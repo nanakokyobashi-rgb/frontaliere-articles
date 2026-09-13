@@ -66,6 +66,7 @@ import { createInterface } from 'node:readline';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScoresBeforeExit, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens, getDeclaredRequestTokenLimit, isModelAvailable, isPerRunCallCapReached } from './lib/ai-models.mjs';
+import { drainStdio, exitAfterDrain } from './lib/drain-stdio.mjs';
 
 // ── Il modello preferito per la SOLA generazione del corpo ──────────────────
 //
@@ -141,17 +142,24 @@ function _preferisceModelloSenzaCap(prefer) {
 // Routing article translation through it instead of the generation LLM frees
 // ~60% of per-article LLM calls for actual generation (the quota bottleneck).
 import { freeTranslateWithRetry, balanceMarkdownMarkers } from './lib/free-translate.mjs';
-import { translateFieldFreeMt, translatedStringOrNull, joinTranslatedChunks } from './lib/article-free-mt.mjs';
+import {
+  translateFieldFreeMt,
+  translatedStringOrNull,
+  joinTranslatedChunks,
+  ensureMunicipalityNames,
+} from './lib/article-free-mt.mjs';
 import {
   createFreeMtRecoveryReport,
   recordFreeMtUnusableOutput,
   claimFreeMtLlmFallback,
   wasFreeMtUnusable,
+  maxFreeMtLlmFallbacksPerLocale,
   MAX_FREE_MT_LLM_FALLBACKS_PER_RUN,
-  MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE,
 } from './lib/free-mt-recovery.mjs';
 import { isReservedPublishedSlug } from '../../scripts/lib/published-slug-guard.mjs';
 import { AI_SEARCH_PROMPT_BLOCK_IT } from './lib/ai-search-template.mjs';
+import { stripVacuousFacts } from './lib/key-facts-specificity.mjs';
+import { checkCantonToponymConsistency } from './lib/cantone-toponimi-coerenza.mjs';
 import { tokenizeIt, jaccardSim, containmentSim, normalizeItWord, STOP_WORDS_IT } from './lib/it-text-similarity.mjs';
 import { fixMicrocopy } from './lib/it-microcopy-guard.mjs';
 import { DOMAIN_DUP_STOPLIST, filterDistinctive } from './lib/dup-stoplist.mjs';
@@ -238,6 +246,7 @@ import { detectBodyRepetition, dedupeRepeatedParagraphs, stripDuplicateTitleFrom
 import { loadEmbeddingStore, loadEmbeddingMeta } from './lib/scoring/embeddingMatcher.mjs';
 import { appendCatalogEntry } from './generate-journalist-image-catalog.mjs';
 import { ARTICLE_SECTION_CORE } from '../../engine/shared/articleSectionCore.mjs';
+import { findSeoEntryMatches } from '../../engine/shared/seo-entry.mjs';
 import { truncateToClause, truncateToClauseNonEmpty } from '../../host/shared/clauseTail.mjs';
 import { buildStructuralEvergreenTopics } from './lib/evergreen-topic-generator.mjs';
 import { corpusPath, resolveGitAddPaths } from './lib/corpus-paths.mjs';
@@ -251,6 +260,7 @@ import {
   EXIT_NO_ARTICLE_DECLARED,
   isInputCapDeferralVeto,
   inputCapVetoSummary,
+  providerCooldownEchoOnlySummary,
   isLegitimateQuotaDeferral,
   quotaDeferralShare,
   // Issue #452 — l'uscita anticipata quando il bersaglio e' sotto il pavimento
@@ -307,6 +317,7 @@ import {
   endRegisterLock as endRegisterLockImpl,
   resolveRegisterLock as resolveRegisterLockImpl,
   registerLockFile,
+  assertSectionConfigKeys,
   RegisterLockError,
   isRegisterLockError,
   isRegisterLockHeld as isRegisterLockHeldImpl,
@@ -1907,6 +1918,7 @@ const RUN_REPORT = {
     relocalized: 0,          // provvisorio IT promosso a localizzato dopo la traduzione
     itFallback: 0,           // ripiego sull'italiano RIMASTO tale a fine pipeline
     itFallbackDetail: [],    // `${locale}:${causa}` per ciascuno
+    itFallbackRecords: [],    // id/locale/source/reason persistibili accanto alla mappa
   },
   translation: createFreeMtRecoveryReport(),
   selectionUsage: {
@@ -2204,6 +2216,7 @@ function finalizeRunReport(status, extra = {}) {
     console.error(
       `FREE_MT_RECOVERY_OUTCOME unusable=${recovery.unusableOutputs}`
       + ` non_string=${recovery.nonStringOutputs}`
+      + ` body_fields=${recovery.bodyFieldCount}`
       + ` unusable_by_locale=${JSON.stringify(recovery.unusableByLocale)}`
       + ` unusable_fields=${JSON.stringify(recovery.unusableFields || {})}`
       + ` llm_fallbacks=${recovery.llmFallbacks}`
@@ -3081,6 +3094,7 @@ export const ARTICLE_SECTION_CONFIGS = {
     registryArrayName: 'ARTICLES',
     slugDataFile: ARTICLE_SECTION_CORE.frontaliere.slugDataFile,
     slugsConstName: ARTICLE_SECTION_CORE.frontaliere.slugConst,
+    fallbackReasonsConstName: 'BLOG_SLUG_FALLBACK_REASONS',
     allIdsConstName: 'ALL_BLOG_ARTICLE_IDS',
     // frontaliere also maintains the BlogArticleId union in router.ts
     updateRouterUnion: true,
@@ -3107,6 +3121,7 @@ export const ARTICLE_SECTION_CONFIGS = {
     registryArrayName: 'SWISS_ARTICLES',
     slugDataFile: ARTICLE_SECTION_CORE.svizzera.slugDataFile,
     slugsConstName: ARTICLE_SECTION_CORE.svizzera.slugConst,
+    fallbackReasonsConstName: 'SWISS_SLUG_FALLBACK_REASONS',
     allIdsConstName: 'ALL_SWISS_ARTICLE_IDS',
     // svizzera ids are loose strings — no BlogArticleId union to touch.
     updateRouterUnion: false,
@@ -3123,6 +3138,13 @@ export const ARTICLE_SECTION_CONFIGS = {
     sourceUrlsFile: 'data/swiss-article-source-urls.json',
   },
 };
+
+// The filename validator in register-lock.mjs and this exported config must
+// agree before the generator can start: a key accepted here is later used in
+// a per-section marker path. Fail at module startup, not halfway through the
+// first article registration when a malformed section would already have
+// written unrelated state.
+assertSectionConfigKeys(ARTICLE_SECTION_CONFIGS);
 
 /** Parse --section=<name> from argv (default frontaliere). Validates. */
 function parseSectionArg(argv) {
@@ -4763,6 +4785,82 @@ function validateItalianPayload(contentIt, locale = 'it') {
       err.qualityReject = true;
       throw err;
     }
+  }
+}
+
+function qualityRejectError(message) {
+  const error = new Error(message);
+  error.qualityReject = true;
+  return error;
+}
+
+function bodyFieldsForQuality(content) {
+  return Object.keys(content || {})
+    .filter((field) => /^body\d+$/.test(field))
+    .sort((a, b) => Number(a.slice(4)) - Number(b.slice(4)));
+}
+
+function bodyTextForQuality(content) {
+  return bodyFieldsForQuality(content)
+    .map((field) => content[field])
+    .join('\n\n');
+}
+
+/**
+ * Gate comune per i payload appena generati, prima di traduzioni, immagini e
+ * scritture. Le coppie `placeholder-value` vengono tolte solo quando la lista
+ * conserva almeno tre fatti; una lista sotto soglia e una guida con toponimi
+ * di un altro cantone fanno fallire l'headline corrente come qualityReject.
+ */
+function assertGeneratedArticleQuality(data, { cantonBody = null } = {}) {
+  const content = data?.content;
+  if (!content || typeof content !== 'object') return;
+
+  for (const [locale, localeContent] of Object.entries(content)) {
+    if (!localeContent || typeof localeContent !== 'object') continue;
+    if (typeof localeContent.body1 !== 'string') continue;
+    const result = stripVacuousFacts(localeContent.body1);
+    if (result.rejected) {
+      const sections = result.rejectedSections.join(', ');
+      throw qualityRejectError(
+        `[key-facts-specificity] ${data.id || '(id mancante)'} `
+        + `${locale}: sezione ${sections || 'Fatti chiave'} sotto la soglia di 3 fatti dopo la rimozione dei non-valori`,
+      );
+    }
+    if (result.changed) {
+      localeContent.body1 = result.value;
+      console.error(
+        `  🧹 [key-facts-specificity] ${data.id || '(id mancante)'} ${locale}: `
+        + `rimosse ${result.dropped.length} coppie senza valore`,
+      );
+    }
+  }
+
+  const contentIt = content.it || content;
+  const bodyIt = bodyTextForQuality(contentIt);
+  // validateAndEnforceCTA() records the Italian body before it appends the
+  // generic navigation CTA. The shared registrar runs after that mutation;
+  // use the snapshot there so a CTA mentioning Ticino cannot become a false
+  // foreign-toponym hit for a Grigioni/Vallese guide.
+  const cantonBodyIt = typeof cantonBody === 'string'
+    ? cantonBody
+    : typeof data._cantonGuardBodyBeforeCta === 'string'
+      ? data._cantonGuardBodyBeforeCta
+      : bodyIt;
+  const cantonVerdict = checkCantonToponymConsistency({
+    articleId: data.id,
+    slug: data.slugs?.it || data.id,
+    title: contentIt.title,
+    body: cantonBodyIt,
+  });
+  if (!cantonVerdict.ok) {
+    const details = cantonVerdict.matches
+      .map((match) => `${match.toponym} (${match.canton})`)
+      .join(', ');
+    throw qualityRejectError(
+      `[canton-toponym] ${data.id || '(id mancante)'} dichiara ${cantonVerdict.declaredCanton} `
+      + `ma contiene toponimi di un altro cantone: ${details}`,
+    );
   }
 }
 
@@ -9869,17 +9967,54 @@ const ARTICLE_TRANSLATE_FREE_MT = String(process.env.ARTICLE_TRANSLATE_FREE_MT ?
 // distinto dal `fieldType` che il motore MT riceve (`title`/`description`): e'
 // la chiave con cui il loop missing-field piu' sotto chiede «questo campo l'ha
 // rifiutato il free-MT?» prima di addebitargli il cap.
-function freeMtField(text, sourceLang, targetLang, fieldType, field = fieldType) {
+function freeMtField(
+  text,
+  sourceLang,
+  targetLang,
+  fieldType,
+  field = fieldType,
+  { preserveMunicipalityNames = false } = {},
+) {
   return translateFieldFreeMt({
     text,
     sourceLang,
     targetLang,
     fieldType,
+    preserveMunicipalityNames,
     translate: freeTranslateWithRetry,
     balanceMarkdown: balanceMarkdownMarkers,
     onWarn: (msg) => console.error(`  ⚠️  ${msg} — recupero per-campo`),
     onUnusableOutput: (event) => recordFreeMtUnusableOutput(RUN_REPORT.translation, { ...event, field }),
   });
+}
+
+/**
+ * Restore municipality spellings on every localized metadata surface. The
+ * free-MT excerpt path masks them before translation; this final postcondition
+ * also covers the legacy LLM response and `imageAlt`, which arrives as a
+ * four-locale field in the primary generation payload.
+ */
+function preserveMunicipalityNamesInMetadata(data) {
+  const sourceExcerpt = data.content?.it?.excerpt;
+  const sourceImageAlt = data.imageAlt?.it;
+  for (const locale of ['en', 'de', 'fr']) {
+    const localized = data.content?.[locale];
+    if (typeof sourceExcerpt === 'string' && typeof localized?.excerpt === 'string') {
+      const fixed = ensureMunicipalityNames(sourceExcerpt, localized.excerpt);
+      if (fixed.added.length > 0) {
+        console.warn(`  ⚠️  [municipality-names] ${locale.toUpperCase()}.excerpt: reinseriti ${fixed.added.join(', ')}`);
+        localized.excerpt = fixed.text;
+      }
+    }
+    if (typeof sourceImageAlt === 'string' && typeof data.imageAlt?.[locale] === 'string') {
+      const fixed = ensureMunicipalityNames(sourceImageAlt, data.imageAlt[locale]);
+      if (fixed.added.length > 0) {
+        console.warn(`  ⚠️  [municipality-names] ${locale.toUpperCase()}.imageAlt: reinseriti ${fixed.added.join(', ')}`);
+        data.imageAlt[locale] = fixed.text;
+      }
+    }
+  }
+  return data;
 }
 
 // Free-MT replacement for translateContent: same return shape ({title, excerpt,
@@ -9891,7 +10026,14 @@ async function translateContentFreeMt(sourceLang, targetLang, targetLabel, sourc
   const bodyFields = Object.keys(collectBodySections(sourceContent));
   const [title, excerpt, ...bodyValues] = await Promise.all([
     freeMtField(sourceContent.title, sourceLang, targetLang, 'title', 'title'),
-    freeMtField(sourceContent.excerpt, sourceLang, targetLang, 'description', 'excerpt'),
+    freeMtField(
+      sourceContent.excerpt,
+      sourceLang,
+      targetLang,
+      'description',
+      'excerpt',
+      { preserveMunicipalityNames: true },
+    ),
     ...bodyFields.map((field) => freeMtField(sourceContent[field], sourceLang, targetLang, 'description', field)),
   ]);
 
@@ -9952,7 +10094,9 @@ async function translateArticle(data) {
   // Il report di recovery è una quota PER ARTICOLO. RUN_REPORT vive più a
   // lungo del funnel: senza reset, un secondo articolo erediterebbe i campi
   // rifiutati e i claim già spesi dal primo (issue #1244).
-  RUN_REPORT.translation = createFreeMtRecoveryReport();
+  const faqCount = Array.isArray(data?.content?.it?.faq) ? data.content.it.faq.length : 0;
+  const bodyFieldCount = Object.keys(collectBodySections(data?.content?.it)).length;
+  RUN_REPORT.translation = createFreeMtRecoveryReport({ faqCount, bodyFieldCount });
 
   async function callWithRetry(prompt, maxTokens, label) {
     const safePrompt = `${prompt}\n\n${JSON_QUOTE_SAFETY_RULE_IT}`;
@@ -10341,8 +10485,9 @@ ${terminologyByLang[targetLang] || ''}`;
       );
       // IL CAP E' SCOPATO AI SOLI CAMPI CHE IL FREE-MT HA DAVVERO RIFIUTATO,
       // ED E' UNA QUOTA PER LOCALE.
-      // Il budget e' 7 per RUN, i campi candidati 21 per articolo (3 locali x 7
-      // campi, inclusi faq.q/faq.a): addebitarlo a OGNI ingresso nel loop — un floor-miss, un campo
+      // Il budget e' 7 per RUN; i campi candidati per locale derivano dai
+      // bodyN realmente tradotti piu' title/excerpt e faq.q/faq.a. Addebitarlo
+      // a OGNI ingresso nel loop — un floor-miss, un campo
       // vuoto per cause estranee al free-MT — lo esaurisce con un solo articolo
       // e da li' in poi ogni campo salta il retry mirato e cade su `itValue`,
       // cioe' pubblica prosa ITALIANA sotto `/en/`, `/de/`, `/fr/` in
@@ -10350,18 +10495,22 @@ ${terminologyByLang[targetLang] || ''}`;
       // difetto #831, live senza rebuild del sito. Il free-MT segnala la coppia
       // (locale, campo) che ha rifiutato (`onUnusableOutput`), e solo quella
       // paga il cap; per tutti gli altri campi il retry mirato resta intatto.
-      // Il claim e' per LOCALE: questo loop scorre `en` prima di `de` e `fr`, e
-      // un budget unico per run si esaurirebbe tutto su `en` proprio nella run
-      // in cui il free-MT degrada su tutti i campi — `/en/` recuperato, `/de/`
-      // e `/fr/` pubblicati in italiano, cioe' di nuovo #831. Vedi
-      // `MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE`.
+      // Il claim e' per LOCALE: questo loop scorre `en` prima di `de` e `fr`,
+      // quindi il cap globale viene ripartito tra i locali con recovery
+      // pendente prima di concedere a uno solo la quota dinamica maggiore.
+      // Vedi `maxFreeMtLlmFallbacksPerLocale()`: dimensiona il cap sui bodyN e
+      // sui campi FAQ realmente indicizzati nell'articolo, non sul solo caso
+      // base.
       const capBloccaIlRetry = ARTICLE_TRANSLATE_FREE_MT
         && wasFreeMtUnusable(RUN_REPORT.translation, locale, recoveryField)
         && !claimFreeMtLlmFallback(RUN_REPORT.translation, locale);
       if (capBloccaIlRetry) {
         console.error(
           `  ⚠️  Recupero LLM per ${field} (${locale}) saltato: raggiunta la quota di `
-          + `${MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE} fallback free-MT per locale `
+          + `${maxFreeMtLlmFallbacksPerLocale(
+            RUN_REPORT.translation.faqCount,
+            RUN_REPORT.translation.bodyFieldCount,
+          )} fallback free-MT per locale `
           + `(cap ${MAX_FREE_MT_LLM_FALLBACKS_PER_RUN} per run) — `
           + `${ultimaRisorsa ? 'valore tradotto mantenuto' : 'fallback al valore italiano'}`,
         );
@@ -11309,6 +11458,10 @@ function pickDefaultCTA(articleCategory) {
 const DEFAULT_CTA = CTA_POOL[0];
 
 function validateAndEnforceCTA(data) {
+  const contentIt = data?.content?.it || data?.content;
+  if (contentIt && typeof data._cantonGuardBodyBeforeCta !== 'string') {
+    data._cantonGuardBodyBeforeCta = bodyTextForQuality(contentIt);
+  }
   const localeKeywords = { it: CTA_KEYWORDS_IT, en: CTA_KEYWORDS_EN, de: CTA_KEYWORDS_DE, fr: CTA_KEYWORDS_FR };
   const cta = pickDefaultCTA(data.category);
 
@@ -12861,6 +13014,48 @@ function modifyRouterTs(data) {
     blogSrc = replaceCaptureSafe(blogSrc, lastEntryRe, (_m, g1) => `${g1}\n${newSlugEntry}`);
   }
 
+  // Persist the provenance of a new Italian-slug fallback beside the routing
+  // map. The map is part of the same atomic write as the slug entry, so a
+  // successful registration cannot publish an unlabelled fallback. Historical
+  // entries intentionally remain absent: only fallbacks observed by this
+  // writer have a trustworthy cause (#1092 items 1 and 3).
+  const fallbackRecords = Array.isArray(data._slugI18nFallbacks)
+    ? data._slugI18nFallbacks
+    : [];
+  if (fallbackRecords.length > 0) {
+    const fallbackMapRe = new RegExp(
+      `(export const ${SECTION.fallbackReasonsConstName}\\s*:[^=]*=\\s*\\{)([\\s\\S]*?)(\\n\\};)`,
+    );
+    const fallbackMapMatch = fallbackMapRe.exec(blogSrc);
+    if (!fallbackMapMatch) {
+      throw new Error(
+        `modifyRouterTs: cannot find ${SECTION.fallbackReasonsConstName} map in ${corpusPath(blogDataFile)}`,
+      );
+    }
+    const existingFallbackIdRe = new RegExp(`['"]${escapeRegex(data.id)}['"]\\s*:`);
+    if (existingFallbackIdRe.test(fallbackMapMatch[2])) {
+      throw new Error(
+        `modifyRouterTs: fallback provenance for article "${data.id}" already exists in ` +
+          `${corpusPath(blogDataFile)}`,
+      );
+    }
+    const fallbackByLocale = new Map(
+      fallbackRecords
+        .filter((record) => record && ['en', 'de', 'fr'].includes(record.locale))
+        .map((record) => [record.locale, record]),
+    );
+    const fallbackFields = ['en', 'de', 'fr']
+      .filter((locale) => fallbackByLocale.has(locale))
+      .map((locale) => {
+        const record = fallbackByLocale.get(locale);
+        return `${locale}: { source: '${escapeForSingleQuoteTS(record.source || 'it-slug')}', reason: '${escapeForSingleQuoteTS(record.reasonCode || 'unknown')}' }`;
+      });
+    if (fallbackFields.length > 0) {
+      const fallbackEntry = `  '${escapeForSingleQuoteTS(data.id)}': { ${fallbackFields.join(', ')} },`;
+      blogSrc = replaceCaptureSafe(blogSrc, fallbackMapRe, (_m, g1, g2, g3) => `${g1}${g2}\n${fallbackEntry}${g3}`);
+    }
+  }
+
   // Regenerate the literal ALL_*_ARTICLE_IDS array ONLY when the file declares
   // it as a literal (`= [...]`). The svizzera section derives it via
   // `Object.keys(SWISS_SLUGS)`, so no array edit is needed there — and that is
@@ -13278,25 +13473,29 @@ function modifySeoService(data) {
 
 /**
  * Post-write validation: re-reads seo-blog-5.ts, extracts the new article's
- * SEO entry using the SAME regex ogPagesPlugin uses at build time, then builds and
- * parses the JSON-LD object. This catches escaping issues before they reach production.
+ * SEO entry using the SAME lexical, balanced resolver used by the render-time
+ * consumers, then builds and parses the JSON-LD object. This catches escaping
+ * and truncated-entry issues before they reach production.
  */
 function validateStructuredData(data) {
   const seoFile = SECTION.seoFile;
   const src = read(seoFile);
   const entryKey = `'blog-${data.id}'`;
 
-  // 1. Verify the entry exists
-  if (!src.includes(entryKey)) {
+  // 1. Resolve the complete object, not a fixed-size prefix. The resolver
+  // ignores comments/templates and closes nested objects before the fields
+  // below are read.
+
+  // 2. Read fields only from that complete, balanced object.
+  const entryMatches = findSeoEntryMatches(src, data.id, corpusPath(seoFile));
+  if (entryMatches.length === 0) {
     throw new Error(`[validate-ld] SEO entry ${entryKey} not found in ${corpusPath(seoFile)}`);
   }
-
-  // 2. Extract using the same regex ogPagesPlugin uses
-  const keyRx = new RegExp(`'blog-${data.id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}':\\s*\\{`);
-  const km = src.match(keyRx);
-  if (!km) throw new Error(`[validate-ld] Could not match entry ${entryKey}`);
-  const start = km.index;
-  const block = src.substring(start, Math.min(start + 3000, src.length));
+  if (entryMatches.length > 1) {
+    throw new Error(`[validate-ld] Multiple SEO entries found for ${entryKey} in ${corpusPath(seoFile)}`);
+  }
+  const { index, closeIdx } = entryMatches[0];
+  const block = src.slice(index, closeIdx + 1);
 
   // Match single-quoted strings (same logic as ogPagesPlugin matchStr)
   const matchStr = (key) => {
@@ -13609,7 +13808,7 @@ function requestCooperativeStop(signal) {
   // timer non si vede nemmeno.
   setTimeout(() => {
     console.warn(`::warning::create-article.mjs: la fermata cooperativa non e' rientrata entro ${COOPERATIVE_STOP_GRACE_MS / 1000}s dal ${signal} — uscita forzata 143 prima del SIGKILL esterno.`);
-    process.exit(143);
+    void exitAfterDrain(143);
   }, COOPERATIVE_STOP_GRACE_MS).unref();
 }
 
@@ -13792,6 +13991,12 @@ async function exitAfterFlush(code) {
   } catch {
     // flushScoresBeforeExit non lancia; il catch e' qui perche' l'uscita non
     // dipenda mai dal ledger, nemmeno se un domani cambiasse contratto.
+  }
+  process.exitCode = code;
+  try {
+    await drainStdio();
+  } catch {
+    // Il drain e' best-effort: un errore dello stream non deve cambiare l'exit.
   }
   process.exit(code);
 }
@@ -15117,6 +15322,11 @@ async function generateAndValidateArticle(url, sourceContext = null) {
       }
       throw validationErr;
     }
+    // Step 3a.0-specificity: reject/repair vacuous key facts and reject a
+    // cross-canton guide before spending translation, image or write budget.
+    // The same helper is called again after translations below because this
+    // primary path does not enter registerArticleFiles().
+    assertGeneratedArticleQuality(data);
     optimizeSeoMetadata(data);
 
     // Step 3a.0-skip: bail early when the chosen source has zero frontaliere
@@ -15752,10 +15962,17 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   // modifyRouterTs/modifyBlogArticlesTsx), quindi la rilocalizzazione dentro
   // `deriveAndSanitizeArticleSlugs()` non lo copre: va invocata anche qui, ed
   // e' la stessa forma del difetto #3209 (una derivazione per produttore).
-  relocalizeSlugsAfterTranslation(data, {
+  const slugI18n = relocalizeSlugsAfterTranslation(data, {
     isTaken: sectionLocaleSlugTaken,
     onEvent: reportSlugI18nEvent,
   });
+  data._slugI18nFallbacks = slugI18n.stillItalian;
+  assertSlugFallbackRunBudget();
+  // `validate()` checked the provisional values before translation. Recheck
+  // the final translated/fallback values before the primary writer touches
+  // any file, otherwise a fallback branch could reintroduce a same-locale
+  // collision after the earlier check (#1092 item 4).
+  checkTranslatedSlugCollisions(data);
 
   // Step 3b.1: Fabricated-institution check on the EN/DE/FR translations —
   // BLOCKING. assertNoFabricatedReferences() (Step 3a.0b, above) only ever
@@ -15800,6 +16017,31 @@ async function generateAndValidateArticle(url, sourceContext = null) {
     }
   }
 
+  // Step 3a.1: Reject/repair prompt-schema placeholders leaked into any
+  // published field (title/excerpt/body1-3/imageAlt/seo.*), same guard
+  // registerArticleFiles() runs for the four secondary producers. This IS
+  // the primary flow's write path — it writes files directly below
+  // (modifyRouterTs/modifyBlogArticlesTsx) and never calls
+  // registerArticleFiles(), so without this call a placeholder leaking here
+  // (e.g. via translateArticle() echoing the schema into en/de/fr) shipped
+  // unguarded. After translateArticle() so it also sees translation-introduced
+  // leaks, before image generation so a doomed article doesn't spend an image
+  // call first. Tagged qualityReject like every other throw in this function:
+  // a placeholder is a per-headline generation failure, not an infra error —
+  // the retry loop should rotate to the next headline, not crash the run.
+  try {
+    sanitizePromptPlaceholders(data);
+  } catch (e) {
+    e.qualityReject = true;
+    throw e;
+  }
+
+  // Run the canton guard after translation/sanitization but BEFORE CTA and
+  // internal-link injection. CTA_POOL contains generic Ticino copy; checking
+  // after that mutation would reject a valid Grigioni/Vallese guide because
+  // of the site's own navigation copy rather than the generated article.
+  assertGeneratedArticleQuality(data);
+
   // Step 3d: Enforce CTA / internal links (all 4 locales)
   console.error('🔗 Verifica CTA e link interni:');
   validateAndEnforceCTA(data);
@@ -15833,30 +16075,17 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   console.error(`   Slug IT: ${data.slugs.it}`);
   console.error('');
 
-  // Step 3a.1: Reject/repair prompt-schema placeholders leaked into any
-  // published field (title/excerpt/body1-3/imageAlt/seo.*), same guard
-  // registerArticleFiles() runs for the four secondary producers. This IS
-  // the primary flow's write path — it writes files directly below
-  // (modifyRouterTs/modifyBlogArticlesTsx) and never calls
-  // registerArticleFiles(), so without this call a placeholder leaking here
-  // (e.g. via translateArticle() echoing the schema into en/de/fr) shipped
-  // unguarded. After translateArticle() so it also sees translation-introduced
-  // leaks, before image generation so a doomed article doesn't spend an image
-  // call first. Tagged qualityReject like every other throw in this function:
-  // a placeholder is a per-headline generation failure, not an infra error —
-  // the retry loop should rotate to the next headline, not crash the run.
-  try {
-    sanitizePromptPlaceholders(data);
-  } catch (e) {
-    e.qualityReject = true;
-    throw e;
-  }
+  // This is the last metadata mutation before the primary write path. The
+  // placeholder guard may replace a localized imageAlt wholesale with its IT
+  // fallback; restore municipality names only after that replacement, or a
+  // comune present only in the localized source would be lost.
+  preserveMunicipalityNamesInMetadata(data);
 
   // Step 3a.2: gate deterministico sui body tradotti — BLOCCANTE (#5661).
-  // Stesso punto e stessa ragione dello Step 3a.1 qui sopra: e' dopo tutte le
-  // mutazioni del testo (3c strip, 3d CTA/link, 3e citazione) e prima di
-  // qualunque scrittura, quindi giudica esattamente cio' che finira' su disco.
-  // Vedi il commento della funzione per la misura che lo motiva.
+  // Questo gate resta dopo tutte le mutazioni del testo (3d CTA/link, 3e
+  // citazione) e prima di qualunque scrittura, quindi giudica esattamente cio'
+  // che finira' su disco. Il guard specificita'/cantoni sopra deve invece
+  // precedere l'iniezione di CTA generiche.
   assertArticlePassesFactualityGates(data);
 
   // Step 3b: Generate article image via Gemini native image generation
@@ -16258,11 +16487,19 @@ export function relocalizeSlugsAfterTranslation(data, opts = {}) {
 
   const itSlug = String(data.slugs.it || '');
   const provisional = Array.isArray(data[PROVISIONAL_IT_SLUG_FIELD]) ? data[PROVISIONAL_IT_SLUG_FIELD] : [];
+  const previousFallbacks = Array.isArray(data._slugI18nFallbacks) ? data._slugI18nFallbacks : [];
 
   for (const locale of ['en', 'de', 'fr']) {
     const current = String(data.slugs[locale] || '');
     const needsWork = provisional.includes(locale) || !current || current === itSlug;
     if (!needsWork) continue;
+
+    // Un articolo gia' servito puo' avere ancora lo slug IT per ragioni
+    // storiche. `isTaken()` vede proprio quella URL nella mappa pubblicata:
+    // in quel caso lo slug non e' piu' provvisorio, anche se il titolo tradotto
+    // e' cambiato. Promuoverlo qui cambierebbe una URL viva senza il bridge di
+    // redirect che appartiene al sito (#1095 item 2).
+    if (current && current === itSlug && isTaken(locale, current)) continue;
 
     const localizedTitle = String(data.content?.[locale]?.title || '').trim();
     // `inspectSlugForPromptPlaceholder` e non `slugifySlugPart` nudo: e' il
@@ -16297,6 +16534,8 @@ export function relocalizeSlugsAfterTranslation(data, opts = {}) {
     // buono non si butta per uno slug. Ma nessuna e' piu' silenziosa — ognuna
     // porta la propria causa, ed e' la causa che dice se il difetto sia il
     // traduttore, il titolo o una collisione.
+    const fallbackSlug = current || itSlug;
+    const fallbackIsTaken = Boolean(fallbackSlug) && isTaken(locale, fallbackSlug);
     const reason = !localizedTitle
       ? 'titolo tradotto assente'
       : floorMiss
@@ -16306,12 +16545,55 @@ export function relocalizeSlugsAfterTranslation(data, opts = {}) {
           : candidate === itSlug
             ? 'titolo tradotto identico all\'italiano'
             : 'slug localizzato gia\' occupato nella sezione';
-    data.slugs[locale] = current || itSlug;
-    out.stillItalian.push({ locale, slug: data.slugs[locale], reason });
-    onEvent({ kind: 'it-fallback', locale, slug: data.slugs[locale], reason });
+    const reasonCode = fallbackIsTaken
+      ? 'fallback-slug-occupied'
+      : !localizedTitle
+        ? 'missing-translated-title'
+        : floorMiss
+          ? 'title-below-plausibility-floor'
+          : !candidate
+          ? 'translated-title-not-slugifiable'
+          : candidate === itSlug
+              ? 'translated-title-identical-to-italian'
+              : 'localized-slug-occupied';
+    if (fallbackIsTaken) {
+      const err = new Error(
+        `slug-i18n fallback occupied: ${locale} "${fallbackSlug}" is already served in the active section`,
+      );
+      err.slugCollision = true;
+      throw err;
+    }
+    data.slugs[locale] = fallbackSlug;
+    const fallback = {
+      locale,
+      slug: data.slugs[locale],
+      reason,
+      reasonCode,
+      source: 'it-slug',
+    };
+    out.stillItalian.push(fallback);
+    const alreadyReported = previousFallbacks.some((previous) =>
+      previous?.locale === locale
+      && previous?.slug === fallback.slug
+      && previous?.reasonCode === fallback.reasonCode,
+    );
+    if (!alreadyReported) {
+      onEvent({
+        kind: 'it-fallback',
+        articleId: data.id || null,
+        locale,
+        slug: data.slugs[locale],
+        reason,
+        fallbackReason: reasonCode,
+        fallbackSource: 'it-slug',
+      });
+    }
   }
   return out;
 }
+
+const MAX_SLUG_FALLBACKS_PER_RUN = 3;
+const SLUG_FALLBACK_HEADROOM_REASON = 'title-below-plausibility-floor';
 
 /** Ponte fra gli eventi puri di sopra e le due tracce che devono restare: log e RUN_REPORT. */
 function reportSlugI18nEvent(event) {
@@ -16322,11 +16604,70 @@ function reportSlugI18nEvent(event) {
   }
   RUN_REPORT.slugs.itFallback += 1;
   RUN_REPORT.slugs.itFallbackDetail.push(`${event.locale}:${event.reason}`);
+  RUN_REPORT.slugs.itFallbackRecords.push({
+    id: event.articleId || RUN_REPORT.article?.id || null,
+    locale: event.locale,
+    slug: event.slug,
+    source: event.fallbackSource || 'it-slug',
+    reason: event.fallbackReason || 'unknown',
+  });
   console.error(
     `  ❌ [slug-i18n] Lo slug ${event.locale} resta l'URL ITALIANO ("${event.slug}") — ${event.reason}. ` +
       'Il locale servira\' lo stesso indirizzo dell\'italiano: e\' un ripiego, non una scelta. ' +
       'Se ricorre, il difetto e\' a monte (traduzione del titolo), non qui.',
   );
+}
+
+/**
+ * The fallback budget is checked before any registration writer runs. The
+ * three deterministic producers share this module, so a process that ever
+ * handles more than the declared margin fails before its next article can
+ * touch the corpus instead of discovering the excess in the API preflight
+ * after content was committed (#1095 item 3).
+ */
+export function assertSlugFallbackRunBudget() {
+  const details = Array.isArray(RUN_REPORT?.slugs?.itFallbackDetail)
+    ? RUN_REPORT.slugs.itFallbackDetail
+    : [];
+  const records = Array.isArray(RUN_REPORT?.slugs?.itFallbackRecords)
+    ? RUN_REPORT.slugs.itFallbackRecords
+    : [];
+  if (records.length !== details.length) {
+    const err = new Error(
+      `slug-i18n fallback provenance incomplete: ${records.length} records for ${details.length} fallbacks; `
+        + 'refusing publication before the writer can touch the corpus.',
+    );
+    err.qualityReject = true;
+    throw err;
+  }
+  const unratcheted = records.filter((record) => record?.reason !== SLUG_FALLBACK_HEADROOM_REASON);
+  if (unratcheted.length > 0) {
+    const detail = unratcheted
+      .map((record) => `${record?.id || 'unknown'}:${record?.locale || 'unknown'}:${record?.reason || 'unknown'}`)
+      .join(' | ');
+    const err = new Error(
+      `slug-i18n fallback reason not admitted for run headroom: ${detail}. `
+        + `Only ${SLUG_FALLBACK_HEADROOM_REASON} may use the fallback margin; refusing publication before the writer.`,
+    );
+    err.qualityReject = true;
+    throw err;
+  }
+  if (details.length <= MAX_SLUG_FALLBACKS_PER_RUN) return;
+  const err = new Error(
+    `slug-i18n fallback budget exceeded: ${details.length} > ${MAX_SLUG_FALLBACKS_PER_RUN} ` +
+      `in one run (${details.join(' | ')}). Refusing further publication; repair the translated titles.`,
+  );
+  err.qualityReject = true;
+  throw err;
+}
+
+/** Small read-only projection for producer guards and diagnostics. */
+export function getSlugFallbackRunSummary() {
+  return {
+    count: RUN_REPORT.slugs.itFallbackDetail.length,
+    detail: [...RUN_REPORT.slugs.itFallbackDetail],
+    records: RUN_REPORT.slugs.itFallbackRecords.map((record) => ({ ...record })),
+  };
 }
 
 /** Lo slug e' gia' occupato da un altro articolo della sezione? Non lancia: e' una sonda. */
@@ -16456,10 +16797,11 @@ export function deriveAndSanitizeArticleSlugs(data) {
   // (issue #191): qualunque slug en/de/fr sia rimasto uguale all'italiano viene
   // ricavato dal titolo tradotto, se un titolo tradotto c'e'. Se non c'e',
   // l'italiano resta — ma lo dice, e si conta.
-  relocalizeSlugsAfterTranslation(data, {
+  const slugI18n = relocalizeSlugsAfterTranslation(data, {
     isTaken: sectionLocaleSlugTaken,
     onEvent: reportSlugI18nEvent,
   });
+  data._slugI18nFallbacks = slugI18n.stillItalian;
   return data.slugs;
 }
 
@@ -16643,6 +16985,16 @@ export async function registerArticleFiles(data, opts = {}) {
   // Prima di clampSeoDescriptions: troncare a 160 caratteri un campo che e' il
   // segnaposto lo renderebbe solo un segnaposto piu' corto.
   sanitizePromptPlaceholders(data);
+  // Secondary producers enter this shared writer directly, so they need the
+  // same pre-write specificity/canton gate as the primary AI path.
+  assertGeneratedArticleQuality(data, {
+    cantonBody: data._cantonGuardBodyBeforeCta,
+  });
+  // La postcondizione sui nomi propri deve coprire anche i producer secondari
+  // che entrano direttamente qui: free-MT rifiutato e fallback LLM possono
+  // perdere un comune dall'excerpt, e l'imageAlt del giornalista non passa dal
+  // percorso AI primario.
+  preserveMunicipalityNamesInMetadata(data);
   // Stessa ragione, stesso percorso condiviso: i quattro produttori secondari
   // (daily-brief, events-digest, border-wait-ranking, journalist) importano
   // registerArticleFiles() direttamente e non passano mai dallo Step 3a.2 del
@@ -16651,6 +17003,12 @@ export async function registerArticleFiles(data, opts = {}) {
   assertArticlePassesFactualityGates(data);
   clampSeoDescriptions(data);
   const slugs = deriveAndSanitizeArticleSlugs(data);
+  assertSlugFallbackRunBudget();
+  // The registrar is the write path of the three deterministic generators and
+  // the journalist importer. Keep the final collision check here as well as
+  // in the primary AI path: `deriveAndSanitizeArticleSlugs()` can intentionally
+  // retain an Italian fallback when a translated candidate is unusable.
+  checkTranslatedSlugCollisions(data);
   beginRegisterLock(data.id);
   modifyRouterTs(data);
   modifyBlogArticlesTsx(data);
@@ -16691,7 +17049,7 @@ export { buildBodyFile };
 // own en/de/fr slugs (deriveLocaleSlugs()) but, before this fix, never
 // validated them against the registry — the same gap that historically only
 // existed for the IT slug in the AI path.
-export { translateArticle, enforceStrongInternalLinks, findBestFallbackImage, pickAuthorForTopic, getAuthorByUid, sanitizeBoldFormatting, validateAndEnforceCTA, optimizeSeoMetadata, checkTranslatedSlugCollisions, assertNoFabricatedReferences, assertNoFabricatedLaborOfficeCrossLocale };
+export { translateArticle, enforceStrongInternalLinks, findBestFallbackImage, pickAuthorForTopic, getAuthorByUid, sanitizeBoldFormatting, validateAndEnforceCTA, optimizeSeoMetadata, checkTranslatedSlugCollisions, assertNoFabricatedReferences, assertNoFabricatedLaborOfficeCrossLocale, assertGeneratedArticleQuality };
 
 // Redazione redesign (issue #3174 follow-up): the journalist now authors only
 // {title, body}; these derive the title-casing/excerpt/body1-3/cover-image
@@ -16799,14 +17157,17 @@ if (invokedDirectly) {
   // Il try/catch e' la stessa regola di `writeRunCard`: una sonda diagnostica
   // non puo' diventare la causa di un esito perso, e questo e' il percorso
   // d'errore.
+  let providerCooldownEchoOnly = null;
   try {
-    if (isQuotaExhaustedError(e) && RUN_REPORT?.rareEvents) {
+    providerCooldownEchoOnly = providerCooldownEchoOnlySummary(e);
+    if ((isQuotaExhaustedError(e) || providerCooldownEchoOnly) && RUN_REPORT?.rareEvents) {
       RUN_REPORT.rareEvents.quotaDeferral = {
         breakdown: (e && typeof e.exhaustionBreakdown === 'object' && e.exhaustionBreakdown) || null,
         share: quotaDeferralShare(e),
         verdict: isLegitimateQuotaDeferral(e),
         inputCapVeto: isInputCapDeferralVeto(e),
         inputCapDecision: inputCapVetoSummary(e),
+        providerCooldownEchoOnly,
       };
     }
   } catch (probeErr) {
@@ -16877,6 +17238,40 @@ if (invokedDirectly) {
     );
     console.error(`::error::roster-cannot-serve-prompt: est=${cap.estimatedRequestTokens} best_cap=${cap.maxSkippedReqLimit} over=${over} refusals=${cap.count}`);
     await exitAfterFlush(EXIT_ROSTER_CANNOT_SERVE_PROMPT);
+  }
+  // #938 item 1 — una cascata composta soltanto da echi di cooldown non ha
+  // prove indipendenti su cui basare un differimento. Il voto generico la
+  // tratta correttamente come pavimento, ma `transientExhaustion` diventa
+  // falso e il catch perderebbe il canale rosso insieme alla causa dichiarata.
+  // Il verdetto strutturale viene prima del ramo quota: qui non si inventano
+  // valori e non si attribuisce l'eco a un secchio che il produttore non ha
+  // marcato.
+  if (providerCooldownEchoOnly) {
+    const {
+      cause,
+      echoes,
+      total,
+      transientEchoes,
+      persistentEchoes,
+      unclassifiedEchoes,
+    } = providerCooldownEchoOnly;
+    finalizeRunReport('error', {
+      notes: [
+        ...RUN_REPORT.notes,
+        `Roster down, not deferrable (${cause}; ${echoes}/${total} rows are cooldown echoes): ${e.message}`,
+      ],
+    });
+    console.error(
+      `\n❌ NON differibile: la cascata contiene solo ${echoes} echi di cooldown, senza prove indipendenti. `
+      + `Causa=${cause}; transitori=${transientEchoes}, persistenti=${persistentEchoes}, non classificati=${unclassifiedEchoes}. `
+      + `Il prossimo run deve rivalutare il provider, non dichiarare una quota legittima. ${e.message}`,
+    );
+    console.error(
+      `::error::roster-down-not-deferrable: cause=${cause} echoes=${echoes} total=${total}`
+      + ` transient_echoes=${transientEchoes} persistent_echoes=${persistentEchoes}`
+      + ` unclassified_echoes=${unclassifiedEchoes}`,
+    );
+    await exitAfterFlush(1);
   }
   // ISSUE #313 / #348 — «tutti i modelli sono temporaneamente esauriti» va
   // DIMOSTRATO, non asserito. La condizione ha due meta' ora: il ramo di

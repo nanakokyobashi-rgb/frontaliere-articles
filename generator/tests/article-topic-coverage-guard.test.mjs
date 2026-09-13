@@ -1122,11 +1122,13 @@ describe('#971 — nessun titolo scollegato dallo slug nel corpus PUBBLICATO', (
     'vivere-oltre-monti-lavorare-grigioni',
     'trasferirsi-svizzera-guida',
   ]);
-  // Misurato sul checkout del 2026-09-11: 296 serie, di cui 46 eccezioni
-  // esplicite. Il floor lascia assorbire ritiri legittimi senza permettere che
-  // una perdita di parsing o una porzione troncata renda il gate vacuo.
-  const SERIES_ARTICLES_FLOOR = 250;
-  const ALLOWED_NULL_COMUNE_KEYS_MAX = 46;
+  // Il floor è derivato dal registro EN indipendente: lascia assorbire un
+  // piccolo numero di ritiri legittimi, ma non può ridursi insieme al parser
+  // IT se una porzione della sweep sparisce. La stessa misura viene usata per
+  // la presenza dei titoli tradotti, così nessun locale passa per vacuità.
+  const SERIES_ARTICLES_MIN_RATIO = 0.95;
+  const NULL_COMUNE_EXCEPTION_MAX_RATIO = 0.2;
+  const SERIES_ARTICLES_FLOOR = Math.ceil(EXPECTED_SERIES_IDS.size * SERIES_ARTICLES_MIN_RATIO);
   const seriesArticles = () => CORPUS.filter((a) => SERIES_ID_RE.test(a.id));
 
   const broken = () => seriesArticles().flatMap((a) => {
@@ -1149,8 +1151,11 @@ describe('#971 — nessun titolo scollegato dallo slug nel corpus PUBBLICATO', (
       .filter((a) => !comuneTopicKey(a.id.replace(/-/g, ' ')))
       .map((a) => a.id)
       .sort();
-    expect(observed.filter((id) => !ALLOWED_NULL_COMUNE_KEYS.has(id))).toEqual([]);
-    expect(ALLOWED_NULL_COMUNE_KEYS.size).toBeLessThan(ALLOWED_NULL_COMUNE_KEYS_MAX + 1);
+    expect(observed).toEqual([...ALLOWED_NULL_COMUNE_KEYS].sort());
+    expect(
+      observed.length <= Math.floor(EXPECTED_SERIES_IDS.size * NULL_COMUNE_EXCEPTION_MAX_RATIO),
+      'le eccezioni esplicite non possono diventare la maggioranza della sweep',
+    ).toBe(true);
   });
 
   it('ogni articolo della serie ha un titolo che nomina il comune del suo slug', () => {
@@ -1203,10 +1208,11 @@ describe('#971 — nessun titolo scollegato dallo slug nel corpus PUBBLICATO', (
     new Map([...loadMetaTitles(`blog-meta-${loc}.ts`), ...loadMetaTitles(`blog-meta-ch-${loc}.ts`)]),
   ]));
 
-  /** Il titolo contiene la sequenza completa di parole `words`? */
+  /** Il titolo contiene ogni token di `words`, senza imporne l'adiacenza? */
   const namesTokens = (title, words) => {
-    const tokens = normalizeText(title).split(' ');
-    return words.every((word) => tokens.includes(word));
+    const tokens = new Set(normalizeText(title).split(' ').filter(Boolean));
+    const required = words.map((word) => normalizeText(word)).filter(Boolean);
+    return required.every((word) => tokens.has(word));
   };
 
   const brokenIn = (loc) => seriesArticles().flatMap((a) => {
@@ -1233,7 +1239,20 @@ describe('#971 — nessun titolo scollegato dallo slug nel corpus PUBBLICATO', (
       // Stessa guardia del lato IT: un regex che smette di agganciare
       // renderebbe VERDE per vacuità l'asserzione seguente.
       const coperti = seriesArticles().filter((a) => LOCALE_TITLES[loc].has(a.id));
-      expect(coperti.length).toBeGreaterThan(250);
+      expect(coperti.length).toBeGreaterThanOrEqual(SERIES_ARTICLES_FLOOR);
+    });
+
+    it(`nessun titolo ${loc} della serie è rimasto identico all'italiano`, () => {
+      const untranslated = seriesArticles()
+        .filter((a) => {
+          const itTitle = IT_TITLES.get(a.id);
+          const localizedTitle = LOCALE_TITLES[loc].get(a.id);
+          return typeof itTitle === 'string'
+            && typeof localizedTitle === 'string'
+            && localizedTitle === itTitle;
+        })
+        .map((a) => a.id);
+      expect(untranslated).toEqual([]);
     });
 
     it(`ogni articolo della serie nomina il comune del suo slug anche nel titolo ${loc}`, () => {

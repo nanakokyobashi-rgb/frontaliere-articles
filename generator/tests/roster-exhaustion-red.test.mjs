@@ -42,6 +42,7 @@ import {
   isInputCapDeferralVeto,
   inputCapVetoSummary,
   isTransientMajority,
+  providerCooldownEchoOnlySummary,
 } from '../scripts/lib/exhaustion-disposition.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -99,7 +100,9 @@ test('la run 31817957722 (pareggio 53/53, 38 rifiuti su taglia) NON e\' un diffe
     decidedBy: 'net',
     netEvidence: 106,
     echoHiddenInBuckets: 0,
+    marginAttribution: 'persistent',
     votedTransient: 53,
+    votedPersistent: 53,
   });
 });
 
@@ -160,18 +163,22 @@ test('la run 31823202761 (53 vs 52 LORDI, 11 echi transitori) e\' un veto al net
   assert.equal(s.echoDominated, false);
 });
 
-test('la diagnostica dice CHI ha deciso, non solo i due secchi netti (#857 → #888)', () => {
-  // Il caso che ha motivato l'item: i due secchi netti dicono «maggioranza
-  // transitoria» (53 vs 52) ACCANTO a un veto. Senza `decidedBy` la riga
-  // spiegherebbe un verdetto diverso da quello preso — e una diagnostica che
-  // contraddice l'exit code smette di essere letta.
+test('la diagnostica conserva la causa che ha deciso, non solo i due secchi netti (#857 → #888 → #938)', () => {
+  // Il caso che ha motivato il residuo #938: i due secchi netti dicono
+  // «maggioranza transitoria» (53 vs 52), ma il consumatore input-cap ha gia'
+  // dichiarato PERSISTENTE la causa del margine non attribuito. Senza
+  // `marginAttribution` la riga spiegherebbe un veto che il consumatore non ha
+  // preso — e una diagnostica che contraddice l'exit code smette di essere
+  // letta.
   const margin = echoingExhaustionError({ echo: { total: 11, transient: 0, persistent: 0 } });
-  assert.equal(isInputCapDeferralVeto(margin), true);
+  assert.equal(isInputCapDeferralVeto(margin), false);
   const m = inputCapVetoSummary(margin);
   assert.equal(m.transient > m.persistent, true, 'la premessa: i due secchi netti sembrano dare ragione al transitorio');
-  assert.equal(m.decidedBy, 'margin', 'ha deciso il margine sugli echi non attribuiti, non i due secchi');
+  assert.equal(m.decidedBy, 'net', 'la causa dichiarata resta persistente, ma non si inventa un veto di taglia');
   assert.equal(m.echoHiddenInBuckets, 10, 'dieci degli undici echi stanno nei secchi: la massa ambigua ne ospita uno');
-  assert.equal(m.votedTransient, 43, 'il numero a sinistra del confronto che ha chiuso il voto');
+  assert.equal(m.marginAttribution, 'persistent');
+  assert.equal(m.votedTransient, 53, 'il transitorio non paga un margine che non gli e\' stato attribuito');
+  assert.equal(m.votedPersistent, 42, 'il margine resta visibile nel secchio della causa dichiarata');
   assert.equal(m.netEvidence, 105);
 
   // Il pavimento: cinque fratelli saltati dallo stesso host, nessuna riga
@@ -345,6 +352,27 @@ test('il veto e\' cablato PRIMA del differimento nel catch di primo livello', ()
   );
 });
 
+test('la cascata di soli echi conserva il canale rosso e la causa', () => {
+  const src = fs.readFileSync(CREATE_ARTICLE, 'utf8');
+  const helper = src.indexOf('providerCooldownEchoOnlySummary');
+  const marker = src.indexOf('cause=${cause}');
+  const quota = src.lastIndexOf('if (isQuotaExhaustedError(e))');
+  assert.ok(helper > 0, 'il catch deve leggere il verdetto di soli echi');
+  assert.ok(marker > helper, 'il marker deve conservare la causa machine-readable');
+  assert.ok(quota > marker, 'il ramo dedicato deve precedere il generico ramo quota');
+
+  const err = {
+    code: 'ALL_MODELS_EXHAUSTED',
+    exhaustionBreakdown: {
+      transient: 5,
+      persistent: 0,
+      total: 5,
+      providerCooldownSkips: { total: 5, transient: 5, persistent: 0 },
+    },
+  };
+  assert.equal(providerCooldownEchoOnlySummary(err)?.cause, 'provider-cooldown-echo-only');
+});
+
 // ── 3. LA PROPAGAZIONE: il blocco bash VERO del workflow ───────────────────
 
 /**
@@ -468,10 +496,10 @@ test('exit 4 (ragione legittima DICHIARATA) resta assorbito', () => {
   assert.equal(runGenerateBlock({ nodeExit: EXIT_NO_ARTICLE_DECLARED }).status, 0);
 });
 
-test('la congiunzione: roster bloccato MA articolo prodotto → verde', () => {
-  // Se un tentativo scrive comunque un corpo, il roster ha servito: fallire qui
-  // butterebbe via un articolo buono.
+test('la congiunzione: roster bloccato dopo output parziale resta rosso', () => {
+  // Un corpo lasciato dopo exit 3 e' output parziale, non un articolo prodotto:
+  // il fallimento del generatore resta vincolante per il commit.
   const r = runGenerateBlock({ nodeExit: EXIT_ROSTER_CANNOT_SERVE_PROMPT, writesArticle: true });
-  assert.equal(r.status, 0);
-  assert.match(r.outputs, /article=true/);
+  assert.equal(r.status, 1, 'un exit 3 dopo una scrittura parziale deve restare rosso');
+  assert.match(r.outputs, /article=false/);
 });

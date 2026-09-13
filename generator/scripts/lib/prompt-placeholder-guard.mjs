@@ -767,7 +767,14 @@ export const PLACEHOLDER_RULES = Object.freeze([
     why: `Testa del valore di esempio dello schema: ${JSON.stringify(leadOf(literal))}.`,
     literal,
   })),
-]);
+].map((rule) => ({
+  ...rule,
+  // Build one global scanner per RegExp once, alongside the rule table, so
+  // repeated field scans do not recompile the same matcher.
+  scanRx: rule.rx instanceof RegExp && !rule.rx.global
+    ? new RegExp(rule.rx.source, `${rule.rx.flags}g`)
+    : rule.rx,
+})));
 
 // These are genuine translated section headings already present in the
 // corpus. A heading such as `## Frequently Asked Questions — Net Salary`
@@ -809,9 +816,7 @@ export function findPromptPlaceholders(value) {
     // non-global `exec()` would stop at that first excluded hit and miss a
     // real label later in the same field, so every rule is scanned from the
     // beginning and every occurrence gets its own exclusion decision.
-    const matcher = rule.rx.global
-      ? rule.rx
-      : new RegExp(rule.rx.source, `${rule.rx.flags}g`);
+    const matcher = rule.scanRx;
     matcher.lastIndex = 0;
     for (const m of value.matchAll(matcher)) {
       if (rule.id === 'faq-unnumbered-label' && isTranslatedFaqSectionHeading(value, m.index)) continue;

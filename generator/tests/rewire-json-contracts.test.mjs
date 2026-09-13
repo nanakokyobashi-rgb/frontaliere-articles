@@ -57,6 +57,7 @@ import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { REWIRE_CONTRACTS, contract, freshenWindow } from './lib/rewire-contracts.mjs';
 import { rankingFromStats, trendFromStats, MIN_SAMPLES_FOR_RANKING } from '../scripts/lib/border-wait-ranking.mjs';
+import { importSpecifiers, relativeImportSpecifiers } from '../../scripts/ci/lib/import-specifiers.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8');
@@ -127,8 +128,8 @@ function copyRefreshTree(root, rel) {
   fs.mkdirSync(path.dirname(dest), { recursive: true });
   fs.copyFileSync(src, dest);
   const text = fs.readFileSync(src, 'utf8');
-  for (const m of text.matchAll(/^\s*import(?:\s|(?=[{*'"]))[^\n]*?[\s}*]from\s*['"](\.[^'"]+)['"]/gm)) {
-    const childRel = path.normalize(path.join(path.dirname(rel), m[1]));
+  for (const spec of relativeImportSpecifiers(text)) {
+    const childRel = path.normalize(path.join(path.dirname(rel), spec));
     copyRefreshTree(root, childRel);
   }
   return dest;
@@ -196,8 +197,7 @@ test('i tre refresh importano solo builtin Node o path relativi — la copia in 
   const offenders = [];
   for (const c of REWIRE_CONTRACTS) {
     const src = read(c.consumer.refresh);
-    for (const m of src.matchAll(/^\s*import(?:\s|(?=[{*'"]))[^\n]*?[\s}*]from\s*['"]([^'"]+)['"]/gm)) {
-      const spec = m[1];
+    for (const spec of importSpecifiers(src)) {
       if (spec.startsWith('node:') || spec.startsWith('.')) continue;
       offenders.push(`${c.consumer.refresh} → ${spec}`);
     }

@@ -108,10 +108,29 @@ test('sulla meta\' body dello split il floor meta non scatta: quei campi non son
 
 test('metaFieldPlausibilityMiss non giudica i campi che non ha dimensionato', () => {
   for (const field of REQUIRED_IT_BODY_FIELDS.filter((f) => !META_ONLY_FIELDS.includes(f))) {
-    assert.equal(metaFieldPlausibilityMiss(field, 'x'), null, `${field} non ha un floor meta`);
+    assert.equal(metaFieldPlausibilityMiss(field, 'x'), null, `${field} non ha un floor`);
   }
   assert.equal(metaFieldPlausibilityMiss('title', undefined), null);
   assert.equal(metaFieldPlausibilityMiss('title', 42), null);
+});
+
+test('#1320 FU-035 — FAQ q/a respingono ellissi e una sola parola', () => {
+  const qFloor = META_FIELD_PLAUSIBILITY_FLOORS['faq.q'];
+  const aFloor = META_FIELD_PLAUSIBILITY_FLOORS['faq.a'];
+  assert.match(
+    metaFieldPlausibilityMiss('faq.q', '...'),
+    new RegExp(`^faq\\.q<${qFloor.minChars}$`),
+  );
+  assert.match(
+    metaFieldPlausibilityMiss('faq.q', 'Domandadomanda'),
+    new RegExp(`^faq\\.q<${qFloor.minWords}w$`),
+  );
+  assert.match(
+    metaFieldPlausibilityMiss('faq.a', 'Rispostalungarispostalunga'),
+    new RegExp(`^faq\\.a<${aFloor.minWords}w$`),
+  );
+  assert.equal(metaFieldPlausibilityMiss('faq.q', 'Come funziona il permesso?'), null);
+  assert.equal(metaFieldPlausibilityMiss('faq.a', 'La procedura richiede due passaggi.'), null);
 });
 
 // ── 2. Il gate a valle sull'articolo MERGIATO porta lo stesso floor ────────

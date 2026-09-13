@@ -224,6 +224,28 @@ test('ogni retry pusha da una base fresca: backoff prima del rebase, nessun reba
   }
 });
 
+test('i checkpoint marker-only puliscono il worktree prima dei retry del push', () => {
+  const checkpointFiles = new Set([
+    'generate-border-wait-ranking-weekly.yml',
+    'generate-daily-brief.yml',
+    'publish-journalist-articles.yml',
+    'refresh-events-digest.yml',
+  ]);
+  for (const w of workflows.filter(({ file }) => checkpointFiles.has(file))) {
+    const commitAt = w.active.indexOf('git commit -m "$COMMIT_MESSAGE"');
+    const retryAt = w.active.indexOf('for attempt in', commitAt);
+    const stashAt = w.active.indexOf('git stash push -u -m "discard-partial-producer-output-before-retry"', commitAt);
+    const dropAt = w.active.indexOf('git stash drop stash@{0}', stashAt);
+    assert.ok(commitAt >= 0, `${w.file}: commit del checkpoint non trovato`);
+    assert.ok(stashAt > commitAt && stashAt < retryAt,
+      `${w.file}: l output parziale resta dirty tra commit marker-only e retry`);
+    assert.ok(dropAt > stashAt && dropAt < retryAt,
+      `${w.file}: il worktree non viene ripulito prima del pull --rebase`);
+    assert.match(w.active.slice(commitAt, stashAt), /PRODUCER_OUTCOME/,
+      `${w.file}: il cleanup deve restare limitato al ramo producer fallito`);
+  }
+});
+
 test('il backoff fra i tentativi cresce con $attempt, in OGNI workflow che ritenta il push', () => {
   // Follow-up #659 di #644: il riordino aveva pinnato l'ORDINE (backoff prima
   // del rebase) ma non la FORMA del backoff, e due produttori su sette erano
@@ -298,13 +320,31 @@ for (const p of producers) {
       !/continue-on-error/.test(block),
       `${p.file}: con continue-on-error lo step diventa decorazione — fallisce, si vede rosso, e il commit parte lo stesso`,
     );
-    // Gli step successivi hanno un `if:` senza status function, quindi GitHub
-    // applica `success()` implicito: uno step fallito qui li salta. E' quella
-    // proprieta' a impedire il commit, quindi va pinnata la sua PRECONDIZIONE.
-    assert.ok(
-      !/if:\s*always\(\)/.test(block),
-      `${p.file}: un always() fra la guardia e il commit rimetterebbe l'articolo bocciato sulla strada di main`,
-    );
+    // I producer con una registrazione multi-file hanno un'eccezione
+    // intenzionale: il checkpoint del marker deve girare con `always()` anche
+    // quando il producer muore. In quel caso il commit successivo deve però
+    // limitarsi all'evidenza del marker; con producer riuscito e guardia rossa
+    // deve rifiutare l'output, mantenendo la guardia non advisory.
+    if (/id:\s*registration-checkpoint/.test(block)) {
+      assert.match(block, /if:\s*always\(\) && steps\.mode\.outputs\.dry != 'true'/,
+        `${p.file}: checkpoint always() non esplicito`);
+      const commitBlock = p.src.slice(c);
+      assert.match(commitBlock, /PRODUCER_OUTCOME=/,
+        `${p.file}: il commit non osserva l'esito del producer`);
+      assert.match(commitBlock, /GUARD_OUTCOME=/,
+        `${p.file}: il commit non osserva l'esito della guardia`);
+      assert.match(commitBlock, /elif \[ "\$GUARD_OUTCOME" != "success" \]/,
+        `${p.file}: una guardia rossa potrebbe ancora far committare l'output`);
+      assert.match(commitBlock, /refusing to commit producer output/,
+        `${p.file}: il ramo di rifiuto della guardia non e' esplicito`);
+    } else {
+      // Gli altri producer conservano il contratto storico: uno step fallito
+      // qui salta i passi successivi tramite il success() implicito.
+      assert.ok(
+        !/if:\s*always\(\)/.test(block),
+        `${p.file}: un always() fra la guardia e il commit rimetterebbe l'articolo bocciato sulla strada di main`,
+      );
+    }
   });
 
   test(`${p.file}: il blocco della guardia non interpola nulla`, () => {
@@ -315,6 +355,59 @@ for (const p of producers) {
     );
   });
 }
+
+test('publish-journalist persiste il marker anche quando producer o guard falliscono', () => {
+  const publisher = workflows.find((w) => w.file === 'publish-journalist-articles.yml');
+  assert.ok(publisher, 'publish-journalist-articles.yml non esiste piu\'');
+
+  const checkpoint = extractRun(
+    publisher.src,
+    'Checkpoint — stage registration marker after producer failure',
+  );
+  assert.match(checkpoint, /PRODUCER_OUTCOME="\$\{\{ steps\.publish\.outcome \}\}"/);
+  assert.match(checkpoint, /git add -A -- 'generator\/data\/register-in-progress-\*\.json'/);
+
+  const commit = extractRun(publisher.src, 'Commit and push registered articles');
+  const failureBranch = commit.slice(
+    commit.indexOf('if [ "$PRODUCER_OUTCOME" != "success" ]'),
+    commit.indexOf('elif [ "$GUARD_OUTCOME" != "success" ]'),
+  );
+  assert.match(failureBranch, /COMMIT_MESSAGE="Checkpoint interrupted journalist registration"/);
+  assert.match(failureBranch, /git add -A -- 'generator\/data\/register-in-progress-\*\.json'/);
+  assert.doesNotMatch(
+    failureBranch,
+    /git add -A\s*\n/,
+    'il ramo di errore non deve trasformare l output parziale in un commit completo',
+  );
+  assert.match(commit, /elif \[ "\$GUARD_OUTCOME" != "success" \]/);
+  assert.match(commit, /refusing to commit producer output/);
+  assert.match(commit, /else\n\s+COMMIT_MESSAGE="Publish journalist article\(s\)"\n\s+git add -A/);
+});
+
+test('publish-journalist rimette in coda i completati prima di un fatal successivo', () => {
+  const source = fs.readFileSync(
+    path.join(ROOT, 'generator/scripts/publish-journalist-article.mjs'),
+    'utf8',
+  );
+  const recovery = fs.readFileSync(
+    path.join(ROOT, 'generator/scripts/lib/journalist-publish-recovery.mjs'),
+    'utf8',
+  );
+  assert.match(source, /import \{ requeuePublishedDocuments \} from '\.\/lib\/journalist-publish-recovery\.mjs';/);
+  assert.match(source, /publishedDocs\.push\(\{ docRef: docSnap\.ref, id \}\)/);
+  const fatalCatch = source.slice(
+    source.indexOf('  } catch (err) {', source.indexOf('async function main()')),
+    source.indexOf('  } finally {', source.indexOf('async function main()')),
+  );
+  assert.match(fatalCatch, /requeuePublishedDocuments\(\{ db, FieldValue, publishedDocs, requeuedIds \}\)/);
+  assert.match(fatalCatch, /discardRequeuedFromPublishedIds\(\)/);
+  assert.match(fatalCatch, /unresolvedIds/);
+  assert.match(recovery, /status: 'queued'/);
+  assert.match(recovery, /await batch\.commit\(\)/);
+  assert.match(recovery, /await doc\.docRef\.get\(\)/);
+  assert.match(recovery, /JOURNALIST_REQUEUE_MAX_ATTEMPTS/);
+  assert.match(source, /requeued_ids=\$\{JSON\.stringify\(requeuedIds\)\}/);
+});
 
 // ═══════════════════════════════════════════════════════════════════════════
 // 3a. RIFIUTO ESEGUITO — il blocco della guardia, eseguito davvero

@@ -169,6 +169,17 @@ test('il prompt non ammette item sotto una barra piu\' bassa di quella che li ch
   );
 });
 
+test('l hard-exclude no-acceptance-condition precede il filtro funnel (#953)', () => {
+  const live = WORKFLOW.indexOf('Hard-exclude live-verification-only');
+  const acceptance = WORKFLOW.indexOf('Hard-exclude rischio senza condizione di accettazione');
+  const nextStage = WORKFLOW.indexOf('Dedup vs issue `follow-up` esistenti');
+  assert.ok(live >= 0, 'manca la regola live-verification-only che precede gli hard-exclude');
+  assert.ok(acceptance >= 0, 'manca la regola no-acceptance-condition');
+  assert.ok(nextStage >= 0, 'manca lo stadio successivo al filtro funnel');
+  assert.ok(live < acceptance && acceptance < nextStage, 'no-acceptance-condition deve precedere gli stadi successivi al filtro funnel');
+  assert.match(WORKFLOW.slice(acceptance, nextStage), /citedTokens\(\)/);
+});
+
 test('la regola misura la Suggested action, non il bullet grezzo', () => {
   // Il divario che questa clausola chiude, dimostrato con le funzioni vere:
   // su un testo senza la regione `Suggested action` l'oracolo ricade

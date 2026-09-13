@@ -27,6 +27,7 @@ import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { parsePositiveNum } from '../../scripts/lib/parse-positive-num.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 import { escapeForSingleQuoteTS, unescapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
+import { exitAfterDrain } from './lib/drain-stdio.mjs';
 
 // Write-time guard (issue #66): strip any C0 control character other than
 // TAB/LF/CR before it reaches content/ — same rule as create-article.mjs write().
@@ -76,6 +77,9 @@ export function normalizeFaqLimit(value) {
   if (value === undefined) return Infinity;
   const raw = String(value).trim();
   if (!raw) throw new RangeError('--limit richiede un intero >= 0');
+  if (!/^\d+$/.test(raw)) {
+    throw new RangeError(`--limit richiede una notazione decimale intera >= 0; ricevuto ${String(value)}`);
+  }
   const parsed = parsePositiveNum(raw, Number.NaN, {
     label: '--limit',
     integer: true,
@@ -87,28 +91,36 @@ export function normalizeFaqLimit(value) {
 }
 
 export function parseFaqLimitArgs(argv) {
+  let value = Infinity;
+  let seen = false;
   for (let idx = 0; idx < argv.length; idx++) {
     const arg = argv[idx];
     if (arg.startsWith('--limit=')) {
-      return normalizeFaqLimit(arg.slice('--limit='.length));
+      if (seen) throw new RangeError('--limit può essere specificato una sola volta');
+      seen = true;
+      value = normalizeFaqLimit(arg.slice('--limit='.length));
+      continue;
     }
     if (arg === '--limit') {
-      const value = argv[idx + 1];
-      if (value === undefined || value.startsWith('--')) {
+      if (seen) throw new RangeError('--limit può essere specificato una sola volta');
+      seen = true;
+      const next = argv[idx + 1];
+      if (next === undefined || next.startsWith('--')) {
         throw new RangeError('--limit richiede un valore intero >= 0');
       }
-      return normalizeFaqLimit(value);
+      value = normalizeFaqLimit(next);
+      idx++;
     }
   }
-  return Infinity;
+  return value;
 }
 
-function parseFaqLimitOrExit(argv) {
+async function parseFaqLimitOrExit(argv) {
   try {
     return parseFaqLimitArgs(argv);
   } catch (err) {
     console.error(`Invalid --limit: ${err.message}`);
-    process.exit(2);
+    await exitAfterDrain(2);
   }
 }
 
@@ -676,13 +688,13 @@ async function main() {
 
   // Valuta gli argomenti solo nell'entry point: importare questo modulo per le
   // funzioni pure non deve poter chiamare process.exit(2) nel processo ospite.
-  const limit = parseFaqLimitOrExit(args);
+  const limit = await parseFaqLimitOrExit(args);
   let section;
   try {
     section = getSectionArg(args);
   } catch (err) {
     console.error(err.message);
-    process.exit(1);
+    await exitAfterDrain(1);
   }
   const sectionBodySubdir = section === 'svizzera' ? 'blog-body-ch' : 'blog-body';
   const bodyDir = resolve(ROOT, corpusPath(`services/locales/${sectionBodySubdir}`));
@@ -864,8 +876,8 @@ async function main() {
 // E' la guardia a rendere testabili `serializeFaqLiteral`/`parseFaqLiteral`,
 // cioe' le due meta' del difetto che questa PR chiude.
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  main().catch(err => {
+  main().catch(async err => {
     console.error('Fatal error:', err);
-    process.exit(1);
+    await exitAfterDrain(1);
   });
 }

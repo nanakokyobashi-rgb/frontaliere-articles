@@ -28,6 +28,11 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { execFileSync } from 'node:child_process';
+import { findAllSeoEntryMatches } from './seo-entry.mjs';
+import { selectRetiredDailyEditions } from '../../generator/scripts/lib/daily-brief-content.mjs';
+import { parseArticleUrlSlugs } from '../../engine/shared/articleReaderSource.mjs';
+import { ARTICLES_PAGE_SIZE } from '../../engine/shared/articleArchiveConfig.mjs';
 
 /**
  * Quanta parte del corpus sorgente deve sopravvivere fino all'artefatto.
@@ -146,7 +151,8 @@ export function populationWarning(label, declared, source, warn = FLOOR_WARN_RET
 }
 
 /**
- * Il pavimento per un valore atteso. Mai negativo, e 0 atteso ⇒ 0.
+ * Il pavimento per un valore atteso. Un atteso positivo ha sempre almeno un
+ * elemento; solo un riferimento davvero assente/non positivo produce 0.
  *
  * ATTENZIONE, ed e' il punto piu' delicato di questo modulo: `floorFrom(0)` e'
  * 0, e un pavimento a 0 non e' un pavimento — `x < 0` e' falso per qualunque
@@ -159,7 +165,7 @@ export function populationWarning(label, declared, source, warn = FLOOR_WARN_RET
  */
 export function floorFrom(expected, retention = FLOOR_RETENTION) {
   if (!Number.isFinite(expected) || expected <= 0) return 0;
-  return Math.floor(expected * retention);
+  return Math.max(1, Math.floor(expected * retention));
 }
 
 /**
@@ -192,6 +198,53 @@ export const SECTION_BODY_DIRS = {
   svizzera: path.join('content', 'blog-body-ch', 'it'),
 };
 
+/** Le chiavi del manifest e i file della sitemap delle due sezioni. */
+export const SECTION_COUNTERS = {
+  frontaliere: 'articles',
+  svizzera: 'swissArticles',
+};
+
+export const SECTION_SITEMAPS = {
+  frontaliere: 'sitemap-blog.xml',
+  svizzera: 'sitemap-blog-ch.xml',
+};
+
+export const ARCHIVE_SITEMAP = 'sitemap-articles-archive.xml';
+export { ARTICLES_PAGE_SIZE as ARCHIVE_PAGE_SIZE };
+
+/** Slug maps read by the runtime sitemap writer, per section. */
+const SECTION_SLUG_FILES = {
+  frontaliere: path.join('content', 'routerBlogData.ts'),
+  svizzera: path.join('content', 'routerSwissData.ts'),
+};
+
+const SECTION_SLUG_EXPORTS = {
+  frontaliere: 'BLOG_SLUGS',
+  svizzera: 'SWISS_SLUGS',
+};
+
+/** Canonical-override maps read by the runtime sitemap writer, per section. */
+const SECTION_CANONICAL_OVERRIDE_FILES = {
+  frontaliere: path.join('engine', 'shared', 'frontaliere-article-canonical-overrides.json'),
+  svizzera: path.join('content', 'swiss-article-canonical-overrides.json'),
+};
+
+/** Registro e metadati che definiscono l'atteso dei corpi, per sezione. */
+export const SECTION_REGISTRY_FILES = {
+  frontaliere: path.join('content', 'blog-articles-data.ts'),
+  svizzera: path.join('content', 'swiss-articles-data.ts'),
+};
+
+export const SECTION_META_PREFIXES = {
+  frontaliere: 'blog-meta-',
+  svizzera: 'blog-meta-ch-',
+};
+
+/** Locali che build-api.mjs carica per ogni sezione. */
+export const SECTION_META_LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
+
+const REGISTRY_ENTRY_RE = /^\s*id:\s*(?:'([^']+)'|"([^"]+)")/gm;
+const META_TITLE_KEY_RE = /['"]blog\.article\.([^'"]+)\.title['"]\s*:/g;
 /** Quante immagini hero questo repo tiene davvero (sorgente di `images-manifest.json`). */
 export const IMAGE_SOURCE_DIR = path.join('public', 'images', 'blog');
 
@@ -215,11 +268,326 @@ function countCorpusFiles(root, rel, ext, what) {
   }
 }
 
+function missingReference(what, rel, cause) {
+  const error = new Error(missingCorpusMessage(what, rel), cause ? { cause } : undefined);
+  error.code = 'MISSING_CORPUS';
+  return error;
+}
+
+function readReference(root, rel, what) {
+  try {
+    const source = fs.readFileSync(path.join(root, rel), 'utf8');
+    if (!source.trim()) throw missingReference(what, rel);
+    return source;
+  } catch (error) {
+    if (error?.code === 'MISSING_CORPUS') throw error;
+    if (['EACCES', 'EISDIR', 'ELOOP', 'ENOENT'].includes(error?.code)) {
+      throw missingReference(what, rel, error);
+    }
+    throw error;
+  }
+}
+
+function registryDataFromSource(source, rel, what) {
+  const entries = [...source.matchAll(REGISTRY_ENTRY_RE)];
+  if (entries.length === 0) throw missingReference(what, rel);
+  const entryIds = entries.map((match) => match[1] ?? match[2]);
+  return {
+    count: entries.length,
+    ids: new Set(entryIds),
+    entryIds,
+  };
+}
+
+function readRegistryData(root, section) {
+  const rel = SECTION_REGISTRY_FILES[section];
+  if (!rel) throw new Error(`unknown corpus section: ${section}`);
+  const source = readReference(root, rel, `${section} registry`);
+  return { ...registryDataFromSource(source, rel, `${section} registry`), rel };
+}
+
+function readSlugMap(root, section) {
+  const rel = SECTION_SLUG_FILES[section];
+  const slugConst = SECTION_SLUG_EXPORTS[section];
+  if (!rel || !slugConst) throw new Error(`unknown corpus section: ${section}`);
+  const source = readReference(root, rel, `${section} slug map`);
+  const slugs = parseArticleUrlSlugs(source, slugConst);
+  if (Object.keys(slugs).length === 0) throw missingReference(`${section} slug map`, rel);
+  return slugs;
+}
+
+function readCanonicalOverrideSlugs(root, section) {
+  const rel = SECTION_CANONICAL_OVERRIDE_FILES[section];
+  if (!rel) throw new Error(`unknown corpus section: ${section}`);
+  let parsed;
+  try {
+    parsed = JSON.parse(readReference(root, rel, `${section} canonical overrides`));
+  } catch (error) {
+    if (error?.code === 'MISSING_CORPUS') throw error;
+    throw new Error(`${rel}: canonical overrides non sono JSON leggibile`, { cause: error });
+  }
+  return new Set(Object.keys(parsed?.overrides ?? {}));
+}
+
+function readGit(root, args) {
+  try {
+    return execFileSync('git', ['-C', root, ...args], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+      maxBuffer: 64 * 1024 * 1024,
+    }).trim();
+  } catch {
+    return null;
+  }
+}
+
+function missingHistoryError(message) {
+  const error = new Error(`storia del corpus non verificabile: ${message}`);
+  error.code = 'MISSING_CORPUS_HISTORY';
+  return error;
+}
+
+const ZERO_REVISION_RE = /^0+$/;
+
+function normalizeConfiguredRevision(value) {
+  const revision = String(value ?? '').trim();
+  if (!revision || ZERO_REVISION_RE.test(revision)) return null;
+  return revision;
+}
+
+/**
+ * Sceglie la base storica in base all'evento che sta eseguendo il gate.
+ *
+ * Un push puo' contenere piu' commit: `HEAD^` sarebbe allora solo il commit
+ * intermedio piu' recente, non lo stato pubblicato prima del push. Le PR
+ * usano invece la base dichiarata dall'evento. `undefined` e' riservato a
+ * workflow_dispatch e uso locale, dove il fallback a `HEAD^` resta esplicito;
+ * `null` significa che un evento push/PR ha dichiarato una base assente e deve
+ * quindi restare fail-closed.
+ */
+export function historyRevisionFromEnv(env = process.env) {
+  const event = String(env.PREFLIGHT_EVENT_NAME ?? env.GITHUB_EVENT_NAME ?? '').trim();
+  if (event === 'push') {
+    return normalizeConfiguredRevision(
+      env.PREFLIGHT_PUSH_BASE_REVISION ?? env.PREFLIGHT_BASE_REVISION ?? env.GITHUB_EVENT_BEFORE,
+    );
+  }
+  if (event === 'pull_request') {
+    return normalizeConfiguredRevision(
+      env.PREFLIGHT_PR_BASE_REVISION ?? env.PREFLIGHT_BASE_REVISION ?? env.GITHUB_BASE_SHA,
+    );
+  }
+  if (Object.prototype.hasOwnProperty.call(env, 'PREFLIGHT_BASE_REVISION')) {
+    return normalizeConfiguredRevision(env.PREFLIGHT_BASE_REVISION);
+  }
+  return undefined;
+}
+
+function previousCorpusRevision(root, configuredRevision = historyRevisionFromEnv()) {
+  if (readGit(root, ['rev-parse', '--is-inside-work-tree']) !== 'true') {
+    throw missingHistoryError('la radice non e\' un checkout Git');
+  }
+  if (readGit(root, ['rev-parse', '--is-shallow-repository']) === 'true') {
+    throw missingHistoryError(
+      'il checkout Git e\' shallow, quindi il high-water precedente non e\' disponibile',
+    );
+  }
+  if (configuredRevision !== undefined) {
+    const configured = normalizeConfiguredRevision(configuredRevision);
+    if (configured === null) {
+      throw missingHistoryError('la revisione base dell\'evento non e\' disponibile');
+    }
+    const revision = readGit(root, ['rev-parse', '--verify', `${configured}^{commit}`]);
+    if (!revision) {
+      throw missingHistoryError(
+        `la revisione base ${configured} non e\' disponibile nel checkout`,
+      );
+    }
+    return revision;
+  }
+  const revision = readGit(root, ['rev-parse', 'HEAD^']);
+  if (!revision) {
+    throw missingHistoryError('la revisione Git precedente non e\' disponibile');
+  }
+  return revision;
+}
+
+function previousRegistryData(root, section, revision) {
+  const rel = SECTION_REGISTRY_FILES[section];
+  try {
+    const source = execFileSync('git', ['-C', root, 'show', `${revision}:${rel}`], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+      maxBuffer: 64 * 1024 * 1024,
+    });
+    if (!source.trim()) return null;
+    return registryDataFromSource(source, rel, `${section} registry storico`);
+  } catch (error) {
+    if (error?.status !== undefined) return null;
+    throw error;
+  }
+}
+
+function registryHighWater(
+  root,
+  section,
+  current,
+  { previousRegistryCount, previousRevision } = {},
+) {
+  if (previousRegistryCount !== undefined) {
+    if (!Number.isSafeInteger(previousRegistryCount) || previousRegistryCount < 0) {
+      const error = new Error(
+        `${section}: previousRegistryCount non valido (${previousRegistryCount}); ` +
+          'la storia iniettata deve essere un intero non negativo',
+      );
+      error.code = 'INVALID_CORPUS_HISTORY';
+      throw error;
+    }
+    return Math.max(current.count, previousRegistryCount);
+  }
+  const revision = previousCorpusRevision(root, previousRevision);
+  const previous = previousRegistryData(root, section, revision);
+  return Math.max(current.count, previous?.count ?? 0);
+}
+
+function truncatedRegistryError(section, current, highWater) {
+  const floor = floorFrom(highWater);
+  const error = new Error(
+    `${current.rel}: ${current.count} entry contro ${highWater} nella revisione Git precedente ` +
+      `(pavimento ${floor}) — registro troncato, rifiuto il floor derivato dal solo registro corrente`,
+  );
+  error.code = 'TRUNCATED_CORPUS';
+  return error;
+}
+
+/** Quanti file-meta locali sono presenti per la sezione. */
+export function countPresentLocales(root, section) {
+  const prefix = SECTION_META_PREFIXES[section];
+  if (!prefix) throw new Error(`unknown corpus section: ${section}`);
+  const rel = path.join('content', `${prefix}*.ts`);
+  let names;
+  try {
+    names = fs.readdirSync(path.join(root, 'content'));
+  } catch (error) {
+    if (['EACCES', 'ELOOP', 'ENOENT'].includes(error?.code)) {
+      throw missingReference(`${section} locale metadata`, rel, error);
+    }
+    throw error;
+  }
+  const missing = SECTION_META_LOCALES
+    .map((locale) => `${prefix}${locale}.ts`)
+    .filter((name) => !names.includes(name));
+  if (missing.length) {
+    throw missingReference(
+      `${section} locale metadata (${missing.join(', ')})`,
+      rel,
+    );
+  }
+  return SECTION_META_LOCALES.length;
+}
+
+function metadataArticleIds(source) {
+  return new Set([...source.matchAll(META_TITLE_KEY_RE)].map((match) => match[1]));
+}
+
+/** Ogni locale deve esporre tutti gli ID del registro, non solo un file. */
+export function validateLocaleMetadata(root, section, registryIds) {
+  const prefix = SECTION_META_PREFIXES[section];
+  if (!prefix) throw new Error(`unknown corpus section: ${section}`);
+  for (const locale of SECTION_META_LOCALES) {
+    const rel = path.join('content', `${prefix}${locale}.ts`);
+    const ids = metadataArticleIds(readReference(root, rel, `${section} locale metadata`));
+    const missing = [...registryIds].filter((id) => !ids.has(id));
+    if (missing.length) {
+      const error = new Error(
+        `${rel}: meta incompleta — ${ids.size} ID title, ${registryIds.size} richiesti; ` +
+          `mancano ${missing.length}: ${missing.slice(0, 5).join(', ')}`,
+      );
+      error.code = 'INCOMPLETE_CORPUS';
+      throw error;
+    }
+  }
+}
+
+/**
+ * Atteso dei corpi: entry del registro × locali-meta presenti.
+ *
+ * Il riferimento non e' la directory che il gate deve scandire: e' la coppia
+ * di registri e metadati che il sito usa per pubblicare gli articoli. Se uno
+ * dei due riferimenti manca, o se la storia necessaria al high-water non e'
+ * leggibile, lancia invece di trasformare l'assenza in un pavimento a zero.
+ * I fake root possono fornire `previousRegistryCount` solo quando la storia
+ * e' stata verificata dal test che li costruisce. `previousRevision` e' la
+ * revisione base esplicita del push/PR; senza questa opzione la selezione
+ * dell'evento usa l'ambiente e solo l'uso locale/dispatch ricade su `HEAD^`.
+ */
+export function expectedBodyFiles(
+  root,
+  section,
+  { previousRegistryCount, previousRevision } = {},
+) {
+  const registry = readRegistryData(root, section);
+  const highWater = registryHighWater(root, section, registry, {
+    previousRegistryCount,
+    previousRevision,
+  });
+  if (registry.count < floorFrom(highWater)) {
+    throw truncatedRegistryError(section, registry, highWater);
+  }
+  const locales = countPresentLocales(root, section);
+  validateLocaleMetadata(root, section, registry.ids);
+  return highWater * locales;
+}
+
+/** Quante entry articolo dichiara il registro sorgente della sezione. */
+export function countRegistryArticles(root, section) {
+  return readRegistryData(root, section).count;
+}
+
 /** Quanti articoli sorgente ha la sezione, contati sui file di corpo. */
 export function countSourceArticles(root, section) {
   const rel = SECTION_BODY_DIRS[section];
   if (!rel) throw new Error(`unknown corpus section: ${section}`);
   return countCorpusFiles(root, rel, '.ts', section);
+}
+
+/**
+ * Quante entry IT promette il corpus alla sitemap.
+ *
+ * Il denominatore parte dal registro, non dal predicato del writer: un nuovo
+ * filtro o una mappa slug troncata deve far scattare il floor, non abbassarlo
+ * insieme all'artefatto. Si sottraggono solo le esclusioni già dichiarate nei
+ * dati di canonical override o nella retention delle daily edition, mappate
+ * esplicitamente allo slug IT di una entry del registro.
+ */
+export function countSourceSitemapEntries(root, section) {
+  const registry = readRegistryData(root, section);
+  const slugMap = readSlugMap(root, section);
+  const shadowed = readCanonicalOverrideSlugs(root, section);
+
+  if (section === 'frontaliere') {
+    for (const id of selectRetiredDailyEditions([...registry.ids])) {
+      const slug = slugMap[id]?.it;
+      if (slug) shadowed.add(slug);
+    }
+  }
+
+  return registry.entryIds.filter((id) => !shadowed.has(slugMap[id]?.it)).length;
+}
+
+/**
+ * Cardinalità attesa dell'archive sitemap, derivata dai due input che il
+ * writer TS unisce: meta title-keys IT e chiavi della slug map. Il conteggio
+ * resta indipendente dal documento XML scritto, così la verifica può
+ * distinguere un corpus corto da una serializzazione corta.
+ */
+export function countSourceArchiveSitemapUrls(root, section) {
+  const metaRel = path.join('content', `${SECTION_META_PREFIXES[section]}it.ts`);
+  const metaIds = metadataArticleIds(readReference(root, metaRel, `${section} Italian metadata`));
+  const slugMap = readSlugMap(root, section);
+  const unionSize = new Set([...metaIds, ...Object.keys(slugMap)]).size;
+  const pages = Math.max(1, Math.ceil(unionSize / ARTICLES_PAGE_SIZE));
+  return pages * SECTION_META_LOCALES.length;
 }
 
 /** Quante immagini hero ci sono in sorgente. */
@@ -247,6 +615,26 @@ export function sectionFloor(root, section, retention = FLOOR_RETENTION) {
 }
 
 /**
+ * Il pavimento di un elenco derivato dal registro, come una sitemap articolo.
+ *
+ * Il registro è il riferimento corretto per il contenuto che la sitemap prova
+ * a elencare; le voci `shadowed` sono escluse legittimamente perché puntano a
+ * un canonical diverso. Il risultato resta relativo al numero corrente, così
+ * non ricrea il vecchio pavimento assoluto che si è svuotato mentre il corpus
+ * cresceva.
+ *
+ * Un registro assente o vuoto non vale come pavimento a zero: è l'assenza del
+ * riferimento e va rifiutata dal writer.
+ */
+export function listedFloor(registryCount, shadowed = 0, retention = FLOOR_RETENTION) {
+  if (!Number.isFinite(registryCount) || registryCount <= 0) {
+    throw new Error(missingCorpusMessage('un elenco derivato dal registro', 'il registro degli articoli'));
+  }
+  const expected = Math.max(0, registryCount - Math.max(0, shadowed));
+  return floorFrom(expected, retention);
+}
+
+/**
  * Dove vivono i chunk SEO in QUESTO repo. Il layout del sito e'
  * `services/seo`; `build-api.mjs` passa `seoDir: 'content/seo'` a
  * `buildAllRssFeeds`, ed e' quello il parametro che vale qui.
@@ -254,7 +642,7 @@ export function sectionFloor(root, section, retention = FLOOR_RETENTION) {
 export const SEO_CHUNK_DIR = path.join('content', 'seo');
 
 /**
- * Le voci di un chunk SEO che diventano davvero `<item>`, aggiunte a `into`.
+ * I metadati completi delle voci di un chunk SEO, aggiunti a `into`.
  *
  * PERCHE' UN CONTEGGIO A PARTE dai file di corpo. Gli `<item>` di un feed non
  * nascono dai corpi: `buildSectionFeeds` li costruisce da `parseSeoBlogs` sui
@@ -265,45 +653,69 @@ export const SEO_CHUNK_DIR = path.join('content', 'seo');
  * un feed legittimamente corto — e la lista dei chunk si e' gia' rivelata
  * capace di muoversi da sola (due su sette letti, feed fermo tre mesi).
  *
- * I criteri ricalcano quelli di `parseSeoBlogs`, che e' il produttore: stesso
- * regex di inizio voce, stessi campi obbligatori e lo stesso confine, cioe'
- * l'inizio della voce successiva o la fine del sorgente per l'ultima voce.
- * Cosi' il pavimento conta esattamente cio' che il feed puo' leggere. L'insieme e' un Set di articleId perche' la',
- * un livello sopra, le voci finiscono in una Map chiavata per articleId: due
- * chunk che citano lo stesso id producono UN item, non due.
+ * Il collector resta completo per i consumer che usano anche il testo SEO
+ * opzionale, come la whitelist della sitemap news in `build-api.mjs`. Il
+ * collector filtrato per RSS qui sotto ricalca invece `parseSeoBlogs`: la
+ * scansione lessicale condivisa riconosce solo chiavi reali, gli stessi campi
+ * obbligatori e il confine bilanciato della singola voce.
  *
  * Restano un parse in piu' — l'engine non esporta il suo — ma la LISTA dei
  * chunk no: quella si importa da `RSS_SECTIONS` (AGENTS.md #6), ed e' la parte
  * che e' gia' andata alla deriva una volta.
  */
-export function collectSeoEntryMetadata(src, into = new Map()) {
-  const entryRe = /'blog-([^']+)':\s*\{/g;
-  const positions = [];
-  let match;
-  while ((match = entryRe.exec(src)) !== null) positions.push({ id: match[1], start: match.index });
+/**
+ * Decode the quoted value used by the TypeScript SEO literals.
+ *
+ * The source string is read before TypeScript evaluates it, so an escaped
+ * quote and an escaped backslash must be decoded in the same order as the
+ * producer. The placeholder keeps a literal pair of backslashes from being
+ * mistaken for the beginning of another escape.
+ */
+export function unescapeQuoted(value, quote = "'") {
+  if (value === undefined) return undefined;
+  return String(value)
+    .split('\\\\').join('\u0000')
+    .split(`\\${quote}`).join(quote)
+    .split('\\n').join('\n')
+    .split('\u0000').join('\\');
+}
+
+function collectSeoEntryMetadataInternal(src, into, feedOnly) {
+  const positions = findAllSeoEntryMatches(src).map(({ id, index, closeIdx }) => ({
+    id,
+    start: index,
+    end: closeIdx + 1,
+  }));
 
   for (let i = 0; i < positions.length; i += 1) {
-    const { id, start } = positions[i];
-    const end = i + 1 < positions.length
-      ? positions[i + 1].start
-      : src.length;
-    // Match parseSeoBlogs: a successor is the exact boundary and the final
-    // entry runs to the end of the source, with no fixed truncation.
+    const { id, start, end } = positions[i];
     const block = src.slice(start, end);
-    into.set(id, {
-      keywords: block.match(/keywords:\s*'((?:[^'\\]|\\.)*)'/)?.[1],
+    const keywordMatch = block.match(/keywords:\s*'((?:[^'\\]|\\.)*)'/);
+    const metadata = {
+      keywords: unescapeQuoted(keywordMatch?.[1]),
       headline: block.match(/"headline":\s*"((?:[^"\\]|\\.)*)"/)?.[1],
       datePublished: block.match(/"datePublished":\s*"([^"]+)"/)?.[1],
-    });
+    };
+    // Solo il percorso RSS applica la validita' del producer prima del dedupe;
+    // il collector completo deve conservare anche i campi opzionali per la
+    // sitemap news.
+    if (feedOnly && (!metadata.headline || !metadata.datePublished)) continue;
+    into.set(id, metadata);
   }
   return into;
 }
 
+export function collectSeoEntryMetadata(src, into = new Map()) {
+  return collectSeoEntryMetadataInternal(src, into, false);
+}
+
+/** Metadati delle sole voci che `parseSeoBlogs` puo' emettere come `<item>`. */
+export function collectSeoFeedEntryMetadata(src, into = new Map()) {
+  return collectSeoEntryMetadataInternal(src, into, true);
+}
+
 export function collectSeoEntryIds(src, into = new Set()) {
-  for (const [id, metadata] of collectSeoEntryMetadata(src)) {
-    // Non-vuoti, come li vuole il produttore: `"headline": ""` e' falsy la', e
-    // contarlo qui alzerebbe il pavimento sopra cio' che il feed puo' emettere.
-    if (!metadata.headline || !metadata.datePublished) continue;
+  for (const id of collectSeoFeedEntryMetadata(src).keys()) {
     into.add(id);
   }
   return into;
@@ -327,4 +739,53 @@ export function countSeoEntries(root, seoFiles, seoDir = SEO_CHUNK_DIR) {
     collectSeoEntryIds(fs.readFileSync(filePath, 'utf-8'), ids);
   }
   return ids.size;
+}
+
+/**
+ * Ultima pubblicazione valida nei chunk SEO che alimentano una sezione.
+ *
+ * Il valore viene misurato sugli stessi blocchi e con gli stessi campi che
+ * `collectSeoEntryIds` consegna al produttore dei feed: il pavimento e la
+ * guardia di freschezza non devono usare due popolazioni diverse. Qui la lista
+ * dichiarata e' un riferimento canonico: se manca anche un solo chunk, il
+ * corpus e' incompleto e la funzione fallisce prima che il gate possa derivare
+ * un floor piu' basso. Eventuali eccezioni cross-repo vanno risolte dal
+ * chiamante prima di passare la lista al producer.
+ */
+export function latestSeoPublication(root, seoFiles, seoDir = SEO_CHUNK_DIR) {
+  const missing = seoFiles.filter((file) => !fs.existsSync(path.join(root, seoDir, file)));
+  if (missing.length) {
+    const error = new Error(
+      missing
+        .map((file) => missingCorpusMessage('la freschezza dei feed', path.join(root, seoDir, file)))
+        .join('\n'),
+    );
+    error.code = 'MISSING_CORPUS';
+    throw error;
+  }
+
+  // `parseSeoBlogs` usa una sola Map attraversando i chunk nell'ordine della
+  // sezione: un id ripetuto viene quindi sostituito dall'ultima voce valida.
+  // Replicare quella semantica prima di cercare il massimo evita che una data
+  // rimasta in un chunk precedente descriva un articolo che il producer ha
+  // gia' sovrascritto.
+  const entries = new Map();
+  for (const file of seoFiles) {
+    const filePath = path.join(root, seoDir, file);
+    for (const [articleId, metadata] of collectSeoFeedEntryMetadata(fs.readFileSync(filePath, 'utf-8'))) {
+      // Il collector RSS filtra prima del Map.set: una voce non emettibile non
+      // sostituisce quella valida precedente.
+      entries.set(articleId, metadata);
+    }
+  }
+
+  let latest = null;
+  for (const [articleId, metadata] of entries) {
+    const timestamp = Date.parse(metadata.datePublished);
+    if (!Number.isFinite(timestamp)) continue;
+    if (!latest || timestamp > latest.timestamp) {
+      latest = { articleId, datePublished: metadata.datePublished, timestamp };
+    }
+  }
+  return latest;
 }

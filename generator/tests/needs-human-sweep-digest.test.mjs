@@ -39,8 +39,15 @@ test('il titolo digest ambiguo non viene risolto scegliendo il primo risultato',
   assert.doesNotMatch(step, /gh search issues/, 'la ricerca non deve avere il cap implicito di gh search');
   assert.match(step, /if \[ -z "\$\{N:-\}" \]; then[\s\S]*?exit 1/, 'zero digest deve essere un errore esplicito');
   assert.match(step, /DIGEST_SEARCH_RC=\$\?/, 'un errore della ricerca deve riportare il codice di uscita della CLI');
-  const search = step.slice(step.indexOf('if DIGEST_MATCHES='), step.indexOf('DIGEST_MATCH_COUNT='));
+  const searchAt = step.indexOf('if DIGEST_MATCHES=');
+  const search = step.slice(searchAt, step.indexOf('DIGEST_MATCH_COUNT=', searchAt));
+  assert.ok(searchAt !== -1, 'la ricerca del digest deve essere un comando reale, non solo un token in prosa');
   assert.doesNotMatch(search, /2>\/dev\/null/, 'gli errori della ricerca non devono essere soppressi');
+  assert.match(
+    search,
+    /\n          else\n[\s\S]*?DIGEST_SEARCH_RC=\$\?/,
+    'il codice di uscita deve essere letto nel ramo che rende raggiungibile il fallimento sotto errexit',
+  );
   assert.match(
     step,
     /DIGEST_MATCH_COUNT=.*(?:wc -l|length)/,
@@ -53,6 +60,23 @@ test('il titolo digest ambiguo non viene risolto scegliendo il primo risultato',
   const guardAt = step.indexOf('if [ "$DIGEST_MATCH_COUNT" -gt 1 ]; then');
   const numberAt = step.indexOf('N=');
   assert.ok(guardAt !== -1 && numberAt !== -1 && guardAt < numberAt, 'il guard deve precedere la scelta del numero');
+
+  const markerAt = step.indexOf('if HAS_LINES=');
+  const markerCountAt = step.indexOf('\n          HAS=', markerAt);
+  assert.ok(markerAt !== -1 && markerCountAt !== -1, 'la lettura dei marker del digest deve essere presente');
+  const markerRead = step.slice(markerAt, markerCountAt);
+  assert.match(
+    markerRead,
+    /gh api --paginate "repos\/\$GITHUB_REPOSITORY\/issues\/\$N\/comments\?per_page=100"/,
+    'i commenti del digest devono essere letti senza il cap implicito di gh issue view',
+  );
+  assert.match(
+    markerRead,
+    /--jq '\.\[\] \| select\(\.body \| test\("<!-- SWEEP_OUTCOME:"\)\) \| 1'/,
+    'la query paginata deve contare i marker su ogni pagina',
+  );
+  assert.match(markerRead, /DIGEST_MARKER_RC=\$\?[\s\S]*?exit 1/, 'un errore nella lettura dei marker deve restare rosso');
+  assert.doesNotMatch(markerRead, /2>\/dev\/null|\|\| echo 0/, 'un errore del digest non deve degradare a zero marker');
 });
 
 test('il valore del titolo digest è validato prima del prompt Claude e passato con un token osservabile', () => {
@@ -86,6 +110,9 @@ test('il valore del titolo digest è validato prima del prompt Claude e passato 
   assert.ok(validationGuard, 'il verdetto finale deve avere un guard sulla validazione del titolo');
   assert.match(validationGuard[1], /exit 1/, 'una validazione fallita deve lasciare rosso anche il verdetto finale');
   const validationGuardAt = outcome.indexOf('if [ "$DIGEST_TITLE_VALIDATION"');
-  const searchAt = outcome.indexOf('DIGEST_MATCHES=');
-  assert.ok(validationGuardAt !== -1 && searchAt !== -1 && validationGuardAt < searchAt, 'il verdetto deve verificare il titolo prima di interrogare GitHub');
+  const searchCommandAt = outcome.indexOf('if DIGEST_MATCHES=');
+  assert.ok(
+    validationGuardAt !== -1 && searchCommandAt !== -1 && validationGuardAt < searchCommandAt,
+    'il verdetto deve verificare il titolo prima del comando che interroga GitHub',
+  );
 });

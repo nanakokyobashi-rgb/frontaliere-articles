@@ -69,9 +69,11 @@ function extractFn(src, header, deps) {
 function makeHarness() {
   const writes = [];
   const mkdirs = [];
+  const qualityChecks = [];
   return {
     writes,
     mkdirs,
+    qualityChecks,
     deps: {
       LOCALES,
       REPO_ROOT: '/fake/repo/root',
@@ -100,6 +102,10 @@ function makeHarness() {
       sanitizeText: (s) => s,
       reportStrippedControlChars: () => {},
       sanitizePromptPlaceholders,
+      assertGeneratedArticleQuality: (data) => {
+        qualityChecks.push(data);
+        if (data._qualityReject) throw new Error('[key-facts-specificity] test rejection');
+      },
       assertArticlePassesFactualityGates: () => {},
     },
   };
@@ -133,6 +139,12 @@ function poisonedData() {
   return data;
 }
 
+function qualityRejectedData() {
+  const data = cleanData();
+  data._qualityReject = true;
+  return data;
+}
+
 describe('refreshBodyFiles — la guardia sui segnaposto gira in processo, non solo nel workflow', () => {
   for (const rel of PRODUCERS) {
     const src = fs.readFileSync(path.join(REPO_ROOT, rel), 'utf-8');
@@ -142,6 +154,7 @@ describe('refreshBodyFiles — la guardia sui segnaposto gira in processo, non s
       const refreshBodyFiles = extractFn(src, 'export function refreshBodyFiles(', h.deps);
       refreshBodyFiles(cleanData(), '/fake/repo/root', () => {});
       assert.equal(h.writes.length, 4, 'un articolo pulito deve produrre 4 file di body');
+      assert.equal(h.qualityChecks.length, 1, 'il writer diretto deve chiamare il gate qualita\'');
     });
 
     it(`${rel}: un segnaposto nel testo LANCIA e non scrive un solo byte`, () => {
@@ -157,6 +170,17 @@ describe('refreshBodyFiles — la guardia sui segnaposto gira in processo, non s
         0,
         'fail-closed violato: la guardia ha lanciato ma qualche body era gia\' stato scritto',
       );
+    });
+
+    it(`${rel}: un rifiuto del gate qualita' precede ogni write`, () => {
+      const h = makeHarness();
+      const refreshBodyFiles = extractFn(src, 'export function refreshBodyFiles(', h.deps);
+      assert.throws(
+        () => refreshBodyFiles(qualityRejectedData(), '/fake/repo/root', () => {}),
+        /key-facts-specificity/,
+      );
+      assert.equal(h.qualityChecks.length, 1);
+      assert.equal(h.writes.length, 0, 'un qualityReject non deve scrivere body');
     });
   }
 

@@ -38,7 +38,16 @@ import {
   resolveContentFieldSources,
   normalizeItalianContentFromPayload,
 } from '../scripts/lib/body2-payload-verdict.mjs';
-import { translateFieldFreeMt } from '../scripts/lib/article-free-mt.mjs';
+import {
+  translateFieldFreeMt,
+  maskMunicipalityNames,
+  maskNavLinks,
+  ensureMunicipalityNames,
+} from '../scripts/lib/article-free-mt.mjs';
+import {
+  resetTopicCoverageCaches,
+  setMunicipalityIndexForTests,
+} from '../scripts/lib/topic-coverage-guard.mjs';
 import {
   createFreeMtRecoveryReport,
   recordFreeMtUnusableOutput,
@@ -46,6 +55,8 @@ import {
   MAX_FREE_MT_LLM_FALLBACKS_PER_RUN,
   MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE,
   FREE_MT_LLM_FALLBACK_LOCALES,
+  freeMtCandidateFieldCount,
+  maxFreeMtLlmFallbacksPerLocale,
 } from '../scripts/lib/free-mt-recovery.mjs';
 import { isReservedPublishedSlug } from '../../scripts/lib/published-slug-guard.mjs';
 import { buildSitemap } from '../../scripts/lib/build-sitemap.mjs';
@@ -59,6 +70,7 @@ import {
   DATASET_DROP_WARNING,
 } from '../scripts/lib/events-utils.mjs';
 import { buildWeekendDigestArticle } from '../scripts/lib/events-digest-content.mjs';
+import { enclosingFunctionByLine, TOP_LEVEL } from './lib/identifier-scope.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = readFileSync(path.join(__dirname, '..', 'scripts', 'create-article.mjs'), 'utf-8');
@@ -168,6 +180,114 @@ describe('translateFieldFreeMt — l’uscita di un motore non e’ prosa', () =
     assert.equal(out, '');
     assert.deepEqual(signals, [{ targetLang: 'de', fieldType: 'title', reason: 'non-string' }]);
   });
+
+  test('preserva i nomi propri dei comuni attraverso la traduzione free-MT', async () => {
+    const input = 'Guida pratica per Besano e Martello';
+    const out = await translateFieldFreeMt({
+      text: input,
+      sourceLang: 'it',
+      targetLang: 'de',
+      fieldType: 'description',
+      preserveMunicipalityNames: true,
+      translate: async ({ text }) => text.replace('Guida pratica per', 'Praktischer Leitfaden für'),
+    });
+    assert.equal(out, 'Praktischer Leitfaden für Besano e Martello');
+  });
+
+  test('un sentinel di comune alterato fa scattare il recupero, non pubblica il nome tradotto', async () => {
+    const signals = [];
+    const out = await translateFieldFreeMt({
+      text: 'Guida pratica per Besano',
+      sourceLang: 'it',
+      targetLang: 'de',
+      fieldType: 'description',
+      preserveMunicipalityNames: true,
+      translate: async ({ text }) => text.replace(/0M0\d+Q0/g, 'Gemeinde'),
+      onUnusableOutput: (event) => signals.push(event),
+    });
+    assert.equal(out, '');
+    assert.deepEqual(signals, [{
+      targetLang: 'de',
+      fieldType: 'description',
+      reason: 'mangled-municipality-name',
+    }]);
+  });
+
+  test('il restore rifiuta indici duplicati, mancanti o fuori range', () => {
+    const municipalities = maskMunicipalityNames('Besano e Martello');
+    assert.equal(municipalities.restore('0M00Q0 e 0M01Q0').ok, true);
+    assert.equal(municipalities.restore('0M00Q0 e 0M00Q0').ok, false, 'duplicato');
+    assert.equal(municipalities.restore('0M00Q0').ok, false, 'indice omesso');
+    assert.equal(municipalities.restore('0M00Q0 e 0M02Q0').ok, false, 'indice fuori range');
+
+    const nav = maskNavLinks('[Besano](nav:municipalities) e [calcolo](nav:calculator)');
+    assert.equal(nav.restore(nav.masked).ok, true);
+    assert.equal(nav.restore(nav.masked.replace('0NAV10', '0NAV00')).ok, false, 'duplicato');
+    assert.equal(nav.restore(nav.masked.replace('0NAV10', '')).ok, false, 'indice omesso');
+    assert.equal(nav.restore(`${nav.masked} 0NAV990`).ok, false, 'indice fuori range');
+  });
+
+  test('il postcondition reinserisce il nome originale anche fuori dal percorso free-MT', () => {
+    assert.deepEqual(
+      ensureMunicipalityNames('Guida pratica per Besano', 'Praktischer Leitfaden'),
+      { text: 'Praktischer Leitfaden (Besano)', added: ['Besano'] },
+    );
+    assert.deepEqual(
+      ensureMunicipalityNames('Guida pratica per Besano', 'Praktischer Leitfaden für Besano'),
+      { text: 'Praktischer Leitfaden für Besano', added: [] },
+    );
+  });
+
+  test('la lista protetta deriva dai comuni canonici e non da una sequenza manuale', () => {
+    const masked = maskMunicipalityNames('Besano, Martello e Villa di Chiavenna');
+    assert.equal(masked.expected, 3);
+    assert.match(masked.masked, /0M0\d+Q0/);
+    assert.equal(masked.restore(masked.masked).text, 'Besano, Martello e Villa di Chiavenna');
+  });
+
+  test('riusa la disambiguazione del topic guard per non proteggere parole comuni', () => {
+    for (const name of ['Mese', 'Dazio', 'Premia', 'Rossa', 'Erba']) {
+      const masked = maskMunicipalityNames(`Estratto: ${name}`);
+      assert.equal(masked.expected, 0, `${name} non è un toponimo disambiguato`);
+      assert.deepEqual(
+        ensureMunicipalityNames(`Estratto: ${name}`, 'Lokalisierter Auszug'),
+        { text: 'Lokalisierter Auszug', added: [] },
+        `${name} non va riaggiunto senza evidenza disambiguata`,
+      );
+    }
+    assert.equal(maskMunicipalityNames('Estratto: Martello').expected, 1,
+      'un comune non ambiguo resta protetto');
+  });
+
+  test('la preservazione fallisce chiusa se l\'indice comuni è vuoto o troncato', () => {
+    setMunicipalityIndexForTests(new Map());
+    try {
+      assert.throws(
+        () => maskMunicipalityNames('Estratto: Besano'),
+        /INDICE COMUNI VUOTO O TRONCATO/,
+      );
+      assert.throws(
+        () => ensureMunicipalityNames('Estratto: Besano', 'Lokalisierter Auszug'),
+        /INDICE COMUNI VUOTO O TRONCATO/,
+      );
+    } finally {
+      resetTopicCoverageCaches();
+    }
+  });
+
+  test('il percorso articolo abilita la protezione sull\'excerpt e la applica dopo la traduzione', () => {
+    assert.match(CREATE_ARTICLE, /preserveMunicipalityNames:\s*true/);
+    const translatedAt = CREATE_ARTICLE.indexOf('await translateArticle(data);');
+    const guardAt = CREATE_ARTICLE.indexOf('preserveMunicipalityNamesInMetadata(data);', translatedAt);
+    const sanitizeAt = CREATE_ARTICLE.indexOf('sanitizePromptPlaceholders(data);', translatedAt);
+    const nextStepAt = CREATE_ARTICLE.indexOf('relocalizeSlugsAfterTranslation(data', translatedAt);
+    assert.ok(
+      translatedAt !== -1
+        && nextStepAt > translatedAt
+        && sanitizeAt > nextStepAt
+        && guardAt > sanitizeAt,
+      'il postcondition dei nomi propri deve seguire l\'ultima sanitizzazione dei placeholder');
+  });
 });
 
 describe('free-MT recovery — il degrado e’ misurato e limitato per run', () => {
@@ -209,14 +329,153 @@ describe('free-MT recovery — il degrado e’ misurato e limitato per run', () 
     assert.deepEqual(report.llmFallbacksByLocale, spesi);
   });
 
-  test('errori di trasporto e sentinel markdown corrotti sono telemetria, non campi da addebitare', () => {
+  test('#1320 FU-033 — il cap per locale segue il numero reale di coppie FAQ', () => {
+    assert.equal(freeMtCandidateFieldCount(0), 5);
+    assert.equal(freeMtCandidateFieldCount(1), 7);
+    assert.equal(freeMtCandidateFieldCount(7), 19);
+    assert.equal(maxFreeMtLlmFallbacksPerLocale(1), MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE);
+    assert.ok(maxFreeMtLlmFallbacksPerLocale(7) > MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE);
+
+    const report = createFreeMtRecoveryReport({ faqCount: 7 });
+    assert.equal(report.faqCount, 7);
+    for (let i = 0; i < MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE + 1; i += 1) {
+      assert.equal(claimFreeMtLlmFallback(report, 'en'), true, `fallback FAQ en ${i + 1}`);
+    }
+  });
+
+  test('#1320 FU-037 — il cap segue i bodyN realmente tradotti insieme alle FAQ', () => {
+    const report = createFreeMtRecoveryReport({ faqCount: 1, bodyFieldCount: 4 });
+    const fields = [
+      'title', 'excerpt', 'body1', 'body2', 'body3', 'body4',
+      'faq.q[0]', 'faq.a[0]',
+    ];
+    for (const field of fields) {
+      recordFreeMtUnusableOutput(report, { reason: 'unusable-text', targetLang: 'en', field });
+    }
+
+    assert.equal(report.bodyFieldCount, 4);
+    assert.equal(freeMtCandidateFieldCount(report.faqCount, report.bodyFieldCount), 8);
+    assert.equal(maxFreeMtLlmFallbacksPerLocale(report.faqCount, report.bodyFieldCount), 4);
+    for (let i = 0; i < 4; i += 1) {
+      assert.equal(claimFreeMtLlmFallback(report, 'en'), true, `fallback body4 en ${i + 1}`);
+    }
+    assert.equal(report.llmFallbacks, 4, 'body4 deve ricevere il quarto retry prima del fallback IT');
+  });
+
+  test('#1320 FU-035 — il cap globale ripartisce i claim fra i locali', () => {
+    const report = createFreeMtRecoveryReport({ faqCount: 2 });
+    const spesi = Object.fromEntries(FREE_MT_LLM_FALLBACK_LOCALES.map((l) => [l, 0]));
+    const faqFields = [
+      'title', 'excerpt', 'body1', 'body2', 'body3',
+      'faq.q[0]', 'faq.a[0]', 'faq.q[1]', 'faq.a[1]',
+    ];
+    for (const locale of FREE_MT_LLM_FALLBACK_LOCALES) {
+      for (const field of faqFields) {
+        recordFreeMtUnusableOutput(report, { reason: 'unusable-text', targetLang: locale, field });
+      }
+    }
+    for (const locale of FREE_MT_LLM_FALLBACK_LOCALES) {
+      for (let i = 0; i < 9; i += 1) {
+        if (claimFreeMtLlmFallback(report, locale)) spesi[locale] += 1;
+      }
+    }
+    assert.ok(spesi.fr >= 1, `fr deve ricevere un claim riservato: ${JSON.stringify(spesi)}`);
+    assert.deepEqual(spesi, { en: 3, de: 2, fr: 2 });
+    assert.equal(report.llmFallbacks, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN);
+    assert.ok(spesi.en <= maxFreeMtLlmFallbacksPerLocale(2));
+    assert.ok(spesi.de <= maxFreeMtLlmFallbacksPerLocale(2));
+    assert.ok(spesi.fr <= maxFreeMtLlmFallbacksPerLocale(2));
+  });
+
+  test('#1320 FU-038 — il cap dinamico non affama i locali successivi', () => {
+    const report = createFreeMtRecoveryReport({ faqCount: 3, bodyFieldCount: 3 });
+    const fields = [
+      'title', 'excerpt', 'body1', 'body2', 'body3',
+      'faq.q[0]', 'faq.a[0]', 'faq.q[1]', 'faq.a[1]', 'faq.q[2]', 'faq.a[2]',
+    ];
+    const spesi = Object.fromEntries(FREE_MT_LLM_FALLBACK_LOCALES.map((locale) => [locale, 0]));
+    for (const locale of FREE_MT_LLM_FALLBACK_LOCALES) {
+      for (const field of fields) {
+        recordFreeMtUnusableOutput(report, { reason: 'unusable-text', targetLang: locale, field });
+      }
+    }
+
+    for (const locale of FREE_MT_LLM_FALLBACK_LOCALES) {
+      for (let i = 0; i < fields.length; i += 1) {
+        if (claimFreeMtLlmFallback(report, locale)) spesi[locale] += 1;
+      }
+    }
+
+    assert.equal(maxFreeMtLlmFallbacksPerLocale(3, 3), 5);
+    assert.deepEqual(spesi, { en: 3, de: 2, fr: 2 });
+    assert.equal(report.llmFallbacks, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN);
+  });
+
+  test('#1320 FU-039 — il budget residuo passa al locale successivo senza sbilanciarlo', () => {
+    const report = createFreeMtRecoveryReport({ faqCount: 3, bodyFieldCount: 3 });
+    const fieldsByLocale = {
+      en: ['title', 'excerpt'],
+      de: ['title', 'excerpt', 'body1', 'body2', 'body3', 'faq.q[0]', 'faq.a[0]'],
+      fr: ['title', 'excerpt', 'body1', 'body2', 'body3', 'faq.q[0]', 'faq.a[0]'],
+    };
+    const spesi = Object.fromEntries(FREE_MT_LLM_FALLBACK_LOCALES.map((locale) => [locale, 0]));
+    for (const [locale, fields] of Object.entries(fieldsByLocale)) {
+      for (const field of fields) {
+        recordFreeMtUnusableOutput(report, { reason: 'unusable-text', targetLang: locale, field });
+      }
+    }
+
+    // Il loop reale consuma en prima: i suoi due soli rifiuti devono liberare
+    // una claim per de/fr, non lasciare il residuo a una ripartizione 4/1.
+    for (const locale of FREE_MT_LLM_FALLBACK_LOCALES) {
+      for (const field of fieldsByLocale[locale]) {
+        if (claimFreeMtLlmFallback(report, locale)) spesi[locale] += 1;
+      }
+    }
+
+    assert.equal(maxFreeMtLlmFallbacksPerLocale(3, 3), 5);
+    assert.deepEqual(spesi, { en: 2, de: 3, fr: 2 });
+    assert.equal(report.llmFallbacks, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN);
+  });
+
+  test('#1320 FU-036 — il cap considera solo i locali con campi rifiutati', () => {
+    const report = createFreeMtRecoveryReport({ faqCount: 2 });
+    const faqFields = [
+      'title', 'excerpt', 'body1', 'body2', 'body3',
+      'faq.q[0]', 'faq.a[0]', 'faq.q[1]', 'faq.a[1]',
+    ];
+    for (const locale of ['en', 'de']) {
+      for (const field of faqFields) {
+        recordFreeMtUnusableOutput(report, { reason: 'unusable-text', targetLang: locale, field });
+      }
+    }
+
+    const spesi = { en: 0, de: 0, fr: 0 };
+    for (const locale of ['en', 'de', 'fr']) {
+      for (let i = 0; i < faqFields.length; i += 1) {
+        if (claimFreeMtLlmFallback(report, locale)) spesi[locale] += 1;
+      }
+    }
+
+    assert.deepEqual(spesi, { en: 4, de: 3, fr: 0 });
+    assert.equal(report.llmFallbacks, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN);
+  });
+
+  test('#1320 FU-034 — ogni uscita free-MT rifiutata addebita il campo', () => {
     const report = createFreeMtRecoveryReport();
     recordFreeMtUnusableOutput(report, { targetLang: 'de', fieldName: 'title', reason: 'error' });
     recordFreeMtUnusableOutput(report, { targetLang: 'de', fieldName: 'excerpt', reason: 'mangled-nav-link' });
+    recordFreeMtUnusableOutput(report, { targetLang: 'de', fieldName: 'body1', reason: 'mangled-municipality-name' });
+    recordFreeMtUnusableOutput(report, { targetLang: 'de', fieldName: 'body2', reason: 'lone-surrogate' });
+    recordFreeMtUnusableOutput(report, { targetLang: 'de', fieldName: 'body3', reason: 'passthrough' });
 
-    assert.equal(report.unusableOutputs, 2);
-    assert.deepEqual(report.unusableByLocale, { de: 2 });
-    assert.deepEqual(report.unusableFields, {}, 'solo output testualmente inutilizzabile o non-stringa paga il cap');
+    assert.equal(report.unusableOutputs, 5);
+    assert.deepEqual(report.unusableByLocale, { de: 5 });
+    assert.deepEqual(
+      report.unusableFields,
+      { 'de:title': 1, 'de:excerpt': 1, 'de:body1': 1, 'de:body2': 1, 'de:body3': 1 },
+      'ogni rifiuto free-MT deve pagare il cap del campo',
+    );
   });
 });
 
@@ -431,7 +690,9 @@ describe('slug: un titolo `Null` non produce /de/blog/null', () => {
       /^function localizedTitleSlugCandidate[\s\S]{0,400}?inspectSlugForPromptPlaceholder\(testo\)\.slug/,
       'l\u2019helper condiviso non attraversa piu\u2019 il classificatore: un titolo `Null` tornerebbe lo slug `null`',
     );
-    const codice = CREATE_ARTICLE.replace(/^\s*(?:\/\/|\*).*$/gm, '');
+    // Solo spazi orizzontali: `\s*` consumerebbe anche i newline e
+    // disallineerebbe l'indice di riga dal classificatore condiviso.
+    const codice = CREATE_ARTICLE.replace(/^[ \t]*(?:\/\/|\*).*$/gm, '');
     // Il vincolo NON e' sul nome dell'argomento: una regressione che scrive
     // `slugifySlugPart(data.content[locale].title)` o `slugifySlugPart(t)`
     // resterebbe verde su un'assertion legata a un elenco di identificatori,
@@ -452,9 +713,24 @@ describe('slug: un titolo `Null` non produce /de/blog/null', () => {
     );
     // Ancorate alla funzione che le contiene, non a una finestra di righe: due
     // righe aggiunte nel mezzo non devono far fallire il test.
+    // `codice` conserva le righe ma elimina le righe di commento. Il file
+    // completo contiene il wrapper CLI finale che questo lettore considera
+    // sbilanciato; per lo scope basta il tratto bilanciato che comprende
+    // `validate()` e i relativi helper. Le righe vuote iniziali riallineano gli
+    // indici assoluti usati dalle match sul sorgente completo.
+    const scopeStart = CREATE_ARTICLE.indexOf('function validate(data, opts = {}) {');
+    const scopeEndAnchor = CREATE_ARTICLE.indexOf('export function deriveAndSanitizeArticleSlugs(data) {');
+    const scopeEnd = CREATE_ARTICLE.indexOf('\n}', scopeEndAnchor) + 2;
+    assert.notEqual(scopeStart, -1, '`validate()` non trovata per la scansione dello scope');
+    assert.notEqual(scopeEndAnchor, -1, '`deriveAndSanitizeArticleSlugs()` non trovata per la scansione dello scope');
+    assert.ok(scopeEnd > scopeEndAnchor, 'la fine del tratto di scope non e\' stata trovata');
+    const prefixLines = CREATE_ARTICLE.slice(0, scopeStart).split('\n').length - 1;
+    const scopeSource = `${'\n'.repeat(prefixLines)}${CREATE_ARTICLE.slice(scopeStart, scopeEnd)}`;
+    const ownerByLine = enclosingFunctionByLine(scopeSource);
     const funzioneChiudente = (idx) => {
-      const m = [...codice.slice(0, idx).matchAll(/^(?:export\s+)?(?:async\s+)?function\s+([A-Za-z0-9_$]+)/gm)].pop();
-      return m ? m[1] : null;
+      const riga = codice.slice(0, idx).split('\n').length;
+      const owner = ownerByLine[riga];
+      return owner === TOP_LEVEL ? null : owner;
     };
     assert.deepEqual(
       nude.map((m) => funzioneChiudente(m.index)).sort(),

@@ -8,7 +8,7 @@
     "",
     "mode:",
     "  identical            — deve restare byte-identico al sito; una modifica la' e' copiabile qui.",
-    "  adapted              — differisce di proposito; `reason` spiega perche'. Resta sorvegliato:",
+    "  adapted              — differisce di proposito; `reason` spiega perche'. Se la baseline e' allineata, `adaptationIssue` indica la issue che governa l'adattamento. Resta sorvegliato:",
     "                         e' proprio sui file adattati che una modifica del sito si perde,",
     "                         perche' 'tanto e' diverso apposta'.",
     "  corpus-only          — non esiste sul sito, ED E' GIUSTO COSI': niente da portare (script",
@@ -159,29 +159,28 @@
       "reason": "Preflight di sintassi TypeScript sui corpi. Gemello di tests/blog-body-typescript-syntax.test.ts del sito: stessa validazione (esbuild transform, loader ts, solo sintassi), adattata al percorso di PUBBLICAZIONE invece che alle PR — la' e' un test su pull_request, qui gli articoli atterrano per push diretto su main, quindi un gate sulle PR non ne vedrebbe mai uno. Registrato 'adapted' e non 'corpus-only': il file sul sito ESISTE, e dichiararlo assente renderebbe loop-drift-check cieco proprio alla divergenza fra i due — il caso peggiore descritto in CLAUDE.md.",
       "baseline": {
         "site": "82a682cdf5586ce4",
-        "corpus": "f42a7f15c4fdfae2",
-        "alignedAt": "2026-08-18"
+        "corpus": "a2753413d81077de",
+        "alignedAt": "2026-09-12"
       }
     },
     {
       "path": "scripts/ci/check-issue-already-resolved.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "e45dab34842b950d",
-        "corpus": "e45dab34842b950d",
-        "alignedAt": "2026-09-11"
+        "site": "77c5698086384349",
+        "corpus": "77c5698086384349",
+        "alignedAt": "2026-09-13"
       }
     },
     {
       "path": "scripts/ci/detect-aggregate.mjs",
-      "mode": "corpus-only-pending",
-      "trackingIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/986",
+      "mode": "identical",
       "baseline": {
-        "site": null,
-        "corpus": "304f762f2aafcb73",
-        "alignedAt": "2026-09-07"
+        "site": "b09919d1e788e369",
+        "corpus": "b09919d1e788e369",
+        "alignedAt": "2026-09-13"
       },
-      "reason": "Il ponte fra `issue-fix.yml` e il rilevatore di aggregati condiviso (issue #986). Il workflow decideva `is_aggregate` con una QUARTA copia del rilevatore, in shell (`grep -cE '^[[:space:]]*[-*][[:space:]]+'` sul corpo, soglia 4), accanto alle tre copie Node tenute identiche da `generator/tests/aggregate-detectors-agree.test.mjs`. Sbagliava in entrambi i versi: falso negativo sulla forma `- **Titolo.**` x3 (#466, coperta da `hasEnumeratedItems` dal #568) — tre item, `3 < 4`, il fixer scrive `Closes` e al merge il tracker si chiude con dentro gli item appena deferiti; falso positivo su un solo item il cui corpo elenca quattro path. Il modulo non reimplementa niente: importa `isAggregate()` da `check-issue-already-resolved.mjs` (AGENTS.md #6). E' `corpus-only-pending` e non `corpus-only` perche' il difetto e' operativo anche sul sito, dove `.github/workflows/issue-fix.yml` ha ancora la sua copia in shell — una terza implementazione ancora (conteggio `N items? deferred` nel TITOLO piu' fallback `sweep|batch|bulk`), che non vede gli item enumerati nel CORPO. Il gemello va portato di la', ed e' il lavoro tracciato da #986: quando atterra, la voce si promuove a `identical` e `trackingIssue` si toglie."
+      "reason": "Trasporto completato dopo il merge della sorgente sito (#8450): il detector importa `isAggregate()` e usa la stessa lettura del payload, fallback conservativo per issue illeggibili o vuote e propagazione non-zero quando `$GITHUB_OUTPUT` non e' scrivibile. Le due copie coincidono; la voce promossa da `corpus-only-pending` a `identical` per chiudere il tracking #986."
     },
     {
       "path": "scripts/ci/check-quota-backoff.mjs",
@@ -305,17 +304,28 @@
       "reason": "Fa girare su `main` il sottoinsieme MISURATO dei gate che leggono `content/**`, e su offender apre UNA issue deduplicata sul titolo invece di rendere rossa una run. Non ha gemello sul sito e non puo' averlo: il difetto che chiude e' la scrittura diretta su `main` dei produttori di QUESTO repo (`generate-article.yml` e i suoi fratelli fanno `git push HEAD:main` — 88 articoli nelle ultime 24h), mentre sul sito il contenuto non e' versionato e nessun bot scrive su `main`. Anche la lista `CONTENT_GATES` e' topologia locale: sono file sotto `generator/tests/`, cartella che sul sito non esiste. Non e' `corpus-only-pending` — non c'e' niente da portare di la'.",
       "baseline": {
         "site": null,
-        "corpus": "23f28a70e0f93b4e",
-        "alignedAt": "2026-08-18"
+        "corpus": "23f73267fded62af",
+        "alignedAt": "2026-09-12"
       }
     },
     {
       "path": "scripts/ci/followup-resolution-match.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "Il corpus espone il contratto aggregate canonical ai consumer locali e conserva la propria risoluzione di locator sul percorso di pubblicazione; per questo la copia non è byte-identica al matcher sorgente del sito. La baseline registra separatamente i due blob e il trasporto successivo deve preservare l'adattamento, non sovrascriverlo con un mirror cieco.",
       "baseline": {
-        "site": "a7744e18a9fbdea8",
-        "corpus": "a7744e18a9fbdea8",
-        "alignedAt": "2026-09-11"
+        "site": "86098adda6c90970",
+        "corpus": "e6da0bfa1d35c132",
+        "alignedAt": "2026-09-13"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/vitestCheck.mjs",
+      "mode": "adapted",
+      "reason": "Il polling sincrono e il riconoscimento dei job conclusi sono il contratto condiviso dalla sorgente sito e da pr-autorebase, ma il corpus mantiene i propri nomi/check required e le proprie guardie review. La copia è quindi trasportata per contratto e non trattata come identica byte-per-byte.",
+      "baseline": {
+        "site": "c63b27c70d03615a",
+        "corpus": "2c783ff28a651001",
+        "alignedAt": "2026-09-13"
       }
     },
     {
@@ -351,9 +361,9 @@
       "path": "scripts/ci/pr-autorebase.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "4c6da30faffb631d",
-        "corpus": "4c6da30faffb631d",
-        "alignedAt": "2026-09-11"
+        "site": "3add6bcb19a0911b",
+        "corpus": "3add6bcb19a0911b",
+        "alignedAt": "2026-09-13"
       }
     },
     {
@@ -413,12 +423,13 @@
       }
     },
     {
-      "path": "scripts/ci/lib/vitestCheck.mjs",
-      "mode": "identical",
+      "path": "scripts/ci/lib/import-specifiers.mjs",
+      "mode": "corpus-only",
+      "reason": "Sorgente unica dell'estrattore lessicale degli import usato dai guard di chiusura del ciclo e dai loro test (#1029). Il modulo vive solo nel publisher del corpus: il sito consuma la superficie pubblicata via HTTP e non deve importare la logica dei guard del corpus.",
       "baseline": {
-        "site": "70c2badbc0a09558",
-        "corpus": "70c2badbc0a09558",
-        "alignedAt": "2026-09-10"
+        "site": null,
+        "corpus": "7d8990ce9bc61b10",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -479,6 +490,16 @@
       }
     },
     {
+      "path": "scripts/lib/seo-entry.mjs",
+      "mode": "corpus-only",
+      "reason": "Shim corpus-only per i generatori che re-esporta il resolver SEO canonico da `engine/shared/seo-entry.mjs`. L'implementazione viaggia con il subtree engine mirrorato; sul sito non esiste questo entry point di pubblicazione corpus-side e non va aggiunta una seconda copia con assunzioni diverse sul formato dei chunk SEO.",
+      "baseline": {
+        "site": null,
+        "corpus": "f5c10340550b94f3",
+        "alignedAt": "2026-09-11"
+      }
+    },
+    {
       "path": "scripts/lib/workflow-scope-detect.mjs",
       "mode": "identical",
       "baseline": {
@@ -531,12 +552,11 @@
     {
       "path": ".github/workflows/tests.yml",
       "mode": "adapted",
-      "reason": "Un solo check obbligatorio per codice, test e review in entrambi i repo; gli edit del body sono gestiti dal recupero selettivo esterno. Il sito usa Vitest e un contratto API prima del checkout; il corpus usa node:test e i propri validatori modulari del body dopo il checkout. Il corpus conserva il gate generator-ci path-scoped, le esclusioni draft/engine-lockstep-auto e la review senza proxy Headroom. RICONCILIATO 2026-09-10 (#1060): baseline attestata dopo il merge della PR sito 8200, con preflight e selezione del recupero coerenti con i gate propri del corpus.",
+      "reason": "Un solo check obbligatorio per codice, test e review in entrambi i repo; gli edit del body sono gestiti dal recupero selettivo esterno. Il sito usa Vitest e un contratto API prima del checkout; il corpus usa node:test e i propri validatori modulari del body dopo il checkout. Il corpus conserva il gate generator-ci path-scoped, le esclusioni draft/engine-lockstep-auto e la review senza proxy Headroom. RICONCILIATO 2026-09-12 (#1060): baseline riattestata dopo l'aggiornamento del checkout corpus a storia completa, con preflight e selezione del recupero coerenti con i gate propri del corpus.",
       "baseline": {
-        "site": "02a2db85e3004622",
-        "corpus": "3cdc0cb253798b27",
-        "alignedAt": "2026-09-10",
-        "forcedAt": "2026-09-10T12:33:10.945Z"
+        "site": "52c9ae3d4a8612f8",
+        "corpus": "dc889bd503a59e25",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -565,8 +585,8 @@
       "reason": "Sorgente unica della domanda «questa issue e' tenuta aperta dal manifest?» (issue #986). Una voce `corpus-only-pending` dichiara che il gemello sul sito manca e punta al lavoro che lo traccia via `trackingIssue`, e quel campo ha un contratto scritto in due posti indipendenti: `loop-sync-manifest-scope.test.mjs` pretende che la issue sia APERTA, e `loop-drift-check.mjs` promuove la voce a `-landed` solo quando il gemello arriva — con la issue chiusa la voce resta pending per sempre, dicendo «in lavorazione» su un lavoro che nessuno sta piu' facendo (la forma di #45). Nessuno dei closer del ciclo leggeva quel contratto: misurato il 2026-09-07 su #986, la chiusura era raggiungibile da `handoff-to-site.mjs` (il ramo `blocked-*` torna `close: true` appena la diagnosi cita un path spedibile, e `.github/workflows/issue-fix.yml` lo e' — il solo canale che poteva far avanzare quella issue era anche quello che la distruggeva), da `reconcile-followups.mjs` (`closeEligible` sul token-match, e #986 non e' aggregata) e da `followup-drainer.mjs` (verdict-exit su `already-fixed`). E' `corpus-only` perche' i pin li definisce il manifest di QUESTO repo: il sito ha il proprio, e un elenco di numeri non e' portabile fra i due.",
       "baseline": {
         "site": null,
-        "corpus": "e0147683e7c7d773",
-        "alignedAt": "2026-09-07"
+        "corpus": "a4acaa8097f41997",
+        "alignedAt": "2026-09-11"
       }
     },
     {
@@ -594,9 +614,10 @@
       "mode": "adapted",
       "reason": "Solo la cadenza (53 5 invece di 17 5). NB: la mia esclusione iniziale era sbagliata — lo step Claude e' gatato su has_novel=='true', quindi senza pattern nuovi il workflow esce a costo ZERO, non brucia una run al giorno.",
       "baseline": {
-        "site": "4eee66a5917239d8",
-        "corpus": "8fa19800e54df34d",
-        "alignedAt": "2026-08-07"
+        "site": "c24d679b209811d3",
+        "corpus": "53ae79b47ab50b37",
+        "alignedAt": "2026-09-11",
+        "forcedAt": "2026-09-11T23:21:48.970Z"
       }
     },
     {
@@ -782,9 +803,10 @@
       "mode": "adapted",
       "reason": "Niente npm ci; ponte RC del corpus; promozione via GITHUB_PAT_NANAKO; cadenza sfasata dal sito.",
       "baseline": {
-        "site": "d9409a02c28b646a",
-        "corpus": "b51bd246fac7389d",
-        "alignedAt": "2026-08-07"
+        "site": "f78b4128cab80562",
+        "corpus": "415aef09bd9f7e59",
+        "alignedAt": "2026-09-11",
+        "forcedAt": "2026-09-11T23:21:49.006Z"
       }
     },
     {
@@ -942,8 +964,8 @@
       "reason": "Niente npm ci, ponte RC del corpus, identita' GITHUB_PAT_NANAKO, cron 50 6 sfasato dal 40 6 del sito. In piu' il Gate 0 su `autorebase-reopen-failed`, che il sito non ha e non gli serve: quella label dice \"non cancellare questo head ref\", e il suo lettore dev'essere il workflow che cancella branch. Sul sito lo fa `worktree-branch-janitor.yml`; qui quel workflow non esiste e l'unico che cancella branch e' questo, quindi e' qui che la label deve avere effetto. Sostituzione dichiarata anche in generator/tests/loop-references-exist.test.mjs, che sorveglia la citazione del janitor in pr-autorebase.mjs. ADATTAMENTO 2026-09-04 (issue #733): la lista `needs-human` dello step \"Surface needs-human PRs and issues\" esclude l'issue dedup di quello stesso step, filtrando sulla chiave di dedup (`DEDUP_TITLE`, unica sorgente del titolo, letta anche da --title). Lo step assumeva di non poter comparire nella propria lista perche' creato con `automation` e non con `needs-human`; il followup-drainer ha aggiunto `needs-human` alla issue #733 il 2026-09-02T13:39:50Z e da li' il report si auto-elenca, rendendo irraggiungibile la condizione di chiusura che scrive nel proprio corpo. Coperto da generator/tests/needs-human-digest-self-listing.test.mjs. E' un MIGLIORAMENTO del meccanismo, non un adattamento al corpus: candidato a risalire al sito, dove lo stesso step porta la stessa assunzione. ADATTAMENTO 2026-09-05 (issue #733, secondo giro): a liste entrambe vuote lo step non si limita piu' a `exit 0` — richiude l'issue dedup con `--resolve` sulla stessa `DEDUP_TITLE`. Raggiungere la condizione di chiusura non bastava: nessun altro processo chiude questo titolo (close-recovered-failure-issues.mjs copre le famiglie `Workflow Failure:` / `Crawler Failure:`), quindi il digest sarebbe rimasto aperto con un elenco ormai falso. Stessa via gia' usata da ticker-shadow-alert.mjs e lockstep-stall-watch.mjs via resolveGithubIssue. Coperto dallo stesso test. Anche questo e' un MIGLIORAMENTO, candidato a risalire al sito. ADATTAMENTO 2026-09-06 (issue #981, item 1): lo step \"Surface needs-human PRs and issues\" cattura l'exit status delle due query `gh` e salta il ramo di chiusura quando una e' fallita. Girando sotto `set -uo pipefail` senza `set -e`, un `gh` non-zero (jq su forma inattesa, rate-limit, token scaduto) lasciava le variabili vuote e indistinguibili da «nessun residuo»: con entrambe rotte dalla stessa causa lo step richiudeva il digest con `--resolve` mentre il backlog needs-human era pieno, senza fallire e sotto `continue-on-error: true`. E' la stessa subordinazione che i gemelli con `--resolve` (reconcile-article-shards.yml, republish-dirty-content.yml) esprimono gia' come `steps.detect.outcome == 'success'`, qui espressa in-step perche' produttore e consumatore sono lo stesso script. Coperto da generator/tests/needs-human-digest-self-listing.test.mjs. MIGLIORAMENTO del meccanismo, non adattamento al corpus: `corpus-ahead`, candidato a risalire al sito, dove lo stesso step ha lo stesso difetto. ADATTAMENTO 2026-09-07 (issue #1003, item 1 di #920): a liste entrambe vuote lo step non chiude piu' con `--resolve`, ma risolve da se' il NUMERO dell'issue dedup con la stessa uguaglianza esatta con cui la lista la esclude (`select(.title == env.DEDUP_TITLE)` su `gh api --paginate`, senza filtro per label perche' il digest nasce con `automation`) e chiude quel numero con `gh issue close`. `resolveGithubIssue` chiude la prima issue aperta il cui titolo `startsWith` il prefisso sanitizzato a 60 char: `DEDUP_TITLE` ne ha 52, quindi qualunque issue aperta il cui titolo comincia con la chiave e prosegue veniva chiusa AL POSTO del digest — e non portando `needs-human` non compariva in nessuna delle due liste, che restavano vuote a ogni run. Apertura, esclusione e chiusura tornano a usare UNA forma della chiave; `scripts/lib/github-issue-creator.mjs` non e' toccato (il match per prefisso li' e' deliberato e condiviso dagli altri chiamanti). La risoluzione ha il suo guard sull'exit status, come le due query sopra. Coperto da generator/tests/needs-human-digest-self-listing.test.mjs. MIGLIORAMENTO del meccanismo, non adattamento al corpus: `corpus-ahead`, candidato a risalire al sito, dove lo stesso step ha lo stesso difetto.",
       "baseline": {
         "site": "8e2799b49ef8ad31",
-        "corpus": "4f703b4f03d50815",
-        "alignedAt": "2026-09-04"
+        "corpus": "0670a7771189e338",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -1031,9 +1053,9 @@
       "path": "scripts/ci/harvest-agent-lessons.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "02ffd48e42595ffa",
-        "corpus": "02ffd48e42595ffa",
-        "alignedAt": "2026-09-10"
+        "site": "e7021b48301afeae",
+        "corpus": "e7021b48301afeae",
+        "alignedAt": "2026-09-13"
       }
     },
     {
@@ -1098,9 +1120,9 @@
       "path": "scripts/ci/stale-claim-detector.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "05cef42b82dc86bf",
-        "corpus": "05cef42b82dc86bf",
-        "alignedAt": "2026-09-01"
+        "site": "71dac35db23d0a61",
+        "corpus": "71dac35db23d0a61",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -1327,6 +1349,16 @@
       }
     },
     {
+      "path": "generator/scripts/scan-vacuous-key-facts.mjs",
+      "mode": "corpus-only",
+      "reason": "Scanner read-only della baseline dei fatti chiave vacui (#1054): stampa file-locale, articoli distinti e locale senza modificare `content/**` e senza avere un gemello operativo sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "991427b316f1f8ea",
+        "alignedAt": "2026-09-12"
+      }
+    },
+    {
       "path": "host/shared/clauseTail.mjs",
       "sitePath": "build-plugins/shared/clauseTail.mjs",
       "mode": "identical",
@@ -1501,8 +1533,8 @@
       "reason": "La sorgente unica dei pavimenti anti-troncamento, condivisa fra verify-api-floors.mjs e build-blog-index.mjs. Corpus-only per lo stesso motivo: i pavimenti sono derivati dai file sorgente degli articoli, che esistono solo in questo repo.",
       "baseline": {
         "site": null,
-        "corpus": "c267355a8a44d5f3",
-        "alignedAt": "2026-09-05"
+        "corpus": "12927d8ee556aac7",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -1595,6 +1627,7 @@
       "path": "generator/scripts/lib/ai-models.mjs",
       "sitePath": "scripts/lib/ai-models.mjs",
       "mode": "adapted",
+      "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/787",
       "reason": "DIVERGENTE dal 2026-08-18, rimisurato il 2026-09-04 su `origin/main` dei due repo: sito `615eb909aef5dc12` (361.252 byte), qui `fcb9ec8865bc6bf6` (393.684 byte). La voce era `identical` con baseline `5dbca2532ac754ab` per lato (la riconciliazione di `AI_MODELS_PREFER` del 2026-08-18, `valerielinc-ops#6004` + `#418`), ma da allora ENTRAMBI i lati si sono mossi in modo indipendente e quel `mode` e' diventato una bugia di INSTRADAMENTO: `identical` promette «la fix si fa sul sito e scende copiabile qui», e non e' piu' vero in nessuna delle due direzioni. Qui vive, e sul sito NON esiste, tutta la classificazione dell'host irraggiungibile con il cooldown a causa persistente — `classifyHostUnreachable`, `HOST_UNREACHABLE_CODES`, `_isHostUnreachableExempt`, `classifyTransientResolver` / `RESOLVER_FLAP_*`, `COOLDOWN_SEVERITY` / `PROVIDER_COOLDOWN_*`, l'opt-out di `recordScore` (issue #475, #630, #767, #769, #770, #781, #783, #802, #803): il tag `hostUnreachable` compare 15 volte qui e ZERO nella copia del sito. Dal lato opposto il sito ha il ledger delle correzioni di ranking (`_rankingCorrections`, `_consumeUnvalidatedSuccess`) e i segmenti di testo dell'assistant, che qui non ci sono. Le due conseguenze del mode sbagliato sono opposte e tutte e due costose: una fix su questo ramo instradata «sul sito» non troverebbe la' nemmeno il codice da toccare, e un mirror sito->corpus che applicasse la voce alla lettera riporterebbe indietro il file cancellando #475 e #767. `adapted` e' la dichiarazione onesta finche' i due lati non vengono riconciliati (parent #787), e non abbassa niente: la baseline del 2026-08-18 NON viene rigenerata — `--init` riscriverebbe TUTTE le voci del manifest dichiarando allineato cio' che nessuno ha letto — quindi `loop-drift-check` continua a emettere `both-moved` / `actionable: true` su questa voce, e un `site-ahead` futuro chiedera' di rileggere e riapplicare a mano invece di copiare sopra.",
       "baseline": {
         "site": "5dbca2532ac754ab",
@@ -1646,6 +1679,7 @@
       "path": "generator/scripts/lib/article-free-mt.mjs",
       "sitePath": "scripts/lib/article-free-mt.mjs",
       "mode": "adapted",
+      "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/831",
       "reason": "NON e' piu' `identical` dal 2026-09-05 (#892): dopo #878 questo file importa `hasUsableTranslatedText`/`hasUsableContentText` da `generator/scripts/lib/body2-payload-verdict.mjs`, che e' `corpus-only` e sul sito NON esiste (404 su `scripts/lib/body2-payload-verdict.mjs`). Il mirror non e' \"da fare\": e' impossibile — copiare il file verbatim porterebbe sul sito un `import` che non risolve, rompendo con `ERR_MODULE_NOT_FOUND` i suoi due consumer reali la', `scripts/repair-object-object-bodies.mjs` e `tests/scripts/article-free-mt.test.ts`. Misura del 2026-09-05 su `origin` dei due lati: 190 righe qui, 159 sul sito, 36 solo-corpus e 5 SOLO-SITO — quindi nemmeno una copia nell'altro verso e' innocua. La divergenza e' la fix di #831/#868 item 4 (il marker di fallimento `Null`/`null` letto come prosa e pubblicato): il sito ne resta senza, e se `repair-object-object-bodies.mjs` tratta output di motori MT gratuiti ha la stessa classe di bug, da verificare separatamente sul suo repo. Il ritorno a `identical` passa da una delle due uscite che spostano il confine fra i repo — portare `body2-payload-verdict.mjs` sul sito, o estrarre i due predicati in un modulo terzo dependency-free `identical` da entrambi i lati — e nessuna delle due si decide qui. La baseline NON viene rigenerata: con la baseline intatta il drift check continua a dire che i due lati sono divergenti invece di dichiarare allineato uno stato che non lo e'.",
       "baseline": {
         "site": "0f3dd9cefcb52b17",
@@ -1808,6 +1842,26 @@
       }
     },
     {
+      "path": "generator/scripts/lib/key-facts-specificity.mjs",
+      "mode": "corpus-only",
+      "reason": "Rilevatore puro dei fatti chiave senza valore nelle quattro lingue. Lo scanner di #1054 usa la forma di riferimento per misurare 53 file-locale/29 articoli; il gate di #1055 rimuove una coppia solo se restano almeno tre fatti e rifiuta il payload sotto soglia. E' una libreria del generatore del corpus e non ha gemello sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "261595c0ccfc778b",
+        "alignedAt": "2026-09-12"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/cantone-toponimi-coerenza.mjs",
+      "mode": "corpus-only",
+      "reason": "Guard puro della coerenza fra cantone nello slug e toponimi nel testo (#1053). Blocca i nuovi offender della classe Grigioni/Vallese con riferimenti ticinesi e conserva come baseline esplicita i 32 articoli storici misurati. La generazione vive nel corpus e non esiste un gemello operativo sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "51e01832939d40b6",
+        "alignedAt": "2026-09-12"
+      }
+    },
+    {
       "path": "generator/scripts/lib/decode-html-entities.mjs",
       "sitePath": "scripts/lib/decode-html-entities.mjs",
       "mode": "identical",
@@ -1842,9 +1896,9 @@
       "sitePath": "scripts/lib/discovery/discoveryScore.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "72f7e9d7f9843823",
-        "corpus": "72f7e9d7f9843823",
-        "alignedAt": "2026-08-09"
+        "site": "7a42d00a94b90c65",
+        "corpus": "7a42d00a94b90c65",
+        "alignedAt": "2026-09-13"
       }
     },
     {
@@ -1892,9 +1946,9 @@
       "sitePath": "scripts/lib/discovery/sources/googleSuggestSource.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "d324259ea4515cb6",
-        "corpus": "d324259ea4515cb6",
-        "alignedAt": "2026-08-09"
+        "site": "be18f36169abce51",
+        "corpus": "be18f36169abce51",
+        "alignedAt": "2026-09-13"
       }
     },
     {
@@ -1915,6 +1969,16 @@
         "site": "7e128ec7373134b8",
         "corpus": "7e128ec7373134b8",
         "alignedAt": "2026-09-06"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/drain-stdio.mjs",
+      "mode": "corpus-only",
+      "reason": "Helper dependency-free del generatore per `drainStdio()`/`exitAfterDrain()`: attende le write gia' accodate su stdout e stderr prima di `process.exit()`, con timeout bounded e contratto best-effort. Il log del generatore vive nel corpus; il gemello del sito non produce articoli e non ha questo exit path operativo, quindi non esiste un modulo da portare e `corpus-only` e' corretto.",
+      "baseline": {
+        "site": null,
+        "corpus": "e00220e76e963cd7",
+        "alignedAt": "2026-09-11"
       }
     },
     {
@@ -2078,6 +2142,26 @@
         "site": null,
         "corpus": "a9c8621700234446",
         "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/tests/key-facts-specificity.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Testa la misura #1054, il parser nelle quattro lingue e la regola #1055 che rimuove i fatti vuoti sopra soglia e rifiuta quelli sotto soglia. E' una suite node:test del generatore del corpus, senza gemello operativo sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "d27fde4ea91a493a",
+        "alignedAt": "2026-09-12"
+      }
+    },
+    {
+      "path": "generator/tests/cantone-toponimi-coerenza.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Testa il guard #1053 con l offender Courmayeur/Vallese, la guida legittima di Carate Urio/Ticino e la baseline storica dei 32 casi. Suite node:test specifica del generatore del corpus, senza gemello sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "222d40c75ffd5d1a",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -2254,6 +2338,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/journalist-publish-recovery.mjs",
+      "mode": "corpus-only",
+      "reason": "Recovery per i documenti giornalista marcati `published` prima che il workflow possa committare le superfici condivise. Vive solo nel corpus: il percorso Firestore del publisher e il relativo checkpoint sono specifici della pipeline di pubblicazione qui, mentre il sito non ha questo modulo gemello. La logica per chunk riconcilia un `batch.commit()` con esito incerto, ritenta solo i documenti ancora `published` e conserva gli ID realmente rimessi in coda; resta dependency-free per la regressione `node --test` e non e' un file da portare nel mirror del sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "9f2333e28695e90c",
+        "alignedAt": "2026-09-11"
+      }
+    },
+    {
       "path": "generator/scripts/lib/profession-taxonomy.mjs",
       "sitePath": "scripts/lib/profession-taxonomy.mjs",
       "mode": "identical",
@@ -2289,9 +2383,9 @@
       "sitePath": "scripts/lib/scoring/cascadedScore.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "2ed579228003fa3b",
-        "corpus": "2ed579228003fa3b",
-        "alignedAt": "2026-08-09"
+        "site": "584f848b25ed20fc",
+        "corpus": "584f848b25ed20fc",
+        "alignedAt": "2026-09-13"
       }
     },
     {
@@ -2299,9 +2393,9 @@
       "sitePath": "scripts/lib/scoring/constants.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "6dc91e985caa7eca",
-        "corpus": "6dc91e985caa7eca",
-        "alignedAt": "2026-08-09"
+        "site": "7534ad3be93b3488",
+        "corpus": "7534ad3be93b3488",
+        "alignedAt": "2026-09-13"
       }
     },
     {
@@ -2482,11 +2576,12 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti del sito che l'engine legge via SiteShellContract. E' un ESTRATTO PER CHIUSURA di build-plugins/constants.ts (850 righe la': solo le ~15 dichiarazioni che il contratto raggiunge, 177 righe qui), quindi non potra' mai essere byte-identico e adapted e' il mode giusto. Per questa sola entry scalarFingerprint confronta i 22 scalari authoritative: cambiamenti del sorgente fuori dalla chiusura restano stable, ma un digest diverso, mancante, malformato o non dichiarato non puo' mai essere stable. I comportamenti del contratto restano coperti dai fingerprint test esistenti; host/host-drift.test.mjs non esiste e non e' una guardia. Il follow-up corpus prepara il lato host al cambio della PR sito #8299: il gate statico passa dalla scansione arbitraria del namespace firebase:authUser: al marker esplicito frontaliere:auth-session, mentre il codice runtime conserva il match sulla chiave Firebase esatta. Il digest 22b3b2bf… e' la destinazione verificata del contratto dopo l'allineamento delle due PR, non una dichiarazione di parita' gia' presente sui branch main. Durante la finestra la divergenza e' intenzionale e va ricontrollata dopo #8299; il digest non dipende da segreti o variabili di ambiente del runner.",
+      "reason": "Costanti del sito che l'engine legge via SiteShellContract. E' un ESTRATTO PER CHIUSURA di build-plugins/constants.ts (850 righe la': solo le ~15 dichiarazioni che il contratto raggiunge, 177 righe qui), quindi non potra' mai essere byte-identico e adapted e' il mode giusto. Per questa sola entry scalarFingerprint confronta i 22 scalari authoritative: cambiamenti del sorgente fuori dalla chiusura restano stable, ma un digest diverso, mancante, malformato o non dichiarato non puo' mai essere stable. I comportamenti del contratto restano coperti dai fingerprint test esistenti; host/host-drift.test.mjs non esiste e non e' una guardia. Il lato sito della PR #8299 e' ora su main; questa baseline registra l'osservazione verificata dei due lati dopo l'allineamento del marker frontaliere:auth-session, mentre il codice runtime conserva il match sulla chiave Firebase esatta. Il digest 22b3b2bf… resta il fingerprint scalar del contratto e non dipende da segreti o variabili di ambiente del runner.",
       "baseline": {
-        "site": "8318a415439ca0d0",
-        "corpus": "7c8c22b48ee255aa",
-        "alignedAt": "2026-09-01"
+        "site": "5bedfc2a3453a9f5",
+        "corpus": "db9e22109da26397",
+        "alignedAt": "2026-09-12",
+        "forcedAt": "2026-09-12T04:17:23.514Z"
       },
       "scalarFingerprint": {
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
@@ -2748,7 +2843,13 @@
         "site": "c584aaf489c71a41",
         "corpus": "c584aaf489c71a41",
         "alignedAt": "2026-08-09"
-      }
+      },
+      "couplingSnapshot": [
+        {
+          "path": "host/tests/shell-contract-functions.test.mjs",
+          "mode": "corpus-only"
+        }
+      ]
     },
     {
       "path": "host/tests/shell-contract-functions.test.mjs",
@@ -2894,8 +2995,8 @@
       "reason": "Porta al SITO la diagnosi che il fixer di QUESTO repo ha pagato e non puo' applicare (il caso «lato sbagliato del mirror»: 4 su 4 dei `blocked-admin-settings` aperti il 2026-08-24). E' `corpus-only` e non `corpus-only-pending`: il gemello sul sito non e' questo file, e' la direzione INVERSA — sito->corpus — che ha gia' il suo meccanismo in `loop-drift-check.mjs`. Un secondo script identico la' non servirebbe a niente, quindi non c'e' nulla da portare. Aggiornato il 2026-08-25: FIX_OUTCOME_RE non e' piu' ridefinita qui ma importata da close-recovered-failure-issues.mjs, che gia' la esportava — due copie identiche della stessa regex erano due posti dove il contratto poteva divergere in silenzio. Aggiornato il 2026-09-04 (#316): `no-root-cause` e' instradabile quando cita un path `mode: identical`, perche' su #316 quel verdetto NON significava «causa non trovata» ma «lato sbagliato del mirror» per 10 run consecutivi.",
       "baseline": {
         "site": null,
-        "corpus": "2d5f60e1130204c3",
-        "alignedAt": "2026-08-25"
+        "corpus": "4b70cd510b6716dd",
+        "alignedAt": "2026-09-11"
       }
     },
     {
@@ -2994,8 +3095,18 @@
       "reason": "Wrapper CLI del digest needs-human: importa il reporter condiviso senza alterarne il contratto best-effort e, con `--fail-on-write`, trasforma `persisted: false` o un risultato nullo in un exit non-zero osservabile dal watchdog di recycle-stale-prs.yml (#1143). E' specifico del workflow adattato del corpus e non ha gemello sul sito.",
       "baseline": {
         "site": null,
-        "corpus": "37f4505efa9dc06e",
+        "corpus": "4dbe4fb2c1845eec",
         "alignedAt": "2026-09-11"
+      }
+    },
+    {
+      "path": "scripts/ci/resolve-issue-verified.mjs",
+      "mode": "corpus-only",
+      "reason": "Wrapper zero-dep che verifica la post-condizione dei close richiesti dai tre workflow del corpus (issue #1005): rilegge lo stato per numero o la lista REST paginata per titolo, ritenta una volta e annota + esce non-zero se l'issue resta aperta. `scripts/lib/github-issue-creator.mjs` resta best-effort e `identical`: la decisione se una chiusura e' obbligatoria appartiene al chiamante. Candidato a risalire al sito insieme ai call-site adattati.",
+      "baseline": {
+        "site": null,
+        "corpus": "e72cf3f25bb9052c",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -3013,9 +3124,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-01.yml",
       "mode": "identical",
       "baseline": {
-        "site": "68431d25797c54c0",
-        "corpus": "68431d25797c54c0",
-        "alignedAt": "2026-09-11"
+        "site": "cf3b3536ab3affa0",
+        "corpus": "cf3b3536ab3affa0",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -3023,9 +3134,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-02.yml",
       "mode": "identical",
       "baseline": {
-        "site": "a8a5b89c6bb7a320",
-        "corpus": "a8a5b89c6bb7a320",
-        "alignedAt": "2026-09-11"
+        "site": "3b60b7f429133a23",
+        "corpus": "3b60b7f429133a23",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -3033,9 +3144,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-03.yml",
       "mode": "identical",
       "baseline": {
-        "site": "5f02df9e741ab42c",
-        "corpus": "5f02df9e741ab42c",
-        "alignedAt": "2026-09-11"
+        "site": "292fbb97ecb62d7d",
+        "corpus": "292fbb97ecb62d7d",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -3043,9 +3154,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-04.yml",
       "mode": "identical",
       "baseline": {
-        "site": "e2f042616e63f411",
-        "corpus": "e2f042616e63f411",
-        "alignedAt": "2026-09-11"
+        "site": "baadc060470610d9",
+        "corpus": "baadc060470610d9",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -3053,9 +3164,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-05.yml",
       "mode": "identical",
       "baseline": {
-        "site": "5fc36cc72bf7a194",
-        "corpus": "5fc36cc72bf7a194",
-        "alignedAt": "2026-09-11"
+        "site": "a9d18940ae254012",
+        "corpus": "a9d18940ae254012",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -3063,9 +3174,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-06.yml",
       "mode": "identical",
       "baseline": {
-        "site": "b5af4b4799f16a03",
-        "corpus": "b5af4b4799f16a03",
-        "alignedAt": "2026-09-11"
+        "site": "c7c881bc1835e7e2",
+        "corpus": "c7c881bc1835e7e2",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -3073,9 +3184,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-07.yml",
       "mode": "identical",
       "baseline": {
-        "site": "f5b07d77c9a29548",
-        "corpus": "f5b07d77c9a29548",
-        "alignedAt": "2026-09-11"
+        "site": "7043c10dd759ee04",
+        "corpus": "7043c10dd759ee04",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -3083,9 +3194,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-08.yml",
       "mode": "identical",
       "baseline": {
-        "site": "188dca7904be68df",
-        "corpus": "188dca7904be68df",
-        "alignedAt": "2026-09-11"
+        "site": "e6dd1d5ce009e363",
+        "corpus": "e6dd1d5ce009e363",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -3093,9 +3204,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-09.yml",
       "mode": "identical",
       "baseline": {
-        "site": "ebf4855464a9d284",
-        "corpus": "ebf4855464a9d284",
-        "alignedAt": "2026-09-11"
+        "site": "b2a383fe7e189b7c",
+        "corpus": "b2a383fe7e189b7c",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -3103,9 +3214,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-10.yml",
       "mode": "identical",
       "baseline": {
-        "site": "6d6bbd6a06b64829",
-        "corpus": "6d6bbd6a06b64829",
-        "alignedAt": "2026-09-11"
+        "site": "2d523db0968916dc",
+        "corpus": "2d523db0968916dc",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -3113,9 +3224,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-11.yml",
       "mode": "identical",
       "baseline": {
-        "site": "132dfde1a98a8e7c",
-        "corpus": "132dfde1a98a8e7c",
-        "alignedAt": "2026-09-11"
+        "site": "e4b9d9e7e3c318c2",
+        "corpus": "e4b9d9e7e3c318c2",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -3123,9 +3234,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-12.yml",
       "mode": "identical",
       "baseline": {
-        "site": "4deb38f962abafdc",
-        "corpus": "4deb38f962abafdc",
-        "alignedAt": "2026-09-11"
+        "site": "fefde88e72613fd3",
+        "corpus": "fefde88e72613fd3",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -3133,9 +3244,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-13.yml",
       "mode": "identical",
       "baseline": {
-        "site": "473dc9a3088e6326",
-        "corpus": "473dc9a3088e6326",
-        "alignedAt": "2026-09-11"
+        "site": "d96e737aff70914b",
+        "corpus": "d96e737aff70914b",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -3143,9 +3254,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-14.yml",
       "mode": "identical",
       "baseline": {
-        "site": "f88b286309ad1e12",
-        "corpus": "f88b286309ad1e12",
-        "alignedAt": "2026-09-11"
+        "site": "0c6a235c38d018d2",
+        "corpus": "0c6a235c38d018d2",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -3153,9 +3264,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-15.yml",
       "mode": "identical",
       "baseline": {
-        "site": "292eb85833756cea",
-        "corpus": "292eb85833756cea",
-        "alignedAt": "2026-09-11"
+        "site": "10df5f43efb3feda",
+        "corpus": "10df5f43efb3feda",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -3163,9 +3274,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-16.yml",
       "mode": "identical",
       "baseline": {
-        "site": "12cea83a3d7a8125",
-        "corpus": "12cea83a3d7a8125",
-        "alignedAt": "2026-09-11"
+        "site": "80fb6797c27c8396",
+        "corpus": "80fb6797c27c8396",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -3173,9 +3284,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-17.yml",
       "mode": "identical",
       "baseline": {
-        "site": "620642233f185635",
-        "corpus": "620642233f185635",
-        "alignedAt": "2026-09-11"
+        "site": "1b8c835ad2c720dd",
+        "corpus": "1b8c835ad2c720dd",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -3183,9 +3294,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-18.yml",
       "mode": "identical",
       "baseline": {
-        "site": "96fb47ef2018a580",
-        "corpus": "96fb47ef2018a580",
-        "alignedAt": "2026-09-11"
+        "site": "85c1da73d8d2f6de",
+        "corpus": "85c1da73d8d2f6de",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -3193,9 +3304,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-19.yml",
       "mode": "identical",
       "baseline": {
-        "site": "ba574bbadb390d8b",
-        "corpus": "ba574bbadb390d8b",
-        "alignedAt": "2026-09-11"
+        "site": "fbcda5b1a980a944",
+        "corpus": "fbcda5b1a980a944",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -3203,9 +3314,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-20.yml",
       "mode": "identical",
       "baseline": {
-        "site": "8aea5e9af9a30772",
-        "corpus": "8aea5e9af9a30772",
-        "alignedAt": "2026-09-11"
+        "site": "4ae7ae2d1f11ab65",
+        "corpus": "4ae7ae2d1f11ab65",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -3213,9 +3324,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-21.yml",
       "mode": "identical",
       "baseline": {
-        "site": "5d73d96e04435c74",
-        "corpus": "5d73d96e04435c74",
-        "alignedAt": "2026-09-11"
+        "site": "ee271e30916906f3",
+        "corpus": "ee271e30916906f3",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -3223,9 +3334,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-22.yml",
       "mode": "identical",
       "baseline": {
-        "site": "dccbe8c33d959b12",
-        "corpus": "dccbe8c33d959b12",
-        "alignedAt": "2026-09-11"
+        "site": "1badc7a41a078d80",
+        "corpus": "1badc7a41a078d80",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -3233,9 +3344,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-23.yml",
       "mode": "identical",
       "baseline": {
-        "site": "a7ab2d339e5190f5",
-        "corpus": "a7ab2d339e5190f5",
-        "alignedAt": "2026-09-11"
+        "site": "a783d33bf13045fc",
+        "corpus": "a783d33bf13045fc",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -3243,9 +3354,9 @@
       "sitePath": ".github/corpus-workflows/translate-pending.yml",
       "mode": "identical",
       "baseline": {
-        "site": "421e29c4b786ca57",
-        "corpus": "421e29c4b786ca57",
-        "alignedAt": "2026-09-11"
+        "site": "4d26a0350a02954f",
+        "corpus": "4d26a0350a02954f",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -3253,9 +3364,9 @@
       "sitePath": ".github/corpus-workflows/contract.json",
       "mode": "identical",
       "baseline": {
-        "site": "63ed04e3b215083b",
-        "corpus": "63ed04e3b215083b",
-        "alignedAt": "2026-09-11"
+        "site": "2a5d409b637fb091",
+        "corpus": "2a5d409b637fb091",
+        "alignedAt": "2026-09-12"
       }
     },
     {
@@ -3263,10 +3374,32 @@
       "sitePath": ".github/corpus-workflows/observers/generator/tests/crawler-cross-repo-artifacts.test.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "3f3664844cfd951c",
-        "corpus": "3f3664844cfd951c",
-        "alignedAt": "2026-09-01"
-      }
+        "site": "dcaceb4ce558cef9",
+        "corpus": "dcaceb4ce558cef9",
+        "alignedAt": "2026-09-11"
+      },
+      "couplingSnapshot": [
+        {
+          "path": "data/jobs/by-crawler/guess-europe.json",
+          "mode": "non registrato"
+        },
+        {
+          "path": "data/jobs/by-crawler/vf-international-the-north-face-timberland.json",
+          "mode": "non registrato"
+        },
+        {
+          "path": "generator/data/crawler-cross-repo-contract.json",
+          "mode": "identical"
+        },
+        {
+          "path": "scripts/ci/close-recovered-failure-issues.mjs",
+          "mode": "identical"
+        },
+        {
+          "path": "scripts/ci/loop-sync-manifest.json",
+          "mode": "corpus-only"
+        }
+      ]
     },
     {
       "path": ".github/workflows/crawler-generation-observer-shadow.yml",
@@ -3420,6 +3553,16 @@
       }
     },
     {
+      "path": "scripts/ci/review-claim.mjs",
+      "mode": "corpus-only",
+      "reason": "Registro persistito e fail-closed del review Claude generale per #8364: la chiave lega PR, HEAD, evento e fingerprint del contributo, e il workflow tests.yml di questo repo ne possiede il consumer. Non esiste un gemello site-owned di questo helper; i fixer site-owned restano nel repository sito e il loro residuo adattato è gestito nella PR sito concatenata #8420.",
+      "baseline": {
+        "site": null,
+        "corpus": "f646797b6f09660a",
+        "alignedAt": "2026-09-12"
+      }
+    },
+    {
       "path": "scripts/ci/generator-ci-gate.mjs",
       "mode": "corpus-only",
       "reason": "Porta il gate condizionale su generator-ci.yml (ex gate 4 di auto-merge-eval) dentro il job che produce il check richiesto dal ruleset: il ruleset puo' richiedere solo contesti presenti su OGNI PR, e generator-ci.yml e' path-scoped. Non ha e non puo' avere un gemello: generator-ci.yml esiste solo qui.",
@@ -3472,7 +3615,7 @@
     {
       "path": "scripts/ci/redcheck-review-prefilter.mjs",
       "mode": "corpus-only",
-      "reason": "Predicato fail-closed del preflight di `pr-redcheck-fixer.yml`: riconosce il rosso esclusivo del review gate solo quando una review del bot sulla HEAD contiene un finding `🔴 Important`, cosi' il redflag-fixer resta il proprietario del caso senza spendere Claude una seconda volta. Non esiste sul sito e non deve: il workflow corpus ha questo preflight adattato e il sito mantiene il proprio percorso.",
+      "reason": "Predicato fail-closed del preflight di `pr-redcheck-fixer.yml`: distingue il rosso esclusivo del review gate con un finding `🔴 Important` sulla HEAD (proprietà del redflag-fixer) dall'abort transiente della review senza failure di codice (nessun fixer deve spendere Claude senza una diagnosi). Non esiste sul sito e non deve: il workflow corpus ha questo preflight adattato e il sito mantiene il proprio percorso.",
       "baseline": {
         "site": null,
         "corpus": "913133c808b31af5",
@@ -3653,9 +3796,9 @@
       "path": "scripts/lib/int-from-env.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "be879e505710750e",
-        "corpus": "be879e505710750e",
-        "alignedAt": "2026-09-10"
+        "site": "f5700c5080b0a99c",
+        "corpus": "f5700c5080b0a99c",
+        "alignedAt": "2026-09-13"
       }
     },
     {
@@ -3674,6 +3817,36 @@
         "site": "2d34eac0549c80ca",
         "corpus": "2d34eac0549c80ca",
         "alignedAt": "2026-09-10"
+      }
+    },
+    {
+      "path": "scripts/ci/parse-claude-execution.mjs",
+      "mode": "corpus-only",
+      "reason": "Wrapper del parser condiviso `parseExecutionMessages()` usato dal workflow corpus per normalizzare una volta l'execution stream Claude prima dei classificatori dei failure. Non esiste sul sito e non deve: il gemello adattato del workflow non invoca questo consumer locale.",
+      "baseline": {
+        "site": null,
+        "corpus": "3be8a132bc5de01a",
+        "alignedAt": "2026-09-11"
+      }
+    },
+    {
+      "path": "scripts/ci/review-quota-rescuer.mjs",
+      "mode": "corpus-only",
+      "reason": "Consumer zero-Claude che riattiva le run PR differite dal lease condiviso, verificando HEAD, ruolo e workflow sorgente prima del rerun. E' un percorso del ciclo Claude del corpus; il sito non possiede questo lease condiviso ne' il relativo consumer, quindi non c'e' un gemello da portare e la classificazione e' `corpus-only` per costruzione.",
+      "baseline": {
+        "site": null,
+        "corpus": "7088f7d382ddebe4",
+        "alignedAt": "2026-09-13"
+      }
+    },
+    {
+      "path": ".github/workflows/review-quota-rescuer.yml",
+      "mode": "corpus-only",
+      "reason": "Workflow zero-Claude che osserva la fine dei consumer e il cron per riattivare le review PR differite dal lease condiviso. Il sito non possiede questo lease ne' questo consumer, quindi non esiste un gemello da portare.",
+      "baseline": {
+        "site": null,
+        "corpus": "ae9dda84d95be040",
+        "alignedAt": "2026-09-12"
       }
     }
   ]

@@ -465,14 +465,17 @@ test('exit 3 (roster non serve il prompt) resta rosso — invariato dalla #357',
   assert.equal(r.status, 1);
 });
 
-test('LA CONGIUNZIONE: un articolo prodotto chiude la questione', () => {
-  // Se una sezione scrive un corpo la run e' un successo qualunque cosa sia
-  // successa all'altra: fallirla getterebbe via un articolo gia' pagato in LLM,
-  // quattro traduzioni DeepL e un'immagine hero.
-  for (const code of [EXIT_ROSTER_CANNOT_SERVE_PROMPT, 0, 1]) {
+test('LA CONGIUNZIONE: un errore dopo una scrittura parziale resta vincolante', () => {
+  // Un corpo osservato dopo un exit non-zero non e' un articolo prodotto: e'
+  // una transazione interrotta che il commit non deve pubblicare.
+  const ok = runGenerateBlock({ nodeExit: 0, writesArticle: true });
+  assert.equal(ok.status, 0, 'un generatore riuscito con un corpo deve restare verde');
+  assert.match(ok.outputs, /article=true/);
+
+  for (const code of [EXIT_ROSTER_CANNOT_SERVE_PROMPT, 1]) {
     const r = runGenerateBlock({ nodeExit: code, writesArticle: true });
-    assert.equal(r.status, 0, `exit ${code} con un articolo prodotto deve restare verde`);
-    assert.match(r.outputs, /article=true/);
+    assert.equal(r.status, 1, `exit ${code} dopo una scrittura parziale deve restare rosso`);
+    assert.match(r.outputs, /article=false/);
   }
 });
 

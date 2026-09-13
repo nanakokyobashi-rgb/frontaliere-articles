@@ -24,6 +24,8 @@ import {
   escapeHatchIn,
   topLevelBullets,
   sectionIsNessuno,
+  invalidPluralChainedPrState,
+  invalidBlockedCauseIn,
 } from '../../scripts/lib/pr-body-nextstep-check.mjs';
 
 const withSection = (bullets) =>
@@ -92,7 +94,7 @@ test('passano i body corretti in risposta alla review (#108 e #124)', () => {
     '- **Resta non verificato contro una fonte ufficiale.** Stato: blocked — richiede giudizio umano di dominio.',
     '- **Il fork del sito conserva i difetti.** Stato: blocked — fuori da questo repo, richiede una PR sul sito.',
     "- **Non e' provato end-to-end.** Stato: in questa PR una volta mergiata (azione post-merge, non codice).",
-    '- **`Post-pre-spend gate: 0/N`**: Stato: PR concatenata — tracciata in #113, non ancora lavorata.',
+    '- **`Post-pre-spend gate: 0/N`**: Stato: PR concatenata #113, non ancora lavorata.',
   ]);
   assert.equal(checkNextStepStates(pr108).ok, true);
   assert.equal(checkNextStepStates(pr108).advisories.length, 0);
@@ -164,6 +166,52 @@ test('un `#N` di contesto non vale come stato, uno di tracciamento sì', () => {
   assert.equal(bulletState('Stato: PR concatenata #113').id, 'tracking-ref');
   assert.equal(bulletState('Stato: blocked — richiede una generazione live').id, 'blocked');
   assert.equal(bulletState('fatto in questa PR').id, 'in-questa-pr');
+});
+
+test('#140: una PR concatenata al plurale senza numero resta non tracciabile', () => {
+  const text = 'Gli altri item sono in PR concatenate successive; i riferimenti storici sono #1365 e #1367.';
+  assert.equal(invalidPluralChainedPrState(text), true);
+  const res = checkNextStepStates(withSection([`- ${text}`]));
+  assert.equal(res.ok, false);
+  assert.equal(res.violations[0].type, 'chained-pr-no-number');
+  assert.equal(blockingNextStepFindings(res).length, 1);
+});
+
+test('#140: ogni menzione plurale di PR concatenata deve avere il proprio numero', () => {
+  assert.equal(invalidPluralChainedPrState('PR concatenate #1365 restano tracciate.'), false);
+  const text = 'PR concatenate #1365 e altre PR concatenate successive restano da lavorare.';
+  assert.equal(invalidPluralChainedPrState(text), true);
+  const res = checkNextStepStates(withSection([`- ${text}`]));
+  assert.equal(res.ok, false);
+  assert.equal(res.violations[0].type, 'chained-pr-no-number');
+});
+
+test('#140: blocked per daily sequencing non equivale a un blocker esterno', () => {
+  const text = 'Gli item restanti sono blocked: daily bucket richiede le restanti PR item-per-item.';
+  assert.equal(invalidBlockedCauseIn(text), true);
+  assert.equal(bulletState(text), null);
+  const res = checkNextStepStates(withSection([`- ${text}`]));
+  assert.equal(res.ok, false);
+  assert.equal(res.violations[0].type, 'blocked-internal-sequencing');
+  assert.equal(blockingNextStepFindings(res).length, 1);
+});
+
+test('#140: le varianti di ordine e genere restano sequencing interno', () => {
+  for (const text of [
+    'Stato: blocked: item successivi',
+    'Stato: blocked: item restanti',
+    'Stato: blocked: prossima PR',
+  ]) {
+    assert.equal(invalidBlockedCauseIn(text), true, `sequencing non rilevato: ${text}`);
+    assert.equal(bulletState(text), null, `sequencing classificato come blocker: ${text}`);
+  }
+});
+
+test('#140: un blocker esterno resta stato anche se cita item residui dopo la causa', () => {
+  const text = 'Stato: blocked: autorizzazione legale pendente; remaining items restano tracciati.';
+  assert.equal(invalidBlockedCauseIn(text), false);
+  assert.equal(bulletState(text)?.id, 'blocked');
+  assert.equal(checkNextStepStates(withSection([`- ${text}`])).ok, true);
 });
 
 test('«non in questa PR» è la negazione, non lo stato (#862)', () => {

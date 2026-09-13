@@ -53,6 +53,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { truncateToClause } from '../../host/shared/clauseTail.mjs';
+import { findAllSeoEntryMatches } from '../../scripts/lib/seo-entry.mjs';
 import {
   findPromptPlaceholders,
   stripFaqNumberedLabels,
@@ -485,15 +486,16 @@ const SEO_JSON_FIELDS = ['headline', 'description', 'caption'];
 const seoDir = path.join(ROOT, 'content', 'seo');
 
 /** L'id dell'articolo a cui appartiene un offset dentro un file seo. */
-function seoIdAt(src, offset) {
-  const before = src.slice(0, offset);
-  const keys = [...before.matchAll(/\n\s*'blog-([^']+)'\s*:\s*\{/g)];
-  return keys.length ? keys[keys.length - 1][1] : '';
+function seoIdAt(entries, offset) {
+  return entries.find(({ index, closeIdx }) => index <= offset && offset <= closeIdx)?.id || '';
 }
 
 for (const f of fs.readdirSync(seoDir).filter((x) => /^seo-blog.*\.ts$/.test(x))) {
   const rel = path.join('content', 'seo', f);
-  const whole = fs.readFileSync(path.join(ROOT, rel), 'utf-8');
+  // Resolve every real, balanced entry before either sweep can write this
+  // file. A malformed object therefore fails closed without a partial SEO
+  // repair; comments, strings and templates cannot claim an article id.
+  let seoEntries = findAllSeoEntryMatches(fs.readFileSync(path.join(ROOT, rel), 'utf-8'), rel);
   total += sweep(rel, new RegExp(`(\\n\\s*(?:${SEO_TS_FIELDS.join('|')}):\\s*')((?:\\\\'|[^'])*)(')`, 'g'), {
     unescape: unescapeTs,
     escape: escapeTs,
@@ -504,16 +506,19 @@ for (const f of fs.readdirSync(seoDir).filter((x) => /^seo-blog.*\.ts$/.test(x))
       // residuo esplicito e' corretto qui, riscriverlo con rebuildExcerpt
       // (prosa dal body) cambierebbe la FORMA del campo, non solo il contenuto.
       if (field === 'keywords') return null;
-      const id = seoIdAt(whole, Number(label.split('@')[1]));
+      const id = seoIdAt(seoEntries, Number(label.split('@')[1]));
       return id ? rebuildExcerpt(id, 'it') : null;
     },
   });
+  // The TypeScript sweep may have changed the file length before the JSON
+  // sweep. Resolve offsets from the current source, never from a stale snapshot.
+  seoEntries = findAllSeoEntryMatches(fs.readFileSync(path.join(ROOT, rel), 'utf-8'), rel);
   total += sweep(rel, new RegExp(`("(?:${SEO_JSON_FIELDS.join('|')})":\\s*")((?:\\\\"|[^"])*)(")`, 'g'), {
     unescape: unescapeJson,
     escape: escapeJson,
     contextOf: (match) => ({ id: '', field: `sd.${/"(\w+)":/.exec(match)[1]}`, locale: 'it' }),
     repair: ({ field, value, label }) => {
-      const id = seoIdAt(whole, Number(label.split('@')[1]));
+      const id = seoIdAt(seoEntries, Number(label.split('@')[1]));
       if (!id) return null;
       if (field === 'sd.caption') return rebuildImageAlt(value, { locale: 'it', id });
       return rebuildExcerpt(id, 'it');

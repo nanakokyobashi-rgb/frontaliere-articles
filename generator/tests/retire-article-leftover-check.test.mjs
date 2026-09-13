@@ -34,11 +34,17 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { codeOnly } from './lib/reachable-source.mjs';
 import { mentionsId } from '../../scripts/lib/mentions-id.mjs';
 import {
+  IMAGES_LEDGER,
+  SECTIONS,
+  leftoverSurfacesFor,
+  requiredSurfaceFilesFor,
   surfaceMentionsArticleId,
   surfaceArticleIdStatus,
   SURFACE_ARTICLE_ID_STATUS,
@@ -100,23 +106,46 @@ test('la regola ha una sorgente sola: nessun chiamante se la ri-scrive', () => {
   // Una copia locale in uno dei due li scollegherebbe in silenzio.
   for (const { rel, symbol } of CALLERS) {
     const src = readFileSync(path.join(ROOT, rel), 'utf-8');
+    const code = codeOnly(src);
     assert.match(
-      src,
-      new RegExp(`import\\s*\\{[^}]*\\b${symbol}\\b[^}]*\\}\\s*from\\s*'[^']*lib/article-surfaces\\.mjs'`, 's'),
-      `${rel}: non importa ${symbol} dal modulo delle superfici`,
+      code,
+      new RegExp(`^[ \\t]*import[ \\t]*\\{[^}]*\\b${symbol}\\b[^}]*\\}[ \\t]*from[ \\t]*'[^']*lib/article-surfaces\\.mjs'`, 'ms'),
+      `${rel}: non importa ${symbol} dal modulo delle superfici nel codice eseguibile`,
     );
     assert.doesNotMatch(
-      src,
+      code,
       /function mentionsId\s*\(/,
       `${rel}: ri-definisce mentionsId invece di importarla — due copie della `
       + 'stessa regola divergono, ed è esattamente il difetto per cui il modulo esiste.',
     );
     assert.doesNotMatch(
-      src,
+      code,
       /readSurface\([^)]*\)\.includes\(id\)|\bread\(f\)\.includes\(id\)/,
       `${rel}: includes(id) nudo su una superficie — un id annidato inventa un residuo.`,
     );
   }
+});
+
+test('il ledger dei ritirati usa lo stesso writer atomico del resto della catena', () => {
+  const src = readFileSync(path.join(ROOT, 'scripts/retire-article.mjs'), 'utf-8');
+  assert.match(src, /import\s+\{\s*writeJsonAtomic\s*\}\s+from\s+'\.\.\/generator\/scripts\/lib\/atomic-write-json\.mjs'/);
+  assert.match(src, /writeJsonAtomic\(ledgerPath, ledger\)/);
+});
+
+test('il controllo finale distingue residui reali da superfici illeggibili', () => {
+  const src = codeOnly(readFileSync(path.join(ROOT, 'scripts/retire-article.mjs'), 'utf-8'));
+  assert.match(src, /status === SURFACE_ARTICLE_ID_STATUS\.PRESENT\) leftovers\.push/);
+  assert.match(src, /status === SURFACE_ARTICLE_ID_STATUS\.UNREADABLE\) unreadable\.push/);
+  assert.match(src, /RIMOZIONE PARZIALE/);
+  assert.match(src, /VERIFICA INCOMPLETA/);
+});
+
+test('il retirement rimuove anche la provenienza dello slug nello stesso buffer della mappa', () => {
+  const src = readFileSync(path.join(ROOT, 'scripts/retire-article.mjs'), 'utf-8');
+  assert.match(src, /function removeFallbackProvenanceRow\(/);
+  assert.match(src, /cfg\.fallbackReasonsConstName/);
+  assert.match(src, /fallbackRow = removeFallbackProvenanceRow\(/);
+  assert.match(src, /slugDataSrc = fallbackRow\.src/);
 });
 
 test('un id vuoto non coincide con ogni superficie', () => {
@@ -154,6 +183,42 @@ test('un ledger illeggibile è distinto da un residuo reale, ma resta bloccante'
     SURFACE_ARTICLE_ID_STATUS.ABSENT,
   );
   assert.equal(surfaceMentionsArticleId(rel, '{ non-json', ID), true);
+});
+
+test('il ledger immagini può contenere l\'id ma non è una superficie residua', () => {
+  const fixture = JSON.stringify({ [ID]: 'images/blog/disoccupazione.webp' });
+  assert.equal(surfaceArticleIdStatus(IMAGES_LEDGER, fixture, ID), SURFACE_ARTICLE_ID_STATUS.PRESENT);
+  assert.equal(leftoverSurfacesFor('frontaliere').includes(IMAGES_LEDGER), false);
+  assert.equal(leftoverSurfacesFor('svizzera').includes(IMAGES_LEDGER), false);
+});
+
+test('una superficie obbligatoria mancante fallisce esplicitamente', () => {
+  const root = mkdtempSync(path.join(os.tmpdir(), 'article-surfaces-'));
+  try {
+    const required = [SECTIONS.frontaliere.slugDataFile, ...SECTIONS.frontaliere.metaFiles];
+    for (const rel of required) {
+      const abs = path.join(root, rel);
+      mkdirSync(path.dirname(abs), { recursive: true });
+      writeFileSync(abs, 'fixture\n', 'utf-8');
+    }
+    assert.throws(
+      () => requiredSurfaceFilesFor('frontaliere', root),
+      /superfici obbligatorie mancanti.*content\/blog-articles-data\.ts/,
+    );
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('retire-article fa il preflight delle superfici obbligatorie prima di ogni write', () => {
+  const src = readFileSync(path.join(ROOT, 'scripts/retire-article.mjs'), 'utf8');
+  const sectionAt = src.indexOf('const section = findSection(id);');
+  const preflightAt = src.indexOf('requiredSurfaceFilesFor(section);');
+  const firstWriteAt = src.indexOf('for (const [file, text] of writes) write(file, text);');
+  const dryRunAt = src.indexOf('if (dryRun)');
+  assert.ok(sectionAt >= 0 && preflightAt > sectionAt, 'il preflight deve seguire la risoluzione della sezione');
+  assert.ok(preflightAt < firstWriteAt, 'le superfici mancanti devono fallire prima delle scritture');
+  assert.ok(preflightAt < dryRunAt, 'anche --dry-run deve validare le superfici obbligatorie');
 });
 
 test('retire-article rifiuta un id mancante, vuoto o fatto di spazi prima di scrivere', () => {

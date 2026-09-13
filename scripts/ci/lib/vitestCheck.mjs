@@ -31,6 +31,61 @@ import {
 } from './constants.mjs';
 
 /**
+ * Ripete una lettura sincrona finché il dato è utilizzabile.
+ *
+ * Gli errori del reader e i payload ok:false restano errori: una risposta
+ * vuota è un dato transitorio, non una prova che l'head sia orfano.
+ *
+ * @template T
+ * @param {{read: () => T, ready: (value: T) => boolean, attempts?: number,
+ *          delayMs?: number, sleep?: (delayMs: number) => void}} options
+ * @returns {T}
+ */
+export function pollUntil({ read, ready, attempts = 3, delayMs = 0, sleep = () => {} } = {}) {
+  if (typeof read !== 'function' || typeof ready !== 'function') {
+    throw new TypeError('pollUntil richiede funzioni read e ready');
+  }
+  const maxAttempts = Math.max(1, Math.trunc(Number(attempts) || 1));
+  let value;
+  for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+    value = read();
+    if (value && typeof value === 'object' && value.ok === false) {
+      const status = value.status === undefined ? '' : ' (HTTP ' + value.status + ')';
+      const error = new Error('GitHub API ha restituito ok:false' + status);
+      if (value.status !== undefined) error.status = value.status;
+      throw error;
+    }
+    if (ready(value)) return value;
+    if (attempt + 1 < maxAttempts) sleep(delayMs);
+  }
+  return value;
+}
+
+/** Un check-run o job ha raggiunto un verdetto terminale. */
+export function vitestJobIsConcluded(job) {
+  return Boolean(job && job.status === 'completed' && job.conclusion);
+}
+
+/**
+ * Dice se la risposta dei check-run deve essere letta di nuovo.
+ * Lista vuota e run non conclusi non autorizzano a classificare l'head con
+ * dati vecchi.
+ */
+export function vitestCheckNeedsPolling(checkRuns) {
+  if (!Array.isArray(checkRuns)) return true;
+  const vitestRuns = checkRuns.filter(
+    (check) => check && (
+      check.name === VITEST_CHECK_NAME
+      || VITEST_SHARD_NAME_RE.test(check.name || '')
+    ),
+  );
+  if (vitestRuns.length === 0) return true;
+  return vitestRuns.some(
+    (check) => check.status !== 'completed' || !check.conclusion || !check.completed_at,
+  );
+}
+
+/**
  * @param {Array<{name?: string, status?: string, conclusion?: string, completed_at?: string}>} checkRuns
  *   L'array `.check_runs` della GitHub check-runs API.
  * @returns {string} La conclusion del check-run vitest COMPLETATO con verdetto
@@ -135,7 +190,7 @@ export function latestCompletedConclusionByName(checkRuns, name) {
  * chiusa da `vitestFailureIsNotAttributableToPr` per il caso `failure`:
  *   - `auto-merge-eval` esige `success` → blocca;
  *   - la review Claude gira dentro il job di esecuzione, DOPO i test (fino al
- *     2026-08-26 era `pr-review-loop.yml`, gattato su `tests` success)
+ *     2026-08-26 era il workflow di review separato, gattato su `tests` success)
  *     → nessuna review ⇒ nessun `## LGTM`, nessuna label;
  *   - `vitestFailureIsNotAttributableToPr` esige `failure` → non copre;
  *   - `pr-autorebase` senza label/LGTM/stuck-red → skip.
@@ -221,7 +276,7 @@ export function vitestVerdictIsTransientCancellation(checkRuns) {
  * premessa è FALSA, e su di essa poggiava l'intera catena di recupero, che
  * diventa uno stato ASSORBENTE:
  *   1. la review Claude gira dentro il job di esecuzione, DOPO i test (fino al
- *      2026-08-26 era `pr-review-loop.yml`, gattato su `tests` success)
+ *      2026-08-26 era il workflow di review separato, gattato su `tests` success)
  *      → vitest rosso ⇒ nessuna review ⇒ nessun `## LGTM`, nessuna label.
  *   2. `pr-autorebase.mjs` tratta come near-merge solo LGTM / `collision-risk` /
  *      `stale-review` → nessuno dei tre ⇒ skip, niente rebase, niente re-test.
@@ -317,13 +372,20 @@ export const CLAUDE_REVIEW_STEP_NAME = 'Run Claude review';
 /** Nome dello step che rende esplicita una review abortita senza verdetto. */
 export const REVIEW_ABORT_STEP_NAME = 'Fail on transient API error (no review posted)';
 
+/** Nome dello step che decide se Claude va saltata sul contributo invariato. */
+export const REVIEW_GUARD_STEP_NAME = 'Re-review guard (skip Claude when no code changed since last LGTM)';
+
+/** Nome dello step che distingue un gate rosso per verdetto da un errore transitorio. */
+export const REVIEW_GATE_FAILURE_STEP_NAME = 'Classify review gate failure';
+
 const REVIEW_STEP_IN_FLIGHT = new Set(['queued', 'in_progress']);
-const NON_GATING_REVIEW_STEPS = new Set([
+export const NON_GATING_REVIEW_STEPS = new Set([
   'Mint GitHub App token for Claude review',
   'Claude usage metrics',
   'Explain the job verdict in the run summary',
+  REVIEW_GATE_FAILURE_STEP_NAME,
 ]);
-// Questi due step appartengono alla review, non al codice della PR. Un loro
+// Questi step appartengono alla review, non al codice della PR. Un loro
 // rosso non deve trasformare un gate puro in un falso rosso dei test.
 export const REVIEW_DEATH_STEP_NAMES = new Set([
   CLAUDE_REVIEW_STEP_NAME,
@@ -355,7 +417,7 @@ export function isNonGatingReviewStep(name) {
  *
  * ── PERCHÉ SERVE ───────────────────────────────────────────────────────────
  * Fino al 2026-08-26 la review Claude era un workflow a parte
- * (`pr-review-loop.yml`) innescato da `workflow_run` su `tests` == success:
+ * (un workflow di review separato) innescato da `workflow_run` su `tests` == success:
  * con vitest rosso la review NON partiva, quindi «vitest rosso» implicava
  * «nessuna review possibile» e riciclare la PR era inutile per costruzione.
  * Da `80a8c73f73a` («Unify tests and PR review workflow») la review è uno step
@@ -398,9 +460,11 @@ export function vitestFailureIsReviewGate(steps) {
 
 /**
  * Il gate è rosso perché il `Re-review guard` ha saltato Claude, non perché la
- * review sia fallita a metà? Pura e conservativa: un abort esplicito della
- * review prevale sul semplice `skipped`, così un errore API non consuma/nega
- * il one-shot del review gate (#1140).
+ * review sia fallita a metà? Pura e conservativa: lo skip è valido solo se il
+ * guard è riuscito, l'abort è `skipped` e il classificatore del gate ha
+ * confermato un `verdict`. Se il classificatore è `success` (errore API,
+ * rate-limit o causa sconosciuta), oppure manca, il rosso non è un verdetto
+ * carry-forward: il one-shot resta disponibile (#1140).
  *
  * @param {Array<{name?: string, conclusion?: string}>} steps
  * @returns {boolean}
@@ -409,8 +473,12 @@ export function reviewSkippedByGuard(steps) {
   if (!Array.isArray(steps) || steps.length === 0) return false;
   const gate = steps.find((s) => s && s.name === REVIEW_GATE_STEP_NAME);
   if (!gate || gate.conclusion !== 'failure') return false;
+  const classification = steps.find((s) => s && s.name === REVIEW_GATE_FAILURE_STEP_NAME);
+  if (!classification || classification.conclusion !== 'failure') return false;
+  const guard = steps.find((s) => s && s.name === REVIEW_GUARD_STEP_NAME);
+  if (!guard || guard.conclusion !== 'success') return false;
   const abort = steps.find((s) => s && s.name === REVIEW_ABORT_STEP_NAME);
-  if (abort && ['failure', 'cancelled'].includes(abort.conclusion)) return false;
+  if (!abort || abort.conclusion !== 'skipped') return false;
   const review = steps.find((s) => s && s.name === CLAUDE_REVIEW_STEP_NAME);
   return Boolean(review && review.conclusion === 'skipped');
 }

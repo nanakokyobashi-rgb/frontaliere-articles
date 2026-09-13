@@ -92,6 +92,8 @@ case "$sub" in
       */pulls/*)
         if [ "$jq" = ".base.sha" ]; then
           node -e 'const m=require(process.argv[1]); process.stdout.write((m.base?.sha||"")+"\\n")' ${JSON.stringify(fixMeta)}
+        elif [ "$jq" = ".head.sha" ]; then
+          node -e 'const m=require(process.argv[1]); process.stdout.write((m.head?.sha||"")+"\\n")' ${JSON.stringify(fixMeta)}
         else
           cat ${JSON.stringify(fixMeta)}
         fi ;;
@@ -169,7 +171,7 @@ test('Important fuori dal diff → il gate e\' verde e il finding diventa follow
       '`generator/scripts/outside.mjs:10`: 🔴 Important: il controllo condiviso manca.',
     ].join('\n'))],
     files: ['generator/scripts/in-scope.mjs'],
-    meta: { base: { sha: 'c'.repeat(40) } },
+    meta: { base: { sha: 'c'.repeat(40) }, head: { sha: HEAD } },
   });
   assert.equal(r.status, 0, `Un finding solo fuori dal diff non deve bloccare.\n${r.stdout}`);
   assert.match(r.stdout, /follow-up|fuori dal diff/i, r.stdout);
@@ -184,7 +186,7 @@ test('Important che inizia con nessuno resta rosso se cita un file nel diff', ()
       '## LGTM',
     ].join('\n'))],
     files: ['generator/scripts/in-scope.mjs'],
-    meta: { base: { sha: 'c'.repeat(40) } },
+    meta: { base: { sha: 'c'.repeat(40) }, head: { sha: HEAD } },
   });
   assert.equal(r.status, 1, `Un finding in-diff che inizia con nessuno deve bloccare.\n${r.stdout}`);
 });

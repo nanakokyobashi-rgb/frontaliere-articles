@@ -41,6 +41,7 @@ import {
 } from '../scripts/lib/article-meta-refresh.mjs';
 import { buildDescriptiveTexts, buildDailyBriefArticle } from '../scripts/lib/daily-brief-content.mjs';
 import { sanitizePromptPlaceholders } from '../scripts/lib/prompt-placeholder-guard.mjs';
+import { bumpDateModified } from '../scripts/lib/evergreen-article-refresh.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const GENERATE_SCRIPT = path.join(HERE, '..', 'scripts', 'generate-daily-brief-article.mjs');
@@ -121,6 +122,18 @@ test('upsertLocaleMetaFields: id non registrato in questo file — errore esplic
   );
 });
 
+test('upsertLocaleMetaFields: campo duplicato — rifiuta prima di aggiornare', () => {
+  const duplicate = META_FIXTURE.replace(
+    "    'blog.article.demo-id.imageAlt': 'Alt demo',\n",
+    "    'blog.article.demo-id.imageAlt': 'Alt demo',\n" +
+      "    'blog.article.demo-id.excerpt': 'Secondo excerpt',\n",
+  );
+  assert.throws(
+    () => upsertLocaleMetaFields(duplicate, 'demo-id', { excerpt: 'Nuovo excerpt' }),
+    /field 'excerpt' duplicato.*refresh rifiutato/,
+  );
+});
+
 // ── 1b. upsertSeoDescriptionBlock ───────────────────────────────────────────
 
 const SEO_FIXTURE =
@@ -149,6 +162,32 @@ const SEO_FIXTURE =
   "    title: 'After',\n" +
   "    description: 'After desc',\n" +
   "  },\n" +
+  "};\nexport default BLOG_SEO_METADATA_5;\n";
+
+function withDuplicateSeoEntry(src, indent = '    ') {
+  return src.replace(
+    '\n};\nexport default',
+    "\n" + indent + "'blog-demo-id': {\n" +
+      "    title: 'Duplicate',\n" +
+      "    description: 'Duplicate desc',\n" +
+      "    ogDescription: 'Duplicate og',\n" +
+      "  },\n" +
+      '};\nexport default',
+  );
+}
+
+const DUPLICATE_SEO_FIXTURE = withDuplicateSeoEntry(SEO_FIXTURE);
+
+const INDENTED_SEO_FIXTURE =
+  "const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {\n" +
+  "\t'blog-demo-id': {\n" +
+  "\t\ttitle: 'Demo',\n" +
+  "\t\tdescription: 'Corto',\n" +
+  "\t\togDescription: 'Corto',\n" +
+  "\t\tstructuredData: {\n" +
+  "\t\t\t\"description\": \"Corto\"\n" +
+  "\t\t}\n" +
+  "\t},\n" +
   "};\nexport default BLOG_SEO_METADATA_5;\n";
 
 test('upsertSeoDescriptionBlock: aggiorna description/ogDescription e il gemello structuredData, scoped al solo id', () => {
@@ -192,6 +231,40 @@ test('upsertSeoDescriptionBlock: entry assente — errore esplicito', () => {
   assert.throws(() => upsertSeoDescriptionBlock(SEO_FIXTURE, 'non-esiste', { description: 'x' }), /nessuna entry/);
 });
 
+test('upsertSeoDescriptionBlock: entry duplicata — rifiuta il first-match ambiguo', () => {
+  assert.throws(
+    () => upsertSeoDescriptionBlock(DUPLICATE_SEO_FIXTURE, 'demo-id', { description: 'x' }),
+    /duplicata.*refresh rifiutato/,
+  );
+});
+
+test('upsertSeoDescriptionBlock: entry duplicata — rileva indentazione tab', () => {
+  assert.throws(
+    () => upsertSeoDescriptionBlock(withDuplicateSeoEntry(SEO_FIXTURE, '\t'), 'demo-id', { description: 'x' }),
+    /duplicata.*refresh rifiutato/,
+  );
+});
+
+test('upsertSeoDescriptionBlock: aggiorna anche i campi top-level con indentazione tab', () => {
+  const out = upsertSeoDescriptionBlock(INDENTED_SEO_FIXTURE, 'demo-id', {
+    description: 'Descrizione tab.',
+    ogDescription: 'Social tab.',
+  });
+  assert.ok(out.includes("\t\tdescription: 'Descrizione tab.',"));
+  assert.ok(out.includes("\t\togDescription: 'Social tab.',"));
+  assert.ok(out.includes('\t\t\t"description": "Descrizione tab."'));
+});
+
+test('upsertSeoDescriptionBlock: restringe la chiave alla sintassi consumata dai reader', () => {
+  const doubleQuoted = SEO_FIXTURE.replace("  'blog-demo-id': {", '  "blog-demo-id": {');
+  const spacedColon = SEO_FIXTURE.replace("  'blog-demo-id': {", "  'blog-demo-id' : {");
+  assert.throws(() => upsertSeoDescriptionBlock(doubleQuoted, 'demo-id', { description: 'x' }), /nessuna entry/);
+  assert.match(
+    upsertSeoDescriptionBlock(spacedColon, 'demo-id', { description: 'x' }),
+    /description: 'x'/,
+  );
+});
+
 // ── 2. refreshDescriptiveTexts — la scrittura su un albero sintetico ────────
 
 /** Un albero minimo che imita il layout `content/` del corpus, cosi' il test
@@ -226,6 +299,81 @@ function syntheticCorpus() {
   );
   return root;
 }
+
+test('refreshDescriptiveTexts: entry SEO duplicata — rifiuta prima di scrivere le locali', () => {
+  const root = syntheticCorpus();
+  try {
+    const seoPath = path.join(root, 'content', 'seo', 'seo-blog-5.ts');
+    const duplicate = withDuplicateSeoEntry(fs.readFileSync(seoPath, 'utf-8'));
+    fs.writeFileSync(seoPath, duplicate);
+    const metaPath = path.join(root, 'content', 'blog-meta-it.ts');
+    const metaBefore = fs.readFileSync(metaPath, 'utf-8');
+
+    assert.throws(
+      () => refreshDescriptiveTexts(
+        'demo-id',
+        { it: { excerpt: 'Nuovo excerpt' } },
+        { description: 'Nuova description' },
+        { repoRoot: root },
+      ),
+      /duplicata.*refresh rifiutato/,
+    );
+    assert.equal(fs.readFileSync(metaPath, 'utf-8'), metaBefore, 'il preflight SEO deve precedere ogni scrittura locale');
+    assert.equal(fs.readFileSync(seoPath, 'utf-8'), duplicate, 'il file SEO ambiguo deve restare intatto');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('refreshDescriptiveTexts: campo meta duplicato — preflighta tutte le locali prima di scrivere', () => {
+  const root = syntheticCorpus();
+  try {
+    const enPath = path.join(root, 'content', 'blog-meta-en.ts');
+    const enDuplicate = fs.readFileSync(enPath, 'utf-8').replace(
+      "    'blog.article.demo-id.imageAlt': 'Alt en',\n",
+      "    'blog.article.demo-id.imageAlt': 'Alt en',\n" +
+        "    'blog.article.demo-id.excerpt': 'Secondo excerpt',\n",
+    );
+    fs.writeFileSync(enPath, enDuplicate);
+    const itPath = path.join(root, 'content', 'blog-meta-it.ts');
+    const itBefore = fs.readFileSync(itPath, 'utf-8');
+
+    assert.throws(
+      () => refreshDescriptiveTexts(
+        'demo-id',
+        { it: { excerpt: 'Nuovo it' }, en: { excerpt: 'Nuovo en' } },
+        undefined,
+        { repoRoot: root },
+      ),
+      /field 'excerpt' duplicato.*refresh rifiutato/,
+    );
+    assert.equal(fs.readFileSync(itPath, 'utf-8'), itBefore, 'nessuna locale deve essere scritta prima del preflight completo');
+    assert.equal(fs.readFileSync(enPath, 'utf-8'), enDuplicate, 'il file ambiguo deve restare intatto');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('bumpDateModified: entry SEO duplicata — rifiuta prima della scrittura', () => {
+  for (const duplicate of [DUPLICATE_SEO_FIXTURE, withDuplicateSeoEntry(SEO_FIXTURE, '\t')]) {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'evergreen-refresh-'));
+    try {
+      const seoDir = path.join(root, 'content', 'seo');
+      fs.mkdirSync(seoDir, { recursive: true });
+      const seoPath = path.join(seoDir, 'seo-blog-5.ts');
+      fs.writeFileSync(seoPath, duplicate);
+      const before = fs.readFileSync(seoPath, 'utf-8');
+
+      assert.throws(
+        () => bumpDateModified('demo-id', '2026-09-12T00:00:00Z', root),
+        /duplicata.*refresh rifiutato/,
+      );
+      assert.equal(fs.readFileSync(seoPath, 'utf-8'), before);
+    } finally {
+      fs.rmSync(root, { recursive: true, force: true });
+    }
+  }
+});
 
 test('refreshDescriptiveTexts: scrive tutte e 4 le locali + il file SEO, e riporta i file toccati', () => {
   const root = syntheticCorpus();
@@ -338,6 +486,31 @@ test('refreshDescriptiveTexts: una ogDescription oltre il proprio budget (250) v
     const ogMatch = it.match(/'blog\.article\.demo-id\.ogDescription': '([^']*)'/);
     assert.ok(ogMatch, 'ogDescription non scritta');
     assert.ok(ogMatch[1].length <= SEO_OG_DESCRIPTION_MAX, `ogDescription scritta fuori budget: ${ogMatch[1].length} chars`);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('refreshDescriptiveTexts: un primo token oltre il budget non lascia il vecchio valore fuori cap', () => {
+  const root = syntheticCorpus();
+  try {
+    const tooLongToken = 'x'.repeat(SEO_DESCRIPTION_MAX + 1);
+    refreshDescriptiveTexts(
+      'demo-id',
+      { it: { seoDescription: tooLongToken } },
+      { description: tooLongToken },
+      { repoRoot: root },
+    );
+
+    const meta = fs.readFileSync(path.join(root, 'content', 'blog-meta-it.ts'), 'utf-8');
+    const metaMatch = meta.match(/'blog\.article\.demo-id\.seoDescription': '([^']*)'/);
+    assert.ok(metaMatch, 'seoDescription non scritta');
+    assert.equal(metaMatch[1].length, SEO_DESCRIPTION_MAX);
+
+    const seo = fs.readFileSync(path.join(root, 'content', 'seo', 'seo-blog-5.ts'), 'utf-8');
+    const seoMatch = seo.match(/description: '([^']*)'/);
+    assert.ok(seoMatch, 'description non scritta');
+    assert.equal(seoMatch[1].length, SEO_DESCRIPTION_MAX);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }

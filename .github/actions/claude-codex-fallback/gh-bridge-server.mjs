@@ -28,7 +28,11 @@ const allowedSubcommands = new Map([
   ['search', new Set(['issues'])],
 ]);
 export const CORPUS_REPOSITORY = 'nanakokyobashi-rgb/frontaliere-articles';
-const corpusAllowedCommands = new Set(['issue']);
+// The corpus triage prompt may need read-only repository API endpoints for
+// metadata that is not present in the prefetched bundle. Keep `api` available
+// for GETs only; validateOperation/apiMethodError and validateApiEndpoint
+// still reject every mutation and every endpoint outside this exact repo.
+const corpusAllowedCommands = new Set(['api', 'issue']);
 const corpusAllowedSubcommands = new Map([
   ['issue', new Set(['view', 'list', 'create', 'comment', 'edit'])],
 ]);
@@ -57,7 +61,7 @@ const blockedCommands = new Set([
 const blockedApiPath = /(?:^|[/?])(secrets?|variables?|installations?|apps?|hooks?|ssh[_-]?keys?|gpg[_-]?keys?|settings)(?:[/?]|$)/i;
 const blockedFlags = new Set([
   '--debug', '--verbose', '--trace', '--output', '-o', '--config', '--insecure-storage',
-  '--with-token', '--pinentry-mode', '--jq', '--include', '--exclude',
+  '--with-token', '--pinentry-mode', '--include', '--exclude',
 ]);
 const fileFlags = new Set(['--body-file', '--input', '--template']);
 const fieldFlags = new Set(['-F', '--field', '-f', '--raw-field']);
@@ -73,9 +77,43 @@ const MAX_PR_BODY_BYTES = 512 * 1024;
 const IMPLEMENTED_HEADER_RE = /^[ \t]{0,3}#{2,3}[ \t]+Implementato\b/im;
 const NON_IMPLEMENTED_HEADER_RE = /^[ \t]{0,3}#{2,3}[ \t]+Non[ \t]+implementato[^\n]*\(ancora\)/im;
 const NON_IMPLEMENTED_ANY_HEADER_RE = /^[ \t]{0,3}#{2,3}[ \t]+Non[ \t]+implementato\b/im;
-const CHAINED_PR_RE = /\bPR\s+concatenat[ao]\b/i;
-const CHAINED_PR_NUMBER_RE = /\bPR\s+concatenat[ao]\s*#\s*\d+/i;
-const BODY_STATE_RE = /\bin\s+questa\s+PR\b|\bPR\s+concatenat[ao]\s*#\s*\d+\b|\bper\s+scelta\b|\bby\s+construction\b|\bblocked\s*:\s*\S|\bfalso\s+positivo\b/i;
+const CHAINED_PR_MENTION_RE = /\bPR\s+concatenat[aoei]\b/gi;
+const CHAINED_PR_NUMBER_RE = /^\s*#\s*\d+/i;
+const BODY_STATE_RE = /\bin\s+questa\s+PR\b|\bPR\s+concatenat[aoei]\s*#\s*\d+\b|\bper\s+scelta\b|\bby\s+construction\b|\bblocked\s*:\s*\S|\bfalso\s+positivo\b/i;
+
+// Keep the bridge's standalone snapshot aligned with the corpus-only body
+// validator. The action copies this file without `scripts/lib/`, so importing
+// the canonical module here would make the fallback fail before it can validate
+// a body. These are the same conservative sequencing forms and emphasis rules.
+const EMPHASIS_RUN_RE = /[*_`]+/g;
+const WORD_CHAR_RE = /[\p{L}\p{N}]/u;
+function stripBodyEmphasis(value) {
+  return String(value || '').replace(EMPHASIS_RUN_RE, (run, at, whole) => {
+    const prev = whole[at - 1];
+    const next = whole[at + run.length];
+    return /^_+$/.test(run) && prev && next && WORD_CHAR_RE.test(prev) && WORD_CHAR_RE.test(next) ? '' : ' ';
+  }).replace(/[^\S\n]+/g, ' ');
+}
+
+const INTERNAL_BLOCKED_SEQUENCE_RE =
+  /\b(?:daily\s+bucket|bucket\s+giornalier[oa]|item[-\s]+per[-\s]+item|(?:restant[ie]|remaining)\s+(?:item|items|PR|PRs)|(?:item|items|PR|PRs)\s+(?:restant[ie]|remaining)|(?:PR|item|items)\s+(?:successiv[oaie]|following|future)|prossim[oaie]\s+(?:PR|item|items)|(?:next|upcoming)\s+(?:PR|item|items))\b/i;
+const BLOCKED_CAUSE_RE =
+  /\b(?:blocked|bloccato|bloccata|bloccati|bloccate)\s*[:—–-]\s*([^\n]*)/i;
+
+function invalidChainedPrState(text) {
+  const s = stripBodyEmphasis(text);
+  const mentions = [...s.matchAll(CHAINED_PR_MENTION_RE)];
+  return mentions.some((mention) => !CHAINED_PR_NUMBER_RE.test(
+    s.slice(mention.index + mention[0].length),
+  ));
+}
+
+function invalidBlockedCauseIn(text) {
+  const match = stripBodyEmphasis(text).match(BLOCKED_CAUSE_RE);
+  if (!match) return false;
+  const firstClause = match[1].split(/[.!?,;]/, 1)[0];
+  return INTERNAL_BLOCKED_SEQUENCE_RE.test(firstClause);
+}
 
 function realRoot(value) {
   try { return fs.realpathSync(value); } catch { return ''; }
@@ -207,6 +245,18 @@ function validateOperation(args, commandIndex, command, repository, allowedSubco
   return '';
 }
 
+function blockedFlagError(arg, command) {
+  if (arg === '--jq' || arg.startsWith('--jq=')) {
+    return command === 'api'
+      ? ''
+      : `gh --jq is only permitted for read-only gh api requests: ${arg}`;
+  }
+  if (blockedFlags.has(arg) || [...blockedFlags].some((flag) => arg.startsWith(`${flag}=`))) {
+    return `gh flag is not permitted by the Codex fallback bridge: ${arg}`;
+  }
+  return '';
+}
+
 function explicitRepositories(args) {
   const values = [];
   for (let index = 0; index < args.length; index += 1) {
@@ -223,42 +273,77 @@ export function resolveGhScope(args, {
   repository,
   host,
   siteToken,
+  currentToken = siteToken,
+  siteRepository: configuredSiteRepository = repository,
   corpusToken = '',
   corpusRepository = CORPUS_REPOSITORY,
 } = {}) {
   if (!Array.isArray(args) || args.some((arg) => typeof arg !== 'string')) return { error: 'invalid args' };
-  const siteRepository = repositoryName(repository);
+  const currentRepository = repositoryName(repository);
+  const siteRepository = repositoryName(configuredSiteRepository);
   const expectedCorpus = repositoryName(corpusRepository);
   const expectedHost = normalizedHost(host);
-  if (!siteRepository || !expectedCorpus || expectedCorpus !== CORPUS_REPOSITORY || !expectedHost) {
+  if (!currentRepository || !siteRepository || !expectedCorpus || expectedCorpus !== CORPUS_REPOSITORY || !expectedHost) {
     return { error: 'Codex GitHub bridge scope is missing its exact repository/host context' };
   }
   const repositories = explicitRepositories(args);
   if (repositories.some((value) => !repositoryName(value))) {
     return { error: 'gh --repo must name an exact owner/repository pair' };
   }
-  const explicitRepository = repositories[0] || siteRepository;
+  const hasExplicitRepository = repositories.length > 0;
+  // A missing --repo means the current checkout, even when the action also
+  // knows a separate site repository for explicit cross-repo writes. Using
+  // siteRepository as the default silently routed corpus `gh api repos/...`
+  // reads through the site scope and rejected the current corpus endpoint.
+  const explicitRepository = repositories[0]
+    || (hasExplicitRepository ? siteRepository : currentRepository);
   if (repositories.some((value) => value !== explicitRepository)) {
     return { error: 'gh --repo may not select multiple repositories in one request' };
   }
-  if (explicitRepository === siteRepository) {
-    if (!siteToken) return { error: 'Codex GitHub bridge site credential is unavailable' };
-    return {
-      kind: 'site',
-      repository: siteRepository,
-      token: siteToken,
-      allowedCommandSet: allowedCommands,
-      allowedSubcommandMap: allowedSubcommands,
-    };
-  }
-  if (explicitRepository === expectedCorpus) {
+  // An explicit corpus target always uses the dedicated corpus PAT, including
+  // when the checkout itself is the corpus: its GITHUB_TOKEN may lack the
+  // event/write scope required by the follow-up writers. When that target is
+  // also the current checkout, retain the normal local allow-list because
+  // prompts may spell out `--repo $REPO` for `gh search issues`.
+  if (hasExplicitRepository && explicitRepository === expectedCorpus) {
     if (!corpusToken) return { error: 'Codex corpus bridge credential is unavailable' };
+    const isCurrentCorpus = currentRepository === expectedCorpus;
     return {
       kind: 'corpus',
       repository: expectedCorpus,
       token: corpusToken,
-      allowedCommandSet: corpusAllowedCommands,
-      allowedSubcommandMap: corpusAllowedSubcommands,
+      allowedCommandSet: isCurrentCorpus ? allowedCommands : corpusAllowedCommands,
+      allowedSubcommandMap: isCurrentCorpus ? allowedSubcommands : corpusAllowedSubcommands,
+    };
+  }
+
+  // Calls without --repo operate on the current checkout (for example the
+  // PR comment/review that closes the current corpus run). They retain the
+  // runner token and the normal command allow-list.
+  if (!hasExplicitRepository && explicitRepository === currentRepository) {
+    if (!currentToken) return { error: 'Codex GitHub bridge current-repository credential is unavailable' };
+    return {
+      kind: 'site',
+      repository: currentRepository,
+      token: currentToken,
+      allowedCommandSet: allowedCommands,
+      allowedSubcommandMap: allowedSubcommands,
+    };
+  }
+
+  // An explicit site target may come from the corpus checkout. It must use a
+  // dedicated site PAT; the current corpus runner token is not a cross-repo
+  // credential. On the site checkout the normal bridge token is a safe
+  // fallback, keeping existing callers unchanged.
+  if (explicitRepository === siteRepository) {
+    const targetToken = siteToken || (currentRepository === siteRepository ? currentToken : '');
+    if (!targetToken) return { error: 'Codex GitHub bridge site credential is unavailable' };
+    return {
+      kind: 'site',
+      repository: siteRepository,
+      token: targetToken,
+      allowedCommandSet: allowedCommands,
+      allowedSubcommandMap: allowedSubcommands,
     };
   }
   return { error: `gh --repo is restricted to ${siteRepository} or the exact corpus repository` };
@@ -421,8 +506,11 @@ export function validatePrBodyContract(body) {
     if (!hasNessuno && !bodyHasMeaningfulContent(section)) {
       violations.push('empty ## Non implementato (ancora)');
     }
-    if (bullets.some((bullet) => CHAINED_PR_RE.test(bullet) && !CHAINED_PR_NUMBER_RE.test(bullet))) {
+    if (bullets.some((bullet) => invalidChainedPrState(bullet))) {
       violations.push('PR concatenata requires a #N');
+    }
+    if (bullets.some((bullet) => invalidBlockedCauseIn(bullet))) {
+      violations.push('blocked internal sequencing is not an external cause');
     }
     if (bullets.some((bullet) => !BODY_STATE_RE.test(bullet))) {
       violations.push('every residual bullet requires a literal state');
@@ -527,9 +615,8 @@ export function validateGhArgs(args, {
   if (bodyError) return bodyError;
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
-    if (blockedFlags.has(arg) || [...blockedFlags].some((flag) => arg.startsWith(`${flag}=`))) {
-      return `gh flag is not permitted by the Codex fallback bridge: ${arg}`;
-    }
+    const blockedFlagMessage = blockedFlagError(arg, command);
+    if (blockedFlagMessage) return blockedFlagMessage;
     const fileFlag = [...fileFlags].find((flag) => arg === flag || arg.startsWith(`${flag}=`));
     if (fileFlag) {
       const value = arg === fileFlag ? args[index + 1] : arg.slice(fileFlag.length + 1);
@@ -564,7 +651,8 @@ export function validateGhArgs(args, {
 
 function main() {
   const socketPath = process.env.CODEX_GH_SOCKET;
-  const siteToken = process.env.CODEX_GH_AUTH;
+  const currentToken = process.env.CODEX_GH_AUTH;
+  const siteToken = process.env.CODEX_GH_SITE_AUTH || '';
   const corpusToken = process.env.CODEX_GH_CORPUS_AUTH || '';
   const realGh = process.env.CODEX_REAL_GH;
   const sideEffectFile = process.env.CODEX_GH_SIDE_EFFECT_FILE || '';
@@ -572,9 +660,12 @@ function main() {
   const workspaceRoot = process.env.CODEX_GH_WORKSPACE || cwd;
   const scratchRoot = process.env.CODEX_GH_SCRATCH;
   const repository = repositoryName(process.env.CODEX_GH_REPOSITORY);
+  const siteRepository = repositoryName(
+    process.env.CODEX_GH_SITE_REPOSITORY || 'valerielinc-ops/frontaliere-si-o-no',
+  );
   const host = normalizedHost(process.env.CODEX_GH_HOST);
   const corpusRepository = process.env.CODEX_GH_CORPUS_REPOSITORY || CORPUS_REPOSITORY;
-  if (!socketPath || !siteToken || !realGh || !cwd || !workspaceRoot || !scratchRoot || !repository || !host
+  if (!socketPath || !currentToken || !realGh || !cwd || !workspaceRoot || !scratchRoot || !repository || !siteRepository || !host
     || corpusRepository !== CORPUS_REPOSITORY) process.exit(2);
   const baseEnv = {
     PATH: process.env.PATH || '/usr/bin:/bin',
@@ -660,6 +751,8 @@ function main() {
           repository,
           host,
           siteToken,
+          currentToken,
+          siteRepository,
           corpusToken,
           corpusRepository,
         });

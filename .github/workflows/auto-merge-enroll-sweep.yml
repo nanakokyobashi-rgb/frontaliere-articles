@@ -84,13 +84,34 @@ jobs:
             exit 1
           fi
           export GH_TOKEN="$GITHUB_PAT_NANAKO"
-          # `--paginate` e non `gh pr list --limit N`: quel sottocomando TRONCA
-          # in silenzio, e oltre il taglio una PR semplicemente non esiste per
-          # questo workflow — che e' il difetto che il workflow esiste per non
-          # avere. `autoMergeRequest` e' null quando nessuno l'ha arruolata.
-          prs=$(gh pr list --repo "$REPO" --state open --json number,isDraft,autoMergeRequest \
-            --limit 200 --jq '.[] | select(.isDraft == false and .autoMergeRequest == null) | .number' \
-            2>/dev/null || true)
+          # `gh pr list --limit N` TRONCA in silenzio, mentre un errore API
+          # trasformato in `[]` farebbe sembrare vuota una coda che non abbiamo
+          # letto. Conserviamo le pagine REST slurpate, verifichiamo il payload
+          # e filtriamo solo dopo un fetch riuscito: il vuoto e' un dato valido
+          # soltanto a quel punto. `auto_merge` e' null quando nessuno ha
+          # arruolato la PR.
+          pages_file="${RUNNER_TEMP}/auto-merge-open-pr-pages.json"
+          if ! gh api --paginate --slurp \
+            "repos/${REPO}/pulls?state=open&per_page=100" > "$pages_file"; then
+            echo "::error::lettura paginata delle PR aperte fallita — non considero la lista vuota e non arruolo niente."
+            exit 1
+          fi
+          if ! prs="$(jq -r '
+            if type != "array" or any(.[]; type != "array") then
+              error("payload REST paginato inatteso")
+            else
+              .[][]
+              | if type != "object" or (.number | type) != "number" then
+                  error("elemento PR REST inatteso")
+                else
+                  select((.draft // false) == false and .auto_merge == null)
+                  | .number
+                end
+            end
+          ' "$pages_file")"; then
+            echo "::error::payload REST paginato delle PR aperte non valido — non considero la lista vuota."
+            exit 1
+          fi
           if [ -z "${prs:-}" ]; then
             echo "Nessuna PR aperta da arruolare."
             exit 0

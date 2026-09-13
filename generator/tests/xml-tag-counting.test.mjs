@@ -89,6 +89,12 @@ test('writer, gate e pavimenti contano con la stessa funzione', () => {
   }
 });
 
+test('il manifest del build riconosce gli RSS col contatore documentale', () => {
+  const src = read('scripts/build-api.mjs');
+  assert.match(src, /\.filter\(\(xml\) => countXmlTags\(xml, 'rss'\) > 0\)/);
+  assert.doesNotMatch(src, /\.filter\(\(xml\) => xml\.includes\('<rss'\)\)/);
+});
+
 test('publish-api usa il contatore condiviso anche per i due gate News XML', () => {
   const workflow = read('.github/workflows/publish-api.yml');
   assert.match(workflow, /countXmlTags/);

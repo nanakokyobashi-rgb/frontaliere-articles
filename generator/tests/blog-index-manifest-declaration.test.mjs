@@ -21,7 +21,8 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -144,6 +145,49 @@ test('build-blog-index dichiara i suoi shard e rifiuta un set parziale', () => {
   assert.match(src, /PUBLISHES_TO_API = OUT === DEFAULT_OUT/);
   assert.match(src, /if \(!failed && PUBLISHES_TO_API\)/);
   assert.match(src, /const walk = \(dir\) => \{[\s\S]*?if \(entry\.isDirectory\(\)\) walk\(abs\);/);
+});
+
+test('build-blog-index valida tutte le sezioni prima di scrivere qualsiasi shard', () => {
+  const root = mkdtempSync(join(tmpdir(), 'blog-index-atomic-'));
+  const copied = [
+    'scripts/build-blog-index.mjs',
+    'scripts/lib/api-manifest.mjs',
+    'scripts/lib/corpus-floors.mjs',
+    'scripts/lib/parse-positive-num.mjs',
+    'scripts/lib/sanitize-control-chars.mjs',
+    'scripts/lib/seo-entry.mjs',
+    'engine/shared/seo-entry.mjs',
+    'generator/scripts/lib/control-char-write-report.mjs',
+    'generator/scripts/lib/meta-field-regex.mjs',
+    'generator/scripts/lib/unescape-ts-string.mjs',
+  ];
+  try {
+    for (const rel of copied) {
+      const dest = join(root, rel);
+      mkdirSync(dirname(dest), { recursive: true });
+      cpSync(resolve(ROOT, rel), dest);
+    }
+    mkdirSync(join(root, 'content/blog-body/it'), { recursive: true });
+    writeFileSync(join(root, 'content/blog-body/it/one.ts'), 'export const one = true;\n');
+    writeFileSync(
+      join(root, 'content/blog-articles-data.ts'),
+      "export const RAW_ARTICLES = [{ id: 'one', category: 'news', date: '2026-01-01', image: '/images/places/one.webp' }];\n",
+    );
+    writeFileSync(
+      join(root, 'content/blog-meta-it.ts'),
+      "'blog.article.one.title': 'Uno',\n'blog.article.one.excerpt': 'Estratto'\n",
+    );
+
+    const out = join(root, 'out');
+    const result = spawnSync(process.execPath, [join(root, 'scripts/build-blog-index.mjs'), '--out', out], {
+      cwd: root,
+      encoding: 'utf8',
+    });
+    assert.equal(result.status, 1, result.stdout + '\n' + result.stderr);
+    assert.equal(existsSync(out), false, 'la sezione valida non deve lasciare output quando quella successiva fallisce');
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
 });
 
 test('il gate control-character di build-api scende nelle sottocartelle', () => {

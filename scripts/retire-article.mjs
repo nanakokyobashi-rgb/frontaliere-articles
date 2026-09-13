@@ -50,15 +50,18 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { ledgerArticleId } from '../generator/scripts/lib/source-url-ledger.mjs';
+import { writeJsonAtomic } from '../generator/scripts/lib/atomic-write-json.mjs';
 import {
   SECTIONS, LOCALES, IMAGES_LEDGER, IMAGE_CATALOG, RETIRED_LEDGER,
-  seoFilesFor, leftoverSurfacesFor, surfaceArticleIdStatus, SURFACE_ARTICLE_ID_STATUS,
+  seoFilesFor, leftoverSurfacesFor, requiredSurfaceFilesFor,
+  surfaceArticleIdStatus, SURFACE_ARTICLE_ID_STATUS,
 } from './lib/article-surfaces.mjs';
 // La localizzazione dei letterali TS (span dell'array piatto degli id, e la
 // parentesi che chiude davvero quella di apertura) vive in un modulo condiviso:
 // la usa anche `generator/scripts/create-article.mjs`, che lo STESSO array lo
 // rigenera (vedi il file per il perché delle due euristiche cadute).
 import { matchingDelimiter, removeFromIdListLiteral } from './lib/ts-literals.mjs';
+import { removeSeoEntriesFromSource } from './lib/seo-entry.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -105,6 +108,36 @@ function removeSlugRow(file, id) {
   return { changed: true, src: src.replace(rx, ''), slugs };
 }
 
+/** Rimuove la provenienza dello slug per lo stesso id dalla mappa del router. */
+function removeFallbackProvenanceRow(src, file, constName, id) {
+  const declarationAt = src.indexOf(`export const ${constName}`);
+  if (declarationAt === -1) {
+    throw new Error(`${file}: mappa ${constName} non dichiarata`);
+  }
+  const equalsAt = src.indexOf('=', declarationAt);
+  const open = src.indexOf('{', equalsAt);
+  if (equalsAt === -1 || open === -1) {
+    throw new Error(`${file}: mappa ${constName} senza apertura leggibile`);
+  }
+  const close = matchingDelimiter(src, open);
+  if (close === -1) throw new Error(`${file}: graffe sbilanciate nella mappa ${constName}`);
+
+  const bodyStart = open + 1;
+  const body = src.slice(bodyStart, close);
+  const escaped = id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const entry = new RegExp(`^[ \\t]*'${escaped}'\\s*:\\s*\\{`, 'm').exec(body);
+  if (!entry) return { changed: false, src };
+
+  const entryStart = bodyStart + entry.index;
+  const entryOpen = bodyStart + entry.index + entry[0].lastIndexOf('{');
+  const entryClose = matchingDelimiter(src, entryOpen);
+  if (entryClose === -1) throw new Error(`${file}: graffe sbilanciate nella provenienza di ${id}`);
+  let end = entryClose + 1;
+  if (src[end] === ',') end += 1;
+  if (src[end] === '\n') end += 1;
+  return { changed: true, src: src.slice(0, entryStart) + src.slice(end) };
+}
+
 /**
  * Rimuove `'<id>'` da una union di literal spezzata in alias
  * (`type _BlogIdN = 'a' | 'b' | …;`), come `content/blogArticleIds.ts`.
@@ -139,21 +172,9 @@ function removeMetaKeys(file, id) {
   return { changed: out !== src, src: out };
 }
 
-/** Rimuove il blocco `'blog-<id>': { … },` da un file SEO. */
+/** Rimuove tutti i blocchi `'blog-<id>': { … },` da un file SEO. */
 function removeSeoEntry(file, id) {
-  const src = read(file);
-  const needle = `'blog-${id}': {`;
-  const at = src.indexOf(needle);
-  if (at === -1) return { changed: false, src };
-  const open = src.indexOf('{', at);
-  const close = matchingDelimiter(src, open);
-  if (close === -1) throw new Error(`${file}: graffe sbilanciate attorno a blog-${id}`);
-  let start = at;
-  while (start > 0 && (src[start - 1] === ' ' || src[start - 1] === '\t')) start -= 1;
-  let end = close + 1;
-  if (src[end] === ',') end += 1;
-  if (src[end] === '\n') end += 1;
-  return { changed: true, src: src.slice(0, start) + src.slice(end) };
+  return removeSeoEntriesFromSource(read(file), id, file);
 }
 
 /**
@@ -216,6 +237,11 @@ function main() {
 
   const section = findSection(id);
   const cfg = SECTIONS[section];
+  // Missing registry/slug/meta surfaces must stop before any retirement
+  // planning can become a partial write. Keep this preflight before the
+  // dry-run branch too: --dry-run must validate the same required inputs as a
+  // real retirement, not merely avoid persisting an already-invalid plan.
+  requiredSurfaceFilesFor(section);
   const winnerSection = findSection(winner); // esiste? altrimenti throw: mai ritirare verso il nulla
   console.log(`ritiro '${id}' (${section}) → vincitore '${winner}' (${winnerSection})${dryRun ? '  [DRY RUN]' : ''}`);
 
@@ -232,6 +258,20 @@ function main() {
   if (!slugRow.changed) throw new Error(`${cfg.slugDataFile}: nessuna riga per '${id}' — mappa slug già incoerente col registro`);
   let slugDataSrc = slugRow.src;
   planned.push({ file: cfg.slugDataFile, what: `riga slug (${LOCALES.map((l) => slugRow.slugs[l]).join(', ')})` });
+
+  // La provenienza vive accanto alla mappa slug e deve uscire nello stesso
+  // buffer, altrimenti build-api.mjs la pubblica come residuo fantasma dopo
+  // il retirement dell'articolo.
+  const fallbackRow = removeFallbackProvenanceRow(
+    slugDataSrc,
+    cfg.slugDataFile,
+    cfg.fallbackReasonsConstName,
+    id,
+  );
+  if (fallbackRow.changed) {
+    slugDataSrc = fallbackRow.src;
+    planned.push({ file: cfg.slugDataFile, what: 'provenienza fallback slug' });
+  }
 
   // 1b. array letterale piatto degli id (es. `ALL_BLOG_ARTICLE_IDS`), se la
   //     sezione ne ha uno indipendente dalla mappa slug appena ripulita.
@@ -342,7 +382,7 @@ function main() {
     slugs: slugRow.slugs,
   });
   ledger.retired.sort((a, b) => a.id.localeCompare(b.id));
-  writeFileSync(ledgerPath, `${JSON.stringify(ledger, null, 2)}\n`, 'utf-8');
+  writeJsonAtomic(ledgerPath, ledger);
 
   // 12. verifica finale: l'id non deve più comparire da nessuna parte.
   //     Senza questo passo una rimozione parziale esce 0 e ferma il publish

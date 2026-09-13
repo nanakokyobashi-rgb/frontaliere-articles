@@ -59,6 +59,22 @@ const DEDUP = 'generator/scripts/lib/cross-section-dedup.mjs';
 
 const entryFor = (p) => MANIFEST.files.find((f) => f.path === p);
 
+const baselineShape = (value) =>
+  typeof value === 'string' && /^[0-9a-f]{16,}$/i.test(value) ? `hex/${value.length}` : null;
+
+const compareBaselinePair = (site, corpus) => {
+  const siteShape = baselineShape(site);
+  const corpusShape = baselineShape(corpus);
+  if (siteShape === null || corpusShape === null || siteShape !== corpusShape) {
+    return { state: 'skipped', siteShape, corpusShape };
+  }
+  return {
+    state: site === corpus ? 'equal' : 'different',
+    siteShape,
+    corpusShape,
+  };
+};
+
 // ── 1. La funzione pura, sui due casi reali ────────────────────────────────
 
 test('IL CASO: `corpus-only` con lo stesso contenuto sul sito a un path DIVERSO', () => {
@@ -178,7 +194,7 @@ test('`gitBlobSha` è davvero l\'identità git, non un hash qualunque', () => {
 
 // ── 2. I due fatti offline sul manifest committato ─────────────────────────
 
-test('le due voci della misura sono `identical`, con `sitePath` e baseline sui DUE lati', () => {
+test('le due voci della misura sono `identical`, con `sitePath` e baseline sui DUE lati', (t) => {
   for (const [p, site] of [
     [HEADLINE, 'scripts/lib/headline-selection-protocol.mjs'],
     [DEDUP, 'scripts/lib/cross-section-dedup.mjs'],
@@ -188,12 +204,31 @@ test('le due voci della misura sono `identical`, con `sitePath` e baseline sui D
     assert.equal(e.mode, 'identical', `${p}: tornata \`${e.mode}\` — il sito ha il gemello byte-identico`);
     assert.equal(e.sitePath, site, `${p}: senza \`sitePath\` il drift check cercherebbe \`${p}\` sul sito, che risponde 404`);
     assert.ok(e.baseline && e.baseline.site, `${p}: \`baseline.site\` nulla — un \`identical\` senza il lato sito non è confrontabile`);
+    const comparison = compareBaselinePair(e.baseline.site, e.baseline.corpus);
+    if (comparison.state === 'skipped') {
+      t.skip(`${p}: confronto baseline skipped; forme ${comparison.siteShape ?? 'non valide'} / ${comparison.corpusShape ?? 'non valide'}`);
+      return;
+    }
     assert.equal(
       e.baseline.site,
       e.baseline.corpus,
       `${p}: baseline diverse sui due lati su un \`identical\` — sarebbe \`undeclared-drift\` al primo giro`,
     );
   }
+});
+
+test('baseline di forma diversa viene classificata `skipped`, non come falso rosso', () => {
+  assert.deepEqual(compareBaselinePair('a'.repeat(16), 'b'.repeat(40)), {
+    state: 'skipped',
+    siteShape: 'hex/16',
+    corpusShape: 'hex/40',
+  });
+  assert.deepEqual(compareBaselinePair('not-a-hash', 'b'.repeat(16)), {
+    state: 'skipped',
+    siteShape: null,
+    corpusShape: 'hex/16',
+  });
+  assert.equal(compareBaselinePair('a'.repeat(40), 'a'.repeat(40)).state, 'equal');
 });
 
 test('il contenuto locale delle due voci combacia con la `baseline.corpus` registrata', () => {

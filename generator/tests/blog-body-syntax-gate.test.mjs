@@ -30,23 +30,29 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 import {
   BLOG_BODY_ROOTS,
-  MIN_FILES_TOTAL,
   collectTypeScriptFiles,
+  deriveFloorModel,
   filesToScan,
   floorViolations,
   formatOffender,
   loadEsbuild,
   parseChangedFiles,
+  run,
 } from '../../scripts/ci/check-blog-body-syntax.mjs';
+import { historyRevisionFromEnv } from '../../scripts/lib/corpus-floors.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../..');
 const GATE = path.join(ROOT, 'scripts/ci/check-blog-body-syntax.mjs');
 const WORKFLOW = path.join(ROOT, '.github/workflows/publish-api.yml');
+const GENERATOR_WORKFLOW = path.join(ROOT, '.github/workflows/generator-ci.yml');
+const CONTENT_GATES_WORKFLOW = path.join(ROOT, '.github/workflows/content-gates-main.yml');
+const TESTS_WORKFLOW = path.join(ROOT, '.github/workflows/tests.yml');
 
 // Questa e' la forma unica della guardia: deve riconoscere import/export
 // statici, anche braced su piu' righe, ma non una stringa `esbuild` in coda a
@@ -94,53 +100,322 @@ function collectLocalModuleSources(entry) {
 // ── I pavimenti ─────────────────────────────────────────────────────────────
 
 test('conteggi realistici non producono violazioni', () => {
-  // I numeri misurati su origin/main il 2026-08-09.
-  const perRoot = [
-    { rel: 'content/blog-body', minFiles: 3000, count: 12548 },
-    { rel: 'content/blog-body-ch', minFiles: 1000, count: 2596 },
-  ];
+  const model = deriveFloorModel(ROOT);
+  const perRoot = model.perRoot.map((r) => ({ ...r, count: r.expectedFiles }));
   assert.deepEqual(floorViolations(perRoot), []);
 });
 
 test('un checkout sparse (zero file ovunque) fa fallire il gate', () => {
   // In un worktree sparse `content/` non esiste affatto. E' il falso verde piu'
   // facile da produrre su questo repo, e il gate deve rifiutarsi di dirsi verde.
-  const perRoot = BLOG_BODY_ROOTS.map((r) => ({ ...r, count: 0 }));
+  const model = deriveFloorModel(ROOT);
+  const perRoot = model.perRoot.map((r) => ({ ...r, count: 0 }));
   const v = floorViolations(perRoot);
   assert.equal(v.length, 3, 'due radici a zero + il totale a zero');
   assert.ok(v.some((m) => m.startsWith('TOTALE:')), 'il pavimento totale deve scattare');
 });
 
 test('UNA sola radice a zero fa fallire, anche se il totale abbonda', () => {
-  // È l'asserzione che il pavimento sul totale NON puo' fare, ed e' esattamente
-  // il buco del 2026-07-29: blog-body da solo fa 12.5k file, quindi qualunque
-  // soglia sul totale resta soddisfatta anche se blog-body-ch risolve a zero —
-  // cartella rinominata, symlink orfano — e la sezione svizzera tornerebbe
-  // scoperta con la CI verde.
-  const perRoot = [
-    { rel: 'content/blog-body', minFiles: 3000, count: 12548 },
-    { rel: 'content/blog-body-ch', minFiles: 1000, count: 0 },
-  ];
+  // Il pavimento per radice deve vedere la sezione svizzera sparire anche se
+  // l'altra radice resta piena; il totale derivato deve inoltre vedere che la
+  // fotografia complessiva e' incompleta.
+  const model = deriveFloorModel(ROOT);
+  const perRoot = model.perRoot.map((r, index) => ({
+    ...r,
+    count: index === 0 ? r.expectedFiles : 0,
+  }));
   const v = floorViolations(perRoot);
-  assert.equal(v.length, 1);
-  assert.match(v[0], /^content\/blog-body-ch: 0 file scanditi/);
+  assert.equal(v.length, 2);
+  assert.ok(v.some((m) => /^content\/blog-body-ch: 0 file scanditi/.test(m)));
   assert.ok(
-    !v.some((m) => m.startsWith('TOTALE:')),
-    'il totale qui e\' soddisfatto: e\' proprio il motivo per cui il pavimento per radice esiste',
+    v.some((m) => m.startsWith('TOTALE:')),
+    'il totale derivato deve scattare quando manca una sezione intera',
   );
 });
 
-test('il pavimento totale e\' almeno 3000 e ogni radice ne ha uno', () => {
-  assert.ok(MIN_FILES_TOTAL >= 3000, `pavimento totale ${MIN_FILES_TOTAL}: troppo basso`);
-  assert.ok(BLOG_BODY_ROOTS.length >= 2, 'entrambe le radici devono essere sorvegliate');
-  for (const r of BLOG_BODY_ROOTS) {
-    assert.ok(r.minFiles > 0, `${r.rel}: un pavimento a 0 non e\' un pavimento`);
-  }
+test('i pavimenti derivano dai registri moltiplicati per i locali presenti', () => {
+  assert.equal(BLOG_BODY_ROOTS.length, 2, 'entrambe le radici devono essere sorvegliate');
   assert.deepEqual(
     BLOG_BODY_ROOTS.map((r) => r.rel).sort(),
     ['content/blog-body', 'content/blog-body-ch'],
     'le due radici dei corpi di questo repo',
   );
+  assert.ok(BLOG_BODY_ROOTS.every((r) => r.section), 'ogni radice deve avere una sezione derivabile');
+  const model = deriveFloorModel(ROOT);
+  assert.ok(model.perRoot.every((r) => r.expectedFiles > 0));
+  assert.equal(
+    model.expectedTotal,
+    model.perRoot.reduce((sum, r) => sum + r.expectedFiles, 0),
+  );
+  const source = fs.readFileSync(GATE, 'utf8');
+  assert.doesNotMatch(source, /MIN_FILES_TOTAL|\bminFiles\s*:/, 'il gate non deve contenere soglie assolute');
+});
+
+test('il modello non conta la directory del gate e rifiuta un riferimento assente', async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-body-floor-reference-'));
+  try {
+    const content = path.join(dir, 'content');
+    fs.mkdirSync(path.join(content, 'blog-body', 'it'), { recursive: true });
+    fs.writeFileSync(path.join(content, 'blog-body', 'it', 'extra.ts'), 'export default ``;');
+    fs.writeFileSync(path.join(content, 'blog-articles-data.ts'), "id: 'a'\nid: 'b'\n");
+    fs.writeFileSync(path.join(content, 'swiss-articles-data.ts'), "id: 's'\n");
+    for (const locale of ['it', 'en', 'de', 'fr']) {
+      fs.writeFileSync(
+        path.join(content, `blog-meta-${locale}.ts`),
+        "'blog.article.a.title': 'A',\n'blog.article.b.title': 'B',\n",
+      );
+      fs.writeFileSync(
+        path.join(content, `blog-meta-ch-${locale}.ts`),
+        "'blog.article.s.title': 'S',\n",
+      );
+    }
+
+    const model = deriveFloorModel(dir, {
+      previousRegistryCounts: { frontaliere: 2, svizzera: 1 },
+    });
+    assert.deepEqual(model.perRoot.map((r) => r.expectedFiles), [8, 4]);
+
+    const missing = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-body-floor-missing-'));
+    try {
+      fs.mkdirSync(path.join(missing, 'content'), { recursive: true });
+      const errors = [];
+      const status = await run({ root: missing, log() {}, error: (message) => errors.push(message), env: {} });
+      assert.equal(status, 1);
+      assert.match(errors.join('\n'), /riferimento del pavimento assente/);
+      assert.throws(() => deriveFloorModel(missing), /content\/blog-articles-data\.ts/);
+    } finally {
+      fs.rmSync(missing, { recursive: true, force: true });
+    }
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('un registro troncato viene confrontato con il high-water della revisione precedente', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-body-floor-history-'));
+  const git = (...args) => execFileSync('git', ['-C', dir, ...args], {
+    encoding: 'utf8',
+    stdio: ['ignore', 'pipe', 'ignore'],
+  }).trim();
+  const writeCorpus = (frontIds, swissIds) => {
+    fs.writeFileSync(
+      path.join(dir, 'content', 'blog-articles-data.ts'),
+      frontIds.map((id) => `id: '${id}'`).join('\n') + '\n',
+    );
+    fs.writeFileSync(
+      path.join(dir, 'content', 'swiss-articles-data.ts'),
+      swissIds.map((id) => `id: '${id}'`).join('\n') + '\n',
+    );
+    for (const locale of ['it', 'en', 'de', 'fr']) {
+      fs.writeFileSync(
+        path.join(dir, 'content', `blog-meta-${locale}.ts`),
+        frontIds.map((id) => `'blog.article.${id}.title': 'A',`).join('\n') + '\n',
+      );
+      fs.writeFileSync(
+        path.join(dir, 'content', `blog-meta-ch-${locale}.ts`),
+        swissIds.map((id) => `'blog.article.${id}.title': 'S',`).join('\n') + '\n',
+      );
+    }
+  };
+
+  try {
+    fs.mkdirSync(path.join(dir, 'content'), { recursive: true });
+    git('init', '-q');
+    git('config', 'user.email', 'test@example.invalid');
+    git('config', 'user.name', 'test');
+    writeCorpus(Array.from({ length: 10 }, (_, i) => `front-${i}`), ['swiss-0']);
+    git('add', 'content');
+    git('commit', '-qm', 'complete corpus');
+    const previous = git('rev-parse', 'HEAD');
+    writeCorpus(Array.from({ length: 5 }, (_, i) => `front-${i}`), ['swiss-0']);
+    git('add', 'content');
+    git('commit', '-qm', 'truncated corpus');
+
+    assert.throws(
+      () => deriveFloorModel(dir, { previousRevision: previous }),
+      (error) => /registro troncato/.test(error.message) && /10 nella revisione Git precedente/.test(error.message),
+    );
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('un push multi-commit usa la base dell\'evento, non il commit intermedio', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-body-floor-multi-push-'));
+  const git = (...args) => execFileSync('git', ['-C', dir, ...args], { encoding: 'utf8' }).trim();
+  const writeCorpus = (frontIds, swissIds) => {
+    fs.writeFileSync(
+      path.join(dir, 'content', 'blog-articles-data.ts'),
+      frontIds.map((id) => `id: '${id}'`).join('\n') + '\n',
+    );
+    fs.writeFileSync(
+      path.join(dir, 'content', 'swiss-articles-data.ts'),
+      swissIds.map((id) => `id: '${id}'`).join('\n') + '\n',
+    );
+    for (const locale of ['it', 'en', 'de', 'fr']) {
+      fs.writeFileSync(
+        path.join(dir, 'content', `blog-meta-${locale}.ts`),
+        frontIds.map((id) => `'blog.article.${id}.title': 'A',`).join('\n') + '\n',
+      );
+      fs.writeFileSync(
+        path.join(dir, 'content', `blog-meta-ch-${locale}.ts`),
+        swissIds.map((id) => `'blog.article.${id}.title': 'S',`).join('\n') + '\n',
+      );
+    }
+  };
+
+  try {
+    fs.mkdirSync(path.join(dir, 'content'), { recursive: true });
+    git('init', '-q');
+    git('config', 'user.email', 'test@example.invalid');
+    git('config', 'user.name', 'test');
+
+    writeCorpus(Array.from({ length: 10 }, (_, i) => `front-${i}`), ['swiss-0']);
+    git('add', 'content');
+    git('commit', '-qm', 'published base');
+    const pushBase = git('rev-parse', 'HEAD');
+
+    writeCorpus(Array.from({ length: 5 }, (_, i) => `front-${i}`), ['swiss-0']);
+    git('add', 'content');
+    git('commit', '-qm', 'intermediate truncated corpus');
+    const intermediate = git('rev-parse', 'HEAD');
+
+    // Confrontare con l'intermedio e' il bug che il push multi-commit rendeva
+    // possibile: la superficie finale sembra coerente con quella già ridotta.
+    git('commit', '--allow-empty', '-qm', 'finalize push');
+    assert.doesNotThrow(() => deriveFloorModel(dir, { previousRevision: intermediate }));
+
+    // `github.event.before` punta invece alla base pubblicata prima dell'intero
+    // push, quindi il troncamento intermedio resta visibile e bloccante.
+    assert.throws(
+      () => deriveFloorModel(dir, { previousRevision: pushBase }),
+      (error) => error.code === 'TRUNCATED_CORPUS'
+        && /10 nella revisione Git precedente/.test(error.message),
+    );
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('la base storica seleziona esplicitamente push, PR e dispatch', () => {
+  assert.equal(
+    historyRevisionFromEnv({
+      PREFLIGHT_EVENT_NAME: 'push',
+      PREFLIGHT_PUSH_BASE_REVISION: 'push-base',
+    }),
+    'push-base',
+  );
+  assert.equal(
+    historyRevisionFromEnv({
+      PREFLIGHT_EVENT_NAME: 'pull_request',
+      PREFLIGHT_PR_BASE_REVISION: 'pr-base',
+    }),
+    'pr-base',
+  );
+  assert.equal(
+    historyRevisionFromEnv({
+      PREFLIGHT_EVENT_NAME: 'push',
+      PREFLIGHT_PUSH_BASE_REVISION: '0'.repeat(40),
+    }),
+    null,
+    'una base push nulla resta esplicita e non ricade su HEAD^',
+  );
+  assert.equal(
+    historyRevisionFromEnv({
+      PREFLIGHT_EVENT_NAME: 'workflow_dispatch',
+      PREFLIGHT_PUSH_BASE_REVISION: 'ignored',
+    }),
+    undefined,
+    'solo dispatch/uso locale autorizza il fallback locale a HEAD^',
+  );
+});
+
+test('un checkout shallow e una storia assente restano fail-closed', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-body-floor-shallow-'));
+  const git = (...args) => execFileSync('git', ['-C', dir, ...args], { encoding: 'utf8' }).trim();
+  try {
+    const content = path.join(dir, 'content');
+    fs.mkdirSync(content, { recursive: true });
+    fs.writeFileSync(path.join(content, 'blog-articles-data.ts'), "id: 'front-0'\n");
+    fs.writeFileSync(path.join(content, 'swiss-articles-data.ts'), "id: 'swiss-0'\n");
+    for (const locale of ['it', 'en', 'de', 'fr']) {
+      fs.writeFileSync(path.join(content, `blog-meta-${locale}.ts`), "'blog.article.front-0.title': 'A',\n");
+      fs.writeFileSync(path.join(content, `blog-meta-ch-${locale}.ts`), "'blog.article.swiss-0.title': 'S',\n");
+    }
+    git('init', '-q');
+    git('config', 'user.email', 'test@example.invalid');
+    git('config', 'user.name', 'test');
+    git('add', 'content');
+    git('commit', '-qm', 'complete corpus');
+    fs.writeFileSync(path.join(dir, '.git', 'shallow'), `${git('rev-parse', 'HEAD')}\n`);
+
+    assert.throws(
+      () => deriveFloorModel(dir),
+      (error) => error.code === 'MISSING_CORPUS_HISTORY' && /shallow/.test(error.message),
+    );
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('i gate realistici fanno checkout della storia completa richiesta dal floor', () => {
+  for (const workflow of [GENERATOR_WORKFLOW, CONTENT_GATES_WORKFLOW, TESTS_WORKFLOW]) {
+    assert.match(
+      fs.readFileSync(workflow, 'utf8'),
+      /uses: actions\/checkout@v5\s+with:\s+(?:#.*\n\s*)*fetch-depth:\s*0/,
+      `${path.basename(workflow)} deve rendere verificabile la revisione precedente`,
+    );
+  }
+});
+
+test('i workflow passano al preflight la base dell\'evento', () => {
+  const publish = fs.readFileSync(WORKFLOW, 'utf8');
+  assert.match(publish, /PREFLIGHT_EVENT_NAME:\s*\$\{\{\s*github\.event_name\s*\}\}/);
+  assert.match(publish, /PREFLIGHT_PUSH_BASE_REVISION:\s*\$\{\{\s*github\.event\.before\s*\}\}/);
+
+  const contentGates = fs.readFileSync(CONTENT_GATES_WORKFLOW, 'utf8');
+  assert.match(contentGates, /PREFLIGHT_EVENT_NAME:\s*\$\{\{\s*github\.event_name\s*\}\}/);
+  assert.match(contentGates, /PREFLIGHT_PUSH_BASE_REVISION:\s*\$\{\{\s*github\.event\.before\s*\}\}/);
+
+  for (const workflow of [GENERATOR_WORKFLOW, TESTS_WORKFLOW]) {
+    const src = fs.readFileSync(workflow, 'utf8');
+    assert.match(src, /PREFLIGHT_EVENT_NAME:\s*\$\{\{\s*github\.event_name\s*\}\}/);
+    assert.match(src, /PREFLIGHT_PUSH_BASE_REVISION:\s*\$\{\{\s*github\.event\.before\s*\}\}/);
+    assert.match(src, /PREFLIGHT_PR_BASE_REVISION:\s*\$\{\{\s*github\.event\.pull_request\.base\.sha\s*\}\}/);
+  }
+});
+
+test('una meta con cardinalità plausibile ma ID sostituito viene rifiutata', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-body-floor-meta-identity-'));
+  try {
+    const content = path.join(dir, 'content');
+    fs.mkdirSync(content, { recursive: true });
+    fs.writeFileSync(path.join(content, 'blog-articles-data.ts'), "id: 'a'\nid: 'b'\n");
+    fs.writeFileSync(path.join(content, 'swiss-articles-data.ts'), "id: 's'\n");
+    for (const locale of ['it', 'en', 'de', 'fr']) {
+      fs.writeFileSync(
+        path.join(content, `blog-meta-${locale}.ts`),
+        locale === 'en'
+          ? "'blog.article.a.title': 'A',\n'blog.article.replacement.title': 'X',\n"
+          : "'blog.article.a.title': 'A',\n'blog.article.b.title': 'B',\n",
+      );
+      fs.writeFileSync(path.join(content, `blog-meta-ch-${locale}.ts`), "'blog.article.s.title': 'S',\n");
+    }
+
+    assert.throws(
+      () => deriveFloorModel(dir),
+      (error) => error.code === 'MISSING_CORPUS_HISTORY' && /non e' un checkout Git/.test(error.message),
+    );
+    assert.throws(
+      () => deriveFloorModel(dir, {
+        previousRegistryCounts: { frontaliere: 2, svizzera: 1 },
+      }),
+      (error) => /blog-meta-en\.ts: meta incompleta/.test(error.message)
+        && /mancano 1: b/.test(error.message),
+    );
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
 });
 
 // ── La raccolta dei file ────────────────────────────────────────────────────
@@ -348,6 +623,11 @@ test('publish-api.yml scopa il preflight ai corpi toccati, con fallback esplicit
     /PREFLIGHT_CHANGED_FILES:\s*\$\{\{\s*steps\.changed-bodies\.outputs\.changed-files\s*\}\}/,
     'il preflight non riceve la lista dei corpi cambiati calcolata dallo step precedente',
   );
+  assert.match(
+    src,
+    /PREFLIGHT_PUSH_BASE_REVISION:\s*\$\{\{\s*github\.event\.before\s*\}\}/,
+    'il preflight deve confrontare l\'intero push con la base pubblicata',
+  );
 
   // Il fallback su scansione piena, mai su lista vuota, e' l'invariante che
   // impedisce a un corpo nuovo rotto di passare inosservato quando il diff
@@ -385,8 +665,17 @@ test('scansione reale dei corpi (solo se PREFLIGHT_ESBUILD_DIR e\' impostata)', 
     return;
   }
   const esbuild = loadEsbuild();
-  const files = BLOG_BODY_ROOTS.flatMap((r) => collectTypeScriptFiles(path.join(ROOT, r.rel)));
-  assert.ok(files.length > MIN_FILES_TOTAL, `solo ${files.length} corpi trovati`);
+  const model = deriveFloorModel(ROOT);
+  const perRoot = model.perRoot.map((r) => ({
+    ...r,
+    files: collectTypeScriptFiles(path.join(ROOT, r.rel)),
+  }));
+  const files = perRoot.flatMap((r) => r.files);
+  assert.deepEqual(
+    floorViolations(perRoot.map((r) => ({ ...r, count: r.files.length }))),
+    [],
+    `pavimenti derivati non soddisfatti: ${files.length} corpi trovati`,
+  );
 
   const failures = [];
   for (let i = 0; i < files.length; i += 500) {

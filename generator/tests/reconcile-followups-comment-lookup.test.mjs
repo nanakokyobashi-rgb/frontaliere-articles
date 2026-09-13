@@ -10,6 +10,7 @@ import { fileURLToPath } from 'node:url';
 import {
   decideReconcileAction,
   isCommentLookupDegraded,
+  parseIssueCommentsResponse,
 } from '../../scripts/ci/reconcile-followups.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -37,4 +38,13 @@ test('#1078 item 3: i fallimenti dei commenti hanno una soglia osservabile', () 
   );
   assert.match(SOURCE, /commentLookupFailed\+\+/);
   assert.match(SOURCE, /process\.exitCode = 1/);
+});
+
+test('#8034 item 1: stdout vuoto riuscito significa lista commenti vuota', () => {
+  assert.deepEqual(parseIssueCommentsResponse(''), []);
+  assert.deepEqual(parseIssueCommentsResponse('  \n'), []);
+  assert.deepEqual(parseIssueCommentsResponse('{"comments":[]}'), []);
+  assert.deepEqual(parseIssueCommentsResponse('{"comments":[{"body":"x"}]}'), [{ body: 'x' }]);
+  assert.equal(parseIssueCommentsResponse(null), null);
+  assert.equal(parseIssueCommentsResponse('{not-json'), null);
 });

@@ -1,22 +1,5 @@
 {
   "keywords": [
-    "imposta di successione e donazione canton Obvaldo aliquote",
-    "asilo nido e custodia bambini canton San Gallo costi",
-    "vivere a Cusino e lavorare in Ticino da frontaliere",
-    "comprare casa canton San Gallo prezzi e mutuo ipotecario",
-    "mercato degli affitti canton San Gallo canoni medi e diritto di locazione",
-    "naturalizzazione canton San Gallo requisiti e procedura",
-    "avs e prestazioni complementari canton San Gallo cassa di compensazione",
-    "abbonamenti trasporti pubblici canton San Gallo zone e tariffe",
-    "premi cassa malati canton Vaud e riduzione premi",
-    "vivere a San Nazzaro Val Cavargna e lavorare in Ticino da frontaliere",
-    "vivere a Veleso e lavorare in Ticino da frontaliere",
-    "vivere a Veniano e lavorare in Ticino da frontaliere",
-    "vivere a Brenta e lavorare in Ticino da frontaliere",
-    "permesso di dimora B canton Nidvaldo requisiti e rinnovo",
-    "permesso di domicilio C canton Nidvaldo requisiti e domanda",
-    "aprire un'attività canton San Gallo registro di commercio e costi",
-    "permesso di domicilio C canton Vaud requisiti e domanda",
     "vivere a Arizzano e lavorare in Ticino da frontaliere",
     "frontaliere lavoro da remoto terzo paese vacanza fiscalità",
     "cercare lavoro in svizzera guida pratica 2026 canton Zurigo",
@@ -499,7 +482,24 @@
     "vivere a Tremezzina e lavorare in Ticino da frontaliere",
     "avs e prestazioni complementari canton Obvaldo cassa di compensazione",
     "permesso di dimora B canton Giura requisiti e rinnovo",
-    "permesso di domicilio C canton Giura requisiti e domanda"
+    "permesso di domicilio C canton Giura requisiti e domanda",
+    "patente di guida canton Obvaldo conversione ed esami",
+    "imposta di successione e donazione canton Obvaldo aliquote",
+    "vivere a Laveno-Mombello e lavorare in Ticino da frontaliere",
+    "vivere a Val Rezzo e lavorare in Ticino da frontaliere",
+    "vivere a Duno e lavorare in Ticino da frontaliere",
+    "asilo nido e custodia bambini canton San Gallo costi",
+    "comprare casa canton San Gallo prezzi e mutuo ipotecario",
+    "mercato degli affitti canton San Gallo canoni medi e diritto di locazione",
+    "avs e prestazioni complementari canton San Gallo cassa di compensazione",
+    "abbonamenti trasporti pubblici canton San Gallo zone e tariffe",
+    "premi cassa malati canton Vaud e riduzione premi",
+    "permesso L di breve durata canton Giura validità e proroga",
+    "sistema scolastico canton Giura iscrizione e cicli",
+    "apprendistato e formazione professionale canton Giura",
+    "permesso di dimora B canton Nidvaldo requisiti e rinnovo",
+    "vivere a Vertemate con Minoprio e lavorare in Ticino da frontaliere",
+    "vivere a Azzate e lavorare in Ticino da frontaliere"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -765,6 +765,9 @@
     "imposta di successione e donazione canton Neuchâtel aliquote": 1,
     "imposte cantonali canton Ginevra aliquote e deduzioni": 1,
     "vivere a Fénis e lavorare in Vallese da frontaliere": 2,
-    "frontaliere tassazione 2026 dopo nuovo accordo fiscale": 3
+    "frontaliere tassazione 2026 dopo nuovo accordo fiscale": 3,
+    "vivere a Laveno-Mombello e lavorare in Ticino da frontaliere": 2,
+    "vivere a Val Rezzo e lavorare in Ticino da frontaliere": 1,
+    "vivere a Duno e lavorare in Ticino da frontaliere": 1
   }
 }

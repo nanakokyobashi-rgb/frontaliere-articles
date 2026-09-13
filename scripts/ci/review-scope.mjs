@@ -198,9 +198,12 @@ function fetchChangedFiles(repo, pr) {
 
 function fetchRepositoryPaths(repo, pr) {
   try {
-    const base = gh(['api', `repos/${repo}/pulls/${pr}`, '--jq', '.base.sha'], { json: false }).trim();
-    if (!/^[0-9a-f]{40}$/iu.test(base)) return null;
-    const tree = gh(['api', `repos/${repo}/git/trees/${base}?recursive=1`]);
+    // Citations are resolved against the tree that the reviewer actually
+    // inspected. The base tree omits files added by the PR and made every
+    // Important on a new corpus script look like an unresolvable finding.
+    const head = gh(['api', `repos/${repo}/pulls/${pr}`, '--jq', '.head.sha'], { json: false }).trim();
+    if (!/^[0-9a-f]{40}$/iu.test(head)) return null;
+    const tree = gh(['api', `repos/${repo}/git/trees/${head}?recursive=1`]);
     if (tree?.truncated || !Array.isArray(tree?.tree)) return null;
     return tree.tree
       .filter((item) => item.type === 'blob' && item.path)

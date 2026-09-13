@@ -61,8 +61,9 @@
  * disponibile; la funzione pura ricade su `updatedAt` per le risposte legacy,
  * mentre il percorso runtime salta in modo fail-safe se la timeline non e'
  * leggibile.
- * Un conflitto lasciato in piedi costa una run in piu' al giro successivo; una
- * rimozione sbagliata cancella l'instradamento di una issue.
+ * Un conflitto fresco resta fuori dal DRAIN nello stesso tick e viene
+ * rivalutato al giro successivo; una rimozione sbagliata cancella
+ * l'instradamento di una issue.
  *
  * Env:
  *   GH_TOKEN     richiesto. Deliberatamente il GITHUB_TOKEN e non il PAT: qui
@@ -81,6 +82,7 @@ import { execFileSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { lastLabelEventAt } from './followup-drainer.mjs';
+import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
 
 /**
  * Le coppie attiva/coda del ciclo. Una issue non deve MAI portarle entrambe:
@@ -93,6 +95,13 @@ export const ROUTE_CONFLICTS = Object.freeze([
   Object.freeze({ active: 'agent:fix', queued: 'agent:fix-queued' }),
   Object.freeze({ active: 'agent:decompose', queued: 'agent:decompose-queued' }),
 ]);
+
+export function parseMinAgeSec(raw, fallback = 120) {
+  return parsePositiveNum(raw, fallback, {
+    label: 'MIN_AGE_SEC',
+    integer: true,
+  });
+}
 
 const labelNames = (iss) => (iss?.labels || []).map((l) => (typeof l === 'string' ? l : l?.name)).filter(Boolean);
 
@@ -201,7 +210,7 @@ function main() {
   const iOnly = argv.indexOf('--issue');
   const only = iOnly >= 0 ? Number(argv[iOnly + 1]) : 0;
   const dry = ['1', 'true'].includes(String(process.env.DRY_RUN || '').toLowerCase());
-  const minAgeSec = Number(process.env.MIN_AGE_SEC || 120);
+  const minAgeSec = parseMinAgeSec(process.env.MIN_AGE_SEC);
 
   if (iOnly >= 0 && (!Number.isInteger(only) || only <= 0)) {
     console.error('::error::--issue richiede un numero intero positivo → nessuna riconciliazione.');
@@ -210,7 +219,7 @@ function main() {
   }
 
   const todo = reconciliations(fetchCandidates(only), {
-    minAgeSec: Number.isFinite(minAgeSec) ? minAgeSec : 120,
+    minAgeSec,
   });
   if (!todo.length) {
     console.log('Nessun doppio instradamento fermo. ✅');

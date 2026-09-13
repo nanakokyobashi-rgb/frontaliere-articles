@@ -40,7 +40,7 @@
  * Zero dipendenze npm: `create-article.mjs` la importa a caldo e i workflow che
  * la leggono girano anche PRIMA di `npm ci`.
  */
-import { mkdirSync, realpathSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, realpathSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import {
   inputCapVetoSummary,
@@ -50,17 +50,78 @@ import {
   quotaDeferralShare,
 } from './exhaustion-disposition.mjs';
 
+const REPO_MARKER = 'package.json';
+const EXPECTED_REPO_NAME = '@frontaliereticino/articles';
+
+function hasExpectedRepoMarker(root) {
+  try {
+    const packageJson = JSON.parse(readFileSync(path.join(root, REPO_MARKER), 'utf8'));
+    return packageJson?.name === EXPECTED_REPO_NAME;
+  } catch {
+    return false;
+  }
+}
+
 /**
- * La radice del workspace, dedotta dalla posizione di questo modulo
- * (`generator/scripts/lib/` -> repo). In CI coincide con `$GITHUB_WORKSPACE`,
- * cioe' con l'albero su cui lo step di generazione fa `git add -A`.
+ * La radice del workspace arriva dal runner quando disponibile. Il fallback
+ * dalla posizione del modulo resta utile in locale; entrambe le fonti vengono
+ * accettate solo se puntano davvero al corpus: copiare/spostare questo file in
+ * una directory temporanea non deve silenziosamente proteggere una radice
+ * sbagliata.
  */
-const WORKSPACE_ROOT = path.resolve(import.meta.dirname, '..', '..', '..');
+function resolveWorkspaceRoot() {
+  const configured = process.env.GITHUB_WORKSPACE?.trim();
+  const root = configured
+    ? path.resolve(configured)
+    : path.resolve(import.meta.dirname, '..', '..', '..');
+  if (!hasExpectedRepoMarker(root)) {
+    const source = configured ? 'GITHUB_WORKSPACE' : 'workspace fallback';
+    throw new Error(
+      `run card: ${source} inattendibile (${root}), manca il marcatore repo ${REPO_MARKER}`,
+    );
+  }
+  return root;
+}
+
+/**
+ * La radice del workspace, dedotta dal runner o dalla posizione del modulo.
+ * In CI il primo ramo coincide con l'albero su cui lo step fa `git add -A`.
+ */
+const WORKSPACE_ROOT = resolveWorkspaceRoot();
 
 /** La stessa radice dopo i symlink, per non mancare un target gia' realpathato. */
 const WORKSPACE_ROOT_REAL = (() => {
   try { return realpathSync(WORKSPACE_ROOT); } catch { return WORKSPACE_ROOT; }
 })();
+
+/**
+ * Risolve anche un target che ancora non esiste: `writeRunCard` crea le
+ * directory dopo il guard, quindi `realpathSync(target)` da solo non vede i
+ * symlink gia' presenti nel prefisso.
+ */
+function realpathWithMissingTail(target) {
+  let current = target;
+  const tail = [];
+  while (true) {
+    try {
+      const real = realpathSync(current);
+      return path.join(real, ...tail.reverse());
+    } catch {
+      const parent = path.dirname(current);
+      if (parent === current) return target;
+      tail.push(path.basename(current));
+      current = parent;
+    }
+  }
+}
+
+function runnerTempRoots() {
+  const configured = process.env.RUNNER_TEMP?.trim();
+  if (!configured) return [];
+  const root = path.resolve(configured);
+  const real = realpathWithMissingTail(root);
+  return [...new Set([root, real])];
+}
 
 /**
  * `true` se `target` (assoluto) sta sotto `root`. Il confronto e' per SEGMENTI:
@@ -265,6 +326,8 @@ export function normalizeRunCard(card) {
  */
 export function writeRunCard(file, report) {
   const target = path.resolve(file);
+  const targetReal = realpathWithMissingTail(target);
+  const workspaceRoots = [WORKSPACE_ROOT, WORKSPACE_ROOT_REAL];
   // L'INVARIANTE STA QUI, NON NEL COMMENTO SOPRA. Fino a #922 il «non scrive
   // niente sotto una radice pubblicata» si fondava sul fatto che il workflow
   // punti la card in `$RUNNER_TEMP`: una prosa vera oggi e falsificabile da
@@ -277,11 +340,19 @@ export function writeRunCard(file, report) {
   // Il chiamante (`create-article.mjs`) avvolge questa chiamata in try/catch e
   // logga: un target sbagliato diventa un avviso rumoroso e la run prosegue,
   // che e' esattamente il baratto giusto per uno strumento diagnostico.
-  if (isInside(WORKSPACE_ROOT, target) || isInside(WORKSPACE_ROOT_REAL, target)) {
+  if (workspaceRoots.some((root) => isInside(root, target) || isInside(root, targetReal))) {
     throw new Error(
       `run card: target dentro il workspace (${target}). La card deve stare fuori`
       + " dall'albero del repo — in CI $RUNNER_TEMP/generate-diagnostics — o il"
       + ' `git add -A` dello step di commit la porta su main.',
+    );
+  }
+  const tempRoots = runnerTempRoots();
+  if (tempRoots.length > 0
+    && !tempRoots.some((root) => isInside(root, target) || isInside(root, targetReal))) {
+    throw new Error(
+      `run card: target fuori da RUNNER_TEMP (${target}). La card deve stare sotto`
+      + ' `$RUNNER_TEMP/generate-diagnostics`.',
     );
   }
   mkdirSync(path.dirname(target), { recursive: true });
@@ -417,7 +488,9 @@ export function summariseRunCards(cards) {
     // pavimento senza mai arrivare al confronto — contarla come «pareggio»
     // gonfierebbe il numeratore con le cascate su cui la soglia non decide.
     const votedTransient = num(inputCapDecision.votedTransient ?? share.votedTransient) ?? netTransient;
-    const votedPersistent = num(inputCapDecision.persistent ?? share.persistent) ?? netPersistent;
+    const votedPersistent = num(inputCapDecision.votedPersistent ?? share.votedPersistent)
+      ?? num(inputCapDecision.persistent ?? share.persistent)
+      ?? netPersistent;
     if (votedTransient + votedPersistent > 0 && Math.abs(votedTransient - votedPersistent) <= 1) {
       out.nearMajorityTie += 1;
     }

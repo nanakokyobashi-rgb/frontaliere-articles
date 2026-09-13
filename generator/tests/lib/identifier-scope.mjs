@@ -19,8 +19,11 @@
  * Qui il pin cambia unita' di misura: non la stringa `.add(`, ma **ogni
  * riferimento all'identificatore**, vincolato a un'allowlist esplicita di
  * funzioni. Alias, bind e passaggio a una helper devono tutti nominare
- * `_dirtyModels` almeno una volta, quindi cadono tutti dentro la stessa rete,
- * e un riferimento nuovo in una funzione nuova e' rosso per default: chi lo
+ * `_dirtyModels` almeno una volta, quindi cadono tutti dentro la stessa rete.
+ * Il lettore segue anche l'alias assegnato con `const`/`let`: il suo uso viene
+ * riportato come riferimento al binding originale, cosi' il vincolo sulla
+ * forma della mutazione non puo' restare verde dentro un lettore ammesso.
+ * Un riferimento nuovo in una funzione nuova e' rosso per default: chi lo
  * aggiunge deve allargare l'allowlist a mano, cioe' decidere consapevolmente.
  *
  * ## Perche' un lettore a stati e non una regex
@@ -353,32 +356,82 @@ function maskNonCode(src, { preserveStrings = false } = {}) {
  * livello di carattere (anche quando sono in coda a una riga), mentre
  * `codeText` conserva solo il codice per non contare un identificatore dentro
  * una stringa. `text` conserva le stringhe statiche necessarie a riconoscere
- * una mutazione computed come `_dirtyModels['add'](`.
+ * una mutazione computed come `_dirtyModels['add'](`. `bindingName` dice quale
+ * nome del binding ha prodotto la riga: `name` per un riferimento diretto,
+ * oppure l'alias seguito dal lettore.
  *
  * `foo._dirtyModels` non conta: e' la proprieta' di qualcun altro, non questo
  * binding di modulo.
  *
  * @param {string} src
  * @param {string} name
- * @returns {{line: number, text: string, fn: string}[]}
+ * @returns {{line: number, text: string, codeText: string, fn: string, bindingName: string, aliasOf?: string}[]}
  */
 export function identifierReferences(src, name) {
   const owner = enclosingFunctionByLine(src);
   // `..._dirtyModels` E' un riferimento: il lookbehind scarta il punto
   // dell'accesso a proprieta' ma non i tre dello spread, che e' esattamente la
   // forma con cui il Set viene passato a una helper.
-  const re = new RegExp(`(?<![\\w$])(?<!(?<!\\.\\.)\\.)${name.replace(/[$]/g, '\\$&')}\\b`);
+  const escapeIdentifier = (identifier) => identifier.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const referenceRe = (identifier, flags = '') => new RegExp(
+    `(?<![\\w$])(?<!(?<!\\.\\.)\\.)${escapeIdentifier(identifier)}\\b`,
+    flags,
+  );
+  const re = referenceRe(name);
   const code = maskNonCode(src);
   const codeLines = code.split('\n');
-  return maskNonCode(src, { preserveStrings: true })
+  const lines = maskNonCode(src, { preserveStrings: true })
     .split('\n')
     .map((text, i) => ({
       line: i + 1,
       text: text.trim(),
       codeText: codeLines[i].trim(),
       fn: owner[i + 1] ?? TOP_LEVEL,
-    }))
-    .filter(({ codeText }) => re.test(codeText));
+    }));
+
+  // Seguiamo solo binding dichiarati in modo esplicito. Non e' un parser JS:
+  // il pin deve restare dependency-free, ma questa forma copre il secondo
+  // ingresso che il gate deve saper vedere (`const d = _dirtyModels; d.add()`)
+  // senza trasformare un qualunque identificatore omonimo in un alias globale.
+  const declarationRe = /\b(?:const|let|var)\s+([A-Za-z_$][\w$]*)\s*=\s*([A-Za-z_$][\w$]*)(?![\w$.])/g;
+  const aliasesByFunction = new Map();
+  const topLevelAliases = new Set();
+  const aliasesFor = (fn) => new Set([
+    ...topLevelAliases,
+    ...(aliasesByFunction.get(fn) || []),
+  ]);
+  const riferimenti = [];
+
+  for (const record of lines) {
+    if (re.test(record.codeText)) riferimenti.push({ ...record, bindingName: name });
+
+    const aliases = aliasesFor(record.fn);
+    const declarationPositions = new Set();
+    for (const match of record.codeText.matchAll(declarationRe)) {
+      const alias = match[1];
+      const rhs = match[2];
+      declarationPositions.add(match.index + match[0].indexOf(alias));
+      if (rhs !== name && !aliases.has(rhs)) continue;
+      aliases.add(alias);
+      if (record.fn === TOP_LEVEL) topLevelAliases.add(alias);
+      else {
+        if (!aliasesByFunction.has(record.fn)) aliasesByFunction.set(record.fn, new Set());
+        aliasesByFunction.get(record.fn).add(alias);
+      }
+    }
+
+    for (const alias of aliases) {
+      const aliasRe = referenceRe(alias, 'g');
+      for (const match of record.codeText.matchAll(aliasRe)) {
+        // La parola a sinistra di `=` e' la dichiarazione dell'alias, gia'
+        // rappresentata dal riferimento diretto all'initializer.
+        if (declarationPositions.has(match.index)) continue;
+        riferimenti.push({ ...record, bindingName: alias, aliasOf: name });
+      }
+    }
+  }
+
+  return riferimenti;
 }
 
 /**

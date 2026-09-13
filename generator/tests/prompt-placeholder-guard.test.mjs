@@ -58,6 +58,14 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '.
 const CREATE_ARTICLE = path.join(ROOT, 'generator', 'scripts', 'create-article.mjs');
 const createArticleSrc = fs.readFileSync(CREATE_ARTICLE, 'utf-8');
 
+it('precompila una variante globale per ogni regola RegExp', () => {
+  for (const rule of PLACEHOLDER_RULES) {
+    if (!(rule.rx instanceof RegExp)) continue;
+    assert.ok(rule.scanRx instanceof RegExp, `${rule.id}: scanRx assente`);
+    assert.equal(rule.scanRx.global, true, `${rule.id}: scanRx non globale`);
+  }
+});
+
 // ═══════════════════════════════════════════════════════════════════════════
 // 1. UNIT — i segnaposto veri, usciti in produzione
 // ═══════════════════════════════════════════════════════════════════════════
@@ -829,6 +837,20 @@ describe('wiring — il guard e\' cablato sul percorso di scrittura CONDIVISO', 
     // la forma esatta dell'incidente del 2026-08-09 sulla meta description.
     const corpo = registerArticleFilesBody();
     assert.ok(corpo.includes('sanitizePromptPlaceholders(data)'), 'guard non invocato in registerArticleFiles');
+  });
+
+  it('la postcondizione dei comuni gira anche nel percorso condiviso', () => {
+    const corpo = registerArticleFilesBody();
+    const sanitizeAt = corpo.indexOf('sanitizePromptPlaceholders(data)');
+    const municipalitiesAt = corpo.indexOf('preserveMunicipalityNamesInMetadata(data)');
+    const factualityAt = corpo.indexOf('assertArticlePassesFactualityGates(data)');
+    assert.ok(sanitizeAt !== -1, 'guard placeholder mancante nel percorso condiviso');
+    assert.ok(municipalitiesAt !== -1, 'postcondizione dei comuni mancante nel percorso condiviso');
+    assert.ok(factualityAt !== -1, 'gate di factuality mancante nel percorso condiviso');
+    assert.ok(
+      sanitizeAt < municipalitiesAt && municipalitiesAt < factualityAt,
+      'i comuni vanno preservati dopo la sanitizzazione e prima della scrittura/gate',
+    );
   });
 
   it('sanitizePromptPlaceholders gira anche nel flusso AI primario (generateAndValidateArticle)', () => {

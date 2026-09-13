@@ -37,10 +37,11 @@
  */
 
 import { strict as assert } from 'node:assert';
+import { spawnSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { describe, it, beforeEach, afterEach } from 'node:test';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import {
   callLLM,
@@ -1023,10 +1024,10 @@ describe('#941 item 1 — i segnali di opt-out escono anche in forma strutturata
   });
 
   it('printRunSummary() stampa la riga anche a zero — e\' il denominatore', () => {
-    const realLog = console.log;
+    const realError = console.error;
     const lines = [];
-    console.log = (...a) => { lines.push(a.join(' ')); };
-    try { printRunSummary(); } finally { console.log = realLog; }
+    console.error = (...a) => { lines.push(a.join(' ')); };
+    try { printRunSummary(); } finally { console.error = realError; }
 
     const summary = lines.join('\n');
     assert.match(
@@ -1039,15 +1040,32 @@ describe('#941 item 1 — i segnali di opt-out escono anche in forma strutturata
   it('e con un segnale la riga porta i conteggi di fine sweep', async () => {
     await silenced(() => _discoverProvider(cfg, { recordScore: false }));
 
-    const realLog = console.log;
+    const realError = console.error;
     const lines = [];
-    console.log = (...a) => { lines.push(a.join(' ')); };
-    try { printRunSummary(); } finally { console.log = realLog; }
+    console.error = (...a) => { lines.push(a.join(' ')); };
+    try { printRunSummary(); } finally { console.error = realError; }
 
     const line = lines.join('\n').split('\n').find((l) => l.startsWith('   opt-out:'));
     assert.ok(line, `riga opt-out assente dal riepilogo: ${lines.join('\n')}`);
     assert.match(line, new RegExp(`${OPT_OUT_SIGNAL_KINDS.DISCOVERY_PRUNE}\\[${cfg.name}\\]`), line);
     assert.match(line, new RegExp(`pruned=${prunedStaleModels().length}\\b`), line);
     assert.match(line, new RegExp(`chain=${DEFAULT_CHAIN.length}\\b`), line);
+  });
+
+  it('printRunSummary() lascia stdout vuoto e manda il riepilogo su stderr (#1207)', () => {
+    const moduleUrl = pathToFileURL(path.resolve(
+      path.dirname(fileURLToPath(import.meta.url)),
+      '../scripts/lib/ai-models.mjs',
+    )).href;
+    const child = spawnSync(
+      process.execPath,
+      ['--input-type=module', '-e', `import { printRunSummary } from ${JSON.stringify(moduleUrl)}; printRunSummary();`],
+      { encoding: 'utf8', env: { ...process.env } },
+    );
+
+    assert.equal(child.status, 0, child.stderr);
+    assert.equal(child.stdout, '', `il payload stdout e' stato contaminato: ${child.stdout}`);
+    assert.match(child.stderr, /AI Model Run Summary/);
+    assert.match(child.stderr, /^ {3}opt-out: none this run$/m);
   });
 });

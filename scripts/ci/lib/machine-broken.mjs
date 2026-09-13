@@ -24,7 +24,22 @@ function normalizePath(value) {
     .replace(/^\.\//, '')
     .replace(/:L?\d+$/i, '');
 }
-/** Path citati nel testo, senza eventuali suffissi di riga. */
+
+// Il body delle schede riporta spesso una citazione verbatim sotto `Original
+// text`. Quella citazione può contenere il path del gate che ha trovato il
+// difetto, ma non è il target che l'item chiede di modificare. Le sole righe
+// operative hanno un campo top-level esplicito: `Target file` o `Suggested
+// action`; l'ancoraggio a colonna zero esclude le righe indentate della citazione.
+const ACTIONABLE_PATH_LINE_RE = /^(?:-\s+)?(?:\*\*)?(?:Target file|Suggested action)(?:\*\*)?\s*:/i;
+
+function actionablePathText(text) {
+  return String(text || '')
+    .split('\n')
+    .filter((line) => ACTIONABLE_PATH_LINE_RE.test(line))
+    .join('\n');
+}
+
+/** Path citati nei campi operativi, senza eventuali suffissi di riga. */
 export function citedPaths(text) {
   const out = [];
   const seen = new Set();
@@ -35,8 +50,9 @@ export function citedPaths(text) {
     seen.add(candidate);
     out.push(candidate);
   };
-  for (const match of String(text || '').matchAll(/`([^`\n]+)`/g)) add(match[1]);
-  for (const match of String(text || '').matchAll(/(?:^|[\s("'`])((?:\.\/)?(?:[A-Za-z0-9_.-]+\/)+[A-Za-z0-9_.-]+\/?(?::L?\d+)?)(?=$|[\s),;"'`])/gm)) {
+  const actionable = actionablePathText(text);
+  for (const match of actionable.matchAll(/`([^`\n]+)`/g)) add(match[1]);
+  for (const match of actionable.matchAll(/(?:^|[\s("'`])((?:\.\/)?(?:[A-Za-z0-9_.-]+\/)+[A-Za-z0-9_.-]+\/?(?::L?\d+)?)(?=$|[\s),;"'`])/gm)) {
     add(match[1]);
   }
   return out;

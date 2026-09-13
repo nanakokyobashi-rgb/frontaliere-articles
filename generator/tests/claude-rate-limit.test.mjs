@@ -1,7 +1,12 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
-import { detectClaudeRateLimit, shouldRefundRateLimitedRound } from '../../scripts/ci/claude-rate-limit.mjs';
+import {
+  detectClaudeRateLimit,
+  latestFixRunOutcomeEntryFromComments,
+  parseExecutionMessages,
+  shouldRefundRateLimitedRound,
+} from '../../scripts/ci/claude-rate-limit.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -19,6 +24,14 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const readRoot = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8');
 
 describe('detectClaudeRateLimit', () => {
+  it('mantiene i messaggi validi attorno a righe NDJSON troncate o diagnostiche', () => {
+    const before = { type: 'result', is_error: true, api_error_status: 429 };
+    const after = { type: 'rate_limit_event', rate_limit_info: { status: 'rejected' } };
+    const raw = [JSON.stringify(before), '{"type":"result","terminal_reason":', 'runner diagnostic', JSON.stringify(after)].join('\n');
+
+    assert.deepEqual(parseExecutionMessages(raw), [before, after]);
+  });
+
   it('non confonde overage rifiutato con quota primaria esaurita quando status è allowed', () => {
     const raw = JSON.stringify([
       {
@@ -67,6 +80,41 @@ describe('detectClaudeRateLimit', () => {
       rateLimited: true,
       resetsAt: resetSeconds,
       rateLimitType: 'five_hour',
+    });
+  });
+});
+
+describe('latestFixRunOutcomeEntryFromComments', () => {
+  it('un backstop generico piu\' recente invalida il verdetto storico', () => {
+    const comments = [
+      { body: '<!-- FIX_OUTCOME: max-turns -->', createdAt: '2026-09-01T00:00:00Z' },
+      { body: '<!-- FIX_OUTCOME: no-pr-unspecified -->\npost-step deterministico', createdAt: '2026-09-02T00:00:00Z' },
+    ];
+    assert.deepEqual(latestFixRunOutcomeEntryFromComments(comments), {
+      outcome: null,
+      at: Date.parse('2026-09-02T00:00:00Z'),
+    });
+  });
+
+  it('mantiene un backstop pr-created come esito di consegna', () => {
+    const comments = [
+      { body: '<!-- FIX_OUTCOME: max-turns -->', createdAt: '2026-09-01T00:00:00Z' },
+      { body: '<!-- FIX_OUTCOME: pr-created -->\npost-step deterministico', createdAt: '2026-09-02T00:00:00Z' },
+    ];
+    assert.deepEqual(latestFixRunOutcomeEntryFromComments(comments), {
+      outcome: 'pr-created',
+      at: Date.parse('2026-09-02T00:00:00Z'),
+    });
+  });
+
+  it('non scavalca un verdetto autentico successivo al backstop', () => {
+    const comments = [
+      { body: '<!-- FIX_OUTCOME: no-pr-unspecified -->\npost-step deterministico', createdAt: '2026-09-02T00:00:00Z' },
+      { body: '<!-- FIX_OUTCOME: no-root-cause -->', createdAt: '2026-09-03T00:00:00Z' },
+    ];
+    assert.deepEqual(latestFixRunOutcomeEntryFromComments(comments), {
+      outcome: 'no-root-cause',
+      at: Date.parse('2026-09-03T00:00:00Z'),
     });
   });
 });

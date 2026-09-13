@@ -11,6 +11,7 @@ import { readFileSync, writeFileSync, unlinkSync, renameSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { corpusPath } from './corpus-paths.mjs';
+import { findSeoEntryMatches } from '../../../scripts/lib/seo-entry.mjs';
 import { sanitizeText } from '../../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './control-char-write-report.mjs';
 
@@ -88,7 +89,8 @@ export function bumpUpdatedAt(id, todayIso, repoRoot = DEFAULT_REPO_ROOT) {
 /**
  * Bump the NewsArticle `dateModified` on the article's blog-SEO entry so the
  * freshness signal tracks the periodic body refresh (datePublished is left at
- * the original publish date). Scoped to this article's block only.
+ * the original publish date). Scoped to this article's unique block; duplicate
+ * keys are rejected before the file can be written.
  *
  * `seoFile` defaults to the "frontaliere" section's active SEO shard — must
  * match `SECTION.seoFile` in create-article.mjs for whichever section the
@@ -103,14 +105,19 @@ export function bumpDateModified(
 ) {
   const file = path.join(repoRoot, corpusPath(seoFile));
   const src = readFileSync(file, 'utf-8');
-  const startIdx = src.indexOf(`'blog-${id}':`);
-  if (startIdx < 0) return false;
-  // Scope the rewrite to THIS entry's block (stop at the next top-level entry
-  // key) so a future nested object can never make us touch a sibling's date.
-  const after = src.slice(startIdx);
-  const nextKey = after.slice(1).search(/\n {2}'[^']+':\s*\{/);
-  const blockEnd = nextKey < 0 ? after.length : nextKey + 1;
-  const block = after.slice(0, blockEnd);
+  const entries = findSeoEntryMatches(src, id);
+  if (entries.length > 1) {
+    throw new Error(
+      "bumpDateModified: entry 'blog-" + id + "' duplicata (" + entries.length + " occorrenze); " +
+      'refresh rifiutato prima della scrittura.',
+    );
+  }
+  const entry = entries[0];
+  if (!entry) return false;
+  // Scope the rewrite to THIS entry's balanced object so indentation changes
+  // cannot make us touch a sibling's date.
+  const { index: startIdx, closeIdx } = entry;
+  const block = src.slice(startIdx, closeIdx + 1);
   const dmRe = /"dateModified":\s*"[^"]*"/;
   if (!dmRe.test(block)) return false;
   // dateModified must never precede datePublished: on the publish day a fixed
@@ -119,7 +126,7 @@ export function bumpDateModified(
   const pub = block.match(/"datePublished":\s*"([^"]*)"/);
   const effective = pub && Date.parse(pub[1]) > Date.parse(isoDateTime) ? pub[1] : isoDateTime;
   const replaced = block.replace(dmRe, `"dateModified": "${effective}"`);
-  writeCorpusFile(file, src.slice(0, startIdx) + replaced + after.slice(blockEnd));
+  writeCorpusFile(file, src.slice(0, startIdx) + replaced + src.slice(closeIdx + 1));
   return true;
 }
 

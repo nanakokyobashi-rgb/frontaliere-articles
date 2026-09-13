@@ -19,13 +19,16 @@
  * silently no-ops when the pathspec IS a file symlink whose target changed, so
  * main needs a `realpath` pass before every `git add`.
  *
- * The published `content/` tree has no symlinks (verified: `find content -type l`
- * is empty) — it IS the real tree. Porting the symlink resolver would have been
- * porting a workaround for a problem that does not exist here, and worse, its
- * `realpathSync` fallback would silently rewrite paths for reasons that no
- * longer apply. So the git-add helpers below are the same API with the symlink
- * logic removed and the layout mapping put in its place: callers keep calling
- * `resolveGitAddPaths(root, files)` and get paths that are correct HERE.
+ * This checkout still contains compatibility symlinks at the legacy main-layout
+ * aliases (`data/` and `services/`). The published `content/` tree, however,
+ * has no symlinks (verified: `find content -type l` is empty) — it IS the real
+ * tree returned by this mapper. Porting the symlink resolver would have been
+ * porting a workaround for a problem that does not exist in the targets here,
+ * and worse, its `realpathSync` fallback would silently rewrite paths for
+ * reasons that no longer apply. So the git-add helpers below deliberately map
+ * legacy aliases to real `content/` paths instead of resolving those aliases:
+ * callers keep calling `resolveGitAddPaths(root, files)` and get paths that are
+ * correct HERE.
  *
  * ── Why an explicit table and not a prefix rewrite ──────────────────────────
  *
@@ -113,9 +116,10 @@ export function corpusPath(rel) {
 
 /**
  * Drop-in replacement for main's `resolve-git-add-path.mjs` export of the same
- * name. Maps the path into this repo's layout; no symlink resolution, because
- * there are no symlinks here (see the header). `repoRoot` is accepted and
- * ignored so call sites need no edit.
+ * name. Maps the path into this repo's layout; legacy symlink aliases are
+ * bypassed in favour of the real `content/` target (see the header), so no
+ * `realpath` pass is needed here. `repoRoot` is accepted and ignored so call
+ * sites need no edit.
  *
  * @param {string} _repoRoot Unused; kept for signature compatibility.
  * @param {string} relPath

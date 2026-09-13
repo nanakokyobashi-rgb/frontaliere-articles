@@ -189,7 +189,7 @@ export function parseReopenBudget(body) {
  *                          ripararlo → non si tocca la PR.
  *   'skip-breaker'       = budget esaurito sullo STESSO stato → si smette.
  *   'reopen'             = riciclo legittimo; `count` è il tentativo in corso.
- *   `cause` ∈ `'tests'|'review-gate'|'review-gate-skipped'|'review-gate-aborted'|''`
+ *   `cause` ∈ `'tests'|'stuck-red'|'review-gate'|'review-gate-skipped'|'review-gate-aborted'|''`
  *   — di chi è il rosso, per il messaggio. `review-gate-skipped` è il review
  *   gate su cui la review non è nemmeno girata (guard) e
  *   `review-gate-aborted` quello su cui è girata ed è morta a metà: tre rossi
@@ -205,6 +205,7 @@ export function decideReopen({
   const gateCause = reviewSkippedByGuard
     ? 'review-gate-skipped'
     : reviewAborted ? 'review-gate-aborted' : 'review-gate';
+  const stuckRed = failureNotAttributable === 'red-main' || failureNotAttributable === 'stale';
   const carried = prior && prior.fingerprint === fingerprint ? prior.count : 0;
 
   // (1) PRECONDIZIONE — prima di tutto il resto, e senza consumare budget: una
@@ -263,7 +264,10 @@ export function decideReopen({
     return {
       action: 'skip-breaker',
       count: carried,
-      cause: reviewGateFailure ? gateCause : '',
+      // `red-main`/`stale` sono una diagnosi più forte del colore del gate:
+      // anche quando gli step riportano una review saltata, il breaker sta
+      // fermando lo rescue dello stuck-red, non un no-op del review guard.
+      cause: stuckRed ? 'stuck-red' : reviewGateFailure ? gateCause : '',
       reason: `${carried} riaperture su uno stato identico (impronta \`${fingerprint}\`) `
         + `non hanno cambiato nulla: il re-trigger non è la cura. Breaker aperto.`,
     };
@@ -288,7 +292,7 @@ export function decideReopen({
   return {
     action: 'reopen',
     count: carried + 1,
-    cause: failureNotAttributable ? 'tests' : '',
+    cause: stuckRed ? 'stuck-red' : failureNotAttributable ? 'tests' : '',
     reason: failureNotAttributable
       ? `riciclo legittimo (tentativo ${carried + 1}/${max}): vitest rosso ma PROVATO `
         + `non attribuibile alla PR (${failureNotAttributable}) — re-trigger di `
@@ -379,21 +383,26 @@ export function renderReopenBudget({
         // close+reopen manuale NON ri-triggera la review, il guard la salta di
         // nuovo sullo stesso contributo. Promettere quell'effetto manderebbe
         // l'operatore a rifare un no-op.
-        ? cause === 'review-gate-aborted'
-          ? `Cosa serve per sbloccarla: **una review Claude che arrivi in fondo** — le `
-            + `ultime sono morte prima di postare (turni esauriti, action fallita o 5xx), `
-            + `quindi non c'è nessun \`🔴 Important\` da chiudere. Rilancia il run di `
-            + `\`tests\` più recente; se la morte per turni si ripete, splitta la PR.`
-        : cause === 'review-gate-skipped'
-          ? `Cosa serve per sbloccarla: **un commit che cambi il codice del contributo** — `
-            + `è l'unica cosa che rimette in moto la review. Un close+reopen manuale non `
-            + `basta: il \`Re-review guard\` salta Claude finché il contributo è invariato `
-            + `dall'ultima \`## LGTM\`, quindi il gate tornerebbe rosso identico. In `
-            + `alternativa, una review approvante postata a mano sulla HEAD.`
-          : `Cosa serve per sbloccarla: **un commit nuovo, o una review che arrivi** — il vitest `
-            + `di solito qui è già verde, non è lui il blocco. Appena l'impronta cambia il `
-            + `contatore si azzera da solo e il ciclo la riprende; in alternativa un close+reopen `
-            + `manuale ri-triggera review+tests subito.`
+        ? cause === 'stuck-red'
+          ? `Cosa serve per sbloccarla: **riparare il main o l'infrastruttura che ha lasciato `
+            + `il vitest rosso** e poi una nuova prova sulla HEAD. Questo è uno stuck-red `
+            + `già ritentato ${max} volte sullo stesso stato: il review gate può risultare `
+            + `saltato nella stessa run, ma non è la causa del breaker.`
+          : cause === 'review-gate-aborted'
+            ? `Cosa serve per sbloccarla: **una review Claude che arrivi in fondo** — le `
+              + `ultime sono morte prima di postare (turni esauriti, action fallita o 5xx), `
+              + `quindi non c'è nessun \`🔴 Important\` da chiudere. Rilancia il run di `
+              + `\`tests\` più recente; se la morte per turni si ripete, splitta la PR.`
+            : cause === 'review-gate-skipped'
+              ? `Cosa serve per sbloccarla: **un commit che cambi il codice del contributo** — `
+                + `è l'unica cosa che rimette in moto la review. Un close+reopen manuale non `
+                + `basta: il \`Re-review guard\` salta Claude finché il contributo è invariato `
+                + `dall'ultima \`## LGTM\`, quindi il gate tornerebbe rosso identico. In `
+                + `alternativa, una review approvante postata a mano sulla HEAD.`
+              : `Cosa serve per sbloccarla: **un commit nuovo, o una review che arrivi** — il vitest `
+                + `di solito qui è già verde, non è lui il blocco. Appena l'impronta cambia il `
+                + `contatore si azzera da solo e il ciclo la riprende; in alternativa un close+reopen `
+                + `manuale ri-triggera review+tests subito.`
         // Il rosso del check ha DUE cause che si chiamano uguali: i test rotti
         // e il review gate (LGTM mancante o 🔴 aperto), che dall'unificazione
         // tests+review del 2026-08-26 vive nello stesso job. Dire «far passare

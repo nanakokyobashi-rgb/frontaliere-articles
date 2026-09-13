@@ -79,6 +79,7 @@ jobs:
       head_ref: ${{ steps.pre.outputs.head_ref }}
       failed_run_id: ${{ steps.pre.outputs.failed_run_id }}
       head_sha: ${{ steps.pre.outputs.head_sha }}
+      failed_check_key: ${{ steps.pre.outputs.failed_check_key }}
     steps:
       - name: Checkout dell'helper del prefilter (solo `scripts/ci/`)
         uses: actions/checkout@v5
@@ -133,6 +134,7 @@ jobs:
           author=$(printf '%s' "$pr" | jq -r '.user.login')
           head_ref=$(printf '%s' "$pr" | jq -r '.head.ref')
           head_sha=$(printf '%s' "$pr" | jq -r '.head.sha')
+          has_autofix=$(printf '%s' "$pr" | jq -r 'if any(.labels[]?.name; . == "agent:autofix") then "true" else "false" end')
 
           if [ "$state" != "open" ]; then
             skip "PR #$PR non piu' OPEN (state=$state) → gia' risolta, skip (no-op)."
@@ -148,14 +150,15 @@ jobs:
             skip "PR #$PR e' la lockstep del mirror engine → fuori scope, skip (no-op)."
           fi
 
-          # Scope: solo PR autonome. Identico al gemello, e per lo stesso
-          # motivo: un fixer che riscrive la PR di una persona e' fuori mandato.
+          # Scope: solo PR autonome. Il branch storico `fix/*` resta sufficiente;
+          # il nuovo loop marca le PR owner-authored con `agent:autofix` subito
+          # dopo averle aperte. Una PR senza nessuna delle due prove è umana.
           case "$head_ref" in
             fix/*) autonomous=true ;;
-            *) [ "$author_type" = "Bot" ] && autonomous=true || autonomous=false ;;
+            *) if [ "$author_type" = "Bot" ] || [ "$has_autofix" = "true" ]; then autonomous=true; else autonomous=false; fi ;;
           esac
           if [ "$autonomous" != "true" ]; then
-            skip "PR #$PR e' di una persona ($author, head '$head_ref') → fuori scope per design, skip (no-op)."
+            skip "PR #$PR e' umana ($author, head '$head_ref', senza agent:autofix) → fuori scope per design, skip (no-op)."
           fi
 
           # Il rosso deve essere quello della HEAD CORRENTE. Un rosso su uno SHA
@@ -183,16 +186,21 @@ jobs:
           fi
           rollup=$(printf '%s' "$failed_checks" | jq -r 'join(", ")' 2>/dev/null || echo "")
 
-          # `tests` e' un check aggregato: quando l'unico step rosso e' il
-          # verdetto della review ed esiste una review reale sulla HEAD con un
-          # finding 🔴 Important. Il finding è il segnale che il redflag-fixer
-          # possiede il caso. La conclusion di `Run Claude review` non basta:
-          # lo step ha `continue-on-error` e può morire riportando `success`.
-          # Si entra qui solo se il rollup contiene esclusivamente `tests`;
-          # un altro check rosso mantiene il percorso normale. Il piccolo
-          # helper Node importa le costanti condivise e fallisce chiuso:
-          # API vuota/illeggibile → review_only=false.
+          # `tests` e' un check aggregato. Il piccolo helper Node distingue due
+          # rossi della review senza confonderli con un test rotto:
+          #
+          # - `important`: il gate ha un finding 🔴 Important reale sulla HEAD;
+          #   il proprietario e' il redflag-fixer;
+          # - `transient`: la review e' abortita senza un errore di codice;
+          #   nessun fixer puo' applicare una diagnosi, quindi redcheck non
+          #   deve spendere un round Claude a vuoto.
+          #
+          # La conclusion di `Run Claude review` non basta: lo step ha
+          # `continue-on-error` e puo' morire riportando `success`. Un altro
+          # check/step rosso mantiene il percorso normale. Il helper fallisce
+          # chiuso: API vuota/illeggibile -> review_failure_kind=none.
           review_only=false
+          review_failure_kind=none
           if [ "$(printf '%s' "$failed_checks" | jq -r 'length' 2>/dev/null || echo 0)" -eq 1 ] \
             && [ "$(printf '%s' "$failed_checks" | jq -r '.[0]' 2>/dev/null || echo '')" = "tests (node --test)" ]; then
             jobs_json=$(gh api "repos/$REPO/actions/runs/$RUN_ID/jobs?per_page=100" --paginate --slurp 2>/dev/null || echo "[]")
@@ -204,15 +212,21 @@ jobs:
               '{headSha:$head_sha,jobs:$jobs,reviews:$reviews}' 2>/dev/null || echo '{}')
             # Niente `2>/dev/null`: un helper rotto (modulo mancante, sintassi)
             # deve essere VISIBILE come warning, non collassare in silenzio in
-            # un `false` indistinguibile da un prefilter che non e' scattato.
-            if ! review_only=$(printf '%s' "$review_payload" \
-              | node scripts/ci/redcheck-review-prefilter.mjs); then
+            # un `none` indistinguibile da un prefilter che non e' scattato.
+            if ! review_failure_kind=$(printf '%s' "$review_payload" \
+              | node scripts/ci/redcheck-review-prefilter.mjs --kind); then
               echo "::warning::Helper del prefilter review-only non eseguibile → prefilter disabilitato, percorso normale mantenuto."
+              review_failure_kind=none
               review_only=false
+            elif [ "$review_failure_kind" = "important" ]; then
+              review_only=true
             fi
           fi
           if [ "${review_only:-false}" = "true" ]; then
             skip "Il check richiesto e' rosso solo per una review Claude sulla HEAD con finding 🔴 Important → competenza del 🔴-fixer, skip zero-Claude (no-op)."
+          fi
+          if [ "${review_failure_kind:-none}" = "transient" ]; then
+            skip "La review Claude e' abortita senza step di codice rosso → nessuna diagnosi riparabile, skip zero-Claude (no-op)."
           fi
 
           # Non correre sopra il gemello: se il 🔴-fixer sta girando su questo
@@ -230,6 +244,7 @@ jobs:
             echo "head_ref=$head_ref"
             echo "failed_run_id=$RUN_ID"
             echo "head_sha=$head_sha"
+            echo "failed_check_key=$rollup"
           } >> "$GITHUB_OUTPUT"
 
   redcheck-fix:
@@ -311,6 +326,51 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: node scripts/ci/alert-pat-down.mjs --workflow "${{ github.workflow }}" --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
+      - name: Claim redcheck PR + HEAD + failed check (zero-Claude)
+        id: claim
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          CLAIM_ACTION: acquire
+          PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
+          HEAD_SHA: ${{ needs.preflight.outputs.head_sha }}
+          CHECK_FAILURE_KEY: ${{ needs.preflight.outputs.failed_check_key }}
+          CLAIM_TTL_SEC: '3600'
+          GITHUB_RUN_ID: ${{ github.run_id }}
+        run: node scripts/ci/redcheck-review-prefilter.mjs --claim
+
+      - name: Fail closed when redcheck claim is unreadable
+        if: steps.claim.outputs.claim_error == 'true'
+        run: |
+          echo "::error::Claim redcheck PR+HEAD+failure illeggibile o non verificabile → nessun fixer Claude."
+          exit 1
+
+      - name: Acquire shared Claude quota lease (redcheck residual)
+        id: quota_lease
+        if: steps.claim.outputs.claim_allowed == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          QUOTA_LEASE_ACTION: acquire
+          QUOTA_LEASE_ROLE: redcheck
+          QUOTA_LEASE_OWNER: redcheck-fixer
+          QUOTA_LEASE_TARGET_TYPE: pr
+          QUOTA_LEASE_TARGET: ${{ needs.preflight.outputs.pr_number }}
+          QUOTA_LEASE_TTL_SEC: '3600'
+          HEAD_SHA: ${{ needs.preflight.outputs.head_sha }}
+        run: node scripts/ci/check-quota-backoff.mjs
+
+      - name: Shared Claude quota lease unavailable (expected skip)
+        if: steps.claim.outputs.claim_allowed == 'true' && steps.quota_lease.outputs.lease_allowed != 'true'
+        run: |
+          if [ "${{ steps.quota_lease.outputs.lease_error }}" = 'true' ]; then
+            echo "::error::Lease quota condiviso illeggibile o non verificabile → redcheck fixer saltato fail-closed."
+            exit 1
+          fi
+          echo "::warning::Lease quota condiviso negato (${{ steps.quota_lease.outputs.lease_reason }}) → redcheck fixer saltato senza consumare quota."
+
       # ── Round cap + capability guard + tier (deterministico, prima di Claude)
       # Conta i marker `<!-- REDCHECK_FIX_ROUND: N -->` gia' sulla PR. A N>=2 →
       # escalation a `needs-human`, STOP senza Claude. Il capability guard:
@@ -319,6 +379,7 @@ jobs:
       # — cioe' un run intero speso e buttato.
       - name: Round cap + capability guard + tier
         id: guard
+        if: steps.claim.outputs.claim_allowed == 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
@@ -694,6 +755,48 @@ jobs:
           WORKFLOW: pr-redcheck-fixer
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: node scripts/ci/refund-fix-round.mjs
+
+
+      - name: Finalize redcheck PR + HEAD + failed check claim
+        if: always() && steps.claim.outputs.claim_acquired == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          CLAIM_ACTION: finalize
+          CLAIM_TOKEN: ${{ steps.claim.outputs.claim_token }}
+          PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
+          HEAD_SHA: ${{ needs.preflight.outputs.head_sha }}
+          CHECK_FAILURE_KEY: ${{ needs.preflight.outputs.failed_check_key }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+        run: |
+          if [ "${{ steps.guard.outputs.proceed }}" != 'true' ]; then
+            CLAIM_STATUS=released
+          elif [ "${{ steps.claude_review.outcome }}" = 'cancelled' ]; then
+            CLAIM_STATUS=failed-transient
+          elif [ "${{ steps.claude_review.outcome }}" = 'skipped' ]; then
+            CLAIM_STATUS=failed-transient
+          elif [ "${{ steps.claude_review.outcome }}" = 'failure' ]; then
+            CLAIM_STATUS=failed-terminal
+          else
+            CLAIM_STATUS=completed
+          fi
+          export CLAIM_STATUS
+          node scripts/ci/redcheck-review-prefilter.mjs --claim
+
+      - name: Release shared Claude quota lease
+        if: always() && steps.quota_lease.outputs.lease_allowed == 'true' && steps.quota_lease.outputs.lease_token != ''
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          QUOTA_LEASE_ACTION: release
+          QUOTA_LEASE_ROLE: redcheck
+          QUOTA_LEASE_OWNER: redcheck-fixer
+          QUOTA_LEASE_TARGET_TYPE: pr
+          QUOTA_LEASE_TARGET: ${{ needs.preflight.outputs.pr_number }}
+          QUOTA_LEASE_TOKEN: ${{ steps.quota_lease.outputs.lease_token }}
+        run: node scripts/ci/check-quota-backoff.mjs
 
       - name: Cleanup Firebase credentials
         if: always()

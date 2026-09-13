@@ -25,6 +25,7 @@
 import type fsT from 'node:fs';
 import type npT from 'node:path';
 import type { ArticleLocale as HubLocale } from '../siteShell';
+import { parseArticleUrlSlugs } from './articleReaderSource.mjs';
 
 /**
  * Read article slugs from blog-meta-{lang}.ts. Each line keyed
@@ -139,8 +140,8 @@ export function readArticleExcerpts(
 
 /**
  * Read the `BlogArticleId` → per-locale URL-slug map from
- * `services/routerBlogData.ts` (the `BLOG_SLUGS` constant). Mirrors the
- * parser in `ogPagesPlugin`.
+ * `services/routerBlogData.ts` (the `BLOG_SLUGS` constant). Uses the shared
+ * parser in `articleReaderSource.mjs`, also consumed by the OG renderer.
  *
  * **Why this exists.** `blog-meta-{lang}.ts` keys are `BlogArticleId`s
  * (e.g. `stipendio-netto-2026`), but the canonical sitemap URL uses the
@@ -166,13 +167,7 @@ export function readBlogUrlSlugs(
   try {
     if (!fs.existsSync(file)) return out;
     const src = fs.readFileSync(file, 'utf-8');
-    const block = src.match(new RegExp(`const ${slugConst}[\\s\\S]*?\\n\\};`, 'm'))?.[0] ?? '';
-    if (!block) return out;
-    const rx = /["']([^"']+)["']:\s*\{\s*it:\s*["']([^"']+)["'],\s*en:\s*["']([^"']+)["'],\s*de:\s*["']([^"']+)["'],\s*fr:\s*["']([^"']+)["']/g;
-    let bm: RegExpExecArray | null;
-    while ((bm = rx.exec(block)) !== null) {
-      out[bm[1]] = { it: bm[2], en: bm[3], de: bm[4], fr: bm[5] };
-    }
+    Object.assign(out, parseArticleUrlSlugs(src, slugConst));
   } catch (err) {
     console.warn(`[seo-hubs] failed to read ${slugConst} from ${slugDataFile}`, err);
   }

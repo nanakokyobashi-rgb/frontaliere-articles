@@ -32,7 +32,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { importSpecifiers } from './lib/relative-import-specifiers.mjs';
+import { importSpecifiers } from '../../scripts/ci/lib/import-specifiers.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const DIRS = ['scripts/ci', 'scripts/ci/lib', 'scripts/lib'];

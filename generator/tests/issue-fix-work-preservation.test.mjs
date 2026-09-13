@@ -78,12 +78,35 @@ test('il backstop FIX_OUTCOME non sovrascrive il marker granulare dell\'agente',
   assert.ok(s, `step «${BACKSTOP}» assente: senza, un run senza marker e\' indistinguibile da uno morto.`);
   assert.match(
     s,
-    /select\(test\("<!-- FIX_OUTCOME:"\)\)/,
+    /select\(\(\.body \/\/ ""\) \| test\("<!-- FIX_OUTCOME:"\)\)/,
     'Il backstop non cerca un marker esistente prima di scriverne uno: sovrascriverebbe il verdetto\n' +
       'granulare dell\'agente con un `no-pr-unspecified` grezzo, avvelenando il segnale invece di\n' +
       'completarlo.',
   );
   assert.match(s, /continue-on-error: true/, 'la telemetria non deve mai far fallire il job');
+});
+
+test('il backstop considera solo marker creati dal run corrente', () => {
+  const s = step(BACKSTOP);
+  assert.match(
+    SRC,
+    /permissions:\n(?:  .*\n)*  actions: read\n/,
+    'Il workflow deve poter leggere la run corrente prima di delimitare la telemetria.',
+  );
+  assert.match(s, /RUN_STARTED_AT=\$\(gh api "repos\/\$REPO\/actions\/runs\/\$GITHUB_RUN_ID"/);
+  assert.match(s, /--jq '\.run_started_at \/\/ \.created_at'/);
+  assert.match(s, /--arg started "\$RUN_STARTED_AT"/);
+  assert.match(s, /\.createdAt \/\/ ""\) >= \$started/);
+  assert.match(
+    s,
+    /RUN_STARTED_AT non disponibile: backstop non emesso\.[\s\S]*?\n\s+exit 0\n\s+fi/,
+    'Se la timestamp della run non e\' leggibile, il backstop non deve invalidare un verdetto storico.',
+  );
+  assert.doesNotMatch(
+    s,
+    /--jq '\[\.comments\[\]\.body \| select\(test\("<!-- FIX_OUTCOME:"\)\)\] \| length'/,
+    'un marker storico non deve sopprimere il backstop del run corrente',
+  );
 });
 
 test('il classificatore PUO\' rendere rosso il job (nessun continue-on-error)', () => {
@@ -113,4 +136,16 @@ test('il classificatore guarda il LAVORO, non l\'exit della CLI', () => {
     'Il controllo sull\'outcome della CLI viene PRIMA di quello sulla PR: un run morto ai turni\n' +
       'dopo aver consegnato la PR verrebbe classificato come fallimento.',
   );
+});
+
+test('un errore nel lookup delle PR resta distinto dalla non-consegna della CLI', () => {
+  const s = step(CLASSIFY);
+  const lookup = s.indexOf('if PR_STATE=$(gh pr list');
+  const cliCheck = s.indexOf('$CLAUDE_OUTCOME" = "failure"');
+  assert.ok(lookup !== -1, 'il lookup delle PR deve avere un ramo di errore esplicito');
+  assert.ok(cliCheck > lookup, 'il lookup delle PR deve precedere la classificazione della CLI');
+  const lookupBlock = s.slice(lookup, cliCheck);
+  assert.doesNotMatch(lookupBlock, /\|\| true/, 'un errore API non deve diventare una PR assente');
+  assert.match(lookupBlock, /PR_LOOKUP_RC=\$\?/, 'il log deve conservare il codice di uscita di gh');
+  assert.match(lookupBlock, /non classifico la CLI come non-delivery/, 'il lookup fallito non va mascherato');
 });

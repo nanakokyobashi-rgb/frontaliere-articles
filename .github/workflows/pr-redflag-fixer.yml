@@ -125,16 +125,19 @@ jobs:
             echo "Branch '$HEAD_REF' sparito (PR risolta + delete_branch_on_merge) → skip 🔴-fix (no-op)."
             echo "actionable=false" >> "$GITHUB_OUTPUT"; exit 0
           fi
-          # Scope: il 🔴-fixer agisce SOLO su PR autonome (per design, header del
-          # file). Una PR con autore non Bot e branch non `fix/*` è fuori scope allo
-          # stesso modo di prima — ma ora lo dichiara con un commento idempotente
-          # invece di sparire in uno SKIPPED silenzioso (issue #5534).
-          if [ "$PR_AUTHOR_TYPE" != "Bot" ] && ! printf '%s' "$HEAD_REF" | grep -q '^fix/'; then
-            echo "PR con autore non Bot, branch non 'fix/*' → fuori scope autonomo (per design) → skip 🔴-fix."
+          # Scope: il 🔴-fixer agisce sulle PR autonome. Il branch storico
+          # `fix/*` resta sufficiente; per le PR owner-authored del nuovo loop la
+          # prova esplicita è `agent:autofix`. Senza quel label una PR umana resta
+          # fuori scope, anche se l'autore è l'owner del repo.
+          PR_AUTOFIX=$(gh pr view "$PR_NUMBER" --repo "$REPO" --json labels \
+            --jq 'if any(.labels[]?.name; . == "agent:autofix") then "true" else "false" end' \
+            2>/dev/null || echo false)
+          if [ "$PR_AUTHOR_TYPE" != "Bot" ] && ! printf '%s' "$HEAD_REF" | grep -q '^fix/' && [ "$PR_AUTOFIX" != "true" ]; then
+            echo "PR con autore non Bot, branch non 'fix/*' e senza agent:autofix → fuori scope autonomo (per design) → skip 🔴-fix."
             already=$(gh api "repos/$REPO/issues/$PR_NUMBER/comments?per_page=100" --paginate \
               --jq '[.[] | .body] | join("\\n")' 2>/dev/null || echo "")
             if ! printf '%s' "$already" | grep -q 'REDFLAG_OUT_OF_SCOPE'; then
-              if ! gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '<!-- REDFLAG_OUT_OF_SCOPE -->\nℹ️ 🔴-fixer: la review più recente contiene un finding \x60🔴 Important\x60, ma questa PR è fuori dallo scope autonomo (autore non Bot, branch non \x60fix/*\x60) — nessun fix automatico verrà tentato (per design). Se il finding resta aperto senza un commit nuovo, serve intervento manuale.')" \
+              if ! gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '<!-- REDFLAG_OUT_OF_SCOPE -->\nℹ️ 🔴-fixer: la review più recente contiene un finding \x60🔴 Important\x60, ma questa PR è fuori dallo scope autonomo (autore non Bot, branch non \x60fix/*\x60 e senza \x60agent:autofix\x60) — nessun fix automatico verrà tentato (per design). Se il finding resta aperto senza un commit nuovo, serve intervento manuale.')" \
                 2>/dev/null; then
                 echo "::warning::REDFLAG_OUT_OF_SCOPE non è stato pubblicato: il fixer resta fuori scope per design, ma il verdetto remoto non è osservabile."
               fi
@@ -303,6 +306,30 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: node scripts/ci/alert-pat-down.mjs --workflow "${{ github.workflow }}" --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
+      - name: Acquire shared Claude quota lease (redflag residual)
+        id: quota_lease
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          QUOTA_LEASE_ACTION: acquire
+          QUOTA_LEASE_ROLE: redflag
+          QUOTA_LEASE_OWNER: redflag-fixer
+          QUOTA_LEASE_TARGET_TYPE: pr
+          QUOTA_LEASE_TARGET: ${{ github.event.pull_request.number }}
+          QUOTA_LEASE_TTL_SEC: '3600'
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: node scripts/ci/check-quota-backoff.mjs
+
+      - name: Shared Claude quota lease unavailable (expected skip)
+        if: steps.quota_lease.outputs.lease_allowed != 'true'
+        run: |
+          if [ "${{ steps.quota_lease.outputs.lease_error }}" = 'true' ]; then
+            echo "::error::Lease quota condiviso illeggibile o non verificabile → redflag fixer saltato fail-closed."
+            exit 1
+          fi
+          echo "::warning::Lease quota condiviso negato (${{ steps.quota_lease.outputs.lease_reason }}) → redflag fixer saltato senza consumare quota."
+
       # ── Round cap + capability guard (deterministico, prima di Claude) ────
       # Conta i marker `<!-- REDFLAG_FIX_ROUND: N -->` già sulla PR. A N>=2 →
       # escalation a needs-human, STOP senza Claude. Altrimenti incrementa.
@@ -323,6 +350,7 @@ jobs:
       # tenuti in disaccordo.
       - name: Round cap + capability guard + tier
         id: guard
+        if: steps.quota_lease.outputs.lease_allowed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
@@ -489,6 +517,9 @@ jobs:
         if: steps.guard.outputs.proceed == 'true'
         uses: ./.github/actions/setup-headroom
 
+      # Il beacon resta telemetria: il lease condiviso sopra decide l'ammissione
+      # al turno, mentre questo probe conserva il segnale quota storico e il
+      # fallback Codex-primary senza introdurre un secondo veto.
       - name: Pre-flight — Claude quota telemetry (Codex primary)
         id: quota
         if: steps.guard.outputs.proceed == 'true'
@@ -641,3 +672,17 @@ jobs:
           fi
           echo "Nessun push ma Claude terminato pulito ('$CLAUDE_OUTCOME') → terminale legittimo (es. non auto-fixabile). Job verde."
           exit 0
+
+      - name: Release shared Claude quota lease
+        if: always() && steps.quota_lease.outputs.lease_allowed == 'true' && steps.quota_lease.outputs.lease_token != ''
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          QUOTA_LEASE_ACTION: release
+          QUOTA_LEASE_ROLE: redflag
+          QUOTA_LEASE_OWNER: redflag-fixer
+          QUOTA_LEASE_TARGET_TYPE: pr
+          QUOTA_LEASE_TARGET: ${{ github.event.pull_request.number }}
+          QUOTA_LEASE_TOKEN: ${{ steps.quota_lease.outputs.lease_token }}
+        run: node scripts/ci/check-quota-backoff.mjs

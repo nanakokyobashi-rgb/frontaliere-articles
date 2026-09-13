@@ -94,13 +94,14 @@ test('il titolo di dedup ha una sola sorgente nello step', () => {
 
 test('la lista issue esclude l issue dedup stessa', () => {
   const step = surfaceStep();
-  const issueQuery = /ISSUES=\$\(printf[\s\S]*?jq -r '([^']+)'\)/.exec(step);
+  const issueQuery = /\n\s+ISSUES=\$\(printf[\s\S]*?jq -r '([^']+)'\)/.exec(step);
   assert.ok(issueQuery, 'query della lista issue dello step non trovata');
   assert.match(
     issueQuery[1],
-    /select\(\s*\.title\s*!=\s*env\.DEDUP_TITLE\s*\)/,
-    'il jq della lista issue deve escludere l issue dedup per titolo, o il report si auto-elenca',
+    /select\(\(\.pull_request \| not\) and \(\.dedup \| not\)/,
+    'la partizione issue deve escludere l issue dedup gia classificata dalla risposta unica',
   );
+  assert.match(step, /\$ENV\.DEDUP_TITLE/, 'gh api --jq deve leggere esplicitamente il titolo dall env');
 });
 
 test('la condizione di chiusura promessa nel corpo resta raggiungibile', () => {
@@ -139,12 +140,19 @@ test('l esito del fetch e delle due partizioni e catturato', () => {
   );
   assert.match(
     step,
-    /NEEDS_HUMAN_RAW=\$\(gh api --paginate --slurp[\s\S]*?\n\s+NEEDS_HUMAN_RC=\$\?/,
-    'l exit status del fetch paginato va catturato subito dopo l assegnazione',
+    /OPEN_ISSUES_LINES=\$\(gh api --paginate[\s\S]*?\n\s+OPEN_ISSUES_FETCH_RC=\$\?/,
+    'l exit status del fetch paginato va catturato prima di partizionare la risposta',
   );
+  assert.match(
+    step,
+    /NEEDS_HUMAN_ITEMS=\$\(printf[\s\S]*?\n\s+NEEDS_HUMAN_RC=\$\?/,
+    'la risposta gia fetchata va partizionata localmente con esito catturato',
+  );
+  assert.match(step, /OPEN_ISSUES_ARRAY_RC=\$\?/, 'la ricomposizione delle righe paginated deve avere un esito osservabile');
   assert.match(step, /node scripts\/ci\/needs-human-digest\.mjs/);
   assert.match(step, /NEEDS_HUMAN_SHAPE_RC=\$\?/);
   assert.match(step, /NEEDS_HUMAN_PAYLOAD_MARKER=/);
+  assert.match(step, /NEEDS_HUMAN_MARKER_RC=0/, 'il marker deve essere osservato prima della partizione');
   assert.match(
     step,
     /PRS=\$\(printf[\s\S]*?\n\s+PRS_RC=\$\?/,
@@ -159,7 +167,12 @@ test('l esito del fetch e delle due partizioni e catturato', () => {
 
 test('una query fallita non arriva mai al ramo di chiusura', () => {
   const step = surfaceStep();
-  const guard = /if \[ "\$NEEDS_HUMAN_RC" -ne 0 \] \|\| \[ "\$NEEDS_HUMAN_SHAPE_RC" -ne 0 \] \|\| \[ "\$NEEDS_HUMAN_MARKER_RC" -ne 0 \]; then([\s\S]*?)\n\s+fi\n/.exec(step);
+  assert.match(
+    step,
+    /OPEN_ISSUES_FETCH_RC=\$\?[\s\S]*?OPEN_ISSUES_ARRAY_RC=\$\?[\s\S]*?NEEDS_HUMAN_SHAPE_RC=\$\?/,
+    'fetch, ricomposizione e validazione devono avere esiti separati',
+  );
+  const guard = /if \[ "\$OPEN_ISSUES_FETCH_RC" -ne 0 \] \|\| \[ "\$OPEN_ISSUES_ARRAY_RC" -ne 0 \] \|\| \[ "\$NEEDS_HUMAN_RC" -ne 0 \] \|\| \[ "\$NEEDS_HUMAN_SHAPE_RC" -ne 0 \] \|\| \[ "\$NEEDS_HUMAN_MARKER_RC" -ne 0 \]; then([\s\S]*?)\n\s+fi\n/.exec(step);
   assert.ok(guard, 'manca il guard sull esito delle query');
   assert.match(guard[1], /\n\s+exit 1/, 'una query fallita deve far fallire lo step, non passare oltre');
   assert.doesNotMatch(
@@ -168,7 +181,7 @@ test('una query fallita non arriva mai al ramo di chiusura', () => {
     'il ramo di errore non deve chiudere niente: lo stato del backlog e sconosciuto, non vuoto',
   );
   // E deve stare PRIMA del ramo «liste vuote», o non lo protegge.
-  const guardAt = step.indexOf('"$NEEDS_HUMAN_RC" -ne 0');
+  const guardAt = step.indexOf('"$OPEN_ISSUES_FETCH_RC" -ne 0');
   const emptyAt = step.indexOf('if [ -z "$PRS" ] && [ -z "$ISSUES" ] && [ -z "$INCOMPLETE_MARKER" ]; then');
   assert.notEqual(emptyAt, -1, 'ramo "liste vuote" non trovato');
   assert.ok(guardAt !== -1 && guardAt < emptyAt, 'il guard deve precedere il ramo di chiusura');
@@ -206,9 +219,10 @@ test('a liste vuote lo step richiude l issue dedup, non si limita a uscire', () 
   const emptyBranch = emptyListsBranch(step);
   assert.match(
     emptyBranch,
-    /\n\s+gh issue close "\$DEDUP_NUMBER"/,
-    'a liste vuote lo step deve chiudere l issue dedup, non limitarsi a uscire',
+    /\n\s+node scripts\/ci\/resolve-issue-verified\.mjs[\s\S]*?--number "\$DEDUP_NUMBER"/,
+    'a liste vuote lo step deve passare dal closer verificato con il numero esatto',
   );
+  assert.doesNotMatch(withoutComments(emptyBranch), /gh issue close/, 'il close deve essere verificato dal wrapper');
 });
 
 /**
@@ -231,34 +245,34 @@ test('a liste vuote lo step richiude l issue dedup, non si limita a uscire', () 
  * dove la chiave si usa in tre punti, e questo test e' il legame fra loro
  * (AGENTS.md #6).
  */
-test('la chiusura risolve l issue con la stessa uguaglianza esatta con cui la lista la esclude', () => {
+test('la chiusura riusa la fotografia iniziale con la stessa chiave esatta della lista', () => {
   const step = surfaceStep();
   const emptyBranch = emptyListsBranch(step);
 
-  const resolve = /DEDUP_MATCHES=\$\(gh api --paginate "([^"]+)"[\s\S]*?--jq '([^']+)'\)/.exec(emptyBranch);
-  assert.ok(resolve, 'il ramo a liste vuote deve risolvere il numero dell issue dedup da se');
   assert.match(
-    resolve[2],
-    /select\(\s*\.title\s*==\s*env\.DEDUP_TITLE\s*\)/,
-    'la chiusura deve selezionare per titolo ESATTO: la stessa chiave con cui la lista si esclude',
+    emptyBranch,
+    /DEDUP_NUMBER=\$\(printf[\s\S]*?"\$OPEN_ISSUES_ITEMS"[\s\S]*?jq -r '([^']*\.dedup == true[^']*)'/,
+    'il ramo a liste vuote deve leggere il numero dalla risposta già validata',
   );
-  assert.match(resolve[2], /\.number/, 'dalla risoluzione deve uscire il NUMERO, che e cio che si chiude');
-  assert.match(
-    resolve[2],
-    /select\(\.pull_request \| not\)/,
-    'l endpoint `issues` elenca anche le PR: senza il filtro si chiuderebbe una PR omonima',
-  );
-  // Il perimetro NON puo' essere quello delle due liste: l'issue dedup nasce
-  // con `automation`, non con `needs-human` — cercarla fra le sole
-  // `needs-human` la troverebbe solo nei run in cui qualcuno gliel'ha
-  // aggiunta, che e' esattamente l'accidente di #733.
-  assert.doesNotMatch(resolve[1], /labels=/, 'la ricerca dell issue dedup non deve filtrare per label: la chiave e il titolo');
-  assert.match(resolve[1], /state=open/, 'si chiude solo un issue aperta');
-  assert.match(resolve[1], /per_page=100/, 'senza `per_page` la paginazione costa il triplo delle chiamate');
+  assert.match(emptyBranch, /\.pull_request \| not/, 'la chiusura deve ignorare eventuali PR omonime');
+  assert.match(emptyBranch, /\.dedup == true/, 'la chiusura deve selezionare l issue marcata dal titolo ESATTO');
+  assert.match(emptyBranch, /\.number/, 'dalla fotografia deve uscire il NUMERO, che e cio che si chiude');
+  assert.doesNotMatch(withoutComments(emptyBranch), /gh api --paginate/, 'la risposta paginata non va richiesta una seconda volta');
+  // Il perimetro NON puo' essere quello delle due liste: l issue dedup nasce
+  // con `automation`, non con `needs-human`; il payload iniziale contiene
+  // invece entrambe le forme senza un secondo endpoint o filtro.
+  assert.match(step, /OPEN_ISSUES_ITEMS/, 'la risoluzione deve usare il payload delle issue aperte');
+  assert.doesNotMatch(withoutComments(step), /resolve_dedup_number/, 'non deve sopravvivere una seconda implementazione di lookup');
 
-  // La chiusura passa per il NUMERO risolto, e il match per prefisso di
-  // `--resolve` sparisce da questo ramo.
-  assert.match(emptyBranch, /\n\s+gh issue close "\$DEDUP_NUMBER"/, 'si chiude il numero risolto');
+  // La chiusura passa per il NUMERO risolto e il wrapper verifica la
+  // post-condizione; il match per prefisso della CLI `--resolve` sparisce da
+  // questo ramo.
+  assert.match(
+    emptyBranch,
+    /\n\s+node scripts\/ci\/resolve-issue-verified\.mjs[\s\S]*?--number "\$DEDUP_NUMBER"/,
+    'si chiude il numero risolto tramite il closer verificato',
+  );
+  assert.doesNotMatch(withoutComments(emptyBranch), /gh issue close/, 'il workflow non deve chiudere senza verificare');
   // Sul CODICE, non sui commenti: il ramo spiega per esteso perche' `--resolve`
   // non va bene qui, e citarlo non e' usarlo.
   assert.doesNotMatch(
@@ -267,24 +281,99 @@ test('la chiusura risolve l issue con la stessa uguaglianza esatta con cui la li
     'il ramo di chiusura non deve tornare al match per prefisso di github-issue-creator.mjs',
   );
 
-  // Stesso principio del guard sulle due liste: una risoluzione FALLITA non e
-  // «issue gia chiusa». Senza catturare l esito, un `gh` non-zero lascerebbe
-  // la variabile vuota e lo step uscirebbe verde senza chiudere niente.
+  // Stesso principio del guard sulle due liste: una lettura FALLITA non e
+  // «issue gia chiusa». Senza catturare l esito, jq potrebbe lasciare la
+  // variabile vuota e lo step uscirebbe verde senza chiudere niente.
   assert.match(
     emptyBranch,
-    /DEDUP_MATCHES=\$\(gh api --paginate[\s\S]*?\n\s+DEDUP_RC=\$\?/,
-    'l exit status della risoluzione va catturato subito dopo l assegnazione',
+    /DEDUP_NUMBER=\$\(printf[\s\S]*?\n\s+DEDUP_RC=\$\?/,
+    'l exit status della lettura del payload va catturato subito dopo l assegnazione',
   );
   const rcGuard = /if \[ "\$DEDUP_RC" -ne 0 \]; then([\s\S]*?)\n\s+fi\n/.exec(emptyBranch);
   assert.ok(rcGuard, 'manca il guard sull esito della risoluzione');
   assert.match(rcGuard[1], /\n\s+exit 1/, 'una risoluzione fallita deve far fallire lo step, non chiudere a caso');
   assert.doesNotMatch(rcGuard[1], /gh issue close/, 'il ramo di errore non deve chiudere niente');
 
+  assert.match(
+    emptyBranch,
+    /node scripts\/ci\/resolve-issue-verified\.mjs[\s\S]*?\n\s+RESOLVE_RC=\$\?/,
+    'l esito del closer verificato va catturato per rendere visibile un close respinto',
+  );
+  const resolveGuard = /RESOLVE_RC=\$\?[\s\S]*?if \[ "\$RESOLVE_RC" -ne 0 \]; then([\s\S]*?)\n\s+fi\n/.exec(emptyBranch);
+  assert.ok(resolveGuard, 'manca il guard sull esito del closer verificato');
+  assert.match(resolveGuard[1], /::error::/);
+  assert.match(resolveGuard[1], /exit "\$RESOLVE_RC"/);
+
   // Nessun match = nessuna issue dedup aperta: e un no-op, non un errore.
   assert.match(
     emptyBranch,
     /if \[ -z "\$DEDUP_NUMBER" \]; then[\s\S]*?exit 0/,
     'senza issue dedup aperta lo step esce pulito senza chiudere niente',
+  );
+});
+
+test('ogni call-site del close usa la stessa verifica post-condizione', () => {
+  const steps = [
+    ['.github/workflows/recycle-stale-prs.yml', 'Surface needs-human PRs and issues'],
+    ['.github/workflows/reconcile-article-shards.yml', 'Close ghost-articles issue (coda drenata)'],
+    ['.github/workflows/republish-dirty-content.yml', 'Close dirty-content issue (coda drenata)'],
+  ];
+
+  for (const [file, name] of steps) {
+    const source = readFileSync(path.join(ROOT, file), 'utf8');
+    const start = source.indexOf(`- name: ${name}`);
+    assert.ok(start >= 0, `${file}: step ${name} non trovato`);
+    const rest = source.slice(start);
+    const next = rest.indexOf('\n      - name: ');
+    const step = next === -1 ? rest : rest.slice(0, next);
+    const executable = withoutComments(step);
+
+    assert.match(step, /continue-on-error:\s*true/, `${file}: il job deve conservare il comportamento best-effort`);
+    assert.match(executable, /node scripts\/ci\/resolve-issue-verified\.mjs/,
+      `${file}: manca il closer che verifica la post-condizione`);
+    assert.doesNotMatch(executable, /github-issue-creator\.mjs[\s\S]*--resolve/,
+      `${file}: il percorso CLI best-effort resta non verificato`);
+  }
+});
+
+test('a liste non vuote il body segue la create/reopen e il publisher strict', () => {
+  const step = withoutComments(surfaceStep());
+  const branchEnd = step.indexOf('PR_COUNT=0');
+  assert.notEqual(branchEnd, -1, 'ramo "liste non vuote" non trovato');
+  const tail = step.slice(branchEnd);
+  const publisherAt = tail.indexOf('node scripts/ci/publish-needs-human-digest.mjs');
+  const publishRcAt = tail.indexOf('PUBLISH_RC=$?');
+  const numberAt = tail.indexOf('DEDUP_NUMBER=$(printf', publishRcAt);
+  const editAt = tail.indexOf('gh issue edit "$DEDUP_NUMBER" --body "$DESC"', numberAt);
+  assert.ok(publisherAt >= 0, 'il publisher strict del digest non e piu nel ramo non vuoto');
+  assert.ok(publishRcAt > publisherAt, 'l esito del publisher deve essere catturato subito dopo la scrittura');
+  assert.match(tail, /PUBLISH_OUTPUT=\$\(node scripts\/ci\/publish-needs-human-digest\.mjs[\s\S]*?2>&1\)/, 'il publisher deve restituire il suo output al medesimo step');
+  assert.ok(numberAt > publishRcAt, 'il numero va estratto dopo create/reopen');
+  assert.ok(editAt > numberAt, 'il body va riallineato dopo il numero restituito dal publisher');
+  assert.match(tail, /--fail-on-write/);
+  assert.match(tail, /if \[ "\$PUBLISH_RC" -ne 0 \]; then[\s\S]*?exit "\$PUBLISH_RC"/);
+  assert.match(tail, /issue_number=\\\(\[1-9\]\[0-9\]\*\\\)/, 'il numero deve provenire dal marker machine-readable del publisher');
+  assert.match(tail, /gh issue edit "\$DEDUP_NUMBER" --body "\$DESC"/);
+  assert.match(tail, /if \[ "\$EDIT_RC" -ne 0 \]; then[\s\S]*?exit 1/);
+  assert.doesNotMatch(tail.slice(publishRcAt), /gh api --paginate/, 'dopo la scrittura non va ripetuta la paginazione');
+});
+
+test('il numero dell issue dedup viene riusato senza una seconda paginazione', () => {
+  const step = withoutComments(surfaceStep());
+  assert.equal(
+    [...step.matchAll(/resolve_dedup_number/g)].length,
+    0,
+    'la vecchia funzione di lookup non deve sopravvivere',
+  );
+  assert.equal(
+    [...step.matchAll(/DEDUP_NUMBER=\$\(printf/g)].length,
+    2,
+    'entrambi i rami devono estrarre il numero senza una query nuova',
+  );
+  assert.equal(
+    [...step.matchAll(/gh api --paginate/g)].length,
+    1,
+    'un solo fetch paginato deve alimentare classificazione, close e body',
   );
 });
 
@@ -306,23 +395,26 @@ test('la chiusura risolve l issue con la stessa uguaglianza esatta con cui la li
  */
 test('la lista issue esclude i tracker permanenti per titolo, non per label', () => {
   const step = surfaceStep();
-  const issueQuery = /ISSUES=\$\(printf[\s\S]*?jq -r '([^']+)'\)/.exec(step);
+  const issueQuery = /\n\s+ISSUES=\$\(printf[\s\S]*?jq -r '([^']+)'\)/.exec(step);
   assert.ok(issueQuery, 'query della lista issue dello step non trovata');
   assert.match(
     step,
-    /NEEDS_HUMAN_API="repos\/\$GH_REPO\/issues\?[^"]*labels=needs-human/,
+    /OPEN_ISSUES_API="repos\/\$GH_REPO\/issues\?state=open&per_page=100"/,
     'la lista viene dall endpoint `issues`, che filtra per label e restituisce `title`: senza, il filtro non ha su cosa lavorare',
   );
+  const executable = withoutComments(step);
+  assert.equal((executable.match(/gh api --paginate/g) || []).length, 1, 'un solo fetch alimenta le liste e il numero del digest');
   assert.match(
     issueQuery[1],
-    /index\(\s*\$i\.title\s*\)\s*\|\s*not/,
+    /\.permanent_tracker \| not/,
     'il jq deve escludere i tracker permanenti confrontando il TITOLO con PERMANENT_TRACKER_TITLES',
   );
   assert.match(
     issueQuery[1],
-    /env\.PERMANENT_TRACKER_TITLES\s*\|\s*split\("\\n"\)/,
+    /\.dedup \| not/,
     'i titoli vengono da PERMANENT_TRACKER_TITLES, una riga per tracker',
   );
+  assert.match(step, /\$ENV\.PERMANENT_TRACKER_TITLES\s*\|\s*split\("\\n"\)/, 'gh api --jq deve leggere esplicitamente i tracker dall env');
   // Il difetto riparato: escludere per label toglieva dall unico canale umano
   // anche le issue davvero bloccate a cui qualcuno ha messo `agent:no-age-out`.
   assert.doesNotMatch(
@@ -412,16 +504,16 @@ test('nessuna delle due liste del digest puo essere troncata in silenzio', () =>
     /\$\(gh (?:pr|issue) list/,
     'i sottocomandi `list` troncano al `--limit`: il digest deve leggere da `gh api --paginate`',
   );
-  const paginated = [...step.matchAll(/\$\(gh api --paginate --slurp "\$NEEDS_HUMAN_API"/g)];
+  const paginated = [...step.matchAll(/\$\(gh api --paginate "\$OPEN_ISSUES_API"/g)];
   assert.equal(paginated.length, 1, 'PR e issue devono condividere un solo fetch paginato');
   // Una sola sorgente per l'endpoint (AGENTS.md #6): due URL divergerebbero, e
   // le due liste finirebbero per descrivere backlog diversi.
   assert.equal(
-    [...step.matchAll(/\n\s+NEEDS_HUMAN_API=/g)].length,
+    [...step.matchAll(/\n\s+OPEN_ISSUES_API=/g)].length,
     1,
-    'NEEDS_HUMAN_API definita piu di una volta: due perimetri divergono in silenzio',
+    'OPEN_ISSUES_API definita piu di una volta: due perimetri divergono in silenzio',
   );
-  assert.match(step, /NEEDS_HUMAN_API="[^"]*per_page=100/, 'senza `per_page` la paginazione costa il triplo delle chiamate');
+  assert.match(step, /OPEN_ISSUES_API="[^"]*per_page=100/, 'senza il parametro per_page la paginazione costa il triplo delle chiamate');
   // Le PR arrivano dallo stesso endpoint `issues` (l'unico che filtra per
   // label): `.pull_request` e' la discriminante fra i due tipi, e senza le due
   // liste conterrebbero gli stessi oggetti.
@@ -432,7 +524,7 @@ test('nessuna delle due liste del digest puo essere troncata in silenzio', () =>
   );
   assert.match(
     step,
-    /jq -r '\[\.\[\] \| select\(\.pull_request \| not\) \|/,
+    /jq -r '\[\.\[\] \| select\(\(\.pull_request \| not\) and/,
     'la lista issue deve escludere gli oggetti con `.pull_request`, o elenca anche le PR',
   );
   // I campi dell'API REST sono snake_case: `updatedAt` (forma `gh ... list`)
@@ -458,7 +550,7 @@ test('nemmeno lo scan stale-review legge una lista troncata', () => {
   );
   assert.match(
     text,
-    /prs=\$\(gh api --paginate "repos\/\$REPO\/issues\?[^"]*labels=stale-review[^"]*per_page=100"/,
+    /prs_lines=\$\(gh api --paginate "repos\/\$REPO\/issues\?[^"]*labels=stale-review[^"]*per_page=100"/,
     'lo scan stale-review deve leggere da `gh api --paginate`',
   );
   // Il rimappaggio deve restituire la forma che i gate sotto leggono: i campi
@@ -471,4 +563,15 @@ test('nemmeno lo scan stale-review legge una lista troncata', () => {
     'il rimappaggio deve riportare `created_at` su `.createdAt`, che e il campo letto dal gate 1',
   );
   assert.match(text, /labels: \[\.labels\[\] \| \{name\}\]/, 'i gate leggono `.labels[].name`: la forma va preservata');
+});
+
+test('il publisher strict espone il numero appena scritto', () => {
+  const publisher = readFileSync(path.join(ROOT, 'scripts/ci/publish-needs-human-digest.mjs'), 'utf8');
+  assert.match(publisher, /Number\.isInteger\(result\.number\)/);
+  assert.match(publisher, /issueNumber === null/);
+  assert.match(
+    publisher,
+    /issue_number=\$\{issueNumber\}/,
+    'il workflow deve poter riusare il numero senza un secondo fetch paginato',
+  );
 });

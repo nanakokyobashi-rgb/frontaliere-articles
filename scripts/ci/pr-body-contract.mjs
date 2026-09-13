@@ -67,13 +67,22 @@ function gh(args, fallback = '') {
   }
 }
 
+function paginatedLines(raw) {
+  return String(raw || '').split(/\r?\n/u).map((line) => line.trim()).filter(Boolean);
+}
+
+function lastPaginatedValue(raw) {
+  return paginatedLines(raw).at(-1) || '';
+}
+
 /** Commento sticky: aggiorna quello esistente invece di accumularne uno per push. */
 function upsertComment(body) {
   const raw = gh(['api', `repos/${REPO}/issues/${PR}/comments`, '--paginate', '--jq',
-    `[.[] | select(.body // "" | contains("${MARKER}"))] | last | .id // empty`]);
-  if (raw) {
-    gh(['api', '-X', 'PATCH', `repos/${REPO}/issues/comments/${raw}`, '-f', `body=${body}`]);
-    console.log(`[pr-body-contract] commento sticky aggiornato (id=${raw}).`);
+    `.[] | select(.body // "" | contains("${MARKER}")) | .id`]);
+  const stickyId = lastPaginatedValue(raw);
+  if (stickyId) {
+    gh(['api', '-X', 'PATCH', `repos/${REPO}/issues/comments/${stickyId}`, '-f', `body=${body}`]);
+    console.log(`[pr-body-contract] commento sticky aggiornato (id=${stickyId}).`);
   } else {
     gh(['pr', 'comment', PR, '--repo', REPO, '--body', body]);
     console.log('[pr-body-contract] commento sticky creato.');
@@ -146,8 +155,8 @@ function main() {
     // Se c'era una violazione ora risolta, il commento sticky resta ma dice il
     // vero: aggiornarlo evita di lasciare un allarme spento acceso.
     const existing = gh(['api', `repos/${REPO}/issues/${PR}/comments`, '--paginate', '--jq',
-      `[.[] | select(.body // "" | contains("${MARKER}"))] | length`], '0');
-    if (existing !== '0') {
+      `.[] | select(.body // "" | contains("${MARKER}")) | .id`]);
+    if (paginatedLines(existing).length > 0) {
       upsertComment(`${MARKER}\n✅ **Contratto del body rispettato.** Le sezioni richieste ci sono e hanno contenuto.`);
     }
     return 0;

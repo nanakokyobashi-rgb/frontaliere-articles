@@ -446,7 +446,7 @@ const MIN_SINGLE_WORD_COMUNE_LEN = 4;
  * semplicemente non si attiva mai. Un elenco troncato spegne un gate, non
  * ferma la pipeline; a sorvegliare che resti pieno c'è il test.
  */
-const MIN_MUNICIPALITIES = 400;
+export const MIN_MUNICIPALITIES = 400;
 let _municipalityIndex = null;
 
 export function municipalityNames() {
@@ -483,6 +483,11 @@ function municipalityIndex() {
   }
   _municipalityIndex = index;
   return index;
+}
+
+/** True only when the canonical municipality source and its derived index are usable. */
+export function isMunicipalityIndexUsable() {
+  return municipalityNames().length >= MIN_MUNICIPALITIES && municipalityIndex().size > 0;
 }
 
 /** L'articolo esprime intento «residenza / trasferimento»? */

@@ -69,6 +69,7 @@ concurrency:
 
 permissions:
   contents: write
+  actions: read
   pull-requests: write
   issues: write
   id-token: write
@@ -212,12 +213,23 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           CTX_DIR: ${{ runner.temp }}/issue-fix-ctx
         run: |
+          # Scrivere subito i default rende l'output sicuro anche se uno dei
+          # comandi successivi abortisce lo step (che è continue-on-error).
+          # I consumer ricevono così sempre un valore esplicito e il fallback
+          # resta quello del flusso singolo.
+          {
+            echo "is_group=false"
+            echo "group_label="
+            echo "group_numbers="
+            echo "skip_member=false"
+          } >> "$GITHUB_OUTPUT"
           set -euo pipefail
           mkdir -p "$CTX_DIR"
           : > "$CTX_DIR/group.json"
           group_is_group=false
           group_label_output=
           group_numbers_output=
+          group_skip_member=false
 
           load_group_context() {
             local leader_json group_label group_contract members valid numbers
@@ -257,9 +269,14 @@ jobs:
 
             # La label è assegnata a tutti i membri, ma solo il numero in coda
             # alla label può armare il run. Un membro etichettato per errore
-            # degrada al flusso singolo e non apre una seconda PR di gruppo.
+            # NON degrada al flusso singolo: il suo concurrency key è diverso
+            # dal leader e una fallback single-issue potrebbe correre insieme
+            # al claim B19. Lo segnaliamo al gate mutex, che chiude il job
+            # prima di ogni diagnosi/Claude senza scrivere un secondo claim.
             if [ "${group_label##*-}" != "$ISSUE_NUMBER" ]; then
-              echo "issue #$ISSUE_NUMBER: membro non-leader di $group_label → flusso singolo"
+              group_label_output=$group_label
+              group_skip_member=true
+              echo "issue #$ISSUE_NUMBER: membro non-leader di $group_label → skip senza fixer singolo"
               return 0
             fi
 
@@ -301,6 +318,7 @@ jobs:
             echo "is_group=$group_is_group"
             echo "group_label=$group_label_output"
             echo "group_numbers=$group_numbers_output"
+            echo "skip_member=$group_skip_member"
           } >> "$GITHUB_OUTPUT"
 
       - name: Validate issue group context file (zero-Claude)
@@ -322,11 +340,17 @@ jobs:
       - name: Pre-flight — in-progress claim gate (zero-Claude, mutex)
         id: claim
         if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true'
+        # FAIL-CLOSED: il claim script emette `in_flight=true` su un errore di
+        # lettura/scrittura o verifica; non lasciare che una mutex illeggibile
+        # arrivi al fixer.
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           ISSUE_NUMBERS: ${{ steps.group.outputs.group_numbers }}
+          SKIP_GROUP_MEMBER: ${{ steps.group.outputs.skip_member || 'false' }}
+          CLAIM_ACTION: acquire
+          CLAIM_OWNER: remote
         run: node scripts/ci/claim-issue-group-in-flight.mjs
 
       # ── Pre-flight 6: diagnosi gia' consegnata al sito (zero-Claude) ───────
@@ -345,9 +369,39 @@ jobs:
           SITE_TOKEN: ${{ env.GITHUB_PAT }}
         run: node scripts/ci/handoff-to-site.mjs --preflight
 
+      - name: Acquire shared Claude quota lease (issue-fix slot)
+        id: quota_lease
+        if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          QUOTA_LEASE_ACTION: consume
+          QUOTA_LEASE_ROLE: issue-fix
+          QUOTA_LEASE_OWNER: issue-fix
+          QUOTA_LEASE_TARGET_TYPE: issue
+          QUOTA_LEASE_TARGET: ${{ github.event.issue.number }}
+          QUOTA_LEASE_TTL_SEC: '21600'
+          GITHUB_RUN_ID: ${{ github.run_id }}
+        run: node scripts/ci/check-quota-backoff.mjs
+
+      - name: Shared Claude quota lease unavailable (requeue zero-Claude)
+        if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true' && steps.quota_lease.outputs.lease_allowed != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          if [ "${{ steps.quota_lease.outputs.lease_error }}" = 'true' ]; then
+            echo "::error::Lease quota condiviso illeggibile o non verificabile → issue-fix saltato fail-closed, nessuna mutazione cieca."
+            exit 1
+          fi
+          gh issue edit "$ISSUE_NUMBER" --repo "$GH_REPO" --add-label agent:fix-queued --remove-label agent:fix
+          echo "Lease quota condiviso negato (${{ steps.quota_lease.outputs.lease_reason }}) → issue #$ISSUE_NUMBER ri-accodata senza consumare un tentativo Claude."
+
       - name: Determine fix tier
         id: tier
-        if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
+        if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
@@ -424,7 +478,7 @@ jobs:
 
       - name: Closing keyword for the PR body (zero-Claude)
         id: closing
-        if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
+        if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
@@ -460,7 +514,7 @@ jobs:
       # da zero butterebbe lavoro già fatto e già pagato.
       - name: Check for resumable WIP branch (zero-Claude)
         id: resume
-        if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
+        if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
@@ -475,7 +529,7 @@ jobs:
           fi
 
       - name: Configure git identity
-        if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
+        if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
         env:
           REPO: ${{ github.repository }}
         run: |
@@ -511,7 +565,7 @@ jobs:
           fi
 
       - name: Setup Headroom compression proxy
-        if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
+        if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
         uses: ./.github/actions/setup-headroom
 
       - name: Run Claude fix
@@ -526,15 +580,15 @@ jobs:
         # ne' branch ne' marker `FIX_OUTCOME`, e il drainer lo ri-accoda a vuoto.
         timeout-minutes: 120
         id: claude_fix
-        if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
+        if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
         continue-on-error: true
         uses: ./.github/actions/claude-codex-fallback
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
-          ISSUE_GROUP: ${{ steps.group.outputs.is_group }}
-          ISSUE_GROUP_LABEL: ${{ steps.group.outputs.group_label }}
-          ISSUE_GROUP_NUMBERS: ${{ steps.group.outputs.group_numbers }}
+          ISSUE_GROUP: ${{ steps.group.outputs.is_group || 'false' }}
+          ISSUE_GROUP_LABEL: ${{ steps.group.outputs.group_label || '' }}
+          ISSUE_GROUP_NUMBERS: ${{ steps.group.outputs.group_numbers || '' }}
           IS_DAILY_BUCKET: ${{ steps.tier.outputs.is_daily_bucket }}
           DAILY_KEY: ${{ steps.tier.outputs.daily_key }}
           DAILY_ITEM_ID: ${{ steps.tier.outputs.selected_item_id }}
@@ -579,7 +633,7 @@ jobs:
           prompt: |
             Sei l'agent di fix autonomo per la issue #${{ github.event.issue.number }} ("${{ github.event.issue.title }}"). Tier: ${{ steps.tier.outputs.tier }}, categoria: ${{ steps.tier.outputs.category }}.
 
-            **Raggruppamento B19:** `group=${{ steps.group.outputs.is_group }}`, membri `${{ steps.group.outputs.group_numbers }}`. Se `group=true`, carica `${{ runner.temp }}/issue-fix-ctx/group.json`: contiene tutte le issue della stessa PR, già verificate dal drainer con una firma e un punto di riparazione comuni, entro il tetto numerico definito da `ISSUE_GROUP_MAX_SIZE`. Diagnostica ogni membro e risolvi tutti i membri nella stessa PR; non prendere lavoro esterno al gruppo. Nel body della PR usa una riga di chiusura per ogni membro, una keyword per riga. Se un membro non è confermabile o non è riparabile con certezza, non forzarlo: lascialo senza keyword di chiusura e dichiaralo in `## Non implementato (ancora)` con uno stato letterale. Se `group=false`, il flusso resta quello della issue singola.
+            **Raggruppamento B19:** `group=${{ steps.group.outputs.is_group || 'false' }}`, membri `${{ steps.group.outputs.group_numbers || '' }}`. Se `group=true`, carica `${{ runner.temp }}/issue-fix-ctx/group.json`: contiene tutte le issue della stessa PR, già verificate dal drainer con una firma e un punto di riparazione comuni, entro il tetto numerico definito da `ISSUE_GROUP_MAX_SIZE`. Diagnostica ogni membro e risolvi tutti i membri nella stessa PR; non prendere lavoro esterno al gruppo. Nel body della PR usa una riga di chiusura per ogni membro, una keyword per riga. Se un membro non è confermabile o non è riparabile con certezza, non forzarlo: lascialo senza keyword di chiusura e dichiaralo in `## Non implementato (ancora)` con uno stato letterale. Se `group=false`, il flusso resta quello della issue singola.
 
             Questo repo pubblica una superficie dati su HTTP (`dist/api/`) che `frontaliereticino.ch` consuma in produzione. **Il sito non ribuilda quando questo repo pubblica**: un errore qui è live subito.
 
@@ -587,6 +641,10 @@ jobs:
             1. Leggi `ISSUES.md` → "Fix flow" — contratto operativo del fixer.
             2. Leggi `AGENTS.md` — non-negoziabili e architettura. VINCOLANTE.
             3. Carica la issue: `gh issue view $ISSUE_NUMBER --json number,title,body,labels,comments`. Se `group=true`, leggi anche `${{ runner.temp }}/issue-fix-ctx/group.json` e tratta ogni record come una issue da chiudere nella stessa PR: la diagnosi deve confermare il punto di riparazione comune, non limitarsi alla label.
+
+            **Stati già dichiarati nei residui (leggi PRIMA di implementare):** se la issue nasce da una PR (follow-up, `Addresses`/`da PR #N` nel body, o una qualunque PR citata come origine nel body), leggi il body della PR d'origine e classifica i bullet di `## Non implementato (ancora)` con `extractSection`, `sectionBullets` e `bulletState` da `scripts/lib/pr-body-sections-check.mjs`; usa le stesse funzioni di `scripts/ci/followup-has-candidates.mjs`, non un parser inventato. `blocked:` non è monolitico: chiudono `in questa PR`, `PR concatenata #N`, `per scelta`, `by construction` e `blocked: decisione del proprietario`, anche nella variante inglese `blocked: owner decision`; ogni altro `blocked: <causa>` resta lavoro dovuto. `PR concatenata` senza `#N` non chiude.
+
+            **Contratto del body PR (gate deterministico, non una scelta stilistica):** `## Implementato` deve descrivere solo comportamento, file e conteggi dimostrabili nella diff di questa PR; non rivendicare batch, file o item ereditati dalla base. `## Non implementato (ancora)` deve contenere `- Nessuno` quando non resta lavoro dovuto. Per ogni residuo reale usa una voce tracciabile con `in questa PR`, `PR concatenata #N` oppure `blocked: <causa esterna reale>`. `PR concatenata` senza `#N` non è tracciabile; `blocked:` non può descrivere la semplice coda interna del daily bucket, degli item restanti o della prossima PR: in quei casi indica la PR numerata o il blocker esterno reale.
 
             **Pre-condizioni (termina se falliscono):**
             - Esiste già una PR aperta che cita "#$ISSUE_NUMBER" → commenta "PR già in volo: #<n>, skip." e TERMINA.
@@ -650,7 +708,7 @@ jobs:
         # c'era lavoro da salvare). Best-effort in senso stretto: qualunque
         # fallimento e' un warning, mai un job rosso — un salvataggio mancato non
         # deve trasformare un run terminato in un run fallito.
-        if: always() && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
+        if: always() && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -726,8 +784,31 @@ jobs:
             echo "::warning::wip-salvage: push di $BRANCH fallito — il lavoro resta solo nel container e andra' perso."
           fi
 
+      - name: Mark autonomous PR provenance (zero-Claude)
+        if: always() && steps.claim.outputs.claim_acquired == 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          ISSUE: ${{ github.event.issue.number }}
+        run: |
+          set -uo pipefail
+          BRANCH="fix/issue-$ISSUE"
+          PR_NUMBER=$(gh pr list --repo "$REPO" --head "$BRANCH" --state open --json number,createdAt \
+            --jq 'sort_by(.createdAt) | last | .number // empty' 2>/dev/null || true)
+          if [ -z "$PR_NUMBER" ]; then
+            echo "provenance: nessuna PR aperta su $BRANCH — skip"
+            exit 0
+          fi
+          gh label create agent:autofix --repo "$REPO" --color 1d76db \
+            --description "PR prodotta dal loop autonomo: abilita i fixer bounded" --force \
+            2>/dev/null || true
+          gh pr edit "$PR_NUMBER" --repo "$REPO" --add-label agent:autofix \
+            && echo "provenance: PR #$PR_NUMBER marcata agent:autofix" \
+            || echo "::warning::provenance: label agent:autofix non applicata alla PR #$PR_NUMBER"
+
       - name: Claude usage metrics
-        if: always() && steps.claude_fix.outputs.claude_used == 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
+        if: always() && steps.claude_fix.outputs.claude_used == 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
         continue-on-error: true
         run: node scripts/ci/claude-usage-summary.mjs "${{ steps.claude_fix.outputs.execution_file }}" "issue-fix"
 
@@ -737,7 +818,7 @@ jobs:
       # esaurisce i tentativi e viene parcheggiata — poi chiusa in automatico
       # senza che nessun agent l'abbia mai letta.
       - name: Mark Claude terminal outcome (granular telemetry)
-        if: always() && steps.claude_fix.outputs.claude_used == 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
+        if: always() && steps.claude_fix.outputs.claude_used == 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -806,7 +887,7 @@ jobs:
       # questo commento la descrive e non la duplica, ed e'
       # `generator/tests/handoff-to-site.test.mjs` a inchiodarla.
       - name: Consegna al sito la diagnosi che vive di la' (zero-Claude)
-        if: always() && steps.claim.outputs.in_flight != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
+        if: always() && steps.claim.outputs.in_flight != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -825,12 +906,13 @@ jobs:
         # questo run ha aperto una PR su `fix/issue-<N>`, altrimenti un grezzo
         # `no-pr-unspecified`.
         #
-        # Non sovrascrive MAI il marker granulare dell'agente: se ce n'e' gia'
-        # uno, esce. Il gate `if:` salta i corti-circuiti di pre-flight, che
+        # Non sovrascrive MAI il marker granulare del run CORRENTE: se ce n'e' gia'
+        # uno, esce. I marker storici non possono sopprimere questo backstop.
+        # Il gate `if:` salta i corti-circuiti di pre-flight, che
         # hanno gia' postato il proprio marker specifico — senza quel salto
         # questo step ci scriverebbe sopra `no-pr-unspecified` e avvelenerebbe
         # il segnale invece di completarlo. Best-effort: non fallisce mai.
-        if: always() && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
+        if: always() && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -838,10 +920,18 @@ jobs:
           ISSUE: ${{ github.event.issue.number }}
         run: |
           set -uo pipefail
-          HAS=$(gh issue view "$ISSUE" --repo "$REPO" --json comments \
-            --jq '[.comments[].body | select(test("<!-- FIX_OUTCOME:"))] | length' 2>/dev/null || echo 0)
+          RUN_STARTED_AT=$(gh api "repos/$REPO/actions/runs/$GITHUB_RUN_ID" \
+            --jq '.run_started_at // .created_at' 2>/dev/null || true)
+          if [ -z "${RUN_STARTED_AT:-}" ]; then
+            echo "::warning::RUN_STARTED_AT non disponibile: backstop non emesso."
+            exit 0
+          fi
+          COMMENTS=$(gh issue view "$ISSUE" --repo "$REPO" --json comments 2>/dev/null || echo '{"comments":[]}')
+          HAS=$(printf '%s\n' "$COMMENTS" | jq -r --arg started "$RUN_STARTED_AT" \
+            '[.comments[] | select((.createdAt // "") >= $started) | select((.body // "") | test("<!-- FIX_OUTCOME:"))] | length' \
+            2>/dev/null || echo 0)
           if [ "${HAS:-0}" != "0" ]; then
-            echo "Marker FIX_OUTCOME gia' presente (postato dall'agente) — nessun backstop necessario."
+            echo "Marker FIX_OUTCOME gia' presente in questo run — nessun backstop necessario."
             exit 0
           fi
           PR=$(gh pr list --repo "$REPO" --head "fix/issue-$ISSUE" --state open --json number,createdAt \
@@ -863,7 +953,7 @@ jobs:
       # quegli step non hanno `continue-on-error`. Nessun gate abbassato — la PR
       # passa comunque dal reviewer; qui si disambigua «intenzionale» da «crash».
       - name: Classify outcome (work-done, not CLI exit)
-        if: always() && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
+        if: always() && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
@@ -876,8 +966,14 @@ jobs:
           # un ordine che `gh` non documenta, e il numero stampato qui sotto punterebbe
           # al lavoro sbagliato. Stesso predicato di `deliveredPrNumber()` in
           # `scripts/ci/mark-claude-terminal-outcome.mjs` (AGENTS.md #6).
-          PR_STATE=$(gh pr list --repo "$REPO" --head "fix/issue-$ISSUE" --state all --json number,state,createdAt \
-            --jq '[.[] | select(.state=="OPEN" or .state=="MERGED")] | sort_by(.createdAt) | last | .number // empty' 2>/dev/null || true)
+          if PR_STATE=$(gh pr list --repo "$REPO" --head "fix/issue-$ISSUE" --state all --json number,state,createdAt \
+            --jq '[.[] | select(.state=="OPEN" or .state=="MERGED")] | sort_by(.createdAt) | last | .number // empty'); then
+            :
+          else
+            PR_LOOKUP_RC=$?
+            echo "::error::issue-fix #$ISSUE: impossibile verificare le PR consegnate (gh pr list rc=$PR_LOOKUP_RC); non classifico la CLI come non-delivery."
+            exit 1
+          fi
           echo "issue=$ISSUE pr(head fix/issue-$ISSUE, open|merged)=${PR_STATE:-<none>} claude=$CLAUDE_OUTCOME"
           if [ -n "${PR_STATE:-}" ]; then
             echo "PR #$PR_STATE esiste (open/merged) per la issue -> run SUCCESS. Job verde anche se la CLI e' uscita '$CLAUDE_OUTCOME' (falso-fallimento: lavoro consegnato)."
@@ -903,20 +999,31 @@ jobs:
           fi
           echo "Nessuna PR ma la CLI e' uscita pulita ('$CLAUDE_OUTCOME') -> terminale legittimo (blocked/already-fixed/no-root-cause). Job verde."
 
-      - name: Release in-progress claim (zero-Claude, mutex)
-        if: always() && steps.claim.outcome != 'skipped' && steps.claim.outputs.in_flight != 'true'
+      - name: Release shared Claude quota lease
+        if: always() && steps.quota_lease.outputs.lease_consumed == 'true'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          QUOTA_LEASE_ACTION: release
+          QUOTA_LEASE_ROLE: issue-fix
+          QUOTA_LEASE_OWNER: issue-fix
+          QUOTA_LEASE_TARGET_TYPE: issue
+          QUOTA_LEASE_TARGET: ${{ github.event.issue.number }}
+          QUOTA_LEASE_TOKEN: ${{ steps.quota_lease.outputs.lease_token }}
+        run: node scripts/ci/check-quota-backoff.mjs
+
+      - name: Release in-progress claim (zero-Claude, mutex)
+        if: always() && steps.claim.outputs.claim_acquired == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ''
           CLAIMED_NUMBERS: ${{ steps.claim.outputs.claimed_numbers }}
-        run: |
-          set -uo pipefail
-          IFS=',' read -r -a claimed <<< "${CLAIMED_NUMBERS:-}"
-          for issue in "${claimed[@]}"; do
-            [ -n "$issue" ] || continue
-            gh issue edit "$issue" --repo "${{ github.repository }}" --remove-label agent:in-progress 2>/dev/null || true
-            echo "Rilasciato agent:in-progress su #$issue (best-effort)."
-          done
+          CLAIM_ACTION: release
+          CLAIM_OWNER: remote
+        run: node scripts/ci/claim-issue-group-in-flight.mjs
 
       - name: Cleanup Firebase credentials
         if: always()

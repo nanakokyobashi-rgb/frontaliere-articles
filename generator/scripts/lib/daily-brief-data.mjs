@@ -90,13 +90,27 @@ export const JOBS_HISTORY_WINDOW_DAYS = 7;
 /**
  * Same reasoning for the exchange series: the block reads the last two points
  * and the newest point at or before `lastDate - 7d`, and refuses anything older
- * than `EXCHANGE_MAX_AGE_DAYS`. Nothing before that horizon is read.
+ * than `EXCHANGE_MAX_AGE_DAYS`. The same five-day freshness tolerance is the
+ * floor for that 7d comparison: an older point is not a weekly baseline.
  */
 const EXCHANGE_WINDOW_DAYS = EXCHANGE_MAX_AGE_DAYS + 7;
 /**
  * A block degraded for this many editions in a row is not a source outage: it
  * is a contract that changed upstream and nobody noticed. See
  * `degradationAlarms`.
+ *
+ * Taratura osservata (misurata il 2026-09-12 sulla storia disponibile fino al
+ * 2026-09-11): 35 snapshot commit, 32 date `dateIso` distinte, finestra
+ * 2026-08-08…2026-09-11. `borderWait` ha 1 sequenza consecutiva di 20
+ * `available:false` e 0 sequenze isolate/alternate; `jobs` ha 0 sequenze
+ * consecutive e 1 sequenza isolata/alternata (2026-09-11); `fuel` ed
+ * `exchange` hanno 0/0. Il run osservato e ripetuto è quindi consecutivo:
+ * la soglia 3 è confermata dal dato e non viene cambiata. L'unico evento
+ * isolato di `jobs` non è una distribuzione alternata sufficiente per tarare
+ * una finestra scorrevole.
+ *
+ * Riproduzione della finestra e degli stati (dal repository):
+ * for c in $(git log --before=2026-09-12 --format=%H -- public/data/daily-brief.json); do git show $c:public/data/daily-brief.json 2>/dev/null | python3 -c "import json,sys;d=json.load(sys.stdin);print(d.get('dateIso'),{k:v.get('available') for k,v in d.get('blocks',{}).items()})"; done
  */
 export const MAX_CONSECUTIVE_DEGRADED_EDITIONS = 3;
 
@@ -373,7 +387,10 @@ export function shapeExchange(doc, { todayIso } = {}) {
     return unavailable(`latest exchange point (${last.date}) is ${Math.round(ageDays)}d old (max ${EXCHANGE_MAX_AGE_DAYS}d)`);
   }
   const weekAgoIso = new Date(lastMs - 7 * 24 * HOUR_MS).toISOString().slice(0, 10);
-  const weekAgo = [...points].reverse().find((p) => p.date <= weekAgoIso) || null;
+  const lookbackFloorIso = new Date(lastMs - EXCHANGE_WINDOW_DAYS * 24 * HOUR_MS).toISOString().slice(0, 10);
+  // `EXCHANGE_MAX_AGE_DAYS` is the established tolerance for missing FX days.
+  // Do not turn a point from a much older gap into a fresh-looking weekly delta.
+  const weekAgo = [...points].reverse().find((p) => p.date <= weekAgoIso && p.date >= lookbackFloorIso) || null;
   return {
     available: true,
     rate: round(last.rate, 4),

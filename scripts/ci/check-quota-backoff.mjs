@@ -61,6 +61,7 @@
  */
 
 import { execFileSync } from 'node:child_process';
+import { randomUUID } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -85,6 +86,604 @@ const LBL_DECOMP = 'agent:decompose';
 const LBL_DECOMP_QUEUED = 'agent:decompose-queued';
 
 const repoArgs = process.env.GH_REPO ? ['--repo', process.env.GH_REPO] : [];
+
+// ── Shared zero-Claude lease (#8365) ─────────────────────────────────────────
+//
+// The quota beacon answers "is the provider currently rate-limited?".  It does
+// not answer the more important admission question: which one of the local
+// Claude consumers owns the next attempt?  The lease is deliberately stored in
+// the same durable, already-observable surface as the beacon — issue/PR
+// comments — so no repository variable, secret, issue tracker or manifest
+// rewrite is needed.  A lease is an append-only event stream keyed by token;
+// the latest event for a token is its state.  Expiry is part of every event and
+// therefore releases a dead runner without a cleanup workflow.
+export const QUOTA_LEASE_MARKER = '<!-- CLAUDE_QUOTA_LEASE:';
+export const REVIEW_QUOTA_DEFERRED_MARKER = '<!-- REVIEW_QUOTA_DEFERRED:';
+const QUOTA_LEASE_STATES = new Set(['reserved', 'active', 'consumed', 'released']);
+const QUOTA_LEASE_LIVE_STATES = new Set(['reserved', 'active', 'consumed']);
+const QUOTA_LEASE_TARGET_TYPES = new Set(['issue', 'pr']);
+const QUOTA_LEASE_TRUSTED_ACTOR_RE = /^(?:github-actions\[bot\]|frontaliere-automation(?:\[bot\])?|claude(?:\[bot\])?|nanakokyobashi-rgb|valerielinc-ops)$/i;
+const QUOTA_LEASE_RE = /<!-- CLAUDE_QUOTA_LEASE:\s*(\{[\s\S]*?\})\s*-->/;
+const REVIEW_QUOTA_DEFERRED_RE = /<!-- REVIEW_QUOTA_DEFERRED:\s*(\{[\s\S]*?\})\s*-->/;
+const QUOTA_LEASE_DEFAULT_TTL_SEC = 60 * 60;
+const QUOTA_LEASE_DEFAULT_SCAN_MAX = 20;
+const PR_QUOTA_CONSUMER_ROLES = new Set(['review', 'redflag', 'redcheck']);
+const SHA1_RE = /^[a-f0-9]{40}$/i;
+
+// Una review o un fixer di PR sono consumatori del canale di riparazione delle
+// PR: lasciarli dietro una coda issue non vuota crea starvation (la PR non può
+// ricevere LGTM, quindi non può liberare il canale). Il floor resta invece
+// vincolante per la decomposizione e per ruoli sconosciuti.
+const QUEUE_FLOOR_BYPASS_ROLES = new Set(['review', 'redflag', 'redcheck']);
+
+function validLeaseTarget(targetType, target) {
+  return QUOTA_LEASE_TARGET_TYPES.has(targetType)
+    && /^[1-9][0-9]*$/.test(String(target || ''));
+}
+
+/** Parse one signed-by-shape lease event from a GitHub comment. Pure. */
+export function parseQuotaLeaseMarker(body) {
+  const match = String(body || '').match(QUOTA_LEASE_RE);
+  if (!match) return null;
+  let event;
+  try { event = JSON.parse(match[1]); } catch { return null; }
+  const headSha = event?.headSha;
+  const reservationRunId = event?.reservationRunId;
+  if (!event || event.version !== 1 || typeof event.token !== 'string' || !event.token
+      || typeof event.role !== 'string' || !event.role
+      || !QUOTA_LEASE_STATES.has(event.state)
+      || !validLeaseTarget(event.targetType, event.target)
+      || !Number.isFinite(Number(event.issuedAt))
+      || !Number.isFinite(Number(event.expiresAt))
+      || (headSha !== undefined && !SHA1_RE.test(String(headSha)))
+      || (reservationRunId !== undefined && !String(reservationRunId))) return null;
+  return {
+    ...event,
+    target: String(event.target),
+    issuedAt: Number(event.issuedAt),
+    expiresAt: Number(event.expiresAt),
+    ...(headSha !== undefined ? { headSha: String(headSha).toLowerCase() } : {}),
+    ...(reservationRunId !== undefined ? { reservationRunId: String(reservationRunId) } : {}),
+  };
+}
+
+/**
+ * Extract lease events in comment order. A comment with an unknown author is
+ * ignored; comments without author metadata are accepted for offline fixtures.
+ * The latter keeps the pure contract testable while the live REST response
+ * always carries `user.login`.
+ */
+export function quotaLeaseEvents(comments = []) {
+  return (comments || []).map((comment, index) => {
+    const login = String(comment?.user?.login || comment?.author?.login || '');
+    if (login && !QUOTA_LEASE_TRUSTED_ACTOR_RE.test(login)) return null;
+    const event = parseQuotaLeaseMarker(comment?.body);
+    if (!event) return null;
+    const at = Date.parse(comment?.created_at ?? comment?.createdAt ?? '');
+    return {
+      ...event,
+      commentId: Number(comment?.id) || index,
+      commentAt: Number.isFinite(at) ? Math.floor(at / 1000) : event.issuedAt,
+      commentOrder: index,
+    };
+  }).filter(Boolean);
+}
+
+/**
+ * Body idempotente che rende osservabile una review differita per contesa del
+ * lease. Il rescuer zero-Claude usa `head` + `runId` come chiave per rilanciare
+ * esattamente la run giusta dopo il rilascio, senza inventare un commit vuoto.
+ * @param {{head?: string, runId?: string|number, role?: string, reason?: string, sourceAttempt?: string|number}} event
+ */
+export function reviewQuotaDeferredBody({
+  head = '', runId = '', role = 'review', reason = '', sourceAttempt,
+} = {}) {
+  const event = {
+    version: 1,
+    head: String(head),
+    runId: String(runId),
+    role: String(role),
+    reason: String(reason || 'shared-quota-lease-unavailable'),
+  };
+  const parsedAttempt = sourceAttempt === undefined || sourceAttempt === null
+    ? undefined
+    : Number(sourceAttempt);
+  if (Number.isSafeInteger(parsedAttempt) && parsedAttempt > 0) {
+    event.sourceAttempt = parsedAttempt;
+  }
+  return `${REVIEW_QUOTA_DEFERRED_MARKER} ${JSON.stringify(event)} -->\n`
+    + `_Review differita senza consumare quota Claude: lease condiviso negato (${event.reason})._`;
+}
+
+/** Parse one review-deferred marker. Pure. */
+export function parseReviewQuotaDeferredMarker(body) {
+  const match = String(body || '').match(REVIEW_QUOTA_DEFERRED_RE);
+  if (!match) return null;
+  let event;
+  try { event = JSON.parse(match[1]); } catch { return null; }
+  if (!event || event.version !== 1
+      || !/^[a-f0-9]{40}$/i.test(String(event.head || ''))
+      || !String(event.runId || '')
+      || !PR_QUOTA_CONSUMER_ROLES.has(String(event.role || ''))
+      || !String(event.reason || '')) return null;
+  const sourceAttempt = event.sourceAttempt === undefined
+    ? undefined
+    : Number(event.sourceAttempt);
+  if (sourceAttempt !== undefined
+      && (!Number.isSafeInteger(sourceAttempt) || sourceAttempt < 1)) return null;
+  return {
+    ...event,
+    head: String(event.head),
+    runId: String(event.runId),
+    role: String(event.role),
+    reason: String(event.reason),
+    ...(sourceAttempt === undefined ? {} : { sourceAttempt }),
+  };
+}
+
+function eventRank(event) {
+  return [Number(event?.commentAt) || 0, Number(event?.commentId) || 0, Number(event?.commentOrder) || 0];
+}
+
+function laterEvent(a, b) {
+  const ar = eventRank(a);
+  const br = eventRank(b);
+  for (let i = 0; i < ar.length; i += 1) {
+    if (ar[i] !== br[i]) return ar[i] > br[i] ? a : b;
+  }
+  return b;
+}
+
+/** Latest event for every token, pure and deterministic. */
+export function latestQuotaLeaseEvents(events = []) {
+  const latest = new Map();
+  for (const event of events || []) {
+    if (!event?.token) continue;
+    const previous = latest.get(event.token);
+    latest.set(event.token, previous ? laterEvent(previous, event) : event);
+  }
+  return [...latest.values()];
+}
+
+/** Live leases only; expired leases are harmless and can be replaced. Pure. */
+export function activeQuotaLeases(events = [], { nowSec = Math.floor(Date.now() / 1000) } = {}) {
+  return latestQuotaLeaseEvents(events).filter((event) =>
+    QUOTA_LEASE_LIVE_STATES.has(event.state)
+    && Number.isFinite(Number(event.expiresAt))
+    && Number(event.expiresAt) > Number(nowSec),
+  );
+}
+
+/**
+ * Admission policy for the shared lease. The issue-fix floor still excludes
+ * decomposition and unknown consumers, but review/redflag/redcheck are allowed
+ * to contend for the same single slot: otherwise a non-empty issue queue can
+ * starve every PR forever. The write+re-read below still makes concurrent
+ * consumers fail closed.
+ */
+export function quotaLeaseDecision({
+  action = 'acquire',
+  role = 'consumer',
+  targetType = '',
+  target = '',
+  activeLeases = [],
+  queueDepth = 0,
+  nowSec = Math.floor(Date.now() / 1000),
+  headSha = '',
+  runId = '',
+} = {}) {
+  if (!validLeaseTarget(targetType, target)) {
+    return { allowed: false, error: true, reason: 'invalid-lease-target' };
+  }
+  const live = (activeLeases || []).filter((lease) =>
+    QUOTA_LEASE_LIVE_STATES.has(lease?.state)
+    && Number(lease?.expiresAt) > Number(nowSec),
+  );
+  if (action === 'release') return { allowed: true, release: true, reason: 'release-request' };
+
+  // Il rescuer zero-Claude prenota lo slot prima di rilanciare il workflow
+  // sorgente. Il primo step di quel workflow usa `acquire`, quindi deve poter
+  // adottare SOLO una reservation dello stesso ruolo, target, HEAD e run
+  // sorgente; un lease active di un altro run resta invece un veto normale.
+  if (action === 'acquire') {
+    const reservedForRun = live.find((lease) =>
+      lease.state === 'reserved'
+      && lease.role === role
+      && lease.targetType === targetType
+      && String(lease.target) === String(target),
+    );
+    const boundReservation = reservedForRun
+      && SHA1_RE.test(String(headSha || ''))
+      && String(reservedForRun.headSha || '').toLowerCase() === String(headSha).toLowerCase()
+      && String(reservedForRun.reservationRunId || '') === String(runId || '');
+    if (boundReservation && live.length !== 1) {
+      return { allowed: false, error: false, reason: 'shared-quota-lease-reservation-contended' };
+    }
+    if (boundReservation) {
+      return {
+        allowed: true,
+        existing: true,
+        token: reservedForRun.token,
+        state: reservedForRun.state,
+        reason: 'shared-quota-lease-reserved-for-head-run',
+      };
+    }
+  }
+
+  if (action === 'consume') {
+    const reservedForTarget = live.find((lease) =>
+      lease.role === role
+      && lease.targetType === targetType
+      && String(lease.target) === String(target),
+    );
+    if (reservedForTarget && live.length !== 1) {
+      return { allowed: false, error: false, reason: 'shared-quota-lease-reservation-contended' };
+    }
+    if (reservedForTarget) {
+      return {
+        allowed: true,
+        existing: true,
+        token: reservedForTarget.token,
+        state: reservedForTarget.state,
+        reason: 'issue-fix-slot-reserved-for-target',
+      };
+    }
+    if (live.length) return { allowed: false, error: false, reason: 'shared-quota-lease-active' };
+    // Direct agent:fix routes are legitimate issue-fix work even when the
+    // queued follow-up pool is non-empty; they claim the same single slot and
+    // are therefore visible to every other consumer.
+    if (role === 'issue-fix' || QUEUE_FLOOR_BYPASS_ROLES.has(role)) {
+      return { allowed: true, existing: false, state: 'active', reason: role === 'issue-fix' ? 'direct-issue-fix-slot' : 'pr-consumer-slot' };
+    }
+    if (role === 'issue-decompose' && Number(queueDepth) === 0) {
+      return { allowed: true, existing: false, state: 'active', reason: 'direct-issue-decompose-slot' };
+    }
+    return { allowed: false, error: false, reason: 'issue-fix-floor-unreserved' };
+  }
+
+  if (live.length) {
+    return {
+      allowed: false,
+      error: false,
+      reason: live.some((lease) => lease.role === 'issue-fix')
+        ? 'issue-fix-slot-active'
+        : 'shared-quota-lease-active',
+    };
+  }
+  if (role !== 'issue-fix' && !QUEUE_FLOOR_BYPASS_ROLES.has(role) && Number(queueDepth) > 0) {
+    return { allowed: false, error: false, reason: 'issue-fix-floor-unreserved' };
+  }
+  return {
+    allowed: true,
+    existing: false,
+    state: action === 'reserve' ? 'reserved' : 'active',
+    reason: action === 'reserve' ? 'issue-fix-slot-reserved' : 'residual-quota-slot',
+  };
+}
+
+function writeLeaseOutputs(result, { writeOutput = true } = {}) {
+  const fields = {
+    lease_allowed: result.allowed === true,
+    lease_acquired: result.acquired === true,
+    lease_consumed: result.consumed === true,
+    lease_released: result.released === true,
+    lease_error: result.error === true,
+    lease_token: result.token || '',
+    lease_state: result.state || '',
+    lease_expires_at: result.expiresAt || '',
+    lease_reason: result.reason || '',
+  };
+  const lines = Object.entries(fields).map(([key, value]) => `${key}=${String(value).replace(/[\r\n]/g, ' ')}`);
+  console.log(lines.join(' '));
+  if (writeOutput && process.env.GITHUB_OUTPUT) fs.appendFileSync(process.env.GITHUB_OUTPUT, `${lines.join('\n')}\n`);
+  return { ...result, ...fields };
+}
+
+function leaseGh(args) {
+  return execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
+}
+
+function leaseJson(args, label) {
+  const raw = leaseGh(args);
+  let parsed;
+  try { parsed = JSON.parse(raw); } catch (error) { throw new Error(`${label}: JSON non valido (${error.message})`); }
+  return parsed;
+}
+
+function leaseRows(value, label) {
+  if (!Array.isArray(value) || !value.every((row) => row && typeof row === 'object' && !Array.isArray(row))) {
+    throw new Error(`${label}: risposta non e' un array di oggetti`);
+  }
+  return value;
+}
+
+function leaseComments(repo, targetType, target) {
+  const pages = leaseJson([
+    'api', '--paginate', '--slurp', `repos/${repo}/issues/${target}/comments?per_page=100`,
+  ], `commenti ${targetType} #${target}`);
+  if (!Array.isArray(pages) || !pages.every((page) => Array.isArray(page))) {
+    throw new Error(`commenti ${targetType} #${target}: risposta non e' un array di pagine`);
+  }
+  const comments = pages.flat();
+  if (!comments.every((comment) => comment && typeof comment === 'object')) {
+    throw new Error(`commenti ${targetType} #${target}: pagina malformata`);
+  }
+  return comments;
+}
+
+function leaseIssueRows(repo, label, max) {
+  return leaseRows(leaseJson([
+    'issue', 'list', '--repo', repo, '--state', 'open', '--label', label,
+    '--json', 'number,updatedAt', '--limit', String(max),
+  ], `issue ${label}`), `issue ${label}`);
+}
+
+function leasePrRows(repo, max) {
+  return leaseRows(leaseJson([
+    'pr', 'list', '--repo', repo, '--state', 'open',
+    '--json', 'number,updatedAt', '--limit', String(max),
+  ], 'PR aperte'), 'PR aperte');
+}
+
+function leaseCommentBody(event) {
+  return `${QUOTA_LEASE_MARKER} ${JSON.stringify(event)} -->\n`
+    + `_Quota lease ${event.state} · ruolo ${event.role} · target ${event.targetType} #${event.target} · `
+    + `scade ${new Date(event.expiresAt * 1000).toISOString()}._`;
+}
+
+function postLeaseEvent(repo, event) {
+  const command = event.targetType === 'issue' ? 'issue' : 'pr';
+  leaseGh([command, 'comment', String(event.target), '--repo', repo, '--body', leaseCommentBody(event)]);
+}
+
+function postReviewQuotaDeferred(repo, target, role, reason, runId) {
+  const head = String(process.env.HEAD_SHA || '');
+  if (!/^[a-f0-9]{40}$/i.test(head) || !String(runId || '')) return;
+  try {
+    leaseGh([
+      'pr', 'comment', String(target), '--repo', repo,
+      '--body', reviewQuotaDeferredBody({
+        head,
+        runId,
+        role,
+        reason,
+        sourceAttempt: process.env.GITHUB_RUN_ATTEMPT,
+      }),
+    ]);
+  } catch (error) {
+    // La telemetria non deve trasformare un rifiuto corretto in un errore di
+    // lease: il rescuer ha comunque il cron come rete di sicurezza.
+    console.log(`::warning::marker review differita non pubblicato: ${String(error?.message || error).slice(0, 180)}`);
+  }
+}
+
+function leaseTargetRefs(repo, targetType, target, max) {
+  const refs = new Map();
+  const add = (type, number) => {
+    const key = `${type}:${number}`;
+    if (validLeaseTarget(type, number) && !refs.has(key)) refs.set(key, { type, number: String(number) });
+  };
+  add(targetType, target);
+  for (const label of ['agent:fix', 'agent:fix-queued', 'agent:decompose', 'agent:decompose-queued']) {
+    for (const row of leaseIssueRows(repo, label, max)) add('issue', row.number);
+  }
+  for (const row of leasePrRows(repo, max)) add('pr', row.number);
+  return [...refs.values()];
+}
+
+function scanQuotaLeases(repo, targetType, target, max, nowSec) {
+  const events = [];
+  const commentsByTarget = new Map();
+  for (const ref of leaseTargetRefs(repo, targetType, target, max)) {
+    const comments = leaseComments(repo, ref.type, ref.number);
+    commentsByTarget.set(`${ref.type}:${ref.number}`, comments);
+    events.push(...quotaLeaseEvents(comments));
+  }
+  return {
+    events,
+    active: activeQuotaLeases(events, { nowSec }),
+    commentsByTarget,
+  };
+}
+
+function leaseToken({ role, owner, runId }) {
+  const stem = String(runId || process.env.GITHUB_RUN_ID || process.pid || 'local')
+    .replace(/[^A-Za-z0-9._-]/g, '-');
+  return `quota-${role}-${owner}-${stem}-${Date.now()}-${randomUUID().slice(0, 8)}`;
+}
+
+function latestLeaseForToken(events, token) {
+  return latestQuotaLeaseEvents(events).find((event) => event.token === token) || null;
+}
+
+/**
+ * Acquire/consume/release the shared lease. All live API and parser failures
+ * are returned as `error=true` and `allowed=false`: callers must gate the
+ * Claude action on this output instead of treating a broken probe as a green
+ * skip. `writeOutput:false` is used by the drainer's in-process reservation.
+ */
+export function runQuotaLease({
+  action = process.env.QUOTA_LEASE_ACTION || '',
+  role = process.env.QUOTA_LEASE_ROLE || 'consumer',
+  owner = process.env.QUOTA_LEASE_OWNER || role,
+  targetType = process.env.QUOTA_LEASE_TARGET_TYPE || (process.env.ISSUE_NUMBER ? 'issue' : 'pr'),
+  target = process.env.QUOTA_LEASE_TARGET || process.env.ISSUE_NUMBER || process.env.PR_NUMBER || '',
+  token = process.env.QUOTA_LEASE_TOKEN || '',
+  ttlSec = Number(process.env.QUOTA_LEASE_TTL_SEC || QUOTA_LEASE_DEFAULT_TTL_SEC),
+  scanMax = Number(process.env.QUOTA_LEASE_SCAN_MAX || QUOTA_LEASE_DEFAULT_SCAN_MAX),
+  runId = process.env.GITHUB_RUN_ID || '',
+  headSha = process.env.HEAD_SHA || '',
+  reservationRunId = process.env.QUOTA_LEASE_RESERVATION_RUN_ID || '',
+  writeOutput = true,
+  dryRun = process.env.DRY_RUN === '1',
+  emitReviewDeferredMarker = true,
+} = {}) {
+  if (!action) return writeLeaseOutputs({ enabled: false, allowed: true, reason: 'lease-not-requested' }, { writeOutput });
+  if (!['acquire', 'reserve', 'consume', 'release'].includes(action)) {
+    return writeLeaseOutputs({ allowed: false, error: true, reason: 'invalid-lease-action' }, { writeOutput });
+  }
+  const repo = process.env.GH_REPO || process.env.GITHUB_REPOSITORY || '';
+  const nowSec = Math.floor(Date.now() / 1000);
+  const ttl = Number.isFinite(ttlSec) && ttlSec > 0 ? Math.floor(ttlSec) : QUOTA_LEASE_DEFAULT_TTL_SEC;
+  const max = Number.isFinite(scanMax) && scanMax > 0 ? Math.floor(scanMax) : QUOTA_LEASE_DEFAULT_SCAN_MAX;
+  if (!repo || !validLeaseTarget(targetType, target)) {
+    return writeLeaseOutputs({ allowed: false, error: true, reason: 'invalid-lease-context' }, { writeOutput });
+  }
+  if (dryRun && action !== 'release') {
+    const dryToken = token || `dry-${role}-${target}`;
+    return writeLeaseOutputs({
+      allowed: true, acquired: true, consumed: action === 'consume', token: dryToken,
+      state: action === 'reserve' ? 'reserved' : 'active', expiresAt: nowSec + ttl, reason: 'dry-run',
+    }, { writeOutput });
+  }
+  try {
+    if (action === 'release') {
+      if (!token) return writeLeaseOutputs({ allowed: false, error: true, reason: 'release-token-missing' }, { writeOutput });
+      const comments = leaseComments(repo, targetType, target);
+      const events = quotaLeaseEvents(comments);
+      const current = latestLeaseForToken(events, token);
+      if (!current) return writeLeaseOutputs({ allowed: true, released: false, token, reason: 'lease-already-absent' }, { writeOutput });
+      const released = {
+        ...current, role, owner, state: 'released', issuedAt: nowSec, expiresAt: Math.max(nowSec, Number(current.expiresAt)),
+        runId: String(runId || process.env.GITHUB_RUN_ID || ''),
+      };
+      if (current.state !== 'released') postLeaseEvent(repo, released);
+      const after = quotaLeaseEvents(leaseComments(repo, targetType, target));
+      const verified = latestLeaseForToken(after, token);
+      if (!verified || verified.state !== 'released') throw new Error('rilascio non verificabile');
+      return writeLeaseOutputs({ allowed: true, released: true, token, state: 'released', expiresAt: verified.expiresAt, reason: 'lease-released' }, { writeOutput });
+    }
+
+    const scan = scanQuotaLeases(repo, targetType, target, max, nowSec);
+    const queueDepth = leaseIssueRows(repo, 'agent:fix-queued', max).length;
+    const decision = quotaLeaseDecision({
+      action,
+      role,
+      targetType,
+      target,
+      activeLeases: scan.active,
+      queueDepth,
+      nowSec,
+      headSha,
+      runId: reservationRunId || runId,
+    });
+    if (!decision.allowed) {
+      if (emitReviewDeferredMarker && !decision.error && targetType === 'pr' && PR_QUOTA_CONSUMER_ROLES.has(role)) {
+        postReviewQuotaDeferred(repo, target, role, decision.reason, runId || process.env.GITHUB_RUN_ID);
+      }
+      return writeLeaseOutputs({ allowed: false, error: decision.error, reason: decision.reason }, { writeOutput });
+    }
+
+    const chosenToken = decision.token || token || leaseToken({ role, owner, runId });
+    const existing = decision.existing === true;
+    const state = action === 'reserve' ? 'reserved' : (action === 'consume' ? 'consumed' : 'active');
+    if (!existing || (action === 'consume' && decision.state !== 'consumed')) {
+      const event = {
+        version: 1,
+        token: chosenToken,
+        role,
+        owner,
+        targetType,
+        target: String(target),
+        state,
+        issuedAt: nowSec,
+        expiresAt: nowSec + ttl,
+        runId: String(runId || process.env.GITHUB_RUN_ID || ''),
+        ...(SHA1_RE.test(String(headSha || '')) ? { headSha: String(headSha).toLowerCase() } : {}),
+        ...(reservationRunId ? { reservationRunId: String(reservationRunId) } : {}),
+      };
+      postLeaseEvent(repo, event);
+    }
+
+    // A write is not an admission until the marker is visible again.  The
+    // second bounded scan also detects a concurrent writer: both contenders
+    // then fail closed instead of both spending Claude.
+    const after = scanQuotaLeases(repo, targetType, target, max, nowSec);
+    const own = latestLeaseForToken(after.events, chosenToken);
+    const liveAfter = after.active;
+    if (!own || !QUOTA_LEASE_LIVE_STATES.has(own.state)
+        || !liveAfter.some((lease) => lease.token === chosenToken)) {
+      throw new Error('lease scritto ma non rileggibile');
+    }
+    if (existing && liveAfter.length !== 1) {
+      // Una reservation adottabile non è un lasciapassare per una seconda run:
+      // se nel frattempo è comparso un altro lease, questa run non spende quota.
+      // La reservation è però head/run-bound a questa stessa run: la ritiriamo
+      // qui, altrimenti il rerun fallito la terrebbe viva fino al TTL e il
+      // nuovo marker di deferral non avrebbe uno slot da far riprovare.
+      const ownsReservation = own.state === 'reserved'
+        && SHA1_RE.test(String(headSha || ''))
+        && String(own.headSha || '').toLowerCase() === String(headSha).toLowerCase()
+        && String(own.reservationRunId || '') === String(reservationRunId || runId || '');
+      try {
+        if (!ownsReservation) throw new Error('reservation non più bound alla run corrente');
+        postLeaseEvent(repo, {
+          ...own,
+          state: 'released',
+          owner,
+          role,
+          issuedAt: nowSec,
+          expiresAt: Math.max(nowSec, Number(own.expiresAt)),
+          runId: String(runId || process.env.GITHUB_RUN_ID || ''),
+        });
+        const afterRelease = quotaLeaseEvents(leaseComments(repo, targetType, target));
+        const released = latestLeaseForToken(afterRelease, chosenToken);
+        if (!released || released.state !== 'released') throw new Error('reservation release non verificabile');
+      } catch (error) {
+        console.log(`::warning::reservation lease contesa non rilasciata: ${String(error?.message || error).slice(0, 180)}`);
+      }
+      if (emitReviewDeferredMarker && targetType === 'pr' && PR_QUOTA_CONSUMER_ROLES.has(role)) {
+        postReviewQuotaDeferred(
+          repo,
+          target,
+          role,
+          'shared-quota-lease-reservation-contended',
+          runId || process.env.GITHUB_RUN_ID,
+        );
+      }
+      return writeLeaseOutputs({
+        allowed: false,
+        error: false,
+        token: chosenToken,
+        state: own.state,
+        expiresAt: own.expiresAt,
+        reason: 'shared-quota-lease-reservation-contended',
+      }, { writeOutput });
+    }
+    if (!existing && liveAfter.length !== 1) {
+      postLeaseEvent(repo, {
+        ...own, state: 'released', owner, role, issuedAt: nowSec,
+        expiresAt: Math.max(nowSec, Number(own.expiresAt)),
+      });
+      // La contesa nasce DOPO la decisione iniziale: senza questo marker il
+      // perdente diventa un review gate rosso senza candidato per il rescuer.
+      // Il lease è già stato ritirato; il marker è solo il passaggio durevole
+      // al retry zero-Claude e non consuma quota.
+      if (emitReviewDeferredMarker && targetType === 'pr' && PR_QUOTA_CONSUMER_ROLES.has(role)) {
+        postReviewQuotaDeferred(
+          repo,
+          target,
+          role,
+          'shared-quota-lease-contention',
+          runId || process.env.GITHUB_RUN_ID,
+        );
+      }
+      throw new Error(`contesa lease: ${liveAfter.length} lease attivi`);
+    }
+    return writeLeaseOutputs({
+      allowed: true,
+      acquired: !existing,
+      consumed: action === 'consume',
+      token: chosenToken,
+      state: own.state,
+      expiresAt: own.expiresAt,
+      reason: decision.reason,
+    }, { writeOutput });
+  } catch (error) {
+    console.log(`::error::quota lease fail-closed: ${String(error?.message || error).slice(0, 240)}`);
+    return writeLeaseOutputs({ allowed: false, error: true, reason: 'lease-api-or-parse-error' }, { writeOutput });
+  }
+}
 
 /**
  * ── Beacon CROSS-REPO, deliberatamente ASIMMETRICO ────────────────────────
@@ -278,6 +877,10 @@ function activeBeaconIn(scope, nowMs, nowSec) {
 }
 
 function main() {
+  if (process.env.QUOTA_LEASE_ACTION) {
+    runQuotaLease();
+    return;
+  }
   const nowMs = Date.now();
   const nowSec = Math.floor(nowMs / 1000);
 

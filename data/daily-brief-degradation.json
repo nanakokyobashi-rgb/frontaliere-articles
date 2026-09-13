@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "dateIso": "2026-09-11",
+  "dateIso": "2026-09-12",
   "blocks": {
     "borderWait": {
       "degradedEditions": 0
@@ -12,7 +12,7 @@
       "degradedEditions": 0
     },
     "jobs": {
-      "degradedEditions": 1
+      "degradedEditions": 0
     }
   }
 }

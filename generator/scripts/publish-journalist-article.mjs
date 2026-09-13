@@ -37,7 +37,11 @@
  *   0 — ran fine, including per-doc failures (expected/handled, recorded on
  *       the doc as status:'failed' so the journalist can fix + resubmit).
  *   1 — hard infra failure only (Firestore unreachable / query threw before
- *       any doc could be processed).
+ *       any doc could be processed), or an interrupted multi-file registration.
+ *       In the latter case, documents completed earlier in the same drain are
+ *       put back in `queued`: their files share the same registry/SEO files as
+ *       the partial document, so the calling workflow must checkpoint only the
+ *       marker rather than publish a mixed batch.
  *
  * Usage:
  *   GOOGLE_APPLICATION_CREDENTIALS=<sa.json> node scripts/publish-journalist-article.mjs
@@ -70,6 +74,7 @@ import {
   assertNoFabricatedLaborOfficeCrossLocale,
 } from './create-article.mjs';
 import { isRegisterLockError } from './lib/register-lock.mjs';
+import { requeuePublishedDocuments } from './lib/journalist-publish-recovery.mjs';
 import { assertNoFabricatedNormAcronyms } from './lib/article-factuality-gates.mjs';
 import { generateFaqIT } from './batch-add-faq-to-articles.mjs';
 import { appendCatalogEntry } from './generate-journalist-image-catalog.mjs';
@@ -448,8 +453,16 @@ async function main() {
   let published = 0;
   let failed = 0;
   const publishedIds = [];
+  const publishedDocs = [];
+  const requeuedIds = [];
   let fatalError = null;
   let currentDocId = null;
+  const discardRequeuedFromPublishedIds = () => {
+    const requeued = new Set(requeuedIds);
+    for (let index = publishedIds.length - 1; index >= 0; index -= 1) {
+      if (requeued.has(publishedIds[index])) publishedIds.splice(index, 1);
+    }
+  };
   try {
     for (const docSnap of snap.docs) {
       // Sequential on purpose — registerArticleFiles() mutates shared source
@@ -460,7 +473,9 @@ async function main() {
       currentDocId = null;
       if (result.ok) {
         published += 1;
-        if (result.id) publishedIds.push(result.id);
+        const id = result.id || docSnap.id;
+        publishedIds.push(id);
+        publishedDocs.push({ docRef: docSnap.ref, id });
       } else {
         failed += 1;
       }
@@ -473,6 +488,36 @@ async function main() {
         + 'riparare il corpus prima del prossimo drenaggio',
       );
     }
+    if (publishedDocs.length > 0) {
+      try {
+        await requeuePublishedDocuments({ db, FieldValue, publishedDocs, requeuedIds });
+        // The workflow failure path intentionally commits the marker only. The
+        // completed documents are now queued again, so advertising them as
+        // published would make the summary claim the opposite of Firestore.
+        discardRequeuedFromPublishedIds();
+        console.error(
+          `::warning::${requeuedIds.length} documento/i completato/i prima dell'interruzione `
+          + 'rimesso/i in coda: il prossimo drenaggio li ritentera dopo la riparazione del marker',
+        );
+      } catch (requeueErr) {
+        // The helper keeps the accumulator and reports the IDs it observed as
+        // queued even when a later chunk remains unresolved. Do not turn a
+        // partial rollback into a green producer: the remaining published IDs
+        // must stay visible next to the original registration failure.
+        for (const id of requeueErr?.requeuedIds || []) {
+          if (!requeuedIds.includes(id)) requeuedIds.push(id);
+        }
+        discardRequeuedFromPublishedIds();
+        const unresolvedIds = requeueErr?.unresolvedIds || publishedDocs
+          .filter(({ id }) => !requeuedIds.includes(id))
+          .map(({ id }) => id);
+        console.error(
+          `::error::rollback giornalista parziale: ${requeuedIds.length} documento/i rimesso/i in coda; `
+          + `${unresolvedIds.length} ancora published (${unresolvedIds.join(', ') || 'nessun id'}) — `
+          + `${requeueErr instanceof Error ? requeueErr.message : String(requeueErr)}`,
+        );
+      }
+    }
     throw err;
   } finally {
     // GITHUB_OUTPUT deve essere aggiornato anche quando il ciclo si interrompe
@@ -482,6 +527,7 @@ async function main() {
     if (githubOutput) {
       try {
         fs.appendFileSync(githubOutput, `published_ids=${JSON.stringify(publishedIds)}\n`);
+        fs.appendFileSync(githubOutput, `requeued_ids=${JSON.stringify(requeuedIds)}\n`);
       } catch (outputErr) {
         console.error(`::error::impossibile scrivere published_ids: ${outputErr.message}`);
         if (!fatalError) throw outputErr;

@@ -21,13 +21,15 @@ name: Follow-up drainer (queue → agent:fix, no-Claude)
 #  - Nessun `npm ci`; ponte RC in `generator/scripts/load-rc-env.mjs`.
 #  - Identità di promozione: `GITHUB_PAT_NANAKO` (niente GitHub App qui).
 #  - Cadenza `*/20` → `*/25` ai minuti dispari, sfasata dal sito.
+#  - Il drainer è cron-driven: i burst `workflow_run` venivano cancellati per
+#    concorrenza prima di poter drenare la coda.
 
 on:
   schedule:
     - cron: '5,30,55 * * * *'
-  workflow_run:
-    workflows: ['Issue fix (Claude → PR)'] # appena un fix finisce, promuovi il prossimo
-    types: [completed]
+  # Non usare workflow_run: ogni completamento del fixer genera un burst di
+  # run concorrenti che GitHub cancella in coda. Il tick cron successivo vede
+  # lo stesso stato e lo drena senza perdere trigger.
   workflow_dispatch:
 
 concurrency:
@@ -129,9 +131,12 @@ jobs:
       # E' lo stato che la chiave di concorrenza per-issue (#908) ha reso
       # possibile fra lo sweep del triage e la run event-driven.
       #
-      # Sta qui e non in `followup-drainer.mjs` perche' quello e' `mode:
-      # identical` nel manifest. Non bloccante e con GITHUB_TOKEN: rimuove una
-      # label, e nessun workflow ascolta `unlabeled`.
+      # Sta qui come passaggio separato dalla promozione. Il drainer è `mode:
+      # adapted` nel manifest e ha un guard gemello: se la vista cattura ancora
+      # entrambe le label dopo questa riconciliazione, non promuove nello stesso
+      # tick e lascia che la finestra di sicurezza si chiuda al giro seguente.
+      # Non bloccante e con GITHUB_TOKEN: rimuove una label, e nessun workflow
+      # ascolta `unlabeled`.
       - name: Reconcile double routing (deterministic, no Claude)
         continue-on-error: true
         env:
@@ -153,6 +158,17 @@ jobs:
           # mentre la quota condivisa è esaurita significa bruciare lo slot per
           # una run che morirà su 429 al primo turno.
           QUOTA_BEACON_PEER_REPO: valerielinc-ops/frontaliere-si-o-no
+          # Il drainer riserva lo slot issue-fix prima della mutazione label;
+          # il lease è durevole abbastanza da coprire la registrazione della
+          # run promossa, ma bounded e rileggibile senza store esterno.
+          FOLLOWUP_QUOTA_LEASE_TTL_SEC: '1800'
+          FOLLOWUP_QUOTA_LEASE_SCAN_MAX: '8'
+          # issue-fix usa Codex come provider primario e Claude solo come
+          # fallback: un beacon Claude non deve congelare la coda del drainer.
+          FOLLOWUP_CODEX_FALLBACK_MODE: '1'
+          # Non chiudere dal percorso verdict-exit durante l'osservabilità del
+          # corpus: il gemello harvest è mirror-locked e non può leggere pin qui.
+          FOLLOWUP_NO_AUTOCLOSE: '1'
         run: |
           if [ -z "${GH_TOKEN:-}" ]; then
             echo "::warning::Nessun PAT usabile → drainer inerte (la promozione non farebbe partire il fixer)."

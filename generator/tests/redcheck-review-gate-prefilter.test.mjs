@@ -11,13 +11,22 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   CLAUDE_REVIEW_STEP_NAME,
+  NON_GATING_REVIEW_STEPS,
+  REVIEW_ABORT_STEP_NAME,
   REVIEW_GATE_STEP_NAME,
 } from '../../scripts/ci/lib/vitestCheck.mjs';
-import { reviewOnlyFailure } from '../../scripts/ci/redcheck-review-prefilter.mjs';
+import {
+  latestRedcheckFixClaims,
+  redcheckFixClaimDecision,
+  redcheckFixClaimKey,
+  reviewFailureKind,
+  reviewOnlyFailure,
+} from '../../scripts/ci/redcheck-review-prefilter.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const WORKFLOW = path.join(ROOT, '.github/workflows/pr-redcheck-fixer.yml');
 const source = fs.readFileSync(WORKFLOW, 'utf8');
+const claimSource = fs.readFileSync(path.join(ROOT, 'scripts/ci/redcheck-review-prefilter.mjs'), 'utf8');
 
 function preflightBlock() {
   const start = source.indexOf('- name: PR azionabile, e il rosso e\' ancora quello della HEAD?');
@@ -89,6 +98,11 @@ test('redcheck filtra il rosso di sola review prima di spendere Claude', () => {
   );
   assert.match(
     block,
+    /redcheck-review-prefilter\.mjs --kind/,
+    'il preflight deve conservare il tipo di failure, non solo il booleano Important',
+  );
+  assert.match(
+    block,
     /review_only.*true|true.*review_only/s,
     'il filtro deve produrre una decisione deterministica review-only',
   );
@@ -97,17 +111,26 @@ test('redcheck filtra il rosso di sola review prima di spendere Claude', () => {
     /review_only[^\n]*true[\s\S]*skip[\s\S]*(?:review|Claude)/,
     'un rosso di sola review deve uscire dal preflight senza invocare Claude del fixer',
   );
+  assert.match(
+    block,
+    /review_failure_kind[^\n]*transient[\s\S]*skip[\s\S]*diagnosi[\s\S]*(?:Claude|zero-Claude)/,
+    'un abort transiente senza rosso di codice deve uscire senza invocare Claude del fixer',
+  );
 });
 
 test('l helper importa i nomi degli step e il matcher dei finding condivisi', async () => {
   const helper = await import('../../scripts/ci/redcheck-review-prefilter.mjs');
   assert.equal(typeof helper.reviewOnlyFailure, 'function');
+  assert.equal(typeof helper.reviewFailureKind, 'function');
   const helperSource = fs.readFileSync(
     path.join(ROOT, 'scripts/ci/redcheck-review-prefilter.mjs'),
     'utf8',
   );
   assert.match(helperSource, /REVIEW_GATE_STEP_NAME/);
   assert.match(helperSource, /CLAUDE_REVIEW_STEP_NAME/);
+  assert.match(helperSource, /NON_GATING_REVIEW_STEPS/);
+  assert.match(helperSource, /REVIEW_ABORT_STEP_NAME/);
+  assert.match(helperSource, /REVIEW_DEATH_STEP_NAMES/);
   assert.match(helperSource, /REDFLAG_IMPORTANT_RE/);
   assert.match(helperSource, /REVIEWER_BOT_LOGIN_RE/);
 });
@@ -168,9 +191,145 @@ test('il predicato richiede un finding reale sulla HEAD, non la conclusion dello
   );
 });
 
+test('il classificatore failure resta nel job ma non aggiunge una failure di codice', () => {
+  assert.equal(
+    NON_GATING_REVIEW_STEPS.has('Classify review gate failure'),
+    true,
+    'il nome del classificatore deve provenire dalla stessa topologia condivisa',
+  );
+  assert.equal(
+    reviewOnlyFailure({
+      headSha: HEAD,
+      jobs: [{ jobs: jobs([{ name: 'Classify review gate failure', conclusion: 'failure' }]) }],
+      reviews: [[review('`x.mjs:1`: 🔴 Important: il gate manca.')]],
+    }),
+    true,
+    'la failure esplicita del classificatore distingue il verdetto ma non deve instradare al redcheck fixer',
+  );
+});
+
 test('il predicato resta chiuso su abort, failure misto e review assente', () => {
   const base = { headSha: HEAD, reviews: [[review('`x.mjs:1`: 🔴 Important: il gate manca.')]] };
   assert.equal(reviewOnlyFailure({ ...base, jobs: [{ jobs: jobs([{ name: 'Generator CI gate', conclusion: 'failure' }]) }] }), false);
   assert.equal(reviewOnlyFailure({ ...base, jobs: [{ jobs: jobs().map(({ name, steps }) => ({ name, steps: steps.filter((s) => s.name !== CLAUDE_REVIEW_STEP_NAME) })) }] }), false);
   assert.equal(reviewOnlyFailure({ headSha: HEAD, jobs: [{ jobs: jobs() }], reviews: [] }), false);
+});
+
+test('un abort transiente senza failure di codice non attiva il fixer', () => {
+  const transientJobs = [{
+    name: 'tests (node --test)',
+    steps: [
+      { name: CLAUDE_REVIEW_STEP_NAME, conclusion: 'success' },
+      { name: REVIEW_ABORT_STEP_NAME, conclusion: 'failure' },
+    ],
+  }];
+  assert.equal(
+    reviewFailureKind({ headSha: HEAD, jobs: [{ jobs: transientJobs }], reviews: [] }),
+    'transient',
+  );
+  assert.equal(
+    reviewOnlyFailure({ headSha: HEAD, jobs: [{ jobs: transientJobs }], reviews: [] }),
+    false,
+  );
+});
+
+test('un abort che rende rosso anche il gate resta transient, salvo Important reale', () => {
+  const transientWithGateJobs = [{
+    name: 'tests (node --test)',
+    steps: [
+      { name: REVIEW_GATE_STEP_NAME, conclusion: 'failure' },
+      { name: CLAUDE_REVIEW_STEP_NAME, conclusion: 'success' },
+      { name: REVIEW_ABORT_STEP_NAME, conclusion: 'failure' },
+    ],
+  }];
+  assert.equal(
+    reviewFailureKind({ headSha: HEAD, jobs: [{ jobs: transientWithGateJobs }], reviews: [] }),
+    'transient',
+  );
+  assert.equal(
+    reviewFailureKind({
+      headSha: HEAD,
+      jobs: [{ jobs: transientWithGateJobs }],
+      reviews: [[review('`x.mjs:1`: 🔴 Important: il gate manca.')]],
+    }),
+    'important',
+    'un finding reale sulla HEAD mantiene la precedenza sull abort',
+  );
+});
+
+test('un abort transiente misto a un errore di codice resta nel percorso normale', () => {
+  const transientAndCodeJobs = [{
+    name: 'tests (node --test)',
+    steps: [
+      { name: 'Generator CI gate', conclusion: 'failure' },
+      { name: CLAUDE_REVIEW_STEP_NAME, conclusion: 'success' },
+      { name: REVIEW_ABORT_STEP_NAME, conclusion: 'failure' },
+    ],
+  }];
+  assert.equal(
+    reviewFailureKind({ headSha: HEAD, jobs: [{ jobs: transientAndCodeJobs }], reviews: [] }),
+    '',
+  );
+});
+
+const CLAIM_HEAD = 'c'.repeat(40);
+const claimKey = redcheckFixClaimKey({
+  prNumber: 42,
+  headSha: CLAIM_HEAD,
+  checkFailureKey: ['tests (node --test)', 'lint'],
+});
+const claimBody = (state, token = 'claim-1', expiresAt = 1_800_000_600) => `<!-- REDCHECK_FIX_CLAIM: ${JSON.stringify({
+  version: 1,
+  token,
+  key: claimKey,
+  prNumber: '42',
+  headSha: CLAIM_HEAD,
+  checkFailureKey: 'lint,tests (node --test)',
+  state,
+  issuedAt: 1_800_000_000,
+  expiresAt,
+})} -->`;
+
+test('#8363: lo stesso rosso/HEAD attivo o terminale viene coalesciato', () => {
+  const active = [{ id: 1, created_at: '2027-01-15T08:00:00Z', body: claimBody('active') }];
+  assert.deepEqual(
+    redcheckFixClaimDecision({ key: claimKey, comments: active, nowSec: 1_800_000_100 }),
+    { allowed: false, exists: true, reason: 'same-red-claim-active' },
+  );
+  const terminal = [{ id: 2, created_at: '2027-01-15T08:01:00Z', body: claimBody('completed', 'claim-2') }];
+  assert.deepEqual(
+    redcheckFixClaimDecision({ key: claimKey, comments: terminal, nowSec: 1_800_000_100 }),
+    { allowed: false, exists: true, reason: 'same-red-terminal-claim' },
+  );
+});
+
+test('#8363: claim scaduto, rilasciato o con failure transiente è riarmabile', () => {
+  for (const state of ['released', 'failed-transient']) {
+    assert.equal(
+      redcheckFixClaimDecision({
+        key: claimKey,
+        comments: [{ id: 3, body: claimBody(state) }],
+        nowSec: 1_800_000_100,
+      }).allowed,
+      true,
+      state,
+    );
+  }
+  assert.equal(
+    redcheckFixClaimDecision({
+      key: claimKey,
+      comments: [{ id: 4, body: claimBody('active', 'claim-expired', 1_799_999_999) }],
+      nowSec: 1_800_000_100,
+    }).allowed,
+    true,
+  );
+  assert.equal(latestRedcheckFixClaims([{ id: 5, body: claimBody('active') }], claimKey).length, 1);
+});
+
+test('#8363: il preflight espone claim idempotente sul tripletto PR+HEAD+failure', () => {
+  assert.match(claimSource, /REDCHECK_FIX_CLAIM/);
+  assert.match(source, /redcheck-review-prefilter\.mjs --claim/);
+  assert.match(source, /failed_check_key/);
+  assert.match(source, /claim_allowed/);
+  assert.match(source, /QUOTA_LEASE_ACTION: acquire/);
 });

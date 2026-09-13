@@ -10,11 +10,13 @@
 // that the refresh script actually ACTS on the decision — a red run — because
 // an alarm nobody is made to read is the same silence with extra JSON.
 //
-// WHERE the red is spent is the other half: never from this step, which owns
-// the commit, but from a gate step in `generate-daily-brief.yml` that runs
-// AFTER it and reads the crossing off `$GITHUB_OUTPUT`. The streak only becomes
-// durable once the snapshot is committed, so a red before the commit would
-// re-cross the threshold every morning — bulletin gone, forever.
+// WHERE the red is spent is the other half: with a healthy output channel it is
+// never from this step, which owns the commit, but from a gate step in
+// `generate-daily-brief.yml` that runs AFTER it and reads the crossing off
+// `$GITHUB_OUTPUT`. The streak only becomes durable once the snapshot is
+// committed, so a red before the commit would re-cross the threshold every
+// morning — bulletin gone, forever. If the output channel itself fails, this
+// step goes red and prevents that unobservable crossing from being committed.
 //
 // Importing the script is safe: it runs `main()` only when it is argv[1].
 
@@ -46,6 +48,19 @@ import { sliceBetween, sliceFrom, sliceUntil } from './lib/anchored-slice.mjs';
 
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const WORKFLOW_PATH = path.join(REPO_ROOT, '.github', 'workflows', 'generate-daily-brief.yml');
+
+test('la soglia conserva la misura storica che la tara', () => {
+  const source = readFileSync(
+    path.join(REPO_ROOT, 'generator', 'scripts', 'lib', 'daily-brief-data.mjs'),
+    'utf8',
+  );
+
+  assert.ok(source.includes('35 snapshot commit, 32 date `dateIso` distinte'));
+  assert.ok(source.includes('`borderWait` ha 1 sequenza consecutiva di 20'));
+  assert.match(source, /`jobs` ha 0 sequenze\s+\* consecutive e 1 sequenza isolata\/alternata/);
+  assert.ok(source.includes('la soglia 3 è confermata dal dato e non viene cambiata'));
+  assert.ok(source.includes('git log --before=2026-09-12 --format=%H -- public/data/daily-brief.json'));
+});
 
 /** Alternatives the commit-step grep must treat as a permanent push rejection. */
 const PERMANENT_REJECTION_SIGNS = [
@@ -228,16 +243,10 @@ test('the alarm names the block, the streak and the reason, and reaches the step
   assert.equal(exitCode, undefined);
 });
 
-test('the alarm never fails the run, because failing here also skips the commit', () => {
-  // The structural constraint, and the reason the first two drafts of this
-  // alarm were wrong. This script is the FIRST step of generate-daily-brief.yml
-  // and `Commit and push` sits behind its implicit `if: success()`. A non-zero
-  // exit does not just skip today's edition: it skips the commit, so the
-  // snapshot that carries the streak never leaves the runner. Tomorrow's
-  // checkout restores the D-1 snapshot, the streak recomputes to the same
-  // number, the crossing reads as new again — red every morning forever, with
-  // the bulletin gone too. A `workflow_dispatch` reads the committed file, so
-  // it cannot break the loop either.
+test('the alarm keeps a healthy output channel non-fatal because the gate owns the red', () => {
+  // With both required outputs writable, this script must leave the snapshot
+  // commit path green. The gate after `Commit and push` owns the red, so the
+  // crossing is spent once without costing the bulletin.
   for (const [editions, before] of [[MAX_CONSECUTIVE_DEGRADED_EDITIONS, MAX_CONSECUTIVE_DEGRADED_EDITIONS - 1], [MAX_CONSECUTIVE_DEGRADED_EDITIONS + 7, MAX_CONSECUTIVE_DEGRADED_EDITIONS + 6]]) {
     const { lines, exitCode } = capture(() => reportDegradationAlarms(
       briefWithStreak(editions),
@@ -246,6 +255,25 @@ test('the alarm never fails the run, because failing here also skips the commit'
     assert.equal(exitCode, undefined, `streak ${editions} must not fail the step that owns the commit`);
     assert.ok(lines.some((l) => l.startsWith('::error::')), 'but it must still be announced');
   }
+});
+
+test('a failed GITHUB_OUTPUT append fails the step and does not publish a partial crossing', () => {
+  const outputPath = path.join(mkdtempSync(path.join(tmpdir(), 'daily-brief-out-failure-')), 'missing', 'output.txt');
+  const { lines, exitCode, outputs } = capture(
+    () => reportDegradationAlarms(
+      briefWithStreak(MAX_CONSECUTIVE_DEGRADED_EDITIONS),
+      { dryRun: false, previous: briefWithStreak(MAX_CONSECUTIVE_DEGRADED_EDITIONS - 1) },
+    ),
+    { GITHUB_OUTPUT: outputPath },
+  );
+  // The refresh writes its snapshot before reporting. A non-zero exit here is
+  // what keeps the workflow's implicit-success commit step from consuming the
+  // crossing when the gate channel is unavailable.
+  assert.notEqual(exitCode, undefined);
+  assert.notEqual(exitCode, 0);
+  assert.equal(outputs[DEGRADATION_CROSSED_OUTPUT], undefined);
+  assert.equal(outputs[DEGRADATION_BLOCKS_OUTPUT], undefined);
+  assert.equal(lines.filter((line) => line.includes('could not write')).length, 2, 'both required outputs are attempted and reported');
 });
 
 test('the crossing edition and the ones after it read differently', () => {
@@ -309,7 +337,7 @@ test('the workflow spends the red on that verdict, and only as the LAST step', (
   assert.ok(yml.includes(`steps.refresh.outputs.${DEGRADATION_BLOCKS_OUTPUT}`), 'the summary names the blocks from the same source');
   assert.match(yml, /^\s+id: refresh$/m, 'the refresh step must keep the id the gate refers to');
 
-  const steps = [...yml.matchAll(/^ {6}- name: (.+)$/gm)].map((m) => ({ name: m[1].trim(), at: m.index }));
+  const steps = [...yml.matchAll(/^ {6}- (?:name|uses): (.+)$/gm)].map((m) => ({ name: m[1].trim(), at: m.index }));
   const gateAt = yml.indexOf(`steps.refresh.outputs.${DEGRADATION_CROSSED_OUTPUT}`);
   const gate = [...steps].reverse().find((step) => step.at < gateAt);
   assert.ok(gate, 'the gate must live inside a named step');
@@ -318,6 +346,10 @@ test('the workflow spends the red on that verdict, and only as the LAST step', (
   // gate before it would kill the very snapshot that proves the alarm.
   const commit = steps.find((step) => step.name.startsWith('Commit and push'));
   assert.ok(commit && gate.at > commit.at, 'the gate must run AFTER the commit, or the streak dies on the runner');
+
+  const gateIf = yml.slice(gate.at, yml.indexOf('\n        run:', gate.at));
+  assert.match(gateIf, /if:\s*\$\{\{\s*!cancelled\(\)\s*&&/, 'the gate must run after unrelated failures, but not after cancellation');
+  assert.doesNotMatch(gateIf, /\balways\(\)/, 'the gate must not arm on a cancelled run');
 
   // And LAST, full stop. `exit 1` skips every later step whose `if:` carries no
   // status function — which is every step here. That already cost the CDN warm

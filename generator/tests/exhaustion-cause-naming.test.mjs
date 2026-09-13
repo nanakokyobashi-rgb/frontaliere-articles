@@ -404,7 +404,7 @@ describe('classifyExhaustionCause — quando una voce contiene DUE cause (#976)'
   });
 
   it('non fa votare alla coda transitoria oltre la finestra (#1320)', () => {
-    const body = `${'x'.repeat(220)} temporarily unavailable before HTTP 401 invalid api key`;
+    const body = `${'x'.repeat(220)} HTTP 401 invalid api key before temporarily unavailable`;
     const b = classifyExhaustionCause([
       { reason: `m: ${body}`, authoritative: null, transientWindow: 200 },
     ]);

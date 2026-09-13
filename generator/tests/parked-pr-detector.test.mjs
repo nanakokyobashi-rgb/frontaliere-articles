@@ -11,11 +11,13 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { selectParkedPrs, DEFAULT_PARKED_HOURS } from '../../scripts/ci/parked-pr-detector.mjs';
 
 const NOW = Date.parse('2026-08-08T12:00:00Z');
 const hoursAgo = (h) => new Date(NOW - h * 3600 * 1000).toISOString();
 const nums = (prs) => prs.map((p) => p.number);
+const detectorSource = readFileSync(new URL('../../scripts/ci/parked-pr-detector.mjs', import.meta.url), 'utf8');
 
 test('una draft ferma oltre la soglia è parcheggiata', () => {
   const prs = [{ number: 33, isDraft: true, updatedAt: hoursAgo(72), labels: [] }];
@@ -96,4 +98,12 @@ test('sceglie solo le parcheggiate da un elenco misto', () => {
     { number: 33, isDraft: true, updatedAt: hoursAgo(96), labels: [] },          // ← questa
   ];
   assert.deepEqual(nums(selectParkedPrs(prs, NOW)), [33]);
+});
+
+test('lo scan reale usa la lista REST paginata e non un cap silenzioso', () => {
+  assert.match(detectorSource, /paginatedJsonLines/);
+  assert.match(detectorSource, /\['api', `repos\/\$\{REPO\}\/pulls\?state=open&per_page=100`/);
+  assert.match(detectorSource, /--paginate/);
+  assert.doesNotMatch(detectorSource, /\['pr', 'list'/);
+  assert.match(detectorSource, /split\(\/\\r\?\\n\//);
 });

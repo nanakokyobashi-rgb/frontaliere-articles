@@ -47,14 +47,16 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
 import { readFileSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 // Le superfici NON sono riscritte qui: le enumera lo stesso modulo che usa
 // `scripts/retire-article.mjs`. Un secondo elenco a mano è già divergito una
-// volta — mancavano `content/blogArticleIds.ts`, i file SEO e il ledger delle
-// immagini, quindi un id ritirato sopravvissuto lì passava verde proprio nel
-// test che esiste per accorgersene.
+// volta — mancavano `content/blogArticleIds.ts` e i file SEO, quindi un id
+// ritirato sopravvissuto lì passava verde proprio nel test che esiste per
+// accorgersene. Il ledger immagini è invece escluso di proposito: contiene
+// la provenienza storica degli asset e può legittimamente conservare l'id.
 import { SECTIONS, leftoverSurfacesFor, seoFilesFor, surfaceMentionsArticleId } from '../../scripts/lib/article-surfaces.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -62,8 +64,33 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const RETIRED_FILE = 'data/retired-articles.json';
 const LOCALES = ['it', 'en', 'de', 'fr'];
 
-/** Il pavimento sotto cui una superficie letta è rotta, non pulita. */
-const MIN_SURFACE_BYTES = 1000;
+/**
+ * Una superficie dimezzata è già una regressione catastrofica; il valore è
+ * derivato dal blob osservato in `HEAD`, non da un floor storico che il corpus
+ * ha superato da anni. Il clone del corpus è completo secondo AGENTS.md, per
+ * l'assenza del blob-base è un errore del test e non un fallback permissivo.
+ */
+const SURFACE_SIZE_FRACTION = 0.5;
+const surfaceFloorCache = new Map();
+
+function observedSurfaceBytes(rel) {
+  const cached = surfaceFloorCache.get(rel);
+  if (cached !== undefined) return cached;
+  let bytes;
+  try {
+    bytes = execFileSync('git', ['show', `HEAD:${rel}`], {
+      cwd: ROOT,
+      encoding: 'buffer',
+      maxBuffer: 32 * 1024 * 1024,
+    }).length;
+  } catch (error) {
+    assert.fail(`${rel}: impossibile misurare la superficie in HEAD (${error.message})`);
+  }
+  assert.ok(bytes > 0, `${rel}: il blob-base è vuoto`);
+  const floor = Math.ceil(bytes * SURFACE_SIZE_FRACTION);
+  surfaceFloorCache.set(rel, floor);
+  return floor;
+}
 
 /**
  * Le superfici lette una sola volta: i file SEO stanno fra i 150 kB e i 5,7 MB
@@ -78,9 +105,10 @@ function readSurface(rel) {
   const abs = path.join(ROOT, rel);
   assert.ok(existsSync(abs), `${rel}: superficie assente — il test non può dire nulla`);
   const src = readFileSync(abs, 'utf-8');
+  const floor = observedSurfaceBytes(rel);
   assert.ok(
-    src.length >= MIN_SURFACE_BYTES,
-    `${rel}: ${src.length} byte (< ${MIN_SURFACE_BYTES}). Una superficie che si legge vuota fa passare `
+    Buffer.byteLength(src, 'utf-8') >= floor,
+    `${rel}: ${Buffer.byteLength(src, 'utf-8')} byte (< ${floor}, floor derivato dalla metà del blob osservato in HEAD). Una superficie che si legge vuota fa passare `
     + 'ogni asserzione di assenza: è il parser a essere rotto, non il corpus a essere pulito.',
   );
   surfaceCache.set(rel, src);
@@ -129,7 +157,8 @@ test('ogni articolo ritirato è sparito da TUTTE le superfici', () => {
     const { id } = entry;
 
     // Le superfici testuali: registro, mappa slug, meta per locale, file SEO,
-    // ledger URL→id, ledger immagini, union degli id.
+    // ledger URL→id e union degli id. Il ledger immagini non è qui: la sua
+    // menzione dell'id è la provenienza dell'asset e resta legittima.
     for (const rel of leftoverSurfacesFor(entry.section)) {
       // `surfaceMentionsArticleId` e non `includes(id)` nudo: gli id si annidano
       // (`frontalieri-disoccupazione-svizzera-2026` contiene
@@ -189,21 +218,21 @@ test('il vincitore di ogni ritiro è ancora pubblicato', () => {
 
 test('l\'elenco delle superfici copre tutto ciò da cui si rimuove una riga', () => {
   // Il gate leggeva quattro superfici su nove: un id ritirato che sopravviveva
-  // nella union, in un file SEO o nel ledger immagini passava verde. Ora
-  // l'elenco è quello di `scripts/retire-article.mjs`, ma un elenco condiviso
-  // resta sbagliabile in un colpo solo — queste asserzioni nominano le tre
-  // superfici che mancavano, così togliendone una il test lo dice.
+  // nella union o in un file SEO passava verde. Ora l'elenco è quello di
+  // `scripts/retire-article.mjs`, ma un elenco condiviso resta sbagliabile in
+  // un colpo solo — queste asserzioni nominano le superfici che mancavano,
+  // così togliendone una il test lo dice.
   const frontaliere = leftoverSurfacesFor('frontaliere');
   for (const rel of [
     SECTIONS.frontaliere.registryFile,
     SECTIONS.frontaliere.slugDataFile,
     SECTIONS.frontaliere.idUnionFile,
     SECTIONS.frontaliere.sourceLedger,
-    'data/blog-images-used.json',
     'content/seo/seo-blog.ts',
   ]) {
     assert.ok(frontaliere.includes(rel), `superficie non sorvegliata: ${rel}`);
   }
+  assert.ok(!frontaliere.includes('data/blog-images-used.json'), 'il ledger immagini non è un residuo di articolo');
 
   const svizzera = leftoverSurfacesFor('svizzera');
   for (const rel of [
@@ -211,10 +240,10 @@ test('l\'elenco delle superfici copre tutto ciò da cui si rimuove una riga', ()
     SECTIONS.svizzera.slugDataFile,
     SECTIONS.svizzera.sourceLedger,
     'content/seo/seo-blog-ch.ts',
-    'data/blog-images-used.json',
   ]) {
     assert.ok(svizzera.includes(rel), `superficie non sorvegliata: ${rel}`);
   }
+  assert.ok(!svizzera.includes('data/blog-images-used.json'), 'il ledger immagini non è un residuo di articolo');
 
   // `seo-blog.ts` non ha il trattino: col glob `seo-blog-*.ts` restava fuori
   // sia dalla rimozione sia dalla verifica, e contiene ancora ~1.000 voci.

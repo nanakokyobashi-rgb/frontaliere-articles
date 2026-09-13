@@ -275,6 +275,66 @@ function runtimeFlagsInvokedBy(text, runtimePath) {
   return flags;
 }
 
+/** Remove shell comments without treating a quoted `#` as a comment. */
+function stripShellComment(line) {
+  let quote = null;
+  let escaped = false;
+  for (let index = 0; index < line.length; index += 1) {
+    const ch = line[index];
+    if (quote === '"') {
+      if (escaped) {
+        escaped = false;
+      } else if (ch === '\\') {
+        escaped = true;
+      } else if (ch === '"') {
+        quote = null;
+      }
+      continue;
+    }
+    if (quote === "'") {
+      if (ch === "'") quote = null;
+      continue;
+    }
+    if (ch === '"' || ch === "'") {
+      quote = ch;
+    } else if (ch === '#' && (index === 0 || /\s/u.test(line[index - 1]))) {
+      return line.slice(0, index);
+    }
+  }
+  return line;
+}
+
+function isCaseLabelForFlag(line, flag) {
+  const closing = line.indexOf(')');
+  if (closing === -1) return false;
+  const labels = line
+    .slice(0, closing)
+    .trim()
+    .split(/\s*\|\s*/u)
+    .map((label) => label.trim());
+  return labels.includes(flag);
+}
+
+/**
+ * A `case` label is a dispatch only when it is attached to a shell case
+ * statement. Anchoring it to the case block prevents a usage string or a
+ * trailing comment containing `<flag>)` from becoming a false positive.
+ */
+function hasCaseDispatchLabel(executableText, flag) {
+  let caseDepth = 0;
+  for (const rawLine of executableText.split(/\r?\n/u)) {
+    const line = stripShellComment(rawLine).trim();
+    if (!line) continue;
+    if (/^case\b.*\bin\s*;?$/u.test(line)) {
+      caseDepth += 1;
+      continue;
+    }
+    if (caseDepth > 0 && isCaseLabelForFlag(line, flag)) return true;
+    if (/^esac\b/u.test(line)) caseDepth = Math.max(0, caseDepth - 1);
+  }
+  return false;
+}
+
 /**
  * Plan one remote source check per distinct runtime flag invoked by the
  * artifacts. Duplicate invocations across the 23 groups remain traceable
@@ -287,14 +347,27 @@ export function planRuntimeFlagChecks(
 ) {
   const declaredRuntimePaths = new Set(contract?.siteRuntimePaths || []);
   const artifactsByFlag = new Map();
+  const zeroMatchArtifacts = [];
   for (const artifact of artifactSources || []) {
-    for (const flag of runtimeFlagsInvokedBy(artifact.text, runtimePath)) {
+    const flags = runtimeFlagsInvokedBy(artifact.text, runtimePath);
+    if (flags.size === 0 && declaredRuntimePaths.has(runtimePath)) {
+      zeroMatchArtifacts.push({
+        field: `${artifact.file}#runtime`,
+        sitePath: runtimePath,
+        runtimePath,
+        flag: null,
+        artifactFiles: [artifact.file],
+        declared: true,
+        unobservedArtifact: true,
+      });
+    }
+    for (const flag of flags) {
       const files = artifactsByFlag.get(flag) || [];
       files.push(artifact.file);
       artifactsByFlag.set(flag, files);
     }
   }
-  return [...artifactsByFlag.entries()]
+  const flagChecks = [...artifactsByFlag.entries()]
     .sort(([left], [right]) => left.localeCompare(right))
     .map(([flag, artifactFiles]) => ({
       field: runtimePath + '#' + flag,
@@ -304,20 +377,21 @@ export function planRuntimeFlagChecks(
       artifactFiles,
       declared: declaredRuntimePaths.has(runtimePath),
     }));
+  return [...flagChecks, ...zeroMatchArtifacts];
 }
 
 /**
  * Check a runtime source semantically, not by a comment or usage example:
  * the flag must participate in the script's argument dispatch. This covers
- * the current if/elif form and leaves the case-label form available to a
- * future rewrite.
+ * the current if/elif form and a real `case` block, never a comment or a
+ * usage/example string.
  */
 export function isRuntimeFlagSupported(bytes, flag) {
   if (!bytes || !RUNTIME_FLAG_PATTERN.test(flag)) return false;
   const text = Buffer.from(bytes).toString('utf8');
   const executableText = text
     .split(/\r?\n/u)
-    .filter((line) => !line.trimStart().startsWith('#'))
+    .map(stripShellComment)
     .join('\n');
   const escaped = escapeRegExp(flag);
   const comparison = new RegExp(
@@ -326,8 +400,7 @@ export function isRuntimeFlagSupported(bytes, flag) {
       "['\"]?(?=[\\s\\];]|$)",
     'u',
   );
-  const caseLabel = new RegExp('(?:^|[|;&\\s])' + escaped + '\\s*\\)', 'mu');
-  return comparison.test(executableText) || caseLabel.test(executableText);
+  return comparison.test(executableText) || hasCaseDispatchLabel(executableText, flag);
 }
 
 /**
@@ -350,7 +423,10 @@ export function evaluateRuntimeFlagChecks(
     const seen = observed instanceof Map ? observed.get(check.field) : observed?.[check.field];
     let state;
     let detail = '';
-    if (!check.declared) {
+    if (check.unobservedArtifact) {
+      state = 'unobserved';
+      detail = `artifact ${check.artifactFiles[0]} non invoca ${check.runtimePath}: nessuna forma riconosciuta`;
+    } else if (!check.declared) {
       state = 'undeclared';
       detail = check.runtimePath + ' non è presente in contract.siteRuntimePaths';
     } else if (!seen || seen.error) {
@@ -812,7 +888,7 @@ async function main() {
 
   const runtimeObserved = new Map();
   for (const check of runtimeChecks) {
-    if (!check.declared) continue;
+    if (!check.declared || check.unobservedArtifact) continue;
     runtimeObserved.set(check.field, await observe(check.sitePath));
   }
 

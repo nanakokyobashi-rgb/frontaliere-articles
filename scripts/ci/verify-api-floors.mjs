@@ -29,7 +29,8 @@
 import fs from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import path from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
+import { RSS_LOCALES, RSS_MAX_ITEMS, RSS_SECTIONS } from '../../engine/rssFeeds.mjs';
 import {
   floorFrom,
   retentionLine,
@@ -43,7 +44,13 @@ import {
   missingCorpusMessage,
   countSeoEntries,
   collectSeoEntryIds,
+  latestSeoPublication,
   SECTION_BODY_DIRS,
+  SECTION_COUNTERS,
+  SECTION_SITEMAPS,
+  ARCHIVE_SITEMAP,
+  countSourceSitemapEntries,
+  countSourceArchiveSitemapUrls,
   SEO_CHUNK_DIR,
   IMAGE_SOURCE_DIR,
 } from '../lib/corpus-floors.mjs';
@@ -51,28 +58,45 @@ import {
 // `<item>` citato dentro un CDATA non e' un elemento del feed, e contarlo qui
 // alzerebbe la misura sopra il pavimento mascherando un feed troncato.
 import { countXmlTags } from '../lib/count-xml-tags.mjs';
+import { stripNonMarkup } from '../lib/count-xml-tags.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
-/** Le due sezioni, col contatore del manifest che ciascuna alimenta. */
-export const SECTION_COUNTERS = {
-  frontaliere: 'articles',
-  svizzera: 'swissArticles',
-};
+// Re-export per i consumer del verifier: la definizione condivisa vive nel
+// modulo dei floor, così writer e gate non possono divergere sui nomi.
+export { SECTION_COUNTERS, SECTION_SITEMAPS, ARCHIVE_SITEMAP };
 
 /** La popolazione dei chunk ha un preallarme proprio: 90% di una run precedente.
  * Il 97% della retention degli articoli sarebbe rumore permanente per il
  * rapporto chunk/corrente, mentre il 90% segnala una contrazione sostanziale. */
 export const FEED_POPULATION_WARN_RETENTION = 0.9;
 
+/** La massima anzianità ammessa dell'ultimo item rispetto al corpus SEO. */
+export const FEED_FRESHNESS_MAX_LAG_HOURS = 72;
+const FEED_FRESHNESS_MAX_LAG_MS = FEED_FRESHNESS_MAX_LAG_HOURS * 60 * 60 * 1000;
+
 /**
  * A quale sezione appartiene un feed, dal nome del file.
  *
- * `rss-svizzera*.xml` e' la sezione svizzera, tutto il resto e' frontaliere —
- * e' la stessa convenzione che `RSS_SECTIONS` usa per generarli.
+ * Il nome viene risolto dalla stessa `RSS_SECTIONS` che genera i feed. Un nome
+ * sconosciuto non viene assegnato per default a frontaliere: e' un errore di
+ * censimento che il gate deve rendere visibile.
  */
-export function feedSection(fileName) {
-  return /^rss-svizzera/.test(fileName) ? 'svizzera' : 'frontaliere';
+function feedNames(section) {
+  const names = new Set([section.mainFeed]);
+  if (typeof section.feedFile === 'function') {
+    for (const locale of RSS_LOCALES) names.add(section.feedFile(locale));
+  }
+  return names;
+}
+
+/** I nomi di tutti i feed che la tabella RSS promette di pubblicare. */
+export function expectedFeedNames(sections = RSS_SECTIONS) {
+  return [...new Set(sections.flatMap((section) => [...feedNames(section)]))];
+}
+
+export function feedSection(fileName, sections = RSS_SECTIONS) {
+  return sections.find((section) => feedNames(section).has(fileName))?.id ?? null;
 }
 
 const ZERO_REVISION_RE = /^0+$/;
@@ -172,6 +196,18 @@ export function feedSourceFloor(expected, section) {
   return Number.isFinite(previous) ? Math.max(current, previous) : current;
 }
 
+function sitemapSourceFloor(expected, section) {
+  return expected.sourceSitemaps?.[section] ?? expected.sourceArticles?.[section] ?? 0;
+}
+
+function archiveSitemapSource(expected) {
+  const errors = Object.entries(expected.sourceArchiveSitemapErrors ?? {});
+  const total = Object.values(expected.sourceArchiveSitemapUrls ?? {})
+    .filter((count) => Number.isFinite(count) && count > 0)
+    .reduce((sum, count) => sum + count, 0);
+  return { errors, total };
+}
+
 function feedPopulationReference(expected, section) {
   const current = expected.feedSources?.[section] ?? 0;
   const previous = expected.previousFeedSources?.[section];
@@ -181,10 +217,11 @@ function feedPopulationReference(expected, section) {
 /**
  * Il nucleo puro: date le misure, quali pavimenti sono sfondati.
  *
- * @param {{articleCounts: Record<string, number>, feeds: {name: string, items: number}[],
- *          images: number|null, imageErrors?: string[]}} measured  cio' che l'artefatto dichiara
- * @param {{sourceArticles: Record<string, number>, feedSources: Record<string, number>,
+ * @param {{articleCounts: Record<string, number>, sitemaps?: Record<string, number>, feeds: {name: string, items: number, latestPublication?: {datePublished: string, timestamp: number}|null}[],
+ *          missingFeeds?: string[], images: number|null, imageErrors?: string[]}} measured  cio' che l'artefatto dichiara
+ * @param {{sourceArticles: Record<string, number>, sourceSitemaps?: Record<string, number>, sourceArchiveSitemapUrls?: Record<string, number>, sourceArchiveSitemapErrors?: Record<string, string>, feedSources: Record<string, number>,
  *          previousFeedSources?: Record<string, number|null>, sourceImages: number|null,
+ *          latestSeoPublications?: Record<string, {articleId: string, datePublished: string, timestamp: number}|null>,
  *          rssMaxItems: number}} expected   cio' che il corpus
  *          sorgente promette: `sourceArticles` sono i file di corpo (il riferimento di
  *          `manifest.counts`), `feedSources` le voci dei chunk SEO (quello dei feed)
@@ -193,6 +230,10 @@ function feedPopulationReference(expected, section) {
 export function floorViolations(measured, expected, retention = undefined) {
   const violations = [...(measured.imageErrors ?? [])];
   const floor = (n) => floorFrom(n, retention);
+
+  for (const feedName of measured.missingFeeds ?? []) {
+    violations.push(`${feedName}: feed RSS atteso da RSS_SECTIONS assente o non è un documento RSS`);
+  }
 
   for (const [section, counter] of Object.entries(SECTION_COUNTERS)) {
     const source = expected.sourceArticles[section] ?? 0;
@@ -219,6 +260,50 @@ export function floorViolations(measured, expected, retention = undefined) {
     }
   }
 
+  // Le sitemap articolo sono un secondo punto di uscita del corpus: il
+  // manifest puo' essere intatto mentre una sitemap viene serializzata a
+  // meta'. `measureDist` fornisce sempre questa mappa per l'artefatto reale;
+  // il guard conserva compatibilita' con i fixture puramente manifest/feed
+  // dei consumer del nucleo.
+  if (measured.sitemaps) {
+    for (const [section, file] of Object.entries(SECTION_SITEMAPS)) {
+      const source = sitemapSourceFloor(expected, section);
+      if (source === 0) continue;
+      const declared = measured.sitemaps[file];
+      if (typeof declared !== 'number') {
+        violations.push(`${file} assente: il corpus sorgente ne tiene ${source} articoli`);
+        continue;
+      }
+      const min = floor(source);
+      if (declared < min) {
+        violations.push(
+          `${file}: ${declared} url contro ${source} articoli sorgente (pavimento ${min}) — sitemap troncata`,
+        );
+      }
+    }
+
+    const { errors: archiveSourceErrors, total: archiveSource } = archiveSitemapSource(expected);
+    for (const [section, message] of archiveSourceErrors) {
+      violations.push(
+        `${ARCHIVE_SITEMAP}: riferimento sorgente ${section} non verificabile — ${message}`,
+      );
+    }
+    if (archiveSourceErrors.length === 0 && archiveSource > 0) {
+      const declared = measured.sitemaps[ARCHIVE_SITEMAP];
+      if (typeof declared !== 'number') {
+        violations.push(`${ARCHIVE_SITEMAP} assente: il corpus sorgente ne richiede ${archiveSource} url`);
+      } else {
+        const min = floor(archiveSource);
+        if (declared < min) {
+          violations.push(
+            `${ARCHIVE_SITEMAP}: ${declared} url contro ${archiveSource} url sorgente ` +
+              `(pavimento ${min}) — sitemap archive troncata`,
+          );
+        }
+      }
+    }
+  }
+
   // Un feed e' tagliato a RSS_MAX_ITEMS, quindi il suo atteso e' il minimo fra
   // il tetto e la popolazione che lo GENERA: su una sezione piccola un feed
   // corto e' corretto, su una grande e' un troncamento.
@@ -233,6 +318,10 @@ export function floorViolations(measured, expected, retention = undefined) {
   const missingSeo = new Set();
   for (const feed of measured.feeds) {
     const section = feedSection(feed.name);
+    if (section === null) {
+      violations.push(`${feed.name}: nessuna sezione RSS_SECTIONS corrispondente — feed non mappato`);
+      continue;
+    }
     const current = expected.feedSources?.[section] ?? 0;
     // Stessa regola dei corpi, un riferimento diverso: zero voci nei chunk non
     // e' «feed legittimamente vuoto», e' la lista dei chunk che non risolve —
@@ -255,6 +344,25 @@ export function floorViolations(measured, expected, retention = undefined) {
         `${feed.name}: ${feed.items} <item> contro ${min} attesi ` +
           `(${current} voci nei chunk SEO di ${section}; riferimento storico/floor ${source}) — feed troncato`,
       );
+    }
+
+    if (expected.latestSeoPublications) {
+      const sourcePublication = expected.latestSeoPublications[section];
+      if (!sourcePublication) {
+        violations.push(`${feed.name}: nessuna datePublished valida nei chunk SEO di ${section}`);
+      } else if (!feed.latestPublication) {
+        violations.push(`${feed.name}: nessun <pubDate> valido nell'artefatto RSS`);
+      } else {
+        const lagMs = sourcePublication.timestamp - feed.latestPublication.timestamp;
+        if (lagMs > FEED_FRESHNESS_MAX_LAG_MS) {
+          const lagHours = (lagMs / (60 * 60 * 1000)).toFixed(1);
+          violations.push(
+            `${feed.name}: ultima <pubDate> ${feed.latestPublication.datePublished} è ${lagHours}h ` +
+              `più vecchia dell'ultima datePublished ${sourcePublication.datePublished} nei chunk SEO di ` +
+              `${section} (soglia ${FEED_FRESHNESS_MAX_LAG_HOURS}h) — feed stantio`,
+          );
+        }
+      }
     }
   }
 
@@ -297,9 +405,10 @@ export function floorViolations(measured, expected, retention = undefined) {
  * rapporto osservabile PRIMA che diventi un fallimento.
  *
  * Le righe le produce lo stesso attraversamento di `floorViolations`, con gli
- * stessi riferimenti — i corpi per `manifest.counts`, i chunk SEO (tagliati a
- * `RSS_MAX_ITEMS`) per i feed, le hero per le immagini: un secondo criterio
- * qui misurerebbe qualcosa che il gate non gata, che e' peggio di non misurare.
+ * stessi riferimenti — i corpi per `manifest.counts`, le sitemap articolo, i
+ * chunk SEO (tagliati a `RSS_MAX_ITEMS`) per i feed, le hero per le immagini:
+ * un secondo criterio qui misurerebbe qualcosa che il gate non gata, che e'
+ * peggio di non misurare.
  *
  * Le righe SENZA riferimento non compaiono: sorgente a zero non e' un rapporto
  * basso, e' l'assenza del riferimento, ed e' gia' una violazione bloccante.
@@ -316,6 +425,21 @@ export function retentionReport(measured, expected) {
     rows.push({ kind: 'manifest', label: `manifest.counts.${counter}`, declared, source });
   }
 
+  if (measured.sitemaps) {
+    for (const [section, file] of Object.entries(SECTION_SITEMAPS)) {
+      const source = sitemapSourceFloor(expected, section);
+      const declared = measured.sitemaps[file];
+      if (source <= 0 || typeof declared !== 'number') continue;
+      rows.push({ kind: 'sitemap', label: file, declared, source });
+    }
+
+    const { errors: archiveSourceErrors, total: archiveSource } = archiveSitemapSource(expected);
+    const declared = measured.sitemaps[ARCHIVE_SITEMAP];
+    if (archiveSourceErrors.length === 0 && archiveSource > 0 && typeof declared === 'number') {
+      rows.push({ kind: 'sitemap', label: ARCHIVE_SITEMAP, declared, source: archiveSource });
+    }
+  }
+
   // Il feed e' capato a RSS_MAX_ITEMS, ma la sua popolazione sorgente non lo
   // e'. Confrontare i chunk con la popolazione della run precedente rende
   // visibile un'erosione da 3750 a 60 voci, che il rapporto del feed (50/50)
@@ -325,11 +449,13 @@ export function retentionReport(measured, expected) {
     const declared = expected.feedSources?.[section] ?? 0;
     const source = feedPopulationReference(expected, section);
     if (source <= 0 || declared <= 0) continue;
-    rows.push({ kind: 'feed-population', label: `chunk SEO ${section}/corpus`, declared, source });
+    rows.push({ kind: 'feed-population', label: `chunk SEO ${section}/run precedente`, declared, source });
   }
 
   for (const feed of measured.feeds) {
-    const source = feedSourceFloor(expected, feedSection(feed.name));
+    const section = feedSection(feed.name);
+    if (section === null) continue;
+    const source = feedSourceFloor(expected, section);
     if (source <= 0) continue;
     // Lo stesso atteso del pavimento: un feed e' tagliato a RSS_MAX_ITEMS,
     // quindi su una sezione grande il 100% e' 50 item, non 3750.
@@ -375,9 +501,9 @@ export function retentionAdvisories(rows, retention = FLOOR_RETENTION, warn = FL
 }
 
 /**
- * Le righe da stampare a ogni run: i due rapporti del manifest, le popolazioni
- * dei chunk SEO, quello delle immagini, e — per i feed — il PIU' MAGRO della
- * sezione.
+ * Le righe da stampare a ogni run: i rapporti del manifest, le due sitemap, le
+ * popolazioni dei chunk SEO, quello delle immagini, e — per i feed — il PIU'
+ * MAGRO della sezione.
  *
  * I dieci feed condividono il riferimento della loro sezione e stanno quasi
  * sempre tutti al tetto: stamparli tutti annegherebbe le due righe che contano
@@ -404,20 +530,56 @@ export function retentionLines(rows, retention = FLOOR_RETENTION) {
     );
 }
 
+function latestFeedPublication(xml) {
+  const markup = stripNonMarkup(xml);
+  const items = [...markup.matchAll(/<item(?:\s[^>]*)?>([\s\S]*?)<\/item>/g)];
+  // Un latest valido non basta: ogni item che il floor conta deve avere
+  // esattamente una data parseabile, altrimenti la superficie pubblicata e'
+  // parzialmente corrotta anche se un altro item e' fresco.
+  if (items.length !== countXmlTags(markup, 'item')) return null;
+
+  let latest = null;
+  for (const [, item] of items) {
+    const dates = [...item.matchAll(/<pubDate(?:\s[^>]*)?>\s*([^<]*?)\s*<\/pubDate>/g)];
+    if (dates.length !== 1) return null;
+    const datePublished = dates[0][1].trim();
+    const timestamp = Date.parse(datePublished);
+    if (!Number.isFinite(timestamp)) return null;
+    if (!latest || timestamp > latest.timestamp) latest = { datePublished, timestamp };
+  }
+  return latest;
+}
+
+function isRssDocument(xml) {
+  return countXmlTags(xml, 'rss') > 0;
+}
+
 /** Legge dall'artefatto su disco le misure che il nucleo puro confronta. */
 export function measureDist(distDir) {
   const readOut = (name) => fs.readFileSync(path.join(distDir, name), 'utf-8');
   const manifest = JSON.parse(readOut('manifest.json'));
 
-  // I feed si riconoscono dal DOCUMENTO, non dal nome: una lista di nomi qui
-  // sarebbe una seconda copia di quella dello YAML, e un feed aggiunto domani
-  // resterebbe fuori dal gate senza che nulla lo segnali.
+  // I feed si riconoscono dal DOCUMENTO, non dal nome: i nomi attesi sono
+  // comunque derivati dalla tabella del producer, così un file atteso assente
+  // o non-RSS non sparisce semplicemente dalla lista delle misure.
   const feeds = fs
     .readdirSync(distDir)
     .filter((f) => f.endsWith('.xml'))
     .map((name) => ({ name, xml: readOut(name) }))
-    .filter(({ xml }) => xml.includes('<rss'))
-    .map(({ name, xml }) => ({ name, items: countXmlTags(xml, 'item') }));
+    .filter(({ xml }) => isRssDocument(xml))
+    .map(({ name, xml }) => ({
+      name,
+      items: countXmlTags(xml, 'item'),
+      latestPublication: latestFeedPublication(xml),
+    }));
+  const presentFeedNames = new Set(feeds.map(({ name }) => name));
+  const missingFeeds = expectedFeedNames().filter((name) => !presentFeedNames.has(name));
+
+  const sitemaps = {};
+  for (const file of [...Object.values(SECTION_SITEMAPS), ARCHIVE_SITEMAP]) {
+    const absolute = path.join(distDir, file);
+    if (fs.existsSync(absolute)) sitemaps[file] = countXmlTags(readOut(file), 'url');
+  }
 
   const imageManifest = path.join(distDir, 'images-manifest.json');
   let images = null;
@@ -435,7 +597,7 @@ export function measureDist(distDir) {
     }
   }
 
-  return { articleCounts: manifest.counts ?? {}, feeds, images, imageErrors };
+  return { articleCounts: manifest.counts ?? {}, sitemaps, feeds, missingFeeds, images, imageErrors };
 }
 
 /** Riconta il corpus sorgente, che e' il riferimento esterno all'artefatto. */
@@ -444,14 +606,13 @@ export async function expectFromCorpus(root) {
   // sezione hanno una sorgente sola, ed e' quella che genera davvero i feed.
   // Una seconda lista qui sarebbe il difetto che ha congelato rss.xml per tre
   // mesi, spostato di un file (AGENTS.md #6).
-  const { RSS_MAX_ITEMS, RSS_SECTIONS } = await import(
-    pathToFileURL(path.join(root, 'engine', 'rssFeeds.mjs')).href
-  );
   const feedSources = {};
   const previousFeedSources = {};
+  const latestSeoPublications = {};
   const revision = previousRevision(root);
   for (const section of RSS_SECTIONS) {
     feedSources[section.id] = countSeoEntries(root, section.seoFiles);
+    latestSeoPublications[section.id] = latestSeoPublication(root, section.seoFiles);
     if (revision === null) {
       previousFeedSources[section.id] = null;
       continue;
@@ -460,13 +621,37 @@ export async function expectFromCorpus(root) {
     const historicalPopulationFiles = [...new Set([...section.seoFiles, ...previousSeoFiles])];
     previousFeedSources[section.id] = countSeoEntriesAtRevision(root, revision, historicalPopulationFiles);
   }
+  const sourceSitemaps = {};
+  const sourceArchiveSitemapUrls = {};
+  const sourceArchiveSitemapErrors = {};
+  for (const section of Object.keys(SECTION_COUNTERS)) {
+    try {
+      sourceSitemaps[section] = countSourceSitemapEntries(root, section);
+    } catch (error) {
+      // Some unit fixtures model only the body/SEO corpus because they never
+      // invoke the sitemap writer. A real publish checkout has these inputs —
+      // build-api.mjs reads them unconditionally — so keep those minimal roots
+      // on the old body fallback while preserving the precise source in CI.
+      if (error?.code !== 'MISSING_CORPUS') throw error;
+    }
+    try {
+      sourceArchiveSitemapUrls[section] = countSourceArchiveSitemapUrls(root, section);
+    } catch (error) {
+      if (error?.code !== 'MISSING_CORPUS') throw error;
+      sourceArchiveSitemapErrors[section] = error.message;
+    }
+  }
   return {
     sourceArticles: {
       frontaliere: countSourceArticles(root, 'frontaliere'),
       svizzera: countSourceArticles(root, 'svizzera'),
     },
+    ...(Object.keys(sourceSitemaps).length ? { sourceSitemaps } : {}),
+    ...(Object.keys(sourceArchiveSitemapUrls).length ? { sourceArchiveSitemapUrls } : {}),
+    ...(Object.keys(sourceArchiveSitemapErrors).length ? { sourceArchiveSitemapErrors } : {}),
     feedSources,
     previousFeedSources,
+    latestSeoPublications,
     sourceImages: countSourceImages(root),
     rssMaxItems: RSS_MAX_ITEMS,
   };
@@ -495,12 +680,19 @@ async function main() {
   );
   console.log(
     `[api-floors] chunk SEO (la popolazione che genera i feed): ` +
-      `${expected.feedSources.frontaliere} frontaliere, ${expected.feedSources.svizzera} svizzera`,
+      `${expected.feedSources.frontaliere} frontaliere, ${expected.feedSources.svizzera} svizzera; ` +
+      `run precedente: ${expected.previousFeedSources?.frontaliere ?? 'non disponibile'} frontaliere, ` +
+      `${expected.previousFeedSources?.svizzera ?? 'non disponibile'} svizzera`,
   );
   console.log(
     `[api-floors] manifest: articles=${measured.articleCounts.articles}, ` +
       `swissArticles=${measured.articleCounts.swissArticles}, ` +
       `feeds=${measured.feeds.length}, images=${measured.images ?? 'non emesso'}`,
+  );
+  console.log(
+    `[api-floors] sitemap: ${Object.values(SECTION_SITEMAPS)
+      .map((file) => `${file}=${measured.sitemaps[file] ?? 'assente'}`)
+      .join(', ')}`,
   );
 
   // La telemetria del rapporto viene PRIMA del verdetto, e viene stampata anche

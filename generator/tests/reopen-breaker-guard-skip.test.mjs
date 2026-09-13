@@ -32,6 +32,9 @@ import { fileURLToPath } from 'node:url';
 import {
   REVIEW_GATE_STEP_NAME,
   CLAUDE_REVIEW_STEP_NAME,
+  REVIEW_ABORT_STEP_NAME,
+  REVIEW_GUARD_STEP_NAME,
+  REVIEW_GATE_FAILURE_STEP_NAME,
   reviewSkippedByGuard,
   vitestFailureIsReviewGate,
 } from '../../scripts/ci/lib/vitestCheck.mjs';
@@ -52,13 +55,16 @@ const GATE_RED_REVIEW_RAN = [
   step('Set up job', 'success'),
   step(CLAUDE_REVIEW_STEP_NAME, 'success'),
   step(REVIEW_GATE_STEP_NAME, 'failure'),
+  step(REVIEW_GATE_FAILURE_STEP_NAME, 'failure'),
 ];
 /** Lo stesso rosso, ma con la review SALTATA dal `Re-review guard`. */
 const GATE_RED_REVIEW_SKIPPED = [
   step('Set up job', 'success'),
-  step('Re-review guard (skip Claude when no code changed since last LGTM)', 'success'),
+  step(REVIEW_GUARD_STEP_NAME, 'success'),
   step(CLAUDE_REVIEW_STEP_NAME, 'skipped'),
+  step(REVIEW_ABORT_STEP_NAME, 'skipped'),
   step(REVIEW_GATE_STEP_NAME, 'failure'),
+  step(REVIEW_GATE_FAILURE_STEP_NAME, 'failure'),
 ];
 
 describe('il segnale: la review e girata su questa run?', () => {
@@ -70,6 +76,28 @@ describe('il segnale: la review e girata su questa run?', () => {
 
   test('gate rosso + review girata → premessa del one-shot intatta', () => {
     assert.equal(reviewSkippedByGuard(GATE_RED_REVIEW_RAN), false);
+  });
+
+  test('review skipped ma il classificatore è success → errore API/rate-limit, non verdetto carry-forward', () => {
+    const apiFailure = [
+      step(REVIEW_GUARD_STEP_NAME, 'success'),
+      step(CLAUDE_REVIEW_STEP_NAME, 'skipped'),
+      step(REVIEW_ABORT_STEP_NAME, 'skipped'),
+      step(REVIEW_GATE_STEP_NAME, 'failure'),
+      step(REVIEW_GATE_FAILURE_STEP_NAME, 'success'),
+    ];
+    assert.equal(reviewSkippedByGuard(apiFailure), false);
+  });
+
+  test('review abortita per rate-limit → one-shot concesso anche con classificatore success', () => {
+    const apiFailure = [
+      step(REVIEW_GUARD_STEP_NAME, 'success'),
+      step(CLAUDE_REVIEW_STEP_NAME, 'success'),
+      step(REVIEW_ABORT_STEP_NAME, 'success'),
+      step(REVIEW_GATE_STEP_NAME, 'failure'),
+      step(REVIEW_GATE_FAILURE_STEP_NAME, 'success'),
+    ];
+    assert.equal(reviewSkippedByGuard(apiFailure), false);
   });
 
   test('gate NON rosso → nessuna deduzione, qualunque sia la review', () => {
@@ -85,6 +113,16 @@ describe('il segnale: la review e girata su questa run?', () => {
     // Lo step della review non c'e' (workflow rinominato, lista di un altro
     // job): non si nega il one-shot sulla base di un dubbio.
     assert.equal(reviewSkippedByGuard([step(REVIEW_GATE_STEP_NAME, 'failure')]), false);
+    assert.equal(
+      reviewSkippedByGuard([
+        step(REVIEW_GUARD_STEP_NAME, 'success'),
+        step(CLAUDE_REVIEW_STEP_NAME, 'skipped'),
+        step(REVIEW_ABORT_STEP_NAME, 'skipped'),
+        step(REVIEW_GATE_STEP_NAME, 'failure'),
+      ]),
+      false,
+      'senza classificatore esplicito il rosso resta sconosciuto, non un verdetto',
+    );
   });
 });
 
@@ -171,12 +209,14 @@ describe('WIRING: la decisione vera legge davvero il segnale', () => {
     assert.equal(calls, 1);
   });
 
-  test('un fingerprint fallback/NULL non puo trasformarsi in uno skip', () => {
+  test('un fingerprint fallback/UNKNOWN non puo trasformarsi in uno skip', () => {
     const guard = testsWorkflow.slice(
       testsWorkflow.indexOf('fpHead=$(node scripts/ci/pr-contribution-fingerprint.mjs'),
       testsWorkflow.indexOf('\n\n      - name: Determine review tier'),
     );
-    assert.match(guard, /\[ -n "\$fpLast" \]/);
-    assert.match(guard, /\[ "\$fpLast" != "NULL" \]/);
+    assert.match(guard, /grep -qE '\^\[a-f0-9\]\{64\}\$'/);
+    assert.match(guard, /fpHead=UNKNOWN/);
+    assert.match(guard, /fpLast=UNKNOWN/);
+    assert.doesNotMatch(guard, /NULL/);
   });
 });

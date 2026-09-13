@@ -166,6 +166,23 @@ test('exchange: latest rate, 1-day and 7-day deltas', () => {
   assert.equal(block.delta7d, 0.0055);
 });
 
+test('exchange: an old gap does not become a published 7-day delta', () => {
+  // Measured regression: before the floor, the 2026-05-01 point (128 days
+  // before lastDate) produced rate7dAgo=1.05 and delta7d=0.06. It is outside
+  // the established seven-day lookback plus five-day FX freshness tolerance.
+  const doc = {
+    points: [
+      { date: '2026-05-01', rate: 1.05 },
+      { date: '2026-09-05', rate: 1.10 },
+      { date: '2026-09-06', rate: 1.11 },
+    ],
+  };
+  const block = shapeExchange(doc, { todayIso: '2026-09-06' });
+  assert.equal(block.available, true);
+  assert.equal(block.rate7dAgo, null);
+  assert.equal(block.delta7d, null);
+});
+
 test('exchange: degrades when the series stops too many days ago', () => {
   const stale = { points: [{ date: '2026-07-30', rate: 1.06 }, { date: '2026-08-01', rate: 1.06 }] };
   const block = shapeExchange(stale, { todayIso: TODAY });

@@ -63,7 +63,7 @@
  * are the same two numbers, kept in sync by
  * `article-meta-refresh.test.mjs`'s budget-sync test, per AGENTS.md #6 (a
  * value that cannot be imported gets the link covered by a test instead).
- * `truncateToClause` IS imported, from the same dependency-free module
+ * `truncateToClauseNonEmpty` IS imported, from the same dependency-free module
  * `clampSeoDescriptions` itself delegates to — the truncation ALGORITHM has
  * one source; only the two threshold numbers are duplicated, and covered.
  */
@@ -71,10 +71,11 @@ import { readFileSync, writeFileSync, unlinkSync, renameSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { corpusPath } from './corpus-paths.mjs';
+import { findSeoEntryMatches } from '../../../scripts/lib/seo-entry.mjs';
 import { sanitizeText } from '../../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './control-char-write-report.mjs';
 import { escapeForSingleQuoteTS } from './article-meta-block.mjs';
-import { truncateToClause } from '../../../host/shared/clauseTail.mjs';
+import { truncateToClauseNonEmpty } from '../../../host/shared/clauseTail.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // Two levels up from `generator/scripts/lib/` is `generator/`; one more is the
@@ -114,7 +115,7 @@ const SEO_ENTRY_DESCRIPTION_BUDGETS = {
 
 function clampField(value, maxLen) {
   if (typeof value !== 'string' || value.length <= maxLen) return value;
-  return truncateToClause(value, maxLen);
+  return truncateToClauseNonEmpty(value, maxLen);
 }
 
 /** Clamp only the budgeted fields of a per-locale `{excerpt, seoDescription,
@@ -165,6 +166,24 @@ function escapeRegex(s) {
   return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+function findUniqueSeoEntry(src, id) {
+  const entries = findSeoEntryMatches(src, id);
+  if (entries.length === 0) {
+    throw new Error("upsertSeoDescriptionBlock: nessuna entry 'blog-" + id + "' trovata in questo file.");
+  }
+  if (entries.length > 1) {
+    throw new Error(
+      "upsertSeoDescriptionBlock: entry 'blog-" + id + "' duplicata (" + entries.length + " occorrenze); " +
+      'refresh rifiutato prima della scrittura.',
+    );
+  }
+  return entries[0];
+}
+
+function localeMetaFieldPattern(id, field) {
+  return `'blog\\.article\\.${escapeRegex(id)}\\.${escapeRegex(field)}':\\s*'((?:[^'\\\\]|\\\\.)*)'`;
+}
+
 /**
  * Update-or-insert the per-locale meta lines for one article id. A field
  * already holding the target value is left untouched; a field whose line
@@ -179,21 +198,31 @@ function escapeRegex(s) {
  * @returns {string} the new content (`=== src` when nothing changed)
  */
 export function upsertLocaleMetaFields(src, id, fields) {
-  let out = src;
-  const missing = [];
+  const requested = [];
   for (const field of LOCALE_FIELDS) {
     if (!(field in fields)) continue;
     const value = fields[field];
     if (typeof value !== 'string' || value.trim() === '') continue;
-    const escaped = escapeForSingleQuoteTS(value);
-    const re = new RegExp(`'blog\\.article\\.${escapeRegex(id)}\\.${field}':\\s*'((?:[^'\\\\]|\\\\.)*)'`);
-    const m = out.match(re);
-    if (!m) {
+    const pattern = localeMetaFieldPattern(id, field);
+    const matches = [...src.matchAll(new RegExp(pattern, 'g'))];
+    if (matches.length > 1) {
+      throw new Error(
+        `upsertLocaleMetaFields: '${id}' field '${field}' duplicato (${matches.length} occorrenze); ` +
+          'refresh rifiutato prima della scrittura.',
+      );
+    }
+    requested.push({ field, escaped: escapeForSingleQuoteTS(value), pattern, match: matches[0] });
+  }
+
+  let out = src;
+  const missing = [];
+  for (const { field, escaped, pattern, match } of requested) {
+    if (!match) {
       missing.push(field);
       continue;
     }
-    if (m[1] === escaped) continue; // already correct: idempotent no-op
-    out = out.replace(re, `'blog.article.${id}.${field}': '${escaped}'`);
+    if (match[1] === escaped) continue; // already correct: idempotent no-op
+    out = out.replace(new RegExp(pattern), () => `'blog.article.${id}.${field}': '${escaped}'`);
   }
 
   if (missing.length > 0) {
@@ -222,12 +251,21 @@ export function upsertLocaleMetaFields(src, id, fields) {
   return out;
 }
 
+function replaceIndentedSeoField(source, field, value) {
+  const re = new RegExp(`(\\n)([\\t ]*)(${escapeRegex(field)}: ')((?:[^'\\\\]|\\\\.)*)(',)`);
+  return source.replace(re, (match, newline, indent, prefix, current, suffix) => {
+    if (current === value) return match;
+    return `${newline}${indent}${prefix}${value}${suffix}`;
+  });
+}
+
 /**
  * Update the `description` / `ogDescription` / `structuredData.description`
- * fields of one `blog-<id>` SEO entry, scoped to that entry's block only —
- * same next-top-level-key scoping `bumpDateModified` uses, so this can never
- * bleed into a sibling entry. A field already at the target value is left
- * untouched.
+ * fields of one `blog-<id>` SEO entry, scoped to the unique balanced block
+ * returned by the shared SEO-entry locator, so this can never bleed into a
+ * sibling entry. Duplicate keys are rejected before the caller can write
+ * anything, rather than choosing an ambiguous first/last winner. A field
+ * already at the target value is left untouched.
  *
  * @param {string} src - the SEO file's current content
  * @param {string} id
@@ -235,22 +273,13 @@ export function upsertLocaleMetaFields(src, id, fields) {
  * @returns {string} the new content (`=== src` when nothing changed)
  */
 export function upsertSeoDescriptionBlock(src, id, seo) {
-  const startIdx = src.indexOf(`'blog-${id}':`);
-  if (startIdx < 0) {
-    throw new Error(`upsertSeoDescriptionBlock: nessuna entry 'blog-${id}' trovata in questo file.`);
-  }
-  const after = src.slice(startIdx);
-  const nextKey = after.slice(1).search(/\n {2}'[^']+':\s*\{/);
-  const blockEnd = nextKey < 0 ? after.length : nextKey + 1;
-  const original = after.slice(0, blockEnd);
+  const { index: startIdx, closeIdx } = findUniqueSeoEntry(src, id);
+  const original = src.slice(startIdx, closeIdx + 1);
   let block = original;
 
   if (typeof seo.description === 'string' && seo.description.trim() !== '') {
     const single = escapeForSingleQuoteTS(seo.description);
-    block = block.replace(
-      /(\n {4}description: ')((?:[^'\\]|\\.)*)(',)/,
-      (m, g1, g2, g3) => (g2 === single ? m : `${g1}${single}${g3}`),
-    );
+    block = replaceIndentedSeoField(block, 'description', single);
     // The structuredData twin is double-quoted and escaped the way
     // modifySeoService escapes it elsewhere in create-article.mjs — only `"`,
     // not a full JSON escape (these texts are plain sentences, never containing
@@ -263,14 +292,11 @@ export function upsertSeoDescriptionBlock(src, id, seo) {
   }
   if (typeof seo.ogDescription === 'string' && seo.ogDescription.trim() !== '') {
     const single = escapeForSingleQuoteTS(seo.ogDescription);
-    block = block.replace(
-      /(\n {4}ogDescription: ')((?:[^'\\]|\\.)*)(',)/,
-      (m, g1, g2, g3) => (g2 === single ? m : `${g1}${single}${g3}`),
-    );
+    block = replaceIndentedSeoField(block, 'ogDescription', single);
   }
 
   if (block === original) return src;
-  return src.slice(0, startIdx) + block + after.slice(blockEnd);
+  return src.slice(0, startIdx) + block + src.slice(closeIdx + 1);
 }
 
 /**
@@ -294,6 +320,18 @@ export function refreshDescriptiveTexts(id, localeTexts, seoTexts, opts = {}) {
   const metaPrefix = opts.metaPrefix || 'blog-meta';
   const seoFile = opts.seoFile || 'services/seo/seo-blog-5.ts';
   const touched = [];
+  const clampedSeoTexts = clampBudgetedFields(seoTexts, SEO_ENTRY_DESCRIPTION_BUDGETS);
+  let seoUpdate = null;
+  const localeUpdates = [];
+
+  // Resolve the SEO entry before touching any locale file. A duplicate SEO
+  // key must reject the whole refresh, not leave a half-updated corpus.
+  if (clampedSeoTexts && (clampedSeoTexts.description || clampedSeoTexts.ogDescription)) {
+    const seoPath = path.join(repoRoot, corpusPath(seoFile));
+    const before = readFileSync(seoPath, 'utf-8');
+    const after = upsertSeoDescriptionBlock(before, id, clampedSeoTexts);
+    seoUpdate = { file: seoPath, before, after };
+  }
 
   for (const locale of LOCALES) {
     const rawFields = localeTexts?.[locale];
@@ -303,20 +341,18 @@ export function refreshDescriptiveTexts(id, localeTexts, seoTexts, opts = {}) {
     const before = readFileSync(file, 'utf-8');
     const after = upsertLocaleMetaFields(before, id, fields);
     if (after !== before) {
-      writeCorpusFile(file, after);
-      touched.push(file);
+      localeUpdates.push({ file, after });
     }
   }
 
-  const clampedSeoTexts = clampBudgetedFields(seoTexts, SEO_ENTRY_DESCRIPTION_BUDGETS);
-  if (clampedSeoTexts && (clampedSeoTexts.description || clampedSeoTexts.ogDescription)) {
-    const seoPath = path.join(repoRoot, corpusPath(seoFile));
-    const before = readFileSync(seoPath, 'utf-8');
-    const after = upsertSeoDescriptionBlock(before, id, clampedSeoTexts);
-    if (after !== before) {
-      writeCorpusFile(seoPath, after);
-      touched.push(seoPath);
-    }
+  for (const { file, after } of localeUpdates) {
+    writeCorpusFile(file, after);
+    touched.push(file);
+  }
+
+  if (seoUpdate && seoUpdate.after !== seoUpdate.before) {
+    writeCorpusFile(seoUpdate.file, seoUpdate.after);
+    touched.push(seoUpdate.file);
   }
 
   return { changed: touched.length > 0, touched };

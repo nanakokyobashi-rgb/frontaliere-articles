@@ -325,6 +325,26 @@ if (args[0] === 'issue' && args[1] === 'view') { process.stdout.write(''); proce
 process.exit(0);
 `;
 
+const HEAD_TREE_GH = `#!/usr/bin/env node
+'use strict';
+const args = process.argv.slice(2);
+if (args[0] === 'pr' && args[1] === 'view') {
+  process.stdout.write(JSON.stringify({ changedFiles: 1, files: ['scripts/ci/added.mjs'] }));
+  process.exit(0);
+}
+if (args[0] === 'api' && args[1].includes('/pulls/')) {
+  process.stdout.write('h'.repeat(40));
+  process.exit(0);
+}
+if (args[0] === 'api' && args[1].includes('/git/trees/')) {
+  process.stdout.write(JSON.stringify({ truncated: false, tree: [
+    { type: 'blob', path: 'scripts/ci/added.mjs' },
+  ] }));
+  process.exit(0);
+}
+process.exit(0);
+`;
+
 async function classifyWithDiffFailure(mode) {
   const { classifyAndMintReview } = await import('../../scripts/ci/review-scope.mjs');
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'review-scope-diff-'));
@@ -353,6 +373,28 @@ async function classifyWithDiffFailure(mode) {
     fs.rmSync(tmpDir, { recursive: true, force: true });
   }
 }
+
+test('risolve le citazioni dei file aggiunti contro il tree HEAD, non contro il base', { concurrency: false }, async () => {
+  const { classifyAndMintReview } = await import('../../scripts/ci/review-scope.mjs');
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'review-scope-head-tree-'));
+  const binDir = path.join(tmpDir, 'bin');
+  fs.mkdirSync(binDir);
+  fs.writeFileSync(path.join(binDir, 'gh'), HEAD_TREE_GH, { mode: 0o755 });
+  const previousPath = process.env.PATH;
+  process.env.PATH = `${binDir}${path.delimiter}${previousPath}`;
+  try {
+    const result = await classifyAndMintReview(
+      '`scripts/ci/added.mjs:10`: 🔴 Important: il controllo del nuovo script manca.',
+      { repo: 'o/r', pr: 906, prUrl: 'https://x/pr/906' },
+    );
+    assert.equal(result.unresolved.length, 0);
+    assert.equal(result.inScope.length, 1);
+    assert.equal(result.blocking, true);
+  } finally {
+    process.env.PATH = previousPath;
+    fs.rmSync(tmpDir, { recursive: true, force: true });
+  }
+});
 
 test('lista REST al hard-cap con complete=false resta BLOCCANTE', { concurrency: false }, async () => {
   const result = await classifyWithDiffFailure('cap');

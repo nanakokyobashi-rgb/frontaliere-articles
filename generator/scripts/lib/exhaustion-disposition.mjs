@@ -83,6 +83,12 @@ export const EXIT_ROSTER_CANNOT_SERVE_PROMPT = 3;
  * netto legge 42 contro 52. Lo stesso errore veniva misurato su due campioni
  * diversi: `isLegitimateQuotaDeferral` al netto (#805), questo al lordo.
  *
+ * Se il breakdown contiene anche un `inputCapReport`, la taglia e' una causa
+ * persistente gia' dichiarata dal produttore. Gli echi non attribuiti che
+ * restano nei secchi vanno quindi addebitati a quella causa nel solo controllo
+ * del veto; non si possono spostare automaticamente sul transitorio perche'
+ * oggi ha il numero piu' alto (#938).
+ *
  * La POLARITA' non cambia: pareggio al persistente, deciso da #357/#767. Cambia
  * solo il campione — ed e' esattamente ciò che `isTransientMajority` esprime,
  * col `tie` a parametro e la sottrazione presa da `deferralTally`, una sorgente
@@ -97,7 +103,13 @@ export function isInputCapDeferralVeto(err) {
   const cap = err.inputCapReport;
   if (!cap || typeof cap !== 'object') return false;
   if (!(Number(cap.count) > 0)) return false;
-  return !isTransientMajority(err.exhaustionBreakdown, { tie: 'persistent' });
+  return !isTransientMajority(err.exhaustionBreakdown, {
+    tie: 'persistent',
+    // The consumer has already declared input-cap as the persistent cause.
+    // Do not let an unclassified cooldown echo be charged to the opposite
+    // bucket merely because transient currently leads by one vote.
+    marginAttribution: 'persistent',
+  });
 }
 
 /**
@@ -122,7 +134,10 @@ export function inputCapVetoSummary(err) {
   // di `isInputCapDeferralVeto`, che vota col pareggio al persistente (#357).
   // Con l'altra polarita' la diagnostica descriverebbe un voto che nessuno ha
   // fatto — che e' il difetto che sta correggendo, un giro piu' in basso.
-  const vote = transientMajorityVerdict(err && err.exhaustionBreakdown, { tie: 'persistent' });
+  const vote = transientMajorityVerdict(err && err.exhaustionBreakdown, {
+    tie: 'persistent',
+    marginAttribution: 'persistent',
+  });
   const removed = buckets.echoTransient + buckets.echoPersistent;
   return {
     estimatedRequestTokens: est,
@@ -145,7 +160,7 @@ export function inputCapVetoSummary(err) {
     // una versione indebolita del predicato dichiara «sottrazione affidabile»
     // proprio sulle run in cui non lo era.
     echoDominated: vote.echoDominated,
-    // ── I QUATTRO CAMPI SU CUI IL VOTO HA DAVVERO DECISO (#857 → #888) ─────
+    // ── I CAMPI SU CUI IL VOTO HA DAVVERO DECISO (#857 → #888 → #938) ──────
     //
     // I due controlli aggiunti da #873 — pavimento delle prove nette e margine
     // sugli echi non attribuiti — possono produrre un veto che i due secchi
@@ -162,10 +177,12 @@ export function inputCapVetoSummary(err) {
     decidedBy: vote.decidedBy,
     netEvidence: vote.netEvidence,
     echoHiddenInBuckets: vote.echoHiddenInBuckets,
+    marginAttribution: vote.marginAttribution,
     // Il numero a SINISTRA del confronto che ha chiuso il voto, dopo il
     // margine. Riportato grezzo, anche quando e' negativo, perche' e'
     // letteralmente cio' che `wins()` ha visto.
     votedTransient: vote.votedTransient,
+    votedPersistent: vote.votedPersistent,
   };
 }
 
@@ -410,6 +427,67 @@ function echoBuckets(breakdown) {
   };
 }
 
+/**
+ * Riconosce il caso in cui ogni riga della cascata e' un echo di cooldown.
+ *
+ * Il pavimento del voto lo tratta correttamente come «nessuna prova
+ * indipendente», ma il flag `transientExhaustion` diventa cosi' `false` e il
+ * chiamante perde il canale `roster-down-not-deferrable`. Questo verdetto e'
+ * strutturale: richiede che il produttore dichiari lo stesso numero di righe e
+ * di echi e che ogni voto di secchio sia coperto; dati gonfiati o incoerenti
+ * restano nel percorso generico, senza inventare una causa.
+ *
+ * @param {unknown} err
+ * @returns {{cause:'provider-cooldown-echo-only',echoes:number,total:number,transientEchoes:number,persistentEchoes:number,unclassifiedEchoes:number}|null}
+ */
+export function providerCooldownEchoOnlySummary(err) {
+  if (!err || typeof err !== 'object' || err.code !== 'ALL_MODELS_EXHAUSTED') return null;
+  const breakdown = err.exhaustionBreakdown;
+  if (!isExhaustionBreakdownTotalValid(breakdown)) return null;
+  const echo = breakdown.providerCooldownSkips;
+  if (!echo || typeof echo !== 'object' || Array.isArray(echo)) return null;
+
+  const isCount = (value) => (
+    value !== null
+    && value !== undefined
+    && value !== ''
+    && Number.isInteger(Number(value))
+    && Number(value) >= 0
+  );
+  // The producer always emits these four counters. If one is malformed, the
+  // safe answer is the generic error path, not a fabricated all-echo cause.
+  if (![breakdown.transient, breakdown.persistent, breakdown.total, echo.total].every(isCount)) {
+    return null;
+  }
+  // These split counters were added with the live producer. A replay that
+  // only has the aggregate echo total is legacy data, not proof that every
+  // row was an echo: fail closed instead of manufacturing an all-echo cause.
+  if (!['transient', 'persistent'].every((key) => (
+    Object.hasOwn(echo, key) && isCount(echo[key])
+  ))) {
+    return null;
+  }
+  const total = Number(breakdown.total);
+  const echoes = Number(echo.total);
+  const transient = nonNegativeInteger(breakdown.transient);
+  const persistent = nonNegativeInteger(breakdown.persistent);
+  const transientEchoes = nonNegativeInteger(echo.transient);
+  const persistentEchoes = nonNegativeInteger(echo.persistent);
+  if (!Number.isInteger(echoes) || echoes <= 0 || echoes !== total) return null;
+  if (transientEchoes > transient || persistentEchoes > persistent) return null;
+  if (transientEchoes + persistentEchoes > echoes) return null;
+  if ((transient - transientEchoes) + (persistent - persistentEchoes) > 0) return null;
+
+  return {
+    cause: 'provider-cooldown-echo-only',
+    echoes,
+    total,
+    transientEchoes,
+    persistentEchoes,
+    unclassifiedEchoes: echoes - transientEchoes - persistentEchoes,
+  };
+}
+
 function deferralTally(breakdown) {
   const {
     transient, persistent, total, echoTransient, echoPersistent, echoTotalReported,
@@ -591,11 +669,17 @@ export function isTransientMajority(breakdown, options = {}) {
  * inaffidabile», non «ha deciso il lordo».
  *
  * @param {unknown} breakdown `err.exhaustionBreakdown`
- * @param {{tie?: 'transient'|'persistent'}} [options] a chi va il pareggio
- * @returns {{verdict:boolean,decidedBy:'floor'|'net'|'margin'|'gross',netTransient:number,netPersistent:number,netEvidence:number,echoHiddenInBuckets:number,votedTransient:number,echoRemoved:number,echoDominated:boolean}}
+ * @param {{tie?: 'transient'|'persistent',marginAttribution?: 'transient'|'persistent'}} [options] a chi va il pareggio e a quale causa addebitare il margine non attribuito
+ * @returns {{verdict:boolean,decidedBy:'floor'|'net'|'margin'|'gross',netTransient:number,netPersistent:number,netEvidence:number,echoHiddenInBuckets:number,marginAttribution:'transient'|'persistent',votedTransient:number,votedPersistent:number,echoRemoved:number,echoDominated:boolean}}
  */
 function transientMajorityVerdict(breakdown, options = {}) {
   const tie = (options && options.tie === 'persistent') ? 'persistent' : 'transient';
+  // `tie` controls equality only. Attribution is explicit because the input
+  // cap consumer has already declared a persistent cause, while the ordinary
+  // transient verdict keeps the historical conservative attribution.
+  const marginAttribution = (options && options.marginAttribution === 'persistent')
+    ? 'persistent'
+    : 'transient';
   const wins = (transient, persistent) => (
     tie === 'persistent' ? transient > persistent : transient >= persistent
   );
@@ -669,13 +753,18 @@ function transientMajorityVerdict(breakdown, options = {}) {
     echoDeclared,
   );
   const netEvidence = buckets.netTransient + buckets.netPersistent;
-  const votedTransient = buckets.netTransient - echoHiddenInBuckets;
+  const votedTransient = buckets.netTransient
+    - (marginAttribution === 'transient' ? echoHiddenInBuckets : 0);
+  const votedPersistent = buckets.netPersistent
+    - (marginAttribution === 'persistent' ? echoHiddenInBuckets : 0);
   const base = {
     netTransient: buckets.netTransient,
     netPersistent: buckets.netPersistent,
     netEvidence,
     echoHiddenInBuckets,
+    marginAttribution,
     votedTransient,
+    votedPersistent,
     echoRemoved,
     // Calcolato SEMPRE, anche quando il guardrail non viene raggiunto: e'
     // l'affidabilita' della sottrazione, non il ramo percorso.
@@ -686,7 +775,7 @@ function transientMajorityVerdict(breakdown, options = {}) {
   if (!wins(buckets.netTransient, buckets.netPersistent)) {
     return { ...base, verdict: false, decidedBy: 'net' };
   }
-  if (!wins(votedTransient, buckets.netPersistent)) {
+  if (!wins(votedTransient, votedPersistent)) {
     return { ...base, verdict: false, decidedBy: 'margin' };
   }
   if (base.echoDominated) {
