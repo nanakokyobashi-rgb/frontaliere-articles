@@ -115,6 +115,33 @@ function assertSection(section, caller) {
   }
 }
 
+function normaliseKnownSections(knownSections) {
+  if (knownSections == null) return null;
+  if (typeof knownSections === 'string' || typeof knownSections[Symbol.iterator] !== 'function') {
+    throw new RegisterLockError(
+      `resolveRegisterLock() requires knownSections to be an iterable of article section names `
+        + `(got ${JSON.stringify(knownSections)}).`,
+    );
+  }
+  let sections;
+  try {
+    sections = [...knownSections];
+  } catch (err) {
+    throw new RegisterLockError(
+      `resolveRegisterLock() could not read knownSections as an iterable: ${err?.message || err}`,
+    );
+  }
+  const invalid = sections.filter((section) => typeof section !== 'string' || !SECTION_RE.test(section));
+  if (invalid.length > 0) {
+    throw new RegisterLockError(
+      `resolveRegisterLock() received invalid knownSections value(s): `
+        + `${invalid.map((section) => JSON.stringify(section)).join(', ')}; `
+        + 'section names must match /^[a-z0-9][a-z0-9-]*$/',
+    );
+  }
+  return new Set(sections);
+}
+
 /**
  * Validate the complete configuration key space before any registration starts.
  *
@@ -375,10 +402,12 @@ export function registrationTargetStatus(targets) {
  * section configuration; it makes an unknown section in the legacy marker a
  * hard error instead of a deferred marker that no future producer could ever
  * own.
+ *
+ * @param {Iterable<string>|null} [knownSections]
  */
 export function resolveRegisterLock(projectRoot, buildTargets, section, knownSections = null) {
   assertSection(section, 'resolveRegisterLock');
-  const knownSectionSet = knownSections == null ? null : new Set(knownSections);
+  const knownSectionSet = normaliseKnownSections(knownSections);
   const deferred = [];
   const resolved = [];
   for (const relPath of [LEGACY_REGISTER_LOCK_FILE, registerLockFile(section)]) {

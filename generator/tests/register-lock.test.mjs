@@ -451,6 +451,28 @@ test('un marker legacy con sezione non configurata non viene deferito per sempre
   assert.equal(fs.existsSync(legacy), true, 'un marker sconosciuto resta evidenza da ispezionare');
 });
 
+test('knownSections rifiuta input non validi prima di consultare il lock', () => {
+  const root = sandbox();
+  let buildCalls = 0;
+  const build = () => {
+    buildCalls += 1;
+    return [];
+  };
+  for (const knownSections of [
+    'frontaliere',
+    42,
+    ['frontaliere', '../svizzera'],
+    new Set(['frontaliere', 42]),
+  ]) {
+    assert.throws(
+      () => resolveRegisterLock(root, build, SECTION, knownSections),
+      (err) => isRegisterLockError(err) && /knownSections/.test(err.message),
+      `knownSections non rifiutato: ${String(knownSections)}`,
+    );
+  }
+  assert.equal(buildCalls, 0, 'un knownSections malformato non deve arrivare al confronto dei bersagli');
+});
+
 test('le chiavi di configurazione delle sezioni sono validate prima del primo run', () => {
   assert.doesNotThrow(() => assertSectionConfigKeys({ frontaliere: {}, 'svizzera-2': {} }));
   for (const bad of ['Frontaliere', '../svizzera', 'svizzera/ch', '', '-svizzera', '_svizzera']) {
