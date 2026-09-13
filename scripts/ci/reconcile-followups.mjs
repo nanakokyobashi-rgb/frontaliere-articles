@@ -67,7 +67,6 @@ import {
   parseFollowupItems,
   suggestedActionText,
   updateFollowupItemState,
-  splitFollowupItems,
 } from './followup-resolution-match.mjs';
 import {
   hasEnumeratedItems,
@@ -194,6 +193,24 @@ export function isAggregateTitle(title = '', body = '') {
   // token inside a bold lead would erase the lead before `hasEnumeratedItems`.
   return sharedIsAggregate(normalizedTitle, normalizedBody)
     || hasEnumeratedItems(stripFencedBlocks(body));
+}
+
+/**
+ * Resolve one parsed item with its explicit stable acceptance token when it has
+ * one. Legacy text-only callers retain the historical Suggested-action path;
+ * stable daily items must not silently discard the token parsed from their
+ * `Acceptance token` field.
+ */
+function detectParsedItemAlreadyResolved(item, io) {
+  const text = typeof item === 'string' ? item : item?.text || '';
+  const acceptanceToken = typeof item === 'object'
+    ? String(item.acceptanceToken || '').trim()
+    : '';
+  return detectAlreadyResolved(
+    text,
+    io,
+    acceptanceToken ? { acceptanceToken } : {},
+  );
 }
 
 const TECHNICAL_LABELS = new Set([UNCLASSIFIABLE_LABEL, LABEL, CLOSED_LABEL]);
@@ -930,7 +947,7 @@ export function dailyBucketCloseGate(
   const unresolvedItems = [];
   const weakItems = [];
   for (const item of items) {
-    const result = detectAlreadyResolved(item.text, io);
+    const result = detectAlreadyResolved(item.text, io, { acceptanceToken: item.acceptanceToken });
     evidenceById.set(item.id, result.evidence || []);
     if (item.state !== 'done' || !result.resolved) unresolvedItems.push(item);
     if (!isStrongAutoCloseEvidence((result.evidence || []).map((entry) => entry.tok))) weakItems.push(item);
@@ -987,7 +1004,7 @@ export function reconcileDailyItems(
   const evidenceById = new Map();
   for (const item of items) {
     const result = hasFalsifiableAcceptance(item.text)
-      ? detectAlreadyResolved(item.text, io)
+      ? detectAlreadyResolved(item.text, io, { acceptanceToken: item.acceptanceToken })
       : { resolved: false, evidence: [] };
     evidenceById.set(item.id, result.evidence || []);
     if (result.resolved && (item.state === 'open' || item.state === 'in-progress')) {
@@ -1029,22 +1046,22 @@ export function reconcileDailyItems(
 export function aggregateCloseGate(body, io, { legacyResolver = null } = {}) {
   if (hasUnterminatedMarkdownFence(body)) return { blocks: true, reason: 'unterminated-markdown-fence' };
   if (bucketState(body) || hasStableItemIds(body)) return dailyBucketCloseGate(body, io);
-  const items = splitFollowupItems(body);
+  const items = parseFollowupItems(body);
   // Corpo senza struttura a item: non abbiamo riclassificato nulla, quindi
   // resta il veto storico. Mai interpretare «non so leggerlo» come «vuoto».
   if (!items.length) return { blocks: true, reason: 'aggregate-unparsed' };
   const legacyResults = new Map();
   if (typeof legacyResolver === 'function') {
-    for (const item of items) legacyResults.set(item, legacyResolver(item));
+    for (const item of items) legacyResults.set(item.text, legacyResolver(item.text));
   }
   // This must remain the shared validity predicate. Target-file metadata can
   // establish provenance for a real acceptance item, but cannot make prose-only
   // text a gating item.
-  const valid = items.filter((item) => hasFalsifiableAcceptance(item));
+  const valid = items.filter((item) => hasFalsifiableAcceptance(item.text));
   if (!valid.length) return { blocks: true, reason: 'no-valid-item' };
-  const allConfirmed = valid.every((s) => {
-    if (detectAlreadyResolved(s, io).resolved) return true;
-    return legacyResults.get(s)?.resolved === true;
+  const allConfirmed = valid.every((item) => {
+    if (detectAlreadyResolved(item.text, io, { acceptanceToken: item.acceptanceToken }).resolved) return true;
+    return legacyResults.get(item.text)?.resolved === true;
   });
   return allConfirmed ? { blocks: false, reason: null } : { blocks: true, reason: 'valid-item-unconfirmed' };
 }

@@ -422,3 +422,18 @@ test('l’aggregata non promuove un item solo-prosa con Target file a item di ga
   });
   assert.deepEqual(gate, { blocks: false, reason: null });
 });
+
+test('l’aggregata passa l acceptance token al matcher strutturale', () => {
+  const body = [
+    '### 1. Item con chiamata parametrizzata',
+    '- Target file: scripts/ci/example.mjs',
+    '- Suggested action: verificare `runTask()` nel target.',
+    '- Acceptance token: `runTask()`',
+  ].join('\n');
+  const gate = aggregateCloseGate(body, {
+    fileExists: (path) => path === TARGET,
+    readFile: () => 'const result = runTask(input);',
+  });
+
+  assert.deepEqual(gate, { blocks: false, reason: null });
+});
