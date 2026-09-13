@@ -66,11 +66,15 @@ const LOCALES = ['it', 'en', 'de', 'fr'];
 
 /**
  * Una superficie dimezzata è già una regressione catastrofica; il valore è
- * derivato dal blob osservato in `HEAD`, non da un floor storico che il corpus
- * ha superato da anni. Il clone del corpus è completo secondo AGENTS.md, per
- * l'assenza del blob-base è un errore del test e non un fallback permissivo.
+ * derivato dal blob osservato nella revisione di riferimento, non da un floor
+ * storico che il corpus ha superato da anni. In una PR il workflow passa la
+ * revisione base, così una superficie accorciata nella stessa PR non può
+ * abbassare il proprio floor.
+ * Il clone del corpus è completo secondo AGENTS.md, per l'assenza del blob-base
+ * è un errore del test e non un fallback permissivo.
  */
 const SURFACE_SIZE_FRACTION = 0.5;
+const SURFACE_FLOOR_BASE_REF = process.env.PREFLIGHT_PR_BASE_REVISION || 'HEAD';
 const surfaceFloorCache = new Map();
 
 function observedSurfaceBytes(rel) {
@@ -78,13 +82,13 @@ function observedSurfaceBytes(rel) {
   if (cached !== undefined) return cached;
   let bytes;
   try {
-    bytes = execFileSync('git', ['show', `HEAD:${rel}`], {
+    bytes = execFileSync('git', ['show', `${SURFACE_FLOOR_BASE_REF}:${rel}`], {
       cwd: ROOT,
       encoding: 'buffer',
       maxBuffer: 32 * 1024 * 1024,
     }).length;
   } catch (error) {
-    assert.fail(`${rel}: impossibile misurare la superficie in HEAD (${error.message})`);
+    assert.fail(`${rel}: impossibile misurare la superficie in ${SURFACE_FLOOR_BASE_REF} (${error.message})`);
   }
   assert.ok(bytes > 0, `${rel}: il blob-base è vuoto`);
   const floor = Math.ceil(bytes * SURFACE_SIZE_FRACTION);

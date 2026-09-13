@@ -38,6 +38,11 @@ test('#1143 item 1: errors accanto a data non diventano un falso-vuoto', () => {
     () => parseNeedsHumanPayload(JSON.stringify([[item(1, 'issue')], { data: [], errors: [{ message: 'partial' }] }])),
     /errors.*data parziale/,
   );
+  assert.throws(
+    () => parseNeedsHumanPayload(JSON.stringify({ data: [item(1, 'issue')], errors: 'partial' })),
+    /errors.*data parziale/,
+  );
+  assert.throws(() => parseNeedsHumanPayload('gh: temporary failure'), /payload non JSON/);
 });
 
 test('#1143 item 3: il classificatore separa completo, parziale e doppio fallimento', () => {

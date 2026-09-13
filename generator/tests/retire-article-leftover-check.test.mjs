@@ -34,20 +34,43 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import {
+  mkdtempSync,
+  chmodSync,
+  mkdirSync,
+  readFileSync,
+  rmSync,
+  symlinkSync,
+  writeFileSync,
+} from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { codeOnly } from './lib/reachable-source.mjs';
 import { mentionsId } from '../../scripts/lib/mentions-id.mjs';
+import { ARTICLE_SECTION_CORE } from '../../engine/shared/articleSectionCore.mjs';
+import { corpusPath } from '../../generator/scripts/lib/corpus-paths.mjs';
 import {
   IMAGES_LEDGER,
+  LOCALES,
   SECTIONS,
   leftoverSurfacesFor,
   requiredSurfaceFilesFor,
   surfaceMentionsArticleId,
   surfaceArticleIdStatus,
   SURFACE_ARTICLE_ID_STATUS,
+  assertRegularFileIfPresent,
+  assertWritableRegularFileIfPresent,
+  isRegularFile,
+  isWritableRegularFile,
+  requireRegularFile,
+  requireWritableDirectory,
+  requireWritableRegularFile,
+  requiredWritableSurfaceFilesFor,
+  seoFilesFor,
+  surfacePathStatus,
+  writableSurfacePathStatus,
+  SURFACE_PATH_STATUS,
 } from '../../scripts/lib/article-surfaces.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -192,9 +215,26 @@ test('il ledger immagini può contenere l\'id ma non è una superficie residua',
   assert.equal(leftoverSurfacesFor('svizzera').includes(IMAGES_LEDGER), false);
 });
 
+test('le superfici principali derivano dalla tupla canonica e dal mapper corpus', () => {
+  for (const section of ['frontaliere', 'svizzera']) {
+    const core = ARTICLE_SECTION_CORE[section];
+    const cfg = SECTIONS[section];
+    assert.equal(cfg.registryFile, corpusPath(core.registryFile));
+    assert.equal(cfg.slugDataFile, corpusPath(core.slugDataFile));
+    assert.deepEqual(
+      cfg.metaFiles,
+      LOCALES.map((locale) => corpusPath(`services/locales/${core.metaPrefix}-${locale}.ts`)),
+    );
+    assert.equal(cfg.bodyDir, corpusPath(`services/locales/${core.bodyDir}`));
+  }
+});
+
 test('una superficie obbligatoria mancante fallisce esplicitamente', () => {
   const root = mkdtempSync(path.join(os.tmpdir(), 'article-surfaces-'));
   try {
+    // Una directory con il nome del registro non è una superficie leggibile:
+    // `existsSync` da sola la avrebbe accettata e il ritiro sarebbe partito.
+    mkdirSync(path.join(root, SECTIONS.frontaliere.registryFile), { recursive: true });
     const required = [SECTIONS.frontaliere.slugDataFile, ...SECTIONS.frontaliere.metaFiles];
     for (const rel of required) {
       const abs = path.join(root, rel);
@@ -210,15 +250,239 @@ test('una superficie obbligatoria mancante fallisce esplicitamente', () => {
   }
 });
 
+test('il preflight di scrittura distingue un file leggibile ma non scrivibile', () => {
+  const root = mkdtempSync(path.join(os.tmpdir(), 'article-writable-surface-'));
+  try {
+    const required = requiredSurfaceFilesFor('frontaliere', ROOT);
+    for (const rel of required) {
+      const abs = path.join(root, rel);
+      mkdirSync(path.dirname(abs), { recursive: true });
+      writeFileSync(abs, 'fixture\n', 'utf8');
+    }
+
+    const target = required[0];
+    const abs = path.join(root, target);
+    chmodSync(abs, 0o444);
+    try {
+      assert.equal(surfacePathStatus(root, target), SURFACE_PATH_STATUS.REGULAR);
+      assert.equal(writableSurfacePathStatus(root, target), SURFACE_PATH_STATUS.UNWRITABLE);
+      assert.equal(isRegularFile(root, target), true);
+      assert.equal(isWritableRegularFile(root, target), false);
+      assert.equal(assertWritableRegularFileIfPresent(root, 'missing.ts', 'target'), false);
+      assert.throws(
+        () => assertWritableRegularFileIfPresent(root, target, 'target'),
+        /non scrivibile/,
+      );
+      assert.throws(
+        () => requireWritableRegularFile(root, target, 'target'),
+        /non scrivibile/,
+      );
+      assert.throws(
+        () => requiredWritableSurfaceFilesFor('frontaliere', root),
+        /superfici obbligatorie non scrivibili.*content\/blog-articles-data\.ts/,
+      );
+    } finally {
+      chmodSync(abs, 0o644);
+    }
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('il preflight retirement blocca directory parent non scrivibili', () => {
+  const root = mkdtempSync(path.join(os.tmpdir(), 'article-writable-parent-'));
+  try {
+    const parent = path.join(root, 'content/blog/it');
+    mkdirSync(parent, { recursive: true });
+    chmodSync(parent, 0o555);
+    try {
+      assert.throws(
+        () => requireWritableDirectory(root, 'content/blog/it', 'directory parent'),
+        /directory parent[\s\S]*non scrivibile[\s\S]*W_OK\|X_OK/,
+      );
+    } finally {
+      chmodSync(parent, 0o755);
+    }
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('SEO distingue assenza da directory, FIFO e path illeggibile', () => {
+  const fixtures = [
+    {
+      label: 'directory',
+      create(target) { mkdirSync(target, { recursive: true }); },
+    },
+    {
+      label: 'FIFO',
+      create(target) {
+        const run = spawnSync('mkfifo', [target], { encoding: 'utf8' });
+        assert.equal(run.status, 0, `${run.stderr || run.stdout || 'mkfifo fallito'}`);
+      },
+    },
+    {
+      label: 'symlink loop illeggibile',
+      create(target) { symlinkSync('seo-blog.ts', target); },
+    },
+  ];
+
+  for (const { label, create } of fixtures) {
+    const root = mkdtempSync(path.join(os.tmpdir(), 'article-seo-surface-'));
+    try {
+      const seoDir = path.join(root, 'content/seo');
+      mkdirSync(seoDir, { recursive: true });
+      create(path.join(seoDir, 'seo-blog.ts'));
+      assert.throws(
+        () => seoFilesFor('frontaliere', root),
+        /superficie SEO[\s\S]*non è un file regolare leggibile/,
+        `${label}: una superficie SEO presente ma inutilizzabile è stata filtrata`,
+      );
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+    }
+  }
+
+  const fixedRoot = mkdtempSync(path.join(os.tmpdir(), 'article-seo-fixed-'));
+  try {
+    const target = path.join(fixedRoot, 'content/seo/seo-blog-ch.ts');
+    mkdirSync(target, { recursive: true });
+    assert.throws(
+      () => seoFilesFor('svizzera', fixedRoot),
+      /superficie SEO[\s\S]*non è un file regolare leggibile/,
+      'anche il ramo SEO elencato non deve trattare una directory come assente',
+    );
+  } finally {
+    rmSync(fixedRoot, { recursive: true, force: true });
+  }
+
+  const invalidRoot = mkdtempSync(path.join(os.tmpdir(), 'article-seo-root-file-'));
+  try {
+    mkdirSync(path.join(invalidRoot, 'content'), { recursive: true });
+    writeFileSync(path.join(invalidRoot, 'content/seo'), 'not-a-directory\n', 'utf8');
+    assert.throws(
+      () => seoFilesFor('frontaliere', invalidRoot),
+      /superficie SEO[\s\S]*non è una directory leggibile/,
+      'la directory SEO stessa non deve passare come contenitore valido',
+    );
+  } finally {
+    rmSync(invalidRoot, { recursive: true, force: true });
+  }
+});
+
+test('leftoverSurfacesFor non omette una SEO presente ma non regolare', () => {
+  const root = mkdtempSync(path.join(os.tmpdir(), 'article-leftover-surface-'));
+  try {
+    for (const file of requiredSurfaceFilesFor('frontaliere', ROOT)) {
+      const abs = path.join(root, file);
+      mkdirSync(path.dirname(abs), { recursive: true });
+      writeFileSync(abs, 'fixture\n', 'utf8');
+    }
+    const seo = path.join(root, 'content/seo/seo-blog.ts');
+    mkdirSync(seo, { recursive: true });
+    assert.throws(
+      () => leftoverSurfacesFor('frontaliere', root),
+      /superficie SEO[\s\S]*non è un file regolare leggibile/,
+    );
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('la predicate dei target delete distingue assenza, inode non regolare e file', () => {
+  const root = mkdtempSync(path.join(os.tmpdir(), 'article-delete-target-'));
+  try {
+    assert.equal(assertRegularFileIfPresent(root, 'missing.ts', 'target'), false);
+
+    const directory = path.join(root, 'directory.ts');
+    mkdirSync(directory);
+    assert.equal(surfacePathStatus(root, 'directory.ts'), SURFACE_PATH_STATUS.DIRECTORY);
+    assert.throws(
+      () => assertRegularFileIfPresent(root, 'directory.ts', 'target'),
+      /non è un file regolare leggibile/,
+    );
+
+    const loop = path.join(root, 'loop.ts');
+    symlinkSync('loop.ts', loop);
+    assert.equal(surfacePathStatus(root, 'loop.ts'), SURFACE_PATH_STATUS.NON_REGULAR);
+    assert.throws(
+      () => requireRegularFile(root, 'loop.ts', 'target'),
+      /non è un file regolare leggibile/,
+    );
+
+    writeFileSync(path.join(root, 'body.ts'), 'fixture\n', 'utf8');
+    assert.equal(assertRegularFileIfPresent(root, 'body.ts', 'target'), true);
+    assert.equal(requireRegularFile(root, 'body.ts', 'target'), true);
+
+    const validLink = path.join(root, 'valid-link.ts');
+    symlinkSync('body.ts', validLink);
+    assert.equal(surfacePathStatus(root, 'valid-link.ts'), SURFACE_PATH_STATUS.NON_REGULAR);
+    assert.throws(
+      () => assertRegularFileIfPresent(root, 'valid-link.ts', 'target'),
+      /non è un file regolare leggibile/,
+    );
+
+    const dangling = path.join(root, 'dangling.ts');
+    symlinkSync('missing-target.ts', dangling);
+    assert.equal(surfacePathStatus(root, 'dangling.ts'), SURFACE_PATH_STATUS.NON_REGULAR);
+    assert.throws(
+      () => assertRegularFileIfPresent(root, 'dangling.ts', 'target'),
+      /non è un file regolare leggibile/,
+    );
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('retire-article fa il preflight delle superfici obbligatorie prima di ogni write', () => {
   const src = readFileSync(path.join(ROOT, 'scripts/retire-article.mjs'), 'utf8');
   const sectionAt = src.indexOf('const section = findSection(id);');
-  const preflightAt = src.indexOf('requiredSurfaceFilesFor(section);');
+  const preflightAt = src.indexOf('requiredWritableSurfaceFilesFor(section);');
   const firstWriteAt = src.indexOf('for (const [file, text] of writes) write(file, text);');
   const dryRunAt = src.indexOf('if (dryRun)');
   assert.ok(sectionAt >= 0 && preflightAt > sectionAt, 'il preflight deve seguire la risoluzione della sezione');
   assert.ok(preflightAt < firstWriteAt, 'le superfici mancanti devono fallire prima delle scritture');
   assert.ok(preflightAt < dryRunAt, 'anche --dry-run deve validare le superfici obbligatorie');
+});
+
+test('retire-article valida i target opzionali prima di accodare i write', () => {
+  const src = codeOnly(readFileSync(path.join(ROOT, 'scripts/retire-article.mjs'), 'utf8'));
+  const firstWriteAt = src.indexOf('for (const [file, text] of writes) write(file, text);');
+  const validateAt = src.indexOf('validateWriteTargets(writes);');
+  assert.match(src, /function queueWriteTarget\([^)]*\)[\s\S]*?requireWritableRegularFile\(/);
+  assert.match(src, /assertRegularFileIfPresent\(\s*ROOT,\s*cfg\.idUnionFile/);
+  assert.match(src, /assertRegularFileIfPresent\(\s*ROOT,\s*cfg\.sourceLedger/);
+  assert.match(src, /assertRegularFileIfPresent\(\s*ROOT,\s*IMAGES_LEDGER/);
+  assert.match(src, /assertRegularFileIfPresent\(\s*ROOT,\s*IMAGE_CATALOG/);
+  assert.ok(validateAt >= 0 && validateAt < firstWriteAt, 'tutti i write target devono essere riverificati prima del primo write');
+});
+
+test('retire-article valida tutti i target delete prima del primo write', () => {
+  const src = codeOnly(readFileSync(path.join(ROOT, 'scripts/retire-article.mjs'), 'utf8'));
+  const validateAt = src.indexOf('validateDeleteTargets(deletes);');
+  const firstWriteAt = src.indexOf('for (const [file, text] of writes) write(file, text);');
+  assert.match(src, /function queueDeleteTarget\(/);
+  assert.match(src, /queueDeleteTarget\(deletes, planned, bodyFile, 'corpo'\)/);
+  assert.match(src, /queueDeleteTarget\(deletes, planned, sidecar, 'sidecar'\)/);
+  assert.match(src, /queueDeleteTarget\(deletes, planned, asset, 'asset'\)/);
+  assert.match(src, /function validateDeleteTargets\(/);
+  assert.match(src, /queueDeleteTarget\([\s\S]*?requireWritableDirectory\(/);
+  assert.match(src, /validateDeleteTargets\([\s\S]*?requireWritableDirectory\(/);
+  assert.ok(validateAt >= 0 && validateAt < firstWriteAt, 'i target delete devono fallire prima di ogni write');
+  assert.doesNotMatch(src, /existsSync\(rel\(bodyFile\)\)/);
+  assert.doesNotMatch(src, /existsSync\(rel\(sidecar\)\)/);
+  assert.doesNotMatch(src, /existsSync\(rel\(asset\)\)/);
+});
+
+test('retire-article preflighta e ricontrolla la directory del ledger atomico', () => {
+  const src = codeOnly(readFileSync(path.join(ROOT, 'scripts/retire-article.mjs'), 'utf8'));
+  const firstWriteAt = src.indexOf('for (const [file, text] of writes) write(file, text);');
+  const ledgerPreflightAt = src.indexOf('const retiredLedgerDirectory = path.dirname(RETIRED_LEDGER);');
+  const ledgerRecheckAt = src.lastIndexOf("'directory padre del ledger ritirati'");
+  assert.match(src, /const retiredLedgerDirectory = path\.dirname\(RETIRED_LEDGER\);/);
+  assert.match(src, /requireWritableDirectory\(\s*ROOT,\s*retiredLedgerDirectory/);
+  assert.ok(ledgerPreflightAt >= 0 && ledgerPreflightAt < firstWriteAt, 'la directory del ledger va preflightata prima del primo write');
+  assert.ok(ledgerRecheckAt >= 0 && ledgerRecheckAt < firstWriteAt, 'la directory del ledger va ricontrollata prima del primo write');
 });
 
 test('retire-article rifiuta un id mancante, vuoto o fatto di spazi prima di scrivere', () => {
