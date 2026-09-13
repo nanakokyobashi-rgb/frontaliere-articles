@@ -88,7 +88,12 @@ case "$sub" in
         node -e 'const c=require(process.argv[1]); process.stdout.write((c.mergeBase||"")+"\\n")' ${JSON.stringify(fixCompare)} ;;
       */compare/*)
         node -e 'const c=require(process.argv[1]); const k=process.argv[2].split("/compare/")[1]; process.stdout.write(JSON.stringify((c.byRange||{})[k]||{files:[]}))' ${JSON.stringify(fixCompare)} "$p" ;;
-      */commits/*/check-runs*) cat ${JSON.stringify(fixCheckRuns)} ;;
+      */commits/*/check-runs*)
+        if [[ "$p" == *'filter=all' ]]; then
+          cat ${JSON.stringify(fixCheckRuns)}
+        else
+          echo '{"check_runs":[]}'
+        fi ;;
       */issues/*/comments*) echo '[]' ;;
       */issues?*) echo '[]' ;;
       */git/trees/*)
