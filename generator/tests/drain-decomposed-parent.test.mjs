@@ -23,6 +23,7 @@ import { fileURLToPath } from 'node:url';
 import {
   isDrainPromotable,
   hasActiveAgentClaim,
+  isRecoverableQueueManaged,
   isAgeOutCandidate,
   isReparkableCandidate,
   isDecomposeEligible,
@@ -151,4 +152,24 @@ test('#1360: un claim locale o remoto esclude ogni via di mutazione del drainer'
     assert.equal(isIssueGroupable(grouped, { repository: 'owner/repo', canPushWorkflows: true }), false, owner);
   }
   assert.match(SRC, /CLAIM-SKIP/);
+});
+
+test('#1455: i claim escludono anche recovery WIP, age-out e tutti i pass mutanti', () => {
+  const old = new Date(Date.now() - 90 * 86_400_000).toISOString();
+  for (const owner of ['agent:in-progress', 'agent:local', 'agent:remote']) {
+    const parked = iss('fu-parked', 'follow-up', owner);
+    assert.equal(isRecoverableQueueManaged(parked), false, `${owner}: parked-wip`);
+    assert.equal(isAgeOutCandidate({ ...parked, createdAt: old }, {
+      now: Date.now(), ageOutDays: 30,
+    }), false, `${owner}: age-out`);
+    assert.equal(isDrainPromotable(iss('agent:fix-queued', owner)), false, `${owner}: drain`);
+  }
+  assert.match(SRC, /\.filter\(\(iss\) => !hasActiveAgentClaim\(iss\)\)/,
+    'verdict-exit/too-large devono filtrare il claim prima della scansione');
+  assert.match(SRC, /parents\.filter\(\(x\) => !hasActiveAgentClaim\(x\)/,
+    'parent-dequeue deve filtrare i padri già assegnati');
+  assert.match(SRC, /function issueMutationAllowed\(/,
+    'ogni issue comment/edit/close deve avere una rilettura live fail-closed');
+  assert.match(SRC, /command === 'issue' && \['comment', 'close', 'edit'\]/,
+    'il wrapper gh deve proteggere anche i call-site legacy');
 });

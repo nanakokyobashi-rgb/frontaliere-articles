@@ -1775,6 +1775,7 @@ export function isQueueManaged(iss) {
  */
 export function isRecoverableQueueManaged(iss) {
   const labels = (iss?.labels || []).map((label) => label?.name).filter(Boolean);
+  if (hasActiveAgentClaim(iss)) return false;
   if (!labels.includes('needs-human')) return isQueueManaged(iss);
   const classification = classifyIssue(
     iss?.title,
@@ -1836,6 +1837,7 @@ export function isPermanentTracker(iss) {
 export function isAgeOutCandidate(iss, { now, ageOutDays }) {
   if (!ageOutDays || ageOutDays <= 0) return false;
   if (!isQueueManaged(iss)) return false;
+  if (hasActiveAgentClaim(iss)) return false;
   const ls = (iss?.labels || []).map((l) => l.name);
   if (isPermanentTracker(iss)) return false; // issue-contatore/tracker permanente, mai eleggibile
   if (ls.includes(LBL_FIX) || ls.includes(LBL_QUEUED)) return false; // in lavorazione/coda
@@ -2070,7 +2072,12 @@ export function isRetryCooldownElapsed(iss, comments, { now, cooldownDays }) {
   return (now - at) / 86_400_000 >= cooldownDays;
 }
 
-function gh(args, { json = true } = {}) {
+function gh(args, { json = true, stage = null } = {}) {
+  const [command, action, number] = args;
+  if (!DRY && command === 'issue' && ['comment', 'close', 'edit'].includes(action)
+      && !issueMutationAllowed(number, stage || `issue ${action}`)) {
+    throw new Error(`issue #${number} claim presente o non verificabile`);
+  }
   const out = execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
   return json ? JSON.parse(out) : out;
 }
@@ -2590,6 +2597,61 @@ export function ensureLabel(name, color, description, { run = gh, dry = DRY } = 
   }
 }
 
+/**
+ * Rilegge le label subito prima di ogni mutazione issue.
+ *
+ * Le liste del drainer sono snapshot: tra la scansione e il comment/edit un
+ * worker locale o remoto può aver acquisito `agent:in-progress`, `agent:local`
+ * o `agent:remote`. Il claim è proprietà dell'altro worker; in caso di lettura
+ * illeggibile si chiude il varco senza mutare nulla (fail-closed).
+ * @param {number|string} num
+ * @param {string} stage
+ */
+function issueMutationAllowed(num, stage) {
+  if (DRY) return true;
+  try {
+    const live = gh(['issue', 'view', String(num), '--repo', REPO, '--json', 'labels']);
+    if (!live || !Array.isArray(live.labels)) {
+      console.log(`::warning::CLAIM-READ-FAIL #${num} (${stage}): label live non verificabile → nessuna mutazione.`);
+      return false;
+    }
+    if (hasActiveAgentClaim(live)) {
+      const claims = names(live)
+        .filter((name) => [LBL_IN_PROGRESS, LBL_LOCAL, LBL_REMOTE].includes(name));
+      console.log(`CLAIM-SKIP #${num} (${stage}; ${claims.join(', ') || 'stato claim incompleto'}) → lascio intatto il lavoro della flotta locale/remota`);
+      return false;
+    }
+    return true;
+  } catch (error) {
+    console.log(`::warning::CLAIM-READ-FAIL #${num} (${stage}): ${String(error).slice(0, 160)} → nessuna mutazione.`);
+    return false;
+  }
+}
+
+/** Commento protetto dalla rilettura del claim live. */
+function commentIssue(num, body, stage = 'comment') {
+  try {
+    gh(['issue', 'comment', String(num), '--repo', REPO, '--body', body], { json: false, stage });
+    return true;
+  } catch (error) {
+    console.log(`::warning::comment #${num} fallito: ${String(error).slice(0, 120)}`);
+    return false;
+  }
+}
+
+/** Chiusura protetta dalla rilettura del claim live. */
+function closeIssue(num, { reason, stage = 'close' } = {}) {
+  const args = ['issue', 'close', String(num), '--repo', REPO];
+  if (reason) args.push('--reason', reason);
+  try {
+    gh(args, { json: false, stage });
+    return true;
+  } catch (error) {
+    console.log(`::warning::close #${num} fallita: ${String(error).slice(0, 120)}`);
+    return false;
+  }
+}
+
 function edit(num, { add = [], remove = [] }) {
   const args = ['issue', 'edit', String(num), '--repo', REPO];
   for (const l of add) args.push('--add-label', l);
@@ -2731,10 +2793,7 @@ function prepareIssueGroup(group) {
  * lavorazione continua, in un'altra forma. */
 function routeToDecompose(num, { remove = [], note }) {
   if (DRY) { console.log(`[dry] decompose-route #${num}`); return; }
-  if (note) {
-    try { gh(['issue', 'comment', String(num), '--repo', REPO, '--body', note], { json: false }); }
-    catch (e) { console.log(`::warning::comment #${num} fallito: ${String(e).slice(0, 120)}`); }
-  }
+  if (note) commentIssue(num, note, 'decompose-route');
   edit(num, { add: [LBL_DECOMP_QUEUED], remove });
 }
 
@@ -3564,12 +3623,9 @@ export function runDrain() {
       if (!budget.take(`#${iss.number} (age-out)`, ITEM_COST_MS)) break;
       const note = `🗑️ Auto-chiusa dal followup-drainer: nessun evento SIGNIFICATIVO da ≥${AGEOUT_INACTIVE_DAYS}gg (commenti di bot e ping dei monitor esclusi: alzano \`updatedAt\` senza dire niente sullo stato) e issue vecchia ≥${AGEOUT_DAYS}gg, mai entrata in lavorazione → non funnel-blocking. **Riapri** se il problema ricorre (o riloggalo: il lessons-harvester lo ricatturerà se è un pattern reale).`;
       if (DRY) { console.log(`[dry] close #${iss.number} (age-out) — "${iss.title}"`); continue; }
-      try {
-        gh(['issue', 'comment', String(iss.number), '--repo', REPO, '--body', note], { json: false });
-        gh(['issue', 'close', String(iss.number), '--repo', REPO, '--reason', 'not planned'], { json: false });
+      if (!commentIssue(iss.number, note, 'age-out comment')) continue;
+      if (closeIssue(iss.number, { reason: 'not planned', stage: 'age-out close' })) {
         console.log(`AGE-OUT close #${iss.number} — "${iss.title}"`);
-      } catch (e) {
-        console.log(`age-out: close #${iss.number} fallita (${e.message}) — continuo col batch.`);
       }
     }
   }
@@ -3588,14 +3644,11 @@ export function runDrain() {
     // passo #7340 & C. resterebbero `agent:fix` per sempre, invisibili a ogni
     // altro strato. Solo label (nessuna `gh view`), e solo per i pochi padri
     // che le portano davvero.
-    for (const p of parents.filter((x) => has(x, LBL_FIX) || has(x, LBL_QUEUED))) {
+    for (const p of parents.filter((x) => !hasActiveAgentClaim(x) && (has(x, LBL_FIX) || has(x, LBL_QUEUED)))) {
       if (DRY) { console.log(`[dry] parent-dequeue #${p.number}`); continue; }
-      try {
-        gh(['issue', 'comment', String(p.number), '--repo', REPO, '--body',
-          `⏭️ **Pre-flight drainer (zero-Claude): padre decomposto fuori dalla coda del fixer.** Lo scope di questa issue vive nelle sub-issue dichiarate da \`DECOMPOSED_INTO\`, che entrano in coda per conto loro; qui non resta lavoro proprio, e un run del fixer non potrebbe che terminare senza PR (o duplicare una figlia). Rimuovo \`agent:fix\`/\`agent:fix-queued\`. La issue **resta aperta**: la chiude il PARENT-CLOSE quando tutte le figlie sono chiuse.`], { json: false });
-      } catch (e) {
-        console.log(`::warning::parent-dequeue: comment #${p.number} fallito: ${String(e).slice(0, 120)}`);
-      }
+      commentIssue(p.number,
+        `⏭️ **Pre-flight drainer (zero-Claude): padre decomposto fuori dalla coda del fixer.** Lo scope di questa issue vive nelle sub-issue dichiarate da \`DECOMPOSED_INTO\`, che entrano in coda per conto loro; qui non resta lavoro proprio, e un run del fixer non potrebbe che terminare senza PR (o duplicare una figlia). Rimuovo \`agent:fix\`/\`agent:fix-queued\`. La issue **resta aperta**: la chiude il PARENT-CLOSE quando tutte le figlie sono chiuse.`,
+        'parent-dequeue comment');
       edit(p.number, { remove: [LBL_FIX, LBL_QUEUED] });
       console.log(`PARENT-DEQUEUE #${p.number} (decomposed:1, lavoro delegato alle figlie) — "${p.title?.slice(0, 50)}"`);
     }
@@ -3651,13 +3704,10 @@ export function runDrain() {
         continue;
       }
       if (DRY) { console.log(`[dry] parent-close #${p.number} (figlie ${kids.join(', ')} tutte chiuse)`); continue; }
-      try {
-        gh(['issue', 'comment', String(p.number), '--repo', REPO, '--body',
-          `✅ Auto-chiusa dal followup-drainer (PARENT-CLOSE): tutte le sub-issue della decomposizione (${kids.map((n) => `#${n}`).join(', ')}) risultano chiuse. Riapri se una parte dello scope originario non è coperta dalle figlie.`], { json: false });
-        gh(['issue', 'close', String(p.number), '--repo', REPO], { json: false });
+      const closedNote = `✅ Auto-chiusa dal followup-drainer (PARENT-CLOSE): tutte le sub-issue della decomposizione (${kids.map((n) => `#${n}`).join(', ')}) risultano chiuse. Riapri se una parte dello scope originario non è coperta dalle figlie.`;
+      if (!commentIssue(p.number, closedNote, 'parent-close comment')) continue;
+      if (closeIssue(p.number, { stage: 'parent-close' })) {
         console.log(`PARENT-CLOSE #${p.number} (figlie tutte chiuse: ${kids.join(', ')}) — "${p.title?.slice(0, 50)}"`);
-      } catch (e) {
-        console.log(`parent-close: #${p.number} fallita (${e.message}) — continuo col batch.`);
       }
     }
   }
@@ -3704,8 +3754,7 @@ export function runDrain() {
         console.log(`PROOF-RETRY #${iss.number}: rimozione di \`${LBL_PROOF}\` fallita → nessun commento`);
         continue;
       }
-      try { gh(['issue', 'comment', String(iss.number), '--repo', REPO, '--body', note], { json: false }); }
-      catch (e) { console.log(`::warning::comment #${iss.number} fallito: ${String(e).slice(0, 120)}`); }
+      commentIssue(iss.number, note, 'production-proof comment');
     }
   }
 
@@ -3718,6 +3767,7 @@ export function runDrain() {
   {
     const parked = listIssues(LBL_PARKED)
       .filter((iss) => isQueueManaged(iss))
+      .filter((iss) => !hasActiveAgentClaim(iss))
       // Chi è già in coda, in lavoro, nello stadio decompose o già escalato non
       // ha bisogno di un'uscita: ce l'ha. `needs-human` incluso, altrimenti
       // questo stadio ri-commenterebbe a ogni tick ciò che ha già instradato.
@@ -3838,12 +3888,10 @@ export function runDrain() {
           ensureLabel(LBL_UNPARKED, '0e8a16', 'Ri-accodata dal drainer: era parked per un addebito falso (nessun verdetto, oppure una consegna letta come run morta)');
           unparkLabelEnsured = true;
         }
-        try {
-          const unparkBody = deliveredParked
+        const unparkBody = deliveredParked
             ? `♻️ **Ri-accodata dal followup-drainer (zero-Claude): aveva consegnato, non fallito.**\n\nQuesta issue portava \`${LBL_PARKED}\` e \`fu-attempt:${attemptOf(iss) || '?'}\`, ma il suo ultimo \`FIX_OUTCOME\` è \`pr-created\` **e la PR di fix su \`fix/issue-${iss.number}\` risulta mergiata**. Il tentativo è stato addebitato dal RESCUE perché \`hasFixPR\` guarda solo le PR \`open\`, e una PR di fix mergia prima dei 30 minuti di \`ORPHAN_MIN_AGE_MIN\`: la consegna è stata letta come una run morta.\n\nTolgo \`${LBL_PARKED}\` e il contatore e la rimetto in coda con \`${LBL_QUEUED}\`. Se il lavoro è davvero finito, a chiuderla sarà il rilevatore di già-risolto al giro dopo: questo ramo non lo decide.`
             : `♻️ **Ri-accodata dal followup-drainer (zero-Claude): era parcheggiata senza un solo tentativo.**\n\nQuesta issue portava \`${LBL_PARKED}\` e \`fu-attempt:${attemptOf(iss) || '?'}\`, ma nei suoi commenti non c'è **nessun** \`FIX_OUTCOME\`: nessuna run del fixer l'ha mai lavorata. Il contatore dei tentativi è stato alzato dal RESCUE su promozioni che la coda di concorrenza di \`issue-fix.yml\` aveva sfrattato (\`cancelled\` prima di eseguire uno step), non su fix falliti.\n\nTolgo \`${LBL_PARKED}\` e il contatore e la rimetto in coda con \`${LBL_QUEUED}\`. Il primo giro vero comincia adesso.`;
-          gh(['issue', 'comment', String(iss.number), '--repo', REPO, '--body', unparkBody], { json: false });
-        } catch { /* il commento spiega, non è il meccanismo */ }
+        commentIssue(iss.number, unparkBody, 'unpark comment');
         edit(iss.number, {
           add: [LBL_QUEUED, LBL_UNPARKED],
           remove: [LBL_PARKED, ...names(iss).filter((n) => /^fu-attempt:\d+$/.test(n))],
@@ -3880,15 +3928,9 @@ export function runDrain() {
         // traccia da duplicare, e una close riuscita toglie la issue dal pool
         // (`listIssues` legge solo le aperte) anche se il commento poi salta.
         // Si può commentare una issue chiusa, quindi non si perde la spiegazione.
-        try {
-          edit(iss.number, { add: [LBL_RESOLVED_AUTO], remove: [LBL_PARKED] });
-          gh(['issue', 'close', String(iss.number), '--repo', REPO, '--reason', 'completed'], { json: false });
-        } catch (e) {
-          console.log(`::warning::verdict-exit close #${iss.number} fallito: ${String(e).slice(0, 120)}`);
-          continue;
-        }
-        try { gh(['issue', 'comment', String(iss.number), '--repo', REPO, '--body', note], { json: false }); }
-        catch { console.log(`::warning::verdict-exit #${iss.number}: chiusa, ma il commento di spiegazione non è stato postato.`); }
+        if (!edit(iss.number, { add: [LBL_RESOLVED_AUTO], remove: [LBL_PARKED] })) continue;
+        if (!closeIssue(iss.number, { reason: 'completed', stage: 'verdict-exit close' })) continue;
+        commentIssue(iss.number, note, 'verdict-exit comment');
         console.log(`VERDICT-EXIT close #${iss.number} (already-fixed) — "${iss.title?.slice(0, 50)}"`);
         continue;
       }
@@ -3896,22 +3938,20 @@ export function runDrain() {
       if (d.action === 'flag') {
         if (DRY) { console.log(`[dry] flag #${iss.number} (verdict-exit: ${d.reason})`); continue; }
         if (has(iss, LBL_MAYBE_RESOLVED)) continue; // già flaggata: niente commento duplicato
-        try {
-          gh(['issue', 'comment', String(iss.number), '--repo', REPO, '--body',
-            `🔎 **followup-drainer (zero-Claude)**: verdetto \`already-fixed\` — il fixer ha verificato che il difetto non c'è più. Chiusura automatica disattivata (\`FOLLOWUP_NO_AUTOCLOSE=1\`), quindi resta aperta per conferma umana.`], { json: false });
-        } catch { /* il flag è advisory: un commento perso non è un blocco */ }
-        edit(iss.number, { add: [LBL_MAYBE_RESOLVED], remove: [] });
+        commentIssue(iss.number,
+          `🔎 **followup-drainer (zero-Claude)**: verdetto \`already-fixed\` — il fixer ha verificato che il difetto non c'è più. Chiusura automatica disattivata (\`FOLLOWUP_NO_AUTOCLOSE=1\`), quindi resta aperta per conferma umana.`,
+          'verdict-exit flag comment');
+        if (!edit(iss.number, { add: [LBL_MAYBE_RESOLVED], remove: [] })) continue;
         console.log(`VERDICT-EXIT flag #${iss.number} (already-fixed, autoclose off) — "${iss.title?.slice(0, 50)}"`);
         continue;
       }
 
       // escalate
       if (DRY) { console.log(`[dry] escalate #${iss.number} → needs-human (verdict-exit: ${d.reason})`); continue; }
-      try {
-        gh(['issue', 'comment', String(iss.number), '--repo', REPO, '--body',
-          `🙋 **Escalata dal followup-drainer (zero-Claude)**: verdetto \`FIX_OUTCOME: ${outcome}\`. È una capacità che la CI non ha (secret, admin, scope \`workflows\`), un lavoro manuale/editoriale, o una causa che il fixer non ha trovato: ri-provare riproduce lo stesso verdetto allo stesso prezzo.\n\nPrima di questa escalation la issue restava \`fu-parked\` e nessuno stadio la guardava. Ora entra nello sweep \`needs-human\` (VISION.md), che è la porta di rientro.`], { json: false });
-      } catch { /* il commento è la spiegazione, non il meccanismo */ }
-      edit(iss.number, { add: ['needs-human'], remove: [LBL_FIX, LBL_QUEUED] });
+      commentIssue(iss.number,
+        `🙋 **Escalata dal followup-drainer (zero-Claude)**: verdetto \`FIX_OUTCOME: ${outcome}\`. È una capacità che la CI non ha (secret, admin, scope \`workflows\`), un lavoro manuale/editoriale, o una causa che il fixer non ha trovato: ri-provare riproduce lo stesso verdetto allo stesso prezzo.\n\nPrima di questa escalation la issue restava \`fu-parked\` e nessuno stadio la guardava. Ora entra nello sweep \`needs-human\` (VISION.md), che è la porta di rientro.`,
+        'verdict-exit escalation comment');
+      if (!edit(iss.number, { add: ['needs-human'], remove: [LBL_FIX, LBL_QUEUED] })) continue;
       console.log(`VERDICT-EXIT escalate #${iss.number} → needs-human (${outcome}) — "${iss.title?.slice(0, 50)}"`);
     }
     if (acted) console.log(`verdict-exit: ${acted} uscite terminali su ${scanned} candidate lette (pool parked ${parked.length}).`);
@@ -3931,6 +3971,7 @@ export function runDrain() {
   {
     const tooLarge = listIssues(LBL_PARKED)
       .filter((iss) => isQueueManaged(iss))
+      .filter((iss) => !hasActiveAgentClaim(iss))
       .filter((iss) => !has(iss, LBL_FIX) && !has(iss, LBL_QUEUED) && !has(iss, 'needs-human'))
       .filter((iss) => reparkGenOf(iss) >= 1)
       .filter((iss) => !isWorkflowScoped(iss.number))
@@ -3981,6 +4022,7 @@ export function runDrain() {
         console.log(`sibling-debt: cap ${SIBLING_DEBT_MAX_PER_RUN}/run raggiunto, le restanti al prossimo tick (no silent cap).`);
         break;
       }
+      if (hasActiveAgentClaim(iss)) continue; // claim locale/remoto: non toccare il lavoro in corso
       if (has(iss, LBL_SIBLING_DEBT)) continue; // idempotenza: la label È il marker
       const debt = detectSiblingDebt(`${iss.title}\n${iss.body || ''}`, REPO);
       if (!debt) continue;
@@ -3994,8 +4036,7 @@ export function runDrain() {
       if (DRY) { console.log(`[dry] sibling-debt #${iss.number} (${debt.repo})`); continue; }
       const note = `🔗 **Debito verso il gemello (drainer, zero-Claude)**: un item di questa follow-up dichiara che il file gemello su **\`${debt.repo}\`** non è ancora allineato.\n\n- **Repo gemello**: \`${debt.repo}\`\n- **File nominati**: ${fileList}\n- **Riferimenti cross-repo citati**: ${refList}\n- **Evidenza (verbatim dal body)**: «${debt.evidence}»\n\n**Perché una label locale e non una issue aperta di là**: \`followup-drainer.yml\` gira con un token dell'installazione del repo CORRENTE (\`APP_TOKEN || GITHUB_PAT\`). L'unica credenziale cross-repo del workspace è \`ARTICLES_REPO_PAT\` (usata da \`mirror-articles-engine.yml\`): esiste solo sul sito, va in una direzione sola (sito→corpus) e non è cablata in questo workflow. Questo script è \`mode: identical\` sui due repo — dev'essere byte-identico — quindi un apri-issue cross-repo funzionerebbe da un lato e tornerebbe 403 dall'altro, proprio il lato dove il segnale nasce (8 casi su 8 misurati sono sul corpus). La label \`${LBL_SIBLING_DEBT}\` è invece leggibile e scrivibile da entrambi con il token che ciascuno ha già.\n\n**Non parcheggio e non instrado**: la issue prosegue nel flusso normale — gli altri item restano lavorabili qui.`;
       if (!ensured) { ensureLabel(LBL_SIBLING_DEBT, '1d76db', 'Un item dichiara un file gemello non allineato sull\'altro repo del workspace'); ensured = true; }
-      try { gh(['issue', 'comment', String(iss.number), '--repo', REPO, '--body', note], { json: false }); }
-      catch (e) { console.log(`::warning::comment #${iss.number} fallito: ${String(e).slice(0, 120)}`); }
+      commentIssue(iss.number, note, 'sibling-debt comment');
       edit(iss.number, { add: [LBL_SIBLING_DEBT] });
     }
     if (labelled) console.log(`sibling-debt: ${labelled} issue etichettate in questo tick (debito verso l'altro repo del workspace).`);
@@ -4732,8 +4773,7 @@ export function runDrain() {
     console.log(`PARK #${iss.number} (padre ${LBL_DECOMPOSED}) → no promozione, il lavoro vive nelle figlie`);
     if (DRY) { console.log(`[dry] park #${iss.number} (padre decomposto)`); continue; }
     const note = `⏭️ **Pre-flight drainer (zero-Claude)**: questa issue è un padre **decomposto** (\`${LBL_DECOMPOSED}\`). Il suo scope vive nelle sub-issue dichiarate dal marker \`DECOMPOSED_INTO\`, che hanno la loro dispatch; il padre resta aperto come tracker e viene chiuso dal PARENT-CLOSE quando tutte le figlie sono chiuse. **Non promuovo**: rimuovo \`${LBL_QUEUED}\` e parko.\n\n<!-- FIX_OUTCOME: overlap-skip -->`;
-    try { gh(['issue', 'comment', String(iss.number), '--repo', REPO, '--body', note], { json: false }); }
-    catch (e) { console.log(`::warning::comment #${iss.number} fallito: ${String(e).slice(0, 120)}`); }
+    commentIssue(iss.number, note, 'decomposed-parent park comment');
     edit(iss.number, { add: [LBL_PARKED], remove: [LBL_QUEUED, LBL_FIX] });
   }
 
@@ -4910,8 +4950,7 @@ export function runDrain() {
       console.log(`DISACCODO #${cand.number} (pin ${pins}) → tracker su causa esterna, nessun run del fixer`);
       const note = `📌 **Pre-flight drainer (zero-Claude, #7648)**: questa issue porta \`${pins}\` — un pin che la dichiara tracker su una causa esterna al repository. Nessun turn-budget la chiude, perché l'input che manca non è codice; promuoverla spende un run Max per ri-scoprire ogni volta la stessa attesa, e rischia di chiudere ciò che il pin vuole tenere aperto.\n\n**Non promuovo e non parcheggio**: \`fu-parked\` vorrebbe dire «lavoro sospeso», e questo non lo è. Rimuovo solo le label di routing; la issue resta aperta e visibile. Togli il pin quando la causa esterna si sblocca e il triage la ri-accoda normalmente.\n\n<!-- FIX_OUTCOME: revenue-tracker-manual -->`;
       if (DRY) { console.log(`[dry] disaccodo #${cand.number} (pin ${pins})`); continue; }
-      try { gh(['issue', 'comment', String(cand.number), '--repo', REPO, '--body', note], { json: false }); }
-      catch (e) { console.log(`::warning::comment #${cand.number} fallito: ${String(e).slice(0, 120)}`); }
+      commentIssue(cand.number, note, 'pin park comment');
       edit(cand.number, { remove: [LBL_QUEUED, LBL_FIX] });
       continue; // prova il prossimo in coda
     }
@@ -4923,8 +4962,7 @@ export function runDrain() {
       console.log(`PARK #${cand.number} (compress-contract-docs ratchet) → no promozione, mai chiusa dal fixer autonomo (8/8 storiche via PR umana)`);
       const note = `⏭️ **Pre-flight drainer (zero-Claude, #5523)**: questa issue è aperta dal ratchet \`compress-contract-docs.yml\` — comprimere un doc "hot" (15-21KB) preservando verbatim heading/regole/tabelle/step/code-block/path/stringhe è un lavoro editoriale, non un difetto meccanico. Nessuna occorrenza storica (#1112 #1113 #1569 #3039 #3641 #4136 #4567 #5507) è mai stata chiusa dal fixer autonomo: tutte hanno richiesto scelte di struttura (es. #5519 ha dovuto estrarre un'appendice in un nuovo file — la sola prosa non bastava a rientrare sotto ceiling) e sono state chiuse da una PR umana. Promuoverla ripaga lo stesso run a vuoto a ogni ri-apertura del ratchet. **Non promuovo**: serve una sessione umana/gentle-compress mirata. Rimuovo \`agent:fix-queued\` e parko (riapribile: togli \`fu-parked\` se il contesto cambia).\n\n<!-- FIX_OUTCOME: revenue-tracker-manual -->`;
       if (DRY) { console.log(`[dry] park #${cand.number} (compress-contract-docs ratchet)`); continue; }
-      try { gh(['issue', 'comment', String(cand.number), '--repo', REPO, '--body', note], { json: false }); }
-      catch (e) { console.log(`::warning::comment #${cand.number} fallito: ${String(e).slice(0, 120)}`); }
+      commentIssue(cand.number, note, 'compress-contract-docs park comment');
       edit(cand.number, { add: [LBL_PARKED], remove: [LBL_QUEUED, LBL_FIX] });
       continue; // prova il prossimo in coda
     }
@@ -4963,8 +5001,7 @@ export function runDrain() {
       console.log(`PARK #${cand.number} (malformed body, ${blen} chars) → no promozione, fixer non ha contesto`);
       const note = `⛔ **Pre-flight drainer (zero-Claude, #2291)**: il body di questa follow-up è vuoto o malformato (${blen} chars, nessuna sezione \`## Origine\`/\`### N.\`). Promuoverla a \`agent:fix\` brucerebbe turni senza produrre una PR — il fixer non ha contesto su cosa fixare.\n\n**Non promuovo**: correggi il body dell'issue (sezioni \`## Origine\` + \`## Item\` obbligatorie) o ri-apri il follow-up con una descrizione completa. Parko con \`needs-human\`.\n\n<!-- FIX_OUTCOME: no-root-cause -->`;
       if (DRY) { console.log(`[dry] park #${cand.number} (malformed body)`); continue; }
-      try { gh(['issue', 'comment', String(cand.number), '--repo', REPO, '--body', note], { json: false }); }
-      catch (e) { console.log(`::warning::comment #${cand.number} fallito: ${String(e).slice(0, 120)}`); }
+      commentIssue(cand.number, note, 'malformed-body park comment');
       edit(cand.number, { add: [LBL_PARKED, 'needs-human'], remove: [LBL_QUEUED, LBL_FIX] });
       continue; // prova il prossimo in coda
     }
@@ -4985,8 +5022,7 @@ export function runDrain() {
       console.log(`PARK #${cand.number} (epic-tracker: sub-issues ${subList}) → no promozione, scope delegato`);
       const note = `⏭️ **Pre-flight drainer (zero-Claude, #4517)**: questa issue è un \`[EPIC]\` di coordinamento — il body delega l'intero scope implementativo alla sezione \`## Sub-issues\` (${subList}), già tracciate indipendentemente nella propria coda \`agent:fix-queued\`/\`agent:fix\`. Promuoverla brucerebbe un run Claude completo per arrivare sempre alla stessa conclusione (nessun target-file proprio da fixare qui). **Non promuovo**: l'epic si chiude quando tutte le sub-issue sono mergiate (o manualmente, come tracker). Rimuovo \`agent:fix-queued\` e parko (riapribile: togli \`fu-parked\` se il contesto cambia).\n\n<!-- FIX_OUTCOME: revenue-tracker-manual -->`;
       if (DRY) { console.log(`[dry] park #${cand.number} (epic-tracker)`); continue; }
-      try { gh(['issue', 'comment', String(cand.number), '--repo', REPO, '--body', note], { json: false }); }
-      catch (e) { console.log(`::warning::comment #${cand.number} fallito: ${String(e).slice(0, 120)}`); }
+      commentIssue(cand.number, note, 'epic-tracker park comment');
       edit(cand.number, { add: [LBL_PARKED], remove: [LBL_QUEUED, LBL_FIX] });
       continue; // prova il prossimo in coda
     }
@@ -5013,8 +5049,7 @@ export function runDrain() {
       console.log(`PARK #${cand.number} (backlog-tracker: ${itemCount} voci, non eleggibile alla decomposizione) → fu-parked`);
       const note = `⏭️ **Pre-flight drainer (zero-Claude, #5312)**: questa issue è un **contenitore di lavoro residuo** (handoff di sessione), non un difetto singolo — il body enumera **${itemCount} voci distinte**, eterogenee e in parte già tracciate altrove. Non ha una root cause comune né un target-file proprio: promuoverla a \`agent:fix\` produce un fix parziale su UNA delle voci, o un run che esaurisce i turni. **Non promuovo**: già decomposta in precedenza (o figlia di una decomposizione), quindi non ri-scorporabile in automatico. Rimuovo \`agent:fix-queued\` e parko (riapribile: togli \`fu-parked\` se il contesto cambia).\n\n<!-- FIX_OUTCOME: revenue-tracker-manual -->`;
       if (DRY) { console.log(`[dry] park #${cand.number} (backlog-tracker)`); continue; }
-      try { gh(['issue', 'comment', String(cand.number), '--repo', REPO, '--body', note], { json: false }); }
-      catch (e) { console.log(`::warning::comment #${cand.number} fallito: ${String(e).slice(0, 120)}`); }
+      commentIssue(cand.number, note, 'backlog-tracker park comment');
       edit(cand.number, { add: [LBL_PARKED], remove: [LBL_QUEUED, LBL_FIX] });
       continue; // prova il prossimo in coda
     }
@@ -5029,8 +5064,7 @@ export function runDrain() {
       if (DRY) { console.log(`[dry] park #${cand.number} (data-pending)`); continue; }
       const note = `⏳ **Pre-flight drainer (zero-Claude, data-pending)**: questa follow-up dichiara di essere in attesa di un dato che non esiste ancora — «${dataPending}». Non è un fix che il fixer possa produrre oggi: promuoverla brucia un run che riscopre ogni volta lo stesso vincolo.\n\n**Non è terminale.** Parcheggio con \`${LBL_DATA_PENDING}\` e cooldown **${DATA_PENDING_COOLDOWN_DAYS} giorni** (il doppio di \`FOLLOWUP_RETRY_COOLDOWN_DAYS\`=${RETRY_COOLDOWN_DAYS}, che è tarato su «ri-tentare un fix fallito» — qui il fix non è fallito, non è ancora valutabile). Allo scadere il pass PARKED-RETRY la ri-accoda da solo in \`agent:fix-queued\`, senza intervento umano. Nessun \`needs-human\`: sarebbe uno stato assorbente e la issue non tornerebbe mai in coda.\n\nSe il dato arriva prima, togli \`${LBL_PARKED}\` per rimetterla in coda subito.`;
       ensureLabel(LBL_DATA_PENDING, 'fbca04', 'Follow-up parcheggiata in attesa di dati/run future (cooldown lungo, ri-accodata da sola)');
-      try { gh(['issue', 'comment', String(cand.number), '--repo', REPO, '--body', note], { json: false }); }
-      catch (e) { console.log(`::warning::comment #${cand.number} fallito: ${String(e).slice(0, 120)}`); }
+      commentIssue(cand.number, note, 'data-pending park comment');
       edit(cand.number, { add: [LBL_PARKED, LBL_DATA_PENDING], remove: [LBL_QUEUED, LBL_FIX] });
       continue; // prova il prossimo in coda
     }
@@ -5117,8 +5151,7 @@ export function runDrain() {
       console.log(`PARK #${cand.number} (workflow-scoped: ${subject}) → no promozione, evito run bloccato`);
       const note = `⏭️ **Pre-flight drainer (zero-Claude, #1724/#5595)**: il fix di questa follow-up tocca **esclusivamente** file \`.github/workflows/**\` (${subject}), che l'identità con cui \`issue-fix\` pusha su questo repo non può modificare (capacità letta da \`canPushWorkflows()\`: né la GitHub App ha \`workflows: write\`, né il PAT di push espone lo scope \`workflow\`). Promuoverla a \`agent:fix\` brucerebbe ~1M token in un run che finirebbe comunque \`blocked-workflows-scope\`. **Non promuovo**: serve un PAT abilitato o mano umana. Rimuovo \`agent:fix-queued\` e parko (riapribile: togli \`fu-parked\` se il contesto cambia).\n\n<!-- FIX_OUTCOME: blocked-workflows-scope -->`;
       if (DRY) { console.log(`[dry] park #${cand.number} (workflow-scoped)`); continue; }
-      try { gh(['issue', 'comment', String(cand.number), '--repo', REPO, '--body', note], { json: false }); }
-      catch (e) { console.log(`::warning::comment #${cand.number} fallito: ${String(e).slice(0, 120)}`); }
+      commentIssue(cand.number, note, 'workflow-scoped park comment');
       edit(cand.number, { add: [LBL_PARKED], remove: [LBL_QUEUED, LBL_FIX] });
       continue; // prova il prossimo in coda
     }
