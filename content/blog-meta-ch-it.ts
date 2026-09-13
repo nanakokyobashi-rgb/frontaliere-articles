@@ -6334,6 +6334,12 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.hormuz-petrolio-200-dollari.title': 'Petrolio a 200 dollari: rischi per l\'economia e la Svizzera',
     'blog.article.hormuz-petrolio-200-dollari.excerpt': 'Rischio di crollo congiunturale mondiale e petrolio fino a 200 dollari se lo Stretto di Hormuz resta chiuso. L\'analisi di UBS e i segnali per la Svizzera.',
     'blog.article.hormuz-petrolio-200-dollari.imageAlt': 'Analista finanziario esamina i grafici del petrolio e dei mercati globali',
+    'blog.article.rischio-petrolio-hormuz-svizzera.title': 'Petrolio a 200 dollari e rischi per l\'economia globale',
+    'blog.article.rischio-petrolio-hormuz-svizzera.excerpt': 'Analisi di UBS sulla potenziale chiusura dello Stretto di Hormuz: dai prezzi del greggio alle prospettive congiunturali ed economiche in Svizzera.',
+    'blog.article.rischio-petrolio-hormuz-svizzera.imageAlt': 'Analisi economica e mercati finanziari in Svizzera',
+    'blog.article.parmelin-tag-der-wirtschaft.title': 'Tag der Wirtschaft: il discorso di Guy Parmelin a Lucerna',
+    'blog.article.parmelin-tag-der-wirtschaft.excerpt': 'Il consigliere federale Guy Parmelin interviene al Tag der Wirtschaft di Lucerna, tracciando un bilancio sulla resilienza economica svizzera e sugli accordi di libero scambio.',
+    'blog.article.parmelin-tag-der-wirtschaft.imageAlt': 'Consigliere federale Guy Parmelin al Tag der Wirtschaft',
 };
 
 export default blogMetaChIt;

@@ -19000,6 +19000,24 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'rischio-petrolio-hormuz-svizzera',
+    category: 'pratico',
+    date: '2026-09-13T06:31:08.367Z',
+    image: '/images/blog/rischio-petrolio-hormuz-svizzera.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'parmelin-tag-der-wirtschaft',
+    category: 'novita',
+    date: '2026-09-13T06:41:53.011Z',
+    image: '/images/blog/parmelin-tag-der-wirtschaft.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
