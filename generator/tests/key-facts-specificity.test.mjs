@@ -87,6 +87,8 @@ test('la forma di riferimento dell issue conta quattro varianti e non i fatti sp
 test('il valore di un fatto e\' cio\' che segue l ultimo due punti', () => {
   assert.equal(factValueOf('- **Chi**: Ente competente: non specificato.'), 'non specificato.');
   assert.equal(factValueOf('- **Dove**: Cantone di Zugo'), 'Cantone di Zugo');
+  assert.equal(factValueOf('- **Quando** → non specificato.'), 'non specificato.');
+  assert.equal(factValueOf('- **Quando** -> non specificato.'), 'non specificato.');
 });
 
 test('lo scanner decodifica gli escape Unicode e hexadecimal dei literal TS', () => {
@@ -114,6 +116,7 @@ test('le intestazioni emesse dal serializzatore sono tutte leggibili', () => {
 test('il prompt AI Search ammette tutti i fatti presenti nella fonte senza placeholder', () => {
   assert.match(AI_SEARCH_PROMPT_BLOCK_IT, /3-8 coppie/);
   assert.doesNotMatch(AI_SEARCH_PROMPT_BLOCK_IT, /5-8 coppie/);
+  assert.match(AI_SEARCH_PROMPT_BLOCK_IT, /termine→valore/);
   assert.match(AI_SEARCH_PROMPT_BLOCK_IT, /dalla fonte/);
   assert.match(AI_SEARCH_PROMPT_BLOCK_IT, /qualsiasi termine utile/i);
   assert.match(AI_SEARCH_PROMPT_BLOCK_IT, /Scadenza.*Requisiti/);
@@ -145,6 +148,19 @@ test('lo schema body1 condivide il contratto AI Search e il literal del guard', 
     SCHEMA_PLACEHOLDER_LITERALS.includes(body1),
     'il literal body1 non e\' allineato alla copia usata dal prompt-placeholder guard',
   );
+});
+
+test('il formato emesso dei fatti chiave viene interpretato dal gate', () => {
+  const body = [
+    '## Fatti chiave',
+    '- Quando → non specificato',
+    '- Dove → Cantone di Zugo',
+    '- Requisiti → documento valido',
+  ].join('\n');
+  const [hit] = findVacuousFacts(body);
+  assert.equal(hit?.value, 'non specificato');
+  assert.equal(hit?.kind, 'placeholder-value');
+  assert.equal(matchesVacuousValue(factValueOf('- Quando → non specificato')), true);
 });
 
 test('con almeno tre superstiti il fatto vuoto viene rimosso', () => {

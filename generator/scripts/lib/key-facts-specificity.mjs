@@ -109,8 +109,9 @@ export function matchesVacuousValue(value) {
 }
 
 /**
- * Estrae il valore dopo l'ultimo `:`. Alcuni modelli scrivono, per esempio,
- * `Chi: Ente competente: non specificato`.
+ * Estrae il valore dopo l'ultimo `:` oppure dopo il separatore `→`/`->`.
+ * Alcuni modelli scrivono, per esempio, `Chi: Ente competente: non specificato`;
+ * il prompt AI Search usa invece `Quando → non specificato`.
  */
 export function factValueOf(item) {
   const clean = String(item)
@@ -118,6 +119,10 @@ export function factValueOf(item) {
     .replace(/^[\s>*•-]+/u, '')
     .trim();
   const lastColon = clean.lastIndexOf(':');
+  const arrow = /\s*(?:→|->)\s*/u.exec(clean);
+  if (arrow && (lastColon === -1 || arrow.index < lastColon)) {
+    return clean.slice(arrow.index + arrow[0].length).trim();
+  }
   return lastColon === -1 ? clean : clean.slice(lastColon + 1).trim();
 }
 
