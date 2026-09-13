@@ -1488,9 +1488,8 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
       parts.push(normalized);
     }
     // `return joined` e non un confronto locale: questo e' il ramo dei testi
-    // lunghi, cioe' dei body, cioe' esattamente dei 27 passthrough misurati.
-    // Gli echo per segmento sono gia' nel bucket `tierPassthroughChunks`, oltre
-    // al conteggio canonico richiesto da #1210.
+    // lunghi, cioe' dei body. Gli echo per segmento sono gia' nel bucket
+    // `tierPassthroughChunks`, oltre al conteggio canonico richiesto da #1210.
     return normalizeBlock(parts.join(' '));
   });
   if (t2) return finalize(t2);
