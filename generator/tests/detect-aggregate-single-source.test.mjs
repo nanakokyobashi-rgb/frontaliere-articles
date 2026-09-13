@@ -21,10 +21,12 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
+import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { detectAggregate } from '../../scripts/ci/detect-aggregate.mjs';
+import { detectAggregate, parseIssuePayload } from '../../scripts/ci/detect-aggregate.mjs';
 import { isAggregate } from '../../scripts/ci/check-issue-already-resolved.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -102,6 +104,44 @@ test('issue illeggibile → aggregata, che e\' la direzione reversibile dell\'er
   assert.equal(v.fallback, true);
   // Un falso `true` costa un giro (`Refs`, issue riaperta); un falso `false`
   // chiude il tracker con gli item deferiti dentro, e non si torna indietro.
+});
+
+test('payload gh vuoto → lettura degradata, non issue singola', () => {
+  const parsed = parseIssuePayload({ title: '  ', body: '\n' });
+  assert.equal(parsed.readable, false);
+  assert.deepEqual(detectAggregate(parsed), { aggregate: true, fallback: true });
+});
+
+test('GITHUB_OUTPUT non scrivibile → il CLI propaga il fallimento dopo il fallback', () => {
+  const sandbox = fs.mkdtempSync(path.join(tmpdir(), 'detect-aggregate-'));
+  try {
+    const fakeGh = path.join(sandbox, 'gh');
+    fs.writeFileSync(fakeGh, '#!/bin/sh\nprintf \'%s\' \'{"title":"fix: one item","body":"Suggested action: one change"}\'\n');
+    fs.chmodSync(fakeGh, 0o755);
+    const outputDirectory = path.join(sandbox, 'github-output');
+    fs.mkdirSync(outputDirectory);
+
+    const result = spawnSync(process.execPath, ['scripts/ci/detect-aggregate.mjs'], {
+      cwd: ROOT,
+      encoding: 'utf8',
+      env: {
+        ...process.env,
+        PATH: `${sandbox}:${process.env.PATH || ''}`,
+        REPO: 'owner/repo',
+        ISSUE_NUMBER: '1176',
+        GITHUB_OUTPUT: outputDirectory,
+      },
+    });
+
+    // stdout documenta la decisione conservativa, ma non valorizza
+    // `steps.tier.outputs`: il caller deve fallire invece di leggere un false
+    // implicito dall'output assente.
+    assert.notEqual(result.status, 0);
+    assert.match(result.stdout, /is_aggregate=true/);
+    assert.match(result.stderr, /errore non gestito/);
+  } finally {
+    fs.rmSync(sandbox, { recursive: true, force: true });
+  }
 });
 
 test('issue-fix.yml delega a scripts/ci/detect-aggregate.mjs', () => {

@@ -217,6 +217,11 @@ const _cascadeStats = {
   // questo bucket dice se e dove il fenomeno esiste, non quante pagine ha
   // salvato.
   tierPassthroughs: {},
+  // I testi lunghi attraversano MyMemory a chunk: un eco qui è un tentativo
+  // per segmento, non un tentativo per campo. Ogni eco entra comunque nel
+  // bucket canonico `tierPassthroughs` (contratto #1210); questo sotto-bucket
+  // conserva la cardinalità per segmento per la calibrazione del pavimento.
+  tierPassthroughChunks: {},
   // Per-field-type split of calls/successes. The cumulative `successes` above is
   // summed across every field type, so a run that translates short titles fine
   // but has every (long) description rejected by all providers still reports
@@ -285,6 +290,12 @@ export function logCascadeSummary() {
   const pass = Object.entries(s.tierPassthroughs).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1]);
   if (pass.length) {
     console.log('   Tier passthrough (sorgente resa verbatim, scartata): ' + pass.map(([k, v]) => `${k}=${v}`).join(', '));
+  }
+  const passChunks = Object.entries(s.tierPassthroughChunks)
+    .filter(([, v]) => v > 0)
+    .sort((a, b) => b[1] - a[1]);
+  if (passChunks.length) {
+    console.log('   Tier passthrough (chunk, sorgente resa verbatim): ' + passChunks.map(([k, v]) => `${k}=${v}`).join(', '));
   }
   const health = getInstanceHealthStats();
   const down = Object.entries(health).filter(([, h]) => h.failures >= HEALTH_FAILURE_THRESHOLD);
@@ -425,19 +436,23 @@ function isSubstantivePassthroughChunk(text) {
  * dentro il loop delle chiavi, prima che `tryTier` veda qualcosa. Passando di
  * qui la FORMULA resta una sola — era duplicata a mano in sei tier, ed e' il
  * tipo di duplicazione che deriva in silenzio — e soprattutto il conteggio
- * finisce nello stesso bucket, invece che sparire: un passthrough consumato
- * dentro il tier senza contarlo rendeva `tierPassthroughs` strutturalmente
- * parziale, cieco proprio sui tier di qualita' migliore, e il numero su cui si
- * decide la taratura sarebbe stato sbilanciato senza dirlo.
+ * finisce nello stesso bucket, invece che sparire. Un echo a chunk aggiorna
+ * sia il conteggio canonico `tierPassthroughs` sia la sua dimensione
+ * diagnostica `tierPassthroughChunks`: il primo soddisfa il contratto di
+ * passthrough, il secondo evita di perdere la granularita' utile alla taratura.
  *
  * @param {string} tierName
  * @param {string} source  testo dato in pasto al motore
  * @param {string} out     testo reso dal motore
+ * @param {string} [granularity='field']  `chunk` per il ramo a segmenti
  * @returns {boolean} true se `out` e' la sorgente (e il tier e' stato contato)
  */
-function rejectedAsPassthrough(tierName, source, out, outcome = null) {
+function rejectedAsPassthrough(tierName, source, out, outcome = null, granularity = 'field') {
   if (!out || !isSourcePassthrough(source, out)) return false;
   _cascadeStats.tierPassthroughs[tierName] = (_cascadeStats.tierPassthroughs[tierName] || 0) + 1;
+  if (granularity === 'chunk') {
+    _cascadeStats.tierPassthroughChunks[tierName] = (_cascadeStats.tierPassthroughChunks[tierName] || 0) + 1;
+  }
   noteTranslationOutcome(outcome, 'passthroughs');
   return true;
 }
@@ -1468,13 +1483,14 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
       // tradotti produrrebbe testo misto. Un resto breve (titolo, URL o
       // placeholder) resta invece nell'assemblato e viene giudicato da
       // `tryTier` sul campo completo, senza buttare via le traduzioni buone.
-      if (rejectedAsPassthrough('myMemory', chunk, normalized, _outcome)
+      if (rejectedAsPassthrough('myMemory', chunk, normalized, _outcome, 'chunk')
         && isSubstantivePassthroughChunk(chunk)) return '';
       parts.push(normalized);
     }
     // `return joined` e non un confronto locale: questo e' il ramo dei testi
     // lunghi, cioe' dei body, cioe' esattamente dei 27 passthrough misurati.
-    // Consumandolo qui il bucket `tierPassthroughs` non li avrebbe visti mai.
+    // Gli echo per segmento sono gia' nel bucket `tierPassthroughChunks`, oltre
+    // al conteggio canonico richiesto da #1210.
     return normalizeBlock(parts.join(' '));
   });
   if (t2) return finalize(t2);
