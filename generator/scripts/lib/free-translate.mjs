@@ -436,10 +436,10 @@ function isSubstantivePassthroughChunk(text) {
  * dentro il loop delle chiavi, prima che `tryTier` veda qualcosa. Passando di
  * qui la FORMULA resta una sola — era duplicata a mano in sei tier, ed e' il
  * tipo di duplicazione che deriva in silenzio — e soprattutto il conteggio
- * finisce nello stesso bucket, invece che sparire. Un echo a chunk aggiorna
- * sia il conteggio canonico `tierPassthroughs` sia la sua dimensione
- * diagnostica `tierPassthroughChunks`: il primo soddisfa il contratto di
- * passthrough, il secondo evita di perdere la granularita' utile alla taratura.
+ * finisce nello stesso bucket, invece che sparire: un passthrough consumato
+ * dentro il tier senza contarlo rendeva `tierPassthroughs` strutturalmente
+ * parziale, cieco proprio sui tier di qualita' migliore, e il numero su cui si
+ * decide la taratura sarebbe stato sbilanciato senza dirlo.
  *
  * @param {string} tierName
  * @param {string} source  testo dato in pasto al motore
