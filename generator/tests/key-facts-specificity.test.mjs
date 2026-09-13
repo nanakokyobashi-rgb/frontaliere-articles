@@ -19,7 +19,12 @@ import {
   parseAiSearchSections,
   stripVacuousFacts,
 } from '../scripts/lib/key-facts-specificity.mjs';
-import { buildAiSearchMarkdown, getKeyFactsHeading } from '../scripts/lib/ai-search-template.mjs';
+import {
+  AI_SEARCH_PROMPT_BLOCK_IT,
+  buildAiSearchMarkdown,
+  buildBackfillPrompt,
+  getKeyFactsHeading,
+} from '../scripts/lib/ai-search-template.mjs';
 import { scanCorpus, unescapeTs } from '../scripts/scan-vacuous-key-facts.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -103,6 +108,27 @@ test('le intestazioni emesse dal serializzatore sono tutte leggibili', () => {
     assert.equal(sections[0].heading, getKeyFactsHeading(locale));
     assert.equal(findVacuousFacts(markdown).length, 1);
   }
+});
+
+test('il prompt AI Search ammette tutti i fatti presenti nella fonte senza placeholder', () => {
+  assert.match(AI_SEARCH_PROMPT_BLOCK_IT, /3-8 coppie/);
+  assert.doesNotMatch(AI_SEARCH_PROMPT_BLOCK_IT, /5-8 coppie/);
+  assert.match(AI_SEARCH_PROMPT_BLOCK_IT, /dalla fonte/);
+  assert.match(AI_SEARCH_PROMPT_BLOCK_IT, /qualsiasi termine utile/i);
+  assert.match(AI_SEARCH_PROMPT_BLOCK_IT, /Scadenza.*Requisiti/);
+  assert.match(AI_SEARCH_PROMPT_BLOCK_IT, /campi assenti/i);
+  assert.match(AI_SEARCH_PROMPT_BLOCK_IT, /niente placeholder/i);
+  assert.match(AI_SEARCH_PROMPT_BLOCK_IT, /## In breve/);
+  assert.match(AI_SEARCH_PROMPT_BLOCK_IT, /## Fatti chiave/);
+});
+
+test('il backfill AI Search mantiene il budget e i fatti source-backed', () => {
+  const prompt = buildBackfillPrompt({ title: 'Titolo', fullBody: 'Testo della fonte.' });
+  assert.match(prompt, /3-8 coppie/);
+  assert.doesNotMatch(prompt, /5-8 coppie/);
+  assert.match(prompt, /dati presenti nell'articolo/i);
+  assert.match(prompt, /campi assenti/i);
+  assert.match(prompt, /niente placeholder/i);
 });
 
 test('con almeno tre superstiti il fatto vuoto viene rimosso', () => {
