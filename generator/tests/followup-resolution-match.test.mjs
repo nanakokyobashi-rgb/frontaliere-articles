@@ -70,8 +70,11 @@ test('acceptance token: solo una chiamata eseguibile conta, non commenti stringh
     'const pattern = /firstGuard\\(\\)/;',
     'return /* comment */ /firstGuard\\(\\)/;',
     'if (ready) /firstGuard\\(\\)/;',
+    'const value = value / /firstGuard\\(\\)/;',
     'function firstGuard() {}',
     'function* firstGuard() {}',
+    'interface Handler { firstGuard(): void; }',
+    'type Handler = { firstGuard(); };',
     'class Handler { firstGuard() {} }',
     'const handler = { async firstGuard() {} };',
   ]) {

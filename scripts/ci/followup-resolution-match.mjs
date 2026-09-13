@@ -401,7 +401,11 @@ function maskNonExecutableJavaScript(source) {
   const regexCanStart = (index) => {
     const previous = previousSignificant(index);
     if (!previous) return true;
-    if (/[([{:;,=!?&|+*%^~<>\-]/.test(previous)) return true;
+    // A regex may follow a division operator: `value / /needle/`. The first
+    // slash is division (the previous token is an operand), while the second
+    // slash starts the literal. Treat `/` as an operator here so the literal
+    // is masked instead of exposing its text as executable code.
+    if (/[([{:;,=!?&|+*%^~<>\-/]/.test(previous)) return true;
     if (previous === ')') {
       const openIndex = matchingParenStart(index - 1);
       const control = out.slice(0, openIndex).join('').match(/([A-Za-z_$][\w$]*)\s*$/u)?.[1];
@@ -493,6 +497,21 @@ function matchingParenEnd(source, openIndex) {
   return -1;
 }
 
+const TYPE_DECLARATION_BLOCK_RE = /\b(?:interface\s+[A-Za-z_$][\w$]*(?:\s+extends\s+[^{}]+)?|type\s+[A-Za-z_$][\w$]*(?:\s*<[^{}]*>)?\s*=\s*)\{/gu;
+
+function isInsideTypeDeclaration(source, index) {
+  for (const match of source.matchAll(TYPE_DECLARATION_BLOCK_RE)) {
+    const openIndex = (match.index ?? 0) + match[0].lastIndexOf('{');
+    let depth = 0;
+    for (let i = openIndex; i < index; i += 1) {
+      if (source[i] === '{') depth += 1;
+      else if (source[i] === '}') depth -= 1;
+    }
+    if (depth > 0) return true;
+  }
+  return false;
+}
+
 function isDeclarationCall(source, nameStart, closeIndex) {
   const beforeName = source.slice(0, nameStart);
   if (/\bfunction\s*\*?\s*$/u.test(beforeName)) return true;
@@ -501,6 +520,14 @@ function isDeclarationCall(source, nameStart, closeIndex) {
   // parameter list is followed by the method body.  Include the common typed
   // return annotation so a TS-shaped fixture cannot bypass this guard.
   const afterCall = source.slice(closeIndex + 1);
+  // TypeScript interface/type-literal methods use a return annotation followed
+  // by `;` (or the end of the declaration). A valid invocation cannot have a
+  // colon immediately after its closing parenthesis, so fail closed here.
+  if (/^\s*:/u.test(afterCall)) return true;
+  // Some TypeScript method signatures omit the return annotation (`foo();`).
+  // Restrict that extra veto to an actual interface/type-literal block so a
+  // normal call statement in executable code remains valid evidence.
+  if (/^\s*;/u.test(afterCall) && isInsideTypeDeclaration(source, nameStart)) return true;
   return /^\s*(?::\s*[^;{}=]*?)?\s*\{/u.test(afterCall);
 }
 
