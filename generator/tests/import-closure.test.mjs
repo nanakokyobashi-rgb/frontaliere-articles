@@ -143,6 +143,7 @@ test('la risoluzione prova le estensioni, e non e\' diventata fail-open', () => 
   try {
     fs.writeFileSync(path.join(dir, 'foo.ts'), 'export const x = 1;\n');
     fs.writeFileSync(path.join(dir, 'bare.mjs'), 'export const x = 1;\n');
+    fs.writeFileSync(path.join(dir, 'extensionless.mjs'), 'export const x = 1;\n');
     fs.mkdirSync(path.join(dir, 'pkg'));
     fs.writeFileSync(path.join(dir, 'pkg', 'index.ts'), 'export const x = 1;\n');
     fs.mkdirSync(path.join(dir, 'plain'));
@@ -153,6 +154,11 @@ test('la risoluzione prova le estensioni, e non e\' diventata fail-open', () => 
     assert.equal(resolveOnDisk(path.join(dir, 'foo'), path.join(dir, 'entry.mjs')), null);
     // Lo specificatore che porta gia' l'estensione continua a risolvere per primo.
     assert.equal(resolveOnDisk(path.join(dir, 'bare.mjs'), path.join(dir, 'entry.mjs')), path.join(dir, 'bare.mjs'));
+    // Il caso #1168: da un importatore .mjs anche `./extensionless` prova il gemello .mjs.
+    assert.equal(
+      resolveOnDisk(path.join(dir, 'extensionless'), path.join(dir, 'entry.mjs')),
+      path.join(dir, 'extensionless.mjs'),
+    );
     // Una cartella con index risolve all'index, non alla cartella.
     assert.equal(resolveOnDisk(path.join(dir, 'pkg'), path.join(dir, 'entry.ts')), path.join(dir, 'pkg', 'index.ts'));
     // E cio' che non esiste NON risolve: il fallback non e' fail-open.

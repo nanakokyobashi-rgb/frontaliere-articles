@@ -40,8 +40,11 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { codeOnly } from './lib/reachable-source.mjs';
 import { mentionsId } from '../../scripts/lib/mentions-id.mjs';
+import { ARTICLE_SECTION_CORE } from '../../engine/shared/articleSectionCore.mjs';
+import { corpusPath } from '../../generator/scripts/lib/corpus-paths.mjs';
 import {
   IMAGES_LEDGER,
+  LOCALES,
   SECTIONS,
   leftoverSurfacesFor,
   requiredSurfaceFilesFor,
@@ -192,9 +195,26 @@ test('il ledger immagini può contenere l\'id ma non è una superficie residua',
   assert.equal(leftoverSurfacesFor('svizzera').includes(IMAGES_LEDGER), false);
 });
 
+test('le superfici principali derivano dalla tupla canonica e dal mapper corpus', () => {
+  for (const section of ['frontaliere', 'svizzera']) {
+    const core = ARTICLE_SECTION_CORE[section];
+    const cfg = SECTIONS[section];
+    assert.equal(cfg.registryFile, corpusPath(core.registryFile));
+    assert.equal(cfg.slugDataFile, corpusPath(core.slugDataFile));
+    assert.deepEqual(
+      cfg.metaFiles,
+      LOCALES.map((locale) => corpusPath(`services/locales/${core.metaPrefix}-${locale}.ts`)),
+    );
+    assert.equal(cfg.bodyDir, corpusPath(`services/locales/${core.bodyDir}`));
+  }
+});
+
 test('una superficie obbligatoria mancante fallisce esplicitamente', () => {
   const root = mkdtempSync(path.join(os.tmpdir(), 'article-surfaces-'));
   try {
+    // Una directory con il nome del registro non è una superficie leggibile:
+    // `existsSync` da sola la avrebbe accettata e il ritiro sarebbe partito.
+    mkdirSync(path.join(root, SECTIONS.frontaliere.registryFile), { recursive: true });
     const required = [SECTIONS.frontaliere.slugDataFile, ...SECTIONS.frontaliere.metaFiles];
     for (const rel of required) {
       const abs = path.join(root, rel);

@@ -18,7 +18,7 @@
  * (AGENTS.md #6), come già per `mentions-id.mjs`.
  */
 
-import { existsSync, readdirSync } from 'node:fs';
+import { existsSync, readdirSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ARTICLE_SECTION_CORE } from '../../engine/shared/articleSectionCore.mjs';
@@ -28,6 +28,15 @@ import { mentionsId } from './mentions-id.mjs';
 
 /** La radice del repo: questo modulo vive in `scripts/lib/`. */
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+
+/** Una superficie è leggibile solo se il path punta a un file, non a una directory. */
+function isRegularFile(root, rel) {
+  try {
+    return statSync(path.join(root, rel)).isFile();
+  } catch {
+    return false;
+  }
+}
 
 export const LOCALES = ['it', 'en', 'de', 'fr'];
 export const IMAGES_LEDGER = 'data/blog-images-used.json';
@@ -133,12 +142,13 @@ export function surfaceMentionsArticleId(rel, text, id) {
 export function seoFilesFor(section) {
   const cfg = SECTIONS[section];
   if (!cfg) throw new Error(`sezione sconosciuta: '${section}'`);
-  if (cfg.seoFiles) return cfg.seoFiles.filter((f) => existsSync(path.join(ROOT, f)));
+  if (cfg.seoFiles) return cfg.seoFiles.filter((f) => isRegularFile(ROOT, f));
   const dir = path.join(ROOT, 'content/seo');
   if (!existsSync(dir)) return [];
   return readdirSync(dir)
     .filter((f) => /^seo-blog.*\.ts$/.test(f))
-    .map((f) => `content/seo/${f}`);
+    .map((f) => `content/seo/${f}`)
+    .filter((f) => isRegularFile(ROOT, f));
 }
 
 /**
@@ -152,7 +162,7 @@ export function requiredSurfaceFilesFor(section, root = ROOT) {
   const cfg = SECTIONS[section];
   if (!cfg) throw new Error(`sezione sconosciuta: '${section}'`);
   const required = [cfg.registryFile, cfg.slugDataFile, ...cfg.metaFiles];
-  const missing = required.filter((file) => !existsSync(path.join(root, file)));
+  const missing = required.filter((file) => !isRegularFile(root, file));
   if (missing.length > 0) {
     throw new Error(
       `superfici obbligatorie mancanti per la sezione '${section}': ${missing.join(', ')}`,
@@ -176,6 +186,6 @@ export function leftoverSurfacesFor(section) {
     ...seoFilesFor(section),
     cfg.sourceLedger,
     ...(cfg.idUnionFile ? [cfg.idUnionFile] : []),
-  ].filter((f) => existsSync(path.join(ROOT, f)));
+  ].filter((f) => isRegularFile(ROOT, f));
   return [...required, ...optional];
 }
