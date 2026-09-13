@@ -56,8 +56,9 @@
  * che nessun edit atomico puo' produrre.
  *
  * Direzione dell'errore: non toccare nulla su qualunque dubbio. Input mancante,
- * `gh` illeggibile, JSON malformato, timestamp assente → si salta la issue e
- * si esce 0. Per l'eta' si preferisce l'ultimo evento di label, quando
+ * `gh` illeggibile, record JSONL malformato/non-object, timestamp assente → si
+ * salta il record o la issue e si esce 0. Per l'eta' si preferisce l'ultimo
+ * evento di label, quando
  * disponibile; la funzione pura ricade su `updatedAt` per le risposte legacy,
  * mentre il percorso runtime salta in modo fail-safe se la timeline non e'
  * leggibile.
@@ -145,8 +146,62 @@ const repoArgs = () => {
 };
 
 function gh(args, { json = true } = {}) {
-  const out = execFileSync('gh', args, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+  const out = execFileSync('gh', args, {
+    encoding: 'utf8',
+    maxBuffer: 8 * 1024 * 1024,
+    stdio: ['ignore', 'pipe', 'pipe'],
+  });
   return json ? JSON.parse(out || '[]') : out;
+}
+
+/**
+ * Legge tutte le issue aperte per una label, non solo il primo migliaio.
+ * `gh issue list --limit 1000` tronca lo sguardo proprio quando il ciclo ha
+ * una coda grande; il gate finirebbe per stampare «nessun doppio» senza aver
+ * osservato le pagine successive. `gh api --paginate --jq` proietta ogni
+ * elemento prima che il processo Node lo legga: non usiamo `--slurp`, che la
+ * versione di gh in CI non accetta insieme a `--jq` e che accumulerebbe i
+ * body completi di tutte le pagine nel buffer del processo.
+ */
+function fetchOpenIssuesForLabel(active) {
+  const repo = repoName() || '{owner}/{repo}';
+  const endpoint = `repos/${repo}/issues?state=open&labels=${encodeURIComponent(active)}&per_page=100`;
+  const projected = gh([
+    'api',
+    endpoint,
+    '--paginate',
+    '--jq',
+    '.[] | {number, labels: [.labels[]?.name], updatedAt: (.updated_at // .updatedAt // ""), isPullRequest: (.pull_request != null)}',
+  ], { json: false });
+  // Ogni riga è un record indipendente: un JSONL rotto non deve nascondere
+  // l'intera label, e un array non va flattenato in candidati.
+  const issues = [];
+  for (const [index, rawLine] of String(projected ?? '').split('\n').entries()) {
+    const line = rawLine.trim();
+    if (!line) continue;
+    let value;
+    try {
+      value = JSON.parse(line);
+    } catch (e) {
+      console.log(`::warning::record JSONL proiettato ${index + 1} illeggibile (${String(e).slice(0, 120)}) → salto.`);
+      continue;
+    }
+    if (value === null || typeof value !== 'object' || Array.isArray(value)) {
+      console.log(`::warning::record JSONL proiettato ${index + 1} non-object → salto.`);
+      continue;
+    }
+    issues.push(value);
+  }
+  return issues
+    // L'endpoint REST /issues include anche le pull request; la proiezione
+    // conserva solo il flag necessario per escluderle.
+    .filter((iss) => iss && !iss.isPullRequest)
+    .map((iss) => ({
+      number: Number(iss.number),
+      labels: Array.isArray(iss.labels) ? iss.labels : [],
+      updatedAt: iss.updatedAt ?? '',
+    }))
+    .filter((iss) => Number.isInteger(iss.number) && iss.number > 0);
 }
 
 /** Usa la timeline REST per non confondere un commento con un evento di label. */
@@ -193,8 +248,7 @@ function fetchCandidates(only) {
   const byNumber = new Map();
   for (const { active } of ROUTE_CONFLICTS) {
     try {
-      for (const iss of gh(['issue', 'list', ...repoArgs(), '--state', 'open', '--label', active,
-        '--limit', '1000', '--json', 'number,labels,updatedAt'])) {
+      for (const iss of fetchOpenIssuesForLabel(active)) {
         byNumber.set(iss.number, iss);
       }
     } catch (e) {
