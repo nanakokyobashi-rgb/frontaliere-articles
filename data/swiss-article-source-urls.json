@@ -1,5 +1,4 @@
 {
-  "https://www.rsi.ch/info/svizzera/quattro-miliardi-perch%c3%a9-non-vada-via-la-luce--3991236.html": "costo-elettricit-svizzera",
   "https://www.admin.ch/it/newnsb/u1_n41xyqrwrghn2vkvp8": "giornate-svizzere-statistica-2026",
   "https://www.swissinfo.ch/ita/travail%2esuisse-chiede-aumenti-salariali-del-2%25%2c-usi-frena/91908551": "travailsuisse-aumenti-salariali-2026",
   "https://www.tio.ch/svizzera/politica/1944305/svizzera-verdi-iniziativa-neutralita-sicurezza-mette": "independenza-svizzera-sicurezza",
@@ -2365,6 +2364,11 @@
   "https://www.laregione.ch/svizzera/svizzera/1949733/la-difesa-dai-droni-non-e-piu-una-questione-teorica-del-futuro": {
     "articleId": "difesa-droni-infrastrutture-berna",
     "ts": "2026-09-13T02:08:50.081Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4074328": {
+    "articleId": "hormuz-petrolio-200-dollari",
+    "ts": "2026-09-13T06:00:40.586Z",
     "keyForm": 2
   }
 }

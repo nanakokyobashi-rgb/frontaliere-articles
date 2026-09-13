@@ -310,10 +310,21 @@
     },
     {
       "path": "scripts/ci/followup-resolution-match.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "Il corpus espone il contratto aggregate canonical ai consumer locali e conserva la propria risoluzione di locator sul percorso di pubblicazione; per questo la copia non è byte-identica al matcher sorgente del sito. La baseline registra separatamente i due blob e il trasporto successivo deve preservare l'adattamento, non sovrascriverlo con un mirror cieco.",
       "baseline": {
-        "site": "2fc97767d9b96296",
-        "corpus": "2fc97767d9b96296",
+        "site": "86098adda6c90970",
+        "corpus": "e6da0bfa1d35c132",
+        "alignedAt": "2026-09-13"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/vitestCheck.mjs",
+      "mode": "adapted",
+      "reason": "Il polling sincrono e il riconoscimento dei job conclusi sono il contratto condiviso dalla sorgente sito e da pr-autorebase, ma il corpus mantiene i propri nomi/check required e le proprie guardie review. La copia è quindi trasportata per contratto e non trattata come identica byte-per-byte.",
+      "baseline": {
+        "site": "c63b27c70d03615a",
+        "corpus": "2c783ff28a651001",
         "alignedAt": "2026-09-13"
       }
     },
@@ -350,9 +361,9 @@
       "path": "scripts/ci/pr-autorebase.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "4c6da30faffb631d",
-        "corpus": "4c6da30faffb631d",
-        "alignedAt": "2026-09-11"
+        "site": "3add6bcb19a0911b",
+        "corpus": "3add6bcb19a0911b",
+        "alignedAt": "2026-09-13"
       }
     },
     {
@@ -409,15 +420,6 @@
         "site": "a5fe209f91e8d29c",
         "corpus": "a5fe209f91e8d29c",
         "alignedAt": "2026-09-11"
-      }
-    },
-    {
-      "path": "scripts/ci/lib/vitestCheck.mjs",
-      "mode": "identical",
-      "baseline": {
-        "site": "70c2badbc0a09558",
-        "corpus": "70c2badbc0a09558",
-        "alignedAt": "2026-09-10"
       }
     },
     {
@@ -1894,9 +1896,9 @@
       "sitePath": "scripts/lib/discovery/discoveryScore.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "72f7e9d7f9843823",
-        "corpus": "72f7e9d7f9843823",
-        "alignedAt": "2026-08-09"
+        "site": "7a42d00a94b90c65",
+        "corpus": "7a42d00a94b90c65",
+        "alignedAt": "2026-09-13"
       }
     },
     {
@@ -1944,9 +1946,9 @@
       "sitePath": "scripts/lib/discovery/sources/googleSuggestSource.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "d324259ea4515cb6",
-        "corpus": "d324259ea4515cb6",
-        "alignedAt": "2026-08-09"
+        "site": "be18f36169abce51",
+        "corpus": "be18f36169abce51",
+        "alignedAt": "2026-09-13"
       }
     },
     {
@@ -2381,9 +2383,9 @@
       "sitePath": "scripts/lib/scoring/cascadedScore.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "2ed579228003fa3b",
-        "corpus": "2ed579228003fa3b",
-        "alignedAt": "2026-08-09"
+        "site": "584f848b25ed20fc",
+        "corpus": "584f848b25ed20fc",
+        "alignedAt": "2026-09-13"
       }
     },
     {
@@ -2391,9 +2393,9 @@
       "sitePath": "scripts/lib/scoring/constants.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "6dc91e985caa7eca",
-        "corpus": "6dc91e985caa7eca",
-        "alignedAt": "2026-08-09"
+        "site": "7534ad3be93b3488",
+        "corpus": "7534ad3be93b3488",
+        "alignedAt": "2026-09-13"
       }
     },
     {
@@ -3794,9 +3796,9 @@
       "path": "scripts/lib/int-from-env.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "be879e505710750e",
-        "corpus": "be879e505710750e",
-        "alignedAt": "2026-09-10"
+        "site": "f5700c5080b0a99c",
+        "corpus": "f5700c5080b0a99c",
+        "alignedAt": "2026-09-13"
       }
     },
     {

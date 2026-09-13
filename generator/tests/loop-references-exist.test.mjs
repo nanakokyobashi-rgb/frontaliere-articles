@@ -1486,15 +1486,6 @@ const DECLARED_ABSENT = {
       'Il file e\' `identical` nel manifest: riscriverla qui fabbricherebbe un `corpus-ahead` ' +
       'su un commento, quindi la correzione va fatta sul sito e fatta scendere.',
   },
-  'scripts/ci/lib/vitestCheck.mjs :: pr-review-loop.yml': {
-    kind: 'retired',
-    reason:
-      'Il referente e\' sparito da ENTRAMBI i repo il 2026-09-03: la Claude review vive ora ' +
-      'dentro `tests.yml` e i quattro workflow che facevano review, contratto del body e ' +
-      'merge non esistono piu\'. La frase qui e\' storica e descrittiva — ripete in due punti del docblock la stessa nota sul trigger workflow_run. ' +
-      'Il file e\' `identical` nel manifest: riscriverla qui fabbricherebbe un `corpus-ahead` ' +
-      'su un commento, quindi la correzione va fatta sul sito e fatta scendere.',
-  },
   'scripts/ci/mark-claude-terminal-outcome.mjs :: pr-review-loop.yml': {
     kind: 'retired',
     reason:
