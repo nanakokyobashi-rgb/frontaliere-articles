@@ -1351,7 +1351,7 @@
     {
       "path": "generator/scripts/scan-vacuous-key-facts.mjs",
       "mode": "corpus-only",
-      "reason": "Scanner read-only della baseline dei fatti chiave vacui (#1054): riconosce le quattro varianti canoniche senza distinguere maiuscole/minuscole e stampa file-locale, articoli distinti e locale senza modificare `content/**` e senza avere un gemello operativo sul sito.",
+      "reason": "Scanner read-only della baseline dei fatti chiave vacui (#1054): stampa file-locale, articoli distinti e locale senza modificare `content/**` e senza avere un gemello operativo sul sito.",
       "baseline": {
         "site": null,
         "corpus": "991427b316f1f8ea",
@@ -1844,7 +1844,7 @@
     {
       "path": "generator/scripts/lib/key-facts-specificity.mjs",
       "mode": "corpus-only",
-      "reason": "Rilevatore puro dei fatti chiave senza valore nelle quattro lingue. Lo scanner di #1054 usa le quattro varianti canoniche, senza distinguere maiuscole/minuscole, e misura file-locale, articoli distinti e locale; il gate di #1055 rimuove una coppia solo se restano almeno tre fatti e rifiuta il payload sotto soglia. E' una libreria del generatore del corpus e non ha gemello sul sito.",
+      "reason": "Rilevatore puro dei fatti chiave senza valore nelle quattro lingue. Lo scanner di #1054 usa la forma di riferimento per misurare 53 file-locale/29 articoli; il gate di #1055 rimuove una coppia solo se restano almeno tre fatti e rifiuta il payload sotto soglia. E' una libreria del generatore del corpus e non ha gemello sul sito.",
       "baseline": {
         "site": null,
         "corpus": "261595c0ccfc778b",
