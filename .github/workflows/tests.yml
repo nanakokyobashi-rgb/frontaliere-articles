@@ -868,10 +868,11 @@ jobs:
             echo "::error::Review Claude morta su max-turns (tier=${REVIEW_TIER:-?}, cap=${REVIEW_MAX_TURNS:-?}, turni=${NUM_TURNS:-?}) senza postare — rilancia, o splitta la PR se ricorre."
             exit 1
           fi
-          # 429: NON fallire QUI. Un errore esplicito inviterebbe a un re-run che
-          # ricolpisce la quota GIA' esaurita → tempesta auto-amplificante. Il
-          # merge resta comunque bloccato, perche' il review gate sotto non
-          # trova nessun `## LGTM` sulla head e fallisce lui.
+          # 429: rendi l'abort visibile nella Jobs API. GITHUB_OUTPUT non fa
+          # parte di `jobs/{job_id}`: il consumer puo' quindi distinguere il
+          # rate-limit soltanto dalla conclusion dello step. Il job sarebbe
+          # gia' rosso per il review gate sotto; questa failure non aggiunge un
+          # re-run, ma permette al consumer di classificarlo come abortito.
           if [ -n "${EXEC_EVENTS_FILE:-}" ] && [ -f "${EXEC_EVENTS_FILE}" ]; then
             RATE_LIMIT_MARKER=false
             if jq -e -s '
@@ -893,8 +894,8 @@ jobs:
             set_review_output review_aborted true
             set_review_output review_abort_cause rate_limit
             set_review_output retryable_failure true
-            echo "::warning::Review abortita su 429 (quota). Non fallisco QUI: eviterei solo di amplificare i re-run sulla quota condivisa col sito. Il review gate blocchera' comunque il merge."
-            exit 0
+            echo "::warning::Review abortita su 429 (quota). Il review gate blocchera' comunque il merge; questa failure rende il segnale leggibile al consumer."
+            exit 1
           fi
           if [ -n "${EXEC_EVENTS_FILE:-}" ] && [ -f "${EXEC_EVENTS_FILE}" ]; then
             SERVER_ERROR_MARKER=false

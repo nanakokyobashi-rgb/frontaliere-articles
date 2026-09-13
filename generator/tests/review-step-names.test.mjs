@@ -210,6 +210,21 @@ test('429 e cause non riattivabili viaggiano come segnali distinti', async () =>
   assert.doesNotMatch(abort, /grep -qE .*is_error.*true/);
   assert.doesNotMatch(abort, /rate\[ _-\]\?limit/);
 
+  const rateLimitBranch = abort.match(
+    /if \[ "\$\{RATE_LIMIT_MARKER:-false\}" = true \]; then([\s\S]*?)\n\s+fi/,
+  );
+  assert.ok(rateLimitBranch, 'il ramo 429 non e\' stato trovato');
+  assert.match(
+    rateLimitBranch[1],
+    /exit 1/,
+    'il ramo 429 deve rendere il segnale visibile nella conclusion della Jobs API',
+  );
+  assert.doesNotMatch(
+    rateLimitBranch[1],
+    /exit 0/,
+    'il ramo 429 non deve restare verde: GITHUB_OUTPUT non e\' leggibile dal consumer',
+  );
+
   const permanentName = 'Fail on non-retryable review action error (no automatic retry)';
   const permanent = stepBlock(yaml, permanentName);
   assert.match(permanent, /steps\.review_abort\.outputs\.permanent_failure/);
