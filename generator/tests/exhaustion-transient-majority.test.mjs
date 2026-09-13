@@ -402,6 +402,11 @@ test('riconosce una cascata composta solo da echi di cooldown senza inventare da
   assert.equal(providerCooldownEchoOnlySummary(malformed), null,
     'un contatore mancante non autorizza una causa inventata');
 
+  const legacySplit = structuredClone(allEcho);
+  delete legacySplit.exhaustionBreakdown.providerCooldownSkips.persistent;
+  assert.equal(providerCooldownEchoOnlySummary(legacySplit), null,
+    'un replay legacy con il solo totale echo non autorizza una causa inventata');
+
   const malformedEcho = structuredClone(allEcho);
   malformedEcho.exhaustionBreakdown.providerCooldownSkips.transient = 'unknown';
   assert.equal(providerCooldownEchoOnlySummary(malformedEcho), null,
