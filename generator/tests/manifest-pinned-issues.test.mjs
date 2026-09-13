@@ -108,7 +108,7 @@ test('un miss con pin caricati lascia una traccia diagnostica', () => {
 test('handoff: una issue pinnata si consegna ma NON si chiude', () => {
   const body =
     'Il file da cambiare vive in valerielinc-ops/frontaliere-si-o-no: ' +
-    '`scripts/ci/followup-resolution-match.mjs` ha ancora la copia in shell.';
+    '`scripts/ci/check-issue-already-resolved.mjs` ha ancora la copia in shell.';
 
   const free = handoffDecision({ verdict: 'blocked-admin-settings', body });
   assert.equal(free.handoff, true);
@@ -133,7 +133,7 @@ test('handoff: una issue pinnata si consegna ma NON si chiude', () => {
  */
 test('handoff: il pin produce un corto-circuito di parcheggio senza Claude', async () => {
   const { redeliveryDecision } = await import('../../scripts/ci/handoff-to-site.mjs');
-  const body = 'valerielinc-ops/frontaliere-si-o-no: `scripts/ci/followup-resolution-match.mjs`';
+  const body = 'valerielinc-ops/frontaliere-si-o-no: `scripts/ci/check-issue-already-resolved.mjs`';
   const held = handoffDecision({ verdict: 'blocked-admin-settings', body, pinnedEntry: 'scripts/ci/detect-aggregate.mjs' });
   const r = redeliveryDecision({ decision: held, deliveredUrl: 'https://github.com/x/y/issues/1' });
   assert.equal(held.pinned, true);

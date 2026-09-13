@@ -190,7 +190,7 @@ export function latestCompletedConclusionByName(checkRuns, name) {
  * chiusa da `vitestFailureIsNotAttributableToPr` per il caso `failure`:
  *   - `auto-merge-eval` esige `success` → blocca;
  *   - la review Claude gira dentro il job di esecuzione, DOPO i test (fino al
- *     2026-08-26 era `pr-review-loop.yml`, gattato su `tests` success)
+ *     2026-08-26 era il workflow di review separato, gattato su `tests` success)
  *     → nessuna review ⇒ nessun `## LGTM`, nessuna label;
  *   - `vitestFailureIsNotAttributableToPr` esige `failure` → non copre;
  *   - `pr-autorebase` senza label/LGTM/stuck-red → skip.
@@ -276,7 +276,7 @@ export function vitestVerdictIsTransientCancellation(checkRuns) {
  * premessa è FALSA, e su di essa poggiava l'intera catena di recupero, che
  * diventa uno stato ASSORBENTE:
  *   1. la review Claude gira dentro il job di esecuzione, DOPO i test (fino al
- *      2026-08-26 era `pr-review-loop.yml`, gattato su `tests` success)
+ *      2026-08-26 era il workflow di review separato, gattato su `tests` success)
  *      → vitest rosso ⇒ nessuna review ⇒ nessun `## LGTM`, nessuna label.
  *   2. `pr-autorebase.mjs` tratta come near-merge solo LGTM / `collision-risk` /
  *      `stale-review` → nessuno dei tre ⇒ skip, niente rebase, niente re-test.
@@ -417,7 +417,7 @@ export function isNonGatingReviewStep(name) {
  *
  * ── PERCHÉ SERVE ───────────────────────────────────────────────────────────
  * Fino al 2026-08-26 la review Claude era un workflow a parte
- * (`pr-review-loop.yml`) innescato da `workflow_run` su `tests` == success:
+ * (un workflow di review separato) innescato da `workflow_run` su `tests` == success:
  * con vitest rosso la review NON partiva, quindi «vitest rosso» implicava
  * «nessuna review possibile» e riciclare la PR era inutile per costruzione.
  * Da `80a8c73f73a` («Unify tests and PR review workflow») la review è uno step
