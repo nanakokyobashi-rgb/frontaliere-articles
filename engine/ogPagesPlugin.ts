@@ -21,6 +21,7 @@ import { ARTICLE_SECTION_DESCRIPTORS, extractBlogEntryPositions, blogKeyToArticl
 import { ARTICLE_ROBOTS_INDEX_ENHANCED } from './shared/robotsDirective';
 import { readImageIntrinsicSize } from './shared/imageIntrinsicSize';
 import { decodeTsStringEscapes, repairLegacyDoubleEscapedBreaks } from './shared/tsStringEscapes';
+import { parseArticleUrlSlugs } from './shared/articleReaderSource.mjs';
 import { computeSectionTopicAssignment } from './articleHubPagesPlugin';
 import { TOPIC_CLUSTERS, TOPIC_HUB_SEGMENT, type TopicLocale } from './topicTaxonomy';
 
@@ -720,13 +721,7 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  const blogSlugs: Record<string, Record<string, string>> = {};
  try {
  const rSrc = fs.readFileSync(np.resolve(rootDir, SECTION.slugData), 'utf-8');
- // Parse the section's slug-const map ({slugConst})
- const bsBlock = rSrc.match(new RegExp(`const ${SECTION.slugConst}[\\s\\S]*?\\n\\};`, 'm'))?.[0] ?? '';
- const bsRx = /["']([^"']+)["']:\s*\{\s*it:\s*["']([^"']+)["'],\s*en:\s*["']([^"']+)["'],\s*de:\s*["']([^"']+)["'],\s*fr:\s*["']([^"']+)["']/g;
- let bm: RegExpExecArray | null;
- while ((bm = bsRx.exec(bsBlock)) !== null) {
- blogSlugs[bm[1]] = { it: bm[2], en: bm[3], de: bm[4], fr: bm[5] };
- }
+ Object.assign(blogSlugs, parseArticleUrlSlugs(rSrc, SECTION.slugConst));
  } catch (err) {
  if (!isMissingPathError(err)) throw err;
  /* optional slug registry absent — per-article lookup will be empty */
