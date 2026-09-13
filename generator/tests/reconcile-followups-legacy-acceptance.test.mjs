@@ -96,6 +96,23 @@ test('un acceptance token stabile è evidenza forte per un daily item', () => {
   assert.equal(hasStrongDailyAcceptanceEvidence(items, [{ tok: 'otherTask()' }]), false);
 });
 
+test('un aggregate legacy non riduce Suggested action al solo Acceptance token', () => {
+  const body = [
+    '### 1. legacy item',
+    `- Target file: ${TARGET}`,
+    '- Suggested action: sostituire `firstGuard()` con `secondGuard()`.',
+    '- Acceptance token: `firstGuard()`',
+  ].join('\n');
+  const result = aggregateCloseGate(body, {
+    fileExists: (path) => path === TARGET,
+    readFile: () => 'firstGuard();',
+  });
+
+  assert.equal(parseFollowupItems(body)[0].id, null);
+  assert.equal(result.blocks, true);
+  assert.equal(result.reason, 'valid-item-unconfirmed');
+});
+
 test('il matcher ignora commenti, stringhe e dichiarazioni di metodi', () => {
   const body = [
     '- Target file: scripts/ci/example.mjs',
@@ -463,17 +480,26 @@ test('l’aggregata non promuove un item solo-prosa con Target file a item di ga
   assert.deepEqual(gate, { blocks: false, reason: null });
 });
 
-test('l’aggregata passa l acceptance token al matcher strutturale', () => {
+test('il daily aggregate passa l acceptance token al matcher strutturale', () => {
   const body = [
-    '### 1. Item con chiamata parametrizzata',
+    'State: sealed',
+    '- Daily key: 2026-09-12',
+    '',
+    '### FU-2026-09-12-001 — Item con chiamata parametrizzata',
+    '- Target repository: owner/repo',
     '- Target file: scripts/ci/example.mjs',
     '- Suggested action: verificare `differentGuard()` nel target.',
     '- Acceptance token: `runTask()`',
+    '- State: done',
   ].join('\n');
   const gate = aggregateCloseGate(body, {
     fileExists: (path) => path === TARGET,
     readFile: () => 'const result = runTask(input);',
   });
 
-  assert.deepEqual(gate, { blocks: false, reason: null });
+  assert.equal(gate.blocks, false);
+  assert.equal(gate.reason, null);
+  assert.deepEqual(gate.evidenceById.get('FU-2026-09-12-001'), [
+    { file: TARGET, tok: 'runTask()' },
+  ]);
 });

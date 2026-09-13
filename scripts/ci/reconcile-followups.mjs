@@ -65,6 +65,7 @@ import {
   isDailyBucketTitle,
   maskInlineCodeSpans,
   parseFollowupItems,
+  FOLLOWUP_ITEM_ID_SINGLE_RE,
   suggestedActionText,
   updateFollowupItemState,
 } from './followup-resolution-match.mjs';
@@ -196,14 +197,16 @@ export function isAggregateTitle(title = '', body = '') {
 }
 
 /**
- * Resolve one parsed item with its explicit stable acceptance token when it has
- * one. Legacy text-only callers retain the historical Suggested-action path;
- * stable daily items must not silently discard the token parsed from their
- * `Acceptance token` field.
+ * Resolve one parsed item with its explicit stable acceptance token only when
+ * it is a stable daily item. Legacy numbered items may carry an informative
+ * `Acceptance token`, but their historical Suggested-action token set remains
+ * authoritative so one token cannot hide another prescribed token.
  */
 function detectParsedItemAlreadyResolved(item, io) {
   const text = typeof item === 'string' ? item : item?.text || '';
-  const acceptanceToken = typeof item === 'object'
+  const isStableDailyItem = typeof item === 'object'
+    && FOLLOWUP_ITEM_ID_SINGLE_RE.test(String(item.id || ''));
+  const acceptanceToken = isStableDailyItem
     ? String(item.acceptanceToken || '').trim()
     : '';
   return detectAlreadyResolved(
