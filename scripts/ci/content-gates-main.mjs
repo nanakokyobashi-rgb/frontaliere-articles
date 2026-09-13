@@ -90,6 +90,7 @@ import {
 } from './check-blog-body-syntax.mjs';
 import { historyRevisionFromEnv } from '../lib/corpus-floors.mjs';
 import { createGithubIssue, resolveGithubIssue } from '../lib/github-issue-creator.mjs';
+import { isRegularFile } from '../lib/article-surfaces.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -336,10 +337,10 @@ export function preflight(
     previousRevision,
   });
   for (const rel of REQUIRED_FILES) {
-    if (!fs.existsSync(path.join(root, rel))) {
+    if (!isRegularFile(root, rel)) {
       violations.push(
-        `${rel}: assente. I gate che lo leggono per nome passerebbero su un registro ` +
-          'vuoto senza dire niente.',
+        `${rel}: assente o non è un file regolare leggibile. I gate che lo leggono per nome ` +
+          'passerebbero su un registro vuoto senza dire niente.',
       );
     }
   }

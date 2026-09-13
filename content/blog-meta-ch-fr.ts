@@ -6349,7 +6349,7 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.attacco-hacker-salt-dati-clienti.title': 'Salt : attaque informatique et vol de données clients mobiles',
     'blog.article.attacco-hacker-salt-dati-clienti.excerpt': 'L\'opérateur téléphonique Salt victime d\'une cyberattaque. Soustractions de données personnelles de certains clients mobiles en Suisse. Averti le Préposé fédéral.',
     'blog.article.attacco-hacker-salt-dati-clienti.imageAlt': 'Siège d\'un opérateur de téléphonie mobile en Suisse impliqué dans une cyberattaque',
-    'blog.article.dazi-usa-seco-commercio.title': 'Droits de douane américains et accords du SECO pour les entreprises suisses',
+    'blog.article.dazi-usa-seco-commercio.title': 'Nouveaux droits de douane américains et accords du SECO pour les entreprises suisses',
     'blog.article.dazi-usa-seco-commercio.excerpt': 'Les États-Unis introduisent des droits supplémentaires allant jusqu\'à 12,5 % sur les marchandises suisses. Le SECO surveille les impacts et l\'évolution des chaînes de production.',
     'blog.article.dazi-usa-seco-commercio.imageAlt': 'Siege du SECO en Suisse',
     'blog.article.furto-apparecchiature-mediche-roma.title': 'Entreprise suisse volée à Rome : l\'instrumentation retrouvée',
@@ -6364,6 +6364,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.record-imprese-culturali-svizzera.title': 'Record d\'entreprises culturelles en Suisse en 2024',
     'blog.article.record-imprese-culturali-svizzera.excerpt': 'En 2024, la Suisse a enregistré 69 441 entreprises culturelles actives, soit une augmentation de 27 % par rapport à 2011, bien que les emplois aient diminué.',
     'blog.article.record-imprese-culturali-svizzera.imageAlt': 'Entreprises culturelles en Suisse selon les données de l\'OFS',
+    'blog.article.forum-economico-ambientale-osce-praga.title': '32e Forum de l\'OSCE à Prague : focus sur la sécurité et la technologie',
+    'blog.article.forum-economico-ambientale-osce-praga.excerpt': 'Ouverture à Prague du 32e Forum économique et environnemental de l\'OSCE sous la direction de la Présidence suisse de 2026.',
+    'blog.article.forum-economico-ambientale-osce-praga.imageAlt': 'Salle de conference du Forum economique et environnemental de l\'OSCE a Prague',
 };
 
 export default blogMetaChFr;

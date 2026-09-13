@@ -18,7 +18,12 @@
  * (AGENTS.md #6), come già per `mentions-id.mjs`.
  */
 
-import { existsSync, readdirSync } from 'node:fs';
+import {
+  accessSync,
+  constants as fsConstants,
+  lstatSync,
+  readdirSync,
+} from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ARTICLE_SECTION_CORE } from '../../engine/shared/articleSectionCore.mjs';
@@ -28,6 +33,153 @@ import { mentionsId } from './mentions-id.mjs';
 
 /** La radice del repo: questo modulo vive in `scripts/lib/`. */
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+
+export const SURFACE_PATH_STATUS = Object.freeze({
+  ABSENT: 'absent',
+  DIRECTORY: 'directory',
+  REGULAR: 'regular',
+  NON_REGULAR: 'non-regular',
+  UNREADABLE: 'unreadable',
+  UNWRITABLE: 'unwritable',
+});
+
+function statusForStatError(error) {
+  if (error?.code === 'ENOENT') return SURFACE_PATH_STATUS.ABSENT;
+  // A file in the middle of a path is not an absent optional surface: it is
+  // a malformed tree that must stop a retirement before its first write.
+  if (error?.code === 'ENOTDIR') return SURFACE_PATH_STATUS.NON_REGULAR;
+  return SURFACE_PATH_STATUS.UNREADABLE;
+}
+
+/**
+ * Classifica un path senza collassare «non c'è» e «non lo si può leggere».
+ *
+ * `lstatSync` copre directory, symlink, FIFO e gli altri inode non regolari;
+ * `accessSync` copre il file regolare presente ma non leggibile. Tutti i
+ * chiamanti dei guard usano questa stessa decisione, così un errore di tipo
+ * non diventa una superficie opzionale sparita per magia.
+ */
+export function surfacePathStatus(root, rel) {
+  const absolute = path.join(root, rel);
+  let stats;
+  try {
+    stats = lstatSync(absolute);
+  } catch (error) {
+    return statusForStatError(error);
+  }
+  if (stats.isDirectory()) return SURFACE_PATH_STATUS.DIRECTORY;
+  if (!stats.isFile()) return SURFACE_PATH_STATUS.NON_REGULAR;
+  try {
+    accessSync(absolute, fsConstants.R_OK);
+  } catch {
+    return SURFACE_PATH_STATUS.UNREADABLE;
+  }
+  return SURFACE_PATH_STATUS.REGULAR;
+}
+
+/** Predicate condivisa con i gate che verificano file obbligatori. */
+export function isRegularFile(root, rel) {
+  return surfacePathStatus(root, rel) === SURFACE_PATH_STATUS.REGULAR;
+}
+
+/**
+ * Preflight separato per chi riscrive un file: i gate di contenuto devono solo
+ * poterlo leggere, mentre il retirement deve sapere che il writeFileSync
+ * potrà aprirlo prima di modificare qualunque altra superficie.
+ */
+export function writableSurfacePathStatus(root, rel) {
+  const status = surfacePathStatus(root, rel);
+  if (status !== SURFACE_PATH_STATUS.REGULAR) return status;
+  try {
+    accessSync(path.join(root, rel), fsConstants.W_OK);
+  } catch {
+    return SURFACE_PATH_STATUS.UNWRITABLE;
+  }
+  return SURFACE_PATH_STATUS.REGULAR;
+}
+
+export function isWritableRegularFile(root, rel) {
+  return writableSurfacePathStatus(root, rel) === SURFACE_PATH_STATUS.REGULAR;
+}
+
+function invalidRegularFileError(rel, status, label) {
+  return new Error(
+    `${label}: '${rel}' non è un file regolare leggibile (${status}); ` +
+    'assenza e path non utilizzabile sono stati distinti fail-closed.',
+  );
+}
+
+function invalidWritableRegularFileError(rel, status, label) {
+  if (status === SURFACE_PATH_STATUS.UNWRITABLE) {
+    return new Error(
+      `${label}: '${rel}' è un file regolare leggibile ma non scrivibile; ` +
+      'il retirement si ferma prima del primo write.',
+    );
+  }
+  return invalidRegularFileError(rel, status, label);
+}
+
+function invalidDirectoryError(rel, status, label) {
+  return new Error(
+    `${label}: '${rel}' non è una directory leggibile (${status}); ` +
+    'assenza e path non utilizzabile sono stati distinti fail-closed.',
+  );
+}
+
+/** Richiede un file regolare già noto: anche l'assenza è un errore. */
+export function requireRegularFile(root, rel, label = 'file') {
+  const status = surfacePathStatus(root, rel);
+  if (status !== SURFACE_PATH_STATUS.REGULAR) {
+    throw invalidRegularFileError(rel, status, label);
+  }
+  return true;
+}
+
+/** Accetta l'assenza opzionale, ma non un inode presente e non utilizzabile. */
+export function assertRegularFileIfPresent(root, rel, label = 'superficie') {
+  const status = surfacePathStatus(root, rel);
+  if (status === SURFACE_PATH_STATUS.ABSENT) return false;
+  if (status !== SURFACE_PATH_STATUS.REGULAR) {
+    throw invalidRegularFileError(rel, status, label);
+  }
+  return true;
+}
+
+/** Richiede un file regolare che il retirement possa anche riscrivere. */
+export function requireWritableRegularFile(root, rel, label = 'file') {
+  const status = writableSurfacePathStatus(root, rel);
+  if (status !== SURFACE_PATH_STATUS.REGULAR) {
+    throw invalidWritableRegularFileError(rel, status, label);
+  }
+  return true;
+}
+
+/** Accetta l'assenza opzionale, ma non un target presente non riscrivibile. */
+export function assertWritableRegularFileIfPresent(root, rel, label = 'superficie') {
+  const status = writableSurfacePathStatus(root, rel);
+  if (status === SURFACE_PATH_STATUS.ABSENT) return false;
+  if (status !== SURFACE_PATH_STATUS.REGULAR) {
+    throw invalidWritableRegularFileError(rel, status, label);
+  }
+  return true;
+}
+
+/** Richiede una directory esistente e utilizzabile per write/rename/unlink. */
+export function requireWritableDirectory(root, rel, label = 'directory') {
+  const status = surfacePathStatus(root, rel);
+  if (status !== SURFACE_PATH_STATUS.DIRECTORY) {
+    throw invalidDirectoryError(rel, status, label);
+  }
+  try {
+    accessSync(path.join(root, rel), fsConstants.W_OK | fsConstants.X_OK);
+  } catch {
+    throw new Error(
+      `${label}: '${rel}' è una directory non scrivibile (servono W_OK|X_OK); ` +
+      'il retirement si ferma prima del primo write.',
+    );
+  }
+  return true;
+}
 
 export const LOCALES = ['it', 'en', 'de', 'fr'];
 export const IMAGES_LEDGER = 'data/blog-images-used.json';
@@ -130,15 +282,38 @@ export function surfaceMentionsArticleId(rel, text, id) {
  * stesso elenco monco. Stesso glob di `generator/scripts/repair-microcopy.mjs`
  * e `repair-prompt-placeholders.mjs`, che quel file lo trattano da sempre.
  */
-export function seoFilesFor(section) {
+export function seoFilesFor(section, root = ROOT) {
   const cfg = SECTIONS[section];
   if (!cfg) throw new Error(`sezione sconosciuta: '${section}'`);
-  if (cfg.seoFiles) return cfg.seoFiles.filter((f) => existsSync(path.join(ROOT, f)));
-  const dir = path.join(ROOT, 'content/seo');
-  if (!existsSync(dir)) return [];
-  return readdirSync(dir)
+  const label = `superficie SEO della sezione '${section}'`;
+  if (cfg.seoFiles) {
+    return cfg.seoFiles.filter((f) => assertRegularFileIfPresent(root, f, label));
+  }
+
+  const dirRel = 'content/seo';
+  const dirStatus = surfacePathStatus(root, dirRel);
+  if (dirStatus === SURFACE_PATH_STATUS.ABSENT) return [];
+  if (dirStatus !== SURFACE_PATH_STATUS.DIRECTORY) {
+    throw invalidDirectoryError(dirRel, dirStatus, label);
+  }
+
+  const dir = path.join(root, dirRel);
+  let names;
+  try {
+    accessSync(dir, fsConstants.R_OK | fsConstants.X_OK);
+    names = readdirSync(dir);
+  } catch (error) {
+    throw new Error(
+      `${label}: '${dirRel}' è presente ma illeggibile (${error?.code || error?.message || error})`,
+    );
+  }
+  return names
     .filter((f) => /^seo-blog.*\.ts$/.test(f))
-    .map((f) => `content/seo/${f}`);
+    .map((f) => `content/seo/${f}`)
+    .map((f) => {
+      requireRegularFile(root, f, label);
+      return f;
+    });
 }
 
 /**
@@ -152,10 +327,31 @@ export function requiredSurfaceFilesFor(section, root = ROOT) {
   const cfg = SECTIONS[section];
   if (!cfg) throw new Error(`sezione sconosciuta: '${section}'`);
   const required = [cfg.registryFile, cfg.slugDataFile, ...cfg.metaFiles];
-  const missing = required.filter((file) => !existsSync(path.join(root, file)));
-  if (missing.length > 0) {
+  const invalid = required
+    .map((file) => ({ file, status: surfacePathStatus(root, file) }))
+    .filter(({ status }) => status !== SURFACE_PATH_STATUS.REGULAR);
+  if (invalid.length > 0) {
     throw new Error(
-      `superfici obbligatorie mancanti per la sezione '${section}': ${missing.join(', ')}`,
+      `superfici obbligatorie mancanti o non utilizzabili per la sezione '${section}': ` +
+      invalid.map(({ file, status }) => `${file} (${status})`).join(', '),
+    );
+  }
+  return required;
+}
+
+/**
+ * Preflight per il retirement: la tupla canonica deve essere leggibile e
+ * riscrivibile. `requiredSurfaceFilesFor` resta read-only per i content gate.
+ */
+export function requiredWritableSurfaceFilesFor(section, root = ROOT) {
+  const required = requiredSurfaceFilesFor(section, root);
+  const invalid = required
+    .map((file) => ({ file, status: writableSurfacePathStatus(root, file) }))
+    .filter(({ status }) => status !== SURFACE_PATH_STATUS.REGULAR);
+  if (invalid.length > 0) {
+    throw new Error(
+      `superfici obbligatorie non scrivibili per la sezione '${section}': ` +
+      invalid.map(({ file, status }) => `${file} (${status})`).join(', '),
     );
   }
   return required;
@@ -168,14 +364,14 @@ export function requiredSurfaceFilesFor(section, root = ROOT) {
  *
  * Restituisce solo i file esistenti: una superficie assente non è un residuo.
  */
-export function leftoverSurfacesFor(section) {
+export function leftoverSurfacesFor(section, root = ROOT) {
   const cfg = SECTIONS[section];
   if (!cfg) throw new Error(`sezione sconosciuta: '${section}'`);
-  const required = requiredSurfaceFilesFor(section);
+  const required = requiredSurfaceFilesFor(section, root);
   const optional = [
-    ...seoFilesFor(section),
+    ...seoFilesFor(section, root),
     cfg.sourceLedger,
     ...(cfg.idUnionFile ? [cfg.idUnionFile] : []),
-  ].filter((f) => existsSync(path.join(ROOT, f)));
+  ].flatMap((f) => assertRegularFileIfPresent(root, f) ? [f] : []);
   return [...required, ...optional];
 }
