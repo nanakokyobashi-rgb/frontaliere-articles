@@ -87,6 +87,7 @@ const BLOG_INDEX = fs.readFileSync(join(ROOT, 'scripts/build-blog-index.mjs'), '
 const HOST_SEO_HUBS = fs.readFileSync(join(ROOT, 'host/seoHubsData.ts'), 'utf-8');
 const ARTICLE_READERS = fs.readFileSync(join(ROOT, 'engine/shared/articleReaders.ts'), 'utf-8');
 const CORPUS_FLOORS = fs.readFileSync(join(ROOT, 'scripts/lib/corpus-floors.mjs'), 'utf-8');
+const OG_PAGES_PLUGIN = fs.readFileSync(join(ROOT, 'engine/ogPagesPlugin.ts'), 'utf-8');
 
 /** Una superficie sana su un corpus della taglia di quello reale. */
 function healthy() {
@@ -224,7 +225,7 @@ test('il denominatore sitemap non si abbassa insieme a una slug map troncata', (
 
 test('il parser della slug map e condiviso fra engine e floor del corpus', () => {
   const source = `const BLOG_SLUGS = {
-  "articolo": { it: "articolo-it", en: "article-en", de: "artikel-de", fr: "article-fr" },
+  "articolo" : { it: "articolo-it" , en: "article-en" , de: "artikel-de" , fr: "article-fr" },
 };\n`;
   assert.deepEqual(parseArticleUrlSlugs(source, 'BLOG_SLUGS'), {
     articolo: { it: 'articolo-it', en: 'article-en', de: 'artikel-de', fr: 'article-fr' },
@@ -232,6 +233,9 @@ test('il parser della slug map e condiviso fra engine e floor del corpus', () =>
   assert.match(ARTICLE_READERS, /parseArticleUrlSlugs/);
   assert.doesNotMatch(ARTICLE_READERS, /const rx = \/\["'\]/);
   assert.doesNotMatch(CORPUS_FLOORS, /SLUG_MAP_ENTRY_RE/);
+  assert.match(OG_PAGES_PLUGIN, /parseArticleUrlSlugs/);
+  assert.match(OG_PAGES_PLUGIN, /Object\.assign\(blogSlugs, parseArticleUrlSlugs\(rSrc, SECTION\.slugConst\)\)/);
+  assert.doesNotMatch(OG_PAGES_PLUGIN, /const bsBlock|const bsRx/);
 });
 
 test("la superficie reale del 2026-09-05 passa: il pavimento non e' stretto", () => {
