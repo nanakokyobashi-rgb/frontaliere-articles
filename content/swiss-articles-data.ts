@@ -18955,6 +18955,33 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'traffico-merci-alpi-semestre-2026',
+    category: 'pratico',
+    date: '2026-09-13T01:07:46.720Z',
+    image: '/images/blog/traffico-merci-alpi-semestre-2026.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'mercato-lavoro-seco-luglio-2026',
+    category: 'novita',
+    date: '2026-09-13T01:15:50.648Z',
+    image: '/images/blog/mercato-lavoro-seco-luglio-2026.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'esercito-polizia-berna-droni',
+    category: 'novita',
+    date: '2026-09-13T01:26:23.585Z',
+    image: '/images/blog/esercito-polizia-berna-droni.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

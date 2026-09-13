@@ -82037,6 +82037,123 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-traffico-merci-alpi-semestre-2026': {
+    title: 'Traffico merci transalpino: dati e crescita nel 2026',
+    description: 'Scopri l\'andamento del traffico merci transalpino in Svizzera nel primo semestre 2026: dati su ferrovia, autocarri, cantieri e FFS Cargo. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, traffico, merci, transalpino, dati',
+    ogTitle: 'Traffico merci transalpino: dati e crescita nel primo semestre 2026',
+    ogDescription: 'Analisi dei rapporti semestrali dell\'Ufficio federale dei trasporti sul traffico merci transalpino in Svizzera per il primo semestre 2026 tra rotaia e strada.',
+    canonicalPath: '/articoli-svizzera/traffico-merci-alpi-semestre-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Traffico merci transalpino: dati e crescita nel 2026",
+      "description": "Scopri l'andamento del traffico merci transalpino in Svizzera nel primo semestre 2026: dati su ferrovia, autocarri, cantieri e FFS Cargo. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/traffico-merci-alpi-semestre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Traffico merci su rotaia e strada attraverso le Alpi svizzere"
+      },
+      "datePublished": "2026-09-13T01:07:46+00:00",
+      "dateModified": "2026-09-13T01:07:46+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/traffico-merci-alpi-semestre-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-mercato-lavoro-seco-luglio-2026': {
+    title: 'Mercato del lavoro SECO: disoccupazione al 3% a luglio 2026',
+    description: 'Scopri i dati ufficiali SECO sul mercato del lavoro in Svizzera a luglio 2026: tasso di disoccupazione al 3%, posti vacanti e analisi per fasce d\'età.',
+    keywords: 'frontalieri, ticino, svizzera, italia, mercato, lavoro, seco, disoccupazione',
+    ogTitle: 'Mercato lavoro SECO: disoccupazione al 3% a luglio 2026',
+    ogDescription: 'Analisi ufficiale SECO del mercato del lavoro svizzero a luglio 2026. Dati su disoccupazione, fasce d\'età, posti vacanti negli URC e lavoro ridotto.',
+    canonicalPath: '/articoli-svizzera/mercato-lavoro-seco-luglio-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mercato del lavoro SECO: disoccupazione al 3% a luglio 2026",
+      "description": "Scopri i dati ufficiali SECO sul mercato del lavoro in Svizzera a luglio 2026: tasso di disoccupazione al 3%, posti vacanti e analisi per fasce d'età.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/mercato-lavoro-seco-luglio-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Statistiche mercato del lavoro SECO in Svizzera a luglio 2026"
+      },
+      "datePublished": "2026-09-13T01:15:50+00:00",
+      "dateModified": "2026-09-13T01:15:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/mercato-lavoro-seco-luglio-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-esercito-polizia-berna-droni': {
+    title: 'Esercito e polizia allenano protezione infrastrutture',
+    description: 'Nel Canton Berna è in corso un\'esercitazione congiunta di quattro giorni tra polizia ed esercito svizzero focalizzata sulla protezione dai droni.',
+    keywords: 'frontalieri, ticino, svizzera, italia, esercito, polizia, allenano, protezione',
+    ogTitle: 'Esercito e polizia allenano protezione infrastrutture critiche a Berna',
+    ogDescription: 'Nel Canton Berna è in corso un\'esercitazione congiunta di quattro giorni tra la polizia cantonale e l\'esercito svizzero focalizzata sulla difesa delle infrastrutture critiche e sulla protezione contro la minaccia dei droni.',
+    canonicalPath: '/articoli-svizzera/esercito-polizia-berna-droni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Esercito e polizia allenano protezione infrastrutture",
+      "description": "Nel Canton Berna è in corso un'esercitazione congiunta di quattro giorni tra polizia ed esercito svizzero focalizzata sulla protezione dai droni.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/esercito-polizia-berna-droni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Esercitazione congiunta di polizia ed esercito contro i droni a Berna"
+      },
+      "datePublished": "2026-09-13T01:26:23+00:00",
+      "dateModified": "2026-09-13T01:26:23+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/esercito-polizia-berna-droni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

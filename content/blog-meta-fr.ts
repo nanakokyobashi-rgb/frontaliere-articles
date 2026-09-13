@@ -11703,6 +11703,15 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.pognana-lario-frontaliere-ticino-guida.title': 'Vivre à Pognana Lario et travailler au Tessin',
     'blog.article.pognana-lario-frontaliere-ticino-guida.excerpt': 'Guide pratique pour les frontaliers à Pognana Lario : trajets vers Chiasso, taxes, accord fiscal et gestion du budget.',
     'blog.article.pognana-lario-frontaliere-ticino-guida.imageAlt': 'Vue du lac pres de Pognana Lario vers la frontiere suisse',
+    'blog.article.speedaf-in-svizzera-50-000-pacchi-al-giorno.title': 'Speedaf en Suisse : 50’000 colis par jour',
+    'blog.article.speedaf-in-svizzera-50-000-pacchi-al-giorno.excerpt': 'Speedaf, filiale suisse fondée en avril, vise à gérer jusqu\'à 50’000 envois par jour avec des centres à Zurich, Berne et Lausanne et son siège à Fribourg.',
+    'blog.article.speedaf-in-svizzera-50-000-pacchi-al-giorno.imageAlt': 'Image éditoriale relative à: Speedaf in Svizzera: 50’000 pacchi al giorno',
+    'blog.article.teleriscaldamento-varese-porte-aperte.title': 'Chauffage urbain Varèse : portes ouvertes à la centrale',
+    'blog.article.teleriscaldamento-varese-porte-aperte.excerpt': 'Journée portes ouvertes à la centrale de chauffage urbain de Varese le samedi 19 septembre. Réservations obligatoires sur Eventbrite.',
+    'blog.article.teleriscaldamento-varese-porte-aperte.imageAlt': 'Centrale de chauffage urbain à Varèse (Varese)',
+    'blog.article.inaugurazione-campus-smartt-valley.title': 'Daverio : le nouveau campus SMARTT VAlley a été inauguré',
+    'blog.article.inaugurazione-campus-smartt-valley.excerpt': 'Ouvert à Daverio, le campus de 5000 m ² dédié à la formation et à l\'innovation. Investissement de 4,5 millions d\'euros pour combler l\'écart entre l\'école et l\'usine.',
+    'blog.article.inaugurazione-campus-smartt-valley.imageAlt': 'Campus SMARTT VAlley à Daverio',
 };
 
 export default blogMetaFr;

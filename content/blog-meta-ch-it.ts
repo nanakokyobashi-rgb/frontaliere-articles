@@ -6319,6 +6319,15 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.condanne-banche-svizzera-corruzione.title': 'Condanne contro le banche in Svizzera per corruzione',
     'blog.article.condanne-banche-svizzera-corruzione.excerpt': 'Sei banche elvetiche condannate di recente dalla giustizia federale per casi di corruzione o riciclaggio. Analizziamo la tendenza con gli esperti.',
     'blog.article.condanne-banche-svizzera-corruzione.imageAlt': 'Edifici di banche svizzere in Svizzera',
+    'blog.article.traffico-merci-alpi-semestre-2026.title': 'Traffico merci transalpino: dati e crescita nel 2026',
+    'blog.article.traffico-merci-alpi-semestre-2026.excerpt': 'Crescita del traffico merci transalpino del 3,1% nel primo semestre 2026. La quota della ferrovia si attesta al 68%, mentre crescono i camion.',
+    'blog.article.traffico-merci-alpi-semestre-2026.imageAlt': 'Traffico merci su rotaia e strada attraverso le Alpi svizzere',
+    'blog.article.mercato-lavoro-seco-luglio-2026.title': 'Mercato del lavoro SECO: disoccupazione al 3% a luglio 2026',
+    'blog.article.mercato-lavoro-seco-luglio-2026.excerpt': 'Pubblicati i dati SECO di luglio 2026: tasso di disoccupazione al 3%, disoccupati in aumento del 7,8% su base annua e 45\'156 posti vacanti registrati.',
+    'blog.article.mercato-lavoro-seco-luglio-2026.imageAlt': 'Statistiche mercato del lavoro SECO in Svizzera a luglio 2026',
+    'blog.article.esercito-polizia-berna-droni.title': 'Esercito e polizia allenano protezione infrastrutture',
+    'blog.article.esercito-polizia-berna-droni.excerpt': 'Nel Canton Berna è in corso un\'esercitazione congiunta di quattro giorni focalizzata sulla difesa delle infrastrutture critiche contro i droni.',
+    'blog.article.esercito-polizia-berna-droni.imageAlt': 'Esercitazione congiunta di polizia ed esercito contro i droni a Berna',
 };
 
 export default blogMetaChIt;

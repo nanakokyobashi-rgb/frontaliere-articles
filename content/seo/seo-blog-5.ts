@@ -90007,6 +90007,123 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-speedaf-in-svizzera-50-000-pacchi-al-giorno': {
+    title: 'Speedaf in Svizzera: 50’000 pacchi al giorno | Frontaliere Ticino',
+    description: 'Speedaf, filiale svizzera fondata ad aprile, punta a gestire fino a 50’000 invii al giorno con centri a Zurigo, Berna e Losanna e sede a Friburgo.',
+    keywords: 'frontalieri, ticino, svizzera, italia, speedaf, pacchi, giorno, filiale',
+    ogTitle: 'Speedaf in Svizzera: 50’000 pacchi al giorno',
+    ogDescription: 'Speedaf, filiale svizzera fondata ad aprile, punta a gestire fino a 50’000 invii al giorno con centri a Zurigo, Berna e Losanna e sede a Friburgo.',
+    canonicalPath: '/articoli-frontaliere/speedaf-in-svizzera-50-000-pacchi-al-giorno',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Speedaf in Svizzera: 50’000 pacchi al giorno",
+      "description": "Speedaf, filiale svizzera fondata ad aprile, punta a gestire fino a 50’000 invii al giorno con centri a Zurigo, Berna e Losanna e sede a Friburgo.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/speedaf-in-svizzera-50-000-pacchi-al-giorno.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine editoriale relativa a: Speedaf in Svizzera: 50’000 pacchi al giorno"
+      },
+      "datePublished": "2026-09-13T01:04:04+00:00",
+      "dateModified": "2026-09-13T01:04:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/speedaf-in-svizzera-50-000-pacchi-al-giorno/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-teleriscaldamento-varese-porte-aperte': {
+    title: 'Teleriscaldamento Varese: porte aperte alla centrale',
+    description: 'Scopri la centrale di teleriscaldamento di Varese di Acinque. Porte aperte sabato 19 settembre con prenotazione obbligatoria su Eventbrite. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, teleriscaldamento, varese, porte, aperte',
+    ogTitle: 'Teleriscaldamento di Varese: prenotazioni aperte per visitare la centrale',
+    ogDescription: 'Torna Impianti Aperti con il Gruppo Acinque. Sabato 19 settembre visite guidate alla centrale di teleriscaldamento di Varese in via Ottorino Rossi. Prenotazione obbligatoria su Eventbrite.',
+    canonicalPath: '/articoli-frontaliere/teleriscaldamento-varese-porte-aperte',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Teleriscaldamento Varese: porte aperte alla centrale",
+      "description": "Scopri la centrale di teleriscaldamento di Varese di Acinque. Porte aperte sabato 19 settembre con prenotazione obbligatoria su Eventbrite. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/teleriscaldamento-varese-porte-aperte.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Centrale di teleriscaldamento a Varese"
+      },
+      "datePublished": "2026-09-13T01:12:30+00:00",
+      "dateModified": "2026-09-13T01:12:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/teleriscaldamento-varese-porte-aperte/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-inaugurazione-campus-smartt-valley': {
+    title: 'Daverio: inaugurato il nuovo campus SMARTT VAlley',
+    description: 'Inaugurato a Daverio il campus SMARTT VAlley: 5000 mq per formare le nuove competenze industriali. Investimento di 4,5 milioni di euro per scuola e lavoro.',
+    keywords: 'frontalieri, ticino, svizzera, italia, daverio, inaugurato, nuovo, campus',
+    ogTitle: 'Daverio: inaugurato il nuovo campus SMARTT VAlley',
+    ogDescription: 'Inaugurato a Daverio il campus SMARTT VAlley: 5000 mq per formare le nuove competenze industriali. Investimento di 4,5 milioni di euro per scuola e lavoro.',
+    canonicalPath: '/articoli-frontaliere/inaugurazione-campus-smartt-valley',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Daverio: inaugurato il nuovo campus SMARTT VAlley",
+      "description": "Inaugurato a Daverio il campus SMARTT VAlley: 5000 mq per formare le nuove competenze industriali. Investimento di 4,5 milioni di euro per scuola e lavoro.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/inaugurazione-campus-smartt-valley.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Campus SMARTT VAlley a Daverio"
+      },
+      "datePublished": "2026-09-13T01:23:00+00:00",
+      "dateModified": "2026-09-13T01:23:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/inaugurazione-campus-smartt-valley/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

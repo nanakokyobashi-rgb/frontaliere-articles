@@ -6319,6 +6319,15 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.condanne-banche-svizzera-corruzione.title': 'Condamnations contre les banques en Suisse pour corruption',
     'blog.article.condanne-banche-svizzera-corruzione.excerpt': 'Six banques suisses ont récemment été condamnées par la justice fédérale pour des affaires de corruption ou de blanchiment. Analysons la tendance avec des experts.',
     'blog.article.condanne-banche-svizzera-corruzione.imageAlt': 'Bâtiments de banques suisses en Suisse',
+    'blog.article.traffico-merci-alpi-semestre-2026.title': 'Trafic marchandises transalpin : données et croissance en 2026',
+    'blog.article.traffico-merci-alpi-semestre-2026.excerpt': 'Croissance du trafic marchandises transalpin de 3,1 % au premier semestre 2026. La part du rail s\'élève à 68 %, tandis que les camions se développent.',
+    'blog.article.traffico-merci-alpi-semestre-2026.imageAlt': 'Trafic de marchandises ferroviaire et routier a travers les Alpes suisses',
+    'blog.article.mercato-lavoro-seco-luglio-2026.title': 'Marché du travail SECO : taux de chômage à 3% en juillet 2026',
+    'blog.article.mercato-lavoro-seco-luglio-2026.excerpt': 'Les données SECO de juillet 2026 ont été publiées : taux de chômage à 3 %, chômeurs en hausse de 7,8 % sur une base annuelle et 45\'156 postes vacants enregistrés.',
+    'blog.article.mercato-lavoro-seco-luglio-2026.imageAlt': 'Statistiques du marché du travail du SECO en Suisse en juillet 2026',
+    'blog.article.esercito-polizia-berna-droni.title': 'L\'armée et la police entraînent la protection des infrastructures',
+    'blog.article.esercito-polizia-berna-droni.excerpt': 'Un exercice conjoint de quatre jours axé sur la défense des infrastructures critiques contre les drones est en cours dans le canton de Berne.',
+    'blog.article.esercito-polizia-berna-droni.imageAlt': 'Exercice conjoint de la police et de l\'armée contre les drones à Berne',
 };
 
 export default blogMetaChFr;
