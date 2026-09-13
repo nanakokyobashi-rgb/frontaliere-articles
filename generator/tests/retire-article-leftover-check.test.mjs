@@ -338,7 +338,7 @@ test('la predicate dei target delete distingue assenza, inode non regolare e fil
 
     const loop = path.join(root, 'loop.ts');
     symlinkSync('loop.ts', loop);
-    assert.equal(surfacePathStatus(root, 'loop.ts'), SURFACE_PATH_STATUS.UNREADABLE);
+    assert.equal(surfacePathStatus(root, 'loop.ts'), SURFACE_PATH_STATUS.NON_REGULAR);
     assert.throws(
       () => requireRegularFile(root, 'loop.ts', 'target'),
       /non è un file regolare leggibile/,
@@ -347,6 +347,22 @@ test('la predicate dei target delete distingue assenza, inode non regolare e fil
     writeFileSync(path.join(root, 'body.ts'), 'fixture\n', 'utf8');
     assert.equal(assertRegularFileIfPresent(root, 'body.ts', 'target'), true);
     assert.equal(requireRegularFile(root, 'body.ts', 'target'), true);
+
+    const validLink = path.join(root, 'valid-link.ts');
+    symlinkSync('body.ts', validLink);
+    assert.equal(surfacePathStatus(root, 'valid-link.ts'), SURFACE_PATH_STATUS.NON_REGULAR);
+    assert.throws(
+      () => assertRegularFileIfPresent(root, 'valid-link.ts', 'target'),
+      /non è un file regolare leggibile/,
+    );
+
+    const dangling = path.join(root, 'dangling.ts');
+    symlinkSync('missing-target.ts', dangling);
+    assert.equal(surfacePathStatus(root, 'dangling.ts'), SURFACE_PATH_STATUS.NON_REGULAR);
+    assert.throws(
+      () => assertRegularFileIfPresent(root, 'dangling.ts', 'target'),
+      /non è un file regolare leggibile/,
+    );
   } finally {
     rmSync(root, { recursive: true, force: true });
   }

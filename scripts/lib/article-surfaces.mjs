@@ -21,8 +21,8 @@
 import {
   accessSync,
   constants as fsConstants,
+  lstatSync,
   readdirSync,
-  statSync,
 } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -53,16 +53,16 @@ function statusForStatError(error) {
 /**
  * Classifica un path senza collassare «non c'è» e «non lo si può leggere».
  *
- * `statSync` copre directory, FIFO e gli altri inode non regolari; `accessSync`
- * copre il file regolare presente ma non leggibile. Tutti i chiamanti dei
- * guard usano questa stessa decisione, così un errore di tipo non diventa una
- * superficie opzionale sparita per magia.
+ * `lstatSync` copre directory, symlink, FIFO e gli altri inode non regolari;
+ * `accessSync` copre il file regolare presente ma non leggibile. Tutti i
+ * chiamanti dei guard usano questa stessa decisione, così un errore di tipo
+ * non diventa una superficie opzionale sparita per magia.
  */
 export function surfacePathStatus(root, rel) {
   const absolute = path.join(root, rel);
   let stats;
   try {
-    stats = statSync(absolute);
+    stats = lstatSync(absolute);
   } catch (error) {
     return statusForStatError(error);
   }
