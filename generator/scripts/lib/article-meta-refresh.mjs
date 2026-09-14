@@ -312,6 +312,8 @@ export function upsertSeoDescriptionBlock(src, id, seo) {
  * @param {string} [opts.repoRoot]
  * @param {string} [opts.metaPrefix] - 'blog-meta' (frontaliere, default) | 'blog-meta-ch' (svizzera)
  * @param {string} [opts.seoFile] - relative to main's layout, default 'services/seo/seo-blog-5.ts'
+ * @param {(file: string, content: string) => void} [opts.writeFile] - optional staged writer
+ * @param {(file: string, encoding?: string) => string} [opts.readFile] - optional staged reader
  * @returns {{ changed: boolean, touched: string[] }}
  */
 export function refreshDescriptiveTexts(id, localeTexts, seoTexts, opts = {}) {
@@ -319,6 +321,8 @@ export function refreshDescriptiveTexts(id, localeTexts, seoTexts, opts = {}) {
   const repoRoot = opts.repoRoot || DEFAULT_REPO_ROOT;
   const metaPrefix = opts.metaPrefix || 'blog-meta';
   const seoFile = opts.seoFile || 'services/seo/seo-blog-5.ts';
+  const readFile = opts.readFile || readFileSync;
+  const writeFile = opts.writeFile || writeCorpusFile;
   const touched = [];
   const clampedSeoTexts = clampBudgetedFields(seoTexts, SEO_ENTRY_DESCRIPTION_BUDGETS);
   let seoUpdate = null;
@@ -328,7 +332,7 @@ export function refreshDescriptiveTexts(id, localeTexts, seoTexts, opts = {}) {
   // key must reject the whole refresh, not leave a half-updated corpus.
   if (clampedSeoTexts && (clampedSeoTexts.description || clampedSeoTexts.ogDescription)) {
     const seoPath = path.join(repoRoot, corpusPath(seoFile));
-    const before = readFileSync(seoPath, 'utf-8');
+    const before = readFile(seoPath, 'utf-8');
     const after = upsertSeoDescriptionBlock(before, id, clampedSeoTexts);
     seoUpdate = { file: seoPath, before, after };
   }
@@ -338,7 +342,7 @@ export function refreshDescriptiveTexts(id, localeTexts, seoTexts, opts = {}) {
     if (!rawFields) continue;
     const fields = clampBudgetedFields(rawFields, LOCALE_DESCRIPTION_BUDGETS);
     const file = path.join(repoRoot, corpusPath(`services/locales/${metaPrefix}-${locale}.ts`));
-    const before = readFileSync(file, 'utf-8');
+    const before = readFile(file, 'utf-8');
     const after = upsertLocaleMetaFields(before, id, fields);
     if (after !== before) {
       localeUpdates.push({ file, after });
@@ -346,12 +350,12 @@ export function refreshDescriptiveTexts(id, localeTexts, seoTexts, opts = {}) {
   }
 
   for (const { file, after } of localeUpdates) {
-    writeCorpusFile(file, after);
+    writeFile(file, after);
     touched.push(file);
   }
 
   if (seoUpdate && seoUpdate.after !== seoUpdate.before) {
-    writeCorpusFile(seoUpdate.file, seoUpdate.after);
+    writeFile(seoUpdate.file, seoUpdate.after);
     touched.push(seoUpdate.file);
   }
 
