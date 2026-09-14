@@ -64,7 +64,14 @@
  * Exit 0 sempre (anche quando NON mergia): un gate non soddisfatto è un esito
  * atteso (l'altro trigger ri-valuterà), non un errore di workflow.
  */
-import { isReviewTestPath, findTestOnlyApproval } from './review-test-policy.mjs';
+import { createHash } from 'node:crypto';
+import {
+  isReviewTestPath,
+  findTestOnlyApproval,
+  reviewInputContextFromPullRequest,
+  reviewInputContextMatches,
+  reviewHasInputRevision,
+} from './review-test-policy.mjs';
 import { execFileSync } from 'node:child_process';
 import {
   VITEST_CHECK_NAME,
@@ -87,6 +94,33 @@ function gh(args, { json = true, token } = {}) {
   if (token) env.GH_TOKEN = token;
   const out = execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, env });
   return json ? JSON.parse(out) : out;
+}
+
+/** Read the trusted PR HEAD and body revision as one review-input snapshot. */
+function currentReviewInputContext() {
+  try {
+    return reviewInputContextFromPullRequest(gh(['api', `repos/${REPO}/pulls/${PR}`]));
+  } catch {
+    return null;
+  }
+}
+
+/** Keep the HEAD and body revision fence together before every action. */
+function reviewInputContextStillCurrent(expectedHead, expectedRevision) {
+  const current = currentReviewInputContext();
+  if (reviewInputContextMatches(current, {
+    headSha: expectedHead,
+    reviewRevision: expectedRevision,
+  })) return true;
+  console.log(
+    `Review gate: HEAD o body PR cambiati durante la valutazione (attesa head=${expectedHead} revision=${expectedRevision}, corrente head=${current?.headSha || '<unreadable>'} revision=${current?.reviewRevision || '<unreadable>'}) — nessuna azione di merge/update-branch.`,
+  );
+  return false;
+}
+
+/** Backward-compatible body-only accessor for callers that choose a default. */
+function currentReviewInputRevision() {
+  return currentReviewInputContext()?.reviewRevision || null;
 }
 
 function fail(msg) {
@@ -406,6 +440,12 @@ async function main() {
   const labels = (pr.labels || []).map((l) => l.name);
   console.log(`HEAD SHA: ${head} · labels: [${labels.join(', ') || '—'}]`);
 
+  const reviewContext = currentReviewInputContext();
+  if (!reviewContext || reviewContext.headSha !== String(head || '').toLowerCase()) {
+    return fail(`Impossibile verificare HEAD + body della PR #${PR} per la revisione della review — skip conservativo.`);
+  }
+  const reviewRevision = reviewContext.reviewRevision;
+
   // 2. Ultima review del bot reviewer sulla HEAD corrente: `## LGTM` e NO 🔴 Important.
   let reviews;
   try {
@@ -415,8 +455,11 @@ async function main() {
   }
   const botReviews = (reviews || []).filter(
     (r) => r.user && r.user.type === 'Bot' && REVIEWER_BOT_LOGIN_RE.test(r.user.login || '')
+      && reviewHasInputRevision(r.body, reviewRevision)
   );
-  const lastBot = findTestOnlyApproval(reviews, head, { ghFn: gh, repo: REPO, pr: PR })
+  const lastBot = findTestOnlyApproval(reviews, head, {
+    ghFn: gh, repo: REPO, pr: PR, reviewRevision,
+  })
     || (botReviews.length ? botReviews[botReviews.length - 1] : null);
   const body = lastBot ? (lastBot.body || '') : '';
   // Un 🔴 Important reale del reviewer BLOCCA se resta nel diff o non è
@@ -438,6 +481,7 @@ async function main() {
   }
   let outsideOnlyApproved = false;
   if (hasRedflag) {
+    if (!reviewInputContextStillCurrent(head, reviewRevision)) return;
     try {
       const scope = await classifyAndMintReview(body, {
         repo: REPO,
@@ -454,6 +498,7 @@ async function main() {
           `Ultima review claude-bot contiene ${scope.inScope.length} finding nel diff e ${scope.unresolved.length} non risolvibili — skip (no merge).`,
         );
       }
+      if (!reviewInputContextStillCurrent(head, reviewRevision)) return;
     } catch (error) {
       return fail(`Classificazione scope della review fallita (${String(error).slice(0, 180)}) — skip (no merge).`);
     }
@@ -497,6 +542,14 @@ async function main() {
     // la PR modifica il workflow che ospita la review (401). Prova il drift-fallback
     // deterministico (autore fidato + body-contract). false → skip (ri-valuta al
     // prossimo `tests`/push).
+    const staleReview = (reviews || []).some((review) =>
+      review?.user?.type === 'Bot'
+      && REVIEWER_BOT_LOGIN_RE.test(review.user.login || '')
+      && review.state !== 'PENDING'
+      && !reviewHasInputRevision(review.body, reviewRevision));
+    if (staleReview) {
+      return fail(`Esiste una review bot storica per una revisione body diversa da ${reviewRevision} — skip; serve un verdetto fresco.`);
+    }
     if (!evaluateDriftFallback()) {
       return fail(`Nessuna review claude-bot e drift-fallback non applicabile — skip.`);
     }
@@ -709,6 +762,7 @@ async function main() {
       console.log(`PR #${PR} gia' mergiata da un run concorrente — successo, nessun update-branch.`);
       return;
     }
+    if (!reviewInputContextStillCurrent(head, reviewRevision)) return;
     console.log(`Race "head out of date": branch dietro main tra gate e merge. Aggiorno il branch col PAT (update-branch) → tests ri-gira → auto-merge ri-valuta e mergia. Nessuna azione manuale.`);
     try {
       gh(['pr', 'update-branch', PR, '--repo', REPO], { json: false, token: primary });
@@ -726,6 +780,7 @@ async function main() {
     }
   };
 
+  if (!reviewInputContextStillCurrent(head, reviewRevision)) return;
   const mergeArgs = ['pr', 'merge', PR, '--squash', '--delete-branch', '--repo', REPO];
   try {
     gh(mergeArgs, { json: false, token: primary });
@@ -742,6 +797,7 @@ async function main() {
     if (hasPat && fallback) {
       console.log(`::warning::Merge col GITHUB_PAT fallito (scope insufficiente?) — retry con GITHUB_TOKEN, nessun cascade.`);
       try {
+        if (!reviewInputContextStillCurrent(head, reviewRevision)) return;
         gh(mergeArgs, { json: false, token: fallback });
         console.log(`PR #${PR} mergiata (fallback GITHUB_TOKEN).`);
       } catch (e2) {

@@ -6385,6 +6385,12 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.naturalizzazione-nidvaldo-procedura.title': 'Naturalization in Nidvaldo: requirements and procedure',
     'blog.article.naturalizzazione-nidvaldo-procedura.excerpt': 'Complete guide to ordinary naturalization in the Canton of Nidvaldo: required years, tests, taxes and bureaucratic steps.',
     'blog.article.naturalizzazione-nidvaldo-procedura.imageAlt': 'Municipal building in the Canton of Nidwalden',
+    'blog.article.prezzi-produzione-importazione-agosto-2026.title': 'Production and import prices: +0.7% in August 2026',
+    'blog.article.prezzi-produzione-importazione-agosto-2026.excerpt': 'The producer and import price index rises to 100.4 points in August 2026. On an annual basis, there is a decrease of 0.7% according to UST data.',
+    'blog.article.prezzi-produzione-importazione-agosto-2026.imageAlt': 'The Swiss Federal Statistical Office in Neuchâtel, source of national economic data.',
+    'blog.article.votazione-scuola-qualita-berna-2026.title': 'Quality school in Bern: the grade is set for 2026',
+    'blog.article.votazione-scuola-qualita-berna-2026.excerpt': 'The initiative to insert a constitutional mandate on the school will be submitted to the voters on September 27, 2026.',
+    'blog.article.votazione-scuola-qualita-berna-2026.imageAlt': 'Empty classroom awaiting the vote on teaching quality in the Canton of Bern',
 };
 
 export default blogMetaChEn;

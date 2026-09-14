@@ -128,6 +128,20 @@ jobs:
             skip "PR #$PR non leggibile → skip (no-op)."
           fi
 
+          # The review-only prefilter must authenticate the reviewer verdict
+          # against the same body hash used by `tests.yml`.  Keep an explicit
+          # empty value on API/hash failure: the Node helper treats a supplied
+          # but empty revision as fail-closed, while its absent-property mode
+          # remains backward-compatible for pure callers/tests.
+          review_revision=""
+          body_file="${RUNNER_TEMP:-/tmp}/redcheck-pr-body-${PR}.txt"
+          if printf '%s' "$pr" | jq -r '.body // ""' > "$body_file" 2>/dev/null; then
+            body_sha=$(sha256sum "$body_file" | awk '{print $1}')
+            if printf '%s' "$body_sha" | grep -qE '^[a-f0-9]{64}$'; then
+              review_revision="body:$body_sha"
+            fi
+          fi
+
           state=$(printf '%s' "$pr" | jq -r '.state')
           draft=$(printf '%s' "$pr" | jq -r '.draft')
           author_type=$(printf '%s' "$pr" | jq -r '.user.type')
@@ -207,9 +221,10 @@ jobs:
             reviews_json=$(gh api "repos/$REPO/pulls/$PR/reviews" --paginate --slurp 2>/dev/null || echo "[]")
             review_payload=$(jq -n \
               --arg head_sha "$head_sha" \
+              --arg review_revision "$review_revision" \
               --argjson jobs "$jobs_json" \
               --argjson reviews "$reviews_json" \
-              '{headSha:$head_sha,jobs:$jobs,reviews:$reviews}' 2>/dev/null || echo '{}')
+              '{headSha:$head_sha,reviewRevision:$review_revision,jobs:$jobs,reviews:$reviews}' 2>/dev/null || echo '{}')
             # Niente `2>/dev/null`: un helper rotto (modulo mancante, sintassi)
             # deve essere VISIBILE come warning, non collassare in silenzio in
             # un `none` indistinguibile da un prefilter che non e' scattato.

@@ -136,6 +136,8 @@ test('l helper importa i nomi degli step e il matcher dei finding condivisi', as
 });
 
 const HEAD = 'a'.repeat(40);
+const CURRENT_REVIEW_REVISION = `body:${'b'.repeat(64)}`;
+const STALE_REVIEW_REVISION = `body:${'c'.repeat(64)}`;
 const jobs = (extra = []) => [{
   name: 'tests (node --test)',
   steps: [
@@ -144,10 +146,10 @@ const jobs = (extra = []) => [{
     ...extra,
   ],
 }];
-const review = (body, commit_id = HEAD) => ({
+const review = (body, commit_id = HEAD, reviewRevision = '') => ({
   user: { type: 'Bot', login: 'claude[bot]' },
   commit_id,
-  body,
+  body: `${body}${reviewRevision ? `\n<!-- REVIEW_INPUT_REVISION: ${reviewRevision} -->` : ''}`,
 });
 
 test('il predicato richiede un finding reale sulla HEAD, non la conclusion dello step', () => {
@@ -188,6 +190,35 @@ test('il predicato richiede un finding reale sulla HEAD, non la conclusion dello
       reviews: [[review('`x.mjs:1`: 🔴 Important: il gate manca.', 'b'.repeat(40))]],
     }),
     false,
+  );
+});
+
+test('il predicato ignora una review sulla HEAD con body revision stantia', () => {
+  const input = {
+    headSha: HEAD,
+    reviewRevision: CURRENT_REVIEW_REVISION,
+    jobs: [{ jobs: jobs() }],
+  };
+  assert.equal(
+    reviewFailureKind({
+      ...input,
+      reviews: [[review('`x.mjs:1`: 🔴 Important: finding vecchio', HEAD, STALE_REVIEW_REVISION)]],
+    }),
+    '',
+  );
+  assert.equal(
+    reviewFailureKind({
+      ...input,
+      reviews: [[review('`x.mjs:1`: 🔴 Important: finding corrente', HEAD, CURRENT_REVIEW_REVISION)]],
+    }),
+    'important',
+  );
+  assert.equal(
+    reviewFailureKind({
+      ...input,
+      reviews: [[review(`\`x.mjs:1\`: 🔴 Important: finding inline <!-- REVIEW_INPUT_REVISION: ${CURRENT_REVIEW_REVISION} -->`, HEAD)]],
+    }),
+    '',
   );
 });
 

@@ -82895,6 +82895,84 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-prezzi-produzione-importazione-agosto-2026': {
+    title: 'Prezzi produzione e import: +0,7% in agosto 2026',
+    description: 'Dati UST agosto 2026: l\'indice dei prezzi alla produzione e importazione sale dello 0,7% mensile a 100,4 punti. Calo annuo dello 0,7%. Analisi e dettagli.',
+    keywords: 'frontalieri, ticino, svizzera, italia, prezzi, produzione, import, agosto',
+    ogTitle: 'Svizzera: prezzi produzione e import in aumento in agosto',
+    ogDescription: 'L\'Ufficio federale di statistica rileva un incremento mensile dello 0,7% nell\'indice dei prezzi alla produzione e all\'importazione. Analisi dei settori chiave.',
+    canonicalPath: '/articoli-svizzera/prezzi-produzione-importazione-agosto-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Prezzi produzione e import: +0,7% in agosto 2026",
+      "description": "Dati UST agosto 2026: l'indice dei prezzi alla produzione e importazione sale dello 0,7% mensile a 100,4 punti. Calo annuo dello 0,7%. Analisi e dettagli.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/prezzi-produzione-importazione-agosto-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "L'Ufficio federale di statistica a Neuchâtel, sede delle rilevazioni economiche svizzere."
+      },
+      "datePublished": "2026-09-14T07:31:45+00:00",
+      "dateModified": "2026-09-14T07:31:45+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/prezzi-produzione-importazione-agosto-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-votazione-scuola-qualita-berna-2026': {
+    title: 'Scuola qualità a Berna: il voto è fissato al 2026',
+    description: 'Il 27 settembre 2026 i bernesi voteranno sull\'iniziativa per un mandato costituzionale sulla qualità della scuola. Promossa dagli insegnanti, opposta',
+    keywords: 'frontalieri, ticino, svizzera, italia, scuola, qualità, berna, voto',
+    ogTitle: 'Scuola qualità a Berna: il voto è fissato al 2026',
+    ogDescription: 'L\'Associazione cantonale degli insegnanti promuove un\'iniziativa per inserire un mandato sulla qualità della scuola nella Costituzione bernese. La consultazione popolare avverrà il 27 settembre 2026, con forti opposizioni da parte del Governo',
+    canonicalPath: '/articoli-svizzera/votazione-scuola-qualita-berna-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Scuola qualità a Berna: il voto è fissato al 2026",
+      "description": "Il 27 settembre 2026 i bernesi voteranno sull'iniziativa per un mandato costituzionale sulla qualità della scuola. Promossa dagli insegnanti, opposta",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/votazione-scuola-qualita-berna-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Aula scolastica vuota in attesa della votazione sulla qualità dell'insegnamento nel Cantone Berna"
+      },
+      "datePublished": "2026-09-14T10:07:20+00:00",
+      "dateModified": "2026-09-14T10:07:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/votazione-scuola-qualita-berna-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

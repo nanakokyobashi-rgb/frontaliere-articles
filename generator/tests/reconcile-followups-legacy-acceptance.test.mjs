@@ -462,7 +462,7 @@ test('legacy riconosce il beacon provvisorio del rimborso', () => {
   assert.equal(result.evidence.find((entry) => entry.kind === 'legacy-semantic')?.rule, 'refund-provisional-quota-beacon');
 });
 
-test('l’aggregata non promuove un item solo-prosa con Target file a item di gating', () => {
+test('l’aggregata blocca un item solo-prosa accanto a un item confermato', () => {
   const body = [
     '### 1. Forma sostituita',
     '- Target file: scripts/ci/example.mjs',
@@ -476,6 +476,23 @@ test('l’aggregata non promuove un item solo-prosa con Target file a item di ga
     legacyResolver: (item) => item.includes('Item senza token storico')
       ? { resolved: false, eligible: true }
       : legacyAddressEvidence(item, 1249, io, addressed),
+  });
+  assert.deepEqual(gate, { blocks: true, reason: 'mixed-prose-pending' });
+});
+
+test('un’aggregata con tutti gli item verificabili conserva la chiusura', () => {
+  const body = [
+    '### 1. Primo item',
+    `- Target file: ${TARGET}`,
+    '- Suggested action: verificare `firstGuard()` nel target.',
+    '',
+    '### 2. Secondo item',
+    `- Target file: ${TARGET}`,
+    '- Suggested action: verificare `secondGuard()` nel target.',
+  ].join('\n');
+  const gate = aggregateCloseGate(body, {
+    fileExists: (path) => path === TARGET,
+    readFile: () => 'firstGuard(); secondGuard();',
   });
   assert.deepEqual(gate, { blocks: false, reason: null });
 });

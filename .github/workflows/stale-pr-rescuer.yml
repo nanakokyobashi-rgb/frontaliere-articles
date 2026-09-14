@@ -174,6 +174,22 @@ jobs:
             UPD_S=$(date -u -d "$UPD" +%s 2>/dev/null || echo "$NOW")
             if [ $((NOW - UPD_S)) -lt $AGE_MIN_S ]; then echo "PR #$N fresca (<2h) — skip"; continue; fi
 
+            # A review is usable only when its marker authenticates the exact
+            # current PR body.  Read/hash the body before selecting LAST_BODY;
+            # an API failure is a safe no-op, never permission to act on an old
+            # reviewer verdict.
+            body_file="${RUNNER_TEMP:-/tmp}/stale-pr-body-${N}.txt"
+            if ! gh api --paginate "repos/$REPO/pulls/$N" --jq '.body // ""' > "$body_file" 2>/dev/null; then
+              echo "PR #$N body illeggibile → skip conservativo"
+              continue
+            fi
+            body_sha=$(sha256sum "$body_file" | awk '{print $1}')
+            if ! printf '%s' "$body_sha" | grep -qE '^[a-f0-9]{64}$'; then
+              echo "PR #$N hash body non verificabile → skip conservativo"
+              continue
+            fi
+            REVIEW_REVISION="body:$body_sha"
+
             # `--paginate` anche qui: `check-runs` risponde `per_page` 30 di
             # default, e un SHA con molti check omonimi (rerun manuali) può
             # spingere il verdetto che conta fuori dalla prima pagina. Con
@@ -204,8 +220,30 @@ jobs:
             # default, e qui si legge l'ULTIMA — cioè proprio quella che una
             # risposta troncata non contiene. Sequenza di ARRAY: `.[][]?`.
             reviews=$(gh api --paginate "repos/$REPO/pulls/$N/reviews?per_page=100" 2>/dev/null || echo '[]')
-            LAST_BODY=$(echo "$reviews" | jq -rs '[.[][]? | select(.user.login|test("^(claude|frontaliere-automation)";"i"))] | last | .body // ""')
-            LAST_CID=$(echo "$reviews" | jq -rs '[.[][]? | select(.user.login|test("^(claude|frontaliere-automation)";"i"))] | last | .commit_id // ""')
+            LAST_BODY=$(echo "$reviews" | jq -rs --arg revision "$REVIEW_REVISION" '
+              def has_current_revision($expected):
+                [((.body // "") | split("\n")[] | rtrimstr("\r")
+                  | select(test("^<!-- REVIEW_INPUT_REVISION: body:[0-9a-f]{64} -->$"; "i"))
+                  | capture("^<!-- REVIEW_INPUT_REVISION: (?<revision>body:[0-9a-f]{64}) -->$"; "i").revision
+                  | ascii_downcase)] | unique as $revisions
+                | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
+              [.[][]?
+               | select(.user.type == "Bot")
+               | select((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
+               | select(has_current_revision($revision))
+              ] | sort_by(.id // 0) | last | .body // ""')
+            LAST_CID=$(echo "$reviews" | jq -rs --arg revision "$REVIEW_REVISION" '
+              def has_current_revision($expected):
+                [((.body // "") | split("\n")[] | rtrimstr("\r")
+                  | select(test("^<!-- REVIEW_INPUT_REVISION: body:[0-9a-f]{64} -->$"; "i"))
+                  | capture("^<!-- REVIEW_INPUT_REVISION: (?<revision>body:[0-9a-f]{64}) -->$"; "i").revision
+                  | ascii_downcase)] | unique as $revisions
+                | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
+              [.[][]?
+               | select(.user.type == "Bot")
+               | select((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
+               | select(has_current_revision($revision))
+              ] | sort_by(.id // 0) | last | .commit_id // ""')
 
             # Una deferral per il lease non è una classe C: il check è stato
             # eseguito, ma il reviewer non è stato ammesso per contesa lecita.

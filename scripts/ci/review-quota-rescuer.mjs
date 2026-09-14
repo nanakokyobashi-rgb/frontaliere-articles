@@ -11,18 +11,27 @@
  */
 
 import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   parseReviewQuotaDeferredMarker,
   runQuotaLease,
 } from './check-quota-backoff.mjs';
+import {
+  latestReviewClaims,
+  reviewWasPosted,
+} from './review-claim.mjs';
+import { normalizeReviewInputRevision, PR_BODY_JQ } from './review-test-policy.mjs';
 
 export const REVIEW_QUOTA_RETRY_MARKER = '<!-- REVIEW_QUOTA_RETRY:';
+export const REVIEW_TRANSIENT_RETRY_MARKER = '<!-- REVIEW_TRANSIENT_RETRY:';
 const REVIEW_QUOTA_RETRY_RE = /<!-- REVIEW_QUOTA_RETRY:\s*(\{[\s\S]*?\})\s*-->/;
+const REVIEW_TRANSIENT_RETRY_RE = /<!-- REVIEW_TRANSIENT_RETRY:\s*(\{[\s\S]*?\})\s*-->/;
 const PR_QUOTA_ROLES = new Set(['review', 'redflag', 'redcheck']);
 const REVIEW_QUOTA_RETRY_STATES = new Set(['requested', 'confirmed', 'failed']);
 const REVIEW_QUOTA_RETRY_ACTIVE_STATES = new Set(['requested', 'confirmed']);
+const REVIEW_TRANSIENT_RETRY_STATES = new Set(['requested', 'confirmed', 'failed']);
 const REVIEW_QUOTA_REQUEST_GRACE_SEC = positiveInt(
   process.env.REVIEW_QUOTA_RESCUER_REQUEST_GRACE_SEC,
   30 * 60,
@@ -37,6 +46,7 @@ const REPO = process.env.GH_REPO || process.env.GITHUB_REPOSITORY || '';
 const DRY_RUN = process.env.DRY_RUN === '1' || process.env.DRY_RUN === 'true';
 const MAX_PRS = positiveInt(process.env.REVIEW_QUOTA_RESCUER_MAX_PRS, 100);
 const MAX_RETRIES = positiveInt(process.env.REVIEW_QUOTA_RESCUER_MAX_RETRIES, 1);
+const MAX_TRANSIENT_RETRIES = positiveInt(process.env.REVIEW_TRANSIENT_RESCUER_MAX_RETRIES, 1);
 const TRUSTED_AUTOMATION_RE = /^(?:github-actions\[bot\]|frontaliere-automation(?:\[bot\])?|claude(?:\[bot\])?|nanakokyobashi-rgb|valerielinc-ops)$/i;
 
 function positiveInt(value, fallback) {
@@ -82,6 +92,145 @@ function laterRank(a, b) {
 function isTrustedAutomationComment(comment) {
   const login = String(comment?.user?.login || comment?.author?.login || '');
   return !login || TRUSTED_AUTOMATION_RE.test(login);
+}
+
+/** Parse one bounded retry for a transient review-gate failure. Pure. */
+export function parseReviewTransientRetryMarker(body) {
+  const match = String(body || '').match(REVIEW_TRANSIENT_RETRY_RE);
+  if (!match) return null;
+  let event;
+  try { event = JSON.parse(match[1]); } catch { return null; }
+  const sourceAttempt = Number(event?.sourceAttempt);
+  const retryCount = Number(event?.retryCount);
+  const issuedAt = Number(event?.issuedAt);
+  const reviewRevision = normalizeReviewInputRevision(event?.reviewRevision);
+  if (!event || event.version !== 1
+      || !/^[a-f0-9]{40}$/i.test(String(event.head || ''))
+      || !/^\d+$/.test(String(event.sourceRunId || ''))
+      || !String(event.claimToken || '')
+      || !String(event.runId || '')
+      || reviewRevision === null || !reviewRevision
+      || !Number.isSafeInteger(sourceAttempt) || sourceAttempt < 1
+      || !Number.isSafeInteger(retryCount) || retryCount < 1
+      || (event.issuedAt !== undefined && (!Number.isSafeInteger(issuedAt) || issuedAt < 1))
+      || !REVIEW_TRANSIENT_RETRY_STATES.has(String(event.state || ''))) return null;
+  return {
+    ...event,
+    head: String(event.head).toLowerCase(),
+    sourceRunId: String(event.sourceRunId),
+    claimToken: String(event.claimToken),
+    runId: String(event.runId),
+    reviewRevision,
+    // Markers emitted before the timestamp field was introduced remain
+    // parseable; latestReviewTransientRetry fills their timestamp from the
+    // trusted GitHub comment time. New markers always persist issuedAt.
+    issuedAt: Number.isSafeInteger(issuedAt) && issuedAt > 0 ? issuedAt : 0,
+    sourceAttempt,
+    retryCount,
+    state: String(event.state),
+  };
+}
+
+/** Durable marker body for the one-shot review recovery. Pure. */
+export function reviewTransientRetryBody({
+  head, reviewRevision, claimToken, sourceRunId, sourceAttempt, runId,
+  retryCount, state = 'confirmed', issuedAt = Math.floor(Date.now() / 1000),
+}) {
+  const event = {
+    version: 1,
+    head: String(head),
+    reviewRevision: String(reviewRevision),
+    claimToken: String(claimToken),
+    sourceRunId: String(sourceRunId),
+    sourceAttempt: Number(sourceAttempt),
+    runId: String(runId),
+    retryCount: Number(retryCount),
+    state: String(state),
+    issuedAt: Number(issuedAt),
+  };
+  return `${REVIEW_TRANSIENT_RETRY_MARKER} ${JSON.stringify(event)} -->\n`
+    + `_Review gate transient rescuer zero-Claude: rerun bounded ${event.retryCount} su `
+    + `PR HEAD ${event.head.slice(0, 12)} dopo claim ${event.claimToken}._`;
+}
+
+function retryEntryRank(entry) {
+  return [Number(entry?.commentAt) || 0, Number(entry?.commentId) || 0, Number(entry?.commentOrder) || 0];
+}
+
+function compareRanks(left, right) {
+  for (let index = 0; index < Math.max(left.length, right.length); index += 1) {
+    const a = Number(left[index]) || 0;
+    const b = Number(right[index]) || 0;
+    if (a !== b) return a - b;
+  }
+  return 0;
+}
+
+/** Latest transient retry marker for one PR HEAD/review-body revision. Pure. */
+export function latestReviewTransientRetry(
+  comments = [],
+  { head = '', reviewRevision = '' } = {},
+) {
+  const expectedRevision = normalizeReviewInputRevision(reviewRevision);
+  if (expectedRevision === null || !expectedRevision) return null;
+  let best = null;
+  for (const [index, comment] of (comments || []).entries()) {
+    if (!isTrustedAutomationComment(comment)) continue;
+    const event = parseReviewTransientRetryMarker(comment?.body);
+    if (!event || event.head !== String(head).toLowerCase()
+        || event.reviewRevision !== expectedRevision) continue;
+    const entry = {
+      event: event.issuedAt > 0 || !Number.isFinite(Date.parse(comment?.created_at ?? comment?.createdAt ?? ''))
+        ? event
+        : { ...event, issuedAt: Math.floor(Date.parse(comment?.created_at ?? comment?.createdAt) / 1000) },
+      commentAt: Date.parse(comment?.created_at ?? comment?.createdAt ?? '') / 1000,
+      commentId: Number(comment?.id) || index,
+      commentOrder: index,
+    };
+    if (!best || compareRanks(retryEntryRank(best), retryEntryRank(entry)) < 0) best = entry;
+  }
+  return best?.event || null;
+}
+
+/**
+ * Return the latest failed-transient review claim eligible for one bounded
+ * rerun. A current active/terminal claim, a different body revision, or a
+ * consumed retry closes admission. Pure and fail-closed.
+ */
+export function pendingReviewTransientClaim({
+  head = '', reviewRevision = '', comments = [],
+  nowSec = Math.floor(Date.now() / 1000), maxRetries = MAX_TRANSIENT_RETRIES,
+} = {}) {
+  const normalizedHead = String(head).toLowerCase();
+  const expectedRevision = normalizeReviewInputRevision(reviewRevision);
+  const retryLimit = positiveInt(maxRetries, MAX_TRANSIENT_RETRIES);
+  if (!/^[a-f0-9]{40}$/i.test(normalizedHead) || !expectedRevision) return null;
+
+  const claims = latestReviewClaims(comments).filter((claim) => (
+    claim.headSha === normalizedHead && claim.reviewRevision === expectedRevision
+  ));
+  if (!claims.length) return null;
+  if (claims.some((claim) => claim.state === 'completed' || claim.state === 'failed-terminal')) return null;
+  if (claims.some((claim) => claim.state === 'active' && Number(claim.expiresAt) > Number(nowSec))) return null;
+
+  const failed = claims
+    .filter((claim) => claim.state === 'failed-transient')
+    .sort((a, b) => compareRanks(retryEntryRank(a), retryEntryRank(b)));
+  const claim = failed.at(-1);
+  if (!claim) return null;
+
+  const retry = latestReviewTransientRetry(comments, {
+    head: normalizedHead,
+    reviewRevision: expectedRevision,
+  });
+  const retryCount = Number(retry?.retryCount) || 0;
+  // A requested marker at the limit is not a new retry to admit: it is a
+  // durable lease whose source run still needs reconciliation.  Do not let
+  // the retry cap strand it forever; only suppress new requests after the
+  // limit, while `reconcileTransientRetry` can still observe requested.
+  if (String(retry?.state || '') === 'confirmed'
+      || (String(retry?.state || '') !== 'requested' && retryCount >= retryLimit)) return null;
+  return { claim, retry, retryCount: retryCount + 1 };
 }
 
 /** Return the newest valid deferral marker, with its comment timestamp. Pure. */
@@ -314,8 +463,38 @@ function commentsForPr(number) {
   return apiPages(`repos/${REPO}/issues/${number}/comments?per_page=100`);
 }
 
+/** Hash exactly the API representation used by tests.yml, including its LF. */
+function currentReviewRevision(number) {
+  const body = gh([
+    'api', `repos/${REPO}/pulls/${number}`, '--jq', PR_BODY_JQ,
+  ], { allowFail: true });
+  if (!body) return '';
+  return `body:${createHash('sha256').update(body, 'utf8').digest('hex')}`;
+}
+
 export function sourceWorkflowForRole(role) {
   return SOURCE_WORKFLOW_BY_ROLE[String(role)] || '';
+}
+
+function sourceRunForTransientClaim(claim, head, { completedOnly = true } = {}) {
+  const sourceRunId = String(claim?.runId || '');
+  if (!/^\d+$/.test(sourceRunId)) return null;
+  const raw = gh([
+    'run', 'view', sourceRunId, '--repo', REPO,
+    '--json', 'databaseId,headSha,status,workflowName,headBranch,event,attempt,conclusion',
+  ], { allowFail: true });
+  const run = parseJson(raw, null);
+  if (!run
+      || (completedOnly && run.status !== 'completed')
+      || run.headSha !== String(head).toLowerCase()
+      || run.workflowName !== SOURCE_WORKFLOW_BY_ROLE.review) return null;
+  const attempt = Number(run.attempt);
+  if (!Number.isSafeInteger(attempt) || attempt < 1) return null;
+  return {
+    ...run,
+    databaseId: String(run.databaseId || sourceRunId),
+    attempt,
+  };
 }
 
 function sourceRunForCandidate(candidate, { completedOnly = true } = {}) {
@@ -351,12 +530,12 @@ export function sourceRunAlreadyHandled(candidate, run) {
   return autonomousAttempt;
 }
 
-function releaseLease(prNumber, role, token, runId) {
+function releaseLease(prNumber, role, token, runId, owner = 'review-quota-rescuer') {
   if (!token || DRY_RUN) return;
   runQuotaLease({
     action: 'release',
     role,
-    owner: 'review-quota-rescuer',
+    owner,
     targetType: 'pr',
     target: String(prNumber),
     token,
@@ -380,6 +559,119 @@ function postRetryComment(number, body) {
   }
 }
 
+function postTransientRetryComment(number, body) {
+  if (DRY_RUN) {
+    console.log(`[dry] PR #${number}: non pubblicherei il marker transient review.`);
+    return false;
+  }
+  try {
+    gh(['pr', 'comment', String(number), '--repo', REPO, '--body', body]);
+    return true;
+  } catch (error) {
+    console.log(`::warning::commento transient review fallito su #${number}: ${String(error?.message || error).slice(0, 180)}`);
+    return false;
+  }
+}
+
+function transientRetryFields(candidate, run, { state = 'confirmed' } = {}) {
+  const previousIssuedAt = Number(candidate.retry?.issuedAt) || 0;
+  const issuedAt = state === 'requested' && candidate.retry?.state !== 'requested'
+    ? Math.floor(Date.now() / 1000)
+    : previousIssuedAt || Math.floor(Date.now() / 1000);
+  return {
+    head: candidate.claim.headSha,
+    reviewRevision: candidate.claim.reviewRevision,
+    claimToken: candidate.claim.token,
+    sourceRunId: String(run?.databaseId || candidate.claim.runId),
+    sourceAttempt: Number(run?.attempt || 1),
+    runId: process.env.GITHUB_RUN_ID || 'review-transient-rescuer',
+    retryCount: candidate.retryCount,
+    state,
+    issuedAt,
+  };
+}
+
+function transientRetryAgeMs(candidate) {
+  const retry = candidate.retry;
+  if (!retry) return null;
+  const issuedAt = Number(retry.issuedAt) || 0;
+  return issuedAt > 0 ? Math.max(0, Date.now() - issuedAt * 1000) : null;
+}
+
+function terminalRetryStateForRun(run) {
+  if (String(run?.status || '').toLowerCase() !== 'completed') return null;
+  return String(run?.conclusion || '').toLowerCase() === 'success' ? 'confirmed' : 'failed';
+}
+
+/** Classify a newer rerun only after its terminal outcome is known. Pure. */
+export function retryStateForObservedAttempt({
+  currentAttempt,
+  requestedAttempt,
+  status,
+  conclusion,
+} = {}) {
+  const observed = Number(currentAttempt);
+  const requested = Number(requestedAttempt);
+  if (!Number.isSafeInteger(observed) || observed < 1
+      || !Number.isSafeInteger(requested) || requested < 1
+      || observed <= requested) return null;
+  return terminalRetryStateForRun({ status, conclusion });
+}
+
+/** Backward-compatible pure classifier for transient retry consumers. */
+export function transientRetryStateForRun(run) {
+  return terminalRetryStateForRun(run);
+}
+
+/** Reconcile a requested transient rerun without issuing a duplicate. */
+function reconcileTransientRetry(candidate, number) {
+  const requested = candidate.retry;
+  if (!requested || requested.state !== 'requested') return true;
+  const run = sourceRunForTransientClaim(candidate.claim, candidate.claim.headSha, { completedOnly: false });
+  if (!run) {
+    console.log(`PR #${number}: marker transient requested sulla HEAD ${candidate.claim.headSha.slice(0, 12)}, stato rerun non verificabile.`);
+    return true;
+  }
+  const state = retryStateForObservedAttempt({
+    currentAttempt: run.attempt,
+    requestedAttempt: requested.sourceAttempt,
+    status: run.status,
+    conclusion: run.conclusion,
+  });
+  if (run.attempt > requested.sourceAttempt) {
+    if (!state) {
+      console.log(`PR #${number}: transient rerun già osservato (attempt ${run.attempt}, stato ${run.status}); fence conservato finché termina.`);
+      return true;
+    }
+    const body = reviewTransientRetryBody({
+      ...transientRetryFields(candidate, run, { state }),
+      state,
+    });
+    if (postTransientRetryComment(number, body)) {
+      console.log(`PR #${number}: transient rerun riconciliato come ${state}, attempt ${run.attempt}.`);
+    }
+    return true;
+  }
+  if (run.status !== 'completed') {
+    console.log(`PR #${number}: transient rerun ancora in corso (attempt ${run.attempt}, stato ${run.status}).`);
+    return true;
+  }
+  const ageMs = transientRetryAgeMs(candidate);
+  const graceMs = REVIEW_QUOTA_REQUEST_GRACE_SEC * 1000;
+  if (ageMs === null || ageMs < graceMs) {
+    console.log(`PR #${number}: marker transient requested recente senza attempt nuovo — fence conservato.`);
+    return true;
+  }
+  const body = reviewTransientRetryBody({
+    ...transientRetryFields(candidate, run, { state: 'failed' }),
+    state: 'failed',
+  });
+  if (postTransientRetryComment(number, body)) {
+    console.log(`PR #${number}: transient rerun non osservato dopo la grace period; nessun duplicato richiesto.`);
+  }
+  return true;
+}
+
 export function collectReviewQuotaCandidates(prs, commentsByPr = new Map()) {
   return (prs || []).flatMap((pr) => {
     const head = String(pr?.head?.sha || '');
@@ -394,6 +686,124 @@ export function collectReviewQuotaCandidates(prs, commentsByPr = new Map()) {
       || String(a.deferred.role).localeCompare(String(b.deferred.role))
       || String(a.deferred.runId).localeCompare(String(b.deferred.runId));
   });
+}
+
+/**
+ * Find one failed-transient review claim eligible for a bounded rerun. The
+ * caller supplies the body revision from the trusted PR API; stale claims are
+ * deliberately ignored.
+ */
+export function collectReviewTransientCandidates(
+  prs,
+  commentsByPr = new Map(),
+  reviewRevisionByPr = new Map(),
+  options = {},
+) {
+  const maxRetries = positiveInt(options.maxRetries, MAX_TRANSIENT_RETRIES);
+  return (prs || []).flatMap((pr) => {
+    const number = Number(pr?.number);
+    const head = String(pr?.head?.sha || '').toLowerCase();
+    const reviewRevision = reviewRevisionByPr.get(number) || '';
+    const comments = commentsByPr.get(number) || [];
+    const candidate = pendingReviewTransientClaim({
+      head,
+      reviewRevision,
+      comments,
+      maxRetries,
+    });
+    return candidate ? [{ pr, head, reviewRevision, comments, ...candidate }] : [];
+  }).sort((a, b) => (
+    Number(a.claim.commentAt || a.claim.issuedAt) - Number(b.claim.commentAt || b.claim.issuedAt)
+      || Number(a.pr.number) - Number(b.pr.number)
+  ));
+}
+
+function rescueTransientReview(candidate) {
+  const number = Number(candidate.pr.number);
+  if (candidate.retry?.state === 'requested') {
+    if (DRY_RUN) {
+      console.log(`[dry] PR #${number}: riconciliazione transient review richiesta saltata.`);
+    } else {
+      reconcileTransientRetry(candidate, number);
+    }
+    return false;
+  }
+
+  const run = sourceRunForTransientClaim(candidate.claim, candidate.head);
+  if (!run) {
+    console.log(`PR #${number}: claim failed-transient sulla HEAD ${candidate.head.slice(0, 12)}, run tests non verificabile/completata.`);
+    return false;
+  }
+  // `run.attempt` alone is not a fence: GitHub keeps the same run ID across
+  // manual/automatic reruns, and an attempt 2+ can itself have produced the
+  // failed-transient claim we are rescuing.  The durable `requested` marker
+  // below is the only proof that this rescuer already asked for a rerun; the
+  // candidate collector has already excluded that marker from this branch.
+
+  let posted = false;
+  try {
+    posted = reviewWasPosted(REPO, number, candidate.head, candidate.reviewRevision);
+  } catch (error) {
+    console.log(`::warning::PR #${number}: Reviews API non verificabile per transient recovery — nessuna azione (${String(error?.message || error).slice(0, 180)}).`);
+    return false;
+  }
+  if (posted) {
+    console.log(`PR #${number}: claim failed-transient ma review corrente osservabile; nessun rerun.`);
+    return false;
+  }
+
+  const owner = 'review-transient-rescuer';
+  const lease = runQuotaLease({
+    action: 'reserve',
+    role: 'review',
+    owner,
+    targetType: 'pr',
+    target: String(number),
+    ttlSec: positiveInt(process.env.REVIEW_QUOTA_LEASE_TTL_SEC, 60 * 60),
+    scanMax: positiveInt(process.env.QUOTA_LEASE_SCAN_MAX, 20),
+    runId: process.env.GITHUB_RUN_ID || owner,
+    headSha: candidate.head,
+    reservationRunId: run.databaseId,
+    writeOutput: false,
+    dryRun: DRY_RUN,
+    emitReviewDeferredMarker: false,
+  });
+  if (!lease.allowed) {
+    console.log(`PR #${number}: transient recovery lease non disponibile (${lease.reason || 'unknown'}) — defer al prossimo tick.`);
+    return false;
+  }
+  if (DRY_RUN) {
+    console.log(`[dry] PR #${number}: rilancerei tests #${run.databaseId} per claim failed-transient sulla HEAD ${candidate.head.slice(0, 12)}.`);
+    return false;
+  }
+
+  const retryFields = transientRetryFields(candidate, run, { state: 'requested' });
+  const requestedBody = reviewTransientRetryBody(retryFields);
+  if (!postTransientRetryComment(number, requestedBody)) {
+    releaseLease(number, 'review', lease.token, retryFields.runId, owner);
+    console.log(`::warning::PR #${number}: marker transient non verificabile → rerun non richiesto.`);
+    return false;
+  }
+
+  try {
+    gh(['run', 'rerun', String(run.databaseId), '--repo', REPO]);
+  } catch (error) {
+    console.log(`::warning::rerun tests #${run.databaseId} fallito per PR #${number}: ${String(error?.message || error).slice(0, 180)}`);
+    const failedBody = reviewTransientRetryBody({ ...retryFields, state: 'failed' });
+    if (!postTransientRetryComment(number, failedBody)) {
+      console.log(`::warning::PR #${number}: marker transient failed non pubblicabile; requested resta fence anti-duplicato.`);
+    }
+    releaseLease(number, 'review', lease.token, retryFields.runId, owner);
+    return false;
+  }
+
+  // The rerun command only acknowledges the request; GitHub may queue, reject,
+  // or never start it after this process exits.  Keep `requested` durable until
+  // a later tick observes a strictly newer attempt in reconcileTransientRetry().
+  // Publishing `confirmed` here would make an unstarted rerun look consumed and
+  // permanently strand the failed-transient claim.
+  console.log(`PR #${number}: tests #${run.databaseId} richiesto una volta per claim failed-transient sulla HEAD ${candidate.head.slice(0, 12)}; attendo un attempt nuovo osservabile.`);
+  return true;
 }
 
 function retryFieldsForCandidate(candidate, run, { preserveRetry = false } = {}) {
@@ -455,7 +865,7 @@ function reconcileRequestedRetry(candidate, number) {
       console.log(`PR #${number}: marker requested legacy senza sourceAttempt — fence conservato finché il rerun non è osservabile.`);
       return true;
     }
-    const legacyState = run.attempt > 1 ? 'confirmed' : 'failed';
+    const legacyState = run.attempt > 1 && run.conclusion === 'success' ? 'confirmed' : 'failed';
     const legacyBody = reviewQuotaRetryBody({
       ...fields,
       sourceAttempt: run.attempt,
@@ -469,17 +879,28 @@ function reconcileRequestedRetry(candidate, number) {
     return true;
   }
 
-  if (run.attempt > requestedAttempt) {
-    if (run.status === 'completed') {
-      const confirmedBody = reviewQuotaRetryBody({ ...fields, sourceAttempt: run.attempt, state: 'confirmed' });
-      if (postRetryComment(number, confirmedBody)) {
-        console.log(`PR #${number}: marker requested riconciliato come confirmed, attempt ${run.attempt}.`);
-      } else {
-        console.log(`::warning::PR #${number}: rerun osservato (attempt ${run.attempt}), ma conferma marker non pubblicata.`);
-      }
+  const observedState = retryStateForObservedAttempt({
+    currentAttempt: run.attempt,
+    requestedAttempt,
+    status: run.status,
+    conclusion: run.conclusion,
+  });
+  if (observedState) {
+    const observedBody = reviewQuotaRetryBody({
+      ...fields,
+      sourceAttempt: run.attempt,
+      state: observedState,
+    });
+    if (postRetryComment(number, observedBody)) {
+      console.log(`PR #${number}: marker requested riconciliato come ${observedState}, attempt ${run.attempt}.`);
     } else {
-      console.log(`PR #${number}: rerun già osservato (attempt ${run.attempt}, stato ${run.status}); nessun duplicato.`);
+      console.log(`::warning::PR #${number}: rerun terminale osservato (attempt ${run.attempt}), ma marker ${observedState} non pubblicato.`);
     }
+    return true;
+  }
+
+  if (run.attempt > requestedAttempt) {
+    console.log(`PR #${number}: rerun già osservato ma ancora non terminale (attempt ${run.attempt}, stato ${run.status}); fence requested conservato.`);
     return true;
   }
 
@@ -512,7 +933,21 @@ function main() {
   const commentsByPr = new Map();
   for (const pr of prs) commentsByPr.set(Number(pr.number), commentsForPr(pr.number));
   const candidates = collectReviewQuotaCandidates(prs, commentsByPr);
-  console.log(`review-quota-rescuer: PR osservate=${prs.length}, candidate=${candidates.length}, max retry=${MAX_RETRIES}`);
+  const reviewRevisionByPr = new Map();
+  for (const pr of prs) {
+    const number = Number(pr.number);
+    const head = String(pr?.head?.sha || '').toLowerCase();
+    const comments = commentsByPr.get(number) || [];
+    const hasTransientClaim = latestReviewClaims(comments)
+      .some((claim) => claim.state === 'failed-transient' && claim.headSha === head);
+    if (hasTransientClaim) reviewRevisionByPr.set(number, currentReviewRevision(number));
+  }
+  const transientCandidates = collectReviewTransientCandidates(prs, commentsByPr, reviewRevisionByPr);
+  console.log(
+    `review-quota-rescuer: PR osservate=${prs.length}, quota-candidate=${candidates.length}, `
+    + `transient-candidate=${transientCandidates.length}, max retry=${MAX_RETRIES}, `
+    + `max transient retry=${MAX_TRANSIENT_RETRIES}`,
+  );
 
   let retried = 0;
   for (const candidate of candidates) {
@@ -596,16 +1031,17 @@ function main() {
     }
     if (!rerunRequested) continue;
 
-    const confirmedBody = reviewQuotaRetryBody({ ...retryFields, state: 'confirmed' });
-    if (!postRetryComment(number, confirmedBody)) {
-      // `requested` è già durevole e hasReviewQuotaRetry() lo considera attivo:
-      // il prossimo tick non può rilanciare lo stesso source run due volte.
-      console.log(`::warning::PR #${number}: conferma marker retry non pubblicata; il fence requested impedisce duplicati.`);
-    }
-    console.log(`PR #${number}: ${candidate.deferred.role} #${run.databaseId} rilanciato sulla HEAD ${candidate.head.slice(0, 12)}.`);
+    // `requested` resta il fence finché il prossimo tick non osserva un attempt
+    // nuovo e pubblica `confirmed` in `reconcileRequestedRetry`.
+    console.log(`PR #${number}: ${candidate.deferred.role} #${run.databaseId} richiesto sulla HEAD ${candidate.head.slice(0, 12)}; attendo un attempt nuovo osservabile.`);
     retried += 1;
   }
-  console.log(`review-quota-rescuer: retry richiesti=${retried}.`);
+  let transientRetried = 0;
+  for (const candidate of transientCandidates) {
+    if (transientRetried >= MAX_TRANSIENT_RETRIES) break;
+    if (rescueTransientReview(candidate)) transientRetried += 1;
+  }
+  console.log(`review-quota-rescuer: retry quota richiesti=${retried}, transient richiesti=${transientRetried}.`);
 }
 
 if (process.argv[1] && path.resolve(fileURLToPath(import.meta.url)) === path.resolve(process.argv[1])) {

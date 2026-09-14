@@ -1,6 +1,4 @@
 {
-  "https://www.rsi.ch/info/scienza-e-tecnologia/minuscoli-droni-vanno-dove-li-porta-il-suono--3988479.html": "minuscoli-droni-sonore-epfl",
-  "https://www.tio.ch/dal-mondo/cronaca/1944403/medicinali-indonesia-numero-vittime-terremoto": "terremoto-indonesia-vittime-68",
   "https://www.tio.ch/sport/calcio/1944400/bielefeld-lugano-stefano-russo-arminia-mercato": "lugano-calciomercato",
   "https://www.tio.ch/rubriche/ospite/1944468/neutralita-svizzera-lorenzo-quadri-nazionale": "svizzera-neutralita-si",
   "https://www.tio.ch/dal-mondo/politica/1944471/texas-big-bend-anti-migranti-muro-lavori": "sospensione-lavori-muro-anti-migranti-big-bend-texas",
@@ -2417,6 +2415,16 @@
   "https://www.rsi.ch/info/dialogo/%e2%80%9cla-benzina-oggi-costa-meno-che-negli-anni-%e2%80%9880%e2%80%9d--4072903.html": {
     "articleId": "benzina-oggi-costo-confronto",
     "ts": "2026-09-14T00:56:30.800Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/fbvvfeouuouu": {
+    "articleId": "prezzi-produzione-importazione-agosto-2026",
+    "ts": "2026-09-14T07:31:45.652Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4078958": {
+    "articleId": "votazione-scuola-qualita-berna-2026",
+    "ts": "2026-09-14T10:07:20.431Z",
     "keyForm": 2
   }
 }

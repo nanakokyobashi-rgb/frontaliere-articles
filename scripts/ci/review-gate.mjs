@@ -46,10 +46,17 @@
  * verdetto ancora vivo, non un 401.
  *
  * Uso:  node scripts/ci/review-gate.mjs
- * Env:  GH_TOKEN, GITHUB_REPOSITORY, PR_NUMBER, HEAD_SHA, RUN_URL (opzionale)
+ * Env:  GH_TOKEN, GITHUB_REPOSITORY, PR_NUMBER, HEAD_SHA, REVIEW_REVISION,
+ *       RUN_URL (opzionale)
  * Exit: 0 approvato · 1 non approvato (il check-run diventa rosso)
  */
-import { findTestOnlyApproval } from './review-test-policy.mjs';
+import {
+  findTestOnlyApproval,
+  normalizeReviewInputRevision,
+  reviewInputContextFromPullRequest,
+  reviewInputContextMatches,
+  reviewHasInputRevision,
+} from './review-test-policy.mjs';
 import { execFileSync } from 'node:child_process';
 import { appendFileSync, readFileSync } from 'node:fs';
 import { parseCodexFallbackEvidence, FALLBACK_STATUS } from './claude-codex-fallback.mjs';
@@ -67,6 +74,7 @@ const REPO = process.env.GITHUB_REPOSITORY || '';
 const PR = process.env.PR_NUMBER || '';
 const HEAD_SHA = process.env.HEAD_SHA || '';
 const RUN_URL = process.env.RUN_URL || '';
+const REVIEW_REVISION = normalizeReviewInputRevision(process.env.REVIEW_REVISION || '');
 const MARKER = '<!-- REVIEW_GATE_NO_LGTM -->';
 const CODEX_REVIEWER_LOGIN_RE = /^(?:github-actions\[bot\]|frontaliere-automation\[bot\])$/i;
 const CODEX_REVIEW_MARKER = '<!-- CODEX_FALLBACK_REVIEW -->';
@@ -92,6 +100,19 @@ function writeFailureKind() {
   }
 }
 
+/** Persist a successful deterministic fallback for the claim finalizer. */
+function writeGateOutput(name, value) {
+  const output = process.env.GITHUB_OUTPUT;
+  if (!output) return false;
+  try {
+    appendFileSync(output, `${name}=${value}\n`);
+    return true;
+  } catch (error) {
+    console.log(`review-gate: impossibile scrivere ${name} (${String(error).slice(0, 120)}).`);
+    return false;
+  }
+}
+
 function gh(args, { json = true } = {}) {
   const out = execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
   return json ? JSON.parse(out) : out;
@@ -102,10 +123,92 @@ function fingerprint(sha) {
   return fp == null ? null : createHash('sha256').update(fp).digest('hex');
 }
 
+/** Read the trusted PR HEAD and body revision as one review-input snapshot. */
+function currentReviewInputContext() {
+  let payload;
+  try {
+    payload = gh(['api', `repos/${REPO}/pulls/${PR}`]);
+  } catch (error) {
+    markTransientFailure();
+    throw new Error(`contesto PR illeggibile: ${String(error).slice(0, 160)}`);
+  }
+  const context = reviewInputContextFromPullRequest(payload);
+  if (!context) {
+    markTransientFailure();
+    throw new Error('contesto PR malformato: HEAD o body non verificabili');
+  }
+  return context;
+}
+
+/**
+ * The review-input snapshot is a TOCTOU fence, not only an input selector.
+ * Re-read HEAD and body immediately before any approving exit so a push or
+ * body edit during review cannot make an older verdict satisfy the check.
+ */
+function reviewInputContextStillCurrent() {
+  let current;
+  try {
+    current = currentReviewInputContext();
+  } catch (error) {
+    markTransientFailure();
+    console.error(`::error::review-gate: impossibile rileggere HEAD + hash body PR prima dell'approvazione (${String(error).slice(0, 160)}).`);
+    return false;
+  }
+  if (reviewInputContextMatches(current, {
+    headSha: HEAD_SHA,
+    reviewRevision: REVIEW_REVISION,
+  })) return true;
+  markTransientFailure();
+  console.error(
+    `::error::review-gate: HEAD o body PR sono cambiati durante la valutazione (attesa head=${HEAD_SHA} revision=${REVIEW_REVISION}, corrente head=${current?.headSha || '<unreadable>'} revision=${current?.reviewRevision || '<unreadable>'}); nessun verdetto può essere riusato.`,
+  );
+  return false;
+}
+
 function isCodexFallbackReview(review) {
   return review?.user?.type === 'Bot'
     && CODEX_REVIEWER_LOGIN_RE.test(review.user.login || '')
     && String(review.body || '').includes(CODEX_REVIEW_MARKER);
+}
+
+/**
+ * A drift fallback cannot erase a non-approving review merely because the old
+ * verdict is from another body revision (or predates revision markers). A
+ * review on a different HEAD is also still live: the current body marker does
+ * not prove that the review was re-evaluated after the code changed. If either
+ * the HEAD or the body revision is stale, require a fresh approving verdict
+ * instead of approving from the PR-body contract alone.
+ */
+function historicalNonApprovingBlocksDriftFallback() {
+  let reviews;
+  try {
+    reviews = gh(['api', `repos/${REPO}/pulls/${PR}/reviews`, '--paginate']) || [];
+  } catch (error) {
+    markTransientFailure();
+    console.log(`drift-fallback: impossibile verificare i finding storici (${String(error).slice(0, 160)}) — no fallback.`);
+    return true;
+  }
+  const blockers = reviews.flat().filter((review) => {
+    const reviewer = review?.user?.type === 'Bot'
+      && (REVIEWER_BOT_LOGIN_RE.test(review.user?.login || '') || isCodexFallbackReview(review));
+    const staleHead = String(review.commit_id || '') !== HEAD_SHA;
+    const staleRevision = !reviewHasInputRevision(review.body, REVIEW_REVISION);
+    const body = String(review.body || '');
+    return reviewer
+      && review.state !== 'PENDING'
+      // A body edit or a code change invalidates every older verdict,
+      // including an old LGTM.  The deterministic fallback may only replace
+      // the absence of a review, never a review that was issued for an older
+      // contribution.
+      && (staleRevision || staleHead);
+  });
+  if (blockers.length) {
+    console.log(
+      `drift-fallback: ${blockers.length} review non approvante storica senza verdetto per ${REVIEW_REVISION} — no fallback.`,
+    );
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -160,7 +263,12 @@ function lastBotReview() {
     console.log(`review-gate: impossibile leggere le review (${String(e).slice(0, 160)}).`);
     return undefined; // undefined = incertezza, diverso da null = nessuna review
   }
-  const automatic = findTestOnlyApproval(reviews, HEAD_SHA, { ghFn: gh, repo: REPO, pr: PR });
+  const automatic = findTestOnlyApproval(reviews, HEAD_SHA, {
+    ghFn: gh,
+    repo: REPO,
+    pr: PR,
+    reviewRevision: REVIEW_REVISION,
+  });
   if (automatic) return automatic;
   if (process.env.CODEX_FALLBACK_EVIDENCE_FILE) {
     // Evidence comes from this run, never from the review's untrusted prose.
@@ -169,6 +277,7 @@ function lastBotReview() {
     const codex = reviews.filter((r) => r.user?.type === 'Bot'
       && /^(?:github-actions\[bot\]|frontaliere-automation\[bot\])$/i.test(r.user?.login || '')
       && r.commit_id === HEAD_SHA
+      && reviewHasInputRevision(r.body, REVIEW_REVISION)
       && String(r.body || '').includes('<!-- CODEX_FALLBACK_REVIEW -->'));
     // Missing/stale Codex review must not fall through to the workflow drift exemption.
     if (!codex.length) throw new Error('Nessuna review Codex marcata sulla HEAD');
@@ -176,7 +285,8 @@ function lastBotReview() {
   }
   const bots = reviews.filter((r) =>
     (r.user?.type === 'Bot' && REVIEWER_BOT_LOGIN_RE.test(r.user?.login || ''))
-    || isCodexFallbackReview(r));
+    || isCodexFallbackReview(r)
+  ).filter((review) => reviewHasInputRevision(review.body, REVIEW_REVISION));
   return bots.length ? bots[bots.length - 1] : null;
 }
 
@@ -186,6 +296,7 @@ function lastBotReview() {
  * al posto del `## LGTM`. Un 🔴 che SI APPLICA alla head resta bloccante.
  */
 function driftFallbackApproves() {
+  if (historicalNonApprovingBlocksDriftFallback()) return false;
   let files;
   try {
     files = gh(['api', `repos/${REPO}/pulls/${PR}/files`, '--paginate', '--jq', '.[].filename'], {
@@ -270,6 +381,32 @@ async function main() {
     console.log('::error::review-gate: GITHUB_REPOSITORY, PR_NUMBER e HEAD_SHA sono obbligatori.');
     process.exit(1);
   }
+  if (!REVIEW_REVISION) {
+    markTransientFailure();
+    writeFailureKind();
+    console.error('::error::review-gate: REVIEW_REVISION mancante o non valida; nessun verdetto precedente può essere riusato.');
+    process.exit(1);
+  }
+  let currentContext;
+  try {
+    currentContext = currentReviewInputContext();
+  } catch (error) {
+    markTransientFailure();
+    writeFailureKind();
+    console.error(`::error::review-gate: impossibile verificare HEAD + REVIEW_REVISION del body PR (${String(error).slice(0, 160)}).`);
+    process.exit(1);
+  }
+  if (!reviewInputContextMatches(currentContext, {
+    headSha: HEAD_SHA,
+    reviewRevision: REVIEW_REVISION,
+  })) {
+    markTransientFailure();
+    writeFailureKind();
+    console.error(
+      `::error::review-gate: HEAD o REVIEW_REVISION non corrispondono alla PR corrente (attesa head=${HEAD_SHA} revision=${REVIEW_REVISION}, corrente head=${currentContext?.headSha || '<unreadable>'} revision=${currentContext?.reviewRevision || '<unreadable>'}); nessun verdetto precedente può essere riusato.`,
+    );
+    process.exit(1);
+  }
   const last = lastBotReview();
   const isCodexReview = isCodexFallbackReview(last);
   const hasFreshCodexEvidence = Boolean(process.env.CODEX_FALLBACK_EVIDENCE_FILE);
@@ -280,6 +417,10 @@ async function main() {
     const hasRedflag = REDFLAG_IMPORTANT_RE.test(body);
     let scope = null;
     if (applies && hasRedflag) {
+      if (!reviewInputContextStillCurrent()) {
+        writeFailureKind();
+        process.exit(1);
+      }
       try {
         scope = await classifyAndMintReview(body, {
           repo: REPO,
@@ -312,6 +453,10 @@ async function main() {
       || hasFreshCodexEvidence
       || codexReviewWasPreviouslyAccepted(last);
     if (approving && applies && codexCarryApproved) {
+      if (!reviewInputContextStillCurrent()) {
+        writeFailureKind();
+        process.exit(1);
+      }
       if (last.commit_id === HEAD_SHA) {
         console.log(`review-gate: review approvante sulla head ${HEAD_SHA}.`);
       } else {
@@ -341,19 +486,27 @@ async function main() {
       console.log(
         `review-gate: la review non si applica alla head ${HEAD_SHA} — tento il drift-fallback.`,
       );
-      if (driftFallbackApproves()) process.exit(0);
+      if (driftFallbackApproves()
+        && reviewInputContextStillCurrent()
+        && writeGateOutput('fallback_approved', 'true')) {
+        process.exit(0);
+      }
     }
   } else if (last === null) {
     console.log("review-gate: nessuna review del bot reviewer su questa PR.");
-    if (driftFallbackApproves()) process.exit(0);
+    if (driftFallbackApproves()
+      && reviewInputContextStillCurrent()
+      && writeGateOutput('fallback_approved', 'true')) {
+      process.exit(0);
+    }
   }
 
   commentOnce(
-    `${MARKER}\n⚠️ **Review gate bloccato** — sulla head \`${HEAD_SHA}\` non c'e' una review Claude con \`## LGTM\` e senza \`🔴 Important\`. Il merge resta bloccato finche' non ne arriva una.${RUN_URL ? `\n\nRun: ${RUN_URL}` : ''}`,
+    `${MARKER}\n⚠️ **Review gate bloccato** — sulla head \`${HEAD_SHA}\` non c'e' una review Claude approvante per la revisione \`${REVIEW_REVISION}\`, con \`## LGTM\` e senza \`🔴 Important\`. Il merge resta bloccato finche' non ne arriva una.${RUN_URL ? `\n\nRun: ${RUN_URL}` : ''}`,
   );
   writeFailureKind();
   console.log(
-    "::error::Nessuna review Claude approvante sulla head: manca '## LGTM' oppure e' presente un finding 🔴 Important.",
+    `::error::Nessuna review Claude approvante sulla head per ${REVIEW_REVISION}: manca '## LGTM', il marker di revisione oppure e' presente un finding 🔴 Important.`,
   );
   process.exit(1);
 }

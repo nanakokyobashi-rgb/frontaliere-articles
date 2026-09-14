@@ -14,7 +14,11 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { REVIEWER_BOT_LOGIN_RE, REVIEWER_BOT_LOGIN_JQ } from '../../scripts/ci/lib/constants.mjs';
+import {
+  REVIEWER_BOT_LOGIN_RE,
+  REVIEWER_BOT_LOGIN_JQ,
+  isReviewerBot,
+} from '../../scripts/ci/lib/constants.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8');
@@ -32,6 +36,12 @@ test('il predicato jq è derivato dalla regex, non riscritto', () => {
   assert.equal(REVIEWER_BOT_LOGIN_JQ, `test("${REVIEWER_BOT_LOGIN_RE.source}";"i")`);
 });
 
+test('il tipo Bot è parte del predicato condiviso', () => {
+  assert.equal(isReviewerBot({ type: 'Bot', login: 'claude[bot]' }), true);
+  assert.equal(isReviewerBot({ type: 'User', login: 'claude-human' }), false);
+  assert.equal(isReviewerBot({ type: 'User', login: 'frontaliere-automation-human' }), false);
+});
+
 test('i workflow che filtrano le review usano il predicato jq condiviso', () => {
   const workflows = [
     '.github/workflows/pr-redflag-fixer.yml',
@@ -45,6 +55,17 @@ test('i workflow che filtrano le review usano il predicato jq condiviso', () => 
       !/test\("claude";"i"\)/.test(src),
       `${wf} filtra ancora il solo login claude`,
     );
+  }
+  for (const [wf, expected] of [
+    ['.github/workflows/pr-redflag-fixer.yml', 1],
+    ['.github/workflows/stale-pr-rescuer.yml', 2],
+  ]) {
+    const src = read(wf);
+    const loginSelector = `select((.user.login // "") | ${REVIEWER_BOT_LOGIN_JQ})`;
+    const botTypeSelector = 'select(.user.type == "Bot")';
+    const count = (needle) => src.split(needle).length - 1;
+    assert.equal(count(loginSelector), expected, `${wf} deve avere ${expected} selettori login reviewer`);
+    assert.equal(count(botTypeSelector), expected, `${wf} deve accoppiare user.type == Bot a ogni selettore reviewer`);
   }
 });
 

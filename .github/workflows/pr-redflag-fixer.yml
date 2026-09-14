@@ -66,6 +66,7 @@ jobs:
     # `REVIEWER_BOT_LOGIN_RE`/`_JQ` in `scripts/ci/lib/constants.mjs`, e per i
     # due `--jq` di `tests.yml` (skip-guard `## LGTM` e base incrementale).
     if: |
+      github.event.review.user.type == 'Bot' &&
       (startsWith(github.event.review.user.login, 'claude') ||
        startsWith(github.event.review.user.login, 'frontaliere-automation')) &&
       contains(github.event.review.body, '🔴') &&
@@ -466,9 +467,8 @@ jobs:
       # Contesto della PR + della review, deterministico e BOUNDED, prima di
       # spendere un turno Claude — stesso pattern del gemello sul sito
       # (frontaliere-si-o-no#6679, "Collect PR + review context"). Il prompt
-      # sotto rifaceva da sé, a OGNI round, `gh pr view --json title,body,
-      # headRefName,files` (files già fetchato sopra, nello step guard, per
-      # il tier) e `gh api .../reviews`. Zero-Claude qui, un bundle, una Read.
+      # sotto rifaceva da sé, a OGNI round, le letture della PR e delle review.
+      # Zero-Claude qui, un bundle, una Read.
       - name: Collect PR + review context (zero-Claude)
         id: ctx
         if: steps.guard.outputs.proceed == 'true'
@@ -476,17 +476,73 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         run: |
           set -uo pipefail
           OUT="$RUNNER_TEMP/redflag"
           mkdir -p "$OUT"
 
-          gh pr view "$PR_NUMBER" --repo "$REPO" --json title,body,headRefName \
-            > "$OUT/pr.json" 2>/dev/null || echo '{}' > "$OUT/pr.json"
+          context_fail() {
+            echo "::error::$1"
+            echo "context_verified=false" >> "$GITHUB_OUTPUT"
+            exit 1
+          }
+
+          # `pull_request_review` può essere consegnato dopo un push. Il suo
+          # `head.sha` è quindi solo l'input dell'evento, non una prova che la
+          # PR remota sia ancora su quella HEAD. Conservare la risposta REST
+          # completa come snapshot strict lega metadata, HEAD, body del bundle
+          # e digest alla stessa lettura: nessuna seconda chiamata può accoppiare
+          # una revisione nuova con un body vecchio.
+          if ! gh api "repos/$REPO/pulls/$PR_NUMBER" \
+            > "$OUT/pr-response.json" 2>/dev/null; then
+            context_fail "Metadata della PR non leggibile: il redflag fixer resta fail-closed senza Claude."
+          fi
+          if ! jq -e '
+            type == "object"
+            and has("body")
+            and ((.title | type) == "string")
+            and ((.head | type) == "object")
+            and (if (.head.sha | type) == "string" then
+              (.head.sha | test("^[a-f0-9]{40}$"; "i"))
+            else false end)
+            and ((.head.ref | type) == "string")
+            and ((.body == null) or ((.body | type) == "string"))
+          ' "$OUT/pr-response.json" >/dev/null 2>&1; then
+            context_fail "Metadata della PR malformata: il redflag fixer resta fail-closed senza Claude."
+          fi
+          if ! jq '{title, body, headRefName: .head.ref}' "$OUT/pr-response.json" \
+            > "$OUT/pr.json" 2>/dev/null; then
+            context_fail "Metadata della PR non proiettabile: il redflag fixer resta fail-closed senza Claude."
+          fi
+          if ! current_head_sha=$(jq -r '.head.sha' "$OUT/pr-response.json"); then
+            context_fail "HEAD corrente della PR illeggibile: il redflag fixer resta fail-closed senza Claude."
+          fi
+          if ! printf '%s' "$current_head_sha" | grep -qE '^[a-f0-9]{40}$'; then
+            context_fail "HEAD corrente della PR malformata: il redflag fixer resta fail-closed senza Claude."
+          fi
+          if ! printf '%s\n%s\n' "$current_head_sha" "$HEAD_SHA" | awk 'NR==1 { current=tolower($0); next } { event=tolower($0); exit current != event }'; then
+            context_fail "La HEAD della PR è cambiata rispetto all'evento review: il redflag fixer resta fail-closed senza Claude."
+          fi
+          # Derive the body bytes from the same projected snapshot that enters
+          # the bundle. Hashing an independent API response would recreate the
+          # TOCTOU pair this collector is meant to close.
+          if ! jq -r '.body // ""' "$OUT/pr.json" > "$OUT/body.txt" 2>/dev/null; then
+            context_fail "Body della PR illeggibile: il redflag fixer resta fail-closed senza Claude."
+          fi
+          if ! body_sha=$(sha256sum "$OUT/body.txt" | awk '{print $1}'); then
+            context_fail "Hash del body PR non calcolabile: il redflag fixer resta fail-closed senza Claude."
+          fi
+          if ! printf '%s' "$body_sha" | grep -qE '^[a-f0-9]{64}$'; then
+            context_fail "Hash del body PR malformato: il redflag fixer resta fail-closed senza Claude."
+          fi
+          review_revision="body:$body_sha"
           # REST paginata, non `--json files` (tronca a 100 in silenzio sopra
           # quella soglia — stessa trappola nota sul sito).
-          gh api "repos/$REPO/pulls/$PR_NUMBER/files" --paginate --jq '.[].filename' \
-            > "$OUT/files.txt" 2>/dev/null || : > "$OUT/files.txt"
+          if ! gh api "repos/$REPO/pulls/$PR_NUMBER/files" --paginate --jq '.[].filename' \
+            > "$OUT/files.txt" 2>/dev/null; then
+            context_fail "Elenco file della PR illeggibile: il redflag fixer resta fail-closed senza Claude."
+          fi
           # STESSO set di login del `if:` job-level sopra (single source:
           # REVIEWER_BOT_LOGIN_JQ in scripts/ci/lib/constants.mjs, pinnato da
           # generator/tests/reviewer-bot-login.test.mjs). Con il solo `claude`
@@ -494,9 +550,32 @@ jobs:
           # VUOTA — o, peggio, l'ultima review `claude` PRECEDENTE, cioe' i 🔴
           # di un round gia' chiuso: l'agent non fallisce, fixa il round
           # sbagliato, e il marker di round e' gia' stato postato.
-          gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" \
-            --jq '[.[] | select((.user.login|test("^(claude|frontaliere-automation)";"i")) and (.body|contains("## Findings (")))] | last | .body // empty' \
-            > "$OUT/latest-review.md" 2>/dev/null || : > "$OUT/latest-review.md"
+          if ! reviews_json=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate --slurp 2>/dev/null); then
+            context_fail "Reviews API illeggibile: il redflag fixer resta fail-closed senza Claude."
+          fi
+          if ! printf '%s' "$reviews_json" | jq -e 'type == "array" and all(.[]; type == "array")' >/dev/null 2>&1; then
+            context_fail "Risposta Reviews API malformata: il redflag fixer resta fail-closed senza Claude."
+          fi
+          if ! printf '%s' "$reviews_json" | jq -r --arg revision "$review_revision" --arg head "$HEAD_SHA" '
+            def has_current_revision($expected):
+              [((.body // "") | split("\n")[] | rtrimstr("\r")
+                | select(test("^<!-- REVIEW_INPUT_REVISION: body:[0-9a-f]{64} -->$"; "i"))
+                | capture("^<!-- REVIEW_INPUT_REVISION: (?<revision>body:[0-9a-f]{64}) -->$"; "i").revision
+                | ascii_downcase)] | unique as $revisions
+              | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
+            [flatten[]
+             | select(.user.type == "Bot")
+             | select((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
+             | select((.commit_id // "" | ascii_downcase) == ($head | ascii_downcase))
+             | select(has_current_revision($revision))
+             | select((.body // "")|contains("## Findings ("))
+            ] | sort_by(.id // 0) | last | .body // empty' \
+            > "$OUT/latest-review.md" 2>/dev/null; then
+            context_fail "Selezione della review corrente non verificabile: il redflag fixer resta fail-closed senza Claude."
+          fi
+          if [ ! -s "$OUT/latest-review.md" ]; then
+            context_fail "Nessuna review Claude verificabile sulla HEAD e revisione body correnti: il redflag fixer resta fail-closed senza Claude."
+          fi
 
           {
             echo "# Redflag-fix bundle — PR #$PR_NUMBER"
@@ -510,11 +589,22 @@ jobs:
             echo '## Ultima review Claude (🔴 findings)'
             cat "$OUT/latest-review.md"
           } > "$OUT/redflag-bundle.md"
+          {
+            echo "review_revision=$review_revision"
+            echo "head_sha=$current_head_sha"
+            echo "context_verified=true"
+          } >> "$GITHUB_OUTPUT"
           echo "Prefetched redflag context in $OUT:"
           ls -la "$OUT"
 
+      - name: Fail closed when review context is unavailable
+        if: always() && steps.guard.outputs.proceed == 'true' && steps.ctx.outputs.context_verified != 'true'
+        run: |
+          echo "::error::Contesto PR/review non verificato: nessun turno Claude ammesso."
+          exit 1
+
       - name: Setup Headroom compression proxy
-        if: steps.guard.outputs.proceed == 'true'
+        if: steps.guard.outputs.proceed == 'true' && steps.ctx.outputs.context_verified == 'true'
         uses: ./.github/actions/setup-headroom
 
       # Il beacon resta telemetria: il lease condiviso sopra decide l'ammissione
@@ -522,7 +612,7 @@ jobs:
       # fallback Codex-primary senza introdurre un secondo veto.
       - name: Pre-flight — Claude quota telemetry (Codex primary)
         id: quota
-        if: steps.guard.outputs.proceed == 'true'
+        if: steps.guard.outputs.proceed == 'true' && steps.ctx.outputs.context_verified == 'true'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -531,9 +621,66 @@ jobs:
           CODEX_FALLBACK_MODE: '1'
         run: node scripts/ci/check-quota-backoff.mjs
 
+      # Il body e la HEAD possono cambiare fra la prefetch e l'avvio della
+      # action Claude. Rifare il read/hash nell'ultimo step prima di consumare
+      # quota Claude evita di applicare un finding a un contesto ormai stantio;
+      # il mismatch è un errore fail-closed, non un bundle vuoto.
+      - name: Revalidate PR + review context immediately before Claude
+        id: preclaude
+        if: steps.guard.outputs.proceed == 'true' && steps.ctx.outputs.context_verified == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          EVENT_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          EXPECTED_HEAD_SHA: ${{ steps.ctx.outputs.head_sha }}
+          EXPECTED_BODY_REVISION: ${{ steps.ctx.outputs.review_revision }}
+        run: |
+          set -euo pipefail
+          OUT="$RUNNER_TEMP/redflag"
+          context_fail() {
+            echo "::error::$1"
+            exit 1
+          }
+
+          pr_before_claude="$OUT/pr-before-claude.json"
+          if ! gh api "repos/$REPO/pulls/$PR_NUMBER" > "$pr_before_claude" 2>/dev/null; then
+            context_fail "Contesto PR illeggibile prima di Claude: il redflag fixer resta fail-closed."
+          fi
+          if ! jq -e 'type == "object" and (.head | type == "object") and (.head.sha | type == "string") and (.body == null or (.body | type == "string")) and has("body")' "$pr_before_claude" >/dev/null 2>&1; then
+            context_fail "Contesto PR malformato prima di Claude: il redflag fixer resta fail-closed."
+          fi
+          current_head_sha=$(jq -r '.head.sha' "$pr_before_claude")
+          if ! printf '%s' "$current_head_sha" | grep -qE '^[a-f0-9]{40}$'; then
+            context_fail "HEAD corrente malformata prima di Claude: il redflag fixer resta fail-closed."
+          fi
+          if ! printf '%s\n%s\n' "$current_head_sha" "$EXPECTED_HEAD_SHA" | awk 'NR==1 { current=tolower($0); next } { expected=tolower($0); exit current != expected }'; then
+            context_fail "La HEAD della PR è cambiata fra prefetch e Claude: nessun fix automatico viene avviato."
+          fi
+          if ! printf '%s\n%s\n' "$current_head_sha" "$EVENT_HEAD_SHA" | awk 'NR==1 { current=tolower($0); next } { event=tolower($0); exit current != event }'; then
+            context_fail "La HEAD della PR non coincide con l'evento review: nessun fix automatico viene avviato."
+          fi
+
+          body_file="$OUT/body-before-claude.txt"
+          if ! jq -r '(.body // "")' "$pr_before_claude" > "$body_file"; then
+            context_fail "Body della PR illeggibile prima di Claude: il redflag fixer resta fail-closed."
+          fi
+          if ! body_sha=$(sha256sum "$body_file" | awk '{print $1}'); then
+            context_fail "Hash del body PR non calcolabile prima di Claude: il redflag fixer resta fail-closed."
+          fi
+          if ! printf '%s' "$body_sha" | grep -qE '^[a-f0-9]{64}$'; then
+            context_fail "Hash del body PR malformato prima di Claude: il redflag fixer resta fail-closed."
+          fi
+          current_revision="body:$body_sha"
+          if [ "$current_revision" != "$EXPECTED_BODY_REVISION" ]; then
+            context_fail "Il body della PR è cambiato fra prefetch e Claude: nessun fix automatico viene avviato."
+          fi
+          echo "verified=true" >> "$GITHUB_OUTPUT"
+          echo "Contesto PR/review ancora identico alla prefetch (HEAD + body revision): Claude autorizzata."
+
       - name: Run Claude 🔴-fix
         id: claude_review
-        if: steps.guard.outputs.proceed == 'true'
+        if: steps.guard.outputs.proceed == 'true' && steps.ctx.outputs.context_verified == 'true' && steps.preclaude.outputs.verified == 'true'
         # Non far fallire il job sull'exit non-zero della action: lo `Classify
         # outcome` finale decide il colore in base al LAVORO reale (commit pushato),
         # non al subtype della CLI. Un error_max_turns DOPO un push valido non è un
@@ -612,7 +759,7 @@ jobs:
             - Una sola passata: applica, valida, committa, pusha, aggiorna body, STOP.
 
       - name: Claude usage metrics
-        if: always() && steps.guard.outputs.proceed == 'true' && steps.claude_review.outputs.claude_used == 'true'
+        if: always() && steps.guard.outputs.proceed == 'true' && steps.ctx.outputs.context_verified == 'true' && steps.claude_review.outputs.claude_used == 'true'
         run: node scripts/ci/claude-usage-summary.mjs "${{ steps.claude_review.outputs.execution_file }}" "pr-redflag-fixer"
 
       # Un 429 non e' un round: Claude non e' mai partito (0 turni, $0) e non ha
@@ -622,7 +769,7 @@ jobs:
       # automatica (#733), cioe' uno stato assorbente. Gemello lato PR di
       # `check-quota-backoff.mjs` + marker `rate-limited` del lato issue.
       - name: Refund round on Claude quota 429 (zero-Claude)
-        if: always() && steps.guard.outputs.proceed == 'true'
+        if: always() && steps.guard.outputs.proceed == 'true' && steps.ctx.outputs.context_verified == 'true'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -651,7 +798,7 @@ jobs:
       # step non hanno continue-on-error. Mai fa-passare un gate: il round non ha
       # gate, è telemetria di colore (cfr. #2288, disambigua intenzionale vs crash).
       - name: Classify outcome (work-done, not CLI exit)
-        if: always() && steps.guard.outputs.proceed == 'true'
+        if: always() && steps.guard.outputs.proceed == 'true' && steps.ctx.outputs.context_verified == 'true'
         env:
           HEAD_REF: ${{ github.event.pull_request.head.ref }}
           BASE_SHA: ${{ steps.base.outputs.sha }}
