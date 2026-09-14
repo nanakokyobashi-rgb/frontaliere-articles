@@ -56,10 +56,23 @@ function writeCorpusFile(file, content) {
   }
 }
 
-/** Bump (or insert) `updatedAt` on the ARTICLES entry so sitemap lastmod reflects the refresh. */
-export function bumpUpdatedAt(id, todayIso, repoRoot = DEFAULT_REPO_ROOT) {
-  const file = path.join(repoRoot, corpusPath('data/blog-articles-data.ts'));
-  let src = readFileSync(file, 'utf-8');
+function isAtOrAfter(stored, candidate) {
+  const storedMs = Date.parse(stored);
+  const candidateMs = Date.parse(candidate);
+  return !Number.isNaN(storedMs) && !Number.isNaN(candidateMs) && storedMs >= candidateMs;
+}
+
+/** Bump (or insert) `updatedAt` on an article registry entry so sitemap lastmod reflects the refresh. */
+export function bumpUpdatedAt(
+  id,
+  todayIso,
+  repoRoot = DEFAULT_REPO_ROOT,
+  registryFile = 'data/blog-articles-data.ts',
+  writeFile = writeCorpusFile,
+  readFile = readFileSync,
+) {
+  const file = path.join(repoRoot, corpusPath(registryFile));
+  let src = readFile(file, 'utf-8');
   const entryRe = new RegExp(`(\\n([ \\t]*)id: '${id}',[\\s\\S]*?)(\\n[ \\t]*\\},)`);
   const m = src.match(entryRe);
   if (!m) return false;
@@ -75,6 +88,8 @@ export function bumpUpdatedAt(id, todayIso, repoRoot = DEFAULT_REPO_ROOT) {
   if (dateMatch && Date.parse(`${todayIso}T00:00:00Z`) < Date.parse(dateMatch[1])) {
     return true;
   }
+  const currentMatch = block.match(/updatedAt: '([^']*)'/);
+  if (currentMatch && isAtOrAfter(currentMatch[1], todayIso)) return true;
   if (/updatedAt:/.test(block)) {
     block = block.replace(/updatedAt: '[^']*'/, `updatedAt: '${todayIso}'`);
   } else {
@@ -82,7 +97,7 @@ export function bumpUpdatedAt(id, todayIso, repoRoot = DEFAULT_REPO_ROOT) {
   }
   if (block === m[1]) return false;
   src = src.replace(m[1], block);
-  writeCorpusFile(file, src);
+  writeFile(file, src);
   return true;
 }
 
@@ -102,9 +117,11 @@ export function bumpDateModified(
   isoDateTime,
   repoRoot = DEFAULT_REPO_ROOT,
   seoFile = 'services/seo/seo-blog-5.ts',
+  writeFile = writeCorpusFile,
+  readFile = readFileSync,
 ) {
   const file = path.join(repoRoot, corpusPath(seoFile));
-  const src = readFileSync(file, 'utf-8');
+  const src = readFile(file, 'utf-8');
   const entries = findSeoEntryMatches(src, id);
   if (entries.length > 1) {
     throw new Error(
@@ -118,15 +135,17 @@ export function bumpDateModified(
   // cannot make us touch a sibling's date.
   const { index: startIdx, closeIdx } = entry;
   const block = src.slice(startIdx, closeIdx + 1);
-  const dmRe = /"dateModified":\s*"[^"]*"/;
+  const dmRe = /"dateModified":\s*"([^"]*)"/;
   if (!dmRe.test(block)) return false;
   // dateModified must never precede datePublished: on the publish day a fixed
   // midnight stamp falls before the publish time → an incoherent freshness
   // signal in the indexed NewsArticle JSON-LD. Clamp up to datePublished when earlier.
   const pub = block.match(/"datePublished":\s*"([^"]*)"/);
   const effective = pub && Date.parse(pub[1]) > Date.parse(isoDateTime) ? pub[1] : isoDateTime;
+  const current = block.match(dmRe);
+  if (current && isAtOrAfter(current[1], effective)) return true;
   const replaced = block.replace(dmRe, `"dateModified": "${effective}"`);
-  writeCorpusFile(file, src.slice(0, startIdx) + replaced + src.slice(closeIdx + 1));
+  writeFile(file, src.slice(0, startIdx) + replaced + src.slice(closeIdx + 1));
   return true;
 }
 
