@@ -300,6 +300,21 @@ test('un claim failed-transient riceve al massimo un rerun per HEAD e body revis
   );
 });
 
+test('un attempt 2+ senza marker requested resta eleggibile al recovery transient', () => {
+  const source = fs.readFileSync(path.join(ROOT, 'scripts/ci/review-quota-rescuer.mjs'), 'utf8');
+  const start = source.indexOf('function rescueTransientReview(');
+  const end = source.indexOf('\nfunction retryFieldsForCandidate', start);
+  assert.ok(start >= 0 && end > start);
+  const transient = source.slice(start, end);
+  assert.doesNotMatch(
+    transient,
+    /if \(run\.attempt > 1\)/,
+    'un attempt GitHub avanzato non dimostra che il rescuer abbia già richiesto il rerun',
+  );
+  assert.match(transient, /state: 'requested'/);
+  assert.match(transient, /postTransientRetryComment\(number, requestedBody\)/);
+});
+
 test('un marker transient requested al limite resta riconciliabile', () => {
   const failed = reviewClaim({ token: 'review-token-requested', runId: '77' });
   const requested = reviewTransientRetryBody({

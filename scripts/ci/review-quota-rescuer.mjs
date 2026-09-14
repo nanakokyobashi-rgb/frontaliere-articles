@@ -734,12 +734,11 @@ function rescueTransientReview(candidate) {
     console.log(`PR #${number}: claim failed-transient sulla HEAD ${candidate.head.slice(0, 12)}, run tests non verificabile/completata.`);
     return false;
   }
-  // A rerun performed by another actor is already a durable state transition;
-  // without our marker, do not spend a second rerun on the same claim.
-  if (run.attempt > 1) {
-    console.log(`PR #${number}: claim failed-transient già associato a attempt ${run.attempt}; nessun rerun duplicato.`);
-    return false;
-  }
+  // `run.attempt` alone is not a fence: GitHub keeps the same run ID across
+  // manual/automatic reruns, and an attempt 2+ can itself have produced the
+  // failed-transient claim we are rescuing.  The durable `requested` marker
+  // below is the only proof that this rescuer already asked for a rerun; the
+  // candidate collector has already excluded that marker from this branch.
 
   let posted = false;
   try {
