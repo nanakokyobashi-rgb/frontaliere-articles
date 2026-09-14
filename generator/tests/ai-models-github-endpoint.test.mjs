@@ -195,7 +195,7 @@ describe('GitHub Models request contract', () => {
     assert.deepEqual(getStats().exhaustedModels, []);
   });
 
-  test('una rejection transitoria del catalogo non resta in cache e non penalizza il modello', async () => {
+  test('un guasto transitorio del catalogo resta un fault negativo per la run e si riapre dopo resetState', async () => {
     let catalogCalls = 0;
     globalThis.fetch = async (url) => {
       if (String(url).endsWith('/catalog/models')) {
@@ -228,11 +228,47 @@ describe('GitHub Models request contract', () => {
       false,
     );
 
-    await callSingleModel([{ role: 'user', content: 'y' }], {
+    await assert.rejects(
+      () => callSingleModel([{ role: 'user', content: 'y' }], {
+        model: AI_MODELS.GPT4O,
+        maxRetriesPerModel: 1,
+      }),
+      (error) => error.githubModelsCatalogFault === true
+        && error.transportFault === true
+        && error.nonRetryable === false
+        && error.markExhausted === false,
+    );
+    assert.equal(catalogCalls, 1, 'lo stesso guasto non deve ripetere il GET per il modello successivo');
+
+    resetState();
+    await callSingleModel([{ role: 'user', content: 'z' }], {
       model: AI_MODELS.GPT4O,
       maxRetriesPerModel: 1,
     });
-    assert.equal(catalogCalls, 2);
+    assert.equal(catalogCalls, 2, 'resetState deve consentire il retry nel ciclo successivo');
+  });
+
+  test('i mapping GitHub non osservabili o ambigui sono persistenti nel verdetto della run', async () => {
+    for (const githubModelsCatalog of [
+      [],
+      [{ id: 'openai/gpt-4o' }, { id: 'azure/gpt-4o' }],
+    ]) {
+      await assert.rejects(
+        () => callLLM([{ role: 'user', content: 'x' }], {
+          chain: [AI_MODELS.GPT4O],
+          githubModelsCatalog,
+          maxRetriesPerModel: 1,
+          recordScore: false,
+        }),
+        (error) => {
+          assert.equal(error.exhaustionBreakdown.transient, 0);
+          assert.equal(error.exhaustionBreakdown.persistent, 1);
+          assert.match(error.message, /\[authoritative-cause=persistent\]/);
+          return true;
+        },
+      );
+      resetState();
+    }
   });
 
   test('un JSON del catalogo non valido è un guasto del provider, non un ban del modello', async () => {

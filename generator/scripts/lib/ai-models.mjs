@@ -672,7 +672,7 @@ const PROVIDER = Object.freeze({
 
 // ── Endpoints ────────────────────────────────────────────────
 const GH_MODELS_BASE      = GH_MODELS_URL;
-const GH_MODELS_CATALOG_URL = new URL('/catalog/models', GH_MODELS_BASE).toString();
+export const GH_MODELS_CATALOG_URL = new URL('/catalog/models', GH_MODELS_BASE).toString();
 const GH_MODELS_BROWNOUT_STATUS = 410;
 const GEMINI_API_BASE     = 'https://generativelanguage.googleapis.com/v1beta/models';
 const GROQ_API_BASE       = 'https://api.groq.com/openai/v1/chat/completions';
@@ -792,15 +792,18 @@ export function qualifyGitHubModelId(model, catalog) {
 
 /**
  * Load the observed GitHub Models catalog for production callers that do not
- * provide a test/cache snapshot. Cache resolved catalogs per PAT, and retain
- * only the intentional 410 brownout rejection. A transient/account-specific
- * failure must be retried on the next call and must not poison every model in
- * the process.
+ * provide a test/cache snapshot. Cache resolved catalogs per PAT, retain the
+ * intentional 410 brownout rejection, and retain a negative provider fault for
+ * the current run. The latter prevents every model from repeating the same
+ * outage request; resetState() opens the next process/run lifecycle again.
  */
 const _githubModelsCatalogPromises = new Map();
+const _githubModelsCatalogFaults = new Map();
 
 async function _getGitHubModelsCatalog(apiKey, timeout) {
   const cacheKey = String(apiKey || '');
+  const fault = _githubModelsCatalogFaults.get(cacheKey);
+  if (fault) throw fault;
   const cached = _githubModelsCatalogPromises.get(cacheKey);
   if (cached) return cached;
   const timeoutMs = Number.isFinite(timeout) && timeout > 0 ? timeout : 30000;
@@ -844,6 +847,7 @@ async function _getGitHubModelsCatalog(apiKey, timeout) {
     if (error?.nonRetryableReason !== 'github_models_catalog_brownout'
         && _githubModelsCatalogPromises.get(cacheKey) === tracked) {
       _githubModelsCatalogPromises.delete(cacheKey);
+      _githubModelsCatalogFaults.set(cacheKey, error);
     }
     throw error;
   });
@@ -2734,12 +2738,14 @@ const ENTRY_TAIL_SEPARATOR_RE = /[\s|]+$/;
 // The provider row is truncated for display. Non-authoritative persistent
 // causes must therefore be read from that same bounded row; only a machine
 // verdict (metadata or this marker) may justify reading the full reason.
-const PERSISTENT_EXHAUSTION_RE = /\b40[124]\b|tokens?_limit_reached|context.?length|maximum context|too many tokens|exceeds .*input cap|max output \d+ <|no API key|unknown.?model|no such model|does not exist|decommissioned|deprecated|no longer supported|no longer available|no longer offered|non-retryable|unusable content|payment|insufficient|credit/i;
+const PERSISTENT_EXHAUSTION_RE = /\b40[124]\b|github_models_mapping_(?:unavailable|ambiguous)|tokens?_limit_reached|context.?length|maximum context|too many tokens|exceeds .*input cap|max output \d+ <|no API key|unknown.?model|no such model|does not exist|decommissioned|deprecated|no longer supported|no longer available|no longer offered|non-retryable|unusable content|payment|insufficient|credit/i;
 const AUTHORITATIVE_CAUSE_MARKER_RE = /\[authoritative-cause=(resolver-flap|unreachable|persistent)\]/i;
 const AUTHORITATIVE_PERSISTENT_REASONS = new Set([
   'persistent',
   'github_models_retirement_brownout',
   'github_models_catalog_brownout',
+  'github_models_mapping_unavailable',
+  'github_models_mapping_ambiguous',
 ]);
 
 function isAuthoritativePersistentReason(reason) {
@@ -5427,6 +5433,7 @@ export function resetState() {
   _claudeCliUnlimitedWarned = false;
   _responseCache.clear();
   _githubModelsCatalogPromises.clear();
+  _githubModelsCatalogFaults.clear();
   _claudeCliBinaryMissing = false;
   _claudeCliConsecutiveTimeouts = 0;
   _claudeCliTimeoutStormDetected = false;
