@@ -78,6 +78,26 @@ test('un budget parziale non lascia buchi permanenti nella finestra', () => {
   assert.equal(seen.size, pool.length);
 });
 
+test('il cursore parent-close non arretra quando cambia il budget', () => {
+  const fullBudget = scanWindowOffset(39, {
+    scanMax: 5,
+    periodMs,
+    now: 0,
+    runNumber: 100,
+    advanceBy: 1,
+  });
+  const partialBudget = scanWindowOffset(39, {
+    scanMax: 5,
+    periodMs,
+    now: 0,
+    runNumber: 101,
+    advanceBy: 1,
+  });
+
+  assert.equal(fullBudget, 22);
+  assert.equal(partialBudget, (fullBudget + 1) % 39);
+});
+
 test('parent-dequeue è bounded e riserva il budget al parent-close', () => {
   const parentStage = DRAINER.slice(
     DRAINER.indexOf('// --- PARENT-CLOSE:'),
@@ -88,7 +108,8 @@ test('parent-dequeue è bounded e riserva il budget al parent-close', () => {
   assert.match(parentStage, /budget\.take\(`#\$\{p\.number\} \(parent-dequeue\)/);
   assert.match(parentStage, /parentCloseReserveMs/);
   assert.match(parentStage, /runNumber: process\.env\.GITHUB_RUN_NUMBER/);
-  assert.match(parentStage, /advanceBy: parentCloseAdvance/);
+  assert.match(parentStage, /advanceBy: 1/);
+  assert.doesNotMatch(parentStage, /parentCloseAdvance/);
   assert.match(parentStage, /stableKey: \(parent\) => parent\?\.number/);
   assert.doesNotMatch(parentStage, /for \(const p of parents\.filter/);
 });

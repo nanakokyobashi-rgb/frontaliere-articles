@@ -3769,19 +3769,18 @@ export function runDrain() {
     // 11-23 giorni. Irraggiungibili per costruzione, non per difficoltà.
     //
     // Il numero di run è il cursore durevole del workflow; il numero issue è
-    // l'ancora stabile dell'ordine. Con budget pieno il passo resta il cap;
-    // con budget parziale il passo unitario mantiene la copertura senza
-    // scavalcare la coda non esaminata.
-    const parentCloseAdvance = !budget.enabled
-      || budget.canAfford(PARENT_CLOSE_MAX_PER_RUN * ITEM_COST_MS)
-      ? PARENT_CLOSE_MAX_PER_RUN
-      : 1;
+    // l'ancora stabile dell'ordine. Il passo resta unitario a prescindere dal
+    // budget: se cambiasse da cap a 1 tra due run, la formula stateless
+    // `runNumber * passo` riavvolgerebbe l'offset e potrebbe saltare ciò che
+    // la finestra precedente non aveva esaminato. Il cap continua a limitare
+    // quante issue si leggono; il passo uniforme garantisce la copertura senza
+    // richiedere uno store esterno del cursore.
     const rotatedParents = rotateForScan(parents, {
       scanMax: PARENT_CLOSE_MAX_PER_RUN,
       runNumber: process.env.GITHUB_RUN_NUMBER,
       now: Date.now(),
       periodMs: SCAN_ROTATION_PERIOD_MS,
-      advanceBy: parentCloseAdvance,
+      advanceBy: 1,
       stableKey: (parent) => parent?.number,
     });
     let examined = 0;
