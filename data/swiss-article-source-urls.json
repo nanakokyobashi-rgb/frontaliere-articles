@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/sport/calcio/1944400/bielefeld-lugano-stefano-russo-arminia-mercato": "lugano-calciomercato",
   "https://www.tio.ch/rubriche/ospite/1944468/neutralita-svizzera-lorenzo-quadri-nazionale": "svizzera-neutralita-si",
   "https://www.tio.ch/dal-mondo/politica/1944471/texas-big-bend-anti-migranti-muro-lavori": "sospensione-lavori-muro-anti-migranti-big-bend-texas",
   "https://www.tio.ch/sport/calcio/1944472/infantino-fifa-lamour-critiche-kevin": "infantino-fifa-lamour-licenziato",
@@ -2425,6 +2424,11 @@
   "https://www.rsi.ch/s/4078958": {
     "articleId": "votazione-scuola-qualita-berna-2026",
     "ts": "2026-09-14T10:07:20.431Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1949987/transpareg-quadri-chiede-di-rinviare-l-entrata-in-vigore-rischio-informatico-enorme": {
+    "articleId": "transpa-reg-quadri-rinvio-1-ottobre",
+    "ts": "2026-09-14T11:57:33.166Z",
     "keyForm": 2
   }
 }
