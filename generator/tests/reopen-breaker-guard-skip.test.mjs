@@ -210,6 +210,7 @@ describe('WIRING: la decisione vera legge davvero il segnale', () => {
   });
 
   test('un fingerprint fallback/UNKNOWN non puo trasformarsi in uno skip', () => {
+    assert.match(testsWorkflow, /set_claim_fingerprint\(\)/);
     const guard = testsWorkflow.slice(
       testsWorkflow.indexOf('fpHead=$(node scripts/ci/pr-contribution-fingerprint.mjs'),
       testsWorkflow.indexOf('\n\n      - name: Determine review tier'),
@@ -217,6 +218,7 @@ describe('WIRING: la decisione vera legge davvero il segnale', () => {
     assert.match(guard, /grep -qE '\^\[a-f0-9\]\{64\}\$'/);
     assert.match(guard, /fpHead=UNKNOWN/);
     assert.match(guard, /fpLast=UNKNOWN/);
+    assert.match(guard, /review-claim-head-only:/);
     assert.doesNotMatch(guard, /NULL/);
   });
 });
