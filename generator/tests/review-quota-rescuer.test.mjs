@@ -24,6 +24,7 @@ import {
   sourceWorkflowForRole,
   roundRobinWindow,
   sourceRunAlreadyHandled,
+  retryStateForObservedAttempt,
   transientRetryStateForRun,
 } from '../../scripts/ci/review-quota-rescuer.mjs';
 import {
@@ -429,6 +430,13 @@ test('un transient attempt nuovo diventa confirmed o failed solo a completamento
   assert.equal(transientRetryStateForRun({ status: 'completed', conclusion: 'failure' }), 'failed');
   assert.equal(transientRetryStateForRun({ status: 'completed', conclusion: 'cancelled' }), 'failed');
   assert.equal(transientRetryStateForRun({ status: 'completed' }), 'failed');
+  const base = { currentAttempt: 3, requestedAttempt: 2 };
+  assert.equal(retryStateForObservedAttempt({ ...base, status: 'queued', conclusion: 'success' }), null);
+  assert.equal(retryStateForObservedAttempt({ ...base, status: 'in_progress', conclusion: 'success' }), null);
+  assert.equal(retryStateForObservedAttempt({ ...base, status: 'completed', conclusion: 'success' }), 'confirmed');
+  assert.equal(retryStateForObservedAttempt({ ...base, status: 'completed', conclusion: 'failure' }), 'failed');
+  assert.equal(retryStateForObservedAttempt({ ...base, status: 'completed', conclusion: 'cancelled' }), 'failed');
+  assert.equal(retryStateForObservedAttempt({ currentAttempt: 2, requestedAttempt: 2, status: 'completed', conclusion: 'success' }), null);
 });
 
 test('il wiring reagisce al completamento dei consumer e rilascia reservation esistenti', () => {

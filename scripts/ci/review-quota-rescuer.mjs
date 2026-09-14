@@ -598,10 +598,29 @@ function transientRetryAgeMs(candidate) {
   return issuedAt > 0 ? Math.max(0, Date.now() - issuedAt * 1000) : null;
 }
 
-/** Classify a newer transient rerun only after its terminal outcome is known. Pure. */
-export function transientRetryStateForRun(run) {
+function terminalRetryStateForRun(run) {
   if (String(run?.status || '').toLowerCase() !== 'completed') return null;
   return String(run?.conclusion || '').toLowerCase() === 'success' ? 'confirmed' : 'failed';
+}
+
+/** Classify a newer rerun only after its terminal outcome is known. Pure. */
+export function retryStateForObservedAttempt({
+  currentAttempt,
+  requestedAttempt,
+  status,
+  conclusion,
+} = {}) {
+  const observed = Number(currentAttempt);
+  const requested = Number(requestedAttempt);
+  if (!Number.isSafeInteger(observed) || observed < 1
+      || !Number.isSafeInteger(requested) || requested < 1
+      || observed <= requested) return null;
+  return terminalRetryStateForRun({ status, conclusion });
+}
+
+/** Backward-compatible pure classifier for transient retry consumers. */
+export function transientRetryStateForRun(run) {
+  return terminalRetryStateForRun(run);
 }
 
 /** Reconcile a requested transient rerun without issuing a duplicate. */
@@ -613,8 +632,13 @@ function reconcileTransientRetry(candidate, number) {
     console.log(`PR #${number}: marker transient requested sulla HEAD ${candidate.claim.headSha.slice(0, 12)}, stato rerun non verificabile.`);
     return true;
   }
+  const state = retryStateForObservedAttempt({
+    currentAttempt: run.attempt,
+    requestedAttempt: requested.sourceAttempt,
+    status: run.status,
+    conclusion: run.conclusion,
+  });
   if (run.attempt > requested.sourceAttempt) {
-    const state = transientRetryStateForRun(run);
     if (!state) {
       console.log(`PR #${number}: transient rerun già osservato (attempt ${run.attempt}, stato ${run.status}); fence conservato finché termina.`);
       return true;
@@ -842,7 +866,7 @@ function reconcileRequestedRetry(candidate, number) {
       console.log(`PR #${number}: marker requested legacy senza sourceAttempt — fence conservato finché il rerun non è osservabile.`);
       return true;
     }
-    const legacyState = run.attempt > 1 ? 'confirmed' : 'failed';
+    const legacyState = run.attempt > 1 && run.conclusion === 'success' ? 'confirmed' : 'failed';
     const legacyBody = reviewQuotaRetryBody({
       ...fields,
       sourceAttempt: run.attempt,
@@ -856,17 +880,28 @@ function reconcileRequestedRetry(candidate, number) {
     return true;
   }
 
-  if (run.attempt > requestedAttempt) {
-    if (run.status === 'completed') {
-      const confirmedBody = reviewQuotaRetryBody({ ...fields, sourceAttempt: run.attempt, state: 'confirmed' });
-      if (postRetryComment(number, confirmedBody)) {
-        console.log(`PR #${number}: marker requested riconciliato come confirmed, attempt ${run.attempt}.`);
-      } else {
-        console.log(`::warning::PR #${number}: rerun osservato (attempt ${run.attempt}), ma conferma marker non pubblicata.`);
-      }
+  const observedState = retryStateForObservedAttempt({
+    currentAttempt: run.attempt,
+    requestedAttempt,
+    status: run.status,
+    conclusion: run.conclusion,
+  });
+  if (observedState) {
+    const observedBody = reviewQuotaRetryBody({
+      ...fields,
+      sourceAttempt: run.attempt,
+      state: observedState,
+    });
+    if (postRetryComment(number, observedBody)) {
+      console.log(`PR #${number}: marker requested riconciliato come ${observedState}, attempt ${run.attempt}.`);
     } else {
-      console.log(`PR #${number}: rerun già osservato (attempt ${run.attempt}, stato ${run.status}); nessun duplicato.`);
+      console.log(`::warning::PR #${number}: rerun terminale osservato (attempt ${run.attempt}), ma marker ${observedState} non pubblicato.`);
     }
+    return true;
+  }
+
+  if (run.attempt > requestedAttempt) {
+    console.log(`PR #${number}: rerun già osservato ma ancora non terminale (attempt ${run.attempt}, stato ${run.status}); fence requested conservato.`);
     return true;
   }
 
