@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   recover:
-    if: github.event.changes.body != null
+    if: github.event.changes.body != null && github.event.pull_request.state == 'open'
     runs-on: ubuntu-latest
     steps:
       - name: Retry only a failed body preflight on the current head

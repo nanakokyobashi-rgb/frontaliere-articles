@@ -23,7 +23,7 @@ test('il preflight richiede Findings e confronta il fingerprint prima di increme
   assert.match(WORKFLOW, /## Findings \(/);
   assert.match(WORKFLOW, /redflag-findings-fingerprint\.mjs/);
   assert.match(WORKFLOW, /REDFLAG_FINDINGS_FINGERPRINT: \[a-f0-9\]\{64\}/);
-  assert.match(WORKFLOW, /\.body\|contains\("## Findings \("\)/);
+  assert.match(WORKFLOW, /contains\("## Findings \("\)/);
   assert.ok(
     WORKFLOW.indexOf('INCOMING_FP') < WORKFLOW.indexOf('NEXT=$((ROUND + 1))'),
     'il duplicato va scartato prima di consumare il marker del round',

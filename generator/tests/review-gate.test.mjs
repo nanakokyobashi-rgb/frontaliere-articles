@@ -22,7 +22,8 @@ import { codeContributionFingerprint } from '../../scripts/ci/auto-merge-eval.mj
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, mkdirSync, writeFileSync, chmodSync, rmSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, chmodSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -32,8 +33,11 @@ const SCRIPT = path.join(ROOT, 'scripts/ci/review-gate.mjs');
 
 const HEAD = 'a'.repeat(40);
 const OLD = 'b'.repeat(40);
+const OLD_BODY_REVISION = `body:${'e'.repeat(64)}`;
 
 const GOOD_BODY = '## Implementato\n- una cosa vera\n\n## Non implementato (ancora)\n- Nessuno';
+const bodyRevision = body => `body:${createHash('sha256').update(`${body}\n`).digest('hex')}`;
+const BODY_REVISION = bodyRevision(GOOD_BODY);
 
 /**
  * Esegue il gate vero con `gh` sostituito da uno stub che legge le sue
@@ -45,19 +49,35 @@ const GOOD_BODY = '## Implementato\n- una cosa vera\n\n## Non implementato (anco
  * cioe' un test verde su un gate che non vede piu' niente.
  */
 function runGate({ reviews = [], files = [], meta = null, compare = null,
-  checkRuns = [], checkRunPages = null, codexEvidence = null }) {
+  checkRuns = [], checkRunPages = null, codexEvidence = null,
+  reviewRevision: requestedReviewRevision = null, currentBody: requestedCurrentBody = null,
+  metaSequence = null }) {
+  const currentBody = requestedCurrentBody ?? meta?.body ?? GOOD_BODY;
+  const reviewRevision = requestedReviewRevision ?? bodyRevision(currentBody);
   const dir = mkdtempSync(path.join(tmpdir(), 'review-gate-'));
   try {
     const bin = path.join(dir, 'bin');
     mkdirSync(bin, { recursive: true });
     const calls = path.join(dir, 'calls');
+    const gateOutput = path.join(dir, 'gate-output');
     const fixReviews = path.join(dir, 'reviews.json');
     const fixFiles = path.join(dir, 'files.txt');
     const fixMeta = path.join(dir, 'meta.json');
     writeFileSync(calls, '');
+    writeFileSync(gateOutput, '');
     writeFileSync(fixReviews, JSON.stringify(reviews));
     writeFileSync(fixFiles, files.join('\n') + (files.length ? '\n' : ''));
-    writeFileSync(fixMeta, JSON.stringify(meta ?? {}));
+    writeFileSync(fixMeta, JSON.stringify({
+      head: { sha: HEAD },
+      ...(meta ?? {}),
+      body: meta?.body ?? currentBody,
+    }));
+    const fixMetaSequence = path.join(dir, 'meta-sequence.json');
+    const metaSequenceIndex = path.join(dir, 'meta-sequence-index');
+    if (metaSequence) {
+      writeFileSync(fixMetaSequence, JSON.stringify(metaSequence));
+      writeFileSync(metaSequenceIndex, '0');
+    }
 
     // `compare` mappa sha → payload della compare API. Un `null` significa
     // «endpoint non stubbato»: il gate deve cadere sul ramo conservativo.
@@ -103,10 +123,15 @@ case "$sub" in
       */git/trees/*)
         node -e 'const fs=require("fs"); const files=fs.readFileSync(process.argv[1],"utf8").split(/\\r?\\n/).filter(Boolean); files.push("generator/scripts/outside.mjs"); process.stdout.write(JSON.stringify({truncated:false,tree:files.map(path=>({type:"blob",path}))}))' ${JSON.stringify(fixFiles)} ;;
       */pulls/*)
-        if [ "$jq" = ".base.sha" ]; then
+        if [ -n ${metaSequence ? JSON.stringify(fixMetaSequence) : "''"} ] && [ -z "$jq" ]; then
+          index=$(cat ${JSON.stringify(metaSequenceIndex)} 2>/dev/null || echo 0)
+          node -e 'const fs=require("fs"); const payload=require(process.argv[1]); const i=Number(process.argv[2]); const item=payload[Math.min(i, payload.length - 1)] || {}; process.stdout.write(JSON.stringify(item)); fs.writeFileSync(process.argv[3], String(i + 1));' ${JSON.stringify(fixMetaSequence)} "$index" ${JSON.stringify(metaSequenceIndex)}
+        elif [ "$jq" = ".base.sha" ]; then
           node -e 'const m=require(process.argv[1]); process.stdout.write((m.base?.sha||"")+"\\n")' ${JSON.stringify(fixMeta)}
         elif [ "$jq" = ".head.sha" ]; then
           node -e 'const m=require(process.argv[1]); process.stdout.write((m.head?.sha||"")+"\\n")' ${JSON.stringify(fixMeta)}
+        elif [ "$jq" = '.body // ""' ] || [[ "$jq" == "if type != "* ]]; then
+          node -e 'const m=require(process.argv[1]); process.stdout.write(String(m.body||"")+"\\n")' ${JSON.stringify(fixMeta)}
         else
           cat ${JSON.stringify(fixMeta)}
         fi ;;
@@ -147,24 +172,78 @@ exit 0
         PR_NUMBER: '901',
         HEAD_SHA: HEAD,
         GH_TOKEN: 'stub',
+        REVIEW_REVISION: reviewRevision,
+        GITHUB_OUTPUT: gateOutput,
         CODEX_FALLBACK_EVIDENCE_FILE: codexEvidence === null ? '' : evidenceFile,
       },
     });
-    return { status: r.status, stdout: `${r.stdout}${r.stderr}` };
+    return { status: r.status, stdout: `${r.stdout}${r.stderr}`, gateOutput: readFileSync(gateOutput, 'utf8') };
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
 }
 
-const botReview = (commit, body) => ({
+const botReview = (commit, body, { reviewRevision = BODY_REVISION, ...overrides } = {}) => ({
   user: { type: 'Bot', login: 'claude[bot]' },
   commit_id: commit,
-  body,
+  body: `${body}${reviewRevision ? `\n<!-- REVIEW_INPUT_REVISION: ${reviewRevision} -->` : ''}`,
+  ...overrides,
 });
 
 test('LGTM sulla head senza 🔴 → il check e\' verde', () => {
   const r = runGate({ reviews: [botReview(HEAD, 'tutto bene\n\n## LGTM')] });
   assert.equal(r.status, 0, r.stdout);
+});
+
+test('un edit del body dopo la selezione del verdetto resta bloccante', () => {
+  const changedBody = `${GOOD_BODY}\n- modifica concorrente`;
+  const r = runGate({
+    reviews: [botReview(HEAD, 'tutto bene\n\n## LGTM')],
+    reviewRevision: BODY_REVISION,
+    metaSequence: [
+      { head: { sha: HEAD }, body: GOOD_BODY },
+      { head: { sha: HEAD }, body: changedBody },
+    ],
+  });
+  assert.equal(r.status, 1, r.stdout);
+  assert.match(r.stdout, /HEAD o body PR sono cambiati durante la valutazione/i, r.stdout);
+});
+
+test('un push dopo la selezione del verdetto resta bloccante', () => {
+  const r = runGate({
+    reviews: [botReview(HEAD, 'tutto bene\n\n## LGTM')],
+    reviewRevision: BODY_REVISION,
+    metaSequence: [
+      { head: { sha: HEAD }, body: GOOD_BODY },
+      { head: { sha: OLD }, body: GOOD_BODY },
+    ],
+  });
+  assert.equal(r.status, 1, r.stdout);
+  assert.match(r.stdout, /HEAD o body PR sono cambiati durante la valutazione/i, r.stdout);
+});
+
+test('un LGTM della revisione body precedente non viene riusato sulla revisione corrente', () => {
+  const stale = runGate({
+    reviews: [botReview(HEAD, 'tutto bene\n\n## LGTM', { reviewRevision: OLD_BODY_REVISION })],
+    files: ['generator/scripts/create-article.mjs'],
+  });
+  assert.equal(stale.status, 1, stale.stdout);
+
+  const fresh = runGate({
+    reviews: [botReview(HEAD, 'tutto bene\n\n## LGTM', { reviewRevision: BODY_REVISION })],
+    files: ['generator/scripts/create-article.mjs'],
+  });
+  assert.equal(fresh.status, 0, fresh.stdout);
+});
+
+test('un body cambiato invalida una review che porta ancora l\'hash precedente', () => {
+  const r = runGate({
+    reviews: [botReview(HEAD, 'tutto bene\n\n## LGTM')],
+    currentBody: `${GOOD_BODY}\n- altra cosa`,
+    reviewRevision: BODY_REVISION,
+  });
+  assert.equal(r.status, 1, r.stdout);
+  assert.match(r.stdout, /non corrispondono alla PR corrente/i, r.stdout);
 });
 
 test('LGTM accanto a un 🔴 Important → il check e\' ROSSO', () => {
@@ -230,6 +309,7 @@ test('drift-fallback: PR sul workflow che ospita la review, autore fidato, body 
   });
   assert.equal(r.status, 0, `Il drift-fallback non ha approvato.\n${r.stdout}`);
   assert.match(r.stdout, /drift-fallback: APPROVATO/, r.stdout);
+  assert.match(r.gateOutput, /^fallback_approved=true$/m, r.gateOutput);
 });
 
 test('drift-fallback: body non conforme → resta ROSSO', () => {
@@ -277,18 +357,60 @@ const DRIFT_META = {
   body: GOOD_BODY,
 };
 
-test('drift-fallback: 🔴 stantio (SHA vecchio, contributo cambiato) + tests.yml → verde', () => {
-  // #970: Claude posta 🔴 sulla prima HEAD, i commit dopo sistemano e toccano
-  // tests.yml, claude-code-action skippa 401 senza postare. Senza questo ramo
-  // il 🔴 vecchio tiene il check rosso per sempre.
+test('drift-fallback: 🔴 stantio senza revisione corrente + tests.yml → ROSSO', () => {
+  // Anche se il contributo è cambiato, un finding precedente non può essere
+  // cancellato dal solo fallback: serve un verdetto per il body revisionato.
   const r = runGate({
-    reviews: [botReview(OLD, '🔴 Important: collect jq ancora claude-only\n\n## LGTM')],
+    reviews: [botReview(OLD, '🔴 Important: collect jq ancora claude-only\n\n## LGTM', { reviewRevision: OLD_BODY_REVISION })],
     files: ['.github/workflows/tests.yml', 'scripts/ci/review-gate.mjs'],
     meta: DRIFT_META,
     compare: COMPARE_CHANGED,
   });
-  assert.equal(r.status, 0, `Un 🔴 che non si applica piu' alla head non deve bloccare il fallback.\n${r.stdout}`);
-  assert.match(r.stdout, /drift-fallback: APPROVATO/, r.stdout);
+  assert.equal(r.status, 1, `Un 🔴 storico non può essere scavalcato senza un verdetto sulla revisione corrente.\n${r.stdout}`);
+  assert.doesNotMatch(r.stdout, /drift-fallback: APPROVATO/, r.stdout);
+});
+
+test('drift-fallback: 🔴 con revisione corrente ma SHA vecchia → ROSSO', () => {
+  // Un marker body aggiornato non dimostra che il finding sia stato
+  // rivalutato dopo una modifica del codice. Senza una review sulla HEAD,
+  // il fallback non può far sparire un Important storico.
+  const r = runGate({
+    reviews: [botReview(OLD, '🔴 Important: il controllo non copre il caso X')],
+    files: ['.github/workflows/tests.yml'],
+    meta: DRIFT_META,
+    compare: COMPARE_CHANGED,
+  });
+  assert.equal(r.status, 1, `Un 🔴 sulla SHA vecchia deve restare bloccante anche col marker body corrente.\n${r.stdout}`);
+  assert.doesNotMatch(r.stdout, /drift-fallback: APPROVATO/, r.stdout);
+});
+
+test('drift-fallback: 🔴 sulla SHA corrente ma revisione body vecchia → ROSSO', () => {
+  // `lastBotReview()` esclude le review legate a un body precedente. Il
+  // fallback deve quindi conservare il finding anche quando la SHA coincide,
+  // altrimenti il vecchio Important sparisce proprio nel passaggio di body
+  // edit senza modifica del codice.
+  const r = runGate({
+    reviews: [botReview(HEAD, '🔴 Important: il controllo non copre il caso X', { reviewRevision: OLD_BODY_REVISION })],
+    files: ['.github/workflows/tests.yml'],
+    meta: DRIFT_META,
+    compare: COMPARE_CHANGED,
+  });
+  assert.equal(r.status, 1, `Un 🔴 sulla SHA corrente ma su body vecchio deve restare bloccante.\n${r.stdout}`);
+  assert.doesNotMatch(r.stdout, /drift-fallback: APPROVATO/, r.stdout);
+});
+
+test('drift-fallback: review storica senza LGTM → ROSSO', () => {
+  // `lastBotReview()` scarta le review legate al body precedente. Una review
+  // storica non approvante senza 🔴 Important non deve però diventare un
+  // insieme vuoto che il fallback può scavalcare.
+  const r = runGate({
+    reviews: [botReview(OLD, '❓ q: verificare il percorso di recovery')],
+    files: ['.github/workflows/tests.yml'],
+    meta: DRIFT_META,
+    compare: COMPARE_CHANGED,
+  });
+  assert.equal(r.status, 1, `Una review storica senza LGTM deve restare bloccante.\n${r.stdout}`);
+  assert.doesNotMatch(r.stdout, /drift-fallback: APPROVATO/, r.stdout);
 });
 
 test('drift-fallback: 🔴 su SHA vecchio ma contributo INVARIATO + tests.yml → ROSSO', () => {
@@ -304,17 +426,18 @@ test('drift-fallback: 🔴 su SHA vecchio ma contributo INVARIATO + tests.yml �
   assert.doesNotMatch(r.stdout, /drift-fallback: APPROVATO/, r.stdout);
 });
 
-test('drift-fallback: LGTM stantia (contributo cambiato) + tests.yml → verde', () => {
-  // Stesso 401: Claude non puo' ri-revieware il delta. Senza fallback la LGTM
-  // vecchia non carry-forwarda e il check resta rosso.
+test('drift-fallback: LGTM stantia (contributo cambiato) + tests.yml → ROSSO', () => {
+  // Stesso 401: Claude non può ri-revieware il delta. Una LGTM sulla HEAD
+  // vecchia non è però una prova sul contributo corrente: il fallback non deve
+  // cancellare nemmeno un verdetto positivo stantio.
   const r = runGate({
     reviews: [botReview(OLD, '## LGTM')],
     files: ['.github/workflows/tests.yml'],
     meta: DRIFT_META,
     compare: COMPARE_CHANGED,
   });
-  assert.equal(r.status, 0, `Una LGTM che non si applica piu' deve cedere al fallback, non al rosso.\n${r.stdout}`);
-  assert.match(r.stdout, /drift-fallback: APPROVATO/, r.stdout);
+  assert.equal(r.status, 1, `Una LGTM sulla HEAD vecchia non deve autorizzare il fallback.\n${r.stdout}`);
+  assert.doesNotMatch(r.stdout, /drift-fallback: APPROVATO/, r.stdout);
 });
 
 test('carry-forward: LGTM su un commit precedente con contributo invariato → verde', () => {
@@ -398,7 +521,7 @@ const codexEvidence = formatCodexFallbackEvidence({ trigger: 'runtime-429', stat
 const codexReview = (overrides = {}) => ({
   user: { type: 'Bot', login: 'github-actions[bot]' },
   commit_id: HEAD,
-  body: '<!-- CODEX_FALLBACK_REVIEW -->\n## LGTM',
+  body: `<!-- CODEX_FALLBACK_REVIEW -->\n## LGTM\n<!-- REVIEW_INPUT_REVISION: ${BODY_REVISION} -->`,
   ...overrides,
 });
 

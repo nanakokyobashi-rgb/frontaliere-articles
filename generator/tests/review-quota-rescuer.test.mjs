@@ -12,17 +12,64 @@ import {
   hasReviewQuotaRetry,
   latestReviewQuotaDeferred,
   latestReviewQuotaRetry,
+  latestReviewTransientRetry,
   parseReviewQuotaRetryMarker,
+  parseReviewTransientRetryMarker,
   reviewQuotaRetryBody,
+  reviewTransientRetryBody,
   reviewQuotaDeferredCandidates,
   collectReviewQuotaCandidates,
+  collectReviewTransientCandidates,
+  pendingReviewTransientClaim,
   sourceWorkflowForRole,
   roundRobinWindow,
   sourceRunAlreadyHandled,
+  retryStateForObservedAttempt,
+  transientRetryStateForRun,
 } from '../../scripts/ci/review-quota-rescuer.mjs';
+import {
+  reviewClaimDedupeKey,
+  reviewClaimKey,
+} from '../../scripts/ci/review-claim.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const HEAD = 'a'.repeat(40);
+const BODY_REVISION = `body:${'b'.repeat(64)}`;
+const FINGERPRINT = 'c'.repeat(64);
+
+function reviewClaim(overrides = {}) {
+  const context = {
+    prNumber: '99',
+    headSha: HEAD,
+    eventKey: 'run:77',
+    contributionFingerprint: FINGERPRINT,
+    reviewRevision: BODY_REVISION,
+  };
+  const event = {
+    version: 1,
+    token: 'review-token-77',
+    ...context,
+    state: 'failed-transient',
+    issuedAt: 100,
+    expiresAt: 3_700,
+    runId: '77',
+    ...overrides,
+  };
+  return {
+    ...event,
+    key: reviewClaimKey(event),
+    dedupeKey: reviewClaimDedupeKey(event),
+  };
+}
+
+function reviewClaimComment(event, id = 1) {
+  return {
+    id,
+    created_at: `1970-01-01T00:0${id}:00Z`,
+    user: { login: 'github-actions[bot]' },
+    body: `<!-- PR_REVIEW_CLAIM: ${JSON.stringify(event)} -->`,
+  };
+}
 
 test('la scansione PR è round-robin quando il pool supera il cap', () => {
   const prs = Array.from({ length: 250 }, (_, index) => index + 1);
@@ -219,6 +266,194 @@ test('il rescuer usa la run sorgente corretta per ogni consumer PR', () => {
   assert.equal(sourceWorkflowForRole('issue-fix'), '');
 });
 
+test('un claim failed-transient riceve al massimo un rerun per HEAD e body revision', () => {
+  const failed = reviewClaim({ token: 'review-token-77', runId: '77' });
+  const comments = [reviewClaimComment(failed, 1)];
+  const pr = { number: 99, head: { sha: HEAD }, draft: false };
+  const revisions = new Map([[99, BODY_REVISION]]);
+  const commentMap = new Map([[99, comments]]);
+
+  const [candidate] = collectReviewTransientCandidates([pr], commentMap, revisions, { maxRetries: 1 });
+  assert.equal(candidate.claim.token, 'review-token-77');
+  assert.equal(candidate.retryCount, 1);
+
+  const marker = reviewTransientRetryBody({
+    head: HEAD,
+    reviewRevision: BODY_REVISION,
+    claimToken: failed.token,
+    sourceRunId: failed.runId,
+    sourceAttempt: 1,
+    runId: 'rescuer-1',
+    retryCount: 1,
+    state: 'confirmed',
+  });
+  assert.equal(parseReviewTransientRetryMarker(marker).retryCount, 1);
+  assert.equal(
+    collectReviewTransientCandidates(
+      [pr],
+      new Map([[99, [...comments, { id: 2, created_at: '1970-01-01T00:02:00Z', body: marker }]]]),
+      revisions,
+      { maxRetries: 1 },
+    ).length,
+    0,
+    'un marker confirmed chiude la finestra one-shot anche se un nuovo claim transient appare',
+  );
+});
+
+test('un attempt 2+ senza marker requested resta eleggibile al recovery transient', () => {
+  const source = fs.readFileSync(path.join(ROOT, 'scripts/ci/review-quota-rescuer.mjs'), 'utf8');
+  const start = source.indexOf('function rescueTransientReview(');
+  const end = source.indexOf('\nfunction retryFieldsForCandidate', start);
+  assert.ok(start >= 0 && end > start);
+  const transient = source.slice(start, end);
+  assert.doesNotMatch(
+    transient,
+    /if \(run\.attempt > 1\)/,
+    'un attempt GitHub avanzato non dimostra che il rescuer abbia già richiesto il rerun',
+  );
+  assert.match(transient, /state: 'requested'/);
+  assert.match(transient, /postTransientRetryComment\(number, requestedBody\)/);
+});
+
+test('un marker transient requested al limite resta riconciliabile', () => {
+  const failed = reviewClaim({ token: 'review-token-requested', runId: '77' });
+  const requested = reviewTransientRetryBody({
+    head: HEAD,
+    reviewRevision: BODY_REVISION,
+    claimToken: failed.token,
+    sourceRunId: failed.runId,
+    sourceAttempt: 1,
+    runId: 'rescuer-requested',
+    retryCount: 1,
+    issuedAt: 150,
+    state: 'requested',
+  });
+  const candidate = pendingReviewTransientClaim({
+    head: HEAD,
+    reviewRevision: BODY_REVISION,
+    comments: [
+      reviewClaimComment(failed, 1),
+      { id: 2, created_at: '1970-01-01T00:03:00Z', body: requested },
+    ],
+    nowSec: 200,
+    maxRetries: 1,
+  });
+  assert.equal(candidate?.retry?.state, 'requested');
+  assert.equal(candidate?.retry?.retryCount, 1);
+});
+
+test('il marker transient persiste il timestamp della richiesta', () => {
+  const marker = reviewTransientRetryBody({
+    head: HEAD,
+    reviewRevision: BODY_REVISION,
+    claimToken: 'review-token-time',
+    sourceRunId: '77',
+    sourceAttempt: 1,
+    runId: 'rescuer-time',
+    retryCount: 1,
+    issuedAt: 1234,
+    state: 'requested',
+  });
+  assert.equal(parseReviewTransientRetryMarker(marker).issuedAt, 1234);
+
+  const legacy = reviewTransientRetryBody({
+    head: HEAD,
+    reviewRevision: BODY_REVISION,
+    claimToken: 'review-token-legacy',
+    sourceRunId: '77',
+    sourceAttempt: 1,
+    runId: 'rescuer-legacy',
+    retryCount: 1,
+    issuedAt: 1234,
+  }).replace(',"issuedAt":1234', '');
+  const recovered = latestReviewTransientRetry([
+    { id: 7, created_at: '1970-01-01T00:20:34Z', body: legacy },
+  ], { head: HEAD, reviewRevision: BODY_REVISION });
+  assert.equal(recovered.issuedAt, 1234);
+});
+
+test('il transient rescuer ignora claim stantii, attivi o terminali', () => {
+  const staleHead = reviewClaim({
+    token: 'stale-head',
+    headSha: 'd'.repeat(40),
+  });
+  const staleRevision = reviewClaim({ token: 'stale-revision', reviewRevision: `body:${'e'.repeat(64)}` });
+  const active = reviewClaim({ token: 'active', state: 'active', expiresAt: 9_999 });
+  const terminal = reviewClaim({ token: 'terminal', state: 'completed' });
+
+  assert.equal(
+    pendingReviewTransientClaim({
+      head: HEAD,
+      reviewRevision: BODY_REVISION,
+      comments: [reviewClaimComment(staleHead, 1), reviewClaimComment(staleRevision, 2)],
+      nowSec: 200,
+    }),
+    null,
+  );
+  assert.equal(
+    pendingReviewTransientClaim({
+      head: HEAD,
+      reviewRevision: BODY_REVISION,
+      comments: [reviewClaimComment(active, 3)],
+      nowSec: 200,
+    }),
+    null,
+  );
+  assert.equal(
+    pendingReviewTransientClaim({
+      head: HEAD,
+      reviewRevision: BODY_REVISION,
+      comments: [reviewClaimComment(terminal, 4)],
+      nowSec: 200,
+    }),
+    null,
+  );
+  assert.equal(parseReviewTransientRetryMarker('<!-- REVIEW_TRANSIENT_RETRY: {"version":1} -->'), null);
+});
+
+test('ogni rerun lascia requested finché non viene osservato un attempt nuovo', () => {
+  const source = fs.readFileSync(path.join(ROOT, 'scripts/ci/review-quota-rescuer.mjs'), 'utf8');
+
+  const transientStart = source.indexOf('function rescueTransientReview(');
+  const transientEnd = source.indexOf('\nfunction retryFieldsForCandidate', transientStart);
+  assert.ok(transientStart >= 0 && transientEnd > transientStart);
+  const transient = source.slice(transientStart, transientEnd);
+  const transientRerun = transient.indexOf("gh(['run', 'rerun'");
+  assert.ok(transientRerun >= 0);
+  assert.match(transient.slice(0, transientRerun), /state: 'requested'/);
+  assert.doesNotMatch(transient.slice(transientRerun), /state: 'confirmed'/,
+    'il percorso transient non deve consumare il retry prima dell attempt nuovo');
+  assert.match(transient, /attendo un attempt nuovo osservabile/);
+
+  const mainStart = source.indexOf('function main()');
+  const mainEnd = source.indexOf('\nif (process.argv[1]', mainStart);
+  assert.ok(mainStart >= 0 && mainEnd > mainStart);
+  const main = source.slice(mainStart, mainEnd);
+  const quotaRerun = main.indexOf("gh(['run', 'rerun'");
+  assert.ok(quotaRerun >= 0);
+  assert.doesNotMatch(main.slice(quotaRerun), /state: 'confirmed'/,
+    'il percorso quota non deve pubblicare confirmed subito dopo gh run rerun');
+  assert.match(main.slice(quotaRerun), /attendo un attempt nuovo osservabile/);
+  assert.match(source, /if \(run\.attempt > requestedAttempt\)/);
+  assert.match(source, /state: 'confirmed'/);
+});
+
+test('un transient attempt nuovo diventa confirmed o failed solo a completamento', () => {
+  assert.equal(transientRetryStateForRun({ status: 'queued', conclusion: 'success' }), null);
+  assert.equal(transientRetryStateForRun({ status: 'in_progress', conclusion: 'success' }), null);
+  assert.equal(transientRetryStateForRun({ status: 'completed', conclusion: 'success' }), 'confirmed');
+  assert.equal(transientRetryStateForRun({ status: 'completed', conclusion: 'failure' }), 'failed');
+  assert.equal(transientRetryStateForRun({ status: 'completed', conclusion: 'cancelled' }), 'failed');
+  assert.equal(transientRetryStateForRun({ status: 'completed' }), 'failed');
+  const base = { currentAttempt: 3, requestedAttempt: 2 };
+  assert.equal(retryStateForObservedAttempt({ ...base, status: 'queued', conclusion: 'success' }), null);
+  assert.equal(retryStateForObservedAttempt({ ...base, status: 'in_progress', conclusion: 'success' }), null);
+  assert.equal(retryStateForObservedAttempt({ ...base, status: 'completed', conclusion: 'success' }), 'confirmed');
+  assert.equal(retryStateForObservedAttempt({ ...base, status: 'completed', conclusion: 'failure' }), 'failed');
+  assert.equal(retryStateForObservedAttempt({ ...base, status: 'completed', conclusion: 'cancelled' }), 'failed');
+  assert.equal(retryStateForObservedAttempt({ currentAttempt: 2, requestedAttempt: 2, status: 'completed', conclusion: 'success' }), null);
+});
+
 test('il wiring reagisce al completamento dei consumer e rilascia reservation esistenti', () => {
   const workflow = fs.readFileSync(path.join(ROOT, '.github/workflows/review-quota-rescuer.yml'), 'utf8');
   const tests = fs.readFileSync(path.join(ROOT, '.github/workflows/tests.yml'), 'utf8');
@@ -245,6 +480,20 @@ test('il wiring reagisce al completamento dei consumer e rilascia reservation es
   assert.match(rescuer, /REVIEW_QUOTA_RESCUER_CURSOR/);
   assert.match(rescuer, /roundRobinWindow/);
   assert.match(rescuer, /if \(DRY_RUN\)[\s\S]*riconciliazione del marker requested saltata/);
+  assert.match(rescuer, /REVIEW_TRANSIENT_RETRY/);
+  assert.match(rescuer, /failed-transient/);
+  const transientRescue = rescuer.slice(
+    rescuer.indexOf('function rescueTransientReview'),
+    rescuer.indexOf('function retryFieldsForCandidate'),
+  );
+  assert.match(transientRescue, /state: 'requested'/);
+  assert.match(transientRescue, /attendo un attempt nuovo osservabile/);
+  assert.doesNotMatch(
+    transientRescue.slice(transientRescue.indexOf('let rerunRequested')),
+    /const confirmedBody = reviewTransientRetryBody/,
+    'il comando rerun non può essere marcato confirmed prima di osservare un attempt nuovo',
+  );
+  assert.match(workflow, /Retry deferred\/transient reviews/);
   const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'));
   assert.equal(
     manifest.files.find((entry) => entry.path === '.github/workflows/review-quota-rescuer.yml')?.mode,

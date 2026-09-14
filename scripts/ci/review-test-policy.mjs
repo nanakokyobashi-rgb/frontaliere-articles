@@ -1,11 +1,53 @@
 /** Owner policy: tests run in CI, but are excluded from model review. */
 import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { fetchPrFiles } from './lib/fetchPrFiles.mjs';
 
 export const TEST_REVIEW_MARKER = '<!-- TEST_ONLY_AUTOMATIC_REVIEW -->';
+// A PR body is a trusted review-input artifact only when the REST response is
+// an object with an explicit string/null `body`. Reusing this jq expression
+// keeps shell and Node consumers fail-closed on a valid-but-malformed payload.
+export const PR_BODY_JQ = 'if type != "object" then error("PR response is not an object") elif (has("body") | not) then error("PR response has no body field") elif .body != null and (.body | type) != "string" then error("PR body is not a string or null") else (.body // "") end';
+const PR_HEAD_SHA_RE = /^[0-9a-f]{40}$/iu;
+
+/** Hash the exact `gh api --jq` body representation used by the workflows. */
+export function reviewInputRevisionForBody(body) {
+  if (typeof body !== 'string') return null;
+  return `body:${createHash('sha256').update(`${body}\n`).digest('hex')}`;
+}
+
+/**
+ * Build one review-input snapshot from one trusted PR REST response. Keeping
+ * HEAD and body revision together prevents the consumers from fencing one
+ * field while silently using a newer value for the other.
+ */
+export function reviewInputContextFromPullRequest(payload) {
+  if (!payload || typeof payload !== 'object' || Array.isArray(payload)
+      || !Object.prototype.hasOwnProperty.call(payload, 'body')) return null;
+  const body = payload.body === null ? '' : payload.body;
+  const headSha = payload.head?.sha;
+  if (typeof body !== 'string' || typeof headSha !== 'string' || !PR_HEAD_SHA_RE.test(headSha)) {
+    return null;
+  }
+  const reviewRevision = reviewInputRevisionForBody(body);
+  return reviewRevision
+    ? { headSha: headSha.toLowerCase(), reviewRevision }
+    : null;
+}
+
+/** Compare a freshly read snapshot with the exact context being acted on. */
+export function reviewInputContextMatches(actual, { headSha, reviewRevision } = {}) {
+  return actual?.headSha === String(headSha || '').trim().toLowerCase()
+    && actual?.reviewRevision === String(reviewRevision || '').trim().toLowerCase();
+}
+// The revision marker is a contract line, not a substring.  Requiring the
+// complete unchanged line prevents prose, quoted examples, or an inline
+// marker from authenticating a verdict for the current PR body.
+export const REVIEW_INPUT_REVISION_MARKER_RE = /^<!-- REVIEW_INPUT_REVISION: (body:[0-9a-f]{64}) -->\r?$/gimu;
+export const REVIEW_INPUT_REVISION_RE = /^body:[0-9a-f]{64}$/iu;
 const TEST_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx', 'mjs', 'cjs', 'mts', 'cts', 'd.ts', 'd.mts', 'd.cts'];
 export const TEST_PATH_RE = new RegExp('(?:^|/)(?:tests|__tests__)/|\\.(?:test|spec)\\.(?:'
   + TEST_EXTENSIONS.map(ext => ext.replaceAll('.', '\\.')).join('|') + ')$');
@@ -41,20 +83,70 @@ export function verifyTestOnlyHead(ghFn, repo, pr, head) {
   const after = current();
   return onlyTests && after.state === 'open' && after.head?.sha === head && before.base?.sha === after.base?.sha;
 }
-export function findTestOnlyApproval(reviews, head, { ghFn = gh, repo, pr } = {}) {
+
+export function normalizeReviewInputRevision(reviewRevision) {
+  const revision = String(reviewRevision ?? '').trim().toLowerCase();
+  return REVIEW_INPUT_REVISION_RE.test(revision) ? revision : revision ? null : '';
+}
+
+/** The review verdict must identify the exact trusted PR-body revision. */
+export function reviewInputRevisionMarker(reviewRevision = '') {
+  const revision = normalizeReviewInputRevision(reviewRevision);
+  if (revision === null) throw new Error('Invalid review input revision');
+  return revision ? `<!-- REVIEW_INPUT_REVISION: ${revision} -->` : '';
+}
+
+/**
+ * A matching marker is necessary, and conflicting revision markers are not
+ * accepted. With no expected revision this remains backward-compatible for
+ * callers that do not run in the body-revision-aware workflow.
+ */
+export function reviewHasInputRevision(body, expectedRevision = '') {
+  const expected = normalizeReviewInputRevision(expectedRevision);
+  if (expected === null) return false;
+  if (!expected) return true;
+  const markers = [...String(body ?? '').matchAll(REVIEW_INPUT_REVISION_MARKER_RE)]
+    .map(match => String(match[1]).toLowerCase());
+  return markers.length > 0 && new Set(markers).size === 1 && markers[0] === expected;
+}
+
+export function findTestOnlyApproval(reviews, head, {
+  ghFn = gh,
+  repo,
+  pr,
+  reviewRevision = process.env.REVIEW_REVISION || '',
+} = {}) {
   const candidates = (reviews ?? []).flat().filter(review => review.user?.type === 'Bot'
     && /^(github-actions|frontaliere-automation)\[bot\]$/.test(review.user.login ?? '')
     && review.commit_id === head && String(review.body ?? '').includes(TEST_REVIEW_MARKER)
+    && reviewHasInputRevision(review.body, reviewRevision)
     && /^## LGTM\s*$/m.test(review.body) && !/🔴/.test(review.body));
   if (!candidates.length || !verifyTestOnlyHead(ghFn, repo, pr, head)) return null;
   return candidates.at(-1);
 }
-export function postTestOnlyReview({ repo, pr, head, ghFn = gh }) {
+export function postTestOnlyReview({
+  repo,
+  pr,
+  head,
+  ghFn = gh,
+  reviewRevision = process.env.REVIEW_REVISION || '',
+}) {
   if (!/^[\w.-]+\/[\w.-]+$/.test(repo ?? '') || !/^\d+$/.test(String(pr)) || !/^[a-f0-9]{40}$/.test(head ?? '')) throw new Error('Invalid review target');
+  const revisionMarker = reviewInputRevisionMarker(reviewRevision);
   if (!verifyTestOnlyHead(ghFn, repo, pr, head)) throw new Error('PR is not a complete tests-only change on the expected HEAD');
   const reviews = ghFn(['api', `repos/${repo}/pulls/${pr}/reviews`, '--paginate']);
-  if (findTestOnlyApproval(reviews, head, { ghFn, repo, pr })) return;
-  const body = `${TEST_REVIEW_MARKER}\n## Scope\nApprovazione automatica: la PR modifica esclusivamente test. I controlli CI e il contratto del body restano obbligatori; nessuna review del modello richiesta dalla policy del proprietario.\n\n## Findings (Important: 0, Nit: 0)\n\n## LGTM\n`;
+  if (findTestOnlyApproval(reviews, head, { ghFn, repo, pr, reviewRevision })) return;
+  const body = [
+    TEST_REVIEW_MARKER,
+    revisionMarker,
+    '## Scope',
+    'Approvazione automatica: la PR modifica esclusivamente test. I controlli CI e il contratto del body restano obbligatori; nessuna review del modello richiesta dalla policy del proprietario.',
+    '',
+    '## Findings (Important: 0, Nit: 0)',
+    '',
+    '## LGTM',
+    '',
+  ].join('\n');
   ghFn(['api', `repos/${repo}/pulls/${pr}/reviews`, '--method', 'POST', '--input', '-'], {
     input: JSON.stringify({ commit_id: head, event: 'COMMENT', body }),
   });
