@@ -4,6 +4,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { CODEX_FALLBACK_MODEL } from '../../../scripts/ci/claude-codex-fallback.mjs';
 import { exitAfterDrain } from './drain-stdio.mjs';
+import { GH_MODELS_URL } from './gh-models-endpoint.mjs';
 
 /**
  * Centralized AI Model Service — v15 (free-only, 115+ models, 14 providers)
@@ -670,7 +671,8 @@ const PROVIDER = Object.freeze({
 });
 
 // ── Endpoints ────────────────────────────────────────────────
-const GH_MODELS_BASE      = 'https://models.inference.ai.azure.com/chat/completions';
+const GH_MODELS_BASE      = GH_MODELS_URL;
+const GH_MODELS_BROWNOUT_STATUS = 410;
 const GEMINI_API_BASE     = 'https://generativelanguage.googleapis.com/v1beta/models';
 const GROQ_API_BASE       = 'https://api.groq.com/openai/v1/chat/completions';
 const OPENROUTER_API_BASE = 'https://openrouter.ai/api/v1/chat/completions';
@@ -685,6 +687,71 @@ const MISTRAL_API_BASE     = 'https://api.mistral.ai/v1/chat/completions';
 const CODESTRAL_API_BASE   = 'https://codestral.mistral.ai/v1/chat/completions';
 const CHUTES_API_BASE      = 'https://llm.chutes.ai/v1/chat/completions';
 const ZAI_API_BASE         = 'https://api.z.ai/api/paas/v4/chat/completions';
+
+function _githubModelsError(message, reason = 'github_models_mapping_unavailable') {
+  return Object.assign(new Error(`[GitHub] ${message}`), {
+    nonRetryable: true,
+    nonRetryableReason: reason,
+  });
+}
+
+function _githubCatalogEntries(catalog) {
+  if (Array.isArray(catalog)) return catalog;
+  if (!catalog || typeof catalog !== 'object') return [];
+  for (const key of ['models', 'data', 'items']) {
+    if (Array.isArray(catalog[key])) return catalog[key];
+  }
+  return [];
+}
+
+function _githubCatalogPublisher(entry) {
+  const publisher = entry && typeof entry === 'object' ? entry.publisher : null;
+  if (typeof publisher === 'string') return publisher.trim();
+  if (!publisher || typeof publisher !== 'object') return '';
+  return String(publisher.slug || publisher.id || '').trim();
+}
+
+/**
+ * Qualify a bare GitHub Models roster id from an observed catalog entry.
+ *
+ * The roster remains bare so getProvider() keeps returning GitHub. A missing,
+ * incomplete, or ambiguous catalog is a permanent block for this call: a
+ * guessed publisher would send a request to the wrong model and would also
+ * make the persisted model key lie about what was attempted.
+ */
+export function qualifyGitHubModelId(model, catalog) {
+  const id = String(model || '').trim();
+  if (!id) throw _githubModelsError('model id vuoto');
+  if (id.includes('/')) return id;
+  if (!catalog) {
+    throw _githubModelsError(
+      `publisher non osservabile per ${id}: catalogo GitHub Models non disponibile (brownout 410)`,
+      'github_models_catalog_brownout',
+    );
+  }
+
+  const qualified = new Set();
+  for (const entry of _githubCatalogEntries(catalog)) {
+    const values = typeof entry === 'string'
+      ? [entry]
+      : [entry?.id, entry?.model, entry?.modelId, entry?.name];
+    const publisher = _githubCatalogPublisher(entry);
+    for (const value of values) {
+      const candidate = String(value || '').trim();
+      if (!candidate) continue;
+      const bare = candidate.includes('/') ? candidate.slice(candidate.lastIndexOf('/') + 1) : candidate;
+      if (bare !== id) continue;
+      if (candidate.includes('/')) qualified.add(candidate);
+      else if (/^[A-Za-z0-9][A-Za-z0-9._-]*$/.test(publisher)) qualified.add(`${publisher}/${candidate}`);
+    }
+  }
+
+  if (qualified.size === 1) return [...qualified][0];
+  if (qualified.size === 0) {
+    throw _githubModelsError(`nessun publisher osservato nel catalogo per ${id}`);
+  }
+  throw _githubModelsError(`publisher ambiguo nel catalogo per ${id}`);
+}
 
 // ── Local LLM (llama.cpp / ollama, OpenAI-compatible) ────────
 // Opt-in: inert unless LOCAL_LLM_ENABLED is truthy. Default endpoint targets a
@@ -5621,6 +5688,17 @@ function _recordResolverFlapReset(context, provider, evidence) {
 export function classifyNonRetryableError(status, bodyText = '') {
   const b = String(bodyText).toLowerCase();
 
+  // GitHub Models returns this while the service is in its retirement brownout.
+  // It is a provider-wide permanent response for this run, not a retryable
+  // overload and not a reason to rotate through identical PATs.
+  if (status === GH_MODELS_BROWNOUT_STATUS || b.includes('github_models_retirement_brownout')) {
+    return {
+      nonRetryable: true,
+      markExhausted: true,
+      reason: 'github_models_retirement_brownout',
+    };
+  }
+
   // HTTP 413 — payload too large / token limit reached
   // GitHub Models returns 413 with tokens_limit_reached when the request
   // body exceeds the model's input token limit. Retrying the identical
@@ -6522,12 +6600,16 @@ function _isGhPatQuotaError(err) {
 async function _callGitHub(model, messages, opts) {
   const pats = getGhModelsPats();
   if (pats.length === 0) throw new Error('GitHub API key not set');
+  // Keep the roster id untouched for getProvider(), score storage and ledger
+  // lookup; only the emitted API payload may carry the observed publisher.
+  const apiModel = qualifyGitHubModelId(model, opts.githubModelsCatalog);
   // Single-PAT (the default): identical behaviour to before — one normal call.
   if (pats.length === 1) {
-    return _callOpenAICompatible(model, messages, opts, {
+    return _callOpenAICompatible(apiModel, messages, opts, {
       endpoint: GH_MODELS_BASE,
       apiKey: pats[0],
       providerName: 'GitHub',
+      trackAs: model,
     });
   }
   // Multi-PAT: try non-exhausted PATs first; if all are flagged exhausted this
@@ -6558,7 +6640,7 @@ async function _callGitHub(model, messages, opts) {
     const idx = order[j];
     const isLast = j === order.length - 1;
     try {
-      return await _callOpenAICompatible(model, messages, opts, {
+      return await _callOpenAICompatible(apiModel, messages, opts, {
         endpoint: GH_MODELS_BASE,
         apiKey: pats[idx],
         // MUST stay the canonical 'GitHub' so provider-name-keyed logic
@@ -6566,6 +6648,7 @@ async function _callGitHub(model, messages, opts) {
         // stats) behaves identically to single-PAT. The PAT index is tracked
         // separately (idx / _ghExhaustedPats), not encoded in the name.
         providerName: 'GitHub',
+        trackAs: model,
         // Until the LAST PAT, a daily-limit on this account must NOT mark the
         // model/provider globally exhausted — the model is still usable on the
         // next account's separate quota. The error still propagates so we rotate.
