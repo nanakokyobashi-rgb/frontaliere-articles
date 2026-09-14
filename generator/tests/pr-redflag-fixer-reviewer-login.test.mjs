@@ -62,6 +62,10 @@ test('il redflag fixer ammette Claude solo con contesto PR/review verificato', (
   const collect = src.slice(collectStart, failClosedStart);
   assert.match(collect, /context_fail\(\)/);
   assert.match(collect, /if ! gh pr view/);
+  assert.match(collect, /if ! current_head_sha=\$\(gh api "repos\/\$REPO\/pulls\/\$PR_NUMBER" --jq '\.head\.sha'\)/);
+  assert.match(collect, /if ! printf '%s' "\$current_head_sha" \| grep -qE '\^\[a-f0-9\]\{40\}\$'/);
+  assert.match(collect, /printf '%s\\n%s\\n' "\$current_head_sha" "\$HEAD_SHA" \| awk[\s\S]*tolower/);
+  assert.match(collect, /La HEAD della PR è cambiata rispetto all'evento review/);
   assert.match(collect, /if ! gh api "repos\/\$REPO\/pulls\/\$PR_NUMBER" --jq '\.body \/\/ ""'/);
   assert.match(collect, /if ! body_sha=/);
   assert.match(collect, /if ! gh api "repos\/\$REPO\/pulls\/\$PR_NUMBER\/files"/);
