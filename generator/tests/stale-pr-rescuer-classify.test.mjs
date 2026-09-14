@@ -60,6 +60,7 @@ import { readFileSync, writeFileSync, mkdtempSync, mkdirSync, rmSync, chmodSync 
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const WF_PATH = path.resolve(HERE, '../../.github/workflows/stale-pr-rescuer.yml');
@@ -94,6 +95,8 @@ const SCAN_RUN = extractRun('Scan open PRs and flag stalled ones');
 const CHECK_NAME = 'tests (node --test)';
 const HEAD_SHA = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
 const OLD_SHA = 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb';
+const PR_BODY = '## Implementato\n- fixture\n\n## Non implementato (ancora)\n- fixture';
+const REVIEW_REVISION = `body:${createHash('sha256').update(`${PR_BODY}\n`).digest('hex')}`;
 
 const isoAgo = (hours) => new Date(Date.now() - hours * 3600_000).toISOString().replace(/\.\d+Z$/, 'Z');
 const quotaDeferredComment = ({ head = HEAD_SHA, role = 'review', runId = 'tests-1' } = {}) => ({
@@ -141,7 +144,11 @@ function checkRuns({ concl = 'success', pending = 0 } = {}) {
 
 /** Una review Claude, o nessuna. */
 function reviews({ commit = OLD_SHA, body = 'nessun blocco' } = {}) {
-  return [{ user: { login: 'claude[bot]', type: 'Bot' }, commit_id: commit, body }];
+  return [{
+    user: { login: 'claude[bot]', type: 'Bot' },
+    commit_id: commit,
+    body: `${body}\n<!-- REVIEW_INPUT_REVISION: ${REVIEW_REVISION} -->`,
+  }];
 }
 
 /**
@@ -205,7 +212,8 @@ case "$sub" in
     while [ $# -gt 0 ]; do
       case "$1" in
         --paginate|--slurp) shift ;;
-        --jq|-H|-f|-F|-X) shift 2 ;;
+        --jq) jq="$2"; shift 2 ;;
+        -H|-f|-F|-X) shift 2 ;;
         *) if [ -z "$p" ]; then p="$1"; fi; shift ;;
       esac
     done
@@ -215,6 +223,13 @@ case "$sub" in
       */check-runs*) cat ${JSON.stringify(fixChecks)} ;;
       */reviews*)    cat ${JSON.stringify(fixReviews)} ;;
       */comments*)   cat ${JSON.stringify(fixComments)} ;;
+      */pulls/*)
+        if [ "$jq" = '.body // ""' ]; then
+          node -e 'const fs=require("fs"); const value=require(process.argv[1]); const pr=Array.isArray(value)?value[0]:value; process.stdout.write(String(pr?.body||"")+"\\n")' ${JSON.stringify(fixPrs)}
+        else
+          cat ${JSON.stringify(fixPrs)}
+        fi
+        ;;
       */pulls*)      cat ${JSON.stringify(fixPrs)} ;;
       *) echo '{}' ;;
     esac
@@ -343,6 +358,7 @@ const openPr = (over = {}) => [
     user: { login: 'claude' },
     labels: [],
     draft: false,
+    body: PR_BODY,
     ...over,
   },
 ];

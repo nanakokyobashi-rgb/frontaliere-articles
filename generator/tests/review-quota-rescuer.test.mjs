@@ -298,6 +298,33 @@ test('un claim failed-transient riceve al massimo un rerun per HEAD e body revis
   );
 });
 
+test('un marker transient requested al limite resta riconciliabile', () => {
+  const failed = reviewClaim({ token: 'review-token-requested', runId: '77' });
+  const requested = reviewTransientRetryBody({
+    head: HEAD,
+    reviewRevision: BODY_REVISION,
+    claimToken: failed.token,
+    sourceRunId: failed.runId,
+    sourceAttempt: 1,
+    runId: 'rescuer-requested',
+    retryCount: 1,
+    issuedAt: 150,
+    state: 'requested',
+  });
+  const candidate = pendingReviewTransientClaim({
+    head: HEAD,
+    reviewRevision: BODY_REVISION,
+    comments: [
+      reviewClaimComment(failed, 1),
+      { id: 2, created_at: '1970-01-01T00:03:00Z', body: requested },
+    ],
+    nowSec: 200,
+    maxRetries: 1,
+  });
+  assert.equal(candidate?.retry?.state, 'requested');
+  assert.equal(candidate?.retry?.retryCount, 1);
+});
+
 test('il marker transient persiste il timestamp della richiesta', () => {
   const marker = reviewTransientRetryBody({
     head: HEAD,

@@ -149,13 +149,13 @@ function historicalNonApprovingBlocksDriftFallback() {
     const staleHead = String(review.commit_id || '') !== HEAD_SHA;
     const staleRevision = !reviewHasInputRevision(review.body, REVIEW_REVISION);
     const body = String(review.body || '');
-    const nonApproving = !body.includes('## LGTM') || REDFLAG_IMPORTANT_RE.test(body);
     return reviewer
       && review.state !== 'PENDING'
-      // A body edit invalidates every older verdict, including an old LGTM.
-      // For the same body revision, preserve the existing drift rule: only a
-      // stale non-approving verdict blocks the deterministic fallback.
-      && (staleRevision || (nonApproving && staleHead));
+      // A body edit or a code change invalidates every older verdict,
+      // including an old LGTM.  The deterministic fallback may only replace
+      // the absence of a review, never a review that was issued for an older
+      // contribution.
+      && (staleRevision || staleHead);
   });
   if (blockers.length) {
     console.log(

@@ -27,6 +27,10 @@ import {
   REDFLAG_IMPORTANT_RE,
   REVIEWER_BOT_LOGIN_RE,
 } from './lib/constants.mjs';
+import {
+  normalizeReviewInputRevision,
+  reviewHasInputRevision,
+} from './review-test-policy.mjs';
 
 function rowsFromPages(value, key) {
   const pages = Array.isArray(value) ? value : [value];
@@ -37,12 +41,18 @@ function rowsFromPages(value, key) {
 }
 
 /**
- * @param {{headSha?: string, jobs?: unknown, reviews?: unknown}} input
+ * @param {{headSha?: string, reviewRevision?: string, jobs?: unknown, reviews?: unknown}} input
  * @returns {'important'|'transient'|''}
  */
 export function reviewFailureKind(input) {
   const headSha = typeof input?.headSha === 'string' ? input.headSha : '';
-  if (!headSha) return '';
+  const hasReviewRevision = input != null
+    && Object.prototype.hasOwnProperty.call(input, 'reviewRevision');
+  const reviewRevision = normalizeReviewInputRevision(input?.reviewRevision ?? '');
+  // Callers that predate body-revision support remain compatible.  Runtime
+  // workflows pass the property explicitly; an absent/invalid revision there
+  // must fail closed rather than trust a stale review.
+  if (!headSha || reviewRevision === null || (hasReviewRevision && !reviewRevision)) return '';
 
   const jobs = rowsFromPages(input?.jobs, 'jobs');
   const testsJob = jobs.find((job) => job?.name === 'tests (node --test)');
@@ -74,6 +84,7 @@ export function reviewFailureKind(input) {
         && review?.user?.type === 'Bot'
         && REVIEWER_BOT_LOGIN_RE.test(review.user.login ?? ''),
       )
+      .filter((review) => reviewHasInputRevision(review.body, reviewRevision))
       .at(-1);
     // The transient-abort step and the gate can both be red: the gate is an
     // `always()` consumer of the review result, so it fails after an aborted
@@ -99,7 +110,7 @@ export function reviewFailureKind(input) {
  * Backward-compatible boolean API for callers that only own Important review
  * findings.
  *
- * @param {{headSha?: string, jobs?: unknown, reviews?: unknown}} input
+ * @param {{headSha?: string, reviewRevision?: string, jobs?: unknown, reviews?: unknown}} input
  * @returns {boolean}
  */
 export function reviewOnlyFailure(input) {

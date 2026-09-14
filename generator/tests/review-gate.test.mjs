@@ -381,17 +381,18 @@ test('drift-fallback: 🔴 su SHA vecchio ma contributo INVARIATO + tests.yml �
   assert.doesNotMatch(r.stdout, /drift-fallback: APPROVATO/, r.stdout);
 });
 
-test('drift-fallback: LGTM stantia (contributo cambiato) + tests.yml → verde', () => {
-  // Stesso 401: Claude non puo' ri-revieware il delta. Senza fallback la LGTM
-  // vecchia non carry-forwarda e il check resta rosso.
+test('drift-fallback: LGTM stantia (contributo cambiato) + tests.yml → ROSSO', () => {
+  // Stesso 401: Claude non può ri-revieware il delta. Una LGTM sulla HEAD
+  // vecchia non è però una prova sul contributo corrente: il fallback non deve
+  // cancellare nemmeno un verdetto positivo stantio.
   const r = runGate({
     reviews: [botReview(OLD, '## LGTM')],
     files: ['.github/workflows/tests.yml'],
     meta: DRIFT_META,
     compare: COMPARE_CHANGED,
   });
-  assert.equal(r.status, 0, `Una LGTM che non si applica piu' deve cedere al fallback, non al rosso.\n${r.stdout}`);
-  assert.match(r.stdout, /drift-fallback: APPROVATO/, r.stdout);
+  assert.equal(r.status, 1, `Una LGTM sulla HEAD vecchia non deve autorizzare il fallback.\n${r.stdout}`);
+  assert.doesNotMatch(r.stdout, /drift-fallback: APPROVATO/, r.stdout);
 });
 
 test('carry-forward: LGTM su un commit precedente con contributo invariato → verde', () => {

@@ -483,6 +483,22 @@ jobs:
 
           gh pr view "$PR_NUMBER" --repo "$REPO" --json title,body,headRefName \
             > "$OUT/pr.json" 2>/dev/null || echo '{}' > "$OUT/pr.json"
+          # The review body must be tied to the exact PR-body revision that the
+          # reviewer saw.  Hash the REST `--jq` output in the same form as
+          # `tests.yml`; if this read is not trustworthy, the review bundle is
+          # deliberately empty rather than feeding a stale finding to Claude.
+          review_revision=""
+          if gh api "repos/$REPO/pulls/$PR_NUMBER" --jq '.body // ""' \
+            > "$OUT/body.txt" 2>/dev/null; then
+            body_sha=$(sha256sum "$OUT/body.txt" | awk '{print $1}')
+            if printf '%s' "$body_sha" | grep -qE '^[a-f0-9]{64}$'; then
+              review_revision="body:$body_sha"
+            else
+              echo "::warning::Hash del body PR non verificabile → nessuna review verra' inserita nel bundle."
+            fi
+          else
+            echo "::warning::Body PR illeggibile → nessuna review verra' inserita nel bundle."
+          fi
           # REST paginata, non `--json files` (tronca a 100 in silenzio sopra
           # quella soglia — stessa trappola nota sul sito).
           gh api "repos/$REPO/pulls/$PR_NUMBER/files" --paginate --jq '.[].filename' \
@@ -494,9 +510,17 @@ jobs:
           # VUOTA — o, peggio, l'ultima review `claude` PRECEDENTE, cioe' i 🔴
           # di un round gia' chiuso: l'agent non fallisce, fixa il round
           # sbagliato, e il marker di round e' gia' stato postato.
-          gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" \
-            --jq '[.[] | select((.user.login|test("^(claude|frontaliere-automation)";"i")) and (.body|contains("## Findings (")))] | last | .body // empty' \
-            > "$OUT/latest-review.md" 2>/dev/null || : > "$OUT/latest-review.md"
+          reviews_json=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate --slurp 2>/dev/null || echo '[]')
+          if ! printf '%s' "$reviews_json" | jq -r --arg revision "$review_revision" '
+            [flatten[]
+             | select((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
+             | select(any((.body // "") | split("\n")[];
+                 rtrimstr("\r") == ("<!-- REVIEW_INPUT_REVISION: " + $revision + " -->")))
+             | select((.body // "")|contains("## Findings ("))
+            ] | sort_by(.id // 0) | last | .body // empty' \
+            > "$OUT/latest-review.md" 2>/dev/null; then
+            : > "$OUT/latest-review.md"
+          fi
 
           {
             echo "# Redflag-fix bundle — PR #$PR_NUMBER"

@@ -346,13 +346,13 @@ jobs:
              | select((.state // "") != "PENDING")
              | select(.user.type == "Bot")
              | select(
-                 ((.user.login // "") | test("^(claude|frontaliere-automation)"; "i"))
+                 ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
                  or (((.user.login // "") | test("^github-actions\\[bot\\]$"; "i"))
                      and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
                )
              | select(
-                 [((.body // "") | scan("<!--\\s*REVIEW_INPUT_REVISION:\\s*(body:[0-9a-f]{64})\\s*-->") | .[])]
-                 | unique == [$revision]
+                 any((.body // "") | split("\n")[];
+                   rtrimstr("\r") == ("<!-- REVIEW_INPUT_REVISION: " + $revision + " -->"))
                )
              | select(.commit_id == $head)] | length'
           )
@@ -382,13 +382,13 @@ jobs:
              | select((.state // "") != "PENDING")
              | select(.user.type == "Bot")
              | select(
-                 ((.user.login // "") | test("^(claude|frontaliere-automation)"; "i"))
+                 ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
                  or (((.user.login // "") | test("^github-actions\\[bot\\]$"; "i"))
                      and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
                )
              | select(
-                 [((.body // "") | scan("<!--\\s*REVIEW_INPUT_REVISION:\\s*(body:[0-9a-f]{64})\\s*-->" ) | .[])]
-                 | unique == [$revision]
+                 any((.body // "") | split("\n")[];
+                   rtrimstr("\r") == ("<!-- REVIEW_INPUT_REVISION: " + $revision + " -->"))
                )
             ] | sort_by(.id // 0) | last | .commit_id // empty' 2>/dev/null || true)
           if [ -z "$last" ]; then
@@ -544,8 +544,15 @@ jobs:
 
           # Re-review incrementale: se esiste gia' una review Claude su un commit
           # precedente, si valuta SOLO il delta, non l'intera PR.
-          lastRev=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate \
-            --jq '[.[] | select(.user.type=="Bot" and (.user.login|test("^(claude|frontaliere-automation)";"i")))] | last | .commit_id // empty' 2>/dev/null || true)
+          lastRev=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate --slurp 2>/dev/null \
+            | jq -r --arg revision "$REVIEW_REVISION" '
+              [flatten[]
+               | select((.state // "") != "PENDING")
+               | select(.user.type == "Bot")
+               | select((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
+               | select(any((.body // "") | split("\n")[];
+                   rtrimstr("\r") == ("<!-- REVIEW_INPUT_REVISION: " + $revision + " -->")))
+              ] | sort_by(.id // 0) | last | .commit_id // empty' 2>/dev/null || true)
           if [ -n "$lastRev" ] && [ "$lastRev" != "$HEAD_SHA" ]; then
             delta_code=$(gh api "repos/$REPO/compare/$lastRev...$HEAD_SHA" --jq '.files[] | .filename, (.previous_filename // empty)' 2>/dev/null \
               | grep -Fxf <(echo "$code_files") || true)
@@ -900,10 +907,11 @@ jobs:
               if [ -n "${REVIEWS:-}" ] && jq -e --arg head_sha "$HEAD_SHA" --arg run_started_at "$RUN_STARTED_AT" --arg review_revision "$REVIEW_REVISION" '
                 flatten | any(.[]?;
                   (.user.type == "Bot")
-                  and ((.user.login // "") | test("^(claude|frontaliere-automation)"; "i"))
+                  and ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
                   and .commit_id == $head_sha
                   and (.submitted_at // "") >= $run_started_at
-                  and ((.body // "") | contains("<!-- REVIEW_INPUT_REVISION: " + $review_revision + " -->"))
+                  and any((.body // "") | split("\n")[];
+                    rtrimstr("\r") == ("<!-- REVIEW_INPUT_REVISION: " + $review_revision + " -->"))
                 )
               ' <<<"$REVIEWS" >/dev/null 2>&1; then
                 set_review_output review_abort_cause verdict_posted

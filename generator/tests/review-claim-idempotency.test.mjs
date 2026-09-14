@@ -219,6 +219,21 @@ test('a review verdict must carry exactly the current trusted body revision', ()
     reviewHasInputRevision(`${fresh}\n${reviewInputRevisionMarker(OTHER_BODY_REVISION)}`, BODY_REVISION),
     false,
   );
+  assert.equal(
+    reviewHasInputRevision(`quoted text: ${reviewInputRevisionMarker(BODY_REVISION)}`, BODY_REVISION),
+    false,
+    'un marker inline nella prosa non è una riga di contratto',
+  );
+  assert.equal(
+    reviewHasInputRevision(` ${reviewInputRevisionMarker(BODY_REVISION)}`, BODY_REVISION),
+    false,
+    'l indentazione cambia la riga del contratto',
+  );
+  assert.equal(
+    reviewHasInputRevision(`## LGTM\r\n${reviewInputRevisionMarker(BODY_REVISION)}\r\n`, BODY_REVISION),
+    true,
+    'il marker esatto resta valido anche con terminatori CRLF',
+  );
   assert.equal(reviewHasInputRevision('legacy review', ''), true);
   assert.throws(() => reviewInputRevisionMarker('body:not-a-sha'), /Invalid review input revision/);
 });
@@ -251,12 +266,14 @@ test('tests.yml claims before review work and finalizes without gating the requi
   assert.match(workflow, /review_revision=body:/);
   assert.match(workflow, /REVIEW_REVISION:/);
   assert.match(workflow, /REVIEW_INPUT_REVISION:/);
-  assert.match(workflow, /contains\("<!-- REVIEW_INPUT_REVISION:/);
   assert.match(workflow, /--arg revision \"\$REVIEW_REVISION\"/);
-  assert.match(workflow, /scan\("<!--\\\\s\*REVIEW_INPUT_REVISION:/);
+  assert.match(workflow, /split\("\\n"\)\[\]/);
+  assert.match(workflow, /rtrimstr\("\\r"\)/);
+  assert.doesNotMatch(workflow, /contains\("<!-- REVIEW_INPUT_REVISION:/);
+  assert.doesNotMatch(workflow, /scan\("<!--\\\\s\*REVIEW_INPUT_REVISION:/);
   const incrementalGuard = workflow.slice(workflow.indexOf('last=$(printf'), workflow.indexOf('if [ -z "$last"', workflow.indexOf('last=$(printf')));
   assert.match(incrementalGuard, /--arg revision \"\$REVIEW_REVISION\"/);
-  assert.match(incrementalGuard, /unique == \[\$revision\]/);
+  assert.match(incrementalGuard, /any\(\(\.body \/\/ ""\) \| split\("\\n"\)\[\]/);
   assert.match(workflow, /steps\.review_claim\.outputs\.claim_allowed == 'true'/);
 
   const gateAt = workflow.indexOf('id: review_gate');
@@ -276,4 +293,12 @@ test('tutti i consumer di review usano la revisione del body corrente', () => {
   assert.match(autoMerge, /currentReviewInputRevision\(\)/);
   assert.match(autoMerge, /findTestOnlyApproval\(reviews, head, \{[\s\S]*reviewRevision/);
   assert.match(autoMerge, /reviewHasInputRevision\(r\.body, reviewRevision\)/);
+
+  const redflag = fs.readFileSync(path.join(ROOT, '.github/workflows/pr-redflag-fixer.yml'), 'utf8');
+  assert.match(redflag, /review_revision=\"body:\$body_sha\"/);
+  assert.match(redflag, /split\("\\n"\)\[\][\s\S]*REVIEW_INPUT_REVISION/);
+
+  const stale = fs.readFileSync(path.join(ROOT, '.github/workflows/stale-pr-rescuer.yml'), 'utf8');
+  assert.match(stale, /REVIEW_REVISION=\"body:\$body_sha\"/);
+  assert.match(stale, /split\("\\n"\)\[\][\s\S]*REVIEW_INPUT_REVISION/);
 });

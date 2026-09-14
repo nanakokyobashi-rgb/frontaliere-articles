@@ -224,7 +224,12 @@ export function pendingReviewTransientClaim({
     reviewRevision: expectedRevision,
   });
   const retryCount = Number(retry?.retryCount) || 0;
-  if (String(retry?.state || '') === 'confirmed' || retryCount >= retryLimit) return null;
+  // A requested marker at the limit is not a new retry to admit: it is a
+  // durable lease whose source run still needs reconciliation.  Do not let
+  // the retry cap strand it forever; only suppress new requests after the
+  // limit, while `reconcileTransientRetry` can still observe requested.
+  if (String(retry?.state || '') === 'confirmed'
+      || (String(retry?.state || '') !== 'requested' && retryCount >= retryLimit)) return null;
   return { claim, retry, retryCount: retryCount + 1 };
 }
 

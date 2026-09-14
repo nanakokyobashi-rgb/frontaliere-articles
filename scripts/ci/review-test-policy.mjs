@@ -6,7 +6,10 @@ import { pathToFileURL } from 'node:url';
 import { fetchPrFiles } from './lib/fetchPrFiles.mjs';
 
 export const TEST_REVIEW_MARKER = '<!-- TEST_ONLY_AUTOMATIC_REVIEW -->';
-export const REVIEW_INPUT_REVISION_MARKER_RE = /<!--\s*REVIEW_INPUT_REVISION:\s*(body:[0-9a-f]{64})\s*-->/giu;
+// The revision marker is a contract line, not a substring.  Requiring the
+// complete unchanged line prevents prose, quoted examples, or an inline
+// marker from authenticating a verdict for the current PR body.
+export const REVIEW_INPUT_REVISION_MARKER_RE = /^<!-- REVIEW_INPUT_REVISION: (body:[0-9a-f]{64}) -->\r?$/gimu;
 export const REVIEW_INPUT_REVISION_RE = /^body:[0-9a-f]{64}$/iu;
 const TEST_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx', 'mjs', 'cjs', 'mts', 'cts', 'd.ts', 'd.mts', 'd.cts'];
 export const TEST_PATH_RE = new RegExp('(?:^|/)(?:tests|__tests__)/|\\.(?:test|spec)\\.(?:'
