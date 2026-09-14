@@ -5684,15 +5684,18 @@ function _recordResolverFlapReset(context, provider, evidence) {
  * Detect permanent client errors that should NOT be retried.
  * - unknown_model: model doesn't exist on the provider (mark exhausted)
  * - context length / too many tokens: prompt too large for this model
- * Returns { nonRetryable: boolean, markExhausted: boolean }
+ * @param {string} [providerName] — provider making the request; GitHub-only
+ *   brownout handling must not classify another provider's HTTP 410.
+ * @returns {{nonRetryable: boolean, markExhausted: boolean, reason?: string}}
  */
-export function classifyNonRetryableError(status, bodyText = '') {
+export function classifyNonRetryableError(status, bodyText = '', providerName = '') {
   const b = String(bodyText).toLowerCase();
+  const isGitHubModels = _normalizeProviderKey(providerName) === _normalizeProviderKey(PROVIDER.GITHUB);
 
   // GitHub Models returns this while the service is in its retirement brownout.
   // It is a provider-wide permanent response for this run, not a retryable
   // overload and not a reason to rotate through identical PATs.
-  if (status === GH_MODELS_BROWNOUT_STATUS || b.includes('github_models_retirement_brownout')) {
+  if (isGitHubModels && (status === GH_MODELS_BROWNOUT_STATUS || b.includes('github_models_retirement_brownout'))) {
     return {
       nonRetryable: true,
       markExhausted: true,
@@ -6317,20 +6320,23 @@ const MODEL_MAX_OUTPUT_TOKENS = {
  * @param {string} apiModel — Model ID to send to the API (without provider prefix)
  * @param {Array} messages — OpenAI-format messages
  * @param {object} opts — Merged options
- * @param {object} provider — { endpoint, apiKey, providerName, trackAs, extraHeaders }
+ * @param {object} provider — { endpoint, apiKey, providerName, trackAs, modelForLookup, extraHeaders }
  */
-async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKey, providerName, trackAs, extraHeaders, extraBody, dispatcher, _suppressExhaustionMark = false }) {
+async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKey, providerName, trackAs, modelForLookup = apiModel, extraHeaders, extraBody, dispatcher, _suppressExhaustionMark = false }) {
   if (!apiKey) throw new Error(`${providerName} API key not set`);
   const modelForTracking = trackAs || apiModel;
+  // GitHub emits an observed publisher/model id, while all model policy tables
+  // remain keyed by the bare roster id. Other callers leave this at apiModel.
+  const modelPolicyId = modelForLookup || apiModel;
   const displayModel = providerName === 'GitHub' ? apiModel : `${providerName}/${apiModel}`;
 
   // Cap maxTokens to model-specific limits (e.g. Cohere max 8192)
-  const modelLimit = MODEL_MAX_OUTPUT_TOKENS[apiModel];
+  const modelLimit = MODEL_MAX_OUTPUT_TOKENS[modelPolicyId];
   const effectiveMaxTokens = modelLimit ? Math.min(opts.maxTokens, modelLimit) : opts.maxTokens;
 
   // Newer OpenAI models (gpt-5-*, o4-mini, o3-mini) require
   // `max_completion_tokens` instead of `max_tokens`
-  const useCompletionTokens = MAX_COMPLETION_TOKENS_MODELS.has(apiModel);
+  const useCompletionTokens = MAX_COMPLETION_TOKENS_MODELS.has(modelPolicyId);
   const tokenParam = useCompletionTokens
     ? { max_completion_tokens: effectiveMaxTokens }
     : { max_tokens: effectiveMaxTokens };
@@ -6430,7 +6436,7 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
           throw Object.assign(new Error(`[${displayModel}] Daily request limit reached`), { exhausted: true });
         }
         // Non-retryable client errors (unknown model, context too small)
-        const nrc = classifyNonRetryableError(res.status, raw);
+        const nrc = classifyNonRetryableError(res.status, raw, providerName);
         if (nrc.nonRetryable) {
           // Learn the real size cap from `raw` while it's still untruncated —
           // the Error message below slices it to 300 chars (and callers slice
@@ -6626,6 +6632,7 @@ async function _callGitHub(model, messages, opts) {
       apiKey: pats[0],
       providerName: 'GitHub',
       trackAs: model,
+      modelForLookup: model,
     });
   }
   // Multi-PAT: try non-exhausted PATs first; if all are flagged exhausted this
@@ -6665,6 +6672,7 @@ async function _callGitHub(model, messages, opts) {
         // separately (idx / _ghExhaustedPats), not encoded in the name.
         providerName: 'GitHub',
         trackAs: model,
+        modelForLookup: model,
         // Until the LAST PAT, a daily-limit on this account must NOT mark the
         // model/provider globally exhausted — the model is still usable on the
         // next account's separate quota. The error still propagates so we rotate.
@@ -7910,7 +7918,7 @@ async function _callGeminiRaw(model, messages, opts) {
           throw Object.assign(new Error(`[${model}] Daily quota reached`), { exhausted: true });
         }
         // Non-retryable client errors (unknown model, context too small)
-        const nrc = classifyNonRetryableError(res.status, raw);
+        const nrc = classifyNonRetryableError(res.status, raw, PROVIDER.GEMINI);
         if (nrc.nonRetryable) {
           // Learn the real size cap from `raw` while it's still untruncated —
           // see the matching call in _callOpenAICompatible for why. Gated like

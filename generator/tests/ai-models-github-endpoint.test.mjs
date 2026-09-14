@@ -62,6 +62,29 @@ describe('GitHub Models request contract', () => {
     assert.equal(modelUsedRef.model, AI_MODELS.GPT4O);
   });
 
+  test('usa l id bare per il parametro e il cap dei modelli qualificati', async () => {
+    const calls = [];
+    globalThis.fetch = async (url, init) => {
+      calls.push({ url: String(url), init });
+      return new Response(JSON.stringify({ choices: [{ message: { content: 'ok' } }] }), {
+        status: 200,
+        headers: { 'content-type': 'application/json' },
+      });
+    };
+
+    await callSingleModel([{ role: 'user', content: 'x' }], {
+      model: AI_MODELS.PHI_4_REASON,
+      githubModelsCatalog: [{ id: 'openai/Phi-4-reasoning' }],
+      maxTokens: 3000,
+      maxRetriesPerModel: 1,
+    });
+
+    const body = JSON.parse(calls[0].init.body);
+    assert.equal(body.model, 'openai/Phi-4-reasoning');
+    assert.equal(body.max_completion_tokens, 3000);
+    assert.equal(body.max_tokens, undefined);
+  });
+
   test('rifiuta un id bare quando il catalogo è ancora non osservabile', async () => {
     let fetchCalls = 0;
     globalThis.fetch = async () => {
@@ -84,13 +107,15 @@ describe('GitHub Models request contract', () => {
   });
 });
 
-test('classifica il brownout GitHub Models 410 come permanente', () => {
-  assert.deepEqual(
-    classifyNonRetryableError(410, '{"error":{"code":"github_models_retirement_brownout"}}'),
-    {
-      nonRetryable: true,
-      markExhausted: true,
-      reason: 'github_models_retirement_brownout',
-    },
-  );
+test('classifica il brownout 410 solo per GitHub Models', () => {
+  const body = '{"error":{"code":"github_models_retirement_brownout"}}';
+  assert.deepEqual(classifyNonRetryableError(410, body, 'GitHub'), {
+    nonRetryable: true,
+    markExhausted: true,
+    reason: 'github_models_retirement_brownout',
+  });
+  assert.deepEqual(classifyNonRetryableError(410, body, 'Gemini'), {
+    nonRetryable: false,
+    markExhausted: false,
+  });
 });
