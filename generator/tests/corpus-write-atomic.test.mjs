@@ -47,6 +47,7 @@ const CHOKE_POINTS = [
   ['generator/scripts/generate-events-digest-article.mjs', 'refresh-events-digest.yml'],
   ['generator/scripts/generate-border-wait-ranking-article.mjs', 'generate-border-wait-ranking-weekly.yml'],
   ['generator/scripts/batch-add-faq-to-articles.mjs', 'batch-faq-articles.yml'],
+  ['generator/scripts/generate-pharmacy-evergreen-guides.mjs', 'nessun workflow: producer rerunnable lanciato a mano'],
   ['generator/scripts/generate-journalist-image-catalog.mjs', 'generate-article.yml'],
   ['generator/scripts/retranslate-blocking-bodies.mjs', 'nessun workflow: bonifica lanciata a mano'],
 ];

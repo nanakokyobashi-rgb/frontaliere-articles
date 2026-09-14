@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "sourceUrl": "https://www.ofct.ch/farmacieturno/",
+  "sourceType": "official",
+  "sourceRegions": [
+    "https://www.ofct.ch/mendrisiotto/",
+    "https://www.ofct.ch/luganese/",
+    "https://www.ofct.ch/bellinzonese/",
+    "https://www.ofct.ch/biasca-e-valli/"
+  ],
+  "fetchedAt": "2026-09-14T18:16:05.788Z",
+  "scope": {
+    "country": "CH",
+    "canton": "Ticino",
+    "includedRegions": [
+      "Mendrisiotto",
+      "Luganese",
+      "Bellinzonese",
+      "Biasca e Valli"
+    ],
+    "excludedRegions": ["Locarnese"]
+  },
+  "verifiedDuty": true,
+  "statusValues": ["verified", "expired"],
+  "recordCount": 46,
+  "completeness": {
+    "status": "complete",
+    "verifiedRecordCount": 46,
+    "minimumRecordCount": 46,
+    "truncated": false
+  },
+  "errors": [],
+  "warnings": []
+}
