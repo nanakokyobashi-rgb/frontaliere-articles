@@ -3545,9 +3545,10 @@
       "mode": "adapted",
       "reason": "Gemello del workflow del sito che arruola le PR nell'auto-merge nativo di GitHub. Adattato su due punti non copiabili: (1) il ponte Remote Config e' generator/scripts/load-rc-env.mjs, non scripts/load-rc-env.mjs, e i due file raw scaricati sono quelli; (2) l'identita' di merge e' GITHUB_PAT_NANAKO, non GITHUB_PAT — questo repo e' di un altro account. Il secondo punto e' anche la ragione per cui l'auto-merge nativo QUI e' diventato possibile: l'obiezione registrata sulle voci rimosse in questa stessa PR (\"non puo' abilitare il nativo con l'identita' corretta perche' manca la GitHub App del sito\") confondeva due cose — il nativo mergia con l'identita' di CHI lo abilita, e un PAT owner basta, quindi publish-api.yml continua a scattare.",
       "baseline": {
-        "site": "2a0de9e28318d264",
-        "corpus": "4be1dbefeafc6837",
-        "alignedAt": "2026-09-03"
+        "site": "6a0eaccfdaf1330d",
+        "corpus": "1b2cde79e60f98e2",
+        "alignedAt": "2026-09-14",
+        "forcedAt": "2026-09-14T21:31:06.354Z"
       }
     },
     {
