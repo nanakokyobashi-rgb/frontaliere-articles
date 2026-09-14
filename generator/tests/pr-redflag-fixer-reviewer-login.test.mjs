@@ -51,6 +51,34 @@ test('collect-review jq, review-gate and auto-merge-eval use the same bot set', 
   assert.doesNotMatch(testsYml, /test\("claude";"i"\)/);
 });
 
+test('il redflag fixer ammette Claude solo con contesto PR/review verificato', () => {
+  const collectStart = src.indexOf('- name: Collect PR + review context (zero-Claude)');
+  const failClosedStart = src.indexOf('- name: Fail closed when review context is unavailable', collectStart);
+  const setupStart = src.indexOf('- name: Setup Headroom compression proxy', failClosedStart);
+  const claudeStart = src.indexOf('- name: Run Claude 🔴-fix', setupStart);
+  assert.ok(collectStart >= 0 && failClosedStart > collectStart && setupStart > failClosedStart);
+  assert.ok(claudeStart > setupStart);
+
+  const collect = src.slice(collectStart, failClosedStart);
+  assert.match(collect, /context_fail\(\)/);
+  assert.match(collect, /if ! gh pr view/);
+  assert.match(collect, /if ! gh api "repos\/\$REPO\/pulls\/\$PR_NUMBER" --jq '\.body \/\/ ""'/);
+  assert.match(collect, /if ! body_sha=/);
+  assert.match(collect, /if ! gh api "repos\/\$REPO\/pulls\/\$PR_NUMBER\/files"/);
+  assert.match(collect, /if ! reviews_json=/);
+  assert.match(collect, /jq -e 'type == "array" and all\(\.\[\]; type == "array"\)'/);
+  assert.match(collect, /\.commit_id \/\/ "".*\$head/);
+  assert.match(collect, /context_verified=true/);
+
+  const failClosed = src.slice(failClosedStart, setupStart);
+  assert.match(failClosed, /steps\.ctx\.outputs\.context_verified != 'true'/);
+  assert.match(failClosed, /exit 1/);
+  assert.match(
+    src.slice(claudeStart, src.indexOf('- name: Claude usage metrics', claudeStart)),
+    /if: steps\.guard\.outputs\.proceed == 'true' && steps\.ctx\.outputs\.context_verified == 'true'/,
+  );
+});
+
 test('il push guard controlla il token che il push remote usa davvero', () => {
   const at = src.indexOf('- name: Configure push remote');
   const next = src.indexOf('\n      - name:', at + 1);

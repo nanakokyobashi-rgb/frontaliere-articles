@@ -986,13 +986,9 @@ function main() {
     }
     if (!rerunRequested) continue;
 
-    const confirmedBody = reviewQuotaRetryBody({ ...retryFields, state: 'confirmed' });
-    if (!postRetryComment(number, confirmedBody)) {
-      // `requested` è già durevole e hasReviewQuotaRetry() lo considera attivo:
-      // il prossimo tick non può rilanciare lo stesso source run due volte.
-      console.log(`::warning::PR #${number}: conferma marker retry non pubblicata; il fence requested impedisce duplicati.`);
-    }
-    console.log(`PR #${number}: ${candidate.deferred.role} #${run.databaseId} rilanciato sulla HEAD ${candidate.head.slice(0, 12)}.`);
+    // `requested` resta il fence finché il prossimo tick non osserva un attempt
+    // nuovo e pubblica `confirmed` in `reconcileRequestedRetry`.
+    console.log(`PR #${number}: ${candidate.deferred.role} #${run.databaseId} richiesto sulla HEAD ${candidate.head.slice(0, 12)}; attendo un attempt nuovo osservabile.`);
     retried += 1;
   }
   let transientRetried = 0;

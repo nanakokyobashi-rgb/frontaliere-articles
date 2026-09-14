@@ -394,6 +394,33 @@ test('il transient rescuer ignora claim stantii, attivi o terminali', () => {
   assert.equal(parseReviewTransientRetryMarker('<!-- REVIEW_TRANSIENT_RETRY: {"version":1} -->'), null);
 });
 
+test('ogni rerun lascia requested finché non viene osservato un attempt nuovo', () => {
+  const source = fs.readFileSync(path.join(ROOT, 'scripts/ci/review-quota-rescuer.mjs'), 'utf8');
+
+  const transientStart = source.indexOf('function rescueTransientReview(');
+  const transientEnd = source.indexOf('\nfunction retryFieldsForCandidate', transientStart);
+  assert.ok(transientStart >= 0 && transientEnd > transientStart);
+  const transient = source.slice(transientStart, transientEnd);
+  const transientRerun = transient.indexOf("gh(['run', 'rerun'");
+  assert.ok(transientRerun >= 0);
+  assert.match(transient.slice(0, transientRerun), /state: 'requested'/);
+  assert.doesNotMatch(transient.slice(transientRerun), /state: 'confirmed'/,
+    'il percorso transient non deve consumare il retry prima dell attempt nuovo');
+  assert.match(transient, /attendo un attempt nuovo osservabile/);
+
+  const mainStart = source.indexOf('function main()');
+  const mainEnd = source.indexOf('\nif (process.argv[1]', mainStart);
+  assert.ok(mainStart >= 0 && mainEnd > mainStart);
+  const main = source.slice(mainStart, mainEnd);
+  const quotaRerun = main.indexOf("gh(['run', 'rerun'");
+  assert.ok(quotaRerun >= 0);
+  assert.doesNotMatch(main.slice(quotaRerun), /state: 'confirmed'/,
+    'il percorso quota non deve pubblicare confirmed subito dopo gh run rerun');
+  assert.match(main.slice(quotaRerun), /attendo un attempt nuovo osservabile/);
+  assert.match(source, /if \(run\.attempt > requestedAttempt\)/);
+  assert.match(source, /state: 'confirmed'/);
+});
+
 test('il wiring reagisce al completamento dei consumer e rilascia reservation esistenti', () => {
   const workflow = fs.readFileSync(path.join(ROOT, '.github/workflows/review-quota-rescuer.yml'), 'utf8');
   const tests = fs.readFileSync(path.join(ROOT, '.github/workflows/tests.yml'), 'utf8');
