@@ -370,7 +370,7 @@ runs:
           exit 1
         fi
         codex_version="$("$codex_path" --version 2>/dev/null || true)"
-        if [ "$codex_version" != 'codex-cli 0.153.4' ]; then
+        if ! printf '%s\n' "$codex_version" | /usr/bin/grep -Eq '(^|[^0-9])0\.153\.4([^0-9]|$)'; then
           echo "::error::Unexpected Codex CLI version: $codex_version"
           exit 1
         fi
@@ -486,7 +486,7 @@ runs:
         codex_runtime_root="${CODEX_RUNTIME_ROOT:?Codex runtime directory unavailable}"
         [ -x "$codex_realpath" ] || { echo '::error::Pinned Codex CLI realpath is not executable.'; exit 1; }
         codex_version="$("$codex_bin" --version 2>/dev/null || true)"
-        [ "$codex_version" = 'codex-cli 0.153.4' ] || { echo "::error::Codex CLI version changed: $codex_version"; exit 1; }
+        printf '%s\n' "$codex_version" | /usr/bin/grep -Eq '(^|[^0-9])0\.153\.4([^0-9]|$)' || { echo "::error::Codex CLI version changed: $codex_version"; exit 1; }
 
         # `shell_environment_policy.ignore_default_excludes=false` deliberately
         # strips GH_TOKEN/GITHUB_TOKEN from model-generated subprocesses. Keep
