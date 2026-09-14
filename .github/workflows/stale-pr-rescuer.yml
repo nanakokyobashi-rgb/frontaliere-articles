@@ -228,7 +228,7 @@ jobs:
                   | ascii_downcase)] | unique as $revisions
                 | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
               [.[][]?
-               | select((.user.type // "") == "Bot")
+               | select(.user.type == "Bot")
                | select((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
                | select(has_current_revision($revision))
               ] | sort_by(.id // 0) | last | .body // ""')
@@ -240,7 +240,7 @@ jobs:
                   | ascii_downcase)] | unique as $revisions
                 | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
               [.[][]?
-               | select((.user.type // "") == "Bot")
+               | select(.user.type == "Bot")
                | select((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
                | select(has_current_revision($revision))
               ] | sort_by(.id // 0) | last | .commit_id // ""')

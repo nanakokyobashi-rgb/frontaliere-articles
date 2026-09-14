@@ -143,9 +143,13 @@ function checkRuns({ concl = 'success', pending = 0 } = {}) {
 }
 
 /** Una review Claude, o nessuna. */
-function reviews({ commit = OLD_SHA, body = 'nessun blocco' } = {}) {
+function reviews({
+  commit = OLD_SHA,
+  body = 'nessun blocco',
+  user = { login: 'claude[bot]', type: 'Bot' },
+} = {}) {
   return [{
-    user: { login: 'claude[bot]', type: 'Bot' },
+    user,
     commit_id: commit,
     body: `${body}\n<!-- REVIEW_INPUT_REVISION: ${REVIEW_REVISION} -->`,
   }];
@@ -413,6 +417,22 @@ test('D — review più vecchia dell\'head con test verdi: la classe scatta', op
     /review più vecchia dell'head/,
     `La classe D non ha classificato lo stato della direzione 3 (#201). Commento:\n${body}`,
   );
+});
+
+test('un login reviewer-like umano non diventa una review della classe D', opts, () => {
+  const body = only(
+    runScan({
+      prs: openPr(),
+      checks: checkRuns({ concl: 'success' }),
+      reviews: reviews({
+        commit: OLD_SHA,
+        user: { login: 'claude-human', type: 'User' },
+        body: '🔴 **Important**: finding umano non attendibile',
+      }),
+    }),
+  );
+  assert.match(body, /class=A/);
+  assert.doesNotMatch(body, /review più vecchia dell'head/);
 });
 
 test('D — il rimedio è il rilancio del run di tests, non «mergia main e pusha»', opts, () => {
