@@ -38,8 +38,9 @@ import { readFileSync } from 'node:fs';
 import { describe, it, beforeEach, afterEach } from 'node:test';
 
 import {
-  callLLM,
-  callSingleModel,
+  AI_MODELS,
+  callLLM as callLLMImpl,
+  callSingleModel as callSingleModelImpl,
   discoverFreeModels,
   flushScores,
   __learnRequestTokenLimitForTests,
@@ -65,6 +66,25 @@ import { describeOpaqueRead, scanEnvReads, stripCommentLines } from './lib/env-r
 import { pinIdentifierToFunctions } from './lib/identifier-scope.mjs';
 
 const SRC = readFileSync(new URL('../scripts/lib/ai-models.mjs', import.meta.url), 'utf8');
+
+// Il catalogo live GitHub Models e' in brownout 410. I test di ledger simulano
+// comunque risposte HTTP per misurare scoring/circuit breaker: forniscono un
+// catalogo osservato sintetico, senza trasformare il roster o introdurre una
+// mappa publisher di produzione.
+const GH_MODELS_TEST_CATALOG = [
+  AI_MODELS.GPT4O,
+  AI_MODELS.GPT4O_MINI,
+  AI_MODELS.GPT_4_1,
+  AI_MODELS.GPT_4_1_MINI,
+].map((id) => ({ id: `observed/${id}` }));
+
+const withGitHubModelsCatalog = (opts = {}) => ({
+  ...opts,
+  githubModelsCatalog: opts.githubModelsCatalog ?? GH_MODELS_TEST_CATALOG,
+});
+
+const callLLM = (messages, opts = {}) => callLLMImpl(messages, withGitHubModelsCatalog(opts));
+const callSingleModel = (messages, opts = {}) => callSingleModelImpl(messages, withGitHubModelsCatalog(opts));
 
 // Il sorgente con le RIGHE di commento svuotate. Necessario perche' i commenti
 // di quel modulo citano il codice per esteso — nomi di variabili d'ambiente
