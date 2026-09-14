@@ -339,6 +339,21 @@ test('drift-fallback: 🔴 con revisione corrente ma SHA vecchia → ROSSO', () 
   assert.doesNotMatch(r.stdout, /drift-fallback: APPROVATO/, r.stdout);
 });
 
+test('drift-fallback: 🔴 sulla SHA corrente ma revisione body vecchia → ROSSO', () => {
+  // `lastBotReview()` esclude le review legate a un body precedente. Il
+  // fallback deve quindi conservare il finding anche quando la SHA coincide,
+  // altrimenti il vecchio Important sparisce proprio nel passaggio di body
+  // edit senza modifica del codice.
+  const r = runGate({
+    reviews: [botReview(HEAD, '🔴 Important: il controllo non copre il caso X', { reviewRevision: OLD_BODY_REVISION })],
+    files: ['.github/workflows/tests.yml'],
+    meta: DRIFT_META,
+    compare: COMPARE_CHANGED,
+  });
+  assert.equal(r.status, 1, `Un 🔴 sulla SHA corrente ma su body vecchio deve restare bloccante.\n${r.stdout}`);
+  assert.doesNotMatch(r.stdout, /drift-fallback: APPROVATO/, r.stdout);
+});
+
 test('drift-fallback: 🔴 su SHA vecchio ma contributo INVARIATO + tests.yml → ROSSO', () => {
   // Il codice e' lo stesso: il 🔴 e' ancora il verdetto vivo. tests.yml nel
   // diff della PR (file list) non basta a cancellarlo.

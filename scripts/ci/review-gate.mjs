@@ -130,9 +130,9 @@ function isCodexFallbackReview(review) {
  * A drift fallback cannot erase a finding merely because the old verdict is
  * from another body revision (or predates revision markers). A finding on a
  * different HEAD is also still live: the current body marker does not prove
- * that the finding was re-evaluated after the code changed. If the new review
- * is missing, keep every stale Important visible and require a fresh verdict
- * instead of approving from the PR-body contract alone.
+ * that the finding was re-evaluated after the code changed. If either the
+ * HEAD or the body revision is stale, keep the Important visible and require
+ * a fresh verdict instead of approving from the PR-body contract alone.
  */
 function historicalImportantBlocksDriftFallback() {
   let reviews;
@@ -146,10 +146,12 @@ function historicalImportantBlocksDriftFallback() {
   const blockers = reviews.flat().filter((review) => {
     const reviewer = review?.user?.type === 'Bot'
       && (REVIEWER_BOT_LOGIN_RE.test(review.user?.login || '') || isCodexFallbackReview(review));
+    const staleHead = String(review.commit_id || '') !== HEAD_SHA;
+    const staleRevision = !reviewHasInputRevision(review.body, REVIEW_REVISION);
     return reviewer
       && review.state !== 'PENDING'
-      && String(review.commit_id || '') !== HEAD_SHA
-      && REDFLAG_IMPORTANT_RE.test(String(review.body || ''));
+      && REDFLAG_IMPORTANT_RE.test(String(review.body || ''))
+      && (staleHead || staleRevision);
   });
   if (blockers.length) {
     console.log(
