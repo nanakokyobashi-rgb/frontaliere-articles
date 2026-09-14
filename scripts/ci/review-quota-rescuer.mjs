@@ -102,6 +102,7 @@ export function parseReviewTransientRetryMarker(body) {
   try { event = JSON.parse(match[1]); } catch { return null; }
   const sourceAttempt = Number(event?.sourceAttempt);
   const retryCount = Number(event?.retryCount);
+  const issuedAt = Number(event?.issuedAt);
   const reviewRevision = normalizeReviewInputRevision(event?.reviewRevision);
   if (!event || event.version !== 1
       || !/^[a-f0-9]{40}$/i.test(String(event.head || ''))
@@ -111,6 +112,7 @@ export function parseReviewTransientRetryMarker(body) {
       || reviewRevision === null || !reviewRevision
       || !Number.isSafeInteger(sourceAttempt) || sourceAttempt < 1
       || !Number.isSafeInteger(retryCount) || retryCount < 1
+      || (event.issuedAt !== undefined && (!Number.isSafeInteger(issuedAt) || issuedAt < 1))
       || !REVIEW_TRANSIENT_RETRY_STATES.has(String(event.state || ''))) return null;
   return {
     ...event,
@@ -119,6 +121,10 @@ export function parseReviewTransientRetryMarker(body) {
     claimToken: String(event.claimToken),
     runId: String(event.runId),
     reviewRevision,
+    // Markers emitted before the timestamp field was introduced remain
+    // parseable; latestReviewTransientRetry fills their timestamp from the
+    // trusted GitHub comment time. New markers always persist issuedAt.
+    issuedAt: Number.isSafeInteger(issuedAt) && issuedAt > 0 ? issuedAt : 0,
     sourceAttempt,
     retryCount,
     state: String(event.state),
@@ -128,7 +134,7 @@ export function parseReviewTransientRetryMarker(body) {
 /** Durable marker body for the one-shot review recovery. Pure. */
 export function reviewTransientRetryBody({
   head, reviewRevision, claimToken, sourceRunId, sourceAttempt, runId,
-  retryCount, state = 'confirmed',
+  retryCount, state = 'confirmed', issuedAt = Math.floor(Date.now() / 1000),
 }) {
   const event = {
     version: 1,
@@ -140,6 +146,7 @@ export function reviewTransientRetryBody({
     runId: String(runId),
     retryCount: Number(retryCount),
     state: String(state),
+    issuedAt: Number(issuedAt),
   };
   return `${REVIEW_TRANSIENT_RETRY_MARKER} ${JSON.stringify(event)} -->\n`
     + `_Review gate transient rescuer zero-Claude: rerun bounded ${event.retryCount} su `
@@ -173,7 +180,9 @@ export function latestReviewTransientRetry(
     if (!event || event.head !== String(head).toLowerCase()
         || event.reviewRevision !== expectedRevision) continue;
     const entry = {
-      event,
+      event: event.issuedAt > 0 || !Number.isFinite(Date.parse(comment?.created_at ?? comment?.createdAt ?? ''))
+        ? event
+        : { ...event, issuedAt: Math.floor(Date.parse(comment?.created_at ?? comment?.createdAt) / 1000) },
       commentAt: Date.parse(comment?.created_at ?? comment?.createdAt ?? '') / 1000,
       commentId: Number(comment?.id) || index,
       commentOrder: index,
@@ -560,6 +569,10 @@ function postTransientRetryComment(number, body) {
 }
 
 function transientRetryFields(candidate, run, { state = 'confirmed' } = {}) {
+  const previousIssuedAt = Number(candidate.retry?.issuedAt) || 0;
+  const issuedAt = state === 'requested' && candidate.retry?.state !== 'requested'
+    ? Math.floor(Date.now() / 1000)
+    : previousIssuedAt || Math.floor(Date.now() / 1000);
   return {
     head: candidate.claim.headSha,
     reviewRevision: candidate.claim.reviewRevision,
@@ -569,6 +582,7 @@ function transientRetryFields(candidate, run, { state = 'confirmed' } = {}) {
     runId: process.env.GITHUB_RUN_ID || 'review-transient-rescuer',
     retryCount: candidate.retryCount,
     state,
+    issuedAt,
   };
 }
 

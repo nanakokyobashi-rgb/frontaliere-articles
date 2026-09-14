@@ -12,6 +12,7 @@ import {
   hasReviewQuotaRetry,
   latestReviewQuotaDeferred,
   latestReviewQuotaRetry,
+  latestReviewTransientRetry,
   parseReviewQuotaRetryMarker,
   parseReviewTransientRetryMarker,
   reviewQuotaRetryBody,
@@ -295,6 +296,36 @@ test('un claim failed-transient riceve al massimo un rerun per HEAD e body revis
     0,
     'un marker confirmed chiude la finestra one-shot anche se un nuovo claim transient appare',
   );
+});
+
+test('il marker transient persiste il timestamp della richiesta', () => {
+  const marker = reviewTransientRetryBody({
+    head: HEAD,
+    reviewRevision: BODY_REVISION,
+    claimToken: 'review-token-time',
+    sourceRunId: '77',
+    sourceAttempt: 1,
+    runId: 'rescuer-time',
+    retryCount: 1,
+    issuedAt: 1234,
+    state: 'requested',
+  });
+  assert.equal(parseReviewTransientRetryMarker(marker).issuedAt, 1234);
+
+  const legacy = reviewTransientRetryBody({
+    head: HEAD,
+    reviewRevision: BODY_REVISION,
+    claimToken: 'review-token-legacy',
+    sourceRunId: '77',
+    sourceAttempt: 1,
+    runId: 'rescuer-legacy',
+    retryCount: 1,
+    issuedAt: 1234,
+  }).replace(',"issuedAt":1234', '');
+  const recovered = latestReviewTransientRetry([
+    { id: 7, created_at: '1970-01-01T00:20:34Z', body: legacy },
+  ], { head: HEAD, reviewRevision: BODY_REVISION });
+  assert.equal(recovered.issuedAt, 1234);
 });
 
 test('il transient rescuer ignora claim stantii, attivi o terminali', () => {
