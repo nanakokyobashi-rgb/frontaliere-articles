@@ -63,6 +63,36 @@ describe('GitHub Models request contract', () => {
     assert.equal(modelUsedRef.model, AI_MODELS.GPT4O);
   });
 
+  test('il consumer carica e riusa il catalogo osservato per gli ID bare', async () => {
+    const calls = [];
+    globalThis.fetch = async (url, init) => {
+      calls.push({ url: String(url), init });
+      if (String(url).endsWith('/catalog/models')) {
+        return new Response(JSON.stringify({ models: [{ id: 'openai/gpt-4o' }] }), {
+          status: 200,
+          headers: { 'content-type': 'application/json' },
+        });
+      }
+      return new Response(JSON.stringify({ choices: [{ message: { content: 'ok' } }] }), {
+        status: 200,
+        headers: { 'content-type': 'application/json' },
+      });
+    };
+
+    await callSingleModel([{ role: 'user', content: 'x' }], {
+      model: AI_MODELS.GPT4O,
+      maxRetriesPerModel: 1,
+    });
+    await callSingleModel([{ role: 'user', content: 'y' }], {
+      model: AI_MODELS.GPT4O,
+      maxRetriesPerModel: 1,
+    });
+
+    assert.equal(calls.filter(({ url }) => url.endsWith('/catalog/models')).length, 1);
+    assert.equal(calls.filter(({ url }) => url.endsWith('/chat/completions')).length, 2);
+    assert.equal(JSON.parse(calls[1].init.body).model, 'openai/gpt-4o');
+  });
+
   test('usa l id bare per il parametro e il cap dei modelli qualificati', async () => {
     const calls = [];
     globalThis.fetch = async (url, init) => {
@@ -96,6 +126,7 @@ describe('GitHub Models request contract', () => {
     await assert.rejects(
       () => callSingleModel([{ role: 'user', content: 'x' }], {
         model: AI_MODELS.GPT4O,
+        githubModelsCatalog: null,
         maxRetriesPerModel: 3,
         recordScore: false,
       }),
@@ -144,10 +175,13 @@ test('i brownout GitHub sono persistenti nel verdetto aggregato', async () => {
   );
 
   resetState();
-  let fetchCalls = 0;
-  globalThis.fetch = async () => {
-    fetchCalls++;
-    throw new Error('il catalogo non osservabile non deve chiamare il completions endpoint');
+  const fetchCalls = [];
+  globalThis.fetch = async (url) => {
+    fetchCalls.push(String(url));
+    return new Response(JSON.stringify({ error: { code: 'github_models_retirement_brownout' } }), {
+      status: 410,
+      headers: { 'content-type': 'application/json' },
+    });
   };
   await assert.rejects(
     () => callLLM([{ role: 'user', content: 'x' }], {
@@ -157,5 +191,5 @@ test('i brownout GitHub sono persistenti nel verdetto aggregato', async () => {
     }),
     persistentVerdict('il catalogo in brownout deve votare persistente'),
   );
-  assert.equal(fetchCalls, 0);
+  assert.deepEqual(fetchCalls, ['https://models.github.ai/catalog/models']);
 });

@@ -672,6 +672,7 @@ const PROVIDER = Object.freeze({
 
 // ── Endpoints ────────────────────────────────────────────────
 const GH_MODELS_BASE      = GH_MODELS_URL;
+const GH_MODELS_CATALOG_URL = new URL('/catalog/models', GH_MODELS_BASE).toString();
 const GH_MODELS_BROWNOUT_STATUS = 410;
 const GEMINI_API_BASE     = 'https://generativelanguage.googleapis.com/v1beta/models';
 const GROQ_API_BASE       = 'https://api.groq.com/openai/v1/chat/completions';
@@ -752,6 +753,46 @@ export function qualifyGitHubModelId(model, catalog) {
     throw _githubModelsError(`nessun publisher osservato nel catalogo per ${id}`);
   }
   throw _githubModelsError(`publisher ambiguo nel catalogo per ${id}`);
+}
+
+/**
+ * Load the observed GitHub Models catalog for production callers that do not
+ * provide a test/cache snapshot. Keep the promise, including a rejected 410,
+ * so a provider-wide catalog brownout costs one observable request per process
+ * instead of one request for every bare roster id.
+ */
+let _githubModelsCatalogPromise = null;
+
+async function _getGitHubModelsCatalog(apiKey, timeout) {
+  if (_githubModelsCatalogPromise) return _githubModelsCatalogPromise;
+  const timeoutMs = Number.isFinite(timeout) && timeout > 0 ? timeout : 30000;
+  _githubModelsCatalogPromise = (async () => {
+    const res = await fetch(GH_MODELS_CATALOG_URL, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${apiKey}`,
+      },
+      signal: AbortSignal.timeout(timeoutMs),
+    });
+    const raw = await res.text().catch(() => '');
+    const lower = raw.toLowerCase();
+    if (!res.ok) {
+      if (res.status === GH_MODELS_BROWNOUT_STATUS || lower.includes('github_models_retirement_brownout')) {
+        throw _githubModelsError(
+          `catalogo GitHub Models non disponibile (brownout ${res.status})`,
+          'github_models_catalog_brownout',
+        );
+      }
+      throw _githubModelsError(`catalogo GitHub Models HTTP ${res.status}`);
+    }
+    try {
+      return JSON.parse(raw);
+    } catch {
+      throw _githubModelsError('catalogo GitHub Models con JSON non valido');
+    }
+  })();
+  return _githubModelsCatalogPromise;
 }
 
 // ── Local LLM (llama.cpp / ollama, OpenAI-compatible) ────────
@@ -5324,6 +5365,7 @@ export function resetState() {
   // distingue «cap disattivato di proposito» da «pensavo di averlo spento».
   _claudeCliUnlimitedWarned = false;
   _responseCache.clear();
+  _githubModelsCatalogPromise = null;
   _claudeCliBinaryMissing = false;
   _claudeCliConsecutiveTimeouts = 0;
   _claudeCliTimeoutStormDetected = false;
@@ -6620,7 +6662,10 @@ async function _callGitHub(model, messages, opts) {
   // lookup; only the emitted API payload may carry the observed publisher.
   let apiModel;
   try {
-    apiModel = qualifyGitHubModelId(model, opts.githubModelsCatalog);
+    const catalog = opts.githubModelsCatalog === undefined && !String(model).includes('/')
+      ? await _getGitHubModelsCatalog(pats[0], opts.timeout)
+      : opts.githubModelsCatalog;
+    apiModel = qualifyGitHubModelId(model, catalog);
   } catch (error) {
     // Mapping is a permanent provider verdict for this process. Preserve the
     // split required by recordScore: the run-local ban must still stop the
