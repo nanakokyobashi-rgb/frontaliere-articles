@@ -24,14 +24,24 @@ test('scarica helper affidabili dal main del corpus e usa il PAT corretto', () =
   assert.match(source, /scripts\/ci\/native-automerge-gate\.mjs\?ref=main/);
   assert.match(source, /scripts\/ci\/review-test-policy\.mjs\?ref=main/);
   assert.match(source, /scripts\/ci\/lib\/fetchPrFiles\.mjs\?ref=main/);
+  assert.match(source, /scripts\/ci\/lib\/vitestCheck\.mjs\?ref=main/);
   assert.match(source, /GITHUB_PAT_NANAKO/);
   assert.doesNotMatch(source, /gh pr merge/);
 });
 
-test('la bootstrap incompleta è un no-op, mentre il gate mantiene il fail-closed', () => {
+test('la bootstrap valida ogni helper prima del mv e pulisce anche il dipendente', () => {
   assert.match(source, /node --check "\$gate_tmp"/);
   assert.match(source, /node --check "\$policy_tmp"/);
   assert.match(source, /node --check "\$files_tmp"/);
+  assert.match(source, /node --check "\$vitest_tmp"/);
+  assert.match(source, /mv "\$vitest_tmp" "\$helper_dir\/lib\/vitestCheck\.mjs"/);
+  assert.match(source, /rm -f "\$gate_tmp" "\$policy_tmp" "\$files_tmp" "\$vitest_tmp"/);
+  assert.match(source, /"\$helper_dir\/lib\/fetchPrFiles\.mjs" "\$helper_dir\/lib\/vitestCheck\.mjs"/);
+});
+
+test('un helper dipendente non validabile lascia la bootstrap in no-op fail-closed', () => {
+  assert.match(source, /&& \[ -s "\$vitest_tmp" \]/);
   assert.match(source, /if: env\.NATIVE_AUTOMERGE_BOOTSTRAP_READY == 'true'/);
+  assert.match(source, /NATIVE_AUTOMERGE_BOOTSTRAP_READY=false/);
   assert.match(source, /native-automerge-gate\.mjs/);
 });
