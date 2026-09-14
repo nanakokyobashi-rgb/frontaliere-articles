@@ -143,6 +143,15 @@
       }
     },
     {
+      "path": "scripts/ci/native-automerge-gate.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "1f6ec77d5a400a3e",
+        "corpus": "1f6ec77d5a400a3e",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
       "path": "scripts/ci/review-scope.mjs",
       "mode": "corpus-only",
       "reason": "Classificatore del verdetto `🔴 Important` rispetto al diff corrente della PR. E' usato dal review-gate e dal fixer del corpus per declassare in modo conservativo i finding fuori diff e coniare una sola issue follow-up; il sito ha un gate e un ciclo di review diversi e non possiede questo consumer del corpus, quindi non esiste un gemello da portare.",
