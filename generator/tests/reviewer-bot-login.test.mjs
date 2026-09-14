@@ -46,6 +46,13 @@ test('i workflow che filtrano le review usano il predicato jq condiviso', () => 
       `${wf} filtra ancora il solo login claude`,
     );
   }
+  for (const wf of ['.github/workflows/pr-redflag-fixer.yml', '.github/workflows/stale-pr-rescuer.yml']) {
+    const src = read(wf);
+    assert.ok(
+      /select\(\(\.user\.type \/\/ ""\) == "Bot"\)/.test(src),
+      `${wf} deve richiedere un reviewer GitHub di tipo Bot`,
+    );
+  }
 });
 
 test('i consumer .mjs della review importano la costante invece di riscriverla', () => {
