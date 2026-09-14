@@ -1272,11 +1272,13 @@ async function processPR(pr) {
           if (!reviewInputContextStillCurrent(num, head, reviewRevision)) return;
           const pushed = pushBranch(branch);
           if (pushed !== null) {
+            const pushedContext = currentReviewInputContext(num);
             // Push OK: la PR è ora mergeable. Dispatch tests (gate vitest di
             // auto-merge-eval valida la risoluzione: se l'unione fosse errata i
             // test falliscono e non si mergia). LGTM carry-forward.
             console.log(`✅ PR #${num}: conflitto import-union AUTO-RISOLTO + pushato → mergeable; dispatch tests.`);
-            if (reviewInputContextStillCurrent(num, head, reviewRevision)
+            if (pushedContext?.reviewRevision === reviewRevision
+              && reviewInputContextStillCurrent(num, pushedContext.headSha, reviewRevision)
               && dispatchTests(num, branch)) clearStaleReviewLabel(num);
             done = true;
           }
@@ -1447,6 +1449,11 @@ async function processPR(pr) {
     console.log(`PR #${num}: push fallito (probabile non-fast-forward / TOCTOU) — skip, riprova al prossimo tick.`);
     return;
   }
+  const pushedContext = currentReviewInputContext(num);
+  if (!pushedContext || pushedContext.reviewRevision !== reviewRevision) {
+    console.log(`PR #${num}: body PR cambiato o HEAD post-push illeggibile — skip azione successiva questo tick.`);
+    return;
+  }
 
   // Ri-esegui SOLO i test sull'head rebasato — NON la review Claude (frugalità
   // quota). Un push PAT su un branch PR NON ri-triggera in modo affidabile i
@@ -1471,7 +1478,7 @@ async function processPR(pr) {
   if (!lgtm) {
     if (labels.includes('needs-human')) {
       console.log(`PR #${num}: rebasata ma needs-human (round-cap) → no reopen (attende umano); solo dispatch tests.`);
-      if (reviewInputContextStillCurrent(num, head, reviewRevision)
+      if (reviewInputContextStillCurrent(num, pushedContext.headSha, reviewRevision)
         && dispatchTests(num, branch)) clearStaleReviewLabel(num);
       return;
     }
@@ -1485,14 +1492,14 @@ async function processPR(pr) {
     // è appena stato PROVATO non attribuibile (red-main/stale) e il reopen è
     // esattamente la ri-esecuzione promessa — `stuckRedReason` disattiva la
     // sola precondizione (il budget del breaker conta comunque).
-    if (reviewInputContextStillCurrent(num, head, reviewRevision)
-      && guardedReopen(num, head, { stuckRedReason })) {
+    if (reviewInputContextStillCurrent(num, pushedContext.headSha, reviewRevision)
+      && guardedReopen(num, pushedContext.headSha, { stuckRedReason })) {
       clearStaleReviewLabel(num);
       console.log(`✅ PR #${num}: rebasata, pushata e ri-aperta (${why}) → review+redflag ri-triggerati drift-free.`);
     }
     return;
   }
-  if (reviewInputContextStillCurrent(num, head, reviewRevision)
+  if (reviewInputContextStillCurrent(num, pushedContext.headSha, reviewRevision)
     && dispatchTests(num, branch)) {
     clearStaleReviewLabel(num);
     console.log(`✅ PR #${num}: rebasata su origin/main, pushata (${branch}) e dispatchato tests.yml → vitest sull'head; LGTM carry-forward, zero Claude.`);

@@ -481,6 +481,7 @@ async function main() {
   }
   let outsideOnlyApproved = false;
   if (hasRedflag) {
+    if (!reviewInputContextStillCurrent(head, reviewRevision)) return;
     try {
       const scope = await classifyAndMintReview(body, {
         repo: REPO,
@@ -497,6 +498,7 @@ async function main() {
           `Ultima review claude-bot contiene ${scope.inScope.length} finding nel diff e ${scope.unresolved.length} non risolvibili — skip (no merge).`,
         );
       }
+      if (!reviewInputContextStillCurrent(head, reviewRevision)) return;
     } catch (error) {
       return fail(`Classificazione scope della review fallita (${String(error).slice(0, 180)}) — skip (no merge).`);
     }

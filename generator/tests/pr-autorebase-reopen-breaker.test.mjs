@@ -333,7 +333,7 @@ describe('stuck-red: un failure PROVATO non attribuibile non blocca il reopen', 
     // chiamerebbe `guardedReopen(num, head)` e l'eccezione non scatterebbe
     // mai — guardia presente, buco intatto, la stessa forma della guardia
     // morta trovata su M3b (identificatore giusto, punto sbagliato).
-    expect(script).toContain('guardedReopen(num, head, { stuckRedReason })');
+    expect(script).toContain('guardedReopen(num, pushedContext.headSha, { stuckRedReason })');
     expect(script).toMatch(/failureNotAttributable:\s*stuckRedReason/);
   });
 
