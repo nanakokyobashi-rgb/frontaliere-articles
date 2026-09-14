@@ -354,6 +354,20 @@ test('drift-fallback: 🔴 sulla SHA corrente ma revisione body vecchia → ROSS
   assert.doesNotMatch(r.stdout, /drift-fallback: APPROVATO/, r.stdout);
 });
 
+test('drift-fallback: review storica senza LGTM → ROSSO', () => {
+  // `lastBotReview()` scarta le review legate al body precedente. Una review
+  // storica non approvante senza 🔴 Important non deve però diventare un
+  // insieme vuoto che il fallback può scavalcare.
+  const r = runGate({
+    reviews: [botReview(OLD, '❓ q: verificare il percorso di recovery')],
+    files: ['.github/workflows/tests.yml'],
+    meta: DRIFT_META,
+    compare: COMPARE_CHANGED,
+  });
+  assert.equal(r.status, 1, `Una review storica senza LGTM deve restare bloccante.\n${r.stdout}`);
+  assert.doesNotMatch(r.stdout, /drift-fallback: APPROVATO/, r.stdout);
+});
+
 test('drift-fallback: 🔴 su SHA vecchio ma contributo INVARIATO + tests.yml → ROSSO', () => {
   // Il codice e' lo stesso: il 🔴 e' ancora il verdetto vivo. tests.yml nel
   // diff della PR (file list) non basta a cancellarlo.

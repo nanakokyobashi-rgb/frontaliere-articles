@@ -127,14 +127,14 @@ function isCodexFallbackReview(review) {
 }
 
 /**
- * A drift fallback cannot erase a finding merely because the old verdict is
- * from another body revision (or predates revision markers). A finding on a
- * different HEAD is also still live: the current body marker does not prove
- * that the finding was re-evaluated after the code changed. If either the
- * HEAD or the body revision is stale, keep the Important visible and require
- * a fresh verdict instead of approving from the PR-body contract alone.
+ * A drift fallback cannot erase a non-approving review merely because the old
+ * verdict is from another body revision (or predates revision markers). A
+ * review on a different HEAD is also still live: the current body marker does
+ * not prove that the review was re-evaluated after the code changed. If either
+ * the HEAD or the body revision is stale, require a fresh approving verdict
+ * instead of approving from the PR-body contract alone.
  */
-function historicalImportantBlocksDriftFallback() {
+function historicalNonApprovingBlocksDriftFallback() {
   let reviews;
   try {
     reviews = gh(['api', `repos/${REPO}/pulls/${PR}/reviews`, '--paginate']) || [];
@@ -148,14 +148,16 @@ function historicalImportantBlocksDriftFallback() {
       && (REVIEWER_BOT_LOGIN_RE.test(review.user?.login || '') || isCodexFallbackReview(review));
     const staleHead = String(review.commit_id || '') !== HEAD_SHA;
     const staleRevision = !reviewHasInputRevision(review.body, REVIEW_REVISION);
+    const body = String(review.body || '');
+    const nonApproving = !body.includes('## LGTM') || REDFLAG_IMPORTANT_RE.test(body);
     return reviewer
       && review.state !== 'PENDING'
-      && REDFLAG_IMPORTANT_RE.test(String(review.body || ''))
+      && nonApproving
       && (staleHead || staleRevision);
   });
   if (blockers.length) {
     console.log(
-      `drift-fallback: ${blockers.length} finding Important storico senza verdetto per ${REVIEW_REVISION} — no fallback.`,
+      `drift-fallback: ${blockers.length} review non approvante storica senza verdetto per ${REVIEW_REVISION} — no fallback.`,
     );
     return true;
   }
@@ -247,7 +249,7 @@ function lastBotReview() {
  * al posto del `## LGTM`. Un 🔴 che SI APPLICA alla head resta bloccante.
  */
 function driftFallbackApproves() {
-  if (historicalImportantBlocksDriftFallback()) return false;
+  if (historicalNonApprovingBlocksDriftFallback()) return false;
   let files;
   try {
     files = gh(['api', `repos/${REPO}/pulls/${PR}/files`, '--paginate', '--jq', '.[].filename'], {
