@@ -372,7 +372,12 @@ jobs:
             exit 0
           fi
 
-          last=$(printf '%s' "$reviews" | jq -r '
+          # Il fast-path incrementale parte solo da una review che porta la
+          # revisione del body corrente. Se restasse una review del body
+          # precedente, il suo compare potrebbe classificare il delta come
+          # solo content/data e saltare Claude proprio dopo una correzione del
+          # contratto; in quel caso si deve ripartire da una review piena.
+          last=$(printf '%s' "$reviews" | jq -r --arg revision "$REVIEW_REVISION" '
             [flatten[]
              | select((.state // "") != "PENDING")
              | select(.user.type == "Bot")
@@ -380,6 +385,10 @@ jobs:
                  ((.user.login // "") | test("^(claude|frontaliere-automation)"; "i"))
                  or (((.user.login // "") | test("^github-actions\\[bot\\]$"; "i"))
                      and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
+               )
+             | select(
+                 [((.body // "") | scan("<!--\\s*REVIEW_INPUT_REVISION:\\s*(body:[0-9a-f]{64})\\s*-->" ) | .[])]
+                 | unique == [$revision]
                )
             ] | sort_by(.id // 0) | last | .commit_id // empty' 2>/dev/null || true)
           if [ -z "$last" ]; then

@@ -152,8 +152,10 @@ function historicalNonApprovingBlocksDriftFallback() {
     const nonApproving = !body.includes('## LGTM') || REDFLAG_IMPORTANT_RE.test(body);
     return reviewer
       && review.state !== 'PENDING'
-      && nonApproving
-      && (staleHead || staleRevision);
+      // A body edit invalidates every older verdict, including an old LGTM.
+      // For the same body revision, preserve the existing drift rule: only a
+      // stale non-approving verdict blocks the deterministic fallback.
+      && (staleRevision || (nonApproving && staleHead));
   });
   if (blockers.length) {
     console.log(

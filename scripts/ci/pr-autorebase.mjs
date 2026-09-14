@@ -60,6 +60,7 @@
  * Env:  GH_TOKEN (PAT, per push + dispatch tests.yml; serve scope actions:write),
  *       GITHUB_REPOSITORY. Richiede `gh` + `git` in un checkout full-history.
  */
+import { createHash } from 'node:crypto';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
 import {
@@ -97,6 +98,7 @@ import {
   renderReopenBudget,
 } from './lib/reopen-breaker.mjs';
 import { intFromEnv, positiveIntFromEnv } from '../lib/int-from-env.mjs';
+import { reviewHasInputRevision } from './review-test-policy.mjs';
 
 const DRY = process.argv.includes('--dry-run');
 const REPO = process.env.GITHUB_REPOSITORY || '';
@@ -199,6 +201,16 @@ function gh(args, { json = true, allowFail = false } = {}) {
   }
 }
 
+/** The current trusted PR body is part of the review input identity. */
+function currentReviewInputRevision(num) {
+  try {
+    const body = gh(['api', `repos/${REPO}/pulls/${num}`, '--jq', '.body // ""'], { json: false });
+    return `body:${createHash('sha256').update(body).digest('hex')}`;
+  } catch {
+    return null;
+  }
+}
+
 /**
  * `git merge-tree --write-tree` fra `origin/main` e una head, che è l'ORACOLO
  * giusto per «questa PR è in conflitto?».
@@ -297,23 +309,28 @@ function pushBranch(branch) {
   );
 }
 
-/** Una review claude-bot con `## LGTM` (su qualunque commit)? */
-function hasLgtmReview(num) {
+/** Una review claude-bot con `## LGTM` sulla revisione body corrente? */
+function hasLgtmReview(num, reviewRevision = currentReviewInputRevision(num)) {
+  if (!reviewRevision) return false;
   const reviews = gh(['api', `repos/${REPO}/pulls/${num}/reviews`, '--paginate'], { allowFail: true });
   if (!Array.isArray(reviews)) return false;
   return reviews.some(
-    (r) => isReviewerBot(r.user) && (r.body || '').includes('## LGTM')
+    (r) => isReviewerBot(r.user)
+      && reviewHasInputRevision(r.body, reviewRevision)
+      && (r.body || '').includes('## LGTM')
   );
 }
 
-/** Esiste ALMENO una review claude-bot (LGTM o 🔴, qualunque esito)? Serve a
+/** Esiste ALMENO una review claude-bot della revisione body corrente (LGTM o 🔴,
+ * qualunque esito)? Serve a
  * distinguere la classe-A "review mai postata" (workflow-validation drift 401:
  * run review fallita, body vuoto) da "review postata con 🔴" (gestita dal
  * redflag-fixer, NON va ri-triggerata qui). */
-function hasAnyClaudeReview(num) {
+function hasAnyClaudeReview(num, reviewRevision = currentReviewInputRevision(num)) {
+  if (!reviewRevision) return true; // API body illeggibile: non aprire/retriggerare alla cieca
   const reviews = gh(['api', `repos/${REPO}/pulls/${num}/reviews`, '--paginate'], { allowFail: true });
   if (!Array.isArray(reviews)) return true; // fail-safe: su errore API assumi review esistente (no reopen)
-  return reviews.some((r) => isReviewerBot(r.user));
+  return reviews.some((r) => isReviewerBot(r.user) && reviewHasInputRevision(r.body, reviewRevision));
 }
 
 /** Re-trigger DETERMINISTICO di review+tests per una PR classe-A: il push PAT
@@ -1110,8 +1127,11 @@ async function processPR(pr) {
     console.log(`PR #${num}: ${d.reason}`);
   }
 
-  // GATE frugalità: solo near-merge.
-  const lgtm = hasLgtmReview(num);
+  // GATE frugalità: solo near-merge. Tutte le decisioni sul verdetto usano la
+  // stessa revisione del body; un LGTM del body precedente non rende la PR
+  // near-merge e non può scegliere il ramo di solo dispatch.
+  const reviewRevision = currentReviewInputRevision(num);
+  const lgtm = hasLgtmReview(num, reviewRevision);
   let nearMerge =
     labels.includes('collision-risk') ||
     labels.includes('stale-review') ||
@@ -1175,7 +1195,7 @@ async function processPR(pr) {
     // appena un run è queued, headHasVitestCheck torna true → niente
     // ri-dispatch. Nessun rebase, nessuna review Claude.
     if (!headHasVitestCheck(head)) {
-      if (!lgtm && !hasAnyClaudeReview(num)) {
+      if (!lgtm && !hasAnyClaudeReview(num, reviewRevision)) {
         // Classe-A: nemmeno la review esiste (drift 401) — il solo vitest non
         // sblocca (auto-merge esige LGTM). Reopen = review+tests insieme.
         console.log(`PR #${num} 0 dietro main, NESSUNA review claude e niente vitest → close+reopen (re-trigger review+tests).`);

@@ -254,6 +254,9 @@ test('tests.yml claims before review work and finalizes without gating the requi
   assert.match(workflow, /contains\("<!-- REVIEW_INPUT_REVISION:/);
   assert.match(workflow, /--arg revision \"\$REVIEW_REVISION\"/);
   assert.match(workflow, /scan\("<!--\\\\s\*REVIEW_INPUT_REVISION:/);
+  const incrementalGuard = workflow.slice(workflow.indexOf('last=$(printf'), workflow.indexOf('if [ -z "$last"', workflow.indexOf('last=$(printf')));
+  assert.match(incrementalGuard, /--arg revision \"\$REVIEW_REVISION\"/);
+  assert.match(incrementalGuard, /unique == \[\$revision\]/);
   assert.match(workflow, /steps\.review_claim\.outputs\.claim_allowed == 'true'/);
 
   const gateAt = workflow.indexOf('id: review_gate');
@@ -261,4 +264,16 @@ test('tests.yml claims before review work and finalizes without gating the requi
   const gateBlock = workflow.slice(gateAt, workflow.indexOf('\n      - name:', gateAt + 1));
   assert.match(gateBlock, /always\(\)/);
   assert.doesNotMatch(gateBlock, /review_claim\.outputs\.claim_allowed/);
+});
+
+test('tutti i consumer di review usano la revisione del body corrente', () => {
+  const autorebase = fs.readFileSync(path.join(ROOT, 'scripts/ci/pr-autorebase.mjs'), 'utf8');
+  assert.match(autorebase, /currentReviewInputRevision\(num\)/);
+  assert.match(autorebase, /reviewHasInputRevision\(r\.body, reviewRevision\)/);
+  assert.match(autorebase, /const reviewRevision = currentReviewInputRevision\(num\)/);
+
+  const autoMerge = fs.readFileSync(path.join(ROOT, 'scripts/ci/auto-merge-eval.mjs'), 'utf8');
+  assert.match(autoMerge, /currentReviewInputRevision\(\)/);
+  assert.match(autoMerge, /findTestOnlyApproval\(reviews, head, \{[\s\S]*reviewRevision/);
+  assert.match(autoMerge, /reviewHasInputRevision\(r\.body, reviewRevision\)/);
 });

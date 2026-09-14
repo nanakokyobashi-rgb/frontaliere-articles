@@ -64,7 +64,8 @@
  * Exit 0 sempre (anche quando NON mergia): un gate non soddisfatto è un esito
  * atteso (l'altro trigger ri-valuterà), non un errore di workflow.
  */
-import { isReviewTestPath, findTestOnlyApproval } from './review-test-policy.mjs';
+import { createHash } from 'node:crypto';
+import { isReviewTestPath, findTestOnlyApproval, reviewHasInputRevision } from './review-test-policy.mjs';
 import { execFileSync } from 'node:child_process';
 import {
   VITEST_CHECK_NAME,
@@ -87,6 +88,16 @@ function gh(args, { json = true, token } = {}) {
   if (token) env.GH_TOKEN = token;
   const out = execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, env });
   return json ? JSON.parse(out) : out;
+}
+
+/** The trusted PR body hash is the review input revision for every consumer. */
+function currentReviewInputRevision() {
+  try {
+    const body = gh(['api', `repos/${REPO}/pulls/${PR}`, '--jq', '.body // ""'], { json: false });
+    return `body:${createHash('sha256').update(body).digest('hex')}`;
+  } catch {
+    return null;
+  }
 }
 
 function fail(msg) {
@@ -406,6 +417,9 @@ async function main() {
   const labels = (pr.labels || []).map((l) => l.name);
   console.log(`HEAD SHA: ${head} · labels: [${labels.join(', ') || '—'}]`);
 
+  const reviewRevision = currentReviewInputRevision();
+  if (!reviewRevision) return fail(`Impossibile leggere il body della PR #${PR} per la revisione della review — skip conservativo.`);
+
   // 2. Ultima review del bot reviewer sulla HEAD corrente: `## LGTM` e NO 🔴 Important.
   let reviews;
   try {
@@ -415,8 +429,11 @@ async function main() {
   }
   const botReviews = (reviews || []).filter(
     (r) => r.user && r.user.type === 'Bot' && REVIEWER_BOT_LOGIN_RE.test(r.user.login || '')
+      && reviewHasInputRevision(r.body, reviewRevision)
   );
-  const lastBot = findTestOnlyApproval(reviews, head, { ghFn: gh, repo: REPO, pr: PR })
+  const lastBot = findTestOnlyApproval(reviews, head, {
+    ghFn: gh, repo: REPO, pr: PR, reviewRevision,
+  })
     || (botReviews.length ? botReviews[botReviews.length - 1] : null);
   const body = lastBot ? (lastBot.body || '') : '';
   // Un 🔴 Important reale del reviewer BLOCCA se resta nel diff o non è
@@ -497,6 +514,14 @@ async function main() {
     // la PR modifica il workflow che ospita la review (401). Prova il drift-fallback
     // deterministico (autore fidato + body-contract). false → skip (ri-valuta al
     // prossimo `tests`/push).
+    const staleReview = (reviews || []).some((review) =>
+      review?.user?.type === 'Bot'
+      && REVIEWER_BOT_LOGIN_RE.test(review.user.login || '')
+      && review.state !== 'PENDING'
+      && !reviewHasInputRevision(review.body, reviewRevision));
+    if (staleReview) {
+      return fail(`Esiste una review bot storica per una revisione body diversa da ${reviewRevision} — skip; serve un verdetto fresco.`);
+    }
     if (!evaluateDriftFallback()) {
       return fail(`Nessuna review claude-bot e drift-fallback non applicabile — skip.`);
     }
