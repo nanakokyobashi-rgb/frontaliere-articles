@@ -66,7 +66,6 @@ test('il preflight include il Codex action-owned quando il broker è pronto', as
     }
   }
 });
-
 test('GitHub Models preflight usa il successore e tratta il brownout 410 come provider non disponibile', async () => {
   const previousPat = process.env.GH_MODELS_PAT;
   process.env.GH_MODELS_PAT = 'preflight-test-pat';

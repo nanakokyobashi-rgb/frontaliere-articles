@@ -1557,7 +1557,9 @@ function getProvider(model) {
   return PROVIDER.GITHUB;
 }
 
-// Read-only provider view for the corpus preflight; runtime call sites keep the private helper.
+// Public read-only view for diagnostics and preflight callers. Keeping the
+// implementation under the original private name avoids changing every
+// runtime call site in this large module.
 export const getProviderForModel = getProvider;
 
 /**

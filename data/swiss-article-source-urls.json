@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/dal-mondo/politica/1944471/texas-big-bend-anti-migranti-muro-lavori": "sospensione-lavori-muro-anti-migranti-big-bend-texas",
   "https://www.tio.ch/sport/calcio/1944472/infantino-fifa-lamour-critiche-kevin": "infantino-fifa-lamour-licenziato",
   "https://www.rsi.ch/info/salute/dolce-far-niente-ecco-perch%c3%a9-fermarsi-fa-bene--3949560.html": "dolce-far-niente-benessere-svizzera",
   "https://www.tio.ch/ticino/attualita/1940625/dagli-aumenti-alle-liti-in-casa-come-evitare-che-un-affitto-finisca-in-tribunale": "diritto-locazione-conciliazione-ticino",
@@ -2433,6 +2432,11 @@
   "https://www.tio.ch/svizzera/politica/1949755/nazionale-consiglio-manifestazione-berna-dovrebbe-vuole-politica-carcere": {
     "articleId": "detenzione-48-ore-manifestazioni",
     "ts": "2026-09-14T12:38:56.978Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4082782": {
+    "articleId": "tassi-interesse-svizzera-bassi",
+    "ts": "2026-09-14T19:40:31.778Z",
     "keyForm": 2
   }
 }
