@@ -692,6 +692,7 @@ function _githubModelsError(message, reason = 'github_models_mapping_unavailable
   return Object.assign(new Error(`[GitHub] ${message}`), {
     nonRetryable: true,
     nonRetryableReason: reason,
+    markExhausted: true,
   });
 }
 
@@ -6602,7 +6603,22 @@ async function _callGitHub(model, messages, opts) {
   if (pats.length === 0) throw new Error('GitHub API key not set');
   // Keep the roster id untouched for getProvider(), score storage and ledger
   // lookup; only the emitted API payload may carry the observed publisher.
-  const apiModel = qualifyGitHubModelId(model, opts.githubModelsCatalog);
+  let apiModel;
+  try {
+    apiModel = qualifyGitHubModelId(model, opts.githubModelsCatalog);
+  } catch (error) {
+    // Mapping is a permanent provider verdict for this process. Preserve the
+    // split required by recordScore: the run-local ban must still stop the
+    // cascade, while the shared ledger remains opt-out-able.
+    if (error?.markExhausted) {
+      markModelExhausted(model, 'nonretryable', error.nonRetryableReason || '', {
+        recordScore: _shouldRecordScore(opts),
+      });
+      _stats.exhausted++;
+      error.exhausted = true;
+    }
+    throw error;
+  }
   // Single-PAT (the default): identical behaviour to before — one normal call.
   if (pats.length === 1) {
     return _callOpenAICompatible(apiModel, messages, opts, {

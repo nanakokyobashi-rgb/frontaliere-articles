@@ -44,7 +44,8 @@ import { describe, it, beforeEach, afterEach } from 'node:test';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import {
-  callLLM,
+  AI_MODELS,
+  callLLM as callLLMImpl,
   coerceRecordScore,
   discoverFreeModels,
   getStats,
@@ -62,6 +63,19 @@ import {
   printRunSummary,
   _discoverProvider,
 } from '../scripts/lib/ai-models.mjs';
+
+// Il catalogo live GitHub Models e' in brownout 410. Questi test simulano
+// risposte HTTP per misurare l'opt-out del ledger, quindi passano solo
+// publisher osservati sintetici: nessuna mappa statica entra in produzione.
+const GH_MODELS_TEST_CATALOG = [
+  AI_MODELS.GPT4O_MINI,
+  AI_MODELS.GPT_4_1_MINI,
+].map((id) => ({ id: `observed/${id}` }));
+
+const callLLM = (messages, opts = {}) => callLLMImpl(messages, {
+  ...opts,
+  githubModelsCatalog: opts.githubModelsCatalog ?? GH_MODELS_TEST_CATALOG,
+});
 
 /**
  * Il segnale si riconosce dal TESTO che il modulo emette, non da tre parole

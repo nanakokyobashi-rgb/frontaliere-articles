@@ -5,6 +5,7 @@ import {
   AI_MODELS,
   callSingleModel,
   classifyNonRetryableError,
+  getStats,
   qualifyGitHubModelId,
   resetState,
 } from '../scripts/lib/ai-models.mjs';
@@ -72,11 +73,14 @@ describe('GitHub Models request contract', () => {
       () => callSingleModel([{ role: 'user', content: 'x' }], {
         model: AI_MODELS.GPT4O,
         maxRetriesPerModel: 3,
+        recordScore: false,
       }),
       (error) => error.nonRetryable === true
         && error.nonRetryableReason === 'github_models_catalog_brownout',
     );
     assert.equal(fetchCalls, 0);
+    assert.deepEqual(getStats().exhaustedModels, [AI_MODELS.GPT4O]);
+    assert.equal(getStats().dirtyModels, 0);
   });
 });
 
