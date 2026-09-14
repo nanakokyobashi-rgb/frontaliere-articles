@@ -33,9 +33,11 @@
  * (ALL distinctive prescribed code tokens present, or the separate provenance-backed legacy
  * acceptance with its explicit negative assertions evaluated — the same bar remains in force
  * for the ordinary path).
- * Multi-item aggregates and keep-open/strategic issues never auto-close (a prose-only
- * sub-item contributes no gating token, so "all tokens present" can't prove every item is
- * done). A genuinely-pending fix recurs and reopens via the dedup-stable monitor title.
+ * Multi-item aggregates and keep-open/strategic issues never auto-close when the body
+ * still contains an item that cannot be verified. A prose-only sub-item contributes no
+ * gating token, so a mixed aggregate must not let confirmed tokens from its other items
+ * bypass the aggregate veto. A genuinely-pending fix recurs and reopens via the
+ * dedup-stable monitor title.
  *
  * Env:
  *   GH_TOKEN       required for gh writes (provided by Actions).
@@ -1079,6 +1081,7 @@ export function aggregateCloseGate(body, io, { legacyResolver = null } = {}) {
   // text a gating item.
   const valid = items.filter((item) => hasFalsifiableAcceptance(item.text));
   if (!valid.length) return { blocks: true, reason: 'no-valid-item' };
+  if (valid.length < items.length) return { blocks: true, reason: 'mixed-prose-pending' };
   const allConfirmed = valid.every((item) => {
     if (detectParsedItemAlreadyResolved(item, io).resolved) return true;
     return legacyResults.get(item.text)?.resolved === true;
@@ -1505,6 +1508,8 @@ ${c.marker}`;
   for (const f of flagged) {
     const note = f.reason === 'no-valid-item'
       ? '\n\n⚠️ Nessun item con condizione di accettazione falsificabile: l\'auto-close **non** scatta (chiuderla qui sarebbe chiudere su evidenza assente) — **chiusura umana**.'
+      : f.reason === 'mixed-prose-pending'
+      ? '\n\n⚠️ L\'aggregata contiene item validi accanto ad almeno un item in prosa non verificabile: l\'auto-close **non** scatta finché ogni item non è falsificabile — **chiusura umana**.'
       : f.reason === 'valid-item-unconfirmed'
       ? '\n\n⚠️ Restano item validi non ancora token-confermati: l\'auto-close non scatta finché ognuno non è confermato — **chiusura umana**.'
       : f.reason === 'aggregate-unparsed'
