@@ -7,21 +7,30 @@ import {
   callLLM,
   classifyNonRetryableError,
   getStats,
+  getScoreBoard,
   qualifyGitHubModelId,
   resetState,
 } from '../scripts/lib/ai-models.mjs';
 
 const originalFetch = globalThis.fetch;
-const originalGhModelsPat = process.env.GH_MODELS_PAT;
+const originalGhModelsPats = Object.fromEntries(
+  Array.from({ length: 9 }, (_, index) => {
+    const key = index === 0 ? 'GH_MODELS_PAT' : `GH_MODELS_PAT_${index + 1}`;
+    return [key, process.env[key]];
+  }),
+);
 
 beforeEach(() => {
   process.env.GH_MODELS_PAT = 'test-pat';
+  for (let i = 2; i <= 9; i++) delete process.env[`GH_MODELS_PAT_${i}`];
 });
 
 afterEach(() => {
   globalThis.fetch = originalFetch;
-  if (originalGhModelsPat === undefined) delete process.env.GH_MODELS_PAT;
-  else process.env.GH_MODELS_PAT = originalGhModelsPat;
+  for (const [key, value] of Object.entries(originalGhModelsPats)) {
+    if (value === undefined) delete process.env[key];
+    else process.env[key] = value;
+  }
   resetState();
 });
 
@@ -93,6 +102,161 @@ describe('GitHub Models request contract', () => {
     assert.equal(JSON.parse(calls[1].init.body).model, 'openai/gpt-4o');
   });
 
+  test('ruota il catalogo osservato quando il primo PAT non espone il modello', async () => {
+    process.env.GH_MODELS_PAT_2 = 'second-pat';
+    const catalogAuth = [];
+    const completions = [];
+    globalThis.fetch = async (url, init) => {
+      const target = String(url);
+      if (target.endsWith('/catalog/models')) {
+        catalogAuth.push(init.headers.Authorization);
+        const models = init.headers.Authorization === 'Bearer second-pat'
+          ? [{ id: 'openai/gpt-4o' }]
+          : [];
+        return new Response(JSON.stringify({ models }), {
+          status: 200,
+          headers: { 'content-type': 'application/json' },
+        });
+      }
+      completions.push({ url: target, init });
+      return new Response(JSON.stringify({ choices: [{ message: { content: 'ok' } }] }), {
+        status: 200,
+        headers: { 'content-type': 'application/json' },
+      });
+    };
+
+    await callSingleModel([{ role: 'user', content: 'x' }], {
+      model: AI_MODELS.GPT4O,
+      maxRetriesPerModel: 1,
+    });
+
+    assert.deepEqual(catalogAuth, ['Bearer test-pat', 'Bearer second-pat']);
+    assert.equal(completions.length, 1);
+    assert.equal(completions[0].init.headers.Authorization, 'Bearer second-pat');
+    assert.equal(JSON.parse(completions[0].init.body).model, 'openai/gpt-4o');
+    assert.deepEqual(getStats().exhaustedModels, []);
+  });
+
+  test('ruota anche un failure account-specifico del catalogo 401', async () => {
+    process.env.GH_MODELS_PAT_2 = 'second-pat';
+    const catalogAuth = [];
+    globalThis.fetch = async (url, init) => {
+      if (String(url).endsWith('/catalog/models')) {
+        catalogAuth.push(init.headers.Authorization);
+        if (init.headers.Authorization === 'Bearer test-pat') {
+          return new Response('{"message":"bad credentials"}', { status: 401 });
+        }
+        return new Response(JSON.stringify({ models: [{ id: 'openai/gpt-4o' }] }), {
+          status: 200,
+          headers: { 'content-type': 'application/json' },
+        });
+      }
+      return new Response(JSON.stringify({ choices: [{ message: { content: 'ok' } }] }), {
+        status: 200,
+        headers: { 'content-type': 'application/json' },
+      });
+    };
+
+    await callSingleModel([{ role: 'user', content: 'x' }], {
+      model: AI_MODELS.GPT4O,
+      maxRetriesPerModel: 1,
+    });
+
+    assert.deepEqual(catalogAuth, ['Bearer test-pat', 'Bearer second-pat']);
+    assert.deepEqual(getStats().exhaustedModels, []);
+  });
+
+  test('ruota anche un rate limit account-specifico del catalogo 429', async () => {
+    process.env.GH_MODELS_PAT_2 = 'second-pat';
+    const catalogAuth = [];
+    globalThis.fetch = async (url, init) => {
+      if (String(url).endsWith('/catalog/models')) {
+        catalogAuth.push(init.headers.Authorization);
+        if (init.headers.Authorization === 'Bearer test-pat') {
+          return new Response('{"message":"rate limited"}', { status: 429 });
+        }
+        return new Response(JSON.stringify({ models: [{ id: 'openai/gpt-4o' }] }), {
+          status: 200,
+          headers: { 'content-type': 'application/json' },
+        });
+      }
+      return new Response(JSON.stringify({ choices: [{ message: { content: 'ok' } }] }), {
+        status: 200,
+        headers: { 'content-type': 'application/json' },
+      });
+    };
+
+    await callSingleModel([{ role: 'user', content: 'x' }], {
+      model: AI_MODELS.GPT4O,
+      maxRetriesPerModel: 1,
+    });
+
+    assert.deepEqual(catalogAuth, ['Bearer test-pat', 'Bearer second-pat']);
+    assert.deepEqual(getStats().exhaustedModels, []);
+  });
+
+  test('una rejection transitoria del catalogo non resta in cache e non penalizza il modello', async () => {
+    let catalogCalls = 0;
+    globalThis.fetch = async (url) => {
+      if (String(url).endsWith('/catalog/models')) {
+        catalogCalls++;
+        if (catalogCalls === 1) return new Response('gateway unavailable', { status: 503 });
+        return new Response(JSON.stringify({ models: [{ id: 'openai/gpt-4o' }] }), {
+          status: 200,
+          headers: { 'content-type': 'application/json' },
+        });
+      }
+      return new Response(JSON.stringify({ choices: [{ message: { content: 'ok' } }] }), {
+        status: 200,
+        headers: { 'content-type': 'application/json' },
+      });
+    };
+
+    await assert.rejects(
+      () => callSingleModel([{ role: 'user', content: 'x' }], {
+        model: AI_MODELS.GPT4O,
+        maxRetriesPerModel: 1,
+      }),
+      (error) => error.githubModelsCatalogFault === true
+        && error.transportFault === true
+        && error.nonRetryable === false
+        && error.markExhausted === false,
+    );
+    assert.deepEqual(getStats().exhaustedModels, []);
+    assert.equal(
+      getScoreBoard().some(({ model }) => model === AI_MODELS.GPT4O),
+      false,
+    );
+
+    await callSingleModel([{ role: 'user', content: 'y' }], {
+      model: AI_MODELS.GPT4O,
+      maxRetriesPerModel: 1,
+    });
+    assert.equal(catalogCalls, 2);
+  });
+
+  test('un JSON del catalogo non valido è un guasto del provider, non un ban del modello', async () => {
+    globalThis.fetch = async (url) => {
+      if (String(url).endsWith('/catalog/models')) return new Response('{', { status: 200 });
+      throw new Error('la completion non deve partire');
+    };
+
+    await assert.rejects(
+      () => callSingleModel([{ role: 'user', content: 'x' }], {
+        model: AI_MODELS.GPT4O,
+        maxRetriesPerModel: 1,
+      }),
+      (error) => error.githubModelsCatalogFault === true
+        && error.nonRetryable === false
+        && error.markExhausted === false,
+    );
+    assert.deepEqual(getStats().exhaustedModels, []);
+    assert.equal(
+      getScoreBoard().some(({ model }) => model === AI_MODELS.GPT4O),
+      false,
+    );
+  });
+
   test('usa l id bare per il parametro e il cap dei modelli qualificati', async () => {
     const calls = [];
     globalThis.fetch = async (url, init) => {
@@ -136,6 +300,33 @@ describe('GitHub Models request contract', () => {
     assert.equal(fetchCalls, 0);
     assert.deepEqual(getStats().exhaustedModels, [AI_MODELS.GPT4O]);
     assert.equal(getStats().dirtyModels, 0);
+  });
+
+  test('cacheizza solo il brownout 410 intenzionale del catalogo', async () => {
+    let catalogCalls = 0;
+    globalThis.fetch = async (url) => {
+      if (String(url).endsWith('/catalog/models')) {
+        catalogCalls++;
+        return new Response(
+          '{"error":{"code":"github_models_retirement_brownout"}}',
+          { status: 410, headers: { 'content-type': 'application/json' } },
+        );
+      }
+      throw new Error('la completion non deve partire');
+    };
+
+    for (const model of [AI_MODELS.GPT4O, AI_MODELS.GPT4O_MINI]) {
+      await assert.rejects(
+        () => callSingleModel([{ role: 'user', content: 'x' }], {
+          model,
+          maxRetriesPerModel: 1,
+        }),
+        (error) => error.nonRetryableReason === 'github_models_catalog_brownout',
+      );
+    }
+
+    assert.equal(catalogCalls, 1);
+    assert.deepEqual(getStats().exhaustedModels, [AI_MODELS.GPT4O, AI_MODELS.GPT4O_MINI]);
   });
 });
 

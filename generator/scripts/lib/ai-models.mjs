@@ -689,12 +689,39 @@ const CODESTRAL_API_BASE   = 'https://codestral.mistral.ai/v1/chat/completions';
 const CHUTES_API_BASE      = 'https://llm.chutes.ai/v1/chat/completions';
 const ZAI_API_BASE         = 'https://api.z.ai/api/paas/v4/chat/completions';
 
-function _githubModelsError(message, reason = 'github_models_mapping_unavailable') {
+function _githubModelsError(message, reason = 'github_models_mapping_unavailable', {
+  nonRetryable = true,
+  markExhausted = true,
+  transportFault = false,
+  githubModelsCatalogFault = false,
+  githubModelsCatalogAccountFailure = false,
+  githubModelsMappingFault = false,
+} = {}) {
   return Object.assign(new Error(`[GitHub] ${message}`), {
-    nonRetryable: true,
+    nonRetryable,
     nonRetryableReason: reason,
-    markExhausted: true,
+    markExhausted,
+    ...(transportFault ? { transportFault: true } : {}),
+    ...(githubModelsCatalogFault ? { githubModelsCatalogFault: true } : {}),
+    ...(githubModelsCatalogAccountFailure ? { githubModelsCatalogAccountFailure: true } : {}),
+    ...(githubModelsMappingFault ? { githubModelsMappingFault: true } : {}),
   });
+}
+
+function _githubModelsCatalogTransportError(message, status = 0) {
+  const accountFailure = status === 401 || status === 429;
+  const shownStatus = status ? ` HTTP ${status}` : '';
+  return _githubModelsError(
+    `catalogo GitHub Models non disponibile${shownStatus}: ${message}`,
+    'github_models_catalog_unavailable',
+    {
+      nonRetryable: false,
+      markExhausted: false,
+      transportFault: true,
+      githubModelsCatalogFault: true,
+      githubModelsCatalogAccountFailure: accountFailure,
+    },
+  );
 }
 
 function _githubCatalogEntries(catalog) {
@@ -750,31 +777,47 @@ export function qualifyGitHubModelId(model, catalog) {
 
   if (qualified.size === 1) return [...qualified][0];
   if (qualified.size === 0) {
-    throw _githubModelsError(`nessun publisher osservato nel catalogo per ${id}`);
+    throw _githubModelsError(
+      `nessun publisher osservato nel catalogo per ${id}`,
+      'github_models_mapping_unavailable',
+      { githubModelsMappingFault: true },
+    );
   }
-  throw _githubModelsError(`publisher ambiguo nel catalogo per ${id}`);
+  throw _githubModelsError(
+    `publisher ambiguo nel catalogo per ${id}`,
+    'github_models_mapping_ambiguous',
+    { githubModelsMappingFault: true },
+  );
 }
 
 /**
  * Load the observed GitHub Models catalog for production callers that do not
- * provide a test/cache snapshot. Keep the promise, including a rejected 410,
- * so a provider-wide catalog brownout costs one observable request per process
- * instead of one request for every bare roster id.
+ * provide a test/cache snapshot. Cache resolved catalogs per PAT, and retain
+ * only the intentional 410 brownout rejection. A transient/account-specific
+ * failure must be retried on the next call and must not poison every model in
+ * the process.
  */
-let _githubModelsCatalogPromise = null;
+const _githubModelsCatalogPromises = new Map();
 
 async function _getGitHubModelsCatalog(apiKey, timeout) {
-  if (_githubModelsCatalogPromise) return _githubModelsCatalogPromise;
+  const cacheKey = String(apiKey || '');
+  const cached = _githubModelsCatalogPromises.get(cacheKey);
+  if (cached) return cached;
   const timeoutMs = Number.isFinite(timeout) && timeout > 0 ? timeout : 30000;
-  _githubModelsCatalogPromise = (async () => {
-    const res = await fetch(GH_MODELS_CATALOG_URL, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        Authorization: `Bearer ${apiKey}`,
-      },
-      signal: AbortSignal.timeout(timeoutMs),
-    });
+  const promise = (async () => {
+    let res;
+    try {
+      res = await fetch(GH_MODELS_CATALOG_URL, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${apiKey}`,
+        },
+        signal: AbortSignal.timeout(timeoutMs),
+      });
+    } catch (error) {
+      throw _githubModelsCatalogTransportError(error?.message || 'errore di trasporto');
+    }
     const raw = await res.text().catch(() => '');
     const lower = raw.toLowerCase();
     if (!res.ok) {
@@ -784,15 +827,28 @@ async function _getGitHubModelsCatalog(apiKey, timeout) {
           'github_models_catalog_brownout',
         );
       }
-      throw _githubModelsError(`catalogo GitHub Models HTTP ${res.status}`);
+      throw _githubModelsCatalogTransportError('risposta HTTP non riuscita', res.status);
     }
+    let parsed;
     try {
-      return JSON.parse(raw);
+      parsed = JSON.parse(raw);
     } catch {
-      throw _githubModelsError('catalogo GitHub Models con JSON non valido');
+      throw _githubModelsCatalogTransportError('JSON non valido');
     }
+    const hasCatalogArray = Array.isArray(parsed)
+      || ['models', 'data', 'items'].some((key) => Array.isArray(parsed?.[key]));
+    if (!hasCatalogArray) throw _githubModelsCatalogTransportError('forma JSON non valida');
+    return parsed;
   })();
-  return _githubModelsCatalogPromise;
+  const tracked = promise.catch((error) => {
+    if (error?.nonRetryableReason !== 'github_models_catalog_brownout'
+        && _githubModelsCatalogPromises.get(cacheKey) === tracked) {
+      _githubModelsCatalogPromises.delete(cacheKey);
+    }
+    throw error;
+  });
+  _githubModelsCatalogPromises.set(cacheKey, tracked);
+  return tracked;
 }
 
 // ── Local LLM (llama.cpp / ollama, OpenAI-compatible) ────────
@@ -5365,7 +5421,7 @@ export function resetState() {
   // distingue «cap disattivato di proposito» da «pensavo di averlo spento».
   _claudeCliUnlimitedWarned = false;
   _responseCache.clear();
-  _githubModelsCatalogPromise = null;
+  _githubModelsCatalogPromises.clear();
   _claudeCliBinaryMissing = false;
   _claudeCliConsecutiveTimeouts = 0;
   _claudeCliTimeoutStormDetected = false;
@@ -6650,6 +6706,7 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
 // must NOT trigger rotation (they'd fail identically on every PAT).
 function _isGhPatQuotaError(err) {
   if (!err) return false;
+  if (err.githubModelsCatalogAccountFailure) return true;
   if (err.exhausted) return true;
   const msg = String(err.message || '');
   return /daily request limit|daily quota|rate limit|HTTP 429|too many requests/i.test(msg);
@@ -6660,35 +6717,6 @@ async function _callGitHub(model, messages, opts) {
   if (pats.length === 0) throw new Error('GitHub API key not set');
   // Keep the roster id untouched for getProvider(), score storage and ledger
   // lookup; only the emitted API payload may carry the observed publisher.
-  let apiModel;
-  try {
-    const catalog = opts.githubModelsCatalog === undefined && !String(model).includes('/')
-      ? await _getGitHubModelsCatalog(pats[0], opts.timeout)
-      : opts.githubModelsCatalog;
-    apiModel = qualifyGitHubModelId(model, catalog);
-  } catch (error) {
-    // Mapping is a permanent provider verdict for this process. Preserve the
-    // split required by recordScore: the run-local ban must still stop the
-    // cascade, while the shared ledger remains opt-out-able.
-    if (error?.markExhausted) {
-      markModelExhausted(model, 'nonretryable', error.nonRetryableReason || '', {
-        recordScore: _shouldRecordScore(opts),
-      });
-      _stats.exhausted++;
-      error.exhausted = true;
-    }
-    throw error;
-  }
-  // Single-PAT (the default): identical behaviour to before — one normal call.
-  if (pats.length === 1) {
-    return _callOpenAICompatible(apiModel, messages, opts, {
-      endpoint: GH_MODELS_BASE,
-      apiKey: pats[0],
-      providerName: 'GitHub',
-      trackAs: model,
-      modelForLookup: model,
-    });
-  }
   // Multi-PAT: try non-exhausted PATs first; if all are flagged exhausted this
   // run, fall back to trying them all again (a daily limit may have lifted).
   //
@@ -6696,9 +6724,11 @@ async function _callGitHub(model, messages, opts) {
   // tag `hostUnreachable` che esce di qui e' un verdetto legittimo sull'host
   // (#781). Due proprieta' lo reggono, e vanno tenute insieme:
   //
-  //   1. solo `_isGhPatQuotaError` fa ruotare. Un errore di connessione cade
-  //      nel `throw err` e propaga NUDO l'errore di quel singolo tentativo:
-  //      chi lo classifica a valle vede un errore, non una somma.
+  //   1. `_isGhPatQuotaError` fa ruotare le completion esaurite; catalogo e
+  //      mapping ruotano invece nel catch locale qui sotto. Un errore di
+  //      connessione alla completion cade nel `throw err` e propaga NUDO
+  //      l'errore di quel singolo tentativo: chi lo classifica a valle vede un
+  //      errore, non una somma.
   //   2. `HOST_UNREACHABLE_CODES` contiene solo codici PRE-AUTENTICAZIONE
   //      (DNS, SYN, routing) verso `GH_MODELS_BASE`, che e' una costante
   //      identica per ogni PAT. Il PAT e' un header: non puo' cambiare l'esito
@@ -6716,6 +6746,35 @@ async function _callGitHub(model, messages, opts) {
   for (let j = 0; j < order.length; j++) {
     const idx = order[j];
     const isLast = j === order.length - 1;
+    let apiModel;
+    try {
+      const catalog = opts.githubModelsCatalog === undefined && !String(model).includes('/')
+        ? await _getGitHubModelsCatalog(pats[idx], opts.timeout)
+        : opts.githubModelsCatalog;
+      apiModel = qualifyGitHubModelId(model, catalog);
+    } catch (error) {
+      lastErr = error;
+      // Catalogs are account-specific observations. A 401/429, transport
+      // failure, malformed response, or a valid catalog without this model
+      // must not prevent the next PAT from supplying its own observation.
+      if (error?.githubModelsCatalogAccountFailure) _ghExhaustedPats.add(idx);
+      if (!isLast && (error?.githubModelsCatalogFault || error?.githubModelsMappingFault)) {
+        console.warn(`🔁 [GitHub] catalogo/mapping non disponibile per PAT #${idx + 1} — provo PAT #${order[j + 1] + 1}`);
+        continue;
+      }
+      // Only a brownout or a mapping that remained absent/ambiguous after all
+      // observed catalogs is a model exhaustion verdict. Catalog transport and
+      // shape failures remain provider faults and are handled without penalty
+      // by callLLM's transportOnly path.
+      if (error?.markExhausted) {
+        markModelExhausted(model, 'nonretryable', error.nonRetryableReason || '', {
+          recordScore: _shouldRecordScore(opts),
+        });
+        _stats.exhausted++;
+        error.exhausted = true;
+      }
+      throw error;
+    }
     try {
       return await _callOpenAICompatible(apiModel, messages, opts, {
         endpoint: GH_MODELS_BASE,
@@ -9063,6 +9122,7 @@ export async function callLLM(messages, opts = {}) {
       // modello che fallisce e non compare mai fra i falliti e' il modo piu'
       // rapido per rendere invisibile il prossimo incidente.
       const transportOnly = (!!e.transportFault && provider === PROVIDER.CLAUDE_CLI)
+        || !!e.githubModelsCatalogFault
         || perMachineEndpointFault;
       // Gemello del ramo di successo: gate sul PARAMETRO, cosi' il fallimento
       // resta contato nel tally di run anche per un chiamante diagnostico
