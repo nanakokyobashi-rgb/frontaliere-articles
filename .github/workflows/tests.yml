@@ -342,6 +342,12 @@ jobs:
           }
 
           same_head=$(printf '%s' "$reviews" | jq --arg head "$HEAD_SHA" --arg revision "$REVIEW_REVISION" '
+            def has_current_revision($expected):
+              [((.body // "") | split("\n")[] | rtrimstr("\r")
+                | select(test("^<!-- REVIEW_INPUT_REVISION: body:[0-9a-f]{64} -->$"; "i"))
+                | capture("^<!-- REVIEW_INPUT_REVISION: (?<revision>body:[0-9a-f]{64}) -->$"; "i").revision
+                | ascii_downcase)] | unique as $revisions
+              | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
             [flatten[]
              | select((.state // "") != "PENDING")
              | select(.user.type == "Bot")
@@ -350,10 +356,7 @@ jobs:
                  or (((.user.login // "") | test("^github-actions\\[bot\\]$"; "i"))
                      and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
                )
-             | select(
-                 any((.body // "") | split("\n")[];
-                   rtrimstr("\r") == ("<!-- REVIEW_INPUT_REVISION: " + $revision + " -->"))
-               )
+             | select(has_current_revision($revision))
              | select(.commit_id == $head)] | length'
           )
           if [ "${same_head:-0}" -gt 0 ] && [ "${BODY_EDITED:-false}" != "true" ]; then
@@ -378,6 +381,12 @@ jobs:
           # solo content/data e saltare Claude proprio dopo una correzione del
           # contratto; in quel caso si deve ripartire da una review piena.
           last=$(printf '%s' "$reviews" | jq -r --arg revision "$REVIEW_REVISION" '
+            def has_current_revision($expected):
+              [((.body // "") | split("\n")[] | rtrimstr("\r")
+                | select(test("^<!-- REVIEW_INPUT_REVISION: body:[0-9a-f]{64} -->$"; "i"))
+                | capture("^<!-- REVIEW_INPUT_REVISION: (?<revision>body:[0-9a-f]{64}) -->$"; "i").revision
+                | ascii_downcase)] | unique as $revisions
+              | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
             [flatten[]
              | select((.state // "") != "PENDING")
              | select(.user.type == "Bot")
@@ -386,10 +395,7 @@ jobs:
                  or (((.user.login // "") | test("^github-actions\\[bot\\]$"; "i"))
                      and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
                )
-             | select(
-                 any((.body // "") | split("\n")[];
-                   rtrimstr("\r") == ("<!-- REVIEW_INPUT_REVISION: " + $revision + " -->"))
-               )
+             | select(has_current_revision($revision))
             ] | sort_by(.id // 0) | last | .commit_id // empty' 2>/dev/null || true)
           if [ -z "$last" ]; then
             set_fingerprint
@@ -467,6 +473,7 @@ jobs:
           PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
           HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
           REPO: ${{ github.repository }}
+          REVIEW_REVISION: ${{ steps.review_input.outputs.review_revision }}
         # Il tier si decide SOLO sul codice. Funnel-critical qui significa: cio'
         # che produce o rende la superficie pubblicata che il sito consuma —
         # `engine/` (rende le pagine articolo), `host/` (l'altra meta' del
@@ -546,12 +553,17 @@ jobs:
           # precedente, si valuta SOLO il delta, non l'intera PR.
           lastRev=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate --slurp 2>/dev/null \
             | jq -r --arg revision "$REVIEW_REVISION" '
+              def has_current_revision($expected):
+                [((.body // "") | split("\n")[] | rtrimstr("\r")
+                  | select(test("^<!-- REVIEW_INPUT_REVISION: body:[0-9a-f]{64} -->$"; "i"))
+                  | capture("^<!-- REVIEW_INPUT_REVISION: (?<revision>body:[0-9a-f]{64}) -->$"; "i").revision
+                  | ascii_downcase)] | unique as $revisions
+                | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
               [flatten[]
                | select((.state // "") != "PENDING")
                | select(.user.type == "Bot")
                | select((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
-               | select(any((.body // "") | split("\n")[];
-                   rtrimstr("\r") == ("<!-- REVIEW_INPUT_REVISION: " + $revision + " -->")))
+               | select(has_current_revision($revision))
               ] | sort_by(.id // 0) | last | .commit_id // empty' 2>/dev/null || true)
           if [ -n "$lastRev" ] && [ "$lastRev" != "$HEAD_SHA" ]; then
             delta_code=$(gh api "repos/$REPO/compare/$lastRev...$HEAD_SHA" --jq '.files[] | .filename, (.previous_filename // empty)' 2>/dev/null \
@@ -905,13 +917,18 @@ jobs:
                 continue
               fi
               if [ -n "${REVIEWS:-}" ] && jq -e --arg head_sha "$HEAD_SHA" --arg run_started_at "$RUN_STARTED_AT" --arg review_revision "$REVIEW_REVISION" '
+                def has_current_revision($expected):
+                  [((.body // "") | split("\n")[] | rtrimstr("\r")
+                    | select(test("^<!-- REVIEW_INPUT_REVISION: body:[0-9a-f]{64} -->$"; "i"))
+                    | capture("^<!-- REVIEW_INPUT_REVISION: (?<revision>body:[0-9a-f]{64}) -->$"; "i").revision
+                    | ascii_downcase)] | unique as $revisions
+                  | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
                 flatten | any(.[]?;
                   (.user.type == "Bot")
                   and ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
                   and .commit_id == $head_sha
                   and (.submitted_at // "") >= $run_started_at
-                  and any((.body // "") | split("\n")[];
-                    rtrimstr("\r") == ("<!-- REVIEW_INPUT_REVISION: " + $review_revision + " -->"))
+                  and has_current_revision($review_revision)
                 )
               ' <<<"$REVIEWS" >/dev/null 2>&1; then
                 set_review_output review_abort_cause verdict_posted
@@ -1109,6 +1126,7 @@ jobs:
           PERMANENT_FAILURE: ${{ steps.review_abort.outputs.permanent_failure }}
           REVIEW_ABORT_CAUSE: ${{ steps.review_abort.outputs.review_abort_cause }}
           REVIEW_POSTED: ${{ steps.test_only_review.outcome == 'success' }}
+          REVIEW_GATE_FALLBACK_APPROVED: ${{ steps.review_gate.outputs.fallback_approved }}
           GITHUB_RUN_ID: ${{ github.run_id }}
         run: node scripts/ci/review-claim.mjs --claim
 

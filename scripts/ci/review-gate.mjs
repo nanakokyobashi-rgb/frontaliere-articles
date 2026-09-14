@@ -98,6 +98,19 @@ function writeFailureKind() {
   }
 }
 
+/** Persist a successful deterministic fallback for the claim finalizer. */
+function writeGateOutput(name, value) {
+  const output = process.env.GITHUB_OUTPUT;
+  if (!output) return false;
+  try {
+    appendFileSync(output, `${name}=${value}\n`);
+    return true;
+  } catch (error) {
+    console.log(`review-gate: impossibile scrivere ${name} (${String(error).slice(0, 120)}).`);
+    return false;
+  }
+}
+
 function gh(args, { json = true } = {}) {
   const out = execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
   return json ? JSON.parse(out) : out;
@@ -422,11 +435,15 @@ async function main() {
       console.log(
         `review-gate: la review non si applica alla head ${HEAD_SHA} — tento il drift-fallback.`,
       );
-      if (driftFallbackApproves()) process.exit(0);
+      if (driftFallbackApproves() && writeGateOutput('fallback_approved', 'true')) {
+        process.exit(0);
+      }
     }
   } else if (last === null) {
     console.log("review-gate: nessuna review del bot reviewer su questa PR.");
-    if (driftFallbackApproves()) process.exit(0);
+    if (driftFallbackApproves() && writeGateOutput('fallback_approved', 'true')) {
+      process.exit(0);
+    }
   }
 
   commentOnce(

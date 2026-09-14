@@ -216,8 +216,10 @@ export function claimStatusFromOutcome({
   retryableFailure = false,
   permanentFailure = false,
   reviewPosted = false,
+  reviewFallbackApproved = false,
 } = {}) {
   if (proceed !== true && proceed !== 'true') return 'released';
+  if (reviewFallbackApproved === true || reviewFallbackApproved === 'true') return 'completed';
   if (permanentFailure === true || permanentFailure === 'true') return 'failed-terminal';
   if (reviewPosted === true || reviewPosted === 'true') return 'completed';
   const text = String(executionText || '');
@@ -440,6 +442,7 @@ function finalizeClaim(base, repo) {
     ? fs.readFileSync(process.env.EXEC_FILE, 'utf8')
     : '';
   const cause = normalized(process.env.REVIEW_ABORT_CAUSE || '').toLowerCase();
+  const reviewFallbackApproved = process.env.REVIEW_GATE_FALLBACK_APPROVED === 'true';
   const retryableCause = ['cancelled', 'max_turns', 'rate_limit', 'server_error'].includes(cause);
   const permanentCause = cause === 'non_retryable' || cause === 'probe_failed';
   let state = REVIEW_CLAIM_STATES.includes(process.env.CLAIM_STATUS)
@@ -451,8 +454,10 @@ function finalizeClaim(base, repo) {
       retryableFailure: process.env.RETRYABLE_FAILURE === 'true' || retryableCause,
       permanentFailure: process.env.PERMANENT_FAILURE === 'true' || permanentCause,
       reviewPosted: process.env.REVIEW_POSTED === 'true',
+      reviewFallbackApproved,
     });
-  if (state === 'completed' && !reviewWasPosted(repo, base.prNumber, base.headSha, base.reviewRevision)) {
+  if (state === 'completed' && !reviewFallbackApproved
+      && !reviewWasPosted(repo, base.prNumber, base.headSha, base.reviewRevision)) {
     if (permanentCause) state = 'failed-terminal';
     else state = 'failed-transient';
   }

@@ -221,16 +221,26 @@ jobs:
             # risposta troncata non contiene. Sequenza di ARRAY: `.[][]?`.
             reviews=$(gh api --paginate "repos/$REPO/pulls/$N/reviews?per_page=100" 2>/dev/null || echo '[]')
             LAST_BODY=$(echo "$reviews" | jq -rs --arg revision "$REVIEW_REVISION" '
+              def has_current_revision($expected):
+                [((.body // "") | split("\n")[] | rtrimstr("\r")
+                  | select(test("^<!-- REVIEW_INPUT_REVISION: body:[0-9a-f]{64} -->$"; "i"))
+                  | capture("^<!-- REVIEW_INPUT_REVISION: (?<revision>body:[0-9a-f]{64}) -->$"; "i").revision
+                  | ascii_downcase)] | unique as $revisions
+                | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
               [.[][]?
                | select((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
-               | select(any((.body // "") | split("\n")[];
-                   rtrimstr("\r") == ("<!-- REVIEW_INPUT_REVISION: " + $revision + " -->")))
+               | select(has_current_revision($revision))
               ] | sort_by(.id // 0) | last | .body // ""')
             LAST_CID=$(echo "$reviews" | jq -rs --arg revision "$REVIEW_REVISION" '
+              def has_current_revision($expected):
+                [((.body // "") | split("\n")[] | rtrimstr("\r")
+                  | select(test("^<!-- REVIEW_INPUT_REVISION: body:[0-9a-f]{64} -->$"; "i"))
+                  | capture("^<!-- REVIEW_INPUT_REVISION: (?<revision>body:[0-9a-f]{64}) -->$"; "i").revision
+                  | ascii_downcase)] | unique as $revisions
+                | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
               [.[][]?
                | select((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
-               | select(any((.body // "") | split("\n")[];
-                   rtrimstr("\r") == ("<!-- REVIEW_INPUT_REVISION: " + $revision + " -->")))
+               | select(has_current_revision($revision))
               ] | sort_by(.id // 0) | last | .commit_id // ""')
 
             # Una deferral per il lease non è una classe C: il check è stato

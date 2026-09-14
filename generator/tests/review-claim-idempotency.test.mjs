@@ -204,6 +204,12 @@ test('classifies setup and provider failures without consuming a retryable claim
   }), 'failed-transient');
   assert.equal(claimStatusFromOutcome({ proceed: true, permanentFailure: true }), 'failed-terminal');
   assert.equal(claimStatusFromOutcome({ proceed: true, claudeOutcome: 'success' }), 'completed');
+  assert.equal(claimStatusFromOutcome({
+    proceed: true,
+    claudeOutcome: 'failure',
+    permanentFailure: true,
+    reviewFallbackApproved: true,
+  }), 'completed');
 });
 
 test('a review verdict must carry exactly the current trusted body revision', () => {
@@ -266,6 +272,7 @@ test('tests.yml claims before review work and finalizes without gating the requi
   assert.match(workflow, /review_revision=body:/);
   assert.match(workflow, /REVIEW_REVISION:/);
   assert.match(workflow, /REVIEW_INPUT_REVISION:/);
+  assert.match(workflow, /has_current_revision/);
   assert.match(workflow, /--arg revision \"\$REVIEW_REVISION\"/);
   assert.match(workflow, /split\("\\n"\)\[\]/);
   assert.match(workflow, /rtrimstr\("\\r"\)/);
@@ -273,8 +280,9 @@ test('tests.yml claims before review work and finalizes without gating the requi
   assert.doesNotMatch(workflow, /scan\("<!--\\\\s\*REVIEW_INPUT_REVISION:/);
   const incrementalGuard = workflow.slice(workflow.indexOf('last=$(printf'), workflow.indexOf('if [ -z "$last"', workflow.indexOf('last=$(printf')));
   assert.match(incrementalGuard, /--arg revision \"\$REVIEW_REVISION\"/);
-  assert.match(incrementalGuard, /any\(\(\.body \/\/ ""\) \| split\("\\n"\)\[\]/);
+  assert.match(incrementalGuard, /has_current_revision\(\$revision\)/);
   assert.match(workflow, /steps\.review_claim\.outputs\.claim_allowed == 'true'/);
+  assert.match(workflow, /REVIEW_GATE_FALLBACK_APPROVED:/);
 
   const gateAt = workflow.indexOf('id: review_gate');
   assert.ok(gateAt >= 0, 'review_gate must remain present');

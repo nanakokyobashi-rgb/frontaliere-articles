@@ -23,7 +23,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { mkdtempSync, mkdirSync, writeFileSync, chmodSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, chmodSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -58,10 +58,12 @@ function runGate({ reviews = [], files = [], meta = null, compare = null,
     const bin = path.join(dir, 'bin');
     mkdirSync(bin, { recursive: true });
     const calls = path.join(dir, 'calls');
+    const gateOutput = path.join(dir, 'gate-output');
     const fixReviews = path.join(dir, 'reviews.json');
     const fixFiles = path.join(dir, 'files.txt');
     const fixMeta = path.join(dir, 'meta.json');
     writeFileSync(calls, '');
+    writeFileSync(gateOutput, '');
     writeFileSync(fixReviews, JSON.stringify(reviews));
     writeFileSync(fixFiles, files.join('\n') + (files.length ? '\n' : ''));
     writeFileSync(fixMeta, JSON.stringify({ ...(meta ?? {}), body: meta?.body ?? currentBody }));
@@ -157,10 +159,11 @@ exit 0
         HEAD_SHA: HEAD,
         GH_TOKEN: 'stub',
         REVIEW_REVISION: reviewRevision,
+        GITHUB_OUTPUT: gateOutput,
         CODEX_FALLBACK_EVIDENCE_FILE: codexEvidence === null ? '' : evidenceFile,
       },
     });
-    return { status: r.status, stdout: `${r.stdout}${r.stderr}` };
+    return { status: r.status, stdout: `${r.stdout}${r.stderr}`, gateOutput: readFileSync(gateOutput, 'utf8') };
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
@@ -265,6 +268,7 @@ test('drift-fallback: PR sul workflow che ospita la review, autore fidato, body 
   });
   assert.equal(r.status, 0, `Il drift-fallback non ha approvato.\n${r.stdout}`);
   assert.match(r.stdout, /drift-fallback: APPROVATO/, r.stdout);
+  assert.match(r.gateOutput, /^fallback_approved=true$/m, r.gateOutput);
 });
 
 test('drift-fallback: body non conforme → resta ROSSO', () => {
