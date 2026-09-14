@@ -19190,9 +19190,18 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorName: 'Redazione Frontaliere Ticino',
    },
    {
+    id: 'tassi-interesse-svizzera-bassi',
+    category: 'pratico',
+    date: '2026-09-14T19:40:31.336Z',
+    image: '/images/blog/tassi-interesse-svizzera-bassi.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
     id: 'farmacie-turno-ticino-guida',
     category: 'pratico',
-    date: '2026-09-14T19:40:57.085Z',
+    date: '2026-09-14T20:06:49.427Z',
     image: '/images/places/bellinzona.webp',
     hasCalculator: false,
     authorSlug: 'redazione',
@@ -19201,7 +19210,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
    {
     id: 'farmacie-ticino-elenco-contatti',
     category: 'pratico',
-    date: '2026-09-14T19:40:57.387Z',
+    date: '2026-09-14T20:06:49.755Z',
     image: '/images/places/lugano-view.webp',
     hasCalculator: false,
     authorSlug: 'redazione',
@@ -19210,7 +19219,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
    {
     id: 'farmacie-confine-italia-como-varese-verbano',
     category: 'pratico',
-    date: '2026-09-14T19:40:58.327Z',
+    date: '2026-09-14T20:06:50.699Z',
     image: '/images/places/mendrisio.webp',
     hasCalculator: false,
     authorSlug: 'redazione',
@@ -19219,7 +19228,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
    {
     id: 'farmacia-aperta-turno-elenco',
     category: 'pratico',
-    date: '2026-09-14T19:40:58.616Z',
+    date: '2026-09-14T20:06:51.005Z',
     image: '/images/places/castelgrande.webp',
     hasCalculator: false,
     authorSlug: 'redazione',

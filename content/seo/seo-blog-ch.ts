@@ -83051,6 +83051,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tassi-interesse-svizzera-bassi': {
+    title: 'Perché i tassi di interesse in Svizzera restano bassi',
+    description: 'La BNS lascia il tasso allo 0% da oltre un anno, inflazione svizzera allo 0,8% ad agosto e mutui a 10 anni medi all’1,9%. Scopri cosa significa per famiglie',
+    keywords: 'frontalieri, ticino, svizzera, italia, perché, tassi, interesse, restano',
+    ogTitle: 'Perché i tassi di interesse in Svizzera restano bassi',
+    ogDescription: 'Analisi della decisione della Banca nazionale svizzera di mantenere il tasso di riferimento allo 0% nonostante i rialzi negli USA e in Europa. Impatto su mutui, risparmi e potere d\'acquisto, con dati aggiornati ad agosto e prossima revisione il 24',
+    canonicalPath: '/articoli-svizzera/tassi-interesse-svizzera-bassi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Perché i tassi di interesse in Svizzera restano bassi",
+      "description": "La BNS lascia il tasso allo 0% da oltre un anno, inflazione svizzera allo 0,8% ad agosto e mutui a 10 anni medi all’1,9%. Scopri cosa significa per famiglie",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/tassi-interesse-svizzera-bassi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Foto realistica di una banca svizzera moderna con la bandiera svizzera, che illustra il contesto di tassi di interesse bassi."
+      },
+      "datePublished": "2026-09-14T19:40:31+00:00",
+      "dateModified": "2026-09-14T19:40:31+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/tassi-interesse-svizzera-bassi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
   'blog-farmacie-turno-ticino-guida': {
     title: 'Farmacie di turno in Ticino: guida a fonti e copertura',
     description: 'Farmacie di turno in Ticino: guida a fonti e copertura: 207 record Ticino e 542 in CO, VA e VB; turni OFCT regionali. Non è copertura nazionale.',
@@ -83075,8 +83114,8 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
         "height": 563,
         "caption": "Vista di Bellinzona in Ticino"
       },
-      "datePublished": "2026-09-14T21:40:57+02:00",
-      "dateModified": "2026-09-14T21:40:57+02:00",
+      "datePublished": "2026-09-14T22:06:49+02:00",
+      "dateModified": "2026-09-14T22:06:49+02:00",
       "inLanguage": "it",
       "author": {
         "@type": "Person",
@@ -83114,8 +83153,8 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
         "height": 563,
         "caption": "Panorama di Lugano in Ticino"
       },
-      "datePublished": "2026-09-14T21:40:57+02:00",
-      "dateModified": "2026-09-14T21:40:57+02:00",
+      "datePublished": "2026-09-14T22:06:49+02:00",
+      "dateModified": "2026-09-14T22:06:49+02:00",
       "inLanguage": "it",
       "author": {
         "@type": "Person",
@@ -83153,8 +83192,8 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
         "height": 563,
         "caption": "Paesaggio del Mendrisiotto vicino al confine"
       },
-      "datePublished": "2026-09-14T21:40:58+02:00",
-      "dateModified": "2026-09-14T21:40:58+02:00",
+      "datePublished": "2026-09-14T22:06:50+02:00",
+      "dateModified": "2026-09-14T22:06:50+02:00",
       "inLanguage": "it",
       "author": {
         "@type": "Person",
@@ -83192,8 +83231,8 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
         "height": 563,
         "caption": "Castelgrande a Bellinzona, Ticino"
       },
-      "datePublished": "2026-09-14T21:40:58+02:00",
-      "dateModified": "2026-09-14T21:40:58+02:00",
+      "datePublished": "2026-09-14T22:06:51+02:00",
+      "dateModified": "2026-09-14T22:06:51+02:00",
       "inLanguage": "it",
       "author": {
         "@type": "Person",
