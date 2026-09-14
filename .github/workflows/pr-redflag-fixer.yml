@@ -467,9 +467,8 @@ jobs:
       # Contesto della PR + della review, deterministico e BOUNDED, prima di
       # spendere un turno Claude — stesso pattern del gemello sul sito
       # (frontaliere-si-o-no#6679, "Collect PR + review context"). Il prompt
-      # sotto rifaceva da sé, a OGNI round, `gh pr view --json title,body,
-      # headRefName,files` (files già fetchato sopra, nello step guard, per
-      # il tier) e `gh api .../reviews`. Zero-Claude qui, un bundle, una Read.
+      # sotto rifaceva da sé, a OGNI round, le letture della PR e delle review.
+      # Zero-Claude qui, un bundle, una Read.
       - name: Collect PR + review context (zero-Claude)
         id: ctx
         if: steps.guard.outputs.proceed == 'true'
@@ -489,20 +488,34 @@ jobs:
             exit 1
           }
 
-          if ! gh pr view "$PR_NUMBER" --repo "$REPO" --json title,body,headRefName \
-            > "$OUT/pr.json" 2>/dev/null; then
-            context_fail "Metadata della PR non leggibile: il redflag fixer resta fail-closed senza Claude."
-          fi
-          if ! jq -e 'type == "object" and (.title | type == "string") and (.headRefName | type == "string")' \
-            "$OUT/pr.json" >/dev/null 2>&1; then
-            context_fail "Metadata della PR malformata: il redflag fixer resta fail-closed senza Claude."
-          fi
           # `pull_request_review` può essere consegnato dopo un push. Il suo
           # `head.sha` è quindi solo l'input dell'evento, non una prova che la
-          # PR remota sia ancora su quella HEAD. Rileggere la HEAD dalla PR
-          # corrente e bloccare il fixer prima di raccogliere review/finding
-          # impedisce di applicare un finding valido al codice nuovo.
-          if ! current_head_sha=$(gh api "repos/$REPO/pulls/$PR_NUMBER" --jq '.head.sha'); then
+          # PR remota sia ancora su quella HEAD. Conservare la risposta REST
+          # completa come snapshot strict lega metadata, HEAD, body del bundle
+          # e digest alla stessa lettura: nessuna seconda chiamata può accoppiare
+          # una revisione nuova con un body vecchio.
+          if ! gh api "repos/$REPO/pulls/$PR_NUMBER" \
+            > "$OUT/pr-response.json" 2>/dev/null; then
+            context_fail "Metadata della PR non leggibile: il redflag fixer resta fail-closed senza Claude."
+          fi
+          if ! jq -e '
+            type == "object"
+            and has("body")
+            and ((.title | type) == "string")
+            and ((.head | type) == "object")
+            and (if (.head.sha | type) == "string" then
+              (.head.sha | test("^[a-f0-9]{40}$"; "i"))
+            else false end)
+            and ((.head.ref | type) == "string")
+            and ((.body == null) or ((.body | type) == "string"))
+          ' "$OUT/pr-response.json" >/dev/null 2>&1; then
+            context_fail "Metadata della PR malformata: il redflag fixer resta fail-closed senza Claude."
+          fi
+          if ! jq '{title, body, headRefName: .head.ref}' "$OUT/pr-response.json" \
+            > "$OUT/pr.json" 2>/dev/null; then
+            context_fail "Metadata della PR non proiettabile: il redflag fixer resta fail-closed senza Claude."
+          fi
+          if ! current_head_sha=$(jq -r '.head.sha' "$OUT/pr-response.json"); then
             context_fail "HEAD corrente della PR illeggibile: il redflag fixer resta fail-closed senza Claude."
           fi
           if ! printf '%s' "$current_head_sha" | grep -qE '^[a-f0-9]{40}$'; then
@@ -511,14 +524,10 @@ jobs:
           if ! printf '%s\n%s\n' "$current_head_sha" "$HEAD_SHA" | awk 'NR==1 { current=tolower($0); next } { event=tolower($0); exit current != event }'; then
             context_fail "La HEAD della PR è cambiata rispetto all'evento review: il redflag fixer resta fail-closed senza Claude."
           fi
-          # The review body must be tied to the exact PR-body revision that the
-          # reviewer saw.  Hash the REST `--jq` output in the same form as
-          # `tests.yml`; an unreadable body/hash is an admission failure, not an
-          # empty bundle that could still authorize Claude with an unverified
-          # review context.
-          if ! gh api "repos/$REPO/pulls/$PR_NUMBER" \
-            --jq 'if type != "object" then error("PR response is not an object") elif (has("body") | not) then error("PR response has no body field") elif .body != null and (.body | type) != "string" then error("PR body is not a string or null") else (.body // "") end' \
-            > "$OUT/body.txt" 2>/dev/null; then
+          # Derive the body bytes from the same projected snapshot that enters
+          # the bundle. Hashing an independent API response would recreate the
+          # TOCTOU pair this collector is meant to close.
+          if ! jq -r '.body // ""' "$OUT/pr.json" > "$OUT/body.txt" 2>/dev/null; then
             context_fail "Body della PR illeggibile: il redflag fixer resta fail-closed senza Claude."
           fi
           if ! body_sha=$(sha256sum "$OUT/body.txt" | awk '{print $1}'); then
