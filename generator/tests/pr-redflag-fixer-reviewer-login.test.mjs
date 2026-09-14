@@ -26,8 +26,8 @@ test('a frontaliere-automation[bot] review with 🔴 passes the job trigger and 
     'il job-level if: deve lasciare il predicato branch al preflight osservabile');
   assert.match(src, /PR_AUTHOR_TYPE: \$\{\{ github\.event\.pull_request\.user\.type \}\}/);
   assert.match(src, /if \[ "\$PR_AUTHOR_TYPE" != "Bot" \] && ! printf '%s' "\$HEAD_REF" \| grep -q '\^fix\//);
-  assert.doesNotMatch(src, /github\.event\.review\.user\.type == 'Bot'/,
-    'il tipo del reviewer non identifica l autore della PR');
+  assert.match(jobIf, /github\.event\.review\.user\.type == 'Bot'/,
+    'il trigger deve accettare solo review emesse da un account Bot');
   assert.match(src, /contains\(github\.event\.review\.body, '🔴'\)/);
   assert.match(src, /startsWith\(github\.event\.review\.user\.login, 'claude'\) \|\|/);
 });
@@ -66,7 +66,7 @@ test('il redflag fixer ammette Claude solo con contesto PR/review verificato', (
   assert.match(collect, /if ! printf '%s' "\$current_head_sha" \| grep -qE '\^\[a-f0-9\]\{40\}\$'/);
   assert.match(collect, /printf '%s\\n%s\\n' "\$current_head_sha" "\$HEAD_SHA" \| awk[\s\S]*tolower/);
   assert.match(collect, /La HEAD della PR è cambiata rispetto all'evento review/);
-  assert.match(collect, /if ! gh api "repos\/\$REPO\/pulls\/\$PR_NUMBER" --jq '\.body \/\/ ""'/);
+  assert.match(collect, /if ! gh api "repos\/\$REPO\/pulls\/\$PR_NUMBER"[\s\S]*PR response is not an object[\s\S]*PR body is not a string or null/);
   assert.match(collect, /if ! body_sha=/);
   assert.match(collect, /if ! gh api "repos\/\$REPO\/pulls\/\$PR_NUMBER\/files"/);
   assert.match(collect, /if ! reviews_json=/);

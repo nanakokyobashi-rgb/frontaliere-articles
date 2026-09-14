@@ -65,7 +65,12 @@
  * atteso (l'altro trigger ri-valuterà), non un errore di workflow.
  */
 import { createHash } from 'node:crypto';
-import { isReviewTestPath, findTestOnlyApproval, reviewHasInputRevision } from './review-test-policy.mjs';
+import {
+  isReviewTestPath,
+  findTestOnlyApproval,
+  PR_BODY_JQ,
+  reviewHasInputRevision,
+} from './review-test-policy.mjs';
 import { execFileSync } from 'node:child_process';
 import {
   VITEST_CHECK_NAME,
@@ -93,7 +98,7 @@ function gh(args, { json = true, token } = {}) {
 /** The trusted PR body hash is the review input revision for every consumer. */
 function currentReviewInputRevision() {
   try {
-    const body = gh(['api', `repos/${REPO}/pulls/${PR}`, '--jq', '.body // ""'], { json: false });
+    const body = gh(['api', `repos/${REPO}/pulls/${PR}`, '--jq', PR_BODY_JQ], { json: false });
     return `body:${createHash('sha256').update(body).digest('hex')}`;
   } catch {
     return null;

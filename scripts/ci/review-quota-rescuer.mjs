@@ -22,7 +22,7 @@ import {
   latestReviewClaims,
   reviewWasPosted,
 } from './review-claim.mjs';
-import { normalizeReviewInputRevision } from './review-test-policy.mjs';
+import { normalizeReviewInputRevision, PR_BODY_JQ } from './review-test-policy.mjs';
 
 export const REVIEW_QUOTA_RETRY_MARKER = '<!-- REVIEW_QUOTA_RETRY:';
 export const REVIEW_TRANSIENT_RETRY_MARKER = '<!-- REVIEW_TRANSIENT_RETRY:';
@@ -466,7 +466,7 @@ function commentsForPr(number) {
 /** Hash exactly the API representation used by tests.yml, including its LF. */
 function currentReviewRevision(number) {
   const body = gh([
-    'api', `repos/${REPO}/pulls/${number}`, '--jq', '.body // ""',
+    'api', `repos/${REPO}/pulls/${number}`, '--jq', PR_BODY_JQ,
   ], { allowFail: true });
   if (!body) return '';
   return `body:${createHash('sha256').update(body, 'utf8').digest('hex')}`;

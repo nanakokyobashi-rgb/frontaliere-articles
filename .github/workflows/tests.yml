@@ -286,7 +286,9 @@ jobs:
           BODY_FILE: ${{ runner.temp }}/review-body.txt
         run: |
           set -euo pipefail
-          if ! gh api "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER" --jq '.body // ""' > "$BODY_FILE"; then
+          if ! gh api "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER" \
+            --jq 'if type != "object" then error("PR response is not an object") elif (has("body") | not) then error("PR response has no body field") elif .body != null and (.body | type) != "string" then error("PR body is not a string or null") else (.body // "") end' \
+            > "$BODY_FILE"; then
             echo "::error::PR body illeggibile → review input revision fail-closed."
             exit 1
           fi

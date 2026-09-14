@@ -53,6 +53,7 @@
 import {
   findTestOnlyApproval,
   normalizeReviewInputRevision,
+  PR_BODY_JQ,
   reviewHasInputRevision,
 } from './review-test-policy.mjs';
 import { execFileSync } from 'node:child_process';
@@ -125,7 +126,7 @@ function fingerprint(sha) {
 function currentReviewInputRevision() {
   let body;
   try {
-    body = gh(['api', `repos/${REPO}/pulls/${PR}`, '--jq', '.body // ""'], { json: false });
+    body = gh(['api', `repos/${REPO}/pulls/${PR}`, '--jq', PR_BODY_JQ], { json: false });
   } catch (error) {
     markTransientFailure();
     throw new Error(`PR body illeggibile: ${String(error).slice(0, 160)}`);

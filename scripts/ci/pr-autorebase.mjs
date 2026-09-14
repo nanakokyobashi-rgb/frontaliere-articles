@@ -98,7 +98,7 @@ import {
   renderReopenBudget,
 } from './lib/reopen-breaker.mjs';
 import { intFromEnv, positiveIntFromEnv } from '../lib/int-from-env.mjs';
-import { reviewHasInputRevision } from './review-test-policy.mjs';
+import { PR_BODY_JQ, reviewHasInputRevision } from './review-test-policy.mjs';
 
 const DRY = process.argv.includes('--dry-run');
 const REPO = process.env.GITHUB_REPOSITORY || '';
@@ -204,7 +204,7 @@ function gh(args, { json = true, allowFail = false } = {}) {
 /** The current trusted PR body is part of the review input identity. */
 function currentReviewInputRevision(num) {
   try {
-    const body = gh(['api', `repos/${REPO}/pulls/${num}`, '--jq', '.body // ""'], { json: false });
+    const body = gh(['api', `repos/${REPO}/pulls/${num}`, '--jq', PR_BODY_JQ], { json: false });
     return `body:${createHash('sha256').update(body).digest('hex')}`;
   } catch {
     return null;

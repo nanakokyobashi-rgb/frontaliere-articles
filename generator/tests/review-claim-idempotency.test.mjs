@@ -303,12 +303,17 @@ test('tutti i consumer di review usano la revisione del body corrente', () => {
   assert.match(autoMerge, /reviewHasInputRevision\(r\.body, reviewRevision\)/);
 
   const redflag = fs.readFileSync(path.join(ROOT, '.github/workflows/pr-redflag-fixer.yml'), 'utf8');
+  const testsWorkflow = fs.readFileSync(path.join(ROOT, '.github/workflows/tests.yml'), 'utf8');
   assert.match(redflag, /review_revision=\"body:\$body_sha\"/);
   assert.match(redflag, /split\("\\n"\)\[\][\s\S]*REVIEW_INPUT_REVISION/);
   assert.match(redflag, /if ! gh pr view[\s\S]*exit 1/);
   assert.match(redflag, /if ! current_head_sha=\$\(gh api "repos\/\$REPO\/pulls\/\$PR_NUMBER" --jq '\.head\.sha'\)/);
   assert.match(redflag, /La HEAD della PR è cambiata rispetto all'evento review/);
-  assert.match(redflag, /if ! gh api "repos\/\$REPO\/pulls\/\$PR_NUMBER" --jq '\.body \/\/ ""'/);
+  assert.match(redflag, /PR response is not an object/);
+  assert.match(redflag, /PR body is not a string or null/);
+  assert.match(redflag, /github\.event\.review\.user\.type == 'Bot'/);
+  assert.match(testsWorkflow, /PR response is not an object/);
+  assert.match(testsWorkflow, /PR body is not a string or null/);
   assert.match(redflag, /if ! reviews_json=\$\(gh api "repos\/\$REPO\/pulls\/\$PR_NUMBER\/reviews" --paginate --slurp/);
 
   const stale = fs.readFileSync(path.join(ROOT, '.github/workflows/stale-pr-rescuer.yml'), 'utf8');

@@ -116,7 +116,7 @@ case "$sub" in
           node -e 'const m=require(process.argv[1]); process.stdout.write((m.base?.sha||"")+"\\n")' ${JSON.stringify(fixMeta)}
         elif [ "$jq" = ".head.sha" ]; then
           node -e 'const m=require(process.argv[1]); process.stdout.write((m.head?.sha||"")+"\\n")' ${JSON.stringify(fixMeta)}
-        elif [ "$jq" = '.body // ""' ]; then
+        elif [ "$jq" = '.body // ""' ] || [[ "$jq" == "if type != "* ]]; then
           node -e 'const m=require(process.argv[1]); process.stdout.write(String(m.body||"")+"\\n")' ${JSON.stringify(fixMeta)}
         else
           cat ${JSON.stringify(fixMeta)}

@@ -6,6 +6,10 @@ import { pathToFileURL } from 'node:url';
 import { fetchPrFiles } from './lib/fetchPrFiles.mjs';
 
 export const TEST_REVIEW_MARKER = '<!-- TEST_ONLY_AUTOMATIC_REVIEW -->';
+// A PR body is a trusted review-input artifact only when the REST response is
+// an object with an explicit string/null `body`. Reusing this jq expression
+// keeps shell and Node consumers fail-closed on a valid-but-malformed payload.
+export const PR_BODY_JQ = 'if type != "object" then error("PR response is not an object") elif (has("body") | not) then error("PR response has no body field") elif .body != null and (.body | type) != "string" then error("PR body is not a string or null") else (.body // "") end';
 // The revision marker is a contract line, not a substring.  Requiring the
 // complete unchanged line prevents prose, quoted examples, or an inline
 // marker from authenticating a verdict for the current PR body.

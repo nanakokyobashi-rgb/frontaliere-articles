@@ -66,6 +66,7 @@ jobs:
     # `REVIEWER_BOT_LOGIN_RE`/`_JQ` in `scripts/ci/lib/constants.mjs`, e per i
     # due `--jq` di `tests.yml` (skip-guard `## LGTM` e base incrementale).
     if: |
+      github.event.review.user.type == 'Bot' &&
       (startsWith(github.event.review.user.login, 'claude') ||
        startsWith(github.event.review.user.login, 'frontaliere-automation')) &&
       contains(github.event.review.body, '🔴') &&
@@ -515,7 +516,8 @@ jobs:
           # `tests.yml`; an unreadable body/hash is an admission failure, not an
           # empty bundle that could still authorize Claude with an unverified
           # review context.
-          if ! gh api "repos/$REPO/pulls/$PR_NUMBER" --jq '.body // ""' \
+          if ! gh api "repos/$REPO/pulls/$PR_NUMBER" \
+            --jq 'if type != "object" then error("PR response is not an object") elif (has("body") | not) then error("PR response has no body field") elif .body != null and (.body | type) != "string" then error("PR body is not a string or null") else (.body // "") end' \
             > "$OUT/body.txt" 2>/dev/null; then
             context_fail "Body della PR illeggibile: il redflag fixer resta fail-closed senza Claude."
           fi
