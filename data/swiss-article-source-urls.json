@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1944363/acqua-svizzera-siccita-ladri-due": "siccita-svizzera-ladri-acqua-preoccupazioni",
   "https://www.tio.ch/svizzera/cronaca/1944395/stadler-rail-zurigo-hacker-processo": "cyberattacco-stadler-rail",
   "https://www.admin.ch/it/newnsb/u0pfz3jktu6-yfduhhmlq": "sanzioni-onu-2026-ch",
   "https://www.rsi.ch/info/scienza-e-tecnologia/minuscoli-droni-vanno-dove-li-porta-il-suono--3988479.html": "minuscoli-droni-sonore-epfl",
@@ -2405,6 +2404,11 @@
   "https://www.admin.ch/it/newnsb/6nj8aqn6rll8": {
     "articleId": "forum-economico-ambientale-osce-praga",
     "ts": "2026-09-13T09:23:48.577Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1949855/latte-franchi-produzione-percento-agricoltori-studio-ora": {
+    "articleId": "latte-e-agricoltura-svizzera-studi",
+    "ts": "2026-09-14T00:08:47.738Z",
     "keyForm": 2
   }
 }
