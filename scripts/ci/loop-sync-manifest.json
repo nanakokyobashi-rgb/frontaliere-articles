@@ -1636,6 +1636,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/gh-models-endpoint.mjs",
+      "sitePath": "scripts/lib/gh-models-endpoint.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "54471fab96b10436",
+        "corpus": "54471fab96b10436",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
       "path": "generator/scripts/lib/ai-search-template.mjs",
       "sitePath": "scripts/lib/ai-search-template.mjs",
       "mode": "identical",
