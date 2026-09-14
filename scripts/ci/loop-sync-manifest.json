@@ -3888,6 +3888,137 @@
         "corpus": "4b6aa845f4a5b61d",
         "alignedAt": "2026-09-14"
       }
+    },
+    {
+      "path": ".github/actions/claude-codex-fallback/bridge-transport.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "fdfff452f405e4bb",
+        "corpus": "fdfff452f405e4bb",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
+      "path": ".github/actions/claude-codex-fallback/child-lifecycle.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "db4a7bd788943b9e",
+        "corpus": "db4a7bd788943b9e",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
+      "path": ".github/actions/claude-codex-fallback/gh-bridge-client.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "6226451d81dbc185",
+        "corpus": "6226451d81dbc185",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
+      "path": ".github/actions/claude-codex-fallback/gh-bridge.sh",
+      "mode": "identical",
+      "baseline": {
+        "site": "ecbf0fbe80f7064c",
+        "corpus": "ecbf0fbe80f7064c",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
+      "path": ".github/actions/claude-codex-fallback/git-bridge-client.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "c9a2156dda2d58ba",
+        "corpus": "c9a2156dda2d58ba",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
+      "path": ".github/actions/claude-codex-fallback/git-bridge-server.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "70d7992c3ffe7988",
+        "corpus": "70d7992c3ffe7988",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
+      "path": ".github/actions/claude-codex-fallback/git-bridge.sh",
+      "mode": "identical",
+      "baseline": {
+        "site": "ea98aaff32e10849",
+        "corpus": "ea98aaff32e10849",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
+      "path": ".github/actions/claude-codex-fallback/sanitize-git-config.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "9b66899fcf2dc19f",
+        "corpus": "9b66899fcf2dc19f",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
+      "path": ".github/actions/setup-codex-sandbox/action.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "049e7b7f8547fc10",
+        "corpus": "049e7b7f8547fc10",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
+      "path": ".github/workflows/observers/scripts/lib/canonical-json-digest.mjs",
+      "sitePath": ".github/corpus-workflows/observers/scripts/lib/canonical-json-digest.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "a98a130d20cea211",
+        "corpus": "a98a130d20cea211",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
+      "path": ".github/workflows/observers/scripts/lib/crawler-generation-observer-report.mjs",
+      "sitePath": ".github/corpus-workflows/observers/scripts/lib/crawler-generation-observer-report.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "0a32d9f5ee5bc961",
+        "corpus": "0a32d9f5ee5bc961",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
+      "path": ".github/workflows/observers/scripts/lib/crawler-generation-token.mjs",
+      "sitePath": ".github/corpus-workflows/observers/scripts/lib/crawler-generation-token.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "4bc0d4d514be3f67",
+        "corpus": "4bc0d4d514be3f67",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
+      "path": ".github/workflows/observers/scripts/lib/github-actions-read-client.mjs",
+      "sitePath": ".github/corpus-workflows/observers/scripts/lib/github-actions-read-client.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "a3c0b3742061e9e1",
+        "corpus": "a3c0b3742061e9e1",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
+      "path": ".github/workflows/observers/workflows/crawler-generation-observer-shadow.yml",
+      "sitePath": ".github/corpus-workflows/observers/workflows/crawler-generation-observer-shadow.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "41a6342737247042",
+        "corpus": "41a6342737247042",
+        "alignedAt": "2026-09-14"
+      }
     }
   ]
 }
