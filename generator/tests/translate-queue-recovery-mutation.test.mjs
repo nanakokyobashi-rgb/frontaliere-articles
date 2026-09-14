@@ -147,12 +147,24 @@ function fakeGithub({
         const round = Math.floor(livenessCalls / 5);
         const snapshot = livenessSnapshots?.[round] ?? flattened;
         livenessCalls += 1;
-        const rows = snapshot.filter((row) => row.status === status);
+        let rows = snapshot.filter((row) => row.status === status);
         if (pendingAfterStatus?.round === round && pendingAfterStatus.status === status) {
           state.pendingPresent = true;
+          rows = [...rows, targetRun({
+            conclusion: null,
+            created_at: '2026-09-01T20:59:00.000Z',
+            id: 33534757798,
+            status,
+          })];
         }
         if (pendingAfterFinalLiveness && round === 1 && livenessCalls === 10) {
           state.pendingPresent = true;
+          rows = [...rows, targetRun({
+            conclusion: null,
+            created_at: '2026-09-01T20:59:00.000Z',
+            id: 33534757797,
+            status,
+          })];
         }
         return response(200, { total_count: rows.length, workflow_runs: rows });
       }
@@ -257,9 +269,10 @@ async function claim(fake, overrides = {}) {
 }
 
 async function execute(fake, overrides = {}) {
+  const targetCapability = overrides.targetCapability ?? TEST_TARGET_CAPABILITY;
   const recoveryClaim = createRecoveryClaim({
     headSha: TARGET_HEAD_SHA,
-    targetCapability: TEST_TARGET_CAPABILITY,
+    targetCapability,
     targetRunId: TARGET_RUN_ID,
   });
   if (fake.state.claimBytes === null) fake.state.claimBytes = recoveryClaim.bytes;
@@ -268,7 +281,7 @@ async function execute(fake, overrides = {}) {
     fetchImpl: fake.fetchImpl,
     now: NOW,
     repository: TARGET_REPOSITORY,
-    targetCapability: TEST_TARGET_CAPABILITY,
+    targetCapability,
     targetRunId: TARGET_RUN_ID,
     token: TOKEN,
     workflowRunAttempt: '1',
@@ -463,7 +476,7 @@ test('claim create-only 201 viene verificato byte-identical e abilita solo quest
   assert.ok(report.queryBudget.usedGets <= MAX_PHASE_GET_REQUESTS);
 });
 
-test('target live senza capability dedupe v1 si ferma prima di claim e rerun', async () => {
+test('target live con dedupe effectively-once e successor guard abilita un solo claim e rerun', async () => {
   const fake = fakeGithub({ workflowBlobSha: TARGET_WORKFLOW_BLOB_SHA });
   const { report } = await runRecoveryClaim({
     fetchImpl: fake.fetchImpl,
@@ -475,29 +488,27 @@ test('target live senza capability dedupe v1 si ferma prima di claim e rerun', a
     targetRunId: TARGET_RUN_ID,
     token: TOKEN,
   });
-  assert.equal(report.decision, 'blocked');
-  assert.equal(report.primaryReason, 'target_execution_dedupe_not_live');
-  assert.ok(report.reasonCodes.includes('target_successor_guard_not_live'));
+  assert.equal(report.decision, 'claim_created');
+  assert.equal(report.primaryReason, 'claim_created');
   assert.equal(report.complete, true);
   assert.equal(report.failClosed, false);
-  assert.equal(report.queryBudget.usedGets, TARGET_ONLY_MAX_INSPECTION_GET_REQUESTS - 1);
-  assert.equal(mutatingCalls(fake).length, 0);
-  assert.equal(report.mutationBudget.usedPuts, 0);
+  assert.equal(report.queryBudget.usedGets, TARGET_ONLY_MAX_INSPECTION_GET_REQUESTS + 1);
+  assert.equal(mutatingCalls(fake).filter(({ options }) => options.method === 'PUT').length, 1);
+  assert.equal(report.mutationBudget.usedPuts, 1);
   assert.deepEqual(TARGET_EXECUTION_CAPABILITY, {
-    executionDedupeProtocolVersion: 0,
+    executionDedupeProtocolVersion: 1,
     schema: TARGET_EXECUTION_CAPABILITY_SCHEMA,
-    successorGuardVersion: 0,
-    targetExecutionDedupe: 'not_live',
+    successorGuardVersion: 1,
+    targetExecutionDedupe: 'effectively_once',
     workflowBlobSha: TARGET_WORKFLOW_BLOB_SHA,
   });
   const executorFake = fakeGithub({ workflowBlobSha: TARGET_WORKFLOW_BLOB_SHA });
   const executor = await execute(executorFake, {
     targetCapability: TARGET_EXECUTION_CAPABILITY,
   });
-  assert.equal(executor.report.decision, 'blocked');
-  assert.ok(executor.report.reasonCodes.includes('target_execution_dedupe_not_live'));
-  assert.ok(executor.report.reasonCodes.includes('target_successor_guard_not_live'));
-  assert.equal(executorFake.calls.filter(({ options }) => options.method === 'POST').length, 0);
+  assert.equal(executor.report.decision, 'rerun_requested');
+  assert.ok(executor.report.reasonCodes.includes('rerun_authorized'));
+  assert.equal(executorFake.calls.filter(({ options }) => options.method === 'POST').length, 1);
   assert.notEqual(TEST_TARGET_CAPABILITY.workflowBlobSha, TARGET_WORKFLOW_BLOB_SHA);
 });
 
@@ -531,7 +542,7 @@ test('capability malformata o estesa fallisce prima di qualunque fetch', async (
   assert.equal(fake.calls.length, 0);
 });
 
-test('target-only ignora 201 cancellazioni profonde e raggiunge il blocker capability', async () => {
+test('target-only ignora 201 cancellazioni profonde e raggiunge il claim live', async () => {
   const history = Array.from({ length: 201 }, (_, index) => targetRun({
     conclusion: 'cancelled',
     id: 41000000000 + index,
@@ -552,16 +563,16 @@ test('target-only ignora 201 cancellazioni profonde e raggiunge il blocker capab
     targetRunId: TARGET_RUN_ID,
     token: TOKEN,
   });
-  assert.equal(report.decision, 'blocked');
-  assert.equal(report.primaryReason, 'target_execution_dedupe_not_live');
+  assert.equal(report.decision, 'claim_created');
+  assert.equal(report.primaryReason, 'claim_created');
   assert.equal(report.failClosed, false);
-  assert.equal(report.queryBudget.usedGets, TARGET_ONLY_MAX_INSPECTION_GET_REQUESTS - 1);
+  assert.equal(report.queryBudget.usedGets, TARGET_ONLY_MAX_INSPECTION_GET_REQUESTS + 1);
   assert.ok(!report.reasonCodes.includes('query_budget_exhausted'));
   assert.equal(fake.calls.filter(({ url }) => (
     url.pathname.endsWith(`/actions/workflows/${TARGET_WORKFLOW_ID}/runs`)
       && url.searchParams.get('status') === null
   )).length, 0);
-  assert.equal(mutatingCalls(fake).length, 0);
+  assert.equal(mutatingCalls(fake).filter(({ options }) => options.method === 'PUT').length, 1);
 });
 
 test('nuova pending nella riosservazione finale deferisce prima di PUT o POST', async (t) => {
@@ -584,7 +595,7 @@ test('nuova pending nella riosservazione finale deferisce prima di PUT o POST', 
 test('pending dopo la query del proprio status non consente write senza successor guard', async (t) => {
   const race = { round: 1, status: 'queued' };
   for (const [name, targetCapability] of [
-    ['live-v0', TARGET_EXECUTION_CAPABILITY],
+    ['live', TARGET_EXECUTION_CAPABILITY],
     ['successor-guard-v0', TEST_NO_SUCCESSOR_GUARD_CAPABILITY],
   ]) {
     await t.test(`${name}-claim`, async () => {
@@ -614,7 +625,7 @@ test('pending dopo la query del proprio status non consente write senza successo
 
 test('pending dopo ultimo GET final-liveness non consente write senza successor guard', async (t) => {
   for (const [name, targetCapability] of [
-    ['live-v0', TARGET_EXECUTION_CAPABILITY],
+    ['live', TARGET_EXECUTION_CAPABILITY],
     ['successor-guard-v0', TEST_NO_SUCCESSOR_GUARD_CAPABILITY],
   ]) {
     await t.test(`${name}-claim`, async () => {
