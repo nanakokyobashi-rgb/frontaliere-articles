@@ -148,13 +148,20 @@ jobs:
         run: node generator/scripts/load-rc-env.mjs
 
       - name: Verify a model provider is actually available
-        run: |
-          set -euo pipefail
-          if [ -z "${GH_MODELS_PAT:-}" ]; then
-            echo "::error::GH_MODELS_PAT missing after the Remote Config load — refusing to start a run that would fail article by article"
-            exit 1
-          fi
-          echo "model provider credentials present"
+        id: provider_preflight
+        if: steps.mode.outputs.dry != 'true'
+        env:
+          PROVIDER_PREFLIGHT_OUTPUT: ${{ runner.temp }}/provider-preflight.json
+        run: node generator/scripts/lib/provider-preflight.mjs
+
+      - name: Upload provider preflight report
+        if: always() && steps.mode.outputs.dry != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: provider-preflight-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/provider-preflight.json
+          if-no-files-found: warn
+          retention-days: 14
 
       - name: Configure git identity
         run: |

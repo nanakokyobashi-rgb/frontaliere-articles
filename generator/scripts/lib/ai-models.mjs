@@ -1392,6 +1392,11 @@ function getProvider(model) {
   return PROVIDER.GITHUB;
 }
 
+// Public read-only view for diagnostics and preflight callers. Keeping the
+// implementation under the original private name avoids changing every
+// runtime call site in this large module.
+export const getProviderForModel = getProvider;
+
 /**
  * Strip provider prefix from model ID to get the API model name.
  * e.g. 'groq/llama-3.3-70b-versatile' → 'llama-3.3-70b-versatile'
@@ -1429,7 +1434,7 @@ function getApiModelId(model) {
 }
 
 /** Get the API key for a given provider */
-function getApiKeyForProvider(provider) {
+export function getApiKeyForProvider(provider) {
   switch (provider) {
     // First available PAT (primary or any extra) — so a config that supplies
     // only GH_MODELS_PAT_2 still registers GitHub as available to the gate.
