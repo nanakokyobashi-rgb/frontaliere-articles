@@ -110,6 +110,21 @@ test('pharmacy evergreen: il builder è idempotente e non muta gli snapshot', ()
   assert.equal(once[0].date, '2026-09-14');
 });
 
+test('pharmacy evergreen: il clock di validazione del builder è iniettato', () => {
+  const snapshots = readFixturePair();
+  const nowMs = Date.parse('2026-09-14T18:20:00.000Z');
+  let calls = 0;
+  const guides = buildPharmacyEvergreenGuides(snapshots, {
+    now: () => {
+      calls += 1;
+      return nowMs;
+    },
+  });
+
+  assert.equal(guides.length, 4);
+  assert.equal(calls, 1, 'la validazione deve usare il clock esplicito una sola volta');
+});
+
 test('pharmacy evergreen: snapshot mancante — il producer chiude prima della scrittura', () => {
   const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'pharmacy-evergreen-'));
   try {

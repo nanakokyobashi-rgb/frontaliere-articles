@@ -873,11 +873,12 @@ function buildSeo(spec, snapshots) {
 }
 
 /**
- * Build the four localized, stable-id guide payloads.  No clock or random
- * value is consulted: the only changing inputs are the validated snapshots.
+ * Build the four localized, stable-id guide payloads.  Content depends only
+ * on the validated snapshots; the validation clock is injected explicitly.
  */
-export function buildPharmacyEvergreenGuides(snapshots) {
-  const validated = validatePharmacySnapshots(snapshots);
+export function buildPharmacyEvergreenGuides(snapshots, { now = Date.now } = {}) {
+  if (typeof now !== 'function') throw snapshotError('clock di validazione non valido');
+  const validated = validatePharmacySnapshots(snapshots, { nowMs: now() });
   const snapshotUpdatedAt = latestSnapshotTimestamp(validated);
   const date = snapshotUpdatedAt.slice(0, 10);
 

@@ -56,6 +56,12 @@ function writeCorpusFile(file, content) {
   }
 }
 
+function isAtOrAfter(stored, candidate) {
+  const storedMs = Date.parse(stored);
+  const candidateMs = Date.parse(candidate);
+  return !Number.isNaN(storedMs) && !Number.isNaN(candidateMs) && storedMs >= candidateMs;
+}
+
 /** Bump (or insert) `updatedAt` on an article registry entry so sitemap lastmod reflects the refresh. */
 export function bumpUpdatedAt(
   id,
@@ -82,6 +88,8 @@ export function bumpUpdatedAt(
   if (dateMatch && Date.parse(`${todayIso}T00:00:00Z`) < Date.parse(dateMatch[1])) {
     return true;
   }
+  const currentMatch = block.match(/updatedAt: '([^']*)'/);
+  if (currentMatch && isAtOrAfter(currentMatch[1], todayIso)) return true;
   if (/updatedAt:/.test(block)) {
     block = block.replace(/updatedAt: '[^']*'/, `updatedAt: '${todayIso}'`);
   } else {
@@ -127,13 +135,15 @@ export function bumpDateModified(
   // cannot make us touch a sibling's date.
   const { index: startIdx, closeIdx } = entry;
   const block = src.slice(startIdx, closeIdx + 1);
-  const dmRe = /"dateModified":\s*"[^"]*"/;
+  const dmRe = /"dateModified":\s*"([^"]*)"/;
   if (!dmRe.test(block)) return false;
   // dateModified must never precede datePublished: on the publish day a fixed
   // midnight stamp falls before the publish time → an incoherent freshness
   // signal in the indexed NewsArticle JSON-LD. Clamp up to datePublished when earlier.
   const pub = block.match(/"datePublished":\s*"([^"]*)"/);
   const effective = pub && Date.parse(pub[1]) > Date.parse(isoDateTime) ? pub[1] : isoDateTime;
+  const current = block.match(dmRe);
+  if (current && isAtOrAfter(current[1], effective)) return true;
   const replaced = block.replace(dmRe, `"dateModified": "${effective}"`);
   writeFile(file, src.slice(0, startIdx) + replaced + src.slice(closeIdx + 1));
   return true;

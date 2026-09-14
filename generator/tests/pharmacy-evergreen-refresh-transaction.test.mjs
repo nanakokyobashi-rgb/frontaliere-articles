@@ -76,6 +76,57 @@ test('pharmacy refresh transaction: un journal interrotto ripristina i backup al
   }
 });
 
+test('pharmacy refresh transaction: rollback interrotto persiste il progresso e riprende senza backup', () => {
+  const root = tempRepo();
+  const originalRenameSync = fs.renameSync;
+  let backupRenames = 0;
+  try {
+    const first = file(root, 'content/first.ts');
+    const second = file(root, 'content/second.ts');
+    fs.writeFileSync(first, 'old first');
+    fs.writeFileSync(second, 'old second');
+
+    const tx = acquirePharmacyEvergreenRefresh(root, {
+      pid: 2147483647,
+      log: () => {},
+    });
+    tx.stage(first, 'new first');
+    tx.stage(second, 'new second');
+    tx.prepare();
+    fs.renameSync(path.join(tx.paths.stageRoot, 'content/first.ts'), first);
+    fs.renameSync(path.join(tx.paths.stageRoot, 'content/second.ts'), second);
+
+    fs.renameSync = (source, target) => {
+      if (source.includes(`${path.sep}backup${path.sep}`)) {
+        backupRenames += 1;
+        if (backupRenames === 2) throw new Error('simulated rollback interruption');
+      }
+      return originalRenameSync(source, target);
+    };
+
+    assert.throws(
+      () => recoverPharmacyEvergreenRefresh(root, { log: () => {} }),
+      /rollback pharmacy refresh incompleto.*simulated rollback interruption/,
+    );
+    assert.equal(fs.readFileSync(first, 'utf8'), 'new first');
+    assert.equal(fs.readFileSync(second, 'utf8'), 'old second');
+    assert.equal(fs.existsSync(tx.paths.lockPath), true, 'il lock resta per consentire il recovery');
+    const journal = JSON.parse(fs.readFileSync(tx.paths.journalPath, 'utf8'));
+    assert.deepEqual(journal.restored, ['content/second.ts']);
+
+    fs.renameSync = originalRenameSync;
+    const result = recoverPharmacyEvergreenRefresh(root, { log: () => {} });
+    assert.equal(result.recovered, true);
+    assert.equal(fs.readFileSync(first, 'utf8'), 'old first');
+    assert.equal(fs.readFileSync(second, 'utf8'), 'old second');
+    assert.equal(fs.existsSync(tx.paths.lockPath), false);
+    assert.equal(fs.existsSync(tx.paths.transactionRoot), false);
+  } finally {
+    fs.renameSync = originalRenameSync;
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('pharmacy refresh transaction: un lock attivo non viene cancellato', () => {
   const root = tempRepo();
   try {

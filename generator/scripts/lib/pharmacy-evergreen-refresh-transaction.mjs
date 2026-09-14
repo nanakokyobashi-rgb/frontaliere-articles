@@ -84,19 +84,28 @@ function processIsAlive(pid) {
 
 function restoreJournal(paths, journal) {
   const failures = [];
+  const restored = new Set(Array.isArray(journal.restored) ? journal.restored : []);
+  journal.phase = 'rolling_back';
+  journal.restored = [...restored];
+  atomicStateWrite(paths.journalPath, journal);
   for (const entry of [...(journal.files || [])].reverse()) {
+    if (restored.has(entry.path)) continue;
     const target = path.join(paths.root, entry.path);
     const backup = path.join(paths.transactionRoot, entry.backup);
     try {
       if (entry.existed) {
-        if (!fs.existsSync(backup)) {
+        if (fs.existsSync(backup)) {
+          fs.mkdirSync(path.dirname(target), { recursive: true });
+          fs.renameSync(backup, target);
+        } else if (!fs.existsSync(target)) {
           throw new Error(`backup assente per ${entry.path}`);
         }
-        fs.mkdirSync(path.dirname(target), { recursive: true });
-        fs.renameSync(backup, target);
       } else if (fs.existsSync(target)) {
         fs.unlinkSync(target);
       }
+      restored.add(entry.path);
+      journal.restored = [...restored];
+      atomicStateWrite(paths.journalPath, journal);
     } catch (error) {
       failures.push(`${entry.path}: ${error.message}`);
     }
@@ -104,6 +113,8 @@ function restoreJournal(paths, journal) {
   if (failures.length > 0) {
     throw new Error(`rollback pharmacy refresh incompleto: ${failures.join(' | ')}`);
   }
+  journal.phase = 'rolled_back';
+  atomicStateWrite(paths.journalPath, journal);
 }
 
 /**
@@ -219,6 +230,7 @@ export function acquirePharmacyEvergreenRefresh(repoRoot, {
       version: TRANSACTION_VERSION,
       phase: 'prepared',
       committed: 0,
+      restored: [],
       files,
     };
     atomicStateWrite(paths.journalPath, journal);
