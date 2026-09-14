@@ -143,6 +143,15 @@
       }
     },
     {
+      "path": "scripts/ci/native-automerge-gate.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "1f6ec77d5a400a3e",
+        "corpus": "1f6ec77d5a400a3e",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
       "path": "scripts/ci/review-scope.mjs",
       "mode": "corpus-only",
       "reason": "Classificatore del verdetto `🔴 Important` rispetto al diff corrente della PR. E' usato dal review-gate e dal fixer del corpus per declassare in modo conservativo i finding fuori diff e coniare una sola issue follow-up; il sito ha un gate e un ciclo di review diversi e non possiede questo consumer del corpus, quindi non esiste un gemello da portare.",
@@ -3454,10 +3463,10 @@
     {
       "path": ".github/workflows/translate-queue-recovery-watchdog.yml",
       "mode": "corpus-only",
-      "reason": "Watchdog corpus-only della coda translate: censisce active/pending con sole GET bounded e separa la copertura storica troncabile. La preservazione rerun schedule e provata da workflow 347680591, run 33550046319, artifact 9817045831, schema v1 e token hash sha256:8f28835373c43bd2c90b532bd294eba56d827e64b979fb38a8924e898fca0c91; lo schedule recovery resta blocked per policy, target dedupe e successor guard non live.",
+      "reason": "Watchdog corpus-only della coda translate: censisce active/pending con sole GET bounded, separa la copertura storica troncabile e segnala il queue SLO. La preservazione rerun schedule e provata da workflow 347680591, run 33550046319, artifact 9817045831, schema v1 e token hash sha256:8f28835373c43bd2c90b532bd294eba56d827e64b979fb38a8924e898fca0c91; il recovery resta manuale per policy e il rerun autorizzato e protetto da claim/successor guard live.",
       "baseline": {
         "site": null,
-        "corpus": "e7df4681b16237d6",
+        "corpus": "d092a06da2a6fc64",
         "alignedAt": "2026-09-01"
       }
     },
@@ -3467,7 +3476,7 @@
       "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata ma recovery blocked per policy, target dedupe e successor guard.",
       "baseline": {
         "site": null,
-        "corpus": "3989696495f1421d",
+        "corpus": "f35402c81161f48d",
         "alignedAt": "2026-09-01"
       }
     },
@@ -3477,34 +3486,34 @@
       "reason": "Contratto Node deterministico corpus-only per watchdog e workflow translate: copre censimento corrente indipendente da oltre 200 run storiche, discovery troncata, budget, prova schedule redatta e assenza by construction di scritture remote.",
       "baseline": {
         "site": null,
-        "corpus": "c12eec9e434e0632",
+        "corpus": "cf3f1a8f39372593",
         "alignedAt": "2026-09-01"
       }
     },
     {
       "path": ".github/workflows/translate-queue-recovery.yml",
       "mode": "corpus-only",
-      "reason": "Recovery manuale corpus-only della coda translate: workflow_dispatch osserva per default in target-only e mantiene claim/executor separati; claim_and_rerun resta bloccato prima delle write finche il blob target non attesta dedupe effectively-once e successor guard v1. Lo schedule resta assente per policy anche con preservazione provata.",
+      "reason": "Recovery manuale corpus-only della coda translate: workflow_dispatch osserva per default in target-only e mantiene claim/executor separati; claim_and_rerun usa un claim immutabile e un successor guard effectively-once blob-bound. Lo schedule resta assente per policy anche con preservazione provata.",
       "baseline": {
         "site": null,
-        "corpus": "98bd862e092f15e3",
+        "corpus": "7c64e6bcc3f521d5",
         "alignedAt": "2026-09-01"
       }
     },
     {
       "path": "scripts/ci/translate-queue-recovery-claim.mjs",
       "mode": "corpus-only",
-      "reason": "Planner e claim CAS zero-dependency corpus-only: usa target-only senza discovery storica, riserva il budget per target/ancestry/blob/jobs/guard finali e richiede capability blob-bound con dedupe effectively-once e successor guard v1; empty_at_observation non promette atomicita e il target live v0 resta senza PUT.",
+      "reason": "Planner e claim CAS zero-dependency corpus-only: usa target-only senza discovery storica, riserva il budget per target/ancestry/blob/jobs/guard finali e richiede capability blob-bound con dedupe effectively-once e successor guard v1; empty_at_observation viene autorizzato solo dopo il guard live.",
       "baseline": {
         "site": null,
-        "corpus": "de213eae0556c476",
+        "corpus": "7c27dc0200d470dc",
         "alignedAt": "2026-09-01"
       }
     },
     {
       "path": "scripts/ci/translate-queue-recovery-executor.mjs",
       "mode": "corpus-only",
-      "reason": "Executor manuale zero-dependency corpus-only: verifica claim, capability dedupe effectively-once, successor guard v1 e nuova liveness target-only sotto il lock translate prima dell'unico endpoint POST testabile; il target live v0 rende il percorso POST irraggiungibile.",
+      "reason": "Executor manuale zero-dependency corpus-only: verifica claim, capability dedupe effectively-once, successor guard v1 e nuova liveness target-only sotto il lock translate prima dell'unico endpoint POST testabile; il workflow target verifica il claim prima dell'esecuzione dell'attempt successor.",
       "baseline": {
         "site": null,
         "corpus": "a01b5a35d86ca688",
@@ -3514,10 +3523,10 @@
     {
       "path": "generator/tests/translate-queue-recovery-mutation.test.mjs",
       "mode": "corpus-only",
-      "reason": "Contratto deterministico corpus-only della recovery manuale: copre 201 cancellazioni profonde senza consumare il target-only budget, capability live v0, fixture attestata dedupe effectively-once/successor guard v1, race post-status e post-final-liveness a zero write senza guard, CAS, failure ambiguity e singolo endpoint mutante.",
+      "reason": "Contratto deterministico corpus-only della recovery manuale: copre 201 cancellazioni profonde senza consumare il target-only budget, capability live effectively-once/successor guard v1, race post-status e post-final-liveness a zero write, CAS, failure ambiguity e singolo endpoint mutante.",
       "baseline": {
         "site": null,
-        "corpus": "b437a1be48cb6bfc",
+        "corpus": "9152a5594c19b9f5",
         "alignedAt": "2026-09-01"
       }
     },
@@ -3536,9 +3545,10 @@
       "mode": "adapted",
       "reason": "Gemello del workflow del sito che arruola le PR nell'auto-merge nativo di GitHub. Adattato su due punti non copiabili: (1) il ponte Remote Config e' generator/scripts/load-rc-env.mjs, non scripts/load-rc-env.mjs, e i due file raw scaricati sono quelli; (2) l'identita' di merge e' GITHUB_PAT_NANAKO, non GITHUB_PAT — questo repo e' di un altro account. Il secondo punto e' anche la ragione per cui l'auto-merge nativo QUI e' diventato possibile: l'obiezione registrata sulle voci rimosse in questa stessa PR (\"non puo' abilitare il nativo con l'identita' corretta perche' manca la GitHub App del sito\") confondeva due cose — il nativo mergia con l'identita' di CHI lo abilita, e un PAT owner basta, quindi publish-api.yml continua a scattare.",
       "baseline": {
-        "site": "2a0de9e28318d264",
-        "corpus": "4be1dbefeafc6837",
-        "alignedAt": "2026-09-03"
+        "site": "6a0eaccfdaf1330d",
+        "corpus": "1b2cde79e60f98e2",
+        "alignedAt": "2026-09-14",
+        "forcedAt": "2026-09-14T21:31:06.354Z"
       }
     },
     {
@@ -3877,6 +3887,147 @@
         "site": null,
         "corpus": "662b302a7622afca",
         "alignedAt": "2026-09-13"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/provider-preflight.mjs",
+      "mode": "corpus-only",
+      "reason": "Preflight zero-inference che censisce i provider disponibili prima delle chiamate del generatore e distingue credenziali mancanti, rete irraggiungibile e quota bloccata. E' consumato dai workflow di produzione del corpus; il sito non possiede il gemello ne' questi entry point del generatore, quindi non c'e' nulla da portare.",
+      "baseline": {
+        "site": null,
+        "corpus": "080c5caa7a296fa9",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
+      "path": ".github/actions/claude-codex-fallback/bridge-transport.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "fdfff452f405e4bb",
+        "corpus": "fdfff452f405e4bb",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
+      "path": ".github/actions/claude-codex-fallback/child-lifecycle.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "db4a7bd788943b9e",
+        "corpus": "db4a7bd788943b9e",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
+      "path": ".github/actions/claude-codex-fallback/gh-bridge-client.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "6226451d81dbc185",
+        "corpus": "6226451d81dbc185",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
+      "path": ".github/actions/claude-codex-fallback/gh-bridge.sh",
+      "mode": "identical",
+      "baseline": {
+        "site": "ecbf0fbe80f7064c",
+        "corpus": "ecbf0fbe80f7064c",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
+      "path": ".github/actions/claude-codex-fallback/git-bridge-client.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "c9a2156dda2d58ba",
+        "corpus": "c9a2156dda2d58ba",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
+      "path": ".github/actions/claude-codex-fallback/git-bridge-server.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "70d7992c3ffe7988",
+        "corpus": "70d7992c3ffe7988",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
+      "path": ".github/actions/claude-codex-fallback/git-bridge.sh",
+      "mode": "identical",
+      "baseline": {
+        "site": "ea98aaff32e10849",
+        "corpus": "ea98aaff32e10849",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
+      "path": ".github/actions/claude-codex-fallback/sanitize-git-config.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "9b66899fcf2dc19f",
+        "corpus": "9b66899fcf2dc19f",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
+      "path": ".github/actions/setup-codex-sandbox/action.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "049e7b7f8547fc10",
+        "corpus": "049e7b7f8547fc10",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
+      "path": ".github/workflows/observers/scripts/lib/canonical-json-digest.mjs",
+      "sitePath": ".github/corpus-workflows/observers/scripts/lib/canonical-json-digest.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "a98a130d20cea211",
+        "corpus": "a98a130d20cea211",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
+      "path": ".github/workflows/observers/scripts/lib/crawler-generation-observer-report.mjs",
+      "sitePath": ".github/corpus-workflows/observers/scripts/lib/crawler-generation-observer-report.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "0a32d9f5ee5bc961",
+        "corpus": "0a32d9f5ee5bc961",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
+      "path": ".github/workflows/observers/scripts/lib/crawler-generation-token.mjs",
+      "sitePath": ".github/corpus-workflows/observers/scripts/lib/crawler-generation-token.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "4bc0d4d514be3f67",
+        "corpus": "4bc0d4d514be3f67",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
+      "path": ".github/workflows/observers/scripts/lib/github-actions-read-client.mjs",
+      "sitePath": ".github/corpus-workflows/observers/scripts/lib/github-actions-read-client.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "a3c0b3742061e9e1",
+        "corpus": "a3c0b3742061e9e1",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
+      "path": ".github/workflows/observers/workflows/crawler-generation-observer-shadow.yml",
+      "sitePath": ".github/corpus-workflows/observers/workflows/crawler-generation-observer-shadow.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "41a6342737247042",
+        "corpus": "41a6342737247042",
+        "alignedAt": "2026-09-14"
       }
     }
   ]

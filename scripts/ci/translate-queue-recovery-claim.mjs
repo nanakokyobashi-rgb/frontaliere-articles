@@ -27,10 +27,10 @@ export const REQUEST_TIMEOUT_MS = 10_000;
 export const PROCESS_TIMEOUT_MS = 240_000;
 export const TARGET_EXECUTION_CAPABILITY_SCHEMA = 'translate-target-execution-capability/v1';
 export const TARGET_EXECUTION_CAPABILITY = Object.freeze({
-  executionDedupeProtocolVersion: 0,
+  executionDedupeProtocolVersion: 1,
   schema: TARGET_EXECUTION_CAPABILITY_SCHEMA,
-  successorGuardVersion: 0,
-  targetExecutionDedupe: 'not_live',
+  successorGuardVersion: 1,
+  targetExecutionDedupe: 'effectively_once',
   workflowBlobSha: TARGET_WORKFLOW_BLOB_SHA,
 });
 export const TARGET_ONLY_OBSERVATION_MODE = 'target_only';

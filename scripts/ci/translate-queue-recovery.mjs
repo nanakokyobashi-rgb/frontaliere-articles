@@ -7,7 +7,7 @@ export const REPORT_SCHEMA = 'translate-queue-recovery-watchdog/v1';
 export const TARGET_REPOSITORY = 'nanakokyobashi-rgb/frontaliere-articles';
 export const TARGET_WORKFLOW_ID = 342441975;
 export const TARGET_WORKFLOW_PATH = '.github/workflows/translate-pending.yml';
-export const TARGET_WORKFLOW_BLOB_SHA = 'f782b4b2761ab87ba7792d256b64ab09c2e206ea';
+export const TARGET_WORKFLOW_BLOB_SHA = '231a28fba27199f606ebb49b13e6c93aa87ace8d';
 export const TARGET_BRANCH = 'main';
 export const QUEUE_MAX_BOUNDARY_SHA = '5e5114b73f37a0c47625f00baff13942fe8b186b';
 export const RERUN_PRESERVATION_PROOF = Object.freeze({
@@ -27,6 +27,7 @@ export const MAX_GET_REQUESTS = MAX_TOTAL_GET_REQUESTS - BOOTSTRAP_GET_REQUESTS;
 export const MAX_SAMPLE_RUN_IDS = 5;
 export const MAX_RESPONSE_BYTES = 4 * 1024 * 1024;
 export const MAX_REPORT_BYTES = 16 * 1024;
+export const DEFAULT_QUEUE_STALE_THRESHOLD_SECONDS = 30 * 60;
 
 const API_ROOT = 'https://api.github.com';
 const REQUEST_TIMEOUT_MS = 8_000;
@@ -90,7 +91,7 @@ export const REASON_CODES = Object.freeze([
   'missing_token',
   'no_active_pending',
   'pagination_inconclusive',
-  'queue_age_observed_no_threshold',
+  'queue_slo_breached',
   'query_budget_exhausted',
   'recovery_schedule_blocked_by_policy_and_target_dedupe',
   'wrong_blob',
@@ -172,11 +173,14 @@ function makeInitialState(nowMs) {
     activeRunIds: [],
     pendingRunIds: [],
     queueCreatedMs: [],
+    pendingCreatedMs: [],
     discovery: {
       declaredTotal: 0,
       maxRuns: MAX_RUN_PAGES * RUNS_PER_PAGE,
       state: 'complete',
       truncated: false,
+      nextPage: null,
+      residualRuns: 0,
     },
     complete: true,
   };
@@ -321,6 +325,8 @@ async function listAllBoundedRuns(client, state) {
       addReason(state, 'pagination_inconclusive');
       state.discovery.state = 'inconclusive';
       state.discovery.truncated = true;
+      state.discovery.nextPage = page;
+      state.discovery.residualRuns = Math.max(0, declaredTotal - collected.length);
       break;
     }
     collected.push(...payload.workflow_runs);
@@ -337,6 +343,8 @@ async function listAllBoundedRuns(client, state) {
       ? 'truncated'
       : 'inconclusive';
     state.discovery.truncated = true;
+    state.discovery.nextPage = Math.floor(collected.length / RUNS_PER_PAGE) + 1;
+    state.discovery.residualRuns = Math.max(0, declaredTotal - collected.length);
   }
   state.discovery.declaredTotal = declaredTotal;
   return collected.slice(0, MAX_RUN_PAGES * RUNS_PER_PAGE).sort(compareRuns);
@@ -399,7 +407,10 @@ function collectShallowFacts(run, state, candidates, { collectQueue = true } = {
     }
     if (collectQueue) {
       if (isActive) state.activeRunIds.push(runId);
-      if (isPending) state.pendingRunIds.push(runId);
+      if (isPending) {
+        state.pendingRunIds.push(runId);
+        state.pendingCreatedMs.push(createdMs);
+      }
       state.queueCreatedMs.push(createdMs);
     }
     return;
@@ -471,7 +482,6 @@ function buildReport(state, client) {
       ...state.activeRunIds,
       ...state.pendingRunIds,
     ].slice(0, MAX_SAMPLE_RUN_IDS);
-    addReason(state, 'queue_age_observed_no_threshold');
   } else {
     addReason(state, 'no_active_pending');
   }
@@ -482,6 +492,35 @@ function buildReport(state, client) {
   const oldestCreatedMs = state.queueCreatedMs.length > 0
     ? Math.min(...state.queueCreatedMs)
     : null;
+  const oldestPendingMs = state.pendingCreatedMs.length > 0
+    ? Math.min(...state.pendingCreatedMs)
+    : null;
+  const oldestPendingAgeSeconds = oldestPendingMs === null
+    ? null
+    : Math.max(0, Math.floor((state.nowMs - oldestPendingMs) / 1000));
+  const queueSlo = !state.complete
+    ? {
+      alert: false,
+      oldestPendingAgeSeconds,
+      state: 'not_evaluable',
+      thresholdSeconds: DEFAULT_QUEUE_STALE_THRESHOLD_SECONDS,
+    }
+    : oldestPendingMs === null
+      ? {
+        alert: false,
+        oldestPendingAgeSeconds: null,
+        state: 'empty',
+        thresholdSeconds: DEFAULT_QUEUE_STALE_THRESHOLD_SECONDS,
+      }
+      : {
+        alert: oldestPendingAgeSeconds >= DEFAULT_QUEUE_STALE_THRESHOLD_SECONDS,
+        oldestPendingAgeSeconds,
+        state: oldestPendingAgeSeconds >= DEFAULT_QUEUE_STALE_THRESHOLD_SECONDS
+          ? 'breached'
+          : 'within_slo',
+        thresholdSeconds: DEFAULT_QUEUE_STALE_THRESHOLD_SECONDS,
+      };
+  if (queueSlo.state === 'breached') addReason(state, 'queue_slo_breached');
   const nonEmptySamples = Object.fromEntries(
     Object.entries(state.reasons.samples).filter(([, runIds]) => runIds.length > 0),
   );
@@ -492,8 +531,8 @@ function buildReport(state, client) {
       recoverySchedule: {
         preservation: 'verified',
         proof: RERUN_PRESERVATION_PROOF,
-        reason: 'blocked_by_policy_and_target_dedupe',
-        state: 'blocked',
+        reason: 'manual_only_by_policy',
+        state: 'manual_only',
       },
     },
     complete: state.complete,
@@ -519,7 +558,10 @@ function buildReport(state, client) {
         ? null
         : Math.max(0, Math.floor((state.nowMs - oldestCreatedMs) / 1000)),
       oldestCreatedAt: oldestCreatedMs === null ? null : new Date(oldestCreatedMs).toISOString(),
-      staleThreshold: 'not_evaluated',
+      oldestPendingAgeSeconds,
+      oldestPendingCreatedAt: oldestPendingMs === null ? null : new Date(oldestPendingMs).toISOString(),
+      slo: queueSlo,
+      staleThreshold: DEFAULT_QUEUE_STALE_THRESHOLD_SECONDS,
     },
     reasonCodes: REASON_CODES.filter((code) => state.reasons.counts[code] > 0),
     samples: nonEmptySamples,
