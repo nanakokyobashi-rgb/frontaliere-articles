@@ -1557,6 +1557,9 @@ function getProvider(model) {
   return PROVIDER.GITHUB;
 }
 
+// Read-only provider view for the corpus preflight; runtime call sites keep the private helper.
+export const getProviderForModel = getProvider;
+
 /**
  * Strip provider prefix from model ID to get the API model name.
  * e.g. 'groq/llama-3.3-70b-versatile' → 'llama-3.3-70b-versatile'
@@ -1594,7 +1597,7 @@ function getApiModelId(model) {
 }
 
 /** Get the API key for a given provider */
-function getApiKeyForProvider(provider) {
+export function getApiKeyForProvider(provider) {
   switch (provider) {
     // First available PAT (primary or any extra) — so a config that supplies
     // only GH_MODELS_PAT_2 still registers GitHub as available to the gate.
