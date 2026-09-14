@@ -82661,6 +82661,240 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-latte-e-agricoltura-svizzera-studi': {
+    title: 'Studi agricoli: guadagni bassi per il latte in Svizzera',
+    description: 'Studio FHNW sui redditi agricoli in Svizzera: produttori di latte a 8.30 franchi all\'ora contro i 73.60 della colza. Dati e aumenti necessari. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, studi, agricoli, guadagni, bassi',
+    ogTitle: 'Guadagni agricoltura in Svizzera: latte a 8.30 franchi l\'ora',
+    ogDescription: 'Un\'analisi approfondita basata sullo studio della FHNW svela i dati sui redditi orari degli agricoltori svizzeri, evidenziando il divario tra la produzione lattiera e le colture vegetali come la colza.',
+    canonicalPath: '/articoli-svizzera/latte-e-agricoltura-svizzera-studi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Studi agricoli: guadagni bassi per il latte in Svizzera",
+      "description": "Studio FHNW sui redditi agricoli in Svizzera: produttori di latte a 8.30 franchi all'ora contro i 73.60 della colza. Dati e aumenti necessari. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/latte-e-agricoltura-svizzera-studi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Produttori di latte e agricoltura in Svizzera secondo lo studio FHNW"
+      },
+      "datePublished": "2026-09-14T00:08:47+00:00",
+      "dateModified": "2026-09-14T00:08:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/latte-e-agricoltura-svizzera-studi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-ps-chiede-cpi-su-f35': {
+    title: 'F-35, il PS chiede una Commissione parlamentare d\'inchiesta',
+    description: 'Il PS avvia l\'iter per una Commissione parlamentare d\'inchiesta sull\'acquisto dei caccia F-35 per verificare trasparenza, costi e procedure del Dipartimento.',
+    keywords: 'frontalieri, ticino, svizzera, italia, f-35, chiede, commissione, parlamentare',
+    ogTitle: 'F-35, il PS chiede una Commissione parlamentare d\'inchiesta',
+    ogDescription: 'Il Partito socialista richiede ufficialmente l\'istituzione di una CPI per fare luce sull\'acquisto dei caccia F-35 e sulla correttezza delle informazioni fornite al Parlamento.',
+    canonicalPath: '/articoli-svizzera/ps-chiede-cpi-su-f35/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "F-35, il PS chiede una Commissione parlamentare d'inchiesta",
+      "description": "Il PS avvia l'iter per una Commissione parlamentare d'inchiesta sull'acquisto dei caccia F-35 per verificare trasparenza, costi e procedure del Dipartimento.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/ps-chiede-cpi-su-f35.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna, sede del Parlamento svizzero."
+      },
+      "datePublished": "2026-09-14T00:16:27+00:00",
+      "dateModified": "2026-09-14T00:16:27+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ps-chiede-cpi-su-f35/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-permesso-c-nidvaldo-requisiti': {
+    title: 'Permesso C Canton Nidvaldo: requisiti e domanda',
+    description: 'Guida completa al permesso di domicilio C nel Canton Nidvaldo: anni richiesti, criteri di integrazione, lingua e procedura di domanda. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, permesso, canton, nidvaldo, requisiti',
+    ogTitle: 'Permesso C nel Canton Nidvaldo: requisiti e domanda',
+    ogDescription: 'Approfondimento completo sui requisiti, i criteri di integrazione, le competenze linguistiche e la procedura per ottenere il permesso di domicilio C nel Canton Nidvaldo.',
+    canonicalPath: '/articoli-svizzera/permesso-c-nidvaldo-requisiti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Permesso C Canton Nidvaldo: requisiti e domanda",
+      "description": "Guida completa al permesso di domicilio C nel Canton Nidvaldo: anni richiesti, criteri di integrazione, lingua e procedura di domanda. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/permesso-c-nidvaldo-requisiti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio amministrativo nel Canton Nidvaldo"
+      },
+      "datePublished": "2026-09-14T00:24:26+00:00",
+      "dateModified": "2026-09-14T00:24:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/permesso-c-nidvaldo-requisiti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-benzina-oggi-costo-confronto': {
+    title: 'La benzina oggi costa meno che negli anni ‘80 | Frontaliere Ticino',
+    description: 'Analisi del prezzo della benzina in Svizzera: oggi attorno a 2 CHF/litro, inferiore al valore degli anni ’80 corretto per potere d’acquisto e più vantaggioso',
+    keywords: 'frontalieri, ticino, svizzera, italia, benzina, oggi, costa, meno',
+    ogTitle: 'La benzina oggi costa meno che negli anni ‘80',
+    ogDescription: 'Il costo della benzina svizzera, pur superando la soglia dei due franchi al litro, risulta inferiore al passato quando si considera il potere d’acquisto e più vantaggioso rispetto a molti paesi esteri. L’articolo confronta i valori nominali, quelli',
+    canonicalPath: '/articoli-svizzera/benzina-oggi-costo-confronto/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "La benzina oggi costa meno che negli anni ‘80",
+      "description": "Analisi del prezzo della benzina in Svizzera: oggi attorno a 2 CHF/litro, inferiore al valore degli anni ’80 corretto per potere d’acquisto e più vantaggioso",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/benzina-oggi-costo-confronto.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Stazione di servizio svizzera con prezzo benzina intorno a 2 CHF/litro"
+      },
+      "datePublished": "2026-09-14T00:56:30+00:00",
+      "dateModified": "2026-09-14T00:56:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/benzina-oggi-costo-confronto/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-consiglio-federale-decisioni-2026': {
+    title: 'Decisioni Consiglio federale: novità e votazioni 2026',
+    description: 'Scopri le decisioni del Consiglio federale, i progetti di legge, le misure contro la siccità e la votazione popolare del 27 settembre 2026 in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, decisioni, consiglio, federale, novità',
+    ogTitle: 'Decisioni e riforme del Consiglio federale: tutti gli aggiornamenti',
+    ogDescription: 'Approfondisci le decisioni del Consiglio federale svizzero, dai progetti di legge sulla protezione climatica e la fibra ottica fino alla votazione popolare del 27 settembre 2026.',
+    canonicalPath: '/articoli-svizzera/consiglio-federale-decisioni-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Decisioni Consiglio federale: novità e votazioni 2026",
+      "description": "Scopri le decisioni del Consiglio federale, i progetti di legge, le misure contro la siccità e la votazione popolare del 27 settembre 2026 in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/consiglio-federale-decisioni-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna sede del Consiglio federale"
+      },
+      "datePublished": "2026-09-14T01:45:57+00:00",
+      "dateModified": "2026-09-14T01:45:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/consiglio-federale-decisioni-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-naturalizzazione-nidvaldo-procedura': {
+    title: 'Naturalizzazione a Nidvaldo: requisiti e procedura',
+    description: 'Guida ufficiale alla naturalizzazione ordinaria nel Cantone di Nidvaldo: anni di residenza, test di lingua, requisiti di integrazione e tasse. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, naturalizzazione, nidvaldo, requisiti, procedura',
+    ogTitle: 'Naturalizzazione nel Canton Nidvaldo: Requisiti e Procedura',
+    ogDescription: 'Scopri la procedura completa per la naturalizzazione ordinaria nel Cantone di Nidvaldo: anni richiesti, test di lingua, integrazione e costi amministrativi.',
+    canonicalPath: '/articoli-svizzera/naturalizzazione-nidvaldo-procedura/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Naturalizzazione a Nidvaldo: requisiti e procedura",
+      "description": "Guida ufficiale alla naturalizzazione ordinaria nel Cantone di Nidvaldo: anni di residenza, test di lingua, requisiti di integrazione e tasse. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/naturalizzazione-nidvaldo-procedura.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio comunale nel Cantone di Nidvaldo"
+      },
+      "datePublished": "2026-09-14T01:54:08+00:00",
+      "dateModified": "2026-09-14T01:54:08+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/naturalizzazione-nidvaldo-procedura/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

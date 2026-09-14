@@ -11735,6 +11735,21 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-09-13.imageAlt': 'Les chiffres du jour pour les frontaliers – 13 septembre 2026 : attentes aux douanes, prix de l\'essence, taux CHF-EUR et offres d\'emploi',
     'blog.article.bollettino-frontaliere-2026-09-13.seoDescription': 'Bulletin du frontalier du 13 septembre 2026 : les files aux douanes ce matin, l\'essence la moins chère, taux franc-euro et nouvelles offres d\'emploi en Suisse.',
     'blog.article.bollettino-frontaliere-2026-09-13.ogDescription': 'Les chiffres du 13 septembre 2026 pour les frontaliers : combien de temps on attend ce matin à chaque douane, où l\'essence coûte le moins cher, ce que vaut le franc aujourd\'hui et combien d\'offres d\'emploi sont parues en Suisse.',
+    'blog.article.vivere-veleso-lavorare-ticino.title': 'Vivre à Veleso et travailler au Tessin en tant que frontalier',
+    'blog.article.vivere-veleso-lavorare-ticino.excerpt': 'Guide pratique pour ceux qui souhaitent résider à Veleso et se rendre au Tessin : fiscalité, permis et gestion du coût de la vie.',
+    'blog.article.vivere-veleso-lavorare-ticino.imageAlt': 'Vue d\'un village résidentiel près de la frontière suisse',
+    'blog.article.vivere-veniano-lavorare-ticino.title': 'Vivre à Veniano et travailler au Tessin en tant que frontalier',
+    'blog.article.vivere-veniano-lavorare-ticino.excerpt': 'Guide pratique pour ceux qui vivent à Veniano et travaillent dans le canton du Tessin : liens, impôt à la source, prévoyance et aspects du transfert.',
+    'blog.article.vivere-veniano-lavorare-ticino.imageAlt': 'Vue de Veniano près de la frontière suisse',
+    'blog.article.crisi-bally-caslano-licenziamenti.title': 'Crise Bally à Caslano : 25 autres licenciés au Tessin',
+    'blog.article.crisi-bally-caslano-licenziamenti.excerpt': 'Nouvelle procédure de licenciement collectif pour Bally à Caslano : 25 autres administrateurs en danger. Les données financières et le moratoire Transliq AG.',
+    'blog.article.crisi-bally-caslano-licenziamenti.imageAlt': 'Usine Bally en crise a Caslano au Tessin',
+    'blog.article.vivere-brenta-lavorare-ticino.title': 'Vivre à Brenta et travailler au Tessin : le guide',
+    'blog.article.vivere-brenta-lavorare-ticino.excerpt': 'Découvrez les avantages et les inconvénients de vivre à Brenta et de travailler au Tessin. Temps de trajet, coûts, avantages et fiscalité pour les frontaliers.',
+    'blog.article.vivere-brenta-lavorare-ticino.imageAlt': 'Vue panoramique du lac de Lugano et des montagnes environnantes au Tessin.',
+    'blog.article.cannabis-terapeutica-ticino-proposta.title': 'Cannabis thérapeutique au Tessin : nouvelle proposition',
+    'blog.article.cannabis-terapeutica-ticino-proposta.excerpt': 'CanMedTicino prépare une nouvelle proposition sur le cannabis thérapeutique après l\'arrêt des autorités sanitaires cantonales.',
+    'blog.article.cannabis-terapeutica-ticino-proposta.imageAlt': 'Réunion sur le cannabis thérapeutique au Tessin',
 };
 
 export default blogMetaFr;

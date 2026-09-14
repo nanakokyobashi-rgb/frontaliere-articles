@@ -11734,6 +11734,21 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-09-13.imageAlt': 'I numeri del giorno per i frontalieri – 13 settembre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro',
     'blog.article.bollettino-frontaliere-2026-09-13.seoDescription': 'Bollettino frontalieri del 13 settembre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
     'blog.article.bollettino-frontaliere-2026-09-13.ogDescription': 'I numeri del 13 settembre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    'blog.article.vivere-veleso-lavorare-ticino.title': 'Vivere a Veleso e lavorare in Ticino da frontaliere',
+    'blog.article.vivere-veleso-lavorare-ticino.excerpt': 'Guida pratica per chi desidera risiedere a Veleso e pendolare in Ticino: fiscalità, permessi e gestione del costo della vita.',
+    'blog.article.vivere-veleso-lavorare-ticino.imageAlt': 'Vista di un borgo residenziale vicino al confine svizzero',
+    'blog.article.vivere-veniano-lavorare-ticino.title': 'Vivere a Veniano e lavorare in Ticino da frontaliere',
+    'blog.article.vivere-veniano-lavorare-ticino.excerpt': 'Guida pratica per chi vive a Veniano e lavora in Canton Ticino: collegamenti, imposta alla fonte, previdenza e aspetti del trasferimento.',
+    'blog.article.vivere-veniano-lavorare-ticino.imageAlt': 'Panorama di Veniano vicino al confine con la Svizzera',
+    'blog.article.crisi-bally-caslano-licenziamenti.title': 'Crisi Bally a Caslano: altri 25 licenziati in Ticino',
+    'blog.article.crisi-bally-caslano-licenziamenti.excerpt': 'Nuova procedura di licenziamento collettivo per Bally a Caslano: altri 25 amministrativi a rischio. I dati finanziari e la moratoria Transliq AG.',
+    'blog.article.crisi-bally-caslano-licenziamenti.imageAlt': 'Stabilimento Bally in crisi a Caslano nel Canton Ticino',
+    'blog.article.vivere-brenta-lavorare-ticino.title': 'Vivere a Brenta e lavorare in Ticino: la guida',
+    'blog.article.vivere-brenta-lavorare-ticino.excerpt': 'Scopri i pro e contro di vivere a Brenta e lavorare in Ticino. Tempi di percorrenza, costi, vantaggi e fiscalità per i frontalieri.',
+    'blog.article.vivere-brenta-lavorare-ticino.imageAlt': 'Vista panoramica del Lago di Lugano e delle montagne circostanti in Ticino.',
+    'blog.article.cannabis-terapeutica-ticino-proposta.title': 'Cannabis terapeutica in Ticino: nuova proposta',
+    'blog.article.cannabis-terapeutica-ticino-proposta.excerpt': 'CanMedTicino prepara una nuova proposta sulla cannabis terapeutica dopo lo stop delle autorita sanitarie cantonali.',
+    'blog.article.cannabis-terapeutica-ticino-proposta.imageAlt': 'Incontro sulla cannabis terapeutica in Ticino tra esperti',
 };
 
 export default blogMetaIt;

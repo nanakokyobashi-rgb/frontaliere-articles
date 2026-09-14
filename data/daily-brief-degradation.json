@@ -3,7 +3,7 @@
   "dateIso": "2026-09-13",
   "blocks": {
     "borderWait": {
-      "degradedEditions": 1
+      "degradedEditions": 0
     },
     "fuel": {
       "degradedEditions": 0
