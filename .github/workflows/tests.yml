@@ -334,13 +334,33 @@ jobs:
           # un Important, una domanda o un nit senza LGTM e' comunque un
           # giudizio gia' emesso. Il fallback Codex vale solo con il marker
           # strutturale che il review-gate richiede per quel bot.
-          set_fingerprint() {
+          # The contribution fingerprint stays strict for the incremental
+          # carry-forward decision below. The claim ledger, however, also
+          # needs a 64-hex identity when GitHub's compare response omits a
+          # patch from a large PR: without one, even a first review could not
+          # be claimed. In that case pin the claim to this HEAD only; the
+          # UNKNOWN values below still force a full review and can never cause
+          # a carry-forward skip.
+          set_claim_fingerprint() {
             fpHead=$(node scripts/ci/pr-contribution-fingerprint.mjs "$HEAD_SHA" 2>/dev/null) || fpHead=UNKNOWN
-            if ! printf '%s' "$fpHead" | grep -qE '^[a-f0-9]{64}$'; then
-              echo "::error::Fingerprint del contributo HEAD non verificabile → review claim fail-closed."
+            if printf '%s' "$fpHead" | grep -qE '^[a-f0-9]{64}$'; then
+              echo "contribution_fingerprint=$fpHead" >> "$GITHUB_OUTPUT"
+              return 0
+            fi
+            if ! printf '%s' "$HEAD_SHA" | grep -qE '^[a-f0-9]{40}$'; then
+              echo "::error::HEAD SHA non verificabile → review claim fail-closed."
               exit 1
             fi
-            echo "contribution_fingerprint=$fpHead" >> "$GITHUB_OUTPUT"
+            if ! claimFingerprint=$(node -e 'const { createHash } = require("node:crypto"); process.stdout.write(createHash("sha256").update("review-claim-head-only:" + process.argv[1]).digest("hex"));' "$HEAD_SHA"); then
+              echo "::error::Identità claim ancorata alla HEAD non calcolabile → review claim fail-closed."
+              exit 1
+            fi
+            if ! printf '%s' "$claimFingerprint" | grep -qE '^[a-f0-9]{64}$'; then
+              echo "::error::Identità claim ancorata alla HEAD malformata → review claim fail-closed."
+              exit 1
+            fi
+            echo "::warning::Fingerprint del contributo non verificabile (compare troncato/errore) → claim ancorato alla HEAD; carry-forward disabilitato e review completa obbligatoria."
+            echo "contribution_fingerprint=$claimFingerprint" >> "$GITHUB_OUTPUT"
           }
 
           same_head=$(printf '%s' "$reviews" | jq --arg head "$HEAD_SHA" --arg revision "$REVIEW_REVISION" '
@@ -371,7 +391,7 @@ jobs:
           fi
 
           if [ "${BODY_EDITED:-false}" = "true" ]; then
-            set_fingerprint
+            set_claim_fingerprint
             echo "skip=false" >> "$GITHUB_OUTPUT"
             echo "Body della PR cambiato → review completa sulla nuova revisione del review input."
             exit 0
@@ -400,15 +420,15 @@ jobs:
              | select(has_current_revision($revision))
             ] | sort_by(.id // 0) | last | .commit_id // empty' 2>/dev/null || true)
           if [ -z "$last" ]; then
-            set_fingerprint
+            set_claim_fingerprint
             echo "skip=false" >> "$GITHUB_OUTPUT"; echo "Nessuna review terminale precedente → review piena."; exit 0
           fi
           if ! changed=$(gh api "repos/$REPO/compare/$last...$HEAD_SHA" --jq '.files[] | .filename, (.previous_filename // empty)' 2>/dev/null); then
-            set_fingerprint
+            set_claim_fingerprint
             echo "skip=false" >> "$GITHUB_OUTPUT"; echo "Compare illeggibile → review piena con claim (conservativo)."; exit 0
           fi
           if [ -z "$changed" ]; then
-            set_fingerprint
+            set_claim_fingerprint
             echo "skip=false" >> "$GITHUB_OUTPUT"; echo "Compare vuoto → review piena con claim (conservativo)."; exit 0
           fi
           code=$(echo "$changed" | node scripts/ci/review-test-policy.mjs filter | grep -vE "$NONCODE_RE" || true)
@@ -423,7 +443,7 @@ jobs:
           # code-only): se e' invariato, la PR non ha cambiato il proprio codice
           # → skip. Stessa funzione che usa il review gate per il carry-forward
           # → niente drift.
-          set_fingerprint
+          set_claim_fingerprint
           # UNKNOWN è un fallback esplicito: un errore transitorio, un output
           # parziale o un hash malformato non può mai diventare un no-op solo
           # perché HEAD e l'ultima review terminale hanno ricevuto lo stesso fallback.
