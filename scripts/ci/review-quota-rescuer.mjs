@@ -598,6 +598,12 @@ function transientRetryAgeMs(candidate) {
   return issuedAt > 0 ? Math.max(0, Date.now() - issuedAt * 1000) : null;
 }
 
+/** Classify a newer transient rerun only after its terminal outcome is known. Pure. */
+export function transientRetryStateForRun(run) {
+  if (String(run?.status || '').toLowerCase() !== 'completed') return null;
+  return String(run?.conclusion || '').toLowerCase() === 'success' ? 'confirmed' : 'failed';
+}
+
 /** Reconcile a requested transient rerun without issuing a duplicate. */
 function reconcileTransientRetry(candidate, number) {
   const requested = candidate.retry;
@@ -608,12 +614,17 @@ function reconcileTransientRetry(candidate, number) {
     return true;
   }
   if (run.attempt > requested.sourceAttempt) {
+    const state = transientRetryStateForRun(run);
+    if (!state) {
+      console.log(`PR #${number}: transient rerun già osservato (attempt ${run.attempt}, stato ${run.status}); fence conservato finché termina.`);
+      return true;
+    }
     const body = reviewTransientRetryBody({
-      ...transientRetryFields(candidate, run),
-      state: 'confirmed',
+      ...transientRetryFields(candidate, run, { state }),
+      state,
     });
     if (postTransientRetryComment(number, body)) {
-      console.log(`PR #${number}: transient rerun riconciliato, attempt ${run.attempt}.`);
+      console.log(`PR #${number}: transient rerun riconciliato come ${state}, attempt ${run.attempt}.`);
     }
     return true;
   }

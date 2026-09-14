@@ -24,6 +24,7 @@ import {
   sourceWorkflowForRole,
   roundRobinWindow,
   sourceRunAlreadyHandled,
+  transientRetryStateForRun,
 } from '../../scripts/ci/review-quota-rescuer.mjs';
 import {
   reviewClaimDedupeKey,
@@ -419,6 +420,15 @@ test('ogni rerun lascia requested finché non viene osservato un attempt nuovo',
   assert.match(main.slice(quotaRerun), /attendo un attempt nuovo osservabile/);
   assert.match(source, /if \(run\.attempt > requestedAttempt\)/);
   assert.match(source, /state: 'confirmed'/);
+});
+
+test('un transient attempt nuovo diventa confirmed o failed solo a completamento', () => {
+  assert.equal(transientRetryStateForRun({ status: 'queued', conclusion: 'success' }), null);
+  assert.equal(transientRetryStateForRun({ status: 'in_progress', conclusion: 'success' }), null);
+  assert.equal(transientRetryStateForRun({ status: 'completed', conclusion: 'success' }), 'confirmed');
+  assert.equal(transientRetryStateForRun({ status: 'completed', conclusion: 'failure' }), 'failed');
+  assert.equal(transientRetryStateForRun({ status: 'completed', conclusion: 'cancelled' }), 'failed');
+  assert.equal(transientRetryStateForRun({ status: 'completed' }), 'failed');
 });
 
 test('il wiring reagisce al completamento dei consumer e rilascia reservation esistenti', () => {
