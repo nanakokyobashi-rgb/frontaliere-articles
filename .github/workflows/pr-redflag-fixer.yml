@@ -496,6 +496,20 @@ jobs:
             "$OUT/pr.json" >/dev/null 2>&1; then
             context_fail "Metadata della PR malformata: il redflag fixer resta fail-closed senza Claude."
           fi
+          # `pull_request_review` può essere consegnato dopo un push. Il suo
+          # `head.sha` è quindi solo l'input dell'evento, non una prova che la
+          # PR remota sia ancora su quella HEAD. Rileggere la HEAD dalla PR
+          # corrente e bloccare il fixer prima di raccogliere review/finding
+          # impedisce di applicare un finding valido al codice nuovo.
+          if ! current_head_sha=$(gh api "repos/$REPO/pulls/$PR_NUMBER" --jq '.head.sha'); then
+            context_fail "HEAD corrente della PR illeggibile: il redflag fixer resta fail-closed senza Claude."
+          fi
+          if ! printf '%s' "$current_head_sha" | grep -qE '^[a-f0-9]{40}$'; then
+            context_fail "HEAD corrente della PR malformata: il redflag fixer resta fail-closed senza Claude."
+          fi
+          if ! printf '%s\n%s\n' "$current_head_sha" "$HEAD_SHA" | awk 'NR==1 { current=tolower($0); next } { event=tolower($0); exit current != event }'; then
+            context_fail "La HEAD della PR è cambiata rispetto all'evento review: il redflag fixer resta fail-closed senza Claude."
+          fi
           # The review body must be tied to the exact PR-body revision that the
           # reviewer saw.  Hash the REST `--jq` output in the same form as
           # `tests.yml`; an unreadable body/hash is an admission failure, not an

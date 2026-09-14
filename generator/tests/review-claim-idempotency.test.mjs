@@ -306,6 +306,8 @@ test('tutti i consumer di review usano la revisione del body corrente', () => {
   assert.match(redflag, /review_revision=\"body:\$body_sha\"/);
   assert.match(redflag, /split\("\\n"\)\[\][\s\S]*REVIEW_INPUT_REVISION/);
   assert.match(redflag, /if ! gh pr view[\s\S]*exit 1/);
+  assert.match(redflag, /if ! current_head_sha=\$\(gh api "repos\/\$REPO\/pulls\/\$PR_NUMBER" --jq '\.head\.sha'\)/);
+  assert.match(redflag, /La HEAD della PR è cambiata rispetto all'evento review/);
   assert.match(redflag, /if ! gh api "repos\/\$REPO\/pulls\/\$PR_NUMBER" --jq '\.body \/\/ ""'/);
   assert.match(redflag, /if ! reviews_json=\$\(gh api "repos\/\$REPO\/pulls\/\$PR_NUMBER\/reviews" --paginate --slurp/);
 
