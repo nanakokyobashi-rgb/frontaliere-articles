@@ -3885,7 +3885,7 @@
       "reason": "Builder puro del producer editoriale per le guide farmacia del publisher: valida snapshot locali e genera payload evergreen per la sezione svizzera. Il sito consuma il corpus via HTTP e non deve importare questo contenuto o il suo builder, quindi non esiste un gemello da portare.",
       "baseline": {
         "site": null,
-        "corpus": "4c1acc14ede5ab37840364518c7cb3ffc08dbea0",
+        "corpus": "47dca1c51b030e46",
         "alignedAt": "2026-09-14"
       }
     }
