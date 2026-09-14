@@ -325,6 +325,20 @@ test('drift-fallback: 🔴 stantio senza revisione corrente + tests.yml → ROSS
   assert.doesNotMatch(r.stdout, /drift-fallback: APPROVATO/, r.stdout);
 });
 
+test('drift-fallback: 🔴 con revisione corrente ma SHA vecchia → ROSSO', () => {
+  // Un marker body aggiornato non dimostra che il finding sia stato
+  // rivalutato dopo una modifica del codice. Senza una review sulla HEAD,
+  // il fallback non può far sparire un Important storico.
+  const r = runGate({
+    reviews: [botReview(OLD, '🔴 Important: il controllo non copre il caso X')],
+    files: ['.github/workflows/tests.yml'],
+    meta: DRIFT_META,
+    compare: COMPARE_CHANGED,
+  });
+  assert.equal(r.status, 1, `Un 🔴 sulla SHA vecchia deve restare bloccante anche col marker body corrente.\n${r.stdout}`);
+  assert.doesNotMatch(r.stdout, /drift-fallback: APPROVATO/, r.stdout);
+});
+
 test('drift-fallback: 🔴 su SHA vecchio ma contributo INVARIATO + tests.yml → ROSSO', () => {
   // Il codice e' lo stesso: il 🔴 e' ancora il verdetto vivo. tests.yml nel
   // diff della PR (file list) non basta a cancellarlo.
