@@ -20,6 +20,7 @@ const STAGE_NAME = 'stage';
 const BACKUP_NAME = 'backup';
 const TRANSACTION_VERSION = 1;
 let stateTmpSeq = 0;
+let lockTmpSeq = 0;
 
 function transactionPaths(repoRoot) {
   const root = path.resolve(repoRoot);
@@ -66,6 +67,19 @@ function readJson(file) {
   }
 }
 
+function readLock(file) {
+  let lock;
+  try {
+    lock = JSON.parse(fs.readFileSync(file, 'utf8'));
+  } catch (error) {
+    throw new Error(`pharmacy refresh: lock parziale o non leggibile (${file}): ${error.message}`);
+  }
+  if (!lock || typeof lock !== 'object' || !Number.isInteger(lock.pid) || lock.pid <= 0) {
+    throw new Error(`pharmacy refresh: lock parziale o non valido (${file})`);
+  }
+  return lock;
+}
+
 function removeTransactionTree(paths) {
   fs.rmSync(paths.transactionRoot, { recursive: true, force: true });
 }
@@ -80,6 +94,102 @@ function processIsAlive(pid) {
     // EPERM means the process exists but is not inspectable by this user.
     return error.code !== 'ESRCH';
   }
+}
+
+function activeLockError(lock) {
+  return new Error(
+    `pharmacy refresh: lock attivo (pid ${lock.pid}); `
+    + 'attendere il termine del producer prima di rilanciare',
+  );
+}
+
+/**
+ * Publish a complete lock with an exclusive hard-link.  `open(..., 'wx')`
+ * alone exposes an empty file between create and write; the hard-link makes
+ * the final lock visible only after its JSON and fsync are complete, while
+ * still refusing a competing publisher without overwriting its lock.
+ */
+function publishLock(paths, lock) {
+  const temporary = `${paths.lockPath}.${process.pid}.${lockTmpSeq++}.tmp`;
+  let fd;
+  try {
+    fd = fs.openSync(temporary, 'wx');
+    fs.writeSync(fd, `${JSON.stringify(lock)}\n`);
+    fs.fsyncSync(fd);
+    fs.closeSync(fd);
+    fd = undefined;
+    fs.linkSync(temporary, paths.lockPath);
+    try { fs.unlinkSync(temporary); } catch { /* best-effort cleanup */ }
+    return true;
+  } catch (error) {
+    if (fd !== undefined) {
+      try { fs.closeSync(fd); } catch { /* best-effort cleanup */ }
+    }
+    try { fs.unlinkSync(temporary); } catch { /* best-effort cleanup */ }
+    if (error.code === 'EEXIST') return false;
+    throw error;
+  }
+}
+
+function claimLock(paths, { pid, startedAt }) {
+  fs.mkdirSync(path.dirname(paths.lockPath), { recursive: true });
+  const lock = {
+    version: TRANSACTION_VERSION,
+    pid,
+    startedAt,
+    transaction: PHARMACY_REFRESH_TRANSACTION_RELATIVE_PATH,
+    token: `${process.pid}:${pid}:${lockTmpSeq++}`,
+  };
+
+  for (;;) {
+    if (!fs.existsSync(paths.lockPath)) {
+      if (publishLock(paths, lock)) return lock;
+      continue;
+    }
+
+    const existing = readLock(paths.lockPath);
+    if (processIsAlive(existing.pid)) throw activeLockError(existing);
+
+    // A stale lock is moved out of the way with one atomic rename. Only the
+    // contender that wins the subsequent exclusive publication may recover
+    // the transaction; a loser never removes another producer's lock.
+    const stale = `${paths.lockPath}.${process.pid}.${lockTmpSeq++}.stale`;
+    try {
+      fs.renameSync(paths.lockPath, stale);
+    } catch (error) {
+      if (error.code === 'ENOENT') continue;
+      throw error;
+    }
+    if (publishLock(paths, lock)) {
+      try { fs.unlinkSync(stale); } catch { /* best-effort cleanup */ }
+      Object.defineProperty(lock, 'reclaimedLock', {
+        value: existing,
+        enumerable: false,
+      });
+      return lock;
+    }
+    try { fs.unlinkSync(stale); } catch { /* best-effort cleanup */ }
+  }
+}
+
+function releaseOwnedLock(paths, token) {
+  if (!fs.existsSync(paths.lockPath)) return;
+  let lock;
+  try {
+    lock = readLock(paths.lockPath);
+  } catch {
+    return;
+  }
+  if (lock.token !== token) return;
+  fs.unlinkSync(paths.lockPath);
+}
+
+function assertOwnedLock(paths, token) {
+  if (!fs.existsSync(paths.lockPath)) {
+    throw new Error('pharmacy refresh: lock del producer assente durante il recovery');
+  }
+  const lock = readLock(paths.lockPath);
+  if (lock.token !== token) throw activeLockError(lock);
 }
 
 function restoreJournal(paths, journal) {
@@ -120,39 +230,51 @@ function restoreJournal(paths, journal) {
 /**
  * Recover a transaction left by a killed process.  An active PID is never
  * touched; a stale prepared/committing journal is restored from its backups.
+ * A caller that already owns the lock passes its token so recovery does not
+ * race with a second lock claim.
  */
-export function recoverPharmacyEvergreenRefresh(repoRoot, { log = () => {} } = {}) {
+export function recoverPharmacyEvergreenRefresh(
+  repoRoot,
+  { log = () => {}, ownerToken = null, keepLock = false } = {},
+) {
   const paths = transactionPaths(repoRoot);
   const lockExists = fs.existsSync(paths.lockPath);
   const transactionExists = fs.existsSync(paths.transactionRoot);
-  if (!lockExists && !transactionExists) return { recovered: false };
 
-  let lock = null;
-  if (lockExists) {
-    try {
-      lock = readJson(paths.lockPath);
-    } catch (error) {
-      // A process can die between creating and filling the lock. The
-      // transaction directory is still scoped to this producer, so cleaning
-      // this incomplete state is safer than blocking every future refresh.
-      log(`  ⚠️ ${error.message}; lock incompleto considerato stale.`);
+  if (!ownerToken && !lockExists && !transactionExists) return { recovered: false };
+  let claimed = null;
+  if (ownerToken) {
+    assertOwnedLock(paths, ownerToken);
+  } else {
+    claimed = claimLock(paths, {
+      pid: process.pid,
+      startedAt: new Date().toISOString(),
+    });
+    ownerToken = claimed.token;
+  }
+
+  try {
+    if (fs.existsSync(paths.journalPath)) {
+      const journal = readJson(paths.journalPath);
+      if (journal.phase !== 'committed') restoreJournal(paths, journal);
     }
+    removeTransactionTree(paths);
+    if (!keepLock) releaseOwnedLock(paths, ownerToken);
+  } catch (error) {
+    // The lock is ours, but the transaction must remain on disk if recovery
+    // failed so a later producer can retry it from the persisted journal.
+    if (!keepLock) {
+      if (claimed?.reclaimedLock) {
+        assertOwnedLock(paths, ownerToken);
+        atomicStateWrite(paths.lockPath, claimed.reclaimedLock);
+      } else {
+        releaseOwnedLock(paths, ownerToken);
+      }
+    }
+    throw error;
   }
-  if (lock && processIsAlive(lock.pid)) {
-    throw new Error(
-      `pharmacy refresh: lock attivo (pid ${lock.pid}); `
-      + 'attendere il termine del producer prima di rilanciare',
-    );
-  }
-
-  if (fs.existsSync(paths.journalPath)) {
-    const journal = readJson(paths.journalPath);
-    if (journal.phase !== 'committed') restoreJournal(paths, journal);
-  }
-  removeTransactionTree(paths);
-  if (fs.existsSync(paths.lockPath)) fs.unlinkSync(paths.lockPath);
   log('  ♻️ recuperata e ripulita una transazione pharmacy evergreen interrotta.');
-  return { recovered: true };
+  return { recovered: transactionExists };
 }
 
 export function acquirePharmacyEvergreenRefresh(repoRoot, {
@@ -161,38 +283,30 @@ export function acquirePharmacyEvergreenRefresh(repoRoot, {
   now = () => new Date().toISOString(),
 } = {}) {
   const paths = transactionPaths(repoRoot);
-  const recovered = recoverPharmacyEvergreenRefresh(paths.root, { log });
-
-  // The fixed directory is itself a second collision guard: a stale directory
-  // cannot be silently reused if recovery failed before the lock was written.
-  fs.mkdirSync(paths.transactionRoot);
-  fs.mkdirSync(paths.stageRoot);
-  fs.mkdirSync(paths.backupRoot);
-
-  let fd;
+  const lock = claimLock(paths, { pid, startedAt: now() });
+  let recovered;
   try {
-    fd = fs.openSync(paths.lockPath, 'wx');
-    fs.writeSync(fd, `${JSON.stringify({
-      version: TRANSACTION_VERSION,
-      pid,
-      startedAt: now(),
-      transaction: PHARMACY_REFRESH_TRANSACTION_RELATIVE_PATH,
-    })}\n`);
-    fs.fsyncSync(fd);
+    recovered = recoverPharmacyEvergreenRefresh(paths.root, {
+      log,
+      ownerToken: lock.token,
+      keepLock: true,
+    });
   } catch (error) {
-    if (fd !== undefined) {
-      try { fs.closeSync(fd); } catch { /* best-effort cleanup */ }
-    }
-    removeTransactionTree(paths);
-    if (error.code === 'EEXIST') {
-      throw new Error(
-        `pharmacy refresh: impossibile acquisire il lock ${PHARMACY_REFRESH_LOCK_RELATIVE_PATH}; `
-        + 'un altro producer potrebbe essere attivo',
-      );
-    }
+    releaseOwnedLock(paths, lock.token);
     throw error;
   }
-  fs.closeSync(fd);
+
+  // The lock is published before this directory exists. A concurrent
+  // producer therefore fails closed on the lock and can never mistake this
+  // producer's in-progress staging tree for an orphan.
+  try {
+    fs.mkdirSync(paths.transactionRoot);
+    fs.mkdirSync(paths.stageRoot);
+    fs.mkdirSync(paths.backupRoot);
+  } catch (error) {
+    releaseOwnedLock(paths, lock.token);
+    throw error;
+  }
 
   const staged = new Map();
   let journal = null;
@@ -238,8 +352,9 @@ export function acquirePharmacyEvergreenRefresh(repoRoot, {
   };
 
   const cleanup = () => {
+    assertOwnedLock(paths, lock.token);
     removeTransactionTree(paths);
-    if (fs.existsSync(paths.lockPath)) fs.unlinkSync(paths.lockPath);
+    releaseOwnedLock(paths, lock.token);
   };
 
   const rollback = () => {

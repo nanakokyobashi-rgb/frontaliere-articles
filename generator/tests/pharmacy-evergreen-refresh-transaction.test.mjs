@@ -21,6 +21,14 @@ function file(root, relative) {
   return target;
 }
 
+function lockPath(root) {
+  return path.join(root, 'generator', 'data', '.pharmacy-evergreen-refresh.lock.json');
+}
+
+function transactionRoot(root) {
+  return path.join(root, 'generator', 'data', '.pharmacy-evergreen-refresh-tx');
+}
+
 test('pharmacy refresh transaction: stage/read e commit coordinano più file', () => {
   const root = tempRepo();
   try {
@@ -71,6 +79,71 @@ test('pharmacy refresh transaction: un journal interrotto ripristina i backup al
     assert.equal(fs.readFileSync(second, 'utf8'), 'old second');
     assert.equal(fs.existsSync(tx.paths.lockPath), false);
     assert.equal(fs.existsSync(tx.paths.transactionRoot), false);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('pharmacy refresh transaction: acquire protegge e ripulisce un transaction orphan senza lock', () => {
+  const root = tempRepo();
+  try {
+    const orphan = transactionRoot(root);
+    const marker = path.join(orphan, 'stage', 'legacy-marker');
+    fs.mkdirSync(path.dirname(marker), { recursive: true });
+    fs.writeFileSync(marker, 'legacy orphan');
+
+    const tx = acquirePharmacyEvergreenRefresh(root, {
+      now: () => '2026-09-15T09:00:00.000Z',
+      log: () => {},
+    });
+    assert.equal(tx.recovered.recovered, true);
+    assert.equal(fs.existsSync(marker), false, 'lo staging orphan viene ripulito sotto il lock acquisito');
+    assert.doesNotThrow(() => JSON.parse(fs.readFileSync(lockPath(root), 'utf8')));
+
+    tx.rollback();
+    assert.equal(fs.existsSync(lockPath(root)), false);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('pharmacy refresh transaction: lock parziale resta fail-closed e non rimuove l orphan', () => {
+  const root = tempRepo();
+  try {
+    const orphan = transactionRoot(root);
+    const marker = path.join(orphan, 'stage', 'legacy-marker');
+    fs.mkdirSync(path.dirname(marker), { recursive: true });
+    fs.writeFileSync(marker, 'legacy orphan');
+    const partial = '{"pid":';
+    fs.writeFileSync(lockPath(root), partial);
+
+    assert.throws(
+      () => acquirePharmacyEvergreenRefresh(root, { log: () => {} }),
+      /lock parziale o non leggibile/,
+    );
+    assert.equal(fs.readFileSync(lockPath(root), 'utf8'), partial);
+    assert.equal(fs.readFileSync(marker, 'utf8'), 'legacy orphan');
+    assert.equal(fs.existsSync(transactionRoot(root)), true);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('pharmacy refresh transaction: un contender attivo non può cancellare lock o staging', () => {
+  const root = tempRepo();
+  try {
+    const first = acquirePharmacyEvergreenRefresh(root, { log: () => {} });
+    const staged = file(root, 'content/active.ts');
+    first.stage(staged, 'active staging');
+
+    assert.throws(
+      () => acquirePharmacyEvergreenRefresh(root, { log: () => {} }),
+      /lock attivo/,
+    );
+    assert.equal(fs.readFileSync(path.join(first.paths.stageRoot, 'content/active.ts'), 'utf8'), 'active staging');
+    assert.equal(fs.existsSync(first.paths.lockPath), true);
+
+    first.rollback();
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
