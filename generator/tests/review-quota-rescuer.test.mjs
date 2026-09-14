@@ -422,6 +422,17 @@ test('il wiring reagisce al completamento dei consumer e rilascia reservation es
   assert.match(rescuer, /if \(DRY_RUN\)[\s\S]*riconciliazione del marker requested saltata/);
   assert.match(rescuer, /REVIEW_TRANSIENT_RETRY/);
   assert.match(rescuer, /failed-transient/);
+  const transientRescue = rescuer.slice(
+    rescuer.indexOf('function rescueTransientReview'),
+    rescuer.indexOf('function retryFieldsForCandidate'),
+  );
+  assert.match(transientRescue, /state: 'requested'/);
+  assert.match(transientRescue, /attendo un attempt nuovo osservabile/);
+  assert.doesNotMatch(
+    transientRescue.slice(transientRescue.indexOf('let rerunRequested')),
+    /const confirmedBody = reviewTransientRetryBody/,
+    'il comando rerun non può essere marcato confirmed prima di osservare un attempt nuovo',
+  );
   assert.match(workflow, /Retry deferred\/transient reviews/);
   const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'));
   assert.equal(

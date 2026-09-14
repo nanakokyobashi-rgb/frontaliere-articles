@@ -763,11 +763,12 @@ function rescueTransientReview(candidate) {
     return false;
   }
 
-  const confirmedBody = reviewTransientRetryBody({ ...retryFields, state: 'confirmed' });
-  if (!postTransientRetryComment(number, confirmedBody)) {
-    console.log(`::warning::PR #${number}: conferma transient non pubblicata; requested resta fence anti-duplicato.`);
-  }
-  console.log(`PR #${number}: tests #${run.databaseId} rilanciato una volta per claim failed-transient sulla HEAD ${candidate.head.slice(0, 12)}.`);
+  // The rerun command only acknowledges the request; GitHub may queue, reject,
+  // or never start it after this process exits.  Keep `requested` durable until
+  // a later tick observes a strictly newer attempt in reconcileTransientRetry().
+  // Publishing `confirmed` here would make an unstarted rerun look consumed and
+  // permanently strand the failed-transient claim.
+  console.log(`PR #${number}: tests #${run.databaseId} richiesto una volta per claim failed-transient sulla HEAD ${candidate.head.slice(0, 12)}; attendo un attempt nuovo osservabile.`);
   return true;
 }
 
