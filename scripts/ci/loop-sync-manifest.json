@@ -1660,7 +1660,7 @@
       "reason": "Preflight zero-inference che censisce i provider disponibili prima delle chiamate del generatore e distingue credenziali mancanti, rete irraggiungibile e quota bloccata. E' consumato dai workflow di produzione del corpus; il sito non possiede il gemello ne' questi entry point del generatore, quindi non c'e' nulla da portare.",
       "baseline": {
         "site": null,
-        "corpus": "73c56d70d2837866",
+        "corpus": "62f8a56123f2f8ff",
         "alignedAt": "2026-09-14"
       }
     },
