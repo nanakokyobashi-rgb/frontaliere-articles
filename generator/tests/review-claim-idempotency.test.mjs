@@ -15,6 +15,8 @@ import {
 } from '../../scripts/ci/review-claim.mjs';
 import {
   normalizeReviewInputRevision,
+  reviewInputContextFromPullRequest,
+  reviewInputContextMatches,
   reviewHasInputRevision,
   reviewInputRevisionMarker,
 } from '../../scripts/ci/review-test-policy.mjs';
@@ -118,6 +120,23 @@ test('a terminal claim for the old body does not block the corrected body revisi
     }),
     { allowed: true, exists: false, reason: 'same-pr-head-claim-retryable' },
   );
+});
+
+test('the review input snapshot binds normalized HEAD and exact body revision', () => {
+  const body = '## Implementato\n- fix\n';
+  const context = reviewInputContextFromPullRequest({
+    body,
+    head: { sha: HEAD.toUpperCase() },
+  });
+  assert.equal(context?.headSha, HEAD);
+  assert.match(context?.reviewRevision || '', /^body:[a-f0-9]{64}$/);
+  assert.equal(reviewInputContextMatches(context, {
+    headSha: HEAD.toUpperCase(),
+    reviewRevision: context.reviewRevision.toUpperCase(),
+  }), true);
+  assert.equal(reviewInputContextFromPullRequest({ body: 42, head: { sha: HEAD } }), null);
+  assert.equal(reviewInputContextFromPullRequest({ body, head: { sha: 'short' } }), null);
+  assert.equal(reviewInputContextFromPullRequest({ body }), null);
 });
 
 test('rejects forged or malformed persisted markers', () => {
@@ -293,14 +312,20 @@ test('tests.yml claims before review work and finalizes without gating the requi
 
 test('tutti i consumer di review usano la revisione del body corrente', () => {
   const autorebase = fs.readFileSync(path.join(ROOT, 'scripts/ci/pr-autorebase.mjs'), 'utf8');
-  assert.match(autorebase, /currentReviewInputRevision\(num\)/);
+  assert.match(autorebase, /currentReviewInputContext\(num\)/);
   assert.match(autorebase, /reviewHasInputRevision\(r\.body, reviewRevision\)/);
-  assert.match(autorebase, /const reviewRevision = currentReviewInputRevision\(num\)/);
+  assert.match(autorebase, /const reviewContext = currentReviewInputContext\(num\)/);
+  assert.match(autorebase, /reviewInputContextStillCurrent\(num, head, reviewRevision\)/);
 
   const autoMerge = fs.readFileSync(path.join(ROOT, 'scripts/ci/auto-merge-eval.mjs'), 'utf8');
-  assert.match(autoMerge, /currentReviewInputRevision\(\)/);
+  assert.match(autoMerge, /currentReviewInputContext\(\)/);
   assert.match(autoMerge, /findTestOnlyApproval\(reviews, head, \{[\s\S]*reviewRevision/);
   assert.match(autoMerge, /reviewHasInputRevision\(r\.body, reviewRevision\)/);
+  assert.match(autoMerge, /reviewInputContextStillCurrent\(head, reviewRevision\)/);
+
+  const reviewGate = fs.readFileSync(path.join(ROOT, 'scripts/ci/review-gate.mjs'), 'utf8');
+  assert.match(reviewGate, /reviewInputContextStillCurrent\(\)/);
+  assert.match(reviewGate, /approving && applies && codexCarryApproved[\s\S]*reviewInputContextStillCurrent/);
 
   const redflag = fs.readFileSync(path.join(ROOT, '.github/workflows/pr-redflag-fixer.yml'), 'utf8');
   const testsWorkflow = fs.readFileSync(path.join(ROOT, '.github/workflows/tests.yml'), 'utf8');
@@ -312,6 +337,10 @@ test('tutti i consumer di review usano la revisione del body corrente', () => {
   assert.match(redflag, /PR response is not an object/);
   assert.match(redflag, /PR body is not a string or null/);
   assert.match(redflag, /github\.event\.review\.user\.type == 'Bot'/);
+  assert.match(redflag, /id: preclaude/);
+  assert.match(redflag, /EXPECTED_BODY_REVISION: \$\{\{ steps\.ctx\.outputs\.review_revision \}\}/);
+  assert.match(redflag, /Il body della PR è cambiato fra prefetch e Claude/);
+  assert.match(redflag, /steps\.preclaude\.outputs\.verified == 'true'/);
   assert.match(testsWorkflow, /PR response is not an object/);
   assert.match(testsWorkflow, /PR body is not a string or null/);
   assert.match(redflag, /if ! reviews_json=\$\(gh api "repos\/\$REPO\/pulls\/\$PR_NUMBER\/reviews" --paginate --slurp/);

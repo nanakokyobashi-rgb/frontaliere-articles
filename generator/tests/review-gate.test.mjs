@@ -50,7 +50,8 @@ const BODY_REVISION = bodyRevision(GOOD_BODY);
  */
 function runGate({ reviews = [], files = [], meta = null, compare = null,
   checkRuns = [], checkRunPages = null, codexEvidence = null,
-  reviewRevision: requestedReviewRevision = null, currentBody: requestedCurrentBody = null }) {
+  reviewRevision: requestedReviewRevision = null, currentBody: requestedCurrentBody = null,
+  metaSequence = null }) {
   const currentBody = requestedCurrentBody ?? meta?.body ?? GOOD_BODY;
   const reviewRevision = requestedReviewRevision ?? bodyRevision(currentBody);
   const dir = mkdtempSync(path.join(tmpdir(), 'review-gate-'));
@@ -66,7 +67,17 @@ function runGate({ reviews = [], files = [], meta = null, compare = null,
     writeFileSync(gateOutput, '');
     writeFileSync(fixReviews, JSON.stringify(reviews));
     writeFileSync(fixFiles, files.join('\n') + (files.length ? '\n' : ''));
-    writeFileSync(fixMeta, JSON.stringify({ ...(meta ?? {}), body: meta?.body ?? currentBody }));
+    writeFileSync(fixMeta, JSON.stringify({
+      head: { sha: HEAD },
+      ...(meta ?? {}),
+      body: meta?.body ?? currentBody,
+    }));
+    const fixMetaSequence = path.join(dir, 'meta-sequence.json');
+    const metaSequenceIndex = path.join(dir, 'meta-sequence-index');
+    if (metaSequence) {
+      writeFileSync(fixMetaSequence, JSON.stringify(metaSequence));
+      writeFileSync(metaSequenceIndex, '0');
+    }
 
     // `compare` mappa sha → payload della compare API. Un `null` significa
     // «endpoint non stubbato»: il gate deve cadere sul ramo conservativo.
@@ -112,7 +123,10 @@ case "$sub" in
       */git/trees/*)
         node -e 'const fs=require("fs"); const files=fs.readFileSync(process.argv[1],"utf8").split(/\\r?\\n/).filter(Boolean); files.push("generator/scripts/outside.mjs"); process.stdout.write(JSON.stringify({truncated:false,tree:files.map(path=>({type:"blob",path}))}))' ${JSON.stringify(fixFiles)} ;;
       */pulls/*)
-        if [ "$jq" = ".base.sha" ]; then
+        if [ -n ${metaSequence ? JSON.stringify(fixMetaSequence) : "''"} ] && [ -z "$jq" ]; then
+          index=$(cat ${JSON.stringify(metaSequenceIndex)} 2>/dev/null || echo 0)
+          node -e 'const fs=require("fs"); const payload=require(process.argv[1]); const i=Number(process.argv[2]); const item=payload[Math.min(i, payload.length - 1)] || {}; process.stdout.write(JSON.stringify(item)); fs.writeFileSync(process.argv[3], String(i + 1));' ${JSON.stringify(fixMetaSequence)} "$index" ${JSON.stringify(metaSequenceIndex)}
+        elif [ "$jq" = ".base.sha" ]; then
           node -e 'const m=require(process.argv[1]); process.stdout.write((m.base?.sha||"")+"\\n")' ${JSON.stringify(fixMeta)}
         elif [ "$jq" = ".head.sha" ]; then
           node -e 'const m=require(process.argv[1]); process.stdout.write((m.head?.sha||"")+"\\n")' ${JSON.stringify(fixMeta)}
@@ -181,6 +195,33 @@ test('LGTM sulla head senza 🔴 → il check e\' verde', () => {
   assert.equal(r.status, 0, r.stdout);
 });
 
+test('un edit del body dopo la selezione del verdetto resta bloccante', () => {
+  const changedBody = `${GOOD_BODY}\n- modifica concorrente`;
+  const r = runGate({
+    reviews: [botReview(HEAD, 'tutto bene\n\n## LGTM')],
+    reviewRevision: BODY_REVISION,
+    metaSequence: [
+      { head: { sha: HEAD }, body: GOOD_BODY },
+      { head: { sha: HEAD }, body: changedBody },
+    ],
+  });
+  assert.equal(r.status, 1, r.stdout);
+  assert.match(r.stdout, /HEAD o body PR sono cambiati durante la valutazione/i, r.stdout);
+});
+
+test('un push dopo la selezione del verdetto resta bloccante', () => {
+  const r = runGate({
+    reviews: [botReview(HEAD, 'tutto bene\n\n## LGTM')],
+    reviewRevision: BODY_REVISION,
+    metaSequence: [
+      { head: { sha: HEAD }, body: GOOD_BODY },
+      { head: { sha: OLD }, body: GOOD_BODY },
+    ],
+  });
+  assert.equal(r.status, 1, r.stdout);
+  assert.match(r.stdout, /HEAD o body PR sono cambiati durante la valutazione/i, r.stdout);
+});
+
 test('un LGTM della revisione body precedente non viene riusato sulla revisione corrente', () => {
   const stale = runGate({
     reviews: [botReview(HEAD, 'tutto bene\n\n## LGTM', { reviewRevision: OLD_BODY_REVISION })],
@@ -202,7 +243,7 @@ test('un body cambiato invalida una review che porta ancora l\'hash precedente',
     reviewRevision: BODY_REVISION,
   });
   assert.equal(r.status, 1, r.stdout);
-  assert.match(r.stdout, /non corrisponde al body PR corrente/i, r.stdout);
+  assert.match(r.stdout, /non corrispondono alla PR corrente/i, r.stdout);
 });
 
 test('LGTM accanto a un 🔴 Important → il check e\' ROSSO', () => {

@@ -580,7 +580,11 @@ jobs:
             echo '## Ultima review Claude (🔴 findings)'
             cat "$OUT/latest-review.md"
           } > "$OUT/redflag-bundle.md"
-          echo "context_verified=true" >> "$GITHUB_OUTPUT"
+          {
+            echo "review_revision=$review_revision"
+            echo "head_sha=$current_head_sha"
+            echo "context_verified=true"
+          } >> "$GITHUB_OUTPUT"
           echo "Prefetched redflag context in $OUT:"
           ls -la "$OUT"
 
@@ -608,9 +612,66 @@ jobs:
           CODEX_FALLBACK_MODE: '1'
         run: node scripts/ci/check-quota-backoff.mjs
 
+      # Il body e la HEAD possono cambiare fra la prefetch e l'avvio della
+      # action Claude. Rifare il read/hash nell'ultimo step prima di consumare
+      # quota Claude evita di applicare un finding a un contesto ormai stantio;
+      # il mismatch è un errore fail-closed, non un bundle vuoto.
+      - name: Revalidate PR + review context immediately before Claude
+        id: preclaude
+        if: steps.guard.outputs.proceed == 'true' && steps.ctx.outputs.context_verified == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          EVENT_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          EXPECTED_HEAD_SHA: ${{ steps.ctx.outputs.head_sha }}
+          EXPECTED_BODY_REVISION: ${{ steps.ctx.outputs.review_revision }}
+        run: |
+          set -euo pipefail
+          OUT="$RUNNER_TEMP/redflag"
+          context_fail() {
+            echo "::error::$1"
+            exit 1
+          }
+
+          pr_before_claude="$OUT/pr-before-claude.json"
+          if ! gh api "repos/$REPO/pulls/$PR_NUMBER" > "$pr_before_claude" 2>/dev/null; then
+            context_fail "Contesto PR illeggibile prima di Claude: il redflag fixer resta fail-closed."
+          fi
+          if ! jq -e 'type == "object" and (.head | type == "object") and (.head.sha | type == "string") and (.body == null or (.body | type == "string")) and has("body")' "$pr_before_claude" >/dev/null 2>&1; then
+            context_fail "Contesto PR malformato prima di Claude: il redflag fixer resta fail-closed."
+          fi
+          current_head_sha=$(jq -r '.head.sha' "$pr_before_claude")
+          if ! printf '%s' "$current_head_sha" | grep -qE '^[a-f0-9]{40}$'; then
+            context_fail "HEAD corrente malformata prima di Claude: il redflag fixer resta fail-closed."
+          fi
+          if ! printf '%s\n%s\n' "$current_head_sha" "$EXPECTED_HEAD_SHA" | awk 'NR==1 { current=tolower($0); next } { expected=tolower($0); exit current != expected }'; then
+            context_fail "La HEAD della PR è cambiata fra prefetch e Claude: nessun fix automatico viene avviato."
+          fi
+          if ! printf '%s\n%s\n' "$current_head_sha" "$EVENT_HEAD_SHA" | awk 'NR==1 { current=tolower($0); next } { event=tolower($0); exit current != event }'; then
+            context_fail "La HEAD della PR non coincide con l'evento review: nessun fix automatico viene avviato."
+          fi
+
+          body_file="$OUT/body-before-claude.txt"
+          if ! jq -r '(.body // "")' "$pr_before_claude" > "$body_file"; then
+            context_fail "Body della PR illeggibile prima di Claude: il redflag fixer resta fail-closed."
+          fi
+          if ! body_sha=$(sha256sum "$body_file" | awk '{print $1}'); then
+            context_fail "Hash del body PR non calcolabile prima di Claude: il redflag fixer resta fail-closed."
+          fi
+          if ! printf '%s' "$body_sha" | grep -qE '^[a-f0-9]{64}$'; then
+            context_fail "Hash del body PR malformato prima di Claude: il redflag fixer resta fail-closed."
+          fi
+          current_revision="body:$body_sha"
+          if [ "$current_revision" != "$EXPECTED_BODY_REVISION" ]; then
+            context_fail "Il body della PR è cambiato fra prefetch e Claude: nessun fix automatico viene avviato."
+          fi
+          echo "verified=true" >> "$GITHUB_OUTPUT"
+          echo "Contesto PR/review ancora identico alla prefetch (HEAD + body revision): Claude autorizzata."
+
       - name: Run Claude 🔴-fix
         id: claude_review
-        if: steps.guard.outputs.proceed == 'true' && steps.ctx.outputs.context_verified == 'true'
+        if: steps.guard.outputs.proceed == 'true' && steps.ctx.outputs.context_verified == 'true' && steps.preclaude.outputs.verified == 'true'
         # Non far fallire il job sull'exit non-zero della action: lo `Classify
         # outcome` finale decide il colore in base al LAVORO reale (commit pushato),
         # non al subtype della CLI. Un error_max_turns DOPO un push valido non è un

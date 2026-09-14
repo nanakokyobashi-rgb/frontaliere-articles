@@ -98,7 +98,11 @@ import {
   renderReopenBudget,
 } from './lib/reopen-breaker.mjs';
 import { intFromEnv, positiveIntFromEnv } from '../lib/int-from-env.mjs';
-import { PR_BODY_JQ, reviewHasInputRevision } from './review-test-policy.mjs';
+import {
+  reviewInputContextFromPullRequest,
+  reviewInputContextMatches,
+  reviewHasInputRevision,
+} from './review-test-policy.mjs';
 
 const DRY = process.argv.includes('--dry-run');
 const REPO = process.env.GITHUB_REPOSITORY || '';
@@ -201,14 +205,31 @@ function gh(args, { json = true, allowFail = false } = {}) {
   }
 }
 
-/** The current trusted PR body is part of the review input identity. */
-function currentReviewInputRevision(num) {
+/** Read the trusted PR HEAD and body revision as one review-input snapshot. */
+function currentReviewInputContext(num) {
   try {
-    const body = gh(['api', `repos/${REPO}/pulls/${num}`, '--jq', PR_BODY_JQ], { json: false });
-    return `body:${createHash('sha256').update(body).digest('hex')}`;
+    return reviewInputContextFromPullRequest(gh(['api', `repos/${REPO}/pulls/${num}`]));
   } catch {
     return null;
   }
+}
+
+/** Backward-compatible body-only accessor for review selection defaults. */
+function currentReviewInputRevision(num) {
+  return currentReviewInputContext(num)?.reviewRevision || null;
+}
+
+/** Re-read HEAD and body immediately before a review-dependent mutation. */
+function reviewInputContextStillCurrent(num, expectedHead, expectedRevision) {
+  const current = currentReviewInputContext(num);
+  if (reviewInputContextMatches(current, {
+    headSha: expectedHead,
+    reviewRevision: expectedRevision,
+  })) return true;
+  console.log(
+    `PR #${num}: HEAD o body PR cambiati durante lo sweep (attesa head=${expectedHead} revision=${expectedRevision}, corrente head=${current?.headSha || '<unreadable>'} revision=${current?.reviewRevision || '<unreadable>'}) — skip azione review-dipendente questo tick.`,
+  );
+  return false;
 }
 
 /**
@@ -1130,7 +1151,12 @@ async function processPR(pr) {
   // GATE frugalità: solo near-merge. Tutte le decisioni sul verdetto usano la
   // stessa revisione del body; un LGTM del body precedente non rende la PR
   // near-merge e non può scegliere il ramo di solo dispatch.
-  const reviewRevision = currentReviewInputRevision(num);
+  const reviewContext = currentReviewInputContext(num);
+  if (!reviewContext || reviewContext.headSha !== String(head || '').toLowerCase()) {
+    console.log(`PR #${num}: HEAD o body della PR non verificabili prima della selezione review — skip questo tick.`);
+    return;
+  }
+  const reviewRevision = reviewContext.reviewRevision;
   const lgtm = hasLgtmReview(num, reviewRevision);
   let nearMerge =
     labels.includes('collision-risk') ||
@@ -1199,10 +1225,12 @@ async function processPR(pr) {
         // Classe-A: nemmeno la review esiste (drift 401) — il solo vitest non
         // sblocca (auto-merge esige LGTM). Reopen = review+tests insieme.
         console.log(`PR #${num} 0 dietro main, NESSUNA review claude e niente vitest → close+reopen (re-trigger review+tests).`);
-        if (guardedReopen(num, head)) clearStaleReviewLabel(num);
+        if (reviewInputContextStillCurrent(num, head, reviewRevision)
+          && guardedReopen(num, head)) clearStaleReviewLabel(num);
       } else {
         console.log(`PR #${num} 0 dietro main ma head ${head.slice(0, 8)} SENZA check-run vitest → dispatch tests.yml (heal, no rebase).`);
-        if (dispatchTests(num, branch)) clearStaleReviewLabel(num);
+        if (reviewInputContextStillCurrent(num, head, reviewRevision)
+          && dispatchTests(num, branch)) clearStaleReviewLabel(num);
       }
     } else if (vitestVerdictIsTransient(head)) {
       // Il check vitest ESISTE ma il suo verdetto rosso è una CANCELLAZIONE da
@@ -1214,7 +1242,8 @@ async function processPR(pr) {
       // Ri-dispatch tests.yml (heal), NESSUN rebase. Un `failure` REALE non passa
       // di qui → niente re-run gratis (AGENTS #5 + frugalità CI).
       console.log(`PR #${num} 0 dietro main, vitest rosso da CANCELLAZIONE (transient, nessun verdetto sul codice) → dispatch tests.yml (heal, no rebase).`);
-      if (dispatchTests(num, branch)) clearStaleReviewLabel(num);
+      if (reviewInputContextStillCurrent(num, head, reviewRevision)
+        && dispatchTests(num, branch)) clearStaleReviewLabel(num);
     } else {
       console.log(`PR #${num} 0 dietro main, vitest già presente sull'head — skip.`);
     }
@@ -1240,13 +1269,15 @@ async function processPR(pr) {
         git(['config', 'user.email', 'valerielinc@gmail.com']);
         const mg = git(['merge', '--no-edit', 'origin/main'], { allowFail: true });
         if (mg === null && resolveImportUnionConflicts() && git(['commit', '--no-edit'], { allowFail: true }) !== null) {
+          if (!reviewInputContextStillCurrent(num, head, reviewRevision)) return;
           const pushed = pushBranch(branch);
           if (pushed !== null) {
             // Push OK: la PR è ora mergeable. Dispatch tests (gate vitest di
             // auto-merge-eval valida la risoluzione: se l'unione fosse errata i
             // test falliscono e non si mergia). LGTM carry-forward.
             console.log(`✅ PR #${num}: conflitto import-union AUTO-RISOLTO + pushato → mergeable; dispatch tests.`);
-            if (dispatchTests(num, branch)) clearStaleReviewLabel(num);
+            if (reviewInputContextStillCurrent(num, head, reviewRevision)
+              && dispatchTests(num, branch)) clearStaleReviewLabel(num);
             done = true;
           }
         }
@@ -1300,7 +1331,8 @@ async function processPR(pr) {
   });
   if (action === 'heal') {
     console.log(`PR #${num} LGTM non-collision, ${behind} dietro main, head ${head.slice(0, 8)} SENZA check-run vitest → dispatch tests (heal, NO rebase: main non-strict, auto-merge la mergia behind).`);
-    if (dispatchTests(num, branch)) clearStaleReviewLabel(num);
+    if (reviewInputContextStillCurrent(num, head, reviewRevision)
+      && dispatchTests(num, branch)) clearStaleReviewLabel(num);
     return;
   }
   if (action === 'skip') {
@@ -1409,6 +1441,7 @@ async function processPR(pr) {
   // Push via PAT. TOCTOU: tra mergeable-check e push un nuovo commit potrebbe
   // essere arrivato → push non-fast-forward fallisce (no --force): skip, il
   // prossimo tick ricalcola.
+  if (!reviewInputContextStillCurrent(num, head, reviewRevision)) return;
   const pushed = pushBranch(branch);
   if (pushed === null) {
     console.log(`PR #${num}: push fallito (probabile non-fast-forward / TOCTOU) — skip, riprova al prossimo tick.`);
@@ -1438,10 +1471,11 @@ async function processPR(pr) {
   if (!lgtm) {
     if (labels.includes('needs-human')) {
       console.log(`PR #${num}: rebasata ma needs-human (round-cap) → no reopen (attende umano); solo dispatch tests.`);
-      if (dispatchTests(num, branch)) clearStaleReviewLabel(num);
+      if (reviewInputContextStillCurrent(num, head, reviewRevision)
+        && dispatchTests(num, branch)) clearStaleReviewLabel(num);
       return;
     }
-    const why = hasAnyClaudeReview(num) ? '🔴/❓ non chiuso + drift sanato' : 'classe-A senza review';
+    const why = hasAnyClaudeReview(num, reviewRevision) ? '🔴/❓ non chiuso + drift sanato' : 'classe-A senza review';
     // Il reopen passa dal breaker: è QUESTO call-site che ha prodotto le 12+10
     // riaperture di #5896/#5906. `!lgtm` con i TEST rossi è una condizione che
     // il reopen non può cambiare (il job si ferma prima della review), quindi
@@ -1451,13 +1485,15 @@ async function processPR(pr) {
     // è appena stato PROVATO non attribuibile (red-main/stale) e il reopen è
     // esattamente la ri-esecuzione promessa — `stuckRedReason` disattiva la
     // sola precondizione (il budget del breaker conta comunque).
-    if (guardedReopen(num, head, { stuckRedReason })) {
+    if (reviewInputContextStillCurrent(num, head, reviewRevision)
+      && guardedReopen(num, head, { stuckRedReason })) {
       clearStaleReviewLabel(num);
       console.log(`✅ PR #${num}: rebasata, pushata e ri-aperta (${why}) → review+redflag ri-triggerati drift-free.`);
     }
     return;
   }
-  if (dispatchTests(num, branch)) {
+  if (reviewInputContextStillCurrent(num, head, reviewRevision)
+    && dispatchTests(num, branch)) {
     clearStaleReviewLabel(num);
     console.log(`✅ PR #${num}: rebasata su origin/main, pushata (${branch}) e dispatchato tests.yml → vitest sull'head; LGTM carry-forward, zero Claude.`);
   }

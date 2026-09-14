@@ -1,5 +1,6 @@
 /** Owner policy: tests run in CI, but are excluded from model review. */
 import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -10,6 +11,38 @@ export const TEST_REVIEW_MARKER = '<!-- TEST_ONLY_AUTOMATIC_REVIEW -->';
 // an object with an explicit string/null `body`. Reusing this jq expression
 // keeps shell and Node consumers fail-closed on a valid-but-malformed payload.
 export const PR_BODY_JQ = 'if type != "object" then error("PR response is not an object") elif (has("body") | not) then error("PR response has no body field") elif .body != null and (.body | type) != "string" then error("PR body is not a string or null") else (.body // "") end';
+const PR_HEAD_SHA_RE = /^[0-9a-f]{40}$/iu;
+
+/** Hash the exact `gh api --jq` body representation used by the workflows. */
+export function reviewInputRevisionForBody(body) {
+  if (typeof body !== 'string') return null;
+  return `body:${createHash('sha256').update(`${body}\n`).digest('hex')}`;
+}
+
+/**
+ * Build one review-input snapshot from one trusted PR REST response. Keeping
+ * HEAD and body revision together prevents the consumers from fencing one
+ * field while silently using a newer value for the other.
+ */
+export function reviewInputContextFromPullRequest(payload) {
+  if (!payload || typeof payload !== 'object' || Array.isArray(payload)
+      || !Object.prototype.hasOwnProperty.call(payload, 'body')) return null;
+  const body = payload.body === null ? '' : payload.body;
+  const headSha = payload.head?.sha;
+  if (typeof body !== 'string' || typeof headSha !== 'string' || !PR_HEAD_SHA_RE.test(headSha)) {
+    return null;
+  }
+  const reviewRevision = reviewInputRevisionForBody(body);
+  return reviewRevision
+    ? { headSha: headSha.toLowerCase(), reviewRevision }
+    : null;
+}
+
+/** Compare a freshly read snapshot with the exact context being acted on. */
+export function reviewInputContextMatches(actual, { headSha, reviewRevision } = {}) {
+  return actual?.headSha === String(headSha || '').trim().toLowerCase()
+    && actual?.reviewRevision === String(reviewRevision || '').trim().toLowerCase();
+}
 // The revision marker is a contract line, not a substring.  Requiring the
 // complete unchanged line prevents prose, quoted examples, or an inline
 // marker from authenticating a verdict for the current PR body.

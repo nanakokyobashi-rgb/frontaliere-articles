@@ -53,7 +53,8 @@
 import {
   findTestOnlyApproval,
   normalizeReviewInputRevision,
-  PR_BODY_JQ,
+  reviewInputContextFromPullRequest,
+  reviewInputContextMatches,
   reviewHasInputRevision,
 } from './review-test-policy.mjs';
 import { execFileSync } from 'node:child_process';
@@ -122,16 +123,46 @@ function fingerprint(sha) {
   return fp == null ? null : createHash('sha256').update(fp).digest('hex');
 }
 
-/** The workflow hashes the trusted PR body before asking for a review. */
-function currentReviewInputRevision() {
-  let body;
+/** Read the trusted PR HEAD and body revision as one review-input snapshot. */
+function currentReviewInputContext() {
+  let payload;
   try {
-    body = gh(['api', `repos/${REPO}/pulls/${PR}`, '--jq', PR_BODY_JQ], { json: false });
+    payload = gh(['api', `repos/${REPO}/pulls/${PR}`]);
   } catch (error) {
     markTransientFailure();
-    throw new Error(`PR body illeggibile: ${String(error).slice(0, 160)}`);
+    throw new Error(`contesto PR illeggibile: ${String(error).slice(0, 160)}`);
   }
-  return `body:${createHash('sha256').update(body).digest('hex')}`;
+  const context = reviewInputContextFromPullRequest(payload);
+  if (!context) {
+    markTransientFailure();
+    throw new Error('contesto PR malformato: HEAD o body non verificabili');
+  }
+  return context;
+}
+
+/**
+ * The review-input snapshot is a TOCTOU fence, not only an input selector.
+ * Re-read HEAD and body immediately before any approving exit so a push or
+ * body edit during review cannot make an older verdict satisfy the check.
+ */
+function reviewInputContextStillCurrent() {
+  let current;
+  try {
+    current = currentReviewInputContext();
+  } catch (error) {
+    markTransientFailure();
+    console.error(`::error::review-gate: impossibile rileggere HEAD + hash body PR prima dell'approvazione (${String(error).slice(0, 160)}).`);
+    return false;
+  }
+  if (reviewInputContextMatches(current, {
+    headSha: HEAD_SHA,
+    reviewRevision: REVIEW_REVISION,
+  })) return true;
+  markTransientFailure();
+  console.error(
+    `::error::review-gate: HEAD o body PR sono cambiati durante la valutazione (attesa head=${HEAD_SHA} revision=${REVIEW_REVISION}, corrente head=${current?.headSha || '<unreadable>'} revision=${current?.reviewRevision || '<unreadable>'}); nessun verdetto può essere riusato.`,
+  );
+  return false;
 }
 
 function isCodexFallbackReview(review) {
@@ -356,12 +387,23 @@ async function main() {
     console.error('::error::review-gate: REVIEW_REVISION mancante o non valida; nessun verdetto precedente può essere riusato.');
     process.exit(1);
   }
-  const currentRevision = currentReviewInputRevision();
-  if (currentRevision !== REVIEW_REVISION) {
+  let currentContext;
+  try {
+    currentContext = currentReviewInputContext();
+  } catch (error) {
+    markTransientFailure();
+    writeFailureKind();
+    console.error(`::error::review-gate: impossibile verificare HEAD + REVIEW_REVISION del body PR (${String(error).slice(0, 160)}).`);
+    process.exit(1);
+  }
+  if (!reviewInputContextMatches(currentContext, {
+    headSha: HEAD_SHA,
+    reviewRevision: REVIEW_REVISION,
+  })) {
     markTransientFailure();
     writeFailureKind();
     console.error(
-      `::error::review-gate: REVIEW_REVISION non corrisponde al body PR corrente (attesa=${REVIEW_REVISION}, corrente=${currentRevision}); nessun verdetto precedente può essere riusato.`,
+      `::error::review-gate: HEAD o REVIEW_REVISION non corrispondono alla PR corrente (attesa head=${HEAD_SHA} revision=${REVIEW_REVISION}, corrente head=${currentContext?.headSha || '<unreadable>'} revision=${currentContext?.reviewRevision || '<unreadable>'}); nessun verdetto precedente può essere riusato.`,
     );
     process.exit(1);
   }
@@ -375,6 +417,10 @@ async function main() {
     const hasRedflag = REDFLAG_IMPORTANT_RE.test(body);
     let scope = null;
     if (applies && hasRedflag) {
+      if (!reviewInputContextStillCurrent()) {
+        writeFailureKind();
+        process.exit(1);
+      }
       try {
         scope = await classifyAndMintReview(body, {
           repo: REPO,
@@ -407,6 +453,10 @@ async function main() {
       || hasFreshCodexEvidence
       || codexReviewWasPreviouslyAccepted(last);
     if (approving && applies && codexCarryApproved) {
+      if (!reviewInputContextStillCurrent()) {
+        writeFailureKind();
+        process.exit(1);
+      }
       if (last.commit_id === HEAD_SHA) {
         console.log(`review-gate: review approvante sulla head ${HEAD_SHA}.`);
       } else {
@@ -436,13 +486,17 @@ async function main() {
       console.log(
         `review-gate: la review non si applica alla head ${HEAD_SHA} — tento il drift-fallback.`,
       );
-      if (driftFallbackApproves() && writeGateOutput('fallback_approved', 'true')) {
+      if (driftFallbackApproves()
+        && reviewInputContextStillCurrent()
+        && writeGateOutput('fallback_approved', 'true')) {
         process.exit(0);
       }
     }
   } else if (last === null) {
     console.log("review-gate: nessuna review del bot reviewer su questa PR.");
-    if (driftFallbackApproves() && writeGateOutput('fallback_approved', 'true')) {
+    if (driftFallbackApproves()
+      && reviewInputContextStillCurrent()
+      && writeGateOutput('fallback_approved', 'true')) {
       process.exit(0);
     }
   }

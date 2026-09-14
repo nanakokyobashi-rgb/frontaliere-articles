@@ -68,7 +68,8 @@ import { createHash } from 'node:crypto';
 import {
   isReviewTestPath,
   findTestOnlyApproval,
-  PR_BODY_JQ,
+  reviewInputContextFromPullRequest,
+  reviewInputContextMatches,
   reviewHasInputRevision,
 } from './review-test-policy.mjs';
 import { execFileSync } from 'node:child_process';
@@ -95,14 +96,31 @@ function gh(args, { json = true, token } = {}) {
   return json ? JSON.parse(out) : out;
 }
 
-/** The trusted PR body hash is the review input revision for every consumer. */
-function currentReviewInputRevision() {
+/** Read the trusted PR HEAD and body revision as one review-input snapshot. */
+function currentReviewInputContext() {
   try {
-    const body = gh(['api', `repos/${REPO}/pulls/${PR}`, '--jq', PR_BODY_JQ], { json: false });
-    return `body:${createHash('sha256').update(body).digest('hex')}`;
+    return reviewInputContextFromPullRequest(gh(['api', `repos/${REPO}/pulls/${PR}`]));
   } catch {
     return null;
   }
+}
+
+/** Keep the HEAD and body revision fence together before every action. */
+function reviewInputContextStillCurrent(expectedHead, expectedRevision) {
+  const current = currentReviewInputContext();
+  if (reviewInputContextMatches(current, {
+    headSha: expectedHead,
+    reviewRevision: expectedRevision,
+  })) return true;
+  console.log(
+    `Review gate: HEAD o body PR cambiati durante la valutazione (attesa head=${expectedHead} revision=${expectedRevision}, corrente head=${current?.headSha || '<unreadable>'} revision=${current?.reviewRevision || '<unreadable>'}) — nessuna azione di merge/update-branch.`,
+  );
+  return false;
+}
+
+/** Backward-compatible body-only accessor for callers that choose a default. */
+function currentReviewInputRevision() {
+  return currentReviewInputContext()?.reviewRevision || null;
 }
 
 function fail(msg) {
@@ -422,8 +440,11 @@ async function main() {
   const labels = (pr.labels || []).map((l) => l.name);
   console.log(`HEAD SHA: ${head} · labels: [${labels.join(', ') || '—'}]`);
 
-  const reviewRevision = currentReviewInputRevision();
-  if (!reviewRevision) return fail(`Impossibile leggere il body della PR #${PR} per la revisione della review — skip conservativo.`);
+  const reviewContext = currentReviewInputContext();
+  if (!reviewContext || reviewContext.headSha !== String(head || '').toLowerCase()) {
+    return fail(`Impossibile verificare HEAD + body della PR #${PR} per la revisione della review — skip conservativo.`);
+  }
+  const reviewRevision = reviewContext.reviewRevision;
 
   // 2. Ultima review del bot reviewer sulla HEAD corrente: `## LGTM` e NO 🔴 Important.
   let reviews;
@@ -739,6 +760,7 @@ async function main() {
       console.log(`PR #${PR} gia' mergiata da un run concorrente — successo, nessun update-branch.`);
       return;
     }
+    if (!reviewInputContextStillCurrent(head, reviewRevision)) return;
     console.log(`Race "head out of date": branch dietro main tra gate e merge. Aggiorno il branch col PAT (update-branch) → tests ri-gira → auto-merge ri-valuta e mergia. Nessuna azione manuale.`);
     try {
       gh(['pr', 'update-branch', PR, '--repo', REPO], { json: false, token: primary });
@@ -756,6 +778,7 @@ async function main() {
     }
   };
 
+  if (!reviewInputContextStillCurrent(head, reviewRevision)) return;
   const mergeArgs = ['pr', 'merge', PR, '--squash', '--delete-branch', '--repo', REPO];
   try {
     gh(mergeArgs, { json: false, token: primary });
@@ -772,6 +795,7 @@ async function main() {
     if (hasPat && fallback) {
       console.log(`::warning::Merge col GITHUB_PAT fallito (scope insufficiente?) — retry con GITHUB_TOKEN, nessun cascade.`);
       try {
+        if (!reviewInputContextStillCurrent(head, reviewRevision)) return;
         gh(mergeArgs, { json: false, token: fallback });
         console.log(`PR #${PR} mergiata (fallback GITHUB_TOKEN).`);
       } catch (e2) {
