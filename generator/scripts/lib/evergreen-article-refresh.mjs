@@ -56,9 +56,14 @@ function writeCorpusFile(file, content) {
   }
 }
 
-/** Bump (or insert) `updatedAt` on the ARTICLES entry so sitemap lastmod reflects the refresh. */
-export function bumpUpdatedAt(id, todayIso, repoRoot = DEFAULT_REPO_ROOT) {
-  const file = path.join(repoRoot, corpusPath('data/blog-articles-data.ts'));
+/** Bump (or insert) `updatedAt` on an article registry entry so sitemap lastmod reflects the refresh. */
+export function bumpUpdatedAt(
+  id,
+  todayIso,
+  repoRoot = DEFAULT_REPO_ROOT,
+  registryFile = 'data/blog-articles-data.ts',
+) {
+  const file = path.join(repoRoot, corpusPath(registryFile));
   let src = readFileSync(file, 'utf-8');
   const entryRe = new RegExp(`(\\n([ \\t]*)id: '${id}',[\\s\\S]*?)(\\n[ \\t]*\\},)`);
   const m = src.match(entryRe);

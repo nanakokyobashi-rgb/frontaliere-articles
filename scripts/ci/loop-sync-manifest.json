@@ -3878,6 +3878,16 @@
         "corpus": "662b302a7622afca",
         "alignedAt": "2026-09-13"
       }
+    },
+    {
+      "path": "generator/scripts/lib/pharmacy-evergreen-guides-content.mjs",
+      "mode": "corpus-only",
+      "reason": "Builder puro del producer editoriale per le guide farmacia del publisher: valida snapshot locali e genera payload evergreen per la sezione svizzera. Il sito consuma il corpus via HTTP e non deve importare questo contenuto o il suo builder, quindi non esiste un gemello da portare.",
+      "baseline": {
+        "site": null,
+        "corpus": "4c1acc14ede5ab37840364518c7cb3ffc08dbea0",
+        "alignedAt": "2026-09-14"
+      }
     }
   ]
 }
