@@ -3364,9 +3364,9 @@
       "sitePath": ".github/corpus-workflows/contract.json",
       "mode": "identical",
       "baseline": {
-        "site": "6226b8d336a26096",
-        "corpus": "6226b8d336a26096",
-        "alignedAt": "2026-09-13"
+        "site": "f059db266ef4ce54",
+        "corpus": "f059db266ef4ce54",
+        "alignedAt": "2026-09-14"
       }
     },
     {
@@ -3374,9 +3374,9 @@
       "sitePath": ".github/corpus-workflows/observers/generator/tests/crawler-cross-repo-artifacts.test.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "3c2136aa2e0f1d07",
-        "corpus": "3c2136aa2e0f1d07",
-        "alignedAt": "2026-09-13"
+        "site": "84871c4f99c400d7",
+        "corpus": "84871c4f99c400d7",
+        "alignedAt": "2026-09-14"
       },
       "couplingSnapshot": [
         {
@@ -3416,9 +3416,9 @@
       "sitePath": ".github/corpus-workflows/observers/scripts/crawler-generation-observer-selector.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "712a817d31a6ddb7",
-        "corpus": "712a817d31a6ddb7",
-        "alignedAt": "2026-09-11"
+        "site": "f317e033d892d702",
+        "corpus": "f317e033d892d702",
+        "alignedAt": "2026-09-14"
       }
     },
     {
