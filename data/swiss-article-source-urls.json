@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/rubriche/ospite/1944468/neutralita-svizzera-lorenzo-quadri-nazionale": "svizzera-neutralita-si",
   "https://www.tio.ch/dal-mondo/politica/1944471/texas-big-bend-anti-migranti-muro-lavori": "sospensione-lavori-muro-anti-migranti-big-bend-texas",
   "https://www.tio.ch/sport/calcio/1944472/infantino-fifa-lamour-critiche-kevin": "infantino-fifa-lamour-licenziato",
   "https://www.rsi.ch/info/salute/dolce-far-niente-ecco-perch%c3%a9-fermarsi-fa-bene--3949560.html": "dolce-far-niente-benessere-svizzera",
@@ -2429,6 +2428,11 @@
   "https://www.tio.ch/svizzera/politica/1949987/transpareg-quadri-chiede-di-rinviare-l-entrata-in-vigore-rischio-informatico-enorme": {
     "articleId": "transpa-reg-quadri-rinvio-1-ottobre",
     "ts": "2026-09-14T11:57:33.166Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1949755/nazionale-consiglio-manifestazione-berna-dovrebbe-vuole-politica-carcere": {
+    "articleId": "detenzione-48-ore-manifestazioni",
+    "ts": "2026-09-14T12:38:56.978Z",
     "keyForm": 2
   }
 }
