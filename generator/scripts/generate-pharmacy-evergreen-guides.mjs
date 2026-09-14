@@ -39,6 +39,7 @@ import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 import { refreshDescriptiveTexts } from './lib/article-meta-refresh.mjs';
 import { sanitizePromptPlaceholders } from './lib/prompt-placeholder-guard.mjs';
+import { acquirePharmacyEvergreenRefresh } from './lib/pharmacy-evergreen-refresh-transaction.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..', '..');
@@ -106,8 +107,14 @@ function writeBodyFile(file, body) {
   }
 }
 
+function stageCorpusFile(transaction, file, content) {
+  const clean = sanitizeText(content);
+  reportStrippedControlChars(file, content, clean);
+  transaction.stage(file, clean);
+}
+
 /** Rewrite the four localized body chunks without re-registering the article. */
-export function refreshBodyFiles(data, repoRoot = REPO_ROOT, log = console.log) {
+export function refreshBodyFiles(data, repoRoot = REPO_ROOT, log = console.log, writeFile = writeBodyFile) {
   sanitizePromptPlaceholders(data);
   assertGeneratedArticleQuality(data);
   assertArticlePassesFactualityGates(data);
@@ -115,13 +122,13 @@ export function refreshBodyFiles(data, repoRoot = REPO_ROOT, log = console.log) 
     const dir = path.join(repoRoot, corpusPath(`services/locales/${SECTION_FILES.bodyDir}`), locale);
     mkdirSync(dir, { recursive: true });
     const file = path.join(dir, `${data.id}.ts`);
-    writeBodyFile(file, buildBodyFile(data, locale));
+    writeFile(file, buildBodyFile(data, locale));
     log(`  ✅ ${path.relative(repoRoot, file)}`);
   }
 }
 
 /** Refresh localized meta and the Swiss SEO entry for an existing stable ID. */
-export function refreshMetaAndSeo(data, repoRoot = REPO_ROOT) {
+export function refreshMetaAndSeo(data, repoRoot = REPO_ROOT, writeFile = null, readFile = null) {
   sanitizePromptPlaceholders(data);
   assertArticlePassesFactualityGates(data);
   const localeTexts = Object.fromEntries(PHARMACY_LOCALES.map((locale) => {
@@ -132,15 +139,18 @@ export function refreshMetaAndSeo(data, repoRoot = REPO_ROOT) {
       ogDescription: content.ogDescription,
     }];
   }));
+  const io = {
+    repoRoot,
+    metaPrefix: SECTION_FILES.metaPrefix,
+    seoFile: SECTION_FILES.seoFile,
+  };
+  if (writeFile) io.writeFile = writeFile;
+  if (readFile) io.readFile = readFile;
   return refreshDescriptiveTexts(
     data.id,
     localeTexts,
     { description: data.seo?.description, ogDescription: data.seo?.ogDescription },
-    {
-      repoRoot,
-      metaPrefix: SECTION_FILES.metaPrefix,
-      seoFile: SECTION_FILES.seoFile,
-    },
+    io,
   );
 }
 
@@ -152,6 +162,59 @@ function preflight(data) {
   sanitizePromptPlaceholders(data);
   assertGeneratedArticleQuality(data);
   assertArticlePassesFactualityGates(data);
+}
+
+function refreshExistingGuides(states) {
+  const transaction = acquirePharmacyEvergreenRefresh(REPO_ROOT, { log: console.log });
+  const writeFile = (file, content) => stageCorpusFile(transaction, file, content);
+  const readFile = (file) => transaction.read(file);
+  try {
+    for (const { guide } of states) {
+      console.log(`♻️  refreshing ${guide.id}…`);
+      refreshBodyFiles(guide, REPO_ROOT, console.log, writeFile);
+      const meta = refreshMetaAndSeo(guide, REPO_ROOT, writeFile, readFile);
+      if (meta.changed) {
+        for (const file of meta.touched) console.log(`  ✅ staged ${path.relative(REPO_ROOT, file)}`);
+      } else {
+        console.log('  ♻️  meta/seo already current — nothing to rewrite.');
+      }
+
+      const refreshDate = guide._snapshotUpdatedAt.slice(0, 10);
+      if (!bumpUpdatedAt(
+        guide.id,
+        refreshDate,
+        REPO_ROOT,
+        SECTION_FILES.registryFile,
+        writeFile,
+        readFile,
+      )) {
+        throw new Error(`pharmacy evergreen: updatedAt non aggiornato per ${guide.id}`);
+      }
+      if (!bumpDateModified(
+        guide.id,
+        dateModifiedWithExplicitUtcOffset(guide._snapshotUpdatedAt),
+        REPO_ROOT,
+        SECTION_FILES.seoFile,
+        writeFile,
+        readFile,
+      )) {
+        throw new Error(`pharmacy evergreen: dateModified non aggiornato per ${guide.id}`);
+      }
+      if (!bumpSitemapLastmod(guide.slugs.it, refreshDate, REPO_ROOT, SECTION_FILES.sitemapFile)) {
+        throw new Error(`pharmacy evergreen: sitemap non aggiornato per ${guide.id}`);
+      }
+      console.log(`✅ staged ${guide.id}.`);
+    }
+    transaction.commit();
+    console.log('✅ pharmacy evergreen refresh transaction committed.');
+  } catch (error) {
+    try {
+      transaction.rollback();
+    } catch (rollbackError) {
+      throw new Error(`${error.message}; ${rollbackError.message}`);
+    }
+    throw error;
+  }
 }
 
 async function main() {
@@ -180,40 +243,14 @@ async function main() {
     return;
   }
 
+  const existing = states.filter((state) => state.exists);
   for (const { guide, exists } of states) {
-    if (!exists) {
-      console.log(`📂 first run — registering ${guide.id}…`);
-      await registerArticleFiles(guide, { skipNews: true });
-      console.log(`✅ registered ${guide.id}.`);
-      continue;
-    }
-
-    console.log(`♻️  refreshing ${guide.id}…`);
-    refreshBodyFiles(guide);
-    const meta = refreshMetaAndSeo(guide);
-    if (meta.changed) {
-      for (const file of meta.touched) console.log(`  ✅ ${path.relative(REPO_ROOT, file)}`);
-    } else {
-      console.log('  ♻️  meta/seo already current — nothing to rewrite.');
-    }
-
-    const refreshDate = guide._snapshotUpdatedAt.slice(0, 10);
-    if (!bumpUpdatedAt(guide.id, refreshDate, REPO_ROOT, SECTION_FILES.registryFile)) {
-      throw new Error(`pharmacy evergreen: updatedAt non aggiornato per ${guide.id}`);
-    }
-    if (!bumpDateModified(
-      guide.id,
-      dateModifiedWithExplicitUtcOffset(guide._snapshotUpdatedAt),
-      REPO_ROOT,
-      SECTION_FILES.seoFile,
-    )) {
-      throw new Error(`pharmacy evergreen: dateModified non aggiornato per ${guide.id}`);
-    }
-    if (!bumpSitemapLastmod(guide.slugs.it, refreshDate, REPO_ROOT, SECTION_FILES.sitemapFile)) {
-      throw new Error(`pharmacy evergreen: sitemap non aggiornato per ${guide.id}`);
-    }
-    console.log(`✅ refreshed ${guide.id}.`);
+    if (exists) continue;
+    console.log(`📂 first run — registering ${guide.id}…`);
+    await registerArticleFiles(guide, { skipNews: true });
+    console.log(`✅ registered ${guide.id}.`);
   }
+  if (existing.length > 0) refreshExistingGuides(existing);
 }
 
 const invokedDirectly = (() => {

@@ -62,9 +62,11 @@ export function bumpUpdatedAt(
   todayIso,
   repoRoot = DEFAULT_REPO_ROOT,
   registryFile = 'data/blog-articles-data.ts',
+  writeFile = writeCorpusFile,
+  readFile = readFileSync,
 ) {
   const file = path.join(repoRoot, corpusPath(registryFile));
-  let src = readFileSync(file, 'utf-8');
+  let src = readFile(file, 'utf-8');
   const entryRe = new RegExp(`(\\n([ \\t]*)id: '${id}',[\\s\\S]*?)(\\n[ \\t]*\\},)`);
   const m = src.match(entryRe);
   if (!m) return false;
@@ -87,7 +89,7 @@ export function bumpUpdatedAt(
   }
   if (block === m[1]) return false;
   src = src.replace(m[1], block);
-  writeCorpusFile(file, src);
+  writeFile(file, src);
   return true;
 }
 
@@ -107,9 +109,11 @@ export function bumpDateModified(
   isoDateTime,
   repoRoot = DEFAULT_REPO_ROOT,
   seoFile = 'services/seo/seo-blog-5.ts',
+  writeFile = writeCorpusFile,
+  readFile = readFileSync,
 ) {
   const file = path.join(repoRoot, corpusPath(seoFile));
-  const src = readFileSync(file, 'utf-8');
+  const src = readFile(file, 'utf-8');
   const entries = findSeoEntryMatches(src, id);
   if (entries.length > 1) {
     throw new Error(
@@ -131,7 +135,7 @@ export function bumpDateModified(
   const pub = block.match(/"datePublished":\s*"([^"]*)"/);
   const effective = pub && Date.parse(pub[1]) > Date.parse(isoDateTime) ? pub[1] : isoDateTime;
   const replaced = block.replace(dmRe, `"dateModified": "${effective}"`);
-  writeCorpusFile(file, src.slice(0, startIdx) + replaced + src.slice(closeIdx + 1));
+  writeFile(file, src.slice(0, startIdx) + replaced + src.slice(closeIdx + 1));
   return true;
 }
 

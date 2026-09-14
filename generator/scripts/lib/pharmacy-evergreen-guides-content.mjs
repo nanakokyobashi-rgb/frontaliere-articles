@@ -35,6 +35,21 @@ export const EXPECTED_DUTY_SOURCE_REGIONS = Object.freeze([
 
 export const EXPECTED_ITALY_PROVINCES = Object.freeze(['CO', 'VA', 'VB']);
 
+// These floors are the last verified complete row counts of the checked-in
+// snapshots. A refresh that silently returns a shorter page is not editorial
+// freshness; it is a truncated source and must stop before article generation.
+export const EXPECTED_MIN_RECORD_COUNTS = Object.freeze({
+  ticino: 207,
+  'italy-border': 542,
+  duty: 46,
+});
+
+// The current official snapshots carry no warnings. Keeping the allow-list
+// explicit makes a future source warning a deliberate schema change instead
+// of an accidental publication path.
+export const ALLOWED_SNAPSHOT_WARNINGS = Object.freeze([]);
+export const SNAPSHOT_FUTURE_TOLERANCE_MS = 5 * 60 * 1000;
+
 export const PHARMACY_ROUTES = Object.freeze({
   it: Object.freeze({
     hub: '/farmacie/',
@@ -83,10 +98,19 @@ function requireString(value, label) {
   return value;
 }
 
-function requireIsoTimestamp(value, label) {
+function requireIsoTimestamp(value, label, nowMs = Date.now()) {
   requireString(value, label);
-  if (Number.isNaN(Date.parse(value)) || !value.endsWith('Z')) {
+  if (!Number.isFinite(nowMs)) {
+    throw snapshotError('clock di validazione non valido');
+  }
+  const timestampMs = Date.parse(value);
+  if (Number.isNaN(timestampMs) || !value.endsWith('Z')) {
     throw snapshotError(`${label} non è un timestamp ISO UTC: ${value}`);
+  }
+  if (timestampMs > nowMs + SNAPSHOT_FUTURE_TOLERANCE_MS) {
+    throw snapshotError(
+      `${label} è nel futuro oltre la tolleranza di ${SNAPSHOT_FUTURE_TOLERANCE_MS / 1000}s: ${value}`,
+    );
   }
   return value;
 }
@@ -102,6 +126,42 @@ function requireEmptyErrors(value, label) {
   if (!Array.isArray(value)) throw snapshotError(`${label} deve essere un array`);
   if (value.length > 0) {
     throw snapshotError(`${label} contiene errori: ${value.join(' | ')}`);
+  }
+}
+
+function requireAllowedWarnings(value, label) {
+  if (!Array.isArray(value)) throw snapshotError(`${label} deve essere un array`);
+  const unexpected = value.filter((warning) => !ALLOWED_SNAPSHOT_WARNINGS.includes(warning));
+  if (unexpected.length > 0) {
+    throw snapshotError(`${label} contiene warning non ammessi: ${unexpected.join(' | ')}`);
+  }
+}
+
+function requireCompleteScope(value, label, expectedKey, recordCount) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    throw snapshotError(`${label} mancante: serve la prova di completezza dello scope`);
+  }
+  if (value.status !== 'complete') {
+    throw snapshotError(`${label}.status deve essere complete, ricevuto ${value.status}`);
+  }
+  if (value.truncated !== false) {
+    throw snapshotError(`${label}.truncated deve essere false`);
+  }
+  if (value.verifiedRecordCount !== recordCount) {
+    throw snapshotError(
+      `${label}.verifiedRecordCount non combacia con recordCount (${recordCount}), ricevuto ${value.verifiedRecordCount}`,
+    );
+  }
+  const expectedMinimum = EXPECTED_MIN_RECORD_COUNTS[expectedKey];
+  if (!Number.isInteger(value.minimumRecordCount) || value.minimumRecordCount < expectedMinimum) {
+    throw snapshotError(
+      `${label}.minimumRecordCount deve essere almeno ${expectedMinimum}, ricevuto ${value.minimumRecordCount}`,
+    );
+  }
+  if (recordCount < value.minimumRecordCount) {
+    throw snapshotError(
+      `${label}: recordCount ${recordCount} sotto la soglia dichiarata ${value.minimumRecordCount}`,
+    );
   }
 }
 
@@ -142,9 +202,10 @@ function readRequiredJson(file, label) {
   return value;
 }
 
-function validateCatalogueSnapshot(catalog) {
+function validateCatalogueSnapshot(catalog, { nowMs = Date.now() } = {}) {
   if (catalog.version !== 1) throw snapshotError('catalogo snapshot: versione non supportata');
   requireEmptyErrors(catalog.errors, 'catalogo snapshot.errors');
+  requireAllowedWarnings(catalog.warnings, 'catalogo snapshot.warnings');
   if (!Array.isArray(catalog.catalogues)) {
     throw snapshotError('catalogo snapshot.catalogues mancante');
   }
@@ -164,8 +225,9 @@ function validateCatalogueSnapshot(catalog) {
   if (ticino.sourceUrl !== EXPECTED_TICINO_SOURCE) {
     throw snapshotError(`catalogo Ticino: fonte inattesa ${ticino.sourceUrl}`);
   }
-  requireIsoTimestamp(ticino.fetchedAt, 'catalogo Ticino.fetchedAt');
+  requireIsoTimestamp(ticino.fetchedAt, 'catalogo Ticino.fetchedAt', nowMs);
   requirePositiveCount(ticino.recordCount, 'catalogo Ticino.recordCount');
+  requireCompleteScope(ticino.completeness, 'catalogo Ticino.completeness', 'ticino', ticino.recordCount);
 
   const italy = byId.get('italy-border');
   if (italy.country !== 'IT') {
@@ -175,15 +237,17 @@ function validateCatalogueSnapshot(catalog) {
   if (italy.sourceUrl !== EXPECTED_ITALY_SOURCE) {
     throw snapshotError(`catalogo italiano: fonte inattesa ${italy.sourceUrl}`);
   }
-  requireIsoTimestamp(italy.fetchedAt, 'catalogo italiano.fetchedAt');
+  requireIsoTimestamp(italy.fetchedAt, 'catalogo italiano.fetchedAt', nowMs);
   requirePositiveCount(italy.recordCount, 'catalogo italiano.recordCount');
+  requireCompleteScope(italy.completeness, 'catalogo italiano.completeness', 'italy-border', italy.recordCount);
 
   return { ticino, italy };
 }
 
-function validateDutySnapshot(duty) {
+function validateDutySnapshot(duty, { nowMs = Date.now() } = {}) {
   if (duty.version !== 1) throw snapshotError('turni snapshot: versione non supportata');
   requireEmptyErrors(duty.errors, 'turni snapshot.errors');
+  requireAllowedWarnings(duty.warnings, 'turni snapshot.warnings');
   if (duty.sourceUrl !== EXPECTED_OFCT_SOURCE) {
     throw snapshotError(`turni snapshot: fonte inattesa ${duty.sourceUrl}`);
   }
@@ -191,8 +255,9 @@ function validateDutySnapshot(duty) {
     throw snapshotError(`turni snapshot: sourceType deve essere official, ricevuto ${duty.sourceType}`);
   }
   requireExactArray(duty.sourceRegions, EXPECTED_DUTY_SOURCE_REGIONS, 'turni snapshot.sourceRegions', { ordered: true });
-  requireIsoTimestamp(duty.fetchedAt, 'turni snapshot.fetchedAt');
+  requireIsoTimestamp(duty.fetchedAt, 'turni snapshot.fetchedAt', nowMs);
   requirePositiveCount(duty.recordCount, 'turni snapshot.recordCount');
+  requireCompleteScope(duty.completeness, 'turni snapshot.completeness', 'duty', duty.recordCount);
   if (duty.verifiedDuty !== true) {
     throw snapshotError('turni snapshot: verifiedDuty deve essere true');
   }
@@ -213,15 +278,15 @@ function validateDutySnapshot(duty) {
  * strict: a source error, a missing catalogue, or a broadened duty scope must
  * stop publication before the registrar is reached.
  */
-export function validatePharmacySnapshots(snapshots) {
+export function validatePharmacySnapshots(snapshots, { nowMs = Date.now() } = {}) {
   if (!snapshots || typeof snapshots !== 'object') {
     throw snapshotError('bundle snapshot mancante');
   }
   if (!snapshots.catalog || !snapshots.duty) {
     throw snapshotError('bundle snapshot incompleto: servono catalog e duty');
   }
-  const catalog = validateCatalogueSnapshot(snapshots.catalog);
-  const duty = validateDutySnapshot(snapshots.duty);
+  const catalog = validateCatalogueSnapshot(snapshots.catalog, { nowMs });
+  const duty = validateDutySnapshot(snapshots.duty, { nowMs });
   return { catalog, duty };
 }
 

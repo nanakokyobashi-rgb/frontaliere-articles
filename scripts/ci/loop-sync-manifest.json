@@ -3888,6 +3888,16 @@
         "corpus": "47dca1c51b030e46",
         "alignedAt": "2026-09-14"
       }
+    },
+    {
+      "path": "generator/scripts/lib/pharmacy-evergreen-refresh-transaction.mjs",
+      "mode": "corpus-only",
+      "reason": "Coordinatore publisher-only del refresh atomico delle guide farmacia: il sito consuma il risultato via HTTP e non ha un gemello di questa transazione, per costruzione.",
+      "baseline": {
+        "site": null,
+        "corpus": "48d618b8dd2267ad",
+        "alignedAt": "2026-09-14"
+      }
     }
   ]
 }

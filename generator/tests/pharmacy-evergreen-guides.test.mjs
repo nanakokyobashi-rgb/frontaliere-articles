@@ -7,12 +7,15 @@ import { fileURLToPath } from 'node:url';
 
 import {
   buildPharmacyEvergreenGuides,
+  EXPECTED_MIN_RECORD_COUNTS,
   EXPECTED_DUTY_REGIONS,
   EXPECTED_DUTY_SOURCE_REGIONS,
   PHARMACY_GUIDE_IDS,
   PHARMACY_LOCALES,
   PHARMACY_ROUTES,
+  SNAPSHOT_FUTURE_TOLERANCE_MS,
   loadPharmacySnapshots,
+  validatePharmacySnapshots,
 } from '../scripts/lib/pharmacy-evergreen-guides-content.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -158,6 +161,68 @@ test('pharmacy evergreen: scope inatteso o fonte in errore — guardia fail-clos
   }
 });
 
+test('pharmacy evergreen: completezza e warning sono guardati fail-closed', () => {
+  const snapshots = readFixturePair();
+
+  const missingCompleteness = structuredClone(snapshots);
+  delete missingCompleteness.catalog.catalogues[0].completeness;
+  assert.throws(
+    () => validatePharmacySnapshots(missingCompleteness),
+    /catalogo Ticino\.completeness.*prova di completezza/,
+  );
+
+  const partial = structuredClone(snapshots);
+  partial.catalog.catalogues[0].completeness.status = 'partial';
+  assert.throws(
+    () => validatePharmacySnapshots(partial),
+    /catalogo Ticino\.completeness\.status.*complete/,
+  );
+
+  const belowFloor = structuredClone(snapshots);
+  belowFloor.catalog.catalogues[0].recordCount = EXPECTED_MIN_RECORD_COUNTS.ticino - 1;
+  belowFloor.catalog.catalogues[0].completeness.verifiedRecordCount = EXPECTED_MIN_RECORD_COUNTS.ticino - 1;
+  assert.throws(
+    () => validatePharmacySnapshots(belowFloor),
+    /minimumRecordCount|completeness.*soglia/,
+  );
+
+  const truncated = structuredClone(snapshots);
+  truncated.duty.completeness.truncated = true;
+  assert.throws(
+    () => validatePharmacySnapshots(truncated),
+    /turni snapshot\.completeness\.truncated.*false/,
+  );
+
+  const unknownWarning = structuredClone(snapshots);
+  unknownWarning.duty.warnings = ['source-partial'];
+  assert.throws(
+    () => validatePharmacySnapshots(unknownWarning),
+    /turni snapshot\.warnings contiene warning non ammessi/,
+  );
+});
+
+test('pharmacy evergreen: timestamp futuro oltre la tolleranza blocca il producer', () => {
+  const snapshots = readFixturePair();
+  const nowMs = Date.parse('2026-09-14T18:16:05.788Z');
+  const future = structuredClone(snapshots);
+  future.catalog.catalogues[0].fetchedAt = new Date(
+    nowMs + SNAPSHOT_FUTURE_TOLERANCE_MS + 1,
+  ).toISOString();
+  assert.throws(
+    () => validatePharmacySnapshots(future, { nowMs }),
+    /catalogo Ticino\.fetchedAt è nel futuro oltre la tolleranza/,
+  );
+
+  const withinTolerance = structuredClone(snapshots);
+  withinTolerance.catalog.catalogues[0].fetchedAt = new Date(
+    nowMs + SNAPSHOT_FUTURE_TOLERANCE_MS,
+  ).toISOString();
+  assert.doesNotThrow(
+    () => validatePharmacySnapshots(withinTolerance, { nowMs }),
+    'un clock skew entro la tolleranza esplicita resta accettabile',
+  );
+});
+
 test('pharmacy evergreen: il producer usa il registrar condiviso e la sezione senza union P0', () => {
   const source = fs.readFileSync(PRODUCER_PATH, 'utf8');
   assert.match(source, /registerArticleFiles\(guide, \{ skipNews: true \}\)/);
@@ -165,4 +230,7 @@ test('pharmacy evergreen: il producer usa il registrar condiviso e la sezione se
   assert.match(source, /registerArticleFiles/);
   assert.doesNotMatch(source, /blogArticleIds|BlogArticleId/);
   assert.doesNotMatch(source, /content\/blog-articles-data\.ts/);
+  assert.match(source, /acquirePharmacyEvergreenRefresh/);
+  assert.match(source, /transaction\.commit\(\)/);
+  assert.match(source, /transaction\.rollback\(\)/);
 });

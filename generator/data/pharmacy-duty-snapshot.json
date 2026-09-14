@@ -23,6 +23,12 @@
   "verifiedDuty": true,
   "statusValues": ["verified", "expired"],
   "recordCount": 46,
+  "completeness": {
+    "status": "complete",
+    "verifiedRecordCount": 46,
+    "minimumRecordCount": 46,
+    "truncated": false
+  },
   "errors": [],
   "warnings": []
 }
