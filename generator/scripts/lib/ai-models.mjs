@@ -2634,6 +2634,15 @@ const ENTRY_TAIL_SEPARATOR_RE = /[\s|]+$/;
 // verdict (metadata or this marker) may justify reading the full reason.
 const PERSISTENT_EXHAUSTION_RE = /\b40[124]\b|tokens?_limit_reached|context.?length|maximum context|too many tokens|exceeds .*input cap|max output \d+ <|no API key|unknown.?model|no such model|does not exist|decommissioned|deprecated|no longer supported|no longer available|no longer offered|non-retryable|unusable content|payment|insufficient|credit/i;
 const AUTHORITATIVE_CAUSE_MARKER_RE = /\[authoritative-cause=(resolver-flap|unreachable|persistent)\]/i;
+const AUTHORITATIVE_PERSISTENT_REASONS = new Set([
+  'persistent',
+  'github_models_retirement_brownout',
+  'github_models_catalog_brownout',
+]);
+
+function isAuthoritativePersistentReason(reason) {
+  return AUTHORITATIVE_PERSISTENT_REASONS.has(String(reason || '').toLowerCase());
+}
 
 /** Stable, parseable marker for an authoritative production verdict. */
 export function formatAuthoritativeCauseMarker(value) {
@@ -8640,7 +8649,10 @@ export async function callLLM(messages, opts = {}) {
       // che questo stesso modulo definisce transitorio per costruzione.
       const errorRow = pushError(
         `${model}: ${msg.slice(0, 200).replace(ENTRY_TAIL_SEPARATOR_RE, '')}`,
-        { reason: `${model}: ${msg}`, authoritative: e.nonRetryableReason === 'persistent' ? 'persistent' : null },
+        {
+          reason: `${model}: ${msg}`,
+          authoritative: isAuthoritativePersistentReason(e.nonRetryableReason) ? 'persistent' : null,
+        },
       );
       _recordLastResortOutcome(model, 'failed');
 

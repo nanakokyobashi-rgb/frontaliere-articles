@@ -4,6 +4,7 @@ import { afterEach, beforeEach, describe, test } from 'node:test';
 import {
   AI_MODELS,
   callSingleModel,
+  callLLM,
   classifyNonRetryableError,
   getStats,
   qualifyGitHubModelId,
@@ -118,4 +119,43 @@ test('classifica il brownout 410 solo per GitHub Models', () => {
     nonRetryable: false,
     markExhausted: false,
   });
+});
+
+test('i brownout GitHub sono persistenti nel verdetto aggregato', async () => {
+  const persistentVerdict = (label) => (error) => {
+    assert.equal(error.exhaustionBreakdown.transient, 0, label);
+    assert.equal(error.exhaustionBreakdown.persistent, 1, label);
+    assert.match(error.message, /\[authoritative-cause=persistent\]/, label);
+    return true;
+  };
+
+  globalThis.fetch = async () => new Response(
+    JSON.stringify({ error: { code: 'github_models_retirement_brownout' } }),
+    { status: 410, headers: { 'content-type': 'application/json' } },
+  );
+  await assert.rejects(
+    () => callLLM([{ role: 'user', content: 'x' }], {
+      chain: [AI_MODELS.GPT4O],
+      githubModelsCatalog: [{ id: 'openai/gpt-4o' }],
+      maxRetriesPerModel: 1,
+      recordScore: false,
+    }),
+    persistentVerdict('il 410 di brownout deve votare persistente'),
+  );
+
+  resetState();
+  let fetchCalls = 0;
+  globalThis.fetch = async () => {
+    fetchCalls++;
+    throw new Error('il catalogo non osservabile non deve chiamare il completions endpoint');
+  };
+  await assert.rejects(
+    () => callLLM([{ role: 'user', content: 'x' }], {
+      chain: [AI_MODELS.GPT4O],
+      maxRetriesPerModel: 1,
+      recordScore: false,
+    }),
+    persistentVerdict('il catalogo in brownout deve votare persistente'),
+  );
+  assert.equal(fetchCalls, 0);
 });
