@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/sport/calcio/1944472/infantino-fifa-lamour-critiche-kevin": "infantino-fifa-lamour-licenziato",
   "https://www.rsi.ch/info/salute/dolce-far-niente-ecco-perch%c3%a9-fermarsi-fa-bene--3949560.html": "dolce-far-niente-benessere-svizzera",
   "https://www.tio.ch/ticino/attualita/1940625/dagli-aumenti-alle-liti-in-casa-come-evitare-che-un-affitto-finisca-in-tribunale": "diritto-locazione-conciliazione-ticino",
   "https://www.tio.ch/svizzera/economia/1944505/addebito-app-twint-pagamenti-utenti": "twint-addebito-diretto",
@@ -2437,6 +2436,11 @@
   "https://www.rsi.ch/s/4082782": {
     "articleId": "tassi-interesse-svizzera-bassi",
     "ts": "2026-09-14T19:40:31.778Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4079924": {
+    "articleId": "cartella-sanitaria-mercosur-parlamento",
+    "ts": "2026-09-15T00:10:32.515Z",
     "keyForm": 2
   }
 }
