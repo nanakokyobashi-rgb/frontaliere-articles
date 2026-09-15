@@ -25,12 +25,13 @@
   "derivationEvidence": {
     "Locarnese": {
       "sourceUrl": "https://www.farmacielocarnese.ch/",
+      "catalogFetchedAt": "2026-09-14T10:03:57.824Z",
       "recordCount": 9,
       "records": [
         {
           "source": { "pharmacy": "Amavita Centro", "locality": "Ascona" },
-          "catalog": { "pharmacy": "Farmacia Amavita Centro", "locality": "Ascona", "matchCount": 1 },
-          "matchKey": "ticino|ascona|farmacia amavita centro",
+          "catalog": { "pharmacy": "Farmacia Amavita Centro Ascona", "locality": "Ascona", "matchCount": 1 },
+          "matchKey": "ticino|ascona|farmacia amavita centro ascona",
           "addressCopied": false
         },
         {

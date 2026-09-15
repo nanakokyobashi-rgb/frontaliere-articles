@@ -252,7 +252,30 @@ function rejectAddressFields(value, label) {
   }
 }
 
-function validateLocarneseDerivationEvidence(duty) {
+function validateCatalogueIdentityRecords(ticino) {
+  const label = 'catalogo Ticino.identityRecords';
+  if (!Array.isArray(ticino.identityRecords)) {
+    throw snapshotError(`${label} mancante: serve l'indice reale delle identità del catalogo`);
+  }
+  if (ticino.identityRecordsRecordCount !== ticino.recordCount) {
+    throw snapshotError(`${label} non è legato al recordCount del catalogo`);
+  }
+  if (ticino.identityRecords.length !== ticino.recordCount) {
+    throw snapshotError(`${label} incompleto: attesi ${ticino.recordCount} record, ricevuti ${ticino.identityRecords.length}`);
+  }
+  for (const [index, record] of ticino.identityRecords.entries()) {
+    const recordLabel = `${label}[${index}]`;
+    if (!record || typeof record !== 'object' || Array.isArray(record)) {
+      throw snapshotError(`${recordLabel} deve contenere Farmacia e Località`);
+    }
+    rejectAddressFields(record, recordLabel);
+    normalizedIdentityPart(record.pharmacy, `${recordLabel}.pharmacy`);
+    normalizedIdentityPart(record.locality, `${recordLabel}.locality`);
+  }
+  return ticino.identityRecords;
+}
+
+function validateLocarneseDerivationEvidence(duty, ticino) {
   const label = 'turni snapshot.derivationEvidence.Locarnese';
   const evidence = duty.derivationEvidence?.Locarnese;
   if (!evidence || typeof evidence !== 'object' || Array.isArray(evidence)) {
@@ -268,6 +291,11 @@ function validateLocarneseDerivationEvidence(duty) {
   }
   if (!Array.isArray(evidence.records) || evidence.records.length !== evidence.recordCount) {
     throw snapshotError(`${label}.records deve contenere esattamente ${evidence.recordCount} record`);
+  }
+  const catalogRecords = validateCatalogueIdentityRecords(ticino);
+  if (evidence.catalogFetchedAt !== ticino.identityRecordsFetchedAt
+    || evidence.catalogFetchedAt !== ticino.fetchedAt) {
+    throw snapshotError(`${label}.catalogFetchedAt non corrisponde alla versione del catalogo validata`);
   }
 
   const sourceIdentities = new Set();
@@ -302,12 +330,24 @@ function validateLocarneseDerivationEvidence(duty) {
     }
     catalogIdentities.add(catalogIdentity);
 
-    const catalogMatchKey = canonicalCatalogMatchKey(record.catalog, `${recordLabel}.catalog`);
-    if (record.matchKey !== catalogMatchKey) {
-      throw snapshotError(`${recordLabel}.matchKey non corrisponde al catalogo selezionato`);
+    const catalogMatches = catalogRecords.filter((catalogRecord) => {
+      try {
+        sourceCatalogMatchKey(record.source, catalogRecord, recordLabel);
+        return true;
+      } catch {
+        return false;
+      }
+    });
+    if (catalogMatches.length !== 1) {
+      throw snapshotError(`${recordLabel}: source ha ${catalogMatches.length} corrispondenze nel catalogo reale, attesa 1`);
     }
-    if (sourceCatalogMatchKey(record.source, record.catalog, recordLabel) !== record.matchKey) {
-      throw snapshotError(`${recordLabel}: source non corrisponde al catalogo selezionato`);
+    const catalogMatch = catalogMatches[0];
+    if (identityKey(record.catalog, `${recordLabel}.catalog`) !== identityKey(catalogMatch, `${recordLabel}.catalogReale`)) {
+      throw snapshotError(`${recordLabel}: source/catalog non corrisponde al record reale del catalogo`);
+    }
+    const catalogMatchKey = canonicalCatalogMatchKey(catalogMatch, `${recordLabel}.catalogReale`);
+    if (record.matchKey !== catalogMatchKey) {
+      throw snapshotError(`${recordLabel}.matchKey non corrisponde al record reale del catalogo`);
     }
   }
 
@@ -356,6 +396,15 @@ function validateCatalogueSnapshot(catalog, { nowMs = Date.now() } = {}) {
   requireIsoTimestamp(ticino.fetchedAt, 'catalogo Ticino.fetchedAt', nowMs);
   requirePositiveCount(ticino.recordCount, 'catalogo Ticino.recordCount');
   requireCompleteScope(ticino.completeness, 'catalogo Ticino.completeness', 'ticino', ticino.recordCount);
+  requireString(ticino.identityRecordsSourceUrl, 'catalogo Ticino.identityRecordsSourceUrl');
+  if (ticino.identityRecordsSourceUrl !== ticino.sourceUrl) {
+    throw snapshotError('catalogo Ticino.identityRecordsSourceUrl inatteso');
+  }
+  requireIsoTimestamp(ticino.identityRecordsFetchedAt, 'catalogo Ticino.identityRecordsFetchedAt', nowMs);
+  if (ticino.identityRecordsFetchedAt !== ticino.fetchedAt) {
+    throw snapshotError('catalogo Ticino.identityRecordsFetchedAt non corrisponde a fetchedAt');
+  }
+  validateCatalogueIdentityRecords(ticino);
 
   const italy = byId.get('italy-border');
   if (italy.country !== 'IT') {
@@ -372,7 +421,7 @@ function validateCatalogueSnapshot(catalog, { nowMs = Date.now() } = {}) {
   return { ticino, italy };
 }
 
-function validateDutySnapshot(duty, { nowMs = Date.now() } = {}) {
+function validateDutySnapshot(duty, { nowMs = Date.now(), catalog = null } = {}) {
   if (duty.version !== 1) throw snapshotError('turni snapshot: versione non supportata');
   requireEmptyErrors(duty.errors, 'turni snapshot.errors');
   requireAllowedWarnings(duty.warnings, 'turni snapshot.warnings');
@@ -397,7 +446,7 @@ function validateDutySnapshot(duty, { nowMs = Date.now() } = {}) {
   }
   requireExactArray(scope.includedRegions, EXPECTED_DUTY_REGIONS, 'turni snapshot.scope.includedRegions', { ordered: true });
   requireExactArray(scope.excludedRegions, [], 'turni snapshot.scope.excludedRegions', { ordered: true });
-  validateLocarneseDerivationEvidence(duty);
+  validateLocarneseDerivationEvidence(duty, catalog);
 
   return duty;
 }
@@ -415,7 +464,7 @@ export function validatePharmacySnapshots(snapshots, { nowMs = Date.now() } = {}
     throw snapshotError('bundle snapshot incompleto: servono catalog e duty');
   }
   const catalog = validateCatalogueSnapshot(snapshots.catalog, { nowMs });
-  const duty = validateDutySnapshot(snapshots.duty, { nowMs });
+  const duty = validateDutySnapshot(snapshots.duty, { nowMs, catalog: catalog.ticino });
   return { catalog, duty };
 }
 
@@ -1015,7 +1064,7 @@ const GUIDE_SPECS = Object.freeze([
         focus: 'Ein Leitfaden zur Prüfung der aktuellen Quelle im richtigen Kanton, ohne Kalender zu erfinden oder einen Link als Öffnungszusage zu lesen.',
         detailHeading: 'Was bestätigt ist und was nicht',
         detail: 'Die bestätigten Notdienst-Daten unseres Datensatzes betreffen fünf Tessiner Regionen: Mendrisiotto, Luganese, Bellinzonese, Biasca e Valli und Locarnese. Für das Locarnese wird eine regionale Verbandsquelle genutzt; für andere Kantone nennen wir verfügbare aufrufbare offizielle Links, veröffentlichen aber kein einheitliches Verzeichnis, keine aktive Abdeckung und keine abgeleiteten Öffnungszeiten.',
-        advice: 'Vor der Fahrt die kantonale oder provinzialen Quelle öffnen, ihren veröffentlichten Anweisungen folgen und die Apotheke anrufen. Wenn eine Quelle keinen öffentlichen Feed oder kein Verzeichnis bietet, benennt der Leitfaden dies statt die Lücke mit Annahmen zu füllen.',
+        advice: 'Vor der Fahrt die kantonale oder provinziale Quelle öffnen, ihren veröffentlichten Anweisungen folgen und die Apotheke anrufen. Wenn eine Quelle keinen öffentlichen Feed oder kein Verzeichnis bietet, benennt der Leitfaden dies statt die Lücke mit Annahmen zu füllen.',
         seoDescription: 'Notdienst-Apotheken in der Schweiz und an der Grenze CO/VA/VB: kantonale Quellen prüfen, fünf bestätigte Tessiner Gebiete und klare Grenzen.',
         ogDescription: 'Quellenleitfaden für Notdienst-Apotheken in der Schweiz und an der italienischen Grenze: kein erfundener Kalender, lokal vor der Fahrt prüfen.',
         faq: [
@@ -1144,10 +1193,10 @@ function buildLocalizedMeta(locale, localized, snapshots) {
     fr: `${ticino.recordCount} entrées au Tessin et ${italy.recordCount} entrées dans les provinces CO, VA et VB`,
   }[locale];
   const defaultSeoDescription = {
-    it: 'Farmacie in Ticino e nel confine CO/VA/VB: turni regionali verificati nelle cinque regioni ticinesi, incluso il Locarnese, e limiti del dato. Non è copertura nazionale.',
-    en: 'Ticino and CO/VA/VB pharmacy directories: verified regional duty in all five Ticino regions, including Locarnese, with clear data limits. Not nationwide coverage.',
-    de: 'Apotheken im Tessin und CO/VA/VB: bestätigter regionaler Notdienst in allen fünf Tessiner Regionen einschliesslich Locarnese und klare Datengrenzen. Keine landesweite Abdeckung.',
-    fr: 'Pharmacies du Tessin et de CO/VA/VB : gardes régionales vérifiées dans les cinq régions tessinoises, y compris le Locarnese, et limites claires. Pas de couverture nationale.',
+    it: 'Farmacie Ticino e confine CO/VA/VB: turni verificati in cinque regioni ticinesi, incluso il Locarnese. Non è copertura nazionale.',
+    en: 'Ticino and CO/VA/VB pharmacies: verified duty in five Ticino regions, including Locarnese. Not nationwide coverage.',
+    de: 'Apotheken im Tessin und CO/VA/VB: bestätigter Notdienst in fünf Tessiner Regionen, einschliesslich Locarnese. Keine landesweite Abdeckung.',
+    fr: 'Pharmacies du Tessin et de CO/VA/VB : gardes vérifiées dans cinq régions tessinoises, y compris le Locarnese. Pas de couverture nationale.',
   }[locale];
   const defaultOgDescription = {
     it: `Cataloghi farmacia Ticino e CO/VA/VB: ${countText}; fonti, timestamp e limiti restano espliciti.`,
@@ -1179,7 +1228,7 @@ function buildSeo(spec, snapshots) {
   const regionCount = EXPECTED_DUTY_REGIONS.length;
   return {
     ...spec.seo,
-    description: `${spec.seo.title}: ${ticino.recordCount} record Ticino e ${italy.recordCount} in CO, VA e VB; turni regionali verificati in ${regionCount} aree ticinesi. Non è copertura nazionale.`,
+    description: `${spec.seo.title}: turni regionali verificati in ${regionCount} aree ticinesi. Copertura non nazionale.`,
     ogTitle: spec.seo.title,
     ogDescription: `Cataloghi farmacia per Ticino e confine italiano (${ticino.recordCount} e ${italy.recordCount} record), con turni regionali verificati in ${regionCount} aree ticinesi. Fonti e timestamp chiari.`,
   };

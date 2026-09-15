@@ -83092,7 +83092,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-farmacie-turno-ticino-guida': {
     title: 'Farmacie di turno in Ticino: guida a fonti e copertura',
-    description: 'Farmacie di turno in Ticino: guida a fonti e copertura: 207 record Ticino e 542 in CO, VA e VB; turni regionali verificati in 5 aree ticinesi. Non è copertura',
+    description: 'Farmacie di turno in Ticino: guida a fonti e copertura: 207 record Ticino e 542 in CO, VA e VB; turni verificati in 5 aree. Copertura non nazionale.',
     keywords: 'farmacie di turno Ticino, OFCT, farmacia aperta, turni regionali, Mendrisiotto, Luganese, Bellinzonese',
     ogTitle: 'Farmacie di turno in Ticino: guida a fonti e copertura',
     ogDescription: 'Cataloghi farmacia per Ticino e confine italiano (207 e 542 record), con turni regionali verificati in 5 aree ticinesi. Fonti e timestamp chiari.',
@@ -83101,7 +83101,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Farmacie di turno in Ticino: come leggere fonti e copertura",
-      "description": "Farmacie di turno in Ticino: guida a fonti e copertura: 207 record Ticino e 542 in CO, VA e VB; turni regionali verificati in 5 aree ticinesi. Non è copertura",
+      "description": "Farmacie di turno in Ticino: guida a fonti e copertura: 207 record Ticino e 542 in CO, VA e VB; turni verificati in 5 aree. Copertura non nazionale.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
@@ -83209,7 +83209,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-farmacia-aperta-turno-elenco': {
     title: 'Farmacia aperta o di turno: come leggere l’elenco',
-    description: 'Farmacia aperta o di turno: come leggere l’elenco: 207 record Ticino e 542 in CO, VA e VB; turni regionali verificati in 5 aree ticinesi. Non è copertura',
+    description: 'Farmacia aperta o di turno: come leggere l’elenco: 207 record Ticino e 542 in CO, VA e VB; turni verificati in 5 aree. Copertura non nazionale.',
     keywords: 'farmacia aperta Ticino, farmacia di turno, elenco farmacie, orari farmacia, OFCT',
     ogTitle: 'Farmacia aperta o di turno: come leggere l’elenco',
     ogDescription: 'Cataloghi farmacia per Ticino e confine italiano (207 e 542 record), con turni regionali verificati in 5 aree ticinesi. Fonti e timestamp chiari.',
@@ -83218,7 +83218,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Farmacia aperta o di turno: come leggere l’elenco",
-      "description": "Farmacia aperta o di turno: come leggere l’elenco: 207 record Ticino e 542 in CO, VA e VB; turni regionali verificati in 5 aree ticinesi. Non è copertura",
+      "description": "Farmacia aperta o di turno: come leggere l’elenco: 207 record Ticino e 542 in CO, VA e VB; turni verificati in 5 aree. Copertura non nazionale.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",

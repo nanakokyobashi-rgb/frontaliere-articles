@@ -256,7 +256,27 @@ test('pharmacy evergreen: l’evidenza Locarnese prova identità univoche senza 
   [records[0].matchKey, records[4].matchKey] = [records[4].matchKey, records[0].matchKey];
   assert.throws(
     () => validatePharmacySnapshots(arbitraryPair),
-    /source non corrisponde al catalogo selezionato/,
+    /source\/catalog non corrisponde al record reale del catalogo/,
+  );
+
+  const fabricated = structuredClone(snapshots);
+  fabricated.duty.derivationEvidence.Locarnese.records[0].catalog = {
+    pharmacy: 'Farmacia Inventata',
+    locality: 'Ascona',
+    matchCount: 1,
+  };
+  fabricated.duty.derivationEvidence.Locarnese.records[0].matchKey =
+    'ticino|ascona|farmacia inventata';
+  assert.throws(
+    () => validatePharmacySnapshots(fabricated),
+    /source ha 1 corrispondenze nel catalogo reale|source\/catalog non corrisponde al record reale del catalogo/,
+  );
+
+  const missingIdentityIndex = structuredClone(snapshots);
+  delete missingIdentityIndex.catalog.catalogues[0].identityRecords;
+  assert.throws(
+    () => validatePharmacySnapshots(missingIdentityIndex),
+    /catalogo Ticino\.identityRecords mancante/,
   );
 
   const copiedAddress = structuredClone(snapshots);
@@ -328,9 +348,12 @@ test('pharmacy evergreen: timestamp futuro oltre la tolleranza blocca il produce
   );
 
   const withinTolerance = structuredClone(snapshots);
-  withinTolerance.catalog.catalogues[0].fetchedAt = new Date(
+  const withinToleranceTimestamp = new Date(
     nowMs + SNAPSHOT_FUTURE_TOLERANCE_MS,
   ).toISOString();
+  withinTolerance.catalog.catalogues[0].fetchedAt = withinToleranceTimestamp;
+  withinTolerance.catalog.catalogues[0].identityRecordsFetchedAt = withinToleranceTimestamp;
+  withinTolerance.duty.derivationEvidence.Locarnese.catalogFetchedAt = withinToleranceTimestamp;
   assert.doesNotThrow(
     () => validatePharmacySnapshots(withinTolerance, { nowMs }),
     'un clock skew entro la tolleranza esplicita resta accettabile',
