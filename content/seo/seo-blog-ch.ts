@@ -83246,6 +83246,84 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-cartella-sanitaria-mercosur-parlamento': {
+    title: 'Il sì del Nazionale alla cartella sanitaria elettronica',
+    description: 'Approvata la cartella sanitaria elettronica e l\'accordo Mercosur in Parlamento. Scopri tutti i dettagli sulle nuove misure per la sanità e l\'economia.',
+    keywords: 'frontalieri, ticino, svizzera, italia, nazionale, alla, cartella, sanitaria',
+    ogTitle: 'Il sì del Nazionale alla cartella sanitaria elettronica e Mercosur',
+    ogDescription: 'Il Parlamento svizzero approva la cartella sanitaria elettronica automatica e gratuita per i residenti, l\'accordo di libero scambio Mercosur con 517 milioni per l\'agricoltura e le nuove misure sui farmaci generici.',
+    canonicalPath: '/articoli-svizzera/cartella-sanitaria-mercosur-parlamento/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Il sì del Nazionale alla cartella sanitaria elettronica",
+      "description": "Approvata la cartella sanitaria elettronica e l'accordo Mercosur in Parlamento. Scopri tutti i dettagli sulle nuove misure per la sanità e l'economia.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/cartella-sanitaria-mercosur-parlamento.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Il Palazzo federale a Berna durante i dibattiti parlamentari federali sulla sanità"
+      },
+      "datePublished": "2026-09-15T00:10:32+00:00",
+      "dateModified": "2026-09-15T00:10:32+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/cartella-sanitaria-mercosur-parlamento/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-consiglio-nazionale-cartella-sanitaria': {
+    title: 'Nuova cartella sanitaria elettronica: ok del Consiglio nazionale',
+    description: 'Approvata la legge per la cartella sanitaria elettronica in Svizzera. Sostituirà la vecchia versione entro il 2030 con gestione automatica e gratuita.',
+    keywords: 'frontalieri, ticino, svizzera, italia, nuova, cartella, sanitaria, elettronica',
+    ogTitle: 'Nuova cartella sanitaria elettronica: ok dal Consiglio nazionale',
+    ogDescription: 'Il Consiglio nazionale ha approvato la nuova legge per la cartella sanitaria elettronica. Sostituirà il vecchio sistema entro il 2030 con apertura automatica per i residenti.',
+    canonicalPath: '/articoli-svizzera/consiglio-nazionale-cartella-sanitaria/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Nuova cartella sanitaria elettronica: ok del Consiglio nazionale",
+      "description": "Approvata la legge per la cartella sanitaria elettronica in Svizzera. Sostituirà la vecchia versione entro il 2030 con gestione automatica e gratuita.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/consiglio-nazionale-cartella-sanitaria.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Nuova cartella sanitaria elettronica approvata in Svizzera"
+      },
+      "datePublished": "2026-09-15T00:26:33+00:00",
+      "dateModified": "2026-09-15T00:26:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/consiglio-nazionale-cartella-sanitaria/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

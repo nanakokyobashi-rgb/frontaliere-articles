@@ -11753,6 +11753,12 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-09-14.imageAlt': 'The day\'s numbers for cross-border commuters – September 14, 2026: border waits, fuel prices, CHF-EUR rate and job listings',
     'blog.article.bollettino-frontaliere-2026-09-14.seoDescription': 'Cross-border brief, September 14, 2026: queues at the crossings this morning, where fuel is cheapest, the franc-euro rate and new job postings in Switzerland.',
     'blog.article.bollettino-frontaliere-2026-09-14.ogDescription': 'The numbers for September 14, 2026, for cross-border commuters: how long the queue is at each crossing this morning, which towns have the cheapest fuel, what the franc is worth today and how many Swiss jobs went up.',
+    'blog.article.premi-cassa-malati-2027-ticino.title': 'Health insurance premiums 2027 in Ticino: question to the Government',
+    'blog.article.premi-cassa-malati-2027-ticino.excerpt': 'The Grand Councillors Censi and Genini present a question to the Council of State on the sick pay premiums 2027 and on the estimates of increase in Ticino.',
+    'blog.article.premi-cassa-malati-2027-ticino.imageAlt': 'Government building in Bellinzona and panoramic view in Ticino',
+    'blog.article.stipendi-como-lombardia-2024.title': 'Average salary in Como and Lombardy: 2024 data',
+    'blog.article.stipendi-como-lombardia-2024.excerpt': 'In 2024 the average annual salary in Lombardy rises to 30,384.07 euros, but almost half of the workers do not exceed 25,000 euros.',
+    'blog.article.stipendi-como-lombardia-2024.imageAlt': 'Average salaries and wages in Lombardy and Como',
 };
 
 export default blogMetaEn;

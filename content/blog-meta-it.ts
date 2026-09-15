@@ -11754,6 +11754,12 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-09-14.imageAlt': 'I numeri del giorno per i frontalieri – 14 settembre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro',
     'blog.article.bollettino-frontaliere-2026-09-14.seoDescription': 'Bollettino frontalieri del 14 settembre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
     'blog.article.bollettino-frontaliere-2026-09-14.ogDescription': 'I numeri del 14 settembre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    'blog.article.premi-cassa-malati-2027-ticino.title': 'Premi cassa malati 2027 in Ticino: interrogazione al Governo',
+    'blog.article.premi-cassa-malati-2027-ticino.excerpt': 'I granconsiglieri Censi e Genini presentano un\'interrogazione al Consiglio di Stato sui premi cassa malati 2027 e sulle stime di aumento in Ticino.',
+    'blog.article.premi-cassa-malati-2027-ticino.imageAlt': 'Palazzo del Governo a Bellinzona e vista panoramica in Ticino',
+    'blog.article.stipendi-como-lombardia-2024.title': 'Stipendio medio a Como e in Lombardia: i dati del 2024',
+    'blog.article.stipendi-como-lombardia-2024.excerpt': 'Nel 2024 la retribuzione media annua in Lombardia sale a 30.384,07 euro, ma quasi la metà dei lavoratori non supera i 25.000 euro.',
+    'blog.article.stipendi-como-lombardia-2024.imageAlt': 'Stipendi medi e retribuzioni in Lombardia e Como',
 };
 
 export default blogMetaIt;

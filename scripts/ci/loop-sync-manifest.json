@@ -1645,6 +1645,26 @@
       }
     },
     {
+      "path": "generator/scripts/lib/gh-models-endpoint.mjs",
+      "sitePath": "scripts/lib/gh-models-endpoint.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "54471fab96b10436",
+        "corpus": "54471fab96b10436",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/provider-preflight.mjs",
+      "mode": "corpus-only",
+      "reason": "Preflight zero-inference che censisce i provider disponibili prima delle chiamate del generatore e distingue credenziali mancanti, rete irraggiungibile e quota bloccata. E' consumato dai workflow di produzione del corpus; il sito non possiede il gemello ne' questi entry point del generatore, quindi non c'e' nulla da portare.",
+      "baseline": {
+        "site": null,
+        "corpus": "62f8a56123f2f8ff",
+        "alignedAt": "2026-09-14"
+      }
+    },
+    {
       "path": "generator/scripts/lib/ai-search-template.mjs",
       "sitePath": "scripts/lib/ai-search-template.mjs",
       "mode": "identical",
@@ -3896,16 +3916,6 @@
       "baseline": {
         "site": null,
         "corpus": "c55b0b7721edc444",
-        "alignedAt": "2026-09-14"
-      }
-    },
-    {
-      "path": "generator/scripts/lib/provider-preflight.mjs",
-      "mode": "corpus-only",
-      "reason": "Preflight zero-inference che censisce i provider disponibili prima delle chiamate del generatore e distingue credenziali mancanti, rete irraggiungibile e quota bloccata. E' consumato dai workflow di produzione del corpus; il sito non possiede il gemello ne' questi entry point del generatore, quindi non c'e' nulla da portare.",
-      "baseline": {
-        "site": null,
-        "corpus": "080c5caa7a296fa9",
         "alignedAt": "2026-09-14"
       }
     },

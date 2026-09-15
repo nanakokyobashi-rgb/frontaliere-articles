@@ -6420,6 +6420,12 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.farmacia-aperta-turno-elenco.imageAlt': 'Castelgrande à Bellinzone, Tessin',
     'blog.article.farmacia-aperta-turno-elenco.seoDescription': 'Pharmacies du Tessin et de CO/VA/VB : gardes OFCT régionales et limites claires. Pas de couverture nationale.',
     'blog.article.farmacia-aperta-turno-elenco.ogDescription': 'Répertoires du Tessin et de CO/VA/VB : 207 entrées au Tessin et 542 entrées dans les provinces CO, VA et VB ; sources, horodatage et limites sont explicites.',
+    'blog.article.cartella-sanitaria-mercosur-parlamento.title': 'Le oui du National au dossier de santé électronique',
+    'blog.article.cartella-sanitaria-mercosur-parlamento.excerpt': 'Le dossier médical électronique, l\'accord Mercosur et les fonds pour l\'agriculture suisse ont été approuvés par le Parlement.',
+    'blog.article.cartella-sanitaria-mercosur-parlamento.imageAlt': 'Le Palais fédéral à Berne lors des débats parlementaires sur la santé',
+    'blog.article.consiglio-nazionale-cartella-sanitaria.title': 'Nouveau dossier médical électronique : OK DU Conseil national',
+    'blog.article.consiglio-nazionale-cartella-sanitaria.excerpt': 'La loi pour le nouveau dossier médical électronique en Suisse a été approuvée. Il remplacera l\'infrastructure précédente d\'ici 2030.',
+    'blog.article.consiglio-nazionale-cartella-sanitaria.imageAlt': 'Nouveau dossier sanitaire électronique approuvé en Suisse',
 };
 
 export default blogMetaChFr;

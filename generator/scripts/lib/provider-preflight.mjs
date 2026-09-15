@@ -16,7 +16,9 @@ import {
   AI_MODELS,
   DEFAULT_CHAIN,
   getApiKeyForProvider,
+  getGhModelsPats,
   getProviderForModel,
+  GH_MODELS_CATALOG_URL,
 } from './ai-models.mjs';
 
 export const PROVIDER_PREFLIGHT_TIMEOUT_MS = 8_000;
@@ -32,7 +34,9 @@ const DISCOVERY_ENDPOINTS = Object.freeze({
 // workflow. ai-models.mjs remains the source of truth for provider selection
 // and credentials; this table only describes the cheapest safe probe.
 const PROVIDER_PROBES = {
-  github: { url: 'https://models.inference.ai.azure.com/chat/completions', mode: 'dns' },
+  // The runtime chat route is POST-only. Probe the observed catalog instead,
+  // so a healthy endpoint cannot be misreported as unavailable on GET 405.
+  github: { url: GH_MODELS_CATALOG_URL, mode: 'catalog' },
   gemini: { url: 'https://generativelanguage.googleapis.com/v1beta/models', mode: 'catalog', auth: 'query' },
   together: { url: 'https://api.together.xyz/v1/models', mode: 'catalog' },
   fireworks: { url: 'https://api.fireworks.ai/inference/v1/models', mode: 'catalog' },
@@ -71,6 +75,7 @@ export function classifyProviderProbe({
   mode = 'catalog',
   dnsError = null,
   networkError = null,
+  provider = null,
   httpStatus = null,
 } = {}) {
   if (!configured) {
@@ -91,6 +96,9 @@ export function classifyProviderProbe({
   }
   if (httpStatus === null || httpStatus === undefined) {
     return { status: 'ready', reason: 'dns_resolved_quota_unprobed', quota: 'unprobed' };
+  }
+  if (provider === 'github' && httpStatus === 410) {
+    return { status: 'provider_unavailable', reason: 'github_models_retirement_brownout', quota: 'unknown' };
   }
   if (httpStatus === 401 || httpStatus === 403) {
     return { status: 'credential_rejected', reason: 'credential_rejected', quota: 'unknown' };
@@ -122,12 +130,15 @@ async function probeProvider(group, {
   lookup = dns.lookup,
   timeoutMs = PROVIDER_PREFLIGHT_TIMEOUT_MS,
 } = {}) {
-  let configured = false;
+  let apiKeys = [];
   try {
-    configured = Boolean(getApiKeyForProvider(group.provider));
+    apiKeys = group.provider === 'github'
+      ? getGhModelsPats()
+      : [getApiKeyForProvider(group.provider)].filter(Boolean);
   } catch {
     return { ...group, status: 'credential_rejected', reason: 'credential_config_invalid', quota: 'unknown' };
   }
+  const configured = apiKeys.length > 0;
 
   const probe = PROVIDER_PROBES[group.provider] || { url: null, mode: 'local' };
   const base = {
@@ -136,53 +147,64 @@ async function probeProvider(group, {
     probe: probe.mode,
     endpoint: probe.url ? new URL(probe.url).hostname : null,
   };
-  if (!configured) return { ...base, ...classifyProviderProbe({ configured, mode: probe.mode }) };
-  if (probe.mode === 'local') return { ...base, ...classifyProviderProbe({ configured, mode: probe.mode }) };
+  if (!configured) return { ...base, ...classifyProviderProbe({ provider: group.provider, configured, mode: probe.mode }) };
+  if (probe.mode === 'local') return { ...base, ...classifyProviderProbe({ provider: group.provider, configured, mode: probe.mode }) };
 
   const endpoint = new URL(probe.url);
   try {
     await lookup(endpoint.hostname);
   } catch (error) {
-    return { ...base, ...classifyProviderProbe({ configured, mode: probe.mode, dnsError: error }), error: safeErrorReason(error) };
+    return { ...base, ...classifyProviderProbe({ provider: group.provider, configured, mode: probe.mode, dnsError: error }), error: safeErrorReason(error) };
   }
   if (probe.mode === 'dns') {
-    return { ...base, ...classifyProviderProbe({ configured, mode: probe.mode }) };
+    return { ...base, ...classifyProviderProbe({ provider: group.provider, configured, mode: probe.mode }) };
   }
   if (typeof fetchImpl !== 'function') {
     return {
       ...base,
-      ...classifyProviderProbe({ configured, mode: probe.mode, networkError: 'fetch_unavailable' }),
+      ...classifyProviderProbe({ provider: group.provider, configured, mode: probe.mode, networkError: 'fetch_unavailable' }),
       error: 'fetch_unavailable',
     };
   }
 
-  const headers = {
-    Accept: 'application/json',
-    Authorization: 'Bearer ' + getApiKeyForProvider(group.provider),
-  };
-  let url = probe.url;
-  if (probe.auth === 'query') {
-    const query = new URL(url);
-    query.searchParams.set('key', getApiKeyForProvider(group.provider));
-    url = query.toString();
-    delete headers.Authorization;
-  }
-  try {
-    const response = await fetchImpl(url, {
-      method: 'GET',
-      headers,
-      redirect: 'manual',
-      signal: AbortSignal.timeout(normalizeTimeoutMs(timeoutMs)),
-    });
-    return {
-      ...base,
-      ...classifyProviderProbe({ configured, mode: probe.mode, httpStatus: response.status }),
-      httpStatus: response.status,
+  let lastResult = null;
+  for (const apiKey of apiKeys) {
+    const headers = {
+      Accept: 'application/json',
+      Authorization: 'Bearer ' + apiKey,
     };
-  } catch (error) {
-    const reason = safeErrorReason(error);
-    return { ...base, ...classifyProviderProbe({ configured, mode: probe.mode, networkError: reason }), error: reason };
+    let url = probe.url;
+    if (probe.auth === 'query') {
+      const query = new URL(url);
+      query.searchParams.set('key', apiKey);
+      url = query.toString();
+      delete headers.Authorization;
+    }
+    try {
+      const response = await fetchImpl(url, {
+        method: 'GET',
+        headers,
+        redirect: 'manual',
+        signal: AbortSignal.timeout(normalizeTimeoutMs(timeoutMs)),
+      });
+      lastResult = {
+        ...base,
+        ...classifyProviderProbe({ provider: group.provider, configured, mode: probe.mode, httpStatus: response.status }),
+        httpStatus: response.status,
+      };
+      // One usable account is enough to keep GitHub in the generation pool;
+      // the runtime rotates the same PAT set for the actual request.
+      if (lastResult.status === 'ready') return lastResult;
+    } catch (error) {
+      const reason = safeErrorReason(error);
+      lastResult = {
+        ...base,
+        ...classifyProviderProbe({ provider: group.provider, configured, mode: probe.mode, networkError: reason }),
+        error: reason,
+      };
+    }
   }
+  return lastResult || { ...base, ...classifyProviderProbe({ provider: group.provider, configured, mode: probe.mode }) };
 }
 
 export function summarizeProviderPreflight(providers, generatedAt = new Date().toISOString()) {
