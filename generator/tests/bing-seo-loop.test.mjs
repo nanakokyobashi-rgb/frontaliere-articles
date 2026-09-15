@@ -62,6 +62,38 @@ test('applyFixes rejects an unapproved editorial source drift', () => {
   );
 });
 
+test('source locators ignore comments and reject duplicate real entries', () => {
+  const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
+  const contents = new Map(BING_TITLE_FIXES.map((fix) => [
+    fix.source,
+    readFileSync(resolve(repoRoot, fix.source), 'utf8'),
+  ]));
+  const firstFix = BING_TITLE_FIXES[0];
+  const original = contents.get(firstFix.source);
+  contents.set(
+    firstFix.source,
+    "/*\n  '" + firstFix.articleId + "': { title: 'fake' }\n*/\n" + original,
+  );
+  assert.doesNotThrow(() => applyFixes({
+    repoRoot,
+    readFile: (absolutePath) => contents.get(relative(repoRoot, absolutePath)),
+    writeFile: () => assert.fail('il contenuto già approvato non deve essere scritto'),
+  }));
+
+  contents.set(
+    firstFix.source,
+    original + "\n  '" + firstFix.articleId + "': { title: 'duplicate' },\n",
+  );
+  assert.throws(
+    () => applyFixes({
+      repoRoot,
+      readFile: (absolutePath) => contents.get(relative(repoRoot, absolutePath)),
+      writeFile: () => assert.fail('una voce duplicata non deve essere scritta'),
+    }),
+    /Entry duplicata/,
+  );
+});
+
 test('live audit accepts canonical attributes in either order and numeric entities', async () => {
   const htmlByUrl = new Map(BING_TITLE_FIXES.map((fix) => [
     fix.url,

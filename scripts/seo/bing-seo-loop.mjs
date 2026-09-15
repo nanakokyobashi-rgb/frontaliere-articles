@@ -83,31 +83,117 @@ function extractHtmlContract(html) {
   return { title, canonical };
 }
 
+function maskTsComments(value) {
+  const source = String(value || '');
+  const chars = source.split('');
+  let state = 'code';
+
+  for (let index = 0; index < source.length; index += 1) {
+    const char = source[index];
+    if (state === 'code') {
+      if (char === "'" || char === '"' || char === '`') {
+        state = char;
+        continue;
+      }
+      if (char === '/' && source[index + 1] === '/') {
+        chars[index] = ' ';
+        chars[index + 1] = ' ';
+        state = 'line-comment';
+        index += 1;
+        continue;
+      }
+      if (char === '/' && source[index + 1] === '*') {
+        chars[index] = ' ';
+        chars[index + 1] = ' ';
+        state = 'block-comment';
+        index += 1;
+      }
+      continue;
+    }
+
+    if (state === 'line-comment') {
+      if (char === '\n') state = 'code';
+      else chars[index] = ' ';
+      continue;
+    }
+
+    if (state === 'block-comment') {
+      if (char === '*' && source[index + 1] === '/') {
+        chars[index] = ' ';
+        chars[index + 1] = ' ';
+        state = 'code';
+        index += 1;
+      } else if (char !== '\n') {
+        chars[index] = ' ';
+      }
+      continue;
+    }
+
+    if (char === '\\') index += 1;
+    else if (char === state) state = 'code';
+  }
+
+  return chars.join('');
+}
+
 function articleBlock(source, articleId) {
-  const marker = "  '" + articleId + "': {";
-  const start = source.indexOf(marker);
-  if (start < 0) throw new Error('Entry non trovato: ' + articleId);
-  const next = source.indexOf("\n  'blog-", start + marker.length);
+  const masked = maskTsComments(source);
+  const entries = [...masked.matchAll(/^  '([^']+)':\s*{/gm)];
+  const matches = entries.filter((entry) => entry[1] === articleId);
+  if (matches.length === 0) throw new Error('Entry non trovata: ' + articleId);
+  if (matches.length !== 1) throw new Error('Entry duplicata: ' + articleId);
+  const target = matches[0];
+  const start = target.index;
+  const next = entries.find((entry) => entry.index > start);
+  const end = next ? next.index : source.length;
+  return { start, end, text: source.slice(start, end) };
+}
+
+function singleQuotedPropertyLocator(block, property) {
+  const masked = maskTsComments(block);
+  const pattern = new RegExp(
+    "((?:^|\\n)\\s*" + escapeRegex(property) + ":\\s*)'((?:\\\\.|[^'])*)'",
+    'gm',
+  );
+  const matches = [...masked.matchAll(pattern)];
+  if (matches.length === 0) throw new Error('Proprietà non trovata: ' + property);
+  if (matches.length !== 1) throw new Error('Proprietà duplicata: ' + property);
+  const match = matches[0];
+  const valueStart = match.index + match[1].length;
   return {
-    start,
-    end: next < 0 ? source.length : next,
-    text: source.slice(start, next < 0 ? source.length : next),
+    value: decodeTsSingleQuote(match[2]),
+    valueStart,
+    valueEnd: valueStart + match[2].length + 2,
+  };
+}
+
+function structuredHeadlineLocator(block) {
+  const masked = maskTsComments(block);
+  const pattern = /((?:^|\n)\s*"headline":\s*)"((?:\\.|[^"])*)"/gm;
+  const matches = [...masked.matchAll(pattern)];
+  if (matches.length === 0) throw new Error('Structured headline non trovato');
+  if (matches.length !== 1) throw new Error('Structured headline duplicato');
+  const match = matches[0];
+  const valueStart = match.index + match[1].length;
+  return {
+    value: JSON.parse('"' + match[2] + '"'),
+    valueStart,
+    valueEnd: valueStart + match[2].length + 2,
   };
 }
 
 function replaceSingleQuotedProperty(block, property, title) {
-  const pattern = new RegExp(
-    "(\\n\\s*" + property + ":\\s*)'((?:\\\\.|[^'])*)'",
-    'm',
-  );
-  if (!pattern.test(block)) throw new Error('Proprietà non trovata: ' + property);
-  return block.replace(pattern, (_match, prefix) => prefix + "'" + escapeTsSingleQuote(title) + "'");
+  const locator = singleQuotedPropertyLocator(block, property);
+  return block.slice(0, locator.valueStart)
+    + "'" + escapeTsSingleQuote(title) + "'"
+    + block.slice(locator.valueEnd);
 }
 
 function replaceHeadline(block, title) {
-  const pattern = /(\n\s*"headline":\s*)"((?:\\.|[^"])*)"/m;
-  if (!pattern.test(block)) throw new Error('Structured headline non trovato');
-  return block.replace(pattern, (_match, prefix) => prefix + JSON.stringify(title));
+  const locator = structuredHeadlineLocator(block);
+  return block.slice(0, locator.valueStart)
+    + JSON.stringify(title)
+    + block.slice(locator.valueEnd);
 }
 
 function replaceSeoEntry(source, fix) {
@@ -121,36 +207,28 @@ function replaceSeoEntry(source, fix) {
 
 function replaceMetaEntry(source, fix) {
   const key = escapeRegex(fix.metadataKey);
+  const masked = maskTsComments(source);
   const pattern = new RegExp(
-    "(['\"]" + key + "['\"]:\\s*)'((?:\\\\.|[^'])*)'",
+    "((?:['\"]" + key + "['\"]):\\s*)'((?:\\\\.|[^'])*)'",
+    'g',
   );
-  if (!pattern.test(source)) throw new Error('Metadata key non trovato: ' + fix.metadataKey);
-  return source.replace(pattern, (_match, prefix) => prefix + "'" + escapeTsSingleQuote(fix.title) + "'");
-}
-
-function singleQuotedPropertyValue(block, property) {
-  const pattern = new RegExp(
-    "(?:^|\\n)\\s*" + escapeRegex(property) + ":\\s*'((?:\\\\.|[^'])*)'",
-    'm',
-  );
-  const match = block.match(pattern);
-  if (!match) throw new Error('Proprietà non trovata: ' + property);
-  return decodeTsSingleQuote(match[1]);
-}
-
-function structuredHeadlineValue(block) {
-  const match = block.match(/(?:^|\n)\s*"headline":\s*"((?:\\.|[^"])*)"/m);
-  if (!match) throw new Error('Structured headline non trovato');
-  return JSON.parse('"' + match[1] + '"');
+  const matches = [...masked.matchAll(pattern)];
+  if (matches.length === 0) throw new Error('Metadata key non trovato: ' + fix.metadataKey);
+  if (matches.length !== 1) throw new Error('Metadata key duplicato: ' + fix.metadataKey);
+  const match = matches[0];
+  const valueStart = match.index + match[1].length;
+  return source.slice(0, valueStart)
+    + "'" + escapeTsSingleQuote(fix.title) + "'"
+    + source.slice(valueStart + match[2].length + 2);
 }
 
 function sourceTitleValue(source, fix) {
   if (fix.kind === 'seo') {
     const block = articleBlock(source, fix.articleId).text;
     const values = [
-      singleQuotedPropertyValue(block, 'title'),
-      singleQuotedPropertyValue(block, 'ogTitle'),
-      structuredHeadlineValue(block),
+      singleQuotedPropertyLocator(block, 'title').value,
+      singleQuotedPropertyLocator(block, 'ogTitle').value,
+      structuredHeadlineLocator(block).value,
     ];
     if (new Set(values).size !== 1) {
       throw new Error('Valori title/ogTitle/headline incoerenti per ' + fix.articleId);
@@ -159,12 +237,15 @@ function sourceTitleValue(source, fix) {
   }
 
   const key = escapeRegex(fix.metadataKey);
+  const masked = maskTsComments(source);
   const pattern = new RegExp(
-    "['\"]" + key + "['\"]:\\s*'((?:\\\\.|[^'])*)'",
+    "((?:['\"]" + key + "['\"]):\\s*)'((?:\\\\.|[^'])*)'",
+    'g',
   );
-  const match = source.match(pattern);
-  if (!match) throw new Error('Metadata key non trovato: ' + fix.metadataKey);
-  return decodeTsSingleQuote(match[1]);
+  const matches = [...masked.matchAll(pattern)];
+  if (matches.length === 0) throw new Error('Metadata key non trovato: ' + fix.metadataKey);
+  if (matches.length !== 1) throw new Error('Metadata key duplicato: ' + fix.metadataKey);
+  return decodeTsSingleQuote(matches[0][2]);
 }
 
 function applyFixToSource(source, fix) {
@@ -206,13 +287,6 @@ export function applyFixes({
   return { changed: changedFiles.size > 0, files: [...changedFiles] };
 }
 
-function hasSeoTitle(block, title) {
-  const escaped = escapeTsSingleQuote(title);
-  return block.includes("title: '" + escaped + "'")
-    && block.includes("ogTitle: '" + escaped + "'")
-    && block.includes('"headline": ' + JSON.stringify(title));
-}
-
 export function checkSource({ repoRoot = REPO_ROOT } = {}) {
   const findings = [];
   const seenUrls = new Set();
@@ -243,18 +317,8 @@ export function checkSource({ repoRoot = REPO_ROOT } = {}) {
     }
 
     try {
-      if (fix.kind === 'seo') {
-        if (!hasSeoTitle(articleBlock(source, fix.articleId).text, fix.title)) {
-          findings.push({ code: 'source-title-drift', file: fix.source, url: fix.url });
-        }
-      } else {
-        const expected = new RegExp(
-          "['\"]" + escapeRegex(fix.metadataKey) + "['\"]:\\s*'((?:\\\\.|[^'])*)'",
-        );
-        const match = source.match(expected);
-        if (!match || decodeTsSingleQuote(match[1]) !== fix.title) {
-          findings.push({ code: 'source-title-drift', file: fix.source, url: fix.url });
-        }
+      if (sourceTitleValue(source, fix) !== fix.title) {
+        findings.push({ code: 'source-title-drift', file: fix.source, url: fix.url });
       }
     } catch (error) {
       findings.push({ code: 'source-entry-missing', file: fix.source, detail: error.message });

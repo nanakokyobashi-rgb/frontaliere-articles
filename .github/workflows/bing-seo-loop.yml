@@ -169,11 +169,13 @@ jobs:
               fi
               export GH_TOKEN="$token"
               dispatch_started_at="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-              gh workflow run publish-api.yml --repo "$GITHUB_REPOSITORY" --ref main
+              dispatch_nonce="bing-seo-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-$(date -u +%Y%m%dT%H%M%SZ)"
+              gh workflow run publish-api.yml --repo "$GITHUB_REPOSITORY" --ref main \
+                -f bing_seo_nonce="$dispatch_nonce"
               publish_run=''
               for attempt in $(seq 1 24); do
                 echo "Cerco la run publish-api.yml dopo il dispatch (tentativo $attempt/24)."
-                publish_run="$(gh run list --repo "$GITHUB_REPOSITORY" --workflow publish-api.yml --event workflow_dispatch --branch main --limit 20 --json databaseId,createdAt --jq "map(select(.createdAt >= \"$dispatch_started_at\")) | sort_by(.createdAt) | last | .databaseId // empty" 2>/dev/null || true)"
+                publish_run="$(gh run list --repo "$GITHUB_REPOSITORY" --workflow publish-api.yml --event workflow_dispatch --branch main --limit 20 --json databaseId,createdAt,displayTitle --jq "map(select(.createdAt >= \"$dispatch_started_at\" and (.displayTitle | contains(\"$dispatch_nonce\")))) | sort_by(.createdAt) | last | .databaseId // empty" 2>/dev/null || true)"
                 if [ -n "$publish_run" ]; then
                   break
                 fi
@@ -246,3 +248,9 @@ jobs:
       - name: Report unresolved live findings
         if: (steps.audit.outcome == 'failure' || steps.source.outcome == 'failure') && steps.reconcile.outputs.republished != 'true'
         run: echo "::warning::La policy sorgente o la superficie live ha ancora finding; il report è allegato e il ciclo successivo riverificherà dopo la pubblicazione API."
+
+      - name: Fail audit-only manual dispatch on unresolved findings
+        if: github.event_name == 'workflow_dispatch' && inputs.apply_fixes == false && (steps.audit.outcome == 'failure' || steps.source.outcome == 'failure')
+        run: |
+          echo '::error::Audit-only Bing SEO fallito: la superficie o la policy sorgente richiede riconciliazione.'
+          exit 1
