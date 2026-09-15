@@ -1418,7 +1418,7 @@
       "file": "translate-pending.yml",
       "sourceLogic": "translate-pending-logic.yml",
       "sourceSha256": "22ffc13f6613a5492c5dddddfbb3450ab1316092972a81dfbfaaf09a5f0128ac",
-      "artifactSha256": "0fd66752f87071703cd9f8e0368cf4e9bb5aebb2e11b1e8f7e5199a0b6ac7a0b",
+      "artifactSha256": "3abf38f4b23020442f305f90311075275dde8a0e9b70bc578f5e870f8f9c4d75",
       "generatorSha256": "4205dd5ee5504ad5947ce3c56e60e687669c5101d1a82121252ae34e109aa9da",
       "members": []
     }
