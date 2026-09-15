@@ -356,6 +356,10 @@ jobs:
               fi
             done < <(node -e 'for (const p of require("/tmp/transport-fallback.json").excludedPaths || []) console.log(p)')
             git add -- scripts/ci/loop-sync-manifest.json
+            if git diff --cached --quiet HEAD^; then
+              echo "Dopo l'esclusione non restano path non-workflow nel tree: nessuna PR apribile."
+              exit 0
+            fi
             git commit --amend --no-edit
             PORTED=$(node -e 'console.log(require("/tmp/transport.json").transported.length)')
             if git diff --quiet HEAD^ HEAD; then

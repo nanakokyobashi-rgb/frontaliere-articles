@@ -67,6 +67,28 @@ test('il fallback seleziona tutti e soli i workflow del commit', () => {
   );
 });
 
+test('un batch solo-workflow esce prima dell\'amend e non apre una PR vuota', () => {
+  const classification = classifyWorkflowPushFailure(refusal);
+  const workflowPaths = selectWorkflowFallbackPaths(classification, [
+    '.github/workflows/crawler-group-01.yml',
+    '.github/workflows/crawler-group-02.yml',
+  ]);
+  const report = removeWorkflowPathsFromReport({
+    manifestChanged: true,
+    transported: workflowPaths.map((path) => ({ path })),
+  }, workflowPaths);
+  assert.deepEqual(report.transported, []);
+
+  const source = fs.readFileSync(path.join(ROOT, '.github/workflows/transport-identical-twins.yml'), 'utf8');
+  const noTreeChange = source.indexOf('if git diff --cached --quiet HEAD^; then');
+  const amend = source.indexOf('git commit --amend --no-edit', noTreeChange);
+  const create = source.indexOf('gh pr create', noTreeChange);
+  assert.ok(noTreeChange >= 0, 'manca il guard del tree dopo l\'esclusione workflow');
+  assert.ok(amend > noTreeChange, 'l\'amend deve arrivare dopo il guard');
+  assert.ok(create > amend, 'gh pr create deve restare dopo l\'amend');
+  assert.match(source.slice(noTreeChange, amend), /non restano path non-workflow[\s\S]*exit 0/);
+});
+
 test('il report conserva native-automerge e nomina i workflow esclusi', () => {
   const report = {
     apply: true,
