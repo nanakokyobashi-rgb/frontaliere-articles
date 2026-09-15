@@ -37,3 +37,7 @@ test('translate-pending mantiene full la popolazione usata da baseline e cascade
     /--mode start --jobs data\/jobs\.json/,
   );
 });
+
+test('translate-pending non abilita il lease Firestore per il proprio mutex GitHub', () => {
+  assert.doesNotMatch(WORKFLOW, /^\s+DATA_PIPELINE_LEASE:/m);
+});
