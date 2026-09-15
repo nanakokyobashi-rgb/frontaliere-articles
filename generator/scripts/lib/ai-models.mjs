@@ -727,10 +727,13 @@ function _githubModelsCatalogTransportError(message, status = 0) {
 function _githubCatalogEntries(catalog) {
   if (Array.isArray(catalog)) return catalog;
   if (!catalog || typeof catalog !== 'object') return [];
-  for (const key of ['models', 'data', 'items']) {
-    if (Array.isArray(catalog[key])) return catalog[key];
-  }
-  return [];
+  const arrays = ['models', 'data', 'items']
+    .filter((key) => Object.prototype.hasOwnProperty.call(catalog, key))
+    .filter((key) => Array.isArray(catalog[key]))
+    .map((key) => catalog[key]);
+  const populated = arrays.filter((entries) => entries.length > 0);
+  if (populated.length > 1) return null;
+  return populated[0] || arrays[0] || [];
 }
 
 function _githubCatalogPublisher(entry) {
@@ -759,8 +762,12 @@ export function qualifyGitHubModelId(model, catalog) {
     );
   }
 
+  const entries = _githubCatalogEntries(catalog);
+  if (entries === null) {
+    throw _githubModelsCatalogTransportError('envelope JSON ambiguo: piu liste popolate');
+  }
   const qualified = new Set();
-  for (const entry of _githubCatalogEntries(catalog)) {
+  for (const entry of entries) {
     const values = typeof entry === 'string'
       ? [entry]
       : [entry?.id, entry?.model, entry?.modelId, entry?.name];
@@ -841,6 +848,9 @@ async function _getGitHubModelsCatalog(apiKey, timeout) {
     const hasCatalogArray = Array.isArray(parsed)
       || ['models', 'data', 'items'].some((key) => Array.isArray(parsed?.[key]));
     if (!hasCatalogArray) throw _githubModelsCatalogTransportError('forma JSON non valida');
+    if (_githubCatalogEntries(parsed) === null) {
+      throw _githubModelsCatalogTransportError('envelope JSON ambiguo: piu liste popolate');
+    }
     return parsed;
   })();
   const tracked = promise.catch((error) => {
