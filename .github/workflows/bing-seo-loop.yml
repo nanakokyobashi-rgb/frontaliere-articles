@@ -96,6 +96,8 @@ jobs:
         if: ${{ github.event_name == 'schedule' || inputs.apply_fixes == true }}
         run: |
           set -euo pipefail
+          git config user.name 'frontaliere-automation[bot]'
+          git config user.email 'frontaliere-automation[bot]@users.noreply.github.com'
           git fetch origin main
           branch='automation/bing-seo-titles'
           if git ls-remote --exit-code --heads origin "$branch" >/dev/null 2>&1; then
@@ -197,8 +199,6 @@ jobs:
             expected_remote_tip="$(git rev-parse "refs/remotes/origin/$branch")"
           fi
           git remote set-url origin "https://x-access-token:$token@github.com/$GITHUB_REPOSITORY.git"
-          git config user.name 'frontaliere-automation[bot]'
-          git config user.email 'frontaliere-automation[bot]@users.noreply.github.com'
           if [ "$working_content_diff" = 'true' ]; then
             git add content/
             git commit -m 'fix(seo): shorten Bing article titles'
