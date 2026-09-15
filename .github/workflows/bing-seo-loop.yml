@@ -35,6 +35,8 @@ jobs:
           persist-credentials: false
           sparse-checkout: |
             AGENTS.md
+            .github/workflows/bing-seo-loop.yml
+            .github/workflows/publish-api.yml
             content/
             scripts/seo/
             generator/tests/bing-seo-loop.test.mjs
@@ -144,6 +146,7 @@ jobs:
         if: ${{ github.event_name == 'schedule' || inputs.apply_fixes == true }}
         env:
           AUDIT_OUTCOME: ${{ steps.audit.outcome }}
+          SOURCE_OUTCOME: ${{ steps.source.outcome }}
         run: |
           set -euo pipefail
           echo 'republished=false' >> "$GITHUB_OUTPUT"
@@ -155,6 +158,12 @@ jobs:
           committed_content_diff='false'
           if ! git diff --quiet origin/main...HEAD -- content/; then
             committed_content_diff='true'
+          fi
+          if [ "$SOURCE_OUTCOME" = 'failure' ] \
+            && [ "$working_content_diff" = 'false' ] \
+            && [ "$committed_content_diff" = 'false' ]; then
+            echo '::error::La policy sorgente è fallita senza diff da proporre: il loop non può dichiararsi verde.'
+            exit 1
           fi
           if [ "$working_content_diff" = 'false' ] && [ "$committed_content_diff" = 'false' ]; then
             if [ "$AUDIT_OUTCOME" = 'failure' ]; then
