@@ -162,3 +162,13 @@ test('il workflow usa il helper e non offre un fallback per altri push error', (
   assert.match(source, /git push -u origin "\$BRANCH" > "\$RETRY_LOG" 2>&1/);
   assert.doesNotMatch(source, /git push --force/);
 });
+
+test('il checkout non persiste l’extraheader GITHUB_TOKEN', () => {
+  const source = fs.readFileSync(path.join(ROOT, '.github/workflows/transport-identical-twins.yml'), 'utf8');
+  const checkoutStart = source.indexOf('      - name: Checkout');
+  const nextStep = source.indexOf('      - name: Setup Node.js', checkoutStart);
+  assert.ok(checkoutStart >= 0 && nextStep > checkoutStart, 'blocco Checkout non riconoscibile');
+  const checkout = source.slice(checkoutStart, nextStep);
+  assert.match(checkout, /^\s+persist-credentials:\s*false\s*$/m);
+  assert.doesNotMatch(checkout, /^\s+persist-credentials:\s*true\s*$/m);
+});
