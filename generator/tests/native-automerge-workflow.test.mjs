@@ -41,6 +41,15 @@ test('il gate corrente non trascina vitestCheck come dipendenza hard', () => {
   assert.match(source, /\[ "\$gate_requires_vitest" = false \] \|\| download_and_check/);
 });
 
+test('la costante locale del gate resta allineata senza import runtime da vitestCheck', async () => {
+  const [{ REVIEW_GATE_STEP_NAME: nativeStep }, { REVIEW_GATE_STEP_NAME: reviewStep }] =
+    await Promise.all([
+      import('../../scripts/ci/native-automerge-gate.mjs'),
+      import('../../scripts/ci/lib/vitestCheck.mjs'),
+    ]);
+  assert.equal(nativeStep, reviewStep);
+});
+
 test('un gate futuro con import reale abilita fetch, validazione e installazione della dipendenza', () => {
   const futureGate = `${gateSource}\nimport { REVIEW_GATE_STEP_NAME } from './lib/vitestCheck.mjs';\n`;
   assert.match(futureGate, VITEST_IMPORT_RE);
