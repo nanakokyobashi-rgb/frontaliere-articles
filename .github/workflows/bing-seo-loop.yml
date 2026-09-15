@@ -212,6 +212,24 @@ jobs:
               git push origin "$branch"
             fi
           fi
+          autofix_label='agent:autofix'
+          ensure_autofix_label() {
+            if gh label list --repo "$GITHUB_REPOSITORY" --limit 1000 --json name \
+              --jq 'any(.[]; .name == "agent:autofix")' | grep -qx true; then
+              return 0
+            fi
+            # A concurrent run may create it between the check and this call;
+            # the authoritative check below makes that race idempotent.
+            gh label create "$autofix_label" --repo "$GITHUB_REPOSITORY" \
+              --color B60205 --description 'PR automatica da un loop fail-closed' \
+              >/dev/null 2>&1 || true
+            if ! gh label list --repo "$GITHUB_REPOSITORY" --limit 1000 --json name \
+              --jq 'any(.[]; .name == "agent:autofix")' | grep -qx true; then
+              echo "::error::Impossibile garantire il label agent:autofix: nessuna PR verrà creata o lasciata senza provenance."
+              return 1
+            fi
+          }
+          ensure_autofix_label
           pr_count="$(gh pr list --repo "$GITHUB_REPOSITORY" --state open --head "$branch" --json number --jq 'length')"
           if [ "$pr_count" = '0' ]; then
             body="$RUNNER_TEMP/bing-seo-titles-pr-body.md"
@@ -225,9 +243,17 @@ jobs:
           - Nessuno: per scelta, nessun residuo in questa PR.
           BODY
             gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$branch" \
-              --title 'fix(seo): shorten Bing article titles' --body-file "$body"
-            gh pr edit --repo "$GITHUB_REPOSITORY" "$branch" --add-label agent:autofix
+              --title 'fix(seo): shorten Bing article titles' --body-file "$body" \
+              --label "$autofix_label"
           fi
+          pr_number="$(gh pr list --repo "$GITHUB_REPOSITORY" --state open --head "$branch" --json number --jq '.[0].number')"
+          if [ -z "$pr_number" ]; then
+            echo '::error::La PR del publisher non è verificabile dopo create/reconcile.'
+            exit 1
+          fi
+          # Always reconcile an already-open PR as well: a previous failed
+          # edit is retried on the next run, without creating a duplicate PR.
+          gh pr edit --repo "$GITHUB_REPOSITORY" "$pr_number" --add-label "$autofix_label"
 
       - name: Upload post-republish report
         if: always()
