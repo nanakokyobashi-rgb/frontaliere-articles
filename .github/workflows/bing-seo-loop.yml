@@ -50,6 +50,7 @@ jobs:
             generator/tests/lib/expect-shim.mjs
             generator/scripts/create-article.mjs
             generator/scripts/load-rc-env.mjs
+            generator/scripts/lib/google-service-account-token.mjs
             generator/scripts/repair-prompt-placeholders.mjs
             generator/scripts/lib/prompt-placeholder-guard.mjs
           sparse-checkout-cone-mode: false
