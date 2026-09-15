@@ -248,6 +248,17 @@ function sourceTitleValue(source, fix) {
   return decodeTsSingleQuote(matches[0][2]);
 }
 
+function sourceTargets(fix) {
+  if (fix.kind !== 'seo') return [fix];
+  if (!fix.metadataSource || !fix.metadataKey) {
+    throw new Error('Policy SEO incompleta per ' + fix.articleId);
+  }
+  return [
+    fix,
+    { ...fix, source: fix.metadataSource, kind: 'meta' },
+  ];
+}
+
 function applyFixToSource(source, fix) {
   return fix.kind === 'seo'
     ? replaceSeoEntry(source, fix)
@@ -259,29 +270,53 @@ export function applyFixes({
   readFile = readFileSync,
   writeFile = writeFileSync,
 } = {}) {
-  const changedFiles = new Set();
+  const sourceByPath = new Map();
+  const pending = [];
+
   for (const fix of BING_TITLE_FIXES) {
-    const absolutePath = resolve(repoRoot, fix.source);
-    const source = readFile(absolutePath, 'utf8');
-    let currentTitle;
-    try {
-      currentTitle = sourceTitleValue(source, fix);
-    } catch (error) {
-      throw new Error(
-        'Titolo sorgente inatteso per ' + fix.source + ': ' + error.message,
-      );
+    for (const target of sourceTargets(fix)) {
+      let entry = sourceByPath.get(target.source);
+      if (!entry) {
+        entry = {
+          absolutePath: resolve(repoRoot, target.source),
+          source: readFile(resolve(repoRoot, target.source), 'utf8'),
+        };
+        sourceByPath.set(target.source, entry);
+      }
+      let currentTitle;
+      try {
+        currentTitle = sourceTitleValue(entry.source, target);
+      } catch (error) {
+        throw new Error(
+          'Titolo sorgente inatteso per ' + target.source + ': ' + error.message,
+        );
+      }
+      if (currentTitle === fix.title) continue;
+      if (currentTitle !== fix.sourceTitle) {
+        throw new Error(
+          'Titolo sorgente inatteso per ' + target.source + ': ' + currentTitle
+            + '. Aggiorna esplicitamente la policy prima di applicare il fix.',
+        );
+      }
+      pending.push({ fix, target });
     }
-    if (currentTitle === fix.title) continue;
-    if (currentTitle !== fix.sourceTitle) {
-      throw new Error(
-        'Titolo sorgente inatteso per ' + fix.source + ': ' + currentTitle
-          + '. Aggiorna esplicitamente la policy prima di applicare il fix.',
-      );
-    }
-    const next = applyFixToSource(source, fix);
-    if (next !== source) {
-      writeFile(absolutePath, next);
-      changedFiles.add(fix.source);
+  }
+
+  const changedFiles = new Set();
+  const nextByPath = new Map(
+    [...sourceByPath].map(([relativePath, entry]) => [relativePath, entry.source]),
+  );
+  for (const { fix, target } of pending) {
+    nextByPath.set(
+      target.source,
+      applyFixToSource(nextByPath.get(target.source), target),
+    );
+  }
+  for (const [relativePath, entry] of sourceByPath) {
+    const next = nextByPath.get(relativePath);
+    if (next !== entry.source) {
+      writeFile(entry.absolutePath, next);
+      changedFiles.add(relativePath);
     }
   }
   return { changed: changedFiles.size > 0, files: [...changedFiles] };
@@ -294,11 +329,6 @@ export function checkSource({ repoRoot = REPO_ROOT } = {}) {
   for (const fix of BING_TITLE_FIXES) {
     if (seenUrls.has(fix.url)) findings.push({ code: 'duplicate-url', url: fix.url });
     seenUrls.add(fix.url);
-    const sourceKey = fix.kind === 'seo' ? fix.articleId : fix.metadataKey;
-    if (seenSourceKeys.has(sourceKey)) {
-      findings.push({ code: 'duplicate-source-key', file: fix.source, detail: sourceKey });
-    }
-    seenSourceKeys.add(sourceKey);
     if (fix.title.length > BING_TITLE_MAX_CHARS) {
       findings.push({
         code: 'policy-title-too-long',
@@ -307,21 +337,30 @@ export function checkSource({ repoRoot = REPO_ROOT } = {}) {
       });
     }
 
-    const absolutePath = resolve(repoRoot, fix.source);
-    let source;
-    try {
-      source = readFileSync(absolutePath, 'utf8');
-    } catch (error) {
-      findings.push({ code: 'source-missing', file: fix.source, detail: error.message });
-      continue;
-    }
-
-    try {
-      if (sourceTitleValue(source, fix) !== fix.title) {
-        findings.push({ code: 'source-title-drift', file: fix.source, url: fix.url });
+    for (const target of sourceTargets(fix)) {
+      const sourceKey = target.kind === 'seo' ? target.articleId : target.metadataKey;
+      const uniqueSourceKey = target.source + ':' + sourceKey;
+      if (seenSourceKeys.has(uniqueSourceKey)) {
+        findings.push({ code: 'duplicate-source-key', file: target.source, detail: sourceKey });
       }
-    } catch (error) {
-      findings.push({ code: 'source-entry-missing', file: fix.source, detail: error.message });
+      seenSourceKeys.add(uniqueSourceKey);
+
+      const absolutePath = resolve(repoRoot, target.source);
+      let source;
+      try {
+        source = readFileSync(absolutePath, 'utf8');
+      } catch (error) {
+        findings.push({ code: 'source-missing', file: target.source, detail: error.message });
+        continue;
+      }
+
+      try {
+        if (sourceTitleValue(source, target) !== fix.title) {
+          findings.push({ code: 'source-title-drift', file: target.source, url: fix.url });
+        }
+      } catch (error) {
+        findings.push({ code: 'source-entry-missing', file: target.source, detail: error.message });
+      }
     }
   }
   return { ok: findings.length === 0, findings };

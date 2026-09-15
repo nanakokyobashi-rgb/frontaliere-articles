@@ -14,12 +14,28 @@ import {
   BING_TITLE_MAX_CHARS,
 } from '../../scripts/seo/bing-seo-policy.mjs';
 
+function readPolicySources(repoRoot) {
+  const contents = new Map();
+  for (const fix of BING_TITLE_FIXES) {
+    for (const relativePath of [fix.source, fix.metadataSource].filter(Boolean)) {
+      if (!contents.has(relativePath)) {
+        contents.set(relativePath, readFileSync(resolve(repoRoot, relativePath), 'utf8'));
+      }
+    }
+  }
+  return contents;
+}
+
 test('Bing title policy is bounded and source-aligned', () => {
   const result = checkSource();
   assert.equal(result.ok, true, JSON.stringify(result.findings));
   assert.equal(BING_TITLE_FIXES.length, 16);
   assert.ok(BING_TITLE_FIXES.every((fix) => fix.title.length <= BING_TITLE_MAX_CHARS));
   assert.equal(new Set(BING_TITLE_FIXES.map((fix) => fix.url)).size, 16);
+  const italianSeoFixes = BING_TITLE_FIXES.filter((fix) => fix.kind === 'seo');
+  assert.equal(italianSeoFixes.length, 8);
+  assert.ok(italianSeoFixes.every((fix) => fix.metadataSource === 'content/blog-meta-ch-it.ts'));
+  assert.ok(italianSeoFixes.every((fix) => fix.metadataKey.startsWith('blog.article.')));
 });
 
 test('live audit accepts the brand suffix when the approved title is its prefix', async () => {
@@ -42,10 +58,7 @@ test('live audit accepts the brand suffix when the approved title is its prefix'
 
 test('applyFixes rejects an unapproved editorial source drift', () => {
   const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
-  const contents = new Map(BING_TITLE_FIXES.map((fix) => [
-    fix.source,
-    readFileSync(resolve(repoRoot, fix.source), 'utf8'),
-  ]));
+  const contents = readPolicySources(repoRoot);
   const firstFix = BING_TITLE_FIXES[0];
   contents.set(
     firstFix.source,
@@ -64,10 +77,7 @@ test('applyFixes rejects an unapproved editorial source drift', () => {
 
 test('source locators ignore comments and reject duplicate real entries', () => {
   const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
-  const contents = new Map(BING_TITLE_FIXES.map((fix) => [
-    fix.source,
-    readFileSync(resolve(repoRoot, fix.source), 'utf8'),
-  ]));
+  const contents = readPolicySources(repoRoot);
   const firstFix = BING_TITLE_FIXES[0];
   const original = contents.get(firstFix.source);
   contents.set(
@@ -92,6 +102,32 @@ test('source locators ignore comments and reject duplicate real entries', () => 
     }),
     /Entry duplicata/,
   );
+});
+
+test('SEO fixes update the structured source and the Italian metadata API source', () => {
+  const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
+  const contents = readPolicySources(repoRoot);
+  const firstFix = BING_TITLE_FIXES.find((fix) => fix.articleId === 'blog-frontaliere-assicurazione-auto-confronto');
+  contents.set(firstFix.source, contents.get(firstFix.source).replaceAll(firstFix.title, firstFix.sourceTitle));
+  contents.set(firstFix.metadataSource, contents.get(firstFix.metadataSource).replace(
+    firstFix.title,
+    firstFix.sourceTitle,
+  ));
+  const written = [];
+
+  applyFixes({
+    repoRoot,
+    readFile: (absolutePath) => contents.get(relative(repoRoot, absolutePath)),
+    writeFile: (absolutePath, value) => {
+      const relativePath = relative(repoRoot, absolutePath);
+      contents.set(relativePath, value);
+      written.push(relativePath);
+    },
+  });
+
+  assert.deepEqual(written.sort(), [firstFix.metadataSource, firstFix.source].sort());
+  assert.ok(contents.get(firstFix.source).includes(firstFix.title));
+  assert.ok(contents.get(firstFix.metadataSource).includes(firstFix.title));
 });
 
 test('live audit accepts canonical attributes in either order and numeric entities', async () => {
