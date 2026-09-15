@@ -55,6 +55,33 @@ const NO_ITALIAN_DUTY_CLAIM = {
   fr: 'Aucune couverture de garde italienne',
 };
 
+const SWISS_CANTON_URLS = [
+  'https://www.notfall-apotheken-zh.ch/',
+  'https://apobern.ch/dienstleistungen/notfalldienst/',
+  'https://www.apoluzern.ch/apotheken/notfalldienst',
+  'https://www.ur.ch/dienstleistungen/3677',
+  'https://www.sz.ch/gesundheit-soziales/gesundheit/notfall.html/',
+  'https://www.zg.ch/behoerden/gesundheit/medizinische-versorgung/notfall',
+  'https://avso.ch/notfalldienst-apotheken/',
+  'https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt',
+  'https://apotheken-aargau.ch/notfall/',
+  'https://www.apotheken-thurgau.ch/pikettdienst/',
+  'https://notfall.apotheke-chur.ch/',
+  'https://www.pharmavalais.ch/pharmacie-valais/pharmacie-garde-51.html',
+  'https://www.pharmaciesfribourg.ch/fr/prestations-et-conseils/pharmacie-de-garde',
+  'https://www.onp.ch/Service-de-garde',
+  'https://www.jura.ch/Htdocs/Files/v/01baf7bafb804ba41706469e756cfccecfac1eee8116c5ba49fc8a29abfe57a6.pdf/Plan-de-garde-des-pharmacies-de-Delemont-en-2026.pdf',
+  'https://garde.svph.ch',
+  'https://pharmageneve.swiss/pharmacie-de-garde/',
+];
+
+const ITALIAN_SOURCE_URLS = [
+  'https://www.ats-insubria.it/farmacie',
+  'https://www.comune.marchirolo.varese.it/portals/2011/SiscomArchivio/6/121368-10-Varese_calendario_turni_2026_2027_2%201.pdf',
+  'https://www.aslvco.it/wp-content/uploads/2026/03/3017434.pdf',
+  'https://farmacia-aperta.eu/',
+];
+
 test('pharmacy evergreen: ogni guida localizzata espone scope, fonti, semantica e link operativi', () => {
   const snapshots = loadPharmacySnapshots();
   const guides = buildPharmacyEvergreenGuides(snapshots);
@@ -121,8 +148,25 @@ test('pharmacy evergreen: il clock di validazione del builder è iniettato', () 
     },
   });
 
-  assert.equal(guides.length, 4);
+  assert.equal(guides.length, 5);
   assert.equal(calls, 1, 'la validazione deve usare il clock esplicito una sola volta');
+});
+
+test('pharmacy evergreen: la guida Svizzera collega ogni fonte senza inventare un calendario', () => {
+  const guide = buildPharmacyEvergreenGuides(loadPharmacySnapshots())
+    .find((item) => item.id === 'farmacie-turno-svizzera-confine-italiano');
+  assert.ok(guide, 'la quinta guida stabile deve essere prodotta');
+
+  for (const locale of PHARMACY_LOCALES) {
+    const text = allArticleText(guide, locale);
+    for (const url of [...SWISS_CANTON_URLS, ...ITALIAN_SOURCE_URLS]) {
+      assert.match(text, new RegExp(escaped(url)), `${locale}: ${url}`);
+    }
+    assert.match(text, /Mendrisiotto.*Luganese.*Bellinzonese.*Biasca e Valli/s);
+    assert.match(text, /Locarnese/);
+    assert.match(text, /OW.*NW.*GL.*AR.*AI.*BL.*SH.*SG/s);
+    assert.match(text, /144/);
+  }
 });
 
 test('pharmacy evergreen: snapshot mancante — il producer chiude prima della scrittura', () => {

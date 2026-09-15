@@ -17,6 +17,7 @@ export const PHARMACY_GUIDE_IDS = Object.freeze([
   'farmacie-ticino-elenco-contatti',
   'farmacie-confine-italia-como-varese-verbano',
   'farmacia-aperta-turno-elenco',
+  'farmacie-turno-svizzera-confine-italiano',
 ]);
 
 export const EXPECTED_DUTY_REGIONS = Object.freeze([
@@ -440,6 +441,96 @@ const COPY = {
   },
 };
 
+const SWISS_CANTON_SOURCES = Object.freeze([
+  ['ZH', 'Zürich', 'https://www.notfall-apotheken-zh.ch/'],
+  ['BE', 'Bern', 'https://apobern.ch/dienstleistungen/notfalldienst/'],
+  ['LU', 'Luzern', 'https://www.apoluzern.ch/apotheken/notfalldienst'],
+  ['UR', 'Uri', 'https://www.ur.ch/dienstleistungen/3677'],
+  ['SZ', 'Schwyz', 'https://www.sz.ch/gesundheit-soziales/gesundheit/notfall.html/'],
+  ['ZG', 'Zug', 'https://www.zg.ch/behoerden/gesundheit/medizinische-versorgung/notfall'],
+  ['SO', 'Solothurn', 'https://avso.ch/notfalldienst-apotheken/'],
+  ['BS', 'Basel-Stadt', 'https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt'],
+  ['AG', 'Aargau', 'https://apotheken-aargau.ch/notfall/'],
+  ['TG', 'Thurgau', 'https://www.apotheken-thurgau.ch/pikettdienst/'],
+  ['GR', 'Graubünden', 'https://notfall.apotheke-chur.ch/'],
+  ['VS', 'Valais', 'https://www.pharmavalais.ch/pharmacie-valais/pharmacie-garde-51.html'],
+  ['FR', 'Fribourg', 'https://www.pharmaciesfribourg.ch/fr/prestations-et-conseils/pharmacie-de-garde'],
+  ['NE', 'Neuchâtel', 'https://www.onp.ch/Service-de-garde'],
+  ['JU', 'Jura', 'https://www.jura.ch/Htdocs/Files/v/01baf7bafb804ba41706469e756cfccecfac1eee8116c5ba49fc8a29abfe57a6.pdf/Plan-de-garde-des-pharmacies-de-Delemont-en-2026.pdf'],
+  ['VD', 'Vaud', 'https://garde.svph.ch'],
+  ['GE', 'Genève', 'https://pharmageneve.swiss/pharmacie-de-garde/'],
+]);
+
+const ITALIAN_BORDER_SOURCES = Object.freeze([
+  ['ATS Insubria', 'https://www.ats-insubria.it/farmacie'],
+  ['Varese (documento turni)', 'https://www.comune.marchirolo.varese.it/portals/2011/SiscomArchivio/6/121368-10-Varese_calendario_turni_2026_2027_2%201.pdf'],
+  ['Verbano-Cusio-Ossola (documento turni)', 'https://www.aslvco.it/wp-content/uploads/2026/03/3017434.pdf'],
+]);
+
+function swissCantonSourceAppendix(locale) {
+  const text = {
+    it: {
+      heading: 'Svizzera: come verificare la fonte aggiornata per cantone',
+      intro: 'Questi sono link ufficiali navigabili o di associazioni cantonali. Aprili al momento della necessità: possono offrire ricerca, piano del giorno, contatto o un avviso, ma questa guida non li trasforma in un calendario unico né promette un orario o una farmacia aperta.',
+      ticino: 'Per il Ticino pubblichiamo dati di turno verificati soltanto per Mendrisiotto, Luganese, Bellinzonese e Biasca e Valli; per il Locarnese e per ogni altra area non deduciamo copertura.',
+      partialSource: 'Per SZ (Svitto) è disponibile il link navigabile qui sopra, ma in questa guida non lo trattiamo come roster pubblico o feed di turno: non dichiariamo copertura attiva né orari.',
+      noFeed: 'OW (Obvaldo), NW (Nidvaldo), GL (Glarona), AR (Appenzello Esterno), AI (Appenzello Interno), BL (Basilea Campagna), SH (Sciaffusa) e SG (San Gallo): in questa guida non è rappresentato un roster pubblico o un feed verificato. Non dichiariamo copertura attiva; contatta la farmacia o l’autorità sanitaria locale. In un’emergenza medica chiama il 144.',
+      border: 'Confine italiano (CO, VA, VB): consulta direttamente le fonti locali. I documenti possono cambiare o scadere; non inferiamo un turno o un orario dalla loro presenza.',
+      aggregator: 'Farmacia Aperta è un link-out esterno di orientamento, non una fonte ufficiale né una prova di apertura o turno.',
+    },
+    en: {
+      heading: 'Switzerland: how to check the current source by canton',
+      intro: 'These are navigable official or cantonal pharmacists’ association links. Open them when needed: they may offer a search, daily plan, contact or notice, but this guide does not turn them into one calendar and does not promise an opening time or an open pharmacy.',
+      ticino: 'For Ticino, we publish verified duty data only for Mendrisiotto, Luganese, Bellinzonese and Biasca e Valli; we infer no coverage for Locarnese or any other area.',
+      partialSource: 'For SZ (Schwyz), the navigable link above is available, but this guide does not treat it as a public roster or duty feed: we make no active-coverage or hours claim.',
+      noFeed: 'OW (Obwalden), NW (Nidwalden), GL (Glarus), AR (Appenzell Ausserrhoden), AI (Appenzell Innerrhoden), BL (Basel-Landschaft), SH (Schaffhausen) and SG (St. Gallen): this guide represents no public roster or verified feed. We make no active-coverage claim; contact the local pharmacy or cantonal health authority. For a medical emergency, call 144.',
+      border: 'Italian border (CO, VA, VB): consult the local sources directly. Documents may change or expire; we infer no duty or opening time from their presence.',
+      aggregator: 'Farmacia Aperta is an external orientation link, not an official source or evidence of opening or duty.',
+    },
+    de: {
+      heading: 'Schweiz: aktuelle Quelle je Kanton prüfen',
+      intro: 'Dies sind aufrufbare offizielle Links oder Links kantonaler Apothekerverbände. Bei Bedarf direkt öffnen: Sie können Suche, Tagesplan, Kontakt oder Hinweis bieten; dieser Leitfaden macht daraus keinen einheitlichen Kalender und verspricht keine Öffnungszeit oder geöffnete Apotheke.',
+      ticino: 'Für das Tessin veröffentlichen wir bestätigte Notdienst-Daten nur für Mendrisiotto, Luganese, Bellinzonese und Biasca e Valli; für Locarnese und jedes andere Gebiet wird keine Abdeckung abgeleitet.',
+      partialSource: 'Für SZ (Schwyz) ist der aufrufbare Link oben vorhanden, aber dieser Leitfaden behandelt ihn nicht als öffentliches Verzeichnis oder Notdienst-Feed: Es wird weder aktive Abdeckung noch Öffnungszeit behauptet.',
+      noFeed: 'OW (Obwalden), NW (Nidwalden), GL (Glarus), AR (Appenzell Ausserrhoden), AI (Appenzell Innerrhoden), BL (Basel-Landschaft), SH (Schaffhausen) und SG (St. Gallen): Dieser Leitfaden bildet kein öffentliches Verzeichnis und keinen bestätigten Feed ab. Es wird keine aktive Abdeckung behauptet; lokale Apotheke oder kantonale Gesundheitsbehörde kontaktieren. Bei einem medizinischen Notfall 144 anrufen.',
+      border: 'Italienische Grenze (CO, VA, VB): lokale Quellen direkt prüfen. Dokumente können sich ändern oder ablaufen; aus ihrem Vorhandensein wird kein Notdienst und keine Öffnungszeit abgeleitet.',
+      aggregator: 'Farmacia Aperta ist ein externer Orientierungslink, keine offizielle Quelle und kein Nachweis für Öffnung oder Notdienst.',
+    },
+    fr: {
+      heading: 'Suisse : vérifier la source à jour par canton',
+      intro: 'Voici des liens officiels navigables ou de sociétés cantonales de pharmaciens. Ouvrez-les au moment du besoin : ils peuvent proposer une recherche, un plan du jour, un contact ou un avis, mais ce guide ne les transforme pas en calendrier unique et ne promet ni horaire ni pharmacie ouverte.',
+      ticino: 'Pour le Tessin, nous publions des données de garde vérifiées uniquement pour le Mendrisiotto, le Luganese, le Bellinzonese et Biasca e Valli ; aucune couverture n’est déduite pour le Locarnese ou une autre zone.',
+      partialSource: 'Pour SZ (Schwyz), le lien navigable ci-dessus est disponible, mais ce guide ne le traite pas comme un roster public ou un flux de garde : aucune couverture active ni horaire n’est revendiqué.',
+      noFeed: 'OW (Obwald), NW (Nidwald), GL (Glaris), AR (Appenzell Rhodes-Extérieures), AI (Appenzell Rhodes-Intérieures), BL (Bâle-Campagne), SH (Schaffhouse) et SG (Saint-Gall) : ce guide ne représente aucun roster public ni flux vérifié. Aucune couverture active n’est revendiquée ; contacter la pharmacie ou l’autorité sanitaire cantonale locale. En cas d’urgence médicale, appeler le 144.',
+      border: 'Frontière italienne (CO, VA, VB) : consulter directement les sources locales. Les documents peuvent changer ou expirer ; aucune garde ni horaire n’est déduit de leur présence.',
+      aggregator: 'Farmacia Aperta est un lien externe d’orientation, pas une source officielle ni une preuve d’ouverture ou de garde.',
+    },
+  }[locale];
+  const cantonLinks = SWISS_CANTON_SOURCES
+    .map(([code, name, url]) => `- [${code} — ${name}](${url})`)
+    .join('\n');
+  const borderLinks = ITALIAN_BORDER_SOURCES
+    .map(([name, url]) => `- [${name}](${url})`)
+    .join('\n');
+
+  return `## ${text.heading}
+${text.intro}
+
+${cantonLinks}
+
+${text.ticino}
+
+${text.partialSource}
+
+${text.noFeed}
+
+## ${text.border}
+${borderLinks}
+- [Farmacia Aperta](https://farmacia-aperta.eu/)
+
+${text.aggregator}`;
+}
+
 const GUIDE_SPECS = Object.freeze([
   {
     id: 'farmacie-turno-ticino-guida',
@@ -729,6 +820,86 @@ const GUIDE_SPECS = Object.freeze([
       },
     },
   },
+  {
+    id: 'farmacie-turno-svizzera-confine-italiano',
+    image: 'lugano-view.webp',
+    slugs: {
+      it: 'farmacie-turno-svizzera-confine-italiano',
+      en: 'on-duty-pharmacies-switzerland-italian-border',
+      de: 'notdienst-apotheken-schweiz-italienische-grenze',
+      fr: 'pharmacies-garde-suisse-frontiere-italienne',
+    },
+    seo: {
+      title: 'Farmacie di turno in Svizzera e confine italiano: fonti per cantone',
+      keywords: 'farmacie di turno Svizzera, farmacia di guardia cantone, farmacia aperta confine Italia, OFCT Ticino, farmacie Varese Como',
+      headline: 'Farmacie di turno in Svizzera: verifica per cantone e confine italiano',
+      breadcrumbName: 'Farmacie di turno Svizzera',
+    },
+    imageAlt: {
+      it: 'Vista di Lugano e del suo lago',
+      en: 'View of Lugano and its lake',
+      de: 'Blick auf Lugano und seinen See',
+      fr: 'Vue de Lugano et de son lac',
+    },
+    copy: {
+      it: {
+        title: 'Farmacie di turno in Svizzera e confine italiano: fonti per cantone',
+        focus: 'Una guida per verificare la fonte aggiornata nel cantone giusto, senza inventare calendari né trasformare un link in una promessa di apertura.',
+        detailHeading: 'Che cosa è verificato e che cosa no',
+        detail: 'L’unico dato di turno verificato pubblicato dal nostro dataset riguarda quattro regioni ticinesi: Mendrisiotto, Luganese, Bellinzonese e Biasca e Valli. Per gli altri cantoni proponiamo link ufficiali navigabili quando disponibili, ma non pubblichiamo un roster unificato, una copertura attiva o orari dedotti.',
+        advice: 'Apri la fonte del cantone o della provincia prima di spostarti, segui le istruzioni che pubblica e chiama la farmacia. Se una fonte non espone un feed o un roster pubblico, la guida lo dice invece di colmare il vuoto con supposizioni.',
+        seoDescription: 'Farmacie di turno in Svizzera e confine CO/VA/VB: fonti cantonali da verificare, quattro regioni ticinesi OFCT e limiti espliciti.',
+        ogDescription: 'Guida alle fonti per le farmacie di turno in Svizzera e al confine italiano: nessun calendario inventato, verifiche locali prima di partire.',
+        faq: [
+          { q: 'La guida mostra un calendario nazionale delle farmacie di turno?', a: 'No. Indica dove verificare la fonte aggiornata per cantone. Solo Mendrisiotto, Luganese, Bellinzonese e Biasca e Valli hanno dati OFCT verificati nel dataset pubblicato.' },
+          { q: 'La presenza di un link cantonale significa che una farmacia è aperta?', a: 'No. Un link è un percorso di verifica: non promette orari, turno o copertura attiva.' },
+          { q: 'Come verifico Como, Varese e Verbano-Cusio-Ossola?', a: 'Apri ATS Insubria o il documento locale indicato, controlla l’aggiornamento e conferma direttamente con la farmacia. Questa guida non deduce un turno italiano.' },
+        ],
+      },
+      en: {
+        title: 'On-duty pharmacies in Switzerland and the Italian border: sources by canton',
+        focus: 'A guide to checking the current source in the right canton, without inventing calendars or turning a link into an opening promise.',
+        detailHeading: 'What is verified and what is not',
+        detail: 'The only verified duty data published by our dataset concerns four Ticino regions: Mendrisiotto, Luganese, Bellinzonese and Biasca e Valli. For other cantons we provide navigable official links where available, but publish no unified roster, active coverage or inferred hours.',
+        advice: 'Open the cantonal or provincial source before travelling, follow its published instructions and call the pharmacy. Where a source exposes no public feed or roster, the guide says so rather than filling the gap with assumptions.',
+        seoDescription: 'On-duty pharmacies in Switzerland and the CO/VA/VB border: cantonal sources to check, four verified OFCT Ticino regions and explicit limits.',
+        ogDescription: 'A source guide for on-duty pharmacies in Switzerland and at the Italian border: no invented calendar, verify locally before travelling.',
+        faq: [
+          { q: 'Does this guide show a nationwide on-duty pharmacy calendar?', a: 'No. It explains where to check the current source by canton. Only Mendrisiotto, Luganese, Bellinzonese and Biasca e Valli have verified OFCT data in the published dataset.' },
+          { q: 'Does a cantonal link mean that a pharmacy is open?', a: 'No. A link is a route for verification; it does not promise hours, duty or active coverage.' },
+          { q: 'How do I check Como, Varese and Verbano-Cusio-Ossola?', a: 'Open ATS Insubria or the named local document, check its update and confirm directly with the pharmacy. This guide infers no Italian duty.' },
+        ],
+      },
+      de: {
+        title: 'Notdienst-Apotheken in der Schweiz und an der italienischen Grenze: Quellen je Kanton',
+        focus: 'Ein Leitfaden zur Prüfung der aktuellen Quelle im richtigen Kanton, ohne Kalender zu erfinden oder einen Link als Öffnungszusage zu lesen.',
+        detailHeading: 'Was bestätigt ist und was nicht',
+        detail: 'Die einzigen bestätigten Notdienst-Daten unseres Datensatzes betreffen vier Tessiner Regionen: Mendrisiotto, Luganese, Bellinzonese und Biasca e Valli. Für andere Kantone nennen wir verfügbare aufrufbare offizielle Links, veröffentlichen aber kein einheitliches Verzeichnis, keine aktive Abdeckung und keine abgeleiteten Öffnungszeiten.',
+        advice: 'Vor der Fahrt die kantonale oder provinzialen Quelle öffnen, ihren veröffentlichten Anweisungen folgen und die Apotheke anrufen. Wenn eine Quelle keinen öffentlichen Feed oder kein Verzeichnis bietet, benennt der Leitfaden dies statt die Lücke mit Annahmen zu füllen.',
+        seoDescription: 'Notdienst-Apotheken in der Schweiz und an der Grenze CO/VA/VB: kantonale Quellen prüfen, vier bestätigte OFCT-Gebiete im Tessin und klare Grenzen.',
+        ogDescription: 'Quellenleitfaden für Notdienst-Apotheken in der Schweiz und an der italienischen Grenze: kein erfundener Kalender, lokal vor der Fahrt prüfen.',
+        faq: [
+          { q: 'Zeigt dieser Leitfaden einen landesweiten Notdienst-Kalender?', a: 'Nein. Er erklärt, wo die aktuelle Quelle je Kanton geprüft wird. Nur für Mendrisiotto, Luganese, Bellinzonese und Biasca e Valli gibt es bestätigte OFCT-Daten im veröffentlichten Datensatz.' },
+          { q: 'Bedeutet ein kantonaler Link, dass eine Apotheke geöffnet ist?', a: 'Nein. Ein Link ist ein Prüfweg; er verspricht weder Öffnungszeit noch Notdienst oder aktive Abdeckung.' },
+          { q: 'Wie prüfe ich Como, Varese und Verbano-Cusio-Ossola?', a: 'ATS Insubria oder das genannte lokale Dokument öffnen, Aktualität prüfen und direkt bei der Apotheke bestätigen. Dieser Leitfaden leitet keinen italienischen Notdienst ab.' },
+        ],
+      },
+      fr: {
+        title: 'Pharmacies de garde en Suisse et à la frontière italienne : sources par canton',
+        focus: 'Un guide pour vérifier la source à jour dans le bon canton, sans inventer de calendrier ni transformer un lien en promesse d’ouverture.',
+        detailHeading: 'Ce qui est vérifié et ce qui ne l’est pas',
+        detail: 'Les seules données de garde vérifiées publiées par notre jeu de données concernent quatre régions tessinoises : Mendrisiotto, Luganese, Bellinzonese et Biasca e Valli. Pour les autres cantons, nous proposons des liens officiels navigables lorsqu’ils sont disponibles, mais aucun roster unique, aucune couverture active ni horaire déduit.',
+        advice: 'Ouvrir la source cantonale ou provinciale avant le déplacement, suivre ses indications publiées et appeler la pharmacie. Lorsqu’une source n’expose aucun flux ni roster public, le guide le dit au lieu de combler le manque par des suppositions.',
+        seoDescription: 'Pharmacies de garde en Suisse et frontière CO/VA/VB : sources cantonales à vérifier, quatre régions OFCT tessinoises vérifiées et limites explicites.',
+        ogDescription: 'Guide des sources pour les pharmacies de garde en Suisse et à la frontière italienne : aucun calendrier inventé, vérification locale avant le déplacement.',
+        faq: [
+          { q: 'Ce guide affiche-t-il un calendrier national des pharmacies de garde ?', a: 'Non. Il indique où vérifier la source à jour par canton. Seuls le Mendrisiotto, le Luganese, le Bellinzonese et Biasca e Valli ont des données OFCT vérifiées dans le jeu de données publié.' },
+          { q: 'Un lien cantonal signifie-t-il qu’une pharmacie est ouverte ?', a: 'Non. Un lien est un parcours de vérification ; il ne promet ni horaire, ni garde, ni couverture active.' },
+          { q: 'Comment vérifier Côme, Varèse et Verbano-Cusio-Ossola ?', a: 'Ouvrir ATS Insubria ou le document local indiqué, vérifier sa mise à jour et confirmer directement auprès de la pharmacie. Ce guide ne déduit aucune garde italienne.' },
+        ],
+      },
+    },
+  },
 ]);
 
 function sourceAndRoutes(copy, locale, snapshots) {
@@ -831,13 +1002,13 @@ function buildLocalizedMeta(locale, localized, snapshots) {
     de: `${ticino.recordCount} Einträge im Tessin und ${italy.recordCount} Einträge in den Provinzen CO, VA und VB`,
     fr: `${ticino.recordCount} entrées au Tessin et ${italy.recordCount} entrées dans les provinces CO, VA et VB`,
   }[locale];
-  const seoDescription = {
+  const defaultSeoDescription = {
     it: 'Farmacie in Ticino e nel confine CO/VA/VB: cataloghi, turni OFCT regionali e limiti del dato. Non è copertura nazionale.',
     en: 'Ticino and CO/VA/VB pharmacy directories: regional OFCT duty and clear data limits. Not nationwide coverage.',
     de: 'Apotheken im Tessin und CO/VA/VB: regionaler OFCT-Notdienst und klare Datengrenzen. Keine landesweite Abdeckung.',
     fr: 'Pharmacies du Tessin et de CO/VA/VB : gardes OFCT régionales et limites claires. Pas de couverture nationale.',
   }[locale];
-  const ogDescription = {
+  const defaultOgDescription = {
     it: `Cataloghi farmacia Ticino e CO/VA/VB: ${countText}; fonti, timestamp e limiti restano espliciti.`,
     en: `Ticino and CO/VA/VB pharmacy directories: ${countText}; sources, timestamps and limits are explicit.`,
     de: `Apothekenverzeichnisse Tessin und CO/VA/VB: ${countText}; Quellen, Zeitstempel und Grenzen sind klar.`,
@@ -851,8 +1022,8 @@ function buildLocalizedMeta(locale, localized, snapshots) {
   }[locale];
   return {
     excerpt: `${localized.focus} ${countText}; ${dutySummary}.`,
-    seoDescription,
-    ogDescription,
+    seoDescription: localized.seoDescription || defaultSeoDescription,
+    ogDescription: localized.ogDescription || defaultOgDescription,
   };
 }
 
@@ -873,7 +1044,7 @@ function buildSeo(spec, snapshots) {
 }
 
 /**
- * Build the four localized, stable-id guide payloads.  Content depends only
+ * Build the five localized, stable-id guide payloads.  Content depends only
  * on the validated snapshots; the validation clock is injected explicitly.
  */
 export function buildPharmacyEvergreenGuides(snapshots, { now = Date.now } = {}) {
@@ -910,7 +1081,7 @@ export function buildPharmacyEvergreenGuides(snapshots, { now = Date.now } = {})
         ogDescription: meta.ogDescription,
         body1: `## ${copy.inBrief}\n- ${facts.join('\n- ')}\n\n${localized.focus}`,
         body2: `## ${localized.detailHeading}\n${detail}\n\n${localized.advice}\n\n## ${copy.distinction}\n- **${copy.catalogue}**: ${copy.catalogueMeaning}\n- **${copy.openingHours}**: ${copy.hoursMeaning}\n- **${copy.duty}**: ${copy.dutyMeaning}`,
-        body3: `${sourceBlock}`,
+      body3: `${sourceBlock}${spec.id === 'farmacie-turno-svizzera-confine-italiano' ? `\n\n${swissCantonSourceAppendix(locale)}` : ''}`,
         faq,
       }];
     })),

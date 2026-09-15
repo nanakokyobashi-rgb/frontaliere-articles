@@ -6435,6 +6435,11 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.formazione-adulta-reddito-svizzera.title': 'La formation des adultes augmente les revenus de 50 %',
     'blog.article.formazione-adulta-reddito-svizzera.excerpt': 'Etude OFS : obtenir un diplôme secondaire II à l\'âge adulte conduit à +50% de revenu et d\'emploi à 80%',
     'blog.article.formazione-adulta-reddito-svizzera.imageAlt': 'Formation adultes avec vue sur les Alpes suisses',
+    'blog.article.farmacie-turno-svizzera-confine-italiano.title': 'Pharmacies de garde en Suisse et à la frontière italienne : sources par canton',
+    'blog.article.farmacie-turno-svizzera-confine-italiano.excerpt': 'Un guide pour vérifier la source à jour dans le bon canton, sans inventer de calendrier ni transformer un lien en promesse d’ouverture. 207 entrées au Tessin et 542 entrées dans les provinces CO, VA et VB; gardes OFCT uniquement dans les quatre zones publiées.',
+    'blog.article.farmacie-turno-svizzera-confine-italiano.imageAlt': 'Vue de Lugano et de son lac',
+    'blog.article.farmacie-turno-svizzera-confine-italiano.seoDescription': 'Pharmacies de garde en Suisse et frontière CO/VA/VB : sources cantonales à vérifier, quatre régions OFCT tessinoises vérifiées et limites explicites.',
+    'blog.article.farmacie-turno-svizzera-confine-italiano.ogDescription': 'Guide des sources pour les pharmacies de garde en Suisse et à la frontière italienne : aucun calendrier inventé, vérification locale avant le déplacement.',
 };
 
 export default blogMetaChFr;

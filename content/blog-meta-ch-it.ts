@@ -6435,6 +6435,11 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.formazione-adulta-reddito-svizzera.title': 'Formazione adulta aumenta reddito 50%',
     'blog.article.formazione-adulta-reddito-svizzera.excerpt': 'Studio UST: conseguire titolo secondario II in età adulta porta a +50% di reddito e occupazione all\'80%',
     'blog.article.formazione-adulta-reddito-svizzera.imageAlt': 'Formazione in età adulta con vista sulle Alpi svizzere',
+    'blog.article.farmacie-turno-svizzera-confine-italiano.title': 'Farmacie di turno in Svizzera e confine italiano: fonti per cantone',
+    'blog.article.farmacie-turno-svizzera-confine-italiano.excerpt': 'Una guida per verificare la fonte aggiornata nel cantone giusto, senza inventare calendari né trasformare un link in una promessa di apertura. 207 record Ticino e 542 nelle province CO, VA e VB; turni OFCT solo nelle quattro aree pubblicate.',
+    'blog.article.farmacie-turno-svizzera-confine-italiano.imageAlt': 'Vista di Lugano e del suo lago',
+    'blog.article.farmacie-turno-svizzera-confine-italiano.seoDescription': 'Farmacie di turno in Svizzera e confine CO/VA/VB: fonti cantonali da verificare, quattro regioni ticinesi OFCT e limiti espliciti.',
+    'blog.article.farmacie-turno-svizzera-confine-italiano.ogDescription': 'Guida alle fonti per le farmacie di turno in Svizzera e al confine italiano: nessun calendario inventato, verifiche locali prima di partire.',
 };
 
 export default blogMetaChIt;

@@ -6435,6 +6435,11 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.formazione-adulta-reddito-svizzera.title': 'Adult education increases income 50%',
     'blog.article.formazione-adulta-reddito-svizzera.excerpt': 'UST Study: Achieving Secondary Title II in Adulthood Leads to +50% Income and Employment at 80%',
     'blog.article.formazione-adulta-reddito-svizzera.imageAlt': 'Adult education with view of Swiss Alps',
+    'blog.article.farmacie-turno-svizzera-confine-italiano.title': 'On-duty pharmacies in Switzerland and the Italian border: sources by canton',
+    'blog.article.farmacie-turno-svizzera-confine-italiano.excerpt': 'A guide to checking the current source in the right canton, without inventing calendars or turning a link into an opening promise. 207 Ticino records and 542 records in provinces CO, VA and VB; OFCT duty only in the four published areas.',
+    'blog.article.farmacie-turno-svizzera-confine-italiano.imageAlt': 'View of Lugano and its lake',
+    'blog.article.farmacie-turno-svizzera-confine-italiano.seoDescription': 'On-duty pharmacies in Switzerland and the CO/VA/VB border: cantonal sources to check, four verified OFCT Ticino regions and explicit limits.',
+    'blog.article.farmacie-turno-svizzera-confine-italiano.ogDescription': 'A source guide for on-duty pharmacies in Switzerland and at the Italian border: no invented calendar, verify locally before travelling.',
 };
 
 export default blogMetaChEn;

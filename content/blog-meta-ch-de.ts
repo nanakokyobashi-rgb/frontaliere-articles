@@ -6435,6 +6435,11 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.formazione-adulta-reddito-svizzera.title': 'Erwachsenenbildung erhöht das Einkommen um 50 %',
     'blog.article.formazione-adulta-reddito-svizzera.excerpt': 'UST-Studie: Der Erwerb eines Sekundarabschlusses II im Erwachsenenalter führt zu +50% Einkommen und 80% Beschäftigung',
     'blog.article.formazione-adulta-reddito-svizzera.imageAlt': 'Erwachsenenbildung mit Blick auf Schweizer Alpen',
+    'blog.article.farmacie-turno-svizzera-confine-italiano.title': 'Notdienst-Apotheken in der Schweiz und an der italienischen Grenze: Quellen je Kanton',
+    'blog.article.farmacie-turno-svizzera-confine-italiano.excerpt': 'Ein Leitfaden zur Prüfung der aktuellen Quelle im richtigen Kanton, ohne Kalender zu erfinden oder einen Link als Öffnungszusage zu lesen. 207 Einträge im Tessin und 542 Einträge in den Provinzen CO, VA und VB; OFCT-Notdienst nur in den vier veröffentlichten Gebieten.',
+    'blog.article.farmacie-turno-svizzera-confine-italiano.imageAlt': 'Blick auf Lugano und seinen See',
+    'blog.article.farmacie-turno-svizzera-confine-italiano.seoDescription': 'Notdienst-Apotheken in der Schweiz und an der Grenze CO/VA/VB: kantonale Quellen prüfen, vier bestätigte OFCT-Gebiete im Tessin und klare Grenzen.',
+    'blog.article.farmacie-turno-svizzera-confine-italiano.ogDescription': 'Quellenleitfaden für Notdienst-Apotheken in der Schweiz und an der italienischen Grenze: kein erfundener Kalender, lokal vor der Fahrt prüfen.',
 };
 
 export default blogMetaChDe;

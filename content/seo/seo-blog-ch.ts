@@ -83441,6 +83441,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-farmacie-turno-svizzera-confine-italiano': {
+    title: 'Farmacie di turno in Svizzera e confine italiano: fonti per cantone',
+    description: 'Farmacie di turno in Svizzera e confine italiano: fonti per cantone: 207 record Ticino e 542 in CO, VA e VB; turni OFCT regionali. Non è copertura nazionale.',
+    keywords: 'farmacie di turno Svizzera, farmacia di guardia cantone, farmacia aperta confine Italia, OFCT Ticino, farmacie Varese Como',
+    ogTitle: 'Farmacie di turno in Svizzera e confine italiano: fonti per cantone',
+    ogDescription: 'Cataloghi farmacia per Ticino e confine italiano (207 e 542 record), con turni OFCT limitati a quattro aree. Fonti e timestamp chiari.',
+    canonicalPath: '/articoli-svizzera/farmacie-turno-svizzera-confine-italiano/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Farmacie di turno in Svizzera: verifica per cantone e confine italiano",
+      "description": "Farmacie di turno in Svizzera e confine italiano: fonti per cantone: 207 record Ticino e 542 in CO, VA e VB; turni OFCT regionali. Non è copertura nazionale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 563,
+        "caption": "Vista di Lugano e del suo lago"
+      },
+      "datePublished": "2026-09-15T11:37:46+02:00",
+      "dateModified": "2026-09-15T11:37:46+02:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/farmacie-turno-svizzera-confine-italiano/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
