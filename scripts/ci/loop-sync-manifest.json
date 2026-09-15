@@ -176,9 +176,9 @@
       "path": "scripts/ci/check-issue-already-resolved.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "489604959eb2b59d",
-        "corpus": "489604959eb2b59d",
-        "alignedAt": "2026-09-15"
+        "site": "77c5698086384349",
+        "corpus": "77c5698086384349",
+        "alignedAt": "2026-09-13"
       }
     },
     {
@@ -1062,9 +1062,9 @@
       "path": "scripts/ci/harvest-agent-lessons.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "b9717c0a710a1d18",
-        "corpus": "b9717c0a710a1d18",
-        "alignedAt": "2026-09-15"
+        "site": "e7021b48301afeae",
+        "corpus": "e7021b48301afeae",
+        "alignedAt": "2026-09-13"
       }
     },
     {
