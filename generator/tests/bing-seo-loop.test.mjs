@@ -35,3 +35,19 @@ test('live audit accepts the brand suffix when the approved title is its prefix'
   });
   assert.deepEqual(result.findings, []);
 });
+
+test('live audit accepts canonical attributes in either order and numeric entities', async () => {
+  const htmlByUrl = new Map(BING_TITLE_FIXES.map((fix) => [
+    fix.url,
+    '<title>' + fix.title.replace('?', '&#63;') + '</title>'
+      + '<link href="' + fix.url + '" rel="alternate canonical">',
+  ]));
+  const result = await auditLive({
+    fetchImpl: async (url) => ({
+      status: 200,
+      url,
+      text: async () => htmlByUrl.get(url),
+    }),
+  });
+  assert.deepEqual(result.findings, []);
+});

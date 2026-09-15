@@ -30,13 +30,25 @@ function escapeTsSingleQuote(value) {
   return String(value).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
 }
 
+function decodeTsSingleQuote(value) {
+  return String(value).replace(/\\([\\'])/g, '$1');
+}
+
 function decodeHtmlEntities(value) {
   return String(value || '')
     .replace(/&amp;/gi, '&')
     .replace(/&quot;/gi, '"')
     .replace(/&#39;|&apos;/gi, "'")
     .replace(/&lt;/gi, '<')
-    .replace(/&gt;/gi, '>');
+    .replace(/&gt;/gi, '>')
+    .replace(/&#(x[\da-f]+|\d+);/gi, (whole, rawCodePoint) => {
+      const codePoint = rawCodePoint[0].toLowerCase() === 'x'
+        ? Number.parseInt(rawCodePoint.slice(1), 16)
+        : Number.parseInt(rawCodePoint, 10);
+      return Number.isInteger(codePoint) && codePoint >= 0 && codePoint <= 0x10ffff
+        ? String.fromCodePoint(codePoint)
+        : whole;
+    });
 }
 
 function stripTags(value) {
@@ -60,9 +72,14 @@ function normalizeUrl(value) {
 function extractHtmlContract(html) {
   const source = String(html || '');
   const title = stripTags(source.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i)?.[1] || '');
-  const canonical = source.match(
-    /<link\b[^>]*rel=["'][^"']*\bcanonical\b[^"']*["'][^>]*href=["']([^"']+)["']/i,
-  )?.[1] || '';
+  let canonical = '';
+  for (const match of source.matchAll(/<link\b[^>]*>/gi)) {
+    const tag = match[0];
+    const rel = tag.match(/\brel=["']([^"']+)["']/i)?.[1] || '';
+    if (!rel.split(/\s+/).some((token) => token.toLowerCase() === 'canonical')) continue;
+    canonical = tag.match(/\bhref=["']([^"']+)["']/i)?.[1] || '';
+    if (canonical) break;
+  }
   return { title, canonical };
 }
 
@@ -167,11 +184,11 @@ export function checkSource({ repoRoot = REPO_ROOT } = {}) {
           findings.push({ code: 'source-title-drift', file: fix.source, url: fix.url });
         }
       } else {
-        const escaped = escapeTsSingleQuote(fix.title);
         const expected = new RegExp(
-          "['\"]" + escapeRegex(fix.metadataKey) + "['\"]:\\s*'" + escaped + "'",
+          "['\"]" + escapeRegex(fix.metadataKey) + "['\"]:\\s*'((?:\\\\.|[^'])*)'",
         );
-        if (!expected.test(source)) {
+        const match = source.match(expected);
+        if (!match || decodeTsSingleQuote(match[1]) !== fix.title) {
           findings.push({ code: 'source-title-drift', file: fix.source, url: fix.url });
         }
       }

@@ -90,6 +90,7 @@ jobs:
 
       - name: Upload live report
         if: always()
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: bing-seo-title-report
@@ -97,6 +98,7 @@ jobs:
           if-no-files-found: warn
 
       - name: Apply approved title corrections
+        id: apply
         if: ${{ github.event_name == 'schedule' || inputs.apply_fixes == true }}
         run: |
           set -euo pipefail
@@ -110,9 +112,6 @@ jobs:
             git switch --create "$branch" origin/main
           fi
           node scripts/seo/bing-seo-loop.mjs --apply-fixes
-          if git diff --quiet -- content/; then
-            echo 'Nessuna correzione titolo da proporre.'
-          fi
 
       # This workflow writes published metadata and SEO source files directly
       # before opening the PR. The producer-wide contract therefore applies
@@ -144,29 +143,66 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
           exit 1
 
-      - name: Commit and push approved title corrections
+      - name: Open PR for approved title corrections
+        id: reconcile
         if: ${{ github.event_name == 'schedule' || inputs.apply_fixes == true }}
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          AUDIT_OUTCOME: ${{ steps.audit.outcome }}
         run: |
           set -euo pipefail
+          echo 'republished=false' >> "$GITHUB_OUTPUT"
           branch='automation/bing-seo-titles'
           if git diff --quiet -- content/; then
-            echo 'Nessuna correzione titolo da proporre.'
+            if [ "$AUDIT_OUTCOME" = 'failure' ]; then
+              token="${GITHUB_PAT_NANAKO:-}"
+              if [ -z "$token" ]; then
+                echo '::error::Manca GITHUB_PAT_NANAKO per il republish verificabile del publisher.'
+                exit 1
+              fi
+              export GH_TOKEN="$token"
+              dispatch_started_at="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+              gh workflow run publish-api.yml --repo "$GITHUB_REPOSITORY" --ref main
+              publish_run=''
+              for attempt in $(seq 1 24); do
+                echo "Cerco la run publish-api.yml dopo il dispatch (tentativo $attempt/24)."
+                publish_run="$(gh run list --repo "$GITHUB_REPOSITORY" --workflow publish-api.yml --event workflow_dispatch --branch main --limit 20 --json databaseId,createdAt --jq "map(select(.createdAt >= \"$dispatch_started_at\")) | sort_by(.createdAt) | last | .databaseId // empty" 2>/dev/null || true)"
+                if [ -n "$publish_run" ]; then
+                  break
+                fi
+                sleep 5
+              done
+              if [ -z "$publish_run" ]; then
+                echo '::error::Il dispatch di publish-api.yml non ha prodotto una run verificabile.'
+                exit 1
+              fi
+              gh run watch "$publish_run" --repo "$GITHUB_REPOSITORY" --interval 10 --exit-status
+              node scripts/seo/bing-seo-loop.mjs --audit-live --report "$RUNNER_TEMP/bing-seo-title-post-republish-report.json"
+              echo 'republished=true' >> "$GITHUB_OUTPUT"
+            else
+              echo 'Nessuna correzione titolo da proporre.'
+            fi
             exit 0
           fi
-          token="${GITHUB_PAT_NANAKO:-$GH_TOKEN}"
+          token="${GITHUB_PAT_NANAKO:-}"
           if [ -z "$token" ]; then
             echo '::error::Manca GITHUB_PAT_NANAKO per la PR del publisher.'
             exit 1
           fi
           export GH_TOKEN="$token"
+          expected_remote_tip=''
+          if git show-ref --verify --quiet "refs/remotes/origin/$branch"; then
+            expected_remote_tip="$(git rev-parse "refs/remotes/origin/$branch")"
+          fi
           git remote set-url origin "https://x-access-token:$token@github.com/$GITHUB_REPOSITORY.git"
           git config user.name 'frontaliere-automation[bot]'
           git config user.email 'frontaliere-automation[bot]@users.noreply.github.com'
           git add content/seo/seo-blog-ch.ts content/blog-meta-de.ts content/blog-meta-fr.ts content/blog-meta-ch-de.ts
           git commit -m 'fix(seo): shorten Bing article titles'
-          git push origin "HEAD:$branch"
+          if [ -n "$expected_remote_tip" ]; then
+            git push --force-with-lease="refs/heads/$branch:$expected_remote_tip" origin "$branch"
+          else
+            git push origin "$branch"
+          fi
           pr_count="$(gh pr list --repo "$GITHUB_REPOSITORY" --state open --head "$branch" --json number --jq 'length')"
           if [ "$pr_count" = '0' ]; then
             body="$RUNNER_TEMP/bing-seo-titles-pr-body.md"
@@ -177,13 +213,22 @@ jobs:
           - Esegue entrambe le guardie del corpus prima del commit, con il checkout completo degli input che le guardie devono scansionare.
 
           ## Non implementato (ancora)
-          - Nessuno
+          - Nessuno: per scelta, nessun residuo in questa PR.
           BODY
             gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$branch" \
               --title 'fix(seo): shorten Bing article titles' --body-file "$body"
             gh pr edit --repo "$GITHUB_REPOSITORY" "$branch" --add-label agent:autofix
           fi
 
+      - name: Upload post-republish report
+        if: always()
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: bing-seo-title-post-republish-report
+          path: $RUNNER_TEMP/bing-seo-title-post-republish-report.json
+          if-no-files-found: warn
+
       - name: Report unresolved live findings
-        if: steps.audit.outcome == 'failure'
+        if: steps.audit.outcome == 'failure' && steps.reconcile.outputs.republished != 'true'
         run: echo "::warning::La superficie live ha ancora finding; il report è allegato e il ciclo successivo riverificherà dopo la pubblicazione API."
