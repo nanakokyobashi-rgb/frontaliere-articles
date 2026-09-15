@@ -381,6 +381,17 @@ export function shouldExportRcValue(value, rcKey) {
 }
 
 /**
+ * Claim an environment target once per load pass. Multiple RC parameters can
+ * intentionally point to the same legacy variable; the first mapping wins so
+ * a more specific value cannot be overwritten by a later fallback mapping.
+ */
+export function claimEnvKey(queuedEnvKeys, envKey) {
+  if (queuedEnvKeys.has(envKey)) return false;
+  queuedEnvKeys.add(envKey);
+  return true;
+}
+
+/**
  * Format unresolved parameter names without exposing any RC values or secrets.
  * A missing parameter is different from an explicitly empty allowlisted value;
  * naming it makes a site/corpus mapping drift actionable instead of silently
@@ -625,6 +636,7 @@ async function main() {
   let expectedAbsent = 0;
   const missingKeys = [];
   const lines = []; // For GITHUB_ENV or stdout
+  const queuedEnvKeys = new Set();
 
   for (const [rcKey, envKeys] of Object.entries(RC_TO_ENV)) {
     const value = getRcValue(template, rcKey);
@@ -644,7 +656,7 @@ async function main() {
     }
 
     for (const envKey of envKeys) {
-      if (process.env[envKey]) {
+      if (process.env[envKey] || !claimEnvKey(queuedEnvKeys, envKey)) {
         skipped++;
         continue;
       }
