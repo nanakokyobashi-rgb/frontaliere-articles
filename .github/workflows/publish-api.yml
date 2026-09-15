@@ -1,4 +1,5 @@
 name: Publish article data API
+run-name: Publish article data API (${{ inputs.bing_seo_nonce || 'automatic' }})
 
 # This repository owns the article corpus. The site that renders it lives in a
 # separate repository and consumes this data as plain JSON over HTTP — it must
@@ -65,6 +66,12 @@ on:
   schedule:
     - cron: '17 3 * * 1'
   workflow_dispatch:
+    inputs:
+      bing_seo_nonce:
+        description: 'Nonce per correlare un republish avviato dal loop Bing SEO'
+        required: false
+        default: ''
+        type: string
 
 # One publish at a time, and never cancel one in flight: a half-written data
 # surface is worse than a slightly stale one.
