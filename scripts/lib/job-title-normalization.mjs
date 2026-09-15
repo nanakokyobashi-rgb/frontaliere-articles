@@ -37,9 +37,10 @@ export function extractNarrativeJobTitle(value) {
   const matches = [...source.matchAll(BOLD_SEGMENT_RE)];
   if (matches.length === 0) return '';
 
-  // Prefer the last introduced segment, but keep looking if the explanation
-  // contains another bold fragment after the actual title.
-  for (let index = matches.length - 1; index >= 0; index -= 1) {
+  // The first introduced segment is the title. Later bold fragments belong to
+  // the explanation (for example, a note after the translated title) and must
+  // never replace it.
+  for (let index = 0; index < matches.length; index += 1) {
     const match = matches[index];
     const candidate = String(match[1] || '').trim();
     const start = Number(match.index ?? -1);

@@ -1626,10 +1626,11 @@
     },
     {
       "path": "scripts/lib/job-title-normalization.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "Il parser del corpus sceglie il primo segmento bold introdotto per evitare che una nota successiva diventi il titolo; adattamento necessario per il contract del corpus (#1507).",
       "baseline": {
         "site": "6e837fa55b30715f",
-        "corpus": "6e837fa55b30715f",
+        "corpus": "75af08e1ca0b64d3",
         "alignedAt": "2026-09-15"
       }
     },
