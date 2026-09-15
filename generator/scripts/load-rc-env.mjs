@@ -78,15 +78,33 @@ const RC_TO_ENV = {
   GRAPHHOPPER_API_KEY:         ['GRAPHHOPPER_API_KEY'],
   OPENROUTESERVICE_API_KEY:    ['OPENROUTESERVICE_API_KEY'],
   STADIA_API_KEY:              ['STADIA_API_KEY'],
+  // Keep the three ASTRA OpenTransportData plans separate. Token hashes are
+  // retained for plan inventory only; the API uses the bearer token. The LSA
+  // token is mapped to the legacy collector variable before the old fallback.
+  OPENTRANSPORTDATA_ASTRA_SITUATION_TOKEN:      ['OPENTRANSPORTDATA_ASTRA_SITUATION_TOKEN'],
+  OPENTRANSPORTDATA_ASTRA_SITUATION_TOKEN_HASH: ['OPENTRANSPORTDATA_ASTRA_SITUATION_TOKEN_HASH'],
+  OPENTRANSPORTDATA_ASTRA_LSA_TOKEN:            ['OPENTRANSPORTDATA_ASTRA_LSA_TOKEN', 'OPENTRANSPORTDATA_API_KEY'],
+  OPENTRANSPORTDATA_ASTRA_LSA_TOKEN_HASH:       ['OPENTRANSPORTDATA_ASTRA_LSA_TOKEN_HASH'],
+  OPENTRANSPORTDATA_ASTRA_COUNTERS_TOKEN:      ['OPENTRANSPORTDATA_ASTRA_COUNTERS_TOKEN'],
+  OPENTRANSPORTDATA_ASTRA_COUNTERS_TOKEN_HASH: ['OPENTRANSPORTDATA_ASTRA_COUNTERS_TOKEN_HASH'],
   OPENTRANSPORTDATA_API_KEY:   ['OPENTRANSPORTDATA_API_KEY'],
+  OPENTRANSPORTDATA_QUOTA:     ['OPENTRANSPORTDATA_QUOTA'],
+  // Conservative provider caps are read by the site scheduler's server-side
+  // mesh. Keep this adapted loader in lockstep so local/CI RC loading cannot
+  // silently drop a cap that exists in Remote Config.
   TOMTOM_DAILY_BUDGET:         ['TOMTOM_DAILY_BUDGET'],
+  TOMTOM_ROUTING_MONTHLY_BUDGET: ['TOMTOM_ROUTING_MONTHLY_BUDGET'],
+  TOMTOM_FLOW_MONTHLY_BUDGET:  ['TOMTOM_FLOW_MONTHLY_BUDGET'],
+  HERE_DAILY_BUDGET:           ['HERE_DAILY_BUDGET'],
   HERE_MONTHLY_BUDGET:         ['HERE_MONTHLY_BUDGET'],
+  GOOGLE_MONTHLY_BUDGET:       ['GOOGLE_MONTHLY_BUDGET'],
   GOOGLE_ROUTES_MONTHLY_BUDGET: ['GOOGLE_ROUTES_MONTHLY_BUDGET'],
   GOOGLE_MAPS_MONTHLY_BUDGET:  ['GOOGLE_MAPS_MONTHLY_BUDGET'],
   MAPBOX_MONTHLY_BUDGET:       ['MAPBOX_MONTHLY_BUDGET'],
   GEOAPIFY_DAILY_BUDGET:       ['GEOAPIFY_DAILY_BUDGET'],
   GRAPHHOPPER_DAILY_BUDGET:    ['GRAPHHOPPER_DAILY_BUDGET'],
   OPENROUTESERVICE_DAILY_BUDGET: ['OPENROUTESERVICE_DAILY_BUDGET'],
+  STADIA_MONTHLY_CREDITS:       ['STADIA_MONTHLY_CREDITS'],
   STADIA_DAILY_BUDGET:         ['STADIA_DAILY_BUDGET'],
   // HERE Cost Management Usage API (OAuth access key) — reconciles the routing
   // budget counter with real billed usage. Server-only, never client-visible.
@@ -363,6 +381,17 @@ export function shouldExportRcValue(value, rcKey) {
 }
 
 /**
+ * Claim an environment target once per load pass. Multiple RC parameters can
+ * intentionally point to the same legacy variable; the first mapping wins so
+ * a more specific value cannot be overwritten by a later fallback mapping.
+ */
+export function claimEnvKey(queuedEnvKeys, envKey) {
+  if (queuedEnvKeys.has(envKey)) return false;
+  queuedEnvKeys.add(envKey);
+  return true;
+}
+
+/**
  * Format unresolved parameter names without exposing any RC values or secrets.
  * A missing parameter is different from an explicitly empty allowlisted value;
  * naming it makes a site/corpus mapping drift actionable instead of silently
@@ -607,6 +636,7 @@ async function main() {
   let expectedAbsent = 0;
   const missingKeys = [];
   const lines = []; // For GITHUB_ENV or stdout
+  const queuedEnvKeys = new Set();
 
   for (const [rcKey, envKeys] of Object.entries(RC_TO_ENV)) {
     const value = getRcValue(template, rcKey);
@@ -626,7 +656,7 @@ async function main() {
     }
 
     for (const envKey of envKeys) {
-      if (process.env[envKey]) {
+      if (process.env[envKey] || !claimEnvKey(queuedEnvKeys, envKey)) {
         skipped++;
         continue;
       }
