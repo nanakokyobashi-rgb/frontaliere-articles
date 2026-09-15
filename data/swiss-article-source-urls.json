@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/ticino/attualita/1940625/dagli-aumenti-alle-liti-in-casa-come-evitare-che-un-affitto-finisca-in-tribunale": "diritto-locazione-conciliazione-ticino",
   "https://www.tio.ch/svizzera/economia/1944505/addebito-app-twint-pagamenti-utenti": "twint-addebito-diretto",
   "https://www.tio.ch/newsblog/valute-e-frontiere/1944282/dazi-agosto-aliquota-tetto-svizzera-rischio-resta": "dazi-usa-svizzera-2026",
   "https://www.admin.ch/it/newnsb/nwb0mjvyloazqobnrdpdb": "occupazione-disoccupazione-svizzera-q2-2026",
@@ -2445,6 +2444,11 @@
   "https://www.swissinfo.ch/ita/cn%3a-ok-a-nuova-cartella-sanitaria-elettronica%2c-sostituir%c3%a0-cip/92056996": {
     "articleId": "consiglio-nazionale-cartella-sanitaria",
     "ts": "2026-09-15T00:26:33.371Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4082713": {
+    "articleId": "ssr-risparmi-270-milioni-2029",
+    "ts": "2026-09-15T01:03:03.335Z",
     "keyForm": 2
   }
 }
