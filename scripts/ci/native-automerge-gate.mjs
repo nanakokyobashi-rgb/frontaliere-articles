@@ -23,10 +23,11 @@ import {
   findTestOnlyApproval,
   TEST_REVIEW_MARKER,
 } from './review-test-policy.mjs';
-import { REVIEW_GATE_STEP_NAME } from './lib/vitestCheck.mjs';
 
 const TESTS_WORKFLOW_PATH = '.github/workflows/tests.yml';
 const TESTS_WORKFLOW_EVENT = 'pull_request';
+// Keep the bootstrap dependency-free unless the gate actually needs it.
+export const REVIEW_GATE_STEP_NAME = 'Require approving Claude review';
 const NIT_MARKER_RE = /^[^\n🔴🟢]*(?<!`)🟡\s*\*{0,2}\s*Nit\s*\*{0,2}\s*[:—-]/mu;
 const FINDINGS_HEADING_RE = /^\s{0,3}#{1,3}\s+Findings\b[^\n]*$/i;
 const LGTM_HEADING_RE = /^\s{0,3}##\s+LGTM\s*$/m;

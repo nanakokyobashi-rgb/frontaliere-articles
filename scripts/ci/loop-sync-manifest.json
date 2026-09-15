@@ -144,10 +144,11 @@
     },
     {
       "path": "scripts/ci/native-automerge-gate.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "Il gate del corpus mantiene la stessa logica di enrollment, ma il nome dello step review è una costante locale: il bootstrap non trascina vitestCheck.mjs come dipendenza hard e lo scarica solo quando il grafo del gate lo richiede. Adattamento necessario per il contract del corpus (#1507).",
       "baseline": {
         "site": "fe0d90a363d6b3c4",
-        "corpus": "fe0d90a363d6b3c4",
+        "corpus": "17ef9a9d8340acc4",
         "alignedAt": "2026-09-15"
       }
     },
@@ -1620,6 +1621,15 @@
       "baseline": {
         "site": "278984502451dcfe",
         "corpus": "278984502451dcfe",
+        "alignedAt": "2026-09-15"
+      }
+    },
+    {
+      "path": "scripts/lib/job-title-normalization.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "6e837fa55b30715f",
+        "corpus": "6e837fa55b30715f",
         "alignedAt": "2026-09-15"
       }
     },
@@ -3323,9 +3333,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-18.yml",
       "mode": "identical",
       "baseline": {
-        "site": "04faac221f3935dd",
-        "corpus": "04faac221f3935dd",
-        "alignedAt": "2026-09-14"
+        "site": "bb521df87ab079ca",
+        "corpus": "bb521df87ab079ca",
+        "alignedAt": "2026-09-15"
       }
     },
     {
@@ -3333,9 +3343,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-19.yml",
       "mode": "identical",
       "baseline": {
-        "site": "84f0fcc4f8109db4",
-        "corpus": "84f0fcc4f8109db4",
-        "alignedAt": "2026-09-14"
+        "site": "8330576ba87352b7",
+        "corpus": "8330576ba87352b7",
+        "alignedAt": "2026-09-15"
       }
     },
     {
@@ -3343,9 +3353,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-20.yml",
       "mode": "identical",
       "baseline": {
-        "site": "bc0b0beaf0fbfa9d",
-        "corpus": "bc0b0beaf0fbfa9d",
-        "alignedAt": "2026-09-14"
+        "site": "980d5002b2d9e82c",
+        "corpus": "980d5002b2d9e82c",
+        "alignedAt": "2026-09-15"
       }
     },
     {
@@ -3353,9 +3363,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-21.yml",
       "mode": "identical",
       "baseline": {
-        "site": "f3d111cbb32a1a4d",
-        "corpus": "f3d111cbb32a1a4d",
-        "alignedAt": "2026-09-14"
+        "site": "0bb500bbe5a99396",
+        "corpus": "0bb500bbe5a99396",
+        "alignedAt": "2026-09-15"
       }
     },
     {
@@ -3363,9 +3373,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-22.yml",
       "mode": "identical",
       "baseline": {
-        "site": "99ac10094cc57ba8",
-        "corpus": "99ac10094cc57ba8",
-        "alignedAt": "2026-09-14"
+        "site": "3cf968156f203fb2",
+        "corpus": "3cf968156f203fb2",
+        "alignedAt": "2026-09-15"
       }
     },
     {
@@ -3373,9 +3383,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-23.yml",
       "mode": "identical",
       "baseline": {
-        "site": "903938dd2ef397fa",
-        "corpus": "903938dd2ef397fa",
-        "alignedAt": "2026-09-14"
+        "site": "c6e27b3143e2bb65",
+        "corpus": "c6e27b3143e2bb65",
+        "alignedAt": "2026-09-15"
       }
     },
     {
@@ -3383,9 +3393,9 @@
       "sitePath": ".github/corpus-workflows/translate-pending.yml",
       "mode": "identical",
       "baseline": {
-        "site": "b723271475199f38",
-        "corpus": "b723271475199f38",
-        "alignedAt": "2026-09-14"
+        "site": "0fd66752f8707170",
+        "corpus": "0fd66752f8707170",
+        "alignedAt": "2026-09-15"
       }
     },
     {
@@ -3393,9 +3403,9 @@
       "sitePath": ".github/corpus-workflows/contract.json",
       "mode": "identical",
       "baseline": {
-        "site": "f48d23a2d3db8810",
-        "corpus": "f48d23a2d3db8810",
-        "alignedAt": "2026-09-14"
+        "site": "71ccc22a16f2bd78",
+        "corpus": "71ccc22a16f2bd78",
+        "alignedAt": "2026-09-15"
       }
     },
     {
