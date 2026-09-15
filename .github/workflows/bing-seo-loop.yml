@@ -94,7 +94,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: bing-seo-title-report
-          path: $RUNNER_TEMP/bing-seo-title-report.json
+          path: ${{ runner.temp }}/bing-seo-title-report.json
           if-no-files-found: warn
 
       - name: Apply approved title corrections
@@ -205,7 +205,7 @@ jobs:
           git config user.name 'frontaliere-automation[bot]'
           git config user.email 'frontaliere-automation[bot]@users.noreply.github.com'
           if [ "$working_content_diff" = 'true' ]; then
-            git add content/seo/seo-blog-ch.ts content/blog-meta-de.ts content/blog-meta-fr.ts content/blog-meta-ch-de.ts
+            git add content/
             git commit -m 'fix(seo): shorten Bing article titles'
           else
             echo 'Correzioni già committate sul branch automation: riconcilio la PR senza ricreare il commit.'
@@ -240,9 +240,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: bing-seo-title-post-republish-report
-          path: $RUNNER_TEMP/bing-seo-title-post-republish-report.json
+          path: ${{ runner.temp }}/bing-seo-title-post-republish-report.json
           if-no-files-found: warn
 
       - name: Report unresolved live findings
-        if: steps.audit.outcome == 'failure' && steps.reconcile.outputs.republished != 'true'
-        run: echo "::warning::La superficie live ha ancora finding; il report è allegato e il ciclo successivo riverificherà dopo la pubblicazione API."
+        if: (steps.audit.outcome == 'failure' || steps.source.outcome == 'failure') && steps.reconcile.outputs.republished != 'true'
+        run: echo "::warning::La policy sorgente o la superficie live ha ancora finding; il report è allegato e il ciclo successivo riverificherà dopo la pubblicazione API."

@@ -216,9 +216,15 @@ function hasSeoTitle(block, title) {
 export function checkSource({ repoRoot = REPO_ROOT } = {}) {
   const findings = [];
   const seenUrls = new Set();
+  const seenSourceKeys = new Set();
   for (const fix of BING_TITLE_FIXES) {
     if (seenUrls.has(fix.url)) findings.push({ code: 'duplicate-url', url: fix.url });
     seenUrls.add(fix.url);
+    const sourceKey = fix.kind === 'seo' ? fix.articleId : fix.metadataKey;
+    if (seenSourceKeys.has(sourceKey)) {
+      findings.push({ code: 'duplicate-source-key', file: fix.source, detail: sourceKey });
+    }
+    seenSourceKeys.add(sourceKey);
     if (fix.title.length > BING_TITLE_MAX_CHARS) {
       findings.push({
         code: 'policy-title-too-long',
