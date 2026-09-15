@@ -35,14 +35,7 @@ jobs:
           persist-credentials: false
           sparse-checkout: |
             AGENTS.md
-            content/blog-meta-de.ts
-            content/blog-meta-fr.ts
-            content/blog-meta-ch-de.ts
-            content/seo/seo-blog-ch.ts
-            content/blog-body/
-            content/blog-body-ch/
-            content/blog-meta-*.ts
-            content/seo/
+            content/
             scripts/seo/
             generator/tests/bing-seo-loop.test.mjs
             generator/tests/article-fabrication-guard.test.mjs
