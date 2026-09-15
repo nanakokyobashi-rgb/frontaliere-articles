@@ -68,6 +68,26 @@ const RC_TO_ENV = {
   FIREBASE_API_KEY:               ['FIREBASE_API_KEY', 'VITE_FIREBASE_API_KEY'],
   TOMTOM_API_KEY:             ['TOMTOM_API_KEY'],
   HERE_API_KEY:               ['HERE_API_KEY'],
+  // Traffic provider mesh. These server-only credentials are optional: the
+  // scheduler rotates to the next configured provider when one is absent,
+  // exhausted, or unavailable.
+  GOOGLE_ROUTES_API_KEY:      ['GOOGLE_ROUTES_API_KEY'],
+  MAPBOX_PUBLIC_TOKEN:         ['MAPBOX_PUBLIC_TOKEN'],
+  MAPBOX_SECRET_TOKEN:         ['MAPBOX_SECRET_TOKEN'],
+  GEOAPIFY_API_KEY:            ['GEOAPIFY_API_KEY'],
+  GRAPHHOPPER_API_KEY:         ['GRAPHHOPPER_API_KEY'],
+  OPENROUTESERVICE_API_KEY:    ['OPENROUTESERVICE_API_KEY'],
+  STADIA_API_KEY:              ['STADIA_API_KEY'],
+  OPENTRANSPORTDATA_API_KEY:   ['OPENTRANSPORTDATA_API_KEY'],
+  TOMTOM_DAILY_BUDGET:         ['TOMTOM_DAILY_BUDGET'],
+  HERE_MONTHLY_BUDGET:         ['HERE_MONTHLY_BUDGET'],
+  GOOGLE_ROUTES_MONTHLY_BUDGET: ['GOOGLE_ROUTES_MONTHLY_BUDGET'],
+  GOOGLE_MAPS_MONTHLY_BUDGET:  ['GOOGLE_MAPS_MONTHLY_BUDGET'],
+  MAPBOX_MONTHLY_BUDGET:       ['MAPBOX_MONTHLY_BUDGET'],
+  GEOAPIFY_DAILY_BUDGET:       ['GEOAPIFY_DAILY_BUDGET'],
+  GRAPHHOPPER_DAILY_BUDGET:    ['GRAPHHOPPER_DAILY_BUDGET'],
+  OPENROUTESERVICE_DAILY_BUDGET: ['OPENROUTESERVICE_DAILY_BUDGET'],
+  STADIA_DAILY_BUDGET:         ['STADIA_DAILY_BUDGET'],
   // HERE Cost Management Usage API (OAuth access key) — reconciles the routing
   // budget counter with real billed usage. Server-only, never client-visible.
   HERE_OAUTH_KEY_ID:          ['HERE_OAUTH_KEY_ID'],
