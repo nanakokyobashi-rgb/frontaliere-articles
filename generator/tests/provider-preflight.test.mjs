@@ -1,12 +1,27 @@
-import test from 'node:test';
+import test, { afterEach, beforeEach } from 'node:test';
 import assert from 'node:assert/strict';
-import { AI_MODELS } from '../scripts/lib/ai-models.mjs';
+import { AI_MODELS, GH_MODELS_CATALOG_URL } from '../scripts/lib/ai-models.mjs';
 import {
   classifyProviderProbe,
   normalizeTimeoutMs,
   runProviderPreflight,
   summarizeProviderPreflight,
 } from '../scripts/lib/provider-preflight.mjs';
+
+const ghPatNames = Array.from({ length: 9 }, (_, index) => index === 0 ? 'GH_MODELS_PAT' : `GH_MODELS_PAT_${index + 1}`);
+const originalGhPats = Object.fromEntries(ghPatNames.map((name) => [name, process.env[name]]));
+
+beforeEach(() => {
+  for (const name of ghPatNames.slice(1)) delete process.env[name];
+});
+
+afterEach(() => {
+  for (const name of ghPatNames) {
+    const value = originalGhPats[name];
+    if (value === undefined) delete process.env[name];
+    else process.env[name] = value;
+  }
+});
 
 test('provider preflight distingue credenziali mancanti, rete e quota', () => {
   assert.equal(classifyProviderProbe({ configured: false }).status, 'credential_missing');
@@ -64,4 +79,55 @@ test('il preflight include il Codex action-owned quando il broker è pronto', as
       else process.env[name] = previous[name];
     }
   }
+});
+test('GitHub Models preflight usa il successore e tratta il brownout 410 come provider non disponibile', async () => {
+  process.env.GH_MODELS_PAT = 'preflight-test-pat';
+  const calls = [];
+  const report = await runProviderPreflight({
+    models: [AI_MODELS.GPT4O],
+    lookup: async (hostname) => {
+      assert.equal(hostname, new URL(GH_MODELS_CATALOG_URL).hostname);
+      return [];
+    },
+    fetchImpl: async (url, init) => {
+      calls.push({ url: String(url), init });
+      return { status: 410 };
+    },
+    now: () => '2026-09-14T22:00:00.000Z',
+  });
+
+  assert.equal(calls.length, 1);
+  assert.equal(calls[0].url, GH_MODELS_CATALOG_URL);
+  assert.equal(calls[0].init.method, 'GET');
+  assert.equal(calls[0].init.headers.Authorization, 'Bearer preflight-test-pat');
+  assert.deepEqual(report.providers[0], {
+    provider: 'github',
+    modelCount: 1,
+    configured: true,
+    probe: 'catalog',
+    endpoint: new URL(GH_MODELS_CATALOG_URL).hostname,
+    status: 'provider_unavailable',
+    reason: 'github_models_retirement_brownout',
+    quota: 'unknown',
+    httpStatus: 410,
+  });
+});
+
+test('GitHub Models preflight ruota tutti i PAT e basta un account pronto', async () => {
+  process.env.GH_MODELS_PAT = 'preflight-first-pat';
+  process.env.GH_MODELS_PAT_2 = 'preflight-second-pat';
+  const auth = [];
+  const report = await runProviderPreflight({
+    models: [AI_MODELS.GPT4O],
+    lookup: async () => [],
+    fetchImpl: async (url, init) => {
+      assert.equal(String(url), GH_MODELS_CATALOG_URL);
+      auth.push(init.headers.Authorization);
+      return auth.length === 1 ? { status: 401 } : { status: 200 };
+    },
+  });
+
+  assert.deepEqual(auth, ['Bearer preflight-first-pat', 'Bearer preflight-second-pat']);
+  assert.equal(report.providers[0].status, 'ready');
+  assert.equal(report.providers[0].reason, 'catalog_reachable');
 });
