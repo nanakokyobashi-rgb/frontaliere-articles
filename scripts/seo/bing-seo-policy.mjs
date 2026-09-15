@@ -12,6 +12,7 @@ export const BING_TITLE_FIXES = [
     source: 'content/seo/seo-blog-ch.ts',
     kind: 'seo',
     articleId: 'blog-dati-tasse-frontalieri-italia',
+    sourceTitle: "Pasticcio dati e tasse dei vecchi frontalieri: 'Si faccia piena luce'",
     title: 'Dati e tasse dei vecchi frontalieri: cosa è successo',
   },
   {
@@ -19,6 +20,7 @@ export const BING_TITLE_FIXES = [
     source: 'content/seo/seo-blog-ch.ts',
     kind: 'seo',
     articleId: 'blog-frontaliere-assicurazione-auto-confronto',
+    sourceTitle: 'Assicurazione auto per frontalieri: Svizzera vs Italia, confronto pratico',
     title: 'Assicurazione auto frontalieri: Svizzera o Italia?',
   },
   {
@@ -26,6 +28,7 @@ export const BING_TITLE_FIXES = [
     source: 'content/seo/seo-blog-ch.ts',
     kind: 'seo',
     articleId: 'blog-frontaliere-credito-imposta-2026-famiglia-con-figli',
+    sourceTitle: "Credito d'imposta per frontalieri: calcolo, limiti e dichiarazione italiana",
     title: "Credito d'imposta frontalieri 2026: guida pratica",
   },
   {
@@ -33,6 +36,7 @@ export const BING_TITLE_FIXES = [
     source: 'content/seo/seo-blog-ch.ts',
     kind: 'seo',
     articleId: 'blog-frontaliere-doppia-imposizione-credito-imposta',
+    sourceTitle: "Frontaliere: come evitare la doppia tassazione con il credito d'imposta",
     title: "Credito d'imposta e doppia tassazione: guida",
   },
   {
@@ -40,6 +44,7 @@ export const BING_TITLE_FIXES = [
     source: 'content/seo/seo-blog-ch.ts',
     kind: 'seo',
     articleId: 'blog-frontaliere-licenziamento-diritti-2026',
+    sourceTitle: 'Licenziamento frontalieri 2026: termini e diritti',
     title: 'Licenziamento frontalieri 2026: diritti e preavviso',
   },
   {
@@ -47,6 +52,7 @@ export const BING_TITLE_FIXES = [
     source: 'content/seo/seo-blog-ch.ts',
     kind: 'seo',
     articleId: 'blog-frontaliere-pensionamento-anticipato-2026-oltre-20km',
+    sourceTitle: 'Pensionamento anticipato per frontalieri: impatto su AVS e secondo pilastro',
     title: 'Pensionamento anticipato frontalieri: AVS e LPP',
   },
   {
@@ -54,6 +60,7 @@ export const BING_TITLE_FIXES = [
     source: 'content/seo/seo-blog-ch.ts',
     kind: 'seo',
     articleId: 'blog-parrucchieri-frontaliere-ticino',
+    sourceTitle: 'Lavorare come parrucchiera in Ticino: stipendio, requisiti e riconoscimento del titolo',
     title: 'Parrucchiera in Ticino da frontaliere: guida',
   },
   {
@@ -61,6 +68,7 @@ export const BING_TITLE_FIXES = [
     source: 'content/seo/seo-blog-ch.ts',
     kind: 'seo',
     articleId: 'blog-quadro-rw-2026-chi-dichiara-conto-svizzero',
+    sourceTitle: 'Chi deve dichiarare il conto svizzero nel 2026',
     title: 'Quadro RW 2026: conto svizzero, chi dichiara',
   },
   {
@@ -68,6 +76,7 @@ export const BING_TITLE_FIXES = [
     source: 'content/blog-meta-de.ts',
     kind: 'meta',
     metadataKey: 'blog.article.fiera-antiquariato-mendrisio-2026.title',
+    sourceTitle: 'Antiquitätenmesse in Mendrisio: 160 Aussteller und über 10.000 Besucher',
     title: 'Antiquitätenmesse Mendrisio 2026: Infos und Termine',
   },
   {
@@ -75,6 +84,7 @@ export const BING_TITLE_FIXES = [
     source: 'content/blog-meta-de.ts',
     kind: 'meta',
     metadataKey: 'blog.article.tassa-salute-frontalieri-ticino-2026.title',
+    sourceTitle: 'Gesundheitssteuer für Grenzgänger: Rückerstattungen blockiert, was sich ändert',
     title: 'Gesundheitssteuer für Grenzgänger: aktuelle Änderungen',
   },
   {
@@ -82,6 +92,7 @@ export const BING_TITLE_FIXES = [
     source: 'content/blog-meta-de.ts',
     kind: 'meta',
     metadataKey: 'blog.article.funivia-monte-lema-stagione-2026.title',
+    sourceTitle: 'Seilbahn Monte Lema, neue Saison 2026: erweiterte Öffnungszeiten und Preise',
     title: 'Monte Lema Bahn 2026: Saison, Zeiten und Preise',
   },
   {
@@ -89,6 +100,7 @@ export const BING_TITLE_FIXES = [
     source: 'content/blog-meta-ch-de.ts',
     kind: 'meta',
     metadataKey: 'blog.article.aufenthaltsbewilligung-b-quellensteuer.title',
+    sourceTitle: 'Aufenthaltsbewilligung B und Quellensteuer 2026: Alles, was Sie wissen müssen',
     title: 'Bewilligung B und Quellensteuer 2026: Ratgeber',
   },
   {
@@ -96,6 +108,7 @@ export const BING_TITLE_FIXES = [
     source: 'content/blog-meta-fr.ts',
     kind: 'meta',
     metadataKey: 'blog.article.autostrada-a9-chiude-de-notti-2026.title',
+    sourceTitle: 'Autoroute A9 en direction de Chiasso fermée la nuit : voici quand et pourquoi',
     title: 'Autoroute A9 Chiasso : fermetures nocturnes 2026',
   },
   {
@@ -103,6 +116,7 @@ export const BING_TITLE_FIXES = [
     source: 'content/blog-meta-fr.ts',
     kind: 'meta',
     metadataKey: 'blog.article.tassa-transito-svizzera-2023.title',
+    sourceTitle: "Taxe de transit Suisse 2026 : qu'est-ce qui change pour les frontaliers ?",
     title: 'Taxe de transit suisse 2026 : changements',
   },
   {
@@ -110,6 +124,7 @@ export const BING_TITLE_FIXES = [
     source: 'content/blog-meta-fr.ts',
     kind: 'meta',
     metadataKey: 'blog.article.orario-lavoro-settimanale-svizzera-2025.title',
+    sourceTitle: 'Heures de travail hebdomadaires en Suisse : 40 heures et 3 minutes en 2025',
     title: 'Heures de travail en Suisse : 40 h 3 en 2025',
   },
   {
@@ -117,6 +132,7 @@ export const BING_TITLE_FIXES = [
     source: 'content/blog-meta-fr.ts',
     kind: 'meta',
     metadataKey: 'blog.article.permesso-g-vs-b-frontalieri-2026-errori-comuni.title',
+    sourceTitle: 'Changement de statut des frontaliers : erreurs courantes et comment les corriger',
     title: 'Permis G ou B : erreurs fréquentes des frontaliers',
   },
 ];

@@ -152,7 +152,15 @@ jobs:
           set -euo pipefail
           echo 'republished=false' >> "$GITHUB_OUTPUT"
           branch='automation/bing-seo-titles'
-          if git diff --quiet -- content/; then
+          working_content_diff='false'
+          if [ -n "$(git status --porcelain -- content/)" ]; then
+            working_content_diff='true'
+          fi
+          committed_content_diff='false'
+          if ! git diff --quiet origin/main...HEAD -- content/; then
+            committed_content_diff='true'
+          fi
+          if [ "$working_content_diff" = 'false' ] && [ "$committed_content_diff" = 'false' ]; then
             if [ "$AUDIT_OUTCOME" = 'failure' ]; then
               token="${GITHUB_PAT_NANAKO:-}"
               if [ -z "$token" ]; then
@@ -196,12 +204,16 @@ jobs:
           git remote set-url origin "https://x-access-token:$token@github.com/$GITHUB_REPOSITORY.git"
           git config user.name 'frontaliere-automation[bot]'
           git config user.email 'frontaliere-automation[bot]@users.noreply.github.com'
-          git add content/seo/seo-blog-ch.ts content/blog-meta-de.ts content/blog-meta-fr.ts content/blog-meta-ch-de.ts
-          git commit -m 'fix(seo): shorten Bing article titles'
-          if [ -n "$expected_remote_tip" ]; then
-            git push --force-with-lease="refs/heads/$branch:$expected_remote_tip" origin "$branch"
+          if [ "$working_content_diff" = 'true' ]; then
+            git add content/seo/seo-blog-ch.ts content/blog-meta-de.ts content/blog-meta-fr.ts content/blog-meta-ch-de.ts
+            git commit -m 'fix(seo): shorten Bing article titles'
+            if [ -n "$expected_remote_tip" ]; then
+              git push --force-with-lease="refs/heads/$branch:$expected_remote_tip" origin "$branch"
+            else
+              git push origin "$branch"
+            fi
           else
-            git push origin "$branch"
+            echo 'Correzioni già committate sul branch automation: riconcilio la PR senza ricreare il commit.'
           fi
           pr_count="$(gh pr list --repo "$GITHUB_REPOSITORY" --state open --head "$branch" --json number --jq 'length')"
           if [ "$pr_count" = '0' ]; then

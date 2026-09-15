@@ -1,7 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { dirname, relative, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import {
+  applyFixes,
   auditLive,
   checkSource,
 } from '../../scripts/seo/bing-seo-loop.mjs';
@@ -34,6 +38,28 @@ test('live audit accepts the brand suffix when the approved title is its prefix'
     }),
   });
   assert.deepEqual(result.findings, []);
+});
+
+test('applyFixes rejects an unapproved editorial source drift', () => {
+  const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
+  const contents = new Map(BING_TITLE_FIXES.map((fix) => [
+    fix.source,
+    readFileSync(resolve(repoRoot, fix.source), 'utf8'),
+  ]));
+  const firstFix = BING_TITLE_FIXES[0];
+  contents.set(
+    firstFix.source,
+    contents.get(firstFix.source).replace(firstFix.title, 'Titolo editoriale aggiornato'),
+  );
+
+  assert.throws(
+    () => applyFixes({
+      repoRoot,
+      readFile: (absolutePath) => contents.get(relative(repoRoot, absolutePath)),
+      writeFile: () => assert.fail('un drift editoriale non deve essere scritto'),
+    }),
+    /Titolo sorgente inatteso/,
+  );
 });
 
 test('live audit accepts canonical attributes in either order and numeric entities', async () => {

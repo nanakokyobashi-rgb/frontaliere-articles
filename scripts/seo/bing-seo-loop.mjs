@@ -128,20 +128,78 @@ function replaceMetaEntry(source, fix) {
   return source.replace(pattern, (_match, prefix) => prefix + "'" + escapeTsSingleQuote(fix.title) + "'");
 }
 
+function singleQuotedPropertyValue(block, property) {
+  const pattern = new RegExp(
+    "(?:^|\\n)\\s*" + escapeRegex(property) + ":\\s*'((?:\\\\.|[^'])*)'",
+    'm',
+  );
+  const match = block.match(pattern);
+  if (!match) throw new Error('Proprietà non trovata: ' + property);
+  return decodeTsSingleQuote(match[1]);
+}
+
+function structuredHeadlineValue(block) {
+  const match = block.match(/(?:^|\n)\s*"headline":\s*"((?:\\.|[^"])*)"/m);
+  if (!match) throw new Error('Structured headline non trovato');
+  return JSON.parse('"' + match[1] + '"');
+}
+
+function sourceTitleValue(source, fix) {
+  if (fix.kind === 'seo') {
+    const block = articleBlock(source, fix.articleId).text;
+    const values = [
+      singleQuotedPropertyValue(block, 'title'),
+      singleQuotedPropertyValue(block, 'ogTitle'),
+      structuredHeadlineValue(block),
+    ];
+    if (new Set(values).size !== 1) {
+      throw new Error('Valori title/ogTitle/headline incoerenti per ' + fix.articleId);
+    }
+    return values[0];
+  }
+
+  const key = escapeRegex(fix.metadataKey);
+  const pattern = new RegExp(
+    "['\"]" + key + "['\"]:\\s*'((?:\\\\.|[^'])*)'",
+  );
+  const match = source.match(pattern);
+  if (!match) throw new Error('Metadata key non trovato: ' + fix.metadataKey);
+  return decodeTsSingleQuote(match[1]);
+}
+
 function applyFixToSource(source, fix) {
   return fix.kind === 'seo'
     ? replaceSeoEntry(source, fix)
     : replaceMetaEntry(source, fix);
 }
 
-export function applyFixes({ repoRoot = REPO_ROOT } = {}) {
+export function applyFixes({
+  repoRoot = REPO_ROOT,
+  readFile = readFileSync,
+  writeFile = writeFileSync,
+} = {}) {
   const changedFiles = new Set();
   for (const fix of BING_TITLE_FIXES) {
     const absolutePath = resolve(repoRoot, fix.source);
-    const source = readFileSync(absolutePath, 'utf8');
+    const source = readFile(absolutePath, 'utf8');
+    let currentTitle;
+    try {
+      currentTitle = sourceTitleValue(source, fix);
+    } catch (error) {
+      throw new Error(
+        'Titolo sorgente inatteso per ' + fix.source + ': ' + error.message,
+      );
+    }
+    if (currentTitle === fix.title) continue;
+    if (currentTitle !== fix.sourceTitle) {
+      throw new Error(
+        'Titolo sorgente inatteso per ' + fix.source + ': ' + currentTitle
+          + '. Aggiorna esplicitamente la policy prima di applicare il fix.',
+      );
+    }
     const next = applyFixToSource(source, fix);
     if (next !== source) {
-      writeFileSync(absolutePath, next);
+      writeFile(absolutePath, next);
       changedFiles.add(fix.source);
     }
   }
