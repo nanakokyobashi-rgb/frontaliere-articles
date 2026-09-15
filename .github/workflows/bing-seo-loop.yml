@@ -207,13 +207,15 @@ jobs:
           if [ "$working_content_diff" = 'true' ]; then
             git add content/seo/seo-blog-ch.ts content/blog-meta-de.ts content/blog-meta-fr.ts content/blog-meta-ch-de.ts
             git commit -m 'fix(seo): shorten Bing article titles'
+          else
+            echo 'Correzioni già committate sul branch automation: riconcilio la PR senza ricreare il commit.'
+          fi
+          if [ "$working_content_diff" = 'true' ] || [ "$committed_content_diff" = 'true' ]; then
             if [ -n "$expected_remote_tip" ]; then
               git push --force-with-lease="refs/heads/$branch:$expected_remote_tip" origin "$branch"
             else
               git push origin "$branch"
             fi
-          else
-            echo 'Correzioni già committate sul branch automation: riconcilio la PR senza ricreare il commit.'
           fi
           pr_count="$(gh pr list --repo "$GITHUB_REPOSITORY" --state open --head "$branch" --json number --jq 'length')"
           if [ "$pr_count" = '0' ]; then
