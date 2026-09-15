@@ -70,17 +70,24 @@ const SWISS_CANTON_URLS = [
   'https://www.pharmavalais.ch/pharmacie-valais/pharmacie-garde-51.html',
   'https://www.pharmaciesfribourg.ch/fr/prestations-et-conseils/pharmacie-de-garde',
   'https://www.onp.ch/Service-de-garde',
-  'https://www.jura.ch/Htdocs/Files/v/01baf7bafb804ba41706469e756cfccecfac1eee8116c5ba49fc8a29abfe57a6.pdf/Plan-de-garde-des-pharmacies-de-Delemont-en-2026.pdf',
+  'https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html',
   'https://garde.svph.ch',
   'https://pharmageneve.swiss/pharmacie-de-garde/',
 ];
 
 const ITALIAN_SOURCE_URLS = [
   'https://www.ats-insubria.it/farmacie',
-  'https://www.comune.marchirolo.varese.it/portals/2011/SiscomArchivio/6/121368-10-Varese_calendario_turni_2026_2027_2%201.pdf',
+  'https://www.turnifarmacie.it/',
   'https://www.aslvco.it/wp-content/uploads/2026/03/3017434.pdf',
   'https://farmacia-aperta.eu/',
 ];
+
+const ANNUAL_SOURCE_NOTES = {
+  it: 'documento annuale, edizione 2026',
+  en: 'annual document, edition 2026',
+  de: 'Jahresdokument, Ausgabe 2026',
+  fr: 'document annuel, édition 2026',
+};
 
 test('pharmacy evergreen: ogni guida localizzata espone scope, fonti, semantica e link operativi', () => {
   const snapshots = loadPharmacySnapshots();
@@ -133,13 +140,13 @@ test('pharmacy evergreen: il builder è idempotente e non muta gli snapshot', ()
 
   assert.equal(JSON.stringify(once), JSON.stringify(twice));
   assert.equal(JSON.stringify(snapshots), before);
-  assert.equal(once[0]._snapshotUpdatedAt, '2026-09-14T18:16:05.788Z');
-  assert.equal(once[0].date, '2026-09-14');
+  assert.equal(once[0]._snapshotUpdatedAt, '2026-09-15T09:40:29.571Z');
+  assert.equal(once[0].date, '2026-09-15');
 });
 
 test('pharmacy evergreen: il clock di validazione del builder è iniettato', () => {
   const snapshots = readFixturePair();
-  const nowMs = Date.parse('2026-09-14T18:20:00.000Z');
+  const nowMs = Date.parse('2026-09-15T09:41:00.000Z');
   let calls = 0;
   const guides = buildPharmacyEvergreenGuides(snapshots, {
     now: () => {
@@ -162,7 +169,8 @@ test('pharmacy evergreen: la guida Svizzera collega ogni fonte senza inventare u
     for (const url of [...SWISS_CANTON_URLS, ...ITALIAN_SOURCE_URLS]) {
       assert.match(text, new RegExp(escaped(url)), `${locale}: ${url}`);
     }
-    assert.match(text, /Mendrisiotto.*Luganese.*Bellinzonese.*Biasca e Valli/s);
+    assert.match(text, /Mendrisiotto.*Luganese.*Bellinzonese.*Biasca e Valli.*Locarnese/s);
+    assert.match(text, new RegExp(escaped(ANNUAL_SOURCE_NOTES[locale]), 'i'));
     assert.match(text, /Locarnese/);
     assert.match(text, /OW.*NW.*GL.*AR.*AI.*BL.*SH.*SG/s);
     assert.match(text, /144/);
@@ -199,7 +207,7 @@ test('pharmacy evergreen: scope inatteso o fonte in errore — guardia fail-clos
     );
 
     const wrongDuty = structuredClone(duty);
-    wrongDuty.scope.includedRegions = [...EXPECTED_DUTY_REGIONS, 'Locarnese'];
+    wrongDuty.scope.includedRegions = [...EXPECTED_DUTY_REGIONS, 'Sopraceneri'];
     const wrongDutyPath = path.join(tempDir, 'wrong-duty-scope.json');
     fs.writeFileSync(wrongDutyPath, JSON.stringify(wrongDuty));
     assert.throws(
@@ -262,7 +270,7 @@ test('pharmacy evergreen: completezza e warning sono guardati fail-closed', () =
 
 test('pharmacy evergreen: timestamp futuro oltre la tolleranza blocca il producer', () => {
   const snapshots = readFixturePair();
-  const nowMs = Date.parse('2026-09-14T18:16:05.788Z');
+  const nowMs = Date.parse('2026-09-15T09:41:00.000Z');
   const future = structuredClone(snapshots);
   future.catalog.catalogues[0].fetchedAt = new Date(
     nowMs + SNAPSHOT_FUTURE_TOLERANCE_MS + 1,

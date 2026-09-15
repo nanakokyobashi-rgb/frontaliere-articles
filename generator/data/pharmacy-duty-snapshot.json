@@ -6,9 +6,10 @@
     "https://www.ofct.ch/mendrisiotto/",
     "https://www.ofct.ch/luganese/",
     "https://www.ofct.ch/bellinzonese/",
-    "https://www.ofct.ch/biasca-e-valli/"
+    "https://www.ofct.ch/biasca-e-valli/",
+    "https://www.farmacielocarnese.ch/"
   ],
-  "fetchedAt": "2026-09-14T18:16:05.788Z",
+  "fetchedAt": "2026-09-15T09:40:29.571Z",
   "scope": {
     "country": "CH",
     "canton": "Ticino",
@@ -16,17 +17,21 @@
       "Mendrisiotto",
       "Luganese",
       "Bellinzonese",
-      "Biasca e Valli"
+      "Biasca e Valli",
+      "Locarnese"
     ],
-    "excludedRegions": ["Locarnese"]
+    "excludedRegions": []
+  },
+  "sourceNotes": {
+    "Locarnese": "Fonte associativa regionale attiva per gli intervalli di turno. Il parser dedicato legge la tabella HTML server-rendered e pubblica un intervallo solo quando Farmacia e Località risolvono un'unica identità nel catalogo cantonale; la fonte non pubblica un'anagrafica completa e non fornisce indirizzi da copiare."
   },
   "verifiedDuty": true,
   "statusValues": ["verified", "expired"],
-  "recordCount": 46,
+  "recordCount": 55,
   "completeness": {
     "status": "complete",
-    "verifiedRecordCount": 46,
-    "minimumRecordCount": 46,
+    "verifiedRecordCount": 55,
+    "minimumRecordCount": 55,
     "truncated": false
   },
   "errors": [],
