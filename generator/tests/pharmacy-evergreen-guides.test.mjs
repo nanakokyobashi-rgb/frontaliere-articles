@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 
 import {
   buildPharmacyEvergreenGuides,
+  EXPECTED_LOCARNESE_DERIVED_RECORD_COUNT,
   EXPECTED_MIN_RECORD_COUNTS,
   EXPECTED_DUTY_REGIONS,
   EXPECTED_DUTY_SOURCE_REGIONS,
@@ -226,6 +227,43 @@ test('pharmacy evergreen: scope inatteso o fonte in errore — guardia fail-clos
   } finally {
     fs.rmSync(tempDir, { recursive: true, force: true });
   }
+});
+
+test('pharmacy evergreen: l’evidenza Locarnese prova identità univoche senza copiare indirizzi', () => {
+  const snapshots = readFixturePair();
+  const evidence = snapshots.duty.derivationEvidence.Locarnese;
+  assert.equal(evidence.records.length, EXPECTED_LOCARNESE_DERIVED_RECORD_COUNT);
+  assert.doesNotThrow(() => validatePharmacySnapshots(snapshots));
+
+  const duplicate = structuredClone(snapshots);
+  duplicate.duty.derivationEvidence.Locarnese.records[1].source =
+    structuredClone(duplicate.duty.derivationEvidence.Locarnese.records[0].source);
+  assert.throws(
+    () => validatePharmacySnapshots(duplicate),
+    /identità Farmacia\+Località source duplicata/,
+  );
+
+  const ambiguous = structuredClone(snapshots);
+  ambiguous.duty.derivationEvidence.Locarnese.records[0].catalog.matchCount = 2;
+  assert.throws(
+    () => validatePharmacySnapshots(ambiguous),
+    /catalog\.matchCount deve essere 1/,
+  );
+
+  const copiedAddress = structuredClone(snapshots);
+  copiedAddress.duty.derivationEvidence.Locarnese.records[0].addressCopied = true;
+  assert.throws(
+    () => validatePharmacySnapshots(copiedAddress),
+    /addressCopied deve essere false/,
+  );
+
+  const noteOnly = structuredClone(snapshots);
+  delete noteOnly.duty.derivationEvidence;
+  noteOnly.duty.sourceNotes = { Locarnese: 'matching univoco e nessun indirizzo copiato' };
+  assert.throws(
+    () => validatePharmacySnapshots(noteOnly),
+    /evidenza strutturata dei record derivati/,
+  );
 });
 
 test('pharmacy evergreen: completezza e warning sono guardati fail-closed', () => {

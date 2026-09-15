@@ -28,16 +28,17 @@ export const EXPECTED_DUTY_REGIONS = Object.freeze([
   'Locarnese',
 ]);
 
+const EXPECTED_LOCARNESE_SOURCE = 'https://www.farmacielocarnese.ch/';
+
 export const EXPECTED_DUTY_SOURCE_REGIONS = Object.freeze([
   'https://www.ofct.ch/mendrisiotto/',
   'https://www.ofct.ch/luganese/',
   'https://www.ofct.ch/bellinzonese/',
   'https://www.ofct.ch/biasca-e-valli/',
-  'https://www.farmacielocarnese.ch/',
+  EXPECTED_LOCARNESE_SOURCE,
 ]);
 
-export const EXPECTED_LOCARNESE_SOURCE_NOTE =
-  "Fonte associativa regionale attiva per gli intervalli di turno. Il parser dedicato legge la tabella HTML server-rendered e pubblica un intervallo solo quando Farmacia e Località risolvono un'unica identità nel catalogo cantonale; la fonte non pubblica un'anagrafica completa e non fornisce indirizzi da copiare.";
+export const EXPECTED_LOCARNESE_DERIVED_RECORD_COUNT = 9;
 
 export const EXPECTED_ITALY_PROVINCES = Object.freeze(['CO', 'VA', 'VB']);
 
@@ -192,6 +193,85 @@ function requireExactArray(actual, expected, label, { ordered = false } = {}) {
   }
 }
 
+function normalizedIdentityPart(value, label) {
+  return requireString(value, label)
+    .normalize('NFKC')
+    .trim()
+    .replace(/\s+/gu, ' ')
+    .toLocaleLowerCase('it-CH');
+}
+
+function identityKey(value, label) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    throw snapshotError(`${label} deve contenere Farmacia e Località`);
+  }
+  return [
+    normalizedIdentityPart(value.pharmacy, `${label}.pharmacy`),
+    normalizedIdentityPart(value.locality, `${label}.locality`),
+  ].join('\u0000');
+}
+
+function rejectAddressFields(value, label) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return;
+  if (Object.keys(value).some((key) => /^(?:address|indirizzo)$/iu.test(key))) {
+    throw snapshotError(`${label} non deve contenere un indirizzo copiato`);
+  }
+}
+
+function validateLocarneseDerivationEvidence(duty) {
+  const label = 'turni snapshot.derivationEvidence.Locarnese';
+  const evidence = duty.derivationEvidence?.Locarnese;
+  if (!evidence || typeof evidence !== 'object' || Array.isArray(evidence)) {
+    throw snapshotError(`${label} mancante: serve evidenza strutturata dei record derivati`);
+  }
+  if (evidence.sourceUrl !== EXPECTED_LOCARNESE_SOURCE) {
+    throw snapshotError(`${label}.sourceUrl inatteso`);
+  }
+  if (evidence.recordCount !== EXPECTED_LOCARNESE_DERIVED_RECORD_COUNT) {
+    throw snapshotError(
+      `${label}.recordCount deve essere ${EXPECTED_LOCARNESE_DERIVED_RECORD_COUNT}, ricevuto ${evidence.recordCount}`,
+    );
+  }
+  if (!Array.isArray(evidence.records) || evidence.records.length !== evidence.recordCount) {
+    throw snapshotError(`${label}.records deve contenere esattamente ${evidence.recordCount} record`);
+  }
+
+  const sourceIdentities = new Set();
+  const catalogIdentities = new Set();
+  for (const [index, record] of evidence.records.entries()) {
+    const recordLabel = `${label}.records[${index}]`;
+    if (!record || typeof record !== 'object' || Array.isArray(record)) {
+      throw snapshotError(`${recordLabel} deve essere un oggetto`);
+    }
+    rejectAddressFields(record, recordLabel);
+    if (record.addressCopied !== false) {
+      throw snapshotError(`${recordLabel}.addressCopied deve essere false`);
+    }
+    rejectAddressFields(record.source, `${recordLabel}.source`);
+    rejectAddressFields(record.catalog, `${recordLabel}.catalog`);
+
+    const sourceIdentity = identityKey(record.source, `${recordLabel}.source`);
+    if (sourceIdentities.has(sourceIdentity)) {
+      throw snapshotError(`${recordLabel}: identità Farmacia+Località source duplicata`);
+    }
+    sourceIdentities.add(sourceIdentity);
+
+    if (!record.catalog || typeof record.catalog !== 'object' || Array.isArray(record.catalog)) {
+      throw snapshotError(`${recordLabel}.catalog deve contenere l'identità del catalogo`);
+    }
+    if (record.catalog.matchCount !== 1) {
+      throw snapshotError(`${recordLabel}.catalog.matchCount deve essere 1`);
+    }
+    const catalogIdentity = identityKey(record.catalog, `${recordLabel}.catalog`);
+    if (catalogIdentities.has(catalogIdentity)) {
+      throw snapshotError(`${recordLabel}: identità Farmacia+Località catalogo duplicata`);
+    }
+    catalogIdentities.add(catalogIdentity);
+  }
+
+  return evidence;
+}
+
 function readRequiredJson(file, label) {
   if (!file || !existsSync(file)) {
     throw snapshotError(`${label} assente: ${file || '(path vuoto)'}`);
@@ -275,9 +355,7 @@ function validateDutySnapshot(duty, { nowMs = Date.now() } = {}) {
   }
   requireExactArray(scope.includedRegions, EXPECTED_DUTY_REGIONS, 'turni snapshot.scope.includedRegions', { ordered: true });
   requireExactArray(scope.excludedRegions, [], 'turni snapshot.scope.excludedRegions', { ordered: true });
-  if (duty.sourceNotes?.Locarnese !== EXPECTED_LOCARNESE_SOURCE_NOTE) {
-    throw snapshotError('turni snapshot.sourceNotes.Locarnese non descrive il matching univoco col catalogo');
-  }
+  validateLocarneseDerivationEvidence(duty);
 
   return duty;
 }
