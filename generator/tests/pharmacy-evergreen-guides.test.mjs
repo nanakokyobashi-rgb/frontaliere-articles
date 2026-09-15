@@ -250,6 +250,15 @@ test('pharmacy evergreen: l’evidenza Locarnese prova identità univoche senza 
     /catalog\.matchCount deve essere 1/,
   );
 
+  const arbitraryPair = structuredClone(snapshots);
+  const records = arbitraryPair.duty.derivationEvidence.Locarnese.records;
+  [records[0].catalog, records[4].catalog] = [records[4].catalog, records[0].catalog];
+  [records[0].matchKey, records[4].matchKey] = [records[4].matchKey, records[0].matchKey];
+  assert.throws(
+    () => validatePharmacySnapshots(arbitraryPair),
+    /source non corrisponde al catalogo selezionato/,
+  );
+
   const copiedAddress = structuredClone(snapshots);
   copiedAddress.duty.derivationEvidence.Locarnese.records[0].addressCopied = true;
   assert.throws(

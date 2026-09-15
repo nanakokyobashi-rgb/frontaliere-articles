@@ -201,6 +201,40 @@ function normalizedIdentityPart(value, label) {
     .toLocaleLowerCase('it-CH');
 }
 
+const LOCARNESE_SOURCE_LOCALITY_ALIASES = Object.freeze({
+  'locarno solduno': 'locarno',
+});
+
+function canonicalCatalogMatchKey(catalog, label) {
+  return [
+    'ticino',
+    normalizedIdentityPart(catalog.locality, `${label}.locality`),
+    normalizedIdentityPart(catalog.pharmacy, `${label}.pharmacy`),
+  ].join('|');
+}
+
+function pharmacyNameForDeterministicMatch(value, label) {
+  return normalizedIdentityPart(value, label)
+    .replace(/^farmacia\s+/u, '')
+    .replace(/\s+(?:sa|sagl)$/u, '');
+}
+
+function sourceCatalogMatchKey(source, catalog, label) {
+  const sourceLocality = normalizedIdentityPart(source.locality, `${label}.source.locality`);
+  const catalogLocality = normalizedIdentityPart(catalog.locality, `${label}.catalog.locality`);
+  const canonicalSourceLocality = LOCARNESE_SOURCE_LOCALITY_ALIASES[sourceLocality] ?? sourceLocality;
+  if (canonicalSourceLocality !== catalogLocality) {
+    throw snapshotError(`${label}: source non corrisponde al catalogo selezionato`);
+  }
+
+  const sourcePharmacy = pharmacyNameForDeterministicMatch(source.pharmacy, `${label}.source.pharmacy`);
+  const catalogPharmacy = pharmacyNameForDeterministicMatch(catalog.pharmacy, `${label}.catalog.pharmacy`);
+  if (catalogPharmacy !== sourcePharmacy && !catalogPharmacy.startsWith(`${sourcePharmacy} `)) {
+    throw snapshotError(`${label}: source non corrisponde al catalogo selezionato`);
+  }
+  return canonicalCatalogMatchKey(catalog, `${label}.catalog`);
+}
+
 function identityKey(value, label) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) {
     throw snapshotError(`${label} deve contenere Farmacia e Località`);
@@ -267,6 +301,14 @@ function validateLocarneseDerivationEvidence(duty) {
       throw snapshotError(`${recordLabel}: identità Farmacia+Località catalogo duplicata`);
     }
     catalogIdentities.add(catalogIdentity);
+
+    const catalogMatchKey = canonicalCatalogMatchKey(record.catalog, `${recordLabel}.catalog`);
+    if (record.matchKey !== catalogMatchKey) {
+      throw snapshotError(`${recordLabel}.matchKey non corrisponde al catalogo selezionato`);
+    }
+    if (sourceCatalogMatchKey(record.source, record.catalog, recordLabel) !== record.matchKey) {
+      throw snapshotError(`${recordLabel}: source non corrisponde al catalogo selezionato`);
+    }
   }
 
   return evidence;
