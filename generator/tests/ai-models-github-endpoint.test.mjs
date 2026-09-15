@@ -48,6 +48,51 @@ describe('GitHub Models request contract', () => {
     assert.equal(AI_MODELS.GPT4O, 'gpt-4o');
   });
 
+  test('usa il primo envelope successivo popolato dopo uno vuoto', () => {
+    assert.equal(
+      qualifyGitHubModelId(AI_MODELS.GPT4O, {
+        models: [],
+        data: [{ id: 'openai/gpt-4o' }],
+      }),
+      'openai/gpt-4o',
+    );
+  });
+
+  test('rifiuta envelope con piu liste popolate', () => {
+    assert.throws(
+      () => qualifyGitHubModelId(AI_MODELS.GPT4O, {
+        models: [{ id: 'openai/gpt-4o' }],
+        data: [{ id: 'azure/gpt-4o' }],
+      }),
+      (error) => error.githubModelsCatalogFault === true
+        && error.transportFault === true
+        && error.nonRetryable === false,
+    );
+  });
+
+  test('il consumer valida lo stesso envelope ambiguo scaricato dal provider', async () => {
+    globalThis.fetch = async (url) => {
+      if (String(url).endsWith('/catalog/models')) {
+        return new Response(JSON.stringify({
+          models: [{ id: 'openai/gpt-4o' }],
+          data: [{ id: 'azure/gpt-4o' }],
+        }), { status: 200, headers: { 'content-type': 'application/json' } });
+      }
+      throw new Error('la completion non deve partire');
+    };
+
+    await assert.rejects(
+      () => callSingleModel([{ role: 'user', content: 'x' }], {
+        model: AI_MODELS.GPT4O,
+        maxRetriesPerModel: 1,
+      }),
+      (error) => error.githubModelsCatalogFault === true
+        && error.transportFault === true
+        && error.nonRetryable === false
+        && error.markExhausted === false,
+    );
+  });
+
   test('emette publisher/model nel payload e conserva l id bare per il tracking', async () => {
     const calls = [];
     globalThis.fetch = async (url, init) => {
