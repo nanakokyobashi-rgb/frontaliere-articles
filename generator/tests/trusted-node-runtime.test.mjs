@@ -15,6 +15,10 @@ const ACTION = fs.readFileSync(
   path.join(ROOT, '.github/actions/setup-claude-haiku-fallback/action.yml'),
   'utf8',
 );
+const CODEX_ACTION = fs.readFileSync(
+  path.join(ROOT, '.github/actions/claude-codex-fallback/action.yml'),
+  'utf8',
+);
 
 const runtimeStart = ACTION.indexOf('- name: Resolve trusted Node/npm toolchain');
 const claudeStart = ACTION.indexOf('- name: Setup Claude CLI Haiku fallback');
@@ -85,4 +89,26 @@ test('la CLI Haiku viene installata in un prefisso attestato e passa il suo path
   assert.match(CLAUDE, /CLAUDE_CLI_BIN=/);
   assert.match(CLAUDE, /CLAUDE_CLI_SHA256=/);
   assert.match(CLAUDE, /root-owned Claude CLI prefix/);
+});
+
+test('le probe CLI tollerano il suffisso di --version senza allentare il pin semver', () => {
+  const claudePattern = CLAUDE.match(
+    /printf '%s\\n' "\$claude_cli_version" \| \/usr\/bin\/grep -Eq '([^']+)'/,
+  )?.[1];
+  assert.ok(claudePattern, 'probe semver della CLI Claude non trovata');
+  const claudeVersion = new RegExp(claudePattern);
+  assert.match('2.1.267 (Claude Code)', claudeVersion);
+  assert.doesNotMatch('2.1.2670', claudeVersion);
+  assert.doesNotMatch(CLAUDE, /\[\s*"\$claude_cli_version"\s*(?:!=|=)\s*'[^']+'\s*\]/);
+
+  const codexPatterns = [...CODEX_ACTION.matchAll(
+    /printf '%s\\n' "\$codex_version" \| \/usr\/bin\/grep -Eq '([^']+)'/g,
+  )].map((match) => match[1]);
+  assert.equal(codexPatterns.length, 2, 'le due probe semver del Codex devono restare allineate');
+  for (const pattern of codexPatterns) {
+    const codexVersion = new RegExp(pattern);
+    assert.match('codex-cli 0.153.4 (Codex CLI)', codexVersion);
+    assert.doesNotMatch('codex-cli 0.153.40', codexVersion);
+  }
+  assert.doesNotMatch(CODEX_ACTION, /\[\s*"\$codex_version"\s*(?:!=|=)\s*'[^']+'\s*\]/);
 });
