@@ -721,6 +721,7 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  const blogSlugs: Record<string, Record<string, string>> = {};
  try {
  const rSrc = fs.readFileSync(np.resolve(rootDir, SECTION.slugData), 'utf-8');
+ // Parse the section's slug-const map ({slugConst})
  Object.assign(blogSlugs, parseArticleUrlSlugs(rSrc, SECTION.slugConst));
  } catch (err) {
  if (!isMissingPathError(err)) throw err;

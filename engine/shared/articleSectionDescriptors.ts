@@ -45,6 +45,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { ARTICLE_SECTION_CORE } from './articleSectionCore.mjs';
 import { CANONICAL_OVERRIDE_FILES } from './canonicalOverrideFiles.mjs';
+// @ts-ignore The site symlink can make tsc resolve this shared source from
+// build-plugins/shared, where this engine-local sibling is not visible at the
+// link path; Node/Vite resolve the realpath correctly at runtime.
 import { findAllSeoEntryMatches } from './seo-entry.mjs';
 
 function isMissingPathError(error: unknown): boolean {
@@ -112,12 +115,12 @@ export const ARTICLE_SECTION_DESCRIPTORS: OgSection[] = [
  * file. Shared (issue #4881 Fase 4, AGENTS.md #6) between `ogPagesPlugin.ts`'s
  * entries-building loop (the render-time, byte-identity-critical use) and the
  * corpus re-render driver's id-enumeration (a superset-safe use — see
- * `blogKeyToArticleId` below). One lexical, balanced resolver, not two scans
- * that could silently diverge if the `blog-` key convention ever changed.
+ * `blogKeyToArticleId` below). One literal regex, not two copies that could
+ * silently diverge if the `blog-` key convention ever changed.
  */
 export function extractBlogEntryPositions(source: string): Array<{ key: string; start: number; end: number }> {
  return findAllSeoEntryMatches(source).map(({ id, index, closeIdx }) => ({
-  key: `blog-${id}`,
+  key: 'blog-' + id,
   start: index,
   end: closeIdx + 1,
  }));
