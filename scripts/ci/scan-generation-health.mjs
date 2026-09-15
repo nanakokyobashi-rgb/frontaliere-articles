@@ -153,6 +153,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createGithubIssue, resolveGithubIssue } from '../lib/github-issue-creator.mjs';
+import { MAX_PREFLIGHT_REQUEST_TOKENS } from '../../generator/scripts/lib/ai-models.mjs';
 import { topicCoverageKey } from '../../generator/scripts/lib/topic-coverage-guard.mjs';
 
 const execFileAsync = promisify(execFile);
@@ -381,9 +382,18 @@ export const isDegradedOutcome = (status) => DEGRADED_OUTCOMES.has(String(status
  * Il cascade di `ai-models.mjs` salta un modello quando il prompt stimato supera
  * il suo tetto di token in INPUT, e lo dice per modello. Un salto isolato è
  * normale (i modelli piccoli hanno tetti a 3.000-4.000). Il guasto è quando il
- * prompt cresce oltre il tetto della MAGGIOR PARTE del roster: la run scivola su
+ * prompt cresce oltre il tetto massimo dichiarato del roster: la run scivola su
  * un modello non validato, produce contenuto thin e viene poi rigettata a valle
  * — dopo aver speso.
+ *
+ * Il solo numero di modelli distinti non basta a dimostrarlo. La ricorrenza di
+ * #313 del 2026-08-26 aveva 5 modelli saltati e una stima massima di 7.994
+ * token, ma aveva superato soltanto i cap 3.000/4.000: quei salti erano il
+ * comportamento normale del cascade, non la prova che il prompt fosse oltre
+ * il tetto del roster. Per ogni run servono quindi entrambe le evidenze:
+ * almeno `OVERSIZE_MIN_MODELS` modelli distinti e almeno uno skip al cap
+ * massimo di pre-flight (o a un cap più alto appreso a runtime). Il valore è
+ * importato dalla sorgente unica di `ai-models.mjs`, non replicato qui.
  *
  * Misurato sulle 200 run: 7 hanno prodotto salti, e i modelli distinti saltati
  * per run sono 1, 2, 2, 5, 7, 20, 22 (su 18 modelli con tetto hardcoded in
@@ -393,10 +403,10 @@ export const isDegradedOutcome = (status) => DEGRADED_OUTCOMES.has(String(status
  * stimati misurati sono 8.510-10.930 token contro tetti dichiarati di
  * 3.000/4.000/6.000/8.000.
  *
- * Soglia: almeno 2 run nella finestra con ≥5 modelli distinti saltati. Con 1
- * sola run la condizione sfarfallerebbe sul bordo della finestra; con 2 resta
- * accesa per tutta la durata reale della regressione e silenziosa nelle 29 ore
- * sane.
+ * Soglia: almeno 2 run nella finestra con ≥5 modelli distinti saltati e con il
+ * cap massimo superato. Con 1 sola run la condizione sfarfallerebbe sul bordo
+ * della finestra; con 2 resta accesa per tutta la durata reale della
+ * regressione e silenziosa nelle 29 ore sane.
  */
 export const OVERSIZE_MIN_MODELS = 5;
 export const OVERSIZE_MIN_RUNS = 2;
@@ -962,7 +972,16 @@ export function summarizeRuns(runs) {
     }
 
     const distinctModels = new Set(r.tokenLimitSkips.map((s) => s.model));
-    if (distinctModels.size >= OVERSIZE_MIN_MODELS) {
+    // I cap bassi sono una proprietà normale del roster, non una prova che il
+    // prompt sia oltre il suo limite massimo. Un record a 8000 (o oltre, se un
+    // provider ha dichiarato/appreso un limite più alto) è l'unica evidenza
+    // contenuta nello skip log che chiude questa ambiguità. Il confronto usa la
+    // costante esportata da ai-models.mjs: il watchdog e il pre-flight non
+    // possono divergere su quale sia il tetto statico più permissivo.
+    const crossedRosterCeiling = r.tokenLimitSkips.some(
+      (s) => s.limit >= MAX_PREFLIGHT_REQUEST_TOKENS,
+    );
+    if (distinctModels.size >= OVERSIZE_MIN_MODELS && crossedRosterCeiling) {
       oversizeRuns++;
       // L'esito della run che ha saltato i modelli. Il salto per tetto di token
       // è il cascade che FUNZIONA: scarta i modelli a contesto piccolo e ricade
@@ -1463,7 +1482,7 @@ export const CONDITIONS = [
         firing: true,
         body: [
           `**${o.runs} run** nella finestra di ${m.runs.spanHours.toFixed(1)}h hanno saltato almeno`,
-          `${OVERSIZE_MIN_MODELS} modelli DISTINTI ciascuna perché il prompt supera il loro tetto di token in`,
+          `${OVERSIZE_MIN_MODELS} modelli DISTINTI ciascuna e almeno il cap massimo di ${MAX_PREFLIGHT_REQUEST_TOKENS} token in`,
           'input. Il cascade scivola così su modelli non validati, e il contenuto thin che ne esce viene poi',
           'rigettato a valle — dopo aver speso.',
           '',
@@ -1480,7 +1499,7 @@ export const CONDITIONS = [
           'costa; se la riga dell\'esito dice che le run degradate sono poche o zero, questa issue sta',
           'misurando un meccanismo sano e va chiusa senza toccare niente.',
           '',
-          `**Perché la soglia è ${OVERSIZE_MIN_RUNS} run con ≥${OVERSIZE_MIN_MODELS} modelli.** Misurato sulle ultime`,
+          `**Perché la soglia è ${OVERSIZE_MIN_RUNS} run con ≥${OVERSIZE_MIN_MODELS} modelli e il cap massimo superato.** Misurato sulle ultime`,
           '200 run: 7 hanno prodotto salti, con 1, 2, 2, 5, 7, 20 e 22 modelli distinti. Le 4 run con ≥5 stanno',
           'tutte nelle ultime 4,2 ore della finestra; nelle 29 ore precedenti erano zero. Con una sola run la',
           'condizione sfarfallerebbe sul bordo della finestra.',

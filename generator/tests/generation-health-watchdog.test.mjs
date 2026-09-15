@@ -135,6 +135,18 @@ const LOG_OVERSIZE = [
   'generate\tGenerate the article\t2026-08-10T12:36:06.1Z ⏭️  [gpt-4.1] Skipped — request would exceed 8000-token limit (estimated 10930)',
 ].join('\n');
 
+// Ricorrenza reale di #313 (2026-08-26): cinque modelli con cap basso saltati,
+// ma la stima resta sotto il cap massimo della flotta. Deve restare diagnostica
+// nei contatori globali senza diventare una run `prompt-oversize`.
+const LOG_LOW_CAP_SKIPS = [
+  'generate\tResolve run mode and section\t2026-08-26T11:10:30.1Z event=schedule chain=false → section=frontaliere dry_run=false',
+  'generate\tGenerate the article\t2026-08-26T11:11:01.1Z ⏭️  [DeepSeek-R1] Skipped — request would exceed 4000-token limit (estimated 7994)',
+  'generate\tGenerate the article\t2026-08-26T11:11:02.1Z ⏭️  [DeepSeek-R1-0528] Skipped — request would exceed 4000-token limit (estimated 7994)',
+  'generate\tGenerate the article\t2026-08-26T11:11:03.1Z ⏭️  [DeepSeek-V3-0324] Skipped — request would exceed 4000-token limit (estimated 7994)',
+  'generate\tGenerate the article\t2026-08-26T11:11:04.1Z ⏭️  [gpt-4o-mini] Skipped — request would exceed 4000-token limit (estimated 7994)',
+  'generate\tGenerate the article\t2026-08-26T11:11:05.1Z ⏭️  [nvidia/nvidia/nemotron-mini-4b-instruct] Skipped — request would exceed 3000-token limit (estimated 7994)',
+].join('\n');
+
 const LOG_DRY = [
   'generate\tResolve run mode and section\t2026-08-10T14:27:40.1Z event=push chain=false → section=frontaliere dry_run=true',
   'generate\tLoad the generator without running it (dry run)\t2026-08-10T14:27:50.1Z ok',
@@ -378,6 +390,14 @@ describe('summarizeRuns — i denominatori', () => {
     assert.equal(s.oversize.distinctModels, 5);
     assert.equal(s.oversize.maxEstimated, 10930);
     assert.deepEqual(s.oversize.limitsCrossed, [3000, 4000, 6000, 8000]);
+  });
+
+  test('non confonde cinque skip a cap basso con un prompt oltre il tetto del roster', () => {
+    const s = summarizeRuns([parseRunLog(LOG_LOW_CAP_SKIPS), parseRunLog(LOG_LOW_CAP_SKIPS)]);
+    assert.equal(s.oversize.runs, 0, '5 skip sotto il cap massimo non sono un oversize del roster');
+    assert.equal(s.oversize.distinctModels, 5, 'la diagnostica dei modelli saltati deve restare disponibile');
+    assert.equal(s.oversize.maxEstimated, 7994);
+    assert.deepEqual(s.oversize.limitsCrossed, [3000, 4000]);
   });
 
   test('somma gli esiti senza confondere no-article, timeout e skip', () => {
@@ -822,6 +842,17 @@ describe('le condizioni sono ACCESE sui guasti realmente accaduti', () => {
     // hanno pubblicato lo stesso, altrimenti conta quanto lavora il cap di
     // richiesta e tace su quanto costa.
     assert.match(v.body, /3 degradate, 1 uscite `generated`/);
+  });
+
+  test('prompt-oversize: il cap massimo superato mantiene acceso il segnale', () => {
+    const m = healthy();
+    m.runs.oversize = summarizeRuns([
+      parseRunLog(LOG_OVERSIZE),
+      parseRunLog(LOG_OVERSIZE),
+    ]).oversize;
+    const v = verdictFor(m, 'prompt-oversize');
+    assert.equal(v.firing, true, 'due run con 5 modelli e uno skip a 8000 sono un oversize reale');
+    assert.match(v.body, /cap massimo di 8000 token/);
   });
 
   test('duplicate-topic-burst: la coppia piastrellista del 2026-08-09 (23 minuti)', () => {
