@@ -127,7 +127,9 @@ jobs:
       # La copia usa il PAT caricato sopra, non il GITHUB_TOKEN del workflow.
       # Sondiamo quindi proprio quell'identità: se il PAT ha `workflow`, il
       # trasporto può includere i gemelli sotto `.github/workflows/`; altrimenti
-      # `unsafeTarget()` resta fail-closed e li lascia nel canale manuale.
+      # `unsafeTarget()` resta fail-closed e li lascia nel canale manuale. Il
+      # push resta comunque l'autorità finale: un falso positivo della sonda è
+      # gestito dal fallback circoscritto nello step di apply.
       - name: Probe scope workflows del token di trasporto
         if: steps.guard.outputs.open_transports == '0'
         continue-on-error: true
@@ -320,10 +322,59 @@ jobs:
             echo "Tutti i path trasportati avevano un mismatch: nessuna PR apribile, il rosso resta registrato."
             exit 0
           fi
+          PUSH_LOG=/tmp/transport-push.log
+          push_rc=0
+          git push -u origin "$BRANCH" > "$PUSH_LOG" 2>&1 || push_rc=$?
+          cat "$PUSH_LOG"
+          if [ "$push_rc" != "0" ]; then
+            # Un rifiuto esplicito GitHub sui workflow può dipendere da uno
+            # scope rilevato erroneamente. Il helper abilita il solo fallback
+            # riconoscibile, ripristina le baseline dal parent e filtra il
+            # report prima dell'amend; ogni altro errore resta bloccante.
+            git diff --name-only HEAD^ HEAD > /tmp/transport-commit-paths.txt
+            git show HEAD^:scripts/ci/loop-sync-manifest.json > /tmp/transport-previous-manifest.json
+            fallback_rc=0
+            node scripts/transport-identical-twins-push-fallback.mjs \
+              --push-log="$PUSH_LOG" \
+              --commit-paths=/tmp/transport-commit-paths.txt \
+              --manifest=scripts/ci/loop-sync-manifest.json \
+              --previous-manifest=/tmp/transport-previous-manifest.json \
+              --report=/tmp/transport.json > /tmp/transport-fallback.json || fallback_rc=$?
+            cat /tmp/transport-fallback.json 2>/dev/null || true
+            if [ "$fallback_rc" = "2" ]; then
+              exit "$push_rc"
+            fi
+            if [ "$fallback_rc" != "0" ]; then
+              exit "$fallback_rc"
+            fi
+            while IFS= read -r rel; do
+              [ -n "$rel" ] || continue
+              if git cat-file -e "HEAD^:$rel" 2>/dev/null; then
+                git restore --source=HEAD^ --staged --worktree -- "$rel"
+              else
+                git rm --cached --ignore-unmatch -- "$rel"
+              fi
+            done < <(node -e 'for (const p of require("/tmp/transport-fallback.json").excludedPaths || []) console.log(p)')
+            git add -- scripts/ci/loop-sync-manifest.json
+            git commit --amend --no-edit
+            PORTED=$(node -e 'console.log(require("/tmp/transport.json").transported.length)')
+            if git diff --quiet HEAD^ HEAD; then
+              echo "Dopo il fallback restano solo workflow non pubblicabili: nessuna PR apribile."
+              exit 0
+            fi
+            git commit --amend -m "chore(loop): porta ${PORTED} gemelli identical dal sito"
+            RETRY_LOG=/tmp/transport-push-retry.log
+            retry_rc=0
+            git push -u origin "$BRANCH" > "$RETRY_LOG" 2>&1 || retry_rc=$?
+            cat "$RETRY_LOG"
+            [ "$retry_rc" = "0" ] || exit "$retry_rc"
+          fi
           # Il corpo si scrive da Node su file: un heredoc dentro un blocco
           # `run:` indentato porterebbe la sua indentazione DENTRO il markdown,
           # e `## Implementato` rientrato non e' piu' un heading — il contratto
           # del body (`pr-body-contract`) lo leggerebbe come assente.
+          # Questo punto e' DOPO il push/fallback: il report e' cosi' quello
+          # effettivamente pubblicato, non il batch rifiutato al primo tentativo.
           # shellcheck disable=SC2016
           node -e '
             const fs = require("fs");
@@ -331,10 +382,11 @@ jobs:
             const list = r.transported.map((t) => "- `" + t.path + "` \u2190 `" + t.sitePath + "` del sito (site sha256 `" + t.to + "`)").join("\n");
             const deltas = (r.couplingDelta || []).map((d) => "- Snapshot accoppiamenti per `" + d.path + "`: +" + d.added.length + "/-" + d.removed.length + (d.initialized ? " (prima osservazione)" : " (delta dalla passata precedente)" ) + ".").join("\n");
             const excluded = (r.realignExcluded || []).map((p) => "- `" + p + "` escluso dal commit per mismatch/normalizzazione dei byte; blocked: diagnosi realign da correggere a mano.").join("\n");
+            const workflowExcluded = (r.workflowExcluded || []).map((p) => "- `" + p + "` escluso dal commit dopo il rifiuto esplicito GitHub dello scope `workflows`; blocked: resta `site-ahead` e verra ritentato in un giro futuro.").join("\n");
             const workflowsBlocked = process.env.PAT_WORKFLOWS_SCOPE !== "true";
-            const deferred = workflowsBlocked
+            const deferred = workflowExcluded || (workflowsBlocked
               ? "- Le voci `adapted` restano escluse per costruzione; i gemelli sotto `.github/workflows/` richiedono lo scope `workflows`: blocked: PAT_WORKFLOWS_SCOPE non è true per questa identità."
-              : "- Le voci `adapted` restano escluse per scelta; i gemelli sotto `.github/workflows/` non sono bloccati dallo scope in questa passata e vengono valutati solo se dichiarati `identical` e `site-ahead`.";
+              : "- Le voci `adapted` restano escluse per scelta; i gemelli sotto `.github/workflows/` non sono bloccati dallo scope in questa passata e vengono valutati solo se dichiarati `identical` e `site-ahead`.");
             fs.writeFileSync("/tmp/pr-body.md", [
               "## Implementato",
               "- Copia automatica dei gemelli dichiarati `mode: identical` in `scripts/ci/loop-sync-manifest.json` che il sito ha portato avanti mentre questo lato restava fermo sulla baseline (stato `site-ahead`), con riallineamento della baseline ai byte committati solo per i path verificati. Aperta da `.github/workflows/transport-identical-twins.yml` (issue #331).",
@@ -347,7 +399,6 @@ jobs:
               "",
             ].join("\n"));
           '
-          git push -u origin "$BRANCH"
           gh pr create --base main --head "$BRANCH" \
             --title "chore(loop): trasporto di ${PORTED} gemelli \`identical\` dal sito" \
             --body-file /tmp/pr-body.md
