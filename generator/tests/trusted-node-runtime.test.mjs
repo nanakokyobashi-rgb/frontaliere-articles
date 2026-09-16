@@ -99,6 +99,8 @@ test('le probe CLI tollerano il suffisso di --version senza allentare il pin sem
   const claudeVersion = new RegExp(claudePattern);
   assert.match('2.1.267 (Claude Code)', claudeVersion);
   assert.doesNotMatch('2.1.2670', claudeVersion);
+  assert.doesNotMatch('2.1.267.1', claudeVersion);
+  assert.doesNotMatch('2.1.267-beta', claudeVersion);
   assert.doesNotMatch(CLAUDE, /\[\s*"\$claude_cli_version"\s*(?:!=|=)\s*'[^']+'\s*\]/);
 
   const codexPatterns = [...CODEX_ACTION.matchAll(
@@ -109,6 +111,8 @@ test('le probe CLI tollerano il suffisso di --version senza allentare il pin sem
     const codexVersion = new RegExp(pattern);
     assert.match('codex-cli 0.153.4 (Codex CLI)', codexVersion);
     assert.doesNotMatch('codex-cli 0.153.40', codexVersion);
+    assert.doesNotMatch('codex-cli 0.153.4.1', codexVersion);
+    assert.doesNotMatch('codex-cli 0.153.4-beta', codexVersion);
   }
   assert.doesNotMatch(CODEX_ACTION, /\[\s*"\$codex_version"\s*(?:!=|=)\s*'[^']+'\s*\]/);
 });

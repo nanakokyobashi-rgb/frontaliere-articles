@@ -466,7 +466,7 @@ runs:
           exit 1
         }
         claude_cli_version="$("$claude_realpath" --version 2>&1 || true)"
-        if ! printf '%s\n' "$claude_cli_version" | /usr/bin/grep -Eq '(^|[^0-9])2\.1\.267([^0-9]|$)'; then
+        if ! printf '%s\n' "$claude_cli_version" | /usr/bin/grep -Eq '(^|[^0-9A-Za-z._-])2\.1\.267([^0-9A-Za-z._-]|$)'; then
           echo "::error::Unexpected Claude Code CLI version: $claude_cli_version"
           exit 1
         fi
