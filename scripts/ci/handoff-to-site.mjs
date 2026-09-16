@@ -113,6 +113,18 @@ export const HANDOFF_VERDICTS = new Set([
  */
 export const MIRROR_LOCKED_MODES = new Set(['identical']);
 
+/**
+ * Workflow consegnati dal canale dedicato sito → corpus, non dal trasporto
+ * generico dei gemelli identical. Restano locked, ma non stranded: il canale
+ * che li porta giù esiste e la sua allowlist è esplicita.
+ */
+export const DEDICATED_CRAWLER_TRANSPORT_PATHS = new Set([
+  ...Array.from({ length: 23 }, (_, index) =>
+    `.github/workflows/crawler-group-${String(index + 1).padStart(2, '0')}.yml`),
+  '.github/workflows/translate-pending.yml',
+  '.github/workflows/crawler-generation-observer-shadow.yml',
+]);
+
 const MANIFEST_PATH = fileURLToPath(new URL('./loop-sync-manifest.json', import.meta.url));
 
 /** Marker scritto nel commento quando una consegna lascia la issue parcheggiata. */
@@ -175,7 +187,9 @@ export function readManifestSnapshot(manifestPath = MANIFEST_PATH) {
     names.set(f.path, sitePath);
     if (MIRROR_LOCKED_MODES.has(f.mode)) {
       locked.set(f.path, sitePath);
-      if (blockedForever.has(f.path)) stranded.add(f.path);
+      if (blockedForever.has(f.path) && !DEDICATED_CRAWLER_TRANSPORT_PATHS.has(f.path)) {
+        stranded.add(f.path);
+      }
     }
   }
   for (const f of files) {
@@ -263,9 +277,11 @@ export function mirrorLockedPaths(manifestPath = MANIFEST_PATH) {
  *     perche'** un trasporto ce l'hanno: qui contano come «scende», non come
  *     bloccati — per questo `outOfScopePrefixes` resta vuoto;
  *   - `transport-identical-twins.mjs`, che gira qui e tira giu' gli `identical`
- *     del manifest — tranne quelli che `permanentBlock` esclude **per sempre**.
+ *     del manifest — tranne quelli che `permanentBlock` esclude **per sempre**;
+ *     i 25 workflow della allowlist dedicata sito → corpus sono l'eccezione
+ *     esplicita, perche' hanno un canale di discesa distinto.
  *
- * I 25 gemelli `identical` sotto `.github/workflows/` cadono nel secondo caso
+ * I workflow `identical` fuori dalla allowlist dedicata cadono nel secondo caso
  * (il token del ciclo non ha lo scope `workflows`: «restano una copia a mano»),
  * ed e' esattamente cio' che un verdetto `blocked-workflows-scope` nomina.
  *
@@ -614,12 +630,14 @@ export function handoffDecision({
   // `blocked-*` dice, nel commento che lascia: «quando la fix scendera' col
   // mirror, la condizione che ha aperto questa issue non ci sara' piu'». Per un
   // gemello che `transport-identical-twins.mjs` rifiuta per SEMPRE quella frase
-  // e' falsa — i 25 workflow `identical` sono il caso canonico, ed e'
-  // precisamente quello che un `blocked-workflows-scope` nomina: il fix di la'
-  // non scendera' mai da solo, la discesa e' una copia a mano. Anche gli altri
-  // path citati ma non `identical` restano residui: la diagnosi puo' essere
-  // aggregata e chiudere qui mentre una sua meta' e' ancora lavoro del corpus
-  // (la stessa regola gia' usata dal ramo `no-root-cause`).
+  // e' falsa — salvo i workflow nella allowlist dedicata sito → corpus, che
+  // hanno un canale esplicito e quindi non sono stranded. Un workflow restante
+  // fuori da quella allowlist e' invece precisamente quello che un
+  // `blocked-workflows-scope` nomina: il fix di la' non scendera' mai da solo,
+  // la discesa e' una copia a mano. Anche gli altri path citati ma non
+  // `identical` restano residui: la diagnosi puo' essere aggregata e chiudere
+  // qui mentre una sua meta' e' ancora lavoro del corpus (la stessa regola gia'
+  // usata dal ramo `no-root-cause`).
   const residual = [...new Set(shippable.filter((p) => stuckSet.has(p) || !locked.has(p)))];
   if (residual.length) {
     const stuckResidual = residual.filter((p) => stuckSet.has(p));
