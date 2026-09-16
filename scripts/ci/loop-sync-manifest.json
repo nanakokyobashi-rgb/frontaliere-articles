@@ -270,6 +270,16 @@
       }
     },
     {
+      "path": "scripts/ci/classify-codex-review-failure.mjs",
+      "mode": "corpus-only",
+      "reason": "Classificatore fail-closed degli eventi JSONL del percorso Codex Luna Max, usato dal workflow `tests.yml` per distinguere max-turns, rate limit, errore server, cancellazione e failure non ritentabili. Il sito non usa questo consumer del review workflow del corpus e non ha un gemello da portare: la classificazione resta specifica di questo ciclo per costruzione.",
+      "baseline": {
+        "site": null,
+        "corpus": "4a1c1a0afcf0cb86",
+        "alignedAt": "2026-09-16"
+      }
+    },
+    {
       "path": "scripts/ci/claude-rate-limit-contract.mjs",
       "mode": "identical",
       "baseline": {
