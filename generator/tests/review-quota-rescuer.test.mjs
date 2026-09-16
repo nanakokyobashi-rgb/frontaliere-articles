@@ -462,7 +462,10 @@ test('il wiring reagisce al completamento dei consumer e rilascia reservation es
   assert.match(workflow, /PR ❌ check fixer \(bounded, check richiesto rosso su PR bot\)/);
   assert.match(workflow, /review-quota-rescuer\.mjs/);
   assert.match(tests, /HEAD_SHA: \$\{\{ steps\.resolve\.outputs\.head_sha \}\}/);
-  assert.match(tests, /steps\.quota\.outputs\.lease_allowed == 'true'[\s\S]*steps\.quota\.outputs\.lease_token != ''/);
+  assert.match(tests, /Pre-flight — Codex lane quota telemetry/);
+  assert.match(tests, /CODEX_FALLBACK_MODE: '1'/);
+  assert.doesNotMatch(tests, /QUOTA_LEASE_ACTION: acquire/,
+    'la review Codex non deve essere saltata per una lease Claude condivisa');
   const redflag = fs.readFileSync(path.join(ROOT, '.github/workflows/pr-redflag-fixer.yml'), 'utf8');
   const redcheck = fs.readFileSync(path.join(ROOT, '.github/workflows/pr-redcheck-fixer.yml'), 'utf8');
   assert.match(redflag, /HEAD_SHA: \$\{\{ github\.event\.pull_request\.head\.sha \}\}/);

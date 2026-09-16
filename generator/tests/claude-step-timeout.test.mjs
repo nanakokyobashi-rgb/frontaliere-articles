@@ -165,7 +165,7 @@ test('i due workflow del ciclo agentico dichiarano il tetto SULLO step', () => {
   // puo' arrivare dal job, o la coda di step post-Claude muore col job.
   for (const [file, stepName] of [
     ['issue-fix.yml', 'Run Claude fix'],
-    ['tests.yml', 'Run Claude review'],
+    ['tests.yml', 'Run Codex Luna Max review'],
   ]) {
     const yaml = fs.readFileSync(path.join(WORKFLOW_DIR, file), 'utf8');
     const found = claudeSteps(yaml).find((s) => s.step === stepName);

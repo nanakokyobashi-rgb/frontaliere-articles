@@ -212,12 +212,14 @@ export function reviewClaimDecision({ key, dedupeKey, claims = [], nowSec = Math
 export function claimStatusFromOutcome({
   proceed,
   claudeOutcome = '',
+  providerOutcome = '',
   executionText = '',
   retryableFailure = false,
   permanentFailure = false,
   reviewPosted = false,
   reviewFallbackApproved = false,
 } = {}) {
+  const outcome = providerOutcome || claudeOutcome;
   if (proceed !== true && proceed !== 'true') return 'released';
   if (reviewFallbackApproved === true || reviewFallbackApproved === 'true') return 'completed';
   if (permanentFailure === true || permanentFailure === 'true') return 'failed-terminal';
@@ -225,9 +227,9 @@ export function claimStatusFromOutcome({
   const text = String(executionText || '');
   const transient = /(?:api_error_status|status_code|http_status|status)"?\s*:\s*"?429\b|\bHTTP\s*429\b|\b(?:overloaded|server_error|internal server error)\b|rate_limit_event|rate_limit_error/iu.test(text);
   if (retryableFailure === true || retryableFailure === 'true'
-      || transient || claudeOutcome === 'cancelled'
-      || claudeOutcome === '' || claudeOutcome === 'skipped') return 'failed-transient';
-  if (claudeOutcome === 'failure') return 'failed-terminal';
+      || transient || outcome === 'cancelled'
+      || outcome === '' || outcome === 'skipped') return 'failed-transient';
+  if (outcome === 'failure') return 'failed-terminal';
   return 'completed';
 }
 
@@ -449,7 +451,7 @@ function finalizeClaim(base, repo) {
     ? process.env.CLAIM_STATUS
     : claimStatusFromOutcome({
       proceed: process.env.PROCEED,
-      claudeOutcome: process.env.CLAUDE_OUTCOME || '',
+      providerOutcome: process.env.CODEX_OUTCOME || process.env.CLAUDE_OUTCOME || '',
       executionText,
       retryableFailure: process.env.RETRYABLE_FAILURE === 'true' || retryableCause,
       permanentFailure: process.env.PERMANENT_FAILURE === 'true' || permanentCause,

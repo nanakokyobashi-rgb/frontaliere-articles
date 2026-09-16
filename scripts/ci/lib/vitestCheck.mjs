@@ -359,29 +359,31 @@ export function vitestFailureIsNotAttributableToPr({
 
 /**
  * Nome dello step di `tests.yml` che rende rosso il job `vitest (unit +
- * integration)` quando la review Claude sulla HEAD non è approvante (manca
+ * integration)` quando la review Codex sulla HEAD non è approvante (manca
  * `## LGTM`, oppure c'è un finding 🔴 Important). Vive qui e non in un literal
  * sparso perché è il DISCRIMINANTE fra due rossi che si chiamano uguali ma
  * vogliono cure opposte — vedi `vitestFailureIsReviewGate`.
  */
-export const REVIEW_GATE_STEP_NAME = 'Require approving Claude review';
+export const REVIEW_GATE_STEP_NAME = 'Require approving Codex review';
 
 /** Nome dello step che esegue davvero la review dentro il job di esecuzione. */
-export const CLAUDE_REVIEW_STEP_NAME = 'Run Claude review';
+export const CODEX_REVIEW_STEP_NAME = 'Run Codex Luna Max review';
+/** @deprecated mantenuto come alias per consumer/test storici. */
+export const CLAUDE_REVIEW_STEP_NAME = CODEX_REVIEW_STEP_NAME;
 
 /** Nome dello step che rende esplicita una review abortita senza verdetto. */
 export const REVIEW_ABORT_STEP_NAME = 'Fail on transient API error (no review posted)';
 
-/** Nome dello step che decide se Claude va saltata sul contributo invariato. */
-export const REVIEW_GUARD_STEP_NAME = 'Re-review guard (skip Claude when no code changed since last LGTM)';
+/** Nome dello step che decide se Codex va saltato sul contributo invariato. */
+export const REVIEW_GUARD_STEP_NAME = 'Re-review guard (skip Codex when no code changed since last LGTM)';
 
 /** Nome dello step che distingue un gate rosso per verdetto da un errore transitorio. */
 export const REVIEW_GATE_FAILURE_STEP_NAME = 'Classify review gate failure';
 
 const REVIEW_STEP_IN_FLIGHT = new Set(['queued', 'in_progress']);
 export const NON_GATING_REVIEW_STEPS = new Set([
-  'Mint GitHub App token for Claude review',
-  'Claude usage metrics',
+  'Mint GitHub App token for Codex review',
+  'Codex usage metrics',
   'Explain the job verdict in the run summary',
   REVIEW_GATE_FAILURE_STEP_NAME,
 ]);
@@ -459,7 +461,7 @@ export function vitestFailureIsReviewGate(steps) {
 }
 
 /**
- * Il gate è rosso perché il `Re-review guard` ha saltato Claude, non perché la
+ * Il gate è rosso perché il `Re-review guard` ha saltato Codex, non perché la
  * review sia fallita a metà? Pura e conservativa: lo skip è valido solo se il
  * guard è riuscito, l'abort è `skipped` e il classificatore del gate ha
  * confermato un `verdict`. Se il classificatore è `success` (errore API,

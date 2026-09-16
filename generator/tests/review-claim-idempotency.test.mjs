@@ -215,6 +215,8 @@ test('classifies setup and provider failures without consuming a retryable claim
   assert.equal(claimStatusFromOutcome({ proceed: false }), 'released');
   assert.equal(claimStatusFromOutcome({ proceed: true, reviewPosted: true }), 'completed');
   assert.equal(claimStatusFromOutcome({ proceed: true, claudeOutcome: '' }), 'failed-transient');
+  assert.equal(claimStatusFromOutcome({ proceed: true, providerOutcome: 'failure' }), 'failed-terminal');
+  assert.equal(claimStatusFromOutcome({ proceed: true, providerOutcome: 'cancelled' }), 'failed-transient');
   assert.equal(claimStatusFromOutcome({ proceed: true, retryableFailure: true }), 'failed-transient');
   assert.equal(claimStatusFromOutcome({
     proceed: true,

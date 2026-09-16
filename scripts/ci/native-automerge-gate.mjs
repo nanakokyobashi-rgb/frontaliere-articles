@@ -27,7 +27,7 @@ import {
 const TESTS_WORKFLOW_PATH = '.github/workflows/tests.yml';
 const TESTS_WORKFLOW_EVENT = 'pull_request';
 // Keep the bootstrap dependency-free unless the gate actually needs it.
-export const REVIEW_GATE_STEP_NAME = 'Require approving Claude review';
+export const REVIEW_GATE_STEP_NAME = 'Require approving Codex review';
 const NIT_MARKER_RE = /^[^\n🔴🟢]*(?<!`)🟡\s*\*{0,2}\s*Nit\s*\*{0,2}\s*[:—-]/mu;
 const FINDINGS_HEADING_RE = /^\s{0,3}#{1,3}\s+Findings\b[^\n]*$/i;
 const LGTM_HEADING_RE = /^\s{0,3}##\s+LGTM\s*$/m;
@@ -350,7 +350,7 @@ export function reviewGateEvidenceDecision({
 
   return {
     allow: true,
-    reason: 'step Require approving Claude review successivo alla review raw sulla stessa HEAD',
+    reason: 'step Require approving Codex review successivo alla review raw sulla stessa HEAD',
     runId: workflow.id,
     jobId: job.id,
     checkId: check.id,

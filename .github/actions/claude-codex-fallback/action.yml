@@ -1,9 +1,10 @@
-name: "Codex primary with Claude fallback"
+name: "Codex Luna Max primary with optional Claude fallback"
 description: >-
   Runs exactly one ephemeral Codex CLI attempt with ChatGPT subscription auth.
-  If Codex fails before any detectable local or remote side effect, runs the
-  existing Claude Code action as the fallback. A failure after a possible side
-  effect stops without retrying the prompt. The action has no API-key mode.
+  If Codex fails before any detectable local or remote side effect and an
+  explicit Claude token is supplied, runs the existing Claude Code action as
+  the compatibility fallback. A failure after a possible side effect stops
+  without retrying the prompt. The action has no API-key mode.
 
 inputs:
   preflight_blocked:
@@ -16,7 +17,8 @@ inputs:
     default: ""
   claude_code_oauth_token:
     description: "Claude subscription OAuth token for the fallback action."
-    required: true
+    required: false
+    default: ""
   codex_auth_json:
     description: "ChatGPT-managed Codex auth.json supplied to the Codex-primary setup step."
     required: false
@@ -1128,7 +1130,7 @@ runs:
     # the fallback safe when the Codex primary failed before its own bridge existed.
     - name: Prepare host-side GitHub bridge for Claude fallback
       id: claude_bridge
-      if: always() && (steps.codex.outcome == 'skipped' || (steps.codex.outcome == 'failure' && steps.codex.outputs.side_effect_detected == 'false'))
+      if: always() && inputs.claude_code_oauth_token != '' && (steps.codex.outcome == 'skipped' || (steps.codex.outcome == 'failure' && steps.codex.outputs.side_effect_detected == 'false'))
       shell: bash
       env:
         CODEX_ACTION_PATH: ${{ github.action_path }}
@@ -1224,7 +1226,7 @@ runs:
       # A failed Codex process is retryable only when the bridge and Git-state
       # snapshots prove that it did not deliver or mutate anything. Unknown
       # state is deliberately non-retryable to avoid duplicate fixes/PRs.
-      if: always() && steps.claude_bridge.outcome == 'success' && (steps.codex.outcome == 'skipped' || (steps.codex.outcome == 'failure' && steps.codex.outputs.side_effect_detected == 'false'))
+      if: always() && inputs.claude_code_oauth_token != '' && steps.claude_bridge.outcome == 'success' && (steps.codex.outcome == 'skipped' || (steps.codex.outcome == 'failure' && steps.codex.outputs.side_effect_detected == 'false'))
       continue-on-error: true
       uses: anthropics/claude-code-action@9c5ddab2e6d17b83ea679153b31f1d5f023cf636
       env:
