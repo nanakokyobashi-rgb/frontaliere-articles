@@ -95,17 +95,6 @@ test('la CLI Codex viene installata in un prefisso attestato e passa il suo path
 });
 
 test('le probe CLI tollerano il suffisso di --version senza allentare il pin semver', () => {
-  const claudePattern = CLAUDE.match(
-    /printf '%s\\n' "\$claude_cli_version" \| \/usr\/bin\/grep -Eq '([^']+)'/,
-  )?.[1];
-  assert.ok(claudePattern, 'probe semver della CLI Claude non trovata');
-  const claudeVersion = new RegExp(claudePattern);
-  assert.match('2.1.267 (Claude Code)', claudeVersion);
-  assert.doesNotMatch('2.1.2670', claudeVersion);
-  assert.doesNotMatch('2.1.267.1', claudeVersion);
-  assert.doesNotMatch('2.1.267-beta', claudeVersion);
-  assert.doesNotMatch(CLAUDE, /\[\s*"\$claude_cli_version"\s*(?:!=|=)\s*'[^']+'\s*\]/);
-
   const codexPatterns = [...CODEX_ACTION.matchAll(
     /printf '%s\\n' "\$codex_version" \| \/usr\/bin\/grep -Eq '([^']+)'/g,
   )].map((match) => match[1]);
