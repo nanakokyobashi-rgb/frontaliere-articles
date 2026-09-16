@@ -1,5 +1,5 @@
 /**
- * Contract test for the Codex-primary / Claude-fallback wiring.
+ * Contract test for the Codex Luna Max article lane.
  *
  * The composite action owns the raw OAuth JSON and exposes only its broker
  * socket. Every workflow consumer must carry that capability to its generator
@@ -51,7 +51,7 @@ function stepBlock(lines, index) {
   return lines.slice(start, end).join('\n');
 }
 
-test('every active article CLI caller wires the OAuth Codex broker', () => {
+test('every active article CLI caller wires the bounded Codex broker', () => {
   assert.equal(workflowFiles.length, 25, 'caller inventory changed: review new/removed consumers');
   for (const rel of workflowFiles) {
     const source = read(rel);
@@ -99,7 +99,7 @@ test('every active article CLI caller wires the OAuth Codex broker', () => {
   }
 });
 
-test('Codex primary keeps the pinned OAuth model and is ordered before Claude', () => {
+test('Codex Luna Max is the only preferred article model', () => {
   const aiModels = read('generator/scripts/lib/ai-models.mjs');
   const createArticle = read('generator/scripts/create-article.mjs');
   const action = read('.github/actions/setup-claude-haiku-fallback/action.yml');
@@ -112,11 +112,12 @@ test('Codex primary keeps the pinned OAuth model and is ordered before Claude', 
   const preferenceStart = createArticle.indexOf('const PREFERRED_GENERATION_MODELS');
   const codexPreference = createArticle.indexOf('AI_MODELS.CODEX_CLI_PRIMARY', preferenceStart);
   const claudePreference = createArticle.indexOf('AI_MODELS.CLAUDE_CLI_HAIKU', preferenceStart);
-  assert.ok(preferenceStart >= 0 && codexPreference >= 0 && claudePreference > codexPreference, 'Codex must precede Claude in the article preference');
-  assert.match(action, /name: "Setup Codex primary with Claude fallback"/);
+  assert.ok(preferenceStart >= 0 && codexPreference >= 0, 'Codex must be the article preference');
+  assert.equal(claudePreference, -1, 'Claude must not be an article preference');
+  assert.match(action, /name: "Setup Codex Luna Max article lane"/);
   assert.doesNotMatch(action, /indirect Codex fallback/);
   assert.match(broker, /CODEX_MODEL\s*=\s*['"]gpt-5\.6-luna['"]/);
-  assert.match(broker, /CODEX_EFFORT\s*=\s*['"]medium['"]/);
+  assert.match(broker, /CODEX_EFFORT\s*=\s*['"]max['"]/);
   assert.match(broker, /const configPath = path\.join\(codexHome, ['"]config\.toml['"]\)/);
   assert.doesNotMatch(broker, /['"]--profile['"]\s*,\s*CODEX_PROFILE/);
 });

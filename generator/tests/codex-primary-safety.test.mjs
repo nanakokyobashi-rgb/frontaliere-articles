@@ -224,24 +224,17 @@ test('the Git bridge marks delivery and local-state-changing operations', () => 
   assert.equal(isMutatingGitArgs(['ls-remote', 'origin', 'HEAD']), false);
 });
 
-test('Claude fallback is suppressed when Codex side effects are possible', () => {
-  assert.match(action, /steps\.codex\.outcome == 'failure'/);
-  assert.match(action, /steps\.codex\.outputs\.side_effect_detected == 'false'/);
-  assert.match(action, /Prepare host-side GitHub bridge for Claude fallback/);
-  assert.match(action, /steps\.claude_bridge\.outcome == 'success'/);
-  assert.match(action, /cp -- "\$action_path\/gh-bridge\.sh" "\$bridge_root\/gh"/);
-  assert.match(action, /resolved_gh="\$\(PATH="\$bridge_path" command -v gh/);
-  assert.match(action, /echo "\$bridge_root" >> "\$GITHUB_PATH"/);
-  const fallbackStart = action.indexOf('    - name: Run Claude fallback');
-  const cleanupStart = action.indexOf('    - name: Cleanup Claude fallback GitHub bridge', fallbackStart);
-  assert.notEqual(fallbackStart, -1);
-  assert.notEqual(cleanupStart, -1);
-  const fallback = action.slice(fallbackStart, cleanupStart);
-  assert.match(fallback, /      env:\n        GITHUB_PAT: ''\n        GITHUB_PAT_NANAKO: ''\n        GITHUB_PAT_SITE: ''/);
+test('il lane resta Codex-only e conserva il guard contro effetti collaterali', () => {
+  assert.match(action, /name:\s*["']Codex Luna Max primary["']/);
+  assert.doesNotMatch(action, /anthropics\/claude-code-action/);
+  assert.doesNotMatch(action, /@anthropic-ai/);
+  assert.doesNotMatch(action, /claude_bridge/);
+  assert.doesNotMatch(action, /Run Claude fallback/);
+  assert.match(action, /CODEX_OUTCOME: \$\{\{ steps\.codex\.outcome \}\}/);
+  assert.match(action, /CODEX_SIDE_EFFECT_DETECTED: \$\{\{ steps\.codex\.outputs\.side_effect_detected \}\}/);
   assert.doesNotMatch(action, /echo 'GITHUB_PAT='/);
   assert.doesNotMatch(action, /echo 'GITHUB_PAT_NANAKO='/);
   assert.doesNotMatch(action, /echo 'GITHUB_PAT_SITE='/);
-  assert.match(action, /Cleanup Claude fallback GitHub bridge/);
   assert.match(action, /restore_sanitized_git_config/);
   const stopGhStart = action.indexOf('        stop_gh_bridge() {');
   const stopGhEnd = action.indexOf('        trap stop_gh_bridge EXIT', stopGhStart);
@@ -272,8 +265,8 @@ test('il bridge corpus resta host-side anche quando il PAT arriva da GITHUB_ENV'
 });
 
 test('the corpus review loads its host-side PAT before invoking Codex', () => {
-  const reviewStep = workflowStep(testsWorkflow, 'Run Claude review');
-  const followupStep = workflowStep(followupWorkflow, 'Run Claude follow-up triage (batch)');
+  const reviewStep = workflowStep(testsWorkflow, 'Run Codex Luna Max review');
+  const followupStep = workflowStep(followupWorkflow, 'Run Codex Luna Max follow-up triage (batch)');
   const firebaseStep = workflowStep(followupWorkflow, 'Prepare Firebase credentials for follow-up routing');
   const credentialsStep = workflowStep(followupWorkflow, 'Load cross-repo follow-up credentials');
   assert.match(firebaseStep, /if: always\(\)/,
@@ -290,7 +283,7 @@ test('the corpus review loads its host-side PAT before invoking Codex', () => {
   assert.doesNotMatch(followupStep, /GITHUB_PAT:\s*\$\{\{ env\.GITHUB_PAT \}\}/);
   assert.match(followupWorkflow, /SITE_REPO: valerielinc-ops\/frontaliere-si-o-no/);
   assert.match(followupWorkflow, /target_token="\$\{GITHUB_PAT_SITE:-\$\{GITHUB_PAT:-\$\{GH_TOKEN:-\}\}\}"/);
-  assert.match(followupWorkflow, /Gate sul conio — sito \(zero-Claude\)/);
+  assert.match(followupWorkflow, /Gate sul conio — sito \(zero-provider\)/);
   assert.match(followupWorkflow, /Checkout site gate implementation/);
   assert.match(followupWorkflow, /repository: valerielinc-ops\/frontaliere-si-o-no/);
   assert.match(followupWorkflow, /sparse-checkout:\s*\|\n\s+\.github\/workflows\n\s+scripts\/ci/);
@@ -309,8 +302,8 @@ test('the corpus review loads its host-side PAT before invoking Codex', () => {
 });
 
 test('#1312: Lessons harvester non blocca Codex quando la quota Claude e\u0027 esaurita', () => {
-  const quota = workflowStep(lessonsWorkflow, 'Pre-flight — Claude quota telemetry (Codex primary)');
-  const draft = workflowStep(lessonsWorkflow, 'Draft doc-rule proposal (Claude — only if NOVEL patterns)');
+  const quota = workflowStep(lessonsWorkflow, 'Pre-flight — Codex lane quota telemetry');
+  const draft = workflowStep(lessonsWorkflow, 'Draft doc-rule proposal (Codex Luna Max — only if NOVEL patterns)');
 
   assert.match(quota, /continue-on-error: true/,
     'la telemetria quota non deve trasformare un 429 in un workflow failure');

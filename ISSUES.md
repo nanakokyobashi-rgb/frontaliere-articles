@@ -9,7 +9,7 @@ issue. Portato da `valerielinc-ops/frontaliere-si-o-no` e adattato.
 workflow fallisce
    └─ workflow-failure-issues.yml (cron */30, centrale)
         └─ "Workflow Failure: <nome>"        ← titolo canonico, dedupato
-             └─ issue-triage.yml             ← classifica, zero Claude
+             └─ issue-triage.yml             ← classifica, zero agente
                   ├─ route=fix    → agent:fix          (solo `publish`)
                   └─ route=queue  → agent:fix-queued   (tutto il resto)
                        └─ followup-drainer.yml         ← promuove UNA alla volta
@@ -98,7 +98,7 @@ tick fosse sbagliato.
    issue aperta per il giro successivo.
 
    **Eccezione — fix provabile solo da una run su `main`.** Se la PR tocca
-   `.github/workflows/**` o la config dell'action Claude (`claude_args`,
+   `.github/workflows/**` o la config dell'action Codex (`settings`,
    `settings`, sandbox, `permissionMode`) per un bug osservabile solo a
    runtime (sandbox/bwrap, permessi, rate-limit, dispatch) — cioè nessun test
    o lettura del diff può dimostrare che il fix funziona, solo una run reale
@@ -198,12 +198,12 @@ resta compatibile con le PR storiche.
 ## La quota è condivisa col sito
 
 Ogni run del fixer compete con il ciclo di `frontaliereticino.ch` sulla stessa
-quota Claude. Questo repo ha **precedenza inferiore per costruzione**: il gate
+quota Codex Luna Max. Questo repo ha **precedenza inferiore per costruzione**: il gate
 di quota legge anche il beacon del sito e cede, mentre il sito non legge mai il
 nostro (`QUOTA_BEACON_PEER_REPO`).
 
-Il beacon Claude resta osservabile, ma `issue-fix` e il drainer usano Codex come
-provider primario e Claude come fallback. Per questo il drainer non congela la
+Il beacon di quota legacy resta osservabile, ma `issue-fix` e il drainer usano
+Codex Luna Max come provider attivo, senza fallback Claude. Per questo il drainer non congela la
 coda quando è attivo `FOLLOWUP_CODEX_FALLBACK_MODE=1`: promuove il prossimo
 lavoro e lascia al fixer la decisione di usare il fallback. Il blocco
 deterministico resta disponibile quando il fallback è disabilitato.

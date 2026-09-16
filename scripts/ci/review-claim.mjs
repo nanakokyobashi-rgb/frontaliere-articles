@@ -211,7 +211,8 @@ export function reviewClaimDecision({ key, dedupeKey, claims = [], nowSec = Math
 /** Map the workflow's outcome to a durable state without weakening the gate. */
 export function claimStatusFromOutcome({
   proceed,
-  claudeOutcome = '',
+  actionOutcome = '',
+  claudeOutcome = actionOutcome,
   executionText = '',
   retryableFailure = false,
   permanentFailure = false,
@@ -224,10 +225,11 @@ export function claimStatusFromOutcome({
   if (reviewPosted === true || reviewPosted === 'true') return 'completed';
   const text = String(executionText || '');
   const transient = /(?:api_error_status|status_code|http_status|status)"?\s*:\s*"?429\b|\bHTTP\s*429\b|\b(?:overloaded|server_error|internal server error)\b|rate_limit_event|rate_limit_error/iu.test(text);
+  const outcome = actionOutcome || claudeOutcome;
   if (retryableFailure === true || retryableFailure === 'true'
-      || transient || claudeOutcome === 'cancelled'
-      || claudeOutcome === '' || claudeOutcome === 'skipped') return 'failed-transient';
-  if (claudeOutcome === 'failure') return 'failed-terminal';
+      || transient || outcome === 'cancelled'
+      || outcome === '' || outcome === 'skipped') return 'failed-transient';
+  if (outcome === 'failure') return 'failed-terminal';
   return 'completed';
 }
 
@@ -449,7 +451,7 @@ function finalizeClaim(base, repo) {
     ? process.env.CLAIM_STATUS
     : claimStatusFromOutcome({
       proceed: process.env.PROCEED,
-      claudeOutcome: process.env.CLAUDE_OUTCOME || '',
+      actionOutcome: process.env.ACTION_OUTCOME || process.env.CLAUDE_OUTCOME || '',
       executionText,
       retryableFailure: process.env.RETRYABLE_FAILURE === 'true' || retryableCause,
       permanentFailure: process.env.PERMANENT_FAILURE === 'true' || permanentCause,

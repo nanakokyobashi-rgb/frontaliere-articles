@@ -89,7 +89,6 @@ import { exitAfterDrain } from './lib/drain-stdio.mjs';
 // l'indipendenza che il guard «local/fallback cannot self-verify» difende.
 const PREFERRED_GENERATION_MODELS = [
   AI_MODELS.CODEX_CLI_PRIMARY,
-  AI_MODELS.CLAUDE_CLI_HAIKU,
 ];
 
 /**

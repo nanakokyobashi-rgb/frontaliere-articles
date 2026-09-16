@@ -121,7 +121,7 @@ superficie servita al sito resta vecchia in silenzio.
 ## Il ciclo autonomo
 
 Le PR ricevono una review automatica e vengono mergiate quando sono verdi. Dal
-2026-09-03 sono la STESSA cosa: contratto del body, test e Claude review col suo
+2026-09-03 sono la STESSA cosa: contratto del body, test e review Codex Luna Max col suo
 verdetto sono le tre famiglie di step di `tests.yml`, che produce il check-run
 `tests (node --test)`; il ruleset su `main` richiede quel check e l'auto-merge
 NATIVO di GitHub aspetta lui. Un `🔴 Important` rende rosso quel check, quindi il
@@ -140,13 +140,13 @@ locale non ha un heartbeat CI affidabile. Le PR create dal loop ricevono
 `agent:autofix`, che è la prova esplicita usata dai fixer e dai rescuer per
 distinguere una PR automatica owner-authored da una PR umana.
 
-**La quota Claude è condivisa con il ciclo del sito.** Questo repo ha
-precedenza inferiore per costruzione: i suoi workflow Claude leggono anche il
+**La quota Codex Luna Max è condivisa con il ciclo del sito.** Questo repo ha
+precedenza inferiore per costruzione: i suoi workflow Codex leggono anche il
 beacon di rate-limit del sito e cedono, mentre il sito non legge mai il nostro.
 Non è una gentilezza, è un invariante — vedi `scripts/ci/check-quota-backoff.mjs`.
-Codex è il provider primario: con `FOLLOWUP_CODEX_FALLBACK_MODE=1` il drainer
-non sospende la coda per un beacon Claude attivo, perché il fixer decide se il
-fallback è necessario dopo la promozione.
+Codex Luna Max è il provider attivo: con `FOLLOWUP_CODEX_FALLBACK_MODE=1` il
+drainer non sospende la coda per un beacon di quota legacy attivo, perché il
+fixer decide come procedere dopo la promozione.
 
 Il ciclo è tenuto allineato a quello del sito da
 `scripts/ci/loop-drift-check.mjs`, che confronta i due lati **contro la

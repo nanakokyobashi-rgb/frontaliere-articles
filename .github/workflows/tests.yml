@@ -4,10 +4,10 @@ run-name: "Code checks and review · ${{ github.event.pull_request.number && for
 # Il check-run che governa il merge di QUALUNQUE PR di questo repo.
 #
 # Dal 2026-09-03 questo file non contiene piu' solo i test: contiene l'INTERO
-# cancello della PR — contratto del body, unit + closure gates, e la Claude
+# cancello della PR — contratto del body, unit + closure gates, e la review Codex
 # review col suo verdetto. E' l'allineamento all'architettura del sito
 # (valerielinc-ops/frontaliere-si-o-no#6571 e #6606), portata qui perche' i due
-# repo condividono il ciclo agentico e la quota Claude.
+# repo condividono il ciclo agentico e il lane Codex.
 #
 # ## Perche' un job solo, e perche' proprio questo
 #
@@ -226,7 +226,7 @@ jobs:
         run: node scripts/ci/loop-baseline-pr-gate.mjs
 
       # ══════════════════════════════════════════════════════════════════════
-      # FAMIGLIA 3/3 — Claude review + verdetto (ex workflow di review dedicato)
+      # FAMIGLIA 3/3 — Codex review + verdetto (ex workflow di review dedicato)
       #
       # Girava su `workflow_run[tests]` proprio per non spendere Claude su
       # codice rosso. Quel risparmio NON si perde: gli step qui sotto stanno
@@ -309,7 +309,7 @@ jobs:
       # piu' recente e si fa carry-forward solo quando il codice PR e' invariato.
       # Una risposta API illeggibile è un errore: senza prova del ledger non si
       # può spendere un altro turno Claude in sicurezza.
-      - name: Re-review guard (skip Claude when no code changed since last LGTM)
+      - name: Re-review guard (skip Codex when no code changed since last LGTM)
         id: guard
         if: steps.body_contract.outcome != 'failure' && steps.resolve.outputs.should_review == 'true'
         env:
@@ -534,13 +534,13 @@ jobs:
           # scavalcando il guard di incompletezza qui sotto.
           if [ -z "$files" ] && [ "$files_complete" = "1" ]; then
             echo "Lista file vuota (PR rebase-only o vuota)."
-            set_tier normal claude-opus-5 35
+            set_tier normal gpt-5.6-luna 35
             exit 0
           fi
           # Elenco incompleto: il tier NON si decide su un campione.
           if [ "$files_complete" != "1" ]; then
             echo "Elenco file INCOMPLETO ($count/$expected, causa: $reason) → tier high forzato: niente minimal, niente decisione funnel su un campione."
-            set_tier high claude-opus-5 60
+            set_tier high gpt-5.6-luna 60
             exit 0
           fi
           if printf '%s' "$result" | node scripts/ci/review-test-policy.mjs only; then
@@ -548,7 +548,7 @@ jobs:
               set_tier tests-only none 0
             else
               # Includes a rename from application code or an uncertain snapshot.
-              set_tier high claude-opus-5 60
+              set_tier high gpt-5.6-luna 60
             fi
             exit 0
           fi
@@ -558,7 +558,7 @@ jobs:
             # da verificare solo il contratto del body. E' il caso PIU' FREQUENTE
             # su questo repo, dove i workflow di generazione committano corpus.
             echo "PR di soli content/data (nessun codice toccato) → tier minimal."
-            set_tier minimal claude-opus-5 12
+            set_tier minimal gpt-5.6-luna 12
             exit 0
           fi
           # funnel_crit <file-list> → exit 0 se la lista contiene codice
@@ -594,9 +594,9 @@ jobs:
               echo "incremental_base=$lastRev" >> "$GITHUB_OUTPUT"
               echo "Re-review incrementale: solo il delta dei file PR da $lastRev:"; echo "$delta_code"
               if funnel_crit "$delta_code"; then
-                set_tier incremental-high claude-opus-5 35
+                set_tier incremental-high gpt-5.6-luna 35
               else
-                set_tier incremental claude-opus-5 35
+                set_tier incremental gpt-5.6-luna 35
               fi
               exit 0
             fi
@@ -606,12 +606,12 @@ jobs:
           code_file_count=$(echo "$code_files" | grep -c . || true)
           if funnel_crit "$code_files"; then
             if [ "$code_file_count" -ge 25 ]; then
-              set_tier high-mega claude-opus-5 90
+              set_tier high-mega gpt-5.6-luna 90
             else
-              set_tier high claude-opus-5 60
+              set_tier high gpt-5.6-luna 60
             fi
           else
-            set_tier normal claude-opus-5 35
+            set_tier normal gpt-5.6-luna 35
           fi
 
       # NIENTE proxy di compressione su questo step, e non e' una dimenticanza.
@@ -706,8 +706,8 @@ jobs:
 
       # Lease zero-Claude: la review puo' spendere quota residua solo quando il
       # drainer non ha una prenotazione issue-fix viva e nessun altro consumer
-      # possiede lo slot condiviso. Codex resta il provider primario.
-      - name: Pre-flight — Claude quota telemetry (Codex primary)
+      # possiede lo slot condiviso. Codex Luna Max è l'unico provider del lane.
+      - name: Pre-flight — Codex lane quota telemetry
         id: quota
         if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true'
         continue-on-error: true
@@ -723,7 +723,7 @@ jobs:
           HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
         run: node scripts/ci/check-quota-backoff.mjs
 
-      - name: Shared Claude quota lease unavailable (expected skip)
+      - name: Shared Codex lane quota lease unavailable (expected skip)
         if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true' && steps.quota.outputs.lease_allowed != 'true'
         run: |
           if [ "${{ steps.quota.outputs.lease_error }}" = 'true' ]; then
@@ -760,8 +760,8 @@ jobs:
         continue-on-error: true
         run: node generator/scripts/load-rc-env.mjs
 
-      - name: Run Claude review
-        # Tetto sullo step (stessa classe del tetto su `Run Claude fix` in
+      - name: Run Codex Luna Max review
+        # Tetto sullo step (stessa classe del tetto su `Run Codex Luna Max fix` in
         # issue-fix.yml). Qui il cap del job e' 360min ed e' CONDIVISO con la
         # suite `node --test`: un reviewer appeso se lo mangia tutto e il job
         # muore `cancelled` — che nessun `if: failure()` vede e che lascia il
@@ -771,7 +771,7 @@ jobs:
         # nessuna review vera; col `continue-on-error` qui sotto lo scadere non
         # tinge il job di rosso, lo lascia classificare al guard.
         timeout-minutes: 45
-        id: claude_review
+        id: codex_review
         if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true' && steps.quota.outputs.lease_allowed == 'true'
         # Un fallimento dell'action non deve abortire il job prima che il guard
         # sotto possa classificarlo: e' il guard a decidere se fallire forte.
@@ -793,13 +793,10 @@ jobs:
           codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
           github_token: ${{ env.APP_TOKEN || secrets.GITHUB_TOKEN }}
           review_marker: '<!-- CODEX_FALLBACK_REVIEW -->'
-          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           # Mai `*`. Le PR aperte dal fixer sono di `claude[bot]`; quelle del
           # mirror engine-lockstep e delle automation interne di
-          # `github-actions[bot]`. Senza whitelist claude-code-action aborta
+          # `github-actions[bot]`. Senza whitelist il lane Codex abortisce
           # "non-human actor".
-          allowed_bots: 'github-actions[bot], claude[bot]'
-          show_full_output: true
           # `--dangerously-skip-permissions` funziona sotto `pull_request` come
           # funzionava sotto `workflow_run`: e' su `schedule`/`workflow_dispatch`
           # che `permissionMode` ricade a "default" nonostante il flag e quasi
@@ -807,7 +804,6 @@ jobs:
           # 28594653701: 36 blocchi, zero commenti postati). Questo workflow non
           # ha piu' un ramo dispatch che invochi la review, quindi la riga resta
           # una sola.
-          claude_args: "--effort medium --max-turns ${{ steps.tier.outputs.max_turns }} --model ${{ steps.tier.outputs.model }} --dangerously-skip-permissions"
           prompt: |
             Test files are excluded from review by owner policy: do not read, probe or raise findings on tests, including during cross-file analysis.
             Report the exact workflow tier `${{ steps.tier.outputs.tier }}` in Scope; this classifies review scope, not model reasoning effort.
@@ -836,21 +832,21 @@ jobs:
 
             Posta ESATTAMENTE una review con `gh pr review ${PR_NUMBER} --comment --body "<markdown nel formato di REVIEW.md>"`. Chiudi con `## LGTM` solo quando non c'e' un `🔴 Important` aperto, nessuna domanda funnel-critical irrisolta e il contratto del body e' valido. Incerto → `❓ q:`, mai speculazione. Lavora read-only: niente edit, commit, push, npm o test. Fermati subito dopo aver postato.
 
-      # claude-code-action puo' uscire 0 anche quando il run e' abortito su un
+      # Il lane Codex puo' uscire 0 anche quando il run e' abortito su un
       # errore API transiente SENZA aver postato una review: il job sembra verde
       # ma la PR si ferma in silenzio. Si classifica dal log di esecuzione.
       - name: Fail on transient API error (no review posted)
         id: review_abort
-        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true' && steps.quota.outputs.lease_allowed == 'true' && steps.claude_review.outputs.primary_success != 'true'
+        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true' && steps.quota.outputs.lease_allowed == 'true' && steps.codex_review.outputs.primary_success != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           RUN_ID: ${{ github.run_id }}
           PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
           HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
-          REVIEW_OUTCOME: ${{ steps.claude_review.outcome }}
-          EXEC_FILE: ${{ steps.claude_review.outputs.execution_file }}
-          CODEX_PRIMARY_SUCCESS: ${{ steps.claude_review.outputs.primary_success }}
+          REVIEW_OUTCOME: ${{ steps.codex_review.outcome }}
+          EXEC_FILE: ${{ steps.codex_review.outputs.execution_file }}
+          CODEX_PRIMARY_SUCCESS: ${{ steps.codex_review.outputs.primary_success }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           REVIEW_TIER: ${{ steps.tier.outputs.tier }}
           REVIEW_MAX_TURNS: ${{ steps.tier.outputs.max_turns }}
@@ -1052,7 +1048,7 @@ jobs:
             # scambia per un review-gate retryable (#1185 item 2).
             set_review_output review_abort_cause non_retryable
             set_review_output permanent_failure true
-            echo "::error::claude-code-action fallita senza causa transient provata (outcome=failure): nessun autorebase automatico."
+            echo "::error::Codex review fallita senza causa transient provata (outcome=failure): nessun autorebase automatico."
             exit 0
           fi
           echo "Step di review concluso senza errori API non recuperati."
@@ -1078,7 +1074,7 @@ jobs:
       # Gira anche quando la review e' stata SALTATA dal guard (carry-forward) e
       # quando l'action e' morta: in quei casi il verdetto sta comunque nelle
       # review gia' postate, e non trovarne una approvante deve bloccare.
-      - name: Require approving Claude review
+      - name: Require approving Codex review
         id: review_gate
         if: steps.body_contract.outcome != 'failure' && always() && steps.resolve.outputs.should_review == 'true'
         env:
@@ -1088,7 +1084,7 @@ jobs:
           HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           REVIEW_REVISION: ${{ steps.review_input.outputs.review_revision }}
-          CODEX_FALLBACK_EVIDENCE_FILE: ${{ steps.claude_review.outputs.fallback_evidence_file }}
+          CODEX_FALLBACK_EVIDENCE_FILE: ${{ steps.codex_review.outputs.fallback_evidence_file }}
         run: node scripts/ci/review-gate.mjs
 
       # La Jobs API espone solo la conclusion del review gate, non la ragione
@@ -1142,8 +1138,8 @@ jobs:
           REVIEW_REVISION: ${{ steps.review_input.outputs.review_revision }}
           CLAIM_TOKEN: ${{ steps.review_claim.outputs.claim_token }}
           PROCEED: ${{ steps.tier.outputs.tier == 'tests-only' || steps.quota.outputs.lease_allowed == 'true' }}
-          CLAUDE_OUTCOME: ${{ steps.claude_review.outcome }}
-          EXEC_FILE: ${{ steps.claude_review.outputs.execution_file }}
+          ACTION_OUTCOME: ${{ steps.codex_review.outcome }}
+          EXEC_FILE: ${{ steps.codex_review.outputs.execution_file }}
           RETRYABLE_FAILURE: ${{ steps.review_abort.outputs.retryable_failure }}
           PERMANENT_FAILURE: ${{ steps.review_abort.outputs.permanent_failure }}
           REVIEW_ABORT_CAUSE: ${{ steps.review_abort.outputs.review_abort_cause }}
@@ -1152,13 +1148,7 @@ jobs:
           GITHUB_RUN_ID: ${{ github.run_id }}
         run: node scripts/ci/review-claim.mjs --claim
 
-      - name: Claude usage metrics
-        # Solo se la review e' effettivamente girata: a review skippata non c'e'
-        # execution_file da riassumere. Best-effort, non fallisce mai il job.
-        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true' && steps.quota.outputs.lease_allowed == 'true' && steps.claude_review.outputs.claude_used == 'true'
-        run: node scripts/ci/claude-usage-summary.mjs "${{ steps.claude_review.outputs.execution_file }}" "pr-review"
-
-      - name: Release shared Claude quota lease
+      - name: Release shared Codex lane quota lease
         if: always() && steps.body_contract.outcome != 'failure' && steps.review_claim.outputs.claim_allowed == 'true' && steps.quota.outputs.lease_allowed == 'true' && steps.quota.outputs.lease_token != ''
         continue-on-error: true
         env:

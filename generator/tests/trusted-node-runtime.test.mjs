@@ -1,5 +1,5 @@
 /**
- * Contratto del resolver Node/npm usato dal fallback Haiku.
+ * Contratto del resolver Node/npm usato dal lane Codex Luna Max.
  *
  * L'action è YAML con una composite action: il test verifica il contratto
  * sorgente senza fingere di poter emulare il runner GitHub in node:test.
@@ -25,10 +25,10 @@ const BROKER = fs.readFileSync(
 );
 
 const runtimeStart = ACTION.indexOf('- name: Resolve trusted Node/npm toolchain');
-const claudeStart = ACTION.indexOf('- name: Setup Claude CLI Haiku fallback');
-assert.ok(runtimeStart !== -1 && claudeStart > runtimeStart, 'blocco trusted toolchain non trovato');
-const RUNTIME = ACTION.slice(runtimeStart, claudeStart);
-const CLAUDE = ACTION.slice(claudeStart);
+const codexStart = ACTION.indexOf('- name: Prepare Linux sandbox for Codex primary');
+assert.ok(runtimeStart !== -1 && codexStart > runtimeStart, 'blocco trusted toolchain non trovato');
+const RUNTIME = ACTION.slice(runtimeStart, codexStart);
+const CODEX = ACTION.slice(codexStart);
 
 test('il resolver ammette solo prefissi di sistema e mantiene il controllo dei componenti', () => {
   const roots = RUNTIME.match(/for trusted_root in ([^;]+); do/)?.[1] ?? '';
@@ -63,36 +63,35 @@ test('la diagnostica espone PATH, realpath e il verdetto dei due controlli', () 
   assert.match(RUNTIME, /trusted-runtime selected node_realpath=%s npm_realpath=%s/);
 });
 
-test('nessuna coppia attestabile disattiva Haiku senza aggirare il controllo', () => {
+test('nessuna coppia attestabile disattiva Codex senza aggirare il controllo', () => {
   const noPair = RUNTIME.match(
     /if \[ -z "\$node_realpath" \] \|\| \[ -z "\$npm_realpath" \]; then([\s\S]*?)fi/,
   )?.[1] ?? '';
-  assert.match(noPair, /disable_haiku/);
+  assert.match(noPair, /disable_codex_lane/);
   assert.doesNotMatch(noPair, /exit 1/);
   assert.match(RUNTIME, /printf 'available=false\\n' >> "\$GITHUB_OUTPUT"/);
   assert.match(
     RUNTIME,
-    /printf 'HAIKU_FALLBACK_GATE=0\\nENABLE_HAIKU_ARTICLE_FALLBACK=0\\nENABLE_CODEX_ARTICLE_FALLBACK=0\\n' >> "\$GITHUB_ENV"/,
+    /printf 'CODEX_ARTICLE_LANE_GATE=0\\nENABLE_CODEX_ARTICLE_FALLBACK=0\\n' >> "\$GITHUB_ENV"/,
   );
 });
 
-test('anche una CLI Haiku non installabile lascia disponibile la cascata normale', () => {
-  assert.match(CLAUDE, /set \+e\n\s*\(/);
-  assert.match(CLAUDE, /setup_status=\$\?/);
-  assert.match(CLAUDE, /printf 'available=true\\n' >> "\$GITHUB_OUTPUT"/);
-  assert.match(CLAUDE, /printf 'available=false\\n' >> "\$GITHUB_OUTPUT"/);
-  assert.match(CLAUDE, /Haiku fallback disabled|Haiku setup unavailable/);
-  assert.match(CLAUDE, /steps\.trusted_toolchain\.outputs\.available == 'true'/);
+test('anche una CLI Codex non installabile lascia disponibile la cascata normale', () => {
+  assert.match(CODEX, /set \+e/);
+  assert.match(CODEX, /Codex CLI install failed/);
+  assert.match(CODEX, /normal fallback cascade remain available/);
+  assert.match(CODEX, /printf 'codex_bin=%s\\n'/);
+  assert.match(CODEX, /steps\.trusted_toolchain\.outputs\.available == 'true'/);
 });
 
-test('la CLI Haiku viene installata in un prefisso attestato e passa il suo path al consumer', () => {
-  assert.match(CLAUDE, /claude_prefix=.*\/opt\/runner\/claude-haiku-cli/);
-  assert.match(CLAUDE, /NPM_CONFIG_PREFIX="\$claude_prefix"/);
-  assert.match(CLAUDE, /claude_cli_bin=/);
-  assert.match(CLAUDE, /claude_cli_sha256=/);
-  assert.match(CLAUDE, /CLAUDE_CLI_BIN=/);
-  assert.match(CLAUDE, /CLAUDE_CLI_SHA256=/);
-  assert.match(CLAUDE, /root-owned Claude CLI prefix/);
+test('la CLI Codex viene installata in un prefisso attestato e passa il suo path al broker', () => {
+  assert.match(CODEX, /codex_prefix="\$\(mktemp -d "\$runner_tmp\/codex-luna-max-codex-cli/);
+  assert.match(CODEX, /@openai\/codex@0\.153\.4/);
+  assert.match(CODEX, /codex_realpath=/);
+  assert.match(CODEX, /codex_sha256=/);
+  assert.match(CODEX, /CODEX_CLI_BIN:/);
+  assert.match(CODEX, /CODEX_CLI_SHA256:/);
+  assert.match(CODEX, /Start Codex auth broker for the primary lane/);
 });
 
 test('le probe CLI tollerano il suffisso di --version senza allentare il pin semver', () => {

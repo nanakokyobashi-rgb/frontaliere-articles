@@ -615,14 +615,6 @@ export const DEFAULT_CHAIN = [
   // OMNIROUTE_ENABLED is set.
   AI_MODELS.OMNIROUTE_AUTO,
 
-  // Claude CLI Haiku, opt-in via Remote Config + CLAUDE_CODE_OAUTH_TOKEN.
-  // Since 2026-07-29 (AI_COMPETING_TIERS default) also PROMOTED to tier-0 —
-  // same mechanism as OMNIROUTE_AUTO above, same bottom-of-array ramp-up
-  // rationale. Additionally capped by CLAUDE_CLI_MAX_CALLS_PER_RUN (default
-  // 25/run) since this tier burns the shared Max-subscription quota that also
-  // powers pr-review-loop.yml/issue-fix.yml — see the callLLM loop's cap
-  // check. Set AI_COMPETING_TIERS='' to restore pinned-last-resort behavior.
-  AI_MODELS.CLAUDE_CLI_HAIKU,
 ];
 
 // ── Provider constants ───────────────────────────────────────

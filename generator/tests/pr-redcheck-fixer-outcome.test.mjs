@@ -69,17 +69,18 @@ esac
 `);
   fakeExecutable(bin, 'gh', String.raw`
 case "$*" in
-  */issues/*/comments*) printf '0\n' ;;
+  *issues/*/comments*) printf '0\n' ;;
   *) printf '%s' "$FAKE_BODY" ;;
 esac
 `);
 
   try {
-    const result = spawnSync('/bin/bash', ['-c', runScript(stepBlock(CLASSIFY_NAME))], {
+    const result = spawnSync('/bin/bash', ['-c', `export PATH="$TEST_BIN:$PATH"\n${runScript(stepBlock(CLASSIFY_NAME))}`], {
       cwd: temp,
       env: {
         ...process.env,
         PATH: `${bin}:${process.env.PATH}`,
+        TEST_BIN: bin,
         REPO: 'example/repo',
         PR_NUMBER: '7',
         HEAD_REF: 'fix/body-outcome',
@@ -87,7 +88,7 @@ esac
         BASE_COMMENTS: '0',
         BASE_BODY_SHA: baseBodySha,
         BASE_CAPTURE_OUTCOME: baseCaptureOutcome,
-        CLAUDE_OUTCOME: 'success',
+        ACTION_OUTCOME: 'success',
         FAKE_HEAD: 'base-sha',
         FAKE_REMOTE: 'base-sha',
         FAKE_BODY: currentBody,
@@ -116,8 +117,8 @@ esac
 `);
   fakeExecutable(bin, 'gh', String.raw`
 case "$*" in
-  */issues/*/comments*) printf '0\n' ;;
-  */pulls/*)
+  *issues/*/comments*) printf '0\n' ;;
+  *pulls*)
     if [ "$FAKE_EMPTY_RESPONSE" = "1" ]; then exit 0; fi
     printf '%s\n' "$FAKE_BODY" ;;
   *) exit 64 ;;
@@ -125,11 +126,12 @@ esac
 `);
 
   try {
-    return spawnSync('/bin/bash', ['-c', runScript(stepBlock('Record base SHA (pre-Claude)'))], {
+    return spawnSync('/bin/bash', ['-c', `export PATH="$TEST_BIN:$PATH"\n${runScript(stepBlock('Record base SHA (pre-Codex)'))}`], {
       cwd: temp,
       env: {
         ...process.env,
         PATH: `${bin}:${process.env.PATH}`,
+        TEST_BIN: bin,
         REPO: 'example/repo',
         PR_NUMBER: '7',
         RUNNER_TEMP: temp,
@@ -146,7 +148,7 @@ esac
 }
 
 test('il digest del body è acquisito prima e classificato fail-closed', () => {
-  const base = stepBlock('Record base SHA (pre-Claude)');
+  const base = stepBlock('Record base SHA (pre-Codex)');
   const classify = stepBlock(CLASSIFY_NAME);
 
   assert.match(base, /set -uo pipefail/, 'la lettura del body deve propagare gli errori della pipeline');

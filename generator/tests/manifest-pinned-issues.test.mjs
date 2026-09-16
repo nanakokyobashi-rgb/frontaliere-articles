@@ -145,7 +145,7 @@ test('handoff: il pin produce un corto-circuito di parcheggio senza Claude', asy
 test('i workflow dei due closer espongono il kill-switch senza modificare il gemello mirror-locked', () => {
   const steps = [
     ['.github/workflows/followup-drainer.yml', 'Drain follow-up queue (deterministic, no Claude)'],
-    ['.github/workflows/lessons-harvester.yml', 'Aggregate recurring patterns (deterministic, zero Claude)'],
+    ['.github/workflows/lessons-harvester.yml', 'Aggregate recurring patterns (deterministic, zero-agent)'],
   ];
   for (const [file, name] of steps) {
     const src = fs.readFileSync(path.join(ROOT, file), 'utf8');

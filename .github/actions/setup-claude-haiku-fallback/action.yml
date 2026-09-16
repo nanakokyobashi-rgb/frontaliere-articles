@@ -1,26 +1,17 @@
-name: "Setup Codex primary with Claude fallback"
+name: "Setup Codex Luna Max article lane"
 description: >-
-  Installs a pinned Codex CLI and the Claude Code CLI lane for article
-  generation. When CODEX_AUTH_JSON is available, Codex is attempted first via
-  a private broker socket; if that one-shot attempt fails, the generator tries
-  Claude Haiku, then its normal model cascade. The historical
+  Installs a pinned Codex CLI and exposes a private broker for the
+  gpt-5.6-luna subscription lane. The historical
   ENABLE_HAIKU_ARTICLE_FALLBACK flag remains the Remote Config kill-switch for
   this optional lane, so existing callers keep working.
-  Claude uses CLAUDE_CODE_OAUTH_TOKEN (the same Max-plan subscription token
-  already used by pr-review-loop.yml/issue-fix.yml), never ANTHROPIC_API_KEY.
   Caller MUST run "node generator/scripts/load-rc-env.mjs" before this action so
-  env.ENABLE_HAIKU_ARTICLE_FALLBACK reflects Remote Config. Caller MUST also
-  pass CLAUDE_CODE_OAUTH_TOKEN (sourced from secrets.CLAUDE_CODE_OAUTH_TOKEN)
-  via env: on any step that actually invokes callLLM — ai-models.mjs only
-  offers the model when both the flag AND the token are present
-  (isClaudeCliFallbackEnabled/hasClaudeCodeOauthToken). Passing the token
-  here is harmless even on steps that never reach the fallback tier.
-  Both optional lanes are fail-open by construction: if the runner has no
+  env.ENABLE_HAIKU_ARTICLE_FALLBACK reflects Remote Config. The generator
+  invokes this lane only when the private broker socket is available.
+  The lane is fail-open by construction: if the runner has no
   immutable, attested Node/npm pair, the normal model cascade remains
   available. Official runner-toolcache components are normalized before
-  attestation when the runner owns them; the pinned Claude CLI is installed
-  under a root-owned /opt/runner prefix and the pinned Codex CLI under a
-  private temporary prefix. Callers pass the optional secret through the
+  attestation when the runner owns them; the pinned Codex CLI is installed
+  under a private temporary prefix. Callers pass the optional secret through the
   codex_auth_json input; only the broker bootstrap step receives it, keeps it
   in broker memory, and exports a private Unix-socket path for the generator.
   CORRECTED CLAIM (was wrong in this file since generate-article.yml run
@@ -44,16 +35,10 @@ inputs:
 outputs:
   codex_auth_broker_socket:
     description: >-
-      Short-lived private Unix-socket endpoint for the one-shot Codex primary.
+      Short-lived private Unix-socket endpoint for the bounded Codex Luna Max lane.
       The endpoint is exposed only as an action output, never through
       GITHUB_ENV.
     value: ${{ steps.start_codex_auth_broker.outputs.socket }}
-  claude_cli_bin:
-    description: Absolute path of the attested pinned Claude CLI, when available.
-    value: ${{ steps.setup_claude_cli.outputs.claude_cli_bin }}
-  claude_cli_sha256:
-    description: SHA-256 digest of the attested pinned Claude CLI.
-    value: ${{ steps.setup_claude_cli.outputs.claude_cli_sha256 }}
 runs:
   using: "composite"
   steps:
@@ -61,15 +46,15 @@ runs:
     # bash instead of GitHub Actions' `if:` expression language, which
     # evaluates a true-unset env.X as equal to '0' rather than as ''. See
     # the CORRECTED CLAIM note above.
-    - name: Resolve Codex primary / Claude fallback gate
+    - name: Resolve Codex Luna Max article gate
       shell: bash
       run: |
-        echo "HAIKU_FALLBACK_GATE=${ENABLE_HAIKU_ARTICLE_FALLBACK:-1}" >> "$GITHUB_ENV"
+        echo "CODEX_ARTICLE_LANE_GATE=${ENABLE_CODEX_ARTICLE_FALLBACK:-${ENABLE_HAIKU_ARTICLE_FALLBACK:-1}}" >> "$GITHUB_ENV"
         echo 'ENABLE_CODEX_ARTICLE_FALLBACK=0' >> "$GITHUB_ENV"
 
     - name: Resolve trusted Node/npm toolchain
       id: trusted_toolchain
-      if: env.HAIKU_FALLBACK_GATE != '0'
+      if: env.CODEX_ARTICLE_LANE_GATE != '0'
       shell: bash
       env:
         CODEX_ACTION_PATH: ${{ github.action_path }}
@@ -81,33 +66,33 @@ runs:
         action_path="${CODEX_ACTION_PATH:?Codex action path unavailable}"
         runner_temp="${RUNNER_TEMP:-${TMPDIR:-/tmp}}"
         runner_home="${RUNNER_HOME:-${HOME:-/home/runner}}"
-        disable_haiku() {
+        disable_codex_lane() {
           local reason="$1"
-          echo "::warning::${reason} Haiku fallback disabled; the normal model cascade remains available"
+          echo "::warning::${reason} Codex article lane disabled; the normal model cascade remains available"
           printf 'available=false\n' >> "$GITHUB_OUTPUT"
-          printf 'HAIKU_FALLBACK_GATE=0\nENABLE_HAIKU_ARTICLE_FALLBACK=0\nENABLE_CODEX_ARTICLE_FALLBACK=0\n' >> "$GITHUB_ENV"
+          printf 'CODEX_ARTICLE_LANE_GATE=0\nENABLE_CODEX_ARTICLE_FALLBACK=0\n' >> "$GITHUB_ENV"
           exit 0
         }
         realpath_cmd=''
         for candidate_realpath in /usr/bin/realpath /bin/realpath; do
           if [ -x "$candidate_realpath" ]; then realpath_cmd="$candidate_realpath"; break; fi
         done
-        [ -n "$realpath_cmd" ] || disable_haiku 'Trusted realpath utility is unavailable.'
+        [ -n "$realpath_cmd" ] || disable_codex_lane 'Trusted realpath utility is unavailable.'
         tr_cmd=/usr/bin/tr
         [ -x "$tr_cmd" ] || tr_cmd=/bin/tr
-        [ -x "$tr_cmd" ] || disable_haiku 'Trusted tr utility is unavailable.'
+        [ -x "$tr_cmd" ] || disable_codex_lane 'Trusted tr utility is unavailable.'
         stat_cmd=/usr/bin/stat
         [ -x "$stat_cmd" ] || stat_cmd=/bin/stat
-        [ -x "$stat_cmd" ] || disable_haiku 'Trusted stat utility is unavailable.'
+        [ -x "$stat_cmd" ] || disable_codex_lane 'Trusted stat utility is unavailable.'
         id_cmd=/usr/bin/id
         [ -x "$id_cmd" ] || id_cmd=/bin/id
-        [ -x "$id_cmd" ] || disable_haiku 'Trusted id utility is unavailable.'
+        [ -x "$id_cmd" ] || disable_codex_lane 'Trusted id utility is unavailable.'
         cut_cmd=/usr/bin/cut
         [ -x "$cut_cmd" ] || cut_cmd=/bin/cut
-        [ -x "$cut_cmd" ] || disable_haiku 'Trusted cut utility is unavailable.'
+        [ -x "$cut_cmd" ] || disable_codex_lane 'Trusted cut utility is unavailable.'
         chmod_cmd=/usr/bin/chmod
         [ -x "$chmod_cmd" ] || chmod_cmd=/bin/chmod
-        [ -x "$chmod_cmd" ] || disable_haiku 'Trusted chmod utility is unavailable.'
+        [ -x "$chmod_cmd" ] || disable_codex_lane 'Trusted chmod utility is unavailable.'
         sudo_cmd=''
         for candidate_sudo in /usr/bin/sudo /bin/sudo; do
           if [ -x "$candidate_sudo" ] && "$candidate_sudo" -n true >/dev/null 2>&1; then
@@ -317,26 +302,26 @@ runs:
         node_realpath="$(find_trusted_node || true)"
         npm_realpath="$(find_trusted_npm || true)"
         if [ -z "$node_realpath" ] || [ -z "$npm_realpath" ]; then
-          disable_haiku 'Trusted Node/npm runtime must resolve outside writable runner trees.'
+          disable_codex_lane 'Trusted Node/npm runtime must resolve outside writable runner trees.'
         fi
         node_version="$("$node_realpath" --version 2>/dev/null || true)"
         case "$node_version" in
           v[0-9]*.[0-9]*.[0-9]*) ;;
-          *) disable_haiku 'Trusted Node runtime returned an invalid version.' ;;
+          *) disable_codex_lane 'Trusted Node runtime returned an invalid version.' ;;
         esac
         node_major="${node_version#v}"
         node_major="${node_major%%.*}"
         [ "$node_major" -ge 18 ] || {
-          disable_haiku 'Trusted Node runtime is older than Node 18.'
+          disable_codex_lane 'Trusted Node runtime is older than Node 18.'
         }
         toolchain_path="$(/usr/bin/dirname "$npm_realpath"):$("/usr/bin/dirname" "$node_realpath"):/usr/bin:/bin"
-        npm_global_config="$(/usr/bin/mktemp "$runner_temp/claude-haiku-toolchain.XXXXXX")"
+        npm_global_config="$(/usr/bin/mktemp "$runner_temp/codex-luna-max-toolchain.XXXXXX")"
         /usr/bin/chmod 600 "$npm_global_config"
         npm_version="$(/usr/bin/env -i PATH="$toolchain_path" HOME=/tmp CI=true NPM_CONFIG_USERCONFIG=/dev/null NPM_CONFIG_GLOBALCONFIG="$npm_global_config" "$node_realpath" "$npm_realpath" --version 2>/dev/null || true)"
         /bin/rm -f -- "$npm_global_config"
         case "$npm_version" in
           [0-9]*.[0-9]*.[0-9]*) ;;
-          *) disable_haiku 'Trusted npm launcher returned an invalid version.' ;;
+          *) disable_codex_lane 'Trusted npm launcher returned an invalid version.' ;;
         esac
         sha256_file() {
           if [ -x /usr/bin/sha256sum ]; then
@@ -353,7 +338,7 @@ runs:
         npm_sha256="$(sha256_file "$npm_realpath" || true)"
         if ! printf '%s' "$node_sha256" | /usr/bin/grep -Eq '^[a-f0-9]{64}$' || \
           ! printf '%s' "$npm_sha256" | /usr/bin/grep -Eq '^[a-f0-9]{64}$'; then
-          disable_haiku 'Unable to attest trusted Node/npm runtime.'
+          disable_codex_lane 'Unable to attest trusted Node/npm runtime.'
         fi
         printf 'available=true\nnode_realpath=%s\nnode_version=%s\nnode_sha256=%s\nnpm_realpath=%s\nnpm_version=%s\nnpm_sha256=%s\n' \
           "$node_realpath" "$node_version" "$node_sha256" \
@@ -363,131 +348,11 @@ runs:
         )
         resolver_status=$?
         if [ "$resolver_status" -ne 0 ]; then
-          echo '::warning::Trusted Node/npm resolver could not complete; Haiku fallback disabled; the normal model cascade remains available'
+          echo '::warning::Trusted Node/npm resolver could not complete; Codex article lane disabled; the normal model cascade remains available'
           printf 'available=false\n' >> "$GITHUB_OUTPUT"
-          printf 'HAIKU_FALLBACK_GATE=0\nENABLE_HAIKU_ARTICLE_FALLBACK=0\nENABLE_CODEX_ARTICLE_FALLBACK=0\n' >> "$GITHUB_ENV"
+          printf 'CODEX_ARTICLE_LANE_GATE=0\nENABLE_CODEX_ARTICLE_FALLBACK=0\n' >> "$GITHUB_ENV"
         fi
 
-    - name: Setup Claude CLI Haiku fallback
-      id: setup_claude_cli
-      if: env.HAIKU_FALLBACK_GATE != '0' && steps.trusted_toolchain.outputs.available == 'true'
-      shell: bash
-      env:
-        TRUSTED_NODE: ${{ steps.trusted_toolchain.outputs.node_realpath }}
-        TRUSTED_NODE_SHA256: ${{ steps.trusted_toolchain.outputs.node_sha256 }}
-        TRUSTED_NPM: ${{ steps.trusted_toolchain.outputs.npm_realpath }}
-        TRUSTED_NPM_SHA256: ${{ steps.trusted_toolchain.outputs.npm_sha256 }}
-      run: |
-        set +e
-        (
-        set -euo pipefail
-        trusted_node="${TRUSTED_NODE:?Trusted Node runtime unavailable}"
-        trusted_node_sha256="${TRUSTED_NODE_SHA256:?Trusted Node digest unavailable}"
-        trusted_npm="${TRUSTED_NPM:?Trusted npm runtime unavailable}"
-        trusted_npm_sha256="${TRUSTED_NPM_SHA256:?Trusted npm digest unavailable}"
-        case "$trusted_node" in /*) ;; *) echo '::error::Trusted Node path is not absolute.'; exit 1 ;; esac
-        case "$trusted_npm" in *.js) ;; *) echo '::error::Trusted npm launcher is not JavaScript.'; exit 1 ;; esac
-        [ -f "$trusted_node" ] && [ -x "$trusted_node" ] && [ ! -L "$trusted_node" ] || {
-          echo '::error::Trusted Node runtime is not a regular executable.'
-          exit 1
-        }
-        [ -f "$trusted_npm" ] && [ -x "$trusted_npm" ] && [ ! -L "$trusted_npm" ] || {
-          echo '::error::Trusted npm launcher is not a regular executable.'
-          exit 1
-        }
-        sha256_file() {
-          if [ -x /usr/bin/sha256sum ]; then
-            /usr/bin/sha256sum -- "$1" | /usr/bin/cut -d ' ' -f 1
-          elif [ -x /bin/sha256sum ]; then
-            /bin/sha256sum -- "$1" | /usr/bin/cut -d ' ' -f 1
-          elif [ -x /usr/bin/shasum ]; then
-            /usr/bin/shasum -a 256 -- "$1" | /usr/bin/cut -d ' ' -f 1
-          else
-            return 1
-          fi
-        }
-        [ "$(sha256_file "$trusted_node")" = "$trusted_node_sha256" ] || {
-          echo '::error::Trusted Node runtime changed after attestation.'
-          exit 1
-        }
-        [ "$(sha256_file "$trusted_npm")" = "$trusted_npm_sha256" ] || {
-          echo '::error::Trusted npm launcher changed after attestation.'
-          exit 1
-        }
-        realpath_bin=/usr/bin/realpath
-        [ -x "$realpath_bin" ] || realpath_bin=/bin/realpath
-        [ -x "$realpath_bin" ] || { echo '::error::Trusted realpath utility is unavailable.'; exit 1; }
-        trusted_npm_dir="$(/usr/bin/dirname "$trusted_npm")"
-        trusted_node_dir="$(/usr/bin/dirname "$trusted_node")"
-        safe_path="$trusted_npm_dir:$trusted_node_dir:/usr/bin:/bin"
-        PATH="$safe_path"
-        export PATH
-        runner_temp="${RUNNER_TEMP:-${TMPDIR:-/tmp}}"
-        install_root="$(mktemp -d "$runner_temp/claude-haiku-cli.XXXXXX")"
-        chmod 700 "$install_root"
-        mkdir -p "$install_root/cache"
-        chmod 700 "$install_root/cache"
-        global_npmrc="$install_root/global-npmrc"
-        : > "$global_npmrc"
-        chmod 600 "$global_npmrc"
-        clean_env=(
-          PATH="$safe_path"
-          HOME="$install_root"
-          CI=true
-          NPM_CONFIG_USERCONFIG=/dev/null
-          NPM_CONFIG_GLOBALCONFIG="$global_npmrc"
-          npm_config_cache="$install_root/cache"
-        )
-        sudo_cmd=/usr/bin/sudo
-        [ -x "$sudo_cmd" ] || sudo_cmd=/bin/sudo
-        [ -x "$sudo_cmd" ] && "$sudo_cmd" -n true >/dev/null 2>&1 || {
-          echo '::error::Non-interactive sudo is unavailable for the root-owned Claude CLI prefix.'
-          exit 1
-        }
-        "$sudo_cmd" -n /usr/bin/mkdir -p /opt/runner
-        "$sudo_cmd" -n /usr/bin/chmod 755 /opt/runner
-        claude_prefix="$("$sudo_cmd" -n /usr/bin/mktemp -d /opt/runner/claude-haiku-cli.XXXXXX)"
-        "$sudo_cmd" -n /usr/bin/chmod 755 "$claude_prefix"
-        "$sudo_cmd" -n /usr/bin/env -i "${clean_env[@]}" NPM_CONFIG_PREFIX="$claude_prefix" "$trusted_node" "$trusted_npm" install --global --prefix "$claude_prefix" \
-          --no-package-lock --no-fund --no-audit @anthropic-ai/claude-code@2.1.267
-        global_root="$("$sudo_cmd" -n /usr/bin/env -i "${clean_env[@]}" NPM_CONFIG_PREFIX="$claude_prefix" "$trusted_node" "$trusted_npm" root --global)"
-        global_root="$("$realpath_bin" "$global_root")"
-        claude_package_json="$global_root/@anthropic-ai/claude-code/package.json"
-        claude_package_version="$("$trusted_node" -e 'const fs=require("node:fs"); process.stdout.write(JSON.parse(fs.readFileSync(process.argv[1], "utf8")).version)' "$claude_package_json" 2>/dev/null || true)"
-        if [ "$claude_package_version" != '2.1.267' ]; then
-          echo "::error::Unexpected Claude Code package version: $claude_package_version"
-          exit 1
-        fi
-        claude_bin="$claude_prefix/bin/claude"
-        claude_realpath="$("$realpath_bin" "$claude_bin" 2>/dev/null || true)"
-        case "$claude_realpath" in /opt/runner/claude-haiku-cli.*/*) ;; *) echo '::error::Pinned Claude CLI resolved outside the root-owned prefix.'; exit 1 ;; esac
-        [ -f "$claude_realpath" ] && [ -x "$claude_realpath" ] && [ ! -L "$claude_realpath" ] || {
-          echo '::error::Pinned Claude Code CLI was not installed at its trusted global prefix.'
-          exit 1
-        }
-        claude_cli_version="$("$claude_realpath" --version 2>&1 || true)"
-        if ! printf '%s\n' "$claude_cli_version" | /usr/bin/grep -Eq '(^|[^0-9A-Za-z._-])2\.1\.267([^0-9A-Za-z._-]|$)'; then
-          echo "::error::Unexpected Claude Code CLI version: $claude_cli_version"
-          exit 1
-        fi
-        claude_sha256="$(sha256_file "$claude_realpath" || true)"
-        printf '%s' "$claude_sha256" | /usr/bin/grep -Eq '^[a-f0-9]{64}$' || {
-          echo '::error::Unable to attest the pinned Claude Code CLI.'
-          exit 1
-        }
-        rm -rf -- "$install_root"
-        printf 'claude_cli_bin=%s\nclaude_cli_sha256=%s\n' "$claude_realpath" "$claude_sha256" >> "$GITHUB_OUTPUT"
-        printf 'CLAUDE_CLI_BIN=%s\nCLAUDE_CLI_SHA256=%s\nENABLE_HAIKU_ARTICLE_FALLBACK=1\n' \
-          "$claude_realpath" "$claude_sha256" >> "$GITHUB_ENV"
-        )
-        setup_status=$?
-        if [ "$setup_status" -eq 0 ]; then
-          printf 'available=true\n' >> "$GITHUB_OUTPUT"
-        else
-          echo '::warning::Claude Code Haiku setup unavailable; the normal model cascade remains available'
-          printf 'available=false\n' >> "$GITHUB_OUTPUT"
-          printf 'ENABLE_HAIKU_ARTICLE_FALLBACK=0\n' >> "$GITHUB_ENV"
-        fi
 
     # Keep the Codex binary outside the mutable checkout and out of the global
     # PATH. The broker receives this action-owned path plus its attestation;
@@ -496,12 +361,12 @@ runs:
     - name: Prepare Linux sandbox for Codex primary
       id: setup_codex_sandbox
       continue-on-error: true
-      if: env.HAIKU_FALLBACK_GATE != '0' && steps.trusted_toolchain.outputs.available == 'true' && inputs.codex_auth_json != ''
+      if: env.CODEX_ARTICLE_LANE_GATE != '0' && steps.trusted_toolchain.outputs.available == 'true' && inputs.codex_auth_json != ''
       uses: ./.github/actions/setup-codex-sandbox
 
     - name: Install pinned Codex CLI for the primary lane
       id: install_codex_cli
-      if: env.HAIKU_FALLBACK_GATE != '0' && steps.trusted_toolchain.outputs.available == 'true' && inputs.codex_auth_json != '' && steps.setup_codex_sandbox.outcome == 'success'
+      if: env.CODEX_ARTICLE_LANE_GATE != '0' && steps.trusted_toolchain.outputs.available == 'true' && inputs.codex_auth_json != '' && steps.setup_codex_sandbox.outcome == 'success'
       shell: bash
       env:
         TRUSTED_NODE: ${{ steps.trusted_toolchain.outputs.node_realpath }}
@@ -515,17 +380,17 @@ runs:
         trusted_npm="${TRUSTED_NPM:-}"
         trusted_npm_sha256="${TRUSTED_NPM_SHA256:-}"
         if [ -z "$trusted_node" ] || [ -z "$trusted_npm" ]; then
-          echo "::warning::Codex CLI install could not resolve a trusted Node/npm runtime; Claude and the normal fallback cascade remain available"
+          echo "::warning::Codex CLI install could not resolve a trusted Node/npm runtime; the normal fallback cascade remain available"
           exit 0
         fi
-        case "$trusted_node" in /*) ;; *) echo "::warning::Trusted Node path is not absolute; Claude and the normal fallback cascade remain available"; exit 0 ;; esac
-        case "$trusted_npm" in *.js) ;; *) echo "::warning::Trusted npm launcher is not JavaScript; Claude and the normal fallback cascade remain available"; exit 0 ;; esac
+        case "$trusted_node" in /*) ;; *) echo "::warning::Trusted Node path is not absolute; the normal fallback cascade remain available"; exit 0 ;; esac
+        case "$trusted_npm" in *.js) ;; *) echo "::warning::Trusted npm launcher is not JavaScript; the normal fallback cascade remain available"; exit 0 ;; esac
         [ -f "$trusted_node" ] && [ -x "$trusted_node" ] && [ ! -L "$trusted_node" ] || {
-          echo "::warning::Trusted Node runtime is not a regular executable; Claude and the normal fallback cascade remain available"
+          echo "::warning::Trusted Node runtime is not a regular executable; the normal fallback cascade remain available"
           exit 0
         }
         [ -f "$trusted_npm" ] && [ -x "$trusted_npm" ] && [ ! -L "$trusted_npm" ] || {
-          echo "::warning::Trusted npm launcher is not a regular executable; Claude and the normal fallback cascade remain available"
+          echo "::warning::Trusted npm launcher is not a regular executable; the normal fallback cascade remain available"
           exit 0
         }
         sha256_file() {
@@ -541,7 +406,7 @@ runs:
         }
         if [ "$(sha256_file "$trusted_node" 2>/dev/null)" != "$trusted_node_sha256" ] || \
           [ "$(sha256_file "$trusted_npm" 2>/dev/null)" != "$trusted_npm_sha256" ]; then
-          echo "::warning::Trusted Node/npm runtime changed after attestation; Claude and the normal fallback cascade remain available"
+          echo "::warning::Trusted Node/npm runtime changed after attestation; the normal fallback cascade remain available"
           exit 0
         fi
         trusted_npm_dir="$(/usr/bin/dirname "$trusted_npm")"
@@ -550,9 +415,9 @@ runs:
         PATH="$safe_path"
         export PATH
         runner_tmp="${RUNNER_TEMP:-${TMPDIR:-/tmp}}"
-        codex_prefix="$(mktemp -d "$runner_tmp/claude-haiku-codex-cli.XXXXXX")"
+        codex_prefix="$(mktemp -d "$runner_tmp/codex-luna-max-codex-cli.XXXXXX")"
         if [ -z "$codex_prefix" ] || [ ! -d "$codex_prefix" ]; then
-          echo "::warning::Codex CLI install could not allocate its credential-free temporary prefix; Claude and the normal fallback cascade remain available"
+          echo "::warning::Codex CLI install could not allocate its credential-free temporary prefix; the normal fallback cascade remain available"
           exit 0
         fi
         chmod 700 "$codex_prefix"
@@ -578,13 +443,13 @@ runs:
           npm_config_cache="$npm_cache" \
           "$trusted_node" "$trusted_npm" install --prefix "$codex_prefix" --no-save --no-package-lock \
             --no-fund --no-audit @openai/codex@0.153.4; then
-          echo "::warning::Codex CLI install failed; Claude and the normal fallback cascade remain available"
+          echo "::warning::Codex CLI install failed; the normal fallback cascade remain available"
           rm -rf -- "$codex_prefix"
           exit 0
         fi
         codex_link="$codex_prefix/node_modules/.bin/codex"
         if [ ! -f "$codex_link" ] || [ ! -x "$codex_link" ]; then
-          echo "::warning::Pinned Codex CLI did not expose an executable; Claude and the normal fallback cascade remain available"
+          echo "::warning::Pinned Codex CLI did not expose an executable; the normal fallback cascade remain available"
           rm -rf -- "$codex_prefix"
           exit 0
         fi
@@ -592,20 +457,20 @@ runs:
         case "$codex_realpath" in
           "$codex_prefix"/*) ;;
           *)
-            echo "::warning::Pinned Codex CLI resolved outside its temporary prefix; Claude and the normal fallback cascade remain available"
+            echo "::warning::Pinned Codex CLI resolved outside its temporary prefix; the normal fallback cascade remain available"
             rm -rf -- "$codex_prefix"
             exit 0
             ;;
         esac
         codex_version="$($codex_realpath --version 2>&1)"
         if ! printf '%s\n' "$codex_version" | grep -Eq '(^|[^0-9A-Za-z._-])v?0\.153\.4([^0-9A-Za-z._-]|$)'; then
-          echo "::warning::Pinned Codex CLI version attestation failed; Claude and the normal fallback cascade remain available"
+          echo "::warning::Pinned Codex CLI version attestation failed; the normal fallback cascade remain available"
           rm -rf -- "$codex_prefix"
           exit 0
         fi
         codex_sha256="$($trusted_node --input-type=module -e 'import fs from "node:fs"; import crypto from "node:crypto"; console.log(crypto.createHash("sha256").update(fs.readFileSync(process.argv[1])).digest("hex"));' "$codex_realpath" 2>/dev/null)"
         if ! printf '%s' "$codex_sha256" | grep -Eq '^[a-f0-9]{64}$'; then
-          echo "::warning::Pinned Codex CLI digest attestation failed; Claude and the normal fallback cascade remain available"
+          echo "::warning::Pinned Codex CLI digest attestation failed; the normal fallback cascade remain available"
           rm -rf -- "$codex_prefix"
           exit 0
         fi
@@ -620,7 +485,7 @@ runs:
     # steps do not inherit a broker capability.
     - name: Start Codex auth broker for the primary lane
       id: start_codex_auth_broker
-      if: env.HAIKU_FALLBACK_GATE != '0' && inputs.codex_auth_json != '' && steps.install_codex_cli.outputs.codex_bin != ''
+      if: env.CODEX_ARTICLE_LANE_GATE != '0' && inputs.codex_auth_json != '' && steps.install_codex_cli.outputs.codex_bin != ''
       shell: bash
       env:
         CODEX_AUTH_JSON: ${{ inputs.codex_auth_json }}
@@ -638,12 +503,12 @@ runs:
           /usr|/usr/*|/usr/local|/usr/local/*|/bin|/bin/*|/opt/hostedtoolcache|/opt/hostedtoolcache/*|/opt/runner|/opt/runner/*|/opt/homebrew|/opt/homebrew/*)
             ;;
           *)
-            echo "::warning::Codex auth broker could not use its attested Node runtime; Claude and the normal fallback cascade remain available"
+            echo "::warning::Codex auth broker could not use its attested Node runtime; the normal fallback cascade remain available"
             exit 0
             ;;
         esac
         if [ ! -f "$node_bin" ] || [ ! -x "$node_bin" ] || [ -L "$node_bin" ]; then
-          echo "::warning::Codex auth broker attested Node runtime is not a real executable; Claude and the normal fallback cascade remain available"
+          echo "::warning::Codex auth broker attested Node runtime is not a real executable; the normal fallback cascade remain available"
           exit 0
         fi
         sha256_file() {
@@ -658,7 +523,7 @@ runs:
           fi
         }
         if [ -z "$node_sha256_expected" ] || [ "$(sha256_file "$node_bin" 2>/dev/null)" != "$node_sha256_expected" ]; then
-          echo "::warning::Codex auth broker attested Node runtime changed after attestation; Claude and the normal fallback cascade remain available"
+          echo "::warning::Codex auth broker attested Node runtime changed after attestation; the normal fallback cascade remain available"
           exit 0
         fi
         # The secret is present in this step from the first shell instruction;
@@ -666,16 +531,16 @@ runs:
         PATH='/usr/bin:/bin'
         export PATH
         auth_tmp="${RUNNER_TEMP:-${TMPDIR:-/tmp}}"
-        auth_dir="$(mktemp -d "$auth_tmp/claude-haiku-codex-broker.XXXXXX")"
+        auth_dir="$(mktemp -d "$auth_tmp/codex-luna-max-codex-broker.XXXXXX")"
         if [ -z "$auth_dir" ] || [ ! -d "$auth_dir" ]; then
-          echo "::warning::Codex auth broker could not allocate private runner temp space; Claude and the normal fallback cascade remain available"
+          echo "::warning::Codex auth broker could not allocate private runner temp space; the normal fallback cascade remain available"
           exit 0
         fi
         chmod 700 "$auth_dir"
         broker_socket="$auth_dir/auth.sock"
         auth_fifo="$auth_dir/auth.in"
         if ! mkfifo "$auth_fifo" || ! chmod 600 "$auth_fifo"; then
-          echo "::warning::Codex auth broker could not allocate its private input channel; Claude and the normal fallback cascade remain available"
+          echo "::warning::Codex auth broker could not allocate its private input channel; the normal fallback cascade remain available"
           rm -rf -- "$auth_dir"
           exit 0
         fi
@@ -683,13 +548,13 @@ runs:
         # with an empty environment so CODEX_AUTH_JSON from this step cannot
         # leak into the long-lived broker process or any diagnostics.
         nohup /usr/bin/env -i PATH="$PATH" "$node_bin" "$GITHUB_ACTION_PATH/codex-auth-broker.mjs" \
-          --socket "$broker_socket" --ttl-ms 1800000 \
+          --socket "$broker_socket" --ttl-ms 1800000 --max-requests 512 \
           --codex-bin "$CODEX_CLI_BIN" --codex-realpath "$CODEX_CLI_REALPATH" \
           --codex-sha256 "$CODEX_CLI_SHA256" --codex-prefix "$CODEX_CLI_PREFIX" \
           < "$auth_fifo" > /dev/null 2>&1 &
         broker_pid=$!
         if ! printf '%s' "$CODEX_AUTH_JSON" > "$auth_fifo"; then
-          echo "::warning::Codex auth broker could not receive its credential; Claude and the normal fallback cascade remain available"
+          echo "::warning::Codex auth broker could not receive its credential; the normal fallback cascade remain available"
           kill "$broker_pid" 2>/dev/null || true
           rm -f -- "$auth_fifo" "$broker_socket"
           rm -rf -- "$CODEX_CLI_PREFIX"
@@ -704,7 +569,7 @@ runs:
           sleep 0.1
         done
         if [ "$broker_ready" -ne 1 ]; then
-          echo "::warning::Codex auth broker did not become ready; Claude and the normal fallback cascade remain available"
+          echo "::warning::Codex auth broker did not become ready; the normal fallback cascade remain available"
           kill "$broker_pid" 2>/dev/null || true
           rm -f -- "$auth_fifo" "$broker_socket"
           rm -rf -- "$CODEX_CLI_PREFIX"
@@ -719,20 +584,15 @@ runs:
     # Unconditional (no `if:`) so it also fires when the step above got
     # skipped — surfaces flag/binary desync directly in this run's log
     # instead of requiring a forensic dig through job.steps[].conclusion.
-    - name: Diagnose Claude CLI Haiku fallback state
+    - name: Diagnose Codex Luna Max article lane
       shell: bash
       env:
         CODEX_CLI_BIN: ${{ steps.install_codex_cli.outputs.codex_bin }}
       run: |
         echo "ENABLE_HAIKU_ARTICLE_FALLBACK=${ENABLE_HAIKU_ARTICLE_FALLBACK:-<unset>} (raw RC value)"
-        echo "HAIKU_FALLBACK_GATE=${HAIKU_FALLBACK_GATE:-<unset>} (resolved gate)"
-        if [ -n "${CLAUDE_CLI_BIN:-}" ] && [ -x "$CLAUDE_CLI_BIN" ]; then
-          echo "claude CLI: present at attested path $CLAUDE_CLI_BIN ($("$CLAUDE_CLI_BIN" --version 2>&1 | head -1))"
-        else
-          echo "claude CLI: unavailable at the attested path — Haiku fallback remains disabled for this run"
-        fi
+        echo "CODEX_ARTICLE_LANE_GATE=${CODEX_ARTICLE_LANE_GATE:-<unset>} (resolved gate)"
         if [ -n "$CODEX_CLI_BIN" ]; then
           echo "codex CLI: attested at $CODEX_CLI_BIN (version 0.153.4)"
         else
-          echo "codex CLI: unavailable or failed attestation — Claude fallback and the normal model chain will continue"
+          echo "codex CLI: unavailable or failed attestation — the normal model chain will continue"
         fi

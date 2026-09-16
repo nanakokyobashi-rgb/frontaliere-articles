@@ -49,7 +49,7 @@ const CLAUDE_ACTION = /uses:\s*(?:anthropics\/claude-code-action|\.\/\.github\/a
 
 /**
  * Tetto massimo accettato per uno step Claude. 120 minuti sono ~10x la piu'
- * lunga esecuzione reale misurata (733s su `Run Claude fix`, 2026-09-06):
+ * lunga esecuzione reale misurata (733s sul lane fix, 2026-09-06):
  * nessun run sano lo tocca, e lascia 4h del cap del job alla coda di step
  * deterministici che deve girare comunque.
  */
@@ -164,8 +164,8 @@ test('i due workflow del ciclo agentico dichiarano il tetto SULLO step', () => {
   // Regressione mirata: nei due file dove il cap del job e' 360 il tetto non
   // puo' arrivare dal job, o la coda di step post-Claude muore col job.
   for (const [file, stepName] of [
-    ['issue-fix.yml', 'Run Claude fix'],
-    ['tests.yml', 'Run Claude review'],
+    ['issue-fix.yml', 'Run Codex Luna Max fix'],
+    ['tests.yml', 'Run Codex Luna Max review'],
   ]) {
     const yaml = fs.readFileSync(path.join(WORKFLOW_DIR, file), 'utf8');
     const found = claudeSteps(yaml).find((s) => s.step === stepName);

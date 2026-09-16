@@ -370,7 +370,7 @@ describe('il nome del check e quello di QUESTO repo, non quello del sito', () =>
 describe('review-gate: il rosso della review non e il rosso dei test (#7429)', () => {
   // Dal 2026-09-03 la Claude review e' uno STEP del job che produce il check
   // richiesto, quindi quel job e' rosso anche a TEST VERDI, quando a fallire e'
-  // `Require approving Claude review`. E' esattamente il rosso di questa PR di
+  // `Require approving Codex review`. E' esattamente il rosso di questa PR di
   // trasporto: leggerlo come «test rotti» manda a cercare un `not ok` che nel
   // log non c'e' e nega il riciclo proprio dove funzionerebbe.
   const redFp = reopenFingerprint({ ...green, vitestConclusion: 'failure' });

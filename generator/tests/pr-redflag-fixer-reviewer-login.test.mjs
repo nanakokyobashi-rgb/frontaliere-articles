@@ -51,13 +51,12 @@ test('collect-review jq, review-gate and auto-merge-eval use the same bot set', 
   assert.doesNotMatch(testsYml, /test\("claude";"i"\)/);
 });
 
-test('il redflag fixer ammette Claude solo con contesto PR/review verificato', () => {
+test('il redflag fixer ammette Codex solo con contesto PR/review verificato', () => {
   const collectStart = src.indexOf('- name: Collect PR + review context (zero-Claude)');
   const failClosedStart = src.indexOf('- name: Fail closed when review context is unavailable', collectStart);
-  const setupStart = src.indexOf('- name: Setup Headroom compression proxy', failClosedStart);
-  const claudeStart = src.indexOf('- name: Run Claude 🔴-fix', setupStart);
-  assert.ok(collectStart >= 0 && failClosedStart > collectStart && setupStart > failClosedStart);
-  assert.ok(claudeStart > setupStart);
+  const codexStart = src.indexOf('- name: Run Codex Luna Max 🔴-fix', failClosedStart);
+  assert.ok(collectStart >= 0 && failClosedStart > collectStart);
+  assert.ok(codexStart > failClosedStart);
 
   const collect = src.slice(collectStart, failClosedStart);
   assert.match(collect, /context_fail\(\)/);
@@ -79,11 +78,11 @@ test('il redflag fixer ammette Claude solo con contesto PR/review verificato', (
   assert.match(collect, /\.commit_id \/\/ "".*\$head/);
   assert.match(collect, /context_verified=true/);
 
-  const failClosed = src.slice(failClosedStart, setupStart);
+  const failClosed = src.slice(failClosedStart, codexStart);
   assert.match(failClosed, /steps\.ctx\.outputs\.context_verified != 'true'/);
   assert.match(failClosed, /exit 1/);
   assert.match(
-    src.slice(claudeStart, src.indexOf('- name: Claude usage metrics', claudeStart)),
+    src.slice(codexStart, src.indexOf('- name: Cleanup Firebase credentials', codexStart)),
     /if: steps\.guard\.outputs\.proceed == 'true' && steps\.ctx\.outputs\.context_verified == 'true'/,
   );
 });

@@ -11,7 +11,7 @@
  * Quella premessa cade in uno stato preciso: il `Re-review guard` di
  * `tests.yml` ha SALTATO Claude (delta dall'ultima `## LGTM` di soli file
  * non-code, oppure fingerprint del contributo invariato) e lo step
- * `Require approving Claude review` — che gira con `always()` — e' fallito lo
+ * `Require approving Codex review` — che gira con `always()` — e' fallito lo
  * stesso sui verdetti gia' postati. Li' il close+reopen e' un no-op per
  * costruzione: `tests.yml` riparte, il guard rivaluta lo stesso contributo (il
  * merge di `main` pushato dall'autorebase non lo cambia: e' 3-dot contro la

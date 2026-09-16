@@ -30,7 +30,7 @@
  * review saltata, e' un no-op per costruzione. Entrambi in silenzio, dietro una
  * CI verde.
  *
- * Si pinna anche l'`if:` di `Run Claude review`, perche' e' la PREMESSA del
+ * Si pinna anche l'`if:` di `Run Codex Luna Max review`, perche' e' la PREMESSA del
  * segnale: lo step risulta `skipped` per il guard solo finche' la sua
  * condizione dipende da `steps.guard.outputs.skip`.
  */
@@ -100,7 +100,7 @@ test('lo step della review e\' `skipped` PER il guard: la sua condizione lo dice
   assert.match(
     cond[1],
     /steps\.guard\.outputs\.skip/,
-    'la condizione di `Run Claude review` non dipende piu\' dal `Re-review guard`. ' +
+    'la condizione di `Run Codex Luna Max review` non dipende piu\' dal `Re-review guard`. ' +
       '`reviewSkippedByGuard` legge `skipped` su quello step per dedurre che il guard ha ' +
       'saltato Claude: senza questa dipendenza il segnale diventa un\'altra cosa, e il ' +
       'one-shot verrebbe negato (o concesso) su una premessa che non vale piu\'.',
@@ -147,7 +147,7 @@ test('lo step di abort gira anche quando la review muore, e sta PRIMA del gate',
   const cond = block.match(/^\s*if:\s*(.+)$/m);
   assert.ok(cond, `lo step \`${REVIEW_ABORT_STEP_NAME}\` non ha un \`if:\``);
   assert.match(block, /^\s*id:\s*review_abort\s*$/m, 'lo step di abort deve esportare il proprio segnale');
-  // Senza `always()` lo step non girerebbe dopo una `Run Claude review` rossa,
+  // Senza `always()` lo step non girerebbe dopo una `Run Codex Luna Max review` rossa,
   // che e' esattamente il caso che deve classificare.
   assert.match(cond[1], /always\(\)/, "lo step di abort non gira piu' con `always()`");
   // L'ordine e' sostanziale: la co-occorrenza «abort rosso + gate rosso» esiste

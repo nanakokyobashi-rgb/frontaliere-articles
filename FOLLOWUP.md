@@ -8,7 +8,7 @@ evapora.
 Portato da `valerielinc-ops/frontaliere-si-o-no`. Struttura identica; cambia il
 filtro di scopo, che qui è quello di `REVIEW.md` di questo repo.
 
-## Il gate anti-nipote (zero Claude, PRIMA del triage)
+## Il gate anti-nipote (zero-agente, PRIMA del triage)
 
 Questo workflow gira su **ogni** PR mergiata — comprese quelle che *fixano* un
 follow-up. Senza guardia il ciclo si auto-alimenta per costruzione:
@@ -16,7 +16,7 @@ follow-up. Senza guardia il ciclo si auto-alimenta per costruzione:
 > follow-up #A → PR di fix → merge → il reviewer lascia un 🟡 → **nuovo
 > follow-up #B (nipote)** → PR di fix → …
 
-Ogni giro costa tre run Claude (triage → fixer → review) sulla quota
+Ogni giro costa due run Codex Luna Max (fixer → review) sulla quota
 **condivisa col sito**. Sul sito questo treadmill è arrivato a bruciare
 centinaia di run a settimana.
 
@@ -43,7 +43,8 @@ deferito evapora.
 
 - La PR mergiata: `gh pr view $PR_NUMBER --json number,title,body,mergedAt,url`
 - Le review del bot: `gh api repos/$REPO/pulls/$PR_NUMBER/reviews`, filtrando
-  `user.type == "Bot"` e login che inizia per `claude`
+  `user.type == "Bot"` e login `github-actions[bot]`, `frontaliere-automation[bot]`
+  o `claude[bot]` storico
 - Le issue già collegate: `gh issue list --label follow-up --state all --search "PR #$PR_NUMBER"`
 
 ## Regole di parsing

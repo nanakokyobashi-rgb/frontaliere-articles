@@ -219,8 +219,8 @@ test('tests: la review e\' gateata su `pull_request`, cosi\' un rerun la riesegu
 // non dipendere dallo skip.
 test('tests: il review gate gira sempre, anche a review saltata', () => {
   const job = jobBlock(TESTS, 'tests');
-  const i = job.indexOf('- name: Require approving Claude review');
-  assert.ok(i !== -1, 'step `Require approving Claude review` non trovato');
+  const i = job.indexOf('- name: Require approving Codex review');
+  assert.ok(i !== -1, 'step `Require approving Codex review` non trovato');
   const step = job.slice(i, i + 800);
   const cond = step.match(/\n\s+if: (.+)/);
   assert.ok(cond, 'lo step del review gate non ha un `if:`');

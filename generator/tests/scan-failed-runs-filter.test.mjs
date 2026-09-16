@@ -328,7 +328,7 @@ test('#170: un guasto VERO nello stesso workflow resta segnalato', () => {
   // E' il fallimento che ha aperto #170 il 2026-08-10: un altro step, stesso
   // workflow. Se il filtro guardasse il WORKFLOW invece dello STEP, questo
   // sparirebbe insieme al rumore — ed e' l'unico dei due che vuole un fix.
-  assert.equal(isDeclaredSkipOnly([job('Run Claude follow-up triage (batch)')]), false);
+  assert.equal(isDeclaredSkipOnly([job('Run Codex Luna Max follow-up triage (batch)')]), false);
 });
 
 test('#170: basta UN job fallito fuori dallo skip perche\' la run resti segnalata', () => {
@@ -392,7 +392,7 @@ test('#1025: un errore diverso nello stesso workflow resta segnalabile', () => {
     false,
   );
   assert.equal(
-    isExpectedIssueFixNonDelivery(ISSUE_FIX_WORKFLOW_NAME, [classifierJob('Run Claude fix')], ISSUE_FIX_FAILURE_LOG),
+    isExpectedIssueFixNonDelivery(ISSUE_FIX_WORKFLOW_NAME, [classifierJob('Run Codex Luna Max fix')], ISSUE_FIX_FAILURE_LOG),
     false,
   );
   assert.equal(

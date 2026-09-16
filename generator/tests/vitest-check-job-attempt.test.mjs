@@ -3,7 +3,7 @@
  * decide sugli step di un attempt superato.
  *
  * `pr-autorebase.mjs` concede UNA riapertura quando il rosso del check
- * richiesto e' lo step `Require approving Claude review` e non i test
+ * richiesto e' lo step `Require approving Codex review` e non i test
  * (`vitestFailureIsReviewGate`). Il discriminante sono gli step del JOB di
  * Actions, e l'unico puntatore al job che la check-runs API espone e' il
  * `details_url` del check-run.
