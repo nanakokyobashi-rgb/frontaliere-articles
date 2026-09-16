@@ -20,7 +20,8 @@
  *      `sitePath` del manifest, cioè con i byte serviti dal sito e non con
  *      quelli locali: è quell'osservazione a rendere reale la `baseline.site`;
  *      per una voce `adapted` il confronto remoto dell'artifact è omesso per
- *      costruzione, mentre il digest locale resta richiesto.
+ *      costruzione, mentre il digest locale viene confrontato coi byte
+ *      committati.
  *
  * E la regola che impedisce al guard di autoassolversi: una voce non osservata
  * NON è una voce verificata, e se non è stata osservata NESSUNA il verdetto
@@ -293,14 +294,25 @@ test('un artifact `adapted` salta solo il confronto remoto e resta esplicito', (
   assert.equal(artifact.adapted, true);
   assert.equal(artifact.mode, 'adapted');
   assert.equal(artifact.sitePath, null);
+  assert.equal(artifact.localOnly, true);
+  assert.equal(artifact.localArtifactFile, 'crawler-group-01.yml');
   assert.equal(artifact.expected, HASH);
 
   const observed = new Map(checks.map((c) => [c.field, { sha256: HASH }]));
+  observed.set(artifact.field, { observed: HASH });
   const verdict = evaluateProvenance(checks, observed);
   assert.equal(verdict.results.find((r) => r.field === artifact.field).state, 'adapted');
   assert.equal(verdict.red, false);
   assert.equal(verdict.counts.adapted, 1);
   assert.match(formatReport(verdict), /## adapted \(1\)/);
+
+  const localDrift = new Map(observed);
+  localDrift.set(artifact.field, { observed: OTHER });
+  const broken = evaluateProvenance(checks, localDrift);
+  const brokenArtifact = broken.results.find((r) => r.field === artifact.field);
+  assert.equal(brokenArtifact.state, 'drifted');
+  assert.equal(broken.red, true);
+  assert.match(broken.reason, /controlli locali di digest\/lineage/);
 });
 
 test('un artifact `adapted` senza digest resta `undeclared` e rosso', () => {
@@ -316,10 +328,16 @@ test('un artifact `adapted` senza digest resta `undeclared` e rosso', () => {
 
 test('il piano reale copre i 49 digest e la lineage del contratto committato', () => {
   const checks = planProvenanceChecks(CONTRACT, MANIFEST);
-  assert.equal(checks.filter((c) => !c.localOnly).length, 1 + CONTRACT.artifacts.length * 2);
-  assert.equal(checks.filter((c) => c.localOnly).length, 5 + CONTRACT.artifacts.length);
+  const adaptedArtifacts = CONTRACT.artifacts.filter((artifact) => MANIFEST.files.some(
+    (entry) => entry.path === `.github/workflows/${artifact.file}` && entry.mode === 'adapted',
+  )).length;
+  assert.equal(
+    checks.filter((c) => !c.localOnly).length,
+    1 + CONTRACT.artifacts.length * 2 - adaptedArtifacts,
+  );
+  assert.equal(checks.filter((c) => c.localOnly).length, 5 + CONTRACT.artifacts.length + adaptedArtifacts);
   assert.equal(checks.length, 5 + CONTRACT.artifacts.length + 1 + CONTRACT.artifacts.length * 2);
-  assert.equal(checks.filter((c) => !c.localOnly).length, 49);
+  assert.equal(checks.filter((c) => !c.localOnly).length, 49 - adaptedArtifacts);
   // Nessun digest resta senza una coordinata sul sito: un `sitePath` null
   // sarebbe `undeclared`, cioè rosso, ma è meglio vederlo qui che allo
   // schedule del giorno dopo.

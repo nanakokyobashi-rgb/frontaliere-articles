@@ -29,8 +29,8 @@
  * sito e' esattamente l'osservazione che mancava per i gemelli `identical`:
  * se passa, quella `baseline.site` non e' piu' fabbricata. Un gemello
  * `adapted`, invece, porta intenzionalmente byte diversi: il piano lo marca
- * esplicitamente `adapted` e salta solo il confronto remoto dell'artifact,
- * lasciando agli assert locali il controllo del digest committato.
+ * esplicitamente `adapted`, salta solo il confronto remoto dell'artifact e
+ * confronta il digest dichiarato con i byte locali committati.
  *
  * ## Perche' non e' un test offline
  *
@@ -55,7 +55,8 @@
  *               rigenerato. ROSSO.
  *   adapted     il manifest dichiara byte intenzionalmente diversi dal sito:
  *               il confronto remoto dell'artifact e' omesso per costruzione,
- *               ma il digest locale resta richiesto. NON rosso da solo.
+ *               ma il digest locale e' stato verificato. NON rosso da solo;
+ *               un digest locale mancante o diverso e' invece rosso.
  *   unobserved  errore di rete. NON rosso da solo (proceed-safe, come il resto
  *               del ciclo), ma se lo sono TUTTE il report non significa piu'
  *               niente e si esce rossi lo stesso — stessa regola di
@@ -657,10 +658,15 @@ export function planProvenanceChecks(
       // invece di ricostruirlo qui tiene una sola sorgente per quel path
       // (AGENTS.md #6), e un `sitePath` sbagliato esce rosso una volta sola.
       // Per un `adapted` il digest corpus non puo' coincidere con il byte
-      // servito dal sito: il check resta nel piano, ma non fa un confronto
-      // remoto che sarebbe rosso per definizione.
+      // servito dal sito: il check resta nel piano come controllo locale, ma
+      // non fa un confronto remoto che sarebbe rosso per definizione.
       ...(adapted
-        ? { sitePath: null, sitePathCandidates: [] }
+        ? {
+          sitePath: null,
+          sitePathCandidates: [],
+          localOnly: true,
+          localArtifactFile: artifact.file,
+        }
         : declared(manifestEntry?.sitePath || null)),
       mode: manifestEntry?.mode || null,
       adapted,
@@ -692,21 +698,21 @@ export function evaluateProvenance(checks, observed) {
     const sitePath = seen?.sitePath || check.sitePath;
     let state;
     let detail = '';
-    if (check.adapted && check.expected == null) {
-      state = 'undeclared';
-      detail = 'il manifest e\' `adapted`, ma il contratto non porta il digest locale';
-    } else if (check.adapted) {
-      state = 'adapted';
-      detail = 'confronto remoto omesso: i byte del gemello sono adattati per costruzione';
-    } else if (check.localOnly) {
-      if (check.expected == null || check.observed == null) {
+    if (check.localOnly) {
+      const observedValue = seen?.observed ?? check.observed ?? null;
+      if (check.expected == null || observedValue == null) {
         state = 'undeclared';
-        detail = 'il contratto non porta una lineage completa e valida';
-      } else if (check.observed === check.expected) {
-        state = 'verified';
+        detail = check.adapted
+          ? 'il manifest e\' `adapted`, ma il contratto non porta il digest locale o l\'artifact non e\' leggibile'
+          : 'il contratto non porta una lineage completa e valida';
+      } else if (observedValue === check.expected) {
+        state = check.adapted ? 'adapted' : 'verified';
+        detail = check.adapted
+          ? 'confronto remoto omesso: i byte del gemello sono adattati per costruzione; digest locale verificato'
+          : '';
       } else {
         state = 'drifted';
-        detail = `dichiarato ${String(check.expected).slice(0, 16)}, osservato ${String(check.observed).slice(0, 16)}`;
+        detail = `dichiarato ${String(check.expected).slice(0, 16)}, osservato ${String(observedValue).slice(0, 16)}`;
       }
     } else if (check.expected == null || !check.sitePath) {
       state = 'undeclared';
@@ -744,7 +750,7 @@ export function evaluateProvenance(checks, observed) {
   const remoteResults = results.filter((result) => !result.localOnly && !result.adapted);
   const unobserved = remoteResults.filter((result) => result.state === 'unobserved').length;
   const localReason = localBroken.length
-    ? `${localBroken.length} controlli locali di lineage non corrispondono: `
+    ? `${localBroken.length} controlli locali di digest/lineage non corrispondono: `
       + localBroken.map((r) => `\`${r.field}\` (${r.detail})`).join('; ')
       + '.'
     : null;
@@ -882,6 +888,9 @@ async function main() {
     }
   }
   const runtimeChecks = planRuntimeFlagChecks(contract, artifactSources);
+  const localArtifactHashes = new Map(
+    artifactSources.map(({ file, text }) => [file, sha256(Buffer.from(text, 'utf8'))]),
+  );
 
   // Un fetch per path DISTINTO: i 24 `sourceSha256` puntano a 24 file diversi,
   // ma un contratto malformato potrebbe ripetere lo stesso path.
@@ -900,6 +909,12 @@ async function main() {
 
   const observed = new Map();
   for (const check of checks) {
+    if (check.localArtifactFile) {
+      observed.set(check.field, {
+        observed: localArtifactHashes.get(check.localArtifactFile) ?? null,
+      });
+      continue;
+    }
     const candidates = check.sitePathCandidates?.length
       ? check.sitePathCandidates
       : (check.sitePath ? [check.sitePath] : []);
