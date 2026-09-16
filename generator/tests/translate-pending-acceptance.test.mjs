@@ -37,3 +37,14 @@ test('translate-pending mantiene full la popolazione usata da baseline e cascade
     /--mode start --jobs data\/jobs\.json/,
   );
 });
+
+test('translate-pending non abilita il lease Firestore per il proprio mutex GitHub', () => {
+  assert.doesNotMatch(WORKFLOW, /^\s+DATA_PIPELINE_LEASE:/m);
+});
+
+test('translate-pending documenta il confine di scrittura isolato dopo la rimozione della lease', () => {
+  assert.match(WORKFLOW, /isolated `--slice-only`/);
+  assert.match(WORKFLOW, /private index from the\s+# current `origin\/main`/);
+  assert.match(WORKFLOW, /3-way-merges touched JSON/);
+  assert.match(WORKFLOW, /retries the atomic ref push after contention/);
+});

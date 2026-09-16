@@ -552,7 +552,7 @@
     {
       "source": "observers/generator/tests/crawler-cross-repo-artifacts.test.mjs",
       "target": "generator/tests/crawler-cross-repo-artifacts.test.mjs",
-      "sha256": "84871c4f99c400d7d0b6c87c776da301aecdb07807d8d0d1b3613c73272685a6"
+      "sha256": "d7ebca7209e2db0de18a61013bb7dc359c3cb0f9e29faa608fcbdb66008c74c1"
     },
     {
       "source": "observers/workflows/crawler-generation-observer-shadow.yml",
@@ -1420,7 +1420,7 @@
       "file": "translate-pending.yml",
       "sourceLogic": "translate-pending-logic.yml",
       "sourceSha256": "22ffc13f6613a5492c5dddddfbb3450ab1316092972a81dfbfaaf09a5f0128ac",
-      "artifactSha256": "3eeb044afbabdd24e79e6a27186709fb080a066031d025f43290606fe862cd5c",
+      "artifactSha256": "ff826c2fc7e3aeb9f52414997470aec7cebaf5e730ff2c44aa6dd57bb567213b",
       "generatorSha256": "94117d65ab69583c10c15e009953b420aa18f59259c5ac70374382b0f589895a",
       "members": []
     }

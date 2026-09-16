@@ -44,6 +44,7 @@ const SINGLE_MIRROR_PATH = 'scripts/ci/check-issue-already-resolved.mjs';
 const SINGLE_MIRROR_BODY = 'Root cause nota: `' + SINGLE_MIRROR_PATH + '` è '
   + '`mode: identical` nel repo **`valerielinc-ops/frontaliere-si-o-no`**; '
   + 'scriverlo qui verrebbe sovrascritto al mirror successivo.';
+const STRANDED_WORKFLOW_PATH = '.github/workflows/crawler-group-01.yml';
 
 test('instrada il caso mirror: verdetto + repo del sito + path', () => {
   const d = handoffDecision({ verdict: 'blocked-admin-settings', body: MIRROR_BODY });
@@ -597,7 +598,10 @@ test('#972: i gemelli che nessun trasporto porta giù sono quelli che il traspor
   // trasporto — «il token del ciclo non ha lo scope `workflows`, quei gemelli
   // restano una copia a mano» — ed è precisamente ciò che un verdetto
   // `blocked-workflows-scope` nomina.
-  assert.ok(stuck.has('.github/workflows/translate-pending.yml'));
+  assert.ok(stuck.has(STRANDED_WORKFLOW_PATH));
+  // `translate-pending` è `adapted` per la correzione #1314: il corpus lo
+  // sorveglia, ma non deve più essere contato fra i gemelli `identical`.
+  assert.equal(stuck.has('.github/workflows/translate-pending.yml'), false);
   // Un gemello `identical` normale scende da solo: non è nell'insieme, e la
   // chiusura dei `blocked-*` resta quella di sempre.
   assert.equal(stuck.has('scripts/ci/followup-drainer.mjs'), false);
@@ -663,12 +667,12 @@ test('#972: un `blocked-*` su un gemello che non scenderà mai consegna ma NON c
   // «quando la fix scenderà col mirror la condizione non ci sarà più». Per un
   // workflow `identical` quella frase è falsa — la discesa è una copia a mano —
   // e la issue chiusa era l'unico posto in cui quella copia risultava dovuta.
-  const body = 'Blocked: il fix va scritto in `.github/workflows/translate-pending.yml` '
+  const body = 'Blocked: il fix va scritto in `' + STRANDED_WORKFLOW_PATH + '` '
     + 'su valerielinc-ops/frontaliere-si-o-no, gemello `identical` di questo.';
   const d = handoffDecision({ verdict: 'blocked-workflows-scope', body });
   assert.equal(d.handoff, true, 'la diagnosi va comunque consegnata: la fix si scrive di là');
   assert.equal(d.close, false);
-  assert.deepEqual(d.residual, ['.github/workflows/translate-pending.yml']);
+  assert.deepEqual(d.residual, [STRANDED_WORKFLOW_PATH]);
   assert.match(d.reason, /copia a mano/);
 });
 
@@ -703,12 +707,12 @@ test('#972: un `no-root-cause` su un gemello fermo lascia il residuo, non lo ass
   // Il residuo toglieva TUTTI i path `identical` perché «li porta il mirror».
   // Per un gemello che nessun canale porta giù il lavoro resta qui (una copia a
   // mano), e senza residuo il commento di parcheggio non lo nomina.
-  const body = 'Root cause: il concurrency group in `.github/workflows/translate-pending.yml`, '
+  const body = 'Root cause: il concurrency group in `' + STRANDED_WORKFLOW_PATH + '`, '
     + '`mode: identical`: scriverlo qui verrebbe sovrascritto al mirror successivo.';
   const d = handoffDecision({ verdict: 'no-root-cause', body });
   assert.equal(d.handoff, true);
   assert.equal(d.close, false);
-  assert.deepEqual(d.residual, ['.github/workflows/translate-pending.yml']);
+  assert.deepEqual(d.residual, [STRANDED_WORKFLOW_PATH]);
 });
 
 test('#972: stranded vuoto → nessun blocco alla chiusura, cioè il comportamento di prima', () => {
@@ -812,7 +816,7 @@ test('#972: col residuo la run SERVE — il corto-circuito la trasformerebbe in 
   // chiusa. Saltare il run qui vorrebbe dire che nessuno lo farà mai.
   const decision = handoffDecision({
     verdict: 'no-root-cause',
-    body: 'Root cause: il concurrency group in `.github/workflows/translate-pending.yml`, '
+    body: 'Root cause: il concurrency group in `' + STRANDED_WORKFLOW_PATH + '`, '
       + '`mode: identical`: scriverlo qui verrebbe sovrascritto al mirror successivo.',
   });
   assert.ok(decision.residual.length);

@@ -16,10 +16,12 @@
  *   1. il piano copre `generatorSha256` (mai confrontato con niente prima);
  *   2. il piano copre `sourceSha256` di OGNI artifact, che punta a file
  *      assenti da questo checkout — l'unico modo di verificarli è il sito;
- *   3. `artifactSha256` viene confrontato col `sitePath` del manifest, cioè
- *      con i byte serviti dal sito e non con quelli locali: è quell'osservazione
- *      a rendere reale la `baseline.site` che il contratto pretende uguale
- *      all'hash locale.
+ *   3. per ogni voce `identical`, `artifactSha256` viene confrontato col
+ *      `sitePath` del manifest, cioè con i byte serviti dal sito e non con
+ *      quelli locali: è quell'osservazione a rendere reale la `baseline.site`;
+ *      per una voce `adapted` il confronto remoto dell'artifact è omesso per
+ *      costruzione, mentre il digest locale viene confrontato coi byte
+ *      committati.
  *
  * E la regola che impedisce al guard di autoassolversi: una voce non osservata
  * NON è una voce verificata, e se non è stata osservata NESSUNA il verdetto
@@ -65,6 +67,15 @@ const SOURCE_COMMIT = 'c'.repeat(40);
 const fixtureManifest = {
   files: [
     { path: '.github/workflows/crawler-group-01.yml', sitePath: '.github/corpus-workflows/crawler-group-01.yml' },
+  ],
+};
+const adaptedFixtureManifest = {
+  files: [
+    {
+      path: '.github/workflows/crawler-group-01.yml',
+      sitePath: '.github/corpus-workflows/crawler-group-01.yml',
+      mode: 'adapted',
+    },
   ],
 };
 const fixtureContract = {
@@ -277,23 +288,74 @@ test('il piano copre generatore, sorgente e artifact di ogni voce', () => {
   assert.equal(checks.filter((c) => !c.localOnly).every((c) => c.observationRef === 'main'), true);
 });
 
+test('un artifact `adapted` salta solo il confronto remoto e resta esplicito', () => {
+  const checks = planProvenanceChecks(fixtureContract, adaptedFixtureManifest);
+  const artifact = checks.find((c) => c.field === 'crawler-group-01.yml#artifactSha256');
+  assert.equal(artifact.adapted, true);
+  assert.equal(artifact.mode, 'adapted');
+  assert.equal(artifact.sitePath, null);
+  assert.equal(artifact.localOnly, true);
+  assert.equal(artifact.localArtifactFile, 'crawler-group-01.yml');
+  assert.equal(artifact.expected, HASH);
+
+  const observed = new Map(checks.map((c) => [c.field, { sha256: HASH }]));
+  observed.set(artifact.field, { observed: HASH });
+  const verdict = evaluateProvenance(checks, observed);
+  assert.equal(verdict.results.find((r) => r.field === artifact.field).state, 'adapted');
+  assert.equal(verdict.red, false);
+  assert.equal(verdict.counts.adapted, 1);
+  assert.match(formatReport(verdict), /## adapted \(1\)/);
+
+  const localDrift = new Map(observed);
+  localDrift.set(artifact.field, { observed: OTHER });
+  const broken = evaluateProvenance(checks, localDrift);
+  const brokenArtifact = broken.results.find((r) => r.field === artifact.field);
+  assert.equal(brokenArtifact.state, 'drifted');
+  assert.equal(broken.red, true);
+  assert.match(broken.reason, /controlli locali di digest\/lineage/);
+});
+
+test('un artifact `adapted` senza digest resta `undeclared` e rosso', () => {
+  const checks = planProvenanceChecks(
+    { ...fixtureContract, artifacts: [{ ...fixtureContract.artifacts[0], artifactSha256: null }] },
+    adaptedFixtureManifest,
+  );
+  const verdict = evaluateProvenance(checks, new Map());
+  const artifact = verdict.results.find((r) => r.field === 'crawler-group-01.yml#artifactSha256');
+  assert.equal(artifact.state, 'undeclared');
+  assert.equal(verdict.red, true);
+});
+
 test('il piano reale copre i 49 digest e la lineage del contratto committato', () => {
   const checks = planProvenanceChecks(CONTRACT, MANIFEST);
-  assert.equal(checks.filter((c) => !c.localOnly).length, 1 + CONTRACT.artifacts.length * 2);
-  assert.equal(checks.filter((c) => c.localOnly).length, 5 + CONTRACT.artifacts.length);
+  const adaptedArtifacts = CONTRACT.artifacts.filter((artifact) => MANIFEST.files.some(
+    (entry) => entry.path === `.github/workflows/${artifact.file}` && entry.mode === 'adapted',
+  )).length;
+  assert.equal(
+    checks.filter((c) => !c.localOnly).length,
+    1 + CONTRACT.artifacts.length * 2 - adaptedArtifacts,
+  );
+  assert.equal(checks.filter((c) => c.localOnly).length, 5 + CONTRACT.artifacts.length + adaptedArtifacts);
   assert.equal(checks.length, 5 + CONTRACT.artifacts.length + 1 + CONTRACT.artifacts.length * 2);
-  assert.equal(checks.filter((c) => !c.localOnly).length, 49);
+  assert.equal(checks.filter((c) => !c.localOnly).length, 49 - adaptedArtifacts);
   // Nessun digest resta senza una coordinata sul sito: un `sitePath` null
   // sarebbe `undeclared`, cioè rosso, ma è meglio vederlo qui che allo
   // schedule del giorno dopo.
-  assert.deepEqual(checks.filter((c) => !c.localOnly && (!c.sitePath || !c.expected)), []);
+  assert.deepEqual(
+    checks.filter((c) => !c.localOnly && !c.adapted && (!c.sitePath || !c.expected)),
+    [],
+  );
   for (const artifact of CONTRACT.artifacts) {
     assert.ok(
       checks.some((c) => c.field === `${artifact.file}#sourceSha256` && c.expected === artifact.sourceSha256),
       `${artifact.file}: sourceSha256 fuori dal confronto`,
     );
     const site = checks.find((c) => c.field === `${artifact.file}#artifactSha256`);
-    assert.equal(site.sitePath, `.github/corpus-workflows/${artifact.file}`, artifact.file);
+    if (site.adapted) {
+      assert.equal(site.sitePath, null, artifact.file);
+    } else {
+      assert.equal(site.sitePath, `.github/corpus-workflows/${artifact.file}`, artifact.file);
+    }
   }
   assert.ok(checks.some((c) => c.field === 'generatorSha256' && c.expected === CONTRACT.generatorSha256));
 });
