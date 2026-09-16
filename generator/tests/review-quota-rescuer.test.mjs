@@ -454,15 +454,16 @@ test('un transient attempt nuovo diventa confirmed o failed solo a completamento
   assert.equal(retryStateForObservedAttempt({ currentAttempt: 2, requestedAttempt: 2, status: 'completed', conclusion: 'success' }), null);
 });
 
-test('il wiring reagisce al completamento dei consumer e rilascia reservation esistenti', () => {
+test('il rescuer conserva i lease dei fixer e il review Codex non ne richiede uno', () => {
   const workflow = fs.readFileSync(path.join(ROOT, '.github/workflows/review-quota-rescuer.yml'), 'utf8');
   const tests = fs.readFileSync(path.join(ROOT, '.github/workflows/tests.yml'), 'utf8');
   assert.match(workflow, /workflow_run:[\s\S]*- tests[\s\S]*- Issue fix \(Claude → PR\)/);
   assert.match(workflow, /PR 🔴 fixer \(bounded loop-closure on bot PRs\)/);
   assert.match(workflow, /PR ❌ check fixer \(bounded, check richiesto rosso su PR bot\)/);
   assert.match(workflow, /review-quota-rescuer\.mjs/);
-  assert.match(tests, /HEAD_SHA: \$\{\{ steps\.resolve\.outputs\.head_sha \}\}/);
-  assert.match(tests, /steps\.quota\.outputs\.lease_allowed == 'true'[\s\S]*steps\.quota\.outputs\.lease_token != ''/);
+  assert.match(tests, /CODEX_FALLBACK_MODE: ['"]1['"]/);
+  assert.doesNotMatch(tests, /QUOTA_LEASE_ACTION:\s*(?:acquire|release)/);
+  assert.doesNotMatch(tests, /steps\.quota\.outputs\.lease_(?:allowed|token)/);
   const redflag = fs.readFileSync(path.join(ROOT, '.github/workflows/pr-redflag-fixer.yml'), 'utf8');
   const redcheck = fs.readFileSync(path.join(ROOT, '.github/workflows/pr-redcheck-fixer.yml'), 'utf8');
   assert.match(redflag, /HEAD_SHA: \$\{\{ github\.event\.pull_request\.head\.sha \}\}/);

@@ -704,9 +704,10 @@ jobs:
           echo "Contesto prefetchato in $CTX_DIR:"
           ls -la "$CTX_DIR"
 
-      # Lease zero-Claude: la review puo' spendere quota residua solo quando il
-      # drainer non ha una prenotazione issue-fix viva e nessun altro consumer
-      # possiede lo slot condiviso. Codex Luna Max è l'unico provider del lane.
+      # Telemetria zero-Claude: il pre-flight legge il beacon legacy della quota
+      # condivisa, ma il lane Codex non deve essere escluso da un lease pensato
+      # per i consumer Claude. `CODEX_FALLBACK_MODE` mantiene osservabile il
+      # backoff senza trasformarlo in uno skip della review Codex.
       - name: Pre-flight — Codex lane quota telemetry
         id: quota
         if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true'
@@ -714,23 +715,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
-          QUOTA_LEASE_ACTION: acquire
-          QUOTA_LEASE_ROLE: review
-          QUOTA_LEASE_OWNER: tests-review
-          QUOTA_LEASE_TARGET_TYPE: pr
-          QUOTA_LEASE_TARGET: ${{ steps.resolve.outputs.pr_number }}
-          QUOTA_LEASE_TTL_SEC: '3600'
-          HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
+          CODEX_FALLBACK_MODE: '1'
         run: node scripts/ci/check-quota-backoff.mjs
-
-      - name: Shared Codex lane quota lease unavailable (expected skip)
-        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true' && steps.quota.outputs.lease_allowed != 'true'
-        run: |
-          if [ "${{ steps.quota.outputs.lease_error }}" = 'true' ]; then
-            echo "::error::Lease quota condiviso illeggibile o non verificabile → review Claude saltata fail-closed; il review gate resta bloccante."
-            exit 1
-          fi
-          echo "::warning::Lease quota condiviso negato (${{ steps.quota.outputs.lease_reason }}) → review Claude saltata senza consumare quota; il review gate conserva il verdetto richiesto."
 
       - name: Publish automatic LGTM for a tests-only PR
         id: test_only_review
@@ -744,7 +730,7 @@ jobs:
         run: node scripts/ci/review-test-policy.mjs post
 
       - name: Prepare Firebase credentials for Codex review
-        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true' && steps.quota.outputs.lease_allowed == 'true'
+        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true'
         env:
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
         run: |
@@ -756,7 +742,7 @@ jobs:
           fi
 
       - name: Load cross-repo Codex credentials
-        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true' && steps.quota.outputs.lease_allowed == 'true'
+        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true'
         continue-on-error: true
         run: node generator/scripts/load-rc-env.mjs
 
@@ -772,7 +758,7 @@ jobs:
         # tinge il job di rosso, lo lascia classificare al guard.
         timeout-minutes: 45
         id: codex_review
-        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true' && steps.quota.outputs.lease_allowed == 'true'
+        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true'
         # Un fallimento dell'action non deve abortire il job prima che il guard
         # sotto possa classificarlo: e' il guard a decidere se fallire forte.
         continue-on-error: true
@@ -837,7 +823,7 @@ jobs:
       # ma la PR si ferma in silenzio. Si classifica dal log di esecuzione.
       - name: Fail on transient API error (no review posted)
         id: review_abort
-        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true' && steps.quota.outputs.lease_allowed == 'true' && steps.codex_review.outputs.primary_success != 'true'
+        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true' && steps.codex_review.outputs.primary_success != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
@@ -1058,7 +1044,7 @@ jobs:
       # review gate. Il gate sotto gira comunque con always() e conserva il suo
       # verdetto separato.
       - name: Fail on non-retryable review action error (no automatic retry)
-        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true' && steps.quota.outputs.lease_allowed == 'true' && steps.review_abort.outputs.permanent_failure == 'true'
+        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true' && steps.review_abort.outputs.permanent_failure == 'true'
         env:
           REVIEW_ABORT_CAUSE: ${{ steps.review_abort.outputs.review_abort_cause }}
         run: |
@@ -1137,7 +1123,7 @@ jobs:
           CONTRIBUTION_FINGERPRINT: ${{ steps.guard.outputs.contribution_fingerprint }}
           REVIEW_REVISION: ${{ steps.review_input.outputs.review_revision }}
           CLAIM_TOKEN: ${{ steps.review_claim.outputs.claim_token }}
-          PROCEED: ${{ steps.tier.outputs.tier == 'tests-only' || steps.quota.outputs.lease_allowed == 'true' }}
+          PROCEED: true
           ACTION_OUTCOME: ${{ steps.codex_review.outcome }}
           EXEC_FILE: ${{ steps.codex_review.outputs.execution_file }}
           RETRYABLE_FAILURE: ${{ steps.review_abort.outputs.retryable_failure }}
@@ -1147,20 +1133,6 @@ jobs:
           REVIEW_GATE_FALLBACK_APPROVED: ${{ steps.review_gate.outputs.fallback_approved }}
           GITHUB_RUN_ID: ${{ github.run_id }}
         run: node scripts/ci/review-claim.mjs --claim
-
-      - name: Release shared Codex lane quota lease
-        if: always() && steps.body_contract.outcome != 'failure' && steps.review_claim.outputs.claim_allowed == 'true' && steps.quota.outputs.lease_allowed == 'true' && steps.quota.outputs.lease_token != ''
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
-          QUOTA_LEASE_ACTION: release
-          QUOTA_LEASE_ROLE: review
-          QUOTA_LEASE_OWNER: tests-review
-          QUOTA_LEASE_TARGET_TYPE: pr
-          QUOTA_LEASE_TARGET: ${{ steps.resolve.outputs.pr_number }}
-          QUOTA_LEASE_TOKEN: ${{ steps.quota.outputs.lease_token }}
-        run: node scripts/ci/check-quota-backoff.mjs
 
       # ── IL SECONDO VERDETTO CONDIZIONALE ─────────────────────────────────
       # `generator-ci.yml` e' path-scoped, quindi il suo check-run NON esiste su
