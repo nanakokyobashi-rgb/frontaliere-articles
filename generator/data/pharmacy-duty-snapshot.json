@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "sourceUrl": "https://www.ofct.ch/farmacieturno/",
+  "sourceType": "official",
+  "sourceRegions": [
+    "https://www.ofct.ch/mendrisiotto/",
+    "https://www.ofct.ch/luganese/",
+    "https://www.ofct.ch/bellinzonese/",
+    "https://www.ofct.ch/biasca-e-valli/",
+    "https://www.farmacielocarnese.ch/"
+  ],
+  "fetchedAt": "2026-09-15T09:40:29.571Z",
+  "scope": {
+    "country": "CH",
+    "canton": "Ticino",
+    "includedRegions": [
+      "Mendrisiotto",
+      "Luganese",
+      "Bellinzonese",
+      "Biasca e Valli",
+      "Locarnese"
+    ],
+    "excludedRegions": []
+  },
+  "derivationEvidence": {
+    "Locarnese": {
+      "sourceUrl": "https://www.farmacielocarnese.ch/",
+      "catalogFetchedAt": "2026-09-14T10:03:57.824Z",
+      "recordCount": 9,
+      "records": [
+        {
+          "source": { "pharmacy": "Amavita Centro", "locality": "Ascona" },
+          "catalog": { "pharmacy": "Farmacia Amavita Centro Ascona", "locality": "Ascona", "matchCount": 1 },
+          "matchKey": "ticino|ascona|farmacia amavita centro ascona",
+          "addressCopied": false
+        },
+        {
+          "source": { "pharmacy": "Soldati", "locality": "Locarno" },
+          "catalog": { "pharmacy": "Farmacia Soldati SA", "locality": "Locarno", "matchCount": 1 },
+          "matchKey": "ticino|locarno|farmacia soldati sa",
+          "addressCopied": false
+        },
+        {
+          "source": { "pharmacy": "Solduno", "locality": "Locarno Solduno" },
+          "catalog": { "pharmacy": "Farmacia Solduno", "locality": "Locarno", "matchCount": 1 },
+          "matchKey": "ticino|locarno|farmacia solduno",
+          "addressCopied": false
+        },
+        {
+          "source": { "pharmacy": "Lafranchi", "locality": "Locarno" },
+          "catalog": { "pharmacy": "Farmacia Lafranchi SA", "locality": "Locarno", "matchCount": 1 },
+          "matchKey": "ticino|locarno|farmacia lafranchi sa",
+          "addressCopied": false
+        },
+        {
+          "source": { "pharmacy": "Nuova", "locality": "Ascona" },
+          "catalog": { "pharmacy": "Farmacia Nuova", "locality": "Ascona", "matchCount": 1 },
+          "matchKey": "ticino|ascona|farmacia nuova",
+          "addressCopied": false
+        },
+        {
+          "source": { "pharmacy": "Centro", "locality": "Losone" },
+          "catalog": { "pharmacy": "Farmacia Centro Losone SA", "locality": "Losone", "matchCount": 1 },
+          "matchKey": "ticino|losone|farmacia centro losone sa",
+          "addressCopied": false
+        },
+        {
+          "source": { "pharmacy": "Celesia", "locality": "Locarno" },
+          "catalog": { "pharmacy": "Farmacia Celesia SA", "locality": "Locarno", "matchCount": 1 },
+          "matchKey": "ticino|locarno|farmacia celesia sa",
+          "addressCopied": false
+        },
+        {
+          "source": { "pharmacy": "Città Vecchia", "locality": "Locarno" },
+          "catalog": { "pharmacy": "Farmacia Città Vecchia Sagl", "locality": "Locarno", "matchCount": 1 },
+          "matchKey": "ticino|locarno|farmacia città vecchia sagl",
+          "addressCopied": false
+        },
+        {
+          "source": { "pharmacy": "Muraccio", "locality": "Ascona" },
+          "catalog": { "pharmacy": "Farmacia Muraccio", "locality": "Ascona", "matchCount": 1 },
+          "matchKey": "ticino|ascona|farmacia muraccio",
+          "addressCopied": false
+        }
+      ]
+    }
+  },
+  "verifiedDuty": true,
+  "statusValues": ["verified", "expired"],
+  "recordCount": 55,
+  "completeness": {
+    "status": "complete",
+    "verifiedRecordCount": 55,
+    "minimumRecordCount": 55,
+    "truncated": false
+  },
+  "errors": [],
+  "warnings": []
+}

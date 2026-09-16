@@ -449,6 +449,7 @@ const LBL_MAYBE_RESOLVED = 'maybe-resolved';
 const DECOMPOSE_ENABLED = process.env.DECOMPOSE_ENABLED !== 'false';
 const DECOMPOSED_INTO_RE = /<!--\s*DECOMPOSED_INTO:\s*((?:#?\d+[\s,]*)+)-->/i;
 const PARENT_CLOSE_MAX_PER_RUN = intFromEnv('FOLLOWUP_PARENT_CLOSE_MAX_PER_RUN', 5);
+const PARENT_DEQUEUE_MAX_PER_RUN = intFromEnv('FOLLOWUP_PARENT_DEQUEUE_MAX_PER_RUN', 5);
 
 /**
  * La issue può entrare nello stadio di decomposizione? Pura (solo label) →
@@ -1976,38 +1977,65 @@ export function isBotComment(comment) {
  * UNA posizione per tick, mentre il commento accanto dichiarava copertura «in
  * ⌈pool/cap⌉ tick»: l'invariante documentata non era quella fornita dal codice.
  *
- * Con passo 1 la finestra `[offset, offset+cap)` impiega fino a `pool - cap`
- * tick a raggiungere una data posizione — sui numeri del sito del 2026-08-23
- * (pool 44, cap 25) sono 19 tick, cioè **~6,5 ore**, non i 2 tick (~40 min)
- * promessi. Nel frattempo le uniche candidate ri-accodabili restano invisibili:
- * misurate 4 sopra il cooldown, di cui 2 non capability-scoped (#4854 e #6017,
- * quest'ultima `fu-prio:high`), e ZERO `PARKED-RETRY` negli ultimi 30 run.
+ * Il passo di default resta `cap`, così gli stadi che hanno un budget completo
+ * mantengono la copertura in ⌈pool/cap⌉ run. Uno stadio che può consumare solo
+ * una finestra PARZIALE passa `advanceBy: 1`: le finestre si sovrappongono e
+ * nessuna posizione non esaminata viene scavalcata dal tick successivo. Il
+ * bound dichiarato per quel caso è quindi `pool` run, non ⌈pool/cap⌉: è un
+ * limite esplicito, non un cap silenzioso.
  *
- * Avanzare di `cap` posizioni per tick rende vera l'invariante dichiarata: le
- * finestre di tick consecutivi sono adiacenti e non sovrapposte, quindi il pool
- * è coperto in ⌈pool/cap⌉ tick esatti. Il costo per run non cambia — sono
- * sempre e solo `cap` letture.
+ * Quando disponibile, `runNumber` sostituisce il tempo di parete. È il numero
+ * monotono della run GitHub Actions di questo workflow: due dispatch nello
+ * stesso bucket avanzano, mentre un cron saltato non salta una finestra.
+ *
+ * Un `stableKey` opzionale ordina una copia del pool prima della rotazione. Il
+ * parent-close lo usa con il numero issue, così l'ordine variabile di
+ * `gh issue list` e l'inserimento di un nuovo padre non cambiano l'ancora.
  *
  * Puro (l'orologio è un parametro) → testabile senza rete né `Date.now()`.
  *
  * @param {number} poolSize
- * @param {{scanMax:number, now:number, periodMs:number}} opts
+ * @param {{scanMax:number, now:number, periodMs:number, runNumber?:number|string, advanceBy?:number}} opts
  * @returns {number} offset in [0, poolSize)
  */
-export function scanWindowOffset(poolSize, { scanMax, now, periodMs }) {
+export function scanWindowOffset(poolSize, {
+  scanMax, now, periodMs, runNumber, advanceBy = scanMax,
+} = {}) {
   const n = Number(poolSize) || 0;
   if (n <= 0) return 0;
   // Pool che ci sta tutto nella finestra → nessuna rotazione da fare: ruotare
   // cambierebbe solo l'ordine di lettura senza cambiare CHI viene letto.
   if (!scanMax || scanMax <= 0 || n <= scanMax) return 0;
-  if (!periodMs || periodMs <= 0 || !Number.isFinite(now)) return 0;
-  const tick = Math.floor(now / periodMs);
-  return ((tick * scanMax) % n + n) % n;
+  const rawRunNumber = runNumber === undefined || runNumber === null || runNumber === ''
+    ? NaN
+    : Number(runNumber);
+  const counter = Number.isFinite(rawRunNumber) && rawRunNumber >= 0
+    ? Math.floor(rawRunNumber)
+    : periodMs > 0 && Number.isFinite(now)
+      ? Math.floor(now / periodMs)
+      : null;
+  if (counter === null) return 0;
+  const rawAdvance = Number(advanceBy);
+  const stride = Number.isFinite(rawAdvance) && rawAdvance > 0
+    ? Math.floor(rawAdvance)
+    : Number(scanMax);
+  if (!stride || stride <= 0) return 0;
+  return ((counter * stride) % n + n) % n;
 }
 
 /** Il pool, ruotato sulla finestra di scansione di questo tick. */
-export function rotateForScan(pool, opts) {
-  const items = Array.isArray(pool) ? pool : [];
+export function rotateForScan(pool, opts = {}) {
+  const items = Array.isArray(pool) ? [...pool] : [];
+  if (typeof opts.stableKey === 'function') {
+    items.sort((left, right) => {
+      const a = opts.stableKey(left);
+      const b = opts.stableKey(right);
+      const an = Number(a);
+      const bn = Number(b);
+      if (Number.isFinite(an) && Number.isFinite(bn)) return an - bn;
+      return String(a ?? '').localeCompare(String(b ?? ''));
+    });
+  }
   const off = scanWindowOffset(items.length, opts);
   return off ? [...items.slice(off), ...items.slice(0, off)] : items;
 }
@@ -3690,9 +3718,33 @@ export function runDrain() {
     // `isDecomposedParent`). I filtri di RESCUE/DRAIN impediscono che ci
     // rientri, ma non tolgono la label a chi ci è già dentro: senza questo
     // passo #7340 & C. resterebbero `agent:fix` per sempre, invisibili a ogni
-    // altro strato. Solo label (nessuna `gh view`), e solo per i pochi padri
-    // che le portano davvero.
-    for (const p of parents.filter((x) => !hasActiveAgentClaim(x) && (has(x, LBL_FIX) || has(x, LBL_QUEUED)))) {
+    // altro strato. Solo label (nessuna `gh view`), con cap e budget propri.
+    // La riserva impedisce a questo pass di consumare il tempo necessario al
+    // parent-close che viene subito dopo.
+    const parentCloseReserveMs = Math.min(PARENT_CLOSE_MAX_PER_RUN, parents.length) * ITEM_COST_MS;
+    const dequeueCandidates = parents.filter((x) => !hasActiveAgentClaim(x)
+      && (has(x, LBL_FIX) || has(x, LBL_QUEUED)));
+    const rotatedDequeue = rotateForScan(dequeueCandidates, {
+      scanMax: PARENT_DEQUEUE_MAX_PER_RUN,
+      runNumber: process.env.GITHUB_RUN_NUMBER,
+      now: Date.now(),
+      periodMs: SCAN_ROTATION_PERIOD_MS,
+      advanceBy: 1,
+      stableKey: (parent) => parent?.number,
+    });
+    let dequeueExamined = 0;
+    for (const p of rotatedDequeue) {
+      if (dequeueExamined >= PARENT_DEQUEUE_MAX_PER_RUN) {
+        console.log(`parent-dequeue: cap ${PARENT_DEQUEUE_MAX_PER_RUN}/run raggiunto, ${dequeueCandidates.length - dequeueExamined} padri rinviati al prossimo tick (no silent cap).`);
+        break;
+      }
+      if (budget.enabled && !budget.canAfford(ITEM_COST_MS + parentCloseReserveMs)) {
+        budget.defer(`#${p.number} (parent-dequeue; riserva parent-close)`);
+        console.log(`parent-dequeue: budget riservato al parent-close (${Math.round(parentCloseReserveMs / 1000)}s) → ${dequeueCandidates.length - dequeueExamined} padri rinviati al prossimo tick.`);
+        break;
+      }
+      if (!budget.take(`#${p.number} (parent-dequeue)`, ITEM_COST_MS)) break;
+      dequeueExamined++;
       if (DRY) { console.log(`[dry] parent-dequeue #${p.number}`); continue; }
       commentIssue(p.number,
         `⏭️ **Pre-flight drainer (zero-Claude): padre decomposto fuori dalla coda del fixer.** Lo scope di questa issue vive nelle sub-issue dichiarate da \`DECOMPOSED_INTO\`, che entrano in coda per conto loro; qui non resta lavoro proprio, e un run del fixer non potrebbe che terminare senza PR (o duplicare una figlia). Rimuovo \`agent:fix\`/\`agent:fix-queued\`. La issue **resta aperta**: la chiude il PARENT-CLOSE quando tutte le figlie sono chiuse.`,
@@ -3716,13 +3768,20 @@ export function runDrain() {
     // testa da 5: stavano alle posizioni 20, 22, 23, 27, 29, 31, 33 e 36, da
     // 11-23 giorni. Irraggiungibili per costruzione, non per difficoltà.
     //
-    // Stessa cura già applicata agli altri stadi scansionati: `rotateForScan`
-    // avanza di `cap` posizioni per tick, quindi il pool è coperto in
-    // ⌈pool/cap⌉ tick (39/5 → 8 tick) senza alzare il costo per run.
+    // Il numero di run è il cursore durevole del workflow; il numero issue è
+    // l'ancora stabile dell'ordine. Il passo resta unitario a prescindere dal
+    // budget: se cambiasse da cap a 1 tra due run, la formula stateless
+    // `runNumber * passo` riavvolgerebbe l'offset e potrebbe saltare ciò che
+    // la finestra precedente non aveva esaminato. Il cap continua a limitare
+    // quante issue si leggono; il passo uniforme garantisce la copertura senza
+    // richiedere uno store esterno del cursore.
     const rotatedParents = rotateForScan(parents, {
       scanMax: PARENT_CLOSE_MAX_PER_RUN,
+      runNumber: process.env.GITHUB_RUN_NUMBER,
       now: Date.now(),
       periodMs: SCAN_ROTATION_PERIOD_MS,
+      advanceBy: 1,
+      stableKey: (parent) => parent?.number,
     });
     let examined = 0;
     for (const p of rotatedParents) {

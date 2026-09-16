@@ -31,9 +31,54 @@ jobs:
             --output "$WATCHDOG_SCRIPT" "$WATCHDOG_SCRIPT_URL"
 
       - name: Observe translate queue without recovery
+        id: observe
         env:
           GITHUB_TOKEN: ${{ github.token }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           RECOVERY_MODE: dry-run
           WATCHDOG_SCRIPT: ${{ runner.temp }}/translate-queue-recovery.mjs
-        run: node "$WATCHDOG_SCRIPT"
+        run: |
+          set -euo pipefail
+          node "$WATCHDOG_SCRIPT" > translate-queue-recovery-report.json
+
+      - name: Alert on queue SLO or incomplete discovery
+        id: alert
+        env:
+          REPORT_PATH: translate-queue-recovery-report.json
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+
+          const report = JSON.parse(fs.readFileSync(process.env.REPORT_PATH, 'utf8'));
+          const slo = report.queue?.slo || {};
+          const discovery = report.discovery || {};
+          const reasons = [];
+          if (slo.state === 'breached') {
+            reasons.push(`queue SLO breached: pending age ${slo.oldestPendingAgeSeconds}s >= ${slo.thresholdSeconds}s`);
+          }
+          if (discovery.truncated || discovery.state !== 'complete') {
+            reasons.push(`discovery ${discovery.state}: residual runs ${discovery.residualRuns ?? 'unknown'}, next page ${discovery.nextPage ?? 'unknown'}`);
+          }
+          if (report.failClosed) reasons.push('observation fail-closed: evidence incomplete');
+          const summary = [
+            '### Translate queue watchdog',
+            `- SLO: ${slo.state || 'unknown'}`,
+            `- Pending: ${report.counts?.pending ?? 'unknown'}`,
+            `- Discovery: ${discovery.state || 'unknown'}${discovery.truncated ? ' (truncated)' : ''}`,
+            `- Decision: ${report.decision || 'unknown'}`,
+            reasons.length ? `- Alerts: ${reasons.join(' | ')}` : '- Alerts: none',
+          ].join('\n');
+          if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `${summary}\n`);
+          for (const reason of reasons) console.log(`::warning::${reason}`);
+          if (slo.state === 'breached' || report.failClosed) process.exitCode = 1;
+          NODE
+
+      - name: Upload queue evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: translate-queue-recovery-${{ github.run_id }}
+          path: translate-queue-recovery-report.json
+          if-no-files-found: error
+          retention-days: 14

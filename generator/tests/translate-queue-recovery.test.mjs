@@ -11,6 +11,7 @@ import {
   MAX_REPORT_BYTES,
   MAX_RESPONSE_BYTES,
   MAX_TOTAL_GET_REQUESTS,
+  DEFAULT_QUEUE_STALE_THRESHOLD_SECONDS,
   QUEUE_MAX_BOUNDARY_SHA,
   REPORT_SCHEMA,
   TARGET_BRANCH,
@@ -126,7 +127,7 @@ async function observe(fake, overrides = {}) {
   });
 }
 
-test('classifica active/pending e cancellazioni jobs=0/jobs>0 senza soglia stale', async () => {
+test('classifica active/pending e segnala il superamento del queue SLO', async () => {
   const headZero = 'a'.repeat(40);
   const headJobs = 'b'.repeat(40);
   const fake = fakeGithub({
@@ -163,17 +164,32 @@ test('classifica active/pending e cancellazioni jobs=0/jobs>0 senza soglia stale
   assert.equal(report.counts.byReason.cancelled_with_jobs, 1);
   assert.equal(report.queue.activePendingPresent, true);
   assert.equal(report.queue.oldestAgeSeconds, 5220);
-  assert.equal(report.queue.staleThreshold, 'not_evaluated');
-  assert.ok(report.reasonCodes.includes('queue_age_observed_no_threshold'));
-  assert.equal(report.capabilities.recoverySchedule.state, 'blocked');
+  assert.equal(report.queue.staleThreshold, DEFAULT_QUEUE_STALE_THRESHOLD_SECONDS);
+  assert.equal(report.queue.slo.state, 'within_slo');
+  assert.equal(report.queue.slo.alert, false);
+  assert.equal(report.queue.oldestPendingAgeSeconds, 968);
+  assert.equal(report.reasonCodes.includes('queue_slo_breached'), false);
+  assert.equal(report.capabilities.recoverySchedule.state, 'manual_only');
   assert.equal(report.capabilities.recoverySchedule.preservation, 'verified');
   assert.deepEqual(report.capabilities.recoverySchedule.proof, RERUN_PRESERVATION_PROOF);
-  assert.equal(report.capabilities.recoverySchedule.reason,
-    'blocked_by_policy_and_target_dedupe');
+  assert.equal(report.capabilities.recoverySchedule.reason, 'manual_only_by_policy');
   assert.equal(report.capabilities.alreadyRecovered.state, 'not_evaluated');
   assert.equal(report.capabilities.claimState.state, 'not_evaluated');
   assert.equal(report.queryBudget.usedGets, 12);
   assert.ok(Buffer.byteLength(json) <= MAX_REPORT_BYTES);
+});
+
+test('il queue SLO usa solo la run pending più vecchia e apre l alert oltre soglia', async () => {
+  const current = run(33500000005, {
+    conclusion: null,
+    created_at: '2026-09-01T16:00:00.000Z',
+    status: 'queued',
+  });
+  const { report } = await observe(fakeGithub({ currentRuns: [current], pages: [[]] }));
+  assert.equal(report.queue.oldestPendingAgeSeconds, 5220);
+  assert.equal(report.queue.slo.state, 'breached');
+  assert.equal(report.queue.slo.alert, true);
+  assert.ok(report.reasonCodes.includes('queue_slo_breached'));
 });
 
 test('classifica deterministicamente tutti i mismatch shallow e attempt>1', async () => {
@@ -309,6 +325,8 @@ test('oltre 200 run storiche tronca discovery senza invalidare il censimento cor
   assert.equal(report.discovery.state, 'truncated');
   assert.equal(report.discovery.truncated, true);
   assert.equal(report.discovery.declaredTotal, 201);
+  assert.equal(report.discovery.nextPage, 3);
+  assert.equal(report.discovery.residualRuns, 1);
   assert.equal(report.counts.pending, 1);
   assert.equal(report.queue.activePendingPresent, true);
   assert.equal(report.counts.deepInspected, 0);
@@ -424,6 +442,8 @@ test('assenza active/pending e JSON canonico restano espliciti', async () => {
   const { json, report } = await observe(fakeGithub({ pages: [[]] }));
   assert.equal(report.queue.activePendingPresent, false);
   assert.equal(report.queue.oldestAgeSeconds, null);
+  assert.equal(report.queue.slo.state, 'empty');
+  assert.equal(report.queue.slo.alert, false);
   assert.equal(report.counts.byReason.no_active_pending, 1);
   assert.equal(`${canonicalJson(report)}\n`, json);
   assert.ok(!json.includes(TOKEN));
@@ -456,7 +476,7 @@ test('workflow e runtime sono read-only/dry-run per costruzione', () => {
 test('target e manifest sono pinning corpus-only esatti', () => {
   assert.equal(TARGET_WORKFLOW_ID, 342441975);
   assert.equal(TARGET_WORKFLOW_PATH, '.github/workflows/translate-pending.yml');
-  assert.equal(TARGET_WORKFLOW_BLOB_SHA, 'f782b4b2761ab87ba7792d256b64ab09c2e206ea');
+  assert.equal(TARGET_WORKFLOW_BLOB_SHA, '231a28fba27199f606ebb49b13e6c93aa87ace8d');
   assert.equal(QUEUE_MAX_BOUNDARY_SHA, '5e5114b73f37a0c47625f00baff13942fe8b186b');
   assert.deepEqual(RERUN_PRESERVATION_PROOF, {
     artifactId: '9817045831',

@@ -409,6 +409,45 @@ test('refreshDescriptiveTexts: scrive tutte e 4 le locali + il file SEO, e ripor
   }
 });
 
+test('refreshDescriptiveTexts: writer e reader iniettati permettono lo staging senza write sul corpus', () => {
+  const root = syntheticCorpus();
+  try {
+    const staged = new Map();
+    const writes = [];
+    const read = (file) => staged.has(file) ? staged.get(file) : fs.readFileSync(file, 'utf8');
+    const write = (file, content) => {
+      staged.set(file, content);
+      writes.push(file);
+    };
+    const metaPath = path.join(root, 'content', 'blog-meta-it.ts');
+    const before = fs.readFileSync(metaPath, 'utf8');
+    const result = refreshDescriptiveTexts(
+      'demo-id',
+      { it: { excerpt: 'Estratto staged', seoDescription: 'SERP staged', ogDescription: 'Social staged' } },
+      { description: 'SERP staged', ogDescription: 'Social staged' },
+      { repoRoot: root, readFile: read, writeFile: write },
+    );
+
+    assert.equal(result.changed, true);
+    assert.equal(writes.length, 2, 'solo la locale richiesta e il file SEO devono essere staged');
+    assert.equal(fs.readFileSync(metaPath, 'utf8'), before, 'il writer iniettato non deve scrivere il target');
+    assert.match(staged.get(metaPath), /Estratto staged/);
+    assert.equal(
+      refreshDescriptiveTexts(
+        'demo-id',
+        { it: { excerpt: 'Estratto staged', seoDescription: 'SERP staged', ogDescription: 'Social staged' } },
+        { description: 'SERP staged', ogDescription: 'Social staged' },
+        { repoRoot: root, readFile: read, writeFile: write },
+      ).changed,
+      false,
+      'reader staged + upsert idempotente non deve aggiungere un secondo write',
+    );
+    assert.equal(writes.length, 2);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('refreshDescriptiveTexts: un secondo giro con gli stessi testi non scrive niente (changed: false)', () => {
   const root = syntheticCorpus();
   try {
