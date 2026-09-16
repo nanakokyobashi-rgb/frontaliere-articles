@@ -324,7 +324,7 @@
       "reason": "Il corpus espone il contratto aggregate canonical ai consumer locali e conserva la propria risoluzione di locator sul percorso di pubblicazione; per questo la copia non è byte-identica al matcher sorgente del sito. La baseline registra separatamente i due blob e il trasporto successivo deve preservare l'adattamento, non sovrascriverlo con un mirror cieco.",
       "baseline": {
         "site": "2fc97767d9b96296",
-        "corpus": "90cd7bbb0dc543f5",
+        "corpus": "a94459bf3a8ca587",
         "alignedAt": "2026-09-13"
       }
     },
@@ -3404,8 +3404,8 @@
       "sitePath": ".github/corpus-workflows/contract.json",
       "mode": "identical",
       "baseline": {
-        "site": "71ccc22a16f2bd78",
-        "corpus": "71ccc22a16f2bd78",
+        "site": "49efb0c8f48213cb",
+        "corpus": "49efb0c8f48213cb",
         "alignedAt": "2026-09-15"
       }
     },
