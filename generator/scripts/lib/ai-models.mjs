@@ -924,7 +924,7 @@ function getOmniRouteUrl() { return (process.env.OMNIROUTE_URL || OMNIROUTE_DEFA
 // key, so keep a sentinel, same pattern as Local/getLocalLlmApiKey.
 function getOmniRouteApiKey() { return (process.env.OMNIROUTE_API_KEY || 'omniroute-no-key').trim(); }
 
-// ── CLI article lane (Codex primary, legacy Claude fallback) ───────────────
+// ── CLI article lane (Codex primary, Claude body fallback) ─────────────────
 // ENABLE_HAIKU_ARTICLE_FALLBACK is the historical Remote Config flag loaded by
 // load-rc-env.mjs. Keep accepting it while the action also publishes the more
 // truthful ENABLE_CODEX_ARTICLE_FALLBACK name: existing callers and the RC
@@ -7362,8 +7362,8 @@ function _callOmniRoute(model, messages, opts) {
 }
 
 /**
- * Call Claude Haiku via the `claude` CLI subprocess (RC-gated, absolute
- * last resort — reuses CLAUDE_CODE_OAUTH_TOKEN, same zero-cost Max-plan auth
+ * Call Claude Haiku via the `claude` CLI subprocess (RC-gated article-body
+ * fallback — reuses CLAUDE_CODE_OAUTH_TOKEN, same zero-cost Max-plan auth
  * already wired for pr-review-loop.yml/issue-fix.yml, never a raw
  * ANTHROPIC_API_KEY). `--bare` deliberately NOT used: it requires
  * ANTHROPIC_API_KEY/apiKeyHelper and ignores OAuth. Tool access is disabled
