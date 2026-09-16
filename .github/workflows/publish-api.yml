@@ -685,7 +685,7 @@ jobs:
       # Best-effort: a failed dispatch must never fail a good publish. The
       # scheduled sync picks it up.
       - name: Notify the site
-        if: steps.deploy.outcome == 'success'
+        if: steps.deploy.outcome == 'success' && github.event_name == 'push'
         continue-on-error: true
         env:
           PAT: ${{ secrets.SITE_REPO_PAT }}
@@ -695,11 +695,36 @@ jobs:
             echo "::warning::SITE_REPO_PAT unset — the site will pick this up on its schedule"
             exit 0
           fi
+          dispatch_payload=$(jq -cn \
+            --argjson schema_version 1 \
+            --arg event_type "articles-published" \
+            --arg source_repository "$GITHUB_REPOSITORY" \
+            --arg source_workflow "$GITHUB_WORKFLOW" \
+            --arg source_workflow_path ".github/workflows/publish-api.yml" \
+            --arg source_run_id "$GITHUB_RUN_ID" \
+            --arg source_run_attempt "$GITHUB_RUN_ATTEMPT" \
+            --arg source_sha "$GITHUB_SHA" \
+            --arg source_branch "$GITHUB_REF_NAME" \
+            --arg source_event "push" \
+            '{
+              event_type: $event_type,
+              client_payload: {
+                schema_version: $schema_version,
+                source_repository: $source_repository,
+                source_workflow: $source_workflow,
+                source_workflow_path: $source_workflow_path,
+                source_run_id: $source_run_id,
+                source_run_attempt: $source_run_attempt,
+                source_sha: $source_sha,
+                source_branch: $source_branch,
+                source_event: $source_event
+              }
+            }')
           code=$(curl -sS -o /dev/null -w '%{http_code}' -X POST \
             -H "Authorization: Bearer $PAT" \
             -H "Accept: application/vnd.github+json" \
             https://api.github.com/repos/valerielinc-ops/frontaliere-si-o-no/dispatches \
-            -d '{"event_type":"articles-published"}')
+            -d "$dispatch_payload")
           echo "dispatch → HTTP $code"
           if [ "$code" != "204" ]; then
             echo "::warning::dispatch returned $code — the site will pick this up on its schedule"
