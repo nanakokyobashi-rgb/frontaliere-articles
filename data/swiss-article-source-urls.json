@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/politica/1944654/iniziativa-commissione-contanti-servizio-obbligo": {
-    "articleId": "servizio-pubblico-obbligo-contanti",
-    "ts": "2026-08-18T16:14:58.528Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/politica/1944655/blocco-dei-trasferimenti-migranti-quadri-quanto-e-costato-alla-svizzera": {
     "articleId": "costi-blocco-trasferimenti-asilo",
     "ts": "2026-08-18T18:10:58.429Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1950337/svizzera-domanda-turismo-estate-destinazioni": {
     "articleId": "turismo-svizzera-estate-normalizzazione",
     "ts": "2026-09-16T02:14:12.187Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/cronaca/1950305/esercitazione-polizia-sicurezza-esercito-collaborazione-risultati": {
+    "articleId": "fides-26-polizia-esercito-berna",
+    "ts": "2026-09-16T02:26:07.712Z",
     "keyForm": 2
   }
 }
