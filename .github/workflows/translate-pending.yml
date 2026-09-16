@@ -40,6 +40,13 @@ concurrency:
   group: jobs-data-pipeline
   cancel-in-progress: false
   queue: max
+# This adapted caller deliberately does not set DATA_PIPELINE_LEASE: the
+# optional Firebase credential is not a reliable prerequisite for this
+# cross-repo publisher. Its write boundary is the isolated `--slice-only`
+# path in `scripts/lib/git-commit-data.sh`: it seeds a private index from the
+# current `origin/main`, 3-way-merges touched JSON when a crawler advanced the
+# remote, and retries the atomic ref push after contention. Concurrent crawler
+# writes therefore survive without a Firestore lease in this workflow.
 permissions:
   actions: read
   contents: read

@@ -26,8 +26,11 @@
  * `artifactSha256`, cioe' a un hash calcolato dai byte LOCALI. E' l'invariante
  * giusta per un `identical`, ma nessuno l'aveva mai vista sul lato sito.
  * Verificare `artifactSha256` contro `.github/corpus-workflows/<file>` del
- * sito e' esattamente l'osservazione che mancava: se passa, quella
- * `baseline.site` non e' piu' fabbricata.
+ * sito e' esattamente l'osservazione che mancava per i gemelli `identical`:
+ * se passa, quella `baseline.site` non e' piu' fabbricata. Un gemello
+ * `adapted`, invece, porta intenzionalmente byte diversi: il piano lo marca
+ * esplicitamente `adapted` e salta solo il confronto remoto dell'artifact,
+ * lasciando agli assert locali il controllo del digest committato.
  *
  * ## Perche' non e' un test offline
  *
@@ -50,6 +53,9 @@
  *   undeclared  la voce di contratto non porta il digest o il suo sorgente —
  *               il caso dell'artifact riordinato a mano invece che
  *               rigenerato. ROSSO.
+ *   adapted     il manifest dichiara byte intenzionalmente diversi dal sito:
+ *               il confronto remoto dell'artifact e' omesso per costruzione,
+ *               ma il digest locale resta richiesto. NON rosso da solo.
  *   unobserved  errore di rete. NON rosso da solo (proceed-safe, come il resto
  *               del ciclo), ma se lo sono TUTTE il report non significa piu'
  *               niente e si esce rossi lo stesso — stessa regola di
@@ -600,8 +606,8 @@ export function planProvenanceChecks(
   logicDirs = siteLogicDirs(),
   observationRef = contractObservationLineage(contract).observationRef,
 ) {
-  const bySitePath = new Map(
-    (manifest?.files || []).map((entry) => [entry.path, entry.sitePath || null]),
+  const byManifestPath = new Map(
+    (manifest?.files || []).map((entry) => [entry.path, entry]),
   );
   const declared = (sitePath) => ({ sitePath, sitePathCandidates: sitePath ? [sitePath] : [] });
   const lineage = contractObservationLineage(contract);
@@ -643,12 +649,21 @@ export function planProvenanceChecks(
       expected: artifact.sourceSha256 || null,
       observationRef,
     });
+    const manifestEntry = byManifestPath.get(`.github/workflows/${artifact.file}`);
+    const adapted = manifestEntry?.mode === 'adapted';
     checks.push({
       field: `${artifact.file}#artifactSha256`,
       // Il lato sito del gemello lo dichiara gia' il manifest: leggerlo di la'
       // invece di ricostruirlo qui tiene una sola sorgente per quel path
       // (AGENTS.md #6), e un `sitePath` sbagliato esce rosso una volta sola.
-      ...declared(bySitePath.get(`.github/workflows/${artifact.file}`) || null),
+      // Per un `adapted` il digest corpus non puo' coincidere con il byte
+      // servito dal sito: il check resta nel piano, ma non fa un confronto
+      // remoto che sarebbe rosso per definizione.
+      ...(adapted
+        ? { sitePath: null, sitePathCandidates: [] }
+        : declared(manifestEntry?.sitePath || null)),
+      mode: manifestEntry?.mode || null,
+      adapted,
       expected: artifact.artifactSha256 || null,
       observationRef,
     });
@@ -677,7 +692,13 @@ export function evaluateProvenance(checks, observed) {
     const sitePath = seen?.sitePath || check.sitePath;
     let state;
     let detail = '';
-    if (check.localOnly) {
+    if (check.adapted && check.expected == null) {
+      state = 'undeclared';
+      detail = 'il manifest e\' `adapted`, ma il contratto non porta il digest locale';
+    } else if (check.adapted) {
+      state = 'adapted';
+      detail = 'confronto remoto omesso: i byte del gemello sono adattati per costruzione';
+    } else if (check.localOnly) {
       if (check.expected == null || check.observed == null) {
         state = 'undeclared';
         detail = 'il contratto non porta una lineage completa e valida';
@@ -720,7 +741,7 @@ export function evaluateProvenance(checks, observed) {
     r.localOnly
     && (r.state === 'drifted' || r.state === 'absent' || r.state === 'unrecognized' || r.state === 'undeclared')
   ));
-  const remoteResults = results.filter((result) => !result.localOnly);
+  const remoteResults = results.filter((result) => !result.localOnly && !result.adapted);
   const unobserved = remoteResults.filter((result) => result.state === 'unobserved').length;
   const localReason = localBroken.length
     ? `${localBroken.length} controlli locali di lineage non corrispondono: `
@@ -801,7 +822,7 @@ function mergeVerdicts(...verdicts) {
 
 export function formatReport({ results, counts, red, reason, observationRef = SITE_REF }) {
   const lines = [`# Provenienza del contratto cross-repo — ${SITE_REPO}@${observationRef}`, ''];
-  const order = ['drifted', 'unrecognized', 'absent', 'undeclared', 'unobserved', 'verified'];
+  const order = ['drifted', 'unrecognized', 'absent', 'undeclared', 'unobserved', 'adapted', 'verified'];
   for (const state of order) {
     const rows = results.filter((r) => r.state === state);
     if (!rows.length) continue;
