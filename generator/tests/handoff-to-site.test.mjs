@@ -29,6 +29,7 @@ import {
   sitePathMap,
   strandedTwinPaths,
   descentBlock,
+  DEDICATED_CRAWLER_TRANSPORT_PATHS,
   redeliveryDecision,
   bodyCitesOrigin,
   selectDeliveredIssue,
@@ -44,7 +45,7 @@ const SINGLE_MIRROR_PATH = 'scripts/ci/check-issue-already-resolved.mjs';
 const SINGLE_MIRROR_BODY = 'Root cause nota: `' + SINGLE_MIRROR_PATH + '` è '
   + '`mode: identical` nel repo **`valerielinc-ops/frontaliere-si-o-no`**; '
   + 'scriverlo qui verrebbe sovrascritto al mirror successivo.';
-const STRANDED_WORKFLOW_PATH = '.github/workflows/crawler-group-01.yml';
+const STRANDED_WORKFLOW_PATH = '.github/workflows/retry-code-check-after-body-edit.yml';
 
 test('instrada il caso mirror: verdetto + repo del sito + path', () => {
   const d = handoffDecision({ verdict: 'blocked-admin-settings', body: MIRROR_BODY });
@@ -594,14 +595,15 @@ test('#1127: una collisione path corpus/site fa fallire la lettura del manifest'
 
 test('#972: i gemelli che nessun trasporto porta giù sono quelli che il trasporto stesso rifiuta', () => {
   const stuck = strandedTwinPaths();
-  // I 25 workflow `identical`: `unsafeTarget` li esclude PER SEMPRE dal
-  // trasporto — «il token del ciclo non ha lo scope `workflows`, quei gemelli
-  // restano una copia a mano» — ed è precisamente ciò che un verdetto
-  // `blocked-workflows-scope` nomina.
+  // I 25 workflow nella allowlist sito → corpus hanno un trasporto dedicato:
+  // restano locked, ma non stranded. Un workflow fuori da quell'allowlist
+  // segue invece la regola generica: `unsafeTarget` lo esclude PER SEMPRE dal
+  // trasporto — «il token del ciclo non ha lo scope `workflows`» — ed è
+  // precisamente ciò che un verdetto `blocked-workflows-scope` nomina.
   assert.ok(stuck.has(STRANDED_WORKFLOW_PATH));
-  // `translate-pending` è `adapted` per la correzione #1314: il corpus lo
-  // sorveglia, ma non deve più essere contato fra i gemelli `identical`.
-  assert.equal(stuck.has('.github/workflows/translate-pending.yml'), false);
+  for (const path of DEDICATED_CRAWLER_TRANSPORT_PATHS) {
+    assert.equal(stuck.has(path), false, `${path} ha già un trasporto dedicato`);
+  }
   // Un gemello `identical` normale scende da solo: non è nell'insieme, e la
   // chiusura dei `blocked-*` resta quella di sempre.
   assert.equal(stuck.has('scripts/ci/followup-drainer.mjs'), false);
