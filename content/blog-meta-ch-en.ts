@@ -6488,6 +6488,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.premi-lamal-glarona-modelli-franchigie.title': 'Health insurance premiums Canton Glarus: bands, deductibles and reduction',
     'blog.article.premi-lamal-glarona-modelli-franchigie.excerpt': 'In the Canton of Glarus, LAMal premiums vary by premium range and deductible; it is possible to obtain the cantonal reduction within three months of registration.',
     'blog.article.premi-lamal-glarona-modelli-franchigie.imageAlt': 'Alpine landscape of the Glarus canton with a traditional Swiss house',
+    'blog.article.costi-nascosti-rientro-scolastico-svizzera.title': 'The hidden costs of returning to school in Switzerland: a challenge for families',
+    'blog.article.costi-nascosti-rientro-scolastico-svizzera.excerpt': 'The start of the school year can be a difficult time for Swiss families, especially from an economic point of view. Learn how to deal with expenses.',
+    'blog.article.costi-nascosti-rientro-scolastico-svizzera.imageAlt': 'A single mother planning her family\'s budget for the school year.',
 };
 
 export default blogMetaChEn;

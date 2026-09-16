@@ -84104,6 +84104,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-costi-nascosti-rientro-scolastico-svizzera': {
+    title: 'I costi nascosti del rientro scolastico in Svizzera: una sfida per le famiglie',
+    description: 'L\'inizio dell\'anno scolastico può essere un momento difficile per le famiglie svizzere, soprattutto dal punto di vista economico. Scopri come affrontare',
+    keywords: 'frontalieri, ticino, svizzera, italia, costi, nascosti, rientro, scolastico',
+    ogTitle: 'I costi nascosti del rientro scolastico in Svizzera: una sfida per le famiglie',
+    ogDescription: 'L\'inizio della scuola può essere un momento difficile per le famiglie svizzere, soprattutto dal punto di vista economico. Scopri come affrontare le spese e pianificare il tuo budget familiare.',
+    canonicalPath: '/articoli-svizzera/costi-nascosti-rientro-scolastico-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "I costi nascosti del rientro scolastico in Svizzera: una sfida per le famiglie",
+      "description": "L'inizio dell'anno scolastico può essere un momento difficile per le famiglie svizzere, soprattutto dal punto di vista economico. Scopri come affrontare",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/costi-nascosti-rientro-scolastico-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Una madre single che pianifica il budget familiare per l'anno scolastico."
+      },
+      "datePublished": "2026-09-16T17:11:11+00:00",
+      "dateModified": "2026-09-16T17:11:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/costi-nascosti-rientro-scolastico-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

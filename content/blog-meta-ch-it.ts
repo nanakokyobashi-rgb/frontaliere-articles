@@ -6488,6 +6488,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.premi-lamal-glarona-modelli-franchigie.title': 'Premi cassa malati Canton Glarona: fasce, franchigie e riduzione',
     'blog.article.premi-lamal-glarona-modelli-franchigie.excerpt': 'Nel Cantone di Glarona i premi LAMal variano per fascia di premio e franchigia; è possibile ottenere la riduzione cantonale entro tre mesi dall’iscrizione.',
     'blog.article.premi-lamal-glarona-modelli-franchigie.imageAlt': 'Paesaggio alpino del Canton Glarona con casa tradizionale svizzera',
+    'blog.article.costi-nascosti-rientro-scolastico-svizzera.title': 'I costi nascosti del rientro scolastico in Svizzera: una sfida per le famiglie',
+    'blog.article.costi-nascosti-rientro-scolastico-svizzera.excerpt': 'L\'inizio dell\'anno scolastico può essere un momento difficile per le famiglie svizzere, soprattutto dal punto di vista economico. Scopri come affrontare le spese.',
+    'blog.article.costi-nascosti-rientro-scolastico-svizzera.imageAlt': 'Una madre single che pianifica il budget familiare per l\'anno scolastico.',
 };
 
 export default blogMetaChIt;

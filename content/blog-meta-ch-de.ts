@@ -6488,6 +6488,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.premi-lamal-glarona-modelli-franchigie.title': 'Krankenkassenprämien Kanton Glarus: Zeitabschnitte, Selbstbehalte und Kürzungen',
     'blog.article.premi-lamal-glarona-modelli-franchigie.excerpt': 'Im Kanton Glarus variieren die KVG-Prämien je nach Prämienspanne und Franchise; die kantonale Reduktion ist innerhalb von drei Monaten nach der Anmeldung möglich.',
     'blog.article.premi-lamal-glarona-modelli-franchigie.imageAlt': 'Alpenlandschaft im Kanton Glarus mit traditionellem Schweizerhaus',
+    'blog.article.costi-nascosti-rientro-scolastico-svizzera.title': 'Die versteckten Kosten der Rückkehr in die Schweiz: eine Herausforderung für Familien',
+    'blog.article.costi-nascosti-rientro-scolastico-svizzera.excerpt': 'Der Beginn des Schuljahres kann für Schweizer Familien eine schwierige Zeit sein, vor allem aus wirtschaftlicher Sicht. Erfahren Sie, wie Sie mit den Ausgaben umgehen.',
+    'blog.article.costi-nascosti-rientro-scolastico-svizzera.imageAlt': 'Eine alleinerziehende Mutter, die den Familienhaushalt für das Schuljahr plant.',
 };
 
 export default blogMetaChDe;

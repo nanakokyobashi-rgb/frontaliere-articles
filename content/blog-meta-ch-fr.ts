@@ -6488,6 +6488,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.premi-lamal-glarona-modelli-franchigie.title': 'Primes caisse-maladie Canton de Glaris : fourchettes, franchises et réduction',
     'blog.article.premi-lamal-glarona-modelli-franchigie.excerpt': 'Dans le canton de Glaris, les primes LAMal varient selon la fourchette de primes et de franchises ; la réduction cantonale peut être obtenue dans les trois mois suivant l\'inscription.',
     'blog.article.premi-lamal-glarona-modelli-franchigie.imageAlt': 'Paysage alpin du canton de Glaris avec une maison suisse traditionnelle',
+    'blog.article.costi-nascosti-rientro-scolastico-svizzera.title': 'Les coûts cachés de la rentrée scolaire en Suisse : un défi pour les familles',
+    'blog.article.costi-nascosti-rientro-scolastico-svizzera.excerpt': 'Le début de l\'année scolaire peut être un moment difficile pour les familles suisses, notamment d\'un point de vue économique. Découvrez comment faire face aux dépenses.',
+    'blog.article.costi-nascosti-rientro-scolastico-svizzera.imageAlt': 'Une mère célibataire planifiant le budget familial pour l\'année scolaire.',
 };
 
 export default blogMetaChFr;

@@ -2185,6 +2185,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'calcio-hockey-svizzera-economia-pubblico': { it: 'calcio-hockey-svizzera-economia-pubblico', en: 'football-hockey-switzerland-economy-public', de: 'fussball-eishockey-schweiz-wirtschaft-publikum', fr: 'football-hockey-suisse-economie-public' },
  'assicurazione-salute-glarona-sussidio': { it: 'assicurazione-salute-glarona-sussidio', en: 'health-insurance-glarus-subsidy', de: 'krankenversicherung-glarus-zuschuss', fr: 'assurance-sante-glaris-subvention' },
  'premi-lamal-glarona-modelli-franchigie': { it: 'premi-lamal-glarona-modelli-franchigie', en: 'lamal-premiums-glarus-models-deductibles', de: 'lamal-beitraege-glarus-modelle-selbstbehalte', fr: 'cotisations-lamal-glaris-modeles-franchises' },
+ 'costi-nascosti-rientro-scolastico-svizzera': { it: 'costi-nascosti-rientro-scolastico-svizzera', en: 'hidden-costs-back-to-school-switzerland', de: 'versteckte-kosten-schulbeginn-schweiz', fr: 'couts-caches-rentree-scolaire-suisse' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
