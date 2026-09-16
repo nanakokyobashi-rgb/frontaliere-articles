@@ -11,6 +11,7 @@ import {
   reviewIsApproved,
   isTransientGithubReadError,
   withTransientGithubReadRetry,
+  REVIEW_GATE_STEP_NAMES,
 } from '../../scripts/ci/native-automerge-gate.mjs';
 
 const HEAD = 'a'.repeat(40);
@@ -124,4 +125,11 @@ test('lascia fail-closed un errore GitHub permanente senza ritentarlo', () => {
     throw permanent;
   }, { sleep: () => undefined }), /gh failed/);
   assert.equal(attempts, 1);
+});
+
+test('il gate resta compatibile durante il rename Claude → Codex', () => {
+  assert.deepEqual(REVIEW_GATE_STEP_NAMES, [
+    'Require approving Claude review',
+    'Require approving Codex review',
+  ]);
 });
