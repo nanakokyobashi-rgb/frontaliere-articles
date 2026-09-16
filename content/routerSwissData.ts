@@ -2186,6 +2186,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'assicurazione-salute-glarona-sussidio': { it: 'assicurazione-salute-glarona-sussidio', en: 'health-insurance-glarus-subsidy', de: 'krankenversicherung-glarus-zuschuss', fr: 'assurance-sante-glaris-subvention' },
  'premi-lamal-glarona-modelli-franchigie': { it: 'premi-lamal-glarona-modelli-franchigie', en: 'lamal-premiums-glarus-models-deductibles', de: 'lamal-beitraege-glarus-modelle-selbstbehalte', fr: 'cotisations-lamal-glaris-modeles-franchises' },
  'costi-nascosti-rientro-scolastico-svizzera': { it: 'costi-nascosti-rientro-scolastico-svizzera', en: 'hidden-costs-back-to-school-switzerland', de: 'versteckte-kosten-schulbeginn-schweiz', fr: 'couts-caches-rentree-scolaire-suisse' },
+ 'malinteso-rendite-avs-moutier': { it: 'malinteso-rendite-avs-moutier', en: 'moutier-avs-pension-misunderstanding', de: 'missverstaendnis-ueber-ahv-renten-in-moutier', fr: 'malentendu-sur-les-rentes-avs-a-moutier' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

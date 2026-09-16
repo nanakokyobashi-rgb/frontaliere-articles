@@ -6491,6 +6491,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.costi-nascosti-rientro-scolastico-svizzera.title': 'The hidden costs of returning to school in Switzerland: a challenge for families',
     'blog.article.costi-nascosti-rientro-scolastico-svizzera.excerpt': 'The start of the school year can be a difficult time for Swiss families, especially from an economic point of view. Learn how to deal with expenses.',
     'blog.article.costi-nascosti-rientro-scolastico-svizzera.imageAlt': 'A single mother planning her family\'s budget for the school year.',
+    'blog.article.malinteso-rendite-avs-moutier.title': 'Moutier: over 400 pensioners receive a double AVS pension by mistake',
+    'blog.article.malinteso-rendite-avs-moutier.excerpt': 'A misunderstanding between Bern and Jura led to a double payment of AVS annuities, creating potential financial hardship for pensioners.',
+    'blog.article.malinteso-rendite-avs-moutier.imageAlt': 'A scene from Moutier, featuring an elderly person checking their AVS pension.',
 };
 
 export default blogMetaChEn;

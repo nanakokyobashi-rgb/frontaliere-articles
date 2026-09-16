@@ -6491,6 +6491,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.costi-nascosti-rientro-scolastico-svizzera.title': 'Les coûts cachés de la rentrée scolaire en Suisse : un défi pour les familles',
     'blog.article.costi-nascosti-rientro-scolastico-svizzera.excerpt': 'Le début de l\'année scolaire peut être un moment difficile pour les familles suisses, notamment d\'un point de vue économique. Découvrez comment faire face aux dépenses.',
     'blog.article.costi-nascosti-rientro-scolastico-svizzera.imageAlt': 'Une mère célibataire planifiant le budget familial pour l\'année scolaire.',
+    'blog.article.malinteso-rendite-avs-moutier.title': 'Moutier : plus de 400 retraités reçoivent une double rente AVS par erreur',
+    'blog.article.malinteso-rendite-avs-moutier.excerpt': 'Un malentendu entre Berne et le Jura a conduit à un doublement des rentes AVS, créant des difficultés financières potentielles pour les retraités.',
+    'blog.article.malinteso-rendite-avs-moutier.imageAlt': 'Une image de Moutier, avec une personne âgée vérifiant sa rente AVS.',
 };
 
 export default blogMetaChFr;

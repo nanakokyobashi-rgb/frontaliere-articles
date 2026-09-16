@@ -6491,6 +6491,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.costi-nascosti-rientro-scolastico-svizzera.title': 'Die versteckten Kosten der Rückkehr in die Schweiz: eine Herausforderung für Familien',
     'blog.article.costi-nascosti-rientro-scolastico-svizzera.excerpt': 'Der Beginn des Schuljahres kann für Schweizer Familien eine schwierige Zeit sein, vor allem aus wirtschaftlicher Sicht. Erfahren Sie, wie Sie mit den Ausgaben umgehen.',
     'blog.article.costi-nascosti-rientro-scolastico-svizzera.imageAlt': 'Eine alleinerziehende Mutter, die den Familienhaushalt für das Schuljahr plant.',
+    'blog.article.malinteso-rendite-avs-moutier.title': 'Moutier: Über 400 Rentner erhalten versehentlich eine doppelte AHV-Rente',
+    'blog.article.malinteso-rendite-avs-moutier.excerpt': 'Ein Missverständnis zwischen Bern und Jura hat zu einer doppelten Auszahlung der AHV-Renten geführt und potenzielle finanzielle Unannehmlichkeiten für Rentner geschaffen.',
+    'blog.article.malinteso-rendite-avs-moutier.imageAlt': 'Ein Bild von Moutier, wo eine ältere Person ihre AHV-Rente überprüft.',
 };
 
 export default blogMetaChDe;

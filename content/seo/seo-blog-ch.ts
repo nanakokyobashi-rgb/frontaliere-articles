@@ -84143,6 +84143,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-malinteso-rendite-avs-moutier': {
+    title: 'Moutier: oltre 400 pensionati ricevono una doppia rendita AVS per errore',
+    description: 'Un malinteso tra Berna e Giura ha portato a un pagamento doppio delle rendite AVS a Moutier, evidenziando la necessità di una comunicazione chiara',
+    keywords: 'frontalieri, ticino, svizzera, italia, moutier, oltre, pensionati, ricevono',
+    ogTitle: 'Moutier: oltre 400 pensionati ricevono una doppia rendita AVS',
+    ogDescription: 'Un episodio a Moutier evidenzia la complessità delle procedure amministrative e la necessità di una comunicazione chiara tra le istituzioni coinvolte nel trasferimento cantonale.',
+    canonicalPath: '/articoli-svizzera/malinteso-rendite-avs-moutier/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Moutier: oltre 400 pensionati ricevono una doppia rendita AVS per errore",
+      "description": "Un malinteso tra Berna e Giura ha portato a un pagamento doppio delle rendite AVS a Moutier, evidenziando la necessità di una comunicazione chiara",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/malinteso-rendite-avs-moutier.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine di Moutier, con un anziano che controlla la propria rendita AVS."
+      },
+      "datePublished": "2026-09-16T17:33:56+00:00",
+      "dateModified": "2026-09-16T17:33:56+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/malinteso-rendite-avs-moutier/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
