@@ -146,4 +146,10 @@ test('il bridge blocca le deroghe decisionali vaghe prima di gh pr create/edit',
     `${prefix}- falso positivo: il token è solo lessicale. **Motivo:** il modulo non usa il contratto review. **Prossimo passo:** lasciare il file invariato e monitorare il prossimo diff.`,
   );
   assert.equal(concrete.ok, true);
+
+  const formattedPlaceholder = validateBridgePrBodyContract(
+    `${prefix}- falso positivo: il token è solo lessicale. **Motivo:** **TBD**. **Prossimo passo:** lasciare il file invariato e monitorare il prossimo diff.`,
+  );
+  assert.equal(formattedPlaceholder.ok, false);
+  assert.match(formattedPlaceholder.violations.join('\n'), /decision deferrals require concrete Motivo and Prossimo passo/);
 });
