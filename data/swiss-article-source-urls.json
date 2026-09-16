@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/politica/1944655/blocco-dei-trasferimenti-migranti-quadri-quanto-e-costato-alla-svizzera": {
-    "articleId": "costi-blocco-trasferimenti-asilo",
-    "ts": "2026-08-18T18:10:58.429Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/gr%3a-ospedale-cantonale%2c-un-cantiere-di-12-anni-verso-il-traguardo/91915775": {
     "articleId": "ospedale-grigioni-ampliamento-2026",
     "ts": "2026-08-18T19:20:17.658Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/cronaca/1950305/esercitazione-polizia-sicurezza-esercito-collaborazione-risultati": {
     "articleId": "fides-26-polizia-esercito-berna",
     "ts": "2026-09-16T02:26:07.712Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4086055": {
+    "articleId": "calcio-hockey-svizzera-economia-pubblico",
+    "ts": "2026-09-16T02:41:41.933Z",
     "keyForm": 2
   }
 }
