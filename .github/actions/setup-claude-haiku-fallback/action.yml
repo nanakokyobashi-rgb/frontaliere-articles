@@ -598,7 +598,7 @@ runs:
             ;;
         esac
         codex_version="$($codex_realpath --version 2>&1)"
-        if ! printf '%s\n' "$codex_version" | grep -Eq '(^|[^0-9])0\.153\.4([^0-9]|$)'; then
+        if ! printf '%s\n' "$codex_version" | grep -Eq '(^|[^0-9A-Za-z._-])v?0\.153\.4([^0-9A-Za-z._-]|$)'; then
           echo "::warning::Pinned Codex CLI version attestation failed; Claude and the normal fallback cascade remain available"
           rm -rf -- "$codex_prefix"
           exit 0

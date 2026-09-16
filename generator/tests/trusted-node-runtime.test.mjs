@@ -19,6 +19,10 @@ const CODEX_ACTION = fs.readFileSync(
   path.join(ROOT, '.github/actions/claude-codex-fallback/action.yml'),
   'utf8',
 );
+const BROKER = fs.readFileSync(
+  path.join(ROOT, '.github/actions/setup-claude-haiku-fallback/codex-auth-broker.mjs'),
+  'utf8',
+);
 
 const runtimeStart = ACTION.indexOf('- name: Resolve trusted Node/npm toolchain');
 const claudeStart = ACTION.indexOf('- name: Setup Claude CLI Haiku fallback');
@@ -110,9 +114,22 @@ test('le probe CLI tollerano il suffisso di --version senza allentare il pin sem
   for (const pattern of codexPatterns) {
     const codexVersion = new RegExp(pattern);
     assert.match('codex-cli 0.153.4 (Codex CLI)', codexVersion);
+    assert.match('codex-cli v0.153.4 (Codex CLI)', codexVersion);
     assert.doesNotMatch('codex-cli 0.153.40', codexVersion);
     assert.doesNotMatch('codex-cli 0.153.4.1', codexVersion);
     assert.doesNotMatch('codex-cli 0.153.4-beta', codexVersion);
   }
+  const setupCodexPattern = ACTION.match(
+    /printf '%s\\n' "\$codex_version" \| grep -Eq '([^']+)'/,
+  )?.[1];
+  assert.ok(setupCodexPattern, 'probe semver del Codex nella setup action non trovata');
+  const setupCodexVersion = new RegExp(setupCodexPattern);
+  assert.match('codex-cli v0.153.4 (Codex CLI)', setupCodexVersion);
+  assert.doesNotMatch('codex-cli 0.153.4.1', setupCodexVersion);
+  assert.doesNotMatch('codex-cli 0.153.4-beta', setupCodexVersion);
+  assert.match(
+    BROKER,
+    /versionOutput\.match\(\/\(\?:\^\|\[\^0-9A-Za-z\._-\]\)v\?\(\\d\+\\\.\\d\+\\\.\\d\+\)\(\?:\[\^0-9A-Za-z\._-\]\|\$\)\//,
+  );
   assert.doesNotMatch(CODEX_ACTION, /\[\s*"\$codex_version"\s*(?:!=|=)\s*'[^']+'\s*\]/);
 });

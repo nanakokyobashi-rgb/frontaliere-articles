@@ -194,7 +194,7 @@ function validateCodexCli() {
   });
   if (versionProbe.error) throw new Error(`Codex CLI version probe failed: ${versionProbe.error.message}`);
   const versionOutput = `${versionProbe.stdout || ''}\n${versionProbe.stderr || ''}`;
-  const versionMatch = versionOutput.match(/(?:^|[^0-9])v?(\d+\.\d+\.\d+)(?:[^0-9]|$)/);
+  const versionMatch = versionOutput.match(/(?:^|[^0-9A-Za-z._-])v?(\d+\.\d+\.\d+)(?:[^0-9A-Za-z._-]|$)/);
   if (versionProbe.status !== 0 || versionMatch?.[1] !== CODEX_CLI_VERSION) {
     throw new Error(`Codex CLI version mismatch: expected ${CODEX_CLI_VERSION}`);
   }
