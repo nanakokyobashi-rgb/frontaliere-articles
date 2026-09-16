@@ -1,5 +1,4 @@
 {
-  "https://www.rsi.ch/info/svizzera/cassa-malati-elettricit%c3%a0-abbonamenti-twint-lancia-l%e2%80%99addebito-diretto--3995235.html": "twint-addebito-diretto-fatture",
   "https://www.tio.ch/ticino/attualita/1944534/la-fondazione-centro-studi-villa-negroni-si-associa-alla-supsi": "la-fondazione-centro-studi-villa-negroni-si-associa-alla-supsi",
   "https://www.tio.ch/svizzera/cronaca/1944506/italia-svizzera-asilo-richiedenti-governo": "svizzera-trasferimento-richiedenti-asilo-italia",
   "https://www.rsi.ch/s/3995190": "italia-rimpatrio-asilo",
@@ -2473,6 +2472,11 @@
   "https://www.rsi.ch/s/4086802": {
     "articleId": "too-big-to-fail-consiglio-stati",
     "ts": "2026-09-16T01:04:39.901Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1950332/bns-aumento-tassi-ubs-tasso": {
+    "articleId": "bns-tassi-interessi-ubs",
+    "ts": "2026-09-16T01:12:05.010Z",
     "keyForm": 2
   }
 }
