@@ -62,12 +62,30 @@ test('every active article CLI caller wires the OAuth Codex broker', () => {
     assert.match(setup, /id:\s*setup_claude_haiku_fallback/, `${rel}: setup step needs a stable id`);
     assert.match(setup, new RegExp(String.raw`codex_auth_json:\s*${escapeRegex(SECRET)}`), `${rel}: raw Codex OAuth secret must stay on setup`);
 
+    const preferredIndexes = lines
+      .map((line, index) => /^\s+AI_MODELS_PREFER:/.test(line) ? index : -1)
+      .filter((index) => index >= 0);
     const oauthIndexes = lines
       .map((line, index) => /^\s+CLAUDE_CODE_OAUTH_TOKEN:/.test(line) ? index : -1)
       .filter((index) => index >= 0);
-    assert.ok(oauthIndexes.length > 0, `${rel}: no Claude generator consumer found`);
-    for (const index of oauthIndexes) {
-      assert.match(stepBlock(lines, index), new RegExp(escapeRegex(SOCKET)), `${rel}: Claude consumer lacks broker socket`);
+    if (preferredIndexes.length > 0 && oauthIndexes.length === 0) {
+      // The Codex-only artifact is the current contract. Keep accepting the
+      // legacy Claude-backed artifact while the corpus transport PR is still
+      // being promoted.
+      for (const index of preferredIndexes) {
+        const consumer = stepBlock(lines, index);
+        assert.match(consumer, new RegExp(escapeRegex(SOCKET)), `${rel}: Codex consumer lacks broker socket`);
+        assert.match(consumer, /AI_MODELS_PREFER:\s*codex-cli\/gpt-5\.6-luna/, `${rel}: Codex consumer preference is not pinned`);
+      }
+    } else {
+      // Legacy corpus artifacts (including the interim hybrid translation
+      // artifact) still use the Claude consumer until the corresponding
+      // generated transport lands; its broker wiring remains a valid
+      // compatibility contract during that transition.
+      assert.ok(oauthIndexes.length > 0, `${rel}: no article CLI consumer found`);
+      for (const index of oauthIndexes) {
+        assert.match(stepBlock(lines, index), new RegExp(escapeRegex(SOCKET)), `${rel}: Claude consumer lacks broker socket`);
+      }
     }
 
     const cleanupIndex = lines.findIndex((line) => line.includes('- name: Cleanup Codex auth broker'));
