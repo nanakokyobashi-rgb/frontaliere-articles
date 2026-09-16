@@ -708,7 +708,7 @@ jobs:
           # appena configurato — e ogni fix su `.github/workflows/**` morirebbe
           # al push nonostante il capability guard lo avesse lasciato passare.
           github_token: ${{ env.GITHUB_PAT_NANAKO }}
-          codex_github_token: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
+          codex_github_token: ${{ env.GITHUB_PAT_NANAKO }}
           prompt: |
             Il branch e' gia' checkoutato sulla head della PR #${{ needs.preflight.outputs.pr_number }}, che ha il **check richiesto ROSSO**.
 

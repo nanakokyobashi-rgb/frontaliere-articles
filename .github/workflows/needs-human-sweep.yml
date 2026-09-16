@@ -161,8 +161,9 @@ jobs:
           node-version: '22'
 
       # Ponte Remote Config → env: da qui arriva `GITHUB_PAT_NANAKO`.
-      # `continue-on-error`: senza PAT lo sweep gira lo stesso col GITHUB_TOKEN,
-      # solo senza poter innescare `issue-triage` sulle issue che ri-accoda.
+      # `continue-on-error` mantiene leggibili i preflight con GITHUB_TOKEN;
+      # senza PAT la corsia Codex riceve input vuoto e si ferma fail-closed
+      # prima di poter eseguire operazioni sul repository.
       - name: Write Firebase SA (se presente)
         continue-on-error: true
         env:
@@ -217,7 +218,7 @@ jobs:
         with:
           codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
           github_token: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
-          codex_github_token: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
+          codex_github_token: ${{ env.GITHUB_PAT_NANAKO }}
           codex_site_github_token: ${{ env.GITHUB_PAT }}
           prompt: |
             Sei lo sweep settimanale delle issue `needs-human` di questo repo (il CORPUS, `$REPO`). Il tuo compito: separare le decisioni VERE del proprietario dal resto, e rimettere il resto nel ciclo autonomo. NON implementi fix e NON apri PR.

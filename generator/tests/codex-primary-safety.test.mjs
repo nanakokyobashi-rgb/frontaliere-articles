@@ -20,6 +20,16 @@ const followupWorkflow = fs.readFileSync(path.join(ROOT, '.github/workflows/post
 const issueDecomposeWorkflow = fs.readFileSync(path.join(ROOT, '.github/workflows/issue-decompose.yml'), 'utf8');
 const needsHumanWorkflow = fs.readFileSync(path.join(ROOT, '.github/workflows/needs-human-sweep.yml'), 'utf8');
 const testsWorkflow = fs.readFileSync(path.join(ROOT, '.github/workflows/tests.yml'), 'utf8');
+const codexBridgeWorkflowSources = [
+  '.github/workflows/issue-fix.yml',
+  '.github/workflows/issue-decompose.yml',
+  '.github/workflows/needs-human-sweep.yml',
+  '.github/workflows/pr-redcheck-fixer.yml',
+  '.github/workflows/pr-redflag-fixer.yml',
+].map((relativePath) => ({
+  relativePath,
+  source: fs.readFileSync(path.join(ROOT, relativePath), 'utf8'),
+}));
 
 function workflowStep(source, name) {
   const start = source.indexOf(`      - name: ${name}`);
@@ -326,6 +336,21 @@ test('the corpus review loads its host-side PAT before invoking Codex', () => {
   assert.match(mintGate, /GATE_PR_TOKEN/);
   assert.match(mintGate, /function ghPr\(/);
   assert.match(mintGate, /ghPr\(\['pr', 'comment'/);
+});
+
+test('i bridge Codex operativi non ricadono su GITHUB_TOKEN', () => {
+  for (const { relativePath, source } of codexBridgeWorkflowSources) {
+    assert.match(
+      source,
+      /codex_github_token:\s+\$\{\{\s*env\.GITHUB_PAT_NANAKO\s*\}\}/,
+      `${relativePath}: manca il PAT esplicito per il bridge Codex`,
+    );
+    assert.doesNotMatch(
+      source,
+      /codex_github_token:[^\n]*secrets\.GITHUB_TOKEN/,
+      `${relativePath}: il bridge Codex non deve usare GITHUB_TOKEN come fallback`,
+    );
+  }
 });
 
 test('#1312: Lessons harvester non blocca Codex quando la quota Claude e\u0027 esaurita', () => {

@@ -716,13 +716,13 @@ jobs:
           # `HAS_PAT`) aveva dato via libera perche' il PAT c'era. Il remote
           # configurato sopra resta utile ai push da `run:`.
           #
-          # Vuoto (non `secrets.GITHUB_TOKEN`) come fallback: gli eventi del
-          # GITHUB_TOKEN non ri-attivano i workflow a valle, quindi il push del
-          # fix non farebbe ripartire la review dentro tests.yml — la re-review che questo
-          # workflow esiste per innescare. Vuoto = ramo di default dell'action
-          # (conia un token proprio), cioe' il comportamento odierno.
+          # Vuoto (non `secrets.GITHUB_TOKEN`) resta fail-closed: gli eventi del
+          # GITHUB_TOKEN non ri-attivano i workflow a valle, quindi non può
+          # essere usato come credenziale operativa per un fix che deve innescare
+          # la re-review dentro tests.yml. L'action si ferma prima di invocare
+          # Codex quando il PAT esplicito manca.
           github_token: ${{ env.GITHUB_PAT_NANAKO }}
-          codex_github_token: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
+          codex_github_token: ${{ env.GITHUB_PAT_NANAKO }}
           # Le review/PR autonome sono di claude[bot] / github-actions[bot] /
           # frontaliere-automation[bot] (App): le PR aggiornate via App token
           # triggerano con actor = l'App → senza whitelist la action aborta

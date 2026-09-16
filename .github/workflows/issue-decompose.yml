@@ -166,7 +166,7 @@ jobs:
         with:
           codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
           github_token: ${{ env.GITHUB_PAT_NANAKO }}
-          codex_github_token: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
+          codex_github_token: ${{ env.GITHUB_PAT_NANAKO }}
           codex_site_github_token: ${{ env.GITHUB_PAT }}
           prompt: |
             Sei l'agente di DECOMPOSIZIONE per la issue #${{ github.event.issue.number }} ("${{ github.event.issue.title }}") di questo repo (il corpus articoli: generator/, engine/, content/, scripts/ci del ciclo autonomo).
