@@ -18,6 +18,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   ALLOW_EMPTY_RC_KEYS,
+  claimEnvKey,
   EXPECTED_ABSENT_RC_KEYS,
   extractGoogleErrorReason,
   formatMissingRcKeys,
@@ -88,6 +89,19 @@ test('il loader separa assenza prevista, assenza inattesa ed empty esplicito', (
   assert.equal(rcValueState('', 'GEMINI_API_KEY'), 'empty');
   assert.equal(shouldExportRcValue(null, 'TELEGRAM_BOT_TOKEN'), false);
   assert.equal(shouldExportRcValue('', 'OMNIROUTE_PROVIDER_ALLOWLIST'), true);
+});
+
+test('il fallback legacy non sovrascrive il token LSA già accodato', () => {
+  const queuedEnvKeys = new Set();
+  const emittedValues = [];
+
+  for (const value of ['lsa-token-from-specific-plan', 'legacy-fallback-token']) {
+    if (claimEnvKey(queuedEnvKeys, 'OPENTRANSPORTDATA_API_KEY')) {
+      emittedValues.push(value);
+    }
+  }
+
+  assert.deepEqual(emittedValues, ['lsa-token-from-specific-plan']);
 });
 
 // #199: né fetchTemplateViaRest né exchangeAssertionForToken avevano un

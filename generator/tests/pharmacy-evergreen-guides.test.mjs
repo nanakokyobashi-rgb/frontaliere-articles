@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 
 import {
   buildPharmacyEvergreenGuides,
+  EXPECTED_LOCARNESE_DERIVED_RECORD_COUNT,
   EXPECTED_MIN_RECORD_COUNTS,
   EXPECTED_DUTY_REGIONS,
   EXPECTED_DUTY_SOURCE_REGIONS,
@@ -53,6 +54,40 @@ const NO_ITALIAN_DUTY_CLAIM = {
   en: 'No Italian on-duty claim',
   de: 'kein Notdienst-Anspruch',
   fr: 'Aucune couverture de garde italienne',
+};
+
+const SWISS_CANTON_URLS = [
+  'https://www.notfall-apotheken-zh.ch/',
+  'https://apobern.ch/dienstleistungen/notfalldienst/',
+  'https://www.apoluzern.ch/apotheken/notfalldienst',
+  'https://www.ur.ch/dienstleistungen/3677',
+  'https://www.sz.ch/gesundheit-soziales/gesundheit/notfall.html/',
+  'https://www.zg.ch/behoerden/gesundheit/medizinische-versorgung/notfall',
+  'https://avso.ch/notfalldienst-apotheken/',
+  'https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt',
+  'https://apotheken-aargau.ch/notfall/',
+  'https://www.apotheken-thurgau.ch/pikettdienst/',
+  'https://notfall.apotheke-chur.ch/',
+  'https://www.pharmavalais.ch/pharmacie-valais/pharmacie-garde-51.html',
+  'https://www.pharmaciesfribourg.ch/fr/prestations-et-conseils/pharmacie-de-garde',
+  'https://www.onp.ch/Service-de-garde',
+  'https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html',
+  'https://garde.svph.ch',
+  'https://pharmageneve.swiss/pharmacie-de-garde/',
+];
+
+const ITALIAN_SOURCE_URLS = [
+  'https://www.ats-insubria.it/farmacie',
+  'https://www.turnifarmacie.it/',
+  'https://www.aslvco.it/wp-content/uploads/2026/03/3017434.pdf',
+  'https://farmacia-aperta.eu/',
+];
+
+const ANNUAL_SOURCE_NOTES = {
+  it: 'documento annuale, edizione 2026',
+  en: 'annual document, edition 2026',
+  de: 'Jahresdokument, Ausgabe 2026',
+  fr: 'document annuel, édition 2026',
 };
 
 test('pharmacy evergreen: ogni guida localizzata espone scope, fonti, semantica e link operativi', () => {
@@ -106,13 +141,13 @@ test('pharmacy evergreen: il builder è idempotente e non muta gli snapshot', ()
 
   assert.equal(JSON.stringify(once), JSON.stringify(twice));
   assert.equal(JSON.stringify(snapshots), before);
-  assert.equal(once[0]._snapshotUpdatedAt, '2026-09-14T18:16:05.788Z');
-  assert.equal(once[0].date, '2026-09-14');
+  assert.equal(once[0]._snapshotUpdatedAt, '2026-09-15T09:40:29.571Z');
+  assert.equal(once[0].date, '2026-09-15');
 });
 
 test('pharmacy evergreen: il clock di validazione del builder è iniettato', () => {
   const snapshots = readFixturePair();
-  const nowMs = Date.parse('2026-09-14T18:20:00.000Z');
+  const nowMs = Date.parse('2026-09-15T09:41:00.000Z');
   let calls = 0;
   const guides = buildPharmacyEvergreenGuides(snapshots, {
     now: () => {
@@ -121,8 +156,26 @@ test('pharmacy evergreen: il clock di validazione del builder è iniettato', () 
     },
   });
 
-  assert.equal(guides.length, 4);
+  assert.equal(guides.length, 5);
   assert.equal(calls, 1, 'la validazione deve usare il clock esplicito una sola volta');
+});
+
+test('pharmacy evergreen: la guida Svizzera collega ogni fonte senza inventare un calendario', () => {
+  const guide = buildPharmacyEvergreenGuides(loadPharmacySnapshots())
+    .find((item) => item.id === 'farmacie-turno-svizzera-confine-italiano');
+  assert.ok(guide, 'la quinta guida stabile deve essere prodotta');
+
+  for (const locale of PHARMACY_LOCALES) {
+    const text = allArticleText(guide, locale);
+    for (const url of [...SWISS_CANTON_URLS, ...ITALIAN_SOURCE_URLS]) {
+      assert.match(text, new RegExp(escaped(url)), `${locale}: ${url}`);
+    }
+    assert.match(text, /Mendrisiotto.*Luganese.*Bellinzonese.*Biasca e Valli.*Locarnese/s);
+    assert.match(text, new RegExp(escaped(ANNUAL_SOURCE_NOTES[locale]), 'i'));
+    assert.match(text, /Locarnese/);
+    assert.match(text, /OW.*NW.*GL.*AR.*AI.*BL.*SH.*SG/s);
+    assert.match(text, /144/);
+  }
 });
 
 test('pharmacy evergreen: snapshot mancante — il producer chiude prima della scrittura', () => {
@@ -155,7 +208,7 @@ test('pharmacy evergreen: scope inatteso o fonte in errore — guardia fail-clos
     );
 
     const wrongDuty = structuredClone(duty);
-    wrongDuty.scope.includedRegions = [...EXPECTED_DUTY_REGIONS, 'Locarnese'];
+    wrongDuty.scope.includedRegions = [...EXPECTED_DUTY_REGIONS, 'Sopraceneri'];
     const wrongDutyPath = path.join(tempDir, 'wrong-duty-scope.json');
     fs.writeFileSync(wrongDutyPath, JSON.stringify(wrongDuty));
     assert.throws(
@@ -174,6 +227,72 @@ test('pharmacy evergreen: scope inatteso o fonte in errore — guardia fail-clos
   } finally {
     fs.rmSync(tempDir, { recursive: true, force: true });
   }
+});
+
+test('pharmacy evergreen: l’evidenza Locarnese prova identità univoche senza copiare indirizzi', () => {
+  const snapshots = readFixturePair();
+  const evidence = snapshots.duty.derivationEvidence.Locarnese;
+  assert.equal(evidence.records.length, EXPECTED_LOCARNESE_DERIVED_RECORD_COUNT);
+  assert.doesNotThrow(() => validatePharmacySnapshots(snapshots));
+
+  const duplicate = structuredClone(snapshots);
+  duplicate.duty.derivationEvidence.Locarnese.records[1].source =
+    structuredClone(duplicate.duty.derivationEvidence.Locarnese.records[0].source);
+  assert.throws(
+    () => validatePharmacySnapshots(duplicate),
+    /identità Farmacia\+Località source duplicata/,
+  );
+
+  const ambiguous = structuredClone(snapshots);
+  ambiguous.duty.derivationEvidence.Locarnese.records[0].catalog.matchCount = 2;
+  assert.throws(
+    () => validatePharmacySnapshots(ambiguous),
+    /catalog\.matchCount deve essere 1/,
+  );
+
+  const arbitraryPair = structuredClone(snapshots);
+  const records = arbitraryPair.duty.derivationEvidence.Locarnese.records;
+  [records[0].catalog, records[4].catalog] = [records[4].catalog, records[0].catalog];
+  [records[0].matchKey, records[4].matchKey] = [records[4].matchKey, records[0].matchKey];
+  assert.throws(
+    () => validatePharmacySnapshots(arbitraryPair),
+    /source\/catalog non corrisponde al record reale del catalogo/,
+  );
+
+  const fabricated = structuredClone(snapshots);
+  fabricated.duty.derivationEvidence.Locarnese.records[0].catalog = {
+    pharmacy: 'Farmacia Inventata',
+    locality: 'Ascona',
+    matchCount: 1,
+  };
+  fabricated.duty.derivationEvidence.Locarnese.records[0].matchKey =
+    'ticino|ascona|farmacia inventata';
+  assert.throws(
+    () => validatePharmacySnapshots(fabricated),
+    /source ha 1 corrispondenze nel catalogo reale|source\/catalog non corrisponde al record reale del catalogo/,
+  );
+
+  const missingIdentityIndex = structuredClone(snapshots);
+  delete missingIdentityIndex.catalog.catalogues[0].identityRecords;
+  assert.throws(
+    () => validatePharmacySnapshots(missingIdentityIndex),
+    /catalogo Ticino\.identityRecords mancante/,
+  );
+
+  const copiedAddress = structuredClone(snapshots);
+  copiedAddress.duty.derivationEvidence.Locarnese.records[0].addressCopied = true;
+  assert.throws(
+    () => validatePharmacySnapshots(copiedAddress),
+    /addressCopied deve essere false/,
+  );
+
+  const noteOnly = structuredClone(snapshots);
+  delete noteOnly.duty.derivationEvidence;
+  noteOnly.duty.sourceNotes = { Locarnese: 'matching univoco e nessun indirizzo copiato' };
+  assert.throws(
+    () => validatePharmacySnapshots(noteOnly),
+    /evidenza strutturata dei record derivati/,
+  );
 });
 
 test('pharmacy evergreen: completezza e warning sono guardati fail-closed', () => {
@@ -218,7 +337,7 @@ test('pharmacy evergreen: completezza e warning sono guardati fail-closed', () =
 
 test('pharmacy evergreen: timestamp futuro oltre la tolleranza blocca il producer', () => {
   const snapshots = readFixturePair();
-  const nowMs = Date.parse('2026-09-14T18:16:05.788Z');
+  const nowMs = Date.parse('2026-09-15T09:41:00.000Z');
   const future = structuredClone(snapshots);
   future.catalog.catalogues[0].fetchedAt = new Date(
     nowMs + SNAPSHOT_FUTURE_TOLERANCE_MS + 1,
@@ -229,9 +348,12 @@ test('pharmacy evergreen: timestamp futuro oltre la tolleranza blocca il produce
   );
 
   const withinTolerance = structuredClone(snapshots);
-  withinTolerance.catalog.catalogues[0].fetchedAt = new Date(
+  const withinToleranceTimestamp = new Date(
     nowMs + SNAPSHOT_FUTURE_TOLERANCE_MS,
   ).toISOString();
+  withinTolerance.catalog.catalogues[0].fetchedAt = withinToleranceTimestamp;
+  withinTolerance.catalog.catalogues[0].identityRecordsFetchedAt = withinToleranceTimestamp;
+  withinTolerance.duty.derivationEvidence.Locarnese.catalogFetchedAt = withinToleranceTimestamp;
   assert.doesNotThrow(
     () => validatePharmacySnapshots(withinTolerance, { nowMs }),
     'un clock skew entro la tolleranza esplicita resta accettabile',

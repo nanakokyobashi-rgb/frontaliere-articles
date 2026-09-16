@@ -1,0 +1,284 @@
+name: Bing SEO title closed loop
+
+# The corpus is the only owner of article title source strings. This workflow
+# audits the live publisher surface, applies only the approved deterministic
+# map and opens a normal PR for the existing review/auto-merge loop.
+on:
+  schedule:
+    - cron: '45 4 * * *'
+  workflow_dispatch:
+    inputs:
+      apply_fixes:
+        description: 'Open a PR for the approved title map'
+        required: false
+        default: true
+        type: boolean
+
+concurrency:
+  group: bing-seo-title-loop
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          sparse-checkout: |
+            AGENTS.md
+            .github/workflows/bing-seo-loop.yml
+            .github/workflows/publish-api.yml
+            content/
+            scripts/seo/
+            generator/tests/bing-seo-loop.test.mjs
+            generator/tests/article-fabrication-guard.test.mjs
+            generator/tests/prompt-placeholder-guard.test.mjs
+            generator/tests/lib/expect-shim.mjs
+            generator/scripts/create-article.mjs
+            generator/scripts/load-rc-env.mjs
+            generator/scripts/lib/google-service-account-token.mjs
+            generator/scripts/repair-prompt-placeholders.mjs
+            generator/scripts/lib/prompt-placeholder-guard.mjs
+          sparse-checkout-cone-mode: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      - name: Prepare Firebase credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -n "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > /tmp/firebase-sa.json
+            echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/firebase-sa.json" >> "$GITHUB_ENV"
+          else
+            echo "::warning::Remote Config non disponibile; il loop potrà solo verificare."
+          fi
+
+      - name: Load secrets from Remote Config
+        continue-on-error: true
+        run: node generator/scripts/load-rc-env.mjs
+
+      - name: Check deterministic source policy
+        id: source
+        continue-on-error: true
+        run: node scripts/seo/bing-seo-loop.mjs --check-source
+
+      - name: Run corpus regression test
+        run: node --test generator/tests/bing-seo-loop.test.mjs
+
+      - name: Audit production titles
+        id: audit
+        continue-on-error: true
+        run: node scripts/seo/bing-seo-loop.mjs --audit-live --report "$RUNNER_TEMP/bing-seo-title-report.json"
+
+      - name: Upload live report
+        if: always()
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: bing-seo-title-report
+          path: ${{ runner.temp }}/bing-seo-title-report.json
+          if-no-files-found: warn
+
+      - name: Apply approved title corrections
+        id: apply
+        if: ${{ github.event_name == 'schedule' || inputs.apply_fixes == true }}
+        run: |
+          set -euo pipefail
+          git config user.name 'frontaliere-automation[bot]'
+          git config user.email 'frontaliere-automation[bot]@users.noreply.github.com'
+          git fetch origin main
+          branch='automation/bing-seo-titles'
+          if git ls-remote --exit-code --heads origin "$branch" >/dev/null 2>&1; then
+            git fetch origin "$branch"
+            git switch --create "$branch" --track "origin/$branch"
+            git rebase origin/main
+          else
+            git switch --create "$branch" origin/main
+          fi
+          node scripts/seo/bing-seo-loop.mjs --apply-fixes
+
+      # This workflow writes published metadata and SEO source files directly
+      # before opening the PR. The producer-wide contract therefore applies
+      # here too: both corpus guards must inspect the complete corpus before
+      # this workflow commits anything. The sparse checkout above includes
+      # exactly the guard inputs, so a missing file cannot become a false green.
+      - name: Guard — le correzioni Bing non raggiungono main se violano le guardie
+        id: guard
+        if: ${{ github.event_name == 'schedule' || inputs.apply_fixes == true }}
+        run: |
+          set -uo pipefail
+          if [ -z "$(git status --porcelain -- content/)" ]; then
+            echo "nessuna scrittura sotto content/ in questo run — niente da validare"
+            exit 0
+          fi
+          git status --porcelain -- content/ | head -20 || true
+          if node --test \
+            generator/tests/article-fabrication-guard.test.mjs \
+            generator/tests/prompt-placeholder-guard.test.mjs; then
+            exit 0
+          fi
+          {
+            echo "### ✖ Scrittura RIFIUTATA prima del commit — \`bing-seo-loop\`"
+            echo
+            echo "\`article-fabrication-guard\` / \`prompt-placeholder-guard\` hanno trovato offender nel corpus dopo la scrittura."
+            echo "**Niente e' stato committato**: le correzioni restano sul runner e spariscono con lui, \`main\` non le vede."
+            echo
+            echo "Gli offender sono elencati per path nel log di questo step. Confrontali con i path stampati sopra da \`git status\`."
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit 1
+
+      - name: Open PR for approved title corrections
+        id: reconcile
+        if: ${{ github.event_name == 'schedule' || inputs.apply_fixes == true }}
+        env:
+          AUDIT_OUTCOME: ${{ steps.audit.outcome }}
+          SOURCE_OUTCOME: ${{ steps.source.outcome }}
+        run: |
+          set -euo pipefail
+          echo 'republished=false' >> "$GITHUB_OUTPUT"
+          branch='automation/bing-seo-titles'
+          working_content_diff='false'
+          if [ -n "$(git status --porcelain -- content/)" ]; then
+            working_content_diff='true'
+          fi
+          committed_content_diff='false'
+          if ! git diff --quiet origin/main...HEAD -- content/; then
+            committed_content_diff='true'
+          fi
+          if [ "$SOURCE_OUTCOME" = 'failure' ] \
+            && [ "$working_content_diff" = 'false' ] \
+            && [ "$committed_content_diff" = 'false' ]; then
+            echo '::error::La policy sorgente è fallita senza diff da proporre: il loop non può dichiararsi verde.'
+            exit 1
+          fi
+          if [ "$working_content_diff" = 'false' ] && [ "$committed_content_diff" = 'false' ]; then
+            if [ "$AUDIT_OUTCOME" = 'failure' ]; then
+              token="${GITHUB_PAT_NANAKO:-}"
+              if [ -z "$token" ]; then
+                echo '::error::Manca GITHUB_PAT_NANAKO per il republish verificabile del publisher.'
+                exit 1
+              fi
+              export GH_TOKEN="$token"
+              dispatch_nonce="bing-seo-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-$(date -u +%Y%m%dT%H%M%SZ)"
+              gh workflow run publish-api.yml --repo "$GITHUB_REPOSITORY" --ref main \
+                -f bing_seo_nonce="$dispatch_nonce"
+              publish_run=''
+              for attempt in $(seq 1 24); do
+                echo "Cerco la run publish-api.yml dopo il dispatch (tentativo $attempt/24)."
+                publish_run="$(gh run list --repo "$GITHUB_REPOSITORY" --workflow publish-api.yml --event workflow_dispatch --branch main --limit 100 --json databaseId,displayTitle --jq "map(select(.displayTitle | contains(\"$dispatch_nonce\"))) | first | .databaseId // empty" 2>/dev/null || true)"
+                if [ -n "$publish_run" ]; then
+                  break
+                fi
+                sleep 5
+              done
+              if [ -z "$publish_run" ]; then
+                echo '::error::Il dispatch di publish-api.yml non ha prodotto una run verificabile.'
+                exit 1
+              fi
+              gh run watch "$publish_run" --repo "$GITHUB_REPOSITORY" --interval 10 --exit-status
+              node scripts/seo/bing-seo-loop.mjs --audit-live --report "$RUNNER_TEMP/bing-seo-title-post-republish-report.json"
+              echo 'republished=true' >> "$GITHUB_OUTPUT"
+            else
+              echo 'Nessuna correzione titolo da proporre.'
+            fi
+            exit 0
+          fi
+          token="${GITHUB_PAT_NANAKO:-}"
+          if [ -z "$token" ]; then
+            echo '::error::Manca GITHUB_PAT_NANAKO per la PR del publisher.'
+            exit 1
+          fi
+          export GH_TOKEN="$token"
+          expected_remote_tip=''
+          if git show-ref --verify --quiet "refs/remotes/origin/$branch"; then
+            expected_remote_tip="$(git rev-parse "refs/remotes/origin/$branch")"
+          fi
+          git remote set-url origin "https://x-access-token:$token@github.com/$GITHUB_REPOSITORY.git"
+          if [ "$working_content_diff" = 'true' ]; then
+            git add content/
+            git commit -m 'fix(seo): shorten Bing article titles'
+          else
+            echo 'Correzioni già committate sul branch automation: riconcilio la PR senza ricreare il commit.'
+          fi
+          if [ "$working_content_diff" = 'true' ] || [ "$committed_content_diff" = 'true' ]; then
+            if [ -n "$expected_remote_tip" ]; then
+              git push --force-with-lease="refs/heads/$branch:$expected_remote_tip" origin "$branch"
+            else
+              git push origin "$branch"
+            fi
+          fi
+          autofix_label='agent:autofix'
+          ensure_autofix_label() {
+            if gh label list --repo "$GITHUB_REPOSITORY" --limit 1000 --json name \
+              --jq 'any(.[]; .name == "agent:autofix")' | grep -qx true; then
+              return 0
+            fi
+            # A concurrent run may create it between the check and this call;
+            # the authoritative check below makes that race idempotent.
+            gh label create "$autofix_label" --repo "$GITHUB_REPOSITORY" \
+              --color B60205 --description 'PR automatica da un loop fail-closed' \
+              >/dev/null 2>&1 || true
+            if ! gh label list --repo "$GITHUB_REPOSITORY" --limit 1000 --json name \
+              --jq 'any(.[]; .name == "agent:autofix")' | grep -qx true; then
+              echo "::error::Impossibile garantire il label agent:autofix: nessuna PR verrà creata o lasciata senza provenance."
+              return 1
+            fi
+          }
+          ensure_autofix_label
+          pr_count="$(gh pr list --repo "$GITHUB_REPOSITORY" --state open --head "$branch" --json number --jq 'length')"
+          if [ "$pr_count" = '0' ]; then
+            body="$RUNNER_TEMP/bing-seo-titles-pr-body.md"
+            cat > "$body" <<'BODY'
+          ## Implementato
+          - Riduce alla soglia Bing di 66 caratteri i 16 titoli osservati, mantenendo una sorgente approvata per locale e allineando title, ogTitle e headline italiani.
+          - Aggiunge audit live di title, canonical, status e propagazione del valore sorgente, con applicazione fail-closed e test Node senza dipendenze.
+          - Esegue entrambe le guardie del corpus prima del commit, con il checkout completo degli input che le guardie devono scansionare.
+
+          ## Non implementato (ancora)
+          - Nessuno: per scelta, nessun residuo in questa PR.
+          BODY
+            gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$branch" \
+              --title 'fix(seo): shorten Bing article titles' --body-file "$body" \
+              --label "$autofix_label"
+          fi
+          pr_number="$(gh pr list --repo "$GITHUB_REPOSITORY" --state open --head "$branch" --json number --jq '.[0].number')"
+          if [ -z "$pr_number" ]; then
+            echo '::error::La PR del publisher non è verificabile dopo create/reconcile.'
+            exit 1
+          fi
+          # Always reconcile an already-open PR as well: a previous failed
+          # edit is retried on the next run, without creating a duplicate PR.
+          gh pr edit --repo "$GITHUB_REPOSITORY" "$pr_number" --add-label "$autofix_label"
+
+      - name: Upload post-republish report
+        if: always()
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: bing-seo-title-post-republish-report
+          path: ${{ runner.temp }}/bing-seo-title-post-republish-report.json
+          if-no-files-found: warn
+
+      - name: Report unresolved live findings
+        if: (steps.audit.outcome == 'failure' || steps.source.outcome == 'failure') && steps.reconcile.outputs.republished != 'true'
+        run: echo "::warning::La policy sorgente o la superficie live ha ancora finding; il report è allegato e il ciclo successivo riverificherà dopo la pubblicazione API."
+
+      - name: Fail audit-only manual dispatch on unresolved findings
+        if: github.event_name == 'workflow_dispatch' && inputs.apply_fixes == false && (steps.audit.outcome == 'failure' || steps.source.outcome == 'failure')
+        run: |
+          echo '::error::Audit-only Bing SEO fallito: la superficie o la policy sorgente richiede riconciliazione.'
+          exit 1

@@ -9,6 +9,8 @@ import {
   reviewHasLgtm,
   reviewHasZeroFindings,
   reviewIsApproved,
+  isTransientGithubReadError,
+  withTransientGithubReadRetry,
 } from '../../scripts/ci/native-automerge-gate.mjs';
 
 const HEAD = 'a'.repeat(40);
@@ -86,4 +88,40 @@ test('richiede il riepilogo esplicito e vincola l opt-in alla HEAD verificata', 
 test('riconosce solo la risposta concorrente documentata', () => {
   assert.equal(isAlreadyInProgressOutput('GraphQL: Merge already in progress (mergePullRequest)'), true);
   assert.equal(isAlreadyInProgressOutput('GraphQL: Pull request is not mergeable'), false);
+});
+
+test('ritenta solo letture GitHub transitorie con un limite esplicito', () => {
+  const transient = Object.assign(new Error('gh failed'), {
+    stderr: 'HTTP 503: 503 Service Unavailable',
+  });
+  const permanent = Object.assign(new Error('gh failed'), {
+    stderr: 'HTTP 403: 403 Forbidden',
+  });
+  const sleeps = [];
+  let attempts = 0;
+
+  const result = withTransientGithubReadRetry(() => {
+    attempts += 1;
+    if (attempts < 3) throw transient;
+    return 'ok';
+  }, { sleep: (delayMs) => sleeps.push(delayMs) });
+
+  assert.equal(result, 'ok');
+  assert.equal(attempts, 3);
+  assert.deepEqual(sleeps, [250, 750]);
+  assert.equal(isTransientGithubReadError(transient), true);
+  assert.equal(isTransientGithubReadError(permanent), false);
+});
+
+test('lascia fail-closed un errore GitHub permanente senza ritentarlo', () => {
+  const permanent = Object.assign(new Error('gh failed'), {
+    stderr: 'HTTP 403: 403 Forbidden',
+  });
+  let attempts = 0;
+
+  assert.throws(() => withTransientGithubReadRetry(() => {
+    attempts += 1;
+    throw permanent;
+  }, { sleep: () => undefined }), /gh failed/);
+  assert.equal(attempts, 1);
 });

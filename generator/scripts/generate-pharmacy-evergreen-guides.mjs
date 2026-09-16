@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
- * Register or refresh the four evergreen pharmacy guides.
+ * Register or refresh the five evergreen pharmacy guides.
  *
  * The IDs are stable: a first run goes through registerArticleFiles(), while
- * later runs atomically refresh the four body files, descriptive meta/SEO and
+ * later runs atomically refresh the five body files, descriptive meta/SEO and
  * freshness markers.  The content is sourced only from the validated compact
  * snapshots in generator/data; no weekly dated article is created here.
  *
@@ -113,7 +113,7 @@ function stageCorpusFile(transaction, file, content) {
   transaction.stage(file, clean);
 }
 
-/** Rewrite the four localized body chunks without re-registering the article. */
+/** Rewrite the five localized body chunks without re-registering the article. */
 export function refreshBodyFiles(data, repoRoot = REPO_ROOT, log = console.log, writeFile = writeBodyFile) {
   sanitizePromptPlaceholders(data);
   assertGeneratedArticleQuality(data);
@@ -224,7 +224,7 @@ async function main() {
   const guides = buildPharmacyEvergreenGuides(snapshots);
 
   // Validate every guide before the first write, so a bad localized payload
-  // cannot leave a partially registered four-guide batch behind.
+  // cannot leave a partially registered five-guide batch behind.
   for (const guide of guides) preflight(guide);
   if (!dryRun) resolveRegisterLockAtStartup();
 
