@@ -40,16 +40,32 @@ import { networkInterfaces } from 'node:os';
 import { readFileSync } from 'node:fs';
 
 import {
+  AI_MODELS,
   classifyHostUnreachable,
   classifyResolverResetEvidence,
   classifyTransientResolver,
   classifyExhaustionCause,
-  callLLM,
+  callLLM as callLLMImpl,
   isQuotaExhaustedError,
   getStats,
   printRunSummary,
   resetState,
 } from '../scripts/lib/ai-models.mjs';
+
+const GH_MODELS_INFERENCE_HOST = 'models.github.ai/inference';
+const GH_MODELS_TEST_CATALOG = [
+  ...new Set([
+    ...Object.values(AI_MODELS),
+    'o4-mini',
+    'phi-4',
+  ]),
+].filter((id) => typeof id === 'string' && !id.includes('/') && !/^(gemini|gemma)-/.test(id))
+  .map((id) => ({ id: `observed/${id}` }));
+
+const callLLM = (messages, opts = {}) => callLLMImpl(messages, {
+  ...opts,
+  githubModelsCatalog: GH_MODELS_TEST_CATALOG,
+});
 
 // La forma REALE che undici produce: il codice syscall vive due livelli sotto.
 function undiciFetchFailed(code) {
@@ -133,7 +149,7 @@ describe('callLLM contro un host che non accetta connessioni', () => {
   // Solo le chiamate all'host GitHub. La model-discovery all'avvio passa dallo
   // stesso `globalThis.fetch` e contarla renderebbe il numero illeggibile —
   // ed e' proprio il numero cio' che questo test misura.
-  const ghCalls = () => fetchCalls.filter((u) => u.includes('models.inference.ai.azure.com'));
+  const ghCalls = () => fetchCalls.filter((u) => u.includes(GH_MODELS_INFERENCE_HOST));
 
   beforeEach(() => {
     envBackup = Object.fromEntries(ENV_KEYS.map((k) => [k, process.env[k]]));
@@ -277,7 +293,7 @@ describe('callLLM contro un resolver che inciampa (#770)', () => {
   let envBackup = {};
   let realFetch;
   let fetchCalls;
-  const ghCalls = () => fetchCalls.filter((u) => u.includes('models.inference.ai.azure.com'));
+  const ghCalls = () => fetchCalls.filter((u) => u.includes(GH_MODELS_INFERENCE_HOST));
 
   beforeEach(() => {
     envBackup = Object.fromEntries(ENV_KEYS.map((k) => [k, process.env[k]]));
@@ -507,7 +523,7 @@ describe('_callGitHub multi-PAT e il verdetto sull\'host', () => {
   // morti verso lo stesso host — esattamente il costo che #475 ha tolto.
   it('un connect rifiutato non ruota sul secondo PAT e arma il breaker', async () => {
     globalThis.fetch = async (url, init) => {
-      if (String(url).includes('models.inference.ai.azure.com')) {
+      if (String(url).includes(GH_MODELS_INFERENCE_HOST)) {
         auths.push(init?.headers?.Authorization || init?.headers?.authorization || '');
         throw undiciFetchFailed('ECONNREFUSED');
       }
@@ -528,7 +544,7 @@ describe('_callGitHub multi-PAT e il verdetto sull\'host', () => {
   // niente sull'host. E' la riga che separa le due classi.
   it('un 429 del primo PAT ruota sul secondo invece di giudicare l\'host', async () => {
     globalThis.fetch = async (url, init) => {
-      if (!String(url).includes('models.inference.ai.azure.com')) throw undiciFetchFailed('ECONNREFUSED');
+      if (!String(url).includes(GH_MODELS_INFERENCE_HOST)) throw undiciFetchFailed('ECONNREFUSED');
       const auth = String(init?.headers?.Authorization || init?.headers?.authorization || '');
       auths.push(auth);
       if (auth.includes('pat-uno')) return new Response('rate limit exceeded', { status: 429 });
@@ -596,7 +612,7 @@ describe('promozione della causa del cooldown (#787)', () => {
 
   it('un 429 seguito da un host morto fa votare i fratelli PERSISTENTE', async () => {
     globalThis.fetch = async (url) => {
-      if (!String(url).includes('models.inference.ai.azure.com')) throw undiciFetchFailed('ENOTFOUND');
+      if (!String(url).includes(GH_MODELS_INFERENCE_HOST)) throw undiciFetchFailed('ENOTFOUND');
       ghCalls += 1;
       // 1° tentativo: 429 → apre il cooldown del provider con causa transitoria
       // e ritenta DENTRO lo stesso modello (nessun re-check pre-flight).
@@ -648,7 +664,7 @@ describe('promozione della causa del cooldown (#787)', () => {
     const late429 = new Promise((resolve) => { releaseLate429 = resolve; });
     const inFlight429 = new Promise((resolve) => { enter429 = resolve; });
     globalThis.fetch = async (url, init) => {
-      if (!String(url).includes('models.inference.ai.azure.com')) throw undiciFetchFailed('ENOTFOUND');
+      if (!String(url).includes(GH_MODELS_INFERENCE_HOST)) throw undiciFetchFailed('ENOTFOUND');
       ghCalls += 1;
       if (String(init?.body || '').includes('gpt-4o-mini')) throw undiciFetchFailed('ENOTFOUND');
       enter429();
@@ -718,7 +734,7 @@ describe('durata del cooldown per causa (#803)', () => {
   let envBackup = {};
   let realFetch;
   let fetchCalls;
-  const ghCalls = () => fetchCalls.filter((u) => u.includes('models.inference.ai.azure.com'));
+  const ghCalls = () => fetchCalls.filter((u) => u.includes(GH_MODELS_INFERENCE_HOST));
 
   beforeEach(() => {
     envBackup = Object.fromEntries(ENV_KEYS.map((k) => [k, process.env[k]]));
@@ -820,7 +836,7 @@ describe('durata del cooldown per causa (#803)', () => {
     // la prova guarderebbe una finestra che non e' mai stata aperta.
     const OPTS_429 = { ...OPTS, maxRetriesPerModel: 2 };
     globalThis.fetch = async (url) => {
-      if (!String(url).includes('models.inference.ai.azure.com')) throw undiciFetchFailed('ENOTFOUND');
+      if (!String(url).includes(GH_MODELS_INFERENCE_HOST)) throw undiciFetchFailed('ENOTFOUND');
       fetchCalls.push(String(url));
       return new Response('rate limit exceeded', { status: 429 });
     };
@@ -869,7 +885,7 @@ describe('durata del cooldown per causa (#803)', () => {
     const late429 = new Promise((resolve) => { release429 = resolve; });
     const inFlight429 = new Promise((resolve) => { enter429 = resolve; });
     globalThis.fetch = async (url, init) => {
-      if (!String(url).includes('models.inference.ai.azure.com')) throw undiciFetchFailed('EAI_AGAIN');
+      if (!String(url).includes(GH_MODELS_INFERENCE_HOST)) throw undiciFetchFailed('EAI_AGAIN');
       fetchCalls.push(String(url));
       // Solo `phi-4` porta il 429, e resta appeso al gate finche' la finestra
       // del flap non e' quasi scaduta: e' la forma reale — le chiamate corrono

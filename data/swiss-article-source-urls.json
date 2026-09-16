@@ -1,29 +1,4 @@
 {
-  "https://www.tio.ch/sport/calcio/1944472/infantino-fifa-lamour-critiche-kevin": "infantino-fifa-lamour-licenziato",
-  "https://www.rsi.ch/info/salute/dolce-far-niente-ecco-perch%c3%a9-fermarsi-fa-bene--3949560.html": "dolce-far-niente-benessere-svizzera",
-  "https://www.tio.ch/ticino/attualita/1940625/dagli-aumenti-alle-liti-in-casa-come-evitare-che-un-affitto-finisca-in-tribunale": "diritto-locazione-conciliazione-ticino",
-  "https://www.tio.ch/svizzera/economia/1944505/addebito-app-twint-pagamenti-utenti": "twint-addebito-diretto",
-  "https://www.tio.ch/newsblog/valute-e-frontiere/1944282/dazi-agosto-aliquota-tetto-svizzera-rischio-resta": "dazi-usa-svizzera-2026",
-  "https://www.admin.ch/it/newnsb/nwb0mjvyloazqobnrdpdb": "occupazione-disoccupazione-svizzera-q2-2026",
-  "https://www.swissinfo.ch/ita/ust%3a-cala-disoccupazione-nel-secondo-trimestre-dell%27anno/91913166": "calo-disoccupazione-svizzera-secondo-trimestre",
-  "https://www.rsi.ch/s/3995235": "twint-addebito-diretto-2027",
-  "https://www.tio.ch/svizzera/attualita/1944512/apprendisti-le-istruzioni-non-bastano-vanno-seguiti-da-vicino": "apprendisti-istruzioni-sicurezza",
-  "https://www.rsi.ch/info/svizzera/cassa-malati-elettricit%c3%a0-abbonamenti-twint-lancia-l%e2%80%99addebito-diretto--3995235.html": "twint-addebito-diretto-fatture",
-  "https://www.tio.ch/ticino/attualita/1944534/la-fondazione-centro-studi-villa-negroni-si-associa-alla-supsi": "la-fondazione-centro-studi-villa-negroni-si-associa-alla-supsi",
-  "https://www.tio.ch/svizzera/cronaca/1944506/italia-svizzera-asilo-richiedenti-governo": "svizzera-trasferimento-richiedenti-asilo-italia",
-  "https://www.rsi.ch/s/3995190": "italia-rimpatrio-asilo",
-  "https://www.admin.ch/it/newnsb/f-gc331fsl8o": "asilo-statistica-luglio-2026",
-  "https://www.rsi.ch/s/3995136": "cassis-neutralita",
-  "https://www.tio.ch/svizzera/politica/1944654/iniziativa-commissione-contanti-servizio-obbligo": {
-    "articleId": "servizio-pubblico-obbligo-contanti",
-    "ts": "2026-08-18T16:14:58.528Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/politica/1944655/blocco-dei-trasferimenti-migranti-quadri-quanto-e-costato-alla-svizzera": {
-    "articleId": "costi-blocco-trasferimenti-asilo",
-    "ts": "2026-08-18T18:10:58.429Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/gr%3a-ospedale-cantonale%2c-un-cantiere-di-12-anni-verso-il-traguardo/91915775": {
     "articleId": "ospedale-grigioni-ampliamento-2026",
     "ts": "2026-08-18T19:20:17.658Z",
@@ -2255,8 +2230,8 @@
     "keyForm": 2
   },
   "https://www.tvsvizzera.it/tvs/svizzera-istruzioni-per-luso": {
-    "articleId": "svizzera-corruzione-restituzione-banche",
-    "ts": "2026-09-09T23:35:39.102Z",
+    "articleId": "lotta-denaro-sporco-svizzera",
+    "ts": "2026-09-16T02:34:31.750Z",
     "keyForm": 2
   },
   "https://www.tio.ch/svizzera/politica/1949060/federale-essere-amherd-consiglio-prescrizione-consigliera-viola-chiede-acquisto-f-35": {
@@ -2437,6 +2412,91 @@
   "https://www.rsi.ch/s/4082782": {
     "articleId": "tassi-interesse-svizzera-bassi",
     "ts": "2026-09-14T19:40:31.778Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4079924": {
+    "articleId": "cartella-sanitaria-mercosur-parlamento",
+    "ts": "2026-09-15T00:10:32.515Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/cn%3a-ok-a-nuova-cartella-sanitaria-elettronica%2c-sostituir%c3%a0-cip/92056996": {
+    "articleId": "consiglio-nazionale-cartella-sanitaria",
+    "ts": "2026-09-15T00:26:33.371Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4082713": {
+    "articleId": "ssr-risparmi-270-milioni-2029",
+    "ts": "2026-09-15T01:03:03.335Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/rubriche/ospite/1950107/premi-politica-continua-responsabilita-salute": {
+    "articleId": "premi-lamal-politica-responsabilita",
+    "ts": "2026-09-15T01:18:20.269Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1949972/titolo-formazione-anni-ii-eta-reddito-ust-migliora": {
+    "articleId": "formazione-adulta-reddito-svizzera",
+    "ts": "2026-09-15T08:04:36.887Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/ocse-vede-pi%c3%b9-crescita-in-svizzera%2c-pil-2026-%2b2%2c0%25/92063355": {
+    "articleId": "ocse-crescita-svizzera-2026",
+    "ts": "2026-09-16T00:19:29.366Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/tgijvny5fjil": {
+    "articleId": "ocse-rapporto-svizzera-2026",
+    "ts": "2026-09-16T00:28:43.235Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/crescita-in-svizzera%2c-bak-economics-alza-nettamente-le-stime/92060939": {
+    "articleId": "bak-economics-pil-2026-18",
+    "ts": "2026-09-16T00:54:45.042Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4086802": {
+    "articleId": "too-big-to-fail-consiglio-stati",
+    "ts": "2026-09-16T01:04:39.901Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1950332/bns-aumento-tassi-ubs-tasso": {
+    "articleId": "bns-tassi-interessi-ubs",
+    "ts": "2026-09-16T01:12:05.010Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4086604": {
+    "articleId": "vaccini-antinfluenzali-ritardo-svizzera",
+    "ts": "2026-09-16T01:22:19.350Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4085818": {
+    "articleId": "ruag-riorganizzazione-tagli-posti",
+    "ts": "2026-09-16T01:29:58.339Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/jyzpuh-clp7c": {
+    "articleId": "consiglio-federale-obiettivi-2027",
+    "ts": "2026-09-16T01:40:06.867Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1950325/online-migros-nuovo-colosso-strutture": {
+    "articleId": "migros-ristruttura-online-retail",
+    "ts": "2026-09-16T01:48:49.535Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1950337/svizzera-domanda-turismo-estate-destinazioni": {
+    "articleId": "turismo-svizzera-estate-normalizzazione",
+    "ts": "2026-09-16T02:14:12.187Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/cronaca/1950305/esercitazione-polizia-sicurezza-esercito-collaborazione-risultati": {
+    "articleId": "fides-26-polizia-esercito-berna",
+    "ts": "2026-09-16T02:26:07.712Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4086055": {
+    "articleId": "calcio-hockey-svizzera-economia-pubblico",
+    "ts": "2026-09-16T02:41:41.933Z",
     "keyForm": 2
   }
 }

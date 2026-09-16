@@ -62,33 +62,67 @@ jobs:
           gate_tmp="$helper_dir/native-automerge-gate-check.mjs"
           policy_tmp="$helper_dir/review-test-policy-check.mjs"
           files_tmp="$helper_dir/lib/fetchPrFiles-check.mjs"
-          if gh api "repos/${GITHUB_REPOSITORY}/contents/scripts/ci/native-automerge-gate.mjs?ref=main" \
-            --header 'Accept: application/vnd.github.raw+json' \
-            > "$gate_tmp" \
-            && gh api "repos/${GITHUB_REPOSITORY}/contents/scripts/ci/review-test-policy.mjs?ref=main" \
-            --header 'Accept: application/vnd.github.raw+json' \
-            > "$policy_tmp" \
-            && gh api "repos/${GITHUB_REPOSITORY}/contents/scripts/ci/lib/fetchPrFiles.mjs?ref=main" \
-            --header 'Accept: application/vnd.github.raw+json' \
-            > "$files_tmp" \
-            && [ -s "$gate_tmp" ] \
-            && [ -s "$policy_tmp" ] \
-            && [ -s "$files_tmp" ] \
-            && node --check "$gate_tmp" \
-            && node --check "$policy_tmp" \
-            && node --check "$files_tmp"; then
+          vitest_tmp="$helper_dir/lib/vitestCheck-check.mjs"
+          download_and_check() {
+            local path="$1"
+            local destination="$2"
+            gh api "repos/${GITHUB_REPOSITORY}/contents/${path}?ref=main" \
+              --header 'Accept: application/vnd.github.raw+json' \
+              > "$destination" \
+              && [ -s "$destination" ] \
+              && node --check "$destination"
+          }
+
+          # Inspect the parsed module graph, not a text substring: comments and
+          # string literals must not turn the optional dependency into a hard
+          # fetch. A detector error is unknown, and unknown remains fail-closed.
+          gate_requires_vitest=unknown
+          if download_and_check \
+            'scripts/ci/native-automerge-gate.mjs' "$gate_tmp"; then
+            if gate_requires_vitest="$(
+              node --experimental-vm-modules --input-type=module - "$gate_tmp" <<'NODE'
+          import { readFileSync } from 'node:fs';
+          import vm from 'node:vm';
+
+          const source = readFileSync(process.argv[2], 'utf8');
+          const parsed = new vm.SourceTextModule(source);
+          const requests = parsed.moduleRequests?.map(({ specifier }) => specifier)
+            ?? parsed.dependencySpecifiers;
+          if (!Array.isArray(requests)) {
+            throw new Error('Unable to inspect gate module dependencies');
+          }
+          process.stdout.write(requests.includes('./lib/vitestCheck.mjs') ? 'true' : 'false');
+          NODE
+            )"; then
+              case "$gate_requires_vitest" in
+                true|false) ;;
+                *) gate_requires_vitest=unknown ;;
+              esac
+            fi
+          fi
+
+          if { [ "$gate_requires_vitest" = true ] || [ "$gate_requires_vitest" = false ]; } \
+            && download_and_check \
+              'scripts/ci/review-test-policy.mjs' "$policy_tmp" \
+            && download_and_check \
+              'scripts/ci/lib/fetchPrFiles.mjs' "$files_tmp" \
+            && { [ "$gate_requires_vitest" = false ] || download_and_check \
+              'scripts/ci/lib/vitestCheck.mjs' "$vitest_tmp"; }; then
             mv "$gate_tmp" "$helper_dir/native-automerge-gate.mjs"
             mv "$policy_tmp" "$helper_dir/review-test-policy.mjs"
             mv "$files_tmp" "$helper_dir/lib/fetchPrFiles.mjs"
+            if [ "$gate_requires_vitest" = true ]; then
+              mv "$vitest_tmp" "$helper_dir/lib/vitestCheck.mjs"
+            fi
             gh api "repos/${GITHUB_REPOSITORY}/contents/scripts/ci/lib/constants.mjs?ref=main" \
               --header 'Accept: application/vnd.github.raw+json' \
               > "$helper_dir/lib/constants.mjs"
             echo "NATIVE_AUTOMERGE_BOOTSTRAP_READY=true" >> "$GITHUB_ENV"
-            echo 'Native auto-merge gate bootstrap is present on main.'
+            echo "Native auto-merge gate bootstrap is present on main (vitestCheck required: $gate_requires_vitest)."
           else
-            rm -f "$gate_tmp" "$policy_tmp" "$files_tmp" \
+            rm -f "$gate_tmp" "$policy_tmp" "$files_tmp" "$vitest_tmp" \
               "$helper_dir/native-automerge-gate.mjs" "$helper_dir/review-test-policy.mjs" \
-              "$helper_dir/lib/fetchPrFiles.mjs"
+              "$helper_dir/lib/fetchPrFiles.mjs" "$helper_dir/lib/vitestCheck.mjs"
             echo "NATIVE_AUTOMERGE_BOOTSTRAP_READY=false" >> "$GITHUB_ENV"
             echo 'Native auto-merge gate is not installed on main; fail-closed no-op.'
           fi

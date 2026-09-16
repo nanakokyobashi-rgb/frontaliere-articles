@@ -8,6 +8,839 @@
       "sourceUrl": "https://www4.ti.ch/fileadmin/DSS/DSP/UFC/PDF/Elenchi_e_Indirizzi/Lista_Farmacie.pdf",
       "fetchedAt": "2026-09-14T10:03:57.824Z",
       "recordCount": 207,
+      "identityRecords": [
+  {
+    "pharmacy": "Farmacia Amavita dell'Aeroporto",
+    "locality": "Agno"
+  },
+  {
+    "pharmacy": "Farmacia di Agno SA",
+    "locality": "Agno"
+  },
+  {
+    "pharmacy": "Farmacia San Provino SA",
+    "locality": "Agno"
+  },
+  {
+    "pharmacy": "Farmacia Boscolo SA",
+    "locality": "Airolo"
+  },
+  {
+    "pharmacy": "Farmacia Moesa",
+    "locality": "Arbedo Castione"
+  },
+  {
+    "pharmacy": "Farmacia Pellandini",
+    "locality": "Arbedo"
+  },
+  {
+    "pharmacy": "Farmacia della Montagna SA",
+    "locality": "Arzo"
+  },
+  {
+    "pharmacy": "Farmacia Amavita Centro Ascona",
+    "locality": "Ascona"
+  },
+  {
+    "pharmacy": "Farmacia Ascona",
+    "locality": "Ascona"
+  },
+  {
+    "pharmacy": "Farmacia Muraccio",
+    "locality": "Ascona"
+  },
+  {
+    "pharmacy": "Farmacia Nuova",
+    "locality": "Ascona"
+  },
+  {
+    "pharmacy": "Farmacia Amavita Centro Breggia",
+    "locality": "Balerna"
+  },
+  {
+    "pharmacy": "Farmacia Dr. Camponovo",
+    "locality": "Balerna"
+  },
+  {
+    "pharmacy": "Farmacia Azione sagl",
+    "locality": "Bellinzona"
+  },
+  {
+    "pharmacy": "Farmacia Benu Bellinzona",
+    "locality": "Bellinzona"
+  },
+  {
+    "pharmacy": "Farmacia delle Semine",
+    "locality": "Bellinzona"
+  },
+  {
+    "pharmacy": "Farmacia Malè SA",
+    "locality": "Bellinzona"
+  },
+  {
+    "pharmacy": "Farmacia Nazionale",
+    "locality": "Bellinzona"
+  },
+  {
+    "pharmacy": "Farmacia Nord",
+    "locality": "Bellinzona"
+  },
+  {
+    "pharmacy": "Farmacia Portone",
+    "locality": "Bellinzona"
+  },
+  {
+    "pharmacy": "Farmacia San Giovanni EOC",
+    "locality": "Bellinzona"
+  },
+  {
+    "pharmacy": "Farmacia San Gottardo",
+    "locality": "Bellinzona"
+  },
+  {
+    "pharmacy": "Farmacia San Rocco",
+    "locality": "Bellinzona"
+  },
+  {
+    "pharmacy": "Farmacia Stazione",
+    "locality": "Bellinzona"
+  },
+  {
+    "pharmacy": "Farmacia Teatro",
+    "locality": "Bellinzona"
+  },
+  {
+    "pharmacy": "Farmacia Ticinese SA",
+    "locality": "Bellinzona"
+  },
+  {
+    "pharmacy": "Farmacia Amavita Biasca",
+    "locality": "Biasca"
+  },
+  {
+    "pharmacy": "Farmacia Pharmantica Sagl",
+    "locality": "Biasca"
+  },
+  {
+    "pharmacy": "Farmacia Rondi",
+    "locality": "Biasca"
+  },
+  {
+    "pharmacy": "Farmacia Rossetti di Chiara",
+    "locality": "Biasca"
+  },
+  {
+    "pharmacy": "Farmacia Stazione Biasca SA",
+    "locality": "Biasca"
+  },
+  {
+    "pharmacy": "Farmacia di Bioggio",
+    "locality": "Bioggio"
+  },
+  {
+    "pharmacy": "Farmacia Fiordaliso",
+    "locality": "Bioggio"
+  },
+  {
+    "pharmacy": "Farmacia Bernasconi",
+    "locality": "Bironico"
+  },
+  {
+    "pharmacy": "Farmacia Sant'Antonio Bissone SA",
+    "locality": "Bissone"
+  },
+  {
+    "pharmacy": "Farmacia Moderna",
+    "locality": "Bodio"
+  },
+  {
+    "pharmacy": "Farmacia Cinque Vie",
+    "locality": "Breganzona"
+  },
+  {
+    "pharmacy": "Farmacia della Posta-Damar SA",
+    "locality": "Breganzona"
+  },
+  {
+    "pharmacy": "Farmacia San Carlo",
+    "locality": "Breganzona"
+  },
+  {
+    "pharmacy": "Farmacia Amavita Brissago",
+    "locality": "Brissago"
+  },
+  {
+    "pharmacy": "Farmacia Centrale",
+    "locality": "Cadenazzo"
+  },
+  {
+    "pharmacy": "Farmacia di Cadro SA",
+    "locality": "Cadro"
+  },
+  {
+    "pharmacy": "Farmacia Camorino",
+    "locality": "Camorino"
+  },
+  {
+    "pharmacy": "Farmacia Benu Canobbio",
+    "locality": "Canobbio"
+  },
+  {
+    "pharmacy": "Farmacia Coop Vitality",
+    "locality": "Canobbio"
+  },
+  {
+    "pharmacy": "Farmacia di Caslano",
+    "locality": "Caslano"
+  },
+  {
+    "pharmacy": "Farmacia Pegaso",
+    "locality": "Caslano"
+  },
+  {
+    "pharmacy": "Farmacia San Luca SA",
+    "locality": "Caslano"
+  },
+  {
+    "pharmacy": "Farmacia Ronchi Luciano e Figlio",
+    "locality": "Castel San Pietro"
+  },
+  {
+    "pharmacy": "Farmacia Castione",
+    "locality": "Castione"
+  },
+  {
+    "pharmacy": "Farmacia Centrale",
+    "locality": "Cavigliano"
+  },
+  {
+    "pharmacy": "Farmacia della Valle Sagl",
+    "locality": "Cevio"
+  },
+  {
+    "pharmacy": "Farmacia Centrale",
+    "locality": "Chiasso"
+  },
+  {
+    "pharmacy": "Farmacia Chiassese Farmadomo SA",
+    "locality": "Chiasso"
+  },
+  {
+    "pharmacy": "Farmacia Chiesa SA",
+    "locality": "Chiasso"
+  },
+  {
+    "pharmacy": "Farmacia del Corso SA",
+    "locality": "Chiasso"
+  },
+  {
+    "pharmacy": "Farmacia Internazionale Dr. Merloni SA",
+    "locality": "Chiasso"
+  },
+  {
+    "pharmacy": "Farmacia Liver",
+    "locality": "Chiasso"
+  },
+  {
+    "pharmacy": "Farmacia Moderna",
+    "locality": "Chiasso"
+  },
+  {
+    "pharmacy": "Farmacia Nuova Emilio Chiesa SA",
+    "locality": "Chiasso"
+  },
+  {
+    "pharmacy": "Farmacia San Gottardo",
+    "locality": "Chiasso"
+  },
+  {
+    "pharmacy": "Farmacia Visagno SA",
+    "locality": "Claro"
+  },
+  {
+    "pharmacy": "Farmacia Bernasconi",
+    "locality": "Coldrerio"
+  },
+  {
+    "pharmacy": "Farmacia Giardino",
+    "locality": "Coldrerio"
+  },
+  {
+    "pharmacy": "Farmacia di Comano",
+    "locality": "Comano"
+  },
+  {
+    "pharmacy": "Farmacia Centro",
+    "locality": "Contone"
+  },
+  {
+    "pharmacy": "Farmacia Arcate",
+    "locality": "Cugnasco"
+  },
+  {
+    "pharmacy": "Farmacia Amica",
+    "locality": "Curio"
+  },
+  {
+    "pharmacy": "Farmacia Martinoli",
+    "locality": "Dongio"
+  },
+  {
+    "pharmacy": "Farmacia delle Alpi",
+    "locality": "Faido"
+  },
+  {
+    "pharmacy": "Farmacia Grassi SA",
+    "locality": "Faido"
+  },
+  {
+    "pharmacy": "Farmacia Benu Giubiasco",
+    "locality": "Giubiasco"
+  },
+  {
+    "pharmacy": "Farmacia Cugini SA",
+    "locality": "Giubiasco"
+  },
+  {
+    "pharmacy": "Farmacia Fenice",
+    "locality": "Giubiasco"
+  },
+  {
+    "pharmacy": "Farmacia Pedrazzetti",
+    "locality": "Giubiasco"
+  },
+  {
+    "pharmacy": "Farmacia Cassina",
+    "locality": "Gordola"
+  },
+  {
+    "pharmacy": "Farmacia Nuova",
+    "locality": "Gordola"
+  },
+  {
+    "pharmacy": "Farmacia Arcobaleno",
+    "locality": "Grancia"
+  },
+  {
+    "pharmacy": "Farmacia Centro Grancia",
+    "locality": "Grancia"
+  },
+  {
+    "pharmacy": "Farmacia Tosi",
+    "locality": "Gravesano"
+  },
+  {
+    "pharmacy": "Farmacia Casabella SA",
+    "locality": "Lamone"
+  },
+  {
+    "pharmacy": "Farmacia San Zeno SA",
+    "locality": "Lamone"
+  },
+  {
+    "pharmacy": "Farmacia Pharma Village La Rinascente",
+    "locality": "Ligornetto"
+  },
+  {
+    "pharmacy": "Farmacia 5 vie Farmadomo SA",
+    "locality": "Locarno"
+  },
+  {
+    "pharmacy": "Farmacia Celesia SA",
+    "locality": "Locarno"
+  },
+  {
+    "pharmacy": "Farmacia Città Vecchia Sagl",
+    "locality": "Locarno"
+  },
+  {
+    "pharmacy": "Farmacia Delta",
+    "locality": "Locarno"
+  },
+  {
+    "pharmacy": "Farmacia Fiore",
+    "locality": "Locarno"
+  },
+  {
+    "pharmacy": "Farmacia Internazionale",
+    "locality": "Locarno"
+  },
+  {
+    "pharmacy": "Farmacia Lafranchi SA",
+    "locality": "Locarno"
+  },
+  {
+    "pharmacy": "Farmacia Maggiorini",
+    "locality": "Locarno"
+  },
+  {
+    "pharmacy": "Farmacia Soldati SA",
+    "locality": "Locarno"
+  },
+  {
+    "pharmacy": "Farmacia Solduno",
+    "locality": "Locarno"
+  },
+  {
+    "pharmacy": "Farmacia Sole",
+    "locality": "Locarno"
+  },
+  {
+    "pharmacy": "Farmacia Sun Store",
+    "locality": "Locarno"
+  },
+  {
+    "pharmacy": "Farmacia Varini",
+    "locality": "Locarno"
+  },
+  {
+    "pharmacy": "Farmacia Zintgraff SA",
+    "locality": "Locarno"
+  },
+  {
+    "pharmacy": "Farmacia Riviera",
+    "locality": "Lodrino"
+  },
+  {
+    "pharmacy": "Farmacia Amavita Realini",
+    "locality": "Losone"
+  },
+  {
+    "pharmacy": "Farmacia Centro Losone SA",
+    "locality": "Losone"
+  },
+  {
+    "pharmacy": "Farmacia San Lorenzo",
+    "locality": "Losone"
+  },
+  {
+    "pharmacy": "Farmacia Airone",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia Amavita Gianella",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia Amavita Lugano",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia Cassarate",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia Castagnola",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia Cattaneo SA",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia Centrale Küng SA",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia Chimica Internazionale",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia Contrada dei Patrizi",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia Contrada dei Patrizi Moncucco",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia D'Antonio",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia del Parco",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia della Piazzetta",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia della Stazione",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia di Besso",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia di Breganzona",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia Dr. Migliore",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia FarmaEmpatia",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia Internazionale Bordoni SA",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia Loreto",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia Luganese SA",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia Nassa SA",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia PharmaExpress",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia Salus",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia San Luca",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia San Nicolao",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia Sant'Anna",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia Solari",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia Stadio SA",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia Stella SA",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia Sun Store",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia Sun Store",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia Ticinese",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia Torre",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia Trevano",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia Victoria Lac",
+    "locality": "Lugano"
+  },
+  {
+    "pharmacy": "Farmacia del Gambarogno SA",
+    "locality": "Magadino"
+  },
+  {
+    "pharmacy": "Farmacia Maggia SA",
+    "locality": "Maggia"
+  },
+  {
+    "pharmacy": "Farmacia Magliaso",
+    "locality": "Magliaso"
+  },
+  {
+    "pharmacy": "Farmacia Pharmavillage",
+    "locality": "Manno"
+  },
+  {
+    "pharmacy": "Farmacia Federale",
+    "locality": "Massagno"
+  },
+  {
+    "pharmacy": "Farmacia San Gottardo",
+    "locality": "Massagno"
+  },
+  {
+    "pharmacy": "Farmacia Generoso Sagl",
+    "locality": "Melano"
+  },
+  {
+    "pharmacy": "Farmacia Internazionale",
+    "locality": "Melide"
+  },
+  {
+    "pharmacy": "Farmacia Accademia SA",
+    "locality": "Mendrisio"
+  },
+  {
+    "pharmacy": "Farmacia Alchemilla",
+    "locality": "Mendrisio"
+  },
+  {
+    "pharmacy": "Farmacia Amavita Lurà",
+    "locality": "Mendrisio"
+  },
+  {
+    "pharmacy": "Farmacia Contrada dei Patrizi SA",
+    "locality": "Mendrisio"
+  },
+  {
+    "pharmacy": "Farmacia Coop Vitality",
+    "locality": "Mendrisio"
+  },
+  {
+    "pharmacy": "Farmacia Ferrari",
+    "locality": "Mendrisio"
+  },
+  {
+    "pharmacy": "Farmacia Ferregutti",
+    "locality": "Mendrisio"
+  },
+  {
+    "pharmacy": "Farmacia Fuoriporta",
+    "locality": "Mendrisio"
+  },
+  {
+    "pharmacy": "Farmacia Quattrini",
+    "locality": "Mendrisio"
+  },
+  {
+    "pharmacy": "Farmacia Stazione",
+    "locality": "Mendrisio"
+  },
+  {
+    "pharmacy": "Farmacia San Luigi",
+    "locality": "Mezzovico"
+  },
+  {
+    "pharmacy": "Farmacia BENU Minusio",
+    "locality": "Minusio"
+  },
+  {
+    "pharmacy": "Farmacia Sciolli",
+    "locality": "Minusio"
+  },
+  {
+    "pharmacy": "Farmacia Verbano sagl",
+    "locality": "Minusio"
+  },
+  {
+    "pharmacy": "Farmacia Collina d'Oro SA",
+    "locality": "Montagnola"
+  },
+  {
+    "pharmacy": "Farmacia Amavita Serfontana SA",
+    "locality": "Morbio Inferiore"
+  },
+  {
+    "pharmacy": "Farmacia San Giorgio SA",
+    "locality": "Morbio Inferiore"
+  },
+  {
+    "pharmacy": "Farmacia del Lago",
+    "locality": "Muralto"
+  },
+  {
+    "pharmacy": "Farmacia Elvetica",
+    "locality": "Muralto"
+  },
+  {
+    "pharmacy": "Farmacia Quisisana SA",
+    "locality": "Novazzano"
+  },
+  {
+    "pharmacy": "Farmacia San Nicolao",
+    "locality": "Novazzano"
+  },
+  {
+    "pharmacy": "Farmacia Martinoli SA",
+    "locality": "Olivone"
+  },
+  {
+    "pharmacy": "Farmacia Biomedica",
+    "locality": "Pambio Noranco"
+  },
+  {
+    "pharmacy": "Farmacia Nuova Europa",
+    "locality": "Paradiso"
+  },
+  {
+    "pharmacy": "Farmacia Paradiso SA",
+    "locality": "Paradiso"
+  },
+  {
+    "pharmacy": "Farmacia San Salvatore",
+    "locality": "Paradiso"
+  },
+  {
+    "pharmacy": "Farmacia San Giorgio",
+    "locality": "Ponte Capriasca"
+  },
+  {
+    "pharmacy": "Farmacia Internazionale",
+    "locality": "Ponte Tresa"
+  },
+  {
+    "pharmacy": "Farmacia Malcantonese SA",
+    "locality": "Ponte Tresa"
+  },
+  {
+    "pharmacy": "Farmacia Bozzoreda",
+    "locality": "Pregassona"
+  },
+  {
+    "pharmacy": "Farmacia Contrada dei Patrizi",
+    "locality": "Pregassona"
+  },
+  {
+    "pharmacy": "Farmacia di Pregassona",
+    "locality": "Pregassona"
+  },
+  {
+    "pharmacy": "Farmacia Martinelli",
+    "locality": "Pregassona"
+  },
+  {
+    "pharmacy": "Farmacia Santo Stefano Sagl",
+    "locality": "Rancate"
+  },
+  {
+    "pharmacy": "Farmacia Riazzino",
+    "locality": "Riazzino"
+  },
+  {
+    "pharmacy": "Farmacia Amavita Neuroni SA",
+    "locality": "Riva San Vitale"
+  },
+  {
+    "pharmacy": "Farmacia Tamaro SA",
+    "locality": "Rivera"
+  },
+  {
+    "pharmacy": "Farmacia Amavita Mordasini",
+    "locality": "Sant'Antonino"
+  },
+  {
+    "pharmacy": "Farmacia Coop Vitality",
+    "locality": "Sant'Antonino"
+  },
+  {
+    "pharmacy": "Farmacia del Crocefisso SA",
+    "locality": "Savosa"
+  },
+  {
+    "pharmacy": "Farmacia Al Ponte",
+    "locality": "Sementina"
+  },
+  {
+    "pharmacy": "Farmacia della Posta",
+    "locality": "Sementina"
+  },
+  {
+    "pharmacy": "Farmacia Sorengo SA",
+    "locality": "Sorengo"
+  },
+  {
+    "pharmacy": "Farmacia Montalbano",
+    "locality": "Stabio"
+  },
+  {
+    "pharmacy": "Farmacia Pestoni",
+    "locality": "Stabio"
+  },
+  {
+    "pharmacy": "Farmacia Signer",
+    "locality": "Stabio"
+  },
+  {
+    "pharmacy": "Farmacia Zanini SA",
+    "locality": "Stabio"
+  },
+  {
+    "pharmacy": "Farmacia Taverne",
+    "locality": "Taverne"
+  },
+  {
+    "pharmacy": "Farmacia Zeta",
+    "locality": "Taverne"
+  },
+  {
+    "pharmacy": "Farmacia Caroni",
+    "locality": "Tenero"
+  },
+  {
+    "pharmacy": "Farmacia Coop Vitality",
+    "locality": "Tenero"
+  },
+  {
+    "pharmacy": "Farmacia Stella d'Oro",
+    "locality": "Tenero"
+  },
+  {
+    "pharmacy": "Farmacia Lepori",
+    "locality": "Tesserete"
+  },
+  {
+    "pharmacy": "Farmacia Nobile",
+    "locality": "Tesserete"
+  },
+  {
+    "pharmacy": "Farmacia Santa Chiara SA",
+    "locality": "Vacallo"
+  },
+  {
+    "pharmacy": "Farmacia San Marco SA",
+    "locality": "Vezia"
+  },
+  {
+    "pharmacy": "Farmacia Benu Viganello",
+    "locality": "Viganello"
+  },
+  {
+    "pharmacy": "Farmacia Contrada dei Patrizi",
+    "locality": "Viganello"
+  },
+  {
+    "pharmacy": "Farmacia Coop Vitality",
+    "locality": "Viganello"
+  },
+  {
+    "pharmacy": "Farmacia Semper Fidelis",
+    "locality": "Viganello"
+  },
+  {
+    "pharmacy": "Farmacia Viganello",
+    "locality": "Viganello"
+  },
+  {
+    "pharmacy": "Farmacia San Cosimo SA",
+    "locality": "Vira Gambarogno"
+  }
+],
+      "identityRecordsSourceUrl": "https://www4.ti.ch/fileadmin/DSS/DSP/UFC/PDF/Elenchi_e_Indirizzi/Lista_Farmacie.pdf",
+      "identityRecordsFetchedAt": "2026-09-14T10:03:57.824Z",
+      "identityRecordsRecordCount": 207,
       "completeness": {
         "status": "complete",
         "verifiedRecordCount": 207,
