@@ -68,6 +68,9 @@ test('every active article CLI caller wires the OAuth Codex broker', () => {
     const oauthIndexes = lines
       .map((line, index) => /^\s+CLAUDE_CODE_OAUTH_TOKEN:/.test(line) ? index : -1)
       .filter((index) => index >= 0);
+    const brokerIndexes = lines
+      .map((line, index) => /^\s+CODEX_AUTH_BROKER_SOCKET:/.test(line) ? index : -1)
+      .filter((index) => index >= 0);
     if (preferredIndexes.length > 0 && oauthIndexes.length === 0) {
       // The Codex-only artifact is the current contract. Keep accepting the
       // legacy Claude-backed artifact while the corpus transport PR is still
@@ -78,13 +81,26 @@ test('every active article CLI caller wires the OAuth Codex broker', () => {
         assert.match(consumer, /AI_MODELS_PREFER:\s*codex-cli\/gpt-5\.6-luna/, `${rel}: Codex consumer preference is not pinned`);
       }
     } else {
-      // Legacy corpus artifacts (including the interim hybrid translation
-      // artifact) still use the Claude consumer until the corresponding
-      // generated transport lands; its broker wiring remains a valid
-      // compatibility contract during that transition.
-      assert.ok(oauthIndexes.length > 0, `${rel}: no article CLI consumer found`);
-      for (const index of oauthIndexes) {
-        assert.match(stepBlock(lines, index), new RegExp(escapeRegex(SOCKET)), `${rel}: Claude consumer lacks broker socket`);
+      if (oauthIndexes.length > 0) {
+        // Legacy corpus artifacts (including the interim hybrid translation
+        // artifact) still use the Claude consumer until the corresponding
+        // generated transport lands; its broker wiring remains a valid
+        // compatibility contract during that transition.
+        for (const index of oauthIndexes) {
+          assert.match(stepBlock(lines, index), new RegExp(escapeRegex(SOCKET)), `${rel}: Claude consumer lacks broker socket`);
+        }
+      } else {
+        // The current background crawler artifact is intentionally broker-only:
+        // the raw Codex credential stays on setup and no child process receives
+        // either the Claude token or a global model preference.
+        const brokerConsumers = brokerIndexes
+          .map((index) => stepBlock(lines, index))
+          .filter((consumer) => !consumer.includes('- name: Cleanup Codex auth broker'));
+        assert.ok(brokerConsumers.length > 0, `${rel}: no article CLI consumer found`);
+        for (const consumer of brokerConsumers) {
+          assert.match(consumer, new RegExp(escapeRegex(SOCKET)), `${rel}: broker-only consumer lacks broker socket`);
+          assert.doesNotMatch(consumer, /CLAUDE_CODE_OAUTH_TOKEN|AI_MODELS_PREFER/, `${rel}: broker-only consumer received legacy credentials`);
+        }
       }
     }
 
