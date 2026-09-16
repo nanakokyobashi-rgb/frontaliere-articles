@@ -8,7 +8,7 @@ name: PR ❌ check fixer (bounded, check richiesto rosso su PR bot)
 # la guardi. Resta rossa finche' un umano non ci inciampa.
 #
 # ── PERCHE' QUI SERVE PIU' CHE SUL SITO (2026-09-03) ────────────────────────
-# Da quando la Claude review vive DENTRO `tests.yml`, il check richiesto e' UNO
+# Da quando la review Codex vive DENTRO `tests.yml`, il check richiesto e' UNO
 # solo e porta quattro cose: contratto del body, unit + closure gates, verdetto
 # della review, gate di `generator-ci`. Un rosso li' e' quindi piu' probabile e
 # piu' bloccante di prima — e con l'auto-merge NATIVO non c'e' piu' nessuno
@@ -209,7 +209,7 @@ jobs:
           #   nessun fixer puo' applicare una diagnosi, quindi redcheck non
           #   deve spendere un round Claude a vuoto.
           #
-          # La conclusion di `Run Claude review` non basta: lo step ha
+          # La conclusion di `Run Codex review` non basta: lo step ha
           # `continue-on-error` e puo' morire riportando `success`. Un altro
           # check/step rosso mantiene il percorso normale. Il helper fallisce
           # chiuso: API vuota/illeggibile -> review_failure_kind=none.
@@ -288,7 +288,7 @@ jobs:
         # Tetto sullo step → `failure` diagnosticabile invece di `cancelled`.
         timeout-minutes: 15
 
-      # Profilassi anti-401. `claude-code-action` esige che il workflow file in
+      # Profilassi anti-401. Il lane Codex esige che il workflow file in
       # esecuzione sia BYTE-IDENTICO a `main`, e dal 2026-09-03 il workflow che
       # ospita la review e' `tests.yml`. Se `main` lo aggiorna DOPO il branch, la
       # re-review innescata dal push qui sotto fallirebbe `401 Workflow
@@ -361,7 +361,7 @@ jobs:
           echo "::error::Claim redcheck PR+HEAD+failure illeggibile o non verificabile → nessun fixer Claude."
           exit 1
 
-      - name: Acquire shared Claude quota lease (redcheck residual)
+      - name: Acquire shared Codex lane quota lease (redcheck residual)
         id: quota_lease
         if: steps.claim.outputs.claim_allowed == 'true'
         continue-on-error: true
@@ -377,7 +377,7 @@ jobs:
           HEAD_SHA: ${{ needs.preflight.outputs.head_sha }}
         run: node scripts/ci/check-quota-backoff.mjs
 
-      - name: Shared Claude quota lease unavailable (expected skip)
+      - name: Shared Codex lane quota lease unavailable (expected skip)
         if: steps.claim.outputs.claim_allowed == 'true' && steps.quota_lease.outputs.lease_allowed != 'true'
         run: |
           if [ "${{ steps.quota_lease.outputs.lease_error }}" = 'true' ]; then
@@ -466,7 +466,7 @@ jobs:
           else
             echo "tier=normal" >> "$GITHUB_OUTPUT"
           fi
-          echo "model=claude-opus-5" >> "$GITHUB_OUTPUT"
+          echo "model=gpt-5.6-luna" >> "$GITHUB_OUTPUT"
 
           # Il marker del round si posta PRIMA di invocare Claude: se la run
           # muore, il round e' comunque contato e l'anti-loop tiene.
@@ -492,7 +492,7 @@ jobs:
       # finale confronta SHA, body e commenti per capire se il round ha davvero
       # consegnato lavoro. Il body resta fuori dai log: si conserva solo il suo
       # digest, cosi' un edit reale e' osservabile senza esporre il contenuto.
-      - name: Record base SHA (pre-Claude)
+      - name: Record base SHA (pre-Codex)
         id: base
         if: steps.guard.outputs.proceed == 'true'
         env:
@@ -674,7 +674,7 @@ jobs:
       # Niente proxy di compressione, per la stessa ragione della review in
       # `tests.yml`: qui l'input dell'agente e' un LOG, e la differenza fra un
       # rosso vero e un falso rosso sta nelle righe che un compressore toglie.
-      - name: Pre-flight — Claude quota telemetry (Codex primary)
+      - name: Pre-flight — Codex lane quota telemetry
         id: quota
         if: steps.guard.outputs.proceed == 'true'
         continue-on-error: true
@@ -685,8 +685,8 @@ jobs:
           CODEX_FALLBACK_MODE: '1'
         run: node scripts/ci/check-quota-backoff.mjs
 
-      - name: Run Claude ❌-check-fix
-        id: claude_fix
+      - name: Run Codex Luna Max ❌-check-fix
+        id: codex_fix
         if: steps.guard.outputs.proceed == 'true'
         # Non far fallire il job sull'exit non-zero dell'action: il `Classify
         # outcome` finale decide il colore sul LAVORO reale (commit pushato), non
@@ -702,17 +702,13 @@ jobs:
         with:
           codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
           # Auth via subscription Max (zero costo API). MAI ANTHROPIC_API_KEY.
-          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           # Stessa identita' dello step `Configure push remote` qui sopra: senza
-          # questo input `claude-code-action` conia un proprio token e RISCRIVE
+          # questo input il lane Codex conia un proprio token e RISCRIVE
           # il remote (`replaceCheckoutCredentials()`), buttando via quello
           # appena configurato — e ogni fix su `.github/workflows/**` morirebbe
           # al push nonostante il capability guard lo avesse lasciato passare.
           github_token: ${{ env.GITHUB_PAT_NANAKO }}
           codex_github_token: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
-          show_full_output: true
-          allowed_bots: 'github-actions[bot], claude[bot]'
-          claude_args: "--effort medium --max-turns 60 --model ${{ steps.guard.outputs.model }} --dangerously-skip-permissions"
           prompt: |
             Il branch e' gia' checkoutato sulla head della PR #${{ needs.preflight.outputs.pr_number }}, che ha il **check richiesto ROSSO**.
 
@@ -725,7 +721,7 @@ jobs:
 
             **L'unica eccezione, e va guadagnata:** alcuni guard di questo repo dichiarano ESSI STESSI una via d'uscita sanzionata, nel proprio sorgente. Puoi usarla solo se: (a) il guard la documenta esplicitamente, (b) verifichi la condizione **contro il codice**, non contro l'intento, e (c) scrivi nel commento QUALE codice hai letto e COSA ti garantisce. Se non puoi fare tutte e tre, non e' la tua strada.
 
-            **Il check richiesto qui porta QUATTRO cose**, e la prima domanda e' quale delle quattro e' rossa: il contratto del body della PR, i gate `node --test`, il verdetto della Claude review (un `🔴 Important` aperto rende rosso il check — quello NON lo ripari tu, lo ripara il 🔴-fixer), e il gate di `generator-ci` sulle PR che toccano `generator/`, `engine/`, `host/`. Se il rosso e' il verdetto della review, commenta dicendolo e TERMINA: sovrapporti al gemello produrrebbe una push race.
+            **Il check richiesto qui porta QUATTRO cose**, e la prima domanda e' quale delle quattro e' rossa: il contratto del body della PR, i gate `node --test`, il verdetto della review Codex (un `🔴 Important` aperto rende rosso il check — quello NON lo ripari tu, lo ripara il 🔴-fixer), e il gate di `generator-ci` sulle PR che toccano `generator/`, `engine/`, `host/`. Se il rosso e' il verdetto della review, commenta dicendolo e TERMINA: sovrapporti al gemello produrrebbe una push race.
 
             **Metodo:**
             - Capisci PERCHE' fallisce prima di toccare qualcosa.
@@ -746,32 +742,6 @@ jobs:
             - **Token-lever:** le letture e le chiamate `gh` indipendenti vanno emesse in parallelo nello stesso messaggio, mai una per turno — un messaggio con piu' tool-call resta 1 turno.
             - Una sola passata: diagnostica, fixa, valida, committa, pusha, aggiorna il body, STOP.
 
-      - name: Claude usage metrics
-        if: always() && steps.guard.outputs.proceed == 'true' && steps.claude_fix.outputs.claude_used == 'true'
-        continue-on-error: true
-        run: node scripts/ci/claude-usage-summary.mjs "${{ steps.claude_fix.outputs.execution_file }}" "pr-redcheck-fixer"
-
-      # Un 429 non e' un round: Claude non e' mai partito (0 turni, $0) e non ha
-      # letto la PR. Il marker di round pero' e' gia' stato postato dal guard,
-      # quindi senza rimborso due finestre di quota consecutive spingono la PR a
-      # `needs-human` — che qui e' un filtro di ESCLUSIONE da ogni coda
-      # automatica (#733), cioe' uno stato assorbente. Gemello lato PR di
-      # `check-quota-backoff.mjs` + marker `rate-limited` del lato issue.
-      - name: Refund round on Claude quota 429 (zero-Claude)
-        if: always() && steps.guard.outputs.proceed == 'true'
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
-          PR: ${{ needs.preflight.outputs.pr_number }}
-          MARKER: REDCHECK_FIX_ROUND
-          ROUND: ${{ steps.guard.outputs.round }}
-          EXEC_FILE: ${{ steps.claude_fix.outputs.execution_file }}
-          WORKFLOW: pr-redcheck-fixer
-          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        run: node scripts/ci/refund-fix-round.mjs
-
-
       - name: Finalize redcheck PR + HEAD + failed check claim
         if: always() && steps.claim.outputs.claim_acquired == 'true'
         continue-on-error: true
@@ -787,11 +757,11 @@ jobs:
         run: |
           if [ "${{ steps.guard.outputs.proceed }}" != 'true' ]; then
             CLAIM_STATUS=released
-          elif [ "${{ steps.claude_fix.outcome }}" = 'cancelled' ]; then
+          elif [ "${{ steps.codex_fix.outcome }}" = 'cancelled' ]; then
             CLAIM_STATUS=failed-transient
-          elif [ "${{ steps.claude_fix.outcome }}" = 'skipped' ]; then
+          elif [ "${{ steps.codex_fix.outcome }}" = 'skipped' ]; then
             CLAIM_STATUS=failed-transient
-          elif [ "${{ steps.claude_fix.outcome }}" = 'failure' ]; then
+          elif [ "${{ steps.codex_fix.outcome }}" = 'failure' ]; then
             CLAIM_STATUS=failed-terminal
           else
             CLAIM_STATUS=completed
@@ -799,7 +769,7 @@ jobs:
           export CLAIM_STATUS
           node scripts/ci/redcheck-review-prefilter.mjs --claim
 
-      - name: Release shared Claude quota lease
+      - name: Release shared Codex lane quota lease
         if: always() && steps.quota_lease.outputs.lease_allowed == 'true' && steps.quota_lease.outputs.lease_token != ''
         continue-on-error: true
         env:
@@ -839,24 +809,24 @@ jobs:
           BASE_COMMENTS: ${{ steps.base.outputs.comments }}
           BASE_BODY_SHA: ${{ steps.base.outputs.body_sha }}
           BASE_CAPTURE_OUTCOME: ${{ steps.base.outcome }}
-          CLAUDE_OUTCOME: ${{ steps.claude_fix.outcome }}
+          ACTION_OUTCOME: ${{ steps.codex_fix.outcome }}
         run: |
           set -uo pipefail
           HEAD_NOW=$(git rev-parse HEAD 2>/dev/null || echo "")
           git fetch origin "$HEAD_REF" -q 2>/dev/null || true
           REMOTE_SHA=$(git rev-parse "origin/$HEAD_REF" 2>/dev/null || echo "")
-          echo "base=$BASE_SHA local=$HEAD_NOW remote=$REMOTE_SHA claude=$CLAUDE_OUTCOME"
+          echo "base=$BASE_SHA local=$HEAD_NOW remote=$REMOTE_SHA claude=$ACTION_OUTCOME"
           if [ "${BASE_CAPTURE_OUTCOME:-}" != "success" ] || \
              ! printf '%s\n' "$BASE_BODY_SHA" | grep -Eq '^[0-9a-f]{64}$'; then
             echo "::error::❌-check-fix: baseline del body PR assente o illeggibile → classificazione BLOCCANTE, job ROSSO."
             exit 1
           fi
           if [ -n "$HEAD_NOW" ] && [ -n "$BASE_SHA" ] && [ "$HEAD_NOW" != "$BASE_SHA" ] && [ "$REMOTE_SHA" = "$HEAD_NOW" ]; then
-            echo "Fix pushato questo round (HEAD avanzato e presente su origin/$HEAD_REF) → round SUCCESS. Job verde anche se la CLI e' uscita '$CLAUDE_OUTCOME'."
+            echo "Fix pushato questo round (HEAD avanzato e presente su origin/$HEAD_REF) → round SUCCESS. Job verde anche se la CLI e' uscita '$ACTION_OUTCOME'."
             exit 0
           fi
-          if [ "$CLAUDE_OUTCOME" != "success" ]; then
-            echo "::error::❌-check-fix: nessun commit pushato e la run Claude non e' terminata con success ('$CLAUDE_OUTCOME') → non-progresso reale. Job ROSSO (segnale preservato; il round-cap porta a needs-human a N>=2)."
+          if [ "$ACTION_OUTCOME" != "success" ]; then
+            echo "::error::❌-check-fix: nessun commit pushato e la run Claude non e' terminata con success ('$ACTION_OUTCOME') → non-progresso reale. Job ROSSO (segnale preservato; il round-cap porta a needs-human a N>=2)."
             exit 1
           fi
           if ! body_file=$(mktemp "${RUNNER_TEMP:-/tmp}/redcheck-body.XXXXXX"); then
@@ -890,8 +860,8 @@ jobs:
           fi
           NOW_COMMENTS=$(gh api "repos/$REPO/issues/$PR_NUMBER/comments" --paginate --jq 'length' 2>/dev/null || echo "${BASE_COMMENTS:-0}")
           if [ "${NOW_COMMENTS:-0}" -le "${BASE_COMMENTS:-0}" ]; then
-            echo "::error::❌-check-fix: nessun commit pushato, CLI uscita '$CLAUDE_OUTCOME', body invariato e nessun commento nuovo a spiegare perche' (commenti ${BASE_COMMENTS:-0}→${NOW_COMMENTS:-0}) → non-progresso SILENZIOSO, non un terminale legittimo. Job ROSSO."
+            echo "::error::❌-check-fix: nessun commit pushato, CLI uscita '$ACTION_OUTCOME', body invariato e nessun commento nuovo a spiegare perche' (commenti ${BASE_COMMENTS:-0}→${NOW_COMMENTS:-0}) → non-progresso SILENZIOSO, non un terminale legittimo. Job ROSSO."
             exit 1
           fi
-          echo "Nessun push, body invariato ma CLI terminata pulita ('$CLAUDE_OUTCOME') con una spiegazione nuova sulla PR → terminale legittimo (es. non auto-fixabile). Job verde."
+          echo "Nessun push, body invariato ma CLI terminata pulita ('$ACTION_OUTCOME') con una spiegazione nuova sulla PR → terminale legittimo (es. non auto-fixabile). Job verde."
           exit 0

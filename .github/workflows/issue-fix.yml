@@ -1,4 +1,4 @@
-name: Issue fix (Claude → PR)
+name: Issue fix (Codex Luna Max → PR)
 
 # Il fixer autonomo: prende una issue etichettata `agent:fix`, diagnostica,
 # applica un fix chirurgico e apre una PR — che poi entra nel ciclo di review e
@@ -9,9 +9,8 @@ name: Issue fix (Claude → PR)
 #
 # ── I quattro pre-flight, e cosa impedisce ciascuno ─────────────────────────
 #
-# 1. quota telemetry — il beacon Claude resta osservabile, ma Codex è il
-#    provider primario. Se Codex non completa, l'action esegue Claude come
-#    fallback; la quota Claude non può impedire il primo tentativo.
+# 1. quota telemetry — il beacon legacy resta osservabile, ma Codex Luna Max è
+#    l'unico provider del lane; la telemetria non può impedire il primo tentativo.
 # 2. already-resolved — la issue potrebbe essere già stata risolta da una PR
 #    mergiata nel frattempo.
 # 3. workflows-scope — se il fix richiede di toccare `.github/workflows/**` ma
@@ -20,16 +19,17 @@ name: Issue fix (Claude → PR)
 #    zero token e un milione.
 # 4. claim in-flight — mutua esclusione: due run sulla stessa issue.
 #
-# Tutti e quattro sono deterministici, zero Claude, e girano PRIMA dello step
+# Tutti e quattro sono deterministici, zero-agent, e girano PRIMA dello step
 # che costa.
 #
 # ── ADATTAMENTI (manifest: `adapted`) ───────────────────────────────────────
-#  - Gate `sender`: accetta gli account del progetto (i due owner) e claude*.
+#  - Gate `sender`: accetta gli account del progetto (i due owner) e gli account
+#    legacy del bot autorizzato.
 #    Sul sito è cablato su `valerielinc-ops`; qui la label di routing viene
 #    applicata dal PAT di questo repo, che è di un altro account.
 #  - Identità di push: `GITHUB_PAT_NANAKO`, non un token di GitHub App —
-#    passato ANCHE come `github_token` a `claude-code-action` (vedi lo step
-#    "Run Claude fix"). Il `git remote set-url` dello step di identità copre
+#    passato ANCHE come `github_token` al lane Codex (vedi lo step
+#    "Run Codex Luna Max fix"). Il `git remote set-url` dello step di identità copre
 #    solo i push che partono da un `run:`: l'action, all'avvio, RISCRIVE quel
 #    remote col proprio token (`replaceCheckoutCredentials()`), quindi il token
 #    che conta per il lavoro dell'agente è quello passato nel `with:`.
@@ -127,7 +127,7 @@ jobs:
 
       # ── Pre-flight 1: quota telemetry ─────────────────────────────────────
       # Il beacon è conservato per diagnosi e non è più un gate: Codex deve
-      # poter partire anche quando la quota Claude è esaurita.
+      # poter partire anche quando il beacon di quota è attivo.
       - name: Pre-flight — quota telemetry (Codex primary)
         id: quota
         continue-on-error: true
@@ -159,7 +159,7 @@ jobs:
       # `labeled` sulla stessa issue non muore piu' sfrattato: aspetta il primo e
       # poi esegue, con il payload catturato prima — anche se la prima run ha nel
       # frattempo aperto la PR o si e' presa la label. Difesa unica rimasta era
-      # l'istruzione di prompt «PR gia' in volo: skip», cioe' una run Claude
+      # l'istruzione di prompt «PR gia' in volo: skip», cioe' una run Codex
       # intera sulla quota condivisa per scoprire una cosa che si legge con due
       # chiamate `gh`. Bias a PROCEDERE su qualunque dubbio (#918).
       - name: Pre-flight — stale-dispatch gate (zero-Claude)
@@ -178,7 +178,7 @@ jobs:
       # non chiude, parcheggia in `needs-human`. Da li' la issue RIENTRA: il
       # pre-pass di `needs-human-sweep` la ri-accoda quando il verdetto scade, e
       # lo sweep settimanale puo' rimetterla in coda. Il giro successivo pagava
-      # una run Claude INTERA sulla quota condivisa col sito per ri-diagnosticare
+      # una run Codex INTERA sulla quota condivisa col sito per ri-diagnosticare
       # lo stesso file bloccato dal mirror e riemettere lo stesso verdetto —
       # ── Pre-flight 3: capability sui workflow ─────────────────────────────
       # Solo quando NON c'è il PAT: col PAT il push su `.github/workflows/**`
@@ -186,7 +186,7 @@ jobs:
       #
       # Perché la condizione ora è VERA (e prima era una promessa non mantenuta):
       # il PAT viaggia sul remote solo per i push lanciati da un `run:`, ma è
-      # `claude-code-action` a pushare, con il proprio token. Finché non le si
+      # il lane Codex a pushare, con il proprio token. Finché non le si
       # passava `github_token`, l'action cadeva sul token di GitHub App del run
       # e ogni push su `.github/workflows/**` veniva rifiutato con "refusing to
       # allow a GitHub App to create or update workflow ... without `workflows`
@@ -369,7 +369,7 @@ jobs:
           SITE_TOKEN: ${{ env.GITHUB_PAT }}
         run: node scripts/ci/handoff-to-site.mjs --preflight
 
-      - name: Acquire shared Claude quota lease (issue-fix slot)
+      - name: Acquire shared Codex lane quota lease (issue-fix slot)
         id: quota_lease
         if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true'
         continue-on-error: true
@@ -389,7 +389,7 @@ jobs:
           GITHUB_RUN_ID: ${{ github.run_id }}
         run: node scripts/ci/check-quota-backoff.mjs
 
-      - name: Shared Claude quota lease unavailable (requeue zero-Claude)
+      - name: Shared Codex lane quota lease unavailable (requeue zero-agent)
         if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true' && steps.quota_lease.outputs.lease_allowed != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -401,7 +401,7 @@ jobs:
             exit 1
           fi
           gh issue edit "$ISSUE_NUMBER" --repo "$GH_REPO" --add-label agent:fix-queued --remove-label agent:fix
-          echo "Lease quota condiviso negato (${{ steps.quota_lease.outputs.lease_reason }}) → issue #$ISSUE_NUMBER ri-accodata senza consumare un tentativo Claude."
+          echo "Lease quota condiviso negato (${{ steps.quota_lease.outputs.lease_reason }}) → issue #$ISSUE_NUMBER ri-accodata senza consumare un tentativo Codex."
 
       - name: Determine fix tier
         id: tier
@@ -440,7 +440,7 @@ jobs:
             publish|engine) echo "tier=high"   >> "$GITHUB_OUTPUT"; echo "max_turns=60" >> "$GITHUB_OUTPUT" ;;
             *)              echo "tier=normal" >> "$GITHUB_OUTPUT"; echo "max_turns=45" >> "$GITHUB_OUTPUT" ;;
           esac
-          echo "model=claude-opus-5" >> "$GITHUB_OUTPUT"
+          echo "model=gpt-5.6-luna" >> "$GITHUB_OUTPUT"
           echo "category=$cat" >> "$GITHUB_OUTPUT"
           # A daily bucket is an aggregate even when it currently contains one
           # item. Select exactly the first stable open item for this run.
@@ -562,19 +562,15 @@ jobs:
             # l'action lo ignori: perche' lo SOVRASCRIVE. All'avvio
             # `replaceCheckoutCredentials()` azzera l'extraheader e rifa' il
             # `set-url` col token che l'action ha ricevuto nel `with:`. Ecco
-            # perche' serve anche `github_token` sullo step "Run Claude fix":
+            # perche' serve anche `github_token` sullo step "Run Codex Luna Max fix":
             # sistemare solo questo remote lasciava l'agente sul token di App.
             echo "push identity (run: steps): PAT — .github/workflows/** pushabile (scope workflow verificato sul PAT)"
-            echo "push identity (claude-code-action): PAT via input github_token — vedi step 'Run Claude fix'"
+            echo "push identity (Codex lane): PAT via input github_token — vedi step 'Run Codex Luna Max fix'"
           else
             echo "push identity: GITHUB_TOKEN (.github/workflows/** NON pushabile, né dai run: né dall'action)"
           fi
 
-      - name: Setup Headroom compression proxy
-        if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
-        uses: ./.github/actions/setup-headroom
-
-      - name: Run Claude fix
+      - name: Run Codex Luna Max fix
         # Tetto sullo step (classe #7310 del sito, portata qui riconciliando il
         # `both-moved` di #956). Il cap del job e' 360min e non lega mai: il
         # vincolo che morde e' `--max-turns`. Misurato su questo repo il
@@ -585,7 +581,7 @@ jobs:
         # qui sotto perdono la coda per girare: un run cancellato non lascia
         # ne' branch ne' marker `FIX_OUTCOME`, e il drainer lo ri-accoda a vuoto.
         timeout-minutes: 120
-        id: claude_fix
+        id: codex_fix
         if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
         continue-on-error: true
         uses: ./.github/actions/claude-codex-fallback
@@ -601,7 +597,6 @@ jobs:
           CLOSING_REF: ${{ steps.closing.outputs.closing_ref }}
         with:
           codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
-          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           # Il token con cui l'ACTION fa le sue operazioni git/GitHub. Senza
           # questo input l'action ricade sul token di GitHub App del run, che
           # per policy di GitHub non può creare né modificare file sotto
@@ -633,9 +628,6 @@ jobs:
           # fine run — cioe' esattamente il comportamento di oggi.
           github_token: ${{ env.GITHUB_PAT_NANAKO }}
           codex_github_token: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
-          allowed_bots: 'github-actions[bot], claude[bot]'
-          show_full_output: true
-          claude_args: "--effort medium --max-turns ${{ steps.tier.outputs.max_turns }} --model ${{ steps.tier.outputs.model }} --dangerously-skip-permissions"
           prompt: |
             Sei l'agent di fix autonomo per la issue #${{ github.event.issue.number }} ("${{ github.event.issue.title }}"). Tier: ${{ steps.tier.outputs.tier }}, categoria: ${{ steps.tier.outputs.category }}.
 
@@ -655,7 +647,7 @@ jobs:
             **Pre-condizioni (termina se falliscono):**
             - Esiste già una PR aperta che cita "#$ISSUE_NUMBER" → commenta "PR già in volo: #<n>, skip." e TERMINA.
             - **Overlap sui file:** estrai i path target dal body. Se una PR aperta modifica già uno di quei file → commenta e TERMINA, per non creare un conflitto o un doppione. Nel dubbio (issue non file-specifica) procedi.
-            - **Capability guard — valutalo SUBITO, prima di implementare.** ${{ env.GITHUB_PAT_NANAKO != '' && 'Questo run ha il PAT, e il PAT è passato SIA al remote git SIA a `claude-code-action` (input `github_token`). **Modificare `.github/workflows/**` è quindi una capacità PIENA: fallo senza esitare.** Non trattarlo come un percorso rischioso e non pre-annunciare un blocco. Se un push viene rifiutato, LEGGI il messaggio prima di concludere: `blocked-workflows-scope` va usato SOLO se il testo dice letteralmente "without `workflows` permission". In quel caso NON abbandonare al primo tentativo — verifica `git remote -v` (deve puntare a `x-access-token:***@github.com`) e `git config --get-all http."https://github.com/".extraheader` (deve essere VUOTO, altrimenti l Authorization header prevale sull URL e il push viaggia con l identità della App); correggi e ritenta UNA volta. Solo se fallisce ancora con lo stesso testo, documenta con `blocked-workflows-scope` e includi il messaggio di rifiuto integrale. Qualunque altro errore di push (conflitto, protezione del branch, rete) NON è questo caso e va gestito come tale.' || 'Questo run NON ha il PAT: sia il remote git sia `claude-code-action` ricadono sul GITHUB_TOKEN, che per policy di GitHub non può creare né modificare file sotto `.github/workflows/**`. Se il fix richiede di toccarli il push fallirebbe SEMPRE → nessuna PR. NON implementare: posta un commento col diff proposto e "blocco scope workflows: il PAT non è stato caricato (controlla lo step Load secrets from Remote Config), serve il PAT o una mano umana", e TERMINA SUBITO con `blocked-workflows-scope`.' }} In ogni caso, se il fix richiede impostazioni del repo, branch protection o segreti non presenti in CI → documenta e TERMINA senza implementare. Fare tutto il lavoro per poi scoprire il blocco al push è il modo più costoso di fallire: il blocco è deterministico, va visto al turno 1.
+            - **Capability guard — valutalo SUBITO, prima di implementare.** ${{ env.GITHUB_PAT_NANAKO != '' && 'Questo run ha il PAT, e il PAT è passato SIA al remote git SIA al lane Codex (input `github_token`). **Modificare `.github/workflows/**` è quindi una capacità PIENA: fallo senza esitare.** Non trattarlo come un percorso rischioso e non pre-annunciare un blocco. Se un push viene rifiutato, LEGGI il messaggio prima di concludere: `blocked-workflows-scope` va usato SOLO se il testo dice letteralmente "without `workflows` permission". In quel caso NON abbandonare al primo tentativo — verifica `git remote -v` (deve puntare a `x-access-token:***@github.com`) e `git config --get-all http."https://github.com/".extraheader` (deve essere VUOTO, altrimenti l Authorization header prevale sull URL e il push viaggia con l identità della App); correggi e ritenta UNA volta. Solo se fallisce ancora con lo stesso testo, documenta con `blocked-workflows-scope` e includi il messaggio di rifiuto integrale. Qualunque altro errore di push (conflitto, protezione del branch, rete) NON è questo caso e va gestito come tale.' || 'Questo run NON ha il PAT: sia il remote git sia il lane Codex ricadono sul GITHUB_TOKEN, che per policy di GitHub non può creare né modificare file sotto `.github/workflows/**`. Se il fix richiede di toccarli il push fallirebbe SEMPRE → nessuna PR. NON implementare: posta un commento col diff proposto e "blocco scope workflows: il PAT non è stato caricato (controlla lo step Load secrets from Remote Config), serve il PAT o una mano umana", e TERMINA SUBITO con `blocked-workflows-scope`.' }} In ogni caso, se il fix richiede impostazioni del repo, branch protection o segreti non presenti in CI → documenta e TERMINA senza implementare. Fare tutto il lavoro per poi scoprire il blocco al push è il modo più costoso di fallire: il blocco è deterministico, va visto al turno 1.
             - **Issue aggregata — is_aggregate=${{ steps.tier.outputs.is_aggregate }}.** Se `true`, tentare tutti gli item in un run sfora il budget turni e consegna ZERO PR. **Regola ferrea:** fixa ESATTAMENTE UN item, poi fermati. (a) applica il capability guard per-item, saltando quelli fuori capacità senza abortire l'intera issue; (b) scegli il primo item in-capacità a maggior valore; (c) implementa solo quello; (d) appena la PR è aperta STOP IMMEDIATO, anche con turni residui; (e) elenca gli altri in `## Non implementato`, che li ri-accoda. Ogni ciclo chiude almeno un item, quindi converge.
 
             **Daily bucket — is_daily_bucket=${{ steps.tier.outputs.is_daily_bucket }}, daily_key=${{ steps.tier.outputs.daily_key }}, item=${{ steps.tier.outputs.selected_item_id }}.** È un contenitore giornaliero condiviso: lavora SOLO l'item stabile selezionato `${{ steps.tier.outputs.selected_item_id }}` e non gli altri item del bucket. Nel body della PR copia VERBATIM la riga di chiusura pre-calcolata `${{ steps.closing.outputs.closing_ref }}`. Per un daily bucket deve essere `Addresses #${{ github.event.issue.number }}` più `Follow-up item: ${{ steps.tier.outputs.selected_item_id }}`; non usare mai `Closes`.
@@ -757,7 +749,7 @@ jobs:
               -m "Run: $RUN_URL" || echo "wip-salvage: commit vuoto o rifiutato, continuo."
           fi
 
-          # Ri-applica l'identita' di push: dopo claude-code-action il remote
+          # Ri-applica l'identita' di push: dopo il lane Codex il remote
           # porta la credenziale che l'action ha ricevuto, e l'extraheader di
           # actions/checkout ha comunque la precedenza sull'URL — stessa
           # trappola documentata nello step «Configure git identity».
@@ -812,34 +804,6 @@ jobs:
           gh pr edit "$PR_NUMBER" --repo "$REPO" --add-label agent:autofix \
             && echo "provenance: PR #$PR_NUMBER marcata agent:autofix" \
             || echo "::warning::provenance: label agent:autofix non applicata alla PR #$PR_NUMBER"
-
-      - name: Claude usage metrics
-        if: always() && steps.claude_fix.outputs.claude_used == 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
-        continue-on-error: true
-        run: node scripts/ci/claude-usage-summary.mjs "${{ steps.claude_fix.outputs.execution_file }}" "issue-fix"
-
-      # Distingue le morti: max-turns, 429, 5xx. Senza questo, un 429 (che ha
-      # `subtype: success` con `is_error: true`) è indistinguibile da una run
-      # morta, e la issue verrebbe ri-accodata contro un muro noto finché non
-      # esaurisce i tentativi e viene parcheggiata — poi chiusa in automatico
-      # senza che nessun agent l'abbia mai letta.
-      - name: Mark Claude terminal outcome (granular telemetry)
-        if: always() && steps.claude_fix.outputs.claude_used == 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true' && steps.handoff_pre.outputs.handoff_delivered != 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
-          # `mark-claude-terminal-outcome.mjs` legge ISSUE, non ISSUE_NUMBER
-          # (mode `identical`: lo script e' quello del sito, dove il chiamante
-          # passa ISSUE). Con la sola ISSUE_NUMBER lo script usciva stampando
-          # "ISSUE non impostata -> niente telemetria da postare" e la telemetria
-          # granulare non e' MAI stata pubblicata — cioe' proprio il segnale che
-          # spiegherebbe un fixer che gira e non produce nulla.
-          ISSUE: ${{ github.event.issue.number }}
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-          EXEC_FILE: ${{ steps.claude_fix.outputs.execution_file }}
-          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        run: node scripts/ci/mark-claude-terminal-outcome.mjs
 
       # Simmetrico al claim, e su OGNI percorso terminale (successo, blocco,
       # max-turns, fallimento infra). `agent:in-progress` e' mutua esclusione,
@@ -964,7 +928,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           ISSUE: ${{ github.event.issue.number }}
-          CLAUDE_OUTCOME: ${{ steps.claude_fix.outcome }}
+          ACTION_OUTCOME: ${{ steps.codex_fix.outcome }}
         run: |
           set -uo pipefail
           # `sort_by(.createdAt) | last`, non `.[0]`: con un branch `fix/issue-<N>`
@@ -980,12 +944,12 @@ jobs:
             echo "::error::issue-fix #$ISSUE: impossibile verificare le PR consegnate (gh pr list rc=$PR_LOOKUP_RC); non classifico la CLI come non-delivery."
             exit 1
           fi
-          echo "issue=$ISSUE pr(head fix/issue-$ISSUE, open|merged)=${PR_STATE:-<none>} claude=$CLAUDE_OUTCOME"
+          echo "issue=$ISSUE pr(head fix/issue-$ISSUE, open|merged)=${PR_STATE:-<none>} claude=$ACTION_OUTCOME"
           if [ -n "${PR_STATE:-}" ]; then
-            echo "PR #$PR_STATE esiste (open/merged) per la issue -> run SUCCESS. Job verde anche se la CLI e' uscita '$CLAUDE_OUTCOME' (falso-fallimento: lavoro consegnato)."
+            echo "PR #$PR_STATE esiste (open/merged) per la issue -> run SUCCESS. Job verde anche se la CLI e' uscita '$ACTION_OUTCOME' (falso-fallimento: lavoro consegnato)."
             exit 0
           fi
-          if [ "$CLAUDE_OUTCOME" = "failure" ]; then
+          if [ "$ACTION_OUTCOME" = "failure" ]; then
             # Quota esaurita (429): il job resta comunque ROSSO — non e' un
             # successo e non ha consegnato niente, quindi nessun falso-verde.
             # Cambia solo il MESSAGGIO: attribuire questi run al «fixer che non
@@ -1000,12 +964,12 @@ jobs:
               echo "::error::issue-fix #$ISSUE: run terminata su QUOTA Claude esaurita (429) al primo turno — l'agente non ha letto la issue (0 turni, costo 0). Non e' un fallimento di diagnosi: la issue e' stata ri-accodata SENZA consumare un tentativo. Job ROSSO perche' nessuna PR e' stata consegnata (nessun falso-verde)."
               exit 1
             fi
-            echo "::error::issue-fix #$ISSUE: nessuna PR aperta/mergiata e la CLI e' fallita ('$CLAUDE_OUTCOME') -> non-delivery reale. Job ROSSO (segnale preservato per il drainer e il report di salute)."
+            echo "::error::issue-fix #$ISSUE: nessuna PR aperta/mergiata e la CLI e' fallita ('$ACTION_OUTCOME') -> non-delivery reale. Job ROSSO (segnale preservato per il drainer e il report di salute)."
             exit 1
           fi
-          echo "Nessuna PR ma la CLI e' uscita pulita ('$CLAUDE_OUTCOME') -> terminale legittimo (blocked/already-fixed/no-root-cause). Job verde."
+          echo "Nessuna PR ma la CLI e' uscita pulita ('$ACTION_OUTCOME') -> terminale legittimo (blocked/already-fixed/no-root-cause). Job verde."
 
-      - name: Release shared Claude quota lease
+      - name: Release shared Codex lane quota lease
         if: always() && steps.quota_lease.outputs.lease_consumed == 'true'
         continue-on-error: true
         env:

@@ -291,7 +291,7 @@ test('il bridge corpus resta host-side anche quando il PAT arriva da GITHUB_ENV'
 
 test('the corpus review loads its host-side PAT before invoking Codex', () => {
   const reviewStep = workflowStep(testsWorkflow, 'Run Codex Luna Max review');
-  const followupStep = workflowStep(followupWorkflow, 'Run Claude follow-up triage (batch)');
+  const followupStep = workflowStep(followupWorkflow, 'Run Codex Luna Max follow-up triage (batch)');
   const firebaseStep = workflowStep(followupWorkflow, 'Prepare Firebase credentials for follow-up routing');
   const credentialsStep = workflowStep(followupWorkflow, 'Load cross-repo follow-up credentials');
   assert.match(firebaseStep, /if: always\(\)/,
@@ -310,7 +310,7 @@ test('the corpus review loads its host-side PAT before invoking Codex', () => {
   assert.doesNotMatch(followupStep, /GITHUB_PAT:\s*\$\{\{ env\.GITHUB_PAT \}\}/);
   assert.match(followupWorkflow, /SITE_REPO: valerielinc-ops\/frontaliere-si-o-no/);
   assert.match(followupWorkflow, /target_token="\$\{GITHUB_PAT_SITE:-\$\{GITHUB_PAT:-\$\{GH_TOKEN:-\}\}\}"/);
-  assert.match(followupWorkflow, /Gate sul conio — sito \(zero-Claude\)/);
+  assert.match(followupWorkflow, /Gate sul conio — sito \(zero-provider\)/);
   assert.match(followupWorkflow, /Checkout site gate implementation/);
   assert.match(followupWorkflow, /repository: valerielinc-ops\/frontaliere-si-o-no/);
   assert.match(followupWorkflow, /sparse-checkout:\s*\|\n\s+\.github\/workflows\n\s+scripts\/ci/);
@@ -329,8 +329,8 @@ test('the corpus review loads its host-side PAT before invoking Codex', () => {
 });
 
 test('#1312: Lessons harvester non blocca Codex quando la quota Claude e\u0027 esaurita', () => {
-  const quota = workflowStep(lessonsWorkflow, 'Pre-flight — Claude quota telemetry (Codex primary)');
-  const draft = workflowStep(lessonsWorkflow, 'Draft doc-rule proposal (Claude — only if NOVEL patterns)');
+  const quota = workflowStep(lessonsWorkflow, 'Pre-flight — Codex lane quota telemetry');
+  const draft = workflowStep(lessonsWorkflow, 'Draft doc-rule proposal (Codex Luna Max — only if NOVEL patterns)');
 
   assert.match(quota, /continue-on-error: true/,
     'la telemetria quota non deve trasformare un 429 in un workflow failure');

@@ -128,7 +128,7 @@ test('il classificatore guarda il LAVORO, non l\'exit della CLI', () => {
   // DOPO quello sull'outcome della CLI, un run morto ai turni dopo aver aperto
   // la PR uscirebbe rosso pur avendo consegnato.
   const prCheck = s.indexOf('PR_STATE=');
-  const cliCheck = s.indexOf('$CLAUDE_OUTCOME" = "failure"');
+  const cliCheck = s.indexOf('$ACTION_OUTCOME" = "failure"');
   assert.ok(prCheck !== -1, 'il classificatore non cerca una PR sul branch della issue');
   assert.ok(cliCheck !== -1, 'il classificatore non guarda l\'outcome della CLI');
   assert.ok(
@@ -141,7 +141,7 @@ test('il classificatore guarda il LAVORO, non l\'exit della CLI', () => {
 test('un errore nel lookup delle PR resta distinto dalla non-consegna della CLI', () => {
   const s = step(CLASSIFY);
   const lookup = s.indexOf('if PR_STATE=$(gh pr list');
-  const cliCheck = s.indexOf('$CLAUDE_OUTCOME" = "failure"');
+  const cliCheck = s.indexOf('$ACTION_OUTCOME" = "failure"');
   assert.ok(lookup !== -1, 'il lookup delle PR deve avere un ramo di errore esplicito');
   assert.ok(cliCheck > lookup, 'il lookup delle PR deve precedere la classificazione della CLI');
   const lookupBlock = s.slice(lookup, cliCheck);

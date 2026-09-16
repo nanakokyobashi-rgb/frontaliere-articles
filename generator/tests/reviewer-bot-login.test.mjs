@@ -79,7 +79,7 @@ test('i consumer .mjs della review importano la costante invece di riscriverla',
     'scripts/ci/harvest-agent-lessons.mjs',
   ]) {
     const src = read(mjs);
-    assert.match(src, /REVIEWER_BOT_LOGIN_RE|isReviewerBot/, `${mjs} deve usare la costante o il predicato condiviso`);
+    assert.match(src, /REVIEWER_BOT_LOGIN_RE|isReviewerBot|isManagedReview/, `${mjs} deve usare la costante o il predicato condiviso`);
     assert.ok(
       !/\/\^claude\/i\.test\(/.test(src),
       `${mjs} ha ancora un filtro login /^claude/i locale`,

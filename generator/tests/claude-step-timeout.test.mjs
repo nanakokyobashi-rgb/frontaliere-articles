@@ -164,7 +164,7 @@ test('i due workflow del ciclo agentico dichiarano il tetto SULLO step', () => {
   // Regressione mirata: nei due file dove il cap del job e' 360 il tetto non
   // puo' arrivare dal job, o la coda di step post-Claude muore col job.
   for (const [file, stepName] of [
-    ['issue-fix.yml', 'Run Claude fix'],
+    ['issue-fix.yml', 'Run Codex Luna Max fix'],
     ['tests.yml', 'Run Codex Luna Max review'],
   ]) {
     const yaml = fs.readFileSync(path.join(WORKFLOW_DIR, file), 'utf8');
