@@ -1,5 +1,4 @@
 {
-  "https://www.rsi.ch/s/3995190": "italia-rimpatrio-asilo",
   "https://www.admin.ch/it/newnsb/f-gc331fsl8o": "asilo-statistica-luglio-2026",
   "https://www.rsi.ch/s/3995136": "cassis-neutralita",
   "https://www.tio.ch/svizzera/politica/1944654/iniziativa-commissione-contanti-servizio-obbligo": {
@@ -2485,6 +2484,11 @@
   "https://www.rsi.ch/s/4085818": {
     "articleId": "ruag-riorganizzazione-tagli-posti",
     "ts": "2026-09-16T01:29:58.339Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/jyzpuh-clp7c": {
+    "articleId": "consiglio-federale-obiettivi-2027",
+    "ts": "2026-09-16T01:40:06.867Z",
     "keyForm": 2
   }
 }
