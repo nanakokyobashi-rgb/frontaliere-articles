@@ -68,6 +68,13 @@ test('every active article CLI caller wires the bounded Codex broker', () => {
     const oauthIndexes = lines
       .map((line, index) => /^\s+CLAUDE_CODE_OAUTH_TOKEN:/.test(line) ? index : -1)
       .filter((index) => index >= 0);
+    const crawlerLaunchIndexes = lines
+      .map((line, index) => /^\s+id:\s*crawler-launch-/.test(line) ? index : -1)
+      .filter((index) => index >= 0);
+    const articleCommandIndexes = lines
+      .map((line, index) => /\bgenerator\/scripts\/create-article\.mjs\b/.test(line)
+        && !/^\s*(?:#|-\s*')/.test(line) ? index : -1)
+      .filter((index) => index >= 0);
     if (preferredIndexes.length > 0 && oauthIndexes.length === 0) {
       // The Codex-only artifact is the current contract. Keep accepting the
       // legacy Claude-backed artifact while the corpus transport PR is still
@@ -76,6 +83,18 @@ test('every active article CLI caller wires the bounded Codex broker', () => {
         const consumer = stepBlock(lines, index);
         assert.match(consumer, new RegExp(escapeRegex(SOCKET)), `${rel}: Codex consumer lacks broker socket`);
         assert.match(consumer, /AI_MODELS_PREFER:\s*codex-cli\/gpt-5\.6-luna/, `${rel}: Codex consumer preference is not pinned`);
+      }
+    } else if (oauthIndexes.length === 0) {
+      // The preferred lane is now selected per call by create-article.mjs.
+      // Crawler launchers and the article command still need the broker
+      // capability, but must not inherit a process-wide preference that can
+      // consume the one-shot Codex marker during pre-spend classification.
+      const codexConsumerIndexes = [...crawlerLaunchIndexes, ...articleCommandIndexes];
+      assert.ok(codexConsumerIndexes.length > 0, `${rel}: no Codex consumer found`);
+      for (const index of codexConsumerIndexes) {
+        const consumer = stepBlock(lines, index);
+        assert.match(consumer, new RegExp(escapeRegex(SOCKET)), `${rel}: Codex consumer lacks broker socket`);
+        assert.doesNotMatch(consumer, /AI_MODELS_PREFER:/, `${rel}: Codex preference leaked into workflow scope`);
       }
     } else {
       // Legacy corpus artifacts (including the interim hybrid translation

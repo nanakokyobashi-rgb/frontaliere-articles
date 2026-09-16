@@ -846,10 +846,10 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           CHAIN_LINK: ${{ steps.mode.outputs.chain_link }}
           # Issue #313 — la meta' che DEVE stare sul processo che chiama callLLM:
-          # Prefer the subscribed Codex lane; the normal provider chain remains
-          # available when the broker is unavailable.
+          # create-article.mjs selects Codex with a per-call preference on body
+          # generation. Keep the process-wide environment neutral so the
+          # pre-spend classifier cannot consume the run's one-shot Codex lane.
           CODEX_AUTH_BROKER_SOCKET: ${{ steps.setup_claude_haiku_fallback.outputs.codex_auth_broker_socket }}
-          AI_MODELS_PREFER: codex-cli/gpt-5.6-luna
         run: |
           # `set +e` explicitly: GitHub's default shell is `bash -eo pipefail`,
           # so without this the step dies the instant create-article.mjs exits
