@@ -77,6 +77,11 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'PR aperta da verificare con il gate completo, inclusa la review Codex'
+        required: false
+        type: string
 
 # Union dei permessi dei tre workflow fusi qui dentro: i test non ne chiedevano
 # (default), `pr-body-contract` scriveva la sticky sulla PR, la review posta il
@@ -156,13 +161,15 @@ jobs:
       - name: PR-body completeness + multi-issue Closes (zero-Claude)
         id: body_contract
         if: >-
-          ${{ !cancelled() && github.event_name == 'pull_request' &&
-          github.event.pull_request.draft == false &&
-          github.event.pull_request.head.ref != 'engine-lockstep-auto' }}
+          ${{ !cancelled() &&
+          ((github.event_name == 'pull_request' &&
+            github.event.pull_request.draft == false &&
+            github.event.pull_request.head.ref != 'engine-lockstep-auto') ||
+           (github.event_name == 'workflow_dispatch' && inputs.pr_number != '')) }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-        run: node scripts/ci/pr-body-contract.mjs "${{ github.event.pull_request.number }}"
+        run: node scripts/ci/pr-body-contract.mjs "${{ github.event.pull_request.number || inputs.pr_number }}"
 
       # ══════════════════════════════════════════════════════════════════════
       # FAMIGLIA 2/3 — unit + closure gates
@@ -249,17 +256,39 @@ jobs:
         # giudizio gia' dato — e un `## LGTM` negato bloccherebbe il canale con
         # cui le correzioni all'engine scendono.
         if: >-
-          ${{ steps.body_contract.outcome != 'failure' && github.event_name == 'pull_request' &&
-          github.event.pull_request.draft == false &&
-          github.event.pull_request.head.ref != 'engine-lockstep-auto' }}
+          ${{ steps.body_contract.outcome != 'failure' &&
+          ((github.event_name == 'pull_request' &&
+            github.event.pull_request.draft == false &&
+            github.event.pull_request.head.ref != 'engine-lockstep-auto') ||
+           (github.event_name == 'workflow_dispatch' && inputs.pr_number != '')) }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PRN: ${{ github.event.pull_request.number }}
-          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          PRN: ${{ github.event.pull_request.number || inputs.pr_number }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
           REPO: ${{ github.repository }}
+          EVENT_NAME: ${{ github.event_name }}
         run: |
           set -uo pipefail
           title=$(gh pr view "$PRN" --repo "$REPO" --json title --jq '.title // ""' 2>/dev/null || true)
+          if [ "${EVENT_NAME:-}" = 'workflow_dispatch' ]; then
+            if ! details=$(gh pr view "$PRN" --repo "$REPO" --json state,isDraft,headRefName,headRefOid); then
+              echo '::error::Impossibile risolvere la PR indicata dal workflow_dispatch.'
+              exit 1
+            fi
+            state=$(printf '%s' "$details" | jq -r '.state // ""')
+            is_draft=$(printf '%s' "$details" | jq -r '.isDraft // false')
+            head_ref=$(printf '%s' "$details" | jq -r '.headRefName // ""')
+            resolved_head=$(printf '%s' "$details" | jq -r '.headRefOid // ""')
+            if [ "$state" != 'OPEN' ] || [ "$is_draft" = 'true' ] || [ "$head_ref" = 'engine-lockstep-auto' ]; then
+              echo '::error::La PR indicata deve essere aperta, non draft e non engine-lockstep-auto.'
+              exit 1
+            fi
+            if [ "$resolved_head" != "$HEAD_SHA" ]; then
+              echo "::error::La PR #$PRN non punta alla HEAD del run ($HEAD_SHA): $resolved_head."
+              exit 1
+            fi
+            HEAD_SHA="$resolved_head"
+          fi
           {
             echo "pr_number=$PRN"
             echo "should_review=true"
@@ -1054,8 +1083,9 @@ jobs:
       # carry-forward; qui si sorveglia soltanto che quel punto abbia girato.
       - name: Fail when required review gate is skipped
         if: >-
-          ${{ steps.body_contract.outcome != 'failure' && always() && github.event_name == 'pull_request' &&
-          github.event.pull_request.draft == false &&
+          ${{ steps.body_contract.outcome != 'failure' && always() &&
+          ((github.event_name == 'pull_request' && github.event.pull_request.draft == false) ||
+           (github.event_name == 'workflow_dispatch' && inputs.pr_number != '')) &&
           steps.review_gate.outcome == 'skipped' }}
         run: |
           echo "::error::Required review gate was skipped on a pull request; no approving review verdict was evaluated."
