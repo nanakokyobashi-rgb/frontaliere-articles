@@ -3392,7 +3392,8 @@
     {
       "path": ".github/workflows/translate-pending.yml",
       "sitePath": ".github/corpus-workflows/translate-pending.yml",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "Il corpus rimuove DATA_PIPELINE_LEASE per chiudere l'issue #1314: il workflow di pubblicazione non deve prendere la lease globale del sito. Il gemello del sito conserva la lease, quindi questo file resta sorvegliato ma non e' trasportabile byte per byte.",
       "baseline": {
         "site": "0fd66752f8707170",
         "corpus": "3abf38f4b2302044",
@@ -3402,10 +3403,11 @@
     {
       "path": "generator/data/crawler-cross-repo-contract.json",
       "sitePath": ".github/corpus-workflows/contract.json",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "Il contratto del corpus registra il nuovo digest dell'artifact translate-pending dopo la rimozione di DATA_PIPELINE_LEASE per l'issue #1314; il contratto del sito conserva il digest precedente. I due blob devono quindi restare distinti e sorvegliati.",
       "baseline": {
         "site": "71ccc22a16f2bd78",
-        "corpus": "2975afb72059e987",
+        "corpus": "67083fd40d947b51",
         "alignedAt": "2026-09-15"
       }
     },
