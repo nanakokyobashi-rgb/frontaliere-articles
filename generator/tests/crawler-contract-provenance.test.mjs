@@ -41,6 +41,7 @@ import {
   formatReport,
   isLogicSource,
   isRuntimeFlagSupported,
+  manifestArtifactEntry,
   planProvenanceChecks,
   planRuntimeFlagChecks,
   resolveSiteCandidate,
@@ -324,6 +325,67 @@ test('un artifact `adapted` senza digest resta `undeclared` e rosso', () => {
   const artifact = verdict.results.find((r) => r.field === 'crawler-group-01.yml#artifactSha256');
   assert.equal(artifact.state, 'undeclared');
   assert.equal(verdict.red, true);
+});
+
+test('il verifier rifiuta una modalità manifest sconosciuta invece di saltare il confronto', () => {
+  const info = manifestArtifactEntry({
+    files: [{
+      path: '.github/workflows/crawler-group-01.yml',
+      sitePath: '.github/corpus-workflows/crawler-group-01.yml',
+      mode: 'corpus-only',
+    }],
+  }, '.github/workflows/crawler-group-01.yml');
+  assert.equal(info.mode, 'corpus-only');
+  assert.match(info.error, /non supportata/);
+
+  const checks = planProvenanceChecks(fixtureContract, {
+    files: [{
+      path: '.github/workflows/crawler-group-01.yml',
+      sitePath: '.github/corpus-workflows/crawler-group-01.yml',
+      mode: 'corpus-only',
+    }],
+  });
+  const artifact = checks.find((c) => c.field.endsWith('#artifactSha256'));
+  assert.equal(artifact.localOnly, undefined);
+  assert.equal(artifact.manifestModeError, info.error);
+  const verdict = evaluateProvenance(checks, new Map());
+  const result = verdict.results.find((r) => r.field === artifact.field);
+  assert.equal(result.state, 'undeclared');
+  assert.equal(verdict.red, true);
+  assert.match(result.detail, /modalità manifest non supportata/);
+});
+
+test('il verifier rifiuta voci manifest duplicate invece di usare l ultima', () => {
+  const manifest = {
+    files: [
+      { path: '.github/workflows/crawler-group-01.yml', sitePath: 'first.yml' },
+      { path: '.github/workflows/crawler-group-01.yml', sitePath: 'second.yml' },
+    ],
+  };
+  const info = manifestArtifactEntry(manifest, '.github/workflows/crawler-group-01.yml');
+  assert.match(info.error, /duplicate/);
+  const artifact = planProvenanceChecks(fixtureContract, manifest)
+    .find((c) => c.field.endsWith('#artifactSha256'));
+  assert.equal(artifact.sitePath, null);
+  assert.match(artifact.manifestModeError, /duplicate/);
+  const result = evaluateProvenance([artifact], new Map()).results[0];
+  assert.equal(result.state, 'undeclared');
+});
+
+test('un artifact `identical` senza sitePath resta rosso e diagnosticabile', () => {
+  const manifest = {
+    files: [{
+      path: '.github/workflows/crawler-group-01.yml',
+      mode: 'identical',
+    }],
+  };
+  const info = manifestArtifactEntry(manifest, '.github/workflows/crawler-group-01.yml');
+  assert.match(info.error, /identical senza sitePath/);
+  const artifact = planProvenanceChecks(fixtureContract, manifest)
+    .find((c) => c.field.endsWith('#artifactSha256'));
+  const result = evaluateProvenance([artifact], new Map()).results[0];
+  assert.equal(result.state, 'undeclared');
+  assert.match(result.detail, /identical senza sitePath/);
 });
 
 test('il piano reale copre i 49 digest e la lineage del contratto committato', () => {

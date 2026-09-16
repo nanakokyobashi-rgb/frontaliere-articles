@@ -88,6 +88,7 @@
 
 import { extractSection, stripNonContent } from './pr-body-sections-check.mjs';
 import { stripEmphasis } from './pr-body-closes-check.mjs';
+import { NEGATION_LOOKBEHIND } from '../ci/lib/false-positive-declaration.mjs';
 
 // Gli stessi header di `pr-body-sections-check.mjs`. Il corpus usa la variante
 // `(ancora)`, il sito quella senza: il modulo accetta entrambe cosi' resta
@@ -210,14 +211,44 @@ export const ESCAPE_HATCHES = [
 /**
  * Una decisione motivata esplicita NON e' una scappatoia: «per scelta», «by
  * construction», «e' una decisione, non una dimenticanza» sono stati terminali
- * legittimi, e i body reali li usano. Senza questa esenzione il livello
- * bloccante prenderebbe anche loro.
+ * legittimi, e i body reali li usano. Nel contratto stretto restano validi solo
+ * se la voce porta anche un motivo e un prossimo passo concreti.
  */
 // Niente `\b` davanti a `è`: fuori dalla modalita' unicode `è` non e' un
 // carattere di parola, quindi il confine non si comporta come ci si aspetta e
 // l'alternativa non aggancia mai.
-export const DECISION_RE =
-  /\bby construction\b|\bper (?:scelta|costruzione|design)\b|(?:è|e')\s+una\s+decisione\b|\bdi proposito\b|\bdeliberat\w*/i;
+export const DECISION_RE = new RegExp(
+  String.raw`\bby construction\b|\bper (?:scelta|costruzione|design)\b|(?:è|e')\s+una\s+decisione\b|\bdi proposito\b|\bdeliberat\w*|\bblocked\s*:\s*(?:decisione del proprietario|owner decision)\b|${NEGATION_LOOKBEHIND}\bfalso\s+positivo\b|${NEGATION_LOOKBEHIND}\bfalse\s+positive\b`,
+  'iu',
+);
+
+// Una deroga motivata deve essere utile anche a chi riprende la PR dopo il
+// merge: il solo «per scelta» non dice né quale vincolo abbia guidato la scelta
+// né quando/come il lavoro verrà ripreso. Le due etichette sono intenzionali e
+// parsabili senza interpretare prosa arbitraria. `stripEmphasis()` rende
+// equivalenti `**Motivo:**` e `Motivo:`.
+const DECISION_REASON_RE = /\b(?:motivo|ragione|reason)\s*:\s*(.+?)(?=\s+\b(?:prossimo\s+passo|next\s+step|azione\s+successiva)\s*:|$)/iu;
+const DECISION_NEXT_STEP_RE = /\b(?:prossimo\s+passo|next\s+step|azione\s+successiva)\s*:\s*(.+)$/iu;
+const DECISION_PLACEHOLDER_RE = /^(?:<[^>]+>|\.\.\.|tbd|n\/a|da\s+(?:definire|decidere|valutare)|da\s+fare)\s*[.!]?$/iu;
+
+function concreteDecisionValue(value) {
+  const clean = String(value ?? '').replace(/\s+/gu, ' ').trim();
+  return clean.length >= 8
+    && !DECISION_PLACEHOLDER_RE.test(clean)
+    && /[\p{L}\p{N}]/u.test(clean);
+}
+
+/** Verifica la parte strutturale di una deroga motivata. */
+export function decisionDeferralSpecificity(text) {
+  const normalized = stripEmphasis(String(text ?? ''));
+  const reason = normalized.match(DECISION_REASON_RE)?.[1]?.trim() || '';
+  const nextStep = normalized.match(DECISION_NEXT_STEP_RE)?.[1]?.trim() || '';
+  return {
+    specific: concreteDecisionValue(reason) && concreteDecisionValue(nextStep),
+    reason,
+    nextStep,
+  };
+}
 
 /**
  * Estrae le voci di PRIMO livello della sezione. Le righe di continuazione e i
@@ -319,9 +350,10 @@ const STATE_TEMPLATE =
  * messaggi diversi sono peggio di uno.
  *
  * @param {string} body
+ * @param {{ strict?: boolean }} options
  * @returns {{ ok: boolean, violations: Array<object>, advisories: Array<object> }}
  */
-export function checkNextStepStates(body = '') {
+export function checkNextStepStates(body = '', { strict = false } = {}) {
   const s = String(body ?? '');
   const headerRe = NON_IMPL_ANCORA_RE.test(s) ? NON_IMPL_ANCORA_RE : NON_IMPL_ANY_RE;
   const section = extractSection(s, headerRe);
@@ -365,7 +397,8 @@ export function checkNextStepStates(body = '') {
     // `fuori **scope**` e l'esenzione non vede `per **scelta**` nella stessa
     // voce, il gate segnala una decisione motivata come rinvio. I due lati
     // della stessa condizione devono leggere lo stesso testo.
-    const decided = DECISION_RE.test(stripEmphasis(b.text));
+    const normalized = stripEmphasis(b.text);
+    const decided = DECISION_RE.test(normalized);
     if (hatch && !decided) {
       violations.push({
         type: 'escape-hatch-instead-of-state',
@@ -381,13 +414,32 @@ export function checkNextStepStates(body = '') {
           '(Se e\' una decisione motivata e non un rinvio, scrivilo: «per scelta», «by construction».)',
       });
     } else if (decided) {
+      const specificity = decisionDeferralSpecificity(b.text);
+      if (strict && !specificity.specific) {
+        violations.push({
+          type: 'decision-deferral-not-specific',
+          section: 'Non implementato (ancora)',
+          index: b.index,
+          text: b.text,
+          snippet: snippetOf(b.text),
+          escapeHatch: hatch,
+          reason: specificity.reason,
+          nextStep: specificity.nextStep,
+          message:
+            `Voce ${b.index} («${snippetOf(b.text, 55)}») usa una deroga motivata ` +
+            '(`per scelta`/`by construction`/`falso positivo`) senza un motivo e un prossimo passo ' +
+            'verificabili. Completa la voce con `**Motivo:** <causa concreta>. ' +
+            '**Prossimo passo:** <azione concreta>.`.',
+        });
+        continue;
+      }
       // L'esenzione «decisione motivata» resta — ma VISIBILE, non silenziosa.
       // Il messaggio della violazione qui sopra suggerisce «per scelta» come
       // rimedio: senza questo ramo, un fixer che aggiunge la frase SENZA
       // togliere la scappatoia usciva da entrambi i rami e la voce passava
       // senza lasciare traccia — il rimedio suggerito diventava un bypass.
-      // Advisory e non violation perche' una decisione motivata e' uno stato
-      // terminale legittimo: va letta da un umano, non bloccata da una regex.
+      // Una decisione completa resta advisory perche' e' uno stato terminale
+      // legittimo: la forma minima e' gia' stata verificata sopra in strict.
       advisories.push({
         type: 'hatch-exempted-by-decision',
         section: 'Non implementato (ancora)',
@@ -427,9 +479,10 @@ export function checkNextStepStates(body = '') {
  * essere un piano comprensibile anche senza una forma letterale. Il contratto
  * del body non può però lasciare ogni caso al reviewer: la sezione
  * `Non implementato` deve dichiarare uno stato oppure fallire in modo
- * deterministico quando non porta neppure un riferimento `#N` nudo. Le
- * esenzioni motivate (`hatch-exempted-by-decision`) restano avvisi e non
- * vengono promosse.
+ * deterministico quando non porta neppure un riferimento `#N` nudo. In modalità
+ * stretta, anche una decisione motivata senza motivo e prossimo passo concreti
+ * è bloccante. Le decisioni complete (`hatch-exempted-by-decision`) restano
+ * avvisi e non vengono promosse.
  *
  * @param {{ violations?: Array<object>, advisories?: Array<object> }} result
  * @returns {Array<object>}
@@ -445,8 +498,9 @@ export function blockingNextStepFindings(result = {}) {
  * Policy minima del runner per il finding che il classificatore lascia come
  * avviso. Un `#N` nudo non è uno stato (lo resta per l'API pura), ma è una
  * soglia conservativa: sui body reali della finestra #140 riduce il blocco ai
- * casi senza alcun riferimento tracciabile. Una decisione motivata resta
- * esente anche se il risultato arriva già dal classificatore in forma diversa.
+ * casi senza alcun riferimento tracciabile. Una decisione completa resta
+ * esente anche se il risultato arriva già dal classificatore in forma diversa;
+ * una decisione incompleta è invece una violation in modalità strict.
  */
 export function isBlockingNextStepFinding(finding = {}) {
   if (finding.type !== 'no-literal-state') return false;
@@ -468,14 +522,16 @@ export function isBlockingNextStepFinding(finding = {}) {
  * @returns {string|null} markdown della sezione corretta, o null se non serve
  */
 export function suggestedSection(body = '', { strict = false } = {}) {
-  const { violations, advisories } = checkNextStepStates(body);
-  // `hatch-exempted-by-decision` non entra nella riscrittura: la voce ha gia'
-  // uno stato terminale (la decisione), e proporle uno `**Stato:**` direbbe di
-  // riparare una cosa che non e' rotta.
+  const { violations, advisories } = checkNextStepStates(body, { strict });
+  // Una decisione completa non entra nella riscrittura: la voce ha gia' uno
+  // stato terminale. Una decisione incompleta, invece, riceve i due campi
+  // strutturali e diventa riparabile dal fixer.
   const rewritable = advisories.filter((a) => a.type !== 'hatch-exempted-by-decision');
   if (!violations.length && !rewritable.length) return null;
   const flagged = new Map();
-  for (const v of violations) flagged.set(v.index, 'violation');
+  for (const v of violations) {
+    flagged.set(v.index, v.type === 'decision-deferral-not-specific' ? 'decision' : 'violation');
+  }
   for (const a of rewritable) {
     flagged.set(a.index, strict && isBlockingNextStepFinding(a) ? 'violation' : 'advisory');
   }
@@ -494,7 +550,10 @@ export function suggestedSection(body = '', { strict = false } = {}) {
       continue;
     }
     const punctuated = text.replace(/\s*$/, '').replace(/([^.!?:;])$/, '$1.');
-    lines.push(`- ${punctuated} ${STATE_TEMPLATE}${kind === 'advisory' ? '  <!-- opzionale -->' : ''}`);
+    const template = kind === 'decision'
+      ? '**Motivo:** <causa concreta>. **Prossimo passo:** <azione concreta>.'
+      : STATE_TEMPLATE;
+    lines.push(`- ${punctuated} ${template}${kind === 'advisory' ? '  <!-- opzionale -->' : ''}`);
   }
   return lines.join('\n');
 }

@@ -307,30 +307,6 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: node scripts/ci/alert-pat-down.mjs --workflow "${{ github.workflow }}" --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
-      - name: Acquire shared Claude quota lease (redflag residual)
-        id: quota_lease
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
-          QUOTA_LEASE_ACTION: acquire
-          QUOTA_LEASE_ROLE: redflag
-          QUOTA_LEASE_OWNER: redflag-fixer
-          QUOTA_LEASE_TARGET_TYPE: pr
-          QUOTA_LEASE_TARGET: ${{ github.event.pull_request.number }}
-          QUOTA_LEASE_TTL_SEC: '3600'
-          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-        run: node scripts/ci/check-quota-backoff.mjs
-
-      - name: Shared Claude quota lease unavailable (expected skip)
-        if: steps.quota_lease.outputs.lease_allowed != 'true'
-        run: |
-          if [ "${{ steps.quota_lease.outputs.lease_error }}" = 'true' ]; then
-            echo "::error::Lease quota condiviso illeggibile o non verificabile → redflag fixer saltato fail-closed."
-            exit 1
-          fi
-          echo "::warning::Lease quota condiviso negato (${{ steps.quota_lease.outputs.lease_reason }}) → redflag fixer saltato senza consumare quota."
-
       # ── Round cap + capability guard (deterministico, prima di Claude) ────
       # Conta i marker `<!-- REDFLAG_FIX_ROUND: N -->` già sulla PR. A N>=2 →
       # escalation a needs-human, STOP senza Claude. Altrimenti incrementa.
@@ -351,7 +327,6 @@ jobs:
       # tenuti in disaccordo.
       - name: Round cap + capability guard + tier
         id: guard
-        if: steps.quota_lease.outputs.lease_allowed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
@@ -386,7 +361,7 @@ jobs:
             echo "::warning::Round cap raggiunto ($ROUND >= $MAX_ROUNDS) → escalation needs-human, no Claude."
             gh pr edit "$PR_NUMBER" --repo "$REPO" --add-label "needs-human" 2>/dev/null \
               || echo "label needs-human assente — creala: gh label create needs-human"
-            gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '🛑 **needs-human** (auto): il 🔴-fixer ha già tentato %s round senza chiudere i findings 🔴. STOP automatico (anti-loop, frugalità quota). Serve revisione umana: leggi le review più recenti e applica il fix a mano.' "$ROUND")" \
+            gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '🛑 **needs-human** (auto): il 🔴-fixer ha già tentato %s round senza chiudere i findings 🔴. STOP automatico (anti-loop). Serve revisione umana: leggi le review più recenti e applica il fix a mano.' "$ROUND")" \
               2>/dev/null || true
             echo "proceed=false" >> "$GITHUB_OUTPUT"
             exit 0
@@ -607,19 +582,9 @@ jobs:
         if: steps.guard.outputs.proceed == 'true' && steps.ctx.outputs.context_verified == 'true'
         uses: ./.github/actions/setup-headroom
 
-      # Il beacon resta telemetria: il lease condiviso sopra decide l'ammissione
-      # al turno, mentre questo probe conserva il segnale quota storico e il
-      # fallback Codex-primary senza introdurre un secondo veto.
-      - name: Pre-flight — Claude quota telemetry (Codex primary)
-        id: quota
-        if: steps.guard.outputs.proceed == 'true' && steps.ctx.outputs.context_verified == 'true'
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
-          QUOTA_BEACON_PEER_REPO: valerielinc-ops/frontaliere-si-o-no
-          CODEX_FALLBACK_MODE: '1'
-        run: node scripts/ci/check-quota-backoff.mjs
+      # Le review possono partire in parallelo: nessun lease AI condiviso e
+      # nessun pre-flight di quota. Claim, round cap e capability guard restano
+      # solo le protezioni operative contro duplicati e cicli non convergenti.
 
       # Il body e la HEAD possono cambiare fra la prefetch e l'avvio della
       # action Claude. Rifare il read/hash nell'ultimo step prima di consumare
@@ -750,7 +715,7 @@ jobs:
             - Esegui i test pertinenti: `npm test` (o il subset rilevante) per validare il fix prima di committare.
             - Commit con identity canonica già configurata (Valerie Linc <valerielinc@gmail.com>), messaggio conventional, nessuna email non-canonica in coda.
             - Push sullo stesso branch: `git push origin HEAD:${{ github.event.pull_request.head.ref }}`. Il remote `origin` è autenticato con il token passato a questa action come `github_token` (il PAT, quando disponibile): l'action riscrive `origin` all'avvio, quindi vale QUEL token, non quello configurato dagli step precedenti. Non è il GITHUB_TOKEN → il push ri-attiva la review dentro tests.yml (re-review), e i file sotto `.github/workflows/**` sono pushabili. Se il push fallisce per scope/auth → prima di arrenderti verifica `git remote -v` (deve mostrare `x-access-token:***@github.com`); se dice `without workflows permission`, il PAT non è arrivato: documenta in un commento e TERMINA.
-            - Aggiorna il body della PR (`gh pr edit $PR_NUMBER --body`) mantenendo `## Implementato` (aggiungi cosa hai fixato) + `## Non implementato (ancora)`.
+            - Aggiorna il body della PR (`gh pr edit $PR_NUMBER --body`) mantenendo `## Implementato` (aggiungi cosa hai fixato) + `## Non implementato (ancora)`. Ogni bullet della seconda sezione deve avere uno stato letterale: `in questa PR` / `PR concatenata #N` / `per scelta` / `by construction` / `falso positivo` / `blocked: <causa esterna reale>`. Le deroghe decisionali (`per scelta`, `by construction`, `falso positivo`, `blocked: decisione del proprietario`) sono chiusure solo con `**Motivo:** <causa concreta>. **Prossimo passo:** <azione concreta>.` nello stesso bullet; una deroga nuda, vaga o con placeholder viene bloccata dal gate. Se stai solo rimandando il lavoro, usa `PR concatenata #N` o `blocked: <causa esterna reale>`.
             - SCOPE: il blocco **Changed file list** è il confine della PR. Applica solo i finding `🔴 Important` che citano file presenti in quella lista; i finding su file fuori dal diff sono già stati coniati nel follow-up e non vanno fissati qui né trascinati nella PR.
 
             **Constraint:**
@@ -764,10 +729,10 @@ jobs:
 
       # Un 429 non e' un round: Claude non e' mai partito (0 turni, $0) e non ha
       # letto la PR. Il marker di round pero' e' gia' stato postato dal guard,
-      # quindi senza rimborso due finestre di quota consecutive spingono la PR a
+      # quindi senza rimborso due errori transitori consecutivi spingono la PR a
       # `needs-human` — che qui e' un filtro di ESCLUSIONE da ogni coda
-      # automatica (#733), cioe' uno stato assorbente. Gemello lato PR di
-      # `check-quota-backoff.mjs` + marker `rate-limited` del lato issue.
+      # automatica (#733), cioe' uno stato assorbente. Il rimborso riattiva il
+      # round senza introdurre un limite globale alla concorrenza.
       - name: Refund round on Claude quota 429 (zero-Claude)
         if: always() && steps.guard.outputs.proceed == 'true' && steps.ctx.outputs.context_verified == 'true'
         continue-on-error: true
@@ -819,17 +784,3 @@ jobs:
           fi
           echo "Nessun push ma Claude terminato pulito ('$CLAUDE_OUTCOME') → terminale legittimo (es. non auto-fixabile). Job verde."
           exit 0
-
-      - name: Release shared Claude quota lease
-        if: always() && steps.quota_lease.outputs.lease_allowed == 'true' && steps.quota_lease.outputs.lease_token != ''
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
-          QUOTA_LEASE_ACTION: release
-          QUOTA_LEASE_ROLE: redflag
-          QUOTA_LEASE_OWNER: redflag-fixer
-          QUOTA_LEASE_TARGET_TYPE: pr
-          QUOTA_LEASE_TARGET: ${{ github.event.pull_request.number }}
-          QUOTA_LEASE_TOKEN: ${{ steps.quota_lease.outputs.lease_token }}
-        run: node scripts/ci/check-quota-backoff.mjs

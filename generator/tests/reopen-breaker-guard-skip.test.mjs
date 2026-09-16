@@ -217,8 +217,8 @@ describe('WIRING: la decisione vera legge davvero il segnale', () => {
     );
     assert.match(guard, /grep -qE '\^\[a-f0-9\]\{64\}\$'/);
     assert.match(guard, /fpHead=UNKNOWN/);
-    assert.match(guard, /fpLast=UNKNOWN/);
     assert.match(guard, /review-claim-head-only:/);
+    assert.doesNotMatch(guard, /fpLast|compare\/\$last/);
     assert.doesNotMatch(guard, /NULL/);
   });
 });

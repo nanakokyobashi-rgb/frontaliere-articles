@@ -362,5 +362,6 @@ test('#8363: il preflight espone claim idempotente sul tripletto PR+HEAD+failure
   assert.match(source, /redcheck-review-prefilter\.mjs --claim/);
   assert.match(source, /failed_check_key/);
   assert.match(source, /claim_allowed/);
-  assert.match(source, /QUOTA_LEASE_ACTION: acquire/);
+  assert.doesNotMatch(source, /QUOTA_LEASE_ACTION: acquire/);
+  assert.doesNotMatch(source, /steps\.quota_lease\.outputs\.lease_(?:allowed|token)/);
 });

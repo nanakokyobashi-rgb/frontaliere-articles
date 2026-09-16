@@ -1,11 +1,11 @@
 name: Review quota rescuer (zero-Claude)
 
-# Un run `tests` può essere verde nei test ma rosso nel review gate perché il
-# lease condiviso era occupato dal fixer issue, oppure terminare senza un
-# verdetto per un errore transitorio. Questo workflow riapre quel solo arco del
-# grafo quando il consumer termina: non crea commit, non invoca Claude e non
-# tocca PR senza un claim/marker deterministico. Il percorso transient è
-# one-shot per PR + HEAD + body revision e rilancia soltanto `tests`.
+# Una PR può restare rossa nel review gate perché un run storico è stato
+# differito, oppure terminare senza un verdetto per un errore transitorio. Questo
+# workflow riapre quel solo arco del grafo quando il consumer termina: non crea
+# commit, non invoca Claude e non tocca PR senza un claim/marker deterministico.
+# Il percorso transient è one-shot per PR + HEAD + body revision e rilancia
+# soltanto `tests`, senza acquisire un lease AI condiviso.
 on:
   workflow_run:
     workflows:

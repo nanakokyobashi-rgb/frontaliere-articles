@@ -23,12 +23,10 @@
  * `## LGTM` e NESSUN finding `🔴 Important`, oppure solo finding su file fuori
  * dal diff corrente già raccolti in una issue follow-up (stessa
  * `REDFLAG_IMPORTANT_RE` che usa il redflag-fixer — una sola regex, nessun
- * drift). Deve stare sulla head corrente; se sta su un commit precedente vale
- * il CARRY-FORWARD: se il fingerprint del contributo (3-dot vs merge-base,
- * code-only) e' identico fra i due commit, la PR non ha cambiato il proprio
- * codice — tipicamente un rebase di solo main-merge — e la review resta valida.
- * E' la stessa funzione che usava `auto-merge-eval.mjs`, importata e non
- * riscritta.
+ * drift). Deve stare sulla head corrente. Un rebase, anche se cambia solo la
+ * base, rende stantia la review precedente: il workflow deve produrre un nuovo
+ * verdetto sulla SHA osservata dal check. Non si usa piu' un fingerprint per
+ * ereditare un LGTM tra commit diversi.
  *
  * ## Il drift-fallback
  *
@@ -41,9 +39,9 @@
  *
  * Si apre in due casi, entrambi «il reviewer non ha potuto parlare DELLA HEAD»:
  * nessuna review del bot, oppure l'ultima review NON si applica piu' (SHA
- * diverso E fingerprint del contributo cambiato). Un 🔴 sulla HEAD, o su un
- * commit precedente col contributo invariato, resta bloccante: quello e' un
- * verdetto ancora vivo, non un 401.
+ * diversa). Un 🔴 sulla HEAD resta bloccante; un verdetto su una SHA precedente
+ * non viene riusato, salvo il fallback deterministico esplicito per il drift
+ * del workflow.
  *
  * Uso:  node scripts/ci/review-gate.mjs
  * Env:  GH_TOKEN, GITHUB_REPOSITORY, PR_NUMBER, HEAD_SHA, REVIEW_REVISION,
@@ -60,9 +58,7 @@ import {
 import { execFileSync } from 'node:child_process';
 import { appendFileSync, readFileSync } from 'node:fs';
 import { parseCodexFallbackEvidence, FALLBACK_STATUS } from './claude-codex-fallback.mjs';
-import { createHash } from 'node:crypto';
 import {
-  prContributionFingerprint,
   isReviewWorkflowDriftPR,
   isTrustedDriftAuthor,
   prBodyContractOk,
@@ -116,11 +112,6 @@ function writeGateOutput(name, value) {
 function gh(args, { json = true } = {}) {
   const out = execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
   return json ? JSON.parse(out) : out;
-}
-
-function fingerprint(sha) {
-  const fp = prContributionFingerprint(sha);
-  return fp == null ? null : createHash('sha256').update(fp).digest('hex');
 }
 
 /** Read the trusted PR HEAD and body revision as one review-input snapshot. */
@@ -367,13 +358,9 @@ function commentOnce(body) {
   }
 }
 
-/** True se l'ultima review descrive ancora il contributo della head. */
+/** True only if the last review names the exact current head. */
 function reviewAppliesToHead(last) {
-  if (last.commit_id === HEAD_SHA) return true;
-  const headFp = fingerprint(HEAD_SHA);
-  const revFp = fingerprint(last.commit_id);
-  if (!headFp || !revFp) markTransientFailure();
-  return Boolean(headFp && revFp && headFp === revFp);
+  return Boolean(last?.commit_id && last.commit_id === HEAD_SHA);
 }
 
 async function main() {
@@ -447,8 +434,9 @@ async function main() {
     const outsideOnlyApproved = Boolean(applies && hasRedflag && scope?.outsideOnly && scope?.minted);
     const approving = (body.includes('## LGTM') && !hasRedflag) || outsideOnlyApproved;
     // The evidence file is ephemeral. On a rerun where the re-review guard
-    // correctly skips Claude, require the durable successful required-check
-    // proof before carrying a positive Codex review forward.
+    // correctly skips Claude for the same exact review input, require the
+    // durable successful required-check proof before reusing a positive Codex
+    // review from an earlier attempt.
     const codexCarryApproved = !isCodexReview
       || hasFreshCodexEvidence
       || codexReviewWasPreviouslyAccepted(last);
@@ -457,13 +445,7 @@ async function main() {
         writeFailureKind();
         process.exit(1);
       }
-      if (last.commit_id === HEAD_SHA) {
-        console.log(`review-gate: review approvante sulla head ${HEAD_SHA}.`);
-      } else {
-        console.log(
-          `review-gate: carry-forward — contributo invariato fra ${last.commit_id} e ${HEAD_SHA} (fingerprint ${fingerprint(HEAD_SHA)}).`,
-        );
-      }
+      console.log(`review-gate: review approvante sulla head ${HEAD_SHA}.`);
       process.exit(0);
     }
     if (approving && isCodexReview && !codexCarryApproved) {
@@ -474,10 +456,8 @@ async function main() {
         `review-gate: l'ultima review del bot (${last.commit_id}) non e' approvante — manca '## LGTM' oppure contiene un 🔴 Important.`,
       );
     } else {
-      const headFp = fingerprint(HEAD_SHA);
-      const revFp = fingerprint(last.commit_id);
       console.log(
-        `review-gate: la review approvante e' su ${last.commit_id}, non sulla head ${HEAD_SHA}, e il contributo e' cambiato (head=${headFp} review=${revFp}).`,
+        `review-gate: la review approvante e' su ${last.commit_id}, non sulla head ${HEAD_SHA}; serve una review nuova, anche se il contributo sembra invariato.`,
       );
     }
     if (!applies) {

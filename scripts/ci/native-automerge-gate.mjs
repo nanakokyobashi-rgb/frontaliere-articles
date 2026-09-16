@@ -6,9 +6,8 @@
  * Claude/frontaliere reviewer-bot verdict (or an explicitly marked Codex
  * fallback with structured review-gate evidence) and a completed required
  * Vitest check on the current HEAD before calling `gh pr merge --auto`. The
- * required check is the complete `tests` job, so its green result is the
- * authority for the review gate's validated LGTM carry-forward when the
- * review commit is older than the current HEAD.
+ * required check is the complete `tests` job. Both the check and the review
+ * must be tied to the exact current HEAD; no older review can unlock it.
  */
 import { execFileSync } from 'node:child_process';
 import { realpathSync } from 'node:fs';
@@ -101,9 +100,10 @@ function isCodexFallbackReviewOnHead(review, head) {
     && String(review.body || '').includes(CODEX_FALLBACK_REVIEW_MARKER);
 }
 
-/** Select a normal reviewer or the explicitly marked Codex evidence candidate. */
+/** Select a normal reviewer or the explicitly marked Codex evidence candidate on the current HEAD. */
 function latestReviewGateCandidate(reviews, head) {
-  return latestReviewMatching(reviews, (review) => isReviewerBot(review?.user)
+  return latestReviewMatching(reviews, (review) =>
+    (isReviewerBot(review?.user) && review?.commit_id === head)
     || isCodexFallbackReviewOnHead(review, head));
 }
 
@@ -388,9 +388,8 @@ export function evaluateNativeAutoMerge({
   }
 
   // The required check is the complete `tests` job. Its review gate already
-  // applies the repository's fingerprint-based carry-forward policy, so the
-  // native helper must not reject a valid older LGTM merely because the PR
-  // received a data-only or otherwise review-preserving commit afterward.
+  // requires the exact current HEAD, so the native helper applies the same
+  // rule and rejects every older LGTM.
   const review = latestReviewGateCandidate(reviews, pr.headRefOid);
   const testOnlyApproval = !review
     && testOnlyReviewIsApproved(verifiedTestOnlyReview, pr.headRefOid);
@@ -422,9 +421,7 @@ export function evaluateNativeAutoMerge({
     ? 'tests-only review verificata sul current HEAD'
     : reviewGateException.allow
     ? 'review-gate outside-diff verificato sulla stessa HEAD'
-    : review.commit_id === pr.headRefOid
-    ? 'review exact-head'
-    : 'LGTM carry-forward verificato dal check required';
+    : 'review exact-head';
   return {
     allow: true,
     reason: `${reviewScope} ✔; ${check.reason}`,

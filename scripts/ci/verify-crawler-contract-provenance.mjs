@@ -590,6 +590,59 @@ export function siteGeneratorPath(contract) {
   throw new Error(`\`generatedBy\` (${declared}) non appartiene a \`sourceRepository\` (${repo})`);
 }
 
+// Un artifact del manifest ha solo due semantiche possibili per il verifier:
+// `identical` si confronta coi byte pubblicati dal sito, `adapted` si verifica
+// localmente perché il gemello pubblicato è diverso per costruzione. Qualsiasi
+// altra modalità è un errore di routing, non un motivo per saltare il check.
+export const MANIFEST_ARTIFACT_MODES = new Set(['identical', 'adapted']);
+
+/**
+ * Risolve in modo fail-closed la voce manifest che governa un artifact.
+ *
+ * La vecchia `Map(files.map(...))` nascondeva due guasti: un duplicato veniva
+ * sovrascritto dall'ultima voce e una modalità nuova veniva trattata come un
+ * normale gemello remoto. In entrambi i casi il piano poteva puntare a byte
+ * diversi da quelli realmente dichiarati dal routing.
+ */
+export function manifestArtifactEntry(manifest, artifactPath) {
+  const entries = Array.isArray(manifest?.files)
+    ? manifest.files.filter((entry) => entry?.path === artifactPath)
+    : [];
+  if (entries.length === 0) {
+    return {
+      entry: null,
+      mode: null,
+      error: `voce manifest mancante per ${artifactPath}`,
+    };
+  }
+  if (entries.length > 1) {
+    return {
+      entry: null,
+      mode: null,
+      error: `voci manifest duplicate per ${artifactPath}`,
+    };
+  }
+  const entry = entries[0];
+  // I fixture storici non avevano `mode`: il default compatibile è
+  // `identical`, ma un valore presente e sconosciuto deve fermare il verifier.
+  const mode = entry.mode ?? 'identical';
+  if (!MANIFEST_ARTIFACT_MODES.has(mode)) {
+    return {
+      entry: null,
+      mode,
+      error: `modalità manifest non supportata per ${artifactPath}: ${String(mode)}`,
+    };
+  }
+  if (mode === 'identical' && (typeof entry.sitePath !== 'string' || !entry.sitePath.trim())) {
+    return {
+      entry: null,
+      mode,
+      error: `voce manifest identical senza sitePath per ${artifactPath}`,
+    };
+  }
+  return { entry, mode, error: null };
+}
+
 /**
  * L'elenco dei confronti da fare, uno per digest dichiarato dal contratto.
  * Puro: non tocca rete ne' filesystem. `sitePath` null significa che il
@@ -607,9 +660,6 @@ export function planProvenanceChecks(
   logicDirs = siteLogicDirs(),
   observationRef = contractObservationLineage(contract).observationRef,
 ) {
-  const byManifestPath = new Map(
-    (manifest?.files || []).map((entry) => [entry.path, entry]),
-  );
   const declared = (sitePath) => ({ sitePath, sitePathCandidates: sitePath ? [sitePath] : [] });
   const lineage = contractObservationLineage(contract);
   const checks = [
@@ -650,8 +700,8 @@ export function planProvenanceChecks(
       expected: artifact.sourceSha256 || null,
       observationRef,
     });
-    const manifestEntry = byManifestPath.get(`.github/workflows/${artifact.file}`);
-    const adapted = manifestEntry?.mode === 'adapted';
+    const manifestInfo = manifestArtifactEntry(manifest, `.github/workflows/${artifact.file}`);
+    const adapted = !manifestInfo.error && manifestInfo.mode === 'adapted';
     checks.push({
       field: `${artifact.file}#artifactSha256`,
       // Il lato sito del gemello lo dichiara gia' il manifest: leggerlo di la'
@@ -660,16 +710,19 @@ export function planProvenanceChecks(
       // Per un `adapted` il digest corpus non puo' coincidere con il byte
       // servito dal sito: il check resta nel piano come controllo locale, ma
       // non fa un confronto remoto che sarebbe rosso per definizione.
-      ...(adapted
+      ...(manifestInfo.error
+        ? declared(null)
+        : adapted
         ? {
           sitePath: null,
           sitePathCandidates: [],
           localOnly: true,
           localArtifactFile: artifact.file,
         }
-        : declared(manifestEntry?.sitePath || null)),
-      mode: manifestEntry?.mode || null,
+        : declared(manifestInfo.entry?.sitePath || null)),
+      mode: manifestInfo.mode,
       adapted,
+      manifestModeError: manifestInfo.error,
       expected: artifact.artifactSha256 || null,
       observationRef,
     });
@@ -698,7 +751,10 @@ export function evaluateProvenance(checks, observed) {
     const sitePath = seen?.sitePath || check.sitePath;
     let state;
     let detail = '';
-    if (check.localOnly) {
+    if (check.manifestModeError) {
+      state = 'undeclared';
+      detail = check.manifestModeError;
+    } else if (check.localOnly) {
       const observedValue = seen?.observed ?? check.observed ?? null;
       if (check.expected == null || observedValue == null) {
         state = 'undeclared';

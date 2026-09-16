@@ -26,6 +26,7 @@ import {
   sectionIsNessuno,
   invalidPluralChainedPrState,
   invalidBlockedCauseIn,
+  decisionDeferralSpecificity,
 } from '../../scripts/lib/pr-body-nextstep-check.mjs';
 
 const withSection = (bullets) =>
@@ -121,6 +122,55 @@ test('scappatoia + decisione: esentata ma VISIBILE, non silenziosa (review #144)
   assert.equal(res.advisories[0].type, 'hatch-exempted-by-decision');
   assert.equal(res.advisories[0].escapeHatch, 'posposto');
   assert.match(res.advisories[0].message, /non un rinvio rietichettato/);
+});
+
+test('in modalità stretta una decisione senza motivo e prossimo passo è una violazione', () => {
+  const body = withSection(['- Il backfill è posposto, per scelta: vale meno del rischio.']);
+  const res = checkNextStepStates(body, { strict: true });
+  assert.equal(res.ok, false);
+  assert.equal(res.violations[0].type, 'decision-deferral-not-specific');
+  assert.match(res.violations[0].message, /Motivo/);
+  assert.match(res.violations[0].message, /Prossimo passo/);
+  assert.equal(decisionDeferralSpecificity('per scelta').specific, false);
+});
+
+test('una decisione con Motivo e Prossimo passo concreti passa in modalità stretta', () => {
+  const body = withSection([
+    '- Il backfill è posposto, per scelta. **Motivo:** il dataset upstream è ancora instabile. ' +
+      '**Prossimo passo:** riaprire il backfill dopo due run consecutivi senza errori.',
+  ]);
+  const res = checkNextStepStates(body, { strict: true });
+  assert.equal(res.ok, true);
+  assert.equal(res.violations.length, 0);
+  assert.equal(decisionDeferralSpecificity(body).specific, true);
+});
+
+test('`falso positivo` usa la stessa policy delle altre deroghe decisionali', () => {
+  const vague = checkNextStepStates(
+    withSection(['- Il finding è un falso positivo: le due regex hanno semantica diversa.']),
+    { strict: true },
+  );
+  assert.equal(vague.ok, false);
+  assert.equal(vague.violations[0].type, 'decision-deferral-not-specific');
+
+  const specific = withSection([
+    '- Il finding è un falso positivo. **Motivo:** il parser usa un contratto diverso. ' +
+      '**Prossimo passo:** chiudere il finding dopo la verifica del fixture condiviso.',
+  ]);
+  assert.equal(checkNextStepStates(specific, { strict: true }).ok, true);
+  const negated = checkNextStepStates(withSection([
+    '- Il finding non è un falso positivo, va sistemato nel prossimo giro.',
+  ]), { strict: true });
+  assert.equal(negated.ok, true);
+  assert.equal(negated.violations.length, 0);
+  assert.equal(negated.advisories[0].type, 'no-literal-state');
+});
+
+test('la sezione suggerita completa una deroga vaga con i due campi obbligatori', () => {
+  const body = withSection(['- Il backfill resta fuori scope, per scelta.']);
+  const suggestion = suggestedSection(body, { strict: true });
+  assert.match(suggestion, /\*\*Motivo:\*\* <causa concreta>/);
+  assert.match(suggestion, /\*\*Prossimo passo:\*\* <azione concreta>/);
 });
 
 test('la voce esentata dalla decisione non entra nella sezione riscritta', () => {
@@ -281,7 +331,7 @@ test('il gate non promuove un no-literal-state con riferimento nudo', () => {
   assert.match(suggestedSection(body, { strict: true }), /opzionale/);
 });
 
-test('una decisione motivata senza scappatoia viene esentata simmetricamente', () => {
+test('una decisione motivata senza scappatoia resta advisory in modalità libera ma richiede dettagli nel gate', () => {
   const body = withSection([
     '- L estensione API non serve per scelta: il comportamento corrente è intenzionale.',
   ]);
@@ -289,7 +339,8 @@ test('una decisione motivata senza scappatoia viene esentata simmetricamente', (
   assert.equal(res.advisories.length, 1);
   assert.equal(res.advisories[0].type, 'hatch-exempted-by-decision');
   assert.equal(blockingNextStepFindings(res).length, 0);
-  assert.equal(suggestedSection(body, { strict: true }), null);
+  assert.equal(suggestedSection(body), null);
+  assert.match(suggestedSection(body, { strict: true }), /\*\*Motivo:\*\*/);
 });
 
 // ---------------------------------------------------------------------------

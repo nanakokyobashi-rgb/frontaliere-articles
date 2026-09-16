@@ -14,7 +14,7 @@
  *
  * Tenere le funzioni qui e non riscriverle nei tre chiamanti e' il punto: sono
  * gia' coperte dai test di questo repo, e due copie della stessa semantica di
- * «contributo invariato» sarebbero un drift garantito.
+ * «review valida sulla HEAD corrente» sarebbero un drift garantito.
  *
  * Dato un PR number, `main()` valuta (e logga ogni gate):
  *   1. PR aperta e NON draft.
@@ -83,6 +83,7 @@ import {
 } from './lib/constants.mjs';
 import { latestCompletedVitestConclusion, latestCompletedConclusionByName } from './lib/vitestCheck.mjs';
 import { checkClosesLines } from '../lib/pr-body-closes-check.mjs';
+import { checkNextStepStates, blockingNextStepFindings } from '../lib/pr-body-nextstep-check.mjs';
 import { checkMergePreviewDuplicates } from './lib/mergePreviewCheck.mjs';
 import { classifyAndMintReview } from './review-scope.mjs';
 
@@ -153,13 +154,11 @@ function notifyAwaitingVitest(pr) {
 /**
  * Fingerprint del CONTRIBUTO PROPRIO della PR a un dato commit `sha` =
  * il diff vs il merge-base con main (3-dot), indipendente dalla churn di main.
- * Usato per il carry-forward dell'LGTM su un rebase di solo-merge-di-main:
- * se il contributo a `sha` è byte-identico a quello su cui claude[bot] aveva
- * dato `## LGTM`, il codice approvato non è cambiato → l'approvazione regge,
- * SENZA ri-eseguire la review (zero Claude). Tutto via compare API (nessun
- * git locale → il chiamante non ha bisogno di un checkout).
+ * Resta disponibile per claim e diagnostica, ma non autorizza più una review:
+ * una review vale solo se è ancorata alla HEAD corrente. Tutto via compare API
+ * (nessun git locale → il chiamante non ha bisogno di un checkout).
  * Conservativo: qualunque incertezza (compare troncato, patch mancanti su file
- * grossi, errore API) → ritorna null → niente carry-forward (stale come prima).
+ * grossi, errore API) → ritorna null.
  */
 export function prContributionFingerprint(sha) {
   let mb;
@@ -182,20 +181,17 @@ export function prContributionFingerprint(sha) {
 // File NON reviewabili come code (dati/static rigenerati): esclusi dal
 // fingerprint del contributo. Stessa lista del tier-gate della review in tests.yml
 // e degli exclude del diff reviewer. Così un push che tocca SOLO questi NON
-// cambia il fingerprint CODE → il carry-forward dell'LGTM regge senza
-// ri-eseguire la review (zero Claude), mentre il gate dei test resta sull'head
-// fresco. Prima il carry-forward valeva SOLO per i rebase di puro main-merge;
-// ora anche per i push di solo corpus.
+// cambia il fingerprint CODE, ma non rende valida una review su una SHA diversa:
+// il gate resta ancorato alla HEAD fresca e il reviewer deve rivalutare il
+// contesto dopo ogni push.
 //
 // ── L'ALBERO E' QUELLO DI QUESTO REPO, e fino al 2026-09-03 non lo era ──────
 // La lista era arrivata dal sito PAROLA PER PAROLA (`data|public|reports|
 // _newsletter_variants|docs`), cioè nominando due cartelle che qui non esistono
 // e OMETTENDO `content/` e `dist/` — le uniche due che qui cambiano da sole. Il
-// risultato è che il carry-forward, la cui ragione d'essere su questo repo è
-// proprio la churn del corpus (~90 push al giorno su `main` che riscrivono
-// `content/`), non scattava MAI sul caso per cui esiste: ogni rigenerazione
-// cambiava il fingerprint e faceva ripartire una review a vuoto. La stessa
-// lista, nella forma corpus, sta in `NONCODE_RE` dentro `tests.yml`.
+// Questa lista resta rilevante per la diagnostica del contributo, non per il
+// riuso del verdetto: anche una rigenerazione che non cambia il codice richiede
+// una review ancorata alla nuova SHA.
 export const NON_REVIEWABLE_FINGERPRINT_RE = /^(content|data|dist|public)\//;
 // I workflow crawler sono proiezioni generate dal sito: la compare API di
 // GitHub puo' elencarli senza `.patch` quando la PR contiene il batch completo.
@@ -291,12 +287,15 @@ const PR_BODY_NONIMPL_RE = /^\s{0,3}#{2,3}\s+Non implementato\b/im;
  * ma NON la crea su una PR ben formata al primo tentativo → su una drift-PR
  * corretta la sticky verde spesso non esiste). Stessi due check del contratto:
  * (1) header `## Implementato` + `## Non implementato` presenti; (2) nessun
- * `Closes #a #b` multi-issue su una riga (riusa `checkClosesLines`, lo stesso
- * helper del workflow → niente drift di logica). Puro → testabile senza gh.
+ * `Closes #a #b` multi-issue su una riga; (3) deferral decisionali specifiche
+ * (riusa gli stessi helper del workflow → niente bypass del body contract).
+ * Puro → testabile senza gh.
  */
 export function prBodyContractOk(body = '') {
   if (!PR_BODY_IMPL_RE.test(body) || !PR_BODY_NONIMPL_RE.test(body)) return false;
-  return checkClosesLines(body).ok;
+  if (!checkClosesLines(body).ok) return false;
+  const nextStep = checkNextStepStates(body, { strict: true });
+  return blockingNextStepFindings(nextStep).length === 0;
 }
 
 /**
@@ -468,16 +467,10 @@ async function main() {
   // `🔴 **Important` (drift osservato su PR #2211 round-2). Stessa classe della
   // detection brittle in pr-redflag-fixer.yml.
   const hasRedflag = !!body && REDFLAG_IMPORTANT_RE.test(body);
-  // Non coniare un follow-up da una review ormai stantia: prima applica la
-  // stessa regola di carry-forward del ramo LGTM. Un contributo cambiato (o
-  // non confrontabile) viene fermato senza trasformare il vecchio verdetto in
-  // lavoro nuovo.
+  // Non coniare un follow-up da una review ormai stantia: un finding appartiene
+  // alla SHA su cui è stato emesso e una nuova review deve rivalutare il diff.
   if (hasRedflag && lastBot?.commit_id && lastBot.commit_id !== head) {
-    const fpHead = prContributionFingerprint(head);
-    const fpReview = prContributionFingerprint(lastBot.commit_id);
-    if (fpHead === null || fpReview === null || fpHead !== fpReview) {
-      return fail(`Ultima review claude-bot riferita a ${lastBot.commit_id} ≠ HEAD ${head} e il diff della PR è cambiato (o non comparabile) — skip; un push nuovo ri-attiverà il review.`);
-    }
+    return fail(`Ultima review claude-bot riferita a ${lastBot.commit_id} ≠ HEAD ${head} — review stantia; serve una review nuova sulla HEAD corrente.`);
   }
   let outsideOnlyApproved = false;
   if (hasRedflag) {
@@ -505,20 +498,11 @@ async function main() {
   }
 
   if (lastBot && (body.includes('## LGTM') || outsideOnlyApproved)) {
-    // Percorso normale: `## LGTM` presente. Deve valere per l'HEAD corrente. Se è
-    // su un commit precedente, accettalo SOLO se l'head è un rebase di
-    // solo-merge-di-main: il contributo proprio della PR è byte-identico a quello
-    // approvato → carry-forward, ZERO Claude (no re-review). Altrimenti è davvero
-    // stale → un push nuovo ri-attiverà la review. (Il gate vitest qui sotto resta
-    // sull'head fresco: pr-autorebase ri-esegue i test sull'head rebasato, così un
-    // conflitto semantico con la nuova main viene comunque colto.)
+    // Percorso normale: `## LGTM` presente. Deve valere per l'HEAD corrente.
+    // Una review su un commit precedente è sempre stantia, anche se il diff
+    // sembra invariato: il workflow successivo deve produrre un nuovo verdetto.
     if (lastBot.commit_id && lastBot.commit_id !== head) {
-      const fpHead = prContributionFingerprint(head);
-      const fpLgtm = prContributionFingerprint(lastBot.commit_id);
-      if (fpHead === null || fpLgtm === null || fpHead !== fpLgtm) {
-        return fail(`Ultima review claude-bot riferita a ${lastBot.commit_id} ≠ HEAD ${head} e il diff della PR è cambiato (o non comparabile) — skip; un push nuovo ri-attiverà il review.`);
-      }
-      console.log(`Gate review: ## LGTM su ${lastBot.commit_id} ≠ HEAD ${head} ma contributo PR invariato (rebase di solo main-merge) → carry-forward ✔`);
+      return fail(`Ultima review claude-bot riferita a ${lastBot.commit_id} ≠ HEAD ${head} — review stantia; serve una review nuova sulla HEAD corrente.`);
     } else if (outsideOnlyApproved) {
       console.log('Gate review: tutti i finding Important sono fuori dal diff e il follow-up è stato coniato ✔');
     } else {
@@ -529,7 +513,7 @@ async function main() {
     // quando il reviewer NON ha postato ALCUNA review (non ha potuto girare:
     // workflow-validation 401 → `lastBot` null). Se una review claude ESISTE qui,
     // per costruzione è NON-approvante: il ramo `## LGTM` sopra ha già consumato
-    // l'unico caso `lastBot`-non-null sicuro (`## LGTM` + fingerprint match), e un
+    // l'unico caso `lastBot`-non-null sicuro (`## LGTM` sulla HEAD corrente), e un
     // `🔴` ha già fatto `fail` prima. Quindi una review esistente che arriva fin
     // qui è un 🟡/❓ senza LGTM (es. ❓ funnel-critical non escalato, dove
     // REVIEW.md vieta `## LGTM`) — RISPETTALA, non scavalcarla, indipendentemente
@@ -753,9 +737,9 @@ async function main() {
   // run 27739578956). Auto-recovery: aggiorna il branch col PAT (merge di main
   // nella head). Il push del PAT ri-triggera `tests`; al suo completamento il
   // trigger workflow_run di auto-merge ri-valuta gli stessi gate e mergia — la
-  // catena si chiude da sola, zero azioni manuali. La LGTM esistente fa
-  // carry-forward (la review resta sulla PR). Esce 0: non è un fallimento, è
-  // un retry deferito al prossimo trigger.
+  // catena si chiude da sola, zero azioni manuali. La review sulla HEAD
+  // precedente diventa stantia; il trigger successivo deve produrre il verdetto
+  // nuovo. Esce 0: non è un fallimento, è un retry deferito al prossimo trigger.
   const isStaleHeadRace = (err) => /out of date|not up to date|base branch was modified/i.test(String(err));
   const recoverStaleHead = () => {
     if (confirmedMergedAfterRace()) {

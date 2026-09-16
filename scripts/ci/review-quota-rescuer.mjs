@@ -1,23 +1,19 @@
 #!/usr/bin/env node
 /**
- * review-quota-rescuer.mjs — riavvia una review che ha perso il lease.
+ * review-quota-rescuer.mjs — riavvia una review che ha perso il proprio run.
  *
- * Un consumer PR può terminare senza Claude perché il fixer issue possiede lo
- * slot condiviso. Senza un nuovo evento la PR resta nel gate rosso: questo
- * consumer zero-Claude ascolta la fine dei fixer e un cron di rete, riserva lo
- * slot quando è libero e rilancia SOLO il run sorgente sulla stessa HEAD. Il
- * workflow rilanciato adotta poi la reservation e la rilascia nel proprio
- * finally.
+ * I marker legacy possono descrivere una review differita da un lease, mentre
+ * i claim transient descrivono un run che è terminato senza verdetto. Questo
+ * consumer zero-Claude ascolta entrambi, usa marker durevoli come fence e
+ * rilancia SOLO il run sorgente sulla stessa HEAD. Claim, HEAD e cap dei retry
+ * impediscono duplicati senza serializzare le review su quota AI.
  */
 
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import {
-  parseReviewQuotaDeferredMarker,
-  runQuotaLease,
-} from './check-quota-backoff.mjs';
+import { parseReviewQuotaDeferredMarker } from './check-quota-backoff.mjs';
 import {
   latestReviewClaims,
   reviewWasPosted,
@@ -225,7 +221,7 @@ export function pendingReviewTransientClaim({
   });
   const retryCount = Number(retry?.retryCount) || 0;
   // A requested marker at the limit is not a new retry to admit: it is a
-  // durable lease whose source run still needs reconciliation.  Do not let
+  // durable fence whose source run still needs reconciliation.  Do not let
   // the retry cap strand it forever; only suppress new requests after the
   // limit, while `reconcileTransientRetry` can still observe requested.
   if (String(retry?.state || '') === 'confirmed'
@@ -423,8 +419,8 @@ export function reviewQuotaRetryBody({
     event.sourceAttempt = parsedAttempt;
   }
   return `${REVIEW_QUOTA_RETRY_MARKER} ${JSON.stringify(event)} -->\n`
-    + `_Review quota rescuer zero-Claude: rilancio della run ${event.role} #${event.sourceRunId} `
-    + `sulla HEAD ${event.head.slice(0, 12)} dopo il rilascio del lease._`;
+    + `_Review rescuer zero-Claude: rilancio bounded della run ${event.role} #${event.sourceRunId} `
+    + `sulla HEAD ${event.head.slice(0, 12)} senza lease AI condiviso._`;
 }
 
 function listOpenPullRequests() {
@@ -519,7 +515,7 @@ function sourceRunForCandidate(candidate, { completedOnly = true } = {}) {
   };
 }
 
-/** Pure: only an autonomous rerun closes the fence; a lease-skip may be green. */
+/** Pure: only an autonomous rerun closes the fence; a deferred run may be green. */
 export function sourceRunAlreadyHandled(candidate, run) {
   const deferredAttempt = Number(candidate?.deferred?.sourceAttempt);
   const runAttempt = Number(run?.attempt);
@@ -528,21 +524,6 @@ export function sourceRunAlreadyHandled(candidate, run) {
     && runAttempt > 0
     && (hasDeferredAttempt ? runAttempt > deferredAttempt : runAttempt > 1);
   return autonomousAttempt;
-}
-
-function releaseLease(prNumber, role, token, runId, owner = 'review-quota-rescuer') {
-  if (!token || DRY_RUN) return;
-  runQuotaLease({
-    action: 'release',
-    role,
-    owner,
-    targetType: 'pr',
-    target: String(prNumber),
-    token,
-    runId,
-    writeOutput: false,
-    dryRun: DRY_RUN,
-  });
 }
 
 function postRetryComment(number, body) {
@@ -752,26 +733,6 @@ function rescueTransientReview(candidate) {
     return false;
   }
 
-  const owner = 'review-transient-rescuer';
-  const lease = runQuotaLease({
-    action: 'reserve',
-    role: 'review',
-    owner,
-    targetType: 'pr',
-    target: String(number),
-    ttlSec: positiveInt(process.env.REVIEW_QUOTA_LEASE_TTL_SEC, 60 * 60),
-    scanMax: positiveInt(process.env.QUOTA_LEASE_SCAN_MAX, 20),
-    runId: process.env.GITHUB_RUN_ID || owner,
-    headSha: candidate.head,
-    reservationRunId: run.databaseId,
-    writeOutput: false,
-    dryRun: DRY_RUN,
-    emitReviewDeferredMarker: false,
-  });
-  if (!lease.allowed) {
-    console.log(`PR #${number}: transient recovery lease non disponibile (${lease.reason || 'unknown'}) — defer al prossimo tick.`);
-    return false;
-  }
   if (DRY_RUN) {
     console.log(`[dry] PR #${number}: rilancerei tests #${run.databaseId} per claim failed-transient sulla HEAD ${candidate.head.slice(0, 12)}.`);
     return false;
@@ -780,7 +741,6 @@ function rescueTransientReview(candidate) {
   const retryFields = transientRetryFields(candidate, run, { state: 'requested' });
   const requestedBody = reviewTransientRetryBody(retryFields);
   if (!postTransientRetryComment(number, requestedBody)) {
-    releaseLease(number, 'review', lease.token, retryFields.runId, owner);
     console.log(`::warning::PR #${number}: marker transient non verificabile → rerun non richiesto.`);
     return false;
   }
@@ -793,7 +753,6 @@ function rescueTransientReview(candidate) {
     if (!postTransientRetryComment(number, failedBody)) {
       console.log(`::warning::PR #${number}: marker transient failed non pubblicabile; requested resta fence anti-duplicato.`);
     }
-    releaseLease(number, 'review', lease.token, retryFields.runId, owner);
     return false;
   }
 
@@ -831,7 +790,7 @@ function closeAlreadyHandledDeferral(candidate, run, number) {
   });
   if (postRetryComment(number, body)) {
     console.log(
-      `PR #${number}: deferral ${candidate.deferred.role} chiusa senza quota; `
+      `PR #${number}: deferral ${candidate.deferred.role} chiusa senza nuovo run; `
       + `run sorgente già avanzata (attempt ${run.attempt}).`,
     );
     return true;
@@ -980,25 +939,6 @@ function main() {
       continue;
     }
 
-    const lease = runQuotaLease({
-      action: 'reserve',
-      role: candidate.deferred.role,
-      owner: 'review-quota-rescuer',
-      targetType: 'pr',
-      target: String(number),
-      ttlSec: positiveInt(process.env.REVIEW_QUOTA_LEASE_TTL_SEC, 60 * 60),
-      scanMax: positiveInt(process.env.QUOTA_LEASE_SCAN_MAX, 20),
-      runId: process.env.GITHUB_RUN_ID || 'review-quota-rescuer',
-      headSha: candidate.head,
-      reservationRunId: run.databaseId,
-      writeOutput: false,
-      dryRun: DRY_RUN,
-      emitReviewDeferredMarker: false,
-    });
-    if (!lease.allowed) {
-      console.log(`PR #${number}: lease non disponibile (${lease.reason || 'unknown'}) — defer al prossimo evento.`);
-      continue;
-    }
     if (DRY_RUN) {
       console.log(`[dry] PR #${number}: rilancerei ${candidate.deferred.role} #${run.databaseId} sulla HEAD ${candidate.head.slice(0, 12)}.`);
       continue;
@@ -1012,7 +952,6 @@ function main() {
     // possiamo appendere `failed` e rendere la deferral nuovamente eleggibile.
     const requestedBody = reviewQuotaRetryBody({ ...retryFields, state: 'requested' });
     if (!postRetryComment(number, requestedBody)) {
-      releaseLease(number, candidate.deferred.role, lease.token, retryFields.runId);
       console.log(`::warning::PR #${number}: marker retry non verificabile → rerun non richiesto, nessun retry contabilizzato.`);
       continue;
     }
@@ -1027,7 +966,6 @@ function main() {
       if (!postRetryComment(number, failedBody)) {
         console.log(`::warning::PR #${number}: impossibile riconciliare il marker failed; il marker requested resta come fence anti-duplicato.`);
       }
-      releaseLease(number, candidate.deferred.role, lease.token, retryFields.runId);
     }
     if (!rerunRequested) continue;
 

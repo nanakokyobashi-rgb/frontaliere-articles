@@ -389,7 +389,8 @@ jobs:
               PR e lascia l'item da ritentare nella prossima passata.
               Dedup, label e commenti vanno eseguiti sullo stesso `--repo` target.
             - Parse PR body `## Non implementato (ancora)`. **Il routing lo decide lo STATO LETTERALE del bullet, non una parola-scusa** (AGENTS.md #8; `scripts/ci/followup-has-candidates.mjs` applica esattamente questa regola a monte, e sono la stessa tassonomia — non inventarne una terza):
-              - `in questa PR` · `PR concatenata #N` · `per scelta` · `by construction` · `blocked: decisione del proprietario` → **NON creare issue**: la voce è già chiusa o già tracciata altrove.
+              - `in questa PR` · `PR concatenata #N` → **NON creare issue**: la voce è già chiusa o già tracciata altrove.
+              - `per scelta` · `by construction` · `falso positivo` · `blocked: decisione del proprietario` → **NON creare issue SOLO se lo stesso bullet contiene `**Motivo:** <causa concreta>. **Prossimo passo:** <azione concreta>.`**. Una decisione nuda, vaga o con placeholder è un candidato e va triagiata/creata come issue: il gate del body la rifiuta per le nuove PR e questo ramo recupera i body storici.
               - `blocked: <causa tecnica>` → **crea issue**, e riporta la causa nel campo `Blocked on:` dell'item.
               - **nessuno stato dichiarato** → **crea issue** (fail-safe: un residuo non qualificato è lavoro potenzialmente dovuto, e tacerlo è peggio che generare una traccia).
               Il vecchio skip su `out of scope` / `posposto` è **ABOLITO** (FOLLOWUP.md § parse rules): non sono più scappatoie di chiusura, e trattarli come tali faceva evaporare lavoro dovuto.

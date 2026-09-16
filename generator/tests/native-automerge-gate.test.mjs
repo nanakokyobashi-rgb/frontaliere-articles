@@ -61,6 +61,13 @@ test('accetta solo review approvante e check verde sulla HEAD', () => {
     reviews: [review(CLEAN_BODY)],
     checkRuns: [check({ conclusion: 'failure' })],
   }).allow, false);
+  const stale = evaluateNativeAutoMerge({
+    pr: pr(),
+    reviews: [review(CLEAN_BODY, OLD_HEAD)],
+    checkRuns: [check()],
+  });
+  assert.equal(stale.allow, false);
+  assert.match(stale.reason, /nessuna review bot verificabile/);
 });
 
 test('non riusa un finding successivo e non accetta check pending o su altra HEAD', () => {

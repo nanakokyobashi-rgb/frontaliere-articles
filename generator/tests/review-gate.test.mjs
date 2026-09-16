@@ -440,10 +440,10 @@ test('drift-fallback: LGTM stantia (contributo cambiato) + tests.yml → ROSSO',
   assert.doesNotMatch(r.stdout, /drift-fallback: APPROVATO/, r.stdout);
 });
 
-test('carry-forward: LGTM su un commit precedente con contributo invariato → verde', () => {
-  // Il caso frequente su questo repo: la PR viene rebasata su main, oppure un
-  // workflow di generazione le riscrive `content/`. Il codice approvato non e'
-  // cambiato, quindi l'approvazione regge senza rispendere Claude.
+test('LGTM su un commit precedente resta rossa anche con contributo invariato', () => {
+  // Un autorebase cambia la SHA osservata dal required check. Anche se il
+  // fingerprint del contributo fosse identico, il verdetto deve essere nuovo
+  // sulla HEAD corrente.
   const r = runGate({
     reviews: [botReview(OLD, '## LGTM')],
     compare: {
@@ -454,11 +454,11 @@ test('carry-forward: LGTM su un commit precedente con contributo invariato → v
       },
     },
   });
-  assert.equal(r.status, 0, `Il carry-forward non ha retto.\n${r.stdout}`);
-  assert.match(r.stdout, /carry-forward/, r.stdout);
+  assert.equal(r.status, 1, `Una review stantia non deve sbloccare la PR.\n${r.stdout}`);
+  assert.doesNotMatch(r.stdout, /carry-forward/, r.stdout);
 });
 
-test('carry-forward: contributo CAMBIATO dall\'ultima LGTM → ROSSO', () => {
+test('LGTM su un commit precedente resta rossa anche con contributo cambiato', () => {
   const r = runGate({
     reviews: [botReview(OLD, '## LGTM')],
     compare: {
@@ -472,10 +472,9 @@ test('carry-forward: contributo CAMBIATO dall\'ultima LGTM → ROSSO', () => {
   assert.equal(r.status, 1, `Il codice e' cambiato dopo la LGTM: serve una review nuova.\n${r.stdout}`);
 });
 
-test('carry-forward: solo `content/` cambiato → verde (e\' la churn del corpus)', () => {
-  // La ragione per cui `NON_REVIEWABLE_FINGERPRINT_RE` nomina l'albero di
-  // QUESTO repo: fino al 2026-09-03 la lista arrivava dal sito e non conteneva
-  // `content/`, quindi ogni rigenerazione del corpus invalidava una LGTM buona.
+test('un cambiamento solo `content/` non rende valida una LGTM su SHA vecchia', () => {
+  // Anche la churn generata del corpus produce una nuova HEAD: il required
+  // check deve osservare una review nuova, non ereditare quella precedente.
   const r = runGate({
     reviews: [botReview(OLD, '## LGTM')],
     compare: {
@@ -491,7 +490,7 @@ test('carry-forward: solo `content/` cambiato → verde (e\' la churn del corpus
       },
     },
   });
-  assert.equal(r.status, 0, `La churn di content/ non deve invalidare una LGTM.\n${r.stdout}`);
+  assert.equal(r.status, 1, `Una LGTM sulla SHA vecchia non deve sbloccare la PR.\n${r.stdout}`);
 });
 
 test('fingerprint: crawler generati senza `.patch` non rendono il contributo UNKNOWN', () => {
@@ -541,7 +540,7 @@ test('Codex LGTM requires valid run evidence and exact HEAD', () => {
   }
 });
 
-test('Codex LGTM carry-forward usa il check richiesto verde come prova persistente', () => {
+test('Codex LGTM su SHA vecchia non viene riusato nemmeno con check precedente verde', () => {
   const checkRuns = [{ name: 'tests (node --test)', status: 'completed', conclusion: 'success' }];
   const compare = {
     mergeBase: 'c'.repeat(40),
@@ -555,11 +554,11 @@ test('Codex LGTM carry-forward usa il check richiesto verde come prova persisten
     compare,
     checkRuns,
   });
-  assert.equal(result.status, 0, result.stdout);
-  assert.match(result.stdout, /carry-forward/, result.stdout);
+  assert.equal(result.status, 1, result.stdout);
+  assert.doesNotMatch(result.stdout, /carry-forward/, result.stdout);
 });
 
-test('Codex LGTM carry-forward aggrega tutte le pagine della cronologia check-run', () => {
+test('Codex LGTM su SHA vecchia resta invalido anche con pagine check-run storiche', () => {
   const checkRunPages = [
     { check_runs: [{ name: 'tests (node --test)', status: 'completed', conclusion: 'failure' }] },
     { check_runs: [{ name: 'tests (node --test)', status: 'completed', conclusion: 'success' }] },
@@ -576,8 +575,8 @@ test('Codex LGTM carry-forward aggrega tutte le pagine della cronologia check-ru
     compare,
     checkRunPages,
   });
-  assert.equal(result.status, 0, result.stdout);
-  assert.match(result.stdout, /carry-forward/, result.stdout);
+  assert.equal(result.status, 1, result.stdout);
+  assert.doesNotMatch(result.stdout, /carry-forward/, result.stdout);
 });
 
 test('un marker Codex senza evidenza e senza check precedente non sblocca il gate', () => {

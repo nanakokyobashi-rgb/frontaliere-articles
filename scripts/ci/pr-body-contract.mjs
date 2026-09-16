@@ -98,7 +98,9 @@ function main() {
   const body = gh(['pr', 'view', PR, '--repo', REPO, '--json', 'body', '--jq', '.body // ""']);
   const sections = checkPrBodySections(body);
   const closes = checkClosesLines(body);
-  const nextStep = checkNextStepStates(body);
+  // Il contratto applica la modalità stretta: una deroga motivata deve lasciare
+  // nel body sia la ragione sia il prossimo passo, non solo un'etichetta.
+  const nextStep = checkNextStepStates(body, { strict: true });
   const nextStepProblems = blockingNextStepFindings(nextStep);
   const nextStepAdvisories = nextStep.advisories.filter((a) => !isBlockingNextStepFinding(a));
 
@@ -134,8 +136,10 @@ function main() {
     ...nextStepProblems.map((v) => `- ${v.message}`),
   ];
 
-  // Le decisioni motivate restano avvisi perché la regex non può provarne la
-  // sostanza. `no-literal-state` è promosso in `nextStepProblems` solo quando
+  // Le decisioni motivate devono avere una forma minima verificabile: la regex
+  // non prova la sostanza, ma impedisce che `per scelta` diventi un deferral
+  // senza owner o next step. `no-literal-state` è promosso in
+  // `nextStepProblems` solo quando
   // manca anche un riferimento `#N` nudo: la misura aggiornata di #140 ha
   // dimostrato che questa soglia prende il caso non tracciato senza bloccare
   // ogni prosa comprensibile.
@@ -193,6 +197,7 @@ function main() {
     '',
     '## Non implementato (ancora)',
     '- <scope ancora dovuto>. **Stato:** `in questa PR` | `PR concatenata #N` | `blocked: <causa>`',
+    '- <scope differito per una decisione>. **Motivo:** <causa concreta>. **Prossimo passo:** <azione concreta>.',
     '```',
     '',
     'oppure «Nessuno» in `## Non implementato (ancora)` se il task è completo.',

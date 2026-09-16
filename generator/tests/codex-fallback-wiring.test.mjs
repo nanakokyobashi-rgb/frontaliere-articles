@@ -10,6 +10,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { validatePrBodyContract as validateBridgePrBodyContract } from '../../.github/actions/claude-codex-fallback/gh-bridge-server.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8');
@@ -128,4 +129,21 @@ test('il pre-scan local-only considera Codex come alternativa non-local', () => 
   const probe = createArticle.slice(probeStart, probeStart + 260);
   assert.match(probe, /\[\.\.\.DEFAULT_CHAIN,\s*AI_MODELS\.CODEX_CLI_PRIMARY\]/);
   assert.match(probe, /m !== AI_MODELS\.LOCAL_FALLBACK/);
+});
+
+test('il bridge blocca le deroghe decisionali vaghe prima di gh pr create/edit', () => {
+  const prefix = '## Implementato\n- fix verificato\n\n## Non implementato (ancora)\n';
+  const vague = validateBridgePrBodyContract(`${prefix}- falso positivo: non serve intervento.`);
+  assert.equal(vague.ok, false);
+  assert.match(vague.violations.join('\n'), /decision deferrals require concrete Motivo and Prossimo passo/);
+
+  const negated = validateBridgePrBodyContract(
+    `${prefix}- non è un falso positivo: il parser resta da correggere in una PR successiva.`,
+  );
+  assert.equal(negated.ok, true);
+
+  const concrete = validateBridgePrBodyContract(
+    `${prefix}- falso positivo: il token è solo lessicale. **Motivo:** il modulo non usa il contratto review. **Prossimo passo:** lasciare il file invariato e monitorare il prossimo diff.`,
+  );
+  assert.equal(concrete.ok, true);
 });
