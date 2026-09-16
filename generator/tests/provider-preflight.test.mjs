@@ -80,6 +80,36 @@ test('il preflight include il Codex action-owned quando il broker è pronto', as
     }
   }
 });
+
+test('il preflight include il fallback Claude quando la lane body è autenticata', async () => {
+  const names = [
+    'HAIKU_FALLBACK_GATE',
+    'ENABLE_HAIKU_ARTICLE_FALLBACK',
+    'ENABLE_CODEX_ARTICLE_FALLBACK',
+    'CODEX_AUTH_BROKER_SOCKET',
+    'CLAUDE_CODE_OAUTH_TOKEN',
+  ];
+  const previous = Object.fromEntries(names.map((name) => [name, process.env[name]]));
+  process.env.HAIKU_FALLBACK_GATE = '1';
+  process.env.ENABLE_HAIKU_ARTICLE_FALLBACK = '1';
+  process.env.CLAUDE_CODE_OAUTH_TOKEN = 'preflight-claude-test-token';
+  delete process.env.ENABLE_CODEX_ARTICLE_FALLBACK;
+  delete process.env.CODEX_AUTH_BROKER_SOCKET;
+  try {
+    const report = await runProviderPreflight({
+      lookup: async () => [],
+      fetchImpl: async () => ({ status: 200 }),
+      now: () => '2026-09-14T12:00:00.000Z',
+    });
+    assert.ok(report.readyProviders.includes('claude_cli'));
+  } finally {
+    for (const name of names) {
+      if (previous[name] === undefined) delete process.env[name];
+      else process.env[name] = previous[name];
+    }
+  }
+});
+
 test('GitHub Models preflight usa il successore e tratta il brownout 410 come provider non disponibile', async () => {
   process.env.GH_MODELS_PAT = 'preflight-test-pat';
   const calls = [];

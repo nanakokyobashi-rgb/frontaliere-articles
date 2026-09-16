@@ -72,9 +72,8 @@ test('every active article CLI caller wires the OAuth Codex broker', () => {
       .map((line, index) => /^\s+CODEX_AUTH_BROKER_SOCKET:/.test(line) ? index : -1)
       .filter((index) => index >= 0);
     if (preferredIndexes.length > 0 && oauthIndexes.length === 0) {
-      // The Codex-only artifact is the current contract. Keep accepting the
-      // legacy Claude-backed artifact while the corpus transport PR is still
-      // being promoted.
+      // Some callers deliberately stay Codex-only. Keep accepting those
+      // callers while the article producer uses the hybrid body lane below.
       for (const index of preferredIndexes) {
         const consumer = stepBlock(lines, index);
         assert.match(consumer, new RegExp(escapeRegex(SOCKET)), `${rel}: Codex consumer lacks broker socket`);
@@ -82,15 +81,13 @@ test('every active article CLI caller wires the OAuth Codex broker', () => {
       }
     } else {
       if (oauthIndexes.length > 0) {
-        // Legacy corpus artifacts (including the interim hybrid translation
-        // artifact) still use the Claude consumer until the corresponding
-        // generated transport lands; its broker wiring remains a valid
-        // compatibility contract during that transition.
+        // Callers that opt into the Claude consumer must carry the same broker
+        // capability: the two lanes are provisioned by one composite action.
         for (const index of oauthIndexes) {
           assert.match(stepBlock(lines, index), new RegExp(escapeRegex(SOCKET)), `${rel}: Claude consumer lacks broker socket`);
         }
       } else {
-        // The current background crawler artifact is intentionally broker-only:
+        // A background caller may intentionally be broker-only:
         // the raw Codex credential stays on setup and no child process receives
         // either the Claude token or a global model preference.
         const brokerConsumers = brokerIndexes
@@ -129,7 +126,7 @@ test('Codex primary keeps Luna Max and is reusable across crawler calls', () => 
   const codexPreference = createArticle.indexOf('AI_MODELS.CODEX_CLI_PRIMARY', preferenceStart);
   const preferenceEnd = createArticle.indexOf('];', codexPreference);
   assert.ok(preferenceStart >= 0 && codexPreference >= 0, 'Codex must be the article preference');
-  assert.doesNotMatch(createArticle.slice(preferenceStart, preferenceEnd), /CLAUDE_CLI_HAIKU/);
+  assert.match(createArticle.slice(preferenceStart, preferenceEnd), /CLAUDE_CLI_HAIKU/);
   assert.match(action, /name: "Setup Codex primary with Claude fallback"/);
   assert.match(action, /--max-requests\s+4096/,
     'the production broker must keep the shared crawler/job lane bounded');
@@ -151,6 +148,6 @@ test('il pre-scan local-only considera Codex come alternativa non-local', () => 
   const probeStart = createArticle.indexOf('const cloudOnlyChain');
   assert.ok(probeStart >= 0, 'probe della cascata cloud non trovato');
   const probe = createArticle.slice(probeStart, probeStart + 260);
-  assert.match(probe, /\[\.\.\.DEFAULT_CHAIN,\s*AI_MODELS\.CODEX_CLI_PRIMARY\]/);
+  assert.match(probe, /\[\.\.\.DEFAULT_CHAIN,\s*\.\.\.PREFERRED_GENERATION_MODELS\]/);
   assert.match(probe, /m !== AI_MODELS\.LOCAL_FALLBACK/);
 });

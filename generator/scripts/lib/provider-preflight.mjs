@@ -229,6 +229,13 @@ function defaultPreflightModels() {
   if (String(process.env.CODEX_AUTH_BROKER_SOCKET || '').trim()) {
     models.push(AI_MODELS.CODEX_CLI_PRIMARY);
   }
+  // Claude is deliberately absent from DEFAULT_CHAIN because it is reserved
+  // for the article-body preference. When the action has loaded the RC gate
+  // and the workflow passed its OAuth token, include that explicit fallback so
+  // preflight cannot reject a run whose only capable lane is Claude.
+  if (getApiKeyForProvider(getProviderForModel(AI_MODELS.CLAUDE_CLI_HAIKU))) {
+    models.push(AI_MODELS.CLAUDE_CLI_HAIKU);
+  }
   return models;
 }
 

@@ -354,12 +354,12 @@ export const AI_MODELS = Object.freeze({
   // FAQ work or fact-check consensus.
   CODEX_CLI_PRIMARY: `codex-cli/${CODEX_FALLBACK_MODEL}`,
 
-  // ── Claude CLI Haiku fallback (legacy explicit opt-in) ───────────────────
+  // ── Claude CLI Haiku fallback (article-body explicit opt-in) ─────────────
   // Routed through the local `claude` CLI subprocess using the existing
   // CLAUDE_CODE_OAUTH_TOKEN (Max subscription — $0 marginal cost, same auth
   // already used by pr-review-loop.yml/issue-fix.yml). Inert unless the CLI
-  // lane flag is set AND the token is present. It is retained for explicit
-  // compatibility callers, but is not part of the article default chain.
+  // lane flag is set AND the token is present. It is not part of the shared
+  // DEFAULT_CHAIN: the article body adds it explicitly after Codex.
   // Uses the CLI's own 'haiku' alias (confirmed live: `claude --model haiku`
   // resolves to claude-haiku-4-5-20251001 today) instead of a dated snapshot
   // id, so this tracks whatever Anthropic ships as "current Haiku" without
@@ -2870,7 +2870,7 @@ function _responseCacheKey(messages, o) {
     // answers an otherwise identical request, so a preferred and a
     // non-preferred call must not share a cache entry. Both layers are keyed:
     // `pf` the process-wide env opt-in, `pfo` the per-call opts.prefer. Without
-    // `pfo` the body call (which prefers Codex) and any other call
+    // `pfo` the body call (which prefers Codex then Claude) and any other call
     // with the same prompt+params would collide, and the preferred call would
     // be served a response a free model produced — the exact defect the
     // preference exists to avoid.
@@ -4962,7 +4962,7 @@ export function applyModelsPrefer(chain, prefer) {
  *
  * `undefined` significa «nessun cap dichiarato», non «illimitato»: e' la
  * risposta che serve a create-article.mjs per NON accorciare la fonte quando a
- * servire la chiamata sara' Codex — l'unico membro del roster preferito senza
+ * servire la chiamata sara' Codex o Claude — i membri del roster preferito senza
  * cap di input dichiarato. Se il modello poi rifiuta davvero per dimensione, il
  * rimedio esiste gia' ed e' `err.retryRequestTokenBudget` al throw qui sotto.
  */
@@ -5116,7 +5116,8 @@ export function isModelAvailable(modelId) {
  */
 export function isAnyModelAvailable() {
   return DEFAULT_CHAIN.some(m => isModelAvailable(m))
-    || isModelAvailable(AI_MODELS.CODEX_CLI_PRIMARY);
+    || isModelAvailable(AI_MODELS.CODEX_CLI_PRIMARY)
+    || isModelAvailable(AI_MODELS.CLAUDE_CLI_HAIKU);
 }
 
 /**

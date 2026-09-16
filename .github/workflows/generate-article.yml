@@ -144,7 +144,7 @@ name: Generate Blog Article
 #     touches (§4: drop, don't port).
 #   - trigger-deploy / fast-publish / corpus-mirror dispatches: site-only.
 #   - setup-omniroute / setup-claude-haiku-fallback: optional model tiers behind
-#     their own kill-switches, never transported. The latter is now Codex-only.
+#     their own kill-switches, never transported.
 
 on:
   schedule:
@@ -709,7 +709,7 @@ jobs:
       - name: Load secrets from Remote Config
         run: node generator/scripts/load-rc-env.mjs
 
-      # ── Codex Luna Max article lane (issue #313 / #348) ─────────────────────
+      # ── I DUE CLI CON UN CONTESTO CAPACE (issue #313 / #348) ────────────────
       #
       # Va DOPO «Load secrets from Remote Config», e non prima: l'action legge
       # env.ENABLE_HAIKU_ARTICLE_FALLBACK, che esiste solo dopo quel caricamento
@@ -718,9 +718,16 @@ jobs:
       #
       # MISURATO, run 31817957722: 38 rifiuti su input cap per un prompt stimato
       # ~9740 token contro un cap massimo di 8000, e gli unici membri del roster
-      # che quel prompt lo reggeva e' il CLI subscription Codex, oggi esposto
-      # solo quando action + broker sono pronti. Il processo di generazione
-      # riceve il socket capability, non la credenziale della sottoscrizione.
+      # che quel prompt lo reggevano sono i due CLI subscription — Codex prima,
+      # Haiku poi — saltati in precedenza con «no API key». Il gate in
+      # ai-models.mjs offre Codex solo quando action + broker sono pronti, e
+      # Claude quando il flag + token sono presenti. Il token va passato allo
+      # step di generazione qui sotto via `env:`: deve esistere nel processo che
+      # chiama callLLM.
+      #
+      # Il secret esiste gia' in questo repo (CLAUDE_CODE_OAUTH_TOKEN, lo stesso
+      # del piano Max usato dalla review in tests.yml e da issue-fix.yml): non c'e' nulla
+      # da provisionare, mancava solo il cablaggio.
       # continue-on-error: true — issue #367. Gli step delle composite action
       # non supportano continue-on-error (nulla lo assorbe dentro
       # setup-claude-haiku-fallback/action.yml), quindi va sullo STEP
@@ -730,7 +737,7 @@ jobs:
       # provider non disponibile, stato gia' gestito a valle da ai-models.mjs.
       # "Generate the article" sotto dipende solo da
       # steps.mode.outputs.dry, non dall'esito di questo step.
-      - name: Setup Codex Luna Max article lane
+      - name: Setup Codex primary with Claude fallback
         id: setup_claude_haiku_fallback
         if: steps.mode.outputs.dry != 'true'
         continue-on-error: true
@@ -742,6 +749,7 @@ jobs:
         id: provider_preflight
         if: steps.mode.outputs.dry != 'true'
         env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           CODEX_AUTH_BROKER_SOCKET: ${{ steps.setup_claude_haiku_fallback.outputs.codex_auth_broker_socket }}
           PROVIDER_PREFLIGHT_OUTPUT: ${{ runner.temp }}/provider-preflight.json
         run: node generator/scripts/lib/provider-preflight.mjs
@@ -845,10 +853,13 @@ jobs:
           SOURCE_URL: ${{ inputs.url }}
           EVENT_NAME: ${{ github.event_name }}
           CHAIN_LINK: ${{ steps.mode.outputs.chain_link }}
-          # La generazione del corpo seleziona Codex per-call in
-          # generator/scripts/create-article.mjs. Manteniamo neutro l'env del
-          # processo: il classificatore pre-spend non deve consumare il marker
-          # Codex one-shot prima della chiamata costosa al corpo.
+          # Issue #313 — la meta' che DEVE stare sul processo che chiama callLLM:
+          # ai-models.mjs offre Codex quando il broker action-owned e' attivo,
+          # e claude-cli/haiku solo se hasClaudeCodeOauthToken() e il relativo
+          # flag sono veri QUI dentro. L'action sopra prepara la prima lane e
+          # questo passa il token della seconda; senza i prerequisiti il
+          # provider resta semplicemente «non disponibile».
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           CODEX_AUTH_BROKER_SOCKET: ${{ steps.setup_claude_haiku_fallback.outputs.codex_auth_broker_socket }}
         run: |
           # `set +e` explicitly: GitHub's default shell is `bash -eo pipefail`,
