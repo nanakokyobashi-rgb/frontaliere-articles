@@ -16,7 +16,7 @@ test('Generate Blog Article esegue il preflight dopo il setup opzionale e prima 
   assert.match(WORKFLOW.slice(preflight, generate), /node generator\/scripts\/lib\/provider-preflight\.mjs/);
   assert.match(WORKFLOW.slice(preflight, generate), /PROVIDER_PREFLIGHT_OUTPUT:/);
   assert.match(WORKFLOW.slice(preflight, generate), /CODEX_AUTH_BROKER_SOCKET:/);
-  assert.match(WORKFLOW.slice(preflight, generate), /CLAUDE_CODE_OAUTH_TOKEN:/);
+  assert.doesNotMatch(WORKFLOW.slice(preflight, generate), /CLAUDE_CODE_OAUTH_TOKEN:/);
   assert.match(WORKFLOW.slice(preflight, generate), /Upload provider preflight report/);
   assert.match(WORKFLOW.slice(preflight, generate), /actions\/upload-artifact@v4/);
 });

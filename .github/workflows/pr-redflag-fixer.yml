@@ -1,13 +1,13 @@
 name: PR 🔴 fixer (bounded loop-closure on bot PRs)
 
-# Quando il reviewer Claude posta un `🔴` su una PR autonoma (bot-authored o
+# Quando il reviewer Codex posta un `🔴` su una PR autonoma (bot-authored o
 # head `fix/*`), questo workflow auto-applica il fix sullo stesso branch — in
 # modo BOUNDED. Il push ri-triggera la review dentro tests.yml (re-review) → se pulito,
 # auto-merge; se 🔴 di nuovo, questo workflow ri-parte fino al round cap.
 # NON agisce mai su PR scritte da umani.
 #
 # ANTI-LOOP: un marker nascosto `<!-- REDFLAG_FIX_ROUND: N -->` sulla PR conta i
-# round. A N>=2 → label `needs-human` + escalation, STOP senza Claude (frugalità
+# round. A N>=2 → label `needs-human` + escalation, STOP senza Codex (frugalità
 # quota: non bruciare turni in un loop che non converge).
 
 on:
@@ -56,20 +56,24 @@ jobs:
     # un vero 🔴 Important quel salto era invisibile ovunque (issue #5534, PR
     # #5515 — check-run "skipped", zero commenti, zero label). Qui restano solo i
     # pre-filtri economici che non richiedono distinguere lo scope.
-    # Reviewer set = `claude*` + `frontaliere-automation*` (prefisso: la
-    # stessa App si presenta senza il suffisso `[bot]` in GraphQL). Il bot
-    # `github-actions[bot]` entra solo per una review Codex marcata
-    # esplicitamente: il marker impedisce a un commento generico del bot di
-    # attivare il fixer. Lo STESSO set vale per i consumer della review — bundle
-    # sotto, `auto-merge-eval.mjs`, `review-gate.mjs`, `pr-autorebase.mjs`,
-    # `stale-pr-rescuer.yml` — via `REVIEWER_BOT_LOGIN_RE`/`_JQ` in
-    # `scripts/ci/lib/constants.mjs`, con il predicato Codex separato.
+    # Reviewer set = `claude*` + `frontaliere-automation*`, plus the explicitly
+    # marked Codex fallback emitted by `github-actions[bot]` (prefisso: la
+    # stessa App si presenta senza il suffisso `[bot]` in GraphQL). A job-level
+    # `startsWith(..., 'claude')` alone skipped App-bot 🔴 on the site
+    # (PRs #7610/#7609); this workflow is `adapted`, so the same login
+    # hole is closed here, not by waiting for an identical twin. Lo STESSO set
+    # vale per i consumer della review — bundle sotto, `auto-merge-eval.mjs`,
+    # `review-gate.mjs`, `pr-autorebase.mjs`, `stale-pr-rescuer.yml` — via
+    # `REVIEWER_BOT_LOGIN_RE`/`_JQ` in `scripts/ci/lib/constants.mjs`, e per i
+    # due `--jq` di `tests.yml` (skip-guard `## LGTM` e base incrementale).
     if: |
       github.event.review.user.type == 'Bot' &&
-      (startsWith(github.event.review.user.login, 'claude') ||
-       startsWith(github.event.review.user.login, 'frontaliere-automation') ||
-       (github.event.review.user.login == 'github-actions[bot]' &&
-        contains(github.event.review.body, '<!-- CODEX_FALLBACK_REVIEW -->'))) &&
+      (
+        startsWith(github.event.review.user.login, 'claude') ||
+        startsWith(github.event.review.user.login, 'frontaliere-automation') ||
+        (github.event.review.user.login == 'github-actions[bot]' &&
+         contains(github.event.review.body, '<!-- CODEX_FALLBACK_REVIEW -->'))
+      ) &&
       contains(github.event.review.body, '🔴') &&
       github.event.pull_request.draft == false
     runs-on: ubuntu-latest
@@ -308,7 +312,7 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: node scripts/ci/alert-pat-down.mjs --workflow "${{ github.workflow }}" --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
-      - name: Acquire shared Claude quota lease (redflag residual)
+      - name: Acquire shared Codex lane quota lease (redflag residual)
         id: quota_lease
         continue-on-error: true
         env:
@@ -323,7 +327,7 @@ jobs:
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         run: node scripts/ci/check-quota-backoff.mjs
 
-      - name: Shared Claude quota lease unavailable (expected skip)
+      - name: Shared Codex lane quota lease unavailable (expected skip)
         if: steps.quota_lease.outputs.lease_allowed != 'true'
         run: |
           if [ "${{ steps.quota_lease.outputs.lease_error }}" = 'true' ]; then
@@ -406,16 +410,16 @@ jobs:
 
           # Tier (mirror della review in tests.yml e di issue-fix): high se la PR
           # tocca CODE funnel-critical (tests/, build-plugins/, scripts/lib/,
-          # services/seo*), normal altrimenti. Modello UNIFICATO claude-opus-5
-          # su entrambi i tier (owner 2026-09-03: opus a effort medium, mai claude-sonnet-4-6); i tier
+          # services/seo*), normal altrimenti. Modello UNIFICATO gpt-5.6-luna
+          # su entrambi i tier (Codex Luna Max, effort max); i tier
           # restano distinti solo per telemetria/prompt.
           crit=$(echo "$files" | grep -E '^(tests/|build-plugins/|scripts/lib/|services/seo)' || true)
           if [ -n "$crit" ]; then
             echo "tier=high"   >> "$GITHUB_OUTPUT"
-            echo "model=claude-opus-5"   >> "$GITHUB_OUTPUT"
+            echo "model=gpt-5.6-luna"   >> "$GITHUB_OUTPUT"
           else
             echo "tier=normal" >> "$GITHUB_OUTPUT"
-            echo "model=claude-opus-5" >> "$GITHUB_OUTPUT"
+            echo "model=gpt-5.6-luna" >> "$GITHUB_OUTPUT"
           fi
 
           # Posta/incrementa il marker round PRIMA di invocare Claude (così se la
@@ -460,7 +464,7 @@ jobs:
       # è poi morta `error_max_turns` in cleanup (false-failure: 28% dei fail nel
       # campione 7gg pushavano un commit ma il job restava RED → failure-rate
       # gonfiato nel loop-health-report #1951).
-      - name: Record base SHA (pre-Claude)
+      - name: Record base SHA (pre-Codex)
         id: base
         if: steps.guard.outputs.proceed == 'true'
         run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
@@ -544,9 +548,10 @@ jobs:
             > "$OUT/files.txt" 2>/dev/null; then
             context_fail "Elenco file della PR illeggibile: il redflag fixer resta fail-closed senza Claude."
           fi
-          # STESSO set di login del `if:` job-level sopra (single source:
-          # REVIEWER_BOT_LOGIN_JQ in scripts/ci/lib/constants.mjs, pinnato da
-          # generator/tests/reviewer-bot-login.test.mjs). Con il solo `claude`
+          # STESSO set di reviewer del `if:` job-level sopra: la allowlist
+          # condivisa `REVIEWER_BOT_LOGIN_JQ` resta la base, mentre il Codex
+          # fallback è ammesso solo con login github-actions[bot] e marker
+          # strutturale. Con il solo `claude`
           # una review dell'App bot dava un bundle con la sezione findings
           # VUOTA — o, peggio, l'ultima review `claude` PRECEDENTE, cioe' i 🔴
           # di un round gia' chiuso: l'agent non fallisce, fixa il round
@@ -568,10 +573,8 @@ jobs:
              | select(.user.type == "Bot")
              | select(
                  ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
-                 or (
-                   ((.user.login // "") == "github-actions[bot]")
-                   and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->"))
-                 )
+                 or (((.user.login // "") | test("^github-actions\\[bot\\]$";"i"))
+                     and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
                )
              | select((.commit_id // "" | ascii_downcase) == ($head | ascii_downcase))
              | select(has_current_revision($revision))
@@ -610,14 +613,10 @@ jobs:
           echo "::error::Contesto PR/review non verificato: nessun turno Claude ammesso."
           exit 1
 
-      - name: Setup Headroom compression proxy
-        if: steps.guard.outputs.proceed == 'true' && steps.ctx.outputs.context_verified == 'true'
-        uses: ./.github/actions/setup-headroom
-
       # Il beacon resta telemetria: il lease condiviso sopra decide l'ammissione
       # al turno, mentre questo probe conserva il segnale quota storico e il
       # fallback Codex-primary senza introdurre un secondo veto.
-      - name: Pre-flight — Claude quota telemetry (Codex primary)
+      - name: Pre-flight — Codex lane quota telemetry
         id: quota
         if: steps.guard.outputs.proceed == 'true' && steps.ctx.outputs.context_verified == 'true'
         continue-on-error: true
@@ -632,8 +631,8 @@ jobs:
       # action Claude. Rifare il read/hash nell'ultimo step prima di consumare
       # quota Claude evita di applicare un finding a un contesto ormai stantio;
       # il mismatch è un errore fail-closed, non un bundle vuoto.
-      - name: Revalidate PR + review context immediately before Claude
-        id: preclaude
+      - name: Revalidate PR + review context immediately before Codex
+        id: precodex
         if: steps.guard.outputs.proceed == 'true' && steps.ctx.outputs.context_verified == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -683,11 +682,11 @@ jobs:
             context_fail "Il body della PR è cambiato fra prefetch e Claude: nessun fix automatico viene avviato."
           fi
           echo "verified=true" >> "$GITHUB_OUTPUT"
-          echo "Contesto PR/review ancora identico alla prefetch (HEAD + body revision): Claude autorizzata."
+          echo "Contesto PR/review ancora identico alla prefetch (HEAD + body revision): Codex autorizzato."
 
-      - name: Run Claude 🔴-fix
-        id: claude_review
-        if: steps.guard.outputs.proceed == 'true' && steps.ctx.outputs.context_verified == 'true' && steps.preclaude.outputs.verified == 'true'
+      - name: Run Codex Luna Max 🔴-fix
+        id: codex_review
+        if: steps.guard.outputs.proceed == 'true' && steps.ctx.outputs.context_verified == 'true' && steps.precodex.outputs.verified == 'true'
         # Non far fallire il job sull'exit non-zero della action: lo `Classify
         # outcome` finale decide il colore in base al LAVORO reale (commit pushato),
         # non al subtype della CLI. Un error_max_turns DOPO un push valido non è un
@@ -705,7 +704,6 @@ jobs:
         with:
           codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
           # Auth via subscription Max (zero API cost). MAI ANTHROPIC_API_KEY.
-          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           # Stesso token dello step "Configure push remote" qui sopra, e per la
           # stessa ragione — ma passato DOVE conta davvero. All'avvio l'action
           # chiama `replaceCheckoutCredentials()`
@@ -718,29 +716,26 @@ jobs:
           # `HAS_PAT`) aveva dato via libera perche' il PAT c'era. Il remote
           # configurato sopra resta utile ai push da `run:`.
           #
-          # Vuoto (non `secrets.GITHUB_TOKEN`) come fallback: gli eventi del
-          # GITHUB_TOKEN non ri-attivano i workflow a valle, quindi il push del
-          # fix non farebbe ripartire la review dentro tests.yml — la re-review che questo
-          # workflow esiste per innescare. Vuoto = ramo di default dell'action
-          # (conia un token proprio), cioe' il comportamento odierno.
+          # Vuoto (non `secrets.GITHUB_TOKEN`) resta fail-closed: gli eventi del
+          # GITHUB_TOKEN non ri-attivano i workflow a valle, quindi non può
+          # essere usato come credenziale operativa per un fix che deve innescare
+          # la re-review dentro tests.yml. L'action si ferma prima di invocare
+          # Codex quando il PAT esplicito manca.
           github_token: ${{ env.GITHUB_PAT_NANAKO }}
-          codex_github_token: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
-          show_full_output: true
+          codex_github_token: ${{ env.GITHUB_PAT_NANAKO }}
           # Le review/PR autonome sono di claude[bot] / github-actions[bot] /
           # frontaliere-automation[bot] (App): le PR aggiornate via App token
           # triggerano con actor = l'App → senza whitelist la action aborta
           # "non-human actor: frontaliere-automation" (exit 1). Mai `*`.
-          allowed_bots: 'github-actions[bot], claude[bot], frontaliere-automation[bot]'
           # 30->45 (misurato 06-12): 25 fail vs 20 success in 7gg, TUTTI
           # error_max_turns al cap 30 (run 27390252111/27375482475/27373263097)
           # = peggior failure-rate del loop; ogni fail brucia ~8-14min di run
-          # opus senza commit e lascia il rosso alla escalation needs-human.
+          # senza commit e lascia il rosso alla escalation needs-human.
           # 2026-07-02: --dangerously-skip-permissions sostituisce --allowedTools scoped
           # (rationale completo: post-merge-followup.yml claude_args comment, stesso
           # fix, evita drift tra copie duplicate).
           # 45->60 (2026-07-17, owner): bump fleet-wide di tutti i cap max-turns
           # Claude dopo l'ennesimo error_max_turns (run 29556645538 del vecchio workflow di review).
-          claude_args: "--effort medium --max-turns 60 --model ${{ steps.guard.outputs.model }} --dangerously-skip-permissions"
           prompt: |
             Sei l'agent di chiusura 🔴 per la PR #${{ github.event.pull_request.number }} ("${{ github.event.pull_request.title }}"). Tier: ${{ steps.guard.outputs.tier }}. Round: ${{ steps.guard.outputs.round }}/2.
 
@@ -765,30 +760,6 @@ jobs:
             - Se i 🔴 non sono fixabili con confidenza (root cause non chiara / serve giudizio umano) → commenta "🔴 non auto-fixabile: <motivo>" e TERMINA senza commit (il round cap + needs-human gestiranno l'escalation).
             - Una sola passata: applica, valida, committa, pusha, aggiorna body, STOP.
 
-      - name: Claude usage metrics
-        if: always() && steps.guard.outputs.proceed == 'true' && steps.ctx.outputs.context_verified == 'true' && steps.claude_review.outputs.claude_used == 'true'
-        run: node scripts/ci/claude-usage-summary.mjs "${{ steps.claude_review.outputs.execution_file }}" "pr-redflag-fixer"
-
-      # Un 429 non e' un round: Claude non e' mai partito (0 turni, $0) e non ha
-      # letto la PR. Il marker di round pero' e' gia' stato postato dal guard,
-      # quindi senza rimborso due finestre di quota consecutive spingono la PR a
-      # `needs-human` — che qui e' un filtro di ESCLUSIONE da ogni coda
-      # automatica (#733), cioe' uno stato assorbente. Gemello lato PR di
-      # `check-quota-backoff.mjs` + marker `rate-limited` del lato issue.
-      - name: Refund round on Claude quota 429 (zero-Claude)
-        if: always() && steps.guard.outputs.proceed == 'true' && steps.ctx.outputs.context_verified == 'true'
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
-          PR: ${{ github.event.pull_request.number }}
-          MARKER: REDFLAG_FIX_ROUND
-          ROUND: ${{ steps.guard.outputs.round }}
-          EXEC_FILE: ${{ steps.claude_review.outputs.execution_file }}
-          WORKFLOW: pr-redflag-fixer
-          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        run: node scripts/ci/refund-fix-round.mjs
-
       - name: Cleanup Firebase credentials
         if: always()
         run: rm -f /tmp/firebase-sa.json
@@ -809,25 +780,25 @@ jobs:
         env:
           HEAD_REF: ${{ github.event.pull_request.head.ref }}
           BASE_SHA: ${{ steps.base.outputs.sha }}
-          CLAUDE_OUTCOME: ${{ steps.claude_review.outcome }}
+          ACTION_OUTCOME: ${{ steps.codex_review.outcome }}
         run: |
           set -uo pipefail
           HEAD_NOW=$(git rev-parse HEAD 2>/dev/null || echo "")
           git fetch origin "$HEAD_REF" -q 2>/dev/null || true
           REMOTE_SHA=$(git rev-parse "origin/$HEAD_REF" 2>/dev/null || echo "")
-          echo "base=$BASE_SHA local=$HEAD_NOW remote=$REMOTE_SHA claude=$CLAUDE_OUTCOME"
+          echo "base=$BASE_SHA local=$HEAD_NOW remote=$REMOTE_SHA claude=$ACTION_OUTCOME"
           if [ -n "$HEAD_NOW" ] && [ -n "$BASE_SHA" ] && [ "$HEAD_NOW" != "$BASE_SHA" ] && [ "$REMOTE_SHA" = "$HEAD_NOW" ]; then
-            echo "✓ Fix pushato questo round (HEAD avanzato e presente su origin/$HEAD_REF) → round SUCCESS. Job verde anche se la CLI è uscita '$CLAUDE_OUTCOME'."
+            echo "✓ Fix pushato questo round (HEAD avanzato e presente su origin/$HEAD_REF) → round SUCCESS. Job verde anche se la CLI è uscita '$ACTION_OUTCOME'."
             exit 0
           fi
-          if [ "$CLAUDE_OUTCOME" = "failure" ]; then
-            echo "::error::🔴-fix: nessun commit pushato e la run Claude è fallita ('$CLAUDE_OUTCOME') → non-progress reale. Job RED (segnale preservato; round-cap → needs-human a N>=2)."
+          if [ "$ACTION_OUTCOME" = "failure" ]; then
+            echo "::error::🔴-fix: nessun commit pushato e la run Claude è fallita ('$ACTION_OUTCOME') → non-progress reale. Job RED (segnale preservato; round-cap → needs-human a N>=2)."
             exit 1
           fi
-          echo "Nessun push ma Claude terminato pulito ('$CLAUDE_OUTCOME') → terminale legittimo (es. non auto-fixabile). Job verde."
+          echo "Nessun push ma Claude terminato pulito ('$ACTION_OUTCOME') → terminale legittimo (es. non auto-fixabile). Job verde."
           exit 0
 
-      - name: Release shared Claude quota lease
+      - name: Release shared Codex lane quota lease
         if: always() && steps.quota_lease.outputs.lease_allowed == 'true' && steps.quota_lease.outputs.lease_token != ''
         continue-on-error: true
         env:

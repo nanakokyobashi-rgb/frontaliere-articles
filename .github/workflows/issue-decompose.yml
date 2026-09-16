@@ -1,4 +1,4 @@
-name: Issue decompose (Claude → sub-issues)
+name: Issue decompose (Codex Luna Max → sub-issues)
 
 # Lo stadio di DECOMPOSIZIONE del ciclo autonomo (2026-08-21) — adattamento
 # corpus del gemello del sito (manifest: `adapted`).
@@ -113,7 +113,7 @@ jobs:
       # stadio a valle sa riconciliare. Segnali: la label di dispatch consumata
       # dalla run precedente, oppure `decomposed:1` gia' sulla issue (ultimo
       # passo della prima run). Bias a PROCEDERE su qualunque dubbio.
-      - name: Pre-flight — stale-dispatch gate (zero-Claude)
+      - name: Pre-flight — stale-dispatch gate (zero-agent)
         id: stale
         if: always()
         env:
@@ -124,7 +124,7 @@ jobs:
           STAGE: decompose
         run: node scripts/ci/check-stale-issue-dispatch.mjs
 
-      - name: Consume shared Claude quota lease (issue-decompose slot)
+      - name: Consume shared Codex lane quota lease (issue-decompose slot)
         id: quota_lease
         if: always()
         continue-on-error: true
@@ -140,7 +140,7 @@ jobs:
           GITHUB_RUN_ID: ${{ github.run_id }}
         run: node scripts/ci/check-quota-backoff.mjs
 
-      - name: Shared Claude quota lease unavailable (requeue zero-Claude)
+      - name: Shared Codex lane quota lease unavailable (requeue zero-agent)
         if: always() && steps.stale.outputs.stale_dispatch != 'true' && steps.quota_lease.outputs.lease_allowed != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -154,12 +154,8 @@ jobs:
           gh issue edit "$ISSUE" --repo "$GH_REPO" --add-label agent:decompose-queued --remove-label agent:decompose
           echo "::warning::Lease quota condiviso negato (${{ steps.quota_lease.outputs.lease_reason }}) → issue #$ISSUE ri-accodata senza consumare quota Claude."
 
-      - name: Setup Headroom compression proxy
-        if: always() && steps.stale.outputs.stale_dispatch != 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
-        uses: ./.github/actions/setup-headroom
-
-      - name: Run Claude decompose
-        id: claude_decompose
+      - name: Run Codex Luna Max decompose
+        id: codex_decompose
         if: always() && steps.stale.outputs.stale_dispatch != 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
         continue-on-error: true
         uses: ./.github/actions/claude-codex-fallback
@@ -169,13 +165,9 @@ jobs:
           REPO: ${{ github.repository }}
         with:
           codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
-          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           github_token: ${{ env.GITHUB_PAT_NANAKO }}
-          codex_github_token: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
+          codex_github_token: ${{ env.GITHUB_PAT_NANAKO }}
           codex_site_github_token: ${{ env.GITHUB_PAT }}
-          show_full_output: true
-          allowed_bots: 'github-actions[bot], claude[bot]'
-          claude_args: "--effort medium --max-turns 35 --model claude-opus-5 --dangerously-skip-permissions"
           prompt: |
             Sei l'agente di DECOMPOSIZIONE per la issue #${{ github.event.issue.number }} ("${{ github.event.issue.title }}") di questo repo (il corpus articoli: generator/, engine/, content/, scripts/ci del ciclo autonomo).
             La issue è stata instradata qui perché è troppo grande o eterogenea per un singolo run di fix. Il tuo compito NON è implementare: è scorporarla in sub-issue ATOMICHE che il fixer autonomo possa chiudere una alla volta.
@@ -220,21 +212,6 @@ jobs:
             - Se non riesci a produrre NEMMENO una scheda valida: trattala come «decisione del proprietario» (commento con ciò che manca + `needs-human` + `<!-- DECOMPOSE_OUTCOME: needs-human-decision -->`).
             - L'ULTIMO commento sul padre porta SEMPRE `<!-- DECOMPOSE_OUTCOME: <code> -->` con `<code>` ∈ `decomposed-K` · `atomic-requeue` · `needs-human-decision` · `already-resolved` · `stale-dispatch`.
 
-      - name: Claude usage metrics
-        if: always() && steps.claude_decompose.outputs.claude_used == 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
-        run: node scripts/ci/claude-usage-summary.mjs "${{ steps.claude_decompose.outputs.execution_file }}" "issue-decompose"
-
-      - name: Mark Claude terminal outcome (granular telemetry)
-        if: always() && steps.claude_decompose.outputs.claude_used == 'true' && steps.stale.outputs.stale_dispatch != 'true' && steps.quota_lease.outputs.lease_allowed == 'true' && steps.claude_decompose.outcome == 'failure'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
-          ISSUE: ${{ github.event.issue.number }}
-          EXEC_FILE: ${{ steps.claude_decompose.outputs.execution_file }}
-          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          WORKFLOW: issue-decompose
-        run: node scripts/ci/mark-claude-terminal-outcome.mjs
-
       - name: Emit DECOMPOSE_OUTCOME telemetry (deterministic backstop)
         if: always() && steps.stale.outputs.stale_dispatch != 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
         env:
@@ -254,22 +231,22 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE: ${{ github.event.issue.number }}
-          CLAUDE_OUTCOME: ${{ steps.claude_decompose.outcome }}
+          ACTION_OUTCOME: ${{ steps.codex_decompose.outcome }}
         run: |
           set -uo pipefail
           DONE=$(gh issue view "$ISSUE" --json comments --jq '[.comments[].body | select(test("<!-- DECOMPOSE_OUTCOME: (decomposed-[0-9]+|atomic-requeue|needs-human-decision|already-resolved|stale-dispatch) -->"))] | length' 2>/dev/null || echo 0)
-          echo "issue=$ISSUE outcome-markers=$DONE claude=$CLAUDE_OUTCOME"
+          echo "issue=$ISSUE outcome-markers=$DONE claude=$ACTION_OUTCOME"
           if [ "${DONE:-0}" != "0" ]; then
             echo "✓ verdetto di decomposizione presente → run SUCCESS."
             exit 0
           fi
-          if [ "$CLAUDE_OUTCOME" = "failure" ]; then
+          if [ "$ACTION_OUTCOME" = "failure" ]; then
             echo "::error::issue-decompose #$ISSUE: nessun verdetto e CLI fallita → non-delivery reale. Il rescue del drainer ri-armerà (1 retry) o parcheggerà."
             exit 1
           fi
           echo "CLI uscita pulita senza verdetto esplicito — il backstop ha marcato no-outcome. Job verde."
 
-      - name: Release shared Claude quota lease
+      - name: Release shared Codex lane quota lease
         if: always() && steps.quota_lease.outputs.lease_consumed == 'true'
         continue-on-error: true
         env:

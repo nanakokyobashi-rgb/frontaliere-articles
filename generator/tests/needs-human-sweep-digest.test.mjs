@@ -79,11 +79,11 @@ test('il titolo digest ambiguo non viene risolto scegliendo il primo risultato',
   assert.doesNotMatch(markerRead, /2>\/dev\/null|\|\| echo 0/, 'un errore del digest non deve degradare a zero marker');
 });
 
-test('il valore del titolo digest è validato prima del prompt Claude e passato con un token osservabile', () => {
+test('il valore del titolo digest è validato prima del prompt Codex e passato con un token osservabile', () => {
   const validateAt = text.indexOf('- name: Validate digest title');
-  const claudeAt = text.indexOf('- name: Run Claude sweep');
+  const claudeAt = text.indexOf('- name: Run Codex Luna Max sweep');
   assert.ok(validateAt !== -1, 'manca lo step di validazione del titolo digest');
-  assert.ok(claudeAt !== -1 && validateAt < claudeAt, 'il titolo deve essere validato prima di invocare Claude');
+  assert.ok(claudeAt !== -1 && validateAt < claudeAt, 'il titolo deve essere validato prima di invocare Codex');
 
   const validate = text.slice(validateAt, claudeAt);
   assert.match(validate, /id: digest_title/, 'lo step deve pubblicare un output identificabile');
@@ -92,7 +92,7 @@ test('il valore del titolo digest è validato prima del prompt Claude e passato 
   assert.match(validate, /\[ -n "\$DIGEST_TITLE" \]/, 'un titolo vuoto deve essere un errore osservabile');
   assert.match(validate, /printf 'title=%s\\n' "\$DIGEST_TITLE" >> "\$GITHUB_OUTPUT"/, 'il valore validato deve diventare un output machine-stabile');
 
-  const prompt = stepBlock('Run Claude sweep');
+  const prompt = stepBlock('Run Codex Luna Max sweep');
   assert.match(
     prompt,
     /titolo ESATTO `\$\{\{ steps\.digest_title\.outputs\.title \}\}`/,

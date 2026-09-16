@@ -30,6 +30,10 @@ test('a frontaliere-automation[bot] review with 🔴 passes the job trigger and 
     'il trigger deve accettare solo review emesse da un account Bot');
   assert.match(src, /contains\(github\.event\.review\.body, '🔴'\)/);
   assert.match(src, /startsWith\(github\.event\.review\.user\.login, 'claude'\) \|\|/);
+  assert.match(jobIf, /github\.event\.review\.user\.login == 'github-actions\[bot\]'/,
+    'il trigger deve riconoscere l\'identità Codex solo in forma esplicita');
+  assert.match(jobIf, /CODEX_FALLBACK_REVIEW/,
+    'il trigger non deve ammettere github-actions senza il marker Codex');
 });
 
 test('no longer requires login to start with claude as the only reviewer match', () => {
@@ -40,25 +44,26 @@ test('no longer requires login to start with claude as the only reviewer match',
 });
 
 test('collect-review jq, review-gate and auto-merge-eval use the same bot set', () => {
-  // I consumer `.mjs` importano `isManagedReview` da
-  // `scripts/ci/lib/constants.mjs`; questo test sorveglia soltanto la copia jq
-  // necessaria nei workflow, che non possono importare JavaScript.
-  assert.match(src, /select\(\.user\.type == "Bot"\)[\s\S]*?test\("\^\(claude\|frontaliere-automation\)";"i"\)/);
-  assert.match(src, /github-actions\[bot\]/);
-  assert.match(src, /CODEX_FALLBACK_REVIEW/);
+  // I consumer `.mjs` non contengono piu' il login in chiaro: importano
+  // `REVIEWER_BOT_LOGIN_RE` da `scripts/ci/lib/constants.mjs`, ed e'
+  // `generator/tests/reviewer-bot-login.test.mjs` a pinnare quel legame per
+  // tutti e sei i consumer (qui resterebbe una copia della stessa regola).
+  assert.match(src, /select\(\.user\.type == "Bot"\)/);
+  assert.match(src, /test\("\^\(claude\|frontaliere-automation\)";"i"\)/);
+  assert.match(src, /test\("\^github-actions\\\\\[bot\\\\\]\$";"i"\)/);
+  assert.match(src, /contains\("<!-- CODEX_FALLBACK_REVIEW -->"\)/);
   assert.match(src, /contains\("## Findings \("\)/);
   const testsYml = fs.readFileSync(path.join(ROOT, '.github/workflows/tests.yml'), 'utf8');
   assert.match(testsYml, /test\("\^\(claude\|frontaliere-automation\)";"i"\)/);
   assert.doesNotMatch(testsYml, /test\("claude";"i"\)/);
 });
 
-test('il redflag fixer ammette Claude solo con contesto PR/review verificato', () => {
+test('il redflag fixer ammette Codex solo con contesto PR/review verificato', () => {
   const collectStart = src.indexOf('- name: Collect PR + review context (zero-Claude)');
   const failClosedStart = src.indexOf('- name: Fail closed when review context is unavailable', collectStart);
-  const setupStart = src.indexOf('- name: Setup Headroom compression proxy', failClosedStart);
-  const claudeStart = src.indexOf('- name: Run Claude 🔴-fix', setupStart);
-  assert.ok(collectStart >= 0 && failClosedStart > collectStart && setupStart > failClosedStart);
-  assert.ok(claudeStart > setupStart);
+  const codexStart = src.indexOf('- name: Run Codex Luna Max 🔴-fix', failClosedStart);
+  assert.ok(collectStart >= 0 && failClosedStart > collectStart);
+  assert.ok(codexStart > failClosedStart);
 
   const collect = src.slice(collectStart, failClosedStart);
   assert.match(collect, /context_fail\(\)/);
@@ -80,11 +85,11 @@ test('il redflag fixer ammette Claude solo con contesto PR/review verificato', (
   assert.match(collect, /\.commit_id \/\/ "".*\$head/);
   assert.match(collect, /context_verified=true/);
 
-  const failClosed = src.slice(failClosedStart, setupStart);
+  const failClosed = src.slice(failClosedStart, codexStart);
   assert.match(failClosed, /steps\.ctx\.outputs\.context_verified != 'true'/);
   assert.match(failClosed, /exit 1/);
   assert.match(
-    src.slice(claudeStart, src.indexOf('- name: Claude usage metrics', claudeStart)),
+    src.slice(codexStart, src.indexOf('- name: Cleanup Firebase credentials', codexStart)),
     /if: steps\.guard\.outputs\.proceed == 'true' && steps\.ctx\.outputs\.context_verified == 'true'/,
   );
 });

@@ -33,7 +33,8 @@ const MAX_RESPONSE_BYTES = 2 * 1024 * 1024;
 const MAX_AUTH_BYTES = 256 * 1024;
 const DEFAULT_TTL_MS = 30 * 60 * 1000;
 // Callers that do not opt into the shared article lane retain one-shot
-// compatibility. The crawler action passes --max-requests 4096.
+// compatibility. The composite action passes --max-requests 4096 for its
+// shared crawler/job lane.
 const DEFAULT_MAX_REQUESTS = 1;
 const MAX_TIMEOUT_MS = 600_000;
 const CLIENT_LIVENESS_PROBE = '\0';

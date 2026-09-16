@@ -1,4 +1,4 @@
-name: Needs-human sweep (Claude, weekly)
+name: Needs-human sweep (Codex Luna Max, weekly)
 
 # L'UNICA porta di rientro dallo stato `needs-human` — adattamento corpus del
 # gemello del sito (manifest: `adapted`), portato qui il 2026-08-25.
@@ -161,8 +161,9 @@ jobs:
           node-version: '22'
 
       # Ponte Remote Config → env: da qui arriva `GITHUB_PAT_NANAKO`.
-      # `continue-on-error`: senza PAT lo sweep gira lo stesso col GITHUB_TOKEN,
-      # solo senza poter innescare `issue-triage` sulle issue che ri-accoda.
+      # `continue-on-error` mantiene leggibili i preflight con GITHUB_TOKEN;
+      # senza PAT la corsia Codex riceve input vuoto e si ferma fail-closed
+      # prima di poter eseguire operazioni sul repository.
       - name: Write Firebase SA (se presente)
         continue-on-error: true
         env:
@@ -205,12 +206,8 @@ jobs:
           }
           printf 'title=%s\n' "$DIGEST_TITLE" >> "$GITHUB_OUTPUT"
 
-      - name: Setup Headroom compression proxy
-        if: always() && steps.digest_title.outcome == 'success'
-        uses: ./.github/actions/setup-headroom
-
-      - name: Run Claude sweep
-        id: claude_sweep
+      - name: Run Codex Luna Max sweep
+        id: codex_sweep
         if: always() && steps.digest_title.outcome == 'success'
         continue-on-error: true
         uses: ./.github/actions/claude-codex-fallback
@@ -220,13 +217,9 @@ jobs:
           SITE_REPO: valerielinc-ops/frontaliere-si-o-no
         with:
           codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
-          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           github_token: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
-          codex_github_token: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
+          codex_github_token: ${{ env.GITHUB_PAT_NANAKO }}
           codex_site_github_token: ${{ env.GITHUB_PAT }}
-          show_full_output: true
-          allowed_bots: 'github-actions[bot], claude[bot]'
-          claude_args: "--effort medium --max-turns 60 --model claude-opus-5 --dangerously-skip-permissions"
           prompt: |
             Sei lo sweep settimanale delle issue `needs-human` di questo repo (il CORPUS, `$REPO`). Il tuo compito: separare le decisioni VERE del proprietario dal resto, e rimettere il resto nel ciclo autonomo. NON implementi fix e NON apri PR.
 
@@ -247,18 +240,13 @@ jobs:
 
             **Telemetria:** chiudi postando sul digest un commento con l'ultimo marker su riga propria: `<!-- SWEEP_OUTCOME: a=<n> b=<n> c=<n> d=<n> -->`.
 
-      - name: Claude usage metrics
-        if: always() && steps.claude_sweep.outputs.claude_used == 'true'
-        continue-on-error: true
-        run: node scripts/ci/claude-usage-summary.mjs "${{ steps.claude_sweep.outputs.execution_file }}" "needs-human-sweep"
-
       # Colore lavoro reale: verde se il marker SWEEP_OUTCOME è stato postato
       # (anche a cap raggiunto), rosso se la CLI è morta senza produrlo.
       - name: Classify outcome (work-done, not CLI exit)
         if: always()
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CLAUDE_OUTCOME: ${{ steps.claude_sweep.outcome }}
+          ACTION_OUTCOME: ${{ steps.codex_sweep.outcome }}
           DIGEST_TITLE_VALIDATION: ${{ steps.digest_title.outcome }}
         run: |
           set -uo pipefail
@@ -300,12 +288,12 @@ jobs:
             exit 1
           fi
           HAS=$(printf '%s\n' "$HAS_LINES" | sed '/^[[:space:]]*$/d' | wc -l | tr -d '[:space:]')
-          echo "digest=${N:-<none>} sweep-markers=$HAS claude=$CLAUDE_OUTCOME"
+          echo "digest=${N:-<none>} sweep-markers=$HAS claude=$ACTION_OUTCOME"
           if [ "${HAS:-0}" != "0" ]; then
             echo "✓ marker SWEEP_OUTCOME presente → run SUCCESS."
             exit 0
           fi
-          if [ "$CLAUDE_OUTCOME" = "failure" ]; then
+          if [ "$ACTION_OUTCOME" = "failure" ]; then
             echo "::error::needs-human-sweep: CLI fallita senza marker → non-delivery. Il prossimo run settimanale (o un dispatch manuale) recupera: lo sweep è idempotente."
             exit 1
           fi

@@ -353,12 +353,12 @@ test('tutti i consumer di review usano la revisione del body corrente', () => {
   assert.equal((collect.match(/gh api "repos\/\$REPO\/pulls\/\$PR_NUMBER"/g) ?? []).length, 1);
   assert.match(redflag, /La HEAD della PR è cambiata rispetto all'evento review/);
   assert.match(redflag, /github\.event\.review\.user\.type == 'Bot'/);
-  assert.match(redflag, /id: preclaude/);
+  assert.match(redflag, /id: precodex/);
   assert.match(redflag, /EXPECTED_BODY_REVISION: \$\{\{ steps\.ctx\.outputs\.review_revision \}\}/);
   assert.match(redflag, /EXPECTED_HEAD_SHA: \$\{\{ steps\.ctx\.outputs\.head_sha \}\}/);
   assert.match(redflag, /pr-before-claude\.json/);
   assert.match(redflag, /Il body della PR è cambiato fra prefetch e Claude/);
-  assert.match(redflag, /steps\.preclaude\.outputs\.verified == 'true'/);
+  assert.match(redflag, /steps\.precodex\.outputs\.verified == 'true'/);
   assert.match(testsWorkflow, /PR response is not an object/);
   assert.match(testsWorkflow, /PR body is not a string or null/);
   assert.match(redflag, /if ! reviews_json=\$\(gh api "repos\/\$REPO\/pulls\/\$PR_NUMBER\/reviews" --paginate --slurp/);
