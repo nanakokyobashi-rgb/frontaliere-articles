@@ -177,9 +177,9 @@
       "path": "scripts/ci/check-issue-already-resolved.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "77c5698086384349",
-        "corpus": "77c5698086384349",
-        "alignedAt": "2026-09-13"
+        "site": "489604959eb2b59d",
+        "corpus": "489604959eb2b59d",
+        "alignedAt": "2026-09-15"
       }
     },
     {
@@ -293,9 +293,9 @@
       "path": "scripts/ci/claude-usage-summary.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "cc5b2fca24f3e328",
-        "corpus": "cc5b2fca24f3e328",
-        "alignedAt": "2026-09-09"
+        "site": "79b484bdbc05106d",
+        "corpus": "79b484bdbc05106d",
+        "alignedAt": "2026-09-15"
       }
     },
     {
@@ -324,7 +324,7 @@
       "reason": "Il corpus espone il contratto aggregate canonical ai consumer locali e conserva la propria risoluzione di locator sul percorso di pubblicazione; per questo la copia non è byte-identica al matcher sorgente del sito. La baseline registra separatamente i due blob e il trasporto successivo deve preservare l'adattamento, non sovrascriverlo con un mirror cieco.",
       "baseline": {
         "site": "2fc97767d9b96296",
-        "corpus": "90cd7bbb0dc543f5",
+        "corpus": "a94459bf3a8ca587",
         "alignedAt": "2026-09-13"
       }
     },
@@ -1063,9 +1063,9 @@
       "path": "scripts/ci/harvest-agent-lessons.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "e7021b48301afeae",
-        "corpus": "e7021b48301afeae",
-        "alignedAt": "2026-09-13"
+        "site": "b9717c0a710a1d18",
+        "corpus": "b9717c0a710a1d18",
+        "alignedAt": "2026-09-15"
       }
     },
     {
