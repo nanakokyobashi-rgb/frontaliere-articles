@@ -61,10 +61,18 @@ test('i workflow che filtrano le review usano il predicato jq condiviso', () => 
     ['.github/workflows/stale-pr-rescuer.yml', 2],
   ]) {
     const src = read(wf);
-    const loginSelector = `select((.user.login // "") | ${REVIEWER_BOT_LOGIN_JQ})`;
+    const loginSelector = wf.endsWith('pr-redflag-fixer.yml')
+      ? `((.user.login // "") | ${REVIEWER_BOT_LOGIN_JQ})`
+      : `select((.user.login // "") | ${REVIEWER_BOT_LOGIN_JQ})`;
     const botTypeSelector = 'select(.user.type == "Bot")';
     const count = (needle) => src.split(needle).length - 1;
-    assert.equal(count(loginSelector), expected, `${wf} deve avere ${expected} selettori login reviewer`);
+    if (wf.endsWith('pr-redflag-fixer.yml')) {
+      assert.equal(count(loginSelector), expected, `${wf} deve avere ${expected} predicato login reviewer`);
+      assert.match(src, /github-actions\[bot\]/, `${wf} deve avere il predicato Codex separato`);
+      assert.match(src, /CODEX_FALLBACK_REVIEW/, `${wf} deve richiedere il marker Codex`);
+    } else {
+      assert.equal(count(loginSelector), expected, `${wf} deve avere ${expected} selettori login reviewer`);
+    }
     assert.equal(count(botTypeSelector), expected, `${wf} deve accoppiare user.type == Bot a ogni selettore reviewer`);
   }
 });

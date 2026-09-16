@@ -250,6 +250,14 @@ test('Claude fallback is suppressed when Codex side effects are possible', () =>
   assert.match(action, /cmp -s -- \"\$codex_state_before\" \"\$codex_state_after\"/);
 });
 
+test('la review Codex esporta eventi strutturati anche quando il processo fallisce', () => {
+  assert.match(action, /codex_diagnostics_file:/);
+  assert.match(action, /--json \\\n\s+--output-last-message/);
+  assert.match(action, /tee "\$codex_diagnostics_destination"/);
+  assert.match(action, /printf 'codex_diagnostics=%s\\n'/);
+  assert.match(action, /CODEX_DIAGNOSTICS: \$\{\{ steps\.codex\.outputs\.codex_diagnostics \}\}/);
+});
+
 test('il bridge corpus resta host-side anche quando il PAT arriva da GITHUB_ENV', () => {
   assert.ok(
     action.includes('codex_corpus_github_auth="${CODEX_CORPUS_GH_AUTH:-${GITHUB_PAT_NANAKO:-${GITHUB_PAT:-}}}"'),

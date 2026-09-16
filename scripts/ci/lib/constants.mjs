@@ -295,3 +295,18 @@ export const REVIEWER_BOT_LOGIN_JQ = `test("${REVIEWER_BOT_LOGIN_RE.source}";"i"
 export function isReviewerBot(user) {
   return user?.type === 'Bot' && REVIEWER_BOT_LOGIN_RE.test(user.login || '');
 }
+
+/**
+ * Codex review identity is deliberately separate from the generic reviewer
+ * allow-list. The GitHub Actions bot is trusted here only when the review
+ * carries the explicit Codex marker; otherwise a generic bot review must not
+ * enter the Codex-only gate by accident.
+ */
+export const CODEX_REVIEWER_LOGIN_RE = /^(?:github-actions\[bot\]|frontaliere-automation\[bot\])$/i;
+export const CODEX_REVIEW_MARKER = '<!-- CODEX_FALLBACK_REVIEW -->';
+
+export function isCodexFallbackReview(review) {
+  return review?.user?.type === 'Bot'
+    && CODEX_REVIEWER_LOGIN_RE.test(review.user.login || '')
+    && String(review.body || '').includes(CODEX_REVIEW_MARKER);
+}

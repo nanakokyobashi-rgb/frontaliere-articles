@@ -12,9 +12,9 @@
  *
  * The socket is deliberately the only job-wide hand-off. Its parent directory
  * is 0700 and the socket is 0600. A malformed request never receives auth or
- * consumes a request slot. The short idle TTL is a backstop for persistent
- * runners; callers should still invoke the explicit cleanup operation at the
- * end of a job.
+ * consumes a request slot. The idle TTL is a backstop for persistent runners
+ * and is refreshed whenever an accepted request starts or completes; callers
+ * should still invoke the explicit cleanup operation at the end of a job.
  */
 
 import fs from 'node:fs';
@@ -398,6 +398,13 @@ let activeRequest = null;
 const pendingRequests = [];
 let expiry;
 
+function refreshIdleExpiry() {
+  if (closed) return;
+  clearTimeout(expiry);
+  expiry = setTimeout(cleanup, ttlMs);
+  expiry.unref?.();
+}
+
 function cleanupRuntime() {
   terminateChild(activeChild, 'SIGKILL');
   activeChild = null;
@@ -490,6 +497,7 @@ function startNextRequest() {
   ).finally(() => {
     activeChild = null;
     if (activeRequest === job) activeRequest = null;
+    refreshIdleExpiry();
     startNextRequest();
   });
 }
@@ -558,6 +566,7 @@ function handleClient(client) {
       return;
     }
     acceptedRequests += 1;
+    refreshIdleExpiry();
     job.parsed = parsed;
     job.requestAccepted = true;
     client.setTimeout(0);
@@ -635,7 +644,7 @@ function start(auth, cliConfig) {
   });
   server.listen(socketPath, () => {
     fs.chmodSync(socketPath, 0o600);
-    expiry = setTimeout(cleanup, ttlMs);
+    refreshIdleExpiry();
   });
 }
 

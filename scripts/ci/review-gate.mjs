@@ -67,7 +67,12 @@ import {
   isTrustedDriftAuthor,
   prBodyContractOk,
 } from './auto-merge-eval.mjs';
-import { REDFLAG_IMPORTANT_RE, REVIEWER_BOT_LOGIN_RE, VITEST_CHECK_NAME } from './lib/constants.mjs';
+import {
+  isCodexFallbackReview,
+  REDFLAG_IMPORTANT_RE,
+  REVIEWER_BOT_LOGIN_RE,
+  VITEST_CHECK_NAME,
+} from './lib/constants.mjs';
 import { classifyAndMintReview } from './review-scope.mjs';
 
 const REPO = process.env.GITHUB_REPOSITORY || '';
@@ -76,8 +81,6 @@ const HEAD_SHA = process.env.HEAD_SHA || '';
 const RUN_URL = process.env.RUN_URL || '';
 const REVIEW_REVISION = normalizeReviewInputRevision(process.env.REVIEW_REVISION || '');
 const MARKER = '<!-- REVIEW_GATE_NO_LGTM -->';
-const CODEX_REVIEWER_LOGIN_RE = /^(?:github-actions\[bot\]|frontaliere-automation\[bot\])$/i;
-const CODEX_REVIEW_MARKER = '<!-- CODEX_FALLBACK_REVIEW -->';
 let gateFailureKind = 'verdict';
 
 /**
@@ -163,12 +166,6 @@ function reviewInputContextStillCurrent() {
     `::error::review-gate: HEAD o body PR sono cambiati durante la valutazione (attesa head=${HEAD_SHA} revision=${REVIEW_REVISION}, corrente head=${current?.headSha || '<unreadable>'} revision=${current?.reviewRevision || '<unreadable>'}); nessun verdetto può essere riusato.`,
   );
   return false;
-}
-
-function isCodexFallbackReview(review) {
-  return review?.user?.type === 'Bot'
-    && CODEX_REVIEWER_LOGIN_RE.test(review.user.login || '')
-    && String(review.body || '').includes(CODEX_REVIEW_MARKER);
 }
 
 /**

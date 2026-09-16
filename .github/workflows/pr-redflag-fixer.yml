@@ -57,18 +57,19 @@ jobs:
     # #5515 — check-run "skipped", zero commenti, zero label). Qui restano solo i
     # pre-filtri economici che non richiedono distinguere lo scope.
     # Reviewer set = `claude*` + `frontaliere-automation*` (prefisso: la
-    # stessa App si presenta senza il suffisso `[bot]` in GraphQL). A job-level
-    # `startsWith(..., 'claude')` alone skipped App-bot 🔴 on the site
-    # (PRs #7610/#7609); this workflow is `adapted`, so the same login
-    # hole is closed here, not by waiting for an identical twin. Lo STESSO set
-    # vale per i consumer della review — bundle sotto, `auto-merge-eval.mjs`,
-    # `review-gate.mjs`, `pr-autorebase.mjs`, `stale-pr-rescuer.yml` — via
-    # `REVIEWER_BOT_LOGIN_RE`/`_JQ` in `scripts/ci/lib/constants.mjs`, e per i
-    # due `--jq` di `tests.yml` (skip-guard `## LGTM` e base incrementale).
+    # stessa App si presenta senza il suffisso `[bot]` in GraphQL). Il bot
+    # `github-actions[bot]` entra solo per una review Codex marcata
+    # esplicitamente: il marker impedisce a un commento generico del bot di
+    # attivare il fixer. Lo STESSO set vale per i consumer della review — bundle
+    # sotto, `auto-merge-eval.mjs`, `review-gate.mjs`, `pr-autorebase.mjs`,
+    # `stale-pr-rescuer.yml` — via `REVIEWER_BOT_LOGIN_RE`/`_JQ` in
+    # `scripts/ci/lib/constants.mjs`, con il predicato Codex separato.
     if: |
       github.event.review.user.type == 'Bot' &&
       (startsWith(github.event.review.user.login, 'claude') ||
-       startsWith(github.event.review.user.login, 'frontaliere-automation')) &&
+       startsWith(github.event.review.user.login, 'frontaliere-automation') ||
+       (github.event.review.user.login == 'github-actions[bot]' &&
+        contains(github.event.review.body, '<!-- CODEX_FALLBACK_REVIEW -->'))) &&
       contains(github.event.review.body, '🔴') &&
       github.event.pull_request.draft == false
     runs-on: ubuntu-latest
@@ -565,7 +566,13 @@ jobs:
               | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
             [flatten[]
              | select(.user.type == "Bot")
-             | select((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
+             | select(
+                 ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
+                 or (
+                   ((.user.login // "") == "github-actions[bot]")
+                   and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->"))
+                 )
+               )
              | select((.commit_id // "" | ascii_downcase) == ($head | ascii_downcase))
              | select(has_current_revision($revision))
              | select((.body // "")|contains("## Findings ("))

@@ -24,6 +24,7 @@ import {
   REVIEW_GATE_STEP_NAME,
 } from './lib/vitestCheck.mjs';
 import {
+  isCodexFallbackReview,
   REDFLAG_IMPORTANT_RE,
   REVIEWER_BOT_LOGIN_RE,
 } from './lib/constants.mjs';
@@ -82,7 +83,7 @@ export function reviewFailureKind(input) {
       .filter((review) =>
         review?.commit_id === headSha
         && review?.user?.type === 'Bot'
-        && REVIEWER_BOT_LOGIN_RE.test(review.user.login ?? ''),
+        && (REVIEWER_BOT_LOGIN_RE.test(review.user.login ?? '') || isCodexFallbackReview(review)),
       )
       .filter((review) => reviewHasInputRevision(review.body, reviewRevision))
       .at(-1);

@@ -77,6 +77,8 @@ function waitForExit(child, timeoutMs = 5000) {
   });
 }
 
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 test('il broker Codex serializza più richieste senza consumare una slot globale', async () => {
   const brokerDir = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-broker-test.'));
   const cliPrefix = fs.mkdtempSync(path.join(os.tmpdir(), 'claude-haiku-codex-cli.'));
@@ -135,6 +137,66 @@ process.stdin.on('end', () => fs.writeFileSync(output, JSON.stringify({ prompt }
     assert.equal(await waitForExit(broker), 0, stderr);
     assert.equal(fs.existsSync(socketPath), false);
     assert.equal(fs.existsSync(cliPrefix), false);
+  } finally {
+    if (broker.exitCode === null) broker.kill('SIGTERM');
+    await waitForExit(broker).catch(() => {});
+    fs.rmSync(brokerDir, { recursive: true, force: true });
+    fs.rmSync(cliPrefix, { recursive: true, force: true });
+  }
+});
+
+test('il TTL del broker è idle e non scade mentre la coda riceve richieste', async () => {
+  const brokerDir = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-broker-idle-test.'));
+  const cliPrefix = fs.mkdtempSync(path.join(os.tmpdir(), 'claude-haiku-codex-cli.'));
+  const socketPath = path.join(brokerDir, 'auth.sock');
+  const cliPath = path.join(cliPrefix, 'codex');
+  const fakeCli = `#!/usr/bin/env node
+import fs from 'node:fs';
+const args = process.argv.slice(2);
+if (args.includes('--version')) { console.log('codex 0.153.4'); process.exit(0); }
+const output = args[args.indexOf('--output-last-message') + 1];
+if (!output) process.exit(2);
+let prompt = '';
+process.stdin.setEncoding('utf8');
+process.stdin.on('data', (chunk) => { prompt += chunk; });
+process.stdin.on('end', () => fs.writeFileSync(output, JSON.stringify({ prompt }), 'utf8'));
+`;
+  fs.writeFileSync(cliPath, fakeCli, { mode: 0o700 });
+  fs.chmodSync(cliPath, 0o700);
+  const cliSha256 = crypto.createHash('sha256').update(fs.readFileSync(cliPath)).digest('hex');
+  const broker = spawn(process.execPath, [
+    BROKER,
+    '--socket', socketPath,
+    '--ttl-ms', '300',
+    '--max-requests', '3',
+    '--codex-bin', cliPath,
+    '--codex-realpath', cliPath,
+    '--codex-sha256', cliSha256,
+    '--codex-prefix', cliPrefix,
+  ], {
+    cwd: ROOT,
+    stdio: ['pipe', 'ignore', 'pipe'],
+  });
+  let stderr = '';
+  broker.stderr.setEncoding('utf8');
+  broker.stderr.on('data', (chunk) => { stderr += chunk; });
+  broker.stdin.end('{"access_token":"test"}');
+
+  try {
+    await waitForSocket(socketPath, broker).catch((error) => {
+      throw new Error(`${error.message}: ${stderr}`);
+    });
+    const first = await request(socketPath, { op: 'exec', prompt: 'first', timeoutMs: 5000 });
+    assert.equal(first.ok, true);
+    await delay(180);
+    const second = await request(socketPath, { op: 'exec', prompt: 'second', timeoutMs: 5000 });
+    assert.equal(second.ok, true);
+    await delay(180);
+    const third = await request(socketPath, { op: 'exec', prompt: 'third', timeoutMs: 5000 });
+    assert.equal(third.ok, true);
+    const cleaned = await request(socketPath, { op: 'cleanup' });
+    assert.deepEqual(cleaned, { ok: true, cleaned: true });
+    assert.equal(await waitForExit(broker), 0);
   } finally {
     if (broker.exitCode === null) broker.kill('SIGTERM');
     await waitForExit(broker).catch(() => {});

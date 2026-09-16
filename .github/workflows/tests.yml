@@ -584,7 +584,11 @@ jobs:
               [flatten[]
                | select((.state // "") != "PENDING")
                | select(.user.type == "Bot")
-               | select((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
+               | select(
+                   ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
+                   or (((.user.login // "") | test("^github-actions\\[bot\\]$"; "i"))
+                       and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
+                 )
                | select(has_current_revision($revision))
               ] | sort_by(.id // 0) | last | .commit_id // empty' 2>/dev/null || true)
           if [ -n "$lastRev" ] && [ "$lastRev" != "$HEAD_SHA" ]; then
@@ -806,7 +810,7 @@ jobs:
 
             Posta ESATTAMENTE una review con `gh pr review ${PR_NUMBER} --comment --body "<markdown nel formato di REVIEW.md>"`. Chiudi con `## LGTM` solo quando non c'e' un `🔴 Important` aperto, nessuna domanda funnel-critical irrisolta e il contratto del body e' valido. Incerto → `❓ q:`, mai speculazione. Lavora read-only: niente edit, commit, push, npm o test. Fermati subito dopo aver postato.
 
-      # claude-code-action puo' uscire 0 anche quando il run e' abortito su un
+      # La review Codex puo' uscire 0 anche quando il run e' abortito su un
       # errore API transiente SENZA aver postato una review: il job sembra verde
       # ma la PR si ferma in silenzio. Si classifica dal log di esecuzione.
       - name: Fail on transient API error (no review posted)
@@ -819,7 +823,7 @@ jobs:
           PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
           HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
           REVIEW_OUTCOME: ${{ steps.codex_review.outcome }}
-          EXEC_FILE: ${{ steps.codex_review.outputs.execution_file }}
+          CODEX_DIAGNOSTICS_FILE: ${{ steps.codex_review.outputs.codex_diagnostics_file }}
           CODEX_PRIMARY_SUCCESS: ${{ steps.codex_review.outputs.primary_success }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           REVIEW_TIER: ${{ steps.tier.outputs.tier }}
@@ -835,41 +839,44 @@ jobs:
           set_review_output retryable_failure false
           set_review_output permanent_failure false
           if [ "${CODEX_PRIMARY_SUCCESS:-false}" = 'true' ]; then
-            echo "Codex primary riuscito: nessun log Claude da classificare."
+            echo "Codex primary riuscito: nessuna failure da classificare."
             exit 0
           fi
-          # L'execution file è NDJSON ma può terminare con una riga diagnostica o
-          # troncata. Normalizzalo una sola volta col parser condiviso, che scarta
-          # soltanto la riga illeggibile; i classificatori sotto non devono usare
-          # jq -s direttamente sul file grezzo e perdere marker validi precedenti.
-          EXEC_EVENTS_FILE=''
-          cleanup_execution_events() {
-            if [ -n "${EXEC_EVENTS_FILE:-}" ]; then
-              rm -f "${EXEC_EVENTS_FILE}"
-            fi
-          }
-          trap cleanup_execution_events EXIT
-          if [ -n "${EXEC_FILE:-}" ] && [ -f "${EXEC_FILE}" ]; then
-            EXEC_EVENTS_FILE="${RUNNER_TEMP:-/tmp}/claude-review-events-${RUN_ID:-$$}.jsonl"
-            if ! node scripts/ci/parse-claude-execution.mjs "${EXEC_FILE}" > "${EXEC_EVENTS_FILE}"; then
+          # Codex viene eseguito con --json: il file è lo stream strutturato
+          # della stessa action, non l'output Claude (vuoto nel percorso
+          # Codex-only). Il classificatore è conservativo e restituisce una
+          # causa esplicita prima che il claim decida retry o terminale.
+          CLASSIFICATION_JSON=''
+          if [ "${REVIEW_OUTCOME:-}" = 'cancelled' ]; then
+            CLASSIFICATION_JSON='{"cause":"cancelled","numTurns":null,"source":"outcome"}'
+          elif [ -n "${CODEX_DIAGNOSTICS_FILE:-}" ] && [ -f "${CODEX_DIAGNOSTICS_FILE}" ]; then
+            if ! CLASSIFICATION_JSON=$(node scripts/ci/classify-codex-review-failure.mjs "${CODEX_DIAGNOSTICS_FILE}" "${REVIEW_OUTCOME:-}"); then
               set_review_output review_abort_cause probe_failed
               set_review_output permanent_failure true
-              echo "::error::Impossibile normalizzare l'execution file Claude: marker non classificati."
+              echo "::error::Impossibile classificare lo stream diagnostico Codex."
               exit 0
             fi
+          else
+            set_review_output review_abort_cause probe_failed
+            set_review_output permanent_failure true
+            echo "::error::Stream diagnostico Codex assente: failure non classificata, nessun autorebase automatico."
+            exit 0
           fi
-          # max_turns PRIMA del 429: il terminal marker e' piu' specifico dei
-          # campi di telemetria condivisi. Il ramo 429 sotto accetta solo
-          # marker strutturati (status HTTP, evento rifiutato o errore tipizzato):
-          # un semplice `rate_limit` nel file puo' essere il metadata di una
-          # richiesta riuscita e non deve trasformare un altro errore in warning.
-          if [ -n "${EXEC_EVENTS_FILE:-}" ] && [ -f "${EXEC_EVENTS_FILE}" ] \
-             && jq -e -s '
-               flatten | any(.[]?;
-                 .terminal_reason == "max_turns"
-               )
-             ' "${EXEC_EVENTS_FILE}" >/dev/null 2>&1; then
-            # Il cap dei turni non prova da solo l'assenza di un verdetto: Claude
+          if ! CLASSIFICATION_CAUSE=$(printf '%s' "$CLASSIFICATION_JSON" | jq -er '.cause // empty') \
+            || [ -z "$CLASSIFICATION_CAUSE" ]; then
+            set_review_output review_abort_cause probe_failed
+            set_review_output permanent_failure true
+            echo "::error::Classificazione Codex malformata: nessun autorebase automatico."
+            exit 0
+          fi
+          NUM_TURNS=$(printf '%s' "$CLASSIFICATION_JSON" | jq -r 'if .numTurns == null then "?" else (.numTurns | tostring) end')
+
+          # max_turns PRIMA di 429/5xx: il terminal marker è più specifico dei
+          # campi di telemetria condivisi. Anche Codex può aver postato la review
+          # nell'ultimo turno, quindi controlliamo HEAD, revisione body e marker
+          # Codex prima di classificare l'abort.
+          if [ "$CLASSIFICATION_CAUSE" = 'max_turns' ]; then
+            # Il cap dei turni non prova da solo l'assenza di un verdetto: Codex
             # puo' aver gia' inviato la review e consumare l'ultimo turno mentre
             # chiude la propria esecuzione. Verifichiamo la HEAD e la finestra di
             # questa run prima di marchiare l'abort, altrimenti un 🔴 reale viene
@@ -917,28 +924,33 @@ jobs:
                   | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
                 flatten | any(.[]?;
                   (.user.type == "Bot")
-                  and ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
+                  and (
+                    ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
+                    or (
+                      (.user.login // "") == "github-actions[bot]"
+                      and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->"))
+                    )
+                  )
                   and .commit_id == $head_sha
                   and (.submitted_at // "") >= $run_started_at
                   and has_current_revision($review_revision)
                 )
               ' <<<"$REVIEWS" >/dev/null 2>&1; then
                 set_review_output review_abort_cause verdict_posted
-                echo "::warning::Review Claude pubblicata sulla HEAD in questa run; max_turns non e' un abort senza verdetto. Il review gate valuta la review appena postata."
+                echo "::warning::Review Codex pubblicata sulla HEAD in questa run; max_turns non e' un abort senza verdetto. Il review gate valuta la review appena postata."
                 exit 0
               fi
               [ "$attempt" -eq 3 ] || sleep 2
             done
-            NUM_TURNS=$(grep -oE '"num_turns"[[:space:]]*:[[:space:]]*[0-9]+' "${EXEC_FILE}" | tail -1 | grep -oE '[0-9]+' || true)
             set_review_output review_aborted true
             set_review_output review_abort_cause max_turns
             set_review_output retryable_failure true
             # The Markdown backticks and literal shell text are intentional.
             # ShellCheck otherwise treats them as an interpolated expression.
             # shellcheck disable=SC2016
-            BODY=$(printf '⚠️ **Review automatica fallita** (`terminal_reason=max_turns`, tier `%s`, cap %s turni, usati %s): Claude ha esaurito il budget prima di postare un verdetto. Nessuna review pubblicata — il check di questo job resta rosso e l auto-merge non puo scattare.\n\nLog: %s\n\nPer sbloccare: rilancia il run di `tests` piu recente di questa PR, oppure fai la review a mano col contratto di `REVIEW.md`.\n\nSe questa PR ha gia avuto una morte `max_turns`, un retry raramente basta: valuta di splittarla.' "${REVIEW_TIER:-?}" "${REVIEW_MAX_TURNS:-?}" "${NUM_TURNS:-?}" "$RUN_URL")
+            BODY=$(printf '⚠️ **Review automatica fallita** (`terminal_reason=max_turns`, tier `%s`, cap %s turni, usati %s): Codex ha esaurito il budget prima di postare un verdetto. Nessuna review pubblicata — il check di questo job resta rosso e l auto-merge non puo scattare.\n\nLog: %s\n\nPer sbloccare: rilancia il run di `tests` piu recente di questa PR, oppure fai la review a mano col contratto di `REVIEW.md`.\n\nSe questa PR ha gia avuto una morte `max_turns`, un retry raramente basta: valuta di splittarla.' "${REVIEW_TIER:-?}" "${REVIEW_MAX_TURNS:-?}" "${NUM_TURNS:-?}" "$RUN_URL")
             gh pr comment "$PR_NUMBER" --body "$BODY" || echo "::warning::gh pr comment fallito (non bloccante)."
-            echo "::error::Review Claude morta su max-turns (tier=${REVIEW_TIER:-?}, cap=${REVIEW_MAX_TURNS:-?}, turni=${NUM_TURNS:-?}) senza postare — rilancia, o splitta la PR se ricorre."
+            echo "::error::Review Codex morta su max-turns (tier=${REVIEW_TIER:-?}, cap=${REVIEW_MAX_TURNS:-?}, turni=${NUM_TURNS:-?}) senza postare — rilancia, o splitta la PR se ricorre."
             exit 1
           fi
           # 429: rendi l'abort visibile nella Jobs API. GITHUB_OUTPUT non fa
@@ -946,83 +958,35 @@ jobs:
           # rate-limit soltanto dalla conclusion dello step. Il job sarebbe
           # gia' rosso per il review gate sotto; questa failure non aggiunge un
           # re-run, ma permette al consumer di classificarlo come abortito.
-          if [ -n "${EXEC_EVENTS_FILE:-}" ] && [ -f "${EXEC_EVENTS_FILE}" ]; then
-            RATE_LIMIT_MARKER=false
-            if jq -e -s '
-              flatten | any(.[]?;
-                (
-                  ((.type == "result" or .type == null) and .is_error == true
-                    and (.api_error_status == 429 or .api_error_status == "429"))
-                  or (.type == "rate_limit_event"
-                    and .rate_limit_info.status == "rejected")
-                  or (.error == "rate_limit")
-                  or (.type == "rate_limit_error")
-                )
-              )
-            ' "${EXEC_EVENTS_FILE}" >/dev/null 2>&1; then
-              RATE_LIMIT_MARKER=true
-            fi
-          fi
-          if [ "${RATE_LIMIT_MARKER:-false}" = true ]; then
+          if [ "$CLASSIFICATION_CAUSE" = 'rate_limit' ]; then
             set_review_output review_aborted true
             set_review_output review_abort_cause rate_limit
             set_review_output retryable_failure true
-            echo "::warning::Review abortita su 429 (quota). Il review gate blocchera' comunque il merge; questa failure rende il segnale leggibile al consumer."
+            echo "::warning::Review Codex abortita su 429 (quota). Il review gate blocchera' comunque il merge; questa failure rende il segnale leggibile al consumer."
             exit 1
           fi
-          if [ -n "${EXEC_EVENTS_FILE:-}" ] && [ -f "${EXEC_EVENTS_FILE}" ]; then
-            SERVER_ERROR_MARKER=false
-            if jq -e -s '
-              flatten | any(.[]?;
-                (
-                  ((.type == "result" or .type == null) and .is_error == true
-                    and (
-                      ((.api_error_status // "") | tostring | test("^5[0-9]{2}$"))
-                      or ((.error // .subtype // .message // "") | tostring
-                        | test("overloaded|server_error|internal server error|api error: 5"; "i"))
-                    ))
-                )
-              )
-            ' "${EXEC_EVENTS_FILE}" >/dev/null 2>&1; then
-              SERVER_ERROR_MARKER=true
-            fi
-            if [ "$SERVER_ERROR_MARKER" = true ]; then
-              set_review_output review_aborted true
-              set_review_output review_abort_cause server_error
-              set_review_output retryable_failure true
-              echo "::error::Review abortita su un 5xx transiente senza postare — rilancia il job."
-              exit 1
-            fi
-            # Tutti gli altri errori strutturati sono non-riattivabili per
-            # default: OAuth scaduto, argomenti invalidi o action ritirata non
-            # cambiano con un close+reopen. Il dettaglio resta nel log/file; il
-            # consumer condiviso potra' usare questo output per la causa precisa.
-            if jq -e -s '
-              flatten | any(.[]?;
-                (.type == "result" or .type == null) and .is_error == true
-              )
-            ' "${EXEC_EVENTS_FILE}" >/dev/null 2>&1; then
-              set_review_output review_abort_cause non_retryable
-              set_review_output permanent_failure true
-              echo "::error::Review action con errore non classificato come transiente: nessun autorebase automatico."
-              exit 0
-            fi
+          if [ "$CLASSIFICATION_CAUSE" = 'server_error' ]; then
+            set_review_output review_aborted true
+            set_review_output review_abort_cause server_error
+            set_review_output retryable_failure true
+            echo "::error::Review Codex abortita su un 5xx transiente senza postare — rilancia il job."
+            exit 1
           fi
-          if [ "${REVIEW_OUTCOME}" = "cancelled" ]; then
+          if [ "$CLASSIFICATION_CAUSE" = 'cancelled' ]; then
             set_review_output review_aborted true
             set_review_output review_abort_cause cancelled
             set_review_output retryable_failure true
-            echo "::error::Review Claude cancellata prima del verdetto — rilanciare il job."
+            echo "::error::Review Codex cancellata prima del verdetto — rilanciare il job."
             exit 1
           fi
-          if [ "${REVIEW_OUTCOME}" = "failure" ]; then
+          if [ "$CLASSIFICATION_CAUSE" = 'non_retryable' ] || [ "${REVIEW_OUTCOME:-}" = 'failure' ]; then
             # Un failure senza prova di max_turns/429/5xx non e' sicuro da
             # riattivare: il secondo step separato lo rende rosso senza
             # nominarlo come REVIEW_ABORT_STEP_NAME, cosi' il consumer non lo
             # scambia per un review-gate retryable (#1185 item 2).
             set_review_output review_abort_cause non_retryable
             set_review_output permanent_failure true
-            echo "::error::claude-code-action fallita senza causa transient provata (outcome=failure): nessun autorebase automatico."
+            echo "::error::Codex review fallita senza causa transient provata (cause=${CLASSIFICATION_CAUSE}, outcome=${REVIEW_OUTCOME:-unknown}): nessun autorebase automatico."
             exit 0
           fi
           echo "Step di review concluso senza errori API non recuperati."
@@ -1113,7 +1077,7 @@ jobs:
           CLAIM_TOKEN: ${{ steps.review_claim.outputs.claim_token }}
           PROCEED: true
           CODEX_OUTCOME: ${{ steps.codex_review.outcome }}
-          EXEC_FILE: ${{ steps.codex_review.outputs.execution_file }}
+          EXEC_FILE: ${{ steps.codex_review.outputs.codex_diagnostics_file }}
           RETRYABLE_FAILURE: ${{ steps.review_abort.outputs.retryable_failure }}
           PERMANENT_FAILURE: ${{ steps.review_abort.outputs.permanent_failure }}
           REVIEW_ABORT_CAUSE: ${{ steps.review_abort.outputs.review_abort_cause }}
