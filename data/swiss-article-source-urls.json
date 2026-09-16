@@ -1,5 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/f-gc331fsl8o": "asilo-statistica-luglio-2026",
   "https://www.rsi.ch/s/3995136": "cassis-neutralita",
   "https://www.tio.ch/svizzera/politica/1944654/iniziativa-commissione-contanti-servizio-obbligo": {
     "articleId": "servizio-pubblico-obbligo-contanti",
@@ -2489,6 +2488,11 @@
   "https://www.admin.ch/it/newnsb/jyzpuh-clp7c": {
     "articleId": "consiglio-federale-obiettivi-2027",
     "ts": "2026-09-16T01:40:06.867Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1950325/online-migros-nuovo-colosso-strutture": {
+    "articleId": "migros-ristruttura-online-retail",
+    "ts": "2026-09-16T01:48:49.535Z",
     "keyForm": 2
   }
 }
