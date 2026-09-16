@@ -3417,7 +3417,7 @@
       "reason": "Il contratto del corpus registra il nuovo digest dell'artifact translate-pending dopo la rimozione di DATA_PIPELINE_LEASE per l'issue #1314; il contratto del sito conserva il digest precedente. I due blob devono quindi restare distinti e sorvegliati.",
       "baseline": {
         "site": "6d82fe73bd234316",
-        "corpus": "8a7ee4b7c9f5b463",
+        "corpus": "d05d49ea6e99a79f",
         "alignedAt": "2026-09-16"
       }
     },

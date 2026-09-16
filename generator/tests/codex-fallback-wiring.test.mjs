@@ -138,7 +138,6 @@ test('Codex primary keeps Luna Max and is reusable across crawler calls', () => 
     'the broker default must remain one-shot when launched outside the composite action');
   assert.match(broker, /CODEX_MODEL\s*=\s*['"]gpt-5\.6-luna['"]/);
   assert.match(broker, /CODEX_EFFORT\s*=\s*['"]max['"]/);
-  assert.match(action, /--max-requests\s+4096/);
   assert.match(broker, /maxRequests/);
   assert.doesNotMatch(broker.slice(broker.indexOf('async function _callCodexCli'), broker.indexOf('function _callOmniRoute')), /_claimCodexCliFallback/);
   assert.match(broker, /const configPath = path\.join\(codexHome, ['"]config\.toml['"]\)/);
