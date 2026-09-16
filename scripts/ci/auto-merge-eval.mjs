@@ -18,7 +18,7 @@
  *
  * Dato un PR number, `main()` valuta (e logga ogni gate):
  *   1. PR aperta e NON draft.
- *   2. Ultima review del bot reviewer (login in `REVIEWER_BOT_LOGIN_RE`, type Bot) sulla
+ *   2. Ultima review del bot reviewer (`isManagedReview`) sulla
  *      HEAD corrente contiene `## LGTM` e NON `🔴 Important`.
  *      DRIFT-FALLBACK (zero-Claude): se manca `## LGTM` E manca un `🔴`, ma la PR
  *      modifica il workflow che OSPITA la review (→ il reviewer Claude non può
@@ -79,7 +79,7 @@ import {
   REVIEW_WORKFLOW_DRIFT_FILES,
   GENERATOR_CI_JOB_NAME,
   GENERATOR_CI_TRIGGER_PATHS,
-  REVIEWER_BOT_LOGIN_RE,
+  isManagedReview,
 } from './lib/constants.mjs';
 import { latestCompletedVitestConclusion, latestCompletedConclusionByName } from './lib/vitestCheck.mjs';
 import { checkClosesLines } from '../lib/pr-body-closes-check.mjs';
@@ -454,7 +454,7 @@ async function main() {
     return fail(`Impossibile leggere reviews PR #${PR}: ${String(e).slice(0, 160)} — skip.`);
   }
   const botReviews = (reviews || []).filter(
-    (r) => r.user && r.user.type === 'Bot' && REVIEWER_BOT_LOGIN_RE.test(r.user.login || '')
+    (r) => isManagedReview(r)
       && reviewHasInputRevision(r.body, reviewRevision)
   );
   const lastBot = findTestOnlyApproval(reviews, head, {
@@ -543,8 +543,7 @@ async function main() {
     // deterministico (autore fidato + body-contract). false → skip (ri-valuta al
     // prossimo `tests`/push).
     const staleReview = (reviews || []).some((review) =>
-      review?.user?.type === 'Bot'
-      && REVIEWER_BOT_LOGIN_RE.test(review.user.login || '')
+      isManagedReview(review)
       && review.state !== 'PENDING'
       && !reviewHasInputRevision(review.body, reviewRevision));
     if (staleReview) {

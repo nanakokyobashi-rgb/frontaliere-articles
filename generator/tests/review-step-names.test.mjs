@@ -166,11 +166,12 @@ test('max_turns distingue una review gia\' postata sulla HEAD nella run corrente
   const { REVIEW_ABORT_STEP_NAME } = await import('../../scripts/ci/lib/vitestCheck.mjs');
   const block = stepBlock(yaml, REVIEW_ABORT_STEP_NAME);
   assert.match(yaml, /^\s*actions:\s*read\s*$/m, 'la probe della run deve poter leggere Actions API');
-  assert.match(block, /node scripts\/ci\/parse-claude-execution\.mjs "\$\{EXEC_FILE\}" > "\$\{EXEC_EVENTS_FILE\}"/);
-  assert.match(block, /EXEC_EVENTS_FILE/);
-  assert.match(block, /jq -e -s/);
+  assert.match(block, /classify-codex-review-failure\.mjs "\$\{CODEX_DIAGNOSTICS_FILE\}"/);
+  assert.match(block, /CODEX_DIAGNOSTICS_FILE/);
+  assert.match(block, /jq -e/);
   assert.match(block, /flatten \| any\(\.\[\]\?;/);
-  assert.match(block, /terminal_reason == "max_turns"/);
+  assert.match(block, /CLASSIFICATION_CAUSE.*max_turns/);
+  assert.match(block, /NUM_TURNS/);
   assert.match(block, /actions\/runs\/\$RUN_ID/);
   assert.match(block, /pulls\/\$PR_NUMBER\/reviews/);
   assert.match(block, /--paginate --slurp/);
@@ -204,14 +205,15 @@ test('429 e cause non riattivabili viaggiano come segnali distinti', async () =>
   assert.match(abort, /review_abort_cause cancelled/);
   assert.match(abort, /retryable_failure true/);
   assert.match(abort, /permanent_failure true/);
-  assert.match(abort, /api_error_status.*429/);
-  assert.match(abort, /rate_limit_event/);
-  assert.match(abort, /status.*rejected/);
-  assert.doesNotMatch(abort, /grep -qE .*is_error.*true/);
-  assert.doesNotMatch(abort, /rate\[ _-\]\?limit/);
+  assert.match(abort, /classify-codex-review-failure\.mjs/);
+  assert.match(abort, /CODEX_DIAGNOSTICS_FILE/);
+  assert.match(abort, /CLASSIFICATION_CAUSE.*rate_limit/);
+  assert.match(abort, /CLASSIFICATION_CAUSE.*server_error/);
+  assert.doesNotMatch(abort, /parse-claude-execution\.mjs/);
+  assert.doesNotMatch(abort, /EXEC_EVENTS_FILE/);
 
   const rateLimitBranch = abort.match(
-    /if \[ "\$\{RATE_LIMIT_MARKER:-false\}" = true \]; then([\s\S]*?)\n\s+fi/,
+    /if \[ "\$CLASSIFICATION_CAUSE" = 'rate_limit' \]; then([\s\S]*?)\n\s+fi/,
   );
   assert.ok(rateLimitBranch, 'il ramo 429 non e\' stato trovato');
   assert.match(

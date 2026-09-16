@@ -78,3 +78,20 @@ test('un run PR che soddisfa il check con review gate skipped deve essere rosso'
     'Una PR con il review gate skipped non deve poter soddisfare verde il check richiesto.',
   );
 });
+
+test('workflow_dispatch con `pr_number` può eseguire il gate completo su una PR reale', () => {
+  assert.match(
+    yaml,
+    /workflow_dispatch:\n\s+inputs:\n\s+pr_number:/,
+    'Il dispatch manuale deve dichiarare l input della PR da verificare.',
+  );
+  const bodyContract = stepBlock(yaml, 'PR-body completeness + multi-issue Closes (zero-Claude)');
+  assert.match(bodyContract, /inputs\.pr_number/);
+  const resolve = stepBlock(yaml, 'Resolve PR');
+  assert.match(resolve, /github\.event_name == 'workflow_dispatch'/);
+  assert.match(resolve, /github\.event\.pull_request\.number \|\| inputs\.pr_number/);
+  assert.match(resolve, /La PR indicata deve essere aperta, non draft/);
+  const skipped = stepBlock(yaml, 'Fail when required review gate is skipped');
+  assert.match(skipped, /github\.event_name == 'workflow_dispatch'/);
+  assert.match(skipped, /inputs\.pr_number/);
+});

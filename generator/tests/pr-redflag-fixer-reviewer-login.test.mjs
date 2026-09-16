@@ -40,11 +40,12 @@ test('no longer requires login to start with claude as the only reviewer match',
 });
 
 test('collect-review jq, review-gate and auto-merge-eval use the same bot set', () => {
-  // I consumer `.mjs` non contengono piu' il login in chiaro: importano
-  // `REVIEWER_BOT_LOGIN_RE` da `scripts/ci/lib/constants.mjs`, ed e'
-  // `generator/tests/reviewer-bot-login.test.mjs` a pinnare quel legame per
-  // tutti e sei i consumer (qui resterebbe una copia della stessa regola).
-  assert.match(src, /select\(\.user\.type == "Bot"\)\s*\n\s*\| select\(\(\.user\.login \/\/ ""\) \| test\("\^\(claude\|frontaliere-automation\)";"i"\)\)/);
+  // I consumer `.mjs` importano `isManagedReview` da
+  // `scripts/ci/lib/constants.mjs`; questo test sorveglia soltanto la copia jq
+  // necessaria nei workflow, che non possono importare JavaScript.
+  assert.match(src, /select\(\.user\.type == "Bot"\)[\s\S]*?test\("\^\(claude\|frontaliere-automation\)";"i"\)/);
+  assert.match(src, /github-actions\[bot\]/);
+  assert.match(src, /CODEX_FALLBACK_REVIEW/);
   assert.match(src, /contains\("## Findings \("\)/);
   const testsYml = fs.readFileSync(path.join(ROOT, '.github/workflows/tests.yml'), 'utf8');
   assert.match(testsYml, /test\("\^\(claude\|frontaliere-automation\)";"i"\)/);

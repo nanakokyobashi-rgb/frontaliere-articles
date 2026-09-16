@@ -15,6 +15,8 @@ import { realpathSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import {
+  isCodexFallbackReview,
+  isManagedReview,
   isReviewerBot,
   REDFLAG_IMPORTANT_RE,
   VITEST_CHECK_NAME,
@@ -27,20 +29,18 @@ import {
 const TESTS_WORKFLOW_PATH = '.github/workflows/tests.yml';
 const TESTS_WORKFLOW_EVENT = 'pull_request';
 // Keep the bootstrap dependency-free unless the gate actually needs it.
-export const REVIEW_GATE_STEP_NAME = 'Require approving Claude review';
+export const REVIEW_GATE_STEP_NAME = 'Require approving Codex review';
 // `enable-native-automerge.yml` downloads this helper from `main`. Keep the
 // provider rename readable during the transition while requiring exactly one
 // repository-owned gate step in the verified job.
 export const REVIEW_GATE_STEP_NAMES = Object.freeze([
-  REVIEW_GATE_STEP_NAME,
+  'Require approving Claude review',
   'Require approving Codex review',
 ]);
 const NIT_MARKER_RE = /^[^\n🔴🟢]*(?<!`)🟡\s*\*{0,2}\s*Nit\s*\*{0,2}\s*[:—-]/mu;
 const FINDINGS_HEADING_RE = /^\s{0,3}#{1,3}\s+Findings\b[^\n]*$/i;
 const LGTM_HEADING_RE = /^\s{0,3}##\s+LGTM\s*$/m;
 const TEST_ONLY_REVIEW_BOT_RE = /^(?:github-actions|frontaliere-automation)\[bot\]$/i;
-const CODEX_FALLBACK_REVIEWER_RE = /^github-actions\[bot\]$/i;
-const CODEX_FALLBACK_REVIEW_MARKER = '<!-- CODEX_FALLBACK_REVIEW -->';
 const MAX_TRANSIENT_GH_READ_ATTEMPTS = 3;
 const TRANSIENT_GH_READ_RETRY_DELAYS_MS = Object.freeze([250, 750]);
 const TRANSIENT_GH_READ_ERROR_RE = /(?:\bHTTP\s+5\d{2}\b|\b5\d{2}\s+(?:bad gateway|service unavailable|gateway timeout)\b|service unavailable|bad gateway|gateway timeout|timed?\s*out|ECONNRESET|ETIMEDOUT|EAI_AGAIN)/iu;
@@ -95,16 +95,14 @@ function latestBotReviewMatching(reviews, predicate) {
 function isCodexFallbackReviewOnHead(review, head) {
   return typeof head === 'string'
     && /^[0-9a-f]{40}$/iu.test(head)
-    && review?.user?.type === 'Bot'
-    && CODEX_FALLBACK_REVIEWER_RE.test(review.user.login || '')
     && review.commit_id === head
-    && String(review.body || '').includes(CODEX_FALLBACK_REVIEW_MARKER);
+    && isCodexFallbackReview(review);
 }
 
 /** Select a normal reviewer or the explicitly marked Codex evidence candidate. */
 function latestReviewGateCandidate(reviews, head) {
-  return latestReviewMatching(reviews, (review) => isReviewerBot(review?.user)
-    || isCodexFallbackReviewOnHead(review, head));
+  return latestReviewMatching(reviews, (review) => isManagedReview(review)
+    && (isReviewerBot(review?.user) || isCodexFallbackReviewOnHead(review, head)));
 }
 
 /** Return the latest reviewer-bot review, regardless of the commit it names. */
@@ -265,7 +263,8 @@ export function reviewGateEvidenceDecision({
   if (typeof head !== 'string' || !/^[0-9a-f]{40}$/iu.test(head)) {
     return deny('HEAD non verificabile per la prova review-gate');
   }
-  if (!isReviewerBot(review?.user) && !isCodexFallbackReviewOnHead(review, head)) {
+  if (!isManagedReview(review) || (!isReviewerBot(review?.user)
+      && !isCodexFallbackReviewOnHead(review, head))) {
     return deny('identità review non autorizzata per la prova review-gate');
   }
   const reviewId = reviewIdKey(review?.id);

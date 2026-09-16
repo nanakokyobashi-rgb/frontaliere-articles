@@ -267,11 +267,12 @@ export const GENERATOR_CI_TRIGGER_PATHS = [
  * per `pr-autorebase.mjs` (nessuna review vista → close+reopen a vuoto) e per
  * il bundle del 🔴-fixer (findings di un round già chiuso).
  *
- * Sorgente UNICA anche per il lato bash: uno `run:` YAML non può importare
- * questa regex, quindi i `--jq` dei workflow usano `REVIEWER_BOT_LOGIN_JQ`,
- * derivato da questa `.source`, e il guard
- * `generator/tests/reviewer-bot-login.test.mjs` lo pretende verbatim nei
- * workflow che filtrano le review.
+ * Sorgente UNICA per i consumer JavaScript: usano `isManagedReview`, che
+ * aggiunge il percorso Codex solo con marker + identità bot esatta. Il lato
+ * bash non può importare JavaScript: i `--jq` dei workflow riproducono lo
+ * stesso predicato con `REVIEWER_BOT_LOGIN_JQ` più il ramo marker Codex; il
+ * guard `generator/tests/reviewer-bot-login.test.mjs` tiene allineate le due
+ * superfici.
  */
 export const REVIEWER_BOT_LOGIN_RE = /^(claude|frontaliere-automation)/i;
 
@@ -294,4 +295,51 @@ export const REVIEWER_BOT_LOGIN_JQ = `test("${REVIEWER_BOT_LOGIN_RE.source}";"i"
  */
 export function isReviewerBot(user) {
   return user?.type === 'Bot' && REVIEWER_BOT_LOGIN_RE.test(user.login || '');
+}
+
+/**
+ * Codex review identity is deliberately separate from the generic reviewer
+ * allow-list. The GitHub Actions bot is trusted here only when the review
+ * carries the explicit Codex marker; otherwise a generic bot review must not
+ * enter the Codex-only gate by accident.
+ */
+export const CODEX_REVIEWER_LOGIN_RE = /^(?:github-actions\[bot\]|frontaliere-automation\[bot\])$/i;
+export const CODEX_REVIEW_MARKER = '<!-- CODEX_FALLBACK_REVIEW -->';
+
+function normalizedBotLogin(login) {
+  const value = String(login || '');
+  return value.replace(/\[bot\]$/iu, '') + '[bot]';
+}
+
+export function isCodexFallbackReview(review) {
+  const user = review?.user;
+  const author = review?.author;
+  const reviewer = user ?? author;
+  const login = normalizedBotLogin(reviewer?.login);
+  const botIdentity = user?.type === 'Bot'
+    || (!user && author && CODEX_REVIEWER_LOGIN_RE.test(login));
+  return botIdentity
+    && CODEX_REVIEWER_LOGIN_RE.test(login)
+    && String(review.body || '').includes(CODEX_REVIEW_MARKER);
+}
+
+/**
+ * Review riconosciuta da tutti i consumer del ciclo.
+ *
+ * Il percorso generico resta vincolato a `type=Bot` e alla allow-list storica;
+ * il percorso Codex ha invece il marker esplicito e l'identità bot esatta.
+ * `author` copre la forma GraphQL (`gh pr view --json reviews`), che omette
+ * il suffisso `[bot]` e non espone sempre `type`.
+ */
+export function isManagedReview(review) {
+  if (isReviewerBot(review?.user)) return true;
+  // GraphQL exposes `author.login` without `type` and without `[bot]`. Accept
+  // only the two exact reviewer identities here; a human named
+  // `claude-something` must not become a managed review by losing the REST
+  // `type=Bot` fence.
+  if (!review?.user && review?.author) {
+    const login = String(review.author.login || '').replace(/\[bot\]$/iu, '');
+    if (/^(?:claude|frontaliere-automation)$/iu.test(login)) return true;
+  }
+  return isCodexFallbackReview(review);
 }
