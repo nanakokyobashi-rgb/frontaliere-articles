@@ -131,7 +131,11 @@ test('Codex primary keeps Luna Max and is reusable across crawler calls', () => 
   assert.ok(preferenceStart >= 0 && codexPreference >= 0, 'Codex must be the article preference');
   assert.doesNotMatch(createArticle.slice(preferenceStart, preferenceEnd), /CLAUDE_CLI_HAIKU/);
   assert.match(action, /name: "Setup Codex primary with Claude fallback"/);
+  assert.match(action, /--max-requests 1/,
+    'the production broker must advertise the same one-shot capacity as the generator claim');
   assert.doesNotMatch(action, /indirect Codex fallback/);
+  assert.match(broker, /const DEFAULT_MAX_REQUESTS = 1/,
+    'the broker default must remain one-shot when launched outside the composite action');
   assert.match(broker, /CODEX_MODEL\s*=\s*['"]gpt-5\.6-luna['"]/);
   assert.match(broker, /CODEX_EFFORT\s*=\s*['"]max['"]/);
   assert.match(action, /--max-requests\s+4096/);
@@ -139,6 +143,8 @@ test('Codex primary keeps Luna Max and is reusable across crawler calls', () => 
   assert.doesNotMatch(broker.slice(broker.indexOf('async function _callCodexCli'), broker.indexOf('function _callOmniRoute')), /_claimCodexCliFallback/);
   assert.match(broker, /const configPath = path\.join\(codexHome, ['"]config\.toml['"]\)/);
   assert.doesNotMatch(broker, /['"]--profile['"]\s*,\s*CODEX_PROFILE/);
+  assert.doesNotMatch(read('.github/workflows/translate-pending.yml'), /^\s+AI_MODELS_PREFER:/m,
+    'translation must not inherit the body-generation preference globally');
 });
 
 test('il pre-scan local-only considera Codex come alternativa non-local', () => {
