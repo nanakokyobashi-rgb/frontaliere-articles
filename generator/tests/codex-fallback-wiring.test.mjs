@@ -81,7 +81,7 @@ test('every active article CLI caller wires the OAuth Codex broker', () => {
   }
 });
 
-test('Codex primary keeps the pinned OAuth model and is ordered before Claude', () => {
+test('Codex primary keeps Luna Max and is reusable across crawler calls', () => {
   const aiModels = read('generator/scripts/lib/ai-models.mjs');
   const createArticle = read('generator/scripts/create-article.mjs');
   const action = read('.github/actions/setup-claude-haiku-fallback/action.yml');
@@ -93,12 +93,16 @@ test('Codex primary keeps the pinned OAuth model and is ordered before Claude', 
   assert.doesNotMatch(aiModels, /_tryCodexCliUsageLimitFallback/);
   const preferenceStart = createArticle.indexOf('const PREFERRED_GENERATION_MODELS');
   const codexPreference = createArticle.indexOf('AI_MODELS.CODEX_CLI_PRIMARY', preferenceStart);
-  const claudePreference = createArticle.indexOf('AI_MODELS.CLAUDE_CLI_HAIKU', preferenceStart);
-  assert.ok(preferenceStart >= 0 && codexPreference >= 0 && claudePreference > codexPreference, 'Codex must precede Claude in the article preference');
+  const preferenceEnd = createArticle.indexOf('];', codexPreference);
+  assert.ok(preferenceStart >= 0 && codexPreference >= 0, 'Codex must be the article preference');
+  assert.doesNotMatch(createArticle.slice(preferenceStart, preferenceEnd), /CLAUDE_CLI_HAIKU/);
   assert.match(action, /name: "Setup Codex primary with Claude fallback"/);
   assert.doesNotMatch(action, /indirect Codex fallback/);
   assert.match(broker, /CODEX_MODEL\s*=\s*['"]gpt-5\.6-luna['"]/);
-  assert.match(broker, /CODEX_EFFORT\s*=\s*['"]medium['"]/);
+  assert.match(broker, /CODEX_EFFORT\s*=\s*['"]max['"]/);
+  assert.match(action, /--max-requests\s+4096/);
+  assert.match(broker, /maxRequests/);
+  assert.doesNotMatch(broker.slice(broker.indexOf('async function _callCodexCli'), broker.indexOf('function _callOmniRoute')), /_claimCodexCliFallback/);
   assert.match(broker, /const configPath = path\.join\(codexHome, ['"]config\.toml['"]\)/);
   assert.doesNotMatch(broker, /['"]--profile['"]\s*,\s*CODEX_PROFILE/);
 });
