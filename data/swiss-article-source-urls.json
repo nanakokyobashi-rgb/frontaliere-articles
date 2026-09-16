@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/ticino/attualita/1944534/la-fondazione-centro-studi-villa-negroni-si-associa-alla-supsi": "la-fondazione-centro-studi-villa-negroni-si-associa-alla-supsi",
   "https://www.tio.ch/svizzera/cronaca/1944506/italia-svizzera-asilo-richiedenti-governo": "svizzera-trasferimento-richiedenti-asilo-italia",
   "https://www.rsi.ch/s/3995190": "italia-rimpatrio-asilo",
   "https://www.admin.ch/it/newnsb/f-gc331fsl8o": "asilo-statistica-luglio-2026",
@@ -2477,6 +2476,11 @@
   "https://www.tio.ch/svizzera/economia/1950332/bns-aumento-tassi-ubs-tasso": {
     "articleId": "bns-tassi-interessi-ubs",
     "ts": "2026-09-16T01:12:05.010Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4086604": {
+    "articleId": "vaccini-antinfluenzali-ritardo-svizzera",
+    "ts": "2026-09-16T01:22:19.350Z",
     "keyForm": 2
   }
 }
