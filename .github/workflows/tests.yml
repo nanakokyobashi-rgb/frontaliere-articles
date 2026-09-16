@@ -226,7 +226,7 @@ jobs:
         run: node scripts/ci/loop-baseline-pr-gate.mjs
 
       # ══════════════════════════════════════════════════════════════════════
-      # FAMIGLIA 3/3 — Claude review + verdetto (ex workflow di review dedicato)
+      # FAMIGLIA 3/3 — Codex review + verdetto (ex workflow di review dedicato)
       #
       # Girava su `workflow_run[tests]` proprio per non spendere Claude su
       # codice rosso. Quel risparmio NON si perde: gli step qui sotto stanno
