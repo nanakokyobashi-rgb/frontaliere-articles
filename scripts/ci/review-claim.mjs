@@ -16,6 +16,7 @@ import { randomUUID } from 'node:crypto';
 import fs from 'node:fs';
 import { pathToFileURL } from 'node:url';
 import { normalizeReviewInputRevision, reviewHasInputRevision } from './review-test-policy.mjs';
+import { isManagedReview } from './lib/constants.mjs';
 
 export const REVIEW_CLAIM_MARKER = '<!-- PR_REVIEW_CLAIM:';
 export const REVIEW_CLAIM_STATES = Object.freeze([
@@ -282,11 +283,9 @@ export function reviewWasPosted(repo, prNumber, headSha, reviewRevision = '', gh
     && typeof review === 'object'
     && review.state !== 'PENDING'
     && review.commit_id === headSha
-    && review.user?.type === 'Bot'
+    && isManagedReview(review)
     && reviewHasInputRevision(review.body, reviewRevision)
-    && (CLAIM_ACTOR_RE.test(String(review.user?.login || ''))
-      || (/^github-actions\[bot\]$/iu.test(String(review.user?.login || ''))
-        && String(review.body || '').includes('<!-- CODEX_FALLBACK_REVIEW -->'))));
+    );
 }
 
 function claimBody(event) {

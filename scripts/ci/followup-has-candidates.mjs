@@ -38,7 +38,7 @@ import path from 'node:path';
 // senza la sua dipendenza (ERR_MODULE_NOT_FOUND con la CI verde); così invece
 // è il file che NON viaggia a dipendere da quello che viaggia.
 import { bulletState } from '../lib/pr-body-sections-check.mjs';
-import { isReviewerBot } from './lib/constants.mjs';
+import { isManagedReview } from './lib/constants.mjs';
 
 const PR = process.env.PR_NUMBER;
 const repoArgs = (process.env.GH_REPO || process.env.GITHUB_REPOSITORY)
@@ -171,12 +171,12 @@ export function reviewerMarkerLines(reviewBody) {
 }
 
 /**
- * Aggregate the bodies of ALL readable reviews left by the Claude reviewer bot.
+ * Aggregate the bodies of ALL readable reviews left by a managed reviewer.
  *
- * Matches via `isReviewerBot` (`claude*` or `frontaliere-automation[bot]`) —
- * the SAME oracle as `tests.yml` / `auto-merge-eval.mjs` / `pr-autorebase.mjs`.
- * `github-actions[bot]` is NOT a reviewer: an exact-match on the wrong login
- * matched zero reviews and silently killed the 🟡/❓ branch.
+ * Matches via `isManagedReview`: the SAME oracle as `tests.yml` /
+ * `auto-merge-eval.mjs` / `pr-autorebase.mjs`. `github-actions[bot]` enters
+ * only with the explicit Codex marker; a generic Actions review is not a
+ * reviewer verdict.
  *
  * @param {Array<{user?:{login?:string,type?:string}, body?:string}>} reviews
  * @returns {string}
@@ -184,7 +184,7 @@ export function reviewerMarkerLines(reviewBody) {
 export function selectReviewerBody(reviews) {
   if (!Array.isArray(reviews)) return '';
   const mine = reviews.filter(
-    (r) => isReviewerBot(r?.user) && typeof r?.body === 'string' && r.body.length > 0,
+    (r) => isManagedReview(r) && typeof r?.body === 'string' && r.body.length > 0,
   );
   return mine.map((r) => r.body).join('\n\n');
 }

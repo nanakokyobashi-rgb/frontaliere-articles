@@ -258,6 +258,16 @@ test('la review Codex esporta eventi strutturati anche quando il processo fallis
   assert.match(action, /CODEX_DIAGNOSTICS: \$\{\{ steps\.codex\.outputs\.codex_diagnostics \}\}/);
 });
 
+test('un verdetto Codex postato nell ultimo turno riceve evidenza effimera verificabile', () => {
+  assert.match(testsWorkflow, /VERDICT_EVIDENCE_FILE: \$\{\{ runner\.temp \}\}\/codex-verdict-evidence-/);
+  assert.match(testsWorkflow, /EVIDENCE_TRIGGER='codex-primary'/);
+  assert.match(testsWorkflow, /set_review_output verdict_evidence_file/);
+  assert.match(
+    testsWorkflow,
+    /steps\.codex_review\.outputs\.fallback_evidence_file \|\| steps\.review_abort\.outputs\.verdict_evidence_file/,
+  );
+});
+
 test('il bridge corpus resta host-side anche quando il PAT arriva da GITHUB_ENV', () => {
   assert.ok(
     action.includes('codex_corpus_github_auth="${CODEX_CORPUS_GH_AUTH:-${GITHUB_PAT_NANAKO:-${GITHUB_PAT:-}}}"'),

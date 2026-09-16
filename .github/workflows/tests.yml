@@ -858,6 +858,7 @@ jobs:
           REVIEW_TIER: ${{ steps.tier.outputs.tier }}
           REVIEW_MAX_TURNS: ${{ steps.tier.outputs.max_turns }}
           REVIEW_REVISION: ${{ steps.review_input.outputs.review_revision }}
+          VERDICT_EVIDENCE_FILE: ${{ runner.temp }}/codex-verdict-evidence-${{ github.run_id }}-${{ github.run_attempt }}.md
         run: |
           set -uo pipefail
           set_review_output() {
@@ -867,6 +868,22 @@ jobs:
           set_review_output review_abort_cause none
           set_review_output retryable_failure false
           set_review_output permanent_failure false
+          set_review_output verdict_evidence_file ''
+          write_verdict_evidence() {
+            local evidence_file="${VERDICT_EVIDENCE_FILE:-${RUNNER_TEMP:-/tmp}/codex-verdict-evidence-${RUN_ID:-$$}.md}"
+            if ! EVIDENCE_FILE="$evidence_file" \
+              EVIDENCE_TRIGGER='codex-primary' \
+              FALLBACK_STATUS='success' \
+              FALLBACK_DETAIL='codex-review-posted-after-max-turns' \
+              GITHUB_OUTPUT=/dev/null \
+              node scripts/ci/claude-codex-fallback.mjs >/dev/null 2>&1; then
+              return 1
+            fi
+            if [ ! -s "$evidence_file" ]; then
+              return 1
+            fi
+            set_review_output verdict_evidence_file "$evidence_file"
+          }
           if [ "${CODEX_PRIMARY_SUCCESS:-false}" = 'true' ]; then
             echo "Codex primary riuscito: nessuna failure da classificare."
             exit 0
@@ -965,6 +982,12 @@ jobs:
                   and has_current_revision($review_revision)
                 )
               ' <<<"$REVIEWS" >/dev/null 2>&1; then
+                if ! write_verdict_evidence; then
+                  set_review_output review_abort_cause probe_failed
+                  set_review_output permanent_failure true
+                  echo "::error::Review Codex verificata ma evidenza di verdetto non scrivibile: nessun gate carry-forward automatico."
+                  exit 0
+                fi
                 set_review_output review_abort_cause verdict_posted
                 echo "::warning::Review Codex pubblicata sulla HEAD in questa run; max_turns non e' un abort senza verdetto. Il review gate valuta la review appena postata."
                 exit 0
@@ -1051,7 +1074,7 @@ jobs:
           HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           REVIEW_REVISION: ${{ steps.review_input.outputs.review_revision }}
-          CODEX_FALLBACK_EVIDENCE_FILE: ${{ steps.codex_review.outputs.fallback_evidence_file }}
+          CODEX_FALLBACK_EVIDENCE_FILE: ${{ steps.codex_review.outputs.fallback_evidence_file || steps.review_abort.outputs.verdict_evidence_file }}
         run: node scripts/ci/review-gate.mjs
 
       # La Jobs API espone solo la conclusion del review gate, non la ragione

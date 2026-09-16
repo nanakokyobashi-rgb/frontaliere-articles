@@ -69,8 +69,8 @@ import {
 } from './auto-merge-eval.mjs';
 import {
   isCodexFallbackReview,
+  isManagedReview,
   REDFLAG_IMPORTANT_RE,
-  REVIEWER_BOT_LOGIN_RE,
   VITEST_CHECK_NAME,
 } from './lib/constants.mjs';
 import { classifyAndMintReview } from './review-scope.mjs';
@@ -186,8 +186,7 @@ function historicalNonApprovingBlocksDriftFallback() {
     return true;
   }
   const blockers = reviews.flat().filter((review) => {
-    const reviewer = review?.user?.type === 'Bot'
-      && (REVIEWER_BOT_LOGIN_RE.test(review.user?.login || '') || isCodexFallbackReview(review));
+    const reviewer = isManagedReview(review);
     const staleHead = String(review.commit_id || '') !== HEAD_SHA;
     const staleRevision = !reviewHasInputRevision(review.body, REVIEW_REVISION);
     const body = String(review.body || '');
@@ -271,19 +270,15 @@ function lastBotReview() {
     // Evidence comes from this run, never from the review's untrusted prose.
     const evidence = parseCodexFallbackEvidence(readFileSync(process.env.CODEX_FALLBACK_EVIDENCE_FILE, 'utf8'));
     if (evidence?.status !== FALLBACK_STATUS.SUCCESS) throw new Error('Evidenza Codex non valida o fallita');
-    const codex = reviews.filter((r) => r.user?.type === 'Bot'
-      && /^(?:github-actions\[bot\]|frontaliere-automation\[bot\])$/i.test(r.user?.login || '')
+    const codex = reviews.filter((r) => isCodexFallbackReview(r)
       && r.commit_id === HEAD_SHA
-      && reviewHasInputRevision(r.body, REVIEW_REVISION)
-      && String(r.body || '').includes('<!-- CODEX_FALLBACK_REVIEW -->'));
+      && reviewHasInputRevision(r.body, REVIEW_REVISION));
     // Missing/stale Codex review must not fall through to the workflow drift exemption.
     if (!codex.length) throw new Error('Nessuna review Codex marcata sulla HEAD');
     return codex[codex.length - 1];
   }
-  const bots = reviews.filter((r) =>
-    (r.user?.type === 'Bot' && REVIEWER_BOT_LOGIN_RE.test(r.user?.login || ''))
-    || isCodexFallbackReview(r)
-  ).filter((review) => reviewHasInputRevision(review.body, REVIEW_REVISION));
+  const bots = reviews.filter((r) => isManagedReview(r))
+    .filter((review) => reviewHasInputRevision(review.body, REVIEW_REVISION));
   return bots.length ? bots[bots.length - 1] : null;
 }
 

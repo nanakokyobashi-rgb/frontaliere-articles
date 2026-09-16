@@ -228,8 +228,16 @@ jobs:
                   | ascii_downcase)] | unique as $revisions
                 | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
               [.[][]?
-               | select(.user.type == "Bot")
-               | select((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
+               | select(
+                   (.user.type == "Bot")
+                   and (
+                     ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
+                     or (
+                       (.user.login // "") == "github-actions[bot]"
+                       and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->"))
+                     )
+                   )
+                 )
                | select(has_current_revision($revision))
               ] | sort_by(.id // 0) | last | .body // ""')
             LAST_CID=$(echo "$reviews" | jq -rs --arg revision "$REVIEW_REVISION" '
@@ -240,8 +248,16 @@ jobs:
                   | ascii_downcase)] | unique as $revisions
                 | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
               [.[][]?
-               | select(.user.type == "Bot")
-               | select((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
+               | select(
+                   (.user.type == "Bot")
+                   and (
+                     ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
+                     or (
+                       (.user.login // "") == "github-actions[bot]"
+                       and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->"))
+                     )
+                   )
+                 )
                | select(has_current_revision($revision))
               ] | sort_by(.id // 0) | last | .commit_id // ""')
 

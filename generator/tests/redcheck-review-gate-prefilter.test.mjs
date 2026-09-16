@@ -132,8 +132,7 @@ test('l helper importa i nomi degli step e il matcher dei finding condivisi', as
   assert.match(helperSource, /REVIEW_ABORT_STEP_NAME/);
   assert.match(helperSource, /REVIEW_DEATH_STEP_NAMES/);
   assert.match(helperSource, /REDFLAG_IMPORTANT_RE/);
-  assert.match(helperSource, /REVIEWER_BOT_LOGIN_RE/);
-  assert.match(helperSource, /isCodexFallbackReview/);
+  assert.match(helperSource, /isManagedReview/);
 });
 
 const HEAD = 'a'.repeat(40);

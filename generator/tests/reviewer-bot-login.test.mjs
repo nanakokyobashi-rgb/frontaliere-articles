@@ -1,13 +1,11 @@
 /**
- * Reviewer-bot login set — UNA sorgente, sei consumer.
+ * Reviewer-bot login set — UNA sorgente per tutti i consumer.
  *
- * `REVIEWER_BOT_LOGIN_RE` decide quali review valgono come verdetto del
- * reviewer. I consumer `.mjs` la importano; i workflow non possono (uno `run:`
- * YAML non importa una const JS) e usano il predicato jq derivato dalla stessa
- * `.source`. Questo guard è il legame fra le due copie: senza, il trigger del
- * 🔴-fixer può accettare l'App bot mentre il bundle e i gate di merge leggono
- * ancora il solo `claude` — un round speso sui findings sbagliati, un `## LGTM`
- * mai riconosciuto, e nessuno dei due fallisce.
+ * `REVIEWER_BOT_LOGIN_RE` è la metà generica del predicato; `isManagedReview`
+ * aggiunge Codex solo con marker + identità bot esatta. I consumer `.mjs`
+ * importano quel predicato; i workflow non possono importare una const JS e
+ * riproducono il ramo jq equivalente. Questo guard tiene allineate le due
+ * superfici.
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -17,6 +15,9 @@ import { fileURLToPath } from 'node:url';
 import {
   REVIEWER_BOT_LOGIN_RE,
   REVIEWER_BOT_LOGIN_JQ,
+  CODEX_REVIEW_MARKER,
+  isCodexFallbackReview,
+  isManagedReview,
   isReviewerBot,
 } from '../../scripts/ci/lib/constants.mjs';
 
@@ -42,6 +43,33 @@ test('il tipo Bot è parte del predicato condiviso', () => {
   assert.equal(isReviewerBot({ type: 'User', login: 'frontaliere-automation-human' }), false);
 });
 
+test('Codex entra nel set gestito solo con marker e identità bot', () => {
+  const codex = {
+    user: { type: 'Bot', login: 'github-actions[bot]' },
+    body: `## LGTM\n${CODEX_REVIEW_MARKER}`,
+  };
+  assert.equal(isCodexFallbackReview(codex), true);
+  assert.equal(isManagedReview(codex), true);
+  assert.equal(isManagedReview({
+    ...codex,
+    body: '## LGTM',
+  }), false);
+  assert.equal(isManagedReview({
+    user: { type: 'Bot', login: 'dependabot[bot]' },
+    body: `## LGTM\n${CODEX_REVIEW_MARKER}`,
+  }), false);
+  assert.equal(isManagedReview({
+    user: { type: 'User', login: 'github-actions[bot]' },
+    body: `## LGTM\n${CODEX_REVIEW_MARKER}`,
+  }), false);
+});
+
+test('il predicato gestito copre anche la forma GraphQL author senza allargare i login', () => {
+  assert.equal(isManagedReview({ author: { login: 'github-actions' }, body: CODEX_REVIEW_MARKER }), true);
+  assert.equal(isManagedReview({ author: { login: 'claude' }, body: '## LGTM' }), true);
+  assert.equal(isManagedReview({ author: { login: 'claude-human' }, body: '## LGTM' }), false);
+});
+
 test('i workflow che filtrano le review usano il predicato jq condiviso', () => {
   const workflows = [
     '.github/workflows/pr-redflag-fixer.yml',
@@ -61,10 +89,10 @@ test('i workflow che filtrano le review usano il predicato jq condiviso', () => 
     ['.github/workflows/stale-pr-rescuer.yml', 2],
   ]) {
     const src = read(wf);
-    const loginSelector = wf.endsWith('pr-redflag-fixer.yml')
-      ? `((.user.login // "") | ${REVIEWER_BOT_LOGIN_JQ})`
-      : `select((.user.login // "") | ${REVIEWER_BOT_LOGIN_JQ})`;
-    const botTypeSelector = 'select(.user.type == "Bot")';
+    const loginSelector = `((.user.login // "") | ${REVIEWER_BOT_LOGIN_JQ})`;
+    const botTypeSelector = wf.endsWith('pr-redflag-fixer.yml')
+      ? 'select(.user.type == "Bot")'
+      : '(.user.type == "Bot")';
     const count = (needle) => src.split(needle).length - 1;
     if (wf.endsWith('pr-redflag-fixer.yml')) {
       assert.equal(count(loginSelector), expected, `${wf} deve avere ${expected} predicato login reviewer`);
@@ -72,6 +100,16 @@ test('i workflow che filtrano le review usano il predicato jq condiviso', () => 
       assert.match(src, /CODEX_FALLBACK_REVIEW/, `${wf} deve richiedere il marker Codex`);
     } else {
       assert.equal(count(loginSelector), expected, `${wf} deve avere ${expected} selettori login reviewer`);
+      assert.equal(
+        count('(.user.login // "") == "github-actions[bot]"'),
+        expected,
+        `${wf} deve avere il ramo Codex con identità esatta`,
+      );
+      assert.equal(
+        count('contains("<!-- CODEX_FALLBACK_REVIEW -->")'),
+        expected,
+        `${wf} deve richiedere il marker Codex`,
+      );
     }
     assert.equal(count(botTypeSelector), expected, `${wf} deve accoppiare user.type == Bot a ogni selettore reviewer`);
   }
@@ -83,9 +121,12 @@ test('i consumer .mjs della review importano la costante invece di riscriverla',
     'scripts/ci/review-gate.mjs',
     'scripts/ci/pr-autorebase.mjs',
     'scripts/ci/harvest-agent-lessons.mjs',
+    'scripts/ci/followup-has-candidates.mjs',
+    'scripts/ci/review-claim.mjs',
+    'scripts/ci/native-automerge-gate.mjs',
   ]) {
     const src = read(mjs);
-    assert.match(src, /REVIEWER_BOT_LOGIN_RE|isReviewerBot/, `${mjs} deve usare la costante o il predicato condiviso`);
+    assert.match(src, /REVIEWER_BOT_LOGIN_RE|isReviewerBot|isManagedReview/, `${mjs} deve usare la costante o il predicato condiviso`);
     assert.ok(
       !/\/\^claude\/i\.test\(/.test(src),
       `${mjs} ha ancora un filtro login /^claude/i locale`,
