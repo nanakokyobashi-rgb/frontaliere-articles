@@ -25,10 +25,11 @@ permissions:
   contents: read
   pull-requests: write
 concurrency:
-  # Every trigger below calls the same idempotent gate. Serialize events for
-  # one PR and discard stale retries while a newer verdict is being checked.
-  # workflow_run also covers runs without a pull_request payload.
-  group: native-automerge-${{ github.event.pull_request.number || github.event.workflow_run.pull_requests[0].number || github.event.workflow_run.head_sha || github.run_id }}
+  # Every trigger below calls the same idempotent gate. Use the source
+  # repository and branch because that identity is available on both PR
+  # events and workflow_run, including runs without pull_requests. This keeps
+  # cancel-in-progress effective while the job resolves the PR number below.
+  group: native-automerge-${{ github.event.pull_request.head.repo.full_name || github.event.workflow_run.head_repository.full_name || github.repository }}-${{ github.event.pull_request.head.ref || github.event.workflow_run.head_branch || github.run_id }}
   cancel-in-progress: true
 jobs:
   enable:
