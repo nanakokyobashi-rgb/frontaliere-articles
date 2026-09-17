@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/wn3hze-cbsz4isczfzrs2": {
-    "articleId": "difesa-aerea-svizzera-investimenti",
-    "ts": "2026-08-19T09:19:00.780Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/ldqy5vvaxvmzrq8xebcwj": {
     "articleId": "indennita-malattia-sistema-funziona-bene",
     "ts": "2026-08-19T09:38:21.047Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/tbrqnj30sw2p": {
     "articleId": "sorveglianza-digitale-sanita-guida",
     "ts": "2026-09-17T02:36:27.154Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/cn-approva-accordo-col-mercosur-e-aiuti-all%27agricoltura/92069687": {
+    "articleId": "accordo-mercosur-agricoltura-svizzera",
+    "ts": "2026-09-17T02:46:34.341Z",
     "keyForm": 2
   }
 }

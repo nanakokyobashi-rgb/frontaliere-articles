@@ -6515,6 +6515,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.sorveglianza-digitale-sanita-guida.title': 'Surveillance numérique de la santé : le nouveau guide officiel',
     'blog.article.sorveglianza-digitale-sanita-guida.excerpt': 'Publication du nouveau guide officiel d\'IFPDT et de privatim sur la surveillance numérique par caméras, infrarouges et radars dans les établissements de santé.',
     'blog.article.sorveglianza-digitale-sanita-guida.imageAlt': 'Guide sur la surveillance numérique dans les structures de santé',
+    'blog.article.accordo-mercosur-agricoltura-svizzera.title': 'Le Conseil national approuve l\'accord avec le Mercosur',
+    'blog.article.accordo-mercosur-agricoltura-svizzera.excerpt': 'Le feu vert du Conseil national à l\'entente commerciale avec le Mercosur. 517 millions sont alloués à l\'agriculture et 25 millions à la lutte contre la déforestation.',
+    'blog.article.accordo-mercosur-agricoltura-svizzera.imageAlt': 'Le Palais fédéral à Berne lors d\'une session parlementaire.',
 };
 
 export default blogMetaChFr;

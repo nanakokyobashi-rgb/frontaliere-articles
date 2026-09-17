@@ -19517,6 +19517,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'laura-bianchi',
     authorName: 'Laura Bianchi',
    },
+   {
+    id: 'accordo-mercosur-agricoltura-svizzera',
+    category: 'novita',
+    date: '2026-09-17T02:46:34.017Z',
+    image: '/images/blog/accordo-mercosur-agricoltura-svizzera.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

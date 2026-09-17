@@ -84455,6 +84455,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-accordo-mercosur-agricoltura-svizzera': {
+    title: 'Il Consiglio nazionale approva l\'accordo con il Mercosur',
+    description: 'Il Consiglio nazionale approva l\'accordo con il Mercosur: 517 milioni per l\'agricoltura e 25 milioni per l\'ambiente. Il dossier torna agli Stati.',
+    keywords: 'frontalieri, ticino, svizzera, italia, consiglio, nazionale, approva, accordo',
+    ogTitle: 'Il Consiglio nazionale approva l\'accordo con il Mercosur',
+    ogDescription: 'Il Consiglio nazionale ha dato il via libera all\'accordo di libero scambio con il Mercosur. Stanziati 517 milioni per il settore agricolo e 25 milioni per la lotta alla deforestazione.',
+    canonicalPath: '/articoli-svizzera/accordo-mercosur-agricoltura-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Il Consiglio nazionale approva l'accordo con il Mercosur",
+      "description": "Il Consiglio nazionale approva l'accordo con il Mercosur: 517 milioni per l'agricoltura e 25 milioni per l'ambiente. Il dossier torna agli Stati.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/accordo-mercosur-agricoltura-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna durante una sessione parlamentare."
+      },
+      "datePublished": "2026-09-17T02:46:34+00:00",
+      "dateModified": "2026-09-17T02:46:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/accordo-mercosur-agricoltura-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -2194,6 +2194,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'helene-budliger-artieda-dimissioni-seco': { it: 'helene-budliger-artieda-dimissioni-seco', en: 'helene-budliger-artieda-seco-resignation', de: 'helene-budliger-artieda-ruecktritt-seco', fr: 'helene-budliger-artieda-demission-seco' },
  'mercato-alloggio-svizzera-2025-2026': { it: 'mercato-alloggio-svizzera-2025-2026', en: 'housing-market-switzerland-2025-2026', de: 'wohnungsmarkt-schweiz-2025-2026', fr: 'marche-logement-suisse-2025-2026' },
  'sorveglianza-digitale-sanita-guida': { it: 'sorveglianza-digitale-sanita-guida', en: 'digital-surveillance-healthcare-guide', de: 'digitale-ueberwachung-gesundheitswesen-leitfaden', fr: 'surveillance-numerique-sante-guide' },
+ 'accordo-mercosur-agricoltura-svizzera': { it: 'accordo-mercosur-agricoltura-svizzera', en: 'switzerland-mercosur-agreement-agriculture', de: 'schweiz-mercosur-abkommen-landwirtschaft', fr: 'accord-mercosur-agriculture-suisse' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

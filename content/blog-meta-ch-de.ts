@@ -6515,6 +6515,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.sorveglianza-digitale-sanita-guida.title': 'Digitale Gesundheitsüberwachung: der neue offizielle Leitfaden',
     'blog.article.sorveglianza-digitale-sanita-guida.excerpt': 'Der neue offizielle Leitfaden von EDÖB und Privaten zur digitalen Überwachung durch Kameras, Infrarot und Radar in Gesundheitseinrichtungen wurde veröffentlicht.',
     'blog.article.sorveglianza-digitale-sanita-guida.imageAlt': 'Leitfaden zur digitalen Überwachung in Gesundheitseinrichtungen',
+    'blog.article.accordo-mercosur-agricoltura-svizzera.title': 'Der Nationalrat genehmigt das Abkommen mit dem Mercosur',
+    'blog.article.accordo-mercosur-agricoltura-svizzera.excerpt': 'Grünes Licht des Nationalrates für das Handelsabkommen mit dem Mercosur. 517 Millionen für die Landwirtschaft und 25 Millionen gegen die Entwaldung.',
+    'blog.article.accordo-mercosur-agricoltura-svizzera.imageAlt': 'Das Bundeshaus in Bern während einer Parlamentssitzung.',
 };
 
 export default blogMetaChDe;
