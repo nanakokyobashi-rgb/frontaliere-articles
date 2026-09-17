@@ -11797,6 +11797,15 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-09-16.imageAlt': 'I numeri del giorno per i frontalieri – 16 settembre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro',
     'blog.article.bollettino-frontaliere-2026-09-16.seoDescription': 'Bollettino frontalieri del 16 settembre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
     'blog.article.bollettino-frontaliere-2026-09-16.ogDescription': 'I numeri del 16 settembre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    'blog.article.stefania-filetti-cgil-nazionale.title': 'Stefania Filetti eletta nella segreteria nazionale Cgil',
+    'blog.article.stefania-filetti-cgil-nazionale.excerpt': 'L\'assemblea generale della Cgil riunita a Roma ha eletto a voto segreto Stefania Filetti nella nuova segreteria confederale composta da dieci persone.',
+    'blog.article.stefania-filetti-cgil-nazionale.imageAlt': 'Stefania Filetti eletta nella segreteria nazionale della Cgil',
+    'blog.article.leroy-merlin-lavoro-varese.title': 'Leroy Merlin: nuove opportunità di lavoro nell\'area di Varese',
+    'blog.article.leroy-merlin-lavoro-varese.excerpt': 'Novità per le opportunità lavorative nel settore retail e GDO nell\'area di Varese con le selezioni aperte da Leroy Merlin.',
+    'blog.article.leroy-merlin-lavoro-varese.imageAlt': 'Opportunità di lavoro Leroy Merlin nell area di Varese',
+    'blog.article.stazioni-ferroviarie-ticino-sicurezza.title': 'Stazioni ferroviarie in Ticino: decoro e sicurezza',
+    'blog.article.stazioni-ferroviarie-ticino-sicurezza.excerpt': 'Interrogazione al Consiglio di Stato presentata da Daniele Piccaluga della Lega dei Ticinesi sulla sicurezza e pulizia delle stazioni.',
+    'blog.article.stazioni-ferroviarie-ticino-sicurezza.imageAlt': 'Stazione ferroviaria in Ticino con illuminazione serale',
 };
 
 export default blogMetaIt;
