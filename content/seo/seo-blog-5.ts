@@ -91177,6 +91177,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-leroy-merlin-lavoro-varese': {
+    title: 'Leroy Merlin: nuove opportunità di lavoro nell\'area di Varese',
+    description: 'Scopri le nuove opportunità di lavoro e le selezioni aperte da Leroy Merlin nell\'area di Varese per il settore retail e GDO. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, leroy, merlin, nuove, opportunità',
+    ogTitle: 'Leroy Merlin: nuove opportunità di lavoro nell area di Varese',
+    ogDescription: 'Approfondimento sulle selezioni di personale e le opportunità lavorative aperte da Leroy Merlin nella provincia di Varese.',
+    canonicalPath: '/articoli-frontaliere/leroy-merlin-lavoro-varese',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Leroy Merlin: nuove opportunità di lavoro nell'area di Varese",
+      "description": "Scopri le nuove opportunità di lavoro e le selezioni aperte da Leroy Merlin nell'area di Varese per il settore retail e GDO. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/leroy-merlin-lavoro-varese.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Opportunità di lavoro Leroy Merlin nell area di Varese"
+      },
+      "datePublished": "2026-09-17T02:41:32+00:00",
+      "dateModified": "2026-09-17T02:41:32+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/leroy-merlin-lavoro-varese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

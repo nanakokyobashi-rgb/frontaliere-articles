@@ -11798,6 +11798,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.stefania-filetti-cgil-nazionale.title': 'Stefania Filetti wurde in das nationale Sekretariat der Cgil gewählt',
     'blog.article.stefania-filetti-cgil-nazionale.excerpt': 'Die in Rom versammelte Generalversammlung der Cgil hat Stefania Filetti in geheimer Abstimmung in das neue zehnköpfige Bundessekretariat gewählt.',
     'blog.article.stefania-filetti-cgil-nazionale.imageAlt': 'Stefania Filetti in das nationale Sekretariat der Cgil gewählt',
+    'blog.article.leroy-merlin-lavoro-varese.title': 'Leroy Merlin: Neue Beschäftigungsmöglichkeiten im Raum Varese',
+    'blog.article.leroy-merlin-lavoro-varese.excerpt': 'Neuheiten für Karrieremöglichkeiten im Einzelhandel und Großhandelsunternehmen im Bereich Varese mit den von Leroy Merlin eröffneten Auswahlmöglichkeiten.',
+    'blog.article.leroy-merlin-lavoro-varese.imageAlt': 'Leroy Merlin Stellenangebote im Raum Varese',
 };
 
 export default blogMetaDe;

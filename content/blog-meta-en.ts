@@ -11799,6 +11799,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.stefania-filetti-cgil-nazionale.title': 'Stefania Filetti elected to the national secretariat of CGIL',
     'blog.article.stefania-filetti-cgil-nazionale.excerpt': 'The General Assembly of the CGIL meeting in Rome elected Stefania Filetti by secret ballot in the new confederal secretariat composed of ten people.',
     'blog.article.stefania-filetti-cgil-nazionale.imageAlt': 'Stefania Filetti elected to the national secretariat of Cgil',
+    'blog.article.leroy-merlin-lavoro-varese.title': 'Leroy Merlin: new job opportunities in the Varese area',
+    'blog.article.leroy-merlin-lavoro-varese.excerpt': 'New for job opportunities in the retail and large-scale retail sector in the Varese area with the selections opened by Leroy Merlin.',
+    'blog.article.leroy-merlin-lavoro-varese.imageAlt': 'Leroy Merlin job opportunities in the Varese area',
 };
 
 export default blogMetaEn;
