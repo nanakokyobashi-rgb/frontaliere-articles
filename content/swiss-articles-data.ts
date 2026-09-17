@@ -19481,6 +19481,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'spuhler-indeciso-bilaterali-iii',
+    category: 'novita',
+    date: '2026-09-17T02:03:41.767Z',
+    image: '/images/blog/spuhler-indeciso-bilaterali-iii.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

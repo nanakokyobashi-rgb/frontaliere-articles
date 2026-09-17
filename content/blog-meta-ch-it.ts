@@ -6503,6 +6503,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.mercato-alloggio-svizzera-ufab.title': 'Mercato dell\'alloggio in Svizzera: la situazione peggiora',
     'blog.article.mercato-alloggio-svizzera-ufab.excerpt': 'Secondo l\'Ufficio federale delle abitazioni la situazione sul mercato dell\'alloggio in Svizzera peggiora a causa delle nuove costruzioni inferiori all\'aumento delle economie domestiche.',
     'blog.article.mercato-alloggio-svizzera-ufab.imageAlt': 'Mercato dell\'alloggio in Svizzera e nuove costruzioni residenziali',
+    'blog.article.spuhler-indeciso-bilaterali-iii.title': 'Spuhler (Stadler Rail): sono indeciso sui bilaterali III',
+    'blog.article.spuhler-indeciso-bilaterali-iii.excerpt': 'Il presidente di Stadler Rail esprime dubbi sul nuovo pacchetto di intese con l\'UE, bilanciando vantaggi economici e criticità istituzionali.',
+    'blog.article.spuhler-indeciso-bilaterali-iii.imageAlt': 'Peter Spuhler, presidente di Stadler Rail',
 };
 
 export default blogMetaChIt;

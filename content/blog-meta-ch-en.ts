@@ -6503,6 +6503,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.mercato-alloggio-svizzera-ufab.title': 'Accommodation market in Switzerland: the situation is getting worse',
     'blog.article.mercato-alloggio-svizzera-ufab.excerpt': 'According to the Federal Office of Housing the situation on the housing market in Switzerland worsens due to new construction undercutting the rise in household economies.',
     'blog.article.mercato-alloggio-svizzera-ufab.imageAlt': 'Housing market in Switzerland and new residential buildings',
+    'blog.article.spuhler-indeciso-bilaterali-iii.title': 'Spuhler (Stadler Rail): I am undecided on bilateral III',
+    'blog.article.spuhler-indeciso-bilaterali-iii.excerpt': 'The president of Stadler Rail expresses doubts about the new package of agreements with the EU, balancing economic advantages and institutional criticalities.',
+    'blog.article.spuhler-indeciso-bilaterali-iii.imageAlt': 'Peter Spuhler, chairman of Stadler Rail',
 };
 
 export default blogMetaChEn;

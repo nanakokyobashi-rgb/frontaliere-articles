@@ -84299,6 +84299,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-spuhler-indeciso-bilaterali-iii': {
+    title: 'Spuhler (Stadler Rail): sono indeciso sui bilaterali III',
+    description: 'Il presidente di Stadler Rail Peter Spuhler esprime dubbi istituzionali ed economici sul nuovo pacchetto di intese bilaterali III con l\'Unione europea.',
+    keywords: 'frontalieri, ticino, svizzera, italia, spuhler, stadler, rail, sono',
+    ogTitle: 'Spuhler (Stadler Rail) e i bilaterali III: tra economia e istituzioni',
+    ogDescription: 'Il presidente di Stadler Rail Peter Spuhler esprime la sua indecisione sul nuovo pacchetto di intese bilaterali III con l\'Unione europea, bilanciando i vantaggi economici con i dubbi istituzionali sulla democrazia diretta.',
+    canonicalPath: '/articoli-svizzera/spuhler-indeciso-bilaterali-iii/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Spuhler (Stadler Rail): sono indeciso sui bilaterali III",
+      "description": "Il presidente di Stadler Rail Peter Spuhler esprime dubbi istituzionali ed economici sul nuovo pacchetto di intese bilaterali III con l'Unione europea.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/spuhler-indeciso-bilaterali-iii.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Peter Spuhler, presidente di Stadler Rail"
+      },
+      "datePublished": "2026-09-17T02:03:41+00:00",
+      "dateModified": "2026-09-17T02:03:41+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/spuhler-indeciso-bilaterali-iii/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

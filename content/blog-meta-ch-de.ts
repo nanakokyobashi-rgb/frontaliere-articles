@@ -6503,6 +6503,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.mercato-alloggio-svizzera-ufab.title': 'Wohnungsmarkt Schweiz: Situation verschlechtert sich',
     'blog.article.mercato-alloggio-svizzera-ufab.excerpt': 'Gemäss dem Bundesamt für Wohnungswesen verschlechtert sich die Situation auf dem Wohnungsmarkt in der Schweiz aufgrund von Neubauten, die hinter der Zunahme der Haushalte zurückbleiben.',
     'blog.article.mercato-alloggio-svizzera-ufab.imageAlt': 'Wohnungsmarkt in der Schweiz und neue Wohngebäude',
+    'blog.article.spuhler-indeciso-bilaterali-iii.title': 'Spuhler (Stadler Rail): Ich bin unentschlossen über die Bilateralen III',
+    'blog.article.spuhler-indeciso-bilaterali-iii.excerpt': 'Der Präsident von Stadler Rail äußert Zweifel an dem neuen Paket von Vereinbarungen mit der EU, die wirtschaftliche Vorteile und institutionelle Herausforderungen ausgleichen.',
+    'blog.article.spuhler-indeciso-bilaterali-iii.imageAlt': 'Peter Spuhler, Verwaltungsratspräsident von Stadler Rail',
 };
 
 export default blogMetaChDe;
