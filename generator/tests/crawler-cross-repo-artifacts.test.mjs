@@ -235,20 +235,17 @@ test('loop-drift osserva live i 24 artifact portabili e il contratto del generat
     assert.ok(entry, `${artifact.file}: mapping loop-sync assente`);
     assert.equal(entry.mode, 'identical', artifact.file);
     assert.equal(entry.sitePath, `.github/corpus-workflows/${artifact.file}`, artifact.file);
-    // The artifact can be intentionally corpus-ahead while its generated twin
-    // is still waiting for the source-side change. Keep the last real
-    // alignment baseline; the diff-scoped baseline gate verifies any edited
-    // digest against the appropriate repository history.
-    assert.match(entry.baseline?.site ?? '', /^[a-f0-9]{16}$/u, `${artifact.file}: site baseline missing`);
-    assert.match(entry.baseline?.corpus ?? '', /^[a-f0-9]{16}$/u, `${artifact.file}: corpus baseline missing`);
+    assert.equal(entry.baseline.site, artifact.artifactSha256.slice(0, 16), artifact.file);
+    assert.equal(entry.baseline.corpus, artifact.artifactSha256.slice(0, 16), artifact.file);
   }
 
   const contractEntry = entries.get('generator/data/crawler-cross-repo-contract.json');
   assert.ok(contractEntry, 'mapping loop-sync del contract assente');
   assert.equal(contractEntry.mode, 'identical');
   assert.equal(contractEntry.sitePath, '.github/corpus-workflows/contract.json');
-  assert.match(contractEntry.baseline?.site ?? '', /^[a-f0-9]{16}$/u, 'contract: site baseline missing');
-  assert.match(contractEntry.baseline?.corpus ?? '', /^[a-f0-9]{16}$/u, 'contract: corpus baseline missing');
+  const contractHash = sha256(readFileSync(CONTRACT_PATH, 'utf8')).slice(0, 16);
+  assert.equal(contractEntry.baseline.site, contractHash);
+  assert.equal(contractEntry.baseline.corpus, contractHash);
 });
 
 test('il retry e limitato al checkout sparse pre-logica, con backoff', () => {
