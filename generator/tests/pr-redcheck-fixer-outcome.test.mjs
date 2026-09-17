@@ -213,7 +213,8 @@ test('i fixer di PR serializzano il branch senza sfrattare la pending gemella', 
   assert.notEqual(redcheckGroup, redflagGroup,
     'i workflow devono evitare una coda condivisa che sfratta la pending gemella');
   assert.match(redcheckGroup || '', /^redcheck-fix-/);
-  assert.match(redflagGroup || '', /^redflag-fix-\$\{\{ github\.event\.pull_request\.head\.ref \}\}$/);
+  assert.match(redflagGroup || '', /^redflag-fix-pr-\$\{\{ github\.event\.pull_request\.number \|\| github\.event\.inputs\.pr \|\| inputs\.pr \|\| 'unknown' \}\}$/,
+    'la chiave deve restare stabile per PR sia sul trigger review sia su workflow_dispatch');
   assert.match(WORKFLOW, /busy=[\s\S]*--workflow=pr-redflag-fixer\.yml/,
     'redcheck deve riconoscere un redflag gia\u0027 attivo prima del push');
   assert.match(REDFLAG_WORKFLOW, /while :[\s\S]*--workflow=pr-redcheck-fixer\.yml[\s\S]*sleep 10/,
