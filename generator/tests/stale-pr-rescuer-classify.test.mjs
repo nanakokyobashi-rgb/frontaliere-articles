@@ -49,7 +49,7 @@
  * anche la prova che lo stub discrimina davvero.
  *
  * La classe B (🔴 Important sull'head, LAST_CID == HEAD) è esercitata nella
- * sezione #488: lo YAML usa `grep -qP` (PCRE), che BSD grep non ha, quindi il
+ * sezione #488: lo YAML usa `grep -cP` (PCRE), che BSD grep non ha, quindi il
  * harness stubba `grep -P` con un regex JS — senza, B è irraggiungibile in
  * locale e l'osservatore sarebbe verde a vuoto.
  */
@@ -297,21 +297,23 @@ else
 fi
 `,
     );
-    // CLASS=B usa `grep -qP`. BSD grep non ha -P: senza stub il ramo non
+    // CLASS=B usa `grep -cP`. BSD grep non ha -P: senza stub il ramo non
     // scatta mai su macOS e i casi #488 sarebbero verdi senza aver eseguito B.
     writeFileSync(
       path.join(bin, 'grep'),
       `#!/usr/bin/env bash
 p=0
+c=0
 for a in "$@"; do
-  case "$a" in -P|-qP|-Pq) p=1 ;; esac
+  case "$a" in -P|-qP|-Pq|-cP) p=1 ;; esac
+  case "$a" in -cP) c=1 ;; esac
 done
 if [ "$p" = "1" ]; then
   pattern=""
   for a in "$@"; do
-    case "$a" in -q|-P|-qP|-Pq) continue ;; -*) continue ;; *) pattern="$a"; break ;; esac
+    case "$a" in -q|-P|-qP|-Pq|-cP) continue ;; -*) continue ;; *) pattern="$a"; break ;; esac
   done
-  node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{try{process.exit(new RegExp(process.argv[1],"u").test(s)?0:1)}catch(e){process.exit(2)}});' "$pattern"
+  node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{try{const m=new RegExp(process.argv[1],"u").test(s);if(process.argv[2]==="1")process.stdout.write(m?"1\\n":"0\\n");process.exit(m?0:1)}catch(e){process.exit(2)}});' "$pattern" "$c"
   exit $?
 fi
 exec /usr/bin/grep "$@"
@@ -327,7 +329,7 @@ exec /usr/bin/grep "$@"
     const stdout = execFileSync('bash', ['-e', script], {
       encoding: 'utf8',
       // stderr catturato e non ereditato: su macOS il ramo della classe B usa
-      // `grep -qP`, che BSD grep non ha, e la sua usage line inquinerebbe
+      // `grep -cP`, che BSD grep non ha, e la sua usage line inquinerebbe
       // l'output di ogni run senza essere un fallimento.
       stdio: ['ignore', 'pipe', 'pipe'],
       env: {
@@ -810,6 +812,41 @@ test('E — una run ancora in volo oltre la grace window resta un veto', opts, (
   });
   assert.deepEqual(r.workflowRuns, [], `Una run vecchia ma ancora in-flight non va duplicata.\n${r.stdout}`);
   assert.deepEqual(r.comments, [], `Il veto in-flight indipendente dal TTL non deve commentare.\n${r.stdout}`);
+});
+
+test('E — round cap raggiunto: nessun nuovo dispatch del fixer', opts, () => {
+  const r = runScan({
+    prs: openPr(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: HEAD_SHA, body: '🔴 **Important**: il cap è terminale' }),
+    comments: [{ body: '<!-- REDFLAG_FIX_ROUND: 2 -->\n_🔴-fixer round 2/2 avviato (auto)._' }],
+    fixerRuns: [],
+  });
+  assert.deepEqual(r.workflowRuns, [], `Il round cap del fixer deve vietare E.\n${r.stdout}`);
+  assert.deepEqual(r.comments, [], `Il veto terminale non deve commentare la PR.\n${r.stdout}`);
+});
+
+test('E — marker needs-human: nessun nuovo dispatch del fixer', opts, () => {
+  const r = runScan({
+    prs: openPr({ labels: [{ name: 'needs-human' }] }),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: HEAD_SHA, body: '🔴 **Important**: serve un umano' }),
+    fixerRuns: [],
+  });
+  assert.deepEqual(r.workflowRuns, [], `La label needs-human deve vietare E.\n${r.stdout}`);
+  assert.deepEqual(r.comments, [], `Il veto needs-human non deve commentare la PR.\n${r.stdout}`);
+});
+
+test('E — commento needs-human: nessun nuovo dispatch del fixer', opts, () => {
+  const r = runScan({
+    prs: openPr(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: HEAD_SHA, body: '🔴 **Important**: il marker è nel thread' }),
+    comments: [{ body: '🛑 **needs-human** (auto): il 🔴-fixer ha già tentato 2 round.' }],
+    fixerRuns: [],
+  });
+  assert.deepEqual(r.workflowRuns, [], `Il commento needs-human deve vietare E.\n${r.stdout}`);
+  assert.deepEqual(r.comments, [], `Il veto needs-human non deve commentare la PR.\n${r.stdout}`);
 });
 
 test('E/B — lookup del fixer illeggibile: nessuna azione fail-closed', opts, () => {
