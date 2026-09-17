@@ -99,6 +99,7 @@ const PR_BODY = '## Implementato\n- fixture\n\n## Non implementato (ancora)\n- f
 const REVIEW_REVISION = `body:${createHash('sha256').update(`${PR_BODY}\n`).digest('hex')}`;
 
 const isoAgo = (hours) => new Date(Date.now() - hours * 3600_000).toISOString().replace(/\.\d+Z$/, 'Z');
+const unixAgo = (hours) => Math.floor((Date.now() - hours * 3600_000) / 1000);
 const quotaDeferredComment = ({ head = HEAD_SHA, role = 'review', runId = 'tests-1' } = {}) => ({
   id: 300,
   created_at: isoAgo(4),
@@ -783,6 +784,65 @@ test('E — una run del fixer già in volo sulla HEAD non viene duplicata', opts
   assert.deepEqual(r.workflowRuns, [], `Il fixer è già in volo: nessun secondo dispatch ammesso.\n${r.stdout}`);
   assert.deepEqual(r.comments, [], `La near-miss non deve pubblicare un rescue duplicato.\n${r.stdout}`);
   assert.deepEqual(r.reruns, []);
+});
+
+test('E — una run ancora in volo oltre la grace window resta un veto', opts, () => {
+  const r = runScan({
+    prs: openPr(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({
+      commit: HEAD_SHA,
+      body: '🔴 **Important**: la run in coda non va sostituita',
+    }),
+    fixerRuns: [{
+      databaseId: 7003,
+      headSha: HEAD_SHA,
+      status: 'in_progress',
+      createdAt: isoAgo(4),
+    }],
+  });
+  assert.deepEqual(r.workflowRuns, [], `Una run vecchia ma ancora in-flight non va duplicata.\n${r.stdout}`);
+  assert.deepEqual(r.comments, [], `Il veto in-flight indipendente dal TTL non deve commentare.\n${r.stdout}`);
+});
+
+test('E — un marker di dispatch scaduto riarma il rescue', opts, () => {
+  const staleMarkers = [
+    {
+      body: [
+        `<!-- stale-pr-rescuer class=E head=${HEAD_SHA.slice(0, 7)} -->`,
+        `<!-- stale-pr-rescuer dispatch=pr-redflag-fixer head=${HEAD_SHA.slice(0, 7)} run=7004 at=${unixAgo(3)} -->`,
+      ].join('\n'),
+    },
+  ];
+  const r = runScan({
+    prs: openPr(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: HEAD_SHA, body: '🔴 **Important**: il marker non è eterno' }),
+    comments: staleMarkers,
+    fixerRuns: [],
+  });
+  assert.equal(r.workflowRuns.length, 1, `Il marker scaduto deve consentire un nuovo dispatch.\n${r.stdout}`);
+  assert.match(r.workflowRuns[0], /-f pr=901/);
+});
+
+test('E — un marker di dispatch ancora fresco resta idempotente', opts, () => {
+  const freshMarkers = [
+    {
+      body: [
+        `<!-- stale-pr-rescuer class=E head=${HEAD_SHA.slice(0, 7)} -->`,
+        `<!-- stale-pr-rescuer dispatch=pr-redflag-fixer head=${HEAD_SHA.slice(0, 7)} run=7005 at=${unixAgo(0.5)} -->`,
+      ].join('\n'),
+    },
+  ];
+  const r = runScan({
+    prs: openPr(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: HEAD_SHA, body: '🔴 **Important**: il dispatch è appena partito' }),
+    comments: freshMarkers,
+    fixerRuns: [],
+  });
+  assert.deepEqual(r.workflowRuns, [], `Il TTL del marker deve evitare un doppio dispatch.\n${r.stdout}`);
+  assert.deepEqual(r.comments, [], `Il marker generale deve evitare un secondo commento.\n${r.stdout}`);
 });
 
 // ── 9. #488: classe B dispatcha pr-review-loop se il fixer ha già chiuso il 🔴 ─

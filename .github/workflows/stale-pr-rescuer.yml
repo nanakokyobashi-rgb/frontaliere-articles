@@ -331,35 +331,48 @@ jobs:
             # sulla stessa HEAD nella soglia già usata dal rescuer (2h). Una run
             # recente, soprattutto queued/in_progress, è il guard di idempotenza
             # dell'azione: non si dispatcha un secondo fixer mentre il primo è
-            # ancora in volo o appena terminato.
+            # ancora in volo o appena terminato. Lo stato in volo è un veto
+            # indipendente dalla grace window: una run vecchia ma ancora
+            # queued/in_progress non può essere sostituita da una seconda.
             FIXER_RUN_LOOKUP_OK=true
+            FIXER_RUN_RECENT_ID=""
             FIXER_RUN_RECENT=false
             FIXER_RUN_IN_FLIGHT=false
             if [ "$HAS_IMPORTANT" = "true" ] && [ "$LAST_CID" = "$HEAD" ]; then
               if ! fixer_runs=$(gh run list --repo "$REPO" --workflow pr-redflag-fixer.yml --branch "$BRANCH" \
-                --limit 30 --json databaseId,headSha,status,createdAt 2>/dev/null); then
+                --limit 30 --json databaseId,headSha,status,conclusion,createdAt 2>/dev/null); then
                 echo "::warning::Impossibile leggere le run di pr-redflag-fixer per PR #$N — nessun dispatch automatico ammesso."
                 FIXER_RUN_LOOKUP_OK=false
               elif ! printf '%s' "$fixer_runs" | jq -e 'type == "array"' >/dev/null 2>&1; then
                 echo "::warning::Elenco run di pr-redflag-fixer malformato per PR #$N — nessun dispatch automatico ammesso."
                 FIXER_RUN_LOOKUP_OK=false
               else
-                FIXER_RUN_RECENT=$(printf '%s' "$fixer_runs" | jq -r --arg head "$HEAD" --argjson now "$NOW" --argjson grace "$AGE_MIN_S" '
+                if ! FIXER_RUN_RECENT_ID=$(printf '%s' "$fixer_runs" | jq -r --arg head "$HEAD" --argjson now "$NOW" --argjson grace "$AGE_MIN_S" '
                   def within_grace:
                     (.createdAt // "") as $created
                     | (try ($created | fromdateiso8601) catch -1) as $created_at
                     | (($now - $created_at) >= 0 and ($now - $created_at) <= $grace);
-                  any(.[]; (.headSha // "" | ascii_downcase) == ($head | ascii_downcase) and within_grace)
-                ' 2>/dev/null || echo false)
-                FIXER_RUN_IN_FLIGHT=$(printf '%s' "$fixer_runs" | jq -r --arg head "$HEAD" --argjson now "$NOW" --argjson grace "$AGE_MIN_S" '
-                  def within_grace:
-                    (.createdAt // "") as $created
-                    | (try ($created | fromdateiso8601) catch -1) as $created_at
-                    | (($now - $created_at) >= 0 and ($now - $created_at) <= $grace);
+                  [.[]
+                   | select((.headSha // "" | ascii_downcase) == ($head | ascii_downcase))
+                   | select(within_grace)]
+                  | sort_by([(.createdAt // ""), ((.databaseId // 0) | tonumber? // 0)])
+                  | last
+                  | .databaseId // empty
+                ' 2>/dev/null); then
+                  echo "::warning::Stato delle run di pr-redflag-fixer non verificabile per PR #$N — nessun dispatch automatico ammesso."
+                  FIXER_RUN_LOOKUP_OK=false
+                else
+                  if printf '%s' "$FIXER_RUN_RECENT_ID" | grep -qE '^[0-9]+$'; then
+                    FIXER_RUN_RECENT=true
+                  fi
+                fi
+                if [ "$FIXER_RUN_LOOKUP_OK" = "true" ] && ! FIXER_RUN_IN_FLIGHT=$(printf '%s' "$fixer_runs" | jq -r --arg head "$HEAD" '
                   any(.[]; (.headSha // "" | ascii_downcase) == ($head | ascii_downcase)
-                    and within_grace
                     and ((.status // "") == "queued" or (.status // "") == "in_progress"))
-                ' 2>/dev/null || echo false)
+                ' 2>/dev/null); then
+                  echo "::warning::Stato in-flight di pr-redflag-fixer non verificabile per PR #$N — nessun dispatch automatico ammesso."
+                  FIXER_RUN_LOOKUP_OK=false
+                fi
               fi
             fi
 
@@ -374,7 +387,7 @@ jobs:
               CLASS="A"
               REASON="test verdi sull'head corrente da >2h ma nessuna review li ha coperti"
               RESCUE="\`git fetch origin main && git merge origin/main\` nel branch \`$BRANCH\`, poi push. Se il merge non serve, può essere solo coda congestionata: attendi."
-            elif [ "$HAS_IMPORTANT" = "true" ] && [ "$LAST_CID" = "$HEAD" ] && [ "$FIXER_RUN_LOOKUP_OK" = "true" ] && [ "$FIXER_RUN_RECENT" != "true" ]; then
+            elif [ "$HAS_IMPORTANT" = "true" ] && [ "$LAST_CID" = "$HEAD" ] && [ "$FIXER_RUN_LOOKUP_OK" = "true" ] && [ "$FIXER_RUN_RECENT" != "true" ] && [ "$FIXER_RUN_IN_FLIGHT" != "true" ]; then
               CLASS="E"
               REASON="🔴 Important non ripreso sulla HEAD corrente (nessun commit nuovo e nessuna run di pr-redflag-fixer registrata nelle ultime 2h)"
               RESCUE="dispatcha \`pr-redflag-fixer.yml\` per la PR #$N sulla HEAD \`${HEAD:0:7}\` con \`workflow_dispatch\`; il fixer riapplicherà gli stessi gate del percorso automatico."
@@ -455,7 +468,23 @@ jobs:
             # HEAD) — e va controllata PRIMA del `continue` sull'idempotenza
             # generica, non dopo.
             DISPATCH_MARKER="<!-- stale-pr-rescuer rerun=tests head=${HEAD:0:7} -->"
-            FIXER_DISPATCH_MARKER="<!-- stale-pr-rescuer dispatch=pr-redflag-fixer head=${HEAD:0:7} -->"
+            # Il marker E è un paracadute per la finestra in cui GitHub ha
+            # accettato la dispatch ma `gh run list` non ha ancora indicizzato la
+            # run. Porta quindi un timestamp TTL e, dopo la dispatch, l'id della
+            # run se è già visibile. Un marker vecchio non può congelare E per
+            # sempre: se la run è stata cancellata, fallita o non ha risolto il
+            # finding, dopo la stessa grace window la classe si riarma.
+            FIXER_DISPATCH_MARKER="<!-- stale-pr-rescuer dispatch=pr-redflag-fixer head=${HEAD:0:7} run=pending at=$NOW -->"
+            FIXER_DISPATCH_MARKER_RE="<!-- stale-pr-rescuer dispatch=pr-redflag-fixer head=${HEAD:0:7} run=[^ ]+ at=([0-9]+) -->"
+            FIXER_DISPATCH_MARKER_ACTIVE=false
+            if [[ "$POSTED_BODIES" =~ $FIXER_DISPATCH_MARKER_RE ]]; then
+              FIXER_MARKER_AT="${BASH_REMATCH[1]}"
+              if [[ "$FIXER_MARKER_AT" =~ ^[0-9]+$ ]] \
+                && [ "$FIXER_MARKER_AT" -le "$NOW" ] \
+                && [ $((NOW - FIXER_MARKER_AT)) -le "$AGE_MIN_S" ]; then
+                FIXER_DISPATCH_MARKER_ACTIVE=true
+              fi
+            fi
             NEEDS_DISPATCH=false
             #
             # `REDFLAG_FIX_REFUNDED` accanto a `REDFLAG_FIX_ROUND`: su un 429 il
@@ -475,13 +504,13 @@ jobs:
                   ;;
               esac
             elif [ "$CLASS" = "E" ]; then
-              # La run sulla HEAD è il guard principale; il marker separato
-              # rende idempotente anche la finestra in cui GitHub ha accettato
-              # il dispatch ma `gh run list` non lo ha ancora indicizzato.
-              case "$POSTED_BODIES" in
-                *"$FIXER_DISPATCH_MARKER"*) ;; # già dispatchato su questo head
-                *) NEEDS_DISPATCH=true ;;
-              esac
+              # La run sulla HEAD è il guard principale. Il marker separato
+              # copre solo la finestra TTL in cui GitHub ha accettato il
+              # dispatch ma `gh run list` non lo ha ancora indicizzato; un
+              # marker scaduto non sopprime il nuovo rescue.
+              if [ "$FIXER_RUN_IN_FLIGHT" != "true" ] && [ "$FIXER_DISPATCH_MARKER_ACTIVE" != "true" ]; then
+                NEEDS_DISPATCH=true
+              fi
             fi
 
             # `case` e non `grep -qF`: `echo | grep -q` chiude la pipe al primo
@@ -508,6 +537,14 @@ jobs:
               RESCUE="\`gh workflow run pr-redflag-fixer.yml --repo $REPO --ref $BRANCH -f pr=$N\` — dispatch sulla HEAD \`${HEAD:0:7}\`; il workflow normalizza il target e riapplica tutti i gate 🔴-fix esistenti."
               if gh workflow run pr-redflag-fixer.yml --repo "$REPO" --ref "$BRANCH" -f "pr=$N"; then
                 echo "PR #$N: pr-redflag-fixer dispatchato sulla HEAD ${HEAD:0:7} (classe E)"
+                FIXER_DISPATCH_RUN_ID=$(gh run list --repo "$REPO" --workflow pr-redflag-fixer.yml --branch "$BRANCH" \
+                  --limit 30 --json databaseId,headSha,createdAt \
+                  --jq "[.[] | select((.headSha // \"\") == \"$HEAD\") | select((try (.createdAt | fromdateiso8601) catch -1) >= ($NOW - 120))] | sort_by(.createdAt) | last | .databaseId // empty" \
+                  2>/dev/null || true)
+                if ! printf '%s' "$FIXER_DISPATCH_RUN_ID" | grep -qE '^[0-9]+$'; then
+                  FIXER_DISPATCH_RUN_ID=pending
+                fi
+                FIXER_DISPATCH_MARKER="<!-- stale-pr-rescuer dispatch=pr-redflag-fixer head=${HEAD:0:7} run=$FIXER_DISPATCH_RUN_ID at=$NOW -->"
                 EXTRA_MARKER="$FIXER_DISPATCH_MARKER"
               else
                 echo "::warning::dispatch di pr-redflag-fixer fallito su PR #$N"
