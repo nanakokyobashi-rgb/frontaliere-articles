@@ -11804,6 +11804,11 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.stazioni-ferroviarie-ticino-sicurezza.title': 'Bahnhöfe im Tessin: Anmut und Sicherheit',
     'blog.article.stazioni-ferroviarie-ticino-sicurezza.excerpt': 'Anfrage an den Staatsrat von Daniele Piccaluga von der Lega dei Ticinesi zur Sicherheit und Sauberkeit der Bahnhöfe.',
     'blog.article.stazioni-ferroviarie-ticino-sicurezza.imageAlt': 'Bahnhof im Tessin mit abendlicher Beleuchtung',
+    'blog.article.bollettino-frontaliere-2026-09-17.title': 'Grenzgänger-Tagesbulletin – 17. September 2026: 12 Minuten Wartezeit in Bardonnex',
+    'blog.article.bollettino-frontaliere-2026-09-17.excerpt': 'Die Zahlen von heute, 17. September 2026, für Grenzgänger: die heute Morgen gemessenen Wartezeiten an den Übergängen, die Gemeinden mit dem günstigsten Benzin, der Franken-Euro-Kurs vom Schlusskurs und die neu ausgeschriebenen Stellen in der Schweiz. Täglich aus unserem Monitoring.',
+    'blog.article.bollettino-frontaliere-2026-09-17.imageAlt': 'Die Zahlen des Tages für Grenzgänger – 17. September 2026: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote',
+    'blog.article.bollettino-frontaliere-2026-09-17.seoDescription': 'Grenzgänger-Bulletin vom 17. September 2026: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.',
+    'blog.article.bollettino-frontaliere-2026-09-17.ogDescription': 'Die Zahlen vom 17. September 2026 für Grenzgänger: wie lange man heute Morgen an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, was der Franken heute wert ist und wie viele Stellen neu dazugekommen sind.',
 };
 
 export default blogMetaDe;

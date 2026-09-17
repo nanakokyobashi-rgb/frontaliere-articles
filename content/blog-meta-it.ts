@@ -11806,6 +11806,11 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.stazioni-ferroviarie-ticino-sicurezza.title': 'Stazioni ferroviarie in Ticino: decoro e sicurezza',
     'blog.article.stazioni-ferroviarie-ticino-sicurezza.excerpt': 'Interrogazione al Consiglio di Stato presentata da Daniele Piccaluga della Lega dei Ticinesi sulla sicurezza e pulizia delle stazioni.',
     'blog.article.stazioni-ferroviarie-ticino-sicurezza.imageAlt': 'Stazione ferroviaria in Ticino con illuminazione serale',
+    'blog.article.bollettino-frontaliere-2026-09-17.title': 'Bollettino del frontaliere – 17 settembre 2026: a Bardonnex 12 minuti di coda',
+    'blog.article.bollettino-frontaliere-2026-09-17.excerpt': 'I numeri di oggi, 17 settembre 2026, per chi attraversa il confine: le attese ai valichi misurate stamattina, i comuni dove la benzina costa meno, il cambio franco-euro aggiornato e i nuovi annunci di lavoro pubblicati in Svizzera. Dati del nostro monitoraggio, rilevati ogni giorno.',
+    'blog.article.bollettino-frontaliere-2026-09-17.imageAlt': 'I numeri del giorno per i frontalieri – 17 settembre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro',
+    'blog.article.bollettino-frontaliere-2026-09-17.seoDescription': 'Bollettino frontalieri del 17 settembre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
+    'blog.article.bollettino-frontaliere-2026-09-17.ogDescription': 'I numeri del 17 settembre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
 };
 
 export default blogMetaIt;
