@@ -19535,6 +19535,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'barometro-previdenza-raiffeisen-zhaw',
+    category: 'pensione',
+    date: '2026-09-17T10:27:05.723Z',
+    image: '/images/blog/barometro-previdenza-raiffeisen-zhaw.webp',
+    hasCalculator: true,
+    authorSlug: 'laura-bianchi',
+    authorName: 'Laura Bianchi',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

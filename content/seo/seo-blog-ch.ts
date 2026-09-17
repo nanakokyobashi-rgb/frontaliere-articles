@@ -84533,6 +84533,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-barometro-previdenza-raiffeisen-zhaw': {
+    title: 'Previdenza svizzera: record di risparmi e timori per l\'AVS',
+    description: 'Il Barometro Raiffeisen e ZHAW mostra condizioni previdenziali ai massimi storici (725 punti), ma emerge il timore del 39% degli intervistati per l\'AVS.',
+    keywords: 'frontalieri, ticino, svizzera, italia, previdenza, record, risparmi, timori',
+    ogTitle: 'Previdenza svizzera: record di risparmi e timori per l\'AVS',
+    ogDescription: 'Il sistema previdenziale svizzero raggiunge i massimi storici con 725 punti secondo il Barometro Raiffeisen e ZHAW. Cresce il pilastro 3a, ma resta l\'incertezza sull\'AVS.',
+    canonicalPath: '/articoli-svizzera/barometro-previdenza-raiffeisen-zhaw/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Previdenza svizzera: record di risparmi e timori per l'AVS",
+      "description": "Il Barometro Raiffeisen e ZHAW mostra condizioni previdenziali ai massimi storici (725 punti), ma emerge il timore del 39% degli intervistati per l'AVS.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/barometro-previdenza-raiffeisen-zhaw.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documenti previdenziali e calcolatrice su una scrivania in ufficio in Svizzera"
+      },
+      "datePublished": "2026-09-17T10:27:05+00:00",
+      "dateModified": "2026-09-17T10:27:05+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/barometro-previdenza-raiffeisen-zhaw/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -6521,6 +6521,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.atted-digitale-ticino-cyber-security.title': 'Ated chiede organismi permanenti per il digitale in Ticino',
     'blog.article.atted-digitale-ticino-cyber-security.excerpt': 'L\'associazione Ated chiede alla Cancelleria di Stato l\'istituzione di un Gruppo consultivo e di una Commissione cantonale per la Cyber Security.',
     'blog.article.atted-digitale-ticino-cyber-security.imageAlt': 'Incontro istituzionale a Castelgrande sulla trasformazione digitale in Ticino',
+    'blog.article.barometro-previdenza-raiffeisen-zhaw.title': 'Previdenza svizzera: record di risparmi e timori per l\'AVS',
+    'blog.article.barometro-previdenza-raiffeisen-zhaw.excerpt': 'Il Barometro Raiffeisen e ZHAW rileva condizioni previdenziali ai massimi storici con 725 punti, ma il 39% degli intervistati teme per il futuro dell\'AVS.',
+    'blog.article.barometro-previdenza-raiffeisen-zhaw.imageAlt': 'Documenti previdenziali e calcolatrice su una scrivania in ufficio in Svizzera',
 };
 
 export default blogMetaChIt;

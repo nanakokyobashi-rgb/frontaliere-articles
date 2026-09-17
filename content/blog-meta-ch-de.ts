@@ -6521,6 +6521,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.atted-digitale-ticino-cyber-security.title': 'Ated fordert ständige Stellen für den digitalen Raum im Tessin',
     'blog.article.atted-digitale-ticino-cyber-security.excerpt': 'Der Verband ATED beantragt bei der Staatskanzlei die Einrichtung einer Beratungsgruppe und einer kantonalen Cybersicherheitskommission.',
     'blog.article.atted-digitale-ticino-cyber-security.imageAlt': 'Institutionelles Treffen im Castelgrande zur digitalen Transformation im Tessin',
+    'blog.article.barometro-previdenza-raiffeisen-zhaw.title': 'Schweizer Vorsorge: Sparrekord und AHV-Befürchtungen',
+    'blog.article.barometro-previdenza-raiffeisen-zhaw.excerpt': 'Das Raiffeisen- und ZHAW-Barometer zeigt mit 725 Punkten Vorsorgebedingungen auf Rekordhoch, doch 39 Prozent der Befragten fürchten um die Zukunft der AHV.',
+    'blog.article.barometro-previdenza-raiffeisen-zhaw.imageAlt': 'Vorsorgedokumente und Taschenrechner auf einem Büroschreibtisch in der Schweiz',
 };
 
 export default blogMetaChDe;

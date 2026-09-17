@@ -6521,6 +6521,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.atted-digitale-ticino-cyber-security.title': 'Ated asks for permanent bodies for digital in Ticino',
     'blog.article.atted-digitale-ticino-cyber-security.excerpt': 'The Ated association asks the State Chancellery to establish an Advisory Group and a cantonal Commission for Cyber Security.',
     'blog.article.atted-digitale-ticino-cyber-security.imageAlt': 'Institutional meeting at Castelgrande on digital transformation in Ticino',
+    'blog.article.barometro-previdenza-raiffeisen-zhaw.title': 'Swiss Social Security: Savings Record and AVS Fears',
+    'blog.article.barometro-previdenza-raiffeisen-zhaw.excerpt': 'The Raiffeisen and ZHAW Barometer detects social security conditions at an all-time high with 725 points, but 39% of respondents fear for the future of the AVS.',
+    'blog.article.barometro-previdenza-raiffeisen-zhaw.imageAlt': 'Pension documents and calculator on an office desk in Switzerland',
 };
 
 export default blogMetaChEn;
