@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1944667/migros-delica-online-tre-partenze-giorno-vertici-stesso": {
-    "articleId": "migros-tre-partenze-vertici",
-    "ts": "2026-08-19T08:23:05.135Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/industria-e-costruzione%3a-ritorno-alla-crescita-nel-ii-trimestre/91918944": {
     "articleId": "industria-costruzione-crescita-q2",
     "ts": "2026-08-19T08:42:03.065Z",
@@ -2497,6 +2492,11 @@
   "https://www.seco.admin.ch/it/newnsb/sb5uskla-j19": {
     "articleId": "helene-budliger-artieda-dimissioni-seco",
     "ts": "2026-09-17T02:17:39.073Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/0zqf4ypmu5my": {
+    "articleId": "mercato-alloggio-svizzera-2025-2026",
+    "ts": "2026-09-17T02:27:37.460Z",
     "keyForm": 2
   }
 }

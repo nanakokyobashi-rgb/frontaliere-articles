@@ -84377,6 +84377,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-mercato-alloggio-svizzera-2025-2026': {
+    title: 'Mercato dell\'alloggio: tra crescita demografica e offerta',
+    description: 'Monitoraggio del mercato dell\'alloggio in Svizzera: situazione nel 2025 e 2026, crescita demografica, affitti e previsioni dell\'Ufficio federale',
+    keywords: 'frontalieri, ticino, svizzera, italia, mercato, dell, alloggio, crescita',
+    ogTitle: 'Mercato dell\'alloggio in Svizzera: analisi e previsioni',
+    ogDescription: 'Scopri i dati dell\'Ufficio federale delle abitazioni sul mercato immobiliare svizzero tra il 2025 e il 2026, l\'impatto della crescita demografica e le prospettive future per gli affitti.',
+    canonicalPath: '/articoli-svizzera/mercato-alloggio-svizzera-2025-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mercato dell'alloggio: tra crescita demografica e offerta",
+      "description": "Monitoraggio del mercato dell'alloggio in Svizzera: situazione nel 2025 e 2026, crescita demografica, affitti e previsioni dell'Ufficio federale",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/mercato-alloggio-svizzera-2025-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Mercato dell'alloggio in Svizzera con edifici residenziali"
+      },
+      "datePublished": "2026-09-17T02:27:37+00:00",
+      "dateModified": "2026-09-17T02:27:37+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/mercato-alloggio-svizzera-2025-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

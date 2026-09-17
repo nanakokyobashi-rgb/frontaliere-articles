@@ -2192,6 +2192,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'mercato-alloggio-svizzera-ufab': { it: 'mercato-alloggio-svizzera-ufab', en: 'housing-market-switzerland-ufab', de: 'wohnungsmarkt-schweiz-ufab', fr: 'marche-logement-suisse-ufab' },
  'spuhler-indeciso-bilaterali-iii': { it: 'spuhler-indeciso-bilaterali-iii', en: 'spuhler-undecided-bilateral-agreements-iii', de: 'spuhler-unentschlossen-bilaterale-vertrage-iii', fr: 'spuhler-indecis-bilaterales-iii' },
  'helene-budliger-artieda-dimissioni-seco': { it: 'helene-budliger-artieda-dimissioni-seco', en: 'helene-budliger-artieda-seco-resignation', de: 'helene-budliger-artieda-ruecktritt-seco', fr: 'helene-budliger-artieda-demission-seco' },
+ 'mercato-alloggio-svizzera-2025-2026': { it: 'mercato-alloggio-svizzera-2025-2026', en: 'housing-market-switzerland-2025-2026', de: 'wohnungsmarkt-schweiz-2025-2026', fr: 'marche-logement-suisse-2025-2026' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

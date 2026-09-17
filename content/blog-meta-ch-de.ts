@@ -6509,6 +6509,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.helene-budliger-artieda-dimissioni-seco.title': 'Rücktritt Staatssekretärin SECO helene budliger artieda',
     'blog.article.helene-budliger-artieda-dimissioni-seco.excerpt': 'Staatssekretärin Helene Budliger Artieda ist seit Ende März 2027 nach fast fünf Jahren an der Spitze des SECO effektiv zurückgetreten.',
     'blog.article.helene-budliger-artieda-dimissioni-seco.imageAlt': 'Bundesverwaltungsgebäude in Bern',
+    'blog.article.mercato-alloggio-svizzera-2025-2026.title': 'Wohnungsmarkt: zwischen Bevölkerungswachstum und Angebot',
+    'blog.article.mercato-alloggio-svizzera-2025-2026.excerpt': 'Analyse des Bundesamtes für Wohnungswesen zum Schweizer Immobilienmarkt in den Jahren 2025 und 2026 zwischen Bevölkerungswachstum und steigenden Mieten.',
+    'blog.article.mercato-alloggio-svizzera-2025-2026.imageAlt': 'Wohnungsmarkt in der Schweiz mit Wohngebäuden',
 };
 
 export default blogMetaChDe;

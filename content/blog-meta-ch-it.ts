@@ -6509,6 +6509,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.helene-budliger-artieda-dimissioni-seco.title': 'Dimissioni segretaria di stato SECO helene budliger artieda',
     'blog.article.helene-budliger-artieda-dimissioni-seco.excerpt': 'La segretaria di Stato Helene Budliger Artieda ha rassegnato le dimissioni effettive da fine marzo 2027 dopo quasi cinque anni alla guida della SECO.',
     'blog.article.helene-budliger-artieda-dimissioni-seco.imageAlt': 'Sede dell\'amministrazione federale a Berna',
+    'blog.article.mercato-alloggio-svizzera-2025-2026.title': 'Mercato dell\'alloggio: tra crescita demografica e offerta',
+    'blog.article.mercato-alloggio-svizzera-2025-2026.excerpt': 'Analisi dell\'Ufficio federale delle abitazioni sul mercato immobiliare svizzero nel 2025 e nel 2026, tra crescita demografica e affitti in aumento.',
+    'blog.article.mercato-alloggio-svizzera-2025-2026.imageAlt': 'Mercato dell\'alloggio in Svizzera con edifici residenziali',
 };
 
 export default blogMetaChIt;
