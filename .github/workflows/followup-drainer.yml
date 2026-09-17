@@ -188,7 +188,9 @@ jobs:
             exit 0
           fi
           GH_TOKEN="$runtime_pat" node scripts/ci/followup-drainer.mjs
+          rc=$?
           unset runtime_pat
+          exit "$rc"
 
       - name: Cleanup Firebase credentials
         if: always()

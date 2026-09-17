@@ -68,3 +68,26 @@ test('ogni consumer critico re-inietta il token runtime nel comando che muta Git
     assert.match(source(file), pattern, `${file}: manca il passaggio runtime del token`);
   }
 });
+
+test('issue-fix passa la capability workflows dalla shell runtime al prompt', () => {
+  const yaml = source('issue-fix.yml');
+  assert.match(yaml, /echo "has_workflows_token=false" >> "\$GITHUB_OUTPUT"/);
+  assert.match(yaml, /echo "has_workflows_token=true" >> "\$GITHUB_OUTPUT"/);
+  assert.match(yaml, /steps\.scope_guard\.outputs\.has_workflows_token/);
+  assert.doesNotMatch(
+    yaml,
+    /\$\{\{\s*env\.GITHUB_PAT_NANAKO\s*!=/,
+    'il prompt non deve valutare la presenza del PAT prima del caricamento runtime',
+  );
+});
+
+test('i consumer che puliscono runtime_pat conservano l’exit status del comando', () => {
+  const drainer = source('followup-drainer.yml');
+  assert.match(drainer, /GH_TOKEN="\$runtime_pat" node scripts\/ci\/followup-drainer\.mjs\n\s+rc=\$\?\n\s+unset runtime_pat\n\s+exit "\$rc"/);
+
+  const autorebase = source('pr-autorebase.yml');
+  assert.match(autorebase, /GH_TOKEN="\$runtime_pat" node scripts\/ci\/pr-autorebase\.mjs --dry-run\n\s+rc=\$\?/);
+  assert.match(autorebase, /GH_TOKEN="\$runtime_pat" node scripts\/ci\/pr-autorebase\.mjs\n\s+rc=\$\?/);
+  assert.match(autorebase, /unset runtime_pat\n\s+exit "\$rc"/,
+    'pr-autorebase: unset non deve mascherare un errore del consumer');
+});

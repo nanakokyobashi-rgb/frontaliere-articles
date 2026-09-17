@@ -136,10 +136,13 @@ jobs:
           fi
           if [ "${DRY_RUN:-false}" = "true" ]; then
             GH_TOKEN="$runtime_pat" node scripts/ci/pr-autorebase.mjs --dry-run
+            rc=$?
           else
             GH_TOKEN="$runtime_pat" node scripts/ci/pr-autorebase.mjs
+            rc=$?
           fi
           unset runtime_pat
+          exit "$rc"
 
       - name: Cleanup Firebase credentials
         if: always()
