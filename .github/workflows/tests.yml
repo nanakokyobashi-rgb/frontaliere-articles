@@ -779,14 +779,6 @@ jobs:
         continue-on-error: true
         run: node generator/scripts/load-rc-env.mjs
 
-      - name: Mint GitHub App token for Codex review
-        continue-on-error: true
-        env:
-          APP_ID: ${{ secrets.APP_ID }}
-          APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-        run: node scripts/ci/mint-app-token.mjs
-
       - name: Run Codex Luna Max review
         # Tetto sullo step (stessa classe del tetto sulla lane di fix in
         # issue-fix.yml). Qui il cap del job e' 360min ed e' CONDIVISO con la
@@ -812,10 +804,12 @@ jobs:
           REVIEW_TIER: ${{ steps.tier.outputs.tier }}
           INCREMENTAL_BASE: ${{ steps.tier.outputs.incremental_base }}
         with:
-          codex_github_token: ${{ env.APP_TOKEN || secrets.GITHUB_TOKEN }}
-          # The input expression may be empty when the value was loaded through
-          # GITHUB_ENV; the composite action also captures the inherited runtime
-          # GITHUB_PAT_NANAKO/GITHUB_PAT host-side and never passes it to Codex.
+          # This corpus repo has no installation of the site's GitHub App. Use
+          # the explicit run token only for the current-repository review so
+          # the accepted reviewer identity remains github-actions[bot]. The
+          # PAT loaded from Remote Config stays separate for corpus/cross-repo
+          # operations; neither token is an implicit fallback for the other.
+          codex_github_token: ${{ secrets.GITHUB_TOKEN }}
           codex_corpus_github_token: ${{ env.GITHUB_PAT_NANAKO || env.GITHUB_PAT }}
           codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
           review_marker: '<!-- CODEX_FALLBACK_REVIEW -->'

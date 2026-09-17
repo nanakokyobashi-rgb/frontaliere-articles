@@ -20,16 +20,45 @@ const followupWorkflow = fs.readFileSync(path.join(ROOT, '.github/workflows/post
 const issueDecomposeWorkflow = fs.readFileSync(path.join(ROOT, '.github/workflows/issue-decompose.yml'), 'utf8');
 const needsHumanWorkflow = fs.readFileSync(path.join(ROOT, '.github/workflows/needs-human-sweep.yml'), 'utf8');
 const testsWorkflow = fs.readFileSync(path.join(ROOT, '.github/workflows/tests.yml'), 'utf8');
-const codexBridgeWorkflowSources = [
-  '.github/workflows/issue-fix.yml',
-  '.github/workflows/issue-decompose.yml',
-  '.github/workflows/needs-human-sweep.yml',
-  '.github/workflows/pr-redcheck-fixer.yml',
-  '.github/workflows/pr-redflag-fixer.yml',
-].map((relativePath) => ({
-  relativePath,
-  source: fs.readFileSync(path.join(ROOT, relativePath), 'utf8'),
-}));
+const WORKFLOW_DIR = path.join(ROOT, '.github/workflows');
+const CODEX_ACTION_LINE = /^ {8}uses:\s*\.\/\.github\/actions\/claude-codex-fallback\s*$/m;
+
+function workflowStepBlocks(source) {
+  const blocks = [];
+  let current = null;
+  for (const line of source.split('\n')) {
+    if (/^ {6}- /.test(line)) {
+      if (current) blocks.push(current.join('\n'));
+      current = [line];
+    } else if (current) {
+      current.push(line);
+    }
+  }
+  if (current) blocks.push(current.join('\n'));
+  return blocks;
+}
+
+function activeWorkflowText(source) {
+  return source
+    .split('\n')
+    .filter((line) => !line.trim().startsWith('#'))
+    .join('\n');
+}
+
+const codexBridgeWorkflowSources = fs
+  .readdirSync(WORKFLOW_DIR)
+  .filter((name) => name.endsWith('.yml') || name.endsWith('.yaml'))
+  .sort()
+  .map((name) => ({
+    relativePath: `.github/workflows/${name}`,
+    source: fs.readFileSync(path.join(WORKFLOW_DIR, name), 'utf8'),
+  }))
+  .map((workflow) => ({
+    ...workflow,
+    callerSteps: workflowStepBlocks(workflow.source)
+      .filter((step) => CODEX_ACTION_LINE.test(step)),
+  }))
+  .filter(({ callerSteps }) => callerSteps.length > 0);
 
 function workflowStep(source, name) {
   const start = source.indexOf(`      - name: ${name}`);
@@ -313,6 +342,8 @@ test('the corpus review loads its host-side PAT before invoking Codex', () => {
   assert.match(testsWorkflow, /node generator\/scripts\/load-rc-env\.mjs/);
   assert.doesNotMatch(reviewStep, /claude_code_oauth_token:/,
     'la review del corpus deve restare sulla corsia Codex senza fallback Claude implicito');
+  assert.match(reviewStep, /codex_github_token: \$\{\{ secrets\.GITHUB_TOKEN \}\}/,
+    'la review corrente deve essere pubblicata dall’identità bot riconosciuta dal gate');
   assert.match(reviewStep, /codex_corpus_github_token: \$\{\{ env\.GITHUB_PAT_NANAKO \|\| env\.GITHUB_PAT \}\}/);
   assert.doesNotMatch(reviewStep, /GITHUB_PAT:\s*\$\{\{ env\.GITHUB_PAT \}\}/);
   assert.match(followupStep, /codex_corpus_github_token: \$\{\{ env\.GITHUB_PAT_NANAKO \|\| env\.GITHUB_PAT \}\}/);
@@ -338,22 +369,63 @@ test('the corpus review loads its host-side PAT before invoking Codex', () => {
   assert.match(mintGate, /ghPr\(\['pr', 'comment'/);
 });
 
-test('i bridge Codex operativi non ricadono su GITHUB_TOKEN', () => {
-  for (const { relativePath, source } of codexBridgeWorkflowSources) {
-    assert.match(
-      source,
-      /codex_github_token:\s+\$\{\{\s*env\.GITHUB_PAT_NANAKO\s*\}\}/,
-      `${relativePath}: manca il PAT esplicito per il bridge Codex`,
-    );
-    assert.doesNotMatch(
-      source,
-      /codex_github_token:[^\n]*secrets\.GITHUB_TOKEN/,
-      `${relativePath}: il bridge Codex non deve usare GITHUB_TOKEN come fallback`,
-    );
+test('ogni caller Codex usa una credenziale operativa esplicita e senza fallback implicito', () => {
+  assert.equal(
+    codexBridgeWorkflowSources.reduce((count, workflow) => count + workflow.callerSteps.length, 0),
+    8,
+    'il censimento dei caller Codex è cambiato: verificare ogni nuovo/ritirato workflow',
+  );
+
+  for (const { relativePath, source, callerSteps } of codexBridgeWorkflowSources) {
+    for (const caller of callerSteps) {
+      const activeCaller = activeWorkflowText(caller);
+      const tokenLines = activeCaller.match(/^ {10}codex_github_token:\s*.+$/gm) ?? [];
+      assert.equal(tokenLines.length, 1, `${relativePath}: il caller deve dichiarare un solo codex_github_token`);
+      const currentReviewUsesBotIdentity = relativePath === '.github/workflows/tests.yml';
+      if (currentReviewUsesBotIdentity) {
+        assert.match(
+          tokenLines[0],
+          /\$\{\{\s*secrets\.GITHUB_TOKEN\s*\}\}/,
+          `${relativePath}: la review corrente deve usare l’identità github-actions[bot]`,
+        );
+        assert.doesNotMatch(
+          tokenLines[0],
+          /\|\||env\.GITHUB_PAT_NANAKO|github\.token/,
+          `${relativePath}: il token bot della review non deve avere fallback o identità alternativa`,
+        );
+        const corpusTokenLines = activeCaller.match(/^ {10}codex_corpus_github_token:\s*.+$/gm) ?? [];
+        assert.equal(corpusTokenLines.length, 1,
+          `${relativePath}: il caller deve separare il PAT dalle operazioni corpus/cross-repo`);
+        assert.match(
+          corpusTokenLines[0],
+          /\$\{\{\s*env\.GITHUB_PAT_NANAKO\s*\|\|\s*env\.GITHUB_PAT\s*\}\}/,
+          `${relativePath}: il bridge corpus deve usare il PAT esplicito caricato da Remote Config`,
+        );
+      } else {
+        assert.match(
+          tokenLines[0],
+          /\$\{\{\s*env\.GITHUB_PAT_NANAKO\s*\}\}/,
+          `${relativePath}: il bridge Codex deve usare il PAT corpus esplicito`,
+        );
+        assert.doesNotMatch(
+          tokenLines[0],
+          /\|\||secrets\.GITHUB_TOKEN|github\.token|\bGITHUB_TOKEN\b/,
+          `${relativePath}: il bridge Codex non deve ricadere sul token del run`,
+        );
+      }
+
+      const callerStart = source.indexOf(caller);
+      const beforeCaller = source.slice(0, callerStart);
+      assert.match(
+        beforeCaller,
+        /node generator\/scripts\/load-rc-env\.mjs/,
+        `${relativePath}: il PAT deve essere caricato da Remote Config prima del bridge`,
+      );
+    }
   }
 });
 
-test('#1312: Lessons harvester non blocca Codex quando la quota Claude e\u0027 esaurita', () => {
+test('#1312/#1288: Lessons harvester conserva la lane Codex e il PAT operativo', () => {
   const quota = workflowStep(lessonsWorkflow, 'Pre-flight — Codex lane quota telemetry');
   const draft = workflowStep(lessonsWorkflow, 'Draft doc-rule proposal (Codex Luna Max — only if NOVEL patterns)');
 
@@ -363,8 +435,10 @@ test('#1312: Lessons harvester non blocca Codex quando la quota Claude e\u0027 e
     'il Lessons harvester deve usare l’action provider-neutral con Codex primario');
   assert.match(draft, /codex_auth_json: \$\{\{ secrets\.CODEX_AUTH_JSON \}\}/,
     'il workflow deve fornire l’autenticazione subscription al provider primario');
-  assert.match(draft, /codex_github_token: \$\{\{ secrets\.GITHUB_TOKEN \}\}/,
-    'il provider primario deve avere il token GitHub esplicito per il bridge');
+  assert.match(draft, /codex_github_token: \$\{\{ env\.GITHUB_PAT_NANAKO \}\}/,
+    'il provider primario deve avere il PAT esplicito per il bridge');
+  assert.match(lessonsWorkflow, /Load current-repository Codex credentials/,
+    'il PAT del bridge deve provenire dal loader Remote Config');
   assert.doesNotMatch(draft, /steps\.quota\.outputs\.quota_blocked/,
     'un beacon Claude attivo non deve saltare il tentativo Codex primario');
 });
