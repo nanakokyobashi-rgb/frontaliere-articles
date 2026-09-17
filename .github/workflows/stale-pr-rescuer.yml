@@ -459,7 +459,7 @@ jobs:
             # #576: la chiave (CLASSE, HEAD) da sola blocca il dispatch di B se
             # il PRIMO commento su un head esce PRIMA che il fixer posti
             # `REDFLAG_FIX_ROUND` — il fixer gira su un workflow separato dietro
-            # `redflag-fix-$PR` con `cancel-in-progress: false`, e questo stesso
+            # `redflag-fix-$BRANCH` con `cancel-in-progress: false`, e questo stesso
             # file documenta che GitHub può metterlo in coda ore. Se il
             # `continue` generico scattasse su quel marker, il dispatch non
             # partirebbe più su quell'head neanche dopo che `REDFLAG_FIX_ROUND`

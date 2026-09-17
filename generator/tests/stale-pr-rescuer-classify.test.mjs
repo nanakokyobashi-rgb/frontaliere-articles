@@ -953,7 +953,7 @@ test('#488 — B + marker in dry_run: non rilancia', opts, () => {
 //
 // Se il rescuer commenta la classe B su un head PRIMA che il fixer posti
 // `REDFLAG_FIX_ROUND` (il fixer è un workflow separato, in coda dietro
-// `redflag-fix-$PR` con `cancel-in-progress: false`, e può slittare ore), il
+// `redflag-fix-$BRANCH` con `cancel-in-progress: false`, e può slittare ore), il
 // marker generale `class=B head=X` finisce nei commenti passati. Quando
 // `REDFLAG_FIX_ROUND` arriva DOPO, un run successivo deve comunque rilanciare:
 // la chiave dell'azione è (rerun, HEAD), non (CLASSE, HEAD).
