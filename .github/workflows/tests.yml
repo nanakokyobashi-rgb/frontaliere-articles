@@ -779,7 +779,7 @@ jobs:
         continue-on-error: true
         run: node generator/scripts/load-rc-env.mjs
 
-      - name: Mint App token (primary identity, PAT fallback)
+      - name: Mint GitHub App token for Codex review
         continue-on-error: true
         env:
           APP_ID: ${{ secrets.APP_ID }}
