@@ -6494,6 +6494,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.malinteso-rendite-avs-moutier.title': 'Moutier: oltre 400 pensionati ricevono una doppia rendita AVS per errore',
     'blog.article.malinteso-rendite-avs-moutier.excerpt': 'Un malinteso tra Berna e Giura ha portato a un pagamento doppio delle rendite AVS, creando potenziali disagi finanziari per i pensionati.',
     'blog.article.malinteso-rendite-avs-moutier.imageAlt': 'Immagine di Moutier, con un anziano che controlla la propria rendita AVS.',
+    'blog.article.revolut-banca-svizzera-finma.title': 'Revolut punta a diventare banca completa in Svizzera',
+    'blog.article.revolut-banca-svizzera-finma.excerpt': 'La fintech britannica ha presentato domanda alla FINMA per ottenere una licenza bancaria elvetica e offrire conti con IBAN svizzero.',
+    'blog.article.revolut-banca-svizzera-finma.imageAlt': 'Revolut presenta domanda alla FINMA per licenza bancaria in Svizzera',
 };
 
 export default blogMetaChIt;

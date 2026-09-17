@@ -6494,6 +6494,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.malinteso-rendite-avs-moutier.title': 'Moutier: over 400 pensioners receive a double AVS pension by mistake',
     'blog.article.malinteso-rendite-avs-moutier.excerpt': 'A misunderstanding between Bern and Jura led to a double payment of AVS annuities, creating potential financial hardship for pensioners.',
     'blog.article.malinteso-rendite-avs-moutier.imageAlt': 'A scene from Moutier, featuring an elderly person checking their AVS pension.',
+    'blog.article.revolut-banca-svizzera-finma.title': 'Revolut aims to become a full bank in Switzerland',
+    'blog.article.revolut-banca-svizzera-finma.excerpt': 'The British fintech has applied to FINMA to obtain a Swiss banking license and offer accounts with Swiss IBANs.',
+    'blog.article.revolut-banca-svizzera-finma.imageAlt': 'Revolut applies to FINMA for a banking license in Switzerland',
 };
 
 export default blogMetaChEn;

@@ -6494,6 +6494,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.malinteso-rendite-avs-moutier.title': 'Moutier: Über 400 Rentner erhalten versehentlich eine doppelte AHV-Rente',
     'blog.article.malinteso-rendite-avs-moutier.excerpt': 'Ein Missverständnis zwischen Bern und Jura hat zu einer doppelten Auszahlung der AHV-Renten geführt und potenzielle finanzielle Unannehmlichkeiten für Rentner geschaffen.',
     'blog.article.malinteso-rendite-avs-moutier.imageAlt': 'Ein Bild von Moutier, wo eine ältere Person ihre AHV-Rente überprüft.',
+    'blog.article.revolut-banca-svizzera-finma.title': 'Revolut zielt darauf ab, eine vollständige Bank in der Schweiz zu werden',
+    'blog.article.revolut-banca-svizzera-finma.excerpt': 'Das britische Fintech beantragte bei der FINMA eine Schweizer Banklizenz und bot Konten bei der Schweizer IBAN an.',
+    'blog.article.revolut-banca-svizzera-finma.imageAlt': 'Revolut beantragt FINMA-Banklizenz in der Schweiz',
 };
 
 export default blogMetaChDe;

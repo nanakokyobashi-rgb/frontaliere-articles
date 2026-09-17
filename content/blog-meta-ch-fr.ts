@@ -6494,6 +6494,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.malinteso-rendite-avs-moutier.title': 'Moutier : plus de 400 retraités reçoivent une double rente AVS par erreur',
     'blog.article.malinteso-rendite-avs-moutier.excerpt': 'Un malentendu entre Berne et le Jura a conduit à un doublement des rentes AVS, créant des difficultés financières potentielles pour les retraités.',
     'blog.article.malinteso-rendite-avs-moutier.imageAlt': 'Une image de Moutier, avec une personne âgée vérifiant sa rente AVS.',
+    'blog.article.revolut-banca-svizzera-finma.title': 'Revolut vise à devenir une banque complète en Suisse',
+    'blog.article.revolut-banca-svizzera-finma.excerpt': 'La fintech britannique a déposé une demande auprès de la FINMA pour obtenir une licence bancaire suisse et proposer des comptes avec IBAN suisse.',
+    'blog.article.revolut-banca-svizzera-finma.imageAlt': 'Revolut demande une licence bancaire à la FINMA en Suisse',
 };
 
 export default blogMetaChFr;
