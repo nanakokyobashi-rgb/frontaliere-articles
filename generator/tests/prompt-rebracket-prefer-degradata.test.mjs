@@ -4,8 +4,8 @@
  * PARENT: #460. Il ri-bracketing (`_eseguiRibracket`) si arma SOLO quando
  * `err.retryRequestTokenBudget` viene dal roster (`_budgetDettato`), cioe'
  * quando la libreria ha visto ALMENO un modello saltato per cap di INPUT. Ma
- * l'unico membro di `PREFERRED_GENERATION_MODELS` (claude-cli/haiku) non
- * dichiara nessun cap di input, quindi non puo' MAI essere fra i modelli
+ * i membri CLI di `PREFERRED_GENERATION_MODELS` (Codex e claude-cli/haiku) non
+ * dichiarano nessun cap di input, quindi non possono MAI essere fra i modelli
  * saltati per dimensione: se ha fallito, ha fallito per un'altra ragione
  * (timeout, quota, rate-limit) che ridimensionare il prompt non cambia.
  * Ricontattarlo con lo stesso `prefer` dopo l'armo e' spendere una chiamata

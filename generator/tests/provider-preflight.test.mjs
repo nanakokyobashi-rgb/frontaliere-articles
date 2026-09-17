@@ -1,5 +1,8 @@
 import test, { afterEach, beforeEach } from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
 import { AI_MODELS, GH_MODELS_CATALOG_URL } from '../scripts/lib/ai-models.mjs';
 import {
   classifyProviderProbe,
@@ -80,6 +83,74 @@ test('il preflight include il Codex action-owned quando il broker è pronto', as
     }
   }
 });
+
+test('il preflight include il fallback Claude quando la lane body è autenticata', async () => {
+  const names = [
+    'HAIKU_FALLBACK_GATE',
+    'ENABLE_HAIKU_ARTICLE_FALLBACK',
+    'ENABLE_CODEX_ARTICLE_FALLBACK',
+    'CODEX_AUTH_BROKER_SOCKET',
+    'CLAUDE_CODE_OAUTH_TOKEN',
+    'CLAUDE_CLI_BIN',
+  ];
+  const previous = Object.fromEntries(names.map((name) => [name, process.env[name]]));
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'provider-preflight-'));
+  const cliPath = path.join(tempDir, 'claude');
+  fs.writeFileSync(cliPath, '#!/bin/sh\nexit 0\n');
+  fs.chmodSync(cliPath, 0o755);
+  process.env.HAIKU_FALLBACK_GATE = '1';
+  process.env.ENABLE_HAIKU_ARTICLE_FALLBACK = '1';
+  process.env.CLAUDE_CODE_OAUTH_TOKEN = 'preflight-claude-test-token';
+  process.env.CLAUDE_CLI_BIN = cliPath;
+  delete process.env.ENABLE_CODEX_ARTICLE_FALLBACK;
+  delete process.env.CODEX_AUTH_BROKER_SOCKET;
+  try {
+    const report = await runProviderPreflight({
+      lookup: async () => [],
+      fetchImpl: async () => ({ status: 200 }),
+      now: () => '2026-09-14T12:00:00.000Z',
+    });
+    assert.ok(report.readyProviders.includes('claude_cli'));
+  } finally {
+    for (const name of names) {
+      if (previous[name] === undefined) delete process.env[name];
+      else process.env[name] = previous[name];
+    }
+    fs.rmSync(tempDir, { recursive: true, force: true });
+  }
+});
+
+test('il preflight esclude Claude se il token esiste ma il CLI non è eseguibile', async () => {
+  const names = [
+    'HAIKU_FALLBACK_GATE',
+    'ENABLE_HAIKU_ARTICLE_FALLBACK',
+    'CLAUDE_CODE_OAUTH_TOKEN',
+    'CLAUDE_CLI_BIN',
+  ];
+  const previous = Object.fromEntries(names.map((name) => [name, process.env[name]]));
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'provider-preflight-'));
+  process.env.HAIKU_FALLBACK_GATE = '1';
+  process.env.ENABLE_HAIKU_ARTICLE_FALLBACK = '1';
+  process.env.CLAUDE_CODE_OAUTH_TOKEN = 'preflight-claude-test-token';
+  process.env.CLAUDE_CLI_BIN = path.join(tempDir, 'missing-claude');
+  try {
+    const report = await runProviderPreflight({
+      models: [AI_MODELS.CLAUDE_CLI_HAIKU],
+      lookup: async () => [],
+      fetchImpl: async () => ({ status: 200 }),
+    });
+    assert.equal(report.ready, false);
+    assert.equal(report.providers[0].status, 'provider_unavailable');
+    assert.equal(report.providers[0].reason, 'cli_not_executable');
+  } finally {
+    for (const name of names) {
+      if (previous[name] === undefined) delete process.env[name];
+      else process.env[name] = previous[name];
+    }
+    fs.rmSync(tempDir, { recursive: true, force: true });
+  }
+});
+
 test('GitHub Models preflight usa il successore e tratta il brownout 410 come provider non disponibile', async () => {
   process.env.GH_MODELS_PAT = 'preflight-test-pat';
   const calls = [];
