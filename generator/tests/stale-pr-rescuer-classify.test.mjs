@@ -159,7 +159,7 @@ function reviews({
  * Esegue il blocco `run:` con `gh` e `date` stubbati e restituisce
  * `{ labeled, comments, stdout }`.
  */
-function runScan({ prs, checks, reviews: revs, comments: posted = [], dryRun = false }) {
+function runScan({ prs, checks, reviews: revs, comments: posted = [], fixerRuns = [], dryRun = false }) {
   const dir = mkdtempSync(path.join(tmpdir(), 'stale-pr-rescuer-'));
   try {
     const bin = path.join(dir, 'bin');
@@ -169,14 +169,16 @@ function runScan({ prs, checks, reviews: revs, comments: posted = [], dryRun = f
     const fixChecks = path.join(dir, 'checks.json');
     const fixReviews = path.join(dir, 'reviews.json');
     const fixComments = path.join(dir, 'comments.json');
+    const fixFixerRuns = path.join(dir, 'fixer-runs.json');
     writeFileSync(calls, '');
     writeFileSync(fixPrs, JSON.stringify(prs));
     writeFileSync(fixChecks, JSON.stringify(checks));
     writeFileSync(fixReviews, JSON.stringify(revs));
     writeFileSync(fixComments, JSON.stringify(posted));
+    writeFileSync(fixFixerRuns, JSON.stringify(fixerRuns));
 
-    // `gh`: serve le QUATTRO letture del rescuer e registra le quattro
-    // scritture (add-label, remove-label, comment, workflow run). Ogni
+    // `gh`: serve le letture del rescuer e registra le scritture
+    // (add-label, remove-label, comment, workflow run). Ogni
     // scrittura finisce in `calls` in una forma greppabile dal test.
     //
     // Il ramo `api` scarta i flag PRIMA di leggere il path: dal fix della #314
@@ -247,7 +249,12 @@ case "$sub" in
     # \`gh run rerun\` e' la SCRITTURA, e finisce in \`calls\` come le altre.
     action="$1"; shift
     case "$action" in
-      list) echo 4242 ;;
+      list)
+        case " $* " in
+          *"pr-redflag-fixer.yml"*) cat ${JSON.stringify(fixFixerRuns)} ;;
+          *) echo 4242 ;;
+        esac
+        ;;
       rerun)
         printf 'RUN_RERUN %s\\n' "$1" >> ${JSON.stringify(calls)}
         ;;
@@ -734,7 +741,51 @@ test('D non allarga l\'insieme delle PR etichettate', opts, () => {
   }
 });
 
-// ── 8. #488: classe B dispatcha pr-review-loop se il fixer ha già chiuso il 🔴 ─
+// ── 8. Classe E: il fixer non deve restare senza un trigger ──────────────────
+//
+// La review è sulla HEAD corrente e contiene un 🔴 Important, ma non esiste
+// nessuna run recente di `pr-redflag-fixer.yml` sulla stessa HEAD. La cura è un
+// dispatch esplicito della nuova maniglia, con la PR come input obbligatorio.
+
+test('E — 🔴 sulla HEAD senza run recente del fixer: dispatch della PR', opts, () => {
+  const r = runScan({
+    prs: openPr(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({
+      commit: HEAD_SHA,
+      body: '🔴 **Important**: il fixer deve essere riattivato',
+    }),
+    fixerRuns: [],
+  });
+  assert.equal(r.workflowRuns.length, 1, `Atteso UN dispatch del fixer: ${r.workflowRuns.join(' | ')}\n${r.stdout}`);
+  assert.match(r.workflowRuns[0], /pr-redflag-fixer\.yml/);
+  assert.match(r.workflowRuns[0], /--ref fix\/qualcosa/);
+  assert.match(r.workflowRuns[0], /-f pr=901/);
+  assert.deepEqual(r.reruns, [], `E non deve rilanciare tests: ${r.reruns.join(' | ')}`);
+  assert.match(only(r), /class=E/);
+});
+
+test('E — una run del fixer già in volo sulla HEAD non viene duplicata', opts, () => {
+  const r = runScan({
+    prs: openPr(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({
+      commit: HEAD_SHA,
+      body: '🔴 **Important**: il fixer è già stato dispatchato',
+    }),
+    fixerRuns: [{
+      databaseId: 7001,
+      headSha: HEAD_SHA,
+      status: 'in_progress',
+      createdAt: isoAgo(0.5),
+    }],
+  });
+  assert.deepEqual(r.workflowRuns, [], `Il fixer è già in volo: nessun secondo dispatch ammesso.\n${r.stdout}`);
+  assert.deepEqual(r.comments, [], `La near-miss non deve pubblicare un rescue duplicato.\n${r.stdout}`);
+  assert.deepEqual(r.reruns, []);
+});
+
+// ── 9. #488: classe B dispatcha pr-review-loop se il fixer ha già chiuso il 🔴 ─
 //
 // LAST_CID == HEAD + 🔴 Important è lo stato di #484: il fixer ha aperto una
 // issue e aggiornato il body, senza commit. `tests` non riparte, quindi
@@ -742,7 +793,14 @@ test('D non allarga l\'insieme delle PR etichettate', opts, () => {
 // commit nuovo — la cura sbagliata, perché il 🔴 è già chiuso proceduralmente.
 // Il segnale deterministico è il marker `<!-- REDFLAG_FIX_ROUND:` sul thread.
 
-const classB = ({ posted = [], dryRun = false } = {}) =>
+const FIXER_RUN_OLD = {
+  databaseId: 7002,
+  headSha: HEAD_SHA,
+  status: 'completed',
+  createdAt: isoAgo(1),
+};
+
+const classB = ({ posted = [], fixerRuns = [FIXER_RUN_OLD], dryRun = false } = {}) =>
   runScan({
     prs: openPr(),
     checks: checkRuns({ concl: 'success' }),
@@ -751,6 +809,7 @@ const classB = ({ posted = [], dryRun = false } = {}) =>
       body: '🔴 **Important**: apri una issue di follow-up e linkala prima del merge',
     }),
     comments: posted,
+    fixerRuns,
     dryRun,
   });
 
