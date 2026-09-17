@@ -11803,6 +11803,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.leroy-merlin-lavoro-varese.title': 'Leroy Merlin: nuove opportunità di lavoro nell\'area di Varese',
     'blog.article.leroy-merlin-lavoro-varese.excerpt': 'Novità per le opportunità lavorative nel settore retail e GDO nell\'area di Varese con le selezioni aperte da Leroy Merlin.',
     'blog.article.leroy-merlin-lavoro-varese.imageAlt': 'Opportunità di lavoro Leroy Merlin nell area di Varese',
+    'blog.article.stazioni-ferroviarie-ticino-sicurezza.title': 'Stazioni ferroviarie in Ticino: decoro e sicurezza',
+    'blog.article.stazioni-ferroviarie-ticino-sicurezza.excerpt': 'Interrogazione al Consiglio di Stato presentata da Daniele Piccaluga della Lega dei Ticinesi sulla sicurezza e pulizia delle stazioni.',
+    'blog.article.stazioni-ferroviarie-ticino-sicurezza.imageAlt': 'Stazione ferroviaria in Ticino con illuminazione serale',
 };
 
 export default blogMetaIt;

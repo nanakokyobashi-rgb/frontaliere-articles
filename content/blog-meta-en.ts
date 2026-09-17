@@ -11802,6 +11802,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.leroy-merlin-lavoro-varese.title': 'Leroy Merlin: new job opportunities in the Varese area',
     'blog.article.leroy-merlin-lavoro-varese.excerpt': 'New for job opportunities in the retail and large-scale retail sector in the Varese area with the selections opened by Leroy Merlin.',
     'blog.article.leroy-merlin-lavoro-varese.imageAlt': 'Leroy Merlin job opportunities in the Varese area',
+    'blog.article.stazioni-ferroviarie-ticino-sicurezza.title': 'Railway stations in Ticino: decorum and safety',
+    'blog.article.stazioni-ferroviarie-ticino-sicurezza.excerpt': 'Question to the Council of State submitted by Daniele Piccaluga of the Ticinese League on the safety and cleanliness of the stations.',
+    'blog.article.stazioni-ferroviarie-ticino-sicurezza.imageAlt': 'Railway station in Ticino with evening lighting',
 };
 
 export default blogMetaEn;

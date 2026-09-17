@@ -11801,6 +11801,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.leroy-merlin-lavoro-varese.title': 'Leroy Merlin: Neue Beschäftigungsmöglichkeiten im Raum Varese',
     'blog.article.leroy-merlin-lavoro-varese.excerpt': 'Neuheiten für Karrieremöglichkeiten im Einzelhandel und Großhandelsunternehmen im Bereich Varese mit den von Leroy Merlin eröffneten Auswahlmöglichkeiten.',
     'blog.article.leroy-merlin-lavoro-varese.imageAlt': 'Leroy Merlin Stellenangebote im Raum Varese',
+    'blog.article.stazioni-ferroviarie-ticino-sicurezza.title': 'Bahnhöfe im Tessin: Anmut und Sicherheit',
+    'blog.article.stazioni-ferroviarie-ticino-sicurezza.excerpt': 'Anfrage an den Staatsrat von Daniele Piccaluga von der Lega dei Ticinesi zur Sicherheit und Sauberkeit der Bahnhöfe.',
+    'blog.article.stazioni-ferroviarie-ticino-sicurezza.imageAlt': 'Bahnhof im Tessin mit abendlicher Beleuchtung',
 };
 
 export default blogMetaDe;
