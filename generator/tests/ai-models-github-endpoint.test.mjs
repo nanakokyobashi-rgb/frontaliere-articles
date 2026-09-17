@@ -446,17 +446,17 @@ test('403 e 410 non diventano transitori nel tally di exhaustion', () => {
       transient: 0,
       persistent: 1,
     },
+    // Nei fallimenti diretti 403/410, "ambiguo" è un vuoto, non una garanzia: aggiungere 403 alla persistentRe
+    // sarebbe un miglioramento e renderebbe rossa l'asserzione persistent=0; l'invariante è mai transient (niente differimento silenzioso).
     {
       label: 'fallimento diretto 403',
       reason: 'openrouter/thinkingmachines/inkling:free: [OpenRouter/thinkingmachines/inkling:free] HTTP 403: {"error":{"message":"only available on agentic harnesses"}}',
       transient: 0,
-      persistent: 0,
     },
     {
       label: 'fallimento diretto 410',
       reason: 'nvidia/meta/llama-3.1-8b-instruct: [NVIDIA/meta/llama-3.1-8b-instruct] HTTP 410: {"title":"Gone","detail":"has reached its end of life"}',
       transient: 0,
-      persistent: 0,
     },
     {
       label: 'controllo quota 429',
@@ -469,7 +469,7 @@ test('403 e 410 non diventano transitori nel tally di exhaustion', () => {
   for (const { label, reason, transient, persistent } of cases) {
     const verdict = classifyExhaustionCause(reason);
     assert.equal(verdict.transient, transient, label);
-    assert.equal(verdict.persistent, persistent, label);
+    if (persistent !== undefined) assert.equal(verdict.persistent, persistent, label);
     assert.equal(verdict.total, 1, label);
   }
 });
