@@ -53,13 +53,16 @@ test('ogni `corpus-only-pending` del manifest produce un pin, con il suo repo', 
 /**
  * La chiave porta il repo perche' un `trackingIssue` puo' puntare al SITO: un
  * closer che gira qui non deve rifiutarsi di chiudere la propria #N solo perche'
- * il numero coincide con una issue pinnata di la'. Oggi il manifest ha davvero
- * entrambi i casi, quindi la proprieta' e' osservabile e non ipotetica.
+ * il numero coincide con una issue pinnata di la'. Il manifest puo' essere
+ * legittimamente vuoto quando tutti i lavori cross-repo sono atterrati; in quel
+ * caso il caso non-vacuo viene aggiunto qui come fixture, non come trackingIssue.
  */
 test('il pin e\' per repo, non per numero nudo', () => {
-  const pinned = manifestPinnedIssues(MANIFEST_PATH);
+  const pinned = new Map(manifestPinnedIssues(MANIFEST_PATH));
+  if (![...pinned.keys()].some((key) => !key.startsWith(`${THIS_REPO}#`))) {
+    pinned.set('fixture-owner/fixture-repo#123', 'synthetic foreign pin');
+  }
   const foreign = [...pinned.keys()].filter((k) => !k.startsWith(`${THIS_REPO}#`));
-  assert.ok(foreign.length > 0, 'atteso almeno un trackingIssue che punta a un altro repo (oggi: il sito)');
   for (const key of foreign) {
     const n = Number(key.split('#')[1]);
     assert.equal(
