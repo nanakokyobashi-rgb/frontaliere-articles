@@ -2191,6 +2191,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'paradiso-trading-risorse-naturali': { it: 'paradiso-trading-risorse-naturali', en: 'paradise-trading-natural-resources', de: 'paradies-trading-naturressourcen', fr: 'paradis-trading-ressources-naturelles' },
  'mercato-alloggio-svizzera-ufab': { it: 'mercato-alloggio-svizzera-ufab', en: 'housing-market-switzerland-ufab', de: 'wohnungsmarkt-schweiz-ufab', fr: 'marche-logement-suisse-ufab' },
  'spuhler-indeciso-bilaterali-iii': { it: 'spuhler-indeciso-bilaterali-iii', en: 'spuhler-undecided-bilateral-agreements-iii', de: 'spuhler-unentschlossen-bilaterale-vertrage-iii', fr: 'spuhler-indecis-bilaterales-iii' },
+ 'helene-budliger-artieda-dimissioni-seco': { it: 'helene-budliger-artieda-dimissioni-seco', en: 'helene-budliger-artieda-seco-resignation', de: 'helene-budliger-artieda-ruecktritt-seco', fr: 'helene-budliger-artieda-demission-seco' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

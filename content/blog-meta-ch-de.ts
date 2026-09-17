@@ -6506,6 +6506,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.spuhler-indeciso-bilaterali-iii.title': 'Spuhler (Stadler Rail): Ich bin unentschlossen über die Bilateralen III',
     'blog.article.spuhler-indeciso-bilaterali-iii.excerpt': 'Der Präsident von Stadler Rail äußert Zweifel an dem neuen Paket von Vereinbarungen mit der EU, die wirtschaftliche Vorteile und institutionelle Herausforderungen ausgleichen.',
     'blog.article.spuhler-indeciso-bilaterali-iii.imageAlt': 'Peter Spuhler, Verwaltungsratspräsident von Stadler Rail',
+    'blog.article.helene-budliger-artieda-dimissioni-seco.title': 'Rücktritt Staatssekretärin SECO helene budliger artieda',
+    'blog.article.helene-budliger-artieda-dimissioni-seco.excerpt': 'Staatssekretärin Helene Budliger Artieda ist seit Ende März 2027 nach fast fünf Jahren an der Spitze des SECO effektiv zurückgetreten.',
+    'blog.article.helene-budliger-artieda-dimissioni-seco.imageAlt': 'Bundesverwaltungsgebäude in Bern',
 };
 
 export default blogMetaChDe;

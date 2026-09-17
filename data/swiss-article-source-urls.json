@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/politica/1944665/koller-lex-stranieri-terreni-immobili-vite-vendita-giro": {
-    "articleId": "revisione-lex-koller-immobiliare",
-    "ts": "2026-08-19T07:50:31.587Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1944667/migros-delica-online-tre-partenze-giorno-vertici-stesso": {
     "articleId": "migros-tre-partenze-vertici",
     "ts": "2026-08-19T08:23:05.135Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/spuhler-%28stadler-rail%29%3a-%22sono-indeciso-sui-bilaterali-iii%22/92071053": {
     "articleId": "spuhler-indeciso-bilaterali-iii",
     "ts": "2026-09-17T02:03:42.052Z",
+    "keyForm": 2
+  },
+  "https://www.seco.admin.ch/it/newnsb/sb5uskla-j19": {
+    "articleId": "helene-budliger-artieda-dimissioni-seco",
+    "ts": "2026-09-17T02:17:39.073Z",
     "keyForm": 2
   }
 }

@@ -6506,6 +6506,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.spuhler-indeciso-bilaterali-iii.title': 'Spuhler (Stadler Rail): I am undecided on bilateral III',
     'blog.article.spuhler-indeciso-bilaterali-iii.excerpt': 'The president of Stadler Rail expresses doubts about the new package of agreements with the EU, balancing economic advantages and institutional criticalities.',
     'blog.article.spuhler-indeciso-bilaterali-iii.imageAlt': 'Peter Spuhler, chairman of Stadler Rail',
+    'blog.article.helene-budliger-artieda-dimissioni-seco.title': 'Resignation Secretary of State SECO Helene Budliger Artieda',
+    'blog.article.helene-budliger-artieda-dimissioni-seco.excerpt': 'Secretary of State Helene Budliger Artieda has resigned effective late March 2027 after nearly five years at the helm of SECO.',
+    'blog.article.helene-budliger-artieda-dimissioni-seco.imageAlt': 'Federal administration building in Bern',
 };
 
 export default blogMetaChEn;

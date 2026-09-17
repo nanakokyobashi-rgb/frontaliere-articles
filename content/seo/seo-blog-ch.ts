@@ -84338,6 +84338,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-helene-budliger-artieda-dimissioni-seco': {
+    title: 'Dimissioni segretaria di stato SECO helene budliger artieda',
+    description: 'Helene Budliger Artieda lascia la guida della SECO a fine marzo 2027. Scopri i dettagli sull\'annuncio, il bilancio del mandato e le procedure di successione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, dimissioni, segretaria, stato, seco',
+    ogTitle: 'Dimissioni segretaria di Stato SECO Helene Budliger Artieda',
+    ogDescription: 'La segretaria di Stato dell\'economia Helene Budliger Artieda ha annunciato le dimissioni effettive da fine marzo 2027. Aperta la procedura per la successione all\'interno dell\'amministrazione federale svizzera.',
+    canonicalPath: '/articoli-svizzera/helene-budliger-artieda-dimissioni-seco/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Dimissioni segretaria di stato SECO helene budliger artieda",
+      "description": "Helene Budliger Artieda lascia la guida della SECO a fine marzo 2027. Scopri i dettagli sull'annuncio, il bilancio del mandato e le procedure di successione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/helene-budliger-artieda-dimissioni-seco.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sede dell'amministrazione federale a Berna"
+      },
+      "datePublished": "2026-09-17T02:17:38+00:00",
+      "dateModified": "2026-09-17T02:17:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/helene-budliger-artieda-dimissioni-seco/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
