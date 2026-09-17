@@ -19,6 +19,10 @@ test('riattiva il gate sugli eventi che possono cambiare review, check o HEAD', 
   assert.match(source, /types: \[submitted, edited, dismissed\]/);
   assert.match(source, /workflow_run:/);
   assert.match(source, /workflows: \[tests\]/);
+  assert.match(source, /concurrency:\s*\n\s+# Every trigger below calls the same idempotent gate\./);
+  assert.match(source, /group: native-automerge-\$\{\{ github\.event\.pull_request\.head\.repo\.full_name \|\| github\.event\.workflow_run\.head_repository\.full_name \|\| github\.repository \}\}-\$\{\{ github\.event\.pull_request\.head\.ref \|\| github\.event\.workflow_run\.head_branch \|\| github\.run_id \}\}/);
+  assert.doesNotMatch(source, /group: native-automerge-.*pull_requests\[0\]\.number/);
+  assert.match(source, /cancel-in-progress: true/);
   assert.match(source, /NATIVE_AUTOMERGE_BOOTSTRAP_READY=false/);
 });
 
