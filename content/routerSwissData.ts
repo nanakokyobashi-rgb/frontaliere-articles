@@ -2195,6 +2195,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'mercato-alloggio-svizzera-2025-2026': { it: 'mercato-alloggio-svizzera-2025-2026', en: 'housing-market-switzerland-2025-2026', de: 'wohnungsmarkt-schweiz-2025-2026', fr: 'marche-logement-suisse-2025-2026' },
  'sorveglianza-digitale-sanita-guida': { it: 'sorveglianza-digitale-sanita-guida', en: 'digital-surveillance-healthcare-guide', de: 'digitale-ueberwachung-gesundheitswesen-leitfaden', fr: 'surveillance-numerique-sante-guide' },
  'accordo-mercosur-agricoltura-svizzera': { it: 'accordo-mercosur-agricoltura-svizzera', en: 'switzerland-mercosur-agreement-agriculture', de: 'schweiz-mercosur-abkommen-landwirtschaft', fr: 'accord-mercosur-agriculture-suisse' },
+ 'atted-digitale-ticino-cyber-security': { it: 'atted-digitale-ticino-cyber-security', en: 'atted-digital-ticino-cyber-security', de: 'atted-digitales-tessin-cyber-sicherheit', fr: 'atted-numerique-ticino-cybersecurite' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

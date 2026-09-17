@@ -6518,6 +6518,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.accordo-mercosur-agricoltura-svizzera.title': 'Il Consiglio nazionale approva l\'accordo con il Mercosur',
     'blog.article.accordo-mercosur-agricoltura-svizzera.excerpt': 'Via libera del Consiglio nazionale all\'intesa commerciale con il Mercosur. Stanziati 517 milioni per l\'agricoltura e 25 milioni contro la deforestazione.',
     'blog.article.accordo-mercosur-agricoltura-svizzera.imageAlt': 'Palazzo federale a Berna durante una sessione parlamentare.',
+    'blog.article.atted-digitale-ticino-cyber-security.title': 'Ated chiede organismi permanenti per il digitale in Ticino',
+    'blog.article.atted-digitale-ticino-cyber-security.excerpt': 'L\'associazione Ated chiede alla Cancelleria di Stato l\'istituzione di un Gruppo consultivo e di una Commissione cantonale per la Cyber Security.',
+    'blog.article.atted-digitale-ticino-cyber-security.imageAlt': 'Incontro istituzionale a Castelgrande sulla trasformazione digitale in Ticino',
 };
 
 export default blogMetaChIt;

@@ -84494,6 +84494,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-atted-digitale-ticino-cyber-security': {
+    title: 'Ated chiede organismi permanenti per il digitale in Ticino',
+    description: 'Ated chiede alla Cancelleria di Stato due organismi permanenti per la trasformazione digitale e la Cyber Security in Ticino. Scopri i dettagli della proposta.',
+    keywords: 'frontalieri, ticino, svizzera, italia, ated, chiede, organismi, permanenti',
+    ogTitle: 'Ated chiede organismi permanenti per il digitale in Ticino',
+    ogDescription: 'L\'associazione Ated chiede alla Cancelleria di Stato e a Norman Gobbi l\'istituzione di un Gruppo consultivo per il digitale e di una Commissione cantonale per la Cyber Security.',
+    canonicalPath: '/articoli-svizzera/atted-digitale-ticino-cyber-security/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ated chiede organismi permanenti per il digitale in Ticino",
+      "description": "Ated chiede alla Cancelleria di Stato due organismi permanenti per la trasformazione digitale e la Cyber Security in Ticino. Scopri i dettagli della proposta.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/atted-digitale-ticino-cyber-security.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Incontro istituzionale a Castelgrande sulla trasformazione digitale in Ticino"
+      },
+      "datePublished": "2026-09-17T02:56:11+00:00",
+      "dateModified": "2026-09-17T02:56:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/atted-digitale-ticino-cyber-security/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

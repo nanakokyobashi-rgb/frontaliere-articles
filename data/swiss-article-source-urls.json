@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/ldqy5vvaxvmzrq8xebcwj": {
-    "articleId": "indennita-malattia-sistema-funziona-bene",
-    "ts": "2026-08-19T09:38:21.047Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1944761/deficit-bilancio-entrate-svizzera-armamento": {
     "articleId": "bilancio-federale-2026-surplus",
     "ts": "2026-08-19T10:16:52.759Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/cn-approva-accordo-col-mercosur-e-aiuti-all%27agricoltura/92069687": {
     "articleId": "accordo-mercosur-agricoltura-svizzera",
     "ts": "2026-09-17T02:46:34.341Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/economia/1950666/sul-digitale-non-dovrebbe-esserci-una-strategia-di-destra-di-centro-o-di-sinistra": {
+    "articleId": "atted-digitale-ticino-cyber-security",
+    "ts": "2026-09-17T02:56:11.239Z",
     "keyForm": 2
   }
 }
