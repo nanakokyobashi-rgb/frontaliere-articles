@@ -415,8 +415,29 @@ describe('GitHub Models request contract', () => {
 test('classifica 410 e 403 generici senza alterare il brownout GitHub', () => {
   const nvidiaGoneBody = '{"type":"about:blank","title":"Gone","status":410,"detail":"The model \'meta/llama-3.1-8b-instruct\' has reached its end of life on 2026-08-26T09:00:00Z..."}';
   const openRouterForbiddenBody = '{"error":{"message":"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app..."}}';
+  const githubForbiddenBody = '{"message":"bad credentials"}';
+  const transientBody = '{"error":{"message":"temporarily unavailable"}}';
   const githubBrownoutBody = '{"error":{"code":"github_models_retirement_brownout"}}';
 
+  // Finding 1: this classifier runs before isRetryableError, so transient
+  // bodies must fall through instead of being marked exhausted by status alone.
+  // Finding 2: a GitHub 403 must also fall through; `nonretryable` would stop
+  // the multi-PAT rotation that account-specific failures rely on.
+  assert.deepEqual(classifyNonRetryableError(403, githubForbiddenBody, 'GitHub'), {
+    nonRetryable: false,
+    markExhausted: false,
+  });
+  assert.deepEqual(classifyNonRetryableError(403, transientBody, 'OpenRouter'), {
+    nonRetryable: false,
+    markExhausted: false,
+  });
+  assert.deepEqual(classifyNonRetryableError(410, transientBody, 'NVIDIA'), {
+    nonRetryable: false,
+    markExhausted: false,
+  });
+
+  // The measured PR cases remain non-retryable: neither body is transient and
+  // neither request is for GitHub Models.
   assert.deepEqual(classifyNonRetryableError(410, nvidiaGoneBody, 'NVIDIA'), {
     nonRetryable: true,
     markExhausted: true,

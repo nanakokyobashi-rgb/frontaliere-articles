@@ -5912,13 +5912,18 @@ export function classifyNonRetryableError(status, bodyText = '', providerName = 
     return { nonRetryable: true, markExhausted: true };
   }
 
+  // These status-only branches run before the caller's isRetryableError check.
+  // Keep transient bodies out of the nonretryable path (review finding 1), and
+  // keep GitHub Models 403s out of it too: the `nonretryable` reason disables
+  // the multi-PAT rotation path (review finding 2).
+
   // HTTP 410 — provider-side end-of-life outside GitHub Models. Run 35095698299
   // recorded NVIDIA's real response: {"type":"about:blank","title":"Gone","status":410,
   // "detail":"The model 'meta/llama-3.1-8b-instruct' has reached its end of life ..."}.
   // The GitHub-specific 410 branch above keeps its reason; this is the generic fallback.
   // Exhaustion is run-scoped (and persisted only for quota), so a recovered endpoint
   // returns on the next run without removing a model from roster, ledger or tally.
-  if (status === 410) {
+  if (status === 410 && !isRetryableError(status, bodyText)) {
     return { nonRetryable: true, markExhausted: true };
   }
 
@@ -5926,7 +5931,7 @@ export function classifyNonRetryableError(status, bodyText = '', providerName = 
   // real response: {"error":{"message":"thinkingmachines/inkling-small:free is only
   // available on agentic harnesses. Try plugging it into a coding agent or productivity app..."}}.
   // Like 402/404, mark it exhausted for this run only; do not spend cascade retries.
-  if (status === 403) {
+  if (status === 403 && !isGitHubModels && !isRetryableError(status, bodyText)) {
     return { nonRetryable: true, markExhausted: true };
   }
 
