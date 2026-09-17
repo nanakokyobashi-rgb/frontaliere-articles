@@ -510,12 +510,17 @@ jobs:
       # GH_TOKEN = GITHUB_TOKEN, NON l'App/PAT (e' la cosa rotta). Scatta solo se
       # NESSUN token usabile (né App né PAT).
       - name: Alert token-down (dedup, zero-Claude)
-        if: env.GITHUB_PAT_NANAKO == ''
+        if: always()
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
-        run: node scripts/ci/alert-pat-down.mjs --workflow "${{ github.workflow }}" --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        run: |
+          if [ -n "${APP_TOKEN:-}" ] || [ -n "${GITHUB_PAT_NANAKO:-${GITHUB_PAT:-}}" ]; then
+            echo "Token operativo runtime disponibile: nessun alert token-down."
+            exit 0
+          fi
+          node scripts/ci/alert-pat-down.mjs --workflow "${{ github.workflow }}" --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
       - name: Acquire shared Codex lane quota lease (redflag residual)
         id: quota_lease
@@ -565,6 +570,7 @@ jobs:
         run: |
           set -uo pipefail
           runtime_pat="${GITHUB_PAT_NANAKO:-${GITHUB_PAT:-}}"
+          workflow_pat="${GITHUB_PAT_NANAKO:-}"
           has_push_token=false
           has_workflows_token=false
           if [ -n "${APP_TOKEN:-}" ]; then
@@ -575,6 +581,8 @@ jobs:
           fi
           if [ -n "$runtime_pat" ]; then
             has_push_token=true
+          fi
+          if [ -n "$workflow_pat" ]; then
             has_workflows_token=true
           fi
           if [ "$has_push_token" != "true" ]; then
