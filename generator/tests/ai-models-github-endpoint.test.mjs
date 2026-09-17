@@ -411,16 +411,23 @@ describe('GitHub Models request contract', () => {
   });
 });
 
-test('classifica il brownout 410 solo per GitHub Models', () => {
-  const body = '{"error":{"code":"github_models_retirement_brownout"}}';
-  assert.deepEqual(classifyNonRetryableError(410, body, 'GitHub'), {
+test('classifica 410 e 403 generici senza alterare il brownout GitHub', () => {
+  const nvidiaGoneBody = '{"type":"about:blank","title":"Gone","status":410,"detail":"The model \'meta/llama-3.1-8b-instruct\' has reached its end of life on 2026-08-26T09:00:00Z..."}';
+  const openRouterForbiddenBody = '{"error":{"message":"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app..."}}';
+  const githubBrownoutBody = '{"error":{"code":"github_models_retirement_brownout"}}';
+
+  assert.deepEqual(classifyNonRetryableError(410, nvidiaGoneBody, 'NVIDIA'), {
+    nonRetryable: true,
+    markExhausted: true,
+  });
+  assert.deepEqual(classifyNonRetryableError(403, openRouterForbiddenBody, 'OpenRouter'), {
+    nonRetryable: true,
+    markExhausted: true,
+  });
+  assert.deepEqual(classifyNonRetryableError(410, githubBrownoutBody, 'GitHub'), {
     nonRetryable: true,
     markExhausted: true,
     reason: 'github_models_retirement_brownout',
-  });
-  assert.deepEqual(classifyNonRetryableError(410, body, 'Gemini'), {
-    nonRetryable: false,
-    markExhausted: false,
   });
 });
 
