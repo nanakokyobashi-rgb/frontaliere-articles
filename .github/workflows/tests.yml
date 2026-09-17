@@ -779,6 +779,14 @@ jobs:
         continue-on-error: true
         run: node generator/scripts/load-rc-env.mjs
 
+      - name: Mint GitHub App token for Codex review
+        continue-on-error: true
+        env:
+          APP_ID: ${{ secrets.APP_ID }}
+          APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node scripts/ci/mint-app-token.mjs
+
       - name: Run Codex Luna Max review
         # Tetto sullo step (stessa classe del tetto sulla lane di fix in
         # issue-fix.yml). Qui il cap del job e' 360min ed e' CONDIVISO con la
