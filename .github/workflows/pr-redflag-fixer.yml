@@ -548,17 +548,12 @@ jobs:
       # capace, il push verrebbe rifiutato (scope workflows) → skip senza bruciare
       # un turno.
       #
-      # HAS_PAT accetta ORA anche APP_TOKEN. Fino al 2026-08-06 era legato al solo
-      # GITHUB_PAT, e il commento lo giustificava con "la App installation token NON
-      # ha lo scope workflows": era vero, ha smesso di esserlo quando alla App
-      # `frontaliere-automation` è stato concesso `workflows: write`. Lasciarlo com'era
-      # avrebbe fatto continuare a saltare i fix su .github/workflows/** con la
-      # motivazione "serve un PAT abilitato" mentre il push sarebbe passato — cioè la
-      # stessa capability sbloccata in un posto e ancora rifiutata nel gemello.
-      #
-      # Allineato al push step più sotto, che era già token-aware
-      # (`env.APP_TOKEN || env.GITHUB_PAT`): erano i due lati della stessa decisione,
-      # tenuti in disaccordo.
+      # I token vengono caricati da GITHUB_ENV in step precedenti. Il guard deve
+      # quindi leggerli dalla shell runtime, non da `env.*` nell'espressione del
+      # workflow: il secondo percorso può essere valutato prima dell'aggiornamento
+      # di GITHUB_ENV e trasformare un token valido in una falsa assenza.
+      # APP_TOKEN_WORKFLOWS è la capability verificata da mint-app-token.mjs;
+      # GITHUB_PAT_NANAKO resta il fallback con scope workflows storico.
       - name: Round cap + capability guard + tier
         id: guard
         if: steps.quota_lease.outputs.lease_allowed == 'true'
@@ -567,9 +562,26 @@ jobs:
           REPO: ${{ github.repository }}
           PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
           REVIEW_BODY_B64: ${{ needs.preflight.outputs.review_body_b64 }}
-          HAS_PAT: ${{ env.GITHUB_PAT_NANAKO != '' }}
         run: |
           set -uo pipefail
+          runtime_pat="${GITHUB_PAT_NANAKO:-${GITHUB_PAT:-}}"
+          has_push_token=false
+          has_workflows_token=false
+          if [ -n "${APP_TOKEN:-}" ]; then
+            has_push_token=true
+            if [ "${APP_TOKEN_WORKFLOWS:-false}" = "true" ]; then
+              has_workflows_token=true
+            fi
+          fi
+          if [ -n "$runtime_pat" ]; then
+            has_push_token=true
+            has_workflows_token=true
+          fi
+          if [ "$has_push_token" != "true" ]; then
+            echo "::warning::Nessun token operativo runtime (App/PAT) → redflag fixer saltato senza consumare un round."
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
           if ! REVIEW_BODY=$(printf '%s' "$REVIEW_BODY_B64" | base64 --decode 2>/dev/null); then
             echo "::error::Review body non decodificabile: guard round-cap fail-closed."
             echo "proceed=false" >> "$GITHUB_OUTPUT"; exit 0
@@ -610,8 +622,8 @@ jobs:
           # File cambiati dalla PR (per tier + capability guard).
           files=$(gh pr view "$PR_NUMBER" --repo "$REPO" --json files --jq '.files[].path' 2>/dev/null || echo "")
           touches_wf=$(echo "$files" | grep -E '^\.github/workflows/' || true)
-          if [ -n "$touches_wf" ] && [ "$HAS_PAT" != "true" ]; then
-            echo "::warning::PR tocca .github/workflows/** ma manca PAT (scope workflows) → push rifiutato, skip senza bruciare un turno Claude."
+          if [ -n "$touches_wf" ] && [ "$has_workflows_token" != "true" ]; then
+            echo "::warning::PR tocca .github/workflows/** ma manca un token runtime con scope workflows → push rifiutato, skip senza bruciare un turno Claude."
             gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '⏭️ 🔴-fixer skip: la PR tocca \x60.github/workflows/**\x60 e non è disponibile un PAT con scope \x60workflows\x60 → il push fallirebbe. Applicare il fix dei 🔴 a mano.')" \
               2>/dev/null || true
             echo "proceed=false" >> "$GITHUB_OUTPUT"
@@ -654,9 +666,8 @@ jobs:
       # re-review non partirebbe (anti-ricorsione); il fix verrebbe comunque
       # committato. Esposto come remote authenticato.
       - name: Configure push remote (App token / PAT)
-        if: steps.guard.outputs.proceed == 'true' && (env.APP_TOKEN != '' || env.GITHUB_PAT_NANAKO != '')
+        if: steps.guard.outputs.proceed == 'true'
         env:
-          PUSH_TOKEN: ${{ env.GITHUB_PAT_NANAKO }}
           REPO: ${{ github.repository }}
         # Stessa classe del bug di pr-autorebase: `actions/checkout` persiste
         # `http.https://github.com/.extraheader = AUTHORIZATION: basic <GITHUB_TOKEN>`,
@@ -665,8 +676,20 @@ jobs:
         # no re-review). Azzerare l'extraheader prima del set-url forza l'uso
         # dell'App token/PAT.
         run: |
+          set -euo pipefail
+          push_token="${APP_TOKEN:-}"
+          runtime_pat="${GITHUB_PAT_NANAKO:-${GITHUB_PAT:-}}"
+          if [ -z "$push_token" ] \
+            || { [ "${APP_TOKEN_WORKFLOWS:-false}" != "true" ] && [ -n "$runtime_pat" ]; }; then
+            push_token="$runtime_pat"
+          fi
+          if [ -z "$push_token" ]; then
+            echo "::error::Nessun token operativo runtime disponibile per il push del redflag fixer."
+            exit 1
+          fi
           git config --unset-all "http.https://github.com/.extraheader" || true
-          git remote set-url origin "https://x-access-token:${PUSH_TOKEN}@github.com/${REPO}.git"
+          git remote set-url origin "https://x-access-token:${push_token}@github.com/${REPO}.git"
+          unset push_token runtime_pat
 
       # SHA di partenza (post-merge origin/main, pre-Claude): il classify finale lo
       # confronta con la HEAD remota dopo Claude per capire se il round ha davvero
