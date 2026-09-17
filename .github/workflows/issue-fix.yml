@@ -265,13 +265,19 @@ jobs:
       # anche all'action, quindi saltare il guard riflette una capacità reale.
       - name: Pre-flight — workflows-scope capability guard (zero-Claude)
         id: scope_guard
-        if: env.GITHUB_PAT_NANAKO == '' && steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true'
+        if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
-        run: node scripts/ci/check-workflows-scope.mjs
+        run: |
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            echo "GITHUB_PAT_NANAKO runtime presente → capability workflows lasciata al token del fixer."
+            echo "workflows_blocked=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          node scripts/ci/check-workflows-scope.mjs
 
       # ── Pre-flight 4: contesto di gruppo prima del claim ──────────────────
       - name: Load issue group context (B19, zero-Claude)
@@ -437,8 +443,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
-          SITE_TOKEN: ${{ env.GITHUB_PAT }}
-        run: node scripts/ci/handoff-to-site.mjs --preflight
+        run: SITE_TOKEN="${GITHUB_PAT:-}" node scripts/ci/handoff-to-site.mjs --preflight
 
       - name: Acquire shared Codex lane quota lease (issue-fix slot)
         id: quota_lease
@@ -857,11 +862,15 @@ jobs:
         if: always() && steps.claim.outputs.claim_acquired == 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
         continue-on-error: true
         env:
-          GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           ISSUE: ${{ github.event.issue.number }}
         run: |
           set -uo pipefail
+          runtime_token="${GITHUB_PAT_NANAKO:-}"
+          if [ -n "$runtime_token" ]; then
+            export GH_TOKEN="$runtime_token"
+          fi
           BRANCH="fix/issue-$ISSUE"
           PR_NUMBER=$(gh pr list --repo "$REPO" --head "$BRANCH" --state open --json number,createdAt \
             --jq 'sort_by(.createdAt) | last | .number // empty' 2>/dev/null || true)
@@ -963,8 +972,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
-          SITE_TOKEN: ${{ env.GITHUB_PAT }}
-        run: node scripts/ci/handoff-to-site.mjs
+        run: SITE_TOKEN="${GITHUB_PAT:-}" node scripts/ci/handoff-to-site.mjs
 
       - name: Emit FIX_OUTCOME telemetry (deterministic backstop)
         # Il prompt CHIEDE all'agente di postare un marker granulare
