@@ -750,6 +750,7 @@ jobs:
         if: steps.mode.outputs.dry != 'true'
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          CLAUDE_CLI_BIN: ${{ steps.setup_claude_haiku_fallback.outputs.claude_cli_bin }}
           CODEX_AUTH_BROKER_SOCKET: ${{ steps.setup_claude_haiku_fallback.outputs.codex_auth_broker_socket }}
           PROVIDER_PREFLIGHT_OUTPUT: ${{ runner.temp }}/provider-preflight.json
         run: node generator/scripts/lib/provider-preflight.mjs

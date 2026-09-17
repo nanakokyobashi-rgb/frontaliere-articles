@@ -77,11 +77,15 @@ export function classifyProviderProbe({
   networkError = null,
   provider = null,
   httpStatus = null,
+  localExecutable = true,
 } = {}) {
   if (!configured) {
     return { status: 'credential_missing', reason: 'credential_missing', quota: 'unknown' };
   }
   if (mode === 'local') {
+    if (localExecutable === false) {
+      return { status: 'provider_unavailable', reason: 'cli_not_executable', quota: 'unknown' };
+    }
     return { status: 'ready', reason: 'local_transport_ready', quota: 'not-applicable' };
   }
   if (dnsError) {
@@ -125,6 +129,27 @@ function safeErrorReason(error) {
   return 'network_error';
 }
 
+function findExecutable(command) {
+  const requested = String(command || '').trim();
+  if (!requested) return null;
+  const candidates = requested.includes('/')
+    ? [requested]
+    : (process.env.PATH || '')
+      .split(path.delimiter)
+      .filter(Boolean)
+      .map((directory) => path.join(directory, requested));
+  for (const candidate of candidates) {
+    try {
+      const stat = fs.statSync(candidate);
+      fs.accessSync(candidate, fs.constants.X_OK);
+      if (stat.isFile()) return candidate;
+    } catch {
+      // Try the next PATH entry; an absent/non-executable CLI is a blocked lane.
+    }
+  }
+  return null;
+}
+
 async function probeProvider(group, {
   fetchImpl = globalThis.fetch,
   lookup = dns.lookup,
@@ -148,7 +173,15 @@ async function probeProvider(group, {
     endpoint: probe.url ? new URL(probe.url).hostname : null,
   };
   if (!configured) return { ...base, ...classifyProviderProbe({ provider: group.provider, configured, mode: probe.mode }) };
-  if (probe.mode === 'local') return { ...base, ...classifyProviderProbe({ provider: group.provider, configured, mode: probe.mode }) };
+  if (probe.mode === 'local') {
+    const localExecutable = group.provider === 'claude_cli'
+      ? !!findExecutable(process.env.CLAUDE_CLI_BIN || 'claude')
+      : true;
+    return {
+      ...base,
+      ...classifyProviderProbe({ provider: group.provider, configured, mode: probe.mode, localExecutable }),
+    };
+  }
 
   const endpoint = new URL(probe.url);
   try {

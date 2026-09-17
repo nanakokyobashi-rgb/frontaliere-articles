@@ -89,7 +89,13 @@ import { exitAfterDrain } from './lib/drain-stdio.mjs';
 // l'indipendenza che il guard «local/fallback cannot self-verify» difende.
 const PREFERRED_GENERATION_MODELS = [
   AI_MODELS.CODEX_CLI_PRIMARY,
-  AI_MODELS.CLAUDE_CLI_HAIKU,
+  // Crawler groups do not receive the Claude OAuth token. Keep Claude out of
+  // their declared preference rather than advertising a lane that
+  // isModelAvailable() will immediately discard; the wired article workflow
+  // adds it here when its flag and token are both present.
+  ...(isModelAvailable(AI_MODELS.CLAUDE_CLI_HAIKU)
+    ? [AI_MODELS.CLAUDE_CLI_HAIKU]
+    : []),
 ];
 
 /**

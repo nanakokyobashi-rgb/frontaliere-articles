@@ -65,9 +65,10 @@ test('every active article CLI caller wires the OAuth Codex broker', () => {
     const preferredIndexes = lines
       .map((line, index) => /^\s+AI_MODELS_PREFER:/.test(line) ? index : -1)
       .filter((index) => index >= 0);
+    const stepsLine = lines.findIndex((line) => /^\s{4}steps:\s*$/.test(line));
     const oauthIndexes = lines
       .map((line, index) => /^\s+CLAUDE_CODE_OAUTH_TOKEN:/.test(line) ? index : -1)
-      .filter((index) => index >= 0);
+      .filter((index) => index >= 0 && (stepsLine < 0 || index > stepsLine));
     const brokerIndexes = lines
       .map((line, index) => /^\s+CODEX_AUTH_BROKER_SOCKET:/.test(line) ? index : -1)
       .filter((index) => index >= 0);
@@ -110,6 +111,27 @@ test('every active article CLI caller wires the OAuth Codex broker', () => {
     assert.match(cleanup, /--cleanup\s+--socket\s+"\$CODEX_AUTH_BROKER_SOCKET"/, `${rel}: cleanup command incomplete`);
     assert.equal((source.match(/CODEX_AUTH_JSON/g) ?? []).length, 1, `${rel}: raw Codex OAuth leaked beyond setup input`);
   }
+});
+
+test('la preferenza Claude esiste solo quando la lane è disponibile nel processo', () => {
+  const createArticle = read('generator/scripts/create-article.mjs');
+  const preferenceStart = createArticle.indexOf('const PREFERRED_GENERATION_MODELS');
+  const preferenceEnd = createArticle.indexOf('];', preferenceStart);
+  assert.ok(preferenceStart >= 0 && preferenceEnd > preferenceStart, 'article preference not found');
+  assert.match(
+    createArticle.slice(preferenceStart, preferenceEnd),
+    /AI_MODELS\.CODEX_CLI_PRIMARY[\s\S]*\.\.\.\(isModelAvailable\(AI_MODELS\.CLAUDE_CLI_HAIKU\)[\s\S]*\[AI_MODELS\.CLAUDE_CLI_HAIKU\][\s\S]*:\s*\[\]\)/,
+    'Claude must be added conditionally, after the Codex primary',
+  );
+});
+
+test('il preflight riceve il percorso del CLI Claude attested dall action', () => {
+  const workflow = read('.github/workflows/generate-article.yml');
+  const preflightStart = workflow.indexOf('id: provider_preflight');
+  const preflightEnd = workflow.indexOf('run: node generator/scripts/lib/provider-preflight.mjs', preflightStart);
+  assert.ok(preflightStart >= 0 && preflightEnd > preflightStart, 'provider preflight step not found');
+  const preflight = workflow.slice(preflightStart, preflightEnd);
+  assert.match(preflight, /CLAUDE_CLI_BIN:\s+\$\{\{\s*steps\.setup_claude_haiku_fallback\.outputs\.claude_cli_bin\s*\}\}/);
 });
 
 test('Codex primary keeps Luna Max and is reusable across crawler calls', () => {
