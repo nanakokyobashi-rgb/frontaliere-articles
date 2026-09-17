@@ -368,12 +368,22 @@ jobs:
                 fi
                 if [ "$FIXER_RUN_LOOKUP_OK" = "true" ] && ! FIXER_RUN_IN_FLIGHT=$(printf '%s' "$fixer_runs" | jq -r --arg head "$HEAD" '
                   any(.[]; (.headSha // "" | ascii_downcase) == ($head | ascii_downcase)
-                    and ((.status // "") == "queued" or (.status // "") == "in_progress"))
+                    and ((.status // "") | test("^(queued|in_progress|waiting|pending|requested)$"))
+                  )
                 ' 2>/dev/null); then
                   echo "::warning::Stato in-flight di pr-redflag-fixer non verificabile per PR #$N — nessun dispatch automatico ammesso."
                   FIXER_RUN_LOOKUP_OK=false
                 fi
               fi
+            fi
+
+            # Se l'elenco delle run non è verificabile, non si può scegliere
+            # fra E e B in sicurezza: anche B potrebbe rilanciare tests mentre
+            # un fixer già esistente è queued/in_progress. La PR resta quindi
+            # intatta e sarà rivalutata dal cron successivo.
+            if [ "$HAS_IMPORTANT" = "true" ] && [ "$LAST_CID" = "$HEAD" ] && [ "$FIXER_RUN_LOOKUP_OK" != "true" ]; then
+              echo "PR #$N: stato di pr-redflag-fixer non verificabile sulla HEAD ${HEAD:0:7} — skip fail-closed"
+              continue
             fi
 
             REASON=""; RESCUE=""; CLASS=""
@@ -477,13 +487,23 @@ jobs:
             FIXER_DISPATCH_MARKER="<!-- stale-pr-rescuer dispatch=pr-redflag-fixer head=${HEAD:0:7} run=pending at=$NOW -->"
             FIXER_DISPATCH_MARKER_RE="<!-- stale-pr-rescuer dispatch=pr-redflag-fixer head=${HEAD:0:7} run=[^ ]+ at=([0-9]+) -->"
             FIXER_DISPATCH_MARKER_ACTIVE=false
-            if [[ "$POSTED_BODIES" =~ $FIXER_DISPATCH_MARKER_RE ]]; then
-              FIXER_MARKER_AT="${BASH_REMATCH[1]}"
-              if [[ "$FIXER_MARKER_AT" =~ ^[0-9]+$ ]] \
-                && [ "$FIXER_MARKER_AT" -le "$NOW" ] \
-                && [ $((NOW - FIXER_MARKER_AT)) -le "$AGE_MIN_S" ]; then
-                FIXER_DISPATCH_MARKER_ACTIVE=true
+            # `[[ ... =~ ]]` restituirebbe solo la prima occorrenza: un marker
+            # scaduto prima di uno fresco farebbe quindi ridispatchare durante
+            # il TTL. Scorriamo tutti i marker compatibili e conserviamo il più
+            # recente ancora valido.
+            FIXER_MARKER_AT=""
+            while IFS= read -r FIXER_MARKER_LINE; do
+              FIXER_MARKER_CANDIDATE="${FIXER_MARKER_LINE##* at=}"
+              FIXER_MARKER_CANDIDATE="${FIXER_MARKER_CANDIDATE% -->}"
+              if [[ "$FIXER_MARKER_CANDIDATE" =~ ^[0-9]+$ ]] \
+                && [ "$FIXER_MARKER_CANDIDATE" -le "$NOW" ] \
+                && [ $((NOW - FIXER_MARKER_CANDIDATE)) -le "$AGE_MIN_S" ] \
+                && { [ -z "$FIXER_MARKER_AT" ] || [ "$FIXER_MARKER_CANDIDATE" -gt "$FIXER_MARKER_AT" ]; }; then
+                FIXER_MARKER_AT="$FIXER_MARKER_CANDIDATE"
               fi
+            done < <(printf '%s' "$POSTED_BODIES" | grep -oE "$FIXER_DISPATCH_MARKER_RE" || true)
+            if [ -n "$FIXER_MARKER_AT" ]; then
+              FIXER_DISPATCH_MARKER_ACTIVE=true
             fi
             NEEDS_DISPATCH=false
             #

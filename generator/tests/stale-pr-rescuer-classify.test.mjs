@@ -160,7 +160,7 @@ function reviews({
  * Esegue il blocco `run:` con `gh` e `date` stubbati e restituisce
  * `{ labeled, comments, stdout }`.
  */
-function runScan({ prs, checks, reviews: revs, comments: posted = [], fixerRuns = [], dryRun = false }) {
+function runScan({ prs, checks, reviews: revs, comments: posted = [], fixerRuns = [], fixerRunsError = false, dryRun = false }) {
   const dir = mkdtempSync(path.join(tmpdir(), 'stale-pr-rescuer-'));
   try {
     const bin = path.join(dir, 'bin');
@@ -171,12 +171,14 @@ function runScan({ prs, checks, reviews: revs, comments: posted = [], fixerRuns 
     const fixReviews = path.join(dir, 'reviews.json');
     const fixComments = path.join(dir, 'comments.json');
     const fixFixerRuns = path.join(dir, 'fixer-runs.json');
+    const fixFixerRunsError = path.join(dir, 'fixer-runs-error');
     writeFileSync(calls, '');
     writeFileSync(fixPrs, JSON.stringify(prs));
     writeFileSync(fixChecks, JSON.stringify(checks));
     writeFileSync(fixReviews, JSON.stringify(revs));
     writeFileSync(fixComments, JSON.stringify(posted));
     writeFileSync(fixFixerRuns, JSON.stringify(fixerRuns));
+    writeFileSync(fixFixerRunsError, fixerRunsError ? 'true' : 'false');
 
     // `gh`: serve le letture del rescuer e registra le scritture
     // (add-label, remove-label, comment, workflow run). Ogni
@@ -251,6 +253,11 @@ case "$sub" in
     action="$1"; shift
     case "$action" in
       list)
+        if [[ "$(cat ${JSON.stringify(fixFixerRunsError)})" == "true" ]]; then
+          case " $* " in
+            *"pr-redflag-fixer.yml"*) exit 1 ;;
+          esac
+        fi
         case " $* " in
           *"pr-redflag-fixer.yml"*) cat ${JSON.stringify(fixFixerRuns)} ;;
           *) echo 4242 ;;
@@ -805,6 +812,21 @@ test('E — una run ancora in volo oltre la grace window resta un veto', opts, (
   assert.deepEqual(r.comments, [], `Il veto in-flight indipendente dal TTL non deve commentare.\n${r.stdout}`);
 });
 
+test('E/B — lookup del fixer illeggibile: nessuna azione fail-closed', opts, () => {
+  const r = runScan({
+    prs: openPr(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({
+      commit: HEAD_SHA,
+      body: '🔴 **Important**: non agire se lo stato del fixer è ignoto',
+    }),
+    fixerRunsError: true,
+  });
+  assert.deepEqual(r.workflowRuns, [], `Un lookup fallito non deve dispatchare E.\n${r.stdout}`);
+  assert.deepEqual(r.reruns, [], `Un lookup fallito non deve rilanciare B.\n${r.stdout}`);
+  assert.deepEqual(r.comments, [], `Lo stato ignoto deve restare completamente fail-closed.\n${r.stdout}`);
+});
+
 test('E — un marker di dispatch scaduto riarma il rescue', opts, () => {
   const staleMarkers = [
     {
@@ -830,6 +852,7 @@ test('E — un marker di dispatch ancora fresco resta idempotente', opts, () => 
     {
       body: [
         `<!-- stale-pr-rescuer class=E head=${HEAD_SHA.slice(0, 7)} -->`,
+        `<!-- stale-pr-rescuer dispatch=pr-redflag-fixer head=${HEAD_SHA.slice(0, 7)} run=6999 at=${unixAgo(3)} -->`,
         `<!-- stale-pr-rescuer dispatch=pr-redflag-fixer head=${HEAD_SHA.slice(0, 7)} run=7005 at=${unixAgo(0.5)} -->`,
       ].join('\n'),
     },
