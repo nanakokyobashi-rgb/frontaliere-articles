@@ -241,10 +241,10 @@ function manifestPinFor(issueNumber) {
   return pinnedBy(issueNumber, REPO);
 }
 
-// Il corpus ha un classificatore adattato che precede il pin keep-open del
-// sito. Manteniamo qui il piccolo predicato richiesto dal rescue daily senza
-// cambiare la semantica/manifest del classificatore condiviso del corpus.
-const FIXER_EXEMPT_LABELS = new Set(['keep-open', 'agent:no-age-out']);
+// Il corpus ha un classificatore adattato che precede i pin del sito. Manteniamo
+// qui il piccolo predicato richiesto dal rescue daily, includendo il pin L11
+// locale senza cambiare la semantica/manifest del classificatore condiviso.
+const FIXER_EXEMPT_LABELS = new Set(['keep-open', 'agent:no-age-out', 'operations-audit-review']);
 const isFixerExempt = (labels = []) => {
   const names = (labels || []).map((label) =>
     String(typeof label === 'string' ? label : label?.name ?? '').toLowerCase(),
@@ -2405,7 +2405,7 @@ export function isReparkableCandidate(iss) {
  * L'esclusione dei pin (`isFixerExempt`) non è ridondante ed è la ragione per
  * cui questo filtro vive qui invece che inline: «non queue-managed» significava
  * «crawler» finché `classifyIssue` restituiva solo `fix`/`queue`. Da quando un
- * pin `keep-open`/`agent:no-age-out` porta `route='none'` (#7648), il
+ * pin `keep-open`/`agent:no-age-out`/`operations-audit-review` porta `route='none'` (#7648), il
  * complemento è «i crawler PIÙ i pinnati», e senza il guard il rescue crawler
  * ri-armerebbe con `agent:fix` proprio le issue che il pin toglie dal ciclo —
  * per la sola ragione che non sono in coda.
@@ -5062,13 +5062,13 @@ export function runDrain() {
     // già in coda quando il pin è stato messo (o messo dopo l'accodamento) ci
     // resterebbero per sempre: la coda si legge per label, non si ri-classifica.
     // Le disaccodo invece di parcheggiarle — `fu-parked` significa «lavoro
-    // sospeso», e un tracker su causa esterna non è lavoro sospeso: è una
+    // sospeso», e una issue pinnata non è lavoro sospeso: è una
     // condizione da osservare. Senza `agent:fix-queued` esce da qui e da ogni
     // stadio del drainer, e resta aperta come il pin chiede.
     if (isFixerExempt(names(cand))) {
       const pins = names(cand).filter((n) => isFixerExempt([n])).join(', ');
-      console.log(`DISACCODO #${cand.number} (pin ${pins}) → tracker su causa esterna, nessun run del fixer`);
-      const note = `📌 **Pre-flight drainer (zero-Claude, #7648)**: questa issue porta \`${pins}\` — un pin che la dichiara tracker su una causa esterna al repository. Nessun turn-budget la chiude, perché l'input che manca non è codice; promuoverla spende un run Max per ri-scoprire ogni volta la stessa attesa, e rischia di chiudere ciò che il pin vuole tenere aperto.\n\n**Non promuovo e non parcheggio**: \`fu-parked\` vorrebbe dire «lavoro sospeso», e questo non lo è. Rimuovo solo le label di routing; la issue resta aperta e visibile. Togli il pin quando la causa esterna si sblocca e il triage la ri-accoda normalmente.\n\n<!-- FIX_OUTCOME: revenue-tracker-manual -->`;
+      console.log(`DISACCODO #${cand.number} (pin ${pins}) → fuori dal ciclo automatico, nessun run del fixer`);
+      const note = `📌 **Pre-flight drainer (zero-Claude, #7648)**: questa issue porta \`${pins}\` — un pin che la dichiara fuori dal ciclo automatico. Nessun turn-budget la chiude, perché il pin richiede osservazione o input esterno; promuoverla spenderebbe un run Max senza una nuova decisione.\n\n**Non promuovo e non parcheggio**: \`fu-parked\` vorrebbe dire «lavoro sospeso», e questo non lo è. Rimuovo solo le label di routing; la issue resta aperta e visibile. Togli il pin quando la causa si sblocca e il triage la ri-accoda normalmente.\n\n<!-- FIX_OUTCOME: revenue-tracker-manual -->`;
       if (DRY) { console.log(`[dry] disaccodo #${cand.number} (pin ${pins})`); continue; }
       commentIssue(cand.number, note, 'pin park comment');
       edit(cand.number, { remove: [LBL_QUEUED, LBL_FIX] });

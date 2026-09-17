@@ -152,7 +152,7 @@ jobs:
           # sul classificatore normale; uno presente ma invalido è review-only.
           l11_contract=$(node --input-type=module - "$body" <<'NODE'
           const body = process.argv[2] || '';
-          const marker = /<!-- L11_ISSUE_CONTRACT:\s*(\{.*\})\s*-->/m.exec(body);
+          const marker = /<!-- L11_ISSUE_CONTRACT:\s*(\{.*\})\s*-->/ms.exec(body);
           if (!marker) {
             process.stdout.write(JSON.stringify({ present: false, valid: false, fixable: false }));
             process.exit(0);
@@ -332,10 +332,10 @@ jobs:
             body=$(printf '%s' "$issue" | jq -r '.body // ""')
             contract=$(node --input-type=module - "$body" <<'NODE'
           const body = process.argv[2] || '';
-          const marker = /<!-- L11_ISSUE_CONTRACT:\s*(\{.*\})\s*-->/m.exec(body);
+          const marker = /<!-- L11_ISSUE_CONTRACT:\s*(\{.*\})\s*-->/ms.exec(body);
           if (!marker) { process.stdout.write(JSON.stringify({ present: false, valid: false, fixable: false })); process.exit(0); }
           let c;
-          try { c = JSON.parse(marker[1]); } catch { process.stdout.write(JSON.stringify({ present: true, valid: false, fixable: false })); process.exit(0); }
+          try { c = JSON.parse(marker[1]); } catch { process.stdout.write(JSON.stringify({ present: true, valid: false, fixable: false, reason: 'invalid-json' })); process.exit(0); }
           const id = (v, p) => typeof v === 'string' && new RegExp(`^lf-${p}-[0-9a-f]{24}$`).test(v);
           const generated = Date.parse(typeof c.generatedAt === 'string' ? c.generatedAt : '');
           const expires = Date.parse(typeof c.expiresAt === 'string' ? c.expiresAt : '');

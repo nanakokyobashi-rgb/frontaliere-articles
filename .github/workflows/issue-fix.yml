@@ -103,10 +103,10 @@ jobs:
           body=$(gh issue view "$ISSUE" --repo "$REPO" --json body --jq '.body // ""')
           contract=$(node --input-type=module - "$body" <<'NODE'
           const body = process.argv[2] || '';
-          const marker = /<!-- L11_ISSUE_CONTRACT:\s*(\{.*\})\s*-->/m.exec(body);
+          const marker = /<!-- L11_ISSUE_CONTRACT:\s*(\{.*\})\s*-->/ms.exec(body);
           if (!marker) { process.stdout.write(JSON.stringify({ present: false, valid: false, fixable: false })); process.exit(0); }
           let c;
-          try { c = JSON.parse(marker[1]); } catch { process.stdout.write(JSON.stringify({ present: true, valid: false, fixable: false })); process.exit(0); }
+          try { c = JSON.parse(marker[1]); } catch { process.stdout.write(JSON.stringify({ present: true, valid: false, fixable: false, reason: 'invalid-json' })); process.exit(0); }
           const id = (v, p) => typeof v === 'string' && new RegExp(`^lf-${p}-[0-9a-f]{24}$`).test(v);
           const generated = Date.parse(typeof c.generatedAt === 'string' ? c.generatedAt : '');
           const expires = Date.parse(typeof c.expiresAt === 'string' ? c.expiresAt : '');
@@ -882,8 +882,10 @@ jobs:
           ISSUE_BODY=$(gh issue view "$ISSUE" --repo "$REPO" --json body --jq '.body // ""' 2>/dev/null || true)
           CONTRACT=$(node --input-type=module - "$ISSUE_BODY" <<'NODE'
           const body = process.argv[2] || '';
-          const marker = /<!-- L11_ISSUE_CONTRACT:\s*(\{.*\})\s*-->/m.exec(body);
-          process.stdout.write(marker ? marker[1] : '');
+          const marker = /<!-- L11_ISSUE_CONTRACT:\s*(\{.*\})\s*-->/ms.exec(body);
+          if (!marker) process.exit(0);
+          try { JSON.parse(marker[1]); } catch { process.exit(0); }
+          process.stdout.write(marker[1]);
           NODE
           )
           if [ -n "$CONTRACT" ]; then
