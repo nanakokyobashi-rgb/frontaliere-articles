@@ -469,7 +469,7 @@ test('lo script è CITATO da issue-fix.yml: non è codice scollegato', async () 
   const fs = await import('node:fs');
   const wf = fs.readFileSync(new URL('../../.github/workflows/issue-fix.yml', import.meta.url), 'utf8');
   assert.match(wf, /handoff-to-site\.mjs/);
-  assert.match(wf, /SITE_TOKEN:/);
+  assert.match(wf, /SITE_TOKEN(?:=|:)/);
 });
 
 // ── #972 item 3: le scritture sulla issue di origine ────────────────────────
@@ -857,9 +857,8 @@ test('#972: il pre-flight è cablato e OGNI step che costa lo consulta', () => {
 
   const gate = all.find((s) => /id: handoff_pre\b/.test(s));
   assert.ok(gate, 'nessuno step con `id: handoff_pre` — il pre-flight non esiste, e lo script gira solo DOPO Claude.');
-  assert.match(gate, /run: node scripts\/ci\/handoff-to-site\.mjs --preflight/);
-  assert.match(gate, /SITE_TOKEN: \$\{\{ env\.GITHUB_PAT \}\}/,
-    'senza il token del sito la ricerca del dedup non è disponibile e il gate è inerte per costruzione');
+  assert.match(gate, /run: SITE_TOKEN="\$\{GITHUB_PAT:-\}" node scripts\/ci\/handoff-to-site\.mjs --preflight/,
+    'il pre-flight deve passare il token del sito dalla shell runtime al comando');
   assert.ok(src.indexOf('id: claim') < src.indexOf('id: handoff_pre'),
     'il pre-flight deve verificare il verdetto dopo il claim della issue, non prima');
   assert.match(gate, /steps\.claim\.outputs\.in_flight != 'true'/,
@@ -869,7 +868,7 @@ test('#972: il pre-flight è cablato e OGNI step che costa lo consulta', () => {
   assert.doesNotMatch(claim, /steps\.handoff_pre\./,
     'il claim non può dipendere dal pre-flight che deve seguire il claim');
 
-  // Il gate legge `env.GITHUB_PAT`, che esiste solo dopo Remote Config: uno
+  // Il gate legge `GITHUB_PAT` dalla shell runtime, dopo Remote Config: uno
   // step piazzato prima leggerebbe una stringa vuota e non corto-circuiterebbe
   // MAI, senza che niente fallisca.
   assert.ok(src.indexOf('Load secrets') < src.indexOf('id: handoff_pre'),
@@ -887,7 +886,7 @@ test('#972: il pre-flight è cablato e OGNI step che costa lo consulta', () => {
 
   // E il post-step: se il pre-flight ha già consegnato lo stato, ripeterlo in
   // coda è lavoro doppio sulle stesse label.
-  const post = all.find((s) => /run: node scripts\/ci\/handoff-to-site\.mjs$/m.test(s) && !/--preflight/.test(s));
+  const post = all.find((s) => /run: SITE_TOKEN="\$\{GITHUB_PAT:-\}" node scripts\/ci\/handoff-to-site\.mjs$/m.test(s) && !/--preflight/.test(s));
   assert.ok(post, 'il post-step di consegna non esiste più: aggiornare questo test');
   assert.match(post, /steps\.handoff_pre\.outputs\.handoff_delivered != 'true'/);
 });
