@@ -5,6 +5,7 @@ import {
   AI_MODELS,
   callSingleModel,
   callLLM,
+  classifyExhaustionCause,
   classifyNonRetryableError,
   getStats,
   getScoreBoard,
@@ -429,6 +430,48 @@ test('classifica 410 e 403 generici senza alterare il brownout GitHub', () => {
     markExhausted: true,
     reason: 'github_models_retirement_brownout',
   });
+});
+
+test('403 e 410 non diventano transitori nel tally di exhaustion', () => {
+  const cases = [
+    {
+      label: 'skip 403 dopo exhausted',
+      reason: 'openrouter/thinkingmachines/inkling:free: skipped — exhausted (non-retryable provider error (HTTP 403))',
+      transient: 0,
+      persistent: 1,
+    },
+    {
+      label: 'skip 410 dopo exhausted',
+      reason: 'nvidia/meta/llama-3.1-8b-instruct: skipped — exhausted (non-retryable provider error (HTTP 410))',
+      transient: 0,
+      persistent: 1,
+    },
+    {
+      label: 'fallimento diretto 403',
+      reason: 'openrouter/thinkingmachines/inkling:free: [OpenRouter/thinkingmachines/inkling:free] HTTP 403: {"error":{"message":"only available on agentic harnesses"}}',
+      transient: 0,
+      persistent: 0,
+    },
+    {
+      label: 'fallimento diretto 410',
+      reason: 'nvidia/meta/llama-3.1-8b-instruct: [NVIDIA/meta/llama-3.1-8b-instruct] HTTP 410: {"title":"Gone","detail":"has reached its end of life"}',
+      transient: 0,
+      persistent: 0,
+    },
+    {
+      label: 'controllo quota 429',
+      reason: 'openai/gpt-4o: [OpenAI/gpt-4o] HTTP 429: {"error":{"message":"quota exceeded"}}',
+      transient: 1,
+      persistent: 0,
+    },
+  ];
+
+  for (const { label, reason, transient, persistent } of cases) {
+    const verdict = classifyExhaustionCause(reason);
+    assert.equal(verdict.transient, transient, label);
+    assert.equal(verdict.persistent, persistent, label);
+    assert.equal(verdict.total, 1, label);
+  }
 });
 
 test('i brownout GitHub sono persistenti nel verdetto aggregato', async () => {
