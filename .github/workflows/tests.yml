@@ -780,6 +780,7 @@ jobs:
         run: node generator/scripts/load-rc-env.mjs
 
       - name: Mint GitHub App token for Codex review
+        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true'
         continue-on-error: true
         env:
           APP_ID: ${{ secrets.APP_ID }}
@@ -812,10 +813,10 @@ jobs:
           REVIEW_TIER: ${{ steps.tier.outputs.tier }}
           INCREMENTAL_BASE: ${{ steps.tier.outputs.incremental_base }}
         with:
-          codex_github_token: ${{ env.APP_TOKEN || secrets.GITHUB_TOKEN }}
-          # The input expression may be empty when the value was loaded through
-          # GITHUB_ENV; the composite action also captures the inherited runtime
-          # GITHUB_PAT_NANAKO/GITHUB_PAT host-side and never passes it to Codex.
+          # The App token is the review identity because its event re-triggers
+          # the downstream review/merge workflow. Missing App credentials must
+          # fail closed; GITHUB_TOKEN is never an operational fallback.
+          codex_github_token: ${{ env.APP_TOKEN }}
           codex_corpus_github_token: ${{ env.GITHUB_PAT_NANAKO || env.GITHUB_PAT }}
           codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
           review_marker: '<!-- CODEX_FALLBACK_REVIEW -->'

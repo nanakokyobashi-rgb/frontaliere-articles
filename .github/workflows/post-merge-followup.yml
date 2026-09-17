@@ -121,10 +121,11 @@ jobs:
 
       # Il follow-up puo' trovare un file che appartiene al producer del corpus,
       # anche quando la PR sorgente e' nel sito. In quel caso l'issue deve nascere
-      # su nanako: il GITHUB_TOKEN del sito e' scoped al solo repo corrente.
-      # Carichiamo il PAT Valerie cross-repo anche senza un batch: i gate finali
-      # fanno recovery di bucket gia' coniati e devono poterli sigillare nella
-      # finestra successiva, senza dipendere da una nuova PR raccolta.
+      # su nanako: il token operativo del bridge deve essere il PAT esplicito,
+      # non il GITHUB_TOKEN del run, che non emette l'evento issues:opened.
+      # Carichiamo i PAT cross-repo anche senza un batch: i gate finali fanno
+      # recovery di bucket gia' coniati e devono poterli sigillare nella finestra
+      # successiva, senza dipendere da una nuova PR raccolta.
 
       - name: Prepare Firebase credentials for follow-up routing
         if: always()
@@ -231,9 +232,10 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
         with:
           codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
-          # Token effimero limitato ai permessi del job; non è un PAT statico.
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          codex_github_token: ${{ secrets.GITHUB_TOKEN }}
+          # The runner GITHUB_TOKEN is kept for zero-agent collection; the
+          # operational bridge uses the PAT loaded from Remote Config.
+          github_token: ${{ env.GITHUB_PAT_NANAKO }}
+          codex_github_token: ${{ env.GITHUB_PAT_NANAKO }}
           # The corpus PAT is a separate host-side bridge scope. It is never
           # included in the Codex child environment and is accepted only for
           # nanakokyobashi-rgb/frontaliere-articles issue operations.
@@ -243,7 +245,8 @@ jobs:
           # host-side site scope; Codex receives neither PAT.
           codex_site_github_token: ${{ env.GITHUB_PAT }}
           # Il merge che alimenta questo workflow può arrivare da automation interna:
-          # i token host-side restano limitati ai permessi del job e ai bridge espliciti.
+          # i token host-side sono espliciti e separati per repository; il token del
+          # job resta confinato ai passi zero-agent che lo dichiarano.
           # max-turns DINAMICO = min(26 + 8*batch_count, 80), floor 26: il cap cresce
           # con il numero di PR, senza consentire sessioni illimitate.
           # Se il batch satura il cap, il watermark non avanza e la run successiva

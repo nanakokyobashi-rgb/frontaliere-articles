@@ -14,7 +14,8 @@
  *
  * Scopes the token to THIS repo only. On success: masks it and appends
  * `APP_TOKEN=<token>` to $GITHUB_ENV. Missing/invalid App creds → warn + exit 0
- * (no APP_TOKEN written) so callers fall back to GITHUB_PAT/GITHUB_TOKEN.
+ * (no APP_TOKEN written); each caller must then fail closed or use its explicitly
+ * declared PAT policy. This helper never authorizes a silent GITHUB_TOKEN fallback.
  *
  * ─── `APP_TOKEN_WORKFLOWS`: capability VERIFIED, not asserted (issue #5288) ──────────
  *
@@ -117,7 +118,7 @@ function setWorkflowsCapability(granted) {
 }
 
 function warnExit(msg) {
-  console.log(`::warning::mint-app-token: ${msg} — APP_TOKEN not set, callers fall back to GITHUB_PAT/GITHUB_TOKEN.`);
+  console.log(`::warning::mint-app-token: ${msg} — APP_TOKEN not set; callers must fail closed or use an explicitly declared PAT.`);
   setWorkflowsCapability(false);
   process.exit(0);
 }
