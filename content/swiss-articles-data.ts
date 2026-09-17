@@ -19508,6 +19508,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'sorveglianza-digitale-sanita-guida',
+    category: 'novita',
+    date: '2026-09-17T02:36:26.832Z',
+    image: '/images/blog/sorveglianza-digitale-sanita-guida.webp',
+    hasCalculator: true,
+    authorSlug: 'laura-bianchi',
+    authorName: 'Laura Bianchi',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

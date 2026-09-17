@@ -2193,6 +2193,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'spuhler-indeciso-bilaterali-iii': { it: 'spuhler-indeciso-bilaterali-iii', en: 'spuhler-undecided-bilateral-agreements-iii', de: 'spuhler-unentschlossen-bilaterale-vertrage-iii', fr: 'spuhler-indecis-bilaterales-iii' },
  'helene-budliger-artieda-dimissioni-seco': { it: 'helene-budliger-artieda-dimissioni-seco', en: 'helene-budliger-artieda-seco-resignation', de: 'helene-budliger-artieda-ruecktritt-seco', fr: 'helene-budliger-artieda-demission-seco' },
  'mercato-alloggio-svizzera-2025-2026': { it: 'mercato-alloggio-svizzera-2025-2026', en: 'housing-market-switzerland-2025-2026', de: 'wohnungsmarkt-schweiz-2025-2026', fr: 'marche-logement-suisse-2025-2026' },
+ 'sorveglianza-digitale-sanita-guida': { it: 'sorveglianza-digitale-sanita-guida', en: 'digital-surveillance-healthcare-guide', de: 'digitale-ueberwachung-gesundheitswesen-leitfaden', fr: 'surveillance-numerique-sante-guide' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

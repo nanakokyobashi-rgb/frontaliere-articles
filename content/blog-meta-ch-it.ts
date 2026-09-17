@@ -6512,6 +6512,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.mercato-alloggio-svizzera-2025-2026.title': 'Mercato dell\'alloggio: tra crescita demografica e offerta',
     'blog.article.mercato-alloggio-svizzera-2025-2026.excerpt': 'Analisi dell\'Ufficio federale delle abitazioni sul mercato immobiliare svizzero nel 2025 e nel 2026, tra crescita demografica e affitti in aumento.',
     'blog.article.mercato-alloggio-svizzera-2025-2026.imageAlt': 'Mercato dell\'alloggio in Svizzera con edifici residenziali',
+    'blog.article.sorveglianza-digitale-sanita-guida.title': 'Sorveglianza digitale sanità: la nuova guida ufficiale',
+    'blog.article.sorveglianza-digitale-sanita-guida.excerpt': 'Pubblicata la nuova guida ufficiale di IFPDT e privatim sulla sorveglianza digitale tramite telecamere, infrarossi e radar nelle strutture sanitarie.',
+    'blog.article.sorveglianza-digitale-sanita-guida.imageAlt': 'Guida sulla sorveglianza digitale nelle strutture sanitarie in Svizzera',
 };
 
 export default blogMetaChIt;

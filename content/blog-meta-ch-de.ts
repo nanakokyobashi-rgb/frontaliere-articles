@@ -6512,6 +6512,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.mercato-alloggio-svizzera-2025-2026.title': 'Wohnungsmarkt: zwischen Bevölkerungswachstum und Angebot',
     'blog.article.mercato-alloggio-svizzera-2025-2026.excerpt': 'Analyse des Bundesamtes für Wohnungswesen zum Schweizer Immobilienmarkt in den Jahren 2025 und 2026 zwischen Bevölkerungswachstum und steigenden Mieten.',
     'blog.article.mercato-alloggio-svizzera-2025-2026.imageAlt': 'Wohnungsmarkt in der Schweiz mit Wohngebäuden',
+    'blog.article.sorveglianza-digitale-sanita-guida.title': 'Digitale Gesundheitsüberwachung: der neue offizielle Leitfaden',
+    'blog.article.sorveglianza-digitale-sanita-guida.excerpt': 'Der neue offizielle Leitfaden von EDÖB und Privaten zur digitalen Überwachung durch Kameras, Infrarot und Radar in Gesundheitseinrichtungen wurde veröffentlicht.',
+    'blog.article.sorveglianza-digitale-sanita-guida.imageAlt': 'Leitfaden zur digitalen Überwachung in Gesundheitseinrichtungen',
 };
 
 export default blogMetaChDe;

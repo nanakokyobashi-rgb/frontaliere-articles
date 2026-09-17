@@ -6512,6 +6512,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.mercato-alloggio-svizzera-2025-2026.title': 'Marché du logement : entre croissance démographique et offre',
     'blog.article.mercato-alloggio-svizzera-2025-2026.excerpt': 'Analyse de l\'Office fédéral du logement sur le marché immobilier suisse en 2025 et 2026, entre croissance démographique et hausse des loyers.',
     'blog.article.mercato-alloggio-svizzera-2025-2026.imageAlt': 'Marche du logement en Suisse avec des immeubles residentiels',
+    'blog.article.sorveglianza-digitale-sanita-guida.title': 'Surveillance numérique de la santé : le nouveau guide officiel',
+    'blog.article.sorveglianza-digitale-sanita-guida.excerpt': 'Publication du nouveau guide officiel d\'IFPDT et de privatim sur la surveillance numérique par caméras, infrarouges et radars dans les établissements de santé.',
+    'blog.article.sorveglianza-digitale-sanita-guida.imageAlt': 'Guide sur la surveillance numérique dans les structures de santé',
 };
 
 export default blogMetaChFr;

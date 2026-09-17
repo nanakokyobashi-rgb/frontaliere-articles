@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/industria-e-costruzione%3a-ritorno-alla-crescita-nel-ii-trimestre/91918944": {
-    "articleId": "industria-costruzione-crescita-q2",
-    "ts": "2026-08-19T08:42:03.065Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/wn3hze-cbsz4isczfzrs2": {
     "articleId": "difesa-aerea-svizzera-investimenti",
     "ts": "2026-08-19T09:19:00.780Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/0zqf4ypmu5my": {
     "articleId": "mercato-alloggio-svizzera-2025-2026",
     "ts": "2026-09-17T02:27:37.460Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/tbrqnj30sw2p": {
+    "articleId": "sorveglianza-digitale-sanita-guida",
+    "ts": "2026-09-17T02:36:27.154Z",
     "keyForm": 2
   }
 }

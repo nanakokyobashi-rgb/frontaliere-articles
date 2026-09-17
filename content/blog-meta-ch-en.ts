@@ -6512,6 +6512,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.mercato-alloggio-svizzera-2025-2026.title': 'Housing market: between population growth and supply',
     'blog.article.mercato-alloggio-svizzera-2025-2026.excerpt': 'The Federal Office of Housing\'s analysis of the Swiss housing market in 2025 and 2026, amid population growth and rising rents.',
     'blog.article.mercato-alloggio-svizzera-2025-2026.imageAlt': 'Housing market in Switzerland with residential buildings',
+    'blog.article.sorveglianza-digitale-sanita-guida.title': 'Digital health surveillance: the new official guide',
+    'blog.article.sorveglianza-digitale-sanita-guida.excerpt': 'IFPDT and privatim\'s new official guide on digital surveillance via cameras, infrared and radar in healthcare facilities has been published.',
+    'blog.article.sorveglianza-digitale-sanita-guida.imageAlt': 'Digital surveillance guide in Swiss healthcare facilities',
 };
 
 export default blogMetaChEn;
