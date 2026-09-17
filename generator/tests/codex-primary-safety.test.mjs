@@ -342,6 +342,8 @@ test('the corpus review loads its host-side PAT before invoking Codex', () => {
   assert.match(testsWorkflow, /node generator\/scripts\/load-rc-env\.mjs/);
   assert.doesNotMatch(reviewStep, /claude_code_oauth_token:/,
     'la review del corpus deve restare sulla corsia Codex senza fallback Claude implicito');
+  assert.match(reviewStep, /codex_github_token: \$\{\{ secrets\.GITHUB_TOKEN \}\}/,
+    'la review corrente deve essere pubblicata dall’identità bot riconosciuta dal gate');
   assert.match(reviewStep, /codex_corpus_github_token: \$\{\{ env\.GITHUB_PAT_NANAKO \|\| env\.GITHUB_PAT \}\}/);
   assert.doesNotMatch(reviewStep, /GITHUB_PAT:\s*\$\{\{ env\.GITHUB_PAT \}\}/);
   assert.match(followupStep, /codex_corpus_github_token: \$\{\{ env\.GITHUB_PAT_NANAKO \|\| env\.GITHUB_PAT \}\}/);
@@ -367,7 +369,7 @@ test('the corpus review loads its host-side PAT before invoking Codex', () => {
   assert.match(mintGate, /ghPr\(\['pr', 'comment'/);
 });
 
-test('ogni caller Codex usa una credenziale operativa esplicita e senza fallback', () => {
+test('ogni caller Codex usa una credenziale operativa esplicita e senza fallback implicito', () => {
   assert.equal(
     codexBridgeWorkflowSources.reduce((count, workflow) => count + workflow.callerSteps.length, 0),
     8,
@@ -379,17 +381,38 @@ test('ogni caller Codex usa una credenziale operativa esplicita e senza fallback
       const activeCaller = activeWorkflowText(caller);
       const tokenLines = activeCaller.match(/^ {10}codex_github_token:\s*.+$/gm) ?? [];
       assert.equal(tokenLines.length, 1, `${relativePath}: il caller deve dichiarare un solo codex_github_token`);
-      const expected = 'env.GITHUB_PAT_NANAKO';
-      assert.match(
-        tokenLines[0],
-        /\$\{\{\s*env\.GITHUB_PAT_NANAKO\s*\}\}/,
-        `${relativePath}: il bridge Codex deve usare ${expected}`,
-      );
-      assert.doesNotMatch(
-        tokenLines[0],
-        /\|\||secrets\.GITHUB_TOKEN|github\.token|\bGITHUB_TOKEN\b/,
-        `${relativePath}: il bridge Codex non deve ricadere sul token del run`,
-      );
+      const currentReviewUsesBotIdentity = relativePath === '.github/workflows/tests.yml';
+      if (currentReviewUsesBotIdentity) {
+        assert.match(
+          tokenLines[0],
+          /\$\{\{\s*secrets\.GITHUB_TOKEN\s*\}\}/,
+          `${relativePath}: la review corrente deve usare l’identità github-actions[bot]`,
+        );
+        assert.doesNotMatch(
+          tokenLines[0],
+          /\|\||env\.GITHUB_PAT_NANAKO|github\.token/,
+          `${relativePath}: il token bot della review non deve avere fallback o identità alternativa`,
+        );
+        const corpusTokenLines = activeCaller.match(/^ {10}codex_corpus_github_token:\s*.+$/gm) ?? [];
+        assert.equal(corpusTokenLines.length, 1,
+          `${relativePath}: il caller deve separare il PAT dalle operazioni corpus/cross-repo`);
+        assert.match(
+          corpusTokenLines[0],
+          /\$\{\{\s*env\.GITHUB_PAT_NANAKO\s*\|\|\s*env\.GITHUB_PAT\s*\}\}/,
+          `${relativePath}: il bridge corpus deve usare il PAT esplicito caricato da Remote Config`,
+        );
+      } else {
+        assert.match(
+          tokenLines[0],
+          /\$\{\{\s*env\.GITHUB_PAT_NANAKO\s*\}\}/,
+          `${relativePath}: il bridge Codex deve usare il PAT corpus esplicito`,
+        );
+        assert.doesNotMatch(
+          tokenLines[0],
+          /\|\||secrets\.GITHUB_TOKEN|github\.token|\bGITHUB_TOKEN\b/,
+          `${relativePath}: il bridge Codex non deve ricadere sul token del run`,
+        );
+      }
 
       const callerStart = source.indexOf(caller);
       const beforeCaller = source.slice(0, callerStart);

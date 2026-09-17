@@ -804,10 +804,12 @@ jobs:
           REVIEW_TIER: ${{ steps.tier.outputs.tier }}
           INCREMENTAL_BASE: ${{ steps.tier.outputs.incremental_base }}
         with:
-          # This corpus repo has no installation of the site's GitHub App. The
-          # PAT loaded from Remote Config is the explicit review identity; the
-          # GITHUB_TOKEN is never an operational fallback.
-          codex_github_token: ${{ env.GITHUB_PAT_NANAKO }}
+          # This corpus repo has no installation of the site's GitHub App. Use
+          # the explicit run token only for the current-repository review so
+          # the accepted reviewer identity remains github-actions[bot]. The
+          # PAT loaded from Remote Config stays separate for corpus/cross-repo
+          # operations; neither token is an implicit fallback for the other.
+          codex_github_token: ${{ secrets.GITHUB_TOKEN }}
           codex_corpus_github_token: ${{ env.GITHUB_PAT_NANAKO || env.GITHUB_PAT }}
           codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
           review_marker: '<!-- CODEX_FALLBACK_REVIEW -->'
