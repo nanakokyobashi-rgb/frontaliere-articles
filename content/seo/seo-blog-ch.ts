@@ -84221,6 +84221,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-paradiso-trading-risorse-naturali': {
+    title: 'Svizzera e trading: l\'origine del mercato delle materie prime',
+    description: 'Approfondimento sul ruolo della Svizzera come hub globale per il trading di materie prime e la trasformazione delle risorse naturali in profitto.',
+    keywords: 'frontalieri, ticino, svizzera, italia, trading, origine, mercato, materie',
+    ogTitle: 'Svizzera e trading di risorse naturali',
+    ogDescription: 'Scopri l\'analisi economica sul ruolo della Svizzera nel commercio globale e nella trasformazione delle risorse naturali provenienti da altri Paesi.',
+    canonicalPath: '/articoli-svizzera/paradiso-trading-risorse-naturali/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Svizzera e trading: l'origine del mercato delle materie prime",
+      "description": "Approfondimento sul ruolo della Svizzera come hub globale per il trading di materie prime e la trasformazione delle risorse naturali in profitto.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/paradiso-trading-risorse-naturali.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Mercato del trading e risorse naturali in Svizzera"
+      },
+      "datePublished": "2026-09-17T01:04:22+00:00",
+      "dateModified": "2026-09-17T01:04:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/paradiso-trading-risorse-naturali/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

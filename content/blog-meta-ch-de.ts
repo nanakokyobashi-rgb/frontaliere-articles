@@ -6497,6 +6497,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.revolut-banca-svizzera-finma.title': 'Revolut zielt darauf ab, eine vollständige Bank in der Schweiz zu werden',
     'blog.article.revolut-banca-svizzera-finma.excerpt': 'Das britische Fintech beantragte bei der FINMA eine Schweizer Banklizenz und bot Konten bei der Schweizer IBAN an.',
     'blog.article.revolut-banca-svizzera-finma.imageAlt': 'Revolut beantragt FINMA-Banklizenz in der Schweiz',
+    'blog.article.paradiso-trading-risorse-naturali.title': 'Schweiz und Handel: Ursprung des Rohstoffmarktes',
+    'blog.article.paradiso-trading-risorse-naturali.excerpt': 'Analyse der Rolle der Schweiz als globaler Knotenpunkt für den Handel und die Verarbeitung natürlicher Ressourcen aus anderen Ländern.',
+    'blog.article.paradiso-trading-risorse-naturali.imageAlt': 'Handelsmarkt und Naturressourcen in der Schweiz',
 };
 
 export default blogMetaChDe;

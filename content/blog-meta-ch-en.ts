@@ -6497,6 +6497,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.revolut-banca-svizzera-finma.title': 'Revolut aims to become a full bank in Switzerland',
     'blog.article.revolut-banca-svizzera-finma.excerpt': 'The British fintech has applied to FINMA to obtain a Swiss banking license and offer accounts with Swiss IBANs.',
     'blog.article.revolut-banca-svizzera-finma.imageAlt': 'Revolut applies to FINMA for a banking license in Switzerland',
+    'blog.article.paradiso-trading-risorse-naturali.title': 'Switzerland and trading: the origin of the commodities market',
+    'blog.article.paradiso-trading-risorse-naturali.excerpt': 'Analysis of Switzerland\'s role as a global hub for trade and transformation of natural resources from other countries.',
+    'blog.article.paradiso-trading-risorse-naturali.imageAlt': 'Trading market and natural resources in Switzerland',
 };
 
 export default blogMetaChEn;

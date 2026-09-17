@@ -2188,6 +2188,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'costi-nascosti-rientro-scolastico-svizzera': { it: 'costi-nascosti-rientro-scolastico-svizzera', en: 'hidden-costs-back-to-school-switzerland', de: 'versteckte-kosten-schulbeginn-schweiz', fr: 'couts-caches-rentree-scolaire-suisse' },
  'malinteso-rendite-avs-moutier': { it: 'malinteso-rendite-avs-moutier', en: 'moutier-avs-pension-misunderstanding', de: 'missverstaendnis-ueber-ahv-renten-in-moutier', fr: 'malentendu-sur-les-rentes-avs-a-moutier' },
  'revolut-banca-svizzera-finma': { it: 'revolut-banca-svizzera-finma', en: 'revolut-banking-license-switzerland', de: 'revolut-schweizer-banklizenz', fr: 'revolut-licence-bancaire-suisse' },
+ 'paradiso-trading-risorse-naturali': { it: 'paradiso-trading-risorse-naturali', en: 'paradise-trading-natural-resources', de: 'paradies-trading-naturressourcen', fr: 'paradis-trading-ressources-naturelles' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

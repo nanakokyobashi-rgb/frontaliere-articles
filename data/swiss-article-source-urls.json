@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1944063/banche-patrimonio-clienti-dietrich-franchi-puo-considerano": {
-    "articleId": "soglie-patrimonio-banche-svizzera",
-    "ts": "2026-08-18T21:58:03.147Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/9h0hioulfebujggpy5krh": {
     "articleId": "easygov-pmi-svizzere",
     "ts": "2026-08-18T23:24:45.913Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4087039": {
     "articleId": "revolut-banca-svizzera-finma",
     "ts": "2026-09-17T00:55:00.855Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/economia/economia/1950387/dietro-il-paradiso-del-trading-la-maledizione-delle-risorse": {
+    "articleId": "paradiso-trading-risorse-naturali",
+    "ts": "2026-09-17T01:04:23.219Z",
     "keyForm": 2
   }
 }

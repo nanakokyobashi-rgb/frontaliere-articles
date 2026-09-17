@@ -19463,6 +19463,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'paradiso-trading-risorse-naturali',
+    category: 'pratico',
+    date: '2026-09-17T01:04:22.906Z',
+    image: '/images/blog/paradiso-trading-risorse-naturali.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
