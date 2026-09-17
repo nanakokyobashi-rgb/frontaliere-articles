@@ -11797,6 +11797,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-09-16.imageAlt': 'I numeri del giorno per i frontalieri – 16 settembre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro',
     'blog.article.bollettino-frontaliere-2026-09-16.seoDescription': 'Bollettino frontalieri del 16 settembre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
     'blog.article.bollettino-frontaliere-2026-09-16.ogDescription': 'I numeri del 16 settembre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    'blog.article.stefania-filetti-cgil-nazionale.title': 'Stefania Filetti eletta nella segreteria nazionale Cgil',
+    'blog.article.stefania-filetti-cgil-nazionale.excerpt': 'L\'assemblea generale della Cgil riunita a Roma ha eletto a voto segreto Stefania Filetti nella nuova segreteria confederale composta da dieci persone.',
+    'blog.article.stefania-filetti-cgil-nazionale.imageAlt': 'Stefania Filetti eletta nella segreteria nazionale della Cgil',
 };
 
 export default blogMetaIt;

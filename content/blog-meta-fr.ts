@@ -11798,6 +11798,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-09-16.imageAlt': 'Les chiffres du jour pour les frontaliers – 16 septembre 2026 : attentes aux douanes, prix de l\'essence, taux CHF-EUR et offres d\'emploi',
     'blog.article.bollettino-frontaliere-2026-09-16.seoDescription': 'Bulletin du frontalier du 16 septembre 2026 : les files aux douanes ce matin, l\'essence la moins chère, taux franc-euro et nouvelles offres d\'emploi en Suisse.',
     'blog.article.bollettino-frontaliere-2026-09-16.ogDescription': 'Les chiffres du 16 septembre 2026 pour les frontaliers : combien de temps on attend ce matin à chaque douane, où l\'essence coûte le moins cher, ce que vaut le franc aujourd\'hui et combien d\'offres d\'emploi sont parues en Suisse.',
+    'blog.article.stefania-filetti-cgil-nazionale.title': 'Stefania Filetti élue au secrétariat national de la CGIL',
+    'blog.article.stefania-filetti-cgil-nazionale.excerpt': 'L\'assemblée générale de la CGIL réunie à Rome a élu au scrutin secret Stefania Filetti dans le nouveau secrétariat confédéral composé de dix personnes.',
+    'blog.article.stefania-filetti-cgil-nazionale.imageAlt': 'Stefania Filetti élue au secrétariat national de la Cgil',
 };
 
 export default blogMetaFr;

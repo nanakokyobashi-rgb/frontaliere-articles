@@ -11795,6 +11795,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-09-16.imageAlt': 'Die Zahlen des Tages für Grenzgänger – 16. September 2026: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote',
     'blog.article.bollettino-frontaliere-2026-09-16.seoDescription': 'Grenzgänger-Bulletin vom 16. September 2026: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.',
     'blog.article.bollettino-frontaliere-2026-09-16.ogDescription': 'Die Zahlen vom 16. September 2026 für Grenzgänger: wie lange man heute Morgen an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, was der Franken heute wert ist und wie viele Stellen neu dazugekommen sind.',
+    'blog.article.stefania-filetti-cgil-nazionale.title': 'Stefania Filetti wurde in das nationale Sekretariat der Cgil gewählt',
+    'blog.article.stefania-filetti-cgil-nazionale.excerpt': 'Die in Rom versammelte Generalversammlung der Cgil hat Stefania Filetti in geheimer Abstimmung in das neue zehnköpfige Bundessekretariat gewählt.',
+    'blog.article.stefania-filetti-cgil-nazionale.imageAlt': 'Stefania Filetti in das nationale Sekretariat der Cgil gewählt',
 };
 
 export default blogMetaDe;

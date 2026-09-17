@@ -91138,6 +91138,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-stefania-filetti-cgil-nazionale': {
+    title: 'Stefania Filetti eletta nella segreteria nazionale Cgil',
+    description: 'Stefania Filetti entra nella segreteria nazionale della Cgil eletta a Roma dall\'assemblea generale. Dalla gavetta all\'Alfa Romeo ai vertici sindacali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, stefania, filetti, eletta, nella',
+    ogTitle: 'Stefania Filetti eletta nella segreteria nazionale della Cgil',
+    ogDescription: 'L\'assemblea generale della Cgil riunita a Roma ha eletto a voto segreto Stefania Filetti nella nuova segreteria confederale guidata da Maurizio Landini, dopo un percorso iniziato nello stabilimento Alfa Romeo di Arese.',
+    canonicalPath: '/articoli-frontaliere/stefania-filetti-cgil-nazionale',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Stefania Filetti eletta nella segreteria nazionale Cgil",
+      "description": "Stefania Filetti entra nella segreteria nazionale della Cgil eletta a Roma dall'assemblea generale. Dalla gavetta all'Alfa Romeo ai vertici sindacali.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/stefania-filetti-cgil-nazionale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Stefania Filetti eletta nella segreteria nazionale della Cgil"
+      },
+      "datePublished": "2026-09-17T01:00:16+00:00",
+      "dateModified": "2026-09-17T01:00:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/stefania-filetti-cgil-nazionale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
