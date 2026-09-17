@@ -6500,6 +6500,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.paradiso-trading-risorse-naturali.title': 'Suisse et trading : l\'origine du marché des matières premières',
     'blog.article.paradiso-trading-risorse-naturali.excerpt': 'Analyse du rôle de la Suisse en tant que plaque tournante mondiale pour le commerce et la transformation des ressources naturelles provenant d\'autres pays.',
     'blog.article.paradiso-trading-risorse-naturali.imageAlt': 'Marché du négoce et ressources naturelles en Suisse',
+    'blog.article.mercato-alloggio-svizzera-ufab.title': 'Marché du logement en Suisse : la situation se détériore',
+    'blog.article.mercato-alloggio-svizzera-ufab.excerpt': 'Selon l\'Office fédéral du logement, la situation sur le marché du logement en Suisse se détériore en raison des nouvelles constructions inférieures à l\'augmentation des ménages.',
+    'blog.article.mercato-alloggio-svizzera-ufab.imageAlt': 'Marché du logement en Suisse et nouveaux bâtiments résidentiels',
 };
 
 export default blogMetaChFr;

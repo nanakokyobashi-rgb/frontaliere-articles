@@ -6500,6 +6500,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.paradiso-trading-risorse-naturali.title': 'Schweiz und Handel: Ursprung des Rohstoffmarktes',
     'blog.article.paradiso-trading-risorse-naturali.excerpt': 'Analyse der Rolle der Schweiz als globaler Knotenpunkt für den Handel und die Verarbeitung natürlicher Ressourcen aus anderen Ländern.',
     'blog.article.paradiso-trading-risorse-naturali.imageAlt': 'Handelsmarkt und Naturressourcen in der Schweiz',
+    'blog.article.mercato-alloggio-svizzera-ufab.title': 'Wohnungsmarkt Schweiz: Situation verschlechtert sich',
+    'blog.article.mercato-alloggio-svizzera-ufab.excerpt': 'Gemäss dem Bundesamt für Wohnungswesen verschlechtert sich die Situation auf dem Wohnungsmarkt in der Schweiz aufgrund von Neubauten, die hinter der Zunahme der Haushalte zurückbleiben.',
+    'blog.article.mercato-alloggio-svizzera-ufab.imageAlt': 'Wohnungsmarkt in der Schweiz und neue Wohngebäude',
 };
 
 export default blogMetaChDe;

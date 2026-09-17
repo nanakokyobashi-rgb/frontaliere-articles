@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/9h0hioulfebujggpy5krh": {
-    "articleId": "easygov-pmi-svizzere",
-    "ts": "2026-08-18T23:24:45.913Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/politica/1944563/neutralita-svizzera-i-sondaggi-dicono-no-al-cambiamento-ma-il-ticino-fa-eccezione": {
     "articleId": "ticino-neutralita-sondaggio-2026",
     "ts": "2026-08-19T06:02:59.636Z",
@@ -2497,6 +2492,11 @@
   "https://www.laregione.ch/economia/economia/1950387/dietro-il-paradiso-del-trading-la-maledizione-delle-risorse": {
     "articleId": "paradiso-trading-risorse-naturali",
     "ts": "2026-09-17T01:04:23.219Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/alloggio%3a-%22situazione-continua-a-peggiorare%22%2c-dice-berna/92069715": {
+    "articleId": "mercato-alloggio-svizzera-ufab",
+    "ts": "2026-09-17T01:55:49.264Z",
     "keyForm": 2
   }
 }

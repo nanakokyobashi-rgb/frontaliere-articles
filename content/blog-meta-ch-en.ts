@@ -6500,6 +6500,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.paradiso-trading-risorse-naturali.title': 'Switzerland and trading: the origin of the commodities market',
     'blog.article.paradiso-trading-risorse-naturali.excerpt': 'Analysis of Switzerland\'s role as a global hub for trade and transformation of natural resources from other countries.',
     'blog.article.paradiso-trading-risorse-naturali.imageAlt': 'Trading market and natural resources in Switzerland',
+    'blog.article.mercato-alloggio-svizzera-ufab.title': 'Accommodation market in Switzerland: the situation is getting worse',
+    'blog.article.mercato-alloggio-svizzera-ufab.excerpt': 'According to the Federal Office of Housing the situation on the housing market in Switzerland worsens due to new construction undercutting the rise in household economies.',
+    'blog.article.mercato-alloggio-svizzera-ufab.imageAlt': 'Housing market in Switzerland and new residential buildings',
 };
 
 export default blogMetaChEn;

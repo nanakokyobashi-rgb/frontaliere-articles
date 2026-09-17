@@ -6500,6 +6500,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.paradiso-trading-risorse-naturali.title': 'Svizzera e trading: l\'origine del mercato delle materie prime',
     'blog.article.paradiso-trading-risorse-naturali.excerpt': 'Analisi sul ruolo della Svizzera come hub globale per il commercio e la trasformazione delle risorse naturali provenienti da altri Paesi.',
     'blog.article.paradiso-trading-risorse-naturali.imageAlt': 'Mercato del trading e risorse naturali in Svizzera',
+    'blog.article.mercato-alloggio-svizzera-ufab.title': 'Mercato dell\'alloggio in Svizzera: la situazione peggiora',
+    'blog.article.mercato-alloggio-svizzera-ufab.excerpt': 'Secondo l\'Ufficio federale delle abitazioni la situazione sul mercato dell\'alloggio in Svizzera peggiora a causa delle nuove costruzioni inferiori all\'aumento delle economie domestiche.',
+    'blog.article.mercato-alloggio-svizzera-ufab.imageAlt': 'Mercato dell\'alloggio in Svizzera e nuove costruzioni residenziali',
 };
 
 export default blogMetaChIt;
