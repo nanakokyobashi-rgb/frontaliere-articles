@@ -24,6 +24,12 @@ on:
 permissions:
   contents: read
   pull-requests: write
+concurrency:
+  # Every trigger below calls the same idempotent gate. Serialize events for
+  # one PR and discard stale retries while a newer verdict is being checked.
+  # workflow_run also covers runs without a pull_request payload.
+  group: native-automerge-${{ github.event.pull_request.number || github.event.workflow_run.pull_requests[0].number || github.event.workflow_run.head_sha || github.run_id }}
+  cancel-in-progress: true
 jobs:
   enable:
     # Guard explicitly against non-PR dispatches. This keeps a malformed or
