@@ -206,14 +206,18 @@ test('la baseline fallita o il digest invalido bloccano prima del confronto body
     `un digest invalido non può diventare progresso body-only:\nstdout=${invalidDigest.stdout}\nstderr=${invalidDigest.stderr}`);
 });
 
-test('i fixer di PR serializzano il branch senza sfrattare la pending gemella', () => {
+test('i fixer di PR serializzano la PR senza sfrattare la pending gemella', () => {
   const groupOf = (source) => source.match(/^  group: (.+)$/m)?.[1];
   const redcheckGroup = groupOf(WORKFLOW);
   const redflagGroup = groupOf(REDFLAG_WORKFLOW);
   assert.notEqual(redcheckGroup, redflagGroup,
     'i workflow devono evitare una coda condivisa che sfratta la pending gemella');
   assert.match(redcheckGroup || '', /^redcheck-fix-/);
-  assert.match(redflagGroup || '', /^redflag-fix-\$\{\{ github\.event\.pull_request\.head\.ref \}\}$/);
+  assert.match(
+    redflagGroup || '',
+    /^redflag-fix-pr-\$\{\{ inputs\.pr \|\| github\.event\.pull_request\.number \|\| 'unknown' \}\}$/,
+    'il fixer deve usare il numero PR anche su workflow_dispatch manuale',
+  );
   assert.match(WORKFLOW, /busy=[\s\S]*--workflow=pr-redflag-fixer\.yml/,
     'redcheck deve riconoscere un redflag gia\u0027 attivo prima del push');
   assert.match(REDFLAG_WORKFLOW, /while :[\s\S]*--workflow=pr-redcheck-fixer\.yml[\s\S]*sleep 10/,
