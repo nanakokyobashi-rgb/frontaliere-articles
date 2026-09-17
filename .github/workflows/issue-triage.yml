@@ -70,7 +70,6 @@ concurrency:
 permissions:
   contents: read
   issues: write
-  id-token: write
   # Serve allo step `Release stale agent:in-progress claims` del job `sweep`:
   # un claim va rilasciato SOLO se nessuna PR aperta lo giustifica, e senza
   # questo permesso quell'elenco sarebbe vuoto. Sola lettura.
@@ -112,7 +111,7 @@ jobs:
             printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > /tmp/firebase-sa.json
             echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/firebase-sa.json" >> "$GITHUB_ENV"
           else
-            echo "⚠️ Nessuna Firebase SA — GITHUB_PAT_NANAKO non caricato; il routing sarà inerte (solo agent:triaged)."
+            echo "⚠️ Nessuna Firebase SA — GITHUB_PAT_NANAKO non caricato; L11 usa la coda fallback e il resto attende lo sweep."
           fi
 
       - name: Load secrets from Remote Config
@@ -136,14 +135,90 @@ jobs:
           # sembrerebbe funzionare — la label c'è — ma non succederebbe nulla.
           ROUTING_TOKEN: ${{ env.GITHUB_PAT_NANAKO }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
-          ISSUE_TITLE: ${{ github.event.issue.title }}
           REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
-          labels_json=$(gh issue view "$ISSUE_NUMBER" --repo "$REPO" --json labels --jq '[.labels[].name]')
-          state=$(gh issue view "$ISSUE_NUMBER" --repo "$REPO" --json state --jq '.state')
-          title="$ISSUE_TITLE"
+          issue_json=$(gh issue view "$ISSUE_NUMBER" --repo "$REPO" --json title,body,labels,state)
+          labels_json=$(printf '%s' "$issue_json" | jq -c '[.labels[].name]')
+          state=$(printf '%s' "$issue_json" | jq -r '.state')
+          title=$(printf '%s' "$issue_json" | jq -r '.title // ""')
+          body=$(printf '%s' "$issue_json" | jq -r '.body // ""')
           echo "Issue #$ISSUE_NUMBER state=$state labels=$labels_json title=$title"
+
+          # L11 ha un contratto prodotto dal supervisore. Validarlo prima della
+          # classificazione generica evita che la prosa dei finding (spesso in
+          # .github/workflows e scripts/ci) venga scambiata per una richiesta
+          # umana o per un'autorizzazione implicita. Un contratto assente resta
+          # sul classificatore normale; uno presente ma invalido è review-only.
+          l11_contract=$(node --input-type=module - "$body" <<'NODE'
+          const body = process.argv[2] || '';
+          const marker = /<!-- L11_ISSUE_CONTRACT:\s*(\{.*\})\s*-->/ms.exec(body);
+          if (!marker) {
+            process.stdout.write(JSON.stringify({ present: false, valid: false, fixable: false }));
+            process.exit(0);
+          }
+          let contract;
+          try { contract = JSON.parse(marker[1]); } catch {
+            process.stdout.write(JSON.stringify({ present: true, valid: false, fixable: false, reason: 'invalid-json' }));
+            process.exit(0);
+          }
+          const id = (value, prefix) => typeof value === 'string' && new RegExp(`^lf-${prefix}-[0-9a-f]{24}$`).test(value);
+          const generated = Date.parse(typeof contract.generatedAt === 'string' ? contract.generatedAt : '');
+          const expires = Date.parse(typeof contract.expiresAt === 'string' ? contract.expiresAt : '');
+          const ttl = Number.isInteger(contract.candidateTtlHours) && contract.candidateTtlHours > 0
+            && Number.isFinite(generated) && Number.isFinite(expires)
+            && expires > Date.now() && expires >= generated
+            && expires <= generated + contract.candidateTtlHours * 3600000
+            && contract.ttl?.hours === contract.candidateTtlHours
+            && contract.ttl?.expiresAt === contract.expiresAt;
+          const shape = contract.schemaVersion === 1 && contract.loopId === 'L11'
+            && contract.mode === 'observe-report-only'
+            && id(contract.candidateId, 'candidate') && id(contract.sourceRecordId, 'source')
+            && Number.isFinite(generated)
+            && contract.remediationPrProofRequired === true && contract.remediationPr === null
+            && (contract.route === 'bounded-fix-queue' || contract.route === 'review-only');
+          const actionParts = typeof contract.actionClass === 'string'
+            ? contract.actionClass.split('+').map((part) => part.trim()) : [];
+          const fixable = shape && contract.route === 'bounded-fix-queue' && actionParts.includes('issue') && ttl;
+          const reviewOnly = shape && contract.route === 'review-only';
+          process.stdout.write(JSON.stringify({ present: true, valid: fixable || reviewOnly, fixable, reason: fixable || reviewOnly ? null : 'fail-closed' }));
+          NODE
+          )
+          l11_present=$(printf '%s' "$l11_contract" | jq -r '.present == true')
+          l11_valid=$(printf '%s' "$l11_contract" | jq -r '.valid == true')
+          l11_fixable=$(printf '%s' "$l11_contract" | jq -r '.fixable == true')
+
+          if [ "$l11_present" = "true" ]; then
+            if [ "$l11_valid" != "true" ] || [ "$l11_fixable" != "true" ]; then
+              echo "L11 contract non eleggibile → review-only, nessun needs-human scelto per default."
+              gh issue edit "$ISSUE_NUMBER" --repo "$REPO" \
+                --remove-label agent:fix --remove-label agent:fix-queued \
+                --add-label operations-audit-review --add-label agent:triaged || true
+              exit 0
+            fi
+            # L11 è autorizzato dal registry solo al percorso issue bounded. Se
+            # il PAT manca, il fallback usa GITHUB_TOKEN per lasciare una coda
+            # visibile allo sweep/drainer: non si marca triaged prima di aver
+            # scritto una label che preservi il lavoro.
+            if [ "$state" != "OPEN" ]; then
+              gh issue edit "$ISSUE_NUMBER" --repo "$REPO" --add-label agent:triaged || true
+              echo "Issue non OPEN ($state) → skip routing L11."; exit 0
+            fi
+            if [ -z "${ROUTING_TOKEN:-}" ]; then
+              echo "::warning::L11 senza PAT: accodo con GITHUB_TOKEN per il prossimo sweep/drainer."
+              gh issue edit "$ISSUE_NUMBER" --repo "$REPO" \
+                --add-label agent:fix-queued --add-label fu-prio:low \
+                --remove-label operations-audit-review \
+                --add-label agent:triaged
+              exit 0
+            fi
+            echo "L11 contract valido → agent:fix-queued via PAT."
+            GH_TOKEN="$ROUTING_TOKEN" gh issue edit "$ISSUE_NUMBER" --repo "$REPO" \
+              --add-label agent:fix-queued --add-label fu-prio:low \
+              --remove-label operations-audit-review
+            gh issue edit "$ISSUE_NUMBER" --repo "$REPO" --add-label agent:triaged || true
+            exit 0
+          fi
 
           decision=$(node scripts/lib/classify-issue.mjs "$title" "$labels_json")
           echo "decision=$decision"
@@ -153,32 +228,31 @@ jobs:
           fuprio=$(node -e "process.stdout.write(JSON.parse(process.argv[1]).fuPrio||'')" "$decision")
           echo "category=$cat autofix=$autofix route=$route fuPrio=$fuprio"
 
-          # Label anti-loop sempre, col GITHUB_TOKEN: non deve triggerare nulla.
-          gh issue edit "$ISSUE_NUMBER" --repo "$REPO" --add-label "agent:triaged" || true
-
           if [ "$route" = "none" ] || [ "$autofix" != "true" ]; then
+            gh issue edit "$ISSUE_NUMBER" --repo "$REPO" --add-label "agent:triaged" || true
             echo "route=$route autofix=$autofix → nessun routing."; exit 0
           fi
           if [ "$state" != "OPEN" ]; then
+            gh issue edit "$ISSUE_NUMBER" --repo "$REPO" --add-label "agent:triaged" || true
             echo "Issue non OPEN ($state) → skip routing."; exit 0
           fi
           if [ -z "${ROUTING_TOKEN:-}" ]; then
-            echo "::warning::Nessun PAT usabile → routing inerte (il GITHUB_TOKEN non farebbe partire fixer/drainer)."; exit 0
+            echo "::warning::Nessun PAT usabile → issue non ancora triaged; lo sweep potrà ritentare senza perdere l'evento."; exit 0
           fi
-          # Non fatale: se il PAT non ha i permessi o la label non esiste, il
-          # triage resta comunque completato (issue etichettata) e il problema
-          # è visibile come warning invece che come run rossa.
           if [ "$route" = "queue" ]; then
             prio="${fuprio:-low}"
             echo "Accodo #$ISSUE_NUMBER → agent:fix-queued + fu-prio:$prio (la promuove il drainer)."
             GH_TOKEN="$ROUTING_TOKEN" gh issue edit "$ISSUE_NUMBER" --repo "$REPO" \
               --add-label "agent:fix-queued" --add-label "fu-prio:$prio" \
-              || echo "::warning::accodamento via PAT fallito (scope/label?) — routing non applicato, triage completato."
+              || { echo "::warning::accodamento via PAT fallito (scope/label?) — issue non triaged, lo sweep ritenta."; exit 0; }
           else
             echo "Applico agent:fix via PAT su #$ISSUE_NUMBER (category=$cat) → fa partire il fixer."
             GH_TOKEN="$ROUTING_TOKEN" gh issue edit "$ISSUE_NUMBER" --repo "$REPO" --add-label "agent:fix" \
-              || echo "::warning::agent:fix via PAT fallito (scope issues:write? label assente?) — routing non applicato, triage completato."
+              || { echo "::warning::agent:fix via PAT fallito (scope issues:write? label assente?) — issue non triaged, lo sweep ritenta."; exit 0; }
           fi
+          # Anti-loop solo dopo il routing: un evento issues:opened è one-shot e
+          # un claim prematuro renderebbe l'errore permanente.
+          gh issue edit "$ISSUE_NUMBER" --repo "$REPO" --add-label "agent:triaged" || true
 
       - name: Cleanup Firebase credentials
         if: always()
@@ -223,7 +297,7 @@ jobs:
             printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > /tmp/firebase-sa.json
             echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/firebase-sa.json" >> "$GITHUB_ENV"
           else
-            echo "⚠️ Nessuna Firebase SA — routing dello sweep inerte (solo agent:triaged)."
+            echo "⚠️ Nessuna Firebase SA — L11 usa la coda fallback; il routing PAT resta inerte."
           fi
 
       - name: Load secrets from Remote Config
@@ -237,6 +311,72 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
         run: node scripts/ci/alert-pat-down.mjs --workflow "${{ github.workflow }}" --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+      # Normalizza prima dello sweep generico le issue L11 già persistite dal
+      # GITHUB_TOKEN. Il loro testo contiene path di control-plane, ma il
+      # contratto registry-driven è l'unica autorizzazione per il fixer; un
+      # contratto assente/invalido resta review-only e non introduce
+      # `needs-human` per scelta.
+      - name: Normalize L11 issue contracts (bounded, fail-closed)
+        if: github.event.inputs.dry_run != 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_PAT: ${{ env.GITHUB_PAT_NANAKO }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -uo pipefail
+          issues=$(gh issue list --repo "$GH_REPO" --state open --label operations-audit --limit 60 --json number,body 2>/dev/null || echo '[]')
+          while IFS= read -r issue; do
+            [ -n "$issue" ] || continue
+            number=$(printf '%s' "$issue" | jq -r '.number')
+            body=$(printf '%s' "$issue" | jq -r '.body // ""')
+            contract=$(node --input-type=module - "$body" <<'NODE'
+          const body = process.argv[2] || '';
+          const marker = /<!-- L11_ISSUE_CONTRACT:\s*(\{.*\})\s*-->/ms.exec(body);
+          if (!marker) { process.stdout.write(JSON.stringify({ present: false, valid: false, fixable: false })); process.exit(0); }
+          let c;
+          try { c = JSON.parse(marker[1]); } catch { process.stdout.write(JSON.stringify({ present: true, valid: false, fixable: false, reason: 'invalid-json' })); process.exit(0); }
+          const id = (v, p) => typeof v === 'string' && new RegExp(`^lf-${p}-[0-9a-f]{24}$`).test(v);
+          const generated = Date.parse(typeof c.generatedAt === 'string' ? c.generatedAt : '');
+          const expires = Date.parse(typeof c.expiresAt === 'string' ? c.expiresAt : '');
+          const ttl = Number.isInteger(c.candidateTtlHours) && c.candidateTtlHours > 0
+            && Number.isFinite(generated) && Number.isFinite(expires) && expires > Date.now()
+            && expires >= generated && expires <= generated + c.candidateTtlHours * 3600000
+            && c.ttl?.hours === c.candidateTtlHours && c.ttl?.expiresAt === c.expiresAt;
+          const shape = c.schemaVersion === 1 && c.loopId === 'L11' && c.mode === 'observe-report-only'
+            && id(c.candidateId, 'candidate') && id(c.sourceRecordId, 'source') && Number.isFinite(generated)
+            && c.remediationPrProofRequired === true && c.remediationPr === null
+            && (c.route === 'bounded-fix-queue' || c.route === 'review-only');
+          const parts = typeof c.actionClass === 'string' ? c.actionClass.split('+').map((v) => v.trim()) : [];
+          const fixable = shape && c.route === 'bounded-fix-queue' && parts.includes('issue') && ttl;
+          const reviewOnly = shape && c.route === 'review-only';
+          process.stdout.write(JSON.stringify({ present: true, valid: fixable || reviewOnly, fixable }));
+          NODE
+            )
+            present=$(printf '%s' "$contract" | jq -r '.present == true')
+            valid=$(printf '%s' "$contract" | jq -r '.valid == true')
+            fixable=$(printf '%s' "$contract" | jq -r '.fixable == true')
+            [ "$present" = "true" ] || continue
+            if [ "$valid" = "true" ] && [ "$fixable" = "true" ]; then
+              echo "L11 #$number contract valido → queue + triaged"
+              if [ -n "${GITHUB_PAT:-}" ]; then
+                GH_TOKEN="$GITHUB_PAT" gh issue edit "$number" --repo "$GH_REPO" \
+                  --add-label agent:fix-queued --add-label fu-prio:low \
+                  --remove-label operations-audit-review >/dev/null 2>&1 || echo "::warning::L11 #$number PAT routing fallito"
+              else
+                gh issue edit "$number" --repo "$GH_REPO" \
+                  --add-label agent:fix-queued --add-label fu-prio:low \
+                  --remove-label operations-audit-review >/dev/null 2>&1 || echo "::warning::L11 #$number queue fallback fallito"
+              fi
+            else
+              echo "L11 #$number contract assente/invalido o review-only → review + triaged"
+              gh issue edit "$number" --repo "$GH_REPO" \
+                --remove-label agent:fix --remove-label agent:fix-queued \
+                --add-label operations-audit-review >/dev/null 2>&1 || true
+            fi
+            gh issue edit "$number" --repo "$GH_REPO" --add-label agent:triaged >/dev/null 2>&1 || true
+          done < <(printf '%s' "$issues" | jq -c '.[]')
 
       - name: Triage sweep (recover orphaned issues, deterministic)
         env:

@@ -72,14 +72,85 @@ permissions:
   actions: read
   pull-requests: write
   issues: write
-  id-token: write
 
 jobs:
+  # Il contratto L11 viene verificato prima del checkout e di ogni pre-flight
+  # costoso. Un marker assente non restringe il classificatore normale; un
+  # marker L11 invalido, scaduto o non autorizzato dal registry è review-only.
+  # Questo è un filtro di routing, non un gate umano per il merge: la prova PR
+  # viene aggiunta solo dopo che il fixer ha davvero consegnato una PR.
+  l11_contract:
+    if: |
+      github.event.label.name == 'agent:fix' &&
+      (github.event.sender.login == 'nanakokyobashi-rgb' ||
+       github.event.sender.login == 'valerielinc-ops' ||
+       startsWith(github.event.sender.login, 'claude'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    permissions:
+      issues: write
+    outputs:
+      allowed: ${{ steps.validate.outputs.allowed }}
+    steps:
+      - name: Validate L11 issue contract (zero-agent, fail-closed)
+        id: validate
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          ISSUE: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+          body=$(gh issue view "$ISSUE" --repo "$REPO" --json body --jq '.body // ""')
+          contract=$(node --input-type=module - "$body" <<'NODE'
+          const body = process.argv[2] || '';
+          const marker = /<!-- L11_ISSUE_CONTRACT:\s*(\{.*\})\s*-->/ms.exec(body);
+          if (!marker) { process.stdout.write(JSON.stringify({ present: false, valid: false, fixable: false })); process.exit(0); }
+          let c;
+          try { c = JSON.parse(marker[1]); } catch { process.stdout.write(JSON.stringify({ present: true, valid: false, fixable: false, reason: 'invalid-json' })); process.exit(0); }
+          const id = (v, p) => typeof v === 'string' && new RegExp(`^lf-${p}-[0-9a-f]{24}$`).test(v);
+          const generated = Date.parse(typeof c.generatedAt === 'string' ? c.generatedAt : '');
+          const expires = Date.parse(typeof c.expiresAt === 'string' ? c.expiresAt : '');
+          const ttl = Number.isInteger(c.candidateTtlHours) && c.candidateTtlHours > 0
+            && Number.isFinite(generated) && Number.isFinite(expires) && expires > Date.now()
+            && expires >= generated && expires <= generated + c.candidateTtlHours * 3600000
+            && c.ttl?.hours === c.candidateTtlHours && c.ttl?.expiresAt === c.expiresAt;
+          const shape = c.schemaVersion === 1 && c.loopId === 'L11' && c.mode === 'observe-report-only'
+            && id(c.candidateId, 'candidate') && id(c.sourceRecordId, 'source') && Number.isFinite(generated)
+            && c.remediationPrProofRequired === true && c.remediationPr === null
+            && (c.route === 'bounded-fix-queue' || c.route === 'review-only');
+          const parts = typeof c.actionClass === 'string' ? c.actionClass.split('+').map((v) => v.trim()) : [];
+          const fixable = shape && c.route === 'bounded-fix-queue' && parts.includes('issue') && ttl;
+          const reviewOnly = shape && c.route === 'review-only';
+          process.stdout.write(JSON.stringify({ present: true, valid: fixable || reviewOnly, fixable }));
+          NODE
+          )
+          present=$(printf '%s' "$contract" | jq -r '.present == true')
+          valid=$(printf '%s' "$contract" | jq -r '.valid == true')
+          fixable=$(printf '%s' "$contract" | jq -r '.fixable == true')
+          if [ "$present" != "true" ]; then
+            echo 'allowed=true' >> "$GITHUB_OUTPUT"
+            echo 'Non-L11 issue → classificatore normale.'
+            exit 0
+          fi
+          if [ "$valid" = "true" ] && [ "$fixable" = "true" ]; then
+            echo 'allowed=true' >> "$GITHUB_OUTPUT"
+            echo 'Contratto L11 valido: issue route bounded autorizzata dal registry.'
+            exit 0
+          fi
+          echo 'allowed=false' >> "$GITHUB_OUTPUT"
+          echo 'Contratto L11 non eleggibile: rimuovo il routing e lascio review-only.'
+          gh issue edit "$ISSUE" --repo "$REPO" \
+            --remove-label agent:fix --remove-label agent:fix-queued \
+            --add-label operations-audit-review || true
+
   fix:
+    needs: l11_contract
     # La label È il consenso: solo chi ha accesso in scrittura può applicarla.
     # Il gate sul sender è la cintura contro una label aggiunta da
     # un'automazione esterna.
     if: |
+      needs.l11_contract.result == 'success' &&
+      needs.l11_contract.outputs.allowed == 'true' &&
       github.event.label.name == 'agent:fix' &&
       (github.event.sender.login == 'nanakokyobashi-rgb' ||
        github.event.sender.login == 'valerielinc-ops' ||
@@ -804,6 +875,35 @@ jobs:
           gh pr edit "$PR_NUMBER" --repo "$REPO" --add-label agent:autofix \
             && echo "provenance: PR #$PR_NUMBER marcata agent:autofix" \
             || echo "::warning::provenance: label agent:autofix non applicata alla PR #$PR_NUMBER"
+
+          # Prova esplicita della remediation: L11 resta report-only fino a
+          # questo punto. Il commento non è un gate del merge; collega solo la
+          # PR realmente aperta al candidate/source record osservato.
+          ISSUE_BODY=$(gh issue view "$ISSUE" --repo "$REPO" --json body --jq '.body // ""' 2>/dev/null || true)
+          CONTRACT=$(node --input-type=module - "$ISSUE_BODY" <<'NODE'
+          const body = process.argv[2] || '';
+          const marker = /<!-- L11_ISSUE_CONTRACT:\s*(\{.*\})\s*-->/ms.exec(body);
+          if (!marker) process.exit(0);
+          try { JSON.parse(marker[1]); } catch { process.exit(0); }
+          process.stdout.write(marker[1]);
+          NODE
+          )
+          if [ -n "$CONTRACT" ]; then
+            HEAD_SHA=$(gh pr view "$PR_NUMBER" --repo "$REPO" --json headRefOid --jq '.headRefOid' 2>/dev/null || true)
+            PROOF=$(node --input-type=module - "$CONTRACT" "$PR_NUMBER" "$HEAD_SHA" <<'NODE'
+          const contract = JSON.parse(process.argv[2]);
+          const prNumber = Number(process.argv[3]);
+          const headSha = process.argv[4] || null;
+          if (contract.loopId !== 'L11' || !/^lf-candidate-[0-9a-f]{24}$/.test(contract.candidateId)
+            || !/^lf-source-[0-9a-f]{24}$/.test(contract.sourceRecordId) || !Number.isInteger(prNumber)) process.exit(0);
+          process.stdout.write(`<!-- L11_REMEDIATION_PR: ${JSON.stringify({ schemaVersion: 1, candidateId: contract.candidateId, sourceRecordId: contract.sourceRecordId, prNumber, headSha })} -->\n_Prova remediation L11: PR aperta dal percorso issue-fix._`);
+          NODE
+            )
+            if [ -n "$PROOF" ]; then
+              gh issue comment "$ISSUE" --repo "$REPO" --body "$PROOF" \
+                || echo "::warning::prova remediation L11 non commentata sulla issue"
+            fi
+          fi
 
       # Simmetrico al claim, e su OGNI percorso terminale (successo, blocco,
       # max-turns, fallimento infra). `agent:in-progress` e' mutua esclusione,
