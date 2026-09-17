@@ -379,14 +379,10 @@ test('ogni caller Codex usa una credenziale operativa esplicita e senza fallback
       const activeCaller = activeWorkflowText(caller);
       const tokenLines = activeCaller.match(/^ {10}codex_github_token:\s*.+$/gm) ?? [];
       assert.equal(tokenLines.length, 1, `${relativePath}: il caller deve dichiarare un solo codex_github_token`);
-      const expected = relativePath.endsWith('/tests.yml')
-        ? 'env.APP_TOKEN'
-        : 'env.GITHUB_PAT_NANAKO';
+      const expected = 'env.GITHUB_PAT_NANAKO';
       assert.match(
         tokenLines[0],
-        expected === 'env.APP_TOKEN'
-          ? /\$\{\{\s*env\.APP_TOKEN\s*\}\}/
-          : /\$\{\{\s*env\.GITHUB_PAT_NANAKO\s*\}\}/,
+        /\$\{\{\s*env\.GITHUB_PAT_NANAKO\s*\}\}/,
         `${relativePath}: il bridge Codex deve usare ${expected}`,
       );
       assert.doesNotMatch(
@@ -397,19 +393,11 @@ test('ogni caller Codex usa una credenziale operativa esplicita e senza fallback
 
       const callerStart = source.indexOf(caller);
       const beforeCaller = source.slice(0, callerStart);
-      if (expected === 'env.APP_TOKEN') {
-        assert.match(
-          beforeCaller,
-          /node scripts\/ci\/mint-app-token\.mjs/,
-          `${relativePath}: il token App deve essere mintato prima del bridge`,
-        );
-      } else {
-        assert.match(
-          beforeCaller,
-          /node generator\/scripts\/load-rc-env\.mjs/,
-          `${relativePath}: il PAT deve essere caricato da Remote Config prima del bridge`,
-        );
-      }
+      assert.match(
+        beforeCaller,
+        /node generator\/scripts\/load-rc-env\.mjs/,
+        `${relativePath}: il PAT deve essere caricato da Remote Config prima del bridge`,
+      );
     }
   }
 });

@@ -779,15 +779,6 @@ jobs:
         continue-on-error: true
         run: node generator/scripts/load-rc-env.mjs
 
-      - name: Mint GitHub App token for Codex review
-        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true'
-        continue-on-error: true
-        env:
-          APP_ID: ${{ secrets.APP_ID }}
-          APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-        run: node scripts/ci/mint-app-token.mjs
-
       - name: Run Codex Luna Max review
         # Tetto sullo step (stessa classe del tetto sulla lane di fix in
         # issue-fix.yml). Qui il cap del job e' 360min ed e' CONDIVISO con la
@@ -813,10 +804,10 @@ jobs:
           REVIEW_TIER: ${{ steps.tier.outputs.tier }}
           INCREMENTAL_BASE: ${{ steps.tier.outputs.incremental_base }}
         with:
-          # The App token is the review identity because its event re-triggers
-          # the downstream review/merge workflow. Missing App credentials must
-          # fail closed; GITHUB_TOKEN is never an operational fallback.
-          codex_github_token: ${{ env.APP_TOKEN }}
+          # This corpus repo has no installation of the site's GitHub App. The
+          # PAT loaded from Remote Config is the explicit review identity; the
+          # GITHUB_TOKEN is never an operational fallback.
+          codex_github_token: ${{ env.GITHUB_PAT_NANAKO }}
           codex_corpus_github_token: ${{ env.GITHUB_PAT_NANAKO || env.GITHUB_PAT }}
           codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
           review_marker: '<!-- CODEX_FALLBACK_REVIEW -->'
