@@ -20,6 +20,16 @@ const followupWorkflow = fs.readFileSync(path.join(ROOT, '.github/workflows/post
 const issueDecomposeWorkflow = fs.readFileSync(path.join(ROOT, '.github/workflows/issue-decompose.yml'), 'utf8');
 const needsHumanWorkflow = fs.readFileSync(path.join(ROOT, '.github/workflows/needs-human-sweep.yml'), 'utf8');
 const testsWorkflow = fs.readFileSync(path.join(ROOT, '.github/workflows/tests.yml'), 'utf8');
+const codexBridgeWorkflowSources = [
+  '.github/workflows/issue-fix.yml',
+  '.github/workflows/issue-decompose.yml',
+  '.github/workflows/needs-human-sweep.yml',
+  '.github/workflows/pr-redcheck-fixer.yml',
+  '.github/workflows/pr-redflag-fixer.yml',
+].map((relativePath) => ({
+  relativePath,
+  source: fs.readFileSync(path.join(ROOT, relativePath), 'utf8'),
+}));
 
 function workflowStep(source, name) {
   const start = source.indexOf(`      - name: ${name}`);
@@ -250,6 +260,24 @@ test('Claude fallback is suppressed when Codex side effects are possible', () =>
   assert.match(action, /cmp -s -- \"\$codex_state_before\" \"\$codex_state_after\"/);
 });
 
+test('la review Codex esporta eventi strutturati anche quando il processo fallisce', () => {
+  assert.match(action, /codex_diagnostics_file:/);
+  assert.match(action, /--json \\\n\s+--output-last-message/);
+  assert.match(action, /tee "\$codex_diagnostics_destination"/);
+  assert.match(action, /printf 'codex_diagnostics=%s\\n'/);
+  assert.match(action, /CODEX_DIAGNOSTICS: \$\{\{ steps\.codex\.outputs\.codex_diagnostics \}\}/);
+});
+
+test('un verdetto Codex postato nell ultimo turno riceve evidenza effimera verificabile', () => {
+  assert.match(testsWorkflow, /VERDICT_EVIDENCE_FILE: \$\{\{ runner\.temp \}\}\/codex-verdict-evidence-/);
+  assert.match(testsWorkflow, /EVIDENCE_TRIGGER='codex-primary'/);
+  assert.match(testsWorkflow, /set_review_output verdict_evidence_file/);
+  assert.match(
+    testsWorkflow,
+    /steps\.codex_review\.outputs\.fallback_evidence_file \|\| steps\.review_abort\.outputs\.verdict_evidence_file/,
+  );
+});
+
 test('il bridge corpus resta host-side anche quando il PAT arriva da GITHUB_ENV', () => {
   assert.ok(
     action.includes('codex_corpus_github_auth="${CODEX_CORPUS_GH_AUTH:-${GITHUB_PAT_NANAKO:-${GITHUB_PAT:-}}}"'),
@@ -272,8 +300,8 @@ test('il bridge corpus resta host-side anche quando il PAT arriva da GITHUB_ENV'
 });
 
 test('the corpus review loads its host-side PAT before invoking Codex', () => {
-  const reviewStep = workflowStep(testsWorkflow, 'Run Claude review');
-  const followupStep = workflowStep(followupWorkflow, 'Run Claude follow-up triage (batch)');
+  const reviewStep = workflowStep(testsWorkflow, 'Run Codex Luna Max review');
+  const followupStep = workflowStep(followupWorkflow, 'Run Codex Luna Max follow-up triage (batch)');
   const firebaseStep = workflowStep(followupWorkflow, 'Prepare Firebase credentials for follow-up routing');
   const credentialsStep = workflowStep(followupWorkflow, 'Load cross-repo follow-up credentials');
   assert.match(firebaseStep, /if: always\(\)/,
@@ -283,6 +311,8 @@ test('the corpus review loads its host-side PAT before invoking Codex', () => {
   assert.match(testsWorkflow, /Prepare Firebase credentials for Codex review/);
   assert.match(testsWorkflow, /Load cross-repo Codex credentials/);
   assert.match(testsWorkflow, /node generator\/scripts\/load-rc-env\.mjs/);
+  assert.doesNotMatch(reviewStep, /claude_code_oauth_token:/,
+    'la review del corpus deve restare sulla corsia Codex senza fallback Claude implicito');
   assert.match(reviewStep, /codex_corpus_github_token: \$\{\{ env\.GITHUB_PAT_NANAKO \|\| env\.GITHUB_PAT \}\}/);
   assert.doesNotMatch(reviewStep, /GITHUB_PAT:\s*\$\{\{ env\.GITHUB_PAT \}\}/);
   assert.match(followupStep, /codex_corpus_github_token: \$\{\{ env\.GITHUB_PAT_NANAKO \|\| env\.GITHUB_PAT \}\}/);
@@ -290,7 +320,7 @@ test('the corpus review loads its host-side PAT before invoking Codex', () => {
   assert.doesNotMatch(followupStep, /GITHUB_PAT:\s*\$\{\{ env\.GITHUB_PAT \}\}/);
   assert.match(followupWorkflow, /SITE_REPO: valerielinc-ops\/frontaliere-si-o-no/);
   assert.match(followupWorkflow, /target_token="\$\{GITHUB_PAT_SITE:-\$\{GITHUB_PAT:-\$\{GH_TOKEN:-\}\}\}"/);
-  assert.match(followupWorkflow, /Gate sul conio — sito \(zero-Claude\)/);
+  assert.match(followupWorkflow, /Gate sul conio — sito \(zero-provider\)/);
   assert.match(followupWorkflow, /Checkout site gate implementation/);
   assert.match(followupWorkflow, /repository: valerielinc-ops\/frontaliere-si-o-no/);
   assert.match(followupWorkflow, /sparse-checkout:\s*\|\n\s+\.github\/workflows\n\s+scripts\/ci/);
@@ -308,9 +338,24 @@ test('the corpus review loads its host-side PAT before invoking Codex', () => {
   assert.match(mintGate, /ghPr\(\['pr', 'comment'/);
 });
 
+test('i bridge Codex operativi non ricadono su GITHUB_TOKEN', () => {
+  for (const { relativePath, source } of codexBridgeWorkflowSources) {
+    assert.match(
+      source,
+      /codex_github_token:\s+\$\{\{\s*env\.GITHUB_PAT_NANAKO\s*\}\}/,
+      `${relativePath}: manca il PAT esplicito per il bridge Codex`,
+    );
+    assert.doesNotMatch(
+      source,
+      /codex_github_token:[^\n]*secrets\.GITHUB_TOKEN/,
+      `${relativePath}: il bridge Codex non deve usare GITHUB_TOKEN come fallback`,
+    );
+  }
+});
+
 test('#1312: Lessons harvester non blocca Codex quando la quota Claude e\u0027 esaurita', () => {
-  const quota = workflowStep(lessonsWorkflow, 'Pre-flight — Claude quota telemetry (Codex primary)');
-  const draft = workflowStep(lessonsWorkflow, 'Draft doc-rule proposal (Claude — only if NOVEL patterns)');
+  const quota = workflowStep(lessonsWorkflow, 'Pre-flight — Codex lane quota telemetry');
+  const draft = workflowStep(lessonsWorkflow, 'Draft doc-rule proposal (Codex Luna Max — only if NOVEL patterns)');
 
   assert.match(quota, /continue-on-error: true/,
     'la telemetria quota non deve trasformare un 429 in un workflow failure');

@@ -62,12 +62,44 @@ test('every active article CLI caller wires the OAuth Codex broker', () => {
     assert.match(setup, /id:\s*setup_claude_haiku_fallback/, `${rel}: setup step needs a stable id`);
     assert.match(setup, new RegExp(String.raw`codex_auth_json:\s*${escapeRegex(SECRET)}`), `${rel}: raw Codex OAuth secret must stay on setup`);
 
+    const preferredIndexes = lines
+      .map((line, index) => /^\s+AI_MODELS_PREFER:/.test(line) ? index : -1)
+      .filter((index) => index >= 0);
+    const stepsLine = lines.findIndex((line) => /^\s{4}steps:\s*$/.test(line));
     const oauthIndexes = lines
       .map((line, index) => /^\s+CLAUDE_CODE_OAUTH_TOKEN:/.test(line) ? index : -1)
+      .filter((index) => index >= 0 && (stepsLine < 0 || index > stepsLine));
+    const brokerIndexes = lines
+      .map((line, index) => /^\s+CODEX_AUTH_BROKER_SOCKET:/.test(line) ? index : -1)
       .filter((index) => index >= 0);
-    assert.ok(oauthIndexes.length > 0, `${rel}: no Claude generator consumer found`);
-    for (const index of oauthIndexes) {
-      assert.match(stepBlock(lines, index), new RegExp(escapeRegex(SOCKET)), `${rel}: Claude consumer lacks broker socket`);
+    if (preferredIndexes.length > 0 && oauthIndexes.length === 0) {
+      // Some callers deliberately stay Codex-only. Keep accepting those
+      // callers while the article producer uses the hybrid body lane below.
+      for (const index of preferredIndexes) {
+        const consumer = stepBlock(lines, index);
+        assert.match(consumer, new RegExp(escapeRegex(SOCKET)), `${rel}: Codex consumer lacks broker socket`);
+        assert.match(consumer, /AI_MODELS_PREFER:\s*codex-cli\/gpt-5\.6-luna/, `${rel}: Codex consumer preference is not pinned`);
+      }
+    } else {
+      if (oauthIndexes.length > 0) {
+        // Callers that opt into the Claude consumer must carry the same broker
+        // capability: the two lanes are provisioned by one composite action.
+        for (const index of oauthIndexes) {
+          assert.match(stepBlock(lines, index), new RegExp(escapeRegex(SOCKET)), `${rel}: Claude consumer lacks broker socket`);
+        }
+      } else {
+        // A background caller may intentionally be broker-only:
+        // the raw Codex credential stays on setup and no child process receives
+        // either the Claude token or a global model preference.
+        const brokerConsumers = brokerIndexes
+          .map((index) => stepBlock(lines, index))
+          .filter((consumer) => !consumer.includes('- name: Cleanup Codex auth broker'));
+        assert.ok(brokerConsumers.length > 0, `${rel}: no article CLI consumer found`);
+        for (const consumer of brokerConsumers) {
+          assert.match(consumer, new RegExp(escapeRegex(SOCKET)), `${rel}: broker-only consumer lacks broker socket`);
+          assert.doesNotMatch(consumer, /CLAUDE_CODE_OAUTH_TOKEN|AI_MODELS_PREFER/, `${rel}: broker-only consumer received legacy credentials`);
+        }
+      }
     }
 
     const cleanupIndex = lines.findIndex((line) => line.includes('- name: Cleanup Codex auth broker'));
@@ -81,7 +113,28 @@ test('every active article CLI caller wires the OAuth Codex broker', () => {
   }
 });
 
-test('Codex primary keeps the pinned OAuth model and is ordered before Claude', () => {
+test('la preferenza Claude esiste solo quando la lane è disponibile nel processo', () => {
+  const createArticle = read('generator/scripts/create-article.mjs');
+  const preferenceStart = createArticle.indexOf('const PREFERRED_GENERATION_MODELS');
+  const preferenceEnd = createArticle.indexOf('];', preferenceStart);
+  assert.ok(preferenceStart >= 0 && preferenceEnd > preferenceStart, 'article preference not found');
+  assert.match(
+    createArticle.slice(preferenceStart, preferenceEnd),
+    /AI_MODELS\.CODEX_CLI_PRIMARY[\s\S]*\.\.\.\(isModelAvailable\(AI_MODELS\.CLAUDE_CLI_HAIKU\)[\s\S]*\[AI_MODELS\.CLAUDE_CLI_HAIKU\][\s\S]*:\s*\[\]\)/,
+    'Claude must be added conditionally, after the Codex primary',
+  );
+});
+
+test('il preflight riceve il percorso del CLI Claude attested dall action', () => {
+  const workflow = read('.github/workflows/generate-article.yml');
+  const preflightStart = workflow.indexOf('id: provider_preflight');
+  const preflightEnd = workflow.indexOf('run: node generator/scripts/lib/provider-preflight.mjs', preflightStart);
+  assert.ok(preflightStart >= 0 && preflightEnd > preflightStart, 'provider preflight step not found');
+  const preflight = workflow.slice(preflightStart, preflightEnd);
+  assert.match(preflight, /CLAUDE_CLI_BIN:\s+\$\{\{\s*steps\.setup_claude_haiku_fallback\.outputs\.claude_cli_bin\s*\}\}/);
+});
+
+test('Codex primary keeps Luna Max and is reusable across crawler calls', () => {
   const aiModels = read('generator/scripts/lib/ai-models.mjs');
   const createArticle = read('generator/scripts/create-article.mjs');
   const action = read('.github/actions/setup-claude-haiku-fallback/action.yml');
@@ -93,14 +146,23 @@ test('Codex primary keeps the pinned OAuth model and is ordered before Claude', 
   assert.doesNotMatch(aiModels, /_tryCodexCliUsageLimitFallback/);
   const preferenceStart = createArticle.indexOf('const PREFERRED_GENERATION_MODELS');
   const codexPreference = createArticle.indexOf('AI_MODELS.CODEX_CLI_PRIMARY', preferenceStart);
-  const claudePreference = createArticle.indexOf('AI_MODELS.CLAUDE_CLI_HAIKU', preferenceStart);
-  assert.ok(preferenceStart >= 0 && codexPreference >= 0 && claudePreference > codexPreference, 'Codex must precede Claude in the article preference');
+  const preferenceEnd = createArticle.indexOf('];', codexPreference);
+  assert.ok(preferenceStart >= 0 && codexPreference >= 0, 'Codex must be the article preference');
+  assert.match(createArticle.slice(preferenceStart, preferenceEnd), /CLAUDE_CLI_HAIKU/);
   assert.match(action, /name: "Setup Codex primary with Claude fallback"/);
+  assert.match(action, /--max-requests\s+4096/,
+    'the production broker must keep the shared crawler/job lane bounded');
   assert.doesNotMatch(action, /indirect Codex fallback/);
+  assert.match(broker, /const DEFAULT_MAX_REQUESTS = 1/,
+    'the broker default must remain one-shot when launched outside the composite action');
   assert.match(broker, /CODEX_MODEL\s*=\s*['"]gpt-5\.6-luna['"]/);
-  assert.match(broker, /CODEX_EFFORT\s*=\s*['"]medium['"]/);
+  assert.match(broker, /CODEX_EFFORT\s*=\s*['"]max['"]/);
+  assert.match(broker, /maxRequests/);
+  assert.doesNotMatch(broker.slice(broker.indexOf('async function _callCodexCli'), broker.indexOf('function _callOmniRoute')), /_claimCodexCliFallback/);
   assert.match(broker, /const configPath = path\.join\(codexHome, ['"]config\.toml['"]\)/);
   assert.doesNotMatch(broker, /['"]--profile['"]\s*,\s*CODEX_PROFILE/);
+  assert.doesNotMatch(read('.github/workflows/translate-pending.yml'), /^\s+AI_MODELS_PREFER:/m,
+    'translation must not inherit the body-generation preference globally');
 });
 
 test('il pre-scan local-only considera Codex come alternativa non-local', () => {
@@ -108,6 +170,6 @@ test('il pre-scan local-only considera Codex come alternativa non-local', () => 
   const probeStart = createArticle.indexOf('const cloudOnlyChain');
   assert.ok(probeStart >= 0, 'probe della cascata cloud non trovato');
   const probe = createArticle.slice(probeStart, probeStart + 260);
-  assert.match(probe, /\[\.\.\.DEFAULT_CHAIN,\s*AI_MODELS\.CODEX_CLI_PRIMARY\]/);
+  assert.match(probe, /\[\.\.\.DEFAULT_CHAIN,\s*\.\.\.PREFERRED_GENERATION_MODELS\]/);
   assert.match(probe, /m !== AI_MODELS\.LOCAL_FALLBACK/);
 });

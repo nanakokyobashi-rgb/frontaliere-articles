@@ -1,9 +1,10 @@
-name: "Codex primary with Claude fallback"
+name: "Codex Luna Max primary with optional Claude fallback"
 description: >-
   Runs exactly one ephemeral Codex CLI attempt with ChatGPT subscription auth.
-  If Codex fails before any detectable local or remote side effect, runs the
-  existing Claude Code action as the fallback. A failure after a possible side
-  effect stops without retrying the prompt. The action has no API-key mode.
+  If Codex fails before any detectable local or remote side effect and an
+  explicit Claude token is supplied, runs the existing Claude Code action as
+  the compatibility fallback. A failure after a possible side effect stops
+  without retrying the prompt. The action has no API-key mode.
 
 inputs:
   preflight_blocked:
@@ -16,7 +17,8 @@ inputs:
     default: ""
   claude_code_oauth_token:
     description: "Claude subscription OAuth token for the fallback action."
-    required: true
+    required: false
+    default: ""
   codex_auth_json:
     description: "ChatGPT-managed Codex auth.json supplied to the Codex-primary setup step."
     required: false
@@ -80,6 +82,9 @@ outputs:
   codex_output_file:
     description: "Ephemeral last-message file written by Codex, if attempted."
     value: ${{ steps.finalize.outputs.codex_output_file }}
+  codex_diagnostics_file:
+    description: "Ephemeral structured Codex CLI event stream for failure classification."
+    value: ${{ steps.finalize.outputs.codex_diagnostics_file }}
   claude_outcome:
     description: "Outcome of the Claude fallback action."
     value: ${{ steps.finalize.outputs.claude_outcome }}
@@ -442,6 +447,7 @@ runs:
         CODEX_PROMPT: ${{ inputs.prompt }}
         CODEX_REVIEW_MARKER: ${{ inputs.review_marker }}
         CODEX_OUTPUT: ${{ runner.temp }}/codex-fallback-${{ github.run_id }}-${{ github.run_attempt }}.txt
+        CODEX_DIAGNOSTICS: ${{ runner.temp }}/codex-fallback-diagnostics-${{ github.run_id }}-${{ github.run_attempt }}.jsonl
       run: |
         set -euo pipefail
         realpath_cmd=/usr/bin/realpath
@@ -532,6 +538,13 @@ runs:
         chmod 700 "$scratch_home"
         runner_temp="${RUNNER_TEMP:-/tmp}"
         codex_output_destination="${CODEX_OUTPUT:-$runner_temp/codex-fallback-${GITHUB_RUN_ID:-local}-${GITHUB_RUN_ATTEMPT:-1}.txt}"
+        codex_diagnostics_destination="${CODEX_DIAGNOSTICS:-$runner_temp/codex-fallback-diagnostics-${GITHUB_RUN_ID:-local}-${GITHUB_RUN_ATTEMPT:-1}.jsonl}"
+        case "$codex_diagnostics_destination" in
+          "$runner_temp"/codex-fallback-diagnostics-*.jsonl) ;;
+          *) echo '::error::Codex diagnostics path is outside the runner temporary directory.'; exit 1 ;;
+        esac
+        : > "$codex_diagnostics_destination"
+        chmod 600 "$codex_diagnostics_destination"
         CODEX_OUTPUT="$scratch_dir/codex-last-message.txt"
 
         # The bridge itself lives in the explicitly reopened scratch tree. Its
@@ -1092,9 +1105,16 @@ runs:
           -c model_reasoning_effort=max \
           -c shell_environment_policy.ignore_default_excludes=false \
           -c "shell_environment_policy.include_only=$codex_env_patterns" \
+          --json \
           --output-last-message "$CODEX_OUTPUT" \
-          -
-        codex_status=$?
+          - 2>&1 | tee "$codex_diagnostics_destination"
+        pipeline_status=("${PIPESTATUS[@]}")
+        codex_status="${pipeline_status[0]:-1}"
+        diagnostics_status="${pipeline_status[1]:-1}"
+        if [ "$diagnostics_status" -ne 0 ]; then
+          echo '::error::Codex diagnostics stream could not be written.'
+          [ "$codex_status" -eq 0 ] && codex_status=1
+        fi
         if [ "$CODEX_OUTPUT" != "$codex_output_destination" ] && [ -f "$CODEX_OUTPUT" ]; then
           cp -- "$CODEX_OUTPUT" "$codex_output_destination" || echo "::warning::Codex output could not be copied to the workflow artifact path."
         fi
@@ -1117,6 +1137,7 @@ runs:
         fi
         printf 'side_effect_detected=%s\n' "$side_effect_detected" >> "$GITHUB_OUTPUT"
         printf 'codex_output=%s\n' "$codex_output_destination" >> "$GITHUB_OUTPUT"
+        printf 'codex_diagnostics=%s\n' "$codex_diagnostics_destination" >> "$GITHUB_OUTPUT"
         exit "$codex_status"
 
     # The Anthropic action receives one github_token input and overwrites GH_TOKEN
@@ -1128,7 +1149,7 @@ runs:
     # the fallback safe when the Codex primary failed before its own bridge existed.
     - name: Prepare host-side GitHub bridge for Claude fallback
       id: claude_bridge
-      if: always() && (steps.codex.outcome == 'skipped' || (steps.codex.outcome == 'failure' && steps.codex.outputs.side_effect_detected == 'false'))
+      if: always() && inputs.claude_code_oauth_token != '' && (steps.codex.outcome == 'skipped' || (steps.codex.outcome == 'failure' && steps.codex.outputs.side_effect_detected == 'false'))
       shell: bash
       env:
         CODEX_ACTION_PATH: ${{ github.action_path }}
@@ -1224,7 +1245,7 @@ runs:
       # A failed Codex process is retryable only when the bridge and Git-state
       # snapshots prove that it did not deliver or mutate anything. Unknown
       # state is deliberately non-retryable to avoid duplicate fixes/PRs.
-      if: always() && steps.claude_bridge.outcome == 'success' && (steps.codex.outcome == 'skipped' || (steps.codex.outcome == 'failure' && steps.codex.outputs.side_effect_detected == 'false'))
+      if: always() && inputs.claude_code_oauth_token != '' && steps.claude_bridge.outcome == 'success' && (steps.codex.outcome == 'skipped' || (steps.codex.outcome == 'failure' && steps.codex.outputs.side_effect_detected == 'false'))
       continue-on-error: true
       uses: anthropics/claude-code-action@9c5ddab2e6d17b83ea679153b31f1d5f023cf636
       env:
@@ -1267,6 +1288,7 @@ runs:
         CODEX_OUTCOME: ${{ steps.codex.outcome }}
         CODEX_SIDE_EFFECT_DETECTED: ${{ steps.codex.outputs.side_effect_detected }}
         CODEX_OUTPUT: ${{ steps.codex.outputs.codex_output }}
+        CODEX_DIAGNOSTICS: ${{ steps.codex.outputs.codex_diagnostics }}
         CLAUDE_OUTCOME: ${{ steps.claude.outcome }}
         EXEC_FILE: ${{ steps.claude.outputs.execution_file }}
         EVIDENCE_FILE: ${{ runner.temp }}/codex-primary-evidence-${{ github.run_id }}-${{ github.run_attempt }}.md
@@ -1333,6 +1355,7 @@ runs:
         printf 'fallback_trigger=%s\n' "$trigger" >> "$GITHUB_OUTPUT"
         printf 'fallback_evidence_file=%s\n' "$evidence_file" >> "$GITHUB_OUTPUT"
         printf 'codex_output_file=%s\n' "${CODEX_OUTPUT:-}" >> "$GITHUB_OUTPUT"
+        printf 'codex_diagnostics_file=%s\n' "${CODEX_DIAGNOSTICS:-}" >> "$GITHUB_OUTPUT"
         printf 'codex_outcome=%s\n' "$codex_outcome" >> "$GITHUB_OUTPUT"
         printf 'claude_outcome=%s\n' "$claude_outcome" >> "$GITHUB_OUTPUT"
         printf 'claude_used=%s\n' "$claude_used" >> "$GITHUB_OUTPUT"

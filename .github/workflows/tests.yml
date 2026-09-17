@@ -77,6 +77,11 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'PR aperta da verificare con il gate completo, inclusa la review Codex'
+        required: false
+        type: string
 
 # Union dei permessi dei tre workflow fusi qui dentro: i test non ne chiedevano
 # (default), `pr-body-contract` scriveva la sticky sulla PR, la review posta il
@@ -156,13 +161,15 @@ jobs:
       - name: PR-body completeness + multi-issue Closes (zero-Claude)
         id: body_contract
         if: >-
-          ${{ !cancelled() && github.event_name == 'pull_request' &&
-          github.event.pull_request.draft == false &&
-          github.event.pull_request.head.ref != 'engine-lockstep-auto' }}
+          ${{ !cancelled() &&
+          ((github.event_name == 'pull_request' &&
+            github.event.pull_request.draft == false &&
+            github.event.pull_request.head.ref != 'engine-lockstep-auto') ||
+           (github.event_name == 'workflow_dispatch' && inputs.pr_number != '')) }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-        run: node scripts/ci/pr-body-contract.mjs "${{ github.event.pull_request.number }}"
+        run: node scripts/ci/pr-body-contract.mjs "${{ github.event.pull_request.number || inputs.pr_number }}"
 
       # ══════════════════════════════════════════════════════════════════════
       # FAMIGLIA 2/3 — unit + closure gates
@@ -226,7 +233,7 @@ jobs:
         run: node scripts/ci/loop-baseline-pr-gate.mjs
 
       # ══════════════════════════════════════════════════════════════════════
-      # FAMIGLIA 3/3 — Claude review + verdetto (ex workflow di review dedicato)
+      # FAMIGLIA 3/3 — Codex review + verdetto (ex workflow di review dedicato)
       #
       # Girava su `workflow_run[tests]` proprio per non spendere Claude su
       # codice rosso. Quel risparmio NON si perde: gli step qui sotto stanno
@@ -249,17 +256,39 @@ jobs:
         # giudizio gia' dato — e un `## LGTM` negato bloccherebbe il canale con
         # cui le correzioni all'engine scendono.
         if: >-
-          ${{ steps.body_contract.outcome != 'failure' && github.event_name == 'pull_request' &&
-          github.event.pull_request.draft == false &&
-          github.event.pull_request.head.ref != 'engine-lockstep-auto' }}
+          ${{ steps.body_contract.outcome != 'failure' &&
+          ((github.event_name == 'pull_request' &&
+            github.event.pull_request.draft == false &&
+            github.event.pull_request.head.ref != 'engine-lockstep-auto') ||
+           (github.event_name == 'workflow_dispatch' && inputs.pr_number != '')) }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PRN: ${{ github.event.pull_request.number }}
-          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          PRN: ${{ github.event.pull_request.number || inputs.pr_number }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
           REPO: ${{ github.repository }}
+          EVENT_NAME: ${{ github.event_name }}
         run: |
           set -uo pipefail
           title=$(gh pr view "$PRN" --repo "$REPO" --json title --jq '.title // ""' 2>/dev/null || true)
+          if [ "${EVENT_NAME:-}" = 'workflow_dispatch' ]; then
+            if ! details=$(gh pr view "$PRN" --repo "$REPO" --json state,isDraft,headRefName,headRefOid); then
+              echo '::error::Impossibile risolvere la PR indicata dal workflow_dispatch.'
+              exit 1
+            fi
+            state=$(printf '%s' "$details" | jq -r '.state // ""')
+            is_draft=$(printf '%s' "$details" | jq -r '.isDraft // false')
+            head_ref=$(printf '%s' "$details" | jq -r '.headRefName // ""')
+            resolved_head=$(printf '%s' "$details" | jq -r '.headRefOid // ""')
+            if [ "$state" != 'OPEN' ] || [ "$is_draft" = 'true' ] || [ "$head_ref" = 'engine-lockstep-auto' ]; then
+              echo '::error::La PR indicata deve essere aperta, non draft e non engine-lockstep-auto.'
+              exit 1
+            fi
+            if [ "$resolved_head" != "$HEAD_SHA" ]; then
+              echo "::error::La PR #$PRN non punta alla HEAD del run ($HEAD_SHA): $resolved_head."
+              exit 1
+            fi
+            HEAD_SHA="$resolved_head"
+          fi
           {
             echo "pr_number=$PRN"
             echo "should_review=true"
@@ -304,12 +333,12 @@ jobs:
       # giudizio di questo contributo, anche se e' negativa o non contiene
       # `## LGTM`, salvo un body edit che introduce una nuova review revision.
       # Senza questo controllo ogni rerun/retry dello stesso rosso poteva
-      # invocare Claude di nuovo. Su una HEAD nuova si conserva invece il
+      # invocare Codex di nuovo. Su una HEAD nuova si conserva invece il
       # percorso incrementale: si guarda il delta dal contributo della review
       # piu' recente e si fa carry-forward solo quando il codice PR e' invariato.
       # Una risposta API illeggibile è un errore: senza prova del ledger non si
-      # può spendere un altro turno Claude in sicurezza.
-      - name: Re-review guard (skip Claude when no code changed since last LGTM)
+      # può spendere un altro turno Codex in sicurezza.
+      - name: Re-review guard (skip Codex when no code changed since last LGTM)
         id: guard
         if: steps.body_contract.outcome != 'failure' && steps.resolve.outputs.should_review == 'true'
         env:
@@ -323,11 +352,11 @@ jobs:
         run: |
           set -euo pipefail
           if ! reviews=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate --slurp 2>/dev/null); then
-            echo "::error::Reviews API illeggibile → claim review fail-closed, nessun nuovo Claude."
+            echo "::error::Reviews API illeggibile → claim review fail-closed, nessun nuovo Codex."
             exit 1
           fi
           if ! printf '%s' "$reviews" | jq -e 'type == "array" and all(.[]; type == "array")' >/dev/null 2>&1; then
-            echo "::error::Risposta Reviews API malformata → claim review fail-closed, nessun nuovo Claude."
+            echo "::error::Risposta Reviews API malformata → claim review fail-closed, nessun nuovo Codex."
             exit 1
           fi
           # Conta ogni review terminale del reviewer, non solo `## LGTM`:
@@ -434,7 +463,7 @@ jobs:
           code=$(echo "$changed" | node scripts/ci/review-test-policy.mjs filter | grep -vE "$NONCODE_RE" || true)
           if [ -z "$code" ]; then
             echo "skip=true" >> "$GITHUB_OUTPUT"
-            echo "Delta dall'ultima review terminale = solo content/data (nessun code) → skip Claude; il review gate conserva il verdetto applicabile."
+            echo "Delta dall'ultima review terminale = solo content/data (nessun code) → skip Codex; il review gate conserva il verdetto applicabile."
             exit 0
           fi
           # Il compare 2-dot vede anche il codice che main ha portato con un
@@ -454,12 +483,12 @@ jobs:
           if [ "$fpHead" != 'UNKNOWN' ] && [ "$fpLast" != 'UNKNOWN' ] \
              && [ "$fpHead" = "$fpLast" ]; then
             echo "skip=true" >> "$GITHUB_OUTPUT"
-            echo "Contributo CODE invariato dall'ultima review terminale (fingerprint $fpHead) → skip Claude."
+            echo "Contributo CODE invariato dall'ultima review terminale (fingerprint $fpHead) → skip Codex."
           else
             echo "skip=false" >> "$GITHUB_OUTPUT"; echo "Code del contributo cambiato (fpHead=$fpHead fpLast=$fpLast) → review piena."
           fi
 
-      - name: Claim review PR + HEAD + contribution (zero-Claude)
+      - name: Claim review PR + HEAD + contribution (zero-agent)
         id: review_claim
         if: steps.body_contract.outcome != 'failure' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'
         continue-on-error: true
@@ -480,12 +509,12 @@ jobs:
       - name: Fail closed when review claim is unreadable
         if: steps.body_contract.outcome != 'failure' && steps.review_claim.outputs.claim_error == 'true'
         run: |
-          echo "::error::Claim review PR+HEAD+contribution illeggibile o non verificabile → nessun nuovo Claude."
+          echo "::error::Claim review PR+HEAD+contribution illeggibile o non verificabile → nessun nuovo Codex."
           exit 1
 
-      - name: Skip already-consumed review contribution (zero-Claude)
+      - name: Skip already-consumed review contribution (zero-agent)
         if: steps.body_contract.outcome != 'failure' && steps.review_claim.outputs.claim_allowed != 'true' && steps.review_claim.outputs.claim_error != 'true'
-        run: echo "Review già acquisita per questa PR+HEAD+contribution → nessun secondo Claude."
+        run: echo "Review già acquisita per questa PR+HEAD+contribution → nessun secondo Codex."
 
       - name: Determine review tier
         id: tier
@@ -534,13 +563,13 @@ jobs:
           # scavalcando il guard di incompletezza qui sotto.
           if [ -z "$files" ] && [ "$files_complete" = "1" ]; then
             echo "Lista file vuota (PR rebase-only o vuota)."
-            set_tier normal claude-opus-5 35
+            set_tier normal gpt-5.6-luna 35
             exit 0
           fi
           # Elenco incompleto: il tier NON si decide su un campione.
           if [ "$files_complete" != "1" ]; then
             echo "Elenco file INCOMPLETO ($count/$expected, causa: $reason) → tier high forzato: niente minimal, niente decisione funnel su un campione."
-            set_tier high claude-opus-5 60
+            set_tier high gpt-5.6-luna 60
             exit 0
           fi
           if printf '%s' "$result" | node scripts/ci/review-test-policy.mjs only; then
@@ -548,7 +577,7 @@ jobs:
               set_tier tests-only none 0
             else
               # Includes a rename from application code or an uncertain snapshot.
-              set_tier high claude-opus-5 60
+              set_tier high gpt-5.6-luna 60
             fi
             exit 0
           fi
@@ -558,7 +587,7 @@ jobs:
             # da verificare solo il contratto del body. E' il caso PIU' FREQUENTE
             # su questo repo, dove i workflow di generazione committano corpus.
             echo "PR di soli content/data (nessun codice toccato) → tier minimal."
-            set_tier minimal claude-opus-5 12
+            set_tier minimal gpt-5.6-luna 12
             exit 0
           fi
           # funnel_crit <file-list> → exit 0 se la lista contiene codice
@@ -584,7 +613,11 @@ jobs:
               [flatten[]
                | select((.state // "") != "PENDING")
                | select(.user.type == "Bot")
-               | select((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
+               | select(
+                   ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
+                   or (((.user.login // "") | test("^github-actions\\[bot\\]$"; "i"))
+                       and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
+                 )
                | select(has_current_revision($revision))
               ] | sort_by(.id // 0) | last | .commit_id // empty' 2>/dev/null || true)
           if [ -n "$lastRev" ] && [ "$lastRev" != "$HEAD_SHA" ]; then
@@ -594,9 +627,9 @@ jobs:
               echo "incremental_base=$lastRev" >> "$GITHUB_OUTPUT"
               echo "Re-review incrementale: solo il delta dei file PR da $lastRev:"; echo "$delta_code"
               if funnel_crit "$delta_code"; then
-                set_tier incremental-high claude-opus-5 35
+                set_tier incremental-high gpt-5.6-luna 35
               else
-                set_tier incremental claude-opus-5 35
+                set_tier incremental gpt-5.6-luna 35
               fi
               exit 0
             fi
@@ -606,12 +639,12 @@ jobs:
           code_file_count=$(echo "$code_files" | grep -c . || true)
           if funnel_crit "$code_files"; then
             if [ "$code_file_count" -ge 25 ]; then
-              set_tier high-mega claude-opus-5 90
+              set_tier high-mega gpt-5.6-luna 90
             else
-              set_tier high claude-opus-5 60
+              set_tier high gpt-5.6-luna 60
             fi
           else
-            set_tier normal claude-opus-5 35
+            set_tier normal gpt-5.6-luna 35
           fi
 
       # NIENTE proxy di compressione su questo step, e non e' una dimenticanza.
@@ -704,33 +737,19 @@ jobs:
           echo "Contesto prefetchato in $CTX_DIR:"
           ls -la "$CTX_DIR"
 
-      # Lease zero-Claude: la review puo' spendere quota residua solo quando il
-      # drainer non ha una prenotazione issue-fix viva e nessun altro consumer
-      # possiede lo slot condiviso. Codex resta il provider primario.
-      - name: Pre-flight — Claude quota telemetry (Codex primary)
+      # Codex Luna Max è la corsia primaria della review. Questo probe conserva
+      # la telemetria della vecchia quota senza trasformarla in un mutex che può
+      # saltare la review: un consumer occupato non deve lasciare il gate senza
+      # verdetto.
+      - name: Pre-flight — Codex lane quota telemetry
         id: quota
         if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
-          QUOTA_LEASE_ACTION: acquire
-          QUOTA_LEASE_ROLE: review
-          QUOTA_LEASE_OWNER: tests-review
-          QUOTA_LEASE_TARGET_TYPE: pr
-          QUOTA_LEASE_TARGET: ${{ steps.resolve.outputs.pr_number }}
-          QUOTA_LEASE_TTL_SEC: '3600'
-          HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
+          CODEX_FALLBACK_MODE: '1'
         run: node scripts/ci/check-quota-backoff.mjs
-
-      - name: Shared Claude quota lease unavailable (expected skip)
-        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true' && steps.quota.outputs.lease_allowed != 'true'
-        run: |
-          if [ "${{ steps.quota.outputs.lease_error }}" = 'true' ]; then
-            echo "::error::Lease quota condiviso illeggibile o non verificabile → review Claude saltata fail-closed; il review gate resta bloccante."
-            exit 1
-          fi
-          echo "::warning::Lease quota condiviso negato (${{ steps.quota.outputs.lease_reason }}) → review Claude saltata senza consumare quota; il review gate conserva il verdetto richiesto."
 
       - name: Publish automatic LGTM for a tests-only PR
         id: test_only_review
@@ -744,7 +763,7 @@ jobs:
         run: node scripts/ci/review-test-policy.mjs post
 
       - name: Prepare Firebase credentials for Codex review
-        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true' && steps.quota.outputs.lease_allowed == 'true'
+        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true'
         env:
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
         run: |
@@ -756,12 +775,20 @@ jobs:
           fi
 
       - name: Load cross-repo Codex credentials
-        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true' && steps.quota.outputs.lease_allowed == 'true'
+        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true'
         continue-on-error: true
         run: node generator/scripts/load-rc-env.mjs
 
-      - name: Run Claude review
-        # Tetto sullo step (stessa classe del tetto su `Run Claude fix` in
+      - name: Mint GitHub App token for Codex review
+        continue-on-error: true
+        env:
+          APP_ID: ${{ secrets.APP_ID }}
+          APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node scripts/ci/mint-app-token.mjs
+
+      - name: Run Codex Luna Max review
+        # Tetto sullo step (stessa classe del tetto sulla lane di fix in
         # issue-fix.yml). Qui il cap del job e' 360min ed e' CONDIVISO con la
         # suite `node --test`: un reviewer appeso se lo mangia tutto e il job
         # muore `cancelled` — che nessun `if: failure()` vede e che lascia il
@@ -771,8 +798,8 @@ jobs:
         # nessuna review vera; col `continue-on-error` qui sotto lo scadere non
         # tinge il job di rosso, lo lascia classificare al guard.
         timeout-minutes: 45
-        id: claude_review
-        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true' && steps.quota.outputs.lease_allowed == 'true'
+        id: codex_review
+        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true'
         # Un fallimento dell'action non deve abortire il job prima che il guard
         # sotto possa classificarlo: e' il guard a decidere se fallire forte.
         continue-on-error: true
@@ -791,23 +818,7 @@ jobs:
           # GITHUB_PAT_NANAKO/GITHUB_PAT host-side and never passes it to Codex.
           codex_corpus_github_token: ${{ env.GITHUB_PAT_NANAKO || env.GITHUB_PAT }}
           codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
-          github_token: ${{ env.APP_TOKEN || secrets.GITHUB_TOKEN }}
           review_marker: '<!-- CODEX_FALLBACK_REVIEW -->'
-          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          # Mai `*`. Le PR aperte dal fixer sono di `claude[bot]`; quelle del
-          # mirror engine-lockstep e delle automation interne di
-          # `github-actions[bot]`. Senza whitelist claude-code-action aborta
-          # "non-human actor".
-          allowed_bots: 'github-actions[bot], claude[bot]'
-          show_full_output: true
-          # `--dangerously-skip-permissions` funziona sotto `pull_request` come
-          # funzionava sotto `workflow_run`: e' su `schedule`/`workflow_dispatch`
-          # che `permissionMode` ricade a "default" nonostante il flag e quasi
-          # ogni Bash torna "requires approval" (rollback #3269, run
-          # 28594653701: 36 blocchi, zero commenti postati). Questo workflow non
-          # ha piu' un ramo dispatch che invochi la review, quindi la riga resta
-          # una sola.
-          claude_args: "--effort medium --max-turns ${{ steps.tier.outputs.max_turns }} --model ${{ steps.tier.outputs.model }} --dangerously-skip-permissions"
           prompt: |
             Test files are excluded from review by owner policy: do not read, probe or raise findings on tests, including during cross-file analysis.
             Report the exact workflow tier `${{ steps.tier.outputs.tier }}` in Scope; this classifies review scope, not model reasoning effort.
@@ -836,25 +847,26 @@ jobs:
 
             Posta ESATTAMENTE una review con `gh pr review ${PR_NUMBER} --comment --body "<markdown nel formato di REVIEW.md>"`. Chiudi con `## LGTM` solo quando non c'e' un `🔴 Important` aperto, nessuna domanda funnel-critical irrisolta e il contratto del body e' valido. Incerto → `❓ q:`, mai speculazione. Lavora read-only: niente edit, commit, push, npm o test. Fermati subito dopo aver postato.
 
-      # claude-code-action puo' uscire 0 anche quando il run e' abortito su un
+      # La review Codex puo' uscire 0 anche quando il run e' abortito su un
       # errore API transiente SENZA aver postato una review: il job sembra verde
       # ma la PR si ferma in silenzio. Si classifica dal log di esecuzione.
       - name: Fail on transient API error (no review posted)
         id: review_abort
-        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true' && steps.quota.outputs.lease_allowed == 'true' && steps.claude_review.outputs.primary_success != 'true'
+        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true' && steps.codex_review.outputs.primary_success != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           RUN_ID: ${{ github.run_id }}
           PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
           HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
-          REVIEW_OUTCOME: ${{ steps.claude_review.outcome }}
-          EXEC_FILE: ${{ steps.claude_review.outputs.execution_file }}
-          CODEX_PRIMARY_SUCCESS: ${{ steps.claude_review.outputs.primary_success }}
+          REVIEW_OUTCOME: ${{ steps.codex_review.outcome }}
+          CODEX_DIAGNOSTICS_FILE: ${{ steps.codex_review.outputs.codex_diagnostics_file }}
+          CODEX_PRIMARY_SUCCESS: ${{ steps.codex_review.outputs.primary_success }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           REVIEW_TIER: ${{ steps.tier.outputs.tier }}
           REVIEW_MAX_TURNS: ${{ steps.tier.outputs.max_turns }}
           REVIEW_REVISION: ${{ steps.review_input.outputs.review_revision }}
+          VERDICT_EVIDENCE_FILE: ${{ runner.temp }}/codex-verdict-evidence-${{ github.run_id }}-${{ github.run_attempt }}.md
         run: |
           set -uo pipefail
           set_review_output() {
@@ -864,42 +876,61 @@ jobs:
           set_review_output review_abort_cause none
           set_review_output retryable_failure false
           set_review_output permanent_failure false
+          set_review_output verdict_evidence_file ''
+          write_verdict_evidence() {
+            local evidence_file="${VERDICT_EVIDENCE_FILE:-${RUNNER_TEMP:-/tmp}/codex-verdict-evidence-${RUN_ID:-$$}.md}"
+            if ! EVIDENCE_FILE="$evidence_file" \
+              EVIDENCE_TRIGGER='codex-primary' \
+              FALLBACK_STATUS='success' \
+              FALLBACK_DETAIL='codex-review-posted-after-max-turns' \
+              GITHUB_OUTPUT=/dev/null \
+              node scripts/ci/claude-codex-fallback.mjs >/dev/null 2>&1; then
+              return 1
+            fi
+            if [ ! -s "$evidence_file" ]; then
+              return 1
+            fi
+            set_review_output verdict_evidence_file "$evidence_file"
+          }
           if [ "${CODEX_PRIMARY_SUCCESS:-false}" = 'true' ]; then
-            echo "Codex primary riuscito: nessun log Claude da classificare."
+            echo "Codex primary riuscito: nessuna failure da classificare."
             exit 0
           fi
-          # L'execution file è NDJSON ma può terminare con una riga diagnostica o
-          # troncata. Normalizzalo una sola volta col parser condiviso, che scarta
-          # soltanto la riga illeggibile; i classificatori sotto non devono usare
-          # jq -s direttamente sul file grezzo e perdere marker validi precedenti.
-          EXEC_EVENTS_FILE=''
-          cleanup_execution_events() {
-            if [ -n "${EXEC_EVENTS_FILE:-}" ]; then
-              rm -f "${EXEC_EVENTS_FILE}"
-            fi
-          }
-          trap cleanup_execution_events EXIT
-          if [ -n "${EXEC_FILE:-}" ] && [ -f "${EXEC_FILE}" ]; then
-            EXEC_EVENTS_FILE="${RUNNER_TEMP:-/tmp}/claude-review-events-${RUN_ID:-$$}.jsonl"
-            if ! node scripts/ci/parse-claude-execution.mjs "${EXEC_FILE}" > "${EXEC_EVENTS_FILE}"; then
+          # Codex viene eseguito con --json: il file è lo stream strutturato
+          # della stessa action, non l'output Claude (vuoto nel percorso
+          # Codex-only). Il classificatore è conservativo e restituisce una
+          # causa esplicita prima che il claim decida retry o terminale.
+          CLASSIFICATION_JSON=''
+          if [ "${REVIEW_OUTCOME:-}" = 'cancelled' ]; then
+            CLASSIFICATION_JSON='{"cause":"cancelled","numTurns":null,"source":"outcome"}'
+          elif [ -n "${CODEX_DIAGNOSTICS_FILE:-}" ] && [ -f "${CODEX_DIAGNOSTICS_FILE}" ]; then
+            if ! CLASSIFICATION_JSON=$(node scripts/ci/classify-codex-review-failure.mjs "${CODEX_DIAGNOSTICS_FILE}" "${REVIEW_OUTCOME:-}"); then
               set_review_output review_abort_cause probe_failed
               set_review_output permanent_failure true
-              echo "::error::Impossibile normalizzare l'execution file Claude: marker non classificati."
+              echo "::error::Impossibile classificare lo stream diagnostico Codex."
               exit 0
             fi
+          else
+            set_review_output review_abort_cause probe_failed
+            set_review_output permanent_failure true
+            echo "::error::Stream diagnostico Codex assente: failure non classificata, nessun autorebase automatico."
+            exit 0
           fi
-          # max_turns PRIMA del 429: il terminal marker e' piu' specifico dei
-          # campi di telemetria condivisi. Il ramo 429 sotto accetta solo
-          # marker strutturati (status HTTP, evento rifiutato o errore tipizzato):
-          # un semplice `rate_limit` nel file puo' essere il metadata di una
-          # richiesta riuscita e non deve trasformare un altro errore in warning.
-          if [ -n "${EXEC_EVENTS_FILE:-}" ] && [ -f "${EXEC_EVENTS_FILE}" ] \
-             && jq -e -s '
-               flatten | any(.[]?;
-                 .terminal_reason == "max_turns"
-               )
-             ' "${EXEC_EVENTS_FILE}" >/dev/null 2>&1; then
-            # Il cap dei turni non prova da solo l'assenza di un verdetto: Claude
+          if ! CLASSIFICATION_CAUSE=$(printf '%s' "$CLASSIFICATION_JSON" | jq -er '.cause // empty') \
+            || [ -z "$CLASSIFICATION_CAUSE" ]; then
+            set_review_output review_abort_cause probe_failed
+            set_review_output permanent_failure true
+            echo "::error::Classificazione Codex malformata: nessun autorebase automatico."
+            exit 0
+          fi
+          NUM_TURNS=$(printf '%s' "$CLASSIFICATION_JSON" | jq -r 'if .numTurns == null then "?" else (.numTurns | tostring) end')
+
+          # max_turns PRIMA di 429/5xx: il terminal marker è più specifico dei
+          # campi di telemetria condivisi. Anche Codex può aver postato la review
+          # nell'ultimo turno, quindi controlliamo HEAD, revisione body e marker
+          # Codex prima di classificare l'abort.
+          if [ "$CLASSIFICATION_CAUSE" = 'max_turns' ]; then
+            # Il cap dei turni non prova da solo l'assenza di un verdetto: Codex
             # puo' aver gia' inviato la review e consumare l'ultimo turno mentre
             # chiude la propria esecuzione. Verifichiamo la HEAD e la finestra di
             # questa run prima di marchiare l'abort, altrimenti un 🔴 reale viene
@@ -947,28 +978,39 @@ jobs:
                   | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
                 flatten | any(.[]?;
                   (.user.type == "Bot")
-                  and ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
+                  and (
+                    ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
+                    or (
+                      (.user.login // "") == "github-actions[bot]"
+                      and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->"))
+                    )
+                  )
                   and .commit_id == $head_sha
                   and (.submitted_at // "") >= $run_started_at
                   and has_current_revision($review_revision)
                 )
               ' <<<"$REVIEWS" >/dev/null 2>&1; then
+                if ! write_verdict_evidence; then
+                  set_review_output review_abort_cause probe_failed
+                  set_review_output permanent_failure true
+                  echo "::error::Review Codex verificata ma evidenza di verdetto non scrivibile: nessun gate carry-forward automatico."
+                  exit 0
+                fi
                 set_review_output review_abort_cause verdict_posted
-                echo "::warning::Review Claude pubblicata sulla HEAD in questa run; max_turns non e' un abort senza verdetto. Il review gate valuta la review appena postata."
+                echo "::warning::Review Codex pubblicata sulla HEAD in questa run; max_turns non e' un abort senza verdetto. Il review gate valuta la review appena postata."
                 exit 0
               fi
               [ "$attempt" -eq 3 ] || sleep 2
             done
-            NUM_TURNS=$(grep -oE '"num_turns"[[:space:]]*:[[:space:]]*[0-9]+' "${EXEC_FILE}" | tail -1 | grep -oE '[0-9]+' || true)
             set_review_output review_aborted true
             set_review_output review_abort_cause max_turns
             set_review_output retryable_failure true
             # The Markdown backticks and literal shell text are intentional.
             # ShellCheck otherwise treats them as an interpolated expression.
             # shellcheck disable=SC2016
-            BODY=$(printf '⚠️ **Review automatica fallita** (`terminal_reason=max_turns`, tier `%s`, cap %s turni, usati %s): Claude ha esaurito il budget prima di postare un verdetto. Nessuna review pubblicata — il check di questo job resta rosso e l auto-merge non puo scattare.\n\nLog: %s\n\nPer sbloccare: rilancia il run di `tests` piu recente di questa PR, oppure fai la review a mano col contratto di `REVIEW.md`.\n\nSe questa PR ha gia avuto una morte `max_turns`, un retry raramente basta: valuta di splittarla.' "${REVIEW_TIER:-?}" "${REVIEW_MAX_TURNS:-?}" "${NUM_TURNS:-?}" "$RUN_URL")
+            BODY=$(printf '⚠️ **Review automatica fallita** (`terminal_reason=max_turns`, tier `%s`, cap %s turni, usati %s): Codex ha esaurito il budget prima di postare un verdetto. Nessuna review pubblicata — il check di questo job resta rosso e l auto-merge non puo scattare.\n\nLog: %s\n\nPer sbloccare: rilancia il run di `tests` piu recente di questa PR, oppure fai la review a mano col contratto di `REVIEW.md`.\n\nSe questa PR ha gia avuto una morte `max_turns`, un retry raramente basta: valuta di splittarla.' "${REVIEW_TIER:-?}" "${REVIEW_MAX_TURNS:-?}" "${NUM_TURNS:-?}" "$RUN_URL")
             gh pr comment "$PR_NUMBER" --body "$BODY" || echo "::warning::gh pr comment fallito (non bloccante)."
-            echo "::error::Review Claude morta su max-turns (tier=${REVIEW_TIER:-?}, cap=${REVIEW_MAX_TURNS:-?}, turni=${NUM_TURNS:-?}) senza postare — rilancia, o splitta la PR se ricorre."
+            echo "::error::Review Codex morta su max-turns (tier=${REVIEW_TIER:-?}, cap=${REVIEW_MAX_TURNS:-?}, turni=${NUM_TURNS:-?}) senza postare — rilancia, o splitta la PR se ricorre."
             exit 1
           fi
           # 429: rendi l'abort visibile nella Jobs API. GITHUB_OUTPUT non fa
@@ -976,83 +1018,35 @@ jobs:
           # rate-limit soltanto dalla conclusion dello step. Il job sarebbe
           # gia' rosso per il review gate sotto; questa failure non aggiunge un
           # re-run, ma permette al consumer di classificarlo come abortito.
-          if [ -n "${EXEC_EVENTS_FILE:-}" ] && [ -f "${EXEC_EVENTS_FILE}" ]; then
-            RATE_LIMIT_MARKER=false
-            if jq -e -s '
-              flatten | any(.[]?;
-                (
-                  ((.type == "result" or .type == null) and .is_error == true
-                    and (.api_error_status == 429 or .api_error_status == "429"))
-                  or (.type == "rate_limit_event"
-                    and .rate_limit_info.status == "rejected")
-                  or (.error == "rate_limit")
-                  or (.type == "rate_limit_error")
-                )
-              )
-            ' "${EXEC_EVENTS_FILE}" >/dev/null 2>&1; then
-              RATE_LIMIT_MARKER=true
-            fi
-          fi
-          if [ "${RATE_LIMIT_MARKER:-false}" = true ]; then
+          if [ "$CLASSIFICATION_CAUSE" = 'rate_limit' ]; then
             set_review_output review_aborted true
             set_review_output review_abort_cause rate_limit
             set_review_output retryable_failure true
-            echo "::warning::Review abortita su 429 (quota). Il review gate blocchera' comunque il merge; questa failure rende il segnale leggibile al consumer."
+            echo "::warning::Review Codex abortita su 429 (quota). Il review gate blocchera' comunque il merge; questa failure rende il segnale leggibile al consumer."
             exit 1
           fi
-          if [ -n "${EXEC_EVENTS_FILE:-}" ] && [ -f "${EXEC_EVENTS_FILE}" ]; then
-            SERVER_ERROR_MARKER=false
-            if jq -e -s '
-              flatten | any(.[]?;
-                (
-                  ((.type == "result" or .type == null) and .is_error == true
-                    and (
-                      ((.api_error_status // "") | tostring | test("^5[0-9]{2}$"))
-                      or ((.error // .subtype // .message // "") | tostring
-                        | test("overloaded|server_error|internal server error|api error: 5"; "i"))
-                    ))
-                )
-              )
-            ' "${EXEC_EVENTS_FILE}" >/dev/null 2>&1; then
-              SERVER_ERROR_MARKER=true
-            fi
-            if [ "$SERVER_ERROR_MARKER" = true ]; then
-              set_review_output review_aborted true
-              set_review_output review_abort_cause server_error
-              set_review_output retryable_failure true
-              echo "::error::Review abortita su un 5xx transiente senza postare — rilancia il job."
-              exit 1
-            fi
-            # Tutti gli altri errori strutturati sono non-riattivabili per
-            # default: OAuth scaduto, argomenti invalidi o action ritirata non
-            # cambiano con un close+reopen. Il dettaglio resta nel log/file; il
-            # consumer condiviso potra' usare questo output per la causa precisa.
-            if jq -e -s '
-              flatten | any(.[]?;
-                (.type == "result" or .type == null) and .is_error == true
-              )
-            ' "${EXEC_EVENTS_FILE}" >/dev/null 2>&1; then
-              set_review_output review_abort_cause non_retryable
-              set_review_output permanent_failure true
-              echo "::error::Review action con errore non classificato come transiente: nessun autorebase automatico."
-              exit 0
-            fi
+          if [ "$CLASSIFICATION_CAUSE" = 'server_error' ]; then
+            set_review_output review_aborted true
+            set_review_output review_abort_cause server_error
+            set_review_output retryable_failure true
+            echo "::error::Review Codex abortita su un 5xx transiente senza postare — rilancia il job."
+            exit 1
           fi
-          if [ "${REVIEW_OUTCOME}" = "cancelled" ]; then
+          if [ "$CLASSIFICATION_CAUSE" = 'cancelled' ]; then
             set_review_output review_aborted true
             set_review_output review_abort_cause cancelled
             set_review_output retryable_failure true
-            echo "::error::Review Claude cancellata prima del verdetto — rilanciare il job."
+            echo "::error::Review Codex cancellata prima del verdetto — rilanciare il job."
             exit 1
           fi
-          if [ "${REVIEW_OUTCOME}" = "failure" ]; then
+          if [ "$CLASSIFICATION_CAUSE" = 'non_retryable' ] || [ "${REVIEW_OUTCOME:-}" = 'failure' ]; then
             # Un failure senza prova di max_turns/429/5xx non e' sicuro da
             # riattivare: il secondo step separato lo rende rosso senza
             # nominarlo come REVIEW_ABORT_STEP_NAME, cosi' il consumer non lo
             # scambia per un review-gate retryable (#1185 item 2).
             set_review_output review_abort_cause non_retryable
             set_review_output permanent_failure true
-            echo "::error::claude-code-action fallita senza causa transient provata (outcome=failure): nessun autorebase automatico."
+            echo "::error::Codex review fallita senza causa transient provata (cause=${CLASSIFICATION_CAUSE}, outcome=${REVIEW_OUTCOME:-unknown}): nessun autorebase automatico."
             exit 0
           fi
           echo "Step di review concluso senza errori API non recuperati."
@@ -1062,7 +1056,7 @@ jobs:
       # review gate. Il gate sotto gira comunque con always() e conserva il suo
       # verdetto separato.
       - name: Fail on non-retryable review action error (no automatic retry)
-        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true' && steps.quota.outputs.lease_allowed == 'true' && steps.review_abort.outputs.permanent_failure == 'true'
+        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true' && steps.review_abort.outputs.permanent_failure == 'true'
         env:
           REVIEW_ABORT_CAUSE: ${{ steps.review_abort.outputs.review_abort_cause }}
         run: |
@@ -1078,7 +1072,7 @@ jobs:
       # Gira anche quando la review e' stata SALTATA dal guard (carry-forward) e
       # quando l'action e' morta: in quei casi il verdetto sta comunque nelle
       # review gia' postate, e non trovarne una approvante deve bloccare.
-      - name: Require approving Claude review
+      - name: Require approving Codex review
         id: review_gate
         if: steps.body_contract.outcome != 'failure' && always() && steps.resolve.outputs.should_review == 'true'
         env:
@@ -1088,7 +1082,7 @@ jobs:
           HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           REVIEW_REVISION: ${{ steps.review_input.outputs.review_revision }}
-          CODEX_FALLBACK_EVIDENCE_FILE: ${{ steps.claude_review.outputs.fallback_evidence_file }}
+          CODEX_FALLBACK_EVIDENCE_FILE: ${{ steps.codex_review.outputs.fallback_evidence_file || steps.review_abort.outputs.verdict_evidence_file }}
         run: node scripts/ci/review-gate.mjs
 
       # La Jobs API espone solo la conclusion del review gate, non la ragione
@@ -1120,8 +1114,9 @@ jobs:
       # carry-forward; qui si sorveglia soltanto che quel punto abbia girato.
       - name: Fail when required review gate is skipped
         if: >-
-          ${{ steps.body_contract.outcome != 'failure' && always() && github.event_name == 'pull_request' &&
-          github.event.pull_request.draft == false &&
+          ${{ steps.body_contract.outcome != 'failure' && always() &&
+          ((github.event_name == 'pull_request' && github.event.pull_request.draft == false) ||
+           (github.event_name == 'workflow_dispatch' && inputs.pr_number != '')) &&
           steps.review_gate.outcome == 'skipped' }}
         run: |
           echo "::error::Required review gate was skipped on a pull request; no approving review verdict was evaluated."
@@ -1141,9 +1136,9 @@ jobs:
           CONTRIBUTION_FINGERPRINT: ${{ steps.guard.outputs.contribution_fingerprint }}
           REVIEW_REVISION: ${{ steps.review_input.outputs.review_revision }}
           CLAIM_TOKEN: ${{ steps.review_claim.outputs.claim_token }}
-          PROCEED: ${{ steps.tier.outputs.tier == 'tests-only' || steps.quota.outputs.lease_allowed == 'true' }}
-          CLAUDE_OUTCOME: ${{ steps.claude_review.outcome }}
-          EXEC_FILE: ${{ steps.claude_review.outputs.execution_file }}
+          PROCEED: true
+          CODEX_OUTCOME: ${{ steps.codex_review.outcome }}
+          EXEC_FILE: ${{ steps.codex_review.outputs.codex_diagnostics_file }}
           RETRYABLE_FAILURE: ${{ steps.review_abort.outputs.retryable_failure }}
           PERMANENT_FAILURE: ${{ steps.review_abort.outputs.permanent_failure }}
           REVIEW_ABORT_CAUSE: ${{ steps.review_abort.outputs.review_abort_cause }}
@@ -1151,26 +1146,6 @@ jobs:
           REVIEW_GATE_FALLBACK_APPROVED: ${{ steps.review_gate.outputs.fallback_approved }}
           GITHUB_RUN_ID: ${{ github.run_id }}
         run: node scripts/ci/review-claim.mjs --claim
-
-      - name: Claude usage metrics
-        # Solo se la review e' effettivamente girata: a review skippata non c'e'
-        # execution_file da riassumere. Best-effort, non fallisce mai il job.
-        if: steps.body_contract.outcome != 'failure' && steps.tier.outputs.tier != 'tests-only' && always() && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true' && steps.quota.outputs.lease_allowed == 'true' && steps.claude_review.outputs.claude_used == 'true'
-        run: node scripts/ci/claude-usage-summary.mjs "${{ steps.claude_review.outputs.execution_file }}" "pr-review"
-
-      - name: Release shared Claude quota lease
-        if: always() && steps.body_contract.outcome != 'failure' && steps.review_claim.outputs.claim_allowed == 'true' && steps.quota.outputs.lease_allowed == 'true' && steps.quota.outputs.lease_token != ''
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
-          QUOTA_LEASE_ACTION: release
-          QUOTA_LEASE_ROLE: review
-          QUOTA_LEASE_OWNER: tests-review
-          QUOTA_LEASE_TARGET_TYPE: pr
-          QUOTA_LEASE_TARGET: ${{ steps.resolve.outputs.pr_number }}
-          QUOTA_LEASE_TOKEN: ${{ steps.quota.outputs.lease_token }}
-        run: node scripts/ci/check-quota-backoff.mjs
 
       # ── IL SECONDO VERDETTO CONDIZIONALE ─────────────────────────────────
       # `generator-ci.yml` e' path-scoped, quindi il suo check-run NON esiste su

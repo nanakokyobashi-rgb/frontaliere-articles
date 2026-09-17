@@ -25,7 +25,7 @@ import fs from 'node:fs';
 import { createGithubIssue } from '../lib/github-issue-creator.mjs';
 import { FIX_OUTCOME_RE } from './close-recovered-failure-issues.mjs';
 import { FALSE_POSITIVE_DECLARATION_RE } from './lib/false-positive-declaration.mjs';
-import { REVIEWER_BOT_LOGIN_RE } from './lib/constants.mjs';
+import { isManagedReview } from './lib/constants.mjs';
 import { intFromEnv } from '../lib/int-from-env.mjs';
 import { hasEnumeratedItems } from './followup-resolution-match.mjs';
 import { isAggregateForAnalytics } from './check-issue-already-resolved.mjs';
@@ -438,9 +438,7 @@ export function tallyFindings(prs, { bucketOf = bucketFinding } = {}) {
   for (const { number, reviews, mergedAt } of prs || []) {
     const seenBuckets = new Set(); // per-PR dedup across all its reviews
     for (const r of reviews || []) {
-      // GraphQL exposes bot logins without the REST [bot] suffix.
-      const reviewerLogin = String(r.author?.login || '').replace(/\[bot\]$/i, '') + '[bot]';
-      if (!REVIEWER_BOT_LOGIN_RE.test(reviewerLogin)) continue;
+      if (!isManagedReview(r)) continue;
       for (const line of String(r.body || '').split('\n')) {
         const sev = detectSeverity(line);
         if (!sev || !COUNTABLE_SEVERITIES.has(sev)) continue;

@@ -132,7 +132,7 @@ test('l helper importa i nomi degli step e il matcher dei finding condivisi', as
   assert.match(helperSource, /REVIEW_ABORT_STEP_NAME/);
   assert.match(helperSource, /REVIEW_DEATH_STEP_NAMES/);
   assert.match(helperSource, /REDFLAG_IMPORTANT_RE/);
-  assert.match(helperSource, /REVIEWER_BOT_LOGIN_RE/);
+  assert.match(helperSource, /isManagedReview/);
 });
 
 const HEAD = 'a'.repeat(40);
@@ -191,6 +191,18 @@ test('il predicato richiede un finding reale sulla HEAD, non la conclusion dello
     }),
     false,
   );
+});
+
+test('il prefilter accetta il bot Codex solo con marker esplicito', () => {
+  const codexReview = {
+    user: { type: 'Bot', login: 'github-actions[bot]' },
+    commit_id: HEAD,
+    body: `\`workflow.yml:L1\`: 🔴 Important: finding Codex\n<!-- CODEX_FALLBACK_REVIEW -->\n<!-- REVIEW_INPUT_REVISION: ${CURRENT_REVIEW_REVISION} -->`,
+  };
+  const withoutMarker = { ...codexReview, body: codexReview.body.replace('\n<!-- CODEX_FALLBACK_REVIEW -->', '') };
+  const input = { headSha: HEAD, reviewRevision: CURRENT_REVIEW_REVISION, jobs: [{ jobs: jobs() }] };
+  assert.equal(reviewFailureKind({ ...input, reviews: [[codexReview]] }), 'important');
+  assert.equal(reviewFailureKind({ ...input, reviews: [[withoutMarker]] }), '');
 });
 
 test('il predicato ignora una review sulla HEAD con body revision stantia', () => {

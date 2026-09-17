@@ -84026,6 +84026,513 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-assicurazione-salute-glarona-sussidio': {
+    title: 'LAMal Glarona: franchigie, sussidio e scelta modello',
+    description: 'Scopri come funziona l’assicurazione LAMal in Glarona: scadenza a 3 mesi, franchigie da 300 a 2 500 CHF e sussidio cantonale basato su reddito e famiglia.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lamal, glarona, franchigie, sussidio',
+    ogTitle: 'LAMal Glarona: franchigie, sussidio e modelli assicurativi',
+    ogDescription: 'In Glarona l’assicurazione malattia obbligatoria deve essere stipulata entro tre mesi, con franchigie comprese tra 300 e 2 500 CHF. Il cantone offre sussidi per chi rispetta criteri di reddito e composizione familiare, oltre a modelli HMO e telmed',
+    canonicalPath: '/articoli-svizzera/assicurazione-salute-glarona-sussidio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "LAMal Glarona: franchigie, sussidio e scelta modello",
+      "description": "Scopri come funziona l’assicurazione LAMal in Glarona: scadenza a 3 mesi, franchigie da 300 a 2 500 CHF e sussidio cantonale basato su reddito e famiglia.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/assicurazione-salute-glarona-sussidio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Villaggio svizzero di Glarona con clinica moderna, simbolo dell'assicurazione sanitaria."
+      },
+      "datePublished": "2026-09-16T10:26:48+00:00",
+      "dateModified": "2026-09-16T10:26:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/assicurazione-salute-glarona-sussidio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-premi-lamal-glarona-modelli-franchigie': {
+    title: 'Premi cassa malati Canton Glarona: fasce, franchigie e riduzione',
+    description: 'Nel Cantone di Glarona i premi LAMal variano per fascia di premio e franchigia; è possibile ottenere la riduzione cantonale entro tre mesi dall’iscrizione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, premi, cassa, malati, canton',
+    ogTitle: 'Premi cassa malati Canton Glarona: fasce, franchigie',
+    ogDescription: 'Nel Cantone di Glarona i premi LAMal variano per fascia di premio e franchigia; è possibile ottenere la riduzione cantonale entro tre mesi dall’iscrizione.',
+    canonicalPath: '/articoli-svizzera/premi-lamal-glarona-modelli-franchigie/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Premi cassa malati Canton Glarona: fasce, franchigie e riduzione",
+      "description": "Nel Cantone di Glarona i premi LAMal variano per fascia di premio e franchigia; è possibile ottenere la riduzione cantonale entro tre mesi dall’iscrizione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/premi-lamal-glarona-modelli-franchigie.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Paesaggio alpino del Canton Glarona con casa tradizionale svizzera"
+      },
+      "datePublished": "2026-09-16T11:54:46+00:00",
+      "dateModified": "2026-09-16T11:54:46+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/premi-lamal-glarona-modelli-franchigie/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-costi-nascosti-rientro-scolastico-svizzera': {
+    title: 'I costi nascosti del rientro scolastico in Svizzera: una sfida per le famiglie',
+    description: 'L\'inizio dell\'anno scolastico può essere un momento difficile per le famiglie svizzere, soprattutto dal punto di vista economico. Scopri come affrontare',
+    keywords: 'frontalieri, ticino, svizzera, italia, costi, nascosti, rientro, scolastico',
+    ogTitle: 'I costi nascosti del rientro scolastico in Svizzera: una sfida per le famiglie',
+    ogDescription: 'L\'inizio della scuola può essere un momento difficile per le famiglie svizzere, soprattutto dal punto di vista economico. Scopri come affrontare le spese e pianificare il tuo budget familiare.',
+    canonicalPath: '/articoli-svizzera/costi-nascosti-rientro-scolastico-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "I costi nascosti del rientro scolastico in Svizzera: una sfida per le famiglie",
+      "description": "L'inizio dell'anno scolastico può essere un momento difficile per le famiglie svizzere, soprattutto dal punto di vista economico. Scopri come affrontare",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/costi-nascosti-rientro-scolastico-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Una madre single che pianifica il budget familiare per l'anno scolastico."
+      },
+      "datePublished": "2026-09-16T17:11:11+00:00",
+      "dateModified": "2026-09-16T17:11:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/costi-nascosti-rientro-scolastico-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-malinteso-rendite-avs-moutier': {
+    title: 'Moutier: oltre 400 pensionati ricevono una doppia rendita AVS per errore',
+    description: 'Un malinteso tra Berna e Giura ha portato a un pagamento doppio delle rendite AVS a Moutier, evidenziando la necessità di una comunicazione chiara',
+    keywords: 'frontalieri, ticino, svizzera, italia, moutier, oltre, pensionati, ricevono',
+    ogTitle: 'Moutier: oltre 400 pensionati ricevono una doppia rendita AVS',
+    ogDescription: 'Un episodio a Moutier evidenzia la complessità delle procedure amministrative e la necessità di una comunicazione chiara tra le istituzioni coinvolte nel trasferimento cantonale.',
+    canonicalPath: '/articoli-svizzera/malinteso-rendite-avs-moutier/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Moutier: oltre 400 pensionati ricevono una doppia rendita AVS per errore",
+      "description": "Un malinteso tra Berna e Giura ha portato a un pagamento doppio delle rendite AVS a Moutier, evidenziando la necessità di una comunicazione chiara",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/malinteso-rendite-avs-moutier.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine di Moutier, con un anziano che controlla la propria rendita AVS."
+      },
+      "datePublished": "2026-09-16T17:33:56+00:00",
+      "dateModified": "2026-09-16T17:33:56+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/malinteso-rendite-avs-moutier/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-revolut-banca-svizzera-finma': {
+    title: 'Revolut punta a diventare banca completa in Svizzera',
+    description: 'La fintech Revolut presenta domanda alla FINMA per la licenza bancaria in Svizzera. Oltre un milione di clienti punta a conti con IBAN elvetico. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, revolut, punta, diventare, banca',
+    ogTitle: 'Revolut chiede la licenza bancaria alla FINMA in Svizzera',
+    ogDescription: 'La fintech britannica Revolut ha chiesto una licenza bancaria alla FINMA. Oltre 1,3 milioni di utenti in Svizzera puntano a conti con IBAN elvetico e protezione dei depositi.',
+    canonicalPath: '/articoli-svizzera/revolut-banca-svizzera-finma/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Revolut punta a diventare banca completa in Svizzera",
+      "description": "La fintech Revolut presenta domanda alla FINMA per la licenza bancaria in Svizzera. Oltre un milione di clienti punta a conti con IBAN elvetico. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/revolut-banca-svizzera-finma.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Revolut presenta domanda alla FINMA per licenza bancaria in Svizzera"
+      },
+      "datePublished": "2026-09-17T00:55:00+00:00",
+      "dateModified": "2026-09-17T00:55:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/revolut-banca-svizzera-finma/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-paradiso-trading-risorse-naturali': {
+    title: 'Svizzera e trading: l\'origine del mercato delle materie prime',
+    description: 'Approfondimento sul ruolo della Svizzera come hub globale per il trading di materie prime e la trasformazione delle risorse naturali in profitto.',
+    keywords: 'frontalieri, ticino, svizzera, italia, trading, origine, mercato, materie',
+    ogTitle: 'Svizzera e trading di risorse naturali',
+    ogDescription: 'Scopri l\'analisi economica sul ruolo della Svizzera nel commercio globale e nella trasformazione delle risorse naturali provenienti da altri Paesi.',
+    canonicalPath: '/articoli-svizzera/paradiso-trading-risorse-naturali/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Svizzera e trading: l'origine del mercato delle materie prime",
+      "description": "Approfondimento sul ruolo della Svizzera come hub globale per il trading di materie prime e la trasformazione delle risorse naturali in profitto.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/paradiso-trading-risorse-naturali.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Mercato del trading e risorse naturali in Svizzera"
+      },
+      "datePublished": "2026-09-17T01:04:22+00:00",
+      "dateModified": "2026-09-17T01:04:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/paradiso-trading-risorse-naturali/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-mercato-alloggio-svizzera-ufab': {
+    title: 'Mercato dell\'alloggio in Svizzera: la situazione peggiora',
+    description: 'Scopri l\'analisi dell\'Ufficio federale delle abitazioni sul mercato immobiliare in Svizzera, la crescita demografica, i terreni edificabili e i canoni',
+    keywords: 'frontalieri, ticino, svizzera, italia, mercato, dell, alloggio, situazione',
+    ogTitle: 'Mercato dell\'alloggio in Svizzera: l\'analisi dell\'UFAB',
+    ogDescription: 'La situazione sul mercato dell\'alloggio in Svizzera continua a peggiorare secondo l\'Ufficio federale delle abitazioni. Analisi su popolazione, affitti e nuove costruzioni.',
+    canonicalPath: '/articoli-svizzera/mercato-alloggio-svizzera-ufab/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mercato dell'alloggio in Svizzera: la situazione peggiora",
+      "description": "Scopri l'analisi dell'Ufficio federale delle abitazioni sul mercato immobiliare in Svizzera, la crescita demografica, i terreni edificabili e i canoni",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/mercato-alloggio-svizzera-ufab.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Mercato dell'alloggio in Svizzera e nuove costruzioni residenziali"
+      },
+      "datePublished": "2026-09-17T01:55:49+00:00",
+      "dateModified": "2026-09-17T01:55:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/mercato-alloggio-svizzera-ufab/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-spuhler-indeciso-bilaterali-iii': {
+    title: 'Spuhler (Stadler Rail): sono indeciso sui bilaterali III',
+    description: 'Il presidente di Stadler Rail Peter Spuhler esprime dubbi istituzionali ed economici sul nuovo pacchetto di intese bilaterali III con l\'Unione europea.',
+    keywords: 'frontalieri, ticino, svizzera, italia, spuhler, stadler, rail, sono',
+    ogTitle: 'Spuhler (Stadler Rail) e i bilaterali III: tra economia e istituzioni',
+    ogDescription: 'Il presidente di Stadler Rail Peter Spuhler esprime la sua indecisione sul nuovo pacchetto di intese bilaterali III con l\'Unione europea, bilanciando i vantaggi economici con i dubbi istituzionali sulla democrazia diretta.',
+    canonicalPath: '/articoli-svizzera/spuhler-indeciso-bilaterali-iii/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Spuhler (Stadler Rail): sono indeciso sui bilaterali III",
+      "description": "Il presidente di Stadler Rail Peter Spuhler esprime dubbi istituzionali ed economici sul nuovo pacchetto di intese bilaterali III con l'Unione europea.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/spuhler-indeciso-bilaterali-iii.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Peter Spuhler, presidente di Stadler Rail"
+      },
+      "datePublished": "2026-09-17T02:03:41+00:00",
+      "dateModified": "2026-09-17T02:03:41+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/spuhler-indeciso-bilaterali-iii/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-helene-budliger-artieda-dimissioni-seco': {
+    title: 'Dimissioni segretaria di stato SECO helene budliger artieda',
+    description: 'Helene Budliger Artieda lascia la guida della SECO a fine marzo 2027. Scopri i dettagli sull\'annuncio, il bilancio del mandato e le procedure di successione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, dimissioni, segretaria, stato, seco',
+    ogTitle: 'Dimissioni segretaria di Stato SECO Helene Budliger Artieda',
+    ogDescription: 'La segretaria di Stato dell\'economia Helene Budliger Artieda ha annunciato le dimissioni effettive da fine marzo 2027. Aperta la procedura per la successione all\'interno dell\'amministrazione federale svizzera.',
+    canonicalPath: '/articoli-svizzera/helene-budliger-artieda-dimissioni-seco/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Dimissioni segretaria di stato SECO helene budliger artieda",
+      "description": "Helene Budliger Artieda lascia la guida della SECO a fine marzo 2027. Scopri i dettagli sull'annuncio, il bilancio del mandato e le procedure di successione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/helene-budliger-artieda-dimissioni-seco.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sede dell'amministrazione federale a Berna"
+      },
+      "datePublished": "2026-09-17T02:17:38+00:00",
+      "dateModified": "2026-09-17T02:17:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/helene-budliger-artieda-dimissioni-seco/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-mercato-alloggio-svizzera-2025-2026': {
+    title: 'Mercato dell\'alloggio: tra crescita demografica e offerta',
+    description: 'Monitoraggio del mercato dell\'alloggio in Svizzera: situazione nel 2025 e 2026, crescita demografica, affitti e previsioni dell\'Ufficio federale',
+    keywords: 'frontalieri, ticino, svizzera, italia, mercato, dell, alloggio, crescita',
+    ogTitle: 'Mercato dell\'alloggio in Svizzera: analisi e previsioni',
+    ogDescription: 'Scopri i dati dell\'Ufficio federale delle abitazioni sul mercato immobiliare svizzero tra il 2025 e il 2026, l\'impatto della crescita demografica e le prospettive future per gli affitti.',
+    canonicalPath: '/articoli-svizzera/mercato-alloggio-svizzera-2025-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mercato dell'alloggio: tra crescita demografica e offerta",
+      "description": "Monitoraggio del mercato dell'alloggio in Svizzera: situazione nel 2025 e 2026, crescita demografica, affitti e previsioni dell'Ufficio federale",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/mercato-alloggio-svizzera-2025-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Mercato dell'alloggio in Svizzera con edifici residenziali"
+      },
+      "datePublished": "2026-09-17T02:27:37+00:00",
+      "dateModified": "2026-09-17T02:27:37+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/mercato-alloggio-svizzera-2025-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-sorveglianza-digitale-sanita-guida': {
+    title: 'Sorveglianza digitale sanità: la nuova guida ufficiale',
+    description: 'Scopri la nuova guida ufficiale 2026 di IFPDT e privatim sulla sorveglianza digitale con telecamere, infrarossi e radar nelle strutture sanitarie.',
+    keywords: 'frontalieri, ticino, svizzera, italia, sorveglianza, digitale, sanità, nuova',
+    ogTitle: 'Sorveglianza digitale negli ospedali: la guida di IFPDT e privatim',
+    ogDescription: 'Analisi approfondita della nuova guida ufficiale pubblicata nel settembre 2026 da IFPDT e privatim riguardo alla sorveglianza digitale e tutela dei dati nelle strutture sanitarie.',
+    canonicalPath: '/articoli-svizzera/sorveglianza-digitale-sanita-guida/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Sorveglianza digitale sanità: la nuova guida ufficiale",
+      "description": "Scopri la nuova guida ufficiale 2026 di IFPDT e privatim sulla sorveglianza digitale con telecamere, infrarossi e radar nelle strutture sanitarie.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/sorveglianza-digitale-sanita-guida.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Guida sulla sorveglianza digitale nelle strutture sanitarie in Svizzera"
+      },
+      "datePublished": "2026-09-17T02:36:26+00:00",
+      "dateModified": "2026-09-17T02:36:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/sorveglianza-digitale-sanita-guida/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-accordo-mercosur-agricoltura-svizzera': {
+    title: 'Il Consiglio nazionale approva l\'accordo con il Mercosur',
+    description: 'Il Consiglio nazionale approva l\'accordo con il Mercosur: 517 milioni per l\'agricoltura e 25 milioni per l\'ambiente. Il dossier torna agli Stati.',
+    keywords: 'frontalieri, ticino, svizzera, italia, consiglio, nazionale, approva, accordo',
+    ogTitle: 'Il Consiglio nazionale approva l\'accordo con il Mercosur',
+    ogDescription: 'Il Consiglio nazionale ha dato il via libera all\'accordo di libero scambio con il Mercosur. Stanziati 517 milioni per il settore agricolo e 25 milioni per la lotta alla deforestazione.',
+    canonicalPath: '/articoli-svizzera/accordo-mercosur-agricoltura-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Il Consiglio nazionale approva l'accordo con il Mercosur",
+      "description": "Il Consiglio nazionale approva l'accordo con il Mercosur: 517 milioni per l'agricoltura e 25 milioni per l'ambiente. Il dossier torna agli Stati.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/accordo-mercosur-agricoltura-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna durante una sessione parlamentare."
+      },
+      "datePublished": "2026-09-17T02:46:34+00:00",
+      "dateModified": "2026-09-17T02:46:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/accordo-mercosur-agricoltura-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-atted-digitale-ticino-cyber-security': {
+    title: 'Ated chiede organismi permanenti per il digitale in Ticino',
+    description: 'Ated chiede alla Cancelleria di Stato due organismi permanenti per la trasformazione digitale e la Cyber Security in Ticino. Scopri i dettagli della proposta.',
+    keywords: 'frontalieri, ticino, svizzera, italia, ated, chiede, organismi, permanenti',
+    ogTitle: 'Ated chiede organismi permanenti per il digitale in Ticino',
+    ogDescription: 'L\'associazione Ated chiede alla Cancelleria di Stato e a Norman Gobbi l\'istituzione di un Gruppo consultivo per il digitale e di una Commissione cantonale per la Cyber Security.',
+    canonicalPath: '/articoli-svizzera/atted-digitale-ticino-cyber-security/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ated chiede organismi permanenti per il digitale in Ticino",
+      "description": "Ated chiede alla Cancelleria di Stato due organismi permanenti per la trasformazione digitale e la Cyber Security in Ticino. Scopri i dettagli della proposta.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/atted-digitale-ticino-cyber-security.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Incontro istituzionale a Castelgrande sulla trasformazione digitale in Ticino"
+      },
+      "datePublished": "2026-09-17T02:56:11+00:00",
+      "dateModified": "2026-09-17T02:56:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/atted-digitale-ticino-cyber-security/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

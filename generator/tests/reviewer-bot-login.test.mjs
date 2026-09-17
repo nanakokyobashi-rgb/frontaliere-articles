@@ -61,7 +61,9 @@ test('i workflow che filtrano le review usano il predicato jq condiviso', () => 
     ['.github/workflows/stale-pr-rescuer.yml', 2],
   ]) {
     const src = read(wf);
-    const loginSelector = `select((.user.login // "") | ${REVIEWER_BOT_LOGIN_JQ})`;
+    // The Codex fallback is an explicit second branch of the jq `select`, so
+    // the shared reviewer predicate is no longer the whole selector string.
+    const loginSelector = REVIEWER_BOT_LOGIN_JQ;
     const botTypeSelector = 'select(.user.type == "Bot")';
     const count = (needle) => src.split(needle).length - 1;
     assert.equal(count(loginSelector), expected, `${wf} deve avere ${expected} selettori login reviewer`);
@@ -77,7 +79,7 @@ test('i consumer .mjs della review importano la costante invece di riscriverla',
     'scripts/ci/harvest-agent-lessons.mjs',
   ]) {
     const src = read(mjs);
-    assert.match(src, /REVIEWER_BOT_LOGIN_RE|isReviewerBot/, `${mjs} deve usare la costante o il predicato condiviso`);
+    assert.match(src, /REVIEWER_BOT_LOGIN_RE|isReviewerBot|isManagedReview/, `${mjs} deve usare la costante o il predicato condiviso`);
     assert.ok(
       !/\/\^claude\/i\.test\(/.test(src),
       `${mjs} ha ancora un filtro login /^claude/i locale`,

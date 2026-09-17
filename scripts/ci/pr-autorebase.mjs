@@ -66,7 +66,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import {
   VITEST_CHECK_NAME,
   VITEST_EXECUTION_JOB_NAME,
-  isReviewerBot,
+  isManagedReview,
 } from './lib/constants.mjs';
 import {
   latestCompletedVitestConclusion,
@@ -330,28 +330,28 @@ function pushBranch(branch) {
   );
 }
 
-/** Una review claude-bot con `## LGTM` sulla revisione body corrente? */
+/** Una review gestita con `## LGTM` sulla revisione body corrente? */
 function hasLgtmReview(num, reviewRevision = currentReviewInputRevision(num)) {
   if (!reviewRevision) return false;
   const reviews = gh(['api', `repos/${REPO}/pulls/${num}/reviews`, '--paginate'], { allowFail: true });
   if (!Array.isArray(reviews)) return false;
   return reviews.some(
-    (r) => isReviewerBot(r.user)
+    (r) => isManagedReview(r)
       && reviewHasInputRevision(r.body, reviewRevision)
       && (r.body || '').includes('## LGTM')
   );
 }
 
-/** Esiste ALMENO una review claude-bot della revisione body corrente (LGTM o 🔴,
+/** Esiste ALMENO una review gestita della revisione body corrente (LGTM o 🔴,
  * qualunque esito)? Serve a
  * distinguere la classe-A "review mai postata" (workflow-validation drift 401:
  * run review fallita, body vuoto) da "review postata con 🔴" (gestita dal
  * redflag-fixer, NON va ri-triggerata qui). */
-function hasAnyClaudeReview(num, reviewRevision = currentReviewInputRevision(num)) {
+function hasAnyManagedReview(num, reviewRevision = currentReviewInputRevision(num)) {
   if (!reviewRevision) return true; // API body illeggibile: non aprire/retriggerare alla cieca
   const reviews = gh(['api', `repos/${REPO}/pulls/${num}/reviews`, '--paginate'], { allowFail: true });
   if (!Array.isArray(reviews)) return true; // fail-safe: su errore API assumi review esistente (no reopen)
-  return reviews.some((r) => isReviewerBot(r.user) && reviewHasInputRevision(r.body, reviewRevision));
+  return reviews.some((r) => isManagedReview(r) && reviewHasInputRevision(r.body, reviewRevision));
 }
 
 /** Re-trigger DETERMINISTICO di review+tests per una PR classe-A: il push PAT
@@ -1221,7 +1221,7 @@ async function processPR(pr) {
     // appena un run è queued, headHasVitestCheck torna true → niente
     // ri-dispatch. Nessun rebase, nessuna review Claude.
     if (!headHasVitestCheck(head)) {
-      if (!lgtm && !hasAnyClaudeReview(num, reviewRevision)) {
+      if (!lgtm && !hasAnyManagedReview(num, reviewRevision)) {
         // Classe-A: nemmeno la review esiste (drift 401) — il solo vitest non
         // sblocca (auto-merge esige LGTM). Reopen = review+tests insieme.
         console.log(`PR #${num} 0 dietro main, NESSUNA review claude e niente vitest → close+reopen (re-trigger review+tests).`);
@@ -1482,7 +1482,7 @@ async function processPR(pr) {
         && dispatchTests(num, branch)) clearStaleReviewLabel(num);
       return;
     }
-    const why = hasAnyClaudeReview(num, reviewRevision) ? '🔴/❓ non chiuso + drift sanato' : 'classe-A senza review';
+    const why = hasAnyManagedReview(num, reviewRevision) ? '🔴/❓ non chiuso + drift sanato' : 'classe-A senza review';
     // Il reopen passa dal breaker: è QUESTO call-site che ha prodotto le 12+10
     // riaperture di #5896/#5906. `!lgtm` con i TEST rossi è una condizione che
     // il reopen non può cambiare (il job si ferma prima della review), quindi

@@ -2183,6 +2183,19 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'fides-26-polizia-esercito-berna': { it: 'fides-26-polizia-esercito-berna', en: 'fides-26-police-army-bern', de: 'fides-26-polizei-armee-bern', fr: 'fides-26-police-armee-berne' },
  'lotta-denaro-sporco-svizzera': { it: 'lotta-denaro-sporco-svizzera', en: 'switzerland-fight-dirty-money', de: 'schweiz-kampf-gegen-schmutziges-geld', fr: 'suisse-lutte-contre-argent-sale' },
  'calcio-hockey-svizzera-economia-pubblico': { it: 'calcio-hockey-svizzera-economia-pubblico', en: 'football-hockey-switzerland-economy-public', de: 'fussball-eishockey-schweiz-wirtschaft-publikum', fr: 'football-hockey-suisse-economie-public' },
+ 'assicurazione-salute-glarona-sussidio': { it: 'assicurazione-salute-glarona-sussidio', en: 'health-insurance-glarus-subsidy', de: 'krankenversicherung-glarus-zuschuss', fr: 'assurance-sante-glaris-subvention' },
+ 'premi-lamal-glarona-modelli-franchigie': { it: 'premi-lamal-glarona-modelli-franchigie', en: 'lamal-premiums-glarus-models-deductibles', de: 'lamal-beitraege-glarus-modelle-selbstbehalte', fr: 'cotisations-lamal-glaris-modeles-franchises' },
+ 'costi-nascosti-rientro-scolastico-svizzera': { it: 'costi-nascosti-rientro-scolastico-svizzera', en: 'hidden-costs-back-to-school-switzerland', de: 'versteckte-kosten-schulbeginn-schweiz', fr: 'couts-caches-rentree-scolaire-suisse' },
+ 'malinteso-rendite-avs-moutier': { it: 'malinteso-rendite-avs-moutier', en: 'moutier-avs-pension-misunderstanding', de: 'missverstaendnis-ueber-ahv-renten-in-moutier', fr: 'malentendu-sur-les-rentes-avs-a-moutier' },
+ 'revolut-banca-svizzera-finma': { it: 'revolut-banca-svizzera-finma', en: 'revolut-banking-license-switzerland', de: 'revolut-schweizer-banklizenz', fr: 'revolut-licence-bancaire-suisse' },
+ 'paradiso-trading-risorse-naturali': { it: 'paradiso-trading-risorse-naturali', en: 'paradise-trading-natural-resources', de: 'paradies-trading-naturressourcen', fr: 'paradis-trading-ressources-naturelles' },
+ 'mercato-alloggio-svizzera-ufab': { it: 'mercato-alloggio-svizzera-ufab', en: 'housing-market-switzerland-ufab', de: 'wohnungsmarkt-schweiz-ufab', fr: 'marche-logement-suisse-ufab' },
+ 'spuhler-indeciso-bilaterali-iii': { it: 'spuhler-indeciso-bilaterali-iii', en: 'spuhler-undecided-bilateral-agreements-iii', de: 'spuhler-unentschlossen-bilaterale-vertrage-iii', fr: 'spuhler-indecis-bilaterales-iii' },
+ 'helene-budliger-artieda-dimissioni-seco': { it: 'helene-budliger-artieda-dimissioni-seco', en: 'helene-budliger-artieda-seco-resignation', de: 'helene-budliger-artieda-ruecktritt-seco', fr: 'helene-budliger-artieda-demission-seco' },
+ 'mercato-alloggio-svizzera-2025-2026': { it: 'mercato-alloggio-svizzera-2025-2026', en: 'housing-market-switzerland-2025-2026', de: 'wohnungsmarkt-schweiz-2025-2026', fr: 'marche-logement-suisse-2025-2026' },
+ 'sorveglianza-digitale-sanita-guida': { it: 'sorveglianza-digitale-sanita-guida', en: 'digital-surveillance-healthcare-guide', de: 'digitale-ueberwachung-gesundheitswesen-leitfaden', fr: 'surveillance-numerique-sante-guide' },
+ 'accordo-mercosur-agricoltura-svizzera': { it: 'accordo-mercosur-agricoltura-svizzera', en: 'switzerland-mercosur-agreement-agriculture', de: 'schweiz-mercosur-abkommen-landwirtschaft', fr: 'accord-mercosur-agriculture-suisse' },
+ 'atted-digitale-ticino-cyber-security': { it: 'atted-digitale-ticino-cyber-security', en: 'atted-digital-ticino-cyber-security', de: 'atted-digitales-tessin-cyber-sicherheit', fr: 'atted-numerique-ticino-cybersecurite' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

@@ -718,11 +718,12 @@ jobs:
       #
       # MISURATO, run 31817957722: 38 rifiuti su input cap per un prompt stimato
       # ~9740 token contro un cap massimo di 8000, e gli unici membri del roster
-      # che quel prompt lo reggono sono i due CLI subscription — Codex prima, Haiku
-      # poi — saltati in precedenza con «no API key». Il gate in ai-models.mjs
-      # offre Codex solo quando action + broker sono pronti, e Claude quando il
-      # flag + token sono presenti. Il token va passato allo step di generazione
-      # qui sotto via `env:`: deve esistere nel processo che chiama callLLM.
+      # che quel prompt lo reggevano sono i due CLI subscription — Codex prima,
+      # Haiku poi — saltati in precedenza con «no API key». Il gate in
+      # ai-models.mjs offre Codex solo quando action + broker sono pronti, e
+      # Claude quando il flag + token sono presenti. Il token va passato allo
+      # step di generazione qui sotto via `env:`: deve esistere nel processo che
+      # chiama callLLM.
       #
       # Il secret esiste gia' in questo repo (CLAUDE_CODE_OAUTH_TOKEN, lo stesso
       # del piano Max usato dalla review in tests.yml e da issue-fix.yml): non c'e' nulla
@@ -749,6 +750,7 @@ jobs:
         if: steps.mode.outputs.dry != 'true'
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          CLAUDE_CLI_BIN: ${{ steps.setup_claude_haiku_fallback.outputs.claude_cli_bin }}
           CODEX_AUTH_BROKER_SOCKET: ${{ steps.setup_claude_haiku_fallback.outputs.codex_auth_broker_socket }}
           PROVIDER_PREFLIGHT_OUTPUT: ${{ runner.temp }}/provider-preflight.json
         run: node generator/scripts/lib/provider-preflight.mjs

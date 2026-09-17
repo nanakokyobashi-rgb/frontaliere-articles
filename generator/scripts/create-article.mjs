@@ -71,8 +71,8 @@ import { exitAfterDrain } from './lib/drain-stdio.mjs';
 // ── Il modello preferito per la SOLA generazione del corpo ──────────────────
 //
 // Decisione del proprietario: per la generazione editoriale ad alto valore la
-// prima scelta e' Codex via subscription; Claude Haiku resta il soccorso
-// immediato, prima della cascata gratuita. Questo e' quel punto: la
+// prima scelta e' Codex via subscription; Claude Haiku e' il fallback
+// immediato, poi si passa alla cascata disponibile. Questo e' quel punto: la
 // generazione del corpo italiano e' l'unica chiamata i cui gate (fedelta' alla
 // fonte, tassi chiave, lunghezza minima) bocciano davvero l'output dei modelli
 // free.
@@ -89,7 +89,13 @@ import { exitAfterDrain } from './lib/drain-stdio.mjs';
 // l'indipendenza che il guard «local/fallback cannot self-verify» difende.
 const PREFERRED_GENERATION_MODELS = [
   AI_MODELS.CODEX_CLI_PRIMARY,
-  AI_MODELS.CLAUDE_CLI_HAIKU,
+  // Crawler groups do not receive the Claude OAuth token. Keep Claude out of
+  // their declared preference rather than advertising a lane that
+  // isModelAvailable() will immediately discard; the wired article workflow
+  // adds it here when its flag and token are both present.
+  ...(isModelAvailable(AI_MODELS.CLAUDE_CLI_HAIKU)
+    ? [AI_MODELS.CLAUDE_CLI_HAIKU]
+    : []),
 ];
 
 /**
@@ -8526,8 +8532,8 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   // Ci si accorciava per farsi accettare, e si veniva bocciati per aver perso
   // i fatti che ci si era accorciati per perdere.
   //
-  // Da quando la generazione del corpo PREFERISCE Codex e, subito dopo, Haiku —
-  // entrambi i CLI senza cap di input dichiarato — la scala della chiamata
+  // Da quando la generazione del corpo PREFERISCE Codex e Claude — i CLI senza
+  // cap di input dichiarato — la scala della chiamata
   // unica non ha piu' motivo di accorciare il primo tentativo. Se pero' il
   // prompt unico supera il cap della flotta, la generazione passa alla vista
   // divisa corpo/metadati qui sotto: i fallback capped ricevono cosi' una
@@ -8961,7 +8967,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   // (`_budgetDettato`), cioe' quando la libreria ha visto ALMENO un modello
   // saltato per cap di INPUT — ma l'unico membro di
   // `PREFERRED_GENERATION_MODELS` (Codex + claude-cli/haiku) non dichiara
-  // nessun cap di input (getDeclaredRequestTokenLimit li salta sempre), quindi non puo'
+  // nessun cap di input (getDeclaredRequestTokenLimit li salta sempre), quindi non possono
   // MAI essere fra i modelli saltati per dimensione. Se ha fallito, ha fallito
   // per un'altra ragione (timeout, quota, rate-limit) che ridimensionare il
   // prompt non cambia: ricontattarlo con lo stesso `prefer` e' spendere una
@@ -9231,7 +9237,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // esattamente i due campi di testo che questa meta' produce.
     const rawMeta = useGeminiDirect
       ? await callLLM(_call2.msgs, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema, expectedFields: META_ONLY_FIELDS })
-      : await callLLM(_call2.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema, prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: META_ONLY_FIELDS });
+      : await callLLM(_call2.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema, expectedFields: META_ONLY_FIELDS });
     let metaData;
     try {
       metaData = JSON.parse(repairLlmJson(rawMeta));
@@ -14065,12 +14071,12 @@ async function main() {
     // this check is unaffected by that promotion either way). Renaming would
     // be a pure identifier change with no behavior difference; left as-is as
     // a comment-only fix (2026-07-28) to keep this edit surgical.
-    // Codex is intentionally absent from DEFAULT_CHAIN because it is reserved
-    // for the high-value article body. It is nevertheless a viable non-local
-    // writer here: omitting it makes this pre-scan misclassify a Codex-only
-    // runtime as local-only and skip the news scan before generation can use
-    // the preferred CLI lane.
-    const cloudOnlyChain = [...DEFAULT_CHAIN, AI_MODELS.CODEX_CLI_PRIMARY]
+    // Codex and Claude are intentionally absent from DEFAULT_CHAIN because
+    // they are reserved for the high-value article body. They are nevertheless
+    // viable non-local writers here: omitting either one makes this pre-scan
+    // misclassify a subscription-only runtime as local-only and skip the news
+    // scan before generation can use the preferred CLI lanes.
+    const cloudOnlyChain = [...DEFAULT_CHAIN, ...PREFERRED_GENERATION_MODELS]
       .filter((m) => m !== AI_MODELS.LOCAL_FALLBACK);
     const cloudCascadeExhausted = isLocalLlmEnabled() && !getPreferredModel({ chain: cloudOnlyChain });
     if (cloudCascadeExhausted) {

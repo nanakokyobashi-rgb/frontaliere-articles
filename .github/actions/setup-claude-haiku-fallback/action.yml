@@ -2,8 +2,9 @@ name: "Setup Codex primary with Claude fallback"
 description: >-
   Installs a pinned Codex CLI and the Claude Code CLI lane for article
   generation. When CODEX_AUTH_JSON is available, Codex is attempted first via
-  a private broker socket; if that one-shot attempt fails, the generator tries
-  Claude Haiku, then its normal model cascade. The historical
+  a private broker socket. Requests are serialized in a bounded job-wide lane;
+  if one attempt fails, the generator tries its normal model cascade for that
+  call without consuming the other crawler calls. The historical
   ENABLE_HAIKU_ARTICLE_FALLBACK flag remains the Remote Config kill-switch for
   this optional lane, so existing callers keep working.
   Claude uses CLAUDE_CODE_OAUTH_TOKEN (the same Max-plan subscription token
@@ -44,7 +45,7 @@ inputs:
 outputs:
   codex_auth_broker_socket:
     description: >-
-      Short-lived private Unix-socket endpoint for the one-shot Codex primary.
+      Short-lived private Unix-socket endpoint for the bounded Codex primary.
       The endpoint is exposed only as an action output, never through
       GITHUB_ENV.
     value: ${{ steps.start_codex_auth_broker.outputs.socket }}
@@ -683,7 +684,7 @@ runs:
         # with an empty environment so CODEX_AUTH_JSON from this step cannot
         # leak into the long-lived broker process or any diagnostics.
         nohup /usr/bin/env -i PATH="$PATH" "$node_bin" "$GITHUB_ACTION_PATH/codex-auth-broker.mjs" \
-          --socket "$broker_socket" --ttl-ms 1800000 \
+          --socket "$broker_socket" --ttl-ms 1800000 --max-requests 4096 \
           --codex-bin "$CODEX_CLI_BIN" --codex-realpath "$CODEX_CLI_REALPATH" \
           --codex-sha256 "$CODEX_CLI_SHA256" --codex-prefix "$CODEX_CLI_PREFIX" \
           < "$auth_fifo" > /dev/null 2>&1 &

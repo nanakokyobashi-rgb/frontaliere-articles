@@ -346,20 +346,20 @@ export const AI_MODELS = Object.freeze({
 
   // ── Codex CLI article primary (opt-in via the shared CLI lane) ────────────
   // Routed through the action-owned broker using the ChatGPT subscription. The
-  // broker keeps CODEX_AUTH_JSON private and exposes only one text request to
-  // this process. The same lane installs Claude Haiku as its second choice;
-  // create-article.mjs makes the order explicit with `prefer: [Codex, Claude]`.
+  // broker keeps CODEX_AUTH_JSON private and serializes the requests from the
+  // crawler group through one bounded lane. The crawler action explicitly
+  // prefers this model before the normal provider cascade.
   // The model is intentionally absent from DEFAULT_CHAIN: Codex is reserved for
   // the high-value article-body generation path, not translations, metadata,
   // FAQ work or fact-check consensus.
   CODEX_CLI_PRIMARY: `codex-cli/${CODEX_FALLBACK_MODEL}`,
 
-  // ── Claude CLI Haiku fallback (opt-in via the shared CLI lane) ────────────
+  // ── Claude CLI Haiku fallback (article-body explicit opt-in) ─────────────
   // Routed through the local `claude` CLI subprocess using the existing
   // CLAUDE_CODE_OAUTH_TOKEN (Max subscription — $0 marginal cost, same auth
   // already used by pr-review-loop.yml/issue-fix.yml). Inert unless the CLI
-  // lane flag is set AND the token is present. This is the fallback after the
-  // Codex article-primary attempt.
+  // lane flag is set AND the token is present. It is not part of the shared
+  // DEFAULT_CHAIN: the article body adds it explicitly after Codex.
   // Uses the CLI's own 'haiku' alias (confirmed live: `claude --model haiku`
   // resolves to claude-haiku-4-5-20251001 today) instead of a dated snapshot
   // id, so this tracks whatever Anthropic ships as "current Haiku" without
@@ -605,7 +605,7 @@ export const DEFAULT_CHAIN = [
   // Self-hosted local AI gateway (OmniRoute), opt-in pilot. Since 2026-07-29
   // (AI_COMPETING_TIERS default) this tier is PROMOTED to tier-0 — it competes
   // on real Firestore score against every normal model above, it does NOT get
-  // sorted relative to LOCAL_FALLBACK/CLAUDE_CLI_HAIKU by tier rank anymore.
+  // sorted relative to LOCAL_FALLBACK by tier rank anymore.
   // Bottom-of-array position here is deliberate ramp-up: initial score 0 +
   // index tiebreak means it starts BEHIND models with accumulated positive
   // score, rising only through real successes (see _lastResortTier /
@@ -615,14 +615,6 @@ export const DEFAULT_CHAIN = [
   // OMNIROUTE_ENABLED is set.
   AI_MODELS.OMNIROUTE_AUTO,
 
-  // Claude CLI Haiku, opt-in via Remote Config + CLAUDE_CODE_OAUTH_TOKEN.
-  // Since 2026-07-29 (AI_COMPETING_TIERS default) also PROMOTED to tier-0 —
-  // same mechanism as OMNIROUTE_AUTO above, same bottom-of-array ramp-up
-  // rationale. Additionally capped by CLAUDE_CLI_MAX_CALLS_PER_RUN (default
-  // 25/run) since this tier burns the shared Max-subscription quota that also
-  // powers pr-review-loop.yml/issue-fix.yml — see the callLLM loop's cap
-  // check. Set AI_COMPETING_TIERS='' to restore pinned-last-resort behavior.
-  AI_MODELS.CLAUDE_CLI_HAIKU,
 ];
 
 // ── Provider constants ───────────────────────────────────────
@@ -932,7 +924,7 @@ function getOmniRouteUrl() { return (process.env.OMNIROUTE_URL || OMNIROUTE_DEFA
 // key, so keep a sentinel, same pattern as Local/getLocalLlmApiKey.
 function getOmniRouteApiKey() { return (process.env.OMNIROUTE_API_KEY || 'omniroute-no-key').trim(); }
 
-// ── CLI article lane (Codex primary, Claude fallback) ──────────────────────
+// ── CLI article lane (Codex primary, Claude body fallback) ─────────────────
 // ENABLE_HAIKU_ARTICLE_FALLBACK is the historical Remote Config flag loaded by
 // load-rc-env.mjs. Keep accepting it while the action also publishes the more
 // truthful ENABLE_CODEX_ARTICLE_FALLBACK name: existing callers and the RC
@@ -961,11 +953,9 @@ const CLAUDE_CLI_BIN = (process.env.CLAUDE_CLI_BIN || 'claude').trim();
 const CODEX_CLI_MAX_TIMEOUT_MS = 600_000;
 const CODEX_CLI_MIN_TIMEOUT_MS = 15_000;
 const CODEX_FALLBACK_MARKER_PREFIX = 'codex-article-primary';
-// The Codex subscription primary is one-shot per GitHub run. The in-process
-// flag is only a fast path for callers outside Actions; workflow processes use
-// the atomic marker in RUNNER_TEMP below so parallel crawler workers cannot
-// multiply the subscription attempt. A failed attempt is not retried: the
-// preferred chain immediately continues with Claude, then the normal models.
+// The atomic marker below is retained only for the legacy indirect fallback
+// path. The direct Codex primary uses the action-owned broker, which accepts
+// serialized requests from all crawler workers in the group.
 let _codexCliFallbackAttempted = false;
 // Flipped true on the first `spawn claude ENOENT` (see the catch block in
 // callLLM's fallback loop). Process-local, never persisted — see that comment
@@ -1641,10 +1631,9 @@ export function getApiKeyForProvider(provider) {
     // (and '' when disabled → every local/* model is skipped). Mirrors Cloudflare.
     case PROVIDER.LOCAL:       return isLocalLlmEnabled() ? 'local-no-key' : '';
     // Codex auth never enters this process as a token: the setup action exposes
-    // only its private broker socket. The one-shot marker is part of the same
-    // availability check, so later crawler workers fall through to Claude
-    // without launching a doomed second Codex request.
-    case PROVIDER.CODEX_CLI:   return _codexCliSlotAvailable() ? 'codex-cli-no-key' : '';
+    // only its private broker socket. The broker serializes a bounded number
+    // of requests, so every crawler worker can use the same primary lane.
+    case PROVIDER.CODEX_CLI:   return isCodexCliPrimaryEnabled() ? 'codex-cli-no-key' : '';
     // No real key — auth is the CLAUDE_CODE_OAUTH_TOKEN env var, read directly
     // by the `claude` CLI subprocess. Gate on RC flag + token presence so the
     // chain only offers this model when both are actually usable. Mirrors Local.
@@ -2881,7 +2870,7 @@ function _responseCacheKey(messages, o) {
     // answers an otherwise identical request, so a preferred and a
     // non-preferred call must not share a cache entry. Both layers are keyed:
     // `pf` the process-wide env opt-in, `pfo` the per-call opts.prefer. Without
-    // `pfo` the body call (which prefers claude-cli/haiku) and any other call
+    // `pfo` the body call (which prefers Codex then Claude) and any other call
     // with the same prompt+params would collide, and the preferred call would
     // be served a response a free model produced — the exact defect the
     // preference exists to avoid.
@@ -4973,7 +4962,7 @@ export function applyModelsPrefer(chain, prefer) {
  *
  * `undefined` significa «nessun cap dichiarato», non «illimitato»: e' la
  * risposta che serve a create-article.mjs per NON accorciare la fonte quando a
- * servire la chiamata sara' claude-cli/haiku — l'unico membro del roster senza
+ * servire la chiamata sara' Codex o Claude — i membri del roster preferito senza
  * cap di input dichiarato. Se il modello poi rifiuta davvero per dimensione, il
  * rimedio esiste gia' ed e' `err.retryRequestTokenBudget` al throw qui sotto.
  */
@@ -5127,7 +5116,8 @@ export function isModelAvailable(modelId) {
  */
 export function isAnyModelAvailable() {
   return DEFAULT_CHAIN.some(m => isModelAvailable(m))
-    || isModelAvailable(AI_MODELS.CODEX_CLI_PRIMARY);
+    || isModelAvailable(AI_MODELS.CODEX_CLI_PRIMARY)
+    || isModelAvailable(AI_MODELS.CLAUDE_CLI_HAIKU);
 }
 
 /**
@@ -5920,6 +5910,29 @@ export function classifyNonRetryableError(status, bodyText = '', providerName = 
   // once per failed CALL, so a dead endpoint now sinks in the ledger 16x slower
   // than it did while it was being re-called 32 times a run.
   if (status === 404) {
+    return { nonRetryable: true, markExhausted: true };
+  }
+
+  // These status-only branches run before the caller's isRetryableError check.
+  // Keep transient bodies out of the nonretryable path (review finding 1), and
+  // keep GitHub Models 403s out of it too: the `nonretryable` reason disables
+  // the multi-PAT rotation path (review finding 2).
+
+  // HTTP 410 — provider-side end-of-life outside GitHub Models. Run 35095698299
+  // recorded NVIDIA's real response: {"type":"about:blank","title":"Gone","status":410,
+  // "detail":"The model 'meta/llama-3.1-8b-instruct' has reached its end of life ..."}.
+  // The GitHub-specific 410 branch above keeps its reason; this is the generic fallback.
+  // Exhaustion is run-scoped (and persisted only for quota), so a recovered endpoint
+  // returns on the next run without removing a model from roster, ledger or tally.
+  if (status === 410 && !isRetryableError(status, bodyText)) {
+    return { nonRetryable: true, markExhausted: true };
+  }
+
+  // HTTP 403 — the API cannot serve this model. The same run recorded OpenRouter's
+  // real response: {"error":{"message":"thinkingmachines/inkling-small:free is only
+  // available on agentic harnesses. Try plugging it into a coding agent or productivity app..."}}.
+  // Like 402/404, mark it exhausted for this run only; do not spend cascade retries.
+  if (status === 403 && !isGitHubModels && !isRetryableError(status, bodyText)) {
     return { nonRetryable: true, markExhausted: true };
   }
 
@@ -7132,7 +7145,7 @@ export function __codexFallbackTimeoutForTests(opts = {}) {
 }
 
 /**
- * Resolve the shared one-shot marker. GitHub's run id and attempt are part of
+ * Resolve the shared fallback marker. GitHub's run id and attempt are part of
  * the key so separate workflow runs never consume one another's fallback. Do
  * not use raw values as path components: a malformed/untrusted value must not
  * escape RUNNER_TEMP.
@@ -7151,10 +7164,11 @@ export function __codexFallbackMarkerPathForTests() {
 }
 
 /**
- * Claim the cross-process one-shot slot with O_EXCL. RUNNER_TEMP is owned by
- * the runner and is intentionally not cleaned up here: another worker may be
- * racing to observe the marker, and the runner removes its temporary tree at
- * the end of the job. The local flag avoids repeated syscalls in one process.
+ * Claim the cross-process fallback slot with O_EXCL. This remains for the
+ * legacy indirect fallback path; the primary crawler lane is brokered and
+ * does not call this function. RUNNER_TEMP is owned by the runner and is
+ * intentionally not cleaned up here: another worker may be racing to observe
+ * the marker, and the runner removes its temporary tree at the end of the job.
  */
 function _claimCodexCliFallback() {
   if (_codexCliFallbackAttempted) return false;
@@ -7183,12 +7197,6 @@ function _claimCodexCliFallback() {
   }
 }
 
-function _codexCliSlotAvailable() {
-  if (!isCodexCliPrimaryEnabled() || _codexCliFallbackAttempted) return false;
-  const markerPath = _codexFallbackMarkerPath();
-  return !markerPath || !fs.existsSync(markerPath);
-}
-
 export function __claimCodexFallbackForTests() {
   return _claimCodexCliFallback();
 }
@@ -7196,8 +7204,9 @@ export function __claimCodexFallbackForTests() {
 /**
  * Ask the action-owned host broker to execute one Codex request. The broker is
  * the only cross-step hand-off; it keeps the raw credential in memory and
- * destroys its private Unix socket after one successful request. There is
- * intentionally no CODEX_AUTH_JSON/CODEX_AUTH_FILE process-env fallback:
+ * serves serialized requests until its bounded request budget or TTL is
+ * reached. There is intentionally no CODEX_AUTH_JSON/CODEX_AUTH_FILE
+ * process-env fallback:
  * those would expose the credential to every background crawler. Raw auth
  * never crosses this socket; only Codex's result does.
  */
@@ -7341,15 +7350,12 @@ function _validateCodexCliResult(result, { wantsJson, schemaApplied }) {
 }
 
 /**
- * One-shot Codex CLI subscription primary. The action-owned broker materializes
+ * Codex CLI subscription primary. The action-owned broker materializes
  * auth in a private temporary CODEX_HOME only for this invocation and removes
  * it in its finally block, including timeout/output failures.
  */
 async function _callCodexCli(messages, opts = {}) {
   const timeoutMs = _codexFallbackTimeoutMs(opts);
-  if (!_claimCodexCliFallback()) {
-    throw new Error('Codex primary skipped: one-shot already consumed');
-  }
   const jsonRequest = _codexFallbackJsonRequest(opts);
   const result = await _requestCodexExecution({
     prompt: _codexPrompt(messages, { jsonOnly: jsonRequest.wantsJson }),
@@ -7379,8 +7385,8 @@ function _callOmniRoute(model, messages, opts) {
 }
 
 /**
- * Call Claude Haiku via the `claude` CLI subprocess (RC-gated, absolute
- * last resort — reuses CLAUDE_CODE_OAUTH_TOKEN, same zero-cost Max-plan auth
+ * Call Claude Haiku via the `claude` CLI subprocess (RC-gated article-body
+ * fallback — reuses CLAUDE_CODE_OAUTH_TOKEN, same zero-cost Max-plan auth
  * already wired for pr-review-loop.yml/issue-fix.yml, never a raw
  * ANTHROPIC_API_KEY). `--bare` deliberately NOT used: it requires
  * ANTHROPIC_API_KEY/apiKeyHelper and ignores OAuth. Tool access is disabled

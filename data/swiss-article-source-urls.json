@@ -1,59 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/gr%3a-ospedale-cantonale%2c-un-cantiere-di-12-anni-verso-il-traguardo/91915775": {
-    "articleId": "ospedale-grigioni-ampliamento-2026",
-    "ts": "2026-08-18T19:20:17.658Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/gr%3a-ospedale-cantonale%2c-un-cantiere-di-12-anni-verso-il-traguardo/91915803": {
-    "articleId": "ospedale-grigioni-ampliamento-500m",
-    "ts": "2026-08-18T19:56:19.148Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/economia/1944598/franchi-bonus-fatturato-stipendi-dati-radiologi-baume-schneider": {
-    "articleId": "stipendi-radiologi-bonus-svizzera",
-    "ts": "2026-08-18T21:22:38.797Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/economia/1944063/banche-patrimonio-clienti-dietrich-franchi-puo-considerano": {
-    "articleId": "soglie-patrimonio-banche-svizzera",
-    "ts": "2026-08-18T21:58:03.147Z",
-    "keyForm": 2
-  },
-  "https://www.admin.ch/it/newnsb/9h0hioulfebujggpy5krh": {
-    "articleId": "easygov-pmi-svizzere",
-    "ts": "2026-08-18T23:24:45.913Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/politica/1944563/neutralita-svizzera-i-sondaggi-dicono-no-al-cambiamento-ma-il-ticino-fa-eccezione": {
-    "articleId": "ticino-neutralita-sondaggio-2026",
-    "ts": "2026-08-19T06:02:59.636Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/politica/1944665/koller-lex-stranieri-terreni-immobili-vite-vendita-giro": {
-    "articleId": "revisione-lex-koller-immobiliare",
-    "ts": "2026-08-19T07:50:31.587Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/economia/1944667/migros-delica-online-tre-partenze-giorno-vertici-stesso": {
-    "articleId": "migros-tre-partenze-vertici",
-    "ts": "2026-08-19T08:23:05.135Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/industria-e-costruzione%3a-ritorno-alla-crescita-nel-ii-trimestre/91918944": {
-    "articleId": "industria-costruzione-crescita-q2",
-    "ts": "2026-08-19T08:42:03.065Z",
-    "keyForm": 2
-  },
-  "https://www.admin.ch/it/newnsb/wn3hze-cbsz4isczfzrs2": {
-    "articleId": "difesa-aerea-svizzera-investimenti",
-    "ts": "2026-08-19T09:19:00.780Z",
-    "keyForm": 2
-  },
-  "https://www.admin.ch/it/newnsb/ldqy5vvaxvmzrq8xebcwj": {
-    "articleId": "indennita-malattia-sistema-funziona-bene",
-    "ts": "2026-08-19T09:38:21.047Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1944761/deficit-bilancio-entrate-svizzera-armamento": {
     "articleId": "bilancio-federale-2026-surplus",
     "ts": "2026-08-19T10:16:52.759Z",
@@ -2497,6 +2442,61 @@
   "https://www.rsi.ch/s/4086055": {
     "articleId": "calcio-hockey-svizzera-economia-pubblico",
     "ts": "2026-09-16T02:41:41.933Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1950481/franchi-figlia-celine-racconta-spese-restano-mese": {
+    "articleId": "costi-nascosti-rientro-scolastico-svizzera",
+    "ts": "2026-09-16T17:11:11.922Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1950676/rendite-pensionati-rendita-versamento-gennaio": {
+    "articleId": "malinteso-rendite-avs-moutier",
+    "ts": "2026-09-16T17:33:56.263Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4087039": {
+    "articleId": "revolut-banca-svizzera-finma",
+    "ts": "2026-09-17T00:55:00.855Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/economia/economia/1950387/dietro-il-paradiso-del-trading-la-maledizione-delle-risorse": {
+    "articleId": "paradiso-trading-risorse-naturali",
+    "ts": "2026-09-17T01:04:23.219Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/alloggio%3a-%22situazione-continua-a-peggiorare%22%2c-dice-berna/92069715": {
+    "articleId": "mercato-alloggio-svizzera-ufab",
+    "ts": "2026-09-17T01:55:49.264Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/spuhler-%28stadler-rail%29%3a-%22sono-indeciso-sui-bilaterali-iii%22/92071053": {
+    "articleId": "spuhler-indeciso-bilaterali-iii",
+    "ts": "2026-09-17T02:03:42.052Z",
+    "keyForm": 2
+  },
+  "https://www.seco.admin.ch/it/newnsb/sb5uskla-j19": {
+    "articleId": "helene-budliger-artieda-dimissioni-seco",
+    "ts": "2026-09-17T02:17:39.073Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/0zqf4ypmu5my": {
+    "articleId": "mercato-alloggio-svizzera-2025-2026",
+    "ts": "2026-09-17T02:27:37.460Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/tbrqnj30sw2p": {
+    "articleId": "sorveglianza-digitale-sanita-guida",
+    "ts": "2026-09-17T02:36:27.154Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/cn-approva-accordo-col-mercosur-e-aiuti-all%27agricoltura/92069687": {
+    "articleId": "accordo-mercosur-agricoltura-svizzera",
+    "ts": "2026-09-17T02:46:34.341Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/economia/1950666/sul-digitale-non-dovrebbe-esserci-una-strategia-di-destra-di-centro-o-di-sinistra": {
+    "articleId": "atted-digitale-ticino-cyber-security",
+    "ts": "2026-09-17T02:56:11.239Z",
     "keyForm": 2
   }
 }

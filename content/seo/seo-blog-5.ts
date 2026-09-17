@@ -91138,6 +91138,123 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-stefania-filetti-cgil-nazionale': {
+    title: 'Stefania Filetti eletta nella segreteria nazionale Cgil',
+    description: 'Stefania Filetti entra nella segreteria nazionale della Cgil eletta a Roma dall\'assemblea generale. Dalla gavetta all\'Alfa Romeo ai vertici sindacali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, stefania, filetti, eletta, nella',
+    ogTitle: 'Stefania Filetti eletta nella segreteria nazionale della Cgil',
+    ogDescription: 'L\'assemblea generale della Cgil riunita a Roma ha eletto a voto segreto Stefania Filetti nella nuova segreteria confederale guidata da Maurizio Landini, dopo un percorso iniziato nello stabilimento Alfa Romeo di Arese.',
+    canonicalPath: '/articoli-frontaliere/stefania-filetti-cgil-nazionale',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Stefania Filetti eletta nella segreteria nazionale Cgil",
+      "description": "Stefania Filetti entra nella segreteria nazionale della Cgil eletta a Roma dall'assemblea generale. Dalla gavetta all'Alfa Romeo ai vertici sindacali.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/stefania-filetti-cgil-nazionale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Stefania Filetti eletta nella segreteria nazionale della Cgil"
+      },
+      "datePublished": "2026-09-17T01:00:16+00:00",
+      "dateModified": "2026-09-17T01:00:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/stefania-filetti-cgil-nazionale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-leroy-merlin-lavoro-varese': {
+    title: 'Leroy Merlin: nuove opportunità di lavoro nell\'area di Varese',
+    description: 'Scopri le nuove opportunità di lavoro e le selezioni aperte da Leroy Merlin nell\'area di Varese per il settore retail e GDO. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, leroy, merlin, nuove, opportunità',
+    ogTitle: 'Leroy Merlin: nuove opportunità di lavoro nell area di Varese',
+    ogDescription: 'Approfondimento sulle selezioni di personale e le opportunità lavorative aperte da Leroy Merlin nella provincia di Varese.',
+    canonicalPath: '/articoli-frontaliere/leroy-merlin-lavoro-varese',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Leroy Merlin: nuove opportunità di lavoro nell'area di Varese",
+      "description": "Scopri le nuove opportunità di lavoro e le selezioni aperte da Leroy Merlin nell'area di Varese per il settore retail e GDO. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/leroy-merlin-lavoro-varese.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Opportunità di lavoro Leroy Merlin nell area di Varese"
+      },
+      "datePublished": "2026-09-17T02:41:32+00:00",
+      "dateModified": "2026-09-17T02:41:32+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/leroy-merlin-lavoro-varese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-stazioni-ferroviarie-ticino-sicurezza': {
+    title: 'Stazioni ferroviarie in Ticino: decoro e sicurezza',
+    description: 'Interrogazione della Lega dei Ticinesi al Consiglio di Stato sulle condizioni di sicurezza, pulizia e decoro nelle stazioni ferroviarie ticinesi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, stazioni, ferroviarie, decoro, sicurezza',
+    ogTitle: 'Stazioni ferroviarie in Ticino: decoro e sicurezza a rischio',
+    ogDescription: 'Un\'interrogazione parlamentare solleva il tema della pulizia, del decoro e della sicurezza nelle stazioni ferroviarie principali e secondarie del Ticino, chiedendo un monitoraggio coordinato e un piano FFS mirato.',
+    canonicalPath: '/articoli-frontaliere/stazioni-ferroviarie-ticino-sicurezza',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Stazioni ferroviarie in Ticino: decoro e sicurezza",
+      "description": "Interrogazione della Lega dei Ticinesi al Consiglio di Stato sulle condizioni di sicurezza, pulizia e decoro nelle stazioni ferroviarie ticinesi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/stazioni-ferroviarie-ticino-sicurezza.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Stazione ferroviaria in Ticino con illuminazione serale"
+      },
+      "datePublished": "2026-09-17T03:01:49+00:00",
+      "dateModified": "2026-09-17T03:01:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/stazioni-ferroviarie-ticino-sicurezza/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

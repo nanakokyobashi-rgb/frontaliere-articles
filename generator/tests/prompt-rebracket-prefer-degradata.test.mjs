@@ -4,8 +4,8 @@
  * PARENT: #460. Il ri-bracketing (`_eseguiRibracket`) si arma SOLO quando
  * `err.retryRequestTokenBudget` viene dal roster (`_budgetDettato`), cioe'
  * quando la libreria ha visto ALMENO un modello saltato per cap di INPUT. Ma
- * l'unico membro di `PREFERRED_GENERATION_MODELS` (claude-cli/haiku) non
- * dichiara nessun cap di input, quindi non puo' MAI essere fra i modelli
+ * i membri CLI di `PREFERRED_GENERATION_MODELS` (Codex e claude-cli/haiku) non
+ * dichiarano nessun cap di input, quindi non possono MAI essere fra i modelli
  * saltati per dimensione: se ha fallito, ha fallito per un'altra ragione
  * (timeout, quota, rate-limit) che ridimensionare il prompt non cambia.
  * Ricontattarlo con lo stesso `prefer` dopo l'armo e' spendere una chiamata
@@ -78,26 +78,21 @@ test('il retry per JSON malformato rispetta il flag oltre a `_preferActiveThisAt
   );
 });
 
-test('la chiamata 2/2 meta (`_call2`) rispetta il flag oltre a `_preferActiveThisAttempt`', () => {
-  // Raggiunta da `_eseguiRibracket` -> ramo `rb.split` -> `_generateSplit()`,
-  // che accende il flag PRIMA di richiamare la funzione: la 2/2 e' quindi
-  // esposta allo stesso ricontatto sprecato della 1/2, ma nel primo giro del
-  // fix non portava il gate (review PR #616, L8438).
-  assert.match(
-    SRC,
-    /prefer: \(_preferActiveThisAttempt && !_preferDegradataDalRibracket\) \? PREFERRED_GENERATION_MODELS : undefined, expectedFields: META_ONLY_FIELDS/,
-    'la chiamata 2/2 meta deve spegnere `prefer` quando il ri-bracketing si e\' armato',
-  );
+test('la chiamata 2/2 meta resta neutra: la preferenza e\' riservata al body', () => {
+  const inizio = SRC.indexOf('const rawMeta =');
+  const fine = SRC.indexOf('\n    let metaData;', inizio);
+  assert.ok(inizio > 0 && fine > inizio, 'blocco rawMeta non trovato');
+  const corpo = SRC.slice(inizio, fine);
+  assert.doesNotMatch(corpo, /\bprefer\s*:/);
 });
 
-test('i quattro call-site del tentativo sono TUTTI coperti dal gate, nessuno resta scoperto', () => {
+test('i due call-site del body sono coperti dal gate, nessuno resta scoperto', () => {
   const occorrenze = SRC.match(/!_preferDegradataDalRibracket/g) || [];
   // Una nel commento di dichiarazione del flag non esiste (il commento non usa
-  // il letterale con `!`); le occorrenze reali sono: split, meta, retry
-  // malformato, piu' i riferimenti in prosa nei commenti che accompagnano
-  // ciascun sito. Il numero minimo che conta e' quello dei GATE effettivi in
-  // una chiamata a `callLLM` (non in un commento): split, meta e retry
-  // malformato usano il letterale
+  // il letterale con `!`); le occorrenze reali sono: split e retry malformato,
+  // piu' i riferimenti in prosa nei commenti che accompagnano ciascun sito.
+  // Il numero minimo che conta e' quello dei GATE effettivi in una chiamata a
+  // `callLLM` (non in un commento): split e retry malformato usano il letterale
   // `(_preferActiveThisAttempt && !_preferDegradataDalRibracket)`, mentre il
   // fallback scala spegne `prefer` incondizionatamente perche' e' GIA' dentro
   // `_eseguiRibracket` (verificato nel test sopra).
@@ -107,7 +102,7 @@ test('i quattro call-site del tentativo sono TUTTI coperti dal gate, nessuno res
   assert.ok(occorrenze.length > 0, 'il flag deve comparire almeno una volta nel file');
   assert.equal(
     gateInCodice.length,
-    3,
-    'split, meta e retry malformato devono tutti portare il gate letterale sul `prefer`',
+    2,
+    'split e retry malformato devono portare il gate letterale sul `prefer`',
   );
 });

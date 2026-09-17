@@ -233,28 +233,19 @@ test('loop-drift osserva live i 24 artifact portabili e il contratto del generat
   for (const artifact of CONTRACT.artifacts) {
     const entry = entries.get(`.github/workflows/${artifact.file}`);
     assert.ok(entry, `${artifact.file}: mapping loop-sync assente`);
+    assert.equal(entry.mode, 'identical', artifact.file);
     assert.equal(entry.sitePath, `.github/corpus-workflows/${artifact.file}`, artifact.file);
-    const artifactHash = artifact.artifactSha256.slice(0, 16);
-    if (artifact.file === 'translate-pending.yml') {
-      assert.equal(entry.mode, 'adapted', artifact.file);
-      assert.match(entry.reason || '', /DATA_PIPELINE_LEASE.*#1314/, artifact.file);
-      assert.equal(entry.baseline.corpus, artifactHash, artifact.file);
-      assert.notEqual(entry.baseline.site, entry.baseline.corpus, artifact.file);
-    } else {
-      assert.equal(entry.mode, 'identical', artifact.file);
-      assert.equal(entry.baseline.site, artifactHash, artifact.file);
-      assert.equal(entry.baseline.corpus, artifactHash, artifact.file);
-    }
+    assert.equal(entry.baseline.site, artifact.artifactSha256.slice(0, 16), artifact.file);
+    assert.equal(entry.baseline.corpus, artifact.artifactSha256.slice(0, 16), artifact.file);
   }
 
   const contractEntry = entries.get('generator/data/crawler-cross-repo-contract.json');
   assert.ok(contractEntry, 'mapping loop-sync del contract assente');
-  assert.equal(contractEntry.mode, 'adapted');
+  assert.equal(contractEntry.mode, 'identical');
   assert.equal(contractEntry.sitePath, '.github/corpus-workflows/contract.json');
   const contractHash = sha256(readFileSync(CONTRACT_PATH, 'utf8')).slice(0, 16);
+  assert.equal(contractEntry.baseline.site, contractHash);
   assert.equal(contractEntry.baseline.corpus, contractHash);
-  assert.notEqual(contractEntry.baseline.site, contractEntry.baseline.corpus);
-  assert.match(contractEntry.reason || '', /DATA_PIPELINE_LEASE.*#1314/);
 });
 
 test('il retry e limitato al checkout sparse pre-logica, con backoff', () => {

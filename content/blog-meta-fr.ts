@@ -11798,6 +11798,15 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-09-16.imageAlt': 'Les chiffres du jour pour les frontaliers – 16 septembre 2026 : attentes aux douanes, prix de l\'essence, taux CHF-EUR et offres d\'emploi',
     'blog.article.bollettino-frontaliere-2026-09-16.seoDescription': 'Bulletin du frontalier du 16 septembre 2026 : les files aux douanes ce matin, l\'essence la moins chère, taux franc-euro et nouvelles offres d\'emploi en Suisse.',
     'blog.article.bollettino-frontaliere-2026-09-16.ogDescription': 'Les chiffres du 16 septembre 2026 pour les frontaliers : combien de temps on attend ce matin à chaque douane, où l\'essence coûte le moins cher, ce que vaut le franc aujourd\'hui et combien d\'offres d\'emploi sont parues en Suisse.',
+    'blog.article.stefania-filetti-cgil-nazionale.title': 'Stefania Filetti élue au secrétariat national de la CGIL',
+    'blog.article.stefania-filetti-cgil-nazionale.excerpt': 'L\'assemblée générale de la CGIL réunie à Rome a élu au scrutin secret Stefania Filetti dans le nouveau secrétariat confédéral composé de dix personnes.',
+    'blog.article.stefania-filetti-cgil-nazionale.imageAlt': 'Stefania Filetti élue au secrétariat national de la Cgil',
+    'blog.article.leroy-merlin-lavoro-varese.title': 'Leroy Merlin : nouvelles opportunités d\'emploi dans la région de Varèse',
+    'blog.article.leroy-merlin-lavoro-varese.excerpt': 'Nouveauté pour les opportunités d\'emploi dans le secteur de la vente au détail et du GDO dans la zone Varese avec les sélections ouvertes par Leroy Merlin.',
+    'blog.article.leroy-merlin-lavoro-varese.imageAlt': 'Opportunités d emploi Leroy Merlin dans la région de Varese',
+    'blog.article.stazioni-ferroviarie-ticino-sicurezza.title': 'Gares ferroviaires au Tessin : décoration et sécurité',
+    'blog.article.stazioni-ferroviarie-ticino-sicurezza.excerpt': 'Question au Conseil d\'État présentée par Daniele Piccaluga de la Ligue des Tessinois sur la sécurité et la propreté des gares.',
+    'blog.article.stazioni-ferroviarie-ticino-sicurezza.imageAlt': 'Gare ferroviaire au Tessin avec éclairage en soirée',
 };
 
 export default blogMetaFr;
