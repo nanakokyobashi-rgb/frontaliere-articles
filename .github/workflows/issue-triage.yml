@@ -208,6 +208,7 @@ jobs:
               echo "::warning::L11 senza PAT: accodo con GITHUB_TOKEN per il prossimo sweep/drainer."
               gh issue edit "$ISSUE_NUMBER" --repo "$REPO" \
                 --add-label agent:fix-queued --add-label fu-prio:low \
+                --remove-label operations-audit-review \
                 --add-label agent:triaged
               exit 0
             fi
@@ -365,7 +366,8 @@ jobs:
                   --remove-label operations-audit-review >/dev/null 2>&1 || echo "::warning::L11 #$number PAT routing fallito"
               else
                 gh issue edit "$number" --repo "$GH_REPO" \
-                  --add-label agent:fix-queued --add-label fu-prio:low >/dev/null 2>&1 || echo "::warning::L11 #$number queue fallback fallito"
+                  --add-label agent:fix-queued --add-label fu-prio:low \
+                  --remove-label operations-audit-review >/dev/null 2>&1 || echo "::warning::L11 #$number queue fallback fallito"
               fi
             else
               echo "L11 #$number contract assente/invalido o review-only → review + triaged"
