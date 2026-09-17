@@ -468,8 +468,11 @@ test('lo script è CITATO da issue-fix.yml: non è codice scollegato', async () 
   // a niente non fa fallire nulla. Se qualcuno lo scollega, questo test lo dice.
   const fs = await import('node:fs');
   const wf = fs.readFileSync(new URL('../../.github/workflows/issue-fix.yml', import.meta.url), 'utf8');
-  assert.match(wf, /handoff-to-site\.mjs/);
-  assert.match(wf, /SITE_TOKEN(?:=|:)/);
+  // Il token operativo viene assegnato nel comando, dopo che
+  // `load-rc-env.mjs` ha popolato la shell runtime: il workflow non deve
+  // ricadere nell'interpolazione anticipata di `env.*`.
+  assert.match(wf, /run: SITE_TOKEN="\$\{GITHUB_PAT:-\}" node scripts\/ci\/handoff-to-site\.mjs/,
+    'issue-fix deve citare l\'handoff con il token letto dalla shell runtime');
 });
 
 // ── #972 item 3: le scritture sulla issue di origine ────────────────────────
@@ -868,9 +871,9 @@ test('#972: il pre-flight è cablato e OGNI step che costa lo consulta', () => {
   assert.doesNotMatch(claim, /steps\.handoff_pre\./,
     'il claim non può dipendere dal pre-flight che deve seguire il claim');
 
-  // Il gate legge `GITHUB_PAT` dalla shell runtime, dopo Remote Config: uno
-  // step piazzato prima leggerebbe una stringa vuota e non corto-circuiterebbe
-  // MAI, senza che niente fallisca.
+  // Il gate legge `GITHUB_PAT` dalla shell, valorizzata da `GITHUB_ENV` dopo
+  // Remote Config: uno step piazzato prima leggerebbe una stringa vuota e non
+  // corto-circuiterebbe MAI, senza che niente fallisca.
   assert.ok(src.indexOf('Load secrets') < src.indexOf('id: handoff_pre'),
     'il pre-flight deve stare DOPO il caricamento dei secret, o `SITE_TOKEN` è vuoto');
 
