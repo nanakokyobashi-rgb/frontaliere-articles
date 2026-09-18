@@ -203,13 +203,37 @@ jobs:
       - name: Unit + closure gates (i gate sul contenuto girano altrove)
         id: unit_gates
         if: ${{ steps.body_contract.outcome != 'failure' && !cancelled() }}
+        env:
+          NODE_TEST_REPORT_FILE: ${{ runner.temp }}/node-test-failures.json
         run: |
           set -euo pipefail
           # The file list is produced by a trusted repository script; keep the
           # exact expansion consumed by the gate and silence SC2086 here.
           files=$(node scripts/ci/list-pr-gate-tests.mjs)
           # shellcheck disable=SC2086
-          node --test $files
+          node \
+            --test \
+            --test-reporter=spec \
+            --test-reporter=./scripts/ci/node-test-failure-reporter.mjs \
+            --test-reporter-destination=stdout \
+            --test-reporter-destination="$NODE_TEST_REPORT_FILE" \
+            $files
+
+      - name: Report node:test failures on PR
+        # The test gate is intentionally still the blocking step. This
+        # fail-soft reporter runs only after that gate fails and only on PRs,
+        # so it adds diagnosis without changing the required check verdict.
+        if: ${{ always() && !cancelled() && steps.body_contract.outcome != 'failure' && (github.event_name == 'pull_request' || (github.event_name == 'workflow_dispatch' && inputs.pr_number != '')) && steps.unit_gates.outcome == 'failure' }}
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number || inputs.pr_number }}
+          RUN_ID: ${{ github.run_id }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          NODE_TEST_REPORT_FILE: ${{ runner.temp }}/node-test-failures.json
+        run: node scripts/ci/report-node-test-failure.mjs
 
       # Baseline del manifest del ciclo: diff-scoped, non un `node --test`.
       # `checkBaselineProvenance()` scopre le baseline fantasma al cron
