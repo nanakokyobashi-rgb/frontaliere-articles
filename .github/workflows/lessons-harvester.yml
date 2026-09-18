@@ -146,6 +146,36 @@ jobs:
           CODEX_FALLBACK_MODE: '1'
         run: node scripts/ci/check-quota-backoff.mjs
 
+      # The Codex bridge performs the proposal commit/push and opens a PR. A
+      # GITHUB_TOKEN would suppress the PR event and leave the proposal without
+      # tests/review, so the current-repository PAT is loaded before the action.
+      - name: Prepare Firebase credentials for Lessons Codex bridge
+        if: steps.guard.outputs.open_proposals == '0' && steps.harvest.outputs.has_novel == 'true'
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            echo "::error::FIREBASE_SERVICE_ACCOUNT_JSON assente: il bridge Codex non può caricare GITHUB_PAT_NANAKO"
+            exit 1
+          fi
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/lessons-codex-sa.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/lessons-codex-sa.json" >> "$GITHUB_ENV"
+
+      - name: Load current-repository Codex credentials
+        if: steps.guard.outputs.open_proposals == '0' && steps.harvest.outputs.has_novel == 'true'
+        continue-on-error: true
+        run: node generator/scripts/load-rc-env.mjs
+
+      - name: Require current-repository Codex PAT
+        if: steps.guard.outputs.open_proposals == '0' && steps.harvest.outputs.has_novel == 'true'
+        run: |
+          set -euo pipefail
+          if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then
+            echo "::error::GITHUB_PAT_NANAKO assente: il Codex bridge resta fail-closed"
+            exit 1
+          fi
+
       - name: Draft doc-rule proposal (Codex Luna Max — only if NOVEL patterns)
         # Escalations are auto-filed by the harvest step above → Codex is spent
         # ONLY when a genuinely-new (novel) recurring pattern needs a doc rule.
@@ -156,8 +186,10 @@ jobs:
           REPO: ${{ github.repository }}
         with:
           codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          codex_github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ env.GITHUB_PAT_NANAKO }}
+          codex_github_token: ${{ env.GITHUB_PAT_NANAKO }}
+          # The runner GITHUB_TOKEN remains available only to zero-agent
+          # bookkeeping steps; it is never an operational Codex credential.
           # Schedule/manual-dispatch → actor umano (owner) oggi, ma stesso
           # class-fix dei sibling: se un'automation interna dispatchasse questo
           # workflow via GITHUB_TOKEN (actor `github-actions[bot]`) o via App token
@@ -214,6 +246,10 @@ jobs:
                Lo `**Stato:**` letterale su OGNI voce non è cosmetico: `scripts/ci/pr-body-contract.mjs` gira dentro il check richiesto `tests (node --test)` ed è il PRIMO step del job, quindi un body senza stato nasce rosso e fa saltare in cascata anche il gate della review. Un cluster scartato è uno stato terminale: `Nessun lavoro dovuto` è la forma che `pr-body-nextstep-check.mjs` accetta — «scartato», «rumore», «nessun flag azionabile» da soli NON bastano. I sibling che aprono PR (`issue-fix.yml`, `transport-identical-twins.yml`) lo prescrivono già.
                Il trailer ⚠️ va in TESTA, sopra `## Implementato`, non in fondo: `topLevelBullets()` (`scripts/lib/pr-body-nextstep-check.mjs`) accumula OGNI riga non vuota nella voce corrente e non azzera su riga vuota, quindi un trailer finale diventa testo dell'ultima voce e il suo contenuto partecipa a `bulletState()`/`escapeHatchIn()` — una parola come «rimandato» o «in questa PR» nel trailer decide lo stato di una voce che non l'ha scelto. Sopra la prima heading è invece fuori da entrambe le sezioni, perché `extractSection` parte dall'header e taglia alla heading successiva.
             7. NON mergiare. È una proposta: la rivede un umano.
+
+      - name: Cleanup Lessons Codex credentials
+        if: always()
+        run: rm -f "$RUNNER_TEMP/lessons-codex-sa.json"
 
       - name: Report failure to GitHub Issues
         if: failure()

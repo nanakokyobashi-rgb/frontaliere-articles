@@ -139,6 +139,7 @@ test('needs-human non cambia la category (resta visibile per telemetria, solo il
 test('i pin locali del classificatore tengono l\'issue fuori dal fixer', () => {
   assert.equal(isFixerExempt(['backlog']), true);
   assert.equal(isFixerExempt([{ name: 'needs-human' }]), true);
+  assert.equal(isFixerExempt(['operations-audit-review']), true);
   assert.equal(isFixerExempt(['priority:high']), false);
 });
 

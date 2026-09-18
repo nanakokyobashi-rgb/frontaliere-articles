@@ -2278,14 +2278,14 @@
     },
     {
       "path": "generator/scripts/lib/sanitize-body-braces.mjs",
-      "mode": "corpus-only-pending",
-      "trackingIssue": "https://github.com/valerielinc-ops/frontaliere-si-o-no/issues/7704",
+      "sitePath": "scripts/lib/sanitize-body-braces.mjs",
+      "mode": "adapted",
       "baseline": {
-        "site": null,
+        "site": "a5466d4942056beb",
         "corpus": "8d6092cf3deadf15",
-        "alignedAt": "2026-09-06"
+        "alignedAt": "2026-09-17"
       },
-      "reason": "`sanitizeBodyText`: toglie le `}` spaiate che LLM e cascata MT producono chiudendo male una virgoletta bassa tedesca („ \"), prima che il testo venga serializzato in un `.ts` di `content/`. Nessun gate le intercetta — le graffe non sono nel vocabolario di `runFactualityGates`, che sul ramo non italiano fa solo aggiudicazione numerica, coerenza dei numeri e falsi amici — quindi una graffa spaiata finisce verbatim in una pagina pubblicata senza un errore. Estratta qui, e non lasciata privata in `create-article.mjs`, perche' il corpus ha DUE scrittori di body: `create-article.mjs` e `retranslate-blocking-bodies.mjs`, che riscrive body gia' pubblicati con l'uscita della stessa cascata MT (nanako#994). NON e' in `lib/article-sanitizers.mjs`, il vicinato naturale: quel file e' `identical`, la sua sorgente e' il sito, e il sito non ha `sanitizeBodyText` nella propria copia — ce l'ha ancora privata dentro il proprio `create-article.mjs` (~`:8868`) — quindi esportarla da qui renderebbe quel file `corpus-ahead`. NON e' `corpus-only`: il sito ha un consumatore con lo stesso buco aperto, `scripts/repair-object-object-bodies.mjs`, che riscrive body-locale gia' pubblicati con l'uscita di `freeTranslateWithRetry` (`:152`) e li scrive (`:254`) applicando solo `balanceMarkdownMarkers` e `applyTermFixes`, che bilanciano i marker markdown e non le graffe; `grep -c sanitizeBodyText` su quel file rende 0. La voce diventa `identical` il giorno in cui il sito estrae la sua copia privata in `scripts/lib/` e la importa dai due chiamanti — vedi il trackingIssue, che elenca anche l'alternativa minima (applicarla solo nel riparatore). Da non confondere con valerielinc-ops#7699, che e' il troncamento della sorgente a 2000 caratteri nel tier HuggingFace di `free-translate.mjs`: quello accorcia il testo, questo ci lascia dentro una graffa."
+      "reason": "Il gemello e' atterrato sul sito come `scripts/lib/sanitize-body-braces.mjs` nella PR `valerielinc-ops/frontaliere-si-o-no#8573`, importato da `create-article.mjs` e `repair-object-object-bodies.mjs`; la PR #8747 ha poi aggiunto la regressione e chiuso il tracker #7704. Il corpus conserva un modulo adattato perche' lo usano anche `retranslate-blocking-bodies.mjs` e il suo parametro di log e' iniettabile nei test; i byte quindi differiscono (`a5466d4942056beb` sul sito contro `8d6092cf3deadf15` qui). Non e' piu' `corpus-only-pending`: il comportamento e il gemello esistono su entrambi i lati, ma il trasporto byte-identico non e' appropriato."
     },
     {
       "path": "generator/scripts/lib/local-opus-mt.mjs",
@@ -3304,9 +3304,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-14.yml",
       "mode": "identical",
       "baseline": {
-        "site": "b71f1926aeb27832",
-        "corpus": "b71f1926aeb27832",
-        "alignedAt": "2026-09-16"
+        "site": "2441eb4803864f39",
+        "corpus": "2441eb4803864f39",
+        "alignedAt": "2026-09-17"
       }
     },
     {
@@ -3314,9 +3314,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-15.yml",
       "mode": "identical",
       "baseline": {
-        "site": "ffbdabeeb1bcc04b",
-        "corpus": "ffbdabeeb1bcc04b",
-        "alignedAt": "2026-09-16"
+        "site": "842dceef41d82bc7",
+        "corpus": "842dceef41d82bc7",
+        "alignedAt": "2026-09-17"
       }
     },
     {
@@ -3324,9 +3324,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-16.yml",
       "mode": "identical",
       "baseline": {
-        "site": "0a060ec239abe1ff",
-        "corpus": "0a060ec239abe1ff",
-        "alignedAt": "2026-09-16"
+        "site": "1ef7ae1eb8ab4fb8",
+        "corpus": "1ef7ae1eb8ab4fb8",
+        "alignedAt": "2026-09-17"
       }
     },
     {
@@ -3414,8 +3414,8 @@
       "sitePath": ".github/corpus-workflows/contract.json",
       "mode": "identical",
       "baseline": {
-        "site": "44ec78563ad90a97",
-        "corpus": "44ec78563ad90a97",
+        "site": "515b33599f3b7694",
+        "corpus": "515b33599f3b7694",
         "alignedAt": "2026-09-17"
       }
     },

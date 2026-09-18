@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-16T09:47:42.426Z",
-  "dateIso": "2026-09-16",
+  "generatedAt": "2026-09-17T09:54:54.900Z",
+  "dateIso": "2026-09-17",
   "counts": {
     "availableBlocks": 3,
     "crossings": 141,
@@ -12,60 +12,74 @@
   "blocks": {
     "borderWait": {
       "available": true,
-      "updatedAt": "2026-09-16T09:02:59.902Z",
+      "updatedAt": "2026-09-17T09:06:08.840Z",
       "count": 141,
-      "zeroWaitCount": 134,
+      "zeroWaitCount": 132,
       "worst": {
-        "slug": "oria-gandria",
-        "name": "Oria-Gandria",
-        "waitMinutes": 2
+        "slug": "bardonnex",
+        "name": "Bardonnex",
+        "waitMinutes": 12
       },
       "crossings": [
         {
+          "slug": "bardonnex",
+          "name": "Bardonnex",
+          "waitMinutes": 12,
+          "status": "yellow",
+          "direction": null
+        },
+        {
+          "slug": "chiasso-brogeda",
+          "name": "Chiasso-Brogeda",
+          "waitMinutes": 8,
+          "status": "yellow",
+          "direction": null
+        },
+        {
+          "slug": "gaggiolo",
+          "name": "Gaggiolo (Cantello-Stabio)",
+          "waitMinutes": 8,
+          "status": "yellow",
+          "direction": null
+        },
+        {
+          "slug": "san-pietro",
+          "name": "San Pietro (Clivio-Stabio)",
+          "waitMinutes": 8,
+          "status": "yellow",
+          "direction": null
+        },
+        {
           "slug": "oria-gandria",
           "name": "Oria-Gandria",
-          "waitMinutes": 2,
-          "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "au-lustenau",
-          "name": "Au-Lustenau",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "camedo",
-          "name": "Camedo (Re-Centovalli)",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "dumenza-cassinone",
-          "name": "Dumenza-Cassinone",
-          "waitMinutes": 1,
+          "waitMinutes": 3,
           "status": "green",
           "direction": null
         },
         {
           "slug": "ponte-tresa",
           "name": "Ponte Tresa",
+          "waitMinutes": 2,
+          "status": "green",
+          "direction": null
+        },
+        {
+          "slug": "campione-d-italia-bissone",
+          "name": "Campione d'Italia-Bissone",
           "waitMinutes": 1,
           "status": "green",
           "direction": null
         },
         {
-          "slug": "sempione",
-          "name": "Sempione (Iselle-Gondo)",
+          "slug": "klettgau-wil-zh",
+          "name": "Klettgau – Wil ZH",
           "waitMinutes": 1,
           "status": "green",
           "direction": null
         },
         {
-          "slug": "st-margrethen-hochst",
-          "name": "St. Margrethen-Höchst",
+          "slug": "porto-ceresio-brusino",
+          "name": "Porto Ceresio-Brusino",
           "waitMinutes": 1,
           "status": "green",
           "direction": null
@@ -78,15 +92,15 @@
           "direction": null
         },
         {
-          "slug": "bad-sackingen-stein-ag",
-          "name": "Bad Säckingen – Stein AG",
+          "slug": "au-lustenau",
+          "name": "Au-Lustenau",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
         },
         {
-          "slug": "bardonnex",
-          "name": "Bardonnex",
+          "slug": "bad-sackingen-stein-ag",
+          "name": "Bad Säckingen – Stein AG",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -232,8 +246,8 @@
           "direction": null
         },
         {
-          "slug": "campione-d-italia-bissone",
-          "name": "Campione d'Italia-Bissone",
+          "slug": "camedo",
+          "name": "Camedo (Re-Centovalli)",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -262,13 +276,6 @@
         {
           "slug": "chiasso-centro",
           "name": "Chiasso Centro (Ponte Chiasso)",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "chiasso-brogeda",
-          "name": "Chiasso-Brogeda",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -365,6 +372,13 @@
           "direction": null
         },
         {
+          "slug": "dumenza-cassinone",
+          "name": "Dumenza-Cassinone",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": null
+        },
+        {
           "slug": "eggingen-hallau",
           "name": "Eggingen – Hallau",
           "waitMinutes": 0,
@@ -388,13 +402,6 @@
         {
           "slug": "forcola-di-livigno",
           "name": "Forcola di Livigno",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "gaggiolo",
-          "name": "Gaggiolo (Cantello-Stabio)",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -563,13 +570,6 @@
         {
           "slug": "klettgau-trasadingen",
           "name": "Klettgau – Trasadingen",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "klettgau-wil-zh",
-          "name": "Klettgau – Wil ZH",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -792,13 +792,6 @@
           "direction": null
         },
         {
-          "slug": "porto-ceresio-brusino",
-          "name": "Porto Ceresio-Brusino",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": null
-        },
-        {
           "slug": "ramsen-moskau-rielasingen-worblingen",
           "name": "Ramsen-Moskau – Rielasingen-Worblingen",
           "waitMinutes": 0,
@@ -890,15 +883,15 @@
           "direction": null
         },
         {
-          "slug": "san-pietro",
-          "name": "San Pietro (Clivio-Stabio)",
+          "slug": "sauverny",
+          "name": "Sauverny",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
         },
         {
-          "slug": "sauverny",
-          "name": "Sauverny",
+          "slug": "sempione",
+          "name": "Sempione (Iselle-Gondo)",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -913,6 +906,13 @@
         {
           "slug": "st-luzisteig",
           "name": "St. Luzisteig (Fläsch-Balzers)",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": null
+        },
+        {
+          "slug": "st-margrethen-hochst",
+          "name": "St. Margrethen-Höchst",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -1013,17 +1013,17 @@
     },
     "fuel": {
       "available": true,
-      "generatedAt": "2026-09-16T06:43:57.392Z",
+      "generatedAt": "2026-09-16T12:51:14.561Z",
       "municipalityCount": 518,
-      "cheaperItalyCount": 23,
-      "cheaperSwissCount": 116,
+      "cheaperItalyCount": 29,
+      "cheaperSwissCount": 110,
       "tieCount": 2,
       "cheapestItaly": [
         {
           "municipality": "Livigno",
           "province": "SO",
-          "minPriceEur": 1.568,
-          "stationName": "TOTAL ERG - LIVIGNO"
+          "minPriceEur": 1.579,
+          "stationName": "PETROL"
         },
         {
           "municipality": "Veduggio con Colzano",
@@ -1055,28 +1055,28 @@
           "municipality": "Livigno",
           "province": "SO",
           "cheaperCountry": "IT",
-          "italyPriceEur": 1.568,
+          "italyPriceEur": 1.579,
           "swissPriceEur": 2.118,
           "swissPriceChf": 2,
-          "saving50LEur": 27.5
+          "saving50LEur": 26.95
         },
         {
           "municipality": "Aprica",
           "province": "SO",
           "cheaperCountry": "IT",
           "italyPriceEur": 1.919,
-          "swissPriceEur": 2.161,
-          "swissPriceChf": 2.04,
-          "saving50LEur": 12.1
+          "swissPriceEur": 2.203,
+          "swissPriceChf": 2.08,
+          "saving50LEur": 14.2
         },
         {
-          "municipality": "Brinzio",
-          "province": "VA",
+          "municipality": "Premeno",
+          "province": "VB",
           "cheaperCountry": "CH",
-          "italyPriceEur": 2.149,
+          "italyPriceEur": 2.238,
           "swissPriceEur": 1.96,
           "swissPriceChf": 1.85,
-          "saving50LEur": 9.45
+          "saving50LEur": 13.9
         }
       ],
       "cheapestSwissStation": null,
@@ -1084,21 +1084,21 @@
     },
     "exchange": {
       "available": true,
-      "rate": 1.0587,
-      "lastDate": "2026-09-15",
-      "prevRate": 1.058,
-      "prevDate": "2026-09-14",
-      "delta1d": 0.0007,
-      "rate7dAgo": 1.0628,
-      "delta7d": -0.0041,
+      "rate": 1.0593,
+      "lastDate": "2026-09-16",
+      "prevRate": 1.0596,
+      "prevDate": "2026-09-15",
+      "delta1d": -0.0003,
+      "rate7dAgo": 1.0625,
+      "delta7d": -0.0032,
       "source": "frankfurter",
       "pointCount": 32,
       "degradedEditions": 0
     },
     "jobs": {
       "available": false,
-      "reason": "jobs history has no closed row for 2026-09-15 — no \"new listings yesterday\" figure to publish",
-      "degradedEditions": 1
+      "reason": "jobs history has no closed row for 2026-09-16 — no \"new listings yesterday\" figure to publish",
+      "degradedEditions": 2
     }
   }
 }

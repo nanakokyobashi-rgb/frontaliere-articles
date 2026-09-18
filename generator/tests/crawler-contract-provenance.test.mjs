@@ -29,6 +29,7 @@
  */
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -36,6 +37,7 @@ import {
   CRAWLER_COMMIT_RUNTIME_PATH,
   SITE_LOGIC_DIR,
   SITE_LOGIC_DIR_FALLBACKS,
+  duplicateManifestPaths,
   evaluateProvenance,
   evaluateRuntimeFlagChecks,
   formatReport,
@@ -694,4 +696,90 @@ test('un solo `*-logic.yml` sparito resta un problema del contratto', () => {
   assert.equal(verdict.red, true);
   assert.match(verdict.reason, /stantii/);
   assert.doesNotMatch(verdict.reason, /SITE_LOGIC_DIR/);
+});
+
+test('path duplicati nel manifest restano fail-closed e non last-wins', () => {
+  const dupManifest = {
+    files: [
+      {
+        path: '.github/workflows/crawler-group-01.yml',
+        sitePath: 'first-policy',
+        mode: 'adapted',
+      },
+      {
+        path: '.github/workflows/crawler-group-01.yml',
+        sitePath: 'last-wins-policy',
+      },
+    ],
+  };
+  assert.equal(duplicateManifestPaths(dupManifest).length, 1);
+  assert.equal(duplicateManifestPaths(fixtureManifest).length, 0);
+
+  const checks = planProvenanceChecks(fixtureContract, dupManifest);
+  assert.equal(checks.duplicateManifestPaths.length, 1);
+  const artifact = checks.find((c) => c.field === 'crawler-group-01.yml#artifactSha256');
+  assert.notEqual(artifact.sitePath, 'last-wins-policy');
+  assert.equal(artifact.sitePath, null);
+
+  const observed = new Map(checks.map((c) => [c.field, { sha256: HASH }]));
+  const verdict = evaluateProvenance(checks, observed);
+  assert.equal(verdict.red, true);
+  assert.match(verdict.reason, /path duplicati/);
+  assert.match(verdict.reason, /fail-closed/);
+});
+
+test('il digest locale pinna i byte raw, non il re-encode UTF-8', () => {
+  assert.match(PROVENANCE_SCRIPT, /sha256\(fs\.readFileSync\(/);
+  assert.doesNotMatch(
+    PROVENANCE_SCRIPT,
+    /sha256\(Buffer\.from\(text,\s*['"]utf8['"]\)\)/,
+  );
+  const invalid = Buffer.from([0xff, 0xfe, 0x00, 0x61]);
+  const reencoded = Buffer.from(invalid.toString('utf8'), 'utf8');
+  const digest = (buf) => createHash('sha256').update(buf).digest('hex');
+  assert.notEqual(digest(invalid), digest(reencoded));
+});
+
+test('i 23 gruppi crawler restano fail-closed se continue-on-error perde wait_outcome', () => {
+  const workflowsDir = path.join(ROOT, '.github/workflows');
+  const groups = CONTRACT.artifacts.filter((artifact) => /^crawler-group-\d{2}\.yml$/.test(artifact.file));
+  assert.equal(groups.length, 23);
+  for (const artifact of groups) {
+    const text = readFileSync(path.join(workflowsDir, artifact.file), 'utf8');
+    assert.match(
+      text,
+      /steps\.crawler_aggregate\.outputs\.wait_outcome \|\| 'failure'/,
+      `${artifact.file}: wait_outcome senza fallback failure`,
+    );
+    assert.match(
+      text,
+      /steps\.crawler_aggregate\.outputs\.missing_count \|\| 'invalid'/,
+      `${artifact.file}: missing_count senza fallback invalid`,
+    );
+    const scan = text.indexOf('missing_count=$((missing_count + 1))');
+    const write = text.indexOf('missing_count=$missing_count');
+    assert.ok(scan >= 0, `${artifact.file}: scansione missing_count assente`);
+    assert.ok(write > scan, `${artifact.file}: missing_count va pinnato dopo la raccolta terminale`);
+    const failStep = text.indexOf('Fail crawler group after all member outcomes');
+    assert.ok(failStep > write, `${artifact.file}: il verdetto finale deve seguire missing_count`);
+  }
+});
+
+test('evaluateProvenance resta fail-closed se un digest remoto dei 24 artifact diverge', () => {
+  assert.equal(CONTRACT.artifactCount, 24);
+  assert.equal(CONTRACT.artifacts.length, 24);
+  const checks = planProvenanceChecks(CONTRACT, MANIFEST);
+  assert.equal(checks.filter((c) => c.field.endsWith('#sourceSha256')).length, 24);
+  assert.equal(checks.filter((c) => c.field.endsWith('#artifactSha256')).length, 24);
+  assert.equal(checks.duplicateManifestPaths.length, 0);
+
+  const observed = new Map(checks.map((c) => [c.field, { sha256: c.expected }]));
+  const victim = checks.find((c) =>
+    c.field.endsWith('#artifactSha256') && !c.adapted && !c.localOnly,
+  ) || checks.find((c) => c.field.endsWith('#sourceSha256'));
+  observed.set(victim.field, { sha256: OTHER });
+  const verdict = evaluateProvenance(checks, observed);
+  assert.equal(verdict.red, true);
+  assert.equal(verdict.results.find((r) => r.field === victim.field).state, 'drifted');
+  assert.match(verdict.reason, /24 artifact|digest del contratto non corrispondono/);
 });

@@ -504,6 +504,24 @@ runs:
         # and immediately remove their environment bindings before executing or
         # reading any action/workspace file.
         codex_github_auth="${CODEX_GH_AUTH:-}"
+        if [ -z "$codex_github_auth" ]; then
+          # A caller may load APP_TOKEN/GITHUB_PAT_NANAKO through GITHUB_ENV
+          # immediately before this composite action. GitHub can evaluate the
+          # `with:` expression before that runtime update, leaving
+          # CODEX_GH_AUTH empty even though the credential is available here.
+          # Prefer the App only when its workflow capability was verified; when
+          # that capability is absent, use the PAT if one is available so a
+          # workflow-file fix does not fail at push time. If there is no PAT,
+          # the App remains a valid identity for non-workflow changes.
+          runtime_pat="${GITHUB_PAT_NANAKO:-${GITHUB_PAT:-}}"
+          if [ -n "${APP_TOKEN:-}" ] \
+            && { [ "${APP_TOKEN_WORKFLOWS:-false}" = "true" ] || [ -z "$runtime_pat" ]; }; then
+            codex_github_auth="$APP_TOKEN"
+          else
+            codex_github_auth="$runtime_pat"
+          fi
+          unset runtime_pat
+        fi
         # The caller may load the corpus PAT through GITHUB_ENV immediately
         # before this composite action.  A runtime GITHUB_PAT expression
         # in the caller can still resolve before that runtime update, so keep

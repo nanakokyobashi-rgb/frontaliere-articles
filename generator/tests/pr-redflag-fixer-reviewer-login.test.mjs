@@ -98,8 +98,35 @@ test('il push guard controlla il token che il push remote usa davvero', () => {
   const at = src.indexOf('- name: Configure push remote');
   const next = src.indexOf('\n      - name:', at + 1);
   const block = src.slice(at, next < 0 ? src.length : next);
-  assert.match(block, /env\.APP_TOKEN != '' \|\| env\.GITHUB_PAT_NANAKO != ''/);
-  assert.doesNotMatch(block, /env\.GITHUB_PAT != ''/);
+  assert.match(block, /if: steps\.guard\.outputs\.proceed == 'true'/);
+  assert.match(block, /push_token="\$\{APP_TOKEN:-\}"/);
+  assert.match(block, /runtime_pat="\$\{GITHUB_PAT_NANAKO:-\$\{GITHUB_PAT:-\}\}"/);
+  assert.match(block, /APP_TOKEN_WORKFLOWS/);
+  assert.match(block, /git remote set-url origin "https:\/\/x-access-token:\$\{push_token\}@github\.com\/\$\{REPO\}\.git"/);
+  assert.doesNotMatch(block, /PUSH_TOKEN: \$\{\{ env\.GITHUB_PAT_NANAKO \}\}/);
+});
+
+test('il capability guard legge App e PAT dall ambiente runtime', () => {
+  const at = src.indexOf('- name: Round cap + capability guard + tier');
+  const end = src.indexOf('\n      - name: Configure git identity', at);
+  const block = src.slice(at, end);
+  assert.match(block, /runtime_pat="\$\{GITHUB_PAT_NANAKO:-\$\{GITHUB_PAT:-\}\}"/);
+  assert.match(block, /workflow_pat="\$\{GITHUB_PAT_NANAKO:-\}"/);
+  assert.match(block, /has_push_token=false/);
+  assert.match(block, /has_workflows_token=false/);
+  assert.match(block, /APP_TOKEN_WORKFLOWS/);
+  assert.match(block, /if \[ -n "\$runtime_pat" \]/);
+  assert.match(block, /if \[ -n "\$workflow_pat" \]/);
+  assert.doesNotMatch(block, /HAS_PAT: \$\{\{ env\.GITHUB_PAT_NANAKO != '' \}\}/);
+});
+
+test('l alert token-down è soppresso da qualunque token runtime operativo', () => {
+  const at = src.indexOf('- name: Alert token-down (dedup, zero-Claude)');
+  const end = src.indexOf('\n      - name:', at + 1);
+  const block = src.slice(at, end);
+  assert.match(block, /if: always\(\)/);
+  assert.match(block, /if \[ -n "\$\{APP_TOKEN:-\}" \] \|\| \[ -n "\$\{GITHUB_PAT_NANAKO:-\$\{GITHUB_PAT:-\}\}" \]/);
+  assert.match(block, /nessun alert token-down/);
 });
 
 test('il job redflag-fix conserva il checkout completo senza fetch shallow della base', () => {

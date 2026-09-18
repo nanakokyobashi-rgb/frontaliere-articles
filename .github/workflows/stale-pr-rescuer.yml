@@ -1,7 +1,7 @@
 name: Stale PR rescuer (self-healing signal)
 
 # Trasforma gli stalli silenziosi della pipeline PR in un segnale etichettato e
-# interrogabile entro ~1h, invece di lasciarli fermi per giorni. Quattro classi:
+# interrogabile entro ~1h, invece di lasciarli fermi per giorni. Cinque classi:
 #
 #   D) REVIEW PIÙ VECCHIA DELL'HEAD (direzione 3 della #201): esiste una review
 #      Claude, non ha chiuso con `## LGTM`, è su un commit che non è più l'head,
@@ -21,6 +21,11 @@ name: Stale PR rescuer (self-healing signal)
 #      proprio il segnale letto qui). Lì il 🔴 non è chiuso ma il rimedio è lo
 #      stesso e più urgente: nessuno ha ancora guardato la PR, e il rerun di
 #      `tests` è l'unico evento che rimette in moto il fixer col budget intero.
+#   E) 🔴 Important sulla HEAD corrente, nessun commit nuovo e nessuna run del
+#      fixer sulla stessa HEAD nella grace window. È il buco del trigger
+#      `pull_request_review`; si ripara dispatchando `pr-redflag-fixer.yml` con
+#      il numero della PR. Il cap `REDFLAG_FIX_ROUND >= 2`/`needs-human` è però
+#      terminale: non si riapre un loop dopo l'escalation del fixer.
 #   C) test non-`success` sull'head e nessun run in volo. È la classe che
 #      cadeva in un `else` MUTO: una PR con i test rossi non ha — e non può
 #      acquisire — nessuno dei due segnali richiesti da A e B, perché il
@@ -144,6 +149,7 @@ jobs:
             UPD=$(echo "$pr" | jq -r '.updatedAt')
             HAS_LABEL=$(echo "$pr" | jq -r '[.labels[].name] | index("stale-review") // empty')
             HAS_AUTOFIX=$(echo "$pr" | jq -r 'if any(.labels[]?.name; . == "agent:autofix") then "true" else "false" end')
+            HAS_NEEDS_HUMAN_LABEL=$(echo "$pr" | jq -r 'if any(.labels[]?.name; . == "needs-human") then "true" else "false" end')
             IS_DRAFT=$(echo "$pr" | jq -r '.isDraft')
 
             # Il rescuer e il recycle operano solo sulle PR del loop autonomo.
@@ -258,7 +264,12 @@ jobs:
             # Il rescuer dedicato osserva il marker e rilancia appena lo slot è
             # libero; se questo scan generico lo trattasse come rosso normale,
             # potrebbe duplicare il rerun o consumare il lease sbagliato.
-            deferred_comments=$(gh api --paginate --slurp "repos/$REPO/issues/$N/comments?per_page=100" 2>/dev/null || echo '[]')
+            COMMENT_LOOKUP_OK=true
+            if ! deferred_comments=$(gh api --paginate --slurp "repos/$REPO/issues/$N/comments?per_page=100" 2>/dev/null); then
+              echo "::warning::Commenti della PR #$N illeggibili — cap/needs-human non verificabili, nessun rescue del fixer."
+              COMMENT_LOOKUP_OK=false
+              deferred_comments='[]'
+            fi
             DEFERRED_FOR_HEAD=$(echo "$deferred_comments" | jq -r --arg head "$HEAD" '
               def trusted:
                 ((.user.login // "") == ""
@@ -298,6 +309,29 @@ jobs:
                   | select($last_retry == null or (newer($last_retry.rank; $candidate.rank) | not))
                 ] | length
             ' 2>/dev/null || echo 0)
+            FIXER_ROUND_CAP_REACHED=false
+            FIXER_NEEDS_HUMAN_MARKER=false
+            FIXER_MAX_ROUNDS=2
+            PR_COMMENT_BODIES=""
+            if [ "$COMMENT_LOOKUP_OK" = "true" ]; then
+              if ! PR_COMMENT_BODIES=$(printf '%s' "$deferred_comments" | jq -rs '[.[][]? | .body // ""] | join("\n")' 2>/dev/null); then
+                echo "::warning::Commenti della PR #$N malformati — cap/needs-human non verificabili, nessun rescue del fixer."
+                COMMENT_LOOKUP_OK=false
+              else
+                FIXER_ROUND=$(printf '%s' "$PR_COMMENT_BODIES" | grep -oE 'REDFLAG_FIX_ROUND: [0-9]+' \
+                  | grep -oE '[0-9]+' | sort -rn | head -1 || true)
+                FIXER_ROUND=${FIXER_ROUND:-0}
+                if [ "$FIXER_ROUND" -ge "$FIXER_MAX_ROUNDS" ]; then
+                  FIXER_ROUND_CAP_REACHED=true
+                fi
+                case "$PR_COMMENT_BODIES" in
+                  *'🛑 **needs-human** (auto):'*) FIXER_NEEDS_HUMAN_MARKER=true ;;
+                esac
+              fi
+            fi
+            if [ "$HAS_NEEDS_HUMAN_LABEL" = "true" ]; then
+              FIXER_NEEDS_HUMAN_MARKER=true
+            fi
             if [ "${DEFERRED_FOR_HEAD:-0}" != "0" ]; then
               echo "PR #$N: review differita per lease sulla head ${HEAD:0:7} — delego al review-quota-rescuer"
               continue
@@ -309,8 +343,100 @@ jobs:
             # vuole dire. Con un body di review, che è lungo, non è teorico.
             case "$LAST_BODY" in *'## LGTM'*) LAST_LGTM=1 ;; *) LAST_LGTM=0 ;; esac
 
-            REASON=""; RESCUE=""; CLASS=""
+            # Il marker va calcolato una sola volta: la classe E e la classe B
+            # devono usare esattamente la stessa definizione di 🔴 Important.
+            # il lead a due rami e i due lookbehind chiudono la terza variante della classe
+            # sulla POSIZIONE invece che sul vocabolario (misurata sulla PR #909): un
+            # 🔴 Important CITATO — dentro «» o dentro un code span APERTO — non e' il
+            # marker di quella riga, e portava i due punti come quello vero. Ma un marker
+            # vero non sparisce ne' per una label incollata (`` `a.mjs:L1`🔴 ``) ne' per un
+            # secondo finding sulla stessa riga (#977): entrambi restano rossi. grep e' gia'
+            # orientato alla riga, quindi il pattern e' REDFLAG_IMPORTANT_RE.source senza i
+            # `\n` delle classi negate; il guard `mirror bash` di
+            # generator/tests/redflag-important-marker.test.mjs lo pretende verbatim.
+            HAS_IMPORTANT=false
             # shellcheck disable=SC2016 # the single-quoted PCRE is intentional
+            IMPORTANT_MATCHES=$(printf '%s' "$LAST_BODY" | LC_ALL=C.UTF-8 grep -cP '^(?:(?=(?:[^`]*`[^`]*`)*[^`]*`[^`]*$)(?:[^🟡🟢❓]*|(?:[^«]|«[^»]*»)*[🟡🟢❓](?:[^«]|«[^»]*»)*)|(?:[^🟡🟢❓]*|(?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*[🟡🟢❓](?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*)(?<!\s`)(?<!^`))🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]' || true)
+            if [ "${IMPORTANT_MATCHES:-0}" -gt 0 ]; then
+              HAS_IMPORTANT=true
+            fi
+
+            # Il fixer scrive il cap in `REDFLAG_FIX_ROUND` e poi parcheggia la
+            # PR con `needs-human` (label + commento). Sono segnali terminali:
+            # senza questo veto la classe E li ignorerebbe e ridispatcherebbe il
+            # fixer ogni 2h, mentre il fixer uscirebbe subito senza lavorare.
+            if [ "$HAS_IMPORTANT" = "true" ] && [ "$LAST_CID" = "$HEAD" ]; then
+              if [ "$COMMENT_LOOKUP_OK" != "true" ]; then
+                echo "PR #$N: cap/needs-human del fixer non verificabile sulla HEAD ${HEAD:0:7} — skip fail-closed"
+                continue
+              fi
+              if [ "$FIXER_ROUND_CAP_REACHED" = "true" ] || [ "$FIXER_NEEDS_HUMAN_MARKER" = "true" ]; then
+                echo "PR #$N: fixer già al cap/needs-human sulla HEAD ${HEAD:0:7} — veto terminale, nessun rescue"
+                continue
+              fi
+            fi
+
+            # La classe E riapre il solo buco del trigger review: 🔴 Important
+            # sulla HEAD corrente, nessun commit nuovo e nessuna run del fixer
+            # sulla stessa HEAD nella soglia già usata dal rescuer (2h). Una run
+            # recente, soprattutto queued/in_progress, è il guard di idempotenza
+            # dell'azione: non si dispatcha un secondo fixer mentre il primo è
+            # ancora in volo o appena terminato. Lo stato in volo è un veto
+            # indipendente dalla grace window: una run vecchia ma ancora
+            # queued/in_progress non può essere sostituita da una seconda.
+            FIXER_RUN_LOOKUP_OK=true
+            FIXER_RUN_RECENT_ID=""
+            FIXER_RUN_RECENT=false
+            FIXER_RUN_IN_FLIGHT=false
+            if [ "$HAS_IMPORTANT" = "true" ] && [ "$LAST_CID" = "$HEAD" ]; then
+              if ! fixer_runs=$(gh run list --repo "$REPO" --workflow pr-redflag-fixer.yml --branch "$BRANCH" \
+                --limit 30 --json databaseId,headSha,status,conclusion,createdAt 2>/dev/null); then
+                echo "::warning::Impossibile leggere le run di pr-redflag-fixer per PR #$N — nessun dispatch automatico ammesso."
+                FIXER_RUN_LOOKUP_OK=false
+              elif ! printf '%s' "$fixer_runs" | jq -e 'type == "array"' >/dev/null 2>&1; then
+                echo "::warning::Elenco run di pr-redflag-fixer malformato per PR #$N — nessun dispatch automatico ammesso."
+                FIXER_RUN_LOOKUP_OK=false
+              else
+                if ! FIXER_RUN_RECENT_ID=$(printf '%s' "$fixer_runs" | jq -r --arg head "$HEAD" --argjson now "$NOW" --argjson grace "$AGE_MIN_S" '
+                  def within_grace:
+                    (.createdAt // "") as $created
+                    | (try ($created | fromdateiso8601) catch -1) as $created_at
+                    | (($now - $created_at) >= 0 and ($now - $created_at) <= $grace);
+                  [.[]
+                   | select((.headSha // "" | ascii_downcase) == ($head | ascii_downcase))
+                   | select(within_grace)]
+                  | sort_by([(.createdAt // ""), ((.databaseId // 0) | tonumber? // 0)])
+                  | last
+                  | .databaseId // empty
+                ' 2>/dev/null); then
+                  echo "::warning::Stato delle run di pr-redflag-fixer non verificabile per PR #$N — nessun dispatch automatico ammesso."
+                  FIXER_RUN_LOOKUP_OK=false
+                else
+                  if printf '%s' "$FIXER_RUN_RECENT_ID" | grep -qE '^[0-9]+$'; then
+                    FIXER_RUN_RECENT=true
+                  fi
+                fi
+                if [ "$FIXER_RUN_LOOKUP_OK" = "true" ] && ! FIXER_RUN_IN_FLIGHT=$(printf '%s' "$fixer_runs" | jq -r --arg head "$HEAD" '
+                  any(.[]; (.headSha // "" | ascii_downcase) == ($head | ascii_downcase)
+                    and ((.status // "") | test("^(queued|in_progress|waiting|pending|requested)$"))
+                  )
+                ' 2>/dev/null); then
+                  echo "::warning::Stato in-flight di pr-redflag-fixer non verificabile per PR #$N — nessun dispatch automatico ammesso."
+                  FIXER_RUN_LOOKUP_OK=false
+                fi
+              fi
+            fi
+
+            # Se l'elenco delle run non è verificabile, non si può scegliere
+            # fra E e B in sicurezza: anche B potrebbe rilanciare tests mentre
+            # un fixer già esistente è queued/in_progress. La PR resta quindi
+            # intatta e sarà rivalutata dal cron successivo.
+            if [ "$HAS_IMPORTANT" = "true" ] && [ "$LAST_CID" = "$HEAD" ] && [ "$FIXER_RUN_LOOKUP_OK" != "true" ]; then
+              echo "PR #$N: stato di pr-redflag-fixer non verificabile sulla HEAD ${HEAD:0:7} — skip fail-closed"
+              continue
+            fi
+
+            REASON=""; RESCUE=""; CLASS=""
             if [ -n "$LAST_CID" ] && [ "$LAST_CID" != "$HEAD" ] && [ "$TESTS_CONCL" = "success" ] && [ "$LAST_LGTM" = "0" ]; then
               CLASS="D"
               # D — direzione 3 della #201. Sottoinsieme stretto di A: nessuna PR
@@ -321,16 +447,11 @@ jobs:
               CLASS="A"
               REASON="test verdi sull'head corrente da >2h ma nessuna review li ha coperti"
               RESCUE="\`git fetch origin main && git merge origin/main\` nel branch \`$BRANCH\`, poi push. Se il merge non serve, può essere solo coda congestionata: attendi."
-            # il lead a due rami e i due lookbehind chiudono la terza variante della classe
-            # sulla POSIZIONE invece che sul vocabolario (misurata sulla PR #909): un
-            # 🔴 Important CITATO — dentro «» o dentro un code span APERTO — non e' il
-            # marker di quella riga, e portava i due punti come quello vero. Ma un marker
-            # vero non sparisce ne' per una label incollata (`` `a.mjs:L1`🔴 ``) ne' per un
-            # secondo finding sulla stessa riga (#977): entrambi restano rossi. grep e' gia'
-            # orientato alla riga, quindi il pattern e' REDFLAG_IMPORTANT_RE.source senza i
-            # `\n` delle classi negate; il guard `mirror bash` di
-            # generator/tests/redflag-important-marker.test.mjs lo pretende verbatim.
-            elif printf '%s' "$LAST_BODY" | LC_ALL=C.UTF-8 grep -qP '^(?:(?=(?:[^`]*`[^`]*`)*[^`]*`[^`]*$)(?:[^🟡🟢❓]*|(?:[^«]|«[^»]*»)*[🟡🟢❓](?:[^«]|«[^»]*»)*)|(?:[^🟡🟢❓]*|(?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*[🟡🟢❓](?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*)(?<!\s`)(?<!^`))🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]' && [ "$LAST_CID" = "$HEAD" ]; then
+            elif [ "$HAS_IMPORTANT" = "true" ] && [ "$LAST_CID" = "$HEAD" ] && [ "$FIXER_RUN_LOOKUP_OK" = "true" ] && [ "$FIXER_RUN_RECENT" != "true" ] && [ "$FIXER_RUN_IN_FLIGHT" != "true" ] && [ "$FIXER_ROUND_CAP_REACHED" != "true" ] && [ "$FIXER_NEEDS_HUMAN_MARKER" != "true" ]; then
+              CLASS="E"
+              REASON="🔴 Important non ripreso sulla HEAD corrente (nessun commit nuovo e nessuna run di pr-redflag-fixer registrata nelle ultime 2h)"
+              RESCUE="dispatcha \`pr-redflag-fixer.yml\` per la PR #$N sulla HEAD \`${HEAD:0:7}\` con \`workflow_dispatch\`; il fixer riapplicherà gli stessi gate del percorso automatico."
+            elif [ "$HAS_IMPORTANT" = "true" ] && [ "$LAST_CID" = "$HEAD" ]; then
               CLASS="B"
               # Regex allineata a REDFLAG_IMPORTANT_RE: un `grep -q "🔴"` nudo
               # scatterebbe anche sulla prosa di NEGAZIONE del reviewer ("zero
@@ -357,6 +478,14 @@ jobs:
                   && echo "PR #$N: stale-review RIMOSSA — nessuno stallo residuo" \
                   || echo "::warning::rimozione di stale-review fallita su PR #$N"
               fi
+              continue
+            fi
+
+            # Una run recente è già il rescue in corso: non pubblicare un
+            # commento B fuorviante e non rilanciare tests mentre il fixer è
+            # ancora queued/in_progress o ha appena terminato.
+            if [ "$CLASS" = "B" ] && [ "$FIXER_RUN_IN_FLIGHT" = "true" ]; then
+              echo "PR #$N: pr-redflag-fixer già in volo sulla HEAD ${HEAD:0:7} — nessun dispatch duplicato"
               continue
             fi
 
@@ -390,7 +519,7 @@ jobs:
             # #576: la chiave (CLASSE, HEAD) da sola blocca il dispatch di B se
             # il PRIMO commento su un head esce PRIMA che il fixer posti
             # `REDFLAG_FIX_ROUND` — il fixer gira su un workflow separato dietro
-            # `redflag-fix-$PR` con `cancel-in-progress: false`, e questo stesso
+            # `redflag-fix-$BRANCH` con `cancel-in-progress: false`, e questo stesso
             # file documenta che GitHub può metterlo in coda ore. Se il
             # `continue` generico scattasse su quel marker, il dispatch non
             # partirebbe più su quell'head neanche dopo che `REDFLAG_FIX_ROUND`
@@ -399,6 +528,33 @@ jobs:
             # HEAD) — e va controllata PRIMA del `continue` sull'idempotenza
             # generica, non dopo.
             DISPATCH_MARKER="<!-- stale-pr-rescuer rerun=tests head=${HEAD:0:7} -->"
+            # Il marker E è un paracadute per la finestra in cui GitHub ha
+            # accettato la dispatch ma `gh run list` non ha ancora indicizzato la
+            # run. Porta quindi un timestamp TTL e, dopo la dispatch, l'id della
+            # run se è già visibile. Un marker vecchio non può congelare E per
+            # sempre: se la run è stata cancellata, fallita o non ha risolto il
+            # finding, dopo la stessa grace window la classe si riarma.
+            FIXER_DISPATCH_MARKER="<!-- stale-pr-rescuer dispatch=pr-redflag-fixer head=${HEAD:0:7} run=pending at=$NOW -->"
+            FIXER_DISPATCH_MARKER_RE="<!-- stale-pr-rescuer dispatch=pr-redflag-fixer head=${HEAD:0:7} run=[^ ]+ at=([0-9]+) -->"
+            FIXER_DISPATCH_MARKER_ACTIVE=false
+            # `[[ ... =~ ]]` restituirebbe solo la prima occorrenza: un marker
+            # scaduto prima di uno fresco farebbe quindi ridispatchare durante
+            # il TTL. Scorriamo tutti i marker compatibili e conserviamo il più
+            # recente ancora valido.
+            FIXER_MARKER_AT=""
+            while IFS= read -r FIXER_MARKER_LINE; do
+              FIXER_MARKER_CANDIDATE="${FIXER_MARKER_LINE##* at=}"
+              FIXER_MARKER_CANDIDATE="${FIXER_MARKER_CANDIDATE% -->}"
+              if [[ "$FIXER_MARKER_CANDIDATE" =~ ^[0-9]+$ ]] \
+                && [ "$FIXER_MARKER_CANDIDATE" -le "$NOW" ] \
+                && [ $((NOW - FIXER_MARKER_CANDIDATE)) -le "$AGE_MIN_S" ] \
+                && { [ -z "$FIXER_MARKER_AT" ] || [ "$FIXER_MARKER_CANDIDATE" -gt "$FIXER_MARKER_AT" ]; }; then
+                FIXER_MARKER_AT="$FIXER_MARKER_CANDIDATE"
+              fi
+            done < <(printf '%s' "$POSTED_BODIES" | grep -oE "$FIXER_DISPATCH_MARKER_RE" || true)
+            if [ -n "$FIXER_MARKER_AT" ]; then
+              FIXER_DISPATCH_MARKER_ACTIVE=true
+            fi
             NEEDS_DISPATCH=false
             #
             # `REDFLAG_FIX_REFUNDED` accanto a `REDFLAG_FIX_ROUND`: su un 429 il
@@ -417,6 +573,14 @@ jobs:
                   esac
                   ;;
               esac
+            elif [ "$CLASS" = "E" ]; then
+              # La run sulla HEAD è il guard principale. Il marker separato
+              # copre solo la finestra TTL in cui GitHub ha accettato il
+              # dispatch ma `gh run list` non lo ha ancora indicizzato; un
+              # marker scaduto non sopprime il nuovo rescue.
+              if [ "$FIXER_RUN_IN_FLIGHT" != "true" ] && [ "$FIXER_DISPATCH_MARKER_ACTIVE" != "true" ]; then
+                NEEDS_DISPATCH=true
+              fi
             fi
 
             # `case` e non `grep -qF`: `echo | grep -q` chiude la pipe al primo
@@ -439,7 +603,23 @@ jobs:
             # Senza il marker del fixer il consiglio resta un commit nuovo.
             # D consegna lo stesso comando nel testo del RESCUE e NON lo esegue.
             EXTRA_MARKER=""
-            if [ "$NEEDS_DISPATCH" = "true" ]; then
+            if [ "$CLASS" = "E" ] && [ "$NEEDS_DISPATCH" = "true" ]; then
+              RESCUE="\`gh workflow run pr-redflag-fixer.yml --repo $REPO --ref $BRANCH -f pr=$N\` — dispatch sulla HEAD \`${HEAD:0:7}\`; il workflow normalizza il target e riapplica tutti i gate 🔴-fix esistenti."
+              if gh workflow run pr-redflag-fixer.yml --repo "$REPO" --ref "$BRANCH" -f "pr=$N"; then
+                echo "PR #$N: pr-redflag-fixer dispatchato sulla HEAD ${HEAD:0:7} (classe E)"
+                FIXER_DISPATCH_RUN_ID=$(gh run list --repo "$REPO" --workflow pr-redflag-fixer.yml --branch "$BRANCH" \
+                  --limit 30 --json databaseId,headSha,createdAt \
+                  --jq "[.[] | select((.headSha // \"\") == \"$HEAD\") | select((try (.createdAt | fromdateiso8601) catch -1) >= ($NOW - 120))] | sort_by(.createdAt) | last | .databaseId // empty" \
+                  2>/dev/null || true)
+                if ! printf '%s' "$FIXER_DISPATCH_RUN_ID" | grep -qE '^[0-9]+$'; then
+                  FIXER_DISPATCH_RUN_ID=pending
+                fi
+                FIXER_DISPATCH_MARKER="<!-- stale-pr-rescuer dispatch=pr-redflag-fixer head=${HEAD:0:7} run=$FIXER_DISPATCH_RUN_ID at=$NOW -->"
+                EXTRA_MARKER="$FIXER_DISPATCH_MARKER"
+              else
+                echo "::warning::dispatch di pr-redflag-fixer fallito su PR #$N"
+              fi
+            elif [ "$NEEDS_DISPATCH" = "true" ]; then
               # Il run da rilanciare è quello di `tests` sull'head CORRENTE: un
               # rerun di un run su un head vecchio revieverebbe codice superato.
               RERUN_ID=$(gh run list --repo "$REPO" --workflow tests.yml --branch "$BRANCH" \

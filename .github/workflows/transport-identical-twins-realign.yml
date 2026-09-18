@@ -114,19 +114,25 @@ jobs:
         run: node generator/scripts/load-rc-env.mjs
 
       - name: Riallinea e committa la baseline su main
-        if: env.GITHUB_PAT_NANAKO != ''
+        if: hashFiles('.github/workflows/transport-identical-twins-realign.yml') != ''
         env:
-          GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          if [ -z "$runtime_pat" ]; then
+            echo "::warning::Nessun GITHUB_PAT_NANAKO runtime → riallineamento post-merge inerte."
+            exit 0
+          fi
+          export GH_TOKEN="$runtime_pat"
           if [ ! -s "$RUNNER_TEMP/transport-realign.tsv" ]; then
             echo "Nessun file trasportato nel body: niente riallineamento post-merge."
             exit 0
           fi
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git"
+          git remote set-url origin "https://x-access-token:${runtime_pat}@github.com/${REPO}.git"
           for attempt in 1 2 3; do
             git fetch origin main --prune
             git checkout --detach origin/main
@@ -156,7 +162,10 @@ jobs:
           exit 1
 
       - name: PAT assente — segnala il blocco
-        if: env.GITHUB_PAT_NANAKO == '' && hashFiles('.github/workflows/transport-identical-twins-realign.yml') != ''
+        if: always() && hashFiles('.github/workflows/transport-identical-twins-realign.yml') != ''
         run: |
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            exit 0
+          fi
           echo "::error::GITHUB_PAT_NANAKO assente: la correzione post-merge del manifest è blocked: credenziale Remote Config non disponibile."
           exit 1

@@ -134,9 +134,13 @@ jobs:
       - name: Probe scope workflows del token di trasporto
         if: steps.guard.outputs.open_transports == '0'
         continue-on-error: true
-        env:
-          PUSH_TOKEN: ${{ env.GITHUB_PAT_NANAKO }}
-        run: node scripts/ci/probe-workflow-scope.mjs
+        run: |
+          set -uo pipefail
+          if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then
+            echo "::warning::Nessun GITHUB_PAT_NANAKO runtime → probe workflow scope saltata."
+            exit 0
+          fi
+          PUSH_TOKEN="$GITHUB_PAT_NANAKO" node scripts/ci/probe-workflow-scope.mjs
 
       # Il dry-run gira SEMPRE, anche senza PAT: il report nel log e' gia' la
       # meta' osservativa, e senza di lui un run senza credenziali non
@@ -161,9 +165,9 @@ jobs:
           # Il 2 non muore pero' qui: viene messo da parte su file e ripreso
           # dall'ULTIMO step, che gira con `always()`. Degradarlo e basta
           # avrebbe lasciato il rosso a carico del solo step di apply, che e'
-          # gatato su `env.GITHUB_PAT_NANAKO != ''` — e il passo che popola quel
+          # protetto dal controllo runtime del PAT — e il passo che popola quel
           # PAT e' `continue-on-error: true`. Con Remote Config muto l'apply
-          # viene SALTATO e la passata sarebbe uscita verde coi blocchi
+          # esce in modo esplicito e la passata resta osservabile coi blocchi
           # permanenti dentro `manual`: lo stesso guasto che l'item 4 chiude,
           # rientrato dalla porta accanto.
           echo "$rc" > "$RUNNER_TEMP/transport-rc"
@@ -175,14 +179,20 @@ jobs:
       # verrebbe mai emesso e la PR resterebbe verde-e-ferma per sempre — la
       # stessa forma di stallo che `enable-native-automerge` esiste per evitare.
       - name: Copia e apri la PR
-        if: steps.guard.outputs.open_transports == '0' && github.event.inputs.dry_run != 'true' && env.GITHUB_PAT_NANAKO != ''
+        if: steps.guard.outputs.open_transports == '0' && github.event.inputs.dry_run != 'true'
         env:
-          GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           SITE_REPO: valerielinc-ops/frontaliere-si-o-no
           SITE_REF: main
         run: |
           set -euo pipefail
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          if [ -z "$runtime_pat" ]; then
+            echo "::warning::Nessun GITHUB_PAT_NANAKO runtime → trasporto inerte; il dry-run resta osservabile."
+            exit 0
+          fi
+          export GH_TOKEN="$runtime_pat"
           : > "$RUNNER_TEMP/transport-realign-rc"
           # `rc=2` (blocchi permanenti con divergenza reale) non ferma la copia:
           # il report e' gia' scritto, gli altri gemelli partono, e il codice si
@@ -215,7 +225,7 @@ jobs:
           BRANCH="transport/identical-twins-${GITHUB_RUN_ID}"
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git"
+          git remote set-url origin "https://x-access-token:${runtime_pat}@github.com/${REPO}.git"
           git checkout -b "$BRANCH"
           # Si stagia l'insieme ENUMERATO da `--apply`, non tutto cio' che e'
           # sporco nel checkout: l'argomento «l'enumerazione E' il

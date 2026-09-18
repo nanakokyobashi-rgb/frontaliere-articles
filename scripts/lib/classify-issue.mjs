@@ -56,14 +56,14 @@
  *   node scripts/lib/classify-issue.mjs "<title>" '<labels-json-array>'
  */
 
-const FIXER_EXEMPT_LABELS = new Set(['backlog', 'needs-human']);
+const FIXER_EXEMPT_LABELS = new Set(['backlog', 'needs-human', 'operations-audit-review']);
 
 /**
  * Labels che tengono un'issue fuori dal ciclo automatico del corpus.
  *
  * Il gemello del sito ha un set di pin diverso; qui la topologia locale è
- * `backlog`/`needs-human`, e `triage-sweep.mjs` deve condividere questa
- * decisione invece di duplicarla.
+ * `backlog`/`needs-human`/`operations-audit-review`, e `triage-sweep.mjs` deve
+ * condividere questa decisione invece di duplicarla.
  *
  * @param {Array<string|{name?: string}>} labels
  */
@@ -121,6 +121,7 @@ export function classifyIssue(title = '', labels = []) {
   // è entrato in `agent:fix` nello stesso giorno. Non tocca `category`
   // (resta visibile per telemetria), solo il route — come `crawler-transient`.
   const needsHuman = has('needs-human');
+  const operationsAuditReview = has('operations-audit-review');
 
   // Come sul sito: nessuna categoria è human-only. Le safety-valve del fixer
   // (root-cause non determinabile, capability-guard su workflows/secret) sono
@@ -136,7 +137,7 @@ export function classifyIssue(title = '', labels = []) {
   // fin dalla nascita) è finita in coda ed è stata promossa al fixer. Il guard
   // vive qui, sorgente unica per entrambi i percorsi.
   const route =
-    has('backlog') || has('crawler-transient') || needsHuman
+    has('backlog') || has('crawler-transient') || needsHuman || operationsAuditReview
       ? 'none'
       : category === 'publish'
         ? 'fix'

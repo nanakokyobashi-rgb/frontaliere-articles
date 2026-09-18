@@ -2196,6 +2196,21 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'sorveglianza-digitale-sanita-guida': { it: 'sorveglianza-digitale-sanita-guida', en: 'digital-surveillance-healthcare-guide', de: 'digitale-ueberwachung-gesundheitswesen-leitfaden', fr: 'surveillance-numerique-sante-guide' },
  'accordo-mercosur-agricoltura-svizzera': { it: 'accordo-mercosur-agricoltura-svizzera', en: 'switzerland-mercosur-agreement-agriculture', de: 'schweiz-mercosur-abkommen-landwirtschaft', fr: 'accord-mercosur-agriculture-suisse' },
  'atted-digitale-ticino-cyber-security': { it: 'atted-digitale-ticino-cyber-security', en: 'atted-digital-ticino-cyber-security', de: 'atted-digitales-tessin-cyber-sicherheit', fr: 'atted-numerique-ticino-cybersecurite' },
+ 'barometro-previdenza-raiffeisen-zhaw': { it: 'barometro-previdenza-raiffeisen-zhaw', en: 'raiffeisen-zhaw-pension-barometer', de: 'raiffeisen-zhaw-vorsorge-barometer', fr: 'barometre-prevoyance-raiffeisen-zhaw' },
+ 'sicurezza-impianti-solari-rete': { it: 'sicurezza-impianti-solari-rete', en: 'solar-plants-security-grid', de: 'sicherheit-solaranlagen-netz', fr: 'securite-installations-solaires-reseau' },
+ 'smi-galderma-sandoz-2026': { it: 'smi-galderma-sandoz-2026', en: 'smi-galderma-and-sandoz-enter-kuhne-nagel-and-swisscom-exit', de: 'smi-galderma-und-sandoz-betreten-kuhne-nagel-und-swisscom-verlassen', fr: 'smi-galderma-et-sandoz-entrent-kuhne-nagel-et-swisscom-sortent' },
+ 'consiglio-stati-lex-ubs-at1': { it: 'consiglio-stati-lex-ubs-at1', en: 'council-states-lex-ubs-at1', de: 'staenderat-lex-ubs-at1', fr: 'conseil-etats-lex-ubs-at1' },
+ 'penuria-alloggi-svizzera-2026': { it: 'penuria-alloggi-svizzera-2026', en: 'housing-shortage-switzerland-2026', de: 'wohnungsnot-schweiz-2026', fr: 'penurie-logement-suisse-2026' },
+ 'tirocini-2026-mercato-svizzera': { it: 'tirocini-2026-mercato-svizzera', en: 'apprenticeships-2026-market-switzerland', de: 'lehrstellen-2026-markt-schweiz', fr: 'places-apprentissage-2026-marche-suisse' },
+ 'crescita-assicurazioni-cyber-2025': { it: 'crescita-assicurazioni-cyber-2025', en: 'cyber-insurance-growth-2025', de: 'cyberversicherung-wachstum-2025', fr: 'croissance-assurance-cyber-2025' },
+ 'votazioni-federali-neutralita-sondaggio': { it: 'votazioni-federali-neutralita-sondaggio', en: 'federal-votes-neutrality-poll', de: 'eidgenoessische-abstimmungen-neutralitaet-umfrage', fr: 'votations-federales-neutralite-sondage' },
+ 'crescita-pil-seco-esportazioni': { it: 'crescita-pil-seco-esportazioni', en: 'seco-gdp-growth-exports', de: 'seco-bip-wachstum-exporte', fr: 'croissance-pib-seco-exportations' },
+ 'seco-previsioni-crescita-2026': { it: 'seco-previsioni-crescita-2026', en: 'seco-growth-forecasts-2026', de: 'seco-wachstumsprognosen-2026', fr: 'seco-previsions-croissance-2026' },
+ 'pil-svizzero-crescita-2026': { it: 'pil-svizzero-crescita-2026', en: 'swiss-gdp-growth-2026', de: 'schweizer-bip-wachstum-2026', fr: 'croissance-pib-suisse-2026' },
+ 'consiglio-federale-contributo-fmi': { it: 'consiglio-federale-contributo-fmi', en: 'federal-council-imf-contribution', de: 'bundesrat-iwf-beitrag', fr: 'conseil-federal-contribution-fmi' },
+ 'penuria-alloggi-svizzera-2027': { it: 'penuria-alloggi-svizzera-2027', en: 'housing-shortage-switzerland-2027', de: 'wohnungsmangel-schweiz-2027', fr: 'penurie-logements-suisse-2027' },
+ 'permesso-c-glarona-requisiti': { it: 'permesso-c-glarona-requisiti', en: 'permit-c-glarona-requirements', de: 'bewilligung-c-glarona-anforderungen', fr: 'permis-c-glarona-conditions' },
+ 'permesso-l-vaud-proroga': { it: 'permesso-l-vaud-proroga', en: 'l-permit-vaud-extension', de: 'l-ausweis-waadt-verlaengerung', fr: 'permis-l-vaud-prolongation' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

@@ -334,12 +334,17 @@ jobs:
       # (`gh-pat-expiry-monitor.yml`), che resta l'owner dell'auto-close.
       # `GH_TOKEN` e' il GITHUB_TOKEN, non il PAT: e' il PAT la cosa rotta.
       - name: Alert token-down (dedup, zero-Claude)
-        if: env.GITHUB_PAT_NANAKO == ''
+        if: always()
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
-        run: node scripts/ci/alert-pat-down.mjs --workflow "${{ github.workflow }}" --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        run: |
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            echo "Token operativo runtime disponibile: nessun alert token-down."
+            exit 0
+          fi
+          node scripts/ci/alert-pat-down.mjs --workflow "${{ github.workflow }}" --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
       - name: Claim redcheck PR + HEAD + failed check (zero-Claude)
         id: claim
@@ -399,10 +404,24 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
-          HAS_PAT: ${{ env.GITHUB_PAT_NANAKO != '' }}
         run: |
           set -uo pipefail
           MAX_ROUNDS=2
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          workflow_pat="${GITHUB_PAT_NANAKO:-}"
+          has_push_token=false
+          has_workflows_token=false
+          if [ -n "$runtime_pat" ]; then
+            has_push_token=true
+          fi
+          if [ -n "$workflow_pat" ]; then
+            has_workflows_token=true
+          fi
+          if [ "$has_push_token" != "true" ]; then
+            echo "::warning::Nessun token operativo runtime → redcheck fixer saltato senza consumare un round."
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
 
           comments=$(gh api "repos/$REPO/issues/$PR_NUMBER/comments" --paginate \
             --jq '[.[] | .body] | join("\n")' 2>/dev/null || echo "")
@@ -440,7 +459,7 @@ jobs:
           # deve pesare come «si'»: il costo di sbagliare in questa direzione e'
           # uno skip con commento, quello opposto e' un run Claude bruciato e un
           # push che fallisce alla fine.
-          if { [ -n "$touches_wf" ] || [ "$files_complete" != "1" ]; } && [ "$HAS_PAT" != "true" ]; then
+          if { [ -n "$touches_wf" ] || [ "$files_complete" != "1" ]; } && [ "$has_workflows_token" != "true" ]; then
             bt=$(printf '\x60')
             if [ -n "$touches_wf" ]; then
               skip_why="la PR tocca ${bt}.github/workflows/**${bt}"
@@ -480,13 +499,19 @@ jobs:
       # inerte e il push viaggia come `github-actions[bot]` — che per
       # anti-ricorsione non ri-triggera `tests`, quindi nessuna re-review.
       - name: Configure push remote (PAT)
-        if: steps.guard.outputs.proceed == 'true' && env.GITHUB_PAT_NANAKO != ''
+        if: steps.guard.outputs.proceed == 'true'
         env:
-          PUSH_TOKEN: ${{ env.GITHUB_PAT_NANAKO }}
           REPO: ${{ github.repository }}
         run: |
+          set -euo pipefail
+          push_token="${GITHUB_PAT_NANAKO:-}"
+          if [ -z "$push_token" ]; then
+            echo "::error::Nessun token operativo runtime disponibile per il push del redcheck fixer."
+            exit 1
+          fi
           git config --unset-all "http.https://github.com/.extraheader" || true
-          git remote set-url origin "https://x-access-token:${PUSH_TOKEN}@github.com/${REPO}.git"
+          git remote set-url origin "https://x-access-token:${push_token}@github.com/${REPO}.git"
+          unset push_token
 
       # Baseline del round (post-merge origin/main, pre-Claude): il classify
       # finale confronta SHA, body e commenti per capire se il round ha davvero

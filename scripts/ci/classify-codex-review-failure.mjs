@@ -126,6 +126,22 @@ function structuredSignals(events) {
   return signals;
 }
 
+function nonJsonRemainder(raw) {
+  return String(raw || '')
+    .split(/\r?\n/u)
+    .filter((line) => {
+      const trimmed = line.trim();
+      if (!trimmed) return false;
+      try {
+        JSON.parse(trimmed);
+        return false;
+      } catch {
+        return true;
+      }
+    })
+    .join('\n');
+}
+
 function textSignals(raw, events) {
   const failedEvents = events
     .filter(isFailureEvent)
@@ -133,9 +149,11 @@ function textSignals(raw, events) {
     .join('\n');
   // When --json produced valid non-error events, do not scan model text as if
   // it were a transport error: a review can legitimately mention "429" or
-  // "rate_limit" in its prompt/output. Plain-text fallback is only for a
-  // completely non-JSON diagnostic stream.
-  const text = failedEvents || (events.length === 0 ? String(raw || '') : '');
+  // "rate_limit" in its prompt/output. Non-JSON remainder (stderr) still
+  // carries transport errors and must not collapse a retryable failure into
+  // `non_retryable`.
+  const remainder = events.length === 0 ? String(raw || '') : nonJsonRemainder(raw);
+  const text = [failedEvents, remainder].filter(Boolean).join('\n');
   return {
     maxTurns: /(?:terminal[_ -]?reason|termination[_ -]?reason|error[_ -]?code|subtype|reason)[^\n:=]*[:=][^\n]*(?:max[_ -]?turns|error[_ -]?max[_ -]?turns)|(?:maximum|exceeded).*turns/i.test(text),
     rateLimit: /(?:api[_ -]?error[_ -]?status|http|status)[^\n:=]*[:= ]+[^\n]*429\b[^\n]*(?:rate[_ -]?limit|too many requests)|rate[_ -]?limit(?:[_ -]?event|[_ -]?error)|too many requests/i.test(text),

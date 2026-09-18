@@ -13,15 +13,34 @@ name: PR 🔴 fixer (bounded loop-closure on bot PRs)
 on:
   pull_request_review:
     types: [submitted]
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: 'PR number to inspect and fix'
+        required: true
+        type: string
 
-# Un fixer alla volta per BRANCH dentro questo workflow. Il gruppo resta distinto
+# Un fixer alla volta per PR dentro questo workflow. Il gruppo resta distinto
 # da redcheck: con `cancel-in-progress: false` GitHub conserva una sola pending e
 # una coda condivisa potrebbe sfrattare silenziosamente proprio la run redflag.
 # Il preflight aspetta la coda redcheck prima di fare checkout o modificare body,
 # mentre il preflight redcheck scarta un rosso quando redflag e' gia' attivo.
 concurrency:
-  group: redflag-fix-${{ github.event.pull_request.head.ref }}
+  group: redflag-fix-pr-${{ inputs.pr || github.event.pull_request.number || 'unknown' }}
   cancel-in-progress: false
+
+# Il lato YAML non può importare `REVIEWER_BOT_LOGIN_JQ` da constants.mjs. Questo
+# filtro è quindi la singola copia eseguibile del predicato jq condiviso dentro
+# questo workflow; i due consumer lo applicano come primo stadio, e il test
+# `reviewer-bot-login.test.mjs` ne verifica il legame con la regex JS.
+env:
+  REVIEWER_BOT_REVIEW_FILTER: |
+    select(.user.type == "Bot")
+    | select(
+        ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
+        or (((.user.login // "") | test("^github-actions\\[bot\\]$";"i"))
+            and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
+      )
 
 permissions:
   contents: write
@@ -67,31 +86,211 @@ jobs:
     # `REVIEWER_BOT_LOGIN_RE`/`_JQ` in `scripts/ci/lib/constants.mjs`, e per i
     # due `--jq` di `tests.yml` (skip-guard `## LGTM` e base incrementale).
     if: |
-      github.event.review.user.type == 'Bot' &&
+      github.event_name == 'workflow_dispatch' ||
       (
-        startsWith(github.event.review.user.login, 'claude') ||
-        startsWith(github.event.review.user.login, 'frontaliere-automation') ||
-        (github.event.review.user.login == 'github-actions[bot]' &&
-         contains(github.event.review.body, '<!-- CODEX_FALLBACK_REVIEW -->'))
-      ) &&
-      contains(github.event.review.body, '🔴') &&
-      github.event.pull_request.draft == false
+        github.event.review.user.type == 'Bot' &&
+        (
+          startsWith(github.event.review.user.login, 'claude') ||
+          startsWith(github.event.review.user.login, 'frontaliere-automation') ||
+          (github.event.review.user.login == 'github-actions[bot]' &&
+           contains(github.event.review.body, '<!-- CODEX_FALLBACK_REVIEW -->'))
+        ) &&
+        contains(github.event.review.body, '🔴') &&
+        github.event.pull_request.draft == false
+      )
     runs-on: ubuntu-latest
     timeout-minutes: 45
     outputs:
       actionable: ${{ steps.pre.outputs.actionable }}
+      pr_number: ${{ steps.normalize.outputs.pr_number }}
+      pr_url: ${{ steps.normalize.outputs.pr_url }}
+      pr_title: ${{ steps.normalize.outputs.pr_title }}
+      base_ref: ${{ steps.normalize.outputs.base_ref }}
+      head_ref: ${{ steps.normalize.outputs.head_ref }}
+      head_sha: ${{ steps.normalize.outputs.head_sha }}
+      is_draft: ${{ steps.normalize.outputs.is_draft }}
+      pr_author_type: ${{ steps.normalize.outputs.pr_author_type }}
+      review_body_b64: ${{ steps.normalize.outputs.review_body_b64 }}
+      review_commit_id: ${{ steps.normalize.outputs.review_commit_id }}
+      review_user_type: ${{ steps.normalize.outputs.review_user_type }}
+      review_user_login: ${{ steps.normalize.outputs.review_user_login }}
     steps:
+      - name: Normalize trigger context
+        id: normalize
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          EVENT_NAME: ${{ github.event_name }}
+          DISPATCH_PR: ${{ inputs.pr }}
+          EVENT_PR_NUMBER: ${{ github.event.pull_request.number }}
+          EVENT_HEAD_REF: ${{ github.event.pull_request.head.ref }}
+          EVENT_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          # Legacy env name retained as the automatic-event input to the
+          # normalizer; the preflight consumes the normalized output below.
+          PR_AUTHOR_TYPE: ${{ github.event.pull_request.user.type }}
+          EVENT_REVIEW_BODY: ${{ github.event.review.body }}
+          EVENT_REVIEW_COMMIT_ID: ${{ github.event.review.commit_id }}
+          EVENT_REVIEW_USER_TYPE: ${{ github.event.review.user.type }}
+          EVENT_REVIEW_USER_LOGIN: ${{ github.event.review.user.login }}
+        run: |
+          set -euo pipefail
+
+          context_fail() {
+            echo "::error::$1"
+            exit 1
+          }
+
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            PR_NUMBER="${DISPATCH_PR:-}"
+          else
+            PR_NUMBER="${EVENT_PR_NUMBER:-}"
+          fi
+          if ! printf '%s' "$PR_NUMBER" | grep -qE '^[1-9][0-9]*$'; then
+            context_fail "Numero PR mancante o malformato: il redflag fixer resta fail-closed."
+          fi
+
+          if ! PR_JSON=$(gh pr view "$PR_NUMBER" --repo "$REPO" \
+            --json number,headRefName,headRefOid,isDraft,author,url,baseRefName,title,state \
+            2>/dev/null); then
+            context_fail "Metadata PR #$PR_NUMBER illeggibile: il redflag fixer resta fail-closed."
+          fi
+          if ! printf '%s' "$PR_JSON" | jq -e '
+            type == "object"
+            and (.number | type == "number")
+            and (.headRefName | type == "string" and length > 0)
+            and (.headRefOid | type == "string" and test("^[a-f0-9]{40}$"; "i"))
+            and (.isDraft | type == "boolean")
+            and (.author | type == "object" and (.is_bot | type == "boolean"))
+            and (.url | type == "string" and length > 0)
+            and (.baseRefName | type == "string" and length > 0)
+            and (.title | type == "string")
+            and (.state | type == "string")
+          ' >/dev/null 2>&1; then
+            context_fail "Metadata PR #$PR_NUMBER malformata: il redflag fixer resta fail-closed."
+          fi
+
+          PR_URL=$(printf '%s' "$PR_JSON" | jq -r '.url')
+          PR_TITLE=$(printf '%s' "$PR_JSON" | jq -r '.title')
+          BASE_REF=$(printf '%s' "$PR_JSON" | jq -r '.baseRefName')
+          IS_DRAFT=$(printf '%s' "$PR_JSON" | jq -r '.isDraft')
+          PR_AUTHOR_TYPE_FROM_API=$(printf '%s' "$PR_JSON" | jq -r 'if .author.is_bot then "Bot" else "User" end')
+
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            HEAD_REF=$(printf '%s' "$PR_JSON" | jq -r '.headRefName')
+            HEAD_SHA=$(printf '%s' "$PR_JSON" | jq -r '.headRefOid')
+
+            if ! REVIEWS_JSON=$(gh api --paginate "repos/$REPO/pulls/$PR_NUMBER/reviews?per_page=100" \
+              --slurp 2>/dev/null); then
+              context_fail "Reviews della PR #$PR_NUMBER illeggibili: il redflag fixer resta fail-closed."
+            fi
+            if ! printf '%s' "$REVIEWS_JSON" | jq -e 'type == "array" and all(.[]; type == "array")' >/dev/null 2>&1; then
+              context_fail "Risposta reviews della PR #$PR_NUMBER malformata: il redflag fixer resta fail-closed."
+            fi
+            REVIEW_JSON=$(printf '%s' "$REVIEWS_JSON" \
+              | jq -c 'flatten[]?' \
+              | jq -c "$REVIEWER_BOT_REVIEW_FILTER" \
+              | jq -c --arg head_sha "$HEAD_SHA" \
+                  'select(((.commit_id // "") | ascii_downcase) == ($head_sha | ascii_downcase))' \
+              | jq -cs '[.[] | {
+                  id: (.id // 0),
+                  body: (.body // ""),
+                  commit_id: (.commit_id // ""),
+                  user_type: (.user.type // ""),
+                  user_login: (.user.login // "")
+                }] | sort_by(.id) | last // empty')
+            if [ -n "$REVIEW_JSON" ]; then
+              REVIEW_BODY=$(printf '%s' "$REVIEW_JSON" | jq -r '.body')
+              REVIEW_COMMIT_ID=$(printf '%s' "$REVIEW_JSON" | jq -r '.commit_id')
+              REVIEW_USER_TYPE=$(printf '%s' "$REVIEW_JSON" | jq -r '.user_type')
+              REVIEW_USER_LOGIN=$(printf '%s' "$REVIEW_JSON" | jq -r '.user_login')
+            else
+              echo "::warning::Nessuna review qualificante trovata sulla PR #$PR_NUMBER: nessun fix automatico ammesso."
+              REVIEW_BODY=""
+              REVIEW_COMMIT_ID=""
+              REVIEW_USER_TYPE=""
+              REVIEW_USER_LOGIN=""
+            fi
+            PR_AUTHOR_TYPE="$PR_AUTHOR_TYPE_FROM_API"
+          else
+            HEAD_REF="${EVENT_HEAD_REF:-}"
+            HEAD_SHA="${EVENT_HEAD_SHA:-}"
+            PR_AUTHOR_TYPE="${PR_AUTHOR_TYPE:-$PR_AUTHOR_TYPE_FROM_API}"
+            REVIEW_BODY="${EVENT_REVIEW_BODY:-}"
+            REVIEW_COMMIT_ID="${EVENT_REVIEW_COMMIT_ID:-}"
+            REVIEW_USER_TYPE="${EVENT_REVIEW_USER_TYPE:-}"
+            REVIEW_USER_LOGIN="${EVENT_REVIEW_USER_LOGIN:-}"
+          fi
+
+          if ! printf '%s' "$HEAD_REF" | grep -qE '^.{1,255}$'; then
+            context_fail "Head ref PR #$PR_NUMBER mancante o malformata: il redflag fixer resta fail-closed."
+          fi
+          if ! printf '%s' "$HEAD_SHA" | grep -qE '^[a-f0-9]{40}$'; then
+            context_fail "Head SHA PR #$PR_NUMBER mancante o malformata: il redflag fixer resta fail-closed."
+          fi
+          case "$PR_AUTHOR_TYPE" in
+            Bot|User) ;;
+            *) context_fail "Tipo autore PR #$PR_NUMBER inatteso: il redflag fixer resta fail-closed." ;;
+          esac
+
+          REVIEW_BODY_B64=$(printf '%s' "$REVIEW_BODY" | base64 -w0)
+          {
+            echo "pr_number=$PR_NUMBER"
+            echo "pr_url=$PR_URL"
+            echo "pr_title=$PR_TITLE"
+            echo "base_ref=$BASE_REF"
+            echo "head_ref=$HEAD_REF"
+            echo "head_sha=$HEAD_SHA"
+            echo "is_draft=$IS_DRAFT"
+            echo "pr_author_type=$PR_AUTHOR_TYPE"
+            echo "review_body_b64=$REVIEW_BODY_B64"
+            echo "review_commit_id=$REVIEW_COMMIT_ID"
+            echo "review_user_type=$REVIEW_USER_TYPE"
+            echo "review_user_login=$REVIEW_USER_LOGIN"
+          } >> "$GITHUB_OUTPUT"
+
       - name: PR still actionable?
         id: pre
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-          HEAD_REF: ${{ github.event.pull_request.head.ref }}
-          REVIEW_BODY: ${{ github.event.review.body }}
-          PR_AUTHOR_TYPE: ${{ github.event.pull_request.user.type }}
+          EVENT_NAME: ${{ github.event_name }}
+          PR_NUMBER: ${{ steps.normalize.outputs.pr_number }}
+          HEAD_REF: ${{ steps.normalize.outputs.head_ref }}
+          HEAD_SHA: ${{ steps.normalize.outputs.head_sha }}
+          REVIEW_BODY_B64: ${{ steps.normalize.outputs.review_body_b64 }}
+          REVIEW_COMMIT_ID: ${{ steps.normalize.outputs.review_commit_id }}
+          REVIEW_USER_TYPE: ${{ steps.normalize.outputs.review_user_type }}
+          REVIEW_USER_LOGIN: ${{ steps.normalize.outputs.review_user_login }}
+          IS_DRAFT: ${{ steps.normalize.outputs.is_draft }}
+          PR_AUTHOR_TYPE: ${{ steps.normalize.outputs.pr_author_type }}
         run: |
           set -uo pipefail
+          if ! REVIEW_BODY=$(printf '%s' "$REVIEW_BODY_B64" | base64 --decode 2>/dev/null); then
+            echo "::error::Review body non decodificabile: il redflag fixer resta fail-closed."
+            echo "actionable=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          if [ "$REVIEW_USER_TYPE" != "Bot" ]; then
+            echo "Review non proveniente da un reviewer Bot qualificante → skip 🔴-fix."
+            echo "actionable=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          case "$REVIEW_USER_LOGIN" in
+            claude*|frontaliere-automation*) ;;
+            'github-actions[bot]')
+              case "$REVIEW_BODY" in
+                *'<!-- CODEX_FALLBACK_REVIEW -->'*) ;;
+                *) echo "Review github-actions[bot] senza marker CODEX_FALLBACK_REVIEW → skip 🔴-fix."; echo "actionable=false" >> "$GITHUB_OUTPUT"; exit 0 ;;
+              esac
+              ;;
+            *) echo "Review Bot non nella allowlist del fixer → skip 🔴-fix."; echo "actionable=false" >> "$GITHUB_OUTPUT"; exit 0 ;;
+          esac
+          if [ "$IS_DRAFT" != "false" ]; then
+            echo "PR #$PR_NUMBER ancora draft → skip 🔴-fix."
+            echo "actionable=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "$REVIEW_COMMIT_ID" != "$HEAD_SHA" ]; then
+            echo "Nessuna review qualificante sulla HEAD corrente della PR #$PR_NUMBER → skip 🔴-fix."
+            echo "actionable=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
           # Marker 🔴-Important tollerante al markdown: il reviewer a volte bolda
           # ("🔴 **Important —**") o varia la spaziatura. Richiede un delimitatore
           # (`:`, `—`, `-`) subito dopo "Important" (+ bold di chiusura opzionale) —
@@ -111,7 +310,8 @@ jobs:
           # `\n` delle classi negate; il guard `mirror bash` di
           # generator/tests/redflag-important-marker.test.mjs lo pretende verbatim.
           # shellcheck disable=SC2016 # the single-quoted PCRE is intentional
-          if ! printf '%s' "$REVIEW_BODY" | LC_ALL=C.UTF-8 grep -qP '^(?:(?=(?:[^`]*`[^`]*`)*[^`]*`[^`]*$)(?:[^🟡🟢❓]*|(?:[^«]|«[^»]*»)*[🟡🟢❓](?:[^«]|«[^»]*»)*)|(?:[^🟡🟢❓]*|(?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*[🟡🟢❓](?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*)(?<!\s`)(?<!^`))🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]'; then
+          IMPORTANT_MATCHES=$(printf '%s' "$REVIEW_BODY" | LC_ALL=C.UTF-8 grep -cP '^(?:(?=(?:[^`]*`[^`]*`)*[^`]*`[^`]*$)(?:[^🟡🟢❓]*|(?:[^«]|«[^»]*»)*[🟡🟢❓](?:[^«]|«[^»]*»)*)|(?:[^🟡🟢❓]*|(?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*[🟡🟢❓](?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*)(?<!\s`)(?<!^`))🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]' || true)
+          if [ "${IMPORTANT_MATCHES:-0}" -eq 0 ]; then
             echo "Review contiene 🔴 ma nessun finding '🔴 Important' (decorativo) → skip 🔴-fix (no-op)."
             echo "actionable=false" >> "$GITHUB_OUTPUT"; exit 0
           fi
@@ -185,18 +385,23 @@ jobs:
           fetch-depth: 1
           # Il branch della PR può non contenere ancora il classificatore: il
           # gate è codice del repository base, non materiale da riparare.
-          ref: ${{ github.event.pull_request.base.ref }}
+          ref: ${{ needs.preflight.outputs.base_ref }}
 
       - name: Classifica finding fuori diff e conia follow-up
         id: classify
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-          PR_URL: ${{ github.event.pull_request.html_url }}
-          REVIEW_BODY: ${{ github.event.review.body }}
+          PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
+          PR_URL: ${{ needs.preflight.outputs.pr_url }}
+          REVIEW_BODY_B64: ${{ needs.preflight.outputs.review_body_b64 }}
         run: |
           set -uo pipefail
+          if ! REVIEW_BODY=$(printf '%s' "$REVIEW_BODY_B64" | base64 --decode 2>/dev/null); then
+            echo "::error::Review body non decodificabile: il fixer resta conservativamente azionabile."
+            REVIEW_BODY=""
+          fi
+          export REVIEW_BODY
           set +e
           output=$(node scripts/ci/review-scope.mjs 2>&1)
           status=$?
@@ -231,7 +436,7 @@ jobs:
         uses: actions/checkout@v5
         with:
           fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.ref }}
+          ref: ${{ needs.preflight.outputs.head_ref }}
           # Checkout 769-1379s su 3 run: il massimo è il 57% di un cap da 40min,
           # e il lavoro qui è un run Claude (costoso da buttare). Blobless partial
           # clone come issue-fix #4189, che è l'altro job Claude-driven con la
@@ -305,12 +510,17 @@ jobs:
       # GH_TOKEN = GITHUB_TOKEN, NON l'App/PAT (e' la cosa rotta). Scatta solo se
       # NESSUN token usabile (né App né PAT).
       - name: Alert token-down (dedup, zero-Claude)
-        if: env.GITHUB_PAT_NANAKO == ''
+        if: always()
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
-        run: node scripts/ci/alert-pat-down.mjs --workflow "${{ github.workflow }}" --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        run: |
+          if [ -n "${APP_TOKEN:-}" ] || [ -n "${GITHUB_PAT_NANAKO:-${GITHUB_PAT:-}}" ]; then
+            echo "Token operativo runtime disponibile: nessun alert token-down."
+            exit 0
+          fi
+          node scripts/ci/alert-pat-down.mjs --workflow "${{ github.workflow }}" --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
       - name: Acquire shared Codex lane quota lease (redflag residual)
         id: quota_lease
@@ -322,9 +532,9 @@ jobs:
           QUOTA_LEASE_ROLE: redflag
           QUOTA_LEASE_OWNER: redflag-fixer
           QUOTA_LEASE_TARGET_TYPE: pr
-          QUOTA_LEASE_TARGET: ${{ github.event.pull_request.number }}
+          QUOTA_LEASE_TARGET: ${{ needs.preflight.outputs.pr_number }}
           QUOTA_LEASE_TTL_SEC: '3600'
-          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          HEAD_SHA: ${{ needs.preflight.outputs.head_sha }}
         run: node scripts/ci/check-quota-backoff.mjs
 
       - name: Shared Codex lane quota lease unavailable (expected skip)
@@ -343,28 +553,48 @@ jobs:
       # capace, il push verrebbe rifiutato (scope workflows) → skip senza bruciare
       # un turno.
       #
-      # HAS_PAT accetta ORA anche APP_TOKEN. Fino al 2026-08-06 era legato al solo
-      # GITHUB_PAT, e il commento lo giustificava con "la App installation token NON
-      # ha lo scope workflows": era vero, ha smesso di esserlo quando alla App
-      # `frontaliere-automation` è stato concesso `workflows: write`. Lasciarlo com'era
-      # avrebbe fatto continuare a saltare i fix su .github/workflows/** con la
-      # motivazione "serve un PAT abilitato" mentre il push sarebbe passato — cioè la
-      # stessa capability sbloccata in un posto e ancora rifiutata nel gemello.
-      #
-      # Allineato al push step più sotto, che era già token-aware
-      # (`env.APP_TOKEN || env.GITHUB_PAT`): erano i due lati della stessa decisione,
-      # tenuti in disaccordo.
+      # I token vengono caricati da GITHUB_ENV in step precedenti. Il guard deve
+      # quindi leggerli dalla shell runtime, non da `env.*` nell'espressione del
+      # workflow: il secondo percorso può essere valutato prima dell'aggiornamento
+      # di GITHUB_ENV e trasformare un token valido in una falsa assenza.
+      # APP_TOKEN_WORKFLOWS è la capability verificata da mint-app-token.mjs;
+      # GITHUB_PAT_NANAKO resta il fallback con scope workflows storico.
       - name: Round cap + capability guard + tier
         id: guard
         if: steps.quota_lease.outputs.lease_allowed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-          REVIEW_BODY: ${{ github.event.review.body }}
-          HAS_PAT: ${{ env.GITHUB_PAT_NANAKO != '' }}
+          PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
+          REVIEW_BODY_B64: ${{ needs.preflight.outputs.review_body_b64 }}
         run: |
           set -uo pipefail
+          runtime_pat="${GITHUB_PAT_NANAKO:-${GITHUB_PAT:-}}"
+          workflow_pat="${GITHUB_PAT_NANAKO:-}"
+          has_push_token=false
+          has_workflows_token=false
+          if [ -n "${APP_TOKEN:-}" ]; then
+            has_push_token=true
+            if [ "${APP_TOKEN_WORKFLOWS:-false}" = "true" ]; then
+              has_workflows_token=true
+            fi
+          fi
+          if [ -n "$runtime_pat" ]; then
+            has_push_token=true
+          fi
+          if [ -n "$workflow_pat" ]; then
+            has_workflows_token=true
+          fi
+          if [ "$has_push_token" != "true" ]; then
+            echo "::warning::Nessun token operativo runtime (App/PAT) → redflag fixer saltato senza consumare un round."
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if ! REVIEW_BODY=$(printf '%s' "$REVIEW_BODY_B64" | base64 --decode 2>/dev/null); then
+            echo "::error::Review body non decodificabile: guard round-cap fail-closed."
+            echo "proceed=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          export REVIEW_BODY
           MAX_ROUNDS=2
 
           # Il preflight non fa checkout: il fingerprint si calcola qui, dove lo
@@ -400,8 +630,8 @@ jobs:
           # File cambiati dalla PR (per tier + capability guard).
           files=$(gh pr view "$PR_NUMBER" --repo "$REPO" --json files --jq '.files[].path' 2>/dev/null || echo "")
           touches_wf=$(echo "$files" | grep -E '^\.github/workflows/' || true)
-          if [ -n "$touches_wf" ] && [ "$HAS_PAT" != "true" ]; then
-            echo "::warning::PR tocca .github/workflows/** ma manca PAT (scope workflows) → push rifiutato, skip senza bruciare un turno Claude."
+          if [ -n "$touches_wf" ] && [ "$has_workflows_token" != "true" ]; then
+            echo "::warning::PR tocca .github/workflows/** ma manca un token runtime con scope workflows → push rifiutato, skip senza bruciare un turno Claude."
             gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '⏭️ 🔴-fixer skip: la PR tocca \x60.github/workflows/**\x60 e non è disponibile un PAT con scope \x60workflows\x60 → il push fallirebbe. Applicare il fix dei 🔴 a mano.')" \
               2>/dev/null || true
             echo "proceed=false" >> "$GITHUB_OUTPUT"
@@ -444,9 +674,8 @@ jobs:
       # re-review non partirebbe (anti-ricorsione); il fix verrebbe comunque
       # committato. Esposto come remote authenticato.
       - name: Configure push remote (App token / PAT)
-        if: steps.guard.outputs.proceed == 'true' && (env.APP_TOKEN != '' || env.GITHUB_PAT_NANAKO != '')
+        if: steps.guard.outputs.proceed == 'true'
         env:
-          PUSH_TOKEN: ${{ env.GITHUB_PAT_NANAKO }}
           REPO: ${{ github.repository }}
         # Stessa classe del bug di pr-autorebase: `actions/checkout` persiste
         # `http.https://github.com/.extraheader = AUTHORIZATION: basic <GITHUB_TOKEN>`,
@@ -455,8 +684,20 @@ jobs:
         # no re-review). Azzerare l'extraheader prima del set-url forza l'uso
         # dell'App token/PAT.
         run: |
+          set -euo pipefail
+          push_token="${APP_TOKEN:-}"
+          runtime_pat="${GITHUB_PAT_NANAKO:-${GITHUB_PAT:-}}"
+          if [ -z "$push_token" ] \
+            || { [ "${APP_TOKEN_WORKFLOWS:-false}" != "true" ] && [ -n "$runtime_pat" ]; }; then
+            push_token="$runtime_pat"
+          fi
+          if [ -z "$push_token" ]; then
+            echo "::error::Nessun token operativo runtime disponibile per il push del redflag fixer."
+            exit 1
+          fi
           git config --unset-all "http.https://github.com/.extraheader" || true
-          git remote set-url origin "https://x-access-token:${PUSH_TOKEN}@github.com/${REPO}.git"
+          git remote set-url origin "https://x-access-token:${push_token}@github.com/${REPO}.git"
+          unset push_token runtime_pat
 
       # SHA di partenza (post-merge origin/main, pre-Claude): il classify finale lo
       # confronta con la HEAD remota dopo Claude per capire se il round ha davvero
@@ -480,8 +721,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
+          HEAD_SHA: ${{ needs.preflight.outputs.head_sha }}
         run: |
           set -uo pipefail
           OUT="$RUNNER_TEMP/redflag"
@@ -562,20 +803,17 @@ jobs:
           if ! printf '%s' "$reviews_json" | jq -e 'type == "array" and all(.[]; type == "array")' >/dev/null 2>&1; then
             context_fail "Risposta Reviews API malformata: il redflag fixer resta fail-closed senza Claude."
           fi
-          if ! printf '%s' "$reviews_json" | jq -r --arg revision "$review_revision" --arg head "$HEAD_SHA" '
+          if ! printf '%s' "$reviews_json" \
+            | jq -c 'flatten[]?' \
+            | jq -c "$REVIEWER_BOT_REVIEW_FILTER" \
+            | jq -rs --arg revision "$review_revision" --arg head "$HEAD_SHA" '
             def has_current_revision($expected):
               [((.body // "") | split("\n")[] | rtrimstr("\r")
                 | select(test("^<!-- REVIEW_INPUT_REVISION: body:[0-9a-f]{64} -->$"; "i"))
                 | capture("^<!-- REVIEW_INPUT_REVISION: (?<revision>body:[0-9a-f]{64}) -->$"; "i").revision
                 | ascii_downcase)] | unique as $revisions
               | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
-            [flatten[]
-             | select(.user.type == "Bot")
-             | select(
-                 ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
-                 or (((.user.login // "") | test("^github-actions\\[bot\\]$";"i"))
-                     and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
-               )
+            [.[]
              | select((.commit_id // "" | ascii_downcase) == ($head | ascii_downcase))
              | select(has_current_revision($revision))
              | select((.body // "")|contains("## Findings ("))
@@ -637,8 +875,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-          EVENT_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
+          EVENT_HEAD_SHA: ${{ needs.preflight.outputs.head_sha }}
           EXPECTED_HEAD_SHA: ${{ steps.ctx.outputs.head_sha }}
           EXPECTED_BODY_REVISION: ${{ steps.ctx.outputs.review_revision }}
         run: |
@@ -696,8 +934,8 @@ jobs:
         uses: ./.github/actions/claude-codex-fallback
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
+          PR_TITLE: ${{ needs.preflight.outputs.pr_title }}
           REPO: ${{ github.repository }}
           FIX_TIER: ${{ steps.guard.outputs.tier }}
           FIX_ROUND: ${{ steps.guard.outputs.round }}
@@ -737,7 +975,7 @@ jobs:
           # 45->60 (2026-07-17, owner): bump fleet-wide di tutti i cap max-turns
           # Claude dopo l'ennesimo error_max_turns (run 29556645538 del vecchio workflow di review).
           prompt: |
-            Sei l'agent di chiusura 🔴 per la PR #${{ github.event.pull_request.number }} ("${{ github.event.pull_request.title }}"). Tier: ${{ steps.guard.outputs.tier }}. Round: ${{ steps.guard.outputs.round }}/2.
+            Sei l'agent di chiusura 🔴 per la PR #${{ needs.preflight.outputs.pr_number }} ("${{ needs.preflight.outputs.pr_title }}"). Tier: ${{ steps.guard.outputs.tier }}. Round: ${{ steps.guard.outputs.round }}/2.
 
             **Bootstrap:**
             1. Leggi `REVIEW.md` (severity/scopo) + `AGENTS.md` (non-negotiables + Privacy). VINCOLANTI.
@@ -751,7 +989,7 @@ jobs:
             - CODE vs DATA: non scorrere i blob `data/**`/`public/**`; fixa il CODE che li genera.
             - Esegui i test pertinenti: `npm test` (o il subset rilevante) per validare il fix prima di committare.
             - Commit con identity canonica già configurata (Valerie Linc <valerielinc@gmail.com>), messaggio conventional, nessuna email non-canonica in coda.
-            - Push sullo stesso branch: `git push origin HEAD:${{ github.event.pull_request.head.ref }}`. Il remote `origin` è autenticato con il token passato a questa action come `github_token` (il PAT, quando disponibile): l'action riscrive `origin` all'avvio, quindi vale QUEL token, non quello configurato dagli step precedenti. Non è il GITHUB_TOKEN → il push ri-attiva la review dentro tests.yml (re-review), e i file sotto `.github/workflows/**` sono pushabili. Se il push fallisce per scope/auth → prima di arrenderti verifica `git remote -v` (deve mostrare `x-access-token:***@github.com`); se dice `without workflows permission`, il PAT non è arrivato: documenta in un commento e TERMINA.
+            - Push sullo stesso branch: `git push origin HEAD:${{ needs.preflight.outputs.head_ref }}`. Il remote `origin` è autenticato con il token passato a questa action come `github_token` (il PAT, quando disponibile): l'action riscrive `origin` all'avvio, quindi vale QUEL token, non quello configurato dagli step precedenti. Non è il GITHUB_TOKEN → il push ri-attiva la review dentro tests.yml (re-review), e i file sotto `.github/workflows/**` sono pushabili. Se il push fallisce per scope/auth → prima di arrenderti verifica `git remote -v` (deve mostrare `x-access-token:***@github.com`); se dice `without workflows permission`, il PAT non è arrivato: documenta in un commento e TERMINA.
             - Aggiorna il body della PR (`gh pr edit $PR_NUMBER --body`) mantenendo `## Implementato` (aggiungi cosa hai fixato) + `## Non implementato (ancora)`.
             - SCOPE: il blocco **Changed file list** è il confine della PR. Applica solo i finding `🔴 Important` che citano file presenti in quella lista; i finding su file fuori dal diff sono già stati coniati nel follow-up e non vanno fissati qui né trascinati nella PR.
 
@@ -778,7 +1016,7 @@ jobs:
       - name: Classify outcome (work-done, not CLI exit)
         if: always() && steps.guard.outputs.proceed == 'true' && steps.ctx.outputs.context_verified == 'true'
         env:
-          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+          HEAD_REF: ${{ needs.preflight.outputs.head_ref }}
           BASE_SHA: ${{ steps.base.outputs.sha }}
           ACTION_OUTCOME: ${{ steps.codex_review.outcome }}
         run: |
@@ -808,6 +1046,6 @@ jobs:
           QUOTA_LEASE_ROLE: redflag
           QUOTA_LEASE_OWNER: redflag-fixer
           QUOTA_LEASE_TARGET_TYPE: pr
-          QUOTA_LEASE_TARGET: ${{ github.event.pull_request.number }}
+          QUOTA_LEASE_TARGET: ${{ needs.preflight.outputs.pr_number }}
           QUOTA_LEASE_TOKEN: ${{ steps.quota_lease.outputs.lease_token }}
         run: node scripts/ci/check-quota-backoff.mjs

@@ -49,7 +49,7 @@
  * anche la prova che lo stub discrimina davvero.
  *
  * La classe B (🔴 Important sull'head, LAST_CID == HEAD) è esercitata nella
- * sezione #488: lo YAML usa `grep -qP` (PCRE), che BSD grep non ha, quindi il
+ * sezione #488: lo YAML usa `grep -cP` (PCRE), che BSD grep non ha, quindi il
  * harness stubba `grep -P` con un regex JS — senza, B è irraggiungibile in
  * locale e l'osservatore sarebbe verde a vuoto.
  */
@@ -99,6 +99,7 @@ const PR_BODY = '## Implementato\n- fixture\n\n## Non implementato (ancora)\n- f
 const REVIEW_REVISION = `body:${createHash('sha256').update(`${PR_BODY}\n`).digest('hex')}`;
 
 const isoAgo = (hours) => new Date(Date.now() - hours * 3600_000).toISOString().replace(/\.\d+Z$/, 'Z');
+const unixAgo = (hours) => Math.floor((Date.now() - hours * 3600_000) / 1000);
 const quotaDeferredComment = ({ head = HEAD_SHA, role = 'review', runId = 'tests-1' } = {}) => ({
   id: 300,
   created_at: isoAgo(4),
@@ -159,7 +160,7 @@ function reviews({
  * Esegue il blocco `run:` con `gh` e `date` stubbati e restituisce
  * `{ labeled, comments, stdout }`.
  */
-function runScan({ prs, checks, reviews: revs, comments: posted = [], dryRun = false }) {
+function runScan({ prs, checks, reviews: revs, comments: posted = [], fixerRuns = [], fixerRunsError = false, dryRun = false }) {
   const dir = mkdtempSync(path.join(tmpdir(), 'stale-pr-rescuer-'));
   try {
     const bin = path.join(dir, 'bin');
@@ -169,14 +170,18 @@ function runScan({ prs, checks, reviews: revs, comments: posted = [], dryRun = f
     const fixChecks = path.join(dir, 'checks.json');
     const fixReviews = path.join(dir, 'reviews.json');
     const fixComments = path.join(dir, 'comments.json');
+    const fixFixerRuns = path.join(dir, 'fixer-runs.json');
+    const fixFixerRunsError = path.join(dir, 'fixer-runs-error');
     writeFileSync(calls, '');
     writeFileSync(fixPrs, JSON.stringify(prs));
     writeFileSync(fixChecks, JSON.stringify(checks));
     writeFileSync(fixReviews, JSON.stringify(revs));
     writeFileSync(fixComments, JSON.stringify(posted));
+    writeFileSync(fixFixerRuns, JSON.stringify(fixerRuns));
+    writeFileSync(fixFixerRunsError, fixerRunsError ? 'true' : 'false');
 
-    // `gh`: serve le QUATTRO letture del rescuer e registra le quattro
-    // scritture (add-label, remove-label, comment, workflow run). Ogni
+    // `gh`: serve le letture del rescuer e registra le scritture
+    // (add-label, remove-label, comment, workflow run). Ogni
     // scrittura finisce in `calls` in una forma greppabile dal test.
     //
     // Il ramo `api` scarta i flag PRIMA di leggere il path: dal fix della #314
@@ -247,7 +252,17 @@ case "$sub" in
     # \`gh run rerun\` e' la SCRITTURA, e finisce in \`calls\` come le altre.
     action="$1"; shift
     case "$action" in
-      list) echo 4242 ;;
+      list)
+        if [[ "$(cat ${JSON.stringify(fixFixerRunsError)})" == "true" ]]; then
+          case " $* " in
+            *"pr-redflag-fixer.yml"*) exit 1 ;;
+          esac
+        fi
+        case " $* " in
+          *"pr-redflag-fixer.yml"*) cat ${JSON.stringify(fixFixerRuns)} ;;
+          *) echo 4242 ;;
+        esac
+        ;;
       rerun)
         printf 'RUN_RERUN %s\\n' "$1" >> ${JSON.stringify(calls)}
         ;;
@@ -282,21 +297,23 @@ else
 fi
 `,
     );
-    // CLASS=B usa `grep -qP`. BSD grep non ha -P: senza stub il ramo non
+    // CLASS=B usa `grep -cP`. BSD grep non ha -P: senza stub il ramo non
     // scatta mai su macOS e i casi #488 sarebbero verdi senza aver eseguito B.
     writeFileSync(
       path.join(bin, 'grep'),
       `#!/usr/bin/env bash
 p=0
+c=0
 for a in "$@"; do
-  case "$a" in -P|-qP|-Pq) p=1 ;; esac
+  case "$a" in -P|-qP|-Pq|-cP) p=1 ;; esac
+  case "$a" in -cP) c=1 ;; esac
 done
 if [ "$p" = "1" ]; then
   pattern=""
   for a in "$@"; do
-    case "$a" in -q|-P|-qP|-Pq) continue ;; -*) continue ;; *) pattern="$a"; break ;; esac
+    case "$a" in -q|-P|-qP|-Pq|-cP) continue ;; -*) continue ;; *) pattern="$a"; break ;; esac
   done
-  node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{try{process.exit(new RegExp(process.argv[1],"u").test(s)?0:1)}catch(e){process.exit(2)}});' "$pattern"
+  node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{try{const m=new RegExp(process.argv[1],"u").test(s);if(process.argv[2]==="1")process.stdout.write(m?"1\\n":"0\\n");process.exit(m?0:1)}catch(e){process.exit(2)}});' "$pattern" "$c"
   exit $?
 fi
 exec /usr/bin/grep "$@"
@@ -312,7 +329,7 @@ exec /usr/bin/grep "$@"
     const stdout = execFileSync('bash', ['-e', script], {
       encoding: 'utf8',
       // stderr catturato e non ereditato: su macOS il ramo della classe B usa
-      // `grep -qP`, che BSD grep non ha, e la sua usage line inquinerebbe
+      // `grep -cP`, che BSD grep non ha, e la sua usage line inquinerebbe
       // l'output di ogni run senza essere un fallimento.
       stdio: ['ignore', 'pipe', 'pipe'],
       env: {
@@ -734,7 +751,161 @@ test('D non allarga l\'insieme delle PR etichettate', opts, () => {
   }
 });
 
-// ── 8. #488: classe B dispatcha pr-review-loop se il fixer ha già chiuso il 🔴 ─
+// ── 8. Classe E: il fixer non deve restare senza un trigger ──────────────────
+//
+// La review è sulla HEAD corrente e contiene un 🔴 Important, ma non esiste
+// nessuna run recente di `pr-redflag-fixer.yml` sulla stessa HEAD. La cura è un
+// dispatch esplicito della nuova maniglia, con la PR come input obbligatorio.
+
+test('E — 🔴 sulla HEAD senza run recente del fixer: dispatch della PR', opts, () => {
+  const r = runScan({
+    prs: openPr(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({
+      commit: HEAD_SHA,
+      body: '🔴 **Important**: il fixer deve essere riattivato',
+    }),
+    fixerRuns: [],
+  });
+  assert.equal(r.workflowRuns.length, 1, `Atteso UN dispatch del fixer: ${r.workflowRuns.join(' | ')}\n${r.stdout}`);
+  assert.match(r.workflowRuns[0], /pr-redflag-fixer\.yml/);
+  assert.match(r.workflowRuns[0], /--ref fix\/qualcosa/);
+  assert.match(r.workflowRuns[0], /-f pr=901/);
+  assert.deepEqual(r.reruns, [], `E non deve rilanciare tests: ${r.reruns.join(' | ')}`);
+  assert.match(only(r), /class=E/);
+});
+
+test('E — una run del fixer già in volo sulla HEAD non viene duplicata', opts, () => {
+  const r = runScan({
+    prs: openPr(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({
+      commit: HEAD_SHA,
+      body: '🔴 **Important**: il fixer è già stato dispatchato',
+    }),
+    fixerRuns: [{
+      databaseId: 7001,
+      headSha: HEAD_SHA,
+      status: 'in_progress',
+      createdAt: isoAgo(0.5),
+    }],
+  });
+  assert.deepEqual(r.workflowRuns, [], `Il fixer è già in volo: nessun secondo dispatch ammesso.\n${r.stdout}`);
+  assert.deepEqual(r.comments, [], `La near-miss non deve pubblicare un rescue duplicato.\n${r.stdout}`);
+  assert.deepEqual(r.reruns, []);
+});
+
+test('E — una run ancora in volo oltre la grace window resta un veto', opts, () => {
+  const r = runScan({
+    prs: openPr(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({
+      commit: HEAD_SHA,
+      body: '🔴 **Important**: la run in coda non va sostituita',
+    }),
+    fixerRuns: [{
+      databaseId: 7003,
+      headSha: HEAD_SHA,
+      status: 'in_progress',
+      createdAt: isoAgo(4),
+    }],
+  });
+  assert.deepEqual(r.workflowRuns, [], `Una run vecchia ma ancora in-flight non va duplicata.\n${r.stdout}`);
+  assert.deepEqual(r.comments, [], `Il veto in-flight indipendente dal TTL non deve commentare.\n${r.stdout}`);
+});
+
+test('E — round cap raggiunto: nessun nuovo dispatch del fixer', opts, () => {
+  const r = runScan({
+    prs: openPr(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: HEAD_SHA, body: '🔴 **Important**: il cap è terminale' }),
+    comments: [{ body: '<!-- REDFLAG_FIX_ROUND: 2 -->\n_🔴-fixer round 2/2 avviato (auto)._' }],
+    fixerRuns: [],
+  });
+  assert.deepEqual(r.workflowRuns, [], `Il round cap del fixer deve vietare E.\n${r.stdout}`);
+  assert.deepEqual(r.comments, [], `Il veto terminale non deve commentare la PR.\n${r.stdout}`);
+});
+
+test('E — marker needs-human: nessun nuovo dispatch del fixer', opts, () => {
+  const r = runScan({
+    prs: openPr({ labels: [{ name: 'needs-human' }] }),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: HEAD_SHA, body: '🔴 **Important**: serve un umano' }),
+    fixerRuns: [],
+  });
+  assert.deepEqual(r.workflowRuns, [], `La label needs-human deve vietare E.\n${r.stdout}`);
+  assert.deepEqual(r.comments, [], `Il veto needs-human non deve commentare la PR.\n${r.stdout}`);
+});
+
+test('E — commento needs-human: nessun nuovo dispatch del fixer', opts, () => {
+  const r = runScan({
+    prs: openPr(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: HEAD_SHA, body: '🔴 **Important**: il marker è nel thread' }),
+    comments: [{ body: '🛑 **needs-human** (auto): il 🔴-fixer ha già tentato 2 round.' }],
+    fixerRuns: [],
+  });
+  assert.deepEqual(r.workflowRuns, [], `Il commento needs-human deve vietare E.\n${r.stdout}`);
+  assert.deepEqual(r.comments, [], `Il veto needs-human non deve commentare la PR.\n${r.stdout}`);
+});
+
+test('E/B — lookup del fixer illeggibile: nessuna azione fail-closed', opts, () => {
+  const r = runScan({
+    prs: openPr(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({
+      commit: HEAD_SHA,
+      body: '🔴 **Important**: non agire se lo stato del fixer è ignoto',
+    }),
+    fixerRunsError: true,
+  });
+  assert.deepEqual(r.workflowRuns, [], `Un lookup fallito non deve dispatchare E.\n${r.stdout}`);
+  assert.deepEqual(r.reruns, [], `Un lookup fallito non deve rilanciare B.\n${r.stdout}`);
+  assert.deepEqual(r.comments, [], `Lo stato ignoto deve restare completamente fail-closed.\n${r.stdout}`);
+});
+
+test('E — un marker di dispatch scaduto riarma il rescue', opts, () => {
+  const staleMarkers = [
+    {
+      body: [
+        `<!-- stale-pr-rescuer class=E head=${HEAD_SHA.slice(0, 7)} -->`,
+        `<!-- stale-pr-rescuer dispatch=pr-redflag-fixer head=${HEAD_SHA.slice(0, 7)} run=7004 at=${unixAgo(3)} -->`,
+      ].join('\n'),
+    },
+  ];
+  const r = runScan({
+    prs: openPr(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: HEAD_SHA, body: '🔴 **Important**: il marker non è eterno' }),
+    comments: staleMarkers,
+    fixerRuns: [],
+  });
+  assert.equal(r.workflowRuns.length, 1, `Il marker scaduto deve consentire un nuovo dispatch.\n${r.stdout}`);
+  assert.match(r.workflowRuns[0], /-f pr=901/);
+});
+
+test('E — un marker di dispatch ancora fresco resta idempotente', opts, () => {
+  const freshMarkers = [
+    {
+      body: [
+        `<!-- stale-pr-rescuer class=E head=${HEAD_SHA.slice(0, 7)} -->`,
+        `<!-- stale-pr-rescuer dispatch=pr-redflag-fixer head=${HEAD_SHA.slice(0, 7)} run=6999 at=${unixAgo(3)} -->`,
+        `<!-- stale-pr-rescuer dispatch=pr-redflag-fixer head=${HEAD_SHA.slice(0, 7)} run=7005 at=${unixAgo(0.5)} -->`,
+      ].join('\n'),
+    },
+  ];
+  const r = runScan({
+    prs: openPr(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: HEAD_SHA, body: '🔴 **Important**: il dispatch è appena partito' }),
+    comments: freshMarkers,
+    fixerRuns: [],
+  });
+  assert.deepEqual(r.workflowRuns, [], `Il TTL del marker deve evitare un doppio dispatch.\n${r.stdout}`);
+  assert.deepEqual(r.comments, [], `Il marker generale deve evitare un secondo commento.\n${r.stdout}`);
+});
+
+// ── 9. #488: classe B dispatcha pr-review-loop se il fixer ha già chiuso il 🔴 ─
 //
 // LAST_CID == HEAD + 🔴 Important è lo stato di #484: il fixer ha aperto una
 // issue e aggiornato il body, senza commit. `tests` non riparte, quindi
@@ -742,7 +913,14 @@ test('D non allarga l\'insieme delle PR etichettate', opts, () => {
 // commit nuovo — la cura sbagliata, perché il 🔴 è già chiuso proceduralmente.
 // Il segnale deterministico è il marker `<!-- REDFLAG_FIX_ROUND:` sul thread.
 
-const classB = ({ posted = [], dryRun = false } = {}) =>
+const FIXER_RUN_OLD = {
+  databaseId: 7002,
+  headSha: HEAD_SHA,
+  status: 'completed',
+  createdAt: isoAgo(1),
+};
+
+const classB = ({ posted = [], fixerRuns = [FIXER_RUN_OLD], dryRun = false } = {}) =>
   runScan({
     prs: openPr(),
     checks: checkRuns({ concl: 'success' }),
@@ -751,6 +929,7 @@ const classB = ({ posted = [], dryRun = false } = {}) =>
       body: '🔴 **Important**: apri una issue di follow-up e linkala prima del merge',
     }),
     comments: posted,
+    fixerRuns,
     dryRun,
   });
 
@@ -834,7 +1013,7 @@ test('#488 — B + marker in dry_run: non rilancia', opts, () => {
 //
 // Se il rescuer commenta la classe B su un head PRIMA che il fixer posti
 // `REDFLAG_FIX_ROUND` (il fixer è un workflow separato, in coda dietro
-// `redflag-fix-$PR` con `cancel-in-progress: false`, e può slittare ore), il
+// `redflag-fix-$BRANCH` con `cancel-in-progress: false`, e può slittare ore), il
 // marker generale `class=B head=X` finisce nei commenti passati. Quando
 // `REDFLAG_FIX_ROUND` arriva DOPO, un run successivo deve comunque rilanciare:
 // la chiave dell'azione è (rerun, HEAD), non (CLASSE, HEAD).

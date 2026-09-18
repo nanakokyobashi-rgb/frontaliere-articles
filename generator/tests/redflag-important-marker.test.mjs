@@ -201,7 +201,7 @@ for (const [name, body] of [
 
 // --- le copie bash non possono divergere ------------------------------------
 // Il difetto e' stato riparato tre volte perche' la logica vive in TRE copie:
-// questa regex e i due `grep -qP` bash (un `if:`/`run:` YAML non puo' importare un
+// questa regex e i due `grep -cP` bash (un `if:`/`run:` YAML non puo' importare un
 // modulo JS). Il guard deriva il pattern atteso dalla `.source` — grep e' gia'
 // orientato alla riga, quindi l'unica differenza legittima e' il `\n` nella classe
 // negata — e lo pretende verbatim in entrambi i workflow.
@@ -219,6 +219,6 @@ test("la sola differenza fra la source JS e il pattern bash sono i `\\n` delle c
 for (const wf of ['pr-redflag-fixer.yml', 'stale-pr-rescuer.yml']) {
   test(`${wf} grepa esattamente quel pattern`, () => {
     const yaml = readFileSync(new URL(`../../.github/workflows/${wf}`, import.meta.url), 'utf8');
-    assert.ok(yaml.includes(`grep -qP '${bashPattern}'`), `${wf} non porta il pattern derivato dalla source`);
+    assert.ok(yaml.includes(`grep -cP '${bashPattern}'`), `${wf} non porta il pattern derivato dalla source`);
   });
 }

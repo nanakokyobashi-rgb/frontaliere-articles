@@ -77,6 +77,7 @@ export const LABELS = [
   ['backlog', '5319e7', 'Issue-contenitore: classify-issue.mjs la instrada a route none, mai al fixer'],
   ['blocked-workflows-scope', 'd4c5f9', 'Il fix richiede .github/workflows ma il token non ha lo scope: serve una mano'],
   ['reconcile-unclassifiable', 'e99695', 'Reconcile non classificabile: serve triage umano'],
+  ['operations-audit-review', 'e99695', 'Audit L11 in review-only: route registry o prova remediation non eleggibile'],
   ['awaiting-production-proof', 'c5def5', 'Merge atterrato, chiusura sospesa: serve la prova di una run su main prima di richiuderla'],
   // Le quattro che seguono le applica il triage post-merge, e sono rimaste
   // NON dichiarate finche' `post-merge-followup.yml` non ha girato per giorni
