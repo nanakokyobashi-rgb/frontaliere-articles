@@ -445,6 +445,50 @@ const SELF_WORKFLOW = process.env.SCAN_FAILED_RUNS_SELF_WORKFLOW || 'workflow-fa
  * Fail-open per costruzione — un listing illeggibile torna null e il chiamante
  * ricade sul floor, che e' il comportamento storico.
  */
+/**
+ * Legge il listing del watermark e dice SE la finestra e' determinabile.
+ *
+ * Puro ed esportato perche' e' la distinzione che decide cosa non verra' mai
+ * piu' guardato, e va provata da un test invece che asserita in un commento.
+ *
+ * **`''` NON e' `[]`.** Una lista vuota e' un JSON valido che dice «non
+ * esistono scansioni `schedule` riuscite», ed e' un risultato LEGITTIMO: alla
+ * prima scansione del repo non c'e' nessun confine precedente da rispettare,
+ * quindi il floor va bene e la passata resta completa. Un output VUOTO non dice
+ * quello — dice che il listing non ha prodotto JSON affatto, cioe' che la
+ * finestra non e' determinabile.
+ *
+ * Confonderli era il buco: floor arbitrario, la run `schedule` completa,
+ * diventa il nuovo watermark, e le failure non esaminate nel tratto saltato —
+ * `publish-api` incluso, che lascia `dist/api/` vecchia — non vengono ripescate
+ * mai piu'.
+ *
+ * @param {string|null} raw stdout di `gh run list`, o null se `gh` e' fallito
+ * @param {string} selfId `GITHUB_RUN_ID`, escluso per non derivare da se stessi
+ * @returns {{atMs: number|null, incomplete: string|null}}
+ */
+export function parseWatermarkListing(raw, selfId = '') {
+  if (raw === null || raw === undefined) return { atMs: null, incomplete: 'non leggibile' };
+  if (raw === '') return { atMs: null, incomplete: 'vuoto (nessun JSON)' };
+  let rows;
+  try {
+    rows = JSON.parse(raw);
+  } catch {
+    return { atMs: null, incomplete: 'non parsabile' };
+  }
+  if (!Array.isArray(rows)) return { atMs: null, incomplete: 'di forma inattesa' };
+  // `--event`/`--status` sono gia' filtri server-side, ma si ri-verificano qui:
+  // un filtro silenziosamente ignorato dal CLI tornerebbe run qualunque, e
+  // questo watermark decide cosa NON verra' piu' guardato.
+  const times = rows
+    .filter((r) => String(r?.databaseId ?? '') !== selfId)
+    .filter((r) => r?.event === 'schedule' && r?.conclusion === 'success')
+    .map((r) => Date.parse(r?.createdAt || ''))
+    .filter((t) => Number.isFinite(t));
+  // Nessuna scansione precedente: legittimo, non incompleto.
+  return { atMs: times.length > 0 ? Math.max(...times) : null, incomplete: null };
+}
+
 function lastSuccessfulScanAtMs() {
   if (!REPO) return null;
   const raw = gh(
@@ -459,34 +503,14 @@ function lastSuccessfulScanAtMs() {
     // legittimo, perche' non c'e' nessun confine precedente da rispettare.
     null,
   );
-  if (raw === null) {
-    markIncomplete('listing delle scansioni precedenti non leggibile: finestra non determinabile');
-    console.warn('[scan-failed-runs] listing delle scansioni precedenti illeggibile → lookback al floor, passata NON completa.');
-    return null;
+  // Tutti i casi (null, '', non parsabile, forma inattesa, lista vuota) sono
+  // classificati in UN solo posto, che e' anche il posto che i test esercitano.
+  const { atMs, incomplete } = parseWatermarkListing(raw, String(process.env.GITHUB_RUN_ID || ''));
+  if (incomplete) {
+    markIncomplete(`listing delle scansioni precedenti ${incomplete}: finestra non determinabile`);
+    console.error(`::error::[scan-failed-runs] listing delle scansioni precedenti ${incomplete} → passata NON completa.`);
   }
-  if (!raw) return null;
-  let rows;
-  try {
-    rows = JSON.parse(raw);
-  } catch {
-    markIncomplete('listing delle scansioni precedenti non parsabile: finestra non determinabile');
-    console.warn('[scan-failed-runs] listing delle scansioni precedenti illeggibile → lookback al floor, passata NON completa.');
-    return null;
-  }
-  if (!Array.isArray(rows)) {
-    markIncomplete('listing delle scansioni precedenti di forma inattesa');
-    return null;
-  }
-  const selfId = String(process.env.GITHUB_RUN_ID || '');
-  // `--event`/`--status` sono gia' filtri server-side, ma si ri-verificano qui:
-  // un filtro silenziosamente ignorato dal CLI tornerebbe run qualunque, e
-  // questo watermark decide cosa NON verra' piu' guardato.
-  const times = rows
-    .filter((r) => String(r?.databaseId ?? '') !== selfId)
-    .filter((r) => r?.event === 'schedule' && r?.conclusion === 'success')
-    .map((r) => Date.parse(r?.createdAt || ''))
-    .filter((t) => Number.isFinite(t));
-  return times.length > 0 ? Math.max(...times) : null;
+  return atMs;
 }
 
 /**

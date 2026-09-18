@@ -18,7 +18,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { resolveLookbackMin, DEFAULT_RUN_QUERY_HORIZON_MIN, fetchRunsBisected } from '../../scripts/ci/scan-failed-runs.mjs';
+import { resolveLookbackMin, DEFAULT_RUN_QUERY_HORIZON_MIN, fetchRunsBisected, parseWatermarkListing } from '../../scripts/ci/scan-failed-runs.mjs';
 
 const WORKFLOW = readFileSync(
   new URL('../../.github/workflows/workflow-failure-issues.yml', import.meta.url),
@@ -248,8 +248,13 @@ test('i tre 🔴 sono lo stesso difetto: nessun avanzamento su lavoro non svolto
   // Un solo accumulatore e una sola uscita applicano la regola.
   assert.match(src, /const incompleteReasons = \[\];/);
   assert.match(src, /function incompleteExit\(\)/);
-  // (1) lettura dello storico non riuscita ≠ nessuna scansione precedente
-  assert.match(src, /markIncomplete\('listing delle scansioni precedenti non leggibile/);
+  // (1) lettura dello storico non riuscita ≠ nessuna scansione precedente.
+  // Asserito sul COMPORTAMENTO della funzione pura, non sul testo del sorgente:
+  // la prima versione pinnava una stringa e si è rotta al primo refactor, che è
+  // esattamente il difetto dei test che pinnano il sorgente.
+  assert.equal(parseWatermarkListing(null).incomplete, 'non leggibile');
+  assert.equal(parseWatermarkListing('[]').incomplete, null);
+  assert.match(src, /markIncomplete\(`listing delle scansioni precedenti \$\{incomplete\}/);
   // (2) consegna non persistita
   assert.match(src, /if \(res === null \|\| res\?\.persisted === false\) \{/);
   assert.doesNotMatch(src, /if \(res\) opened\+\+;/);
@@ -257,4 +262,40 @@ test('i tre 🔴 sono lo stesso difetto: nessun avanzamento su lavoro non svolto
   assert.match(src, /markIncomplete\('export della finestra risolta al detector timeout fallito'\)/);
   // e la lista vuota non è più un successo incondizionato
   assert.match(src, /return incompleteReasons\.length > 0 \? incompleteExit\(\) : 0;/);
+});
+
+test('«[]» e «» non sono la stessa cosa: solo il secondo rende la passata incompleta', () => {
+  // L'ultimo 🔴: `if (!raw) return null` trattava l'output VUOTO come «non
+  // esistono scansioni riuscite», quindi il codice usava il floor, completava la
+  // run `schedule` e la faceva diventare il nuovo watermark — saltando failure
+  // non esaminate, `publish-api` incluso, che lascia `dist/api/` vecchia.
+
+  // Lista vuota: risultato VALIDO. Prima scansione del repo: nessun confine
+  // precedente da rispettare, floor legittimo, passata completa.
+  assert.deepEqual(parseWatermarkListing('[]'), { atMs: null, incomplete: null });
+
+  // Output vuoto: la finestra NON è determinabile.
+  assert.equal(parseWatermarkListing('').incomplete, 'vuoto (nessun JSON)');
+  assert.equal(parseWatermarkListing('').atMs, null);
+
+  // gh fallito.
+  assert.equal(parseWatermarkListing(null).incomplete, 'non leggibile');
+  // Spazzatura.
+  assert.equal(parseWatermarkListing('not json').incomplete, 'non parsabile');
+  // Forma inattesa (un oggetto invece di un array).
+  assert.equal(parseWatermarkListing('{"a":1}').incomplete, 'di forma inattesa');
+});
+
+test('il watermark ignora se stesso e tutto cio che non e schedule+success', () => {
+  const rows = JSON.stringify([
+    { databaseId: 111, createdAt: '2026-09-18T12:00:00Z', event: 'schedule', conclusion: 'success' },
+    { databaseId: 222, createdAt: '2026-09-18T17:00:00Z', event: 'workflow_dispatch', conclusion: 'success' },
+    { databaseId: 333, createdAt: '2026-09-18T16:00:00Z', event: 'schedule', conclusion: 'failure' },
+    { databaseId: 999, createdAt: '2026-09-18T18:00:00Z', event: 'schedule', conclusion: 'success' },
+  ]);
+  // 999 è la run corrente: derivare da se stessi collasserebbe il lookback a zero.
+  const { atMs, incomplete } = parseWatermarkListing(rows, '999');
+  assert.equal(incomplete, null);
+  assert.equal(new Date(atMs).toISOString(), '2026-09-18T12:00:00.000Z',
+    'vince la più recente fra schedule+success, esclusa la corrente');
 });
