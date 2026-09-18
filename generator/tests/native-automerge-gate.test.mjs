@@ -9,6 +9,7 @@ import {
   reviewHasLgtm,
   reviewHasZeroFindings,
   reviewIsApproved,
+  reviewGateEvidenceDecision,
   isTransientGithubReadError,
   withTransientGithubReadRetry,
   REVIEW_GATE_STEP_NAMES,
@@ -63,22 +64,106 @@ test('accetta solo review approvante e check verde sulla HEAD', () => {
   }).allow, false);
 });
 
-test('non riusa un finding successivo e non accetta check pending o su altra HEAD', () => {
+test('usa l ultimo verdetto sulla HEAD e non accetta check pending o su altra HEAD', () => {
   const finding = review('## Findings (Important: 1, Nit: 0)\n\n🔴 Important: regression.\n\n## LGTM', HEAD, '2026-09-13T12:02:00Z');
   assert.equal(evaluateNativeAutoMerge({
     pr: pr(),
-    reviews: [review(CLEAN_BODY), finding],
+    reviews: [review(CLEAN_BODY, HEAD, '2026-09-13T12:00:00Z'), finding],
     checkRuns: [check()],
   }).allow, false);
+  assert.equal(evaluateNativeAutoMerge({
+    pr: pr(),
+    reviews: [finding, review(CLEAN_BODY, HEAD, '2026-09-13T12:03:00Z')],
+    checkRuns: [check()],
+  }).allow, true);
   assert.equal(requiredVitestDecision([check({ status: 'in_progress', conclusion: null, completed_at: null })], HEAD).allow, false);
   assert.equal(requiredVitestDecision([check({ head_sha: OLD_HEAD })], HEAD).allow, false);
+});
+
+test('un edit di una review vecchia non nasconde un Important successivo', () => {
+  const clean = review(CLEAN_BODY, HEAD, '2026-09-13T12:00:00Z');
+  clean.updated_at = '2026-09-13T12:03:00Z';
+  const finding = review('🔴 Important: regression.', HEAD, '2026-09-13T12:02:00Z');
+  assert.equal(evaluateNativeAutoMerge({
+    pr: pr(),
+    reviews: [clean, finding],
+    checkRuns: [check()],
+  }).allow, false);
+});
+
+test('la prova temporale considera anche l aggiornamento successivo della review', () => {
+  const evidence = {
+    reviewId: '7',
+    check: {
+      id: 100,
+      name: 'tests (node --test)',
+      details_url: 'https://github.com/owner/repo/actions/runs/200/job/300',
+      head_sha: HEAD,
+      status: 'completed',
+      conclusion: 'success',
+      completed_at: '2026-09-13T12:04:00Z',
+    },
+    workflow: {
+      id: 200,
+      path: '.github/workflows/tests.yml',
+      event: 'pull_request',
+      head_sha: HEAD,
+      status: 'completed',
+      conclusion: 'success',
+      run_started_at: '2026-09-13T12:01:00Z',
+      updated_at: '2026-09-13T12:05:00Z',
+    },
+    job: {
+      id: 300,
+      run_id: 200,
+      name: 'tests (node --test)',
+      head_sha: HEAD,
+      status: 'completed',
+      conclusion: 'success',
+      check_run_url: 'https://api.github.com/repos/owner/repo/check-runs/100',
+      started_at: '2026-09-13T12:02:00Z',
+      completed_at: '2026-09-13T12:04:00Z',
+      steps: [{
+        name: 'Require approving Codex review',
+        status: 'completed',
+        conclusion: 'success',
+        started_at: '2026-09-13T12:02:30Z',
+        completed_at: '2026-09-13T12:03:30Z',
+      }],
+    },
+  };
+  const reviewBeforeEdit = {
+    ...review('outside-diff finding', HEAD, '2026-09-13T12:00:00Z'),
+    id: 7,
+    updated_at: '2026-09-13T12:01:30Z',
+  };
+  assert.equal(reviewGateEvidenceDecision({
+    evidence,
+    repo: 'owner/repo',
+    head: HEAD,
+    review: reviewBeforeEdit,
+  }).allow, true);
+
+  const reviewEditedAfterGate = {
+    ...reviewBeforeEdit,
+    updated_at: '2026-09-13T12:03:45Z',
+  };
+  assert.equal(reviewGateEvidenceDecision({
+    evidence,
+    repo: 'owner/repo',
+    head: HEAD,
+    review: reviewEditedAfterGate,
+  }).allow, false);
 });
 
 test('richiede il riepilogo esplicito e vincola l opt-in alla HEAD verificata', () => {
   assert.equal(reviewHasZeroFindings(CLEAN_BODY), true);
   assert.equal(reviewHasLgtm(CLEAN_BODY), true);
   assert.equal(reviewIsApproved(review(CLEAN_BODY)), true);
-  assert.equal(reviewHasZeroFindings('## Findings (Important: 0, Nit: 1)\n\n## LGTM'), false);
+  assert.equal(reviewHasZeroFindings('## Findings (Important: 0, Nit: 1)\n\n`x.mjs:L1`: 🟡 Nit: advisory.\n\n## LGTM'), true);
+  assert.equal(reviewIsApproved(review('## Findings (Important: 0, Nit: 1)\n\n`x.mjs:L1`: 🟡 Nit: advisory.\n\n## LGTM')), true);
+  assert.equal(reviewHasZeroFindings('## Scope\n\n## LGTM'), true);
+  assert.equal(reviewHasZeroFindings('## Findings (Important: 1, Nit: 0)\n\n🔴 Important: not harmless'), false);
   assert.deepEqual(nativeAutoMergeArgs({ repo: 'owner/repo', prNumber: '42', headSha: HEAD }), [
     'pr', 'merge', '42', '--repo', 'owner/repo', '--auto', '--squash', '--delete-branch',
     '--match-head-commit', HEAD,

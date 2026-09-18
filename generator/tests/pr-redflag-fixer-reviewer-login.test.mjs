@@ -83,6 +83,8 @@ test('il redflag fixer ammette Codex solo con contesto PR/review verificato', ()
   assert.match(collect, /if ! reviews_json=/);
   assert.match(collect, /jq -e 'type == "array" and all\(\.\[\]; type == "array"\)'/);
   assert.match(collect, /\.commit_id \/\/ "".*\$head/);
+  assert.match(collect, /has_single_revision/);
+  assert.match(collect, /applies_to_current_input/);
   assert.match(collect, /context_verified=true/);
 
   const failClosed = src.slice(failClosedStart, codexStart);

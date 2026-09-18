@@ -11832,6 +11832,14 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.assenteismo-psichico-ticino-51.title': 'Assenze psichiche in Ticino: 51% finiscono in licenziamento',
     'blog.article.assenteismo-psichico-ticino-51.excerpt': 'In Ticino, il 51% delle assenze per cause psichiche porta allo scioglimento del contratto. La quota di beneficiari AI per motivi psichiatrici è salita al 51%.',
     'blog.article.assenteismo-psichico-ticino-51.imageAlt': 'Ambiente di lavoro sereno in Ticino, focus sulla salute mentale e integrazione',
+    'blog.article.bollettino-frontaliere-2026-09-18.title': 'Bollettino del frontaliere – 18 settembre 2026: franco a 1.0580 €',
+    'blog.article.bollettino-frontaliere-2026-09-18.excerpt': 'I numeri di oggi, 18 settembre 2026, per chi attraversa il confine: le attese ai valichi misurate stamattina, i comuni dove la benzina costa meno, il cambio franco-euro aggiornato e i nuovi annunci di lavoro pubblicati in Svizzera. Dati del nostro monitoraggio, rilevati ogni giorno.',
+    'blog.article.bollettino-frontaliere-2026-09-18.imageAlt': 'I numeri del giorno per i frontalieri – 18 settembre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro',
+    'blog.article.bollettino-frontaliere-2026-09-18.seoDescription': 'Bollettino frontalieri del 18 settembre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
+    'blog.article.bollettino-frontaliere-2026-09-18.ogDescription': 'I numeri del 18 settembre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    'blog.article.fondi-comuni-frontiera-decreto.title': 'Fondi comuni di frontiera: firmato il decreto MEF',
+    'blog.article.fondi-comuni-frontiera-decreto.excerpt': 'Il Ministro Giorgetti ha firmato il decreto per l\'assegnazione dei fondi ai Comuni entro 20 km dal confine con Ticino, Grigioni e Vallese.',
+    'blog.article.fondi-comuni-frontiera-decreto.imageAlt': 'Centro di un comune di frontiera nel Mendrisiotto',
 };
 
 export default blogMetaIt;

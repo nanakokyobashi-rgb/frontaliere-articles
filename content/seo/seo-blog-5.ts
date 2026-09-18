@@ -91567,6 +91567,84 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-bollettino-frontaliere-2026-09-18': {
+    title: 'Bollettino del frontaliere – 18 settembre 2026: franco a 1.0580 €',
+    description: 'Bollettino frontalieri del 18 settembre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
+    keywords: 'bollettino frontaliere, dogana, attesa dogana, code valichi ticino, prezzi benzina confine, cambio franco euro, lavoro svizzera, frontalieri ticino',
+    ogTitle: 'Bollettino del frontaliere – 18 settembre 2026: franco a 1.0580 €',
+    ogDescription: 'I numeri del 18 settembre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    canonicalPath: '/articoli-frontaliere/bollettino-frontaliere-2026-09-18',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bollettino del frontaliere – 18 settembre 2026: franco a 1.0580 €",
+      "description": "Bollettino frontalieri del 18 settembre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bollettino-frontaliere-2026-09-18.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "I numeri del giorno per i frontalieri – 18 settembre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro"
+      },
+      "datePublished": "2026-09-18T09:30:19+00:00",
+      "dateModified": "2026-09-18T09:30:19+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/samuele-valente/#person",
+        "name": "Samuele Valente",
+        "url": "https://frontaliereticino.ch/autori/samuele-valente/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/bollettino-frontaliere-2026-09-18/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-fondi-comuni-frontiera-decreto': {
+    title: 'Fondi comuni di frontiera: firmato il decreto MEF',
+    description: 'Il Ministro Giorgetti ha firmato il decreto per i fondi ai Comuni entro 20 km dal confine con Ticino, Grigioni e Vallese. Scopri i dettagli. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, fondi, comuni, frontiera, firmato',
+    ogTitle: 'Fondi Comuni di frontiera: firmato il decreto MEF',
+    ogDescription: 'Svolta per i territori di confine: il MEF assegna risorse ai Comuni entro 20 km dal confine con Ticino, Grigioni e Vallese per infrastrutture e servizi.',
+    canonicalPath: '/articoli-frontaliere/fondi-comuni-frontiera-decreto',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Fondi comuni di frontiera: firmato il decreto MEF",
+      "description": "Il Ministro Giorgetti ha firmato il decreto per i fondi ai Comuni entro 20 km dal confine con Ticino, Grigioni e Vallese. Scopri i dettagli. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/fondi-comuni-frontiera-decreto.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Centro di un comune di frontiera nel Mendrisiotto"
+      },
+      "datePublished": "2026-09-18T11:45:45+00:00",
+      "dateModified": "2026-09-18T11:45:45+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/fondi-comuni-frontiera-decreto/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

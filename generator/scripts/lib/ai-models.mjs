@@ -736,6 +736,21 @@ function _githubCatalogPublisher(entry) {
 }
 
 /**
+ * Policy-table key for a GitHub Models id.
+ *
+ * `qualifyGitHubModelId` emits publisher/model for the provider request.
+ * MODEL_MAX_OUTPUT_TOKENS and MAX_COMPLETION_TOKENS_MODELS stay keyed by the
+ * bare roster id, so a caller that already passes publisher/model must still
+ * hit those tables. Other providers keep slashful API ids (Groq llama-4,
+ * NVIDIA, …) — never run this helper on them.
+ */
+export function githubModelIdForLookup(model) {
+  const id = String(model || '').trim();
+  if (!id) return id;
+  return id.includes('/') ? id.slice(id.lastIndexOf('/') + 1) : id;
+}
+
+/**
  * Qualify a bare GitHub Models roster id from an observed catalog entry.
  *
  * The roster remains bare so getProvider() keeps returning GitHub. A missing,
@@ -4969,8 +4984,11 @@ export function applyModelsPrefer(chain, prefer) {
 export function getDeclaredRequestTokenLimit(model) {
   const modelKey = _normalizeMemoModelKey(model);
   const apiModelId = getApiModelId(modelKey);
+  const lookupId = getProvider(modelKey) === PROVIDER.GITHUB
+    ? githubModelIdForLookup(apiModelId)
+    : apiModelId;
   const knownLimits = [
-    MODEL_MAX_REQUEST_TOKENS[apiModelId],
+    MODEL_MAX_REQUEST_TOKENS[lookupId],
     _learnedRequestTokenLimits.get(modelKey),
     DEFAULT_REQUEST_TOKENS_BY_PROVIDER[getProvider(modelKey)],
   ].filter((v) => typeof v === 'number' && v > 0);
@@ -5568,9 +5586,10 @@ const HOST_UNREACHABLE_CODES = new Set([
  *
  * So a flap is retryable like ECONNRESET/EPIPE, and the retry loop's backoff
  * is exactly the "try again" the code asks for. What #475 bought is not given
- * back, only made conditional: `callLLM` counts flaps per provider, and at
- * RESOLVER_FLAP_ESCALATION consecutive failed model attempts against the same
- * provider the resolver is no longer hiccuping — the flap is promoted to a
+ * back, only made conditional: `callLLM` counts flaps per `resolverFlapKey`
+ * (host for configurable-endpoint providers, provider otherwise — #818 item 4),
+ * and at RESOLVER_FLAP_ESCALATION consecutive failed model attempts against
+ * the same key the resolver is no longer hiccuping — the flap is promoted to a
  * full unreachable and takes the ban + cooldown path unchanged.
  *
  * «Unchanged» stops at the cooldown DURATION (#803): the run-long ban is for a
@@ -5670,6 +5689,106 @@ function _endpointHost(endpoint) {
   } catch {
     return '';
   }
+}
+
+function _normalizeFlapHost(host) {
+  if (typeof host !== 'string') return '';
+  return host.trim().toLowerCase().replace(/^\[|\]$/g, '');
+}
+
+function _configurableEndpointHost(provider) {
+  if (provider === PROVIDER.LOCAL) return _endpointHost(getLocalLlmUrl());
+  if (provider === PROVIDER.OMNIROUTE) return _endpointHost(getOmniRouteUrl());
+  return '';
+}
+
+/**
+ * Grain of the resolver-flap streak (#818 item 4).
+ *
+ * #770 keyed on `getProvider(model)` because "siblings share the host name".
+ * That is true for a fixed-endpoint provider (every GitHub id talks to
+ * GH_MODELS_BASE). It is not true for a configurable-endpoint provider:
+ * LOCAL_LLM_URL / OMNIROUTE_URL can point at unrelated hostnames behind one
+ * id, so three flaps on three OmniRoute hosts would escalate as one streak.
+ *
+ * Configurable-endpoint providers therefore key on the resolved endpointHost
+ * (from the error, else from the current URL). Everyone else keeps the
+ * provider grain — it is 1:1 with the host.
+ */
+export function resolverFlapKey({ provider, endpointHost, model } = {}) {
+  const p = provider || (model ? getProvider(model) : '');
+  const fromErr = _normalizeFlapHost(endpointHost);
+  if (p && PER_MACHINE_ENDPOINT_ENV[p] !== undefined) {
+    return fromErr || _normalizeFlapHost(_configurableEndpointHost(p)) || p;
+  }
+  return p;
+}
+
+function _flapKeyFor(model, provider, err) {
+  const endpointHost = err && typeof err === 'object'
+    ? (_walkErrorChain(err, (e) => (
+      typeof e.endpointHost === 'string' && e.endpointHost ? e.endpointHost : null
+    )) || '')
+    : '';
+  return resolverFlapKey({ provider, endpointHost, model });
+}
+
+/**
+ * Inner attempts a resolver flap may spend against the remaining run
+ * deadline (#818 item 5).
+ *
+ * A flap re-enters the generic retry loop (`maxRetriesPerModel` + `backoffMs`).
+ * Near an expired `deadlineMs` that loop can empty the cascade on the
+ * wall-clock branch before a healthy provider is reached. Worst case per
+ * attempt is the request timeout (EAI_AGAIN can hang until AbortSignal.timeout)
+ * plus backoff after every non-final attempt.
+ *
+ * Pure: the loop asks, this answers. Non-finite `remainingMs` → full budget
+ * (same behaviour #770 pinned). Always at least one attempt.
+ * `completedAttempts` lets the caller ask for the absolute attempt count that
+ * still fits after the current request has already consumed part of the
+ * deadline budget.
+ *
+ * @returns {number} in [1, maxRetriesPerModel]
+ */
+export function resolverFlapAttemptBudget({
+  maxRetriesPerModel = DEFAULT_OPTS.maxRetriesPerModel,
+  backoffMs = DEFAULT_OPTS.backoffMs,
+  timeoutMs = DEFAULT_OPTS.timeout,
+  remainingMs = Infinity,
+  completedAttempts = 0,
+} = {}) {
+  const maxAttempts = Math.max(1, Math.floor(Number(maxRetriesPerModel)) || 1);
+  const timeout = Math.max(0, Number(timeoutMs) || 0);
+  const backoff = Math.max(0, Number(backoffMs) || 0);
+  const remaining = Number(remainingMs);
+  if (!Number.isFinite(remaining)) return maxAttempts;
+  const completed = Math.min(
+    maxAttempts,
+    Math.max(0, Math.floor(Number(completedAttempts)) || 0),
+  );
+  let allowed = completed;
+  let spent = 0;
+  for (let attempt = completed + 1; attempt <= maxAttempts; attempt++) {
+    const wait = attempt > 1 ? (attempt - 1) * backoff : 0;
+    const cost = timeout + wait;
+    if (spent + cost > Math.max(0, remaining)) break;
+    spent += cost;
+    allowed = attempt;
+  }
+  return Math.max(1, allowed);
+}
+
+function _flapRetryExhausted(e, attempt, opts) {
+  if (!classifyTransientResolver(e)) return false;
+  const remainingMs = opts?.deadlineMs ? opts.deadlineMs - Date.now() : Infinity;
+  return attempt >= resolverFlapAttemptBudget({
+    maxRetriesPerModel: opts.maxRetriesPerModel,
+    backoffMs: opts.backoffMs,
+    timeoutMs: opts.timeout,
+    remainingMs,
+    completedAttempts: attempt,
+  });
 }
 
 function _isLiteralAddress(host) {
@@ -6468,8 +6587,13 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
   if (!apiKey) throw new Error(`${providerName} API key not set`);
   const modelForTracking = trackAs || apiModel;
   // GitHub emits an observed publisher/model id, while all model policy tables
-  // remain keyed by the bare roster id. Other callers leave this at apiModel.
-  const modelPolicyId = modelForLookup || apiModel;
+  // remain keyed by the bare roster id. Strip here too: a direct caller that
+  // already passed publisher/model would otherwise miss the tables even when
+  // `_callGitHub` forgets to pass a bare `modelForLookup`.
+  const rawPolicyId = modelForLookup || apiModel;
+  const modelPolicyId = _normalizeProviderKey(providerName) === _normalizeProviderKey(PROVIDER.GITHUB)
+    ? githubModelIdForLookup(rawPolicyId)
+    : rawPolicyId;
   const displayModel = providerName === 'GitHub' ? apiModel : `${providerName}/${apiModel}`;
 
   // Cap maxTokens to model-specific limits (e.g. Cohere max 8192)
@@ -6723,6 +6847,10 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
       // `attempt * backoffMs`. Tagged so the callLLM() cascade can apply its
       // circuit breaker (see classifyHostUnreachable, nanako#475).
       if (unreachableCode) throw e;
+      // Resolver flap: retryable, but not past the remaining run deadline
+      // (#818 item 5). The helper is the cap; without a deadline the budget
+      // is maxRetriesPerModel, same as #770.
+      if (_flapRetryExhausted(e, attempt, opts)) throw e;
       // Otherwise retry
       _stats.retries++;
       const waitMs = attempt * opts.backoffMs;
@@ -6820,7 +6948,7 @@ async function _callGitHub(model, messages, opts) {
         // separately (idx / _ghExhaustedPats), not encoded in the name.
         providerName: 'GitHub',
         trackAs: model,
-        modelForLookup: model,
+        modelForLookup: githubModelIdForLookup(model),
         // Until the LAST PAT, a daily-limit on this account must NOT mark the
         // model/provider globally exhausted — the model is still usable on the
         // next account's separate quota. The error still propagates so we rotate.
@@ -8145,6 +8273,7 @@ async function _callGeminiRaw(model, messages, opts) {
       // antipattern is the loop's, not the host's: a `fetch failed` here fell
       // through to the generic retry exactly the same way.
       if (unreachableCode) throw e;
+      if (_flapRetryExhausted(e, attempt, opts)) throw e;
       _stats.retries++;
       const waitMs = attempt * opts.backoffMs;
       console.warn(`⚠️  [${model}] Error retry ${attempt}/${opts.maxRetriesPerModel}: ${e.message?.slice(0, 150)}`);
@@ -8637,7 +8766,9 @@ export async function callLLM(messages, opts = {}) {
     // Skip models whose max output token limit is below the requested maxTokens.
     // This avoids wasting API calls that will fail with "max tokens must be less than" errors.
     // Also was silent pre-flight — see cooldown comment above.
-    const apiModelId = getApiModelId(model);
+    const apiModelId = getProvider(model) === PROVIDER.GITHUB
+      ? githubModelIdForLookup(getApiModelId(model))
+      : getApiModelId(model);
     const modelLimit = MODEL_MAX_OUTPUT_TOKENS[apiModelId];
     if (modelLimit && o.maxTokens > modelLimit) {
       _logPreflightSkipOnce(model, 'maxOutput', `model max output ${modelLimit} < requested maxTokens ${o.maxTokens}`);
@@ -8734,7 +8865,7 @@ export async function callLLM(messages, opts = {}) {
       recordModelSuccess(servedModel, { recordScore: _shouldRecordScore(o) });
       _consecutive429.delete(model); // FRO-325: reset 429 counter on success
       _clampedTimeouts.delete(model); // an answer clears the adaptive-ceiling doubt
-      _recordResolverFlapReset(o._resolverContext, provider, 'success'); // the name resolved: the flap streak is over (#770)
+      _recordResolverFlapReset(o._resolverContext, _flapKeyFor(model, provider, null), 'success'); // the name resolved: the flap streak is over (#770)
       _recordLastResortOutcome(model, 'served');
       if (provider === PROVIDER.CLAUDE_CLI) _claudeCliConsecutiveTimeouts = 0;
       if (provider === PROVIDER.OMNIROUTE) _omniRouteConsecutiveFailures = 0;
@@ -8816,19 +8947,22 @@ export async function callLLM(messages, opts = {}) {
       }
       // Resolver flap (#770): transient by definition, so it does NOT ban the
       // model nor freeze the provider — until it stops looking transient. The
-      // counter is per PROVIDER and not per model because that is the scope of
-      // the fault a resolver failure describes: the name of the host, which
-      // every sibling id shares. Only failed attempts count; a success on the
-      // same provider clears it (see the reset next to _consecutive429).
+      // counter is per HOST for configurable-endpoint providers (#818 item 4:
+      // OmniRoute/local URLs do not share a name) and per provider otherwise,
+      // because that is the scope of the fault a resolver failure describes:
+      // the name of the host, which every sibling id of a fixed-endpoint
+      // provider shares. Only failed attempts count; a success on the same
+      // key clears it (see the reset next to _consecutive429).
       //
-      // «Consecutive» e' letterale (#818): un fallimento di ALTRA classe sullo
-      // stesso provider chiude la striscia esattamente come la chiude un
+      // «Consecutive» e' letterale (#818): un fallimento di ALTRA classe sulla
+      // stessa chiave chiude la striscia esattamente come la chiude un
       // successo — gemello del reset di `_consecutive429` qui sotto. Senza
       // questa riga tre flap sparsi su tutta la run, con 429 e timeout in
       // mezzo, escalavano come tre di fila: la soglia misurava «tre flap
       // qualsiasi nella run» invece di «il resolver e' rotto adesso».
       const outerPersistent = e.nonRetryable === true || hasPersistentExhaustionCause(msg.slice(0, 200));
       const flapCode = e.hostUnreachable || outerPersistent ? null : classifyTransientResolver(e);
+      const flapKey = _flapKeyFor(model, provider, e);
       if (!flapCode) {
         // Il comportamento non cambia — la striscia si chiude come prima —, ma
         // ora si sa CON CHE COSA: `_recordResolverFlapReset` conta la classe
@@ -8837,10 +8971,10 @@ export async function callLLM(messages, opts = {}) {
         // il reset alle sole classi che provano che il resolver funziona: sotto
         // una certa frequenza di reset `silent` l'item e' teorico, sopra e' il
         // difetto che impedisce all'escalation di scattare.
-        _recordResolverFlapReset(o._resolverContext, provider, classifyResolverResetEvidence(e, provider));
+        _recordResolverFlapReset(o._resolverContext, flapKey, classifyResolverResetEvidence(e, provider));
       } else {
-        const flaps = (o._resolverContext.flaps.get(provider) || 0) + 1;
-        o._resolverContext.flaps.set(provider, flaps);
+        const flaps = (o._resolverContext.flaps.get(flapKey) || 0) + 1;
+        o._resolverContext.flaps.set(flapKey, flaps);
         // #813 — l'escalation NON si applica ai provider di ultima risorsa.
         // Il flap e' una prova che il codice stesso definisce transitoria, e
         // promuoverla qui manda `local/`/`omniroute/` — cioe' l'ultima riga
@@ -8868,8 +9002,8 @@ export async function callLLM(messages, opts = {}) {
           // dall'escalation e' un evento che #848 item 3 deve contare come gli
           // altri. Cancellandola qui spariva da entrambe le mappe e la run
           // stampava «none this run» a fondo scala (review di #945).
-          _recordResolverFlapReset(o._resolverContext, provider, 'escalated');
-          console.warn(`🚫 [${model}] ${flaps} consecutive resolver failures (${flapCode}) on ${provider} — no longer treating it as a hiccup`);
+          _recordResolverFlapReset(o._resolverContext, flapKey, 'escalated');
+          console.warn(`🚫 [${model}] ${flaps} consecutive resolver failures (${flapCode}) on ${flapKey} — no longer treating it as a hiccup`);
           // Stesso vocabolario della riga di skip dei fratelli, e per la
           // stessa ragione (vedi `_providerCooldownReason`): un flap escalato
           // mette la catena fuori gioco, e votare «transitorio» qui e'
