@@ -134,10 +134,65 @@ test('lo YAML non passa piu una finestra fissa allo scanner', () => {
 test('il gemello scan-job-timeouts riusa la finestra risolta, non la ricalcola', () => {
   // AGENTS.md §6: un valore condiviso ha UNA sorgente. I due scanner girano
   // nello stesso job e avevano lo stesso 40 fisso, quindi lo stesso buco.
+  // La finestra si risolve nella SHELL: `env.SCAN_RESOLVED_LOOKBACK_MIN` non è
+  // alimentato in modo affidabile da una scrittura in GITHUB_ENV di un passo
+  // precedente — stessa trappola già documentata nel workflow per il PAT — e il
+  // silenzio riporterebbe il detector a 40 riaprendo il buco (review #1568).
+  assert.doesNotMatch(
+    WORKFLOW,
+    /TIMEOUT_SCAN_LOOKBACK_MINUTES: \$\{\{[^}]*env\.SCAN_RESOLVED_LOOKBACK_MIN/,
+    'la finestra non va interpolata dal context env.*',
+  );
   assert.match(
     WORKFLOW,
-    /TIMEOUT_SCAN_LOOKBACK_MINUTES: \$\{\{ github\.event\.inputs\.lookback_min \|\| env\.SCAN_RESOLVED_LOOKBACK_MIN \|\| '40' \}\}/,
+    /export TIMEOUT_SCAN_LOOKBACK_MINUTES="\$\{TIMEOUT_SCAN_LOOKBACK_INPUT:-\$\{SCAN_RESOLVED_LOOKBACK_MIN:-40\}\}"/,
+    'precedenza: input manuale → finestra risolta → floor, risolta in shell',
   );
+});
+
+test('l export della finestra e opt-in, per non inquinare altri job', () => {
+  // Misurato sulla run 35378019611: `tests.yml` esegue un test che lancia questo
+  // CLI, e `SCAN_RESOLVED_LOOKBACK_MIN=40` è finito nell'ambiente dei suoi step.
+  // In CI GITHUB_ENV è popolata in OGNI job, quindi "scrivo se esiste" non è una
+  // condizione sufficiente: solo il workflow che possiede il gemello lo chiede.
+  const src = readFileSync(new URL('../../scripts/ci/scan-failed-runs.mjs', import.meta.url), 'utf8');
+  assert.match(src, /process\.env\.SCAN_EXPORT_RESOLVED_LOOKBACK === '1' && process\.env\.GITHUB_ENV/);
+  assert.match(WORKFLOW, /SCAN_EXPORT_RESOLVED_LOOKBACK: '1'/);
+});
+
+test('il watermark conta solo le scansioni da schedule, non i dry-run', () => {
+  // Una run `workflow_dispatch --dry-run` esce SUCCESS senza consegnare niente:
+  // usarla come watermark fa avanzare la finestra oltre fallimenti mai
+  // segnalati (review #1568). `schedule` è l'unico canale di consegna.
+  const src = readFileSync(new URL('../../scripts/ci/scan-failed-runs.mjs', import.meta.url), 'utf8');
+  assert.match(src, /'--status', 'success', '--event', 'schedule'/);
+  assert.match(
+    src,
+    /\.filter\(\(r\) => r\?\.event === 'schedule' && r\?\.conclusion === 'success'\)/,
+    'il filtro server-side va ri-verificato in locale: decide cosa non verrà più guardato',
+  );
+});
+
+test('una passata troncata dal cap esce non-zero, per non far avanzare la finestra', () => {
+  // Il cap che tronca in silenzio e poi esce 0 e' una perdita definitiva: il
+  // watermark avanzerebbe oltre gli scartati. Uscire non-zero è il meccanismo
+  // che tiene la finestra indietro finché la consegna non è completa.
+  const src = readFileSync(new URL('../../scripts/ci/scan-failed-runs.mjs', import.meta.url), 'utf8');
+  assert.match(src, /if \(truncated\.length > 0\) \{/);
+  assert.match(src, /passata INCOMPLETA/);
+  assert.doesNotMatch(src, /NON recuperabili in una passata successiva/);
+  assert.match(src, /la prossima scansione li rivede/);
+});
+
+test('un errore interno non esce piu 0: con un watermark sarebbe una perdita', () => {
+  // PROCEED-SAFE usciva 0 perché «uno scanner rotto non deve far fallire il
+  // workflow che lo ospita». Da quando la finestra si deriva dall'ultima
+  // scansione riuscita, uscire 0 dopo un errore fa avanzare il watermark oltre
+  // fallimenti non raccolti. L'asserzione di prosa va cambiata col diff (§8).
+  const src = readFileSync(new URL('../../scripts/ci/scan-failed-runs.mjs', import.meta.url), 'utf8');
+  const tail = src.slice(src.indexOf('main().then('));
+  assert.match(tail, /process\.exit\(1\)/, "l'errore deve risultare rotto");
+  assert.doesNotMatch(tail, /PROCEED-SAFE: uno scanner rotto non deve/);
 });
 
 test('il rilevamento di timeout non viene saltato se lo scanner ordinario fallisce', () => {
@@ -149,10 +204,13 @@ test('il rilevamento di timeout non viene saltato se lo scanner ordinario fallis
 });
 
 test('il cap non promette piu un recupero che non avviene', () => {
-  // Il vecchio messaggio diceva "Verranno ripresi alla prossima scansione".
-  // È falso: la passata capped RIESCE, quindi la finestra successiva parte da
-  // qui e gli scartati ne restano fuori per sempre.
+  // Il messaggio originale diceva "Verranno ripresi alla prossima scansione",
+  // e con una finestra derivata era falso: la passata capped RIESCE, quindi la
+  // finestra successiva parte da qui e gli scartati ne restano fuori.
+  // Ora la promessa è di nuovo VERA, ma perché il comportamento è cambiato —
+  // la passata troncata esce non-zero, quindi non diventa il watermark. Il
+  // messaggio deve dire quel meccanismo, non ammettere la perdita.
   const src = readFileSync(new URL('../../scripts/ci/scan-failed-runs.mjs', import.meta.url), 'utf8');
   assert.doesNotMatch(src, /Verranno ripresi alla prossima scansione/);
-  assert.match(src, /NON recuperabili in una passata successiva/);
+  assert.match(src, /esce non-zero per NON far avanzare il watermark/);
 });

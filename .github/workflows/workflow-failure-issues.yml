@@ -106,6 +106,10 @@ jobs:
           # ha esaurito il suo compito ed è stato rimosso. La variabile resta
           # supportata dallo scanner per un eventuale caso futuro.
           IGNORE_WORKFLOWS: ''
+          # Chiede l'export della finestra risolta in GITHUB_ENV, per il passo
+          # gemello qui sotto. È opt-in perché questo CLI viene lanciato anche
+          # da un test in `tests.yml`, dove non c'è nessun gemello da alimentare.
+          SCAN_EXPORT_RESOLVED_LOOKBACK: '1'
         run: |
           runtime_pat="${GITHUB_PAT_NANAKO:-}"
           export GH_TOKEN="${runtime_pat:-$GH_TOKEN}"
@@ -135,16 +139,25 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
-          # Finestra RISOLTA dallo scanner precedente (vedi `resolveLookbackMin`):
-          # un solo posto la calcola. Il fallback a 40 copre il caso in cui il
-          # passo sopra sia morto prima di esportarla.
-          TIMEOUT_SCAN_LOOKBACK_MINUTES: ${{ github.event.inputs.lookback_min || env.SCAN_RESOLVED_LOOKBACK_MIN || '40' }}
+          # NON si interpola `env.SCAN_RESOLVED_LOOKBACK_MIN` qui: una variabile
+          # scritta in `GITHUB_ENV` da un passo precedente non alimenta in modo
+          # affidabile il context `env.*` del passo successivo — è la stessa
+          # trappola già documentata sopra per il PAT ("interpolarlo da `env.*`
+          # può restare vuoto e forzare il fallback"), e qui il silenzio
+          # riporterebbe il detector a 40 minuti riaprendo il buco che questa
+          # modifica chiude. Si risolve nella shell, dove la variabile ESISTE.
+          TIMEOUT_SCAN_LOOKBACK_INPUT: ${{ github.event.inputs.lookback_min }}
           # Stesso settle del default dello scanner: evita di scambiare la
           # finalizzazione dell'API Actions per uno step morto sull'host.
           HOST_KILL_SETTLE_MS: '120000'
         run: |
           runtime_pat="${GITHUB_PAT_NANAKO:-}"
           export GH_TOKEN="${runtime_pat:-$GH_TOKEN}"
+          # Precedenza: input manuale → finestra risolta dallo scanner → floor.
+          # `SCAN_RESOLVED_LOOKBACK_MIN` arriva da GITHUB_ENV e come variabile di
+          # shell c'è davvero, a differenza del context `env.*`.
+          export TIMEOUT_SCAN_LOOKBACK_MINUTES="${TIMEOUT_SCAN_LOOKBACK_INPUT:-${SCAN_RESOLVED_LOOKBACK_MIN:-40}}"
+          echo "[timeout-scan] finestra = ${TIMEOUT_SCAN_LOOKBACK_MINUTES} min"
           if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
             node scripts/ci/scan-job-timeouts.mjs --dry-run
           else

@@ -102,8 +102,9 @@ const LOOKBACK_FLOOR_MIN = 40;
  * un throttling che peggiora quando il repo si carica. La finestra si deriva
  * dallo stato che GitHub gia' tiene: l'istante dell'ULTIMA scansione riuscita.
  * Cosi' il lookback si allarga da solo quando lo scheduler salta un giro e
- * torna a ~30 minuti quando il cron viene rispettato, senza watermark da
- * mantenere e senza assumere niente sulla cadenza.
+ * torna al floor di 40 minuti quando il cron viene rispettato — 30 trascorsi
+ * piu' 5 di sovrapposizione fanno 35, che il floor alza a 40 — senza watermark
+ * da mantenere e senza assumere niente sulla cadenza.
  *
  * `--lookback-min` esplicito resta un override pieno (serve al dry-run e al
  * dispatch manuale): un valore passato a mano vince sempre sulla derivazione.
@@ -424,18 +425,32 @@ const RUN_QUERY_HORIZON_MIN = parseHorizonMin(process.env.SCAN_FAILED_RUNS_HORIZ
 const SELF_WORKFLOW = process.env.SCAN_FAILED_RUNS_SELF_WORKFLOW || 'workflow-failure-issues.yml';
 
 /**
- * Istante dell'ultima scansione RIUSCITA, o null se non leggibile.
+ * Il watermark conta SOLO le scansioni da `schedule`, e solo quelle riuscite.
  *
- * Si escludono la run corrente (`GITHUB_RUN_ID`) e qualunque run piu' recente
- * di essa: una passata non deve mai derivare la finestra da se stessa, o il
- * lookback collasserebbe a zero. Fail-open per costruzione — un listing fallito
- * torna null e il chiamante ricade sul floor, che e' il comportamento storico.
+ * `--status success` da solo non basta, ed e' il difetto trovato dalla review
+ * sulla PR #1568: una run `workflow_dispatch --dry-run` esce SUCCESS senza aver
+ * consegnato nulla, e usarla come watermark fa avanzare la finestra oltre
+ * fallimenti mai segnalati. Lo stesso vale per un dispatch manuale con un
+ * `--lookback-min` stretto, che copre una finestra diversa da quella pianificata.
+ *
+ * `schedule` e' l'UNICO canale di consegna: e' la definizione operativa di
+ * "passata vera". Un dispatch resta uno strumento di ispezione e non muove
+ * niente. Insieme all'uscita non-zero su passata incompleta (vedi `main`), da'
+ * l'invariante che serve: **la finestra avanza solo dopo una passata che ha
+ * consegnato tutto.**
+ *
+ * Si esclude anche la run corrente (`GITHUB_RUN_ID`): una passata non deve mai
+ * derivare la finestra da se stessa, o il lookback collasserebbe a zero.
+ *
+ * Fail-open per costruzione — un listing illeggibile torna null e il chiamante
+ * ricade sul floor, che e' il comportamento storico.
  */
 function lastSuccessfulScanAtMs() {
   if (!REPO) return null;
   const raw = gh(
     ['run', 'list', '--repo', REPO, '--workflow', SELF_WORKFLOW,
-      '--status', 'success', '--limit', '10', '--json', 'databaseId,createdAt'],
+      '--status', 'success', '--event', 'schedule',
+      '--limit', '10', '--json', 'databaseId,createdAt,event,conclusion'],
     '',
   );
   if (!raw) return null;
@@ -448,8 +463,12 @@ function lastSuccessfulScanAtMs() {
   }
   if (!Array.isArray(rows)) return null;
   const selfId = String(process.env.GITHUB_RUN_ID || '');
+  // `--event`/`--status` sono gia' filtri server-side, ma si ri-verificano qui:
+  // un filtro silenziosamente ignorato dal CLI tornerebbe run qualunque, e
+  // questo watermark decide cosa NON verra' piu' guardato.
   const times = rows
     .filter((r) => String(r?.databaseId ?? '') !== selfId)
+    .filter((r) => r?.event === 'schedule' && r?.conclusion === 'success')
     .map((r) => Date.parse(r?.createdAt || ''))
     .filter((t) => Number.isFinite(t));
   return times.length > 0 ? Math.max(...times) : null;
@@ -480,7 +499,14 @@ function lookbackMin() {
   // AGENTS.md §6 vieta — la finestra risolta qui viene esportata e il passo
   // successivo la riusa. Un solo posto la calcola; il gemello e' pinnato da
   // `generator/tests/scan-failed-runs-lookback.test.mjs`.
-  if (process.env.GITHUB_ENV) {
+  //
+  // L'export e' OPT-IN esplicito e non "scrivo se GITHUB_ENV esiste": in CI
+  // quella variabile e' popolata in OGNI job, e `tests.yml` esegue un test che
+  // lancia questo CLI come sottoprocesso — misurato sulla run 35378019611, dove
+  // `SCAN_RESOLVED_LOOKBACK_MIN=40` e' finito nell'ambiente degli step di
+  // `tests.yml`, che non ha nessun gemello da alimentare. Solo il workflow che
+  // possiede il passo successivo chiede l'export.
+  if (process.env.SCAN_EXPORT_RESOLVED_LOOKBACK === '1' && process.env.GITHUB_ENV) {
     try {
       appendFileSync(process.env.GITHUB_ENV, `SCAN_RESOLVED_LOOKBACK_MIN=${lookbackCache}\n`);
     } catch (e) {
@@ -1165,16 +1191,19 @@ async function main() {
   console.log(`[scan-failed-runs] ${runs.length} run fallite → ${candidatesByWorkflow.size} workflow distinti${DRY_RUN ? ' (dry-run)' : ''}.`);
 
   let opened = 0;
+  let truncated = [];
   for (const [name, selected] of byWorkflow) {
     const run = selected.run;
     if (opened >= MAX_ISSUES) {
+      truncated = [...byWorkflow.keys()].slice(opened);
       // Un cap che tronca in silenzio si legge come "tutto coperto". Lo diciamo.
-      // NON si promette piu' che "verranno ripresi alla prossima scansione":
-      // era falso. La prossima passata deriva la finestra dall'ULTIMA scansione
-      // riuscita — e questa, anche se troncata dal cap, riesce — quindi gli
-      // scartati escono dalla finestra e non tornano. Il cap e' una perdita
-      // definitiva, e va detto cosi'.
-      console.warn(`::warning::[scan-failed-runs] Cap di ${MAX_ISSUES} issue raggiunto — ${byWorkflow.size - opened} workflow falliti NON segnalati e NON recuperabili in una passata successiva: ${[...byWorkflow.keys()].slice(opened).join(', ')}. Alzare --max-issues se ricorre.`);
+      // Il cap tronca, e la passata NON puo' quindi contare come watermark:
+      // uscendo 0 la finestra avanzerebbe oltre i workflow scartati e nessuno
+      // li guarderebbe piu'. Si esce non-zero (vedi in fondo), cosi' questa run
+      // non e' `success`, il watermark resta indietro e la passata successiva
+      // li rivede. E' il difetto segnalato dalla review sulla PR #1568: il
+      // messaggio precedente ammetteva la perdita invece di impedirla.
+      console.warn(`::warning::[scan-failed-runs] Cap di ${MAX_ISSUES} issue raggiunto — ${byWorkflow.size - opened} workflow falliti NON segnalati in questa passata: ${truncated.join(', ')}. La run esce non-zero per NON far avanzare il watermark: la prossima scansione li rivede. Alzare --max-issues se ricorre.`);
       break;
     }
 
@@ -1278,6 +1307,18 @@ async function main() {
   }
 
   console.log(`[scan-failed-runs] Fatto — ${opened} segnalazione/i emesse.`);
+  // Una passata TRONCATA non deve diventare il watermark: `lastSuccessfulScanAtMs`
+  // accetta solo run `schedule` con `conclusion: success`, quindi uscire 1 qui e'
+  // esattamente il meccanismo che tiene la finestra indietro fino a quando la
+  // consegna e' completa. Le issue gia' aperte in questa passata restano aperte:
+  // il lavoro fatto non si perde, si perde solo l'avanzamento del confine.
+  if (truncated.length > 0) {
+    console.error(
+      `[scan-failed-runs] passata INCOMPLETA: ${truncated.length} workflow non segnalati `
+        + '→ uscita non-zero per non far avanzare la finestra.',
+    );
+    return 1;
+  }
   return 0;
 }
 
@@ -1287,11 +1328,21 @@ if (process.argv[1] && process.argv[1].endsWith('scan-failed-runs.mjs')) {
   main().then(
     (c) => process.exit(c),
     (e) => {
-      // PROCEED-SAFE: uno scanner rotto non deve far fallire il workflow che lo
-      // ospita, altrimenti il rilevatore di fallimenti diventa esso stesso un
-      // fallimento ricorrente da segnalare.
-      console.error(`[scan-failed-runs] errore non fatale: ${e && e.stack ? e.stack : e}`);
-      process.exit(0);
+      // Qui c'era PROCEED-SAFE: si usciva 0 perche' «uno scanner rotto non deve
+      // far fallire il workflow che lo ospita». Quella ragione non regge piu', e
+      // va cambiata insieme al diff che l'ha invalidata (AGENTS.md §8): da
+      // quando la finestra si deriva dall'ultima scansione RIUSCITA, uscire 0
+      // dopo un errore fa avanzare il watermark oltre fallimenti che non sono
+      // stati raccolti — cioe' il costo dell'uscita morbida non e' piu' un
+      // workflow verde, e' una perdita silenziosa. E' il difetto segnalato
+      // dalla review sulla PR #1568.
+      //
+      // Un rilevatore di fallimenti che si rompe DEVE risultare rotto: il rosso
+      // apre una issue su se stesso (una sola, la dedup collassa le ricorrenze)
+      // e soprattutto tiene la finestra indietro, cosi' la passata successiva
+      // ri-guarda tutto quello che questa non ha consegnato.
+      console.error(`[scan-failed-runs] errore: ${e && e.stack ? e.stack : e}`);
+      process.exit(1);
     },
   );
 }

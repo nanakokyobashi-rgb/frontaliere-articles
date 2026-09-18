@@ -61,8 +61,11 @@ test('il monitor centrale ha permessi check e inoltra dry-run/lookback senza cam
   // La finestra non è più la costante 40: si deriva dall'ultima scansione
   // riuscita (`resolveLookbackMin`) perché il cron non è onorato. L'invariante
   // pinnata resta la stessa — il monitor INOLTRA la finestra invece di averne
-  // una propria — cambia solo da dove arriva il valore.
-  assert.match(step, /TIMEOUT_SCAN_LOOKBACK_MINUTES: \$\{\{ github\.event\.inputs\.lookback_min \|\| env\.SCAN_RESOLVED_LOOKBACK_MIN \|\| '40' \}\}/);
+  // una propria — cambia solo da dove arriva il valore, e si risolve nella
+  // SHELL: una scrittura in GITHUB_ENV non alimenta in modo affidabile il
+  // context `env.*` del passo successivo (stessa trappola del PAT, review #1568).
+  assert.match(step, /TIMEOUT_SCAN_LOOKBACK_INPUT: \$\{\{ github\.event\.inputs\.lookback_min \}\}/);
+  assert.match(step, /export TIMEOUT_SCAN_LOOKBACK_MINUTES="\$\{TIMEOUT_SCAN_LOOKBACK_INPUT:-\$\{SCAN_RESOLVED_LOOKBACK_MIN:-40\}\}"/);
   assert.match(step, /HOST_KILL_SETTLE_MS: '120000'/);
   assert.match(step, /if \[ "\$\{\{ github\.event\.inputs\.dry_run \}\}" = "true" \]; then/);
 });
