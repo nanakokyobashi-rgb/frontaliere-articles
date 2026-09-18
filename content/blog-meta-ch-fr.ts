@@ -6527,6 +6527,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.sicurezza-impianti-solari-rete.title': 'Les failles de sécurité dans les systèmes solaires menacent le réseau',
     'blog.article.sicurezza-impianti-solari-rete.excerpt': 'L\'Institut national de tests de cybersécurité a détecté plus de cinquante vulnérabilités dans onze produits photovoltaïques largement répandus.',
     'blog.article.sicurezza-impianti-solari-rete.imageAlt': 'Installations photovoltaïques sur des toits suisses',
+    'blog.article.smi-galderma-sandoz-2026.title': 'SMI : Galderma et Sandoz entrent, Kühne+Nagel et Swisscom sortent',
+    'blog.article.smi-galderma-sandoz-2026.excerpt': 'Grande nouveauté pour l\'indice boursier suisse SMI établi par SIX : Galderma et Sandoz entrent, tandis que Kühne+Nagel et Swisscom sortent. Le secteur de la santé grimpe à 40 %.',
+    'blog.article.smi-galderma-sandoz-2026.imageAlt': 'Mise à jour de l\'indice boursier suisse SMI avec Galderma et Sandoz',
 };
 
 export default blogMetaChFr;

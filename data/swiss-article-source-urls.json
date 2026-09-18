@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/3998052": {
-    "articleId": "eccedenza-federale-2026-800-milioni",
-    "ts": "2026-08-19T10:46:57.855Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/politica/1944770/difesa-federale-consiglio-chiede-tempi": {
     "articleId": "difesa-970-milioni-consiglio-federale",
     "ts": "2026-08-19T11:04:28.991Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/falle-sicurezza-impianti-solari-minacciano-rete-elettrica-elvetica/92076053": {
     "articleId": "sicurezza-impianti-solari-rete",
     "ts": "2026-09-18T00:24:00.803Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/smi-riceve-un%27iniezione-farmaceutica%2c-entrano-galderma-e-sandoz/92077634": {
+    "articleId": "smi-galderma-sandoz-2026",
+    "ts": "2026-09-18T01:31:17.756Z",
     "keyForm": 2
   }
 }

@@ -2198,6 +2198,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'atted-digitale-ticino-cyber-security': { it: 'atted-digitale-ticino-cyber-security', en: 'atted-digital-ticino-cyber-security', de: 'atted-digitales-tessin-cyber-sicherheit', fr: 'atted-numerique-ticino-cybersecurite' },
  'barometro-previdenza-raiffeisen-zhaw': { it: 'barometro-previdenza-raiffeisen-zhaw', en: 'raiffeisen-zhaw-pension-barometer', de: 'raiffeisen-zhaw-vorsorge-barometer', fr: 'barometre-prevoyance-raiffeisen-zhaw' },
  'sicurezza-impianti-solari-rete': { it: 'sicurezza-impianti-solari-rete', en: 'solar-plants-security-grid', de: 'sicherheit-solaranlagen-netz', fr: 'securite-installations-solaires-reseau' },
+ 'smi-galderma-sandoz-2026': { it: 'smi-galderma-sandoz-2026', en: 'smi-galderma-and-sandoz-enter-kuhne-nagel-and-swisscom-exit', de: 'smi-galderma-und-sandoz-betreten-kuhne-nagel-und-swisscom-verlassen', fr: 'smi-galderma-et-sandoz-entrent-kuhne-nagel-et-swisscom-sortent' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
