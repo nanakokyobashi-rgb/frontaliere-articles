@@ -500,7 +500,7 @@ test('guard 1 — una LGTM su un commit precedente NON è uno stallo (carry-forw
   assert.match(body, /nessuna review li ha coperti/, `Atteso il fallback alla classe A.\n${body}`);
 });
 
-test('guard 1b — marker body precedente sulla HEAD resta una review applicabile', opts, () => {
+test('guard 1b — marker body precedente sulla HEAD non basta per una review applicabile', opts, () => {
   const body = only(
     runScan({
       prs: openPr(),
@@ -513,8 +513,8 @@ test('guard 1b — marker body precedente sulla HEAD resta una review applicabil
       fixerRuns: [],
     }),
   );
-  assert.doesNotMatch(body, /nessuna review li ha coperti/, `Un marker precedente sulla HEAD non è "nessuna review".\n${body}`);
-  assert.match(body, /class=E|class=B/, `Il finding sulla HEAD deve restare visibile.\n${body}`);
+  assert.match(body, /nessuna review li ha coperti/, `Un marker precedente sulla HEAD non autentica il body corrente.\n${body}`);
+  assert.match(body, /class=A/, `Il finding con marker precedente deve restare fuori dal verdetto corrente.\n${body}`);
 });
 
 test('guard 2 — una PR mai revisionata resta in classe A', opts, () => {
