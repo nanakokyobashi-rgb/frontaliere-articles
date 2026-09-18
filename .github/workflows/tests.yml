@@ -355,11 +355,13 @@ jobs:
 
       # Re-review guard: una review terminale sulla STESSA HEAD e' gia' il
       # giudizio di questo contributo, anche se e' negativa o non contiene
-      # `## LGTM`, salvo un body edit che introduce una nuova review revision.
-      # Senza questo controllo ogni rerun/retry dello stesso rosso poteva
-      # invocare Codex di nuovo. Su una HEAD nuova si conserva invece il
-      # percorso incrementale: si guarda il delta dal contributo della review
-      # piu' recente e si fa carry-forward solo quando il codice PR e' invariato.
+      # `## LGTM`, anche quando un body edit introduce una nuova review
+      # revision: il gate porta avanti esplicitamente il verdetto sulla stessa
+      # HEAD dopo aver rivalidato il contesto corrente. Senza questo controllo
+      # ogni rerun/retry dello stesso rosso poteva invocare Codex di nuovo. Su
+      # una HEAD nuova si conserva invece il percorso incrementale: si guarda
+      # il delta dal contributo della review piu' recente e si fa carry-forward
+      # solo quando il codice PR e' invariato.
       # Una risposta API illeggibile è un errore: senza prova del ledger non si
       # può spendere un altro turno Codex in sicurezza.
       - name: Re-review guard (skip Codex when no code changed since last LGTM)
@@ -416,37 +418,51 @@ jobs:
             echo "contribution_fingerprint=$claimFingerprint" >> "$GITHUB_OUTPUT"
           }
 
-          same_head=$(printf '%s' "$reviews" | jq --arg head "$HEAD_SHA" --arg revision "$REVIEW_REVISION" '
-            def has_current_revision($expected):
+          # Count every terminal APPROVING managed review on this HEAD,
+          # including those posted against an older PR-body hash, but only when
+          # the review authenticates at least one unique body revision. A bare
+          # HEAD match is not enough: it would let an unmarked or conflicting
+          # body become the carry-forward verdict after a body edit. A negative
+          # review deliberately does not skip re-review: editing the body is
+          # how a PR-body finding gets corrected and revalidated.
+          same_head=$(printf '%s' "$reviews" | jq --arg head "$HEAD_SHA" '
+            def has_single_revision:
               [((.body // "") | split("\n")[] | rtrimstr("\r")
                 | select(test("^<!-- REVIEW_INPUT_REVISION: body:[0-9a-f]{64} -->$"; "i"))
                 | capture("^<!-- REVIEW_INPUT_REVISION: (?<revision>body:[0-9a-f]{64}) -->$"; "i").revision
-                | ascii_downcase)] | unique as $revisions
-              | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
+                | ascii_downcase)] | unique | length == 1;
+            def has_clean_lgtm:
+              (any((.body // "") | split("\n")[];
+                test("^[[:space:]]{0,3}##[[:space:]]+LGTM[[:space:]]*$")))
+              and (((.body // "")
+                | test("🔴[[:space:]]*\\*{0,2}[[:space:]]*Important[[:space:]]*\\*{0,2}[[:space:]]*[:—-]")) | not);
             [flatten[]
              | select((.state // "") != "PENDING")
-             | select(.user.type == "Bot")
              | select(
-                 ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
-                 or (((.user.login // "") | test("^github-actions\\[bot\\]$"; "i"))
+                 ((.user.type == "Bot")
+                   and ((.user.login // "") | test("^(claude|frontaliere-automation)";"i")))
+                 or ((.user.type == "Bot")
+                     and ((.user.login // "") | test("^github-actions\\[bot\\]$"; "i"))
                      and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
                )
-             | select(has_current_revision($revision))
-             | select(.commit_id == $head)] | length'
+             | select(has_single_revision)
+             | select(.commit_id == $head)]
+             | sort_by([(.submitted_at // .created_at // ""), ((.id // 0) | tonumber? // 0)])
+             | if length == 0 then 0
+               elif (.[-1] | ((.state == "COMMENTED" or .state == "APPROVED") and has_clean_lgtm)) then 1
+               else 0
+               end'
           )
-          if [ "${same_head:-0}" -gt 0 ] && [ "${BODY_EDITED:-false}" != "true" ]; then
-            echo "skip=true" >> "$GITHUB_OUTPUT"
-            echo "Esiste gia' una review terminale del reviewer sulla HEAD $HEAD_SHA → nessuna seconda review per lo stesso contributo."
-            exit 0
-          fi
           if [ "${same_head:-0}" -gt 0 ]; then
-            echo "Review terminale presente sulla HEAD, ma il body della PR è cambiato → nuova review ammessa con revisione distinta."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "Esiste gia' una review approvante del reviewer sulla HEAD $HEAD_SHA → nessuna seconda review, anche dopo un body edit."
+            exit 0
           fi
 
           if [ "${BODY_EDITED:-false}" = "true" ]; then
             set_claim_fingerprint
             echo "skip=false" >> "$GITHUB_OUTPUT"
-            echo "Body della PR cambiato → review completa sulla nuova revisione del review input."
+            echo "Body della PR cambiato e nessuna review terminale sulla HEAD → review completa."
             exit 0
           fi
 
@@ -462,8 +478,8 @@ jobs:
                 | capture("^<!-- REVIEW_INPUT_REVISION: (?<revision>body:[0-9a-f]{64}) -->$"; "i").revision
                 | ascii_downcase)] | unique as $revisions
               | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
-            [flatten[]
-             | select((.state // "") != "PENDING")
+             [flatten[]
+             | select((.state // "") != "PENDING" and (.state // "") != "DISMISSED")
              | select(.user.type == "Bot")
              | select(
                  ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
@@ -635,7 +651,7 @@ jobs:
                   | ascii_downcase)] | unique as $revisions
                 | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
               [flatten[]
-               | select((.state // "") != "PENDING")
+               | select((.state // "") != "PENDING" and (.state // "") != "DISMISSED")
                | select(.user.type == "Bot")
                | select(
                    ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
