@@ -449,7 +449,7 @@
       "reason": "Scanner repo-wide del confine GITHUB_ENV / contesto env.*: dopo load-rc-env.mjs il PAT vive nella shell, non in `${{ env.GITHUB_PAT_NANAKO }}`. La PR #1547 ha spostato otto consumer del loop sulla shell, ma il test elencava quei file — un reviewer poteva reintrodurre PUSH_TOKEN/GH_TOKEN interpolati da env.* altrove restando verde (escalation #1288, bucket reviewer-finding/workflow-scope-creds). Eseguito su ogni PR da generator/tests/runtime-token-handoff.test.mjs. Non esiste sul sito: la' i token si chiamano APP_TOKEN/GITHUB_PAT e i workflow non sono gli stessi; senza issue aperta che tracci un gemello il grado onesto resta corpus-only.",
       "baseline": {
         "site": null,
-        "corpus": "b52e64e0c4f53744",
+        "corpus": "cd3bfad75ae9dc65",
         "alignedAt": "2026-09-18"
       }
     },
