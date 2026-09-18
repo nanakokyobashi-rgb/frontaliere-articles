@@ -7,9 +7,11 @@ import {
   callLLM,
   classifyExhaustionCause,
   classifyNonRetryableError,
+  getDeclaredRequestTokenLimit,
   getStats,
   getScoreBoard,
   isRetryableError,
+  githubModelIdForLookup,
   qualifyGitHubModelId,
   resetState,
 } from '../scripts/lib/ai-models.mjs';
@@ -361,6 +363,48 @@ describe('GitHub Models request contract', () => {
     assert.equal(body.model, 'openai/Phi-4-reasoning');
     assert.equal(body.max_completion_tokens, 3000);
     assert.equal(body.max_tokens, undefined);
+  });
+
+  test('un ID gia qualificato usa il bare per policy e il qualificato nel payload', async () => {
+    assert.equal(githubModelIdForLookup('openai/Phi-4-reasoning'), AI_MODELS.PHI_4_REASON);
+    assert.equal(githubModelIdForLookup(AI_MODELS.PHI_4_REASON), AI_MODELS.PHI_4_REASON);
+    assert.equal(
+      qualifyGitHubModelId('openai/Phi-4-reasoning', [{ id: 'azure/Phi-4-reasoning' }]),
+      'openai/Phi-4-reasoning',
+    );
+    assert.equal(getDeclaredRequestTokenLimit('openai/gpt-4o-mini'), 4000);
+
+    const calls = [];
+    globalThis.fetch = async (url, init) => {
+      calls.push({ url: String(url), init });
+      return new Response(JSON.stringify({ choices: [{ message: { content: 'ok' } }] }), {
+        status: 200,
+        headers: { 'content-type': 'application/json' },
+      });
+    };
+
+    await callSingleModel([{ role: 'user', content: 'x' }], {
+      model: 'openai/Phi-4-reasoning',
+      githubModelsCatalog: [{ id: 'openai/Phi-4-reasoning' }],
+      maxTokens: 3000,
+      maxRetriesPerModel: 1,
+    });
+    await callSingleModel([{ role: 'user', content: 'y' }], {
+      model: `microsoft/${AI_MODELS.PHI_4_MINI_REASON}`,
+      githubModelsCatalog: [{ id: `microsoft/${AI_MODELS.PHI_4_MINI_REASON}` }],
+      maxTokens: 8000,
+      maxRetriesPerModel: 1,
+    });
+
+    const reasoning = JSON.parse(calls[0].init.body);
+    assert.equal(reasoning.model, 'openai/Phi-4-reasoning');
+    assert.equal(reasoning.max_completion_tokens, 3000);
+    assert.equal(reasoning.max_tokens, undefined);
+
+    const mini = JSON.parse(calls[1].init.body);
+    assert.equal(mini.model, `microsoft/${AI_MODELS.PHI_4_MINI_REASON}`);
+    assert.equal(mini.max_completion_tokens, 4000);
+    assert.equal(mini.max_tokens, undefined);
   });
 
   test('rifiuta un id bare quando il catalogo è ancora non osservabile', async () => {

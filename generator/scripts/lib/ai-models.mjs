@@ -736,6 +736,21 @@ function _githubCatalogPublisher(entry) {
 }
 
 /**
+ * Policy-table key for a GitHub Models id.
+ *
+ * `qualifyGitHubModelId` emits publisher/model for the provider request.
+ * MODEL_MAX_OUTPUT_TOKENS and MAX_COMPLETION_TOKENS_MODELS stay keyed by the
+ * bare roster id, so a caller that already passes publisher/model must still
+ * hit those tables. Other providers keep slashful API ids (Groq llama-4,
+ * NVIDIA, …) — never run this helper on them.
+ */
+export function githubModelIdForLookup(model) {
+  const id = String(model || '').trim();
+  if (!id) return id;
+  return id.includes('/') ? id.slice(id.lastIndexOf('/') + 1) : id;
+}
+
+/**
  * Qualify a bare GitHub Models roster id from an observed catalog entry.
  *
  * The roster remains bare so getProvider() keeps returning GitHub. A missing,
@@ -4969,8 +4984,11 @@ export function applyModelsPrefer(chain, prefer) {
 export function getDeclaredRequestTokenLimit(model) {
   const modelKey = _normalizeMemoModelKey(model);
   const apiModelId = getApiModelId(modelKey);
+  const lookupId = getProvider(modelKey) === PROVIDER.GITHUB
+    ? githubModelIdForLookup(apiModelId)
+    : apiModelId;
   const knownLimits = [
-    MODEL_MAX_REQUEST_TOKENS[apiModelId],
+    MODEL_MAX_REQUEST_TOKENS[lookupId],
     _learnedRequestTokenLimits.get(modelKey),
     DEFAULT_REQUEST_TOKENS_BY_PROVIDER[getProvider(modelKey)],
   ].filter((v) => typeof v === 'number' && v > 0);
@@ -6577,8 +6595,13 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
   if (!apiKey) throw new Error(`${providerName} API key not set`);
   const modelForTracking = trackAs || apiModel;
   // GitHub emits an observed publisher/model id, while all model policy tables
-  // remain keyed by the bare roster id. Other callers leave this at apiModel.
-  const modelPolicyId = modelForLookup || apiModel;
+  // remain keyed by the bare roster id. Strip here too: a direct caller that
+  // already passed publisher/model would otherwise miss the tables even when
+  // `_callGitHub` forgets to pass a bare `modelForLookup`.
+  const rawPolicyId = modelForLookup || apiModel;
+  const modelPolicyId = _normalizeProviderKey(providerName) === _normalizeProviderKey(PROVIDER.GITHUB)
+    ? githubModelIdForLookup(rawPolicyId)
+    : rawPolicyId;
   const displayModel = providerName === 'GitHub' ? apiModel : `${providerName}/${apiModel}`;
 
   // Cap maxTokens to model-specific limits (e.g. Cohere max 8192)
@@ -6928,7 +6951,7 @@ async function _callGitHub(model, messages, opts) {
         // separately (idx / _ghExhaustedPats), not encoded in the name.
         providerName: 'GitHub',
         trackAs: model,
-        modelForLookup: model,
+        modelForLookup: githubModelIdForLookup(model),
         // Until the LAST PAT, a daily-limit on this account must NOT mark the
         // model/provider globally exhausted — the model is still usable on the
         // next account's separate quota. The error still propagates so we rotate.
@@ -8742,7 +8765,9 @@ export async function callLLM(messages, opts = {}) {
     // Skip models whose max output token limit is below the requested maxTokens.
     // This avoids wasting API calls that will fail with "max tokens must be less than" errors.
     // Also was silent pre-flight — see cooldown comment above.
-    const apiModelId = getApiModelId(model);
+    const apiModelId = getProvider(model) === PROVIDER.GITHUB
+      ? githubModelIdForLookup(getApiModelId(model))
+      : getApiModelId(model);
     const modelLimit = MODEL_MAX_OUTPUT_TOKENS[apiModelId];
     if (modelLimit && o.maxTokens > modelLimit) {
       _logPreflightSkipOnce(model, 'maxOutput', `model max output ${modelLimit} < requested maxTokens ${o.maxTokens}`);

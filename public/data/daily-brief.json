@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-17T09:54:54.900Z",
-  "dateIso": "2026-09-17",
+  "generatedAt": "2026-09-18T09:30:15.874Z",
+  "dateIso": "2026-09-18",
   "counts": {
     "availableBlocks": 3,
     "crossings": 141,
@@ -12,22 +12,15 @@
   "blocks": {
     "borderWait": {
       "available": true,
-      "updatedAt": "2026-09-17T09:06:08.840Z",
+      "updatedAt": "2026-09-18T08:43:02.808Z",
       "count": 141,
-      "zeroWaitCount": 132,
+      "zeroWaitCount": 121,
       "worst": {
-        "slug": "bardonnex",
-        "name": "Bardonnex",
-        "waitMinutes": 12
+        "slug": "chiasso-brogeda",
+        "name": "Chiasso-Brogeda",
+        "waitMinutes": 8
       },
       "crossings": [
-        {
-          "slug": "bardonnex",
-          "name": "Bardonnex",
-          "waitMinutes": 12,
-          "status": "yellow",
-          "direction": null
-        },
         {
           "slug": "chiasso-brogeda",
           "name": "Chiasso-Brogeda",
@@ -36,43 +29,99 @@
           "direction": null
         },
         {
-          "slug": "gaggiolo",
-          "name": "Gaggiolo (Cantello-Stabio)",
-          "waitMinutes": 8,
-          "status": "yellow",
-          "direction": null
-        },
-        {
-          "slug": "san-pietro",
-          "name": "San Pietro (Clivio-Stabio)",
-          "waitMinutes": 8,
-          "status": "yellow",
-          "direction": null
-        },
-        {
-          "slug": "oria-gandria",
-          "name": "Oria-Gandria",
-          "waitMinutes": 3,
+          "slug": "ponte-tresa",
+          "name": "Ponte Tresa",
+          "waitMinutes": 4,
           "status": "green",
           "direction": null
         },
         {
-          "slug": "ponte-tresa",
-          "name": "Ponte Tresa",
+          "slug": "giogo-di-santa-maria",
+          "name": "Giogo di Santa Maria (Passo dell'Umbrail)",
           "waitMinutes": 2,
           "status": "green",
           "direction": null
         },
         {
-          "slug": "campione-d-italia-bissone",
-          "name": "Campione d'Italia-Bissone",
+          "slug": "rheinfelden-rheinfelden-ag-alte-rheinbrucke",
+          "name": "Rheinfelden (Baden) – Rheinfelden AG, Alte Rheinbrücke",
+          "waitMinutes": 2,
+          "status": "green",
+          "direction": null
+        },
+        {
+          "slug": "au-lustenau",
+          "name": "Au-Lustenau",
           "waitMinutes": 1,
           "status": "green",
           "direction": null
         },
         {
-          "slug": "klettgau-wil-zh",
-          "name": "Klettgau – Wil ZH",
+          "slug": "blumberg-bargen-sh-autostrasse-h4",
+          "name": "Blumberg – Bargen SH, Autostrasse H4",
+          "waitMinutes": 1,
+          "status": "green",
+          "direction": null
+        },
+        {
+          "slug": "castasegna-villa-di-chiavenna",
+          "name": "Castasegna-Villa di Chiavenna",
+          "waitMinutes": 1,
+          "status": "green",
+          "direction": null
+        },
+        {
+          "slug": "ferney-voltaire-grand-saconnex",
+          "name": "Ferney-Voltaire / Grand-Saconnex",
+          "waitMinutes": 1,
+          "status": "green",
+          "direction": null
+        },
+        {
+          "slug": "inzlingen-riehen",
+          "name": "Inzlingen – Riehen",
+          "waitMinutes": 1,
+          "status": "green",
+          "direction": null
+        },
+        {
+          "slug": "konstanz-tagerwilen-autostrada-b33n-a7",
+          "name": "Konstanz – Tägerwilen, Autostrada B33n/A7",
+          "waitMinutes": 1,
+          "status": "green",
+          "direction": null
+        },
+        {
+          "slug": "konstanz-tagerwilen-gottlieber-strasse",
+          "name": "Konstanz – Tägerwilen, Gottlieber Strasse",
+          "waitMinutes": 1,
+          "status": "green",
+          "direction": null
+        },
+        {
+          "slug": "le-chatelard-vallorcine",
+          "name": "Le Châtelard-Vallorcine",
+          "waitMinutes": 1,
+          "status": "green",
+          "direction": null
+        },
+        {
+          "slug": "martina-nauders",
+          "name": "Martina-Nauders (Finstermünz)",
+          "waitMinutes": 1,
+          "status": "green",
+          "direction": null
+        },
+        {
+          "slug": "morgins-chatel",
+          "name": "Morgins-Châtel (Pas de Morgins)",
+          "waitMinutes": 1,
+          "status": "green",
+          "direction": null
+        },
+        {
+          "slug": "oria-gandria",
+          "name": "Oria-Gandria",
           "waitMinutes": 1,
           "status": "green",
           "direction": null
@@ -85,6 +134,34 @@
           "direction": null
         },
         {
+          "slug": "riehen-weil-am-rhein",
+          "name": "Riehen – Weil am Rhein",
+          "waitMinutes": 1,
+          "status": "green",
+          "direction": null
+        },
+        {
+          "slug": "saltrio-arzo",
+          "name": "Saltrio-Arzo",
+          "waitMinutes": 1,
+          "status": "green",
+          "direction": null
+        },
+        {
+          "slug": "sempione",
+          "name": "Sempione (Iselle-Gondo)",
+          "waitMinutes": 1,
+          "status": "green",
+          "direction": null
+        },
+        {
+          "slug": "stuhlingen-schleitheim",
+          "name": "Stühlingen – Schleitheim",
+          "waitMinutes": 1,
+          "status": "green",
+          "direction": null
+        },
+        {
           "slug": "anieres",
           "name": "Anières",
           "waitMinutes": 0,
@@ -92,15 +169,15 @@
           "direction": null
         },
         {
-          "slug": "au-lustenau",
-          "name": "Au-Lustenau",
+          "slug": "bad-sackingen-stein-ag",
+          "name": "Bad Säckingen – Stein AG",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
         },
         {
-          "slug": "bad-sackingen-stein-ag",
-          "name": "Bad Säckingen – Stein AG",
+          "slug": "bardonnex",
+          "name": "Bardonnex",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -157,13 +234,6 @@
         {
           "slug": "blumberg-bargen-sh-alte-bargener-strasse",
           "name": "Blumberg – Bargen SH, Alte Bargener Strasse",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "blumberg-bargen-sh-autostrasse-h4",
-          "name": "Blumberg – Bargen SH, Autostrasse H4",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -253,15 +323,15 @@
           "direction": null
         },
         {
-          "slug": "campocologno-tirano",
-          "name": "Campocologno-Tirano",
+          "slug": "campione-d-italia-bissone",
+          "name": "Campione d'Italia-Bissone",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
         },
         {
-          "slug": "castasegna-villa-di-chiavenna",
-          "name": "Castasegna-Villa di Chiavenna",
+          "slug": "campocologno-tirano",
+          "name": "Campocologno-Tirano",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -393,15 +463,15 @@
           "direction": null
         },
         {
-          "slug": "ferney-voltaire-grand-saconnex",
-          "name": "Ferney-Voltaire / Grand-Saconnex",
+          "slug": "forcola-di-livigno",
+          "name": "Forcola di Livigno",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
         },
         {
-          "slug": "forcola-di-livigno",
-          "name": "Forcola di Livigno",
+          "slug": "gaggiolo",
+          "name": "Gaggiolo (Cantello-Stabio)",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -416,13 +486,6 @@
         {
           "slug": "gailingen-am-hochrhein-ramsen-sh",
           "name": "Gailingen am Hochrhein – Ramsen SH",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "giogo-di-santa-maria",
-          "name": "Giogo di Santa Maria (Passo dell'Umbrail)",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -519,13 +582,6 @@
           "direction": null
         },
         {
-          "slug": "inzlingen-riehen",
-          "name": "Inzlingen – Riehen",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": null
-        },
-        {
           "slug": "jestetten-laufen-uhwiesen-dorfstrasse",
           "name": "Jestetten – Laufen-Uhwiesen, Dorfstrasse",
           "waitMinutes": 0,
@@ -575,6 +631,13 @@
           "direction": null
         },
         {
+          "slug": "klettgau-wil-zh",
+          "name": "Klettgau – Wil ZH",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": null
+        },
+        {
           "slug": "klettgau-wilchingen",
           "name": "Klettgau – Wilchingen",
           "waitMinutes": 0,
@@ -584,20 +647,6 @@
         {
           "slug": "konstanz-kreuzlingen",
           "name": "Konstanz – Kreuzlingen",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "konstanz-tagerwilen-autostrada-b33n-a7",
-          "name": "Konstanz – Tägerwilen, Autostrada B33n/A7",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "konstanz-tagerwilen-gottlieber-strasse",
-          "name": "Konstanz – Tägerwilen, Gottlieber Strasse",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -659,13 +708,6 @@
           "direction": null
         },
         {
-          "slug": "le-chatelard-vallorcine",
-          "name": "Le Châtelard-Vallorcine",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": null
-        },
-        {
           "slug": "les-verrieres",
           "name": "Les Verrières",
           "waitMinutes": 0,
@@ -708,13 +750,6 @@
           "direction": null
         },
         {
-          "slug": "martina-nauders",
-          "name": "Martina-Nauders (Finstermünz)",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": null
-        },
-        {
           "slug": "maslianico-pizzamiglio",
           "name": "Maslianico-Pizzamiglio",
           "waitMinutes": 0,
@@ -745,13 +780,6 @@
         {
           "slug": "montlingen-koblach",
           "name": "Montlingen-Koblach",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "morgins-chatel",
-          "name": "Morgins-Châtel (Pas de Morgins)",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -806,13 +834,6 @@
           "direction": null
         },
         {
-          "slug": "rheinfelden-rheinfelden-ag-alte-rheinbrucke",
-          "name": "Rheinfelden (Baden) – Rheinfelden AG, Alte Rheinbrücke",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": null
-        },
-        {
           "slug": "rheinfelden-rheinfelden-ag-autostrada-a861-a3",
           "name": "Rheinfelden (Baden) – Rheinfelden AG, Autostrada A861/A3",
           "waitMinutes": 0,
@@ -822,13 +843,6 @@
         {
           "slug": "riehen-lorrach-stetten",
           "name": "Riehen – Lörrach-Stetten",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "riehen-weil-am-rhein",
-          "name": "Riehen – Weil am Rhein",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -869,13 +883,6 @@
           "direction": null
         },
         {
-          "slug": "saltrio-arzo",
-          "name": "Saltrio-Arzo",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": null
-        },
-        {
           "slug": "samnaun-spiss",
           "name": "Samnaun-Spiss",
           "waitMinutes": 0,
@@ -883,15 +890,15 @@
           "direction": null
         },
         {
-          "slug": "sauverny",
-          "name": "Sauverny",
+          "slug": "san-pietro",
+          "name": "San Pietro (Clivio-Stabio)",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
         },
         {
-          "slug": "sempione",
-          "name": "Sempione (Iselle-Gondo)",
+          "slug": "sauverny",
+          "name": "Sauverny",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -920,13 +927,6 @@
         {
           "slug": "stuhlingen-hallau",
           "name": "Stühlingen – Hallau",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "stuhlingen-schleitheim",
-          "name": "Stühlingen – Schleitheim",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -1084,21 +1084,21 @@
     },
     "exchange": {
       "available": true,
-      "rate": 1.0593,
-      "lastDate": "2026-09-16",
-      "prevRate": 1.0596,
-      "prevDate": "2026-09-15",
-      "delta1d": -0.0003,
-      "rate7dAgo": 1.0625,
-      "delta7d": -0.0032,
+      "rate": 1.058,
+      "lastDate": "2026-09-17",
+      "prevRate": 1.0585,
+      "prevDate": "2026-09-16",
+      "delta1d": -0.0005,
+      "rate7dAgo": 1.0614,
+      "delta7d": -0.0034,
       "source": "frankfurter",
       "pointCount": 32,
       "degradedEditions": 0
     },
     "jobs": {
       "available": false,
-      "reason": "jobs history has no closed row for 2026-09-16 — no \"new listings yesterday\" figure to publish",
-      "degradedEditions": 2
+      "reason": "jobs history has no closed row for 2026-09-17 — no \"new listings yesterday\" figure to publish",
+      "degradedEditions": 3
     }
   }
 }

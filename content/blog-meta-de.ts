@@ -11830,6 +11830,11 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.assenteismo-psichico-ticino-51.title': 'Psychische Abwesenheiten im Tessin: 51% werden entlassen',
     'blog.article.assenteismo-psichico-ticino-51.excerpt': 'Im Tessin führen 51% der Absenzen aus psychischen Gründen zur Auflösung des Vertrages. Der Anteil der IV-Begünstigten aus psychiatrischen Gründen ist auf 51% gestiegen.',
     'blog.article.assenteismo-psichico-ticino-51.imageAlt': 'Ruhige Arbeitsumgebung im Tessin, Fokus auf psychische Gesundheit',
+    'blog.article.bollettino-frontaliere-2026-09-18.title': 'Grenzgänger-Tagesbulletin – 18. September 2026: Franken bei 1.0580 €',
+    'blog.article.bollettino-frontaliere-2026-09-18.excerpt': 'Die Zahlen von heute, 18. September 2026, für Grenzgänger: die heute Morgen gemessenen Wartezeiten an den Übergängen, die Gemeinden mit dem günstigsten Benzin, der Franken-Euro-Kurs vom Schlusskurs und die neu ausgeschriebenen Stellen in der Schweiz. Täglich aus unserem Monitoring.',
+    'blog.article.bollettino-frontaliere-2026-09-18.imageAlt': 'Die Zahlen des Tages für Grenzgänger – 18. September 2026: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote',
+    'blog.article.bollettino-frontaliere-2026-09-18.seoDescription': 'Grenzgänger-Bulletin vom 18. September 2026: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.',
+    'blog.article.bollettino-frontaliere-2026-09-18.ogDescription': 'Die Zahlen vom 18. September 2026 für Grenzgänger: wie lange man heute Morgen an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, was der Franken heute wert ist und wie viele Stellen neu dazugekommen sind.',
 };
 
 export default blogMetaDe;
