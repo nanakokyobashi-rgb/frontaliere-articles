@@ -267,6 +267,25 @@ test('marker di body conflittuali sulla HEAD non diventano carry-forward', () =>
   assert.match(r.stdout, /manca.*marker|nessuna review/i, r.stdout);
 });
 
+test('il review-gate sceglie l ultimo verdetto terminale per timestamp e id', () => {
+  const clean = botReview(HEAD, 'tutto bene\n\n## LGTM', {
+    submitted_at: '2026-09-18T09:00:00Z',
+    id: 10,
+  });
+  const finding = botReview(HEAD, '🔴 Important: controllo mancante\n\n## LGTM', {
+    submitted_at: '2026-09-18T09:01:00Z',
+    id: 11,
+  });
+  assert.equal(runGate({ reviews: [clean, finding] }).status, 1);
+  assert.equal(runGate({ reviews: [finding, clean] }).status, 1);
+  assert.equal(runGate({
+    reviews: [
+      finding,
+      { ...clean, submitted_at: '2026-09-18T09:02:00Z', id: 12 },
+    ],
+  }).status, 0);
+});
+
 test('un verdetto negativo del body precedente sulla stessa HEAD resta bloccante', () => {
   const changedBody = `${GOOD_BODY}\n- altra cosa`;
   const r = runGate({

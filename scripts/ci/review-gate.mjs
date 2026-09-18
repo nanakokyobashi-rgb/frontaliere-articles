@@ -185,6 +185,19 @@ function reviewHasSingleInputRevision(body) {
   return revisions.length > 0 && new Set(revisions).size === 1;
 }
 
+/** Order terminal review verdicts independently of the REST page order. */
+function reviewOrderTimestamp(review) {
+  const timestamps = [review?.submitted_at, review?.submittedAt, review?.created_at, review?.createdAt]
+    .map((value) => Date.parse(value || ''))
+    .filter(Number.isFinite);
+  return timestamps.length > 0 ? Math.max(...timestamps) : Number.NEGATIVE_INFINITY;
+}
+
+function compareReviewOrder(left, right) {
+  return reviewOrderTimestamp(left) - reviewOrderTimestamp(right)
+    || (Number(left?.id || 0) || 0) - (Number(right?.id || 0) || 0);
+}
+
 /**
  * A drift fallback cannot erase a non-approving review merely because the old
  * verdict is from another body revision (or predates revision markers). A
@@ -303,7 +316,7 @@ function lastBotReview() {
     const sameHeadCarryForward = review.commit_id === HEAD_SHA
       && reviewHasSingleInputRevision(review.body);
     return currentRevision || sameHeadCarryForward;
-  });
+  }).sort(compareReviewOrder);
   return eligible.length ? eligible[eligible.length - 1] : null;
 }
 

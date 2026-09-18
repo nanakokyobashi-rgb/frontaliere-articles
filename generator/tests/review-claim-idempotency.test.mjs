@@ -290,6 +290,7 @@ test('tests.yml claims before review work and finalizes without gating the requi
   assert.match(sameHeadGuard, /test\("\^\(claude\|frontaliere-automation\)";"i"\)/);
   assert.match(sameHeadGuard, /has_single_revision/);
   assert.match(sameHeadGuard, /has_clean_lgtm/);
+  assert.match(sameHeadGuard, /sort_by\(\[\(\.submitted_at \/\/ \.created_at/);
   assert.match(workflow, /scripts\/ci\/review-claim\.mjs --claim/);
   assert.match(workflow, /CLAIM_ACTION: acquire/);
   assert.match(workflow, /CLAIM_ACTION: finalize/);
