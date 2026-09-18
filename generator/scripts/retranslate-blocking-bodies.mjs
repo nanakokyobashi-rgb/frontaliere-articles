@@ -413,7 +413,12 @@ export function parseLocaleList(raw) {
  */
 export function selectBlockingPairs(pairs, { locales, slugs } = {}) {
   const localeSet = new Set(Array.isArray(locales) ? locales : []);
-  const slugSet = Array.isArray(slugs) && slugs.length > 0 ? new Set(slugs) : null;
+  // `null`/`undefined` mean that --slug was absent; an explicit empty list is
+  // an active filter and must select nothing. Treating both as `null` lets an
+  // empty shell variable turn an --apply audit into a whole-corpus rewrite.
+  const slugSet = slugs == null
+    ? null
+    : new Set(Array.isArray(slugs) ? slugs : []);
   return (Array.isArray(pairs) ? pairs : []).filter((p) => {
     if (!localeSet.has(p.locale)) return false;
     if (slugSet && !slugSet.has(p.id)) return false;
@@ -488,10 +493,16 @@ export function stratify(pairs, limit) {
 
 const argv = process.argv.slice(2);
 const flag = (name, dflt = null) => {
-  const i = argv.indexOf(`--${name}`);
-  return i === -1 ? dflt : (argv[i + 1] ?? dflt);
+  const exact = `--${name}`;
+  const i = argv.indexOf(exact);
+  if (i !== -1) return argv[i + 1] ?? dflt;
+  const inline = argv.find((arg) => arg.startsWith(`${exact}=`));
+  return inline === undefined ? dflt : inline.slice(exact.length + 1);
 };
-const has = (name) => argv.includes(`--${name}`);
+const has = (name) => {
+  const exact = `--${name}`;
+  return argv.includes(exact) || argv.some((arg) => arg.startsWith(`${exact}=`));
+};
 
 async function main() {
   const auditPath = flag('audit');
@@ -532,6 +543,7 @@ async function main() {
   const CONTENT_ROOT = resolve(flag('content-root', ROOT));
   const LOCALES = parseLocaleList(flag('locale', 'en,de,fr'));
   const CODE = flag('code');
+  const SLUG_FILTER = has('slug') ? SLUGS : undefined;
 
   // Un worktree sparse NON ha `content/`, e senza questo controllo ogni coppia
   // uscirebbe 'sorgente-mancante' con exit 0: un no-op che si legge come "non
@@ -549,14 +561,14 @@ async function main() {
     const audit = JSON.parse(readFileSync(auditPath, 'utf8'));
     pairs = selectBlockingPairs(blockingPairsFromAudit(audit), {
       locales: LOCALES,
-      slugs: SLUGS,
+      slugs: SLUG_FILTER,
     });
   } else {
     // Senza audit lo slug e' l'unica chiave: riscrittura in-place di un
     // articolo gia' registrato, italiano compreso. Nessun id nuovo.
     pairs = selectBlockingPairs(pairsForSlugs(SLUGS, LOCALES, CONTENT_ROOT), {
       locales: LOCALES,
-      slugs: SLUGS,
+      slugs: SLUG_FILTER,
     });
   }
   pairs = pairs.filter((p) => !CODE || p.codes.includes(CODE));

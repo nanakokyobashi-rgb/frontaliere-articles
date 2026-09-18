@@ -382,6 +382,11 @@ test('--slug vuoto esce con errore invece di disabilitare il filtro dell audit',
   assert.equal(run.status, 2);
   assert.match(run.stderr, /--slug.*vuoto/);
   assert.doesNotMatch(String(run.stdout), /coppie trattate/);
+
+  const inline = spawnSync(process.execPath, [script, '--audit', '/dev/null', '--slug='], { encoding: 'utf8' });
+  assert.equal(inline.status, 2);
+  assert.match(inline.stderr, /--slug.*vuoto/);
+  assert.doesNotMatch(String(inline.stdout), /coppie trattate/);
 });
 
 // ── La stessa classe sull'altro scrittore per-locale ───────────────────────
@@ -699,6 +704,11 @@ test('selectBlockingPairs include it solo se richiesto, e filtra per slug', () =
     selectBlockingPairs(pairs, { locales: ['it', 'en'], slugs: ['alpha'] }).map((p) => `${p.locale}/${p.id}`),
     ['it/alpha', 'en/alpha'],
     '--slug mira l\'id, non il primo della lista',
+  );
+  assert.deepEqual(
+    selectBlockingPairs(pairs, { locales: ['en'], slugs: [] }),
+    [],
+    'un --slug esplicitamente vuoto è un filtro attivo, non il filtro assente',
   );
 });
 
