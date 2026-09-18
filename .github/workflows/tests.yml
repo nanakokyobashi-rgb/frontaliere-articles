@@ -223,7 +223,7 @@ jobs:
         # The test gate is intentionally still the blocking step. This
         # fail-soft reporter runs only after that gate fails and only on PRs,
         # so it adds diagnosis without changing the required check verdict.
-        if: ${{ always() && !cancelled() && (github.event_name == 'pull_request' || (github.event_name == 'workflow_dispatch' && inputs.pr_number != '')) && steps.unit_gates.outcome == 'failure' }}
+        if: ${{ always() && !cancelled() && steps.body_contract.outcome != 'failure' && (github.event_name == 'pull_request' || (github.event_name == 'workflow_dispatch' && inputs.pr_number != '')) && steps.unit_gates.outcome == 'failure' }}
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

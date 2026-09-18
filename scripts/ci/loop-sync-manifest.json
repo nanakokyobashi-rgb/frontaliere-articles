@@ -319,6 +319,26 @@
       }
     },
     {
+      "path": "scripts/ci/node-test-failure-reporter.mjs",
+      "mode": "corpus-only",
+      "reason": "Reporter strutturato del corpus: consuma gli eventi `test:fail` di `node:test` e scrive il JSON che il passo successivo pubblica sulla PR. Il sito usa Vitest e il proprio reporter JSON, quindi non esiste un gemello byte-verificabile da trasportare.",
+      "baseline": {
+        "site": null,
+        "corpus": "9b07b553a475baa1",
+        "alignedAt": "2026-09-18"
+      }
+    },
+    {
+      "path": "scripts/ci/report-node-test-failure.mjs",
+      "mode": "corpus-only",
+      "reason": "Publisher del commento sticky per i failure `node:test` del corpus, con fallback fail-soft quando il report manca. Il sito ha il consumer adattato `scripts/ci/report-vitest-failure.mjs` per Vitest, quindi questo script resta specifico del corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": "f31d1fea13d23dd8",
+        "alignedAt": "2026-09-18"
+      }
+    },
+    {
       "path": "scripts/ci/content-gates-main.mjs",
       "mode": "corpus-only",
       "reason": "Fa girare su `main` il sottoinsieme MISURATO dei gate che leggono `content/**`, e su offender apre UNA issue deduplicata sul titolo invece di rendere rossa una run. Non ha gemello sul sito e non puo' averlo: il difetto che chiude e' la scrittura diretta su `main` dei produttori di QUESTO repo (`generate-article.yml` e i suoi fratelli fanno `git push HEAD:main` — 88 articoli nelle ultime 24h), mentre sul sito il contenuto non e' versionato e nessun bot scrive su `main`. Anche la lista `CONTENT_GATES` e' topologia locale: sono file sotto `generator/tests/`, cartella che sul sito non esiste. Non e' `corpus-only-pending` — non c'e' niente da portare di la'.",
