@@ -6551,6 +6551,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.seco-previsioni-crescita-2026.title': 'SECO révise à la hausse : croissance du PIB à 1,7% pour 2026',
     'blog.article.seco-previsioni-crescita-2026.excerpt': 'Le SECO a révisé ses estimations de croissance à 1,7 % pour 2026. PIB du deuxième trimestre en hausse de 1,5 %. Chômage attendu à 3,1 %.',
     'blog.article.seco-previsioni-crescita-2026.imageAlt': 'Graphique économique et prévisions conjoncturelles de la Confédération suisse',
+    'blog.article.pil-svizzero-crescita-2026.title': 'PIB suisse : croissance révisée à 1,7% pour 2026',
+    'blog.article.pil-svizzero-crescita-2026.excerpt': 'Le groupe d\'experts de la Confédération met à jour les estimations économiques : PIB à 1,7 % en 2026 et 1,6 % en 2027. Chômage à 3,1 %.',
+    'blog.article.pil-svizzero-crescita-2026.imageAlt': 'Previsions conjoncturelles et economie suisse a Berne',
 };
 
 export default blogMetaChFr;

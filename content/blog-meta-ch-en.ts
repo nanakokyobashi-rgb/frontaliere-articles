@@ -6551,6 +6551,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.seco-previsioni-crescita-2026.title': 'SECO revises upwards: GDP growth at 1.7% for 2026',
     'blog.article.seco-previsioni-crescita-2026.excerpt': 'SECO has revised growth estimates to 1.7% for 2026. Second quarter GDP up 1.5%. Expected unemployment at 3.1%.',
     'blog.article.seco-previsioni-crescita-2026.imageAlt': 'Economic chart and cyclical forecasts of the Swiss Confederation',
+    'blog.article.pil-svizzero-crescita-2026.title': 'Swiss GDP: revised growth to 1.7% by 2026',
+    'blog.article.pil-svizzero-crescita-2026.excerpt': 'The Confederation\'s expert group updates the economic estimates: GDP at 1.7% in 2026 and 1.6% in 2027. Unemployment at 3.1%.',
+    'blog.article.pil-svizzero-crescita-2026.imageAlt': 'Economic forecasts and Swiss economy in Bern',
 };
 
 export default blogMetaChEn;

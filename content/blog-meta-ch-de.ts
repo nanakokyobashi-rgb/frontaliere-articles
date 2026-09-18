@@ -6551,6 +6551,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.seco-previsioni-crescita-2026.title': 'SECO revidiert nach oben: BIP-Wachstum von 1,7% für 2026',
     'blog.article.seco-previsioni-crescita-2026.excerpt': 'Das SECO revidierte die Wachstumsprognose für 2026 auf 1,7%. BIP des zweiten Quartals um 1,5% gestiegen. Erwartete Arbeitslosenquote von 3,1%.',
     'blog.article.seco-previsioni-crescita-2026.imageAlt': 'Wirtschaftsdiagramm und Konjunkturprognosen der Schweizerischen Eidgenossenschaft',
+    'blog.article.pil-svizzero-crescita-2026.title': 'Schweizer BIP: Wachstum bis 2026 auf 1,7% revidiert',
+    'blog.article.pil-svizzero-crescita-2026.excerpt': 'Die Expertengruppe des Bundes aktualisiert die Wirtschaftsschätzungen: BIP auf 1,7% im Jahr 2026 und 1,6% im Jahr 2027. Arbeitslosenquote bei 3,1%.',
+    'blog.article.pil-svizzero-crescita-2026.imageAlt': 'Konjunkturprognosen und Schweizer Wirtschaft in Bern',
 };
 
 export default blogMetaChDe;

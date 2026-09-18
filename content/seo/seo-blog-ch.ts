@@ -84923,6 +84923,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-pil-svizzero-crescita-2026': {
+    title: 'PIL svizzero: crescita rivista all\'1,7% per il 2026',
+    description: 'Aggiornate le stime economiche in Svizzera: crescita del PIL all\'1,7% per il 2026 e 1,6% nel 2027. Disoccupazione al 3,1% e inflazione stabile allo 0,6%.',
+    keywords: 'frontalieri, ticino, svizzera, italia, svizzero, crescita, rivista, gruppo',
+    ogTitle: 'Previsioni congiunturali: nel 2026 l\'economia svizzera crescerà dell\'1,7%',
+    ogDescription: 'Il gruppo di esperti della Confederazione ha pubblicato le nuove stime economiche per la Svizzera: PIL rivisto all\'1,7% per il 2026 e 1,6% per il 2027. Disoccupazione in calo al 3,1% e inflazione media allo 0,6%. Scopri tutti i dettagli sui settori',
+    canonicalPath: '/articoli-svizzera/pil-svizzero-crescita-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "PIL svizzero: crescita rivista all'1,7% per il 2026",
+      "description": "Aggiornate le stime economiche in Svizzera: crescita del PIL all'1,7% per il 2026 e 1,6% nel 2027. Disoccupazione al 3,1% e inflazione stabile allo 0,6%.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/pil-svizzero-crescita-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Previsioni congiunturali ed economia svizzera a Berna"
+      },
+      "datePublished": "2026-09-18T02:59:49+00:00",
+      "dateModified": "2026-09-18T02:59:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/pil-svizzero-crescita-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
