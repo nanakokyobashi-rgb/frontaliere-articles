@@ -323,23 +323,46 @@ export function isCodexFallbackReview(review) {
     && String(review.body || '').includes(CODEX_REVIEW_MARKER);
 }
 
+function reviewLogin(review) {
+  return review?.user?.login || review?.author?.login || '';
+}
+
+function reviewActorType(review) {
+  return review?.user?.type || review?.author?.type || '';
+}
+
+function normalizedReviewerLogin(login) {
+  return String(login || '').replace(/\[bot\]$/iu, '');
+}
+
+function isManagedReviewerLogin(login, type) {
+  const raw = String(login || '');
+  if (!raw) return false;
+  if (type === 'Bot') return REVIEWER_BOT_LOGIN_RE.test(raw);
+  const normalized = normalizedReviewerLogin(raw);
+  if (/^(?:claude|frontaliere-automation)$/iu.test(normalized)) return true;
+  // GraphQL may keep the `[bot]` suffix or a prefix variant (`claude-…[bot]`).
+  // Accept those only when the login is bot-shaped, so a human `claude-x`
+  // without type does not enter the REST prefix allow-list.
+  return /\[bot\]$/iu.test(raw) && REVIEWER_BOT_LOGIN_RE.test(raw);
+}
+
 /**
  * Review riconosciuta da tutti i consumer del ciclo.
  *
- * Il percorso generico resta vincolato a `type=Bot` e alla allow-list storica;
- * il percorso Codex ha invece il marker esplicito e l'identità bot esatta.
- * `author` copre la forma GraphQL (`gh pr view --json reviews`), che omette
- * il suffisso `[bot]` e non espone sempre `type`.
+ * REST (`user.login` + `type=Bot`) e GraphQL (`author.login`, spesso senza
+ * `type` e senza `[bot]`) condividono la stessa normalizzazione del login.
+ * Il percorso Codex resta sull'identità bot esatta più il marker.
  */
 export function isManagedReview(review) {
   if (isReviewerBot(review?.user)) return true;
-  // GraphQL exposes `author.login` without `type` and without `[bot]`. Accept
-  // only the two exact reviewer identities here; a human named
-  // `claude-something` must not become a managed review by losing the REST
-  // `type=Bot` fence.
-  if (!review?.user && review?.author) {
-    const login = String(review.author.login || '').replace(/\[bot\]$/iu, '');
-    if (/^(?:claude|frontaliere-automation)$/iu.test(login)) return true;
+  // GraphQL exposes `author.login` (and sometimes `user.login`) without
+  // `type`. REST uses `user.login` + `type=Bot`. Both paths share the same
+  // login normalization so a suffix or prefix variant cannot be a managed
+  // review on one API and invisible on the other. Codex stays on exact bot
+  // identity + marker.
+  if (!reviewActorType(review) && isManagedReviewerLogin(reviewLogin(review), '')) {
+    return true;
   }
   return isCodexFallbackReview(review);
 }
