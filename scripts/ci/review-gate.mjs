@@ -185,6 +185,16 @@ function reviewHasSingleInputRevision(body) {
   return revisions.length > 0 && new Set(revisions).size === 1;
 }
 
+function isTerminalReview(review) {
+  return ['COMMENTED', 'APPROVED', 'CHANGES_REQUESTED'].includes(
+    String(review?.state || '').toUpperCase(),
+  );
+}
+
+function reviewStateAllowsApproval(review) {
+  return ['COMMENTED', 'APPROVED'].includes(String(review?.state || '').toUpperCase());
+}
+
 /** Order terminal review verdicts independently of the REST page order. */
 function reviewOrderTimestamp(review) {
   const timestamps = [review?.submitted_at, review?.submittedAt, review?.created_at, review?.createdAt]
@@ -304,13 +314,14 @@ function lastBotReview() {
     const evidence = parseCodexFallbackEvidence(readFileSync(process.env.CODEX_FALLBACK_EVIDENCE_FILE, 'utf8'));
     if (evidence?.status !== FALLBACK_STATUS.SUCCESS) throw new Error('Evidenza Codex non valida o fallita');
     const codex = reviews.filter((r) => isCodexFallbackReview(r)
+      && isTerminalReview(r)
       && r.commit_id === HEAD_SHA
       && reviewHasInputRevision(r.body, REVIEW_REVISION));
     // Missing/stale Codex review must not fall through to the workflow drift exemption.
     if (!codex.length) throw new Error('Nessuna review Codex marcata sulla HEAD');
     return codex[codex.length - 1];
   }
-  const bots = reviews.filter((r) => isManagedReview(r));
+  const bots = reviews.filter((r) => isManagedReview(r) && isTerminalReview(r));
   const eligible = bots.filter((review) => {
     const currentRevision = reviewHasInputRevision(review.body, REVIEW_REVISION);
     const sameHeadCarryForward = review.commit_id === HEAD_SHA
@@ -475,7 +486,8 @@ async function main() {
       }
     }
     const outsideOnlyApproved = Boolean(applies && hasRedflag && scope?.outsideOnly && scope?.minted);
-    const approving = (body.includes('## LGTM') && !hasRedflag) || outsideOnlyApproved;
+    const approving = reviewStateAllowsApproval(last)
+      && ((body.includes('## LGTM') && !hasRedflag) || outsideOnlyApproved);
     // The evidence file is ephemeral. On a rerun where the re-review guard
     // correctly skips Claude, require the durable successful required-check
     // proof before carrying a positive Codex review forward.

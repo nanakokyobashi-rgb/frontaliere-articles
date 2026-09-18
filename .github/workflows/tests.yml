@@ -449,7 +449,7 @@ jobs:
              | select(.commit_id == $head)]
              | sort_by([(.submitted_at // .created_at // ""), ((.id // 0) | tonumber? // 0)])
              | if length == 0 then 0
-               elif (.[-1] | has_clean_lgtm) then 1
+               elif (.[-1] | ((.state == "COMMENTED" or .state == "APPROVED") and has_clean_lgtm)) then 1
                else 0
                end'
           )
@@ -479,7 +479,7 @@ jobs:
                 | ascii_downcase)] | unique as $revisions
               | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
             [flatten[]
-             | select((.state // "") != "PENDING")
+             | select((.state // "") != "PENDING" and (.state // "") != "DISMISSED")
              | select(.user.type == "Bot")
              | select(
                  ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
@@ -651,7 +651,7 @@ jobs:
                   | ascii_downcase)] | unique as $revisions
                 | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
               [flatten[]
-               | select((.state // "") != "PENDING")
+               | select((.state // "") != "PENDING" and (.state // "") != "DISMISSED")
                | select(.user.type == "Bot")
                | select(
                    ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))

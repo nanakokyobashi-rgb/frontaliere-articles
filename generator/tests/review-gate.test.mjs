@@ -185,6 +185,7 @@ exit 0
 
 const botReview = (commit, body, { reviewRevision = BODY_REVISION, ...overrides } = {}) => ({
   user: { type: 'Bot', login: 'claude[bot]' },
+  state: 'COMMENTED',
   commit_id: commit,
   body: `${body}${reviewRevision ? `\n<!-- REVIEW_INPUT_REVISION: ${reviewRevision} -->` : ''}`,
   ...overrides,
@@ -284,6 +285,15 @@ test('il review-gate sceglie l ultimo verdetto terminale per timestamp e id', ()
       { ...clean, submitted_at: '2026-09-18T09:02:00Z', id: 12 },
     ],
   }).status, 0);
+});
+
+test('PENDING, DISMISSED e CHANGES_REQUESTED non approvano un LGTM carry-forward', () => {
+  for (const state of ['PENDING', 'DISMISSED', 'CHANGES_REQUESTED']) {
+    const r = runGate({
+      reviews: [botReview(HEAD, 'tutto bene\n\n## LGTM', { state })],
+    });
+    assert.equal(r.status, 1, `${state}: ${r.stdout}`);
+  }
 });
 
 test('un verdetto negativo del body precedente sulla stessa HEAD resta bloccante', () => {
@@ -568,6 +578,7 @@ test('fingerprint: crawler generati senza `.patch` non rendono il contributo UNK
 const codexEvidence = formatCodexFallbackEvidence({ trigger: 'runtime-429', status: 'success' });
 const codexReview = (overrides = {}) => ({
   user: { type: 'Bot', login: 'github-actions[bot]' },
+  state: 'COMMENTED',
   commit_id: HEAD,
   body: `<!-- CODEX_FALLBACK_REVIEW -->\n## LGTM\n<!-- REVIEW_INPUT_REVISION: ${BODY_REVISION} -->`,
   ...overrides,
