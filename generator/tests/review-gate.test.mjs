@@ -223,13 +223,13 @@ test('un push dopo la selezione del verdetto resta bloccante', () => {
   assert.match(r.stdout, /HEAD o body PR sono cambiati durante la valutazione/i, r.stdout);
 });
 
-test('un LGTM della revisione body precedente viene portato avanti sulla stessa HEAD', () => {
+test('un LGTM della revisione body precedente non viene riusato sulla stessa HEAD', () => {
   const stale = runGate({
     reviews: [botReview(HEAD, 'tutto bene\n\n## LGTM', { reviewRevision: OLD_BODY_REVISION })],
     files: ['generator/scripts/create-article.mjs'],
   });
-  assert.equal(stale.status, 0, stale.stdout);
-  assert.match(stale.stdout, /review approvante sulla head/i, stale.stdout);
+  assert.equal(stale.status, 1, stale.stdout);
+  assert.match(stale.stdout, /manca.*marker|nessuna review/i, stale.stdout);
 
   const fresh = runGate({
     reviews: [botReview(HEAD, 'tutto bene\n\n## LGTM', { reviewRevision: BODY_REVISION })],
@@ -238,15 +238,15 @@ test('un LGTM della revisione body precedente viene portato avanti sulla stessa 
   assert.equal(fresh.status, 0, fresh.stdout);
 });
 
-test('un body cambiato sulla stessa HEAD porta avanti una review che conserva il codice', () => {
+test('un body cambiato sulla stessa HEAD richiede una review della nuova revisione', () => {
   const changedBody = `${GOOD_BODY}\n- altra cosa`;
   const r = runGate({
     reviews: [botReview(HEAD, 'tutto bene\n\n## LGTM', { reviewRevision: OLD_BODY_REVISION })],
     currentBody: changedBody,
     reviewRevision: bodyRevision(changedBody),
   });
-  assert.equal(r.status, 0, r.stdout);
-  assert.match(r.stdout, /review approvante sulla head/i, r.stdout);
+  assert.equal(r.status, 1, r.stdout);
+  assert.match(r.stdout, /manca.*marker|nessuna review/i, r.stdout);
 });
 
 test('una review sulla HEAD senza marker non diventa carry-forward', () => {
@@ -457,8 +457,8 @@ test('drift-fallback: 🔴 con revisione corrente ma SHA vecchia → ROSSO', () 
 });
 
 test('drift-fallback: 🔴 sulla SHA corrente ma revisione body vecchia → ROSSO', () => {
-  // Il carry-forward sulla stessa HEAD conserva il finding anche quando la
-  // revisione body è vecchia: il passaggio di body edit non lo può cancellare.
+  // La review legata al body precedente non è eleggibile, ma il fallback deve
+  // comunque conservare il finding storico invece di trattarlo come assente.
   const r = runGate({
     reviews: [botReview(HEAD, '🔴 Important: il controllo non copre il caso X', { reviewRevision: OLD_BODY_REVISION })],
     files: ['.github/workflows/tests.yml'],
@@ -611,7 +611,7 @@ test('Codex LGTM requires valid run evidence and exact HEAD', () => {
   }
 });
 
-test('Codex LGTM sulla stessa HEAD porta avanti il verdetto dopo un body edit', () => {
+test('Codex LGTM sulla stessa HEAD non viene riusato dopo un body edit', () => {
   const changedBody = `${GOOD_BODY}\n- modifica editoriale`;
   const staleCodex = codexReview({
     body: `<!-- CODEX_FALLBACK_REVIEW -->\n## LGTM\n<!-- REVIEW_INPUT_REVISION: ${OLD_BODY_REVISION} -->`,
@@ -622,8 +622,8 @@ test('Codex LGTM sulla stessa HEAD porta avanti il verdetto dopo un body edit', 
     reviewRevision: bodyRevision(changedBody),
     checkRuns: [{ name: 'tests (node --test)', status: 'completed', conclusion: 'success' }],
   });
-  assert.equal(result.status, 0, result.stdout);
-  assert.match(result.stdout, /review approvante sulla head/i, result.stdout);
+  assert.equal(result.status, 1, result.stdout);
+  assert.match(result.stdout, /manca.*marker|nessuna review/i, result.stdout);
 });
 
 test('Codex LGTM carry-forward usa il check richiesto verde come prova persistente', () => {

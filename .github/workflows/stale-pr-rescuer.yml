@@ -226,7 +226,7 @@ jobs:
             # default, e qui si legge l'ULTIMA — cioè proprio quella che una
             # risposta troncata non contiene. Sequenza di ARRAY: `.[][]?`.
             reviews=$(gh api --paginate "repos/$REPO/pulls/$N/reviews?per_page=100" 2>/dev/null || echo '[]')
-            LAST_BODY=$(echo "$reviews" | jq -rs --arg head "$HEAD" --arg revision "$REVIEW_REVISION" '
+            LAST_BODY=$(echo "$reviews" | jq -rs --arg revision "$REVIEW_REVISION" '
               def review_revisions:
                 [((.body // "") | split("\n")[] | rtrimstr("\r")
                   | select(test("^<!-- REVIEW_INPUT_REVISION: body:[0-9a-f]{64} -->$"; "i"))
@@ -235,12 +235,6 @@ jobs:
               def has_current_revision($expected):
                 review_revisions as $revisions
                 | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
-              def has_single_revision:
-                (review_revisions | length) == 1;
-              def applies_to_current_input($expected; $head):
-                has_current_revision($expected)
-                or (((.commit_id // "") | ascii_downcase) == ($head | ascii_downcase)
-                    and has_single_revision);
               [.[][]?
                | select((.state // "") != "PENDING" and (.state // "") != "DISMISSED")
                | select(.user.type == "Bot")
@@ -249,9 +243,9 @@ jobs:
                    or (((.user.login // "") | test("^github-actions\\[bot\\]$";"i"))
                        and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
                  )
-               | select(applies_to_current_input($revision; $head))
+               | select(has_current_revision($revision))
               ] | sort_by(.id // 0) | last | .body // ""')
-            LAST_CID=$(echo "$reviews" | jq -rs --arg head "$HEAD" --arg revision "$REVIEW_REVISION" '
+            LAST_CID=$(echo "$reviews" | jq -rs --arg revision "$REVIEW_REVISION" '
               def review_revisions:
                 [((.body // "") | split("\n")[] | rtrimstr("\r")
                   | select(test("^<!-- REVIEW_INPUT_REVISION: body:[0-9a-f]{64} -->$"; "i"))
@@ -260,12 +254,6 @@ jobs:
               def has_current_revision($expected):
                 review_revisions as $revisions
                 | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
-              def has_single_revision:
-                (review_revisions | length) == 1;
-              def applies_to_current_input($expected; $head):
-                has_current_revision($expected)
-                or (((.commit_id // "") | ascii_downcase) == ($head | ascii_downcase)
-                    and has_single_revision);
               [.[][]?
                | select((.state // "") != "PENDING" and (.state // "") != "DISMISSED")
                | select(.user.type == "Bot")
@@ -274,7 +262,7 @@ jobs:
                    or (((.user.login // "") | test("^github-actions\\[bot\\]$";"i"))
                        and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
                  )
-               | select(applies_to_current_input($revision; $head))
+               | select(has_current_revision($revision))
               ] | sort_by(.id // 0) | last | .commit_id // ""')
 
             # Una deferral per il lease non è una classe C: il check è stato

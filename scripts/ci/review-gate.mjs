@@ -23,14 +23,13 @@
  * `## LGTM` e NESSUN finding `🔴 Important`, oppure solo finding su file fuori
  * dal diff corrente già raccolti in una issue follow-up (stessa
  * `REDFLAG_IMPORTANT_RE` che usa il redflag-fixer — una sola regex, nessun
- * drift). Deve stare sulla head corrente, oppure portare la revisione del body
- * corrente su un commit precedente; se sta su un commit precedente vale il
- * CARRY-FORWARD: se il fingerprint del contributo (3-dot vs merge-base,
+ * drift). Deve portare la revisione del body corrente. Su un commit precedente
+ * vale il CARRY-FORWARD se il fingerprint del contributo (3-dot vs merge-base,
  * code-only) e' identico fra i due commit, la PR non ha cambiato il proprio
  * codice — tipicamente un rebase di solo main-merge — e la review resta valida.
- * Un edit del body sulla stessa HEAD e' un carry-forward esplicito e stretto:
- * il guard evita una seconda review, mentre questo gate rivalida HEAD e body
- * correnti prima di riusare l'ultimo verdetto della HEAD.
+ * Un edit del body cambia l'input fidato della review anche sulla stessa HEAD:
+ * il guard deve quindi riarmare una review nuova e questo gate non può riusare
+ * il verdetto legato al body precedente.
  * E' la stessa funzione che usava `auto-merge-eval.mjs`, importata e non
  * riscritta.
  *
@@ -59,7 +58,6 @@ import {
   normalizeReviewInputRevision,
   reviewInputContextFromPullRequest,
   reviewInputContextMatches,
-  REVIEW_INPUT_REVISION_MARKER_RE,
   reviewHasInputRevision,
 } from './review-test-policy.mjs';
 import { execFileSync } from 'node:child_process';
@@ -173,18 +171,6 @@ function reviewInputContextStillCurrent() {
   return false;
 }
 
-/**
- * A same-HEAD carry-forward still needs a review-input identity.  The HEAD
- * alone is not an authenticator: an unmarked or conflicting review body must
- * never become the verdict after a PR-body edit.  Duplicate copies of the
- * same marker are harmless; different markers are rejected.
- */
-function reviewHasSingleInputRevision(body) {
-  const revisions = [...String(body ?? '').matchAll(REVIEW_INPUT_REVISION_MARKER_RE)]
-    .map((match) => String(match[1]).toLowerCase());
-  return revisions.length > 0 && new Set(revisions).size === 1;
-}
-
 function isTerminalReview(review) {
   return ['COMMENTED', 'APPROVED', 'CHANGES_REQUESTED', 'DISMISSED'].includes(
     String(review?.state || '').toUpperCase(),
@@ -283,10 +269,9 @@ function codexReviewWasPreviouslyAccepted(review) {
 /**
  * Ultima review del reviewer bot, qualunque sia il suo esito. Una review con
  * la revisione body corrente vale anche su una HEAD diversa per il normale
- * fingerprint carry-forward; una review con revisione body vecchia vale solo
- * se e' ancorata alla HEAD corrente. Quest'ultimo e' il percorso esplicito che
- * consente al re-review guard di saltare Codex dopo un body edit senza perdere
- * il verdetto del codice gia' valutato.
+ * fingerprint carry-forward. Una review legata a una revisione body vecchia
+ * non vale nemmeno se e' ancorata alla HEAD corrente: un body edit richiede
+ * una review del nuovo input.
  */
 function lastBotReview() {
   let reviews;
@@ -322,12 +307,9 @@ function lastBotReview() {
     return codex[codex.length - 1];
   }
   const bots = reviews.filter((r) => isManagedReview(r) && isTerminalReview(r));
-  const eligible = bots.filter((review) => {
-    const currentRevision = reviewHasInputRevision(review.body, REVIEW_REVISION);
-    const sameHeadCarryForward = review.commit_id === HEAD_SHA
-      && reviewHasSingleInputRevision(review.body);
-    return currentRevision || sameHeadCarryForward;
-  }).sort(compareReviewOrder);
+  const eligible = bots
+    .filter((review) => reviewHasInputRevision(review.body, REVIEW_REVISION))
+    .sort(compareReviewOrder);
   return eligible.length ? eligible[eligible.length - 1] : null;
 }
 

@@ -353,11 +353,10 @@ jobs:
           echo "review_revision=body:$body_sha" >> "$GITHUB_OUTPUT"
           echo "Review input revision: body:$body_sha"
 
-      # Re-review guard: una review terminale sulla STESSA HEAD e' gia' il
-      # giudizio di questo contributo, anche se e' negativa o non contiene
-      # `## LGTM`, anche quando un body edit introduce una nuova review
-      # revision: il gate porta avanti esplicitamente il verdetto sulla stessa
-      # HEAD dopo aver rivalidato il contesto corrente. Senza questo controllo
+      # Re-review guard: una review terminale approvante sulla STESSA HEAD e'
+      # gia' il giudizio di questo contributo solo se autentica la revisione
+      # body corrente. Un body edit cambia l'input della review e deve riarmare
+      # Codex; un marker singolo ma vecchio non basta. Senza questo controllo
       # ogni rerun/retry dello stesso rosso poteva invocare Codex di nuovo. Su
       # una HEAD nuova si conserva invece il percorso incrementale: si guarda
       # il delta dal contributo della review piu' recente e si fa carry-forward
@@ -418,19 +417,17 @@ jobs:
             echo "contribution_fingerprint=$claimFingerprint" >> "$GITHUB_OUTPUT"
           }
 
-          # Count every terminal APPROVING managed review on this HEAD,
-          # including those posted against an older PR-body hash, but only when
-          # the review authenticates at least one unique body revision. A bare
-          # HEAD match is not enough: it would let an unmarked or conflicting
-          # body become the carry-forward verdict after a body edit. A negative
-          # review deliberately does not skip re-review: editing the body is
-          # how a PR-body finding gets corrected and revalidated.
-          same_head=$(printf '%s' "$reviews" | jq --arg head "$HEAD_SHA" '
-            def has_single_revision:
+          # Count every terminal APPROVING managed review on this HEAD only
+          # when it authenticates the exact current PR-body revision. A bare
+          # HEAD match or an older single marker is not enough: a body edit
+          # must be corrected and revalidated by a new review.
+          same_head=$(printf '%s' "$reviews" | jq --arg head "$HEAD_SHA" --arg revision "$REVIEW_REVISION" '
+            def has_current_revision($expected):
               [((.body // "") | split("\n")[] | rtrimstr("\r")
                 | select(test("^<!-- REVIEW_INPUT_REVISION: body:[0-9a-f]{64} -->$"; "i"))
                 | capture("^<!-- REVIEW_INPUT_REVISION: (?<revision>body:[0-9a-f]{64}) -->$"; "i").revision
-                | ascii_downcase)] | unique | length == 1;
+                | ascii_downcase)] | unique as $revisions
+              | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
             def has_clean_lgtm:
               (any((.body // "") | split("\n")[];
                 test("^[[:space:]]{0,3}##[[:space:]]+LGTM[[:space:]]*$")))
@@ -445,7 +442,7 @@ jobs:
                      and ((.user.login // "") | test("^github-actions\\[bot\\]$"; "i"))
                      and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
                )
-             | select(has_single_revision)
+             | select(has_current_revision($revision))
              | select(.commit_id == $head)]
              | sort_by([(.submitted_at // .created_at // ""), ((.id // 0) | tonumber? // 0)])
              | if length == 0 then 0
@@ -455,7 +452,7 @@ jobs:
           )
           if [ "${same_head:-0}" -gt 0 ]; then
             echo "skip=true" >> "$GITHUB_OUTPUT"
-            echo "Esiste gia' una review approvante del reviewer sulla HEAD $HEAD_SHA → nessuna seconda review, anche dopo un body edit."
+            echo "Esiste gia' una review approvante del reviewer sulla HEAD $HEAD_SHA per la revisione body corrente → nessuna seconda review."
             exit 0
           fi
 
