@@ -66,6 +66,20 @@ test('il testo dell\'ultimo finding si ferma al successivo H2', () => {
   assert.doesNotMatch(findings[0].text, /Adversarial|Summary|review-scope\.mjs/);
 });
 
+test('un Nit sul body della PR non viene assorbito nell\'Important precedente', () => {
+  const body = [
+    '## Findings',
+    '',
+    '`scripts/lib/shared.mjs:L12`: 🔴 Important: il parser è ancora insicuro.',
+    'PR body:L10: 🟡 Nit: il riepilogo dell’implementazione è obsoleto.',
+    '',
+    '## LGTM',
+  ].join('\n');
+  const [finding] = importantFindings(body);
+  assert.doesNotMatch(finding.text, /PR body:L10/);
+  assert.deepEqual(finding.citations, [{ path: 'scripts/lib/shared.mjs', line: 12 }]);
+});
+
 test('normalizza alias diff e risolve un path citato in forma abbreviata', () => {
   assert.equal(normalizePath('a/scripts/lib/detect-language.mjs:L12'), 'scripts/lib/detect-language.mjs');
   const result = classifyImportantFindings(
