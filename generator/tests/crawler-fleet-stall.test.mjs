@@ -23,6 +23,7 @@ import {
   MIN_GROUPS_PER_DAY,
   COVERAGE_WINDOW_HOURS,
   groupDeliveries,
+  parseDeliveryRows,
   stallVerdict,
   deliveriesByDay,
 } from '../../scripts/ci/scan-crawler-fleet-stall.mjs';
@@ -55,6 +56,16 @@ test('riconosce solo i commit di consegna dei gruppi', () => {
   assert.ok(!d.some((x) => x.group === undefined));
   assert.match('Auto-update crawler group 07 jobs', GROUP_COMMIT_RE);
   assert.doesNotMatch('Record crawler generation ledger', GROUP_COMMIT_RE);
+});
+
+test('una risposta API vuota e leggibile attiva il caso zero-consegne', () => {
+  const empty = parseDeliveryRows('');
+  assert.deepEqual(empty.rows, []);
+  assert.equal(empty.readable, true, 'nessuna riga è una risposta valida senza consegne');
+  assert.equal(empty.bad, 0);
+
+  const failed = parseDeliveryRows(null);
+  assert.equal(failed.readable, false, 'null rappresenta un errore del wrapper gh');
 });
 
 test('un fleet sano non suona', () => {
@@ -210,4 +221,3 @@ test('le pagine di gh api arrivano come TSV di due campi, senza JSON da ricucire
   assert.doesNotMatch(src, /replace\(\/\\\]\\s\*\\\[\/g/);
   assert.doesNotMatch(src, /JSON\.parse\(t\)/, 'nessun parsing JSON per riga');
 });
-

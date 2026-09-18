@@ -4130,7 +4130,7 @@
       "reason": "Allarme per la flotta crawler che gira VERDE e non consegna: legge la storia dei commit `Auto-update crawler group NN jobs` del SITO e suona quando la copertura scende sotto meta' della flotta. Corpus-only per costruzione — e' la meta' simmetrica di `workflow-failure-issues.yml`, che qui apre centralmente cio' che il sito cabla in ogni workflow, e misura una consegna CROSS-REPO che solo questo lato ha bisogno di sorvegliare. Il sito vede i propri commit direttamente e non ha questo consumer.",
       "baseline": {
         "site": null,
-        "corpus": "327602469d56b49f",
+        "corpus": "f230644e455e2c43",
         "alignedAt": "2026-09-18"
       }
     }
