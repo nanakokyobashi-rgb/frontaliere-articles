@@ -573,9 +573,11 @@ jobs:
       # it swallows its own errors and always exits 0.
       - name: Alert on shadowed ticker articles (non-blocking, detect-only per #293)
         env:
-          GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-        run: node scripts/ci/ticker-shadow-alert.mjs
+        run: |
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          GH_TOKEN="${runtime_pat:-$GH_TOKEN}" node scripts/ci/ticker-shadow-alert.mjs
 
       - uses: actions/configure-pages@v5
 
