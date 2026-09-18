@@ -128,7 +128,7 @@ export const BING_TITLE_FIXES = [
     title: 'Autoroute A9 Chiasso : fermetures nocturnes 2026',
   },
   {
-    url: 'https://frontaliereticino.ch/fr/articles-frontalier/frais-de-transit-suisse/',
+    url: 'https://frontaliereticino.ch/fr/articles-frontalier/frais-de-transit-suisse-2026/',
     source: 'content/blog-meta-fr.ts',
     kind: 'meta',
     metadataKey: 'blog.article.tassa-transito-svizzera-2023.title',
