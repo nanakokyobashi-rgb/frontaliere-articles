@@ -106,33 +106,43 @@ jobs:
         run: node generator/scripts/load-rc-env.mjs
 
       - name: Alert token-down (dedup, zero-Claude)
-        if: env.GITHUB_PAT_NANAKO == ''
+        if: always()
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
-        run: node scripts/ci/alert-pat-down.mjs --workflow "${{ github.workflow }}" --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        run: |
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            echo "Token operativo runtime disponibile: nessun alert token-down."
+            exit 0
+          fi
+          node scripts/ci/alert-pat-down.mjs --workflow "${{ github.workflow }}" --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
       - name: Rebase near-merge PRs (deterministic, no Claude)
         env:
           # Il PAT serve per due cose insieme: pushare il rebase e dispatchare
           # `tests.yml` (scope actions:write). Un push col GITHUB_TOKEN non
           # ri-triggererebbe nulla, quindi la PR resterebbe ferma comunque.
-          GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           CI_CHECK_NAME: 'tests (node --test)'
           DRY_RUN: ${{ github.event.inputs.dry_run }}
         run: |
           set -uo pipefail
-          if [ -z "${GH_TOKEN:-}" ]; then
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          if [ -z "$runtime_pat" ]; then
             echo "::warning::Nessun PAT usabile → autorebase inerte (serve per il push e per il dispatch di tests.yml)."
             exit 0
           fi
           if [ "${DRY_RUN:-false}" = "true" ]; then
-            node scripts/ci/pr-autorebase.mjs --dry-run
+            GH_TOKEN="$runtime_pat" node scripts/ci/pr-autorebase.mjs --dry-run
+            rc=$?
           else
-            node scripts/ci/pr-autorebase.mjs
+            GH_TOKEN="$runtime_pat" node scripts/ci/pr-autorebase.mjs
+            rc=$?
           fi
+          unset runtime_pat
+          exit "$rc"
 
       - name: Cleanup Firebase credentials
         if: always()

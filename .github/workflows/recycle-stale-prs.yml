@@ -73,7 +73,7 @@ jobs:
       # Primary identity = GitHub App installation token (`frontaliere-automation[bot]`):
       # auto-mints, no expiry babysit, and the re-queue label push re-triggers
       # issue-fix.yml just like the PAT (issue-fix.yml's sender gate already
-      # allowlists the App slug). Falls back to env.GITHUB_PAT (#2861 item 1).
+      # allowlists the App slug). Falls back to GITHUB_PAT_NANAKO (#2861 item 1).
       - name: Mint App token (primary identity, PAT fallback)
         continue-on-error: true
         env:
@@ -88,17 +88,21 @@ jobs:
       # (gh-pat-expiry-monitor.yml) che resta l'owner dell'auto-close.
       # GH_TOKEN = GITHUB_TOKEN, NON il PAT (e' la cosa rotta).
       - name: Alert token-down (dedup, zero-Claude)
-        if: env.GITHUB_PAT_NANAKO == ''
+        if: always()
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
-        run: node scripts/ci/alert-pat-down.mjs --workflow "${{ github.workflow }}" --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        run: |
+          if [ -n "${APP_TOKEN:-${GITHUB_PAT_NANAKO:-}}" ]; then
+            echo "Token operativo runtime disponibile: nessun alert token-down."
+            exit 0
+          fi
+          node scripts/ci/alert-pat-down.mjs --workflow "${{ github.workflow }}" --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
       - name: Recycle deeply-stale stale-review PRs
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PAT: ${{ env.GITHUB_PAT_NANAKO }}
           REPO: ${{ github.repository }}
           # Posture: lo SCHEDULE agisce (false) — è l'intento autonomo; il
           # DISPATCH manuale resta safe-by-default (input default true) per test.
@@ -110,6 +114,12 @@ jobs:
           MAX_RECYCLES_PER_RUN: ${{ github.event.inputs.max_recycles || '5' }}
         run: |
           set -uo pipefail
+          runtime_token="${APP_TOKEN:-${GITHUB_PAT_NANAKO:-}}"
+          if [ -z "$runtime_token" ]; then
+            echo "::warning::Nessun token operativo runtime → recycle stale-review inerte."
+            exit 0
+          fi
+          PAT="$runtime_token"
           DRY="${DRY_RUN:-true}"
           NOW=$(date -u +%s)
           MAXAGE=$(( ${MAX_AGE_HOURS:-24} * 3600 ))
@@ -230,7 +240,7 @@ jobs:
             # GITHUB_TOKEN non triggera `issue-fix` — anti-ricorsione, sender
             # github-actions[bot] — quindi chiudere qui vorrebbe dire chiudere
             # senza che nessuno riprenda il lavoro).
-            if [ -z "${PAT:-}" ]; then
+            if [ -z "$PAT" ]; then
               echo "⚠️ PAT assente — PR #${N} NON chiusa e issue #${ISSUE} NON ri-accodata. Ri-applicare agent:fix a mano."
               gh issue comment "${ISSUE}" --repo "${REPO}" --body "♻️ PR stale #${N} non chiusa: riapplicare \`agent:fix\` (serve PAT) per un fix fresco." 2>/dev/null || true
               continue
@@ -291,9 +301,9 @@ jobs:
             # issue-fix — anti-ricorsione; sender github-actions[bot] non passa
             # il gate). Col PAT il sender e' un account del progetto, che il
             # gate di issue-fix accetta → trigger valido.
-            GH_TOKEN="${PAT}" gh issue edit "${ISSUE}" --repo "${REPO}" --remove-label agent:fix 2>/dev/null || true
+            GH_TOKEN="$PAT" gh issue edit "${ISSUE}" --repo "${REPO}" --remove-label agent:fix 2>/dev/null || true
             sleep 2
-            if GH_TOKEN="${PAT}" gh issue edit "${ISSUE}" --repo "${REPO}" --add-label agent:fix 2>/dev/null; then
+            if GH_TOKEN="$PAT" gh issue edit "${ISSUE}" --repo "${REPO}" --add-label agent:fix 2>/dev/null; then
               echo "issue #${ISSUE} ri-accodata (agent:fix via PAT)"
             else
               echo "::error::re-label fallito issue #${ISSUE} (PR #${N} gia' chiusa): riapplicare agent:fix a mano."

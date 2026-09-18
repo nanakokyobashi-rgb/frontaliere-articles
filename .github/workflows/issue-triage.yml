@@ -119,12 +119,17 @@ jobs:
         run: node generator/scripts/load-rc-env.mjs
 
       - name: Alert token-down (dedup, zero-Claude)
-        if: env.GITHUB_PAT_NANAKO == ''
+        if: always()
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
-        run: node scripts/ci/alert-pat-down.mjs --workflow "${{ github.workflow }}" --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        run: |
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            echo "Token operativo runtime disponibile: nessun alert token-down."
+            exit 0
+          fi
+          node scripts/ci/alert-pat-down.mjs --workflow "${{ github.workflow }}" --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
       - name: Classify and route (deterministic, no Claude)
         env:
@@ -133,11 +138,11 @@ jobs:
           # GITHUB_TOKEN: un evento `labeled` emesso dal GITHUB_TOKEN non fa
           # partire né il fixer né il drainer. Col GITHUB_TOKEN il triage
           # sembrerebbe funzionare — la label c'è — ma non succederebbe nulla.
-          ROUTING_TOKEN: ${{ env.GITHUB_PAT_NANAKO }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
+          routing_token="${GITHUB_PAT_NANAKO:-}"
           issue_json=$(gh issue view "$ISSUE_NUMBER" --repo "$REPO" --json title,body,labels,state)
           labels_json=$(printf '%s' "$issue_json" | jq -c '[.labels[].name]')
           state=$(printf '%s' "$issue_json" | jq -r '.state')
@@ -204,7 +209,7 @@ jobs:
               gh issue edit "$ISSUE_NUMBER" --repo "$REPO" --add-label agent:triaged || true
               echo "Issue non OPEN ($state) → skip routing L11."; exit 0
             fi
-            if [ -z "${ROUTING_TOKEN:-}" ]; then
+            if [ -z "$routing_token" ]; then
               echo "::warning::L11 senza PAT: accodo con GITHUB_TOKEN per il prossimo sweep/drainer."
               gh issue edit "$ISSUE_NUMBER" --repo "$REPO" \
                 --add-label agent:fix-queued --add-label fu-prio:low \
@@ -213,7 +218,7 @@ jobs:
               exit 0
             fi
             echo "L11 contract valido → agent:fix-queued via PAT."
-            GH_TOKEN="$ROUTING_TOKEN" gh issue edit "$ISSUE_NUMBER" --repo "$REPO" \
+            GH_TOKEN="$routing_token" gh issue edit "$ISSUE_NUMBER" --repo "$REPO" \
               --add-label agent:fix-queued --add-label fu-prio:low \
               --remove-label operations-audit-review
             gh issue edit "$ISSUE_NUMBER" --repo "$REPO" --add-label agent:triaged || true
@@ -236,18 +241,18 @@ jobs:
             gh issue edit "$ISSUE_NUMBER" --repo "$REPO" --add-label "agent:triaged" || true
             echo "Issue non OPEN ($state) → skip routing."; exit 0
           fi
-          if [ -z "${ROUTING_TOKEN:-}" ]; then
+          if [ -z "$routing_token" ]; then
             echo "::warning::Nessun PAT usabile → issue non ancora triaged; lo sweep potrà ritentare senza perdere l'evento."; exit 0
           fi
           if [ "$route" = "queue" ]; then
             prio="${fuprio:-low}"
             echo "Accodo #$ISSUE_NUMBER → agent:fix-queued + fu-prio:$prio (la promuove il drainer)."
-            GH_TOKEN="$ROUTING_TOKEN" gh issue edit "$ISSUE_NUMBER" --repo "$REPO" \
+            GH_TOKEN="$routing_token" gh issue edit "$ISSUE_NUMBER" --repo "$REPO" \
               --add-label "agent:fix-queued" --add-label "fu-prio:$prio" \
               || { echo "::warning::accodamento via PAT fallito (scope/label?) — issue non triaged, lo sweep ritenta."; exit 0; }
           else
             echo "Applico agent:fix via PAT su #$ISSUE_NUMBER (category=$cat) → fa partire il fixer."
-            GH_TOKEN="$ROUTING_TOKEN" gh issue edit "$ISSUE_NUMBER" --repo "$REPO" --add-label "agent:fix" \
+            GH_TOKEN="$routing_token" gh issue edit "$ISSUE_NUMBER" --repo "$REPO" --add-label "agent:fix" \
               || { echo "::warning::agent:fix via PAT fallito (scope issues:write? label assente?) — issue non triaged, lo sweep ritenta."; exit 0; }
           fi
           # Anti-loop solo dopo il routing: un evento issues:opened è one-shot e
@@ -305,12 +310,17 @@ jobs:
         run: node generator/scripts/load-rc-env.mjs
 
       - name: Alert token-down (dedup, zero-Claude)
-        if: env.GITHUB_PAT_NANAKO == ''
+        if: always()
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
-        run: node scripts/ci/alert-pat-down.mjs --workflow "${{ github.workflow }}" --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        run: |
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            echo "Token operativo runtime disponibile: nessun alert token-down."
+            exit 0
+          fi
+          node scripts/ci/alert-pat-down.mjs --workflow "${{ github.workflow }}" --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
       # Normalizza prima dello sweep generico le issue L11 già persistite dal
       # GITHUB_TOKEN. Il loro testo contiene path di control-plane, ma il
@@ -322,10 +332,10 @@ jobs:
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_PAT: ${{ env.GITHUB_PAT_NANAKO }}
           GH_REPO: ${{ github.repository }}
         run: |
           set -uo pipefail
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
           issues=$(gh issue list --repo "$GH_REPO" --state open --label operations-audit --limit 60 --json number,body 2>/dev/null || echo '[]')
           while IFS= read -r issue; do
             [ -n "$issue" ] || continue
@@ -360,8 +370,8 @@ jobs:
             [ "$present" = "true" ] || continue
             if [ "$valid" = "true" ] && [ "$fixable" = "true" ]; then
               echo "L11 #$number contract valido → queue + triaged"
-              if [ -n "${GITHUB_PAT:-}" ]; then
-                GH_TOKEN="$GITHUB_PAT" gh issue edit "$number" --repo "$GH_REPO" \
+              if [ -n "$runtime_pat" ]; then
+                GH_TOKEN="$runtime_pat" gh issue edit "$number" --repo "$GH_REPO" \
                   --add-label agent:fix-queued --add-label fu-prio:low \
                   --remove-label operations-audit-review >/dev/null 2>&1 || echo "::warning::L11 #$number PAT routing fallito"
               else
@@ -385,15 +395,15 @@ jobs:
           # di questo account tiene lo script byte-identico a quello del sito:
           # è la differenza fra un file copiabile e un fork da riallineare a
           # mano ogni volta.
-          GITHUB_PAT: ${{ env.GITHUB_PAT_NANAKO }}
           GH_REPO: ${{ github.repository }}
           INPUT_CAP: ${{ github.event.inputs.cap || '5' }}
           INPUT_DRY_RUN: ${{ github.event.inputs.dry_run }}
         run: |
           set -uo pipefail
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
           ARGS=(--cap "$INPUT_CAP")
           if [ "$INPUT_DRY_RUN" = "true" ]; then ARGS+=(--dry-run); fi
-          node scripts/ci/triage-sweep.mjs "${ARGS[@]}"
+          GITHUB_PAT="$runtime_pat" node scripts/ci/triage-sweep.mjs "${ARGS[@]}"
 
       # Doppio instradamento (#918, item 2). Da quando la chiave di concorrenza
       # e' per-issue (#908), questa run schedulata e la run event-driven non si
