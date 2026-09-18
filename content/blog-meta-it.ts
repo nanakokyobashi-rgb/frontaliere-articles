@@ -11820,6 +11820,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.giorgetti-firma-decreto-contributi-comuni-confine.title': 'Frontalieri: Giorgetti firma il decreto sui contributi',
     'blog.article.giorgetti-firma-decreto-contributi-comuni-confine.excerpt': 'Il ministro dell\'Economia Giancarlo Giorgetti ha firmato il decreto sui contributi statali per i Comuni di frontiera basato sull\'accordo Roma-Berna 2020.',
     'blog.article.giorgetti-firma-decreto-contributi-comuni-confine.imageAlt': 'Il ministro Giancarlo Giorgetti ha firmato il decreto sui contributi ai Comuni di confine',
+    'blog.article.sequestro-pappagalli-gandria.title': 'Sequestro di pappagalli protetti al valico di Gandria',
+    'blog.article.sequestro-pappagalli-gandria.excerpt': 'Fermato un cittadino svizzero al valico di Gandria con due pappagalli cenerini sprovvisti di autorizzazione Cites. Intervento di Udsc e Usav.',
+    'blog.article.sequestro-pappagalli-gandria.imageAlt': 'Controlli doganali al valico di Gandria in Ticino',
 };
 
 export default blogMetaIt;

@@ -11819,6 +11819,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.giorgetti-firma-decreto-contributi-comuni-confine.title': 'Frontier workers: Giorgetti signs the decree on contributions',
     'blog.article.giorgetti-firma-decreto-contributi-comuni-confine.excerpt': 'Economy Minister Giancarlo Giorgetti signed the decree on state contributions for border municipalities based on the Rome-Berna 2020 agreement.',
     'blog.article.giorgetti-firma-decreto-contributi-comuni-confine.imageAlt': 'Minister Giancarlo Giorgetti signed the decree on contributions to border municipalities',
+    'blog.article.sequestro-pappagalli-gandria.title': 'Seizure of protected parrots at the Gandria crossing',
+    'blog.article.sequestro-pappagalli-gandria.excerpt': 'A Swiss citizen was stopped at the Gandria crossing with two ash parrots without Cites authorization. Intervention by UDSC and USAV.',
+    'blog.article.sequestro-pappagalli-gandria.imageAlt': 'Customs controls at the Gandria border crossing in Ticino',
 };
 
 export default blogMetaEn;

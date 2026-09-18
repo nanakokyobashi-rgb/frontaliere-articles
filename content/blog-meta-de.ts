@@ -11818,6 +11818,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.giorgetti-firma-decreto-contributi-comuni-confine.title': 'Grenzgänger: Giorgetti unterzeichnet das Beitragsdekret',
     'blog.article.giorgetti-firma-decreto-contributi-comuni-confine.excerpt': 'Wirtschaftsminister Giancarlo Giorgetti hat das Dekret über staatliche Beiträge für Grenzgemeinden auf der Grundlage des Rom-Bern-Abkommens 2020 unterzeichnet.',
     'blog.article.giorgetti-firma-decreto-contributi-comuni-confine.imageAlt': 'Minister Giancarlo Giorgetti unterzeichnete das Dekret über Beiträge an Grenzgemeinden',
+    'blog.article.sequestro-pappagalli-gandria.title': 'Beschlagnahme von geschützten Papageien am Gandria-Pass',
+    'blog.article.sequestro-pappagalli-gandria.excerpt': 'Ein Schweizer Bürger wurde am Gandria-Pass mit zwei Aschenpapageien ohne CITES-Genehmigung festgenommen. Intervention von UdSSR und Usav.',
+    'blog.article.sequestro-pappagalli-gandria.imageAlt': 'Zollkontrollen am Grenzübergang Gandria im Tessin',
 };
 
 export default blogMetaDe;

@@ -11821,6 +11821,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.giorgetti-firma-decreto-contributi-comuni-confine.title': 'Frontaliers : Giorgetti signe le décret sur les contributions',
     'blog.article.giorgetti-firma-decreto-contributi-comuni-confine.excerpt': 'Le ministre de l\'Economie Giancarlo Giorgetti a signé le décret sur les contributions de l\'État pour les communes frontalières basé sur l\'accord Rome-Berne 2020.',
     'blog.article.giorgetti-firma-decreto-contributi-comuni-confine.imageAlt': 'Le ministre Giancarlo Giorgetti a signé le décret sur les contributions aux communes frontalières',
+    'blog.article.sequestro-pappagalli-gandria.title': 'Enlèvement de perroquets protégés au col de Gandria',
+    'blog.article.sequestro-pappagalli-gandria.excerpt': 'Arrêté un citoyen suisse au col de Gandria avec deux perroquets cendrés sans autorisation Cites. Intervention de Udsc et Usav.',
+    'blog.article.sequestro-pappagalli-gandria.imageAlt': 'Contrôles douaniers au poste frontière de Gandria au Tessin',
 };
 
 export default blogMetaFr;

@@ -91411,6 +91411,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-sequestro-pappagalli-gandria': {
+    title: 'Sequestro di pappagalli protetti al valico di Gandria',
+    description: 'Fermato al valico di Gandria un cittadino svizzero con due pappagalli cenerini sprovvisti di autorizzazione Cites. Intervento di Udsc e Usav. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, sequestro, pappagalli, protetti, valico',
+    ogTitle: 'Pappagalli protetti sequestrati al valico di Gandria',
+    ogDescription: 'Scopri i dettagli sul sequestro di due pappagalli cenerini sprovvisti di certificato Cites fermati al valico di Gandria dagli agenti dell\'Udsc e dell\'Usav.',
+    canonicalPath: '/articoli-frontaliere/sequestro-pappagalli-gandria',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Sequestro di pappagalli protetti al valico di Gandria",
+      "description": "Fermato al valico di Gandria un cittadino svizzero con due pappagalli cenerini sprovvisti di autorizzazione Cites. Intervento di Udsc e Usav. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/sequestro-pappagalli-gandria.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Controlli doganali al valico di Gandria in Ticino"
+      },
+      "datePublished": "2026-09-18T02:08:16+00:00",
+      "dateModified": "2026-09-18T02:08:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/sequestro-pappagalli-gandria/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
