@@ -145,3 +145,35 @@ test('live audit accepts canonical attributes in either order and numeric entiti
   });
   assert.deepEqual(result.findings, []);
 });
+
+// Ogni URL della policy e' una stringa scritta a mano, ma lo slug che contiene
+// appartiene alla mappa localizzata di `content/router*Data.ts`: sono due copie
+// dello stesso dato, e finora niente le teneva insieme. Quando
+// `tassa-transito-svizzera-2023` ha preso lo slug francese
+// `frais-de-transit-suisse-2026`, qui e' rimasto `frais-de-transit-suisse`:
+// l'audit live ha iniziato a chiedere una pagina che non esiste e ne ha ricavato
+// TRE finding dalla stessa causa — `http-status` 404, piu' `title-source-drift`
+// e `canonical-missing` letti sulla 404 di GitHub Pages, che ha un `<title>`
+// suo e nessun canonical. Lo step che apre la PR esce 1 sui finding residui,
+// quindi il loop e' rimasto rosso 54h per uno slug, senza che nessuna
+// correzione di titolo potesse chiuderlo.
+//
+// Il confronto e' sul letterale QUOTATO, non sulla sottostringa: `includes`
+// nudo troverebbe `frais-de-transit-suisse` dentro
+// `'frais-de-transit-suisse-2026'` e il guard passerebbe proprio nel caso che
+// deve bocciare.
+test('ogni URL della policy punta a uno slug che esiste nella mappa localizzata', () => {
+  const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
+  const slugSources = ['content/routerBlogData.ts', 'content/routerSwissData.ts']
+    .map((relativePath) => readFileSync(resolve(repoRoot, relativePath), 'utf8'));
+
+  const orphans = BING_TITLE_FIXES
+    .map((fix) => new URL(fix.url).pathname.replace(/\/$/, '').split('/').pop())
+    .filter((slug) => !slugSources.some((source) => source.includes(`'${slug}'`)));
+
+  assert.deepEqual(
+    orphans,
+    [],
+    `slug assenti da content/router*Data.ts (URL della policy da riallineare): ${orphans.join(', ')}`,
+  );
+});
