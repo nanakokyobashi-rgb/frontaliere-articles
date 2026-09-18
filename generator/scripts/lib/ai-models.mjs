@@ -5473,14 +5473,37 @@ export function resetExhaustedModel(modelId) {
  * is treated as an intermediary/routing miss, not a reason to retire the model.
  */
 function _hasEolEvidence(bodyText = '') {
-  const b = String(bodyText).toLowerCase();
-  // Qualifica la parola di ciclo di vita con "model" nello stesso frammento:
-  // una risposta 410 come "route retired" descrive il trasporto, non il
-  // modello. Il limite di frase evita che un riferimento a un endpoint morto
-  // in una parte del body contamini l'evidenza EOL del modello.
+  const raw = String(bodyText);
+  const fragments = [];
+  const collectStrings = (value) => {
+    if (typeof value === 'string') {
+      fragments.push(value);
+    } else if (Array.isArray(value)) {
+      for (const item of value) collectStrings(item);
+    } else if (value && typeof value === 'object') {
+      for (const item of Object.values(value)) collectStrings(item);
+    }
+  };
+
+  try {
+    // Restrict the evidence to JSON values (message/detail/etc.), never keys.
+    // That prevents `{ "model": "...", "detail": "route retired" }` from
+    // treating the structural `model` key as an EOL subject.
+    collectStrings(JSON.parse(raw));
+  } catch {
+    fragments.push(raw);
+  }
+
   const eolTerm = '(?:end\\s+of\\s+life|end-of-life|no longer available|no longer supported|decommissioned|retired|disabled)';
-  return new RegExp('\\bmodel\\b[^;\\n]{0,160}\\b' + eolTerm + '\\b').test(b)
-    || new RegExp('\\b' + eolTerm + '\\b[^;\\n]{0,160}\\bmodel\\b').test(b);
+  const namedModelEol = new RegExp('\\bmodel\\b[^;\\n]{0,160}\\b' + eolTerm + '\\b');
+  const modelPathEol = new RegExp('\\b[a-z0-9][a-z0-9._-]*/[a-z0-9][a-z0-9._:/-]*\\b[^;\\n]{0,160}\\b' + eolTerm + '\\b');
+  return fragments.some((fragment) => {
+    const b = fragment.toLowerCase();
+    // The first form covers `model X ... retired` and explicit generic
+    // statements such as `model is disabled`; the second covers provider
+    // messages such as `models/foo is no longer available`.
+    return namedModelEol.test(b) || modelPathEol.test(b);
+  });
 }
 
 /**
@@ -5543,6 +5566,11 @@ export function isRetryableError(status, bodyText = '') {
     b.includes('model is overloaded') ||
     /\bbusy\b/.test(b);
   if (!hasTransientToken) return false;
+  // A provider-wide credential/WAF/IP refusal wins over a transient-looking
+  // token in the same body: retrying would pay the same dead provider once per
+  // sibling. This precedence is limited to 403; a 410 remains governed by
+  // model-lifecycle evidence below.
+  if (status === 403 && _isProviderWide403(bodyText)) return false;
   if ((status === 403 || status === 410) && _hasPermanent403410Evidence(bodyText)) {
     return false;
   }

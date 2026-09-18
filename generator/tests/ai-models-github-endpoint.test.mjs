@@ -621,14 +621,17 @@ const TRANSIENT_UNAVAILABLE_BODY = '{"error":{"message":"temporarily unavailable
 const TRANSIENT_RATE_LIMIT_BODY = '{"error":{"message":"rate limit exceeded, retry later"}}';
 const TRANSIENT_BUSY_BODY = '{"error":{"message":"model is busy"}}';
 const WAF_IP_403_BODY = '{"error":{"message":"Your IP has been blocked by the WAF"}}';
+const WAF_IP_TRANSIENT_403_BODY = '{"error":{"message":"Your IP has been blocked by the WAF; rate limit exceeded"}}';
 const CREDENTIAL_403_BODY = '{"error":{"message":"invalid api key"}}';
 const API_KEY_SUBJECT_403_BODY = '{"error":{"message":"API key is invalid"}}';
 const TOKEN_EXPIRED_403_BODY = '{"error":{"message":"token has expired"}}';
 const REGIONAL_403_BODY = '{"error":{"message":"forbidden in this region"}}';
 const ROUTING_410_BODY = '{"error":{"message":"No healthy upstream; origin routing changed"}}';
 const RETIRED_ROUTE_410_BODY = '{"error":{"message":"route retired"}}';
+const STRUCTURED_RETIRED_ROUTE_410_BODY = '{"model":"meta/llama-3.1-8b-instruct","detail":"route retired"}';
 const GONE_TITLE_410_BODY = '{"type":"about:blank","title":"Gone","status":410}';
 const MODEL_RETIRED_410_BODY = '{"error":{"message":"model llama-3.1-8b-instruct has been retired"}}';
+const MODEL_PATH_UNAVAILABLE_410_BODY = '{"error":{"message":"models/meta/llama-3.1-8b-instruct is no longer available"}}';
 const MODEL_DISABLED_410_BODY = '{"error":{"message":"model is disabled"}}';
 const GROQ_DECOMMISSION_410 = '{"error":{"message":"model llama-3.1-8b-instant has been decommissioned"}}';
 
@@ -707,6 +710,14 @@ describe('matrice 403/410: isRetryableError e classifyNonRetryableError', () => 
       classification: { nonRetryable: true, markExhausted: true, exhaustProvider: true },
     },
     {
+      label: 'OpenRouter 403 WAF/IP with transient wording stays provider-wide',
+      status: 403,
+      provider: 'OpenRouter',
+      body: WAF_IP_TRANSIENT_403_BODY,
+      retryable: false,
+      classification: { nonRetryable: true, markExhausted: true, exhaustProvider: true },
+    },
+    {
       label: 'Cerebras 403 invalid api key',
       status: 403,
       provider: 'Cerebras',
@@ -755,10 +766,26 @@ describe('matrice 403/410: isRetryableError e classifyNonRetryableError', () => 
       classification: { nonRetryable: true, markExhausted: false },
     },
     {
+      label: 'NVIDIA 410 structured route retired is not model EOL',
+      status: 410,
+      provider: 'NVIDIA',
+      body: STRUCTURED_RETIRED_ROUTE_410_BODY,
+      retryable: false,
+      classification: { nonRetryable: true, markExhausted: false },
+    },
+    {
       label: 'NVIDIA 410 retired model',
       status: 410,
       provider: 'NVIDIA',
       body: MODEL_RETIRED_410_BODY,
+      retryable: false,
+      classification: { nonRetryable: true, markExhausted: true },
+    },
+    {
+      label: 'NVIDIA 410 model path no longer available',
+      status: 410,
+      provider: 'NVIDIA',
+      body: MODEL_PATH_UNAVAILABLE_410_BODY,
       retryable: false,
       classification: { nonRetryable: true, markExhausted: true },
     },
