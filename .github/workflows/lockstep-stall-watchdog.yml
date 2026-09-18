@@ -111,15 +111,17 @@ jobs:
 
       - name: Watch the engine lockstep
         env:
-          # `GITHUB_PAT_NANAKO` arriva da Remote Config ed è quello che fa
-          # emettere l'evento `issues: opened`; il fallback tiene la guardia viva
-          # anche quando RC non risponde.
-          GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
+          # `GITHUB_PAT_NANAKO` arriva da Remote Config (GITHUB_ENV) ed è quello
+          # che fa emettere l'evento `issues: opened`; il fallback shell tiene
+          # la guardia viva anche quando RC non risponde.
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           THRESHOLD_HOURS: ${{ inputs.threshold_hours || '3' }}
           DRY_RUN: ${{ inputs.dry_run }}
         run: |
           set -euo pipefail
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          export GH_TOKEN="${runtime_pat:-$GH_TOKEN}"
           args=(--threshold-hours "$THRESHOLD_HOURS")
           if [ "${DRY_RUN:-false}" = "true" ]; then args+=(--dry-run); fi
           node scripts/ci/lockstep-stall-watch.mjs "${args[@]}"
