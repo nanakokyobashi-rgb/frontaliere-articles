@@ -5513,11 +5513,10 @@ function _isProviderWide403(bodyText = '') {
     b.includes('web application firewall') ||
     /\bwaf\b/.test(b) ||
     /\b(?:ip|address)\b.{0,40}\b(?:blocked|banned|denied)\b/.test(b) ||
-    /\b(?:invalid|expired|revoked)\s+(?:api\s+)?key\b/.test(b) ||
-    /\b(?:invalid|expired|revoked)\s+(?:access\s+)?token\b/.test(b) ||
+    /\b(?:invalid|expired|revoked|missing)\s+(?:api\s+)?(?:key|token|credential)s?\b/.test(b) ||
     b.includes('bad credentials') ||
     b.includes('account disabled') ||
-    b.includes('credential')
+    /\bcredentials?\s+(?:is|are)\s+(?:invalid|expired|revoked|missing)\b/.test(b)
   );
 }
 
