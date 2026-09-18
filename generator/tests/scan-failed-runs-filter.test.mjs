@@ -34,6 +34,7 @@ import {
   parseRunListJson,
   ALWAYS_ESCALATE_WORKFLOWS,
   gateForWorkflow,
+  orderBySurveillanceFirst,
 } from '../../scripts/ci/scan-failed-runs.mjs';
 import { TITLE_RE } from '../../scripts/ci/close-recovered-failure-issues.mjs';
 import { isExclusivelyWorkflowScoped } from '../../scripts/ci/check-workflows-scope.mjs';
@@ -854,4 +855,33 @@ test('il gate di ricorrenza resta attivo per il rumore transiente della generazi
   assert.equal(gateForWorkflow('Crawler Group 23 (sparse cross-repo execution)', { gate: 3 }), 3);
   // Un articolo perso non aspetta la terza perdita: contratto preesistente.
   assert.equal(gateForWorkflow('Generate Blog Article', { gate: 3, lost: true }), -1);
+});
+
+/**
+ * Il gate non e' l'unico punto in cui un allarme puo' sparire: il ciclo che
+ * apre le issue si ferma a `MAX_ISSUES` (5 per default). Con piu' di cinque
+ * workflow falliti nella stessa passata, un watchdog in coda all'ordine di
+ * inserimento viene troncato, esce dalla finestra di lookback e la sua issue
+ * non viene aperta mai. I workflow sorvegliati vanno quindi servit_i_ prima
+ * del cap, non solo esentati dal gate.
+ */
+test('i workflow di sorveglianza sono ordinati prima del cap MAX_ISSUES', () => {
+  const noisy = [
+    'Generate Blog Article',
+    'Crawler Group 1 (sparse cross-repo execution)',
+    'Crawler Group 2 (sparse cross-repo execution)',
+    'Crawler Group 3 (sparse cross-repo execution)',
+    'Crawler Group 4 (sparse cross-repo execution)',
+    'Crawler Group 5 (sparse cross-repo execution)',
+  ];
+  const entries = [...noisy, 'Translate Queue Recovery Watchdog (observe only)'].map((n) => [n, {}]);
+  const ordered = orderBySurveillanceFirst(entries).map(([n]) => n);
+
+  const cap = 5;
+  assert.ok(
+    ordered.slice(0, cap).includes('Translate Queue Recovery Watchdog (observe only)'),
+    `il watchdog e' fuori dai primi ${cap}: ${ordered.slice(0, cap).join(', ')}`,
+  );
+  // Stabilita': il rumore conserva il suo ordine relativo.
+  assert.deepEqual(ordered.filter((n) => noisy.includes(n)), noisy);
 });

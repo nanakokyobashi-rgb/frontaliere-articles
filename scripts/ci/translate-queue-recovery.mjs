@@ -40,13 +40,21 @@ export const MAX_REPORT_BYTES = 16 * 1024;
 //     servizio per run: la coda e' satura per progetto, non per incidente.
 // Con la vecchia soglia unica di 1800 s il watchdog e' risultato rosso in 15
 // delle ultime 16 run schedulate senza che nulla fosse rotto (rosso continuo
-// per 52,5 h): misurava l'occupazione del mutex, non un guasto. Restano vere
-// solo due condizioni:
-//   - nessun detentore attivo e la coda non parte comunque oltre il timeout del
-//     target (350 min) piu' margine: non e' contesa, e' una coda bloccata;
-//   - detentore presente ma la linea non avanza in una giornata intera.
+// per 52,5 h): misurava l'occupazione del mutex, non un guasto.
+//
+// L'allarme ora misura CHI deve muoversi, non quanto e' vecchia la coda:
+//   - senza detentore attivo il guasto e' la coda che non parte, e si misura
+//     sull'attesa del pending piu' vecchio: oltre il timeout del target
+//     (350 min) piu' margine non e' contesa, e' una coda bloccata;
+//   - con un detentore l'attesa dei pending NON e' un segnale di salute, perche'
+//     cresce con la profondita' dell'arretrato e non col guasto: tre run davanti
+//     a 350 min di timeout ciascuna fanno 17,5 h di attesa lecita, quattro ne
+//     fanno 23,3. A dover avanzare e' il detentore, e il suo wall clock
+//     `createdAt`->`updatedAt` misurato ha un massimo di 869 min su 15 run.
+//     Oltre le 24 h (1,66x il massimo osservato) il detentore non sta finendo:
+//     e' il caso job-zero per cui esiste `translate-queue-recovery.yml`.
 export const QUEUE_UNSERVED_STALE_THRESHOLD_SECONDS = 6 * 60 * 60;
-export const QUEUE_SERVED_STALE_THRESHOLD_SECONDS = 24 * 60 * 60;
+export const QUEUE_HOLDER_STALE_THRESHOLD_SECONDS = 24 * 60 * 60;
 
 const API_ROOT = 'https://api.github.com';
 const REQUEST_TIMEOUT_MS = 8_000;
@@ -193,6 +201,7 @@ function makeInitialState(nowMs) {
     pendingRunIds: [],
     queueCreatedMs: [],
     pendingCreatedMs: [],
+    activeCreatedMs: [],
     discovery: {
       declaredTotal: 0,
       maxRuns: MAX_RUN_PAGES * RUNS_PER_PAGE,
@@ -293,7 +302,17 @@ export function createReadOnlyGithubClient({ fetchImpl, token }) {
 async function listCurrentQueueRuns(client, state) {
   const collected = [];
   const seen = new Set();
-  for (const status of [...ACTIVE_STATUSES, ...PENDING_STATUSES]) {
+  // `in_progress` si legge PER ULTIMO, e l'ordine e' portante ora che l'alert
+  // distingue "servita" da "non servita". Il censimento sono cinque GET
+  // sequenziali, e un hand-off dura 4 s (misurato: run 35327548227 e' partita
+  // 4 s dopo la fine di 35313063351). Leggendo prima i pending, una run che
+  // subentra durante il censimento finisce in due liste e il duplicato fa
+  // scattare `liveness_census_inconclusive` (fail-closed, nessun alert), oppure
+  // sparisce dai pending e la coda risulta vuota: nessuno dei due percorsi
+  // inventa una coda "senza detentore". Nell'ordine opposto un hand-off
+  // preso a meta' darebbe 0 active con un pending vecchio, cioe' un rosso
+  // falso proprio sul ramo nuovo.
+  for (const status of [...PENDING_STATUSES, ...ACTIVE_STATUSES]) {
     const query = new URLSearchParams({
       branch: TARGET_BRANCH,
       page: '1',
@@ -425,7 +444,10 @@ function collectShallowFacts(run, state, candidates, { collectQueue = true } = {
       return;
     }
     if (collectQueue) {
-      if (isActive) state.activeRunIds.push(runId);
+      if (isActive) {
+        state.activeRunIds.push(runId);
+        state.activeCreatedMs.push(createdMs);
+      }
       if (isPending) {
         state.pendingRunIds.push(runId);
         state.pendingCreatedMs.push(createdMs);
@@ -517,14 +539,26 @@ function buildReport(state, client) {
   const oldestPendingAgeSeconds = oldestPendingMs === null
     ? null
     : Math.max(0, Math.floor((state.nowMs - oldestPendingMs) / 1000));
-  // Con un detentore attivo l'attesa e' contesa lecita sul mutex; senza
-  // detentore la coda non sta partendo, ed e' quello il guasto osservabile.
-  const thresholdSeconds = state.activeRunIds.length > 0
-    ? QUEUE_SERVED_STALE_THRESHOLD_SECONDS
+  const oldestActiveMs = state.activeCreatedMs.length > 0
+    ? Math.min(...state.activeCreatedMs)
+    : null;
+  const oldestActiveAgeSeconds = oldestActiveMs === null
+    ? null
+    : Math.max(0, Math.floor((state.nowMs - oldestActiveMs) / 1000));
+  // Chi misuriamo dipende da chi deve muoversi: il detentore se c'e', altrimenti
+  // la coda che non parte. `measured` mette la scelta nel report, cosi' il
+  // numero dell'alert non e' interpretabile in due modi.
+  const served = state.activeRunIds.length > 0;
+  const measured = served ? 'oldest_holder_age' : 'oldest_pending_age';
+  const measuredAgeSeconds = served ? oldestActiveAgeSeconds : oldestPendingAgeSeconds;
+  const thresholdSeconds = served
+    ? QUEUE_HOLDER_STALE_THRESHOLD_SECONDS
     : QUEUE_UNSERVED_STALE_THRESHOLD_SECONDS;
   const queueSlo = !state.complete
     ? {
       alert: false,
+      measured,
+      measuredAgeSeconds,
       oldestPendingAgeSeconds,
       state: 'not_evaluable',
       thresholdSeconds,
@@ -532,14 +566,18 @@ function buildReport(state, client) {
     : oldestPendingMs === null
       ? {
         alert: false,
+        measured,
+        measuredAgeSeconds: null,
         oldestPendingAgeSeconds: null,
         state: 'empty',
         thresholdSeconds,
       }
       : {
-        alert: oldestPendingAgeSeconds >= thresholdSeconds,
+        alert: measuredAgeSeconds >= thresholdSeconds,
+        measured,
+        measuredAgeSeconds,
         oldestPendingAgeSeconds,
-        state: oldestPendingAgeSeconds >= thresholdSeconds
+        state: measuredAgeSeconds >= thresholdSeconds
           ? 'breached'
           : 'within_slo',
         thresholdSeconds,
@@ -582,6 +620,8 @@ function buildReport(state, client) {
         ? null
         : Math.max(0, Math.floor((state.nowMs - oldestCreatedMs) / 1000)),
       oldestCreatedAt: oldestCreatedMs === null ? null : new Date(oldestCreatedMs).toISOString(),
+      oldestActiveAgeSeconds,
+      oldestActiveCreatedAt: oldestActiveMs === null ? null : new Date(oldestActiveMs).toISOString(),
       oldestPendingAgeSeconds,
       oldestPendingCreatedAt: oldestPendingMs === null ? null : new Date(oldestPendingMs).toISOString(),
       slo: queueSlo,

@@ -163,6 +163,16 @@ export const ALWAYS_ESCALATE_WORKFLOWS = new Set([
   'Workflow failure → issue',
 ]);
 
+/**
+ * Ordina i workflow di sorveglianza prima del cap `MAX_ISSUES`. `sort` in Node
+ * e' stabile, quindi per tutti gli altri resta l'ordine di inserimento.
+ */
+export function orderBySurveillanceFirst(entries) {
+  return [...entries].sort(
+    ([a], [b]) => Number(ALWAYS_ESCALATE_WORKFLOWS.has(b)) - Number(ALWAYS_ESCALATE_WORKFLOWS.has(a)),
+  );
+}
+
 /** `-1` disattiva il gate di ricorrenza: prima issue vera al primo rosso. */
 export function gateForWorkflow(name, { lost = false, gate = undefined } = {}) {
   if (lost || ALWAYS_ESCALATE_WORKFLOWS.has(name)) return -1;
@@ -1039,12 +1049,19 @@ async function main() {
 
   console.log(`[scan-failed-runs] ${runs.length} run fallite → ${candidatesByWorkflow.size} workflow distinti${DRY_RUN ? ' (dry-run)' : ''}.`);
 
+  // I workflow di sorveglianza vanno serviti PRIMA del cap `MAX_ISSUES`: se il
+  // cap li tronca escono dalla finestra di lookback e il loro allarme non viene
+  // aperto mai — lo stesso difetto che `ALWAYS_ESCALATE_WORKFLOWS` chiude sul
+  // gate, riaperto da un'altra porta. `sort` in Node e' stabile, quindi
+  // l'ordine relativo di tutti gli altri resta quello di inserimento.
+  const servedOrder = orderBySurveillanceFirst(byWorkflow);
+
   let opened = 0;
-  for (const [name, selected] of byWorkflow) {
+  for (const [name, selected] of servedOrder) {
     const run = selected.run;
     if (opened >= MAX_ISSUES) {
       // Un cap che tronca in silenzio si legge come "tutto coperto". Lo diciamo.
-      console.warn(`::warning::[scan-failed-runs] Cap di ${MAX_ISSUES} issue raggiunto — ${byWorkflow.size - opened} workflow falliti NON segnalati in questa passata: ${[...byWorkflow.keys()].slice(opened).join(', ')}. Verranno ripresi alla prossima scansione.`);
+      console.warn(`::warning::[scan-failed-runs] Cap di ${MAX_ISSUES} issue raggiunto — ${byWorkflow.size - opened} workflow falliti NON segnalati in questa passata: ${servedOrder.map(([workflowName]) => workflowName).slice(opened).join(', ')}. Verranno ripresi alla prossima scansione.`);
       break;
     }
 

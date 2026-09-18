@@ -55,7 +55,14 @@ jobs:
           const discovery = report.discovery || {};
           const reasons = [];
           if (slo.state === 'breached') {
-            reasons.push(`queue SLO breached: pending age ${slo.oldestPendingAgeSeconds}s >= ${slo.thresholdSeconds}s`);
+            // Il numero dell'alert deve dire QUALE grandezza ha sfondato: con un
+            // detentore si misura la sua eta', senza detentore l'attesa del
+            // pending piu' vecchio. Scrivere sempre "pending age" ha mandato la
+            // diagnosi sulla coda quando il soggetto era un altro.
+            reasons.push(
+              `queue SLO breached: ${slo.measured} ${slo.measuredAgeSeconds}s >= ${slo.thresholdSeconds}s`
+              + ` (oldest pending ${slo.oldestPendingAgeSeconds ?? 'none'}s, active ${report.counts?.active ?? 'unknown'})`,
+            );
           }
           if (discovery.truncated || discovery.state !== 'complete') {
             // `residual runs` e `next page` da soli descrivono solo il

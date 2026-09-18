@@ -11,7 +11,7 @@ import {
   MAX_REPORT_BYTES,
   MAX_RESPONSE_BYTES,
   MAX_TOTAL_GET_REQUESTS,
-  QUEUE_SERVED_STALE_THRESHOLD_SECONDS,
+  QUEUE_HOLDER_STALE_THRESHOLD_SECONDS,
   QUEUE_UNSERVED_STALE_THRESHOLD_SECONDS,
   QUEUE_MAX_BOUNDARY_SHA,
   REPORT_SCHEMA,
@@ -165,7 +165,7 @@ test('classifica active/pending e segnala il superamento del queue SLO', async (
   assert.equal(report.counts.byReason.cancelled_with_jobs, 1);
   assert.equal(report.queue.activePendingPresent, true);
   assert.equal(report.queue.oldestAgeSeconds, 5220);
-  assert.equal(report.queue.staleThreshold, QUEUE_SERVED_STALE_THRESHOLD_SECONDS);
+  assert.equal(report.queue.staleThreshold, QUEUE_HOLDER_STALE_THRESHOLD_SECONDS);
   assert.equal(report.queue.slo.state, 'within_slo');
   assert.equal(report.queue.slo.alert, false);
   assert.equal(report.queue.oldestPendingAgeSeconds, 968);
@@ -190,6 +190,8 @@ test('il queue SLO usa solo la run pending più vecchia e apre l alert se nessun
   assert.equal(report.counts.active, 0);
   assert.equal(report.queue.oldestPendingAgeSeconds, 26820);
   assert.equal(report.queue.staleThreshold, QUEUE_UNSERVED_STALE_THRESHOLD_SECONDS);
+  assert.equal(report.queue.slo.measured, 'oldest_pending_age');
+  assert.equal(report.queue.slo.measuredAgeSeconds, 26820);
   assert.equal(report.queue.slo.state, 'breached');
   assert.equal(report.queue.slo.alert, true);
   assert.ok(report.reasonCodes.includes('queue_slo_breached'));
@@ -214,13 +216,42 @@ test('la coda satura ma servita da un detentore non apre l alert', async () => {
   assert.equal(report.counts.active, 1);
   assert.equal(report.counts.pending, 1);
   assert.equal(report.queue.oldestPendingAgeSeconds, 16532);
-  assert.equal(report.queue.staleThreshold, QUEUE_SERVED_STALE_THRESHOLD_SECONDS);
+  assert.equal(report.queue.oldestActiveAgeSeconds, 30203);
+  assert.equal(report.queue.staleThreshold, QUEUE_HOLDER_STALE_THRESHOLD_SECONDS);
+  assert.equal(report.queue.slo.measured, 'oldest_holder_age');
+  assert.equal(report.queue.slo.measuredAgeSeconds, 30203);
   assert.equal(report.queue.slo.state, 'within_slo');
   assert.equal(report.queue.slo.alert, false);
   assert.equal(report.reasonCodes.includes('queue_slo_breached'), false);
 });
 
-test('una coda servita ma ferma da oltre una giornata apre comunque l alert', async () => {
+// L'arretrato profondo e' lecito per costruzione: con 350 min di timeout per
+// detentore, tre run davanti fanno 17,5 h di attesa e quattro 23,3 h. Se
+// l'allarme guardasse l'eta' della CODA invece di quella del detentore, una
+// coda sana e profonda tornerebbe rossa da sola — il rosso che questa PR
+// chiude, riaperto da un'altra porta.
+test('un pending vecchio di 31 h dietro un detentore appena partito non apre l alert', async () => {
+  const holder = run(33500000010, {
+    conclusion: null,
+    created_at: '2026-09-01T17:00:00.000Z',
+    status: 'in_progress',
+  });
+  const queued = run(33500000011, {
+    conclusion: null,
+    created_at: '2026-08-31T10:00:00.000Z',
+    status: 'queued',
+  });
+  const { report } = await observe(fakeGithub({ currentRuns: [holder, queued], pages: [[]] }));
+  assert.equal(report.queue.oldestPendingAgeSeconds, 113220);
+  assert.ok(report.queue.oldestPendingAgeSeconds > QUEUE_HOLDER_STALE_THRESHOLD_SECONDS);
+  assert.equal(report.queue.slo.measured, 'oldest_holder_age');
+  assert.equal(report.queue.slo.measuredAgeSeconds, 1620);
+  assert.equal(report.queue.slo.state, 'within_slo');
+  assert.equal(report.queue.slo.alert, false);
+  assert.equal(report.reasonCodes.includes('queue_slo_breached'), false);
+});
+
+test('un detentore che non finisce da oltre una giornata apre l alert', async () => {
   const holder = run(33500000008, {
     conclusion: null,
     created_at: '2026-08-30T17:00:00.000Z',
@@ -233,8 +264,10 @@ test('una coda servita ma ferma da oltre una giornata apre comunque l alert', as
   });
   const { report } = await observe(fakeGithub({ currentRuns: [holder, queued], pages: [[]] }));
   assert.equal(report.counts.active, 1);
-  assert.equal(report.queue.oldestPendingAgeSeconds, 113220);
-  assert.equal(report.queue.staleThreshold, QUEUE_SERVED_STALE_THRESHOLD_SECONDS);
+  assert.equal(report.queue.oldestActiveAgeSeconds, 174420);
+  assert.equal(report.queue.staleThreshold, QUEUE_HOLDER_STALE_THRESHOLD_SECONDS);
+  assert.equal(report.queue.slo.measured, 'oldest_holder_age');
+  assert.equal(report.queue.slo.measuredAgeSeconds, 174420);
   assert.equal(report.queue.slo.state, 'breached');
   assert.equal(report.queue.slo.alert, true);
   assert.ok(report.reasonCodes.includes('queue_slo_breached'));
@@ -390,7 +423,10 @@ test('censimento corrente oltre la singola pagina fallisce chiuso indipendenteme
   assert.equal(report.complete, false);
   assert.equal(report.failClosed, true);
   assert.equal(report.counts.byReason.liveness_census_inconclusive, 1);
-  assert.equal(report.queryBudget.usedGets, 3);
+  // Due GET, non tre: il censimento legge `in_progress` per ultimo (l'ordine e'
+  // portante, vedi il commento in listCurrentQueueRuns), quindi la pagina
+  // sovradimensionata di `queued` arriva alla seconda richiesta.
+  assert.equal(report.queryBudget.usedGets, 2);
 });
 
 test('client GET esaurisce deterministicamente il budget prima della trentesima GET runtime', async () => {
