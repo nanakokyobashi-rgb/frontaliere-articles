@@ -6545,6 +6545,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.votazioni-federali-neutralita-sondaggio.title': 'Abstimmung am 27. September: Schwere Niederlage für Neutralität',
     'blog.article.votazioni-federali-neutralita-sondaggio.excerpt': 'Gemäss der Umfrage gfs.bern für die SRG planen 63 Prozent der Stimmberechtigten, die Neutralitätsinitiative vom 27. September 2026 abzulehnen.',
     'blog.article.votazioni-federali-neutralita-sondaggio.imageAlt': 'Urnen und Abstimmungsunterlagen für eidgenössische Wahlen in der Schweiz',
+    'blog.article.crescita-pil-seco-esportazioni.title': 'Schweizer BIP-Wachstum auf 1,7%: SECO Schätzungen und Auswirkungen',
+    'blog.article.crescita-pil-seco-esportazioni.excerpt': 'Das SECO revidiert das Schweizer BIP-Wachstum dank Exporten auf 1,7% im laufenden Jahr. Die Arbeitslosenquote wird auf 3,1 % im Jahr 2026 geschätzt.',
+    'blog.article.crescita-pil-seco-esportazioni.imageAlt': 'Wirtschaftspanorama der Schweiz mit modernen Gebäuden und Finanzinstituten',
 };
 
 export default blogMetaChDe;

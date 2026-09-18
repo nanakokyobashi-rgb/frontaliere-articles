@@ -6545,6 +6545,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.votazioni-federali-neutralita-sondaggio.title': 'Votes 27 September: heavy defeat for neutrality',
     'blog.article.votazioni-federali-neutralita-sondaggio.excerpt': 'According to the gfs.bern poll for the SSR, 63% of the electorate plan to reject the initiative on neutrality at the polls on 27 September 2026.',
     'blog.article.votazioni-federali-neutralita-sondaggio.imageAlt': 'Ballot boxes and voting materials for federal elections in Switzerland',
+    'blog.article.crescita-pil-seco-esportazioni.title': 'Swiss GDP growth at 1.7%: SECO estimates and impacts',
+    'blog.article.crescita-pil-seco-esportazioni.excerpt': 'SECO sees Swiss GDP growth up to 1.7% for the current year thanks to exports. Unemployment estimated at 3.1% in 2026.',
+    'blog.article.crescita-pil-seco-esportazioni.imageAlt': 'Economic panorama of Switzerland with modern buildings and financial institutions',
 };
 
 export default blogMetaChEn;

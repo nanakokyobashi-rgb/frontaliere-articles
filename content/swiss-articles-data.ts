@@ -19607,6 +19607,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'crescita-pil-seco-esportazioni',
+    category: 'pratico',
+    date: '2026-09-18T02:42:09.575Z',
+    image: '/images/blog/crescita-pil-seco-esportazioni.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

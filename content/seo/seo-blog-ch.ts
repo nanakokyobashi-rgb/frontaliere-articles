@@ -84845,6 +84845,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-crescita-pil-seco-esportazioni': {
+    title: 'Crescita PIL svizzero all\'1,7%: stime SECO e impatti',
+    description: 'Scopri la revisione al rialzo del PIL svizzero all\'1,7% comunicata dalla SECO. Dati aggiornati su esportazioni, disoccupazione al 3,1% e inflazione allo 0,6%.',
+    keywords: 'frontalieri, ticino, svizzera, italia, crescita, svizzero, stime, seco',
+    ogTitle: 'Crescita PIL svizzero all\'1,7%: le nuove stime SECO per l\'economia',
+    ogDescription: 'La Segreteria di Stato dell\'economia rivede al rialzo la crescita del PIL elvetico all\'1,7% per l\'anno in corso. Scopri tutti i dati su esportazioni, disoccupazione e inflazione.',
+    canonicalPath: '/articoli-svizzera/crescita-pil-seco-esportazioni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Crescita PIL svizzero all'1,7%: stime SECO e impatti",
+      "description": "Scopri la revisione al rialzo del PIL svizzero all'1,7% comunicata dalla SECO. Dati aggiornati su esportazioni, disoccupazione al 3,1% e inflazione allo 0,6%.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/crescita-pil-seco-esportazioni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Panorama economico della Svizzera con edifici moderni e istituzioni finanziarie"
+      },
+      "datePublished": "2026-09-18T02:42:09+00:00",
+      "dateModified": "2026-09-18T02:42:09+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/crescita-pil-seco-esportazioni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

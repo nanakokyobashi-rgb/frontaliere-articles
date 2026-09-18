@@ -6545,6 +6545,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.votazioni-federali-neutralita-sondaggio.title': 'Votazioni 27 settembre: pesante sconfitta per la neutralità',
     'blog.article.votazioni-federali-neutralita-sondaggio.excerpt': 'Secondo il sondaggio gfs.bern per la SSR, il 63% dell\'elettorato prevede di respingere l\'iniziativa sulla neutralità alle urne del 27 settembre 2026.',
     'blog.article.votazioni-federali-neutralita-sondaggio.imageAlt': 'Urne e materiale di voto in vista delle votazioni federali in Svizzera',
+    'blog.article.crescita-pil-seco-esportazioni.title': 'Crescita PIL svizzero all\'1,7%: stime SECO e impatti',
+    'blog.article.crescita-pil-seco-esportazioni.excerpt': 'La SECO rivede al rialzo la crescita del PIL svizzero all\'1,7% per l\'anno in corso grazie alle esportazioni. Disoccupazione stimata al 3,1% nel 2026.',
+    'blog.article.crescita-pil-seco-esportazioni.imageAlt': 'Panorama economico della Svizzera con edifici moderni e istituzioni finanziarie',
 };
 
 export default blogMetaChIt;

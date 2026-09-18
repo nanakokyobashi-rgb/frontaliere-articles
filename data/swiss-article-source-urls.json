@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/1jdhp-k2i5rojqu6ngtoj": {
-    "articleId": "trasporti-eccezionali-standard-federali",
-    "ts": "2026-08-19T13:11:24.272Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/x_h-nz8sjsroxtswgodeb": {
     "articleId": "cop31-novembre-antalya-2026",
     "ts": "2026-08-19T13:29:15.525Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/votazioni/votazioni-del-27-settembre-liniziativa-sulla-neutralit%c3%a0-potrebbe-subire-una-sconfitta-pesante/92062979": {
     "articleId": "votazioni-federali-neutralita-sondaggio",
     "ts": "2026-09-18T02:22:10.003Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4090330": {
+    "articleId": "crescita-pil-seco-esportazioni",
+    "ts": "2026-09-18T02:42:09.862Z",
     "keyForm": 2
   }
 }
