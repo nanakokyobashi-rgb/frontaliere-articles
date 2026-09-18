@@ -11824,6 +11824,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.sequestro-pappagalli-gandria.title': 'Enlèvement de perroquets protégés au col de Gandria',
     'blog.article.sequestro-pappagalli-gandria.excerpt': 'Arrêté un citoyen suisse au col de Gandria avec deux perroquets cendrés sans autorisation Cites. Intervention de Udsc et Usav.',
     'blog.article.sequestro-pappagalli-gandria.imageAlt': 'Contrôles douaniers au poste frontière de Gandria au Tessin',
+    'blog.article.crescita-economia-svizzera-seco-2026.title': 'Croissance suisse à la hausse : PIB à 1,7 % selon le SECO',
+    'blog.article.crescita-economia-svizzera-seco-2026.excerpt': 'Le Secrétariat d\'Etat à l\'économie révise à la hausse les prévisions du PIB suisse pour 2026 à 1,7%, tiré par les exportations et le commerce extérieur.',
+    'blog.article.crescita-economia-svizzera-seco-2026.imageAlt': 'Croissance économique suisse et prévisions du SECO',
 };
 
 export default blogMetaFr;

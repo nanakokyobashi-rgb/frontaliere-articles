@@ -35256,6 +35256,15 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'crescita-economia-svizzera-seco-2026',
+ category: 'pratico',
+ date: '2026-09-18T02:18:07.570Z',
+ image: '/images/blog/crescita-economia-svizzera-seco-2026.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

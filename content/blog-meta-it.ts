@@ -11823,6 +11823,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.sequestro-pappagalli-gandria.title': 'Sequestro di pappagalli protetti al valico di Gandria',
     'blog.article.sequestro-pappagalli-gandria.excerpt': 'Fermato un cittadino svizzero al valico di Gandria con due pappagalli cenerini sprovvisti di autorizzazione Cites. Intervento di Udsc e Usav.',
     'blog.article.sequestro-pappagalli-gandria.imageAlt': 'Controlli doganali al valico di Gandria in Ticino',
+    'blog.article.crescita-economia-svizzera-seco-2026.title': 'Crescita svizzera al rialzo: PIL al 1,7% secondo la SECO',
+    'blog.article.crescita-economia-svizzera-seco-2026.excerpt': 'La Segreteria di Stato dell\'economia rivede al rialzo le previsioni del PIL svizzero per il 2026 all\'1,7%, trainato da esportazioni e commercio estero.',
+    'blog.article.crescita-economia-svizzera-seco-2026.imageAlt': 'Crescita economica svizzera e previsioni SECO',
 };
 
 export default blogMetaIt;

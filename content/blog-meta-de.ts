@@ -11821,6 +11821,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.sequestro-pappagalli-gandria.title': 'Beschlagnahme von geschützten Papageien am Gandria-Pass',
     'blog.article.sequestro-pappagalli-gandria.excerpt': 'Ein Schweizer Bürger wurde am Gandria-Pass mit zwei Aschenpapageien ohne CITES-Genehmigung festgenommen. Intervention von UdSSR und Usav.',
     'blog.article.sequestro-pappagalli-gandria.imageAlt': 'Zollkontrollen am Grenzübergang Gandria im Tessin',
+    'blog.article.crescita-economia-svizzera-seco-2026.title': 'Schweizer Wachstum nach oben: BIP 1,7% gemäss SECO',
+    'blog.article.crescita-economia-svizzera-seco-2026.excerpt': 'Das Staatssekretariat für Wirtschaft revidiert die Prognose des Schweizer BIP für 2026 auf 1,7%, angetrieben durch Exporte und Außenhandel.',
+    'blog.article.crescita-economia-svizzera-seco-2026.imageAlt': 'Schweizer Wirtschaftswachstum und SECO-Prognosen',
 };
 
 export default blogMetaDe;

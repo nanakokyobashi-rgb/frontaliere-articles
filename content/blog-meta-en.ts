@@ -11822,6 +11822,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.sequestro-pappagalli-gandria.title': 'Seizure of protected parrots at the Gandria crossing',
     'blog.article.sequestro-pappagalli-gandria.excerpt': 'A Swiss citizen was stopped at the Gandria crossing with two ash parrots without Cites authorization. Intervention by UDSC and USAV.',
     'blog.article.sequestro-pappagalli-gandria.imageAlt': 'Customs controls at the Gandria border crossing in Ticino',
+    'blog.article.crescita-economia-svizzera-seco-2026.title': 'Swiss growth on the upside: GDP at 1.7% according to SECO',
+    'blog.article.crescita-economia-svizzera-seco-2026.excerpt': 'The State Secretariat for the Economy revises upwards the Swiss GDP forecast for 2026 to 1.7%, driven by exports and foreign trade.',
+    'blog.article.crescita-economia-svizzera-seco-2026.imageAlt': 'Swiss economic growth and SECO forecasts',
 };
 
 export default blogMetaEn;
