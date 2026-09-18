@@ -85157,6 +85157,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-permesso-c-zugo-requisiti': {
+    title: 'Permesso C a Zugo: requisiti e procedura di domanda',
+    description: 'Scopri come ottenere il permesso di domicilio C nel Canton Zugo: requisiti temporali (5-10 anni), criteri di integrazione e passaggi per la domanda.',
+    keywords: 'frontalieri, ticino, svizzera, italia, permesso, zugo, requisiti, procedura',
+    ogTitle: 'Permesso C a Zugo: requisiti e procedura di domanda',
+    ogDescription: 'Vuoi ottenere il domicilio stabile nel Canton Zugo? Scopri i requisiti di residenza per cittadini UE e extra-UE, i criteri di integrazione e i vantaggi fiscali e professionali del permesso C.',
+    canonicalPath: '/articoli-svizzera/permesso-c-zugo-requisiti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Permesso C a Zugo: requisiti e procedura di domanda",
+      "description": "Scopri come ottenere il permesso di domicilio C nel Canton Zugo: requisiti temporali (5-10 anni), criteri di integrazione e passaggi per la domanda.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/permesso-c-zugo-requisiti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta del Canton Zugo e dei suoi uffici amministrativi"
+      },
+      "datePublished": "2026-09-18T22:03:28+00:00",
+      "dateModified": "2026-09-18T22:03:28+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/permesso-c-zugo-requisiti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

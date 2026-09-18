@@ -2212,6 +2212,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'permesso-c-glarona-requisiti': { it: 'permesso-c-glarona-requisiti', en: 'permit-c-glarona-requirements', de: 'bewilligung-c-glarona-anforderungen', fr: 'permis-c-glarona-conditions' },
  'permesso-l-vaud-proroga': { it: 'permesso-l-vaud-proroga', en: 'l-permit-vaud-extension', de: 'l-ausweis-waadt-verlaengerung', fr: 'permis-l-vaud-prolongation' },
  'crediti-esercito-difesa-svizzera': { it: 'crediti-esercito-difesa-svizzera', en: 'swiss-army-defense-credits', de: 'schweiz-armee-verteidigungskredite', fr: 'credits-defense-armee-suisse' },
+ 'permesso-c-zugo-requisiti': { it: 'permesso-c-zugo-requisiti', en: 'permesso-c-zugo-requirements', de: 'permesso-c-zugo-anforderungen', fr: 'permesso-c-zugo-conditions' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

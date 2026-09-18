@@ -6569,6 +6569,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.crediti-esercito-difesa-svizzera.title': 'Schweizer Verteidigung: 970 Millionen für die Armee gefordert',
     'blog.article.crediti-esercito-difesa-svizzera.excerpt': 'Der Bundesrat fordert knapp eine Milliarde Franken zusätzlich für Boden-Luft- und Radarsysteme, um den Bedrohungen in Europa zu begegnen.',
     'blog.article.crediti-esercito-difesa-svizzera.imageAlt': 'Bundeshaus in Bern, Sitz des Schweizer Bundesrates',
+    'blog.article.permesso-c-zugo-requisiti.title': 'Führerschein C in Zug: Voraussetzungen und Antragsverfahren',
+    'blog.article.permesso-c-zugo-requisiti.excerpt': 'Leitfaden zum festen Wohnsitz im Kanton Zug: Wohnsitzvoraussetzungen (5 Jahre für EU/EFTA, 10 Jahre für Nicht-EU), Integration und finanzielle Stabilität.',
+    'blog.article.permesso-c-zugo-requisiti.imageAlt': 'Ansicht des Kantons Zug und seiner Verwaltungsbüros',
 };
 
 export default blogMetaChDe;

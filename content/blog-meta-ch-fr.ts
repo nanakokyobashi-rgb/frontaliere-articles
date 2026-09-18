@@ -6569,6 +6569,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.crediti-esercito-difesa-svizzera.title': 'Défense suisse : 970 millions demandés pour l\'armée',
     'blog.article.crediti-esercito-difesa-svizzera.excerpt': 'Le Conseil fédéral demande près d\'un milliard de francs supplémentaires pour les systèmes sol-air et radar afin de faire face aux menaces en Europe.',
     'blog.article.crediti-esercito-difesa-svizzera.imageAlt': 'Palais fédéral à Berne, siège du Conseil fédéral suisse',
+    'blog.article.permesso-c-zugo-requisiti.title': 'Permis C à Zoug : exigences et procédure de demande',
+    'blog.article.permesso-c-zugo-requisiti.excerpt': 'Conduite à domicile stable dans le canton de Zoug : exigences de résidence (5 ans pour UE/AELE, 10 ans pour hors UE), intégration et stabilité financière.',
+    'blog.article.permesso-c-zugo-requisiti.imageAlt': 'Vue du Canton de Zoug et de ses bureaux administratifs',
 };
 
 export default blogMetaChFr;
