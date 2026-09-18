@@ -11837,6 +11837,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-09-18.imageAlt': 'I numeri del giorno per i frontalieri – 18 settembre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro',
     'blog.article.bollettino-frontaliere-2026-09-18.seoDescription': 'Bollettino frontalieri del 18 settembre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
     'blog.article.bollettino-frontaliere-2026-09-18.ogDescription': 'I numeri del 18 settembre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    'blog.article.fondi-comuni-frontiera-decreto.title': 'Fondi comuni di frontiera: firmato il decreto MEF',
+    'blog.article.fondi-comuni-frontiera-decreto.excerpt': 'Il Ministro Giorgetti ha firmato il decreto per l\'assegnazione dei fondi ai Comuni entro 20 km dal confine con Ticino, Grigioni e Vallese.',
+    'blog.article.fondi-comuni-frontiera-decreto.imageAlt': 'Centro di un comune di frontiera nel Mendrisiotto',
 };
 
 export default blogMetaIt;

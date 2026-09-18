@@ -50,6 +50,8 @@ import {
   getStats,
   printRunSummary,
   resetState,
+  resolverFlapAttemptBudget,
+  resolverFlapKey,
 } from '../scripts/lib/ai-models.mjs';
 
 const GH_MODELS_INFERENCE_HOST = 'models.github.ai/inference';
@@ -1220,7 +1222,13 @@ describe('#813 — l\'escalation del flap salta i provider di ultima risorsa', (
     }
 
     const stats = getStats();
-    assert.equal(stats.resolverFlaps.omniroute, 3, `i flap vanno comunque contati: ${JSON.stringify(stats.resolverFlaps)}`);
+    const omniKey = resolverFlapKey({
+      provider: 'omniroute',
+      endpointHost: 'gateway.example.invalid',
+    });
+    assert.equal(omniKey, 'gateway.example.invalid', 'OmniRoute deve chiavare sull\'host risolto, non sul provider');
+    assert.equal(stats.resolverFlaps[omniKey], 3, `i flap vanno comunque contati: ${JSON.stringify(stats.resolverFlaps)}`);
+    assert.equal(stats.resolverFlaps.omniroute, undefined, `la chiave provider non deve raggruppare host OmniRoute: ${JSON.stringify(stats.resolverFlaps)}`);
     assert.ok(!stats.exhaustedModels.includes('omniroute/auto'), `nessun ban da flap sull'ultima risorsa, visti: ${stats.exhaustedModels.join(', ')}`);
     assert.equal(stats.activeCooldowns.omniroute, undefined, `nessun cooldown da flap sull'ultima risorsa: ${JSON.stringify(stats.activeCooldowns)}`);
   });
@@ -1883,5 +1891,159 @@ describe('callLLM — il reset della striscia si conta per classe (#848 item 3)'
     assert.ok(getStats().resolverFlapResets.github, 'precondizione: un reset contato');
     resetState();
     assert.deepEqual(getStats().resolverFlapResets, {}, 'il conteggio muore con lo stato di run');
+  });
+});
+
+/**
+ * ── #818 item 4: LA CHIAVE E' L'HOST RISOLTO, NON getProvider() ─────────────
+ *
+ * `getProvider(model)` raggruppa host OmniRoute non correlati dietro un solo
+ * id. I fratelli GitHub condividono davvero GH_MODELS_BASE, quindi restano
+ * sulla chiave provider. Il helper e' la porta: callLLM non ha una seconda
+ * formula della chiave.
+ */
+describe('#818 item 4 — granularita della chiave del contatore dei flap', () => {
+  it('due host OmniRoute non condividono la striscia', () => {
+    const a = resolverFlapKey({ provider: 'omniroute', endpointHost: 'gw-a.example' });
+    const b = resolverFlapKey({ provider: 'omniroute', endpointHost: 'gw-b.example' });
+    assert.equal(a, 'gw-a.example');
+    assert.equal(b, 'gw-b.example');
+    assert.notEqual(a, b);
+  });
+
+  it('local/ con host diversi non condividono la striscia', () => {
+    assert.notEqual(
+      resolverFlapKey({ provider: 'local', endpointHost: '127.0.0.1' }),
+      resolverFlapKey({ provider: 'local', endpointHost: '10.0.0.8' }),
+    );
+  });
+
+  it('i fratelli GitHub restano sulla stessa chiave provider', () => {
+    assert.equal(
+      resolverFlapKey({ provider: 'github', endpointHost: 'models.github.ai', model: 'gpt-4o-mini' }),
+      resolverFlapKey({ provider: 'github', endpointHost: 'models.github.ai', model: 'gpt-4.1-mini' }),
+    );
+    assert.equal(resolverFlapKey({ provider: 'github', endpointHost: 'models.github.ai' }), 'github');
+  });
+
+  it('senza host un provider a endpoint configurabile deriva l\'URL corrente', () => {
+    const prev = process.env.OMNIROUTE_URL;
+    process.env.OMNIROUTE_URL = 'https://gw-from-env.example/v1/chat/completions';
+    try {
+      assert.equal(resolverFlapKey({ provider: 'omniroute' }), 'gw-from-env.example');
+    } finally {
+      if (prev === undefined) delete process.env.OMNIROUTE_URL;
+      else process.env.OMNIROUTE_URL = prev;
+    }
+    assert.equal(resolverFlapKey({ provider: 'github' }), 'github');
+  });
+});
+
+/**
+ * ── #818 item 5: I RETRY DEL FLAP NON POSSONO SUPERARE IL DEADLINE ──────────
+ *
+ * Worst-case per modello: ogni tentativo puo' bruciare il timeout della
+ * request (EAI_AGAIN puo' appendersi fino ad AbortSignal.timeout) piu' il
+ * backoff dopo ogni tentativo non-finale. Vicino al deadline quella somma
+ * svuota la catena sul ramo wall-clock prima di un provider sano. Il helper
+ * e' il cap; il loop lo consulta, i test non ricalcolano la formula.
+ */
+describe('#818 item 5 — budget dei retry sul ramo flap', () => {
+  const ENV_KEYS = ['AI_MODELS_FORCE_CHAIN', 'GH_MODELS_PAT', 'AI_MODELS_PREFER'];
+  let envBackup = {};
+  let realFetch;
+
+  beforeEach(() => {
+    envBackup = Object.fromEntries(ENV_KEYS.map((k) => [k, process.env[k]]));
+    for (const k of ENV_KEYS) delete process.env[k];
+    process.env.GH_MODELS_PAT = 'test-pat';
+    realFetch = globalThis.fetch;
+    resetState();
+  });
+
+  afterEach(() => {
+    globalThis.fetch = realFetch;
+    for (const k of ENV_KEYS) {
+      if (envBackup[k] === undefined) delete process.env[k];
+      else process.env[k] = envBackup[k];
+    }
+    resetState();
+  });
+
+  it('senza deadline il budget e\' maxRetriesPerModel', () => {
+    assert.equal(resolverFlapAttemptBudget({
+      maxRetriesPerModel: 2,
+      backoffMs: 2500,
+      timeoutMs: 30_000,
+    }), 2);
+    assert.equal(resolverFlapAttemptBudget({
+      maxRetriesPerModel: 3,
+      backoffMs: 1,
+      timeoutMs: 5000,
+    }), 3);
+  });
+
+  it('un deadline piu\' stretto del worst-case lascia un solo tentativo', () => {
+    assert.equal(resolverFlapAttemptBudget({
+      maxRetriesPerModel: 2,
+      backoffMs: 2500,
+      timeoutMs: 90_000,
+      remainingMs: 10_000,
+    }), 1);
+    assert.equal(resolverFlapAttemptBudget({
+      maxRetriesPerModel: 2,
+      backoffMs: 2500,
+      timeoutMs: 90_000,
+      remainingMs: 200_000,
+    }), 2);
+  });
+
+  it('calcola il tentativo successivo dal residuo dopo quello già consumato', () => {
+    assert.equal(resolverFlapAttemptBudget({
+      maxRetriesPerModel: 2,
+      backoffMs: 2500,
+      timeoutMs: 90_000,
+      remainingMs: 100_000,
+      completedAttempts: 1,
+    }), 2, 'il secondo tentativo costa 92.5s e rientra nei 100s residui');
+    assert.equal(resolverFlapAttemptBudget({
+      maxRetriesPerModel: 2,
+      backoffMs: 2500,
+      timeoutMs: 90_000,
+      remainingMs: 90_000,
+      completedAttempts: 1,
+    }), 1, 'il secondo tentativo non rientra nei 90s residui');
+  });
+
+  it('il loop consulta il helper: sotto un deadline stretto un flap non brucia maxRetriesPerModel', async () => {
+    process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini';
+    const fetchCalls = [];
+    globalThis.fetch = async (url) => {
+      fetchCalls.push(String(url));
+      throw undiciFetchFailed('EAI_AGAIN');
+    };
+
+    const timeout = 30_000;
+    const maxRetriesPerModel = 3;
+    const backoffMs = 2500;
+    const remainingMs = 1_000;
+    assert.equal(resolverFlapAttemptBudget({
+      maxRetriesPerModel,
+      backoffMs,
+      timeoutMs: timeout,
+      remainingMs,
+    }), 1, 'precondizione: il helper deve tagliare a 1');
+
+    await assert.rejects(
+      () => callLLM([{ role: 'user', content: 'x' }], {
+        maxRetriesPerModel,
+        backoffMs,
+        timeout,
+        deadlineMs: Date.now() + remainingMs,
+      }),
+    );
+
+    const ghCalls = fetchCalls.filter((u) => u.includes(GH_MODELS_INFERENCE_HOST));
+    assert.equal(ghCalls.length, 1, `atteso 1 connect, non ${maxRetriesPerModel}: visti ${ghCalls.length}`);
   });
 });
