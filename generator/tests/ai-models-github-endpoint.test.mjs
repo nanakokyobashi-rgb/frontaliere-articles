@@ -455,6 +455,38 @@ describe('GitHub Models request contract', () => {
     assert.equal(catalogCalls, 1);
     assert.deepEqual(getStats().exhaustedModels, [AI_MODELS.GPT4O, AI_MODELS.GPT4O_MINI]);
   });
+
+  test('un 403 provider-wide raffredda anche il provider last-resort senza hard-ban', async () => {
+    const previous = {
+      enabled: process.env.OMNIROUTE_ENABLED,
+      key: process.env.OMNIROUTE_API_KEY,
+    };
+    process.env.OMNIROUTE_ENABLED = '1';
+    process.env.OMNIROUTE_API_KEY = 'omni-test';
+    globalThis.fetch = async () => new Response(WAF_IP_403_BODY, {
+      status: 403,
+      headers: { 'content-type': 'application/json' },
+    });
+
+    try {
+      await assert.rejects(
+        () => callLLM([{ role: 'user', content: 'x' }], {
+          chain: [AI_MODELS.OMNIROUTE_AUTO],
+          maxRetriesPerModel: 1,
+          backoffMs: 1,
+          timeout: 5000,
+          recordScore: false,
+        }),
+      );
+      assert.equal(getStats().activeCooldowns.omniroute, Infinity);
+      assert.deepEqual(getStats().exhaustedModels, []);
+    } finally {
+      if (previous.enabled === undefined) delete process.env.OMNIROUTE_ENABLED;
+      else process.env.OMNIROUTE_ENABLED = previous.enabled;
+      if (previous.key === undefined) delete process.env.OMNIROUTE_API_KEY;
+      else process.env.OMNIROUTE_API_KEY = previous.key;
+    }
+  });
 });
 
 test('classifica 410 e 403 generici senza alterare il brownout GitHub', () => {
@@ -590,9 +622,14 @@ const TRANSIENT_RATE_LIMIT_BODY = '{"error":{"message":"rate limit exceeded, ret
 const TRANSIENT_BUSY_BODY = '{"error":{"message":"model is busy"}}';
 const WAF_IP_403_BODY = '{"error":{"message":"Your IP has been blocked by the WAF"}}';
 const CREDENTIAL_403_BODY = '{"error":{"message":"invalid api key"}}';
+const API_KEY_SUBJECT_403_BODY = '{"error":{"message":"API key is invalid"}}';
+const TOKEN_EXPIRED_403_BODY = '{"error":{"message":"token has expired"}}';
 const REGIONAL_403_BODY = '{"error":{"message":"forbidden in this region"}}';
 const ROUTING_410_BODY = '{"error":{"message":"No healthy upstream; origin routing changed"}}';
+const RETIRED_ROUTE_410_BODY = '{"error":{"message":"route retired"}}';
 const GONE_TITLE_410_BODY = '{"type":"about:blank","title":"Gone","status":410}';
+const MODEL_RETIRED_410_BODY = '{"error":{"message":"model llama-3.1-8b-instruct has been retired"}}';
+const MODEL_DISABLED_410_BODY = '{"error":{"message":"model is disabled"}}';
 const GROQ_DECOMMISSION_410 = '{"error":{"message":"model llama-3.1-8b-instant has been decommissioned"}}';
 
 describe('matrice 403/410: isRetryableError e classifyNonRetryableError', () => {
@@ -678,6 +715,22 @@ describe('matrice 403/410: isRetryableError e classifyNonRetryableError', () => 
       classification: { nonRetryable: true, markExhausted: true, exhaustProvider: true },
     },
     {
+      label: 'Cerebras 403 API key is invalid',
+      status: 403,
+      provider: 'Cerebras',
+      body: API_KEY_SUBJECT_403_BODY,
+      retryable: false,
+      classification: { nonRetryable: true, markExhausted: true, exhaustProvider: true },
+    },
+    {
+      label: 'Cerebras 403 token has expired',
+      status: 403,
+      provider: 'Cerebras',
+      body: TOKEN_EXPIRED_403_BODY,
+      retryable: false,
+      classification: { nonRetryable: true, markExhausted: true, exhaustProvider: true },
+    },
+    {
       label: 'Cerebras 403 regional entitlement stays model-scoped',
       status: 403,
       provider: 'Cerebras',
@@ -692,6 +745,30 @@ describe('matrice 403/410: isRetryableError e classifyNonRetryableError', () => 
       body: ROUTING_410_BODY,
       retryable: false,
       classification: { nonRetryable: true, markExhausted: false },
+    },
+    {
+      label: 'NVIDIA 410 retired route is not model EOL',
+      status: 410,
+      provider: 'NVIDIA',
+      body: RETIRED_ROUTE_410_BODY,
+      retryable: false,
+      classification: { nonRetryable: true, markExhausted: false },
+    },
+    {
+      label: 'NVIDIA 410 retired model',
+      status: 410,
+      provider: 'NVIDIA',
+      body: MODEL_RETIRED_410_BODY,
+      retryable: false,
+      classification: { nonRetryable: true, markExhausted: true },
+    },
+    {
+      label: 'NVIDIA 410 disabled model',
+      status: 410,
+      provider: 'NVIDIA',
+      body: MODEL_DISABLED_410_BODY,
+      retryable: false,
+      classification: { nonRetryable: true, markExhausted: true },
     },
     {
       label: 'NVIDIA 410 Gone title without EOL evidence',

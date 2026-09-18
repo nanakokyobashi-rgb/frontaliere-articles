@@ -5474,14 +5474,13 @@ export function resetExhaustedModel(modelId) {
  */
 function _hasEolEvidence(bodyText = '') {
   const b = String(bodyText).toLowerCase();
-  return (
-    b.includes('end of life') ||
-    b.includes('end-of-life') ||
-    b.includes('no longer available') ||
-    b.includes('no longer supported') ||
-    b.includes('decommissioned') ||
-    b.includes('retired')
-  );
+  // Qualifica la parola di ciclo di vita con "model" nello stesso frammento:
+  // una risposta 410 come "route retired" descrive il trasporto, non il
+  // modello. Il limite di frase evita che un riferimento a un endpoint morto
+  // in una parte del body contamini l'evidenza EOL del modello.
+  const eolTerm = '(?:end\\s+of\\s+life|end-of-life|no longer available|no longer supported|decommissioned|retired|disabled)';
+  return new RegExp('\\bmodel\\b[^;\\n]{0,160}\\b' + eolTerm + '\\b').test(b)
+    || new RegExp('\\b' + eolTerm + '\\b[^;\\n]{0,160}\\bmodel\\b').test(b);
 }
 
 /**
@@ -5509,14 +5508,14 @@ function _isModelSpecific403(bodyText = '') {
  */
 function _isProviderWide403(bodyText = '') {
   const b = String(bodyText).toLowerCase();
+  const credentialStatus = /\b(?:(?:invalid|expired|revoked|missing)\s+(?:api\s+)?(?:key|token|credential)s?|(?:api\s+)?(?:key|token|credential)s?\s+(?:is|are|was|were|has|have)\s+(?:invalid|expired|revoked|missing))\b/.test(b);
   return (
     b.includes('web application firewall') ||
     /\bwaf\b/.test(b) ||
     /\b(?:ip|address)\b.{0,40}\b(?:blocked|banned|denied)\b/.test(b) ||
-    /\b(?:invalid|expired|revoked|missing)\s+(?:api\s+)?(?:key|token|credential)s?\b/.test(b) ||
+    credentialStatus ||
     b.includes('bad credentials') ||
-    b.includes('account disabled') ||
-    /\bcredentials?\s+(?:is|are)\s+(?:invalid|expired|revoked|missing)\b/.test(b)
+    /\baccount(?:\s+\w+){0,2}\s+(?:is|has been)?\s*(?:disabled|suspended|revoked)\b/.test(b)
   );
 }
 
@@ -6116,7 +6115,7 @@ export function classifyNonRetryableError(status, bodyText = '', providerName = 
   // without explicit EOL evidence (end of life / no longer available) is an
   // intermediary or routing miss: skip this attempt, do not retire a live model.
   if (status === 410 && !isRetryableError(status, bodyText)) {
-    if (_hasEolEvidence(bodyText)) {
+    if (_hasPermanent403410Evidence(bodyText)) {
       return { nonRetryable: true, markExhausted: true };
     }
     return { nonRetryable: true, markExhausted: false };
@@ -6222,7 +6221,7 @@ function _applyNonRetryableExhaustion(modelId, nrc, status, { recordScore } = {}
     markModelExhausted(modelId, 'nonretryable', `HTTP ${status}`, { recordScore });
     _stats.exhausted++;
   }
-  if (nrc.exhaustProvider && !_isLastResortProvider(modelId)) {
+  if (nrc.exhaustProvider) {
     const provider = getProvider(modelId);
     if (
       cooldownProvider(
