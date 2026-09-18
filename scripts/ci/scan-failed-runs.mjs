@@ -451,17 +451,32 @@ function lastSuccessfulScanAtMs() {
     ['run', 'list', '--repo', REPO, '--workflow', SELF_WORKFLOW,
       '--status', 'success', '--event', 'schedule',
       '--limit', '10', '--json', 'databaseId,createdAt,event,conclusion'],
-    '',
+    // Sentinella distinta dalla lista vuota: "gh e' fallito" e "non esistono
+    // scansioni precedenti riuscite" NON sono la stessa cosa, e confonderle e'
+    // il difetto segnalato dalla review. Nel primo caso il floor di 40 minuti
+    // e' una finestra ARBITRARIA su un buco di ampiezza ignota, quindi la
+    // passata non puo' diventare il watermark; nel secondo il floor e'
+    // legittimo, perche' non c'e' nessun confine precedente da rispettare.
+    null,
   );
+  if (raw === null) {
+    markIncomplete('listing delle scansioni precedenti non leggibile: finestra non determinabile');
+    console.warn('[scan-failed-runs] listing delle scansioni precedenti illeggibile → lookback al floor, passata NON completa.');
+    return null;
+  }
   if (!raw) return null;
   let rows;
   try {
     rows = JSON.parse(raw);
   } catch {
-    console.warn('[scan-failed-runs] listing delle scansioni precedenti illeggibile → lookback al floor.');
+    markIncomplete('listing delle scansioni precedenti non parsabile: finestra non determinabile');
+    console.warn('[scan-failed-runs] listing delle scansioni precedenti illeggibile → lookback al floor, passata NON completa.');
     return null;
   }
-  if (!Array.isArray(rows)) return null;
+  if (!Array.isArray(rows)) {
+    markIncomplete('listing delle scansioni precedenti di forma inattesa');
+    return null;
+  }
   const selfId = String(process.env.GITHUB_RUN_ID || '');
   // `--event`/`--status` sono gia' filtri server-side, ma si ri-verificano qui:
   // un filtro silenziosamente ignorato dal CLI tornerebbe run qualunque, e
@@ -510,8 +525,13 @@ function lookbackMin() {
     try {
       appendFileSync(process.env.GITHUB_ENV, `SCAN_RESOLVED_LOOKBACK_MIN=${lookbackCache}\n`);
     } catch (e) {
-      // Fail-open: il passo gemello ricade sul proprio default.
-      console.warn(`[scan-failed-runs] export della finestra risolta fallito: ${String(e.message).slice(0, 120)}`);
+      // NON fail-open. Se l'export fallisce, il passo gemello ricade in
+      // silenzio su 40 minuti mentre questo scanner puo' riuscire: il job
+      // diventa il watermark e i timeout/host-kill piu' vecchi nella finestra
+      // derivata — incluso un publish cancellato — si perdono senza traccia.
+      // E' il terzo dei tre 🔴 della review, e la stessa forma degli altri due.
+      markIncomplete('export della finestra risolta al detector timeout fallito');
+      console.error(`::error::[scan-failed-runs] export della finestra risolta fallito: ${String(e.message).slice(0, 160)}`);
     }
   }
   return lookbackCache;
@@ -635,11 +655,18 @@ export function fetchRunsBisected(startMs, endMs, opts) {
     cap = FAILED_RUNS_SAFETY_CAP,
     maxDepth = FAILED_RUNS_MAX_SPLIT_DEPTH,
     warn = console.warn,
+    // Chiamata per ogni finestra che NON si e' riusciti a leggere. Esiste
+    // perche' `warnUnread` avvisava e poi rendeva `'read'`: la perdita finiva
+    // nel log e il chiamante la vedeva come una lettura riuscita, quindi la
+    // passata poteva diventare il watermark senza aver guardato quel tratto.
+    // Default no-op per non cambiare i chiamanti di sola lettura (i test).
+    onUnread = () => {},
   } = opts;
   const byId = new Map();
 
   const iso = (ms) => new Date(ms).toISOString();
   const warnUnread = (aIso, bIso) => {
+    onUnread(aIso, bIso);
     warn(
       `::warning::[scan-failed-runs] query FALLITA sulla finestra ${aIso}..`
         + `${bIso ?? 'ora'} — nessuna run letta li' dentro, e la scansione prosegue `
@@ -757,6 +784,37 @@ export function parseRunListJson(raw) {
   }
 }
 
+/**
+ * Ragioni per cui questa passata NON ha consegnato tutto.
+ *
+ * La regola che questa PR cerca di far valere e' una sola: **il confine non
+ * avanza senza una consegna completa dimostrata.** Da quando la finestra si
+ * deriva dall'ultima scansione RIUSCITA, ogni uscita morbida diventa un
+ * avanzamento di stato su lavoro non svolto — la review ne ha trovati tre, e
+ * sono la stessa forma del difetto originale, un livello piu' in basso.
+ *
+ * Qualunque cosa che renda la passata parziale — una finestra non letta, un
+ * listing dello storico illeggibile, una issue non persistita, il cap che
+ * tronca, l'export della finestra al gemello fallito — si registra qui, e
+ * `main()` esce non-zero. Uscire non-zero significa che questa run non e'
+ * `success`, quindi `lastSuccessfulScanAtMs()` non la prende come watermark e
+ * la passata successiva ri-guarda tutto.
+ */
+const incompleteReasons = [];
+function markIncomplete(reason) {
+  incompleteReasons.push(reason);
+}
+
+/** Uscita unica per una passata incompleta, usata da OGNI ritorno di `main()`. */
+function incompleteExit() {
+  console.error(
+    `::error::[scan-failed-runs] passata INCOMPLETA (${incompleteReasons.length}): `
+      + `${incompleteReasons.join(' · ')}. Uscita non-zero per NON far avanzare la finestra: `
+      + 'la prossima scansione ri-guarda questo tratto.',
+  );
+  return 1;
+}
+
 /** Run fallite nella finestra, escluse quelle da pull_request e dai gate pre-merge in preview. */
 function failedRuns() {
   const nowMs = Date.now();
@@ -774,7 +832,11 @@ function failedRuns() {
     );
     return parseRunListJson(raw);
   };
-  const runs = fetchRunsBisected(queryCutoffMs, null, { fetchWindow, nowMs });
+  const runs = fetchRunsBisected(queryCutoffMs, null, {
+    fetchWindow,
+    nowMs,
+    onUnread: (aIso, bIso) => markIncomplete(`finestra non letta ${aIso}..${bIso ?? 'ora'}`),
+  });
   const reportable = runs.filter((r) => isReportableRun(r, { since }));
   // Il canary si misura sulle run che possono DAVVERO essere perse dal report:
   // stesso filtro di `reportable` ma senza `since`, che e' proprio la soglia
@@ -1156,7 +1218,13 @@ async function main() {
   const runs = failedRuns();
   if (!runs.length) {
     console.log(`[scan-failed-runs] Nessuna run fallita negli ultimi ${lookbackMin()} minuti (esclusi PR e cancelled).`);
-    return 0;
+    // «Nessuna run fallita» e «non ho potuto leggere» danno la STESSA lista
+    // vuota, e uscire 0 qui era il primo dei tre 🔴: una finestra non letta
+    // faceva diventare questa run il nuovo watermark senza aver guardato
+    // niente, e un fallimento di `publish-api` nel tratto perso non sarebbe
+    // stato ripescato mai piu'. La lista vuota e' un risultato valido SOLO se
+    // ogni lettura e' riuscita.
+    return incompleteReasons.length > 0 ? incompleteExit() : 0;
   }
 
   // Una issue per WORKFLOW, non per run: se lo stesso workflow e' fallito tre
@@ -1303,22 +1371,45 @@ async function main() {
       // perche' aspettare la terza perdita significa buttarne tre.
       consecutiveGate: lost ? -1 : GATE,
     });
-    if (res) opened++;
+    // `if (res) opened++` contava come consegnati anche i due casi di
+    // fallimento, ed e' il secondo dei tre 🔴 della review: `createGithubIssue`
+    // rende `null` quando la creazione fallisce e `{persisted: false}` quando
+    // fallisce un commento o una riapertura. Contarli chiudeva la passata a 0 e
+    // faceva avanzare il confine oltre una failure NON registrata — inclusa una
+    // possibile failure di `publish-api`, che lascia la superficie dati vecchia.
+    //
+    // `ledger: true` e `staleBuild: true` sono percorsi RIUSCITI che non
+    // portano `persisted`, quindi si testano esattamente i due fallimenti e non
+    // la verita' di `persisted` (il caso ledger va preservato, come chiede la
+    // review).
+    if (res === null || res?.persisted === false) {
+      markIncomplete(
+        `segnalazione non consegnata per "${name}": `
+          + `${res === null ? 'createGithubIssue ha reso null' : 'commento non persistito'}`,
+      );
+      console.error(
+        `::error::[scan-failed-runs] ${name}: segnalazione NON consegnata `
+          + `(${res === null ? 'null' : 'persisted: false'}) — la passata non e' completa.`,
+      );
+      continue;
+    }
+    opened++;
   }
 
   console.log(`[scan-failed-runs] Fatto — ${opened} segnalazione/i emesse.`);
-  // Una passata TRONCATA non deve diventare il watermark: `lastSuccessfulScanAtMs`
-  // accetta solo run `schedule` con `conclusion: success`, quindi uscire 1 qui e'
-  // esattamente il meccanismo che tiene la finestra indietro fino a quando la
-  // consegna e' completa. Le issue gia' aperte in questa passata restano aperte:
-  // il lavoro fatto non si perde, si perde solo l'avanzamento del confine.
   if (truncated.length > 0) {
-    console.error(
-      `[scan-failed-runs] passata INCOMPLETA: ${truncated.length} workflow non segnalati `
-        + '→ uscita non-zero per non far avanzare la finestra.',
-    );
-    return 1;
+    markIncomplete(`cap raggiunto: ${truncated.length} workflow non segnalati`);
   }
+  // UNICO punto che applica la regola: il confine non avanza senza una consegna
+  // completa dimostrata. `lastSuccessfulScanAtMs()` accetta solo run `schedule`
+  // con `conclusion: success`, quindi uscire non-zero qui E' il meccanismo che
+  // tiene la finestra indietro finche' la passata non e' completa.
+  //
+  // Le issue gia' aperte in questa passata restano aperte: non si perde il
+  // lavoro fatto, si perde solo l'avanzamento del confine — che e' esattamente
+  // il verso giusto in cui sbagliare, perche' il costo e' ri-guardare, non
+  // non-guardare.
+  if (incompleteReasons.length > 0) return incompleteExit();
   return 0;
 }
 

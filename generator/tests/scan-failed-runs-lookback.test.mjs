@@ -18,7 +18,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { resolveLookbackMin, DEFAULT_RUN_QUERY_HORIZON_MIN } from '../../scripts/ci/scan-failed-runs.mjs';
+import { resolveLookbackMin, DEFAULT_RUN_QUERY_HORIZON_MIN, fetchRunsBisected } from '../../scripts/ci/scan-failed-runs.mjs';
 
 const WORKFLOW = readFileSync(
   new URL('../../.github/workflows/workflow-failure-issues.yml', import.meta.url),
@@ -213,4 +213,48 @@ test('il cap non promette piu un recupero che non avviene', () => {
   const src = readFileSync(new URL('../../scripts/ci/scan-failed-runs.mjs', import.meta.url), 'utf8');
   assert.doesNotMatch(src, /Verranno ripresi alla prossima scansione/);
   assert.match(src, /esce non-zero per NON far avanzare il watermark/);
+});
+
+test('una finestra NON letta viene riportata al chiamante, non solo loggata', () => {
+  // Primo dei tre 🔴: `warnUnread()` avvisava e poi rendeva `'read'`, quindi la
+  // perdita finiva nel log e il chiamante la vedeva come lettura riuscita — e la
+  // passata poteva diventare il watermark senza aver guardato quel tratto.
+  const unread = [];
+  const runs = fetchRunsBisected(
+    Date.parse('2026-09-18T00:00:00Z'),
+    null,
+    {
+      fetchWindow: () => null, // gh fallisce sempre
+      nowMs: Date.parse('2026-09-18T12:00:00Z'),
+      warn: () => {},
+      onUnread: (a, b) => unread.push([a, b]),
+    },
+  );
+  assert.equal(runs.length, 0);
+  assert.ok(unread.length > 0, 'la finestra persa deve essere segnalata al chiamante');
+});
+
+test('onUnread ha un default no-op: i chiamanti di sola lettura non cambiano', () => {
+  // I test storici chiamano fetchRunsBisected senza onUnread: non deve lanciare.
+  assert.doesNotThrow(() => fetchRunsBisected(
+    Date.parse('2026-09-18T00:00:00Z'),
+    null,
+    { fetchWindow: () => null, nowMs: Date.parse('2026-09-18T12:00:00Z'), warn: () => {} },
+  ));
+});
+
+test('i tre 🔴 sono lo stesso difetto: nessun avanzamento su lavoro non svolto', () => {
+  const src = readFileSync(new URL('../../scripts/ci/scan-failed-runs.mjs', import.meta.url), 'utf8');
+  // Un solo accumulatore e una sola uscita applicano la regola.
+  assert.match(src, /const incompleteReasons = \[\];/);
+  assert.match(src, /function incompleteExit\(\)/);
+  // (1) lettura dello storico non riuscita ≠ nessuna scansione precedente
+  assert.match(src, /markIncomplete\('listing delle scansioni precedenti non leggibile/);
+  // (2) consegna non persistita
+  assert.match(src, /if \(res === null \|\| res\?\.persisted === false\) \{/);
+  assert.doesNotMatch(src, /if \(res\) opened\+\+;/);
+  // (3) export della finestra al gemello
+  assert.match(src, /markIncomplete\('export della finestra risolta al detector timeout fallito'\)/);
+  // e la lista vuota non è più un successo incondizionato
+  assert.match(src, /return incompleteReasons\.length > 0 \? incompleteExit\(\) : 0;/);
 });
