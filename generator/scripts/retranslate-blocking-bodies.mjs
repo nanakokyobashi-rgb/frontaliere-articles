@@ -495,7 +495,16 @@ const has = (name) => argv.includes(`--${name}`);
 
 async function main() {
   const auditPath = flag('audit');
-  const SLUGS = parseSlugList(flag('slug'));
+  const rawSlug = flag('slug');
+  const SLUGS = parseSlugList(rawSlug);
+  // `--slug` is a safety boundary for --apply: an explicitly empty value
+  // must not silently become "no filter" and let an audit rewrite every pair.
+  // Keep the parser's null/empty result useful to callers, but reject the
+  // ambiguous CLI spelling before reading any audit or content tree.
+  if (has('slug') && SLUGS.length === 0) {
+    console.error(`❌ --slug "${rawSlug ?? ''}" è vuoto. Indica almeno uno slug.`);
+    process.exit(2);
+  }
   if (!auditPath && SLUGS.length === 0) {
     console.error('❌ --audit <file.json> oppure --slug <id> è richiesto.');
     process.exit(2);
