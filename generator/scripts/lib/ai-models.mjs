@@ -6091,10 +6091,7 @@ function _applyNonRetryableExhaustion(modelId, nrc, status, { recordScore } = {}
         `provider-wide HTTP ${status}`,
         `forbidden (HTTP ${status}), non-retryable`,
         COOLDOWN_SEVERITY.persistent,
-      ) === 'created'
-    ) {
-      _stats.providerCooldowns++;
-    }
+      ) === 'created') _stats.providerCooldowns++;
   }
 }
 
