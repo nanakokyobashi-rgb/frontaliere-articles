@@ -275,10 +275,12 @@ jobs:
       - name: Open/update the canonical issue (backfill falliti o coda oltre il cap)
         if: always() && steps.detect.outcome == 'success' && (steps.backfill.outputs.failed > 0 || steps.backfill.outputs.unprocessed > 0 || steps.detect.outputs.leftover != '0')
         env:
-          GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
           set -euo pipefail
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          export GH_TOKEN="${runtime_pat:-$GH_TOKEN}"
           report="$RUNNER_TEMP/dirty.json"
           results="$RUNNER_TEMP/backfill-results.tsv"
 

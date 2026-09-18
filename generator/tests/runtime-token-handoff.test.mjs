@@ -1,42 +1,95 @@
 /**
- * GitHub Actions evaluates `env.*` expressions before values appended to
- * GITHUB_ENV are available to later shell steps.  Keep the loop's
- * control-plane consumers on the runtime side of that boundary: expressions
- * may select the runner token, while the Remote Config token is selected only
- * from the shell environment and passed to the child command there.
+ * GitHub Actions valuta `env.*` prima che i valori scritti in GITHUB_ENV
+ * siano visibili alle interpolazioni YAML. I consumer del loop devono
+ * leggere il PAT dalla shell. Lo scanner cammina TUTTI i workflow: un
+ * elenco di otto file (PR #1547) lasciava reintrodurre
+ * `PUSH_TOKEN: ${{ env.GITHUB_PAT_NANAKO }}` altrove restando verde.
  */
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import test from 'node:test';
+import {
+  ENV_CONTEXT_HANDOFF_RE,
+  IF_ENV_TOKEN_RE,
+  MIN_SCANNED_WORKFLOWS,
+  PROBE_ENV_PUSH_TOKEN_RE,
+  PROBE_SCRIPT,
+  PROBE_SHELL_PUSH_TOKEN_RE,
+  findViolations,
+  scanRepo,
+} from '../../scripts/ci/scan-runtime-token-handoff.mjs';
 
-const root = new URL('../..', import.meta.url);
-const workflows = [
-  'followup-drainer.yml',
-  'issue-fix.yml',
-  'issue-triage.yml',
-  'pr-autorebase.yml',
-  'pr-redcheck-fixer.yml',
-  'recycle-stale-prs.yml',
-  'transport-identical-twins.yml',
-  'transport-identical-twins-realign.yml',
-];
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+const source = (file) => readFileSync(path.join(ROOT, '.github/workflows', file), 'utf8');
 
-const source = (file) => readFileSync(new URL(`.github/workflows/${file}`, root), 'utf8');
+test('lo scanner riconosce if: env.GITHUB_PAT e PUSH_TOKEN interpolato', () => {
+  const badIf = findViolations([
+    '      - name: Guard',
+    '        if: env.GITHUB_PAT_NANAKO != \'\'',
+    '        run: echo hi',
+  ].join('\n'), 'fixture.yml');
+  assert.equal(badIf.some((f) => f.kind === 'if-env-token'), true, 'if: env.PAT deve essere un finding');
 
-test('i consumer del loop non usano env.* per decidere la presenza del token runtime', () => {
-  for (const file of workflows) {
-    const yaml = source(file);
-    assert.doesNotMatch(
-      yaml,
-      /if:\s*[^\n]*env\.(?:APP_TOKEN|GITHUB_PAT(?:_NANAKO)?)/,
-      `${file}: una condizione env.* può essere valutata prima del GITHUB_ENV runtime`,
-    );
-    assert.doesNotMatch(
-      yaml,
-      /(?:GH_TOKEN|PUSH_TOKEN|PAT|ROUTING_TOKEN|SITE_TOKEN):\s*\$\{\{\s*env\.(?:APP_TOKEN|GITHUB_PAT(?:_NANAKO)?)\s*\}\}/,
-      `${file}: il token operativo deve essere passato dal guscio runtime`,
-    );
-  }
+  const badPush = findViolations(
+    '          PUSH_TOKEN: ${{ env.GITHUB_PAT_NANAKO }}\n',
+    'fixture.yml',
+  );
+  assert.equal(badPush.some((f) => f.kind === 'env-context-handoff'), true);
+  assert.equal(badPush.some((f) => f.kind === 'probe-env-push-token'), true);
+
+  const badFallback = findViolations(
+    '          GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}\n',
+    'fixture.yml',
+  );
+  assert.equal(
+    badFallback.some((f) => f.kind === 'env-context-handoff'),
+    true,
+    'il fallback silenzioso su GITHUB_TOKEN è la stessa classe: env vuoto → token runner',
+  );
+});
+
+test('lo scanner non confonde GITHUB_PAT: con la chiave PAT: e ignora i commenti', () => {
+  const actionInput = findViolations([
+    '          github_token: ${{ env.GITHUB_PAT_NANAKO }}',
+    '          codex_github_token: ${{ env.GITHUB_PAT_NANAKO }}',
+    '          GITHUB_PAT: ${{ env.GITHUB_PAT }}',
+  ].join('\n'), 'fixture.yml');
+  assert.deepEqual(actionInput, [], 'gli input Codex e GITHUB_PAT: non sono chiavi operative del gate');
+
+  const commented = findViolations(
+    '      # Lo step di apply e\' gatato su `env.GITHUB_PAT_NANAKO != \'\'`\n',
+    'fixture.yml',
+  );
+  assert.deepEqual(commented, [], 'un commento che cita l\'anti-pattern non è un handoff');
+});
+
+test('una sonda senza PUSH_TOKEN dalla shell è un finding; con la forma runtime no', () => {
+  const missing = findViolations(
+    `        run: node scripts/ci/${PROBE_SCRIPT}\n`,
+    'fixture.yml',
+  );
+  assert.equal(missing.some((f) => f.kind === 'probe-missing-shell-token'), true);
+
+  const ok = findViolations(
+    `          PUSH_TOKEN="$GITHUB_PAT_NANAKO" node scripts/ci/${PROBE_SCRIPT}\n`,
+    'fixture.yml',
+  );
+  assert.deepEqual(ok, []);
+});
+
+test('nessun workflow del repo reintroduce handoff env.* dopo load-rc-env', () => {
+  const { findings, scanned } = scanRepo(ROOT);
+  assert.ok(
+    scanned >= MIN_SCANNED_WORKFLOWS,
+    `scansionati ${scanned} workflow, sotto il pavimento di ${MIN_SCANNED_WORKFLOWS}`,
+  );
+  assert.deepEqual(
+    findings.map((f) => `${f.file}:${f.line} [${f.kind}] ${f.text}`),
+    [],
+    'handoff env.GITHUB_PAT*: passa il token dalla shell, non dal contesto env',
+  );
 });
 
 test('gli alert token-down leggono la disponibilità dalla shell runtime', () => {
@@ -90,4 +143,14 @@ test('i consumer che puliscono runtime_pat conservano l’exit status del comand
   assert.match(autorebase, /GH_TOKEN="\$runtime_pat" node scripts\/ci\/pr-autorebase\.mjs\n\s+rc=\$\?/);
   assert.match(autorebase, /unset runtime_pat\n\s+exit "\$rc"/,
     'pr-autorebase: unset non deve mascherare un errore del consumer');
+});
+
+test('la sonda del repo e le regex esportate restano allineate', () => {
+  const probe = readFileSync(new URL('../../scripts/ci/probe-workflow-scope.mjs', import.meta.url), 'utf8');
+  assert.match(probe, /const token = process\.env\.PUSH_TOKEN/,
+    'la sonda deve continuare a rifiutare di indovinare l\'identità da GH_TOKEN');
+  assert.match(PROBE_SHELL_PUSH_TOKEN_RE.source, /GITHUB_PAT_NANAKO/);
+  assert.match(IF_ENV_TOKEN_RE.source, /GITHUB_PAT/);
+  assert.match(ENV_CONTEXT_HANDOFF_RE.source, /GH_TOKEN/);
+  assert.match(PROBE_ENV_PUSH_TOKEN_RE.source, /PUSH_TOKEN/);
 });

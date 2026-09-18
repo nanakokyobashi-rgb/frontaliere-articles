@@ -212,7 +212,6 @@ jobs:
         continue-on-error: true
         uses: ./.github/actions/claude-codex-fallback
         env:
-          GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           SITE_REPO: valerielinc-ops/frontaliere-si-o-no
         with:
