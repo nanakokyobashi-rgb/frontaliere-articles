@@ -118,6 +118,14 @@
       {
         "prefix": "data/events-image-manifest.json",
         "reason": "Manifest scritto dalla pipeline di mirroring immagini eventi portata con #775. E' output di quella pipeline (WebP via sharp), non la pipeline: il codice che lo genera e' sotto generator/scripts/, che e' gia' il posto dove una fix scende."
+      },
+      {
+        "prefix": ".github/workflows/observers/scripts/crawler-generation-observer-selector.mjs",
+        "reason": "Gemello di classe `identical` (sorgente sul sito in .github/corpus-workflows/observers/), ma i due lati sono DIVERSI: il sito ha aggiunto il budget cumulativo MAX_DISCOVERY_ARTIFACT_REFERENCES e qui non e' sceso. Non registrato come `identical` perche' `--init` lo rifiuta con ragione — registrare due lati diversi come allineati fa leggere `undeclared-drift` alla passata successiva e FERMA il trasporto su questo file. La baseline giusta e' l'ultimo stato in cui i due lati combaciavano, che va cercata nella storia: e' lavoro di trasporto, non una registrazione. Dichiarato qui per non lasciare ambiguo fra «non ha un gemello» e «nessuno ha guardato». Non e' byte-identico, quindi il censimento non lo segnala comunque."
+      },
+      {
+        "prefix": ".github/workflows/observers/generator/tests/crawler-cross-repo-artifacts.test.mjs",
+        "reason": "Stessa ragione del selector che questo test copre: il lato sito importa MAX_DISCOVERY_ARTIFACT_REFERENCES e asserisce il budget cumulativo, questa copia no. In piu' il lato sito importa `../../scripts/ci/crawler-generation-observer-selector.mjs`, path che nella disposizione del corpus (observers/scripts/, senza `ci/`) non risolve: copiarlo alla lettera non basta, e questa e' una dipendenza implicita che il drift check non vede. Va trasportato insieme al selector, non da solo."
       }
     ]
   },
@@ -4064,6 +4072,56 @@
         "site": "049e7b7f8547fc10",
         "corpus": "049e7b7f8547fc10",
         "alignedAt": "2026-09-14"
+      }
+    },
+    {
+      "path": ".github/workflows/observers/scripts/lib/canonical-json-digest.mjs",
+      "sitePath": ".github/corpus-workflows/observers/scripts/lib/canonical-json-digest.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "a98a130d20cea211",
+        "corpus": "a98a130d20cea211",
+        "alignedAt": "2026-09-18"
+      }
+    },
+    {
+      "path": ".github/workflows/observers/scripts/lib/crawler-generation-observer-report.mjs",
+      "sitePath": ".github/corpus-workflows/observers/scripts/lib/crawler-generation-observer-report.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "0a32d9f5ee5bc961",
+        "corpus": "0a32d9f5ee5bc961",
+        "alignedAt": "2026-09-18"
+      }
+    },
+    {
+      "path": ".github/workflows/observers/scripts/lib/crawler-generation-token.mjs",
+      "sitePath": ".github/corpus-workflows/observers/scripts/lib/crawler-generation-token.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "4bc0d4d514be3f67",
+        "corpus": "4bc0d4d514be3f67",
+        "alignedAt": "2026-09-18"
+      }
+    },
+    {
+      "path": ".github/workflows/observers/scripts/lib/github-actions-read-client.mjs",
+      "sitePath": ".github/corpus-workflows/observers/scripts/lib/github-actions-read-client.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "a3c0b3742061e9e1",
+        "corpus": "a3c0b3742061e9e1",
+        "alignedAt": "2026-09-18"
+      }
+    },
+    {
+      "path": ".github/workflows/observers/workflows/crawler-generation-observer-shadow.yml",
+      "sitePath": ".github/corpus-workflows/observers/workflows/crawler-generation-observer-shadow.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "41a6342737247042",
+        "corpus": "41a6342737247042",
+        "alignedAt": "2026-09-18"
       }
     }
   ]
