@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/politica/1944770/difesa-federale-consiglio-chiede-tempi": {
-    "articleId": "difesa-970-milioni-consiglio-federale",
-    "ts": "2026-08-19T11:04:28.991Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1944731/burckhardt-winterthur-compression-lavoro-posti": {
     "articleId": "burckhardt-compression-tagli-posti",
     "ts": "2026-08-19T11:44:57.880Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/smi-riceve-un%27iniezione-farmaceutica%2c-entrano-galderma-e-sandoz/92077634": {
     "articleId": "smi-galderma-sandoz-2026",
     "ts": "2026-09-18T01:31:17.756Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1950922/crisi-ubs-at1-caso-soluzione-banca-capitale-cs-obbligazioni-commissione": {
+    "articleId": "consiglio-stati-lex-ubs-at1",
+    "ts": "2026-09-18T01:45:48.275Z",
     "keyForm": 2
   }
 }

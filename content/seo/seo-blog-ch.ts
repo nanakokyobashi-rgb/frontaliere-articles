@@ -84650,6 +84650,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-consiglio-stati-lex-ubs-at1': {
+    title: 'Lex UBS: Consiglio degli Stati rinvia la decisione',
+    description: 'Dibattito al Consiglio degli Stati sul progetto banche sistemiche e obbligazioni AT1. Intervento di Karin Keller-Sutter e costi stimati per UBS. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, consiglio, stati, rinvia, decisione',
+    ogTitle: 'Lex UBS: Consiglio degli Stati rinvia la decisione',
+    ogDescription: 'Non sono bastate oltre tre ore di dibattito al Consiglio degli Stati per terminare l\'esame del progetto governativo sulle banche sistemiche. Decisione rinviata alla settimana prossima.',
+    canonicalPath: '/articoli-svizzera/consiglio-stati-lex-ubs-at1/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lex UBS: Consiglio degli Stati rinvia la decisione",
+      "description": "Dibattito al Consiglio degli Stati sul progetto banche sistemiche e obbligazioni AT1. Intervento di Karin Keller-Sutter e costi stimati per UBS. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/consiglio-stati-lex-ubs-at1.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna durante il dibattito sulle banche sistemiche"
+      },
+      "datePublished": "2026-09-18T01:45:48+00:00",
+      "dateModified": "2026-09-18T01:45:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/consiglio-stati-lex-ubs-at1/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

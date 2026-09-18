@@ -6530,6 +6530,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.smi-galderma-sandoz-2026.title': 'SMI: Galderma und Sandoz betreten, Kühne+Nagel und Swisscom verlassen',
     'blog.article.smi-galderma-sandoz-2026.excerpt': 'Grosse Neuerungen für den Schweizer Aktienindex SMI von SIX: Galderma und Sandoz steigen ein, Kühne+Nagel und Swisscom gehen aus. Der Gesundheitssektor steigt auf 40%.',
     'blog.article.smi-galderma-sandoz-2026.imageAlt': 'Aktualisierung des Schweizer Aktienindex SMI mit Galderma und Sandoz',
+    'blog.article.consiglio-stati-lex-ubs-at1.title': 'Lex UBS: Ständerat vertagt Entscheid',
+    'blog.article.consiglio-stati-lex-ubs-at1.excerpt': 'Debatte im Ständerat über das Projekt Systembanken. Die Intervention von Karin Keller-Sutter ist für Mittwoch geplant und die Kosten werden auf 20 Milliarden geschätzt.',
+    'blog.article.consiglio-stati-lex-ubs-at1.imageAlt': 'Bundeshaus in Bern während der Debatte über systemrelevante Banken',
 };
 
 export default blogMetaChDe;
