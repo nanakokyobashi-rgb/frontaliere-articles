@@ -5,7 +5,7 @@
  *
  * ## La classe di guasto, e perche' nessun altro rilevatore la vede
  *
- * I 23 `crawler-group-NN.yml` scrivono la loro raccolta nel repo SITO con un
+ * I `crawler-group-NN.yml` scrivono la loro raccolta nel repo SITO con un
  * commit `Auto-update crawler group NN jobs`. Quando il commit non atterra, la
  * run NON diventa rossa: il percorso di commit classifica il caso come
  * "systemic class" ed esce 0 con un `::warning::`, per scelta — una contesa sul
@@ -31,19 +31,37 @@
  * — "la run e' girata" invece di "il dato e' atterrato". L'oracolo e' il commit,
  * perche' il commit E' la consegna.
  *
- * ## La soglia, e da dove viene
+ * ## La soglia, e da dove viene (al secondo tentativo)
  *
- * Baseline misurata dal 2026-09-05 al 2026-09-13: **23 gruppi distinti che
- * committano OGNI giorno**, in una o due ondate (23-48 commit/giorno). Dal
- * 2026-09-14: 2, 0, 4, 6, 2. Con una soglia di 6 ore l'allarme sarebbe suonato
- * il 2026-09-15 invece di lasciar passare 124 ore, e nei 9 giorni sani non
- * avrebbe mai suonato: il gap massimo osservato fra due ondate in quel periodo
- * resta sotto la soglia.
+ * Baseline misurata dal 2026-09-05 al 2026-09-13: **tutti i gruppi consegnano
+ * OGNI giorno**, in una o due ondate (23-48 commit/giorno). Dal 2026-09-14:
+ * 2, 0, 4, 6, 2 gruppi distinti al giorno.
  *
- * Si misura il gruppo DISTINTO piu' recente, non il conteggio: un fleet che
- * consegna 2 gruppi su 23 e' rotto, ma non e' fermo, e la soglia "zero commit"
- * e' l'unica che non richiede di indovinare quanti gruppi sia normale vedere in
- * una finestra di sei ore (le ondate non sono equispaziate).
+ * La prima versione usava «zero consegne in 6 ore», che sembra la condizione
+ * ovvia e misurata contro i dati reali NON SUONAVA: i vincitori del convoglio
+ * ruotano, quindi 1-2 gruppi filtrano sempre e "zero" resta falso mentre il 91%
+ * della flotta non consegna. Avrebbe preso solo il 2026-09-15, l'unico giorno a
+ * zero assoluto.
+ *
+ * Il segnale che separa e' la COPERTURA, non il silenzio: minimo sano 21,
+ * massimo rotto 6, quindi qualunque soglia fra 7 e 20 divide le due popolazioni
+ * senza sovrapposizione. La soglia e' meta' della flotta CONTATA (vedi
+ * `MIN_COVERAGE_FRACTION` e `countCrawlerGroups`), su una finestra di 24 ore che
+ * contiene sempre almeno un'ondata intera — con 6 ore un'ondata sana appena
+ * fuori finestra darebbe un falso positivo. Resta la condizione `hard-stop` per
+ * lo zero assoluto, che prende il caso pulito prima.
+ *
+ * ## Un allarme che tace e' peggio di un allarme assente
+ *
+ * Due decisioni che sembrano simmetriche e non lo sono:
+ *
+ * - non riuscire a LEGGERE la storia dei commit e' fail-open deliberato
+ *   (nessun verdetto, exit 0, detto nel log): un allarme che suona quando e'
+ *   cieco viene silenziato, e allora non suona piu' nemmeno quando serve;
+ * - non riuscire a CONSEGNARE il verdetto, o un'eccezione non prevista, escono
+ *   NON-ZERO. Qui lo stato che si perde non e' un dato, e' l'allarme stesso: un
+ *   fallimento silenzioso riprodurrebbe esattamente il guasto da segnalare —
+ *   124 ore senza traccia — e lo renderebbe indistinguibile da un fleet sano.
  *
  * Uso:
  *   node scripts/ci/scan-crawler-fleet-stall.mjs [--dry-run] [--stall-hours N]
@@ -55,6 +73,7 @@
  */
 
 import { execFileSync } from 'node:child_process';
+import { readdirSync } from 'node:fs';
 import { createGithubIssue } from '../lib/github-issue-creator.mjs';
 import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
 
@@ -76,8 +95,32 @@ const SITE_REPO = process.env.SITE_REPO || 'valerielinc-ops/frontaliere-si-o-no'
 /** Il messaggio che i workflow generati usano per la consegna. Unica sorgente. */
 export const GROUP_COMMIT_RE = /^Auto-update crawler group (\d{2}) jobs/;
 
-/** Quanti gruppi esistono. Serve solo alla prosa della issue, non alla soglia. */
-export const EXPECTED_GROUPS = 23;
+/**
+ * Quanti crawler-group esistono, CONTATI dai workflow invece di dichiarati.
+ *
+ * Era una costante 23, e la review ha ragione: regex, denominatore e soglia
+ * tarati su una cardinalita' fissa smettono di rappresentare "meta' della
+ * flotta" appena la flotta cresce. Un gruppo 24 aggiunto avrebbe lasciato la
+ * soglia a 12 su 24 — cioe' avrebbe richiesto che METÀ ESATTA fallisse prima
+ * di suonare, silenziosamente piu' permissiva ogni volta che il fleet cresce.
+ *
+ * Il conteggio e' locale e offline: i workflow generati stanno in questo
+ * checkout. Fallback a 23 se la directory non e' leggibile, che e' il valore
+ * misurato il 2026-09-18 e degrada al comportamento noto invece che a zero.
+ */
+export function countCrawlerGroups(dir = '.github/workflows') {
+  try {
+    const n = readdirSync(dir).filter((f) => /^crawler-group-\d+\.yml$/.test(f)).length;
+    return n > 0 ? n : 23;
+  } catch {
+    return 23;
+  }
+}
+
+export const EXPECTED_GROUPS = countCrawlerGroups();
+
+/** La soglia e' una FRAZIONE della flotta, non un assoluto. Vedi MIN_GROUPS_PER_DAY. */
+export const MIN_COVERAGE_FRACTION = 0.5;
 
 function gh(args, fallback = '') {
   try {
@@ -101,14 +144,29 @@ function gh(args, fallback = '') {
  * @param {Array<{commit?: {message?: string, committer?: {date?: string}}}>} rows
  * @returns {Array<{group: string, atMs: number}>}
  */
-export function groupDeliveries(rows) {
+export function groupDeliveries(rows, nowMs = Date.now()) {
   const out = [];
+  let future = 0;
   for (const r of Array.isArray(rows) ? rows : []) {
     const msg = String(r?.commit?.message || '').split('\n')[0];
     const m = GROUP_COMMIT_RE.exec(msg);
     if (!m) continue;
     const atMs = Date.parse(r?.commit?.committer?.date || '');
-    if (Number.isFinite(atMs)) out.push({ group: m[1], atMs });
+    if (!Number.isFinite(atMs)) continue;
+    // Un timestamp nel FUTURO va scartato, non contato come consegna recente.
+    // `committer.date` e' fornito dal client che ha pushato, quindi un clock
+    // skew su un runner puo' datare un commit avanti; conteggiarlo renderebbe
+    // "recente" una consegna che non e' avvenuta, e sopprimerebbe l'allarme
+    // proprio nel verso sbagliato. 5 minuti di tolleranza assorbono lo skew
+    // normale senza ammettere date inventate.
+    if (atMs > nowMs + 5 * 60_000) {
+      future += 1;
+      continue;
+    }
+    out.push({ group: m[1], atMs });
+  }
+  if (future > 0) {
+    console.warn(`[fleet-stall] ${future} consegne con data nel futuro scartate (clock skew?).`);
   }
   return out.sort((a, b) => b.atMs - a.atMs);
 }
@@ -136,7 +194,7 @@ export function groupDeliveries(rows) {
  * consegna >=21, e anche mezza ondata ne fa ~11-12 — per questo la finestra e'
  * 24 ore, che contiene sempre almeno un'ondata intera, e non 6).
  */
-export const MIN_GROUPS_PER_DAY = 12;
+export const MIN_GROUPS_PER_DAY = Math.max(2, Math.round(EXPECTED_GROUPS * MIN_COVERAGE_FRACTION));
 
 /** Ampiezza della finestra di copertura. Contiene sempre almeno un'ondata. */
 export const COVERAGE_WINDOW_HOURS = 24;
@@ -218,26 +276,54 @@ async function main() {
   const raw = gh(
     ['api', '-H', 'Accept: application/vnd.github+json',
       `repos/${SITE_REPO}/commits?sha=main&since=${sinceIso}&per_page=100`,
-      '--paginate'],
+      // TSV di DUE campi, non JSON: `gh api --jq` stampa gli oggetti
+      // pretty-printed su piu' righe, quindi "una riga = un oggetto" non regge
+      // (misurato: 139'095 righe, nessuna parsabile singolarmente). Servono solo
+      // la data e la prima riga del messaggio, quindi li si estrae in jq e non
+      // resta nessun JSON da ricucire — ne' la regex fragile di prima, ne' il
+      // parsing per riga.
+      '--paginate', '--jq',
+      '.[] | [(.commit.committer.date // ""), ((.commit.message // "") | split("\n")[0])] | @tsv'],
     '',
   );
   let rows = [];
   let readable = false;
   if (raw) {
-    try {
-      // `--paginate` concatena piu' array JSON: si normalizza in uno.
-      rows = JSON.parse(`[${raw.replace(/\]\s*\[/g, ',').replace(/^\[|\]$/g, '')}]`);
-      readable = Array.isArray(rows);
-    } catch (e) {
-      console.warn(`[fleet-stall] risposta non parsabile: ${String(e.message).slice(0, 160)}`);
+    // Una riga = un oggetto JSON, prodotta da `--jq '.[]'`. La versione
+    // precedente incollava gli array di `--paginate` con una regex
+    // (`/\]\s*\[/`) e poi li riparsava: fragile per costruzione — una pagina
+    // finale vuota, uno spazio diverso o un `][` dentro una stringa del
+    // messaggio di commit rendevano il JSON non parsabile, e il fail-open
+    // trasformava l'errore in SILENZIO invece che in un allarme. Con una riga
+    // per oggetto non c'e' niente da ricucire.
+    // Ogni riga e' `<iso-date>\t<prima riga del messaggio>`. Si ricostruisce la
+    // forma dell'API perche' `groupDeliveries` resta puro su quella forma ed e'
+    // la funzione che i test esercitano senza rete.
+    const parsed = [];
+    let bad = 0;
+    for (const line of raw.split('\n')) {
+      if (!line.trim()) continue;
+      const tab = line.indexOf('\t');
+      if (tab === -1) { bad += 1; continue; }
+      const date = line.slice(0, tab);
+      const message = line.slice(tab + 1);
+      if (!date) { bad += 1; continue; }
+      parsed.push({ commit: { message, committer: { date } } });
     }
+    if (bad > 0) {
+      console.warn(`[fleet-stall] ${bad} righe malformate scartate su ${parsed.length + bad}.`);
+    }
+    // Una riga rotta NON invalida la lettura: il conteggio scende e al massimo
+    // l'allarme suona in anticipo, che e' il verso giusto in cui sbagliare.
+    rows = parsed;
+    readable = parsed.length > 0 || raw.trim() === '';
   }
   if (!readable) {
     console.warn('[fleet-stall] storia dei commit del sito illeggibile → nessun verdetto (fail-open).');
     return 0;
   }
 
-  const deliveries = groupDeliveries(rows);
+  const deliveries = groupDeliveries(rows, nowMs);
   const verdict = stallVerdict({ deliveries, nowMs, stallHours: STALL_HOURS, readable });
   const perDay = deliveriesByDay(deliveries);
 
@@ -257,9 +343,13 @@ async function main() {
   const headline = verdict.reason === 'under-coverage'
     ? `Solo **${verdict.coverage} gruppi su ${EXPECTED_GROUPS}** hanno consegnato dati nelle ultime ${COVERAGE_WINDOW_HOURS}h (soglia ${MIN_GROUPS_PER_DAY}). L'ultima consegna risale a ${idle}, quindi il fleet NON e' silenzioso: sta girando e consegnando una frazione.`
     : `Nessuno dei ${EXPECTED_GROUPS} crawler-group ha committato dati nel repo sito da **${idle}**, contro una soglia di ${STALL_HOURS}h.`;
-  const title = verdict.reason === 'under-coverage'
-    ? 'Crawler fleet sotto copertura: la maggior parte dei gruppi non consegna'
-    : 'Crawler fleet stallo: nessun gruppo consegna dati';
+  // UN SOLO titolo canonico per entrambi i verdetti, e la ragione nel body.
+  // Con due titoli, un incidente che passa da `under-coverage` a `hard-stop`
+  // (che e' il PEGGIORAMENTO dello stesso guasto, non un guasto nuovo) sfuggiva
+  // alla dedup e apriva una seconda issue — e dato che la chiusura automatica e'
+  // dichiarata non implementata, restavano aperte entrambe. Il titolo e' la
+  // chiave di dedup, quindi deve identificare la CONDIZIONE, non la sua severita'.
+  const title = 'Crawler fleet: i gruppi non consegnano dati';
   const lines = [
     headline,
     '',
@@ -297,14 +387,36 @@ async function main() {
     return 0;
   }
 
-  await createGithubIssue({
+  const res = await createGithubIssue({
     title,
     description,
     priority: 1,
     labels: ['bug', 'crawler-fleet'],
     workflow: 'Crawler fleet stall watchdog',
   });
-  console.log('[fleet-stall] issue aperta/aggiornata.');
+
+  // Il risultato NON si puo' ignorare, ed e' il difetto che la review ha
+  // trovato su questa PR: `createGithubIssue` rende `null` quando la scrittura
+  // fallisce e `{persisted: false}` quando fallisce un commento su una issue
+  // esistente o riaperta. Stampare «issue aperta/aggiornata» e uscire 0 in quei
+  // casi e' la stessa classe di difetto che questo allarme esiste per
+  // intercettare: dichiarare fatto qualcosa che non e' stato fatto. Qui costa
+  // di piu' che altrove, perche' questa e' l'UNICA segnalazione di una consegna
+  // ferma: se sparisce, si torna alle 124 ore di silenzio.
+  //
+  // `ledger: true` e `staleBuild: true` sono percorsi RIUSCITI che non portano
+  // `persisted`, quindi si testano esattamente i due casi di fallimento e non
+  // la verita' di `persisted`.
+  if (res === null || res?.persisted === false) {
+    console.error(
+      '::error::[fleet-stall] verdetto di stallo NON consegnato: '
+        + `${res === null ? 'createGithubIssue ha restituito null' : 'commento non persistito (persisted: false)'}. `
+        + 'La run esce non-zero: il fallimento dell\'allarme deve essere visibile, '
+        + 'altrimenti una consegna ferma resta senza nessuna traccia.',
+    );
+    return 1;
+  }
+  console.log(`[fleet-stall] verdetto consegnato${res?.number ? ` su #${res.number}` : ''}.`);
   return 0;
 }
 
@@ -312,12 +424,21 @@ if (process.argv[1] && process.argv[1].endsWith('scan-crawler-fleet-stall.mjs'))
   main().then(
     (c) => process.exit(c),
     (e) => {
-      // Fail-open: un allarme rotto non deve far fallire il workflow che lo
-      // ospita, e qui non c'e' nessun watermark da far avanzare — a differenza
-      // di `scan-failed-runs.mjs`, questo script non ha stato che una uscita
-      // morbida possa spostare, quindi uscire 0 non nasconde nulla.
-      console.error(`[fleet-stall] errore non fatale: ${e && e.stack ? e.stack : e}`);
-      process.exit(0);
+      // NON fail-open. Il primo tentativo usciva 0 qui, con il ragionamento
+      // «questo script non ha watermark da far avanzare, quindi un'uscita
+      // morbida non nasconde nulla». Sbagliato: lo stato che si perde non e' un
+      // watermark, e' l'ALLARME. Questo e' l'unico rilevatore di una consegna
+      // ferma, quindi un crash silenzioso riproduce esattamente la condizione
+      // che deve segnalare — 124 ore di guasto senza nessuna traccia — e la
+      // rende indistinguibile da un fleet sano.
+      //
+      // Distinzione che conta e che resta: non leggere la storia dei commit e'
+      // fail-open DELIBERATO (verdetto assente, exit 0, detto nel log), perche'
+      // un allarme che suona quando e' cieco viene silenziato. Ma un'eccezione
+      // non prevista non e' cecita' dichiarata: e' un guasto dell'allarme, e va
+      // visto.
+      console.error(`::error::[fleet-stall] errore non gestito: ${e && e.stack ? e.stack : e}`);
+      process.exit(1);
     },
   );
 }

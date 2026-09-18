@@ -14,9 +14,12 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import {
   GROUP_COMMIT_RE,
   EXPECTED_GROUPS,
+  MIN_COVERAGE_FRACTION,
+  countCrawlerGroups,
   MIN_GROUPS_PER_DAY,
   COVERAGE_WINDOW_HOURS,
   groupDeliveries,
@@ -137,4 +140,73 @@ test('il riepilogo per giorno conta gruppi DISTINTI, non commit', () => {
     { day: '2026-09-17', groups: 1 },
     { day: '2026-09-18', groups: 2 },
   ]);
+});
+
+test('la flotta si CONTA, non si dichiara: la soglia resta meta anche se cresce', () => {
+  // La review: regex, denominatore e soglia tarati su cardinalità fissa smettono
+  // di rappresentare «metà della flotta» appena la flotta cresce. Con 24 gruppi
+  // e soglia fissa 12 servirebbe che metà esatta fallisse prima di suonare.
+  assert.equal(countCrawlerGroups('/nonexistent-dir'), 23, 'fallback al valore misurato, non a zero');
+  assert.equal(MIN_COVERAGE_FRACTION, 0.5);
+  assert.equal(MIN_GROUPS_PER_DAY, Math.max(2, Math.round(EXPECTED_GROUPS * MIN_COVERAGE_FRACTION)));
+  // Con la flotta osservata oggi la soglia resta quella misurata.
+  assert.equal(EXPECTED_GROUPS, 23);
+  assert.equal(MIN_GROUPS_PER_DAY, 12);
+});
+
+test('un timestamp nel futuro non vale come consegna recente', () => {
+  // `committer.date` viene dal client che ha pushato: un clock skew su un runner
+  // può datare un commit avanti, e contarlo sopprimerebbe l'allarme nel verso
+  // sbagliato — «recente» una consegna che non è avvenuta.
+  const rows = [
+    { commit: { message: 'Auto-update crawler group 04 jobs', committer: { date: '2026-09-19T18:00:00Z' } } },
+    { commit: { message: 'Auto-update crawler group 05 jobs', committer: { date: '2026-09-18T17:00:00Z' } } },
+  ];
+  const d = groupDeliveries(rows, NOW);
+  assert.deepEqual(d.map((x) => x.group), ['05'], 'la consegna datata domani è scartata');
+  // Tolleranza: 5 minuti di skew restano ammessi.
+  const skewed = [{ commit: { message: 'Auto-update crawler group 06 jobs', committer: { date: '2026-09-18T18:03:00Z' } } }];
+  assert.equal(groupDeliveries(skewed, NOW).length, 1);
+});
+
+test('il titolo e UNICO per entrambi i verdetti, o la dedup apre due issue', () => {
+  // Un incidente che passa da under-coverage a hard-stop è il PEGGIORAMENTO
+  // dello stesso guasto: con due titoli la dedup non lo riconosce e, dato che la
+  // chiusura automatica è dichiarata non implementata, restano aperte entrambe.
+  const src = readFileSync(new URL('../../scripts/ci/scan-crawler-fleet-stall.mjs', import.meta.url), 'utf8');
+  assert.match(src, /const title = 'Crawler fleet: i gruppi non consegnano dati';/);
+  assert.doesNotMatch(src, /const title = verdict\.reason === 'under-coverage'/);
+});
+
+test('un verdetto non consegnato esce non-zero, e un crash pure', () => {
+  // È l'UNICA segnalazione di una consegna ferma: se createGithubIssue rende
+  // null o `persisted: false` e il processo stampa «aperta» ed esce 0, si torna
+  // alle 124 ore di silenzio. `ledger`/`staleBuild` sono successi SENZA
+  // `persisted`, quindi si testano i due fallimenti, non la verità di persisted.
+  const src = readFileSync(new URL('../../scripts/ci/scan-crawler-fleet-stall.mjs', import.meta.url), 'utf8');
+  assert.match(src, /if \(res === null \|\| res\?\.persisted === false\)/);
+  // Non basta che la stringa non ci sia: il commento sopra la CITA per spiegare
+  // perché era sbagliata. Ciò che deve sparire è la STAMPA incondizionata.
+  assert.doesNotMatch(src, /console\.log\('\[fleet-stall\] issue aperta\/aggiornata\.'\)/);
+  assert.match(src, /console\.log\(`\[fleet-stall\] verdetto consegnato/);
+  const tail = src.slice(src.indexOf('main().then('));
+  assert.match(tail, /process\.exit\(1\)/, 'un errore non gestito deve risultare rotto');
+  assert.doesNotMatch(tail, /process\.exit\(0\)/);
+});
+
+test('le pagine di gh api arrivano come TSV di due campi, senza JSON da ricucire', () => {
+  // Due tentativi scartati, entrambi per fragilità del parsing:
+  //  1. incollare gli array di --paginate con /\]\s*\[/ e riparsare — una pagina
+  //     finale vuota o un `][` dentro un messaggio rompeva il JSON;
+  //  2. `--jq '.[]'` una riga per oggetto — ma `gh api --jq` stampa gli oggetti
+  //     pretty-printed, misurato: 139.095 righe, nessuna parsabile da sola.
+  // In entrambi i casi il fail-open trasformava l'errore in SILENZIO, che su
+  // questo allarme è il guasto stesso. Servono solo data e prima riga del
+  // messaggio: estratti in jq, non resta niente da parsare.
+  const src = readFileSync(new URL('../../scripts/ci/scan-crawler-fleet-stall.mjs', import.meta.url), 'utf8');
+  assert.match(src, /@tsv/);
+  assert.match(src, /\.commit\.committer\.date/);
+  assert.doesNotMatch(src, /'--paginate', '--jq', '\.\[\]'\]/);
+  assert.doesNotMatch(src, /replace\(\/\\\]\\s\*\\\[\/g/);
+  assert.doesNotMatch(src, /JSON\.parse\(t\)/, 'nessun parsing JSON per riga');
 });
