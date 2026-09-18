@@ -6554,6 +6554,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.pil-svizzero-crescita-2026.title': 'PIL svizzero: crescita rivista all\'1,7% per il 2026',
     'blog.article.pil-svizzero-crescita-2026.excerpt': 'Il gruppo di esperti della Confederazione aggiorna le stime economiche: PIL all\'1,7% nel 2026 e all\'1,6% nel 2027. Disoccupazione al 3,1%.',
     'blog.article.pil-svizzero-crescita-2026.imageAlt': 'Previsioni congiunturali ed economia svizzera a Berna',
+    'blog.article.consiglio-federale-contributo-fmi.title': 'Consiglio federale: 40 milioni di franchi per il FMI',
+    'blog.article.consiglio-federale-contributo-fmi.excerpt': 'Il Consiglio federale ha approvato un contributo di 40 milioni di franchi per il partenariato SECO-FMI nel periodo 2026-2030.',
+    'blog.article.consiglio-federale-contributo-fmi.imageAlt': 'Il Palazzo federale a Berna sede del Consiglio federale svizzero',
 };
 
 export default blogMetaChIt;

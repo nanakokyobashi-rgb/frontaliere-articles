@@ -19634,6 +19634,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'consiglio-federale-contributo-fmi',
+    category: 'novita',
+    date: '2026-09-18T03:06:02.186Z',
+    image: '/images/blog/consiglio-federale-contributo-fmi.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

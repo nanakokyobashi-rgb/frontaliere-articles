@@ -6554,6 +6554,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.pil-svizzero-crescita-2026.title': 'Schweizer BIP: Wachstum bis 2026 auf 1,7% revidiert',
     'blog.article.pil-svizzero-crescita-2026.excerpt': 'Die Expertengruppe des Bundes aktualisiert die Wirtschaftsschätzungen: BIP auf 1,7% im Jahr 2026 und 1,6% im Jahr 2027. Arbeitslosenquote bei 3,1%.',
     'blog.article.pil-svizzero-crescita-2026.imageAlt': 'Konjunkturprognosen und Schweizer Wirtschaft in Bern',
+    'blog.article.consiglio-federale-contributo-fmi.title': 'Bundesrat: 40 Millionen Franken für den IWF',
+    'blog.article.consiglio-federale-contributo-fmi.excerpt': 'Der Bundesrat hat einen Beitrag von 40 Millionen Franken für die Partnerschaft SECO-FMI im Zeitraum 2026-2030 bewilligt.',
+    'blog.article.consiglio-federale-contributo-fmi.imageAlt': 'Das Bundeshaus in Bern Sitz des Schweizerischen Bundesrates',
 };
 
 export default blogMetaChDe;

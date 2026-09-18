@@ -6554,6 +6554,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.pil-svizzero-crescita-2026.title': 'Swiss GDP: revised growth to 1.7% by 2026',
     'blog.article.pil-svizzero-crescita-2026.excerpt': 'The Confederation\'s expert group updates the economic estimates: GDP at 1.7% in 2026 and 1.6% in 2027. Unemployment at 3.1%.',
     'blog.article.pil-svizzero-crescita-2026.imageAlt': 'Economic forecasts and Swiss economy in Bern',
+    'blog.article.consiglio-federale-contributo-fmi.title': 'Federal Council: 40 million francs for the IMF',
+    'blog.article.consiglio-federale-contributo-fmi.excerpt': 'The Federal Council has approved a contribution of CHF 40 million for the SECO-IMF partnership in the period 2026-2030.',
+    'blog.article.consiglio-federale-contributo-fmi.imageAlt': 'The Federal Palace in Bern seat of the Swiss Federal Council',
 };
 
 export default blogMetaChEn;

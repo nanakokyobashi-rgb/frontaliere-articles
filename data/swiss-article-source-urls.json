@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/voto-27-settembre%3a-si-profilano-due-no-a-iniziative/91918539": {
-    "articleId": "due-no-iniziative-settembre",
-    "ts": "2026-08-19T14:25:41.221Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/attualita/1944642/lavoro-annuncio-zurigo-diritto-esperto-ricerca-anni-fumatrice": {
     "articleId": "annuncio-discriminatorio-zurigo-lpar",
     "ts": "2026-08-19T15:05:48.398Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/juhthgdqzukb": {
     "articleId": "pil-svizzero-crescita-2026",
     "ts": "2026-09-18T02:59:50.093Z",
+    "keyForm": 2
+  },
+  "https://www.seco.admin.ch/it/newnsb/zmsyjbttr33fguq8ra_t6": {
+    "articleId": "consiglio-federale-contributo-fmi",
+    "ts": "2026-09-18T03:06:02.479Z",
     "keyForm": 2
   }
 }
