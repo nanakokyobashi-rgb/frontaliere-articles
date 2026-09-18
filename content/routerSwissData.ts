@@ -2210,6 +2210,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'consiglio-federale-contributo-fmi': { it: 'consiglio-federale-contributo-fmi', en: 'federal-council-imf-contribution', de: 'bundesrat-iwf-beitrag', fr: 'conseil-federal-contribution-fmi' },
  'penuria-alloggi-svizzera-2027': { it: 'penuria-alloggi-svizzera-2027', en: 'housing-shortage-switzerland-2027', de: 'wohnungsmangel-schweiz-2027', fr: 'penurie-logements-suisse-2027' },
  'permesso-c-glarona-requisiti': { it: 'permesso-c-glarona-requisiti', en: 'permit-c-glarona-requirements', de: 'bewilligung-c-glarona-anforderungen', fr: 'permis-c-glarona-conditions' },
+ 'permesso-l-vaud-proroga': { it: 'permesso-l-vaud-proroga', en: 'l-permit-vaud-extension', de: 'l-ausweis-waadt-verlaengerung', fr: 'permis-l-vaud-prolongation' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

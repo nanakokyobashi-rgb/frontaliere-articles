@@ -6563,6 +6563,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.permesso-c-glarona-requisiti.title': 'Residence permit C Canton Glarus: requirements and application',
     'blog.article.permesso-c-glarona-requisiti.excerpt': 'Guide to the requirements for the C permit in Glarus: years of residence, language integration and issuance procedure for EU/EFTA citizens and third states.',
     'blog.article.permesso-c-glarona-requisiti.imageAlt': 'Swiss administrative building for residence permit management',
+    'blog.article.permesso-l-vaud-proroga.title': 'Permit L in Vaud: validity max 1 year and extension',
+    'blog.article.permesso-l-vaud-proroga.excerpt': 'Validity up to 1 year, employer constraint and SEM management. The rules for the extension or transition to permit B.',
+    'blog.article.permesso-l-vaud-proroga.imageAlt': 'L permit document on a desk in a Swiss office',
 };
 
 export default blogMetaChEn;

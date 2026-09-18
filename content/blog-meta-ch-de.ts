@@ -6563,6 +6563,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.permesso-c-glarona-requisiti.title': 'Niederlassungsbewilligung C Kanton Glarus: Voraussetzungen und Antrag',
     'blog.article.permesso-c-glarona-requisiti.excerpt': 'Leitfaden zu den Voraussetzungen für die Bewilligung C in Glarus: Aufenthaltsjahre, Sprachintegration und Erteilungsverfahren für EU-/EFTA-Bürger und Drittstaaten.',
     'blog.article.permesso-c-glarona-requisiti.imageAlt': 'Schweizer Verwaltungsgebäude für die Verwaltung von Aufenthaltstbewilligungen',
+    'blog.article.permesso-l-vaud-proroga.title': 'Ausweis L in der Waadt: Gültigkeit max. 1 Jahr und Verlängerung',
+    'blog.article.permesso-l-vaud-proroga.excerpt': 'Gültigkeit bis zu 1 Jahr, Bindung an den Arbeitgeber und SEM-Verwaltung. Die Regeln für die Verlängerung oder den Übergang zur B-Bewilligung.',
+    'blog.article.permesso-l-vaud-proroga.imageAlt': 'L-Ausweis-Dokument auf einem Tisch in einem Schweizer Büro',
 };
 
 export default blogMetaChDe;

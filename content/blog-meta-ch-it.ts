@@ -6563,6 +6563,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.permesso-c-glarona-requisiti.title': 'Permesso di domicilio C Canton Glarona: requisiti e domanda',
     'blog.article.permesso-c-glarona-requisiti.excerpt': 'Guida ai requisiti per il permesso C a Glarona: anni di residenza, integrazione linguistica e procedura di rilascio per cittadini UE/AELS e terzi stati.',
     'blog.article.permesso-c-glarona-requisiti.imageAlt': 'Edificio amministrativo svizzero per la gestione dei permessi di soggiorno',
+    'blog.article.permesso-l-vaud-proroga.title': 'Permesso L in Vaud: validità max 1 anno e proroga',
+    'blog.article.permesso-l-vaud-proroga.excerpt': 'Validità fino a 1 anno, vincolo al datore di lavoro e gestione SEM. Le regole per la proroga o il passaggio al permesso B.',
+    'blog.article.permesso-l-vaud-proroga.imageAlt': 'Documento di permesso L sul tavolo di un ufficio svizzero',
 };
 
 export default blogMetaChIt;

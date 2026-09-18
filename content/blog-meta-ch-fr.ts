@@ -6563,6 +6563,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.permesso-c-glarona-requisiti.title': 'Permis de séjour C Canton de Glaris : exigences et demande',
     'blog.article.permesso-c-glarona-requisiti.excerpt': 'Guide des exigences pour le permis C à Glaris : années de résidence, intégration linguistique et procédure de délivrance pour les citoyens de l\'UE/AELE et des pays tiers.',
     'blog.article.permesso-c-glarona-requisiti.imageAlt': 'Bâtiment administratif suisse pour la gestion des permis de séjour',
+    'blog.article.permesso-l-vaud-proroga.title': 'Permis L en Vaud : validité max 1 an et prolongation',
+    'blog.article.permesso-l-vaud-proroga.excerpt': 'Validité jusqu\'à 1 an, obligation à l\'employeur et gestion SEM. Les règles pour la prolongation ou le passage au permis B.',
+    'blog.article.permesso-l-vaud-proroga.imageAlt': 'Document de permis L sur une table dans un bureau suisse',
 };
 
 export default blogMetaChFr;
