@@ -6566,6 +6566,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.permesso-l-vaud-proroga.title': 'Permit L in Vaud: validity max 1 year and extension',
     'blog.article.permesso-l-vaud-proroga.excerpt': 'Validity up to 1 year, employer constraint and SEM management. The rules for the extension or transition to permit B.',
     'blog.article.permesso-l-vaud-proroga.imageAlt': 'L permit document on a desk in a Swiss office',
+    'blog.article.crediti-esercito-difesa-svizzera.title': 'Swiss defense: 970 million requested for the army',
+    'blog.article.crediti-esercito-difesa-svizzera.excerpt': 'The Federal Council is asking for almost a billion extra francs for ground-to-air and radar systems to deal with threats in Europe.',
+    'blog.article.crediti-esercito-difesa-svizzera.imageAlt': 'Federal Palace in Bern, seat of the Swiss Federal Council',
 };
 
 export default blogMetaChEn;

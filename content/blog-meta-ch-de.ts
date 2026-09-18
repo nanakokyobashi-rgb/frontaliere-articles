@@ -6566,6 +6566,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.permesso-l-vaud-proroga.title': 'Ausweis L in der Waadt: Gültigkeit max. 1 Jahr und Verlängerung',
     'blog.article.permesso-l-vaud-proroga.excerpt': 'Gültigkeit bis zu 1 Jahr, Bindung an den Arbeitgeber und SEM-Verwaltung. Die Regeln für die Verlängerung oder den Übergang zur B-Bewilligung.',
     'blog.article.permesso-l-vaud-proroga.imageAlt': 'L-Ausweis-Dokument auf einem Tisch in einem Schweizer Büro',
+    'blog.article.crediti-esercito-difesa-svizzera.title': 'Schweizer Verteidigung: 970 Millionen für die Armee gefordert',
+    'blog.article.crediti-esercito-difesa-svizzera.excerpt': 'Der Bundesrat fordert knapp eine Milliarde Franken zusätzlich für Boden-Luft- und Radarsysteme, um den Bedrohungen in Europa zu begegnen.',
+    'blog.article.crediti-esercito-difesa-svizzera.imageAlt': 'Bundeshaus in Bern, Sitz des Schweizer Bundesrates',
 };
 
 export default blogMetaChDe;

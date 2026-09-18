@@ -85118,6 +85118,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-crediti-esercito-difesa-svizzera': {
+    title: 'Difesa svizzera: richiesti 970 milioni per l\'esercito',
+    description: 'Il Consiglio federale richiede 970 milioni per l\'esercito e fondi per agricoltura e sicurezza vertici. Uscite totali: 1,068 miliardi di franchi. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, difesa, richiesti, milioni, esercito',
+    ogTitle: 'Difesa svizzera: richiesti 970 milioni per l\'esercito',
+    ogDescription: 'Il Consiglio federale presenta una richiesta di credito di 970 milioni per l\'esercito e fondi per l\'agricoltura e la sicurezza di vertici internazionali. Totale uscite: 1,068 miliardi di franchi.',
+    canonicalPath: '/articoli-svizzera/crediti-esercito-difesa-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Difesa svizzera: richiesti 970 milioni per l'esercito",
+      "description": "Il Consiglio federale richiede 970 milioni per l'esercito e fondi per agricoltura e sicurezza vertici. Uscite totali: 1,068 miliardi di franchi. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/crediti-esercito-difesa-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo Federale a Berna, sede del Consiglio federale svizzero"
+      },
+      "datePublished": "2026-09-18T18:14:30+00:00",
+      "dateModified": "2026-09-18T18:14:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/crediti-esercito-difesa-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
