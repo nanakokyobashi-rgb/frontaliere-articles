@@ -424,8 +424,10 @@ jobs:
              | select(has_single_revision)
              | select(.commit_id == $head)
              | sort_by([(.submitted_at // .created_at // ""), ((.id // 0) | tonumber? // 0)])
-             | last
-             | if . == null then 0 elif has_clean_lgtm then 1 else 0 end'
+             | if length == 0 then 0
+               elif (.[-1] | has_clean_lgtm) then 1
+               else 0
+               end'
           )
           if [ "${same_head:-0}" -gt 0 ]; then
             echo "skip=true" >> "$GITHUB_OUTPUT"
