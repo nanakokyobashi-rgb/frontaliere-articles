@@ -165,6 +165,15 @@ export function readBodyField(src, id, field) {
 export { escapeForSingleQuoteTS };
 
 /**
+ * Applica il post-processing della pipeline e rende esplicito il fallimento
+ * quando la sanitizzazione svuota l'uscita MT.
+ */
+export function sanitizeTranslatedField(value) {
+  const sanitized = sanitizeBodyText(value);
+  return sanitized.trim() ? sanitized : null;
+}
+
+/**
  * Sostituisce UN campo body nel sorgente, lasciando intatto tutto il resto del
  * file (le altre chiavi, `faq`, l'export finale). Ritorna `null` se la chiave
  * non c'e': meglio saltare l'articolo che riscriverlo a meta'.
@@ -387,7 +396,12 @@ export function blockingPairsFromAudit(audit) {
 /** Id articolo da `--slug a,b`. Vuoto se il flag manca o e' una stringa vuota. */
 export function parseSlugList(raw) {
   if (raw == null || raw === '') return [];
-  return String(raw).split(',').map((s) => s.trim()).filter(Boolean);
+  return [...new Set(String(raw).split(',').map((s) => s.trim()).filter(Boolean))];
+}
+
+export function parseLocaleList(raw) {
+  if (raw == null || raw === '') return [];
+  return [...new Set(String(raw).split(',').map((s) => s.trim()).filter(Boolean))];
 }
 
 /**
@@ -414,9 +428,11 @@ export function selectBlockingPairs(pairs, { locales, slugs } = {}) {
  */
 export function pairsForSlugs(slugs, locales, contentRoot) {
   const out = [];
-  for (const id of Array.isArray(slugs) ? slugs : []) {
+  const uniqueSlugs = [...new Set(Array.isArray(slugs) ? slugs.filter(Boolean) : [])];
+  const uniqueLocales = [...new Set(Array.isArray(locales) ? locales.filter(Boolean) : [])];
+  for (const id of uniqueSlugs) {
     if (!id) continue;
-    for (const locale of Array.isArray(locales) ? locales : []) {
+    for (const locale of uniqueLocales) {
       for (const [dir, realDir] of Object.entries(DIR_TO_REAL)) {
         const file = resolve(contentRoot, realDir, locale, `${id}.ts`);
         if (existsSync(file)) out.push({ id, locale, dir, codes: ['in-place'] });
@@ -505,7 +521,7 @@ async function main() {
   }
   const CONCURRENCY = Math.max(1, Number(flag('concurrency', 2)) || 2);
   const CONTENT_ROOT = resolve(flag('content-root', ROOT));
-  const LOCALES = String(flag('locale', 'en,de,fr')).split(',').map((s) => s.trim()).filter(Boolean);
+  const LOCALES = parseLocaleList(flag('locale', 'en,de,fr'));
   const CODE = flag('code');
 
   // Un worktree sparse NON ha `content/`, e senza questo controllo ogni coppia
@@ -597,7 +613,9 @@ async function processPair(pair, { CONTENT_ROOT, APPLY }) {
     // sanificazione del percorso di produzione. Una rigenerazione editoriale
     // (scaffolding, istituzioni fabbricate) resta un'altra operazione.
     for (const f of Object.keys(italianSections)) {
-      newSections[f] = sanitizeBodyText(italianSections[f]);
+      const sanitized = sanitizeTranslatedField(italianSections[f]);
+      if (sanitized === null) { missingField = f; break; }
+      newSections[f] = sanitized;
     }
   } else {
     // Ri-traduzione: OGNI carattere qui esce dalla cascata MT, mai da una regex.
@@ -614,7 +632,9 @@ async function processPair(pair, { CONTENT_ROOT, APPLY }) {
       // Stesso post-processing del percorso di produzione (`create-article.mjs`
       // lo applica alla stessa identica uscita di `translateFieldFreeMt`): la
       // cascata e' la stessa, e da qui in poi lo e' anche cio' che le succede.
-      newSections[f] = sanitizeBodyText(out);
+      const sanitized = sanitizeTranslatedField(out);
+      if (sanitized === null) { missingField = f; break; }
+      newSections[f] = sanitized;
     }
   }
 

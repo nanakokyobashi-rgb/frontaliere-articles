@@ -52,8 +52,11 @@ import {
   criticalCodes,
   guardTranslatedKeyFacts,
   parseSlugList,
+  parseLocaleList,
+  pairsForSlugs,
   selectBlockingPairs,
   rewriteExistingLocaleBody,
+  sanitizeTranslatedField,
 } from '../scripts/retranslate-blocking-bodies.mjs';
 // Dal modulo corpus-only, NON da `lib/article-sanitizers.mjs`: quello e'
 // `identical` nel manifest del ciclo e un export aggiunto dal corpus lo
@@ -634,8 +637,38 @@ test('il rifiuto di lingua non scrive, il fallimento del motore tiene il fallbac
 
 test('parseSlugList spezza, trimma e ignora i vuoti', () => {
   assert.deepEqual(parseSlugList('a, b ,c'), ['a', 'b', 'c']);
+  assert.deepEqual(parseSlugList('a, b, a,,b'), ['a', 'b']);
   assert.deepEqual(parseSlugList(''), []);
   assert.deepEqual(parseSlugList(null), []);
+});
+
+test('parseLocaleList normalizza e deduplica i locali', () => {
+  assert.deepEqual(parseLocaleList('en, de, en,,fr,de'), ['en', 'de', 'fr']);
+});
+
+test('pairsForSlugs non duplica il lavoro quando slug o locale sono ripetuti', () => {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'retranslate-dedupe-'));
+  try {
+    const dir = path.join(tmp, 'content', 'blog-body', 'en');
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(path.join(dir, 'slug-arbitrario.ts'), fileFor('slug-arbitrario', { body1: 'x' }));
+    const pairs = pairsForSlugs(
+      ['slug-arbitrario', 'slug-arbitrario'],
+      ['en', 'en'],
+      tmp,
+    );
+    assert.deepEqual(
+      pairs.map((p) => p.locale + '/' + p.id),
+      ['en/slug-arbitrario'],
+    );
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
+});
+
+test('una sanitizzazione che svuota l uscita MT diventa un campo mancante', () => {
+  assert.equal(sanitizeTranslatedField('}'), null);
+  assert.equal(sanitizeTranslatedField('testo }'), 'testo ');
 });
 
 test('selectBlockingPairs include it solo se richiesto, e filtra per slug', () => {
