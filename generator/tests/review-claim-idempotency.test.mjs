@@ -288,7 +288,10 @@ test('tests.yml claims before review work and finalizes without gating the requi
   const sameHeadGuard = workflow.slice(sameHeadStart, sameHeadEnd);
   assert.match(sameHeadGuard, /\.user\.type == "Bot"/);
   assert.match(sameHeadGuard, /test\("\^\(claude\|frontaliere-automation\)";"i"\)/);
-  assert.match(sameHeadGuard, /has_single_revision/);
+  assert.match(sameHeadGuard, /--arg revision \"\$REVIEW_REVISION\"/);
+  assert.match(sameHeadGuard, /has_current_revision\(\$expected\)/);
+  assert.match(sameHeadGuard, /select\(has_current_revision\(\$revision\)\)/);
+  assert.doesNotMatch(sameHeadGuard, /has_single_revision/);
   assert.match(sameHeadGuard, /has_clean_lgtm/);
   assert.match(sameHeadGuard, /sort_by\(\[\(\.submitted_at \/\/ \.created_at/);
   assert.match(sameHeadGuard, /select\(\.commit_id == \$head\)\]\s*\|\s*sort_by\(/);
@@ -377,10 +380,15 @@ test('tutti i consumer di review usano la revisione del body corrente', () => {
   assert.match(testsWorkflow, /PR body is not a string or null/);
   assert.match(redflag, /if ! reviews_json=\$\(gh api "repos\/\$REPO\/pulls\/\$PR_NUMBER\/reviews" --paginate --slurp/);
 
+  assert.match(redflag, /select\(has_current_revision\(\$revision\)\)/);
+  assert.doesNotMatch(redflag, /has_single_revision|applies_to_current_input/);
+
   const stale = fs.readFileSync(path.join(ROOT, '.github/workflows/stale-pr-rescuer.yml'), 'utf8');
   const terminalReviewFilter = /select\(\(\.state \/\/ ""\) != "PENDING" and \(\.state \/\/ ""\) != "DISMISSED"\)/g;
   assert.equal((redflag.match(terminalReviewFilter) ?? []).length, 1);
   assert.equal((stale.match(terminalReviewFilter) ?? []).length, 2);
   assert.match(stale, /REVIEW_REVISION=\"body:\$body_sha\"/);
   assert.match(stale, /split\("\\n"\)\[\][\s\S]*REVIEW_INPUT_REVISION/);
+  assert.equal((stale.match(/select\(has_current_revision\(\$revision\)\)/g) ?? []).length, 2);
+  assert.doesNotMatch(stale, /has_single_revision|applies_to_current_input/);
 });

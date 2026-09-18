@@ -817,16 +817,10 @@ jobs:
             def has_current_revision($expected):
               review_revisions as $revisions
               | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
-            def has_single_revision:
-              (review_revisions | length) == 1;
-            def applies_to_current_input($expected; $head):
-              has_current_revision($expected)
-              or (((.commit_id // "") | ascii_downcase) == ($head | ascii_downcase)
-                  and has_single_revision);
             [.[]
              | select((.state // "") != "PENDING" and (.state // "") != "DISMISSED")
              | select((.commit_id // "" | ascii_downcase) == ($head | ascii_downcase))
-             | select(applies_to_current_input($revision; $head))
+             | select(has_current_revision($revision))
              | select((.body // "")|contains("## Findings ("))
             ] | sort_by(.id // 0) | last | .body // empty' \
             > "$OUT/latest-review.md" 2>/dev/null; then
