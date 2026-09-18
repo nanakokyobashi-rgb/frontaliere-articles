@@ -546,7 +546,9 @@ const TRANSIENT_RATE_LIMIT_BODY = '{"error":{"message":"rate limit exceeded, ret
 const TRANSIENT_BUSY_BODY = '{"error":{"message":"model is busy"}}';
 const WAF_IP_403_BODY = '{"error":{"message":"Your IP has been blocked by the WAF"}}';
 const CREDENTIAL_403_BODY = '{"error":{"message":"invalid api key"}}';
+const REGIONAL_403_BODY = '{"error":{"message":"forbidden in this region"}}';
 const ROUTING_410_BODY = '{"error":{"message":"No healthy upstream; origin routing changed"}}';
+const GONE_TITLE_410_BODY = '{"type":"about:blank","title":"Gone","status":410}';
 const GROQ_DECOMMISSION_410 = '{"error":{"message":"model llama-3.1-8b-instant has been decommissioned"}}';
 
 describe('matrice 403/410: isRetryableError e classifyNonRetryableError', () => {
@@ -632,10 +634,26 @@ describe('matrice 403/410: isRetryableError e classifyNonRetryableError', () => 
       classification: { nonRetryable: true, markExhausted: true, exhaustProvider: true },
     },
     {
+      label: 'Cerebras 403 regional entitlement stays model-scoped',
+      status: 403,
+      provider: 'Cerebras',
+      body: REGIONAL_403_BODY,
+      retryable: false,
+      classification: { nonRetryable: true, markExhausted: true },
+    },
+    {
       label: 'NVIDIA 410 routing / intermediary',
       status: 410,
       provider: 'NVIDIA',
       body: ROUTING_410_BODY,
+      retryable: false,
+      classification: { nonRetryable: true, markExhausted: false },
+    },
+    {
+      label: 'NVIDIA 410 Gone title without EOL evidence',
+      status: 410,
+      provider: 'NVIDIA',
+      body: GONE_TITLE_410_BODY,
       retryable: false,
       classification: { nonRetryable: true, markExhausted: false },
     },

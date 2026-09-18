@@ -5462,8 +5462,7 @@ function _hasEolEvidence(bodyText = '') {
     b.includes('no longer available') ||
     b.includes('no longer supported') ||
     b.includes('decommissioned') ||
-    b.includes('retired') ||
-    /\bgone\b/.test(b)
+    b.includes('retired')
   );
 }
 
@@ -5482,6 +5481,25 @@ function _isModelSpecific403(bodyText = '') {
     b.includes('model is restricted') ||
     b.includes('model has been disabled') ||
     b.includes('model is disabled')
+  );
+}
+
+/**
+ * 403 evidence that applies to the provider credential or network, rather
+ * than to the selected model. Keep this positive: an unrecognised 403 may be
+ * a regional, entitlement, or routing response and must not cool siblings.
+ */
+function _isProviderWide403(bodyText = '') {
+  const b = String(bodyText).toLowerCase();
+  return (
+    b.includes('web application firewall') ||
+    /\bwaf\b/.test(b) ||
+    /\b(?:ip|address)\b.{0,40}\b(?:blocked|banned|denied)\b/.test(b) ||
+    /\b(?:invalid|expired|revoked)\s+(?:api\s+)?key\b/.test(b) ||
+    /\b(?:invalid|expired|revoked)\s+(?:access\s+)?token\b/.test(b) ||
+    b.includes('bad credentials') ||
+    b.includes('account disabled') ||
+    b.includes('credential')
   );
 }
 
@@ -5977,7 +5995,7 @@ export function classifyNonRetryableError(status, bodyText = '', providerName = 
   // returns on the next run without removing a model from roster, ledger or tally.
   //
   // The controlled condition stays `status === 410 && !isRetryableError`. A 410
-  // without EOL evidence (end of life / gone / no longer available) is an
+  // without explicit EOL evidence (end of life / no longer available) is an
   // intermediary or routing miss: skip this attempt, do not retire a live model.
   if (status === 410 && !isRetryableError(status, bodyText)) {
     if (_hasEolEvidence(bodyText)) {
@@ -5999,7 +6017,10 @@ export function classifyNonRetryableError(status, bodyText = '', providerName = 
     if (_isModelSpecific403(bodyText)) {
       return { nonRetryable: true, markExhausted: true };
     }
-    return { nonRetryable: true, markExhausted: true, exhaustProvider: true };
+    if (_isProviderWide403(bodyText)) {
+      return { nonRetryable: true, markExhausted: true, exhaustProvider: true };
+    }
+    return { nonRetryable: true, markExhausted: true };
   }
 
   if (status !== 400) return { nonRetryable: false, markExhausted: false };
