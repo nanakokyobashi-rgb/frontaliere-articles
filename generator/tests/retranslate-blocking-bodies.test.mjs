@@ -376,6 +376,14 @@ test('--limit negativo esce con errore invece di selezionare tutto meno uno', ()
   assert.doesNotMatch(String(run('--limit', '5').stderr), /negativo/);
 });
 
+test('--slug vuoto esce con errore invece di disabilitare il filtro dell audit', () => {
+  const script = fileURLToPath(new URL('../scripts/retranslate-blocking-bodies.mjs', import.meta.url));
+  const run = spawnSync(process.execPath, [script, '--audit', '/dev/null', '--slug', ''], { encoding: 'utf8' });
+  assert.equal(run.status, 2);
+  assert.match(run.stderr, /--slug.*vuoto/);
+  assert.doesNotMatch(String(run.stdout), /coppie trattate/);
+});
+
 // ── La stessa classe sull'altro scrittore per-locale ───────────────────────
 //
 // `fix-faq-locales.mjs` verificava il locale sul testo CONCATENATO delle

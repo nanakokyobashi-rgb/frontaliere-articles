@@ -5468,18 +5468,113 @@ export function resetExhaustedModel(modelId) {
 
 // ── Internal helpers ─────────────────────────────────────────
 
-function isRetryableError(status, bodyText = '') {
+/**
+ * Provider-side end-of-life wording for HTTP 410. A 410 without this evidence
+ * is treated as an intermediary/routing miss, not a reason to retire the model.
+ */
+function _hasEolEvidence(bodyText = '') {
+  const raw = String(bodyText);
+  const fragments = [];
+  const collectStrings = (value) => {
+    if (typeof value === 'string') {
+      fragments.push(value);
+    } else if (Array.isArray(value)) {
+      for (const item of value) collectStrings(item);
+    } else if (value && typeof value === 'object') {
+      for (const item of Object.values(value)) collectStrings(item);
+    }
+  };
+
+  try {
+    // Restrict the evidence to JSON values (message/detail/etc.), never keys.
+    // That prevents `{ "model": "...", "detail": "route retired" }` from
+    // treating the structural `model` key as an EOL subject.
+    collectStrings(JSON.parse(raw));
+  } catch {
+    fragments.push(raw);
+  }
+
+  const eolTerm = '(?:end\\s+of\\s+life|end-of-life|no longer available|no longer supported|decommissioned|retired|disabled)';
+  const namedModelEol = new RegExp('\\bmodel\\b[^;\\n]{0,160}\\b' + eolTerm + '\\b');
+  const modelPathEol = new RegExp('\\b[a-z0-9][a-z0-9._-]*/[a-z0-9][a-z0-9._:/-]*\\b[^;\\n]{0,160}\\b' + eolTerm + '\\b');
+  return fragments.some((fragment) => {
+    const b = fragment.toLowerCase();
+    // The first form covers `model X ... retired` and explicit generic
+    // statements such as `model is disabled`; the second covers provider
+    // messages such as `models/foo is no longer available`.
+    return namedModelEol.test(b) || modelPathEol.test(b);
+  });
+}
+
+/**
+ * 403 that names THIS model (OpenRouter "only available on agentic harnesses"),
+ * not the credential / WAF / IP of the whole provider.
+ */
+function _isModelSpecific403(bodyText = '') {
+  const b = String(bodyText).toLowerCase();
+  return (
+    b.includes('only available on agentic') ||
+    b.includes('agentic harness') ||
+    b.includes('not available for this model') ||
+    b.includes('this model is not') ||
+    b.includes('model is not available') ||
+    b.includes('model is restricted') ||
+    b.includes('model has been disabled') ||
+    b.includes('model is disabled')
+  );
+}
+
+/**
+ * 403 evidence that applies to the provider credential or network, rather
+ * than to the selected model. Keep this positive: an unrecognised 403 may be
+ * a regional, entitlement, or routing response and must not cool siblings.
+ */
+function _isProviderWide403(bodyText = '') {
+  const b = String(bodyText).toLowerCase();
+  const credentialStatus = /\b(?:(?:invalid|expired|revoked|missing)\s+(?:api\s+)?(?:key|token|credential)s?|(?:api\s+)?(?:key|token|credential)s?\s+(?:(?:is|are|was|were)\s+|(?:has|have)(?:\s+been)?\s+)(?:invalid|expired|revoked|missing))\b/.test(b);
+  return (
+    b.includes('web application firewall') ||
+    /\bwaf\b/.test(b) ||
+    /\b(?:ip|address)\b.{0,40}\b(?:blocked|banned|denied)\b/.test(b) ||
+    credentialStatus ||
+    b.includes('bad credentials') ||
+    /\baccount(?:\s+\w+){0,2}\s+(?:is|has been)?\s*(?:disabled|suspended|revoked)\b/.test(b)
+  );
+}
+
+function _hasPermanent403410Evidence(bodyText = '') {
+  return _hasEolEvidence(bodyText) || _isModelSpecific403(bodyText);
+}
+
+/**
+ * Transient capacity / overload. Exported so tests can pin the 403/410
+ * provider-body matrix against the same predicate the cascade uses.
+ *
+ * 403/410 keep generic tokens (`rate limit`, `temporarily unavailable`, `busy`)
+ * retryable, but a permanent refusal that happens to contain those tokens
+ * (EOL, agentic-harness, decommissioned) must not re-enter the retry loop.
+ */
+export function isRetryableError(status, bodyText = '') {
   if (status === 429 || status === 503) return true;
   if (status >= 500 && status < 600) return true;
   const b = String(bodyText).toLowerCase();
-  return (
+  const hasTransientToken =
     b.includes('resource exhausted') ||
     b.includes('rate limit') ||
     b.includes('too many requests') ||
     b.includes('temporarily unavailable') ||
     b.includes('model is overloaded') ||
-    b.includes('busy')
-  );
+    /\bbusy\b/.test(b);
+  if (!hasTransientToken) return false;
+  // A provider-wide credential/WAF/IP refusal wins over a transient-looking
+  // token in the same body: retrying would pay the same dead provider once per
+  // sibling. This precedence is limited to 403; a 410 remains governed by
+  // model-lifecycle evidence below.
+  if (status === 403 && _isProviderWide403(bodyText)) return false;
+  if ((status === 403 || status === 410) && _hasPermanent403410Evidence(bodyText)) {
+    return false;
+  }
+  return true;
 }
 
 function isDailyLimitError(status, bodyText = '') {
@@ -6043,15 +6138,33 @@ export function classifyNonRetryableError(status, bodyText = '', providerName = 
   // The GitHub-specific 410 branch above keeps its reason; this is the generic fallback.
   // Exhaustion is run-scoped (and persisted only for quota), so a recovered endpoint
   // returns on the next run without removing a model from roster, ledger or tally.
+  //
+  // The controlled condition stays `status === 410 && !isRetryableError`. A 410
+  // without explicit EOL evidence (end of life / no longer available) is an
+  // intermediary or routing miss: skip this attempt, do not retire a live model.
   if (status === 410 && !isRetryableError(status, bodyText)) {
-    return { nonRetryable: true, markExhausted: true };
+    if (_hasPermanent403410Evidence(bodyText)) {
+      return { nonRetryable: true, markExhausted: true };
+    }
+    return { nonRetryable: true, markExhausted: false };
   }
 
   // HTTP 403 — the API cannot serve this model. The same run recorded OpenRouter's
   // real response: {"error":{"message":"thinkingmachines/inkling-small:free is only
   // available on agentic harnesses. Try plugging it into a coding agent or productivity app..."}}.
   // Like 402/404, mark it exhausted for this run only; do not spend cascade retries.
+  //
+  // The controlled condition stays `!isGitHubModels && !isRetryableError` so a
+  // GitHub 403 still falls through for multi-PAT rotation. A model-specific
+  // refusal exhausts only that id; a credential / WAF / IP 403 exhausts the
+  // provider's siblings (see `_applyNonRetryableExhaustion`).
   if (status === 403 && !isGitHubModels && !isRetryableError(status, bodyText)) {
+    if (_isProviderWide403(bodyText)) {
+      return { nonRetryable: true, markExhausted: true, exhaustProvider: true };
+    }
+    if (_isModelSpecific403(bodyText)) {
+      return { nonRetryable: true, markExhausted: true };
+    }
     return { nonRetryable: true, markExhausted: true };
   }
 
@@ -6124,6 +6237,28 @@ export function classifyNonRetryableError(status, bodyText = '', providerName = 
     };
   }
   return { nonRetryable: false, markExhausted: false };
+}
+
+/**
+ * Apply a non-retryable classification to in-process run state.
+ * `exhaustProvider` cools the whole provider for the rest of the run so a
+ * credential/WAF/IP 403 does not spend one dead call per sibling.
+ */
+function _applyNonRetryableExhaustion(modelId, nrc, status, { recordScore } = {}) {
+  if (nrc.markExhausted && !_isLastResortProvider(modelId)) {
+    markModelExhausted(modelId, 'nonretryable', `HTTP ${status}`, { recordScore });
+    _stats.exhausted++;
+  }
+  if (nrc.exhaustProvider) {
+    const provider = getProvider(modelId);
+    if (
+      cooldownProvider(
+        provider,
+        `provider-wide HTTP ${status}`,
+        `forbidden (HTTP ${status}), non-retryable`,
+        COOLDOWN_SEVERITY.persistent,
+      ) === 'created') _stats.providerCooldowns++;
+  }
 }
 
 function sleep(ms) {
@@ -6724,13 +6859,12 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
           if (nrc.reason === 'schema_unsupported' && responseFormat?.type === 'json_schema') {
             _learnSchemaIncompatible(modelForTracking, { recordScore: _shouldRecordScore(opts) });
           }
-          if (nrc.markExhausted && !_isLastResortProvider(modelForTracking)) {
-            // Gate sul parametro, non sul call site (#846).
-            markModelExhausted(modelForTracking, 'nonretryable', `HTTP ${res.status}`, {
-              recordScore: _shouldRecordScore(opts),
-            });
-            _stats.exhausted++;
-          }
+          // Gate sul parametro, non sul call site (#846). Provider-wide 403
+          // also cools siblings so a WAF/credential refusal is not paid once
+          // per roster id.
+          _applyNonRetryableExhaustion(modelForTracking, nrc, res.status, {
+            recordScore: _shouldRecordScore(opts),
+          });
           const err = new Error(`[${displayModel}] HTTP ${res.status}: ${raw.slice(0, 300)}`);
           err.nonRetryable = true;
           err.nonRetryableReason = nrc.reason ?? (nrc.markExhausted ? 'persistent' : null);
@@ -8199,20 +8333,17 @@ async function _callGeminiRaw(model, messages, opts) {
           if (nrc.reason === 'schema_unsupported' && useGeminiSchema) {
             _learnSchemaIncompatible(model, { recordScore: _shouldRecordScore(opts) });
           }
-          if (nrc.markExhausted) {
-            // 'nonretryable', NOT the default 'quota': this is the Gemini twin
-            // of the _callOpenAICompatible non-retryable branch, which already
-            // labels correctly. Left at the default, a 404/unknown-model here
-            // was persisted to the shared Firestore doc until midnight UTC as
-            // if it were a daily quota — exactly the over-persistence #4073
-            // removed (quota-only persist gate in _persistScoresToFirestore).
-            // Review 🔴 on #4073.
-            // Gate sul parametro, non sul call site (#846).
-            markModelExhausted(model, 'nonretryable', `HTTP ${res.status}`, {
-              recordScore: _shouldRecordScore(opts),
-            });
-            _stats.exhausted++;
-          }
+          // 'nonretryable', NOT the default 'quota': this is the Gemini twin
+          // of the _callOpenAICompatible non-retryable branch, which already
+          // labels correctly. Left at the default, a 404/unknown-model here
+          // was persisted to the shared Firestore doc until midnight UTC as
+          // if it were a daily quota — exactly the over-persistence #4073
+          // removed (quota-only persist gate in _persistScoresToFirestore).
+          // Review 🔴 on #4073.
+          // Gate sul parametro, non sul call site (#846).
+          _applyNonRetryableExhaustion(model, nrc, res.status, {
+            recordScore: _shouldRecordScore(opts),
+          });
           const err = new Error(`[${model}] HTTP ${res.status}: ${raw.slice(0, 300)}`);
           err.nonRetryable = true;
           err.nonRetryableReason = nrc.reason ?? (nrc.markExhausted ? 'persistent' : null);

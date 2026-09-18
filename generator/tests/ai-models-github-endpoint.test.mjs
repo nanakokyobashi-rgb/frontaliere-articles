@@ -10,6 +10,7 @@ import {
   getDeclaredRequestTokenLimit,
   getStats,
   getScoreBoard,
+  isRetryableError,
   githubModelIdForLookup,
   qualifyGitHubModelId,
   resetState,
@@ -454,6 +455,38 @@ describe('GitHub Models request contract', () => {
     assert.equal(catalogCalls, 1);
     assert.deepEqual(getStats().exhaustedModels, [AI_MODELS.GPT4O, AI_MODELS.GPT4O_MINI]);
   });
+
+  test('un 403 provider-wide raffredda anche il provider last-resort senza hard-ban', async () => {
+    const previous = {
+      enabled: process.env.OMNIROUTE_ENABLED,
+      key: process.env.OMNIROUTE_API_KEY,
+    };
+    process.env.OMNIROUTE_ENABLED = '1';
+    process.env.OMNIROUTE_API_KEY = 'omni-test';
+    globalThis.fetch = async () => new Response(WAF_IP_403_BODY, {
+      status: 403,
+      headers: { 'content-type': 'application/json' },
+    });
+
+    try {
+      await assert.rejects(
+        () => callLLM([{ role: 'user', content: 'x' }], {
+          chain: [AI_MODELS.OMNIROUTE_AUTO],
+          maxRetriesPerModel: 1,
+          backoffMs: 1,
+          timeout: 5000,
+          recordScore: false,
+        }),
+      );
+      assert.equal(getStats().activeCooldowns.omniroute, Infinity);
+      assert.deepEqual(getStats().exhaustedModels, []);
+    } finally {
+      if (previous.enabled === undefined) delete process.env.OMNIROUTE_ENABLED;
+      else process.env.OMNIROUTE_ENABLED = previous.enabled;
+      if (previous.key === undefined) delete process.env.OMNIROUTE_API_KEY;
+      else process.env.OMNIROUTE_API_KEY = previous.key;
+    }
+  });
 });
 
 test('classifica 410 e 403 generici senza alterare il brownout GitHub', () => {
@@ -579,4 +612,400 @@ test('i brownout GitHub sono persistenti nel verdetto aggregato', async () => {
     persistentVerdict('il catalogo in brownout deve votare persistente'),
   );
   assert.deepEqual(fetchCalls, ['https://models.github.ai/catalog/models']);
+});
+
+const NVIDIA_EOL_BODY = '{"type":"about:blank","title":"Gone","status":410,"detail":"The model \'meta/llama-3.1-8b-instruct\' has reached its end of life on 2026-08-26T09:00:00Z..."}';
+const OPENROUTER_AGENTIC_BODY = '{"error":{"message":"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app..."}}';
+const OPENROUTER_AGENTIC_BUSY_TRAP = '{"error":{"message":"thinkingmachines/inkling-small:free is only available on agentic harnesses. The cluster is busy serving those apps."}}';
+const TRANSIENT_UNAVAILABLE_BODY = '{"error":{"message":"temporarily unavailable"}}';
+const TRANSIENT_RATE_LIMIT_BODY = '{"error":{"message":"rate limit exceeded, retry later"}}';
+const TRANSIENT_BUSY_BODY = '{"error":{"message":"model is busy"}}';
+const WAF_IP_403_BODY = '{"error":{"message":"Your IP has been blocked by the WAF"}}';
+const WAF_IP_TRANSIENT_403_BODY = '{"error":{"message":"Your IP has been blocked by the WAF; rate limit exceeded"}}';
+const CREDENTIAL_403_BODY = '{"error":{"message":"invalid api key"}}';
+const API_KEY_SUBJECT_403_BODY = '{"error":{"message":"API key is invalid"}}';
+const API_KEY_REVOKED_403_BODY = '{"error":{"message":"API key has been revoked"}}';
+const TOKEN_EXPIRED_403_BODY = '{"error":{"message":"token has expired"}}';
+const REGIONAL_403_BODY = '{"error":{"message":"forbidden in this region"}}';
+const ROUTING_410_BODY = '{"error":{"message":"No healthy upstream; origin routing changed"}}';
+const RETIRED_ROUTE_410_BODY = '{"error":{"message":"route retired"}}';
+const STRUCTURED_RETIRED_ROUTE_410_BODY = '{"model":"meta/llama-3.1-8b-instruct","detail":"route retired"}';
+const GONE_TITLE_410_BODY = '{"type":"about:blank","title":"Gone","status":410}';
+const MODEL_RETIRED_410_BODY = '{"error":{"message":"model llama-3.1-8b-instruct has been retired"}}';
+const MODEL_PATH_UNAVAILABLE_410_BODY = '{"error":{"message":"models/meta/llama-3.1-8b-instruct is no longer available"}}';
+const MODEL_DISABLED_410_BODY = '{"error":{"message":"model is disabled"}}';
+const GROQ_DECOMMISSION_410 = '{"error":{"message":"model llama-3.1-8b-instant has been decommissioned"}}';
+
+describe('matrice 403/410: isRetryableError e classifyNonRetryableError', () => {
+  const matrix = [
+    {
+      label: 'OpenRouter 403 temporarily unavailable',
+      status: 403,
+      provider: 'OpenRouter',
+      body: TRANSIENT_UNAVAILABLE_BODY,
+      retryable: true,
+      classification: { nonRetryable: false, markExhausted: false },
+    },
+    {
+      label: 'NVIDIA 410 temporarily unavailable',
+      status: 410,
+      provider: 'NVIDIA',
+      body: TRANSIENT_UNAVAILABLE_BODY,
+      retryable: true,
+      classification: { nonRetryable: false, markExhausted: false },
+    },
+    {
+      label: 'Groq 403 rate limit',
+      status: 403,
+      provider: 'Groq',
+      body: TRANSIENT_RATE_LIMIT_BODY,
+      retryable: true,
+      classification: { nonRetryable: false, markExhausted: false },
+    },
+    {
+      label: 'HuggingFace 403 model is busy',
+      status: 403,
+      provider: 'HuggingFace',
+      body: TRANSIENT_BUSY_BODY,
+      retryable: true,
+      classification: { nonRetryable: false, markExhausted: false },
+    },
+    {
+      label: 'OpenRouter 403 agentic harnesses',
+      status: 403,
+      provider: 'OpenRouter',
+      body: OPENROUTER_AGENTIC_BODY,
+      retryable: false,
+      classification: { nonRetryable: true, markExhausted: true },
+    },
+    {
+      label: 'OpenRouter 403 agentic + busy (false-positive trap)',
+      status: 403,
+      provider: 'OpenRouter',
+      body: OPENROUTER_AGENTIC_BUSY_TRAP,
+      retryable: false,
+      classification: { nonRetryable: true, markExhausted: true },
+    },
+    {
+      label: 'NVIDIA 410 end of life',
+      status: 410,
+      provider: 'NVIDIA',
+      body: NVIDIA_EOL_BODY,
+      retryable: false,
+      classification: { nonRetryable: true, markExhausted: true },
+    },
+    {
+      label: 'Groq 410 decommissioned',
+      status: 410,
+      provider: 'Groq',
+      body: GROQ_DECOMMISSION_410,
+      retryable: false,
+      classification: { nonRetryable: true, markExhausted: true },
+    },
+    {
+      label: 'OpenRouter 403 WAF/IP',
+      status: 403,
+      provider: 'OpenRouter',
+      body: WAF_IP_403_BODY,
+      retryable: false,
+      classification: { nonRetryable: true, markExhausted: true, exhaustProvider: true },
+    },
+    {
+      label: 'OpenRouter 403 WAF/IP with transient wording stays provider-wide',
+      status: 403,
+      provider: 'OpenRouter',
+      body: WAF_IP_TRANSIENT_403_BODY,
+      retryable: false,
+      classification: { nonRetryable: true, markExhausted: true, exhaustProvider: true },
+    },
+    {
+      label: 'Cerebras 403 invalid api key',
+      status: 403,
+      provider: 'Cerebras',
+      body: CREDENTIAL_403_BODY,
+      retryable: false,
+      classification: { nonRetryable: true, markExhausted: true, exhaustProvider: true },
+    },
+    {
+      label: 'Cerebras 403 API key is invalid',
+      status: 403,
+      provider: 'Cerebras',
+      body: API_KEY_SUBJECT_403_BODY,
+      retryable: false,
+      classification: { nonRetryable: true, markExhausted: true, exhaustProvider: true },
+    },
+    {
+      label: 'Cerebras 403 API key has been revoked',
+      status: 403,
+      provider: 'Cerebras',
+      body: API_KEY_REVOKED_403_BODY,
+      retryable: false,
+      classification: { nonRetryable: true, markExhausted: true, exhaustProvider: true },
+    },
+    {
+      label: 'Cerebras 403 token has expired',
+      status: 403,
+      provider: 'Cerebras',
+      body: TOKEN_EXPIRED_403_BODY,
+      retryable: false,
+      classification: { nonRetryable: true, markExhausted: true, exhaustProvider: true },
+    },
+    {
+      label: 'Cerebras 403 regional entitlement stays model-scoped',
+      status: 403,
+      provider: 'Cerebras',
+      body: REGIONAL_403_BODY,
+      retryable: false,
+      classification: { nonRetryable: true, markExhausted: true },
+    },
+    {
+      label: 'NVIDIA 410 routing / intermediary',
+      status: 410,
+      provider: 'NVIDIA',
+      body: ROUTING_410_BODY,
+      retryable: false,
+      classification: { nonRetryable: true, markExhausted: false },
+    },
+    {
+      label: 'NVIDIA 410 retired route is not model EOL',
+      status: 410,
+      provider: 'NVIDIA',
+      body: RETIRED_ROUTE_410_BODY,
+      retryable: false,
+      classification: { nonRetryable: true, markExhausted: false },
+    },
+    {
+      label: 'NVIDIA 410 structured route retired is not model EOL',
+      status: 410,
+      provider: 'NVIDIA',
+      body: STRUCTURED_RETIRED_ROUTE_410_BODY,
+      retryable: false,
+      classification: { nonRetryable: true, markExhausted: false },
+    },
+    {
+      label: 'NVIDIA 410 retired model',
+      status: 410,
+      provider: 'NVIDIA',
+      body: MODEL_RETIRED_410_BODY,
+      retryable: false,
+      classification: { nonRetryable: true, markExhausted: true },
+    },
+    {
+      label: 'NVIDIA 410 model path no longer available',
+      status: 410,
+      provider: 'NVIDIA',
+      body: MODEL_PATH_UNAVAILABLE_410_BODY,
+      retryable: false,
+      classification: { nonRetryable: true, markExhausted: true },
+    },
+    {
+      label: 'NVIDIA 410 disabled model',
+      status: 410,
+      provider: 'NVIDIA',
+      body: MODEL_DISABLED_410_BODY,
+      retryable: false,
+      classification: { nonRetryable: true, markExhausted: true },
+    },
+    {
+      label: 'NVIDIA 410 Gone title without EOL evidence',
+      status: 410,
+      provider: 'NVIDIA',
+      body: GONE_TITLE_410_BODY,
+      retryable: false,
+      classification: { nonRetryable: true, markExhausted: false },
+    },
+    {
+      label: 'NVIDIA 410 empty body (no EOL evidence)',
+      status: 410,
+      provider: 'NVIDIA',
+      body: '',
+      retryable: false,
+      classification: { nonRetryable: true, markExhausted: false },
+    },
+    {
+      label: 'GitHub 403 bad credentials still falls through',
+      status: 403,
+      provider: 'GitHub',
+      body: '{"message":"bad credentials"}',
+      retryable: false,
+      classification: { nonRetryable: false, markExhausted: false },
+    },
+    {
+      label: 'GitHub 403 rate limit stays retryable',
+      status: 403,
+      provider: 'GitHub',
+      body: TRANSIENT_RATE_LIMIT_BODY,
+      retryable: true,
+      classification: { nonRetryable: false, markExhausted: false },
+    },
+  ];
+
+  for (const { label, status, provider, body, retryable, classification } of matrix) {
+    test(label, () => {
+      assert.equal(isRetryableError(status, body), retryable, `${label}: isRetryableError`);
+      assert.deepEqual(
+        classifyNonRetryableError(status, body, provider),
+        classification,
+        `${label}: classifyNonRetryableError`,
+      );
+    });
+  }
+});
+
+describe('call-path 403/410: sibling exhaustion vs model-only vs routing', () => {
+  const originalOr = process.env.OPENROUTER_API_KEY;
+  const originalNv = process.env.NVIDIA_API_KEY;
+  const originalGemini = process.env.GEMINI_API_KEY;
+
+  beforeEach(() => {
+    process.env.OPENROUTER_API_KEY = 'or-test';
+    process.env.NVIDIA_API_KEY = 'nv-test';
+    delete process.env.GEMINI_API_KEY;
+    delete process.env.VITE_GEMINI_API_KEY;
+  });
+
+  afterEach(() => {
+    if (originalOr === undefined) delete process.env.OPENROUTER_API_KEY;
+    else process.env.OPENROUTER_API_KEY = originalOr;
+    if (originalNv === undefined) delete process.env.NVIDIA_API_KEY;
+    else process.env.NVIDIA_API_KEY = originalNv;
+    if (originalGemini === undefined) delete process.env.GEMINI_API_KEY;
+    else process.env.GEMINI_API_KEY = originalGemini;
+  });
+
+  const orA = AI_MODELS.OR_LLAMA_3_3;
+  const orB = AI_MODELS.OR_GEMMA_3_27B;
+  const nvA = 'nvidia/meta/llama-3.1-8b-instruct';
+  const nvB = 'nvidia/nvidia/nemotron-3-super-120b-a12b';
+
+  test('un 403 provider-wide esaurisce i sibling, un 403 per-modello no', async () => {
+    const seen = [];
+    globalThis.fetch = async (_url, init) => {
+      seen.push(JSON.parse(init.body).model);
+      return new Response(WAF_IP_403_BODY, {
+        status: 403,
+        headers: { 'content-type': 'application/json' },
+      });
+    };
+
+    await assert.rejects(
+      () => callLLM([{ role: 'user', content: 'x' }], {
+        chain: [orA, orB],
+        maxRetriesPerModel: 1,
+        backoffMs: 1,
+        timeout: 5000,
+        recordScore: false,
+      }),
+    );
+
+    assert.equal(seen.length, 1, 'il sibling OpenRouter non deve essere composto dopo un 403 WAF');
+    assert.ok(getStats().exhaustedModels.includes(orA), `atteso ${orA} esaurito, visti: ${getStats().exhaustedModels.join(', ')}`);
+    assert.equal(getStats().activeCooldowns.openrouter, Infinity);
+
+    resetState();
+    seen.length = 0;
+    globalThis.fetch = async (_url, init) => {
+      seen.push(JSON.parse(init.body).model);
+      return new Response(OPENROUTER_AGENTIC_BODY, {
+        status: 403,
+        headers: { 'content-type': 'application/json' },
+      });
+    };
+
+    await assert.rejects(
+      () => callLLM([{ role: 'user', content: 'x' }], {
+        chain: [orA, orB],
+        maxRetriesPerModel: 1,
+        backoffMs: 1,
+        timeout: 5000,
+        recordScore: false,
+      }),
+    );
+
+    assert.equal(seen.length, 2, 'un 403 agentic-harness esaurisce solo il modello, il fratello resta componibile');
+    assert.ok(getStats().exhaustedModels.includes(orA));
+    assert.ok(getStats().exhaustedModels.includes(orB));
+    assert.equal(getStats().activeCooldowns.openrouter, undefined);
+  });
+
+  test('un 403 GitHub continua a cadere nel fall-through multi-PAT, senza esaurire i sibling', async () => {
+    const seen = [];
+    globalThis.fetch = async (_url, init) => {
+      seen.push(JSON.parse(init.body).model);
+      return new Response('{"message":"bad credentials"}', {
+        status: 403,
+        headers: { 'content-type': 'application/json' },
+      });
+    };
+
+    await assert.rejects(
+      () => callLLM([{ role: 'user', content: 'x' }], {
+        chain: [AI_MODELS.GPT4O, AI_MODELS.GPT4O_MINI],
+        githubModelsCatalog: [
+          { id: 'openai/gpt-4o' },
+          { id: 'openai/gpt-4o-mini' },
+        ],
+        maxRetriesPerModel: 1,
+        backoffMs: 1,
+        timeout: 5000,
+        recordScore: false,
+      }),
+    );
+
+    assert.deepEqual(seen, ['openai/gpt-4o', 'openai/gpt-4o-mini']);
+    assert.deepEqual(getStats().exhaustedModels, []);
+    assert.equal(getStats().activeCooldowns.github, undefined);
+  });
+
+  test('un 410 EOL ritira il modello; un 410 di routing no', async () => {
+    const seen = [];
+    globalThis.fetch = async (_url, init) => {
+      seen.push(JSON.parse(init.body).model);
+      return new Response(NVIDIA_EOL_BODY, {
+        status: 410,
+        headers: { 'content-type': 'application/json' },
+      });
+    };
+
+    await assert.rejects(
+      () => callLLM([{ role: 'user', content: 'x' }], {
+        chain: [nvA, nvB],
+        maxRetriesPerModel: 1,
+        backoffMs: 1,
+        timeout: 5000,
+        recordScore: false,
+      }),
+    );
+
+    assert.equal(seen.length, 2, 'il 410 EOL e\' per-modello: il fratello NVIDIA viene comunque composto');
+    assert.ok(getStats().exhaustedModels.includes(nvA), `atteso ${nvA} esaurito, visti: ${getStats().exhaustedModels.join(', ')}`);
+    assert.ok(getStats().exhaustedModels.includes(nvB));
+
+    resetState();
+    seen.length = 0;
+    globalThis.fetch = async (_url, init) => {
+      seen.push(JSON.parse(init.body).model);
+      return new Response(ROUTING_410_BODY, {
+        status: 410,
+        headers: { 'content-type': 'application/json' },
+      });
+    };
+
+    await assert.rejects(
+      () => callLLM([{ role: 'user', content: 'x' }], {
+        chain: [nvA, nvB],
+        maxRetriesPerModel: 1,
+        backoffMs: 1,
+        timeout: 5000,
+        recordScore: false,
+      }),
+    );
+
+    assert.equal(seen.length, 2);
+    assert.deepEqual(
+      getStats().exhaustedModels,
+      [],
+      `un 410 di routing non deve ritirare un modello vivo, visti: ${getStats().exhaustedModels.join(', ')}`,
+    );
+  });
 });
