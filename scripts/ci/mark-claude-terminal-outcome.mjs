@@ -25,8 +25,8 @@
  * payload osservati, ma se mai coesistessero il budget di turni esaurito è il
  * verdetto più informativo (indica una issue too-large, che il drainer parka
  * subito con `needs-human`), mentre il 429 è una condizione ambientale
- * transitoria. Stessa precedenza che `pr-review-loop.yml` applica già nel suo
- * ramo bash.
+ * transitoria. Stessa precedenza che il precedente ramo bash del reviewer
+ * applicava già.
  *
  * Nessun marker viene postato per gli altri failure (5xx transienti, crash
  * infra): restano senza verdetto e quindi legittimamente ri-tentabili dal
