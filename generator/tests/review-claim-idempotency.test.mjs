@@ -295,6 +295,8 @@ test('tests.yml claims before review work and finalizes without gating the requi
   assert.match(sameHeadGuard, /if length == 0 then 0/);
   assert.match(sameHeadGuard, /select\(\(\.state \/\/ ""\) != "PENDING"\)/);
   assert.match(sameHeadGuard, /\.\[-1\] \| \(\(\.state == "COMMENTED" or \.state == "APPROVED"\) and has_clean_lgtm\)/);
+  const dismissedExcludedFromIncremental = /select\(\(\.state \/\/ ""\) != "PENDING" and \(\.state \/\/ ""\) != "DISMISSED"\)/g;
+  assert.equal((workflow.match(dismissedExcludedFromIncremental) ?? []).length, 2);
   assert.match(workflow, /scripts\/ci\/review-claim\.mjs --claim/);
   assert.match(workflow, /CLAIM_ACTION: acquire/);
   assert.match(workflow, /CLAIM_ACTION: finalize/);
@@ -376,7 +378,7 @@ test('tutti i consumer di review usano la revisione del body corrente', () => {
   assert.match(redflag, /if ! reviews_json=\$\(gh api "repos\/\$REPO\/pulls\/\$PR_NUMBER\/reviews" --paginate --slurp/);
 
   const stale = fs.readFileSync(path.join(ROOT, '.github/workflows/stale-pr-rescuer.yml'), 'utf8');
-  const terminalReviewFilter = /select\(\(\.state \/\/ ""\) != "PENDING"\)/g;
+  const terminalReviewFilter = /select\(\(\.state \/\/ ""\) != "PENDING" and \(\.state \/\/ ""\) != "DISMISSED"\)/g;
   assert.equal((redflag.match(terminalReviewFilter) ?? []).length, 1);
   assert.equal((stale.match(terminalReviewFilter) ?? []).length, 2);
   assert.match(stale, /REVIEW_REVISION=\"body:\$body_sha\"/);

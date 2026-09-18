@@ -478,8 +478,8 @@ jobs:
                 | capture("^<!-- REVIEW_INPUT_REVISION: (?<revision>body:[0-9a-f]{64}) -->$"; "i").revision
                 | ascii_downcase)] | unique as $revisions
               | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
-            [flatten[]
-             | select((.state // "") != "PENDING")
+             [flatten[]
+             | select((.state // "") != "PENDING" and (.state // "") != "DISMISSED")
              | select(.user.type == "Bot")
              | select(
                  ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
@@ -651,7 +651,7 @@ jobs:
                   | ascii_downcase)] | unique as $revisions
                 | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
               [flatten[]
-               | select((.state // "") != "PENDING")
+               | select((.state // "") != "PENDING" and (.state // "") != "DISMISSED")
                | select(.user.type == "Bot")
                | select(
                    ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
