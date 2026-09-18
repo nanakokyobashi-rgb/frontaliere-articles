@@ -91333,6 +91333,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-barometro-raiffeisen-zhaw-record': {
+    title: 'Previdenza Svizzera: Barometro Raiffeisen record a 725 punti',
+    description: 'Barometro Raiffeisen e ZHAW record a 725 punti. Cresce il pilastro 3a al 79%, ma il 39% teme per l\'AVS. Scopri i dati della previdenza in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, previdenza, barometro, raiffeisen, record',
+    ogTitle: 'Previdenza: Barometro Raiffeisen e ZHAW a quota 725 punti',
+    ogDescription: 'Il sistema previdenziale svizzero segna un record con il barometro Raiffeisen e ZHAW a 725 punti. Aumenta il risparmio nel pilastro 3a al 79%, ma persistono i timori per il finanziamento a lungo termine dell\'AVS e la sostenibilità del primo pilastro.',
+    canonicalPath: '/articoli-frontaliere/barometro-raiffeisen-zhaw-record',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Previdenza Svizzera: Barometro Raiffeisen record a 725 punti",
+      "description": "Barometro Raiffeisen e ZHAW record a 725 punti. Cresce il pilastro 3a al 79%, ma il 39% teme per l'AVS. Scopri i dati della previdenza in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/barometro-raiffeisen-zhaw-record.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Barometro previdenziale Raiffeisen e ZHAW in Ticino e Svizzera"
+      },
+      "datePublished": "2026-09-18T01:36:40+00:00",
+      "dateModified": "2026-09-18T01:36:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/barometro-raiffeisen-zhaw-record/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

@@ -11815,6 +11815,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.tavolo-interministeriale-frontalieri.title': 'Frontières : nouvelle confrontation entre le gouvernement et les territoires',
     'blog.article.tavolo-interministeriale-frontalieri.excerpt': 'La nouvelle réunion de la table interministérielle sur le frontalier s\'est tenue avec un accent sur le Naspi, la santé, le chèque unique et les statuts.',
     'blog.article.tavolo-interministeriale-frontalieri.imageAlt': 'Réunion interministérielle sur les frontaliers',
+    'blog.article.barometro-raiffeisen-zhaw-record.title': 'Prévoyance Suisse : Baromètre Raiffeisen record à 725 points',
+    'blog.article.barometro-raiffeisen-zhaw-record.excerpt': 'Le baromètre Raiffeisen et ZHAW atteint le record de 725 points. Le pilier 3a passe à 79%, mais l\'incertitude demeure quant au financement de l\'AVS.',
+    'blog.article.barometro-raiffeisen-zhaw-record.imageAlt': 'Baromètre de prévoyance Raiffeisen et ZHAW en Suisse',
 };
 
 export default blogMetaFr;

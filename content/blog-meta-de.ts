@@ -11812,6 +11812,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.tavolo-interministeriale-frontalieri.title': 'Grenzgänger: Neuer Vergleich zwischen Regierung und Territorien',
     'blog.article.tavolo-interministeriale-frontalieri.excerpt': 'Das neue Treffen des interministeriellen Tisches an der Grenze mit Schwerpunkt auf Naspi, Gesundheit, einmaliger Zulage und Satzung wurde abgehalten.',
     'blog.article.tavolo-interministeriale-frontalieri.imageAlt': 'Interministerielles Treffen für Grenzgänger',
+    'blog.article.barometro-raiffeisen-zhaw-record.title': 'Vorsorge Schweiz: Rekord-Raiffeisen-Barometer mit 725 Punkten',
+    'blog.article.barometro-raiffeisen-zhaw-record.excerpt': 'Das Raiffeisen- und ZHAW-Barometer erreicht mit 725 Punkten den Rekord. Säule 3a wächst auf 79%, aber die AHV-Finanzierung bleibt unsicher.',
+    'blog.article.barometro-raiffeisen-zhaw-record.imageAlt': 'Raiffeisen- und ZHAW-Vorsorgebarometer in der Schweiz',
 };
 
 export default blogMetaDe;

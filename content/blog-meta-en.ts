@@ -11813,6 +11813,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.tavolo-interministeriale-frontalieri.title': 'Frontier: a new comparison between the Government and the territories',
     'blog.article.tavolo-interministeriale-frontalieri.excerpt': 'The new meeting of the inter-ministerial table on the border was held with a focus on Naspi, health, single cheque and statute.',
     'blog.article.tavolo-interministeriale-frontalieri.imageAlt': 'Interministerial meeting on cross-border workers',
+    'blog.article.barometro-raiffeisen-zhaw-record.title': 'Pension Switzerland: Record 725-point Raiffeisen Barometer',
+    'blog.article.barometro-raiffeisen-zhaw-record.excerpt': 'The Raiffeisen and ZHAW barometer reaches the record of 725 points. Pillar 3a grows to 79%, but uncertainty remains over the financing of the AVS.',
+    'blog.article.barometro-raiffeisen-zhaw-record.imageAlt': 'Raiffeisen and ZHAW pension barometer in Ticino and Switzerland',
 };
 
 export default blogMetaEn;
