@@ -446,7 +446,7 @@ jobs:
                      and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
                )
              | select(has_single_revision)
-             | select(.commit_id == $head)
+             | select(.commit_id == $head)]
              | sort_by([(.submitted_at // .created_at // ""), ((.id // 0) | tonumber? // 0)])
              | if length == 0 then 0
                elif (.[-1] | has_clean_lgtm) then 1

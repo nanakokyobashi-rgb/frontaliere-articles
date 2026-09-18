@@ -291,6 +291,7 @@ test('tests.yml claims before review work and finalizes without gating the requi
   assert.match(sameHeadGuard, /has_single_revision/);
   assert.match(sameHeadGuard, /has_clean_lgtm/);
   assert.match(sameHeadGuard, /sort_by\(\[\(\.submitted_at \/\/ \.created_at/);
+  assert.match(sameHeadGuard, /select\(\.commit_id == \$head\)\]\s*\|\s*sort_by\(/);
   assert.match(sameHeadGuard, /if length == 0 then 0/);
   assert.match(sameHeadGuard, /\.\[-1\] \| has_clean_lgtm/);
   assert.match(workflow, /scripts\/ci\/review-claim\.mjs --claim/);
