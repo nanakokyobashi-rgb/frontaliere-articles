@@ -54,7 +54,15 @@ function fakeExecutable(dir, name, source) {
   chmodSync(file, 0o755);
 }
 
-function runClassifier({ baseBody, currentBody, baseBodySha = sha256(baseBody), baseCaptureOutcome = 'success' }) {
+function runClassifier({
+  baseBody,
+  currentBody,
+  baseBodySha = sha256(baseBody),
+  baseCaptureOutcome = 'success',
+  head = 'base-sha',
+  remote = 'base-sha',
+  actionOutcome = 'success',
+}) {
   const temp = mkdtempSync(path.join(os.tmpdir(), 'pr-redcheck-outcome-'));
   const bin = path.join(temp, 'bin');
   mkdirSync(bin);
@@ -88,9 +96,9 @@ esac
         BASE_COMMENTS: '0',
         BASE_BODY_SHA: baseBodySha,
         BASE_CAPTURE_OUTCOME: baseCaptureOutcome,
-        ACTION_OUTCOME: 'success',
-        FAKE_HEAD: 'base-sha',
-        FAKE_REMOTE: 'base-sha',
+        ACTION_OUTCOME: actionOutcome,
+        FAKE_HEAD: head,
+        FAKE_REMOTE: remote,
         FAKE_BODY: currentBody,
       },
       encoding: 'utf8',
@@ -243,4 +251,37 @@ test('body cambiato è progresso, body identico è non-progresso', () => {
     1,
     `body identico deve restare non-progresso:\nstdout=${identical.stdout}\nstderr=${identical.stderr}`,
   );
+});
+
+test('un push esterno supersede il round e rilascia il claim prima del ramo di errore', () => {
+  const baseBody = '## Implementato\n\n- body iniziale';
+  const result = runClassifier({
+    baseBody,
+    currentBody: baseBody,
+    head: 'base-sha',
+    remote: 'external-sha',
+    actionOutcome: 'failure',
+  });
+  assert.equal(
+    result.status,
+    0,
+    `un branch avanzato da un altro writer non deve diventare un falso rosso:\nstdout=${result.stdout}\nstderr=${result.stderr}`,
+  );
+  assert.match(result.stdout, /run SUPERSEDED/);
+});
+
+test('redflag e redcheck hanno la stessa guardia per una race esterna', () => {
+  for (const [name, source] of [['redflag', REDFLAG_WORKFLOW], ['redcheck', WORKFLOW]]) {
+    const classify = source.slice(source.indexOf(CLASSIFY_NAME));
+    assert.match(classify, /CLAIM_STATUS=released/,
+      `${name}: il claim deve essere rilasciato sul superseded`);
+    assert.match(classify, /\[ "\$REMOTE_SHA" != "\$BASE_SHA" \]/,
+      `${name}: la guardia deve riconoscere il remote avanzato`);
+    assert.match(classify, /\[ "\$REMOTE_SHA" != "\$HEAD_NOW" \]/,
+      `${name}: la guardia deve escludere il push proprio`);
+    const supersededAt = classify.indexOf('run SUPERSEDED');
+    const failureAt = classify.indexOf('if [ "$ACTION_OUTCOME"');
+    assert.ok(supersededAt >= 0 && failureAt >= 0 && supersededAt < failureAt,
+      `${name}: la race deve essere classificata prima del fallimento`);
+  }
 });

@@ -815,6 +815,8 @@ jobs:
       # Il colore del job e' il LAVORO reale del round, non l'exit della CLI.
       #  - commit pushato sul branch → SUCCESS (la re-review girera'). Vale anche
       #    se la CLI e' morta ai turni DOPO il push.
+      #  - branch remoto avanzato da un altro writer dopo la baseline → run
+      #    SUPERSEDED: il claim viene rilasciato e nessun round viene consumato.
       #  - nessun push + CLI fallita → non-progresso reale → ROSSO.
       #  - nessun push + CLI pulita + body PR cambiato → progresso body-only,
       #    quindi SUCCESS.
@@ -848,6 +850,14 @@ jobs:
           fi
           if [ -n "$HEAD_NOW" ] && [ -n "$BASE_SHA" ] && [ "$HEAD_NOW" != "$BASE_SHA" ] && [ "$REMOTE_SHA" = "$HEAD_NOW" ]; then
             echo "Fix pushato questo round (HEAD avanzato e presente su origin/$HEAD_REF) → round SUCCESS. Job verde anche se la CLI e' uscita '$ACTION_OUTCOME'."
+            exit 0
+          fi
+          if [ -n "$HEAD_NOW" ] && [ -n "$BASE_SHA" ] && [ -n "$REMOTE_SHA" ] \
+             && [ "$REMOTE_SHA" != "$BASE_SHA" ] && [ "$REMOTE_SHA" != "$HEAD_NOW" ]; then
+            if [ -n "${GITHUB_ENV:-}" ]; then
+              echo 'CLAIM_STATUS=released' >> "$GITHUB_ENV"
+            fi
+            echo "⚠️ Branch avanzato da un altro writer dopo l'avvio del round (base=$BASE_SHA local=$HEAD_NOW remote=$REMOTE_SHA) → run SUPERSEDED; claim rilasciato, nessun round consumato."
             exit 0
           fi
           if [ "$ACTION_OUTCOME" != "success" ]; then
