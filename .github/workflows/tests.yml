@@ -82,6 +82,10 @@ on:
         description: 'PR aperta da verificare con il gate completo, inclusa la review Codex'
         required: false
         type: string
+      head_sha:
+        description: 'SHA esatta della head della PR per i dispatch di recovery'
+        required: false
+        type: string
 
 # Union dei permessi dei tre workflow fusi qui dentro: i test non ne chiedevano
 # (default), `pr-body-contract` scriveva la sticky sulla PR, la review posta il
@@ -103,7 +107,7 @@ permissions:
 # `total_count = 0` esattamente come prima, con un trigger in piu' a far credere
 # il contrario.
 concurrency:
-  group: ${{ github.ref == 'refs/heads/main' && 'tests-main' || format('tests-{0}', github.ref) }}
+  group: ${{ github.event_name == 'workflow_dispatch' && format('tests-recovery-{0}', inputs.head_sha || github.sha) || (github.ref == 'refs/heads/main' && 'tests-main' || format('tests-{0}', github.ref)) }}
   cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
@@ -231,7 +235,7 @@ jobs:
           PR_NUMBER: ${{ github.event.pull_request.number || inputs.pr_number }}
           RUN_ID: ${{ github.run_id }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          HEAD_SHA: ${{ inputs.head_sha || github.event.pull_request.head.sha || github.sha }}
           NODE_TEST_REPORT_FILE: ${{ runner.temp }}/node-test-failures.json
         run: node scripts/ci/report-node-test-failure.mjs
 
@@ -253,7 +257,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
-          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          HEAD_SHA: ${{ inputs.head_sha || github.event.pull_request.head.sha || github.sha }}
         run: node scripts/ci/loop-baseline-pr-gate.mjs
 
       # ══════════════════════════════════════════════════════════════════════
@@ -288,7 +292,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PRN: ${{ github.event.pull_request.number || inputs.pr_number }}
-          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          HEAD_SHA: ${{ inputs.head_sha || github.event.pull_request.head.sha || github.sha }}
           REPO: ${{ github.repository }}
           EVENT_NAME: ${{ github.event_name }}
         run: |
