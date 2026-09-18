@@ -5531,7 +5531,7 @@ function _isModelSpecific403(bodyText = '') {
  */
 function _isProviderWide403(bodyText = '') {
   const b = String(bodyText).toLowerCase();
-  const credentialStatus = /\b(?:(?:invalid|expired|revoked|missing)\s+(?:api\s+)?(?:key|token|credential)s?|(?:api\s+)?(?:key|token|credential)s?\s+(?:is|are|was|were|has|have)\s+(?:invalid|expired|revoked|missing))\b/.test(b);
+  const credentialStatus = /\b(?:(?:invalid|expired|revoked|missing)\s+(?:api\s+)?(?:key|token|credential)s?|(?:api\s+)?(?:key|token|credential)s?\s+(?:(?:is|are|was|were)\s+|(?:has|have)(?:\s+been)?\s+)(?:invalid|expired|revoked|missing))\b/.test(b);
   return (
     b.includes('web application firewall') ||
     /\bwaf\b/.test(b) ||
@@ -6159,11 +6159,11 @@ export function classifyNonRetryableError(status, bodyText = '', providerName = 
   // refusal exhausts only that id; a credential / WAF / IP 403 exhausts the
   // provider's siblings (see `_applyNonRetryableExhaustion`).
   if (status === 403 && !isGitHubModels && !isRetryableError(status, bodyText)) {
-    if (_isModelSpecific403(bodyText)) {
-      return { nonRetryable: true, markExhausted: true };
-    }
     if (_isProviderWide403(bodyText)) {
       return { nonRetryable: true, markExhausted: true, exhaustProvider: true };
+    }
+    if (_isModelSpecific403(bodyText)) {
+      return { nonRetryable: true, markExhausted: true };
     }
     return { nonRetryable: true, markExhausted: true };
   }

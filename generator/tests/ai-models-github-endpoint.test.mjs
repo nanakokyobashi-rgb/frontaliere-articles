@@ -624,6 +624,7 @@ const WAF_IP_403_BODY = '{"error":{"message":"Your IP has been blocked by the WA
 const WAF_IP_TRANSIENT_403_BODY = '{"error":{"message":"Your IP has been blocked by the WAF; rate limit exceeded"}}';
 const CREDENTIAL_403_BODY = '{"error":{"message":"invalid api key"}}';
 const API_KEY_SUBJECT_403_BODY = '{"error":{"message":"API key is invalid"}}';
+const API_KEY_REVOKED_403_BODY = '{"error":{"message":"API key has been revoked"}}';
 const TOKEN_EXPIRED_403_BODY = '{"error":{"message":"token has expired"}}';
 const REGIONAL_403_BODY = '{"error":{"message":"forbidden in this region"}}';
 const ROUTING_410_BODY = '{"error":{"message":"No healthy upstream; origin routing changed"}}';
@@ -730,6 +731,14 @@ describe('matrice 403/410: isRetryableError e classifyNonRetryableError', () => 
       status: 403,
       provider: 'Cerebras',
       body: API_KEY_SUBJECT_403_BODY,
+      retryable: false,
+      classification: { nonRetryable: true, markExhausted: true, exhaustProvider: true },
+    },
+    {
+      label: 'Cerebras 403 API key has been revoked',
+      status: 403,
+      provider: 'Cerebras',
+      body: API_KEY_REVOKED_403_BODY,
       retryable: false,
       classification: { nonRetryable: true, markExhausted: true, exhaustProvider: true },
     },
