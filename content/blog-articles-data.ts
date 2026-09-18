@@ -35220,6 +35220,15 @@ const RAW_ARTICLES = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'tavolo-interministeriale-frontalieri',
+ category: 'novita',
+ date: '2026-09-18T00:13:06.360Z',
+ image: '/images/blog/tavolo-interministeriale-frontalieri.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

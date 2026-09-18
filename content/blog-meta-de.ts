@@ -11809,6 +11809,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-09-17.imageAlt': 'Die Zahlen des Tages für Grenzgänger – 17. September 2026: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote',
     'blog.article.bollettino-frontaliere-2026-09-17.seoDescription': 'Grenzgänger-Bulletin vom 17. September 2026: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.',
     'blog.article.bollettino-frontaliere-2026-09-17.ogDescription': 'Die Zahlen vom 17. September 2026 für Grenzgänger: wie lange man heute Morgen an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, was der Franken heute wert ist und wie viele Stellen neu dazugekommen sind.',
+    'blog.article.tavolo-interministeriale-frontalieri.title': 'Grenzgänger: Neuer Vergleich zwischen Regierung und Territorien',
+    'blog.article.tavolo-interministeriale-frontalieri.excerpt': 'Das neue Treffen des interministeriellen Tisches an der Grenze mit Schwerpunkt auf Naspi, Gesundheit, einmaliger Zulage und Satzung wurde abgehalten.',
+    'blog.article.tavolo-interministeriale-frontalieri.imageAlt': 'Interministerielles Treffen für Grenzgänger',
 };
 
 export default blogMetaDe;

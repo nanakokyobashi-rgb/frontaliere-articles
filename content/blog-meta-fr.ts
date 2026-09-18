@@ -11812,6 +11812,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-09-17.imageAlt': 'Les chiffres du jour pour les frontaliers – 17 septembre 2026 : attentes aux douanes, prix de l\'essence, taux CHF-EUR et offres d\'emploi',
     'blog.article.bollettino-frontaliere-2026-09-17.seoDescription': 'Bulletin du frontalier du 17 septembre 2026 : les files aux douanes ce matin, l\'essence la moins chère, taux franc-euro et nouvelles offres d\'emploi en Suisse.',
     'blog.article.bollettino-frontaliere-2026-09-17.ogDescription': 'Les chiffres du 17 septembre 2026 pour les frontaliers : combien de temps on attend ce matin à chaque douane, où l\'essence coûte le moins cher, ce que vaut le franc aujourd\'hui et combien d\'offres d\'emploi sont parues en Suisse.',
+    'blog.article.tavolo-interministeriale-frontalieri.title': 'Frontières : nouvelle confrontation entre le gouvernement et les territoires',
+    'blog.article.tavolo-interministeriale-frontalieri.excerpt': 'La nouvelle réunion de la table interministérielle sur le frontalier s\'est tenue avec un accent sur le Naspi, la santé, le chèque unique et les statuts.',
+    'blog.article.tavolo-interministeriale-frontalieri.imageAlt': 'Réunion interministérielle sur les frontaliers',
 };
 
 export default blogMetaFr;

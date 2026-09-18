@@ -91294,6 +91294,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tavolo-interministeriale-frontalieri': {
+    title: 'Frontalieri: nuovo confronto tra Governo e territori',
+    description: 'Nuovo incontro del tavolo interministeriale sul frontalierato: focus su Naspi, sanità, assegno unico e statuto. Prossima riunione il 9 novembre. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, nuovo, confronto, governo, territori',
+    ogTitle: 'Frontalieri, nuovo confronto tra Governo e territori',
+    ogDescription: 'Si è tenuto un nuovo incontro del tavolo interministeriale sul frontalierato con la partecipazione del Piemonte. Al centro del dibattito Naspi, sanità, assegno unico e statuto. Fissata la data del prossimo incontro per il 9 novembre.',
+    canonicalPath: '/articoli-frontaliere/tavolo-interministeriale-frontalieri',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontalieri: nuovo confronto tra Governo e territori",
+      "description": "Nuovo incontro del tavolo interministeriale sul frontalierato: focus su Naspi, sanità, assegno unico e statuto. Prossima riunione il 9 novembre. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/tavolo-interministeriale-frontalieri.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Riunione del tavolo interministeriale sui frontalieri"
+      },
+      "datePublished": "2026-09-18T00:13:06+00:00",
+      "dateModified": "2026-09-18T00:13:06+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/tavolo-interministeriale-frontalieri/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

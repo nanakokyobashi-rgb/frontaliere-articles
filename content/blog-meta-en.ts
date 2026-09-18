@@ -11810,6 +11810,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-09-17.imageAlt': 'The day\'s numbers for cross-border commuters – September 17, 2026: border waits, fuel prices, CHF-EUR rate and job listings',
     'blog.article.bollettino-frontaliere-2026-09-17.seoDescription': 'Cross-border brief, September 17, 2026: queues at the crossings this morning, where fuel is cheapest, the franc-euro rate and new job postings in Switzerland.',
     'blog.article.bollettino-frontaliere-2026-09-17.ogDescription': 'The numbers for September 17, 2026, for cross-border commuters: how long the queue is at each crossing this morning, which towns have the cheapest fuel, what the franc is worth today and how many Swiss jobs went up.',
+    'blog.article.tavolo-interministeriale-frontalieri.title': 'Frontier: a new comparison between the Government and the territories',
+    'blog.article.tavolo-interministeriale-frontalieri.excerpt': 'The new meeting of the inter-ministerial table on the border was held with a focus on Naspi, health, single cheque and statute.',
+    'blog.article.tavolo-interministeriale-frontalieri.imageAlt': 'Interministerial meeting on cross-border workers',
 };
 
 export default blogMetaEn;

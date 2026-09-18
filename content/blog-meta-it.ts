@@ -11811,6 +11811,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-09-17.imageAlt': 'I numeri del giorno per i frontalieri – 17 settembre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro',
     'blog.article.bollettino-frontaliere-2026-09-17.seoDescription': 'Bollettino frontalieri del 17 settembre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
     'blog.article.bollettino-frontaliere-2026-09-17.ogDescription': 'I numeri del 17 settembre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    'blog.article.tavolo-interministeriale-frontalieri.title': 'Frontalieri: nuovo confronto tra Governo e territori',
+    'blog.article.tavolo-interministeriale-frontalieri.excerpt': 'Si è tenuto il nuovo incontro del tavolo interministeriale sul frontalierato con focus su Naspi, sanità, assegno unico e statuto.',
+    'blog.article.tavolo-interministeriale-frontalieri.imageAlt': 'Riunione del tavolo interministeriale sui frontalieri',
 };
 
 export default blogMetaIt;
