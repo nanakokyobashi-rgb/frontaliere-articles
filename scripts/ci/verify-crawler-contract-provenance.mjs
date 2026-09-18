@@ -591,6 +591,33 @@ export function siteGeneratorPath(contract) {
 }
 
 /**
+ * Path ripetuti in `manifest.files`. Una Map last-wins terrebbe solo
+ * l'ultima policy e farebbe sparire la prima: il piano li conta prima
+ * di costruire la mappa e resta fail-closed finche' i path non sono univoci.
+ *
+ * @param {{files?: Array<{path?: string}>}|null|undefined} manifest
+ * @returns {string[]}
+ */
+export function duplicateManifestPaths(manifest) {
+  const seen = new Set();
+  const duplicates = [];
+  const reported = new Set();
+  for (const entry of manifest?.files || []) {
+    const filePath = entry?.path;
+    if (typeof filePath !== 'string' || filePath.length === 0) continue;
+    if (seen.has(filePath)) {
+      if (!reported.has(filePath)) {
+        duplicates.push(filePath);
+        reported.add(filePath);
+      }
+    } else {
+      seen.add(filePath);
+    }
+  }
+  return duplicates;
+}
+
+/**
  * L'elenco dei confronti da fare, uno per digest dichiarato dal contratto.
  * Puro: non tocca rete ne' filesystem. `sitePath` null significa che il
  * contratto non dice CONTRO COSA confrontare — gia' un difetto, e
@@ -600,6 +627,8 @@ export function siteGeneratorPath(contract) {
  * Per tutto cio' che il contratto o il manifest DICHIARANO e' un elenco di
  * uno — non si tira a indovinare su una coordinata dichiarata. Solo i
  * `sourceSha256`, la cui directory nessuno dichiara, ne hanno piu' di uno.
+ * Path duplicati in `manifest.files` sono contati in
+ * `checks.duplicateManifestPaths.length` e rendono il verdetto fail-closed.
  */
 export function planProvenanceChecks(
   contract,
@@ -607,9 +636,17 @@ export function planProvenanceChecks(
   logicDirs = siteLogicDirs(),
   observationRef = contractObservationLineage(contract).observationRef,
 ) {
-  const byManifestPath = new Map(
-    (manifest?.files || []).map((entry) => [entry.path, entry]),
-  );
+  // Path duplicati prima della Map: last-wins nasconderebbe la policy della
+  // prima voce. I duplicati restano fuori dalla mappa finche' non sono univoci.
+  const duplicates = duplicateManifestPaths(manifest);
+  const duplicatePathSet = new Set(duplicates);
+  const byManifestPath = new Map();
+  for (const entry of manifest?.files || []) {
+    const filePath = entry?.path;
+    if (typeof filePath !== 'string' || filePath.length === 0) continue;
+    if (duplicatePathSet.has(filePath)) continue;
+    byManifestPath.set(filePath, entry);
+  }
   const declared = (sitePath) => ({ sitePath, sitePathCandidates: sitePath ? [sitePath] : [] });
   const lineage = contractObservationLineage(contract);
   const checks = [
@@ -680,6 +717,7 @@ export function planProvenanceChecks(
     ));
   }
 
+  checks.duplicateManifestPaths = duplicates;
   return checks;
 }
 
@@ -809,6 +847,19 @@ export function evaluateProvenance(checks, observed) {
     reason = reason ? `${reason} A parte: ${localReason}` : localReason;
   }
 
+  const duplicateManifestPaths = Array.isArray(checks.duplicateManifestPaths)
+    ? checks.duplicateManifestPaths
+    : [];
+  if (duplicateManifestPaths.length) {
+    red = true;
+    const dupReason =
+      `manifest.files contiene ${duplicateManifestPaths.length} path duplicati ` +
+      `(${duplicateManifestPaths.slice(0, 3).map((p) => `\`${p}\``).join(', ')}` +
+      `${duplicateManifestPaths.length > 3 ? ', …' : ''}): ` +
+      'il piano e\' fail-closed finche\' i path non sono univoci.';
+    reason = reason ? `${reason} A parte: ${dupReason}` : dupReason;
+  }
+
   return { results, counts, red, reason, observationRef };
 }
 
@@ -874,11 +925,16 @@ async function main() {
   const observationRef = checks.find((check) => check.observationRef)?.observationRef || SITE_REF;
   const unreadableArtifacts = [];
   const artifactSources = [];
+  const localArtifactHashes = new Map();
   for (const artifact of contract.artifacts || []) {
+    const filePath = path.join(ROOT, '.github/workflows', artifact.file);
     try {
+      // Digest sui byte raw committati, non sul decode/re-encode UTF-8:
+      // una sequenza non UTF-8 cambierebbe hash dopo `Buffer.from(text, 'utf8')`.
+      localArtifactHashes.set(artifact.file, sha256(fs.readFileSync(filePath)));
       artifactSources.push({
         file: artifact.file,
-        text: fs.readFileSync(path.join(ROOT, '.github/workflows', artifact.file), 'utf8'),
+        text: fs.readFileSync(filePath, 'utf8'),
       });
     } catch (error) {
       unreadableArtifacts.push({
@@ -888,9 +944,6 @@ async function main() {
     }
   }
   const runtimeChecks = planRuntimeFlagChecks(contract, artifactSources);
-  const localArtifactHashes = new Map(
-    artifactSources.map(({ file, text }) => [file, sha256(Buffer.from(text, 'utf8'))]),
-  );
 
   // Un fetch per path DISTINTO: i 24 `sourceSha256` puntano a 24 file diversi,
   // ma un contratto malformato potrebbe ripetere lo stesso path.
