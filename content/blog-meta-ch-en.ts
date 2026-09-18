@@ -6560,6 +6560,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.penuria-alloggi-svizzera-2027.title': 'Homes in Switzerland: the shortage has eased since 2027',
     'blog.article.penuria-alloggi-svizzera-2027.excerpt': 'Studio Wüest Partner: The housing shortage in Switzerland could be alleviated by the end of 2027 with 50,000 new units planned.',
     'blog.article.penuria-alloggi-svizzera-2027.imageAlt': 'New residential buildings under construction in Switzerland',
+    'blog.article.permesso-c-glarona-requisiti.title': 'Residence permit C Canton Glarus: requirements and application',
+    'blog.article.permesso-c-glarona-requisiti.excerpt': 'Guide to the requirements for the C permit in Glarus: years of residence, language integration and issuance procedure for EU/EFTA citizens and third states.',
+    'blog.article.permesso-c-glarona-requisiti.imageAlt': 'Swiss administrative building for residence permit management',
 };
 
 export default blogMetaChEn;

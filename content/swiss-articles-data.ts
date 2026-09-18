@@ -19652,6 +19652,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'permesso-c-glarona-requisiti',
+    category: 'pratico',
+    date: '2026-09-18T04:16:44.938Z',
+    image: '/images/blog/permesso-c-glarona-requisiti.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

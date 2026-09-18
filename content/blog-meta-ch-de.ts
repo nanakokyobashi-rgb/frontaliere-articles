@@ -6560,6 +6560,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.penuria-alloggi-svizzera-2027.title': 'Wohnen in der Schweiz: Knappheit mildert sich ab 2027',
     'blog.article.penuria-alloggi-svizzera-2027.excerpt': 'Studie Wüest Partner: Der Wohnungsmangel in der Schweiz könnte sich bis Ende 2027 mit 50\'000 neuen Wohneinheiten abschwächen.',
     'blog.article.penuria-alloggi-svizzera-2027.imageAlt': 'Neue Wohngebäude im Bau in der Schweiz',
+    'blog.article.permesso-c-glarona-requisiti.title': 'Niederlassungsbewilligung C Kanton Glarus: Voraussetzungen und Antrag',
+    'blog.article.permesso-c-glarona-requisiti.excerpt': 'Leitfaden zu den Voraussetzungen für die Bewilligung C in Glarus: Aufenthaltsjahre, Sprachintegration und Erteilungsverfahren für EU-/EFTA-Bürger und Drittstaaten.',
+    'blog.article.permesso-c-glarona-requisiti.imageAlt': 'Schweizer Verwaltungsgebäude für die Verwaltung von Aufenthaltstbewilligungen',
 };
 
 export default blogMetaChDe;

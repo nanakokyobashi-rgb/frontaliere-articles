@@ -6560,6 +6560,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.penuria-alloggi-svizzera-2027.title': 'Logements en Suisse : la pénurie s\'atténue depuis 2027',
     'blog.article.penuria-alloggi-svizzera-2027.excerpt': 'Étude Wüest Partner : la pénurie de logements en Suisse pourrait s\'atténuer d\'ici la fin de 2027 avec 50\'000 nouvelles unités prévues.',
     'blog.article.penuria-alloggi-svizzera-2027.imageAlt': 'Nouveaux bâtiments résidentiels en construction en Suisse',
+    'blog.article.permesso-c-glarona-requisiti.title': 'Permis de séjour C Canton de Glaris : exigences et demande',
+    'blog.article.permesso-c-glarona-requisiti.excerpt': 'Guide des exigences pour le permis C à Glaris : années de résidence, intégration linguistique et procédure de délivrance pour les citoyens de l\'UE/AELE et des pays tiers.',
+    'blog.article.permesso-c-glarona-requisiti.imageAlt': 'Bâtiment administratif suisse pour la gestion des permis de séjour',
 };
 
 export default blogMetaChFr;

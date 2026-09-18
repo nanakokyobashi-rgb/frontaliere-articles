@@ -2209,6 +2209,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'pil-svizzero-crescita-2026': { it: 'pil-svizzero-crescita-2026', en: 'swiss-gdp-growth-2026', de: 'schweizer-bip-wachstum-2026', fr: 'croissance-pib-suisse-2026' },
  'consiglio-federale-contributo-fmi': { it: 'consiglio-federale-contributo-fmi', en: 'federal-council-imf-contribution', de: 'bundesrat-iwf-beitrag', fr: 'conseil-federal-contribution-fmi' },
  'penuria-alloggi-svizzera-2027': { it: 'penuria-alloggi-svizzera-2027', en: 'housing-shortage-switzerland-2027', de: 'wohnungsmangel-schweiz-2027', fr: 'penurie-logements-suisse-2027' },
+ 'permesso-c-glarona-requisiti': { it: 'permesso-c-glarona-requisiti', en: 'permit-c-glarona-requirements', de: 'bewilligung-c-glarona-anforderungen', fr: 'permis-c-glarona-conditions' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

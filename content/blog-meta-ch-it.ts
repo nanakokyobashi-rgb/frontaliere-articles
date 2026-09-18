@@ -6560,6 +6560,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.penuria-alloggi-svizzera-2027.title': 'Abitazioni in Svizzera: la penuria si attenua dal 2027',
     'blog.article.penuria-alloggi-svizzera-2027.excerpt': 'Studio Wüest Partner: la penuria di alloggi in Svizzera potrebbe attenuarsi entro la fine del 2027 con 50\'000 nuove unità previste.',
     'blog.article.penuria-alloggi-svizzera-2027.imageAlt': 'Nuovi edifici residenziali in costruzione in Svizzera',
+    'blog.article.permesso-c-glarona-requisiti.title': 'Permesso di domicilio C Canton Glarona: requisiti e domanda',
+    'blog.article.permesso-c-glarona-requisiti.excerpt': 'Guida ai requisiti per il permesso C a Glarona: anni di residenza, integrazione linguistica e procedura di rilascio per cittadini UE/AELS e terzi stati.',
+    'blog.article.permesso-c-glarona-requisiti.imageAlt': 'Edificio amministrativo svizzero per la gestione dei permessi di soggiorno',
 };
 
 export default blogMetaChIt;
