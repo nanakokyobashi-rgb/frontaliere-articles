@@ -6539,6 +6539,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.tirocini-2026-mercato-svizzera.title': 'Posti di tirocinio 2026: mercato stabile e variegato',
     'blog.article.tirocini-2026-mercato-svizzera.excerpt': 'Il mercato dei posti di tirocinio in Svizzera è stabile nel 2026 con circa 76 000 contratti firmati a fine agosto. Spazio anche ai WorldSkills a Shanghai.',
     'blog.article.tirocini-2026-mercato-svizzera.imageAlt': 'Giovani apprendisti durante la formazione professionale in Svizzera',
+    'blog.article.crescita-assicurazioni-cyber-2025.title': 'Assicurazioni cyber in crescita nel 2025 in Svizzera',
+    'blog.article.crescita-assicurazioni-cyber-2025.excerpt': 'Nel 2025 le assicurazioni cyber in Svizzera registrano una forte crescita: 72\'000 aziende assicurate e 480\'000 privati, secondo i dati dell\'ASA.',
+    'blog.article.crescita-assicurazioni-cyber-2025.imageAlt': 'Crescita delle assicurazioni cyber in Svizzera nel 2025',
 };
 
 export default blogMetaChIt;

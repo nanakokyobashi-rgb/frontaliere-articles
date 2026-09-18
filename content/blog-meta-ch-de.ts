@@ -6539,6 +6539,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.tirocini-2026-mercato-svizzera.title': 'Lehrstellen 2026: stabiler und vielfältiger Markt',
     'blog.article.tirocini-2026-mercato-svizzera.excerpt': 'Der Lehrstellenmarkt in der Schweiz ist 2026 mit rund 76 \'000 Ende August unterzeichneten Verträgen stabil. Auch Platz für die WorldSkills in Shanghai.',
     'blog.article.tirocini-2026-mercato-svizzera.imageAlt': 'Junge Lernende während der beruflichen Grundbildung in der Schweiz',
+    'blog.article.crescita-assicurazioni-cyber-2025.title': 'Wachsende Cyber-Versicherungen im Jahr 2025 in der Schweiz',
+    'blog.article.crescita-assicurazioni-cyber-2025.excerpt': 'Im Jahr 2025 verzeichnen die Cyber-Versicherungen in der Schweiz ein starkes Wachstum: 72\'000 versicherte Unternehmen und 480\'000 Privatpersonen, so die Daten des SVV.',
+    'blog.article.crescita-assicurazioni-cyber-2025.imageAlt': 'Wachstum von Cyberversicherungen in der Schweiz im Jahr 2025',
 };
 
 export default blogMetaChDe;

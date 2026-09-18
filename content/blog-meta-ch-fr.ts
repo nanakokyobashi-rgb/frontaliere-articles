@@ -6539,6 +6539,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.tirocini-2026-mercato-svizzera.title': 'Places d\'apprentissage 2026 : marché stable et varié',
     'blog.article.tirocini-2026-mercato-svizzera.excerpt': 'Le marché des places d\'apprentissage en Suisse est stable en 2026 avec environ 76 000 contrats signés fin août. Place également aux WorldSkills à Shanghai.',
     'blog.article.tirocini-2026-mercato-svizzera.imageAlt': 'Jeunes apprentis pendant la formation professionnelle en Suisse',
+    'blog.article.crescita-assicurazioni-cyber-2025.title': 'Les cyberassurances en hausse en 2025 en Suisse',
+    'blog.article.crescita-assicurazioni-cyber-2025.excerpt': 'En 2025, les cyberassurances en Suisse connaissent une forte croissance : 72\'000 entreprises assurées et 480\'000 particuliers, selon les données de l\'ASA.',
+    'blog.article.crescita-assicurazioni-cyber-2025.imageAlt': 'Croissance de l\'assurance cyber en Suisse en 2025',
 };
 
 export default blogMetaChFr;

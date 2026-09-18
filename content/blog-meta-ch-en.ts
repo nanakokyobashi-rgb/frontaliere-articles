@@ -6539,6 +6539,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.tirocini-2026-mercato-svizzera.title': 'Internship places 2026: stable and varied market',
     'blog.article.tirocini-2026-mercato-svizzera.excerpt': 'The market for traineeships in Switzerland is stable in 2026 with around 76,000 contracts signed at the end of August. Space also at the WorldSkills in Shanghai.',
     'blog.article.tirocini-2026-mercato-svizzera.imageAlt': 'Young apprentices during vocational training in Switzerland',
+    'blog.article.crescita-assicurazioni-cyber-2025.title': 'Cyber insurance growing in 2025 in Switzerland',
+    'blog.article.crescita-assicurazioni-cyber-2025.excerpt': 'In 2025, cyber insurance in Switzerland recorded strong growth: 72,000 insured companies and 480,000 individuals, according to ASA data.',
+    'blog.article.crescita-assicurazioni-cyber-2025.imageAlt': 'Growth of cyber insurance in Switzerland in 2025',
 };
 
 export default blogMetaChEn;
