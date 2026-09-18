@@ -6572,6 +6572,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.permesso-c-zugo-requisiti.title': 'Permis C à Zoug : exigences et procédure de demande',
     'blog.article.permesso-c-zugo-requisiti.excerpt': 'Conduite à domicile stable dans le canton de Zoug : exigences de résidence (5 ans pour UE/AELE, 10 ans pour hors UE), intégration et stabilité financière.',
     'blog.article.permesso-c-zugo-requisiti.imageAlt': 'Vue du Canton de Zoug et de ses bureaux administratifs',
+    'blog.article.borse-studio-zugo-guide.title': 'Bourses Canton Zoug : exigences et montants',
+    'blog.article.borse-studio-zugo-guide.excerpt': 'Guide pratique sur les bourses et les prêts dans le canton de Zoug : conditions d\'accès, montants maximaux et délais de dépôt des demandes.',
+    'blog.article.borse-studio-zugo-guide.imageAlt': 'Étudiants étudiant dans une bibliothèque suisse moderne',
 };
 
 export default blogMetaChFr;

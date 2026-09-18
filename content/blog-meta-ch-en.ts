@@ -6572,6 +6572,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.permesso-c-zugo-requisiti.title': 'Permit C to Zug: requirements and application procedure',
     'blog.article.permesso-c-zugo-requisiti.excerpt': 'Permanent residence in the Canton of Zug: residency requirements (5 years for EU/EFTA, 10 for non-EU), integration and financial stability.',
     'blog.article.permesso-c-zugo-requisiti.imageAlt': 'View of Canton Zug and its administrative offices',
+    'blog.article.borse-studio-zugo-guide.title': 'Canton Zug Scholarships: Requirements and Amounts',
+    'blog.article.borse-studio-zugo-guide.excerpt': 'Practical guide on scholarships and loans in the Canton of Zug: access requirements, maximum amounts and deadlines for submitting applications.',
+    'blog.article.borse-studio-zugo-guide.imageAlt': 'Students studying in a modern Swiss library',
 };
 
 export default blogMetaChEn;

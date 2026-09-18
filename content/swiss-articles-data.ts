@@ -19688,6 +19688,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'borse-studio-zugo-guide',
+    category: 'pratico',
+    date: '2026-09-18T23:08:02.019Z',
+    image: '/images/blog/borse-studio-zugo-guide.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

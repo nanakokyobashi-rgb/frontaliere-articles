@@ -6572,6 +6572,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.permesso-c-zugo-requisiti.title': 'Führerschein C in Zug: Voraussetzungen und Antragsverfahren',
     'blog.article.permesso-c-zugo-requisiti.excerpt': 'Leitfaden zum festen Wohnsitz im Kanton Zug: Wohnsitzvoraussetzungen (5 Jahre für EU/EFTA, 10 Jahre für Nicht-EU), Integration und finanzielle Stabilität.',
     'blog.article.permesso-c-zugo-requisiti.imageAlt': 'Ansicht des Kantons Zug und seiner Verwaltungsbüros',
+    'blog.article.borse-studio-zugo-guide.title': 'Stipendien Kanton Zug: Voraussetzungen und Beträge',
+    'blog.article.borse-studio-zugo-guide.excerpt': 'Praxisleitfaden zu Stipendien und Darlehen im Kanton Zug: Zugangsvoraussetzungen, Höchstbeträge und Bewerbungsfristen.',
+    'blog.article.borse-studio-zugo-guide.imageAlt': 'Studierende in einer modernen Schweizer Bibliothek',
 };
 
 export default blogMetaChDe;
