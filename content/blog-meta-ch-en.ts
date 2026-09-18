@@ -6557,6 +6557,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.consiglio-federale-contributo-fmi.title': 'Federal Council: 40 million francs for the IMF',
     'blog.article.consiglio-federale-contributo-fmi.excerpt': 'The Federal Council has approved a contribution of CHF 40 million for the SECO-IMF partnership in the period 2026-2030.',
     'blog.article.consiglio-federale-contributo-fmi.imageAlt': 'The Federal Palace in Bern seat of the Swiss Federal Council',
+    'blog.article.penuria-alloggi-svizzera-2027.title': 'Homes in Switzerland: the shortage has eased since 2027',
+    'blog.article.penuria-alloggi-svizzera-2027.excerpt': 'Studio Wüest Partner: The housing shortage in Switzerland could be alleviated by the end of 2027 with 50,000 new units planned.',
+    'blog.article.penuria-alloggi-svizzera-2027.imageAlt': 'New residential buildings under construction in Switzerland',
 };
 
 export default blogMetaChEn;

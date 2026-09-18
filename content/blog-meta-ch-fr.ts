@@ -6557,6 +6557,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.consiglio-federale-contributo-fmi.title': 'Conseil fédéral : 40 millions de francs pour le FMI',
     'blog.article.consiglio-federale-contributo-fmi.excerpt': 'Le Conseil fédéral a approuvé une contribution de 40 millions de francs pour le partenariat SECO-FMI sur la période 2026-2030.',
     'blog.article.consiglio-federale-contributo-fmi.imageAlt': 'Le Palais fédéral à Berne siège du Conseil fédéral suisse',
+    'blog.article.penuria-alloggi-svizzera-2027.title': 'Logements en Suisse : la pénurie s\'atténue depuis 2027',
+    'blog.article.penuria-alloggi-svizzera-2027.excerpt': 'Étude Wüest Partner : la pénurie de logements en Suisse pourrait s\'atténuer d\'ici la fin de 2027 avec 50\'000 nouvelles unités prévues.',
+    'blog.article.penuria-alloggi-svizzera-2027.imageAlt': 'Nouveaux bâtiments résidentiels en construction en Suisse',
 };
 
 export default blogMetaChFr;

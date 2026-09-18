@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1944642/lavoro-annuncio-zurigo-diritto-esperto-ricerca-anni-fumatrice": {
-    "articleId": "annuncio-discriminatorio-zurigo-lpar",
-    "ts": "2026-08-19T15:05:48.398Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/qfbjozpp9glkfmhcts1mv": {
     "articleId": "onu-sanzioni-sesam-2026",
     "ts": "2026-08-19T16:29:35.169Z",
@@ -2497,6 +2492,11 @@
   "https://www.seco.admin.ch/it/newnsb/zmsyjbttr33fguq8ra_t6": {
     "articleId": "consiglio-federale-contributo-fmi",
     "ts": "2026-09-18T03:06:02.479Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/abitazioni%3a-penuria-potrebbe-attenuarsi%2c-ma-non-prima-del-2027/92077041": {
+    "articleId": "penuria-alloggi-svizzera-2027",
+    "ts": "2026-09-18T03:19:46.917Z",
     "keyForm": 2
   }
 }

@@ -6557,6 +6557,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.consiglio-federale-contributo-fmi.title': 'Bundesrat: 40 Millionen Franken für den IWF',
     'blog.article.consiglio-federale-contributo-fmi.excerpt': 'Der Bundesrat hat einen Beitrag von 40 Millionen Franken für die Partnerschaft SECO-FMI im Zeitraum 2026-2030 bewilligt.',
     'blog.article.consiglio-federale-contributo-fmi.imageAlt': 'Das Bundeshaus in Bern Sitz des Schweizerischen Bundesrates',
+    'blog.article.penuria-alloggi-svizzera-2027.title': 'Wohnen in der Schweiz: Knappheit mildert sich ab 2027',
+    'blog.article.penuria-alloggi-svizzera-2027.excerpt': 'Studie Wüest Partner: Der Wohnungsmangel in der Schweiz könnte sich bis Ende 2027 mit 50\'000 neuen Wohneinheiten abschwächen.',
+    'blog.article.penuria-alloggi-svizzera-2027.imageAlt': 'Neue Wohngebäude im Bau in der Schweiz',
 };
 
 export default blogMetaChDe;

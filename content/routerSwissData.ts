@@ -2208,6 +2208,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'seco-previsioni-crescita-2026': { it: 'seco-previsioni-crescita-2026', en: 'seco-growth-forecasts-2026', de: 'seco-wachstumsprognosen-2026', fr: 'seco-previsions-croissance-2026' },
  'pil-svizzero-crescita-2026': { it: 'pil-svizzero-crescita-2026', en: 'swiss-gdp-growth-2026', de: 'schweizer-bip-wachstum-2026', fr: 'croissance-pib-suisse-2026' },
  'consiglio-federale-contributo-fmi': { it: 'consiglio-federale-contributo-fmi', en: 'federal-council-imf-contribution', de: 'bundesrat-iwf-beitrag', fr: 'conseil-federal-contribution-fmi' },
+ 'penuria-alloggi-svizzera-2027': { it: 'penuria-alloggi-svizzera-2027', en: 'housing-shortage-switzerland-2027', de: 'wohnungsmangel-schweiz-2027', fr: 'penurie-logements-suisse-2027' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
