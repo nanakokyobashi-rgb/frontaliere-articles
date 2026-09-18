@@ -11841,6 +11841,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.fondi-comuni-frontiera-decreto.title': 'Fonds communs frontaliers : le décret MEF signé',
     'blog.article.fondi-comuni-frontiera-decreto.excerpt': 'Le ministre Giorgetti a signé le décret d\'attribution des fonds aux municipalités à moins de 20 km de la frontière avec le Tessin, les Grisons et le Valais.',
     'blog.article.fondi-comuni-frontiera-decreto.imageAlt': 'Centre d\'une commune frontalière dans le Mendrisiotto',
+    'blog.article.governo-no-iniziativa-frontiere.title': 'Contrôles aux frontières : le Gouvernement rejette l\'initiative UDC',
+    'blog.article.governo-no-iniziativa-frontiere.excerpt': 'Le Conseil fédéral rejette l\'initiative « Arrêter les abus en matière d\'asile » : les contrôles systématiques coûteraient des milliards et risqueraient la sortie de Schengen.',
+    'blog.article.governo-no-iniziativa-frontiere.imageAlt': 'Passage frontalier au Tessin avec trafic de frontaliers',
 };
 
 export default blogMetaFr;

@@ -11839,6 +11839,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.fondi-comuni-frontiera-decreto.title': 'Common border funds: MEF decree signed',
     'blog.article.fondi-comuni-frontiera-decreto.excerpt': 'Minister Giorgetti signed the decree for the allocation of funds to the Municipalities within 20 km of the border with Ticino, Graubünden and Valais.',
     'blog.article.fondi-comuni-frontiera-decreto.imageAlt': 'Center of a border municipality in the Mendrisiotto region',
+    'blog.article.governo-no-iniziativa-frontiere.title': 'Border controls: the Government rejects the UDC initiative',
+    'blog.article.governo-no-iniziativa-frontiere.excerpt': 'The Federal Council rejects the initiative \'Stopping abuses in asylum\': systematic checks would cost billions and risk leaving Schengen.',
+    'blog.article.governo-no-iniziativa-frontiere.imageAlt': 'Border crossing in Ticino with commuter traffic',
 };
 
 export default blogMetaEn;

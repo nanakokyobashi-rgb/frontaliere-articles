@@ -11840,6 +11840,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.fondi-comuni-frontiera-decreto.title': 'Fondi comuni di frontiera: firmato il decreto MEF',
     'blog.article.fondi-comuni-frontiera-decreto.excerpt': 'Il Ministro Giorgetti ha firmato il decreto per l\'assegnazione dei fondi ai Comuni entro 20 km dal confine con Ticino, Grigioni e Vallese.',
     'blog.article.fondi-comuni-frontiera-decreto.imageAlt': 'Centro di un comune di frontiera nel Mendrisiotto',
+    'blog.article.governo-no-iniziativa-frontiere.title': 'Controlli frontiere: il Governo boccia l\'iniziativa UDC',
+    'blog.article.governo-no-iniziativa-frontiere.excerpt': 'Il Consiglio federale respinge l\'iniziativa \'Fermare gli abusi nell\'asilo\': i controlli sistematici costerebbero miliardi e rischiano l\'uscita da Schengen.',
+    'blog.article.governo-no-iniziativa-frontiere.imageAlt': 'Passaggio di frontiera in Ticino con traffico di pendolari',
 };
 
 export default blogMetaIt;

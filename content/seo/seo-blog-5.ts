@@ -91645,6 +91645,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-governo-no-iniziativa-frontiere': {
+    title: 'Controlli frontiere: il Governo boccia l\'iniziativa UDC',
+    description: 'Il Consiglio federale boccia l\'iniziativa UDC: controlli sistematici alle frontiere costerebbero miliardi e rischierebbero l\'uscita da Schengen. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, controlli, frontiere, governo, boccia',
+    ogTitle: 'Controlli frontiere: il Governo dice no all\'iniziativa UDC',
+    ogDescription: 'Il Consiglio federale avverte: controlli sistematici alle frontiere causerebbero miliardi di franchi di costi e rischierebbero l\'uscita dal sistema Schengen/Dublino.',
+    canonicalPath: '/articoli-frontaliere/governo-no-iniziativa-frontiere',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Controlli frontiere: il Governo boccia l'iniziativa UDC",
+      "description": "Il Consiglio federale boccia l'iniziativa UDC: controlli sistematici alle frontiere costerebbero miliardi e rischierebbero l'uscita da Schengen. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/governo-no-iniziativa-frontiere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Passaggio di frontiera in Ticino con traffico di pendolari"
+      },
+      "datePublished": "2026-09-18T15:22:41+00:00",
+      "dateModified": "2026-09-18T15:22:41+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/governo-no-iniziativa-frontiere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

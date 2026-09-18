@@ -11838,6 +11838,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.fondi-comuni-frontiera-decreto.title': 'Border Joint Funds: MEF-Dekret unterzeichnet',
     'blog.article.fondi-comuni-frontiera-decreto.excerpt': 'Minister Giorgetti unterzeichnete das Dekret über die Zuweisung der Mittel an die Gemeinden innerhalb von 20 km von der Grenze zu Tessin, Graubünden und Wallis.',
     'blog.article.fondi-comuni-frontiera-decreto.imageAlt': 'Zentrum einer Grenzgemeinde im Mendrisiotto',
+    'blog.article.governo-no-iniziativa-frontiere.title': 'Grenzkontrollen: Regierung lehnt SVP-Initiative ab',
+    'blog.article.governo-no-iniziativa-frontiere.excerpt': 'Der Bundesrat lehnt die Initiative «Asylmissbrauch stoppen» ab: Systematische Kontrollen würden Milliarden kosten und den Austritt aus Schengen riskieren.',
+    'blog.article.governo-no-iniziativa-frontiere.imageAlt': 'Grenzübergang im Tessin mit Pendlerverkehr',
 };
 
 export default blogMetaDe;

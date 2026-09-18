@@ -35301,6 +35301,15 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'governo-no-iniziativa-frontiere',
+ category: 'novita',
+ date: '2026-09-18T15:22:41.824Z',
+ image: '/images/blog/governo-no-iniziativa-frontiere.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
