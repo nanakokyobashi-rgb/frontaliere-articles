@@ -11829,6 +11829,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.sospensione-treni-luino-porto.title': 'Sospensioni treni tra Luino e Porto Valtravaglia',
     'blog.article.sospensione-treni-luino-porto.excerpt': 'Interventi infrastrutturali di RFI: stop ai treni regionali tra Luino e Porto Valtravaglia dalle 9.02 alle 14.02 in giorni specifici tra settembre e ottobre 2026.',
     'blog.article.sospensione-treni-luino-porto.imageAlt': 'Treno regionale sulla linea tra Luino e Porto Valtravaglia',
+    'blog.article.assenteismo-psichico-ticino-51.title': 'Assenze psichiche in Ticino: 51% finiscono in licenziamento',
+    'blog.article.assenteismo-psichico-ticino-51.excerpt': 'In Ticino, il 51% delle assenze per cause psichiche porta allo scioglimento del contratto. La quota di beneficiari AI per motivi psichiatrici è salita al 51%.',
+    'blog.article.assenteismo-psichico-ticino-51.imageAlt': 'Ambiente di lavoro sereno in Ticino, focus sulla salute mentale e integrazione',
 };
 
 export default blogMetaIt;

@@ -91528,6 +91528,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-assenteismo-psichico-ticino-51': {
+    title: 'Assenze psichiche in Ticino: 51% finiscono in licenziamento',
+    description: 'In Ticino, il 51% delle assenze per cause psichiche termina con lo scioglimento del contratto. La quota di beneficiari AI per motivi psichiatrici è salita',
+    keywords: 'frontalieri, ticino, svizzera, italia, assenze, psichiche, finiscono, licenziamento',
+    ogTitle: 'Assenze psichiche in Ticino: 51% finiscono in licenziamento',
+    ogDescription: 'In Ticino, il 51% delle assenze per cause psichiche termina con lo scioglimento del contratto. La quota di beneficiari AI per motivi psichiatrici è salita al 51% dal 33% di vent\'anni fa. Scopri i dati e le soluzioni.',
+    canonicalPath: '/articoli-frontaliere/assenteismo-psichico-ticino-51',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Assenze psichiche in Ticino: 51% finiscono in licenziamento",
+      "description": "In Ticino, il 51% delle assenze per cause psichiche termina con lo scioglimento del contratto. La quota di beneficiari AI per motivi psichiatrici è salita",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/assenteismo-psichico-ticino-51.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ambiente di lavoro sereno in Ticino, focus sulla salute mentale e integrazione"
+      },
+      "datePublished": "2026-09-18T03:45:59+00:00",
+      "dateModified": "2026-09-18T03:45:59+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/assenteismo-psichico-ticino-51/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

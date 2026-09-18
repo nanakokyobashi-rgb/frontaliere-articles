@@ -35274,6 +35274,15 @@ const RAW_ARTICLES = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'assenteismo-psichico-ticino-51',
+ category: 'pratico',
+ date: '2026-09-18T03:45:59.021Z',
+ image: '/images/blog/assenteismo-psichico-ticino-51.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

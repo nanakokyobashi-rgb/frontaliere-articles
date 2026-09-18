@@ -11830,6 +11830,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.sospensione-treni-luino-porto.title': 'Suspensions trains entre Luino et Porto Valtravaglia',
     'blog.article.sospensione-treni-luino-porto.excerpt': 'Interventions infrastructurelles de RFI : arrêt des trains régionaux entre Luino et Porto Valtravaglia de 9h02 à 14h02 certains jours entre septembre et octobre 2026.',
     'blog.article.sospensione-treni-luino-porto.imageAlt': 'Train regional sur la ligne entre Luino et Porto Valtravaglia',
+    'blog.article.assenteismo-psichico-ticino-51.title': 'Absences psychiques au Tessin : 51 % finissent par être licenciés',
+    'blog.article.assenteismo-psichico-ticino-51.excerpt': 'Au Tessin, 51 % des absences pour raisons psychiques entraînent la résiliation du contrat. La part des bénéficiaires AI pour raisons psychiatriques est passée à 51 %.',
+    'blog.article.assenteismo-psichico-ticino-51.imageAlt': 'Environnement de travail calme au Tessin, focus sur la santé mentale',
 };
 
 export default blogMetaFr;

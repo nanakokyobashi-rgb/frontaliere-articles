@@ -11828,6 +11828,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.sospensione-treni-luino-porto.title': 'Train suspensions between Luino and Porto Valtravaglia',
     'blog.article.sospensione-treni-luino-porto.excerpt': 'RFI infrastructure interventions: stop regional trains between Luino and Porto Valtravaglia from 9.02 to 14.02 on specific days between September and October 2026.',
     'blog.article.sospensione-treni-luino-porto.imageAlt': 'Regional train on the line between Luino and Porto Valtravaglia',
+    'blog.article.assenteismo-psichico-ticino-51.title': 'Psychic absences in Ticino: 51% end up in dismissal',
+    'blog.article.assenteismo-psichico-ticino-51.excerpt': 'In Ticino, 51% of absences due to mental causes lead to the dissolution of the contract. The share of AI beneficiaries for psychiatric reasons rose to 51%.',
+    'blog.article.assenteismo-psichico-ticino-51.imageAlt': 'Calm work environment in Ticino, focus on mental health and integration',
 };
 
 export default blogMetaEn;
