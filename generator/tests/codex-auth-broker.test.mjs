@@ -33,6 +33,17 @@ function waitForSocket(socketPath, child, timeoutMs = 5000) {
   });
 }
 
+function openRequest(socketPath, payload) {
+  return new Promise((resolve, reject) => {
+    const client = net.createConnection(socketPath);
+    client.once('error', reject);
+    client.once('connect', () => {
+      client.write(`${JSON.stringify(payload)}\n`);
+      resolve(client);
+    });
+  });
+}
+
 function request(socketPath, payload) {
   return new Promise((resolve, reject) => {
     let response = '';
@@ -197,6 +208,86 @@ process.stdin.on('end', () => fs.writeFileSync(output, JSON.stringify({ prompt }
     const cleaned = await request(socketPath, { op: 'cleanup' });
     assert.deepEqual(cleaned, { ok: true, cleaned: true });
     assert.equal(await waitForExit(broker), 0);
+  } finally {
+    if (broker.exitCode === null) broker.kill('SIGTERM');
+    await waitForExit(broker).catch(() => {});
+    fs.rmSync(brokerDir, { recursive: true, force: true });
+    fs.rmSync(cliPrefix, { recursive: true, force: true });
+  }
+});
+
+test('una richiesta cancellata prima dell esecuzione non consuma la quota', async () => {
+  const brokerDir = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-broker-cancel-test.'));
+  const cliPrefix = fs.mkdtempSync(path.join(os.tmpdir(), 'claude-haiku-codex-cli.'));
+  const socketPath = path.join(brokerDir, 'auth.sock');
+  const cliPath = path.join(cliPrefix, 'codex');
+  const fakeCli = `#!/usr/bin/env node
+import fs from 'node:fs';
+const args = process.argv.slice(2);
+if (args.includes('--version')) { console.log('codex 0.153.4'); process.exit(0); }
+const output = args[args.indexOf('--output-last-message') + 1];
+if (!output) process.exit(2);
+await new Promise((resolve) => setTimeout(resolve, 400));
+let prompt = '';
+process.stdin.setEncoding('utf8');
+process.stdin.on('data', (chunk) => { prompt += chunk; });
+process.stdin.on('end', () => fs.writeFileSync(output, JSON.stringify({ prompt }), 'utf8'));
+`;
+  fs.writeFileSync(cliPath, fakeCli, { mode: 0o700 });
+  fs.chmodSync(cliPath, 0o700);
+  const cliSha256 = crypto.createHash('sha256').update(fs.readFileSync(cliPath)).digest('hex');
+  const broker = spawn(process.execPath, [
+    BROKER,
+    '--socket', socketPath,
+    '--ttl-ms', '60000',
+    '--max-requests', '2',
+    '--codex-bin', cliPath,
+    '--codex-realpath', cliPath,
+    '--codex-sha256', cliSha256,
+    '--codex-prefix', cliPrefix,
+  ], {
+    cwd: ROOT,
+    stdio: ['pipe', 'ignore', 'pipe'],
+  });
+  let stderr = '';
+  broker.stderr.setEncoding('utf8');
+  broker.stderr.on('data', (chunk) => { stderr += chunk; });
+  broker.stdin.end('{"access_token":"test"}');
+
+  try {
+    await waitForSocket(socketPath, broker);
+    const firstHold = openRequest(socketPath, { op: 'exec', prompt: 'first', timeoutMs: 5000 });
+    await delay(40);
+    const cancelled = await openRequest(socketPath, { op: 'exec', prompt: 'cancelled', timeoutMs: 5000 });
+    await delay(40);
+    cancelled.destroy();
+    await delay(40);
+    const [first, replacement] = await Promise.all([
+      firstHold.then((client) => new Promise((resolve, reject) => {
+        let response = '';
+        client.setEncoding('utf8');
+        client.on('data', (chunk) => {
+          response += chunk;
+          if (response.startsWith('\0')) response = response.slice(1);
+          const newline = response.indexOf('\n');
+          if (newline < 0) return;
+          try {
+            resolve(JSON.parse(response.slice(0, newline)));
+          } catch (error) {
+            reject(error);
+          }
+        });
+        client.on('error', reject);
+      })),
+      request(socketPath, { op: 'exec', prompt: 'replacement', timeoutMs: 5000 }),
+    ]);
+    assert.equal(first.ok, true, stderr);
+    assert.equal(replacement.ok, true, stderr);
+    const exhausted = await request(socketPath, { op: 'exec', prompt: 'fourth', timeoutMs: 5000 });
+    assert.deepEqual(exhausted, { ok: false, error: 'request limit exhausted' });
+    const cleaned = await request(socketPath, { op: 'cleanup' });
+    assert.deepEqual(cleaned, { ok: true, cleaned: true });
+    assert.equal(await waitForExit(broker), 0, stderr);
   } finally {
     if (broker.exitCode === null) broker.kill('SIGTERM');
     await waitForExit(broker).catch(() => {});
