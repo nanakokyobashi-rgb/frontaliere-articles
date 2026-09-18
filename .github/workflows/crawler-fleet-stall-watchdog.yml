@@ -1,0 +1,111 @@
+name: Crawler fleet stall watchdog
+
+# Apre una issue quando la flotta crawler gira VERDE e non consegna dati.
+#
+# Il razionale completo, la misura che ha scelto la soglia e perché la soglia
+# ovvia non funziona stanno in `scripts/ci/scan-crawler-fleet-stall.mjs`. In
+# breve: i 23 `crawler-group-NN.yml` scrivono la raccolta nel repo SITO, e
+# quando il commit non atterra la run NON diventa rossa — il percorso di commit
+# classifica il lease occupato e la contesa sul ref come "systemic class", esce
+# 0 con un `::warning::` e non stage niente.
+#
+# `workflow-failure-issues.yml` non può quindi vederla, perché filtra su
+# `conclusion == failure`, e nemmeno deve: non è un fallimento. È la stessa
+# forma del guasto che `generation-health-watchdog.yml` intercetta per la
+# generazione articoli — «ROTTA MA VERDE», dove il difetto non è nel singolo run
+# ma nella SERIE, e nessuno step dentro un run ha il denominatore per vederlo.
+#
+# Quel pattern non era mai stato puntato sulla flotta crawler. Misurato il
+# 2026-09-18: 124 ore con 15 gruppi su 23 a zero commit, run verdi, zero issue.
+# Una run con 27 membri su 27 riusciti (35351794322) ha scartato l'intera
+# raccolta perché il lease globale era occupato.
+#
+# ── Cadenza, e perché questa ────────────────────────────────────────────────
+# :26, ogni due ore.
+#
+# · Il minuto. I due repo colpiscono la STESSA quota API GitHub, quindi il cron
+#   va tenuto lontano da quelli del sito (:15/:17/:20/:23) e da quelli già
+#   occupati qui (:09/:39 per workflow-failure-issues, :44 per
+#   generation-health, :33 per lockstep-stall, :31 7 per loop-drift).
+# · La frequenza. Le ondate dei crawler sono 1-2 al giorno e la finestra di
+#   copertura è di 24 ore: un controllo più fitto riproporrebbe lo stesso
+#   verdetto senza aggiungere informazione. Due ore bastano perché l'allarme
+#   arrivi entro un'ondata dal guasto, invece delle 124 ore misurate.
+#
+# Zero Claude: è tutto deterministico. Il costo di quota Claude è nullo.
+
+on:
+  schedule:
+    - cron: '26 */2 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Stampa il verdetto senza aprire niente'
+        required: false
+        type: boolean
+        default: false
+      stall_hours:
+        description: 'Ore senza NESSUNA consegna che fanno scattare hard-stop (default 6)'
+        required: false
+        default: ''
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: crawler-fleet-stall-watchdog
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      # Nessun `npm ci`: lo scanner e github-issue-creator usano solo builtin.
+
+      - name: Prepare Firebase credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$FIREBASE_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > /tmp/firebase-sa.json
+            echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/firebase-sa.json" >> "$GITHUB_ENV"
+          fi
+
+      - name: Load secrets from Remote Config
+        continue-on-error: true
+        run: node generator/scripts/load-rc-env.mjs
+
+      # La storia dei commit da leggere è quella del SITO, non di questo repo:
+      # il GITHUB_TOKEN di qui non la vede, serve il PAT. Senza, lo scanner
+      # non riesce a leggere e per costruzione NON suona (fail-open), dicendolo
+      # nel log — non apre un falso allarme.
+      - name: Scan crawler fleet delivery
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          SITE_REPO: valerielinc-ops/frontaliere-si-o-no
+        run: |
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          export GH_TOKEN="${runtime_pat:-$GH_TOKEN}"
+          ARGS=()
+          if [ -n "${{ github.event.inputs.stall_hours }}" ]; then
+            ARGS+=(--stall-hours "${{ github.event.inputs.stall_hours }}")
+          fi
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then ARGS+=(--dry-run); fi
+          node scripts/ci/scan-crawler-fleet-stall.mjs ${ARGS[@]+"${ARGS[@]}"}
+
+      - name: Cleanup Firebase credentials
+        if: always()
+        run: rm -f /tmp/firebase-sa.json
