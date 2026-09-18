@@ -762,11 +762,12 @@
     },
     {
       "path": "scripts/ci/mark-claude-terminal-outcome.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "Dedup CAP_HIT_AFTER_DELIVERY e lettura del verdetto vigente importano `lastLabelEventAt` e `latestFixOutcomeEntryFromComments` da `followup-drainer.mjs`, che qui è `adapted` (#925/#1011, follow-up #1084). Il gemello sito (baseline e605a5b7b6996af5, 11025 byte) non ha quel ramo: restare `identical` lo farebbe sovrascrivere al primo `site-ahead`. Non è un mirror byte-identico.",
       "baseline": {
         "site": "e605a5b7b6996af5",
-        "corpus": "e605a5b7b6996af5",
-        "alignedAt": "2026-09-05"
+        "corpus": "fa37b5e14d8d11f3",
+        "alignedAt": "2026-09-18"
       }
     },
     {

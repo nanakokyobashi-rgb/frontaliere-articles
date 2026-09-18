@@ -37,6 +37,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
@@ -50,6 +51,9 @@ import {
   blockingPairsFromAudit,
   criticalCodes,
   guardTranslatedKeyFacts,
+  parseSlugList,
+  selectBlockingPairs,
+  rewriteExistingLocaleBody,
 } from '../scripts/retranslate-blocking-bodies.mjs';
 // Dal modulo corpus-only, NON da `lib/article-sanitizers.mjs`: quello e'
 // `identical` nel manifest del ciclo e un export aggiunto dal corpus lo
@@ -165,8 +169,8 @@ test('la guardia dei fatti chiave sta prima del gate e della scrittura atomica',
   );
   const guard = source.indexOf('guardTranslatedKeyFacts(newSections)');
   const gate = source.indexOf('runFactualityGates({ sections: checkedSections');
-  const filteredWrite = source.indexOf('replaceBodyField(trSrc, pair.id, f, checkedSections[f])');
-  const write = source.indexOf('writeAtomic(trPath, trSrc)');
+  const filteredWrite = source.indexOf('rewriteExistingLocaleBody(trSrc, pair.id, checkedSections)');
+  const write = source.indexOf('writeAtomic(trPath, rewritten.src)');
   assert.ok(guard >= 0 && guard < gate, 'la factuality gate deve ricevere il payload gia\' guardato');
   assert.ok(gate < filteredWrite && filteredWrite < write, 'la scrittura deve persistere il payload gia\' guardato dopo tutti i gate');
 });
@@ -620,4 +624,125 @@ test('il rifiuto di lingua non scrive, il fallimento del motore tiene il fallbac
     'processArticle: il fallback italiano sul fallimento del motore non va rimosso qui');
   assert.match(bodies.processTopUp, /insertFaqIntoBodyFile\(localePath, articleId, validMerged\)/,
     'processTopUp: il fallback italiano sul fallimento del motore non va rimosso qui');
+});
+
+// ── Entry point in-place per uno slug arbitrario, italiano compreso (#1084) ─
+//
+// `registerArticleFiles()` resta append-only: questo script riscrive i body
+// gia' registrati. Fino a qui l'italiano veniva droppato in silenzio anche con
+// `--locale it`, e non c'era un `--slug` per mirare un id senza l'audit intero.
+
+test('parseSlugList spezza, trimma e ignora i vuoti', () => {
+  assert.deepEqual(parseSlugList('a, b ,c'), ['a', 'b', 'c']);
+  assert.deepEqual(parseSlugList(''), []);
+  assert.deepEqual(parseSlugList(null), []);
+});
+
+test('selectBlockingPairs include it solo se richiesto, e filtra per slug', () => {
+  const pairs = [
+    { id: 'alpha', locale: 'it', codes: ['leaked-prompt-scaffolding'] },
+    { id: 'alpha', locale: 'en', codes: ['truncated-bold'] },
+    { id: 'beta', locale: 'de', codes: ['translation-false-friend'] },
+  ];
+  assert.deepEqual(
+    selectBlockingPairs(pairs, { locales: ['en', 'de', 'fr'] }).map((p) => `${p.locale}/${p.id}`),
+    ['en/alpha', 'de/beta'],
+    'il default en,de,fr continua a escludere l\'italiano',
+  );
+  assert.deepEqual(
+    selectBlockingPairs(pairs, { locales: ['it'] }).map((p) => `${p.locale}/${p.id}`),
+    ['it/alpha'],
+    '--locale it non deve droppare l\'italiano',
+  );
+  assert.deepEqual(
+    selectBlockingPairs(pairs, { locales: ['it', 'en'], slugs: ['alpha'] }).map((p) => `${p.locale}/${p.id}`),
+    ['it/alpha', 'en/alpha'],
+    '--slug mira l\'id, non il primo della lista',
+  );
+});
+
+test('rewriteExistingLocaleBody riscrive i campi senza toccare le altre chiavi', () => {
+  const src = fileFor('slug-arbitrario', { body1: 'uno', body2: 'due', body3: 'tre' });
+  const out = rewriteExistingLocaleBody(src, 'slug-arbitrario', { body2: "l'articolo nuovo" });
+  assert.equal(out.missing, null);
+  assert.equal(readBodyField(out.src, 'slug-arbitrario', 'body1'), 'uno');
+  assert.equal(readBodyField(out.src, 'slug-arbitrario', 'body2'), "l'articolo nuovo");
+  assert.equal(readBodyField(out.src, 'slug-arbitrario', 'body3'), 'tre');
+  assert.equal(rewriteExistingLocaleBody(src, 'slug-arbitrario', { body9: 'x' }).missing, 'body9');
+});
+
+test('lo script non importa registerArticleFiles: la riscrittura resta in-place', () => {
+  const src = fs.readFileSync(
+    new URL('../scripts/retranslate-blocking-bodies.mjs', import.meta.url),
+    'utf8',
+  );
+  assert.doesNotMatch(src, /^import .*registerArticleFiles/m,
+    'un import del registrar append-only romperebbe la riscrittura di uno slug esistente');
+  assert.doesNotMatch(src, /from ['"].*create-article/,
+    'create-article.mjs esegue main() all\'import: non deve entrare in questo script');
+  assert.match(src, /rewriteExistingLocaleBody/,
+    'la scrittura deve passare dalla funzione in-place, non da un writeFile diretto');
+  assert.doesNotMatch(src, /p\.locale !== 'it'/,
+    'il drop silenzioso dell\'italiano e\' il buco: --locale it deve poterlo selezionare');
+});
+
+test('--locale it e --slug trattano la coppia italiana invece di dropparla', () => {
+  const script = fileURLToPath(new URL('../scripts/retranslate-blocking-bodies.mjs', import.meta.url));
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'retranslate-slug-'));
+  try {
+    const bodyDir = path.join(tmp, 'content', 'blog-body');
+    for (const loc of ['it', 'en']) {
+      fs.mkdirSync(path.join(bodyDir, loc), { recursive: true });
+      fs.writeFileSync(
+        path.join(bodyDir, loc, 'slug-arbitrario.ts'),
+        fileFor('slug-arbitrario', {
+          body1: loc === 'it' ? IT_LONG : EN_LONG,
+          body2: loc === 'it' ? IT_LONG : EN_LONG,
+          body3: loc === 'it' ? IT_LONG : EN_LONG,
+        }),
+      );
+    }
+    const audit = path.join(tmp, 'audit.json');
+    fs.writeFileSync(audit, JSON.stringify({
+      findings: [
+        {
+          id: 'slug-arbitrario',
+          locale: 'it',
+          dir: 'services/locales/blog-body',
+          criticalCount: 1,
+          issues: [{ severity: 'critical', code: 'leaked-prompt-scaffolding' }],
+        },
+        {
+          id: 'slug-arbitrario',
+          locale: 'en',
+          dir: 'services/locales/blog-body',
+          criticalCount: 1,
+          issues: [{ severity: 'critical', code: 'truncated-bold' }],
+        },
+      ],
+    }));
+
+    const dropped = spawnSync(process.execPath, [
+      script, '--audit', audit, '--content-root', tmp, '--json',
+      '--code', 'leaked-prompt-scaffolding',
+    ], { encoding: 'utf8' });
+    assert.equal(dropped.status, 0, dropped.stderr);
+    const droppedReport = JSON.parse(dropped.stdout);
+    assert.equal(droppedReport.results.length, 0,
+      'senza --locale it il default en,de,fr continua a escludere l\'italiano');
+
+    const itRun = spawnSync(process.execPath, [
+      script, '--audit', audit, '--content-root', tmp, '--locale', 'it',
+      '--slug', 'slug-arbitrario', '--json',
+    ], { encoding: 'utf8' });
+    assert.equal(itRun.status, 0, itRun.stderr);
+    const itReport = JSON.parse(itRun.stdout);
+    assert.equal(itReport.results.length, 1);
+    assert.equal(itReport.results[0].id, 'slug-arbitrario');
+    assert.equal(itReport.results[0].locale, 'it');
+    assert.equal(itReport.results[0].written, false,
+      'dry-run: l\'italiano passa da shouldWrite, non da registerArticleFiles');
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
 });

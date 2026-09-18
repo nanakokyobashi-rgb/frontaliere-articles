@@ -66,10 +66,16 @@
  *   ...--audit a.json --apply                                      # scrive
  *
  * Flag:
- *   --audit <file>     JSON di audit-article-factuality.mjs --json (richiesto)
+ *   --audit <file>     JSON di audit-article-factuality.mjs --json
+ *                      (richiesto, salvo --slug)
+ *   --slug a,b         id articolo (slug) da trattare. Con --audit filtra;
+ *                      senza, sintetizza le coppie dai file gia' in content/.
+ *                      E' l'entry point in-place per uno slug arbitrario,
+ *                      italiano compreso: non passa da registerArticleFiles().
  *   --apply            scrive davvero. SENZA questo flag e' un dry-run.
  *   --limit N          massimo di coppie trattate
- *   --locale a,b       filtra le coppie per locale (default en,de,fr)
+ *   --locale a,b       filtra le coppie per locale (default en,de,fr).
+ *                      `it` e' opt-in: e' il sorgente, non una traduzione.
  *   --code <code>      filtra per codice bloccante (stratificazione del pilota)
  *   --stratify         una fetta per ogni codice, fino a --limit complessivo
  *   --concurrency N    articoli in parallelo (default 2, gentile coi motori)
@@ -378,6 +384,63 @@ export function blockingPairsFromAudit(audit) {
     }));
 }
 
+/** Id articolo da `--slug a,b`. Vuoto se il flag manca o e' una stringa vuota. */
+export function parseSlugList(raw) {
+  if (raw == null || raw === '') return [];
+  return String(raw).split(',').map((s) => s.trim()).filter(Boolean);
+}
+
+/**
+ * Filtra le coppie per locale e slug. `it` entra SOLO se e' nella lista
+ * locali: il default resta en,de,fr, ma `--locale it` non lo droppa piu'
+ * in silenzio (follow-up #1084: nessun entry point rigenerava un italiano
+ * esistente). Non chiama `registerArticleFiles()`: la scrittura resta
+ * `replaceBodyField` + `writeAtomic` sul file gia' registrato.
+ */
+export function selectBlockingPairs(pairs, { locales, slugs } = {}) {
+  const localeSet = new Set(Array.isArray(locales) ? locales : []);
+  const slugSet = Array.isArray(slugs) && slugs.length > 0 ? new Set(slugs) : null;
+  return (Array.isArray(pairs) ? pairs : []).filter((p) => {
+    if (!localeSet.has(p.locale)) return false;
+    if (slugSet && !slugSet.has(p.id)) return false;
+    return true;
+  });
+}
+
+/**
+ * Sintetizza le coppie dai body gia' in `content/` per uno slug arbitrario.
+ * Serve quando non c'e' un audit: e' il percorso in-place generalizzato
+ * oltre i tre evergreen a id fisso, senza toccare il registrar append-only.
+ */
+export function pairsForSlugs(slugs, locales, contentRoot) {
+  const out = [];
+  for (const id of Array.isArray(slugs) ? slugs : []) {
+    if (!id) continue;
+    for (const locale of Array.isArray(locales) ? locales : []) {
+      for (const [dir, realDir] of Object.entries(DIR_TO_REAL)) {
+        const file = resolve(contentRoot, realDir, locale, `${id}.ts`);
+        if (existsSync(file)) out.push({ id, locale, dir, codes: ['in-place'] });
+      }
+    }
+  }
+  return out;
+}
+
+/**
+ * Riscrive i campi body di un file locale GIA' registrato. Non crea id
+ * nuovi e non chiama `registerArticleFiles()` (append-only). `null` su
+ * una chiave assente: meglio saltare che riscrivere a meta'.
+ */
+export function rewriteExistingLocaleBody(src, id, sections) {
+  let next = src;
+  for (const [field, value] of Object.entries(sections || {})) {
+    const rewritten = replaceBodyField(next, id, field, value);
+    if (rewritten === null) return { src: next, missing: field };
+    next = rewritten;
+  }
+  return { src: next, missing: null };
+}
+
 /**
  * Sceglie il campione del pilota: una fetta per ciascun codice presente, a
  * turno, finche' non si raggiunge `limit`. Round-robin invece di "i primi N"
@@ -416,8 +479,9 @@ const has = (name) => argv.includes(`--${name}`);
 
 async function main() {
   const auditPath = flag('audit');
-  if (!auditPath) {
-    console.error('❌ --audit <file.json> è richiesto (output di audit-article-factuality.mjs --json).');
+  const SLUGS = parseSlugList(flag('slug'));
+  if (!auditPath && SLUGS.length === 0) {
+    console.error('❌ --audit <file.json> oppure --slug <id> è richiesto.');
     process.exit(2);
   }
   const APPLY = has('apply');
@@ -455,12 +519,22 @@ async function main() {
     process.exit(2);
   }
 
-  const audit = JSON.parse(readFileSync(auditPath, 'utf8'));
-  let pairs = blockingPairsFromAudit(audit)
-    // L'italiano è il sorgente, non una traduzione: ri-tradurlo non ha senso e
-    // rigenerarlo è un'altra operazione (che oggi nessun entry point espone).
-    .filter((p) => p.locale !== 'it' && LOCALES.includes(p.locale))
-    .filter((p) => !CODE || p.codes.includes(CODE));
+  let pairs;
+  if (auditPath) {
+    const audit = JSON.parse(readFileSync(auditPath, 'utf8'));
+    pairs = selectBlockingPairs(blockingPairsFromAudit(audit), {
+      locales: LOCALES,
+      slugs: SLUGS,
+    });
+  } else {
+    // Senza audit lo slug e' l'unica chiave: riscrittura in-place di un
+    // articolo gia' registrato, italiano compreso. Nessun id nuovo.
+    pairs = selectBlockingPairs(pairsForSlugs(SLUGS, LOCALES, CONTENT_ROOT), {
+      locales: LOCALES,
+      slugs: SLUGS,
+    });
+  }
+  pairs = pairs.filter((p) => !CODE || p.codes.includes(CODE));
 
   pairs = has('stratify') && LIMIT !== Infinity ? stratify(pairs, LIMIT) : pairs.slice(0, LIMIT);
 
@@ -501,30 +575,47 @@ async function processPair(pair, { CONTENT_ROOT, APPLY }) {
     return { ...base, written: false, reason: 'italiano-illeggibile' };
   }
 
+  const isSourceLocale = pair.locale === 'it';
   const oldSections = {};
-  for (const f of BODY_FIELDS) {
-    const v = readBodyField(trSrc, pair.id, f);
-    if (v) oldSections[f] = v;
+  if (isSourceLocale) {
+    Object.assign(oldSections, italianSections);
+  } else {
+    for (const f of BODY_FIELDS) {
+      const v = readBodyField(trSrc, pair.id, f);
+      if (v) oldSections[f] = v;
+    }
   }
   const oldCodes = criticalCodes(runFactualityGates({ sections: oldSections, locale: pair.locale, italianSections }));
 
-  // Ri-traduzione: OGNI carattere qui esce dalla cascata MT, mai da una regex.
   const newSections = {};
   let missingField = null;
-  for (const f of Object.keys(italianSections)) {
-    const out = await translateFieldFreeMt({
-      text: italianSections[f],
-      sourceLang: 'it',
-      targetLang: pair.locale,
-      fieldType: 'description',
-      translate: freeTranslateWithRetry,
-      balanceMarkdown: balanceMarkdownMarkers,
-    });
-    if (!out) { missingField = f; break; }
-    // Stesso post-processing del percorso di produzione (`create-article.mjs`
-    // lo applica alla stessa identica uscita di `translateFieldFreeMt`): la
-    // cascata e' la stessa, e da qui in poi lo e' anche cio' che le succede.
-    newSections[f] = sanitizeBodyText(out);
+  if (isSourceLocale) {
+    // L'italiano e' il sorgente: ri-tradurlo non ha senso. Si riscrive IN
+    // PLACE sullo stesso file, con lo stesso `shouldWrite` della bonifica
+    // dei locale, senza `registerArticleFiles()` (append-only). Il contenuto
+    // nuovo e' il body esistente passato da `sanitizeBodyText` — la stessa
+    // sanificazione del percorso di produzione. Una rigenerazione editoriale
+    // (scaffolding, istituzioni fabbricate) resta un'altra operazione.
+    for (const f of Object.keys(italianSections)) {
+      newSections[f] = sanitizeBodyText(italianSections[f]);
+    }
+  } else {
+    // Ri-traduzione: OGNI carattere qui esce dalla cascata MT, mai da una regex.
+    for (const f of Object.keys(italianSections)) {
+      const out = await translateFieldFreeMt({
+        text: italianSections[f],
+        sourceLang: 'it',
+        targetLang: pair.locale,
+        fieldType: 'description',
+        translate: freeTranslateWithRetry,
+        balanceMarkdown: balanceMarkdownMarkers,
+      });
+      if (!out) { missingField = f; break; }
+      // Stesso post-processing del percorso di produzione (`create-article.mjs`
+      // lo applica alla stessa identica uscita di `translateFieldFreeMt`): la
+      // cascata e' la stessa, e da qui in poi lo e' anche cio' che le succede.
+      newSections[f] = sanitizeBodyText(out);
+    }
   }
 
   // La guardia dei fatti chiave deve precedere factuality e writeAtomic: il
@@ -538,7 +629,7 @@ async function processPair(pair, { CONTENT_ROOT, APPLY }) {
     ? []
     : criticalCodes(runFactualityGates({ sections: checkedSections, locale: pair.locale, italianSections }));
 
-  const sanity = missingField
+  const sanity = missingField || isSourceLocale
     ? null
     : translationSanityIssue({ oldSections, newSections: checkedSections, italianSections, locale: pair.locale });
   const verdict = shouldWrite({
@@ -551,12 +642,9 @@ async function processPair(pair, { CONTENT_ROOT, APPLY }) {
   const row = { ...base, oldCodes, newCodes, missingField, written: false, reason: verdict.reason };
   if (!verdict.write || !APPLY) return row;
 
-  for (const f of Object.keys(newSections)) {
-    const next = replaceBodyField(trSrc, pair.id, f, checkedSections[f]);
-    if (next === null) return { ...row, reason: `chiave-assente: ${f}` };
-    trSrc = next;
-  }
-  writeAtomic(trPath, trSrc);
+  const rewritten = rewriteExistingLocaleBody(trSrc, pair.id, checkedSections);
+  if (rewritten.missing) return { ...row, reason: `chiave-assente: ${rewritten.missing}` };
+  writeAtomic(trPath, rewritten.src);
   return { ...row, written: true };
 }
 
