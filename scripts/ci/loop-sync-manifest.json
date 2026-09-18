@@ -3542,7 +3542,7 @@
       "reason": "Watchdog corpus-only della coda translate: censisce active/pending con sole GET bounded, separa la copertura storica troncabile e segnala il queue SLO. La preservazione rerun schedule e provata da workflow 347680591, run 33550046319, artifact 9817045831, schema v1 e token hash sha256:8f28835373c43bd2c90b532bd294eba56d827e64b979fb38a8924e898fca0c91; il recovery resta manuale per policy e il rerun autorizzato e protetto da claim/successor guard live.",
       "baseline": {
         "site": null,
-        "corpus": "d092a06da2a6fc64",
+        "corpus": "ed41aff4b30a5242",
         "alignedAt": "2026-09-01"
       }
     },
@@ -3552,7 +3552,7 @@
       "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata ma recovery blocked per policy, target dedupe e successor guard.",
       "baseline": {
         "site": null,
-        "corpus": "f35402c81161f48d",
+        "corpus": "59c461861be4c3f8",
         "alignedAt": "2026-09-01"
       }
     },
@@ -3562,7 +3562,7 @@
       "reason": "Contratto Node deterministico corpus-only per watchdog e workflow translate: copre censimento corrente indipendente da oltre 200 run storiche, discovery troncata, budget, prova schedule redatta e assenza by construction di scritture remote.",
       "baseline": {
         "site": null,
-        "corpus": "cf3f1a8f39372593",
+        "corpus": "d32bb58e82e13a47",
         "alignedAt": "2026-09-01"
       }
     },

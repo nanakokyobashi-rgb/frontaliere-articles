@@ -27,7 +27,26 @@ export const MAX_GET_REQUESTS = MAX_TOTAL_GET_REQUESTS - BOOTSTRAP_GET_REQUESTS;
 export const MAX_SAMPLE_RUN_IDS = 5;
 export const MAX_RESPONSE_BYTES = 4 * 1024 * 1024;
 export const MAX_REPORT_BYTES = 16 * 1024;
-export const DEFAULT_QUEUE_STALE_THRESHOLD_SECONDS = 30 * 60;
+// La coda translate e' un mutex a slot singolo: translate-pending.yml usa
+// `concurrency: jobs-data-pipeline` con `cancel-in-progress: false` e dichiara
+// `timeout-minutes: 350`. Un run pending attende quindi per costruzione il
+// detentore corrente: "pending da ore" e' lo stato NORMALE della coda, non un
+// guasto. Distribuzione misurata il 2026-09-18 su questo repo:
+//   - run 35313063351: attesa 322 min, esecuzione 265 min, conclusione success;
+//   - run 35327548227: creata 09:03:37Z, job avviato 15:48:01Z (attesa 404 min),
+//     subentrata 4 s dopo la fine della precedente: lo slot non resta idle;
+//   - wall clock createdAt->updatedAt su 15 run: min 359, mediana 567, max 869 min;
+//   - 17 arrivi in 49,5 h (5 cron al giorno piu' i dispatch) contro ~4,4 h di
+//     servizio per run: la coda e' satura per progetto, non per incidente.
+// Con la vecchia soglia unica di 1800 s il watchdog e' risultato rosso in 15
+// delle ultime 16 run schedulate senza che nulla fosse rotto (rosso continuo
+// per 52,5 h): misurava l'occupazione del mutex, non un guasto. Restano vere
+// solo due condizioni:
+//   - nessun detentore attivo e la coda non parte comunque oltre il timeout del
+//     target (350 min) piu' margine: non e' contesa, e' una coda bloccata;
+//   - detentore presente ma la linea non avanza in una giornata intera.
+export const QUEUE_UNSERVED_STALE_THRESHOLD_SECONDS = 6 * 60 * 60;
+export const QUEUE_SERVED_STALE_THRESHOLD_SECONDS = 24 * 60 * 60;
 
 const API_ROOT = 'https://api.github.com';
 const REQUEST_TIMEOUT_MS = 8_000;
@@ -498,27 +517,32 @@ function buildReport(state, client) {
   const oldestPendingAgeSeconds = oldestPendingMs === null
     ? null
     : Math.max(0, Math.floor((state.nowMs - oldestPendingMs) / 1000));
+  // Con un detentore attivo l'attesa e' contesa lecita sul mutex; senza
+  // detentore la coda non sta partendo, ed e' quello il guasto osservabile.
+  const thresholdSeconds = state.activeRunIds.length > 0
+    ? QUEUE_SERVED_STALE_THRESHOLD_SECONDS
+    : QUEUE_UNSERVED_STALE_THRESHOLD_SECONDS;
   const queueSlo = !state.complete
     ? {
       alert: false,
       oldestPendingAgeSeconds,
       state: 'not_evaluable',
-      thresholdSeconds: DEFAULT_QUEUE_STALE_THRESHOLD_SECONDS,
+      thresholdSeconds,
     }
     : oldestPendingMs === null
       ? {
         alert: false,
         oldestPendingAgeSeconds: null,
         state: 'empty',
-        thresholdSeconds: DEFAULT_QUEUE_STALE_THRESHOLD_SECONDS,
+        thresholdSeconds,
       }
       : {
-        alert: oldestPendingAgeSeconds >= DEFAULT_QUEUE_STALE_THRESHOLD_SECONDS,
+        alert: oldestPendingAgeSeconds >= thresholdSeconds,
         oldestPendingAgeSeconds,
-        state: oldestPendingAgeSeconds >= DEFAULT_QUEUE_STALE_THRESHOLD_SECONDS
+        state: oldestPendingAgeSeconds >= thresholdSeconds
           ? 'breached'
           : 'within_slo',
-        thresholdSeconds: DEFAULT_QUEUE_STALE_THRESHOLD_SECONDS,
+        thresholdSeconds,
       };
   if (queueSlo.state === 'breached') addReason(state, 'queue_slo_breached');
   const nonEmptySamples = Object.fromEntries(
@@ -561,7 +585,7 @@ function buildReport(state, client) {
       oldestPendingAgeSeconds,
       oldestPendingCreatedAt: oldestPendingMs === null ? null : new Date(oldestPendingMs).toISOString(),
       slo: queueSlo,
-      staleThreshold: DEFAULT_QUEUE_STALE_THRESHOLD_SECONDS,
+      staleThreshold: thresholdSeconds,
     },
     reasonCodes: REASON_CODES.filter((code) => state.reasons.counts[code] > 0),
     samples: nonEmptySamples,

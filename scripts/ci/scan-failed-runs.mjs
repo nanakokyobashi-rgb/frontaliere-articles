@@ -140,6 +140,35 @@ const IGNORE = parseIgnoreList(process.env.IGNORE_WORKFLOWS);
  */
 const PR_GATE_WORKFLOWS = new Set(['tests', 'Generator CI']);
 
+// Workflow di SORVEGLIANZA della pipeline: il loro rosso E' l'allarme, non il
+// rumore transiente per cui esiste il gate di ricorrenza. Tenerli nel gate li
+// rende invisibili, ed e' misurato: il watchdog della coda translate e' stato
+// rosso per 12 run consecutive (52,5 h) senza aprire nessuna issue. Lo
+// scanner lo aveva visto una volta sola, e la riga del gate era
+// `failure 1/3 ... → low-priority breadcrumb` nel ledger #25 (un solo commento
+// per questa chiave). Con meno di 3 avvistamenti nella finestra di 48 h
+// l'ordinale non arriva mai a 3/3, quindi il gate qui non rimanda
+// l'escalation: la sopprime per sempre.
+// I nomi sono legati ai `name:` reali degli YAML da
+// `generator/tests/scan-failed-runs-filter.test.mjs`: una rinomina del workflow
+// senza aggiornare questa lista la renderebbe muta in silenzio.
+export const ALWAYS_ESCALATE_WORKFLOWS = new Set([
+  'Translate Queue Recovery Watchdog (observe only)',
+  'Translate Pending Jobs (sparse cross-repo execution)',
+  'Generation health watchdog',
+  'Lockstep stall watchdog',
+  'GH_PAT Expiry Monitor',
+  'Close Recovered Failure Issues',
+  // Se muore il reporter, non resta nessuno a segnalare gli altri.
+  'Workflow failure → issue',
+]);
+
+/** `-1` disattiva il gate di ricorrenza: prima issue vera al primo rosso. */
+export function gateForWorkflow(name, { lost = false, gate = undefined } = {}) {
+  if (lost || ALWAYS_ESCALATE_WORKFLOWS.has(name)) return -1;
+  return gate === undefined ? GATE : gate;
+}
+
 function gh(args, fallback = '') {
   try {
     // maxBuffer esplicito: il default di execFileSync e' 1 MB, e da quando
@@ -1113,7 +1142,7 @@ async function main() {
       // transiente della generazione articoli. Non vale per un articolo perso:
       // `-1` disattiva il gate (vedi consecutiveGate in github-issue-creator.mjs),
       // perche' aspettare la terza perdita significa buttarne tre.
-      consecutiveGate: lost ? -1 : GATE,
+      consecutiveGate: gateForWorkflow(name, { lost: Boolean(lost) }),
     });
     if (res) opened++;
   }

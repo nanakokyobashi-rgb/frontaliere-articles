@@ -7,6 +7,9 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { readdirSync, readFileSync } from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import {
   isReportableRun,
   cleanLogLine,
@@ -29,6 +32,8 @@ import {
   horizonPressure,
   fetchRunsBisected,
   parseRunListJson,
+  ALWAYS_ESCALATE_WORKFLOWS,
+  gateForWorkflow,
 } from '../../scripts/ci/scan-failed-runs.mjs';
 import { TITLE_RE } from '../../scripts/ci/close-recovered-failure-issues.mjs';
 import { isExclusivelyWorkflowScoped } from '../../scripts/ci/check-workflows-scope.mjs';
@@ -39,6 +44,8 @@ import { isExclusivelyWorkflowScoped } from '../../scripts/ci/check-workflows-sc
 // del modulo — cioe' l'intero file di test — su una differenza che qui e'
 // informativa e non portante. Col namespace la feature si sonda a runtime.
 import * as scopeDetect from '../../scripts/lib/workflow-scope-detect.mjs';
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
 const { detectWorkflowScoped, CODE_PATH_RE, isMonitorFiledWorkflowFailure } = scopeDetect;
 
@@ -803,4 +810,48 @@ test('la slice con batch non-array e\' trattata come query fallita', () => {
     assert.equal(got.length, 0);
     assert.match(warnings[0] ?? '', /FALLITA/, `batch ${JSON.stringify(bad)} deve gridare`);
   }
+});
+
+/**
+ * I workflow di sorveglianza non passano dal gate di ricorrenza. Misurato il
+ * 2026-09-18: il watchdog della coda translate era rosso da 12 run consecutive
+ * (52,5 h) e non aveva aperto NESSUNA issue, perche' lo scanner lo aveva visto
+ * una volta sola e il gate l'aveva archiviato come `failure 1/3 → low-priority
+ * breadcrumb` nel ledger #25. Con meno di 3 avvistamenti in 48 h l'ordinale non
+ * arriva mai a 3/3: per questa classe il gate non rimanda l'escalation, la
+ * sopprime.
+ */
+test('i workflow di sorveglianza saltano il gate di ricorrenza', () => {
+  for (const name of ALWAYS_ESCALATE_WORKFLOWS) {
+    assert.equal(gateForWorkflow(name), -1, name);
+  }
+  assert.ok(ALWAYS_ESCALATE_WORKFLOWS.has('Translate Queue Recovery Watchdog (observe only)'));
+  assert.ok(ALWAYS_ESCALATE_WORKFLOWS.has('Translate Pending Jobs (sparse cross-repo execution)'));
+});
+
+/**
+ * La lista duplica i `name:` degli YAML: senza questo legame una rinomina del
+ * workflow la rende muta in silenzio, ed e' esattamente il modo in cui un
+ * allarme torna invisibile.
+ */
+test('ogni nome della lista esiste come `name:` di un workflow reale', () => {
+  const dir = path.join(ROOT, '.github/workflows');
+  const declared = new Set(
+    readdirSync(dir)
+      .filter((file) => file.endsWith('.yml') || file.endsWith('.yaml'))
+      .map((file) => /^name:\s*(.+?)\s*$/m.exec(readFileSync(path.join(dir, file), 'utf8'))?.[1])
+      .filter(Boolean)
+      .map((name) => name.replace(/^['"]|['"]$/g, '')),
+  );
+  assert.ok(declared.size > 10, `letti solo ${declared.size} workflow: path sbagliato?`);
+  for (const name of ALWAYS_ESCALATE_WORKFLOWS) {
+    assert.ok(declared.has(name), `nessun workflow si chiama "${name}"`);
+  }
+});
+
+test('il gate di ricorrenza resta attivo per il rumore transiente della generazione', () => {
+  assert.equal(gateForWorkflow('Generate Blog Article', { gate: 3 }), 3);
+  assert.equal(gateForWorkflow('Crawler Group 23 (sparse cross-repo execution)', { gate: 3 }), 3);
+  // Un articolo perso non aspetta la terza perdita: contratto preesistente.
+  assert.equal(gateForWorkflow('Generate Blog Article', { gate: 3, lost: true }), -1);
 });
