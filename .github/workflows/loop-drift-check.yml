@@ -59,7 +59,12 @@ concurrency:
 jobs:
   drift:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    # Il job include checkout completo, setup e due scansioni cross-repo. Il
+    # timeout e' il budget dell'intero job: 10 minuti hanno cancellato una
+    # scansione ancora in corso quando la manifest e' cresciuta (issue #1270).
+    # Il controllo resta invariato; qui si aggiunge solo il margine necessario
+    # alla latenza variabile di GitHub.
+    timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@v5
