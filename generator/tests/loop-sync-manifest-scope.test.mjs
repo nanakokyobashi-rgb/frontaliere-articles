@@ -185,6 +185,18 @@ test('files: ogni `adapted` allineato indica l issue che governa l adattamento',
   }
 });
 
+test('mark-claude-terminal-outcome: la divergenza corpus e\' dichiarata adapted (#1084)', () => {
+  const entry = byPath.get('scripts/ci/mark-claude-terminal-outcome.mjs');
+  assert.ok(entry, 'mark-claude-terminal-outcome.mjs deve restare censito');
+  assert.equal(entry.mode, 'adapted',
+    'restare identical con il corpus divergente e\' undeclared-drift: il trasporto site-ahead sovrascriverebbe il dedup CAP_HIT_AFTER_DELIVERY');
+  assert.notEqual(entry.baseline?.site, entry.baseline?.corpus,
+    'i due lati non sono allineati: la reason deve coprire la divergenza, non una falsa identita\'');
+  assert.match(entry.reason, /followup-drainer/);
+  assert.match(entry.reason, /CAP_HIT_AFTER_DELIVERY|lastLabelEventAt|latestFixOutcomeEntryFromComments/);
+  assert.match(entry.reason, /#1084|#925|#1011/);
+});
+
 test('followup-drainer: la baseline post-B19 non dichiara piu\' una falsa identita\'', () => {
   const entry = byPath.get('scripts/ci/followup-drainer.mjs');
   assert.ok(entry, 'followup-drainer.mjs deve restare censito');

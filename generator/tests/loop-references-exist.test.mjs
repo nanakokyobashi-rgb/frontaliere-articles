@@ -1486,15 +1486,6 @@ const DECLARED_ABSENT = {
       'Il file e\' `identical` nel manifest: riscriverla qui fabbricherebbe un `corpus-ahead` ' +
       'su un commento, quindi la correzione va fatta sul sito e fatta scendere.',
   },
-  'scripts/ci/mark-claude-terminal-outcome.mjs :: pr-review-loop.yml': {
-    kind: 'retired',
-    reason:
-      'Il referente e\' sparito da ENTRAMBI i repo il 2026-09-03: la Claude review vive ora ' +
-      'dentro `tests.yml` e i quattro workflow che facevano review, contratto del body e ' +
-      'merge non esistono piu\'. La frase qui e\' storica e descrittiva — cita la precedenza max_turns-prima-di-429 che il vecchio reviewer applicava e che lo step di tests.yml applica ancora. ' +
-      'Il file e\' `identical` nel manifest: riscriverla qui fabbricherebbe un `corpus-ahead` ' +
-      'su un commento, quindi la correzione va fatta sul sito e fatta scendere.',
-  },
   'scripts/ci/pr-autorebase.mjs :: pr-review-loop.yml': {
     kind: 'retired',
     reason:
