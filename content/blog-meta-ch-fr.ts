@@ -6524,6 +6524,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.barometro-previdenza-raiffeisen-zhaw.title': 'Prévoyance suisse : record d\'économies et craintes pour l\'AVS',
     'blog.article.barometro-previdenza-raiffeisen-zhaw.excerpt': 'Le Baromètre Raiffeisen et ZHAW relève des conditions de prévoyance à des sommets historiques avec 725 points, mais 39 % des personnes interrogées craignent pour l\'avenir de l\'AVS.',
     'blog.article.barometro-previdenza-raiffeisen-zhaw.imageAlt': 'Documents de prévoyance et calculatrice sur un bureau de bureau en Suisse',
+    'blog.article.sicurezza-impianti-solari-rete.title': 'Les failles de sécurité dans les systèmes solaires menacent le réseau',
+    'blog.article.sicurezza-impianti-solari-rete.excerpt': 'L\'Institut national de tests de cybersécurité a détecté plus de cinquante vulnérabilités dans onze produits photovoltaïques largement répandus.',
+    'blog.article.sicurezza-impianti-solari-rete.imageAlt': 'Installations photovoltaïques sur des toits suisses',
 };
 
 export default blogMetaChFr;

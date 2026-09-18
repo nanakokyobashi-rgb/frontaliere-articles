@@ -6524,6 +6524,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.barometro-previdenza-raiffeisen-zhaw.title': 'Previdenza svizzera: record di risparmi e timori per l\'AVS',
     'blog.article.barometro-previdenza-raiffeisen-zhaw.excerpt': 'Il Barometro Raiffeisen e ZHAW rileva condizioni previdenziali ai massimi storici con 725 punti, ma il 39% degli intervistati teme per il futuro dell\'AVS.',
     'blog.article.barometro-previdenza-raiffeisen-zhaw.imageAlt': 'Documenti previdenziali e calcolatrice su una scrivania in ufficio in Svizzera',
+    'blog.article.sicurezza-impianti-solari-rete.title': 'Falle di sicurezza nei sistemi solari minacciano la rete',
+    'blog.article.sicurezza-impianti-solari-rete.excerpt': 'L\'Istituto nazionale di test per la cibersicurezza ha rilevato oltre cinquanta vulnerabilità in undici prodotti fotovoltaici ampiamente diffusi.',
+    'blog.article.sicurezza-impianti-solari-rete.imageAlt': 'Impianti fotovoltaici sui tetti in Svizzera',
 };
 
 export default blogMetaChIt;

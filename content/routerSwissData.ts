@@ -2197,6 +2197,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'accordo-mercosur-agricoltura-svizzera': { it: 'accordo-mercosur-agricoltura-svizzera', en: 'switzerland-mercosur-agreement-agriculture', de: 'schweiz-mercosur-abkommen-landwirtschaft', fr: 'accord-mercosur-agriculture-suisse' },
  'atted-digitale-ticino-cyber-security': { it: 'atted-digitale-ticino-cyber-security', en: 'atted-digital-ticino-cyber-security', de: 'atted-digitales-tessin-cyber-sicherheit', fr: 'atted-numerique-ticino-cybersecurite' },
  'barometro-previdenza-raiffeisen-zhaw': { it: 'barometro-previdenza-raiffeisen-zhaw', en: 'raiffeisen-zhaw-pension-barometer', de: 'raiffeisen-zhaw-vorsorge-barometer', fr: 'barometre-prevoyance-raiffeisen-zhaw' },
+ 'sicurezza-impianti-solari-rete': { it: 'sicurezza-impianti-solari-rete', en: 'solar-plants-security-grid', de: 'sicherheit-solaranlagen-netz', fr: 'securite-installations-solaires-reseau' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

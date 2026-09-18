@@ -6524,6 +6524,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.barometro-previdenza-raiffeisen-zhaw.title': 'Swiss Social Security: Savings Record and AVS Fears',
     'blog.article.barometro-previdenza-raiffeisen-zhaw.excerpt': 'The Raiffeisen and ZHAW Barometer detects social security conditions at an all-time high with 725 points, but 39% of respondents fear for the future of the AVS.',
     'blog.article.barometro-previdenza-raiffeisen-zhaw.imageAlt': 'Pension documents and calculator on an office desk in Switzerland',
+    'blog.article.sicurezza-impianti-solari-rete.title': 'Security flaws in solar systems threaten the grid',
+    'blog.article.sicurezza-impianti-solari-rete.excerpt': 'The National Cybersecurity Testing Institute has detected over fifty vulnerabilities in eleven widely distributed photovoltaic products.',
+    'blog.article.sicurezza-impianti-solari-rete.imageAlt': 'Solar photovoltaic systems on Swiss rooftops',
 };
 
 export default blogMetaChEn;

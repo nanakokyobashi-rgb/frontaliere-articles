@@ -6524,6 +6524,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.barometro-previdenza-raiffeisen-zhaw.title': 'Schweizer Vorsorge: Sparrekord und AHV-Befürchtungen',
     'blog.article.barometro-previdenza-raiffeisen-zhaw.excerpt': 'Das Raiffeisen- und ZHAW-Barometer zeigt mit 725 Punkten Vorsorgebedingungen auf Rekordhoch, doch 39 Prozent der Befragten fürchten um die Zukunft der AHV.',
     'blog.article.barometro-previdenza-raiffeisen-zhaw.imageAlt': 'Vorsorgedokumente und Taschenrechner auf einem Büroschreibtisch in der Schweiz',
+    'blog.article.sicurezza-impianti-solari-rete.title': 'Sicherheitslücken in Solaranlagen bedrohen das Netz',
+    'blog.article.sicurezza-impianti-solari-rete.excerpt': 'Das Nationale Testinstitut für Cybersicherheit hat mehr als fünfzig Schwachstellen in elf weit verbreiteten Photovoltaik-Produkten festgestellt.',
+    'blog.article.sicurezza-impianti-solari-rete.imageAlt': 'Photovoltaikanlagen auf Schweizer Dächern',
 };
 
 export default blogMetaChDe;

@@ -84572,6 +84572,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-sicurezza-impianti-solari-rete': {
+    title: 'Falle di sicurezza nei sistemi solari minacciano la rete',
+    description: 'Rilevate oltre 50 vulnerabilità nei sistemi fotovoltaici in Svizzera. Sette prodotti su undici presentano gravi falle e rischi di ciberattacchi. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, falle, sicurezza, sistemi, solari',
+    ogTitle: 'Falle di sicurezza negli impianti solari minacciano la rete',
+    ogDescription: 'L\'Istituto nazionale di test per la cibersicurezza ha esaminato undici prodotti fotovoltaici in Svizzera, individuando oltre cinquanta vulnerabilità e gravi rischi per la stabilità della rete elettrica nazionale.',
+    canonicalPath: '/articoli-svizzera/sicurezza-impianti-solari-rete/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Falle di sicurezza nei sistemi solari minacciano la rete",
+      "description": "Rilevate oltre 50 vulnerabilità nei sistemi fotovoltaici in Svizzera. Sette prodotti su undici presentano gravi falle e rischi di ciberattacchi. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/sicurezza-impianti-solari-rete.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Impianti fotovoltaici sui tetti in Svizzera"
+      },
+      "datePublished": "2026-09-18T00:24:00+00:00",
+      "dateModified": "2026-09-18T00:24:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/sicurezza-impianti-solari-rete/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
