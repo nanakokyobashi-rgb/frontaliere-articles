@@ -2205,6 +2205,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'crescita-assicurazioni-cyber-2025': { it: 'crescita-assicurazioni-cyber-2025', en: 'cyber-insurance-growth-2025', de: 'cyberversicherung-wachstum-2025', fr: 'croissance-assurance-cyber-2025' },
  'votazioni-federali-neutralita-sondaggio': { it: 'votazioni-federali-neutralita-sondaggio', en: 'federal-votes-neutrality-poll', de: 'eidgenoessische-abstimmungen-neutralitaet-umfrage', fr: 'votations-federales-neutralite-sondage' },
  'crescita-pil-seco-esportazioni': { it: 'crescita-pil-seco-esportazioni', en: 'seco-gdp-growth-exports', de: 'seco-bip-wachstum-exporte', fr: 'croissance-pib-seco-exportations' },
+ 'seco-previsioni-crescita-2026': { it: 'seco-previsioni-crescita-2026', en: 'seco-growth-forecasts-2026', de: 'seco-wachstumsprognosen-2026', fr: 'seco-previsions-croissance-2026' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

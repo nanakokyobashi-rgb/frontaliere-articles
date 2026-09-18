@@ -6548,6 +6548,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.crescita-pil-seco-esportazioni.title': 'Crescita PIL svizzero all\'1,7%: stime SECO e impatti',
     'blog.article.crescita-pil-seco-esportazioni.excerpt': 'La SECO rivede al rialzo la crescita del PIL svizzero all\'1,7% per l\'anno in corso grazie alle esportazioni. Disoccupazione stimata al 3,1% nel 2026.',
     'blog.article.crescita-pil-seco-esportazioni.imageAlt': 'Panorama economico della Svizzera con edifici moderni e istituzioni finanziarie',
+    'blog.article.seco-previsioni-crescita-2026.title': 'SECO rivede al rialzo: crescita PIL all\'1,7% per il 2026',
+    'blog.article.seco-previsioni-crescita-2026.excerpt': 'Il SECO ha rivisto le stime di crescita all\'1,7% per il 2026. PIL del secondo trimestre in aumento dell\'1,5%. Disoccupazione attesa al 3,1%.',
+    'blog.article.seco-previsioni-crescita-2026.imageAlt': 'Grafico economico e previsioni congiunturali della Confederazione Svizzera',
 };
 
 export default blogMetaChIt;

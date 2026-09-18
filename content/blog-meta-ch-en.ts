@@ -6548,6 +6548,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.crescita-pil-seco-esportazioni.title': 'Swiss GDP growth at 1.7%: SECO estimates and impacts',
     'blog.article.crescita-pil-seco-esportazioni.excerpt': 'SECO sees Swiss GDP growth up to 1.7% for the current year thanks to exports. Unemployment estimated at 3.1% in 2026.',
     'blog.article.crescita-pil-seco-esportazioni.imageAlt': 'Economic panorama of Switzerland with modern buildings and financial institutions',
+    'blog.article.seco-previsioni-crescita-2026.title': 'SECO revises upwards: GDP growth at 1.7% for 2026',
+    'blog.article.seco-previsioni-crescita-2026.excerpt': 'SECO has revised growth estimates to 1.7% for 2026. Second quarter GDP up 1.5%. Expected unemployment at 3.1%.',
+    'blog.article.seco-previsioni-crescita-2026.imageAlt': 'Economic chart and cyclical forecasts of the Swiss Confederation',
 };
 
 export default blogMetaChEn;

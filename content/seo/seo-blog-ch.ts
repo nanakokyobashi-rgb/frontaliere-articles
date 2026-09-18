@@ -84884,6 +84884,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-seco-previsioni-crescita-2026': {
+    title: 'SECO rivede al rialzo: crescita PIL all\'1,7% per il 2026',
+    description: 'Il SECO rivede al rialzo le stime economiche della Svizzera per il 2026: PIL all\'1,7%, inflazione allo 0,6% e disoccupazione al 3,1%. Dettagli e analisi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, seco, rivede, rialzo, crescita',
+    ogTitle: 'Previsioni SECO 2026: crescita PIL svizzero all\'1,7%',
+    ogDescription: 'Scopri le ultime previsioni congiunturali del SECO per la Svizzera nel 2026 e 2027: stime sul PIL, inflazione media annua e tasso di disoccupazione.',
+    canonicalPath: '/articoli-svizzera/seco-previsioni-crescita-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "SECO rivede al rialzo: crescita PIL all'1,7% per il 2026",
+      "description": "Il SECO rivede al rialzo le stime economiche della Svizzera per il 2026: PIL all'1,7%, inflazione allo 0,6% e disoccupazione al 3,1%. Dettagli e analisi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/seco-previsioni-crescita-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Grafico economico e previsioni congiunturali della Confederazione Svizzera"
+      },
+      "datePublished": "2026-09-18T02:51:08+00:00",
+      "dateModified": "2026-09-18T02:51:08+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/seco-previsioni-crescita-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
