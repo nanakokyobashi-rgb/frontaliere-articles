@@ -85,11 +85,17 @@ test('workflow_dispatch con `pr_number` può eseguire il gate completo su una PR
     /workflow_dispatch:\n\s+inputs:\n\s+pr_number:/,
     'Il dispatch manuale deve dichiarare l input della PR da verificare.',
   );
+  assert.match(
+    yaml,
+    /\n\s+head_sha:\n\s+description:/,
+    'Il dispatch di recovery deve dichiarare la SHA esatta passata dal workflow trusted.',
+  );
   const bodyContract = stepBlock(yaml, 'PR-body completeness + multi-issue Closes (zero-Claude)');
   assert.match(bodyContract, /inputs\.pr_number/);
   const resolve = stepBlock(yaml, 'Resolve PR');
   assert.match(resolve, /github\.event_name == 'workflow_dispatch'/);
   assert.match(resolve, /github\.event\.pull_request\.number \|\| inputs\.pr_number/);
+  assert.match(resolve, /inputs\.head_sha \|\| github\.event\.pull_request\.head\.sha \|\| github\.sha/);
   assert.match(resolve, /La PR indicata deve essere aperta, non draft/);
   const skipped = stepBlock(yaml, 'Fail when required review gate is skipped');
   assert.match(skipped, /github\.event_name == 'workflow_dispatch'/);
