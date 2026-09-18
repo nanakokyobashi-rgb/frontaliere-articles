@@ -18,6 +18,8 @@ import {
   REVIEWER_BOT_LOGIN_RE,
   REVIEWER_BOT_LOGIN_JQ,
   isReviewerBot,
+  isManagedReview,
+  CODEX_REVIEW_MARKER,
 } from '../../scripts/ci/lib/constants.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -40,6 +42,33 @@ test('il tipo Bot è parte del predicato condiviso', () => {
   assert.equal(isReviewerBot({ type: 'Bot', login: 'claude[bot]' }), true);
   assert.equal(isReviewerBot({ type: 'User', login: 'claude-human' }), false);
   assert.equal(isReviewerBot({ type: 'User', login: 'frontaliere-automation-human' }), false);
+});
+
+test('isManagedReview allinea login GraphQL e REST dopo la normalizzazione', () => {
+  assert.equal(isManagedReview({ user: { type: 'Bot', login: 'claude[bot]' } }), true);
+  assert.equal(isManagedReview({ user: { type: 'Bot', login: 'frontaliere-automation' } }), true);
+  assert.equal(isManagedReview({ author: { login: 'claude' } }), true);
+  assert.equal(isManagedReview({ author: { login: 'claude[bot]' } }), true);
+  assert.equal(isManagedReview({ author: { login: 'frontaliere-automation[bot]' } }), true);
+  assert.equal(isManagedReview({ user: { login: 'claude[bot]' } }), true);
+  assert.equal(isManagedReview({ author: { login: 'claude-code[bot]' } }), true);
+  assert.equal(isManagedReview({ user: { type: 'Bot', login: 'claude-code[bot]' } }), true);
+  assert.equal(isManagedReview({ author: { login: 'claude-human' } }), false);
+  assert.equal(isManagedReview({ user: { type: 'User', login: 'claude-human' } }), false);
+  assert.equal(
+    isManagedReview({
+      user: { type: 'Bot', login: 'github-actions[bot]' },
+      body: `${CODEX_REVIEW_MARKER}\n## LGTM`,
+    }),
+    true,
+  );
+  assert.equal(
+    isManagedReview({
+      user: { type: 'Bot', login: 'github-actions[bot]' },
+      body: '## LGTM',
+    }),
+    false,
+  );
 });
 
 test('i workflow che filtrano le review usano il predicato jq condiviso', () => {
