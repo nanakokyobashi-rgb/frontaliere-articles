@@ -263,6 +263,14 @@ test('the Git bridge marks delivery and local-state-changing operations', () => 
   assert.equal(isMutatingGitArgs(['ls-remote', 'origin', 'HEAD']), false);
 });
 
+test('la credenziale corrente recupera il token runtime quando il with-input e vuoto', () => {
+  assert.ok(action.includes('codex_github_auth="${CODEX_GH_AUTH:-}"'));
+  assert.ok(action.includes('runtime_pat="${GITHUB_PAT_NANAKO:-${GITHUB_PAT:-}}"'));
+  assert.ok(action.includes('APP_TOKEN_WORKFLOWS'));
+  assert.ok(action.includes('codex_github_auth="$APP_TOKEN"'));
+  assert.ok(action.includes('codex_github_auth="$runtime_pat"'));
+});
+
 test('Claude fallback is suppressed when Codex side effects are possible', () => {
   assert.match(action, /steps\.codex\.outcome == 'failure'/);
   assert.match(action, /steps\.codex\.outputs\.side_effect_detected == 'false'/);
