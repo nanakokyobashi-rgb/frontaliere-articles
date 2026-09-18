@@ -61,6 +61,7 @@
  */
 
 import { execFileSync } from 'node:child_process';
+import { appendFileSync } from 'node:fs';
 import { createGithubIssue, searchSafePrefix } from '../lib/github-issue-creator.mjs';
 import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
 
@@ -81,8 +82,86 @@ const DRY_RUN = flag('--dry-run');
 // chiamanti storici (e i test che la pinnano) continuino a trovarla.
 export { parsePositiveNum } from '../lib/parse-positive-num.mjs';
 
-const LOOKBACK_MIN = parsePositiveNum(val('--lookback-min', undefined), 40, { label: '--lookback-min' });
-const MAX_ISSUES = parsePositiveNum(val('--max-issues', undefined), 5, { label: '--max-issues' });
+const LOOKBACK_FLOOR_MIN = 40;
+
+/**
+ * Finestra di scansione: NON una costante, perche' la cadenza non e' garantita.
+ *
+ * `workflow-failure-issues.yml` e' cron'ato ogni 30 minuti, e i 40 minuti di
+ * lookback erano tarati su quella cadenza: finestre che si sovrappongono di 10
+ * minuti, nessun buco. La premessa e' falsa. GitHub DEGRADA le `schedule` su un
+ * repo carico, e le droppa: misurato il 2026-09-18 su 120 scansioni riuscite in
+ * 449 ore, la cadenza reale e' mediana 231 minuti, p90 318, massima 454 — il
+ * 13% delle run previste. Con un lookback fisso di 40 minuti lo scanner vedeva
+ * quindi il 17,7% del tempo: il 70% delle run fallite non-PR (95 su 136) non e'
+ * MAI entrata in nessuna finestra. Non "segnalata in ritardo": mai guardata.
+ * E' il buco per cui `crawler-group-04/05/08/12` sono stati rossi ~26 ore senza
+ * aprire una issue, e per cui `Loop drift check` ne ha perse 3.
+ *
+ * Il fix non e' una costante piu' grande — sarebbe lo stesso difetto tarato su
+ * un throttling che peggiora quando il repo si carica. La finestra si deriva
+ * dallo stato che GitHub gia' tiene: l'istante dell'ULTIMA scansione riuscita.
+ * Cosi' il lookback si allarga da solo quando lo scheduler salta un giro e
+ * torna a ~30 minuti quando il cron viene rispettato, senza watermark da
+ * mantenere e senza assumere niente sulla cadenza.
+ *
+ * `--lookback-min` esplicito resta un override pieno (serve al dry-run e al
+ * dispatch manuale): un valore passato a mano vince sempre sulla derivazione.
+ *
+ * @param {{explicitRaw?: string, lastSuccessAtMs?: number|null, nowMs: number,
+ *   floorMin?: number, ceilingMin: number, warn?: (m: string) => void}} opts
+ * @returns {number} minuti di lookback
+ */
+export function resolveLookbackMin({
+  explicitRaw,
+  lastSuccessAtMs,
+  nowMs,
+  floorMin = LOOKBACK_FLOOR_MIN,
+  ceilingMin,
+  warn = console.warn,
+}) {
+  if (explicitRaw !== undefined && explicitRaw !== null && explicitRaw !== '') {
+    return parsePositiveNum(explicitRaw, floorMin, { label: '--lookback-min' });
+  }
+  if (!Number.isFinite(lastSuccessAtMs) || !Number.isFinite(nowMs) || lastSuccessAtMs >= nowMs) {
+    // Prima scansione del repo, listing fallito, o orologio incoerente: il
+    // floor e' il comportamento storico, cioe' un degrado noto e non un salto.
+    return floorMin;
+  }
+  // +5 minuti di sovrapposizione: una run che fallisce mentre la scansione
+  // precedente era in volo ha `updatedAt` appena prima del suo inizio.
+  const elapsed = Math.ceil((nowMs - lastSuccessAtMs) / 60_000) + 5;
+  if (elapsed > ceilingMin) {
+    // Il soffitto e' l'orizzonte della query: oltre, `--created` non coprirebbe
+    // piu' la finestra e il filtro `since` prometterebbe run che non arrivano.
+    warn(
+      `::warning::[scan-failed-runs] ultima scansione riuscita ${Math.round(elapsed / 60)}h fa: `
+        + `lookback troncato all'orizzonte di ${ceilingMin} minuti. I fallimenti piu' vecchi `
+        + 'di cosi\' non sono recuperabili da questa passata.',
+    );
+    return ceilingMin;
+  }
+  return Math.max(elapsed, floorMin);
+}
+
+/**
+ * Cap di issue per passata.
+ *
+ * Era 5, tarato sull'idea che una passata veda pochi workflow rossi. Sul fleet
+ * dei crawler non regge: il 2026-09-18 una singola passata ha trovato 17
+ * workflow distinti falliti e ne ha scartati 12, fra cui 8 crawler-group e
+ * `Loop drift check`. E lo scarto non e' equo — `byWorkflow` e' ordinato per
+ * recency, e l'onda dei crawler parte in ordine di gruppo crescente, quindi i
+ * gruppi con numero ALTO sono sempre i piu' recenti e occupano sempre i 5
+ * posti: 03..19 erano starved per costruzione, non per sfortuna. Misurato sulle
+ * 48 ore precedenti, 8 gruppi non hanno MAI ricevuto una issue.
+ *
+ * 20 copre il fleet osservato (30 workflow distinti in 19 giorni, ~17 per
+ * passata) e resta bounded: la dedup in `github-issue-creator.mjs` collassa le
+ * ricorrenze su UNA issue per workflow, quindi il cap limita il lavoro per
+ * passata, non il numero di issue vive.
+ */
+const MAX_ISSUES = parsePositiveNum(val('--max-issues', undefined), 20, { label: '--max-issues' });
 // `-1` e' un valore DICHIARATO per questa leva: disattiva il gate di ricorrenza
 // in `github-issue-creator.mjs` (stesso `-1` usato piu' sotto per l'articolo perso).
 const GATE = parsePositiveNum(val('--gate', undefined), 3, { label: '--gate', sentinels: [-1] });
@@ -339,6 +418,80 @@ export function parseHorizonMin(raw, opts = {}) {
 const RUN_QUERY_HORIZON_MIN = parseHorizonMin(process.env.SCAN_FAILED_RUNS_HORIZON_MIN);
 
 /**
+ * Il workflow che ospita QUESTO scanner, per rileggere la propria cadenza reale.
+ * Override solo per i test; in CI il default e' l'unico chiamante.
+ */
+const SELF_WORKFLOW = process.env.SCAN_FAILED_RUNS_SELF_WORKFLOW || 'workflow-failure-issues.yml';
+
+/**
+ * Istante dell'ultima scansione RIUSCITA, o null se non leggibile.
+ *
+ * Si escludono la run corrente (`GITHUB_RUN_ID`) e qualunque run piu' recente
+ * di essa: una passata non deve mai derivare la finestra da se stessa, o il
+ * lookback collasserebbe a zero. Fail-open per costruzione — un listing fallito
+ * torna null e il chiamante ricade sul floor, che e' il comportamento storico.
+ */
+function lastSuccessfulScanAtMs() {
+  if (!REPO) return null;
+  const raw = gh(
+    ['run', 'list', '--repo', REPO, '--workflow', SELF_WORKFLOW,
+      '--status', 'success', '--limit', '10', '--json', 'databaseId,createdAt'],
+    '',
+  );
+  if (!raw) return null;
+  let rows;
+  try {
+    rows = JSON.parse(raw);
+  } catch {
+    console.warn('[scan-failed-runs] listing delle scansioni precedenti illeggibile → lookback al floor.');
+    return null;
+  }
+  if (!Array.isArray(rows)) return null;
+  const selfId = String(process.env.GITHUB_RUN_ID || '');
+  const times = rows
+    .filter((r) => String(r?.databaseId ?? '') !== selfId)
+    .map((r) => Date.parse(r?.createdAt || ''))
+    .filter((t) => Number.isFinite(t));
+  return times.length > 0 ? Math.max(...times) : null;
+}
+
+/**
+ * Finestra di scansione, risolta UNA volta e memoizzata.
+ *
+ * Deliberatamente NON una costante di modulo: la derivazione legge `gh` ed
+ * esporta in `GITHUB_ENV`, cioe' fa I/O. A livello di modulo quell'I/O
+ * scatterebbe al solo `import`, e questo file viene importato dai test —
+ * in CI `GITHUB_REPOSITORY` e `GITHUB_ENV` sono entrambe popolate, quindi un
+ * import avrebbe chiamato GitHub e scritto nell'env del job. E' la trappola di
+ * `scripts/ci`: un side effect sopra il guard di `main` non e' inerte.
+ */
+let lookbackCache = null;
+function lookbackMin() {
+  if (lookbackCache !== null) return lookbackCache;
+  lookbackCache = resolveLookbackMin({
+    explicitRaw: val('--lookback-min', undefined),
+    lastSuccessAtMs: lastSuccessfulScanAtMs(),
+    nowMs: Date.now(),
+    ceilingMin: RUN_QUERY_HORIZON_MIN,
+  });
+  // `scan-job-timeouts.mjs` gira nello STESSO job e aveva la stessa finestra
+  // fissa di 40 minuti, quindi lo stesso buco di copertura. Invece di ripetere
+  // la derivazione nello YAML — due sorgenti per un valore condiviso, che
+  // AGENTS.md §6 vieta — la finestra risolta qui viene esportata e il passo
+  // successivo la riusa. Un solo posto la calcola; il gemello e' pinnato da
+  // `generator/tests/scan-failed-runs-lookback.test.mjs`.
+  if (process.env.GITHUB_ENV) {
+    try {
+      appendFileSync(process.env.GITHUB_ENV, `SCAN_RESOLVED_LOOKBACK_MIN=${lookbackCache}\n`);
+    } catch (e) {
+      // Fail-open: il passo gemello ricade sul proprio default.
+      console.warn(`[scan-failed-runs] export della finestra risolta fallito: ${String(e.message).slice(0, 120)}`);
+    }
+  }
+  return lookbackCache;
+}
+
+/**
  * L'orizzonte e' una stima, quindi va MISURATO invece che creduto: e' la
  * mancanza di questa misura ad aver reso la perdita silenziosa per mesi.
  *
@@ -581,8 +734,9 @@ export function parseRunListJson(raw) {
 /** Run fallite nella finestra, escluse quelle da pull_request e dai gate pre-merge in preview. */
 function failedRuns() {
   const nowMs = Date.now();
-  const since = new Date(nowMs - LOOKBACK_MIN * 60_000).toISOString();
-  const queryCutoffMs = nowMs - (LOOKBACK_MIN + RUN_QUERY_HORIZON_MIN) * 60_000;
+  const lookback = lookbackMin();
+  const since = new Date(nowMs - lookback * 60_000).toISOString();
+  const queryCutoffMs = nowMs - (lookback + RUN_QUERY_HORIZON_MIN) * 60_000;
   const fetchWindow = (startIso, endIso) => {
     // Fallback `null`, non `'[]'`: qui "gh e' fallito" e "la finestra e' vuota"
     // devono restare due cose diverse — vedi `fetchRunsBisected`.
@@ -975,7 +1129,7 @@ async function main() {
 
   const runs = failedRuns();
   if (!runs.length) {
-    console.log(`[scan-failed-runs] Nessuna run fallita negli ultimi ${LOOKBACK_MIN} minuti (esclusi PR e cancelled).`);
+    console.log(`[scan-failed-runs] Nessuna run fallita negli ultimi ${lookbackMin()} minuti (esclusi PR e cancelled).`);
     return 0;
   }
 
@@ -1015,7 +1169,12 @@ async function main() {
     const run = selected.run;
     if (opened >= MAX_ISSUES) {
       // Un cap che tronca in silenzio si legge come "tutto coperto". Lo diciamo.
-      console.warn(`::warning::[scan-failed-runs] Cap di ${MAX_ISSUES} issue raggiunto — ${byWorkflow.size - opened} workflow falliti NON segnalati in questa passata: ${[...byWorkflow.keys()].slice(opened).join(', ')}. Verranno ripresi alla prossima scansione.`);
+      // NON si promette piu' che "verranno ripresi alla prossima scansione":
+      // era falso. La prossima passata deriva la finestra dall'ULTIMA scansione
+      // riuscita — e questa, anche se troncata dal cap, riesce — quindi gli
+      // scartati escono dalla finestra e non tornano. Il cap e' una perdita
+      // definitiva, e va detto cosi'.
+      console.warn(`::warning::[scan-failed-runs] Cap di ${MAX_ISSUES} issue raggiunto — ${byWorkflow.size - opened} workflow falliti NON segnalati e NON recuperabili in una passata successiva: ${[...byWorkflow.keys()].slice(opened).join(', ')}. Alzare --max-issues se ricorre.`);
       break;
     }
 

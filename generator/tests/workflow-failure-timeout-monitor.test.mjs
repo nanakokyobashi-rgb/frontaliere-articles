@@ -58,7 +58,11 @@ test('il monitor centrale ha permessi check e inoltra dry-run/lookback senza cam
   const step = workflowStep('Scan timed out and host-killed jobs');
   assert.match(step, /node scripts\/ci\/scan-job-timeouts\.mjs --dry-run/);
   assert.match(step, /else\n\s+node scripts\/ci\/scan-job-timeouts\.mjs\n\s+fi/);
-  assert.match(step, /TIMEOUT_SCAN_LOOKBACK_MINUTES: \$\{\{ github\.event\.inputs\.lookback_min \|\| '40' \}\}/);
+  // La finestra non è più la costante 40: si deriva dall'ultima scansione
+  // riuscita (`resolveLookbackMin`) perché il cron non è onorato. L'invariante
+  // pinnata resta la stessa — il monitor INOLTRA la finestra invece di averne
+  // una propria — cambia solo da dove arriva il valore.
+  assert.match(step, /TIMEOUT_SCAN_LOOKBACK_MINUTES: \$\{\{ github\.event\.inputs\.lookback_min \|\| env\.SCAN_RESOLVED_LOOKBACK_MIN \|\| '40' \}\}/);
   assert.match(step, /HOST_KILL_SETTLE_MS: '120000'/);
   assert.match(step, /if \[ "\$\{\{ github\.event\.inputs\.dry_run \}\}" = "true" \]; then/);
 });
@@ -66,10 +70,23 @@ test('il monitor centrale ha permessi check e inoltra dry-run/lookback senza cam
 test('scanner generico e specializzato condividono finestra e clock di completamento', () => {
   const generic = workflowStep('Scan failed runs and open issues');
   const specialized = workflowStep('Scan timed out and host-killed jobs');
-  const lookback = /github\.event\.inputs\.lookback_min \|\| '40'/g;
 
-  assert.equal((generic.match(lookback) || []).length, 1);
-  assert.equal((specialized.match(lookback) || []).length, 1);
+  // La finestra CONDIVISA resta l'invariante; la sua sorgente non è più il
+  // letterale `|| '40'` in entrambi i passi — che era una costante duplicata,
+  // cioè esattamente ciò che AGENTS.md §6 vieta — ma un valore risolto una
+  // volta dallo scanner generico ed esportato in GITHUB_ENV.
+  //
+  // Lo scanner generico non deve ricevere un lookback fisso: passarne sempre
+  // uno rendeva la derivazione codice morto sulle run da `schedule`.
+  assert.doesNotMatch(generic, /--lookback-min "\$\{\{ github\.event\.inputs\.lookback_min \|\| '40' \}\}"/);
+  assert.match(generic, /if \[ -n "\$\{\{ github\.event\.inputs\.lookback_min \}\}" \]/);
+  // Lo specializzato deve LEGGERE quella finestra, non calcolarne una propria.
+  assert.match(specialized, /env\.SCAN_RESOLVED_LOOKBACK_MIN/);
+  assert.match(
+    FAILED_RUNS_SCANNER,
+    /appendFileSync\(process\.env\.GITHUB_ENV, `SCAN_RESOLVED_LOOKBACK_MIN=\$\{lookbackCache\}\\n`\)/,
+    'la finestra risolta va esportata, o il gemello ricade sul default e il buco torna',
+  );
   assert.match(FAILED_RUNS_SCANNER, /\(r\.updatedAt \|\| r\.createdAt\) >= since/);
   assert.match(TIMEOUT_SCANNER, /run\.updated_at \|\| run\.created_at \|\| ''/);
   assert.doesNotMatch(TIMEOUT_SCANNER, /Date\.parse\(run\.created_at\) < cutoffMs/);
