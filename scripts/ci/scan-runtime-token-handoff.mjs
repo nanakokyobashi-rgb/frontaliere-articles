@@ -90,6 +90,41 @@ export function stripFullLineComments(text) {
 }
 
 /**
+ * Return the shell text of each YAML `run:` value. Block scalars are kept
+ * together until the next key at the same (or smaller) indentation; an
+ * inline `run:` owns only its line. This is deliberately a small YAML shape
+ * parser: the scanner needs the boundary between shell commands, not a full
+ * workflow evaluator.
+ *
+ * @param {string} text
+ * @returns {{ text: string, line: number }[]}
+ */
+function runBlocks(text) {
+  const lines = String(text || '').split('\n');
+  const blocks = [];
+  for (let i = 0; i < lines.length; i++) {
+    const match = /^([ \t]*)(?:-\s*)?run:\s*(.*)$/.exec(lines[i]);
+    if (!match) continue;
+    const runIndent = match[1].length;
+    const scalar = match[2].trim();
+    const blockScalar = scalar === '' || /^[|>][-+0-9]*$/.test(scalar);
+    const body = [match[2]];
+    if (blockScalar) {
+      let next = i + 1;
+      while (next < lines.length) {
+        const line = lines[next];
+        if (line.trim() && line.match(/^[ \t]*/)[0].length <= runIndent) break;
+        body.push(line);
+        next++;
+      }
+      i = next - 1;
+    }
+    blocks.push({ text: body.join('\n'), line: i + 1 - (blockScalar ? body.length - 1 : 0) });
+  }
+  return blocks;
+}
+
+/**
  * @param {string} text
  * @param {string} [file]
  * @returns {{ file: string, line: number, kind: string, text: string }[]}
@@ -112,13 +147,16 @@ export function findViolations(text, file = '-') {
       findings.push({ file, line: i + 1, kind: 'probe-env-push-token', text: line.trim() });
     }
   }
-  if (active.includes(PROBE_SCRIPT) && !PROBE_SHELL_PUSH_TOKEN_RE.test(active)) {
-    findings.push({
-      file,
-      line: 0,
-      kind: 'probe-missing-shell-token',
-      text: `${PROBE_SCRIPT} invocata senza PUSH_TOKEN dalla shell`,
-    });
+  for (const block of runBlocks(active)) {
+    if (!block.text.includes(PROBE_SCRIPT)) continue;
+    if (!PROBE_SHELL_PUSH_TOKEN_RE.test(block.text)) {
+      findings.push({
+        file,
+        line: block.line,
+        kind: 'probe-missing-shell-token',
+        text: `${PROBE_SCRIPT} invocata senza PUSH_TOKEN dalla shell nello stesso blocco run`,
+      });
+    }
   }
   return findings;
 }

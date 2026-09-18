@@ -77,6 +77,25 @@ test('una sonda senza PUSH_TOKEN dalla shell è un finding; con la forma runtime
     'fixture.yml',
   );
   assert.deepEqual(ok, []);
+
+  const tokenInAnotherStep = findViolations([
+    '      - name: Token in another step',
+    '        run: PUSH_TOKEN="$GITHUB_PAT_NANAKO" echo ready',
+    '      - name: Probe',
+    '        run: node scripts/ci/probe-workflow-scope.mjs',
+  ].join('\n'), 'fixture.yml');
+  assert.equal(
+    tokenInAnotherStep.some((f) => f.kind === 'probe-missing-shell-token'),
+    true,
+    'un token in uno step diverso non deve soddisfare la sonda',
+  );
+
+  const sameBlock = findViolations([
+    '      - name: Probe',
+    '        run: |',
+    '          PUSH_TOKEN="$GITHUB_PAT_NANAKO" node scripts/ci/probe-workflow-scope.mjs',
+  ].join('\n'), 'fixture.yml');
+  assert.deepEqual(sameBlock, []);
 });
 
 test('nessun workflow del repo reintroduce handoff env.* dopo load-rc-env', () => {
