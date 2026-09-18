@@ -807,15 +807,23 @@ jobs:
             | jq -c 'flatten[]?' \
             | jq -c "$REVIEWER_BOT_REVIEW_FILTER" \
             | jq -rs --arg revision "$review_revision" --arg head "$HEAD_SHA" '
-            def has_current_revision($expected):
+            def review_revisions:
               [((.body // "") | split("\n")[] | rtrimstr("\r")
                 | select(test("^<!-- REVIEW_INPUT_REVISION: body:[0-9a-f]{64} -->$"; "i"))
                 | capture("^<!-- REVIEW_INPUT_REVISION: (?<revision>body:[0-9a-f]{64}) -->$"; "i").revision
-                | ascii_downcase)] | unique as $revisions
+                | ascii_downcase)] | unique;
+            def has_current_revision($expected):
+              review_revisions as $revisions
               | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
+            def has_single_revision:
+              (review_revisions | length) == 1;
+            def applies_to_current_input($expected; $head):
+              has_current_revision($expected)
+              or (((.commit_id // "") | ascii_downcase) == ($head | ascii_downcase)
+                  and has_single_revision);
             [.[]
              | select((.commit_id // "" | ascii_downcase) == ($head | ascii_downcase))
-             | select(has_current_revision($revision))
+             | select(applies_to_current_input($revision; $head))
              | select((.body // "")|contains("## Findings ("))
             ] | sort_by(.id // 0) | last | .body // empty' \
             > "$OUT/latest-review.md" 2>/dev/null; then
