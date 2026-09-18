@@ -11815,6 +11815,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.barometro-raiffeisen-zhaw-record.title': 'Vorsorge Schweiz: Rekord-Raiffeisen-Barometer mit 725 Punkten',
     'blog.article.barometro-raiffeisen-zhaw-record.excerpt': 'Das Raiffeisen- und ZHAW-Barometer erreicht mit 725 Punkten den Rekord. Säule 3a wächst auf 79%, aber die AHV-Finanzierung bleibt unsicher.',
     'blog.article.barometro-raiffeisen-zhaw-record.imageAlt': 'Raiffeisen- und ZHAW-Vorsorgebarometer in der Schweiz',
+    'blog.article.giorgetti-firma-decreto-contributi-comuni-confine.title': 'Grenzgänger: Giorgetti unterzeichnet das Beitragsdekret',
+    'blog.article.giorgetti-firma-decreto-contributi-comuni-confine.excerpt': 'Wirtschaftsminister Giancarlo Giorgetti hat das Dekret über staatliche Beiträge für Grenzgemeinden auf der Grundlage des Rom-Bern-Abkommens 2020 unterzeichnet.',
+    'blog.article.giorgetti-firma-decreto-contributi-comuni-confine.imageAlt': 'Minister Giancarlo Giorgetti unterzeichnete das Dekret über Beiträge an Grenzgemeinden',
 };
 
 export default blogMetaDe;

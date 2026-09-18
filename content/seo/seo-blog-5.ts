@@ -91372,6 +91372,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-giorgetti-firma-decreto-contributi-comuni-confine': {
+    title: 'Frontalieri: Giorgetti firma il decreto sui contributi',
+    description: 'Il ministro Giorgetti ha firmato il decreto sui contributi per i Comuni di frontiera nella fascia di 20 chilometri in base all\'accordo Roma-Berna del 2020.',
+    keywords: 'frontalieri, ticino, svizzera, italia, giorgetti, firma, decreto, contributi',
+    ogTitle: 'Frontalieri: firmato il decreto contributi per i Comuni di confine',
+    ogDescription: 'Il ministro italiano dell\'Economia Giancarlo Giorgetti ha firmato il decreto sui contributi statali per i Comuni di frontiera nella fascia di 20 chilometri, attuando l\'accordo Roma-Berna del 2020 per Ticino, Grigioni e Vallese.',
+    canonicalPath: '/articoli-frontaliere/giorgetti-firma-decreto-contributi-comuni-confine',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontalieri: Giorgetti firma il decreto sui contributi",
+      "description": "Il ministro Giorgetti ha firmato il decreto sui contributi per i Comuni di frontiera nella fascia di 20 chilometri in base all'accordo Roma-Berna del 2020.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/giorgetti-firma-decreto-contributi-comuni-confine.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Il ministro Giancarlo Giorgetti ha firmato il decreto sui contributi ai Comuni di confine"
+      },
+      "datePublished": "2026-09-18T01:50:29+00:00",
+      "dateModified": "2026-09-18T01:50:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/giorgetti-firma-decreto-contributi-comuni-confine/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

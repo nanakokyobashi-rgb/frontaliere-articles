@@ -11817,6 +11817,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.barometro-raiffeisen-zhaw-record.title': 'Previdenza Svizzera: Barometro Raiffeisen record a 725 punti',
     'blog.article.barometro-raiffeisen-zhaw-record.excerpt': 'Il barometro Raiffeisen e ZHAW raggiunge il record di 725 punti. Cresce il pilastro 3a al 79%, ma resta l\'incertezza sul finanziamento dell\'AVS.',
     'blog.article.barometro-raiffeisen-zhaw-record.imageAlt': 'Barometro previdenziale Raiffeisen e ZHAW in Ticino e Svizzera',
+    'blog.article.giorgetti-firma-decreto-contributi-comuni-confine.title': 'Frontalieri: Giorgetti firma il decreto sui contributi',
+    'blog.article.giorgetti-firma-decreto-contributi-comuni-confine.excerpt': 'Il ministro dell\'Economia Giancarlo Giorgetti ha firmato il decreto sui contributi statali per i Comuni di frontiera basato sull\'accordo Roma-Berna 2020.',
+    'blog.article.giorgetti-firma-decreto-contributi-comuni-confine.imageAlt': 'Il ministro Giancarlo Giorgetti ha firmato il decreto sui contributi ai Comuni di confine',
 };
 
 export default blogMetaIt;

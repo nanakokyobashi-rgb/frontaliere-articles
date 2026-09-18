@@ -11816,6 +11816,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.barometro-raiffeisen-zhaw-record.title': 'Pension Switzerland: Record 725-point Raiffeisen Barometer',
     'blog.article.barometro-raiffeisen-zhaw-record.excerpt': 'The Raiffeisen and ZHAW barometer reaches the record of 725 points. Pillar 3a grows to 79%, but uncertainty remains over the financing of the AVS.',
     'blog.article.barometro-raiffeisen-zhaw-record.imageAlt': 'Raiffeisen and ZHAW pension barometer in Ticino and Switzerland',
+    'blog.article.giorgetti-firma-decreto-contributi-comuni-confine.title': 'Frontier workers: Giorgetti signs the decree on contributions',
+    'blog.article.giorgetti-firma-decreto-contributi-comuni-confine.excerpt': 'Economy Minister Giancarlo Giorgetti signed the decree on state contributions for border municipalities based on the Rome-Berna 2020 agreement.',
+    'blog.article.giorgetti-firma-decreto-contributi-comuni-confine.imageAlt': 'Minister Giancarlo Giorgetti signed the decree on contributions to border municipalities',
 };
 
 export default blogMetaEn;

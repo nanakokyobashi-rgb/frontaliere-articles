@@ -11818,6 +11818,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.barometro-raiffeisen-zhaw-record.title': 'Prévoyance Suisse : Baromètre Raiffeisen record à 725 points',
     'blog.article.barometro-raiffeisen-zhaw-record.excerpt': 'Le baromètre Raiffeisen et ZHAW atteint le record de 725 points. Le pilier 3a passe à 79%, mais l\'incertitude demeure quant au financement de l\'AVS.',
     'blog.article.barometro-raiffeisen-zhaw-record.imageAlt': 'Baromètre de prévoyance Raiffeisen et ZHAW en Suisse',
+    'blog.article.giorgetti-firma-decreto-contributi-comuni-confine.title': 'Frontaliers : Giorgetti signe le décret sur les contributions',
+    'blog.article.giorgetti-firma-decreto-contributi-comuni-confine.excerpt': 'Le ministre de l\'Economie Giancarlo Giorgetti a signé le décret sur les contributions de l\'État pour les communes frontalières basé sur l\'accord Rome-Berne 2020.',
+    'blog.article.giorgetti-firma-decreto-contributi-comuni-confine.imageAlt': 'Le ministre Giancarlo Giorgetti a signé le décret sur les contributions aux communes frontalières',
 };
 
 export default blogMetaFr;
