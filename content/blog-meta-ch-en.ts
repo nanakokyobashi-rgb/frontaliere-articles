@@ -6533,6 +6533,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.consiglio-stati-lex-ubs-at1.title': 'Lex UBS: Council of States postpones decision',
     'blog.article.consiglio-stati-lex-ubs-at1.excerpt': 'Debate in the Council of States on the systemic banking project. Intervention by Karin Keller-Sutter scheduled for Wednesday and estimated cost of 20 billion.',
     'blog.article.consiglio-stati-lex-ubs-at1.imageAlt': 'Federal Palace in Bern during the debate on systemic banks',
+    'blog.article.penuria-alloggi-svizzera-2026.title': 'Shortage of accommodation in Switzerland: between 2026 and 2027',
+    'blog.article.penuria-alloggi-svizzera-2026.excerpt': 'Wüest Partner forecasts a recovery in residential construction with 45,000 units in 2026 and 50,000 in 2027.',
+    'blog.article.penuria-alloggi-svizzera-2026.imageAlt': 'Residential buildings and housing market in Switzerland',
 };
 
 export default blogMetaChEn;

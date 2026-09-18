@@ -6533,6 +6533,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.consiglio-stati-lex-ubs-at1.title': 'Lex UBS: Ständerat vertagt Entscheid',
     'blog.article.consiglio-stati-lex-ubs-at1.excerpt': 'Debatte im Ständerat über das Projekt Systembanken. Die Intervention von Karin Keller-Sutter ist für Mittwoch geplant und die Kosten werden auf 20 Milliarden geschätzt.',
     'blog.article.consiglio-stati-lex-ubs-at1.imageAlt': 'Bundeshaus in Bern während der Debatte über systemrelevante Banken',
+    'blog.article.penuria-alloggi-svizzera-2026.title': 'Wohnungsnot in der Schweiz: Wendepunkt zwischen 2026 und 2027',
+    'blog.article.penuria-alloggi-svizzera-2026.excerpt': 'Die Prognosen von Wüest Partner deuten auf eine Erholung des Wohnungsbaus mit 45\'000 Einheiten im Jahr 2026 und 50\'000 im Jahr 2027 hin.',
+    'blog.article.penuria-alloggi-svizzera-2026.imageAlt': 'Wohnungsbau und Immobilienmarkt in der Schweiz',
 };
 
 export default blogMetaChDe;

@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1944731/burckhardt-winterthur-compression-lavoro-posti": {
-    "articleId": "burckhardt-compression-tagli-posti",
-    "ts": "2026-08-19T11:44:57.880Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1944760/sunrise-krause-costi-personale-tagli": {
     "articleId": "sunrise-147-tagli-posti-lavoro",
     "ts": "2026-08-19T12:04:42.130Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/politica/1950922/crisi-ubs-at1-caso-soluzione-banca-capitale-cs-obbligazioni-commissione": {
     "articleId": "consiglio-stati-lex-ubs-at1",
     "ts": "2026-09-18T01:45:48.275Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1950870/svizzera-abitazioni-penuria-potrebbe-dovrebbe": {
+    "articleId": "penuria-alloggi-svizzera-2026",
+    "ts": "2026-09-18T01:54:52.037Z",
     "keyForm": 2
   }
 }

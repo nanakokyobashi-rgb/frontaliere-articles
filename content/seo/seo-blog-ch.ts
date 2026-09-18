@@ -84689,6 +84689,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-penuria-alloggi-svizzera-2026': {
+    title: 'Penuria alloggi in Svizzera: svolta tra il 2026 e il 2027',
+    description: 'Scopri le previsioni sul mercato immobiliare svizzero: stimate 45\'000 nuove unità abitative nel 2026 e 50\'000 nel 2027 secondo i dati di Wüest Partner.',
+    keywords: 'frontalieri, ticino, svizzera, italia, penuria, alloggi, svolta, previsioni',
+    ogTitle: 'Penuria alloggi in Svizzera: svolta tra il 2026 e il 2027',
+    ogDescription: 'Analisi del mercato immobiliare svizzero e previsioni sulle nuove costruzioni residenziali per il biennio 2026-2027 basate sullo studio di Wüest Partner.',
+    canonicalPath: '/articoli-svizzera/penuria-alloggi-svizzera-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Penuria alloggi in Svizzera: svolta tra il 2026 e il 2027",
+      "description": "Scopri le previsioni sul mercato immobiliare svizzero: stimate 45'000 nuove unità abitative nel 2026 e 50'000 nel 2027 secondo i dati di Wüest Partner.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/penuria-alloggi-svizzera-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Costruzioni residenziali e mercato immobiliare in Svizzera"
+      },
+      "datePublished": "2026-09-18T01:54:51+00:00",
+      "dateModified": "2026-09-18T01:54:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/penuria-alloggi-svizzera-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

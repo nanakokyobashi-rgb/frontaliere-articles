@@ -6533,6 +6533,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.consiglio-stati-lex-ubs-at1.title': 'Lex UBS : Conseil des Etats renvoie la décision',
     'blog.article.consiglio-stati-lex-ubs-at1.excerpt': 'Débat au Conseil des Etats sur le projet de banques systémiques. Intervention de Karin Keller-Sutter prévue mercredi et coût estimé à 20 milliards.',
     'blog.article.consiglio-stati-lex-ubs-at1.imageAlt': 'Palais fédéral à Berne lors du débat sur les banques systémiques',
+    'blog.article.penuria-alloggi-svizzera-2026.title': 'Pénurie de logements en Suisse : tournant entre 2026 et 2027',
+    'blog.article.penuria-alloggi-svizzera-2026.excerpt': 'Les prévisions de Wüest Partner indiquent une reprise des constructions résidentielles avec 45\'000 unités en 2026 et 50\'000 en 2027.',
+    'blog.article.penuria-alloggi-svizzera-2026.imageAlt': 'Constructions résidentielles et marché immobilier en Suisse',
 };
 
 export default blogMetaChFr;
