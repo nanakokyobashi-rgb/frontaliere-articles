@@ -96,7 +96,8 @@ describe('la copertura NON si perde: è ciò che rende accettabile l\'esclusione
   it('tests.yml usa lo script invece della cartella intera', () => {
     const wf = read('.github/workflows/tests.yml');
     assert.match(wf, /files=\$\(node scripts\/ci\/list-pr-gate-tests\.mjs\)/);
-    assert.match(wf, /node --test \$files/);
+    assert.match(wf, /node \\\n\s+--test \\\n\s+--test-reporter=spec/);
+    assert.match(wf, /--test-reporter-destination="\$NODE_TEST_REPORT_FILE"/);
     assert.doesNotMatch(
       wf,
       /node --test 'generator\/tests\/\*\.test\.mjs'/,
