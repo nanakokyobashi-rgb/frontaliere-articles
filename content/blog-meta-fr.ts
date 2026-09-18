@@ -11844,6 +11844,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.governo-no-iniziativa-frontiere.title': 'Contrôles aux frontières : le Gouvernement rejette l\'initiative UDC',
     'blog.article.governo-no-iniziativa-frontiere.excerpt': 'Le Conseil fédéral rejette l\'initiative « Arrêter les abus en matière d\'asile » : les contrôles systématiques coûteraient des milliards et risqueraient la sortie de Schengen.',
     'blog.article.governo-no-iniziativa-frontiere.imageAlt': 'Passage frontalier au Tessin avec trafic de frontaliers',
+    'blog.article.tasse-frontaliere-oltre-20km-2026.title': 'Taxes frontalières Italie Suisse 2026 : conduite sur 20 km',
+    'blog.article.tasse-frontaliere-oltre-20km-2026.excerpt': 'Règles fiscales 2026 pour les frontaliers de plus de 20 km : impôt à la source, franchises de 7 500 ou 10 000 euros et gestion de la double imposition.',
+    'blog.article.tasse-frontaliere-oltre-20km-2026.imageAlt': 'Vue de Lugano avec documents fiscaux pour frontaliers',
 };
 
 export default blogMetaFr;
