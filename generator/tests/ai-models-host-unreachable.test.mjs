@@ -1998,6 +1998,23 @@ describe('#818 item 5 — budget dei retry sul ramo flap', () => {
     }), 2);
   });
 
+  it('calcola il tentativo successivo dal residuo dopo quello già consumato', () => {
+    assert.equal(resolverFlapAttemptBudget({
+      maxRetriesPerModel: 2,
+      backoffMs: 2500,
+      timeoutMs: 90_000,
+      remainingMs: 100_000,
+      completedAttempts: 1,
+    }), 2, 'il secondo tentativo costa 92.5s e rientra nei 100s residui');
+    assert.equal(resolverFlapAttemptBudget({
+      maxRetriesPerModel: 2,
+      backoffMs: 2500,
+      timeoutMs: 90_000,
+      remainingMs: 90_000,
+      completedAttempts: 1,
+    }), 1, 'il secondo tentativo non rientra nei 90s residui');
+  });
+
   it('il loop consulta il helper: sotto un deadline stretto un flap non brucia maxRetriesPerModel', async () => {
     process.env.AI_MODELS_FORCE_CHAIN = 'gpt-4o-mini';
     const fetchCalls = [];

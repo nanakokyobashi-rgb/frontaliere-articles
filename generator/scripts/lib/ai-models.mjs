@@ -5727,6 +5727,9 @@ function _flapKeyFor(model, provider, err) {
  *
  * Pure: the loop asks, this answers. Non-finite `remainingMs` → full budget
  * (same behaviour #770 pinned). Always at least one attempt.
+ * `completedAttempts` lets the caller ask for the absolute attempt count that
+ * still fits after the current request has already consumed part of the
+ * deadline budget.
  *
  * @returns {number} in [1, maxRetriesPerModel]
  */
@@ -5735,18 +5738,23 @@ export function resolverFlapAttemptBudget({
   backoffMs = DEFAULT_OPTS.backoffMs,
   timeoutMs = DEFAULT_OPTS.timeout,
   remainingMs = Infinity,
+  completedAttempts = 0,
 } = {}) {
   const maxAttempts = Math.max(1, Math.floor(Number(maxRetriesPerModel)) || 1);
   const timeout = Math.max(0, Number(timeoutMs) || 0);
   const backoff = Math.max(0, Number(backoffMs) || 0);
   const remaining = Number(remainingMs);
   if (!Number.isFinite(remaining)) return maxAttempts;
-  let allowed = 0;
+  const completed = Math.min(
+    maxAttempts,
+    Math.max(0, Math.floor(Number(completedAttempts)) || 0),
+  );
+  let allowed = completed;
   let spent = 0;
-  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
-    const wait = attempt < maxAttempts ? attempt * backoff : 0;
+  for (let attempt = completed + 1; attempt <= maxAttempts; attempt++) {
+    const wait = attempt > 1 ? (attempt - 1) * backoff : 0;
     const cost = timeout + wait;
-    if (allowed >= 1 && spent + cost > Math.max(0, remaining)) break;
+    if (spent + cost > Math.max(0, remaining)) break;
     spent += cost;
     allowed = attempt;
   }
@@ -5761,6 +5769,7 @@ function _flapRetryExhausted(e, attempt, opts) {
     backoffMs: opts.backoffMs,
     timeoutMs: opts.timeout,
     remainingMs,
+    completedAttempts: attempt,
   });
 }
 
