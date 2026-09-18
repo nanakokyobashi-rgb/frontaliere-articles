@@ -283,6 +283,11 @@ test('tests.yml claims before review work and finalizes without gating the requi
   assert.match(workflow, /actions:\s*read/);
   assert.match(workflow, /Reviews API illeggibile/);
   assert.match(workflow, /same_head/);
+  const sameHeadStart = workflow.indexOf('same_head=');
+  const sameHeadEnd = workflow.indexOf('if [ "${same_head:-0}"', sameHeadStart);
+  const sameHeadGuard = workflow.slice(sameHeadStart, sameHeadEnd);
+  assert.match(sameHeadGuard, /\.user\.type == "Bot"/);
+  assert.match(sameHeadGuard, /test\("\^\(claude\|frontaliere-automation\)";"i"\)/);
   assert.match(workflow, /scripts\/ci\/review-claim\.mjs --claim/);
   assert.match(workflow, /CLAIM_ACTION: acquire/);
   assert.match(workflow, /CLAIM_ACTION: finalize/);

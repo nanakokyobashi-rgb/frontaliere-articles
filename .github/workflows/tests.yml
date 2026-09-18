@@ -331,11 +331,13 @@ jobs:
 
       # Re-review guard: una review terminale sulla STESSA HEAD e' gia' il
       # giudizio di questo contributo, anche se e' negativa o non contiene
-      # `## LGTM`, salvo un body edit che introduce una nuova review revision.
-      # Senza questo controllo ogni rerun/retry dello stesso rosso poteva
-      # invocare Codex di nuovo. Su una HEAD nuova si conserva invece il
-      # percorso incrementale: si guarda il delta dal contributo della review
-      # piu' recente e si fa carry-forward solo quando il codice PR e' invariato.
+      # `## LGTM`, anche quando un body edit introduce una nuova review
+      # revision: il gate porta avanti esplicitamente il verdetto sulla stessa
+      # HEAD dopo aver rivalidato il contesto corrente. Senza questo controllo
+      # ogni rerun/retry dello stesso rosso poteva invocare Codex di nuovo. Su
+      # una HEAD nuova si conserva invece il percorso incrementale: si guarda
+      # il delta dal contributo della review piu' recente e si fa carry-forward
+      # solo quando il codice PR e' invariato.
       # Una risposta API illeggibile è un errore: senza prova del ledger non si
       # può spendere un altro turno Codex in sicurezza.
       - name: Re-review guard (skip Codex when no code changed since last LGTM)
@@ -400,8 +402,10 @@ jobs:
             [flatten[]
              | select((.state // "") != "PENDING" and (.state // "") != "DISMISSED")
              | select(
-                 ((.user.login // "") | test("^(claude\\[bot\\]|frontaliere-automation\\[bot\\])$";"i"))
-                 or (((.user.login // "") | test("^github-actions\\[bot\\]$"; "i"))
+                 ((.user.type == "Bot")
+                   and ((.user.login // "") | test("^(claude|frontaliere-automation)";"i")))
+                 or ((.user.type == "Bot")
+                     and ((.user.login // "") | test("^github-actions\\[bot\\]$"; "i"))
                      and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
                )
              | select(.commit_id == $head)] | length'

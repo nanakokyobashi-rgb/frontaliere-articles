@@ -63,15 +63,31 @@ test('accetta solo review approvante e check verde sulla HEAD', () => {
   }).allow, false);
 });
 
-test('tiene la prima LGTM sulla HEAD e non accetta check pending o su altra HEAD', () => {
+test('usa l ultimo verdetto sulla HEAD e non accetta check pending o su altra HEAD', () => {
   const finding = review('## Findings (Important: 1, Nit: 0)\n\n🔴 Important: regression.\n\n## LGTM', HEAD, '2026-09-13T12:02:00Z');
   assert.equal(evaluateNativeAutoMerge({
     pr: pr(),
     reviews: [review(CLEAN_BODY, HEAD, '2026-09-13T12:00:00Z'), finding],
     checkRuns: [check()],
+  }).allow, false);
+  assert.equal(evaluateNativeAutoMerge({
+    pr: pr(),
+    reviews: [finding, review(CLEAN_BODY, HEAD, '2026-09-13T12:03:00Z')],
+    checkRuns: [check()],
   }).allow, true);
   assert.equal(requiredVitestDecision([check({ status: 'in_progress', conclusion: null, completed_at: null })], HEAD).allow, false);
   assert.equal(requiredVitestDecision([check({ head_sha: OLD_HEAD })], HEAD).allow, false);
+});
+
+test('un edit di una review vecchia non nasconde un Important successivo', () => {
+  const clean = review(CLEAN_BODY, HEAD, '2026-09-13T12:00:00Z');
+  clean.updated_at = '2026-09-13T12:03:00Z';
+  const finding = review('🔴 Important: regression.', HEAD, '2026-09-13T12:02:00Z');
+  assert.equal(evaluateNativeAutoMerge({
+    pr: pr(),
+    reviews: [clean, finding],
+    checkRuns: [check()],
+  }).allow, false);
 });
 
 test('richiede il riepilogo esplicito e vincola l opt-in alla HEAD verificata', () => {

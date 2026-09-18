@@ -51,12 +51,6 @@ function flattenPages(value) {
 
 function reviewTimestamp(review) {
   const timestamps = [
-    review?.edited_at,
-    review?.editedAt,
-    review?.event_at,
-    review?.eventAt,
-    review?.updated_at,
-    review?.updatedAt,
     review?.submitted_at,
     review?.submittedAt,
     review?.created_at,
@@ -102,30 +96,6 @@ function isCodexFallbackReviewOnHead(review, head) {
 function latestReviewGateCandidate(reviews, head) {
   return latestReviewMatching(reviews, (review) => isManagedReview(review)
     && (isReviewerBot(review?.user) || isCodexFallbackReviewOnHead(review, head)));
-}
-
-function firstReviewMatching(reviews, predicate) {
-  if (!Array.isArray(reviews) || typeof predicate !== 'function') return null;
-  const candidates = flattenPages(reviews)
-    .map((review, index) => ({ review, index, timestamp: reviewTimestamp(review) }))
-    .filter(({ review, timestamp }) => predicate(review)
-      && timestamp !== null)
-    .sort((left, right) => left.timestamp - right.timestamp
-      || (Number(left.review.id || left.index) || left.index)
-        - (Number(right.review.id || right.index) || right.index));
-  return candidates[0]?.review || null;
-}
-
-/**
- * A clean LGTM on HEAD is sticky: a later same-SHA Important cannot revoke it.
- * If the first terminal verdict is not approving, keep the latest HEAD review.
- */
-function firstReviewGateCandidate(reviews, head) {
-  const first = firstReviewMatching(reviews, (review) => isManagedReview(review)
-    && review?.commit_id === head
-    && (isReviewerBot(review?.user) || isCodexFallbackReviewOnHead(review, head)));
-  if (first && reviewHasLgtm(first.body) && reviewHasZeroFindings(first.body)) return first;
-  return latestReviewGateCandidate(reviews, head);
 }
 
 /** Return the latest reviewer-bot review, regardless of the commit it names. */
@@ -416,7 +386,7 @@ export function evaluateNativeAutoMerge({
   // applies the repository's fingerprint-based carry-forward policy, so the
   // native helper must not reject a valid older LGTM merely because the PR
   // received a data-only or otherwise review-preserving commit afterward.
-  const review = firstReviewGateCandidate(reviews, pr.headRefOid);
+  const review = latestReviewGateCandidate(reviews, pr.headRefOid);
   const testOnlyApproval = !review
     && testOnlyReviewIsApproved(verifiedTestOnlyReview, pr.headRefOid);
   if (!review && !testOnlyApproval) {
@@ -753,7 +723,7 @@ function main() {
       repo,
       pr.headRefOid,
       checkRuns,
-      firstReviewGateCandidate(reviews, pr.headRefOid),
+      latestReviewGateCandidate(reviews, pr.headRefOid),
     );
   } catch (error) {
     if (hadAutoMerge) {
@@ -822,7 +792,7 @@ function main() {
       repo,
       current.headRefOid,
       finalCheckRuns,
-      firstReviewGateCandidate(finalReviews, current.headRefOid),
+      latestReviewGateCandidate(finalReviews, current.headRefOid),
     );
   } catch (error) {
     if (current.autoMergeRequest !== null) {

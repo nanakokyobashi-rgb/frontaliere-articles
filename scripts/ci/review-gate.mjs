@@ -23,10 +23,14 @@
  * `## LGTM` e NESSUN finding `🔴 Important`, oppure solo finding su file fuori
  * dal diff corrente già raccolti in una issue follow-up (stessa
  * `REDFLAG_IMPORTANT_RE` che usa il redflag-fixer — una sola regex, nessun
- * drift). Deve stare sulla head corrente; se sta su un commit precedente vale
- * il CARRY-FORWARD: se il fingerprint del contributo (3-dot vs merge-base,
+ * drift). Deve stare sulla head corrente, oppure portare la revisione del body
+ * corrente su un commit precedente; se sta su un commit precedente vale il
+ * CARRY-FORWARD: se il fingerprint del contributo (3-dot vs merge-base,
  * code-only) e' identico fra i due commit, la PR non ha cambiato il proprio
  * codice — tipicamente un rebase di solo main-merge — e la review resta valida.
+ * Un edit del body sulla stessa HEAD e' un carry-forward esplicito e stretto:
+ * il guard evita una seconda review, mentre questo gate rivalida HEAD e body
+ * correnti prima di riusare l'ultimo verdetto della HEAD.
  * E' la stessa funzione che usava `auto-merge-eval.mjs`, importata e non
  * riscritta.
  *
@@ -192,10 +196,10 @@ function historicalNonApprovingBlocksDriftFallback() {
     const body = String(review.body || '');
     return reviewer
       && review.state !== 'PENDING'
-      // A body edit or a code change invalidates every older verdict,
-      // including an old LGTM.  The deterministic fallback may only replace
-      // the absence of a review, never a review that was issued for an older
-      // contribution.
+      // A body edit on the same HEAD has a separate carry-forward path in
+      // `lastBotReview`; the deterministic fallback must still never replace
+      // a verdict that is stale by revision or by HEAD when that path is
+      // unavailable.
       && (staleRevision || staleHead);
   });
   if (blockers.length) {
@@ -241,9 +245,12 @@ function codexReviewWasPreviouslyAccepted(review) {
 }
 
 /**
- * Ultima review del reviewer bot, qualunque sia il suo esito. Serve sia per il
- * verdetto sia per distinguere «review che si applica alla head» da «review
- * mai postata / review stantia». Il drift-fallback si apre solo nel secondo.
+ * Ultima review del reviewer bot, qualunque sia il suo esito. Una review con
+ * la revisione body corrente vale anche su una HEAD diversa per il normale
+ * fingerprint carry-forward; una review con revisione body vecchia vale solo
+ * se e' ancorata alla HEAD corrente. Quest'ultimo e' il percorso esplicito che
+ * consente al re-review guard di saltare Codex dopo un body edit senza perdere
+ * il verdetto del codice gia' valutato.
  */
 function lastBotReview() {
   let reviews;
@@ -277,9 +284,12 @@ function lastBotReview() {
     if (!codex.length) throw new Error('Nessuna review Codex marcata sulla HEAD');
     return codex[codex.length - 1];
   }
-  const bots = reviews.filter((r) => isManagedReview(r))
-    .filter((review) => reviewHasInputRevision(review.body, REVIEW_REVISION));
-  return bots.length ? bots[bots.length - 1] : null;
+  const bots = reviews.filter((r) => isManagedReview(r));
+  const eligible = bots.filter((review) => (
+    reviewHasInputRevision(review.body, REVIEW_REVISION)
+    || review.commit_id === HEAD_SHA
+  ));
+  return eligible.length ? eligible[eligible.length - 1] : null;
 }
 
 /**
