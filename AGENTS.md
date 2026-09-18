@@ -118,6 +118,15 @@ Per push, merge e dispatch si usa **`GITHUB_PAT_NANAKO`**, non `GITHUB_PAT`
 i merge**: per anti-ricorsione non fa scattare `publish-api.yml`, quindi la
 superficie servita al sito resta vecchia in silenzio.
 
+Dopo `load-rc-env.mjs` il PAT vive nella **shell** (`GITHUB_ENV` →
+`$GITHUB_PAT_NANAKO`), non nel contesto `${{ env.GITHUB_PAT_NANAKO }}`: quella
+interpolazione può restare vuota e far ricadere `PUSH_TOKEN` / `GH_TOKEN` sul
+`GITHUB_TOKEN` del runner, o far saltare `probe-workflow-scope.mjs`. La forma
+runtime è `PUSH_TOKEN="$GITHUB_PAT_NANAKO"` / `GH_TOKEN="$GITHUB_PAT_NANAKO"`.
+`scripts/ci/scan-runtime-token-handoff.mjs` (via
+`generator/tests/runtime-token-handoff.test.mjs`) rende rossa la forma `env.*`
+su ogni workflow, non su un elenco di file.
+
 ## Il ciclo autonomo
 
 Le PR ricevono una review automatica e vengono mergiate quando sono verdi. Dal
