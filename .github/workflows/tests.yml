@@ -394,17 +394,24 @@ jobs:
             echo "contribution_fingerprint=$claimFingerprint" >> "$GITHUB_OUTPUT"
           }
 
-          # Count every terminal managed review on this HEAD, including those
-          # posted against an older PR-body hash, but only when the review
-          # authenticates at least one unique body revision. A bare HEAD match
-          # is not enough: it would let an unmarked or conflicting body become
-          # the carry-forward verdict after a body edit.
+          # Count every terminal APPROVING managed review on this HEAD,
+          # including those posted against an older PR-body hash, but only when
+          # the review authenticates at least one unique body revision. A bare
+          # HEAD match is not enough: it would let an unmarked or conflicting
+          # body become the carry-forward verdict after a body edit. A negative
+          # review deliberately does not skip re-review: editing the body is
+          # how a PR-body finding gets corrected and revalidated.
           same_head=$(printf '%s' "$reviews" | jq --arg head "$HEAD_SHA" '
             def has_single_revision:
               [((.body // "") | split("\n")[] | rtrimstr("\r")
                 | select(test("^<!-- REVIEW_INPUT_REVISION: body:[0-9a-f]{64} -->$"; "i"))
                 | capture("^<!-- REVIEW_INPUT_REVISION: (?<revision>body:[0-9a-f]{64}) -->$"; "i").revision
                 | ascii_downcase)] | unique | length == 1;
+            def has_clean_lgtm:
+              (any((.body // "") | split("\n")[];
+                test("^[[:space:]]{0,3}##[[:space:]]+LGTM[[:space:]]*$")))
+              and (((.body // "")
+                | test("🔴[[:space:]]*\\*{0,2}[[:space:]]*Important[[:space:]]*\\*{0,2}[[:space:]]*[:—-]")) | not);
             [flatten[]
              | select((.state // "") != "PENDING" and (.state // "") != "DISMISSED")
              | select(
@@ -415,11 +422,12 @@ jobs:
                      and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
                )
              | select(has_single_revision)
+             | select(has_clean_lgtm)
              | select(.commit_id == $head)] | length'
           )
           if [ "${same_head:-0}" -gt 0 ]; then
             echo "skip=true" >> "$GITHUB_OUTPUT"
-            echo "Esiste gia' una review terminale del reviewer sulla HEAD $HEAD_SHA → nessuna seconda review, anche dopo un body edit."
+            echo "Esiste gia' una review approvante del reviewer sulla HEAD $HEAD_SHA → nessuna seconda review, anche dopo un body edit."
             exit 0
           fi
 
