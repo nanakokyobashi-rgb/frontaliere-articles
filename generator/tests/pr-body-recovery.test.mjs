@@ -35,11 +35,11 @@ test('body edits re-enter the code pipeline; recovery uses only trusted API call
   assert.match(tests.match(/types: \[[^\]]+\]/)[0], /edited/);
   assert.match(tests, /BODY_EDITED:/);
   assert.match(tests, /REVIEW_REVISION:/);
-  assert.match(tests, /nessuna seconda review\./);
+  assert.match(tests, /nessuna seconda review, anche dopo un body edit/);
   assert.match(tests, /review approvante del reviewer/);
   assert.match(tests, /has_clean_lgtm/);
   assert.match(tests, /Body della PR cambiato e nessuna review terminale sulla HEAD → review completa/);
-  assert.ok(tests.indexOf('nessuna seconda review.') < tests.indexOf('if [ -z "$changed" ]'));
+  assert.ok(tests.indexOf('nessuna seconda review, anche dopo un body edit') < tests.indexOf('if [ -z "$changed" ]'));
   assert.doesNotMatch(tests, /BODY_EDITED:-false\}" != "true"/);
   assert.match(recovery, /pull_request_target:\n    types: \[edited\]/);
   assert.doesNotMatch(recovery, /actions\/checkout|createCheckRun/);
