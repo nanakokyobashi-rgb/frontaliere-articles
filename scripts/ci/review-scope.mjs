@@ -21,6 +21,7 @@ const FOLLOWUP_MARKER = 'OUT_OF_SCOPE_REVIEW_FOLLOWUP';
 const MAX_FOLLOWUP_BODY_LEN = 60000;
 const FILE_CITATION_RE = /(?:^|[\s([{"'`])((?:\.\.?\/)?(?:[A-Za-z0-9_.-]+\/)*[A-Za-z0-9_.-]+\.(?:cjs|css|html|js|json|md|mjs|sh|ts|tsx|txt|toml|yaml|yml|jsx))(?:[:#]L?\d+(?:[-–]\d+)?)?/giu;
 const IMPORTANT_MARKER_RE = /🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]\s*/u;
+const FINDING_MARKER_RE = /🔴|🟡\s*\*{0,2}\s*Nit\s*\*{0,2}\s*[:—-]|🟣\s*\*{0,2}\s*Pre-existing\s*\*{0,2}\s*[:—-]|❓\s*q\s*:/gu;
 const ZERO_IMPORTANT_RE = /^(?:0|none|nessuno)\s*$/iu;
 
 function resetImportantRegex() {
@@ -62,6 +63,32 @@ export function extractFileCitations(line) {
   });
 }
 
+function isInsideCodeSpan(line, index) {
+  return (String(line).slice(0, index).match(/`/gu) || []).length % 2 === 1;
+}
+
+function firstFindingMarker(line) {
+  FINDING_MARKER_RE.lastIndex = 0;
+  for (const match of String(line || '').matchAll(FINDING_MARKER_RE)) {
+    if (!isInsideCodeSpan(line, match.index)) return match;
+  }
+  return null;
+}
+
+/** A severity line is a boundary only when its prefix identifies a finding. */
+function isFindingStart(line, marker) {
+  if (!marker) return false;
+  const prefix = String(line).slice(0, marker.index)
+    .trim()
+    .replace(/^(?:[-*+>]\s*)+/u, '')
+    .replace(/^(?:[_*~`]\s*)+/u, '')
+    .trim();
+  if (!prefix || extractFileCitations(prefix).length > 0) return true;
+  return /^PR\s+body\s*[:#]\s*L?\d+(?:[-–]\d+)?\s*:\s*$/iu.test(prefix)
+    || /`[^`\n]+`\s*:\s*$/u.test(prefix)
+    || /(?:^|\s)(?:L?\d+)(?:[-–]\d+)?\s*:\s*$/iu.test(prefix);
+}
+
 function importantFindingLine(line) {
   resetImportantRegex();
   if (!REDFLAG_IMPORTANT_RE.test(line)) return false;
@@ -84,11 +111,15 @@ function findingsSection(body) {
 export function importantFindings(body) {
   const section = findingsSection(body);
   const lines = (section || String(body || '')).split(/\r?\n/);
+  const boundaries = lines
+    .map((line, index) => ({ line, index, marker: firstFindingMarker(line) }))
+    .filter(({ marker, line }) => isFindingStart(line, marker))
+    .map(({ index }) => index);
   const markers = lines
     .map((line, index) => ({ line, index }))
     .filter(({ line }) => importantFindingLine(line));
   return markers.map(({ line, index }, markerIndex) => {
-    const nextFinding = markers[markerIndex + 1]?.index ?? lines.length;
+    const nextFinding = boundaries.find(boundary => boundary > index) ?? lines.length;
     const nextH2 = lines.findIndex((candidate, candidateIndex) =>
       candidateIndex > index && /^##\s/u.test(candidate));
     const end = Math.min(nextFinding, nextH2 === -1 ? lines.length : nextH2);

@@ -845,5 +845,40 @@
     "articleId": "stazioni-ferroviarie-ticino-sicurezza",
     "ts": "2026-09-17T03:01:49.784Z",
     "keyForm": 2
+  },
+  "https://www.vconews.it/2026/09/17/leggi-notizia/argomenti/attualita-27/articolo/frontalieri-nuovo-confronto-tra-governo-e-territori-sul-tavolo-naspi-sanita-e-assegno-unico.html": {
+    "articleId": "tavolo-interministeriale-frontalieri",
+    "ts": "2026-09-18T00:13:06.713Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/previdenza%3a-barometro-raiffeisen-record%2c-ma-resta-incertezza-avs/92075981": {
+    "articleId": "barometro-raiffeisen-zhaw-record",
+    "ts": "2026-09-18T01:36:40.740Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1951004/decreto-confine-firmato-comuni-giorgetti": {
+    "articleId": "giorgetti-firma-decreto-contributi-comuni-confine",
+    "ts": "2026-09-18T01:50:29.705Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/cantone/luganese/1950907/passa-il-valico-di-gandria-con-due-pappagalli-di-una-specie-protetta": {
+    "articleId": "sequestro-pappagalli-gandria",
+    "ts": "2026-09-18T02:08:17.111Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/info/economia/crescita-svizzera-al-rialzo-grazie-alle-esportazioni--4090330.html": {
+    "articleId": "crescita-economia-svizzera-seco-2026",
+    "ts": "2026-09-18T02:18:07.861Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/09/parziali-sospensioni-dei-treni-tra-luino-e-porto-valtravaglia-dal-23-settembre-al-primo-ottobre/2682115": {
+    "articleId": "sospensione-treni-luino-porto",
+    "ts": "2026-09-18T02:47:07.403Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4086184": {
+    "articleId": "assenteismo-psichico-ticino-51",
+    "ts": "2026-09-18T03:45:59.431Z",
+    "keyForm": 2
   }
 }

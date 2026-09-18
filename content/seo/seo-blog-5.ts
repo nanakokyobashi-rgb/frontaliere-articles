@@ -91294,6 +91294,279 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tavolo-interministeriale-frontalieri': {
+    title: 'Frontalieri: nuovo confronto tra Governo e territori',
+    description: 'Nuovo incontro del tavolo interministeriale sul frontalierato: focus su Naspi, sanità, assegno unico e statuto. Prossima riunione il 9 novembre. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, nuovo, confronto, governo, territori',
+    ogTitle: 'Frontalieri, nuovo confronto tra Governo e territori',
+    ogDescription: 'Si è tenuto un nuovo incontro del tavolo interministeriale sul frontalierato con la partecipazione del Piemonte. Al centro del dibattito Naspi, sanità, assegno unico e statuto. Fissata la data del prossimo incontro per il 9 novembre.',
+    canonicalPath: '/articoli-frontaliere/tavolo-interministeriale-frontalieri',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontalieri: nuovo confronto tra Governo e territori",
+      "description": "Nuovo incontro del tavolo interministeriale sul frontalierato: focus su Naspi, sanità, assegno unico e statuto. Prossima riunione il 9 novembre. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/tavolo-interministeriale-frontalieri.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Riunione del tavolo interministeriale sui frontalieri"
+      },
+      "datePublished": "2026-09-18T00:13:06+00:00",
+      "dateModified": "2026-09-18T00:13:06+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/tavolo-interministeriale-frontalieri/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-barometro-raiffeisen-zhaw-record': {
+    title: 'Previdenza Svizzera: Barometro Raiffeisen record a 725 punti',
+    description: 'Barometro Raiffeisen e ZHAW record a 725 punti. Cresce il pilastro 3a al 79%, ma il 39% teme per l\'AVS. Scopri i dati della previdenza in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, previdenza, barometro, raiffeisen, record',
+    ogTitle: 'Previdenza: Barometro Raiffeisen e ZHAW a quota 725 punti',
+    ogDescription: 'Il sistema previdenziale svizzero segna un record con il barometro Raiffeisen e ZHAW a 725 punti. Aumenta il risparmio nel pilastro 3a al 79%, ma persistono i timori per il finanziamento a lungo termine dell\'AVS e la sostenibilità del primo pilastro.',
+    canonicalPath: '/articoli-frontaliere/barometro-raiffeisen-zhaw-record',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Previdenza Svizzera: Barometro Raiffeisen record a 725 punti",
+      "description": "Barometro Raiffeisen e ZHAW record a 725 punti. Cresce il pilastro 3a al 79%, ma il 39% teme per l'AVS. Scopri i dati della previdenza in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/barometro-raiffeisen-zhaw-record.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Barometro previdenziale Raiffeisen e ZHAW in Ticino e Svizzera"
+      },
+      "datePublished": "2026-09-18T01:36:40+00:00",
+      "dateModified": "2026-09-18T01:36:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/barometro-raiffeisen-zhaw-record/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-giorgetti-firma-decreto-contributi-comuni-confine': {
+    title: 'Frontalieri: Giorgetti firma il decreto sui contributi',
+    description: 'Il ministro Giorgetti ha firmato il decreto sui contributi per i Comuni di frontiera nella fascia di 20 chilometri in base all\'accordo Roma-Berna del 2020.',
+    keywords: 'frontalieri, ticino, svizzera, italia, giorgetti, firma, decreto, contributi',
+    ogTitle: 'Frontalieri: firmato il decreto contributi per i Comuni di confine',
+    ogDescription: 'Il ministro italiano dell\'Economia Giancarlo Giorgetti ha firmato il decreto sui contributi statali per i Comuni di frontiera nella fascia di 20 chilometri, attuando l\'accordo Roma-Berna del 2020 per Ticino, Grigioni e Vallese.',
+    canonicalPath: '/articoli-frontaliere/giorgetti-firma-decreto-contributi-comuni-confine',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontalieri: Giorgetti firma il decreto sui contributi",
+      "description": "Il ministro Giorgetti ha firmato il decreto sui contributi per i Comuni di frontiera nella fascia di 20 chilometri in base all'accordo Roma-Berna del 2020.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/giorgetti-firma-decreto-contributi-comuni-confine.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Il ministro Giancarlo Giorgetti ha firmato il decreto sui contributi ai Comuni di confine"
+      },
+      "datePublished": "2026-09-18T01:50:29+00:00",
+      "dateModified": "2026-09-18T01:50:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/giorgetti-firma-decreto-contributi-comuni-confine/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-sequestro-pappagalli-gandria': {
+    title: 'Sequestro di pappagalli protetti al valico di Gandria',
+    description: 'Fermato al valico di Gandria un cittadino svizzero con due pappagalli cenerini sprovvisti di autorizzazione Cites. Intervento di Udsc e Usav. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, sequestro, pappagalli, protetti, valico',
+    ogTitle: 'Pappagalli protetti sequestrati al valico di Gandria',
+    ogDescription: 'Scopri i dettagli sul sequestro di due pappagalli cenerini sprovvisti di certificato Cites fermati al valico di Gandria dagli agenti dell\'Udsc e dell\'Usav.',
+    canonicalPath: '/articoli-frontaliere/sequestro-pappagalli-gandria',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Sequestro di pappagalli protetti al valico di Gandria",
+      "description": "Fermato al valico di Gandria un cittadino svizzero con due pappagalli cenerini sprovvisti di autorizzazione Cites. Intervento di Udsc e Usav. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/sequestro-pappagalli-gandria.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Controlli doganali al valico di Gandria in Ticino"
+      },
+      "datePublished": "2026-09-18T02:08:16+00:00",
+      "dateModified": "2026-09-18T02:08:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/sequestro-pappagalli-gandria/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-crescita-economia-svizzera-seco-2026': {
+    title: 'Crescita svizzera al rialzo: PIL al 1,7% secondo la SECO',
+    description: 'La SECO alza le stime del PIL svizzero al 1,7% per il 2026 grazie all\'export. Scopri i dati su disoccupazione e inflazione per i lavoratori. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, crescita, rialzo, secondo, seco',
+    ogTitle: 'Crescita PIL Svizzera al rialzo: SECO fissa l\'1,7% per il 2026',
+    ogDescription: 'Le ultime previsioni economiche della SECO per la Svizzera: PIL all\'1,7% nel 2026, export in crescita e inflazione contenuta allo 0,6% per i frontalieri.',
+    canonicalPath: '/articoli-frontaliere/crescita-economia-svizzera-seco-2026',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Crescita svizzera al rialzo: PIL al 1,7% secondo la SECO",
+      "description": "La SECO alza le stime del PIL svizzero al 1,7% per il 2026 grazie all'export. Scopri i dati su disoccupazione e inflazione per i lavoratori. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/crescita-economia-svizzera-seco-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Crescita economica svizzera e previsioni SECO"
+      },
+      "datePublished": "2026-09-18T02:18:07+00:00",
+      "dateModified": "2026-09-18T02:18:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/crescita-economia-svizzera-seco-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-sospensione-treni-luino-porto': {
+    title: 'Sospensioni treni tra Luino e Porto Valtravaglia',
+    description: 'Scopri le modifiche alla circolazione dei treni regionali tra Luino e Porto Valtravaglia dal 23 settembre al 1 ottobre 2026 per lavori RFI. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, sospensioni, treni, luino, porto',
+    ogTitle: 'Sospensioni treni tra Luino e Porto Valtravaglia',
+    ogDescription: 'Aggiornamenti sui lavori di potenziamento infrastrutturale di Rete Ferroviaria Italiana e stop ai treni regionali tra Luino e Porto Valtravaglia.',
+    canonicalPath: '/articoli-frontaliere/sospensione-treni-luino-porto',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Sospensioni treni tra Luino e Porto Valtravaglia",
+      "description": "Scopri le modifiche alla circolazione dei treni regionali tra Luino e Porto Valtravaglia dal 23 settembre al 1 ottobre 2026 per lavori RFI. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/sospensione-treni-luino-porto.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Treno regionale sulla linea tra Luino e Porto Valtravaglia"
+      },
+      "datePublished": "2026-09-18T02:47:07+00:00",
+      "dateModified": "2026-09-18T02:47:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/sospensione-treni-luino-porto/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-assenteismo-psichico-ticino-51': {
+    title: 'Assenze psichiche in Ticino: 51% finiscono in licenziamento',
+    description: 'In Ticino, il 51% delle assenze per cause psichiche termina con lo scioglimento del contratto. La quota di beneficiari AI per motivi psichiatrici è salita',
+    keywords: 'frontalieri, ticino, svizzera, italia, assenze, psichiche, finiscono, licenziamento',
+    ogTitle: 'Assenze psichiche in Ticino: 51% finiscono in licenziamento',
+    ogDescription: 'In Ticino, il 51% delle assenze per cause psichiche termina con lo scioglimento del contratto. La quota di beneficiari AI per motivi psichiatrici è salita al 51% dal 33% di vent\'anni fa. Scopri i dati e le soluzioni.',
+    canonicalPath: '/articoli-frontaliere/assenteismo-psichico-ticino-51',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Assenze psichiche in Ticino: 51% finiscono in licenziamento",
+      "description": "In Ticino, il 51% delle assenze per cause psichiche termina con lo scioglimento del contratto. La quota di beneficiari AI per motivi psichiatrici è salita",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/assenteismo-psichico-ticino-51.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ambiente di lavoro sereno in Ticino, focus sulla salute mentale e integrazione"
+      },
+      "datePublished": "2026-09-18T03:45:59+00:00",
+      "dateModified": "2026-09-18T03:45:59+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/assenteismo-psichico-ticino-51/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
