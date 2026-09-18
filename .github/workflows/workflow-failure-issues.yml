@@ -12,9 +12,20 @@ name: Workflow failure → issue
 # centralmente; questo apre centralmente.
 #
 # ── Cadenza, e perché non è quella del sito ─────────────────────────────────
-# Ogni 30 minuti ai minuti 9 e 39, deliberatamente sfasati dai cron del sito
-# (che gira a :15/:17/:20/:23). I due repo colpiscono la STESSA API GitHub e la
-# stessa quota: cron allineati sommano i picchi invece di distribuirli.
+# Il cron CHIEDE ogni 30 minuti, ai minuti 9 e 39, deliberatamente sfasati dai
+# cron del sito (che gira a :15/:17/:20/:23). I due repo colpiscono la STESSA
+# API GitHub e la stessa quota: cron allineati sommano i picchi invece di
+# distribuirli.
+#
+# Ma «ogni 30 minuti» è una RICHIESTA, non una garanzia, e su questo repo non
+# viene onorata: GitHub degrada e droppa le `schedule` quando il repo è carico.
+# Misurato il 2026-09-18 su 120 scansioni riuscite in 449 ore: cadenza reale
+# mediana 231 minuti, p90 318, massima 454 — il 13% delle run richieste.
+# Per questo la finestra di scansione NON è più una costante tarata sui 30
+# minuti: `scan-failed-runs.mjs` la deriva dall'ultima scansione riuscita e si
+# allarga da sola quando lo scheduler salta un giro. Vedi `resolveLookbackMin`.
+# Con il vecchio lookback fisso di 40 minuti lo scanner copriva il 17,7% del
+# tempo e il 70% delle run fallite non-PR non entrava in NESSUNA finestra.
 #
 # Zero Claude: è tutto deterministico. Il costo di quota è nullo — questo
 # workflow può girare frequentemente senza togliere niente al ciclo del sito.
@@ -30,9 +41,9 @@ on:
         type: boolean
         default: false
       lookback_min:
-        description: 'Finestra di scansione in minuti (default 40)'
+        description: 'Finestra di scansione in minuti (vuoto = derivata dall''ultima scansione riuscita)'
         required: false
-        default: '40'
+        default: ''
 
 permissions:
   contents: read
@@ -47,7 +58,7 @@ concurrency:
 jobs:
   scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 25
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -95,28 +106,58 @@ jobs:
           # ha esaurito il suo compito ed è stato rimosso. La variabile resta
           # supportata dallo scanner per un eventuale caso futuro.
           IGNORE_WORKFLOWS: ''
+          # Chiede l'export della finestra risolta in GITHUB_ENV, per il passo
+          # gemello qui sotto. È opt-in perché questo CLI viene lanciato anche
+          # da un test in `tests.yml`, dove non c'è nessun gemello da alimentare.
+          SCAN_EXPORT_RESOLVED_LOOKBACK: '1'
         run: |
           runtime_pat="${GITHUB_PAT_NANAKO:-}"
           export GH_TOKEN="${runtime_pat:-$GH_TOKEN}"
-          ARGS=(--lookback-min "${{ github.event.inputs.lookback_min || '40' }}")
+          # Nessun --lookback-min di default. Passarne SEMPRE uno (era
+          # `|| '40'`) rendeva irraggiungibile la derivazione dall'ultima
+          # scansione riuscita proprio sulle run da `schedule`, che sono il
+          # 100% delle run reali: l'input è vuoto lì, quindi vinceva il '40'.
+          ARGS=()
+          if [ -n "${{ github.event.inputs.lookback_min }}" ]; then
+            ARGS+=(--lookback-min "${{ github.event.inputs.lookback_min }}")
+          fi
           if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then ARGS+=(--dry-run); fi
-          node scripts/ci/scan-failed-runs.mjs "${ARGS[@]}"
+          node scripts/ci/scan-failed-runs.mjs ${ARGS[@]+"${ARGS[@]}"}
 
       # I timeout sono `cancelled`, quindi non raggiungono lo scanner sopra.
       # Gli host-kill sono `failure`, ma scan-failed-runs li cede a questo
       # detector specializzato per non contare lo stesso evento anche nel
       # rolling ledger dei fallimenti ordinari.
+      # `if: always()`: senza, il default `success()` faceva saltare INTERAMENTE
+      # il rilevamento di timeout e host-kill ogni volta che lo scanner
+      # ordinario sopra usciva non-zero. Le due famiglie di guasto sono
+      # indipendenti — un errore nel primo scanner non è una ragione per non
+      # guardare i `cancelled` — e il verdetto del job resta comunque rosso
+      # perché il passo precedente ha già fallito.
       - name: Scan timed out and host-killed jobs
+        if: always()
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
-          TIMEOUT_SCAN_LOOKBACK_MINUTES: ${{ github.event.inputs.lookback_min || '40' }}
+          # NON si interpola `env.SCAN_RESOLVED_LOOKBACK_MIN` qui: una variabile
+          # scritta in `GITHUB_ENV` da un passo precedente non alimenta in modo
+          # affidabile il context `env.*` del passo successivo — è la stessa
+          # trappola già documentata sopra per il PAT ("interpolarlo da `env.*`
+          # può restare vuoto e forzare il fallback"), e qui il silenzio
+          # riporterebbe il detector a 40 minuti riaprendo il buco che questa
+          # modifica chiude. Si risolve nella shell, dove la variabile ESISTE.
+          TIMEOUT_SCAN_LOOKBACK_INPUT: ${{ github.event.inputs.lookback_min }}
           # Stesso settle del default dello scanner: evita di scambiare la
           # finalizzazione dell'API Actions per uno step morto sull'host.
           HOST_KILL_SETTLE_MS: '120000'
         run: |
           runtime_pat="${GITHUB_PAT_NANAKO:-}"
           export GH_TOKEN="${runtime_pat:-$GH_TOKEN}"
+          # Precedenza: input manuale → finestra risolta dallo scanner → floor.
+          # `SCAN_RESOLVED_LOOKBACK_MIN` arriva da GITHUB_ENV e come variabile di
+          # shell c'è davvero, a differenza del context `env.*`.
+          export TIMEOUT_SCAN_LOOKBACK_MINUTES="${TIMEOUT_SCAN_LOOKBACK_INPUT:-${SCAN_RESOLVED_LOOKBACK_MIN:-40}}"
+          echo "[timeout-scan] finestra = ${TIMEOUT_SCAN_LOOKBACK_MINUTES} min"
           if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
             node scripts/ci/scan-job-timeouts.mjs --dry-run
           else
