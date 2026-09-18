@@ -2201,6 +2201,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'smi-galderma-sandoz-2026': { it: 'smi-galderma-sandoz-2026', en: 'smi-galderma-and-sandoz-enter-kuhne-nagel-and-swisscom-exit', de: 'smi-galderma-und-sandoz-betreten-kuhne-nagel-und-swisscom-verlassen', fr: 'smi-galderma-et-sandoz-entrent-kuhne-nagel-et-swisscom-sortent' },
  'consiglio-stati-lex-ubs-at1': { it: 'consiglio-stati-lex-ubs-at1', en: 'council-states-lex-ubs-at1', de: 'staenderat-lex-ubs-at1', fr: 'conseil-etats-lex-ubs-at1' },
  'penuria-alloggi-svizzera-2026': { it: 'penuria-alloggi-svizzera-2026', en: 'housing-shortage-switzerland-2026', de: 'wohnungsnot-schweiz-2026', fr: 'penurie-logement-suisse-2026' },
+ 'tirocini-2026-mercato-svizzera': { it: 'tirocini-2026-mercato-svizzera', en: 'apprenticeships-2026-market-switzerland', de: 'lehrstellen-2026-markt-schweiz', fr: 'places-apprentissage-2026-marche-suisse' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

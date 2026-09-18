@@ -6536,6 +6536,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.penuria-alloggi-svizzera-2026.title': 'Wohnungsnot in der Schweiz: Wendepunkt zwischen 2026 und 2027',
     'blog.article.penuria-alloggi-svizzera-2026.excerpt': 'Die Prognosen von Wüest Partner deuten auf eine Erholung des Wohnungsbaus mit 45\'000 Einheiten im Jahr 2026 und 50\'000 im Jahr 2027 hin.',
     'blog.article.penuria-alloggi-svizzera-2026.imageAlt': 'Wohnungsbau und Immobilienmarkt in der Schweiz',
+    'blog.article.tirocini-2026-mercato-svizzera.title': 'Lehrstellen 2026: stabiler und vielfältiger Markt',
+    'blog.article.tirocini-2026-mercato-svizzera.excerpt': 'Der Lehrstellenmarkt in der Schweiz ist 2026 mit rund 76 \'000 Ende August unterzeichneten Verträgen stabil. Auch Platz für die WorldSkills in Shanghai.',
+    'blog.article.tirocini-2026-mercato-svizzera.imageAlt': 'Junge Lernende während der beruflichen Grundbildung in der Schweiz',
 };
 
 export default blogMetaChDe;

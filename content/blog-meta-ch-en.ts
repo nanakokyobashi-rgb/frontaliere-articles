@@ -6536,6 +6536,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.penuria-alloggi-svizzera-2026.title': 'Shortage of accommodation in Switzerland: between 2026 and 2027',
     'blog.article.penuria-alloggi-svizzera-2026.excerpt': 'Wüest Partner forecasts a recovery in residential construction with 45,000 units in 2026 and 50,000 in 2027.',
     'blog.article.penuria-alloggi-svizzera-2026.imageAlt': 'Residential buildings and housing market in Switzerland',
+    'blog.article.tirocini-2026-mercato-svizzera.title': 'Internship places 2026: stable and varied market',
+    'blog.article.tirocini-2026-mercato-svizzera.excerpt': 'The market for traineeships in Switzerland is stable in 2026 with around 76,000 contracts signed at the end of August. Space also at the WorldSkills in Shanghai.',
+    'blog.article.tirocini-2026-mercato-svizzera.imageAlt': 'Young apprentices during vocational training in Switzerland',
 };
 
 export default blogMetaChEn;

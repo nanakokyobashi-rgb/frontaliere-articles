@@ -6536,6 +6536,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.penuria-alloggi-svizzera-2026.title': 'Penuria alloggi in Svizzera: svolta tra il 2026 e il 2027',
     'blog.article.penuria-alloggi-svizzera-2026.excerpt': 'Le previsioni di Wüest Partner indicano una ripresa delle costruzioni residenziali con 45\'000 unità nel 2026 e 50\'000 nel 2027.',
     'blog.article.penuria-alloggi-svizzera-2026.imageAlt': 'Costruzioni residenziali e mercato immobiliare in Svizzera',
+    'blog.article.tirocini-2026-mercato-svizzera.title': 'Posti di tirocinio 2026: mercato stabile e variegato',
+    'blog.article.tirocini-2026-mercato-svizzera.excerpt': 'Il mercato dei posti di tirocinio in Svizzera è stabile nel 2026 con circa 76 000 contratti firmati a fine agosto. Spazio anche ai WorldSkills a Shanghai.',
+    'blog.article.tirocini-2026-mercato-svizzera.imageAlt': 'Giovani apprendisti durante la formazione professionale in Svizzera',
 };
 
 export default blogMetaChIt;

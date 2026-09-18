@@ -6536,6 +6536,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.penuria-alloggi-svizzera-2026.title': 'Pénurie de logements en Suisse : tournant entre 2026 et 2027',
     'blog.article.penuria-alloggi-svizzera-2026.excerpt': 'Les prévisions de Wüest Partner indiquent une reprise des constructions résidentielles avec 45\'000 unités en 2026 et 50\'000 en 2027.',
     'blog.article.penuria-alloggi-svizzera-2026.imageAlt': 'Constructions résidentielles et marché immobilier en Suisse',
+    'blog.article.tirocini-2026-mercato-svizzera.title': 'Places d\'apprentissage 2026 : marché stable et varié',
+    'blog.article.tirocini-2026-mercato-svizzera.excerpt': 'Le marché des places d\'apprentissage en Suisse est stable en 2026 avec environ 76 000 contrats signés fin août. Place également aux WorldSkills à Shanghai.',
+    'blog.article.tirocini-2026-mercato-svizzera.imageAlt': 'Jeunes apprentis pendant la formation professionnelle en Suisse',
 };
 
 export default blogMetaChFr;

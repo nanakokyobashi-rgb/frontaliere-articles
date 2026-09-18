@@ -19580,6 +19580,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'tirocini-2026-mercato-svizzera',
+    category: 'pratico',
+    date: '2026-09-18T02:02:40.001Z',
+    image: '/images/blog/tirocini-2026-mercato-svizzera.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
