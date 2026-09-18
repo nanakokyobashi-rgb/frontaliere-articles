@@ -35265,6 +35265,15 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'sospensione-treni-luino-porto',
+ category: 'novita',
+ date: '2026-09-18T02:47:07.054Z',
+ image: '/images/blog/sospensione-treni-luino-porto.webp',
+ hasCalculator: true,
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

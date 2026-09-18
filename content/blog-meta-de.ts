@@ -11824,6 +11824,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.crescita-economia-svizzera-seco-2026.title': 'Schweizer Wachstum nach oben: BIP 1,7% gemäss SECO',
     'blog.article.crescita-economia-svizzera-seco-2026.excerpt': 'Das Staatssekretariat für Wirtschaft revidiert die Prognose des Schweizer BIP für 2026 auf 1,7%, angetrieben durch Exporte und Außenhandel.',
     'blog.article.crescita-economia-svizzera-seco-2026.imageAlt': 'Schweizer Wirtschaftswachstum und SECO-Prognosen',
+    'blog.article.sospensione-treni-luino-porto.title': 'Zugaussetzung zwischen Luino und Porto Valtravaglia',
+    'blog.article.sospensione-treni-luino-porto.excerpt': 'Infrastrukturmaßnahmen von RFI: Stopp für Regionalzüge zwischen Luino und Porto Valtravaglia von 9.02 bis 14.02 an bestimmten Tagen zwischen September und Oktober 2026.',
+    'blog.article.sospensione-treni-luino-porto.imageAlt': 'Regionalzug auf der Strecke zwischen Luino und Porto Valtravaglia',
 };
 
 export default blogMetaDe;

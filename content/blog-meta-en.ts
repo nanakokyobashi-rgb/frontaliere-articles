@@ -11825,6 +11825,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.crescita-economia-svizzera-seco-2026.title': 'Swiss growth on the upside: GDP at 1.7% according to SECO',
     'blog.article.crescita-economia-svizzera-seco-2026.excerpt': 'The State Secretariat for the Economy revises upwards the Swiss GDP forecast for 2026 to 1.7%, driven by exports and foreign trade.',
     'blog.article.crescita-economia-svizzera-seco-2026.imageAlt': 'Swiss economic growth and SECO forecasts',
+    'blog.article.sospensione-treni-luino-porto.title': 'Train suspensions between Luino and Porto Valtravaglia',
+    'blog.article.sospensione-treni-luino-porto.excerpt': 'RFI infrastructure interventions: stop regional trains between Luino and Porto Valtravaglia from 9.02 to 14.02 on specific days between September and October 2026.',
+    'blog.article.sospensione-treni-luino-porto.imageAlt': 'Regional train on the line between Luino and Porto Valtravaglia',
 };
 
 export default blogMetaEn;

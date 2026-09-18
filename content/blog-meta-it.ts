@@ -11826,6 +11826,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.crescita-economia-svizzera-seco-2026.title': 'Crescita svizzera al rialzo: PIL al 1,7% secondo la SECO',
     'blog.article.crescita-economia-svizzera-seco-2026.excerpt': 'La Segreteria di Stato dell\'economia rivede al rialzo le previsioni del PIL svizzero per il 2026 all\'1,7%, trainato da esportazioni e commercio estero.',
     'blog.article.crescita-economia-svizzera-seco-2026.imageAlt': 'Crescita economica svizzera e previsioni SECO',
+    'blog.article.sospensione-treni-luino-porto.title': 'Sospensioni treni tra Luino e Porto Valtravaglia',
+    'blog.article.sospensione-treni-luino-porto.excerpt': 'Interventi infrastrutturali di RFI: stop ai treni regionali tra Luino e Porto Valtravaglia dalle 9.02 alle 14.02 in giorni specifici tra settembre e ottobre 2026.',
+    'blog.article.sospensione-treni-luino-porto.imageAlt': 'Treno regionale sulla linea tra Luino e Porto Valtravaglia',
 };
 
 export default blogMetaIt;
