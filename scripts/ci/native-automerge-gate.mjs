@@ -61,6 +61,31 @@ function reviewTimestamp(review) {
   return timestamps.length > 0 ? Math.max(...timestamps) : null;
 }
 
+/**
+ * The ordering key above must not move when an old review is edited.  The
+ * evidence proof has a different job: it must reject a review whose content
+ * was updated after the review-gate step started.  Keep mutable timestamps in
+ * this separate freshness key so the two decisions cannot contaminate each
+ * other.
+ */
+function reviewFreshnessTimestamp(review) {
+  const timestamps = [
+    review?.edited_at,
+    review?.editedAt,
+    review?.event_at,
+    review?.eventAt,
+    review?.updated_at,
+    review?.updatedAt,
+    review?.submitted_at,
+    review?.submittedAt,
+    review?.created_at,
+    review?.createdAt,
+  ]
+    .map((value) => Date.parse(value || ''))
+    .filter(Number.isFinite);
+  return timestamps.length > 0 ? Math.max(...timestamps) : null;
+}
+
 function latestReviewMatching(reviews, predicate) {
   if (!Array.isArray(reviews) || typeof predicate !== 'function') return null;
   const candidates = flattenPages(reviews)
@@ -320,7 +345,7 @@ export function reviewGateEvidenceDecision({
   const steps = job.steps.filter((step) => REVIEW_GATE_STEP_NAMES.includes(step?.name));
   if (steps.length !== 1) return deny('step review-gate assente o ambiguo');
   const step = steps[0];
-  const reviewAt = reviewTimestamp(review);
+  const reviewAt = reviewFreshnessTimestamp(review);
   const stepStartedAt = validTimestamp(step.started_at);
   const stepCompletedAt = validTimestamp(step.completed_at);
   const checkCompletedAt = validTimestamp(check.completed_at);

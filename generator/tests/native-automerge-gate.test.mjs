@@ -9,6 +9,7 @@ import {
   reviewHasLgtm,
   reviewHasZeroFindings,
   reviewIsApproved,
+  reviewGateEvidenceDecision,
   isTransientGithubReadError,
   withTransientGithubReadRetry,
   REVIEW_GATE_STEP_NAMES,
@@ -87,6 +88,71 @@ test('un edit di una review vecchia non nasconde un Important successivo', () =>
     pr: pr(),
     reviews: [clean, finding],
     checkRuns: [check()],
+  }).allow, false);
+});
+
+test('la prova temporale considera anche l aggiornamento successivo della review', () => {
+  const evidence = {
+    reviewId: '7',
+    check: {
+      id: 100,
+      name: 'tests (node --test)',
+      details_url: 'https://github.com/owner/repo/actions/runs/200/job/300',
+      head_sha: HEAD,
+      status: 'completed',
+      conclusion: 'success',
+      completed_at: '2026-09-13T12:04:00Z',
+    },
+    workflow: {
+      id: 200,
+      path: '.github/workflows/tests.yml',
+      event: 'pull_request',
+      head_sha: HEAD,
+      status: 'completed',
+      conclusion: 'success',
+      run_started_at: '2026-09-13T12:01:00Z',
+      updated_at: '2026-09-13T12:05:00Z',
+    },
+    job: {
+      id: 300,
+      run_id: 200,
+      name: 'tests (node --test)',
+      head_sha: HEAD,
+      status: 'completed',
+      conclusion: 'success',
+      check_run_url: 'https://api.github.com/repos/owner/repo/check-runs/100',
+      started_at: '2026-09-13T12:02:00Z',
+      completed_at: '2026-09-13T12:04:00Z',
+      steps: [{
+        name: 'Require approving Codex review',
+        status: 'completed',
+        conclusion: 'success',
+        started_at: '2026-09-13T12:02:30Z',
+        completed_at: '2026-09-13T12:03:30Z',
+      }],
+    },
+  };
+  const reviewBeforeEdit = {
+    ...review('outside-diff finding', HEAD, '2026-09-13T12:00:00Z'),
+    id: 7,
+    updated_at: '2026-09-13T12:01:30Z',
+  };
+  assert.equal(reviewGateEvidenceDecision({
+    evidence,
+    repo: 'owner/repo',
+    head: HEAD,
+    review: reviewBeforeEdit,
+  }).allow, true);
+
+  const reviewEditedAfterGate = {
+    ...reviewBeforeEdit,
+    updated_at: '2026-09-13T12:03:45Z',
+  };
+  assert.equal(reviewGateEvidenceDecision({
+    evidence,
+    repo: 'owner/repo',
+    head: HEAD,
+    review: reviewEditedAfterGate,
   }).allow, false);
 });
 

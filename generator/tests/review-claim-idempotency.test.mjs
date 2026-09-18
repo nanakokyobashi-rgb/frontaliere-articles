@@ -288,6 +288,7 @@ test('tests.yml claims before review work and finalizes without gating the requi
   const sameHeadGuard = workflow.slice(sameHeadStart, sameHeadEnd);
   assert.match(sameHeadGuard, /\.user\.type == "Bot"/);
   assert.match(sameHeadGuard, /test\("\^\(claude\|frontaliere-automation\)";"i"\)/);
+  assert.match(sameHeadGuard, /has_single_revision/);
   assert.match(workflow, /scripts\/ci\/review-claim\.mjs --claim/);
   assert.match(workflow, /CLAIM_ACTION: acquire/);
   assert.match(workflow, /CLAIM_ACTION: finalize/);

@@ -248,6 +248,25 @@ test('un body cambiato sulla stessa HEAD porta avanti una review che conserva il
   assert.match(r.stdout, /review approvante sulla head/i, r.stdout);
 });
 
+test('una review sulla HEAD senza marker non diventa carry-forward', () => {
+  const r = runGate({
+    reviews: [botReview(HEAD, 'tutto bene\n\n## LGTM', { reviewRevision: '' })],
+  });
+  assert.equal(r.status, 1, r.stdout);
+  assert.match(r.stdout, /manca.*marker|nessuna review/i, r.stdout);
+});
+
+test('marker di body conflittuali sulla HEAD non diventano carry-forward', () => {
+  const r = runGate({
+    reviews: [botReview(
+      HEAD,
+      `tutto bene\n\n## LGTM\n<!-- REVIEW_INPUT_REVISION: ${OLD_BODY_REVISION} -->`,
+    )],
+  });
+  assert.equal(r.status, 1, r.stdout);
+  assert.match(r.stdout, /manca.*marker|nessuna review/i, r.stdout);
+});
+
 test('un verdetto negativo del body precedente sulla stessa HEAD resta bloccante', () => {
   const changedBody = `${GOOD_BODY}\n- altra cosa`;
   const r = runGate({

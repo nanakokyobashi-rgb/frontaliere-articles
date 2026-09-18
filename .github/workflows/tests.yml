@@ -395,10 +395,16 @@ jobs:
           }
 
           # Count every terminal managed review on this HEAD, including those
-          # posted against an older PR-body hash. A body edit is not a new
-          # contribution (site #9085 / corpus #1551: LGTM then a second Codex
-          # on the same SHA because BODY_EDITED bypassed the skip).
+          # posted against an older PR-body hash, but only when the review
+          # authenticates at least one unique body revision. A bare HEAD match
+          # is not enough: it would let an unmarked or conflicting body become
+          # the carry-forward verdict after a body edit.
           same_head=$(printf '%s' "$reviews" | jq --arg head "$HEAD_SHA" '
+            def has_single_revision:
+              [((.body // "") | split("\n")[] | rtrimstr("\r")
+                | select(test("^<!-- REVIEW_INPUT_REVISION: body:[0-9a-f]{64} -->$"; "i"))
+                | capture("^<!-- REVIEW_INPUT_REVISION: (?<revision>body:[0-9a-f]{64}) -->$"; "i").revision
+                | ascii_downcase)] | unique | length == 1;
             [flatten[]
              | select((.state // "") != "PENDING" and (.state // "") != "DISMISSED")
              | select(
@@ -408,6 +414,7 @@ jobs:
                      and ((.user.login // "") | test("^github-actions\\[bot\\]$"; "i"))
                      and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
                )
+             | select(has_single_revision)
              | select(.commit_id == $head)] | length'
           )
           if [ "${same_head:-0}" -gt 0 ]; then

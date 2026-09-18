@@ -59,6 +59,7 @@ import {
   normalizeReviewInputRevision,
   reviewInputContextFromPullRequest,
   reviewInputContextMatches,
+  REVIEW_INPUT_REVISION_MARKER_RE,
   reviewHasInputRevision,
 } from './review-test-policy.mjs';
 import { execFileSync } from 'node:child_process';
@@ -170,6 +171,18 @@ function reviewInputContextStillCurrent() {
     `::error::review-gate: HEAD o body PR sono cambiati durante la valutazione (attesa head=${HEAD_SHA} revision=${REVIEW_REVISION}, corrente head=${current?.headSha || '<unreadable>'} revision=${current?.reviewRevision || '<unreadable>'}); nessun verdetto può essere riusato.`,
   );
   return false;
+}
+
+/**
+ * A same-HEAD carry-forward still needs a review-input identity.  The HEAD
+ * alone is not an authenticator: an unmarked or conflicting review body must
+ * never become the verdict after a PR-body edit.  Duplicate copies of the
+ * same marker are harmless; different markers are rejected.
+ */
+function reviewHasSingleInputRevision(body) {
+  const revisions = [...String(body ?? '').matchAll(REVIEW_INPUT_REVISION_MARKER_RE)]
+    .map((match) => String(match[1]).toLowerCase());
+  return revisions.length > 0 && new Set(revisions).size === 1;
 }
 
 /**
@@ -285,10 +298,12 @@ function lastBotReview() {
     return codex[codex.length - 1];
   }
   const bots = reviews.filter((r) => isManagedReview(r));
-  const eligible = bots.filter((review) => (
-    reviewHasInputRevision(review.body, REVIEW_REVISION)
-    || review.commit_id === HEAD_SHA
-  ));
+  const eligible = bots.filter((review) => {
+    const currentRevision = reviewHasInputRevision(review.body, REVIEW_REVISION);
+    const sameHeadCarryForward = review.commit_id === HEAD_SHA
+      && reviewHasSingleInputRevision(review.body);
+    return currentRevision || sameHeadCarryForward;
+  });
   return eligible.length ? eligible[eligible.length - 1] : null;
 }
 
