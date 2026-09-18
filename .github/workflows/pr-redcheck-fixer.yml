@@ -297,10 +297,12 @@ jobs:
       # merge e' no-op se il branch e' gia' fresco. Su conflitto → warning e si
       # prosegue, il branch resta com'era.
       - name: Align review workflows (merge origin/main, anti-401 drift)
+        id: align
         run: |
           set -uo pipefail
           git config user.name "Valerie Linc"
           git config user.email "valerielinc@gmail.com"
+          echo "start_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
           git fetch origin main -q || true
           if git merge origin/main -m "chore: merge main (anti-401 workflow drift)" -q 2>/dev/null; then
             echo "Branch allineato a origin/main (o gia' fresco)."
@@ -767,54 +769,12 @@ jobs:
             - **Token-lever:** le letture e le chiamate `gh` indipendenti vanno emesse in parallelo nello stesso messaggio, mai una per turno — un messaggio con piu' tool-call resta 1 turno.
             - Una sola passata: diagnostica, fixa, valida, committa, pusha, aggiorna il body, STOP.
 
-      - name: Finalize redcheck PR + HEAD + failed check claim
-        if: always() && steps.claim.outputs.claim_acquired == 'true'
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
-          CLAIM_ACTION: finalize
-          CLAIM_TOKEN: ${{ steps.claim.outputs.claim_token }}
-          PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
-          HEAD_SHA: ${{ needs.preflight.outputs.head_sha }}
-          CHECK_FAILURE_KEY: ${{ needs.preflight.outputs.failed_check_key }}
-          GITHUB_RUN_ID: ${{ github.run_id }}
-        run: |
-          if [ "${{ steps.guard.outputs.proceed }}" != 'true' ]; then
-            CLAIM_STATUS=released
-          elif [ "${{ steps.codex_fix.outcome }}" = 'cancelled' ]; then
-            CLAIM_STATUS=failed-transient
-          elif [ "${{ steps.codex_fix.outcome }}" = 'skipped' ]; then
-            CLAIM_STATUS=failed-transient
-          elif [ "${{ steps.codex_fix.outcome }}" = 'failure' ]; then
-            CLAIM_STATUS=failed-terminal
-          else
-            CLAIM_STATUS=completed
-          fi
-          export CLAIM_STATUS
-          node scripts/ci/redcheck-review-prefilter.mjs --claim
-
-      - name: Release shared Codex lane quota lease
-        if: always() && steps.quota_lease.outputs.lease_allowed == 'true' && steps.quota_lease.outputs.lease_token != ''
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
-          QUOTA_LEASE_ACTION: release
-          QUOTA_LEASE_ROLE: redcheck
-          QUOTA_LEASE_OWNER: redcheck-fixer
-          QUOTA_LEASE_TARGET_TYPE: pr
-          QUOTA_LEASE_TARGET: ${{ needs.preflight.outputs.pr_number }}
-          QUOTA_LEASE_TOKEN: ${{ steps.quota_lease.outputs.lease_token }}
-        run: node scripts/ci/check-quota-backoff.mjs
-
-      - name: Cleanup Firebase credentials
-        if: always()
-        run: rm -f /tmp/firebase-sa.json
-
       # Il colore del job e' il LAVORO reale del round, non l'exit della CLI.
       #  - commit pushato sul branch → SUCCESS (la re-review girera'). Vale anche
       #    se la CLI e' morta ai turni DOPO il push.
+      #  - branch remoto avanzato da un altro writer dopo START_SHA (pre-merge)
+      #    → run SUPERSEDED: CLAIM_STATUS=released e' visibile al finalize
+      #    successivo; il marker di round pre-Codex viene rimborsato.
       #  - nessun push + CLI fallita → non-progresso reale → ROSSO.
       #  - nessun push + CLI pulita + body PR cambiato → progresso body-only,
       #    quindi SUCCESS.
@@ -828,19 +788,26 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
+          GH_REPO: ${{ github.repository }}
           PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
           HEAD_REF: ${{ needs.preflight.outputs.head_ref }}
+          HEAD_SHA: ${{ needs.preflight.outputs.head_sha }}
+          CHECK_FAILURE_KEY: ${{ needs.preflight.outputs.failed_check_key }}
+          START_SHA: ${{ steps.align.outputs.start_sha }}
           BASE_SHA: ${{ steps.base.outputs.sha }}
           BASE_COMMENTS: ${{ steps.base.outputs.comments }}
           BASE_BODY_SHA: ${{ steps.base.outputs.body_sha }}
           BASE_CAPTURE_OUTCOME: ${{ steps.base.outcome }}
           ACTION_OUTCOME: ${{ steps.codex_fix.outcome }}
+          FIX_ROUND: ${{ steps.guard.outputs.round }}
+          FIX_ROUND_MARKER: REDCHECK_FIX_ROUND
+          CLAIM_TOKEN: ${{ steps.claim.outputs.claim_token }}
         run: |
           set -uo pipefail
           HEAD_NOW=$(git rev-parse HEAD 2>/dev/null || echo "")
           git fetch origin "$HEAD_REF" -q 2>/dev/null || true
           REMOTE_SHA=$(git rev-parse "origin/$HEAD_REF" 2>/dev/null || echo "")
-          echo "base=$BASE_SHA local=$HEAD_NOW remote=$REMOTE_SHA claude=$ACTION_OUTCOME"
+          echo "start=$START_SHA base=$BASE_SHA local=$HEAD_NOW remote=$REMOTE_SHA claude=$ACTION_OUTCOME"
           if [ "${BASE_CAPTURE_OUTCOME:-}" != "success" ] || \
              ! printf '%s\n' "$BASE_BODY_SHA" | grep -Eq '^[0-9a-f]{64}$'; then
             echo "::error::❌-check-fix: baseline del body PR assente o illeggibile → classificazione BLOCCANTE, job ROSSO."
@@ -848,6 +815,41 @@ jobs:
           fi
           if [ -n "$HEAD_NOW" ] && [ -n "$BASE_SHA" ] && [ "$HEAD_NOW" != "$BASE_SHA" ] && [ "$REMOTE_SHA" = "$HEAD_NOW" ]; then
             echo "Fix pushato questo round (HEAD avanzato e presente su origin/$HEAD_REF) → round SUCCESS. Job verde anche se la CLI e' uscita '$ACTION_OUTCOME'."
+            exit 0
+          fi
+          if [ -n "$HEAD_NOW" ] && [ -n "${START_SHA:-}" ] && [ -n "$REMOTE_SHA" ] \
+             && [ "$REMOTE_SHA" != "$START_SHA" ] && [ "$REMOTE_SHA" != "$HEAD_NOW" ]; then
+            CLAIM_STATUS=released
+            export CLAIM_STATUS
+            if [ -n "${GITHUB_ENV:-}" ]; then
+              echo 'CLAIM_STATUS=released' >> "$GITHUB_ENV"
+            fi
+            if [ -n "${PR_NUMBER:-}" ] && [ -n "${FIX_ROUND:-}" ] && [ -n "${FIX_ROUND_MARKER:-}" ]; then
+              comments_json=$(gh api --paginate "repos/${REPO}/issues/${PR_NUMBER}/comments?per_page=100" 2>/dev/null || echo '[]')
+              case "$comments_json" in
+                \[*) ;;
+                *) comments_json='[]' ;;
+              esac
+              comment_id=$(printf '%s' "$comments_json" | jq -r --arg m "$FIX_ROUND_MARKER" --arg r "$FIX_ROUND" '[.[]? | select((.body // "") | test("<!--[[:space:]]*" + $m + ":[[:space:]]*" + $r + "[[:space:]]*-->")) | .id] | last // empty' 2>/dev/null || true)
+              if [ -n "$comment_id" ]; then
+                if gh api -X DELETE "repos/${REPO}/issues/comments/${comment_id}"; then
+                  refund_marker="${FIX_ROUND_MARKER%_ROUND}_REFUNDED"
+                  gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '<!-- %s: %s -->\n_Round rimborsato: run SUPERSEDED; nessun round consumato._' "$refund_marker" "$FIX_ROUND")" >/dev/null 2>&1 || true
+                  echo "round marker $FIX_ROUND_MARKER:$FIX_ROUND deleted (comment $comment_id) → rimborsato"
+                else
+                  echo "::warning::SUPERSEDED ma DELETE del marker round $comment_id fallita → round ancora contato"
+                fi
+              else
+                echo "SUPERSEDED: marker $FIX_ROUND_MARKER:$FIX_ROUND assente → niente da rimborsare"
+              fi
+            fi
+            if [ -n "${CLAIM_TOKEN:-}" ]; then
+              CLAIM_ACTION=finalize
+              GH_REPO="${GH_REPO:-$REPO}"
+              export CLAIM_ACTION GH_REPO
+              node scripts/ci/redcheck-review-prefilter.mjs --claim || echo "::warning::SUPERSEDED ma finalizzazione claim released non verificabile"
+            fi
+            echo "⚠️ Branch avanzato da un altro writer dopo l'avvio del round (start=$START_SHA local=$HEAD_NOW remote=$REMOTE_SHA) → run SUPERSEDED; claim rilasciato, nessun round consumato."
             exit 0
           fi
           if [ "$ACTION_OUTCOME" != "success" ]; then
@@ -890,3 +892,52 @@ jobs:
           fi
           echo "Nessun push, body invariato ma CLI terminata pulita ('$ACTION_OUTCOME') con una spiegazione nuova sulla PR → terminale legittimo (es. non auto-fixabile). Job verde."
           exit 0
+
+      - name: Finalize redcheck PR + HEAD + failed check claim
+        if: always() && steps.claim.outputs.claim_acquired == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          CLAIM_ACTION: finalize
+          CLAIM_TOKEN: ${{ steps.claim.outputs.claim_token }}
+          PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
+          HEAD_SHA: ${{ needs.preflight.outputs.head_sha }}
+          CHECK_FAILURE_KEY: ${{ needs.preflight.outputs.failed_check_key }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GUARD_PROCEED: ${{ steps.guard.outputs.proceed }}
+          CODEX_OUTCOME: ${{ steps.codex_fix.outcome }}
+        run: |
+          if [ -n "${CLAIM_STATUS:-}" ]; then
+            echo "CLAIM_STATUS ereditato dal classify ($CLAIM_STATUS)"
+          elif [ "${GUARD_PROCEED:-}" != 'true' ]; then
+            CLAIM_STATUS=released
+          elif [ "${CODEX_OUTCOME:-}" = 'cancelled' ]; then
+            CLAIM_STATUS=failed-transient
+          elif [ "${CODEX_OUTCOME:-}" = 'skipped' ]; then
+            CLAIM_STATUS=failed-transient
+          elif [ "${CODEX_OUTCOME:-}" = 'failure' ]; then
+            CLAIM_STATUS=failed-terminal
+          else
+            CLAIM_STATUS=completed
+          fi
+          export CLAIM_STATUS
+          node scripts/ci/redcheck-review-prefilter.mjs --claim
+
+      - name: Release shared Codex lane quota lease
+        if: always() && steps.quota_lease.outputs.lease_allowed == 'true' && steps.quota_lease.outputs.lease_token != ''
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          QUOTA_LEASE_ACTION: release
+          QUOTA_LEASE_ROLE: redcheck
+          QUOTA_LEASE_OWNER: redcheck-fixer
+          QUOTA_LEASE_TARGET_TYPE: pr
+          QUOTA_LEASE_TARGET: ${{ needs.preflight.outputs.pr_number }}
+          QUOTA_LEASE_TOKEN: ${{ steps.quota_lease.outputs.lease_token }}
+        run: node scripts/ci/check-quota-backoff.mjs
+
+      - name: Cleanup Firebase credentials
+        if: always()
+        run: rm -f /tmp/firebase-sa.json

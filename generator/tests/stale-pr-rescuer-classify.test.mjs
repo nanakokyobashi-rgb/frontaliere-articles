@@ -147,12 +147,13 @@ function checkRuns({ concl = 'success', pending = 0 } = {}) {
 function reviews({
   commit = OLD_SHA,
   body = 'nessun blocco',
+  reviewRevision = REVIEW_REVISION,
   user = { login: 'claude[bot]', type: 'Bot' },
 } = {}) {
   return [{
     user,
     commit_id: commit,
-    body: `${body}\n<!-- REVIEW_INPUT_REVISION: ${REVIEW_REVISION} -->`,
+    body: `${body}\n<!-- REVIEW_INPUT_REVISION: ${reviewRevision} -->`,
   }];
 }
 
@@ -497,6 +498,23 @@ test('guard 1 — una LGTM su un commit precedente NON è uno stallo (carry-forw
       `\`Re-review guard\` di pr-review-loop.yml, e chiamarlo stallo insegna a ignorare l'etichetta.\n${body}`,
   );
   assert.match(body, /nessuna review li ha coperti/, `Atteso il fallback alla classe A.\n${body}`);
+});
+
+test('guard 1b — marker body precedente sulla HEAD resta una review applicabile', opts, () => {
+  const body = only(
+    runScan({
+      prs: openPr(),
+      checks: checkRuns({ concl: 'success' }),
+      reviews: reviews({
+        commit: HEAD_SHA,
+        body: '🔴 **Important**: il finding va ancora corretto',
+        reviewRevision: `body:${'c'.repeat(64)}`,
+      }),
+      fixerRuns: [],
+    }),
+  );
+  assert.doesNotMatch(body, /nessuna review li ha coperti/, `Un marker precedente sulla HEAD non è "nessuna review".\n${body}`);
+  assert.match(body, /class=E|class=B/, `Il finding sulla HEAD deve restare visibile.\n${body}`);
 });
 
 test('guard 2 — una PR mai revisionata resta in classe A', opts, () => {

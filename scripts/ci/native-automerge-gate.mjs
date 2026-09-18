@@ -37,7 +37,6 @@ export const REVIEW_GATE_STEP_NAMES = Object.freeze([
   'Require approving Claude review',
   'Require approving Codex review',
 ]);
-const NIT_MARKER_RE = /^[^\n🔴🟢]*(?<!`)🟡\s*\*{0,2}\s*Nit\s*\*{0,2}\s*[:—-]/mu;
 const FINDINGS_HEADING_RE = /^\s{0,3}#{1,3}\s+Findings\b[^\n]*$/i;
 const LGTM_HEADING_RE = /^\s{0,3}##\s+LGTM\s*$/m;
 const TEST_ONLY_REVIEW_BOT_RE = /^(?:github-actions|frontaliere-automation)\[bot\]$/i;
@@ -51,6 +50,25 @@ function flattenPages(value) {
 }
 
 function reviewTimestamp(review) {
+  const timestamps = [
+    review?.submitted_at,
+    review?.submittedAt,
+    review?.created_at,
+    review?.createdAt,
+  ]
+    .map((value) => Date.parse(value || ''))
+    .filter(Number.isFinite);
+  return timestamps.length > 0 ? Math.max(...timestamps) : null;
+}
+
+/**
+ * The ordering key above must not move when an old review is edited.  The
+ * evidence proof has a different job: it must reject a review whose content
+ * was updated after the review-gate step started.  Keep mutable timestamps in
+ * this separate freshness key so the two decisions cannot contaminate each
+ * other.
+ */
+function reviewFreshnessTimestamp(review) {
   const timestamps = [
     review?.edited_at,
     review?.editedAt,
@@ -117,15 +135,18 @@ export function latestBotReviewOnHead(reviews, head) {
   return latestBotReviewMatching(reviews, (review) => review?.commit_id === head);
 }
 
-/** Require the explicit reviewer summary, rather than inferring zero findings. */
+/**
+ * Zero blocking findings. A missing `## Findings` heading is approving when
+ * the body also has no real `🔴 Important`. `🟡 Nit` is advisory (site #9085)
+ * and must not block native auto-merge of an otherwise clean `## LGTM`.
+ */
 export function reviewHasZeroFindings(body) {
   if (typeof body !== 'string') return false;
+  REDFLAG_IMPORTANT_RE.lastIndex = 0;
+  if (REDFLAG_IMPORTANT_RE.test(body)) return false;
   const findingsHeading = body.split(/\r?\n/).find((line) => FINDINGS_HEADING_RE.test(line));
-  if (!findingsHeading) return false;
-  return /\bImportant\s*:\s*0\b/i.test(findingsHeading)
-    && /\bNit\s*:\s*0\b/i.test(findingsHeading)
-    && !REDFLAG_IMPORTANT_RE.test(body)
-    && !NIT_MARKER_RE.test(body);
+  if (!findingsHeading) return true;
+  return /\bImportant\s*:\s*0\b/i.test(findingsHeading);
 }
 
 export function reviewHasLgtm(body) {
@@ -324,7 +345,7 @@ export function reviewGateEvidenceDecision({
   const steps = job.steps.filter((step) => REVIEW_GATE_STEP_NAMES.includes(step?.name));
   if (steps.length !== 1) return deny('step review-gate assente o ambiguo');
   const step = steps[0];
-  const reviewAt = reviewTimestamp(review);
+  const reviewAt = reviewFreshnessTimestamp(review);
   const stepStartedAt = validTimestamp(step.started_at);
   const stepCompletedAt = validTimestamp(step.completed_at);
   const checkCompletedAt = validTimestamp(check.completed_at);
@@ -405,7 +426,7 @@ export function evaluateNativeAutoMerge({
     })
     : { allow: false, reason: 'review raw già approvante' };
   if (review && !reviewIsApproved(review) && !reviewGateException.allow) {
-    return { allow: false, reason: 'ultima review bot non è Important 0/Nit 0 + LGTM' };
+    return { allow: false, reason: 'review bot sulla HEAD non è LGTM senza 🔴 Important' };
   }
 
   const check = requiredVitestDecision(checkRuns, pr.headRefOid);
