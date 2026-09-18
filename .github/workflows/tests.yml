@@ -392,37 +392,30 @@ jobs:
             echo "contribution_fingerprint=$claimFingerprint" >> "$GITHUB_OUTPUT"
           }
 
-          same_head=$(printf '%s' "$reviews" | jq --arg head "$HEAD_SHA" --arg revision "$REVIEW_REVISION" '
-            def has_current_revision($expected):
-              [((.body // "") | split("\n")[] | rtrimstr("\r")
-                | select(test("^<!-- REVIEW_INPUT_REVISION: body:[0-9a-f]{64} -->$"; "i"))
-                | capture("^<!-- REVIEW_INPUT_REVISION: (?<revision>body:[0-9a-f]{64}) -->$"; "i").revision
-                | ascii_downcase)] | unique as $revisions
-              | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
+          # Count every terminal managed review on this HEAD, including those
+          # posted against an older PR-body hash. A body edit is not a new
+          # contribution (site #9085 / corpus #1551: LGTM then a second Codex
+          # on the same SHA because BODY_EDITED bypassed the skip).
+          same_head=$(printf '%s' "$reviews" | jq --arg head "$HEAD_SHA" '
             [flatten[]
-             | select((.state // "") != "PENDING")
-             | select(.user.type == "Bot")
+             | select((.state // "") != "PENDING" and (.state // "") != "DISMISSED")
              | select(
-                 ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
+                 ((.user.login // "") | test("^(claude\\[bot\\]|frontaliere-automation\\[bot\\])$";"i"))
                  or (((.user.login // "") | test("^github-actions\\[bot\\]$"; "i"))
                      and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
                )
-             | select(has_current_revision($revision))
              | select(.commit_id == $head)] | length'
           )
-          if [ "${same_head:-0}" -gt 0 ] && [ "${BODY_EDITED:-false}" != "true" ]; then
-            echo "skip=true" >> "$GITHUB_OUTPUT"
-            echo "Esiste gia' una review terminale del reviewer sulla HEAD $HEAD_SHA → nessuna seconda review per lo stesso contributo."
-            exit 0
-          fi
           if [ "${same_head:-0}" -gt 0 ]; then
-            echo "Review terminale presente sulla HEAD, ma il body della PR è cambiato → nuova review ammessa con revisione distinta."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "Esiste gia' una review terminale del reviewer sulla HEAD $HEAD_SHA → nessuna seconda review, anche dopo un body edit."
+            exit 0
           fi
 
           if [ "${BODY_EDITED:-false}" = "true" ]; then
             set_claim_fingerprint
             echo "skip=false" >> "$GITHUB_OUTPUT"
-            echo "Body della PR cambiato → review completa sulla nuova revisione del review input."
+            echo "Body della PR cambiato e nessuna review terminale sulla HEAD → review completa."
             exit 0
           fi
 

@@ -63,13 +63,13 @@ test('accetta solo review approvante e check verde sulla HEAD', () => {
   }).allow, false);
 });
 
-test('non riusa un finding successivo e non accetta check pending o su altra HEAD', () => {
+test('tiene la prima LGTM sulla HEAD e non accetta check pending o su altra HEAD', () => {
   const finding = review('## Findings (Important: 1, Nit: 0)\n\n🔴 Important: regression.\n\n## LGTM', HEAD, '2026-09-13T12:02:00Z');
   assert.equal(evaluateNativeAutoMerge({
     pr: pr(),
-    reviews: [review(CLEAN_BODY), finding],
+    reviews: [review(CLEAN_BODY, HEAD, '2026-09-13T12:00:00Z'), finding],
     checkRuns: [check()],
-  }).allow, false);
+  }).allow, true);
   assert.equal(requiredVitestDecision([check({ status: 'in_progress', conclusion: null, completed_at: null })], HEAD).allow, false);
   assert.equal(requiredVitestDecision([check({ head_sha: OLD_HEAD })], HEAD).allow, false);
 });
@@ -78,7 +78,10 @@ test('richiede il riepilogo esplicito e vincola l opt-in alla HEAD verificata', 
   assert.equal(reviewHasZeroFindings(CLEAN_BODY), true);
   assert.equal(reviewHasLgtm(CLEAN_BODY), true);
   assert.equal(reviewIsApproved(review(CLEAN_BODY)), true);
-  assert.equal(reviewHasZeroFindings('## Findings (Important: 0, Nit: 1)\n\n## LGTM'), false);
+  assert.equal(reviewHasZeroFindings('## Findings (Important: 0, Nit: 1)\n\n`x.mjs:L1`: 🟡 Nit: advisory.\n\n## LGTM'), true);
+  assert.equal(reviewIsApproved(review('## Findings (Important: 0, Nit: 1)\n\n`x.mjs:L1`: 🟡 Nit: advisory.\n\n## LGTM')), true);
+  assert.equal(reviewHasZeroFindings('## Scope\n\n## LGTM'), true);
+  assert.equal(reviewHasZeroFindings('## Findings (Important: 1, Nit: 0)\n\n🔴 Important: not harmless'), false);
   assert.deepEqual(nativeAutoMergeArgs({ repo: 'owner/repo', prNumber: '42', headSha: HEAD }), [
     'pr', 'merge', '42', '--repo', 'owner/repo', '--auto', '--squash', '--delete-branch',
     '--match-head-commit', HEAD,

@@ -37,7 +37,6 @@ export const REVIEW_GATE_STEP_NAMES = Object.freeze([
   'Require approving Claude review',
   'Require approving Codex review',
 ]);
-const NIT_MARKER_RE = /^[^\n🔴🟢]*(?<!`)🟡\s*\*{0,2}\s*Nit\s*\*{0,2}\s*[:—-]/mu;
 const FINDINGS_HEADING_RE = /^\s{0,3}#{1,3}\s+Findings\b[^\n]*$/i;
 const LGTM_HEADING_RE = /^\s{0,3}##\s+LGTM\s*$/m;
 const TEST_ONLY_REVIEW_BOT_RE = /^(?:github-actions|frontaliere-automation)\[bot\]$/i;
@@ -105,6 +104,30 @@ function latestReviewGateCandidate(reviews, head) {
     && (isReviewerBot(review?.user) || isCodexFallbackReviewOnHead(review, head)));
 }
 
+function firstReviewMatching(reviews, predicate) {
+  if (!Array.isArray(reviews) || typeof predicate !== 'function') return null;
+  const candidates = flattenPages(reviews)
+    .map((review, index) => ({ review, index, timestamp: reviewTimestamp(review) }))
+    .filter(({ review, timestamp }) => predicate(review)
+      && timestamp !== null)
+    .sort((left, right) => left.timestamp - right.timestamp
+      || (Number(left.review.id || left.index) || left.index)
+        - (Number(right.review.id || right.index) || right.index));
+  return candidates[0]?.review || null;
+}
+
+/**
+ * A clean LGTM on HEAD is sticky: a later same-SHA Important cannot revoke it.
+ * If the first terminal verdict is not approving, keep the latest HEAD review.
+ */
+function firstReviewGateCandidate(reviews, head) {
+  const first = firstReviewMatching(reviews, (review) => isManagedReview(review)
+    && review?.commit_id === head
+    && (isReviewerBot(review?.user) || isCodexFallbackReviewOnHead(review, head)));
+  if (first && reviewHasLgtm(first.body) && reviewHasZeroFindings(first.body)) return first;
+  return latestReviewGateCandidate(reviews, head);
+}
+
 /** Return the latest reviewer-bot review, regardless of the commit it names. */
 export function latestBotReview(reviews) {
   if (!Array.isArray(reviews)) return null;
@@ -117,15 +140,18 @@ export function latestBotReviewOnHead(reviews, head) {
   return latestBotReviewMatching(reviews, (review) => review?.commit_id === head);
 }
 
-/** Require the explicit reviewer summary, rather than inferring zero findings. */
+/**
+ * Zero blocking findings. A missing `## Findings` heading is approving when
+ * the body also has no real `🔴 Important`. `🟡 Nit` is advisory (site #9085)
+ * and must not block native auto-merge of an otherwise clean `## LGTM`.
+ */
 export function reviewHasZeroFindings(body) {
   if (typeof body !== 'string') return false;
+  REDFLAG_IMPORTANT_RE.lastIndex = 0;
+  if (REDFLAG_IMPORTANT_RE.test(body)) return false;
   const findingsHeading = body.split(/\r?\n/).find((line) => FINDINGS_HEADING_RE.test(line));
-  if (!findingsHeading) return false;
-  return /\bImportant\s*:\s*0\b/i.test(findingsHeading)
-    && /\bNit\s*:\s*0\b/i.test(findingsHeading)
-    && !REDFLAG_IMPORTANT_RE.test(body)
-    && !NIT_MARKER_RE.test(body);
+  if (!findingsHeading) return true;
+  return /\bImportant\s*:\s*0\b/i.test(findingsHeading);
 }
 
 export function reviewHasLgtm(body) {
@@ -390,7 +416,7 @@ export function evaluateNativeAutoMerge({
   // applies the repository's fingerprint-based carry-forward policy, so the
   // native helper must not reject a valid older LGTM merely because the PR
   // received a data-only or otherwise review-preserving commit afterward.
-  const review = latestReviewGateCandidate(reviews, pr.headRefOid);
+  const review = firstReviewGateCandidate(reviews, pr.headRefOid);
   const testOnlyApproval = !review
     && testOnlyReviewIsApproved(verifiedTestOnlyReview, pr.headRefOid);
   if (!review && !testOnlyApproval) {
@@ -405,7 +431,7 @@ export function evaluateNativeAutoMerge({
     })
     : { allow: false, reason: 'review raw già approvante' };
   if (review && !reviewIsApproved(review) && !reviewGateException.allow) {
-    return { allow: false, reason: 'ultima review bot non è Important 0/Nit 0 + LGTM' };
+    return { allow: false, reason: 'review bot sulla HEAD non è LGTM senza 🔴 Important' };
   }
 
   const check = requiredVitestDecision(checkRuns, pr.headRefOid);
@@ -727,7 +753,7 @@ function main() {
       repo,
       pr.headRefOid,
       checkRuns,
-      latestReviewGateCandidate(reviews, pr.headRefOid),
+      firstReviewGateCandidate(reviews, pr.headRefOid),
     );
   } catch (error) {
     if (hadAutoMerge) {
@@ -796,7 +822,7 @@ function main() {
       repo,
       current.headRefOid,
       finalCheckRuns,
-      latestReviewGateCandidate(finalReviews, current.headRefOid),
+      firstReviewGateCandidate(finalReviews, current.headRefOid),
     );
   } catch (error) {
     if (current.autoMergeRequest !== null) {
