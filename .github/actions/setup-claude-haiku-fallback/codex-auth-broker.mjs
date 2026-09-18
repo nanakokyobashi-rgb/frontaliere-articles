@@ -418,8 +418,12 @@ function cleanupRuntime() {
 
 function cancelRequest(job) {
   if (!job || job.cancelled || job.responseStarted) return;
+  const started = job.started === true || activeRequest === job;
   job.cancelled = true;
-  if (activeRequest === job) cleanupRuntime();
+  if (!started && job.requestAccepted) {
+    acceptedRequests = Math.max(0, acceptedRequests - 1);
+  }
+  if (started) cleanupRuntime();
 }
 
 function cleanup() {
@@ -472,6 +476,7 @@ function startNextRequest() {
     }
   }
   if (!job) return;
+  job.started = true;
   activeRequest = job;
   const timeoutMs = Number(job.parsed.timeoutMs);
   job.client.setTimeout(Math.max(5000, timeoutMs + 10_000), () => {
@@ -507,7 +512,7 @@ function handleClient(client) {
   let request = '';
   let bytes = 0;
   let handled = false;
-  const job = { client, parsed: null, requestAccepted: false, responseStarted: false, cancelled: false };
+  const job = { client, parsed: null, requestAccepted: false, responseStarted: false, cancelled: false, started: false };
   client.setEncoding('utf8');
   client.setTimeout(5000, () => client.destroy());
   const cancelOnDisconnect = () => {

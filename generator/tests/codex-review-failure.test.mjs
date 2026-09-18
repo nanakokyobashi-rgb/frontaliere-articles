@@ -45,3 +45,25 @@ test('un outcome cancelled è retryable anche senza file diagnostico', () => {
     { cause: CODEX_REVIEW_FAILURE_CAUSE.CANCELLED, numTurns: null, source: 'outcome' },
   );
 });
+
+test('stderr rate-limit su stream misto JSON+testo resta retryable', () => {
+  const mixed = [
+    JSON.stringify({ type: 'item.completed', text: 'The prompt mentions HTTP 429 rate_limit.' }),
+    'stderr: HTTP 429 rate_limit too many requests',
+  ].join('\n');
+  assert.deepEqual(
+    classifyCodexReviewFailure({ outcome: 'failure', raw: mixed }),
+    { cause: CODEX_REVIEW_FAILURE_CAUSE.RATE_LIMIT, numTurns: null, source: 'text' },
+  );
+});
+
+test('stderr server-error su stream misto JSON+testo resta retryable', () => {
+  const mixed = [
+    JSON.stringify({ type: 'turn.started', item_id: '1' }),
+    'api error: 503 overloaded server_error',
+  ].join('\n');
+  assert.deepEqual(
+    classifyCodexReviewFailure({ outcome: 'failure', raw: mixed }),
+    { cause: CODEX_REVIEW_FAILURE_CAUSE.SERVER_ERROR, numTurns: null, source: 'text' },
+  );
+});
