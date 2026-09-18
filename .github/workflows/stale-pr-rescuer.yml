@@ -180,9 +180,12 @@ jobs:
             UPD_S=$(date -u -d "$UPD" +%s 2>/dev/null || echo "$NOW")
             if [ $((NOW - UPD_S)) -lt $AGE_MIN_S ]; then echo "PR #$N fresca (<2h) — skip"; continue; fi
 
-            # A review is usable only when its marker authenticates the exact
-            # current PR body.  Read/hash the body before selecting LAST_BODY;
-            # an API failure is a safe no-op, never permission to act on an old
+            # A review covers the current input only when its marker authenticates
+            # the exact current PR body. Read/hash the body before selecting the
+            # current-input review. Keep the latest managed review on this HEAD
+            # separately: a 🔴 from an older body revision remains an actionable
+            # finding until a later managed review on that HEAD supersedes it.
+            # An API failure is a safe no-op, never permission to act on an old
             # reviewer verdict.
             body_file="${RUNNER_TEMP:-/tmp}/stale-pr-body-${N}.txt"
             if ! gh api --paginate "repos/$REPO/pulls/$N" --jq '.body // ""' > "$body_file" 2>/dev/null; then
@@ -226,7 +229,7 @@ jobs:
             # default, e qui si legge l'ULTIMA — cioè proprio quella che una
             # risposta troncata non contiene. Sequenza di ARRAY: `.[][]?`.
             reviews=$(gh api --paginate "repos/$REPO/pulls/$N/reviews?per_page=100" 2>/dev/null || echo '[]')
-            LAST_BODY=$(echo "$reviews" | jq -rs --arg revision "$REVIEW_REVISION" '
+            LAST_REVIEW_BODIES=$(echo "$reviews" | jq -c -rs --arg head "$HEAD" --arg revision "$REVIEW_REVISION" '
               def review_revisions:
                 [((.body // "") | split("\n")[] | rtrimstr("\r")
                   | select(test("^<!-- REVIEW_INPUT_REVISION: body:[0-9a-f]{64} -->$"; "i"))
@@ -242,10 +245,13 @@ jobs:
                    ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
                    or (((.user.login // "") | test("^github-actions\\[bot\\]$";"i"))
                        and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
-                 )
-               | select(has_current_revision($revision))
-              ] | sort_by(.id // 0) | last | .body // ""')
-            LAST_CID=$(echo "$reviews" | jq -rs --arg revision "$REVIEW_REVISION" '
+                 )] as $managed
+              | ($managed | map(select(has_current_revision($revision))) | sort_by(.id // 0) | last // {}) as $current
+              | ($managed | map(select(.commit_id == $head)) | sort_by(.id // 0) | last // {}) as $head_review
+              | {current: ($current.body // ""), head: ($head_review.body // "") }')
+            LAST_BODY=$(printf '%s' "$LAST_REVIEW_BODIES" | jq -r '.current // ""')
+            LAST_HEAD_BODY=$(printf '%s' "$LAST_REVIEW_BODIES" | jq -r '.head // ""')
+            LAST_REVIEW_CIDS=$(echo "$reviews" | jq -c -rs --arg revision "$REVIEW_REVISION" '
               def review_revisions:
                 [((.body // "") | split("\n")[] | rtrimstr("\r")
                   | select(test("^<!-- REVIEW_INPUT_REVISION: body:[0-9a-f]{64} -->$"; "i"))
@@ -261,9 +267,10 @@ jobs:
                    ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
                    or (((.user.login // "") | test("^github-actions\\[bot\\]$";"i"))
                        and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
-                 )
-               | select(has_current_revision($revision))
-              ] | sort_by(.id // 0) | last | .commit_id // ""')
+                 )] as $managed
+              | ($managed | map(select(has_current_revision($revision))) | sort_by(.id // 0) | last // {})
+              | {current: (.commit_id // "")}')
+            LAST_CID=$(printf '%s' "$LAST_REVIEW_CIDS" | jq -r '.current // ""')
 
             # Una deferral per il lease non è una classe C: il check è stato
             # eseguito, ma il reviewer non è stato ammesso per contesa lecita.
@@ -366,12 +373,25 @@ jobs:
             if [ "${IMPORTANT_MATCHES:-0}" -gt 0 ]; then
               HAS_IMPORTANT=true
             fi
+            IMPORTANT_ON_HEAD=false
+            if [ "$HAS_IMPORTANT" = "true" ] && [ "$LAST_CID" = "$HEAD" ]; then
+              IMPORTANT_ON_HEAD=true
+            fi
+            # The exact same PCRE is authoritative for both the current-input
+            # review and the latest managed review on HEAD. This preserves a
+            # historical finding after a body edit without treating a stale
+            # LGTM as an approval for the new body.
+            # shellcheck disable=SC2016 # the single-quoted PCRE is intentional
+            HEAD_IMPORTANT_MATCHES=$(printf '%s' "$LAST_HEAD_BODY" | LC_ALL=C.UTF-8 grep -cP '^(?:(?=(?:[^`]*`[^`]*`)*[^`]*`[^`]*$)(?:[^🟡🟢❓]*|(?:[^«]|«[^»]*»)*[🟡🟢❓](?:[^«]|«[^»]*»)*)|(?:[^🟡🟢❓]*|(?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*[🟡🟢❓](?:[^`«]|`[^`]*`|«[^»]*»|`(?![^`]*`))*)(?<!\s`)(?<!^`))🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]' || true)
+            if [ "${HEAD_IMPORTANT_MATCHES:-0}" -gt 0 ]; then
+              IMPORTANT_ON_HEAD=true
+            fi
 
             # Il fixer scrive il cap in `REDFLAG_FIX_ROUND` e poi parcheggia la
             # PR con `needs-human` (label + commento). Sono segnali terminali:
             # senza questo veto la classe E li ignorerebbe e ridispatcherebbe il
             # fixer ogni 2h, mentre il fixer uscirebbe subito senza lavorare.
-            if [ "$HAS_IMPORTANT" = "true" ] && [ "$LAST_CID" = "$HEAD" ]; then
+            if [ "$IMPORTANT_ON_HEAD" = "true" ]; then
               if [ "$COMMENT_LOOKUP_OK" != "true" ]; then
                 echo "PR #$N: cap/needs-human del fixer non verificabile sulla HEAD ${HEAD:0:7} — skip fail-closed"
                 continue
@@ -394,7 +414,7 @@ jobs:
             FIXER_RUN_RECENT_ID=""
             FIXER_RUN_RECENT=false
             FIXER_RUN_IN_FLIGHT=false
-            if [ "$HAS_IMPORTANT" = "true" ] && [ "$LAST_CID" = "$HEAD" ]; then
+            if [ "$IMPORTANT_ON_HEAD" = "true" ]; then
               if ! fixer_runs=$(gh run list --repo "$REPO" --workflow pr-redflag-fixer.yml --branch "$BRANCH" \
                 --limit 30 --json databaseId,headSha,status,conclusion,createdAt 2>/dev/null); then
                 echo "::warning::Impossibile leggere le run di pr-redflag-fixer per PR #$N — nessun dispatch automatico ammesso."
@@ -437,7 +457,7 @@ jobs:
             # fra E e B in sicurezza: anche B potrebbe rilanciare tests mentre
             # un fixer già esistente è queued/in_progress. La PR resta quindi
             # intatta e sarà rivalutata dal cron successivo.
-            if [ "$HAS_IMPORTANT" = "true" ] && [ "$LAST_CID" = "$HEAD" ] && [ "$FIXER_RUN_LOOKUP_OK" != "true" ]; then
+            if [ "$IMPORTANT_ON_HEAD" = "true" ] && [ "$FIXER_RUN_LOOKUP_OK" != "true" ]; then
               echo "PR #$N: stato di pr-redflag-fixer non verificabile sulla HEAD ${HEAD:0:7} — skip fail-closed"
               continue
             fi
@@ -449,15 +469,15 @@ jobs:
               # in più viene etichettata, cambia solo il rimedio consegnato.
               REASON="ultima review più vecchia dell'head: è su \`${LAST_CID:0:7}\`, l'head è \`${HEAD:0:7}\`, non chiude con \`## LGTM\` e i test sull'head sono verdi — i findings sono stati ripresi da un commit nuovo e nessuno ha ri-revisionato"
               RESCUE="rilancia il run di \`tests\` più recente su \`${HEAD:0:7}\` (\`gh run rerun <id> --repo $REPO\`): da quando la review vive DENTRO \`tests.yml\` sul trigger \`pull_request\`, un rerun la riesegue davvero — prima serviva un dispatch a parte perché il reviewer girava su \`workflow_run\` e un rerun non ne produce uno."
-            elif [ "$TESTS_CONCL" = "success" ] && [ "$LAST_CID" != "$HEAD" ]; then
+            elif [ "$TESTS_CONCL" = "success" ] && [ "$LAST_CID" != "$HEAD" ] && [ "$IMPORTANT_ON_HEAD" != "true" ]; then
               CLASS="A"
               REASON="test verdi sull'head corrente da >2h ma nessuna review li ha coperti"
               RESCUE="\`git fetch origin main && git merge origin/main\` nel branch \`$BRANCH\`, poi push. Se il merge non serve, può essere solo coda congestionata: attendi."
-            elif [ "$HAS_IMPORTANT" = "true" ] && [ "$LAST_CID" = "$HEAD" ] && [ "$FIXER_RUN_LOOKUP_OK" = "true" ] && [ "$FIXER_RUN_RECENT" != "true" ] && [ "$FIXER_RUN_IN_FLIGHT" != "true" ] && [ "$FIXER_ROUND_CAP_REACHED" != "true" ] && [ "$FIXER_NEEDS_HUMAN_MARKER" != "true" ]; then
+            elif [ "$IMPORTANT_ON_HEAD" = "true" ] && [ "$FIXER_RUN_LOOKUP_OK" = "true" ] && [ "$FIXER_RUN_RECENT" != "true" ] && [ "$FIXER_RUN_IN_FLIGHT" != "true" ] && [ "$FIXER_ROUND_CAP_REACHED" != "true" ] && [ "$FIXER_NEEDS_HUMAN_MARKER" != "true" ]; then
               CLASS="E"
               REASON="🔴 Important non ripreso sulla HEAD corrente (nessun commit nuovo e nessuna run di pr-redflag-fixer registrata nelle ultime 2h)"
               RESCUE="dispatcha \`pr-redflag-fixer.yml\` per la PR #$N sulla HEAD \`${HEAD:0:7}\` con \`workflow_dispatch\`; il fixer riapplicherà gli stessi gate del percorso automatico."
-            elif [ "$HAS_IMPORTANT" = "true" ] && [ "$LAST_CID" = "$HEAD" ]; then
+            elif [ "$IMPORTANT_ON_HEAD" = "true" ]; then
               CLASS="B"
               # Regex allineata a REDFLAG_IMPORTANT_RE: un `grep -q "🔴"` nudo
               # scatterebbe anche sulla prosa di NEGAZIONE del reviewer ("zero
