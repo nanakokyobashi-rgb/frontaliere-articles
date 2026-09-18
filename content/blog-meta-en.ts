@@ -11836,6 +11836,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-09-18.imageAlt': 'The day\'s numbers for cross-border commuters – September 18, 2026: border waits, fuel prices, CHF-EUR rate and job listings',
     'blog.article.bollettino-frontaliere-2026-09-18.seoDescription': 'Cross-border brief, September 18, 2026: queues at the crossings this morning, where fuel is cheapest, the franc-euro rate and new job postings in Switzerland.',
     'blog.article.bollettino-frontaliere-2026-09-18.ogDescription': 'The numbers for September 18, 2026, for cross-border commuters: how long the queue is at each crossing this morning, which towns have the cheapest fuel, what the franc is worth today and how many Swiss jobs went up.',
+    'blog.article.fondi-comuni-frontiera-decreto.title': 'Common border funds: MEF decree signed',
+    'blog.article.fondi-comuni-frontiera-decreto.excerpt': 'Minister Giorgetti signed the decree for the allocation of funds to the Municipalities within 20 km of the border with Ticino, Graubünden and Valais.',
+    'blog.article.fondi-comuni-frontiera-decreto.imageAlt': 'Center of a border municipality in the Mendrisiotto region',
 };
 
 export default blogMetaEn;

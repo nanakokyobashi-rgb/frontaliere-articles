@@ -11838,6 +11838,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-09-18.imageAlt': 'Les chiffres du jour pour les frontaliers – 18 septembre 2026 : attentes aux douanes, prix de l\'essence, taux CHF-EUR et offres d\'emploi',
     'blog.article.bollettino-frontaliere-2026-09-18.seoDescription': 'Bulletin du frontalier du 18 septembre 2026 : les files aux douanes ce matin, l\'essence la moins chère, taux franc-euro et nouvelles offres d\'emploi en Suisse.',
     'blog.article.bollettino-frontaliere-2026-09-18.ogDescription': 'Les chiffres du 18 septembre 2026 pour les frontaliers : combien de temps on attend ce matin à chaque douane, où l\'essence coûte le moins cher, ce que vaut le franc aujourd\'hui et combien d\'offres d\'emploi sont parues en Suisse.',
+    'blog.article.fondi-comuni-frontiera-decreto.title': 'Fonds communs frontaliers : le décret MEF signé',
+    'blog.article.fondi-comuni-frontiera-decreto.excerpt': 'Le ministre Giorgetti a signé le décret d\'attribution des fonds aux municipalités à moins de 20 km de la frontière avec le Tessin, les Grisons et le Valais.',
+    'blog.article.fondi-comuni-frontiera-decreto.imageAlt': 'Centre d\'une commune frontalière dans le Mendrisiotto',
 };
 
 export default blogMetaFr;
