@@ -120,9 +120,11 @@ jobs:
 
       - name: Scan generation health (apre e richiude nella stessa passata)
         env:
-          GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          export GH_TOKEN="${runtime_pat:-$GH_TOKEN}"
           args=(
             --max-log-runs "${{ github.event.inputs.max_log_runs || '60' }}"
             --run-lookback-hours "${{ github.event.inputs.run_lookback_hours || '12' }}"

@@ -87,14 +87,17 @@ jobs:
         env:
           # PAT se disponibile (l'evento `issues: opened` parte → triage
           # immediato), altrimenti GITHUB_TOKEN (le issue si aprono lo stesso,
-          # le raccoglie lo sweep del triage).
-          GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
+          # le raccoglie lo sweep del triage). Il PAT arriva in GITHUB_ENV:
+          # interpolarlo da `env.*` può restare vuoto e forzare il fallback.
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           # Nessun workflow da ignorare: lo smoke del token, unico caso previsto,
           # ha esaurito il suo compito ed è stato rimosso. La variabile resta
           # supportata dallo scanner per un eventuale caso futuro.
           IGNORE_WORKFLOWS: ''
         run: |
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          export GH_TOKEN="${runtime_pat:-$GH_TOKEN}"
           ARGS=(--lookback-min "${{ github.event.inputs.lookback_min || '40' }}")
           if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then ARGS+=(--dry-run); fi
           node scripts/ci/scan-failed-runs.mjs "${ARGS[@]}"
@@ -105,13 +108,15 @@ jobs:
       # rolling ledger dei fallimenti ordinari.
       - name: Scan timed out and host-killed jobs
         env:
-          GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           TIMEOUT_SCAN_LOOKBACK_MINUTES: ${{ github.event.inputs.lookback_min || '40' }}
           # Stesso settle del default dello scanner: evita di scambiare la
           # finalizzazione dell'API Actions per uno step morto sull'host.
           HOST_KILL_SETTLE_MS: '120000'
         run: |
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          export GH_TOKEN="${runtime_pat:-$GH_TOKEN}"
           if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
             node scripts/ci/scan-job-timeouts.mjs --dry-run
           else

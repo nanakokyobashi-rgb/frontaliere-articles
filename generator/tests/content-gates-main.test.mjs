@@ -128,9 +128,16 @@ describe('content-gates-main: il workflow', () => {
   test('apre le issue col PAT, non col GITHUB_TOKEN', () => {
     assert.match(
       WF,
-      /GH_TOKEN: \$\{\{ env\.GITHUB_PAT_NANAKO \|\| secrets\.GITHUB_TOKEN \}\}/,
+      /GH_TOKEN="\$\{runtime_pat:-\$GH_TOKEN\}" node scripts\/ci\/content-gates-main\.mjs/,
       "Una issue creata dal GITHUB_TOKEN non emette `issues: opened` (anti-ricorsione " +
         'GitHub): nascerebbe fuori dal triage event-driven e nessuno la instraderebbe al fixer.',
+    );
+    assert.match(WF, /runtime_pat="\$\{GITHUB_PAT_NANAKO:-\}"/,
+      'il PAT deve arrivare dalla shell dopo GITHUB_ENV, non da `${{ env.GITHUB_PAT_NANAKO }}`');
+    assert.doesNotMatch(
+      WF,
+      /GH_TOKEN:\s*\$\{\{\s*env\.GITHUB_PAT/,
+      'un handoff env.* ricade in silenzio sul GITHUB_TOKEN quando il contesto è vuoto',
     );
     assert.match(WF, /issues: write/, 'senza `issues: write` lo script non può aprire niente');
   });
