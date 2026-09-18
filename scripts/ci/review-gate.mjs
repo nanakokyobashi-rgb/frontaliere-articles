@@ -186,7 +186,7 @@ function reviewHasSingleInputRevision(body) {
 }
 
 function isTerminalReview(review) {
-  return ['COMMENTED', 'APPROVED', 'CHANGES_REQUESTED'].includes(
+  return ['COMMENTED', 'APPROVED', 'CHANGES_REQUESTED', 'DISMISSED'].includes(
     String(review?.state || '').toUpperCase(),
   );
 }

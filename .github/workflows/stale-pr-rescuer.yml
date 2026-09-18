@@ -242,7 +242,7 @@ jobs:
                 or (((.commit_id // "") | ascii_downcase) == ($head | ascii_downcase)
                     and has_single_revision);
               [.[][]?
-               | select((.state // "") != "PENDING" and (.state // "") != "DISMISSED")
+               | select((.state // "") != "PENDING")
                | select(.user.type == "Bot")
                | select(
                    ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
@@ -267,7 +267,7 @@ jobs:
                 or (((.commit_id // "") | ascii_downcase) == ($head | ascii_downcase)
                     and has_single_revision);
               [.[][]?
-               | select((.state // "") != "PENDING" and (.state // "") != "DISMISSED")
+               | select((.state // "") != "PENDING")
                | select(.user.type == "Bot")
                | select(
                    ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))

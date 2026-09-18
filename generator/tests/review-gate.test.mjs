@@ -294,6 +294,17 @@ test('PENDING, DISMISSED e CHANGES_REQUESTED non approvano un LGTM carry-forward
     });
     assert.equal(r.status, 1, `${state}: ${r.stdout}`);
   }
+  const clean = botReview(HEAD, 'tutto bene\n\n## LGTM', {
+    state: 'COMMENTED',
+    submitted_at: '2026-09-18T09:00:00Z',
+    id: 10,
+  });
+  const dismissed = botReview(HEAD, 'tutto bene\n\n## LGTM', {
+    state: 'DISMISSED',
+    submitted_at: '2026-09-18T09:01:00Z',
+    id: 11,
+  });
+  assert.equal(runGate({ reviews: [clean, dismissed] }).status, 1);
 });
 
 test('un verdetto negativo del body precedente sulla stessa HEAD resta bloccante', () => {
