@@ -2203,6 +2203,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'penuria-alloggi-svizzera-2026': { it: 'penuria-alloggi-svizzera-2026', en: 'housing-shortage-switzerland-2026', de: 'wohnungsnot-schweiz-2026', fr: 'penurie-logement-suisse-2026' },
  'tirocini-2026-mercato-svizzera': { it: 'tirocini-2026-mercato-svizzera', en: 'apprenticeships-2026-market-switzerland', de: 'lehrstellen-2026-markt-schweiz', fr: 'places-apprentissage-2026-marche-suisse' },
  'crescita-assicurazioni-cyber-2025': { it: 'crescita-assicurazioni-cyber-2025', en: 'cyber-insurance-growth-2025', de: 'cyberversicherung-wachstum-2025', fr: 'croissance-assurance-cyber-2025' },
+ 'votazioni-federali-neutralita-sondaggio': { it: 'votazioni-federali-neutralita-sondaggio', en: 'federal-votes-neutrality-poll', de: 'eidgenoessische-abstimmungen-neutralitaet-umfrage', fr: 'votations-federales-neutralite-sondage' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

@@ -6542,6 +6542,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.crescita-assicurazioni-cyber-2025.title': 'Les cyberassurances en hausse en 2025 en Suisse',
     'blog.article.crescita-assicurazioni-cyber-2025.excerpt': 'En 2025, les cyberassurances en Suisse connaissent une forte croissance : 72\'000 entreprises assurées et 480\'000 particuliers, selon les données de l\'ASA.',
     'blog.article.crescita-assicurazioni-cyber-2025.imageAlt': 'Croissance de l\'assurance cyber en Suisse en 2025',
+    'blog.article.votazioni-federali-neutralita-sondaggio.title': 'Vote 27 septembre : lourde défaite pour la neutralité',
+    'blog.article.votazioni-federali-neutralita-sondaggio.excerpt': 'Selon le sondage gfs.bern pour la SSR, 63% de l\'électorat envisage de rejeter l\'initiative sur la neutralité aux urnes du 27 septembre 2026.',
+    'blog.article.votazioni-federali-neutralita-sondaggio.imageAlt': 'Urnes et documents de vote pour les votations fédérales en Suisse',
 };
 
 export default blogMetaChFr;

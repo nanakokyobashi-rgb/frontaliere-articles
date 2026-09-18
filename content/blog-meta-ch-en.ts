@@ -6542,6 +6542,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.crescita-assicurazioni-cyber-2025.title': 'Cyber insurance growing in 2025 in Switzerland',
     'blog.article.crescita-assicurazioni-cyber-2025.excerpt': 'In 2025, cyber insurance in Switzerland recorded strong growth: 72,000 insured companies and 480,000 individuals, according to ASA data.',
     'blog.article.crescita-assicurazioni-cyber-2025.imageAlt': 'Growth of cyber insurance in Switzerland in 2025',
+    'blog.article.votazioni-federali-neutralita-sondaggio.title': 'Votes 27 September: heavy defeat for neutrality',
+    'blog.article.votazioni-federali-neutralita-sondaggio.excerpt': 'According to the gfs.bern poll for the SSR, 63% of the electorate plan to reject the initiative on neutrality at the polls on 27 September 2026.',
+    'blog.article.votazioni-federali-neutralita-sondaggio.imageAlt': 'Ballot boxes and voting materials for federal elections in Switzerland',
 };
 
 export default blogMetaChEn;
