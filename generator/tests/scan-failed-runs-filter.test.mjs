@@ -16,6 +16,7 @@ import {
   crawlerFailuresFromLog,
   buildCrawlerFailureReport,
   isCrawlerGroupWorkflow,
+  isSystemicCrawlerFailureLog,
   conflictedPathsFromLog,
   blockingConflictPath,
   articleWasGenerated,
@@ -122,6 +123,20 @@ test('un gruppo crawler ha un riconoscimento strutturale e non viene ridotto a u
 
 test('un esito di lease condiviso non attribuisce il fallimento a un crawler', () => {
   const log = groupLogLine('28:00.0000000', 'fust: crawler exited with status 44').replaceAll('capri-holdings', 'fust');
+  assert.deepEqual(crawlerFailuresFromLog(log), []);
+  assert.equal(buildCrawlerFailureReport({
+    log,
+    run: CRAWLER_RUN,
+    workflowName: CRAWLER_GROUP,
+  }), null);
+});
+
+test('il precondition failure condiviso con exit 43 non diventa un falso errore per-membro', () => {
+  const log = [
+    groupLogLine('28:00.0000000', "::error::fust: crawl OK but the crawler group's shared deferred-commit precondition failed (exit 43). Group-wide fault, identical for every sibling — step stays red, no per-crawler issue filed (systemic class)."),
+    groupLogLine('28:00.0100000', 'fust: crawler exited with status 1'),
+  ].join('\n');
+  assert.equal(isSystemicCrawlerFailureLog(log), true);
   assert.deepEqual(crawlerFailuresFromLog(log), []);
   assert.equal(buildCrawlerFailureReport({
     log,

@@ -252,6 +252,7 @@ const RECURRENCE_GATED_WORKFLOW_RE = /^(?:Generate Blog Article|fast-publish-art
 export const CRAWLER_GROUP_WORKFLOW_RE = /^Crawler Group \d{1,2} \(sparse cross-repo execution\)$/;
 const CRAWLER_MEMBER_FAILURE_RE = /(?:^|[^a-z0-9-])([a-z0-9][a-z0-9-]*):\s*crawler exited with status\s+([1-9]\d*)\b/gi;
 const NON_CRAWLER_FAILURE_EXIT_CODES = new Set([42, 43, 44]);
+const SYSTEMIC_CRAWLER_FAILURE_RE = /shared (?:deferred-commit precondition failed|group precondition failure)\s*\(exit\s*43\)/i;
 
 export function isRecurrenceGatedWorkflow(name) {
   return RECURRENCE_GATED_WORKFLOW_RE.test(String(name || ''));
@@ -259,6 +260,10 @@ export function isRecurrenceGatedWorkflow(name) {
 
 export function isCrawlerGroupWorkflow(name) {
   return CRAWLER_GROUP_WORKFLOW_RE.test(String(name || ''));
+}
+
+export function isSystemicCrawlerFailureLog(text) {
+  return SYSTEMIC_CRAWLER_FAILURE_RE.test(String(text || ''));
 }
 
 // Workflow di SORVEGLIANZA della pipeline: il loro rosso E' l'allarme, non il
@@ -1169,6 +1174,7 @@ export function cleanLogLine(line) {
  * la riga eseguita.
  */
 export function crawlerFailuresFromLog(text) {
+  if (isSystemicCrawlerFailureLog(text)) return [];
   const failures = new Map();
   for (const raw of String(text || '').split('\n')) {
     const line = cleanLogLine(raw);
