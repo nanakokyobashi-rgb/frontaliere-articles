@@ -2216,6 +2216,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'borse-studio-zugo-guide': { it: 'borse-studio-zugo-guide', en: 'zug-scholarships-guide', de: 'zug-stipendien-leitfaden', fr: 'bourses-etudes-zug-guide' },
  'suissenegece-respinge-tasse-profitti': { it: 'suissenegece-respinge-tasse-profitti', en: 'suissenegece-rejects-profit-taxes', de: 'suissenegece-lehnt-gewinnsteuern-ab', fr: 'suissenegece-rejette-taxes-benefices' },
  'taf-respinge-ricorso-liste-ospedaliere': { it: 'taf-respinge-ricorso-liste-ospedaliere', en: 'taf-rejects-hospital-list-appeal', de: 'bvg-weist-spitalisten-klage-ab', fr: 'taf-rejette-recours-listes-hopitaux' },
+ 'bns-tassi-esame-settembre': { it: 'bns-tassi-esame-settembre', en: 'snb-rates-september-exam', de: 'snb-zinsen-september-pruefung', fr: 'bns-taux-examen-septembre' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

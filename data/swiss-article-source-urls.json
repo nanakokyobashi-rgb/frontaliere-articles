@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/dt32anprn-j524s9gtdck": {
-    "articleId": "ordinanza-iran-formulari-agosto",
-    "ts": "2026-08-19T19:07:52.611Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/attualita/1944757/dopo-lo-scandalo-sessuale-torna-il-festival-del-tantra-il-consenso-come-regola": {
     "articleId": "antara-tantra-festival-lenk",
     "ts": "2026-08-20T01:23:25.562Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/tasse-extra-per-i-commercianti-di-materie-prime%3f-%22non-ci-stiamo%22/92084098": {
     "articleId": "suissenegece-respinge-tasse-profitti",
     "ts": "2026-09-19T01:32:55.810Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1951146/bns-previsioni-giovedi-tassi-franco": {
+    "articleId": "bns-tassi-esame-settembre",
+    "ts": "2026-09-19T01:53:05.909Z",
     "keyForm": 2
   }
 }

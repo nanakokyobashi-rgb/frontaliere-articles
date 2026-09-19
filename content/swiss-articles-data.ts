@@ -19715,6 +19715,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'bns-tassi-esame-settembre',
+    category: 'novita',
+    date: '2026-09-19T01:53:05.686Z',
+    image: '/images/blog/bns-tassi-esame-settembre.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

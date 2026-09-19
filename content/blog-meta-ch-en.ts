@@ -6581,6 +6581,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.taf-respinge-ricorso-liste-ospedaliere.title': 'Insurers: no recourse to the entire hospital list',
     'blog.article.taf-respinge-ricorso-liste-ospedaliere.excerpt': 'The Federal Administrative Court dismissed the appeal of prio.swiss against the hospital list of the Canton of Switzerland. Only targeted appeals are possible.',
     'blog.article.taf-respinge-ricorso-liste-ospedaliere.imageAlt': 'Federal Administrative Court in St. Gallen',
+    'blog.article.bns-tassi-esame-settembre.title': 'SNB: fixed rates at 0.0% and future forecasts',
+    'blog.article.bns-tassi-esame-settembre.excerpt': 'The Swiss National Bank is preparing for the economic exam with rates at 0.0% and inflation in Switzerland rising to 0.8% in August.',
+    'blog.article.bns-tassi-esame-settembre.imageAlt': 'Swiss National Bank building in Bern for the monetary policy exam',
 };
 
 export default blogMetaChEn;

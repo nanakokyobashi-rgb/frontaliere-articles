@@ -6581,6 +6581,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.taf-respinge-ricorso-liste-ospedaliere.title': 'Assicuratori: no a ricorsi su intera lista ospedaliera',
     'blog.article.taf-respinge-ricorso-liste-ospedaliere.excerpt': 'Il Tribunale amministrativo federale ha respinto il ricorso di prio.swiss contro la lista ospedaliera del Canton Svitto. Possibili solo ricorsi mirati.',
     'blog.article.taf-respinge-ricorso-liste-ospedaliere.imageAlt': 'Tribunale amministrativo federale di San Gallo',
+    'blog.article.bns-tassi-esame-settembre.title': 'BNS: tassi fermi allo 0,0% e previsioni future',
+    'blog.article.bns-tassi-esame-settembre.excerpt': 'La Banca nazionale svizzera si prepara all\'esame economico con tassi fermi allo 0,0% e un\'inflazione in Svizzera salita allo 0,8% in agosto.',
+    'blog.article.bns-tassi-esame-settembre.imageAlt': 'Sede della Banca nazionale svizzera a Berna per l\'esame dei tassi',
 };
 
 export default blogMetaChIt;

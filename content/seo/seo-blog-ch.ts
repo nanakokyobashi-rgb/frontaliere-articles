@@ -85312,6 +85312,46 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
+
+  'blog-bns-tassi-esame-settembre': {
+    title: 'BNS: tassi fermi allo 0,0% e previsioni future',
+    description: 'La BNS affronta il terzo esame annuale a Berna. Tasso guida fermo allo 0,0% e inflazione all\'0,8% in agosto. Previsioni 2027 tra 0,00% e 0,75%. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, tassi, fermi, allo, previsioni',
+    ogTitle: 'BNS: tassi fermi allo 0,0% e previsioni future',
+    ogDescription: 'Scopri gli aggiornamenti sull\'esame di politica monetaria della Banca nazionale svizzera, l\'andamento dell\'inflazione e le previsioni sul tasso guida per i prossimi trimestri.',
+    canonicalPath: '/articoli-svizzera/bns-tassi-esame-settembre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "BNS: tassi fermi allo 0,0% e previsioni future",
+      "description": "La BNS affronta il terzo esame annuale a Berna. Tasso guida fermo allo 0,0% e inflazione all'0,8% in agosto. Previsioni 2027 tra 0,00% e 0,75%. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bns-tassi-esame-settembre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sede della Banca nazionale svizzera a Berna per l'esame dei tassi"
+      },
+      "datePublished": "2026-09-19T01:53:05+00:00",
+      "dateModified": "2026-09-19T01:53:05+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/bns-tassi-esame-settembre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

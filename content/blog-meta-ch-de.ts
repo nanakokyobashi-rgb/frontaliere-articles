@@ -6581,6 +6581,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.taf-respinge-ricorso-liste-ospedaliere.title': 'Versicherer: Nein zu Beschwerden auf der gesamten Spitalliste',
     'blog.article.taf-respinge-ricorso-liste-ospedaliere.excerpt': 'Das Bundesverwaltungsgericht hat die Beschwerde von prio.swiss gegen die Spitalliste des Kantons Schwyz abgewiesen. Nur zielgerichtete Rechtsbehelfe sind möglich.',
     'blog.article.taf-respinge-ricorso-liste-ospedaliere.imageAlt': 'Bundesverwaltungsgericht in St. Gallen',
+    'blog.article.bns-tassi-esame-settembre.title': 'SNB: feste Zinssätze von 0,0% und zukünftige Prognosen',
+    'blog.article.bns-tassi-esame-settembre.excerpt': 'Die Schweizerische Nationalbank bereitet sich mit festen Zinsen von 0,0% und einer Inflation in der Schweiz von 0,8% im August auf die wirtschaftliche Prüfung vor.',
+    'blog.article.bns-tassi-esame-settembre.imageAlt': 'Gebäude der Schweizerischen Nationalbank in Bern',
 };
 
 export default blogMetaChDe;
