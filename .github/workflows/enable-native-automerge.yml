@@ -84,7 +84,7 @@ jobs:
                 return 0
               fi
               if [ "$attempt" -eq 3 ] || ! grep -Eiq \
-                'i/o timeout|timed? out|connection reset|connection refused|temporary failure|service unavailable|bad gateway|gateway timeout|HTTP 5[0-9][0-9]|ECONNRESET|ETIMEDOUT|EAI_AGAIN' \
+                'timeout|timed[[:space:]._-]*out|deadline[[:space:]._-]*exceeded|connection reset|connection refused|temporary failure|service unavailable|bad gateway|gateway timeout|HTTP 5[0-9][0-9]|ECONNRESET|ETIMEDOUT|EAI_AGAIN' \
                 "$error_file"; then
                 cat "$error_file" >&2
                 rm -f "$destination" "$error_file"

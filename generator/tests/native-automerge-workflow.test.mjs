@@ -44,7 +44,9 @@ test('#1604: il bootstrap ritenta solo letture GitHub transitorie e resta fail-c
   const downloader = source.slice(start, end);
   assert.match(downloader, /for attempt in 1 2 3/);
   assert.match(downloader, /> "\$destination" 2> "\$error_file"/);
-  assert.match(downloader, /i\/o timeout/);
+  assert.match(downloader, /timeout/);
+  assert.match(downloader, /deadline\[\[:space:\]\.\_-\]\*exceeded/);
+  assert.match(downloader, /timed\[\[:space:\]\.\_-\]\*out/);
   assert.match(downloader, /HTTP 5\[0-9\]\[0-9\]/);
   assert.match(downloader, /\[ "\$attempt" -eq 3 \] \|\| ! grep/);
   assert.match(downloader, /sleep "\$\(\(attempt \* 5\)\)"/);
