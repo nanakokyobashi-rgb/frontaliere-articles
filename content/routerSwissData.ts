@@ -2220,6 +2220,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'consiglio-federale-boccia-frontiere': { it: 'consiglio-federale-boccia-frontiere', en: 'federal-council-rejects-borders-initiative', de: 'bundesrat-lehnt-grenzinitiative-ab', fr: 'conseil-federal-rejette-initiative-frontieres' },
  'casa-zugo-prezzi-mutuo': { it: 'casa-zugo-prezzi-mutuo', en: 'zug-house-prices-mortgage', de: 'zug-hauspreise-hypothek', fr: 'maison-zoug-prix-hypothecaire' },
  'permesso-l-vaud-validita-rinnovo': { it: 'permesso-l-vaud-validita-rinnovo', en: 'vaud-l-permit-validity-renewal', de: 'vaud-l-ausweis-gultigkeit-verlaengerung', fr: 'permis-l-vaud-duree-renouvellement' },
+ 'votazione-27-settembre-2026': { it: 'votazione-27-settembre-2026', en: 'september-vote-2026', de: 'abstimmung-27-september-2026', fr: 'vote-27-septembre-2026' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

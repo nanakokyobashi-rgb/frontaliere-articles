@@ -6593,6 +6593,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.permesso-l-vaud-validita-rinnovo.title': 'Permesso L in Vaud: validità 1 anno e rinnovo fino a 24 mesi',
     'blog.article.permesso-l-vaud-validita-rinnovo.excerpt': 'Il permesso L dura max 1 anno, rinnovabile per un secondo anno. Dopo 24 mesi passa al permesso B. Guida completa per il Cantone di Vaud.',
     'blog.article.permesso-l-vaud-validita-rinnovo.imageAlt': 'Lavoratore con documenti per il permesso L di breve durata in Svizzera',
+    'blog.article.votazione-27-settembre-2026.title': 'Votazione 27 settembre: 63% no alla neutralità',
+    'blog.article.votazione-27-settembre-2026.excerpt': 'Sondaggio gfs.bern: oltre il 60% degli elettori intende respingere le iniziative su neutralità e sicurezza alimentare al 27 settembre.',
+    'blog.article.votazione-27-settembre-2026.imageAlt': 'Elezioni federali 27 settembre 2026: elettori alla seggio in Svizzera',
 };
 
 export default blogMetaChIt;

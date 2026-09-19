@@ -19751,6 +19751,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'votazione-27-settembre-2026',
+    category: 'novita',
+    date: '2026-09-19T03:45:29.583Z',
+    image: '/images/blog/votazione-27-settembre-2026.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

@@ -85469,6 +85469,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-votazione-27-settembre-2026': {
+    title: 'Votazione 27 settembre: 63% no alla neutralità',
+    description: 'Sondaggio gfs.bern: oltre il 60% degli elettori svizzeri intende respingere le iniziative su neutralità e sicurezza alimentare del 27 settembre. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, votazione, settembre, alla, neutralità',
+    ogTitle: 'Votazione 27 settembre: 63% no alla neutralità',
+    ogDescription: 'Il secondo sondaggio gfs.bern per la SSR rivela una netta maggioranza di \'no\' alle iniziative su neutralità e sicurezza alimentare. Scopri i dati dettagliati per Cantone e gruppo politico in vista del voto del 27 settembre 2026.',
+    canonicalPath: '/articoli-svizzera/votazione-27-settembre-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Votazione 27 settembre: 63% no alla neutralità",
+      "description": "Sondaggio gfs.bern: oltre il 60% degli elettori svizzeri intende respingere le iniziative su neutralità e sicurezza alimentare del 27 settembre. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/votazione-27-settembre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Elezioni federali 27 settembre 2026: elettori alla seggio in Svizzera"
+      },
+      "datePublished": "2026-09-19T03:45:29+00:00",
+      "dateModified": "2026-09-19T03:45:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/votazione-27-settembre-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

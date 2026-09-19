@@ -6593,6 +6593,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.permesso-l-vaud-validita-rinnovo.title': 'Führerschein L Waadt: 1 Jahr gültig, Verlängerung',
     'blog.article.permesso-l-vaud-validita-rinnovo.excerpt': 'Die Genehmigung L gilt für maximal 1 Jahr und kann um ein zweites Jahr verlängert werden. Nach 24 Monaten geht er in die Bewilligung B. Vollständiger Leitfaden für den Kanton Waadt.',
     'blog.article.permesso-l-vaud-validita-rinnovo.imageAlt': 'Arbeitnehmer mit Dokumenten für die kurzfristige L-Ausweispapiere in der Schweiz',
+    'blog.article.votazione-27-settembre-2026.title': 'Abstimmung vom 27. September: 63% Nein zur Neutralität',
+    'blog.article.votazione-27-settembre-2026.excerpt': 'Umfrage gfs.bern: Mehr als 60% der Wähler wollen die Initiativen zur Neutralität und Ernährungssicherheit am 27. September ablehnen.',
+    'blog.article.votazione-27-settembre-2026.imageAlt': 'Bundeswahlen 27. September 2026: Wähler an der Urne in der Schweiz',
 };
 
 export default blogMetaChDe;

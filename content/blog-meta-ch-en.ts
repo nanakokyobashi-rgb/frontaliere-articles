@@ -6593,6 +6593,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.permesso-l-vaud-validita-rinnovo.title': 'Permit L in Vaud: validity 1 year and renewal up to 24 months',
     'blog.article.permesso-l-vaud-validita-rinnovo.excerpt': 'The L permit lasts a maximum of 1 year, renewable for a second year. After 24 months it passes to permit B. Complete guide for the Canton of Vaud.',
     'blog.article.permesso-l-vaud-validita-rinnovo.imageAlt': 'Worker holding documents for the short-term L permit in Switzerland',
+    'blog.article.votazione-27-settembre-2026.title': 'Vote 27 September: 63% no to neutrality',
+    'blog.article.votazione-27-settembre-2026.excerpt': 'Gfs.bern survey: over 60% of voters intend to reject initiatives on neutrality and food security as of 27 September.',
+    'blog.article.votazione-27-settembre-2026.imageAlt': 'Federal elections September 27 2026: voters at the polling station in Switzerland',
 };
 
 export default blogMetaChEn;

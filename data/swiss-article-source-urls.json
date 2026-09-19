@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/ticino/politica/1944772/neutralita-alla-ticinese": {
-    "articleId": "sondaggio-neutralita-ticinese-voto",
-    "ts": "2026-08-20T04:46:46.826Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1944925/assenze-personale-salute-collaboratori-studio": {
     "articleId": "studio-axa-assenze-psicologiche-pmi",
     "ts": "2026-08-20T05:08:56.876Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/cf%3a-bocciare-iniziativa-per-la-protezione-delle-frontiere/92082006": {
     "articleId": "consiglio-federale-boccia-frontiere",
     "ts": "2026-09-19T02:02:10.152Z",
+    "keyForm": 2
+  },
+  "https://lenews.ch/2026/09/18/swiss-voters-look-set-to-reject-neutrality-and-food-initiatives": {
+    "articleId": "votazione-27-settembre-2026",
+    "ts": "2026-09-19T03:45:29.889Z",
     "keyForm": 2
   }
 }
