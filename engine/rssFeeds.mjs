@@ -157,8 +157,7 @@ function parseSeoBlogs(fs, path, rootDir, seoDir, seoFiles) {
     if (!fs.existsSync(filePath)) continue;
     const src = fs.readFileSync(filePath, 'utf-8');
 
-    // Split into per-entry blocks using the same lexical, balanced resolver as
-    // the corpus floor. Key-shaped text in comments/templates is not an entry.
+    // Split into per-entry blocks: each starts with 'blog-{id}': {
     const entryPositions = findAllSeoEntryMatches(src, filePath).map(({ id, index, closeIdx }) => ({
       articleId: id,
       start: index,
@@ -219,8 +218,6 @@ function parseBlogSlugs(fs, path, rootDir, slugFile, slugConst) {
   if (!fs.existsSync(filePath)) return new Map();
   const src = fs.readFileSync(filePath, 'utf-8');
 
-  // Keep the RSS reader aligned with the OG/archive readers. In particular,
-  // the shared parser accepts formatting whitespace before `:` and `,`.
   return new Map(Object.entries(parseArticleUrlSlugs(src, slugConst)));
 }
 

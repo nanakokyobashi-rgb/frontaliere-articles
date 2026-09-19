@@ -222,7 +222,11 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  } = shell;
 
  const distDir = opts.distDir;
- const collector = new WriteCollector({ distDir, pluginName: 'ogPagesPlugin' });
+ const collector = new WriteCollector({
+  distDir,
+  pluginName: 'ogPagesPlugin',
+  postWalkDerivedKind: 'blog',
+ });
  const DEFAULT_IMG = '/og-image.png';
  const blogImageById: Record<string, string> = {};
  // Single-article and batch narrowing collapse to the same Set<string> so
@@ -721,6 +725,7 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  const blogSlugs: Record<string, Record<string, string>> = {};
  try {
  const rSrc = fs.readFileSync(np.resolve(rootDir, SECTION.slugData), 'utf-8');
+ // Parse the section's slug-const map ({slugConst})
  Object.assign(blogSlugs, parseArticleUrlSlugs(rSrc, SECTION.slugConst));
  } catch (err) {
  if (!isMissingPathError(err)) throw err;
