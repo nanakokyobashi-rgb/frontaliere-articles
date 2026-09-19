@@ -99,6 +99,19 @@ const repoArgs = process.env.GH_REPO ? ['--repo', process.env.GH_REPO] : [];
 // therefore releases a dead runner without a cleanup workflow.
 export const QUOTA_LEASE_MARKER = '<!-- CLAUDE_QUOTA_LEASE:';
 export const REVIEW_QUOTA_DEFERRED_MARKER = '<!-- REVIEW_QUOTA_DEFERRED:';
+export const REVIEW_QUOTA_SOURCE_WORKFLOW_BY_ROLE = Object.freeze({
+  redflag: '.github/workflows/pr-redflag-fixer.yml',
+  redcheck: '.github/workflows/pr-redcheck-fixer.yml',
+});
+export const REVIEW_QUOTA_SOURCE_WORKFLOW_NAME_BY_ROLE = Object.freeze({
+  redflag: 'PR 🔴 fixer (bounded loop-closure on bot PRs)',
+  redcheck: 'PR ❌ check fixer (bounded, check richiesto rosso su PR bot)',
+});
+export const REVIEW_QUOTA_SOURCE_EVENTS_BY_ROLE = Object.freeze({
+  redflag: Object.freeze(['pull_request_review', 'workflow_dispatch']),
+  redcheck: Object.freeze(['workflow_run', 'workflow_dispatch']),
+});
+export const REVIEW_QUOTA_TRUSTED_ACTOR_RE = /^(?:github-actions\[bot\]|frontaliere-automation(?:\[bot\])?|claude(?:\[bot\])?|nanakokyobashi-rgb|valerielinc-ops)$/i;
 const QUOTA_LEASE_STATES = new Set(['reserved', 'active', 'consumed', 'released']);
 const QUOTA_LEASE_LIVE_STATES = new Set(['reserved', 'active', 'consumed']);
 const QUOTA_LEASE_TARGET_TYPES = new Set(['issue', 'pr']);
@@ -109,6 +122,8 @@ const QUOTA_LEASE_DEFAULT_TTL_SEC = 60 * 60;
 const QUOTA_LEASE_DEFAULT_SCAN_MAX = 20;
 const PR_QUOTA_CONSUMER_ROLES = new Set(['review', 'redflag', 'redcheck']);
 const SHA1_RE = /^[a-f0-9]{40}$/i;
+const PR_NUMBER_RE = /^[1-9][0-9]*$/;
+const RUN_ID_RE = /^[1-9][0-9]*$/;
 
 // Una review o un fixer di PR sono consumatori del canale di riparazione delle
 // PR: lasciarli dietro una coda issue non vuota crea starvation (la PR non può
@@ -169,30 +184,138 @@ export function quotaLeaseEvents(comments = []) {
   }).filter(Boolean);
 }
 
+function validDeferredSourceEvent(role, sourceEvent) {
+  return Array.isArray(REVIEW_QUOTA_SOURCE_EVENTS_BY_ROLE[role])
+    && REVIEW_QUOTA_SOURCE_EVENTS_BY_ROLE[role].includes(sourceEvent);
+}
+
 /**
- * Body idempotente che rende osservabile una review differita per contesa del
- * lease. Il rescuer zero-Claude usa `head` + `runId` come chiave per rilanciare
- * esattamente la run giusta dopo il rilascio, senza inventare un commit vuoto.
- * @param {{head?: string, runId?: string|number, role?: string, reason?: string, sourceAttempt?: string|number}} event
+ * Normalize the durable deferral schema. Version 1 is deliberately permissive:
+ * old review/fixer comments remain retryable with their historical contract.
+ * Version 2 is only trusted for fixer roles and carries enough provenance to
+ * prove a workflow_run/dispatch belongs to the current PR before a rerun.
+ * Pure; an unknown actor is handled by the caller's trusted-comment filter.
  */
-export function reviewQuotaDeferredBody({
+export function normalizeReviewQuotaDeferredEvent(event, { allowLegacy = true } = {}) {
+  if (!event || typeof event !== 'object' || Array.isArray(event)) return null;
+  const role = String(event.role || '');
+  if (!PR_QUOTA_CONSUMER_ROLES.has(role) || !String(event.reason || '')
+      || !SHA1_RE.test(String(event.head || ''))) return null;
+
+  if (event.version === 1) {
+    if (!allowLegacy || !String(event.runId || '')) return null;
+    const sourceAttempt = event.sourceAttempt === undefined
+      ? undefined
+      : Number(event.sourceAttempt);
+    if (sourceAttempt !== undefined
+        && (!Number.isSafeInteger(sourceAttempt) || sourceAttempt < 1)) return null;
+    return {
+      ...event,
+      head: String(event.head),
+      runId: String(event.runId),
+      role,
+      reason: String(event.reason),
+      ...(sourceAttempt === undefined ? {} : { sourceAttempt }),
+    };
+  }
+
+  if (event.version !== 2 || !REVIEW_QUOTA_SOURCE_WORKFLOW_BY_ROLE[role]
+      || !PR_NUMBER_RE.test(String(event.prNumber || ''))
+      || !RUN_ID_RE.test(String(event.runId || ''))
+      || !Number.isSafeInteger(Number(event.sourceAttempt))
+      || Number(event.sourceAttempt) < 1
+      || String(event.sourceWorkflow || '') !== REVIEW_QUOTA_SOURCE_WORKFLOW_BY_ROLE[role]
+      || !validDeferredSourceEvent(role, String(event.sourceEvent || ''))) return null;
+
+  const sourceEvent = String(event.sourceEvent);
+  const triggerRunId = event.triggerRunId === undefined ? '' : String(event.triggerRunId);
+  const triggerHead = event.triggerHead === undefined ? '' : String(event.triggerHead);
+  if ((triggerRunId && !triggerHead) || (!triggerRunId && triggerHead)) return null;
+  // workflow_run must carry the tests run that was actually on the PR HEAD;
+  // accepting only the fixer run would bind a workflow_run on main to a PR.
+  // A workflow_dispatch has a different contract: its trusted preflight takes
+  // the PR number and current head as input, so it intentionally has no tests
+  // trigger to cite here.
+  if (sourceEvent === 'workflow_run'
+      && (!RUN_ID_RE.test(triggerRunId) || !SHA1_RE.test(triggerHead))) return null;
+  if (triggerRunId && (!RUN_ID_RE.test(triggerRunId) || !SHA1_RE.test(triggerHead))) return null;
+  if (triggerRunId && triggerHead.toLowerCase() !== String(event.head).toLowerCase()) return null;
+  return {
+    ...event,
+    version: 2,
+    head: String(event.head).toLowerCase(),
+    runId: String(event.runId),
+    role,
+    reason: String(event.reason),
+    prNumber: String(event.prNumber),
+    sourceAttempt: Number(event.sourceAttempt),
+    sourceWorkflow: String(event.sourceWorkflow),
+    sourceEvent,
+    ...(triggerRunId ? { triggerRunId, triggerHead: triggerHead.toLowerCase() } : {}),
+  };
+}
+
+/**
+ * Return a marker event in the canonical schema. Supplying any provenance
+ * field opts into v2; malformed provenance returns null so callers can avoid
+ * a misleading comment/mutation instead of silently downgrading a fixer run.
+ */
+export function reviewQuotaDeferredEvent({
   head = '', runId = '', role = 'review', reason = '', sourceAttempt,
+  prNumber, sourceWorkflow, sourceEvent, triggerRunId, triggerHead,
 } = {}) {
+  // `review` is the historical tests consumer: its v1 marker remains valid
+  // even when the shared lease caller supplies generic PR metadata. New fixer
+  // roles must opt into the complete provenance contract.
+  const hasProvenance = role !== 'review'
+    && [prNumber, sourceWorkflow, sourceEvent, triggerRunId, triggerHead]
+      .some((value) => value !== undefined && value !== null && String(value) !== '');
+  if (!hasProvenance) {
+    const event = {
+      version: 1,
+      head: String(head),
+      runId: String(runId),
+      role: String(role),
+      reason: String(reason || 'shared-quota-lease-unavailable'),
+    };
+    const parsedAttempt = sourceAttempt === undefined || sourceAttempt === null
+      ? undefined
+      : Number(sourceAttempt);
+    if (Number.isSafeInteger(parsedAttempt) && parsedAttempt > 0) event.sourceAttempt = parsedAttempt;
+    return event;
+  }
+
   const event = {
-    version: 1,
+    version: 2,
     head: String(head),
     runId: String(runId),
     role: String(role),
     reason: String(reason || 'shared-quota-lease-unavailable'),
+    prNumber: String(prNumber ?? ''),
+    sourceAttempt: Number(sourceAttempt),
+    sourceWorkflow: String(sourceWorkflow ?? ''),
+    sourceEvent: String(sourceEvent ?? ''),
+    ...(String(triggerRunId ?? '') !== '' || String(triggerHead ?? '') !== ''
+      ? { triggerRunId: String(triggerRunId ?? ''), triggerHead: String(triggerHead ?? '') }
+      : {}),
   };
-  const parsedAttempt = sourceAttempt === undefined || sourceAttempt === null
-    ? undefined
-    : Number(sourceAttempt);
-  if (Number.isSafeInteger(parsedAttempt) && parsedAttempt > 0) {
-    event.sourceAttempt = parsedAttempt;
-  }
-  return `${REVIEW_QUOTA_DEFERRED_MARKER} ${JSON.stringify(event)} -->\n`
-    + `_Review differita senza consumare quota Claude: lease condiviso negato (${event.reason})._`;
+  return normalizeReviewQuotaDeferredEvent(event, { allowLegacy: false });
+}
+
+/**
+ * Body idempotente che rende osservabile una review differita per contesa del
+ * lease. Il rescuer zero-Claude usa `head` + `runId` come chiave per rilanciare
+ * esattamente la run giusta dopo il rilascio, senza inventare un commit vuoto.
+ * @param {{head?: string, runId?: string|number, role?: string, reason?: string, sourceAttempt?: string|number, prNumber?: string|number, sourceWorkflow?: string, sourceEvent?: string, triggerRunId?: string|number, triggerHead?: string}} event
+ */
+export function reviewQuotaDeferredBody(options = {}) {
+  const event = reviewQuotaDeferredEvent(options);
+  if (!event) return '';
+  const suffix = event.version === 2
+    ? `_Review differita senza consumare quota Claude: lease condiviso negato (${event.reason}); `
+      + `provenienza ${event.sourceWorkflow} · evento ${event.sourceEvent}._`
+    : `_Review differita senza consumare quota Claude: lease condiviso negato (${event.reason})._`;
+  return `${REVIEW_QUOTA_DEFERRED_MARKER} ${JSON.stringify(event)} -->\n${suffix}`;
 }
 
 /** Parse one review-deferred marker. Pure. */
@@ -201,24 +324,7 @@ export function parseReviewQuotaDeferredMarker(body) {
   if (!match) return null;
   let event;
   try { event = JSON.parse(match[1]); } catch { return null; }
-  if (!event || event.version !== 1
-      || !/^[a-f0-9]{40}$/i.test(String(event.head || ''))
-      || !String(event.runId || '')
-      || !PR_QUOTA_CONSUMER_ROLES.has(String(event.role || ''))
-      || !String(event.reason || '')) return null;
-  const sourceAttempt = event.sourceAttempt === undefined
-    ? undefined
-    : Number(event.sourceAttempt);
-  if (sourceAttempt !== undefined
-      && (!Number.isSafeInteger(sourceAttempt) || sourceAttempt < 1)) return null;
-  return {
-    ...event,
-    head: String(event.head),
-    runId: String(event.runId),
-    role: String(event.role),
-    reason: String(event.reason),
-    ...(sourceAttempt === undefined ? {} : { sourceAttempt }),
-  };
+  return normalizeReviewQuotaDeferredEvent(event);
 }
 
 function eventRank(event) {
@@ -465,19 +571,35 @@ function postLeaseEvent(repo, event) {
   leaseGh([command, 'comment', String(event.target), '--repo', repo, '--body', leaseCommentBody(event)]);
 }
 
-function postReviewQuotaDeferred(repo, target, role, reason, runId) {
+function workflowPathFromEnv() {
+  const ref = String(process.env.GITHUB_WORKFLOW_REF || '');
+  const match = ref.match(/(\.github\/workflows\/[^@]+)@/);
+  return match ? match[1] : '';
+}
+
+function postReviewQuotaDeferred(repo, target, role, reason, runId, provenance = {}) {
   const head = String(process.env.HEAD_SHA || '');
   if (!/^[a-f0-9]{40}$/i.test(head) || !String(runId || '')) return;
   try {
+    const body = reviewQuotaDeferredBody({
+      head,
+      runId,
+      role,
+      reason,
+      sourceAttempt: process.env.GITHUB_RUN_ATTEMPT,
+      prNumber: provenance.prNumber ?? target,
+      sourceWorkflow: provenance.sourceWorkflow || process.env.REVIEW_QUOTA_SOURCE_WORKFLOW || workflowPathFromEnv(),
+      sourceEvent: provenance.sourceEvent || process.env.REVIEW_QUOTA_SOURCE_EVENT || process.env.GITHUB_EVENT_NAME,
+      triggerRunId: provenance.triggerRunId || process.env.REVIEW_QUOTA_TRIGGER_RUN_ID || process.env.TRIGGER_RUN_ID,
+      triggerHead: provenance.triggerHead || process.env.REVIEW_QUOTA_TRIGGER_HEAD || process.env.TRIGGER_HEAD,
+    });
+    if (!body) {
+      console.log('::warning::marker review differita non pubblicato: provenance fixer incompleta o non allowlisted');
+      return;
+    }
     leaseGh([
       'pr', 'comment', String(target), '--repo', repo,
-      '--body', reviewQuotaDeferredBody({
-        head,
-        runId,
-        role,
-        reason,
-        sourceAttempt: process.env.GITHUB_RUN_ATTEMPT,
-      }),
+      '--body', body,
     ]);
   } catch (error) {
     // La telemetria non deve trasformare un rifiuto corretto in un errore di
@@ -547,6 +669,7 @@ export function runQuotaLease({
   writeOutput = true,
   dryRun = process.env.DRY_RUN === '1',
   emitReviewDeferredMarker = true,
+  deferredProvenance = {},
 } = {}) {
   if (!action) return writeLeaseOutputs({ enabled: false, allowed: true, reason: 'lease-not-requested' }, { writeOutput });
   if (!['acquire', 'reserve', 'consume', 'release'].includes(action)) {
@@ -604,7 +727,14 @@ export function runQuotaLease({
     });
     if (!decision.allowed) {
       if (emitReviewDeferredMarker && !decision.error && targetType === 'pr' && PR_QUOTA_CONSUMER_ROLES.has(role)) {
-        postReviewQuotaDeferred(repo, target, role, decision.reason, runId || process.env.GITHUB_RUN_ID);
+        postReviewQuotaDeferred(
+          repo,
+          target,
+          role,
+          decision.reason,
+          runId || process.env.GITHUB_RUN_ID,
+          { ...deferredProvenance, prNumber: deferredProvenance.prNumber ?? target },
+        );
       }
       return writeLeaseOutputs({ allowed: false, error: decision.error, reason: decision.reason }, { writeOutput });
     }
@@ -686,6 +816,7 @@ export function runQuotaLease({
           role,
           'shared-quota-lease-reservation-contended',
           runId || process.env.GITHUB_RUN_ID,
+          { ...deferredProvenance, prNumber: deferredProvenance.prNumber ?? target },
         );
       }
       return writeLeaseOutputs({
@@ -713,6 +844,7 @@ export function runQuotaLease({
           role,
           'shared-quota-lease-contention',
           runId || process.env.GITHUB_RUN_ID,
+          { ...deferredProvenance, prNumber: deferredProvenance.prNumber ?? target },
         );
       }
       throw new Error(`contesa lease: ${liveAfter.length} lease attivi`);

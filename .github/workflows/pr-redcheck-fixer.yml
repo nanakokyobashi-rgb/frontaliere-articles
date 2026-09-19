@@ -382,6 +382,11 @@ jobs:
           QUOTA_LEASE_TARGET: ${{ needs.preflight.outputs.pr_number }}
           QUOTA_LEASE_TTL_SEC: '3600'
           HEAD_SHA: ${{ needs.preflight.outputs.head_sha }}
+          # v2 deferral provenance: workflow_run was triggered by this exact
+          # tests run on the PR HEAD. workflow_dispatch leaves these empty by
+          # construction; its trusted preflight intent is HEAD-pinned instead.
+          REVIEW_QUOTA_TRIGGER_RUN_ID: ${{ github.event.workflow_run.id }}
+          REVIEW_QUOTA_TRIGGER_HEAD: ${{ github.event.workflow_run.head_sha }}
         run: node scripts/ci/check-quota-backoff.mjs
 
       - name: Shared Codex lane quota lease unavailable (expected skip)
