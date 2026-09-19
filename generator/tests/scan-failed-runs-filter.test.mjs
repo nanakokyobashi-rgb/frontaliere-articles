@@ -35,6 +35,7 @@ import {
   ALWAYS_ESCALATE_WORKFLOWS,
   gateForWorkflow,
   orderBySurveillanceFirst,
+  capReached,
 } from '../../scripts/ci/scan-failed-runs.mjs';
 import { TITLE_RE } from '../../scripts/ci/close-recovered-failure-issues.mjs';
 import { isExclusivelyWorkflowScoped } from '../../scripts/ci/check-workflows-scope.mjs';
@@ -884,4 +885,22 @@ test('i workflow di sorveglianza sono ordinati prima del cap MAX_ISSUES', () => 
   );
   // Stabilita': il rumore conserva il suo ordine relativo.
   assert.deepEqual(ordered.filter((n) => noisy.includes(n)), noisy);
+});
+
+/**
+ * L'ordinamento da solo non basta: `ALWAYS_ESCALATE_WORKFLOWS` ha 7 voci e
+ * `MAX_ISSUES` ne vale 5, quindi una passata con sei o piu' sorvegliati falliti
+ * ne troncava alcuni al cap — potenzialmente il reporter stesso, e allora non
+ * resta nessuno a segnalare niente. I sorvegliati non contano verso il cap.
+ */
+test('il cap MAX_ISSUES non puo\' troncare un workflow di sorveglianza', () => {
+  for (const name of ALWAYS_ESCALATE_WORKFLOWS) {
+    assert.equal(capReached({ name, cappedOpened: 99, maxIssues: 5 }), false, name);
+  }
+  assert.ok(ALWAYS_ESCALATE_WORKFLOWS.size > 5, 'il caso interessante e\' proprio lista > cap');
+});
+
+test('il cap MAX_ISSUES continua a troncare il rumore', () => {
+  assert.equal(capReached({ name: 'Generate Blog Article', cappedOpened: 5, maxIssues: 5 }), true);
+  assert.equal(capReached({ name: 'Generate Blog Article', cappedOpened: 4, maxIssues: 5 }), false);
 });

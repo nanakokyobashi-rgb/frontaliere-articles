@@ -167,6 +167,15 @@ export const ALWAYS_ESCALATE_WORKFLOWS = new Set([
  * Ordina i workflow di sorveglianza prima del cap `MAX_ISSUES`. `sort` in Node
  * e' stabile, quindi per tutti gli altri resta l'ordine di inserimento.
  */
+/**
+ * Il cap limita il rumore, non gli allarmi: un workflow di sorveglianza non
+ * conta verso `MAX_ISSUES` e non puo' essere troncato.
+ */
+export function capReached({ name, cappedOpened, maxIssues }) {
+  if (ALWAYS_ESCALATE_WORKFLOWS.has(name)) return false;
+  return cappedOpened >= maxIssues;
+}
+
 export function orderBySurveillanceFirst(entries) {
   return [...entries].sort(
     ([a], [b]) => Number(ALWAYS_ESCALATE_WORKFLOWS.has(b)) - Number(ALWAYS_ESCALATE_WORKFLOWS.has(a)),
@@ -1057,11 +1066,23 @@ async function main() {
   const servedOrder = orderBySurveillanceFirst(byWorkflow);
 
   let opened = 0;
+  // Il cap limita il RUMORE, non gli allarmi: i workflow di sorveglianza non
+  // contano verso `MAX_ISSUES` e non possono essere troncati. Sono al massimo
+  // `ALWAYS_ESCALATE_WORKFLOWS.size` per costruzione e ognuno apre UNA issue
+  // deduplicata, quindi il tetto sul rumore resta quello dichiarato. Senza
+  // questo, con sei o piu' sorvegliati falliti nella stessa passata il cap ne
+  // troncava alcuni — potenzialmente il reporter stesso — e il loro allarme
+  // non veniva aperto mai, che e' il difetto che questa lista chiude.
+  let cappedOpened = 0;
+  let position = -1;
   for (const [name, selected] of servedOrder) {
+    position += 1;
     const run = selected.run;
-    if (opened >= MAX_ISSUES) {
+    const surveillance = ALWAYS_ESCALATE_WORKFLOWS.has(name);
+    if (capReached({ name, cappedOpened, maxIssues: MAX_ISSUES })) {
       // Un cap che tronca in silenzio si legge come "tutto coperto". Lo diciamo.
-      console.warn(`::warning::[scan-failed-runs] Cap di ${MAX_ISSUES} issue raggiunto — ${byWorkflow.size - opened} workflow falliti NON segnalati in questa passata: ${servedOrder.map(([workflowName]) => workflowName).slice(opened).join(', ')}. Verranno ripresi alla prossima scansione.`);
+      const skipped = servedOrder.map(([workflowName]) => workflowName).slice(position);
+      console.warn(`::warning::[scan-failed-runs] Cap di ${MAX_ISSUES} issue raggiunto — ${skipped.length} workflow falliti NON segnalati in questa passata: ${skipped.join(', ')}. Verranno ripresi alla prossima scansione.`);
       break;
     }
 
@@ -1143,6 +1164,7 @@ async function main() {
     if (DRY_RUN) {
       console.log(`[scan-failed-runs] (dry-run) aprirei: "${title}" — run ${run.url}`);
       opened++;
+      if (!surveillance) cappedOpened++;
       continue;
     }
 
@@ -1161,7 +1183,10 @@ async function main() {
       // perche' aspettare la terza perdita significa buttarne tre.
       consecutiveGate: gateForWorkflow(name, { lost: Boolean(lost) }),
     });
-    if (res) opened++;
+    if (res) {
+      opened++;
+      if (!surveillance) cappedOpened++;
+    }
   }
 
   console.log(`[scan-failed-runs] Fatto — ${opened} segnalazione/i emesse.`);

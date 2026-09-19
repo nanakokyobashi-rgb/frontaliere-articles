@@ -446,7 +446,16 @@ function collectShallowFacts(run, state, candidates, { collectQueue = true } = {
     if (collectQueue) {
       if (isActive) {
         state.activeRunIds.push(runId);
-        state.activeCreatedMs.push(createdMs);
+        // Un rerun non azzera `created_at` ma aggiorna `run_started_at`: per
+        // l'eta' del detentore vale il piu' recente dei due, altrimenti un
+        // detentore appena riavviato si legge come fermo da giorni e apre un
+        // alert falso. Se il campo manca o non e' valido si ricade su
+        // `created_at`, cioe' sul comportamento precedente: e' un
+        // raffinamento della misura, non una nuova precondizione.
+        const startedMs = validTimestamp(run.run_started_at);
+        state.activeCreatedMs.push(
+          startedMs === null ? createdMs : Math.max(createdMs, startedMs),
+        );
       }
       if (isPending) {
         state.pendingRunIds.push(runId);
@@ -563,12 +572,16 @@ function buildReport(state, client) {
       state: 'not_evaluable',
       thresholdSeconds,
     }
-    : oldestPendingMs === null
+    // `empty` e' l'assenza della grandezza MISURATA, non l'assenza di coda: un
+    // detentore fermo da oltre 24 h senza arretrato dietro e' esattamente il
+    // guasto job-zero, e con `oldestPendingMs === null` come discriminante
+    // sfuggiva all'alert proprio nel caso peggiore.
+    : measuredAgeSeconds === null
       ? {
         alert: false,
         measured,
         measuredAgeSeconds: null,
-        oldestPendingAgeSeconds: null,
+        oldestPendingAgeSeconds,
         state: 'empty',
         thresholdSeconds,
       }

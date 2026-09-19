@@ -251,6 +251,42 @@ test('un pending vecchio di 31 h dietro un detentore appena partito non apre l a
   assert.equal(report.reasonCodes.includes('queue_slo_breached'), false);
 });
 
+// `empty` deve significare "nessuna grandezza da misurare", non "nessun
+// arretrato": un detentore fermo da oltre 24 h senza niente in coda dietro e'
+// esattamente il caso job-zero, e con l'assenza di pending come discriminante
+// sfuggiva all'alert nel caso peggiore.
+test('un detentore fermo da oltre una giornata apre l alert anche senza arretrato', async () => {
+  const holder = run(33500000012, {
+    conclusion: null,
+    created_at: '2026-08-30T17:00:00.000Z',
+    status: 'in_progress',
+  });
+  const { report } = await observe(fakeGithub({ currentRuns: [holder], pages: [[]] }));
+  assert.equal(report.counts.active, 1);
+  assert.equal(report.counts.pending, 0);
+  assert.equal(report.queue.oldestPendingAgeSeconds, null);
+  assert.equal(report.queue.slo.measured, 'oldest_holder_age');
+  assert.equal(report.queue.slo.measuredAgeSeconds, 174420);
+  assert.equal(report.queue.slo.state, 'breached');
+  assert.equal(report.queue.slo.alert, true);
+  assert.ok(report.reasonCodes.includes('queue_slo_breached'));
+});
+
+// Un rerun conserva il `created_at` originale: senza `run_started_at` un
+// detentore riavviato adesso si leggerebbe come fermo da giorni.
+test('un detentore riavviato si misura da run_started_at, non da created_at', async () => {
+  const holder = run(33500000013, {
+    conclusion: null,
+    created_at: '2026-08-30T17:00:00.000Z',
+    run_started_at: '2026-09-01T17:00:00.000Z',
+    status: 'in_progress',
+  });
+  const { report } = await observe(fakeGithub({ currentRuns: [holder], pages: [[]] }));
+  assert.equal(report.queue.slo.measuredAgeSeconds, 1620);
+  assert.equal(report.queue.slo.state, 'within_slo');
+  assert.equal(report.reasonCodes.includes('queue_slo_breached'), false);
+});
+
 test('un detentore che non finisce da oltre una giornata apre l alert', async () => {
   const holder = run(33500000008, {
     conclusion: null,
