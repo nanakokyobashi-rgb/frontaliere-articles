@@ -436,7 +436,7 @@ jobs:
               [.comments[]?.body // ""
                 | select(contains("<!-- followup-mint-gate -->"))
                 | select(test("(?m)^.*Issue[[:space:]]+#" + $bucket + "([^0-9]|$)"))
-                | select(test("(?m)^-[[:space:]]+Sources?:[^\\n]*PR[[:space:]]+#" + $pr + "([^0-9]|$)"))]
+                | select(test("(?m)^-[[:space:]]+Sources?[[:space:]]*:[^\\n]*PR[[:space:]]+#" + $pr + "([^0-9]|$)"))]
               | length > 0
             ' >/dev/null 2>&1
           }
@@ -457,15 +457,15 @@ jobs:
               issue_json=$(GH_TOKEN="$target_token" gh issue view "$bucket" --repo "$target_repo" --json number,title,body 2>/dev/null) || continue
               if printf '%s' "$issue_json" | jq -e --arg bucket "$bucket" '
                 ((.number | tostring) == $bucket)
-                and ((.title // "") | test("^follow-up\\(daily:[0-9]{4}-[0-9]{2}-[0-9]{2}\\):[[:space:]]+[0-9]+[[:space:]]+items?"))
+                and ((.title // "") | test("^follow-up\\(daily:[0-9]{4}-[0-9]{2}-[0-9]{2}\\):[[:space:]]*[0-9]+[[:space:]]+items?[[:space:]]*(—|-)[[:space:]]*[^[:space:]]"))
               ' >/dev/null 2>&1; then
                 bucket_seen=true
               fi
               if printf '%s' "$issue_json" | jq -e --arg bucket "$bucket" --arg pr "$pr_number" '
                 ((.number | tostring) == $bucket)
-                and ((.title // "") | test("^follow-up\\(daily:[0-9]{4}-[0-9]{2}-[0-9]{2}\\):[[:space:]]+[0-9]+[[:space:]]+items?"))
+                and ((.title // "") | test("^follow-up\\(daily:[0-9]{4}-[0-9]{2}-[0-9]{2}\\):[[:space:]]*[0-9]+[[:space:]]+items?[[:space:]]*(—|-)[[:space:]]*[^[:space:]]"))
                 and ((.body // "") | test("(?m)^### FU-[0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{3}"))
-                and ((.body // "") | test("(?m)^-[[:space:]]+Sources?:[^\\n]*PR[[:space:]]+#" + $pr + "([^0-9]|$)"))
+                and ((.body // "") | test("(?m)^-[[:space:]]+Sources?[[:space:]]*:[^\\n]*PR[[:space:]]+#" + $pr + "([^0-9]|$)"))
               ' >/dev/null 2>&1; then
                 return 0
               fi

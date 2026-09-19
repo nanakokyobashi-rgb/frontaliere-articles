@@ -155,6 +155,13 @@ test('accetta la prova del gate quando tutti gli item della PR sono stati demoti
   assert.equal(gatePreservedFollowupMatches(gateComments, 8944, 1535), true);
   assert.equal(persistedBucketIssueMatches(bucket, 1535, gateComments), true);
   assert.equal(
+    persistedBucketIssueMatches({
+      ...bucket,
+      body: 'State: sealed\n\n### FU-2026-09-17-001\n- Sources : PR #1535\n',
+    }, 1535),
+    true,
+  );
+  assert.equal(
     verifyTriageMarkerPersistence(
       '## Post-merge follow-up triage\n\n- Daily bucket: #8944',
       1535,
@@ -199,5 +206,7 @@ test('il gemello bash dello YAML resta allineato', () => {
   assert.match(yml, /zero outstanding items\|backfill skipped/);
   assert.match(yml, /gate_preserved_for_pr\(\)/);
   assert.match(yml, /followup-mint-gate/);
+  assert.match(yml, /Sources\?\[\[:space:\]\]\*:/);
+  assert.match(yml, /items\?\[\[:space:\]\]\*\(—\|-\)/);
   assert.match(yml, /bucket_persisted_for_pr "\$bucket" "\$pr" "\$comments"/);
 });

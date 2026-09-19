@@ -366,7 +366,7 @@ export function gatePreservedFollowupMatches(commentsJson, bucketNumber, prNumbe
   const bucket = String(Number(bucketNumber));
   const pr = String(Number(prNumber));
   const bucketPattern = new RegExp('(?:^|\\n).*\\bIssue\\s+#' + bucket + '\\b', 'i');
-  const sourcePattern = new RegExp('^\\s*-\\s+Sources?:[^\\n]*\\bPR\\s+#' + pr + '\\b', 'im');
+  const sourcePattern = new RegExp('^\\s*-\\s+Sources?\\s*:[^\\n]*\\bPR\\s+#' + pr + '\\b', 'im');
   return comments.some((comment) => {
     const body = typeof comment?.body === 'string' ? comment.body : '';
     return body.includes('<!-- followup-mint-gate -->')
@@ -382,7 +382,7 @@ export function persistedBucketIssueMatches(issue, prNumber, prComments = '') {
   const pr = String(Number(prNumber));
   if (!info) return false;
   const directEvidence = /^###\s+FU-\d{4}-\d{2}-\d{2}-\d{3}\b/m.test(body)
-    && new RegExp('^\\s*-\\s+Sources?:[^\\n]*\\bPR\\s+#' + pr + '\\b', 'im').test(body);
+    && new RegExp('^\\s*-\\s+Sources?\\s*:[^\\n]*\\bPR\\s+#' + pr + '\\b', 'im').test(body);
   return directEvidence || gatePreservedFollowupMatches(prComments, issue.number, prNumber);
 }
 
