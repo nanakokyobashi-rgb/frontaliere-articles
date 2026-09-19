@@ -11847,6 +11847,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.studio-svizzero-confine-frontalieri.title': 'Schweizer Grenzstudie: Grenzkosten und Einsturz',
     'blog.article.studio-svizzero-confine-frontalieri.excerpt': 'Bundesratsbericht und Ecoplan-Studie: Staus von 422.000 Stunden pro Tag, Milliardenkosten und Grenzgängerkollaps von bis zu 60% ohne Schengen.',
     'blog.article.studio-svizzero-confine-frontalieri.imageAlt': 'Autostau an der Grenze zwischen der Schweiz und Italien',
+    'blog.article.sindaco-malesco-fondi-confine.title': 'Frontalieri, Malesco schreibt an die Regierung für die Mittel',
+    'blog.article.sindaco-malesco-fondi-confine.excerpt': 'Enrico Barbazza, Bürgermeister von Malesco, fordert von der Regierung die vollständige Übertragung der für die Grenzgemeinden vorgesehenen Mittel zur Unterstützung der lokalen Dienste.',
+    'blog.article.sindaco-malesco-fondi-confine.imageAlt': 'Rathaus in der Region Tessin',
 };
 
 export default blogMetaDe;

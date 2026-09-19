@@ -11850,6 +11850,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.studio-svizzero-confine-frontalieri.title': 'Étude suisse à la frontière : coûts et effondrement frontaliers',
     'blog.article.studio-svizzero-confine-frontalieri.excerpt': 'Rapport du Conseil fédéral et étude Ecoplan : embouteillages 422.000 heures par jour, coûts milliardaires et effondrement des frontaliers jusqu\'à 60% sans Schengen.',
     'blog.article.studio-svizzero-confine-frontalieri.imageAlt': 'File de voitures à la frontière entre la Suisse et l\'Italie',
+    'blog.article.sindaco-malesco-fondi-confine.title': 'Frontaliers, Malesco écrit au gouvernement pour les fonds',
+    'blog.article.sindaco-malesco-fondi-confine.excerpt': 'Enrico Barbazza, maire de Malesco, demande au gouvernement le transfert intégral des ressources destinées aux communes frontalières pour soutenir les services locaux.',
+    'blog.article.sindaco-malesco-fondi-confine.imageAlt': 'Hôtel de ville dans la région du Tessin',
 };
 
 export default blogMetaFr;

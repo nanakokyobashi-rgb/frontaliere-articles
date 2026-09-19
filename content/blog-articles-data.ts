@@ -35328,6 +35328,15 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'sindaco-malesco-fondi-confine',
+ category: 'pratico',
+ date: '2026-09-19T01:57:04.495Z',
+ image: '/images/blog/sindaco-malesco-fondi-confine.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

@@ -11848,6 +11848,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.studio-svizzero-confine-frontalieri.title': 'Swiss Border Study: Border Costs and Collapse',
     'blog.article.studio-svizzero-confine-frontalieri.excerpt': 'Federal Council report and Ecoplan study: traffic jams for 422,000 hours a day, billion-dollar costs and the collapse of border workers by up to 60% without Schengen.',
     'blog.article.studio-svizzero-confine-frontalieri.imageAlt': 'Car traffic queue at the border between Switzerland and Italy',
+    'blog.article.sindaco-malesco-fondi-confine.title': 'Frontiersmen, Malesco writes to the Government for funds',
+    'blog.article.sindaco-malesco-fondi-confine.excerpt': 'Enrico Barbazza, mayor of Malesco, requests the Government to fully transfer the resources allocated to border municipalities to support local services.',
+    'blog.article.sindaco-malesco-fondi-confine.imageAlt': 'Town hall building in Ticino region',
 };
 
 export default blogMetaEn;

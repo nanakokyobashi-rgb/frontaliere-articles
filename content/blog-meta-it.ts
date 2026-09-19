@@ -11849,6 +11849,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.studio-svizzero-confine-frontalieri.title': 'Studio svizzero sul confine: costi e crollo frontalieri',
     'blog.article.studio-svizzero-confine-frontalieri.excerpt': 'Rapporto del Consiglio federale e studio Ecoplan: ingorghi per 422.000 ore al giorno, costi miliardari e crollo dei frontalieri fino al 60% senza Schengen.',
     'blog.article.studio-svizzero-confine-frontalieri.imageAlt': 'Coda di auto al confine tra Svizzera e Italia',
+    'blog.article.sindaco-malesco-fondi-confine.title': 'Frontalieri, Malesco scrive al Governo per i fondi',
+    'blog.article.sindaco-malesco-fondi-confine.excerpt': 'Enrico Barbazza, sindaco di Malesco, richiede al Governo il trasferimento integrale delle risorse destinate ai comuni di confine per sostenere i servizi locali.',
+    'blog.article.sindaco-malesco-fondi-confine.imageAlt': 'Palazzo comunale di una città ticinese',
 };
 
 export default blogMetaIt;

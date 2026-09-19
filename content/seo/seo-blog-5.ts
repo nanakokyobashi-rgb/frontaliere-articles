@@ -91762,6 +91762,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-sindaco-malesco-fondi-confine': {
+    title: 'Frontalieri, Malesco scrive al Governo per i fondi',
+    description: 'Il sindaco di Malesco, Enrico Barbazza, chiede al Governo il trasferimento integrale delle risorse di confine per garantire i servizi locali ai cittadini.',
+    keywords: 'frontalieri, ticino, svizzera, italia, malesco, scrive, governo, fondi',
+    ogTitle: 'Frontalieri, Barbazza chiede fondi al Governo',
+    ogDescription: 'Enrico Barbazza, sindaco di Malesco, scrive al Governo italiano per difendere il trasferimento integrale delle risorse destinate ai comuni di frontiera.',
+    canonicalPath: '/articoli-frontaliere/sindaco-malesco-fondi-confine',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontalieri, Malesco scrive al Governo per i fondi",
+      "description": "Il sindaco di Malesco, Enrico Barbazza, chiede al Governo il trasferimento integrale delle risorse di confine per garantire i servizi locali ai cittadini.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/sindaco-malesco-fondi-confine.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo comunale di una città ticinese"
+      },
+      "datePublished": "2026-09-19T01:57:04+00:00",
+      "dateModified": "2026-09-19T01:57:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/sindaco-malesco-fondi-confine/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
