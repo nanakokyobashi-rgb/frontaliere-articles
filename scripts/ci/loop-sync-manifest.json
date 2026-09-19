@@ -1079,7 +1079,7 @@
     {
       "path": "scripts/ci/gate-minted-followups.mjs",
       "mode": "adapted",
-      "reason": "Gate corpus adattato al parser `parse-positive-num.mjs` e alla sorgente `manifest-pinned-issues.mjs`; ricontrolla e ricalcola il body con CAS prima di sopprimere una issue e non chiude i trackingIssue pinnati. Il gemello del sito resta distinto per il suo parser e il suo manifest.",
+      "reason": "Gate corpus adattato al parser `parse-positive-num.mjs` e alla sorgente `manifest-pinned-issues.mjs`; esegue controlli di freschezza fail-closed prima delle scritture (senza promettere una CAS HTTP atomica), e non chiude i trackingIssue pinnati. Il gemello del sito resta distinto per il suo parser e il suo manifest.",
       "baseline": {
         "site": "7d10dc4d094256eb",
         "corpus": "80793d795df62223",
