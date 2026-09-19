@@ -45,14 +45,17 @@ test('la prova di produzione viene applicata deterministicamente ai diff runtime
   const s = step(PRODUCTION_PROOF);
   assert.ok(s, `step «${PRODUCTION_PROOF}» assente: la label resterebbe affidata al prompt dell'agente.`);
   assert.match(s, /if: always\(\) && steps\.claim\.outputs\.claim_acquired == 'true'/);
-  assert.match(s, /continue-on-error: true/);
   assert.match(s, /--state all/, 'il retry deve riconoscere anche una PR già mergiata');
   assert.match(s, /fetch-pr-files\.mjs --repo "\$REPO" --pr "\$PR_NUMBER"/);
   assert.match(s, /\.complete \/\/ false/, 'una lista file incompleta deve fermare il rilevamento');
   assert.ok(s.includes('^\\\\.github/workflows/[^/]+$'), 'manca il selettore dei workflow eseguibili');
-  assert.ok(s.includes('^\\\\.github/actions/claude-codex-fallback/'), 'manca il selettore dell’action runtime');
+  assert.doesNotMatch(s, /claude-codex-fallback\//, 'non creare hold per action path che il drainer non può provare');
+  assert.match(s, /PR_LOOKUP_RC=\$\?/ , 'un errore di lookup PR non deve diventare una PR assente');
+  assert.match(s, /for attempt in 1 2 3/, 'le letture e le scritture GitHub devono avere retry bounded');
   assert.match(s, /gh label create awaiting-production-proof/);
   assert.match(s, /gh issue edit "\$ISSUE" --repo "\$REPO" --add-label awaiting-production-proof/);
+  assert.match(s, /hold non valutato/, 'gli errori persistenti devono essere visibili e recuperabili');
+  assert.doesNotMatch(s, /continue-on-error: true/, 'un hold non applicato non deve essere assorbito come successo');
   assert.ok(
     SRC.indexOf(`- name: ${PRODUCTION_PROOF}`) > SRC.indexOf('- name: Mark autonomous PR provenance (zero-Claude)'),
     'la label va applicata dopo che la PR è stata consegnata',
