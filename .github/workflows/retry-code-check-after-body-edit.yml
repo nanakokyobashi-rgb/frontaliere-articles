@@ -24,9 +24,14 @@ jobs:
   recover:
     if: github.event.changes.body != null
     runs-on: ubuntu-latest
+    # Covers the wait below for a run still in flight (review p90 ~12 min).
+    timeout-minutes: 50
     steps:
       - name: Retry a failed body or review gate on the current head
         uses: actions/github-script@v8
+        env:
+          BODY_RECOVERY_POLL_MS: '30000'
+          BODY_RECOVERY_WAIT_MS: '2400000'
         with:
           script: |
             const repo = context.repo;
@@ -39,6 +44,28 @@ jobs:
             const latest = runs.sort((a, b) => b.id - a.id)[0];
             if (!latest) {
               core.info(`No tests run exists on ${pr.head.sha}; the next push re-enters the code check.`);
+              return;
+            }
+            // Corpus adaptation: settle BEFORE classifying. The edit can land
+            // while the latest run is still queued or reviewing; its failed
+            // steps do not exist yet, and without `edited` on tests.yml no
+            // other event would ever retry it once it fails on the old body.
+            const pollMs = Number(process.env.BODY_RECOVERY_POLL_MS) || 30000;
+            const deadline = Date.now() + (Number(process.env.BODY_RECOVERY_WAIT_MS) || 2400000);
+            let settled = latest;
+            while (settled.status !== 'completed') {
+              if (Date.now() > deadline) {
+                core.warning(`Run ${latest.id} still ${settled.status} at the wait deadline; no retry.`);
+                return;
+              }
+              await new Promise(resolve => setTimeout(resolve, pollMs));
+              ({ data: settled } = await github.rest.actions.getWorkflowRun({ ...repo, run_id: latest.id }));
+              // Another attempt started (push, rescuer, duplicate edit): it
+              // already reads the current body, nothing left to recover here.
+              if (settled.run_attempt !== latest.run_attempt) return;
+            }
+            if (settled.conclusion !== 'failure') {
+              core.info(`Run ${latest.id} concluded ${settled.conclusion}; preserve the existing code verdict.`);
               return;
             }
             // Inspect the latest attempt only, never an old failure underneath
@@ -71,15 +98,6 @@ jobs:
               core.info('Body preflight and review gate did not fail exclusively; preserve the existing code verdict.');
               return;
             }
-            // An edit may arrive while the failed preflight run is finishing.
-            // Wait only for this failed preflight, never for running tests.
-            let settled = latest;
-            for (let poll = 0; settled.status !== 'completed' && poll < 10; poll++) {
-              await new Promise(resolve => setTimeout(resolve, 1000));
-              ({ data: settled } = await github.rest.actions.getWorkflowRun({ ...repo, run_id: latest.id }));
-              if (settled.run_attempt !== latest.run_attempt) return;
-            }
-            if (settled.status !== 'completed' || settled.conclusion !== 'failure') return;
             // Recheck both head and attempt after reading jobs. Duplicate edit
             // deliveries must not restart a retry that is already queued.
             const [{ data: currentPr }, { data: currentRun }] = await Promise.all([

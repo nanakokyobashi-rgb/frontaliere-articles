@@ -8,30 +8,39 @@ const recovery = read('.github/workflows/retry-code-check-after-body-edit.yml');
 const script = recovery.slice(recovery.indexOf('          script: |\n') + '          script: |\n'.length)
   .split('\n').map(line => line.replace(/^ {12}/, '')).join('\n');
 const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
+// The workflow waits for an in-flight run; keep the wait instant here.
+process.env.BODY_RECOVERY_POLL_MS = '1';
+process.env.BODY_RECOVERY_WAIT_MS = '50';
 
-async function recover(bodyConclusion, status = 'completed', failedSteps = []) {
+// `later`: statuses the run reports on successive polls after the first read.
+async function recover(bodyConclusion, status = 'completed', failedSteps = [], later = []) {
   const reruns = [];
-  const run = { id: 42, run_attempt: 1, status, conclusion: 'failure' };
+  const run = { id: 42, run_attempt: 1, status, conclusion: status === 'completed' ? 'failure' : null };
+  const polls = [...later];
   const github = {
     rest: {
       pulls: { get: async () => ({ data: { state: 'open', head: { sha: 'head' } } }) },
       actions: {
         listWorkflowRuns: 'runs', listJobsForWorkflowRun: 'jobs',
-        getWorkflowRun: async () => ({ data: run }),
+        getWorkflowRun: async () => {
+          if (polls.length) Object.assign(run, polls.shift());
+          return { data: { ...run } };
+        },
         reRunWorkflow: async ({ run_id }) => { reruns.push(run_id); },
       },
     },
-    paginate: async endpoint => endpoint === 'runs' ? [run] : [{
-      conclusion: failedSteps.length ? 'failure' : undefined,
+    // Like the Jobs API: a step has no conclusion until the run gets there.
+    paginate: async endpoint => endpoint === 'runs' ? [{ ...run }] : [{
+      conclusion: run.status === 'completed' && failedSteps.length ? 'failure' : null,
       steps: [
-        { name: 'PR-body completeness + multi-issue Closes (zero-Claude)', conclusion: bodyConclusion },
-        ...failedSteps.map(name => ({ name, conclusion: 'failure' })),
+        { name: 'PR-body completeness + multi-issue Closes (zero-Claude)', conclusion: run.status === 'completed' ? bodyConclusion : null },
+        ...failedSteps.map(name => ({ name, conclusion: run.status === 'completed' ? 'failure' : null })),
       ],
     }],
   };
   await new AsyncFunction('github', 'context', 'core', script)(github, {
     repo: { owner: 'owner', repo: 'repo' }, payload: { pull_request: { number: 1, head: { sha: 'head' } } },
-  }, { info() {} });
+  }, { info() {}, warning() {} });
   return reruns;
 }
 
@@ -79,6 +88,15 @@ test('the review step names the recovery watches exist in tests.yml', () => {
     assert.match(recovery, new RegExp(`'${name}'`));
     assert.ok(tests.includes(`- name: ${name}\n`), name);
   }
+});
+
+test('an edit during a running review waits for the run, then retries its body/review failure', async () => {
+  const done = { status: 'completed', conclusion: 'failure' };
+  assert.deepEqual(await recover('success', 'in_progress', ['Require approving Codex review'], [{ status: 'in_progress' }, done]), [42]);
+  assert.deepEqual(await recover('failure', 'queued', [], [done]), [42]);
+  // A run that ends green, or a new attempt started meanwhile, is not retried.
+  assert.deepEqual(await recover('success', 'in_progress', [], [{ status: 'completed', conclusion: 'success' }]), []);
+  assert.deepEqual(await recover('failure', 'in_progress', [], [{ run_attempt: 2 }]), []);
 });
 
 test('a passed body preserves both a later failure and running tests', async () => {
