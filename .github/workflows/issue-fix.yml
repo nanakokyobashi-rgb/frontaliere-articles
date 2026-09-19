@@ -932,29 +932,63 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           ISSUE: ${{ github.event.issue.number }}
+          ACTION_OUTCOME: ${{ steps.codex_fix.outcome || '' }}
+          ISSUE_GROUP: ${{ steps.group.outputs.is_group || 'false' }}
+          ISSUE_GROUP_NUMBERS: ${{ steps.group.outputs.group_numbers || '' }}
         run: |
           set -uo pipefail
           runtime_token="${GITHUB_PAT_NANAKO:-}"
           if [ -n "$runtime_token" ]; then
             export GH_TOKEN="$runtime_token"
           fi
-          BRANCH="fix/issue-$ISSUE"
-          PR_LOOKUP_RC=0
-          PR_NUMBER=$(gh pr list --repo "$REPO" --head "$BRANCH" --state all --json number,state,createdAt \
-            --jq 'map(select(.state == "OPEN" or .state == "MERGED")) | sort_by(.createdAt) | last | .number // empty' 2>/dev/null) || PR_LOOKUP_RC=$?
-          if [ "$PR_LOOKUP_RC" -ne 0 ]; then
-            echo "::warning::production-proof: lookup PR fallito (rc=$PR_LOOKUP_RC), retry"
-            sleep 2
-            PR_LOOKUP_RC=0
-            PR_NUMBER=$(gh pr list --repo "$REPO" --head "$BRANCH" --state all --json number,state,createdAt \
-              --jq 'map(select(.state == "OPEN" or .state == "MERGED")) | sort_by(.createdAt) | last | .number // empty' 2>/dev/null) || PR_LOOKUP_RC=$?
+          if [ -z "$ACTION_OUTCOME" ] || [ "$ACTION_OUTCOME" = "skipped" ]; then
+            echo "production-proof: nessuna consegna Codex nella run corrente (outcome=$ACTION_OUTCOME) — skip"
+            exit 0
           fi
+          BRANCH="fix/issue-$ISSUE"
+          RUN_STARTED_AT=""
+          RUN_LOOKUP_RC=1
+          for attempt in 1 2; do
+            RUN_LOOKUP_RC=0
+            RUN_STARTED_AT=$(gh api "repos/$REPO/actions/runs/$GITHUB_RUN_ID" \
+              --jq '.run_started_at // .created_at' 2>/dev/null) || RUN_LOOKUP_RC=$?
+            if [ "$RUN_LOOKUP_RC" -eq 0 ] && [ -n "$RUN_STARTED_AT" ]; then
+              break
+            fi
+            echo "::warning::production-proof: start time run illeggibile (attempt=$attempt rc=$RUN_LOOKUP_RC)"
+            [ "$attempt" -lt 2 ] && sleep 2
+          done
+          if [ "$RUN_LOOKUP_RC" -ne 0 ] || [ -z "$RUN_STARTED_AT" ]; then
+            echo "::error::production-proof: start time run non leggibile — hold non valutato"
+            exit 1
+          fi
+
+          PR_LIST_JSON=""
+          PR_LOOKUP_RC=1
+          for attempt in 1 2; do
+            PR_LOOKUP_RC=0
+            PR_LIST_JSON=$(gh pr list --repo "$REPO" --head "$BRANCH" --state all \
+              --json number,state,createdAt 2>/dev/null) || PR_LOOKUP_RC=$?
+            if [ "$PR_LOOKUP_RC" -eq 0 ]; then
+              break
+            fi
+            echo "::warning::production-proof: lookup PR fallito (attempt=$attempt rc=$PR_LOOKUP_RC), retry"
+            [ "$attempt" -lt 2 ] && sleep 2
+          done
           if [ "$PR_LOOKUP_RC" -ne 0 ]; then
             echo "::error::production-proof: lookup PR non leggibile dopo il retry — hold non valutato"
             exit 1
           fi
+          PR_PARSE_RC=0
+          PR_NUMBER=$(printf '%s\n' "$PR_LIST_JSON" | jq -r --arg started "$RUN_STARTED_AT" \
+            'map(select((.state == "OPEN" or .state == "MERGED") and (.createdAt >= $started))) | sort_by(.createdAt) | last | .number // empty' \
+            2>/dev/null) || PR_PARSE_RC=$?
+          if [ "$PR_PARSE_RC" -ne 0 ]; then
+            echo "::error::production-proof: parsing PR lookup fallito — hold non valutato"
+            exit 1
+          fi
           if [ -z "$PR_NUMBER" ]; then
-            echo "production-proof: nessuna PR open/merged su $BRANCH — skip"
+            echo "production-proof: nessuna PR open/merged consegnata nella run corrente su $BRANCH — skip"
             exit 0
           fi
 
@@ -974,10 +1008,11 @@ jobs:
             if [ "$FILES_RC" -eq 0 ] && [ "$COMPLETE" = "true" ]; then
               break
             fi
-            if [ "$FILES_RC" -eq 0 ] && [ "$FILES_REASON" != "list-fetch-failed" ]; then
+            if [ "$FILES_RC" -eq 0 ] && [ "$FILES_REASON" = "rest-hard-limit" ]; then
+              echo "::error::production-proof: elenco file PR #$PR_NUMBER oltre il cap REST — hold non valutabile"
               break
             fi
-            echo "::warning::production-proof: elenco file PR #$PR_NUMBER non leggibile (attempt=$attempt rc=$FILES_RC reason=$FILES_REASON)"
+            echo "::warning::production-proof: elenco file PR #$PR_NUMBER non completo (attempt=$attempt rc=$FILES_RC reason=$FILES_REASON), retry"
             [ "$attempt" -lt 3 ] && sleep "$attempt"
           done
           if [ "$FILES_RC" -ne 0 ] || [ "$COMPLETE" != "true" ]; then
@@ -1013,20 +1048,33 @@ jobs:
             exit 1
           fi
 
-          ISSUE_EDIT_RC=1
-          for attempt in 1 2 3; do
-            if gh issue edit "$ISSUE" --repo "$REPO" --add-label awaiting-production-proof; then
-              ISSUE_EDIT_RC=0
-              break
-            fi
-            echo "::warning::production-proof: edit label issue fallito (attempt=$attempt)"
-            [ "$attempt" -lt 3 ] && sleep "$attempt"
-          done
-          if [ "$ISSUE_EDIT_RC" -ne 0 ]; then
-            echo "::error::production-proof: label non applicata alla issue #$ISSUE dopo i retry"
+          TARGET_ISSUES="${ISSUE_GROUP_NUMBERS:-$ISSUE}"
+          if [ "$ISSUE_GROUP" = "true" ] && [ -z "$ISSUE_GROUP_NUMBERS" ]; then
+            echo "::error::production-proof: gruppo B19 senza membri — hold non applicato"
             exit 1
           fi
-          echo "production-proof: issue #$ISSUE sospesa per PR #$PR_NUMBER"
+          IFS=',' read -r -a ISSUE_LIST <<< "$TARGET_ISSUES"
+          for target_issue in "${ISSUE_LIST[@]}"; do
+            target_issue="${target_issue//[[:space:]]/}"
+            if [[ ! "$target_issue" =~ ^[0-9]+$ ]]; then
+              echo "::error::production-proof: membro issue non valido: $target_issue"
+              exit 1
+            fi
+            ISSUE_EDIT_RC=1
+            for attempt in 1 2 3; do
+              if gh issue edit "$target_issue" --repo "$REPO" --add-label awaiting-production-proof; then
+                ISSUE_EDIT_RC=0
+                break
+              fi
+              echo "::warning::production-proof: edit label issue #$target_issue fallito (attempt=$attempt)"
+              [ "$attempt" -lt 3 ] && sleep "$attempt"
+            done
+            if [ "$ISSUE_EDIT_RC" -ne 0 ]; then
+              echo "::error::production-proof: label non applicata alla issue #$target_issue dopo i retry"
+              exit 1
+            fi
+            echo "production-proof: issue #$target_issue sospesa per PR #$PR_NUMBER"
+          done
 
       # Simmetrico al claim, e su OGNI percorso terminale (successo, blocco,
       # max-turns, fallimento infra). `agent:in-progress` e' mutua esclusione,

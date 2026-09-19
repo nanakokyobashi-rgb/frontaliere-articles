@@ -46,14 +46,21 @@ test('la prova di produzione viene applicata deterministicamente ai diff runtime
   assert.ok(s, `step «${PRODUCTION_PROOF}» assente: la label resterebbe affidata al prompt dell'agente.`);
   assert.match(s, /if: always\(\) && steps\.claim\.outputs\.claim_acquired == 'true'/);
   assert.match(s, /--state all/, 'il retry deve riconoscere anche una PR già mergiata');
+  assert.match(s, /ACTION_OUTCOME/, 'la hold deve appartenere a una consegna della run corrente');
+  assert.match(s, /run_started_at/, 'la PR va ancorata all\'inizio della run corrente');
+  assert.match(s, /createdAt >= \$started/, 'una PR storica sul branch riusato non deve essere selezionata');
   assert.match(s, /fetch-pr-files\.mjs --repo "\$REPO" --pr "\$PR_NUMBER"/);
   assert.match(s, /\.complete \/\/ false/, 'una lista file incompleta deve fermare il rilevamento');
   assert.ok(s.includes('^\\\\.github/workflows/[^/]+$'), 'manca il selettore dei workflow eseguibili');
   assert.doesNotMatch(s, /claude-codex-fallback\//, 'non creare hold per action path che il drainer non può provare');
   assert.match(s, /PR_LOOKUP_RC=\$\?/ , 'un errore di lookup PR non deve diventare una PR assente');
   assert.match(s, /for attempt in 1 2 3/, 'le letture e le scritture GitHub devono avere retry bounded');
+  assert.match(s, /rest-hard-limit/, 'il cap REST deve essere distinto dalle incompletezze transitorie');
+  assert.match(s, /FILES_REASON.*rest-hard-limit/, 'le incompletezze non-hard devono poter ritentare');
+  assert.match(s, /ISSUE_GROUP_NUMBERS/, 'un gruppo B19 deve propagare la hold a ogni membro');
+  assert.match(s, /for target_issue in "\$\{ISSUE_LIST\[@\]\}"/, 'ogni membro del gruppo deve essere editato');
   assert.match(s, /gh label create awaiting-production-proof/);
-  assert.match(s, /gh issue edit "\$ISSUE" --repo "\$REPO" --add-label awaiting-production-proof/);
+  assert.match(s, /gh issue edit "\$target_issue" --repo "\$REPO" --add-label awaiting-production-proof/);
   assert.match(s, /hold non valutato/, 'gli errori persistenti devono essere visibili e recuperabili');
   assert.doesNotMatch(s, /continue-on-error: true/, 'un hold non applicato non deve essere assorbito come successo');
   assert.ok(
