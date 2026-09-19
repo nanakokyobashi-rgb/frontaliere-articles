@@ -46,35 +46,48 @@ jobs:
       # trusted e le sue sole dipendenze dependency-free: il codice della PR
       # non decide quali review/check possano arruolare l'auto-merge.
       - name: Download workflow helpers
-        env:
-          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           helper_dir="${RUNNER_TEMP}/native-automerge-helpers"
           mkdir -p "$helper_dir/lib"
-          # Bootstrap reads are idempotent. Retry only transient network/API
-          # failures so a bad path, invalid source or empty response still
-          # stops the sweep before it can read or enroll anything.
+          raw_base_url="https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/main"
+          # Read the trusted main helpers through the raw-content CDN. The
+          # installation-token REST API has a shared quota, so using `gh api`
+          # here can make this bootstrap fail before it can load the PAT that
+          # owns the later writes. Retry only idempotent reads and recognizable
+          # transient failures; 404/403, invalid JavaScript and empty files
+          # remain fail-closed instead of becoming a silent no-op.
           download_and_check() {
             local path="$1"
             local destination="$2"
             local error_file="${destination}.error"
+            local status_file="${destination}.status"
+            local raw_url="${raw_base_url}/${path}"
             local attempt
             for attempt in 1 2 3; do
-              rm -f "$destination" "$error_file"
-              if gh api "repos/${GITHUB_REPOSITORY}/contents/${path}?ref=main" \
-                --header 'Accept: application/vnd.github.raw+json' \
-                > "$destination" 2> "$error_file" \
+              rm -f "$destination" "$error_file" "$status_file"
+              : > "$status_file"
+              if curl --fail --location --silent --show-error --retry 0 \
+                --connect-timeout 10 --max-time 60 \
+                --output "$destination" \
+                --write-out '%{http_code}' \
+                "$raw_url" > "$status_file" 2> "$error_file" \
                 && [ -s "$destination" ] \
+                && grep -Eq '^2[0-9][0-9]$' "$status_file" \
                 && node --check "$destination"; then
-                rm -f "$error_file"
+                rm -f "$error_file" "$status_file"
                 return 0
               fi
-              if [ "$attempt" -eq 3 ] || ! grep -Eiq \
-                'timeout|timed[[:space:]._-]*out|deadline[[:space:]._-]*exceeded|connection reset|connection refused|temporary failure|service unavailable|bad gateway|gateway timeout|HTTP 429|rate limit exceeded|secondary rate limit|HTTP 5[0-9][0-9]|ECONNRESET|ETIMEDOUT|EAI_AGAIN' \
-                "$error_file"; then
+              local retryable=false
+              if grep -Eq '^(408|425|429|5[0-9][0-9])$' "$status_file" \
+                || grep -Eiq \
+                  'timeout|timed[[:space:]._-]*out|deadline[[:space:]._-]*exceeded|connection reset|connection refused|failed to connect|temporary failure|could not resolve|service unavailable|bad gateway|gateway timeout|HTTP 429|error: 429|rate limit exceeded|secondary rate limit|HTTP 5[0-9][0-9]|error: 5[0-9][0-9]|ECONNRESET|ETIMEDOUT|EAI_AGAIN' \
+                  "$error_file"; then
+                retryable=true
+              fi
+              if [ "$attempt" -eq 3 ] || [ "$retryable" != true ]; then
                 cat "$error_file" >&2
-                rm -f "$destination" "$error_file"
+                rm -f "$destination" "$error_file" "$status_file"
                 return 1
               fi
               echo "::warning::Transient GitHub helper read failed for ${path} (attempt ${attempt}/3); retrying."

@@ -39,6 +39,8 @@ test('#1139: auto-merge sweep usa REST paginata e fallisce chiuso sulla lettura'
   assert.doesNotMatch(source, /^\s*prs=\$\(gh pr list/m);
   assert.doesNotMatch(source, /^\s*--limit 200/m);
   assert.doesNotMatch(source, /^\s*.*\|\| true/m);
+  assert.match(source, /raw_base_url="https:\/\/raw\.githubusercontent\.com\/\$\{GITHUB_REPOSITORY\}\/main"/);
+  assert.doesNotMatch(source, /gh api "repos\/\$\{GITHUB_REPOSITORY\}\/contents/);
 });
 
 test('#1604: anche il fallback periodico ritenta il bootstrap senza aprire un percorso fail-open', () => {
@@ -47,7 +49,10 @@ test('#1604: anche il fallback periodico ritenta il bootstrap senza aprire un pe
   assert.ok(start >= 0 && end > start, 'helper downloader block non trovato');
   const downloader = source.slice(start, end);
   assert.match(downloader, /for attempt in 1 2 3/);
-  assert.match(downloader, /> "\$destination" 2> "\$error_file"/);
+  assert.match(downloader, /--output "\$destination"/);
+  assert.match(downloader, /--write-out '%\{http_code\}'/);
+  assert.match(downloader, /--connect-timeout 10 --max-time 60/);
+  assert.match(downloader, /grep -Eq '\^2\[0-9\]\[0-9\]\$' "\$status_file"/);
   assert.match(downloader, /timeout/);
   assert.match(downloader, /deadline\[\[:space:\]\.\_-\]\*exceeded/);
   assert.match(downloader, /timed\[\[:space:\]\.\_-\]\*out/);
@@ -56,7 +61,10 @@ test('#1604: anche il fallback periodico ritenta il bootstrap senza aprire un pe
   assert.match(downloader, /secondary rate limit/);
   assert.doesNotMatch(downloader, /HTTP 403/);
   assert.match(downloader, /HTTP 5\[0-9\]\[0-9\]/);
-  assert.match(downloader, /\[ "\$attempt" -eq 3 \] \|\| ! grep/);
+  assert.match(downloader, /\^\(408\|425\|429\|5\[0-9\]\[0-9\]\)\$/);
+  assert.match(downloader, /retryable=false/);
+  assert.match(downloader, /\[ "\$retryable" != true \]/);
+  assert.doesNotMatch(downloader, /gh api/);
   assert.match(downloader, /sleep "\$\(\(attempt \* 5\)\)"/);
   assert.match(downloader, /return 1\b/);
   assert.match(source, /download_and_check \\\n\s+'generator\/scripts\/load-rc-env\.mjs' "\$helper_dir\/load-rc-env\.mjs"/);
