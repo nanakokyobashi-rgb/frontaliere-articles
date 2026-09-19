@@ -88,6 +88,7 @@ env:
 
 permissions:
   contents: read
+  actions: read
   issues: write
   id-token: write
 
@@ -227,13 +228,15 @@ jobs:
             2. `gh issue list --repo $REPO --state open --label needs-human --json number,title,labels,createdAt,updatedAt --limit 100` — ordina per updatedAt crescente (le più ferme prima).
 
             **Per ogni issue (MASSIMO 15 azioni totali in questo run — un'azione = un cambio di label/stato; le issue oltre il cap restano al giro successivo):**
-            1. Leggi body + commenti (`gh issue view N --repo $REPO --json body,comments,labels`). Cerca PRIMA una decisione del proprietario già registrata nel registro di VISION.md: se c'è, la issue non è più una domanda — applicala.
+            1. Leggi body + commenti + data di apertura (`gh issue view N --repo $REPO --json body,comments,labels,createdAt`). Cerca PRIMA una decisione del proprietario già registrata nel registro di VISION.md: se c'è, la issue non è più una domanda — applicala.
             2. Classifica in UNA delle quattro:
                - **A — vero vicolo cieco**: NESSUN driver la copre, e non è un blocco di capacità (quello è B). Con «Sempre umano» rimossa questa classe dovrebbe essere quasi sempre vuota: prima di usarla, verifica che non sia semplicemente una decisione di prodotto/contenuto che ORA il ciclo può prendere da sé citando D1-D8. Se davvero nessun driver risponde, NON toccare le label e aggiungila al digest formulando la domanda in modo DECIDIBILE.
                - **B — capability/permessi**: era bloccata da una capacità che oggi esiste (i secret sono autorizzati in modo permanente dal 2026-08-24 e `issue-fix.yml` carica Remote Config prima del run; `GITHUB_PAT_NANAKO` dà lo scope `workflows`; lo stadio di decomposizione esiste per le issue grandi). Commento che cita il driver o la capacità + `gh issue edit N --repo $REPO --remove-label needs-human --remove-label fu-parked --add-label agent:fix-queued` (issue singola con causa chiara) oppure `--add-label agent:decompose-queued` (issue grande/contenitore: più cause o più target).
                - **C — claim scaduta**: il difetto descritto non esiste più (verificalo con la misura più economica che decide: un comando dal body, un grep sul codice, una gh api). Ricorda che i numeri nelle issue scadono: rimisura, non fidarti del body. Commento con la misura osservata e il comando che la riproduce, poi `gh issue close N --repo $REPO`. Se NON riesci a misurare, NON chiudere: trattala come A o lasciala.
                - **D — parcheggiata giusta**: `needs-human` corretto e già nel digest/registro. Non toccare nulla, non rimetterla nel digest se già presente. Ci rientra la famiglia delle CREDENZIALI (`Agent loop down: GITHUB_PAT…`, `GH_PAT expiry warning:`): la rotazione è stata DECLINATA dal proprietario il 2026-08-18 e il ciclo non può comunque agirci — non riproporla.
             3. VINCOLI: mai chiudere ciò che non hai misurato; mai rimuovere `agent:no-age-out`; un'issue con PR aperta collegata non si tocca; prima di instradare una fix verifica il `mode` in `scripts/ci/loop-sync-manifest.json` — una issue su un file `identical` si ripara SUL SITO, e ri-accodarla qui produrrebbe una PR che il mirror sovrascrive.
+
+            **Guardia obbligatoria per la chiusura delle issue di failure.** Prima di qualsiasi `gh issue close` su un titolo che corrisponde a `^(Workflow|Crawler|CI) Failure: `, applica lo stesso oracolo di `scripts/ci/close-recovered-failure-issues.mjs`: per `Workflow Failure:` e `CI Failure:` esegui `gh run list -w "$workflow_name" -b main -L 100 --json databaseId,conclusion,status,createdAt`, filtra le sole run con `status == `completed``, ordinale per `createdAt` decrescente e usa l'ultima; deve avere `conclusion == `success`` e una data successiva a `createdAt` dell'issue. Per `Crawler Failure: Run <slug>` devi usare la stessa risoluzione gruppo→step del reconciler e verificare la conclusione dello step nella run completata più recente su `main`. Se l'ultima run/step è rossa, `cancelled`, assente o non leggibile, **NON chiudere**: lascia l'issue aperta e commenta la misura. Un `maybe-resolved`, un verdetto o una decisione di sweep non sostituiscono questa prova.
 
             **Digest (ultima azione, sempre):** una sola issue col titolo ESATTO `${{ steps.digest_title.outputs.title }}` (cerca fra le aperte con `gh search issues --repo $REPO`; se trovi più di una issue col titolo esatto, NON scegliere la prima: fermati e segnala l'ambiguità). Se non esiste creala con label `needs-human,automation,agent:no-age-out`. Sostituisci/aggiorna il body con: l'elenco delle domande di classe A (numero, domanda decidibile, opzioni), le decisioni applicate in questo run (classe B/C, con issue e driver citato), e il conteggio residuo `needs-human`. Il body deve restare leggibile in 2 minuti: le domande sono POCHE e decidibili, o lo sweep ha fallito il suo compito.
 

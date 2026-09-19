@@ -476,6 +476,18 @@ test('#170: il filtro NON e\' un allowlist di workflow — il nome dello step e\
     'il pre-flight e\' PROCEED-SAFE (continue-on-error) e non fallisce mai: non deve entrare nel filtro');
 });
 
+test('#1594: lo sweep non chiude una failure mentre l\'ultima run e\' rossa', () => {
+  const workflow = readFileSync(path.join(ROOT, '.github', 'workflows', 'needs-human-sweep.yml'), 'utf8');
+  assert.match(workflow, /actions:\s+read/, 'lo sweep deve poter leggere le run Actions');
+  assert.match(workflow, /gh issue view N --repo \$REPO --json body,comments,labels,createdAt/);
+  assert.match(workflow, /scripts\/ci\/close-recovered-failure-issues\.mjs/);
+  assert.match(workflow, /gh run list -w "\$workflow_name" -b main -L 100 --json databaseId,conclusion,status,createdAt/);
+  assert.match(workflow, /status == `completed`/);
+  assert.match(workflow, /conclusion == `success`/);
+  assert.match(workflow, /ultima run\/step è rossa, `cancelled`, assente o non leggibile/);
+  assert.match(workflow, /NON chiudere.*lascia l'issue aperta/);
+});
+
 // ───────────────────────────────────────────────────────────────────────────
 // issue #1025 — il classificatore rosso non deve auto-segnalare il workflow
 
