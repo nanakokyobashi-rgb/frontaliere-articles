@@ -26,6 +26,7 @@ import {
 } from '../../scripts/ci/translate-queue-recovery.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+const TARGET_WORKFLOW_FILE = path.join(ROOT, TARGET_WORKFLOW_PATH);
 const WORKFLOW_PATH = path.join(ROOT, '.github/workflows/translate-queue-recovery-watchdog.yml');
 const RUNTIME_PATH = path.join(ROOT, 'scripts/ci/translate-queue-recovery.mjs');
 const MANIFEST_PATH = path.join(ROOT, 'scripts/ci/loop-sync-manifest.json');
@@ -50,6 +51,13 @@ function canonicalJson(value) {
   return `{${Object.keys(value).sort().map((key) => (
     `${JSON.stringify(key)}:${canonicalJson(value[key])}`
   )).join(',')}}`;
+}
+
+function gitBlobSha(bytes) {
+  return createHash('sha1')
+    .update(Buffer.from(`blob ${bytes.length}\0`, 'utf8'))
+    .update(bytes)
+    .digest('hex');
 }
 
 function run(id, overrides = {}) {
@@ -593,10 +601,13 @@ test('workflow e runtime sono read-only/dry-run per costruzione', () => {
   assert.doesNotMatch(RUNTIME, /writeFile|appendFile|createGithubIssue|child_process/);
 });
 
-test('target e manifest sono pinning corpus-only esatti', () => {
+test('target, workflow generato e manifest sono pinning corpus-only esatti', () => {
   assert.equal(TARGET_WORKFLOW_ID, 342441975);
   assert.equal(TARGET_WORKFLOW_PATH, '.github/workflows/translate-pending.yml');
-  assert.equal(TARGET_WORKFLOW_BLOB_SHA, '231a28fba27199f606ebb49b13e6c93aa87ace8d');
+  // Il pin conserva la guardia sul contenuto esattamente revisionato, ma il
+  // workflow e' generato dal sito: questo confronto fa fallire il check nello
+  // stesso lockstep in cui il file cambia, invece di lasciare marcire il pin.
+  assert.equal(TARGET_WORKFLOW_BLOB_SHA, gitBlobSha(readFileSync(TARGET_WORKFLOW_FILE)));
   assert.equal(QUEUE_MAX_BOUNDARY_SHA, '5e5114b73f37a0c47625f00baff13942fe8b186b');
   assert.deepEqual(RERUN_PRESERVATION_PROOF, {
     artifactId: '9817045831',
