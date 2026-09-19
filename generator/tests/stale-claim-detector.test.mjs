@@ -26,6 +26,7 @@ import {
   claimOwner,
   hasClaimLabel,
   removeLabelArgs,
+  releaseStaleClaim,
 } from '../../scripts/ci/stale-claim-detector.mjs';
 
 const NOW = Date.parse('2026-08-08T12:00:00Z');
@@ -213,4 +214,78 @@ test('ripete il flag per ogni label rimossa, senza affidarsi a una variadica amb
     '--remove-label', 'agent:in-progress',
     '--remove-label', 'agent:remote',
   ]);
+});
+
+// ── releaseStaleClaim: marker-before-release ───────────────────────────────
+
+test('lettura commenti non disponibile → non commenta e non rimuove il claim', () => {
+  const calls = [];
+  const result = releaseStaleClaim({
+    markerState: null,
+    postComment: () => { calls.push('comment'); return true; },
+    confirmMarker: () => { calls.push('confirm'); return true; },
+    removeClaim: () => { calls.push('remove'); return true; },
+  });
+
+  assert.deepEqual(result, { released: false, reason: 'marker-read-failed' });
+  assert.deepEqual(calls, []);
+});
+
+test('marker già confermato → rilascia in modo idempotente senza duplicare il commento', () => {
+  const calls = [];
+  const result = releaseStaleClaim({
+    markerState: true,
+    postComment: () => { calls.push('comment'); return true; },
+    confirmMarker: () => { calls.push('confirm'); return true; },
+    removeClaim: () => { calls.push('remove'); return true; },
+  });
+
+  assert.deepEqual(result, { released: true, reason: 'marker-existing' });
+  assert.deepEqual(calls, ['remove']);
+});
+
+test('commento non riuscito → non rimuove il claim', () => {
+  const calls = [];
+  const result = releaseStaleClaim({
+    markerState: false,
+    postComment: () => { calls.push('comment'); return false; },
+    confirmMarker: () => { calls.push('confirm'); return true; },
+    removeClaim: () => { calls.push('remove'); return true; },
+  });
+
+  assert.deepEqual(result, { released: false, reason: 'comment-failed' });
+  assert.deepEqual(calls, ['comment']);
+});
+
+test('commento riuscito ma marker non confermato → claim conservato per retry', () => {
+  const calls = [];
+  const result = releaseStaleClaim({
+    markerState: false,
+    postComment: () => { calls.push('comment'); return true; },
+    confirmMarker: () => { calls.push('confirm'); return false; },
+    removeClaim: () => { calls.push('remove'); return true; },
+  });
+
+  assert.deepEqual(result, { released: false, reason: 'marker-not-persisted' });
+  assert.deepEqual(calls, ['comment', 'confirm']);
+});
+
+test('edit fallito → marker resta il punto di retry e il giro successivo può rimuovere', () => {
+  const calls = [];
+  const first = releaseStaleClaim({
+    markerState: true,
+    postComment: () => { calls.push('comment'); return true; },
+    confirmMarker: () => { calls.push('confirm'); return true; },
+    removeClaim: () => { calls.push('remove-fail'); return false; },
+  });
+  const second = releaseStaleClaim({
+    markerState: true,
+    postComment: () => { calls.push('comment-duplicate'); return true; },
+    confirmMarker: () => { calls.push('confirm-duplicate'); return true; },
+    removeClaim: () => { calls.push('remove-retry'); return true; },
+  });
+
+  assert.deepEqual(first, { released: false, reason: 'claim-remove-failed' });
+  assert.deepEqual(second, { released: true, reason: 'marker-existing' });
+  assert.deepEqual(calls, ['remove-fail', 'remove-retry']);
 });
