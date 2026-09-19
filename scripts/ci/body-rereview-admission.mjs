@@ -101,12 +101,17 @@ function reviewId(review) {
   return Number.isFinite(id) ? id : 0;
 }
 
-// Anchor `PR body:L<n>`. Volutamente LOCALE e non importato da
-// `review-scope.mjs`: il gemello la' arriva in una PR concatenata, e legare
-// questo modulo a un export che su `main` non esiste ancora romperebbe il
-// guard su ogni PR nel frattempo. Due righe duplicate valgono meno di quel
-// rischio; quando il gemello scende, si unificano.
-const PR_BODY_ANCHOR_RE = /`?PR body[:#]L?[1-9]\d*/iu;
+// Anchor `PR body:L<n>` in POSIZIONE, cioe' come prefisso della prima riga del
+// finding — la stessa forma con cui il reviewer ancora un finding a un file.
+// Cercarlo ovunque nel testo era sbagliato nella direzione peggiore: un
+// Important di CODICE senza citazione che menziona di sfuggita «vedi PR
+// body:L5» sarebbe passato per body-only, avrebbe aperto la corsia `minimal`
+// e sarebbe sparito dal verdetto.
+//
+// Volutamente LOCALE e non importato da `review-scope.mjs`: il gemello la'
+// arriva in una PR concatenata, e legare questo modulo a un export che su
+// `main` non esiste ancora romperebbe il guard su ogni PR nel frattempo.
+const PR_BODY_ANCHOR_RE = /^\s*(?:[-*]\s*)?`?PR body[:#]L?[1-9]\d*(?:\s*[-–]\s*L?[1-9]\d*)?(?=$|[`:\s])/iu;
 
 /**
  * Vero se il verdetto porta almeno un 🔴 Important che NON e' ancorato al solo
@@ -122,7 +127,8 @@ export function hasOpenCodeImportant(body) {
     return true;
   }
   return findings.some((finding) => finding.citations.length > 0
-    || !PR_BODY_ANCHOR_RE.test(String(finding.text || '')));
+    // Solo la PRIMA riga: e' li' che vive l'anchor di posizione.
+    || !PR_BODY_ANCHOR_RE.test(String(finding.text || '').split(/\r?\n/)[0] || ''));
 }
 
 function submittedAt(review) {

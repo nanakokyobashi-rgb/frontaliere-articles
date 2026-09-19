@@ -127,8 +127,45 @@ test('un 🔴 di CODICE aperto chiude la corsia body-only', () => {
     bodyEditedAt: '2026-09-19T10:05:00Z',
   }), false);
 
-  // Solo body → la corsia si apre.
+  // Un Important di CODICE che MENZIONA un anchor del body senza esserne
+  // ancorato resta lavoro aperto: cercare l'anchor ovunque nel testo apriva
+  // la corsia e faceva sparire il finding dal verdetto.
+  const mentionsAnchor = [
+    `<!-- REVIEW_INPUT_REVISION: ${OLD_REVISION} -->`,
+    '🔴 Important: il canonical e\' sbagliato, vedi anche `PR body:L5`.',
+  ].join('\n');
+  assert.equal(hasOpenCodeImportant(mentionsAnchor), true,
+    'l\'anchor deve essere la POSIZIONE del finding, non una menzione');
+
+  // Solo body → la corsia si apre, anche con un anchor a intervallo.
   assert.equal(hasOpenCodeImportant(redflag()), false);
+  assert.equal(hasOpenCodeImportant([
+    `<!-- REVIEW_INPUT_REVISION: ${OLD_REVISION} -->`,
+    '`PR body:L5-6`: 🔴 Important: le due voci non tornano.',
+  ].join('\n')), false);
+});
+
+test('il recupero del verdetto precedente non usa una flag che `gh api` non ha', () => {
+  // `gh api` non supporta `--arg`: e' di `jq`. Passarla faceva fallire il
+  // comando, e l'errore inghiottito lasciava al reviewer un contesto VUOTO
+  // mentre il bundle gli prometteva il verdetto precedente verbatim.
+  const workflow = fs.readFileSync(path.join(ROOT, '.github/workflows/tests.yml'), 'utf8');
+  // Il blocco ESATTO che produce il file, non una finestra attorno al nome:
+  // il prefetch fa altre chiamate `gh api` e una finestra ne pescava una
+  // qualsiasi, rendendo il guard cieco alla regressione che deve vedere.
+  const open = workflow.indexOf('if ! gh api');
+  assert.notEqual(open, -1, 'recupero del verdetto precedente non trovato');
+  const close = workflow.indexOf('previous-review.md"; then', open);
+  assert.notEqual(close, -1, 'chiusura del recupero non trovata');
+  const block = workflow.slice(open, close);
+  const beforeJq = block.split('| jq')[0];
+  assert.match(beforeJq, /gh api "repos\/\$REPO\/pulls\/\$PR_NUMBER\/reviews"/u,
+    'il blocco trovato non e\' il recupero delle review');
+  assert.ok(!/--arg\b/u.test(beforeJq),
+    '`--arg` passata a `gh api`: il comando fallisce e il contesto resta vuoto');
+  assert.match(block, /\|\s*jq -r --arg head/u, 'la query deve passare da jq vero');
+  assert.match(workflow.slice(open, close + 600), /::warning::Verdetto precedente/u,
+    'un recupero fallito va DICHIARATO, non travestito da «non c\'era niente»');
 });
 
 test('fra due verdetti con lo stesso timestamp vince quello con l\'id piu\' alto', () => {

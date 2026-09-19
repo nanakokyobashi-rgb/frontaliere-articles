@@ -882,10 +882,22 @@ jobs:
           # bundle lo DICHIARA invece di far credere che non ci fosse nulla.
           : > "$CTX_DIR/previous-review.md"
           if [ -n "${CODE_UNCHANGED_SINCE:-}" ]; then
-            # shellcheck disable=SC2016 # `$head` e' una variabile jq (--arg), non di shell.
-            gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate \
-              --jq '[.[] | select(.commit_id == $head) | select((.state // "") != "PENDING" and (.state // "") != "DISMISSED")] | last | .body // ""' \
-              --arg head "$CODE_UNCHANGED_SINCE" > "$CTX_DIR/previous-review.md" 2>/dev/null || : > "$CTX_DIR/previous-review.md"
+            # `gh api` NON ha `--arg`: quella flag e' di `jq`, e passarla a gh
+            # fa fallire il comando. Con l'errore inghiottito da `|| :` il
+            # bundle riceveva un file VUOTO e prometteva al reviewer un
+            # verdetto precedente che non gli arrivava mai. Si pagina con gh e
+            # si interroga con jq vero; `--slurp` annida le pagine, quindi
+            # `.[][]` le appiattisce.
+            # shellcheck disable=SC2016 # `$head` e' una variabile jq, non di shell.
+            if ! gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate --slurp \
+              | jq -r --arg head "$CODE_UNCHANGED_SINCE" \
+                  '[.[][] | select(.commit_id == $head) | select((.state // "") != "PENDING" and (.state // "") != "DISMISSED")] | last | .body // ""' \
+                  > "$CTX_DIR/previous-review.md"; then
+              # Il fallimento si DICHIARA: un contesto mancante che si traveste
+              # da «non c'era niente» e' peggio di un contesto mancante.
+              echo "::warning::Verdetto precedente su $CODE_UNCHANGED_SINCE non recuperabile: il bundle lo dichiara al reviewer."
+              : > "$CTX_DIR/previous-review.md"
+            fi
           fi
           # Claude non ha bisogno dell'elenco completo dei file di corpus: per la
           # review servono il body, il diff code e i file code toccati.
