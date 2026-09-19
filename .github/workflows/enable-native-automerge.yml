@@ -21,6 +21,12 @@ on:
   workflow_run:
     workflows: [tests]
     types: [completed]
+    # Una run `tests` su `main` (push, o dispatch col ref di default) ha come
+    # head_sha un commit di `main`: la ricerca `commits/<sha>/pulls` qui sotto
+    # non trova mai una PR aperta e il job esce senza fare nulla. Filtrarla al
+    # trigger evita di creare la run: il push su main e' ~29% delle run `tests`
+    # (58 su 200, 2026-09-18/19).
+    branches-ignore: [main]
 permissions:
   contents: read
   pull-requests: write

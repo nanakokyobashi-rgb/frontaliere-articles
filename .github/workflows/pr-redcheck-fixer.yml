@@ -27,6 +27,12 @@ on:
   workflow_run:
     workflows: ['tests']
     types: [completed]
+    # Su `main` non c'e' PR da riparare: il preflight cerca la PR aperta con
+    # head.ref == head_branch e con `main` salta sempre. Filtrare qui evita di
+    # creare una run (col job `skipped`) a ogni push su main, ~29% delle run
+    # `tests`. I dispatch di `pr-autorebase.mjs` usano `--ref <branch della PR>`
+    # e restano dentro il filtro.
+    branches-ignore: [main]
   workflow_dispatch:
     inputs:
       pr:

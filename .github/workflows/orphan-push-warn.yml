@@ -21,8 +21,10 @@ name: Orphan push warn
 # mentre QUESTO job vuole esattamente i push sui branch — cioe' il trigger
 # opposto. Due domande diverse, due workflow.
 on:
+  # `ledger/**` sono branch di stato scritti dai bot, mai head di una PR:
+  # un push li' non puo' essere orfano di nessuna PR.
   push:
-    branches-ignore: [main]
+    branches-ignore: [main, 'ledger/**']
 
 permissions:
   contents: read
