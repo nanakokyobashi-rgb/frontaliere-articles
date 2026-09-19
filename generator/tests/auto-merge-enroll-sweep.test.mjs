@@ -46,6 +46,10 @@ test('#1604: anche il fallback periodico ritenta il bootstrap senza aprire un pe
   assert.match(downloader, /timeout/);
   assert.match(downloader, /deadline\[\[:space:\]\.\_-\]\*exceeded/);
   assert.match(downloader, /timed\[\[:space:\]\.\_-\]\*out/);
+  assert.match(downloader, /HTTP 429/);
+  assert.match(downloader, /rate limit exceeded/);
+  assert.match(downloader, /secondary rate limit/);
+  assert.doesNotMatch(downloader, /HTTP 403/);
   assert.match(downloader, /HTTP 5\[0-9\]\[0-9\]/);
   assert.match(downloader, /\[ "\$attempt" -eq 3 \] \|\| ! grep/);
   assert.match(downloader, /sleep "\$\(\(attempt \* 5\)\)"/);
