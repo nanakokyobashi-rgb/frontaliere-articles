@@ -126,6 +126,22 @@ describe('orphan-pr-custodian — adozione di un 🔴 fuori scope (sito #9221/#9
     }).action, 'none');
   });
 
+  it('non adotta una PR il cui head sta su un fork', () => {
+    assert.equal(classifyOrphan({
+      pr: pr({ headRepo: 'someone/fork', baseRepo: 'o/r' }), checkRuns: [], reviews: [review(IMPORTANT)],
+      comments: [outOfScope], nowS: NOW_S,
+    }).action, 'none');
+  });
+
+  it('rilancia la run intera (niente --failed) e ritira le label se il dispatch fallisce', () => {
+    const src = readFileSync(new URL('../../scripts/ci/orphan-pr-custodian.mjs', import.meta.url), 'utf8');
+    assert.ok(src.includes("gh(['run', 'rerun', runId, '--repo', repo]);"));
+    assert.ok(!src.includes("'--failed'"));
+    const onFail = src.slice(src.indexOf('dispatch del redflag-fixer fallito') - 600);
+    assert.ok(onFail.includes('ok = false;'));
+    assert.ok(onFail.includes("'--remove-label', AUTOFIX_LABEL, '--remove-label', ORPHANED_LABEL"));
+  });
+
   it('usa la stessa definizione di autonomia dei fixer', () => {
     assert.equal(isAutonomousPr(pr({ headRef: 'automerge-x' })), true);
     assert.equal(isAutonomousPr(pr()), false);

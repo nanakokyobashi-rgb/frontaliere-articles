@@ -1032,7 +1032,7 @@
       "mode": "identical",
       "baseline": {
         "site": "6f928fa12abb8f70",
-        "corpus": "6f928fa12abb8f70",
+        "corpus": "456b61ce6cdeb330",
         "alignedAt": "2026-09-19"
       }
     },
@@ -1043,7 +1043,7 @@
       "reason": "Gemello node:test del test Vitest del sito sul custode delle PR orfane: stessi casi sulla decisione pura (rerun di una suite CANCELLED con LGTM, adozione di un 🔴 fuori scope, guardie) e sul cablaggio di stale-pr-rescuer.yml. Cambia solo il runner, e qui asserisce anche il dispatch del redflag-fixer (`REDFLAG_FIXER_DISPATCH_INPUT: pr`), che il sito non ha perche' il suo fixer non accetta workflow_dispatch.",
       "baseline": {
         "site": "8c8ed1ad41640e6b",
-        "corpus": "e3ff3079e1937cab",
+        "corpus": "50f7b61f4942188b",
         "alignedAt": "2026-09-19"
       }
     },
