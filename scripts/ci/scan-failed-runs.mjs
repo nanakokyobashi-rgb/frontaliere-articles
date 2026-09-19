@@ -233,7 +233,7 @@ const PR_GATE_WORKFLOWS = new Set(['tests', 'Generator CI']);
  * di generazione ad alta frequenza restano espliciti perché non condividono il
  * prefisso dei crawler.
  */
-const RECURRENCE_GATED_WORKFLOW_RE = /^(?:Generate Blog Article|fast-publish-article|Crawler Group \d{2} \(sparse cross-repo execution\))$/;
+const RECURRENCE_GATED_WORKFLOW_RE = /^(?:Generate Blog Article|fast-publish-article|Crawler Group \d{1,2} \(sparse cross-repo execution\))$/;
 
 export function isRecurrenceGatedWorkflow(name) {
   return RECURRENCE_GATED_WORKFLOW_RE.test(String(name || ''));
