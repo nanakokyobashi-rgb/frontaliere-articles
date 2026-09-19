@@ -2219,6 +2219,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'bns-tassi-esame-settembre': { it: 'bns-tassi-esame-settembre', en: 'snb-rates-september-exam', de: 'snb-zinsen-september-pruefung', fr: 'bns-taux-examen-septembre' },
  'consiglio-federale-boccia-frontiere': { it: 'consiglio-federale-boccia-frontiere', en: 'federal-council-rejects-borders-initiative', de: 'bundesrat-lehnt-grenzinitiative-ab', fr: 'conseil-federal-rejette-initiative-frontieres' },
  'casa-zugo-prezzi-mutuo': { it: 'casa-zugo-prezzi-mutuo', en: 'zug-house-prices-mortgage', de: 'zug-hauspreise-hypothek', fr: 'maison-zoug-prix-hypothecaire' },
+ 'permesso-l-vaud-validita-rinnovo': { it: 'permesso-l-vaud-validita-rinnovo', en: 'vaud-l-permit-validity-renewal', de: 'vaud-l-ausweis-gultigkeit-verlaengerung', fr: 'permis-l-vaud-duree-renouvellement' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

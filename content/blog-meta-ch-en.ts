@@ -6590,6 +6590,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.casa-zugo-prezzi-mutuo.title': 'House in Zug: prices and mortgage',
     'blog.article.casa-zugo-prezzi-mutuo.excerpt': 'Prices among the highest in Switzerland: own fund, tax on trappings and notary costs to be calculated before purchase.',
     'blog.article.casa-zugo-prezzi-mutuo.imageAlt': 'Modern house in Canton Zug with hill view, example of Swiss real estate market',
+    'blog.article.permesso-l-vaud-validita-rinnovo.title': 'Permit L in Vaud: validity 1 year and renewal up to 24 months',
+    'blog.article.permesso-l-vaud-validita-rinnovo.excerpt': 'The L permit lasts a maximum of 1 year, renewable for a second year. After 24 months it passes to permit B. Complete guide for the Canton of Vaud.',
+    'blog.article.permesso-l-vaud-validita-rinnovo.imageAlt': 'Worker holding documents for the short-term L permit in Switzerland',
 };
 
 export default blogMetaChEn;

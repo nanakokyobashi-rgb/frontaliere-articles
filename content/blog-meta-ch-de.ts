@@ -6590,6 +6590,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.casa-zugo-prezzi-mutuo.title': 'Haus in Zug: Preise und Hypothekendarlehen',
     'blog.article.casa-zugo-prezzi-mutuo.excerpt': 'Die Preise gehören zu den höchsten in der Schweiz: Eigenkapital, Abgabensteuer und Notarkosten, die vor dem Kauf zu berechnen sind.',
     'blog.article.casa-zugo-prezzi-mutuo.imageAlt': 'Modernes Haus im Kanton Zug mit Hügelaussicht, Beispiel für den Schweizer Immobilienmarkt',
+    'blog.article.permesso-l-vaud-validita-rinnovo.title': 'Führerschein L Waadt: 1 Jahr gültig, Verlängerung',
+    'blog.article.permesso-l-vaud-validita-rinnovo.excerpt': 'Die Genehmigung L gilt für maximal 1 Jahr und kann um ein zweites Jahr verlängert werden. Nach 24 Monaten geht er in die Bewilligung B. Vollständiger Leitfaden für den Kanton Waadt.',
+    'blog.article.permesso-l-vaud-validita-rinnovo.imageAlt': 'Arbeitnehmer mit Dokumenten für die kurzfristige L-Ausweispapiere in der Schweiz',
 };
 
 export default blogMetaChDe;

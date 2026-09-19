@@ -85430,6 +85430,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-permesso-l-vaud-validita-rinnovo': {
+    title: 'Permesso L in Vaud: validità 1 anno e rinnovo fino a 24 mesi',
+    description: 'Scopri la durata del permesso L in Vaud (max 24 mesi) e come convertirlo in permesso B. Guida pratica su validità, rinnovi e obblighi previdenziali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, permesso, vaud, validità, anno',
+    ogTitle: 'Permesso L in Vaud: validità, rinnovo e passaggio al B',
+    ogDescription: 'Il permesso L in Vaud dura max 1 anno, rinnovabile per un secondo (totale 24 mesi). Scopri come convertirlo in permesso B, gli obblighi fiscali e le scadenze da rispettare per evitare interruzioni della copertura.',
+    canonicalPath: '/articoli-svizzera/permesso-l-vaud-validita-rinnovo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Permesso L in Vaud: validità 1 anno e rinnovo fino a 24 mesi",
+      "description": "Scopri la durata del permesso L in Vaud (max 24 mesi) e come convertirlo in permesso B. Guida pratica su validità, rinnovi e obblighi previdenziali.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/permesso-l-vaud-validita-rinnovo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lavoratore con documenti per il permesso L di breve durata in Svizzera"
+      },
+      "datePublished": "2026-09-19T02:58:18+00:00",
+      "dateModified": "2026-09-19T02:58:18+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/permesso-l-vaud-validita-rinnovo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

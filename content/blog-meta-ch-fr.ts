@@ -6590,6 +6590,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.casa-zugo-prezzi-mutuo.title': 'Maison à Zoug : prix et hypothèque',
     'blog.article.casa-zugo-prezzi-mutuo.excerpt': 'Prix parmi les plus élevés en Suisse : fonds propres, taxe sur les forages et frais de notaire à calculer avant l\'achat.',
     'blog.article.casa-zugo-prezzi-mutuo.imageAlt': 'Maison moderne dans le canton de Zoug avec vue sur les collines, exemple du marché immobilier suisse',
+    'blog.article.permesso-l-vaud-validita-rinnovo.title': 'Permis L en Vaud : validité 1 an et renouvellement jusqu\'à 24 mois',
+    'blog.article.permesso-l-vaud-validita-rinnovo.excerpt': 'Le permis L dure 1 an maximum, renouvelable pour une deuxième année. Après 24 mois, il passe au permis B. Guide complet pour le canton de Vaud.',
+    'blog.article.permesso-l-vaud-validita-rinnovo.imageAlt': 'Travailleur avec documents pour le permis L de courte durée en Suisse',
 };
 
 export default blogMetaChFr;

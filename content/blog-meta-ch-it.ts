@@ -6590,6 +6590,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.casa-zugo-prezzi-mutuo.title': 'Casa a Zugo: prezzi e mutuo ipotecario',
     'blog.article.casa-zugo-prezzi-mutuo.excerpt': 'Prezzi tra i più alti in Svizzera: fondo proprio, imposta sui trapati e costi notarili da calcolare prima dell\'acquisto.',
     'blog.article.casa-zugo-prezzi-mutuo.imageAlt': 'Casa moderna nel Canton Zugo con vista sulle colline, esempio di mercato immobiliare svizzero',
+    'blog.article.permesso-l-vaud-validita-rinnovo.title': 'Permesso L in Vaud: validità 1 anno e rinnovo fino a 24 mesi',
+    'blog.article.permesso-l-vaud-validita-rinnovo.excerpt': 'Il permesso L dura max 1 anno, rinnovabile per un secondo anno. Dopo 24 mesi passa al permesso B. Guida completa per il Cantone di Vaud.',
+    'blog.article.permesso-l-vaud-validita-rinnovo.imageAlt': 'Lavoratore con documenti per il permesso L di breve durata in Svizzera',
 };
 
 export default blogMetaChIt;
