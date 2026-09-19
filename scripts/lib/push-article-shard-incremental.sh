@@ -32,7 +32,9 @@
 #     more robust than push-section-shard.sh's raw.githubusercontent.com route
 #     (:126): no CDN caching/staleness and no unauthenticated 60/hr rate limit,
 #     and the object graph we already cloned is authoritative for exactly the
-#     HEAD we are about to build on top of.
+#     HEAD we are about to build on top of. Presence is read from the tree
+#     first: a listed marker whose blob fetch fails aborts the attempt instead
+#     of restarting the count from 0.
 #
 # Merge semantics hold BY CONSTRUCTION: the base tree is the remote's current
 # tree; only the caller's relpaths are added/replaced in the index before
@@ -235,8 +237,19 @@ _attempt() {
   # small targeted blob fetch — see header comment for why this beats the
   # raw.githubusercontent.com route). Missing/non-numeric → 0, same posture as
   # push-section-shard.sh.
+  # The stage is a `--filter=blob:none` clone: the blob arrives on demand, and
+  # a failed fetch makes `git show` fail exactly like an absent file. Only the
+  # tree (always present) proves absence; a listed but unreadable marker is an
+  # error, never a silent 0 that would restart the count from scratch.
   local prev_n
-  prev_n="$(git -C "$stage" show HEAD:.shard-filecount 2>/dev/null || echo 0)"
+  if [ -n "$(git -C "$stage" ls-tree --name-only HEAD -- .shard-filecount 2>/dev/null)" ]; then
+    prev_n="$(git -C "$stage" show HEAD:.shard-filecount)" || {
+      echo "::error::.shard-filecount is listed in the shard tree but its blob is unreadable (on-demand fetch failed)" >&2
+      return 1
+    }
+  else
+    prev_n=0
+  fi
   [[ "$prev_n" =~ ^[0-9]+$ ]] || prev_n=0
   local new_total=$((prev_n + new_count))
   if [ "$new_count" -gt 0 ]; then

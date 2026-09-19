@@ -539,6 +539,16 @@
       }
     },
     {
+      "path": "scripts/lib/pr-body-contract-eval.mjs",
+      "mode": "corpus-only",
+      "reason": "Verdetto bloccante del contratto del body (sezioni, `Closes`, stati di `Non implementato`) senza rete ne' commenti: sorgente unica per `scripts/ci/pr-body-contract.mjs` e per `retry-code-check-after-body-edit.yml`, che dopo un edit su una run verde rilancia la run solo se il body nuovo viola il contratto. Corpus-only come `pr-body-contract.mjs` e `pr-body-nextstep-check.mjs`, di cui compone i moduli.",
+      "baseline": {
+        "site": null,
+        "corpus": "b14cc7b051377a47",
+        "alignedAt": "2026-09-19"
+      }
+    },
+    {
       "path": "scripts/lib/pr-body-filepath-check.mjs",
       "mode": "corpus-only",
       "reason": "Verifica che i path citati fra backtick nel body di una PR ESISTANO. E' il secondo giro dell'escalation #140: `pr-body-sections-check` guarda la presenza della sezione, `pr-body-nextstep-check` la forma dello stato, e un body puo' essere di forma perfetta e citare file che qui non ci sono — sulla #358 `checkNextStepStates` dava `ok: true` mentre il reviewer spendeva un ciclo per dire che due path non esistevano. Sul sito non esiste, e non e' `corpus-only-pending`: il perimetro (`KNOWN_ROOTS`) e la dislocazione `scripts/` -> `generator/scripts/` sono la topologia di QUESTO repo, e la soglia advisory e' calibrata sulle 45 PR mergiate di qui (misura nel docblock). Sul sito quei due pezzi andrebbero rimisurati da zero, quindi la' e' un modulo diverso, non lo stesso file. Stessa politica del gemello `pr-body-nextstep-check.mjs`, corpus-only per la stessa ragione.",
@@ -3991,11 +4001,12 @@
     },
     {
       "path": ".github/workflows/retry-code-check-after-body-edit.yml",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "Stesso recupero del sito dopo un body corretto: riesegue l'ultima run `tests` della HEAD quando e' fallita sul contratto del body o sul SOLO gate della review, ed e' l'unica via di rientro da quando `tests.yml` non ha piu' `edited` fra i trigger. Adattato su cinque punti, tutti emersi dalla review della PR #1613 e tutti conseguenza dell'aver tolto `edited`: (1) niente `createWorkflowDispatch` quando la HEAD non ha run, perche' il `tests.yml` di questo repo fa checkout del ref dispatchato senza `ref: inputs.head_sha` e testerebbe il codice di base mettendo il check sulla SHA di base; (2) la run bersaglio e' scelta anche per branch della PR ed evento `pull_request`: mai una run `push` dello stesso commit, ne' un dispatch test-only di `pr-autorebase.mjs` (senza `pr_number`, quindi senza contratto del body e senza review); (3) una run ancora in volo e partita PRIMA dell'edit viene cancellata e rieseguita (poteva aver letto il body vecchio), invece di essere classificata prima che i suoi step falliti esistano; lo stato si rilegge prima di cancellare e un 409 (run appena conclusa) porta alla classificazione normale; una run partita DOPO l'edit, conclusa o no, non si tocca; (4) anche un'ultima run `cancelled`/`timed_out` viene rieseguita, perche' dopo l'edit nessun altro evento riporterebbe la HEAD a un verdetto; (5) una run VERDE viene rieseguita se il body nuovo viola il contratto, valutato con `scripts/lib/pr-body-contract-eval.mjs` dal checkout del branch base (zero-Claude), cosi' il check richiesto torna rosso prima che l'auto-merge nativo fonda un body rotto; la review non si rifa' su un body che passa il contratto, per la politica ratificata sul sito con valerielinc-ops/frontaliere-si-o-no#9118. Il sito ha gli stessi buchi (2)-(4), mascherati finche' il suo `tests.yml` aveva `edited`: la risalita va fatta la'.",
       "baseline": {
-        "site": "c4c5c45669fbe69d",
-        "corpus": "c4c5c45669fbe69d",
-        "alignedAt": "2026-09-10"
+        "site": "746f8ace38ffe2f2",
+        "corpus": "b18f1396f2472489",
+        "alignedAt": "2026-09-19"
       }
     },
     {
