@@ -122,7 +122,7 @@ export const EXPECTED_GROUPS = countCrawlerGroups();
 /** La soglia e' una FRAZIONE della flotta, non un assoluto. Vedi MIN_GROUPS_PER_DAY. */
 export const MIN_COVERAGE_FRACTION = 0.5;
 
-function gh(args, fallback = '') {
+function gh(args, fallback = null) {
   try {
     return execFileSync('gh', args, {
       encoding: 'utf8',
@@ -169,6 +169,45 @@ export function groupDeliveries(rows, nowMs = Date.now()) {
     console.warn(`[fleet-stall] ${future} consegne con data nel futuro scartate (clock skew?).`);
   }
   return out.sort((a, b) => b.atMs - a.atMs);
+}
+
+/**
+ * Decodifica il TSV di `gh api` senza confondere una risposta VUOTA con un
+ * errore di lettura.
+ *
+ * E' la distinzione su cui si regge l'allarme: `''` = API raggiunta e nessuna
+ * consegna nella finestra (cioe' lo stallo totale, il caso peggiore, che deve
+ * SUONARE); `null` = il wrapper `gh()` ha fallito e il verdetto deve restare
+ * fail-open. Prima erano lo stesso valore e il caso peggiore usciva zitto.
+ *
+ * Ogni riga e' `<iso-date>\t<prima riga del messaggio>`. Si ricostruisce la
+ * forma dell'API perche' `groupDeliveries` resta puro su quella forma ed e' la
+ * funzione che i test esercitano senza rete. Una riga = un record, prodotta da
+ * `--jq ... | @tsv`: la versione precedente incollava gli array di
+ * `--paginate` con una regex (`/\]\s*\[/`) e li riparsava, fragile per
+ * costruzione — una pagina finale vuota, uno spazio diverso o un `][` dentro
+ * un messaggio di commit rendevano il JSON non parsabile, e il fail-open
+ * trasformava l'errore in SILENZIO invece che in un allarme.
+ *
+ * @param {string|null|undefined} raw
+ * @returns {{rows: Array<{commit: {message: string, committer: {date: string}}}>, readable: boolean, bad: number}}
+ */
+export function parseDeliveryRows(raw) {
+  if (raw === null || raw === undefined) return { rows: [], readable: false, bad: 0 };
+  const rows = [];
+  let bad = 0;
+  for (const line of String(raw).split('\n')) {
+    if (!line.trim()) continue;
+    const tab = line.indexOf('\t');
+    if (tab === -1) { bad += 1; continue; }
+    const date = line.slice(0, tab);
+    const message = line.slice(tab + 1);
+    if (!date) { bad += 1; continue; }
+    rows.push({ commit: { message, committer: { date } } });
+  }
+  // Una riga rotta NON invalida la lettura: il conteggio scende e al massimo
+  // l'allarme suona in anticipo, che e' il verso giusto in cui sbagliare.
+  return { rows, readable: rows.length > 0 || String(raw).trim() === '', bad };
 }
 
 /**
@@ -284,39 +323,13 @@ async function main() {
       // parsing per riga.
       '--paginate', '--jq',
       '.[] | [(.commit.committer.date // ""), ((.commit.message // "") | split("\n")[0])] | @tsv'],
-    '',
+    // `null`, NON `''`: zero consegne e' il guasto che questo script esiste per
+    // vedere, e con `''` come fallback era indistinguibile da un `gh` fallito.
+    null,
   );
-  let rows = [];
-  let readable = false;
-  if (raw) {
-    // Una riga = un oggetto JSON, prodotta da `--jq '.[]'`. La versione
-    // precedente incollava gli array di `--paginate` con una regex
-    // (`/\]\s*\[/`) e poi li riparsava: fragile per costruzione — una pagina
-    // finale vuota, uno spazio diverso o un `][` dentro una stringa del
-    // messaggio di commit rendevano il JSON non parsabile, e il fail-open
-    // trasformava l'errore in SILENZIO invece che in un allarme. Con una riga
-    // per oggetto non c'e' niente da ricucire.
-    // Ogni riga e' `<iso-date>\t<prima riga del messaggio>`. Si ricostruisce la
-    // forma dell'API perche' `groupDeliveries` resta puro su quella forma ed e'
-    // la funzione che i test esercitano senza rete.
-    const parsed = [];
-    let bad = 0;
-    for (const line of raw.split('\n')) {
-      if (!line.trim()) continue;
-      const tab = line.indexOf('\t');
-      if (tab === -1) { bad += 1; continue; }
-      const date = line.slice(0, tab);
-      const message = line.slice(tab + 1);
-      if (!date) { bad += 1; continue; }
-      parsed.push({ commit: { message, committer: { date } } });
-    }
-    if (bad > 0) {
-      console.warn(`[fleet-stall] ${bad} righe malformate scartate su ${parsed.length + bad}.`);
-    }
-    // Una riga rotta NON invalida la lettura: il conteggio scende e al massimo
-    // l'allarme suona in anticipo, che e' il verso giusto in cui sbagliare.
-    rows = parsed;
-    readable = parsed.length > 0 || raw.trim() === '';
+  const { rows, readable, bad } = parseDeliveryRows(raw);
+  if (bad > 0) {
+    console.warn(`[fleet-stall] ${bad} righe malformate scartate su ${rows.length + bad}.`);
   }
   if (!readable) {
     console.warn('[fleet-stall] storia dei commit del sito illeggibile → nessun verdetto (fail-open).');
