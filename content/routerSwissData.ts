@@ -2214,6 +2214,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'crediti-esercito-difesa-svizzera': { it: 'crediti-esercito-difesa-svizzera', en: 'swiss-army-defense-credits', de: 'schweiz-armee-verteidigungskredite', fr: 'credits-defense-armee-suisse' },
  'permesso-c-zugo-requisiti': { it: 'permesso-c-zugo-requisiti', en: 'permesso-c-zugo-requirements', de: 'permesso-c-zugo-anforderungen', fr: 'permesso-c-zugo-conditions' },
  'borse-studio-zugo-guide': { it: 'borse-studio-zugo-guide', en: 'zug-scholarships-guide', de: 'zug-stipendien-leitfaden', fr: 'bourses-etudes-zug-guide' },
+ 'suissenegece-respinge-tasse-profitti': { it: 'suissenegece-respinge-tasse-profitti', en: 'suissenegece-rejects-profit-taxes', de: 'suissenegece-lehnt-gewinnsteuern-ab', fr: 'suissenegece-rejette-taxes-benefices' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

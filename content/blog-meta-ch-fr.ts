@@ -6575,6 +6575,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.borse-studio-zugo-guide.title': 'Bourses Canton Zoug : exigences et montants',
     'blog.article.borse-studio-zugo-guide.excerpt': 'Guide pratique sur les bourses et les prêts dans le canton de Zoug : conditions d\'accès, montants maximaux et délais de dépôt des demandes.',
     'blog.article.borse-studio-zugo-guide.imageAlt': 'Étudiants étudiant dans une bibliothèque suisse moderne',
+    'blog.article.suissenegece-respinge-tasse-profitti.title': 'Suissenégoce rejette de nouvelles taxes sur les bénéfices',
+    'blog.article.suissenegece-respinge-tasse-profitti.excerpt': 'L\'association rejette toute hypothèse d\'imposition supplémentaire sur les bénéfices des entreprises du secteur des matières premières.',
+    'blog.article.suissenegece-respinge-tasse-profitti.imageAlt': 'L\'association Suissenégoce contre les taxes supplémentaires sur les bénéfices',
 };
 
 export default blogMetaChFr;

@@ -6575,6 +6575,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.borse-studio-zugo-guide.title': 'Canton Zug Scholarships: Requirements and Amounts',
     'blog.article.borse-studio-zugo-guide.excerpt': 'Practical guide on scholarships and loans in the Canton of Zug: access requirements, maximum amounts and deadlines for submitting applications.',
     'blog.article.borse-studio-zugo-guide.imageAlt': 'Students studying in a modern Swiss library',
+    'blog.article.suissenegece-respinge-tasse-profitti.title': 'Suissenégoce rejects new taxes on profits',
+    'blog.article.suissenegece-respinge-tasse-profitti.excerpt': 'The association rejects any hypothesis of additional taxation on the profits of companies in the raw materials sector.',
+    'blog.article.suissenegece-respinge-tasse-profitti.imageAlt': 'Suissenégoce association against extra profit taxes',
 };
 
 export default blogMetaChEn;

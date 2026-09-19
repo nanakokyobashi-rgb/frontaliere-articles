@@ -6575,6 +6575,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.borse-studio-zugo-guide.title': 'Stipendien Kanton Zug: Voraussetzungen und Beträge',
     'blog.article.borse-studio-zugo-guide.excerpt': 'Praxisleitfaden zu Stipendien und Darlehen im Kanton Zug: Zugangsvoraussetzungen, Höchstbeträge und Bewerbungsfristen.',
     'blog.article.borse-studio-zugo-guide.imageAlt': 'Studierende in einer modernen Schweizer Bibliothek',
+    'blog.article.suissenegece-respinge-tasse-profitti.title': 'Suissenégoce lehnt neue Gewinnsteuern ab',
+    'blog.article.suissenegece-respinge-tasse-profitti.excerpt': 'Der Verband lehnt jede Annahme einer zusätzlichen Besteuerung der Gewinne von Unternehmen der Rohstoffbranche ab.',
+    'blog.article.suissenegece-respinge-tasse-profitti.imageAlt': 'Verband Suissenégoce gegen zusätzliche Gewinnsteuern',
 };
 
 export default blogMetaChDe;

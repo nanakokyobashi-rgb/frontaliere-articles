@@ -19697,6 +19697,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'suissenegece-respinge-tasse-profitti',
+    category: 'fiscale',
+    date: '2026-09-19T01:32:55.474Z',
+    image: '/images/blog/suissenegece-respinge-tasse-profitti.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

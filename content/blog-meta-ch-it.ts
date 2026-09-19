@@ -6575,6 +6575,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.borse-studio-zugo-guide.title': 'Borse di studio Canton Zugo: requisiti e importi',
     'blog.article.borse-studio-zugo-guide.excerpt': 'Guida pratica su borse di studio e prestiti nel Canton Zugo: requisiti di accesso, importi massimi e termini per la presentazione delle domande.',
     'blog.article.borse-studio-zugo-guide.imageAlt': 'Studenti che studiano in una biblioteca svizzera moderna',
+    'blog.article.suissenegece-respinge-tasse-profitti.title': 'Suissenégoce respinge nuove tasse sui profitti',
+    'blog.article.suissenegece-respinge-tasse-profitti.excerpt': 'L\'associazione respinge ogni ipotesi di imposizione fiscale supplementare sui profitti delle aziende del settore delle materie prime.',
+    'blog.article.suissenegece-respinge-tasse-profitti.imageAlt': 'Associazione Suissenégoce contro le tasse extra sui profitti',
 };
 
 export default blogMetaChIt;

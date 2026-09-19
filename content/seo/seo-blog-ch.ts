@@ -85235,6 +85235,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-suissenegece-respinge-tasse-profitti': {
+    title: 'Suissenégoce respinge nuove tasse sui profitti',
+    description: 'L\'associazione Suissenégoce si oppone alle nuove tasse sui profitti nel commercio di materie prime. Nessun rischio di penuria petrolifera in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, suissenégoce, respinge, nuove, tasse',
+    ogTitle: 'Suissenégoce respinge le tasse extra sui profitti',
+    ogDescription: 'L\'associazione Suissenégoce si oppone fermamente all\'introduzione di nuove tasse sui profitti delle aziende di materie prime e trasporto marittimo in Svizzera.',
+    canonicalPath: '/articoli-svizzera/suissenegece-respinge-tasse-profitti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Suissenégoce respinge nuove tasse sui profitti",
+      "description": "L'associazione Suissenégoce si oppone alle nuove tasse sui profitti nel commercio di materie prime. Nessun rischio di penuria petrolifera in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/suissenegece-respinge-tasse-profitti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Associazione Suissenégoce contro le tasse extra sui profitti"
+      },
+      "datePublished": "2026-09-19T01:32:55+00:00",
+      "dateModified": "2026-09-19T01:32:55+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/suissenegece-respinge-tasse-profitti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
