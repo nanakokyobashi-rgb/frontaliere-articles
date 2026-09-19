@@ -145,6 +145,20 @@ test('il precondition failure condiviso con exit 43 non diventa un falso errore 
   }), null);
 });
 
+test('l\'eco del blocco shell non sopprime un failure reale dello stesso membro', () => {
+  const systemic = "echo \"::error::fust: crawl OK but the crawler group's shared deferred-commit precondition failed (exit 43).\"";
+  const log = [
+    groupLogLine('28:00.0000000', systemic),
+    groupLogLine('28:00.0100000', 'fust: crawler exited with status 1'),
+  ].join('\n');
+  assert.equal(isSystemicCrawlerFailureLog(log), false);
+  assert.deepEqual(crawlerFailuresFromLog(log), [{
+    slug: 'fust',
+    exitCode: 1,
+    lines: ['fust: crawler exited with status 1'],
+  }]);
+});
+
 test('un marker sistemico non nasconde un failure reale di un altro membro', () => {
   const log = [
     groupLogLine('28:00.0000000', "::error::fust: crawl OK but the crawler group's shared deferred-commit precondition failed (exit 43). Group-wide fault, identical for every sibling — step stays red, no per-crawler issue filed (systemic class)."),
@@ -474,6 +488,18 @@ test('#170: il filtro NON e\' un allowlist di workflow — il nome dello step e\
   assert.equal(DECLARED_SKIP_STEP_RE.test('Post-merge follow-up triage'), false);
   assert.equal(DECLARED_SKIP_STEP_RE.test('Pre-flight — quota backoff gate (zero-Claude)'), false,
     'il pre-flight e\' PROCEED-SAFE (continue-on-error) e non fallisce mai: non deve entrare nel filtro');
+});
+
+test('#1594: lo sweep non chiude una failure mentre l\'ultima run e\' rossa', () => {
+  const workflow = readFileSync(path.join(ROOT, '.github', 'workflows', 'needs-human-sweep.yml'), 'utf8');
+  assert.match(workflow, /actions:\s+read/, 'lo sweep deve poter leggere le run Actions');
+  assert.match(workflow, /gh issue view N --repo \$REPO --json body,comments,labels,createdAt/);
+  assert.match(workflow, /scripts\/ci\/close-recovered-failure-issues\.mjs/);
+  assert.match(workflow, /gh run list -w "\$workflow_name" -b main -L 100 --json databaseId,conclusion,status,createdAt/);
+  assert.match(workflow, /status == `completed`/);
+  assert.match(workflow, /conclusion == `success`/);
+  assert.match(workflow, /ultima run\/step è rossa, `cancelled`, assente o non leggibile/);
+  assert.match(workflow, /NON chiudere.*lascia l'issue aperta/);
 });
 
 // ───────────────────────────────────────────────────────────────────────────
