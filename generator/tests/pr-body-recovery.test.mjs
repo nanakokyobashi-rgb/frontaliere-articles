@@ -8,24 +8,33 @@ const recovery = read('.github/workflows/retry-code-check-after-body-edit.yml');
 const script = recovery.slice(recovery.indexOf('          script: |\n') + '          script: |\n'.length)
   .split('\n').map(line => line.replace(/^ {12}/, '')).join('\n');
 const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
-// The workflow waits for an in-flight run; keep the wait instant here.
+// The workflow waits for a cancelled run to settle; keep the wait instant here.
 process.env.BODY_RECOVERY_POLL_MS = '1';
 process.env.BODY_RECOVERY_WAIT_MS = '50';
 
-// `later`: statuses the run reports on successive polls after the first read.
-async function recover(bodyConclusion, status = 'completed', failedSteps = [], later = []) {
+const EDITED_AT = '2026-09-19T12:00:00Z';
+const BEFORE_EDIT = '2026-09-19T11:50:00Z';
+const AFTER_EDIT = '2026-09-19T12:01:00Z';
+
+// `later`: fields the run takes on successive reads after the first one.
+async function recover(bodyConclusion, status = 'completed', failedSteps = [], later = [], runOverrides = {}) {
   const reruns = [];
-  const run = { id: 42, run_attempt: 1, status, conclusion: status === 'completed' ? 'failure' : null };
+  const cancels = [];
+  const run = {
+    id: 42, run_attempt: 1, status, conclusion: status === 'completed' ? 'failure' : null,
+    head_branch: 'feature', event: 'pull_request', run_started_at: BEFORE_EDIT, ...runOverrides,
+  };
   const polls = [...later];
   const github = {
     rest: {
-      pulls: { get: async () => ({ data: { state: 'open', head: { sha: 'head' } } }) },
+      pulls: { get: async () => ({ data: { state: 'open', head: { sha: 'head', ref: 'feature' } } }) },
       actions: {
         listWorkflowRuns: 'runs', listJobsForWorkflowRun: 'jobs',
         getWorkflowRun: async () => {
           if (polls.length) Object.assign(run, polls.shift());
           return { data: { ...run } };
         },
+        cancelWorkflowRun: async ({ run_id }) => { cancels.push(run_id); },
         reRunWorkflow: async ({ run_id }) => { reruns.push(run_id); },
       },
     },
@@ -39,8 +48,10 @@ async function recover(bodyConclusion, status = 'completed', failedSteps = [], l
     }],
   };
   await new AsyncFunction('github', 'context', 'core', script)(github, {
-    repo: { owner: 'owner', repo: 'repo' }, payload: { pull_request: { number: 1, head: { sha: 'head' } } },
+    repo: { owner: 'owner', repo: 'repo' },
+    payload: { pull_request: { number: 1, head: { sha: 'head' }, updated_at: EDITED_AT } },
   }, { info() {}, warning() {} });
+  recover.lastCancels = cancels;
   return reruns;
 }
 
@@ -90,18 +101,34 @@ test('the review step names the recovery watches exist in tests.yml', () => {
   }
 });
 
-test('an edit during a running review waits for the run, then retries its body/review failure', async () => {
-  const done = { status: 'completed', conclusion: 'failure' };
-  assert.deepEqual(await recover('success', 'in_progress', ['Require approving Codex review'], [{ status: 'in_progress' }, done]), [42]);
-  assert.deepEqual(await recover('failure', 'queued', [], [done]), [42]);
-  // A run that ends green, or a new attempt started meanwhile, is not retried.
-  assert.deepEqual(await recover('success', 'in_progress', [], [{ status: 'completed', conclusion: 'success' }]), []);
-  assert.deepEqual(await recover('failure', 'in_progress', [], [{ run_attempt: 2 }]), []);
+test('a run still in flight from before the edit is cancelled and rerun on the new body', async () => {
+  const cancelled = { status: 'completed', conclusion: 'cancelled' };
+  assert.deepEqual(await recover('success', 'in_progress', [], [cancelled]), [42]);
+  assert.deepEqual(recover.lastCancels, [42]);
+  // Started after the edit (a push, our own rerun, a duplicate delivery):
+  // it already reads the current body, so it is neither cancelled nor rerun.
+  assert.deepEqual(await recover('success', 'in_progress', [], [], { run_started_at: AFTER_EDIT }), []);
+  assert.deepEqual(recover.lastCancels, []);
+  // Someone else restarted it meanwhile: nothing left to do here.
+  assert.deepEqual(await recover('success', 'in_progress', [], [{ run_attempt: 2 }]), []);
 });
 
-test('a passed body preserves both a later failure and running tests', async () => {
+test('a cancelled or timed-out latest run is rerun after an edit', async () => {
+  assert.deepEqual(await recover('success', 'completed', [], [], { conclusion: 'cancelled' }), [42]);
+  assert.deepEqual(await recover('success', 'completed', [], [], { conclusion: 'timed_out' }), [42]);
+  assert.deepEqual(await recover('success', 'completed', [], [], { conclusion: 'success' }), []);
+});
+
+test('only a run of this PR branch and a PR-bound event is a target', async () => {
+  assert.deepEqual(await recover('failure', 'completed', [], [], { head_branch: 'main', event: 'push' }), []);
+  assert.deepEqual(await recover('failure', 'completed', [], [], { head_branch: 'other' }), []);
+  assert.deepEqual(await recover('failure', 'completed', [], [], { event: 'workflow_dispatch' }), [42]);
+});
+
+test('a passed body preserves both a later failure and tests running on the current body', async () => {
   assert.deepEqual(await recover('success'), []);
-  assert.deepEqual(await recover('success', 'in_progress'), []);
+  assert.deepEqual(await recover('success', 'in_progress', [], [], { run_started_at: AFTER_EDIT }), []);
+  assert.deepEqual(recover.lastCancels, []);
 });
 
 test('both Codex entry points use the shared sandbox prerequisites', () => {

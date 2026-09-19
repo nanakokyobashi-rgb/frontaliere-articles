@@ -73,9 +73,10 @@ on:
   # uccideva per rimisurare lo stesso codice (13 run su 52 il 2026-09-19).
   # Il body corretto rientra comunque: `retry-code-check-after-body-edit.yml`
   # (pull_request_target: [edited]) riesegue la run della HEAD quando e' fallita
-  # sul contratto del body o sul solo gate della review, e la rerun rifa' la
-  # review perche' il guard qui sotto conta soltanto le review legate alla
-  # revisione CORRENTE del body. Stessa scelta del sito
+  # sul contratto del body o sul solo gate della review, quando e' finita
+  # cancelled/timed_out, o quando era ancora in volo dal body precedente
+  # (la cancella e la riesegue); la rerun rifa' la review perche' il guard qui
+  # sotto conta soltanto le review legate alla revisione CORRENTE del body. Stessa scelta del sito
   # (valerielinc-ops/frontaliere-si-o-no#9118).
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]

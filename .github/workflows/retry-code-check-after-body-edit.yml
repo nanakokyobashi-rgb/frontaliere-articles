@@ -4,10 +4,20 @@ run-name: 'Body recovery · PR #${{ github.event.pull_request.number }}'
 # API-only recovery on trusted main. It reruns the latest tests run of the
 # exact PR head, without executing any file/string from the PR.
 #
-# Corpus adaptation: no dispatch when the head has no run. The site version
-# dispatches tests.yml on the base ref, but this repo's tests.yml checks out
-# the dispatched ref (no `ref: inputs.head_sha`), so that run would test the
-# base code and publish its check on the base SHA, never on the PR head.
+# Since tests.yml no longer listens to `edited`, this is the ONLY path by
+# which a body correction re-enters the required check. Corpus adaptations of
+# the site twin (see the manifest reason):
+#  1. no dispatch when the head has no run: this repo's tests.yml checks out
+#     the dispatched ref, so a dispatch on the base would test base code and
+#     publish its check on the base SHA, never on the PR head;
+#  2. the run is selected on head SHA AND PR branch AND a PR-bound event, so a
+#     `push` run of the same commit on another branch is never the target;
+#  3. a run still in flight that started BEFORE the edit is cancelled and
+#     rerun (it may have read the old body), instead of being classified
+#     before its failed steps exist — the old `edited` trigger did the same
+#     via cancel-in-progress, but for every edit;
+#  4. a `cancelled` / `timed_out` latest run is rerun too: after an edit no
+#     other event would ever bring that head back to a verdict.
 on:
   pull_request_target:
     types: [edited]
@@ -24,85 +34,99 @@ jobs:
   recover:
     if: github.event.changes.body != null
     runs-on: ubuntu-latest
-    # Covers the wait below for a run still in flight (review p90 ~12 min).
-    timeout-minutes: 50
+    timeout-minutes: 10
     steps:
       - name: Retry a failed body or review gate on the current head
         uses: actions/github-script@v8
         env:
-          BODY_RECOVERY_POLL_MS: '30000'
-          BODY_RECOVERY_WAIT_MS: '2400000'
+          BODY_RECOVERY_POLL_MS: '5000'
+          BODY_RECOVERY_WAIT_MS: '300000'
         with:
           script: |
             const repo = context.repo;
             const number = context.payload.pull_request.number;
+            const editedAt = Date.parse(context.payload.pull_request.updated_at || '');
+            const pollMs = Number(process.env.BODY_RECOVERY_POLL_MS) || 5000;
+            const waitMs = Number(process.env.BODY_RECOVERY_WAIT_MS) || 300000;
+            const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
             const { data: pr } = await github.rest.pulls.get({ ...repo, pull_number: number });
             if (pr.state !== 'open' || pr.head.sha !== context.payload.pull_request.head.sha) return;
             const runs = await github.paginate(github.rest.actions.listWorkflowRuns, {
               ...repo, workflow_id: 'tests.yml', head_sha: pr.head.sha, per_page: 100,
             });
-            const latest = runs.sort((a, b) => b.id - a.id)[0];
+            // Only runs that validate THIS PR: same branch, PR-bound event.
+            const latest = runs
+              .filter(run => run.head_branch === pr.head.ref &&
+                ['pull_request', 'workflow_dispatch'].includes(run.event))
+              .sort((a, b) => b.id - a.id)[0];
             if (!latest) {
-              core.info(`No tests run exists on ${pr.head.sha}; the next push re-enters the code check.`);
+              core.info(`No tests run of PR #${number} exists on ${pr.head.sha}; the next push re-enters the code check.`);
               return;
             }
-            // Corpus adaptation: settle BEFORE classifying. The edit can land
-            // while the latest run is still queued or reviewing; its failed
-            // steps do not exist yet, and without `edited` on tests.yml no
-            // other event would ever retry it once it fails on the old body.
-            const pollMs = Number(process.env.BODY_RECOVERY_POLL_MS) || 30000;
-            const deadline = Date.now() + (Number(process.env.BODY_RECOVERY_WAIT_MS) || 2400000);
-            let settled = latest;
-            while (settled.status !== 'completed') {
-              if (Date.now() > deadline) {
-                core.warning(`Run ${latest.id} still ${settled.status} at the wait deadline; no retry.`);
+            const getRun = async () => (await github.rest.actions.getWorkflowRun({ ...repo, run_id: latest.id })).data;
+            const settle = async attempt => {
+              let run = await getRun();
+              for (const deadline = Date.now() + waitMs; run.status !== 'completed'; run = await getRun()) {
+                if (run.run_attempt !== attempt || Date.now() > deadline) return null;
+                await sleep(pollMs);
+              }
+              return run.run_attempt === attempt ? run : null;
+            };
+            let retryReason = '';
+            if (latest.status !== 'completed') {
+              // A run (or attempt) that started after the edit already reads
+              // the current body from the API: leave it alone. This also
+              // keeps a duplicate delivery from cancelling our own rerun.
+              const startedAt = Date.parse(latest.run_started_at || latest.created_at || '');
+              if (!Number.isFinite(editedAt) || !Number.isFinite(startedAt) || startedAt >= editedAt) {
+                core.info(`Run ${latest.id} started after the edit; it validates the current body.`);
                 return;
               }
-              await new Promise(resolve => setTimeout(resolve, pollMs));
-              ({ data: settled } = await github.rest.actions.getWorkflowRun({ ...repo, run_id: latest.id }));
-              // Another attempt started (push, rescuer, duplicate edit): it
-              // already reads the current body, nothing left to recover here.
-              if (settled.run_attempt !== latest.run_attempt) return;
+              await github.rest.actions.cancelWorkflowRun({ ...repo, run_id: latest.id });
+              const cancelled = await settle(latest.run_attempt);
+              if (!cancelled) {
+                core.warning(`Run ${latest.id} did not settle after cancel; no retry.`);
+                return;
+              }
+              retryReason = 'it was still running on the previous body';
+            } else if (['cancelled', 'timed_out'].includes(latest.conclusion)) {
+              retryReason = `it ended ${latest.conclusion} with no later verdict`;
+            } else if (latest.conclusion === 'failure') {
+              // Inspect the latest attempt only, never an old failure
+              // underneath a running retry. A passed preflight alone is not
+              // enough: the reviewer can also reject the body.
+              const jobs = await github.paginate(github.rest.actions.listJobsForWorkflowRun, {
+                ...repo, run_id: latest.id, filter: 'latest', per_page: 100,
+              });
+              const failedBody = jobs.some(job => job.steps?.some(step => step.name.startsWith('PR-body completeness + multi-issue Closes') &&
+                  step.conclusion === 'failure'));
+              const reviewFailureSteps = new Set([
+                'Require approving Codex review',
+                'Classify review gate failure',
+                'Fail when required review gate is skipped',
+              ]);
+              const failedJobs = jobs.filter(job => job.conclusion === 'failure');
+              const reviewOnlyFailure = failedJobs.length > 0 && failedJobs.every(job => {
+                const failedSteps = (job.steps ?? [])
+                  .filter(step => step.conclusion === 'failure')
+                  .map(step => step.name);
+                return failedSteps.length > 0 && failedSteps.every(name => reviewFailureSteps.has(name));
+              });
+              retryReason = failedBody
+                ? 'the body preflight failed'
+                : reviewOnlyFailure
+                  ? 'the review gate failed'
+                  : '';
             }
-            if (settled.conclusion !== 'failure') {
-              core.info(`Run ${latest.id} concluded ${settled.conclusion}; preserve the existing code verdict.`);
-              return;
-            }
-            // Inspect the latest attempt only, never an old failure underneath
-            // a running retry. A passed preflight alone is not enough: the
-            // reviewer can also reject the body, and that verdict otherwise
-            // remains attached to the unchanged head forever after an edit.
-            const jobs = await github.paginate(github.rest.actions.listJobsForWorkflowRun, {
-              ...repo, run_id: latest.id, filter: 'latest', per_page: 100,
-            });
-            const failedBody = jobs.some(job => job.steps?.some(step => step.name.startsWith('PR-body completeness + multi-issue Closes') &&
-                step.conclusion === 'failure'));
-            const reviewFailureSteps = new Set([
-              'Require approving Codex review',
-              'Classify review gate failure',
-              'Fail when required review gate is skipped',
-            ]);
-            const failedJobs = jobs.filter(job => job.conclusion === 'failure');
-            const reviewOnlyFailure = failedJobs.length > 0 && failedJobs.every(job => {
-              const failedSteps = (job.steps ?? [])
-                .filter(step => step.conclusion === 'failure')
-                .map(step => step.name);
-              return failedSteps.length > 0 && failedSteps.every(name => reviewFailureSteps.has(name));
-            });
-            const retryReason = failedBody
-              ? 'the body preflight failed'
-              : reviewOnlyFailure
-                ? 'the review gate failed'
-                : '';
             if (!retryReason) {
-              core.info('Body preflight and review gate did not fail exclusively; preserve the existing code verdict.');
+              core.info(`Run ${latest.id} (${latest.conclusion}) did not fail on the body or review alone; preserve the existing code verdict.`);
               return;
             }
-            // Recheck both head and attempt after reading jobs. Duplicate edit
-            // deliveries must not restart a retry that is already queued.
-            const [{ data: currentPr }, { data: currentRun }] = await Promise.all([
+            // Recheck both head and attempt right before the write. Duplicate
+            // edit deliveries must not restart a retry that is already queued.
+            const [{ data: currentPr }, currentRun] = await Promise.all([
               github.rest.pulls.get({ ...repo, pull_number: number }),
-              github.rest.actions.getWorkflowRun({ ...repo, run_id: latest.id }),
+              getRun(),
             ]);
             if (currentPr.state !== 'open' || currentPr.head.sha !== pr.head.sha ||
                 currentRun.status !== 'completed' || currentRun.run_attempt !== latest.run_attempt) return;

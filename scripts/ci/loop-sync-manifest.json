@@ -3930,10 +3930,10 @@
     {
       "path": ".github/workflows/retry-code-check-after-body-edit.yml",
       "mode": "adapted",
-      "reason": "Stesso recupero del sito dopo un body corretto: riesegue l'ultima run `tests` della HEAD quando e' fallita sul contratto del body o sul SOLO gate della review, ed e' l'unica via di rientro da quando `tests.yml` non ha piu' `edited` fra i trigger. Adattato su due punti. (1) Niente `createWorkflowDispatch` quando la HEAD non ha run. Il `tests.yml` di questo repo fa checkout del ref dispatchato senza `ref: inputs.head_sha`, quindi quel dispatch sul base ref testerebbe il codice di base e pubblicherebbe il check sulla SHA di base, mai sulla HEAD della PR (finding della review sulla PR #1613). (2) Aspetta che l'ultima run della HEAD sia `completed` PRIMA di classificarla (poll 30 s, tetto 40 min, job 50 min): senza `edited` su `tests.yml` un edit arrivato mentre la run e' ancora in coda o in review era perso, perche' gli step falliti non esistono ancora e nessun altro evento la riprende (secondo finding della stessa review). Il resto dello script e' quello del sito.",
+      "reason": "Stesso recupero del sito dopo un body corretto: riesegue l'ultima run `tests` della HEAD quando e' fallita sul contratto del body o sul SOLO gate della review, ed e' l'unica via di rientro da quando `tests.yml` non ha piu' `edited` fra i trigger. Adattato su quattro punti, tutti emersi dalla review della PR #1613 e tutti conseguenza dell'aver tolto `edited`: (1) niente `createWorkflowDispatch` quando la HEAD non ha run, perche' il `tests.yml` di questo repo fa checkout del ref dispatchato senza `ref: inputs.head_sha` e testerebbe il codice di base mettendo il check sulla SHA di base; (2) la run bersaglio e' scelta anche per branch della PR ed evento `pull_request`/`workflow_dispatch`, mai una run `push` dello stesso commit; (3) una run ancora in volo e partita PRIMA dell'edit viene cancellata e rieseguita (poteva aver letto il body vecchio), invece di essere classificata prima che i suoi step falliti esistano; una run partita dopo l'edit non si tocca; (4) anche un'ultima run `cancelled`/`timed_out` viene rieseguita, perche' dopo l'edit nessun altro evento riporterebbe la HEAD a un verdetto. Il sito ha gli stessi buchi (2)-(4), mascherati finche' il suo `tests.yml` aveva `edited`: la risalita va fatta la'.",
       "baseline": {
         "site": "746f8ace38ffe2f2",
-        "corpus": "e6ee3d844eb8e33a",
+        "corpus": "709a433bec66970b",
         "alignedAt": "2026-09-19"
       }
     },
