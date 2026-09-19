@@ -280,3 +280,45 @@ test('diff illeggibile: i 🔴 sul body cadono E la PR resta approvabile', { con
     fs.rmSync(tmpDir, { recursive: true, force: true });
   }
 });
+
+test('un anchor a INTERVALLO si valida riga per riga, non solo sul primo estremo', () => {
+  // `PR body:L5-9` copre righe che possono uscire da `## Non implementato`:
+  // tenere solo `5` declassava un finding che parla anche di quelle. Finding
+  // della review incrementale su #1629.
+  const body = [
+    '## Implementato',              // 1
+    '- Fa una cosa.',               // 2
+    '',                             // 3
+    '## Non implementato (ancora)', // 4
+    '- Cosa X: `per scelta`. **Motivo:** y. **Prossimo passo:** z.', // 5
+    '- Cosa Y: `per scelta`. **Motivo:** y. **Prossimo passo:** z.', // 6
+    '',                             // 7
+    '## Note',                      // 8
+    '- fuori dal dominio del contratto.', // 9
+  ].join('\n');
+  const inRange = classifyImportantFindings(
+    bodyFinding('PR body:L5-6', 'le due voci non tornano.'),
+    ['scripts/ci/review-scope.mjs'], null, { bodyContractPassed: true, prBody: body },
+  );
+  assert.equal(inRange.bodyDeclassified.length, 1, 'un intervallo tutto dentro la sezione si declassa');
+
+  const spanning = classifyImportantFindings(
+    bodyFinding('PR body:L5-9', 'queste righe non tornano.'),
+    ['scripts/ci/review-scope.mjs'], null, { bodyContractPassed: true, prBody: body },
+  );
+  assert.equal(spanning.bodyDeclassified.length, 0,
+    'L9 sta in `## Note`: il contratto non giudica quella riga');
+  assert.equal(spanning.blocking, true);
+
+  const reversed = classifyImportantFindings(
+    bodyFinding('PR body:L6-5', 'intervallo rovesciato.'),
+    ['scripts/ci/review-scope.mjs'], null, { bodyContractPassed: true, prBody: body },
+  );
+  assert.equal(reversed.bodyDeclassified.length, 0, 'un intervallo rovesciato si rifiuta');
+
+  const past = classifyImportantFindings(
+    bodyFinding('PR body:L5-99', 'intervallo oltre la fine.'),
+    ['scripts/ci/review-scope.mjs'], null, { bodyContractPassed: true, prBody: body },
+  );
+  assert.equal(past.bodyDeclassified.length, 0, 'una riga oltre la fine non e\' verificabile');
+});

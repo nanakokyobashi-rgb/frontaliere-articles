@@ -27,10 +27,12 @@ const ZERO_IMPORTANT_RE = /^(?:0|none|nessuno)\s*$/iu;
 // Anchor di un finding il cui unico riferimento e' la descrizione della PR.
 const PR_BODY_ANCHOR_RE = /^\s*(?:[-*]\s*)?`?PR body[:#]L?([1-9]\d*)(?:[-–]\d+)?(?=$|[`:\s])/iu;
 const PR_BODY_ANCHOR_LOOSE_RE = /`?PR body[:#]L?([1-9]\d*)/iu;
-// TUTTI gli anchor `PR body:L<n>` del finding, non solo il primo: un finding
-// che ne cita due, uno dentro `## Non implementato` e uno fuori, non e' un
-// finding di dominio del contratto e non si declassa.
-const PR_BODY_ANCHOR_ALL_RE = /`?PR body[:#]L?([1-9]\d*)/giu;
+// TUTTI gli anchor `PR body:L<n>` del finding, non solo il primo, e con
+// l'INTERVALLO quando c'e' (`PR body:L5-9`). Un anchor a intervallo che parte
+// dentro `## Non implementato` puo' finire fuori — per esempio su una riga di
+// `## Implementato` che il contratto non giudica — e tenerne solo l'estremo
+// iniziale declasserebbe un finding che parla anche di quell'altra riga.
+const PR_BODY_ANCHOR_ALL_RE = /`?PR body[:#]L?([1-9]\d*)(?:\s*[-–]\s*L?([1-9]\d*))?/giu;
 // Cio' che il contratto deterministico NON sa giudicare resta bloccante anche
 // se ancorato al body: il claim di performance senza baseline (REVIEW.md punto
 // 7) non e' una regola del contratto, e' una regola della review. La lista e'
@@ -210,7 +212,15 @@ export function isContractDomainBodyFinding(finding, prBody) {
   const text = String(finding?.text || '');
   if (NON_CONTRACT_BODY_RE.test(text)) return false;
   PR_BODY_ANCHOR_ALL_RE.lastIndex = 0;
-  const anchors = [...text.matchAll(PR_BODY_ANCHOR_ALL_RE)].map((match) => Number(match[1]));
+  const anchors = [];
+  for (const match of text.matchAll(PR_BODY_ANCHOR_ALL_RE)) {
+    const start = Number(match[1]);
+    const end = match[2] === undefined ? start : Number(match[2]);
+    // Un intervallo rovesciato o assurdo non e' un anchor che si possa
+    // verificare: si rifiuta invece di interpretarlo.
+    if (!Number.isFinite(start) || !Number.isFinite(end) || end < start) return false;
+    for (let line = start; line <= end; line += 1) anchors.push(line);
+  }
   const first = prBodyFindingLine(finding);
   if (first !== null && !anchors.includes(first)) anchors.push(first);
   if (anchors.length === 0) return false;
