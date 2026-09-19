@@ -33,6 +33,7 @@ import {
   fetchRunsBisected,
   parseRunListJson,
   ALWAYS_ESCALATE_WORKFLOWS,
+  isRecurrenceGatedWorkflow,
   gateForWorkflow,
   orderBySurveillanceFirst,
   capReached,
@@ -852,10 +853,25 @@ test('ogni nome della lista esiste come `name:` di un workflow reale', () => {
 });
 
 test('il gate di ricorrenza resta attivo per il rumore transiente della generazione', () => {
+  assert.equal(isRecurrenceGatedWorkflow('Generate Blog Article'), true);
+  assert.equal(isRecurrenceGatedWorkflow('fast-publish-article'), true);
+  assert.equal(isRecurrenceGatedWorkflow('Crawler Group 23 (sparse cross-repo execution)'), true);
   assert.equal(gateForWorkflow('Generate Blog Article', { gate: 3 }), 3);
   assert.equal(gateForWorkflow('Crawler Group 23 (sparse cross-repo execution)', { gate: 3 }), 3);
   // Un articolo perso non aspetta la terza perdita: contratto preesistente.
   assert.equal(gateForWorkflow('Generate Blog Article', { gate: 3, lost: true }), -1);
+});
+
+test('i workflow ordinari non vengono ritardati da una finestra di gate fissa', () => {
+  for (const name of [
+    'Bing SEO title closed loop',
+    'Generate Daily Brief Edition (Bollettino del Frontaliere)',
+    'Refresh Border-Wait Ranking Digest (weekly)',
+    'un workflow nuovo a cron giornaliero',
+  ]) {
+    assert.equal(isRecurrenceGatedWorkflow(name), false, name);
+    assert.equal(gateForWorkflow(name, { gate: 3 }), -1, name);
+  }
 });
 
 /**

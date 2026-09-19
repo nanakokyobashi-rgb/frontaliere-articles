@@ -31,12 +31,14 @@
  *    DELLA PR: lo vede il reviewer, blocca l'auto-merge e si risolve lì. Aprire
  *    anche una issue duplicherebbe il segnale su un canale che non lo chiude.
  *
- * 3. **Gate sui fallimenti consecutivi.** Il profilo di fallimento di questo
- *    repo è dominato dalla generazione articoli (misurato: 9 `Generate Blog
- *    Article` + 8 `fast-publish-article` su 18 fallimenti in 7 giorni), che
- *    dipende da provider LLM e rete ed è transiente per natura. Il primo blip
- *    resta una briciola `priority:low`; solo la ripetizione escala. Senza
- *    questo, il triage annegherebbe in rumore al primo giorno.
+ * 3. **Gate sui fallimenti consecutivi dei flussi rumorosi.** Il profilo di
+ *    fallimento di questo repo è dominato dalla generazione articoli (misurato:
+ *    9 `Generate Blog Article` + 8 `fast-publish-article` su 18 fallimenti in
+ *    7 giorni), che dipende da provider LLM e rete ed è transiente per natura.
+ *    Il primo blip di quei flussi resta una briciola `priority:low`; solo la
+ *    ripetizione escala. Il gate non si applica ai workflow ordinari: un cron
+ *    giornaliero o settimanale non può accumulare tre eventi dentro la finestra
+ *    fissa di 48 ore e restare invisibile per costruzione.
  *
  * ## Anti-doppio-conteggio
  *
@@ -220,6 +222,23 @@ const IGNORE = parseIgnoreList(process.env.IGNORE_WORKFLOWS);
  */
 const PR_GATE_WORKFLOWS = new Set(['tests', 'Generator CI']);
 
+/**
+ * Il gate di ricorrenza è una protezione dal rumore, non il default del
+ * reporter. Solo i flussi osservati come ad alta frequenza e transitori lo
+ * usano: un workflow nuovo o lento deve aprire il primo allarme, altrimenti
+ * la cadenza del suo cron diventa una soglia implicita di silenzio.
+ *
+ * I crawler group hanno un nome strutturale condiviso; tenerli in una regex
+ * evita una lista di 23 nomi che potrebbe divergere dal roster. I due workflow
+ * di generazione ad alta frequenza restano espliciti perché non condividono il
+ * prefisso dei crawler.
+ */
+const RECURRENCE_GATED_WORKFLOW_RE = /^(?:Generate Blog Article|fast-publish-article|Crawler Group \d{2} \(sparse cross-repo execution\))$/;
+
+export function isRecurrenceGatedWorkflow(name) {
+  return RECURRENCE_GATED_WORKFLOW_RE.test(String(name || ''));
+}
+
 // Workflow di SORVEGLIANZA della pipeline: il loro rosso E' l'allarme, non il
 // rumore transiente per cui esiste il gate di ricorrenza. Tenerli nel gate li
 // rende invisibili, ed e' misurato: il watchdog della coda translate e' stato
@@ -271,7 +290,7 @@ export function orderBySurveillanceFirst(entries) {
 
 /** `-1` disattiva il gate di ricorrenza: prima issue vera al primo rosso. */
 export function gateForWorkflow(name, { lost = false, gate = undefined } = {}) {
-  if (lost || ALWAYS_ESCALATE_WORKFLOWS.has(name)) return -1;
+  if (lost || ALWAYS_ESCALATE_WORKFLOWS.has(name) || !isRecurrenceGatedWorkflow(name)) return -1;
   return gate === undefined ? GATE : gate;
 }
 
@@ -1462,11 +1481,12 @@ async function main() {
       priority: lost ? 1 : 2,
       labels: ['Bug'],
       workflow: name,
-      // Il primo blip resta una briciola priority:low; solo la ripetizione
-      // dentro la finestra escala. È ciò che tiene fuori dal triage il rumore
-      // transiente della generazione articoli. Non vale per un articolo perso:
-      // `-1` disattiva il gate (vedi consecutiveGate in github-issue-creator.mjs),
-      // perche' aspettare la terza perdita significa buttarne tre.
+      // Il primo blip resta una briciola priority:low solo per i flussi ad alta
+      // frequenza classificati da gateForWorkflow. I workflow ordinari, inclusi
+      // i cron giornalieri e settimanali, arrivano alla prima issue: `-1`
+      // disattiva il gate (vedi consecutiveGate in github-issue-creator.mjs).
+      // Non vale per un articolo perso: aspettare la terza perdita significa
+      // buttarne tre.
       consecutiveGate: gateForWorkflow(name, { lost: Boolean(lost) }),
     });
     // `if (res) opened++` contava come consegnati anche i due casi di
