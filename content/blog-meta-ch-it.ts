@@ -6578,6 +6578,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.suissenegece-respinge-tasse-profitti.title': 'Suissenégoce respinge nuove tasse sui profitti',
     'blog.article.suissenegece-respinge-tasse-profitti.excerpt': 'L\'associazione respinge ogni ipotesi di imposizione fiscale supplementare sui profitti delle aziende del settore delle materie prime.',
     'blog.article.suissenegece-respinge-tasse-profitti.imageAlt': 'Associazione Suissenégoce contro le tasse extra sui profitti',
+    'blog.article.taf-respinge-ricorso-liste-ospedaliere.title': 'Assicuratori: no a ricorsi su intera lista ospedaliera',
+    'blog.article.taf-respinge-ricorso-liste-ospedaliere.excerpt': 'Il Tribunale amministrativo federale ha respinto il ricorso di prio.swiss contro la lista ospedaliera del Canton Svitto. Possibili solo ricorsi mirati.',
+    'blog.article.taf-respinge-ricorso-liste-ospedaliere.imageAlt': 'Tribunale amministrativo federale di San Gallo',
 };
 
 export default blogMetaChIt;

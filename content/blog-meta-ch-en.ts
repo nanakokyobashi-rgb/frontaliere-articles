@@ -6578,6 +6578,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.suissenegece-respinge-tasse-profitti.title': 'Suissenégoce rejects new taxes on profits',
     'blog.article.suissenegece-respinge-tasse-profitti.excerpt': 'The association rejects any hypothesis of additional taxation on the profits of companies in the raw materials sector.',
     'blog.article.suissenegece-respinge-tasse-profitti.imageAlt': 'Suissenégoce association against extra profit taxes',
+    'blog.article.taf-respinge-ricorso-liste-ospedaliere.title': 'Insurers: no recourse to the entire hospital list',
+    'blog.article.taf-respinge-ricorso-liste-ospedaliere.excerpt': 'The Federal Administrative Court dismissed the appeal of prio.swiss against the hospital list of the Canton of Switzerland. Only targeted appeals are possible.',
+    'blog.article.taf-respinge-ricorso-liste-ospedaliere.imageAlt': 'Federal Administrative Court in St. Gallen',
 };
 
 export default blogMetaChEn;

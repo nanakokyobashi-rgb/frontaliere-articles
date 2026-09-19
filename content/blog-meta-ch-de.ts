@@ -6578,6 +6578,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.suissenegece-respinge-tasse-profitti.title': 'Suissenégoce lehnt neue Gewinnsteuern ab',
     'blog.article.suissenegece-respinge-tasse-profitti.excerpt': 'Der Verband lehnt jede Annahme einer zusätzlichen Besteuerung der Gewinne von Unternehmen der Rohstoffbranche ab.',
     'blog.article.suissenegece-respinge-tasse-profitti.imageAlt': 'Verband Suissenégoce gegen zusätzliche Gewinnsteuern',
+    'blog.article.taf-respinge-ricorso-liste-ospedaliere.title': 'Versicherer: Nein zu Beschwerden auf der gesamten Spitalliste',
+    'blog.article.taf-respinge-ricorso-liste-ospedaliere.excerpt': 'Das Bundesverwaltungsgericht hat die Beschwerde von prio.swiss gegen die Spitalliste des Kantons Schwyz abgewiesen. Nur zielgerichtete Rechtsbehelfe sind möglich.',
+    'blog.article.taf-respinge-ricorso-liste-ospedaliere.imageAlt': 'Bundesverwaltungsgericht in St. Gallen',
 };
 
 export default blogMetaChDe;

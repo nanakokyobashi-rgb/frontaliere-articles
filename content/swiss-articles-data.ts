@@ -19706,6 +19706,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'taf-respinge-ricorso-liste-ospedaliere',
+    category: 'novita',
+    date: '2026-09-19T01:41:43.216Z',
+    image: '/images/blog/taf-respinge-ricorso-liste-ospedaliere.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

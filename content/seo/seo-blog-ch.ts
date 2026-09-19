@@ -85274,6 +85274,44 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-taf-respinge-ricorso-liste-ospedaliere': {
+    title: 'Assicuratori: no a ricorsi su intera lista ospedaliera',
+    description: 'Il Tribunale amministrativo federale respinge il ricorso di prio.swiss: le casse malati non possono contestare l\'intera lista ospedaliera del Canton Svitto.',
+    keywords: 'frontalieri, ticino, svizzera, italia, assicuratori, ricorsi, intera, lista',
+    ogTitle: 'TAF: gli assicuratori non possono contestare la lista ospedaliera in toto',
+    ogDescription: 'Il Tribunale amministrativo federale ha respinto il ricorso dell\'Associazione degli assicuratori malattia svizzeri contro la pianificazione ospedaliera del Canton Svitto. Scopri i dettagli sulle nuove regole per le impugnazioni sanitarie.',
+    canonicalPath: '/articoli-svizzera/taf-respinge-ricorso-liste-ospedaliere/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Assicuratori: no a ricorsi su intera lista ospedaliera",
+      "description": "Il Tribunale amministrativo federale respinge il ricorso di prio.swiss: le casse malati non possono contestare l'intera lista ospedaliera del Canton Svitto.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/taf-respinge-ricorso-liste-ospedaliere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Tribunale amministrativo federale di San Gallo"
+      },
+      "datePublished": "2026-09-19T01:41:43+00:00",
+      "dateModified": "2026-09-19T01:41:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/taf-respinge-ricorso-liste-ospedaliere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
 };
 
 export default BLOG_CH_SEO_METADATA;
