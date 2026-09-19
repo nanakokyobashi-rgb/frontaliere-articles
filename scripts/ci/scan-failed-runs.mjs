@@ -20,7 +20,7 @@
  * e usa le STESSE convenzioni di titolo (`Workflow Failure: <nome>`) perché il
  * reconciler le richiuda da solo quando il workflow torna verde.
  *
- * ## I tre filtri, e perché ciascuno esiste
+ * ## I filtri, e perché ciascuno esiste
  *
  * 1. **Solo `conclusion == failure`.** Mai `cancelled`. Il 2026-08-06 un
  *    disservizio GitHub ha cancellato in coda ogni run del repo per ore: senza
@@ -39,6 +39,14 @@
  *    ripetizione escala. Il gate non si applica ai workflow ordinari: un cron
  *    giornaliero o settimanale non può accumulare tre eventi dentro la finestra
  *    fissa di 48 ore e restare invisibile per costruzione.
+ *
+ * 4. **Gruppi crawler: recovery per membro.** Un gruppo contiene molti worker
+ *    nello stesso job e il suo rosso aggregato non identifica il crawler che ha
+ *    fallito. Per i gruppi si legge il log solo dopo aver trovato il job rosso:
+ *    quando c'è un solo exit non sistemico, l'issue usa `Crawler Failure: Run
+ *    <slug>`. Il reconciler già esistente può così verificare lo step `Run
+ *    <slug>` della run successiva; il verde dell'aggregatore da solo non è più
+ *    una prova sufficiente. Con più membri falliti il report resta aggregato.
  *
  * ## Anti-doppio-conteggio
  *
@@ -235,8 +243,27 @@ const PR_GATE_WORKFLOWS = new Set(['tests', 'Generator CI']);
  */
 const RECURRENCE_GATED_WORKFLOW_RE = /^(?:Generate Blog Article|fast-publish-article|Crawler Group \d{1,2} \(sparse cross-repo execution\))$/;
 
+// I gruppi crawler condividono un job e un esito aggregato. Un issue aperto sul
+// solo nome del gruppo viene quindi chiuso dal reconciler quando il contenitore
+// torna verde, anche se il segnale utile era il membro che aveva fallito. Il
+// titolo per-membro qui sotto riusa invece il percorso `Crawler Failure: Run
+// <slug>` già capito da close-recovered-failure-issues.mjs: quel guard legge lo
+// step `Run <slug>` e non il verde complessivo del gruppo.
+export const CRAWLER_GROUP_WORKFLOW_RE = /^Crawler Group \d{1,2} \(sparse cross-repo execution\)$/;
+const CRAWLER_MEMBER_FAILURE_RE = /(?:^|[^a-z0-9-])([a-z0-9][a-z0-9-]*):\s*crawler exited with status\s+([1-9]\d*)\b/gi;
+const NON_CRAWLER_FAILURE_EXIT_CODES = new Set([42, 43, 44]);
+const SYSTEMIC_CRAWLER_FAILURE_RE = /(?:^|[^a-z0-9-])([a-z0-9][a-z0-9-]*):\s*(?:crawl OK but the crawler group's shared deferred-commit precondition failed|shared group precondition failure)\s*\(exit\s*43\)/i;
+
 export function isRecurrenceGatedWorkflow(name) {
   return RECURRENCE_GATED_WORKFLOW_RE.test(String(name || ''));
+}
+
+export function isCrawlerGroupWorkflow(name) {
+  return CRAWLER_GROUP_WORKFLOW_RE.test(String(name || ''));
+}
+
+export function isSystemicCrawlerFailureLog(text) {
+  return SYSTEMIC_CRAWLER_FAILURE_RE.test(String(text || ''));
 }
 
 // Workflow di SORVEGLIANZA della pipeline: il loro rosso E' l'allarme, non il
@@ -1137,6 +1164,101 @@ export function cleanLogLine(line) {
   return String(line).replace(/\r$/, '').replace(ANSI_RE, '').replace(LOG_PREFIX_RE, '').trimEnd();
 }
 
+/**
+ * Membri crawler che hanno davvero restituito un errore dal worker del gruppo.
+ *
+ * I codici 42/43/44 sono esiti del commit/lease condiviso, non un errore del
+ * crawler: trasformarli in `Crawler Failure: Run ...` attribuirebbe il guasto
+ * al membro sbagliato e farebbe osservare allo closer lo step sbagliato. La
+ * lista è deduplicata perché Actions stampa sia l'echo dello shell block sia
+ * la riga eseguita.
+ */
+export function crawlerFailuresFromLog(text) {
+  const systemicSlugs = new Set();
+  for (const raw of String(text || '').split('\n')) {
+    const marker = SYSTEMIC_CRAWLER_FAILURE_RE.exec(cleanLogLine(raw));
+    if (marker) systemicSlugs.add(marker[1].toLowerCase());
+  }
+  const failures = new Map();
+  for (const raw of String(text || '').split('\n')) {
+    const line = cleanLogLine(raw);
+    CRAWLER_MEMBER_FAILURE_RE.lastIndex = 0;
+    for (const match of line.matchAll(CRAWLER_MEMBER_FAILURE_RE)) {
+      const slug = match[1].toLowerCase();
+      const exitCode = Number(match[2]);
+      if (NON_CRAWLER_FAILURE_EXIT_CODES.has(exitCode)) continue;
+      // Il finalizer `always()` può stampare sia il marker sistemico di uno
+      // slug (exit 43 convertito in exit 1) sia il failure reale di un altro
+      // membro. Sopprimiamo quindi solo gli slug nominati dal marker, non
+      // l'intero log del gruppo.
+      if (systemicSlugs.has(slug)) continue;
+      if (!failures.has(slug)) failures.set(slug, { slug, exitCode, lines: [] });
+      const failure = failures.get(slug);
+      if (failure.lines.length < 6 && line && !failure.lines.includes(line)) failure.lines.push(line);
+    }
+  }
+  return [...failures.values()];
+}
+
+/**
+ * Issue diagnostica per un gruppo con un solo membro fallito.
+ *
+ * Con più membri non scegliamo arbitrariamente un colpevole: il chiamante
+ * resta sul titolo aggregato, che è più onesto del binding di un alert a uno
+ * step non determinato. La forma per-membro è invece recuperabile dal guard
+ * esistente, perché `Crawler Failure: Run <slug>` viene confrontato con lo
+ * step omonimo della run successiva.
+ */
+export function buildCrawlerFailureReport({ log, run, workflowName, jobLines } = {}) {
+  if (!isCrawlerGroupWorkflow(workflowName)) return null;
+  const failures = crawlerFailuresFromLog(log);
+  if (failures.length !== 1) return null;
+
+  const [{ slug, exitCode, lines }] = failures;
+  const group = workflowName || 'crawler group';
+  const logEvidence = String(log || '')
+    .split('\n')
+    .map(cleanLogLine)
+    .filter((line) => /crawler failed:/i.test(line) || new RegExp(
+      `(?:^|[^a-z0-9-])${slug.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}:\\s*crawler exited with status\\s+\\d+\\b`,
+      'i',
+    ).test(line));
+  const evidence = [...new Set([...(logEvidence.length ? logEvidence : lines)])];
+  if (evidence.length === 0) evidence.push(`${slug}: crawler exited with status ${exitCode}`);
+  const description = [
+    `Il gruppo **${group}** ha un membro crawler fallito: **\`${slug}\`**.`,
+    '',
+    `- Run: ${run?.url || '?'}`,
+    `- Branch: \`${run?.headBranch || '?'}\``,
+    `- Evento: \`${run?.event || '?'}\``,
+    `- Concluso: ${run?.updatedAt || run?.createdAt || '?'}`,
+    `- Exit del crawler: \`${exitCode}\``,
+    '',
+    '**Job falliti del gruppo**',
+    jobLines || '_(nessun job fallito riportato dall\'API)_',
+    '',
+    '**Estratto diagnostico del membro**',
+    '',
+    '```',
+    ...evidence,
+    '```',
+    '',
+    'Questo alert usa il titolo per-membro `Crawler Failure: Run '
+      + slug + '`, così il recupero richiede che lo step `Run '
+      + slug + '` di una run successiva sia verde; il verde aggregato del '
+      + 'gruppo, da solo, non chiude più questa diagnosi.',
+    '',
+    'Issue aperta automaticamente da `scan-failed-runs.mjs`.',
+  ].join('\n');
+
+  return {
+    title: `Crawler Failure: Run ${slug}`,
+    description,
+    slug,
+    exitCode,
+  };
+}
+
 // `git rebase` quando il conflitto e' reale.
 const CONFLICT_RE = /CONFLICT \([^)]*\): Merge conflict in (\S.*)$/;
 // L'avviso di scripts/lib/rebase-onto-remote.sh: e' IL path che ha fatto
@@ -1298,12 +1420,16 @@ function workflowPathOfRun(runId) {
 }
 
 /**
- * Log dei job falliti della run. Scaricato SOLO quando uno step fallito si
- * chiama come un push: e' l'unica classe per cui questo modulo sa dire
- * qualcosa di piu' della issue generica, e un log per run e' comunque costoso.
+ * Log dei job falliti della run. Oltre agli step di push, lo scarichiamo per i
+ * gruppi crawler: il loro step rosso è un aggregatore e il nome del membro
+ * fallito esiste solo nel log. Per gli altri workflow resta la issue generica.
  */
-function failedRunLog(runId, jobs) {
-  if (!jobs.some((j) => /push/i.test(j.step || ''))) return '';
+function failedRunLog(runId, jobs, workflowName = '') {
+  // I gruppi crawler sono l'unica classe in cui il job fallito è un aggregatore:
+  // senza il log il report perde il nome del membro e il closer può osservare
+  // solo il verde del contenitore. Il log resta limitato alle run che possono
+  // produrre una diagnosi ricca, non a ogni workflow rosso.
+  if (!isCrawlerGroupWorkflow(workflowName) && !jobs.some((j) => /push/i.test(j.step || ''))) return '';
   return gh(['run', 'view', String(runId), '--repo', REPO, '--log-failed'], '');
 }
 
@@ -1435,22 +1561,34 @@ async function main() {
 
     // Il rilevatore ricco gira PRIMA della dedup: e' il titolo che decide quale
     // issue guardare, e per questa classe il titolo non e' piu' quello generico.
+    const failureLog = failedRunLog(run.databaseId, jobs, name);
     const lost = buildLostArticleReport({
-      log: failedRunLog(run.databaseId, jobs),
+      log: failureLog,
       run,
       workflowName: name,
       workflowPath: workflowPathOfRun(run.databaseId),
       jobLines,
     });
 
-    const title = lost ? lost.title : `Workflow Failure: ${name}`;
+    // Per i gruppi con un solo membro fallito, il titolo specifico porta il
+    // segnale nel percorso di recovery per-step. Con più membri o un log non
+    // leggibile conserviamo l'alert aggregato: inventare un colpevole sarebbe
+    // peggio di lasciare il gruppo in triage.
+    const crawler = lost ? null : buildCrawlerFailureReport({
+      log: failureLog,
+      run,
+      workflowName: name,
+      jobLines,
+    });
+    const report = lost || crawler;
+    const title = report ? report.title : `Workflow Failure: ${name}`;
 
     if (alreadyReported(title, run.url)) {
       console.log(`[scan-failed-runs] ${name}: run ${run.databaseId} già segnalata → skip (evita doppio conteggio nel gate).`);
       continue;
     }
 
-    const description = lost ? lost.description : [
+    const description = report ? report.description : [
       `Il workflow **${name}** è fallito.`,
       '',
       `- Run: ${run.url}`,

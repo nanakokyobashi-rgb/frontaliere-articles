@@ -13,6 +13,10 @@ import { fileURLToPath } from 'node:url';
 import {
   isReportableRun,
   cleanLogLine,
+  crawlerFailuresFromLog,
+  buildCrawlerFailureReport,
+  isCrawlerGroupWorkflow,
+  isSystemicCrawlerFailureLog,
   conflictedPathsFromLog,
   blockingConflictPath,
   articleWasGenerated,
@@ -80,6 +84,109 @@ test('push fallito su tests/Generator CI direttamente su main è segnalato (#476
 
 test('pull_request resta escluso per qualunque workflow (invariante preesistente)', () => {
   assert.equal(isReportableRun({ ...base, workflowName: 'tests', event: 'pull_request', headBranch: 'main' }), false);
+});
+
+const CRAWLER_GROUP = 'Crawler Group 20 (sparse cross-repo execution)';
+const CRAWLER_RUN = {
+  url: 'https://github.com/nanakokyobashi-rgb/frontaliere-articles/actions/runs/35405281362',
+  headBranch: 'crawler-generation-shadow-35403879560-1',
+  event: 'workflow_dispatch',
+  updatedAt: '2026-09-19T01:28:01Z',
+};
+const groupLogLine = (t, s) => `crawler_group_20\tRun capri-holdings\t2026-09-19T01:${t}Z ${s}`;
+const GROUP_FAILURE_LOG = [
+  groupLogLine('27:19.6000000', '❌ Capri Holdings crawler failed: Workday Michael Kors empty search changed its total from 519 to 0 at offset 20'),
+  groupLogLine('28:00.0000000', 'capri-holdings: crawler exited with status 1'),
+  groupLogLine('28:00.1000000', 'capri-holdings: crawler exited with status 1'),
+].join('\n');
+
+test('un gruppo crawler ha un riconoscimento strutturale e non viene ridotto a un alert generico', () => {
+  assert.equal(isCrawlerGroupWorkflow(CRAWLER_GROUP), true);
+  assert.deepEqual(crawlerFailuresFromLog(GROUP_FAILURE_LOG), [{
+    slug: 'capri-holdings',
+    exitCode: 1,
+    lines: ['capri-holdings: crawler exited with status 1'],
+  }]);
+
+  const report = buildCrawlerFailureReport({
+    log: GROUP_FAILURE_LOG,
+    run: CRAWLER_RUN,
+    workflowName: CRAWLER_GROUP,
+    jobLines: '- `crawler_group_20` — step fallito: `Fail crawler group after all member outcomes`',
+  });
+  assert.ok(report);
+  assert.equal(report.title, 'Crawler Failure: Run capri-holdings');
+  assert.ok(TITLE_RE.test(report.title), 'il titolo deve entrare nel reconciler per-step esistente');
+  assert.match(report.description, /changed its total from 519 to 0 at offset 20/);
+  assert.match(report.description, /step `Run capri-holdings`/);
+});
+
+test('un esito di lease condiviso non attribuisce il fallimento a un crawler', () => {
+  const log = groupLogLine('28:00.0000000', 'fust: crawler exited with status 44').replaceAll('capri-holdings', 'fust');
+  assert.deepEqual(crawlerFailuresFromLog(log), []);
+  assert.equal(buildCrawlerFailureReport({
+    log,
+    run: CRAWLER_RUN,
+    workflowName: CRAWLER_GROUP,
+  }), null);
+});
+
+test('il precondition failure condiviso con exit 43 non diventa un falso errore per-membro', () => {
+  const log = [
+    groupLogLine('28:00.0000000', "::error::fust: crawl OK but the crawler group's shared deferred-commit precondition failed (exit 43). Group-wide fault, identical for every sibling — step stays red, no per-crawler issue filed (systemic class)."),
+    groupLogLine('28:00.0100000', 'fust: crawler exited with status 1'),
+  ].join('\n');
+  assert.equal(isSystemicCrawlerFailureLog(log), true);
+  assert.deepEqual(crawlerFailuresFromLog(log), []);
+  assert.equal(buildCrawlerFailureReport({
+    log,
+    run: CRAWLER_RUN,
+    workflowName: CRAWLER_GROUP,
+  }), null);
+});
+
+test('un marker sistemico non nasconde un failure reale di un altro membro', () => {
+  const log = [
+    groupLogLine('28:00.0000000', "::error::fust: crawl OK but the crawler group's shared deferred-commit precondition failed (exit 43). Group-wide fault, identical for every sibling — step stays red, no per-crawler issue filed (systemic class)."),
+    groupLogLine('28:00.0100000', 'fust: crawler exited with status 1'),
+    groupLogLine('28:01.0000000', '❌ Capri Holdings crawler failed: Workday Michael Kors empty search changed its total from 519 to 0 at offset 20'),
+    groupLogLine('28:01.0100000', 'capri-holdings: crawler exited with status 1'),
+  ].join('\n');
+  assert.deepEqual(crawlerFailuresFromLog(log), [{
+    slug: 'capri-holdings',
+    exitCode: 1,
+    lines: ['capri-holdings: crawler exited with status 1'],
+  }]);
+  const report = buildCrawlerFailureReport({
+    log,
+    run: CRAWLER_RUN,
+    workflowName: CRAWLER_GROUP,
+  });
+  assert.equal(report?.title, 'Crawler Failure: Run capri-holdings');
+});
+
+test('il report del gruppo 22 conserva la causa concreta del guard Fust', () => {
+  const workflowName = 'Crawler Group 22 (sparse cross-repo execution)';
+  const log = groupLogLine('28:00.0000000', '❌ Fust crawler failed: Fust workplace canton invariant failed: "Niederwangen BE" is not resolvable to a Swiss municipality.')
+    + '\n'
+    + groupLogLine('28:00.0100000', 'fust: crawler exited with status 1');
+  const report = buildCrawlerFailureReport({ log, run: CRAWLER_RUN, workflowName });
+  assert.ok(report);
+  assert.equal(report.title, 'Crawler Failure: Run fust');
+  assert.match(report.description, /Niederwangen BE/);
+  assert.match(report.description, /step `Run fust`/);
+});
+
+test('più membri falliti restano aggregati: nessun titolo per-step inventato', () => {
+  const log = [
+    groupLogLine('28:00.0000000', 'capri-holdings: crawler exited with status 1'),
+    groupLogLine('28:01.0000000', 'fust: crawler exited with status 1'),
+  ].join('\n');
+  assert.equal(buildCrawlerFailureReport({
+    log,
+    run: CRAWLER_RUN,
+    workflowName: CRAWLER_GROUP,
+  }), null);
 });
 
 test('push fallito su un workflow SENZA trigger pull_request gemello resta segnalato', () => {
