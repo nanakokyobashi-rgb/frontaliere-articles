@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const read = (path) => fs.readFileSync(new URL(`../../${path}`, import.meta.url), 'utf8');
@@ -82,7 +83,27 @@ test('body edits re-enter through the trusted recovery, not through a tests.yml 
   // sparse on the evaluator, without credentials: never the PR head.
   const checkout = recovery.slice(recovery.indexOf('uses: actions/checkout'), recovery.indexOf('- name: Retry'));
   assert.doesNotMatch(checkout, /ref:/);
-  assert.match(checkout, /sparse-checkout: \|\n\s+scripts\/lib\n/);
+  const sparseDirs = checkout.split('sparse-checkout: |\n')[1].split('\n')
+    .map(line => line.trim()).filter(line => line && !line.includes(':'));
+  assert.deepEqual(sparseDirs, ['scripts/lib', 'scripts/ci/lib']);
+  // Every module the evaluator imports must be inside the sparse checkout,
+  // or the green-run branch dies on ERR_MODULE_NOT_FOUND before any rerun.
+  const root = new URL('../../', import.meta.url);
+  const seen = new Set();
+  const queue = ['scripts/lib/pr-body-contract-eval.mjs'];
+  while (queue.length) {
+    const rel = queue.pop();
+    if (seen.has(rel)) continue;
+    seen.add(rel);
+    const text = fs.readFileSync(new URL(rel, root), 'utf8');
+    for (const m of text.matchAll(/(?:import|export)[^'"]*?from\s*['"](\.[^'"]+)['"]|import\(\s*['"](\.[^'"]+)['"]/g)) {
+      queue.push(path.posix.normalize(path.posix.join(path.posix.dirname(rel), m[1] || m[2])));
+    }
+  }
+  assert.ok(seen.size >= 4, [...seen].join(', '));
+  for (const rel of seen) {
+    assert.ok(sparseDirs.includes(path.posix.dirname(rel)), `${rel} is outside the recovery sparse checkout`);
+  }
   assert.match(checkout, /persist-credentials: false/);
   // Corpus adaptation: tests.yml here checks out the dispatched ref, so a
   // dispatch on the base would test base code and anchor the check on the

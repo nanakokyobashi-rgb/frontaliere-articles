@@ -50,8 +50,11 @@ jobs:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 1
+          # Directories holding the evaluator's whole import closure;
+          # generator/tests/pr-body-recovery.test.mjs recomputes it.
           sparse-checkout: |
             scripts/lib
+            scripts/ci/lib
           persist-credentials: false
 
       - name: Retry a failed body or review gate on the current head
