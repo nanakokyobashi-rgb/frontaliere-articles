@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
@@ -6,6 +7,7 @@ import {
   cancelledRequiredSuites,
   classifyOrphan,
   isAutonomousPr,
+  reviewRevisionForBody,
 } from '../../scripts/ci/orphan-pr-custodian.mjs';
 import { VITEST_CHECK_NAME } from '../../scripts/ci/lib/constants.mjs';
 
@@ -21,6 +23,7 @@ function pr(overrides = {}) {
     headRef: 'audit-stale-claim-marker',
     headSha: HEAD,
     updatedAt: '2026-09-19T11:09:00Z',
+    headCommittedAt: '2026-09-19T11:09:00Z',
     authorType: 'User',
     labels: [],
     ...overrides,
@@ -78,14 +81,42 @@ describe('orphan-pr-custodian — rerun di un check richiesto CANCELLED con LGTM
     }).action, 'none');
     assert.equal(classifyOrphan({
       ...base, pr: pr(), reviews: [review('## LGTM')],
-      comments: [{ user: { login: 'github-actions[bot]' }, body: actionMarker('rerun', HEAD) }],
+      // Il marker del rerun porta la generazione cancellata (check-run id 1).
+      comments: [{ user: { login: 'github-actions[bot]' }, body: actionMarker('rerun', HEAD, '1') }],
     }).action, 'none');
   });
 
-  it('non tocca una PR con attivita\' nelle ultime 2 ore o in draft', () => {
+  it('non tocca una PR con un push nelle ultime 2 ore o in draft', () => {
     const args = { checkRuns: [checkRun(1, 7, 'cancelled')], reviews: [review('## LGTM')], comments: [], nowS: NOW_S };
-    assert.equal(classifyOrphan({ ...args, pr: pr({ updatedAt: '2026-09-19T16:30:00Z' }) }).action, 'none');
+    assert.equal(classifyOrphan({
+      ...args,
+      pr: pr({ updatedAt: '2026-09-19T16:30:00Z', headCommittedAt: '2026-09-19T16:30:00Z' }),
+    }).action, 'none');
     assert.equal(classifyOrphan({ ...args, pr: pr({ draft: true }) }).action, 'none');
+  });
+
+  it('l\'orologio e\' il push, non `updated_at` che il bot di review rinfresca', () => {
+    // #1599 su questo repo: aperta da 11,7 h, ultimo push 20:04Z, nessun agente
+    // vivo — ma `updated_at` diceva 1,8 h perche' il reviewer aveva appena
+    // postato il suo ennesimo 🔴.
+    const rinfrescata = pr({
+      updatedAt: '2026-09-19T17:00:00Z',
+      headCommittedAt: '2026-09-19T09:00:00Z',
+    });
+    assert.equal(classifyOrphan({
+      pr: rinfrescata, checkRuns: [], reviews: [review(IMPORTANT)], comments: [], nowS: NOW_S,
+    }).action, 'adopt');
+  });
+
+  it('ricade su `updated_at` quando la data del push non e\' leggibile', () => {
+    assert.equal(classifyOrphan({
+      pr: pr({ headCommittedAt: undefined }), checkRuns: [], reviews: [review(IMPORTANT)],
+      comments: [], nowS: NOW_S,
+    }).action, 'adopt');
+    assert.equal(classifyOrphan({
+      pr: pr({ headCommittedAt: '', updatedAt: 'non-una-data' }), checkRuns: [],
+      reviews: [review(IMPORTANT)], comments: [], nowS: NOW_S,
+    }).action, 'none');
   });
 });
 
@@ -105,10 +136,26 @@ describe('orphan-pr-custodian — adozione di un 🔴 fuori scope (sito #9221/#9
     assert.equal(classifyOrphan({ ...args, pr: pr({ labels: ['needs-human'] }) }).action, 'none');
   });
 
-  it('non adotta senza dichiarazione di fuori scope, su review vecchia o due volte', () => {
-    assert.equal(classifyOrphan({
+  it('adotta anche senza REDFLAG_OUT_OF_SCOPE: il marker e\' prova, non precondizione', () => {
+    // Il commento lo scrive `pr-redflag-fixer.yml` con lo stesso predicato di
+    // `isAutonomousPr` gia' valutato qui. Su questo repo quel workflow non
+    // girava dal 17-09 (le review le posta `github-actions[bot]` e GitHub
+    // sopprime il `pull_request_review` a valle), quindi il ramo era morto.
+    const senzaMarker = classifyOrphan({
       pr: pr(), checkRuns: [], reviews: [review(IMPORTANT)], comments: [], nowS: NOW_S,
-    }).action, 'none');
+    });
+    assert.equal(senzaMarker.action, 'adopt');
+    assert.equal(senzaMarker.outOfScopeDeclared, false);
+    assert.ok(senzaMarker.reason.includes('nessun run del redflag-fixer'));
+
+    const conMarker = classifyOrphan({
+      pr: pr(), checkRuns: [], reviews: [review(IMPORTANT)], comments: [outOfScope], nowS: NOW_S,
+    });
+    assert.equal(conMarker.action, 'adopt');
+    assert.equal(conMarker.outOfScopeDeclared, true);
+  });
+
+  it('non adotta su review vecchia o due volte', () => {
     assert.equal(classifyOrphan({
       pr: pr(), checkRuns: [], reviews: [review(IMPORTANT, OLD)], comments: [outOfScope], nowS: NOW_S,
     }).action, 'none');
@@ -119,11 +166,58 @@ describe('orphan-pr-custodian — adozione di un 🔴 fuori scope (sito #9221/#9
     }).action, 'none');
   });
 
-  it('non si fida di un REDFLAG_OUT_OF_SCOPE scritto da un utente qualsiasi', () => {
+  it('non accredita un REDFLAG_OUT_OF_SCOPE scritto da un utente qualsiasi', () => {
     assert.equal(classifyOrphan({
       pr: pr(), checkRuns: [], reviews: [review(IMPORTANT)],
       comments: [{ user: { login: 'someone' }, body: outOfScope.body }], nowS: NOW_S,
+    }).outOfScopeDeclared, false);
+  });
+
+  it('non riusa un verdetto emesso su una revisione precedente del body', () => {
+    const REV_A = `body:${'1'.repeat(64)}`;
+    const REV_B = `body:${'2'.repeat(64)}`;
+    const marcata = (rev, body) => review(`<!-- REVIEW_INPUT_REVISION: ${rev} -->\n${body}`);
+    const base = { pr: pr(), checkRuns: [], comments: [], nowS: NOW_S };
+    assert.equal(classifyOrphan({ ...base, reviews: [marcata(REV_B, IMPORTANT)], reviewRevision: REV_B }).action, 'adopt');
+    assert.equal(classifyOrphan({ ...base, reviews: [marcata(REV_A, IMPORTANT)], reviewRevision: REV_B }).action, 'none');
+    assert.equal(classifyOrphan({ ...base, reviews: [marcata(REV_A, IMPORTANT)] }).action, 'none');
+    assert.equal(classifyOrphan({ ...base, reviews: [review(IMPORTANT)], reviewRevision: REV_B }).action, 'adopt');
+    // Due marker: il gate non riusa quel verdetto, e nemmeno noi.
+    assert.equal(classifyOrphan({
+      ...base,
+      reviews: [review(`<!-- REVIEW_INPUT_REVISION: ${REV_A} -->\n<!-- REVIEW_INPUT_REVISION: ${REV_B} -->\n${IMPORTANT}`)],
+      reviewRevision: REV_B,
     }).action, 'none');
+    // Newline serializzati come due caratteri: li normalizza il parser canonico.
+    assert.equal(classifyOrphan({
+      ...base,
+      reviews: [review(`<!-- REVIEW_INPUT_REVISION: ${REV_B} -->\\n${IMPORTANT}`)],
+      reviewRevision: REV_B,
+    }).action, 'adopt');
+  });
+
+  it('usa il parser canonico dei marker, non una copia locale della regex', () => {
+    const src = readFileSync(new URL('../../scripts/ci/orphan-pr-custodian.mjs', import.meta.url), 'utf8');
+    assert.ok(src.includes("from './lib/review-input-revision.mjs'"));
+  });
+
+  it('la revisione si calcola come `body:sha256(body + newline)`', () => {
+    assert.equal(reviewRevisionForBody('ciao'),
+      `body:${createHash('sha256').update('ciao\n').digest('hex')}`);
+    assert.equal(reviewRevisionForBody(undefined), null);
+  });
+
+  it('un rerun a sua volta cancellato non mura la PR: il marker e\' per generazione', () => {
+    const base = { pr: pr(), reviews: [review('## LGTM')], nowS: NOW_S };
+    const primo = classifyOrphan({ ...base, checkRuns: [checkRun(1, 7, 'cancelled')], comments: [] });
+    assert.equal(primo.action, 'rerun');
+    const markerPrimo = { user: { login: 'github-actions[bot]' }, body: actionMarker('rerun', HEAD, primo.rerunKey) };
+    assert.equal(classifyOrphan({
+      ...base, checkRuns: [checkRun(1, 7, 'cancelled')], comments: [markerPrimo],
+    }).action, 'none');
+    assert.equal(classifyOrphan({
+      ...base, checkRuns: [checkRun(5, 7, 'cancelled')], comments: [markerPrimo],
+    }).action, 'rerun');
   });
 
   it('non adotta una PR il cui head sta su un fork', () => {
@@ -155,6 +249,16 @@ describe('stale-pr-rescuer — cablaggio', () => {
 
   it('non gira sui completamenti di tests dei push su main', () => {
     assert.ok(WORKFLOW.includes("if: github.event_name != 'workflow_run' || github.event.workflow_run.event != 'push'"));
+  });
+
+  it('misura l\'inattivita\' sul push, come il custode che esegue', () => {
+    assert.ok(WORKFLOW.includes("PUSHED_AT=$(gh api \"repos/$REPO/commits/$HEAD\" --jq '.commit.committer.date'"));
+    assert.ok(WORKFLOW.includes('IDLE_SINCE="${PUSHED_AT:-$UPD}"'));
+    assert.ok(!WORKFLOW.includes('UPD_S=$(date -u -d "$UPD" +%s'));
+  });
+
+  it('porta il modulo canonico della revisione nel checkout sparse del custode', () => {
+    assert.match(WORKFLOW, /sparse-checkout: \|\n(?:\s+\S+\n)*\s+scripts\/ci\/lib\/review-input-revision\.mjs\n/);
   });
 
   it('esegue il custode con lo script e le costanti presenti nel checkout sparse', () => {
