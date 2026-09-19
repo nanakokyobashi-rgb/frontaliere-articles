@@ -282,9 +282,9 @@
       "path": "scripts/ci/claude-codex-fallback.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "e689fea0127bdeed",
-        "corpus": "e689fea0127bdeed",
-        "alignedAt": "2026-09-11"
+        "site": "aa15ba50bb2256ff",
+        "corpus": "aa15ba50bb2256ff",
+        "alignedAt": "2026-09-19"
       }
     },
     {
