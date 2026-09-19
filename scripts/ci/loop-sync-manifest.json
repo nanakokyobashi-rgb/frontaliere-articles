@@ -1179,9 +1179,9 @@
       "path": "scripts/ci/stale-claim-detector.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "71dac35db23d0a61",
-        "corpus": "71dac35db23d0a61",
-        "alignedAt": "2026-09-12"
+        "site": "c70791ba015c7707",
+        "corpus": "c70791ba015c7707",
+        "alignedAt": "2026-09-19"
       }
     },
     {
@@ -1200,8 +1200,8 @@
       "reason": "Equivalente in node:test del guard vitest del sito (tests/stale-claim-detector.test.ts). La meta' che conta e' l'errore OPPOSTO: finche' una PR e' in volo il claim agent:in-progress e' corretto, e rilasciarlo farebbe partire un secondo fixer in parallelo — la collisione #4788/#4793 causata dal detector che la previene.",
       "baseline": {
         "site": null,
-        "corpus": "9f28aa91b7129cb9",
-        "alignedAt": "2026-08-08"
+        "corpus": "4b5db2497b4b8ed4",
+        "alignedAt": "2026-09-19"
       }
     },
     {
