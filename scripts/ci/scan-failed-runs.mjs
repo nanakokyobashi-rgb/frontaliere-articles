@@ -994,7 +994,10 @@ function failedRuns() {
 /**
  * Una issue aperta con QUESTO titolo cita già questa run? Se sì l'abbiamo
  * gia' contata in una scansione precedente e va saltata, altrimenti il gate
- * conterebbe due volte lo stesso fallimento.
+ * conterebbe due volte lo stesso fallimento. Per i workflow con gate di
+ * ricorrenza, la stessa prova va cercata anche nel ledger condiviso: i primi
+ * due eventi non hanno una issue per-workflow, quindi il solo titolo specifico
+ * non puo' vedere una run gia' registrata in `#25`.
  *
  * Prende il titolo intero e non piu' il solo nome del workflow: da quando il
  * rilevatore qui sotto puo' emettere un titolo per-path invece di
@@ -1009,7 +1012,7 @@ function failedRuns() {
  * zero risultati — la issue canonica esiste ma non si trova, e se ne apre una
  * doppia.
  */
-export function alreadyReported(title, runUrl) {
+export function alreadyReported(title, runUrl, { checkTransientLedger = false } = {}) {
   const titlePrefix = searchSafePrefix(title);
   const raw = gh(
     ['issue', 'list', '--repo', REPO, '--state', 'open', '--search', `${titlePrefix} in:title`, '--json', 'number,title', '--limit', '10'],
@@ -1025,6 +1028,31 @@ export function alreadyReported(title, runUrl) {
   for (const i of match) {
     const body = gh(['issue', 'view', String(i.number), '--repo', REPO, '--json', 'body,comments', '--jq', '.body + (.comments | map(.body) | join("\n"))'], '');
     if (body.includes(runUrl)) return true;
+  }
+  if (checkTransientLedger) {
+    // `crawler-transient` is the stable label shared by the ledger and the
+    // legacy per-crawler breadcrumbs. Listing by label is immediately
+    // consistent, unlike title search; a run URL found in any such open issue
+    // is already counted and must not create another ledger event.
+    const ledgerRaw = gh([
+      'issue', 'list', '--repo', REPO, '--state', 'open',
+      '--label', 'crawler-transient', '--json', 'number,title', '--limit', '200',
+    ], '[]');
+    let ledgerIssues = [];
+    try {
+      const parsed = JSON.parse(ledgerRaw || '[]');
+      ledgerIssues = Array.isArray(parsed) ? parsed : [];
+    } catch {
+      ledgerIssues = [];
+    }
+    for (const issue of ledgerIssues) {
+      if (!Number.isInteger(Number(issue?.number))) continue;
+      const body = gh([
+        'issue', 'view', String(issue.number), '--repo', REPO,
+        '--json', 'body,comments', '--jq', '.body + (.comments | map(.body) | join("\n"))',
+      ], '');
+      if (body.includes(runUrl)) return true;
+    }
   }
   return false;
 }
@@ -1583,7 +1611,7 @@ async function main() {
     const report = lost || crawler;
     const title = report ? report.title : `Workflow Failure: ${name}`;
 
-    if (alreadyReported(title, run.url)) {
+    if (alreadyReported(title, run.url, { checkTransientLedger: isRecurrenceGatedWorkflow(name) })) {
       console.log(`[scan-failed-runs] ${name}: run ${run.databaseId} già segnalata → skip (evita doppio conteggio nel gate).`);
       continue;
     }
