@@ -448,8 +448,14 @@ jobs:
             echo "::warning::Round cap raggiunto ($ROUND >= $MAX_ROUNDS) → escalation needs-human, no Claude."
             gh pr edit "$PR_NUMBER" --repo "$REPO" --add-label "needs-human" 2>/dev/null \
               || echo "label needs-human assente — la crea ensure-loop-labels.mjs"
-            gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '🛑 **needs-human** (auto): il ❌-check-fixer ha gia tentato %s round senza far tornare verde la CI. STOP automatico (anti-loop, frugalita di quota). Serve revisione umana: apri il job fallito e leggi le righe di fallimento.' "$ROUND")" \
-              2>/dev/null || true
+            # Una volta sola: ogni rosso successivo ri-sveglia il fixer al cap,
+            # e senza questo guard ognuno aggiungeva lo stesso 🛑 alla PR.
+            if printf '%s' "$comments" | grep -qF '<!-- REDCHECK_NEEDS_HUMAN -->'; then
+              echo "Escalation needs-human gia' commentata su #$PR_NUMBER → nessun commento duplicato."
+            else
+              gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '<!-- REDCHECK_NEEDS_HUMAN -->\n🛑 **needs-human** (auto): il ❌-check-fixer ha gia tentato %s round senza far tornare verde la CI. STOP automatico (anti-loop, frugalita di quota). Serve revisione umana: apri il job fallito e leggi le righe di fallimento.' "$ROUND")" \
+                2>/dev/null || true
+            fi
             echo "proceed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
@@ -525,6 +531,14 @@ jobs:
           git config --unset-all "http.https://github.com/.extraheader" || true
           git remote set-url origin "https://x-access-token:${push_token}@github.com/${REPO}.git"
           unset push_token
+
+      # Ogni commit dell'agente porta `Fixer: redcheck-round-N` (formato comune
+      # col sito e col 🔴-fixer). Hook e non prompt: il commit lo fa l'agente.
+      - name: Install fixer commit trailer hook
+        if: steps.guard.outputs.proceed == 'true'
+        env:
+          FIX_ROUND: ${{ steps.guard.outputs.round }}
+        run: node scripts/ci/fixer-commit-trailer.mjs install redcheck "$FIX_ROUND"
 
       # Baseline del round (post-merge origin/main, pre-Claude): il classify
       # finale confronta SHA, body e commenti per capire se il round ha davvero
@@ -777,6 +791,7 @@ jobs:
             **Vincoli:**
             - SOLO il check rosso. Non rifare la PR, niente drive-by.
             - Se non e' fixabile con confidenza (root cause non chiara, serve giudizio umano, o l'unica via sarebbe indebolire un gate) → commenta «❌ check non auto-fixabile: <motivo>» e TERMINA senza commit. Il round cap porta a `needs-human` da solo: e' l'esito giusto, non una sconfitta.
+            - Ogni commit porta il trailer `Fixer: redcheck-round-${{ steps.guard.outputs.round }}`: lo aggiunge l'hook `commit-msg` gia' installato, quindi non usare `--no-verify`.
             - **Token-lever:** le letture e le chiamate `gh` indipendenti vanno emesse in parallelo nello stesso messaggio, mai una per turno — un messaggio con piu' tool-call resta 1 turno.
             - Una sola passata: diagnostica, fixa, valida, committa, pusha, aggiorna il body, STOP.
 

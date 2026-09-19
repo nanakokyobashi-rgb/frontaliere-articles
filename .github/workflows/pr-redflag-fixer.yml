@@ -623,8 +623,14 @@ jobs:
             echo "::warning::Round cap raggiunto ($ROUND >= $MAX_ROUNDS) → escalation needs-human, no Claude."
             gh pr edit "$PR_NUMBER" --repo "$REPO" --add-label "needs-human" 2>/dev/null \
               || echo "label needs-human assente — creala: gh label create needs-human"
-            gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '🛑 **needs-human** (auto): il 🔴-fixer ha già tentato %s round senza chiudere i findings 🔴. STOP automatico (anti-loop, frugalità quota). Serve revisione umana: leggi le review più recenti e applica il fix a mano.' "$ROUND")" \
-              2>/dev/null || true
+            # Una volta sola: ogni review successiva ri-sveglia il fixer al cap,
+            # e senza questo guard ognuna aggiungeva lo stesso 🛑 alla PR.
+            if printf '%s' "$comments" | grep -qF '<!-- REDFLAG_NEEDS_HUMAN -->'; then
+              echo "Escalation needs-human gia' commentata su #$PR_NUMBER → nessun commento duplicato."
+            else
+              gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '<!-- REDFLAG_NEEDS_HUMAN -->\n🛑 **needs-human** (auto): il 🔴-fixer ha già tentato %s round senza chiudere i findings 🔴. STOP automatico (anti-loop, frugalità quota). Serve revisione umana: leggi le review più recenti e applica il fix a mano.' "$ROUND")" \
+                2>/dev/null || true
+            fi
             echo "proceed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
@@ -670,6 +676,16 @@ jobs:
         run: |
           git config user.name "Valerie Linc"
           git config user.email "valerielinc@gmail.com"
+
+      # Ogni commit dell'agente porta `Fixer: redflag-round-N` (formato comune
+      # col sito e col ❌-fixer): il round entra nella storia, non solo nel
+      # marker di commento. E' un hook, non una riga di prompt, perche' il
+      # commit lo fa l'agente.
+      - name: Install fixer commit trailer hook
+        if: steps.guard.outputs.proceed == 'true'
+        env:
+          FIX_ROUND: ${{ steps.guard.outputs.round }}
+        run: node scripts/ci/fixer-commit-trailer.mjs install redflag "$FIX_ROUND"
 
       # Push via App token (primario) / PAT (fallback) — ri-attiva la review dentro tests.yml
       # = re-review. Senza nessuno dei due il push userebbe GITHUB_TOKEN e la
@@ -1001,6 +1017,7 @@ jobs:
             **Constraint:**
             - SOLO i 🔴 della review corrente. Non rifare l'intera PR, non drive-by.
             - Se i 🔴 non sono fixabili con confidenza (root cause non chiara / serve giudizio umano) → commenta "🔴 non auto-fixabile: <motivo>" e TERMINA senza commit (il round cap + needs-human gestiranno l'escalation).
+            - Ogni commit porta il trailer `Fixer: redflag-round-${{ steps.guard.outputs.round }}`: lo aggiunge l'hook `commit-msg` gia' installato, quindi non usare `--no-verify`.
             - Una sola passata: applica, valida, committa, pusha, aggiorna body, STOP.
 
       - name: Cleanup Firebase credentials
