@@ -1049,6 +1049,7 @@ jobs:
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           REVIEW_TIER: ${{ steps.tier.outputs.tier }}
           REVIEW_MAX_TURNS: ${{ steps.tier.outputs.max_turns }}
+          REVIEW_EFFORT: ${{ steps.tier.outputs.effort }}
           REVIEW_REVISION: ${{ steps.review_input.outputs.review_revision }}
           VERDICT_EVIDENCE_FILE: ${{ runner.temp }}/codex-verdict-evidence-${{ github.run_id }}-${{ github.run_attempt }}.md
         run: |
@@ -1063,8 +1064,14 @@ jobs:
           set_review_output verdict_evidence_file ''
           write_verdict_evidence() {
             local evidence_file="${VERDICT_EVIDENCE_FILE:-${RUNNER_TEMP:-/tmp}/codex-verdict-evidence-${RUN_ID:-$$}.md}"
+            # L'evidenza sintetica deve registrare l'effort REALE di questa run,
+            # non il default dello script: una review girata a `high` scritta
+            # come `max` e' telemetria falsa proprio sul percorso in cui si
+            # vorrebbe capire se l'effort ridotto ha causato la morte a
+            # max-turns. Finding 🟡 della review su #1628.
             if ! EVIDENCE_FILE="$evidence_file" \
               EVIDENCE_TRIGGER='codex-primary' \
+              EVIDENCE_EFFORT="${REVIEW_EFFORT:-max}" \
               FALLBACK_STATUS='success' \
               FALLBACK_DETAIL='codex-review-posted-after-max-turns' \
               GITHUB_OUTPUT=/dev/null \
