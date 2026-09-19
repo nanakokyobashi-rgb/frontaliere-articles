@@ -110,6 +110,12 @@ concurrency:
 
 jobs:
   rescue:
+    # Il `tests` di un push su `main` non cambia lo stato di nessuna PR: lo
+    # scan legge solo le PR aperte e non usa il payload `workflow_run`. Quei
+    # completamenti riempivano la coda di run identiche al tick successivo
+    # (sul sito: 86 run in 4 h il 2026-09-19). Restano le completion delle
+    # PR, il cron e il dispatch.
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.event != 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
@@ -672,3 +678,33 @@ jobs:
               2>/dev/null || echo "commento fallito su PR #$N"
           done
           echo "Scan completo."
+
+      # Le PR non autonome (branch non `fix/*`, autore umano, senza
+      # `agent:autofix`) sono saltate dallo scan qui sopra e dai fixer: quando
+      # l'agente che le ha aperte muore restano ferme per ore (#1591: LGTM alle
+      # 09:31, `tests` CANCELLED, ferma fino al rerun manuale delle 17:40). Il
+      # custode e' identico a quello del sito: rilancia un check richiesto
+      # CANCELLED su una HEAD con LGTM e adotta per i fixer le PR con un 🔴
+      # dichiarato fuori scope, dispatchando subito `pr-redflag-fixer.yml`.
+      - name: Checkout orphan PR custodian
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            scripts/ci/orphan-pr-custodian.mjs
+            scripts/ci/lib/constants.mjs
+          sparse-checkout-cone-mode: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      - name: Orphan PR custodian
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          DRY_RUN: ${{ github.event.inputs.dry_run }}
+          CI_CHECK_NAME: 'tests (node --test)'
+          REDFLAG_FIXER_DISPATCH_INPUT: pr
+        run: node scripts/ci/orphan-pr-custodian.mjs
