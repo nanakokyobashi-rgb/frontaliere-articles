@@ -414,11 +414,34 @@ test('un valore mancante non viene rubato al flag successivo, e --out vuoto non 
   const script = fileURLToPath(new URL('../scripts/retranslate-blocking-bodies.mjs', import.meta.url));
   // `--slug --audit a.json`: senza guardia `--audit` diventava lo slug
   // letterale, zero coppie selezionate ed exit 0 — un no-op che si legge come
-  // "niente da fare". Deve cadere nella guardia di --slug, non passare.
+  // "niente da fare".
   const stolen = spawnSync(process.execPath, [script, '--slug', '--audit', '/dev/null'], { encoding: 'utf8' });
   assert.equal(stolen.status, 2, 'il flag successivo non e un valore');
-  assert.match(stolen.stderr, /--slug.*vuoto/);
+  assert.match(stolen.stderr, /--slug richiede un valore/);
   assert.doesNotMatch(String(stolen.stdout), /coppie trattate/);
+
+  // Un valore mancante NON puo' ricadere sul default: e' il verso pericoloso.
+  // `--limit --apply` darebbe LIMIT=Infinity e `--code --apply` toglierebbe il
+  // filtro per codice, allargando la riscrittura all'audit intero.
+  const noLimit = spawnSync(process.execPath, [script, '--audit', '/dev/null', '--limit', '--apply'], { encoding: 'utf8' });
+  assert.equal(noLimit.status, 2, '--limit senza valore non diventa "nessun limite"');
+  assert.match(noLimit.stderr, /--limit richiede un valore/);
+  assert.doesNotMatch(String(noLimit.stdout), /coppie trattate/);
+
+  const noCode = spawnSync(process.execPath, [script, '--audit', '/dev/null', '--code', '--apply'], { encoding: 'utf8' });
+  assert.equal(noCode.status, 2, '--code senza valore non toglie il filtro');
+  assert.match(noCode.stderr, /--code richiede un valore/);
+  assert.doesNotMatch(String(noCode.stdout), /coppie trattate/);
+
+  // L'ultimo argomento senza valore e' lo stesso errore, non un default.
+  const dangling = spawnSync(process.execPath, [script, '--audit', '/dev/null', '--code'], { encoding: 'utf8' });
+  assert.equal(dangling.status, 2);
+  assert.match(dangling.stderr, /--code richiede un valore/);
+
+  // Falsificazione: un flag ASSENTE resta il caso legittimo del default, e un
+  // valore negativo o numerico non viene confuso con un flag.
+  const present = spawnSync(process.execPath, [script, '--audit', '/dev/null', '--limit', '5'], { encoding: 'utf8' });
+  assert.doesNotMatch(String(present.stderr), /richiede un valore/, 'un valore valido non e un errore');
 
   // `--out=` chiede un file e lo perderebbe su stdout, che non e' parsabile.
   const emptyOut = spawnSync(process.execPath, [script, '--audit', '/dev/null', '--slug', 'x', '--out='], { encoding: 'utf8' });

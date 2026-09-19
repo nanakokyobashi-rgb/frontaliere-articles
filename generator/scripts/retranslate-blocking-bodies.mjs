@@ -498,10 +498,20 @@ const flag = (name, dflt = null) => {
   // Il flag SUCCESSIVO non e' il valore di questo: `--slug --audit a.json`
   // consumava `--audit` come slug letterale, selezionava zero coppie e usciva
   // 0 — il no-op silenzioso che si legge come "non c'era niente da fare".
-  // Trattandolo come valore mancante cade invece nella guardia di `--slug`.
+  //
+  // Ma "valore mancante" NON puo' ricadere sul default, ed e' il verso
+  // pericoloso: `--limit --apply` diventerebbe `LIMIT=Infinity` e
+  // `--code --apply` TOGLIEREBBE il filtro per codice, allargando la
+  // riscrittura all'audit intero. Un flag che chiede un valore e non lo ha e'
+  // un errore di invocazione, quindi si esce 2 prima di applicare qualsiasi
+  // default. Il flag ASSENTE resta il caso legittimo del default.
   if (i !== -1) {
     const next = argv[i + 1];
-    return next === undefined || next.startsWith('--') ? dflt : next;
+    if (next === undefined || next.startsWith('--')) {
+      console.error(`❌ ${exact} richiede un valore${next === undefined ? '' : ` (trovato "${next}")`}.`);
+      process.exit(2);
+    }
+    return next;
   }
   const inline = argv.find((arg) => arg.startsWith(`${exact}=`));
   return inline === undefined ? dflt : inline.slice(exact.length + 1);
