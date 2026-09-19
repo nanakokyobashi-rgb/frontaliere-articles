@@ -35319,6 +35319,15 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'studio-svizzero-confine-frontalieri',
+ category: 'pratico',
+ date: '2026-09-19T01:47:35.761Z',
+ image: '/images/blog/studio-svizzero-confine-frontalieri.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

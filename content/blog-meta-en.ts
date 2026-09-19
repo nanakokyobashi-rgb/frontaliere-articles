@@ -11845,6 +11845,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.tasse-frontaliere-oltre-20km-2026.title': 'Border taxes Italy Switzerland 2026: driving over 20 km',
     'blog.article.tasse-frontaliere-oltre-20km-2026.excerpt': 'Tax rules 2026 for border workers over 20 km: source tax, deductibles of 7,500 or 10,000 euros and double taxation management.',
     'blog.article.tasse-frontaliere-oltre-20km-2026.imageAlt': 'View of Lugano with tax documents for cross-border workers',
+    'blog.article.studio-svizzero-confine-frontalieri.title': 'Swiss Border Study: Border Costs and Collapse',
+    'blog.article.studio-svizzero-confine-frontalieri.excerpt': 'Federal Council report and Ecoplan study: traffic jams for 422,000 hours a day, billion-dollar costs and the collapse of border workers by up to 60% without Schengen.',
+    'blog.article.studio-svizzero-confine-frontalieri.imageAlt': 'Car traffic queue at the border between Switzerland and Italy',
 };
 
 export default blogMetaEn;

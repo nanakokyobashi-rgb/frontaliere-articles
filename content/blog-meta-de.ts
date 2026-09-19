@@ -11844,6 +11844,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.tasse-frontaliere-oltre-20km-2026.title': 'Grenzsteuern Italien Schweiz 2026: Fahren über 20 km',
     'blog.article.tasse-frontaliere-oltre-20km-2026.excerpt': 'Steuervorschriften 2026 für Grenzgänger über 20 km: Quellensteuer, Freibeträge von 7.500 oder 10.000 Euro und Doppelbesteuerung.',
     'blog.article.tasse-frontaliere-oltre-20km-2026.imageAlt': 'Blick auf Lugano mit Steuerdokumenten für Grenzgänger',
+    'blog.article.studio-svizzero-confine-frontalieri.title': 'Schweizer Grenzstudie: Grenzkosten und Einsturz',
+    'blog.article.studio-svizzero-confine-frontalieri.excerpt': 'Bundesratsbericht und Ecoplan-Studie: Staus von 422.000 Stunden pro Tag, Milliardenkosten und Grenzgängerkollaps von bis zu 60% ohne Schengen.',
+    'blog.article.studio-svizzero-confine-frontalieri.imageAlt': 'Autostau an der Grenze zwischen der Schweiz und Italien',
 };
 
 export default blogMetaDe;

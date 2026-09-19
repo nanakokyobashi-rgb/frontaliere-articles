@@ -11847,6 +11847,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.tasse-frontaliere-oltre-20km-2026.title': 'Taxes frontalières Italie Suisse 2026 : conduite sur 20 km',
     'blog.article.tasse-frontaliere-oltre-20km-2026.excerpt': 'Règles fiscales 2026 pour les frontaliers de plus de 20 km : impôt à la source, franchises de 7 500 ou 10 000 euros et gestion de la double imposition.',
     'blog.article.tasse-frontaliere-oltre-20km-2026.imageAlt': 'Vue de Lugano avec documents fiscaux pour frontaliers',
+    'blog.article.studio-svizzero-confine-frontalieri.title': 'Étude suisse à la frontière : coûts et effondrement frontaliers',
+    'blog.article.studio-svizzero-confine-frontalieri.excerpt': 'Rapport du Conseil fédéral et étude Ecoplan : embouteillages 422.000 heures par jour, coûts milliardaires et effondrement des frontaliers jusqu\'à 60% sans Schengen.',
+    'blog.article.studio-svizzero-confine-frontalieri.imageAlt': 'File de voitures à la frontière entre la Suisse et l\'Italie',
 };
 
 export default blogMetaFr;
