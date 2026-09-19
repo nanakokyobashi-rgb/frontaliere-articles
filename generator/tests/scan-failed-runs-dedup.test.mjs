@@ -12,10 +12,10 @@
  *
  * Il seam e' un eseguibile `gh` finto in testa a `PATH` (stessa tecnica di
  * `github-issue-creator-reopen-default.test.mjs`): `alreadyReported()` chiama
- * `gh` due volte — `issue list` per i candidati, `issue view` per il body —
- * ed e' quella seconda chiamata (dedup per run URL) che il test deve poter
- * osservare per verificare che la discriminazione fra run diverse resti
- * intatta.
+ * `gh` per gli issue candidati e per i loro body; per i workflow con gate di
+ * ricorrenza interroga anche il ledger `crawler-transient`. Il test osserva
+ * queste chiamate per verificare che la discriminazione fra run diverse e il
+ * dedup del ledger restino intatti.
  */
 import { test, before, beforeEach, after } from 'node:test';
 import assert from 'node:assert/strict';
@@ -27,6 +27,7 @@ import { searchSafePrefix } from '../../scripts/lib/github-issue-creator.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const MODULE_PATH = path.resolve(HERE, '../../scripts/ci/scan-failed-runs.mjs');
+const CREATOR_PATH = path.resolve(HERE, '../../scripts/lib/github-issue-creator.mjs');
 const { alreadyReported } = await import(MODULE_PATH);
 
 // ── Il `gh` finto ───────────────────────────────────────────────────
@@ -43,7 +44,7 @@ const args = process.argv.slice(2);
 fs.appendFileSync(process.env.FAKE_GH_LOG, JSON.stringify(args) + '\\n');
 const sc = JSON.parse(fs.readFileSync(process.env.FAKE_GH_SCENARIO, 'utf8'));
 if (args[0] === 'issue' && args[1] === 'list') {
-  process.stdout.write(JSON.stringify(sc.open || []));
+  process.stdout.write(JSON.stringify(args.includes('--label') ? (sc.transient || []) : (sc.open || [])));
   process.exit(0);
 }
 if (args[0] === 'issue' && args[1] === 'view') {
@@ -163,4 +164,26 @@ test('dedup per run URL: la stessa run gia\' citata non riapre, una run nuova s�
   });
   assert.equal(alreadyReported(PAREN_TITLE, 'https://github.com/o/r/actions/runs/aaa'), true);
   assert.equal(alreadyReported(PAREN_TITLE, 'https://github.com/o/r/actions/runs/bbb'), false);
+});
+
+test('il ledger transitorio deduplica la stessa run prima del conio per-workflow', () => {
+  const runUrl = 'https://github.com/o/r/actions/runs/35404644708';
+  setScenario({
+    open: [],
+    transient: [{ number: 25, title: 'Crawler transient failures (rolling ledger)' }],
+    bodies: { 25: `🔁 **Workflow Failure: Crawler Group 11**\n\nRun: ${runUrl}` },
+  });
+  assert.equal(alreadyReported(
+    'Workflow Failure: Crawler Group 11 (sparse cross-repo execution)',
+    runUrl,
+    { checkTransientLedger: true },
+  ), true);
+  const ledgerList = ghCalls().find((args) => args.includes('--label'));
+  assert.ok(ledgerList, 'il controllo deve interrogare il ledger per label');
+  assert.ok(ledgerList.includes('crawler-transient'));
+  assert.match(
+    fs.readFileSync(CREATOR_PATH, 'utf8'),
+    /const CRAWLER_TRANSIENT_LABEL = 'crawler-transient';/,
+    'la label deve restare allineata al reporter che scrive il ledger',
+  );
 });
