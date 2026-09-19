@@ -23,6 +23,13 @@ const FILE_CITATION_RE = /(?:^|[\s([{"'`])((?:\.\.?\/)?(?:[A-Za-z0-9_.-]+\/)*[A-
 const IMPORTANT_MARKER_RE = /🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]\s*/u;
 const FINDING_MARKER_RE = /🔴|🟡\s*\*{0,2}\s*Nit\s*\*{0,2}\s*[:—-]|🟣\s*\*{0,2}\s*Pre-existing\s*\*{0,2}\s*[:—-]|❓\s*q\s*:/gu;
 const ZERO_IMPORTANT_RE = /^(?:0|none|nessuno)\s*$/iu;
+// Anchor di un finding il cui unico riferimento e' la descrizione della PR.
+const PR_BODY_ANCHOR_RE = /^\s*(?:[-*]\s*)?`?PR body[:#]L?([1-9]\d*)(?:[-–]\d+)?(?=$|[`:\s])/iu;
+const PR_BODY_ANCHOR_LOOSE_RE = /`?PR body[:#]L?([1-9]\d*)/iu;
+// Cio' che il contratto deterministico NON sa giudicare resta bloccante anche
+// se ancorato al body: il claim di performance senza baseline (REVIEW.md step
+// 7) non e' una regola del contratto, e' una regola della review.
+const NON_CONTRACT_BODY_RE = /\b(?:baseline|perf|performance|speed-?up|misura|misurat|pre\/post|revert|ottimizzazion|optimi[sz]ation|claim)\w*/iu;
 
 function resetImportantRegex() {
   REDFLAG_IMPORTANT_RE.lastIndex = 0;
@@ -166,15 +173,63 @@ function changedContains(changedFiles, resolvedPath) {
  * disponibile; senza tree i basename vengono risolti solo contro i file del
  * diff, quindi un basename esterno resta non risolvibile.
  */
-export function classifyImportantFindings(body, changedFiles, repositoryPaths = null) {
+/** Numero di riga del body a cui un finding e' ancorato, o `null`. */
+export function prBodyFindingLine(finding) {
+  const fromText = String(finding?.text || '').match(PR_BODY_ANCHOR_RE);
+  if (fromText) return Number(fromText[1]);
+  const fromLine = String(finding?.line || '').match(PR_BODY_ANCHOR_LOOSE_RE);
+  return fromLine ? Number(fromLine[1]) : null;
+}
+
+/**
+ * Vero quando il finding e' un 🔴 ancorato SOLO su `PR body:L<n>`, su una riga
+ * che cade dentro `## Non implementato` — la sezione che il contratto
+ * deterministico valida — e non parla di un claim che il contratto non sa
+ * giudicare.
+ *
+ * Tutto il resto resta bloccante: una riga altrove nel body, un claim di
+ * performance, o l'assenza del testo del body con cui provare la posizione.
+ * Senza `prBody` non si declassa niente: la prova che l'anchor cade nella
+ * sezione giusta e' parte del predicato, non un'assunzione.
+ */
+export function isContractDomainBodyFinding(finding, prBody) {
+  const line = prBodyFindingLine(finding);
+  if (line === null || typeof prBody !== 'string' || !prBody) return false;
+  if (NON_CONTRACT_BODY_RE.test(String(finding?.text || ''))) return false;
+  const lines = prBody.split(/\r?\n/u);
+  if (line > lines.length) return false;
+  let section = null;
+  for (let index = 0; index < line; index += 1) {
+    const heading = lines[index].match(/^\s{0,3}#{2,3}\s+(.+?)\s*$/u);
+    if (heading) section = heading[1];
+  }
+  return Boolean(section && /^Non implementato\b/iu.test(section));
+}
+
+export function classifyImportantFindings(body, changedFiles, repositoryPaths = null, {
+  // Il contratto deterministico del body (`scripts/ci/pr-body-contract.mjs`,
+  // step `PR-body completeness` di tests.yml) e' passato su QUESTO body nella
+  // stessa run. E' l'unica fonte di verita' sul body: un 🔴 del modello
+  // ancorato solo su `PR body:L<n>` vale allora al massimo un Nit.
+  bodyContractPassed = false,
+  // Body corrente della PR: serve a PROVARE che la riga citata cade dentro
+  // `## Non implementato`. Assente → nessun declassamento.
+  prBody = null,
+} = {}) {
   const changed = [...new Set((changedFiles || []).map(normalizePath).filter(Boolean))];
   const treeAvailable = repositoryPaths !== null && repositoryPaths !== undefined;
   const knownPaths = treeAvailable ? repositoryPaths : changed;
   const outside = [];
   const inScope = [];
   const unresolved = [];
+  const bodyDeclassified = [];
 
   for (const finding of importantFindings(body)) {
+    if (bodyContractPassed && finding.citations.length === 0
+        && isContractDomainBodyFinding(finding, prBody)) {
+      bodyDeclassified.push(finding);
+      continue;
+    }
     if (finding.citations.length === 0) {
       unresolved.push({ ...finding, reason: 'nessun file citato' });
       continue;
@@ -210,7 +265,9 @@ export function classifyImportantFindings(body, changedFiles, repositoryPaths = 
     outside,
     inScope,
     unresolved,
-    outsideOnly: outside.length > 0 && inScope.length === 0 && unresolved.length === 0,
+    bodyDeclassified,
+    outsideOnly: (outside.length + bodyDeclassified.length) > 0
+      && inScope.length === 0 && unresolved.length === 0,
     blocking: inScope.length > 0 || unresolved.length > 0,
   };
 }
@@ -225,6 +282,21 @@ function gh(args, { json = true } = {}) {
 
 function fetchChangedFiles(repo, pr) {
   return fetchPrFiles(Number(pr), gh, repo);
+}
+
+/**
+ * Body corrente della PR. Un errore torna `null`, che spegne il declassamento
+ * invece di concederlo: senza il body non c'e' prova che l'anchor cada dentro
+ * `## Non implementato`.
+ */
+function readPrBody(repo, pr) {
+  try {
+    const view = gh(['api', `repos/${repo}/pulls/${pr}`]);
+    return typeof view?.body === 'string' ? view.body : null;
+  } catch (error) {
+    console.log(`review-scope: body della PR non leggibile (${String(error).slice(0, 160)}) → nessun declassamento.`);
+    return null;
+  }
 }
 
 function fetchRepositoryPaths(repo, pr) {
@@ -427,23 +499,38 @@ async function mintFollowup({ repo, pr, prUrl, body, findings }) {
  * Classifica la review sulla PR reale e, solo se tutti i finding sono fuori
  * scope, conia/aggiorna la singola issue della PR.
  */
-export async function classifyAndMintReview(body, { repo, pr, prUrl, mutate = true } = {}) {
+export async function classifyAndMintReview(body, {
+  repo, pr, prUrl, mutate = true, bodyContractPassed = false, prBody = null,
+} = {}) {
   if (!repo || !pr) throw new Error('repo e pr sono obbligatori');
+  const effectivePrBody = bodyContractPassed && prBody === null ? readPrBody(repo, pr) : prBody;
   const changed = fetchChangedFiles(repo, pr);
   const diffUnavailable = changed.complete !== true || changed.files.length === 0;
   if (diffUnavailable) {
     const findings = importantFindings(body);
     const reason = changed.files.length === 0 ? 'empty' : changed.reason;
+    // Un finding sul body non dipende dal diff: il contratto lo ha gia'
+    // giudicato su questo stesso body. Senza questa separazione un diff
+    // illeggibile — una PR che rigenera migliaia di file di corpus e' il caso
+    // normale qui — resusciterebbe come bloccante proprio i 🔴 che il
+    // contratto verde ha appena chiuso, e lo farebbe per una ragione che non
+    // ha niente a che vedere con loro.
+    const bodyDeclassified = bodyContractPassed
+      ? findings.filter((finding) => finding.citations.length === 0
+          && isContractDomainBodyFinding(finding, effectivePrBody))
+      : [];
+    const stillOpen = findings.filter((finding) => !bodyDeclassified.includes(finding));
     return {
       findings,
       outside: [],
       inScope: [],
-      unresolved: findings.map((finding) => ({
+      unresolved: stillOpen.map((finding) => ({
         ...finding,
         reason: `diff non verificabile (${reason})`,
       })),
+      bodyDeclassified,
       outsideOnly: false,
-      blocking: findings.length > 0,
+      blocking: stillOpen.length > 0,
       minted: false,
       changedFiles: changed.files,
       changedFilesComplete: changed.complete,
@@ -451,7 +538,10 @@ export async function classifyAndMintReview(body, { repo, pr, prUrl, mutate = tr
     };
   }
   const repositoryPaths = fetchRepositoryPaths(repo, pr);
-  const result = classifyImportantFindings(body, changed.files, repositoryPaths);
+  const result = classifyImportantFindings(body, changed.files, repositoryPaths, {
+    bodyContractPassed,
+    prBody: effectivePrBody,
+  });
   if (result.outside.length === 0 || !mutate) {
     return {
       ...result,

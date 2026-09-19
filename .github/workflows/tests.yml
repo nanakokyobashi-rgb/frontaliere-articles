@@ -799,6 +799,7 @@ jobs:
           REPO: ${{ github.repository }}
           CTX_DIR: ${{ runner.temp }}/review-ctx
           TIER: ${{ steps.tier.outputs.tier }}
+          BODY_CONTRACT_OUTCOME: ${{ steps.body_contract.outcome }}
           REVIEW_DIFF_EXCLUSIONS: content,data,dist,public
         run: |
           set -uo pipefail
@@ -846,6 +847,13 @@ jobs:
             echo
             echo "## PR metadata"
             cat "$CTX_DIR/pr.json"
+            echo
+            echo "## Deterministic body contract"
+            if [ "${BODY_CONTRACT_OUTCOME:-}" = "success" ]; then
+              echo "✅ passed on the current body (sections, bullet states, Motivo/Prossimo passo, placeholders, Closes). The body cannot produce a 🔴 Important in this review: at most a 🟡 Nit anchored as \`PR body:L<n>\`."
+            else
+              echo "Verdict unavailable (${BODY_CONTRACT_OUTCOME:-unknown}): apply the REVIEW.md body rules."
+            fi
             echo
             echo "## Changed code-file list"
             cat "$CTX_DIR/review-code-files.txt"
@@ -952,6 +960,8 @@ jobs:
             Se `INCREMENTAL_BASE` e' valorizzato, revieva SOLO il delta e le sue interazioni: i commit fino a quel punto sono gia' stati approvati. Sei comunque autorizzato a Read/grep i file pieni per il CONTESTO — l'obiettivo e' non rispendere token su codice gia' approvato, non chiudere gli occhi sulle interazioni.
 
             **Disciplina turni (budget rigido, tutti i tier tranne `minimal`):** hai ${{ steps.tier.outputs.max_turns }} turni. Un messaggio con tool-call = 1 turno indipendentemente da quanti tool_use contiene, quindi le probe indipendenti vanno emesse in parallelo nello stesso messaggio, mai una per turno. `PR_NUMBER`/`HEAD_SHA`/`INCREMENTAL_BASE` sono gia' nell'env: mai spendere un turno per rileggerli. Il checkout NON ha `node_modules`: niente `npm`/`npx`/test runner, il verdetto si basa sulla lettura statica. Entro cinque turni dal cap DEVI aver postato la review: se hai ancora verifiche aperte, postale come `❓ q:` invece di continuare a probeare. Una review postata con un `❓` sblocca il loop; una review MAI postata brucia il run intero senza verdetto.
+
+            **PR body: una sola fonte di verita'.** Il contratto deterministico del body (`scripts/ci/pr-body-contract.mjs`, step `PR-body completeness` di questo stesso run) ha gia' validato sezioni, stato di ogni voce, `Motivo`/`Prossimo passo`, placeholder e `Closes`; il suo verdetto e' nel bundle sotto `## Deterministic body contract`. Quando e' ✅ NON rivalidare quelle regole e non emettere mai un `🔴 Important` sul body: un dubbio su quelle regole vale al massimo un `🟡 Nit` ancorato `PR body:L<n>`, e il review gate declassa comunque un 🔴 cosi' ancorato su un contratto verde. Ogni stato che il contratto accetta in `## Non implementato (ancora)` — `in questa PR`, `PR concatenata #N`, `per scelta`, `by construction` e qualunque altro `blocked: <causa>` — e' valido, e su quelli **non si emette 🔴**. Riemettere un 🔴 su una voce che il contratto ha accettato incastra il ciclo: il fixer declina con una ragione, il cap dei round scatta, e `needs-human` atterra con la diagnosi sbagliata su una PR che non ha niente da riparare. Il claim di performance senza baseline (step 7 di REVIEW.md) NON e' una regola del contratto e resta 🔴. Una regola del body che il contratto non copre si aggiunge al contratto, non si applica a mano.
 
             **Workflow di review come da REVIEW.md:** completeness contract → `Implementato` con occhio critico → `Non implementato` filtro scopo → scope drift → ripetizione di pattern cross-file → conformita' al piano di test → claim di performance non validati → output.
             - Tier `high`, `high-mega` o `incremental-high`: aggiungi una sezione `## Adversarial check` con esattamente 3 rischi REALI non verificati, prima del summary. Mai «manca un test».
@@ -1199,6 +1209,9 @@ jobs:
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           REVIEW_REVISION: ${{ steps.review_input.outputs.review_revision }}
           CODEX_FALLBACK_EVIDENCE_FILE: ${{ steps.codex_review.outputs.fallback_evidence_file || steps.review_abort.outputs.verdict_evidence_file }}
+          # Unica fonte di verita' sul body: un 🔴 del modello ancorato SOLO su
+          # `PR body:L<n>` non blocca quando questo contratto e' passato.
+          BODY_CONTRACT_OUTCOME: ${{ steps.body_contract.outcome }}
         run: |
           set -euo pipefail
           echo "Executing trusted review gate from $REVIEW_GATE_MAIN_MODULE"

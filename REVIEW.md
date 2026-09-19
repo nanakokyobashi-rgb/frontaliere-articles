@@ -96,6 +96,14 @@ Il body della PR DEVE avere:
 - Piano di completamento: scope ancora dovuto + stato/next-step (in questa PR / PR concatenata #N / blocked: <causa>). «Nessuno» = task completo.
 ```
 
+### Una sola fonte di verita' sul body
+
+Il contratto del body e' validato in modo deterministico da `scripts/ci/pr-body-contract.mjs` (step `PR-body completeness` di `tests.yml`, che compone `pr-body-sections-check.mjs`, `pr-body-nextstep-check.mjs`, `pr-body-closes-check.mjs` e `pr-body-filepath-check.mjs`): sezioni, stato di ogni voce, `Motivo`/`Prossimo passo`, placeholder, `Closes`, path citati. Il suo verdetto arriva al reviewer nel bundle, sotto `## Deterministic body contract`.
+
+**Se e' ✅, il body non genera 🔴 Important**: al massimo un 🟡 Nit ancorato `PR body:L<n>`. Ogni stato che il contratto accetta — incluso qualunque `blocked: <causa>`, che tiene il task aperto senza bloccare la PR — e' valido, e un `Prossimo passo` concreto non si ridiscute. Il review gate declassa comunque un 🔴 ancorato SOLO su una riga `PR body:L<n>` dentro `## Non implementato` quando il contratto e' verde (`DECLASSIFIED-BODY` nel log di `scripts/ci/review-scope.mjs`); il claim di performance senza baseline (punto 7 qui sotto) non e' una regola del contratto e resta 🔴.
+
+Una regola del body che il contratto non copre va AGGIUNTA al contratto, non applicata a mano dal reviewer: due giudici sulla stessa superficie con politiche diverse incastrano il ciclo — il fixer declina, il cap dei round scatta, e `needs-human` atterra su una PR che non ha niente da riparare. I punti 2 e 4 qui sotto valgono quindi per cio' che il contratto non vede (la coerenza fra `## Implementato` e il diff) e per quando il verdetto non e' disponibile.
+
 ### Comportamento del reviewer
 
 1. **Voce `Implementato`** → pensiero critico: il diff la implementa davvero? Edge case? Logica su boundary, null, ordinamento, async? C'è un modo più semplice? Un buco visibile? Code-smell con debito → 🟡.
