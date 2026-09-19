@@ -67,6 +67,8 @@ Il tier è calcolato dallo step `Determine review tier` di `tests.yml` e passato
 
 **Il tier si decide SOLO sul CODE.** `content/` (14.888 file di corpus), `data/`, `dist/` (superficie generata) e `public/` non sono codice: non escalano il tier e non vanno revieweati riga per riga.
 
+**Effort del modello per tier** (`tests.yml` → input `reasoning_effort` dell'action `claude-codex-fallback`): `max` per `high` e `high-mega`, `high` per `minimal`, `incremental`, `incremental-high` e `normal`. Il valore finisce nell'evidenza strutturata della run e il review gate lo valida contro l'insieme chiuso `CODEX_ALLOWED_EFFORTS` (`scripts/ci/claude-codex-fallback.mjs`): un effort fuori insieme invalida l'evidenza e il gate non accetta il verdetto. Ogni altro chiamante dell'action (issue-fix, i fixer) non passa l'input e resta su `max`.
+
 | Tier | File trigger (CODE) | Profondità |
 |---|---|---|
 | **high** | `generator/**`, `engine/**`, `host/**`, `.github/workflows/**`, e tutto `scripts/**` ECCETTO `scripts/{ci,dev}/` e gli audit/report read-only | È il codice che emette o rende la superficie pubblicata. Un bug qui è live senza deploy. Probe su regex, assertion, exit code, idempotenza. Sezione `## Adversarial check` con 3 cose NON verificate. |
