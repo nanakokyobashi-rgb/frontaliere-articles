@@ -3557,20 +3557,20 @@
     {
       "path": "scripts/ci/translate-queue-recovery.mjs",
       "mode": "corpus-only",
-      "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata ma recovery blocked per policy, target dedupe e successor guard.",
+      "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
       "baseline": {
         "site": null,
-        "corpus": "1260eede17442be1",
+        "corpus": "1f8ac4d164753ebe",
         "alignedAt": "2026-09-01"
       }
     },
     {
       "path": "generator/tests/translate-queue-recovery.test.mjs",
       "mode": "corpus-only",
-      "reason": "Contratto Node deterministico corpus-only per watchdog e workflow translate: copre censimento corrente indipendente da oltre 200 run storiche, discovery troncata, budget, prova schedule redatta e assenza by construction di scritture remote.",
+      "reason": "Contratto Node deterministico corpus-only per watchdog e workflow translate: copre censimento corrente indipendente da oltre 200 run storiche, discovery troncata, budget, prova schedule redatta, assenza by construction di scritture remote e drift del pin blob contro il workflow generato.",
       "baseline": {
         "site": null,
-        "corpus": "5a096e6047d85795",
+        "corpus": "a62aeaa126fde1ca",
         "alignedAt": "2026-09-01"
       }
     },
