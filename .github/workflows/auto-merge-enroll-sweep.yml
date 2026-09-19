@@ -11,12 +11,11 @@ name: Auto-merge enroll sweep
 # #201 con la review che non ripartiva): niente fallisce, qualcosa si ferma.
 #
 # Il vecchio `auto-merge-sweep` faceva il MERGE da se' ogni mezz'ora ed e' stato
-# rimosso col passaggio al nativo. Questo non lo resuscita: non mergia niente,
-# non legge review, non conosce i gate. Chiama la stessa API che chiamerebbe
-# l'arruolamento all'apertura, e da li' in poi decide GitHub, che aspetta il
-# check richiesto dal ruleset — cioe' il job `tests` col verdetto della review
-# dentro. Un arruolamento in piu' non puo' quindi mergiare niente che non
-# sarebbe mergiato comunque.
+# rimosso col passaggio al nativo. Questo sweep non duplica quel decisore: per
+# ogni candidata passa il controllo al gate trusted di `main`, che rilegge PR,
+# review, check richiesto e HEAD e abilita soltanto l'auto-merge nativo con
+# `--match-head-commit`. Un arruolamento in piu' non puo' quindi saltare il
+# verdetto del gate o la sua protezione dalla race sulla HEAD.
 #
 # ── PERCHE' L'IDENTITA' DEVE ESSERE IL PAT ─────────────────────────────────
 # L'auto-merge nativo mergia con l'identita' di CHI lo ha abilitato. Arruolare
@@ -42,9 +41,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      # Come `enable-native-automerge.yml`: servono solo il loader di Remote
-      # Config e il suo helper JWT, e un checkout dovrebbe scaricare l'albero
-      # intero (28.777 file) prima che lo sparse possa selezionarli.
+      # Come `enable-native-automerge.yml`: niente checkout dell'albero (28.777
+      # file). Oltre al loader di Remote Config scarichiamo da `main` il gate
+      # trusted e le sue sole dipendenze dependency-free: il codice della PR
+      # non decide quali review/check possano arruolare l'auto-merge.
       - name: Download workflow helpers
         env:
           GH_TOKEN: ${{ github.token }}
@@ -88,6 +88,16 @@ jobs:
           download_and_check \
             'generator/scripts/lib/google-service-account-token.mjs' \
             "$helper_dir/lib/google-service-account-token.mjs"
+          for spec in \
+            'scripts/ci/native-automerge-gate.mjs|native-automerge-gate.mjs' \
+            'scripts/ci/review-test-policy.mjs|review-test-policy.mjs' \
+            'scripts/ci/lib/fetchPrFiles.mjs|lib/fetchPrFiles.mjs' \
+            'scripts/ci/lib/constants.mjs|lib/constants.mjs' \
+            'scripts/ci/native-automerge-sweep-policy.mjs|native-automerge-sweep-policy.mjs'; do
+            source_path="${spec%%|*}"
+            destination="${spec#*|}"
+            download_and_check "$source_path" "$helper_dir/$destination"
+          done
           echo "NATIVE_AUTOMERGE_HELPER_DIR=$helper_dir" >> "$GITHUB_ENV"
 
       - name: Prepare Firebase credentials
@@ -116,29 +126,17 @@ jobs:
           export GH_TOKEN="$GITHUB_PAT_NANAKO"
           # `gh pr list --limit N` TRONCA in silenzio, mentre un errore API
           # trasformato in `[]` farebbe sembrare vuota una coda che non abbiamo
-          # letto. Conserviamo le pagine REST slurpate, verifichiamo il payload
-          # e filtriamo solo dopo un fetch riuscito: il vuoto e' un dato valido
-          # soltanto a quel punto. `auto_merge` e' null quando nessuno ha
-          # arruolato la PR.
+          # letto. Conserviamo le pagine REST slurpate e lasciamo al policy
+          # helper trusted la validazione dello shape e il filtro minimo:
+          # base=main, non lockstep, non draft, auto_merge=null.
           pages_file="${RUNNER_TEMP}/auto-merge-open-pr-pages.json"
           if ! gh api --paginate --slurp \
             "repos/${REPO}/pulls?state=open&per_page=100" > "$pages_file"; then
             echo "::error::lettura paginata delle PR aperte fallita — non considero la lista vuota e non arruolo niente."
             exit 1
           fi
-          if ! prs="$(jq -r '
-            if type != "array" or any(.[]; type != "array") then
-              error("payload REST paginato inatteso")
-            else
-              .[][]
-              | if type != "object" or (.number | type) != "number" then
-                  error("elemento PR REST inatteso")
-                else
-                  select((.draft // false) == false and .auto_merge == null)
-                  | .number
-                end
-            end
-          ' "$pages_file")"; then
+          if ! prs="$(node "$NATIVE_AUTOMERGE_HELPER_DIR/native-automerge-sweep-policy.mjs" \
+            --enroll "$pages_file")"; then
             echo "::error::payload REST paginato delle PR aperte non valido — non considero la lista vuota."
             exit 1
           fi
@@ -148,18 +146,18 @@ jobs:
           fi
           n=0
           for pr in $prs; do
-            # Fail-soft per singola PR: una che rifiuta l'arruolamento (base
-            # non protetta, conflitti, permessi) non deve impedire alle altre
-            # di essere arruolate — il caso peggiore e' che il prossimo giro
-            # ci riprovi fra mezz'ora.
-            if gh pr merge "$pr" --repo "$REPO" --auto --squash --delete-branch 2>&1 | tail -2; then
-              echo "PR #$pr arruolata nell'auto-merge nativo."
+            # Fail-soft per singola PR: il gate trusted decide se la candidata
+            # resta in attesa di review/check o se viene arruolata. Il gate
+            # rilegge la HEAD subito prima dell'opt-in e usa --match-head-commit.
+            if GH_TOKEN="$GITHUB_PAT_NANAKO" node "$NATIVE_AUTOMERGE_HELPER_DIR/native-automerge-gate.mjs" \
+              "$REPO" "$pr"; then
+              echo "PR #$pr valutata dal native gate (arruolamento o attesa)."
               n=$((n + 1))
             else
-              echo "::warning::PR #$pr non arruolata — riprovo al prossimo giro."
+              echo "::warning::PR #$pr non valutata dal native gate — riprovo al prossimo giro."
             fi
           done
-          echo "Arruolate $n PR."
+          echo "Valutate $n PR dal native gate."
 
       - name: Cleanup Firebase credentials
         if: always()

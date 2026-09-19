@@ -28,6 +28,9 @@
  * 5. A residual bullet that says `PR concatenata`/`PR concatenato` without
  *    `#N` is a blocking violation (`chained-pr-no-number`, #6300 / #6289).
  *    Other bullets without a literal state stay advisory (`bullet-without-state`).
+ * 6. New PR writes can opt into a strict decision-deferral check: `per scelta`,
+ *    `by construction` and the owner-decision state require concrete `Motivo:`
+ *    and `Prossimo passo:` fields.
  *
  * Usage:
  *   node scripts/lib/pr-body-sections-check.mjs "$BODY"   # exit 1 on violation
@@ -168,15 +171,16 @@ export function hasNessuno(rawContent) {
 export const STATE_PATTERNS = Object.freeze({
   inThisPr: /\bin\s+questa\s+PR\b/i,
   chainedPr: /\bPR\s+concatenat[ao]\s*#\s*\d+/i,
-  // «falso positivo» è un sinonimo accettato dello stesso stato `by-choice`
-  // (stesso significato: nessuna azione dovuta) — non una classe nuova.
+  // «falso positivo» / «false positive» sono sinonimi accettati dello stesso
+  // stato `by-choice` (stesso significato: nessuna azione dovuta) — non una
+  // classe nuova.
   // La variante negata ("non è un falso positivo, va sistemato in
   // follow-up") dichiara l'OPPOSTO — lavoro dovuto, non chiuso — quindi
   // riusa lo stesso NEGATION_LOOKBEHIND già fixato per questa identica
   // frase in scripts/ci/lib/false-positive-declaration.mjs (incidente
   // #3367) invece di duplicare la naive substring-match qui.
   byChoice: new RegExp(
-    String.raw`\bper\s+scelta\b|${NEGATION_LOOKBEHIND}\bfalso\s+positivo\b`,
+    String.raw`\bper\s+scelta\b|${NEGATION_LOOKBEHIND}\b(?:falso\s+positivo|false\s+positive)\b`,
     'i',
   ),
   byConstruction: /\bby\s+construction\b/i,
@@ -247,6 +251,78 @@ export function sectionBullets(rawContent) {
     .split('\n')
     .map((l) => l.trim())
     .filter((l) => /^[-*+][ \t]+\S/.test(l));
+}
+
+// Decision states close a residual item, so a vague decision used to erase
+// work from the follow-up graph. Keep the structural fields deliberately
+// narrow and parseable; this checks completeness, not whether the reason is
+// substantively correct.
+const DECISION_RE = /\bby construction\b|\bper (?:scelta|costruzione|design)\b|(?:è|e')\s+una\s+decisione\b|\bdi proposito\b|\bdeliberat\w*|\bblocked\s*:\s*(?:decisione del proprietario|owner decision)\b/i;
+const DECISION_REASON_RE = /\b(?:motivo|ragione|reason)\s*:\s*(.+?)(?=\s+\b(?:prossimo\s+passo|next\s+step|azione\s+successiva)\s*:|$)/iu;
+const DECISION_NEXT_STEP_RE = /\b(?:prossimo\s+passo|next\s+step|azione\s+successiva)\s*:\s*(.+)$/iu;
+const DECISION_PLACEHOLDER_RE = /(?:^|[\s:;,.!?()\[\]{}—–-])(?:<[^>]+>|\.\.\.|tbd|n\/a|da\s+(?:definire|decidere|valutare|fare))(?=$|[\s:;,.!?()\[\]{}—–-])/iu;
+const DECISION_STATES = new Set(['by-choice', 'by-construction', 'blocked-owner']);
+const NON_IMPL_ANY_RE = /^[ \t]{0,3}#{2,3}[ \t]+Non[ \t]+implementato\b[^\n]*/im;
+
+function stripDecisionFormatting(text) {
+  return String(text ?? '').replace(/[*_~`]/gu, '');
+}
+
+function concreteDecisionValue(value) {
+  const clean = String(value ?? '').replace(/\s+/gu, ' ').trim();
+  return clean.length >= 8
+    && !DECISION_PLACEHOLDER_RE.test(clean)
+    && /[\p{L}\p{N}]/u.test(clean);
+}
+
+/** Verifica i due campi auditabili di una deroga decisionale. */
+export function decisionDeferralSpecificity(text) {
+  const normalized = stripDecisionFormatting(text);
+  const reason = normalized.match(DECISION_REASON_RE)?.[1]?.trim() || '';
+  const nextStep = normalized.match(DECISION_NEXT_STEP_RE)?.[1]?.trim() || '';
+  return {
+    specific: concreteDecisionValue(reason) && concreteDecisionValue(nextStep),
+    reason,
+    nextStep,
+  };
+}
+
+function isDecisionDeferral(text) {
+  const normalized = stripDecisionFormatting(text);
+  // `bulletState` is the canonical classifier. The explicit regex retains
+  // older prose forms (`deliberatamente`, `è una decisione`), while the state
+  // check also covers the accepted negation-aware `falso positivo` synonym.
+  return DECISION_RE.test(normalized) || DECISION_STATES.has(bulletState(normalized));
+}
+
+function topLevelDecisionBullets(rawContent) {
+  const clean = stripNonContent(rawContent ?? '');
+  const bullets = [];
+  let current = null;
+  for (const line of clean.split('\n')) {
+    if (/^[ \t]*[-*+][ \t]+\S/.test(line)) {
+      if (current) bullets.push(current);
+      current = { index: bullets.length + 1, text: line.trim() };
+    } else if (current && line.trim()) {
+      current.text += ` ${line.trim()}`;
+    }
+  }
+  if (current) bullets.push(current);
+  return bullets;
+}
+
+/** Decision bullets that lack one or both concrete audit fields. */
+export function decisionDeferralFindings(body = '') {
+  const content = extractSection(String(body ?? ''), NON_IMPL_ANY_RE);
+  if (content === null) return [];
+  return topLevelDecisionBullets(content)
+    .filter((bullet) => isDecisionDeferral(bullet.text))
+    .map((bullet) => ({ ...bullet, specificity: decisionDeferralSpecificity(bullet.text) }))
+    .filter((bullet) => !bullet.specificity.specific);
+}
+
+export function decisionDeferralsAreSpecific(body = '') {
+  return decisionDeferralFindings(body).length === 0;
 }
 
 /**
@@ -324,12 +400,12 @@ const NON_IMPL_NO_ANCORA_RE = /^[ \t]{0,3}#{2,3}[ \t]+Non[ \t]+implementato\b/im
  * da fare quando la misura sarà 0/13.
  *
  * @param {string} body full PR body text
- * @param {{ diffPaths?: string[] }} [opts] `diffPaths` (optional): repo-relative paths
+ * @param {{ diffPaths?: string[], strictDecisionDeferrals?: boolean }} [opts] `diffPaths` (optional): repo-relative paths
  *   changed by the PR, to power the diff-vs-body citation check (#6301). Omitted →
  *   that check simply doesn't run (no diff to compare against).
  * @returns {{ ok: boolean, violations: Array<{type:string,section?:string,message:string}>, warnings: Array<{type:string,section?:string,message:string}> }}
  */
-export function checkPrBodySections(body = '', { diffPaths } = {}) {
+export function checkPrBodySections(body = '', { diffPaths, strictDecisionDeferrals = false } = {}) {
   const s = String(body ?? '');
   const violations = [];
   const warnings = [];
@@ -463,6 +539,19 @@ export function checkPrBodySections(body = '', { diffPaths } = {}) {
             + ' Senza stato la voce viene raccolta come follow-up da'
             + ' scripts/ci/followup-has-candidates.mjs, anche quando è già chiusa.'
             + ` Primo bullet interessato: "${stateless[0].slice(0, 120)}".`,
+        });
+      }
+    }
+
+    // --- 5b. STRICT: a decision must remain auditable ------------------------
+    if (strictDecisionDeferrals) {
+      for (const finding of decisionDeferralFindings(s)) {
+        violations.push({
+          type: 'decision-deferral-not-specific',
+          section: 'Non implementato (ancora)',
+          message:
+            `Voce ${finding.index} dichiara una deroga decisionale senza `
+            + '`Motivo: <causa concreta>` e `Prossimo passo: <azione concreta>`.',
         });
       }
     }
