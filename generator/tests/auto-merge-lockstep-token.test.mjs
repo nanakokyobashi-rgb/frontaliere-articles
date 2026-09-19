@@ -233,7 +233,7 @@ function checkRun(
 }
 
 function checkPages(...runs) {
-  return [{ check_runs: runs }];
+  return [{ total_count: runs.length, check_runs: runs }];
 }
 
 test('i check-run sono vincolati alla HEAD e impediscono ABA', () => {
@@ -525,6 +525,11 @@ test('un payload check-run troncato rispetto a total_count non autorizza', () =>
   ];
   assert.equal(exactCheckRunSnapshot(inconsistent, HEAD_A).allow, false);
   assert.equal(exactCheckRunSnapshot([{ total_count: 'x', check_runs: [] }], HEAD_A).allow, false);
+  // Senza total_count la completezza non e' verificabile: nega, non salta.
+  const undeclared = [{ check_runs: complete[0].check_runs }];
+  const missing = exactCheckRunSnapshot(undeclared, HEAD_A);
+  assert.equal(missing.allow, false);
+  assert.match(missing.reason, /total_count/);
 });
 
 test('la policy espone il nome del branch lockstep per il workflow', async () => {

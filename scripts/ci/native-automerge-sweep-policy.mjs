@@ -343,20 +343,20 @@ export function exactCheckRunSnapshot(pages, headSha, repository = null) {
   // `total_count` is the endpoint's own statement of how many check-runs the
   // commit has. With `filter=all` every generation is included, so a payload
   // whose pages add up to fewer runs than declared is truncated: a missing
-  // newer generation could hide a failure behind an older SUCCESS.
+  // newer generation could hide a failure behind an older SUCCESS. The REST
+  // response always carries it, so its absence is itself an unverifiable
+  // payload, not a reason to skip the check.
   const declaredTotals = pages.map((page) => (
     page && typeof page === 'object' && !Array.isArray(page) ? page.total_count : undefined));
-  if (declaredTotals.some((total) => total !== undefined)) {
-    const [firstTotal] = declaredTotals;
-    if (!Number.isSafeInteger(firstTotal) || firstTotal < 0
-        || declaredTotals.some((total) => total !== firstTotal)) {
-      return deny('total_count dei check-run assente o incoerente tra le pagine');
-    }
-    const received = pages.reduce((sum, page) => (
-      sum + (Array.isArray(page?.check_runs) ? page.check_runs.length : 0)), 0);
-    if (received !== firstTotal) {
-      return deny(`payload check-run incompleto: ${received} ricevuti su ${firstTotal} dichiarati`);
-    }
+  const [firstTotal] = declaredTotals;
+  if (!Number.isSafeInteger(firstTotal) || firstTotal < 0
+      || declaredTotals.some((total) => total !== firstTotal)) {
+    return deny('total_count dei check-run assente o incoerente tra le pagine');
+  }
+  const received = pages.reduce((sum, page) => (
+    sum + (Array.isArray(page?.check_runs) ? page.check_runs.length : 0)), 0);
+  if (received !== firstTotal) {
+    return deny(`payload check-run incompleto: ${received} ricevuti su ${firstTotal} dichiarati`);
   }
 
   const latest = new Map();
