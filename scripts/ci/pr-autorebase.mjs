@@ -107,7 +107,7 @@ import {
 const DRY = process.argv.includes('--dry-run');
 const REPO = process.env.GITHUB_REPOSITORY || '';
 const TOKEN = process.env.GH_TOKEN || '';
-const MAX_PER_RUN = 10;
+export const MAX_PER_RUN = 10;
 // Costo tipico di una PR nel loop, misurato sui run reali (fase di lavoro
 // 19-114s per 1-10 PR): ~30s copre il caso normale con margine. È una STIMA per
 // decidere se COMINCIARE, non un timer: nessuna PR viene interrotta a metà.
@@ -205,6 +205,90 @@ function gh(args, { json = true, allowFail = false } = {}) {
   }
 }
 
+const PR_HEAD_SHA_RE = /^[0-9a-f]{40}$/i;
+
+/**
+ * Normalizza e valida il payload di `gh api --paginate --slurp` per le PR.
+ *
+ * `--slurp` restituisce un array di pagine, non una pagina concatenata. Una
+ * pagina o una PR malformata è un errore di discovery: non può diventare una
+ * lista vuota che farebbe apparire il run verde senza aver scansionato nulla.
+ *
+ * @param {unknown} payload
+ * @returns {Array<{number: number, headRefName: string, headRefOid: string,
+ *   isDraft: boolean, labels: Array<{name: string}>}>}
+ */
+export function parsePaginatedPullRequests(payload) {
+  if (!Array.isArray(payload)) {
+    throw new TypeError('pr-autorebase: pull request payload must be an array of pages');
+  }
+
+  const pullRequests = [];
+  const seenNumbers = new Set();
+  for (const [pageIndex, page] of payload.entries()) {
+    if (!Array.isArray(page)) {
+      throw new TypeError(`pr-autorebase: pull request page ${pageIndex + 1} is not an array`);
+    }
+    for (const [itemIndex, pullRequest] of page.entries()) {
+      if (!pullRequest || Array.isArray(pullRequest) || typeof pullRequest !== 'object') {
+        throw new TypeError(`pr-autorebase: pull request ${pageIndex + 1}/${itemIndex + 1} is not an object`);
+      }
+      const number = pullRequest.number;
+      const head = pullRequest.head;
+      const labels = pullRequest.labels;
+      if (!Number.isSafeInteger(number) || number <= 0) {
+        throw new TypeError(`pr-autorebase: pull request ${pageIndex + 1}/${itemIndex + 1} has an invalid number`);
+      }
+      if (seenNumbers.has(number)) {
+        throw new TypeError(`pr-autorebase: pull request #${number} appears more than once in the paginated payload`);
+      }
+      if (!head || Array.isArray(head) || typeof head !== 'object'
+          || typeof head.ref !== 'string' || head.ref.length === 0
+          || typeof head.sha !== 'string' || !PR_HEAD_SHA_RE.test(head.sha)) {
+        throw new TypeError(`pr-autorebase: pull request #${number} has an invalid head`);
+      }
+      if (typeof pullRequest.draft !== 'boolean') {
+        throw new TypeError(`pr-autorebase: pull request #${number} has an invalid draft flag`);
+      }
+      if (!Array.isArray(labels) || labels.some((label) => (
+        !label || Array.isArray(label) || typeof label !== 'object'
+          || typeof label.name !== 'string'
+      ))) {
+        throw new TypeError(`pr-autorebase: pull request #${number} has invalid labels`);
+      }
+      seenNumbers.add(number);
+      pullRequests.push({
+        number,
+        headRefName: head.ref,
+        headRefOid: head.sha,
+        isDraft: pullRequest.draft,
+        labels: labels.map(({ name }) => ({ name })),
+      });
+    }
+  }
+  return pullRequests;
+}
+
+/** Read the complete open-PR pool through the paginated GitHub API. */
+export function discoverOpenPullRequests(read = gh, repo = REPO) {
+  const payload = read([
+    'api', '--paginate', '--slurp',
+    `repos/${repo}/pulls?state=open&per_page=100`,
+  ]);
+  return parsePaginatedPullRequests(payload);
+}
+
+/** Filter drafts, then rotate the complete pool before the per-run cap. */
+export function preparePullRequestSweep(pullRequests, runNumber) {
+  if (!Array.isArray(pullRequests)) {
+    throw new TypeError('pr-autorebase: pull request pool must be an array');
+  }
+  return rotateForFairness(
+    pullRequests.filter((pullRequest) => !pullRequest.isDraft),
+    runNumber,
+  );
+}
+
 /** Read the trusted PR HEAD and body revision as one review-input snapshot. */
 function currentReviewInputContext(num) {
   try {
@@ -242,7 +326,7 @@ function reviewInputContextStillCurrent(num, expectedHead, expectedRevision) {
  * `mergeableOf()` qui sopra fa un solo re-poll dopo 4 s e poi si arrende;
  * merge-tree invece calcola il merge davvero, senza toccare il working tree.
  *
- * @returns {{ conflicted: boolean, files: string[] }}
+ * @returns {{ state: 'clean'|'conflicted'|'unknown', conflicted: boolean, files: string[] }}
  */
 function mergeTreeVerdict(headSha) {
   const res = spawnSync('git', ['merge-tree', '--write-tree', 'origin/main', headSha], {
@@ -251,14 +335,21 @@ function mergeTreeVerdict(headSha) {
   });
   // 0 = merge pulito, 1 = conflitti, >1 = non ha potuto calcolare (oggetto
   // mancante, storia shallow). Il terzo caso NON è «pulito»: non sappiamo, e
-  // dire «nessun conflitto» sarebbe la bugia che questo helper esiste per non
-  // dire. Lo trattiamo come non-conflitto ma lo logghiamo.
-  if (res.status === null || res.status > 1) {
+  // quindi nessuna label/commento può essere ricalcolata.
+  const state = classifyMergeTreeStatus(res.status);
+  if (state === 'unknown') {
     console.log(`  merge-tree non calcolabile (status=${res.status}): ${(res.stderr || '').trim().slice(0, 200)}`);
-    return { conflicted: false, files: [] };
+    return { state, conflicted: false, files: [] };
   }
-  if (res.status === 0) return { conflicted: false, files: [] };
-  return { conflicted: true, files: parseMergeTreeConflicts(res.stdout || '') };
+  if (state === 'clean') return { state, conflicted: false, files: [] };
+  return { state, conflicted: true, files: parseMergeTreeConflicts(res.stdout || '') };
+}
+
+/** Map merge-tree's process status to a fail-closed scan state. */
+export function classifyMergeTreeStatus(status) {
+  if (status === 0) return 'clean';
+  if (status === 1) return 'conflicted';
+  return 'unknown';
 }
 
 /**
@@ -293,6 +384,22 @@ export function decideConflictLabel({ conflicted, hasLabel }) {
   if (conflicted && !hasLabel) return 'add';
   if (!conflicted && hasLabel) return 'remove';
   return 'none';
+}
+
+/**
+ * Pure conflict-scan decision. Fetch failure and an uncomputable merge-tree
+ * result are both `unknown`: neither authorizes a label mutation.
+ */
+export function decideConflictScan({ fetchOk, mergeTreeState, hasLabel }) {
+  const state = fetchOk ? mergeTreeState : 'unknown';
+  if (state === 'unknown') return { state, action: 'none' };
+  if (state !== 'clean' && state !== 'conflicted') {
+    throw new TypeError(`pr-autorebase: invalid merge-tree state ${String(state)}`);
+  }
+  return {
+    state,
+    action: decideConflictLabel({ conflicted: state === 'conflicted', hasLabel }),
+  };
 }
 
 function git(args, { allowFail = false } = {}) {
@@ -908,13 +1015,22 @@ function clearStaleReviewLabel(num) {
  * che qualcuno ha già rebasato a mano.
  */
 function reportMainConflict(num, branch, head, labels) {
-  git(['fetch', 'origin', branch, 'main'], { allowFail: true });
+  const fetched = git(['fetch', 'origin', branch, 'main'], { allowFail: true });
+  if (fetched === null) {
+    console.log(`PR #${num}: fetch di ${branch}/main fallito → conflitto non verificabile; preservo label/commento esistenti.`);
+    return null;
+  }
   const verdict = mergeTreeVerdict(head);
   const hasLabel = labels.includes(MAIN_CONFLICT_LABEL);
-  const labelAction = decideConflictLabel({ conflicted: verdict.conflicted, hasLabel });
+  const scan = decideConflictScan({ fetchOk: true, mergeTreeState: verdict.state, hasLabel });
 
-  if (!verdict.conflicted) {
-    if (labelAction === 'remove') {
+  if (scan.state === 'unknown') {
+    console.log(`PR #${num}: merge-tree non verificabile → preservo label/commento esistenti.`);
+    return null;
+  }
+
+  if (scan.state === 'clean') {
+    if (scan.action === 'remove') {
       console.log(`PR #${num}: conflitto rientrato → -label ${MAIN_CONFLICT_LABEL}.`);
       if (!DRY) {
         gh(['pr', 'edit', String(num), '--repo', REPO, '--remove-label', MAIN_CONFLICT_LABEL],
@@ -927,7 +1043,7 @@ function reportMainConflict(num, branch, head, labels) {
   console.log(`PR #${num}: CONFLITTO con main su ${verdict.files.length} file — ${verdict.files.slice(0, 5).join(', ')}`);
   if (DRY) { console.log(`[dry] +label ${MAIN_CONFLICT_LABEL} #${num}`); return true; }
 
-  if (labelAction === 'add') {
+  if (scan.action === 'add') {
     // La label può non esistere ancora nel repo: creala best-effort, come fa
     // `ensureLabelsExist` in github-issue-creator.
     gh(['label', 'create', MAIN_CONFLICT_LABEL, '--repo', REPO,
@@ -957,6 +1073,114 @@ Nota per chi automatizza: \`gh pr view --json mergeable\` **non** è l'oracolo �
 _Segnale deterministico da pr-autorebase.yml (zero-Claude). La label sparisce da sola quando il conflitto rientra._`;
   gh(['pr', 'comment', String(num), '--repo', REPO, '--body', body], { json: false, allowFail: true });
   return true;
+}
+
+// --- HAND-OFF di un conflitto DOPO il LGTM (2026-09-19) ---------------------
+// Un conflitto non import-only si ferma qui: abort, `stale-review`, un
+// commento. Su una PR gia' approvata e' il punto in cui il ciclo perde la PR:
+// nessun fixer risolve conflitti (redcheck-fixer vuole un check rosso,
+// redflag-fixer un 🔴), il rescuer aspetta 2 h di silenzio e il recycle 24 h.
+// #9260 sul sito: LGTM alle 14:04, ripresa a mano alle 16:13; qui #1597:
+// AUTOREBASE_CONFLICT alle 13:44, nessuna ripresa per 3 h. Il rimedio esistente che risolve un conflitto e' un agente con
+// il contesto della PR, e il ciclo ne avvia uno solo da una issue `agent:fix`:
+// (corpus: stesso blocco del sito, #9293; qui GH_TOKEN e' il PAT nanako, che
+// il sender gate di issue-fix ammette).
+// la issue qui sotto lo avvia subito, con la PR, la HEAD e i file in
+// conflitto gia' scritti, invece di attendere che qualcuno legga la label.
+//
+// Solo con LGTM: senza, la PR non e' pronta al merge e il conflitto resta un
+// dettaglio del lavoro in corso del suo autore. One-shot per HEAD (marker nel
+// commento della PR): una HEAD nuova e' un conflitto nuovo.
+export const CONFLICT_HANDOFF_MARKER_PREFIX = '<!-- AUTOREBASE_CONFLICT_HANDOFF';
+
+export function conflictHandoffMarker(head) {
+  return `${CONFLICT_HANDOFF_MARKER_PREFIX} head=${String(head).slice(0, 12)} -->`;
+}
+
+/** Il conflitto merita un agente adesso? Puro: niente rete. */
+export function shouldHandOffConflict({ lgtm, alreadyHandedOff }) {
+  return Boolean(lgtm) && !alreadyHandedOff;
+}
+
+/** Titolo stabile e body della issue di hand-off. Puro: niente rete. */
+export function buildConflictHandoffIssue({ num, branch, head, files }) {
+  const list = (files || []).slice(0, 30).map((f) => `- \`${f}\``).join('\n') || '- (elenco non disponibile: ricalcolalo con il comando sotto)';
+  const title = `Conflitto con main dopo LGTM: riapplicare la PR #${num} su main`;
+  const body = [
+    `La PR #${num} (branch \`${branch}\`, HEAD \`${String(head).slice(0, 12)}\`) aveva un \`## LGTM\` ed e' entrata in conflitto con \`main\`. L'autorebase deterministico ha provato \`git merge origin/main\` e l'unione degli import, poi ha abortito: il conflitto tocca codice, non solo import.`,
+    '',
+    'File in conflitto:',
+    '',
+    list,
+    '',
+    'Da fare:',
+    '',
+    `1. \`git fetch origin main ${branch}\` e \`git diff $(git merge-base origin/main origin/${branch}) origin/${branch}\`: e' il contributo della PR, gia' approvato.`,
+    '2. Riapplicalo su `origin/main` nel branch di questa issue risolvendo i conflitti: conserva il comportamento arrivato su `main` E quello della PR. Nessuna modifica oltre a quella gia\' approvata.',
+    `3. Apri la PR con \`Supersedes #${num}\` e \`Closes\` di questa issue, poi chiudi #${num} con un commento che rimanda alla nuova PR.`,
+    '',
+    'Se il conflitto e\' gia\' stato risolto sul branch originale (la PR torna mergeable), chiudi questa issue senza PR.',
+    '',
+    '_Aperta da pr-autorebase (zero-Claude) al primo conflitto non auto-risolvibile dopo il LGTM._',
+  ].join('\n');
+  return { title, body };
+}
+
+/** `gh` con esito binario: true solo se il comando e' uscito 0. */
+function ghOk(args) {
+  try {
+    execFileSync('gh', args, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function handOffConflictToFixer(num, branch, head, lgtm) {
+  const marker = conflictHandoffMarker(head);
+  if (!shouldHandOffConflict({ lgtm, alreadyHandedOff: lgtm && hasCommentMarker(num, marker) })) return;
+  // Il ramo chiamante puo' essersi basato su `mergeable=CONFLICTING`, che e'
+  // una cache: l'hand-off parte solo se merge-tree conferma ADESSO un
+  // conflitto. `clean` o `unknown` → nessuna issue (fail-closed).
+  const verdict = mergeTreeVerdict(head);
+  if (verdict.state !== 'conflicted') {
+    console.log(`PR #${num}: merge-tree ${verdict.state} al momento dell'hand-off → nessuna issue.`);
+    return;
+  }
+  const { title, body } = buildConflictHandoffIssue({ num, branch, head, files: verdict.files });
+  if (DRY) { console.log(`[dry] #${num} conflitto dopo LGTM → issue agent:fix «${title}»`); return; }
+  // Il titolo e' stabile: una issue gia' aperta da un tick precedente (routing
+  // fallito, marker non scritto) viene riusata invece di duplicata.
+  const existing = gh(['issue', 'list', '--repo', REPO, '--state', 'open', '--search', `"${title}" in:title`,
+    '--json', 'number,title'], { allowFail: true });
+  if (existing === null) {
+    console.log(`::warning::PR #${num}: elenco issue illeggibile → hand-off rinviato al prossimo tick.`);
+    return;
+  }
+  let issue = String((existing || []).find((i) => i.title === title)?.number || '');
+  if (!issue) {
+    // `agent:triaged` alla creazione: il triage la manderebbe comunque in coda
+    // (`agent:fix-queued`), cioe' ore invece di minuti. `agent:fix` arriva con
+    // un edit separato, perche' e' l'evento `labeled` a far partire issue-fix,
+    // e l'identita' di GH_TOKEN e' quella ammessa dal suo sender gate.
+    const url = String(gh(['issue', 'create', '--repo', REPO, '--title', title, '--body', body,
+      '--label', 'agent:triaged'], { json: false, allowFail: true }) || '').trim();
+    issue = /\/issues\/(\d+)/.exec(url)?.[1] || '';
+  }
+  if (!issue) {
+    console.log(`::warning::PR #${num}: issue di hand-off del conflitto non creata — resta la label stale-review.`);
+    return;
+  }
+  // Esito dall'exit status, non dallo stdout: senza routing confermato il
+  // marker NON si scrive, cosi' il prossimo tick riprova sulla stessa issue.
+  if (!ghOk(['issue', 'edit', issue, '--repo', REPO, '--add-label', 'agent:fix'])) {
+    console.log(`::warning::issue #${issue}: agent:fix non applicata — marker non scritto, ritento al prossimo tick.`);
+    return;
+  }
+  gh(['pr', 'comment', String(num), '--repo', REPO, '--body',
+    `${marker}\n♻️ **autorebase / conflitto dopo LGTM**: affidato a issue-fix con #${issue}, che riapplica il contributo approvato su \`main\` in una PR nuova. _Segnale deterministico da pr-autorebase (zero-Claude)._`],
+  { json: false, allowFail: true });
+  console.log(`PR #${num}: conflitto dopo LGTM → hand-off a issue-fix con #${issue}.`);
 }
 
 function commentConflictOnce(num, branch) {
@@ -1101,6 +1325,16 @@ async function processPR(pr) {
     }
   }
 
+  // Conflict discovery is the fail-closed boundary for the whole PR tick.
+  // Keep it before the needs-human ledger below: that ledger may write a
+  // sticky comment, so checking only at the later near-merge gate would leave
+  // a mutation path alive while fetch/merge-tree is unknown.
+  const conflictScan = reportMainConflict(num, branch, head, labels);
+  if (conflictScan === null) {
+    console.log(`PR #${num}: conflitto non verificabile → rinvio ogni azione questo tick.`);
+    return;
+  }
+
   // GATE `needs-human`: una passata SOLO se lo stato è cambiato.
   //
   // Deve stare QUI — subito dopo il solo stuck-red, e prima di tutto il resto —
@@ -1170,7 +1404,7 @@ async function processPR(pr) {
   // segnale è a valle del vitest verde:
   //   la review Claude gira DENTRO il job vitest, ma dopo i test: se questi
   //     falliscono il job si ferma prima ⇒ niente review, niente LGTM, niente
-  //     label (prima del 2026-08-26 era `pr-review-loop.yml`, gattato su
+  //     label (prima del 2026-08-26 era nel vecchio `pr-review-loop`, gattato su
   //     `workflow_run[tests] == success`: stessa implicazione, altro wiring);
   //   stale-pr-rescuer.yml classe A esige `tests == success`, classe B esige una
   //     review con 🔴 → cade nell'`else` ⇒ non mette nemmeno `stale-review`;
@@ -1185,12 +1419,6 @@ async function processPR(pr) {
   // altrimenti lo rendono irraggiungibile. Qui resta solo l'effetto: un rescue
   // valido rende la PR near-merge anche senza LGTM né label.
   if (stuckRedReason) nearMerge = true;
-
-  // Rilevazione conflitti: PRIMA del gate near-merge e per OGNI PR, perché è la
-  // classe fuori dal gate (in revisione, con un 🔴 e senza label) quella che
-  // resta in volo più a lungo e che nessun altro segnale copre. Costo: un
-  // `git merge-tree`, nessuna scrittura sul branch.
-  reportMainConflict(num, branch, head, labels);
 
   if (!nearMerge) {
     console.log(`PR #${num} non near-merge (no LGTM/collision-risk/stale-review/stuck-red) — skip del rebase.`);
@@ -1289,6 +1517,7 @@ async function processPR(pr) {
         console.log(`PR #${num} CONFLICTING non auto-risolvibile (non import-only) → stale-review + comment (recycle).`);
         ensureStaleLabel(num);
         commentConflictOnce(num, branch);
+        handOffConflictToFixer(num, branch, head, lgtm);
       }
       return;
     }
@@ -1406,6 +1635,7 @@ async function processPR(pr) {
     console.log(`PR #${num} mergeable=CONFLICTING → label stale-review + comment once.`);
     ensureStaleLabel(num);
     commentConflictOnce(num, branch);
+    handOffConflictToFixer(num, branch, head, lgtm);
     return;
   }
 
@@ -1436,6 +1666,7 @@ async function processPR(pr) {
       git(['merge', '--abort'], { allowFail: true });
       ensureStaleLabel(num);
       commentConflictOnce(num, branch);
+      handOffConflictToFixer(num, branch, head, lgtm);
       return;
     }
   }
@@ -1513,19 +1744,18 @@ async function main() {
 
   let prs;
   try {
-    prs = gh(['pr', 'list', '--repo', REPO, '--state', 'open', '--limit', '50',
-      '--json', 'number,headRefName,headRefOid,isDraft,labels']);
+    prs = discoverOpenPullRequests();
   } catch (e) {
-    console.error(`gh pr list fallito: ${String(e).slice(0, 160)}`);
-    process.exit(0);
+    console.error(`discovery PR fallita: ${String(e).slice(0, 160)}`);
+    process.exitCode = 1;
+    return;
   }
-  const openUnrotated = (prs || []).filter((p) => !p.isDraft);
   // Rotazione anti-starvation (#5145/#5144 punto 3): il cap `MAX_PER_RUN` e il
   // budget di run tagliano entrambi la CODA della lista. Partendo sempre dalla
   // stessa testa, una PR lenta in posizione 1 non consuma solo il proprio turno:
   // rende irraggiungibili tutte quelle dietro, a ogni run. Ruotando su
   // GITHUB_RUN_NUMBER ogni PR passa dalla testa nell'arco di pochi tick.
-  const open = rotateForFairness(openUnrotated, process.env.GITHUB_RUN_NUMBER);
+  const open = preparePullRequestSweep(prs, process.env.GITHUB_RUN_NUMBER);
   console.log(`PR open non-draft: ${open.length}${open.length > 1 ? ` (ordine ruotato su run #${process.env.GITHUB_RUN_NUMBER || '?'} — anti-starvation)` : ''}`);
   if (budget.enabled) {
     console.log(`budget di run: ${Math.round(budget.remainingMs() / 1000)}s utilizzabili prima della deadline del job.`);
