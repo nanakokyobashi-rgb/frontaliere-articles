@@ -145,6 +145,20 @@ test('il precondition failure condiviso con exit 43 non diventa un falso errore 
   }), null);
 });
 
+test('l\'eco del blocco shell non sopprime un failure reale dello stesso membro', () => {
+  const systemic = "echo \"::error::fust: crawl OK but the crawler group's shared deferred-commit precondition failed (exit 43).\"";
+  const log = [
+    groupLogLine('28:00.0000000', systemic),
+    groupLogLine('28:00.0100000', 'fust: crawler exited with status 1'),
+  ].join('\n');
+  assert.equal(isSystemicCrawlerFailureLog(log), false);
+  assert.deepEqual(crawlerFailuresFromLog(log), [{
+    slug: 'fust',
+    exitCode: 1,
+    lines: ['fust: crawler exited with status 1'],
+  }]);
+});
+
 test('un marker sistemico non nasconde un failure reale di un altro membro', () => {
   const log = [
     groupLogLine('28:00.0000000', "::error::fust: crawl OK but the crawler group's shared deferred-commit precondition failed (exit 43). Group-wide fault, identical for every sibling — step stays red, no per-crawler issue filed (systemic class)."),
