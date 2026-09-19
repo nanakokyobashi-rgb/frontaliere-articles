@@ -6566,6 +6566,15 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.permesso-l-vaud-proroga.title': 'Permesso L in Vaud: validità max 1 anno e proroga',
     'blog.article.permesso-l-vaud-proroga.excerpt': 'Validità fino a 1 anno, vincolo al datore di lavoro e gestione SEM. Le regole per la proroga o il passaggio al permesso B.',
     'blog.article.permesso-l-vaud-proroga.imageAlt': 'Documento di permesso L sul tavolo di un ufficio svizzero',
+    'blog.article.crediti-esercito-difesa-svizzera.title': 'Difesa svizzera: richiesti 970 milioni per l\'esercito',
+    'blog.article.crediti-esercito-difesa-svizzera.excerpt': 'Il Consiglio federale chiede quasi un miliardo di franchi extra per sistemi terra-aria e radar per far fronte alle minacce in Europa.',
+    'blog.article.crediti-esercito-difesa-svizzera.imageAlt': 'Palazzo Federale a Berna, sede del Consiglio federale svizzero',
+    'blog.article.permesso-c-zugo-requisiti.title': 'Permesso C a Zugo: requisiti e procedura di domanda',
+    'blog.article.permesso-c-zugo-requisiti.excerpt': 'Guida al domicilio stabile nel Canton Zugo: requisiti di residenza (5 anni per UE/AELS, 10 per extra-UE), integrazione e stabilità finanziaria.',
+    'blog.article.permesso-c-zugo-requisiti.imageAlt': 'Veduta del Canton Zugo e dei suoi uffici amministrativi',
+    'blog.article.borse-studio-zugo-guide.title': 'Borse di studio Canton Zugo: requisiti e importi',
+    'blog.article.borse-studio-zugo-guide.excerpt': 'Guida pratica su borse di studio e prestiti nel Canton Zugo: requisiti di accesso, importi massimi e termini per la presentazione delle domande.',
+    'blog.article.borse-studio-zugo-guide.imageAlt': 'Studenti che studiano in una biblioteca svizzera moderna',
 };
 
 export default blogMetaChIt;

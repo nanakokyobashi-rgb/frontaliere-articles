@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/qfbjozpp9glkfmhcts1mv": {
-    "articleId": "onu-sanzioni-sesam-2026",
-    "ts": "2026-08-19T16:29:35.169Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/rubriche/aziende-ticinesi-informano/1944894/serfontana-accelera-sulla-sostenibilita-in-arrivo-una-nuova-copertura-fotovoltaica-per-il-parcheggio": {
     "articleId": "serfontana-fotovoltaico-parcheggio",
     "ts": "2026-08-19T18:48:37.703Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/abitazioni%3a-penuria-potrebbe-attenuarsi%2c-ma-non-prima-del-2027/92077041": {
     "articleId": "penuria-alloggi-svizzera-2027",
     "ts": "2026-09-18T03:19:46.917Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1951116/franchi-esercito-miliardo-chiesto-osce": {
+    "articleId": "crediti-esercito-difesa-svizzera",
+    "ts": "2026-09-18T18:14:30.261Z",
     "keyForm": 2
   }
 }

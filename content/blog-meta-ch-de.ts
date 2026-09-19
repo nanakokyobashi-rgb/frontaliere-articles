@@ -6566,6 +6566,15 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.permesso-l-vaud-proroga.title': 'Ausweis L in der Waadt: Gültigkeit max. 1 Jahr und Verlängerung',
     'blog.article.permesso-l-vaud-proroga.excerpt': 'Gültigkeit bis zu 1 Jahr, Bindung an den Arbeitgeber und SEM-Verwaltung. Die Regeln für die Verlängerung oder den Übergang zur B-Bewilligung.',
     'blog.article.permesso-l-vaud-proroga.imageAlt': 'L-Ausweis-Dokument auf einem Tisch in einem Schweizer Büro',
+    'blog.article.crediti-esercito-difesa-svizzera.title': 'Schweizer Verteidigung: 970 Millionen für die Armee gefordert',
+    'blog.article.crediti-esercito-difesa-svizzera.excerpt': 'Der Bundesrat fordert knapp eine Milliarde Franken zusätzlich für Boden-Luft- und Radarsysteme, um den Bedrohungen in Europa zu begegnen.',
+    'blog.article.crediti-esercito-difesa-svizzera.imageAlt': 'Bundeshaus in Bern, Sitz des Schweizer Bundesrates',
+    'blog.article.permesso-c-zugo-requisiti.title': 'Führerschein C in Zug: Voraussetzungen und Antragsverfahren',
+    'blog.article.permesso-c-zugo-requisiti.excerpt': 'Leitfaden zum festen Wohnsitz im Kanton Zug: Wohnsitzvoraussetzungen (5 Jahre für EU/EFTA, 10 Jahre für Nicht-EU), Integration und finanzielle Stabilität.',
+    'blog.article.permesso-c-zugo-requisiti.imageAlt': 'Ansicht des Kantons Zug und seiner Verwaltungsbüros',
+    'blog.article.borse-studio-zugo-guide.title': 'Stipendien Kanton Zug: Voraussetzungen und Beträge',
+    'blog.article.borse-studio-zugo-guide.excerpt': 'Praxisleitfaden zu Stipendien und Darlehen im Kanton Zug: Zugangsvoraussetzungen, Höchstbeträge und Bewerbungsfristen.',
+    'blog.article.borse-studio-zugo-guide.imageAlt': 'Studierende in einer modernen Schweizer Bibliothek',
 };
 
 export default blogMetaChDe;

@@ -6566,6 +6566,15 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.permesso-l-vaud-proroga.title': 'Permit L in Vaud: validity max 1 year and extension',
     'blog.article.permesso-l-vaud-proroga.excerpt': 'Validity up to 1 year, employer constraint and SEM management. The rules for the extension or transition to permit B.',
     'blog.article.permesso-l-vaud-proroga.imageAlt': 'L permit document on a desk in a Swiss office',
+    'blog.article.crediti-esercito-difesa-svizzera.title': 'Swiss defense: 970 million requested for the army',
+    'blog.article.crediti-esercito-difesa-svizzera.excerpt': 'The Federal Council is asking for almost a billion extra francs for ground-to-air and radar systems to deal with threats in Europe.',
+    'blog.article.crediti-esercito-difesa-svizzera.imageAlt': 'Federal Palace in Bern, seat of the Swiss Federal Council',
+    'blog.article.permesso-c-zugo-requisiti.title': 'Permit C to Zug: requirements and application procedure',
+    'blog.article.permesso-c-zugo-requisiti.excerpt': 'Permanent residence in the Canton of Zug: residency requirements (5 years for EU/EFTA, 10 for non-EU), integration and financial stability.',
+    'blog.article.permesso-c-zugo-requisiti.imageAlt': 'View of Canton Zug and its administrative offices',
+    'blog.article.borse-studio-zugo-guide.title': 'Canton Zug Scholarships: Requirements and Amounts',
+    'blog.article.borse-studio-zugo-guide.excerpt': 'Practical guide on scholarships and loans in the Canton of Zug: access requirements, maximum amounts and deadlines for submitting applications.',
+    'blog.article.borse-studio-zugo-guide.imageAlt': 'Students studying in a modern Swiss library',
 };
 
 export default blogMetaChEn;

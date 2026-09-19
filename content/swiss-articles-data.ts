@@ -19670,6 +19670,33 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'crediti-esercito-difesa-svizzera',
+    category: 'novita',
+    date: '2026-09-18T18:14:29.973Z',
+    image: '/images/blog/crediti-esercito-difesa-svizzera.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'permesso-c-zugo-requisiti',
+    category: 'pratico',
+    date: '2026-09-18T22:03:28.185Z',
+    image: '/images/blog/permesso-c-zugo-requisiti.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'borse-studio-zugo-guide',
+    category: 'pratico',
+    date: '2026-09-18T23:08:02.019Z',
+    image: '/images/blog/borse-studio-zugo-guide.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

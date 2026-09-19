@@ -6566,6 +6566,15 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.permesso-l-vaud-proroga.title': 'Permis L en Vaud : validité max 1 an et prolongation',
     'blog.article.permesso-l-vaud-proroga.excerpt': 'Validité jusqu\'à 1 an, obligation à l\'employeur et gestion SEM. Les règles pour la prolongation ou le passage au permis B.',
     'blog.article.permesso-l-vaud-proroga.imageAlt': 'Document de permis L sur une table dans un bureau suisse',
+    'blog.article.crediti-esercito-difesa-svizzera.title': 'Défense suisse : 970 millions demandés pour l\'armée',
+    'blog.article.crediti-esercito-difesa-svizzera.excerpt': 'Le Conseil fédéral demande près d\'un milliard de francs supplémentaires pour les systèmes sol-air et radar afin de faire face aux menaces en Europe.',
+    'blog.article.crediti-esercito-difesa-svizzera.imageAlt': 'Palais fédéral à Berne, siège du Conseil fédéral suisse',
+    'blog.article.permesso-c-zugo-requisiti.title': 'Permis C à Zoug : exigences et procédure de demande',
+    'blog.article.permesso-c-zugo-requisiti.excerpt': 'Conduite à domicile stable dans le canton de Zoug : exigences de résidence (5 ans pour UE/AELE, 10 ans pour hors UE), intégration et stabilité financière.',
+    'blog.article.permesso-c-zugo-requisiti.imageAlt': 'Vue du Canton de Zoug et de ses bureaux administratifs',
+    'blog.article.borse-studio-zugo-guide.title': 'Bourses Canton Zoug : exigences et montants',
+    'blog.article.borse-studio-zugo-guide.excerpt': 'Guide pratique sur les bourses et les prêts dans le canton de Zoug : conditions d\'accès, montants maximaux et délais de dépôt des demandes.',
+    'blog.article.borse-studio-zugo-guide.imageAlt': 'Étudiants étudiant dans une bibliothèque suisse moderne',
 };
 
 export default blogMetaChFr;
