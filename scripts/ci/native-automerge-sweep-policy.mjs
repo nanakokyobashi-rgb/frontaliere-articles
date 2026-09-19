@@ -14,9 +14,71 @@ import { pathToFileURL } from 'node:url';
 import { VITEST_CHECK_NAME } from './lib/constants.mjs';
 
 export const LOCKSTEP_HEAD_REF = 'engine-lockstep-auto';
+const COMMIT_SHA_RE = /^[0-9a-f]{40}$/i;
+const REPOSITORY_RE = /^[^/]+\/[^/]+$/;
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
 function deny(reason) {
   return { allow: false, reason };
+}
+
+/**
+ * Select exactly the trusted lockstep PR from either `gh pr list` (array) or
+ * the immediate pre-merge `gh pr view` (single object). A branch name alone
+ * is not an identity: a fork can publish the same ref, and a PR to another
+ * base must never be accepted by this corpus merge workflow.
+ *
+ * @param {unknown} payload list/object returned by gh
+ * @param {string} repository expected base repository `owner/name`
+ * @param {string|number|null} expectedNumber optional PR number to revalidate
+ * @param {string|null} expectedHead optional frozen HEAD SHA to revalidate
+ */
+export function lockstepPullRequestDecision(
+  payload,
+  repository,
+  expectedNumber = null,
+  expectedHead = null,
+) {
+  const isList = Array.isArray(payload);
+  if (!isList && (expectedNumber === null || expectedNumber === undefined
+      || !payload || typeof payload !== 'object')) {
+    return deny('payload PR lockstep non verificabile');
+  }
+  const candidates = isList ? payload : [payload];
+  if (candidates.length !== 1) {
+    return deny(`candidati PR lockstep ambigui (${candidates.length})`);
+  }
+  if (typeof repository !== 'string' || !/^[^/]+\/[^/]+$/.test(repository)) {
+    return deny('repository PR lockstep non verificabile');
+  }
+
+  const pr = candidates[0];
+  if (!pr || typeof pr !== 'object' || Array.isArray(pr)
+      || !Number.isSafeInteger(pr.number) || pr.number <= 0
+      || typeof pr.state !== 'string' || pr.state.toUpperCase() !== 'OPEN'
+      || pr.baseRefName !== 'main'
+      || pr.headRefName !== LOCKSTEP_HEAD_REF
+      || !pr.headRepository || typeof pr.headRepository !== 'object'
+      || Array.isArray(pr.headRepository)
+      || pr.headRepository.nameWithOwner !== repository) {
+    return deny('metadata PR lockstep non autorizzata o incompleta');
+  }
+
+  if (expectedNumber !== null && expectedNumber !== undefined) {
+    const number = typeof expectedNumber === 'number'
+      ? expectedNumber
+      : /^\d+$/.test(String(expectedNumber)) ? Number(expectedNumber) : NaN;
+    if (!Number.isSafeInteger(number) || number !== pr.number) {
+      return deny('numero PR lockstep cambiato o non verificabile');
+    }
+  }
+  if (expectedHead !== null && expectedHead !== undefined) {
+    if (!COMMIT_SHA_RE.test(typeof expectedHead === 'string' ? expectedHead : '')
+        || pr.headRefOid !== expectedHead) {
+      return deny('HEAD PR lockstep cambiata o non verificabile');
+    }
+  }
+  return { allow: true, number: pr.number, reason: `PR lockstep #${pr.number} autorizzata` };
 }
 
 /**
@@ -137,8 +199,6 @@ export function allChecksDecision(checks, requiredName = VITEST_CHECK_NAME) {
   return { allow: true, reason: 'check principale ' + requiredName + ' SUCCESS' };
 }
 
-const COMMIT_SHA_RE = /^[0-9a-f]{40}$/i;
-
 function checkRunState(run) {
   const status = run.status.trim().toUpperCase();
   if (status === 'COMPLETED') {
@@ -148,13 +208,104 @@ function checkRunState(run) {
   return status;
 }
 
-function checkRunTime(run) {
-  const status = run.status.trim().toUpperCase();
-  const raw = status === 'COMPLETED'
-    ? run.completed_at
-    : run.started_at || run.created_at;
-  const value = Date.parse(typeof raw === 'string' ? raw : '');
-  return Number.isFinite(value) ? value : null;
+function workflowRunIdentity(detailsUrl, repository) {
+  if (typeof detailsUrl !== 'string' || !REPOSITORY_RE.test(repository || '')) return null;
+  let url;
+  try {
+    url = new URL(detailsUrl);
+  } catch {
+    return null;
+  }
+  if (url.protocol !== 'https:' || url.hostname !== 'github.com') return null;
+  const parts = url.pathname.split('/').filter(Boolean);
+  if (parts.length !== 7 || `${parts[0]}/${parts[1]}` !== repository
+      || parts[2] !== 'actions' || parts[3] !== 'runs' || parts[5] !== 'job'
+      || !/^[1-9]\d*$/.test(parts[4]) || !/^[1-9]\d*$/.test(parts[6])) {
+    return null;
+  }
+  return { workflowRunId: parts[4], jobId: parts[6] };
+}
+
+function compareDecimalIds(left, right) {
+  const a = String(left).replace(/^0+(?=\d)/, '');
+  const b = String(right).replace(/^0+(?=\d)/, '');
+  if (a.length !== b.length) return a.length > b.length ? 1 : -1;
+  if (a === b) return 0;
+  return a > b ? 1 : -1;
+}
+
+function checkRunGeneration(run, repository) {
+  // `completed_at` describes when a runner happened to finish, not which
+  // rerun is the current generation. The check-runs REST payload has no
+  // top-level generation stamp on every API shape: use an explicit
+  // `created_at`, or correlate the authoritative workflow-run/job URL.
+  // `started_at`/`run_started_at` are deliberately NOT fallbacks: a delayed
+  // queued runner can start after a newer rerun and would recreate the ABA
+  // bug this snapshot is meant to close.
+  let createdAt;
+  let generationId = run.id;
+  let source = 'timestamp';
+  const suite = run.check_suite;
+  if (suite !== undefined) {
+    if (!suite || typeof suite !== 'object' || Array.isArray(suite)
+        || !Number.isSafeInteger(suite.id) || suite.id <= 0) {
+      return null;
+    }
+    if (Object.hasOwn(suite, 'head_sha')) {
+      if (typeof suite.head_sha !== 'string'
+          || !COMMIT_SHA_RE.test(suite.head_sha)
+          || suite.head_sha.toLowerCase() !== run.head_sha.toLowerCase()) {
+        return null;
+      }
+    }
+    // Some endpoints include suite.created_at while the commit/check-runs
+    // response observed in production does not. Validate it when supplied,
+    // but never require or order by it: the workflow-run URL is the source
+    // of generation identity for the timestamp-less shape.
+    if (Object.hasOwn(suite, 'created_at') && suite.created_at !== null
+        && (typeof suite.created_at !== 'string'
+          || !Number.isFinite(Date.parse(suite.created_at)))) {
+      return null;
+    }
+  }
+  if (Object.hasOwn(run, 'created_at') && run.created_at !== null) {
+    if (typeof run.created_at !== 'string') return null;
+    createdAt = Date.parse(run.created_at);
+    if (!Number.isFinite(createdAt)) return null;
+  }
+
+  // `run_attempt` is not present on every check-run API shape. When present,
+  // it is authoritative for same-timestamp reruns and must be a real attempt;
+  // a malformed present value is not silently downgraded to the id fallback.
+  let runAttempt = 0;
+  if (Object.hasOwn(run, 'run_attempt')) {
+    if (!Number.isSafeInteger(run.run_attempt) || run.run_attempt < 1) return null;
+    runAttempt = run.run_attempt;
+  }
+  if (!Number.isFinite(createdAt)) {
+    // The Check Run REST response's nested `check_suite` example contains an
+    // id but not suite timestamps. Its Actions details URL is the authoritative
+    // workflow-run/job correlation available in this response; without that
+    // identity, selection would be a guess and must remain fail-closed.
+    if (suite === undefined) return null;
+    const workflow = workflowRunIdentity(run.details_url, repository);
+    if (!workflow) return null;
+    if (typeof run.external_id !== 'string' || !UUID_RE.test(run.external_id.trim())) {
+      return null;
+    }
+    source = 'workflow-run';
+    // `workflowRunId` proves which Actions run the URL belongs to; the
+    // check-run id is the generation order/tie-break within that run.
+    return { source, createdAt: null, runAttempt, generationId: run.id, ...workflow };
+  }
+  return { source, createdAt, runAttempt, generationId };
+}
+
+function checkRunVerdictMetadata(run) {
+  if (run.status.trim().toUpperCase() !== 'COMPLETED') return true;
+  return typeof run.conclusion === 'string'
+    && run.conclusion.trim()
+    && Number.isFinite(Date.parse(typeof run.completed_at === 'string' ? run.completed_at : ''));
 }
 
 function checkRunBucket(state) {
@@ -169,13 +320,19 @@ function checkRunBucket(state) {
 /**
  * Flatten the exact commit/check-runs response and select the latest run per
  * check name. The endpoint is commit-pinned, but every run is still required
- * to repeat that SHA: a mixed or malformed response is never a verdict.
+ * to repeat that SHA: a mixed or malformed response is never a verdict. The
+ * latest generation is selected by creation timestamp, or by validated
+ * workflow-run/check-run identity when the REST shape has no timestamp. For
+ * the latter, the numeric workflow-run id is the generation and the
+ * check-run id is the tie-break within that workflow run; completion order
+ * is deliberately not a generation signal because an old runner can finish
+ * after a newer rerun.
  *
  * @param {unknown} pages result of `gh api --paginate --slurp` on check-runs
  * @param {string} headSha frozen PR HEAD
  * @returns {{allow: boolean, reason: string, checks?: Array<object>}}
  */
-export function exactCheckRunSnapshot(pages, headSha) {
+export function exactCheckRunSnapshot(pages, headSha, repository = null) {
   if (!COMMIT_SHA_RE.test(typeof headSha === 'string' ? headSha : '')) {
     return deny('HEAD SHA non verificabile per i check-run');
   }
@@ -202,20 +359,39 @@ export function exactCheckRunSnapshot(pages, headSha) {
       if (seenIds.has(run.id)) return deny(`check-run ${run.id} duplicato nel payload paginato`);
       seenIds.add(run.id);
       const state = checkRunState(run);
-      const time = checkRunTime(run);
-      if (!state || time === null) {
-        return deny(`check-run ${run.name} senza stato/tempo verificabile`);
+      const generation = checkRunGeneration(run, repository);
+      if (!state || !generation || !checkRunVerdictMetadata(run)) {
+        return deny(`check-run ${run.name} senza generazione/stato verificabile`);
       }
       const candidate = {
         name: run.name,
         state,
         bucket: checkRunBucket(state),
         id: run.id,
-        time,
+        ...generation,
       };
       const previous = latest.get(run.name);
-      if (!previous || candidate.time > previous.time
-          || (candidate.time === previous.time && candidate.id > previous.id)) {
+      if (previous && candidate.source !== previous.source) {
+        return deny(`check-run ${run.name} con generazioni non correlabili`);
+      }
+      let newer = !previous;
+      if (previous) {
+        if (candidate.source === 'timestamp') {
+          newer = candidate.createdAt > previous.createdAt
+            || (candidate.createdAt === previous.createdAt
+              && (candidate.runAttempt > previous.runAttempt
+                || (candidate.runAttempt === previous.runAttempt
+                  && candidate.generationId > previous.generationId)));
+        } else {
+          const workflowOrder = compareDecimalIds(
+            candidate.workflowRunId,
+            previous.workflowRunId,
+          );
+          newer = workflowOrder > 0
+            || (workflowOrder === 0 && candidate.id > previous.id);
+        }
+      }
+      if (newer) {
         latest.set(run.name, candidate);
       }
     }
@@ -245,8 +421,8 @@ function requiredCheckNames(payload) {
   return { allow: true, names };
 }
 
-function commitCheckDecision(mode, pages, requiredNames, headSha, requiredName) {
-  const snapshot = exactCheckRunSnapshot(pages, headSha);
+function commitCheckDecision(mode, pages, requiredNames, headSha, requiredName, repository) {
+  const snapshot = exactCheckRunSnapshot(pages, headSha, repository);
   if (!snapshot.allow) return snapshot;
   const names = requiredCheckNames(requiredNames);
   if (!names.allow) return names;
@@ -263,12 +439,24 @@ function commitCheckDecision(mode, pages, requiredNames, headSha, requiredName) 
   return deny('modalità check-run sconosciuta');
 }
 
-export function requiredCheckRunsDecision(pages, requiredNames, headSha, requiredName = VITEST_CHECK_NAME) {
-  return commitCheckDecision('required', pages, requiredNames, headSha, requiredName);
+export function requiredCheckRunsDecision(
+  pages,
+  requiredNames,
+  headSha,
+  requiredName = VITEST_CHECK_NAME,
+  repository = null,
+) {
+  return commitCheckDecision('required', pages, requiredNames, headSha, requiredName, repository);
 }
 
-export function allCheckRunsDecision(pages, requiredNames, headSha, requiredName = VITEST_CHECK_NAME) {
-  return commitCheckDecision('all', pages, requiredNames, headSha, requiredName);
+export function allCheckRunsDecision(
+  pages,
+  requiredNames,
+  headSha,
+  requiredName = VITEST_CHECK_NAME,
+  repository = null,
+) {
+  return commitCheckDecision('all', pages, requiredNames, headSha, requiredName, repository);
 }
 
 function readJson(file) {
@@ -277,11 +465,21 @@ function readJson(file) {
 }
 
 function main() {
-  const [mode, file, requiredFile, headSha] = process.argv.slice(2);
+  const [mode, file, requiredFile, headSha, contextArg] = process.argv.slice(2);
   const payload = readJson(file);
   if (mode === '--enroll') {
     const numbers = enrollablePullRequestNumbers(payload);
     if (numbers.length > 0) process.stdout.write(`${numbers.join('\n')}\n`);
+    return;
+  }
+  if (mode === '--lockstep-pr') {
+    const decision = lockstepPullRequestDecision(payload, requiredFile, headSha, contextArg);
+    if (!decision.allow) {
+      console.error(decision.reason);
+      process.exitCode = 1;
+      return;
+    }
+    console.log(decision.number);
     return;
   }
   if (mode === '--all-checks') {
@@ -307,8 +505,8 @@ function main() {
   if (mode === '--required-check-runs' || mode === '--all-check-runs') {
     const required = readJson(requiredFile);
     const decision = mode === '--required-check-runs'
-      ? requiredCheckRunsDecision(payload, required, headSha)
-      : allCheckRunsDecision(payload, required, headSha);
+      ? requiredCheckRunsDecision(payload, required, headSha, VITEST_CHECK_NAME, contextArg)
+      : allCheckRunsDecision(payload, required, headSha, VITEST_CHECK_NAME, contextArg);
     if (!decision.allow) {
       console.error(decision.reason);
       process.exitCode = 1;

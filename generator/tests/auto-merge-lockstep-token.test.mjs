@@ -31,6 +31,7 @@ import {
   allChecksDecision,
   allCheckRunsDecision,
   exactCheckRunSnapshot,
+  lockstepPullRequestDecision,
   requiredCheckDecision,
   requiredCheckRunsDecision,
 } from '../../scripts/ci/native-automerge-sweep-policy.mjs';
@@ -74,8 +75,19 @@ test('non ricade MAI su GITHUB_TOKEN per il merge', () => {
 });
 
 test('è ristretto al branch che il mirror possiede', () => {
-  assert.match(wf, /--head engine-lockstep-auto/,
+  assert.match(wf, /gh pr list --repo "\$GH_REPO" --head engine-lockstep-auto --base main/,
     'senza --head l\'auto-merge prenderebbe qualunque PR aperta del repo');
+  assert.match(wf, /--json number,state,baseRefName,headRefName,headRepository/);
+  assert.match(wf, /--lockstep-pr "\$PR_CANDIDATES_FILE" "\$GH_REPO"/);
+});
+
+test('il lockstep non espone un dispatch manuale da un ref arbitrario', () => {
+  assert.doesNotMatch(wf, /^\s*workflow_dispatch:/m,
+    'il dispatch manuale potrebbe eseguire una revisione non trusted prima dei gate');
+  assert.match(wf, /check_suite:\n\s+types: \[completed\]/,
+    'il trigger check_suite deve restare disponibile sul workflow trusted');
+  assert.match(wf, /schedule:\n\s+- cron:/,
+    'il trigger schedule deve restare disponibile sul workflow trusted');
 });
 
 test('usa --merge e non --squash, per non perdere la provenienza', () => {
@@ -89,20 +101,20 @@ test('usa --merge e non --squash, per non perdere la provenienza', () => {
 });
 
 test('il lockstep legge tutti i check e resta fail-closed', () => {
-  assert.match(wf, /gh pr checks "\$PR" --required --json name/);
+  assert.match(wf, /gh pr checks "\$PR" --repo "\$GH_REPO" --required --json name/);
   assert.doesNotMatch(wf, /gh pr checks "\$PR" --json name,state,bucket/,
     'gli stati non devono provenire da uno snapshot PR non legato alla HEAD');
   assert.match(wf, /gh api --paginate --slurp[\s\S]+commits\/\$\{HEAD_SHA\}\/check-runs\?per_page=100/);
   assert.match(wf, /native-automerge-sweep-policy\.mjs/);
-  assert.match(wf, /--required-check-runs "\$CHECK_RUNS_FILE" "\$REQUIRED_NAMES_FILE" "\$HEAD_SHA"/);
-  assert.match(wf, /--all-check-runs "\$CHECK_RUNS_FILE" "\$REQUIRED_NAMES_FILE" "\$HEAD_SHA"/);
+  assert.match(wf, /--required-check-runs "\$CHECK_RUNS_FILE" "\$REQUIRED_NAMES_FILE" "\$HEAD_SHA" "\$GH_REPO"/);
+  assert.match(wf, /--all-check-runs "\$CHECK_RUNS_FILE" "\$REQUIRED_NAMES_FILE" "\$HEAD_SHA" "\$GH_REPO"/);
   assert.match(wf, /REQUIRED_NAMES_EXIT=/);
   assert.match(wf, /CHECK_RUNS_EXIT=/);
   assert.match(wf, /--merge --delete-branch=false/);
 });
 
 test('il merge è vincolato alla HEAD catturata prima dei check', () => {
-  const headCapture = wf.indexOf('HEAD_SHA=$(gh pr view "$PR" --json headRefOid');
+  const headCapture = wf.indexOf('HEAD_SHA=$(gh pr view "$PR" --repo "$GH_REPO" --json headRefOid');
   const checks = wf.indexOf('REQUIRED_NAMES_FILE=', headCapture);
   const runs = wf.indexOf('CHECK_RUNS_FILE=', checks);
   const merge = wf.indexOf('gh pr merge "$PR" --merge --delete-branch=false');
@@ -116,25 +128,104 @@ test('il merge è vincolato alla HEAD catturata prima dei check', () => {
   );
   assert.match(wf, /HEAD_SHA.*\^\[0-9a-fA-F\]\{40\}/s,
     'HEAD non valida deve restare fail-closed');
+  const finalMetadata = wf.indexOf('FINAL_PR_FILE=');
+  assert.ok(finalMetadata > runs && finalMetadata < merge,
+    'la metadata PR deve essere riletta subito prima del merge');
+  assert.match(wf, /--json number,state,baseRefName,headRefName,headRepository,headRefOid/);
+  assert.match(wf, /--lockstep-pr "\$FINAL_PR_FILE" "\$GH_REPO" "\$PR" "\$HEAD_SHA"/);
+});
+
+const LOCKSTEP_REPO = 'nanakokyobashi-rgb/frontaliere-articles';
+const LOCKSTEP_HEAD = 'c'.repeat(40);
+const validLockstepPr = {
+  number: 1597,
+  state: 'OPEN',
+  baseRefName: 'main',
+  headRefName: 'engine-lockstep-auto',
+  headRepository: { nameWithOwner: LOCKSTEP_REPO },
+  headRefOid: LOCKSTEP_HEAD,
+};
+
+test('la selezione lockstep richiede candidato unico, base, ref e repository trusted', () => {
+  const cases = [
+    ['candidato valido', [validLockstepPr], true],
+    ['nessun candidato', [], false],
+    ['candidati multipli', [validLockstepPr, { ...validLockstepPr, number: 1598 }], false],
+    ['fork', [{ ...validLockstepPr, headRepository: { nameWithOwner: 'fork/frontaliere-articles' } }], false],
+    ['base diversa', [{ ...validLockstepPr, baseRefName: 'develop' }], false],
+    ['ref diverso', [{ ...validLockstepPr, headRefName: 'engine-lockstep-other' }], false],
+    ['repository vuoto', [{ ...validLockstepPr, headRepository: { nameWithOwner: '' } }], false],
+    ['base vuota', [{ ...validLockstepPr, baseRefName: '' }], false],
+    ['ref vuoto', [{ ...validLockstepPr, headRefName: '' }], false],
+    ['stato chiuso', [{ ...validLockstepPr, state: 'CLOSED' }], false],
+    ['metadata incompleta', [{ ...validLockstepPr, headRepository: null }], false],
+  ];
+  for (const [name, payload, expected] of cases) {
+    assert.equal(lockstepPullRequestDecision(payload, LOCKSTEP_REPO).allow, expected, name);
+  }
+  assert.equal(
+    lockstepPullRequestDecision(validLockstepPr, LOCKSTEP_REPO).allow,
+    false,
+    'un oggetto singolo non può mascherare una risposta list malformata',
+  );
+  assert.equal(
+    lockstepPullRequestDecision(validLockstepPr, LOCKSTEP_REPO, '1597', LOCKSTEP_HEAD).allow,
+    true,
+    'la rilettura finale deve riconfermare numero e HEAD',
+  );
+  assert.equal(
+    lockstepPullRequestDecision(validLockstepPr, LOCKSTEP_REPO, '1597', 'd'.repeat(40)).allow,
+    false,
+    'la rilettura finale deve negare una HEAD cambiata',
+  );
 });
 
 const HEAD_A = 'a'.repeat(40);
 const HEAD_B = 'b'.repeat(40);
 const requiredNames = [{ name: VITEST_CHECK_NAME }, { name: 'generator-ci' }];
 
-function checkRun(id, name, state, head = HEAD_A, time = `2026-09-19T${String(id % 24).padStart(2, '0')}:00:00Z`) {
+function checkRun(
+  id,
+  name,
+  state,
+  head = HEAD_A,
+  time = `2026-09-19T${String(id % 24).padStart(2, '0')}:00:00Z`,
+  options = {},
+) {
   const normalized = state.toLowerCase();
   const active = ['queued', 'in_progress', 'requested', 'waiting', 'pending'].includes(normalized);
-  return {
+  const run = {
     id,
     name,
     head_sha: head,
     status: active ? normalized : 'completed',
     conclusion: active ? null : normalized,
-    created_at: time,
+    created_at: options.createdAt ?? time,
     started_at: time,
-    completed_at: active ? null : time,
+    completed_at: active ? null : options.completedAt ?? time,
   };
+  if (options.startedAt !== undefined) run.started_at = options.startedAt;
+  if (options.omitCreatedAt) delete run.created_at;
+  if (options.runAttempt !== undefined) run.run_attempt = options.runAttempt;
+  if (options.apiShape) {
+    // Shape observed from /commits/{sha}/check-runs: no generation timestamp
+    // or run_attempt, and check_suite contains only its id in this response.
+    run.created_at = null;
+    delete run.run_attempt;
+    run.check_suite = { id: options.checkSuiteId ?? id };
+    if (options.omitCheckSuite) delete run.check_suite;
+    if (!options.omitDetailsUrl) {
+      const detailsRepository = options.detailsRepository ?? LOCKSTEP_REPO;
+      const workflowRunId = options.workflowRunId ?? String(35442617310 + id);
+      const jobId = options.jobId ?? String(105895961099 + id);
+      run.details_url = `https://github.com/${detailsRepository}/actions/runs/${workflowRunId}/job/${jobId}`;
+    }
+    if (!options.omitExternalId) {
+      run.external_id = options.externalId
+        ?? `00000000-0000-4000-8000-${String(id).padStart(12, '0')}`;
+    }
+  }
+  return run;
 }
 
 function checkPages(...runs) {
@@ -203,6 +294,122 @@ test('check-run snapshot seleziona l ultimo run per nome e fail-closes malformed
     false,
     'id duplicato nelle pagine',
   );
+});
+
+test('la generazione vince sul completamento fuori ordine e sui tie-break', () => {
+  const outOfOrder = checkPages(
+    // È la generazione PIÙ NUOVA e deve vincere anche se termina prima.
+    checkRun(501, VITEST_CHECK_NAME, 'SUCCESS', HEAD_A, '2026-09-19T06:01:00Z', {
+      completedAt: '2026-09-19T06:02:00Z',
+      runAttempt: 2,
+    }),
+    // Rerun più vecchio: finisce dopo e non deve sovrascrivere il successo.
+    checkRun(500, VITEST_CHECK_NAME, 'FAILURE', HEAD_A, '2026-09-19T06:00:00Z', {
+      completedAt: '2026-09-19T06:03:00Z',
+      runAttempt: 1,
+    }),
+  );
+  const snapshot = exactCheckRunSnapshot(outOfOrder, HEAD_A);
+  assert.equal(snapshot.allow, true);
+  assert.equal(snapshot.checks.find((check) => check.name === VITEST_CHECK_NAME)?.state, 'SUCCESS');
+
+  const sameGenerationTime = checkPages(
+    checkRun(601, VITEST_CHECK_NAME, 'FAILURE', HEAD_A, '2026-09-19T07:00:00Z', {
+      completedAt: '2026-09-19T07:02:00Z', runAttempt: 1,
+    }),
+    checkRun(602, VITEST_CHECK_NAME, 'SUCCESS', HEAD_A, '2026-09-19T07:00:00Z', {
+      completedAt: '2026-09-19T07:01:00Z', runAttempt: 2,
+    }),
+  );
+  assert.equal(
+    exactCheckRunSnapshot(sameGenerationTime, HEAD_A).checks
+      .find((check) => check.name === VITEST_CHECK_NAME)?.state,
+    'SUCCESS',
+    'run_attempt deve precedere il tie-break sull id',
+  );
+
+  const malformedGeneration = [
+    ['timestamp mancante', checkPages(checkRun(603, VITEST_CHECK_NAME, 'SUCCESS', HEAD_A, '2026-09-19T08:00:00Z', {
+      omitCreatedAt: true, startedAt: null,
+    }))],
+    ['run_attempt non numerico', checkPages(checkRun(604, VITEST_CHECK_NAME, 'SUCCESS', HEAD_A, '2026-09-19T08:00:00Z', {
+      runAttempt: '2',
+    }))],
+  ];
+  for (const [name, pages] of malformedGeneration) {
+    assert.equal(exactCheckRunSnapshot(pages, HEAD_A).allow, false, name);
+  }
+
+  const apiShapedOutOfOrder = checkPages(
+    // Shape reale: niente created_at/run_attempt top-level. Il queued vecchio
+    // ha uno started_at più recente, ma non deve oscurare la generazione nuova;
+    // l'id workflow più alto identifica il rerun nuovo anche quando il check-run
+    // id è più basso.
+    checkRun(799, VITEST_CHECK_NAME, 'IN_PROGRESS', HEAD_A, '2026-09-19T10:30:00Z', {
+      apiShape: true, checkSuiteId: 799, workflowRunId: '35442617310',
+    }),
+    checkRun(701, VITEST_CHECK_NAME, 'SUCCESS', HEAD_A, '2026-09-19T10:01:00Z', {
+      apiShape: true, checkSuiteId: 701, workflowRunId: '35442617311',
+      completedAt: '2026-09-19T10:02:00Z',
+    }),
+  );
+  assert.equal(apiShapedOutOfOrder[0].check_runs[0].created_at, null);
+  assert.deepEqual(apiShapedOutOfOrder[0].check_runs[0].check_suite, { id: 799 });
+  const apiSnapshot = exactCheckRunSnapshot(apiShapedOutOfOrder, HEAD_A, LOCKSTEP_REPO);
+  assert.equal(apiSnapshot.allow, true, 'la shape reale usa il workflow-run URL per la generazione');
+  assert.equal(
+    apiSnapshot.checks.find((check) => check.name === VITEST_CHECK_NAME)?.state,
+    'SUCCESS',
+    'un queued vecchio non deve sovrascrivere il rerun nuovo',
+  );
+  assert.equal(
+    exactCheckRunSnapshot(checkPages(checkRun(703, VITEST_CHECK_NAME, 'SUCCESS', HEAD_A, '2026-09-19T10:00:00Z', {
+      omitCreatedAt: true, startedAt: '2026-09-19T10:30:00Z',
+    })), HEAD_A).allow,
+    false,
+    'senza created_at né check_suite la generazione è inconcludente',
+  );
+
+  const sameWorkflowRun = checkPages(
+    checkRun(801, VITEST_CHECK_NAME, 'FAILURE', HEAD_A, '2026-09-19T10:00:00Z', {
+      apiShape: true, workflowRunId: '35442617312',
+    }),
+    checkRun(802, VITEST_CHECK_NAME, 'SUCCESS', HEAD_A, '2026-09-19T10:01:00Z', {
+      apiShape: true, workflowRunId: '35442617312',
+    }),
+  );
+  assert.equal(
+    exactCheckRunSnapshot(sameWorkflowRun, HEAD_A, LOCKSTEP_REPO)
+      .checks.find((check) => check.name === VITEST_CHECK_NAME)?.state,
+    'SUCCESS',
+    'nello stesso workflow-run il check-run id è il tie-break',
+  );
+  const malformedApiShape = [
+    ['details URL assente', checkPages(checkRun(804, VITEST_CHECK_NAME, 'SUCCESS', HEAD_A, undefined, {
+      apiShape: true, omitDetailsUrl: true,
+    }))],
+    ['external id assente', checkPages(checkRun(805, VITEST_CHECK_NAME, 'SUCCESS', HEAD_A, undefined, {
+      apiShape: true, omitExternalId: true,
+    }))],
+    ['external id non UUID', checkPages(checkRun(806, VITEST_CHECK_NAME, 'SUCCESS', HEAD_A, undefined, {
+      apiShape: true, externalId: 'not-a-workflow-id',
+    }))],
+    ['check suite assente', checkPages(checkRun(807, VITEST_CHECK_NAME, 'SUCCESS', HEAD_A, undefined, {
+      apiShape: true, omitCheckSuite: true,
+    }))],
+    ['repository details non trusted', checkPages(checkRun(808, VITEST_CHECK_NAME, 'SUCCESS', HEAD_A, undefined, {
+      apiShape: true, detailsRepository: 'fork/frontaliere-articles',
+    }))],
+    ['workflow run id non positivo', checkPages(checkRun(809, VITEST_CHECK_NAME, 'SUCCESS', HEAD_A, undefined, {
+      apiShape: true, workflowRunId: '0',
+    }))],
+    ['job id non numerico', checkPages(checkRun(810, VITEST_CHECK_NAME, 'SUCCESS', HEAD_A, undefined, {
+      apiShape: true, jobId: 'not-a-job',
+    }))],
+  ];
+  for (const [name, pages] of malformedApiShape) {
+    assert.equal(exactCheckRunSnapshot(pages, HEAD_A, LOCKSTEP_REPO).allow, false, name);
+  }
 });
 
 const required = (state, overrides = {}) => ({
