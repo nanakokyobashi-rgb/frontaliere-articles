@@ -131,48 +131,44 @@ jobs:
           fi
           echo "HEAD lockstep verificata prima dei check: $HEAD_SHA"
 
-          # Leggi due snapshot e passa entrambi al policy helper condiviso:
-          # quello --required verifica che ogni check richiesto, incluso il
-          # principale, sia SUCCESS; quello completo non nasconde eventuali
-          # check opzionali rossi o pendenti. `gh pr checks` esce non-zero su
-          # pending/failure: il codice di uscita resta una seconda barriera,
-          # mentre il JSON viene comunque valutato quando esiste. Output vuoto,
-          # non-array, check principale mancante e stati non sicuri sono tutti
+          # Leggi i nomi dei check required con il comando nativo, ma prendi
+          # OGNI stato dal payload check-runs della commit congelata. `gh pr
+          # checks` senza una commit esplicita può restituire il verdetto di una
+          # HEAD intermedia (A→B→A); il policy helper verifica head_sha su ogni
+          # run e poi conserva la distinzione required/all. Output vuoto,
+          # pagine malformate, run di un'altra HEAD e stati non sicuri sono tutti
           # no-op fail-closed; il prossimo check_suite/cron riprova.
-          REQUIRED_CHECKS_FILE="$RUNNER_TEMP/lockstep-required-checks.json"
-          REQUIRED_CHECKS_EXIT=0
-          if gh pr checks "$PR" --required --json name,state,bucket > "$REQUIRED_CHECKS_FILE"; then
-            REQUIRED_CHECKS_EXIT=0
+          REQUIRED_NAMES_FILE="$RUNNER_TEMP/lockstep-required-names.json"
+          REQUIRED_NAMES_EXIT=0
+          if gh pr checks "$PR" --required --json name > "$REQUIRED_NAMES_FILE"; then
+            REQUIRED_NAMES_EXIT=0
           else
-            REQUIRED_CHECKS_EXIT=$?
+            REQUIRED_NAMES_EXIT=$?
           fi
-          CHECKS_FILE="$RUNNER_TEMP/lockstep-checks.json"
-          CHECKS_EXIT=0
-          if gh pr checks "$PR" --json name,state,bucket > "$CHECKS_FILE"; then
-            CHECKS_EXIT=0
+          CHECK_RUNS_FILE="$RUNNER_TEMP/lockstep-check-runs.json"
+          CHECK_RUNS_EXIT=0
+          if gh api --paginate --slurp \
+            "repos/${GH_REPO}/commits/${HEAD_SHA}/check-runs?per_page=100" > "$CHECK_RUNS_FILE"; then
+            CHECK_RUNS_EXIT=0
           else
-            CHECKS_EXIT=$?
+            CHECK_RUNS_EXIT=$?
           fi
           if ! REQUIRED_DECISION=$(node scripts/ci/native-automerge-sweep-policy.mjs \
-            --required-check "$REQUIRED_CHECKS_FILE" 2>&1); then
-            echo "Check required non autorizzante — non mergio: $REQUIRED_DECISION"
+            --required-check-runs "$CHECK_RUNS_FILE" "$REQUIRED_NAMES_FILE" "$HEAD_SHA" 2>&1); then
+            echo "Check required sulla HEAD non autorizzante — non mergio: $REQUIRED_DECISION"
             exit 0
           fi
           echo "check required: $REQUIRED_DECISION"
-          if [ "$REQUIRED_CHECKS_EXIT" -ne 0 ]; then
-            echo "Lettura check required non conclusa con successo (exit $REQUIRED_CHECKS_EXIT) — non mergio."
+          if [ "$REQUIRED_NAMES_EXIT" -ne 0 ] || [ "$CHECK_RUNS_EXIT" -ne 0 ]; then
+            echo "Lettura dei nomi/check-run non conclusa con successo (required=$REQUIRED_NAMES_EXIT, runs=$CHECK_RUNS_EXIT) — non mergio."
             exit 0
           fi
           if ! CHECK_DECISION=$(node scripts/ci/native-automerge-sweep-policy.mjs \
-            --all-checks "$CHECKS_FILE" 2>&1); then
-            echo "Check completo non autorizzante — non mergio: $CHECK_DECISION"
+            --all-check-runs "$CHECK_RUNS_FILE" "$REQUIRED_NAMES_FILE" "$HEAD_SHA" 2>&1); then
+            echo "Check completo sulla HEAD non autorizzante — non mergio: $CHECK_DECISION"
             exit 0
           fi
           echo "check completo: $CHECK_DECISION"
-          if [ "$CHECKS_EXIT" -ne 0 ]; then
-            echo "Lettura check completo non conclusa con successo (exit $CHECKS_EXIT) — non mergio."
-            exit 0
-          fi
 
           # `--merge`, non `--squash`: il commit del mirror porta il SHA del sito da cui
           # l'engine è stato copiato, che è l'unica traccia di provenienza fra i due repo.

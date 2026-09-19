@@ -137,13 +137,147 @@ export function allChecksDecision(checks, requiredName = VITEST_CHECK_NAME) {
   return { allow: true, reason: 'check principale ' + requiredName + ' SUCCESS' };
 }
 
+const COMMIT_SHA_RE = /^[0-9a-f]{40}$/i;
+
+function checkRunState(run) {
+  const status = run.status.trim().toUpperCase();
+  if (status === 'COMPLETED') {
+    return typeof run.conclusion === 'string' && run.conclusion.trim()
+      ? run.conclusion.trim().toUpperCase() : '';
+  }
+  return status;
+}
+
+function checkRunTime(run) {
+  const status = run.status.trim().toUpperCase();
+  const raw = status === 'COMPLETED'
+    ? run.completed_at
+    : run.started_at || run.created_at;
+  const value = Date.parse(typeof raw === 'string' ? raw : '');
+  return Number.isFinite(value) ? value : null;
+}
+
+function checkRunBucket(state) {
+  if (state === 'SUCCESS') return 'pass';
+  if (state === 'SKIPPED' || state === 'NEUTRAL') return 'skipping';
+  if (['QUEUED', 'IN_PROGRESS', 'REQUESTED', 'WAITING', 'PENDING'].includes(state)) {
+    return 'pending';
+  }
+  return 'fail';
+}
+
+/**
+ * Flatten the exact commit/check-runs response and select the latest run per
+ * check name. The endpoint is commit-pinned, but every run is still required
+ * to repeat that SHA: a mixed or malformed response is never a verdict.
+ *
+ * @param {unknown} pages result of `gh api --paginate --slurp` on check-runs
+ * @param {string} headSha frozen PR HEAD
+ * @returns {{allow: boolean, reason: string, checks?: Array<object>}}
+ */
+export function exactCheckRunSnapshot(pages, headSha) {
+  if (!COMMIT_SHA_RE.test(typeof headSha === 'string' ? headSha : '')) {
+    return deny('HEAD SHA non verificabile per i check-run');
+  }
+  if (!Array.isArray(pages) || pages.length === 0) {
+    return deny('payload check-run paginato non è un array non vuoto');
+  }
+
+  const latest = new Map();
+  const seenIds = new Set();
+  for (const [pageIndex, page] of pages.entries()) {
+    if (!page || typeof page !== 'object' || Array.isArray(page)
+        || !Array.isArray(page.check_runs)) {
+      return deny(`pagina check-run ${pageIndex} non verificabile`);
+    }
+    for (const [runIndex, run] of page.check_runs.entries()) {
+      if (!run || typeof run !== 'object' || Array.isArray(run)
+          || !Number.isSafeInteger(run.id) || run.id <= 0
+          || typeof run.name !== 'string' || !run.name
+          || typeof run.head_sha !== 'string' || !COMMIT_SHA_RE.test(run.head_sha)
+          || run.head_sha.toLowerCase() !== headSha.toLowerCase()
+          || typeof run.status !== 'string' || !run.status.trim()) {
+        return deny(`check-run ${pageIndex}:${runIndex} non verificabile o fuori HEAD`);
+      }
+      if (seenIds.has(run.id)) return deny(`check-run ${run.id} duplicato nel payload paginato`);
+      seenIds.add(run.id);
+      const state = checkRunState(run);
+      const time = checkRunTime(run);
+      if (!state || time === null) {
+        return deny(`check-run ${run.name} senza stato/tempo verificabile`);
+      }
+      const candidate = {
+        name: run.name,
+        state,
+        bucket: checkRunBucket(state),
+        id: run.id,
+        time,
+      };
+      const previous = latest.get(run.name);
+      if (!previous || candidate.time > previous.time
+          || (candidate.time === previous.time && candidate.id > previous.id)) {
+        latest.set(run.name, candidate);
+      }
+    }
+  }
+  if (latest.size === 0) return deny('nessun check-run sulla HEAD verificata');
+  return {
+    allow: true,
+    reason: `check-run sulla HEAD ${headSha} verificati`,
+    checks: [...latest.values()].map(({ name, state, bucket }) => ({ name, state, bucket })),
+  };
+}
+
+function requiredCheckNames(payload) {
+  if (!Array.isArray(payload) || payload.length === 0) {
+    return deny('payload dei nomi required non è un array non vuoto');
+  }
+  const names = [];
+  const seen = new Set();
+  for (const [index, item] of payload.entries()) {
+    if (!item || typeof item !== 'object' || Array.isArray(item)
+        || typeof item.name !== 'string' || !item.name || seen.has(item.name)) {
+      return deny(`nome required ${index} non verificabile o duplicato`);
+    }
+    seen.add(item.name);
+    names.push(item.name);
+  }
+  return { allow: true, names };
+}
+
+function commitCheckDecision(mode, pages, requiredNames, headSha, requiredName) {
+  const snapshot = exactCheckRunSnapshot(pages, headSha);
+  if (!snapshot.allow) return snapshot;
+  const names = requiredCheckNames(requiredNames);
+  if (!names.allow) return names;
+  const requiredSet = new Set(names.names);
+  const missing = names.names.find((name) => !snapshot.checks.some((check) => check.name === name));
+  if (missing) return deny(`check required ${missing} assente sulla HEAD ${headSha}`);
+  if (mode === 'required') {
+    return requiredCheckDecision(
+      snapshot.checks.filter((check) => requiredSet.has(check.name)),
+      requiredName,
+    );
+  }
+  if (mode === 'all') return allChecksDecision(snapshot.checks, requiredName);
+  return deny('modalità check-run sconosciuta');
+}
+
+export function requiredCheckRunsDecision(pages, requiredNames, headSha, requiredName = VITEST_CHECK_NAME) {
+  return commitCheckDecision('required', pages, requiredNames, headSha, requiredName);
+}
+
+export function allCheckRunsDecision(pages, requiredNames, headSha, requiredName = VITEST_CHECK_NAME) {
+  return commitCheckDecision('all', pages, requiredNames, headSha, requiredName);
+}
+
 function readJson(file) {
   if (!file) throw new Error('file JSON mancante');
   return JSON.parse(readFileSync(resolve(file), 'utf8'));
 }
 
 function main() {
-  const [mode, file] = process.argv.slice(2);
+  const [mode, file, requiredFile, headSha] = process.argv.slice(2);
   const payload = readJson(file);
   if (mode === '--enroll') {
     const numbers = enrollablePullRequestNumbers(payload);
@@ -162,6 +296,19 @@ function main() {
   }
   if (mode === '--required-check') {
     const decision = requiredCheckDecision(payload);
+    if (!decision.allow) {
+      console.error(decision.reason);
+      process.exitCode = 1;
+      return;
+    }
+    console.log(decision.reason);
+    return;
+  }
+  if (mode === '--required-check-runs' || mode === '--all-check-runs') {
+    const required = readJson(requiredFile);
+    const decision = mode === '--required-check-runs'
+      ? requiredCheckRunsDecision(payload, required, headSha)
+      : allCheckRunsDecision(payload, required, headSha);
     if (!decision.allow) {
       console.error(decision.reason);
       process.exitCode = 1;
