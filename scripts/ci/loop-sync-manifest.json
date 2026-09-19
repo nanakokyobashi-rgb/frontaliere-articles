@@ -3971,7 +3971,7 @@
       "mode": "adapted",
       "reason": "Il corpus aggiunge al contratto body-input condiviso il fast lane del ledger: sezioni/body predicate, registry contract, lifecycle ledger e percorsi `filter|only|check|post`; il sito conserva l'helper per la policy test-only e il proprio contratto PR/body. I consumer mantengono API e call-site locali, quindi questo file non è trasportabile come copia identica e non viene modificato funzionalmente in questa PR.",
       "baseline": {
-        "site": "961ca48e1176be3",
+        "site": "961cae48e1176be3",
         "corpus": "eb10df6a0fe35ea0",
         "alignedAt": "2026-09-19"
       }
