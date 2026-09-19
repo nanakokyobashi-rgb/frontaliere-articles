@@ -145,13 +145,18 @@ jobs:
           # storia completa anche quando la PR non modifica `content/`.
           fetch-depth: 0
           # Storia completa di commit e tree, ma blob scaricati solo per la
-          # HEAD: il clone pieno portava ~1 GB di blob storici (circa 74 s di
-          # checkout) di cui i gate leggono una manciata — i registri della
-          # revisione base (`scripts/lib/corpus-floors.mjs`), le superfici di
-          # `retired-articles-fully-removed`, il diff della review. Quei blob
+          # HEAD: il clone pieno portava ~1 GB di pack, di cui i gate leggono
+          # una manciata di blob storici — i registri della revisione base
+          # (`scripts/lib/corpus-floors.mjs`), le superfici di
+          # `retired-articles-fully-removed`, le baseline cambiate del manifest
+          # (`loop-baseline-pr-gate.mjs`), il diff della review. Quei blob
           # arrivano su richiesta con le credenziali che il checkout lascia
-          # configurate; se il fetch fallisce, `git show` esce != 0 e i due
-          # consumer falliscono chiusi, come per un blob assente.
+          # configurate. Ogni consumer distingue il path ASSENTE (dal tree, che
+          # il partial clone ha sempre) dal blob ILLEGGIBILE (fetch fallito):
+          # il secondo e' un errore o una storia non verificabile, mai
+          # un'assenza. Step `Run actions/checkout@v5`: 63-64 s col clone
+          # pieno, 52 s cosi' (run 35460972059 e 35460929675 contro 35461528619,
+          # 2026-09-19).
           # Niente sparse: i gate della PR leggono `content/`, `public/` e
           # `data/jobs/` (misurato: 41 test rossi senza quei path, 10 senza
           # solo `data/`).
