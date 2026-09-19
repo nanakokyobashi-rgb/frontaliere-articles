@@ -68,12 +68,17 @@ run-name: "Code checks and review · ${{ github.event.pull_request.number && for
 # (`.github/workflows/content-gates-main.yml`): li' gira il sottoinsieme dei
 # gate che leggono `content/**`, con gli offender in una issue.
 on:
-  # Body edits must re-enter the code check: a corrected description is a new
-  # review input even when the code HEAD is unchanged. Title/other edit
-  # metadata may also produce a cheap rerun, but the guard below only re-arms
-  # review for an actual body edit.
+  # Niente `edited`: un cambio di titolo o body lascia la HEAD identica, e con
+  # `cancel-in-progress` un edit arrivato durante la run di `synchronize` la
+  # uccideva per rimisurare lo stesso codice (13 run su 52 il 2026-09-19).
+  # Il body corretto rientra comunque: `retry-code-check-after-body-edit.yml`
+  # (pull_request_target: [edited]) riesegue la run della HEAD quando e' fallita
+  # sul contratto del body o sul solo gate della review, e la rerun rifa' la
+  # review perche' il guard qui sotto conta soltanto le review legate alla
+  # revisione CORRENTE del body. Stessa scelta del sito
+  # (valerielinc-ops/frontaliere-si-o-no#9118).
   pull_request:
-    types: [opened, synchronize, reopened, ready_for_review, edited]
+    types: [opened, synchronize, reopened, ready_for_review]
   push:
     branches: [main]
   workflow_dispatch:
@@ -443,7 +448,6 @@ jobs:
           HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
           REPO: ${{ github.repository }}
           REVIEW_REVISION: ${{ steps.review_input.outputs.review_revision }}
-          BODY_EDITED: ${{ github.event_name == 'pull_request' && github.event.action == 'edited' && github.event.changes.body != null }}
         run: |
           set -euo pipefail
           if ! reviews=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate --slurp 2>/dev/null); then
@@ -523,13 +527,6 @@ jobs:
           if [ "${same_head:-0}" -gt 0 ]; then
             echo "skip=true" >> "$GITHUB_OUTPUT"
             echo "Esiste gia' una review approvante del reviewer sulla HEAD $HEAD_SHA per la revisione body corrente → nessuna seconda review, anche dopo un body edit."
-            exit 0
-          fi
-
-          if [ "${BODY_EDITED:-false}" = "true" ]; then
-            set_claim_fingerprint
-            echo "skip=false" >> "$GITHUB_OUTPUT"
-            echo "Body della PR cambiato e nessuna review terminale sulla HEAD → review completa."
             exit 0
           fi
 

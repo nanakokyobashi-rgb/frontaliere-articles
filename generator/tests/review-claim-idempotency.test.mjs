@@ -305,8 +305,11 @@ test('tests.yml claims before review work and finalizes without gating the requi
   assert.match(workflow, /CLAIM_ACTION: finalize/);
   assert.match(workflow, /CLAIM_KIND: review/);
   assert.match(workflow, /CONTRIBUTION_FINGERPRINT:/);
-  assert.match(workflow, /types: \[opened, synchronize, reopened, ready_for_review, edited\]/);
-  assert.match(workflow, /BODY_EDITED:/);
+  // Il body edit non rientra piu' da un trigger `edited` di tests.yml: la
+  // rerun di retry-code-check-after-body-edit.yml riusa il payload originale,
+  // quindi la re-review dipende SOLO dalla revisione body letta via API.
+  assert.match(workflow, /types: \[opened, synchronize, reopened, ready_for_review\]/);
+  assert.doesNotMatch(workflow, /BODY_EDITED/);
   assert.match(workflow, /review_revision=body:/);
   assert.match(workflow, /REVIEW_REVISION:/);
   assert.match(workflow, /REVIEW_INPUT_REVISION:/);

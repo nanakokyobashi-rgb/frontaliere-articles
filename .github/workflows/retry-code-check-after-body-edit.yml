@@ -1,8 +1,8 @@
 name: Retry code check after corrected PR body
 run-name: 'Body recovery · PR #${{ github.event.pull_request.number }}'
 
-# API-only recovery on trusted main. This does not publish a check on the PR
-# head, validate code, or execute any file/string from the pull request.
+# API-only recovery on trusted main. It dispatches the trusted tests workflow
+# when the exact head has no run, without executing any file/string from the PR.
 on:
   pull_request_target:
     types: [edited]
@@ -17,10 +17,10 @@ concurrency:
 
 jobs:
   recover:
-    if: github.event.changes.body != null && github.event.pull_request.state == 'open'
+    if: github.event.changes.body != null
     runs-on: ubuntu-latest
     steps:
-      - name: Retry only a failed body preflight on the current head
+      - name: Retry a failed body or review gate on the current head
         uses: actions/github-script@v8
         with:
           script: |
@@ -32,16 +32,48 @@ jobs:
               ...repo, workflow_id: 'tests.yml', head_sha: pr.head.sha, per_page: 100,
             });
             const latest = runs.sort((a, b) => b.id - a.id)[0];
-            if (!latest) return;
+            if (!latest) {
+              await github.rest.actions.createWorkflowDispatch({
+                ...repo,
+                workflow_id: 'tests.yml',
+                // Dispatch the trusted workflow from the base branch. A fork
+                // PR has no branch in this repository, so pr.head.ref is not
+                // a valid dispatch ref here. The exact untrusted head travels
+                // as data and is resolved/checked by tests.yml.
+                ref: pr.base.ref,
+                inputs: { pr_number: String(number), head_sha: pr.head.sha },
+              });
+              core.info(`Dispatched tests.yml for PR #${number}: no run existed on ${pr.head.sha}.`);
+              return;
+            }
             // Inspect the latest attempt only, never an old failure underneath
-            // a running retry. A passed preflight means edits cannot restart CI.
+            // a running retry. A passed preflight alone is not enough: the
+            // reviewer can also reject the body, and that verdict otherwise
+            // remains attached to the unchanged head forever after an edit.
             const jobs = await github.paginate(github.rest.actions.listJobsForWorkflowRun, {
               ...repo, run_id: latest.id, filter: 'latest', per_page: 100,
             });
             const failedBody = jobs.some(job => job.steps?.some(step => step.name.startsWith('PR-body completeness + multi-issue Closes') &&
                 step.conclusion === 'failure'));
-            if (!failedBody) {
-              core.info('Body preflight did not fail; preserve the existing code verdict.');
+            const reviewFailureSteps = new Set([
+              'Require approving Codex review',
+              'Classify review gate failure',
+              'Fail when required review gate is skipped',
+            ]);
+            const failedJobs = jobs.filter(job => job.conclusion === 'failure');
+            const reviewOnlyFailure = failedJobs.length > 0 && failedJobs.every(job => {
+              const failedSteps = (job.steps ?? [])
+                .filter(step => step.conclusion === 'failure')
+                .map(step => step.name);
+              return failedSteps.length > 0 && failedSteps.every(name => reviewFailureSteps.has(name));
+            });
+            const retryReason = failedBody
+              ? 'the body preflight failed'
+              : reviewOnlyFailure
+                ? 'the review gate failed'
+                : '';
+            if (!retryReason) {
+              core.info('Body preflight and review gate did not fail exclusively; preserve the existing code verdict.');
               return;
             }
             // An edit may arrive while the failed preflight run is finishing.
@@ -62,4 +94,4 @@ jobs:
             if (currentPr.state !== 'open' || currentPr.head.sha !== pr.head.sha ||
                 currentRun.status !== 'completed' || currentRun.run_attempt !== latest.run_attempt) return;
             await github.rest.actions.reRunWorkflow({ ...repo, run_id: latest.id });
-            core.info(`Retrying code run ${latest.id}: its body preflight failed and the description changed.`);
+            core.info(`Retrying code run ${latest.id}: ${retryReason} and the description changed.`);
