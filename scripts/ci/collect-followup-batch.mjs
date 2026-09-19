@@ -453,7 +453,17 @@ export function readBucketIssue(bucket, run = gh, repos = BUCKET_REPOS) {
     if (raw === null) { unreadable = true; continue; }
     try {
       const issue = JSON.parse(raw);
-      if (issue && typeof issue === 'object' && !Array.isArray(issue)) return issue;
+      // I due repository numerano le proprie issue in modo INDIPENDENTE, quindi
+      // lo stesso numero puo' esistere in entrambi: fermarsi al primo JSON
+      // valido restituirebbe una issue omonima e qualunque scorrere del
+      // contatore la renderebbe la risposta sbagliata a un bucket reale.
+      // Oggi il corpus e' a #1594 e il sito a #9217 — i bucket del sito citati
+      // dai marker del corpus (#8944, #9102, #9182) sono ancora fuori portata,
+      // ma la collisione ha una data d'arrivo, non una probabilita'. Il filtro
+      // e' il titolo canonico del bucket giornaliero, lo stesso oracolo che
+      // `persistedBucketIssueMatches` applica subito dopo.
+      if (issue && typeof issue === 'object' && !Array.isArray(issue)
+        && dailyBucketInfo(issue.title || '')) return issue;
     } catch { /* not this repository's issue */ }
   }
   return unreadable ? null : false;

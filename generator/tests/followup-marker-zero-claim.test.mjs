@@ -179,6 +179,27 @@ test('il bucket del sito viene trovato anche quando `GH_REPO` è il corpus', () 
   assert.deepEqual(calls, ['nanakokyobashi-rgb/frontaliere-articles', 'valerielinc-ops/frontaliere-si-o-no']);
 });
 
+test('una issue omonima nel primo repository non nasconde il bucket vero nel secondo', () => {
+  // I due repository numerano le proprie issue in modo indipendente: oggi il
+  // corpus e' a #1594 e il sito a #9217, quindi i bucket citati dai marker del
+  // corpus sono ancora fuori dalla portata del corpus — ma la collisione ha una
+  // data d'arrivo. Fermarsi al primo JSON valido restituirebbe l'omonima.
+  const homonym = { number: 9102, title: 'fix: qualcosa di non correlato', body: 'niente bucket qui' };
+  const fakeGh = (args) => {
+    const repo = args[args.indexOf('--repo') + 1];
+    return JSON.stringify(repo.startsWith('nanakokyobashi-rgb') ? homonym : SITE_BUCKET);
+  };
+  const repos = ['nanakokyobashi-rgb/frontaliere-articles', 'valerielinc-ops/frontaliere-si-o-no'];
+  const issue = readBucketIssue(9102, fakeGh, repos);
+  assert.equal(issue?.title, SITE_BUCKET.title, 'deve vincere il bucket giornaliero, non l’omonima');
+
+  const body = '## Post-merge follow-up triage\n\nBucket daily: #9102\n- Follow-up item: FU-2026-09-18-011';
+  assert.equal(
+    verifyTriageMarkerPersistence(body, 1563, (b) => readBucketIssue(b, fakeGh, repos)),
+    true,
+  );
+});
+
 test('un bucket illeggibile in ogni repository non falsifica gli altri riferimenti', () => {
   // `gh` non distingue un 404 da un guasto, quindi un numero introvabile resta
   // `null` = «non lo so» e da solo tiene la PR nel batch. Ma con la verifica
