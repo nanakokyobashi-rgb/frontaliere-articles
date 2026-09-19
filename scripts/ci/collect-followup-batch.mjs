@@ -126,12 +126,61 @@ const repoArgs = REPO
   ? ['--repo', REPO]
   : [];
 
-function gh(args) {
+/**
+ * Un item del corpus puo' avere come target un file del sito: in quel caso il
+ * bucket giornaliero nasce NEL SITO, e il marker della PR corpus lo cita col
+ * suo numero. Leggere il bucket solo in `GH_REPO` faceva rispondere a `gh`
+ * «Could not resolve to an issue with the number 8944» — cioe' `null`, cioe'
+ * «lettura indisponibile» — su OGNI bucket cross-repo: 4 delle 11 PR bloccate
+ * nella run 35430183038 sono esattamente questo caso.
+ *
+ * ponytail: entrambi i repo sono PUBBLICI, quindi il `GITHUB_TOKEN` del job
+ * basta per la lettura cross-repo e non serve anticipare il caricamento dei PAT.
+ * Se uno dei due diventasse privato, questa lettura va spostata dopo lo step
+ * «Load cross-repo follow-up credentials» e deve usare `GITHUB_PAT_SITE`.
+ */
+const BUCKET_REPOS = [...new Set([
+  REPO,
+  process.env.FOLLOWUP_SITE_REPO || 'valerielinc-ops/frontaliere-si-o-no',
+  process.env.FOLLOWUP_CORPUS_REPO || 'nanakokyobashi-rgb/frontaliere-articles',
+].filter(Boolean))];
+
+function gh(args, token = '', quiet = false) {
   try {
-    return execFileSync('gh', args, { encoding: 'utf-8', maxBuffer: 32 * 1024 * 1024 });
+    const env = token ? { ...process.env, GH_TOKEN: token } : process.env;
+    return execFileSync('gh', args, {
+      encoding: 'utf-8',
+      maxBuffer: 32 * 1024 * 1024,
+      env,
+      // `quiet`: un bucket assente dal primo repository e' l'esito ATTESO della
+      // ricerca cross-repo, non un guasto. Lasciar passare il
+      // «GraphQL: Could not resolve to an issue» di `gh` mette nel log della run
+      // una riga che sembra la causa del rosso: e' esattamente il genere di
+      // rumore che ha reso illeggibili le otto run rosse di questa finestra.
+      stdio: quiet ? ['ignore', 'pipe', 'ignore'] : undefined,
+    });
   } catch {
     return null;
   }
+}
+
+/**
+ * Credenziale esplicita per repository, senza fallback implicito.
+ *
+ * Lo step `Verify complete follow-up triage` gira DOPO «Load cross-repo
+ * follow-up credentials», quindi i PAT ci sono; lo step `Collect follow-up
+ * batch` gira PRIMA e non li ha. La catena e' percio' dichiarata e degrada in
+ * modo morbido sul token del job: entrambi i repository sono pubblici, e una
+ * lettura di sola issue riesce comunque. Se uno dei due diventasse privato, la
+ * lettura del collector va spostata dopo il caricamento dei PAT — non allargata
+ * qui con un fallback silenzioso.
+ */
+export function bucketRepoToken(repo, env = process.env) {
+  const site = env.FOLLOWUP_SITE_REPO || 'valerielinc-ops/frontaliere-si-o-no';
+  const corpus = env.FOLLOWUP_CORPUS_REPO || 'nanakokyobashi-rgb/frontaliere-articles';
+  if (repo === site) return env.GITHUB_PAT_SITE || env.GITHUB_PAT || env.GH_TOKEN || '';
+  if (repo === corpus) return env.GITHUB_PAT_NANAKO || env.GITHUB_PAT || env.GH_TOKEN || '';
+  return env.GH_TOKEN || env.GITHUB_PAT || '';
 }
 
 // ── Pure helpers (no I/O) → unit-testable ───────────────────────────
@@ -296,51 +345,52 @@ export function latestTriageCommentBody(commentsJson, prefix = TRIAGE_COMMENT_PR
 }
 
 /**
- * Extract the persistence claim from a marker.  A zero-result/backfill marker
- * intentionally needs no bucket; every other successful marker must name one or
- * more daily issues.  This is only an expectation parser — the issue bodies are
- * checked by `verifyTriageMarkerPersistence` before idempotency skips a PR.
+ * Extract the persistence claim from a marker.
+ *
+ * ## Perche' qui non c'e' piu' nessuna formula ammessa
+ *
+ * Il prompt NON impone un formato al corpo del marker, quindi la riga di claim
+ * e' prosa generata da un modello. Ogni versione precedente di questo parser
+ * era un ELENCO di formule (`Created:`, `Created/updated:`, `Daily bucket:`), ed
+ * e' stata superata dalla variante successiva quattro volte:
+ *
+ *   2026-09-17  `- Daily bucket: #8944 (...)`       aggiunta al parser
+ *   2026-09-18  `Created/updated: 0 item; ...`      aggiunto il claim a zero
+ *   2026-09-18  `Bucket daily: #9102 — ...`         NON riconosciuta
+ *   2026-09-19  `- Daily bucket: nessuno.`          NON riconosciuta
+ *
+ * Misurato sulla run 35430183038 (schedule, 07:45Z): le ULTIME DUE varianti
+ * hanno fermato tutte le 11 PR triagiate della finestra — `deferred_count=17`,
+ * le stesse 4 PR piu' vecchie ri-triagiate ogni 3 ore come no-op, sei run rosse
+ * consecutive. Un allowlist di sinonimi non e' un cursore durevole: e' un
+ * contratto che una delle due parti non ha mai firmato.
+ *
+ * Il discriminante ora e' STRUTTURALE e non nomina nessun verbo:
+ *  - un ITEM dichiarato e' una riga `Follow-up item: FU-YYYY-MM-DD-NNN`. Quel
+ *    formato e' l'unica cosa che il prompt impone davvero al marker, ed e' lo
+ *    stesso ID che compare nel corpo del bucket;
+ *  - un BUCKET citato e' un `#N` su una riga che dice «bucket», in qualunque
+ *    ordine e con qualunque punteggiatura.
+ *
+ * Niente dichiarato = niente da verificare. Per tutto il resto decide
+ * `verifyTriageMarkerPersistence` leggendo le issue vere.
  */
 export function triageMarkerPersistenceExpectation(markerBody) {
   const body = String(markerBody || '');
-  // Only the explicit creation/update line is a persistence claim. Later
-  // prose may mention a sealed historical bucket for audit context; treating
-  // that reference as another claim makes a valid marker fail verification.
-  const claim = body.split(/\r?\n/)
-    // Le righe di DICHIARAZIONE del triage. Il sito scrive `Created/updated:`,
-    // questo repo scrive `- Daily bucket: #N` — due formule per lo stesso fatto,
-    // perche' il prompt non impone un formato al corpo del marker. Restano solo
-    // le righe di testa: la prosa che cita un bucket storico per contesto deve
-    // continuare a NON contare come claim.
-    .filter((line) => /^\s*(?:[-*]\s+)?(?:Created(?:\/updated)?|Daily bucket):/i.test(line))
-    .join('\n');
-  // `bucket #N` (sito) e `bucket: #N` (corpus): i due punti non cambiano il fatto.
-  const buckets = [...claim.matchAll(/\bbucket\s*:?\s*#([1-9]\d*)\b/gi)]
-    .map((match) => Number(match[1]));
-  const uniqueBuckets = [...new Set(buckets)];
-  // Il discriminante e' STRUTTURALE: sulla riga di claim gia' isolata sopra
-  // conta il NUMERO dichiarato, non la prosa che lo segue. La versione
-  // precedente elencava le formule ammesse una per una, ed e' stata superata
-  // tre volte dalla variante successiva — l'ultima il 2026-09-18, quando il
-  // triage ha scritto «Created/updated: 0 item; nessun bucket creato.» per un
-  // esito legittimo (candidati tutti dropped/skipped) che il contratto non
-  // aveva mai nominato: `persistence_ok=false` e run rossa su un marker giusto.
-  // Un claim a zero non promette nulla da verificare, qualunque parola usi.
-  const claimLines = claim.split(/\r?\n/).filter((line) => line.trim());
-  // `0(?![0-9.])`: un `Created: 0.5 item` non e' un claim a zero.
-  const zeroClaim = claimLines.length > 0
-    && claimLines.every((line) => /^\s*(?:[-*]\s+)?(?:Created(?:\/updated)?|Daily bucket):\s*0(?![0-9.])/i.test(line));
-  // Le due forme d'intestazione restano ammesse: non portano una riga `Created:`
-  // da cui leggere un conteggio.
-  // Le formule d'intestazione valgono SOLO in assenza di una riga di claim:
-  // altrimenti una prosa successiva scavalcherebbe la verifica del bucket per
-  // una persistenza reale.
-  const legacyEmptyHeader = claimLines.length === 0
-    && /zero outstanding items|backfill skipped/i.test(body);
-  const noBucketExpected = zeroClaim || legacyEmptyHeader;
+  const items = [...body.matchAll(/Follow-up\s+item\s*:\s*(FU-\d{4}-\d{2}-\d{2}-\d{3})\b/gi)]
+    .map((match) => match[1].toUpperCase());
+  // Il `#N` deve stare su una riga che parla di bucket: cosi' un `PR concatenata
+  // #9050` citato fra i drop non diventa un candidato. Le righe di prosa che
+  // citano un bucket storico restano invece ammesse come candidati, perche' la
+  // verifica sotto e' ESISTENZIALE: un riferimento che non prova nulla non puo'
+  // piu' far cadere un marker che ne porta un altro valido.
+  const buckets = body.split(/\r?\n/)
+    .filter((line) => /\bbucket\b/i.test(line))
+    .flatMap((line) => [...line.matchAll(/#([1-9]\d*)\b/g)].map((match) => Number(match[1])));
   return {
-    buckets: uniqueBuckets,
-    requiresBucket: uniqueBuckets.length > 0 || !noBucketExpected,
+    items: [...new Set(items)],
+    buckets: [...new Set(buckets)],
+    requiresBucket: items.length > 0 || buckets.length > 0,
   };
 }
 
@@ -387,21 +437,57 @@ export function persistedBucketIssueMatches(issue, prNumber, prComments = '') {
 }
 
 /**
+ * Read one candidate daily bucket from any repository that can hold it.
+ *
+ * Returns the issue, `false` when no repository has that number (a reference
+ * that proves nothing, not a fault), or `null` when a read was unavailable.
+ */
+export function readBucketIssue(bucket, run = gh, repos = BUCKET_REPOS) {
+  let unreadable = false;
+  for (const repo of repos) {
+    const raw = run(
+      ['issue', 'view', String(bucket), '--repo', repo, '--json', 'number,title,body'],
+      bucketRepoToken(repo),
+      true,
+    );
+    if (raw === null) { unreadable = true; continue; }
+    try {
+      const issue = JSON.parse(raw);
+      if (issue && typeof issue === 'object' && !Array.isArray(issue)) return issue;
+    } catch { /* not this repository's issue */ }
+  }
+  return unreadable ? null : false;
+}
+
+/**
  * Check marker idempotency against durable bucket/item evidence.
- * `readIssue` returns an issue object, `null` for an unavailable read, and may be
- * injected in tests. Unknown is deliberately returned as `null`, so a transient
- * API failure keeps the PR in the next batch instead of skipping it forever.
+ *
+ * `readIssue` returns an issue object, `false` for a bucket that is not in any
+ * reachable repository, and `null` for an unavailable read. Unknown stays
+ * `null`, so a transient API failure keeps the PR in the next batch instead of
+ * skipping it forever.
+ *
+ * La verifica e' ESISTENZIALE: basta UN riferimento provato. Prima era
+ * universale, e con un parser che non sa distinguere il bucket del giorno da
+ * uno citato per contesto l'universale trasforma ogni riga di prosa in un modo
+ * di far cadere un marker giusto. Il verso sicuro e' l'opposto: un marker senza
+ * NESSUNA prova durevole resta non provato e la PR torna nel batch.
  */
 export function verifyTriageMarkerPersistence(markerBody, prNumber, readIssue, prComments = '') {
   const expectation = triageMarkerPersistenceExpectation(markerBody);
   if (!expectation.requiresBucket) return true;
   if (!expectation.buckets.length || typeof readIssue !== 'function') return false;
+  let unreadable = false;
   for (const number of expectation.buckets) {
     const issue = readIssue(number);
-    if (issue === null || issue === undefined) return null;
-    if (Number(issue.number) !== number || !persistedBucketIssueMatches(issue, prNumber, prComments)) return false;
+    if (issue === null || issue === undefined) { unreadable = true; continue; }
+    if (issue === false) continue;
+    if (Number(issue.number) === number
+      && persistedBucketIssueMatches(issue, prNumber, prComments)) return true;
   }
-  return true;
+  // Nessuna prova trovata: `null` solo se una lettura era indisponibile, cosi'
+  // un guasto API non viene mai letto come «il triage non e' persistito».
+  return unreadable ? null : false;
 }
 
 /**
@@ -746,16 +832,7 @@ export function main() {
     }
     if (hasTriageComment(commentsRaw)) {
       const markerBody = latestTriageCommentBody(commentsRaw);
-      const persistence = verifyTriageMarkerPersistence(markerBody, n, (bucket) => {
-        const bucketRaw = gh(['issue', 'view', String(bucket), ...repoArgs, '--json', 'number,title,body']);
-        if (bucketRaw === null) return null;
-        try {
-          const issue = JSON.parse(bucketRaw);
-          return issue && typeof issue === 'object' && !Array.isArray(issue) ? issue : false;
-        } catch {
-          return false;
-        }
-      }, commentsRaw);
+      const persistence = verifyTriageMarkerPersistence(markerBody, n, readBucketIssue, commentsRaw);
       if (persistence === true) {
         console.log(`PR #${n}: already has '${TRIAGE_COMMENT_PREFIX}' plus persisted bucket/item evidence → skip (idempotent).`);
         continue;
@@ -807,7 +884,50 @@ export function main() {
 // CLI entrypoint only (importing for tests must not invoke gh). Proceed-safe: any
 // An uncaught collection error emits an explicit failed output and exits nonzero;
 // the workflow verifier then fails the job, so the success watermark cannot advance.
+/**
+ * `--verify-persistence <pr>...` — la STESSA verifica usata per l'idempotenza,
+ * esposta allo step `Verify complete follow-up triage` del workflow.
+ *
+ * Lo step aveva una RISCRITTURA in bash dello stesso predicato. Le due copie
+ * sono divergute in entrambi i versi contemporaneamente: la bash leggeva il
+ * bucket cross-repo ma non conosceva la prova per gli item demoti dal gate,
+ * il JS conosceva la prova ma leggeva solo `GH_REPO`. Risultato: nella run
+ * 35430183038 ciascuna copia bocciava le PR che l'altra avrebbe promosso.
+ * Un solo predicato, un solo chiamante: la divergenza non e' piu' esprimibile.
+ */
+function verifyPersistenceCli(prNumbers) {
+  let incomplete = false;
+  for (const raw of prNumbers) {
+    const pr = Number(raw);
+    if (!Number.isInteger(pr) || pr <= 0) {
+      console.log(`triage incompleta: PR '${raw}' non numerica`);
+      incomplete = true;
+      continue;
+    }
+    const comments = gh(['pr', 'view', String(pr), ...repoArgs, '--json', 'comments']);
+    if (comments === null || !hasTriageComment(comments)) {
+      console.log(`triage incompleta: PR #${pr} senza marker di triage leggibile`);
+      incomplete = true;
+      continue;
+    }
+    const marker = latestTriageCommentBody(comments);
+    const verdict = verifyTriageMarkerPersistence(marker, pr, readBucketIssue, comments);
+    const expectation = triageMarkerPersistenceExpectation(marker);
+    if (verdict === true) {
+      console.log(`PR #${pr}: persistenza provata (item=${expectation.items.length}, bucket=[${expectation.buckets.join(',') || '-'}]).`);
+      continue;
+    }
+    console.log(`triage incompleta: PR #${pr} ${verdict === null ? 'bucket non leggibile' : 'senza item/Source persistito'} (item=${expectation.items.length}, bucket=[${expectation.buckets.join(',') || '-'}]).`);
+    incomplete = true;
+  }
+  return !incomplete;
+}
+
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  if (process.argv[2] === '--verify-persistence') {
+    const prs = process.argv.slice(3).flatMap((arg) => arg.split(',')).map((s) => s.trim()).filter(Boolean);
+    process.exitCode = verifyPersistenceCli(prs) ? 0 : 1;
+  } else {
   try {
     main();
   } catch (e) {
@@ -816,5 +936,6 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
       console.error(`collect-followup-batch: impossibile scrivere gli output di errore (${emitError?.message || emitError}).`);
     }
     process.exitCode = 1;
+  }
   }
 }
