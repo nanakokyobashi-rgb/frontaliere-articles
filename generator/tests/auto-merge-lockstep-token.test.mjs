@@ -96,6 +96,22 @@ test('il lockstep legge tutti i check e resta fail-closed', () => {
   assert.match(wf, /--merge --delete-branch=false/);
 });
 
+test('il merge è vincolato alla HEAD catturata prima dei check', () => {
+  const headCapture = wf.indexOf('HEAD_SHA=$(gh pr view "$PR" --json headRefOid');
+  const checks = wf.indexOf('REQUIRED_CHECKS_FILE=', headCapture);
+  const merge = wf.indexOf('gh pr merge "$PR" --merge --delete-branch=false');
+  assert.ok(headCapture >= 0, 'deve catturare headRefOid prima della valutazione');
+  assert.ok(checks > headCapture, 'i check devono seguire lo snapshot HEAD');
+  assert.ok(merge > checks, 'il merge deve seguire entrambi i gate');
+  assert.match(
+    wf.slice(merge, merge + 180),
+    /--match-head-commit "\$HEAD_SHA"/,
+    'il merge deve rifiutare un force-push fra check e merge',
+  );
+  assert.match(wf, /HEAD_SHA.*\^\[0-9a-fA-F\]\{40\}/s,
+    'HEAD non valida deve restare fail-closed');
+});
+
 const required = (state, overrides = {}) => ({
   name: VITEST_CHECK_NAME,
   state,
