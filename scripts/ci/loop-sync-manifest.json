@@ -3550,27 +3550,27 @@
       "reason": "Watchdog corpus-only della coda translate: censisce active/pending con sole GET bounded, separa la copertura storica troncabile e segnala il queue SLO. La preservazione rerun schedule e provata da workflow 347680591, run 33550046319, artifact 9817045831, schema v1 e token hash sha256:8f28835373c43bd2c90b532bd294eba56d827e64b979fb38a8924e898fca0c91; il recovery resta manuale per policy e il rerun autorizzato e protetto da claim/successor guard live.",
       "baseline": {
         "site": null,
-        "corpus": "d092a06da2a6fc64",
+        "corpus": "e3b1ab08f65fa512",
         "alignedAt": "2026-09-01"
       }
     },
     {
       "path": "scripts/ci/translate-queue-recovery.mjs",
       "mode": "corpus-only",
-      "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata ma recovery blocked per policy, target dedupe e successor guard.",
+      "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
       "baseline": {
         "site": null,
-        "corpus": "f35402c81161f48d",
+        "corpus": "1f8ac4d164753ebe",
         "alignedAt": "2026-09-01"
       }
     },
     {
       "path": "generator/tests/translate-queue-recovery.test.mjs",
       "mode": "corpus-only",
-      "reason": "Contratto Node deterministico corpus-only per watchdog e workflow translate: copre censimento corrente indipendente da oltre 200 run storiche, discovery troncata, budget, prova schedule redatta e assenza by construction di scritture remote.",
+      "reason": "Contratto Node deterministico corpus-only per watchdog e workflow translate: copre censimento corrente indipendente da oltre 200 run storiche, discovery troncata, budget, prova schedule redatta, assenza by construction di scritture remote e drift del pin blob contro il workflow generato.",
       "baseline": {
         "site": null,
-        "corpus": "cf3f1a8f39372593",
+        "corpus": "a62aeaa126fde1ca",
         "alignedAt": "2026-09-01"
       }
     },
@@ -4075,62 +4075,12 @@
       }
     },
     {
-      "path": ".github/workflows/observers/scripts/lib/canonical-json-digest.mjs",
-      "sitePath": ".github/corpus-workflows/observers/scripts/lib/canonical-json-digest.mjs",
-      "mode": "identical",
-      "baseline": {
-        "site": "a98a130d20cea211",
-        "corpus": "a98a130d20cea211",
-        "alignedAt": "2026-09-18"
-      }
-    },
-    {
-      "path": ".github/workflows/observers/scripts/lib/crawler-generation-observer-report.mjs",
-      "sitePath": ".github/corpus-workflows/observers/scripts/lib/crawler-generation-observer-report.mjs",
-      "mode": "identical",
-      "baseline": {
-        "site": "0a32d9f5ee5bc961",
-        "corpus": "0a32d9f5ee5bc961",
-        "alignedAt": "2026-09-18"
-      }
-    },
-    {
-      "path": ".github/workflows/observers/scripts/lib/crawler-generation-token.mjs",
-      "sitePath": ".github/corpus-workflows/observers/scripts/lib/crawler-generation-token.mjs",
-      "mode": "identical",
-      "baseline": {
-        "site": "4bc0d4d514be3f67",
-        "corpus": "4bc0d4d514be3f67",
-        "alignedAt": "2026-09-18"
-      }
-    },
-    {
-      "path": ".github/workflows/observers/scripts/lib/github-actions-read-client.mjs",
-      "sitePath": ".github/corpus-workflows/observers/scripts/lib/github-actions-read-client.mjs",
-      "mode": "identical",
-      "baseline": {
-        "site": "a3c0b3742061e9e1",
-        "corpus": "a3c0b3742061e9e1",
-        "alignedAt": "2026-09-18"
-      }
-    },
-    {
-      "path": ".github/workflows/observers/workflows/crawler-generation-observer-shadow.yml",
-      "sitePath": ".github/corpus-workflows/observers/workflows/crawler-generation-observer-shadow.yml",
-      "mode": "identical",
-      "baseline": {
-        "site": "41a6342737247042",
-        "corpus": "41a6342737247042",
-        "alignedAt": "2026-09-18"
-      }
-    },
-    {
       "path": "scripts/ci/scan-crawler-fleet-stall.mjs",
       "mode": "corpus-only",
       "reason": "Allarme per la flotta crawler che gira VERDE e non consegna: legge la storia dei commit `Auto-update crawler group NN jobs` del SITO e suona quando la copertura scende sotto meta' della flotta. Corpus-only per costruzione — e' la meta' simmetrica di `workflow-failure-issues.yml`, che qui apre centralmente cio' che il sito cabla in ogni workflow, e misura una consegna CROSS-REPO che solo questo lato ha bisogno di sorvegliare. Il sito vede i propri commit direttamente e non ha questo consumer.",
       "baseline": {
         "site": null,
-        "corpus": "f230644e455e2c43",
+        "corpus": "327602469d56b49f",
         "alignedAt": "2026-09-18"
       }
     }

@@ -7,7 +7,7 @@ export const REPORT_SCHEMA = 'translate-queue-recovery-watchdog/v1';
 export const TARGET_REPOSITORY = 'nanakokyobashi-rgb/frontaliere-articles';
 export const TARGET_WORKFLOW_ID = 342441975;
 export const TARGET_WORKFLOW_PATH = '.github/workflows/translate-pending.yml';
-export const TARGET_WORKFLOW_BLOB_SHA = '231a28fba27199f606ebb49b13e6c93aa87ace8d';
+export const TARGET_WORKFLOW_BLOB_SHA = '1995c0569cf00c9754d9002fb0e5da7d14f06272';
 export const TARGET_BRANCH = 'main';
 export const QUEUE_MAX_BOUNDARY_SHA = '5e5114b73f37a0c47625f00baff13942fe8b186b';
 export const RERUN_PRESERVATION_PROOF = Object.freeze({
@@ -27,7 +27,34 @@ export const MAX_GET_REQUESTS = MAX_TOTAL_GET_REQUESTS - BOOTSTRAP_GET_REQUESTS;
 export const MAX_SAMPLE_RUN_IDS = 5;
 export const MAX_RESPONSE_BYTES = 4 * 1024 * 1024;
 export const MAX_REPORT_BYTES = 16 * 1024;
-export const DEFAULT_QUEUE_STALE_THRESHOLD_SECONDS = 30 * 60;
+// La coda translate e' un mutex a slot singolo: translate-pending.yml usa
+// `concurrency: jobs-data-pipeline` con `cancel-in-progress: false` e dichiara
+// `timeout-minutes: 350`. Un run pending attende quindi per costruzione il
+// detentore corrente: "pending da ore" e' lo stato NORMALE della coda, non un
+// guasto. Distribuzione misurata il 2026-09-18 su questo repo:
+//   - run 35313063351: attesa 322 min, esecuzione 265 min, conclusione success;
+//   - run 35327548227: creata 09:03:37Z, job avviato 15:48:01Z (attesa 404 min),
+//     subentrata 4 s dopo la fine della precedente: lo slot non resta idle;
+//   - wall clock createdAt->updatedAt su 15 run: min 359, mediana 567, max 869 min;
+//   - 17 arrivi in 49,5 h (5 cron al giorno piu' i dispatch) contro ~4,4 h di
+//     servizio per run: la coda e' satura per progetto, non per incidente.
+// Con la vecchia soglia unica di 1800 s il watchdog e' risultato rosso in 15
+// delle ultime 16 run schedulate senza che nulla fosse rotto (rosso continuo
+// per 52,5 h): misurava l'occupazione del mutex, non un guasto.
+//
+// L'allarme ora misura CHI deve muoversi, non quanto e' vecchia la coda:
+//   - senza detentore attivo il guasto e' la coda che non parte, e si misura
+//     sull'attesa del pending piu' vecchio: oltre il timeout del target
+//     (350 min) piu' margine non e' contesa, e' una coda bloccata;
+//   - con un detentore l'attesa dei pending NON e' un segnale di salute, perche'
+//     cresce con la profondita' dell'arretrato e non col guasto: tre run davanti
+//     a 350 min di timeout ciascuna fanno 17,5 h di attesa lecita, quattro ne
+//     fanno 23,3. A dover avanzare e' il detentore, e il suo wall clock
+//     `createdAt`->`updatedAt` misurato ha un massimo di 869 min su 15 run.
+//     Oltre le 24 h (1,66x il massimo osservato) il detentore non sta finendo:
+//     e' il caso job-zero per cui esiste `translate-queue-recovery.yml`.
+export const QUEUE_UNSERVED_STALE_THRESHOLD_SECONDS = 6 * 60 * 60;
+export const QUEUE_HOLDER_STALE_THRESHOLD_SECONDS = 24 * 60 * 60;
 
 const API_ROOT = 'https://api.github.com';
 const REQUEST_TIMEOUT_MS = 8_000;
@@ -174,6 +201,7 @@ function makeInitialState(nowMs) {
     pendingRunIds: [],
     queueCreatedMs: [],
     pendingCreatedMs: [],
+    activeCreatedMs: [],
     discovery: {
       declaredTotal: 0,
       maxRuns: MAX_RUN_PAGES * RUNS_PER_PAGE,
@@ -274,7 +302,17 @@ export function createReadOnlyGithubClient({ fetchImpl, token }) {
 async function listCurrentQueueRuns(client, state) {
   const collected = [];
   const seen = new Set();
-  for (const status of [...ACTIVE_STATUSES, ...PENDING_STATUSES]) {
+  // `in_progress` si legge PER ULTIMO, e l'ordine e' portante ora che l'alert
+  // distingue "servita" da "non servita". Il censimento sono cinque GET
+  // sequenziali, e un hand-off dura 4 s (misurato: run 35327548227 e' partita
+  // 4 s dopo la fine di 35313063351). Leggendo prima i pending, una run che
+  // subentra durante il censimento finisce in due liste e il duplicato fa
+  // scattare `liveness_census_inconclusive` (fail-closed, nessun alert), oppure
+  // sparisce dai pending e la coda risulta vuota: nessuno dei due percorsi
+  // inventa una coda "senza detentore". Nell'ordine opposto un hand-off
+  // preso a meta' darebbe 0 active con un pending vecchio, cioe' un rosso
+  // falso proprio sul ramo nuovo.
+  for (const status of [...PENDING_STATUSES, ...ACTIVE_STATUSES]) {
     const query = new URLSearchParams({
       branch: TARGET_BRANCH,
       page: '1',
@@ -406,7 +444,19 @@ function collectShallowFacts(run, state, candidates, { collectQueue = true } = {
       return;
     }
     if (collectQueue) {
-      if (isActive) state.activeRunIds.push(runId);
+      if (isActive) {
+        state.activeRunIds.push(runId);
+        // Un rerun non azzera `created_at` ma aggiorna `run_started_at`: per
+        // l'eta' del detentore vale il piu' recente dei due, altrimenti un
+        // detentore appena riavviato si legge come fermo da giorni e apre un
+        // alert falso. Se il campo manca o non e' valido si ricade su
+        // `created_at`, cioe' sul comportamento precedente: e' un
+        // raffinamento della misura, non una nuova precondizione.
+        const startedMs = validTimestamp(run.run_started_at);
+        state.activeCreatedMs.push(
+          startedMs === null ? createdMs : Math.max(createdMs, startedMs),
+        );
+      }
       if (isPending) {
         state.pendingRunIds.push(runId);
         state.pendingCreatedMs.push(createdMs);
@@ -498,27 +548,52 @@ function buildReport(state, client) {
   const oldestPendingAgeSeconds = oldestPendingMs === null
     ? null
     : Math.max(0, Math.floor((state.nowMs - oldestPendingMs) / 1000));
+  const oldestActiveMs = state.activeCreatedMs.length > 0
+    ? Math.min(...state.activeCreatedMs)
+    : null;
+  const oldestActiveAgeSeconds = oldestActiveMs === null
+    ? null
+    : Math.max(0, Math.floor((state.nowMs - oldestActiveMs) / 1000));
+  // Chi misuriamo dipende da chi deve muoversi: il detentore se c'e', altrimenti
+  // la coda che non parte. `measured` mette la scelta nel report, cosi' il
+  // numero dell'alert non e' interpretabile in due modi.
+  const served = state.activeRunIds.length > 0;
+  const measured = served ? 'oldest_holder_age' : 'oldest_pending_age';
+  const measuredAgeSeconds = served ? oldestActiveAgeSeconds : oldestPendingAgeSeconds;
+  const thresholdSeconds = served
+    ? QUEUE_HOLDER_STALE_THRESHOLD_SECONDS
+    : QUEUE_UNSERVED_STALE_THRESHOLD_SECONDS;
   const queueSlo = !state.complete
     ? {
       alert: false,
+      measured,
+      measuredAgeSeconds,
       oldestPendingAgeSeconds,
       state: 'not_evaluable',
-      thresholdSeconds: DEFAULT_QUEUE_STALE_THRESHOLD_SECONDS,
+      thresholdSeconds,
     }
-    : oldestPendingMs === null
+    // `empty` e' l'assenza della grandezza MISURATA, non l'assenza di coda: un
+    // detentore fermo da oltre 24 h senza arretrato dietro e' esattamente il
+    // guasto job-zero, e con `oldestPendingMs === null` come discriminante
+    // sfuggiva all'alert proprio nel caso peggiore.
+    : measuredAgeSeconds === null
       ? {
         alert: false,
-        oldestPendingAgeSeconds: null,
+        measured,
+        measuredAgeSeconds: null,
+        oldestPendingAgeSeconds,
         state: 'empty',
-        thresholdSeconds: DEFAULT_QUEUE_STALE_THRESHOLD_SECONDS,
+        thresholdSeconds,
       }
       : {
-        alert: oldestPendingAgeSeconds >= DEFAULT_QUEUE_STALE_THRESHOLD_SECONDS,
+        alert: measuredAgeSeconds >= thresholdSeconds,
+        measured,
+        measuredAgeSeconds,
         oldestPendingAgeSeconds,
-        state: oldestPendingAgeSeconds >= DEFAULT_QUEUE_STALE_THRESHOLD_SECONDS
+        state: measuredAgeSeconds >= thresholdSeconds
           ? 'breached'
           : 'within_slo',
-        thresholdSeconds: DEFAULT_QUEUE_STALE_THRESHOLD_SECONDS,
+        thresholdSeconds,
       };
   if (queueSlo.state === 'breached') addReason(state, 'queue_slo_breached');
   const nonEmptySamples = Object.fromEntries(
@@ -558,10 +633,12 @@ function buildReport(state, client) {
         ? null
         : Math.max(0, Math.floor((state.nowMs - oldestCreatedMs) / 1000)),
       oldestCreatedAt: oldestCreatedMs === null ? null : new Date(oldestCreatedMs).toISOString(),
+      oldestActiveAgeSeconds,
+      oldestActiveCreatedAt: oldestActiveMs === null ? null : new Date(oldestActiveMs).toISOString(),
       oldestPendingAgeSeconds,
       oldestPendingCreatedAt: oldestPendingMs === null ? null : new Date(oldestPendingMs).toISOString(),
       slo: queueSlo,
-      staleThreshold: DEFAULT_QUEUE_STALE_THRESHOLD_SECONDS,
+      staleThreshold: thresholdSeconds,
     },
     reasonCodes: REASON_CODES.filter((code) => state.reasons.counts[code] > 0),
     samples: nonEmptySamples,

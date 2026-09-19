@@ -11844,6 +11844,18 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.governo-no-iniziativa-frontiere.title': 'Contrôles aux frontières : le Gouvernement rejette l\'initiative UDC',
     'blog.article.governo-no-iniziativa-frontiere.excerpt': 'Le Conseil fédéral rejette l\'initiative « Arrêter les abus en matière d\'asile » : les contrôles systématiques coûteraient des milliards et risqueraient la sortie de Schengen.',
     'blog.article.governo-no-iniziativa-frontiere.imageAlt': 'Passage frontalier au Tessin avec trafic de frontaliers',
+    'blog.article.tasse-frontaliere-oltre-20km-2026.title': 'Taxes frontalières Italie Suisse 2026 : conduite sur 20 km',
+    'blog.article.tasse-frontaliere-oltre-20km-2026.excerpt': 'Règles fiscales 2026 pour les frontaliers de plus de 20 km : impôt à la source, franchises de 7 500 ou 10 000 euros et gestion de la double imposition.',
+    'blog.article.tasse-frontaliere-oltre-20km-2026.imageAlt': 'Vue de Lugano avec documents fiscaux pour frontaliers',
+    'blog.article.studio-svizzero-confine-frontalieri.title': 'Étude suisse à la frontière : coûts et effondrement frontaliers',
+    'blog.article.studio-svizzero-confine-frontalieri.excerpt': 'Rapport du Conseil fédéral et étude Ecoplan : embouteillages 422.000 heures par jour, coûts milliardaires et effondrement des frontaliers jusqu\'à 60% sans Schengen.',
+    'blog.article.studio-svizzero-confine-frontalieri.imageAlt': 'File de voitures à la frontière entre la Suisse et l\'Italie',
+    'blog.article.sindaco-malesco-fondi-confine.title': 'Frontaliers, Malesco écrit au gouvernement pour les fonds',
+    'blog.article.sindaco-malesco-fondi-confine.excerpt': 'Enrico Barbazza, maire de Malesco, demande au gouvernement le transfert intégral des ressources destinées aux communes frontalières pour soutenir les services locaux.',
+    'blog.article.sindaco-malesco-fondi-confine.imageAlt': 'Hôtel de ville dans la région du Tessin',
+    'blog.article.confapi-avsi-accordo-varese-formazione.title': 'Accord Confapi Varese-AVSI pour la formation des jeunes',
+    'blog.article.confapi-avsi-accordo-varese-formazione.excerpt': 'Protocole signé le 17 septembre entre Confapi Varese et la Fondation AVSI pour former des jeunes par le biais de l\'apprentissage et de la formation en alternance.',
+    'blog.article.confapi-avsi-accordo-varese-formazione.imageAlt': 'Casa Museo Lodovico Pogliaghi à Varèse, lieu de l\'accord entre Confapi Varese et Fondazione AVSI',
 };
 
 export default blogMetaFr;

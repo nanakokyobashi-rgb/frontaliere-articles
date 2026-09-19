@@ -7,6 +7,9 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { readdirSync, readFileSync } from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import {
   isReportableRun,
   cleanLogLine,
@@ -29,6 +32,11 @@ import {
   horizonPressure,
   fetchRunsBisected,
   parseRunListJson,
+  ALWAYS_ESCALATE_WORKFLOWS,
+  isRecurrenceGatedWorkflow,
+  gateForWorkflow,
+  orderBySurveillanceFirst,
+  capReached,
 } from '../../scripts/ci/scan-failed-runs.mjs';
 import { TITLE_RE } from '../../scripts/ci/close-recovered-failure-issues.mjs';
 import { isExclusivelyWorkflowScoped } from '../../scripts/ci/check-workflows-scope.mjs';
@@ -39,6 +47,8 @@ import { isExclusivelyWorkflowScoped } from '../../scripts/ci/check-workflows-sc
 // del modulo — cioe' l'intero file di test — su una differenza che qui e'
 // informativa e non portante. Col namespace la feature si sonda a runtime.
 import * as scopeDetect from '../../scripts/lib/workflow-scope-detect.mjs';
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
 const { detectWorkflowScoped, CODE_PATH_RE, isMonitorFiledWorkflowFailure } = scopeDetect;
 
@@ -803,4 +813,111 @@ test('la slice con batch non-array e\' trattata come query fallita', () => {
     assert.equal(got.length, 0);
     assert.match(warnings[0] ?? '', /FALLITA/, `batch ${JSON.stringify(bad)} deve gridare`);
   }
+});
+
+/**
+ * I workflow di sorveglianza non passano dal gate di ricorrenza. Misurato il
+ * 2026-09-18: il watchdog della coda translate era rosso da 12 run consecutive
+ * (52,5 h) e non aveva aperto NESSUNA issue, perche' lo scanner lo aveva visto
+ * una volta sola e il gate l'aveva archiviato come `failure 1/3 → low-priority
+ * breadcrumb` nel ledger #25. Con meno di 3 avvistamenti in 48 h l'ordinale non
+ * arriva mai a 3/3: per questa classe il gate non rimanda l'escalation, la
+ * sopprime.
+ */
+test('i workflow di sorveglianza saltano il gate di ricorrenza', () => {
+  for (const name of ALWAYS_ESCALATE_WORKFLOWS) {
+    assert.equal(gateForWorkflow(name), -1, name);
+  }
+  assert.ok(ALWAYS_ESCALATE_WORKFLOWS.has('Translate Queue Recovery Watchdog (observe only)'));
+  assert.ok(ALWAYS_ESCALATE_WORKFLOWS.has('Translate Pending Jobs (sparse cross-repo execution)'));
+});
+
+/**
+ * La lista duplica i `name:` degli YAML: senza questo legame una rinomina del
+ * workflow la rende muta in silenzio, ed e' esattamente il modo in cui un
+ * allarme torna invisibile.
+ */
+test('ogni nome della lista esiste come `name:` di un workflow reale', () => {
+  const dir = path.join(ROOT, '.github/workflows');
+  const declared = new Set(
+    readdirSync(dir)
+      .filter((file) => file.endsWith('.yml') || file.endsWith('.yaml'))
+      .map((file) => /^name:\s*(.+?)\s*$/m.exec(readFileSync(path.join(dir, file), 'utf8'))?.[1])
+      .filter(Boolean)
+      .map((name) => name.replace(/^['"]|['"]$/g, '')),
+  );
+  assert.ok(declared.size > 10, `letti solo ${declared.size} workflow: path sbagliato?`);
+  for (const name of ALWAYS_ESCALATE_WORKFLOWS) {
+    assert.ok(declared.has(name), `nessun workflow si chiama "${name}"`);
+  }
+});
+
+test('il gate di ricorrenza resta attivo per il rumore transiente della generazione', () => {
+  assert.equal(isRecurrenceGatedWorkflow('Generate Blog Article'), true);
+  assert.equal(isRecurrenceGatedWorkflow('fast-publish-article'), true);
+  assert.equal(isRecurrenceGatedWorkflow('Crawler Group 1 (sparse cross-repo execution)'), true);
+  assert.equal(isRecurrenceGatedWorkflow('Crawler Group 23 (sparse cross-repo execution)'), true);
+  assert.equal(gateForWorkflow('Generate Blog Article', { gate: 3 }), 3);
+  assert.equal(gateForWorkflow('Crawler Group 23 (sparse cross-repo execution)', { gate: 3 }), 3);
+  // Un articolo perso non aspetta la terza perdita: contratto preesistente.
+  assert.equal(gateForWorkflow('Generate Blog Article', { gate: 3, lost: true }), -1);
+});
+
+test('i workflow ordinari non vengono ritardati da una finestra di gate fissa', () => {
+  for (const name of [
+    'Bing SEO title closed loop',
+    'Generate Daily Brief Edition (Bollettino del Frontaliere)',
+    'Refresh Border-Wait Ranking Digest (weekly)',
+    'un workflow nuovo a cron giornaliero',
+  ]) {
+    assert.equal(isRecurrenceGatedWorkflow(name), false, name);
+    assert.equal(gateForWorkflow(name, { gate: 3 }), -1, name);
+  }
+});
+
+/**
+ * Il gate non e' l'unico punto in cui un allarme puo' sparire: il ciclo che
+ * apre le issue si ferma a `MAX_ISSUES` (5 per default). Con piu' di cinque
+ * workflow falliti nella stessa passata, un watchdog in coda all'ordine di
+ * inserimento viene troncato, esce dalla finestra di lookback e la sua issue
+ * non viene aperta mai. I workflow sorvegliati vanno quindi servit_i_ prima
+ * del cap, non solo esentati dal gate.
+ */
+test('i workflow di sorveglianza sono ordinati prima del cap MAX_ISSUES', () => {
+  const noisy = [
+    'Generate Blog Article',
+    'Crawler Group 1 (sparse cross-repo execution)',
+    'Crawler Group 2 (sparse cross-repo execution)',
+    'Crawler Group 3 (sparse cross-repo execution)',
+    'Crawler Group 4 (sparse cross-repo execution)',
+    'Crawler Group 5 (sparse cross-repo execution)',
+  ];
+  const entries = [...noisy, 'Translate Queue Recovery Watchdog (observe only)'].map((n) => [n, {}]);
+  const ordered = orderBySurveillanceFirst(entries).map(([n]) => n);
+
+  const cap = 5;
+  assert.ok(
+    ordered.slice(0, cap).includes('Translate Queue Recovery Watchdog (observe only)'),
+    `il watchdog e' fuori dai primi ${cap}: ${ordered.slice(0, cap).join(', ')}`,
+  );
+  // Stabilita': il rumore conserva il suo ordine relativo.
+  assert.deepEqual(ordered.filter((n) => noisy.includes(n)), noisy);
+});
+
+/**
+ * L'ordinamento da solo non basta: `ALWAYS_ESCALATE_WORKFLOWS` ha 7 voci e
+ * `MAX_ISSUES` ne vale 5, quindi una passata con sei o piu' sorvegliati falliti
+ * ne troncava alcuni al cap — potenzialmente il reporter stesso, e allora non
+ * resta nessuno a segnalare niente. I sorvegliati non contano verso il cap.
+ */
+test('il cap MAX_ISSUES non puo\' troncare un workflow di sorveglianza', () => {
+  for (const name of ALWAYS_ESCALATE_WORKFLOWS) {
+    assert.equal(capReached({ name, cappedOpened: 99, maxIssues: 5 }), false, name);
+  }
+  assert.ok(ALWAYS_ESCALATE_WORKFLOWS.size > 5, 'il caso interessante e\' proprio lista > cap');
+});
+
+test('il cap MAX_ISSUES continua a troncare il rumore', () => {
+  assert.equal(capReached({ name: 'Generate Blog Article', cappedOpened: 5, maxIssues: 5 }), true);
+  assert.equal(capReached({ name: 'Generate Blog Article', cappedOpened: 4, maxIssues: 5 }), false);
 });

@@ -31,12 +31,14 @@
  *    DELLA PR: lo vede il reviewer, blocca l'auto-merge e si risolve lì. Aprire
  *    anche una issue duplicherebbe il segnale su un canale che non lo chiude.
  *
- * 3. **Gate sui fallimenti consecutivi.** Il profilo di fallimento di questo
- *    repo è dominato dalla generazione articoli (misurato: 9 `Generate Blog
- *    Article` + 8 `fast-publish-article` su 18 fallimenti in 7 giorni), che
- *    dipende da provider LLM e rete ed è transiente per natura. Il primo blip
- *    resta una briciola `priority:low`; solo la ripetizione escala. Senza
- *    questo, il triage annegherebbe in rumore al primo giorno.
+ * 3. **Gate sui fallimenti consecutivi dei flussi rumorosi.** Il profilo di
+ *    fallimento di questo repo è dominato dalla generazione articoli (misurato:
+ *    9 `Generate Blog Article` + 8 `fast-publish-article` su 18 fallimenti in
+ *    7 giorni), che dipende da provider LLM e rete ed è transiente per natura.
+ *    Il primo blip di quei flussi resta una briciola `priority:low`; solo la
+ *    ripetizione escala. Il gate non si applica ai workflow ordinari: un cron
+ *    giornaliero o settimanale non può accumulare tre eventi dentro la finestra
+ *    fissa di 48 ore e restare invisibile per costruzione.
  *
  * ## Anti-doppio-conteggio
  *
@@ -61,6 +63,7 @@
  */
 
 import { execFileSync } from 'node:child_process';
+import { appendFileSync } from 'node:fs';
 import { createGithubIssue, searchSafePrefix } from '../lib/github-issue-creator.mjs';
 import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
 
@@ -81,8 +84,87 @@ const DRY_RUN = flag('--dry-run');
 // chiamanti storici (e i test che la pinnano) continuino a trovarla.
 export { parsePositiveNum } from '../lib/parse-positive-num.mjs';
 
-const LOOKBACK_MIN = parsePositiveNum(val('--lookback-min', undefined), 40, { label: '--lookback-min' });
-const MAX_ISSUES = parsePositiveNum(val('--max-issues', undefined), 5, { label: '--max-issues' });
+const LOOKBACK_FLOOR_MIN = 40;
+
+/**
+ * Finestra di scansione: NON una costante, perche' la cadenza non e' garantita.
+ *
+ * `workflow-failure-issues.yml` e' cron'ato ogni 30 minuti, e i 40 minuti di
+ * lookback erano tarati su quella cadenza: finestre che si sovrappongono di 10
+ * minuti, nessun buco. La premessa e' falsa. GitHub DEGRADA le `schedule` su un
+ * repo carico, e le droppa: misurato il 2026-09-18 su 120 scansioni riuscite in
+ * 449 ore, la cadenza reale e' mediana 231 minuti, p90 318, massima 454 — il
+ * 13% delle run previste. Con un lookback fisso di 40 minuti lo scanner vedeva
+ * quindi il 17,7% del tempo: il 70% delle run fallite non-PR (95 su 136) non e'
+ * MAI entrata in nessuna finestra. Non "segnalata in ritardo": mai guardata.
+ * E' il buco per cui `crawler-group-04/05/08/12` sono stati rossi ~26 ore senza
+ * aprire una issue, e per cui `Loop drift check` ne ha perse 3.
+ *
+ * Il fix non e' una costante piu' grande — sarebbe lo stesso difetto tarato su
+ * un throttling che peggiora quando il repo si carica. La finestra si deriva
+ * dallo stato che GitHub gia' tiene: l'istante dell'ULTIMA scansione riuscita.
+ * Cosi' il lookback si allarga da solo quando lo scheduler salta un giro e
+ * torna al floor di 40 minuti quando il cron viene rispettato — 30 trascorsi
+ * piu' 5 di sovrapposizione fanno 35, che il floor alza a 40 — senza watermark
+ * da mantenere e senza assumere niente sulla cadenza.
+ *
+ * `--lookback-min` esplicito resta un override pieno (serve al dry-run e al
+ * dispatch manuale): un valore passato a mano vince sempre sulla derivazione.
+ *
+ * @param {{explicitRaw?: string, lastSuccessAtMs?: number|null, nowMs: number,
+ *   floorMin?: number, ceilingMin: number, warn?: (m: string) => void}} opts
+ * @returns {number} minuti di lookback
+ */
+export function resolveLookbackMin({
+  explicitRaw,
+  lastSuccessAtMs,
+  nowMs,
+  floorMin = LOOKBACK_FLOOR_MIN,
+  ceilingMin,
+  warn = console.warn,
+}) {
+  if (explicitRaw !== undefined && explicitRaw !== null && explicitRaw !== '') {
+    return parsePositiveNum(explicitRaw, floorMin, { label: '--lookback-min' });
+  }
+  if (!Number.isFinite(lastSuccessAtMs) || !Number.isFinite(nowMs) || lastSuccessAtMs >= nowMs) {
+    // Prima scansione del repo, listing fallito, o orologio incoerente: il
+    // floor e' il comportamento storico, cioe' un degrado noto e non un salto.
+    return floorMin;
+  }
+  // +5 minuti di sovrapposizione: una run che fallisce mentre la scansione
+  // precedente era in volo ha `updatedAt` appena prima del suo inizio.
+  const elapsed = Math.ceil((nowMs - lastSuccessAtMs) / 60_000) + 5;
+  if (elapsed > ceilingMin) {
+    // Il soffitto e' l'orizzonte della query: oltre, `--created` non coprirebbe
+    // piu' la finestra e il filtro `since` prometterebbe run che non arrivano.
+    warn(
+      `::warning::[scan-failed-runs] ultima scansione riuscita ${Math.round(elapsed / 60)}h fa: `
+        + `lookback troncato all'orizzonte di ${ceilingMin} minuti. I fallimenti piu' vecchi `
+        + 'di cosi\' non sono recuperabili da questa passata.',
+    );
+    return ceilingMin;
+  }
+  return Math.max(elapsed, floorMin);
+}
+
+/**
+ * Cap di issue per passata.
+ *
+ * Era 5, tarato sull'idea che una passata veda pochi workflow rossi. Sul fleet
+ * dei crawler non regge: il 2026-09-18 una singola passata ha trovato 17
+ * workflow distinti falliti e ne ha scartati 12, fra cui 8 crawler-group e
+ * `Loop drift check`. E lo scarto non e' equo — `byWorkflow` e' ordinato per
+ * recency, e l'onda dei crawler parte in ordine di gruppo crescente, quindi i
+ * gruppi con numero ALTO sono sempre i piu' recenti e occupano sempre i 5
+ * posti: 03..19 erano starved per costruzione, non per sfortuna. Misurato sulle
+ * 48 ore precedenti, 8 gruppi non hanno MAI ricevuto una issue.
+ *
+ * 20 copre il fleet osservato (30 workflow distinti in 19 giorni, ~17 per
+ * passata) e resta bounded: la dedup in `github-issue-creator.mjs` collassa le
+ * ricorrenze su UNA issue per workflow, quindi il cap limita il lavoro per
+ * passata, non il numero di issue vive.
+ */
+const MAX_ISSUES = parsePositiveNum(val('--max-issues', undefined), 20, { label: '--max-issues' });
 // `-1` e' un valore DICHIARATO per questa leva: disattiva il gate di ricorrenza
 // in `github-issue-creator.mjs` (stesso `-1` usato piu' sotto per l'articolo perso).
 const GATE = parsePositiveNum(val('--gate', undefined), 3, { label: '--gate', sentinels: [-1] });
@@ -139,6 +221,78 @@ const IGNORE = parseIgnoreList(process.env.IGNORE_WORKFLOWS);
  * esista, ed escluderlo azzererebbe la copertura, non la duplicherebbe.
  */
 const PR_GATE_WORKFLOWS = new Set(['tests', 'Generator CI']);
+
+/**
+ * Il gate di ricorrenza è una protezione dal rumore, non il default del
+ * reporter. Solo i flussi osservati come ad alta frequenza e transitori lo
+ * usano: un workflow nuovo o lento deve aprire il primo allarme, altrimenti
+ * la cadenza del suo cron diventa una soglia implicita di silenzio.
+ *
+ * I crawler group hanno un nome strutturale condiviso; tenerli in una regex
+ * evita una lista di 23 nomi che potrebbe divergere dal roster. I due workflow
+ * di generazione ad alta frequenza restano espliciti perché non condividono il
+ * prefisso dei crawler.
+ */
+const RECURRENCE_GATED_WORKFLOW_RE = /^(?:Generate Blog Article|fast-publish-article|Crawler Group \d{1,2} \(sparse cross-repo execution\))$/;
+
+export function isRecurrenceGatedWorkflow(name) {
+  return RECURRENCE_GATED_WORKFLOW_RE.test(String(name || ''));
+}
+
+// Workflow di SORVEGLIANZA della pipeline: il loro rosso E' l'allarme, non il
+// rumore transiente per cui esiste il gate di ricorrenza. Tenerli nel gate li
+// rende invisibili, ed e' misurato: il watchdog della coda translate e' stato
+// rosso per 12 run consecutive (52,5 h) senza aprire nessuna issue. Lo
+// scanner lo aveva visto una volta sola, e la riga del gate era
+// `failure 1/3 ... → low-priority breadcrumb` nel ledger #25 (un solo commento
+// per questa chiave). Con meno di 3 avvistamenti nella finestra di 48 h
+// l'ordinale non arriva mai a 3/3, quindi il gate qui non rimanda
+// l'escalation: la sopprime per sempre.
+// I nomi sono legati ai `name:` reali degli YAML da
+// `generator/tests/scan-failed-runs-filter.test.mjs`: una rinomina del workflow
+// senza aggiornare questa lista la renderebbe muta in silenzio.
+export const ALWAYS_ESCALATE_WORKFLOWS = new Set([
+  'Translate Queue Recovery Watchdog (observe only)',
+  'Translate Pending Jobs (sparse cross-repo execution)',
+  'Generation health watchdog',
+  'Lockstep stall watchdog',
+  'Crawler fleet stall watchdog',
+  'GH_PAT Expiry Monitor',
+  'Close Recovered Failure Issues',
+  // Se muore il reporter, non resta nessuno a segnalare gli altri.
+  'Workflow failure → issue',
+  // Il publisher della superficie HTTP: se fallisce, `dist/api/` resta vecchia
+  // e il sito serve dati stantii. Un rosso qui non e' rumore transiente da
+  // aggregare nel ledger, e' la superficie pubblica che non si aggiorna — lo
+  // dice anche il razionale del confine di scansione, che cita `publish-api`
+  // fra i fallimenti che non devono essere inghiottiti.
+  'Publish article data API',
+]);
+
+/**
+ * Ordina i workflow di sorveglianza prima del cap `MAX_ISSUES`. `sort` in Node
+ * e' stabile, quindi per tutti gli altri resta l'ordine di inserimento.
+ */
+/**
+ * Il cap limita il rumore, non gli allarmi: un workflow di sorveglianza non
+ * conta verso `MAX_ISSUES` e non puo' essere troncato.
+ */
+export function capReached({ name, cappedOpened, maxIssues }) {
+  if (ALWAYS_ESCALATE_WORKFLOWS.has(name)) return false;
+  return cappedOpened >= maxIssues;
+}
+
+export function orderBySurveillanceFirst(entries) {
+  return [...entries].sort(
+    ([a], [b]) => Number(ALWAYS_ESCALATE_WORKFLOWS.has(b)) - Number(ALWAYS_ESCALATE_WORKFLOWS.has(a)),
+  );
+}
+
+/** `-1` disattiva il gate di ricorrenza: prima issue vera al primo rosso. */
+export function gateForWorkflow(name, { lost = false, gate = undefined } = {}) {
+  if (lost || ALWAYS_ESCALATE_WORKFLOWS.has(name) || !isRecurrenceGatedWorkflow(name)) return -1;
+  return gate === undefined ? GATE : gate;
+}
 
 function gh(args, fallback = '') {
   try {
@@ -339,6 +493,149 @@ export function parseHorizonMin(raw, opts = {}) {
 const RUN_QUERY_HORIZON_MIN = parseHorizonMin(process.env.SCAN_FAILED_RUNS_HORIZON_MIN);
 
 /**
+ * Il workflow che ospita QUESTO scanner, per rileggere la propria cadenza reale.
+ * Override solo per i test; in CI il default e' l'unico chiamante.
+ */
+const SELF_WORKFLOW = process.env.SCAN_FAILED_RUNS_SELF_WORKFLOW || 'workflow-failure-issues.yml';
+
+/**
+ * Il watermark conta SOLO le scansioni da `schedule`, e solo quelle riuscite.
+ *
+ * `--status success` da solo non basta, ed e' il difetto trovato dalla review
+ * sulla PR #1568: una run `workflow_dispatch --dry-run` esce SUCCESS senza aver
+ * consegnato nulla, e usarla come watermark fa avanzare la finestra oltre
+ * fallimenti mai segnalati. Lo stesso vale per un dispatch manuale con un
+ * `--lookback-min` stretto, che copre una finestra diversa da quella pianificata.
+ *
+ * `schedule` e' l'UNICO canale di consegna: e' la definizione operativa di
+ * "passata vera". Un dispatch resta uno strumento di ispezione e non muove
+ * niente. Insieme all'uscita non-zero su passata incompleta (vedi `main`), da'
+ * l'invariante che serve: **la finestra avanza solo dopo una passata che ha
+ * consegnato tutto.**
+ *
+ * Si esclude anche la run corrente (`GITHUB_RUN_ID`): una passata non deve mai
+ * derivare la finestra da se stessa, o il lookback collasserebbe a zero.
+ *
+ * Fail-open per costruzione — un listing illeggibile torna null e il chiamante
+ * ricade sul floor, che e' il comportamento storico.
+ */
+/**
+ * Legge il listing del watermark e dice SE la finestra e' determinabile.
+ *
+ * Puro ed esportato perche' e' la distinzione che decide cosa non verra' mai
+ * piu' guardato, e va provata da un test invece che asserita in un commento.
+ *
+ * **`''` NON e' `[]`.** Una lista vuota e' un JSON valido che dice «non
+ * esistono scansioni `schedule` riuscite», ed e' un risultato LEGITTIMO: alla
+ * prima scansione del repo non c'e' nessun confine precedente da rispettare,
+ * quindi il floor va bene e la passata resta completa. Un output VUOTO non dice
+ * quello — dice che il listing non ha prodotto JSON affatto, cioe' che la
+ * finestra non e' determinabile.
+ *
+ * Confonderli era il buco: floor arbitrario, la run `schedule` completa,
+ * diventa il nuovo watermark, e le failure non esaminate nel tratto saltato —
+ * `publish-api` incluso, che lascia `dist/api/` vecchia — non vengono ripescate
+ * mai piu'.
+ *
+ * @param {string|null} raw stdout di `gh run list`, o null se `gh` e' fallito
+ * @param {string} selfId `GITHUB_RUN_ID`, escluso per non derivare da se stessi
+ * @returns {{atMs: number|null, incomplete: string|null}}
+ */
+export function parseWatermarkListing(raw, selfId = '') {
+  if (raw === null || raw === undefined) return { atMs: null, incomplete: 'non leggibile' };
+  if (raw === '') return { atMs: null, incomplete: 'vuoto (nessun JSON)' };
+  let rows;
+  try {
+    rows = JSON.parse(raw);
+  } catch {
+    return { atMs: null, incomplete: 'non parsabile' };
+  }
+  if (!Array.isArray(rows)) return { atMs: null, incomplete: 'di forma inattesa' };
+  // `--event`/`--status` sono gia' filtri server-side, ma si ri-verificano qui:
+  // un filtro silenziosamente ignorato dal CLI tornerebbe run qualunque, e
+  // questo watermark decide cosa NON verra' piu' guardato.
+  const times = rows
+    .filter((r) => String(r?.databaseId ?? '') !== selfId)
+    .filter((r) => r?.event === 'schedule' && r?.conclusion === 'success')
+    .map((r) => Date.parse(r?.createdAt || ''))
+    .filter((t) => Number.isFinite(t));
+  // Nessuna scansione precedente: legittimo, non incompleto.
+  return { atMs: times.length > 0 ? Math.max(...times) : null, incomplete: null };
+}
+
+function lastSuccessfulScanAtMs() {
+  if (!REPO) return null;
+  const raw = gh(
+    ['run', 'list', '--repo', REPO, '--workflow', SELF_WORKFLOW,
+      '--status', 'success', '--event', 'schedule',
+      '--limit', '10', '--json', 'databaseId,createdAt,event,conclusion'],
+    // Sentinella distinta dalla lista vuota: "gh e' fallito" e "non esistono
+    // scansioni precedenti riuscite" NON sono la stessa cosa, e confonderle e'
+    // il difetto segnalato dalla review. Nel primo caso il floor di 40 minuti
+    // e' una finestra ARBITRARIA su un buco di ampiezza ignota, quindi la
+    // passata non puo' diventare il watermark; nel secondo il floor e'
+    // legittimo, perche' non c'e' nessun confine precedente da rispettare.
+    null,
+  );
+  // Tutti i casi (null, '', non parsabile, forma inattesa, lista vuota) sono
+  // classificati in UN solo posto, che e' anche il posto che i test esercitano.
+  const { atMs, incomplete } = parseWatermarkListing(raw, String(process.env.GITHUB_RUN_ID || ''));
+  if (incomplete) {
+    markIncomplete(`listing delle scansioni precedenti ${incomplete}: finestra non determinabile`);
+    console.error(`::error::[scan-failed-runs] listing delle scansioni precedenti ${incomplete} → passata NON completa.`);
+  }
+  return atMs;
+}
+
+/**
+ * Finestra di scansione, risolta UNA volta e memoizzata.
+ *
+ * Deliberatamente NON una costante di modulo: la derivazione legge `gh` ed
+ * esporta in `GITHUB_ENV`, cioe' fa I/O. A livello di modulo quell'I/O
+ * scatterebbe al solo `import`, e questo file viene importato dai test —
+ * in CI `GITHUB_REPOSITORY` e `GITHUB_ENV` sono entrambe popolate, quindi un
+ * import avrebbe chiamato GitHub e scritto nell'env del job. E' la trappola di
+ * `scripts/ci`: un side effect sopra il guard di `main` non e' inerte.
+ */
+let lookbackCache = null;
+function lookbackMin() {
+  if (lookbackCache !== null) return lookbackCache;
+  lookbackCache = resolveLookbackMin({
+    explicitRaw: val('--lookback-min', undefined),
+    lastSuccessAtMs: lastSuccessfulScanAtMs(),
+    nowMs: Date.now(),
+    ceilingMin: RUN_QUERY_HORIZON_MIN,
+  });
+  // `scan-job-timeouts.mjs` gira nello STESSO job e aveva la stessa finestra
+  // fissa di 40 minuti, quindi lo stesso buco di copertura. Invece di ripetere
+  // la derivazione nello YAML — due sorgenti per un valore condiviso, che
+  // AGENTS.md §6 vieta — la finestra risolta qui viene esportata e il passo
+  // successivo la riusa. Un solo posto la calcola; il gemello e' pinnato da
+  // `generator/tests/scan-failed-runs-lookback.test.mjs`.
+  //
+  // L'export e' OPT-IN esplicito e non "scrivo se GITHUB_ENV esiste": in CI
+  // quella variabile e' popolata in OGNI job, e `tests.yml` esegue un test che
+  // lancia questo CLI come sottoprocesso — misurato sulla run 35378019611, dove
+  // `SCAN_RESOLVED_LOOKBACK_MIN=40` e' finito nell'ambiente degli step di
+  // `tests.yml`, che non ha nessun gemello da alimentare. Solo il workflow che
+  // possiede il passo successivo chiede l'export.
+  if (process.env.SCAN_EXPORT_RESOLVED_LOOKBACK === '1' && process.env.GITHUB_ENV) {
+    try {
+      appendFileSync(process.env.GITHUB_ENV, `SCAN_RESOLVED_LOOKBACK_MIN=${lookbackCache}\n`);
+    } catch (e) {
+      // NON fail-open. Se l'export fallisce, il passo gemello ricade in
+      // silenzio su 40 minuti mentre questo scanner puo' riuscire: il job
+      // diventa il watermark e i timeout/host-kill piu' vecchi nella finestra
+      // derivata — incluso un publish cancellato — si perdono senza traccia.
+      // E' il terzo dei tre 🔴 della review, e la stessa forma degli altri due.
+      markIncomplete('export della finestra risolta al detector timeout fallito');
+      console.error(`::error::[scan-failed-runs] export della finestra risolta fallito: ${String(e.message).slice(0, 160)}`);
+    }
+  }
+  return lookbackCache;
+}
+
+/**
  * L'orizzonte e' una stima, quindi va MISURATO invece che creduto: e' la
  * mancanza di questa misura ad aver reso la perdita silenziosa per mesi.
  *
@@ -456,11 +753,18 @@ export function fetchRunsBisected(startMs, endMs, opts) {
     cap = FAILED_RUNS_SAFETY_CAP,
     maxDepth = FAILED_RUNS_MAX_SPLIT_DEPTH,
     warn = console.warn,
+    // Chiamata per ogni finestra che NON si e' riusciti a leggere. Esiste
+    // perche' `warnUnread` avvisava e poi rendeva `'read'`: la perdita finiva
+    // nel log e il chiamante la vedeva come una lettura riuscita, quindi la
+    // passata poteva diventare il watermark senza aver guardato quel tratto.
+    // Default no-op per non cambiare i chiamanti di sola lettura (i test).
+    onUnread = () => {},
   } = opts;
   const byId = new Map();
 
   const iso = (ms) => new Date(ms).toISOString();
   const warnUnread = (aIso, bIso) => {
+    onUnread(aIso, bIso);
     warn(
       `::warning::[scan-failed-runs] query FALLITA sulla finestra ${aIso}..`
         + `${bIso ?? 'ora'} — nessuna run letta li' dentro, e la scansione prosegue `
@@ -578,11 +882,43 @@ export function parseRunListJson(raw) {
   }
 }
 
+/**
+ * Ragioni per cui questa passata NON ha consegnato tutto.
+ *
+ * La regola che questa PR cerca di far valere e' una sola: **il confine non
+ * avanza senza una consegna completa dimostrata.** Da quando la finestra si
+ * deriva dall'ultima scansione RIUSCITA, ogni uscita morbida diventa un
+ * avanzamento di stato su lavoro non svolto — la review ne ha trovati tre, e
+ * sono la stessa forma del difetto originale, un livello piu' in basso.
+ *
+ * Qualunque cosa che renda la passata parziale — una finestra non letta, un
+ * listing dello storico illeggibile, una issue non persistita, il cap che
+ * tronca, l'export della finestra al gemello fallito — si registra qui, e
+ * `main()` esce non-zero. Uscire non-zero significa che questa run non e'
+ * `success`, quindi `lastSuccessfulScanAtMs()` non la prende come watermark e
+ * la passata successiva ri-guarda tutto.
+ */
+const incompleteReasons = [];
+function markIncomplete(reason) {
+  incompleteReasons.push(reason);
+}
+
+/** Uscita unica per una passata incompleta, usata da OGNI ritorno di `main()`. */
+function incompleteExit() {
+  console.error(
+    `::error::[scan-failed-runs] passata INCOMPLETA (${incompleteReasons.length}): `
+      + `${incompleteReasons.join(' · ')}. Uscita non-zero per NON far avanzare la finestra: `
+      + 'la prossima scansione ri-guarda questo tratto.',
+  );
+  return 1;
+}
+
 /** Run fallite nella finestra, escluse quelle da pull_request e dai gate pre-merge in preview. */
 function failedRuns() {
   const nowMs = Date.now();
-  const since = new Date(nowMs - LOOKBACK_MIN * 60_000).toISOString();
-  const queryCutoffMs = nowMs - (LOOKBACK_MIN + RUN_QUERY_HORIZON_MIN) * 60_000;
+  const lookback = lookbackMin();
+  const since = new Date(nowMs - lookback * 60_000).toISOString();
+  const queryCutoffMs = nowMs - (lookback + RUN_QUERY_HORIZON_MIN) * 60_000;
   const fetchWindow = (startIso, endIso) => {
     // Fallback `null`, non `'[]'`: qui "gh e' fallito" e "la finestra e' vuota"
     // devono restare due cose diverse — vedi `fetchRunsBisected`.
@@ -594,7 +930,11 @@ function failedRuns() {
     );
     return parseRunListJson(raw);
   };
-  const runs = fetchRunsBisected(queryCutoffMs, null, { fetchWindow, nowMs });
+  const runs = fetchRunsBisected(queryCutoffMs, null, {
+    fetchWindow,
+    nowMs,
+    onUnread: (aIso, bIso) => markIncomplete(`finestra non letta ${aIso}..${bIso ?? 'ora'}`),
+  });
   const reportable = runs.filter((r) => isReportableRun(r, { since }));
   // Il canary si misura sulle run che possono DAVVERO essere perse dal report:
   // stesso filtro di `reportable` ma senza `since`, che e' proprio la soglia
@@ -975,8 +1315,14 @@ async function main() {
 
   const runs = failedRuns();
   if (!runs.length) {
-    console.log(`[scan-failed-runs] Nessuna run fallita negli ultimi ${LOOKBACK_MIN} minuti (esclusi PR e cancelled).`);
-    return 0;
+    console.log(`[scan-failed-runs] Nessuna run fallita negli ultimi ${lookbackMin()} minuti (esclusi PR e cancelled).`);
+    // «Nessuna run fallita» e «non ho potuto leggere» danno la STESSA lista
+    // vuota, e uscire 0 qui era il primo dei tre 🔴: una finestra non letta
+    // faceva diventare questa run il nuovo watermark senza aver guardato
+    // niente, e un fallimento di `publish-api` nel tratto perso non sarebbe
+    // stato ripescato mai piu'. La lista vuota e' un risultato valido SOLO se
+    // ogni lettura e' riuscita.
+    return incompleteReasons.length > 0 ? incompleteExit() : 0;
   }
 
   // Una issue per WORKFLOW, non per run: se lo stesso workflow e' fallito tre
@@ -1010,12 +1356,38 @@ async function main() {
 
   console.log(`[scan-failed-runs] ${runs.length} run fallite → ${candidatesByWorkflow.size} workflow distinti${DRY_RUN ? ' (dry-run)' : ''}.`);
 
+  // I workflow di sorveglianza vanno serviti PRIMA del cap `MAX_ISSUES`: se il
+  // cap li tronca escono dalla finestra di lookback e il loro allarme non viene
+  // aperto mai — lo stesso difetto che `ALWAYS_ESCALATE_WORKFLOWS` chiude sul
+  // gate, riaperto da un'altra porta. `sort` in Node e' stabile, quindi
+  // l'ordine relativo di tutti gli altri resta quello di inserimento.
+  const servedOrder = orderBySurveillanceFirst(byWorkflow);
+
   let opened = 0;
-  for (const [name, selected] of byWorkflow) {
+  // Il cap limita il RUMORE, non gli allarmi: i workflow di sorveglianza non
+  // contano verso `MAX_ISSUES` e non possono essere troncati. Sono al massimo
+  // `ALWAYS_ESCALATE_WORKFLOWS.size` per costruzione e ognuno apre UNA issue
+  // deduplicata, quindi il tetto sul rumore resta quello dichiarato. Senza
+  // questo, con sei o piu' sorvegliati falliti nella stessa passata il cap ne
+  // troncava alcuni — potenzialmente il reporter stesso — e il loro allarme
+  // non veniva aperto mai, che e' il difetto che questa lista chiude.
+  let cappedOpened = 0;
+  let position = -1;
+  let truncated = [];
+  for (const [name, selected] of servedOrder) {
+    position += 1;
     const run = selected.run;
-    if (opened >= MAX_ISSUES) {
+    const surveillance = ALWAYS_ESCALATE_WORKFLOWS.has(name);
+    if (capReached({ name, cappedOpened, maxIssues: MAX_ISSUES })) {
+      truncated = servedOrder.map(([workflowName]) => workflowName).slice(position);
       // Un cap che tronca in silenzio si legge come "tutto coperto". Lo diciamo.
-      console.warn(`::warning::[scan-failed-runs] Cap di ${MAX_ISSUES} issue raggiunto — ${byWorkflow.size - opened} workflow falliti NON segnalati in questa passata: ${[...byWorkflow.keys()].slice(opened).join(', ')}. Verranno ripresi alla prossima scansione.`);
+      // Il cap tronca, e la passata NON puo' quindi contare come watermark:
+      // uscendo 0 la finestra avanzerebbe oltre i workflow scartati e nessuno
+      // li guarderebbe piu'. Si esce non-zero (vedi in fondo), cosi' questa run
+      // non e' `success`, il watermark resta indietro e la passata successiva
+      // li rivede. E' il difetto segnalato dalla review sulla PR #1568: il
+      // messaggio precedente ammetteva la perdita invece di impedirla.
+      console.warn(`::warning::[scan-failed-runs] Cap di ${MAX_ISSUES} issue raggiunto — ${truncated.length} workflow falliti NON segnalati in questa passata: ${truncated.join(', ')}. La run esce non-zero per NON far avanzare il watermark: la prossima scansione li rivede. Alzare --max-issues se ricorre.`);
       break;
     }
 
@@ -1097,6 +1469,7 @@ async function main() {
     if (DRY_RUN) {
       console.log(`[scan-failed-runs] (dry-run) aprirei: "${title}" — run ${run.url}`);
       opened++;
+      if (!surveillance) cappedOpened++;
       continue;
     }
 
@@ -1108,17 +1481,55 @@ async function main() {
       priority: lost ? 1 : 2,
       labels: ['Bug'],
       workflow: name,
-      // Il primo blip resta una briciola priority:low; solo la ripetizione
-      // dentro la finestra escala. È ciò che tiene fuori dal triage il rumore
-      // transiente della generazione articoli. Non vale per un articolo perso:
-      // `-1` disattiva il gate (vedi consecutiveGate in github-issue-creator.mjs),
-      // perche' aspettare la terza perdita significa buttarne tre.
-      consecutiveGate: lost ? -1 : GATE,
+      // Il primo blip resta una briciola priority:low solo per i flussi ad alta
+      // frequenza classificati da gateForWorkflow. I workflow ordinari, inclusi
+      // i cron giornalieri e settimanali, arrivano alla prima issue: `-1`
+      // disattiva il gate (vedi consecutiveGate in github-issue-creator.mjs).
+      // Non vale per un articolo perso: aspettare la terza perdita significa
+      // buttarne tre.
+      consecutiveGate: gateForWorkflow(name, { lost: Boolean(lost) }),
     });
-    if (res) opened++;
+    // `if (res) opened++` contava come consegnati anche i due casi di
+    // fallimento, ed e' il secondo dei tre 🔴 della review: `createGithubIssue`
+    // rende `null` quando la creazione fallisce e `{persisted: false}` quando
+    // fallisce un commento o una riapertura. Contarli chiudeva la passata a 0 e
+    // faceva avanzare il confine oltre una failure NON registrata — inclusa una
+    // possibile failure di `publish-api`, che lascia la superficie dati vecchia.
+    //
+    // `ledger: true` e `staleBuild: true` sono percorsi RIUSCITI che non
+    // portano `persisted`, quindi si testano esattamente i due fallimenti e non
+    // la verita' di `persisted` (il caso ledger va preservato, come chiede la
+    // review).
+    if (res === null || res?.persisted === false) {
+      markIncomplete(
+        `segnalazione non consegnata per "${name}": `
+          + `${res === null ? 'createGithubIssue ha reso null' : 'commento non persistito'}`,
+      );
+      console.error(
+        `::error::[scan-failed-runs] ${name}: segnalazione NON consegnata `
+          + `(${res === null ? 'null' : 'persisted: false'}) — la passata non e' completa.`,
+      );
+      continue;
+    }
+    opened++;
+    // Solo una segnalazione CONSEGNATA conta verso il cap del rumore.
+    if (!surveillance) cappedOpened++;
   }
 
   console.log(`[scan-failed-runs] Fatto — ${opened} segnalazione/i emesse.`);
+  if (truncated.length > 0) {
+    markIncomplete(`cap raggiunto: ${truncated.length} workflow non segnalati`);
+  }
+  // UNICO punto che applica la regola: il confine non avanza senza una consegna
+  // completa dimostrata. `lastSuccessfulScanAtMs()` accetta solo run `schedule`
+  // con `conclusion: success`, quindi uscire non-zero qui E' il meccanismo che
+  // tiene la finestra indietro finche' la passata non e' completa.
+  //
+  // Le issue gia' aperte in questa passata restano aperte: non si perde il
+  // lavoro fatto, si perde solo l'avanzamento del confine — che e' esattamente
+  // il verso giusto in cui sbagliare, perche' il costo e' ri-guardare, non
+  // non-guardare.
+  if (incompleteReasons.length > 0) return incompleteExit();
   return 0;
 }
 
@@ -1128,11 +1539,21 @@ if (process.argv[1] && process.argv[1].endsWith('scan-failed-runs.mjs')) {
   main().then(
     (c) => process.exit(c),
     (e) => {
-      // PROCEED-SAFE: uno scanner rotto non deve far fallire il workflow che lo
-      // ospita, altrimenti il rilevatore di fallimenti diventa esso stesso un
-      // fallimento ricorrente da segnalare.
-      console.error(`[scan-failed-runs] errore non fatale: ${e && e.stack ? e.stack : e}`);
-      process.exit(0);
+      // Qui c'era PROCEED-SAFE: si usciva 0 perche' «uno scanner rotto non deve
+      // far fallire il workflow che lo ospita». Quella ragione non regge piu', e
+      // va cambiata insieme al diff che l'ha invalidata (AGENTS.md §8): da
+      // quando la finestra si deriva dall'ultima scansione RIUSCITA, uscire 0
+      // dopo un errore fa avanzare il watermark oltre fallimenti che non sono
+      // stati raccolti — cioe' il costo dell'uscita morbida non e' piu' un
+      // workflow verde, e' una perdita silenziosa. E' il difetto segnalato
+      // dalla review sulla PR #1568.
+      //
+      // Un rilevatore di fallimenti che si rompe DEVE risultare rotto: il rosso
+      // apre una issue su se stesso (una sola, la dedup collassa le ricorrenze)
+      // e soprattutto tiene la finestra indietro, cosi' la passata successiva
+      // ri-guarda tutto quello che questa non ha consegnato.
+      console.error(`[scan-failed-runs] errore: ${e && e.stack ? e.stack : e}`);
+      process.exit(1);
     },
   );
 }

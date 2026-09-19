@@ -491,8 +491,33 @@ jobs:
                 marker_ok=false
               else
                 marker_body=$(printf '%s' "$comments" | jq -r '[.comments[]?.body // "" | select(contains("## Post-merge follow-up triage"))] | last // ""' 2>/dev/null || true)
-                bucket_refs=$(printf '%s\n' "$marker_body" | sed -n -E '/^[[:space:]]*(-[[:space:]]+|\*[[:space:]]+)?Created(\/updated)?:/p' | grep -Eo 'bucket #[0-9]+' | sed -E 's/.*#//' | sort -un || true)
-                if printf '%s' "$marker_body" | grep -Eiq 'zero outstanding items|backfill skipped|Created:[[:space:]]*0 issue[[:space:]]*\(solo live-verification batchata\)|Created/updated:[[:space:]]*(0 issue[[:space:]]*[—-][[:space:]]*nessun item nuovo aggiunto|nessun nuovo item nel bucket)'; then
+                # `grep -Ei` e non `sed -n -E`: la grammatica del claim e'
+                # case-insensitive nel gemello JS, e un `created/updated:` o un
+                # `daily bucket:` in minuscolo non deve sparire da questo lato.
+                claim_head='^[[:space:]]*(-[[:space:]]+|\*[[:space:]]+)?(Created(/updated)?|Daily bucket):'
+                claim_lines=$(printf '%s\n' "$marker_body" | grep -Ei "$claim_head" || true)
+                bucket_refs=$(printf '%s\n' "$claim_lines" | grep -Eio 'bucket[[:space:]]*:?[[:space:]]*#[0-9]+' | sed -E 's/.*#//' | sort -un || true)
+                # Discriminante STRUTTURALE, gemello di `triageMarkerPersistenceExpectation`
+                # in scripts/ci/collect-followup-batch.mjs (il legame e' coperto da
+                # generator/tests/followup-marker-zero-claim.test.mjs): sulla riga di claim
+                # isolata qui sopra conta il NUMERO dichiarato, non la prosa. La
+                # lista di formule ammesse che stava qui e' stata superata tre volte
+                # dalla variante successiva; l'ultima il 2026-09-18 con
+                # «Created/updated: 0 item; nessun bucket creato.», marker corretto
+                # per un esito legittimo, run rossa.
+                # `0([^0-9.]|$)`: un `Created: 0.5 item` non e' un claim a zero.
+                zero_claim=false
+                if [ -n "$claim_lines" ] && ! printf '%s\n' "$claim_lines" \
+                  | grep -Eqvi "${claim_head}[[:space:]]*0([^0-9.]|\$)"; then
+                  zero_claim=true
+                fi
+                # Le formule d'intestazione valgono SOLO se non esiste alcuna riga
+                # di claim: cercarle nell'intero corpo anche con un claim non-zero
+                # lasciava a una prosa successiva la possibilita' di scavalcare la
+                # verifica del bucket per una persistenza REALE.
+                if [ "$zero_claim" = true ] \
+                  || { [ -z "$claim_lines" ] \
+                    && printf '%s' "$marker_body" | grep -Eiq 'zero outstanding items|backfill skipped'; }; then
                   # A zero-candidate summary may name an unchanged daily bucket
                   # for audit context; it is not a persistence claim.
                   :

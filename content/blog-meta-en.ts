@@ -11842,6 +11842,18 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.governo-no-iniziativa-frontiere.title': 'Border controls: the Government rejects the UDC initiative',
     'blog.article.governo-no-iniziativa-frontiere.excerpt': 'The Federal Council rejects the initiative \'Stopping abuses in asylum\': systematic checks would cost billions and risk leaving Schengen.',
     'blog.article.governo-no-iniziativa-frontiere.imageAlt': 'Border crossing in Ticino with commuter traffic',
+    'blog.article.tasse-frontaliere-oltre-20km-2026.title': 'Border taxes Italy Switzerland 2026: driving over 20 km',
+    'blog.article.tasse-frontaliere-oltre-20km-2026.excerpt': 'Tax rules 2026 for border workers over 20 km: source tax, deductibles of 7,500 or 10,000 euros and double taxation management.',
+    'blog.article.tasse-frontaliere-oltre-20km-2026.imageAlt': 'View of Lugano with tax documents for cross-border workers',
+    'blog.article.studio-svizzero-confine-frontalieri.title': 'Swiss Border Study: Border Costs and Collapse',
+    'blog.article.studio-svizzero-confine-frontalieri.excerpt': 'Federal Council report and Ecoplan study: traffic jams for 422,000 hours a day, billion-dollar costs and the collapse of border workers by up to 60% without Schengen.',
+    'blog.article.studio-svizzero-confine-frontalieri.imageAlt': 'Car traffic queue at the border between Switzerland and Italy',
+    'blog.article.sindaco-malesco-fondi-confine.title': 'Frontiersmen, Malesco writes to the Government for funds',
+    'blog.article.sindaco-malesco-fondi-confine.excerpt': 'Enrico Barbazza, mayor of Malesco, requests the Government to fully transfer the resources allocated to border municipalities to support local services.',
+    'blog.article.sindaco-malesco-fondi-confine.imageAlt': 'Town hall building in Ticino region',
+    'blog.article.confapi-avsi-accordo-varese-formazione.title': 'Confapi Varese-AVSI agreement for youth training',
+    'blog.article.confapi-avsi-accordo-varese-formazione.excerpt': 'Protocol signed on 17 September between Confapi Varese and the AVSI Foundation to train young people through apprenticeships and dual training.',
+    'blog.article.confapi-avsi-accordo-varese-formazione.imageAlt': 'Casa Museo Lodovico Pogliaghi in Varese, venue for the agreement between Confapi Varese and Fondazione AVSI',
 };
 
 export default blogMetaEn;

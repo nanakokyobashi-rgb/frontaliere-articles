@@ -2212,6 +2212,16 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'permesso-c-glarona-requisiti': { it: 'permesso-c-glarona-requisiti', en: 'permit-c-glarona-requirements', de: 'bewilligung-c-glarona-anforderungen', fr: 'permis-c-glarona-conditions' },
  'permesso-l-vaud-proroga': { it: 'permesso-l-vaud-proroga', en: 'l-permit-vaud-extension', de: 'l-ausweis-waadt-verlaengerung', fr: 'permis-l-vaud-prolongation' },
  'crediti-esercito-difesa-svizzera': { it: 'crediti-esercito-difesa-svizzera', en: 'swiss-army-defense-credits', de: 'schweiz-armee-verteidigungskredite', fr: 'credits-defense-armee-suisse' },
+ 'permesso-c-zugo-requisiti': { it: 'permesso-c-zugo-requisiti', en: 'permesso-c-zugo-requirements', de: 'permesso-c-zugo-anforderungen', fr: 'permesso-c-zugo-conditions' },
+ 'borse-studio-zugo-guide': { it: 'borse-studio-zugo-guide', en: 'zug-scholarships-guide', de: 'zug-stipendien-leitfaden', fr: 'bourses-etudes-zug-guide' },
+ 'suissenegece-respinge-tasse-profitti': { it: 'suissenegece-respinge-tasse-profitti', en: 'suissenegece-rejects-profit-taxes', de: 'suissenegece-lehnt-gewinnsteuern-ab', fr: 'suissenegece-rejette-taxes-benefices' },
+ 'taf-respinge-ricorso-liste-ospedaliere': { it: 'taf-respinge-ricorso-liste-ospedaliere', en: 'taf-rejects-hospital-list-appeal', de: 'bvg-weist-spitalisten-klage-ab', fr: 'taf-rejette-recours-listes-hopitaux' },
+ 'bns-tassi-esame-settembre': { it: 'bns-tassi-esame-settembre', en: 'snb-rates-september-exam', de: 'snb-zinsen-september-pruefung', fr: 'bns-taux-examen-septembre' },
+ 'consiglio-federale-boccia-frontiere': { it: 'consiglio-federale-boccia-frontiere', en: 'federal-council-rejects-borders-initiative', de: 'bundesrat-lehnt-grenzinitiative-ab', fr: 'conseil-federal-rejette-initiative-frontieres' },
+ 'casa-zugo-prezzi-mutuo': { it: 'casa-zugo-prezzi-mutuo', en: 'zug-house-prices-mortgage', de: 'zug-hauspreise-hypothek', fr: 'maison-zoug-prix-hypothecaire' },
+ 'permesso-l-vaud-validita-rinnovo': { it: 'permesso-l-vaud-validita-rinnovo', en: 'vaud-l-permit-validity-renewal', de: 'vaud-l-ausweis-gultigkeit-verlaengerung', fr: 'permis-l-vaud-duree-renouvellement' },
+ 'votazione-27-settembre-2026': { it: 'votazione-27-settembre-2026', en: 'september-vote-2026', de: 'abstimmung-27-september-2026', fr: 'vote-27-septembre-2026' },
+ 'scuola-canton-vaud-iscrizioni-cicli': { it: 'scuola-canton-vaud-iscrizioni-cicli', en: 'vaud-school-system-enrollment-cycles', de: 'schulsystem-kanton-waadt-anmeldung', fr: 'systeme-scolaire-canton-vaud-inscription' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

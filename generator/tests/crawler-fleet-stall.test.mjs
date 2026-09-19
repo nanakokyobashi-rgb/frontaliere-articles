@@ -59,13 +59,38 @@ test('riconosce solo i commit di consegna dei gruppi', () => {
 });
 
 test('una risposta API vuota e leggibile attiva il caso zero-consegne', () => {
+  // Il caso PEGGIORE — nessun gruppo consegna — arrivava come `''`, che con il
+  // vecchio fallback `''` di `gh()` era identico a un errore di lettura: il
+  // fail-open lo faceva uscire zitto. `''` deve essere leggibile, `null` no.
   const empty = parseDeliveryRows('');
   assert.deepEqual(empty.rows, []);
-  assert.equal(empty.readable, true, 'nessuna riga è una risposta valida senza consegne');
+  assert.equal(empty.readable, true, 'nessuna riga e una risposta valida senza consegne');
   assert.equal(empty.bad, 0);
 
   const failed = parseDeliveryRows(null);
   assert.equal(failed.readable, false, 'null rappresenta un errore del wrapper gh');
+
+  // Le righe malformate si contano senza invalidare la lettura: una riga senza
+  // tab e una con la data vuota. Una riga di soli spazi NON e' malformata, e'
+  // salto di riga: viene scartata prima del controllo sul tab.
+  const partial = parseDeliveryRows(
+    '2026-09-18T10:00:00Z\tAuto-update crawler group 07 jobs\nsenza-tab\n\tmessaggio-senza-data\n \n',
+  );
+  assert.equal(partial.rows.length, 1);
+  assert.equal(partial.bad, 2);
+  assert.equal(partial.readable, true);
+});
+
+test('zero consegne leggibili suonano invece di uscire fail-open', () => {
+  // La catena completa: risposta vuota -> readable -> verdetto stalled.
+  const { rows, readable } = parseDeliveryRows('');
+  const v = stallVerdict({
+    deliveries: groupDeliveries(rows, NOW),
+    nowMs: NOW,
+    stallHours: 6,
+    readable,
+  });
+  assert.equal(v.stalled, true, 'lo stallo totale deve suonare, non tacere');
 });
 
 test('un fleet sano non suona', () => {

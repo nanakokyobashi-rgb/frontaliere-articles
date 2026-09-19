@@ -85157,6 +85157,396 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-permesso-c-zugo-requisiti': {
+    title: 'Permesso C a Zugo: requisiti e procedura di domanda',
+    description: 'Scopri come ottenere il permesso di domicilio C nel Canton Zugo: requisiti temporali (5-10 anni), criteri di integrazione e passaggi per la domanda.',
+    keywords: 'frontalieri, ticino, svizzera, italia, permesso, zugo, requisiti, procedura',
+    ogTitle: 'Permesso C a Zugo: requisiti e procedura di domanda',
+    ogDescription: 'Vuoi ottenere il domicilio stabile nel Canton Zugo? Scopri i requisiti di residenza per cittadini UE e extra-UE, i criteri di integrazione e i vantaggi fiscali e professionali del permesso C.',
+    canonicalPath: '/articoli-svizzera/permesso-c-zugo-requisiti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Permesso C a Zugo: requisiti e procedura di domanda",
+      "description": "Scopri come ottenere il permesso di domicilio C nel Canton Zugo: requisiti temporali (5-10 anni), criteri di integrazione e passaggi per la domanda.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/permesso-c-zugo-requisiti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta del Canton Zugo e dei suoi uffici amministrativi"
+      },
+      "datePublished": "2026-09-18T22:03:28+00:00",
+      "dateModified": "2026-09-18T22:03:28+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/permesso-c-zugo-requisiti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-borse-studio-zugo-guide': {
+    title: 'Borse di studio Canton Zugo: requisiti e importi',
+    description: 'Guida completa alle borse di studio e prestiti nel Canton Zugo. Scopri i requisiti economici, gli importi massimi e come presentare la domanda all\'ufficio.',
+    keywords: 'frontalieri, ticino, svizzera, italia, borse, studio, canton, zugo',
+    ogTitle: 'Borse di studio Canton Zugo: requisiti e importi',
+    ogDescription: 'Vuoi studiare nel Canton Zugo? Scopri come richiedere borse di studio e prestiti: requisiti economici, procedure e uffici competenti per il sostegno finanziario.',
+    canonicalPath: '/articoli-svizzera/borse-studio-zugo-guide/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Borse di studio Canton Zugo: requisiti e importi",
+      "description": "Guida completa alle borse di studio e prestiti nel Canton Zugo. Scopri i requisiti economici, gli importi massimi e come presentare la domanda all'ufficio.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/borse-studio-zugo-guide.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Studenti che studiano in una biblioteca svizzera moderna"
+      },
+      "datePublished": "2026-09-18T23:08:02+00:00",
+      "dateModified": "2026-09-18T23:08:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/borse-studio-zugo-guide/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-suissenegece-respinge-tasse-profitti': {
+    title: 'Suissenégoce respinge nuove tasse sui profitti',
+    description: 'L\'associazione Suissenégoce si oppone alle nuove tasse sui profitti nel commercio di materie prime. Nessun rischio di penuria petrolifera in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, suissenégoce, respinge, nuove, tasse',
+    ogTitle: 'Suissenégoce respinge le tasse extra sui profitti',
+    ogDescription: 'L\'associazione Suissenégoce si oppone fermamente all\'introduzione di nuove tasse sui profitti delle aziende di materie prime e trasporto marittimo in Svizzera.',
+    canonicalPath: '/articoli-svizzera/suissenegece-respinge-tasse-profitti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Suissenégoce respinge nuove tasse sui profitti",
+      "description": "L'associazione Suissenégoce si oppone alle nuove tasse sui profitti nel commercio di materie prime. Nessun rischio di penuria petrolifera in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/suissenegece-respinge-tasse-profitti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Associazione Suissenégoce contro le tasse extra sui profitti"
+      },
+      "datePublished": "2026-09-19T01:32:55+00:00",
+      "dateModified": "2026-09-19T01:32:55+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/suissenegece-respinge-tasse-profitti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-taf-respinge-ricorso-liste-ospedaliere': {
+    title: 'Assicuratori: no a ricorsi su intera lista ospedaliera',
+    description: 'Il Tribunale amministrativo federale respinge il ricorso di prio.swiss: le casse malati non possono contestare l\'intera lista ospedaliera del Canton Svitto.',
+    keywords: 'frontalieri, ticino, svizzera, italia, assicuratori, ricorsi, intera, lista',
+    ogTitle: 'TAF: gli assicuratori non possono contestare la lista ospedaliera in toto',
+    ogDescription: 'Il Tribunale amministrativo federale ha respinto il ricorso dell\'Associazione degli assicuratori malattia svizzeri contro la pianificazione ospedaliera del Canton Svitto. Scopri i dettagli sulle nuove regole per le impugnazioni sanitarie.',
+    canonicalPath: '/articoli-svizzera/taf-respinge-ricorso-liste-ospedaliere/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Assicuratori: no a ricorsi su intera lista ospedaliera",
+      "description": "Il Tribunale amministrativo federale respinge il ricorso di prio.swiss: le casse malati non possono contestare l'intera lista ospedaliera del Canton Svitto.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/taf-respinge-ricorso-liste-ospedaliere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Tribunale amministrativo federale di San Gallo"
+      },
+      "datePublished": "2026-09-19T01:41:43+00:00",
+      "dateModified": "2026-09-19T01:41:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/taf-respinge-ricorso-liste-ospedaliere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-bns-tassi-esame-settembre': {
+    title: 'BNS: tassi fermi allo 0,0% e previsioni future',
+    description: 'La BNS affronta il terzo esame annuale a Berna. Tasso guida fermo allo 0,0% e inflazione all\'0,8% in agosto. Previsioni 2027 tra 0,00% e 0,75%. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, tassi, fermi, allo, previsioni',
+    ogTitle: 'BNS: tassi fermi allo 0,0% e previsioni future',
+    ogDescription: 'Scopri gli aggiornamenti sull\'esame di politica monetaria della Banca nazionale svizzera, l\'andamento dell\'inflazione e le previsioni sul tasso guida per i prossimi trimestri.',
+    canonicalPath: '/articoli-svizzera/bns-tassi-esame-settembre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "BNS: tassi fermi allo 0,0% e previsioni future",
+      "description": "La BNS affronta il terzo esame annuale a Berna. Tasso guida fermo allo 0,0% e inflazione all'0,8% in agosto. Previsioni 2027 tra 0,00% e 0,75%. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bns-tassi-esame-settembre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sede della Banca nazionale svizzera a Berna per l'esame dei tassi"
+      },
+      "datePublished": "2026-09-19T01:53:05+00:00",
+      "dateModified": "2026-09-19T01:53:05+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/bns-tassi-esame-settembre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-consiglio-federale-boccia-frontiere': {
+    title: 'Consiglio federale boccia l\'iniziativa UDC sulle frontiere',
+    description: 'Il Consiglio federale boccia l\'iniziativa UDC sulle frontiere. Rilevati costi elevati, impatti sull\'economia e gravi rischi per gli accordi di Schengen.',
+    keywords: 'frontalieri, ticino, svizzera, italia, consiglio, federale, boccia, iniziativa',
+    ogTitle: 'Consiglio federale boccia l\'iniziativa UDC sulle frontiere',
+    ogDescription: 'Il Consiglio federale raccomanda di bocciare l\'iniziativa popolare dell\'UDC per la protezione delle frontiere a causa di costi elevati e rischi per Schengen.',
+    canonicalPath: '/articoli-svizzera/consiglio-federale-boccia-frontiere/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Consiglio federale boccia l'iniziativa UDC sulle frontiere",
+      "description": "Il Consiglio federale boccia l'iniziativa UDC sulle frontiere. Rilevati costi elevati, impatti sull'economia e gravi rischi per gli accordi di Schengen.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/consiglio-federale-boccia-frontiere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Post di confine in Svizzera con transito veicolare"
+      },
+      "datePublished": "2026-09-19T02:02:09+00:00",
+      "dateModified": "2026-09-19T02:02:09+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/consiglio-federale-boccia-frontiere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-casa-zugo-prezzi-mutuo': {
+    title: 'Casa a Zugo: prezzi e mutuo ipotecario | Frontaliere Ticino',
+    description: 'Scopri prezzi, fondo proprio, imposta sui trapati e spese notarili per acquistare casa nel Canton Zugo. Guida pratica per il mutuo. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, casa, zugo, prezzi, mutuo',
+    ogTitle: 'Casa a Zugo: prezzi e mutuo ipotecario',
+    ogDescription: 'Il Canton Zugo ha tra i prezzi immobiliari più alti della Svizzera. Guida pratica su fondo proprio, imposta sui trapati e costi notarili da calcolare prima di firmare il mutuo ipotecario.',
+    canonicalPath: '/articoli-svizzera/casa-zugo-prezzi-mutuo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Casa a Zugo: prezzi e mutuo ipotecario",
+      "description": "Scopri prezzi, fondo proprio, imposta sui trapati e spese notarili per acquistare casa nel Canton Zugo. Guida pratica per il mutuo. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/casa-zugo-prezzi-mutuo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Casa moderna nel Canton Zugo con vista sulle colline, esempio di mercato immobiliare svizzero"
+      },
+      "datePublished": "2026-09-19T02:27:20+00:00",
+      "dateModified": "2026-09-19T02:27:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/casa-zugo-prezzi-mutuo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-permesso-l-vaud-validita-rinnovo': {
+    title: 'Permesso L in Vaud: validità 1 anno e rinnovo fino a 24 mesi',
+    description: 'Scopri la durata del permesso L in Vaud (max 24 mesi) e come convertirlo in permesso B. Guida pratica su validità, rinnovi e obblighi previdenziali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, permesso, vaud, validità, anno',
+    ogTitle: 'Permesso L in Vaud: validità, rinnovo e passaggio al B',
+    ogDescription: 'Il permesso L in Vaud dura max 1 anno, rinnovabile per un secondo (totale 24 mesi). Scopri come convertirlo in permesso B, gli obblighi fiscali e le scadenze da rispettare per evitare interruzioni della copertura.',
+    canonicalPath: '/articoli-svizzera/permesso-l-vaud-validita-rinnovo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Permesso L in Vaud: validità 1 anno e rinnovo fino a 24 mesi",
+      "description": "Scopri la durata del permesso L in Vaud (max 24 mesi) e come convertirlo in permesso B. Guida pratica su validità, rinnovi e obblighi previdenziali.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/permesso-l-vaud-validita-rinnovo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lavoratore con documenti per il permesso L di breve durata in Svizzera"
+      },
+      "datePublished": "2026-09-19T02:58:18+00:00",
+      "dateModified": "2026-09-19T02:58:18+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/permesso-l-vaud-validita-rinnovo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-votazione-27-settembre-2026': {
+    title: 'Votazione 27 settembre: 63% no alla neutralità',
+    description: 'Sondaggio gfs.bern: oltre il 60% degli elettori svizzeri intende respingere le iniziative su neutralità e sicurezza alimentare del 27 settembre. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, votazione, settembre, alla, neutralità',
+    ogTitle: 'Votazione 27 settembre: 63% no alla neutralità',
+    ogDescription: 'Il secondo sondaggio gfs.bern per la SSR rivela una netta maggioranza di \'no\' alle iniziative su neutralità e sicurezza alimentare. Scopri i dati dettagliati per Cantone e gruppo politico in vista del voto del 27 settembre 2026.',
+    canonicalPath: '/articoli-svizzera/votazione-27-settembre-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Votazione 27 settembre: 63% no alla neutralità",
+      "description": "Sondaggio gfs.bern: oltre il 60% degli elettori svizzeri intende respingere le iniziative su neutralità e sicurezza alimentare del 27 settembre. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/votazione-27-settembre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Elezioni federali 27 settembre 2026: elettori alla seggio in Svizzera"
+      },
+      "datePublished": "2026-09-19T03:45:29+00:00",
+      "dateModified": "2026-09-19T03:45:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/votazione-27-settembre-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-scuola-canton-vaud-iscrizioni-cicli': {
+    title: 'Sistema scolastico Canton Vaud: iscrizioni e cicli',
+    description: 'Guida alla scuola dell\'obbligo nel Canton Vaud: scopri i cicli di studio, l\'età di iscrizione, le lingue di insegnamento e i passaggi per le medie superiori.',
+    keywords: 'frontalieri, ticino, svizzera, italia, sistema, scolastico, canton, vaud',
+    ogTitle: 'Sistema scolastico Canton Vaud: iscrizioni e cicli',
+    ogDescription: 'Scopri come funziona la scuola dell\'obbligo nel Canton Vaud: cicli di studio, procedure di iscrizione basate sull\'età e orientamento alle medie superiori.',
+    canonicalPath: '/articoli-svizzera/scuola-canton-vaud-iscrizioni-cicli/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Sistema scolastico Canton Vaud: iscrizioni e cicli",
+      "description": "Guida alla scuola dell'obbligo nel Canton Vaud: scopri i cicli di studio, l'età di iscrizione, le lingue di insegnamento e i passaggi per le medie superiori.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/scuola-canton-vaud-iscrizioni-cicli.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio scolastico moderno nel Canton Vaud"
+      },
+      "datePublished": "2026-09-19T04:14:39+00:00",
+      "dateModified": "2026-09-19T04:14:39+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/scuola-canton-vaud-iscrizioni-cicli/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

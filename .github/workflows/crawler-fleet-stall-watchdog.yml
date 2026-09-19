@@ -109,4 +109,3 @@ jobs:
       - name: Cleanup Firebase credentials
         if: always()
         run: rm -f /tmp/firebase-sa.json
-

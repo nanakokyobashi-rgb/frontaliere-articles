@@ -35310,6 +35310,42 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'tasse-frontaliere-oltre-20km-2026',
+ category: 'fiscale',
+ date: '2026-09-18T23:37:15.347Z',
+ image: '/images/blog/tasse-frontaliere-oltre-20km-2026.webp',
+ hasCalculator: true,
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
+ {
+ id: 'studio-svizzero-confine-frontalieri',
+ category: 'pratico',
+ date: '2026-09-19T01:47:35.761Z',
+ image: '/images/blog/studio-svizzero-confine-frontalieri.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'sindaco-malesco-fondi-confine',
+ category: 'pratico',
+ date: '2026-09-19T01:57:04.495Z',
+ image: '/images/blog/sindaco-malesco-fondi-confine.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'confapi-avsi-accordo-varese-formazione',
+ category: 'pratico',
+ date: '2026-09-19T02:39:34.497Z',
+ image: '/images/blog/confapi-avsi-accordo-varese-formazione.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

@@ -11841,6 +11841,18 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.governo-no-iniziativa-frontiere.title': 'Grenzkontrollen: Regierung lehnt SVP-Initiative ab',
     'blog.article.governo-no-iniziativa-frontiere.excerpt': 'Der Bundesrat lehnt die Initiative «Asylmissbrauch stoppen» ab: Systematische Kontrollen würden Milliarden kosten und den Austritt aus Schengen riskieren.',
     'blog.article.governo-no-iniziativa-frontiere.imageAlt': 'Grenzübergang im Tessin mit Pendlerverkehr',
+    'blog.article.tasse-frontaliere-oltre-20km-2026.title': 'Grenzsteuern Italien Schweiz 2026: Fahren über 20 km',
+    'blog.article.tasse-frontaliere-oltre-20km-2026.excerpt': 'Steuervorschriften 2026 für Grenzgänger über 20 km: Quellensteuer, Freibeträge von 7.500 oder 10.000 Euro und Doppelbesteuerung.',
+    'blog.article.tasse-frontaliere-oltre-20km-2026.imageAlt': 'Blick auf Lugano mit Steuerdokumenten für Grenzgänger',
+    'blog.article.studio-svizzero-confine-frontalieri.title': 'Schweizer Grenzstudie: Grenzkosten und Einsturz',
+    'blog.article.studio-svizzero-confine-frontalieri.excerpt': 'Bundesratsbericht und Ecoplan-Studie: Staus von 422.000 Stunden pro Tag, Milliardenkosten und Grenzgängerkollaps von bis zu 60% ohne Schengen.',
+    'blog.article.studio-svizzero-confine-frontalieri.imageAlt': 'Autostau an der Grenze zwischen der Schweiz und Italien',
+    'blog.article.sindaco-malesco-fondi-confine.title': 'Frontalieri, Malesco schreibt an die Regierung für die Mittel',
+    'blog.article.sindaco-malesco-fondi-confine.excerpt': 'Enrico Barbazza, Bürgermeister von Malesco, fordert von der Regierung die vollständige Übertragung der für die Grenzgemeinden vorgesehenen Mittel zur Unterstützung der lokalen Dienste.',
+    'blog.article.sindaco-malesco-fondi-confine.imageAlt': 'Rathaus in der Region Tessin',
+    'blog.article.confapi-avsi-accordo-varese-formazione.title': 'Vereinbarung Confapi Varese-AVSI für die Ausbildung junger Menschen',
+    'blog.article.confapi-avsi-accordo-varese-formazione.excerpt': 'Protokoll unterzeichnet am 17. September zwischen Confapi Varese und der AVSI-Stiftung zur Ausbildung junger Menschen durch Lehrlingsausbildung und duale Ausbildung.',
+    'blog.article.confapi-avsi-accordo-varese-formazione.imageAlt': 'Casa Museo Lodovico Pogliaghi in Varese, Ort der Vereinbarung zwischen Confapi Varese und Fondazione AVSI',
 };
 
 export default blogMetaDe;

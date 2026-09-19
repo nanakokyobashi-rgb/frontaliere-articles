@@ -11843,6 +11843,18 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.governo-no-iniziativa-frontiere.title': 'Controlli frontiere: il Governo boccia l\'iniziativa UDC',
     'blog.article.governo-no-iniziativa-frontiere.excerpt': 'Il Consiglio federale respinge l\'iniziativa \'Fermare gli abusi nell\'asilo\': i controlli sistematici costerebbero miliardi e rischiano l\'uscita da Schengen.',
     'blog.article.governo-no-iniziativa-frontiere.imageAlt': 'Passaggio di frontiera in Ticino con traffico di pendolari',
+    'blog.article.tasse-frontaliere-oltre-20km-2026.title': 'Tasse frontaliere Italia Svizzera 2026: guida oltre 20 km',
+    'blog.article.tasse-frontaliere-oltre-20km-2026.excerpt': 'Regole fiscali 2026 per frontalieri oltre 20 km: imposta alla fonte, franchigie di 7.500 o 10.000 euro e gestione doppia imposizione.',
+    'blog.article.tasse-frontaliere-oltre-20km-2026.imageAlt': 'Vista di Lugano con documenti fiscali per frontalieri',
+    'blog.article.studio-svizzero-confine-frontalieri.title': 'Studio svizzero sul confine: costi e crollo frontalieri',
+    'blog.article.studio-svizzero-confine-frontalieri.excerpt': 'Rapporto del Consiglio federale e studio Ecoplan: ingorghi per 422.000 ore al giorno, costi miliardari e crollo dei frontalieri fino al 60% senza Schengen.',
+    'blog.article.studio-svizzero-confine-frontalieri.imageAlt': 'Coda di auto al confine tra Svizzera e Italia',
+    'blog.article.sindaco-malesco-fondi-confine.title': 'Frontalieri, Malesco scrive al Governo per i fondi',
+    'blog.article.sindaco-malesco-fondi-confine.excerpt': 'Enrico Barbazza, sindaco di Malesco, richiede al Governo il trasferimento integrale delle risorse destinate ai comuni di confine per sostenere i servizi locali.',
+    'blog.article.sindaco-malesco-fondi-confine.imageAlt': 'Palazzo comunale di una città ticinese',
+    'blog.article.confapi-avsi-accordo-varese-formazione.title': 'Accordo Confapi Varese-AVSI per formazione giovani',
+    'blog.article.confapi-avsi-accordo-varese-formazione.excerpt': 'Protocollo firmato il 17 settembre tra Confapi Varese e Fondazione AVSI per formare giovani tramite apprendistato e formazione duale.',
+    'blog.article.confapi-avsi-accordo-varese-formazione.imageAlt': 'Casa Museo Lodovico Pogliaghi a Varese, sede dell\'accordo tra Confapi Varese e Fondazione AVSI',
 };
 
 export default blogMetaIt;
