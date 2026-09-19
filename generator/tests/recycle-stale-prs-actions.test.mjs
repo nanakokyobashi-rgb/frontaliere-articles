@@ -31,6 +31,7 @@ set -eu
 log=\"\${FAKE_LOG:?}\"
 state=\"\${FAKE_STATE:?}\"
 printf '%s\\n' \"$*\" >>\"$log\"
+printf '%s|%s\\n' \"\${GH_TOKEN:-}\" \"$*\" >>\"$log.tok\"
 
 get_state() {
   awk -F= -v key=\"$1\" '$1 == key { print substr($0, index($0, \"=\") + 1); exit }' \"$state\"
@@ -54,7 +55,27 @@ args=\"$*\"
 
 case \"$command\" in
   api)
+    if [ \"$args\" = user ] || printf '%s' \"$args\" | grep -q -- '^user '; then
+      if [ \"\${GH_TOKEN:-}\" = nanako-token ]; then printf '%s\\n' \"\${FAKE_PAT_LOGIN-nanakokyobashi-rgb}\"; exit 0; fi
+      printf '%s\\n' \"\${FAKE_OTHER_LOGIN:-frontaliere-automation[bot]}\"
+      exit 0
+    fi
+    if printf '%s' \"$args\" | grep -q -- 'labels=recycle-recovery'; then
+      if [ \"\${FAKE_RECOVERY:-none}\" = pr ] && [ \"$(get_state MARKER)\" = true ]; then
+        printf '%s\\n' '{\"number\":17,\"title\":\"fix stale (#77)\",\"body\":\"\"}'
+      fi
+      exit 0
+    fi
+    if printf '%s' \"$args\" | grep -q -- '--method POST .*issues/17/labels'; then
+      set_state MARKER true
+      exit 0
+    fi
+    if printf '%s' \"$args\" | grep -q -- '--method DELETE .*issues/17/labels/recycle-recovery'; then
+      set_state MARKER false
+      exit 0
+    fi
     if printf '%s' \"$args\" | grep -q -- '--paginate'; then
+      if [ \"\${FAKE_STALE_LIST:-pr}\" = empty ]; then exit 0; fi
       printf '%s\\n' '{\"number\":17,\"title\":\"fix stale (#77)\",\"body\":\"\",\"createdAt\":\"2020-01-01T00:00:00Z\",\"headRefName\":\"fix/issue-77\",\"labels\":[{\"name\":\"stale-review\"},{\"name\":\"agent:autofix\"}]}'
       exit 0
     fi
@@ -92,11 +113,14 @@ case \"$command\" in
         set_state PREMATURE_DELETE true
         set_state REF_PRESENT false
       fi
+      if [ \"\${FAKE_CLOSE:-ok}\" = unknown ]; then set_state PR_STATE ''; exit 0; fi
       if [ \"\${FAKE_CLOSE:-ok}\" != open ]; then set_state PR_STATE CLOSED; fi
       exit 0
     fi
     if [ \"$sub\" = view ]; then
-      if printf '%s' \"$args\" | grep -q -- '--json state'; then
+      if printf '%s' \"$args\" | grep -q -- '--json state,headRepository'; then
+        printf '{\"state\":\"%s\",\"headRepository\":{\"nameWithOwner\":\"owner/repo\"},\"headRefName\":\"fix/issue-77\",\"headRefOid\":\"%s\"}\\n' \"$(get_state PR_STATE)\" \"${SHA}\"
+      elif printf '%s' \"$args\" | grep -q -- '--json state'; then
         printf '%s\\n' \"$(get_state PR_STATE)\"
       else
         if [ \"\${FAKE_HEAD_METADATA:-ok}\" = partial ]; then
@@ -151,7 +175,7 @@ function runScenario(overrides = {}) {
   writeFileSync(fakeSleep, '#!/bin/sh\nexit 0\n');
   writeFileSync(fakeDate, '#!/bin/sh\ncase "$*" in\n  "-u +%s") printf "2000000000\\n" ;;\n  "-u -d "*" +%s") printf "1577836800\\n" ;;\n  *) exit 1 ;;\nesac\n');
   writeFileSync(log, '');
-  writeFileSync(state, 'LABEL_PRESENT=true\nREF_PRESENT=true\nPREMATURE_DELETE=false\nPR_STATE=OPEN\n');
+  writeFileSync(state, `LABEL_PRESENT=true\nREF_PRESENT=true\nPREMATURE_DELETE=false\nPR_STATE=${overrides.FAKE_INIT_PR_STATE || 'OPEN'}\nMARKER=${overrides.FAKE_INIT_MARKER || 'false'}\n`);
   chmodSync(fakeGh, 0o755);
   chmodSync(fakeSleep, 0o755);
   chmodSync(fakeDate, 0o755);
@@ -162,7 +186,7 @@ function runScenario(overrides = {}) {
     GH_TOKEN: 'base-token',
     REPO: 'owner/repo',
     APP_TOKEN: 'runtime-token',
-    GITHUB_PAT_NANAKO: '',
+    GITHUB_PAT_NANAKO: 'nanako-token',
     DRY_RUN: 'false',
     MAX_AGE_HOURS: '24',
     MAX_RECYCLES_PER_RUN: '5',
@@ -186,9 +210,15 @@ function runScenario(overrides = {}) {
     output = `${caught.stdout || ''}${caught.stderr || ''}`;
   }
   const events = readFileSync(log, 'utf8').trim().split('\n').filter(Boolean);
+  let tokens = [];
+  try {
+    tokens = readFileSync(`${log}.tok`, 'utf8').trim().split('\n').filter(Boolean);
+  } catch {
+    tokens = [];
+  }
   const stateText = readFileSync(state, 'utf8');
   rmSync(dir, { recursive: true, force: true });
-  return { output, events, stateText, error };
+  return { output, events, tokens, stateText, error };
 }
 
 function eventIndex(events, pattern, from = 0) {
@@ -293,4 +323,77 @@ test('PAT assente blocca la prima azione distruttiva', () => {
   const log = result.events.join('\n');
   assert.doesNotMatch(log, /^pr close 17/);
   assert.doesNotMatch(log, /--remove-label agent:fix/);
+});
+
+test('re-queue con il PAT ammesso dal sender gate di issue-fix, non con l\'App token', () => {
+  const result = runScenario({ APP_TOKEN: 'app-token', GITHUB_PAT_NANAKO: 'nanako-token' });
+  assert.match(result.output, /issue #77 ri-accodata/);
+  const labelOps = result.tokens.filter((line) => /\|issue (edit|view) 77 .*(label|--json labels)/.test(line));
+  assert.ok(labelOps.length >= 4);
+  for (const line of labelOps) assert.ok(line.startsWith('nanako-token|'), line);
+  assert.ok(!result.tokens.some((line) => line.startsWith('app-token|')));
+});
+
+test('solo App token o PAT con identita\' non ammessa: nessuna close', () => {
+  for (const overrides of [
+    { APP_TOKEN: 'app-token', GITHUB_PAT_NANAKO: '' },
+    { GITHUB_PAT_NANAKO: 'nanako-token', FAKE_PAT_LOGIN: 'frontaliere-automation[bot]' },
+    { GITHUB_PAT_NANAKO: 'nanako-token', FAKE_PAT_LOGIN: '' },
+  ]) {
+    const result = runScenario(overrides);
+    const log = result.events.join('\n');
+    assert.doesNotMatch(log, /^pr close 17/m);
+    assert.doesNotMatch(log, /--(add|remove)-label agent:fix/);
+    assert.match(result.output, /identita' ammessa/);
+  }
+});
+
+test('stato illeggibile dopo una close riuscita: marker di recovery + commento, niente ref/label', () => {
+  const result = runScenario({ FAKE_CLOSE: 'unknown' });
+  const log = result.events.join('\n');
+  assert.doesNotMatch(log, /--include/);
+  assert.doesNotMatch(log, /--(add|remove)-label agent:fix/);
+  assert.match(result.stateText, /MARKER=true/);
+  assert.match(log, /^issue comment 77 /m);
+});
+
+test('close che lascia la PR OPEN non mette il marker: la PR resta nella scansione', () => {
+  const result = runScenario({ FAKE_CLOSE: 'open' });
+  assert.match(result.stateText, /MARKER=false/);
+});
+
+test('remove/verify di agent:fix fallito dopo close+DELETE: marker e commento durevoli', () => {
+  for (const overrides of [{ FAKE_REMOVE: 'fail' }, { FAKE_REMOVE: 'stuck' }, { FAKE_ADD: 'fail' }, { FAKE_ADD: 'silent' }]) {
+    const result = runScenario(overrides);
+    assert.match(result.stateText, /REF_PRESENT=false/);
+    assert.match(result.stateText, /MARKER=true/, JSON.stringify(overrides));
+    assert.match(result.events.join('\n'), /^issue comment 77 /m);
+  }
+});
+
+test('riconciliazione: PR chiusa con marker viene liberata e ri-accodata senza richiuderla', () => {
+  const result = runScenario({
+    FAKE_INIT_PR_STATE: 'CLOSED',
+    FAKE_INIT_MARKER: 'true',
+    FAKE_RECOVERY: 'pr',
+    FAKE_STALE_LIST: 'empty',
+  });
+  const log = result.events.join('\n');
+  assert.doesNotMatch(log, /^pr close/m);
+  assert.match(log, /-X DELETE/);
+  assert.match(result.stateText, /LABEL_PRESENT=true/);
+  assert.match(result.stateText, /MARKER=false/);
+  assert.match(result.output, /recovery PR #17: issue #77 ri-accodata/);
+});
+
+test('riconciliazione fallita lascia il marker e non ripete il commento', () => {
+  const result = runScenario({
+    FAKE_INIT_PR_STATE: 'CLOSED',
+    FAKE_INIT_MARKER: 'true',
+    FAKE_RECOVERY: 'pr',
+    FAKE_STALE_LIST: 'empty',
+    FAKE_ADD: 'fail',
+  });
+  assert.match(result.stateText, /MARKER=true/);
+  assert.doesNotMatch(result.events.join('\n'), /^issue comment/m);
 });

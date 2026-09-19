@@ -114,12 +114,24 @@ jobs:
           MAX_RECYCLES_PER_RUN: ${{ github.event.inputs.max_recycles || '5' }}
         run: |
           set -uo pipefail
-          runtime_token="${APP_TOKEN:-${GITHUB_PAT_NANAKO:-}}"
-          if [ -z "$runtime_token" ]; then
-            echo "::warning::Nessun token operativo runtime → recycle stale-review inerte."
-            exit 0
+          # Il re-label `agent:fix` e' un trigger: issue-fix.yml (job
+          # l11_contract e fix) accetta come sender SOLO nanakokyobashi-rgb,
+          # valerielinc-ops o claude*. L'App token (`frontaliere-automation[bot]`)
+          # NON passa quel gate: un re-queue fatto con lui chiuderebbe la PR e
+          # lascerebbe la issue senza fixer. Quindi il token delle mutazioni e'
+          # il PAT, e la sua identita' si verifica PRIMA di qualunque close.
+          PAT="${GITHUB_PAT_NANAKO:-}"
+          PAT_LOGIN=""
+          if [ -n "$PAT" ]; then
+            PAT_LOGIN=$(GH_TOKEN="$PAT" gh api user --jq '.login' 2>/dev/null || true)
           fi
-          PAT="$runtime_token"
+          case "$PAT_LOGIN" in
+            nanakokyobashi-rgb|valerielinc-ops|claude*) ;;
+            *)
+              echo "::warning::Nessun PAT con identita' ammessa dal sender gate di issue-fix (login=${PAT_LOGIN:-NONE}) → recycle stale-review inerte: nessuna PR chiusa."
+              exit 0
+              ;;
+          esac
           DRY="${DRY_RUN:-true}"
           NOW=$(date -u +%s)
           MAXAGE=$(( ${MAX_AGE_HOURS:-24} * 3600 ))
@@ -133,6 +145,186 @@ jobs:
             exit 1
           fi
           RECYCLE_ATTEMPTS=0
+
+          # Marker di recovery durevole. La scansione principale vede solo PR
+          # APERTE: una PR gia' chiusa il cui re-queue e' fallito a meta'
+          # sparirebbe per sempre. La label sulla PR chiusa la rende
+          # riconciliabile dal run successivo (sezione "Riconciliazione" sotto),
+          # il commento sulla issue la rende visibile a un umano.
+          RECOVERY_LABEL="recycle-recovery"
+          mark_recovery() {
+            gh api --method POST "repos/${REPO}/issues/${N}/labels" -f "labels[]=${RECOVERY_LABEL}" >/dev/null 2>&1 \
+              || echo "::error::PR #${N}: marker ${RECOVERY_LABEL} non applicato."
+            gh issue comment "${ISSUE}" --repo "${REPO}" --body "♻️ recovery: PR stale #${N} chiusa dal recycle ma $1. La PR porta il marker \`${RECOVERY_LABEL}\`: il run successivo riprova da solo (guard del ref + re-queue) senza richiuderla; se il marker resta, riapplicare \`agent:fix\` a mano." 2>/dev/null \
+              || echo "::error::commento di recovery su issue #${ISSUE} non pubblicato."
+          }
+
+          # Libera il ref della PR chiusa: 404 confermato, oppure DELETE
+          # esplicito SOLO se il ref punta ancora alla head chiusa. Usa i
+          # globali N, ISSUE, HEADREF, HEADSHA; ritorna 0 solo se il ref e' libero.
+          free_ref() {
+            # La close puo' tornare 0 e lasciare comunque il ref (head su fork,
+            # branch protetto, race). Il push di issue-fix e' il consumatore del
+            # ref, non della PR: si verifica il REF, non solo lo stato della PR.
+            # Un output vuoto e' "ref assente" SOLO con HTTP 404 confermato;
+            # 403/5xx/timeout e JSON malformato sono errori e bloccano.
+            ref_free=false
+            if [ -z "${HEADREF:-}" ]; then
+              echo "::warning::PR #${N}: head ref sconosciuto, non posso verificare che sia libero"
+            else
+              for attempt in 1 2 3; do
+                probe_file=$(mktemp)
+                probe_err=$(mktemp)
+                if gh api --include "repos/${REPO}/git/refs/heads/${HEADREF}" >"$probe_file" 2>"$probe_err"; then
+                  http_status=$(sed 's/\r$//' "$probe_file" | sed -n '1s/^HTTP\/[0-9.][0-9.]*[[:space:]]\{1,\}\([0-9][0-9][0-9]\).*/\1/p')
+                  probe_body=$(sed 's/\r$//' "$probe_file" | awk 'BEGIN { body=0 } body { print } /^$/ { body=1; next }')
+                  if [ "$http_status" != "200" ]; then
+                    echo "::error::PR #${N}: probe ref ${HEADREF} ha HTTP ${http_status:-UNKNOWN}; NON considero il ref assente."
+                    rm -f "$probe_file" "$probe_err"
+                    break
+                  fi
+                  REF_SHA=$(printf '%s' "$probe_body" | jq -er '.object.sha | select(type == "string" and test("^[0-9a-fA-F]{40}$"))' 2>/dev/null || true)
+                  if [ -z "$REF_SHA" ]; then
+                    echo "::error::PR #${N}: probe ref ${HEADREF} ha payload JSON malformato; NON considero il ref assente."
+                    rm -f "$probe_file" "$probe_err"
+                    break
+                  fi
+                else
+                  http_status=$(sed 's/\r$//' "$probe_file" | sed -n '1s/^HTTP\/[0-9.][0-9.]*[[:space:]]\{1,\}\([0-9][0-9][0-9]\).*/\1/p')
+                  if [ "$http_status" = "404" ]; then
+                    ref_free=true
+                    rm -f "$probe_file" "$probe_err"
+                    break
+                  fi
+                  echo "::error::PR #${N}: probe ref ${HEADREF} fallita (HTTP ${http_status:-UNKNOWN}); NON considero il ref assente."
+                  rm -f "$probe_file" "$probe_err"
+                  break
+                fi
+                rm -f "$probe_file" "$probe_err"
+                if [ "$attempt" = "2" ]; then
+                  if [ -z "${HEADSHA:-}" ]; then
+                    echo "::warning::PR #${N}: head SHA sconosciuta, skip DELETE del ref ${HEADREF}"
+                    break
+                  fi
+                  if [ "$REF_SHA" != "$HEADSHA" ]; then
+                    echo "::warning::PR #${N}: ref ${HEADREF} punta a ${REF_SHA}, diverso dalla head chiusa ${HEADSHA}; skip DELETE"
+                    break
+                  fi
+                  if ! gh api -X DELETE "repos/${REPO}/git/refs/heads/${HEADREF}" >/dev/null 2>&1; then
+                    echo "::error::PR #${N}: DELETE del ref ${HEADREF} fallita; NON ri-accodo issue #${ISSUE}."
+                    break
+                  fi
+                fi
+                sleep 2
+              done
+            fi
+            [ "${ref_free}" = "true" ]
+          }
+
+          # remove -> verify -> add -> verify di `agent:fix` con il PAT ammesso
+          # dal gate. Ritorna 0 solo se la label e' verificata presente.
+          requeue_issue() {
+            # Re-queue: serve PAT (un agent:fix via GITHUB_TOKEN NON triggera
+            # issue-fix — anti-ricorsione; sender github-actions[bot] non passa
+            # il gate). Verifica entrambe le transizioni: se remove fallisce o
+            # la label resta presente, NON eseguire add (evita retrigger falso).
+            if ! GH_TOKEN="$PAT" gh issue edit "${ISSUE}" --repo "${REPO}" --remove-label agent:fix 2>/dev/null; then
+              echo "::error::remove-label agent:fix fallita issue #${ISSUE}: NON ri-accodo (la label potrebbe essere ancora presente)."
+              return 1
+            fi
+            label_payload=$(GH_TOKEN="$PAT" gh issue view "${ISSUE}" --repo "${REPO}" --json labels 2>/dev/null || true)
+            label_present=$(printf '%s' "$label_payload" | jq -er '
+              if type != "object" or ((.labels? | type) != "array") then
+                error("labels payload non verificabile")
+              elif any(.labels[];
+                if type != "object" then true
+                elif (has("name") | not) then true
+                else (.name | type != "string")
+                end
+              ) then
+                error("label record non verificabile")
+              elif any(.labels[]; .name == "agent:fix") then "true"
+              else "false"
+              end
+            ' 2>/dev/null || true)
+            if [ "$label_present" != "false" ]; then
+              echo "::error::remove-label agent:fix non verificata issue #${ISSUE} (stato=${label_present:-UNKNOWN}): NON eseguo add."
+              return 1
+            fi
+            sleep 2
+            if ! GH_TOKEN="$PAT" gh issue edit "${ISSUE}" --repo "${REPO}" --add-label agent:fix 2>/dev/null; then
+              echo "::error::add-label agent:fix fallita issue #${ISSUE} (PR #${N} gia' chiusa): riapplicarla a mano."
+              return 1
+            fi
+            label_payload=$(GH_TOKEN="$PAT" gh issue view "${ISSUE}" --repo "${REPO}" --json labels 2>/dev/null || true)
+            label_present=$(printf '%s' "$label_payload" | jq -er '
+              if type != "object" or ((.labels? | type) != "array") then
+                error("labels payload non verificabile")
+              elif any(.labels[];
+                if type != "object" then true
+                elif (has("name") | not) then true
+                else (.name | type != "string")
+                end
+              ) then
+                error("label record non verificabile")
+              elif any(.labels[]; .name == "agent:fix") then "true"
+              else "false"
+              end
+            ' 2>/dev/null || true)
+            if [ "$label_present" != "true" ]; then
+              echo "::error::add-label agent:fix non verificata issue #${ISSUE}: riapplicarla a mano."
+              return 1
+            fi
+            return 0
+          }
+
+          # ── Riconciliazione dei marker di recovery ────────────────────────
+          # Riprende le PR CHIUSE marcate `recycle-recovery` da un run
+          # precedente: stesso guard del ref (SHA della head chiusa) e stesso
+          # re-queue verificato, senza richiudere nulla. Il marker si toglie
+          # solo a re-queue verificato; un nuovo fallimento lo lascia al run
+          # successivo senza ripetere il commento sulla issue.
+          if ! rec_lines=$(gh api --paginate "repos/${REPO}/issues?state=closed&labels=${RECOVERY_LABEL}&per_page=100" \
+            --jq '.[] | select(.pull_request) | {number, title, body}'); then
+            echo "::warning::Query dei marker ${RECOVERY_LABEL} fallita: riconciliazione rimandata al prossimo run."
+            rec_lines=""
+          fi
+          RECONCILED=0
+          while read -r rec; do
+            [ -n "$rec" ] || continue
+            if [ "$RECONCILED" -ge "$MAX_RECYCLES" ]; then
+              echo "::notice::Cap $MAX_RECYCLES raggiunto sulla riconciliazione: il resto al prossimo run."
+              break
+            fi
+            N=$(printf '%s' "$rec" | jq -r '.number')
+            TITLE=$(printf '%s' "$rec" | jq -r '.title // ""')
+            BODY=$(printf '%s' "$rec" | jq -r '.body // ""')
+            ISSUE=$(printf '%s' "$TITLE" | grep -oE '\(#[0-9]+\)' | tail -1 | grep -oE '[0-9]+' || true)
+            if [ -z "${ISSUE:-}" ]; then
+              ISSUE=$(printf '%s' "$BODY" | grep -oiE 'closes #[0-9]+' | head -1 | grep -oE '[0-9]+' || true)
+            fi
+            if [ -z "${ISSUE:-}" ]; then echo "recovery PR #$N: issue sorgente non identificabile — lascio il marker"; continue; fi
+            RMETA=$(gh pr view "$N" --repo "$REPO" --json state,headRepository,headRefName,headRefOid 2>/dev/null || true)
+            R_STATE=$(printf '%s' "$RMETA" | jq -r '.state // empty' 2>/dev/null || true)
+            HEADREF=$(printf '%s' "$RMETA" | jq -r '.headRefName // empty' 2>/dev/null || true)
+            HEADSHA=$(printf '%s' "$RMETA" | jq -r '.headRefOid // empty' 2>/dev/null || true)
+            HEAD_REPO=$(printf '%s' "$RMETA" | jq -r '.headRepository.nameWithOwner // empty' 2>/dev/null || true)
+            if [ "$R_STATE" != "CLOSED" ] || [ -z "$HEADREF" ] || [ "$HEAD_REPO" != "$REPO" ] \
+              || ! printf '%s' "$HEADSHA" | grep -qE '^[0-9a-fA-F]{40}$'; then
+              echo "recovery PR #$N: stato/head non verificabili (state=${R_STATE:-UNKNOWN}, ref=${HEADREF:-?}, repo=${HEAD_REPO:-?}) — lascio il marker"
+              continue
+            fi
+            IST=$(gh issue view "$ISSUE" --repo "$REPO" --json state --jq '.state' 2>/dev/null || echo "UNKNOWN")
+            if [ "$IST" != "OPEN" ]; then echo "recovery PR #$N → issue #$ISSUE stato=$IST — niente da ri-accodare, lascio il marker"; continue; fi
+            if [ "$DRY" = "true" ]; then echo "(dry-run) recovery PR #$N → issue #$ISSUE: skip"; continue; fi
+            RECONCILED=$((RECONCILED + 1))
+            if ! free_ref; then echo "::warning::recovery PR #$N: ref ${HEADREF} non ancora libero — marker lasciato"; continue; fi
+            if ! requeue_issue; then echo "::warning::recovery PR #$N: re-queue issue #$ISSUE non verificato — marker lasciato"; continue; fi
+            gh api --method DELETE "repos/${REPO}/issues/${N}/labels/${RECOVERY_LABEL}" >/dev/null 2>&1 \
+              || echo "::warning::recovery PR #$N: re-queue riuscito ma marker non rimosso (il prossimo giro lo vedra' gia' ri-accodato)."
+            echo "recovery PR #$N: issue #${ISSUE} ri-accodata (agent:fix via PAT)"
+          done <<<"$rec_lines"
+
 
           # `autorebase-reopen-failed` e' escluso: quella label la mette
           # pr-autorebase quando la coppia close+reopen si rompe a meta', e dice
@@ -296,123 +488,25 @@ jobs:
             PR_STATE=$(gh pr view "$N" --repo "$REPO" --json state --jq '.state' 2>/dev/null || true)
             if [ "$PR_STATE" != "CLOSED" ]; then
               echo "::error::PR #${N}: close non verificata (state=${PR_STATE:-UNKNOWN}) — NON ri-accodo issue #${ISSUE}."
+              # OPEN = la close non ha preso: la PR resta nella scansione del
+              # prossimo run. Uno stato vuoto/illeggibile invece puo' nascondere
+              # una PR gia' chiusa, che la scansione non vedrebbe piu'.
+              if [ "$PR_STATE" != "OPEN" ]; then
+                mark_recovery "lo stato dopo la close non è verificabile (state=${PR_STATE:-UNKNOWN})"
+              fi
               continue
             fi
 
-            # La close puo' tornare 0 e lasciare comunque il ref (head su fork,
-            # branch protetto, race). Il push di issue-fix e' il consumatore del
-            # ref, non della PR: si verifica il REF, non solo lo stato della PR.
-            # Un output vuoto e' "ref assente" SOLO con HTTP 404 confermato;
-            # 403/5xx/timeout e JSON malformato sono errori e bloccano.
-            ref_free=false
-            if [ -z "${HEADREF:-}" ]; then
-              echo "::warning::PR #${N}: head ref sconosciuto, non posso verificare che sia libero"
-            else
-              for attempt in 1 2 3; do
-                probe_file=$(mktemp)
-                probe_err=$(mktemp)
-                if gh api --include "repos/${REPO}/git/refs/heads/${HEADREF}" >"$probe_file" 2>"$probe_err"; then
-                  http_status=$(sed 's/\r$//' "$probe_file" | sed -n '1s/^HTTP\/[0-9.][0-9.]*[[:space:]]\{1,\}\([0-9][0-9][0-9]\).*/\1/p')
-                  probe_body=$(sed 's/\r$//' "$probe_file" | awk 'BEGIN { body=0 } body { print } /^$/ { body=1; next }')
-                  if [ "$http_status" != "200" ]; then
-                    echo "::error::PR #${N}: probe ref ${HEADREF} ha HTTP ${http_status:-UNKNOWN}; NON considero il ref assente."
-                    rm -f "$probe_file" "$probe_err"
-                    break
-                  fi
-                  REF_SHA=$(printf '%s' "$probe_body" | jq -er '.object.sha | select(type == "string" and test("^[0-9a-fA-F]{40}$"))' 2>/dev/null || true)
-                  if [ -z "$REF_SHA" ]; then
-                    echo "::error::PR #${N}: probe ref ${HEADREF} ha payload JSON malformato; NON considero il ref assente."
-                    rm -f "$probe_file" "$probe_err"
-                    break
-                  fi
-                else
-                  http_status=$(sed 's/\r$//' "$probe_file" | sed -n '1s/^HTTP\/[0-9.][0-9.]*[[:space:]]\{1,\}\([0-9][0-9][0-9]\).*/\1/p')
-                  if [ "$http_status" = "404" ]; then
-                    ref_free=true
-                    rm -f "$probe_file" "$probe_err"
-                    break
-                  fi
-                  echo "::error::PR #${N}: probe ref ${HEADREF} fallita (HTTP ${http_status:-UNKNOWN}); NON considero il ref assente."
-                  rm -f "$probe_file" "$probe_err"
-                  break
-                fi
-                rm -f "$probe_file" "$probe_err"
-                if [ "$attempt" = "2" ]; then
-                  if [ -z "${HEADSHA:-}" ]; then
-                    echo "::warning::PR #${N}: head SHA sconosciuta, skip DELETE del ref ${HEADREF}"
-                    break
-                  fi
-                  if [ "$REF_SHA" != "$HEADSHA" ]; then
-                    echo "::warning::PR #${N}: ref ${HEADREF} punta a ${REF_SHA}, diverso dalla head chiusa ${HEADSHA}; skip DELETE"
-                    break
-                  fi
-                  if ! gh api -X DELETE "repos/${REPO}/git/refs/heads/${HEADREF}" >/dev/null 2>&1; then
-                    echo "::error::PR #${N}: DELETE del ref ${HEADREF} fallita; NON ri-accodo issue #${ISSUE}."
-                    break
-                  fi
-                fi
-                sleep 2
-              done
-            fi
-            if [ "${ref_free}" != "true" ]; then
+            if ! free_ref; then
               # Ri-accodare ora significherebbe un push non-fast-forward e zero
-              # PR. La issue resta aperta e il canale manuale la recupera.
+              # PR. Il marker di recovery fa riprovare il run successivo.
               echo "::error::PR #${N}: branch ${HEADREF:-?} ancora presente dopo la close — NON ri-accodo issue #${ISSUE}."
-              gh issue comment "${ISSUE}" --repo "${REPO}" --body "♻️ PR stale #${N} chiusa ma il branch \`${HEADREF:-?}\` non è stato cancellato o verificato: riapplicare \`agent:fix\` a mano dopo aver rimosso il ref." 2>/dev/null || true
+              mark_recovery "il branch \`${HEADREF:-?}\` non è stato cancellato o verificato"
               continue
             fi
 
-            # Re-queue: serve PAT (un agent:fix via GITHUB_TOKEN NON triggera
-            # issue-fix — anti-ricorsione; sender github-actions[bot] non passa
-            # il gate). Verifica entrambe le transizioni: se remove fallisce o
-            # la label resta presente, NON eseguire add (evita retrigger falso).
-            if ! GH_TOKEN="$PAT" gh issue edit "${ISSUE}" --repo "${REPO}" --remove-label agent:fix 2>/dev/null; then
-              echo "::error::remove-label agent:fix fallita issue #${ISSUE}: NON ri-accodo (la label potrebbe essere ancora presente)."
-              continue
-            fi
-            label_payload=$(GH_TOKEN="$PAT" gh issue view "${ISSUE}" --repo "${REPO}" --json labels 2>/dev/null || true)
-            label_present=$(printf '%s' "$label_payload" | jq -er '
-              if type != "object" or ((.labels? | type) != "array") then
-                error("labels payload non verificabile")
-              elif any(.labels[];
-                if type != "object" then true
-                elif (has("name") | not) then true
-                else (.name | type != "string")
-                end
-              ) then
-                error("label record non verificabile")
-              elif any(.labels[]; .name == "agent:fix") then "true"
-              else "false"
-              end
-            ' 2>/dev/null || true)
-            if [ "$label_present" != "false" ]; then
-              echo "::error::remove-label agent:fix non verificata issue #${ISSUE} (stato=${label_present:-UNKNOWN}): NON eseguo add."
-              continue
-            fi
-            sleep 2
-            if ! GH_TOKEN="$PAT" gh issue edit "${ISSUE}" --repo "${REPO}" --add-label agent:fix 2>/dev/null; then
-              echo "::error::add-label agent:fix fallita issue #${ISSUE} (PR #${N} gia' chiusa): riapplicarla a mano."
-              gh issue comment "${ISSUE}" --repo "${REPO}" --body "♻️ PR stale #${N} chiusa ma il re-label \`agent:fix\` è fallito: riapplicarlo a mano per un fix fresco." 2>/dev/null || true
-              continue
-            fi
-            label_payload=$(GH_TOKEN="$PAT" gh issue view "${ISSUE}" --repo "${REPO}" --json labels 2>/dev/null || true)
-            label_present=$(printf '%s' "$label_payload" | jq -er '
-              if type != "object" or ((.labels? | type) != "array") then
-                error("labels payload non verificabile")
-              elif any(.labels[];
-                if type != "object" then true
-                elif (has("name") | not) then true
-                else (.name | type != "string")
-                end
-              ) then
-                error("label record non verificabile")
-              elif any(.labels[]; .name == "agent:fix") then "true"
-              else "false"
-              end
-            ' 2>/dev/null || true)
-            if [ "$label_present" != "true" ]; then
-              echo "::error::add-label agent:fix non verificata issue #${ISSUE}: riapplicarla a mano."
-              gh issue comment "${ISSUE}" --repo "${REPO}" --body "♻️ PR stale #${N} chiusa ma il re-label \`agent:fix\` non è verificabile: riapplicarlo a mano per un fix fresco." 2>/dev/null || true
+            if ! requeue_issue; then
+              mark_recovery "il re-queue \`agent:fix\` (remove/verify/add/verify) non è andato a buon fine"
               continue
             fi
             echo "issue #${ISSUE} ri-accodata (agent:fix via PAT)"
