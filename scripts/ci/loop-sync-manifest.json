@@ -161,6 +161,16 @@
       }
     },
     {
+      "path": "scripts/ci/native-automerge-sweep-policy.mjs",
+      "mode": "corpus-only",
+      "reason": "Policy pura per il corpus, consumata esclusivamente da `auto-merge-enroll-sweep.yml` e `auto-merge-engine-lockstep.yml`: valida l'enrollment del mirror e il lockstep dei check prima del passaggio al gate nativo. Il sito ha un ciclo nativo diverso (`enable-native-automerge.yml`/`retry-native-automerge.yml`) e non possiede questo helper né i workflow di sweep/lockstep, quindi non esiste un gemello da portare.",
+      "baseline": {
+        "site": null,
+        "corpus": "28c091e258484d4d",
+        "alignedAt": "2026-09-19"
+      }
+    },
+    {
       "path": "scripts/ci/review-scope.mjs",
       "mode": "corpus-only",
       "reason": "Classificatore del verdetto `🔴 Important` rispetto al diff corrente della PR. E' usato dal review-gate e dal fixer del corpus per declassare in modo conservativo i finding fuori diff e coniare una sola issue follow-up; il sito ha un gate e un ciclo di review diversi e non possiede questo consumer del corpus, quindi non esiste un gemello da portare.",
@@ -185,9 +195,9 @@
       "path": "scripts/ci/check-issue-already-resolved.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "489604959eb2b59d",
-        "corpus": "489604959eb2b59d",
-        "alignedAt": "2026-09-15"
+        "site": "3495d7994fa50d84",
+        "corpus": "3495d7994fa50d84",
+        "alignedAt": "2026-09-19"
       }
     },
     {
@@ -224,9 +234,9 @@
       "path": "scripts/ci/check-workflows-scope.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "459a67139071d1ef",
-        "corpus": "459a67139071d1ef",
-        "alignedAt": "2026-08-07"
+        "site": "c4517ec345983e0f",
+        "corpus": "c4517ec345983e0f",
+        "alignedAt": "2026-09-19"
       }
     },
     {
@@ -407,11 +417,12 @@
     },
     {
       "path": "scripts/ci/pr-autorebase.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "La discovery paginata e la decisione tri-state di conflitto sono comuni e fail-closed, ma i call-site restano adattati ai due contratti esterni: il sito invoca `tests.yml` con `workflow_dispatch -f pr_number=...` per risolvere la PR e avviare test+review sulla head, mentre il corpus conserva il dispatch `--ref` test-only del ramo needs-human/carry-forward. Il corpus inoltre fissa la revisione body con `currentReviewInputContext`/`reviewInputContextStillCurrent` e `review-test-policy.mjs`, e il suo `tests.yml` mantiene input `pr_number`/`head_sha`, guard body+review ed eventi lifecycle; il sito usa il proprio body-edit retry e i check names locali in constants. Non copiare il file byte-per-byte: ogni lato conserva il proprio percorso PR/body/review e il nome del check richiesto.",
       "baseline": {
-        "site": "3add6bcb19a0911b",
-        "corpus": "3add6bcb19a0911b",
-        "alignedAt": "2026-09-13"
+        "site": "adeebf70483aae35",
+        "corpus": "8321863157d60bdd",
+        "alignedAt": "2026-09-19"
       }
     },
     {
@@ -522,9 +533,9 @@
       "path": "scripts/lib/pr-body-sections-check.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "bda6dc74ee93671d",
-        "corpus": "bda6dc74ee93671d",
-        "alignedAt": "2026-09-01"
+        "site": "5612aa5e2536996b",
+        "corpus": "5612aa5e2536996b",
+        "alignedAt": "2026-09-19"
       }
     },
     {
@@ -942,8 +953,8 @@
       "reason": "Fratello di loop-scripts-closure.test.mjs per i riferimenti che NON sono import. Nato dal caso #45: alert-pat-down.mjs e' arrivato qui identical dichiarando che gh-pat-expiry-monitor.yml e' «l'unico punto di chiusura» del suo alert, con quel workflow assente — una issue priority:urgent che niente poteva chiudere, con le voci not-ported a 0 e la CI verde. Stessa forma del SiteShellContract: un contratto senza forma di import non e' coperto dai guard che seguono gli import. Ogni citazione non risolta va DICHIARATA con un kind chiuso e una ragione scritta, perche' l'intento non si indovina dalla prosa (la citazione contrastiva «e' X, non Y» nomina Y proprio per negarlo) — e' lo stesso errore che false-positive-declaration.mjs documenta. Il valore non e' classificare le 29 di oggi ma rendere impossibile aggiungere la 30esima in silenzio.",
       "baseline": {
         "site": null,
-        "corpus": "89c1fed7117cc164",
-        "alignedAt": "2026-09-01"
+        "corpus": "7734244adf87562a",
+        "alignedAt": "2026-09-19"
       }
     },
     {
@@ -1121,9 +1132,9 @@
       "path": "scripts/ci/lib/false-positive-declaration.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "0d8abb4da520f254",
-        "corpus": "0d8abb4da520f254",
-        "alignedAt": "2026-08-23"
+        "site": "3bbe2db3005e0271",
+        "corpus": "3bbe2db3005e0271",
+        "alignedAt": "2026-09-19"
       }
     },
     {
@@ -1322,6 +1333,17 @@
         "site": "d8d7c06048be343b",
         "corpus": "0e7e653ee69818c7",
         "alignedAt": "2026-08-15"
+      }
+    },
+    {
+      "path": "generator/tests/pr-autorebase-discovery-conflict.test.mjs",
+      "sitePath": "tests/pr-autorebase-discovery-conflict.test.ts",
+      "mode": "adapted",
+      "reason": "Gemello Vitest/node:test della regressione su discovery paginata, rotazione del pool completo e conflitto tri-state; il corpus riscrive solo il runner e mantiene le stesse failure injection (API indisponibile, payload malformato, fetch/merge-tree unknown) senza introdurre Vitest nel repo pubblicatore. Il test va censito perche' il manifest segue i guard del ciclo anche quando il file di test non e' un consumer runtime.",
+      "baseline": {
+        "site": "2fd56656bae3b94e",
+        "corpus": "0d30add5dad4393d",
+        "alignedAt": "2026-09-19"
       }
     },
     {
@@ -1668,9 +1690,9 @@
       "path": "scripts/lib/shard-git-helpers.sh",
       "mode": "identical",
       "baseline": {
-        "site": "278984502451dcfe",
-        "corpus": "278984502451dcfe",
-        "alignedAt": "2026-09-15"
+        "site": "550e43bda27c9ee4",
+        "corpus": "550e43bda27c9ee4",
+        "alignedAt": "2026-09-19"
       }
     },
     {
@@ -3478,7 +3500,7 @@
         },
         {
           "path": "generator/data/crawler-cross-repo-contract.json",
-          "mode": "adapted"
+          "mode": "identical"
         },
         {
           "path": "scripts/ci/close-recovered-failure-issues.mjs",
@@ -3959,18 +3981,19 @@
       "path": "scripts/ci/prefetch-review-diff.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "ed6ec76d58d3c7b0",
-        "corpus": "ed6ec76d58d3c7b0",
-        "alignedAt": "2026-09-10"
+        "site": "5f1868446705cf60",
+        "corpus": "5f1868446705cf60",
+        "alignedAt": "2026-09-19"
       }
     },
     {
       "path": "scripts/ci/review-test-policy.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "Il corpus aggiunge al contratto body-input condiviso il fast lane del ledger: sezioni/body predicate, registry contract, lifecycle ledger e percorsi `filter|only|check|post`; il sito conserva l'helper per la policy test-only e il proprio contratto PR/body. I consumer mantengono API e call-site locali, quindi questo file non è trasportabile come copia identica e non viene modificato funzionalmente in questa PR.",
       "baseline": {
-        "site": "2d34eac0549c80ca",
-        "corpus": "2d34eac0549c80ca",
-        "alignedAt": "2026-09-10"
+        "site": "961cae48e1176be3",
+        "corpus": "eb10df6a0fe35ea0",
+        "alignedAt": "2026-09-19"
       }
     },
     {
