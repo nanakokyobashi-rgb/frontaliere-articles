@@ -211,20 +211,25 @@ export function isContractDomainBodyFinding(finding, prBody) {
   if (typeof prBody !== 'string' || !prBody) return false;
   const text = String(finding?.text || '');
   if (NON_CONTRACT_BODY_RE.test(text)) return false;
+  const lines = prBody.split(/\r?\n/u);
   PR_BODY_ANCHOR_ALL_RE.lastIndex = 0;
   const anchors = [];
   for (const match of text.matchAll(PR_BODY_ANCHOR_ALL_RE)) {
     const start = Number(match[1]);
     const end = match[2] === undefined ? start : Number(match[2]);
-    // Un intervallo rovesciato o assurdo non e' un anchor che si possa
-    // verificare: si rifiuta invece di interpretarlo.
-    if (!Number.isFinite(start) || !Number.isFinite(end) || end < start) return false;
+    // I limiti si verificano PRIMA di espandere. Il testo della review e'
+    // prodotto da un modello: `PR body:L1-999999999` altrimenti farebbe
+    // crescere questo array fino a fermare la classificazione e con essa il
+    // review gate — cioe' la coda di merge e di pubblicazione — per un
+    // anchor che comunque non sarebbe verificabile. Un intervallo rovesciato
+    // o che esce dal body si rifiuta, non si interpreta.
+    if (!Number.isFinite(start) || !Number.isFinite(end)) return false;
+    if (end < start || end > lines.length) return false;
     for (let line = start; line <= end; line += 1) anchors.push(line);
   }
   const first = prBodyFindingLine(finding);
   if (first !== null && !anchors.includes(first)) anchors.push(first);
   if (anchors.length === 0) return false;
-  const lines = prBody.split(/\r?\n/u);
   // Ogni anchor deve cadere dentro `## Non implementato` E la riga che cita
   // non deve essere essa stessa un claim che il contratto non sa giudicare:
   // il finding puo' limitarsi a puntare la riga senza ripeterne il contenuto.

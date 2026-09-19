@@ -488,7 +488,14 @@ async function main() {
         pr: PR,
         prUrl: `https://github.com/${REPO}/pull/${PR}`,
       });
-      outsideOnlyApproved = scope.outsideOnly && scope.minted;
+      // La follow-up traccia i finding FUORI dal diff: quando non ce ne sono
+      // — il caso in cui gli unici 🔴 sono sul body e il contratto
+      // deterministico li ha gia' giudicati — non c'e' niente da coniare, e
+      // pretendere comunque il conio terrebbe ferma una PR che `review-gate`
+      // considera non bloccante. Stessa congiunzione del gate: due politiche
+      // sullo stesso verdetto sono il modo in cui questo ciclo si incaglia.
+      outsideOnlyApproved = scope.outsideOnly
+        && ((scope.outside?.length ?? 0) === 0 || scope.minted);
       if (outsideOnlyApproved) {
         console.log(
           `Gate review: ${scope.outside.length} finding Important fuori dal diff → follow-up ${scope.followup?.number || scope.followup?.url || 'coniato'}, non bloccante ✔`,

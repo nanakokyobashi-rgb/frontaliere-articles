@@ -321,4 +321,25 @@ test('un anchor a INTERVALLO si valida riga per riga, non solo sul primo estremo
     ['scripts/ci/review-scope.mjs'], null, { bodyContractPassed: true, prBody: body },
   );
   assert.equal(past.bodyDeclassified.length, 0, 'una riga oltre la fine non e\' verificabile');
+
+  // Il testo della review lo scrive un modello: un intervallo enorme deve
+  // essere RIFIUTATO prima di essere espanso, non espanso e poi scartato.
+  // Se questo test impiega piu' di un istante, il review gate — e con lui la
+  // coda di merge — si ferma sulla stessa riga.
+  const started = Date.now();
+  const huge = classifyImportantFindings(
+    bodyFinding('PR body:L1-999999999', 'intervallo assurdo.'),
+    ['scripts/ci/review-scope.mjs'], null, { bodyContractPassed: true, prBody: body },
+  );
+  assert.equal(huge.bodyDeclassified.length, 0);
+  assert.ok(Date.now() - started < 1000,
+    'l\'intervallo e\' stato espanso invece che rifiutato: il gate si puo\' fermare qui');
+});
+
+test('auto-merge-eval usa la stessa congiunzione del gate sul verdetto', () => {
+  // Due politiche sullo stesso verdetto incagliano il ciclo: il gate
+  // approverebbe e l'auto-merge rifiuterebbe, lasciando la PR verde e ferma.
+  const source = read('scripts/ci/auto-merge-eval.mjs');
+  assert.match(source, /\(scope\.outside\?\.length \?\? 0\) === 0 \|\| scope\.minted/u,
+    'auto-merge-eval pretende ancora una follow-up coniata che non esiste');
 });
