@@ -39,6 +39,25 @@ function step(name) {
 const WIP = 'Salva il lavoro parziale (WIP checkpoint deterministico, zero-Claude)';
 const BACKSTOP = 'Emit FIX_OUTCOME telemetry (deterministic backstop)';
 const CLASSIFY = 'Classify outcome (work-done, not CLI exit)';
+const PRODUCTION_PROOF = 'Apply production-proof hold for runtime workflow fixes (zero-Claude)';
+
+test('la prova di produzione viene applicata deterministicamente ai diff runtime-sensitive', () => {
+  const s = step(PRODUCTION_PROOF);
+  assert.ok(s, `step «${PRODUCTION_PROOF}» assente: la label resterebbe affidata al prompt dell'agente.`);
+  assert.match(s, /if: always\(\) && steps\.claim\.outputs\.claim_acquired == 'true'/);
+  assert.match(s, /continue-on-error: true/);
+  assert.match(s, /--state all/, 'il retry deve riconoscere anche una PR già mergiata');
+  assert.match(s, /fetch-pr-files\.mjs --repo "\$REPO" --pr "\$PR_NUMBER"/);
+  assert.match(s, /\.complete \/\/ false/, 'una lista file incompleta deve fermare il rilevamento');
+  assert.ok(s.includes('^\\\\.github/workflows/[^/]+$'), 'manca il selettore dei workflow eseguibili');
+  assert.ok(s.includes('^\\\\.github/actions/claude-codex-fallback/'), 'manca il selettore dell’action runtime');
+  assert.match(s, /gh label create awaiting-production-proof/);
+  assert.match(s, /gh issue edit "\$ISSUE" --repo "\$REPO" --add-label awaiting-production-proof/);
+  assert.ok(
+    SRC.indexOf(`- name: ${PRODUCTION_PROOF}`) > SRC.indexOf('- name: Mark autonomous PR provenance (zero-Claude)'),
+    'la label va applicata dopo che la PR è stata consegnata',
+  );
+});
 
 test('il checkpoint WIP esiste e gira su always()', () => {
   const s = step(WIP);
