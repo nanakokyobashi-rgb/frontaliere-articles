@@ -188,8 +188,8 @@ async function baseManifest() {
  * trova niente e dichiara `exhausted: false`, cosi' il chiamante passa all'API
  * invece di scambiare una storia troncata per una prova.
  */
-function localHistoryMatch(rel, targetHash) {
-  const git = (args) => execFileSync('git', args, { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
+export function localHistoryMatch(rel, targetHash, root = ROOT) {
+  const git = (args) => execFileSync('git', args, { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
   let shas;
   try {
     shas = git(['log', '--format=%H', '--', rel]).split('\n').filter(Boolean);
@@ -204,13 +204,25 @@ function localHistoryMatch(rel, targetHash) {
   }
   let checked = 0;
   for (const sha of shas) {
+    // Presenza dal TREE, contenuto dal BLOB. Il checkout di `tests.yml` e' un
+    // partial clone (`filter: blob:none`): i blob storici arrivano su
+    // richiesta, e un fetch fallito fa uscire `cat-file` != 0 come un path
+    // assente. Solo il tree (che il partial clone ha sempre) prova l'assenza;
+    // un blob presente ma illeggibile rende la storia locale NON verificabile
+    // (`exhausted: false`), cosi' il chiamante passa all'API invece di
+    // dichiarare fantasma una baseline che esiste.
+    let listed;
+    try {
+      listed = git(['ls-tree', '--name-only', sha, '--', rel]);
+    } catch {
+      return { match: false, exhausted: false, checked, historyReadable: false };
+    }
+    if (!listed.split('\n').some((entry) => entry === rel)) continue;
     let buf;
     try {
-      buf = execFileSync('git', ['cat-file', 'blob', `${sha}:${rel}`], { cwd: ROOT, stdio: ['ignore', 'pipe', 'ignore'] });
+      buf = execFileSync('git', ['cat-file', 'blob', `${sha}:${rel}`], { cwd: root, stdio: ['ignore', 'pipe', 'ignore'] });
     } catch {
-      // Il path non esisteva sotto questo nome a quella revisione: come nel
-      // walk remoto, non e' un errore, si prosegue.
-      continue;
+      return { match: false, exhausted: false, checked, historyReadable: false };
     }
     checked += 1;
     if (sha256(buf) === targetHash) return { match: true, exhausted: true, checked, historyReadable: true };

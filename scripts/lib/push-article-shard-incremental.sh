@@ -27,10 +27,14 @@
 #     `git write-tree --missing-ok`.
 #   - `git commit-tree` and a non-force `git push` need no blob content either
 #     — push only ever transfers objects the remote doesn't already have.
-#   - Reading the previous `.shard-filecount` via the shared
-#     `shard_read_counter` helper checks tree membership before asking Git to
-#     lazy-fetch that one small blob. A listed-but-unreadable marker fails the
-#     push instead of being mistaken for zero; an absent marker remains zero.
+#   - Reading the previous `.shard-filecount` via `git show HEAD:.shard-filecount`
+#     DOES lazily fetch that one small blob — acceptable (a few bytes), and
+#     more robust than push-section-shard.sh's raw.githubusercontent.com route
+#     (:126): no CDN caching/staleness and no unauthenticated 60/hr rate limit,
+#     and the object graph we already cloned is authoritative for exactly the
+#     HEAD we are about to build on top of. Presence is read from the tree
+#     first: a listed marker whose blob fetch fails aborts the attempt instead
+#     of restarting the count from 0.
 #
 # Merge semantics hold BY CONSTRUCTION: the base tree is the remote's current
 # tree; only the caller's relpaths are added/replaced in the index before
@@ -229,14 +233,24 @@ _attempt() {
     git -C "$stage" update-index --add --cacheinfo 100644,"$sha","$rel" || return 1
   done
 
-  # Previous file-count: use the shared tree-aware reader. Missing/non-numeric
-  # remains 0, while a listed marker whose lazy-fetch fails aborts this attempt
-  # instead of resetting the counter and publishing an incorrect total.
+  # Previous file-count: read straight from the tree we just cloned (a single
+  # small targeted blob fetch — see header comment for why this beats the
+  # raw.githubusercontent.com route). Missing/non-numeric → 0, same posture as
+  # push-section-shard.sh.
+  # The stage is a `--filter=blob:none` clone: the blob arrives on demand, and
+  # a failed fetch makes `git show` fail exactly like an absent file. Only the
+  # tree (always present) proves absence; a listed but unreadable marker is an
+  # error, never a silent 0 that would restart the count from scratch.
   local prev_n
-  if ! prev_n="$(shard_read_counter "$stage" .shard-filecount)"; then
-    echo "::error::$section-$loc article shard: .shard-filecount is listed but unreadable" >&2
-    return 1
+  if [ -n "$(git -C "$stage" ls-tree --name-only HEAD -- .shard-filecount 2>/dev/null)" ]; then
+    prev_n="$(git -C "$stage" show HEAD:.shard-filecount)" || {
+      echo "::error::.shard-filecount is listed in the shard tree but its blob is unreadable (on-demand fetch failed)" >&2
+      return 1
+    }
+  else
+    prev_n=0
   fi
+  [[ "$prev_n" =~ ^[0-9]+$ ]] || prev_n=0
   local new_total=$((prev_n + new_count))
   if [ "$new_count" -gt 0 ]; then
     local fc_sha

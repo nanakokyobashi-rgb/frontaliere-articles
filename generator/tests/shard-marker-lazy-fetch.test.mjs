@@ -11,9 +11,11 @@ const publisher = readFileSync(
   'utf8',
 );
 
-test('the fast publisher delegates marker reads to the tree-aware shared helper', () => {
+test('the shard marker readers distinguish absence from an unreadable lazy blob', () => {
   assert.match(helper, /shard_read_counter\(\)[\s\S]*?git -C \"\$dir\" ls-tree HEAD/);
-  assert.match(publisher, /shard_read_counter \"\$stage\" \.shard-filecount/);
+  assert.match(publisher, /ls-tree --name-only HEAD -- \.shard-filecount/);
+  assert.match(publisher, /show HEAD:\.shard-filecount\)\" \|\| \{/);
+  assert.match(publisher, /listed in the shard tree but its blob is unreadable[\s\S]*?return 1/);
   assert.doesNotMatch(
     publisher,
     /git -C \"\$stage\" show HEAD:\.shard-filecount[\s\S]*?echo 0/,
