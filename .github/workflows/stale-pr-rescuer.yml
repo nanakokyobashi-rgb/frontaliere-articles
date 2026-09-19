@@ -87,6 +87,10 @@ on:
   workflow_run:
     workflows: ['tests']
     types: [completed]
+    # I `tests` dei push su main non riguardano nessuna PR aperta: il filtro
+    # sul trigger evita che il run nasca e sfratti quello in attesa nella
+    # concurrency (sul sito un dispatch cancellato in 12 s, 2026-09-19).
+    branches-ignore: [main]
   schedule:
     - cron: '35 * * * *'
   workflow_dispatch:
@@ -110,6 +114,12 @@ concurrency:
 
 jobs:
   rescue:
+    # Il `tests` di un push su `main` non cambia lo stato di nessuna PR: lo
+    # scan legge solo le PR aperte e non usa il payload `workflow_run`. Quei
+    # completamenti riempivano la coda di run identiche al tick successivo
+    # (sul sito: 86 run in 4 h il 2026-09-19). Restano le completion delle
+    # PR, il cron e il dispatch.
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.event != 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
@@ -177,8 +187,37 @@ jobs:
             # chiusa.
             if [ "$IS_DRAFT" = "true" ]; then echo "PR #$N draft — skip"; continue; fi
 
-            UPD_S=$(date -u -d "$UPD" +%s 2>/dev/null || echo "$NOW")
-            if [ $((NOW - UPD_S)) -lt $AGE_MIN_S ]; then echo "PR #$N fresca (<2h) — skip"; continue; fi
+            # Age gate: l'orologio è l'ultimo PUSH, non `updated_at`. Ogni
+            # review, commento e label del ciclo rinfresca `updated_at` — cioè
+            # proprio l'attività automatica che NON prova che un agente sia
+            # vivo, che è la domanda che questo gate pone. Misurato il
+            # 2026-09-19 su questo repo: tre PR orfane ferme da ore (#1599
+            # aperta da 11,7 h con `updated_at` a 1,8 h) respinte come
+            # «fresche» perché il reviewer aveva appena postato il suo ennesimo
+            # 🔴. Stesso difetto e stessa correzione di
+            # `scripts/ci/orphan-pr-custodian.mjs`, che questo workflow esegue
+            # più sotto. `updated_at` resta il ripiego quando la data del
+            # commit non è leggibile: è sempre >= la data del push, quindi al
+            # massimo ritarda un intervento, non ne anticipa uno.
+            # Il ripiego su `$UPD` dev'essere raggiungibile anche quando la
+            # lettura RIESCE ma non restituisce una data: con un `--jq` non
+            # applicabile la risposta e' `{}`, e un errore trasporto puo' stampare
+            # testo. `${PUSHED_AT:-$UPD}` copre solo la stringa VUOTA, quindi
+            # quei casi arrivavano a `date -d` come spazzatura e cadevano sul
+            # `|| echo "$NOW"`, cioe' «PR fresca» — la stessa cecita' che
+            # questo blocco esiste per togliere, ma permanente. Il fallback
+            # esplicito su `$UPD` prima di `$NOW` lo rende raggiungibile.
+            # `--paginate` e' INERTE qui (l'endpoint rende un solo oggetto e
+            # non manda `Link`), e resta per una ragione di guardia: il test
+            # `#314 — nessuna lettura gh senza --paginate` vale proprio perche'
+            # non ha eccezioni da ricordare. Indebolirlo con un'allowlist per
+            # risparmiare un flag inerte costa piu' di quanto rende.
+            PUSHED_AT=$(gh api --paginate "repos/$REPO/commits/$HEAD" --jq '.commit.committer.date' 2>/dev/null || true)
+            IDLE_SINCE="${PUSHED_AT:-$UPD}"
+            UPD_S=$(date -u -d "$IDLE_SINCE" +%s 2>/dev/null \
+              || date -u -d "$UPD" +%s 2>/dev/null \
+              || echo "$NOW")
+            if [ $((NOW - UPD_S)) -lt $AGE_MIN_S ]; then echo "PR #$N con push recente (<2h) — skip"; continue; fi
 
             # A review covers the current input only when its marker authenticates
             # the exact current PR body. Read/hash the body before selecting the
@@ -672,3 +711,34 @@ jobs:
               2>/dev/null || echo "commento fallito su PR #$N"
           done
           echo "Scan completo."
+
+      # Le PR non autonome (branch non `fix/*`, autore umano, senza
+      # `agent:autofix`) sono saltate dallo scan qui sopra e dai fixer: quando
+      # l'agente che le ha aperte muore restano ferme per ore (#1591: LGTM alle
+      # 09:31, `tests` CANCELLED, ferma fino al rerun manuale delle 17:40). Il
+      # custode e' identico a quello del sito: rilancia un check richiesto
+      # CANCELLED su una HEAD con LGTM e adotta per i fixer le PR con un 🔴
+      # dichiarato fuori scope, dispatchando subito `pr-redflag-fixer.yml`.
+      - name: Checkout orphan PR custodian
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            scripts/ci/orphan-pr-custodian.mjs
+            scripts/ci/lib/constants.mjs
+            scripts/ci/lib/review-input-revision.mjs
+          sparse-checkout-cone-mode: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      - name: Orphan PR custodian
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          DRY_RUN: ${{ github.event.inputs.dry_run }}
+          CI_CHECK_NAME: 'tests (node --test)'
+          REDFLAG_FIXER_DISPATCH_INPUT: pr
+        run: node scripts/ci/orphan-pr-custodian.mjs
