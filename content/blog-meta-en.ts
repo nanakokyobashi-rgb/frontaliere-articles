@@ -11851,6 +11851,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.sindaco-malesco-fondi-confine.title': 'Frontiersmen, Malesco writes to the Government for funds',
     'blog.article.sindaco-malesco-fondi-confine.excerpt': 'Enrico Barbazza, mayor of Malesco, requests the Government to fully transfer the resources allocated to border municipalities to support local services.',
     'blog.article.sindaco-malesco-fondi-confine.imageAlt': 'Town hall building in Ticino region',
+    'blog.article.confapi-avsi-accordo-varese-formazione.title': 'Confapi Varese-AVSI agreement for youth training',
+    'blog.article.confapi-avsi-accordo-varese-formazione.excerpt': 'Protocol signed on 17 September between Confapi Varese and the AVSI Foundation to train young people through apprenticeships and dual training.',
+    'blog.article.confapi-avsi-accordo-varese-formazione.imageAlt': 'Casa Museo Lodovico Pogliaghi in Varese, venue for the agreement between Confapi Varese and Fondazione AVSI',
 };
 
 export default blogMetaEn;

@@ -11852,6 +11852,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.sindaco-malesco-fondi-confine.title': 'Frontalieri, Malesco scrive al Governo per i fondi',
     'blog.article.sindaco-malesco-fondi-confine.excerpt': 'Enrico Barbazza, sindaco di Malesco, richiede al Governo il trasferimento integrale delle risorse destinate ai comuni di confine per sostenere i servizi locali.',
     'blog.article.sindaco-malesco-fondi-confine.imageAlt': 'Palazzo comunale di una città ticinese',
+    'blog.article.confapi-avsi-accordo-varese-formazione.title': 'Accordo Confapi Varese-AVSI per formazione giovani',
+    'blog.article.confapi-avsi-accordo-varese-formazione.excerpt': 'Protocollo firmato il 17 settembre tra Confapi Varese e Fondazione AVSI per formare giovani tramite apprendistato e formazione duale.',
+    'blog.article.confapi-avsi-accordo-varese-formazione.imageAlt': 'Casa Museo Lodovico Pogliaghi a Varese, sede dell\'accordo tra Confapi Varese e Fondazione AVSI',
 };
 
 export default blogMetaIt;
