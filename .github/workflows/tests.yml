@@ -413,6 +413,15 @@ jobs:
           download_main scripts/ci/review-scope.mjs "$review_gate_root/scripts/ci/review-scope.mjs"
           download_main scripts/lib/github-issue-creator.mjs "$review_gate_root/scripts/lib/github-issue-creator.mjs"
           download_main scripts/lib/pr-body-closes-check.mjs "$review_gate_root/scripts/lib/pr-body-closes-check.mjs"
+          # Chiusura del contratto deterministico del body: `review-scope.mjs`
+          # lo ricalcola per declassare un 🔴 ancorato al solo body. Il gate
+          # gira da una directory ISOLATA, quindi un modulo del grafo che manca
+          # qui non e' un import lento, e' ERR_MODULE_NOT_FOUND su ogni PR.
+          # Il guard e' `generator/tests/review-gate-bootstrap-closure.test.mjs`.
+          download_main scripts/lib/pr-body-contract-eval.mjs "$review_gate_root/scripts/lib/pr-body-contract-eval.mjs"
+          download_main scripts/lib/pr-body-sections-check.mjs "$review_gate_root/scripts/lib/pr-body-sections-check.mjs"
+          download_main scripts/lib/pr-body-nextstep-check.mjs "$review_gate_root/scripts/lib/pr-body-nextstep-check.mjs"
+          download_main scripts/ci/lib/false-positive-declaration.mjs "$review_gate_root/scripts/ci/lib/false-positive-declaration.mjs"
 
           review_gate_module="$review_gate_root/scripts/ci/review-gate.mjs"
           node --check "$review_gate_module"

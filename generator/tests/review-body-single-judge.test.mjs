@@ -25,6 +25,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
+  bodyContractIsGreen,
   classifyImportantFindings,
   isContractDomainBodyFinding,
   importantFindings,
@@ -155,4 +156,127 @@ test('il gate porta il verdetto del contratto e non pretende una follow-up che n
     'il prompt deve dire al reviewer che il contratto verde chiude il body');
   assert.ok(read('REVIEW.md').includes('Una sola fonte di verita\' sul body'),
     'REVIEW.md deve documentare la regola: e\' il file che il reviewer legge');
+});
+
+test('il claim di performance resta 🔴 anche con parole che il primo filtro non vedeva', () => {
+  // Il filtro iniziale conosceva solo baseline/perf/misura: `throughput`,
+  // `latency`, `benchmark`, `faster` passavano e un claim senza baseline
+  // veniva declassato, violando il punto 7 di REVIEW.md. Finding della review
+  // su #1629.
+  for (const word of ['throughput', 'latency', 'benchmark', 'faster', 'p95', 'overhead']) {
+    const result = classifyImportantFindings(
+      bodyFinding('PR body:L5', `la voce promette ${word} migliore senza una misura.`),
+      ['scripts/ci/review-scope.mjs'], null, { bodyContractPassed: true, prBody: PR_BODY },
+    );
+    assert.equal(result.bodyDeclassified.length, 0, `«${word}» non deve essere declassato`);
+    assert.equal(result.blocking, true);
+  }
+});
+
+test('il claim puo\' stare nella RIGA citata, non nel testo del finding', () => {
+  const body = [
+    '## Implementato',
+    '- x',
+    '',
+    '## Non implementato (ancora)',
+    '- Riduzione del throughput di rendering: `per scelta`. **Motivo:** y. **Prossimo passo:** z.',
+  ].join('\n');
+  const result = classifyImportantFindings(
+    bodyFinding('PR body:L5', 'questa voce non regge.'),
+    ['scripts/ci/review-scope.mjs'], null, { bodyContractPassed: true, prBody: body },
+  );
+  assert.equal(result.bodyDeclassified.length, 0,
+    'il finding puo\' limitarsi a puntare la riga: il claim va cercato anche li\'');
+});
+
+test('un finding con DUE anchor, uno fuori sezione, non si declassa', () => {
+  const review = [
+    '## Findings (Important: 1)',
+    '`PR body:L5`: 🔴 Important: questa voce e anche `PR body:L2` non tornano.',
+  ].join('\n');
+  const result = classifyImportantFindings(review, ['scripts/ci/review-scope.mjs'], null, {
+    bodyContractPassed: true, prBody: PR_BODY,
+  });
+  assert.equal(result.bodyDeclassified.length, 0,
+    'L2 sta in `## Implementato`: il contratto non giudica quella riga');
+  assert.equal(result.blocking, true);
+  // Due anchor entrambi dentro la sezione restano declassabili.
+  const both = classifyImportantFindings(
+    ['## Findings (Important: 1)',
+     '`PR body:L5`: 🔴 Important: questa voce e anche `PR body:L6` non tornano.'].join('\n'),
+    ['scripts/ci/review-scope.mjs'], null, { bodyContractPassed: true, prBody: PR_BODY },
+  );
+  assert.equal(both.bodyDeclassified.length, 1);
+});
+
+test('il verdetto del contratto si RICALCOLA dal body, per ogni consumer', () => {
+  // Il fixer e la CLI di review-scope non hanno lo step `PR-body completeness`:
+  // senza questa funzione applicherebbero una politica diversa sullo stesso
+  // finding e brucerebbero round su lavoro che non esiste. Finding della
+  // review su #1629.
+  assert.equal(bodyContractIsGreen(PR_BODY), true, 'il body di prova rispetta il contratto');
+  assert.equal(bodyContractIsGreen('## Implementato\n- solo questa'), false,
+    'manca la seconda sezione: contratto rosso');
+  assert.equal(bodyContractIsGreen(''), false);
+  assert.equal(bodyContractIsGreen(null), false);
+});
+
+// Il ramo «diff non verificabile» e' il caso NORMALE qui: una PR che rigenera
+// il corpus tocca migliaia di file e la lista arriva troncata o vuota. Il
+// gemello del sito non ha questo ramo, quindi il declassamento va provato
+// proprio li' — ed e' li' che la prima stesura sbagliava: `blocking` diventava
+// false ma `outsideOnly` restava false, e `review-gate.mjs` non approvava
+// comunque. Il ramo non sbloccava niente. Finding della review su #1629.
+const DIFF_EMPTY_GH = `#!/usr/bin/env node
+'use strict';
+const args = process.argv.slice(2);
+if (args[0] === 'pr' && args[1] === 'view') {
+  process.stdout.write(JSON.stringify({ changedFiles: 0, files: [] }));
+  process.exit(0);
+}
+if (args[0] === 'api' && args[1].endsWith('/files')) { process.exit(0); }
+if (args[0] === 'api' && /pulls\\/\\d+$/.test(args[1])) {
+  process.stdout.write(JSON.stringify({ body: process.env.FAKE_PR_BODY || '' }));
+  process.exit(0);
+}
+if (args[0] === 'api') { process.stdout.write('c'.repeat(40) + '\\n'); process.exit(0); }
+process.exit(0);
+`;
+
+test('diff illeggibile: i 🔴 sul body cadono E la PR resta approvabile', { concurrency: false }, async () => {
+  const os = await import('node:os');
+  const { classifyAndMintReview } = await import('../../scripts/ci/review-scope.mjs');
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'review-body-diff-'));
+  const binDir = path.join(tmpDir, 'bin');
+  fs.mkdirSync(binDir);
+  fs.writeFileSync(path.join(binDir, 'gh'), DIFF_EMPTY_GH, { mode: 0o755 });
+  const previous = { PATH: process.env.PATH, FAKE_PR_BODY: process.env.FAKE_PR_BODY };
+  process.env.PATH = `${binDir}${path.delimiter}${previous.PATH}`;
+  process.env.FAKE_PR_BODY = PR_BODY;
+  try {
+    const result = await classifyAndMintReview(
+      bodyFinding('PR body:L5', 'la voce non dichiara uno stato accettabile.'),
+      { repo: 'o/r', pr: 42, prUrl: 'https://x/pr/42', mutate: false },
+    );
+    assert.equal(result.bodyDeclassified.length, 1, 'il finding sul body va declassato');
+    assert.equal(result.blocking, false);
+    assert.equal(result.outsideOnly, true,
+      'senza outsideOnly il gate non approva: il ramo non sbloccherebbe nulla');
+    assert.equal(result.minted, false, 'non c\'e\' niente fuori dal diff da tracciare');
+
+    // Un 🔴 di CODICE nello stesso ramo resta invece bloccante.
+    const mixed = await classifyAndMintReview(
+      [bodyFinding('PR body:L5', 'la voce non dichiara uno stato accettabile.'),
+       '`engine/x.mjs:10`: 🔴 Important: rotto.'].join('\n'),
+      { repo: 'o/r', pr: 42, prUrl: 'https://x/pr/42', mutate: false },
+    );
+    assert.equal(mixed.bodyDeclassified.length, 1);
+    assert.equal(mixed.blocking, true);
+    assert.equal(mixed.outsideOnly, false);
+  } finally {
+    process.env.PATH = previous.PATH;
+    if (previous.FAKE_PR_BODY === undefined) delete process.env.FAKE_PR_BODY;
+    else process.env.FAKE_PR_BODY = previous.FAKE_PR_BODY;
+    fs.rmSync(tmpDir, { recursive: true, force: true });
+  }
 });

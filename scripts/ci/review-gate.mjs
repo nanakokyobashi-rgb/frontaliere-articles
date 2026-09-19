@@ -87,7 +87,12 @@ const REVIEW_REVISION = normalizeReviewInputRevision(process.env.REVIEW_REVISION
 // completeness`, id `body_contract`). Verde = unica fonte di verita' sul body:
 // un 🔴 del modello ancorato solo su `PR body:L<n>` non blocca. Qualunque
 // valore diverso da `success` lascia il giudizio al reviewer come prima.
-const BODY_CONTRACT_PASSED = process.env.BODY_CONTRACT_OUTCOME === 'success';
+// `true` quando lo step del contratto di QUESTA run e' passato; `null` = «non
+// lo so», e `review-scope.mjs` ricalcola il verdetto dal body con gli stessi
+// moduli del gate. Mai `false` implicito: un env mancante non deve spegnere il
+// declassamento, altrimenti i consumer senza quello step (il fixer, la CLI)
+// applicherebbero una politica diversa sulla stessa superficie.
+const BODY_CONTRACT_PASSED = process.env.BODY_CONTRACT_OUTCOME === 'success' ? true : null;
 const MARKER = '<!-- REVIEW_GATE_NO_LGTM -->';
 let gateFailureKind = 'verdict';
 

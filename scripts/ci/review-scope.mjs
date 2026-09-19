@@ -15,6 +15,7 @@ import { readFileSync } from 'node:fs';
 import { REDFLAG_IMPORTANT_RE } from './lib/constants.mjs';
 import { fetchPrFiles } from './lib/fetchPrFiles.mjs';
 import { createGithubIssue } from '../lib/github-issue-creator.mjs';
+import { evaluateBodyContract } from '../lib/pr-body-contract-eval.mjs';
 
 const FOLLOWUP_MARKER = 'OUT_OF_SCOPE_REVIEW_FOLLOWUP';
 // Stesso margine del writer condiviso (`MAX_BODY_LEN`): il tetto API e' 65536.
@@ -26,10 +27,22 @@ const ZERO_IMPORTANT_RE = /^(?:0|none|nessuno)\s*$/iu;
 // Anchor di un finding il cui unico riferimento e' la descrizione della PR.
 const PR_BODY_ANCHOR_RE = /^\s*(?:[-*]\s*)?`?PR body[:#]L?([1-9]\d*)(?:[-–]\d+)?(?=$|[`:\s])/iu;
 const PR_BODY_ANCHOR_LOOSE_RE = /`?PR body[:#]L?([1-9]\d*)/iu;
+// TUTTI gli anchor `PR body:L<n>` del finding, non solo il primo: un finding
+// che ne cita due, uno dentro `## Non implementato` e uno fuori, non e' un
+// finding di dominio del contratto e non si declassa.
+const PR_BODY_ANCHOR_ALL_RE = /`?PR body[:#]L?([1-9]\d*)/giu;
 // Cio' che il contratto deterministico NON sa giudicare resta bloccante anche
-// se ancorato al body: il claim di performance senza baseline (REVIEW.md step
-// 7) non e' una regola del contratto, e' una regola della review.
-const NON_CONTRACT_BODY_RE = /\b(?:baseline|perf|performance|speed-?up|misura|misurat|pre\/post|revert|ottimizzazion|optimi[sz]ation|claim)\w*/iu;
+// se ancorato al body: il claim di performance senza baseline (REVIEW.md punto
+// 7) non e' una regola del contratto, e' una regola della review. La lista e'
+// deliberatamente LARGA: ogni termine in piu' lascia bloccante un finding in
+// piu', che e' la direzione sicura dell'errore. Stringerla richiede una
+// misura, allargarla no.
+const NON_CONTRACT_BODY_RE = new RegExp([
+  'baseline', 'perf', 'performance', 'speed-?up', 'speed', 'faster', 'veloc',
+  'throughput', 'latenc[yz]', 'latenza', 'benchmark', 'overhead', 'regressi',
+  'misura', 'misurat', 'pre/post', 'revert', 'ottimizzazion', 'optimi[sz]',
+  'claim', 'risparmi', 'saving', 'p50', 'p90', 'p95', 'p99',
+].map((part) => `(?:${part})`).join('|'), 'iu');
 
 function resetImportantRegex() {
   REDFLAG_IMPORTANT_RE.lastIndex = 0;
@@ -193,17 +206,51 @@ export function prBodyFindingLine(finding) {
  * sezione giusta e' parte del predicato, non un'assunzione.
  */
 export function isContractDomainBodyFinding(finding, prBody) {
-  const line = prBodyFindingLine(finding);
-  if (line === null || typeof prBody !== 'string' || !prBody) return false;
-  if (NON_CONTRACT_BODY_RE.test(String(finding?.text || ''))) return false;
+  if (typeof prBody !== 'string' || !prBody) return false;
+  const text = String(finding?.text || '');
+  if (NON_CONTRACT_BODY_RE.test(text)) return false;
+  PR_BODY_ANCHOR_ALL_RE.lastIndex = 0;
+  const anchors = [...text.matchAll(PR_BODY_ANCHOR_ALL_RE)].map((match) => Number(match[1]));
+  const first = prBodyFindingLine(finding);
+  if (first !== null && !anchors.includes(first)) anchors.push(first);
+  if (anchors.length === 0) return false;
   const lines = prBody.split(/\r?\n/u);
-  if (line > lines.length) return false;
-  let section = null;
-  for (let index = 0; index < line; index += 1) {
-    const heading = lines[index].match(/^\s{0,3}#{2,3}\s+(.+?)\s*$/u);
-    if (heading) section = heading[1];
+  // Ogni anchor deve cadere dentro `## Non implementato` E la riga che cita
+  // non deve essere essa stessa un claim che il contratto non sa giudicare:
+  // il finding puo' limitarsi a puntare la riga senza ripeterne il contenuto.
+  return anchors.every((line) => {
+    if (!Number.isFinite(line) || line > lines.length) return false;
+    if (NON_CONTRACT_BODY_RE.test(lines[line - 1] || '')) return false;
+    let section = null;
+    for (let index = 0; index < line; index += 1) {
+      const heading = lines[index].match(/^\s{0,3}#{2,3}\s+(.+?)\s*$/u);
+      if (heading) section = heading[1];
+    }
+    return Boolean(section && /^Non implementato\b/iu.test(section));
+  });
+}
+
+/**
+ * Il contratto deterministico del body, ricalcolato dal body stesso con gli
+ * stessi moduli dello step `PR-body completeness` (`evaluateBodyContract`:
+ * sezioni, `Closes`, stato bloccante di ogni voce; gli advisory non bloccano
+ * quel gate e non bloccano qui).
+ *
+ * Esiste perche' il verdetto NON puo' arrivare solo da una variabile d'ambiente
+ * di `tests.yml`: `pr-redflag-fixer.yml` e la CLI di questo file classificano
+ * gli stessi finding SENZA quello step, e li' un 🔴 sul body con contratto
+ * verde consumerebbe round del fixer su lavoro che non esiste. Ricalcolarlo
+ * rende il declassamento uguale per ogni consumer, che e' l'unico modo di non
+ * avere due politiche sulla stessa superficie.
+ */
+export function bodyContractIsGreen(prBody) {
+  if (typeof prBody !== 'string' || !prBody) return false;
+  try {
+    return evaluateBodyContract(prBody).blocking === 0;
+  } catch (error) {
+    console.log(`review-scope: contratto del body non valutabile (${String(error).slice(0, 160)}) → nessun declassamento.`);
+    return false;
   }
-  return Boolean(section && /^Non implementato\b/iu.test(section));
 }
 
 export function classifyImportantFindings(body, changedFiles, repositoryPaths = null, {
@@ -500,10 +547,21 @@ async function mintFollowup({ repo, pr, prUrl, body, findings }) {
  * scope, conia/aggiorna la singola issue della PR.
  */
 export async function classifyAndMintReview(body, {
-  repo, pr, prUrl, mutate = true, bodyContractPassed = false, prBody = null,
+  repo, pr, prUrl, mutate = true,
+  // `null`/assente = «non lo so»: il verdetto si RICALCOLA dal body con gli
+  // stessi moduli del gate. Un booleano esplicito lo impone (il review gate
+  // passa `true` quando lo step del contratto di quella run e' andato bene).
+  // Cosi' ogni consumer — review gate, fixer, CLI — applica la stessa
+  // politica senza che un workflow debba propagare una variabile.
+  bodyContractPassed = null, prBody = null,
 } = {}) {
   if (!repo || !pr) throw new Error('repo e pr sono obbligatori');
-  const effectivePrBody = bodyContractPassed && prBody === null ? readPrBody(repo, pr) : prBody;
+  const effectivePrBody = prBody === null && bodyContractPassed !== false
+    ? readPrBody(repo, pr)
+    : prBody;
+  const contractPassed = typeof bodyContractPassed === 'boolean'
+    ? bodyContractPassed
+    : bodyContractIsGreen(effectivePrBody);
   const changed = fetchChangedFiles(repo, pr);
   const diffUnavailable = changed.complete !== true || changed.files.length === 0;
   if (diffUnavailable) {
@@ -515,7 +573,7 @@ export async function classifyAndMintReview(body, {
     // normale qui — resusciterebbe come bloccante proprio i 🔴 che il
     // contratto verde ha appena chiuso, e lo farebbe per una ragione che non
     // ha niente a che vedere con loro.
-    const bodyDeclassified = bodyContractPassed
+    const bodyDeclassified = contractPassed
       ? findings.filter((finding) => finding.citations.length === 0
           && isContractDomainBodyFinding(finding, effectivePrBody))
       : [];
@@ -529,7 +587,11 @@ export async function classifyAndMintReview(body, {
         reason: `diff non verificabile (${reason})`,
       })),
       bodyDeclassified,
-      outsideOnly: false,
+      // Il ramo dichiara di voler sbloccare la PR con diff illeggibile i cui
+      // unici 🔴 erano sul body: senza questo, `blocking` diventava false ma
+      // `outsideOnly` restava false e il gate non approvava comunque —
+      // il ramo non avrebbe sbloccato niente.
+      outsideOnly: bodyDeclassified.length > 0 && stillOpen.length === 0,
       blocking: stillOpen.length > 0,
       minted: false,
       changedFiles: changed.files,
@@ -539,7 +601,7 @@ export async function classifyAndMintReview(body, {
   }
   const repositoryPaths = fetchRepositoryPaths(repo, pr);
   const result = classifyImportantFindings(body, changed.files, repositoryPaths, {
-    bodyContractPassed,
+    bodyContractPassed: contractPassed,
     prBody: effectivePrBody,
   });
   if (result.outside.length === 0 || !mutate) {
