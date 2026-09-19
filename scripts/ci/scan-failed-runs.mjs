@@ -220,6 +220,61 @@ const IGNORE = parseIgnoreList(process.env.IGNORE_WORKFLOWS);
  */
 const PR_GATE_WORKFLOWS = new Set(['tests', 'Generator CI']);
 
+// Workflow di SORVEGLIANZA della pipeline: il loro rosso E' l'allarme, non il
+// rumore transiente per cui esiste il gate di ricorrenza. Tenerli nel gate li
+// rende invisibili, ed e' misurato: il watchdog della coda translate e' stato
+// rosso per 12 run consecutive (52,5 h) senza aprire nessuna issue. Lo
+// scanner lo aveva visto una volta sola, e la riga del gate era
+// `failure 1/3 ... → low-priority breadcrumb` nel ledger #25 (un solo commento
+// per questa chiave). Con meno di 3 avvistamenti nella finestra di 48 h
+// l'ordinale non arriva mai a 3/3, quindi il gate qui non rimanda
+// l'escalation: la sopprime per sempre.
+// I nomi sono legati ai `name:` reali degli YAML da
+// `generator/tests/scan-failed-runs-filter.test.mjs`: una rinomina del workflow
+// senza aggiornare questa lista la renderebbe muta in silenzio.
+export const ALWAYS_ESCALATE_WORKFLOWS = new Set([
+  'Translate Queue Recovery Watchdog (observe only)',
+  'Translate Pending Jobs (sparse cross-repo execution)',
+  'Generation health watchdog',
+  'Lockstep stall watchdog',
+  'Crawler fleet stall watchdog',
+  'GH_PAT Expiry Monitor',
+  'Close Recovered Failure Issues',
+  // Se muore il reporter, non resta nessuno a segnalare gli altri.
+  'Workflow failure → issue',
+  // Il publisher della superficie HTTP: se fallisce, `dist/api/` resta vecchia
+  // e il sito serve dati stantii. Un rosso qui non e' rumore transiente da
+  // aggregare nel ledger, e' la superficie pubblica che non si aggiorna — lo
+  // dice anche il razionale del confine di scansione, che cita `publish-api`
+  // fra i fallimenti che non devono essere inghiottiti.
+  'Publish article data API',
+]);
+
+/**
+ * Ordina i workflow di sorveglianza prima del cap `MAX_ISSUES`. `sort` in Node
+ * e' stabile, quindi per tutti gli altri resta l'ordine di inserimento.
+ */
+/**
+ * Il cap limita il rumore, non gli allarmi: un workflow di sorveglianza non
+ * conta verso `MAX_ISSUES` e non puo' essere troncato.
+ */
+export function capReached({ name, cappedOpened, maxIssues }) {
+  if (ALWAYS_ESCALATE_WORKFLOWS.has(name)) return false;
+  return cappedOpened >= maxIssues;
+}
+
+export function orderBySurveillanceFirst(entries) {
+  return [...entries].sort(
+    ([a], [b]) => Number(ALWAYS_ESCALATE_WORKFLOWS.has(b)) - Number(ALWAYS_ESCALATE_WORKFLOWS.has(a)),
+  );
+}
+
+/** `-1` disattiva il gate di ricorrenza: prima issue vera al primo rosso. */
+export function gateForWorkflow(name, { lost = false, gate = undefined } = {}) {
+  if (lost || ALWAYS_ESCALATE_WORKFLOWS.has(name)) return -1;
+  return gate === undefined ? GATE : gate;
+}
+
 function gh(args, fallback = '') {
   try {
     // maxBuffer esplicito: il default di execFileSync e' 1 MB, e da quando
@@ -1282,12 +1337,30 @@ async function main() {
 
   console.log(`[scan-failed-runs] ${runs.length} run fallite → ${candidatesByWorkflow.size} workflow distinti${DRY_RUN ? ' (dry-run)' : ''}.`);
 
+  // I workflow di sorveglianza vanno serviti PRIMA del cap `MAX_ISSUES`: se il
+  // cap li tronca escono dalla finestra di lookback e il loro allarme non viene
+  // aperto mai — lo stesso difetto che `ALWAYS_ESCALATE_WORKFLOWS` chiude sul
+  // gate, riaperto da un'altra porta. `sort` in Node e' stabile, quindi
+  // l'ordine relativo di tutti gli altri resta quello di inserimento.
+  const servedOrder = orderBySurveillanceFirst(byWorkflow);
+
   let opened = 0;
+  // Il cap limita il RUMORE, non gli allarmi: i workflow di sorveglianza non
+  // contano verso `MAX_ISSUES` e non possono essere troncati. Sono al massimo
+  // `ALWAYS_ESCALATE_WORKFLOWS.size` per costruzione e ognuno apre UNA issue
+  // deduplicata, quindi il tetto sul rumore resta quello dichiarato. Senza
+  // questo, con sei o piu' sorvegliati falliti nella stessa passata il cap ne
+  // troncava alcuni — potenzialmente il reporter stesso — e il loro allarme
+  // non veniva aperto mai, che e' il difetto che questa lista chiude.
+  let cappedOpened = 0;
+  let position = -1;
   let truncated = [];
-  for (const [name, selected] of byWorkflow) {
+  for (const [name, selected] of servedOrder) {
+    position += 1;
     const run = selected.run;
-    if (opened >= MAX_ISSUES) {
-      truncated = [...byWorkflow.keys()].slice(opened);
+    const surveillance = ALWAYS_ESCALATE_WORKFLOWS.has(name);
+    if (capReached({ name, cappedOpened, maxIssues: MAX_ISSUES })) {
+      truncated = servedOrder.map(([workflowName]) => workflowName).slice(position);
       // Un cap che tronca in silenzio si legge come "tutto coperto". Lo diciamo.
       // Il cap tronca, e la passata NON puo' quindi contare come watermark:
       // uscendo 0 la finestra avanzerebbe oltre i workflow scartati e nessuno
@@ -1295,7 +1368,7 @@ async function main() {
       // non e' `success`, il watermark resta indietro e la passata successiva
       // li rivede. E' il difetto segnalato dalla review sulla PR #1568: il
       // messaggio precedente ammetteva la perdita invece di impedirla.
-      console.warn(`::warning::[scan-failed-runs] Cap di ${MAX_ISSUES} issue raggiunto — ${byWorkflow.size - opened} workflow falliti NON segnalati in questa passata: ${truncated.join(', ')}. La run esce non-zero per NON far avanzare il watermark: la prossima scansione li rivede. Alzare --max-issues se ricorre.`);
+      console.warn(`::warning::[scan-failed-runs] Cap di ${MAX_ISSUES} issue raggiunto — ${truncated.length} workflow falliti NON segnalati in questa passata: ${truncated.join(', ')}. La run esce non-zero per NON far avanzare il watermark: la prossima scansione li rivede. Alzare --max-issues se ricorre.`);
       break;
     }
 
@@ -1377,6 +1450,7 @@ async function main() {
     if (DRY_RUN) {
       console.log(`[scan-failed-runs] (dry-run) aprirei: "${title}" — run ${run.url}`);
       opened++;
+      if (!surveillance) cappedOpened++;
       continue;
     }
 
@@ -1393,7 +1467,7 @@ async function main() {
       // transiente della generazione articoli. Non vale per un articolo perso:
       // `-1` disattiva il gate (vedi consecutiveGate in github-issue-creator.mjs),
       // perche' aspettare la terza perdita significa buttarne tre.
-      consecutiveGate: lost ? -1 : GATE,
+      consecutiveGate: gateForWorkflow(name, { lost: Boolean(lost) }),
     });
     // `if (res) opened++` contava come consegnati anche i due casi di
     // fallimento, ed e' il secondo dei tre 🔴 della review: `createGithubIssue`
@@ -1418,6 +1492,8 @@ async function main() {
       continue;
     }
     opened++;
+    // Solo una segnalazione CONSEGNATA conta verso il cap del rumore.
+    if (!surveillance) cappedOpened++;
   }
 
   console.log(`[scan-failed-runs] Fatto — ${opened} segnalazione/i emesse.`);

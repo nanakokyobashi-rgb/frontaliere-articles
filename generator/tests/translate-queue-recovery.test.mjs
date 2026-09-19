@@ -11,7 +11,8 @@ import {
   MAX_REPORT_BYTES,
   MAX_RESPONSE_BYTES,
   MAX_TOTAL_GET_REQUESTS,
-  DEFAULT_QUEUE_STALE_THRESHOLD_SECONDS,
+  QUEUE_HOLDER_STALE_THRESHOLD_SECONDS,
+  QUEUE_UNSERVED_STALE_THRESHOLD_SECONDS,
   QUEUE_MAX_BOUNDARY_SHA,
   REPORT_SCHEMA,
   TARGET_BRANCH,
@@ -164,7 +165,7 @@ test('classifica active/pending e segnala il superamento del queue SLO', async (
   assert.equal(report.counts.byReason.cancelled_with_jobs, 1);
   assert.equal(report.queue.activePendingPresent, true);
   assert.equal(report.queue.oldestAgeSeconds, 5220);
-  assert.equal(report.queue.staleThreshold, DEFAULT_QUEUE_STALE_THRESHOLD_SECONDS);
+  assert.equal(report.queue.staleThreshold, QUEUE_HOLDER_STALE_THRESHOLD_SECONDS);
   assert.equal(report.queue.slo.state, 'within_slo');
   assert.equal(report.queue.slo.alert, false);
   assert.equal(report.queue.oldestPendingAgeSeconds, 968);
@@ -179,14 +180,130 @@ test('classifica active/pending e segnala il superamento del queue SLO', async (
   assert.ok(Buffer.byteLength(json) <= MAX_REPORT_BYTES);
 });
 
-test('il queue SLO usa solo la run pending più vecchia e apre l alert oltre soglia', async () => {
+test('il queue SLO usa solo la run pending più vecchia e apre l alert se nessuno drena', async () => {
   const current = run(33500000005, {
     conclusion: null,
-    created_at: '2026-09-01T16:00:00.000Z',
+    created_at: '2026-09-01T10:00:00.000Z',
     status: 'queued',
   });
   const { report } = await observe(fakeGithub({ currentRuns: [current], pages: [[]] }));
-  assert.equal(report.queue.oldestPendingAgeSeconds, 5220);
+  assert.equal(report.counts.active, 0);
+  assert.equal(report.queue.oldestPendingAgeSeconds, 26820);
+  assert.equal(report.queue.staleThreshold, QUEUE_UNSERVED_STALE_THRESHOLD_SECONDS);
+  assert.equal(report.queue.slo.measured, 'oldest_pending_age');
+  assert.equal(report.queue.slo.measuredAgeSeconds, 26820);
+  assert.equal(report.queue.slo.state, 'breached');
+  assert.equal(report.queue.slo.alert, true);
+  assert.ok(report.reasonCodes.includes('queue_slo_breached'));
+});
+
+// Regressione 2026-09-18: 12 run watchdog rosse consecutive (rosso per 52,5 h)
+// con la coda satura ma sana. Numeri dalla run 35369737340: 1 detentore attivo
+// (35327548227) e pending piu' vecchio 35342722223 a 16.532 s. La vecchia
+// soglia unica di 1800 s dichiarava `breached` questo stato normale.
+test('la coda satura ma servita da un detentore non apre l alert', async () => {
+  const holder = run(33500000006, {
+    conclusion: null,
+    created_at: '2026-09-01T09:03:37.000Z',
+    status: 'in_progress',
+  });
+  const queued = run(33500000007, {
+    conclusion: null,
+    created_at: '2026-09-01T12:51:28.000Z',
+    status: 'queued',
+  });
+  const { report } = await observe(fakeGithub({ currentRuns: [holder, queued], pages: [[]] }));
+  assert.equal(report.counts.active, 1);
+  assert.equal(report.counts.pending, 1);
+  assert.equal(report.queue.oldestPendingAgeSeconds, 16532);
+  assert.equal(report.queue.oldestActiveAgeSeconds, 30203);
+  assert.equal(report.queue.staleThreshold, QUEUE_HOLDER_STALE_THRESHOLD_SECONDS);
+  assert.equal(report.queue.slo.measured, 'oldest_holder_age');
+  assert.equal(report.queue.slo.measuredAgeSeconds, 30203);
+  assert.equal(report.queue.slo.state, 'within_slo');
+  assert.equal(report.queue.slo.alert, false);
+  assert.equal(report.reasonCodes.includes('queue_slo_breached'), false);
+});
+
+// L'arretrato profondo e' lecito per costruzione: con 350 min di timeout per
+// detentore, tre run davanti fanno 17,5 h di attesa e quattro 23,3 h. Se
+// l'allarme guardasse l'eta' della CODA invece di quella del detentore, una
+// coda sana e profonda tornerebbe rossa da sola — il rosso che questa PR
+// chiude, riaperto da un'altra porta.
+test('un pending vecchio di 31 h dietro un detentore appena partito non apre l alert', async () => {
+  const holder = run(33500000010, {
+    conclusion: null,
+    created_at: '2026-09-01T17:00:00.000Z',
+    status: 'in_progress',
+  });
+  const queued = run(33500000011, {
+    conclusion: null,
+    created_at: '2026-08-31T10:00:00.000Z',
+    status: 'queued',
+  });
+  const { report } = await observe(fakeGithub({ currentRuns: [holder, queued], pages: [[]] }));
+  assert.equal(report.queue.oldestPendingAgeSeconds, 113220);
+  assert.ok(report.queue.oldestPendingAgeSeconds > QUEUE_HOLDER_STALE_THRESHOLD_SECONDS);
+  assert.equal(report.queue.slo.measured, 'oldest_holder_age');
+  assert.equal(report.queue.slo.measuredAgeSeconds, 1620);
+  assert.equal(report.queue.slo.state, 'within_slo');
+  assert.equal(report.queue.slo.alert, false);
+  assert.equal(report.reasonCodes.includes('queue_slo_breached'), false);
+});
+
+// `empty` deve significare "nessuna grandezza da misurare", non "nessun
+// arretrato": un detentore fermo da oltre 24 h senza niente in coda dietro e'
+// esattamente il caso job-zero, e con l'assenza di pending come discriminante
+// sfuggiva all'alert nel caso peggiore.
+test('un detentore fermo da oltre una giornata apre l alert anche senza arretrato', async () => {
+  const holder = run(33500000012, {
+    conclusion: null,
+    created_at: '2026-08-30T17:00:00.000Z',
+    status: 'in_progress',
+  });
+  const { report } = await observe(fakeGithub({ currentRuns: [holder], pages: [[]] }));
+  assert.equal(report.counts.active, 1);
+  assert.equal(report.counts.pending, 0);
+  assert.equal(report.queue.oldestPendingAgeSeconds, null);
+  assert.equal(report.queue.slo.measured, 'oldest_holder_age');
+  assert.equal(report.queue.slo.measuredAgeSeconds, 174420);
+  assert.equal(report.queue.slo.state, 'breached');
+  assert.equal(report.queue.slo.alert, true);
+  assert.ok(report.reasonCodes.includes('queue_slo_breached'));
+});
+
+// Un rerun conserva il `created_at` originale: senza `run_started_at` un
+// detentore riavviato adesso si leggerebbe come fermo da giorni.
+test('un detentore riavviato si misura da run_started_at, non da created_at', async () => {
+  const holder = run(33500000013, {
+    conclusion: null,
+    created_at: '2026-08-30T17:00:00.000Z',
+    run_started_at: '2026-09-01T17:00:00.000Z',
+    status: 'in_progress',
+  });
+  const { report } = await observe(fakeGithub({ currentRuns: [holder], pages: [[]] }));
+  assert.equal(report.queue.slo.measuredAgeSeconds, 1620);
+  assert.equal(report.queue.slo.state, 'within_slo');
+  assert.equal(report.reasonCodes.includes('queue_slo_breached'), false);
+});
+
+test('un detentore che non finisce da oltre una giornata apre l alert', async () => {
+  const holder = run(33500000008, {
+    conclusion: null,
+    created_at: '2026-08-30T17:00:00.000Z',
+    status: 'in_progress',
+  });
+  const queued = run(33500000009, {
+    conclusion: null,
+    created_at: '2026-08-31T10:00:00.000Z',
+    status: 'queued',
+  });
+  const { report } = await observe(fakeGithub({ currentRuns: [holder, queued], pages: [[]] }));
+  assert.equal(report.counts.active, 1);
+  assert.equal(report.queue.oldestActiveAgeSeconds, 174420);
+  assert.equal(report.queue.staleThreshold, QUEUE_HOLDER_STALE_THRESHOLD_SECONDS);
+  assert.equal(report.queue.slo.measured, 'oldest_holder_age');
+  assert.equal(report.queue.slo.measuredAgeSeconds, 174420);
   assert.equal(report.queue.slo.state, 'breached');
   assert.equal(report.queue.slo.alert, true);
   assert.ok(report.reasonCodes.includes('queue_slo_breached'));
@@ -342,7 +459,10 @@ test('censimento corrente oltre la singola pagina fallisce chiuso indipendenteme
   assert.equal(report.complete, false);
   assert.equal(report.failClosed, true);
   assert.equal(report.counts.byReason.liveness_census_inconclusive, 1);
-  assert.equal(report.queryBudget.usedGets, 3);
+  // Due GET, non tre: il censimento legge `in_progress` per ultimo (l'ordine e'
+  // portante, vedi il commento in listCurrentQueueRuns), quindi la pagina
+  // sovradimensionata di `queued` arriva alla seconda richiesta.
+  assert.equal(report.queryBudget.usedGets, 2);
 });
 
 test('client GET esaurisce deterministicamente il budget prima della trentesima GET runtime', async () => {

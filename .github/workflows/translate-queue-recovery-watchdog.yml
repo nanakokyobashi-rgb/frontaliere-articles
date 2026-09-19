@@ -55,10 +55,29 @@ jobs:
           const discovery = report.discovery || {};
           const reasons = [];
           if (slo.state === 'breached') {
-            reasons.push(`queue SLO breached: pending age ${slo.oldestPendingAgeSeconds}s >= ${slo.thresholdSeconds}s`);
+            // Il numero dell'alert deve dire QUALE grandezza ha sfondato: con un
+            // detentore si misura la sua eta', senza detentore l'attesa del
+            // pending piu' vecchio. Scrivere sempre "pending age" ha mandato la
+            // diagnosi sulla coda quando il soggetto era un altro.
+            reasons.push(
+              `queue SLO breached: ${slo.measured} ${slo.measuredAgeSeconds}s >= ${slo.thresholdSeconds}s`
+              + ` (oldest pending ${slo.oldestPendingAgeSeconds ?? 'none'}s, active ${report.counts?.active ?? 'unknown'})`,
+            );
           }
           if (discovery.truncated || discovery.state !== 'complete') {
-            reasons.push(`discovery ${discovery.state}: residual runs ${discovery.residualRuns ?? 'unknown'}, next page ${discovery.nextPage ?? 'unknown'}`);
+            // `residual runs` e `next page` da soli descrivono solo il
+            // troncamento per paginazione, e mandano la diagnosi fuori strada
+            // quando la causa e' un'altra: il 2026-09-18 la discovery risultava
+            // troncata con 174/174 run lette e nessuna pagina residua, perche'
+            // i candidati erano 29 contro un tetto di 20 e il budget GET era
+            // consumato (27/29) dai candidati a blob non allineato.
+            const budget = report.queryBudget || {};
+            reasons.push(
+              `discovery ${discovery.state}: scanned ${discovery.scannedRuns ?? 'unknown'}/${discovery.declaredTotal ?? 'unknown'}`
+              + `, next page ${discovery.nextPage ?? 'none'}, residual runs ${discovery.residualRuns ?? 'unknown'}`
+              + `, deep candidates ${report.counts?.deepCandidates ?? 'unknown'} inspected ${report.counts?.deepInspected ?? 'unknown'}`
+              + `, gets ${budget.usedGets ?? 'unknown'}/${budget.maxGets ?? 'unknown'} exhausted ${budget.exhausted ?? 'unknown'}`,
+            );
           }
           if (report.failClosed) reasons.push('observation fail-closed: evidence incomplete');
           const summary = [
