@@ -6584,6 +6584,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.bns-tassi-esame-settembre.title': 'BNS: tassi fermi allo 0,0% e previsioni future',
     'blog.article.bns-tassi-esame-settembre.excerpt': 'La Banca nazionale svizzera si prepara all\'esame economico con tassi fermi allo 0,0% e un\'inflazione in Svizzera salita allo 0,8% in agosto.',
     'blog.article.bns-tassi-esame-settembre.imageAlt': 'Sede della Banca nazionale svizzera a Berna per l\'esame dei tassi',
+    'blog.article.consiglio-federale-boccia-frontiere.title': 'Consiglio federale boccia l\'iniziativa UDC sulle frontiere',
+    'blog.article.consiglio-federale-boccia-frontiere.excerpt': 'Il Consiglio federale raccomanda di respingere l\'iniziativa UDC sulle frontiere. Rilevati costi elevati, danni all\'economia e rischi per Schengen.',
+    'blog.article.consiglio-federale-boccia-frontiere.imageAlt': 'Post di confine in Svizzera con transito veicolare',
 };
 
 export default blogMetaChIt;

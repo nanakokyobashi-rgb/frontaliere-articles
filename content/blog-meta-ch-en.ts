@@ -6584,6 +6584,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.bns-tassi-esame-settembre.title': 'SNB: fixed rates at 0.0% and future forecasts',
     'blog.article.bns-tassi-esame-settembre.excerpt': 'The Swiss National Bank is preparing for the economic exam with rates at 0.0% and inflation in Switzerland rising to 0.8% in August.',
     'blog.article.bns-tassi-esame-settembre.imageAlt': 'Swiss National Bank building in Bern for the monetary policy exam',
+    'blog.article.consiglio-federale-boccia-frontiere.title': 'Federal Council rejects the UDC initiative on borders',
+    'blog.article.consiglio-federale-boccia-frontiere.excerpt': 'The Federal Council recommends rejecting the UDC initiative on borders. High costs, damage to the economy and risks for Schengen have been detected.',
+    'blog.article.consiglio-federale-boccia-frontiere.imageAlt': 'Border crossing point in Switzerland with vehicular traffic',
 };
 
 export default blogMetaChEn;

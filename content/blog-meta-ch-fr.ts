@@ -6584,6 +6584,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.bns-tassi-esame-settembre.title': 'BNS : taux fermes à 0,0 % et prévisions futures',
     'blog.article.bns-tassi-esame-settembre.excerpt': 'La Banque nationale suisse se prépare à l\'examen économique avec des taux fermes à 0,0% et une inflation en Suisse en hausse à 0,8% en août.',
     'blog.article.bns-tassi-esame-settembre.imageAlt': 'Batiment de la Banque nationale suisse a Berne',
+    'blog.article.consiglio-federale-boccia-frontiere.title': 'Conseil fédéral rejette l\'initiative UDC sur les frontières',
+    'blog.article.consiglio-federale-boccia-frontiere.excerpt': 'Le Conseil fédéral recommande de rejeter l\'initiative UDC sur les frontières. Coûts élevés, dommages économiques et risques pour Schengen détectés.',
+    'blog.article.consiglio-federale-boccia-frontiere.imageAlt': 'Point de passage frontalier en Suisse avec circulation',
 };
 
 export default blogMetaChFr;

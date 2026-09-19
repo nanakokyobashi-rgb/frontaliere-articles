@@ -6584,6 +6584,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.bns-tassi-esame-settembre.title': 'SNB: feste Zinssätze von 0,0% und zukünftige Prognosen',
     'blog.article.bns-tassi-esame-settembre.excerpt': 'Die Schweizerische Nationalbank bereitet sich mit festen Zinsen von 0,0% und einer Inflation in der Schweiz von 0,8% im August auf die wirtschaftliche Prüfung vor.',
     'blog.article.bns-tassi-esame-settembre.imageAlt': 'Gebäude der Schweizerischen Nationalbank in Bern',
+    'blog.article.consiglio-federale-boccia-frontiere.title': 'Bundesrat lehnt SVP-Grenzinitiative ab',
+    'blog.article.consiglio-federale-boccia-frontiere.excerpt': 'Der Bundesrat empfiehlt, die SVP-Grenzinitiative abzulehnen. Hohe Kosten, wirtschaftliche Schäden und Schengen-Risiken festgestellt.',
+    'blog.article.consiglio-federale-boccia-frontiere.imageAlt': 'Grenzübergang in der Schweiz mit Fahrzeugverkehr',
 };
 
 export default blogMetaChDe;

@@ -85352,6 +85352,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-consiglio-federale-boccia-frontiere': {
+    title: 'Consiglio federale boccia l\'iniziativa UDC sulle frontiere',
+    description: 'Il Consiglio federale boccia l\'iniziativa UDC sulle frontiere. Rilevati costi elevati, impatti sull\'economia e gravi rischi per gli accordi di Schengen.',
+    keywords: 'frontalieri, ticino, svizzera, italia, consiglio, federale, boccia, iniziativa',
+    ogTitle: 'Consiglio federale boccia l\'iniziativa UDC sulle frontiere',
+    ogDescription: 'Il Consiglio federale raccomanda di bocciare l\'iniziativa popolare dell\'UDC per la protezione delle frontiere a causa di costi elevati e rischi per Schengen.',
+    canonicalPath: '/articoli-svizzera/consiglio-federale-boccia-frontiere/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Consiglio federale boccia l'iniziativa UDC sulle frontiere",
+      "description": "Il Consiglio federale boccia l'iniziativa UDC sulle frontiere. Rilevati costi elevati, impatti sull'economia e gravi rischi per gli accordi di Schengen.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/consiglio-federale-boccia-frontiere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Post di confine in Svizzera con transito veicolare"
+      },
+      "datePublished": "2026-09-19T02:02:09+00:00",
+      "dateModified": "2026-09-19T02:02:09+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/consiglio-federale-boccia-frontiere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

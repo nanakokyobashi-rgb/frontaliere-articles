@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1944757/dopo-lo-scandalo-sessuale-torna-il-festival-del-tantra-il-consenso-come-regola": {
-    "articleId": "antara-tantra-festival-lenk",
-    "ts": "2026-08-20T01:23:25.562Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/politica/1944772/neutralita-alla-ticinese": {
     "articleId": "sondaggio-neutralita-ticinese-voto",
     "ts": "2026-08-20T04:46:46.826Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1951146/bns-previsioni-giovedi-tassi-franco": {
     "articleId": "bns-tassi-esame-settembre",
     "ts": "2026-09-19T01:53:05.909Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/cf%3a-bocciare-iniziativa-per-la-protezione-delle-frontiere/92082006": {
+    "articleId": "consiglio-federale-boccia-frontiere",
+    "ts": "2026-09-19T02:02:10.152Z",
     "keyForm": 2
   }
 }
