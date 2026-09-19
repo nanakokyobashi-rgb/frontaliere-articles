@@ -166,7 +166,7 @@
       "reason": "Policy pura per il corpus, consumata esclusivamente da `auto-merge-enroll-sweep.yml` e `auto-merge-engine-lockstep.yml`: valida l'enrollment del mirror e il lockstep dei check prima del passaggio al gate nativo. Il sito ha un ciclo nativo diverso (`enable-native-automerge.yml`/`retry-native-automerge.yml`) e non possiede questo helper né i workflow di sweep/lockstep, quindi non esiste un gemello da portare.",
       "baseline": {
         "site": null,
-        "corpus": "0198a26edf2a07c1",
+        "corpus": "c207280e5557efba",
         "alignedAt": "2026-09-19"
       }
     },

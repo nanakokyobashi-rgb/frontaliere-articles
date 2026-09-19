@@ -75,8 +75,11 @@ test('non ricade MAI su GITHUB_TOKEN per il merge', () => {
 });
 
 test('è ristretto al branch che il mirror possiede', () => {
-  assert.match(wf, /gh pr list --repo "\$GH_REPO" --head engine-lockstep-auto --base main/,
+  assert.match(wf, /gh pr list --repo "\$GH_REPO" --head "\$LOCKSTEP_HEAD_REF" --base main/,
     'senza --head l\'auto-merge prenderebbe qualunque PR aperta del repo');
+  assert.match(wf, /LOCKSTEP_HEAD_REF=\$\(node scripts\/ci\/native-automerge-sweep-policy\.mjs --lockstep-head-ref\)/,
+    'il nome del branch viene dalla stessa policy che autorizza il candidato, non da un letterale duplicato');
+  assert.doesNotMatch(wf, /--head engine-lockstep-auto/);
   assert.match(wf, /--json number,state,baseRefName,headRefName,headRepository/);
   assert.match(wf, /--lockstep-pr "\$PR_CANDIDATES_FILE" "\$GH_REPO"/);
 });
@@ -104,7 +107,8 @@ test('il lockstep legge tutti i check e resta fail-closed', () => {
   assert.match(wf, /gh pr checks "\$PR" --repo "\$GH_REPO" --required --json name/);
   assert.doesNotMatch(wf, /gh pr checks "\$PR" --json name,state,bucket/,
     'gli stati non devono provenire da uno snapshot PR non legato alla HEAD');
-  assert.match(wf, /gh api --paginate --slurp[\s\S]+commits\/\$\{HEAD_SHA\}\/check-runs\?per_page=100/);
+  assert.match(wf, /gh api --paginate --slurp[\s\S]+commits\/\$\{HEAD_SHA\}\/check-runs\?filter=all&per_page=100/,
+    'senza filter=all l\'API rende solo l\'ultima generazione e nasconde quelle da confrontare');
   assert.match(wf, /native-automerge-sweep-policy\.mjs/);
   assert.match(wf, /--required-check-runs "\$CHECK_RUNS_FILE" "\$REQUIRED_NAMES_FILE" "\$HEAD_SHA" "\$GH_REPO"/);
   assert.match(wf, /--all-check-runs "\$CHECK_RUNS_FILE" "\$REQUIRED_NAMES_FILE" "\$HEAD_SHA" "\$GH_REPO"/);
@@ -496,4 +500,37 @@ test('payload vuoto, non-array o senza required check non autorizza il merge', (
     assert.equal(requiredCheckDecision(payload).allow, false, name);
     assert.equal(allChecksDecision(payload).allow, false, 'all checks: ' + name);
   }
+});
+
+test('un payload check-run troncato rispetto a total_count non autorizza', () => {
+  const complete = [{
+    total_count: 2,
+    check_runs: [
+      checkRun(901, VITEST_CHECK_NAME, 'SUCCESS', HEAD_A, '2026-09-19T01:00:00Z'),
+      checkRun(902, 'generator-ci', 'SUCCESS', HEAD_A, '2026-09-19T01:01:00Z'),
+    ],
+  }];
+  assert.equal(exactCheckRunSnapshot(complete, HEAD_A).allow, true);
+
+  // Una generazione nuova FAILURE persa dalla risposta: resta solo il vecchio
+  // SUCCESS, ma total_count dichiara 3 run.
+  const truncated = [{ ...complete[0], total_count: 3 }];
+  const decision = exactCheckRunSnapshot(truncated, HEAD_A);
+  assert.equal(decision.allow, false);
+  assert.match(decision.reason, /incompleto: 2 ricevuti su 3/);
+
+  const inconsistent = [
+    { total_count: 2, check_runs: [complete[0].check_runs[0]] },
+    { total_count: 5, check_runs: [complete[0].check_runs[1]] },
+  ];
+  assert.equal(exactCheckRunSnapshot(inconsistent, HEAD_A).allow, false);
+  assert.equal(exactCheckRunSnapshot([{ total_count: 'x', check_runs: [] }], HEAD_A).allow, false);
+});
+
+test('la policy espone il nome del branch lockstep per il workflow', async () => {
+  const { execFileSync } = await import('node:child_process');
+  const out = execFileSync(process.execPath, [
+    resolve(here, '../../scripts/ci/native-automerge-sweep-policy.mjs'), '--lockstep-head-ref',
+  ], { encoding: 'utf8' });
+  assert.equal(out.trim(), 'engine-lockstep-auto');
 });

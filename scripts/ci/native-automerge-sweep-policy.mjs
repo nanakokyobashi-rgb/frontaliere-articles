@@ -340,6 +340,25 @@ export function exactCheckRunSnapshot(pages, headSha, repository = null) {
     return deny('payload check-run paginato non è un array non vuoto');
   }
 
+  // `total_count` is the endpoint's own statement of how many check-runs the
+  // commit has. With `filter=all` every generation is included, so a payload
+  // whose pages add up to fewer runs than declared is truncated: a missing
+  // newer generation could hide a failure behind an older SUCCESS.
+  const declaredTotals = pages.map((page) => (
+    page && typeof page === 'object' && !Array.isArray(page) ? page.total_count : undefined));
+  if (declaredTotals.some((total) => total !== undefined)) {
+    const [firstTotal] = declaredTotals;
+    if (!Number.isSafeInteger(firstTotal) || firstTotal < 0
+        || declaredTotals.some((total) => total !== firstTotal)) {
+      return deny('total_count dei check-run assente o incoerente tra le pagine');
+    }
+    const received = pages.reduce((sum, page) => (
+      sum + (Array.isArray(page?.check_runs) ? page.check_runs.length : 0)), 0);
+    if (received !== firstTotal) {
+      return deny(`payload check-run incompleto: ${received} ricevuti su ${firstTotal} dichiarati`);
+    }
+  }
+
   const latest = new Map();
   const seenIds = new Set();
   for (const [pageIndex, page] of pages.entries()) {
@@ -466,6 +485,12 @@ function readJson(file) {
 
 function main() {
   const [mode, file, requiredFile, headSha, contextArg] = process.argv.slice(2);
+  if (mode === '--lockstep-head-ref') {
+    // Single source for the mirror branch name: the workflow asks here
+    // instead of repeating the literal the policy authorizes.
+    console.log(LOCKSTEP_HEAD_REF);
+    return;
+  }
   const payload = readJson(file);
   if (mode === '--enroll') {
     const numbers = enrollablePullRequestNumbers(payload);

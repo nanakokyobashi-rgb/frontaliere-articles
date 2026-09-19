@@ -109,8 +109,13 @@ jobs:
           fi
           export GH_TOKEN="$GITHUB_PAT_NANAKO"
 
+          if ! LOCKSTEP_HEAD_REF=$(node scripts/ci/native-automerge-sweep-policy.mjs --lockstep-head-ref) \
+            || [ -z "$LOCKSTEP_HEAD_REF" ]; then
+            echo "::error::Nome del branch lockstep non leggibile dalla policy — non mergio."
+            exit 1
+          fi
           PR_CANDIDATES_FILE="$RUNNER_TEMP/lockstep-pr-candidates.json"
-          if ! gh pr list --repo "$GH_REPO" --head engine-lockstep-auto --base main \
+          if ! gh pr list --repo "$GH_REPO" --head "$LOCKSTEP_HEAD_REF" --base main \
             --state open --json number,state,baseRefName,headRefName,headRepository \
             > "$PR_CANDIDATES_FILE"; then
             echo "::error::Elenco PR lockstep non leggibile — non mergio."
@@ -154,7 +159,7 @@ jobs:
           CHECK_RUNS_FILE="$RUNNER_TEMP/lockstep-check-runs.json"
           CHECK_RUNS_EXIT=0
           if gh api --paginate --slurp \
-            "repos/${GH_REPO}/commits/${HEAD_SHA}/check-runs?per_page=100" > "$CHECK_RUNS_FILE"; then
+            "repos/${GH_REPO}/commits/${HEAD_SHA}/check-runs?filter=all&per_page=100" > "$CHECK_RUNS_FILE"; then
             CHECK_RUNS_EXIT=0
           else
             CHECK_RUNS_EXIT=$?
