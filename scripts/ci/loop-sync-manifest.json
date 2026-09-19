@@ -171,6 +171,16 @@
       }
     },
     {
+      "path": "scripts/ci/body-rereview-admission.mjs",
+      "mode": "corpus-only",
+      "reason": "Predicato che ammette UNA review `minimal` sul solo body quando l'ultimo verdetto sulla HEAD non era approvante e il body e' stato corretto dopo di esso. Il sito ha la stessa DECISIONE (valerielinc-ops/frontaliere-si-o-no#9275, `shouldAdmitBodyReReview`) ma dentro `scripts/ci/lib/pr-review-admission.mjs`, un modulo che questo repo non ha: qui il re-review guard e' bash+jq inline dentro `tests.yml`. Soprattutto, il predicato di qui e' ancorato a `REVIEW_INPUT_REVISION` — l'hash del body che questo repo usa come revisione dell'input della review e che il sito non possiede — quindi un terzo criterio (\"quel body e' gia' stato giudicato\") non ha gemello la'. Non e' `corpus-only-pending`: il caso del sito e' gia' coperto dal suo modulo, non manca niente li'.",
+      "baseline": {
+        "site": null,
+        "corpus": "0a1cba79bf6175d8",
+        "alignedAt": "2026-09-19"
+      }
+    },
+    {
       "path": "scripts/ci/review-scope.mjs",
       "mode": "corpus-only",
       "reason": "Classificatore del verdetto `🔴 Important` rispetto al diff corrente della PR. E' usato dal review-gate e dal fixer del corpus per declassare in modo conservativo i finding fuori diff e coniare una sola issue follow-up; il sito ha un gate e un ciclo di review diversi e non possiede questo consumer del corpus, quindi non esiste un gemello da portare.",
