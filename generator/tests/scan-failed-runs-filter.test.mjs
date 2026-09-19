@@ -855,6 +855,7 @@ test('ogni nome della lista esiste come `name:` di un workflow reale', () => {
 test('il gate di ricorrenza resta attivo per il rumore transiente della generazione', () => {
   assert.equal(isRecurrenceGatedWorkflow('Generate Blog Article'), true);
   assert.equal(isRecurrenceGatedWorkflow('fast-publish-article'), true);
+  assert.equal(isRecurrenceGatedWorkflow('Crawler Group 1 (sparse cross-repo execution)'), true);
   assert.equal(isRecurrenceGatedWorkflow('Crawler Group 23 (sparse cross-repo execution)'), true);
   assert.equal(gateForWorkflow('Generate Blog Article', { gate: 3 }), 3);
   assert.equal(gateForWorkflow('Crawler Group 23 (sparse cross-repo execution)', { gate: 3 }), 3);
