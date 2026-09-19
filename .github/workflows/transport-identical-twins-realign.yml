@@ -77,7 +77,7 @@ jobs:
               console.log("Path non-identical esclusi dal realign post-merge: " + excluded.join(", "));
             }
             const found = new Map();
-            const re = /^- `([^`\n]+)` .*?\(site sha256 `([0-9a-f]{16})`\)\s*$/gm;
+            const re = /^- `([^`\n]+)` .*?\((?:site )?sha256 `([0-9a-f]{16})`\)\s*$/gm;
             for (const match of body.matchAll(re)) {
               if (!changed.has(match[1])) throw new Error("il body cita un path non presente nei file della PR: " + match[1]);
               if (!identical.has(match[1])) continue;
