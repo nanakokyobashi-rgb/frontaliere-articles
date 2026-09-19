@@ -420,8 +420,8 @@
       "mode": "adapted",
       "reason": "La discovery paginata e la decisione tri-state di conflitto sono comuni e fail-closed, ma i call-site restano adattati ai due contratti esterni: il sito invoca `tests.yml` con `workflow_dispatch -f pr_number=...` per risolvere la PR e avviare test+review sulla head, mentre il corpus conserva il dispatch `--ref` test-only del ramo needs-human/carry-forward. Il corpus inoltre fissa la revisione body con `currentReviewInputContext`/`reviewInputContextStillCurrent` e `review-test-policy.mjs`, e il suo `tests.yml` mantiene input `pr_number`/`head_sha`, guard body+review ed eventi lifecycle; il sito usa il proprio body-edit retry e i check names locali in constants. Non copiare il file byte-per-byte: ogni lato conserva il proprio percorso PR/body/review e il nome del check richiesto.",
       "baseline": {
-        "site": "adeebf70483aae35",
-        "corpus": "8321863157d60bdd",
+        "site": "e3cb4fb86fe8ff01",
+        "corpus": "5a87bd0e01473a0d",
         "alignedAt": "2026-09-19"
       }
     },
@@ -535,6 +535,16 @@
       "baseline": {
         "site": "5612aa5e2536996b",
         "corpus": "5612aa5e2536996b",
+        "alignedAt": "2026-09-19"
+      }
+    },
+    {
+      "path": "scripts/lib/pr-body-contract-eval.mjs",
+      "mode": "corpus-only",
+      "reason": "Verdetto bloccante del contratto del body (sezioni, `Closes`, stati di `Non implementato`) senza rete ne' commenti: sorgente unica per `scripts/ci/pr-body-contract.mjs` e per `retry-code-check-after-body-edit.yml`, che dopo un edit su una run verde rilancia la run solo se il body nuovo viola il contratto. Corpus-only come `pr-body-contract.mjs` e `pr-body-nextstep-check.mjs`, di cui compone i moduli.",
+      "baseline": {
+        "site": null,
+        "corpus": "b14cc7b051377a47",
         "alignedAt": "2026-09-19"
       }
     },
@@ -1352,6 +1362,17 @@
         "site": "d8d7c06048be343b",
         "corpus": "0e7e653ee69818c7",
         "alignedAt": "2026-08-15"
+      }
+    },
+    {
+      "path": "generator/tests/pr-autorebase-conflict-handoff.test.mjs",
+      "sitePath": "tests/pr-autorebase-conflict-handoff.test.ts",
+      "mode": "adapted",
+      "reason": "Gemello node:test del test Vitest del sito sull'hand-off a issue-fix di un conflitto dopo LGTM: stessi casi (decisione pura, marker per HEAD, contenuto della issue senza keyword di chiusura, pin dei tre rami di abort). Cambia solo il runner e l'esempio (#1597 invece di #9260).",
+      "baseline": {
+        "site": "bf07932f2eb0a3e1",
+        "corpus": "3222f4bf740aa007",
+        "alignedAt": "2026-09-19"
       }
     },
     {
@@ -3980,11 +4001,12 @@
     },
     {
       "path": ".github/workflows/retry-code-check-after-body-edit.yml",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "Stesso recupero del sito dopo un body corretto: riesegue l'ultima run `tests` della HEAD quando e' fallita sul contratto del body o sul SOLO gate della review, ed e' l'unica via di rientro da quando `tests.yml` non ha piu' `edited` fra i trigger. Adattato su cinque punti, tutti emersi dalla review della PR #1613 e tutti conseguenza dell'aver tolto `edited`: (1) niente `createWorkflowDispatch` quando la HEAD non ha run, perche' il `tests.yml` di questo repo fa checkout del ref dispatchato senza `ref: inputs.head_sha` e testerebbe il codice di base mettendo il check sulla SHA di base; (2) la run bersaglio e' scelta anche per branch della PR ed evento `pull_request`: mai una run `push` dello stesso commit, ne' un dispatch test-only di `pr-autorebase.mjs` (senza `pr_number`, quindi senza contratto del body e senza review); (3) una run ancora in volo e partita PRIMA dell'edit viene cancellata e rieseguita (poteva aver letto il body vecchio), invece di essere classificata prima che i suoi step falliti esistano; lo stato si rilegge prima di cancellare e un 409 (run appena conclusa) porta alla classificazione normale; una run partita DOPO l'edit, conclusa o no, non si tocca; (4) anche un'ultima run `cancelled`/`timed_out` viene rieseguita, perche' dopo l'edit nessun altro evento riporterebbe la HEAD a un verdetto; (5) una run VERDE viene rieseguita se il body nuovo viola il contratto, valutato con `scripts/lib/pr-body-contract-eval.mjs` dal checkout del branch base (zero-Claude), cosi' il check richiesto torna rosso prima che l'auto-merge nativo fonda un body rotto; la review non si rifa' su un body che passa il contratto, per la politica ratificata sul sito con valerielinc-ops/frontaliere-si-o-no#9118. Il sito ha gli stessi buchi (2)-(4), mascherati finche' il suo `tests.yml` aveva `edited`: la risalita va fatta la'.",
       "baseline": {
-        "site": "c4c5c45669fbe69d",
-        "corpus": "c4c5c45669fbe69d",
-        "alignedAt": "2026-09-10"
+        "site": "746f8ace38ffe2f2",
+        "corpus": "b18f1396f2472489",
+        "alignedAt": "2026-09-19"
       }
     },
     {

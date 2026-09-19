@@ -68,12 +68,18 @@ run-name: "Code checks and review · ${{ github.event.pull_request.number && for
 # (`.github/workflows/content-gates-main.yml`): li' gira il sottoinsieme dei
 # gate che leggono `content/**`, con gli offender in una issue.
 on:
-  # Body edits must re-enter the code check: a corrected description is a new
-  # review input even when the code HEAD is unchanged. Title/other edit
-  # metadata may also produce a cheap rerun, but the guard below only re-arms
-  # review for an actual body edit.
+  # Niente `edited`: un cambio di titolo o body lascia la HEAD identica, e con
+  # `cancel-in-progress` un edit arrivato durante la run di `synchronize` la
+  # uccideva per rimisurare lo stesso codice (13 run su 52 il 2026-09-19).
+  # Il body corretto rientra comunque: `retry-code-check-after-body-edit.yml`
+  # (pull_request_target: [edited]) riesegue la run della HEAD quando e' fallita
+  # sul contratto del body o sul solo gate della review, quando e' finita
+  # cancelled/timed_out, o quando era ancora in volo dal body precedente
+  # (la cancella e la riesegue); la rerun rifa' la review perche' il guard qui
+  # sotto conta soltanto le review legate alla revisione CORRENTE del body. Stessa scelta del sito
+  # (valerielinc-ops/frontaliere-si-o-no#9118).
   pull_request:
-    types: [opened, synchronize, reopened, ready_for_review, edited]
+    types: [opened, synchronize, reopened, ready_for_review]
   push:
     branches: [main]
   workflow_dispatch:
@@ -144,6 +150,23 @@ jobs:
           # rifiutare un registro troncato; il checkout deve quindi esporre la
           # storia completa anche quando la PR non modifica `content/`.
           fetch-depth: 0
+          # Storia completa di commit e tree, ma blob scaricati solo per la
+          # HEAD: il clone pieno portava ~1 GB di pack, di cui i gate leggono
+          # una manciata di blob storici — i registri della revisione base
+          # (`scripts/lib/corpus-floors.mjs`), le superfici di
+          # `retired-articles-fully-removed`, le baseline cambiate del manifest
+          # (`loop-baseline-pr-gate.mjs`), il diff della review. Quei blob
+          # arrivano su richiesta con le credenziali che il checkout lascia
+          # configurate. Ogni consumer distingue il path ASSENTE (dal tree, che
+          # il partial clone ha sempre) dal blob ILLEGGIBILE (fetch fallito):
+          # il secondo e' un errore o una storia non verificabile, mai
+          # un'assenza. Step `Run actions/checkout@v5`: 63-64 s col clone
+          # pieno, 52 s cosi' (run 35460972059 e 35460929675 contro 35461528619,
+          # 2026-09-19).
+          # Niente sparse: i gate della PR leggono `content/`, `public/` e
+          # `data/jobs/` (misurato: 41 test rossi senza quei path, 10 senza
+          # solo `data/`).
+          filter: blob:none
 
       - uses: actions/setup-node@v5
         with:
@@ -443,7 +466,6 @@ jobs:
           HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
           REPO: ${{ github.repository }}
           REVIEW_REVISION: ${{ steps.review_input.outputs.review_revision }}
-          BODY_EDITED: ${{ github.event_name == 'pull_request' && github.event.action == 'edited' && github.event.changes.body != null }}
         run: |
           set -euo pipefail
           if ! reviews=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate --slurp 2>/dev/null); then
@@ -523,13 +545,6 @@ jobs:
           if [ "${same_head:-0}" -gt 0 ]; then
             echo "skip=true" >> "$GITHUB_OUTPUT"
             echo "Esiste gia' una review approvante del reviewer sulla HEAD $HEAD_SHA per la revisione body corrente → nessuna seconda review, anche dopo un body edit."
-            exit 0
-          fi
-
-          if [ "${BODY_EDITED:-false}" = "true" ]; then
-            set_claim_fingerprint
-            echo "skip=false" >> "$GITHUB_OUTPUT"
-            echo "Body della PR cambiato e nessuna review terminale sulla HEAD → review completa."
             exit 0
           fi
 

@@ -240,6 +240,57 @@ test('un registro troncato viene confrontato con il high-water della revisione p
   }
 });
 
+test('un blob storico illeggibile (partial clone, fetch fallito) fallisce chiuso, non azzera l\'high-water', () => {
+  // `tests.yml` fa un checkout `filter: blob:none`: il registro della base
+  // arriva su richiesta. Se quel fetch fallisce, `git show` esce != 0 come per
+  // un path assente — ma il tree dice che il file c'e', quindi non e' "nessuna
+  // storia" e il troncamento non deve poter passare in silenzio.
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-body-floor-missing-blob-'));
+  const git = (...args) => execFileSync('git', ['-C', dir, ...args], {
+    encoding: 'utf8',
+    stdio: ['ignore', 'pipe', 'ignore'],
+  }).trim();
+  const writeCorpus = (frontIds) => {
+    fs.writeFileSync(
+      path.join(dir, 'content', 'blog-articles-data.ts'),
+      frontIds.map((id) => `id: '${id}'`).join('\n') + '\n',
+    );
+    fs.writeFileSync(path.join(dir, 'content', 'swiss-articles-data.ts'), "id: 'swiss-0'\n");
+    for (const locale of ['it', 'en', 'de', 'fr']) {
+      fs.writeFileSync(
+        path.join(dir, 'content', `blog-meta-${locale}.ts`),
+        frontIds.map((id) => `'blog.article.${id}.title': 'A',`).join('\n') + '\n',
+      );
+      fs.writeFileSync(path.join(dir, 'content', `blog-meta-ch-${locale}.ts`), "'blog.article.swiss-0.title': 'S',\n");
+    }
+  };
+  try {
+    fs.mkdirSync(path.join(dir, 'content'), { recursive: true });
+    git('init', '-q');
+    git('config', 'user.email', 'test@example.invalid');
+    git('config', 'user.name', 'test');
+    writeCorpus(Array.from({ length: 10 }, (_, i) => `front-${i}`));
+    git('add', 'content');
+    git('commit', '-qm', 'complete corpus');
+    const previous = git('rev-parse', 'HEAD');
+    const oldBlob = git('rev-parse', `${previous}:content/blog-articles-data.ts`);
+    writeCorpus(Array.from({ length: 5 }, (_, i) => `front-${i}`));
+    git('add', 'content');
+    git('commit', '-qm', 'truncated corpus');
+    // Il blob della base sparisce, il tree resta: e' lo stato di un partial
+    // clone il cui fetch su richiesta non e' andato a buon fine.
+    fs.rmSync(path.join(dir, '.git', 'objects', oldBlob.slice(0, 2), oldBlob.slice(2)));
+
+    assert.throws(
+      () => deriveFloorModel(dir, { previousRevision: previous }),
+      (error) => error.code === 'MISSING_CORPUS_HISTORY'
+        && /content\/blog-articles-data\.ts/.test(error.message),
+    );
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
 test('un push multi-commit usa la base dell\'evento, non il commit intermedio', () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-body-floor-multi-push-'));
   const git = (...args) => execFileSync('git', ['-C', dir, ...args], { encoding: 'utf8' }).trim();

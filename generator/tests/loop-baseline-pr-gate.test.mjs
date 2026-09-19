@@ -9,8 +9,12 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
-import { changedBaselines, gateVerdict } from '../../scripts/ci/loop-baseline-pr-gate.mjs';
+import fs, { readFileSync } from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
+import { changedBaselines, gateVerdict, localHistoryMatch } from '../../scripts/ci/loop-baseline-pr-gate.mjs';
 
 const GATE_SOURCE = readFileSync(new URL('../../scripts/ci/loop-baseline-pr-gate.mjs', import.meta.url), 'utf8');
 
@@ -120,4 +124,38 @@ test('il rimedio del gate per una ghost-baseline allinea il guard init e traccia
   assert.match(GATE_SOURCE, /ghost-baseline/);
   assert.match(GATE_SOURCE, /--force/);
   assert.match(GATE_SOURCE, /forcedAt/);
+});
+
+test('localHistoryMatch: un blob storico illeggibile (partial clone) rende la storia non verificabile, non una baseline fantasma', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'baseline-gate-partial-'));
+  const git = (...args) => execFileSync('git', ['-C', dir, ...args], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+  const hash = (text) => createHash('sha256').update(text).digest('hex').slice(0, 16);
+  try {
+    git('init', '-q');
+    git('config', 'user.email', 'test@example.invalid');
+    git('config', 'user.name', 'test');
+    fs.mkdirSync(path.join(dir, 'scripts'), { recursive: true });
+    const rel = 'scripts/x.mjs';
+    fs.writeFileSync(path.join(dir, rel), 'v1\n');
+    git('add', rel); git('commit', '-qm', 'v1');
+    const v1Blob = git('rev-parse', `HEAD:${rel}`);
+    fs.writeFileSync(path.join(dir, rel), 'v2\n');
+    git('add', rel); git('commit', '-qm', 'v2');
+
+    // Storia leggibile: la baseline v1 si trova.
+    assert.equal(localHistoryMatch(rel, hash('v1\n'), dir).match, true);
+    // Hash mai esistito, storia intera leggibile: esaurita e leggibile.
+    const ghost = localHistoryMatch(rel, hash('mai\n'), dir);
+    assert.deepEqual([ghost.match, ghost.exhausted, ghost.historyReadable], [false, true, true]);
+
+    // Il blob di v1 non arriva (fetch su richiesta fallito): il tree dice che
+    // il file c'era, quindi NON e' una prova di assenza.
+    fs.rmSync(path.join(dir, '.git', 'objects', v1Blob.slice(0, 2), v1Blob.slice(2)));
+    const partial = localHistoryMatch(rel, hash('v1\n'), dir);
+    assert.deepEqual([partial.match, partial.exhausted, partial.historyReadable], [false, false, false]);
+    // `exhausted: false` e' cio' che fa passare il chiamante all'API invece
+    // di consegnare a `ghostVerdict` una storia incompleta come esaurita.
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
 });
