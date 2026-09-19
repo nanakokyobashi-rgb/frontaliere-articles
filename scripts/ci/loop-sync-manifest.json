@@ -1032,7 +1032,7 @@
       "mode": "adapted",
       "reason": "Il corpus usa CI_CHECK_NAME e classi di recupero A/B/C/D con il workflow pr-autorebase indipendente; il sito riesegue il run di codice dalla label corrente dentro tests.yml. Si preservano i rimedi specifici del corpus, il rerun della classe B con marker del fixer e la cadenza :35.",
       "baseline": {
-        "site": "96436e0cf8507e11",
+        "site": "7fc0afed9ab0ac93",
         "corpus": "783d85464405d178",
         "alignedAt": "2026-09-19"
       }
@@ -1041,7 +1041,7 @@
       "path": "scripts/ci/orphan-pr-custodian.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "6f928fa12abb8f70",
+        "site": "456b61ce6cdeb330",
         "corpus": "456b61ce6cdeb330",
         "alignedAt": "2026-09-19"
       }
@@ -1052,7 +1052,7 @@
       "mode": "adapted",
       "reason": "Gemello node:test del test Vitest del sito sul custode delle PR orfane: stessi casi sulla decisione pura (rerun di una suite CANCELLED con LGTM, adozione di un 🔴 fuori scope, guardie) e sul cablaggio di stale-pr-rescuer.yml. Cambia solo il runner, e qui asserisce anche il dispatch del redflag-fixer (`REDFLAG_FIXER_DISPATCH_INPUT: pr`), che il sito non ha perche' il suo fixer non accetta workflow_dispatch.",
       "baseline": {
-        "site": "8c8ed1ad41640e6b",
+        "site": "8e06a9d692fc2579",
         "corpus": "50f7b61f4942188b",
         "alignedAt": "2026-09-19"
       }
