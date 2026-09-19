@@ -18,6 +18,7 @@ import { fileURLToPath } from 'node:url';
 import {
   MAX_BODY_REREVIEWS_PER_HEAD,
   admissionCli,
+  hasOpenCodeImportant,
   shouldAdmitBodyReReview,
 } from '../../scripts/ci/body-rereview-admission.mjs';
 
@@ -81,17 +82,66 @@ test('il cap per HEAD impedisce a un loop di body edit review illimitate', () =>
     at: `2026-09-19T10:0${i}:00Z`,
   }));
   assert.equal(shouldAdmitBodyReReview({
-    headSha: HEAD,
-    revision: REVISION,
-    reviews: [many],
-    bodyEditedAt: '2026-09-19T11:00:00Z',
+    headSha: HEAD, revision: REVISION, reviews: [many], bodyEditedAt: '2026-09-19T11:00:00Z',
   }), false);
+  // Il cap dichiarato e' 3: con 3 verdetti gia' sulla HEAD, il quarto NON si
+  // ammette. Con `>` ne passava uno in piu' di quanti il docblock prometteva.
   assert.equal(shouldAdmitBodyReReview({
     headSha: HEAD,
     revision: REVISION,
     reviews: [many.slice(0, MAX_BODY_REREVIEWS_PER_HEAD)],
     bodyEditedAt: '2026-09-19T11:00:00Z',
-  }), true, 'esattamente al cap si ammette ancora');
+  }), false, `con ${MAX_BODY_REREVIEWS_PER_HEAD} verdetti il cap e' raggiunto`);
+  assert.equal(shouldAdmitBodyReReview({
+    headSha: HEAD,
+    revision: REVISION,
+    reviews: [many.slice(0, MAX_BODY_REREVIEWS_PER_HEAD - 1)],
+    bodyEditedAt: '2026-09-19T11:00:00Z',
+  }), true, 'sotto il cap si ammette');
+});
+
+test('un 🔴 di CODICE aperto chiude la corsia body-only', () => {
+  // La garanzia non puo' essere una promessa fatta al modello nel prompt: una
+  // review `minimal` che dimentica di riportare un Important di codice chiude
+  // il gate, e il finding sparisce su un contributo che nessuno ha riparato.
+  // Se c'e' codice aperto, correggere il body non basta: review piena.
+  const withCode = [
+    `<!-- REVIEW_INPUT_REVISION: ${OLD_REVISION} -->`,
+    '`PR body:L5`: 🔴 Important: la voce non dichiara uno stato.',
+    '`engine/render.mjs:42`: 🔴 Important: il canonical e\' sbagliato.',
+  ].join('\n');
+  assert.equal(hasOpenCodeImportant(withCode), true);
+  assert.equal(shouldAdmitBodyReReview({
+    headSha: HEAD, revision: REVISION, reviews: [[review({ body: withCode })]],
+    bodyEditedAt: '2026-09-19T10:05:00Z',
+  }), false);
+
+  // Anche un Important SENZA alcun anchor e' lavoro aperto che il body non tocca.
+  const noAnchor = [
+    `<!-- REVIEW_INPUT_REVISION: ${OLD_REVISION} -->`,
+    '🔴 Important: il contratto del manifest non regge.',
+  ].join('\n');
+  assert.equal(hasOpenCodeImportant(noAnchor), true);
+  assert.equal(shouldAdmitBodyReReview({
+    headSha: HEAD, revision: REVISION, reviews: [[review({ body: noAnchor })]],
+    bodyEditedAt: '2026-09-19T10:05:00Z',
+  }), false);
+
+  // Solo body → la corsia si apre.
+  assert.equal(hasOpenCodeImportant(redflag()), false);
+});
+
+test('fra due verdetti con lo stesso timestamp vince quello con l\'id piu\' alto', () => {
+  const at = '2026-09-19T10:00:00Z';
+  const older = { ...review({ body: redflag(), at }), id: 10 };
+  const newer = { ...review({ body: lgtm(), at }), id: 11 };
+  // Il piu' recente e' un LGTM pulito: sticky, niente ammissione, comunque
+  // sia ordinato l'array in ingresso.
+  for (const order of [[older, newer], [newer, older]]) {
+    assert.equal(shouldAdmitBodyReReview({
+      headSha: HEAD, revision: REVISION, reviews: [order], bodyEditedAt: '2026-09-19T10:05:00Z',
+    }), false, `ordine ${order.map((r) => r.id).join(',')}`);
+  }
 });
 
 test('un body gia\' giudicato su questa HEAD non si rigiudica', () => {
@@ -172,6 +222,10 @@ test('tests.yml consuma davvero l\'ammissione e la porta al tier minimal', () =>
     'la decisione deve produrre il tier minimal, non una review piena');
   assert.ok(workflow.includes('## Code contribution unchanged'),
     'il bundle deve dire al reviewer che il codice non e\' cambiato');
+  assert.ok(workflow.includes('### Previous verdict on this HEAD (verbatim)'),
+    'il bundle deve portare il verdetto precedente, non solo l\'istruzione di riportarlo');
+  assert.match(workflow, /previous-review\.md/u,
+    'il prefetch deve recuperare il verdetto precedente');
   assert.match(workflow, /CODE_UNCHANGED_SINCE: \$\{\{ steps\.tier\.outputs\.code_unchanged_since \}\}/u,
     'il prefetch deve ricevere il riferimento della review precedente');
   // L'ordine e' parte del contratto: il LGTM pulito sulla revisione corrente

@@ -34,6 +34,13 @@
  *   edit non puo' comprare review illimitate.
  * - Se una review sulla HEAD porta gia' la revisione corrente, quel body e'
  *   gia' stato giudicato: non si ammette niente.
+ * - Se il verdetto precedente porta anche UN SOLO 🔴 Important di CODICE, la
+ *   corsia body-only non si apre affatto. Questo confine e' deterministico e
+ *   sostituisce una promessa: il prompt puo' chiedere al modello di riportare
+ *   i finding di codice, ma una review `minimal` che li dimentica chiude il
+ *   gate e il 🔴 sparisce — e un contributo di codice invariato resterebbe
+ *   approvato senza che nessuno lo abbia riparato. Se ci sono finding di
+ *   codice aperti, correggere il body non basta e la review piena e' giusta.
  *
  * Uso:
  *   gh api .../reviews --paginate --slurp \
@@ -43,8 +50,9 @@
  * Stampa su stdout `body_rereview=true|false` (forma GITHUB_OUTPUT).
  */
 import { REVIEWER_BOT_LOGIN_RE } from './lib/constants.mjs';
+import { importantFindings } from './review-scope.mjs';
 
-/** Oltre questo numero di verdetti sulla stessa HEAD non si ammette altro. */
+/** Raggiunto questo numero di verdetti sulla stessa HEAD non si ammette altro. */
 export const MAX_BODY_REREVIEWS_PER_HEAD = 3;
 
 const REVISION_LINE_RE = /^<!-- REVIEW_INPUT_REVISION: (body:[0-9a-f]{64}) -->$/i;
@@ -88,6 +96,35 @@ export function reviewIsApproving(body) {
   return !IMPORTANT_RE.test(text);
 }
 
+function reviewId(review) {
+  const id = Number(review?.id);
+  return Number.isFinite(id) ? id : 0;
+}
+
+// Anchor `PR body:L<n>`. Volutamente LOCALE e non importato da
+// `review-scope.mjs`: il gemello la' arriva in una PR concatenata, e legare
+// questo modulo a un export che su `main` non esiste ancora romperebbe il
+// guard su ogni PR nel frattempo. Due righe duplicate valgono meno di quel
+// rischio; quando il gemello scende, si unificano.
+const PR_BODY_ANCHOR_RE = /`?PR body[:#]L?[1-9]\d*/iu;
+
+/**
+ * Vero se il verdetto porta almeno un 🔴 Important che NON e' ancorato al solo
+ * body: un finding che cita un file, o che non porta nessun anchor `PR
+ * body:L<n>`, e' lavoro di codice aperto e la correzione del body non lo tocca.
+ */
+export function hasOpenCodeImportant(body) {
+  let findings;
+  try {
+    findings = importantFindings(String(body || ''));
+  } catch {
+    // Parser in errore: si assume il caso peggiore e la corsia resta chiusa.
+    return true;
+  }
+  return findings.some((finding) => finding.citations.length > 0
+    || !PR_BODY_ANCHOR_RE.test(String(finding.text || '')));
+}
+
 function submittedAt(review) {
   const raw = review?.submitted_at || review?.submittedAt || review?.created_at || '';
   const at = Date.parse(String(raw));
@@ -106,7 +143,7 @@ export function shouldAdmitBodyReReview({ headSha, revision, reviews, bodyEdited
     .filter((review) => isManagedBotReview(review) && isTerminal(review)
       && String(review.commit_id || '') === String(headSha));
   if (onHead.length === 0) return false;
-  if (onHead.length > MAX_BODY_REREVIEWS_PER_HEAD) return false;
+  if (onHead.length >= MAX_BODY_REREVIEWS_PER_HEAD) return false;
   const wanted = String(revision || '').toLowerCase();
   if (wanted) {
     // Il body corrente e' gia' stato giudicato su questa HEAD: non c'e'
@@ -114,10 +151,16 @@ export function shouldAdmitBodyReReview({ headSha, revision, reviews, bodyEdited
     const alreadyJudged = onHead.some((review) => reviewRevisions(review.body).includes(wanted));
     if (alreadyJudged) return false;
   }
-  const ordered = [...onHead].sort((a, b) => submittedAt(a) - submittedAt(b));
+  // Ordinamento per timestamp E per id: due review inviate nello stesso
+  // istante hanno lo stesso `submitted_at`, e senza il secondo criterio
+  // «l'ultima» sarebbe quella che l'ordinamento capita a mettere in fondo.
+  const ordered = [...onHead].sort((a, b) => (submittedAt(a) - submittedAt(b))
+    || (reviewId(a) - reviewId(b)));
   const latest = ordered[ordered.length - 1];
   // Un LGTM pulito resta sticky: un body edit dopo un si' non compra nulla.
   if (reviewIsApproving(latest?.body)) return false;
+  // Un 🔴 di CODICE aperto chiude la corsia: vedi il docblock.
+  if (hasOpenCodeImportant(latest?.body)) return false;
   const editedAt = Date.parse(String(bodyEditedAt || ''));
   if (!Number.isFinite(editedAt)) return false;
   return editedAt > submittedAt(latest);

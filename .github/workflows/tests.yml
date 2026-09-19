@@ -877,6 +877,16 @@ jobs:
             # patch must fail here, not force the model to rebuild it via API.
             node scripts/ci/prefetch-review-diff.mjs || exit 1
           fi
+          # Il verdetto precedente sulla stessa HEAD, per la corsia body-only.
+          # `|| :` ovunque: questo e' contesto, non un gate — se manca, il
+          # bundle lo DICHIARA invece di far credere che non ci fosse nulla.
+          : > "$CTX_DIR/previous-review.md"
+          if [ -n "${CODE_UNCHANGED_SINCE:-}" ]; then
+            # shellcheck disable=SC2016 # `$head` e' una variabile jq (--arg), non di shell.
+            gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate \
+              --jq '[.[] | select(.commit_id == $head) | select((.state // "") != "PENDING" and (.state // "") != "DISMISSED")] | last | .body // ""' \
+              --arg head "$CODE_UNCHANGED_SINCE" > "$CTX_DIR/previous-review.md" 2>/dev/null || : > "$CTX_DIR/previous-review.md"
+          fi
           # Claude non ha bisogno dell'elenco completo dei file di corpus: per la
           # review servono il body, il diff code e i file code toccati.
           node scripts/ci/review-test-policy.mjs filter < "$CTX_DIR/files.txt" | grep -vE "$NONCODE_RE" > "$CTX_DIR/code-files.txt" || : > "$CTX_DIR/code-files.txt"
@@ -906,7 +916,20 @@ jobs:
             echo
             if [ -n "${CODE_UNCHANGED_SINCE:-}" ]; then
               echo "## Code contribution unchanged"
-              echo "The PR code contribution is identical to the one reviewed at ${CODE_UNCHANGED_SINCE} (same HEAD, no PR code file changed since). This is a body-only re-review: judge only the PR body, carry every open code Important verbatim with its anchor, and never write \`Fix di\` for a code anchor."
+              echo "The PR code contribution is identical to the one reviewed at ${CODE_UNCHANGED_SINCE} (same HEAD, no PR code file changed since). This is a body-only re-review: judge only the PR body, carry every open Important verbatim with its anchor, and never write \`Fix di\` for a code anchor."
+              echo
+              # Il verdetto precedente per intero. L'ammissione a questa corsia
+              # ha gia' PROVATO che non porta Important di codice
+              # (`hasOpenCodeImportant`), quindi qui non si puo' perdere lavoro
+              # di codice: questo blocco esiste perche' il reviewer possa
+              # confermare o chiudere gli Important sul BODY con l'anchor
+              # esatto, invece di riscoprirli.
+              echo "### Previous verdict on this HEAD (verbatim)"
+              if [ -s "$CTX_DIR/previous-review.md" ]; then
+                cat "$CTX_DIR/previous-review.md"
+              else
+                echo "Not retrievable: treat every Important you can see in the PR conversation as still open."
+              fi
               echo
             fi
             echo "## Changed code-file list"
