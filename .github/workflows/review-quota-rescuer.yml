@@ -32,12 +32,28 @@ permissions:
   pull-requests: write
   issues: write
 
-concurrency:
-  group: review-quota-rescuer
-  cancel-in-progress: false
-
 jobs:
   rescue:
+    # Due sorgenti `workflow_run` che non possono aver lasciato nulla da
+    # riaprire, e che il `workflows:` sopra non sa escludere (non filtra per
+    # evento, e un filtro `branches` taglierebbe i fixer, che girano sempre sul
+    # branch di default):
+    #  - `tests` su `push`: gira solo su `main`, senza PR, e non entra mai nella
+    #    famiglia review, quindi non prende ne' rilascia il lease condiviso e
+    #    non scrive marker di deferral. E' ~29% delle run `tests` (58 su 200,
+    #    2026-09-18/19).
+    #  - una run sorgente `skipped`: nessun job e' partito, quindi nessun lease.
+    # Il cron e il dispatch restano la rete che scandisce TUTTE le PR aperte.
+    if: >-
+      github.event_name != 'workflow_run' ||
+      (github.event.workflow_run.conclusion != 'skipped' &&
+       !(github.event.workflow_run.name == 'tests' && github.event.workflow_run.event == 'push'))
+    # A livello di JOB e non di workflow: un job saltato dall'`if` sopra non
+    # entra nel gruppo, quindi non puo' sfrattare la run pending di un trigger
+    # utile (con `cancel-in-progress: false` GitHub ne tiene una sola).
+    concurrency:
+      group: review-quota-rescuer
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
