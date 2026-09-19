@@ -3505,6 +3505,56 @@
       }
     },
     {
+      "path": ".github/workflows/observers/scripts/lib/canonical-json-digest.mjs",
+      "sitePath": ".github/corpus-workflows/observers/scripts/lib/canonical-json-digest.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "a98a130d20cea211",
+        "corpus": "a98a130d20cea211",
+        "alignedAt": "2026-09-19"
+      }
+    },
+    {
+      "path": ".github/workflows/observers/scripts/lib/crawler-generation-observer-report.mjs",
+      "sitePath": ".github/corpus-workflows/observers/scripts/lib/crawler-generation-observer-report.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "0a32d9f5ee5bc961",
+        "corpus": "0a32d9f5ee5bc961",
+        "alignedAt": "2026-09-19"
+      }
+    },
+    {
+      "path": ".github/workflows/observers/scripts/lib/crawler-generation-token.mjs",
+      "sitePath": ".github/corpus-workflows/observers/scripts/lib/crawler-generation-token.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "4bc0d4d514be3f67",
+        "corpus": "4bc0d4d514be3f67",
+        "alignedAt": "2026-09-19"
+      }
+    },
+    {
+      "path": ".github/workflows/observers/scripts/lib/github-actions-read-client.mjs",
+      "sitePath": ".github/corpus-workflows/observers/scripts/lib/github-actions-read-client.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "a3c0b3742061e9e1",
+        "corpus": "a3c0b3742061e9e1",
+        "alignedAt": "2026-09-19"
+      }
+    },
+    {
+      "path": ".github/workflows/observers/workflows/crawler-generation-observer-shadow.yml",
+      "sitePath": ".github/corpus-workflows/observers/workflows/crawler-generation-observer-shadow.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "41a6342737247042",
+        "corpus": "41a6342737247042",
+        "alignedAt": "2026-09-19"
+      }
+    },
+    {
       "path": "scripts/ci/crawler-generation-observer-selector.mjs",
       "sitePath": ".github/corpus-workflows/observers/scripts/crawler-generation-observer-selector.mjs",
       "mode": "identical",
