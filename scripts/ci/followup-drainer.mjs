@@ -582,6 +582,8 @@ const LBL_UNPARKED = 'fu-unparked';
 const UNPARKED_RE = /^fu-unparked(?::\d+)?$/;
 const isUnparkedOnce = (iss) => names(iss).some((n) => UNPARKED_RE.test(n));
 let unparkLabelEnsured = false;
+export const MAX_LABEL_DESCRIPTION_LENGTH = 100;
+export const UNPARKED_LABEL_DESCRIPTION = 'Ri-accodata dal drainer: addebito falso (nessun verdetto o consegna letta come run morta)';
 // Quante candidate all'age-out possono essere rivalutate sull'ultimo evento
 // significativo in una run. Stesso modello del cap del PARKED-RETRY, e stesso
 // motivo: la lettura commenti è l'unica parte cara del passo.
@@ -2634,8 +2636,13 @@ export function isIssueGroupable(issue, {
  * mano da un lato solo sarebbe drift garantito. `gh label create` fallisce
  * anche quando la label esiste già: in quel caso il fallback `label edit`
  * riallinea sempre colore e description, compresa una description live ormai
- * obsoleta. */
+ * obsoleta. Una description oltre il limite API è invece un errore di
+ * contratto: non viene troncata in silenzio e non rende la label «assicurata». */
 export function ensureLabel(name, color, description, { run = gh, dry = DRY } = {}) {
+  if (typeof description !== 'string' || description.length > MAX_LABEL_DESCRIPTION_LENGTH) {
+    console.log(`::warning::label "${name}" non valida: description oltre ${MAX_LABEL_DESCRIPTION_LENGTH} caratteri`);
+    return 'failed';
+  }
   if (dry) return 'dry';
   const args = ['label', 'create', name, '--repo', REPO, '--color', color, '--description', description];
   try {
@@ -2852,7 +2859,7 @@ function prepareIssueGroup(group) {
   if (!label || !Array.isArray(group?.issues) || group.issues.length < 2) return null;
   if (group.issues.some(hasActiveAgentClaim)) return null;
   if (!liveClaimsAllowGroupMutation(group.issues)) return null;
-  ensureLabel(label, '5319e7', `Gruppo issue B19: chiave condivisa, massimo ${ISSUE_GROUP_MAX_SIZE} issue nella PR`);
+  if (ensureLabel(label, '5319e7', `Gruppo issue B19: chiave condivisa, massimo ${ISSUE_GROUP_MAX_SIZE} issue nella PR`) === 'failed') return null;
   for (const issue of group.issues) {
     if (hasActiveAgentClaim(issue)) return null;
     const stale = issueGroupInstanceLabels(issue).filter((name) => name !== label);
@@ -3753,8 +3760,8 @@ export function runDrain() {
       console.log(`PARENT-DEQUEUE #${p.number} (decomposed:1, lavoro delegato alle figlie) — "${p.title?.slice(0, 50)}"`);
     }
     // Il cap di questo stadio conta le ESAMINATE, non le azioni — a differenza
-    // di age-out (`slice` su candidate già filtrate), verdict-exit (`acted`) e
-    // sibling-debt (`labelled`), dove uno slot lo consuma solo chi agisce. Qui
+    // di age-out (`slice` su candidate già filtrate), verdict-exit (`attempted`) e
+    // sibling-debt (`attempted`), dove uno slot lo consuma solo chi agisce. Qui
     // l'esame È il costo (1 view commenti + K view di stato per padre), quindi
     // il cap sulle esaminate è giusto e resta. Senza rotazione, però, quel cap
     // cade SEMPRE sulle stesse 5 posizioni di testa: `gh issue list` ordina
@@ -3899,10 +3906,11 @@ export function runDrain() {
       periodMs: SCAN_ROTATION_PERIOD_MS,
     });
 
-    let acted = 0;
+    let attempted = 0;
+    let succeeded = 0;
     let scanned = 0;
     for (const iss of rotated) {
-      if (acted >= VERDICT_EXIT_MAX_PER_RUN) {
+      if (attempted >= VERDICT_EXIT_MAX_PER_RUN) {
         console.log(`verdict-exit: cap ${VERDICT_EXIT_MAX_PER_RUN}/run raggiunto, ${parked.length - scanned} candidate rinviate al prossimo tick (no silent cap).`);
         break;
       }
@@ -3987,23 +3995,29 @@ export function runDrain() {
       const deliveredParked = outcome === 'pr-created' && mergedFixPrAt(iss.number) !== null;
 
       if ((outcome === null || deliveredParked) && !isUnparkedOnce(iss)) {
-        acted++;
+        attempted++;
         if (DRY) {
+          succeeded++;
           console.log(`[dry] unpark #${iss.number} (${deliveredParked ? 'parked con pr-created e PR mergiata: ha consegnato' : 'parked senza alcun FIX_OUTCOME: nessun tentativo reale'}) — "${iss.title?.slice(0, 60)}"`);
           continue;
         }
         if (!unparkLabelEnsured) {
-          ensureLabel(LBL_UNPARKED, '0e8a16', 'Ri-accodata dal drainer: era parked per un addebito falso (nessun verdetto, oppure una consegna letta come run morta)');
+          const labelStatus = ensureLabel(LBL_UNPARKED, '0e8a16', UNPARKED_LABEL_DESCRIPTION);
+          if (labelStatus === 'failed') {
+            console.log(`UNPARK-SKIP #${iss.number}: label ${LBL_UNPARKED} non disponibile, ritento al prossimo tick.`);
+            continue;
+          }
           unparkLabelEnsured = true;
         }
         const unparkBody = deliveredParked
             ? `♻️ **Ri-accodata dal followup-drainer (zero-Claude): aveva consegnato, non fallito.**\n\nQuesta issue portava \`${LBL_PARKED}\` e \`fu-attempt:${attemptOf(iss) || '?'}\`, ma il suo ultimo \`FIX_OUTCOME\` è \`pr-created\` **e la PR di fix su \`fix/issue-${iss.number}\` risulta mergiata**. Il tentativo è stato addebitato dal RESCUE perché \`hasFixPR\` guarda solo le PR \`open\`, e una PR di fix mergia prima dei 30 minuti di \`ORPHAN_MIN_AGE_MIN\`: la consegna è stata letta come una run morta.\n\nTolgo \`${LBL_PARKED}\` e il contatore e la rimetto in coda con \`${LBL_QUEUED}\`. Se il lavoro è davvero finito, a chiuderla sarà il rilevatore di già-risolto al giro dopo: questo ramo non lo decide.`
             : `♻️ **Ri-accodata dal followup-drainer (zero-Claude): era parcheggiata senza un solo tentativo.**\n\nQuesta issue portava \`${LBL_PARKED}\` e \`fu-attempt:${attemptOf(iss) || '?'}\`, ma nei suoi commenti non c'è **nessun** \`FIX_OUTCOME\`: nessuna run del fixer l'ha mai lavorata. Il contatore dei tentativi è stato alzato dal RESCUE su promozioni che la coda di concorrenza di \`issue-fix.yml\` aveva sfrattato (\`cancelled\` prima di eseguire uno step), non su fix falliti.\n\nTolgo \`${LBL_PARKED}\` e il contatore e la rimetto in coda con \`${LBL_QUEUED}\`. Il primo giro vero comincia adesso.`;
-        commentIssue(iss.number, unparkBody, 'unpark comment');
         if (!edit(iss.number, {
           add: [LBL_QUEUED, LBL_UNPARKED],
           remove: [LBL_PARKED, ...names(iss).filter((n) => /^fu-attempt:\d+$/.test(n))],
         })) continue;
+        succeeded++;
+        commentIssue(iss.number, unparkBody, 'unpark comment');
         // La ragione va nel log di PRODUZIONE, non solo nel `--dry-run`: questa
         // riga e' l'unica traccia con cui si audita il drenaggio a posteriori, e
         // su un pool misto attribuirebbe la causa sbagliata a ogni unpark
@@ -4017,7 +4031,7 @@ export function runDrain() {
         noAutoclose: VERDICT_EXIT_NO_AUTOCLOSE,
       });
       if (d.action === 'none') continue;
-      acted++;
+      attempted++;
 
       if (d.action === 'close') {
         const pinnedPath = manifestPinFor(iss.number);
@@ -4026,44 +4040,54 @@ export function runDrain() {
           continue;
         }
         const note = `✅ **Auto-chiusa dal followup-drainer (zero-Claude)**: l'ultimo giro del fixer ha emesso \`FIX_OUTCOME: already-fixed\`, cioè è andato a guardare il codice e il difetto non c'era più. Il verdetto è più forte del token-match con cui \`reconcile-followups.mjs\` già auto-chiude, quindi non serve una seconda run per confermarlo.\n\n**Riapri** se il difetto ricorre — il monitor che ha aperto questa issue lo fa da sé. Per disattivare questa chiusura: \`FOLLOWUP_NO_AUTOCLOSE=1\`.`;
-        if (DRY) { console.log(`[dry] close #${iss.number} (verdict-exit: ${d.reason}) — "${iss.title}"`); continue; }
-        // ORDINE: label → close → commento, e NON commento → close come
-        // nell'age-out. Il motivo è la mutazione non atomica: se il commento va
-        // a buon fine e la close lancia (l'errore è catturato e loggato), la
-        // issue resta `fu-parked` col verdetto invariato e al tick successivo
-        // rientra nel pool e ri-commenta — un «Auto-chiusa» duplicato su una
-        // issue ancora aperta. Chiudendo per prima, un fallimento non lascia
-        // traccia da duplicare, e una close riuscita toglie la issue dal pool
-        // (`listIssues` legge solo le aperte) anche se il commento poi salta.
-        // Si può commentare una issue chiusa, quindi non si perde la spiegazione.
-        if (!edit(iss.number, { add: [LBL_RESOLVED_AUTO], remove: [LBL_PARKED] })) continue;
+        if (DRY) { succeeded++; console.log(`[dry] close #${iss.number} (verdict-exit: ${d.reason}) — "${iss.title}"`); continue; }
+        // ORDINE NON ATOMICO: add resolved-auto → close → remove fu-parked →
+        // commento. `fu-parked` RESTA finché la close non riesce: rimuoverla
+        // prima avrebbe fatto sparire una issue ancora aperta dal pool, così un
+        // errore di close non sarebbe stato ritentato al tick successivo.
+        // Dopo una close riuscita l'issue è fuori da `listIssues` anche se il
+        // cleanup della label fallisce; i due esiti vanno quindi loggati separati.
+        // Si può commentare una issue chiusa, quindi il commento arriva solo qui.
+        if (!edit(iss.number, { add: [LBL_RESOLVED_AUTO], remove: [] })) continue;
         if (!closeIssue(iss.number, { reason: 'completed', stage: 'verdict-exit close' })) continue;
+        succeeded++;
+        const parkedCleanup = edit(iss.number, { add: [], remove: [LBL_PARKED] });
+        if (!parkedCleanup) {
+          console.log(`::warning::verdict-exit close #${iss.number}: chiusa, ma cleanup ${LBL_PARKED} fallito; la label resta da rimuovere.`);
+        }
         commentIssue(iss.number, note, 'verdict-exit comment');
-        console.log(`VERDICT-EXIT close #${iss.number} (already-fixed) — "${iss.title?.slice(0, 50)}"`);
+        console.log(`VERDICT-EXIT close #${iss.number} (already-fixed; cleanup ${parkedCleanup ? 'fu-parked ok' : 'fu-parked fallito'}) — "${iss.title?.slice(0, 50)}"`);
         continue;
       }
 
       if (d.action === 'flag') {
-        if (DRY) { console.log(`[dry] flag #${iss.number} (verdict-exit: ${d.reason})`); continue; }
+        if (DRY) { succeeded++; console.log(`[dry] flag #${iss.number} (verdict-exit: ${d.reason})`); continue; }
         if (has(iss, LBL_MAYBE_RESOLVED)) continue; // già flaggata: niente commento duplicato
+        if (!edit(iss.number, { add: [LBL_MAYBE_RESOLVED], remove: [] })) continue;
+        succeeded++;
         commentIssue(iss.number,
           `🔎 **followup-drainer (zero-Claude)**: verdetto \`already-fixed\` — il fixer ha verificato che il difetto non c'è più. Chiusura automatica disattivata (\`FOLLOWUP_NO_AUTOCLOSE=1\`), quindi resta aperta per conferma umana.`,
           'verdict-exit flag comment');
-        if (!edit(iss.number, { add: [LBL_MAYBE_RESOLVED], remove: [] })) continue;
         console.log(`VERDICT-EXIT flag #${iss.number} (already-fixed, autoclose off) — "${iss.title?.slice(0, 50)}"`);
         continue;
       }
 
       // escalate
-      if (DRY) { console.log(`[dry] escalate #${iss.number} → needs-human (verdict-exit: ${d.reason})`); continue; }
+      if (DRY) { succeeded++; console.log(`[dry] escalate #${iss.number} → needs-human (verdict-exit: ${d.reason})`); continue; }
+      if (!edit(iss.number, { add: ['needs-human'], remove: [LBL_FIX, LBL_QUEUED] })) continue;
+      succeeded++;
       commentIssue(iss.number,
         `🙋 **Escalata dal followup-drainer (zero-Claude)**: verdetto \`FIX_OUTCOME: ${outcome}\`. È una capacità che la CI non ha (secret, admin, scope \`workflows\`), un lavoro manuale/editoriale, o una causa che il fixer non ha trovato: ri-provare riproduce lo stesso verdetto allo stesso prezzo.\n\nPrima di questa escalation la issue restava \`fu-parked\` e nessuno stadio la guardava. Ora entra nello sweep \`needs-human\` (VISION.md), che è la porta di rientro.`,
         'verdict-exit escalation comment');
-      if (!edit(iss.number, { add: ['needs-human'], remove: [LBL_FIX, LBL_QUEUED] })) continue;
       console.log(`VERDICT-EXIT escalate #${iss.number} → needs-human (${outcome}) — "${iss.title?.slice(0, 50)}"`);
     }
-    if (acted) console.log(`verdict-exit: ${acted} uscite terminali su ${scanned} candidate lette (pool parked ${parked.length}).`);
-    else if (scanned) console.log(`verdict-exit: ${scanned} candidate lette, nessun verdetto NON_RETRYABLE da instradare (pool parked ${parked.length}).`);
+    if (succeeded) console.log(`verdict-exit: ${succeeded} uscite terminali su ${scanned} candidate lette (tentate ${attempted}, pool parked ${parked.length}).`);
+    else if (scanned) {
+      const transitionSummary = attempted
+        ? `nessuna transizione confermata dopo ${attempted} tentativi`
+        : 'nessun verdetto NON_RETRYABLE da instradare';
+      console.log(`verdict-exit: ${scanned} candidate lette, ${transitionSummary} (pool parked ${parked.length}).`);
+    }
   }
 
   // --- TOO-LARGE ESCALATION (no cooldown) ------------------------------------
@@ -4124,10 +4148,11 @@ export function runDrain() {
       'issue', 'list', '--repo', REPO, '--state', 'open',
       '--json', 'number,title,labels,body',
     ], 'issue aperte (sibling-debt scan)');
-    let labelled = 0;
+    let attempted = 0;
+    let succeeded = 0;
     let ensured = false;
     for (const iss of withBodies) {
-      if (labelled >= SIBLING_DEBT_MAX_PER_RUN) {
+      if (attempted >= SIBLING_DEBT_MAX_PER_RUN) {
         console.log(`sibling-debt: cap ${SIBLING_DEBT_MAX_PER_RUN}/run raggiunto, le restanti al prossimo tick (no silent cap).`);
         break;
       }
@@ -4142,14 +4167,23 @@ export function runDrain() {
         : 'nessun path estratto dalla prosa';
       const refList = debt.refs.length ? debt.refs.map((r) => `\`${r}\``).join(', ') : 'nessuno';
       console.log(`SIBLING-DEBT #${iss.number} → \`${LBL_SIBLING_DEBT}\` (gemello su ${debt.repo}, file: ${fileList})`);
-      labelled++;
-      if (DRY) { console.log(`[dry] sibling-debt #${iss.number} (${debt.repo})`); continue; }
+      attempted++;
+      if (DRY) { succeeded++; console.log(`[dry] sibling-debt #${iss.number} (${debt.repo})`); continue; }
       const note = `🔗 **Debito verso il gemello (drainer, zero-Claude)**: un item di questa follow-up dichiara che il file gemello su **\`${debt.repo}\`** non è ancora allineato.\n\n- **Repo gemello**: \`${debt.repo}\`\n- **File nominati**: ${fileList}\n- **Riferimenti cross-repo citati**: ${refList}\n- **Evidenza (verbatim dal body)**: «${debt.evidence}»\n\n**Perché una label locale e non una issue aperta di là**: \`followup-drainer.yml\` gira con un token dell'installazione del repo CORRENTE (\`APP_TOKEN || GITHUB_PAT\`). L'unica credenziale cross-repo del workspace è \`ARTICLES_REPO_PAT\` (usata da \`mirror-articles-engine.yml\`): esiste solo sul sito, va in una direzione sola (sito→corpus) e non è cablata in questo workflow. Questo script è \`mode: identical\` sui due repo — dev'essere byte-identico — quindi un apri-issue cross-repo funzionerebbe da un lato e tornerebbe 403 dall'altro, proprio il lato dove il segnale nasce (8 casi su 8 misurati sono sul corpus). La label \`${LBL_SIBLING_DEBT}\` è invece leggibile e scrivibile da entrambi con il token che ciascuno ha già.\n\n**Non parcheggio e non instrado**: la issue prosegue nel flusso normale — gli altri item restano lavorabili qui.`;
-      if (!ensured) { ensureLabel(LBL_SIBLING_DEBT, '1d76db', 'Un item dichiara un file gemello non allineato sull\'altro repo del workspace'); ensured = true; }
+      if (!ensured) {
+        const labelStatus = ensureLabel(LBL_SIBLING_DEBT, '1d76db', 'Un item dichiara un file gemello non allineato sull\'altro repo del workspace');
+        if (labelStatus === 'failed') {
+          console.log(`SIBLING-DEBT-SKIP #${iss.number}: label ${LBL_SIBLING_DEBT} non disponibile, ritento al prossimo tick.`);
+          continue;
+        }
+        ensured = true;
+      }
+      if (!edit(iss.number, { add: [LBL_SIBLING_DEBT] })) continue;
+      succeeded++;
       commentIssue(iss.number, note, 'sibling-debt comment');
-      edit(iss.number, { add: [LBL_SIBLING_DEBT] });
     }
-    if (labelled) console.log(`sibling-debt: ${labelled} issue etichettate in questo tick (debito verso l'altro repo del workspace).`);
+    if (succeeded) console.log(`sibling-debt: ${succeeded} issue etichettate in questo tick (tentate ${attempted}, debito verso l'altro repo del workspace).`);
+    else if (attempted) console.log(`sibling-debt: nessuna issue etichettata dopo ${attempted} tentativi; retry al prossimo tick.`);
   }
 
   // --- PARKED-RETRY: ri-accoda i parked ritentabili --------------------------
@@ -5183,9 +5217,12 @@ export function runDrain() {
       console.log(`PARK #${cand.number} (data-pending, cooldown ${DATA_PENDING_COOLDOWN_DAYS}g) → «${dataPending.slice(0, 80)}»`);
       if (DRY) { console.log(`[dry] park #${cand.number} (data-pending)`); continue; }
       const note = `⏳ **Pre-flight drainer (zero-Claude, data-pending)**: questa follow-up dichiara di essere in attesa di un dato che non esiste ancora — «${dataPending}». Non è un fix che il fixer possa produrre oggi: promuoverla brucia un run che riscopre ogni volta lo stesso vincolo.\n\n**Non è terminale.** Parcheggio con \`${LBL_DATA_PENDING}\` e cooldown **${DATA_PENDING_COOLDOWN_DAYS} giorni** (il doppio di \`FOLLOWUP_RETRY_COOLDOWN_DAYS\`=${RETRY_COOLDOWN_DAYS}, che è tarato su «ri-tentare un fix fallito» — qui il fix non è fallito, non è ancora valutabile). Allo scadere il pass PARKED-RETRY la ri-accoda da solo in \`agent:fix-queued\`, senza intervento umano. Nessun \`needs-human\`: sarebbe uno stato assorbente e la issue non tornerebbe mai in coda.\n\nSe il dato arriva prima, togli \`${LBL_PARKED}\` per rimetterla in coda subito.`;
-      ensureLabel(LBL_DATA_PENDING, 'fbca04', 'Follow-up parcheggiata in attesa di dati/run future (cooldown lungo, ri-accodata da sola)');
+      if (ensureLabel(LBL_DATA_PENDING, 'fbca04', 'Follow-up parcheggiata in attesa di dati/run future (cooldown lungo, ri-accodata da sola)') === 'failed') {
+        console.log(`DATA-PENDING-SKIP #${cand.number}: label ${LBL_DATA_PENDING} non disponibile, ritento al prossimo tick.`);
+        continue;
+      }
+      if (!edit(cand.number, { add: [LBL_PARKED, LBL_DATA_PENDING], remove: [LBL_QUEUED, LBL_FIX] })) continue;
       commentIssue(cand.number, note, 'data-pending park comment');
-      edit(cand.number, { add: [LBL_PARKED, LBL_DATA_PENDING], remove: [LBL_QUEUED, LBL_FIX] });
       continue; // prova il prossimo in coda
     }
 
