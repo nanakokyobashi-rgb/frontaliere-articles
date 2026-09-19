@@ -2218,6 +2218,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'taf-respinge-ricorso-liste-ospedaliere': { it: 'taf-respinge-ricorso-liste-ospedaliere', en: 'taf-rejects-hospital-list-appeal', de: 'bvg-weist-spitalisten-klage-ab', fr: 'taf-rejette-recours-listes-hopitaux' },
  'bns-tassi-esame-settembre': { it: 'bns-tassi-esame-settembre', en: 'snb-rates-september-exam', de: 'snb-zinsen-september-pruefung', fr: 'bns-taux-examen-septembre' },
  'consiglio-federale-boccia-frontiere': { it: 'consiglio-federale-boccia-frontiere', en: 'federal-council-rejects-borders-initiative', de: 'bundesrat-lehnt-grenzinitiative-ab', fr: 'conseil-federal-rejette-initiative-frontieres' },
+ 'casa-zugo-prezzi-mutuo': { it: 'casa-zugo-prezzi-mutuo', en: 'zug-house-prices-mortgage', de: 'zug-hauspreise-hypothek', fr: 'maison-zoug-prix-hypothecaire' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

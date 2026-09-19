@@ -85391,6 +85391,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-casa-zugo-prezzi-mutuo': {
+    title: 'Casa a Zugo: prezzi e mutuo ipotecario | Frontaliere Ticino',
+    description: 'Scopri prezzi, fondo proprio, imposta sui trapati e spese notarili per acquistare casa nel Canton Zugo. Guida pratica per il mutuo. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, casa, zugo, prezzi, mutuo',
+    ogTitle: 'Casa a Zugo: prezzi e mutuo ipotecario',
+    ogDescription: 'Il Canton Zugo ha tra i prezzi immobiliari più alti della Svizzera. Guida pratica su fondo proprio, imposta sui trapati e costi notarili da calcolare prima di firmare il mutuo ipotecario.',
+    canonicalPath: '/articoli-svizzera/casa-zugo-prezzi-mutuo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Casa a Zugo: prezzi e mutuo ipotecario",
+      "description": "Scopri prezzi, fondo proprio, imposta sui trapati e spese notarili per acquistare casa nel Canton Zugo. Guida pratica per il mutuo. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/casa-zugo-prezzi-mutuo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Casa moderna nel Canton Zugo con vista sulle colline, esempio di mercato immobiliare svizzero"
+      },
+      "datePublished": "2026-09-19T02:27:20+00:00",
+      "dateModified": "2026-09-19T02:27:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/casa-zugo-prezzi-mutuo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

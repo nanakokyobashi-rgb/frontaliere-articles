@@ -6587,6 +6587,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.consiglio-federale-boccia-frontiere.title': 'Consiglio federale boccia l\'iniziativa UDC sulle frontiere',
     'blog.article.consiglio-federale-boccia-frontiere.excerpt': 'Il Consiglio federale raccomanda di respingere l\'iniziativa UDC sulle frontiere. Rilevati costi elevati, danni all\'economia e rischi per Schengen.',
     'blog.article.consiglio-federale-boccia-frontiere.imageAlt': 'Post di confine in Svizzera con transito veicolare',
+    'blog.article.casa-zugo-prezzi-mutuo.title': 'Casa a Zugo: prezzi e mutuo ipotecario',
+    'blog.article.casa-zugo-prezzi-mutuo.excerpt': 'Prezzi tra i più alti in Svizzera: fondo proprio, imposta sui trapati e costi notarili da calcolare prima dell\'acquisto.',
+    'blog.article.casa-zugo-prezzi-mutuo.imageAlt': 'Casa moderna nel Canton Zugo con vista sulle colline, esempio di mercato immobiliare svizzero',
 };
 
 export default blogMetaChIt;

@@ -6587,6 +6587,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.consiglio-federale-boccia-frontiere.title': 'Federal Council rejects the UDC initiative on borders',
     'blog.article.consiglio-federale-boccia-frontiere.excerpt': 'The Federal Council recommends rejecting the UDC initiative on borders. High costs, damage to the economy and risks for Schengen have been detected.',
     'blog.article.consiglio-federale-boccia-frontiere.imageAlt': 'Border crossing point in Switzerland with vehicular traffic',
+    'blog.article.casa-zugo-prezzi-mutuo.title': 'House in Zug: prices and mortgage',
+    'blog.article.casa-zugo-prezzi-mutuo.excerpt': 'Prices among the highest in Switzerland: own fund, tax on trappings and notary costs to be calculated before purchase.',
+    'blog.article.casa-zugo-prezzi-mutuo.imageAlt': 'Modern house in Canton Zug with hill view, example of Swiss real estate market',
 };
 
 export default blogMetaChEn;

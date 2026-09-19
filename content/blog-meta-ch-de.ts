@@ -6587,6 +6587,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.consiglio-federale-boccia-frontiere.title': 'Bundesrat lehnt SVP-Grenzinitiative ab',
     'blog.article.consiglio-federale-boccia-frontiere.excerpt': 'Der Bundesrat empfiehlt, die SVP-Grenzinitiative abzulehnen. Hohe Kosten, wirtschaftliche Schäden und Schengen-Risiken festgestellt.',
     'blog.article.consiglio-federale-boccia-frontiere.imageAlt': 'Grenzübergang in der Schweiz mit Fahrzeugverkehr',
+    'blog.article.casa-zugo-prezzi-mutuo.title': 'Haus in Zug: Preise und Hypothekendarlehen',
+    'blog.article.casa-zugo-prezzi-mutuo.excerpt': 'Die Preise gehören zu den höchsten in der Schweiz: Eigenkapital, Abgabensteuer und Notarkosten, die vor dem Kauf zu berechnen sind.',
+    'blog.article.casa-zugo-prezzi-mutuo.imageAlt': 'Modernes Haus im Kanton Zug mit Hügelaussicht, Beispiel für den Schweizer Immobilienmarkt',
 };
 
 export default blogMetaChDe;

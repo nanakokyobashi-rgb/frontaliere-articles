@@ -6587,6 +6587,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.consiglio-federale-boccia-frontiere.title': 'Conseil fédéral rejette l\'initiative UDC sur les frontières',
     'blog.article.consiglio-federale-boccia-frontiere.excerpt': 'Le Conseil fédéral recommande de rejeter l\'initiative UDC sur les frontières. Coûts élevés, dommages économiques et risques pour Schengen détectés.',
     'blog.article.consiglio-federale-boccia-frontiere.imageAlt': 'Point de passage frontalier en Suisse avec circulation',
+    'blog.article.casa-zugo-prezzi-mutuo.title': 'Maison à Zoug : prix et hypothèque',
+    'blog.article.casa-zugo-prezzi-mutuo.excerpt': 'Prix parmi les plus élevés en Suisse : fonds propres, taxe sur les forages et frais de notaire à calculer avant l\'achat.',
+    'blog.article.casa-zugo-prezzi-mutuo.imageAlt': 'Maison moderne dans le canton de Zoug avec vue sur les collines, exemple du marché immobilier suisse',
 };
 
 export default blogMetaChFr;
