@@ -11854,6 +11854,11 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.confapi-avsi-accordo-varese-formazione.title': 'Confapi Varese-AVSI agreement for youth training',
     'blog.article.confapi-avsi-accordo-varese-formazione.excerpt': 'Protocol signed on 17 September between Confapi Varese and the AVSI Foundation to train young people through apprenticeships and dual training.',
     'blog.article.confapi-avsi-accordo-varese-formazione.imageAlt': 'Casa Museo Lodovico Pogliaghi in Varese, venue for the agreement between Confapi Varese and Fondazione AVSI',
+    'blog.article.bollettino-frontaliere-2026-09-19.title': 'Cross-border daily brief – September 19, 2026: franc at €1.0554',
+    'blog.article.bollettino-frontaliere-2026-09-19.excerpt': 'Today\'s numbers, September 19, 2026, for cross-border commuters: the waits measured at every crossing this morning, the municipalities where fuel is cheapest, the franc-euro rate at yesterday\'s close and the jobs newly posted in Switzerland. Measured daily by our own monitoring.',
+    'blog.article.bollettino-frontaliere-2026-09-19.imageAlt': 'The day\'s numbers for cross-border commuters – September 19, 2026: border waits, fuel prices, CHF-EUR rate and job listings',
+    'blog.article.bollettino-frontaliere-2026-09-19.seoDescription': 'Cross-border brief, September 19, 2026: queues at the crossings this morning, where fuel is cheapest, the franc-euro rate and new job postings in Switzerland.',
+    'blog.article.bollettino-frontaliere-2026-09-19.ogDescription': 'The numbers for September 19, 2026, for cross-border commuters: how long the queue is at each crossing this morning, which towns have the cheapest fuel, what the franc is worth today and how many Swiss jobs went up.',
 };
 
 export default blogMetaEn;
