@@ -68,6 +68,7 @@ jobs:
               rm -f "$destination" "$error_file" "$status_file"
               : > "$status_file"
               if curl --fail --location --silent --show-error --retry 0 \
+                --connect-timeout 10 --max-time 60 \
                 --output "$destination" \
                 --write-out '%{http_code}' \
                 "$raw_url" > "$status_file" 2> "$error_file" \

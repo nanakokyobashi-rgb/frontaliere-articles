@@ -47,6 +47,7 @@ test('#1604: il bootstrap ritenta solo letture GitHub transitorie e resta fail-c
   assert.match(downloader, /for attempt in 1 2 3/);
   assert.match(downloader, /--output "\$destination"/);
   assert.match(downloader, /--write-out '%\{http_code\}'/);
+  assert.match(downloader, /--connect-timeout 10 --max-time 60/);
   assert.match(downloader, /grep -Eq '\^2\[0-9\]\[0-9\]\$' "\$status_file"/);
   assert.match(downloader, /timeout/);
   assert.match(downloader, /deadline\[\[:space:\]\.\_-\]\*exceeded/);
