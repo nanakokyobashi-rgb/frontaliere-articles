@@ -132,7 +132,9 @@ test('ogni consumer critico re-inietta il token runtime nel comando che muta Git
     'issue-triage.yml': /GITHUB_PAT="\$runtime_pat" node scripts\/ci\/triage-sweep\.mjs/,
     'pr-autorebase.yml': /GH_TOKEN="\$runtime_pat" node scripts\/ci\/pr-autorebase\.mjs/,
     'pr-redcheck-fixer.yml': /push_token="\$\{GITHUB_PAT_NANAKO:-\}"/,
-    'recycle-stale-prs.yml': /runtime_token="\$\{APP_TOKEN:-\$\{GITHUB_PAT_NANAKO:-\}\}"/,
+    // Il re-queue di recycle deve passare il sender gate di issue-fix: PAT
+    // con identita' verificata, non l'App token (frontaliere-automation[bot]).
+    'recycle-stale-prs.yml': /PAT="\$\{GITHUB_PAT_NANAKO:-\}"[\s\S]*?GH_TOKEN="\$PAT" gh api user/,
     'transport-identical-twins.yml': /PUSH_TOKEN="\$GITHUB_PAT_NANAKO" node scripts\/ci\/probe-workflow-scope\.mjs/,
     'transport-identical-twins-realign.yml': /export GH_TOKEN="\$runtime_pat"/,
   };
