@@ -252,7 +252,7 @@ const RECURRENCE_GATED_WORKFLOW_RE = /^(?:Generate Blog Article|fast-publish-art
 export const CRAWLER_GROUP_WORKFLOW_RE = /^Crawler Group \d{1,2} \(sparse cross-repo execution\)$/;
 const CRAWLER_MEMBER_FAILURE_RE = /(?:^|[^a-z0-9-])([a-z0-9][a-z0-9-]*):\s*crawler exited with status\s+([1-9]\d*)\b/gi;
 const NON_CRAWLER_FAILURE_EXIT_CODES = new Set([42, 43, 44]);
-const SYSTEMIC_CRAWLER_FAILURE_RE = /shared (?:deferred-commit precondition failed|group precondition failure)\s*\(exit\s*43\)/i;
+const SYSTEMIC_CRAWLER_FAILURE_RE = /(?:^|[^a-z0-9-])([a-z0-9][a-z0-9-]*):\s*(?:crawl OK but the crawler group's shared deferred-commit precondition failed|shared group precondition failure)\s*\(exit\s*43\)/i;
 
 export function isRecurrenceGatedWorkflow(name) {
   return RECURRENCE_GATED_WORKFLOW_RE.test(String(name || ''));
@@ -1174,7 +1174,11 @@ export function cleanLogLine(line) {
  * la riga eseguita.
  */
 export function crawlerFailuresFromLog(text) {
-  if (isSystemicCrawlerFailureLog(text)) return [];
+  const systemicSlugs = new Set();
+  for (const raw of String(text || '').split('\n')) {
+    const marker = SYSTEMIC_CRAWLER_FAILURE_RE.exec(cleanLogLine(raw));
+    if (marker) systemicSlugs.add(marker[1].toLowerCase());
+  }
   const failures = new Map();
   for (const raw of String(text || '').split('\n')) {
     const line = cleanLogLine(raw);
@@ -1183,6 +1187,11 @@ export function crawlerFailuresFromLog(text) {
       const slug = match[1].toLowerCase();
       const exitCode = Number(match[2]);
       if (NON_CRAWLER_FAILURE_EXIT_CODES.has(exitCode)) continue;
+      // Il finalizer `always()` può stampare sia il marker sistemico di uno
+      // slug (exit 43 convertito in exit 1) sia il failure reale di un altro
+      // membro. Sopprimiamo quindi solo gli slug nominati dal marker, non
+      // l'intero log del gruppo.
+      if (systemicSlugs.has(slug)) continue;
       if (!failures.has(slug)) failures.set(slug, { slug, exitCode, lines: [] });
       const failure = failures.get(slug);
       if (failure.lines.length < 6 && line && !failure.lines.includes(line)) failure.lines.push(line);

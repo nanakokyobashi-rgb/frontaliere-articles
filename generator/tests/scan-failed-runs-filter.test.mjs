@@ -145,6 +145,26 @@ test('il precondition failure condiviso con exit 43 non diventa un falso errore 
   }), null);
 });
 
+test('un marker sistemico non nasconde un failure reale di un altro membro', () => {
+  const log = [
+    groupLogLine('28:00.0000000', "::error::fust: crawl OK but the crawler group's shared deferred-commit precondition failed (exit 43). Group-wide fault, identical for every sibling — step stays red, no per-crawler issue filed (systemic class)."),
+    groupLogLine('28:00.0100000', 'fust: crawler exited with status 1'),
+    groupLogLine('28:01.0000000', '❌ Capri Holdings crawler failed: Workday Michael Kors empty search changed its total from 519 to 0 at offset 20'),
+    groupLogLine('28:01.0100000', 'capri-holdings: crawler exited with status 1'),
+  ].join('\n');
+  assert.deepEqual(crawlerFailuresFromLog(log), [{
+    slug: 'capri-holdings',
+    exitCode: 1,
+    lines: ['capri-holdings: crawler exited with status 1'],
+  }]);
+  const report = buildCrawlerFailureReport({
+    log,
+    run: CRAWLER_RUN,
+    workflowName: CRAWLER_GROUP,
+  });
+  assert.equal(report?.title, 'Crawler Failure: Run capri-holdings');
+});
+
 test('il report del gruppo 22 conserva la causa concreta del guard Fust', () => {
   const workflowName = 'Crawler Group 22 (sparse cross-repo execution)';
   const log = groupLogLine('28:00.0000000', '❌ Fust crawler failed: Fust workplace canton invariant failed: "Niederwangen BE" is not resolvable to a Swiss municipality.')
