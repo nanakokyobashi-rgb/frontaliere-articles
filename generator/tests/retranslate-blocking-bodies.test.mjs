@@ -57,6 +57,7 @@ import {
   selectBlockingPairs,
   rewriteExistingLocaleBody,
   sanitizeTranslatedField,
+  inlineBoolean,
 } from '../scripts/retranslate-blocking-bodies.mjs';
 // Dal modulo corpus-only, NON da `lib/article-sanitizers.mjs`: quello e'
 // `identical` nel manifest del ciclo e un export aggiunto dal corpus lo
@@ -387,6 +388,42 @@ test('--slug vuoto esce con errore invece di disabilitare il filtro dell audit',
   assert.equal(inline.status, 2);
   assert.match(inline.stderr, /--slug.*vuoto/);
   assert.doesNotMatch(String(inline.stdout), /coppie trattate/);
+});
+
+test('--apply=false NON entra nel percorso di scrittura', () => {
+  // Il parsing inline dei flag ha reso `--apply=false` indistinguibile da
+  // `--apply`: il valore diceva "no" e il flag risultava presente, quindi una
+  // negazione esplicita abilitava la riscrittura di body PUBBLICATI.
+  assert.equal(inlineBoolean(['--apply'], 'apply'), true, '--apply nudo scrive');
+  assert.equal(inlineBoolean(['--apply=true'], 'apply'), true);
+  assert.equal(inlineBoolean(['--apply=1'], 'apply'), true);
+  for (const negated of ['--apply=false', '--apply=0', '--apply=no', '--apply=off', '--apply=FALSE', '--apply= false ']) {
+    assert.equal(inlineBoolean([negated], 'apply'), false, `${negated} deve restare dry-run`);
+  }
+  // Invocazione malformata: su un flag che riscrive, il valore assente cade sul
+  // lato sicuro. E' la differenza deliberata con la presenza usata da --slug.
+  assert.equal(inlineBoolean(['--apply='], 'apply'), false, '--apply= non abilita la scrittura');
+  // Il flag assente resta assente, e un altro flag non lo attiva per prefisso.
+  assert.equal(inlineBoolean([], 'apply'), false);
+  assert.equal(inlineBoolean(['--apply-everything'], 'apply'), false, 'niente match per prefisso');
+  assert.equal(inlineBoolean(['--json=false'], 'json'), false, 'stessa classe su --json');
+  assert.equal(inlineBoolean(['--stratify=false'], 'stratify'), false, 'stessa classe su --stratify');
+});
+
+test('un valore mancante non viene rubato al flag successivo, e --out vuoto non cade su stdout', () => {
+  const script = fileURLToPath(new URL('../scripts/retranslate-blocking-bodies.mjs', import.meta.url));
+  // `--slug --audit a.json`: senza guardia `--audit` diventava lo slug
+  // letterale, zero coppie selezionate ed exit 0 — un no-op che si legge come
+  // "niente da fare". Deve cadere nella guardia di --slug, non passare.
+  const stolen = spawnSync(process.execPath, [script, '--slug', '--audit', '/dev/null'], { encoding: 'utf8' });
+  assert.equal(stolen.status, 2, 'il flag successivo non e un valore');
+  assert.match(stolen.stderr, /--slug.*vuoto/);
+  assert.doesNotMatch(String(stolen.stdout), /coppie trattate/);
+
+  // `--out=` chiede un file e lo perderebbe su stdout, che non e' parsabile.
+  const emptyOut = spawnSync(process.execPath, [script, '--audit', '/dev/null', '--slug', 'x', '--out='], { encoding: 'utf8' });
+  assert.equal(emptyOut.status, 2);
+  assert.match(emptyOut.stderr, /--out è vuoto/);
 });
 
 // ── La stessa classe sull'altro scrittore per-locale ───────────────────────
