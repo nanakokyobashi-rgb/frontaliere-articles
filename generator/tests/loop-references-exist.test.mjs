@@ -252,6 +252,13 @@ const resolveToken = (token) => (token.includes('/') ? token : `${WORKFLOW_DIR}/
  *                    test «`retired` solo su file `identical`».
  */
 const DECLARED_ABSENT = {
+  'scripts/ci/prefetch-review-diff.mjs :: scripts/lib/nord-anglia-job-parser.mjs': {
+    kind: 'site-only',
+    reason:
+      'Citazione storica nel commento di writeReviewDiff: il parser Nord Anglia e un crawler '
+      + 'del sito (#9175) usato come esempio del delta contaminato su #9141; lo script di review '
+      + 'non lo importa, non lo esegue e non dipende dalla sua esistenza.',
+  },
   '.github/workflows/issue-fix.yml :: scripts/lib/pr-body-generator-contract.mjs': {
     kind: 'site-only',
     reason:
