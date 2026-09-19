@@ -185,9 +185,9 @@
       "path": "scripts/ci/check-issue-already-resolved.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "489604959eb2b59d",
-        "corpus": "489604959eb2b59d",
-        "alignedAt": "2026-09-15"
+        "site": "3495d7994fa50d84",
+        "corpus": "3495d7994fa50d84",
+        "alignedAt": "2026-09-19"
       }
     },
     {
@@ -224,9 +224,9 @@
       "path": "scripts/ci/check-workflows-scope.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "459a67139071d1ef",
-        "corpus": "459a67139071d1ef",
-        "alignedAt": "2026-08-07"
+        "site": "c4517ec345983e0f",
+        "corpus": "c4517ec345983e0f",
+        "alignedAt": "2026-09-19"
       }
     },
     {
@@ -522,9 +522,9 @@
       "path": "scripts/lib/pr-body-sections-check.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "bda6dc74ee93671d",
-        "corpus": "bda6dc74ee93671d",
-        "alignedAt": "2026-09-01"
+        "site": "5612aa5e2536996b",
+        "corpus": "5612aa5e2536996b",
+        "alignedAt": "2026-09-19"
       }
     },
     {
@@ -1121,9 +1121,9 @@
       "path": "scripts/ci/lib/false-positive-declaration.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "0d8abb4da520f254",
-        "corpus": "0d8abb4da520f254",
-        "alignedAt": "2026-08-23"
+        "site": "3bbe2db3005e0271",
+        "corpus": "3bbe2db3005e0271",
+        "alignedAt": "2026-09-19"
       }
     },
     {
@@ -1668,9 +1668,9 @@
       "path": "scripts/lib/shard-git-helpers.sh",
       "mode": "identical",
       "baseline": {
-        "site": "278984502451dcfe",
-        "corpus": "278984502451dcfe",
-        "alignedAt": "2026-09-15"
+        "site": "58bd10ee04888120",
+        "corpus": "58bd10ee04888120",
+        "alignedAt": "2026-09-19"
       }
     },
     {
@@ -2634,9 +2634,9 @@
       "sitePath": "build-plugins/batchWrite.ts",
       "mode": "identical",
       "baseline": {
-        "site": "d0e045812aef8d35",
-        "corpus": "d0e045812aef8d35",
-        "alignedAt": "2026-08-09"
+        "site": "33e2ddbfa2d92820",
+        "corpus": "33e2ddbfa2d92820",
+        "alignedAt": "2026-09-19"
       }
     },
     {
@@ -2869,9 +2869,9 @@
       "sitePath": "build-plugins/sharedWriteRegistry.ts",
       "mode": "identical",
       "baseline": {
-        "site": "a97ed1adc182a002",
-        "corpus": "a97ed1adc182a002",
-        "alignedAt": "2026-08-31"
+        "site": "e93c6a89dc08244e",
+        "corpus": "e93c6a89dc08244e",
+        "alignedAt": "2026-09-19"
       }
     },
     {
@@ -3478,7 +3478,7 @@
         },
         {
           "path": "generator/data/crawler-cross-repo-contract.json",
-          "mode": "adapted"
+          "mode": "identical"
         },
         {
           "path": "scripts/ci/close-recovered-failure-issues.mjs",
@@ -3899,9 +3899,9 @@
       "path": "scripts/ci/prefetch-review-diff.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "ed6ec76d58d3c7b0",
-        "corpus": "ed6ec76d58d3c7b0",
-        "alignedAt": "2026-09-10"
+        "site": "5f1868446705cf60",
+        "corpus": "5f1868446705cf60",
+        "alignedAt": "2026-09-19"
       }
     },
     {
@@ -4042,9 +4042,9 @@
       "path": ".github/actions/claude-codex-fallback/git-bridge-server.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "70d7992c3ffe7988",
-        "corpus": "70d7992c3ffe7988",
-        "alignedAt": "2026-09-14"
+        "site": "47fc3189057df464",
+        "corpus": "47fc3189057df464",
+        "alignedAt": "2026-09-19"
       }
     },
     {
