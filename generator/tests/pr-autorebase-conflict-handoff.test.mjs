@@ -46,3 +46,12 @@ test('la issue salta il triage e riceve agent:fix con un evento separato', () =>
   assert.ok(SOURCE.includes("'--label', 'agent:triaged'"));
   assert.match(SOURCE, /'issue', 'edit', issue, '--repo', REPO, '--add-label', 'agent:fix'/);
 });
+
+test("l'hand-off e' fail-closed: merge-tree deve confermare il conflitto e il marker segue il routing", () => {
+  const fn = SOURCE.slice(SOURCE.indexOf('function handOffConflictToFixer('), SOURCE.indexOf('function commentConflictOnce('));
+  assert.ok(fn.includes("if (verdict.state !== 'conflicted')"), 'clean/unknown non devono aprire una issue');
+  const routed = fn.indexOf("if (!ghOk(['issue', 'edit', issue, '--repo', REPO, '--add-label', 'agent:fix']))");
+  const marker = fn.indexOf('${marker}');
+  assert.ok(routed > 0 && marker > routed, 'il marker si scrive solo dopo agent:fix confermato dall\'exit status');
+  assert.match(fn, /'issue', 'list'[\s\S]*in:title/, 'un retry riusa la issue gia\' aperta invece di duplicarla');
+});

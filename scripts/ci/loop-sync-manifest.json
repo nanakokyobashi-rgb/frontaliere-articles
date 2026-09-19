@@ -421,7 +421,7 @@
       "reason": "La discovery paginata e la decisione tri-state di conflitto sono comuni e fail-closed, ma i call-site restano adattati ai due contratti esterni: il sito invoca `tests.yml` con `workflow_dispatch -f pr_number=...` per risolvere la PR e avviare test+review sulla head, mentre il corpus conserva il dispatch `--ref` test-only del ramo needs-human/carry-forward. Il corpus inoltre fissa la revisione body con `currentReviewInputContext`/`reviewInputContextStillCurrent` e `review-test-policy.mjs`, e il suo `tests.yml` mantiene input `pr_number`/`head_sha`, guard body+review ed eventi lifecycle; il sito usa il proprio body-edit retry e i check names locali in constants. Non copiare il file byte-per-byte: ogni lato conserva il proprio percorso PR/body/review e il nome del check richiesto.",
       "baseline": {
         "site": "e3cb4fb86fe8ff01",
-        "corpus": "ead1b8a2ba5a51b1",
+        "corpus": "5a87bd0e01473a0d",
         "alignedAt": "2026-09-19"
       }
     },
@@ -1342,7 +1342,7 @@
       "reason": "Gemello node:test del test Vitest del sito sull'hand-off a issue-fix di un conflitto dopo LGTM: stessi casi (decisione pura, marker per HEAD, contenuto della issue senza keyword di chiusura, pin dei tre rami di abort). Cambia solo il runner e l'esempio (#1597 invece di #9260).",
       "baseline": {
         "site": "bf07932f2eb0a3e1",
-        "corpus": "d881c66b34329a85",
+        "corpus": "3222f4bf740aa007",
         "alignedAt": "2026-09-19"
       }
     },
