@@ -370,27 +370,42 @@ export function latestTriageCommentBody(commentsJson, prefix = TRIAGE_COMMENT_PR
  *    formato e' l'unica cosa che il prompt impone davvero al marker, ed e' lo
  *    stesso ID che compare nel corpo del bucket;
  *  - un BUCKET citato e' un `#N` su una riga che dice «bucket», in qualunque
- *    ordine e con qualunque punteggiatura.
+ *    ordine e con qualunque punteggiatura;
+ *  - uno ZERO esplicito e' l'INTESTAZIONE che il prompt impone per l'esito
+ *    vuoto (`## Post-merge follow-up triage: zero outstanding items.` oppure
+ *    `## Post-merge follow-up triage (backfill skipped): ...`). Conta solo su
+ *    una riga H2, mai nella prosa del corpo.
  *
- * Niente dichiarato = niente da verificare. Per tutto il resto decide
- * `verifyTriageMarkerPersistence` leggendo le issue vere.
+ * Il default e' NON provato. Un marker che non dichiara ne' uno zero esplicito
+ * ne' un riferimento verificabile ha un formato che questo parser non
+ * riconosce, e un formato non riconosciuto non e' una prova di «niente da
+ * persistere»: prima produceva `requiresBucket=false` e la PR veniva saltata
+ * per sempre anche con un triage non-zero reale (review di #1593).
  */
 export function triageMarkerPersistenceExpectation(markerBody) {
   const body = String(markerBody || '');
   const items = [...body.matchAll(/Follow-up\s+item\s*:\s*(FU-\d{4}-\d{2}-\d{2}-\d{3})\b/gi)]
     .map((match) => match[1].toUpperCase());
   // Il `#N` deve stare su una riga che parla di bucket: cosi' un `PR concatenata
-  // #9050` citato fra i drop non diventa un candidato. Le righe di prosa che
-  // citano un bucket storico restano invece ammesse come candidati, perche' la
-  // verifica sotto e' ESISTENZIALE: un riferimento che non prova nulla non puo'
-  // piu' far cadere un marker che ne porta un altro valido.
+  // #9050` citato fra i drop non diventa un candidato.
   const buckets = body.split(/\r?\n/)
     .filter((line) => /\bbucket\b/i.test(line))
     .flatMap((line) => [...line.matchAll(/#([1-9]\d*)\b/g)].map((match) => Number(match[1])));
+  // Una riga H2, non prosa: il modello a volte ripete il prefisso nudo prima
+  // dell'intestazione dello zero (marker REALE di PR #1570:
+  // `## Post-merge follow-up triage\n\n## Post-merge follow-up triage: zero
+  // outstanding items.`), quindi conta qualunque riga H2 del marker.
+  const explicitZero = body.split(/\r?\n/).some((line) =>
+    /^\s*##\s+Post-merge follow-up triage\s*(?::\s*zero outstanding items\b|\(backfill skipped\))/i.test(line));
+  const uniqueItems = [...new Set(items)];
   return {
-    items: [...new Set(items)],
+    items: uniqueItems,
     buckets: [...new Set(buckets)],
-    requiresBucket: items.length > 0 || buckets.length > 0,
+    // Uno zero esplicito NON copre item dichiarati: la contraddizione si prova.
+    // I bucket citati da un marker a zero sono contesto (nessun item da
+    // persistere li' dentro), non una promessa.
+    explicitZero: explicitZero && uniqueItems.length === 0,
+    requiresBucket: !(explicitZero && uniqueItems.length === 0),
   };
 }
 
@@ -437,13 +452,23 @@ export function persistedBucketIssueMatches(issue, prNumber, prComments = '') {
 }
 
 /**
- * Read one candidate daily bucket from any repository that can hold it.
+ * Read EVERY daily-bucket candidate numbered `bucket` across the repositories
+ * that can hold it.
  *
- * Returns the issue, `false` when no repository has that number (a reference
- * that proves nothing, not a fault), or `null` when a read was unavailable.
+ * I due repository numerano le proprie issue in modo INDIPENDENTE, quindi lo
+ * stesso numero puo' esistere in entrambi. Fermarsi al primo JSON valido (o al
+ * primo titolo da daily bucket) lasciava a una issue omonima del primo
+ * repository il potere di impedire la lettura del secondo. Qui la scansione non
+ * si ferma: il chiamante applica il predicato bucket/PR a ogni candidato.
+ *
+ * Returns `{ candidates, unreadable }`: `candidates` sono le issue con titolo
+ * canonico da daily bucket e numero coincidente, `unreadable` dice se almeno
+ * una lettura era indisponibile (`gh` non distingue un 404 da un guasto, quindi
+ * un numero assente da un repository resta «non lo so» per quel repository).
  */
 export function readBucketIssue(bucket, run = gh, repos = BUCKET_REPOS) {
   let unreadable = false;
+  const candidates = [];
   for (const repo of repos) {
     const raw = run(
       ['issue', 'view', String(bucket), '--repo', repo, '--json', 'number,title,body'],
@@ -451,53 +476,68 @@ export function readBucketIssue(bucket, run = gh, repos = BUCKET_REPOS) {
       true,
     );
     if (raw === null) { unreadable = true; continue; }
-    try {
-      const issue = JSON.parse(raw);
-      // I due repository numerano le proprie issue in modo INDIPENDENTE, quindi
-      // lo stesso numero puo' esistere in entrambi: fermarsi al primo JSON
-      // valido restituirebbe una issue omonima e qualunque scorrere del
-      // contatore la renderebbe la risposta sbagliata a un bucket reale.
-      // Oggi il corpus e' a #1594 e il sito a #9217 — i bucket del sito citati
-      // dai marker del corpus (#8944, #9102, #9182) sono ancora fuori portata,
-      // ma la collisione ha una data d'arrivo, non una probabilita'. Il filtro
-      // e' il titolo canonico del bucket giornaliero, lo stesso oracolo che
-      // `persistedBucketIssueMatches` applica subito dopo.
-      if (issue && typeof issue === 'object' && !Array.isArray(issue)
-        && dailyBucketInfo(issue.title || '')) return issue;
-    } catch { /* not this repository's issue */ }
+    let issue;
+    try { issue = JSON.parse(raw); } catch { unreadable = true; continue; }
+    if (issue && typeof issue === 'object' && !Array.isArray(issue)
+      && Number(issue.number) === Number(bucket)
+      && dailyBucketInfo(issue.title || '')) candidates.push({ ...issue, repo });
   }
-  return unreadable ? null : false;
+  return { candidates, unreadable };
+}
+
+/**
+ * Normalizza l'esito di `readIssue` per un bucket. Accetta la forma di
+ * `readBucketIssue` (`{candidates, unreadable}`), un array di candidati, una
+ * singola issue, `false` (nessun repository ha quel numero) o `null`/`undefined`
+ * (lettura indisponibile).
+ */
+function bucketReadResult(result) {
+  if (result === null || result === undefined) return { candidates: [], unreadable: true };
+  if (result === false) return { candidates: [], unreadable: false };
+  if (Array.isArray(result)) return { candidates: result, unreadable: false };
+  if (typeof result === 'object' && Array.isArray(result.candidates)) {
+    return { candidates: result.candidates, unreadable: result.unreadable === true };
+  }
+  if (typeof result === 'object') return { candidates: [result], unreadable: false };
+  return { candidates: [], unreadable: true };
 }
 
 /**
  * Check marker idempotency against durable bucket/item evidence.
  *
- * `readIssue` returns an issue object, `false` for a bucket that is not in any
- * reachable repository, and `null` for an unavailable read. Unknown stays
- * `null`, so a transient API failure keeps the PR in the next batch instead of
- * skipping it forever.
+ * Esiti: `true` solo per uno zero esplicito o quando OGNI bucket dichiarato e'
+ * provato; `false` quando manca una prova e tutte le letture erano definitive;
+ * `null` quando una prova manca e almeno una lettura era indisponibile, cosi' un
+ * guasto API tiene la PR nel batch invece di dichiararla non persistita.
  *
- * La verifica e' ESISTENZIALE: basta UN riferimento provato. Prima era
- * universale, e con un parser che non sa distinguere il bucket del giorno da
- * uno citato per contesto l'universale trasforma ogni riga di prosa in un modo
- * di far cadere un marker giusto. Il verso sicuro e' l'opposto: un marker senza
- * NESSUNA prova durevole resta non provato e la PR torna nel batch.
+ * La verifica e' UNIVERSALE sui bucket dichiarati. Con bucket distinti (per
+ * esempio uno nel corpus e uno nel sito) la versione esistenziale dichiarava
+ * completo un marker con un solo bucket persistito e l'altro no: meta' triage
+ * perso, PR saltata per sempre. Il costo del verso sicuro e' noto e visibile:
+ * un bucket citato solo per contesto, che non contiene la PR, tiene la PR nel
+ * batch (run rossa, retry), mai un salto silenzioso.
+ *
+ * Gli ID `FU-...` dichiarati NON vengono cercati uno per uno: il gate sul conio
+ * ricompone il corpo e RINUMERA gli item validi, quindi l'ID del marker puo'
+ * legittimamente non comparire piu' nel bucket. La prova per bucket resta
+ * «item vivo con `Sources: PR #N`» oppure il commento di conservazione del gate.
  */
 export function verifyTriageMarkerPersistence(markerBody, prNumber, readIssue, prComments = '') {
   const expectation = triageMarkerPersistenceExpectation(markerBody);
-  if (!expectation.requiresBucket) return true;
+  if (expectation.explicitZero) return true;
   if (!expectation.buckets.length || typeof readIssue !== 'function') return false;
   let unreadable = false;
+  let disproved = false;
   for (const number of expectation.buckets) {
-    const issue = readIssue(number);
-    if (issue === null || issue === undefined) { unreadable = true; continue; }
-    if (issue === false) continue;
-    if (Number(issue.number) === number
-      && persistedBucketIssueMatches(issue, prNumber, prComments)) return true;
+    const read = bucketReadResult(readIssue(number));
+    const proved = read.candidates.some((issue) => Number(issue?.number) === number
+      && persistedBucketIssueMatches(issue, prNumber, prComments));
+    if (proved) continue;
+    if (read.unreadable) unreadable = true;
+    else disproved = true;
   }
-  // Nessuna prova trovata: `null` solo se una lettura era indisponibile, cosi'
-  // un guasto API non viene mai letto come «il triage non e' persistito».
-  return unreadable ? null : false;
+  if (disproved) return false;
+  return unreadable ? null : true;
 }
 
 /**

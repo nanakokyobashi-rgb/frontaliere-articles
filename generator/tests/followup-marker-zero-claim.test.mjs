@@ -94,7 +94,42 @@ test('un marker senza niente di dichiarato non promette niente da verificare', (
   assert.deepEqual(expectation.buckets, [], '«nessuno» non è un numero di bucket');
   assert.equal(expectation.items.length, 0);
   assert.equal(expectation.requiresBucket, false);
+  assert.equal(expectation.explicitZero, true);
   assert.equal(verifyTriageMarkerPersistence(marker, 1537, () => null), true);
+});
+
+test('fail-closed: un formato non riconosciuto NON e\' uno zero (review #1593, 🔴 L393)', () => {
+  // Nessun `Follow-up item:`, nessun `bucket #N`, e l'intestazione non e'
+  // quella dello zero imposta dal prompt. Prima: `requiresBucket=false` →
+  // `true` → PR saltata per sempre anche se il triage aveva prodotto item
+  // scritti in una forma nuova. Ora il default e' «non provato».
+  for (const marker of [
+    '## Post-merge follow-up triage\n\nAggiunti due item al daily di oggi (FU-2026-09-19-003, FU-2026-09-19-004).',
+    '## Post-merge follow-up triage\n\nCreated/updated: 2 item nel daily del sito.',
+    '## Post-merge follow-up triage\n\n',
+    '',
+  ]) {
+    const expectation = triageMarkerPersistenceExpectation(marker);
+    assert.equal(expectation.explicitZero, false, marker);
+    assert.equal(expectation.requiresBucket, true, marker);
+    assert.notEqual(verifyTriageMarkerPersistence(marker, 1600, () => SITE_BUCKET), true, marker);
+  }
+  // La frase dello zero nella PROSA non e' l'intestazione: non vale.
+  assert.equal(triageMarkerPersistenceExpectation(
+    '## Post-merge follow-up triage\n\nNon siamo a zero outstanding items: vedi sotto.').explicitZero, false);
+  // Marker REALE di PR #1570: prefisso nudo ripetuto, poi l'intestazione dello zero.
+  assert.equal(verifyTriageMarkerPersistence(
+    '## Post-merge follow-up triage\n\n## Post-merge follow-up triage: zero outstanding items.\n\nLa triage batchata non ha mintato item.',
+    1570, () => null), true);
+  // L'intestazione del backfill non idoneo e' anch'essa uno zero esplicito.
+  assert.equal(verifyTriageMarkerPersistence(
+    '## Post-merge follow-up triage (backfill skipped): PR not eligible (not merged or different author)',
+    1600, () => null), true);
+  // Uno zero che dichiara comunque un item e' una contraddizione: si prova.
+  const contradictory = '## Post-merge follow-up triage: zero outstanding items.\n- Follow-up item: FU-2026-09-18-011\n- Daily bucket: #9102';
+  assert.equal(triageMarkerPersistenceExpectation(contradictory).explicitZero, false);
+  assert.equal(verifyTriageMarkerPersistence(contradictory, 1999, () => SITE_BUCKET), false);
+  assert.equal(verifyTriageMarkerPersistence(contradictory, 1563, () => SITE_BUCKET), true);
 });
 
 test('un `#N` fuori da una riga di bucket non diventa un candidato', () => {
@@ -136,22 +171,34 @@ test('una lettura indisponibile resta `null`, mai `false`', () => {
   assert.equal(verifyTriageMarkerPersistence(body, 1563, () => null), null);
 });
 
-/* ── La verifica è esistenziale, non universale ─────────────────────────── */
+/* ── La verifica è universale sui bucket dichiarati ─────────────────────── */
 
-test('un bucket citato per contesto non fa cadere un marker che ne prova un altro', () => {
-  // Era il difetto opposto: con la verifica UNIVERSALE ogni riga di prosa che
-  // nominasse un bucket storico diventava un modo di bocciare un marker giusto.
+test('ogni bucket dichiarato va provato: uno persistito non copre l\'altro (review #1593, 🔴 L481)', () => {
+  // Bucket distinti corpus+sito: con la verifica ESISTENZIALE bastava il
+  // primo, e il secondo — mai scritto — veniva dichiarato completo.
+  const corpusBucket = {
+    number: 1590,
+    title: 'follow-up(daily:2026-09-18): 1 item — nanakokyobashi-rgb/frontaliere-articles',
+    body: '### FU-2026-09-18-020 — altro item\n- Sources: PR #1400\n',
+  };
   const body = [
     '## Post-merge follow-up triage',
     '',
-    'Bucket daily: #9102 — State: collecting.',
+    'Bucket daily sito: #9102 — State: collecting.',
+    'Bucket daily corpus: #1590 — State: collecting.',
     '- Follow-up item: FU-2026-09-18-011',
-    '',
-    'Nessun nuovo bucket: il bucket collecting storico #8944 copre la stessa finestra.',
+    '- Follow-up item: FU-2026-09-18-021',
   ].join('\n');
-  assert.deepEqual(triageMarkerPersistenceExpectation(body).buckets, [9102, 8944]);
-  const readIssue = (n) => (n === 9102 ? SITE_BUCKET : false);
-  assert.equal(verifyTriageMarkerPersistence(body, 1563, readIssue), true);
+  assert.deepEqual(triageMarkerPersistenceExpectation(body).buckets, [9102, 1590]);
+  const readIssue = (n) => (n === 9102 ? SITE_BUCKET : n === 1590 ? corpusBucket : false);
+  assert.equal(verifyTriageMarkerPersistence(body, 1563, readIssue), false,
+    '#1590 non contiene PR #1563: il triage non e\' completo');
+  // Quando anche il secondo contiene la PR, il marker e' provato.
+  const both = (n) => (n === 9102 ? SITE_BUCKET
+    : { ...corpusBucket, body: corpusBucket.body + '\n### FU-2026-09-18-021 — nuovo\n- Sources: PR #1563\n' });
+  assert.equal(verifyTriageMarkerPersistence(body, 1563, both), true);
+  // Un bucket introvabile (nessun repository ha quel numero) non e' una prova.
+  assert.equal(verifyTriageMarkerPersistence(body, 1563, (n) => (n === 9102 ? SITE_BUCKET : false)), false);
 });
 
 test('nessun riferimento provato: esito NON positivo', () => {
@@ -174,8 +221,11 @@ test('il bucket del sito viene trovato anche quando `GH_REPO` è il corpus', () 
     if (repo.startsWith('nanakokyobashi-rgb')) return null; // 404, come nella run reale
     return JSON.stringify(SITE_BUCKET);
   };
-  const issue = readBucketIssue(9102, fakeGh, ['nanakokyobashi-rgb/frontaliere-articles', 'valerielinc-ops/frontaliere-si-o-no']);
-  assert.equal(issue?.number, 9102, 'il bucket del sito deve essere leggibile dal corpus');
+  const read = readBucketIssue(9102, fakeGh, ['nanakokyobashi-rgb/frontaliere-articles', 'valerielinc-ops/frontaliere-si-o-no']);
+  assert.equal(read.candidates.length, 1);
+  assert.equal(read.candidates[0].number, 9102, 'il bucket del sito deve essere leggibile dal corpus');
+  assert.equal(read.candidates[0].repo, 'valerielinc-ops/frontaliere-si-o-no');
+  assert.equal(read.unreadable, true, 'il 404 del corpus resta «non lo so», non «assente»');
   assert.deepEqual(calls, ['nanakokyobashi-rgb/frontaliere-articles', 'valerielinc-ops/frontaliere-si-o-no']);
 });
 
@@ -190,8 +240,8 @@ test('una issue omonima nel primo repository non nasconde il bucket vero nel sec
     return JSON.stringify(repo.startsWith('nanakokyobashi-rgb') ? homonym : SITE_BUCKET);
   };
   const repos = ['nanakokyobashi-rgb/frontaliere-articles', 'valerielinc-ops/frontaliere-si-o-no'];
-  const issue = readBucketIssue(9102, fakeGh, repos);
-  assert.equal(issue?.title, SITE_BUCKET.title, 'deve vincere il bucket giornaliero, non l’omonima');
+  const read = readBucketIssue(9102, fakeGh, repos);
+  assert.deepEqual(read.candidates.map((c) => c.title), [SITE_BUCKET.title], 'l’omonima non e\' un candidato');
 
   const body = '## Post-merge follow-up triage\n\nBucket daily: #9102\n- Follow-up item: FU-2026-09-18-011';
   assert.equal(
@@ -200,29 +250,47 @@ test('una issue omonima nel primo repository non nasconde il bucket vero nel sec
   );
 });
 
-test('un bucket illeggibile in ogni repository non falsifica gli altri riferimenti', () => {
-  // `gh` non distingue un 404 da un guasto, quindi un numero introvabile resta
-  // `null` = «non lo so» e da solo tiene la PR nel batch. Ma con la verifica
-  // esistenziale non può più far cadere un marker il cui ALTRO riferimento è
-  // provato: è la combinazione che sblocca le PR reali #1535/#1540/#1544, dove
-  // il bucket citato vive nel sito e non nel repository del run.
+test('un daily bucket omonimo nel primo repository non ferma la scansione (review #1593, 🔴 L456)', () => {
+  // Caso peggiore del precedente: l'omonima nel corpus E' un daily bucket
+  // (titolo canonico) ma non contiene la PR. Fermarsi al primo titolo valido
+  // impediva di interrogare il sito, dove il bucket vero la contiene.
+  const corpusHomonym = {
+    number: 9102,
+    title: 'follow-up(daily:2026-10-02): 2 items — nanakokyobashi-rgb/frontaliere-articles',
+    body: '### FU-2026-10-02-001 — altro\n- Sources: PR #1700\n',
+  };
   const reads = [];
+  const fakeGh = (args) => {
+    const repo = args[args.indexOf('--repo') + 1];
+    reads.push(repo);
+    return JSON.stringify(repo.startsWith('nanakokyobashi-rgb') ? corpusHomonym : SITE_BUCKET);
+  };
+  const repos = ['nanakokyobashi-rgb/frontaliere-articles', 'valerielinc-ops/frontaliere-si-o-no'];
+  const read = readBucketIssue(9102, fakeGh, repos);
+  assert.deepEqual(reads, repos, 'entrambi i repository vanno interrogati');
+  assert.equal(read.candidates.length, 2);
+  const body = '## Post-merge follow-up triage\n\nBucket daily: #9102\n- Follow-up item: FU-2026-09-18-011';
+  assert.equal(verifyTriageMarkerPersistence(body, 1563, (b) => readBucketIssue(b, fakeGh, repos)), true,
+    'il predicato bucket/PR si applica a ogni candidato');
+  assert.equal(verifyTriageMarkerPersistence(body, 1999, (b) => readBucketIssue(b, fakeGh, repos)), false,
+    'nessun candidato contiene la PR: non provato');
+});
+
+test('un bucket illeggibile tiene la PR nel batch anche se un altro e\' provato', () => {
+  // `gh` non distingue un 404 da un guasto, quindi un numero introvabile resta
+  // `null` = «non lo so». Con la verifica universale non puo' essere coperto
+  // da un ALTRO bucket provato: l'esito e' `null` (retry), mai `true`.
   const fakeGh = (args) => {
     const num = args[2];
     const repo = args[args.indexOf('--repo') + 1];
-    reads.push(`${repo}#${num}`);
     if (num === '9102' && repo.startsWith('valerielinc-ops')) return JSON.stringify(SITE_BUCKET);
-    return null; // introvabile o guasto: indistinguibili da `gh`
+    return null;
   };
   const repos = ['nanakokyobashi-rgb/frontaliere-articles', 'valerielinc-ops/frontaliere-si-o-no'];
-  assert.equal(readBucketIssue(4242, fakeGh, repos), null, 'introvabile ovunque → `null`');
+  assert.deepEqual(readBucketIssue(4242, fakeGh, repos), { candidates: [], unreadable: true });
 
   const body = '## Post-merge follow-up triage\n\nBucket daily: #4242 e bucket #9102.\n- Follow-up item: FU-2026-09-18-011';
-  assert.equal(
-    verifyTriageMarkerPersistence(body, 1563, (b) => readBucketIssue(b, fakeGh, repos)),
-    true,
-    'un riferimento introvabile non deve annullare quello provato',
-  );
+  assert.equal(verifyTriageMarkerPersistence(body, 1563, (b) => readBucketIssue(b, fakeGh, repos)), null);
 });
 
 /* ── La prova per gli item demoti dal gate sul conio ───────────────────── */
