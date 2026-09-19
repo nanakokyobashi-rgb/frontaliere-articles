@@ -242,6 +242,12 @@ export const ALWAYS_ESCALATE_WORKFLOWS = new Set([
   'Close Recovered Failure Issues',
   // Se muore il reporter, non resta nessuno a segnalare gli altri.
   'Workflow failure → issue',
+  // Il publisher della superficie HTTP: se fallisce, `dist/api/` resta vecchia
+  // e il sito serve dati stantii. Un rosso qui non e' rumore transiente da
+  // aggregare nel ledger, e' la superficie pubblica che non si aggiorna — lo
+  // dice anche il razionale del confine di scansione, che cita `publish-api`
+  // fra i fallimenti che non devono essere inghiottiti.
+  'Publish article data API',
 ]);
 
 /**
