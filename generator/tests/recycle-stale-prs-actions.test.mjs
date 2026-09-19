@@ -60,6 +60,10 @@ case \"$command\" in
       printf '%s\\n' \"\${FAKE_OTHER_LOGIN:-frontaliere-automation[bot]}\"
       exit 0
     fi
+    if printf '%s' \"$args\" | grep -q -- '^repos/owner/repo/labels/recycle-recovery'; then
+      if [ \"$(get_state RECOVERY_LABEL)\" = true ]; then printf 'recycle-recovery\\n'; exit 0; fi
+      printf '{\"message\":\"Not Found\"}\\n'; exit 1
+    fi
     if printf '%s' \"$args\" | grep -q -- 'labels=recycle-recovery'; then
       if [ \"\${FAKE_RECOVERY:-none}\" = pr ] && [ \"$(get_state MARKER)\" = true ]; then
         printf '%s\\n' '{\"number\":17,\"title\":\"fix stale (#77)\",\"body\":\"\"}'
@@ -132,6 +136,10 @@ case \"$command\" in
       exit 0
     fi
     ;;
+  label)
+    if [ \"\${1:-}\" = create ] && [ \"\${FAKE_LABEL_CREATE:-ok}\" = ok ]; then set_state RECOVERY_LABEL true; exit 0; fi
+    exit 1
+    ;;
   issue)
     sub=\"\${1:-}\"
     shift || true
@@ -175,7 +183,7 @@ function runScenario(overrides = {}) {
   writeFileSync(fakeSleep, '#!/bin/sh\nexit 0\n');
   writeFileSync(fakeDate, '#!/bin/sh\ncase "$*" in\n  "-u +%s") printf "2000000000\\n" ;;\n  "-u -d "*" +%s") printf "1577836800\\n" ;;\n  *) exit 1 ;;\nesac\n');
   writeFileSync(log, '');
-  writeFileSync(state, `LABEL_PRESENT=true\nREF_PRESENT=true\nPREMATURE_DELETE=false\nPR_STATE=${overrides.FAKE_INIT_PR_STATE || 'OPEN'}\nMARKER=${overrides.FAKE_INIT_MARKER || 'false'}\n`);
+  writeFileSync(state, `LABEL_PRESENT=true\nREF_PRESENT=true\nPREMATURE_DELETE=false\nPR_STATE=${overrides.FAKE_INIT_PR_STATE || 'OPEN'}\nMARKER=${overrides.FAKE_INIT_MARKER || 'false'}\nRECOVERY_LABEL=${overrides.FAKE_INIT_RECOVERY_LABEL || 'true'}\n`);
   chmodSync(fakeGh, 0o755);
   chmodSync(fakeSleep, 0o755);
   chmodSync(fakeDate, 0o755);
@@ -396,4 +404,20 @@ test('riconciliazione fallita lascia il marker e non ripete il commento', () => 
   });
   assert.match(result.stateText, /MARKER=true/);
   assert.doesNotMatch(result.events.join('\n'), /^issue comment/m);
+});
+
+test('label recycle-recovery assente: viene creata e verificata prima di qualunque close', () => {
+  const result = runScenario({ FAKE_INIT_RECOVERY_LABEL: 'false' });
+  const close = result.events.findIndex((e) => /^pr close 17/.test(e));
+  const create = result.events.findIndex((e) => /^label create recycle-recovery/.test(e));
+  assert.ok(create >= 0 && close > create);
+  assert.match(result.stateText, /RECOVERY_LABEL=true/);
+});
+
+test('label recycle-recovery non creabile: nessuna PR chiusa', () => {
+  const result = runScenario({ FAKE_INIT_RECOVERY_LABEL: 'false', FAKE_LABEL_CREATE: 'fail' });
+  const log = result.events.join('\n');
+  assert.doesNotMatch(log, /^pr close 17/m);
+  assert.doesNotMatch(log, /--(add|remove)-label agent:fix/);
+  assert.match(result.output, /recycle-recovery assente e non creabile/);
 });

@@ -152,6 +152,28 @@ jobs:
           # riconciliabile dal run successivo (sezione "Riconciliazione" sotto),
           # il commento sulla issue la rende visibile a un umano.
           RECOVERY_LABEL="recycle-recovery"
+          # Il marker esiste solo se la label esiste: il POST su una label
+          # mancante fallisce e la PR chiusa sparirebbe dalla scansione.
+          # Questo workflow non esegue ensure-loop-labels.mjs, quindi assicura
+          # e VERIFICA la label qui, prima di qualunque close; se non e'
+          # disponibile nessuna PR viene chiusa.
+          recovery_label_present() {
+            [ "$(gh api "repos/${REPO}/labels/${RECOVERY_LABEL}" --jq '.name' 2>/dev/null || true)" = "$RECOVERY_LABEL" ]
+          }
+          if ! recovery_label_present; then
+            if [ "$DRY" != "true" ]; then
+              gh label create "$RECOVERY_LABEL" --repo "$REPO" --color d93f0b \
+                --description "PR chiusa dal recycle con re-queue incompleto: il run successivo la riconcilia" --force >/dev/null 2>&1 || true
+            fi
+            if ! recovery_label_present; then
+              if [ "$DRY" = "true" ]; then
+                echo "::warning::label ${RECOVERY_LABEL} assente (dry-run: non la creo)."
+              else
+                echo "::error::label ${RECOVERY_LABEL} assente e non creabile: senza marker di recovery nessuna PR viene chiusa."
+                exit 1
+              fi
+            fi
+          fi
           mark_recovery() {
             gh api --method POST "repos/${REPO}/issues/${N}/labels" -f "labels[]=${RECOVERY_LABEL}" >/dev/null 2>&1 \
               || echo "::error::PR #${N}: marker ${RECOVERY_LABEL} non applicato."
