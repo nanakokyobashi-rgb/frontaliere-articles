@@ -1,11 +1,15 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
-import { ensureLabel } from '../../scripts/ci/followup-drainer.mjs';
+import {
+  ensureLabel,
+  MAX_LABEL_DESCRIPTION_LENGTH,
+  UNPARKED_LABEL_DESCRIPTION,
+} from '../../scripts/ci/followup-drainer.mjs';
 
 const LABEL = 'fu-unparked';
 const COLOR = '0e8a16';
-const DESCRIPTION = 'Ri-accodata dal drainer: era parked per un addebito falso (nessun verdetto, oppure una consegna letta come run morta)';
+const DESCRIPTION = UNPARKED_LABEL_DESCRIPTION;
 
 test('ensureLabel aggiorna la description di una label gia esistente', () => {
   const calls = [];
@@ -32,4 +36,25 @@ test('ensureLabel crea una label mancante senza eseguire un edit', () => {
   assert.equal(calls.length, 1);
   assert.deepEqual(calls[0].slice(0, 2), ['label', 'create']);
   assert.equal(calls[0][calls[0].indexOf('--description') + 1], DESCRIPTION);
+});
+
+test('ensureLabel rifiuta una description oltre il limite senza truncarla', () => {
+  const calls = [];
+  const run = (args) => calls.push(args);
+  const tooLong = 'x'.repeat(MAX_LABEL_DESCRIPTION_LENGTH + 1);
+
+  assert.equal(ensureLabel(LABEL, COLOR, tooLong, { run, dry: false }), 'failed');
+  assert.equal(ensureLabel(LABEL, COLOR, tooLong, { run, dry: true }), 'failed');
+  assert.equal(calls.length, 0);
+});
+
+test('ensureLabel non memoizza un fallimento di create e fallback edit', () => {
+  const calls = [];
+  const run = (args) => {
+    calls.push(args);
+    throw new Error('API unavailable');
+  };
+
+  assert.equal(ensureLabel(LABEL, COLOR, DESCRIPTION, { run, dry: false }), 'failed');
+  assert.equal(calls.length, 2);
 });
