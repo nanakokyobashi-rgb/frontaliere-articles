@@ -1,5 +1,6 @@
 /**
- * Fissa QUALE credenziale mergia la PR del mirror, e su quale perimetro.
+ * Fissa QUALE credenziale mergia la PR del mirror, su quale perimetro e con
+ * quale verdetto required-check.
  * Run with `node --test`.
  *
  * Non è un test di stile: entrambe le cose che verifica falliscono in SILENZIO.
@@ -17,12 +18,20 @@
  * 2. Il perimetro. `engine-lockstep-auto` è un branch che il mirror possiede in
  *    esclusiva e force-pusha; allargare il filtro a `--state open` senza `--head`
  *    farebbe auto-mergiare qualunque PR aperta di questo repo.
+ * 3. Il check. Un output vuoto, non-array, senza il check principale o con uno
+ *    stato non sicuro non è un verdetto: il lockstep deve restare fermo e
+ *    riprovare. Gli opzionali `SKIPPED`/`NEUTRAL` restano esplicitamente leciti.
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
+import {
+  allChecksDecision,
+  requiredCheckDecision,
+} from '../../scripts/ci/native-automerge-sweep-policy.mjs';
+import { VITEST_CHECK_NAME } from '../../scripts/ci/lib/constants.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const WORKFLOW = resolve(here, '../../.github/workflows/auto-merge-engine-lockstep.yml');
@@ -76,10 +85,99 @@ test('usa --merge e non --squash, per non perdere la provenienza', () => {
   assert.ok(!/--squash/.test(attive));
 });
 
-test('un check pendente o rosso NON fa fallire il job', () => {
-  // `gh pr checks` esce non-zero quando qualcosa non è verde. Sotto `set -e` questo
-  // renderebbe rosso il job per una PR semplicemente ancora in corso — un fallimento
-  // che non significa niente e che, ripetendosi ogni due ore, si impara a ignorare.
-  assert.match(wf, /\|\| echo "UNKNOWN"/, 'lo stato dei check va catturato, non propagato');
-  assert.match(wf, /\*PENDING\*\|\*QUEUED\*\|\*IN_PROGRESS\*\|UNKNOWN\)[\s\S]{0,200}exit 0/);
+test('il lockstep legge tutti i check e resta fail-closed', () => {
+  assert.match(wf, /gh pr checks "\$PR" --required --json name,state,bucket/);
+  assert.match(wf, /gh pr checks "\$PR" --json name,state,bucket/);
+  assert.match(wf, /native-automerge-sweep-policy\.mjs/);
+  assert.match(wf, /--required-check "\$REQUIRED_CHECKS_FILE"/);
+  assert.match(wf, /--all-checks "\$CHECKS_FILE"/);
+  assert.match(wf, /REQUIRED_CHECKS_EXIT=/);
+  assert.match(wf, /CHECKS_EXIT=/);
+  assert.match(wf, /--merge --delete-branch=false/);
+});
+
+const required = (state, overrides = {}) => ({
+  name: VITEST_CHECK_NAME,
+  state,
+  bucket: state === 'SUCCESS' ? 'pass' : 'pending',
+  ...overrides,
+});
+
+test('la decisione check è table-driven e richiede SUCCESS esplicito', () => {
+  const cases = [
+    ['SUCCESS', true],
+    ['SKIPPED', false],
+    ['NEUTRAL', false],
+    ['EXPECTED', false],
+    ['ACTION_REQUIRED', false],
+    ['STALE', false],
+    ['PENDING', false],
+    ['QUEUED', false],
+    ['IN_PROGRESS', false],
+    ['FAILURE', false],
+    ['ERROR', false],
+    ['CANCELLED', false],
+    ['UNKNOWN', false],
+    ['', false],
+  ];
+  for (const [state, expected] of cases) {
+    assert.equal(requiredCheckDecision([required(state)]).allow, expected, state || '<empty>');
+  }
+  assert.equal(requiredCheckDecision([required('success')]).allow, true, 'state case-insensitive');
+  assert.equal(requiredCheckDecision([required('SUCCESS'), required('SUCCESS')]).allow, false, 'duplicate required ambiguo');
+  assert.equal(requiredCheckDecision([
+    required('SUCCESS'),
+    { name: 'generator-ci', state: 'FAILURE', bucket: 'fail' },
+  ]).allow, false, 'altro check rosso');
+  assert.equal(requiredCheckDecision([
+    required('SUCCESS'),
+    { name: 'generator-ci', state: 'UNKNOWN', bucket: 'pending' },
+  ]).allow, false, 'altro check sconosciuto');
+  assert.equal(requiredCheckDecision([
+    required('SUCCESS'),
+    { name: 'generator-ci', state: 'SKIPPED', bucket: 'skipping' },
+  ]).allow, false, 'required secondario saltato');
+  assert.equal(requiredCheckDecision([
+    required('SUCCESS'),
+    { name: 'generator-ci', state: 'NEUTRAL', bucket: 'pass' },
+  ]).allow, false, 'required secondario neutrale');
+  assert.equal(requiredCheckDecision([
+    required('SUCCESS'),
+    { name: 'generator-ci', state: 'SUCCESS', bucket: 'pass' },
+  ]).allow, true, 'altri check verdi');
+  const optionalCases = [
+    ['SUCCESS', true],
+    ['SKIPPED', true],
+    ['NEUTRAL', true],
+    ['EXPECTED', false],
+    ['ACTION_REQUIRED', false],
+    ['STALE', false],
+    ['PENDING', false],
+    ['QUEUED', false],
+    ['IN_PROGRESS', false],
+    ['FAILURE', false],
+    ['ERROR', false],
+    ['CANCELLED', false],
+    ['UNKNOWN', false],
+  ];
+  for (const [state, expected] of optionalCases) {
+    assert.equal(allChecksDecision([
+      required('SUCCESS'),
+      { name: 'optional-docs', state, bucket: state === 'SUCCESS' ? 'pass' : 'pending' },
+    ]).allow, expected, `check opzionale ${state}`);
+  }
+});
+
+test('payload vuoto, non-array o senza required check non autorizza il merge', () => {
+  const cases = [
+    ['empty', []],
+    ['null', null],
+    ['object', {}],
+    ['required missing', [{ name: 'unrelated', state: 'SUCCESS', bucket: 'pass' }]],
+    ['required malformed', [{ name: VITEST_CHECK_NAME }]],
+  ];
+  for (const [name, payload] of cases) {
+    assert.equal(requiredCheckDecision(payload).allow, false, name);
+    assert.equal(allChecksDecision(payload).allow, false, 'all checks: ' + name);
+  }
 });

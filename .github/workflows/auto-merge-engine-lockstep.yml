@@ -117,21 +117,48 @@ jobs:
           fi
           echo "PR lockstep aperta: #$PR"
 
-          # Stato dei check. `gh pr checks` esce non-zero quando qualcosa non è verde, il che
-          # sotto `set -e` chiuderebbe il job come FALLITO per una PR semplicemente ancora in
-          # corso — un rosso che non significa niente e che a furia di ripetersi si impara a
-          # ignorare. Qui un check pendente o fallito è un NON-EVENTO: si esce 0 e ci riprova
-          # il prossimo giro.
-          STATE=$(gh pr checks "$PR" --json state -q '[.[].state]|join(",")' 2>/dev/null || echo "UNKNOWN")
-          echo "check: $STATE"
-          case "$STATE" in
-            *FAILURE*|*ERROR*|*CANCELLED*|*TIMED_OUT*)
-              echo "Check non verdi — non mergio. Se persiste è un difetto dell'engine, non di questo workflow."
-              exit 0 ;;
-            *PENDING*|*QUEUED*|*IN_PROGRESS*|UNKNOWN)
-              echo "Check ancora in corso — riprovo al prossimo giro."
-              exit 0 ;;
-          esac
+          # Leggi due snapshot e passa entrambi al policy helper condiviso:
+          # quello --required verifica che ogni check richiesto, incluso il
+          # principale, sia SUCCESS; quello completo non nasconde eventuali
+          # check opzionali rossi o pendenti. `gh pr checks` esce non-zero su
+          # pending/failure: il codice di uscita resta una seconda barriera,
+          # mentre il JSON viene comunque valutato quando esiste. Output vuoto,
+          # non-array, check principale mancante e stati non sicuri sono tutti
+          # no-op fail-closed; il prossimo check_suite/cron riprova.
+          REQUIRED_CHECKS_FILE="$RUNNER_TEMP/lockstep-required-checks.json"
+          REQUIRED_CHECKS_EXIT=0
+          if gh pr checks "$PR" --required --json name,state,bucket > "$REQUIRED_CHECKS_FILE"; then
+            REQUIRED_CHECKS_EXIT=0
+          else
+            REQUIRED_CHECKS_EXIT=$?
+          fi
+          CHECKS_FILE="$RUNNER_TEMP/lockstep-checks.json"
+          CHECKS_EXIT=0
+          if gh pr checks "$PR" --json name,state,bucket > "$CHECKS_FILE"; then
+            CHECKS_EXIT=0
+          else
+            CHECKS_EXIT=$?
+          fi
+          if ! REQUIRED_DECISION=$(node scripts/ci/native-automerge-sweep-policy.mjs \
+            --required-check "$REQUIRED_CHECKS_FILE" 2>&1); then
+            echo "Check required non autorizzante — non mergio: $REQUIRED_DECISION"
+            exit 0
+          fi
+          echo "check required: $REQUIRED_DECISION"
+          if [ "$REQUIRED_CHECKS_EXIT" -ne 0 ]; then
+            echo "Lettura check required non conclusa con successo (exit $REQUIRED_CHECKS_EXIT) — non mergio."
+            exit 0
+          fi
+          if ! CHECK_DECISION=$(node scripts/ci/native-automerge-sweep-policy.mjs \
+            --all-checks "$CHECKS_FILE" 2>&1); then
+            echo "Check completo non autorizzante — non mergio: $CHECK_DECISION"
+            exit 0
+          fi
+          echo "check completo: $CHECK_DECISION"
+          if [ "$CHECKS_EXIT" -ne 0 ]; then
+            echo "Lettura check completo non conclusa con successo (exit $CHECKS_EXIT) — non mergio."
+            exit 0
+          fi
 
           # `--merge`, non `--squash`: il commit del mirror porta il SHA del sito da cui
           # l'engine è stato copiato, che è l'unica traccia di provenienza fra i due repo.
