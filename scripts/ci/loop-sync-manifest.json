@@ -3747,6 +3747,16 @@
       }
     },
     {
+      "path": "scripts/ci/fixer-commit-trailer.mjs",
+      "mode": "corpus-only",
+      "reason": "Installa nel checkout dei due fixer di PR (`pr-redflag-fixer.yml`, `pr-redcheck-fixer.yml`) un hook `commit-msg` che aggiunge il trailer `Fixer: redflag-round-N` / `Fixer: redcheck-round-N` ai commit dell'agente. Il formato del trailer e' comune col sito; l'helper no: i fixer del sito sono workflow `adapted` con un proprio percorso di commit, e qui serve un modulo senza dipendenze npm eseguibile prima dell'agente.",
+      "baseline": {
+        "site": null,
+        "corpus": "9ec57e329dc439c0",
+        "alignedAt": "2026-09-19"
+      }
+    },
+    {
       "path": "scripts/ci/redflag-findings-fingerprint.mjs",
       "mode": "corpus-only",
       "reason": "Calcola l'impronta stabile dei finding `🔴 Important` che il `pr-redflag-fixer.yml` usa per non rispendere un round sullo stesso verdetto (#1093). Non esiste sul sito e non deve: il fixer corpus ha il confronto con i round gia' commentati e il relativo contratto locale, mentre il sito mantiene il proprio workflow adattato.",
