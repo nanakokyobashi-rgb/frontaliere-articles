@@ -19,6 +19,8 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
+  gatePreservedFollowupMatches,
+  persistedBucketIssueMatches,
   triageMarkerPersistenceExpectation,
   verifyTriageMarkerPersistence,
 } from '../../scripts/ci/collect-followup-batch.mjs';
@@ -135,6 +137,44 @@ test('un conteggio non intero non e uno zero', () => {
   );
 });
 
+test('accetta la prova del gate quando tutti gli item della PR sono stati demoti', () => {
+  const bucket = {
+    number: 8944,
+    title: 'follow-up(daily:2026-09-17): 7 items — valerielinc-ops/frontaliere-si-o-no',
+    body: 'State: sealed\n\n### FU-2026-09-17-001 — item rimasto\n- Sources: PR #1520\n',
+  };
+  const gateComments = JSON.stringify({ comments: [{ body: [
+    '<!-- followup-mint-gate -->',
+    '## Item demoti dal gate sul conio',
+    'Issue #8944 resta aperta con 7 item validi.',
+    '',
+    '### item demoto',
+    '- Source: PR #1535 / adversarial check',
+  ].join('\n') }] });
+
+  assert.equal(gatePreservedFollowupMatches(gateComments, 8944, 1535), true);
+  assert.equal(persistedBucketIssueMatches(bucket, 1535, gateComments), true);
+  assert.equal(
+    verifyTriageMarkerPersistence(
+      '## Post-merge follow-up triage\n\n- Daily bucket: #8944',
+      1535,
+      () => bucket,
+      gateComments,
+    ),
+    true,
+  );
+});
+
+test('la prova del gate resta fail-closed per bucket o PR diversi', () => {
+  const comments = JSON.stringify({ comments: [{ body: [
+    '<!-- followup-mint-gate -->',
+    'Issue #8944 resta aperta con 7 item validi.',
+    '- Source: PR #1535 / adversarial check',
+  ].join('\n') }] });
+  assert.equal(gatePreservedFollowupMatches(comments, 8943, 1535), false);
+  assert.equal(gatePreservedFollowupMatches(comments, 8944, 1536), false);
+});
+
 test('piu bucket dichiarati, uno illeggibile: esito NON positivo', () => {
   const body = '## Post-merge follow-up triage\n\nCreated/updated: 2 item nei bucket #1525 e bucket #9182.\n';
   const expectation = triageMarkerPersistenceExpectation(body);
@@ -157,4 +197,7 @@ test('il gemello bash dello YAML resta allineato', () => {
   assert.match(yml, /grep -Eqvi "\$\{claim_head\}\[\[:space:\]\]\*0\(\[\^0-9\.\]\|\\\$\)"/);
   assert.match(yml, /\[ -z "\$claim_lines" \][\s\S]{0,140}zero outstanding items\|backfill skipped/);
   assert.match(yml, /zero outstanding items\|backfill skipped/);
+  assert.match(yml, /gate_preserved_for_pr\(\)/);
+  assert.match(yml, /followup-mint-gate/);
+  assert.match(yml, /bucket_persisted_for_pr "\$bucket" "\$pr" "\$comments"/);
 });

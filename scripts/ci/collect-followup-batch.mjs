@@ -344,14 +344,46 @@ export function triageMarkerPersistenceExpectation(markerBody) {
   };
 }
 
+/**
+ * Prove the deterministic mint gate preserved this PR's dropped item.
+ *
+ * The gate may remove every item sourced by a PR when none has a falsifiable
+ * acceptance condition. It keeps the complete item in a comment on the source
+ * PR, so the daily bucket no longer contains Sources: PR #N even though the
+ * triage result is durable. The bucket number is part of that comment to keep
+ * an old demotion from satisfying a newer marker.
+ */
+export function gatePreservedFollowupMatches(commentsJson, bucketNumber, prNumber) {
+  let data;
+  try {
+    data = JSON.parse(commentsJson || '');
+  } catch {
+    return false;
+  }
+  const comments = Array.isArray(data)
+    ? data
+    : data && Array.isArray(data.comments) ? data.comments : [];
+  const bucket = String(Number(bucketNumber));
+  const pr = String(Number(prNumber));
+  const bucketPattern = new RegExp('(?:^|\\n).*\\bIssue\\s+#' + bucket + '\\b', 'i');
+  const sourcePattern = new RegExp('^\\s*-\\s+Sources?:[^\\n]*\\bPR\\s+#' + pr + '\\b', 'im');
+  return comments.some((comment) => {
+    const body = typeof comment?.body === 'string' ? comment.body : '';
+    return body.includes('<!-- followup-mint-gate -->')
+      && bucketPattern.test(body)
+      && sourcePattern.test(body);
+  });
+}
+
 /** Prove one persisted daily bucket contains a live item sourced by this PR. */
-export function persistedBucketIssueMatches(issue, prNumber) {
+export function persistedBucketIssueMatches(issue, prNumber, prComments = '') {
   const info = dailyBucketInfo(issue?.title || '');
   const body = String(issue?.body || '');
   const pr = String(Number(prNumber));
-  return !!info
-    && /^###\s+FU-\d{4}-\d{2}-\d{2}-\d{3}\b/m.test(body)
-    && new RegExp(`^\\s*-\\s+Sources?:[^\\n]*\\bPR\\s+#${pr}\\b`, 'im').test(body);
+  if (!info) return false;
+  const directEvidence = /^###\s+FU-\d{4}-\d{2}-\d{2}-\d{3}\b/m.test(body)
+    && new RegExp('^\\s*-\\s+Sources?:[^\\n]*\\bPR\\s+#' + pr + '\\b', 'im').test(body);
+  return directEvidence || gatePreservedFollowupMatches(prComments, issue.number, prNumber);
 }
 
 /**
@@ -360,14 +392,14 @@ export function persistedBucketIssueMatches(issue, prNumber) {
  * injected in tests. Unknown is deliberately returned as `null`, so a transient
  * API failure keeps the PR in the next batch instead of skipping it forever.
  */
-export function verifyTriageMarkerPersistence(markerBody, prNumber, readIssue) {
+export function verifyTriageMarkerPersistence(markerBody, prNumber, readIssue, prComments = '') {
   const expectation = triageMarkerPersistenceExpectation(markerBody);
   if (!expectation.requiresBucket) return true;
   if (!expectation.buckets.length || typeof readIssue !== 'function') return false;
   for (const number of expectation.buckets) {
     const issue = readIssue(number);
     if (issue === null || issue === undefined) return null;
-    if (Number(issue.number) !== number || !persistedBucketIssueMatches(issue, prNumber)) return false;
+    if (Number(issue.number) !== number || !persistedBucketIssueMatches(issue, prNumber, prComments)) return false;
   }
   return true;
 }
@@ -723,7 +755,7 @@ export function main() {
         } catch {
           return false;
         }
-      });
+      }, commentsRaw);
       if (persistence === true) {
         console.log(`PR #${n}: already has '${TRIAGE_COMMENT_PREFIX}' plus persisted bucket/item evidence → skip (idempotent).`);
         continue;
