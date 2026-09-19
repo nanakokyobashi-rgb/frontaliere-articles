@@ -144,6 +144,18 @@ jobs:
           # rifiutare un registro troncato; il checkout deve quindi esporre la
           # storia completa anche quando la PR non modifica `content/`.
           fetch-depth: 0
+          # Storia completa di commit e tree, ma blob scaricati solo per la
+          # HEAD: il clone pieno portava ~1 GB di blob storici (circa 74 s di
+          # checkout) di cui i gate leggono una manciata — i registri della
+          # revisione base (`scripts/lib/corpus-floors.mjs`), le superfici di
+          # `retired-articles-fully-removed`, il diff della review. Quei blob
+          # arrivano su richiesta con le credenziali che il checkout lascia
+          # configurate; se il fetch fallisce, `git show` esce != 0 e i due
+          # consumer falliscono chiusi, come per un blob assente.
+          # Niente sparse: i gate della PR leggono `content/`, `public/` e
+          # `data/jobs/` (misurato: 41 test rossi senza quei path, 10 senza
+          # solo `data/`).
+          filter: blob:none
 
       - uses: actions/setup-node@v5
         with:

@@ -414,18 +414,35 @@ function previousCorpusRevision(root, configuredRevision = historyRevisionFromEn
 
 function previousRegistryData(root, section, revision) {
   const rel = SECTION_REGISTRY_FILES[section];
+  // Presenza dal TREE, lettura dal BLOB, come `readGitFileAtRevision` di
+  // `scripts/ci/verify-api-floors.mjs`. Il checkout di `tests.yml` e' un
+  // partial clone (`filter: blob:none`): il blob storico arriva su richiesta,
+  // e un fetch fallito fa uscire `git show` != 0 esattamente come un path
+  // assente. Trattarli allo stesso modo azzererebbe l'high-water in silenzio,
+  // cioe' spegnerebbe il rifiuto del registro troncato. Solo l'assenza
+  // provata dal tree (che il partial clone ha sempre) vale "nessuna storia".
+  let listing;
   try {
-    const source = execFileSync('git', ['-C', root, 'show', `${revision}:${rel}`], {
+    listing = execFileSync('git', ['-C', root, 'ls-tree', '--name-only', revision, '--', rel], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    });
+  } catch (error) {
+    throw missingHistoryError(`impossibile elencare ${rel} alla revisione ${revision}`);
+  }
+  if (!listing.split('\n').some((entry) => entry === rel)) return null;
+  let source;
+  try {
+    source = execFileSync('git', ['-C', root, 'show', `${revision}:${rel}`], {
       encoding: 'utf8',
       stdio: ['ignore', 'pipe', 'ignore'],
       maxBuffer: 64 * 1024 * 1024,
     });
-    if (!source.trim()) return null;
-    return registryDataFromSource(source, rel, `${section} registry storico`);
   } catch (error) {
-    if (error?.status !== undefined) return null;
-    throw error;
+    throw missingHistoryError(`impossibile leggere ${rel} alla revisione ${revision}`);
   }
+  if (!source.trim()) return null;
+  return registryDataFromSource(source, rel, `${section} registry storico`);
 }
 
 function registryHighWater(
