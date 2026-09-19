@@ -58,27 +58,49 @@ jobs:
           set -euo pipefail
           helper_dir="${RUNNER_TEMP}/native-automerge-helpers"
           mkdir -p "$helper_dir/lib"
-          gh api "repos/${GITHUB_REPOSITORY}/contents/generator/scripts/load-rc-env.mjs?ref=main" \
-            --header 'Accept: application/vnd.github.raw+json' \
-            > "$helper_dir/load-rc-env.mjs"
-          gh api "repos/${GITHUB_REPOSITORY}/contents/generator/scripts/lib/google-service-account-token.mjs?ref=main" \
-            --header 'Accept: application/vnd.github.raw+json' \
-            > "$helper_dir/lib/google-service-account-token.mjs"
           # Keep the final extension while syntax-checking: Node otherwise
           # parses an `.tmp` file as CommonJS and rejects the helper exports.
           gate_tmp="$helper_dir/native-automerge-gate-check.mjs"
           policy_tmp="$helper_dir/review-test-policy-check.mjs"
           files_tmp="$helper_dir/lib/fetchPrFiles-check.mjs"
           vitest_tmp="$helper_dir/lib/vitestCheck-check.mjs"
+          # A runner can lose its outbound GitHub connection after the job has
+          # started. Retry only idempotent helper reads and only recognizable
+          # transient failures; 404/403, invalid JavaScript and empty files
+          # remain fail-closed instead of becoming a silent no-op.
           download_and_check() {
             local path="$1"
             local destination="$2"
-            gh api "repos/${GITHUB_REPOSITORY}/contents/${path}?ref=main" \
-              --header 'Accept: application/vnd.github.raw+json' \
-              > "$destination" \
-              && [ -s "$destination" ] \
-              && node --check "$destination"
+            local error_file="${destination}.error"
+            local attempt
+            for attempt in 1 2 3; do
+              rm -f "$destination" "$error_file"
+              if gh api "repos/${GITHUB_REPOSITORY}/contents/${path}?ref=main" \
+                --header 'Accept: application/vnd.github.raw+json' \
+                > "$destination" 2> "$error_file" \
+                && [ -s "$destination" ] \
+                && node --check "$destination"; then
+                rm -f "$error_file"
+                return 0
+              fi
+              if [ "$attempt" -eq 3 ] || ! grep -Eiq \
+                'i/o timeout|timed? out|connection reset|connection refused|temporary failure|service unavailable|bad gateway|gateway timeout|HTTP 5[0-9][0-9]|ECONNRESET|ETIMEDOUT|EAI_AGAIN' \
+                "$error_file"; then
+                cat "$error_file" >&2
+                rm -f "$destination" "$error_file"
+                return 1
+              fi
+              echo "::warning::Transient GitHub helper read failed for ${path} (attempt ${attempt}/3); retrying."
+              sleep "$((attempt * 5))"
+            done
+            return 1
           }
+
+          download_and_check \
+            'generator/scripts/load-rc-env.mjs' "$helper_dir/load-rc-env.mjs"
+          download_and_check \
+            'generator/scripts/lib/google-service-account-token.mjs' \
+            "$helper_dir/lib/google-service-account-token.mjs"
 
           # Inspect the parsed module graph, not a text substring: comments and
           # string literals must not turn the optional dependency into a hard
@@ -121,9 +143,8 @@ jobs:
             if [ "$gate_requires_vitest" = true ]; then
               mv "$vitest_tmp" "$helper_dir/lib/vitestCheck.mjs"
             fi
-            gh api "repos/${GITHUB_REPOSITORY}/contents/scripts/ci/lib/constants.mjs?ref=main" \
-              --header 'Accept: application/vnd.github.raw+json' \
-              > "$helper_dir/lib/constants.mjs"
+            download_and_check \
+              'scripts/ci/lib/constants.mjs' "$helper_dir/lib/constants.mjs"
             echo "NATIVE_AUTOMERGE_BOOTSTRAP_READY=true" >> "$GITHUB_ENV"
             echo "Native auto-merge gate bootstrap is present on main (vitestCheck required: $gate_requires_vitest)."
           else
