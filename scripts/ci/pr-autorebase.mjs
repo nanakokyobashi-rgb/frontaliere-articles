@@ -107,7 +107,7 @@ import {
 const DRY = process.argv.includes('--dry-run');
 const REPO = process.env.GITHUB_REPOSITORY || '';
 const TOKEN = process.env.GH_TOKEN || '';
-const MAX_PER_RUN = 10;
+export const MAX_PER_RUN = 10;
 // Costo tipico di una PR nel loop, misurato sui run reali (fase di lavoro
 // 19-114s per 1-10 PR): ~30s copre il caso normale con margine. È una STIMA per
 // decidere se COMINCIARE, non un timer: nessuna PR viene interrotta a metà.
@@ -205,6 +205,90 @@ function gh(args, { json = true, allowFail = false } = {}) {
   }
 }
 
+const PR_HEAD_SHA_RE = /^[0-9a-f]{40}$/i;
+
+/**
+ * Normalizza e valida il payload di `gh api --paginate --slurp` per le PR.
+ *
+ * `--slurp` restituisce un array di pagine, non una pagina concatenata. Una
+ * pagina o una PR malformata è un errore di discovery: non può diventare una
+ * lista vuota che farebbe apparire il run verde senza aver scansionato nulla.
+ *
+ * @param {unknown} payload
+ * @returns {Array<{number: number, headRefName: string, headRefOid: string,
+ *   isDraft: boolean, labels: Array<{name: string}>}>}
+ */
+export function parsePaginatedPullRequests(payload) {
+  if (!Array.isArray(payload)) {
+    throw new TypeError('pr-autorebase: pull request payload must be an array of pages');
+  }
+
+  const pullRequests = [];
+  const seenNumbers = new Set();
+  for (const [pageIndex, page] of payload.entries()) {
+    if (!Array.isArray(page)) {
+      throw new TypeError(`pr-autorebase: pull request page ${pageIndex + 1} is not an array`);
+    }
+    for (const [itemIndex, pullRequest] of page.entries()) {
+      if (!pullRequest || Array.isArray(pullRequest) || typeof pullRequest !== 'object') {
+        throw new TypeError(`pr-autorebase: pull request ${pageIndex + 1}/${itemIndex + 1} is not an object`);
+      }
+      const number = pullRequest.number;
+      const head = pullRequest.head;
+      const labels = pullRequest.labels;
+      if (!Number.isSafeInteger(number) || number <= 0) {
+        throw new TypeError(`pr-autorebase: pull request ${pageIndex + 1}/${itemIndex + 1} has an invalid number`);
+      }
+      if (seenNumbers.has(number)) {
+        throw new TypeError(`pr-autorebase: pull request #${number} appears more than once in the paginated payload`);
+      }
+      if (!head || Array.isArray(head) || typeof head !== 'object'
+          || typeof head.ref !== 'string' || head.ref.length === 0
+          || typeof head.sha !== 'string' || !PR_HEAD_SHA_RE.test(head.sha)) {
+        throw new TypeError(`pr-autorebase: pull request #${number} has an invalid head`);
+      }
+      if (typeof pullRequest.draft !== 'boolean') {
+        throw new TypeError(`pr-autorebase: pull request #${number} has an invalid draft flag`);
+      }
+      if (!Array.isArray(labels) || labels.some((label) => (
+        !label || Array.isArray(label) || typeof label !== 'object'
+          || typeof label.name !== 'string'
+      ))) {
+        throw new TypeError(`pr-autorebase: pull request #${number} has invalid labels`);
+      }
+      seenNumbers.add(number);
+      pullRequests.push({
+        number,
+        headRefName: head.ref,
+        headRefOid: head.sha,
+        isDraft: pullRequest.draft,
+        labels: labels.map(({ name }) => ({ name })),
+      });
+    }
+  }
+  return pullRequests;
+}
+
+/** Read the complete open-PR pool through the paginated GitHub API. */
+export function discoverOpenPullRequests(read = gh, repo = REPO) {
+  const payload = read([
+    'api', '--paginate', '--slurp',
+    `repos/${repo}/pulls?state=open&per_page=100`,
+  ]);
+  return parsePaginatedPullRequests(payload);
+}
+
+/** Filter drafts, then rotate the complete pool before the per-run cap. */
+export function preparePullRequestSweep(pullRequests, runNumber) {
+  if (!Array.isArray(pullRequests)) {
+    throw new TypeError('pr-autorebase: pull request pool must be an array');
+  }
+  return rotateForFairness(
+    pullRequests.filter((pullRequest) => !pullRequest.isDraft),
+    runNumber,
+  );
+}
+
 /** Read the trusted PR HEAD and body revision as one review-input snapshot. */
 function currentReviewInputContext(num) {
   try {
@@ -242,7 +326,7 @@ function reviewInputContextStillCurrent(num, expectedHead, expectedRevision) {
  * `mergeableOf()` qui sopra fa un solo re-poll dopo 4 s e poi si arrende;
  * merge-tree invece calcola il merge davvero, senza toccare il working tree.
  *
- * @returns {{ conflicted: boolean, files: string[] }}
+ * @returns {{ state: 'clean'|'conflicted'|'unknown', conflicted: boolean, files: string[] }}
  */
 function mergeTreeVerdict(headSha) {
   const res = spawnSync('git', ['merge-tree', '--write-tree', 'origin/main', headSha], {
@@ -251,14 +335,21 @@ function mergeTreeVerdict(headSha) {
   });
   // 0 = merge pulito, 1 = conflitti, >1 = non ha potuto calcolare (oggetto
   // mancante, storia shallow). Il terzo caso NON è «pulito»: non sappiamo, e
-  // dire «nessun conflitto» sarebbe la bugia che questo helper esiste per non
-  // dire. Lo trattiamo come non-conflitto ma lo logghiamo.
-  if (res.status === null || res.status > 1) {
+  // quindi nessuna label/commento può essere ricalcolata.
+  const state = classifyMergeTreeStatus(res.status);
+  if (state === 'unknown') {
     console.log(`  merge-tree non calcolabile (status=${res.status}): ${(res.stderr || '').trim().slice(0, 200)}`);
-    return { conflicted: false, files: [] };
+    return { state, conflicted: false, files: [] };
   }
-  if (res.status === 0) return { conflicted: false, files: [] };
-  return { conflicted: true, files: parseMergeTreeConflicts(res.stdout || '') };
+  if (state === 'clean') return { state, conflicted: false, files: [] };
+  return { state, conflicted: true, files: parseMergeTreeConflicts(res.stdout || '') };
+}
+
+/** Map merge-tree's process status to a fail-closed scan state. */
+export function classifyMergeTreeStatus(status) {
+  if (status === 0) return 'clean';
+  if (status === 1) return 'conflicted';
+  return 'unknown';
 }
 
 /**
@@ -293,6 +384,22 @@ export function decideConflictLabel({ conflicted, hasLabel }) {
   if (conflicted && !hasLabel) return 'add';
   if (!conflicted && hasLabel) return 'remove';
   return 'none';
+}
+
+/**
+ * Pure conflict-scan decision. Fetch failure and an uncomputable merge-tree
+ * result are both `unknown`: neither authorizes a label mutation.
+ */
+export function decideConflictScan({ fetchOk, mergeTreeState, hasLabel }) {
+  const state = fetchOk ? mergeTreeState : 'unknown';
+  if (state === 'unknown') return { state, action: 'none' };
+  if (state !== 'clean' && state !== 'conflicted') {
+    throw new TypeError(`pr-autorebase: invalid merge-tree state ${String(state)}`);
+  }
+  return {
+    state,
+    action: decideConflictLabel({ conflicted: state === 'conflicted', hasLabel }),
+  };
 }
 
 function git(args, { allowFail = false } = {}) {
@@ -908,13 +1015,22 @@ function clearStaleReviewLabel(num) {
  * che qualcuno ha già rebasato a mano.
  */
 function reportMainConflict(num, branch, head, labels) {
-  git(['fetch', 'origin', branch, 'main'], { allowFail: true });
+  const fetched = git(['fetch', 'origin', branch, 'main'], { allowFail: true });
+  if (fetched === null) {
+    console.log(`PR #${num}: fetch di ${branch}/main fallito → conflitto non verificabile; preservo label/commento esistenti.`);
+    return null;
+  }
   const verdict = mergeTreeVerdict(head);
   const hasLabel = labels.includes(MAIN_CONFLICT_LABEL);
-  const labelAction = decideConflictLabel({ conflicted: verdict.conflicted, hasLabel });
+  const scan = decideConflictScan({ fetchOk: true, mergeTreeState: verdict.state, hasLabel });
 
-  if (!verdict.conflicted) {
-    if (labelAction === 'remove') {
+  if (scan.state === 'unknown') {
+    console.log(`PR #${num}: merge-tree non verificabile → preservo label/commento esistenti.`);
+    return null;
+  }
+
+  if (scan.state === 'clean') {
+    if (scan.action === 'remove') {
       console.log(`PR #${num}: conflitto rientrato → -label ${MAIN_CONFLICT_LABEL}.`);
       if (!DRY) {
         gh(['pr', 'edit', String(num), '--repo', REPO, '--remove-label', MAIN_CONFLICT_LABEL],
@@ -927,7 +1043,7 @@ function reportMainConflict(num, branch, head, labels) {
   console.log(`PR #${num}: CONFLITTO con main su ${verdict.files.length} file — ${verdict.files.slice(0, 5).join(', ')}`);
   if (DRY) { console.log(`[dry] +label ${MAIN_CONFLICT_LABEL} #${num}`); return true; }
 
-  if (labelAction === 'add') {
+  if (scan.action === 'add') {
     // La label può non esistere ancora nel repo: creala best-effort, come fa
     // `ensureLabelsExist` in github-issue-creator.
     gh(['label', 'create', MAIN_CONFLICT_LABEL, '--repo', REPO,
@@ -1101,6 +1217,16 @@ async function processPR(pr) {
     }
   }
 
+  // Conflict discovery is the fail-closed boundary for the whole PR tick.
+  // Keep it before the needs-human ledger below: that ledger may write a
+  // sticky comment, so checking only at the later near-merge gate would leave
+  // a mutation path alive while fetch/merge-tree is unknown.
+  const conflictScan = reportMainConflict(num, branch, head, labels);
+  if (conflictScan === null) {
+    console.log(`PR #${num}: conflitto non verificabile → rinvio ogni azione questo tick.`);
+    return;
+  }
+
   // GATE `needs-human`: una passata SOLO se lo stato è cambiato.
   //
   // Deve stare QUI — subito dopo il solo stuck-red, e prima di tutto il resto —
@@ -1170,7 +1296,7 @@ async function processPR(pr) {
   // segnale è a valle del vitest verde:
   //   la review Claude gira DENTRO il job vitest, ma dopo i test: se questi
   //     falliscono il job si ferma prima ⇒ niente review, niente LGTM, niente
-  //     label (prima del 2026-08-26 era `pr-review-loop.yml`, gattato su
+  //     label (prima del 2026-08-26 era nel vecchio `pr-review-loop`, gattato su
   //     `workflow_run[tests] == success`: stessa implicazione, altro wiring);
   //   stale-pr-rescuer.yml classe A esige `tests == success`, classe B esige una
   //     review con 🔴 → cade nell'`else` ⇒ non mette nemmeno `stale-review`;
@@ -1185,12 +1311,6 @@ async function processPR(pr) {
   // altrimenti lo rendono irraggiungibile. Qui resta solo l'effetto: un rescue
   // valido rende la PR near-merge anche senza LGTM né label.
   if (stuckRedReason) nearMerge = true;
-
-  // Rilevazione conflitti: PRIMA del gate near-merge e per OGNI PR, perché è la
-  // classe fuori dal gate (in revisione, con un 🔴 e senza label) quella che
-  // resta in volo più a lungo e che nessun altro segnale copre. Costo: un
-  // `git merge-tree`, nessuna scrittura sul branch.
-  reportMainConflict(num, branch, head, labels);
 
   if (!nearMerge) {
     console.log(`PR #${num} non near-merge (no LGTM/collision-risk/stale-review/stuck-red) — skip del rebase.`);
@@ -1513,19 +1633,18 @@ async function main() {
 
   let prs;
   try {
-    prs = gh(['pr', 'list', '--repo', REPO, '--state', 'open', '--limit', '50',
-      '--json', 'number,headRefName,headRefOid,isDraft,labels']);
+    prs = discoverOpenPullRequests();
   } catch (e) {
-    console.error(`gh pr list fallito: ${String(e).slice(0, 160)}`);
-    process.exit(0);
+    console.error(`discovery PR fallita: ${String(e).slice(0, 160)}`);
+    process.exitCode = 1;
+    return;
   }
-  const openUnrotated = (prs || []).filter((p) => !p.isDraft);
   // Rotazione anti-starvation (#5145/#5144 punto 3): il cap `MAX_PER_RUN` e il
   // budget di run tagliano entrambi la CODA della lista. Partendo sempre dalla
   // stessa testa, una PR lenta in posizione 1 non consuma solo il proprio turno:
   // rende irraggiungibili tutte quelle dietro, a ogni run. Ruotando su
   // GITHUB_RUN_NUMBER ogni PR passa dalla testa nell'arco di pochi tick.
-  const open = rotateForFairness(openUnrotated, process.env.GITHUB_RUN_NUMBER);
+  const open = preparePullRequestSweep(prs, process.env.GITHUB_RUN_NUMBER);
   console.log(`PR open non-draft: ${open.length}${open.length > 1 ? ` (ordine ruotato su run #${process.env.GITHUB_RUN_NUMBER || '?'} — anti-starvation)` : ''}`);
   if (budget.enabled) {
     console.log(`budget di run: ${Math.round(budget.remainingMs() / 1000)}s utilizzabili prima della deadline del job.`);

@@ -38,7 +38,6 @@ on:
   # che questo workflow chiude, quindi vale la pena avere due strade.
   schedule:
     - cron: '17 */2 * * *'
-  workflow_dispatch:
 
 concurrency:
   group: auto-merge-engine-lockstep
@@ -110,31 +109,99 @@ jobs:
           fi
           export GH_TOKEN="$GITHUB_PAT_NANAKO"
 
-          PR=$(gh pr list --head engine-lockstep-auto --state open --json number -q '.[0].number // empty')
-          if [ -z "$PR" ]; then
-            echo "Nessuna PR lockstep aperta — niente da fare."
+          if ! LOCKSTEP_HEAD_REF=$(node scripts/ci/native-automerge-sweep-policy.mjs --lockstep-head-ref) \
+            || [ -z "$LOCKSTEP_HEAD_REF" ]; then
+            echo "::error::Nome del branch lockstep non leggibile dalla policy — non mergio."
+            exit 1
+          fi
+          PR_CANDIDATES_FILE="$RUNNER_TEMP/lockstep-pr-candidates.json"
+          if ! gh pr list --repo "$GH_REPO" --head "$LOCKSTEP_HEAD_REF" --base main \
+            --state open --json number,state,baseRefName,headRefName,headRepository \
+            > "$PR_CANDIDATES_FILE"; then
+            echo "::error::Elenco PR lockstep non leggibile — non mergio."
+            exit 1
+          fi
+          if ! PR=$(node scripts/ci/native-automerge-sweep-policy.mjs \
+            --lockstep-pr "$PR_CANDIDATES_FILE" "$GH_REPO" 2>&1); then
+            echo "Nessun candidato lockstep autorizzato — niente da fare: $PR"
             exit 0
           fi
           echo "PR lockstep aperta: #$PR"
 
-          # Stato dei check. `gh pr checks` esce non-zero quando qualcosa non è verde, il che
-          # sotto `set -e` chiuderebbe il job come FALLITO per una PR semplicemente ancora in
-          # corso — un rosso che non significa niente e che a furia di ripetersi si impara a
-          # ignorare. Qui un check pendente o fallito è un NON-EVENTO: si esce 0 e ci riprova
-          # il prossimo giro.
-          STATE=$(gh pr checks "$PR" --json state -q '[.[].state]|join(",")' 2>/dev/null || echo "UNKNOWN")
-          echo "check: $STATE"
-          case "$STATE" in
-            *FAILURE*|*ERROR*|*CANCELLED*|*TIMED_OUT*)
-              echo "Check non verdi — non mergio. Se persiste è un difetto dell'engine, non di questo workflow."
-              exit 0 ;;
-            *PENDING*|*QUEUED*|*IN_PROGRESS*|UNKNOWN)
-              echo "Check ancora in corso — riprovo al prossimo giro."
-              exit 0 ;;
-          esac
+          # Congela la HEAD prima dei check: il mirror force-pusha questo branch e
+          # una nuova HEAD durante la valutazione non deve poter trasformare un
+          # verdetto valido in un merge di contenuto mai verificato.
+          HEAD_SHA=""
+          if ! HEAD_SHA=$(gh pr view "$PR" --repo "$GH_REPO" --json headRefOid -q '.headRefOid // empty'); then
+            echo "::error::HEAD lockstep non leggibile — non mergio."
+            exit 1
+          fi
+          if ! [[ "$HEAD_SHA" =~ ^[0-9a-fA-F]{40}$ ]]; then
+            echo "::error::HEAD lockstep non rappresentabile — non mergio."
+            exit 1
+          fi
+          echo "HEAD lockstep verificata prima dei check: $HEAD_SHA"
+
+          # Leggi i nomi dei check required con il comando nativo, ma prendi
+          # OGNI stato dal payload check-runs della commit congelata. `gh pr
+          # checks` senza una commit esplicita può restituire il verdetto di una
+          # HEAD intermedia (A→B→A); il policy helper verifica head_sha su ogni
+          # run e poi conserva la distinzione required/all. Output vuoto,
+          # pagine malformate, run di un'altra HEAD e stati non sicuri sono tutti
+          # no-op fail-closed; il prossimo check_suite/cron riprova.
+          REQUIRED_NAMES_FILE="$RUNNER_TEMP/lockstep-required-names.json"
+          REQUIRED_NAMES_EXIT=0
+          if gh pr checks "$PR" --repo "$GH_REPO" --required --json name > "$REQUIRED_NAMES_FILE"; then
+            REQUIRED_NAMES_EXIT=0
+          else
+            REQUIRED_NAMES_EXIT=$?
+          fi
+          CHECK_RUNS_FILE="$RUNNER_TEMP/lockstep-check-runs.json"
+          CHECK_RUNS_EXIT=0
+          if gh api --paginate --slurp \
+            "repos/${GH_REPO}/commits/${HEAD_SHA}/check-runs?filter=all&per_page=100" > "$CHECK_RUNS_FILE"; then
+            CHECK_RUNS_EXIT=0
+          else
+            CHECK_RUNS_EXIT=$?
+          fi
+          if ! REQUIRED_DECISION=$(node scripts/ci/native-automerge-sweep-policy.mjs \
+            --required-check-runs "$CHECK_RUNS_FILE" "$REQUIRED_NAMES_FILE" "$HEAD_SHA" "$GH_REPO" 2>&1); then
+            echo "Check required sulla HEAD non autorizzante — non mergio: $REQUIRED_DECISION"
+            exit 0
+          fi
+          echo "check required: $REQUIRED_DECISION"
+          if [ "$REQUIRED_NAMES_EXIT" -ne 0 ] || [ "$CHECK_RUNS_EXIT" -ne 0 ]; then
+            echo "Lettura dei nomi/check-run non conclusa con successo (required=$REQUIRED_NAMES_EXIT, runs=$CHECK_RUNS_EXIT) — non mergio."
+            exit 0
+          fi
+          if ! CHECK_DECISION=$(node scripts/ci/native-automerge-sweep-policy.mjs \
+            --all-check-runs "$CHECK_RUNS_FILE" "$REQUIRED_NAMES_FILE" "$HEAD_SHA" "$GH_REPO" 2>&1); then
+            echo "Check completo sulla HEAD non autorizzante — non mergio: $CHECK_DECISION"
+            exit 0
+          fi
+          echo "check completo: $CHECK_DECISION"
+
+          # Ri-leggi e ri-valida l'identità della PR subito prima del merge:
+          # --head da solo non lega il ref al repository base, e un force-push
+          # può anche cambiare base/ref/repository mentre i check erano verdi.
+          FINAL_PR_FILE="$RUNNER_TEMP/lockstep-pr-final.json"
+          if ! gh pr view "$PR" --repo "$GH_REPO" \
+            --json number,state,baseRefName,headRefName,headRepository,headRefOid \
+            > "$FINAL_PR_FILE"; then
+            echo "::warning::Metadata PR lockstep non rileggibile prima del merge — riprovo al prossimo evento."
+            exit 0
+          fi
+          if ! FINAL_DECISION=$(node scripts/ci/native-automerge-sweep-policy.mjs \
+            --lockstep-pr "$FINAL_PR_FILE" "$GH_REPO" "$PR" "$HEAD_SHA" 2>&1); then
+            echo "::warning::Identità PR lockstep cambiata/non verificabile — non mergio: $FINAL_DECISION"
+            exit 0
+          fi
+          echo "Identità PR lockstep riconfermata: #$FINAL_DECISION"
 
           # `--merge`, non `--squash`: il commit del mirror porta il SHA del sito da cui
           # l'engine è stato copiato, che è l'unica traccia di provenienza fra i due repo.
-          # Uno squash la sostituirebbe col titolo della PR e la perderebbe.
-          gh pr merge "$PR" --merge --delete-branch=false
+          # Uno squash la sostituirebbe col titolo della PR e la perderebbe. Il match
+          # HEAD rende atomico il confine fra snapshot/check e merge rispetto a un
+          # force-push concorrente: in caso di drift GitHub rifiuta il merge.
+          gh pr merge "$PR" --merge --delete-branch=false --match-head-commit "$HEAD_SHA"
           echo "PR #$PR mergiata con il PAT: publish-api.yml riceve il push e rigenera la superficie dati."

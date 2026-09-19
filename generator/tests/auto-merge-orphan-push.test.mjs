@@ -163,7 +163,7 @@ test('(a) il blocco on prima di jobs contiene push (e ignora main)', () => {
   );
   assert.match(
     on,
-    /push:\n[ \t]+branches-ignore:\s*\[main\]/,
+    /push:\n[ \t]+branches-ignore:\s*\[main(?:,[^\]\n]*)?\]/,
     'Il trigger `push` deve ignorare `main`: spararlo lì costerebbe una run ' +
       'per ogni articolo generato (~90/giorno) senza nessuna PR da avvisare.',
   );
