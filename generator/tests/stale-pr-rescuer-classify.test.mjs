@@ -161,7 +161,20 @@ function reviews({
  * Esegue il blocco `run:` con `gh` e `date` stubbati e restituisce
  * `{ labeled, comments, stdout }`.
  */
-function runScan({ prs, checks, reviews: revs, comments: posted = [], fixerRuns = [], fixerRunsError = false, dryRun = false }) {
+function runScan({
+  prs,
+  checks,
+  reviews: revs,
+  comments: posted = [],
+  fixerRuns = [],
+  fixerRunsError = false,
+  dryRun = false,
+  // Risposta di `gh api repos/:r/commits/:sha --jq .commit.committer.date`,
+  // cioe' l'orologio del gate di eta'. Il default combacia con
+  // `updated_at: isoAgo(5)` della fixture: senza questo stub la chiamata
+  // cadeva nel ramo `*) echo '{}'` e OGNI PR risultava fresca.
+  pushedAt = isoAgo(5),
+}) {
   const dir = mkdtempSync(path.join(tmpdir(), 'stale-pr-rescuer-'));
   try {
     const bin = path.join(dir, 'bin');
@@ -173,6 +186,8 @@ function runScan({ prs, checks, reviews: revs, comments: posted = [], fixerRuns 
     const fixComments = path.join(dir, 'comments.json');
     const fixFixerRuns = path.join(dir, 'fixer-runs.json');
     const fixFixerRunsError = path.join(dir, 'fixer-runs-error');
+    const fixPushedAt = path.join(dir, 'pushed-at');
+    writeFileSync(fixPushedAt, String(pushedAt));
     writeFileSync(calls, '');
     writeFileSync(fixPrs, JSON.stringify(prs));
     writeFileSync(fixChecks, JSON.stringify(checks));
@@ -231,6 +246,10 @@ case "$sub" in
     # \`*/pulls*\`, quindi le foglie vanno prima della lista.
     case "$p" in
       */check-runs*) cat ${JSON.stringify(fixChecks)} ;;
+      # DOPO \`check-runs\` (il cui path e' \`.../commits/<sha>/check-runs\` e
+      # matcherebbe anche qui) e prima delle altre foglie: e' la lettura che
+      # decide l'eta' della PR.
+      */commits/*)   cat ${JSON.stringify(fixPushedAt)} ;;
       */reviews*)    cat ${JSON.stringify(fixReviews)} ;;
       */comments*)   cat ${JSON.stringify(fixComments)} ;;
       */pulls/*)
@@ -558,16 +577,57 @@ test('un run in volo sull\'head non è uno stallo: nessuna azione', opts, () => 
   assert.deepEqual(r.labeled, []);
 });
 
-test('una PR toccata da meno di 2h non viene mai etichettata', opts, () => {
-  // Vale anche come prova che lo stub di `date` discrimina: se non parsasse
-  // `updatedAt`, il fallback del workflow renderebbe fresca OGNI PR e tutti i
-  // casi sopra sarebbero verdi a vuoto.
+test('una PR con un PUSH di meno di 2h non viene mai etichettata', opts, () => {
+  // Vale anche come prova che lo stub di `date` discrimina: se non parsasse la
+  // data, il fallback del workflow renderebbe fresca OGNI PR e tutti i casi
+  // sopra sarebbero verdi a vuoto.
   const r = runScan({
-    prs: openPr({ updated_at: isoAgo(0.5) }),
+    prs: openPr(),
+    pushedAt: isoAgo(0.5),
     checks: checkRuns({ concl: 'success' }),
     reviews: reviews({ commit: OLD_SHA }),
   });
   assert.deepEqual(r.comments, [], `Il gate delle 2h non ha trattenuto una PR fresca.\n${r.stdout}`);
+});
+
+test('`updated_at` fresco ma push vecchio: la PR NON è più protetta', opts, () => {
+  // È il difetto che questo blocco esiste per togliere, misurato il
+  // 2026-09-19 sul corpus: #1599 era aperta da 11,7 h e ferma da ore, ma ogni
+  // 🔴 del reviewer le rinfrescava `updated_at` (1,8 h) e il rescuer la
+  // respingeva come «fresca». L'attività che rinfresca `updated_at` è
+  // esattamente quella che NON prova che un agente sia vivo.
+  const r = runScan({
+    prs: openPr({ updated_at: isoAgo(0.1) }),
+    pushedAt: isoAgo(11.7),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: OLD_SHA }),
+  });
+  assert.equal(
+    r.comments.length,
+    1,
+    `Un push vecchio dietro un \`updated_at\` fresco deve essere visto.\n${r.stdout}`,
+  );
+});
+
+test('lettura del push riuscita ma senza data: si ripiega su `updated_at`, non su «fresca»', opts, () => {
+  // `gh api` con un `--jq` non applicabile stampa `{}`, e un errore di
+  // trasporto può stampare testo: entrambi NON sono la stringa vuota, quindi
+  // `${PUSHED_AT:-$UPD}` non li copre. Senza il ripiego esplicito su `$UPD`
+  // quella spazzatura arriva a `date -d`, fallisce, e cade su `$NOW` — cioè
+  // «PR fresca» per sempre, su OGNI PR: la stessa cecità di prima, ma
+  // permanente e silenziosa. Riprodotto: con lo stub che rendeva `{}` il
+  // rescuer saltava ogni PR con «push recente (<2h)».
+  const r = runScan({
+    prs: openPr({ updated_at: isoAgo(5) }),
+    pushedAt: '{}',
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: OLD_SHA }),
+  });
+  assert.equal(
+    r.comments.length,
+    1,
+    `Una risposta senza data deve ripiegare su \`updated_at\`, non fabbricare una PR fresca.\n${r.stdout}`,
+  );
 });
 
 // ── 4. Nessuna cella muta: la proprietà che rende la condizione «coperta» ───

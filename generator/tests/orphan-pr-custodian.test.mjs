@@ -252,9 +252,32 @@ describe('stale-pr-rescuer — cablaggio', () => {
   });
 
   it('misura l\'inattivita\' sul push, come il custode che esegue', () => {
-    assert.ok(WORKFLOW.includes("PUSHED_AT=$(gh api \"repos/$REPO/commits/$HEAD\" --jq '.commit.committer.date'"));
-    assert.ok(WORKFLOW.includes('IDLE_SINCE="${PUSHED_AT:-$UPD}"'));
-    assert.ok(!WORKFLOW.includes('UPD_S=$(date -u -d "$UPD" +%s'));
+    // Asserzioni sull'INTENTO, non sui byte. La prima versione di questo test
+    // pinnava la riga verbatim e una negazione (`non deve comparire
+    // `date -d "$UPD"`): entrambe si sono rotte sulla correzione LEGITTIMA che
+    // aggiunge `--paginate` e rende raggiungibile proprio quel ripiego. Un
+    // test che dice «no» al rimedio giusto costa piu' di quanto protegge.
+    assert.match(
+      WORKFLOW,
+      /PUSHED_AT=\$\(gh api [^\n]*"repos\/\$REPO\/commits\/\$HEAD"[^\n]*\.commit\.committer\.date/,
+      'il gate di eta deve leggere la data del commit della HEAD',
+    );
+    assert.ok(
+      WORKFLOW.includes('IDLE_SINCE="${PUSHED_AT:-$UPD}"'),
+      'il push viene prima di `updated_at`',
+    );
+    assert.match(
+      WORKFLOW,
+      /UPD_S=\$\(date -u -d "\$IDLE_SINCE" \+%s/,
+      'il confronto di eta deve usare IDLE_SINCE, non `updated_at` diretto',
+    );
+    // Il ripiego su `$UPD` dev'essere RAGGIUNGIBILE anche quando la lettura
+    // riesce ma rende una non-data: senza, si cade su `$NOW` = «PR fresca».
+    assert.match(
+      WORKFLOW,
+      /\|\|\s*date -u -d "\$UPD" \+%s[^\n]*\n\s*\|\|\s*echo "\$NOW"/,
+      '`$UPD` deve essere tentato prima di `$NOW`',
+    );
   });
 
   it('porta il modulo canonico della revisione nel checkout sparse del custode', () => {

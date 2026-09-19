@@ -199,9 +199,24 @@ jobs:
             # più sotto. `updated_at` resta il ripiego quando la data del
             # commit non è leggibile: è sempre >= la data del push, quindi al
             # massimo ritarda un intervento, non ne anticipa uno.
-            PUSHED_AT=$(gh api "repos/$REPO/commits/$HEAD" --jq '.commit.committer.date' 2>/dev/null || true)
+            # Il ripiego su `$UPD` dev'essere raggiungibile anche quando la
+            # lettura RIESCE ma non restituisce una data: con un `--jq` non
+            # applicabile la risposta e' `{}`, e un errore trasporto puo' stampare
+            # testo. `${PUSHED_AT:-$UPD}` copre solo la stringa VUOTA, quindi
+            # quei casi arrivavano a `date -d` come spazzatura e cadevano sul
+            # `|| echo "$NOW"`, cioe' «PR fresca» — la stessa cecita' che
+            # questo blocco esiste per togliere, ma permanente. Il fallback
+            # esplicito su `$UPD` prima di `$NOW` lo rende raggiungibile.
+            # `--paginate` e' INERTE qui (l'endpoint rende un solo oggetto e
+            # non manda `Link`), e resta per una ragione di guardia: il test
+            # `#314 — nessuna lettura gh senza --paginate` vale proprio perche'
+            # non ha eccezioni da ricordare. Indebolirlo con un'allowlist per
+            # risparmiare un flag inerte costa piu' di quanto rende.
+            PUSHED_AT=$(gh api --paginate "repos/$REPO/commits/$HEAD" --jq '.commit.committer.date' 2>/dev/null || true)
             IDLE_SINCE="${PUSHED_AT:-$UPD}"
-            UPD_S=$(date -u -d "$IDLE_SINCE" +%s 2>/dev/null || echo "$NOW")
+            UPD_S=$(date -u -d "$IDLE_SINCE" +%s 2>/dev/null \
+              || date -u -d "$UPD" +%s 2>/dev/null \
+              || echo "$NOW")
             if [ $((NOW - UPD_S)) -lt $AGE_MIN_S ]; then echo "PR #$N con push recente (<2h) — skip"; continue; fi
 
             # A review covers the current input only when its marker authenticates
