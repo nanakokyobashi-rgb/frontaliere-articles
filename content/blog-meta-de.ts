@@ -11841,6 +11841,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.governo-no-iniziativa-frontiere.title': 'Grenzkontrollen: Regierung lehnt SVP-Initiative ab',
     'blog.article.governo-no-iniziativa-frontiere.excerpt': 'Der Bundesrat lehnt die Initiative «Asylmissbrauch stoppen» ab: Systematische Kontrollen würden Milliarden kosten und den Austritt aus Schengen riskieren.',
     'blog.article.governo-no-iniziativa-frontiere.imageAlt': 'Grenzübergang im Tessin mit Pendlerverkehr',
+    'blog.article.tasse-frontaliere-oltre-20km-2026.title': 'Grenzsteuern Italien Schweiz 2026: Fahren über 20 km',
+    'blog.article.tasse-frontaliere-oltre-20km-2026.excerpt': 'Steuervorschriften 2026 für Grenzgänger über 20 km: Quellensteuer, Freibeträge von 7.500 oder 10.000 Euro und Doppelbesteuerung.',
+    'blog.article.tasse-frontaliere-oltre-20km-2026.imageAlt': 'Blick auf Lugano mit Steuerdokumenten für Grenzgänger',
 };
 
 export default blogMetaDe;

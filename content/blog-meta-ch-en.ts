@@ -6569,6 +6569,15 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.crediti-esercito-difesa-svizzera.title': 'Swiss defense: 970 million requested for the army',
     'blog.article.crediti-esercito-difesa-svizzera.excerpt': 'The Federal Council is asking for almost a billion extra francs for ground-to-air and radar systems to deal with threats in Europe.',
     'blog.article.crediti-esercito-difesa-svizzera.imageAlt': 'Federal Palace in Bern, seat of the Swiss Federal Council',
+    'blog.article.permesso-c-zugo-requisiti.title': 'Permit C to Zug: requirements and application procedure',
+    'blog.article.permesso-c-zugo-requisiti.excerpt': 'Permanent residence in the Canton of Zug: residency requirements (5 years for EU/EFTA, 10 for non-EU), integration and financial stability.',
+    'blog.article.permesso-c-zugo-requisiti.imageAlt': 'View of Canton Zug and its administrative offices',
+    'blog.article.borse-studio-zugo-guide.title': 'Canton Zug Scholarships: Requirements and Amounts',
+    'blog.article.borse-studio-zugo-guide.excerpt': 'Practical guide on scholarships and loans in the Canton of Zug: access requirements, maximum amounts and deadlines for submitting applications.',
+    'blog.article.borse-studio-zugo-guide.imageAlt': 'Students studying in a modern Swiss library',
+    'blog.article.suissenegece-respinge-tasse-profitti.title': 'Suissenégoce rejects new taxes on profits',
+    'blog.article.suissenegece-respinge-tasse-profitti.excerpt': 'The association rejects any hypothesis of additional taxation on the profits of companies in the raw materials sector.',
+    'blog.article.suissenegece-respinge-tasse-profitti.imageAlt': 'Suissenégoce association against extra profit taxes',
 };
 
 export default blogMetaChEn;

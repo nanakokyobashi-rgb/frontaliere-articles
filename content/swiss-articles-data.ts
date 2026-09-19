@@ -19679,6 +19679,33 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'permesso-c-zugo-requisiti',
+    category: 'pratico',
+    date: '2026-09-18T22:03:28.185Z',
+    image: '/images/blog/permesso-c-zugo-requisiti.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'borse-studio-zugo-guide',
+    category: 'pratico',
+    date: '2026-09-18T23:08:02.019Z',
+    image: '/images/blog/borse-studio-zugo-guide.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'suissenegece-respinge-tasse-profitti',
+    category: 'fiscale',
+    date: '2026-09-19T01:32:55.474Z',
+    image: '/images/blog/suissenegece-respinge-tasse-profitti.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

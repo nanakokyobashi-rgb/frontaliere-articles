@@ -85157,6 +85157,123 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-permesso-c-zugo-requisiti': {
+    title: 'Permesso C a Zugo: requisiti e procedura di domanda',
+    description: 'Scopri come ottenere il permesso di domicilio C nel Canton Zugo: requisiti temporali (5-10 anni), criteri di integrazione e passaggi per la domanda.',
+    keywords: 'frontalieri, ticino, svizzera, italia, permesso, zugo, requisiti, procedura',
+    ogTitle: 'Permesso C a Zugo: requisiti e procedura di domanda',
+    ogDescription: 'Vuoi ottenere il domicilio stabile nel Canton Zugo? Scopri i requisiti di residenza per cittadini UE e extra-UE, i criteri di integrazione e i vantaggi fiscali e professionali del permesso C.',
+    canonicalPath: '/articoli-svizzera/permesso-c-zugo-requisiti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Permesso C a Zugo: requisiti e procedura di domanda",
+      "description": "Scopri come ottenere il permesso di domicilio C nel Canton Zugo: requisiti temporali (5-10 anni), criteri di integrazione e passaggi per la domanda.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/permesso-c-zugo-requisiti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta del Canton Zugo e dei suoi uffici amministrativi"
+      },
+      "datePublished": "2026-09-18T22:03:28+00:00",
+      "dateModified": "2026-09-18T22:03:28+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/permesso-c-zugo-requisiti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-borse-studio-zugo-guide': {
+    title: 'Borse di studio Canton Zugo: requisiti e importi',
+    description: 'Guida completa alle borse di studio e prestiti nel Canton Zugo. Scopri i requisiti economici, gli importi massimi e come presentare la domanda all\'ufficio.',
+    keywords: 'frontalieri, ticino, svizzera, italia, borse, studio, canton, zugo',
+    ogTitle: 'Borse di studio Canton Zugo: requisiti e importi',
+    ogDescription: 'Vuoi studiare nel Canton Zugo? Scopri come richiedere borse di studio e prestiti: requisiti economici, procedure e uffici competenti per il sostegno finanziario.',
+    canonicalPath: '/articoli-svizzera/borse-studio-zugo-guide/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Borse di studio Canton Zugo: requisiti e importi",
+      "description": "Guida completa alle borse di studio e prestiti nel Canton Zugo. Scopri i requisiti economici, gli importi massimi e come presentare la domanda all'ufficio.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/borse-studio-zugo-guide.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Studenti che studiano in una biblioteca svizzera moderna"
+      },
+      "datePublished": "2026-09-18T23:08:02+00:00",
+      "dateModified": "2026-09-18T23:08:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/borse-studio-zugo-guide/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-suissenegece-respinge-tasse-profitti': {
+    title: 'Suissenégoce respinge nuove tasse sui profitti',
+    description: 'L\'associazione Suissenégoce si oppone alle nuove tasse sui profitti nel commercio di materie prime. Nessun rischio di penuria petrolifera in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, suissenégoce, respinge, nuove, tasse',
+    ogTitle: 'Suissenégoce respinge le tasse extra sui profitti',
+    ogDescription: 'L\'associazione Suissenégoce si oppone fermamente all\'introduzione di nuove tasse sui profitti delle aziende di materie prime e trasporto marittimo in Svizzera.',
+    canonicalPath: '/articoli-svizzera/suissenegece-respinge-tasse-profitti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Suissenégoce respinge nuove tasse sui profitti",
+      "description": "L'associazione Suissenégoce si oppone alle nuove tasse sui profitti nel commercio di materie prime. Nessun rischio di penuria petrolifera in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/suissenegece-respinge-tasse-profitti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Associazione Suissenégoce contro le tasse extra sui profitti"
+      },
+      "datePublished": "2026-09-19T01:32:55+00:00",
+      "dateModified": "2026-09-19T01:32:55+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/suissenegece-respinge-tasse-profitti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

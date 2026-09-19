@@ -6569,6 +6569,15 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.crediti-esercito-difesa-svizzera.title': 'Difesa svizzera: richiesti 970 milioni per l\'esercito',
     'blog.article.crediti-esercito-difesa-svizzera.excerpt': 'Il Consiglio federale chiede quasi un miliardo di franchi extra per sistemi terra-aria e radar per far fronte alle minacce in Europa.',
     'blog.article.crediti-esercito-difesa-svizzera.imageAlt': 'Palazzo Federale a Berna, sede del Consiglio federale svizzero',
+    'blog.article.permesso-c-zugo-requisiti.title': 'Permesso C a Zugo: requisiti e procedura di domanda',
+    'blog.article.permesso-c-zugo-requisiti.excerpt': 'Guida al domicilio stabile nel Canton Zugo: requisiti di residenza (5 anni per UE/AELS, 10 per extra-UE), integrazione e stabilità finanziaria.',
+    'blog.article.permesso-c-zugo-requisiti.imageAlt': 'Veduta del Canton Zugo e dei suoi uffici amministrativi',
+    'blog.article.borse-studio-zugo-guide.title': 'Borse di studio Canton Zugo: requisiti e importi',
+    'blog.article.borse-studio-zugo-guide.excerpt': 'Guida pratica su borse di studio e prestiti nel Canton Zugo: requisiti di accesso, importi massimi e termini per la presentazione delle domande.',
+    'blog.article.borse-studio-zugo-guide.imageAlt': 'Studenti che studiano in una biblioteca svizzera moderna',
+    'blog.article.suissenegece-respinge-tasse-profitti.title': 'Suissenégoce respinge nuove tasse sui profitti',
+    'blog.article.suissenegece-respinge-tasse-profitti.excerpt': 'L\'associazione respinge ogni ipotesi di imposizione fiscale supplementare sui profitti delle aziende del settore delle materie prime.',
+    'blog.article.suissenegece-respinge-tasse-profitti.imageAlt': 'Associazione Suissenégoce contro le tasse extra sui profitti',
 };
 
 export default blogMetaChIt;

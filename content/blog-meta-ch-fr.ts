@@ -6569,6 +6569,15 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.crediti-esercito-difesa-svizzera.title': 'Défense suisse : 970 millions demandés pour l\'armée',
     'blog.article.crediti-esercito-difesa-svizzera.excerpt': 'Le Conseil fédéral demande près d\'un milliard de francs supplémentaires pour les systèmes sol-air et radar afin de faire face aux menaces en Europe.',
     'blog.article.crediti-esercito-difesa-svizzera.imageAlt': 'Palais fédéral à Berne, siège du Conseil fédéral suisse',
+    'blog.article.permesso-c-zugo-requisiti.title': 'Permis C à Zoug : exigences et procédure de demande',
+    'blog.article.permesso-c-zugo-requisiti.excerpt': 'Conduite à domicile stable dans le canton de Zoug : exigences de résidence (5 ans pour UE/AELE, 10 ans pour hors UE), intégration et stabilité financière.',
+    'blog.article.permesso-c-zugo-requisiti.imageAlt': 'Vue du Canton de Zoug et de ses bureaux administratifs',
+    'blog.article.borse-studio-zugo-guide.title': 'Bourses Canton Zoug : exigences et montants',
+    'blog.article.borse-studio-zugo-guide.excerpt': 'Guide pratique sur les bourses et les prêts dans le canton de Zoug : conditions d\'accès, montants maximaux et délais de dépôt des demandes.',
+    'blog.article.borse-studio-zugo-guide.imageAlt': 'Étudiants étudiant dans une bibliothèque suisse moderne',
+    'blog.article.suissenegece-respinge-tasse-profitti.title': 'Suissenégoce rejette de nouvelles taxes sur les bénéfices',
+    'blog.article.suissenegece-respinge-tasse-profitti.excerpt': 'L\'association rejette toute hypothèse d\'imposition supplémentaire sur les bénéfices des entreprises du secteur des matières premières.',
+    'blog.article.suissenegece-respinge-tasse-profitti.imageAlt': 'L\'association Suissenégoce contre les taxes supplémentaires sur les bénéfices',
 };
 
 export default blogMetaChFr;

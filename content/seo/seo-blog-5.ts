@@ -91684,6 +91684,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tasse-frontaliere-oltre-20km-2026': {
+    title: 'Tasse frontaliere Italia Svizzera 2026: guida oltre 20 km',
+    description: 'Guida fiscale 2026 per frontalieri oltre 20 km: imposta alla fonte, franchigie 7.500/10.000€ e credito d\'imposta per evitare la doppia imposizione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, tasse, oltre, regole, fiscali',
+    ogTitle: 'Tasse frontaliere 2026: regole per chi risiede oltre 20 km',
+    ogDescription: 'Scopri come funziona la tassazione per i frontalieri nel 2026: franchigie, aliquote IRPEF e gestione del credito d\'imposta per evitare la doppia imposizione CH-IT.',
+    canonicalPath: '/articoli-frontaliere/tasse-frontaliere-oltre-20km-2026',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tasse frontaliere Italia Svizzera 2026: guida oltre 20 km",
+      "description": "Guida fiscale 2026 per frontalieri oltre 20 km: imposta alla fonte, franchigie 7.500/10.000€ e credito d'imposta per evitare la doppia imposizione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/tasse-frontaliere-oltre-20km-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista di Lugano con documenti fiscali per frontalieri"
+      },
+      "datePublished": "2026-09-18T23:37:15+00:00",
+      "dateModified": "2026-09-18T23:37:15+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/tasse-frontaliere-oltre-20km-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

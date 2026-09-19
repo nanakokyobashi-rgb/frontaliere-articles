@@ -6569,6 +6569,15 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.crediti-esercito-difesa-svizzera.title': 'Schweizer Verteidigung: 970 Millionen für die Armee gefordert',
     'blog.article.crediti-esercito-difesa-svizzera.excerpt': 'Der Bundesrat fordert knapp eine Milliarde Franken zusätzlich für Boden-Luft- und Radarsysteme, um den Bedrohungen in Europa zu begegnen.',
     'blog.article.crediti-esercito-difesa-svizzera.imageAlt': 'Bundeshaus in Bern, Sitz des Schweizer Bundesrates',
+    'blog.article.permesso-c-zugo-requisiti.title': 'Führerschein C in Zug: Voraussetzungen und Antragsverfahren',
+    'blog.article.permesso-c-zugo-requisiti.excerpt': 'Leitfaden zum festen Wohnsitz im Kanton Zug: Wohnsitzvoraussetzungen (5 Jahre für EU/EFTA, 10 Jahre für Nicht-EU), Integration und finanzielle Stabilität.',
+    'blog.article.permesso-c-zugo-requisiti.imageAlt': 'Ansicht des Kantons Zug und seiner Verwaltungsbüros',
+    'blog.article.borse-studio-zugo-guide.title': 'Stipendien Kanton Zug: Voraussetzungen und Beträge',
+    'blog.article.borse-studio-zugo-guide.excerpt': 'Praxisleitfaden zu Stipendien und Darlehen im Kanton Zug: Zugangsvoraussetzungen, Höchstbeträge und Bewerbungsfristen.',
+    'blog.article.borse-studio-zugo-guide.imageAlt': 'Studierende in einer modernen Schweizer Bibliothek',
+    'blog.article.suissenegece-respinge-tasse-profitti.title': 'Suissenégoce lehnt neue Gewinnsteuern ab',
+    'blog.article.suissenegece-respinge-tasse-profitti.excerpt': 'Der Verband lehnt jede Annahme einer zusätzlichen Besteuerung der Gewinne von Unternehmen der Rohstoffbranche ab.',
+    'blog.article.suissenegece-respinge-tasse-profitti.imageAlt': 'Verband Suissenégoce gegen zusätzliche Gewinnsteuern',
 };
 
 export default blogMetaChDe;
