@@ -19760,6 +19760,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'scuola-canton-vaud-iscrizioni-cicli',
+    category: 'pratico',
+    date: '2026-09-19T04:14:39.399Z',
+    image: '/images/blog/scuola-canton-vaud-iscrizioni-cicli.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

@@ -6596,6 +6596,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.votazione-27-settembre-2026.title': 'Vote 27 September: 63% no to neutrality',
     'blog.article.votazione-27-settembre-2026.excerpt': 'Gfs.bern survey: over 60% of voters intend to reject initiatives on neutrality and food security as of 27 September.',
     'blog.article.votazione-27-settembre-2026.imageAlt': 'Federal elections September 27 2026: voters at the polling station in Switzerland',
+    'blog.article.scuola-canton-vaud-iscrizioni-cicli.title': 'Canton Vaud school system: enrolments and cycles',
+    'blog.article.scuola-canton-vaud-iscrizioni-cicli.excerpt': 'Complete guide to compulsory education in the Canton of Vaud: study cycles, age of enrollment, languages and transition to high school.',
+    'blog.article.scuola-canton-vaud-iscrizioni-cicli.imageAlt': 'Modern school building in Canton Vaud',
 };
 
 export default blogMetaChEn;

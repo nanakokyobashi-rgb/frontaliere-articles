@@ -6596,6 +6596,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.votazione-27-settembre-2026.title': 'Abstimmung vom 27. September: 63% Nein zur Neutralität',
     'blog.article.votazione-27-settembre-2026.excerpt': 'Umfrage gfs.bern: Mehr als 60% der Wähler wollen die Initiativen zur Neutralität und Ernährungssicherheit am 27. September ablehnen.',
     'blog.article.votazione-27-settembre-2026.imageAlt': 'Bundeswahlen 27. September 2026: Wähler an der Urne in der Schweiz',
+    'blog.article.scuola-canton-vaud-iscrizioni-cicli.title': 'Schulsystem Kanton Waadt: Einschreibungen und Zyklen',
+    'blog.article.scuola-canton-vaud-iscrizioni-cicli.excerpt': 'Vollständiger Leitfaden zur obligatorischen Schule im Kanton Waadt: Studiengänge, Einschreibungsalter, Sprachen und Übergang in die Sekundarstufe II',
+    'blog.article.scuola-canton-vaud-iscrizioni-cicli.imageAlt': 'Modernes Schulgebäude im Kanton Waadt',
 };
 
 export default blogMetaChDe;
