@@ -413,7 +413,12 @@ export function parseLocaleList(raw) {
  */
 export function selectBlockingPairs(pairs, { locales, slugs } = {}) {
   const localeSet = new Set(Array.isArray(locales) ? locales : []);
-  const slugSet = Array.isArray(slugs) && slugs.length > 0 ? new Set(slugs) : null;
+  // `null`/`undefined` mean that --slug was absent; an explicit empty list is
+  // an active filter and must select nothing. Treating both as `null` lets an
+  // empty shell variable turn an --apply audit into a whole-corpus rewrite.
+  const slugSet = slugs == null
+    ? null
+    : new Set(Array.isArray(slugs) ? slugs : []);
   return (Array.isArray(pairs) ? pairs : []).filter((p) => {
     if (!localeSet.has(p.locale)) return false;
     if (slugSet && !slugSet.has(p.id)) return false;
@@ -488,10 +493,71 @@ export function stratify(pairs, limit) {
 
 const argv = process.argv.slice(2);
 const flag = (name, dflt = null) => {
-  const i = argv.indexOf(`--${name}`);
-  return i === -1 ? dflt : (argv[i + 1] ?? dflt);
+  const exact = `--${name}`;
+  const i = argv.indexOf(exact);
+  // Il flag SUCCESSIVO non e' il valore di questo: `--slug --audit a.json`
+  // consumava `--audit` come slug letterale, selezionava zero coppie e usciva
+  // 0 — il no-op silenzioso che si legge come "non c'era niente da fare".
+  //
+  // Ma "valore mancante" NON puo' ricadere sul default, ed e' il verso
+  // pericoloso: `--limit --apply` diventerebbe `LIMIT=Infinity` e
+  // `--code --apply` TOGLIEREBBE il filtro per codice, allargando la
+  // riscrittura all'audit intero. Un flag che chiede un valore e non lo ha e'
+  // un errore di invocazione, quindi si esce 2 prima di applicare qualsiasi
+  // default. Il flag ASSENTE resta il caso legittimo del default.
+  if (i !== -1) {
+    const next = argv[i + 1];
+    if (next === undefined || next.startsWith('--')) {
+      console.error(`❌ ${exact} richiede un valore${next === undefined ? '' : ` (trovato "${next}")`}.`);
+      process.exit(2);
+    }
+    return next;
+  }
+  const inline = argv.find((arg) => arg.startsWith(`${exact}=`));
+  return inline === undefined ? dflt : inline.slice(exact.length + 1);
 };
-const has = (name) => argv.includes(`--${name}`);
+// `has()` risponde alla PRESENZA del flag, qualunque sia il valore inline.
+// Serve a `--slug`, dove `--slug=` e' un filtro attivo e vuoto che deve far
+// scattare la guardia qui sotto: se `has('slug')` tornasse `false` sul valore
+// vuoto, il filtro risulterebbe ASSENTE e si tornerebbe alla riscrittura di
+// tutto il corpus, cioe' esattamente il difetto che questa PR chiude.
+const has = (name) => {
+  const exact = `--${name}`;
+  return argv.includes(exact) || argv.some((arg) => arg.startsWith(`${exact}=`));
+};
+/** Negazioni inline riconosciute per i flag BOOLEANI. */
+const NEGATED_INLINE = new Set(['false', '0', 'no', 'off']);
+
+/**
+ * Presenza MENO negazione inline: e' cio' che serve a un flag BOOLEANO.
+ *
+ * Con la sola presenza (`has()`) `--apply=false` entrava nel percorso di
+ * SCRITTURA e poteva riscrivere body pubblicati — il valore diceva "no" e il
+ * parser leggeva "si'". Stessa classe per `--json=false` e `--stratify=false`.
+ *
+ * NON si puo' usare `bool()` per `--slug`: la' il valore vuoto e' un filtro
+ * attivo, non un "no", e confonderli riapre la riscrittura di tutto il corpus.
+ *
+ * Puro ed esportato perche' e' la logica su cui sta un percorso di scrittura,
+ * e un test la esercita senza lanciare la pipeline.
+ *
+ * @param {string[]} args
+ * @param {string} name
+ * @returns {boolean}
+ */
+export function inlineBoolean(args, name) {
+  const list = Array.isArray(args) ? args : [];
+  const exact = `--${name}`;
+  if (list.includes(exact)) return true;
+  const inline = list.find((arg) => typeof arg === 'string' && arg.startsWith(`${exact}=`));
+  if (inline === undefined) return false;
+  const value = inline.slice(exact.length + 1).trim().toLowerCase();
+  // `--apply=` senza valore NON abilita la scrittura: su un flag che riscrive
+  // contenuto pubblicato un'invocazione malformata cade sul lato sicuro. E' la
+  // differenza con `has()`, dove il valore vuoto e' un filtro e non un "si'".
+  return value !== '' && !NEGATED_INLINE.has(value);
+}
+const bool = (name) => inlineBoolean(argv, name);
 
 async function main() {
   const auditPath = flag('audit');
@@ -505,12 +571,19 @@ async function main() {
     console.error(`❌ --slug "${rawSlug ?? ''}" è vuoto. Indica almeno uno slug.`);
     process.exit(2);
   }
+  // `--out=` vuoto ricadeva su stdout in silenzio, e questo flag esiste proprio
+  // perche' stdout NON e' parsabile: i tier della cascata ci loggano le
+  // rotazioni di chiave. Una destinazione chiesta e persa e' il report perso.
+  if (has('out') && !flag('out')) {
+    console.error('❌ --out è vuoto. Indica un file oppure ometti il flag per il report su stdout.');
+    process.exit(2);
+  }
   if (!auditPath && SLUGS.length === 0) {
     console.error('❌ --audit <file.json> oppure --slug <id> è richiesto.');
     process.exit(2);
   }
-  const APPLY = has('apply');
-  const AS_JSON = has('json');
+  const APPLY = bool('apply');
+  const AS_JSON = bool('json');
   // `|| Infinity` sarebbe sbagliato: `--limit 0` e' zero, non "nessun limite".
   const rawLimit = flag('limit');
   const LIMIT = rawLimit === null ? Infinity : Number(rawLimit);
@@ -532,6 +605,7 @@ async function main() {
   const CONTENT_ROOT = resolve(flag('content-root', ROOT));
   const LOCALES = parseLocaleList(flag('locale', 'en,de,fr'));
   const CODE = flag('code');
+  const SLUG_FILTER = has('slug') ? SLUGS : undefined;
 
   // Un worktree sparse NON ha `content/`, e senza questo controllo ogni coppia
   // uscirebbe 'sorgente-mancante' con exit 0: un no-op che si legge come "non
@@ -549,19 +623,19 @@ async function main() {
     const audit = JSON.parse(readFileSync(auditPath, 'utf8'));
     pairs = selectBlockingPairs(blockingPairsFromAudit(audit), {
       locales: LOCALES,
-      slugs: SLUGS,
+      slugs: SLUG_FILTER,
     });
   } else {
     // Senza audit lo slug e' l'unica chiave: riscrittura in-place di un
     // articolo gia' registrato, italiano compreso. Nessun id nuovo.
     pairs = selectBlockingPairs(pairsForSlugs(SLUGS, LOCALES, CONTENT_ROOT), {
       locales: LOCALES,
-      slugs: SLUGS,
+      slugs: SLUG_FILTER,
     });
   }
   pairs = pairs.filter((p) => !CODE || p.codes.includes(CODE));
 
-  pairs = has('stratify') && LIMIT !== Infinity ? stratify(pairs, LIMIT) : pairs.slice(0, LIMIT);
+  pairs = bool('stratify') && LIMIT !== Infinity ? stratify(pairs, LIMIT) : pairs.slice(0, LIMIT);
 
   const results = [];
   let cursor = 0;
