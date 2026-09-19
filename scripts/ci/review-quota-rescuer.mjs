@@ -16,12 +16,17 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   parseReviewQuotaDeferredMarker,
+  REVIEW_QUOTA_SOURCE_EVENTS_BY_ROLE,
+  REVIEW_QUOTA_TRUSTED_ACTOR_RE,
+  REVIEW_QUOTA_SOURCE_WORKFLOW_BY_ROLE,
+  REVIEW_QUOTA_SOURCE_WORKFLOW_NAME_BY_ROLE,
   runQuotaLease,
 } from './check-quota-backoff.mjs';
 import {
   latestReviewClaims,
   reviewWasPosted,
 } from './review-claim.mjs';
+import { latestRedcheckFixClaims } from './redcheck-review-prefilter.mjs';
 import { normalizeReviewInputRevision, PR_BODY_JQ } from './review-test-policy.mjs';
 
 export const REVIEW_QUOTA_RETRY_MARKER = '<!-- REVIEW_QUOTA_RETRY:';
@@ -32,14 +37,14 @@ const PR_QUOTA_ROLES = new Set(['review', 'redflag', 'redcheck']);
 const REVIEW_QUOTA_RETRY_STATES = new Set(['requested', 'confirmed', 'failed']);
 const REVIEW_QUOTA_RETRY_ACTIVE_STATES = new Set(['requested', 'confirmed']);
 const REVIEW_TRANSIENT_RETRY_STATES = new Set(['requested', 'confirmed', 'failed']);
+const PR_HEAD_RE = /^[a-f0-9]{40}$/i;
 const REVIEW_QUOTA_REQUEST_GRACE_SEC = positiveInt(
   process.env.REVIEW_QUOTA_RESCUER_REQUEST_GRACE_SEC,
   30 * 60,
 );
 const SOURCE_WORKFLOW_BY_ROLE = Object.freeze({
   review: 'tests',
-  redflag: 'PR 🔴 fixer (bounded loop-closure on bot PRs)',
-  redcheck: 'PR ❌ check fixer (bounded, check richiesto rosso su PR bot)',
+  ...REVIEW_QUOTA_SOURCE_WORKFLOW_NAME_BY_ROLE,
 });
 
 const REPO = process.env.GH_REPO || process.env.GITHUB_REPOSITORY || '';
@@ -47,7 +52,6 @@ const DRY_RUN = process.env.DRY_RUN === '1' || process.env.DRY_RUN === 'true';
 const MAX_PRS = positiveInt(process.env.REVIEW_QUOTA_RESCUER_MAX_PRS, 100);
 const MAX_RETRIES = positiveInt(process.env.REVIEW_QUOTA_RESCUER_MAX_RETRIES, 1);
 const MAX_TRANSIENT_RETRIES = positiveInt(process.env.REVIEW_TRANSIENT_RESCUER_MAX_RETRIES, 1);
-const TRUSTED_AUTOMATION_RE = /^(?:github-actions\[bot\]|frontaliere-automation(?:\[bot\])?|claude(?:\[bot\])?|nanakokyobashi-rgb|valerielinc-ops)$/i;
 
 function positiveInt(value, fallback) {
   const n = Number(value);
@@ -71,10 +75,22 @@ function parseJson(raw, fallback) {
 }
 
 function apiPages(path) {
-  const parsed = parseJson(gh(['api', '--paginate', '--slurp', path]), []);
-  return Array.isArray(parsed)
-    ? parsed.flatMap((page) => Array.isArray(page) ? page : [])
-    : [];
+  let raw;
+  try {
+    raw = gh(['api', '--paginate', '--slurp', path]);
+  } catch (error) {
+    throw new Error(`GitHub API non leggibile per ${path}: ${String(error?.message || error).slice(0, 180)}`);
+  }
+  let parsed;
+  try {
+    parsed = JSON.parse(raw);
+  } catch {
+    throw new Error(`GitHub API malformata per ${path}: JSON non valido`);
+  }
+  if (!Array.isArray(parsed) || parsed.some((page) => !Array.isArray(page))) {
+    throw new Error(`GitHub API malformata per ${path}: attese pagine array`);
+  }
+  return parsed.flat();
 }
 
 function commentRank(comment, index) {
@@ -91,7 +107,7 @@ function laterRank(a, b) {
 
 function isTrustedAutomationComment(comment) {
   const login = String(comment?.user?.login || comment?.author?.login || '');
-  return !login || TRUSTED_AUTOMATION_RE.test(login);
+  return !login || REVIEW_QUOTA_TRUSTED_ACTOR_RE.test(login);
 }
 
 /** Parse one bounded retry for a transient review-gate failure. Pure. */
@@ -428,16 +444,31 @@ export function reviewQuotaRetryBody({
 }
 
 function listOpenPullRequests() {
-  const all = apiPages(`repos/${REPO}/pulls?state=open&per_page=100`)
-    .filter((pr) => pr && pr.number && !pr.draft)
+  const all = apiPages(`repos/${REPO}/pulls?state=open&per_page=100`);
+  // Un elenco di pagine formalmente JSON ma senza i campi che il routing
+  // consuma (`[[{}]]`, per esempio) non è «nessuna PR»: trasformarlo in una
+  // coda vuota renderebbe il rescuer verde mentre osserva zero dati utili.
+  if (!all.every((pr) => pr
+      && typeof pr === 'object'
+      && !Array.isArray(pr)
+      && Number.isInteger(pr.number)
+      && pr.number > 0
+      && typeof pr.draft === 'boolean'
+      && pr.head
+      && typeof pr.head === 'object'
+      && typeof pr.head.sha === 'string'
+      && pr.head.sha.length > 0)) {
+    throw new Error('elenco PR aperte malformato: campi di routing mancanti');
+  }
+  const eligible = all.filter((pr) => !pr.draft)
   const cursor = nonNegativeInt(
     process.env.REVIEW_QUOTA_RESCUER_CURSOR ?? process.env.GITHUB_RUN_NUMBER,
     0,
   );
-  const selection = roundRobinWindow(all, { limit: MAX_PRS, cursor });
-  if (selection.items.length < all.length) {
+  const selection = roundRobinWindow(eligible, { limit: MAX_PRS, cursor });
+  if (selection.items.length < eligible.length) {
     console.log(
-      `review-quota-rescuer: pool PR=${all.length}, finestra=${selection.items.length}, `
+      `review-quota-rescuer: pool PR=${eligible.length}, finestra=${selection.items.length}, `
       + `round=${cursor}, start=${selection.start}; il prossimo run osserva una finestra diversa.`,
     );
   }
@@ -476,6 +507,15 @@ export function sourceWorkflowForRole(role) {
   return SOURCE_WORKFLOW_BY_ROLE[String(role)] || '';
 }
 
+export function sourceWorkflowPathForRole(role) {
+  return REVIEW_QUOTA_SOURCE_WORKFLOW_BY_ROLE[String(role)] || '';
+}
+
+function sourceEventForRole(role, event) {
+  return Array.isArray(REVIEW_QUOTA_SOURCE_EVENTS_BY_ROLE[String(role)])
+    && REVIEW_QUOTA_SOURCE_EVENTS_BY_ROLE[String(role)].includes(String(event));
+}
+
 function sourceRunForTransientClaim(claim, head, { completedOnly = true } = {}) {
   const sourceRunId = String(claim?.runId || '');
   if (!/^\d+$/.test(sourceRunId)) return null;
@@ -497,7 +537,87 @@ function sourceRunForTransientClaim(claim, head, { completedOnly = true } = {}) 
   };
 }
 
-function sourceRunForCandidate(candidate, { completedOnly = true } = {}) {
+function trustedSourceMarker(candidate) {
+  const deferred = candidate?.deferred;
+  if (deferred?.version !== 2) return true;
+  const commentId = Number(deferred.commentId);
+  if (!Number.isSafeInteger(commentId) || commentId < 1 || !Array.isArray(candidate?.comments)) return false;
+  const comment = candidate.comments.find((item) => Number(item?.id) === commentId);
+  const marker = parseReviewQuotaDeferredMarker(comment?.body);
+  if (!marker
+      || marker.version !== deferred.version
+      || String(marker.head).toLowerCase() !== String(deferred.head).toLowerCase()
+      || String(marker.runId) !== String(deferred.runId)
+      || String(marker.role) !== String(deferred.role)
+      || String(marker.prNumber) !== String(deferred.prNumber)
+      || String(marker.sourceWorkflow) !== String(deferred.sourceWorkflow)
+      || String(marker.sourceEvent) !== String(deferred.sourceEvent)
+      || Number(marker.sourceAttempt) !== Number(deferred.sourceAttempt)) return false;
+  const login = String(comment?.user?.login || comment?.author?.login || '');
+  // `gh run view --json` has no actor field. The durable marker comment is
+  // emitted by the fixer run itself, so its GitHub author is the provenance
+  // actor we can verify without requesting an unsupported JSON property.
+  return Boolean(login) && REVIEW_QUOTA_TRUSTED_ACTOR_RE.test(login);
+}
+
+function triggerRunForDeferred(candidate) {
+  const triggerRunId = String(candidate?.deferred?.triggerRunId || '');
+  if (!/^\d+$/.test(triggerRunId)) return null;
+  const raw = gh([
+    'run', 'view', triggerRunId, '--repo', REPO,
+    '--json', 'databaseId,headSha,status,workflowName,event,attempt,conclusion',
+  ], { allowFail: true });
+  const run = parseJson(raw, null);
+  if (!run || String(run.databaseId || triggerRunId) !== triggerRunId
+      || String(run.workflowName || '') !== 'tests'
+      || !['pull_request', 'workflow_dispatch'].includes(String(run.event || ''))
+      || String(run.headSha || '').toLowerCase() !== String(candidate.head || '').toLowerCase()) return null;
+  return {
+    ...run,
+    databaseId: triggerRunId,
+    headSha: String(run.headSha).toLowerCase(),
+  };
+}
+
+function sourceProvenanceForCandidate(candidate, run) {
+  const deferred = candidate?.deferred;
+  if (deferred?.version !== 2) {
+    return { verified: String(run?.headSha || '').toLowerCase() === String(candidate?.head || '').toLowerCase() };
+  }
+  const role = String(deferred.role || '');
+  if (String(deferred.prNumber || '') !== String(candidate?.pr?.number || '')
+      || String(deferred.head || '').toLowerCase() !== String(candidate?.head || '').toLowerCase()
+      || String(deferred.sourceWorkflow || '') !== sourceWorkflowPathForRole(role)
+      || !sourceEventForRole(role, deferred.sourceEvent)
+      || String(run?.workflowName || '') !== sourceWorkflowForRole(role)
+      || String(run?.event || '') !== String(deferred.sourceEvent || '')) {
+    return { verified: false, reason: 'fixer-provenance-mismatch' };
+  }
+
+  const runHead = String(run?.headSha || '').toLowerCase();
+  const prHead = String(candidate?.head || '').toLowerCase();
+  // workflow_run/dispatch children may legitimately report the workflow's
+  // default branch. Their PR binding is proved by the triggering tests run;
+  // only a direct pull_request_review run is required to carry the PR HEAD.
+  if (deferred.sourceEvent === 'pull_request_review') {
+    return runHead === prHead
+      ? { verified: true }
+      : { verified: false, reason: 'review-run-head-mismatch' };
+  }
+  if (deferred.sourceEvent === 'workflow_dispatch') {
+    // Manual fixer runs are intentionally dispatched on the default branch,
+    // so their own `headSha` is not the PR head. `currentTargetProof()` in the
+    // caller verifies the trusted preflight intent against the live PR; the
+    // allowlisted workflow/event/actor above binds that intent to this run.
+    return { verified: true, dispatchIntent: true };
+  }
+  const trigger = triggerRunForDeferred(candidate);
+  return trigger
+    ? { verified: true, trigger }
+    : { verified: false, reason: 'trigger-tests-head-unverified' };
+}
+
+export function sourceRunForCandidate(candidate, { completedOnly = true } = {}) {
   const sourceRunId = String(candidate?.deferred?.runId || '');
   const expectedWorkflow = sourceWorkflowForRole(candidate?.deferred?.role);
   if (!/^\d+$/.test(sourceRunId) || !expectedWorkflow) return null;
@@ -508,26 +628,114 @@ function sourceRunForCandidate(candidate, { completedOnly = true } = {}) {
   const run = parseJson(raw, null);
   if (!run
       || (completedOnly && run.status !== 'completed')
-      || run.headSha !== candidate.head
-      || run.workflowName !== expectedWorkflow) return null;
+      || String(run.databaseId || sourceRunId) !== sourceRunId
+      || run.workflowName !== expectedWorkflow
+      || !trustedSourceMarker(candidate)) return null;
+  const provenance = sourceProvenanceForCandidate(candidate, run);
+  if (!provenance.verified) return null;
   const attempt = Number(run.attempt);
   if (!Number.isSafeInteger(attempt) || attempt < 1) return null;
   return {
     ...run,
     databaseId: String(run.databaseId || sourceRunId),
     attempt,
+    provenanceVerified: true,
   };
 }
 
-/** Pure: only an autonomous rerun closes the fence; a lease-skip may be green. */
-export function sourceRunAlreadyHandled(candidate, run) {
+/** Pure: an advanced fixer attempt needs evidence of real work, not just a new ID. */
+export function sourceRunAlreadyHandled(candidate, run, evidence = run) {
   const deferredAttempt = Number(candidate?.deferred?.sourceAttempt);
   const runAttempt = Number(run?.attempt);
   const hasDeferredAttempt = Number.isSafeInteger(deferredAttempt) && deferredAttempt > 0;
   const autonomousAttempt = Number.isSafeInteger(runAttempt)
     && runAttempt > 0
     && (hasDeferredAttempt ? runAttempt > deferredAttempt : runAttempt > 1);
-  return autonomousAttempt;
+  if (candidate?.deferred?.version !== 2) return autonomousAttempt;
+  if (!autonomousAttempt) return false;
+  return evidence?.verified === true && evidence?.consumed === true;
+}
+
+const REDFLAG_FIX_STEP_NAME = 'Run Codex Luna Max 🔴-fix';
+
+/** Pure evidence classifier for an advanced fixer attempt. */
+export function fixerAttemptEvidence({ role, runId, prNumber, head, comments = [], jobs } = {}) {
+  const normalizedRole = String(role || '');
+  const normalizedHead = String(head || '').toLowerCase();
+  const normalizedPr = String(prNumber || '');
+  if (!['redflag', 'redcheck'].includes(normalizedRole)
+      || !/^\d+$/.test(String(runId || ''))
+      || !PR_HEAD_RE.test(normalizedHead)
+      || !/^\d+$/.test(normalizedPr)) {
+    return { verified: false, consumed: false, reason: 'fixer-evidence-context-invalid' };
+  }
+  if (normalizedRole === 'redcheck') {
+    if (!Array.isArray(comments) || comments.some((comment) => !comment || typeof comment !== 'object')) {
+      return { verified: false, consumed: false, reason: 'redcheck-claims-unreadable' };
+    }
+    const terminal = latestRedcheckFixClaims(comments).some((claim) => (
+      String(claim.prNumber) === normalizedPr
+      && String(claim.headSha).toLowerCase() === normalizedHead
+      && String(claim.runId) === String(runId)
+      && ['completed', 'failed-terminal'].includes(String(claim.state))
+    ));
+    return { verified: true, consumed: terminal, reason: terminal ? 'redcheck-claim-terminal' : 'redcheck-claim-not-terminal' };
+  }
+  if (!Array.isArray(jobs) || jobs.some((job) => !job || typeof job !== 'object' || !Array.isArray(job.steps))) {
+    return { verified: false, consumed: false, reason: 'redflag-jobs-unreadable' };
+  }
+  const step = jobs.flatMap((job) => job.steps)
+    .find((item) => item && item.name === REDFLAG_FIX_STEP_NAME);
+  if (!step) return { verified: true, consumed: false, reason: 'redflag-fix-step-not-started' };
+  const started = typeof step.startedAt === 'string' && step.startedAt.length > 0;
+  const skipped = String(step.conclusion || '').toLowerCase() === 'skipped';
+  return {
+    verified: true,
+    consumed: started && !skipped,
+    reason: started && !skipped ? 'redflag-fix-step-started' : 'redflag-fix-step-skipped',
+  };
+}
+
+function sourceRunEvidence(candidate, run) {
+  if (candidate?.deferred?.version !== 2) return { verified: true, consumed: true };
+  const role = String(candidate.deferred.role || '');
+  if (role === 'redcheck') {
+    return fixerAttemptEvidence({
+      role,
+      runId: run?.databaseId,
+      prNumber: candidate?.pr?.number,
+      head: candidate?.head,
+      comments: candidate?.comments,
+    });
+  }
+  const raw = gh([
+    'run', 'view', String(run?.databaseId || ''), '--repo', REPO,
+    '--json', 'jobs',
+  ], { allowFail: true });
+  const payload = parseJson(raw, null);
+  return fixerAttemptEvidence({
+    role,
+    runId: run?.databaseId,
+    prNumber: candidate?.pr?.number,
+    head: candidate?.head,
+    jobs: payload?.jobs,
+  });
+}
+
+export function currentTargetProof(candidate) {
+  if (candidate?.deferred?.version !== 2) return { verified: true, obsolete: false };
+  const number = String(candidate?.pr?.number || '');
+  const raw = gh(['api', `repos/${REPO}/pulls/${number}`], { allowFail: true });
+  const pr = parseJson(raw, null);
+  if (!pr || String(pr.number || '') !== number
+      || !pr.head || typeof pr.head.sha !== 'string' || !PR_HEAD_RE.test(pr.head.sha)
+      || !['open', 'closed'].includes(String(pr.state || '').toLowerCase())) return null;
+  const headMatches = pr.head.sha.toLowerCase() === String(candidate.head || '').toLowerCase();
+  if (!headMatches) return null;
+  return {
+    verified: true,
+    obsolete: String(pr.state).toLowerCase() !== 'open',
+  };
 }
 
 function releaseLease(prNumber, role, token, runId, owner = 'review-quota-rescuer') {
@@ -677,6 +885,8 @@ export function collectReviewQuotaCandidates(prs, commentsByPr = new Map()) {
     const head = String(pr?.head?.sha || '');
     const comments = commentsByPr.get(Number(pr?.number)) || [];
     return pendingReviewQuotaDeferredEntries({ head, comments, includeRequested: true })
+      .filter(({ deferred }) => deferred.version !== 2
+        || String(deferred.prNumber || '') === String(pr?.number || ''))
       .map(({ deferred, retry }) => ({ pr, head, deferred, retry, comments }));
   }).sort((a, b) => {
     const at = Date.parse(a.deferred.createdAt || '') || 0;
@@ -879,12 +1089,33 @@ function reconcileRequestedRetry(candidate, number) {
     return true;
   }
 
-  const observedState = retryStateForObservedAttempt({
+  let observedState = retryStateForObservedAttempt({
     currentAttempt: run.attempt,
     requestedAttempt,
     status: run.status,
     conclusion: run.conclusion,
   });
+  if (candidate.deferred.version === 2 && run.attempt > requestedAttempt) {
+    const evidence = sourceRunEvidence(candidate, run);
+    if (!evidence.verified) {
+      console.log(`PR #${number}: attempt fixer avanzato ma prova di consumo non verificabile (${evidence.reason}); fence requested conservato.`);
+      return true;
+    }
+    if (evidence.consumed) {
+      // A real model step / terminal same-owner claim proves that the retry was
+      // accepted. The run may still be in progress for redflag; do not wait for
+      // a terminal conclusion to avoid a duplicate dispatch.
+      observedState = 'confirmed';
+    } else if (run.status === 'completed') {
+      // A completed no-op (lease skip, capability guard, or redcheck claim not
+      // finalized) did not consume a fixer attempt. Reopen the deferral so the
+      // next bounded tick can retry it.
+      observedState = 'failed';
+    } else {
+      console.log(`PR #${number}: attempt fixer avanzato ma il passo di fix non è ancora terminale; fence requested conservato.`);
+      return true;
+    }
+  }
   if (observedState) {
     const observedBody = reviewQuotaRetryBody({
       ...fields,
@@ -925,8 +1156,7 @@ function reconcileRequestedRetry(candidate, number) {
 
 function main() {
   if (!REPO) {
-    console.log('review-quota-rescuer: repository mancante — nessuna azione.');
-    return;
+    throw new Error('repository mancante: scansione non verificabile');
   }
 
   const prs = listOpenPullRequests();
@@ -953,6 +1183,15 @@ function main() {
   for (const candidate of candidates) {
     if (retried >= MAX_RETRIES) break;
     const number = Number(candidate.pr.number);
+    const targetProof = currentTargetProof(candidate);
+    if (!targetProof) {
+      console.log(`PR #${number}: target/provenance non verificabile — nessuna riconciliazione o mutazione.`);
+      continue;
+    }
+    if (targetProof.obsolete) {
+      console.log(`PR #${number}: deferral sulla HEAD corrente ma PR non più aperta — nessun rerun.`);
+      continue;
+    }
     if (candidate.retry?.event?.state === 'requested') {
       if (DRY_RUN) {
         console.log(`[dry] PR #${number}: riconciliazione del marker requested saltata.`);
@@ -968,7 +1207,16 @@ function main() {
       continue;
     }
 
-    if (sourceRunAlreadyHandled(candidate, run)) {
+    const runAdvanced = candidate.deferred.version === 2
+      && Number.isSafeInteger(Number(candidate.deferred.sourceAttempt))
+      && run.attempt > Number(candidate.deferred.sourceAttempt);
+    const evidence = runAdvanced ? sourceRunEvidence(candidate, run) : null;
+    if (runAdvanced && !evidence?.verified) {
+      console.log(`PR #${number}: attempt fixer avanzato senza prova di consumo verificabile (${evidence?.reason || 'unknown'}); nessun rerun o marker.`);
+      continue;
+    }
+
+    if (sourceRunAlreadyHandled(candidate, run, evidence || run)) {
       if (DRY_RUN) {
         console.log(
           `[dry] PR #${number}: non rilancerei ${candidate.deferred.role} `
@@ -1049,8 +1297,10 @@ if (process.argv[1] && path.resolve(fileURLToPath(import.meta.url)) === path.res
     main();
   } catch (error) {
     // Un rescuer rotto non deve colorare il check del repo né modificare il
-    // routing: il cron successivo riprova e il marker resta osservabile.
-    console.error(`review-quota-rescuer: probe fallita (defer sicuro): ${String(error?.message || error).slice(0, 240)}`);
-    process.exitCode = 0;
+    // routing: il cron successivo riprova e il marker resta osservabile. Il
+    // fallimento resta però non-zero: un check verde qui maschererebbe una
+    // scansione mai verificata e trasformerebbe un errore API in «coda vuota».
+    console.error(`review-quota-rescuer: probe fallita (nessuna azione, retry al prossimo tick): ${String(error?.message || error).slice(0, 240)}`);
+    process.exitCode = 1;
   }
 }

@@ -147,6 +147,8 @@ Prefix: `🔴 Important` / `🟡 Nit` / `🟣 Pre-existing` / `❓ q:`.
 
 **Tieni:** la linea esatta, i simboli in backtick, un fix concreto, il *perché* solo se non ovvio.
 
+**Newline reali:** posta Markdown con newline reali, non la sequenza letterale `\n` o un JSON-escaped intero; marker, heading, finding e `## LGTM` devono restare su righe proprie. Una review su una sola riga rompe il parsing del gate e del harvester.
+
 ### Esempi
 
 - `scripts/build-api.mjs:L142: 🔴 Important: quando un locale non ha articoli il file meta-<locale>.json viene scritto comunque con counts a 0, e il sito lo accetta come verita' — la pagina risulta vuota invece che assente. Salta il write o propaga l'errore.`
