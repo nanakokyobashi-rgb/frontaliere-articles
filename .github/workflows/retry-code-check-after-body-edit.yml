@@ -10,8 +10,10 @@ run-name: 'Body recovery · PR #${{ github.event.pull_request.number }}'
 #  1. no dispatch when the head has no run: this repo's tests.yml checks out
 #     the dispatched ref, so a dispatch on the base would test base code and
 #     publish its check on the base SHA, never on the PR head;
-#  2. the run is selected on head SHA AND PR branch AND a PR-bound event, so a
-#     `push` run of the same commit on another branch is never the target;
+#  2. the run is selected on head SHA AND PR branch AND the `pull_request`
+#     event: a `push` run of the same commit, or a test-only dispatch from
+#     pr-autorebase (no pr_number: no body contract, no review), is never the
+#     target;
 #  3. a run still in flight that started BEFORE the edit is cancelled and
 #     rerun (it may have read the old body), instead of being classified
 #     before its failed steps exist — the old `edited` trigger did the same
@@ -54,10 +56,10 @@ jobs:
             const runs = await github.paginate(github.rest.actions.listWorkflowRuns, {
               ...repo, workflow_id: 'tests.yml', head_sha: pr.head.sha, per_page: 100,
             });
-            // Only runs that validate THIS PR: same branch, PR-bound event.
+            // Only runs that carry this PR's body contract and review: the
+            // `pull_request` event on the PR branch.
             const latest = runs
-              .filter(run => run.head_branch === pr.head.ref &&
-                ['pull_request', 'workflow_dispatch'].includes(run.event))
+              .filter(run => run.head_branch === pr.head.ref && run.event === 'pull_request')
               .sort((a, b) => b.id - a.id)[0];
             if (!latest) {
               core.info(`No tests run of PR #${number} exists on ${pr.head.sha}; the next push re-enters the code check.`);
@@ -72,26 +74,36 @@ jobs:
               }
               return run.run_attempt === attempt ? run : null;
             };
+            // Re-read: the listing may be stale by now.
+            let target = await getRun();
+            // A run (or attempt) that started after the edit already read the
+            // current body from the API: its verdict, or the one it is about
+            // to give, is not stale. This also keeps a duplicate delivery from
+            // cancelling our own rerun. Same-second timestamps count as BEFORE
+            // the edit (fail-safe: at worst one extra rerun, never a stale
+            // verdict).
+            const startedAt = Date.parse(target.run_started_at || target.created_at || '');
+            if (!Number.isFinite(editedAt) || !Number.isFinite(startedAt) || startedAt > editedAt) {
+              core.info(`Run ${target.id} started after the edit; it validates the current body.`);
+              return;
+            }
+            if (target.status !== 'completed') {
+              try {
+                await github.rest.actions.cancelWorkflowRun({ ...repo, run_id: target.id });
+              } catch (error) {
+                // 409: it completed in the meantime; classify it below.
+                if (error?.status !== 409) throw error;
+              }
+              target = await settle(target.run_attempt);
+              if (!target) {
+                core.warning(`Run ${latest.id} did not settle within the wait; no retry.`);
+                return;
+              }
+            }
             let retryReason = '';
-            if (latest.status !== 'completed') {
-              // A run (or attempt) that started after the edit already reads
-              // the current body from the API: leave it alone. This also
-              // keeps a duplicate delivery from cancelling our own rerun.
-              const startedAt = Date.parse(latest.run_started_at || latest.created_at || '');
-              if (!Number.isFinite(editedAt) || !Number.isFinite(startedAt) || startedAt >= editedAt) {
-                core.info(`Run ${latest.id} started after the edit; it validates the current body.`);
-                return;
-              }
-              await github.rest.actions.cancelWorkflowRun({ ...repo, run_id: latest.id });
-              const cancelled = await settle(latest.run_attempt);
-              if (!cancelled) {
-                core.warning(`Run ${latest.id} did not settle after cancel; no retry.`);
-                return;
-              }
-              retryReason = 'it was still running on the previous body';
-            } else if (['cancelled', 'timed_out'].includes(latest.conclusion)) {
-              retryReason = `it ended ${latest.conclusion} with no later verdict`;
-            } else if (latest.conclusion === 'failure') {
+            if (['cancelled', 'timed_out'].includes(target.conclusion)) {
+              retryReason = `it ended ${target.conclusion} (or was still running on the previous body)`;
+            } else if (target.conclusion === 'failure') {
               // Inspect the latest attempt only, never an old failure
               // underneath a running retry. A passed preflight alone is not
               // enough: the reviewer can also reject the body.
@@ -119,7 +131,7 @@ jobs:
                   : '';
             }
             if (!retryReason) {
-              core.info(`Run ${latest.id} (${latest.conclusion}) did not fail on the body or review alone; preserve the existing code verdict.`);
+              core.info(`Run ${latest.id} (${target.conclusion}) did not fail on the body or review alone; preserve the existing code verdict.`);
               return;
             }
             // Recheck both head and attempt right before the write. Duplicate
@@ -129,6 +141,6 @@ jobs:
               getRun(),
             ]);
             if (currentPr.state !== 'open' || currentPr.head.sha !== pr.head.sha ||
-                currentRun.status !== 'completed' || currentRun.run_attempt !== latest.run_attempt) return;
+                currentRun.status !== 'completed' || currentRun.run_attempt !== target.run_attempt) return;
             await github.rest.actions.reRunWorkflow({ ...repo, run_id: latest.id });
             core.info(`Retrying code run ${latest.id}: ${retryReason} and the description changed.`);

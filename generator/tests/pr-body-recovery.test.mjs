@@ -16,8 +16,9 @@ const EDITED_AT = '2026-09-19T12:00:00Z';
 const BEFORE_EDIT = '2026-09-19T11:50:00Z';
 const AFTER_EDIT = '2026-09-19T12:01:00Z';
 
-// `later`: fields the run takes on successive reads after the first one.
-async function recover(bodyConclusion, status = 'completed', failedSteps = [], later = [], runOverrides = {}) {
+// `later`: fields the run takes on successive getWorkflowRun reads (the
+// first read is the script's re-read of the listed run).
+async function recover(bodyConclusion, status = 'completed', failedSteps = [], later = [], runOverrides = {}, cancelError = null) {
   const reruns = [];
   const cancels = [];
   const run = {
@@ -34,7 +35,10 @@ async function recover(bodyConclusion, status = 'completed', failedSteps = [], l
           if (polls.length) Object.assign(run, polls.shift());
           return { data: { ...run } };
         },
-        cancelWorkflowRun: async ({ run_id }) => { cancels.push(run_id); },
+        cancelWorkflowRun: async ({ run_id }) => {
+          if (cancelError) throw cancelError;
+          cancels.push(run_id);
+        },
         reRunWorkflow: async ({ run_id }) => { reruns.push(run_id); },
       },
     },
@@ -103,14 +107,25 @@ test('the review step names the recovery watches exist in tests.yml', () => {
 
 test('a run still in flight from before the edit is cancelled and rerun on the new body', async () => {
   const cancelled = { status: 'completed', conclusion: 'cancelled' };
-  assert.deepEqual(await recover('success', 'in_progress', [], [cancelled]), [42]);
+  assert.deepEqual(await recover('success', 'in_progress', [], [{}, cancelled]), [42]);
   assert.deepEqual(recover.lastCancels, [42]);
   // Started after the edit (a push, our own rerun, a duplicate delivery):
   // it already reads the current body, so it is neither cancelled nor rerun.
   assert.deepEqual(await recover('success', 'in_progress', [], [], { run_started_at: AFTER_EDIT }), []);
   assert.deepEqual(recover.lastCancels, []);
   // Someone else restarted it meanwhile: nothing left to do here.
-  assert.deepEqual(await recover('success', 'in_progress', [], [{ run_attempt: 2 }]), []);
+  assert.deepEqual(await recover('success', 'in_progress', [], [{}, { run_attempt: 2 }]), []);
+  // It completed between the listing and the re-read: classified, not cancelled.
+  assert.deepEqual(await recover('failure', 'in_progress', [], [{ status: 'completed', conclusion: 'failure' }]), [42]);
+  assert.deepEqual(recover.lastCancels, []);
+  // It completed between the re-read and the cancel (409): classified anyway.
+  const conflict = Object.assign(new Error('Cannot cancel a workflow run that is completed.'), { status: 409 });
+  assert.deepEqual(await recover('failure', 'in_progress', [], [{}, { status: 'completed', conclusion: 'failure' }], {}, conflict), [42]);
+  // Its verdict on the current body is not stale: a completed run that
+  // started after the edit is not rerun either.
+  assert.deepEqual(await recover('failure', 'completed', [], [], { run_started_at: AFTER_EDIT }), []);
+  // Same-second start counts as before the edit (fail-safe).
+  assert.deepEqual(await recover('failure', 'completed', [], [], { run_started_at: EDITED_AT }), [42]);
 });
 
 test('a cancelled or timed-out latest run is rerun after an edit', async () => {
@@ -122,7 +137,9 @@ test('a cancelled or timed-out latest run is rerun after an edit', async () => {
 test('only a run of this PR branch and a PR-bound event is a target', async () => {
   assert.deepEqual(await recover('failure', 'completed', [], [], { head_branch: 'main', event: 'push' }), []);
   assert.deepEqual(await recover('failure', 'completed', [], [], { head_branch: 'other' }), []);
-  assert.deepEqual(await recover('failure', 'completed', [], [], { event: 'workflow_dispatch' }), [42]);
+  // pr-autorebase dispatches tests.yml on the PR branch without pr_number:
+  // no body contract, no review. Rerunning it would not re-enter the check.
+  assert.deepEqual(await recover('failure', 'completed', [], [], { event: 'workflow_dispatch' }), []);
 });
 
 test('a passed body preserves both a later failure and tests running on the current body', async () => {
