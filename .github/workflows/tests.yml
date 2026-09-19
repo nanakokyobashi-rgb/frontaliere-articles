@@ -476,6 +476,27 @@ jobs:
             echo "::error::Risposta Reviews API malformata → claim review fail-closed, nessun nuovo Codex."
             exit 1
           fi
+          # Un body corretto sulla STESSA HEAD dopo un verdetto non approvante
+          # e' l'unico cambiamento di metadata che merita un secondo giro di
+          # modello — e solo sul body, perche' la HEAD non e' cambiata e il
+          # codice e' identico per costruzione. Senza questo ramo il guard cade
+          # su «nessuna review con la revisione corrente» e compra una review
+          # PIENA (tier high su quasi ogni PR di ciclo) per una riga di prosa.
+          # `lastEditedAt` vuoto = body mai modificato, e l'eccezione non scatta.
+          # shellcheck disable=SC2016 # $owner/$name/$number sono variabili GraphQL, non shell.
+          body_edited_at=$(gh api graphql \
+            -f query='query($owner:String!,$name:String!,$number:Int!){repository(owner:$owner,name:$name){pullRequest(number:$number){lastEditedAt}}}' \
+            -F owner="${REPO%%/*}" -F name="${REPO#*/}" -F number="$PR_NUMBER" \
+            --jq '.data.repository.pullRequest.lastEditedAt // empty' 2>/dev/null || true)
+          # `|| true`: questo ramo sceglie la corsia ECONOMICA. Un helper che
+          # non parte deve lasciare il guard alla sua decisione normale (review
+          # piena), non far morire lo step e togliere il verdetto alla PR.
+          body_rereview=$(printf '%s' "$reviews" \
+            | node scripts/ci/body-rereview-admission.mjs \
+                --head "$HEAD_SHA" --revision "$REVIEW_REVISION" \
+                --body-edited-at "${body_edited_at:-none}" \
+            | sed -n 's/^body_rereview=//p' | tail -n 1 || true)
+
           # Conta ogni review terminale del reviewer, non solo `## LGTM`:
           # un Important, una domanda o un nit senza LGTM e' comunque un
           # giudizio gia' emesso. Il fallback Codex vale solo con il marker
@@ -545,6 +566,19 @@ jobs:
           if [ "${same_head:-0}" -gt 0 ]; then
             echo "skip=true" >> "$GITHUB_OUTPUT"
             echo "Esiste gia' una review approvante del reviewer sulla HEAD $HEAD_SHA per la revisione body corrente → nessuna seconda review, anche dopo un body edit."
+            exit 0
+          fi
+
+          # Ordine voluto: il LGTM pulito sulla revisione corrente vince sempre
+          # (il ramo sopra), poi il body corretto. Cosi' un body edit non puo'
+          # mai riaprire una review gia' approvata su quello stesso body.
+          if [ "${body_rereview:-false}" = 'true' ]; then
+            set_claim_fingerprint
+            {
+              echo "skip=false"
+              echo "body_rereview=true"
+            } >> "$GITHUB_OUTPUT"
+            echo "Verdetto non approvante sulla HEAD $HEAD_SHA e body corretto dopo di esso → review minimal sul solo body."
             exit 0
           fi
 
@@ -647,6 +681,7 @@ jobs:
           HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
           REPO: ${{ github.repository }}
           REVIEW_REVISION: ${{ steps.review_input.outputs.review_revision }}
+          BODY_REREVIEW: ${{ steps.guard.outputs.body_rereview }}
         # Il tier si decide SOLO sul codice. Funnel-critical qui significa: cio'
         # che produce o rende la superficie pubblicata che il sito consuma —
         # `engine/` (rende le pagine articolo), `host/` (l'altra meta' del
@@ -678,6 +713,16 @@ jobs:
             } >> "$GITHUB_OUTPUT"
             echo "Review tier: $1 ($2, max-turns $3, effort $effort)"
           }
+          # Body corretto sulla stessa HEAD dopo un verdetto non approvante
+          # (ramo `body_rereview` del guard): la HEAD non e' cambiata, quindi
+          # il codice e' identico PER COSTRUZIONE. Si rigiudica solo il body e
+          # i 🔴 di codice ancora aperti restano aperti.
+          if [ "${BODY_REREVIEW:-}" = "true" ]; then
+            echo "code_unchanged_since=$HEAD_SHA" >> "$GITHUB_OUTPUT"
+            echo "Body corretto dopo un verdetto non approvante sulla stessa HEAD → tier minimal (solo body)."
+            set_tier minimal gpt-5.6-luna 12
+            exit 0
+          fi
           # `gh pr view --json files` TRONCA a 100 file senza dirlo, e su questo
           # repo una PR che rigenera il corpus ne ha migliaia: il tier si
           # deciderebbe su un campione, e con >100 file `content/` in testa
@@ -810,6 +855,7 @@ jobs:
           REPO: ${{ github.repository }}
           CTX_DIR: ${{ runner.temp }}/review-ctx
           TIER: ${{ steps.tier.outputs.tier }}
+          CODE_UNCHANGED_SINCE: ${{ steps.tier.outputs.code_unchanged_since }}
           REVIEW_DIFF_EXCLUSIONS: content,data,dist,public
         run: |
           set -uo pipefail
@@ -858,6 +904,11 @@ jobs:
             echo "## PR metadata"
             cat "$CTX_DIR/pr.json"
             echo
+            if [ -n "${CODE_UNCHANGED_SINCE:-}" ]; then
+              echo "## Code contribution unchanged"
+              echo "The PR code contribution is identical to the one reviewed at ${CODE_UNCHANGED_SINCE} (same HEAD, no PR code file changed since). This is a body-only re-review: judge only the PR body, carry every open code Important verbatim with its anchor, and never write \`Fix di\` for a code anchor."
+              echo
+            fi
             echo "## Changed code-file list"
             cat "$CTX_DIR/review-code-files.txt"
             echo
@@ -967,6 +1018,8 @@ jobs:
             Se `INCREMENTAL_BASE` e' valorizzato, revieva SOLO il delta e le sue interazioni: i commit fino a quel punto sono gia' stati approvati. Sei comunque autorizzato a Read/grep i file pieni per il CONTESTO — l'obiettivo e' non rispendere token su codice gia' approvato, non chiudere gli occhi sulle interazioni.
 
             **Disciplina turni (budget rigido, tutti i tier tranne `minimal`):** hai ${{ steps.tier.outputs.max_turns }} turni. Un messaggio con tool-call = 1 turno indipendentemente da quanti tool_use contiene, quindi le probe indipendenti vanno emesse in parallelo nello stesso messaggio, mai una per turno. `PR_NUMBER`/`HEAD_SHA`/`INCREMENTAL_BASE` sono gia' nell'env: mai spendere un turno per rileggerli. Il checkout NON ha `node_modules`: niente `npm`/`npx`/test runner, il verdetto si basa sulla lettura statica. Entro cinque turni dal cap DEVI aver postato la review: se hai ancora verifiche aperte, postale come `❓ q:` invece di continuare a probeare. Una review postata con un `❓` sblocca il loop; una review MAI postata brucia il run intero senza verdetto.
+
+            Se il bundle porta una sezione `## Code contribution unchanged`, il codice NON e' cambiato dalla review citata: rigiudica SOLO il body della PR, riporta ogni 🔴 Important di codice ancora aperto con lo stesso path e la stessa riga, non scrivere mai `Fix di` per un anchor di codice, e risolvi un Important sul body solo se il body corrente lo ripara davvero.
 
             **Workflow di review come da REVIEW.md:** completeness contract → `Implementato` con occhio critico → `Non implementato` filtro scopo → scope drift → ripetizione di pattern cross-file → conformita' al piano di test → claim di performance non validati → output.
             - Tier `high`, `high-mega` o `incremental-high`: aggiungi una sezione `## Adversarial check` con esattamente 3 rischi REALI non verificati, prima del summary. Mai «manca un test».
