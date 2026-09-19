@@ -44,14 +44,8 @@
  */
 
 import { execFileSync } from 'node:child_process';
-import { checkPrBodySections } from '../lib/pr-body-sections-check.mjs';
-import { checkClosesLines } from '../lib/pr-body-closes-check.mjs';
-import {
-  checkNextStepStates,
-  blockingNextStepFindings,
-  isBlockingNextStepFinding,
-  suggestedSection,
-} from '../lib/pr-body-nextstep-check.mjs';
+import { isBlockingNextStepFinding, suggestedSection } from '../lib/pr-body-nextstep-check.mjs';
+import { evaluateBodyContract } from '../lib/pr-body-contract-eval.mjs';
 import { checkCitedFilePaths, extractCitedPaths } from '../lib/pr-body-filepath-check.mjs';
 
 const PR = process.argv[2];
@@ -96,10 +90,7 @@ function main() {
   }
 
   const body = gh(['pr', 'view', PR, '--repo', REPO, '--json', 'body', '--jq', '.body // ""']);
-  const sections = checkPrBodySections(body);
-  const closes = checkClosesLines(body);
-  const nextStep = checkNextStepStates(body);
-  const nextStepProblems = blockingNextStepFindings(nextStep);
+  const { sections, closes, nextStep, nextStepProblems } = evaluateBodyContract(body);
   const nextStepAdvisories = nextStep.advisories.filter((a) => !isBlockingNextStepFinding(a));
 
   // I file toccati dalla PR contano come esistenti anche quando l'albero non li

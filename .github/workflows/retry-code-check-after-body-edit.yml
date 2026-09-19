@@ -19,13 +19,20 @@ run-name: 'Body recovery · PR #${{ github.event.pull_request.number }}'
 #     before its failed steps exist — the old `edited` trigger did the same
 #     via cancel-in-progress, but for every edit;
 #  4. a `cancelled` / `timed_out` latest run is rerun too: after an edit no
-#     other event would ever bring that head back to a verdict.
+#     other event would ever bring that head back to a verdict;
+#  5. a GREEN run is rerun when the NEW body breaks the contract (checked with
+#     the base branch's own evaluator, zero-Claude): the rerun turns the
+#     required check red before native auto-merge can land a broken body.
+#     A green run whose new body still passes the contract is kept, and the
+#     review is not redone: that is the policy ratified on the site with
+#     valerielinc-ops/frontaliere-si-o-no#9118.
 on:
   pull_request_target:
     types: [edited]
 
 permissions:
   actions: write
+  contents: read
   pull-requests: read
 
 concurrency:
@@ -38,6 +45,15 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
+      # Trusted code only: `pull_request_target` checks out the BASE branch,
+      # never the PR head, and only the body-contract evaluator is read.
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            scripts/lib
+          persist-credentials: false
+
       - name: Retry a failed body or review gate on the current head
         uses: actions/github-script@v8
         env:
@@ -101,7 +117,11 @@ jobs:
               }
             }
             let retryReason = '';
-            if (['cancelled', 'timed_out'].includes(target.conclusion)) {
+            if (target.conclusion === 'success') {
+              const { evaluateBodyContract } = await import(`${process.env.GITHUB_WORKSPACE}/scripts/lib/pr-body-contract-eval.mjs`);
+              const { blocking } = evaluateBodyContract(pr.body ?? '');
+              if (blocking > 0) retryReason = `the new body breaks the contract (${blocking} blocking problems)`;
+            } else if (['cancelled', 'timed_out'].includes(target.conclusion)) {
               retryReason = `it ended ${target.conclusion} (or was still running on the previous body)`;
             } else if (target.conclusion === 'failure') {
               // Inspect the latest attempt only, never an old failure

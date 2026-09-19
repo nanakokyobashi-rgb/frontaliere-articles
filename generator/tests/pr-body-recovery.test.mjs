@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import { fileURLToPath } from 'node:url';
 
 const read = (path) => fs.readFileSync(new URL(`../../${path}`, import.meta.url), 'utf8');
 const tests = read('.github/workflows/tests.yml');
@@ -11,6 +12,9 @@ const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
 // The workflow waits for a cancelled run to settle; keep the wait instant here.
 process.env.BODY_RECOVERY_POLL_MS = '1';
 process.env.BODY_RECOVERY_WAIT_MS = '50';
+process.env.GITHUB_WORKSPACE = fileURLToPath(new URL('../..', import.meta.url));
+const GOOD_BODY = '## Implementato\n\n- una modifica reale e descritta\n\n## Non implementato (ancora)\n\nNessuno.\n';
+let prBody = GOOD_BODY;
 
 const EDITED_AT = '2026-09-19T12:00:00Z';
 const BEFORE_EDIT = '2026-09-19T11:50:00Z';
@@ -28,7 +32,7 @@ async function recover(bodyConclusion, status = 'completed', failedSteps = [], l
   const polls = [...later];
   const github = {
     rest: {
-      pulls: { get: async () => ({ data: { state: 'open', head: { sha: 'head', ref: 'feature' } } }) },
+      pulls: { get: async () => ({ data: { state: 'open', head: { sha: 'head', ref: 'feature' }, body: prBody } }) },
       actions: {
         listWorkflowRuns: 'runs', listJobsForWorkflowRun: 'jobs',
         getWorkflowRun: async () => {
@@ -73,7 +77,13 @@ test('body edits re-enter through the trusted recovery, not through a tests.yml 
   assert.match(tests, /has_clean_lgtm/);
   assert.ok(tests.indexOf('nessuna seconda review, anche dopo un body edit') < tests.indexOf('if [ -z "$changed" ]'));
   assert.match(recovery, /pull_request_target:\n    types: \[edited\]/);
-  assert.doesNotMatch(recovery, /actions\/checkout|createCheckRun/);
+  assert.doesNotMatch(recovery, /createCheckRun/);
+  // The only checkout is the trusted base (pull_request_target default ref),
+  // sparse on the evaluator, without credentials: never the PR head.
+  const checkout = recovery.slice(recovery.indexOf('uses: actions/checkout'), recovery.indexOf('- name: Retry'));
+  assert.doesNotMatch(checkout, /ref:/);
+  assert.match(checkout, /sparse-checkout: \|\n\s+scripts\/lib\n/);
+  assert.match(checkout, /persist-credentials: false/);
   // Corpus adaptation: tests.yml here checks out the dispatched ref, so a
   // dispatch on the base would test base code and anchor the check on the
   // base SHA. Without a run on the head, recovery waits for the next push.
@@ -126,6 +136,18 @@ test('a run still in flight from before the edit is cancelled and rerun on the n
   assert.deepEqual(await recover('failure', 'completed', [], [], { run_started_at: AFTER_EDIT }), []);
   // Same-second start counts as before the edit (fail-safe).
   assert.deepEqual(await recover('failure', 'completed', [], [], { run_started_at: EDITED_AT }), [42]);
+});
+
+test('a green run is rerun only when the new body breaks the contract', async () => {
+  const green = { conclusion: 'success' };
+  prBody = GOOD_BODY;
+  assert.deepEqual(await recover('success', 'completed', [], [], green), []);
+  prBody = '## Implementato\n\n- solo questa sezione\n';
+  try {
+    assert.deepEqual(await recover('success', 'completed', [], [], green), [42]);
+  } finally {
+    prBody = GOOD_BODY;
+  }
 });
 
 test('a cancelled or timed-out latest run is rerun after an edit', async () => {
