@@ -103,6 +103,8 @@ jobs:
           FOLLOWUP_ELIGIBLE_AUTHORS: 'nanakokyobashi-rgb,valerielinc-ops,claude,github-actions'
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
+          FOLLOWUP_SITE_REPO: valerielinc-ops/frontaliere-si-o-no
+          FOLLOWUP_CORPUS_REPO: nanakokyobashi-rgb/frontaliere-articles
           # Dispatch inputs reach the shell as DATA, never as script text.
           INPUT_PR_NUMBER: ${{ github.event.inputs.pr_number }}
         run: |
@@ -404,13 +406,17 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
-          SITE_REPO: valerielinc-ops/frontaliere-si-o-no
+          GH_REPO: ${{ github.repository }}
           BATCH_PRS: ${{ steps.collect.outputs.batch_prs }}
           BATCH_COUNT: ${{ steps.collect.outputs.batch_count }}
           COLLECTION_OK: ${{ steps.collect.outputs.collection_ok }}
           ACTION_OUTCOME: ${{ steps.followup.outputs.codex_outcome }}
           ACTION_SUCCESS: ${{ steps.followup.outputs.action_success }}
-          CORPUS_REPO: nanakokyobashi-rgb/frontaliere-articles
+          # I due repository in cui puo' vivere un bucket giornaliero. Un item
+          # del corpus con target un file del sito conia NEL SITO, quindi la
+          # verifica deve poter leggere entrambi.
+          FOLLOWUP_SITE_REPO: valerielinc-ops/frontaliere-si-o-no
+          FOLLOWUP_CORPUS_REPO: nanakokyobashi-rgb/frontaliere-articles
         run: |
           set -uo pipefail
           complete=false
@@ -423,59 +429,20 @@ jobs:
           action_ok=false
           persistence_ok=true
 
-          # A PR marker is only an idempotency claim.  For a non-empty result it
-          # must point to a durable daily bucket whose body contains both a stable
-          # item heading and this PR in Sources.  This catches a successful marker
-          # comment followed by a failed issue create/edit; otherwise the next run
-          # would skip the PR forever.  The bucket can live in either repository.
-          gate_preserved_for_pr() {
-            bucket="$1"
-            pr_number="$2"
-            pr_comments="$3"
-            printf '%s' "$pr_comments" | jq -e --arg bucket "$bucket" --arg pr "$pr_number" '
-              [.comments[]?.body // ""
-                | select(contains("<!-- followup-mint-gate -->"))
-                | select(test("(?m)^.*Issue[[:space:]]+#" + $bucket + "([^0-9]|$)"))
-                | select(test("(?m)^-[[:space:]]+Sources?[[:space:]]*:[^\\n]*PR[[:space:]]+#" + $pr + "([^0-9]|$)"))]
-              | length > 0
-            ' >/dev/null 2>&1
-          }
-
-          bucket_persisted_for_pr() {
-            bucket="$1"
-            pr_number="$2"
-            pr_comments="$3"
-            bucket_seen=false
-            for target_repo in "${REPO:-}" "${CORPUS_REPO:-}" "${SITE_REPO:-}"; do
-              [ -n "$target_repo" ] || continue
-              case "$target_repo" in
-                "${CORPUS_REPO:-}") target_token="${GITHUB_PAT_NANAKO:-${GITHUB_PAT:-${GH_TOKEN:-}}}" ;;
-                "${SITE_REPO:-}") target_token="${GITHUB_PAT_SITE:-${GITHUB_PAT:-${GH_TOKEN:-}}}" ;;
-                *) target_token="${GH_TOKEN:-${GITHUB_PAT:-}}" ;;
-              esac
-              [ -n "$target_token" ] || continue
-              issue_json=$(GH_TOKEN="$target_token" gh issue view "$bucket" --repo "$target_repo" --json number,title,body 2>/dev/null) || continue
-              if printf '%s' "$issue_json" | jq -e --arg bucket "$bucket" '
-                ((.number | tostring) == $bucket)
-                and ((.title // "") | test("^follow-up\\(daily:[0-9]{4}-[0-9]{2}-[0-9]{2}\\):[[:space:]]*[0-9]+[[:space:]]+items?[[:space:]]*(—|-)[[:space:]]*[^[:space:]]"))
-              ' >/dev/null 2>&1; then
-                bucket_seen=true
-              fi
-              if printf '%s' "$issue_json" | jq -e --arg bucket "$bucket" --arg pr "$pr_number" '
-                ((.number | tostring) == $bucket)
-                and ((.title // "") | test("^follow-up\\(daily:[0-9]{4}-[0-9]{2}-[0-9]{2}\\):[[:space:]]*[0-9]+[[:space:]]+items?[[:space:]]*(—|-)[[:space:]]*[^[:space:]]"))
-                and ((.body // "") | test("(?m)^### FU-[0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{3}"))
-                and ((.body // "") | test("(?m)^-[[:space:]]+Sources?[[:space:]]*:[^\\n]*PR[[:space:]]+#" + $pr + "([^0-9]|$)"))
-              ' >/dev/null 2>&1; then
-                return 0
-              fi
-            done
-            if [ "$bucket_seen" = true ] && [ -n "$pr_comments" ] \
-              && gate_preserved_for_pr "$bucket" "$pr_number" "$pr_comments"; then
-              return 0
-            fi
-            return 1
-          }
+          # Il marker della PR e' solo un CLAIM di idempotenza: da solo non prova
+          # che il triage sia atterrato da qualche parte. La prova durevole e'
+          # il bucket giornaliero (o, per gli item demoti dal gate sul conio, il
+          # commento di conservazione sulla PR sorgente), e vive in uno dei due
+          # repository.
+          #
+          # Quella verifica NON e' riscritta qui. Lo era, e le due copie sono
+          # divergute in entrambi i versi nella stessa run (35430183038): la
+          # bash leggeva il bucket cross-repo ma non conosceva la prova del
+          # gate, il gemello JS conosceva la prova ma leggeva solo `GH_REPO`.
+          # Ogni copia bocciava le PR che l'altra avrebbe promosso, e nessun
+          # test poteva vederlo perche' i due predicati non si incontravano mai.
+          # Ora esiste un solo predicato, in scripts/ci/collect-followup-batch.mjs,
+          # e questo step lo INVOCA: la divergenza non e' piu' esprimibile.
 
           if [ "$collection_ok" != true ]; then
             echo "triage incompleta: collection_ok non è true (raccolta fallita/illeggibile)"
@@ -510,56 +477,14 @@ jobs:
               esac
               seen="${seen:+$seen,}${pr}"
               actual=$((actual + 1))
-              comments=$(gh pr view "$pr" --repo "$REPO" --json comments 2>/dev/null) || comments=""
-              if [ -z "$comments" ] || ! printf '%s' "$comments" | jq -e '[.comments[]?.body // "" | contains("## Post-merge follow-up triage")] | any' >/dev/null 2>&1; then
-                echo "triage incompleta: PR #$pr senza marker di triage leggibile"
-                marker_ok=false
-              else
-                marker_body=$(printf '%s' "$comments" | jq -r '[.comments[]?.body // "" | select(contains("## Post-merge follow-up triage"))] | last // ""' 2>/dev/null || true)
-                # `grep -Ei` e non `sed -n -E`: la grammatica del claim e'
-                # case-insensitive nel gemello JS, e un `created/updated:` o un
-                # `daily bucket:` in minuscolo non deve sparire da questo lato.
-                claim_head='^[[:space:]]*(-[[:space:]]+|\*[[:space:]]+)?(Created(/updated)?|Daily bucket):'
-                claim_lines=$(printf '%s\n' "$marker_body" | grep -Ei "$claim_head" || true)
-                bucket_refs=$(printf '%s\n' "$claim_lines" | grep -Eio 'bucket[[:space:]]*:?[[:space:]]*#[0-9]+' | sed -E 's/.*#//' | sort -un || true)
-                # Discriminante STRUTTURALE, gemello di `triageMarkerPersistenceExpectation`
-                # in scripts/ci/collect-followup-batch.mjs (il legame e' coperto da
-                # generator/tests/followup-marker-zero-claim.test.mjs): sulla riga di claim
-                # isolata qui sopra conta il NUMERO dichiarato, non la prosa. La
-                # lista di formule ammesse che stava qui e' stata superata tre volte
-                # dalla variante successiva; l'ultima il 2026-09-18 con
-                # «Created/updated: 0 item; nessun bucket creato.», marker corretto
-                # per un esito legittimo, run rossa.
-                # `0([^0-9.]|$)`: un `Created: 0.5 item` non e' un claim a zero.
-                zero_claim=false
-                if [ -n "$claim_lines" ] && ! printf '%s\n' "$claim_lines" \
-                  | grep -Eqvi "${claim_head}[[:space:]]*0([^0-9.]|\$)"; then
-                  zero_claim=true
-                fi
-                # Le formule d'intestazione valgono SOLO se non esiste alcuna riga
-                # di claim: cercarle nell'intero corpo anche con un claim non-zero
-                # lasciava a una prosa successiva la possibilita' di scavalcare la
-                # verifica del bucket per una persistenza REALE.
-                if [ "$zero_claim" = true ] \
-                  || { [ -z "$claim_lines" ] \
-                    && printf '%s' "$marker_body" | grep -Eiq 'zero outstanding items|backfill skipped'; }; then
-                  # A zero-candidate summary may name an unchanged daily bucket
-                  # for audit context; it is not a persistence claim.
-                  :
-                elif [ -z "$bucket_refs" ]; then
-                  echo "triage incompleta: marker PR #$pr senza riferimento a un bucket persistito"
-                  persistence_ok=false
-                else
-                  while IFS= read -r bucket; do
-                    [ -n "$bucket" ] || continue
-                    if ! bucket_persisted_for_pr "$bucket" "$pr" "$comments"; then
-                      echo "triage incompleta: bucket #$bucket per PR #$pr non leggibile, senza item/Source persistito o senza prova del gate"
-                      persistence_ok=false
-                    fi
-                  done < <(printf '%s\n' "$bucket_refs")
-                fi
-              fi
             done
+            # Un solo invio per tutto il batch: stesso predicato
+            # dell'idempotenza del collector, stesse letture cross-repo.
+            if [ "$marker_ok" = true ]; then
+              if ! node scripts/ci/collect-followup-batch.mjs --verify-persistence "$csv"; then
+                persistence_ok=false
+              fi
+            fi
             if [ "$actual" -ne "$count" ] 2>/dev/null; then
               echo "triage incompleta: batch_count=$count ma PR verificate=$actual"
               marker_ok=false

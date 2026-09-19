@@ -358,7 +358,16 @@ test('the corpus review loads its host-side PAT before invoking Codex', () => {
   assert.match(followupStep, /codex_site_github_token: \$\{\{ env\.GITHUB_PAT \}\}/);
   assert.doesNotMatch(followupStep, /GITHUB_PAT:\s*\$\{\{ env\.GITHUB_PAT \}\}/);
   assert.match(followupWorkflow, /SITE_REPO: valerielinc-ops\/frontaliere-si-o-no/);
-  assert.match(followupWorkflow, /target_token="\$\{GITHUB_PAT_SITE:-\$\{GITHUB_PAT:-\$\{GH_TOKEN:-\}\}\}"/);
+  // La catena di credenziali per la lettura cross-repo del bucket non vive piu'
+  // in una riga bash del workflow: quella riga era metà di un predicato
+  // duplicato, divergente dal gemello JS in entrambi i versi (run 35430183038).
+  // La catena resta ESPLICITA e senza fallback implicito, ma nell'unico posto
+  // che ora esegue quella lettura.
+  assert.match(
+    fs.readFileSync(path.join(ROOT, 'scripts/ci/collect-followup-batch.mjs'), 'utf8'),
+    /env\.GITHUB_PAT_SITE \|\| env\.GITHUB_PAT \|\| env\.GH_TOKEN/,
+    'la lettura del bucket sito deve dichiarare la propria credenziale',
+  );
   assert.match(followupWorkflow, /Gate sul conio — sito \(zero-provider\)/);
   assert.match(followupWorkflow, /Checkout site gate implementation/);
   assert.match(followupWorkflow, /repository: valerielinc-ops\/frontaliere-si-o-no/);

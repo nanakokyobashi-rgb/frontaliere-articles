@@ -330,6 +330,72 @@ jobs:
           } >> "$GITHUB_OUTPUT"
           echo "Risolto PR #$PRN sulla head $HEAD_SHA."
 
+      # Il gate della review e tutte le sue dipendenze sono policy di merge:
+      # devono arrivare dalla main della PR, non dall'albero non fidato del
+      # branch. Il download e' separato dal checkout perche' il checkout
+      # contiene comunque il codice da testare e da revisionare.
+      - name: Bootstrap trusted review gate from main
+        id: review_source_main
+        if: >-
+          ${{ steps.body_contract.outcome != 'failure' &&
+          steps.resolve.outputs.should_review == 'true' && !cancelled() }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
+          REPO: ${{ github.repository }}
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PR_BASE_REF: ${{ github.event.pull_request.base.ref }}
+        run: |
+          set -euo pipefail
+          policy_ref="${PR_BASE_SHA:-}"
+          policy_ref_name="${PR_BASE_REF:-}"
+          if [ -z "$policy_ref" ]; then
+            base_ref=$(gh pr view "$PR_NUMBER" --repo "$REPO" --json baseRefName,baseRefOid)
+            policy_ref_name=$(printf '%s' "$base_ref" | jq -r '.baseRefName // empty')
+            policy_ref=$(printf '%s' "$base_ref" | jq -r '.baseRefOid // empty')
+          fi
+          if [ "$policy_ref_name" != 'main' ] || ! printf '%s' "$policy_ref" | grep -qE '^[0-9a-f]{40}$'; then
+            echo "::error::Il review gate richiede la SHA della main come POLICY_REF (ref=${policy_ref_name:-empty}, sha=${policy_ref:-empty})."
+            exit 1
+          fi
+
+          review_gate_root="${RUNNER_TEMP}/review-gate-main"
+          download_main() {
+            local path="$1"
+            local destination="$2"
+            mkdir -p "$(dirname "$destination")"
+            if ! gh api "repos/${REPO}/contents/${path}?ref=${policy_ref}" \
+              --header 'Accept: application/vnd.github.raw+json' \
+              > "$destination"; then
+              echo "::error::Download da main fallito: ${path}"
+              return 1
+            fi
+            if [ ! -s "$destination" ]; then
+              echo "::error::Download da main vuoto: ${path}"
+              return 1
+            fi
+          }
+
+          download_main scripts/ci/review-gate.mjs "$review_gate_root/scripts/ci/review-gate.mjs"
+          download_main scripts/ci/review-test-policy.mjs "$review_gate_root/scripts/ci/review-test-policy.mjs"
+          download_main scripts/ci/claude-codex-fallback.mjs "$review_gate_root/scripts/ci/claude-codex-fallback.mjs"
+          download_main scripts/ci/claude-rate-limit.mjs "$review_gate_root/scripts/ci/claude-rate-limit.mjs"
+          download_main scripts/ci/claude-rate-limit-contract.mjs "$review_gate_root/scripts/ci/claude-rate-limit-contract.mjs"
+          download_main scripts/ci/auto-merge-eval.mjs "$review_gate_root/scripts/ci/auto-merge-eval.mjs"
+          download_main scripts/ci/lib/constants.mjs "$review_gate_root/scripts/ci/lib/constants.mjs"
+          download_main scripts/ci/lib/fetchPrFiles.mjs "$review_gate_root/scripts/ci/lib/fetchPrFiles.mjs"
+          download_main scripts/ci/lib/vitestCheck.mjs "$review_gate_root/scripts/ci/lib/vitestCheck.mjs"
+          download_main scripts/ci/lib/mergePreviewCheck.mjs "$review_gate_root/scripts/ci/lib/mergePreviewCheck.mjs"
+          download_main scripts/ci/lib/duplicateDeclarations.mjs "$review_gate_root/scripts/ci/lib/duplicateDeclarations.mjs"
+          download_main scripts/ci/review-scope.mjs "$review_gate_root/scripts/ci/review-scope.mjs"
+          download_main scripts/lib/github-issue-creator.mjs "$review_gate_root/scripts/lib/github-issue-creator.mjs"
+          download_main scripts/lib/pr-body-closes-check.mjs "$review_gate_root/scripts/lib/pr-body-closes-check.mjs"
+
+          review_gate_module="$review_gate_root/scripts/ci/review-gate.mjs"
+          node --check "$review_gate_module"
+          echo "REVIEW_GATE_MAIN_MODULE=$review_gate_module" >> "$GITHUB_ENV"
+          echo "Review gate bootstrap: main @ ${policy_ref}; module=${review_gate_module}"
+
       # The body is an input to the reviewer, not executable content. Its
       # trusted API hash gives the durable claim ledger a new revision when a
       # body correction arrives on the same code HEAD.
@@ -1109,7 +1175,7 @@ jobs:
       # review gia' postate, e non trovarne una approvante deve bloccare.
       - name: Require approving Codex review
         id: review_gate
-        if: steps.body_contract.outcome != 'failure' && always() && steps.resolve.outputs.should_review == 'true'
+        if: ${{ steps.body_contract.outcome != 'failure' && always() && steps.resolve.outputs.should_review == 'true' && steps.review_source_main.outcome == 'success' }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
@@ -1118,7 +1184,10 @@ jobs:
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           REVIEW_REVISION: ${{ steps.review_input.outputs.review_revision }}
           CODEX_FALLBACK_EVIDENCE_FILE: ${{ steps.codex_review.outputs.fallback_evidence_file || steps.review_abort.outputs.verdict_evidence_file }}
-        run: node scripts/ci/review-gate.mjs
+        run: |
+          set -euo pipefail
+          echo "Executing trusted review gate from $REVIEW_GATE_MAIN_MODULE"
+          node "$REVIEW_GATE_MAIN_MODULE"
 
       # La Jobs API espone solo la conclusion del review gate, non la ragione
       # che lo ha fatto uscire 1. Il processo scrive failure_kind su

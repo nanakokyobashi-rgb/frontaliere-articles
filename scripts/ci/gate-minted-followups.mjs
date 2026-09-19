@@ -550,27 +550,109 @@ export function retitleDailyBucket(title, n) {
  * accesso a un suo campo farebbe esplodere il ciclo, facendo perdere tutte le ALTRE issue
  * della stessa PR invece della sola issue illeggibile. Puro.
  *
- * @param {string|null} raw @returns {object|null}
+ * @param {string|null} raw @returns {object|null} issue con numero intero positivo
  */
 export function parseIssueJson(raw) {
   if (typeof raw !== 'string' || !raw.trim()) return null;
   try {
     const o = JSON.parse(raw);
-    return o && typeof o === 'object' && !Array.isArray(o) ? o : null;
+    return o && typeof o === 'object' && !Array.isArray(o)
+      && Number.isInteger(o.number) && o.number > 0
+      && isValidRawIssueLabels(o.labels) ? o : null;
   } catch {
     return null;
   }
 }
 
 /**
+ * GitHub's issue JSON normally contains label objects, but a partial/mocked
+ * response can omit the field or replace an entry with null/{}.  Queueing is a
+ * mutation, so an unverifiable label snapshot must be treated as unknown.
+ * Keep the raw entries intact: the optimistic snapshot comparison below must
+ * notice any concurrent label change, not reduce labels to names and lose that
+ * evidence.
+ *
+ * @param {unknown} labels @returns {boolean}
+ */
+export function isValidRawIssueLabels(labels) {
+  return Array.isArray(labels) && labels.every((label) => (
+    (typeof label === 'string' && label.trim().length > 0)
+    || (label && typeof label === 'object' && !Array.isArray(label)
+      && typeof label.name === 'string' && label.name.trim().length > 0)
+  ));
+}
+
+function rawIssueLabelName(label) {
+  return typeof label === 'string' ? label.trim() : label.name.trim();
+}
+
+function queueLabelDecision(issue) {
+  if (!isValidRawIssueLabels(issue?.labels)) {
+    return { allowed: false, code: 'labels-unverifiable', reason: 'missing-or-malformed-labels' };
+  }
+  if (issue.labels.some((label) => rawIssueLabelName(label).toLowerCase() === 'needs-human')) {
+    return { allowed: false, code: 'needs-human', reason: 'needs-human-veto' };
+  }
+  return { allowed: true, code: 'labels-verified', reason: 'labels-clear' };
+}
+
+/** Return whether a queue-label mutation is safe for this issue snapshot. */
+export function canMintQueueLabel(issue) {
+  return queueLabelDecision(issue).allowed;
+}
+
+function queueLabelIfAllowed(issue, repoArgs) {
+  // This is a freshness check, not an atomic HTTP CAS: GitHub's issue edit API
+  // cannot condition a label mutation on an unchanged body/title/labels
+  // snapshot.  Still take the last complete read here, immediately before the
+  // add-label, so a needs-human addition or any unreadable/changed metadata
+  // fails closed instead of reusing the pre-body-write snapshot.
+  const latest = parseIssueJson(gh(['issue', 'view', String(issue?.number), ...repoArgs,
+    '--json', 'number,title,body,createdAt,labels'], { allowFail: true }));
+  if (!latest) {
+    console.log(`#${issue?.number || 'unknown'}: queue label negata (latest-snapshot-unverifiable) → nessuna mutazione.`);
+    return null;
+  }
+  if (!sameIssueSnapshot(issue, latest)) {
+    console.log(`#${issue?.number || 'unknown'}: queue label negata (latest-snapshot-stale) → nessuna mutazione.`);
+    return null;
+  }
+  const decision = queueLabelDecision(latest);
+  if (!decision.allowed) {
+    console.log(`#${latest.number || issue?.number || 'unknown'}: queue label negata (${decision.code}:${decision.reason}) → nessuna mutazione.`);
+    return null;
+  }
+  return gh(['issue', 'e' + 'dit', String(latest.number), ...repoArgs,
+    '--add-label', 'agent:fix-queued'], { allowFail: true });
+}
+
+function stableSnapshotValue(value) {
+  if (Array.isArray(value)) return value.map(stableSnapshotValue);
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(Object.keys(value).sort().map((key) => [key, stableSnapshotValue(value[key])]));
+  }
+  return value;
+}
+
+function rawLabelsFingerprint(labels) {
+  return isValidRawIssueLabels(labels) ? JSON.stringify(stableSnapshotValue(labels)) : null;
+}
+
+/**
  * Compare the complete issue snapshot used for an optimistic write.  The title
- * carries the daily item count/identity, so a body-only comparison can overwrite
- * a concurrent retitle and silently desynchronise the queue.
+ * carries the daily item count/identity and labels carry queue ownership/vetoes,
+ * so a body-only comparison can overwrite a concurrent retitle/label change and
+ * silently desynchronise the queue.
  */
 function sameIssueSnapshot(expected, actual) {
   return !!actual
+    && Number.isInteger(expected?.number) && expected.number > 0
+    && Number.isInteger(actual.number) && actual.number > 0
+    && actual.number === expected.number
     && String(actual.title || '') === String(expected?.title || '')
-    && String(actual.body || '') === String(expected?.body || '');
+    && String(actual.body || '') === String(expected?.body || '')
+    && rawLabelsFingerprint(actual.labels) !== null
+    && rawLabelsFingerprint(actual.labels) === rawLabelsFingerprint(expected?.labels);
 }
 
 function manifestPinFor(issueNumber) {
@@ -588,7 +670,7 @@ function manifestPinFor(issueNumber) {
  * `gh issue list` did.
  *
  * @param {string|null} raw
- * @returns {Array<{number:number,title:string,createdAt?:string}>|null}
+ * @returns {Array<{number:number,title:string,createdAt?:string,labels:Array}>|null}
  */
 export function parseOpenFollowupPages(raw) {
   let pages;
@@ -617,9 +699,10 @@ export function parseOpenFollowupPages(raw) {
     if (!Number.isInteger(number) || number <= 0 || typeof title !== 'string' || !title.trim()
         || (row.state !== undefined && row.state !== 'open')
         || (createdAt !== undefined && (typeof createdAt !== 'string' || Number.isNaN(Date.parse(createdAt))))
+        || !isValidRawIssueLabels(row.labels)
         || seen.has(number)) return null;
     seen.add(number);
-    issues.push({ number, title, ...(createdAt === undefined ? {} : { createdAt }) });
+    issues.push({ number, title, ...(createdAt === undefined ? {} : { createdAt }), labels: row.labels });
   }
   return issues;
 }
@@ -743,7 +826,7 @@ function recoverableDailyIdentities(open, repoArgs, prRepoArgs) {
     let hasCollecting = false;
     for (const member of members) {
       const issue = parseIssueJson(gh(['issue', 'view', String(member.number), ...repoArgs,
-        '--json', 'number,title,body,createdAt'], { allowFail: true }));
+        '--json', 'number,title,body,createdAt,labels'], { allowFail: true }));
       const actualIdentity = dailyBucketIdentity(issue?.title || '');
       const info = dailyBucketInfo(issue?.title || '');
       const state = issue ? bucketState(issue.body || '') : null;
@@ -809,7 +892,7 @@ function consolidateDailyBuckets(open, repoArgs, recoverable = new Set()) {
     members.sort((a, b) => Number(a.number) - Number(b.number));
     const canonicalMeta = members[0];
     let canonical = parseIssueJson(gh(['issue', 'view', String(canonicalMeta.number), ...repoArgs,
-      '--json', 'number,title,body,createdAt'], { allowFail: true }));
+      '--json', 'number,title,body,createdAt,labels'], { allowFail: true }));
     if (!canonical) {
       blocked.add(identity);
       console.log(`⚠️ daily ${identity}: owner canonico #${canonicalMeta.number} illeggibile → nessun bucket viene sigillato/accodato.`);
@@ -826,7 +909,7 @@ function consolidateDailyBuckets(open, repoArgs, recoverable = new Set()) {
     let mergeFailed = false;
     for (const duplicateMeta of members.slice(1)) {
       const duplicate = parseIssueJson(gh(['issue', 'view', String(duplicateMeta.number), ...repoArgs,
-        '--json', 'number,title,body,createdAt'], { allowFail: true }));
+        '--json', 'number,title,body,createdAt,labels'], { allowFail: true }));
       if (!duplicate) {
         mergeFailed = true;
         console.log(`⚠️ daily ${identity}: duplicato #${duplicateMeta.number} illeggibile → lascio entrambi aperti e rinvio il sealing.`);
@@ -857,7 +940,7 @@ function consolidateDailyBuckets(open, repoArgs, recoverable = new Set()) {
     // the collecting duplicate remain stranded forever.
     if (!hasCollecting && !recovered.has(identity)) continue;
     const latestCanonical = parseIssueJson(gh(['issue', 'view', String(canonicalMeta.number), ...repoArgs,
-      '--json', 'number,title,body,createdAt'], { allowFail: true }));
+      '--json', 'number,title,body,createdAt,labels'], { allowFail: true }));
     if (!latestCanonical || !sameIssueSnapshot(canonical, latestCanonical)) {
       blocked.add(identity);
       console.log(`⚠️ daily ${identity}: owner #${canonicalMeta.number} cambiato durante il merge → retry senza overwrite.`);
@@ -881,7 +964,7 @@ function consolidateDailyBuckets(open, repoArgs, recoverable = new Set()) {
     let closeFailed = false;
     for (const duplicate of duplicateRecords) {
       const latestDuplicate = parseIssueJson(gh(['issue', 'view', String(duplicate.number), ...repoArgs,
-        '--json', 'number,title,body,createdAt'], { allowFail: true }));
+        '--json', 'number,title,body,createdAt,labels'], { allowFail: true }));
       if (!latestDuplicate || !sameIssueSnapshot(duplicate, latestDuplicate)) {
         closeFailed = true;
         console.log(`⚠️ daily ${identity}: duplicato #${duplicate.number} cambiato/illeggibile → non lo chiudo; retry idempotente.`);
@@ -898,7 +981,7 @@ function consolidateDailyBuckets(open, repoArgs, recoverable = new Set()) {
       // complete title/body snapshot immediately before closing, so an append made
       // by another daily writer cannot be lost by this close handshake.
       const beforeDuplicateClose = parseIssueJson(gh(['issue', 'view', String(duplicate.number), ...repoArgs,
-        '--json', 'number,title,body,createdAt'], { allowFail: true }));
+        '--json', 'number,title,body,createdAt,labels'], { allowFail: true }));
       if (!beforeDuplicateClose || !sameIssueSnapshot(duplicate, beforeDuplicateClose)) {
         closeFailed = true;
         console.log(`⚠️ daily ${identity}: duplicato #${duplicate.number} cambiato dopo l'audit → non lo chiudo; retry idempotente.`);
@@ -994,7 +1077,7 @@ function main() {
       if (!uniqueFound.length) { console.log(`PR #${pr}: nessuna issue coniata → niente da fare.`); continue; }
       const issues = [];
       for (const f of uniqueFound) {
-        const one = parseIssueJson(gh(['issue', 'view', String(f.number), ...repoArgs, '--json', 'number,title,body,createdAt'], { allowFail: true }));
+        const one = parseIssueJson(gh(['issue', 'view', String(f.number), ...repoArgs, '--json', 'number,title,body,createdAt,labels'], { allowFail: true }));
         // Proceed-safe PER ISSUE, non per PR: una lettura fallita salta QUELLA issue e le
         // altre del lotto proseguono. Lasciare entrare un `null` qui farebbe esplodere il
         // ciclo al primo accesso a un campo, e il catch per-PR abbandonerebbe tutte le altre.
@@ -1022,7 +1105,7 @@ function main() {
           // queued; a fully-done bucket stays out of the fixer queue.
           if (d.action === 'keep' && daily && bucketState(iss.body || '') === 'sealed'
               && selectFirstOpenItem(iss.body || '') && !DRY_RUN) {
-            gh(['issue', 'e' + 'dit', String(iss.number), ...repoArgs, '--add-label', 'agent:fix-queued'], { allowFail: true });
+            queueLabelIfAllowed(iss, repoArgs);
           }
           if (d.action === 'skip') {
             report.push(`- ⏭️ #${iss.number} skip (${d.reason}) — PR #${pr}`);
@@ -1037,7 +1120,7 @@ function main() {
             continue;
           }
           const latest = parseIssueJson(gh(['issue', 'view', String(iss.number), ...repoArgs,
-            '--json', 'number,title,body,createdAt'], { allowFail: true }));
+            '--json', 'number,title,body,createdAt,labels'], { allowFail: true }));
           if (!latest || !sameIssueSnapshot(iss, latest)) {
             console.log(`#${iss.number}: body cambiato/non leggibile prima del sealing → lascio collecting, retry con lettura nuova.`);
             report.push(`- ⚠️ #${iss.number} sealing rinviato per baseline concorrente/illeggibile`);
@@ -1056,7 +1139,11 @@ function main() {
           }
           gh(['issue', 'comment', String(iss.number), ...repoArgs, '--body',
             `${MINT_GATE_MARKER}\n✅ Daily bucket sigillato in modo deterministico: tutti gli item hanno ID stabile e acceptance verificabile. Ora può essere accodato a \`agent:fix-queued\`.`], { allowFail: true });
-          gh(['issue', editVerb, String(iss.number), ...repoArgs, '--add-label', 'agent:fix-queued'], { allowFail: true });
+          queueLabelIfAllowed({
+            ...latest,
+            title: newTitle === null ? latest.title : newTitle,
+            body: d.body,
+          }, repoArgs);
           report.push(`- 🔒 #${iss.number} daily bucket sealed, ${d.valid.length} item accodabili — ${daily?.targetRepository || 'unknown'}`);
           continue;
         }
@@ -1064,7 +1151,7 @@ function main() {
         // concurrent retry) appended an item after the list snapshot, recompute from
         // that fresh body instead of overwriting it with a stale baseline.
         const latest = parseIssueJson(gh(['issue', 'view', String(iss.number), ...repoArgs,
-          '--json', 'number,title,body,createdAt'], { allowFail: true }));
+          '--json', 'number,title,body,createdAt,labels'], { allowFail: true }));
         if (!latest || !sameIssueSnapshot(iss, latest)) {
           if (!latest) {
             console.log(`⚠️ #${iss.number}: body baseline non leggibile prima della riscrittura → lascio collecting/intatta.`);
@@ -1132,7 +1219,7 @@ function main() {
           // preserve that fresh body too, then perform one last CAS read immediately
           // before the close. This is the close boundary, not an advisory re-check.
           const latestBeforeClose = parseIssueJson(gh(['issue', 'view', String(iss.number), ...repoArgs,
-            '--json', 'number,title,body,createdAt'], { allowFail: true }));
+            '--json', 'number,title,body,createdAt,labels'], { allowFail: true }));
           if (!latestBeforeClose) {
             console.log(`⚠️ #${iss.number}: ultima lettura prima della soppressione illeggibile → issue lasciata aperta.`);
             report.push(`- ⚠️ #${iss.number} soppressione rinviata, baseline finale illeggibile`);
@@ -1173,7 +1260,7 @@ function main() {
               continue;
             }
             const confirmed = parseIssueJson(gh(['issue', 'view', String(iss.number), ...repoArgs,
-              '--json', 'number,title,body,createdAt'], { allowFail: true }));
+              '--json', 'number,title,body,createdAt,labels'], { allowFail: true }));
             if (!confirmed || !sameIssueSnapshot(latestBeforeClose, confirmed)) {
               console.log(`⚠️ #${iss.number}: CAS finale fallita dopo la conservazione → issue lasciata aperta, retry.`);
               report.push(`- ⚠️ #${iss.number} soppressione rinviata per CAS finale concorrente`);
@@ -1237,7 +1324,11 @@ function main() {
           if (daily && bucketState(d.body) === 'sealed' && selectFirstOpenItem(d.body)) {
             gh(['issue', 'comment', String(iss.number), ...repoArgs, '--body',
               `${MINT_GATE_MARKER}\n✅ Dopo la demozione il daily bucket è stato sigillato: gli item validi possono entrare in \`agent:fix-queued\`.`], { allowFail: true });
-            gh(['issue', 'edit', String(iss.number), ...repoArgs, '--add-label', 'agent:fix-queued'], { allowFail: true });
+            queueLabelIfAllowed({
+              ...iss,
+              title: newTitle === null ? iss.title : newTitle,
+              body: d.body,
+            }, repoArgs);
           }
           report.push(d.action === 'dedupe'
             ? `- 🧹 #${iss.number} ${d.duplicates.length} item duplicati accorpati, ${d.valid.length} restano — daily ${daily?.dailyKey || 'unknown'}`

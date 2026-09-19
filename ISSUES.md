@@ -98,11 +98,10 @@ tick fosse sbagliato.
    issue aperta per il giro successivo.
 
    **Eccezione — fix provabile solo da una run su `main`.** Se la PR tocca
-   `.github/workflows/**` o la config dell'action Claude (`claude_args`,
-   `settings`, sandbox, `permissionMode`) per un bug osservabile solo a
-   runtime (sandbox/bwrap, permessi, rate-limit, dispatch) — cioè nessun test
-   o lettura del diff può dimostrare che il fix funziona, solo una run reale
-   — **non usare `Closes #<n>`**: usa `Refs #<n>` e, dopo l'apertura della PR,
+   `.github/workflows/**` per un bug osservabile solo a runtime
+   (sandbox/bwrap, permessi, rate-limit, dispatch) — cioè nessun test o
+   lettura del diff può dimostrare che il fix funziona, solo una run reale —
+   **non usare `Closes #<n>`**: usa `Refs #<n>` e, dopo l'apertura della PR,
    `gh issue edit <n> --add-label awaiting-production-proof`. La issue resta
    aperta finché la misura di una run verde su `main` non arriva
    (vedi #151: la PR #147 è stata mergiata e la issue #127 chiusa 8 minuti

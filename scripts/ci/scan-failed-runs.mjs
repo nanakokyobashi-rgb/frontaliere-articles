@@ -252,7 +252,7 @@ const RECURRENCE_GATED_WORKFLOW_RE = /^(?:Generate Blog Article|fast-publish-art
 export const CRAWLER_GROUP_WORKFLOW_RE = /^Crawler Group \d{1,2} \(sparse cross-repo execution\)$/;
 const CRAWLER_MEMBER_FAILURE_RE = /(?:^|[^a-z0-9-])([a-z0-9][a-z0-9-]*):\s*crawler exited with status\s+([1-9]\d*)\b/gi;
 const NON_CRAWLER_FAILURE_EXIT_CODES = new Set([42, 43, 44]);
-const SYSTEMIC_CRAWLER_FAILURE_RE = /(?:^|[^a-z0-9-])([a-z0-9][a-z0-9-]*):\s*(?:crawl OK but the crawler group's shared deferred-commit precondition failed|shared group precondition failure)\s*\(exit\s*43\)/i;
+const SYSTEMIC_CRAWLER_FAILURE_RE = /^::error::\s*([a-z0-9][a-z0-9-]*):\s*(?:crawl OK but the crawler group's shared deferred-commit precondition failed|shared group precondition failure)\s*\(exit\s*43\)/i;
 
 export function isRecurrenceGatedWorkflow(name) {
   return RECURRENCE_GATED_WORKFLOW_RE.test(String(name || ''));
@@ -263,7 +263,7 @@ export function isCrawlerGroupWorkflow(name) {
 }
 
 export function isSystemicCrawlerFailureLog(text) {
-  return SYSTEMIC_CRAWLER_FAILURE_RE.test(String(text || ''));
+  return String(text || '').split('\n').some((line) => SYSTEMIC_CRAWLER_FAILURE_RE.test(cleanLogLine(line)));
 }
 
 // Workflow di SORVEGLIANZA della pipeline: il loro rosso E' l'allarme, non il

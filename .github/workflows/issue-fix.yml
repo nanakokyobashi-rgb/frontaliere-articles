@@ -753,7 +753,7 @@ jobs:
                ```
                **Eccezione — issue AGGREGATA (is_aggregate=${{ steps.tier.outputs.is_aggregate }}).** Se `true`, la regola ferrea qui sopra ti fa chiudere UN item su N: `Closes #$ISSUE_NUMBER` al merge chiuderebbe il TRACKER, e con esso gli item che hai appena elencato in `## Non implementato` — non resta piu' niente da ri-accodare, e il ciclo non converge. `scripts/ci/reconcile-followups.mjs` rifiuta gia' di auto-chiudere un aggregato (`closeEligible = ... && !isAggregate`); la keyword nel body bypassa quella protezione. **Usa la riga `closing_ref` pre-calcolata dal workflow** (`Refs #$ISSUE_NUMBER` per gli aggregati normali; `Addresses #$ISSUE_NUMBER` + `Follow-up item: FU-...` per i daily), mai una keyword inventata.
 
-               **Eccezione — fix provabile solo da una run su `main`.** Se QUESTA PR tocca `.github/workflows/**` o la config dell'action Claude (`claude_args`, `settings`, sandbox, `permissionMode`, `github_token`) per un bug osservabile solo a runtime (sandbox/bwrap, permessi, rate-limit, dispatch) — nessun test né lettura del diff può dimostrare che il fix funziona, solo una run reale — **non usare `Closes #$ISSUE_NUMBER`**: usa `Refs #$ISSUE_NUMBER` e, dopo l'apertura della PR, `gh issue edit $ISSUE_NUMBER --add-label awaiting-production-proof`. Dettagli in `ISSUES.md` → "Fix flow".
+               **Eccezione — fix provabile solo da una run su `main`.** Se QUESTA PR tocca `.github/workflows/**` per un bug osservabile solo a runtime (sandbox/bwrap, permessi, rate-limit, dispatch) — nessun test né lettura del diff può dimostrare che il fix funziona, solo una run reale — **non usare `Closes #$ISSUE_NUMBER`**: usa `Refs #$ISSUE_NUMBER` e, dopo l'apertura della PR, aggiungi `awaiting-production-proof`. Il post-step deterministico applica automaticamente la label ai retry che consegnano file `.github/workflows/<file>`; altri path restano fuori da questo hold perché il drainer non ha una prova equivalente. Dettagli in `ISSUES.md` → "Fix flow".
             10. La PR entra da sola nel ciclo di review e auto-merge. **NON mergiare a mano.**
 
             **Vincoli:**
@@ -915,6 +915,166 @@ jobs:
                 || echo "::warning::prova remediation L11 non commentata sulla issue"
             fi
           fi
+
+      - name: Apply production-proof hold for runtime workflow fixes (zero-Claude)
+        # La regola era affidata al prompt: se l'agente apriva la PR e poi
+        # moriva, oppure saltava il comando, la issue rientrava subito nella
+        # coda senza la prova necessaria su `main`. Questo post-step legge la
+        # PR consegnata e rende la sospensione deterministica.
+        #
+        # Il file-list CLI fallisce chiuso quando GitHub non consegna l'elenco
+        # completo: non applichiamo una label sulla base di una lista troncata.
+        # `.github/workflows/<file>` (un solo livello) segue workflowFilesOf;
+        # altri path non vengono selezionati, perché il drainer non ha una
+        # prova di produzione equivalente per loro.
+        if: always() && steps.claim.outputs.claim_acquired == 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          ISSUE: ${{ github.event.issue.number }}
+          ACTION_OUTCOME: ${{ steps.codex_fix.outcome || '' }}
+          ISSUE_GROUP: ${{ steps.group.outputs.is_group || 'false' }}
+          ISSUE_GROUP_NUMBERS: ${{ steps.group.outputs.group_numbers || '' }}
+        run: |
+          set -uo pipefail
+          runtime_token="${GITHUB_PAT_NANAKO:-}"
+          if [ -n "$runtime_token" ]; then
+            export GH_TOKEN="$runtime_token"
+          fi
+          if [ -z "$ACTION_OUTCOME" ] || [ "$ACTION_OUTCOME" = "skipped" ]; then
+            echo "production-proof: nessuna consegna Codex nella run corrente (outcome=$ACTION_OUTCOME) — skip"
+            exit 0
+          fi
+          BRANCH="fix/issue-$ISSUE"
+          RUN_STARTED_AT=""
+          RUN_LOOKUP_RC=1
+          for attempt in 1 2; do
+            RUN_LOOKUP_RC=0
+            RUN_STARTED_AT=$(gh api "repos/$REPO/actions/runs/$GITHUB_RUN_ID" \
+              --jq '.run_started_at // .created_at' 2>/dev/null) || RUN_LOOKUP_RC=$?
+            if [ "$RUN_LOOKUP_RC" -eq 0 ] && [ -n "$RUN_STARTED_AT" ]; then
+              break
+            fi
+            echo "::warning::production-proof: start time run illeggibile (attempt=$attempt rc=$RUN_LOOKUP_RC)"
+            [ "$attempt" -lt 2 ] && sleep 2
+          done
+          if [ "$RUN_LOOKUP_RC" -ne 0 ] || [ -z "$RUN_STARTED_AT" ]; then
+            echo "::error::production-proof: start time run non leggibile — hold non valutato"
+            exit 1
+          fi
+
+          PR_LIST_JSON=""
+          PR_LOOKUP_RC=1
+          for attempt in 1 2; do
+            PR_LOOKUP_RC=0
+            PR_LIST_JSON=$(gh pr list --repo "$REPO" --head "$BRANCH" --state all \
+              --json number,state,createdAt 2>/dev/null) || PR_LOOKUP_RC=$?
+            if [ "$PR_LOOKUP_RC" -eq 0 ]; then
+              break
+            fi
+            echo "::warning::production-proof: lookup PR fallito (attempt=$attempt rc=$PR_LOOKUP_RC), retry"
+            [ "$attempt" -lt 2 ] && sleep 2
+          done
+          if [ "$PR_LOOKUP_RC" -ne 0 ]; then
+            echo "::error::production-proof: lookup PR non leggibile dopo il retry — hold non valutato"
+            exit 1
+          fi
+          PR_PARSE_RC=0
+          PR_NUMBER=$(printf '%s\n' "$PR_LIST_JSON" | jq -r --arg started "$RUN_STARTED_AT" \
+            'map(select((.state == "OPEN" or .state == "MERGED") and (.createdAt >= $started))) | sort_by(.createdAt) | last | .number // empty' \
+            2>/dev/null) || PR_PARSE_RC=$?
+          if [ "$PR_PARSE_RC" -ne 0 ]; then
+            echo "::error::production-proof: parsing PR lookup fallito — hold non valutato"
+            exit 1
+          fi
+          if [ -z "$PR_NUMBER" ]; then
+            echo "production-proof: nessuna PR open/merged consegnata nella run corrente su $BRANCH — skip"
+            exit 0
+          fi
+
+          FILES_JSON=""
+          FILES_RC=1
+          COMPLETE=false
+          FILES_REASON="cli-failed"
+          for attempt in 1 2 3; do
+            FILES_RC=0
+            FILES_JSON=$(node scripts/ci/fetch-pr-files.mjs --repo "$REPO" --pr "$PR_NUMBER" 2>/dev/null) || FILES_RC=$?
+            COMPLETE=false
+            FILES_REASON="cli-failed"
+            if [ "$FILES_RC" -eq 0 ] && [ -n "$FILES_JSON" ]; then
+              COMPLETE=$(printf '%s\n' "$FILES_JSON" | jq -r '.complete // false' 2>/dev/null) || COMPLETE=false
+              FILES_REASON=$(printf '%s\n' "$FILES_JSON" | jq -r '.reason // "unknown"' 2>/dev/null) || FILES_REASON=unknown
+            fi
+            if [ "$FILES_RC" -eq 0 ] && [ "$COMPLETE" = "true" ]; then
+              break
+            fi
+            if [ "$FILES_RC" -eq 0 ] && [ "$FILES_REASON" = "rest-hard-limit" ]; then
+              echo "::error::production-proof: elenco file PR #$PR_NUMBER oltre il cap REST — hold non valutabile"
+              break
+            fi
+            echo "::warning::production-proof: elenco file PR #$PR_NUMBER non completo (attempt=$attempt rc=$FILES_RC reason=$FILES_REASON), retry"
+            [ "$attempt" -lt 3 ] && sleep "$attempt"
+          done
+          if [ "$FILES_RC" -ne 0 ] || [ "$COMPLETE" != "true" ]; then
+            echo "::error::production-proof: elenco file PR #$PR_NUMBER incompleto dopo i retry — hold non valutato"
+            exit 1
+          fi
+          RUNTIME_RC=0
+          RUNTIME_FILES=$(printf '%s\n' "$FILES_JSON" | jq -r \
+            '.files[]? | select(test("^\\.github/workflows/[^/]+$"))' \
+            2>/dev/null) || RUNTIME_RC=$?
+          if [ "$RUNTIME_RC" -ne 0 ]; then
+            echo "::error::production-proof: parsing elenco file PR #$PR_NUMBER fallito — hold non valutato"
+            exit 1
+          fi
+          if [ -z "$RUNTIME_FILES" ]; then
+            echo "production-proof: PR #$PR_NUMBER non tocca superfici runtime-sensitive — skip"
+            exit 0
+          fi
+
+          LABEL_CREATE_RC=1
+          for attempt in 1 2 3; do
+            if gh label create awaiting-production-proof --repo "$REPO" --color c5def5 \
+              --description "Merge atterrato, serve una run su main prima della chiusura" --force \
+              2>/dev/null; then
+              LABEL_CREATE_RC=0
+              break
+            fi
+            echo "::warning::production-proof: creazione label fallita (attempt=$attempt)"
+            [ "$attempt" -lt 3 ] && sleep "$attempt"
+          done
+          if [ "$LABEL_CREATE_RC" -ne 0 ]; then
+            echo "::error::production-proof: label non disponibile dopo i retry — hold non applicato"
+            exit 1
+          fi
+
+          TARGET_ISSUES="${ISSUE_GROUP_NUMBERS:-$ISSUE}"
+          if [ "$ISSUE_GROUP" = "true" ] && [ -z "$ISSUE_GROUP_NUMBERS" ]; then
+            echo "::error::production-proof: gruppo B19 senza membri — hold non applicato"
+            exit 1
+          fi
+          IFS=',' read -r -a ISSUE_LIST <<< "$TARGET_ISSUES"
+          for target_issue in "${ISSUE_LIST[@]}"; do
+            target_issue="${target_issue//[[:space:]]/}"
+            if [[ ! "$target_issue" =~ ^[0-9]+$ ]]; then
+              echo "::error::production-proof: membro issue non valido: $target_issue"
+              exit 1
+            fi
+            ISSUE_EDIT_RC=1
+            for attempt in 1 2 3; do
+              if gh issue edit "$target_issue" --repo "$REPO" --add-label awaiting-production-proof; then
+                ISSUE_EDIT_RC=0
+                break
+              fi
+              echo "::warning::production-proof: edit label issue #$target_issue fallito (attempt=$attempt)"
+              [ "$attempt" -lt 3 ] && sleep "$attempt"
+            done
+            if [ "$ISSUE_EDIT_RC" -ne 0 ]; then
+              echo "::error::production-proof: label non applicata alla issue #$target_issue dopo i retry"
+              exit 1
+            fi
+            echo "production-proof: issue #$target_issue sospesa per PR #$PR_NUMBER"
+          done
 
       # Simmetrico al claim, e su OGNI percorso terminale (successo, blocco,
       # max-turns, fallimento infra). `agent:in-progress` e' mutua esclusione,

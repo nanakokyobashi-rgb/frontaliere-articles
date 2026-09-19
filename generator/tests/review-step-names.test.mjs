@@ -71,6 +71,33 @@ function stepBlock(src, name) {
   return out.join('\n');
 }
 
+function repoRelativeImportClosure(entry) {
+  const seen = new Set();
+  const queue = [entry];
+  const staticImport = /(?:^|\n)\s*import\s+(?:[\s\S]*?\s+from\s+)?['"]([^'"]+)['"]/g;
+  const dynamicImport = /\bimport\(\s*['"]([^'"]+)['"]\s*\)/g;
+  while (queue.length) {
+    const file = queue.shift();
+    if (seen.has(file)) continue;
+    seen.add(file);
+    const source = fs.readFileSync(file, 'utf8');
+    const specs = [];
+    for (const matcher of [staticImport, dynamicImport]) {
+      matcher.lastIndex = 0;
+      for (const match of source.matchAll(matcher)) specs.push(match[1]);
+    }
+    for (const spec of specs) {
+      if (!spec.startsWith('.')) continue;
+      const base = path.resolve(path.dirname(file), spec);
+      const candidate = [base, `${base}.mjs`, `${base}.js`, `${base}.json`]
+        .find((filePath) => fs.existsSync(filePath));
+      assert.ok(candidate, `import repo-locale non risolto: ${spec} da ${file}`);
+      queue.push(candidate);
+    }
+  }
+  return [...seen].sort().map((file) => path.relative(ROOT, file));
+}
+
 test('i nomi di step su cui pr-autorebase decide combaciano con tests.yml', async () => {
   const { REVIEW_GATE_STEP_NAME, CLAUDE_REVIEW_STEP_NAME, REVIEW_ABORT_STEP_NAME, REVIEW_GUARD_STEP_NAME, REVIEW_GATE_FAILURE_STEP_NAME } = await import(
     '../../scripts/ci/lib/vitestCheck.mjs'
@@ -122,6 +149,37 @@ test('il review gate gira anche a review saltata, altrimenti il segnale non esis
     'il review gate ora si salta insieme alla review: lo stato «gate rosso su verdetti ' +
       'gia\' postati» sparisce, e con esso il caso che `reviewSkippedByGuard` distingue.',
   );
+});
+
+test('il review gate e il suo grafo di import arrivano dalla main', () => {
+  const bootstrapName = 'Bootstrap trusted review gate from main';
+  const bootstrap = stepBlock(yaml, bootstrapName);
+  const gate = stepBlock(yaml, 'Require approving Codex review');
+  const names = stepNames(yaml);
+  const closure = repoRelativeImportClosure(path.join(ROOT, 'scripts/ci/review-gate.mjs'));
+
+  assert.ok(
+    names.indexOf(bootstrapName) < names.indexOf('Require approving Codex review'),
+    'il modulo scaricato deve essere pronto prima dell invocazione del gate',
+  );
+  assert.match(bootstrap, /download_main\s+scripts\/ci\/review-gate\.mjs\s+"\$review_gate_root\/scripts\/ci\/review-gate\.mjs"/);
+  assert.match(bootstrap, /set -euo pipefail/);
+  assert.match(bootstrap, /if ! gh api/);
+  assert.match(bootstrap, /REVIEW_GATE_MAIN_MODULE=/);
+  assert.match(bootstrap, /Review gate bootstrap: main @/);
+  for (const relative of closure) {
+    const escaped = relative.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    assert.match(
+      bootstrap,
+      new RegExp(`download_main\\s+${escaped}\\s+"\\$review_gate_root/${escaped}"`),
+      `${relative} e' nel grafo del gate ma non viene scaricato dalla main`,
+    );
+  }
+
+  assert.match(gate, /node "\$REVIEW_GATE_MAIN_MODULE"/);
+  assert.match(gate, /Executing trusted review gate from/);
+  assert.match(gate, /steps\.review_source_main\.outcome\s*==\s*['"]success['"]/);
+  assert.doesNotMatch(gate, /node\s+(?:\.\/)?scripts\/ci\/review-gate\.mjs/);
 });
 
 test('il classificatore separa un verdetto da un errore del review gate', async () => {

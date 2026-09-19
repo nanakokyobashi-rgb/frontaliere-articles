@@ -27,14 +27,36 @@ test('riattiva il gate sugli eventi che possono cambiare review, check o HEAD', 
 });
 
 test('scarica helper affidabili dal main del corpus e usa il PAT corretto', () => {
-  assert.match(source, /generator\/scripts\/load-rc-env\.mjs\?ref=main/);
-  assert.match(source, /generator\/scripts\/lib\/google-service-account-token\.mjs\?ref=main/);
+  assert.match(source, /'generator\/scripts\/load-rc-env\.mjs' "\$helper_dir\/load-rc-env\.mjs"/);
+  assert.match(source, /'generator\/scripts\/lib\/google-service-account-token\.mjs'/);
   assert.match(source, /contents\/\$\{path\}\?ref=main/);
   assert.match(source, /'scripts\/ci\/native-automerge-gate\.mjs' "\$gate_tmp"/);
   assert.match(source, /'scripts\/ci\/review-test-policy\.mjs' "\$policy_tmp"/);
   assert.match(source, /'scripts\/ci\/lib\/fetchPrFiles\.mjs' "\$files_tmp"/);
   assert.match(source, /GITHUB_PAT_NANAKO/);
   assert.doesNotMatch(source, /gh pr merge/);
+});
+
+test('#1604: il bootstrap ritenta solo letture GitHub transitorie e resta fail-closed', () => {
+  const start = source.indexOf('download_and_check() {');
+  const end = source.indexOf('\n\n          # Inspect the parsed module graph', start);
+  assert.ok(start >= 0 && end > start, 'helper downloader block non trovato');
+  const downloader = source.slice(start, end);
+  assert.match(downloader, /for attempt in 1 2 3/);
+  assert.match(downloader, /> "\$destination" 2> "\$error_file"/);
+  assert.match(downloader, /timeout/);
+  assert.match(downloader, /deadline\[\[:space:\]\.\_-\]\*exceeded/);
+  assert.match(downloader, /timed\[\[:space:\]\.\_-\]\*out/);
+  assert.match(downloader, /HTTP 429/);
+  assert.match(downloader, /rate limit exceeded/);
+  assert.match(downloader, /secondary rate limit/);
+  assert.doesNotMatch(downloader, /HTTP 403/);
+  assert.match(downloader, /HTTP 5\[0-9\]\[0-9\]/);
+  assert.match(downloader, /\[ "\$attempt" -eq 3 \] \|\| ! grep/);
+  assert.match(downloader, /sleep "\$\(\(attempt \* 5\)\)"/);
+  assert.match(downloader, /return 1\b/);
+  assert.match(source, /download_and_check \\\n\s+'generator\/scripts\/load-rc-env\.mjs' "\$helper_dir\/load-rc-env\.mjs"/);
+  assert.match(source, /download_and_check \\\n\s+'scripts\/ci\/lib\/constants\.mjs' "\$helper_dir\/lib\/constants\.mjs"/);
 });
 
 test('il gate corrente non trascina vitestCheck come dipendenza hard', () => {

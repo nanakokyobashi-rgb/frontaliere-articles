@@ -1,14 +1,16 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import {
   reviewQuotaDeferredBody,
 } from '../../scripts/ci/check-quota-backoff.mjs';
 import {
   deferredReviewCandidate,
+  fixerAttemptEvidence,
   hasReviewQuotaRetry,
   latestReviewQuotaDeferred,
   latestReviewQuotaRetry,
@@ -22,7 +24,9 @@ import {
   collectReviewTransientCandidates,
   pendingReviewTransientClaim,
   sourceWorkflowForRole,
+  sourceWorkflowPathForRole,
   roundRobinWindow,
+  sourceRunForCandidate,
   sourceRunAlreadyHandled,
   retryStateForObservedAttempt,
   transientRetryStateForRun,
@@ -36,6 +40,68 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const HEAD = 'a'.repeat(40);
 const BODY_REVISION = `body:${'b'.repeat(64)}`;
 const FINGERPRINT = 'c'.repeat(64);
+
+test('il CLI distingue elenco vuoto da API non verificabile e resta non-zero', () => {
+  const dir = fs.mkdtempSync(path.join(fs.realpathSync('/tmp'), 'review-quota-rescuer-cli-'));
+  const calls = path.join(dir, 'calls');
+  const gh = path.join(dir, 'gh');
+  fs.writeFileSync(calls, '');
+  fs.writeFileSync(gh, [
+    '#!/bin/sh',
+    'printf "%s\\n" "$*" >> "$GH_CALLS"',
+    'case "$GH_MODE" in',
+    '  fail) exit 1 ;;',
+    '  malformed) printf "{\\"unexpected\\":true}\\n" ;;',
+    '  malformed-page) printf "[[{}]]\\n" ;;',
+    '  empty) printf "[]\\n" ;;',
+    'esac',
+    '',
+  ].join('\n'));
+  fs.chmodSync(gh, 0o755);
+  try {
+    const env = {
+      ...process.env,
+      GH_REPO: 'nanakokyobashi-rgb/frontaliere-articles',
+      GH_CALLS: calls,
+      PATH: dir + ':' + (process.env.PATH || ''),
+    };
+    const script = path.join(ROOT, 'scripts/ci/review-quota-rescuer.mjs');
+    const failed = spawnSync(process.execPath, [script], {
+      encoding: 'utf8',
+      env: { ...env, GH_MODE: 'fail' },
+    });
+    assert.notEqual(failed.status, 0, 'un errore gh non può colorare verde il rescuer');
+    assert.match(failed.stderr, /probe fallita/);
+    assert.doesNotMatch(fs.readFileSync(calls, 'utf8'), /pr comment|run rerun|api -X/);
+
+    fs.writeFileSync(calls, '');
+    const empty = spawnSync(process.execPath, [script], {
+      encoding: 'utf8',
+      env: { ...env, GH_MODE: 'empty' },
+    });
+    assert.equal(empty.status, 0, 'un elenco PR vuoto valido non è un errore');
+    assert.match(empty.stdout, /PR osservate=0/);
+
+    fs.writeFileSync(calls, '');
+    const malformed = spawnSync(process.execPath, [script], {
+      encoding: 'utf8',
+      env: { ...env, GH_MODE: 'malformed' },
+    });
+    assert.notEqual(malformed.status, 0, 'un payload non-array non è un elenco vuoto');
+    assert.match(malformed.stderr, /probe fallita/);
+
+    fs.writeFileSync(calls, '');
+    const malformedPage = spawnSync(process.execPath, [script], {
+      encoding: 'utf8',
+      env: { ...env, GH_MODE: 'malformed-page' },
+    });
+    assert.notEqual(malformedPage.status, 0, 'una pagina con record senza campi non è una coda vuota');
+    assert.match(malformedPage.stderr, /probe fallita/);
+    assert.doesNotMatch(fs.readFileSync(calls, 'utf8'), /pr comment|run rerun|api -X/);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
 
 function reviewClaim(overrides = {}) {
   const context = {
@@ -91,6 +157,95 @@ test('solo una run sorgente avanzata non consuma un nuovo retry', () => {
   assert.equal(sourceRunAlreadyHandled(candidate, { attempt: 2, status: 'completed', conclusion: 'failure' }), false);
   assert.equal(sourceRunAlreadyHandled({ deferred: {} }, { attempt: 2, status: 'completed', conclusion: 'failure' }), true);
   assert.equal(sourceRunAlreadyHandled({ deferred: {} }, { attempt: 1, status: 'completed', conclusion: 'success' }), false);
+});
+
+test('un marker v2 avanzato richiede prova di consumo, non solo attempt', () => {
+  const candidate = { deferred: { version: 2, sourceAttempt: 2 } };
+  assert.equal(
+    sourceRunAlreadyHandled(candidate, { attempt: 3 }, { verified: true, consumed: false }),
+    false,
+  );
+  assert.equal(
+    sourceRunAlreadyHandled(candidate, { attempt: 3 }, { verified: true, consumed: true }),
+    true,
+  );
+  assert.equal(
+    sourceRunAlreadyHandled(candidate, { attempt: 3 }, { verified: false, consumed: true }),
+    false,
+  );
+});
+
+function redcheckClaimComment(state, runId = '77', login = 'github-actions[bot]') {
+  return {
+    user: { login },
+    body: `<!-- REDCHECK_FIX_CLAIM: ${JSON.stringify({
+      version: 1,
+      token: `claim-${runId}`,
+      key: `pr:99|head:${HEAD}|failure:tests`,
+      prNumber: '99',
+      headSha: HEAD,
+      checkFailureKey: 'tests',
+      state,
+      issuedAt: 1_800_000_000,
+      expiresAt: 1_800_000_600,
+      runId,
+    })} -->`,
+  };
+}
+
+test('la riconciliazione v2 redcheck accetta solo claim terminale dello stesso run', () => {
+  assert.deepEqual(
+    fixerAttemptEvidence({
+      role: 'redcheck', runId: '77', prNumber: 99, head: HEAD,
+      comments: [redcheckClaimComment('active')],
+    }),
+    { verified: true, consumed: false, reason: 'redcheck-claim-not-terminal' },
+  );
+  assert.deepEqual(
+    fixerAttemptEvidence({
+      role: 'redcheck', runId: '77', prNumber: 99, head: HEAD,
+      comments: [redcheckClaimComment('completed')],
+    }),
+    { verified: true, consumed: true, reason: 'redcheck-claim-terminal' },
+  );
+  assert.equal(
+    fixerAttemptEvidence({
+      role: 'redcheck', runId: '77', prNumber: 99, head: HEAD,
+      comments: [redcheckClaimComment('completed', '76')],
+    }).consumed,
+    false,
+  );
+  assert.equal(
+    fixerAttemptEvidence({
+      role: 'redcheck', runId: '77', prNumber: 99, head: HEAD,
+      comments: [redcheckClaimComment('completed', '77', 'untrusted-user')],
+    }).consumed,
+    false,
+    'un actor non può chiudere la fence',
+  );
+});
+
+test('la riconciliazione v2 redflag richiede lo step di fix realmente avviato', () => {
+  const step = { name: 'Run Codex Luna Max 🔴-fix', startedAt: '2026-09-19T10:00:00Z', conclusion: 'success' };
+  assert.deepEqual(
+    fixerAttemptEvidence({ role: 'redflag', runId: '77', prNumber: 99, head: HEAD, jobs: [{ steps: [step] }] }),
+    { verified: true, consumed: true, reason: 'redflag-fix-step-started' },
+  );
+  assert.equal(
+    fixerAttemptEvidence({
+      role: 'redflag', runId: '77', prNumber: 99, head: HEAD,
+      jobs: [{ steps: [{ ...step, startedAt: null, conclusion: 'skipped' }] }],
+    }).consumed,
+    false,
+  );
+  assert.deepEqual(
+    fixerAttemptEvidence({ role: 'redflag', runId: '77', prNumber: 99, head: HEAD, jobs: [{ steps: [] }] }),
+    { verified: true, consumed: false, reason: 'redflag-fix-step-not-started' },
+  );
+  assert.equal(
+    fixerAttemptEvidence({ role: 'redflag', runId: '77', prNumber: 99, head: HEAD, jobs: [{}] }).verified,
+    false,
+  );
 });
 
 test('il rescuer seleziona solo una deferral sulla HEAD corrente', () => {
@@ -264,6 +419,193 @@ test('il rescuer usa la run sorgente corretta per ogni consumer PR', () => {
   assert.equal(sourceWorkflowForRole('redflag'), 'PR 🔴 fixer (bounded loop-closure on bot PRs)');
   assert.equal(sourceWorkflowForRole('redcheck'), 'PR ❌ check fixer (bounded, check richiesto rosso su PR bot)');
   assert.equal(sourceWorkflowForRole('issue-fix'), '');
+  assert.equal(sourceWorkflowPathForRole('redflag'), '.github/workflows/pr-redflag-fixer.yml');
+  assert.equal(sourceWorkflowPathForRole('redcheck'), '.github/workflows/pr-redcheck-fixer.yml');
+  assert.equal(sourceWorkflowPathForRole('review'), '');
+});
+
+test('collect scarta un marker v2 indirizzato a un’altra PR', () => {
+  const body = reviewQuotaDeferredBody({
+    head: HEAD,
+    runId: '123',
+    role: 'redcheck',
+    reason: 'shared-quota-lease-active',
+    sourceAttempt: 1,
+    prNumber: 100,
+    sourceWorkflow: '.github/workflows/pr-redcheck-fixer.yml',
+    sourceEvent: 'workflow_dispatch',
+  });
+  assert.ok(body);
+  assert.deepEqual(
+    collectReviewQuotaCandidates(
+      [{ number: 99, head: { sha: HEAD } }],
+      new Map([[99, [{ body }]]]),
+    ),
+    [],
+  );
+});
+
+test('workflow_run su main è accettato solo con trigger tests sulla PR HEAD', () => {
+  const dir = fs.mkdtempSync(path.join(fs.realpathSync('/tmp'), 'review-quota-provenance-'));
+  const gh = path.join(dir, 'gh');
+  const mainSha = 'b'.repeat(40);
+  const fixer = JSON.stringify({
+    databaseId: '123',
+    headSha: mainSha,
+    status: 'completed',
+    workflowName: 'PR ❌ check fixer (bounded, check richiesto rosso su PR bot)',
+    event: 'workflow_run',
+    attempt: 3,
+    conclusion: 'success',
+  });
+  const trigger = JSON.stringify({
+    databaseId: '456',
+    headSha: HEAD,
+    status: 'completed',
+    workflowName: 'tests',
+    event: 'pull_request',
+    attempt: 1,
+    conclusion: 'failure',
+  });
+  fs.writeFileSync(gh, [
+    '#!/bin/sh',
+    'if [ "$3" = "123" ]; then printf \'%s\\n\' "$FIXER_JSON"; else printf \'%s\\n\' "$TRIGGER_JSON"; fi',
+    '',
+  ].join('\n'));
+  fs.chmodSync(gh, 0o755);
+  const candidate = {
+    pr: { number: 99 },
+    head: HEAD,
+    deferred: {
+      version: 2,
+      head: HEAD,
+      runId: '123',
+      role: 'redcheck',
+      reason: 'shared-quota-lease-active',
+      prNumber: '99',
+      sourceAttempt: 2,
+      sourceWorkflow: '.github/workflows/pr-redcheck-fixer.yml',
+      sourceEvent: 'workflow_run',
+      triggerRunId: '456',
+      triggerHead: HEAD,
+    },
+  };
+  candidate.deferred.commentId = 7;
+  candidate.comments = [{
+    id: 7,
+    user: { login: 'github-actions[bot]' },
+    body: reviewQuotaDeferredBody(candidate.deferred),
+  }];
+  try {
+    const env = {
+      ...process.env,
+      GH_REPO: 'nanakokyobashi-rgb/frontaliere-articles',
+      FIXER_JSON: fixer,
+      TRIGGER_JSON: trigger,
+      PATH: dir + ':' + (process.env.PATH || ''),
+    };
+    const moduleUrl = pathToFileURL(path.join(ROOT, 'scripts/ci/review-quota-rescuer.mjs')).href;
+    const source = `import { sourceRunForCandidate } from ${JSON.stringify(moduleUrl)};\n`
+      + `const run = sourceRunForCandidate(${JSON.stringify(candidate)});\n`
+      + `process.stdout.write(JSON.stringify(run));\n`;
+    const accepted = spawnSync(process.execPath, ['--input-type=module', '-e', source], {
+      encoding: 'utf8',
+      env,
+    });
+    assert.equal(accepted.status, 0, accepted.stderr);
+    assert.equal(JSON.parse(accepted.stdout).provenanceVerified, true);
+    assert.equal(JSON.parse(accepted.stdout).headSha, mainSha);
+
+    const rejected = spawnSync(process.execPath, ['--input-type=module', '-e', source], {
+      encoding: 'utf8',
+      env: {
+        ...env,
+        TRIGGER_JSON: JSON.stringify({ ...JSON.parse(trigger), headSha: 'c'.repeat(40) }),
+      },
+    });
+    assert.equal(rejected.status, 0, rejected.stderr);
+    assert.equal(JSON.parse(rejected.stdout), null);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('workflow_dispatch su main usa intent preflight trusted + PR HEAD corrente, senza trigger tests', () => {
+  const dir = fs.mkdtempSync(path.join(fs.realpathSync('/tmp'), 'review-quota-dispatch-'));
+  const gh = path.join(dir, 'gh');
+  const dispatchRun = JSON.stringify({
+    databaseId: '123',
+    headSha: 'b'.repeat(40),
+    status: 'completed',
+    workflowName: 'PR ❌ check fixer (bounded, check richiesto rosso su PR bot)',
+    event: 'workflow_dispatch',
+    attempt: 2,
+    conclusion: 'success',
+  });
+  const pr = JSON.stringify({ number: 99, state: 'open', head: { sha: HEAD } });
+  fs.writeFileSync(gh, [
+    '#!/bin/sh',
+    'if [ "$1" = "api" ]; then printf \'%s\\n\' "$PR_JSON"; else printf \'%s\\n\' "$RUN_JSON"; fi',
+    '',
+  ].join('\n'));
+  fs.chmodSync(gh, 0o755);
+  const candidate = {
+    pr: { number: 99 },
+    head: HEAD,
+    deferred: {
+      version: 2,
+      head: HEAD,
+      runId: '123',
+      role: 'redcheck',
+      reason: 'shared-quota-lease-active',
+      prNumber: '99',
+      sourceAttempt: 1,
+      sourceWorkflow: '.github/workflows/pr-redcheck-fixer.yml',
+      sourceEvent: 'workflow_dispatch',
+    },
+  };
+  candidate.deferred.commentId = 8;
+  candidate.comments = [{
+    id: 8,
+    user: { login: 'github-actions[bot]' },
+    body: reviewQuotaDeferredBody(candidate.deferred),
+  }];
+  try {
+    const env = {
+      ...process.env,
+      GH_REPO: 'nanakokyobashi-rgb/frontaliere-articles',
+      RUN_JSON: dispatchRun,
+      PR_JSON: pr,
+      PATH: dir + ':' + (process.env.PATH || ''),
+    };
+    const moduleUrl = pathToFileURL(path.join(ROOT, 'scripts/ci/review-quota-rescuer.mjs')).href;
+    const sourceFor = (target) => `import { currentTargetProof, sourceRunForCandidate } from ${JSON.stringify(moduleUrl)};\n`
+      + `const candidate = ${JSON.stringify(target)};\n`
+      + `process.stdout.write(JSON.stringify({ proof: currentTargetProof(candidate), run: sourceRunForCandidate(candidate) }));\n`;
+    const source = sourceFor(candidate);
+    const accepted = spawnSync(process.execPath, ['--input-type=module', '-e', source], {
+      encoding: 'utf8',
+      env,
+    });
+    assert.equal(accepted.status, 0, accepted.stderr);
+    const acceptedPayload = JSON.parse(accepted.stdout);
+    assert.deepEqual(acceptedPayload.proof, { verified: true, obsolete: false });
+    assert.equal(acceptedPayload.run.provenanceVerified, true);
+    assert.equal(acceptedPayload.run.headSha, 'b'.repeat(40));
+
+    const untrustedCandidate = {
+      ...candidate,
+      comments: [{ ...candidate.comments[0], user: { login: 'untrusted-user' } }],
+    };
+    const rejectedMarker = spawnSync(process.execPath, ['--input-type=module', '-e', sourceFor(untrustedCandidate)], {
+      encoding: 'utf8',
+      env,
+    });
+    assert.equal(rejectedMarker.status, 0, rejectedMarker.stderr);
+    assert.equal(JSON.parse(rejectedMarker.stdout).run, null);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
 });
 
 test('un claim failed-transient riceve al massimo un rerun per HEAD e body revision', () => {
@@ -470,6 +812,8 @@ test('il wiring reagisce al completamento dei consumer e rilascia reservation es
   const redcheck = fs.readFileSync(path.join(ROOT, '.github/workflows/pr-redcheck-fixer.yml'), 'utf8');
   assert.match(redflag, /HEAD_SHA: \$\{\{ github\.event\.pull_request\.head\.sha \}\}/);
   assert.match(redcheck, /HEAD_SHA: \$\{\{ needs\.preflight\.outputs\.head_sha \}\}/);
+  assert.match(redcheck, /REVIEW_QUOTA_TRIGGER_RUN_ID: \$\{\{ github\.event\.workflow_run\.id \}\}/);
+  assert.match(redcheck, /REVIEW_QUOTA_TRIGGER_HEAD: \$\{\{ github\.event\.workflow_run\.head_sha \}\}/);
   assert.match(redflag, /steps\.quota_lease\.outputs\.lease_allowed == 'true'[\s\S]*steps\.quota_lease\.outputs\.lease_token != ''/);
   assert.match(redcheck, /steps\.quota_lease\.outputs\.lease_allowed == 'true'[\s\S]*steps\.quota_lease\.outputs\.lease_token != ''/);
   const rescuer = fs.readFileSync(path.join(ROOT, 'scripts/ci/review-quota-rescuer.mjs'), 'utf8');
@@ -478,6 +822,8 @@ test('il wiring reagisce al completamento dei consumer e rilascia reservation es
   assert.match(rescuer, /state: 'failed'/);
   assert.match(rescuer, /state: 'confirmed'/);
   assert.match(rescuer, /--json', 'databaseId,headSha,status,workflowName,headBranch,event,attempt,conclusion'/);
+  assert.doesNotMatch(rescuer, /headBranch,event,attempt,conclusion,actor,triggeringActor/);
+  assert.match(rescuer, /trustedSourceMarker/);
   assert.match(rescuer, /includeRequested: true/);
   assert.match(rescuer, /sourceAttempt/);
   assert.match(rescuer, /REVIEW_QUOTA_RESCUER_CURSOR/);

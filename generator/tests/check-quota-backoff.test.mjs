@@ -230,6 +230,121 @@ test('#8365: il marker di deferral registra l’attempt sorgente quando disponib
   );
 });
 
+test('#8365: i fixer usano il marker v2 con provenienza workflow e trigger HEAD-pinned', () => {
+  const head = 'a'.repeat(40);
+  const body = reviewQuotaDeferredBody({
+    head,
+    runId: '123',
+    role: 'redcheck',
+    reason: 'shared-quota-lease-active',
+    sourceAttempt: 2,
+    prNumber: 99,
+    sourceWorkflow: '.github/workflows/pr-redcheck-fixer.yml',
+    sourceEvent: 'workflow_run',
+    triggerRunId: '456',
+    triggerHead: head,
+  });
+  assert.ok(body);
+  assert.deepEqual(parseReviewQuotaDeferredMarker(body), {
+    version: 2,
+    head,
+    runId: '123',
+    role: 'redcheck',
+    reason: 'shared-quota-lease-active',
+    prNumber: '99',
+    sourceAttempt: 2,
+    sourceWorkflow: '.github/workflows/pr-redcheck-fixer.yml',
+    sourceEvent: 'workflow_run',
+    triggerRunId: '456',
+    triggerHead: head,
+  });
+  assert.equal(
+    reviewQuotaDeferredBody({
+      head,
+      runId: '123',
+      role: 'redcheck',
+      reason: 'shared-quota-lease-active',
+      sourceAttempt: 2,
+      prNumber: 99,
+      sourceWorkflow: '.github/workflows/pr-redcheck-fixer.yml',
+      sourceEvent: 'workflow_run',
+      triggerRunId: '456',
+      triggerHead: 'b'.repeat(40),
+    }),
+    '',
+    'il trigger deve dimostrare la stessa HEAD della PR',
+  );
+  assert.equal(
+    reviewQuotaDeferredBody({
+      head,
+      runId: '123',
+      role: 'redcheck',
+      reason: 'shared-quota-lease-active',
+      sourceAttempt: 2,
+      prNumber: 99,
+      sourceWorkflow: '.github/workflows/pr-redcheck-fixer.yml',
+      sourceEvent: 'workflow_run',
+      triggerRunId: '456',
+    }),
+    '',
+    'workflow_run senza trigger HEAD non è verificabile',
+  );
+  assert.equal(
+    reviewQuotaDeferredBody({
+      head,
+      runId: '123',
+      role: 'redcheck',
+      reason: 'shared-quota-lease-active',
+      sourceAttempt: 2,
+      prNumber: 99,
+      sourceWorkflow: '.github/workflows/pr-redcheck-fixer.yml',
+      sourceEvent: 'workflow_run',
+      triggerHead: head,
+    }),
+    '',
+    'triggerRunId e triggerHead sono una coppia indivisibile',
+  );
+  const dispatchBody = reviewQuotaDeferredBody({
+    head,
+    runId: '123',
+    role: 'redcheck',
+    reason: 'shared-quota-lease-active',
+    sourceAttempt: 2,
+    prNumber: 99,
+    sourceWorkflow: '.github/workflows/pr-redcheck-fixer.yml',
+    sourceEvent: 'workflow_dispatch',
+    triggerRunId: '456',
+    triggerHead: head,
+  });
+  assert.equal(parseReviewQuotaDeferredMarker(dispatchBody)?.sourceEvent, 'workflow_dispatch');
+  const dispatchWithoutTrigger = reviewQuotaDeferredBody({
+    head,
+    runId: '123',
+    role: 'redcheck',
+    reason: 'shared-quota-lease-active',
+    sourceAttempt: 2,
+    prNumber: 99,
+    sourceWorkflow: '.github/workflows/pr-redcheck-fixer.yml',
+    sourceEvent: 'workflow_dispatch',
+  });
+  assert.equal(parseReviewQuotaDeferredMarker(dispatchWithoutTrigger)?.sourceEvent, 'workflow_dispatch');
+  assert.equal(
+    reviewQuotaDeferredBody({
+      head,
+      runId: '123',
+      role: 'redcheck',
+      reason: 'shared-quota-lease-active',
+      sourceAttempt: 2,
+      prNumber: 99,
+      sourceWorkflow: '.github/workflows/pr-redcheck-fixer.yml',
+      sourceEvent: 'workflow_dispatch',
+      triggerHead: head,
+    }),
+    '',
+    'trigger parziale non è un intent dispatch verificabile',
+  );
+});
+
 test('#8365: lease scaduto o rilasciato non blocca il tick successivo', () => {
   const nowSec = 1_800_000_000;
   const expired = {
