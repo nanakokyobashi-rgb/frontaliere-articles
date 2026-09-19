@@ -50,6 +50,10 @@ test('body edits re-enter through the trusted recovery, not through a tests.yml 
   assert.ok(tests.indexOf('nessuna seconda review, anche dopo un body edit') < tests.indexOf('if [ -z "$changed" ]'));
   assert.match(recovery, /pull_request_target:\n    types: \[edited\]/);
   assert.doesNotMatch(recovery, /actions\/checkout|createCheckRun/);
+  // Corpus adaptation: tests.yml here checks out the dispatched ref, so a
+  // dispatch on the base would test base code and anchor the check on the
+  // base SHA. Without a run on the head, recovery waits for the next push.
+  assert.doesNotMatch(recovery, /createWorkflowDispatch/);
 });
 
 test('a corrected failed body retries the code run', async () => {

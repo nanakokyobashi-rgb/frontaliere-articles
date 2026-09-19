@@ -1,8 +1,13 @@
 name: Retry code check after corrected PR body
 run-name: 'Body recovery · PR #${{ github.event.pull_request.number }}'
 
-# API-only recovery on trusted main. It dispatches the trusted tests workflow
-# when the exact head has no run, without executing any file/string from the PR.
+# API-only recovery on trusted main. It reruns the latest tests run of the
+# exact PR head, without executing any file/string from the PR.
+#
+# Corpus adaptation: no dispatch when the head has no run. The site version
+# dispatches tests.yml on the base ref, but this repo's tests.yml checks out
+# the dispatched ref (no `ref: inputs.head_sha`), so that run would test the
+# base code and publish its check on the base SHA, never on the PR head.
 on:
   pull_request_target:
     types: [edited]
@@ -33,17 +38,7 @@ jobs:
             });
             const latest = runs.sort((a, b) => b.id - a.id)[0];
             if (!latest) {
-              await github.rest.actions.createWorkflowDispatch({
-                ...repo,
-                workflow_id: 'tests.yml',
-                // Dispatch the trusted workflow from the base branch. A fork
-                // PR has no branch in this repository, so pr.head.ref is not
-                // a valid dispatch ref here. The exact untrusted head travels
-                // as data and is resolved/checked by tests.yml.
-                ref: pr.base.ref,
-                inputs: { pr_number: String(number), head_sha: pr.head.sha },
-              });
-              core.info(`Dispatched tests.yml for PR #${number}: no run existed on ${pr.head.sha}.`);
+              core.info(`No tests run exists on ${pr.head.sha}; the next push re-enters the code check.`);
               return;
             }
             // Inspect the latest attempt only, never an old failure underneath

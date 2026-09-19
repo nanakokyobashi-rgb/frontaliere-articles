@@ -3929,10 +3929,11 @@
     },
     {
       "path": ".github/workflows/retry-code-check-after-body-edit.yml",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "Stesso recupero del sito dopo un body corretto: riesegue l'ultima run `tests` della HEAD quando e' fallita sul contratto del body o sul SOLO gate della review, ed e' l'unica via di rientro da quando `tests.yml` non ha piu' `edited` fra i trigger. Adattato su un punto: niente `createWorkflowDispatch` quando la HEAD non ha run. Il `tests.yml` di questo repo fa checkout del ref dispatchato senza `ref: inputs.head_sha`, quindi quel dispatch sul base ref testerebbe il codice di base e pubblicherebbe il check sulla SHA di base, mai sulla HEAD della PR (finding della review sulla PR #1613). Il resto del file e' byte per byte quello del sito.",
       "baseline": {
         "site": "746f8ace38ffe2f2",
-        "corpus": "746f8ace38ffe2f2",
+        "corpus": "7e3e32c744d969ff",
         "alignedAt": "2026-09-19"
       }
     },
