@@ -45,7 +45,10 @@ const SINGLE_MIRROR_PATH = 'scripts/ci/check-issue-already-resolved.mjs';
 const SINGLE_MIRROR_BODY = 'Root cause nota: `' + SINGLE_MIRROR_PATH + '` è '
   + '`mode: identical` nel repo **`valerielinc-ops/frontaliere-si-o-no`**; '
   + 'scriverlo qui verrebbe sovrascritto al mirror successivo.';
-const STRANDED_WORKFLOW_PATH = '.github/workflows/retry-code-check-after-body-edit.yml';
+// Un workflow `identical` che nessun trasporto porta giu'. Era
+// `retry-code-check-after-body-edit.yml` finche' e' rimasto `identical`: dalla
+// PR #1613 e' `adapted` e quindi non e' piu' un gemello fermo.
+const STRANDED_WORKFLOW_PATH = '.github/workflows/observers/workflows/crawler-generation-observer-shadow.yml';
 
 test('instrada il caso mirror: verdetto + repo del sito + path', () => {
   const d = handoffDecision({ verdict: 'blocked-admin-settings', body: MIRROR_BODY });
