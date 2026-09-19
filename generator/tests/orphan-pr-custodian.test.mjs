@@ -133,6 +133,10 @@ describe('orphan-pr-custodian — adozione di un 🔴 fuori scope (sito #9221/#9
 });
 
 describe('stale-pr-rescuer — cablaggio', () => {
+  it('non crea nemmeno il run per i tests di main (filtro sul trigger)', () => {
+    assert.match(WORKFLOW, /workflow_run:\n\s+workflows: \['tests'\]\n\s+types: \[completed\]\n(?:\s+#.*\n)*\s+branches-ignore: \[main\]\n/);
+  });
+
   it('non gira sui completamenti di tests dei push su main', () => {
     assert.ok(WORKFLOW.includes("if: github.event_name != 'workflow_run' || github.event.workflow_run.event != 'push'"));
   });

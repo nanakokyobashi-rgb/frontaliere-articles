@@ -87,6 +87,10 @@ on:
   workflow_run:
     workflows: ['tests']
     types: [completed]
+    # I `tests` dei push su main non riguardano nessuna PR aperta: il filtro
+    # sul trigger evita che il run nasca e sfratti quello in attesa nella
+    # concurrency (sul sito un dispatch cancellato in 12 s, 2026-09-19).
+    branches-ignore: [main]
   schedule:
     - cron: '35 * * * *'
   workflow_dispatch:
