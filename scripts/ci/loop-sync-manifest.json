@@ -1668,8 +1668,8 @@
       "path": "scripts/lib/shard-git-helpers.sh",
       "mode": "identical",
       "baseline": {
-        "site": "58bd10ee04888120",
-        "corpus": "58bd10ee04888120",
+        "site": "550e43bda27c9ee4",
+        "corpus": "550e43bda27c9ee4",
         "alignedAt": "2026-09-19"
       }
     },
@@ -2634,9 +2634,9 @@
       "sitePath": "build-plugins/batchWrite.ts",
       "mode": "identical",
       "baseline": {
-        "site": "33e2ddbfa2d92820",
-        "corpus": "33e2ddbfa2d92820",
-        "alignedAt": "2026-09-19"
+        "site": "d0e045812aef8d35",
+        "corpus": "d0e045812aef8d35",
+        "alignedAt": "2026-08-09"
       }
     },
     {
@@ -2869,9 +2869,9 @@
       "sitePath": "build-plugins/sharedWriteRegistry.ts",
       "mode": "identical",
       "baseline": {
-        "site": "e93c6a89dc08244e",
-        "corpus": "e93c6a89dc08244e",
-        "alignedAt": "2026-09-19"
+        "site": "a97ed1adc182a002",
+        "corpus": "a97ed1adc182a002",
+        "alignedAt": "2026-08-31"
       }
     },
     {
@@ -4092,9 +4092,9 @@
       "path": ".github/actions/claude-codex-fallback/git-bridge-server.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "47fc3189057df464",
-        "corpus": "47fc3189057df464",
-        "alignedAt": "2026-09-19"
+        "site": "70d7992c3ffe7988",
+        "corpus": "70d7992c3ffe7988",
+        "alignedAt": "2026-09-14"
       }
     },
     {
