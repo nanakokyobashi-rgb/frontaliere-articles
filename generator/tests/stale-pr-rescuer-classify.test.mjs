@@ -137,10 +137,19 @@ const quotaRetryComment = ({
 function checkRuns({ concl = 'success', pending = 0 } = {}) {
   const runs = [];
   if (concl !== null) {
-    runs.push({ id: 1000, name: CHECK_NAME, status: 'completed', completed_at: isoAgo(3), conclusion: concl });
+    runs.push({
+      id: 1000,
+      head_sha: HEAD_SHA,
+      name: CHECK_NAME,
+      status: 'completed',
+      completed_at: isoAgo(3),
+      conclusion: concl,
+    });
   }
-  for (let i = 0; i < pending; i++) runs.push({ id: 2000 + i, name: CHECK_NAME, status: 'in_progress', completed_at: null });
-  return { check_runs: runs };
+  for (let i = 0; i < pending; i++) {
+    runs.push({ id: 2000 + i, head_sha: HEAD_SHA, name: CHECK_NAME, status: 'in_progress', completed_at: null });
+  }
+  return { total_count: runs.length, check_runs: runs };
 }
 
 /** Una review Claude, o nessuna. */
@@ -254,9 +263,11 @@ case "$sub" in
     ;;
   api)
     p=""
+    slurp=false
     while [ $# -gt 0 ]; do
       case "$1" in
-        --paginate|--slurp) shift ;;
+        --paginate) shift ;;
+        --slurp) slurp=true; shift ;;
         --jq) jq="$2"; shift 2 ;;
         -H|-f|-F|-X) shift 2 ;;
         *) if [ -z "$p" ]; then p="$1"; fi; shift ;;
@@ -280,7 +291,11 @@ case "$sub" in
       */comments*)
         if [[ "$(cat ${JSON.stringify(fixCommentsError)})" == "true" ]]; then exit 1; fi
         if [[ "$(cat ${JSON.stringify(fixCommentsMalformed)})" == "true" ]]; then printf 'not-json\\n'; exit 0; fi
-        cat ${JSON.stringify(fixComments)} ;;
+        if [ "$slurp" = "true" ]; then
+          node -e 'const value=require(process.argv[1]); process.stdout.write(JSON.stringify([value])+"\\n")' ${JSON.stringify(fixComments)}
+        else
+          cat ${JSON.stringify(fixComments)}
+        fi ;;
       */pulls/*)
         if [ "$jq" = '.body // ""' ]; then
           node -e 'const fs=require("fs"); const value=require(process.argv[1]); const pr=Array.isArray(value)?value[0]:value; process.stdout.write(String(pr?.body||"")+"\\n")' ${JSON.stringify(fixPrs)}
@@ -657,6 +672,25 @@ test('R1 — record di verdetto incompleto o non attendibile è unavailable', op
   }
 });
 
+test('R1 — check-run troncati o riferiti a un altro SHA sono unavailable', opts, () => {
+  const valid = checkRuns({ concl: 'success' });
+  const invalid = [
+    { ...valid, total_count: valid.total_count + 1 },
+    {
+      ...valid,
+      check_runs: valid.check_runs.map((run) => ({ ...run, head_sha: OLD_SHA })),
+    },
+  ];
+  for (const checks of invalid) {
+    const r = runScan({ prs: openPr(), checks, reviews: [] });
+    assert.deepEqual(r.comments, [], JSON.stringify(checks));
+    assert.deepEqual(r.labeled, [], JSON.stringify(checks));
+    assert.deepEqual(r.unlabeled, [], JSON.stringify(checks));
+    assert.deepEqual(r.workflowRuns, [], JSON.stringify(checks));
+    assert.deepEqual(r.reruns, [], JSON.stringify(checks));
+  }
+});
+
 test('guard 3 — con i test rossi il rimedio resta quello della classe C', opts, () => {
   const body = only(
     runScan({
@@ -903,9 +937,10 @@ test('#314 — due check completati nello STESSO secondo: vince il più recente 
   const r = runScan({
     prs: openPr(),
     checks: {
+      total_count: 2,
       check_runs: [
-        { id: 5002, name: CHECK_NAME, status: 'completed', completed_at: sameSecond, conclusion: 'success' },
-        { id: 5001, name: CHECK_NAME, status: 'completed', completed_at: sameSecond, conclusion: 'failure' },
+        { id: 5002, head_sha: HEAD_SHA, name: CHECK_NAME, status: 'completed', completed_at: sameSecond, conclusion: 'success' },
+        { id: 5001, head_sha: HEAD_SHA, name: CHECK_NAME, status: 'completed', completed_at: sameSecond, conclusion: 'failure' },
       ],
     },
     reviews: reviews({ commit: OLD_SHA, body: 'un finding, niente LGTM' }),

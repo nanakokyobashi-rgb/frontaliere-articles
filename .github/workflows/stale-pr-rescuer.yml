@@ -253,7 +253,7 @@ jobs:
             CHECKS_STATE=available
             if ! checks=$(gh api --paginate "repos/$REPO/commits/$HEAD/check-runs?per_page=100" 2>/dev/null); then
               CHECKS_STATE=unavailable
-            elif [ -z "${checks//[[:space:]]/}" ] || ! printf '%s\n' "$checks" | jq -s -e '
+            elif [ -z "${checks//[[:space:]]/}" ] || ! printf '%s\n' "$checks" | jq -s -e --arg head "$HEAD" '
               def iso8601:
                 type == "string"
                 and test("^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?Z$")
@@ -265,21 +265,28 @@ jobs:
               def status:
                 . as $value
                 | (["queued", "in_progress", "completed", "requested", "waiting", "pending"] | index($value)) != null;
-              length > 0
-              and all(.[];
+              . as $pages
+              | ($pages | length > 0)
+              and ($pages | all(.[];
                 type == "object"
+                and (.total_count | type) == "number"
+                and (.total_count | floor == . and . >= 0)
                 and (.check_runs | type) == "array"
                 and all(.check_runs[];
                   type == "object"
                   and (.id | type) == "number"
                   and (.id | floor == . and . >= 1)
+                  and (.head_sha | type) == "string"
+                  and (.head_sha == $head)
                   and (.name | type) == "string"
                   and (.name | length > 0)
                   and (.status | type) == "string"
                   and ((.status | status) == true)
                   and (.status != "completed" or ((.completed_at | iso8601) and (.conclusion | conclusion)))
                 )
-              )
+              ))
+              and (($pages | map(.total_count) | unique | length) == 1)
+              and (($pages | map(.check_runs | length) | add) == ($pages[0].total_count))
             ' >/dev/null 2>&1; then
               CHECKS_STATE=unavailable
             fi
@@ -486,7 +493,7 @@ jobs:
             FIXER_MAX_ROUNDS=2
             PR_COMMENT_BODIES=""
             if [ "$COMMENT_LOOKUP_OK" = "true" ]; then
-              if ! PR_COMMENT_BODIES=$(printf '%s' "$deferred_comments" | jq -rs '[.[][]? | .body // ""] | join("\n")' 2>/dev/null); then
+              if ! PR_COMMENT_BODIES=$(printf '%s' "$deferred_comments" | jq -r '[.[][]? | .body // ""] | join("\n")' 2>/dev/null); then
                 echo "::warning::Commenti della PR #$N malformati — cap/needs-human non verificabili, nessun rescue del fixer."
                 COMMENT_LOOKUP_OK=false
               else
