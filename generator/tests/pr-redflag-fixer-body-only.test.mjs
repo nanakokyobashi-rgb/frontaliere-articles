@@ -20,6 +20,16 @@ test('il redflag fixer tratta il BODY-only come esito deterministico e idempoten
   assert.match(WORKFLOW, /nessun fix automatico o follow-up necessario/u);
 });
 
+test('il consumer dello scope definisce il writer nello stesso step che lo usa', () => {
+  const classifyStart = WORKFLOW.indexOf('      - name: Classifica finding fuori diff e conia follow-up');
+  const classifyEnd = WORKFLOW.indexOf('\n      - name:', classifyStart + 1);
+  assert.notEqual(classifyStart, -1, 'step classify presente');
+  assert.notEqual(classifyEnd, -1, 'step successivo presente');
+  const classifyStep = WORKFLOW.slice(classifyStart, classifyEnd);
+  assert.match(classifyStep, /write_scope_output\(\) \{ printf/u);
+  assert.match(classifyStep, /write_scope_output "body_only=\$body_only"/u);
+});
+
 test('il job Claude resta riservato ai finding bloccanti o non verificabili', () => {
   const start = WORKFLOW.indexOf('  redflag-fix:');
   const relativeEnd = WORKFLOW.slice(start + 3).search(/\n  [a-z][a-z-]+:\n/u);

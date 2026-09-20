@@ -399,6 +399,7 @@ jobs:
           REVIEW_BODY_B64: ${{ needs.preflight.outputs.review_body_b64 }}
         run: |
           set -uo pipefail
+          write_scope_output() { printf '%s\n' "$1" >> "$GITHUB_OUTPUT"; }
           if ! REVIEW_BODY=$(printf '%s' "$REVIEW_BODY_B64" | base64 --decode 2>/dev/null); then
             echo "::error::Review body non decodificabile: il fixer resta conservativamente azionabile."
             REVIEW_BODY=""
