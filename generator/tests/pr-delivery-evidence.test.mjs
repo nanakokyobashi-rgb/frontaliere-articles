@@ -31,6 +31,7 @@ function pr(overrides = {}) {
     state: 'OPEN',
     headRefName: BRANCH,
     headRefOid: 'sha-before',
+    headRepository: { nameWithOwner: REPO },
     createdAt: '2026-09-19T09:00:00Z',
     updatedAt: '2026-09-19T09:30:00Z',
     mergedAt: null,
@@ -107,6 +108,20 @@ describe('pr-delivery-evidence', () => {
     });
   });
 
+  it('rifiuta una PR omonima proveniente da un fork', () => {
+    const forkPr = pr({
+      number: 703,
+      headRepository: { nameWithOwner: 'fork-owner/frontaliere-articles' },
+      createdAt: '2026-09-19T10:04:00Z',
+      updatedAt: '2026-09-19T10:04:00Z',
+    });
+    assert.deepEqual(evaluate(baseline(), [forkPr]), {
+      status: DELIVERY_STATUS.UNAVAILABLE,
+      reason: 'pr-head-repository-mismatch',
+      prNumber: null,
+    });
+  });
+
   it('lega la delivery al cambio di HEAD, non a updatedAt da solo', () => {
     const unchangedHead = pr({ updatedAt: '2026-09-19T10:20:00Z' });
     assert.equal(evaluate(baseline(), [unchangedHead]).status, DELIVERY_STATUS.NONE);
@@ -167,6 +182,30 @@ describe('pr-delivery-evidence', () => {
       actionOutcome: 'success',
       delivery: { status: DELIVERY_STATUS.NONE },
     }).exitCode, 0);
+    assert.deepEqual(classifyWorkflowOutcome({
+      actionOutcome: 'success',
+      delivery: {},
+    }), {
+      classification: 'unknown',
+      exitCode: 1,
+      reason: 'evidence-status-invalid',
+    });
+    assert.deepEqual(classifyWorkflowOutcome({
+      actionOutcome: 'success',
+      delivery: { status: 'future-status' },
+    }), {
+      classification: 'unknown',
+      exitCode: 1,
+      reason: 'evidence-status-invalid',
+    });
+    assert.deepEqual(classifyWorkflowOutcome({
+      actionOutcome: 'success',
+      delivery: { status: DELIVERY_STATUS.DELIVERED },
+    }), {
+      classification: 'unknown',
+      exitCode: 1,
+      reason: 'evidence-pr-number-missing',
+    });
   });
 
   it('un lookup gh fallito è unavailable, non una lista vuota', () => {
