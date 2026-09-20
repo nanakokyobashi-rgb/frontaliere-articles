@@ -189,16 +189,17 @@ test('lo schema body1 condivide il contratto AI Search e il literal del guard', 
   const source = fs.readFileSync(CREATE_ARTICLE_PATH, 'utf8');
   const body1 = source.match(/"body1": "([^"]+)"/)?.[1];
   assert.ok(body1, 'literal body1 non trovato nello schema JSON del prompt');
-  assert.match(body1, /sole coppie termine→valore disponibili, up to 8: usa solo fatti presenti nella fonte, anche se sono meno di tre/);
+  assert.match(body1, /0-8 coppie termine→valore, tutte presenti nella fonte/);
   assert.doesNotMatch(body1, /3-8 coppie/);
-  assert.match(body1, /campi assenti, senza placeholder/);
+  assert.match(body1, /ometti assenti e placeholder/);
   assert.doesNotMatch(body1, /5-8 coppie/);
   assert.doesNotMatch(body1, /\*\*Cosa\/Quando\/Dove\/Chi\/Importo\*\*/);
   assert.ok(
     SCHEMA_PLACEHOLDER_LITERALS.includes(body1),
     'il literal body1 non e\' allineato alla copia usata dal prompt-placeholder guard',
   );
-  assert.match(source, /Ometti il campo o il dettaglio; non usare placeholder/);
+  assert.match(source, /Se la fonte NON specifica un dato: omettilo; niente placeholder/);
+  assert.match(source, /DATI ASSENTI NELLA FONTE: omettili; niente placeholder/);
   assert.doesNotMatch(source, /Scrivi "non ancora specificato"/);
   assert.doesNotMatch(source, /scrivi "non ancora specificato", "in fase di definizione"/);
 });
