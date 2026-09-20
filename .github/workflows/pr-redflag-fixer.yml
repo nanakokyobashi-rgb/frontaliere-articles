@@ -1188,16 +1188,19 @@ jobs:
         if: always()
         run: rm -f /tmp/firebase-sa.json
 
-      # Colore del job = LAVORO reale del round, non l'exit della CLI Claude.
+      # Colore del job = LAVORO reale del round, non l'exit della CLI Codex.
       #  • commit pushato sul branch della PR  → round SUCCESS (la re-review girerà;
       #    se 🔴 di nuovo, il round successivo o il round-cap → needs-human). Vale
-      #    anche se Claude è morto error_max_turns DOPO il push (false-failure).
+      #    anche se Codex è morto error_max_turns DOPO il push (false-failure).
       #  • branch remoto avanzato da un altro writer dopo la baseline → run
       #    SUPERSEDED: il claim viene rilasciato e nessun round viene consumato.
-      #  • nessun push + Claude FAILED          → non-progress reale → RED (segnale
-      #    preservato per il loop-health-report + escalation round-cap).
-      #  • nessun push + Claude SUCCESS          → terminale pulito (es. "🔴 non
-      #    auto-fixabile") → GREEN, niente da fixare nel workflow.
+      #  • nessun push + Codex FAILED/CANCELLED → non-progress reale → RED; il
+      #    marker resta contato perché l'avvio/consumo del tentativo non è escluso.
+      #  • nessun push + Codex SKIPPED → RED e rimborso del marker verificato: il
+      #    percorso precodex ha impedito l'invocazione, quindi il round non è stato
+      #    consumato. L'handle REDFLAG_FIX_REFUNDED riarma il rescue senza contare.
+      #  • nessun push + Codex SUCCESS          → terminale pulito (es. "🔴 non
+      #    auto-fixabile") → GREEN, marker conservato per il round-cap.
       # I fail infra a monte (npm ci, setup, load-rc) restano RED da soli: quegli
       # step non hanno continue-on-error. Mai fa-passare un gate: il round non ha
       # gate, è telemetria di colore (cfr. #2288, disambigua intenzionale vs crash).
@@ -1222,9 +1225,9 @@ jobs:
           HEAD_NOW=$(git rev-parse HEAD 2>/dev/null || echo "")
           git fetch origin "$HEAD_REF" -q 2>/dev/null || true
           REMOTE_SHA=$(git rev-parse "origin/$HEAD_REF" 2>/dev/null || echo "")
-          echo "start=$START_SHA base=$BASE_SHA local=$HEAD_NOW remote=$REMOTE_SHA claude=$ACTION_OUTCOME"
+          echo "start=$START_SHA base=$BASE_SHA local=$HEAD_NOW remote=$REMOTE_SHA codex=$ACTION_OUTCOME"
           if [ -n "$HEAD_NOW" ] && [ -n "$BASE_SHA" ] && [ "$HEAD_NOW" != "$BASE_SHA" ] && [ "$REMOTE_SHA" = "$HEAD_NOW" ]; then
-            echo "✓ Fix pushato questo round (HEAD avanzato e presente su origin/$HEAD_REF) → round SUCCESS. Job verde anche se la CLI è uscita '$ACTION_OUTCOME'."
+            echo "✓ Fix pushato questo round (HEAD avanzato e presente su origin/$HEAD_REF) → round SUCCESS. Job verde anche se la CLI Codex è uscita '$ACTION_OUTCOME'."
             exit 0
           fi
           if [ -n "$HEAD_NOW" ] && [ -n "${START_SHA:-}" ] && [ -n "$REMOTE_SHA" ] \
@@ -1255,11 +1258,34 @@ jobs:
             echo "⚠️ Branch avanzato da un altro writer dopo l'avvio del round (start=$START_SHA local=$HEAD_NOW remote=$REMOTE_SHA) → run SUPERSEDED; claim rilasciato, nessun round consumato."
             exit 0
           fi
-          if [ "$ACTION_OUTCOME" = "failure" ]; then
-            echo "::error::🔴-fix: nessun commit pushato e la run Claude è fallita ('$ACTION_OUTCOME') → non-progress reale. Job RED (segnale preservato; round-cap → needs-human a N>=2)."
+          if [ "$ACTION_OUTCOME" = "skipped" ]; then
+            if [ -z "${MARKER_COMMENT_ID:-}" ] || [ -z "${MARKER_HEAD:-}" ] \
+              || [ -z "${MARKER_BODY_REVISION:-}" ] || [ ! -f "${TRUSTED_MARKER_HELPER:-}" ]; then
+              echo "::error::🔴-fix: Codex skipped ma la prova trusted del marker è incompleta → marker conservato e job RED."
+              exit 1
+            fi
+            if ! marker_delete_result=$(node "$TRUSTED_MARKER_HELPER" --delete-verified \
+              --repo "$REPO" --pr "$PR_NUMBER" --marker "$FIX_ROUND_MARKER" \
+              --round "$FIX_ROUND" --comment-id "$MARKER_COMMENT_ID" \
+              --expected-head "$MARKER_HEAD" --expected-body-revision "$MARKER_BODY_REVISION" \
+              --expected-author github-actions[bot]); then
+              echo "::error::🔴-fix: Codex skipped ma il marker $FIX_ROUND_MARKER:$FIX_ROUND non ha superato la prova trusted → round ancora contato, job RED."
+              exit 1
+            fi
+            refund_marker="${FIX_ROUND_MARKER%_ROUND}_REFUNDED"
+            if ! gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '<!-- %s: %s -->\n_Round rimborsato: Codex non invocato (pre-Codex fallito); nessun round consumato._' "$refund_marker" "$FIX_ROUND")"; then
+              echo "::error::🔴-fix: marker $FIX_ROUND_MARKER:$FIX_ROUND cancellato ma handle di rimborso non scrivibile."
+              exit 1
+            fi
+            echo "round marker $FIX_ROUND_MARKER:$FIX_ROUND deleted after trusted ID/body proof → rimborsato ($marker_delete_result)"
+            echo "::error::🔴-fix: Codex non invocato: lo step è skipped dopo un precodex failure → non-progress reale. Job RED; il round è stato rimborsato."
             exit 1
           fi
-          echo "Nessun push ma Claude terminato pulito ('$ACTION_OUTCOME') → terminale legittimo (es. non auto-fixabile). Job verde."
+          if [ "$ACTION_OUTCOME" != "success" ]; then
+            echo "::error::🔴-fix: nessun commit pushato e la run Codex non è terminata con success ('$ACTION_OUTCOME') → non-progress reale. Job RED (marker conservato salvo skipped verificato; round-cap → needs-human a N>=2)."
+            exit 1
+          fi
+          echo "Nessun push ma Codex terminato pulito ('$ACTION_OUTCOME') → terminale legittimo (es. non auto-fixabile). Job verde."
           exit 0
 
       - name: Release shared Codex lane quota lease

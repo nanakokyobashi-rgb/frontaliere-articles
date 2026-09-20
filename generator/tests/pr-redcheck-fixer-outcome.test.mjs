@@ -525,3 +525,40 @@ test('redflag rimborsa il marker di round su SUPERSEDED', () => {
   assert.match(result.ghLog, /api .*DELETE .*issues\/comments\/77/);
   assert.match(result.ghLog, /REDFLAG_FIX_REFUNDED: 2/);
 });
+
+test('redflag distingue failure/skipped/cancelled/success e contabilizza il marker', () => {
+  const baseBody = '## Implementato\n\n- body iniziale';
+  const scenarios = [
+    { outcome: 'failure', status: 1, refunded: false },
+    { outcome: 'skipped', status: 1, refunded: true },
+    { outcome: 'cancelled', status: 1, refunded: false },
+    { outcome: 'success', status: 0, refunded: false },
+  ];
+
+  for (const { outcome, status, refunded } of scenarios) {
+    const result = runClassifier({
+      source: REDFLAG_WORKFLOW,
+      baseBody,
+      currentBody: baseBody,
+      actionOutcome: outcome,
+      fixRound: '1',
+      fixRoundMarker: 'REDFLAG_FIX_ROUND',
+      markerCommentId: '42',
+      commentsJson: JSON.stringify([roundMarkerComment({
+        marker: 'REDFLAG_FIX_ROUND', round: 1, id: 42, body: baseBody,
+      })]),
+    });
+    assert.equal(
+      result.status,
+      status,
+      `${outcome}: esito inatteso:\nstdout=${result.stdout}\nstderr=${result.stderr}`,
+    );
+    if (refunded) {
+      assert.match(result.ghLog, /api --method DELETE .*issues\/comments\/42/, `${outcome}: marker non cancellato`);
+      assert.match(result.ghLog, /REDFLAG_FIX_REFUNDED: 1/, `${outcome}: handle di rimborso assente`);
+    } else {
+      assert.doesNotMatch(result.ghLog, /issues\/comments\/42/, `${outcome}: marker rimborsato senza prova di skipped`);
+      assert.doesNotMatch(result.ghLog, /REDFLAG_FIX_REFUNDED: 1/, `${outcome}: handle di rimborso inatteso`);
+    }
+  }
+});
