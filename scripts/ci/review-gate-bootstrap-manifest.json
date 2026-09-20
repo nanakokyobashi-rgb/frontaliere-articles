@@ -14,6 +14,8 @@
     "scripts/ci/lib/vitestCheck.mjs",
     "scripts/ci/lib/mergePreviewCheck.mjs",
     "scripts/ci/lib/duplicateDeclarations.mjs",
+    "scripts/ci/followup-resolution-match.mjs",
+    "scripts/ci/lib/review-findings.mjs",
     "scripts/ci/lib/false-positive-declaration.mjs",
     "scripts/lib/github-issue-creator.mjs",
     "scripts/lib/pr-body-closes-check.mjs",

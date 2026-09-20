@@ -77,6 +77,7 @@ import {
   VITEST_CHECK_NAME,
 } from './lib/constants.mjs';
 import { classifyAndMintReview, prBodyFindingLine } from './review-scope.mjs';
+import { isMalformedReviewBody, reviewBodyDefects } from './lib/review-findings.mjs';
 
 const REPO = process.env.GITHUB_REPOSITORY || '';
 const PR = process.env.PR_NUMBER || '';
@@ -446,6 +447,22 @@ async function main() {
 
   if (last) {
     const body = last.body || '';
+    // Un body malformato NON e' un verdetto. Le due forme misurate sul sito il
+    // 19-09 su 220 review — `\n` letterali al posto delle righe, e
+    // `Fix di ``: ok` con l'anchor vuoto, che chiude per silenzio qualunque
+    // finding aperto — producono un testo che il parser legge come review
+    // valida ma da cui non si ricava ne' un finding ne' una conferma. Leggerlo
+    // comunque significa approvare o bloccare su un'illusione; scartarlo
+    // lascia al ciclo di re-review il compito di rifare la review.
+    if (isMalformedReviewBody(body)) {
+      const defects = reviewBodyDefects(body).join(', ');
+      // `gateFailureKind` resta `verdict` (il default): e' un verdetto
+      // rifiutato, non un guasto infrastrutturale, quindi il classificatore a
+      // valle deve renderlo rosso e non silenziarlo come errore transiente.
+      writeFailureKind();
+      console.log(`::error::review-gate: body della review malformato (${defects}) → verdetto scartato, serve una review nuova.`);
+      process.exit(1);
+    }
     const applies = reviewAppliesToHead(last);
     const hasRedflag = REDFLAG_IMPORTANT_RE.test(body);
     let scope = null;

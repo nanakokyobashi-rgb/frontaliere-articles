@@ -99,6 +99,17 @@ Il body della PR DEVE avere:
 - Piano di completamento: scope ancora dovuto + stato/next-step (in questa PR / PR concatenata #N / blocked: <causa>). «Nessuno» = task completo.
 ```
 
+### Identita' di un finding, e i 🔴 su righe non cambiate
+
+L'identita' di un 🔴 NON e' il suo anchor `path:Lriga`: un rebase o un merge di `main` sposta la riga, e lo stesso rilievo risulta «nuovo» — non si deduplica e non si lascia confermare. `scripts/ci/lib/review-findings.mjs` calcola un id stabile da `(path, simbolo, classe, prosa normalizzata)`, che non contiene il numero di riga.
+
+Da questo seguono due regole operative per il reviewer:
+
+- **Classe dichiarata.** Puoi marcare un finding con una classe fra parentesi quadre SUBITO DOPO i due punti: `🔴 Important: [regression] ...`. Le classi sono `regression`, `correctness`, `contract`, `funnel`, `process`, `other`; una classe inventata vale `other`. Il tag va dopo il separatore: prima lo rende invisibile al parser.
+- **Un 🔴 NUOVO ancorato solo a righe che nessuno ha toccato dall'ultima review viene DECLASSATO** (`DECLASSIFIED-UNCHANGED-LINE` nel log). Quel codice e' esattamente quello gia' giudicato: o il rilievo valeva anche allora — e allora non e' nuovo, ha lo stesso id stabile e passa — oppure non vale adesso. Se sei davvero convinto che sia una regressione, dichiaralo `🔴 Important: [regression]` e resta bloccante. Il declassamento e' conservativo: non scatta senza anchor di riga, non scatta se il delta non e' calcolabile, non scatta se anche un solo path citato non e' stato confrontato, e non scatta mai su un finding che il parser non sa delimitare.
+
+Un body malformato non e' un verdetto e viene SCARTATO dal gate invece di essere letto: `\n` letterali al posto delle righe, oppure `Fix di ``: ok` con l'anchor vuoto, che chiuderebbe per silenzio qualunque finding aperto.
+
 ### Una sola fonte di verita' sul body
 
 Il contratto del body e' validato in modo deterministico da `scripts/ci/pr-body-contract.mjs` (step `PR-body completeness` di `tests.yml`, che compone `pr-body-sections-check.mjs`, `pr-body-nextstep-check.mjs`, `pr-body-closes-check.mjs` e `pr-body-filepath-check.mjs`): sezioni, stato di ogni voce, `Motivo`/`Prossimo passo`, placeholder, `Closes`, path citati. Il suo verdetto arriva al reviewer nel bundle, sotto `## Deterministic body contract`.
