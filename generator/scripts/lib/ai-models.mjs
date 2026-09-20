@@ -6939,13 +6939,10 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
       // REASONING_MODELS set that still emit chain-of-thought tags)
       if (text) text = stripThinkTags(text);
       if (!text) {
-        if (attempt < opts.maxRetriesPerModel) {
-          _stats.retries++;
-          console.warn(`⚠️  [${displayModel}] Empty response, retry ${attempt}/${opts.maxRetriesPerModel}`);
-          await sleep(attempt * 1200);
-          continue;
-        }
-        const error = new Error(`[${displayModel}] Empty response after ${opts.maxRetriesPerModel} attempts`);
+        // HTTP 200 with no content is deterministic for this model. Do not
+        // spend the remaining per-model retry budget before the outer
+        // callLLM breaker can record the content failure and move on.
+        const error = new Error(`[${displayModel}] Empty response`);
         error.contentFailure = true;
         throw error;
       }
@@ -8413,13 +8410,10 @@ async function _callGeminiRaw(model, messages, opts) {
       }
       const text = textValue || '';
       if (!text) {
-        if (attempt < opts.maxRetriesPerModel) {
-          _stats.retries++;
-          console.warn(`⚠️  [${model}] Empty response, retry ${attempt}/${opts.maxRetriesPerModel}`);
-          await sleep(attempt * 1200);
-          continue;
-        }
-        const error = new Error(`[${model}] Empty response after ${opts.maxRetriesPerModel} attempts`);
+        // HTTP 200 with no content is deterministic for this model. Let the
+        // outer callLLM breaker handle it immediately instead of retrying a
+        // response that cannot become valid within this request.
+        const error = new Error(`[${model}] Empty response`);
         error.contentFailure = true;
         throw error;
       }

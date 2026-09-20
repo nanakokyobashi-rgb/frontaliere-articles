@@ -446,6 +446,22 @@ const mangledProtectedTokenScrubRe = () =>
   new RegExp(`z${TOKEN_SEP}q${TOKEN_SEP}(?:[①-⑳][\\s\\S]{0,8}?%|x${TOKEN_SEP}[0-9oOxX][\\s\\S]{0,8}?%)`, 'giu');
 
 /**
+ * Remove canonical and mangled protected-token sentinels for comparisons.
+ * This runs before the passthrough guard so a provider cannot evade it by
+ * changing only the sentinel's spelling. Ordinary `ZQ 100%` prose is not a
+ * sentinel and deliberately survives.
+ */
+export function normalizeProtectedTokenSentinels(text = '') {
+  const input = String(text ?? '');
+  if (!input) return input;
+  const out = input
+    .replace(protectedTokenRe(), ' ')
+    .replace(protectedTokenScrubRe(), ' ')
+    .replace(mangledProtectedTokenScrubRe(), ' ');
+  return out === input ? input : tidySpacing(out);
+}
+
+/**
  * Collapse the Swiss German inclusive compound `…frau:mann` to the masculine
  * lexical form before a translator sees it. The colon form is common in newly
  * crawled Coop titles and otherwise gets copied or rendered as a literal
@@ -580,8 +596,7 @@ export function restoreProtectedTokens(text = '', tokens = [], targetLang = '', 
       seen.add(i);
       return genderTrigraphForLocale(targetLang, token);
     });
-    out = out.replace(protectedTokenScrubRe(), '');
-    out = out.replace(mangledProtectedTokenScrubRe(), '');
+    out = normalizeProtectedTokenSentinels(out);
     // Only tidy when a sentinel was actually swapped out, so the guard never
     // reflows the indentation of a description that had nothing to protect
     // (nested markdown bullets rely on their leading double spaces).

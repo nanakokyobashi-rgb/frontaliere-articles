@@ -21,7 +21,7 @@
  */
 
 import { translateWithMyMemory } from './mymemory-translate.mjs';
-import { finalizeTranslatedText, maskProtectedTokens, normalizeGermanGenderForms } from './translation-glossary.mjs';
+import { finalizeTranslatedText, maskProtectedTokens, normalizeGermanGenderForms, normalizeProtectedTokenSentinels } from './translation-glossary.mjs';
 import { translateWithLocalOpusMt, localOpusMtEnabled } from './local-opus-mt.mjs';
 import {
   extractOAuthErrorReason,
@@ -406,9 +406,9 @@ function normalizeBlock(s) {
  * @returns {boolean} true se il motore NON ha tradotto
  */
 export function isSourcePassthrough(sourceText, translatedText) {
-  const src = normalizeBlock(sourceText).toLowerCase();
+  const src = normalizeBlock(normalizeProtectedTokenSentinels(sourceText)).toLowerCase();
   if (!src) return false;
-  return src === normalizeBlock(translatedText).toLowerCase();
+  return src === normalizeBlock(normalizeProtectedTokenSentinels(translatedText)).toLowerCase();
 }
 
 // Un segmento breve puo' essere un titolo, una URL o un placeholder che il

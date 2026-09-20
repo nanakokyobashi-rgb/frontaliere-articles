@@ -149,6 +149,22 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
     assert.equal(snapshot().chunks - before.chunks, 0);
   });
 
+  test('rifiuta il passthrough quando il provider altera il sentinel protetto', async () => {
+    stubCascade('Tecnico ZQ ①000%');
+    const before = snapshot();
+
+    const out = await freeTranslate({
+      text: 'Tecnico (m/w/d)',
+      sourceLang: 'de',
+      targetLang: 'it',
+      fieldType: 'title',
+    });
+
+    assert.equal(out, '');
+    assert.equal(snapshot().passthroughs - before.passthroughs, 1);
+    assert.equal(snapshot().hits - before.hits, 0);
+  });
+
   test('rifiuta il passthrough parziale nel ramo MyMemory a chunk', async () => {
     const longText = Array.from({ length: 140 }, (_, i) => `Frase sorgente numero ${i} con testo sufficiente.`).join(' ');
     let myMemoryCalls = 0;
@@ -734,5 +750,12 @@ describe('isSourcePassthrough', () => {
     // il bucket direbbe che la guardia lavora dove non c'e' niente da tradurre.
     assert.equal(isSourcePassthrough('', ''), false);
     assert.equal(isSourcePassthrough('   ', 'qualcosa'), false);
+  });
+
+  test('normalizza i sentinel mangled prima del confronto senza toccare le percentuali ordinarie', () => {
+    const source = 'Tecnico ZQX0XQZ';
+    assert.equal(isSourcePassthrough(source, 'Tecnico ZQ ①000%'), true);
+    assert.equal(isSourcePassthrough(source, 'Tecnico ZQXOXQZ'), true);
+    assert.equal(isSourcePassthrough('ZQ 100%', 'ZQ 100%'), true);
   });
 });
