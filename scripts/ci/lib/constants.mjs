@@ -269,9 +269,12 @@ export const GENERATOR_CI_TRIGGER_PATHS = [
  *
  * Sorgente UNICA per i consumer JavaScript: usano `isManagedReview`, che
  * aggiunge il percorso Codex solo con marker + identità bot esatta. Il lato
- * bash non può importare JavaScript: i `--jq` dei workflow riproducono lo
- * stesso predicato con `REVIEWER_BOT_LOGIN_JQ` più il ramo marker Codex; il
- * guard `generator/tests/reviewer-bot-login.test.mjs` tiene allineate le due
+ * bash non può importare JavaScript: i `--jq` dei workflow adattati
+ * riproducono lo stesso predicato con `REVIEWER_BOT_LOGIN_JQ` più il ramo
+ * marker Codex. `stale-pr-rescuer.yml` è l'eccezione intenzionale: legge il
+ * payload REST e usa l'allowlist esatta dei due login `[bot]`, senza affidarsi
+ * al metadata opzionale `user.type`. Il guard
+ * `generator/tests/reviewer-bot-login.test.mjs` tiene allineate entrambe le
  * superfici.
  */
 export const REVIEWER_BOT_LOGIN_RE = /^(claude|frontaliere-automation)/i;

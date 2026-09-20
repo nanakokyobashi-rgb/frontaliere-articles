@@ -516,6 +516,25 @@ test('D — review più vecchia dell\'head con test verdi: la classe scatta', op
   );
 });
 
+test('D — una review bot senza user.type resta riconosciuta dal login esatto', opts, () => {
+  const body = only(
+    runScan({
+      prs: openPr(),
+      checks: checkRuns({ concl: 'success' }),
+      reviews: reviews({
+        commit: OLD_SHA,
+        user: { login: 'claude[bot]' },
+        body: '🔴 **Important**: manca il guard senza metadata type',
+      }),
+    }),
+  );
+  assert.match(
+    body,
+    /review più vecchia dell'head/,
+    `Una review valida senza user.type deve ancora attivare D. Commento:\n${body}`,
+  );
+});
+
 test('un login reviewer-like umano non diventa una review della classe D', opts, () => {
   const body = only(
     runScan({

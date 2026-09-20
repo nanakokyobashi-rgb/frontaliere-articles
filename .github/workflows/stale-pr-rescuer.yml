@@ -494,9 +494,6 @@ jobs:
             if ! reviews=$(gh api --paginate "repos/$REPO/pulls/$N/reviews?per_page=100" 2>/dev/null); then
               REVIEWS_STATE=unavailable
             elif [ -z "${reviews//[[:space:]]/}" ] || ! printf '%s\n' "$reviews" | jq -s -e '
-              def actor_type:
-                . as $type
-                | ["Bot", "User", "Organization", "Mannequin"] | index($type);
               def review_state:
                 . as $state
                 | ["APPROVED", "CHANGES_REQUESTED", "COMMENTED", "PENDING", "DISMISSED"] | index($state);
@@ -512,8 +509,6 @@ jobs:
                   and (.user | type) == "object"
                   and (.user.login | type) == "string"
                   and (.user.login | length > 0)
-                  and (.user.type | type) == "string"
-                  and ((.user.type | actor_type) != null)
                   and (.commit_id | type) == "string"
                   and (.commit_id | test("^[a-f0-9]{40}$"; "i"))
                   and (.body | type) == "string"
@@ -540,9 +535,8 @@ jobs:
                 | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
               [.[][]?
                | select((.state // "") != "PENDING" and (.state // "") != "DISMISSED")
-               | select(.user.type == "Bot")
                | select(
-                   ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
+                   ((.user.login // "") | test("^(claude\\[bot\\]|frontaliere-automation\\[bot\\])$";"i"))
                    or (((.user.login // "") | test("^github-actions\\[bot\\]$";"i"))
                        and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
                  )] as $managed
@@ -568,9 +562,8 @@ jobs:
                 | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
               [.[][]?
                | select((.state // "") != "PENDING" and (.state // "") != "DISMISSED")
-               | select(.user.type == "Bot")
                | select(
-                   ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
+                   ((.user.login // "") | test("^(claude\\[bot\\]|frontaliere-automation\\[bot\\])$";"i"))
                    or (((.user.login // "") | test("^github-actions\\[bot\\]$";"i"))
                        and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
                  )] as $managed
