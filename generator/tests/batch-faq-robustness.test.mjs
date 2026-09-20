@@ -75,13 +75,13 @@ function faqDiId(testo, id) {
 // ── L'import resta senza effetti ─────────────────────────────────────────────
 //
 // MUTAZIONE: spostare `installSigtermCheckpoint()` fuori dalla guardia
-// `import.meta.url === ...` in fondo allo script → rosso.
+// `if (invokedDirectly)` in fondo allo script → rosso.
 
 test('importare il modulo non arma nessun handler di segnale', () => {
   assert.equal(process.listenerCount('SIGTERM'), 0,
     'l handler SIGTERM committa e pusha su main: non deve esistere in un processo che ha solo IMPORTATO lo script');
   const src = fs.readFileSync(SCRIPT, 'utf-8');
-  const guardia = src.indexOf('if (import.meta.url ===');
+  const guardia = src.indexOf('if (invokedDirectly)');
   assert.ok(guardia > 0, 'la guardia sull entry point deve esserci');
   // Le CHIAMATE, non la definizione: `function installSigtermCheckpoint()` sta
   // dentro `main()`, che viene invocata solo dalla guardia.
