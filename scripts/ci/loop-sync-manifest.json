@@ -389,10 +389,10 @@
     {
       "path": "scripts/ci/followup-resolution-match.mjs",
       "mode": "adapted",
-      "reason": "Il corpus espone il contratto aggregate canonical ai consumer locali e conserva la propria risoluzione di locator sul percorso di pubblicazione; per questo la copia non è byte-identica al matcher sorgente del sito. La baseline registra separatamente i due blob e il trasporto successivo deve preservare l'adattamento, non sovrascriverlo con un mirror cieco.",
+      "reason": "Il corpus espone il contratto aggregate canonical ai consumer locali e conserva la propria risoluzione di locator sul percorso di pubblicazione; per questo la copia non è byte-identica al matcher sorgente del sito. La baseline registra separatamente i due blob e il trasporto successivo deve preservare l'adattamento, non sovrascriverlo con un mirror cieco. MOVIMENTO CORPUS 2026-09-20: `stripFencedBlocks` e' stata ESPORTATA perche' `scripts/ci/lib/review-findings.mjs` (sceso dal sito con #9318) la riusa invece di riscriverla. Aggiornata la SOLA baseline `corpus`: il lato `site` e `alignedAt` restano al 2026-09-13 perche' il sito si e' mosso per conto suo da allora e quel drift non l'ha riconciliato nessuno — riscriverlo qui lo cancellerebbe dal report senza che nessuno lo abbia guardato.",
       "baseline": {
         "site": "2fc97767d9b96296",
-        "corpus": "a94459bf3a8ca587",
+        "corpus": "e5fc098c9c606f1d",
         "alignedAt": "2026-09-13"
       }
     },
