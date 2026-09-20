@@ -166,7 +166,7 @@ test('il job post-merge usa hash site freschi e committa solo il manifest su mai
   assert.match(yml, /github\.event\.pull_request\.head\.repo\.full_name == github\.repository/);
   assert.match(yml, /group: transport-identical-twins-realign-main/);
   assert.doesNotMatch(yml, /group: transport-identical-twins-realign-\$\{\{ github\.event\.pull_request\.number \}\}/);
-  assert.match(yml, /site sha256/);
+  assert.match(yml, /\(\?:site \)\?sha256/);
   assert.match(yml, /ref: main[\s\S]{0,100}fetch-depth: 0/);
   assert.match(yml, /const declared = new Set\(\(manifest\.files \|\| \[\]\)\.map/);
   assert.match(yml, /const unknown = \[\.\.\.changed\][\s\S]{0,180}!declared\.has\(filename\)/);
@@ -181,6 +181,20 @@ test('il job post-merge usa hash site freschi e committa solo il manifest su mai
   assert.match(yml, /for attempt in 1 2 3/);
   assert.match(yml, /if git push origin HEAD:main; then/);
   assert.match(yml, /baseline\.corpus/);
+});
+
+test('il parser post-merge accetta sia il body storico sia quello corrente', () => {
+  const yml = read(REALIGN_WORKFLOW);
+  const declared = yml.match(/const re = (\/\^-.*\/gm);/);
+  assert.ok(declared, 'manca il parser delle righe con site hash');
+  const parser = new Function(`return ${declared[1]}`)();
+  const pathName = 'scripts/ci/check-issue-already-resolved.mjs';
+  for (const suffix of ['sha256', 'site sha256']) {
+    parser.lastIndex = 0;
+    const match = parser.exec(`- \`${pathName}\` ← sito (${suffix} \`3495d7994fa50d84\`)`);
+    assert.equal(match?.[1], pathName, `formato non riconosciuto: ${suffix}`);
+    assert.equal(match?.[2], '3495d7994fa50d84');
+  }
 });
 
 test('il body del trasporto descrive lo scope workflow osservato, non uno stato inventato', () => {

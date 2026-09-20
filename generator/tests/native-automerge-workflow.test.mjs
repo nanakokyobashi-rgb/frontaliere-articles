@@ -26,10 +26,12 @@ test('riattiva il gate sugli eventi che possono cambiare review, check o HEAD', 
   assert.match(source, /NATIVE_AUTOMERGE_BOOTSTRAP_READY=false/);
 });
 
-test('scarica helper affidabili dal main del corpus e usa il PAT corretto', () => {
+test('scarica helper affidabili dal main del corpus senza consumare la quota REST', () => {
   assert.match(source, /'generator\/scripts\/load-rc-env\.mjs' "\$helper_dir\/load-rc-env\.mjs"/);
   assert.match(source, /'generator\/scripts\/lib\/google-service-account-token\.mjs'/);
-  assert.match(source, /contents\/\$\{path\}\?ref=main/);
+  assert.match(source, /raw_base_url="https:\/\/raw\.githubusercontent\.com\/\$\{GITHUB_REPOSITORY\}\/main"/);
+  assert.match(source, /curl --fail --location --silent --show-error --retry 0/);
+  assert.doesNotMatch(source, /gh api "repos\/\$\{GITHUB_REPOSITORY\}\/contents/);
   assert.match(source, /'scripts\/ci\/native-automerge-gate\.mjs' "\$gate_tmp"/);
   assert.match(source, /'scripts\/ci\/review-test-policy\.mjs' "\$policy_tmp"/);
   assert.match(source, /'scripts\/ci\/lib\/fetchPrFiles\.mjs' "\$files_tmp"/);
@@ -43,7 +45,10 @@ test('#1604: il bootstrap ritenta solo letture GitHub transitorie e resta fail-c
   assert.ok(start >= 0 && end > start, 'helper downloader block non trovato');
   const downloader = source.slice(start, end);
   assert.match(downloader, /for attempt in 1 2 3/);
-  assert.match(downloader, /> "\$destination" 2> "\$error_file"/);
+  assert.match(downloader, /--output "\$destination"/);
+  assert.match(downloader, /--write-out '%\{http_code\}'/);
+  assert.match(downloader, /--connect-timeout 10 --max-time 60/);
+  assert.match(downloader, /grep -Eq '\^2\[0-9\]\[0-9\]\$' "\$status_file"/);
   assert.match(downloader, /timeout/);
   assert.match(downloader, /deadline\[\[:space:\]\.\_-\]\*exceeded/);
   assert.match(downloader, /timed\[\[:space:\]\.\_-\]\*out/);
@@ -52,7 +57,10 @@ test('#1604: il bootstrap ritenta solo letture GitHub transitorie e resta fail-c
   assert.match(downloader, /secondary rate limit/);
   assert.doesNotMatch(downloader, /HTTP 403/);
   assert.match(downloader, /HTTP 5\[0-9\]\[0-9\]/);
-  assert.match(downloader, /\[ "\$attempt" -eq 3 \] \|\| ! grep/);
+  assert.match(downloader, /\^\(408\|425\|429\|5\[0-9\]\[0-9\]\)\$/);
+  assert.match(downloader, /retryable=false/);
+  assert.match(downloader, /\[ "\$retryable" != true \]/);
+  assert.doesNotMatch(downloader, /gh api/);
   assert.match(downloader, /sleep "\$\(\(attempt \* 5\)\)"/);
   assert.match(downloader, /return 1\b/);
   assert.match(source, /download_and_check \\\n\s+'generator\/scripts\/load-rc-env\.mjs' "\$helper_dir\/load-rc-env\.mjs"/);

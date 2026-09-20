@@ -68,12 +68,18 @@ run-name: "Code checks and review · ${{ github.event.pull_request.number && for
 # (`.github/workflows/content-gates-main.yml`): li' gira il sottoinsieme dei
 # gate che leggono `content/**`, con gli offender in una issue.
 on:
-  # Body edits must re-enter the code check: a corrected description is a new
-  # review input even when the code HEAD is unchanged. Title/other edit
-  # metadata may also produce a cheap rerun, but the guard below only re-arms
-  # review for an actual body edit.
+  # Niente `edited`: un cambio di titolo o body lascia la HEAD identica, e con
+  # `cancel-in-progress` un edit arrivato durante la run di `synchronize` la
+  # uccideva per rimisurare lo stesso codice (13 run su 52 il 2026-09-19).
+  # Il body corretto rientra comunque: `retry-code-check-after-body-edit.yml`
+  # (pull_request_target: [edited]) riesegue la run della HEAD quando e' fallita
+  # sul contratto del body o sul solo gate della review, quando e' finita
+  # cancelled/timed_out, o quando era ancora in volo dal body precedente
+  # (la cancella e la riesegue); la rerun rifa' la review perche' il guard qui
+  # sotto conta soltanto le review legate alla revisione CORRENTE del body. Stessa scelta del sito
+  # (valerielinc-ops/frontaliere-si-o-no#9118).
   pull_request:
-    types: [opened, synchronize, reopened, ready_for_review, edited]
+    types: [opened, synchronize, reopened, ready_for_review]
   push:
     branches: [main]
   workflow_dispatch:
@@ -144,6 +150,23 @@ jobs:
           # rifiutare un registro troncato; il checkout deve quindi esporre la
           # storia completa anche quando la PR non modifica `content/`.
           fetch-depth: 0
+          # Storia completa di commit e tree, ma blob scaricati solo per la
+          # HEAD: il clone pieno portava ~1 GB di pack, di cui i gate leggono
+          # una manciata di blob storici — i registri della revisione base
+          # (`scripts/lib/corpus-floors.mjs`), le superfici di
+          # `retired-articles-fully-removed`, le baseline cambiate del manifest
+          # (`loop-baseline-pr-gate.mjs`), il diff della review. Quei blob
+          # arrivano su richiesta con le credenziali che il checkout lascia
+          # configurate. Ogni consumer distingue il path ASSENTE (dal tree, che
+          # il partial clone ha sempre) dal blob ILLEGGIBILE (fetch fallito):
+          # il secondo e' un errore o una storia non verificabile, mai
+          # un'assenza. Step `Run actions/checkout@v5`: 63-64 s col clone
+          # pieno, 52 s cosi' (run 35460972059 e 35460929675 contro 35461528619,
+          # 2026-09-19).
+          # Niente sparse: i gate della PR leggono `content/`, `public/` e
+          # `data/jobs/` (misurato: 41 test rossi senza quei path, 10 senza
+          # solo `data/`).
+          filter: blob:none
 
       - uses: actions/setup-node@v5
         with:
@@ -360,20 +383,45 @@ jobs:
           fi
 
           review_gate_root="${RUNNER_TEMP}/review-gate-main"
+          raw_base_url="https://raw.githubusercontent.com/${REPO}/${policy_ref}"
           download_main() {
             local path="$1"
             local destination="$2"
+            local error_file="${destination}.error"
+            local status_file="${destination}.status"
+            local raw_url="${raw_base_url}/${path}"
+            local attempt
             mkdir -p "$(dirname "$destination")"
-            if ! gh api "repos/${REPO}/contents/${path}?ref=${policy_ref}" \
-              --header 'Accept: application/vnd.github.raw+json' \
-              > "$destination"; then
-              echo "::error::Download da main fallito: ${path}"
-              return 1
-            fi
-            if [ ! -s "$destination" ]; then
-              echo "::error::Download da main vuoto: ${path}"
-              return 1
-            fi
+            for attempt in 1 2 3; do
+              rm -f "$destination" "$error_file" "$status_file"
+              : > "$status_file"
+              if curl --fail --location --silent --show-error --retry 0 \
+                --connect-timeout 10 --max-time 60 \
+                --output "$destination" \
+                --write-out '%{http_code}' \
+                "$raw_url" > "$status_file" 2> "$error_file" \
+                && [ -s "$destination" ] \
+                && grep -Eq '^2[0-9][0-9]$' "$status_file" \
+                && node --check "$destination"; then
+                rm -f "$error_file" "$status_file"
+                return 0
+              fi
+              local retryable=false
+              if grep -Eq '^(408|425|429|5[0-9][0-9])$' "$status_file" \
+                || grep -Eiq \
+                  'timeout|timed[[:space:]._-]*out|deadline[[:space:]._-]*exceeded|connection reset|connection refused|failed to connect|temporary failure|could not resolve|service unavailable|bad gateway|gateway timeout|HTTP 429|error: 429|rate limit exceeded|secondary rate limit|HTTP 5[0-9][0-9]|error: 5[0-9][0-9]|ECONNRESET|ETIMEDOUT|EAI_AGAIN' \
+                  "$error_file"; then
+                retryable=true
+              fi
+              if [ "$attempt" -eq 3 ] || [ "$retryable" != true ]; then
+                cat "$error_file" >&2
+                rm -f "$destination" "$error_file" "$status_file"
+                return 1
+              fi
+              echo "::warning::Transient GitHub helper read failed for ${path} (attempt ${attempt}/3); retrying."
+              sleep "$((attempt * 5))"
+            done
+            return 1
           }
 
           download_main scripts/ci/review-gate.mjs "$review_gate_root/scripts/ci/review-gate.mjs"
@@ -390,6 +438,15 @@ jobs:
           download_main scripts/ci/review-scope.mjs "$review_gate_root/scripts/ci/review-scope.mjs"
           download_main scripts/lib/github-issue-creator.mjs "$review_gate_root/scripts/lib/github-issue-creator.mjs"
           download_main scripts/lib/pr-body-closes-check.mjs "$review_gate_root/scripts/lib/pr-body-closes-check.mjs"
+          # Chiusura del contratto deterministico del body: `review-scope.mjs`
+          # lo ricalcola per declassare un 🔴 ancorato al solo body. Il gate
+          # gira da una directory ISOLATA, quindi un modulo del grafo che manca
+          # qui non e' un import lento, e' ERR_MODULE_NOT_FOUND su ogni PR.
+          # Il guard e' `generator/tests/review-gate-bootstrap-closure.test.mjs`.
+          download_main scripts/lib/pr-body-contract-eval.mjs "$review_gate_root/scripts/lib/pr-body-contract-eval.mjs"
+          download_main scripts/lib/pr-body-sections-check.mjs "$review_gate_root/scripts/lib/pr-body-sections-check.mjs"
+          download_main scripts/lib/pr-body-nextstep-check.mjs "$review_gate_root/scripts/lib/pr-body-nextstep-check.mjs"
+          download_main scripts/ci/lib/false-positive-declaration.mjs "$review_gate_root/scripts/ci/lib/false-positive-declaration.mjs"
 
           review_gate_module="$review_gate_root/scripts/ci/review-gate.mjs"
           node --check "$review_gate_module"
@@ -443,7 +500,6 @@ jobs:
           HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
           REPO: ${{ github.repository }}
           REVIEW_REVISION: ${{ steps.review_input.outputs.review_revision }}
-          BODY_EDITED: ${{ github.event_name == 'pull_request' && github.event.action == 'edited' && github.event.changes.body != null }}
         run: |
           set -euo pipefail
           if ! reviews=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate --slurp 2>/dev/null); then
@@ -523,13 +579,6 @@ jobs:
           if [ "${same_head:-0}" -gt 0 ]; then
             echo "skip=true" >> "$GITHUB_OUTPUT"
             echo "Esiste gia' una review approvante del reviewer sulla HEAD $HEAD_SHA per la revisione body corrente → nessuna seconda review, anche dopo un body edit."
-            exit 0
-          fi
-
-          if [ "${BODY_EDITED:-false}" = "true" ]; then
-            set_claim_fingerprint
-            echo "skip=false" >> "$GITHUB_OUTPUT"
-            echo "Body della PR cambiato e nessuna review terminale sulla HEAD → review completa."
             exit 0
           fi
 
@@ -644,13 +693,24 @@ jobs:
         # lascia la PR ferma senza verdetto — peggio di qualche turno in piu'.
         run: |
           set -euo pipefail
+          # Effort per tier (sito valerielinc-ops/frontaliere-si-o-no#9301):
+          # `max` solo dove il contratto chiede probing avversario sull'intero
+          # contributo funnel-critical (`high`, `high-mega`); `high` per
+          # `minimal`/`incremental`/`incremental-high`/`normal`, che leggono un
+          # body, un delta gia' reviewato o codice non funnel. Finora il tier
+          # cambiava solo lo scope mentre l'action passava sempre
+          # `model_reasoning_effort=max`. Il tier `tests-only` non invoca Codex
+          # (model `none`), quindi l'effort che emette non viene mai speso.
           set_tier() {
+            local effort=high
+            case "$1" in high|high-mega) effort=max ;; esac
             {
               echo "tier=$1"
               echo "model=$2"
               echo "max_turns=$3"
+              echo "effort=$effort"
             } >> "$GITHUB_OUTPUT"
-            echo "Review tier: $1 ($2, max-turns $3)"
+            echo "Review tier: $1 ($2, max-turns $3, effort $effort)"
           }
           # `gh pr view --json files` TRONCA a 100 file senza dirlo, e su questo
           # repo una PR che rigenera il corpus ne ha migliaia: il tier si
@@ -784,6 +844,7 @@ jobs:
           REPO: ${{ github.repository }}
           CTX_DIR: ${{ runner.temp }}/review-ctx
           TIER: ${{ steps.tier.outputs.tier }}
+          BODY_CONTRACT_OUTCOME: ${{ steps.body_contract.outcome }}
           REVIEW_DIFF_EXCLUSIONS: content,data,dist,public
         run: |
           set -uo pipefail
@@ -831,6 +892,13 @@ jobs:
             echo
             echo "## PR metadata"
             cat "$CTX_DIR/pr.json"
+            echo
+            echo "## Deterministic body contract"
+            if [ "${BODY_CONTRACT_OUTCOME:-}" = "success" ]; then
+              echo "✅ passed on the current body (sections, bullet states, Motivo/Prossimo passo, placeholders, Closes). The body cannot produce a 🔴 Important in this review: at most a 🟡 Nit anchored as \`PR body:L<n>\`."
+            else
+              echo "Verdict unavailable (${BODY_CONTRACT_OUTCOME:-unknown}): apply the REVIEW.md body rules."
+            fi
             echo
             echo "## Changed code-file list"
             cat "$CTX_DIR/review-code-files.txt"
@@ -920,6 +988,10 @@ jobs:
           codex_corpus_github_token: ${{ env.GITHUB_PAT_NANAKO || env.GITHUB_PAT }}
           codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
           review_marker: '<!-- CODEX_FALLBACK_REVIEW -->'
+          # Effort per tier dallo step `tier`; `max` quando lo step non ne ha
+          # emesso uno, cosi' un output mancante non puo' mai ABBASSARE
+          # l'effort di una review funnel-critical.
+          reasoning_effort: ${{ steps.tier.outputs.effort || 'max' }}
           prompt: |
             Test files are excluded from review by owner policy: do not read, probe or raise findings on tests, including during cross-file analysis.
             Report the exact workflow tier `${{ steps.tier.outputs.tier }}` in Scope; this classifies review scope, not model reasoning effort.
@@ -937,6 +1009,8 @@ jobs:
             Se `INCREMENTAL_BASE` e' valorizzato, revieva SOLO il delta e le sue interazioni: i commit fino a quel punto sono gia' stati approvati. Sei comunque autorizzato a Read/grep i file pieni per il CONTESTO — l'obiettivo e' non rispendere token su codice gia' approvato, non chiudere gli occhi sulle interazioni.
 
             **Disciplina turni (budget rigido, tutti i tier tranne `minimal`):** hai ${{ steps.tier.outputs.max_turns }} turni. Un messaggio con tool-call = 1 turno indipendentemente da quanti tool_use contiene, quindi le probe indipendenti vanno emesse in parallelo nello stesso messaggio, mai una per turno. `PR_NUMBER`/`HEAD_SHA`/`INCREMENTAL_BASE` sono gia' nell'env: mai spendere un turno per rileggerli. Il checkout NON ha `node_modules`: niente `npm`/`npx`/test runner, il verdetto si basa sulla lettura statica. Entro cinque turni dal cap DEVI aver postato la review: se hai ancora verifiche aperte, postale come `❓ q:` invece di continuare a probeare. Una review postata con un `❓` sblocca il loop; una review MAI postata brucia il run intero senza verdetto.
+
+            **PR body: una sola fonte di verita'.** Il contratto deterministico del body (`scripts/ci/pr-body-contract.mjs`, step `PR-body completeness` di questo stesso run) ha gia' validato sezioni, stato di ogni voce, `Motivo`/`Prossimo passo`, placeholder e `Closes`; il suo verdetto e' nel bundle sotto `## Deterministic body contract`. Quando e' ✅ NON rivalidare quelle regole e non emettere mai un `🔴 Important` sul body: un dubbio su quelle regole vale al massimo un `🟡 Nit` ancorato `PR body:L<n>`, e il review gate declassa comunque un 🔴 cosi' ancorato su un contratto verde. Ogni stato che il contratto accetta in `## Non implementato (ancora)` — `in questa PR`, `PR concatenata #N`, `per scelta`, `by construction` e qualunque altro `blocked: <causa>` — e' valido, e su quelli **non si emette 🔴**. Riemettere un 🔴 su una voce che il contratto ha accettato incastra il ciclo: il fixer declina con una ragione, il cap dei round scatta, e `needs-human` atterra con la diagnosi sbagliata su una PR che non ha niente da riparare. Il claim di performance senza baseline (step 7 di REVIEW.md) NON e' una regola del contratto e resta 🔴. Una regola del body che il contratto non copre si aggiunge al contratto, non si applica a mano.
 
             **Workflow di review come da REVIEW.md:** completeness contract → `Implementato` con occhio critico → `Non implementato` filtro scopo → scope drift → ripetizione di pattern cross-file → conformita' al piano di test → claim di performance non validati → output.
             - Tier `high`, `high-mega` o `incremental-high`: aggiungi una sezione `## Adversarial check` con esattamente 3 rischi REALI non verificati, prima del summary. Mai «manca un test».
@@ -1184,6 +1258,9 @@ jobs:
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           REVIEW_REVISION: ${{ steps.review_input.outputs.review_revision }}
           CODEX_FALLBACK_EVIDENCE_FILE: ${{ steps.codex_review.outputs.fallback_evidence_file || steps.review_abort.outputs.verdict_evidence_file }}
+          # Unica fonte di verita' sul body: un 🔴 del modello ancorato SOLO su
+          # `PR body:L<n>` non blocca quando questo contratto e' passato.
+          BODY_CONTRACT_OUTCOME: ${{ steps.body_contract.outcome }}
         run: |
           set -euo pipefail
           echo "Executing trusted review gate from $REVIEW_GATE_MAIN_MODULE"

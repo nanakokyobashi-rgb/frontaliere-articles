@@ -176,8 +176,8 @@
       "reason": "Classificatore del verdetto `🔴 Important` rispetto al diff corrente della PR. E' usato dal review-gate e dal fixer del corpus per declassare in modo conservativo i finding fuori diff e coniare una sola issue follow-up; il sito ha un gate e un ciclo di review diversi e non possiede questo consumer del corpus, quindi non esiste un gemello da portare.",
       "baseline": {
         "site": null,
-        "corpus": "e06f7f46555a4692",
-        "alignedAt": "2026-09-09"
+        "corpus": "d7d58ebafc744966",
+        "alignedAt": "2026-09-19"
       }
     },
     {
@@ -282,9 +282,9 @@
       "path": "scripts/ci/claude-codex-fallback.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "e689fea0127bdeed",
-        "corpus": "e689fea0127bdeed",
-        "alignedAt": "2026-09-11"
+        "site": "aa15ba50bb2256ff",
+        "corpus": "aa15ba50bb2256ff",
+        "alignedAt": "2026-09-19"
       }
     },
     {
@@ -535,6 +535,16 @@
       "baseline": {
         "site": "5612aa5e2536996b",
         "corpus": "5612aa5e2536996b",
+        "alignedAt": "2026-09-19"
+      }
+    },
+    {
+      "path": "scripts/lib/pr-body-contract-eval.mjs",
+      "mode": "corpus-only",
+      "reason": "Verdetto bloccante del contratto del body (sezioni, `Closes`, stati di `Non implementato`) senza rete ne' commenti: sorgente unica per `scripts/ci/pr-body-contract.mjs` e per `retry-code-check-after-body-edit.yml`, che dopo un edit su una run verde rilancia la run solo se il body nuovo viola il contratto. Corpus-only come `pr-body-contract.mjs` e `pr-body-nextstep-check.mjs`, di cui compone i moduli.",
+      "baseline": {
+        "site": null,
+        "corpus": "b14cc7b051377a47",
         "alignedAt": "2026-09-19"
       }
     },
@@ -1022,10 +1032,38 @@
       "mode": "adapted",
       "reason": "Il corpus usa CI_CHECK_NAME e classi di recupero A/B/C/D con il workflow pr-autorebase indipendente; il sito riesegue il run di codice dalla label corrente dentro tests.yml. Si preservano i rimedi specifici del corpus, il rerun della classe B con marker del fixer e la cadenza :35.",
       "baseline": {
-        "site": "7f21b1a6977aa7de",
-        "corpus": "5f9405e2e553f8d7",
-        "alignedAt": "2026-09-10",
-        "forcedAt": "2026-09-10T12:33:12.822Z"
+        "site": "1d3108398b6a9623",
+        "corpus": "dec5c2a2c169d1c9",
+        "alignedAt": "2026-09-19"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/review-input-revision.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "d869cb07abc6814c",
+        "corpus": "d869cb07abc6814c",
+        "alignedAt": "2026-09-19"
+      }
+    },
+    {
+      "path": "scripts/ci/orphan-pr-custodian.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "c6434469fb6fb309",
+        "corpus": "c6434469fb6fb309",
+        "alignedAt": "2026-09-19"
+      }
+    },
+    {
+      "path": "generator/tests/orphan-pr-custodian.test.mjs",
+      "sitePath": "tests/orphan-pr-custodian.test.ts",
+      "mode": "adapted",
+      "reason": "Gemello node:test del test Vitest del sito sul custode delle PR orfane: stessi casi sulla decisione pura (rerun di una suite CANCELLED con LGTM, adozione di un 🔴 fuori scope, guardie) e sul cablaggio di stale-pr-rescuer.yml. Cambia solo il runner, e qui asserisce anche il dispatch del redflag-fixer (`REDFLAG_FIXER_DISPATCH_INPUT: pr`), che il sito non ha perche' il suo fixer non accetta workflow_dispatch.",
+      "baseline": {
+        "site": "ceab56f221d07ec1",
+        "corpus": "fb8e3ca0ab601792",
+        "alignedAt": "2026-09-19"
       }
     },
     {
@@ -3177,7 +3215,7 @@
       "reason": "Estrae ed ESEGUE la catena di classificazione di stale-pr-rescuer.yml (gh e date stubbati, jq reale). Corpus-only perche' il suo soggetto e' `adapted`: la cadenza, il ponte CI_CHECK_NAME e ora la classe D con il dispatch di pr-review-loop.yml sono le forme di QUESTO repo, e un gemello vitest asserirebbe altro. Se la classe D risale al sito, il gemello va scritto li' contro il suo YAML, non copiato.",
       "baseline": {
         "site": null,
-        "corpus": "ade3e04bb588571d",
+        "corpus": "e12bcae6b83f1847",
         "alignedAt": "2026-08-14"
       }
     },
@@ -3972,11 +4010,12 @@
     },
     {
       "path": ".github/workflows/retry-code-check-after-body-edit.yml",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "Stesso recupero del sito dopo un body corretto: riesegue l'ultima run `tests` della HEAD quando e' fallita sul contratto del body o sul SOLO gate della review, ed e' l'unica via di rientro da quando `tests.yml` non ha piu' `edited` fra i trigger. Adattato su cinque punti, tutti emersi dalla review della PR #1613 e tutti conseguenza dell'aver tolto `edited`: (1) niente `createWorkflowDispatch` quando la HEAD non ha run, perche' il `tests.yml` di questo repo fa checkout del ref dispatchato senza `ref: inputs.head_sha` e testerebbe il codice di base mettendo il check sulla SHA di base; (2) la run bersaglio e' scelta anche per branch della PR ed evento `pull_request`: mai una run `push` dello stesso commit, ne' un dispatch test-only di `pr-autorebase.mjs` (senza `pr_number`, quindi senza contratto del body e senza review); (3) una run ancora in volo e partita PRIMA dell'edit viene cancellata e rieseguita (poteva aver letto il body vecchio), invece di essere classificata prima che i suoi step falliti esistano; lo stato si rilegge prima di cancellare e un 409 (run appena conclusa) porta alla classificazione normale; una run partita DOPO l'edit, conclusa o no, non si tocca; (4) anche un'ultima run `cancelled`/`timed_out` viene rieseguita, perche' dopo l'edit nessun altro evento riporterebbe la HEAD a un verdetto; (5) una run VERDE viene rieseguita se il body nuovo viola il contratto, valutato con `scripts/lib/pr-body-contract-eval.mjs` dal checkout del branch base (zero-Claude), cosi' il check richiesto torna rosso prima che l'auto-merge nativo fonda un body rotto; la review non si rifa' su un body che passa il contratto, per la politica ratificata sul sito con valerielinc-ops/frontaliere-si-o-no#9118. Il sito ha gli stessi buchi (2)-(4), mascherati finche' il suo `tests.yml` aveva `edited`: la risalita va fatta la'.",
       "baseline": {
-        "site": "c4c5c45669fbe69d",
-        "corpus": "c4c5c45669fbe69d",
-        "alignedAt": "2026-09-10"
+        "site": "746f8ace38ffe2f2",
+        "corpus": "b18f1396f2472489",
+        "alignedAt": "2026-09-19"
       }
     },
     {

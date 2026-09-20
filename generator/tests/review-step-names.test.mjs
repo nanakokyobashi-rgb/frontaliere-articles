@@ -164,7 +164,22 @@ test('il review gate e il suo grafo di import arrivano dalla main', () => {
   );
   assert.match(bootstrap, /download_main\s+scripts\/ci\/review-gate\.mjs\s+"\$review_gate_root\/scripts\/ci\/review-gate\.mjs"/);
   assert.match(bootstrap, /set -euo pipefail/);
-  assert.match(bootstrap, /if ! gh api/);
+  assert.match(bootstrap, /raw_base_url="https:\/\/raw\.githubusercontent\.com\/\$\{REPO\}\/\$\{policy_ref\}"/);
+  const downloaderStart = bootstrap.indexOf('download_main() {');
+  const downloaderEnd = bootstrap.indexOf('\n\n          download_main scripts/ci/review-gate.mjs', downloaderStart);
+  assert.ok(downloaderStart >= 0 && downloaderEnd > downloaderStart, 'helper downloader block non trovato');
+  const downloader = bootstrap.slice(downloaderStart, downloaderEnd);
+  assert.doesNotMatch(downloader, /gh api/);
+  assert.match(downloader, /for attempt in 1 2 3/);
+  assert.match(downloader, /--connect-timeout 10 --max-time 60/);
+  assert.match(downloader, /--write-out '%\{http_code\}'/);
+  assert.match(downloader, /&& \[ -s "\$destination" \]/);
+  assert.match(downloader, /grep -Eq '\^2\[0-9\]\[0-9\]\$' "\$status_file"/);
+  assert.match(downloader, /node --check "\$destination"/);
+  assert.match(downloader, /retryable=false/);
+  assert.match(downloader, /\[ "\$attempt" -eq 3 \] \|\| \[ "\$retryable" != true \]/);
+  assert.match(downloader, /sleep "\$\(\(attempt \* 5\)\)"/);
+  assert.match(downloader, /return 1/);
   assert.match(bootstrap, /REVIEW_GATE_MAIN_MODULE=/);
   assert.match(bootstrap, /Review gate bootstrap: main @/);
   for (const relative of closure) {

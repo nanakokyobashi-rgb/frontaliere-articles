@@ -67,6 +67,8 @@ Il tier è calcolato dallo step `Determine review tier` di `tests.yml` e passato
 
 **Il tier si decide SOLO sul CODE.** `content/` (14.888 file di corpus), `data/`, `dist/` (superficie generata) e `public/` non sono codice: non escalano il tier e non vanno revieweati riga per riga.
 
+**Effort del modello per tier** (`tests.yml` → input `reasoning_effort` dell'action `claude-codex-fallback`): `max` per `high` e `high-mega`, `high` per `minimal`, `incremental`, `incremental-high` e `normal`. Il valore finisce nell'evidenza strutturata della run e il review gate lo valida contro l'insieme chiuso `CODEX_ALLOWED_EFFORTS` (`scripts/ci/claude-codex-fallback.mjs`): un effort fuori insieme invalida l'evidenza e il gate non accetta il verdetto. Ogni altro chiamante dell'action (issue-fix, i fixer) non passa l'input e resta su `max`.
+
 | Tier | File trigger (CODE) | Profondità |
 |---|---|---|
 | **high** | `generator/**`, `engine/**`, `host/**`, `.github/workflows/**`, e tutto `scripts/**` ECCETTO `scripts/{ci,dev}/` e gli audit/report read-only | È il codice che emette o rende la superficie pubblicata. Un bug qui è live senza deploy. Probe su regex, assertion, exit code, idempotenza. Sezione `## Adversarial check` con 3 cose NON verificate. |
@@ -95,6 +97,14 @@ Il body della PR DEVE avere:
 ## Non implementato (ancora)
 - Piano di completamento: scope ancora dovuto + stato/next-step (in questa PR / PR concatenata #N / blocked: <causa>). «Nessuno» = task completo.
 ```
+
+### Una sola fonte di verita' sul body
+
+Il contratto del body e' validato in modo deterministico da `scripts/ci/pr-body-contract.mjs` (step `PR-body completeness` di `tests.yml`, che compone `pr-body-sections-check.mjs`, `pr-body-nextstep-check.mjs`, `pr-body-closes-check.mjs` e `pr-body-filepath-check.mjs`): sezioni, stato di ogni voce, `Motivo`/`Prossimo passo`, placeholder, `Closes`, path citati. Il suo verdetto arriva al reviewer nel bundle, sotto `## Deterministic body contract`.
+
+**Se e' ✅, il body non genera 🔴 Important**: al massimo un 🟡 Nit ancorato `PR body:L<n>`. Ogni stato che il contratto accetta — incluso qualunque `blocked: <causa>`, che tiene il task aperto senza bloccare la PR — e' valido, e un `Prossimo passo` concreto non si ridiscute. Il review gate declassa comunque un 🔴 ancorato SOLO su una riga `PR body:L<n>` dentro `## Non implementato` quando il contratto e' verde (`DECLASSIFIED-BODY` nel log di `scripts/ci/review-scope.mjs`); il claim di performance senza baseline (punto 7 qui sotto) non e' una regola del contratto e resta 🔴.
+
+Una regola del body che il contratto non copre va AGGIUNTA al contratto, non applicata a mano dal reviewer: due giudici sulla stessa superficie con politiche diverse incastrano il ciclo — il fixer declina, il cap dei round scatta, e `needs-human` atterra su una PR che non ha niente da riparare. I punti 2 e 4 qui sotto valgono quindi per cio' che il contratto non vede (la coerenza fra `## Implementato` e il diff) e per quando il verdetto non e' disponibile.
 
 ### Comportamento del reviewer
 

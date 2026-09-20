@@ -76,13 +76,23 @@ import {
   REDFLAG_IMPORTANT_RE,
   VITEST_CHECK_NAME,
 } from './lib/constants.mjs';
-import { classifyAndMintReview } from './review-scope.mjs';
+import { classifyAndMintReview, prBodyFindingLine } from './review-scope.mjs';
 
 const REPO = process.env.GITHUB_REPOSITORY || '';
 const PR = process.env.PR_NUMBER || '';
 const HEAD_SHA = process.env.HEAD_SHA || '';
 const RUN_URL = process.env.RUN_URL || '';
 const REVIEW_REVISION = normalizeReviewInputRevision(process.env.REVIEW_REVISION || '');
+// Il contratto deterministico del body di QUESTA run (step `PR-body
+// completeness`, id `body_contract`). Verde = unica fonte di verita' sul body:
+// un 🔴 del modello ancorato solo su `PR body:L<n>` non blocca. Qualunque
+// valore diverso da `success` lascia il giudizio al reviewer come prima.
+// `true` quando lo step del contratto di QUESTA run e' passato; `null` = «non
+// lo so», e `review-scope.mjs` ricalcola il verdetto dal body con gli stessi
+// moduli del gate. Mai `false` implicito: un env mancante non deve spegnere il
+// declassamento, altrimenti i consumer senza quello step (il fixer, la CLI)
+// applicherebbero una politica diversa sulla stessa superficie.
+const BODY_CONTRACT_PASSED = process.env.BODY_CONTRACT_OUTCOME === 'success' ? true : null;
 const MARKER = '<!-- REVIEW_GATE_NO_LGTM -->';
 let gateFailureKind = 'verdict';
 
@@ -449,7 +459,13 @@ async function main() {
           repo: REPO,
           pr: PR,
           prUrl: `https://github.com/${REPO}/pull/${PR}`,
+          bodyContractPassed: BODY_CONTRACT_PASSED,
         });
+        for (const finding of scope.bodyDeclassified ?? []) {
+          console.log(
+            `review-gate: DECLASSIFIED-BODY finding=review-L${finding.lineNumber} anchor=PR body:L${prBodyFindingLine(finding) ?? '?'} reason=il contratto deterministico del body e' passato su questo body; una nota sul body vale al massimo un Nit`,
+          );
+        }
         if (scope.outside.length > 0 && scope.minted) {
           console.log(
             `review-gate: ${scope.outside.length} finding Important fuori dal diff → follow-up ${scope.followup?.number || scope.followup?.url || 'coniato'}.`,
@@ -467,7 +483,11 @@ async function main() {
         );
       }
     }
-    const outsideOnlyApproved = Boolean(applies && hasRedflag && scope?.outsideOnly && scope?.minted);
+    // La follow-up e' la traccia dei finding FUORI dal diff: senza di loro non
+    // c'e' niente da tracciare, e pretendere comunque un conio terrebbe rossa
+    // una PR i cui unici 🔴 il contratto verde ha gia' chiuso.
+    const outsideOnlyApproved = Boolean(applies && hasRedflag && scope?.outsideOnly
+      && ((scope?.outside?.length ?? 0) === 0 || scope?.minted));
     const approving = reviewStateAllowsApproval(last)
       && ((body.includes('## LGTM') && !hasRedflag) || outsideOnlyApproved);
     // The evidence file is ephemeral. On a rerun where the re-review guard

@@ -15,6 +15,7 @@ import { readFileSync } from 'node:fs';
 import { REDFLAG_IMPORTANT_RE } from './lib/constants.mjs';
 import { fetchPrFiles } from './lib/fetchPrFiles.mjs';
 import { createGithubIssue } from '../lib/github-issue-creator.mjs';
+import { evaluateBodyContract } from '../lib/pr-body-contract-eval.mjs';
 
 const FOLLOWUP_MARKER = 'OUT_OF_SCOPE_REVIEW_FOLLOWUP';
 // Stesso margine del writer condiviso (`MAX_BODY_LEN`): il tetto API e' 65536.
@@ -23,6 +24,27 @@ const FILE_CITATION_RE = /(?:^|[\s([{"'`])((?:\.\.?\/)?(?:[A-Za-z0-9_.-]+\/)*[A-
 const IMPORTANT_MARKER_RE = /🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]\s*/u;
 const FINDING_MARKER_RE = /🔴|🟡\s*\*{0,2}\s*Nit\s*\*{0,2}\s*[:—-]|🟣\s*\*{0,2}\s*Pre-existing\s*\*{0,2}\s*[:—-]|❓\s*q\s*:/gu;
 const ZERO_IMPORTANT_RE = /^(?:0|none|nessuno)\s*$/iu;
+// Anchor di un finding il cui unico riferimento e' la descrizione della PR.
+const PR_BODY_ANCHOR_RE = /^\s*(?:[-*]\s*)?`?PR body[:#]L?([1-9]\d*)(?:[-–]\d+)?(?=$|[`:\s])/iu;
+const PR_BODY_ANCHOR_LOOSE_RE = /`?PR body[:#]L?([1-9]\d*)/iu;
+// TUTTI gli anchor `PR body:L<n>` del finding, non solo il primo, e con
+// l'INTERVALLO quando c'e' (`PR body:L5-9`). Un anchor a intervallo che parte
+// dentro `## Non implementato` puo' finire fuori — per esempio su una riga di
+// `## Implementato` che il contratto non giudica — e tenerne solo l'estremo
+// iniziale declasserebbe un finding che parla anche di quell'altra riga.
+const PR_BODY_ANCHOR_ALL_RE = /`?PR body[:#]L?([1-9]\d*)(?:\s*[-–]\s*L?([1-9]\d*))?/giu;
+// Cio' che il contratto deterministico NON sa giudicare resta bloccante anche
+// se ancorato al body: il claim di performance senza baseline (REVIEW.md punto
+// 7) non e' una regola del contratto, e' una regola della review. La lista e'
+// deliberatamente LARGA: ogni termine in piu' lascia bloccante un finding in
+// piu', che e' la direzione sicura dell'errore. Stringerla richiede una
+// misura, allargarla no.
+const NON_CONTRACT_BODY_RE = new RegExp([
+  'baseline', 'perf', 'performance', 'speed-?up', 'speed', 'faster', 'veloc',
+  'throughput', 'latenc[yz]', 'latenza', 'benchmark', 'overhead', 'regressi',
+  'misura', 'misurat', 'pre/post', 'revert', 'ottimizzazion', 'optimi[sz]',
+  'claim', 'risparmi', 'saving', 'p50', 'p90', 'p95', 'p99',
+].map((part) => `(?:${part})`).join('|'), 'iu');
 
 function resetImportantRegex() {
   REDFLAG_IMPORTANT_RE.lastIndex = 0;
@@ -166,15 +188,110 @@ function changedContains(changedFiles, resolvedPath) {
  * disponibile; senza tree i basename vengono risolti solo contro i file del
  * diff, quindi un basename esterno resta non risolvibile.
  */
-export function classifyImportantFindings(body, changedFiles, repositoryPaths = null) {
+/** Numero di riga del body a cui un finding e' ancorato, o `null`. */
+export function prBodyFindingLine(finding) {
+  const fromText = String(finding?.text || '').match(PR_BODY_ANCHOR_RE);
+  if (fromText) return Number(fromText[1]);
+  const fromLine = String(finding?.line || '').match(PR_BODY_ANCHOR_LOOSE_RE);
+  return fromLine ? Number(fromLine[1]) : null;
+}
+
+/**
+ * Vero quando il finding e' un 🔴 ancorato SOLO su `PR body:L<n>`, su una riga
+ * che cade dentro `## Non implementato` — la sezione che il contratto
+ * deterministico valida — e non parla di un claim che il contratto non sa
+ * giudicare.
+ *
+ * Tutto il resto resta bloccante: una riga altrove nel body, un claim di
+ * performance, o l'assenza del testo del body con cui provare la posizione.
+ * Senza `prBody` non si declassa niente: la prova che l'anchor cade nella
+ * sezione giusta e' parte del predicato, non un'assunzione.
+ */
+export function isContractDomainBodyFinding(finding, prBody) {
+  if (typeof prBody !== 'string' || !prBody) return false;
+  const text = String(finding?.text || '');
+  if (NON_CONTRACT_BODY_RE.test(text)) return false;
+  const lines = prBody.split(/\r?\n/u);
+  PR_BODY_ANCHOR_ALL_RE.lastIndex = 0;
+  const anchors = [];
+  for (const match of text.matchAll(PR_BODY_ANCHOR_ALL_RE)) {
+    const start = Number(match[1]);
+    const end = match[2] === undefined ? start : Number(match[2]);
+    // I limiti si verificano PRIMA di espandere. Il testo della review e'
+    // prodotto da un modello: `PR body:L1-999999999` altrimenti farebbe
+    // crescere questo array fino a fermare la classificazione e con essa il
+    // review gate — cioe' la coda di merge e di pubblicazione — per un
+    // anchor che comunque non sarebbe verificabile. Un intervallo rovesciato
+    // o che esce dal body si rifiuta, non si interpreta.
+    if (!Number.isFinite(start) || !Number.isFinite(end)) return false;
+    if (end < start || end > lines.length) return false;
+    for (let line = start; line <= end; line += 1) anchors.push(line);
+  }
+  const first = prBodyFindingLine(finding);
+  if (first !== null && !anchors.includes(first)) anchors.push(first);
+  if (anchors.length === 0) return false;
+  // Ogni anchor deve cadere dentro `## Non implementato` E la riga che cita
+  // non deve essere essa stessa un claim che il contratto non sa giudicare:
+  // il finding puo' limitarsi a puntare la riga senza ripeterne il contenuto.
+  return anchors.every((line) => {
+    if (!Number.isFinite(line) || line > lines.length) return false;
+    if (NON_CONTRACT_BODY_RE.test(lines[line - 1] || '')) return false;
+    let section = null;
+    for (let index = 0; index < line; index += 1) {
+      const heading = lines[index].match(/^\s{0,3}#{2,3}\s+(.+?)\s*$/u);
+      if (heading) section = heading[1];
+    }
+    return Boolean(section && /^Non implementato\b/iu.test(section));
+  });
+}
+
+/**
+ * Il contratto deterministico del body, ricalcolato dal body stesso con gli
+ * stessi moduli dello step `PR-body completeness` (`evaluateBodyContract`:
+ * sezioni, `Closes`, stato bloccante di ogni voce; gli advisory non bloccano
+ * quel gate e non bloccano qui).
+ *
+ * Esiste perche' il verdetto NON puo' arrivare solo da una variabile d'ambiente
+ * di `tests.yml`: `pr-redflag-fixer.yml` e la CLI di questo file classificano
+ * gli stessi finding SENZA quello step, e li' un 🔴 sul body con contratto
+ * verde consumerebbe round del fixer su lavoro che non esiste. Ricalcolarlo
+ * rende il declassamento uguale per ogni consumer, che e' l'unico modo di non
+ * avere due politiche sulla stessa superficie.
+ */
+export function bodyContractIsGreen(prBody) {
+  if (typeof prBody !== 'string' || !prBody) return false;
+  try {
+    return evaluateBodyContract(prBody).blocking === 0;
+  } catch (error) {
+    console.log(`review-scope: contratto del body non valutabile (${String(error).slice(0, 160)}) → nessun declassamento.`);
+    return false;
+  }
+}
+
+export function classifyImportantFindings(body, changedFiles, repositoryPaths = null, {
+  // Il contratto deterministico del body (`scripts/ci/pr-body-contract.mjs`,
+  // step `PR-body completeness` di tests.yml) e' passato su QUESTO body nella
+  // stessa run. E' l'unica fonte di verita' sul body: un 🔴 del modello
+  // ancorato solo su `PR body:L<n>` vale allora al massimo un Nit.
+  bodyContractPassed = false,
+  // Body corrente della PR: serve a PROVARE che la riga citata cade dentro
+  // `## Non implementato`. Assente → nessun declassamento.
+  prBody = null,
+} = {}) {
   const changed = [...new Set((changedFiles || []).map(normalizePath).filter(Boolean))];
   const treeAvailable = repositoryPaths !== null && repositoryPaths !== undefined;
   const knownPaths = treeAvailable ? repositoryPaths : changed;
   const outside = [];
   const inScope = [];
   const unresolved = [];
+  const bodyDeclassified = [];
 
   for (const finding of importantFindings(body)) {
+    if (bodyContractPassed && finding.citations.length === 0
+        && isContractDomainBodyFinding(finding, prBody)) {
+      bodyDeclassified.push(finding);
+      continue;
+    }
     if (finding.citations.length === 0) {
       unresolved.push({ ...finding, reason: 'nessun file citato' });
       continue;
@@ -210,7 +327,9 @@ export function classifyImportantFindings(body, changedFiles, repositoryPaths = 
     outside,
     inScope,
     unresolved,
-    outsideOnly: outside.length > 0 && inScope.length === 0 && unresolved.length === 0,
+    bodyDeclassified,
+    outsideOnly: (outside.length + bodyDeclassified.length) > 0
+      && inScope.length === 0 && unresolved.length === 0,
     blocking: inScope.length > 0 || unresolved.length > 0,
   };
 }
@@ -225,6 +344,21 @@ function gh(args, { json = true } = {}) {
 
 function fetchChangedFiles(repo, pr) {
   return fetchPrFiles(Number(pr), gh, repo);
+}
+
+/**
+ * Body corrente della PR. Un errore torna `null`, che spegne il declassamento
+ * invece di concederlo: senza il body non c'e' prova che l'anchor cada dentro
+ * `## Non implementato`.
+ */
+function readPrBody(repo, pr) {
+  try {
+    const view = gh(['api', `repos/${repo}/pulls/${pr}`]);
+    return typeof view?.body === 'string' ? view.body : null;
+  } catch (error) {
+    console.log(`review-scope: body della PR non leggibile (${String(error).slice(0, 160)}) → nessun declassamento.`);
+    return null;
+  }
 }
 
 function fetchRepositoryPaths(repo, pr) {
@@ -427,23 +561,53 @@ async function mintFollowup({ repo, pr, prUrl, body, findings }) {
  * Classifica la review sulla PR reale e, solo se tutti i finding sono fuori
  * scope, conia/aggiorna la singola issue della PR.
  */
-export async function classifyAndMintReview(body, { repo, pr, prUrl, mutate = true } = {}) {
+export async function classifyAndMintReview(body, {
+  repo, pr, prUrl, mutate = true,
+  // `null`/assente = «non lo so»: il verdetto si RICALCOLA dal body con gli
+  // stessi moduli del gate. Un booleano esplicito lo impone (il review gate
+  // passa `true` quando lo step del contratto di quella run e' andato bene).
+  // Cosi' ogni consumer — review gate, fixer, CLI — applica la stessa
+  // politica senza che un workflow debba propagare una variabile.
+  bodyContractPassed = null, prBody = null,
+} = {}) {
   if (!repo || !pr) throw new Error('repo e pr sono obbligatori');
+  const effectivePrBody = prBody === null && bodyContractPassed !== false
+    ? readPrBody(repo, pr)
+    : prBody;
+  const contractPassed = typeof bodyContractPassed === 'boolean'
+    ? bodyContractPassed
+    : bodyContractIsGreen(effectivePrBody);
   const changed = fetchChangedFiles(repo, pr);
   const diffUnavailable = changed.complete !== true || changed.files.length === 0;
   if (diffUnavailable) {
     const findings = importantFindings(body);
     const reason = changed.files.length === 0 ? 'empty' : changed.reason;
+    // Un finding sul body non dipende dal diff: il contratto lo ha gia'
+    // giudicato su questo stesso body. Senza questa separazione un diff
+    // illeggibile — una PR che rigenera migliaia di file di corpus e' il caso
+    // normale qui — resusciterebbe come bloccante proprio i 🔴 che il
+    // contratto verde ha appena chiuso, e lo farebbe per una ragione che non
+    // ha niente a che vedere con loro.
+    const bodyDeclassified = contractPassed
+      ? findings.filter((finding) => finding.citations.length === 0
+          && isContractDomainBodyFinding(finding, effectivePrBody))
+      : [];
+    const stillOpen = findings.filter((finding) => !bodyDeclassified.includes(finding));
     return {
       findings,
       outside: [],
       inScope: [],
-      unresolved: findings.map((finding) => ({
+      unresolved: stillOpen.map((finding) => ({
         ...finding,
         reason: `diff non verificabile (${reason})`,
       })),
-      outsideOnly: false,
-      blocking: findings.length > 0,
+      bodyDeclassified,
+      // Il ramo dichiara di voler sbloccare la PR con diff illeggibile i cui
+      // unici 🔴 erano sul body: senza questo, `blocking` diventava false ma
+      // `outsideOnly` restava false e il gate non approvava comunque —
+      // il ramo non avrebbe sbloccato niente.
+      outsideOnly: bodyDeclassified.length > 0 && stillOpen.length === 0,
+      blocking: stillOpen.length > 0,
       minted: false,
       changedFiles: changed.files,
       changedFilesComplete: changed.complete,
@@ -451,7 +615,10 @@ export async function classifyAndMintReview(body, { repo, pr, prUrl, mutate = tr
     };
   }
   const repositoryPaths = fetchRepositoryPaths(repo, pr);
-  const result = classifyImportantFindings(body, changed.files, repositoryPaths);
+  const result = classifyImportantFindings(body, changed.files, repositoryPaths, {
+    bodyContractPassed: contractPassed,
+    prBody: effectivePrBody,
+  });
   if (result.outside.length === 0 || !mutate) {
     return {
       ...result,
