@@ -52,7 +52,7 @@ function stepBlock(lines, index) {
 }
 
 test('every active article CLI caller wires the OAuth Codex broker', () => {
-  assert.equal(workflowFiles.length, 25, 'caller inventory changed: review new/removed consumers');
+  assert.equal(workflowFiles.length, 24, 'caller inventory changed: review new/removed consumers');
   for (const rel of workflowFiles) {
     const source = read(rel);
     const lines = source.split('\n');
@@ -111,6 +111,9 @@ test('every active article CLI caller wires the OAuth Codex broker', () => {
     assert.match(cleanup, /--cleanup\s+--socket\s+"\$CODEX_AUTH_BROKER_SOCKET"/, `${rel}: cleanup command incomplete`);
     assert.equal((source.match(/CODEX_AUTH_JSON/g) ?? []).length, 1, `${rel}: raw Codex OAuth leaked beyond setup input`);
   }
+  const translationWorkflow = read('.github/workflows/translate-pending.yml');
+  assert.doesNotMatch(translationWorkflow, /setup-claude-haiku-fallback|CODEX_AUTH_BROKER_SOCKET/,
+    'translation must stay outside the Codex broker lane');
 });
 
 test('la preferenza Claude esiste solo quando la lane è disponibile nel processo', () => {

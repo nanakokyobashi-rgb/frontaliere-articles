@@ -288,6 +288,7 @@ describe('stale-pr-rescuer — cablaggio', () => {
     assert.match(WORKFLOW, /sparse-checkout: \|\n(?:\s+\S+\n)*\s+scripts\/ci\/orphan-pr-custodian\.mjs\n/);
     assert.ok(WORKFLOW.includes('scripts/ci/lib/constants.mjs'));
     assert.ok(WORKFLOW.includes('run: node scripts/ci/orphan-pr-custodian.mjs'));
+    assert.match(WORKFLOW, /TRUSTED_GH_BIN: \$\{\{ steps\.trusted_gh\.outputs\.path \}\}/);
     // Qui il fixer accetta il dispatch: l'adozione lo avvia subito.
     assert.ok(WORKFLOW.includes('REDFLAG_FIXER_DISPATCH_INPUT: pr'));
   });

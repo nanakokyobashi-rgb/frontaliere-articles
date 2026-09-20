@@ -7,6 +7,7 @@ import { test } from 'node:test';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const ENTRYPOINTS = [
   'generator/scripts/load-rc-env.mjs',
+  'generator/scripts/lib/provider-preflight.mjs',
   'generator/scripts/retranslate-blocking-bodies.mjs',
   'generator/scripts/reset-evergreen-strikes.mjs',
   'generator/scripts/scan-vacuous-key-facts.mjs',

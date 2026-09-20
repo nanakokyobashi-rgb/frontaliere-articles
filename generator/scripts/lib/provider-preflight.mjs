@@ -9,9 +9,9 @@
  * quota/rate-limit responses, so "no provider" is an actionable red result.
  */
 import dns from 'node:dns/promises';
-import fs from 'node:fs';
+import fs, { realpathSync } from 'node:fs';
 import path from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 import {
   AI_MODELS,
   DEFAULT_CHAIN,
@@ -323,6 +323,14 @@ export async function main() {
   return report;
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1] || '').href) {
+const invokedDirectly = (() => {
+  try {
+    return realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1] || '');
+  } catch {
+    return false;
+  }
+})();
+
+if (invokedDirectly) {
   await main();
 }

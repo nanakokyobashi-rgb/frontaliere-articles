@@ -1,0 +1,22 @@
+name: Housekeeping jobs (two lanes)
+
+on:
+  schedule:
+    - cron: '0 5 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  housekeeping:
+    strategy:
+      fail-fast: false
+      matrix:
+        lane: [prospective, rest]
+    uses: valerielinc-ops/frontaliere-si-o-no/.github/workflows/housekeeping-jobs-logic.yml@main
+    with:
+      lane: ${{ matrix.lane }}
+    secrets:
+      FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}

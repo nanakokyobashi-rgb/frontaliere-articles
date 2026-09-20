@@ -93,7 +93,14 @@ export function appendCatalogEntry(blogImagePath) {
   }
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+const invokedDirectly = (() => {
+  try {
+    return fs.realpathSync(fileURLToPath(import.meta.url)) === fs.realpathSync(process.argv[1] || '');
+  } catch {
+    return false;
+  }
+})();
+if (invokedDirectly) {
   // DRY_RUN=1 is the convention the other generator entry points already use
   // ("plan only, no writes" — see generate-events-digest-article.mjs and
   // generate-border-wait-ranking-article.mjs). This script had no dry-run

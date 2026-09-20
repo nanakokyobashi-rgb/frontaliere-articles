@@ -1822,9 +1822,9 @@
       "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/787",
       "reason": "DIVERGENTE dal 2026-08-18, rimisurato il 2026-09-04 su `origin/main` dei due repo: sito `615eb909aef5dc12` (361.252 byte), qui `fcb9ec8865bc6bf6` (393.684 byte). La voce era `identical` con baseline `5dbca2532ac754ab` per lato (la riconciliazione di `AI_MODELS_PREFER` del 2026-08-18, `valerielinc-ops#6004` + `#418`), ma da allora ENTRAMBI i lati si sono mossi in modo indipendente e quel `mode` e' diventato una bugia di INSTRADAMENTO: `identical` promette «la fix si fa sul sito e scende copiabile qui», e non e' piu' vero in nessuna delle due direzioni. Qui vive, e sul sito NON esiste, tutta la classificazione dell'host irraggiungibile con il cooldown a causa persistente — `classifyHostUnreachable`, `HOST_UNREACHABLE_CODES`, `_isHostUnreachableExempt`, `classifyTransientResolver` / `RESOLVER_FLAP_*`, `COOLDOWN_SEVERITY` / `PROVIDER_COOLDOWN_*`, l'opt-out di `recordScore` (issue #475, #630, #767, #769, #770, #781, #783, #802, #803): il tag `hostUnreachable` compare 15 volte qui e ZERO nella copia del sito. Dal lato opposto il sito ha il ledger delle correzioni di ranking (`_rankingCorrections`, `_consumeUnvalidatedSuccess`) e i segmenti di testo dell'assistant, che qui non ci sono. Le due conseguenze del mode sbagliato sono opposte e tutte e due costose: una fix su questo ramo instradata «sul sito» non troverebbe la' nemmeno il codice da toccare, e un mirror sito->corpus che applicasse la voce alla lettera riporterebbe indietro il file cancellando #475 e #767. `adapted` e' la dichiarazione onesta finche' i due lati non vengono riconciliati (parent #787), e non abbassa niente: la baseline del 2026-08-18 NON viene rigenerata — `--init` riscriverebbe TUTTE le voci del manifest dichiarando allineato cio' che nessuno ha letto — quindi `loop-drift-check` continua a emettere `both-moved` / `actionable: true` su questa voce, e un `site-ahead` futuro chiedera' di rileggere e riapplicare a mano invece di copiare sopra.",
       "baseline": {
-        "site": "5dbca2532ac754ab",
-        "corpus": "5dbca2532ac754ab",
-        "alignedAt": "2026-08-18"
+        "site": "4f5d339918426b43",
+        "corpus": "a29eafc434638d4c",
+        "alignedAt": "2026-09-20"
       }
     },
     {
@@ -2088,9 +2088,9 @@
       "sitePath": "scripts/lib/detect-language.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "e9d1b7896c24df17",
-        "corpus": "e9d1b7896c24df17",
-        "alignedAt": "2026-08-09"
+        "site": "cc0f178cef34f188",
+        "corpus": "cc0f178cef34f188",
+        "alignedAt": "2026-09-20"
       }
     },
     {
@@ -2308,12 +2308,13 @@
     {
       "path": "generator/scripts/lib/free-translate.mjs",
       "sitePath": "scripts/lib/free-translate.mjs",
-      "mode": "identical",
+      "mode": "adapted",
       "baseline": {
-        "site": "aeaa602722dd062f",
-        "corpus": "aeaa602722dd062f",
-        "alignedAt": "2026-08-09"
-      }
+        "site": "37ec8b868eb9a730",
+        "corpus": "a7ec2a7ee7533fc3",
+        "alignedAt": "2026-09-20"
+      },
+      "reason": "Il corpus conserva adattamenti propri della cascata di traduzione (fingerprint delle capability per il memo eventi, neutralità dei tier opzionali non configurati, retry OAuth Google Cloud, attribuzione rung/durata e rifiuto dei payload OPUS-MT troncati); la copia byte-identica del sito cancellerebbe questi comportamenti e rende rossi i test di passthrough del corpus. In questa PR si portano la normalizzazione tedesca `frau:mann`, il guard sui sentinel mangled e il confronto con la sorgente raw prima della normalizzazione, mantenendo gli adattamenti locali dichiarati."
     },
     {
       "path": "generator/scripts/lib/google-service-account-token.mjs",
@@ -2454,9 +2455,9 @@
       "sitePath": "scripts/lib/local-opus-mt.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "5a4560459057675c",
-        "corpus": "5a4560459057675c",
-        "alignedAt": "2026-08-09"
+        "site": "615ec4aee4ff9a9d",
+        "corpus": "615ec4aee4ff9a9d",
+        "alignedAt": "2026-09-20"
       }
     },
     {
@@ -2716,9 +2717,9 @@
       "sitePath": "scripts/lib/translation-glossary.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "96607fe11ac8a312",
-        "corpus": "96607fe11ac8a312",
-        "alignedAt": "2026-09-01"
+        "site": "2f13be14632d23d5",
+        "corpus": "2f13be14632d23d5",
+        "alignedAt": "2026-09-20"
       }
     },
     {
@@ -3536,9 +3537,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-20.yml",
       "mode": "identical",
       "baseline": {
-        "site": "633cc36ce07e93e4",
-        "corpus": "633cc36ce07e93e4",
-        "alignedAt": "2026-09-19"
+        "site": "bf5085750a3fb0f2",
+        "corpus": "bf5085750a3fb0f2",
+        "alignedAt": "2026-09-20"
       }
     },
     {
@@ -3546,9 +3547,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-21.yml",
       "mode": "identical",
       "baseline": {
-        "site": "825f988f080d7256",
-        "corpus": "825f988f080d7256",
-        "alignedAt": "2026-09-19"
+        "site": "7544849b9ab3b032",
+        "corpus": "7544849b9ab3b032",
+        "alignedAt": "2026-09-20"
       }
     },
     {
@@ -3556,9 +3557,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-22.yml",
       "mode": "identical",
       "baseline": {
-        "site": "f5388eefd07679a0",
-        "corpus": "f5388eefd07679a0",
-        "alignedAt": "2026-09-19"
+        "site": "c2aae36e4411429f",
+        "corpus": "c2aae36e4411429f",
+        "alignedAt": "2026-09-20"
       }
     },
     {
@@ -3566,9 +3567,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-23.yml",
       "mode": "identical",
       "baseline": {
-        "site": "02b8275c6916cc5e",
-        "corpus": "02b8275c6916cc5e",
-        "alignedAt": "2026-09-19"
+        "site": "7988233fbf595a84",
+        "corpus": "7988233fbf595a84",
+        "alignedAt": "2026-09-20"
       }
     },
     {
@@ -3576,9 +3577,9 @@
       "sitePath": ".github/corpus-workflows/translate-pending.yml",
       "mode": "identical",
       "baseline": {
-        "site": "3aa1b3b91b972fe4",
-        "corpus": "3aa1b3b91b972fe4",
-        "alignedAt": "2026-09-17"
+        "site": "680f356b302f21b8",
+        "corpus": "680f356b302f21b8",
+        "alignedAt": "2026-09-20"
       }
     },
     {
@@ -3588,7 +3589,7 @@
       "reason": "Il contratto trasportato dal sito e' adattato nel corpus per attestare gli artifactSha256 reali dei workflow crawler presenti qui: la copia sito 166b72214eec9faf conserva i digest della generazione precedente, mentre la baseline corpus pinna i file effettivamente verificati da generator/tests/crawler-cross-repo-artifacts.test.mjs. Non e' quindi un gemello byte-identico da sovrascrivere al trasporto successivo.",
       "baseline": {
         "site": "166b72214eec9faf",
-        "corpus": "c233108747873891",
+        "corpus": "02e8f7f9db8c98d0",
         "alignedAt": "2026-09-20"
       }
     },
@@ -3636,56 +3637,6 @@
         "site": "41a6342737247042",
         "corpus": "41a6342737247042",
         "alignedAt": "2026-09-06"
-      }
-    },
-    {
-      "path": ".github/workflows/observers/scripts/lib/canonical-json-digest.mjs",
-      "sitePath": ".github/corpus-workflows/observers/scripts/lib/canonical-json-digest.mjs",
-      "mode": "identical",
-      "baseline": {
-        "site": "a98a130d20cea211",
-        "corpus": "a98a130d20cea211",
-        "alignedAt": "2026-09-19"
-      }
-    },
-    {
-      "path": ".github/workflows/observers/scripts/lib/crawler-generation-observer-report.mjs",
-      "sitePath": ".github/corpus-workflows/observers/scripts/lib/crawler-generation-observer-report.mjs",
-      "mode": "identical",
-      "baseline": {
-        "site": "0a32d9f5ee5bc961",
-        "corpus": "0a32d9f5ee5bc961",
-        "alignedAt": "2026-09-19"
-      }
-    },
-    {
-      "path": ".github/workflows/observers/scripts/lib/crawler-generation-token.mjs",
-      "sitePath": ".github/corpus-workflows/observers/scripts/lib/crawler-generation-token.mjs",
-      "mode": "identical",
-      "baseline": {
-        "site": "4bc0d4d514be3f67",
-        "corpus": "4bc0d4d514be3f67",
-        "alignedAt": "2026-09-19"
-      }
-    },
-    {
-      "path": ".github/workflows/observers/scripts/lib/github-actions-read-client.mjs",
-      "sitePath": ".github/corpus-workflows/observers/scripts/lib/github-actions-read-client.mjs",
-      "mode": "identical",
-      "baseline": {
-        "site": "a3c0b3742061e9e1",
-        "corpus": "a3c0b3742061e9e1",
-        "alignedAt": "2026-09-19"
-      }
-    },
-    {
-      "path": ".github/workflows/observers/workflows/crawler-generation-observer-shadow.yml",
-      "sitePath": ".github/corpus-workflows/observers/workflows/crawler-generation-observer-shadow.yml",
-      "mode": "identical",
-      "baseline": {
-        "site": "41a6342737247042",
-        "corpus": "41a6342737247042",
-        "alignedAt": "2026-09-19"
       }
     },
     {
@@ -3744,8 +3695,8 @@
       "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
       "baseline": {
         "site": null,
-        "corpus": "1f8ac4d164753ebe",
-        "alignedAt": "2026-09-01"
+        "corpus": "fba84a18d4decb54",
+        "alignedAt": "2026-09-20"
       }
     },
     {

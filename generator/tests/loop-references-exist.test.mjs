@@ -252,6 +252,20 @@ const resolveToken = (token) => (token.includes('/') ? token : `${WORKFLOW_DIR}/
  *                    test «`retired` solo su file `identical`».
  */
 const DECLARED_ABSENT = {
+  '.github/workflows/housekeeping-jobs.yml :: .github/workflows/housekeeping-jobs-logic.yml': {
+    kind: 'site-only',
+    reason:
+      'Reusable workflow posseduto dal repository del sito: il caller corpus lo invoca ' +
+      'cross-repo con un ref main, quindi la sua assenza locale e intenzionale e non un ' +
+      'referente runtime mancante nel publisher.',
+  },
+  '.github/workflows/jobs-pipeline-queue-monitor.yml :: scripts/monitor-jobs-pipeline-queue.mjs': {
+    kind: 'site-only',
+    reason:
+      'Lo scanner della coda e mantenuto nel repository del sito e viene controllato nel ' +
+      'workflow dopo uno sparse checkout esplicito dal repo site; il corpus fornisce solo ' +
+      'l inventario locale dei workflow e non una seconda copia dello script.',
+  },
   'scripts/ci/prefetch-review-diff.mjs :: scripts/lib/nord-anglia-job-parser.mjs': {
     kind: 'site-only',
     reason:
