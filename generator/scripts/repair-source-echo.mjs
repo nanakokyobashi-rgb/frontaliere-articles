@@ -251,4 +251,13 @@ function main() {
   process.exitCode = verifyOnly ? 1 : 0;
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) main();
+const invokedDirectly = (() => {
+  try {
+    return fs.realpathSync(fileURLToPath(import.meta.url)) === fs.realpathSync(process.argv[1] || '');
+  } catch {
+    return false;
+  }
+})();
+if (invokedDirectly) {
+  main();
+}
