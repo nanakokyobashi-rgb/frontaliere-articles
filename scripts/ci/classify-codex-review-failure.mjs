@@ -71,10 +71,14 @@ function structuredSignals(events) {
     maxTurns: false,
     rateLimit: false,
     serverError: false,
+    cancelled: false,
     numTurns: null,
   };
   for (const event of events) {
     const failure = isFailureEvent(event);
+    if (eventType(event) === 'codex_timeout' || event?.codex_timeout === true) {
+      signals.cancelled = true;
+    }
     if (eventType(event) === 'rate_limit_event' || eventType(event) === 'rate_limit_error') {
       signals.rateLimit = true;
     }
@@ -190,6 +194,9 @@ export function classifyCodexReviewFailure({ outcome = '', raw = '' } = {}) {
       numTurns: structured.numTurns,
       source: structured.serverError ? 'structured' : 'text',
     };
+  }
+  if (structured.cancelled) {
+    return { cause: CODEX_REVIEW_FAILURE_CAUSE.CANCELLED, numTurns: structured.numTurns, source: 'structured' };
   }
   if (normalizedOutcome === 'cancelled') {
     return { cause: CODEX_REVIEW_FAILURE_CAUSE.CANCELLED, numTurns: structured.numTurns, source: 'outcome' };

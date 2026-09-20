@@ -70,3 +70,14 @@ test('post-merge-followup non porta variabili di sandbox Claude', () => {
   assert.doesNotMatch(followup.block, /CLAUDE_CODE_SUBPROCESS_ENV_SCRUB/);
   assert.doesNotMatch(followup.block, /MAX_THINKING_TOKENS/);
 });
+
+test('l’action Codex ha un watchdog interno prima del kill del runner', () => {
+  const action = readFileSync(ACTION_FILE, 'utf8');
+  assert.match(action, /\/usr\/bin\/timeout/);
+  assert.match(action, /codex_exec_timeout_seconds=900/);
+  assert.match(action, /codex_exec_kill_grace_seconds=30/);
+  assert.match(action, /\$codex_timeout_bin[\s\S]*--signal=TERM[\s\S]*--kill-after=/);
+  assert.match(action, /"\$\{codex_exec_timeout_seconds\}s" "\$codex_bin" exec/);
+  assert.match(action, /codex_timed_out=%s/);
+  assert.match(action, /CODEX_TIMED_OUT:/);
+});
