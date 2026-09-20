@@ -315,18 +315,29 @@ describe('il dedup della nota di consegna morde solo sul suo caso esatto', () =>
 // il caso normale su una issue ri-accodata — il numero mostrato all'umano e' quello
 // della PR vecchia. Il predicato vive in due posti (script + YAML) e non possono
 // importarsi: il legame va tenuto da un test (AGENTS.md #6).
-describe('selezione della PR consegnata: la piu\' recente, non la prima', () => {
+describe('identità della delivery corrente: helper unico e tri-state', () => {
   const SORTED = 'sort_by(.createdAt) | last | .number // empty';
 
-  it('lo script ordina per createdAt e non usa piu\' `.[0].number`', () => {
+  it('il marker usa l\'evidenza corrente e non il sort storico delle PR', () => {
     const src = readRoot('scripts/ci/mark-claude-terminal-outcome.mjs');
-    assert.ok(src.includes(SORTED));
+    assert.ok(src.includes('./lib/pr-delivery-evidence.mjs'));
+    assert.ok(src.includes('PR_DELIVERY_BASELINE_FILE'));
+    assert.ok(src.includes('deliveryEvidence'));
+    assert.ok(!src.includes(SORTED));
     assert.ok(!src.includes('.[0].number'));
   });
 
-  it('issue-fix.yml usa lo stesso predicato del gemello in JS', () => {
+  it('issue-fix.yml cattura/evalua/classifica col medesimo helper', () => {
     const yml = readRoot('.github/workflows/issue-fix.yml');
-    assert.ok(yml.includes(SORTED));
+    assert.ok(yml.includes('pr-delivery-evidence.mjs capture'));
+    assert.ok(yml.includes('pr-delivery-evidence.mjs evaluate'));
+    assert.ok(yml.includes('pr-delivery-evidence.mjs classify'));
+    assert.ok(yml.includes('--run-attempt "$GITHUB_RUN_ATTEMPT"'));
+    assert.ok(yml.includes('PR_DELIVERY_EVIDENCE_FILE'));
+    assert.ok(yml.includes('jq -r --arg started "$RUN_STARTED_AT"'));
+    assert.ok(yml.includes('verified-delivery'));
+    assert.ok(yml.includes('verified-none'));
+    assert.ok(!yml.includes("|| echo '{\"comments\":[]}'"));
     assert.ok(!yml.includes('fix/issue-$ISSUE" --state all --json number,state \\'));
     assert.ok(!/fix\/issue-\$ISSUE[\s\S]{0,200}?\.\[0\]\.number/.test(yml));
   });
