@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1944925/assenze-personale-salute-collaboratori-studio": {
-    "articleId": "studio-axa-assenze-psicologiche-pmi",
-    "ts": "2026-08-20T05:08:56.876Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/u9thm3lcuedlownt4isd4": {
     "articleId": "esportazioni-svizzera-luglio-2026",
     "ts": "2026-08-20T06:17:58.491Z",
@@ -2497,6 +2492,11 @@
   "https://lenews.ch/2026/09/18/swiss-voters-look-set-to-reject-neutrality-and-food-initiatives": {
     "articleId": "votazione-27-settembre-2026",
     "ts": "2026-09-19T03:45:29.889Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4093774": {
+    "articleId": "revolut-hacker-svizzera-pec",
+    "ts": "2026-09-20T06:48:51.629Z",
     "keyForm": 2
   }
 }
