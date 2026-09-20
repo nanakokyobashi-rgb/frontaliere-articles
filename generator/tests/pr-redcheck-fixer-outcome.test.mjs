@@ -5,6 +5,8 @@
  * controllate: un body diverso deve essere progresso, lo stesso body deve
  * restare non-progresso. Il secondo caso impedisce che un `gh pr edit` no-op
  * trasformi un job rosso in un falso verde.
+ * Copre anche il guard deterministico del cap round, distinguendo una
+ * snapshot stantia da uno stato malformato.
  */
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -70,6 +72,122 @@ function fakeExecutable(dir, name, source) {
   writeFileSync(file, `#!/bin/sh\n${source}\n`);
   chmodSync(file, 0o755);
 }
+
+function runRoundGuard({ roundState, expectedHead = HEAD_SHA_40, expectedBodyRevision }) {
+  const temp = mkdtempSync(path.join(os.tmpdir(), 'pr-redcheck-round-guard-'));
+  const bin = path.join(temp, 'bin');
+  mkdirSync(bin);
+  const githubOutput = path.join(temp, 'github-output');
+  writeFileSync(githubOutput, '');
+
+  fakeExecutable(bin, 'node', String.raw`
+printf '%s\n' "$FAKE_ROUND_STATE"
+`);
+  fakeExecutable(bin, 'gh', String.raw`
+case "$*" in
+  *issues/*/comments*) printf '%s\n' '[[{"body":""}]]' ;;
+  *workflow\ run*) exit 0 ;;
+  *) exit 64 ;;
+esac
+`);
+
+  const script = runScript(stepBlock('Round cap + capability guard + tier'))
+    .replaceAll('${{ steps.trusted_marker.outputs.available }}', 'true')
+    .replaceAll('${{ steps.trusted_marker.outputs.path }}', '$TRUSTED_MARKER')
+    .replaceAll('${{ needs.preflight.outputs.head_sha }}', '$EXPECTED_HEAD');
+  try {
+    const result = spawnSync('/bin/bash', ['-c', `export PATH="$TEST_BIN:$PATH"\n${script}`], {
+      cwd: ROOT,
+      env: {
+        ...process.env,
+        PATH: `${bin}:${process.env.PATH}`,
+        TEST_BIN: bin,
+        GITHUB_PAT_NANAKO: 'runtime-token',
+        GH_TOKEN: 'runtime-token',
+        REPO: 'example/repo',
+        PR_NUMBER: '7',
+        HEAD_REF: 'fix/body-outcome',
+        EXPECTED_HEAD: expectedHead,
+        EXPECTED_BODY_REVISION: expectedBodyRevision,
+        TRUSTED_MARKER: path.join(temp, 'trusted-marker.mjs'),
+        FAKE_ROUND_STATE: JSON.stringify(roundState),
+        GITHUB_OUTPUT: githubOutput,
+      },
+      encoding: 'utf8',
+      timeout: 10_000,
+    });
+    result.githubOutput = readFileSync(githubOutput, 'utf8');
+    return result;
+  } finally {
+    rmSync(temp, { recursive: true, force: true });
+  }
+}
+
+test('il guard tratta un cambio HEAD come no-op e un body-only come retry concreto', () => {
+  const body = '## Implementato\n\n- snapshot';
+  const bodyRevision = sha256(`${body}\n`);
+  const headStale = runRoundGuard({
+    roundState: { headSha: 'b'.repeat(40), bodyRevision, round: 0 },
+    expectedBodyRevision: bodyRevision,
+  });
+  assert.equal(headStale.status, 0,
+    `snapshot HEAD stantia non deve rendere rosso il job:\nstdout=${headStale.stdout}\nstderr=${headStale.stderr}`);
+  assert.match(headStale.stdout, /Snapshot PR HEAD cambiato dopo il preflight/);
+  assert.match(headStale.githubOutput, /proceed=false/);
+  assert.match(headStale.githubOutput, /retryable=false/);
+
+  const bodyStale = runRoundGuard({
+    roundState: { headSha: HEAD_SHA_40, bodyRevision: 'c'.repeat(64), round: 0 },
+    expectedBodyRevision: bodyRevision,
+  });
+  assert.equal(bodyStale.status, 0,
+    `snapshot body-only deve dispatchare un retry concreto:\nstdout=${bodyStale.stdout}\nstderr=${bodyStale.stderr}`);
+  assert.match(bodyStale.stdout, /riavvio concreto di pr-redcheck-fixer/);
+  assert.match(bodyStale.githubOutput, /proceed=false/);
+  assert.match(bodyStale.githubOutput, /retryable=true/);
+  assert.match(bodyStale.githubOutput, /retry_dispatched=true/);
+});
+
+test('il guard resta fail-closed su uno stato round o SHA atteso malformato', () => {
+  const body = '## Implementato\n\n- snapshot';
+  const bodyRevision = sha256(`${body}\n`);
+  const scenarios = [
+    {
+      roundState: { headSha: HEAD_SHA_40, bodyRevision, round: 'not-a-number' },
+      expectedHead: HEAD_SHA_40,
+      expectedBodyRevision: bodyRevision,
+    },
+    {
+      roundState: { headSha: HEAD_SHA_40, bodyRevision, round: 0 },
+      expectedHead: '',
+      expectedBodyRevision: bodyRevision,
+    },
+    {
+      roundState: { headSha: HEAD_SHA_40, bodyRevision, round: 0 },
+      expectedHead: 'not-a-sha',
+      expectedBodyRevision: bodyRevision,
+    },
+    {
+      roundState: { headSha: HEAD_SHA_40, bodyRevision, round: 0 },
+      expectedHead: HEAD_SHA_40,
+      expectedBodyRevision: '',
+    },
+    {
+      roundState: { headSha: HEAD_SHA_40, bodyRevision, round: 0 },
+      expectedHead: HEAD_SHA_40,
+      expectedBodyRevision: 'not-a-sha',
+    },
+  ];
+
+  for (const scenario of scenarios) {
+    const result = runRoundGuard(scenario);
+    assert.equal(result.status, 1,
+      `stato round/SHA malformato non deve autorizzare Claude:\nstdout=${result.stdout}\nstderr=${result.stderr}`);
+    assert.match(result.stdout, /Round REDCHECK_FIX_ROUND malformato/);
+    assert.match(result.githubOutput, /proceed=false/);
+    assert.match(result.githubOutput, /retryable=true/);
+  }
+});
 
 function runClassifier({
   baseBody,
@@ -374,6 +492,21 @@ test('i fixer di PR serializzano la PR senza sfrattare la pending gemella', () =
   assert.notEqual(redcheckGroup, redflagGroup,
     'i workflow devono evitare una coda condivisa che sfratta la pending gemella');
   assert.match(redcheckGroup || '', /^redcheck-fix-/);
+  assert.match(
+    WORKFLOW,
+    /workflow_dispatch:\n\s+inputs:\n\s+pr:[\s\S]*?\n\s+head_ref:\n\s+description:/,
+    'il redispatch deve ricevere il branch oltre al numero PR',
+  );
+  assert.match(
+    WORKFLOW,
+    /group: redcheck-fix-\$\{\{ github\.event\.pull_request\.head\.ref \|\| github\.event\.workflow_run\.head_branch \|\| github\.event\.inputs\.head_ref \}\}/,
+    'workflow_run e workflow_dispatch devono condividere la chiave basata sul branch',
+  );
+  assert.match(
+    WORKFLOW,
+    /gh workflow run pr-redcheck-fixer\.yml[\s\S]*--field "pr=\$PR_NUMBER" \\\n\s+--field "head_ref=\$HEAD_REF"/,
+    'il retry body-only deve passare lo stesso branch della run originaria',
+  );
   assert.match(
     redflagGroup || '',
     /^redflag-fix-pr-\$\{\{ inputs\.pr \|\| github\.event\.pull_request\.number \|\| 'unknown' \}\}$/,
