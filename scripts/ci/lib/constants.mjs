@@ -324,8 +324,11 @@ export function isCodexFallbackReview(review) {
   const user = review?.user;
   const author = review?.author;
   const reviewer = user ?? author;
-  const login = user ? String(reviewer?.login || '') : normalizedBotLogin(reviewer?.login);
-  return CODEX_REVIEWER_LOGIN_RE.test(login)
+  const login = normalizedBotLogin(reviewer?.login);
+  const botIdentity = user?.type === 'Bot'
+    || (!user && author && CODEX_REVIEWER_LOGIN_RE.test(login));
+  return botIdentity
+    && CODEX_REVIEWER_LOGIN_RE.test(login)
     && String(review.body || '').includes(CODEX_REVIEW_MARKER);
 }
 
