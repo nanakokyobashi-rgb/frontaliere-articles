@@ -448,6 +448,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
+          HEAD_REF: ${{ needs.preflight.outputs.head_ref }}
           EXPECTED_BODY_REVISION: ${{ needs.preflight.outputs.body_revision }}
         run: |
           set -uo pipefail
@@ -503,18 +504,22 @@ jobs:
             echo "retryable=true" >> "$GITHUB_OUTPUT"
             exit 1
           fi
-          # Il preflight ha catturato HEAD e body prima del checkout. Se nel
-          # frattempo la PR è avanzata, il marker helper restituisce uno
-          # snapshot valido ma diverso: è un no-op, non un failure del ciclo.
-          # Un oggetto non strutturato o un round invalido resta invece
-          # fail-closed, perché non possiamo calcolare il cap in sicurezza.
+          # Il preflight ha catturato HEAD e body prima del checkout. SHA attesi
+          # vuoti o non canonici sono malformati: non possono trasformare un
+          # marker valido in uno stale verde. Un cambio HEAD è invece una race
+          # esterna e resta un no-op; un cambio body-only richiede un retry
+          # concreto perché il relativo workflow non emette un nuovo run da sé.
           if ! round_state_status=$(printf '%s' "$round_state" | jq -er \
             --arg expected "${{ needs.preflight.outputs.head_sha }}" \
             --arg expected_body "$EXPECTED_BODY_REVISION" --argjson max "$MAX_ROUNDS" \
-            'if type != "object" then "malformed"
-             elif (.headSha | type) != "string" or (.bodyRevision | type) != "string" or (.round | type) != "number" then "malformed"
+            'def sha40: if type == "string" then test("^[0-9a-f]{40}$") else false end;
+             def sha64: if type == "string" then test("^[0-9a-f]{64}$") else false end;
+             if (($expected | sha40) | not) or (($expected_body | sha64) | not) then "malformed"
+             elif type != "object" then "malformed"
+             elif ((.headSha | sha40) | not) or ((.bodyRevision | sha64) | not) or (.round | type) != "number" then "malformed"
              elif (.round | floor) != .round or .round < 0 or .round > $max then "malformed"
-             elif .headSha != $expected or .bodyRevision != $expected_body then "stale"
+             elif .headSha != $expected then "head-stale"
+             elif .bodyRevision != $expected_body then "body-stale"
              else ("current:" + (.round | tostring)) end'); then
             echo "::error::Round REDCHECK_FIX_ROUND non classificabile rispetto a HEAD, body o cap: nessun Codex, claim/lease rilasciati dal cleanup, stato retryable."
             echo "proceed=false" >> "$GITHUB_OUTPUT"
@@ -523,11 +528,34 @@ jobs:
             exit 1
           fi
           case "$round_state_status" in
-            stale)
-              echo "::notice::Snapshot PR HEAD/body cambiato dopo il preflight → redcheck skip (no-op), senza consumare un round."
+            head-stale)
+              echo "::notice::Snapshot PR HEAD cambiato dopo il preflight → redcheck skip (no-op), senza consumare un round."
               echo "proceed=false" >> "$GITHUB_OUTPUT"
               echo "marker_verified=false" >> "$GITHUB_OUTPUT"
               echo "retryable=false" >> "$GITHUB_OUTPUT"
+              exit 0
+              ;;
+            body-stale)
+              echo "::notice::Snapshot bodyRevision cambiato dopo il preflight → riavvio concreto di pr-redcheck-fixer sullo snapshot corrente."
+              if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then
+                echo "::error::Retry body-only non dispatchabile: GITHUB_PAT_NANAKO assente. Stato retryable fail-closed."
+                echo "proceed=false" >> "$GITHUB_OUTPUT"
+                echo "marker_verified=false" >> "$GITHUB_OUTPUT"
+                echo "retryable=true" >> "$GITHUB_OUTPUT"
+                exit 1
+              fi
+              if ! GH_TOKEN="$GITHUB_PAT_NANAKO" gh workflow run pr-redcheck-fixer.yml \
+                --repo "$REPO" --ref "$HEAD_REF" --field "pr=$PR_NUMBER"; then
+                echo "::error::Retry body-only non dispatchato: gh workflow run non verificato. Stato retryable fail-closed."
+                echo "proceed=false" >> "$GITHUB_OUTPUT"
+                echo "marker_verified=false" >> "$GITHUB_OUTPUT"
+                echo "retryable=true" >> "$GITHUB_OUTPUT"
+                exit 1
+              fi
+              echo "proceed=false" >> "$GITHUB_OUTPUT"
+              echo "marker_verified=false" >> "$GITHUB_OUTPUT"
+              echo "retryable=true" >> "$GITHUB_OUTPUT"
+              echo "retry_dispatched=true" >> "$GITHUB_OUTPUT"
               exit 0
               ;;
             current:*)

@@ -86,6 +86,7 @@ printf '%s\n' "$FAKE_ROUND_STATE"
   fakeExecutable(bin, 'gh', String.raw`
 case "$*" in
   *issues/*/comments*) printf '%s\n' '[[{"body":""}]]' ;;
+  *workflow\ run*) exit 0 ;;
   *) exit 64 ;;
 esac
 `);
@@ -105,6 +106,7 @@ esac
         GH_TOKEN: 'runtime-token',
         REPO: 'example/repo',
         PR_NUMBER: '7',
+        HEAD_REF: 'fix/body-outcome',
         EXPECTED_HEAD: expectedHead,
         EXPECTED_BODY_REVISION: expectedBodyRevision,
         TRUSTED_MARKER: path.join(temp, 'trusted-marker.mjs'),
@@ -121,42 +123,70 @@ esac
   }
 }
 
-test('il guard tratta un cambio HEAD/body dopo il preflight come no-op verde', () => {
+test('il guard tratta un cambio HEAD come no-op e un body-only come retry concreto', () => {
+  const body = '## Implementato\n\n- snapshot';
+  const bodyRevision = sha256(`${body}\n`);
+  const headStale = runRoundGuard({
+    roundState: { headSha: 'b'.repeat(40), bodyRevision, round: 0 },
+    expectedBodyRevision: bodyRevision,
+  });
+  assert.equal(headStale.status, 0,
+    `snapshot HEAD stantia non deve rendere rosso il job:\nstdout=${headStale.stdout}\nstderr=${headStale.stderr}`);
+  assert.match(headStale.stdout, /Snapshot PR HEAD cambiato dopo il preflight/);
+  assert.match(headStale.githubOutput, /proceed=false/);
+  assert.match(headStale.githubOutput, /retryable=false/);
+
+  const bodyStale = runRoundGuard({
+    roundState: { headSha: HEAD_SHA_40, bodyRevision: 'c'.repeat(64), round: 0 },
+    expectedBodyRevision: bodyRevision,
+  });
+  assert.equal(bodyStale.status, 0,
+    `snapshot body-only deve dispatchare un retry concreto:\nstdout=${bodyStale.stdout}\nstderr=${bodyStale.stderr}`);
+  assert.match(bodyStale.stdout, /riavvio concreto di pr-redcheck-fixer/);
+  assert.match(bodyStale.githubOutput, /proceed=false/);
+  assert.match(bodyStale.githubOutput, /retryable=true/);
+  assert.match(bodyStale.githubOutput, /retry_dispatched=true/);
+});
+
+test('il guard resta fail-closed su uno stato round o SHA atteso malformato', () => {
   const body = '## Implementato\n\n- snapshot';
   const bodyRevision = sha256(`${body}\n`);
   const scenarios = [
-    { headSha: 'b'.repeat(40), bodyRevision, round: 0 },
-    { headSha: HEAD_SHA_40, bodyRevision: 'c'.repeat(64), round: 0 },
+    {
+      roundState: { headSha: HEAD_SHA_40, bodyRevision, round: 'not-a-number' },
+      expectedHead: HEAD_SHA_40,
+      expectedBodyRevision: bodyRevision,
+    },
+    {
+      roundState: { headSha: HEAD_SHA_40, bodyRevision, round: 0 },
+      expectedHead: '',
+      expectedBodyRevision: bodyRevision,
+    },
+    {
+      roundState: { headSha: HEAD_SHA_40, bodyRevision, round: 0 },
+      expectedHead: 'not-a-sha',
+      expectedBodyRevision: bodyRevision,
+    },
+    {
+      roundState: { headSha: HEAD_SHA_40, bodyRevision, round: 0 },
+      expectedHead: HEAD_SHA_40,
+      expectedBodyRevision: '',
+    },
+    {
+      roundState: { headSha: HEAD_SHA_40, bodyRevision, round: 0 },
+      expectedHead: HEAD_SHA_40,
+      expectedBodyRevision: 'not-a-sha',
+    },
   ];
 
-  for (const roundState of scenarios) {
-    const result = runRoundGuard({
-      roundState,
-      expectedBodyRevision: bodyRevision,
-    });
-    assert.equal(result.status, 0,
-      `snapshot stantia non deve rendere rosso il job:\nstdout=${result.stdout}\nstderr=${result.stderr}`);
-    assert.match(result.stdout, /Snapshot PR HEAD\/body cambiato dopo il preflight/);
+  for (const scenario of scenarios) {
+    const result = runRoundGuard(scenario);
+    assert.equal(result.status, 1,
+      `stato round/SHA malformato non deve autorizzare Claude:\nstdout=${result.stdout}\nstderr=${result.stderr}`);
+    assert.match(result.stdout, /Round REDCHECK_FIX_ROUND malformato/);
     assert.match(result.githubOutput, /proceed=false/);
-    assert.match(result.githubOutput, /retryable=false/);
+    assert.match(result.githubOutput, /retryable=true/);
   }
-});
-
-test('il guard resta fail-closed su uno stato round malformato', () => {
-  const body = '## Implementato\n\n- snapshot';
-  const result = runRoundGuard({
-    roundState: {
-      headSha: HEAD_SHA_40,
-      bodyRevision: sha256(`${body}\n`),
-      round: 'not-a-number',
-    },
-    expectedBodyRevision: sha256(`${body}\n`),
-  });
-  assert.equal(result.status, 1,
-    `stato round malformato non deve autorizzare Claude:\nstdout=${result.stdout}\nstderr=${result.stderr}`);
-  assert.match(result.stdout, /Round REDCHECK_FIX_ROUND malformato/);
-  assert.match(result.githubOutput, /proceed=false/);
-  assert.match(result.githubOutput, /retryable=true/);
 });
 
 function runClassifier({
