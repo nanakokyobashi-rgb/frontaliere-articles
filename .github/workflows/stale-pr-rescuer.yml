@@ -310,20 +310,56 @@ jobs:
                 if (.details_url | type) != "string" then null
                 else try (.details_url | capture("^https://github[.]com/[^/]+/[^/]+/actions/runs/(?<id>[1-9][0-9]*)/job/[1-9][0-9]*$").id) catch null
                 end;
+              def parse_time:
+                if type != "string" or length == 0 then null
+                else (try (sub("\\.[0-9]+Z$"; "Z") | fromdateiso8601) catch null)
+                end;
+              def valid_created_at:
+                (.created_at == null)
+                or ((.created_at | parse_time) != null);
+              def valid_run_attempt:
+                (.run_attempt == null)
+                or ((.run_attempt | type) == "number"
+                  and (.run_attempt | floor == . and . >= 1));
+              def valid_suite($expected):
+                (.check_suite == null)
+                or ((.check_suite | type) == "object"
+                  and (.check_suite.id | type) == "number"
+                  and (.check_suite.id | floor == . and . >= 1)
+                  and ((.check_suite.head_sha == null)
+                    or ((.check_suite.head_sha | type) == "string"
+                      and (.check_suite.head_sha | ascii_downcase) == ($expected | ascii_downcase))));
+              def valid_external_id:
+                (.external_id == null)
+                or ((.external_id | type) == "string"
+                  and (.external_id | test("^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"; "i")));
               def generation:
-                if (.created_at | type) == "string"
-                   and (.created_at | length) > 0
-                   and (try (.created_at | fromdateiso8601) catch null) != null
-                then {source: "timestamp", order: (.created_at | fromdateiso8601)}
+                if (.created_at | parse_time) != null
+                then {source: "timestamp", order: (.created_at | parse_time)}
+                elif (.run_attempt | type) == "number"
+                   and (.run_attempt | floor == . and . >= 1)
+                then {source: "attempt", order: .run_attempt}
                 else (workflow_id) as $id
                   | if $id == null then null else {source: "workflow", order: ($id | tonumber)} end
                 end;
+              def correlation_valid($expected):
+                (valid_created_at and valid_run_attempt and valid_suite($expected) and valid_external_id)
+                and (
+                  ((.created_at | parse_time) != null)
+                  or ((.run_attempt | type) == "number"
+                    and (.run_attempt | floor == . and . >= 1))
+                  or ((workflow_id != null)
+                    and (.check_suite | type) == "object"
+                    and (.external_id | type) == "string"
+                    and (.external_id | test("^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"; "i")))
+                );
               def invalid_run($expected):
                 if (.head_sha | type) != "string" then true
                 elif (.head_sha | ascii_downcase) != ($expected | ascii_downcase) then true
                 elif (.id | type) != "number" then true
                 elif .id < 1 then true
                 elif ((.id | floor) != .id) then true
+                elif (correlation_valid($expected) | not) then true
                 elif (generation == null) then true
                 elif (.status != "completed" and .status != "queued"
                       and .status != "in_progress" and .status != "requested"
@@ -341,7 +377,7 @@ jobs:
                 elif (([$all[] | .id] | unique | length) != ($all | length)) then {conclusion: "none", pending: 1}
                 else ($all | map(. + {generation: generation})) as $with_generation
                   | if ([ $with_generation[] | .generation.source ] | unique | length) != 1 then {conclusion: "none", pending: 1}
-                    else ($with_generation | map(select(.status == "completed" and .conclusion != "skipped"))) as $verdicts
+                    else ($with_generation | map(select(.status != "completed" or .conclusion != "skipped"))) as $verdicts
                       | if ($verdicts | length) == 0 then {conclusion: "none", pending: 1}
                         else ($verdicts | sort_by([.generation.order, .id]) | last) as $latest
                           | if $latest.status == "completed"

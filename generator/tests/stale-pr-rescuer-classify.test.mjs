@@ -967,6 +967,38 @@ test('#314 — un rerun vecchio che finisce dopo non oscura la generazione nuova
     `Il rerun vecchio concluso dopo non deve diventare il check rosso.\n${body}`);
 });
 
+test('#314 — una generazione nuova pending blocca il verdetto completato vecchio', opts, () => {
+  const r = runScan({
+    prs: openPr(),
+    checks: {
+      total_count: 2,
+      check_runs: [
+        {
+          id: 5102,
+          name: CHECK_NAME,
+          status: 'in_progress',
+          head_sha: HEAD_SHA,
+          created_at: isoAgo(1),
+          completed_at: null,
+          conclusion: null,
+        },
+        {
+          id: 5101,
+          name: CHECK_NAME,
+          status: 'completed',
+          head_sha: HEAD_SHA,
+          created_at: isoAgo(3),
+          completed_at: isoAgo(2),
+          conclusion: 'success',
+        },
+      ],
+    },
+    reviews: reviews({ commit: OLD_SHA, body: 'un finding, niente LGTM' }),
+  });
+  assert.deepEqual(r.comments, [], `La generazione nuova è ancora pending: nessun rescue.\n${r.stdout}`);
+  assert.deepEqual(r.labeled, [], `Il verdetto vecchio non deve produrre una mutation.\n${r.stdout}`);
+});
+
 test('#314 — identità non verificabile: nessun verdetto silenzioso', opts, () => {
   const r = runScan({
     prs: openPr(),
@@ -1002,6 +1034,8 @@ test('#314 — shape REST senza timestamp: il workflow id ordina la generazione'
           completed_at: isoAgo(2),
           conclusion: 'success',
           details_url: 'https://github.com/nanakokyobashi-rgb/frontaliere-articles/actions/runs/2002/job/701',
+          check_suite: { id: 701 },
+          external_id: '00000000-0000-4000-8000-000000000701',
         },
         {
           id: 799,
@@ -1012,6 +1046,8 @@ test('#314 — shape REST senza timestamp: il workflow id ordina la generazione'
           completed_at: isoAgo(1),
           conclusion: 'failure',
           details_url: 'https://github.com/nanakokyobashi-rgb/frontaliere-articles/actions/runs/2001/job/799',
+          check_suite: { id: 799 },
+          external_id: '00000000-0000-4000-8000-000000000799',
         },
       ],
     },

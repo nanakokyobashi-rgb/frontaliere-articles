@@ -37,6 +37,8 @@ function run({
   if (workflowRunId !== undefined) {
     value.created_at = null;
     value.details_url = `https://github.com/owner/repo/actions/runs/${workflowRunId}/job/${id}`;
+    value.check_suite = { id };
+    value.external_id = `00000000-0000-4000-8000-${String(id).padStart(12, '0')}`;
   }
   return value;
 }
@@ -133,8 +135,11 @@ test('head SHA misti, id duplicato o metadati invalidi sono ambiguous e fail-clo
   const cases = [
     [valid, run({ id: 501, conclusion: 'failure', createdAt: '2026-09-20T13:01:00Z', headSha: 'b'.repeat(40) })],
     [valid, { ...valid, conclusion: 'failure' }],
+    [valid, { ...valid, details_url: 'https://github.com/owner/repo/actions/runs/2001/job/501' }],
+    [valid, { ...valid, external_id: '00000000-0000-4000-8000-000000000501' }],
     [{ ...valid, created_at: 'not-a-date' }],
     [{ ...valid, created_at: null }],
+    [{ ...valid, external_id: 'not-a-uuid' }],
     [{ ...valid, id: undefined }],
   ];
 

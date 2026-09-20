@@ -39,6 +39,7 @@ import {
 
 const COMMIT_SHA_RE = /^[0-9a-f]{40}$/i;
 const WORKFLOW_RUN_ID_RE = /^[1-9][0-9]*$/;
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const COMPLETED_RUN_STATUS = 'completed';
 const PENDING_RUN_STATUSES = new Set(['queued', 'in_progress', 'requested', 'waiting', 'pending']);
 
@@ -97,6 +98,42 @@ function generationMetadata(run) {
   if (typeof run.head_sha !== 'string' || !COMMIT_SHA_RE.test(run.head_sha)) return null;
   if (run.status !== COMPLETED_RUN_STATUS && !PENDING_RUN_STATUSES.has(run.status)) return null;
 
+  let checkSuiteId = null;
+  let checkSuiteHeadSha = null;
+  if (Object.hasOwn(run, 'check_suite') && run.check_suite !== null
+      && run.check_suite !== undefined) {
+    const suite = run.check_suite;
+    if (!suite || typeof suite !== 'object' || Array.isArray(suite)
+        || !Number.isSafeInteger(suite.id) || suite.id <= 0) return null;
+    checkSuiteId = suite.id;
+    if (Object.hasOwn(suite, 'head_sha') && suite.head_sha !== null
+        && suite.head_sha !== undefined) {
+      if (typeof suite.head_sha !== 'string' || !COMMIT_SHA_RE.test(suite.head_sha)
+          || suite.head_sha.toLowerCase() !== run.head_sha.toLowerCase()) return null;
+      checkSuiteHeadSha = suite.head_sha.toLowerCase();
+    }
+    if (Object.hasOwn(suite, 'created_at') && suite.created_at !== null
+        && suite.created_at !== undefined && !validTimestamp(suite.created_at)) {
+      return null;
+    }
+  }
+
+  let externalId = null;
+  if (Object.hasOwn(run, 'external_id') && run.external_id !== null
+      && run.external_id !== undefined) {
+    if (typeof run.external_id !== 'string' || !UUID_RE.test(run.external_id.trim())) {
+      return null;
+    }
+    externalId = run.external_id.trim().toLowerCase();
+  }
+
+  let detailsUrl = null;
+  if (Object.hasOwn(run, 'details_url') && run.details_url !== null
+      && run.details_url !== undefined) {
+    if (typeof run.details_url !== 'string' || run.details_url.trim().length === 0) return null;
+    detailsUrl = run.details_url.trim();
+  }
+
   let createdAt = null;
   if (Object.hasOwn(run, 'created_at') && run.created_at !== null && run.created_at !== undefined) {
     if (!validTimestamp(run.created_at)) return null;
@@ -114,7 +151,7 @@ function generationMetadata(run) {
     if (!validTimestamp(run.completed_at)) return null;
   }
 
-  const workflowRunId = workflowRunIdFromDetailsUrl(run.details_url);
+  const workflowRunId = workflowRunIdFromDetailsUrl(detailsUrl);
 
   // Il solo check-run id è una chiave unica, non una prova sufficiente della
   // generazione: alcune forme REST omettono timestamp e attempt e possono
@@ -123,6 +160,11 @@ function generationMetadata(run) {
   // quello, un attempt verificato resta utilizzabile. Altrimenti non si sceglie
   // silenziosamente fra generazioni concorrenti.
   if (createdAt === null && runAttempt === null && workflowRunId === null) return null;
+  // A timestamp-less raw check-runs response is only correlatable when the
+  // existing Actions identity is intact: check_suite + external_id + the job
+  // details URL. The check-run id alone is not a workflow generation key.
+  if (createdAt === null && workflowRunId !== null
+      && (checkSuiteId === null || externalId === null)) return null;
 
   return {
     id: run.id,
@@ -131,6 +173,10 @@ function generationMetadata(run) {
     runAttempt,
     source: createdAt !== null ? 'timestamp' : workflowRunId !== null ? 'workflow-run' : 'attempt',
     workflowRunId,
+    detailsUrl,
+    externalId,
+    checkSuiteId,
+    checkSuiteHeadSha,
   };
 }
 
@@ -143,12 +189,12 @@ function compareGenerations(left, right) {
   if (left.createdAt !== null && right.createdAt !== null && left.createdAt !== right.createdAt) {
     return left.createdAt - right.createdAt;
   }
+  if (left.runAttempt !== null && right.runAttempt !== null && left.runAttempt !== right.runAttempt) {
+    return left.runAttempt - right.runAttempt;
+  }
   if (left.workflowRunId !== null && right.workflowRunId !== null) {
     const workflowOrder = compareDecimalIds(left.workflowRunId, right.workflowRunId);
     if (workflowOrder !== 0) return workflowOrder;
-  }
-  if (left.runAttempt !== null && right.runAttempt !== null && left.runAttempt !== right.runAttempt) {
-    return left.runAttempt - right.runAttempt;
   }
   return left.id - right.id;
 }
@@ -159,7 +205,12 @@ function sameRunIdentity(left, right) {
     && left.conclusion === right.conclusion
     && left.created_at === right.created_at
     && left.completed_at === right.completed_at
-    && left.run_attempt === right.run_attempt;
+    && left.run_attempt === right.run_attempt
+    && (left.details_url ?? null) === (right.details_url ?? null)
+    && (typeof left.external_id === 'string' ? left.external_id.trim().toLowerCase() : null)
+      === (typeof right.external_id === 'string' ? right.external_id.trim().toLowerCase() : null)
+    && (left.check_suite?.id ?? null) === (right.check_suite?.id ?? null)
+    && (left.check_suite?.head_sha ?? null) === (right.check_suite?.head_sha ?? null);
 }
 
 /**
