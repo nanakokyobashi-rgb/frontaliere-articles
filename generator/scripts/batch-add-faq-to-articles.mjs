@@ -18,7 +18,7 @@
  * Progress is saved to data/batch-faq-progress.json for resumability.
  */
 
-import { readFileSync, writeFileSync, readdirSync, existsSync, renameSync, unlinkSync } from 'fs';
+import { readFileSync, writeFileSync, readdirSync, existsSync, renameSync, unlinkSync, realpathSync } from 'fs';
 import { resolve, basename, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
@@ -1577,8 +1577,17 @@ async function main(argv = process.argv.slice(2)) {
 // Only auto-run the batch job when this file is executed directly (`node
 // batch-add-faq-to-articles.mjs`) — NOT when it's imported elsewhere just to
 // reuse `generateFaqIT` (e.g. publish-journalist-article.mjs), which would
-// otherwise trigger the entire batch scan as an import side effect.
-if (import.meta.url === `file://${process.argv[1]}`) {
+// otherwise trigger the entire batch scan as an import side effect. Node
+// canonicalizes import.meta.url but keeps a symlink in argv[1], so compare
+// their real paths rather than their spellings.
+const invokedDirectly = (() => {
+  try {
+    return realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1] || '');
+  } catch {
+    return false;
+  }
+})();
+if (invokedDirectly) {
   main().catch(async err => {
     console.error(`\n💥 Fatal error: ${err.message}`);
     console.error(err.stack);
