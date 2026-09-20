@@ -835,7 +835,7 @@ async function _getGitHubModelsCatalog(apiKey, timeout) {
     } catch (error) {
       throw _githubModelsCatalogTransportError(error?.message || 'errore di trasporto');
     }
-    const raw = await res.text().catch(() => '');
+    const raw = await res.text();
     const lower = raw.toLowerCase();
     if (!res.ok) {
       if (res.status === GH_MODELS_BROWNOUT_STATUS || lower.includes('github_models_retirement_brownout')) {
@@ -6814,7 +6814,7 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
         }
       }
 
-      const raw = await res.text().catch(() => '');
+      const raw = await res.text();
 
       if (!res.ok) {
         // Daily limit — mark exhausted immediately. When a caller still has
@@ -6914,14 +6914,26 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
         throw new Error(`[${displayModel}] HTTP ${res.status}: ${raw.slice(0, 300)}`);
       }
 
-      // Parse response
-      const data = JSON.parse(raw);
+      // Parse response. An HTTP-200 body that cannot be decoded is a content
+      // failure, not a transport success: let callLLM feed it to the content
+      // breaker instead of allowing a free retry loop to revive a zombie model.
+      let data;
+      try {
+        data = JSON.parse(raw);
+      } catch (error) {
+        error.contentFailure = true;
+        throw error;
+      }
       let text = data?.choices?.[0]?.message?.content || '';
       // Guard: some providers (e.g. Cloudflare) return non-string content (array, object).
       // Surface as a proper error so the retry/exhaustion path handles it instead of crashing
       // with "text.replace is not a function" inside stripThinkTags (observed: CF_LLAMA_4_SCOUT,
       // CF_QWEN_25_CODER_32B — latent for remaining CF models until this guard lands).
-      if (text && typeof text !== 'string') throw new Error(`[${displayModel}] non-string content: ${typeof text}`);
+      if (text && typeof text !== 'string') {
+        const error = new Error(`[${displayModel}] non-string content: ${typeof text}`);
+        error.contentFailure = true;
+        throw error;
+      }
       // Strip <think> reasoning tags — apply universally (safe: no valid
       // translation output contains <think> XML; catches models not yet in
       // REASONING_MODELS set that still emit chain-of-thought tags)
@@ -6933,7 +6945,9 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
           await sleep(attempt * 1200);
           continue;
         }
-        throw new Error(`[${displayModel}] Empty response after ${opts.maxRetriesPerModel} attempts`);
+        const error = new Error(`[${displayModel}] Empty response after ${opts.maxRetriesPerModel} attempts`);
+        error.contentFailure = true;
+        throw error;
       }
 
       _stats.successes++;
@@ -6947,6 +6961,11 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
       if (e.message?.includes('Daily request limit')) throw e;
       // Re-throw non-retryable errors immediately (unknown model, context limit)
       if (e.nonRetryable) throw e;
+      // HTTP 200 with malformed/empty/non-string content is deterministic for
+      // this model. Retrying inside the same call only recreates the zombie
+      // loop; callLLM() records the content failure and its breaker decides
+      // when to exclude the model for the rest of the run.
+      if (e.contentFailure) throw e;
       // Il tag va posato PRIMA di ogni `throw`, non dentro il ramo che i soli
       // tentativi non-finali raggiungono (#769): con `maxRetriesPerModel: 1`
       // — valore legittimo e usato — il primo tentativo e' gia' l'ultimo,
@@ -8310,7 +8329,7 @@ async function _callGeminiRaw(model, messages, opts) {
       });
       responseReceived = true;
 
-      const raw = await res.text().catch(() => '');
+      const raw = await res.text();
 
       if (!res.ok) {
         // Quota / rate-limit — mark exhausted if it looks permanent
@@ -8368,8 +8387,15 @@ async function _callGeminiRaw(model, messages, opts) {
         throw new Error(`[${model}] HTTP ${res.status}: ${raw.slice(0, 300)}`);
       }
 
-      // Parse response — skip "thought" parts
-      const data = JSON.parse(raw);
+      // Parse response — skip "thought" parts. A malformed HTTP-200 payload
+      // is a content failure and participates in the model breaker.
+      let data;
+      try {
+        data = JSON.parse(raw);
+      } catch (error) {
+        error.contentFailure = true;
+        throw error;
+      }
       const text = data?.candidates?.[0]?.content?.parts?.find((p) => p.text && !p.thought)?.text || '';
       if (!text) {
         if (attempt < opts.maxRetriesPerModel) {
@@ -8378,7 +8404,9 @@ async function _callGeminiRaw(model, messages, opts) {
           await sleep(attempt * 1200);
           continue;
         }
-        throw new Error(`[${model}] Empty response after ${opts.maxRetriesPerModel} attempts`);
+        const error = new Error(`[${model}] Empty response after ${opts.maxRetriesPerModel} attempts`);
+        error.contentFailure = true;
+        throw error;
       }
 
       _stats.successes++;
@@ -8390,6 +8418,7 @@ async function _callGeminiRaw(model, messages, opts) {
       }
       if (e.message?.includes('Daily quota')) throw e;
       if (e.nonRetryable) throw e;
+      if (e.contentFailure) throw e;
       // Tag prima del `throw` dell'ultimo tentativo — gemello della riga in
       // _callOpenAICompatible, stessa ragione (#769).
       const unreachableCode = classifyHostUnreachable(e);
@@ -9049,6 +9078,10 @@ export async function callLLM(messages, opts = {}) {
         },
       );
       _recordLastResortOutcome(model, 'failed');
+      const contentFailure = e.contentFailure === true;
+      if (contentFailure) {
+        recordModelContentFailure(model, { recordScore: _shouldRecordScore(o) });
+      }
 
       // claude CLI binary missing (spawn ENOENT — install step failed/was
       // skipped). Unlike quota/timeout exhaustion this can't self-heal mid-run
@@ -9420,7 +9453,7 @@ export async function callLLM(messages, opts = {}) {
       // Gemello del ramo di successo: gate sul PARAMETRO, cosi' il fallimento
       // resta contato nel tally di run anche per un chiamante diagnostico
       // (see DEFAULT_OPTS.recordScore).
-      recordModelFailure(model, {
+      if (!contentFailure) recordModelFailure(model, {
         nonRetryable: !!e.nonRetryable,
         exhausted: isExhausted || isTimeoutFailure,
         transportOnly,

@@ -1,0 +1,63 @@
+name: jobs-pipeline-queue-monitor
+
+# The real queue lives in this publisher repository: translate-pending and
+# recovery workflows here consume the corpus pool. The observer script stays
+# sourced from the site repository so queue math and issue formatting have one
+# implementation, while this checkout supplies the local workflow inventory.
+on:
+  schedule:
+    - cron: '25 * * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: jobs-pipeline-queue-monitor
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  actions: read
+  issues: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout publisher workflows
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+
+      - name: Checkout observer source
+        uses: actions/checkout@v5
+        with:
+          repository: valerielinc-ops/frontaliere-si-o-no
+          ref: main
+          path: observer-source
+          fetch-depth: 1
+          sparse-checkout: |
+            scripts/monitor-jobs-pipeline-queue.mjs
+            scripts/lib
+          sparse-checkout-cone-mode: true
+
+      - name: Scan queue depth, wait, and utilization
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          WORKFLOWS_DIR: .github/workflows
+        run: node observer-source/scripts/monitor-jobs-pipeline-queue.mjs
+
+      - name: Report unexpected scan failure to GitHub Issues
+        if: failure()
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node observer-source/scripts/lib/github-issue-creator.mjs \
+            --title "CI Failure: ${{ github.workflow }}" \
+            --description "## jobs-pipeline-queue-monitor crashato
+          **Run:** https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          **Trigger:** ${{ github.event_name }}" \
+            --priority 3 \
+            --label Bug \
+            --workflow "${{ github.workflow }}"
