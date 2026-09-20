@@ -12,7 +12,7 @@
  */
 import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
-import { REDFLAG_IMPORTANT_RE, REVIEWER_BOT_LOGIN_RE } from './lib/constants.mjs';
+import { isManagedReview, REDFLAG_IMPORTANT_RE } from './lib/constants.mjs';
 import { fetchPrFiles } from './lib/fetchPrFiles.mjs';
 import { createGithubIssue } from '../lib/github-issue-creator.mjs';
 import { evaluateBodyContract } from '../lib/pr-body-contract-eval.mjs';
@@ -611,10 +611,7 @@ function reviewHistoryContext(repo, pr, headSha) {
       // reviewer PRIMARIO di questo repo: gli id precedenti e il delta
       // sarebbero usciti vuoti su ogni re-review reale, e la regola sarebbe
       // stata un no-op che non protegge nulla.
-      .filter((review) => review?.user?.type === 'Bot'
-        && (REVIEWER_BOT_LOGIN_RE.test(String(review?.user?.login || ''))
-          || (/^github-actions\[bot\]$/iu.test(String(review?.user?.login || ''))
-            && String(review?.body || '').includes('<!-- CODEX_FALLBACK_REVIEW -->')))
+      .filter((review) => isManagedReview(review)
         && String(review?.state || '') !== 'PENDING'
         && String(review?.state || '') !== 'DISMISSED')
       // L'ordine dell'array REST non e' un contratto: si normalizza per

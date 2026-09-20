@@ -283,21 +283,27 @@ export const REVIEWER_BOT_LOGIN_RE = /^(claude|frontaliere-automation)/i;
 export const REVIEWER_BOT_LOGIN_JQ = `test("${REVIEWER_BOT_LOGIN_RE.source}";"i")`;
 
 /**
- * Predicato sul reviewer, gemello di quello del sito (`scripts/ci/lib/constants.mjs`
- * :126 la'). Vive qui e non nel chiamante perche' `REVIEWER_BOT_LOGIN_RE` e'
- * dichiarata sorgente unica del filtro, e un chiamante che rifacesse il test a
- * mano diventerebbe una seconda definizione da tenere allineata.
+ * Allowlist esatta per le review REST. Il metadata `user.type` puo' mancare
+ * nella serializzazione, quindi il login bot-shaped e' la prova primaria.
+ */
+export const REST_REVIEWER_BOT_LOGIN_RE = /^(?:claude\[bot\]|frontaliere-automation\[bot\])$/i;
+
+/**
+ * Predicato REST sul reviewer. Vive qui e non nel chiamante perche'
+ * `REST_REVIEWER_BOT_LOGIN_RE` e' la sorgente unica del filtro REST, e un
+ * chiamante che rifacesse il test a mano diventerebbe una seconda definizione
+ * da tenere allineata.
  *
  * NON e' una copia byte-identica del sito, e non deve esserlo: `constants.mjs`
- * e' voce `adapted` nel manifest, e le due `REVIEWER_BOT_LOGIN_RE` divergono per
- * scelta (qui e' un prefisso, sul sito e' ancorata con `[bot]` esplicito). Il
- * predicato e' identico, l'insieme che accetta segue la regex del proprio repo.
+ * e' voce `adapted` nel manifest. Il predicato REST resta ancorato ai due
+ * login `[bot]` esatti; il predicato GraphQL sottostante conserva la forma
+ * senza suffisso usata da `author.login`.
  *
- * La congiunzione con `type === 'Bot'` e' la parte che conta: la regex da sola
- * accetterebbe un utente umano che si chiami `claude-qualcosa`.
+ * Per REST il tipo e' metadata opzionale: l'allowlist esatta `[bot]` evita
+ * comunque di accettare un login umano simile.
  */
 export function isReviewerBot(user) {
-  return user?.type === 'Bot' && REVIEWER_BOT_LOGIN_RE.test(user.login || '');
+  return REST_REVIEWER_BOT_LOGIN_RE.test(user?.login || '');
 }
 
 /**
@@ -318,11 +324,8 @@ export function isCodexFallbackReview(review) {
   const user = review?.user;
   const author = review?.author;
   const reviewer = user ?? author;
-  const login = normalizedBotLogin(reviewer?.login);
-  const botIdentity = user?.type === 'Bot'
-    || (!user && author && CODEX_REVIEWER_LOGIN_RE.test(login));
-  return botIdentity
-    && CODEX_REVIEWER_LOGIN_RE.test(login)
+  const login = user ? String(reviewer?.login || '') : normalizedBotLogin(reviewer?.login);
+  return CODEX_REVIEWER_LOGIN_RE.test(login)
     && String(review.body || '').includes(CODEX_REVIEW_MARKER);
 }
 
@@ -353,18 +356,17 @@ function isManagedReviewerLogin(login, type) {
 /**
  * Review riconosciuta da tutti i consumer del ciclo.
  *
- * REST (`user.login` + `type=Bot`) e GraphQL (`author.login`, spesso senza
- * `type` e senza `[bot]`) condividono la stessa normalizzazione del login.
+ * REST (`user.login` con il suffisso `[bot]`) e GraphQL (`author.login`, spesso
+ * senza `type` e senza `[bot]`) usano forme diverse dello stesso login.
  * Il percorso Codex resta sull'identità bot esatta più il marker.
  */
 export function isManagedReview(review) {
   if (isReviewerBot(review?.user)) return true;
-  // GraphQL exposes `author.login` (and sometimes `user.login`) without
-  // `type`. REST uses `user.login` + `type=Bot`. Both paths share the same
-  // login normalization so a suffix or prefix variant cannot be a managed
-  // review on one API and invisible on the other. Codex stays on exact bot
-  // identity + marker.
-  if (!reviewActorType(review) && isManagedReviewerLogin(reviewLogin(review), '')) {
+  // A REST payload has `user`; only the GraphQL-shaped payload uses `author`
+  // and the unsuffixed login fallback. This prevents a missing REST type from
+  // reopening the old prefix allowlist.
+  if (!review?.user && !reviewActorType(review)
+      && isManagedReviewerLogin(reviewLogin(review), '')) {
     return true;
   }
   return isCodexFallbackReview(review);

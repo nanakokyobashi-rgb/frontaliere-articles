@@ -41,21 +41,25 @@ test('il predicato jq è derivato dalla regex, non riscritto', () => {
   assert.equal(REVIEWER_BOT_LOGIN_JQ, `test("${REVIEWER_BOT_LOGIN_RE.source}";"i")`);
 });
 
-test('il tipo Bot è parte del predicato condiviso', () => {
+test('il login REST esatto basta anche senza user.type', () => {
   assert.equal(isReviewerBot({ type: 'Bot', login: 'claude[bot]' }), true);
+  assert.equal(isReviewerBot({ login: 'frontaliere-automation[bot]' }), true);
+  assert.equal(isReviewerBot({ type: 'User', login: 'claude[bot]' }), true);
+  assert.equal(isReviewerBot({ type: 'Bot', login: 'frontaliere-automation' }), false);
   assert.equal(isReviewerBot({ type: 'User', login: 'claude-human' }), false);
-  assert.equal(isReviewerBot({ type: 'User', login: 'frontaliere-automation-human' }), false);
 });
 
 test('isManagedReview allinea login GraphQL e REST dopo la normalizzazione', () => {
   assert.equal(isManagedReview({ user: { type: 'Bot', login: 'claude[bot]' } }), true);
-  assert.equal(isManagedReview({ user: { type: 'Bot', login: 'frontaliere-automation' } }), true);
+  assert.equal(isManagedReview({ user: { login: 'frontaliere-automation[bot]' } }), true);
+  assert.equal(isManagedReview({ user: { type: 'Bot', login: 'frontaliere-automation' } }), false);
   assert.equal(isManagedReview({ author: { login: 'claude' } }), true);
   assert.equal(isManagedReview({ author: { login: 'claude[bot]' } }), true);
+  assert.equal(isManagedReview({ author: { login: 'frontaliere-automation' } }), true);
   assert.equal(isManagedReview({ author: { login: 'frontaliere-automation[bot]' } }), true);
   assert.equal(isManagedReview({ user: { login: 'claude[bot]' } }), true);
   assert.equal(isManagedReview({ author: { login: 'claude-code[bot]' } }), true);
-  assert.equal(isManagedReview({ user: { type: 'Bot', login: 'claude-code[bot]' } }), true);
+  assert.equal(isManagedReview({ user: { type: 'Bot', login: 'claude-code[bot]' } }), false);
   assert.equal(isManagedReview({ author: { login: 'claude-human' } }), false);
   assert.equal(isManagedReview({ user: { type: 'User', login: 'claude-human' } }), false);
   assert.equal(
@@ -80,7 +84,13 @@ test('i workflow di review rispettano il contratto di identità specifico', () =
   ];
   for (const wf of workflows) {
     const src = read(wf);
-    assert.ok(src.includes(REVIEWER_BOT_LOGIN_JQ), `${wf} deve filtrare le review con ${REVIEWER_BOT_LOGIN_JQ}`);
+    assert.equal(
+      src.split(STRICT_REVIEWER_BOT_LOGIN_JQ).length - 1,
+      1,
+      `${wf} deve usare una allowlist REST esatta`,
+    );
+    assert.doesNotMatch(src, /select\(\.user\.type == "Bot"\)/,
+      `${wf} non deve dipendere da user.type`);
     assert.ok(
       !/test\("claude";"i"\)/.test(src),
       `${wf} filtra ancora il solo login claude`,
@@ -114,13 +124,10 @@ test('i workflow di review rispettano il contratto di identità specifico', () =
     ['.github/workflows/pr-redflag-fixer.yml', 1],
   ]) {
     const src = read(wf);
-    // The Codex fallback is an explicit second branch of the jq `select`, so
-    // the shared reviewer predicate is no longer the whole selector string.
-    const loginSelector = REVIEWER_BOT_LOGIN_JQ;
-    const botTypeSelector = 'select(.user.type == "Bot")';
+    const loginSelector = STRICT_REVIEWER_BOT_LOGIN_JQ;
     const count = (needle) => src.split(needle).length - 1;
     assert.equal(count(loginSelector), expected, `${wf} deve avere ${expected} selettori login reviewer`);
-    assert.equal(count(botTypeSelector), expected, `${wf} deve accoppiare user.type == Bot a ogni selettore reviewer`);
+    assert.equal(count('select(.user.type == "Bot")'), 0, `${wf} non deve filtrare user.type`);
   }
 });
 

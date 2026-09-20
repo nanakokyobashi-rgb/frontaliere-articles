@@ -35,9 +35,8 @@ concurrency:
 # `reviewer-bot-login.test.mjs` ne verifica il legame con la regex JS.
 env:
   REVIEWER_BOT_REVIEW_FILTER: |
-    select(.user.type == "Bot")
-    | select(
-        ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
+    select(
+        ((.user.login // "") | test("^(claude\\[bot\\]|frontaliere-automation\\[bot\\])$";"i"))
         or (((.user.login // "") | test("^github-actions\\[bot\\]$";"i"))
             and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
       )
@@ -75,12 +74,10 @@ jobs:
     # un vero 🔴 Important quel salto era invisibile ovunque (issue #5534, PR
     # #5515 — check-run "skipped", zero commenti, zero label). Qui restano solo i
     # pre-filtri economici che non richiedono distinguere lo scope.
-    # Reviewer set = `claude*` + `frontaliere-automation*`, plus the explicitly
-    # marked Codex fallback emitted by `github-actions[bot]` (prefisso: la
-    # stessa App si presenta senza il suffisso `[bot]` in GraphQL). A job-level
-    # `startsWith(..., 'claude')` alone skipped App-bot 🔴 on the site
-    # (PRs #7610/#7609); this workflow is `adapted`, so the same login
-    # hole is closed here, not by waiting for an identical twin. Lo STESSO set
+    # Reviewer set REST = `claude[bot]` + `frontaliere-automation[bot]`, plus
+    # the explicitly marked Codex fallback emitted by `github-actions[bot]`.
+    # Il metadata opzionale `user.type` non e' un gate: il login esatto e' la
+    # prova di identita'. Lo STESSO set
     # vale per i consumer della review — bundle sotto, `auto-merge-eval.mjs`,
     # `review-gate.mjs`, `pr-autorebase.mjs`, `stale-pr-rescuer.yml` — via
     # `REVIEWER_BOT_LOGIN_RE`/`_JQ` in `scripts/ci/lib/constants.mjs`, e per i
@@ -88,10 +85,9 @@ jobs:
     if: |
       github.event_name == 'workflow_dispatch' ||
       (
-        github.event.review.user.type == 'Bot' &&
         (
-          startsWith(github.event.review.user.login, 'claude') ||
-          startsWith(github.event.review.user.login, 'frontaliere-automation') ||
+          github.event.review.user.login == 'claude[bot]' ||
+          github.event.review.user.login == 'frontaliere-automation[bot]' ||
           (github.event.review.user.login == 'github-actions[bot]' &&
            contains(github.event.review.body, '<!-- CODEX_FALLBACK_REVIEW -->'))
         ) &&
@@ -287,12 +283,8 @@ jobs:
             echo "::error::Review body non decodificabile: il redflag fixer resta fail-closed."
             echo "actionable=false" >> "$GITHUB_OUTPUT"; exit 0
           fi
-          if [ "$REVIEW_USER_TYPE" != "Bot" ]; then
-            echo "Review non proveniente da un reviewer Bot qualificante → skip 🔴-fix."
-            echo "actionable=false" >> "$GITHUB_OUTPUT"; exit 0
-          fi
           case "$REVIEW_USER_LOGIN" in
-            claude*|frontaliere-automation*) ;;
+            'claude[bot]'|'frontaliere-automation[bot]') ;;
             'github-actions[bot]')
               case "$REVIEW_BODY" in
                 *'<!-- CODEX_FALLBACK_REVIEW -->'*) ;;
