@@ -1522,9 +1522,11 @@ export function detectWideScopeAggregate(title, body, { min = WIDE_SCOPE_MIN_ITE
 // l'overlap è transitorio — la PR bloccante può mergiarsi, il candidato diventa
 // promuovibile al tick successivo senza aver consumato quota Claude).
 //
-// CONSERVATIVO (bias a PROMUOVERE — un falso-skip ritarderebbe un fix legittimo):
+// CONSERVATIVO (fail-closed sulla lettura, ma senza park terminale):
 //   - Nessun path di codice estratto dal body → PROMUOVI (nessun segnale).
-//   - Errori gh (pr list / pr diff) → PROMUOVI (transiente, non bloccare su glitch).
+//   - Errori gh (pr list / pr diff) → lascia IN CODA il candidato con path
+//     estratti (retryable/zero-agent): una lista parziale non prova l'assenza
+//     di overlap e non deve aprire fixer concorrenti.
 //   - Solo path CODE_PATH_RE (scripts/build-plugins/services/…) — mai su data-blob
 //     (data/**) o workflow (.github/**) già gestiti dalle pre-flight sopra.
 
@@ -1742,6 +1744,7 @@ export function groupIssueQueue(issues, {
  * @returns {{prNumber:number, prTitle:string, file:string}|null}
  */
 export function findOverlapFile(paths, prFilesMap) {
+  if (!(prFilesMap instanceof Map)) return null;
   for (const [prNumber, { title, files }] of prFilesMap) {
     for (const p of paths) {
       if (files.has(p)) return { prNumber, prTitle: String(title || ''), file: p };
@@ -3477,27 +3480,74 @@ function loadOpenGroupPrs() {
 }
 
 /**
+ * Valida una fotografia di PR aperte e delle rispettive diff.
+ *
+ * `[]` è una risposta valida (nessuna PR aperta); `null`, una forma non-array,
+ * un record incompleto o una diff non stringa sono indisponibilità. La forma
+ * pura permette di iniettare ogni failure senza invocare GitHub nei test e
+ * impedisce che il consumer torni accidentalmente alla vecchia mappa vuota.
+ *
+ * @param {unknown} openPrs
+ * @param {Map<number, string>} diffOutputs
+ * @returns {{ok:true,map:Map<number, {title:string, body:string, files:Set<string>}>}|{ok:false,map:null,reason:string}}
+ */
+export function openPrFilesScanDecision(openPrs, diffOutputs) {
+  if (!Array.isArray(openPrs)) {
+    return { ok: false, map: null, reason: 'open-pr-list-unavailable' };
+  }
+  if (!(diffOutputs instanceof Map)) {
+    return { ok: false, map: null, reason: 'open-pr-diffs-unavailable' };
+  }
+  const map = new Map();
+  for (const pr of openPrs) {
+    const number = Number(pr?.number);
+    if (!Number.isSafeInteger(number) || number <= 0 || typeof pr?.title !== 'string'
+      || (pr?.body !== null && typeof pr?.body !== 'string')) {
+      return { ok: false, map: null, reason: 'open-pr-list-invalid-entry' };
+    }
+    const diffOut = diffOutputs.get(number);
+    if (typeof diffOut !== 'string') {
+      return { ok: false, map: null, reason: `open-pr-diff-unavailable-${number}` };
+    }
+    const files = new Set(diffOut.split('\n').map((line) => line.trim()).filter(Boolean));
+    map.set(number, { title: pr.title, body: pr.body || '', files });
+  }
+  return { ok: true, map };
+}
+
+/**
  * Carica la mappa PR aperta → {title, body, files modificati} per il ciclo drainer
- * corrente. In caso di errore gh → mappa vuota (bias a promuovere: mai bloccare
- * una promozione per un glitch API transiente).
- * @returns {Map<number, {title:string, body:string, files:Set<string>}>}
+ * corrente. Una lista vuota verificata è una scansione valida; un errore nella
+ * lista o in una diff è indisponibilità, non «nessuna PR». Il chiamante deve
+ * quindi lasciare il candidato in coda senza prendere lease o claim: promuovere
+ * con una scansione parziale potrebbe creare due fixer concorrenti sullo stesso
+ * file.
+ * @returns {{ok:true,map:Map<number, {title:string, body:string, files:Set<string>}>}|{ok:false,map:null,reason:string}}
  */
 function loadOpenPrFilesMap() {
-  const map = new Map();
   let openPrs;
   try {
-    openPrs = gh(['pr', 'list', '--state', 'open', '--json', 'number,title,body', '--limit', '50']);
-  } catch { return map; } // lista PR non disponibile → mappa vuota → promuovi
-  for (const pr of Array.isArray(openPrs) ? openPrs : []) {
+    const raw = gh([
+      'api', `repos/${REPO}/pulls?state=open&per_page=100`,
+      '--paginate', '--slurp',
+    ]);
+    openPrs = flattenPaginatedOpenPrs(raw);
+  } catch { return { ok: false, map: null, reason: 'open-pr-list-unavailable' }; }
+  if (!Array.isArray(openPrs)) {
+    return { ok: false, map: null, reason: 'open-pr-list-unavailable' };
+  }
+  const diffOutputs = new Map();
+  for (const pr of openPrs) {
+    const number = Number(pr?.number);
+    if (!Number.isSafeInteger(number) || number <= 0) continue;
     try {
       const diffOut = gh(['pr', 'diff', String(pr.number), '--name-only'], { json: false });
-      const files = new Set(
-        String(diffOut || '').split('\n').map((l) => l.trim()).filter(Boolean),
-      );
-      map.set(pr.number, { title: String(pr.title || ''), body: String(pr.body || ''), files });
-    } catch { /* diff non disponibile → salta questa PR (bias a promuovere) */ }
+      diffOutputs.set(number, diffOut);
+    } catch {
+      return { ok: false, map: null, reason: `open-pr-diff-unavailable-${number}` };
+    }
   }
-  return map;
+  return openPrFilesScanDecision(openPrs, diffOutputs);
 }
 
 /** Wrapper: qualunque sia il `return` con cui `runDrain` esce, il riepilogo di
@@ -4953,8 +5003,9 @@ export function runDrain() {
   }
 
   let overlapSkipped = 0;
+  let overlapScanBlocked = 0;
   let proofSkipped = 0;
-  let prFilesMap = null; // lazy: caricato al primo candidato con path estratti, poi cached
+  let prFilesScan = null; // lazy: caricato al primo candidato con path estratti, poi cached
   let dailyOpenPrScan = null; // complete/paginated scan; null means not needed yet
 
   // --- GROUPING (B19): pianifica prima, arma solo il leader ------------------
@@ -5004,8 +5055,13 @@ export function runDrain() {
       for (const issue of group.issues) {
         const paths = extractCodePaths(`${issue.title || ''}\n${issue.body || ''}`);
         if (paths.length > 0) {
-          if (prFilesMap === null) prFilesMap = loadOpenPrFilesMap();
-          const overlap = findOverlapFile(paths, prFilesMap);
+          if (prFilesScan === null) prFilesScan = loadOpenPrFilesMap();
+          if (!prFilesScan.ok) {
+            console.log(`GROUP-MEMBER-SKIP #${issue.number}: scansione overlap PR non disponibile (${prFilesScan.reason}) → membro lasciato in coda (retryable, zero-agent)`);
+            overlapScanBlocked++;
+            continue;
+          }
+          const overlap = findOverlapFile(paths, prFilesScan.map);
           if (overlap) {
             console.log(`GROUP-MEMBER-SKIP #${issue.number} (file \`${overlap.file}\` in-volo in PR #${overlap.prNumber}) → il gruppo non ingloba il membro transitorio`);
             continue;
@@ -5335,8 +5391,13 @@ export function runDrain() {
     // Check: overlap-file con PR aperta (escalation #3810). Zero-Claude, pre-promozione.
     const candPaths = extractCodePaths(`${cand.title}\n${body}`);
     if (candPaths.length > 0) {
-      if (prFilesMap === null) prFilesMap = loadOpenPrFilesMap(); // lazy init, cached per ciclo
-      const overlap = findOverlapFile(candPaths, prFilesMap);
+      if (prFilesScan === null) prFilesScan = loadOpenPrFilesMap(); // lazy init, cached per ciclo
+      if (!prFilesScan.ok) {
+        console.log(`OVERLAP-SCAN-BLOCK #${cand.number}: scansione PR non disponibile (${prFilesScan.reason}) → resta in coda (retryable, blocked-zero-agent)`);
+        overlapScanBlocked++;
+        continue;
+      }
+      const overlap = findOverlapFile(candPaths, prFilesScan.map);
       if (overlap) {
         console.log(`OVERLAP-SKIP #${cand.number} (file \`${overlap.file}\` in-volo in PR #${overlap.prNumber} "${overlap.prTitle.slice(0, 40)}") → rinvio al prossimo tick`);
         overlapSkipped++;
@@ -5399,6 +5460,7 @@ export function runDrain() {
   }
   const skipNote = [
     overlapSkipped ? `${overlapSkipped} overlap-file` : '',
+    overlapScanBlocked ? `${overlapScanBlocked} scansione overlap non verificabile` : '',
     proofSkipped ? `${proofSkipped} in attesa di prova in produzione` : '',
   ].filter(Boolean).join(' + ');
   // Gated su `promoted === 0`: col cap a piu' di 1 il ciclo puo' esaurire la

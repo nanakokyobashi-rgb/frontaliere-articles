@@ -1,7 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { cpSync, mkdtempSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
+import { spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 
 import { parseCodexUsage } from '../../scripts/ci/codex-usage-summary.mjs';
+
+const SUMMARY = fileURLToPath(new URL('../../scripts/ci/codex-usage-summary.mjs', import.meta.url));
 
 test('stream vuoto: telemetry fail-open senza invocazione', () => {
   assert.deepEqual(
@@ -20,6 +27,41 @@ test('stream vuoto: telemetry fail-open senza invocazione', () => {
     },
   );
 });
+
+test('la CLI resta attiva quando il parser viene invocato tramite un path symlink', () => {
+  const root = mkdtempSync(path.join(tmpdir(), 'codex-usage-summary-'));
+  try {
+    const copied = path.join(root, 'summary.mjs');
+    const linked = path.join(root, 'summary-link.mjs');
+    const diagnostics = path.join(root, 'diagnostics.jsonl');
+    cpSync(SUMMARY, copied);
+    symlinkSync(copied, linked);
+    writeFileSync(diagnostics, `${JSON.stringify({
+      type: 'turn.completed',
+      usage: { input_tokens: 3, cached_input_tokens: 2, output_tokens: 1 },
+    })}\n`);
+
+    const result = spawnSync(process.execPath, [linked, diagnostics, 'success', '7'], {
+      encoding: 'utf8',
+    });
+    assert.equal(result.status, 0, result.stderr);
+    assert.deepEqual(JSON.parse(result.stdout), {
+      codex_invocations: 1,
+      usage_available: true,
+      input_tokens: 3,
+      cached_input_tokens: 2,
+      output_tokens: 1,
+      duration_ms: 7,
+      outcome: 'success',
+      stream_status: 'complete',
+      malformed_lines: 0,
+      usage_records: 1,
+    });
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('un turno Codex aggrega solo usage numerici e la durata del processo', () => {
   const stream = [
     JSON.stringify({ type: 'thread.started', thread_id: 'thread-1' }),
