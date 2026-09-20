@@ -170,6 +170,18 @@ test('la ri-traduzione accetta una sezione riconosciuta con uno o due fatti non 
   }
 });
 
+test('la ri-traduzione rifiuta fatti vuoti, solo punteggiatura e prosa vacua residua', () => {
+  for (const body1 of [
+    ['## Fatti chiave', '- **Cosa**:'].join('\n'),
+    ['## Fatti chiave', '- **Cosa**: —'].join('\n'),
+    ['## Fatti chiave', '- **Importo**: Gli importi non sono ancora specificati.'].join('\n'),
+  ]) {
+    const guarded = guardTranslatedKeyFacts({ body1 });
+    assert.equal(guarded.changed, false);
+    assert.match(guarded.issue, /non vuoto\/non vacuo/);
+  }
+});
+
 test('la guardia dei fatti chiave sta prima del gate e della scrittura atomica', () => {
   const source = fs.readFileSync(
     new URL('../scripts/retranslate-blocking-bodies.mjs', import.meta.url),
