@@ -37,6 +37,14 @@ for (const [file, marker] of [
       `${file}: finalizzazione non lega la prova allo stesso ID del marker`);
     assert.match(source.slice(finalVerifyAt - 500, finalVerifyAt + 700), /EXPECTED_COMMENT_ID/,
       `${file}: ID marker finale non proviene dall'output trusted del POST`);
+    const supersededAt = source.indexOf('echo "::warning::SUPERSEDED:');
+    assert.ok(supersededAt >= 0, `${file}: ramo SUPERSEDED assente`);
+    assert.match(source.slice(Math.max(0, supersededAt - 1100), supersededAt + 1600), /--delete-verified/,
+      `${file}: cleanup SUPERSEDED non usa la prova trusted dell'ID marker`);
+    assert.match(source.slice(Math.max(0, supersededAt - 1100), supersededAt + 1600), /MARKER_COMMENT_ID/,
+      `${file}: cleanup SUPERSEDED non usa l'ID restituito dal marker`);
+    assert.doesNotMatch(source, /comment_id=\$\(printf '%s' "\$comments_json"/,
+      `${file}: cleanup SUPERSEDED seleziona ancora commenti con token body-only`);
     assert.ok(source.indexOf('if: steps.guard.outputs.proceed == \'true\'', finalVerifyAt) > finalVerifyAt,
       `${file}: finalizzazione Codex non vincolata al guard`);
     assert.match(source, /jq -r ['"](?:\([^\n]*\.body|\.body)/,
@@ -49,5 +57,7 @@ test('helper marker: snapshot paginata e prova finale restano fail-closed', () =
   assert.match(helper, /const afterComments = readPr\(repo, pr\)/);
   assert.match(helper, /PR HEAD\/body cambiati durante la lettura paginata/);
   assert.match(helper, /verifyCurrentMarker/);
+  assert.match(helper, /legacy\/incompleto/);
+  assert.match(helper, /deleteVerifiedMarker/);
   assert.match(helper, /stesso ID\/autore\/body subito prima del modello/);
 });

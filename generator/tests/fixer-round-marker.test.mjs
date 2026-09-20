@@ -10,6 +10,7 @@ import { fileURLToPath } from 'node:url';
 import {
   bodyRevision,
   markerTokens,
+  verifyMarkerComment,
   verifiedCurrentRound,
   verifyPersistedMarker,
   verifyRoundMarker,
@@ -94,6 +95,14 @@ function runVerifyCurrent(fake, { marker = 'REDCHECK_FIX_ROUND', round = 1, comm
   ], { cwd: ROOT, env: fake.env, encoding: 'utf8', timeout: 10_000 });
 }
 
+function runDeleteVerified(fake, { marker = 'REDCHECK_FIX_ROUND', round = 1, commentId = 42 } = {}) {
+  return spawnSync(process.execPath, [HELPER,
+    '--delete-verified', '--repo', REPO, '--pr', PR, '--marker', marker,
+    '--round', String(round), '--comment-id', String(commentId),
+    '--expected-head', HEAD, '--expected-body-revision', BODY_SHA,
+  ], { cwd: ROOT, env: fake.env, encoding: 'utf8', timeout: 10_000 });
+}
+
 test('il marker lega round, HEAD e body revision allo stesso commento', () => {
   const tokens = markerTokens({
     marker: 'REDCHECK_FIX_ROUND', round: 1, headSha: HEAD, bodySha: BODY_SHA,
@@ -140,6 +149,52 @@ test('un marker trusted oltre il cap è un errore fail-closed', () => {
     comments: [{ id: 12, user: { login: 'fixture-bot' }, body: tokens.join('\n') }],
     marker: 'REDCHECK_FIX_ROUND', headSha: HEAD, bodySha: BODY_SHA, expectedAuthor: 'fixture-bot',
   }), /fuori intervallo/);
+});
+
+test('un marker trusted legacy senza binding HEAD/body blocca il cap fail-closed', () => {
+  for (const round of [1, 2]) {
+    assert.throws(() => verifiedCurrentRound({
+      comments: [{
+        id: 20 + round,
+        user: { login: 'fixture-bot' },
+        body: `<!-- REDCHECK_FIX_ROUND: ${round} -->\n_round legacy_`,
+      }],
+      marker: 'REDCHECK_FIX_ROUND', headSha: HEAD, bodySha: BODY_SHA, expectedAuthor: 'fixture-bot',
+    }), /legacy\/incompleto/);
+  }
+});
+
+test('il cleanup prova ID, autore e token snapshot prima del DELETE', () => {
+  const tokens = markerTokens({
+    marker: 'REDCHECK_FIX_ROUND', round: 1, headSha: HEAD, bodySha: BODY_SHA,
+  });
+  const body = `${tokens.join('\n')}\n_round 1/2_`;
+  assert.deepEqual(verifyMarkerComment({
+    comments: [{ id: 42, user: { login: 'fixture-bot' }, body }],
+    marker: 'REDCHECK_FIX_ROUND', round: 1, headSha: HEAD, bodySha: BODY_SHA,
+    expectedCommentId: 42, expectedAuthor: 'fixture-bot',
+  })?.commentId, 42);
+  assert.equal(verifyMarkerComment({
+    comments: [{ id: 43, user: { login: 'attacker' }, body }],
+    marker: 'REDCHECK_FIX_ROUND', round: 1, headSha: HEAD, bodySha: BODY_SHA,
+    expectedCommentId: 42, expectedAuthor: 'fixture-bot',
+  }), null);
+});
+
+test('la CLI del cleanup non cancella un commento preseed o concorrente', () => {
+  const tokens = markerTokens({
+    marker: 'REDCHECK_FIX_ROUND', round: 1, headSha: HEAD, bodySha: BODY_SHA,
+  });
+  const body = `${tokens.join('\n')}\n_round 1/2_`;
+  const fake = fakeGh({ comments: [{ id: 43, user: { login: 'attacker' }, body }] });
+  try {
+    const result = runDeleteVerified(fake);
+    assert.equal(result.status, 1, `${result.stdout}\n${result.stderr}`);
+    assert.match(result.stderr, /stesso ID\/autore\/body/);
+    assert.doesNotMatch(readFileSync(fake.log, 'utf8'), /issues\/comments\/42/);
+  } finally {
+    rmSync(fake.temp, { recursive: true, force: true });
+  }
 });
 
 test('la CLI del cap usa il read-back paginato e scarta preseed/stale', () => {

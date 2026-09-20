@@ -56,6 +56,15 @@ function sha256(text) {
   return createHash('sha256').update(text).digest('hex');
 }
 
+function roundMarkerComment({ marker = 'REDCHECK_FIX_ROUND', round = 1, id = 42, body }) {
+  const bodyRevision = sha256(`${body}\n`);
+  return {
+    id,
+    user: { login: 'fixture-bot' },
+    body: `<!-- ${marker}: ${round} -->\n<!-- ${marker}_HEAD: ${HEAD_SHA_40} -->\n<!-- ${marker}_BODY: ${bodyRevision} -->\n_round ${round}/2 avviato (auto)._`,
+  };
+}
+
 function fakeExecutable(dir, name, source) {
   const file = path.join(dir, name);
   writeFileSync(file, `#!/bin/sh\n${source}\n`);
@@ -74,6 +83,7 @@ function runClassifier({
   actionOutcome = 'success',
   fixRound = '',
   fixRoundMarker = 'REDCHECK_FIX_ROUND',
+  markerCommentId = '',
   commentsJson = '[]',
   claimToken = '',
   source = WORKFLOW,
@@ -94,9 +104,10 @@ case "$1 $2" in
   *) exit 64 ;;
 esac
 `);
-  fakeExecutable(bin, 'gh', String.raw`
+fakeExecutable(bin, 'gh', String.raw`
 echo "$*" >> "$GH_LOG"
 if echo "$*" | grep -q -- '-X DELETE'; then exit 0; fi
+if echo "$*" | grep -q 'api user'; then printf '{"login":"fixture-bot"}\n'; exit 0; fi
 if echo "$*" | grep -q 'pr comment'; then exit 0; fi
 if echo "$*" | grep -q 'issues/.*/comments'; then
   if echo "$*" | grep -q -- '--jq'; then
@@ -134,6 +145,10 @@ printf '%s' "$FAKE_BODY"
         ACTION_OUTCOME: actionOutcome,
         FIX_ROUND: fixRound,
         FIX_ROUND_MARKER: fixRoundMarker,
+        MARKER_COMMENT_ID: markerCommentId,
+        MARKER_HEAD: HEAD_SHA_40,
+        MARKER_BODY_REVISION: sha256(`${baseBody}\n`),
+        TRUSTED_MARKER_HELPER: path.join(ROOT, 'scripts/ci/fixer-round-marker.mjs'),
         CLAIM_TOKEN: claimToken,
         GITHUB_ENV: githubEnv,
         GH_LOG: ghLog,
@@ -382,10 +397,7 @@ test('body cambiato è progresso, body identico è non-progresso', () => {
 
 test('un push esterno supersede il round e rilascia il claim prima del ramo di errore', () => {
   const baseBody = '## Implementato\n\n- body iniziale';
-  const roundComment = {
-    id: 42,
-    body: '<!-- REDCHECK_FIX_ROUND: 1 -->\n_❌-check-fixer round 1/2 avviato (auto)._',
-  };
+  const roundComment = roundMarkerComment({ body: baseBody });
   const result = runClassifier({
     baseBody,
     currentBody: baseBody,
@@ -395,6 +407,7 @@ test('un push esterno supersede il round e rilascia il claim prima del ramo di e
     remote: 'external-sha',
     actionOutcome: 'failure',
     fixRound: '1',
+    markerCommentId: '42',
     commentsJson: JSON.stringify([roundComment, activeClaimComment()]),
     claimToken: 'tok-1',
   });
@@ -406,7 +419,7 @@ test('un push esterno supersede il round e rilascia il claim prima del ramo di e
   assert.match(result.stdout, /run SUPERSEDED/);
   assert.match(result.githubEnv, /CLAIM_STATUS=released/);
   assert.match(result.stdout, /rimborsato/);
-  assert.match(result.ghLog, /-X DELETE .*issues\/comments\/42/);
+  assert.match(result.ghLog, /api .*DELETE .*issues\/comments\/42/);
   assert.match(result.ghLog, /REDCHECK_FIX_REFUNDED: 1/);
 });
 
@@ -421,10 +434,7 @@ test('un branch solo indietro rispetto a main non è SUPERSEDED', () => {
     remote: 'pr-sha',
     actionOutcome: 'failure',
     fixRound: '1',
-    commentsJson: JSON.stringify([{
-      id: 42,
-      body: '<!-- REDCHECK_FIX_ROUND: 1 -->\n_round_',
-    }]),
+    commentsJson: JSON.stringify([roundMarkerComment({ body: baseBody })]),
   });
   assert.equal(
     result.status,
@@ -483,10 +493,10 @@ test('redflag rimborsa il marker di round su SUPERSEDED', () => {
     actionOutcome: 'failure',
     fixRound: '2',
     fixRoundMarker: 'REDFLAG_FIX_ROUND',
-    commentsJson: JSON.stringify([{
-      id: 77,
-      body: '<!-- REDFLAG_FIX_ROUND: 2 -->\n_🔴-fixer round 2/2 avviato (auto)._',
-    }]),
+    markerCommentId: '77',
+    commentsJson: JSON.stringify([roundMarkerComment({
+      marker: 'REDFLAG_FIX_ROUND', round: 2, id: 77, body: baseBody,
+    })]),
   });
   assert.equal(
     result.status,
@@ -495,6 +505,6 @@ test('redflag rimborsa il marker di round su SUPERSEDED', () => {
   );
   assert.match(result.stdout, /run SUPERSEDED/);
   assert.match(result.stdout, /rimborsato/);
-  assert.match(result.ghLog, /-X DELETE .*issues\/comments\/77/);
+  assert.match(result.ghLog, /api .*DELETE .*issues\/comments\/77/);
   assert.match(result.ghLog, /REDFLAG_FIX_REFUNDED: 2/);
 });

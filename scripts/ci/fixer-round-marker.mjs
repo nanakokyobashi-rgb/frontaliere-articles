@@ -42,10 +42,11 @@ function parseArgs(argv) {
     const arg = argv[i];
     if (!arg.startsWith('--')) throw new Error(`argomento inatteso: ${arg}`);
     const key = arg.slice(2);
-    if (key === 'help' || key === 'verify-current' || key === 'current-round') {
+    if (key === 'help' || key === 'verify-current' || key === 'current-round' || key === 'delete-verified') {
       if (key === 'help') result.help = true;
       else if (key === 'verify-current') result['verify-current'] = true;
-      else result['current-round'] = true;
+      else if (key === 'current-round') result['current-round'] = true;
+      else result['delete-verified'] = true;
       continue;
     }
     const value = argv[i + 1];
@@ -59,7 +60,7 @@ function parseArgs(argv) {
 }
 
 function usage() {
-  return 'uso: fixer-round-marker.mjs --repo owner/repo --pr N --marker NAME --round N --expected-head SHA --message TEXT | --current-round | --verify-current --marker NAME --round N --comment-id ID --expected-head SHA --expected-body-revision SHA';
+  return 'uso: fixer-round-marker.mjs --repo owner/repo --pr N --marker NAME --round N --expected-head SHA --message TEXT | --current-round | --verify-current --marker NAME --round N --comment-id ID --expected-head SHA --expected-body-revision SHA | --delete-verified --marker NAME --round N --comment-id ID --expected-head SHA --expected-body-revision SHA';
 }
 
 function runGh(args, label) {
@@ -140,6 +141,27 @@ export function verifyPersistedMarker({ comments, marker, round, headSha, bodySh
   return match ? { commentId: match.id ?? null, tokens } : null;
 }
 
+/**
+ * Prove the exact marker comment before a cleanup DELETE. This deliberately
+ * does not require the PR to still point at the marker's HEAD: SUPERSEDED
+ * cleanup runs after another writer has advanced the branch. The trusted
+ * actor, comment ID, and complete snapshot-bound marker tokens are still
+ * required, so a body-only preseed or a neighboring concurrent comment can
+ * never be selected for deletion.
+ */
+export function verifyMarkerComment({ comments, marker, round, headSha, bodySha, expectedCommentId, expectedAuthor }) {
+  if (!Number.isSafeInteger(Number(expectedCommentId)) || Number(expectedCommentId) <= 0) {
+    throw new Error('ID marker persistito mancante o non valido per il cleanup');
+  }
+  if (!expectedAuthor) throw new Error('autore marker mancante per il cleanup');
+  const tokens = markerTokens({ marker, round, headSha, bodySha });
+  const match = comments.find((comment) => Number(comment?.id) === Number(expectedCommentId)
+    && comment?.user?.login === expectedAuthor
+    && typeof comment.body === 'string'
+    && tokens.every((token) => comment.body.includes(token)));
+  return match ? { commentId: Number(match.id), author: expectedAuthor, body: match.body, tokens } : null;
+}
+
 function readMarkerActor() {
   const actor = runGhJson(['api', 'user'], 'lettura autore marker');
   const login = String(actor?.login || '');
@@ -172,9 +194,15 @@ export function verifiedCurrentRound({ comments, marker, headSha, bodySha, expec
     if (!Number.isSafeInteger(candidate) || candidate < 1 || candidate > MAX_ROUND) {
       throw new Error(`round marker fuori intervallo 1..${MAX_ROUND}`);
     }
-    if (verifyPersistedMarker({
+    const hasHeadBinding = comment.body.includes(`<!-- ${marker}_HEAD:`);
+    const hasBodyBinding = comment.body.includes(`<!-- ${marker}_BODY:`);
+    if (!hasHeadBinding || !hasBodyBinding) {
+      throw new Error(`marker ${marker}:${candidate} legacy/incompleto: binding HEAD/body assente`);
+    }
+    const persisted = verifyPersistedMarker({
       comments: [comment], marker, round: candidate, headSha, bodySha,
-    })) round = Math.max(round, candidate);
+    });
+    if (persisted) round = Math.max(round, candidate);
   }
   if (!Number.isSafeInteger(round) || round < 0 || round > MAX_ROUND) {
     throw new Error(`round corrente fuori intervallo 0..${MAX_ROUND}`);
@@ -272,6 +300,20 @@ function postComment(repo, pr, body, { refundOnDelete = null } = {}) {
 
 function deleteComment(repo, commentId) {
   runGh(['api', '--method', 'DELETE', `repos/${repo}/issues/comments/${commentId}`], 'rimborso marker round');
+}
+
+export function deleteVerifiedMarker({ repo, pr, marker, round, expectedHead, expectedBodySha, expectedCommentId }) {
+  const comments = readComments(repo, pr);
+  const author = readMarkerActor();
+  const verified = verifyMarkerComment({
+    comments, marker, round, headSha: expectedHead, bodySha: expectedBodySha,
+    expectedCommentId, expectedAuthor: author,
+  });
+  if (!verified) {
+    throw new Error('marker persistito non verificabile con stesso ID/autore/body prima del cleanup');
+  }
+  deleteComment(repo, verified.commentId);
+  return { ...verified, deletedCommentId: verified.commentId };
 }
 
 function refundMarkerName(marker) {
@@ -457,6 +499,21 @@ function main() {
       throw new Error('HEAD/body revision attese non valide');
     }
     console.log(JSON.stringify(verifyCurrentMarker({
+      repo: String(args.repo || ''), pr: String(args.pr || ''), marker, round,
+      expectedHead, expectedBodySha, expectedCommentId: commentId,
+    })));
+  } else if (args['delete-verified']) {
+    const expectedHead = String(args['expected-head'] || '').toLowerCase();
+    const expectedBodySha = String(args['expected-body-revision'] || '').toLowerCase();
+    const marker = String(args.marker || '');
+    const round = Number(args.round);
+    const commentId = Number(args['comment-id']);
+    if (!SHA_RE.test(expectedHead) || !/^[a-f0-9]{64}$/.test(expectedBodySha)
+      || !MARKER_RE.test(marker) || !Number.isSafeInteger(round) || round < 1 || round > MAX_ROUND
+      || !Number.isSafeInteger(commentId) || commentId <= 0) {
+      throw new Error('HEAD/body revision attese non valide');
+    }
+    console.log(JSON.stringify(deleteVerifiedMarker({
       repo: String(args.repo || ''), pr: String(args.pr || ''), marker, round,
       expectedHead, expectedBodySha, expectedCommentId: commentId,
     })));
