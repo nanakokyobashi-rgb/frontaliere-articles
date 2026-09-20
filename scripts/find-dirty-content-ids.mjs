@@ -117,9 +117,9 @@
 //                    in questo modo lo script torna a NON convergere)
 // Exit: 0 sempre (report vuoto = niente da fare, non e' un errore).
 
-import fs from 'node:fs';
+import fs, { realpathSync } from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 import { findControlChars, isInvalidControlCode, sanitizeHtmlDocument } from './lib/sanitize-control-chars.mjs';
 // issue #220: due predicati di sporco oltre al C0. Vedi le due sezioni piu'
 // sotto ("SEGNAPOSTO FAQ" e "RESIDUO PROPAGATO") per il perche' di ciascuno.
@@ -1097,7 +1097,15 @@ async function main() {
   }
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
+const invokedDirectly = (() => {
+  try {
+    return realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1] || '');
+  } catch {
+    return false;
+  }
+})();
+
+if (invokedDirectly) {
   main().catch((err) => {
     console.error(`::error::[find-dirty-content-ids] ${err && err.stack ? err.stack : err}`);
     process.exit(1);
