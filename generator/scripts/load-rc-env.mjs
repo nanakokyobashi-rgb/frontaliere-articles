@@ -25,7 +25,8 @@
  *     so workflows that don't have Firebase configured still work.
  */
 
-import { pathToFileURL } from 'node:url';
+import { realpathSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 
 // ─── RC Param → Env Var Mapping ──────────────────────────────────────────
 // Maps Remote Config parameter names to the environment variable names
@@ -698,8 +699,18 @@ async function main() {
   statusLog(`✅ RC secrets loaded: ${loaded} set, ${skipped} already in env, ${missing} not in RC, ${expectedAbsent} absent by design`);
 }
 
-// Only run when executed directly (not when imported by tests).
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+// Only run when executed directly (not when imported by tests). Resolve both
+// sides because Node canonicalizes the module URL but preserves a symlink in
+// argv[1].
+const invokedDirectly = (() => {
+  try {
+    return realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1] || '');
+  } catch {
+    return false;
+  }
+})();
+
+if (invokedDirectly) {
   main().catch((err) => {
     console.warn(`⚠️  load-rc-env failed: ${err?.message || 'Unknown error'}`);
     console.warn('   Falling back to environment variables / GH Secrets.');

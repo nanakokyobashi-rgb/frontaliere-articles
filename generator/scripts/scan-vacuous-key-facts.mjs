@@ -12,7 +12,7 @@
  *   node generator/scripts/scan-vacuous-key-facts.mjs --json
  */
 
-import fs from 'node:fs';
+import fs, { realpathSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
@@ -192,10 +192,15 @@ export function printReport(report, { list = false } = {}) {
   console.log(`hedged-prose ............... ${report.byKind['hedged-prose']} bullet su ${report.articlesByKind['hedged-prose'].length} articoli`);
 }
 
-const isMain = process.argv[1]
-  && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+const invokedDirectly = (() => {
+  try {
+    return realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1] || '');
+  } catch {
+    return false;
+  }
+})();
 
-if (isMain) {
+if (invokedDirectly) {
   const report = scanCorpus();
   if (process.argv.includes('--json')) {
     console.log(JSON.stringify(report, null, 2));
