@@ -353,7 +353,7 @@
       "mode": "adapted",
       "reason": "Fixture F5 della vecchia PR merged contro l'assenza di delivery nel run corrente, con prove di nuova PR, cambio HEAD, transizione OPEN -> MERGED e lookup unavailable. Il sito usa Vitest/TypeScript; il corpus mantiene node:test e il proprio fake-gh senza rete, quindi la suite è un port adattato del contratto e non un copia-incolla.",
       "baseline": {
-        "site": "0202d3472daa0de4",
+        "site": "783de6489ec92d72",
         "corpus": "fa4a9b7210c0f837",
         "alignedAt": "2026-09-20",
         "forcedAt": "2026-09-20T08:39:04.396Z"

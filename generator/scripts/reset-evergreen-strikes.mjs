@@ -41,7 +41,7 @@
  *   node generator/scripts/reset-evergreen-strikes.mjs --section=svizzera
  *   node generator/scripts/reset-evergreen-strikes.mjs --section=svizzera --apply
  */
-import fs from 'node:fs';
+import fs, { realpathSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -156,7 +156,16 @@ function main(argv) {
 }
 
 // Guardia CLI: senza, importare questo modulo da un test lo eseguirebbe davvero
-// (vedi ignore-list-semantics.test.mjs, stessa classe di difetto).
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+// (vedi ignore-list-semantics.test.mjs, stessa classe di difetto). Risolviamo
+// entrambi i lati per coprire l'invocazione via symlink.
+const invokedDirectly = (() => {
+  try {
+    return realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1] || '');
+  } catch {
+    return false;
+  }
+})();
+
+if (invokedDirectly) {
   process.exit(main(process.argv.slice(2)));
 }

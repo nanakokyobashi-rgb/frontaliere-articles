@@ -75,13 +75,13 @@ function faqDiId(testo, id) {
 // ── L'import resta senza effetti ─────────────────────────────────────────────
 //
 // MUTAZIONE: spostare `installSigtermCheckpoint()` fuori dalla guardia
-// `import.meta.url === ...` in fondo allo script → rosso.
+// `if (invokedDirectly)` in fondo allo script → rosso.
 
 test('importare il modulo non arma nessun handler di segnale', () => {
   assert.equal(process.listenerCount('SIGTERM'), 0,
     'l handler SIGTERM committa e pusha su main: non deve esistere in un processo che ha solo IMPORTATO lo script');
   const src = fs.readFileSync(SCRIPT, 'utf-8');
-  const guardia = src.indexOf('if (import.meta.url ===');
+  const guardia = src.indexOf('if (invokedDirectly)');
   assert.ok(guardia > 0, 'la guardia sull entry point deve esserci');
   // Le CHIAMATE, non la definizione: `function installSigtermCheckpoint()` sta
   // dentro `main()`, che viene invocata solo dalla guardia.
@@ -92,6 +92,42 @@ test('importare il modulo non arma nessun handler di segnale', () => {
   for (const i of chiamate) {
     assert.ok(i > main,
       'installSigtermCheckpoint() va chiamata dentro main: a module scope si arma anche su un import');
+  }
+});
+
+test('#625 i checkpoint usano il PAT senza esporlo e falliscono chiusi senza credenziale', () => {
+  const precedente = process.env.GITHUB_PAT;
+  process.env.GITHUB_PAT = 'fixture-token';
+  try {
+    const args = batch.authenticatedGitArgs(['push', 'origin', 'main']);
+    const serializzati = args.join('\0');
+    assert.match(serializzati, /credential\.helper=!f\(\)/);
+    assert.match(serializzati, /\$GITHUB_PAT/);
+    assert.ok(!serializzati.includes('fixture-token'), 'il token non deve finire negli argomenti del processo');
+    assert.match(serializzati, /GIT_TERMINAL_PROMPT|http\.https:\/\/github\.com\/\.extraheader/);
+
+    const source = fs.readFileSync(SCRIPT, 'utf-8');
+    assert.match(source, /GIT_TERMINAL_PROMPT: '0'/);
+    const sezioneCheckpoint = source.slice(source.indexOf('function gitCommitAndPush'));
+    assert.equal(
+      (sezioneCheckpoint.match(/authenticatedGit\(\[/g) || []).length,
+      3,
+      'push iniziale, pull di rebase e retry push devono condividere il helper autenticato',
+    );
+  } finally {
+    if (precedente === undefined) delete process.env.GITHUB_PAT;
+    else process.env.GITHUB_PAT = precedente;
+  }
+
+  delete process.env.GITHUB_PAT;
+  try {
+    assert.throws(
+      () => batch.authenticatedGitArgs(['push', 'origin', 'main']),
+      /GITHUB_PAT missing/,
+      'un checkpoint senza PAT non deve ripiegare su una credenziale ambientale',
+    );
+  } finally {
+    if (precedente !== undefined) process.env.GITHUB_PAT = precedente;
   }
 });
 

@@ -732,13 +732,35 @@ jobs:
             set_claim_fingerprint
             echo "skip=false" >> "$GITHUB_OUTPUT"; echo "Nessuna review terminale precedente → review piena."; exit 0
           fi
-          if ! changed=$(gh api "repos/$REPO/compare/$last...$HEAD_SHA" --jq '.files[] | .filename, (.previous_filename // empty)' 2>/dev/null); then
+          compare_json=''
+          if ! compare_json=$(gh api "repos/$REPO/compare/$last...$HEAD_SHA" 2>/dev/null); then
             set_claim_fingerprint
             echo "skip=false" >> "$GITHUB_OUTPUT"; echo "Compare illeggibile → review piena con claim (conservativo)."; exit 0
           fi
-          if [ -z "$changed" ]; then
+          # Un compare valido con files=[] prova che la HEAD contiene solo un
+          # retrigger/empty commit rispetto all'ultima review. Un'API malformata
+          # o una risposta senza lo schema `files` resta invece fail-closed:
+          # non deve diventare uno skip silenzioso.
+          if ! printf '%s' "$compare_json" | jq -e '
+            type == "object"
+            and (.files | type == "array")
+            and all(.files[];
+              type == "object"
+              and (.filename | type == "string")
+              and (.filename | length > 0)
+              and ((has("previous_filename") | not)
+                or .previous_filename == null
+                or (.previous_filename | type == "string"))
+            )
+          ' >/dev/null 2>&1; then
             set_claim_fingerprint
-            echo "skip=false" >> "$GITHUB_OUTPUT"; echo "Compare vuoto → review piena con claim (conservativo)."; exit 0
+            echo "skip=false" >> "$GITHUB_OUTPUT"; echo "Compare malformato → review piena con claim (conservativo)."; exit 0
+          fi
+          changed=$(printf '%s' "$compare_json" | jq -r '.files[] | .filename, (.previous_filename // empty)')
+          if [ -z "$changed" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "Compare valido con files=[] → contributo invariato dall'ultima review; nessuna seconda review Codex."
+            exit 0
           fi
           code=$(echo "$changed" | node scripts/ci/review-test-policy.mjs filter | grep -vE "$NONCODE_RE" || true)
           if [ -z "$code" ]; then

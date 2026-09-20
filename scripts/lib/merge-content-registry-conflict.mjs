@@ -80,9 +80,10 @@
  *     via l'articolo per un motivo che non c'entra. Un errore di sintassi
  *     RIPORTATO dal probe invece e' fatale.
  */
-import { readFileSync, writeFileSync, unlinkSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, unlinkSync, existsSync, realpathSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 // ── Analizzatore ────────────────────────────────────────────────────────────
 // Non e' un parser TypeScript completo e non deve esserlo: deve sapere dove
@@ -890,6 +891,14 @@ function main(argv) {
   return ok ? 0 : 1;
 }
 
-if (process.argv[1] && import.meta.url === `file://${process.argv[1]}`) {
+const invokedDirectly = (() => {
+  try {
+    return realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1] || '');
+  } catch {
+    return false;
+  }
+})();
+
+if (invokedDirectly) {
   process.exit(main(process.argv.slice(2)));
 }

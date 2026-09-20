@@ -5,10 +5,13 @@ import test from 'node:test';
 import {
   ISSUE_GROUP_MAX_SIZE,
   activeGroupDigests,
+  findOverlapFile,
+  flattenPaginatedOpenPrs,
   groupIssueQueue,
   isIssueGroupable,
   issueGroupInstanceLabels,
   issueGroupingKey,
+  openPrFilesScanDecision,
   openPrHeadIdentity,
   parseOpenGroupPrs,
 } from '../../scripts/ci/followup-drainer.mjs';
@@ -163,6 +166,73 @@ test('il mutex B19 qualifica ref e repository head, rifiutando fork e risposta p
     'una risposta REST senza identità completa del head deve rendere indisponibile la scansione',
   );
   assert.deepEqual(parseOpenGroupPrs([[localPr]]), [localPr]);
+});
+
+test('la scansione overlap distingue lista PR vuota valida da lista indisponibile', () => {
+  const empty = openPrFilesScanDecision([], new Map());
+  assert.equal(empty.ok, true);
+  assert.deepEqual([...empty.map.entries()], []);
+
+  const unavailable = openPrFilesScanDecision(null, new Map());
+  assert.equal(unavailable.ok, false);
+  assert.equal(unavailable.reason, 'open-pr-list-unavailable');
+  assert.equal(unavailable.map, null);
+});
+
+test('la scansione overlap usa tutte le pagine REST, oltre il limite storico di 50 PR', () => {
+  const firstPage = Array.from({ length: 50 }, (_, index) => ({
+    number: index + 1,
+    title: `fix ${index + 1}`,
+    body: '',
+  }));
+  const secondPage = [{ number: 51, title: 'fix 51', body: '' }];
+  const complete = flattenPaginatedOpenPrs([firstPage, secondPage]);
+  assert.equal(complete.length, 51);
+
+  const loader = DRAINER_SOURCE.slice(
+    DRAINER_SOURCE.indexOf('function loadOpenPrFilesMap'),
+    DRAINER_SOURCE.indexOf('/** Wrapper:', DRAINER_SOURCE.indexOf('function loadOpenPrFilesMap')),
+  );
+  assert.match(loader, /pulls\?state=open&per_page=100/);
+  assert.match(loader, /--paginate/);
+  assert.match(loader, /--slurp/);
+  assert.doesNotMatch(loader, /'pr', 'list'/);
+});
+
+test('una diff mancante o illeggibile blocca la scansione, anche con PR aperta', () => {
+  const prs = [{ number: 42, title: 'fix', body: '' }];
+  const missing = openPrFilesScanDecision(prs, new Map());
+  assert.equal(missing.ok, false);
+  assert.equal(missing.reason, 'open-pr-diff-unavailable-42');
+
+  const malformed = openPrFilesScanDecision(prs, new Map([[42, null]]));
+  assert.equal(malformed.ok, false);
+  assert.equal(malformed.reason, 'open-pr-diff-unavailable-42');
+});
+
+test('diff vuota è una scansione valida e non produce overlap', () => {
+  const scan = openPrFilesScanDecision(
+    [{ number: 42, title: 'fix', body: null }],
+    new Map([[42, '']]),
+  );
+  assert.equal(scan.ok, true);
+  assert.equal(findOverlapFile(['scripts/ci/followup-drainer.mjs'], scan.map), null);
+  assert.equal(findOverlapFile(['scripts/ci/followup-drainer.mjs'], null), null);
+});
+
+test('il drainer lascia il candidato in coda quando la scansione overlap è unavailable', () => {
+  assert.match(DRAINER_SOURCE, /OVERLAP-SCAN-BLOCK/);
+  assert.match(DRAINER_SOURCE, /retryable, blocked-zero-agent/);
+  assert.match(DRAINER_SOURCE, /overlapScanBlocked/);
+  const candidate = DRAINER_SOURCE.slice(
+    DRAINER_SOURCE.indexOf('const candPaths = extractCodePaths'),
+    DRAINER_SOURCE.indexOf('const quotaLease = reserveQuotaLease', DRAINER_SOURCE.indexOf('const candPaths = extractCodePaths')),
+  );
+  assert.ok(candidate.indexOf('OVERLAP-SCAN-BLOCK') >= 0);
+  assert.ok(
+    DRAINER_SOURCE.indexOf('OVERLAP-SCAN-BLOCK', DRAINER_SOURCE.indexOf('const candPaths = extractCodePaths'))
+      < DRAINER_SOURCE.indexOf('const quotaLease = reserveQuotaLease', DRAINER_SOURCE.indexOf('const candPaths = extractCodePaths')),
+  );
 });
 
 test('il rescue rimuove i marker B19 prima di ogni riarmo o park', () => {
