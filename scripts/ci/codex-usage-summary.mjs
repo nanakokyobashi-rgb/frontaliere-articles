@@ -11,7 +11,8 @@
  * CLI: node codex-usage-summary.mjs [diagnostics_file] [outcome] [duration_ms]
  */
 
-import fs from 'node:fs';
+import fs, { realpathSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 
 const OUTCOMES = new Set(['success', 'failure', 'cancelled', 'skipped']);
 const TOKEN_FIELDS = Object.freeze([
@@ -157,4 +158,17 @@ function main() {
   process.stdout.write(`${JSON.stringify(metrics)}\n`);
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) main();
+// Node resolves `import.meta.url` through symlinks while `process.argv[1]`
+// preserves the spelling supplied by the caller. The action invokes this
+// parser from RUNNER_TEMP, which can be a symlink on hosted runners; compare
+// canonical paths so the CLI entry point is not silently skipped.
+let invokedDirectly = false;
+if (process.argv[1]) {
+  try {
+    invokedDirectly = realpathSync(fileURLToPath(import.meta.url))
+      === realpathSync(process.argv[1]);
+  } catch {
+    invokedDirectly = false;
+  }
+}
+if (invokedDirectly) main();
