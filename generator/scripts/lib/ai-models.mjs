@@ -8396,20 +8396,16 @@ async function _callGeminiRaw(model, messages, opts) {
         error.contentFailure = true;
         throw error;
       }
-      const parts = Array.isArray(data?.candidates?.[0]?.content?.parts)
-        ? data.candidates[0].content.parts
-        : [];
-      const malformedTextPart = parts.find((part) => part
-        && typeof part === 'object'
-        && !part.thought
-        && Object.prototype.hasOwnProperty.call(part, 'text')
-        && typeof part.text !== 'string');
-      if (malformedTextPart) {
-        const error = new Error(`[${model}] non-string Gemini content: ${typeof malformedTextPart.text}`);
+      const textPart = data?.candidates?.[0]?.content?.parts?.find(
+        (part) => part && !part.thought && part.text !== undefined,
+      );
+      const textValue = textPart?.text;
+      if (textValue !== undefined && typeof textValue !== 'string') {
+        const error = new Error(`[${model}] non-string content: ${typeof textValue}`);
         error.contentFailure = true;
         throw error;
       }
-      const text = parts.find((part) => part && !part.thought && typeof part.text === 'string' && part.text)?.text || '';
+      const text = textValue || '';
       if (!text) {
         if (attempt < opts.maxRetriesPerModel) {
           _stats.retries++;
