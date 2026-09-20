@@ -594,6 +594,12 @@ runs:
         : > "$codex_diagnostics_destination"
         chmod 600 "$codex_diagnostics_destination"
         CODEX_OUTPUT="$scratch_dir/codex-last-message.txt"
+        # Publish the destinations before starting Codex.  If the bounded
+        # runner timeout interrupts this step, the always() finalizer can still
+        # parse the partial JSONL stream instead of treating the invocation as
+        # invisible.
+        printf 'codex_output=%s\ncodex_diagnostics=%s\ncodex_duration_ms=0\n' \
+          "$codex_output_destination" "$codex_diagnostics_destination" >> "$GITHUB_OUTPUT"
 
         # The bridge itself lives in the explicitly reopened scratch tree. Its
         # client contains no token; a host-side server reads the token only in
