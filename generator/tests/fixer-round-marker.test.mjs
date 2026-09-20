@@ -23,19 +23,19 @@ const BODY_SHA = bodyRevision(BODY);
 const REPO = 'example/repo';
 const PR = '7';
 
-function fakeGh({ comments, postBody = '', failComment = false, malformedPost = false, failCommentsRead = false, head = HEAD, body = BODY }) {
+function fakeGh({ comments, postBody = '', refundBody = '', failComment = false, malformedPost = false, failCommentsRead = false, head = HEAD, body = BODY }) {
   const temp = mkdtempSync(path.join(os.tmpdir(), 'fixer-round-marker-'));
   const bin = path.join(temp, 'bin');
   mkdirSync(bin);
   const log = path.join(temp, 'gh.log');
+  const postCount = path.join(temp, 'post-count');
   writeFileSync(log, '');
+  writeFileSync(postCount, '0');
   const gh = path.join(bin, 'gh');
   const commentsJson = JSON.stringify([comments]);
   const postCommand = failComment
     ? 'exit 23'
-    : malformedPost
-      ? "printf '%s\\n' '{'"
-      : 'printf \'{"id":42,"user":{"login":"fixture-bot"},"body":%s}\\n\' "$FAKE_POST_BODY"';
+    : `count=$(cat "$FAKE_POST_COUNT"); count=$((count + 1)); printf '%s\\n' "$count" > "$FAKE_POST_COUNT"; if [ "$count" -eq 1 ] && [ "$FAKE_MALFORMED_POST" = true ]; then printf '%s\\n' '{'; else body="$FAKE_POST_BODY"; [ "$count" -gt 1 ] && body="$FAKE_REFUND_BODY"; printf '{"id":42,"user":{"login":"fixture-bot"},"body":%s}\\n' "$body"; fi`;
   writeFileSync(gh, `#!/bin/sh
 echo "$*" >> "$GH_LOG"
 case "$*" in
@@ -59,7 +59,10 @@ esac
       ...process.env,
       PATH: `${bin}:${process.env.PATH}`,
       GH_LOG: log,
+      FAKE_POST_COUNT: postCount,
+      FAKE_MALFORMED_POST: String(malformedPost),
       FAKE_POST_BODY: JSON.stringify(postBody),
+      FAKE_REFUND_BODY: JSON.stringify(refundBody),
       FAKE_PR: JSON.stringify({ head: { sha: head }, body }),
     },
   };
@@ -80,6 +83,14 @@ function runHelper(fake, extra = []) {
 function runCurrentRound(fake, marker = 'REDCHECK_FIX_ROUND') {
   return spawnSync(process.execPath, [HELPER,
     '--current-round', '--repo', REPO, '--pr', PR, '--marker', marker,
+  ], { cwd: ROOT, env: fake.env, encoding: 'utf8', timeout: 10_000 });
+}
+
+function runVerifyCurrent(fake, { marker = 'REDCHECK_FIX_ROUND', round = 1, commentId = 42 } = {}) {
+  return spawnSync(process.execPath, [HELPER,
+    '--verify-current', '--repo', REPO, '--pr', PR, '--marker', marker,
+    '--round', String(round), '--comment-id', String(commentId),
+    '--expected-head', HEAD, '--expected-body-revision', BODY_SHA,
   ], { cwd: ROOT, env: fake.env, encoding: 'utf8', timeout: 10_000 });
 }
 
@@ -152,6 +163,27 @@ test('la CLI del cap usa il read-back paginato e scarta preseed/stale', () => {
   }
 });
 
+test('la verifica finale prova lo stesso ID, autore e body del marker persistito', () => {
+  const tokens = markerTokens({
+    marker: 'REDCHECK_FIX_ROUND', round: 1, headSha: HEAD, bodySha: BODY_SHA,
+  });
+  const postedBody = `${tokens.join('\n')}\n_round 1/2_`;
+  const fake = fakeGh({
+    comments: [{ id: 42, user: { login: 'fixture-bot' }, body: postedBody }],
+    postBody: postedBody,
+  });
+  try {
+    const result = runVerifyCurrent(fake);
+    assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
+    assert.match(result.stdout, /"commentId":42/);
+    const missing = runVerifyCurrent(fake, { commentId: 99 });
+    assert.equal(missing.status, 1, `${missing.stdout}\n${missing.stderr}`);
+    assert.match(missing.stderr, /stesso ID\/autore\/body/);
+  } finally {
+    rmSync(fake.temp, { recursive: true, force: true });
+  }
+});
+
 test('post + verifica usa i commenti paginati e completa il ciclo', () => {
   const tokens = markerTokens({
     marker: 'REDCHECK_FIX_ROUND', round: 1, headSha: HEAD, bodySha: BODY_SHA,
@@ -199,6 +231,7 @@ test('POST malformata viene riconciliata e rimborsata senza lasciare il marker',
   const fake = fakeGh({
     comments: [{ id: 42, user: { login: 'fixture-bot' }, body: postedBody }],
     postBody: postedBody,
+    refundBody: '<!-- REDCHECK_FIX_REFUNDED: 1 -->\n_Round rimborsato: marker non verificabile; nessun round consumato._',
     malformedPost: true,
   });
   try {
@@ -216,7 +249,11 @@ test('marker scritto ma API commenti illeggibile resta retryable, rimborsa e fal
     marker: 'REDCHECK_FIX_ROUND', round: 1, headSha: HEAD, bodySha: BODY_SHA,
   });
   const postedBody = `${tokens.join('\n')}\n_round 1/2_`;
-  const fake = fakeGh({ comments: [], postBody: postedBody, failCommentsRead: true });
+  const fake = fakeGh({
+    comments: [], postBody: postedBody,
+    refundBody: '<!-- REDCHECK_FIX_REFUNDED: 1 -->\n_Round rimborsato: marker non verificabile; nessun round consumato._',
+    failCommentsRead: true,
+  });
   try {
     const result = runHelper(fake);
     assert.equal(result.status, 1, `${result.stdout}\n${result.stderr}`);

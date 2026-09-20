@@ -163,6 +163,24 @@ jobs:
           NOW=$(date -u +%s)
           AGE_MIN_S=7200  # 2h: non toccare PR con lavoro recente
 
+          # Il cap REDFLAG è una decisione di sicurezza: usa solo l'helper
+          # trusted già presente su main, materializzato dal contenuto del blob
+          # a SHA pinnato. Non eseguire mai un helper preso dal branch della PR
+          # e non ricadere sul parser body-only se la materializzazione fallisce.
+          TRUSTED_MARKER_HELPER="${RUNNER_TEMP:-/tmp}/stale-fixer-round-marker.mjs"
+          TRUSTED_MARKER_AVAILABLE=false
+          MAIN_SHA=$(gh api --paginate "repos/$REPO/git/ref/heads/main" --jq '.object.sha' 2>/dev/null || true)
+          if printf '%s\n' "$MAIN_SHA" | grep -qE '^[a-f0-9]{40}$'; then
+            if marker_b64=$(gh api --paginate "repos/$REPO/contents/scripts/ci/fixer-round-marker.mjs?ref=$MAIN_SHA" --jq '.content' 2>/dev/null) \
+              && printf '%s' "$marker_b64" | base64 --decode > "$TRUSTED_MARKER_HELPER" \
+              && [ -s "$TRUSTED_MARKER_HELPER" ]; then
+              TRUSTED_MARKER_AVAILABLE=true
+            fi
+          fi
+          if [ "$TRUSTED_MARKER_AVAILABLE" != "true" ]; then
+            echo "::warning::Helper round-marker trusted non disponibile da main ($MAIN_SHA) — il cap REDFLAG resta non verificabile e non farà dispatch."
+          fi
+
           # `gh api --paginate` e non il vecchio `gh pr list --limit 50`: quel
           # sottocomando NON ha `--paginate` e il suo `--limit` TRONCA in
           # silenzio, quindi oltre il taglio una PR semplicemente non esiste per
@@ -631,6 +649,7 @@ jobs:
                 ] | length
             ' 2>/dev/null || echo 0)
             FIXER_ROUND_CAP_REACHED=false
+            FIXER_ROUND_STATE_OK=false
             FIXER_NEEDS_HUMAN_MARKER=false
             FIXER_MAX_ROUNDS=2
             PR_COMMENT_BODIES=""
@@ -639,11 +658,21 @@ jobs:
                 echo "::warning::Commenti della PR #$N malformati — cap/needs-human non verificabili, nessun rescue del fixer."
                 COMMENT_LOOKUP_OK=false
               else
-                FIXER_ROUND=$(printf '%s' "$PR_COMMENT_BODIES" | grep -oE 'REDFLAG_FIX_ROUND: [0-9]+' \
-                  | grep -oE '[0-9]+' | sort -rn | head -1 || true)
-                FIXER_ROUND=${FIXER_ROUND:-0}
-                if [ "$FIXER_ROUND" -ge "$FIXER_MAX_ROUNDS" ]; then
-                  FIXER_ROUND_CAP_REACHED=true
+                if [ "$TRUSTED_MARKER_AVAILABLE" = "true" ]; then
+                  round_state=$(node "$TRUSTED_MARKER_HELPER" --current-round \
+                    --repo "$REPO" --pr "$N" --marker REDFLAG_FIX_ROUND 2>/dev/null || true)
+                  if FIXER_ROUND=$(printf '%s' "$round_state" | jq -er \
+                    --arg head "$HEAD" --arg body "$body_sha" --argjson max "$FIXER_MAX_ROUNDS" \
+                    'if type == "object" and .headSha == $head and .bodyRevision == $body and (.round | type == "number" and floor == . and . >= 0 and . <= $max) then (.round | tostring) else error("trusted round state stale or malformed") end' 2>/dev/null); then
+                    FIXER_ROUND_STATE_OK=true
+                    if [ "$FIXER_ROUND" -ge "$FIXER_MAX_ROUNDS" ]; then
+                      FIXER_ROUND_CAP_REACHED=true
+                    fi
+                  else
+                    echo "PR #$N: stato trusted REDFLAG_FIX_ROUND non verificabile per HEAD/body correnti — nessun rescue del fixer."
+                  fi
+                else
+                  echo "PR #$N: helper trusted REDFLAG_FIX_ROUND assente — nessun rescue del fixer."
                 fi
                 case "$PR_COMMENT_BODIES" in
                   *'🛑 **needs-human** (auto):'*) FIXER_NEEDS_HUMAN_MARKER=true ;;
@@ -702,6 +731,10 @@ jobs:
             if [ "$IMPORTANT_ON_HEAD" = "true" ]; then
               if [ "$COMMENT_LOOKUP_OK" != "true" ]; then
                 echo "PR #$N: cap/needs-human del fixer non verificabile sulla HEAD ${HEAD:0:7} — skip fail-closed"
+                continue
+              fi
+              if [ "$FIXER_ROUND_STATE_OK" != "true" ]; then
+                echo "PR #$N: cap trusted del fixer non verificabile sulla HEAD ${HEAD:0:7} — skip fail-closed"
                 continue
               fi
               if [ "$FIXER_ROUND_CAP_REACHED" = "true" ] || [ "$FIXER_NEEDS_HUMAN_MARKER" = "true" ]; then

@@ -86,6 +86,7 @@ jobs:
       failed_run_id: ${{ steps.pre.outputs.failed_run_id }}
       head_sha: ${{ steps.pre.outputs.head_sha }}
       failed_check_key: ${{ steps.pre.outputs.failed_check_key }}
+      body_revision: ${{ steps.pre.outputs.body_revision }}
     steps:
       - name: Checkout dell'helper del prefilter (solo `scripts/ci/`)
         uses: actions/checkout@v5
@@ -140,6 +141,7 @@ jobs:
           # but empty revision as fail-closed, while its absent-property mode
           # remains backward-compatible for pure callers/tests.
           review_revision=""
+          body_sha=""
           body_file="${RUNNER_TEMP:-/tmp}/redcheck-pr-body-${PR}.txt"
           if printf '%s' "$pr" | jq -r '.body // ""' > "$body_file" 2>/dev/null; then
             body_sha=$(sha256sum "$body_file" | awk '{print $1}')
@@ -266,6 +268,7 @@ jobs:
             echo "failed_run_id=$RUN_ID"
             echo "head_sha=$head_sha"
             echo "failed_check_key=$rollup"
+            echo "body_revision=$body_sha"
           } >> "$GITHUB_OUTPUT"
 
   redcheck-fix:
@@ -445,6 +448,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
+          EXPECTED_BODY_REVISION: ${{ needs.preflight.outputs.body_revision }}
         run: |
           set -uo pipefail
           MAX_ROUNDS=2
@@ -499,8 +503,9 @@ jobs:
             exit 1
           fi
           if ! ROUND=$(printf '%s' "$round_state" | jq -er \
-            --arg expected "${{ needs.preflight.outputs.head_sha }}" --argjson max "$MAX_ROUNDS" \
-            'if type == "object" and .headSha == $expected and (.round | type == "number" and floor == . and . >= 0 and . <= $max) then (.round | tostring) else error("round state stale or malformed") end'); then
+            --arg expected "${{ needs.preflight.outputs.head_sha }}" \
+            --arg expected_body "$EXPECTED_BODY_REVISION" --argjson max "$MAX_ROUNDS" \
+            'if type == "object" and .headSha == $expected and .bodyRevision == $expected_body and (.round | type == "number" and floor == . and . >= 0 and . <= $max) then (.round | tostring) else error("round state stale or malformed") end'); then
             echo "::error::Round REDCHECK_FIX_ROUND stale/malformato rispetto a HEAD o cap: nessun Codex, claim/lease rilasciati dal cleanup, stato retryable."
             echo "proceed=false" >> "$GITHUB_OUTPUT"
             echo "marker_verified=false" >> "$GITHUB_OUTPUT"
@@ -600,6 +605,7 @@ jobs:
           echo "proceed=true" >> "$GITHUB_OUTPUT"
           echo "round=$NEXT" >> "$GITHUB_OUTPUT"
           echo "marker_body_revision=$(printf '%s' \"$marker_result\" | jq -r '.bodyRevision')" >> "$GITHUB_OUTPUT"
+          echo "marker_comment_id=$(printf '%s' \"$marker_result\" | jq -r '.commentId')" >> "$GITHUB_OUTPUT"
           echo "marker_verified=true" >> "$GITHUB_OUTPUT"
           echo "retryable=false" >> "$GITHUB_OUTPUT"
 
@@ -831,15 +837,21 @@ jobs:
         id: precodex
         if: steps.guard.outputs.proceed == 'true'
         env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
           EXPECTED_HEAD_SHA: ${{ needs.preflight.outputs.head_sha }}
           EXPECTED_BODY_REVISION: ${{ steps.guard.outputs.marker_body_revision }}
+          EXPECTED_MARKER: REDCHECK_FIX_ROUND
+          EXPECTED_ROUND: ${{ steps.guard.outputs.round }}
+          EXPECTED_COMMENT_ID: ${{ steps.guard.outputs.marker_comment_id }}
           TRUSTED_MARKER_HELPER: ${{ steps.trusted_marker.outputs.path }}
         run: |
           set -euo pipefail
           if ! node "$TRUSTED_MARKER_HELPER" --verify-current \
             --repo "$REPO" --pr "$PR_NUMBER" \
+            --marker "$EXPECTED_MARKER" --round "$EXPECTED_ROUND" \
+            --comment-id "$EXPECTED_COMMENT_ID" \
             --expected-head "$EXPECTED_HEAD_SHA" \
             --expected-body-revision "$EXPECTED_BODY_REVISION" >/dev/null; then
             echo "::error::HEAD/body revision non verificabili con l'helper trusted subito prima di Codex: nessun fix automatico viene avviato."

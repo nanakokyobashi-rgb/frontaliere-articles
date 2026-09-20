@@ -33,9 +33,21 @@ for (const [file, marker] of [
     assert.doesNotMatch(source, new RegExp(`gh pr comment[\\s\\S]{0,220}${marker}`));
     const finalVerifyAt = source.indexOf('--verify-current', proceedAt);
     assert.ok(finalVerifyAt > proceedAt, `${file}: verifica finale HEAD/body assente`);
+    assert.match(source.slice(finalVerifyAt, finalVerifyAt + 700), /--comment-id/,
+      `${file}: finalizzazione non lega la prova allo stesso ID del marker`);
+    assert.match(source.slice(finalVerifyAt - 500, finalVerifyAt + 700), /EXPECTED_COMMENT_ID/,
+      `${file}: ID marker finale non proviene dall'output trusted del POST`);
     assert.ok(source.indexOf('if: steps.guard.outputs.proceed == \'true\'', finalVerifyAt) > finalVerifyAt,
       `${file}: finalizzazione Codex non vincolata al guard`);
     assert.match(source, /jq -r ['"](?:\([^\n]*\.body|\.body)/,
       `${file}: body revision non usa la fence jq contrattuale`);
   });
 }
+
+test('helper marker: snapshot paginata e prova finale restano fail-closed', () => {
+  const helper = readFileSync(path.join(ROOT, 'scripts/ci/fixer-round-marker.mjs'), 'utf8');
+  assert.match(helper, /const afterComments = readPr\(repo, pr\)/);
+  assert.match(helper, /PR HEAD\/body cambiati durante la lettura paginata/);
+  assert.match(helper, /verifyCurrentMarker/);
+  assert.match(helper, /stesso ID\/autore\/body subito prima del modello/);
+});

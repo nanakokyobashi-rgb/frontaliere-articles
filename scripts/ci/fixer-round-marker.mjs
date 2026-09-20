@@ -59,7 +59,7 @@ function parseArgs(argv) {
 }
 
 function usage() {
-  return 'uso: fixer-round-marker.mjs --repo owner/repo --pr N --marker NAME --round N --expected-head SHA --message TEXT | --current-round';
+  return 'uso: fixer-round-marker.mjs --repo owner/repo --pr N --marker NAME --round N --expected-head SHA --message TEXT | --current-round | --verify-current --marker NAME --round N --comment-id ID --expected-head SHA --expected-body-revision SHA';
 }
 
 function runGh(args, label) {
@@ -188,13 +188,20 @@ export function readVerifiedCurrentRound({ repo, pr, marker }) {
   if (!MARKER_RE.test(marker)) throw new Error('nome marker non valido');
   const current = readPr(repo, pr);
   const comments = readComments(repo, pr);
+  // The PR snapshot can change while paginated comments are being read. A
+  // marker valid for the first snapshot must never authorize a newer HEAD or
+  // body, so require the same snapshot on both sides of the read.
+  const afterComments = readPr(repo, pr);
+  if (afterComments.headSha !== current.headSha || afterComments.bodySha !== current.bodySha) {
+    throw new Error('PR HEAD/body cambiati durante la lettura paginata dei marker');
+  }
   return {
     marker,
     ...verifiedCurrentRound({
       comments,
       marker,
-      headSha: current.headSha,
-      bodySha: current.bodySha,
+      headSha: afterComments.headSha,
+      bodySha: afterComments.bodySha,
       expectedAuthor: readMarkerActor(),
     }),
   };
@@ -229,7 +236,7 @@ function reconcileMalformedPost({ repo, pr, body, author }) {
   return null;
 }
 
-function postComment(repo, pr, body) {
+function postComment(repo, pr, body, { refundOnDelete = null } = {}) {
   const expectedAuthor = readMarkerActor();
   try {
     const comment = runGhJson([
@@ -252,12 +259,39 @@ function postComment(repo, pr, body) {
     } catch (deleteError) {
       throw new Error(`${postError.message}; rimborso marker riconciliato ${reconciledId} fallito: ${deleteError.message}`);
     }
+    if (refundOnDelete) {
+      try {
+        publishRefundHandle(repo, pr, refundOnDelete.marker, refundOnDelete.round);
+      } catch (refundError) {
+        throw new Error(`${postError.message}; commento ${reconciledId} rimborsato ma handle refund non pubblicato: ${refundError.message}`);
+      }
+    }
     throw new Error(`${postError.message}; commento ${reconciledId} rimborsato dopo risposta POST malformata`);
   }
 }
 
 function deleteComment(repo, commentId) {
   runGh(['api', '--method', 'DELETE', `repos/${repo}/issues/comments/${commentId}`], 'rimborso marker round');
+}
+
+function refundMarkerName(marker) {
+  if (!marker.endsWith('_ROUND')) throw new Error(`marker non rimborsabile: ${marker}`);
+  return `${marker.slice(0, -'_ROUND'.length)}_REFUNDED`;
+}
+
+function publishRefundHandle(repo, pr, marker, round) {
+  const refundMarker = refundMarkerName(marker);
+  const body = `<!-- ${refundMarker}: ${round} -->\n_Round rimborsato: marker non verificabile; nessun round consumato._`;
+  return postComment(repo, pr, body);
+}
+
+function deleteAndRefund({ repo, pr, commentId, marker, round, cause }) {
+  deleteComment(repo, commentId);
+  try {
+    publishRefundHandle(repo, pr, marker, round);
+  } catch (error) {
+    throw new Error(`${cause}; rimborso commento ${commentId} eseguito ma handle refund non pubblicato: ${error.message}`);
+  }
 }
 
 function readBackPostedComment({ repo, pr, posted, marker, round, headSha, bodySha, body }) {
@@ -306,7 +340,9 @@ export function postAndVerifyRoundMarker(args) {
     bodySha: before.bodySha,
   });
   const commentBody = `${tokens.join('\n')}\n${input.message}`;
-  const posted = postComment(input.repo, input.pr, commentBody);
+  const posted = postComment(input.repo, input.pr, commentBody, {
+    refundOnDelete: { marker: input.marker, round: input.round },
+  });
   let lastError;
   // GitHub comment reads are eventually consistent. Keep the retry bounded;
   // if all attempts fail, remove exactly the POST response we created so this
@@ -332,9 +368,16 @@ export function postAndVerifyRoundMarker(args) {
     }
   }
   try {
-    deleteComment(input.repo, posted.id);
+    deleteAndRefund({
+      repo: input.repo,
+      pr: input.pr,
+      commentId: posted.id,
+      marker: input.marker,
+      round: input.round,
+      cause: lastError?.message || 'read-back marker fallita',
+    });
   } catch (error) {
-    throw new Error(`${lastError?.message || 'read-back marker fallita'}; rimborso commento ${posted.id} fallito: ${error.message}`);
+    throw new Error(`${lastError?.message || 'read-back marker fallita'}; ${error.message}`);
   }
   throw new Error(`${lastError?.message || 'read-back marker fallita'}; commento ${posted.id} rimborsato`);
 }
@@ -350,6 +393,48 @@ export function verifyCurrentRoundBaseline({ repo, pr, expectedHead, expectedBod
   return { headSha: current.headSha, bodyRevision: current.bodySha };
 }
 
+export function verifyCurrentMarker({
+  repo, pr, marker, round, expectedHead, expectedBodySha, expectedCommentId,
+}) {
+  const current = readPr(repo, pr);
+  if (current.headSha !== String(expectedHead).toLowerCase()) {
+    throw new Error(`HEAD cambiata subito prima del modello (${current.headSha} != ${expectedHead})`);
+  }
+  if (current.bodySha !== expectedBodySha) {
+    throw new Error(`body revision cambiata subito prima del modello (${current.bodySha} != ${expectedBodySha})`);
+  }
+  if (!Number.isSafeInteger(Number(expectedCommentId)) || Number(expectedCommentId) <= 0) {
+    throw new Error('ID marker persistito mancante o non valido subito prima del modello');
+  }
+  if (!Number.isSafeInteger(Number(round)) || Number(round) < 1 || Number(round) > MAX_ROUND) {
+    throw new Error('round marker non valido subito prima del modello');
+  }
+  const comments = readComments(repo, pr);
+  const author = readMarkerActor();
+  const afterComments = readPr(repo, pr);
+  if (afterComments.headSha !== current.headSha || afterComments.bodySha !== current.bodySha) {
+    throw new Error('PR HEAD/body cambiati durante la verifica finale del marker');
+  }
+  const exact = comments.find((comment) => Number(comment?.id) === Number(expectedCommentId)
+    && comment?.user?.login === author
+    && typeof comment.body === 'string'
+    && verifyPersistedMarker({
+      comments: [comment], marker, round: Number(round),
+      headSha: afterComments.headSha, bodySha: afterComments.bodySha,
+    }));
+  if (!exact) {
+    throw new Error('marker persistito non verificabile con stesso ID/autore/body subito prima del modello');
+  }
+  return {
+    headSha: afterComments.headSha,
+    bodyRevision: afterComments.bodySha,
+    commentId: Number(expectedCommentId),
+    author,
+    marker,
+    round: Number(round),
+  };
+}
+
 function main() {
   const args = parseArgs(process.argv.slice(2));
   if (args.help) {
@@ -363,12 +448,17 @@ function main() {
   } else if (args['verify-current']) {
     const expectedHead = String(args['expected-head'] || '').toLowerCase();
     const expectedBodySha = String(args['expected-body-revision'] || '').toLowerCase();
-    if (!SHA_RE.test(expectedHead) || !/^[a-f0-9]{64}$/.test(expectedBodySha)) {
+    const marker = String(args.marker || '');
+    const round = Number(args.round);
+    const commentId = Number(args['comment-id']);
+    if (!SHA_RE.test(expectedHead) || !/^[a-f0-9]{64}$/.test(expectedBodySha)
+      || !MARKER_RE.test(marker) || !Number.isSafeInteger(round) || round < 1 || round > MAX_ROUND
+      || !Number.isSafeInteger(commentId) || commentId <= 0) {
       throw new Error('HEAD/body revision attese non valide');
     }
-    console.log(JSON.stringify(verifyCurrentRoundBaseline({
-      repo: String(args.repo || ''), pr: String(args.pr || ''),
-      expectedHead, expectedBodySha,
+    console.log(JSON.stringify(verifyCurrentMarker({
+      repo: String(args.repo || ''), pr: String(args.pr || ''), marker, round,
+      expectedHead, expectedBodySha, expectedCommentId: commentId,
     })));
   } else {
     console.log(JSON.stringify(postAndVerifyRoundMarker(args)));

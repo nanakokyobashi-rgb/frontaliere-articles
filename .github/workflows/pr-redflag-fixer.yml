@@ -699,6 +699,23 @@ jobs:
           # Il cap non usa token body-only `REDFLAG_FIX_ROUND: [0-9]+`: conta solo
           # marker completi emessi dall'autore trusted e
           # legati alla HEAD/body correnti; mai token in un commento preseed o stale.
+          marker_body_file=$(mktemp "${RUNNER_TEMP:-/tmp}/redflag-marker-body.XXXXXX")
+          trap 'rm -f "$marker_body_file"' EXIT
+          if ! gh api "repos/$REPO/pulls/$PR_NUMBER" --jq '(.body // "")' > "$marker_body_file" 2>/dev/null; then
+            echo "::error::Body PR illeggibile prima del marker REDFLAG_FIX_ROUND: cap non verificabile. Nessun Codex, stato retryable."
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+            echo "marker_verified=false" >> "$GITHUB_OUTPUT"
+            echo "retryable=true" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+          if ! marker_body_revision_before=$(sha256sum "$marker_body_file" | awk '{print $1}') \
+            || ! printf '%s\n' "$marker_body_revision_before" | grep -Eq '^[a-f0-9]{64}$'; then
+            echo "::error::Body revision PR illeggibile prima del marker REDFLAG_FIX_ROUND: cap non verificabile. Nessun Codex, stato retryable."
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+            echo "marker_verified=false" >> "$GITHUB_OUTPUT"
+            echo "retryable=true" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
           if ! round_state=$(node "${{ steps.trusted_marker.outputs.path }}" \
             --current-round --repo "$REPO" --pr "$PR_NUMBER" --marker REDFLAG_FIX_ROUND); then
             echo "::error::Round REDFLAG_FIX_ROUND non verificabile con il helper trusted: nessun Codex, stato retryable."
@@ -708,8 +725,9 @@ jobs:
             exit 1
           fi
           if ! ROUND=$(printf '%s' "$round_state" | jq -er \
-            --arg expected "${{ needs.preflight.outputs.head_sha }}" --argjson max "$MAX_ROUNDS" \
-            'if type == "object" and .headSha == $expected and (.round | type == "number" and floor == . and . >= 0 and . <= $max) then (.round | tostring) else error("round state stale or malformed") end'); then
+            --arg expected "${{ needs.preflight.outputs.head_sha }}" \
+            --arg expected_body "$marker_body_revision_before" --argjson max "$MAX_ROUNDS" \
+            'if type == "object" and .headSha == $expected and .bodyRevision == $expected_body and (.round | type == "number" and floor == . and . >= 0 and . <= $max) then (.round | tostring) else error("round state stale or malformed") end'); then
             echo "::error::Round REDFLAG_FIX_ROUND stale/malformato rispetto a HEAD o cap: nessun Codex, stato retryable."
             echo "proceed=false" >> "$GITHUB_OUTPUT"
             echo "marker_verified=false" >> "$GITHUB_OUTPUT"
@@ -795,6 +813,7 @@ jobs:
           echo "proceed=true" >> "$GITHUB_OUTPUT"
           echo "round=$NEXT"  >> "$GITHUB_OUTPUT"
           echo "marker_body_revision=$(printf '%s' \"$marker_result\" | jq -r '.bodyRevision')" >> "$GITHUB_OUTPUT"
+          echo "marker_comment_id=$(printf '%s' \"$marker_result\" | jq -r '.commentId')" >> "$GITHUB_OUTPUT"
           echo "marker_verified=true" >> "$GITHUB_OUTPUT"
           echo "retryable=false" >> "$GITHUB_OUTPUT"
 
@@ -1028,6 +1047,9 @@ jobs:
           EXPECTED_HEAD_SHA: ${{ steps.ctx.outputs.head_sha }}
           EXPECTED_BODY_REVISION: ${{ steps.ctx.outputs.review_revision }}
           EXPECTED_MARKER_BODY_REVISION: ${{ steps.guard.outputs.marker_body_revision }}
+          EXPECTED_MARKER: REDFLAG_FIX_ROUND
+          EXPECTED_ROUND: ${{ steps.guard.outputs.round }}
+          EXPECTED_COMMENT_ID: ${{ steps.guard.outputs.marker_comment_id }}
           TRUSTED_MARKER_HELPER: ${{ steps.trusted_marker.outputs.path }}
         run: |
           set -euo pipefail
@@ -1039,6 +1061,8 @@ jobs:
 
           if ! node "$TRUSTED_MARKER_HELPER" --verify-current \
             --repo "$REPO" --pr "$PR_NUMBER" \
+            --marker "$EXPECTED_MARKER" --round "$EXPECTED_ROUND" \
+            --comment-id "$EXPECTED_COMMENT_ID" \
             --expected-head "$EXPECTED_HEAD_SHA" \
             --expected-body-revision "$EXPECTED_MARKER_BODY_REVISION" \
             > "$OUT/marker-before-claude.json"; then
