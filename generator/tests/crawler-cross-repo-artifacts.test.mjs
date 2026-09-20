@@ -241,12 +241,11 @@ test('loop-drift osserva live i 24 artifact portabili e il contratto del generat
 
   const contractEntry = entries.get('generator/data/crawler-cross-repo-contract.json');
   assert.ok(contractEntry, 'mapping loop-sync del contract assente');
-  assert.equal(contractEntry.mode, 'adapted');
+  assert.equal(contractEntry.mode, 'identical');
   assert.equal(contractEntry.sitePath, '.github/corpus-workflows/contract.json');
   const contractHash = sha256(readFileSync(CONTRACT_PATH, 'utf8')).slice(0, 16);
+  assert.equal(contractEntry.baseline.site, contractHash);
   assert.equal(contractEntry.baseline.corpus, contractHash);
-  assert.notEqual(contractEntry.baseline.site, contractHash);
-  assert.match(contractEntry.reason, /artifactSha256/);
 });
 
 test('il retry e limitato al checkout sparse pre-logica, con backoff', () => {
