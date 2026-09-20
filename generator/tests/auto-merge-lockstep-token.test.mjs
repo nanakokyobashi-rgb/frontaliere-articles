@@ -332,6 +332,47 @@ test('la generazione vince sul completamento fuori ordine e sui tie-break', () =
     'run_attempt deve precedere il tie-break sull id',
   );
 
+  const sameTimestampAndAttempt = checkPages(
+    {
+      ...checkRun(612, VITEST_CHECK_NAME, 'FAILURE', HEAD_A, '2026-09-19T07:30:00Z', {
+        runAttempt: 1,
+      }),
+      details_url: `https://github.com/${LOCKSTEP_REPO}/actions/runs/35442617320/job/300?check=old#fragment`,
+    },
+    {
+      ...checkRun(611, VITEST_CHECK_NAME, 'SUCCESS', HEAD_A, '2026-09-19T07:30:00Z', {
+        runAttempt: 1,
+      }),
+      details_url: `https://github.com/${LOCKSTEP_REPO}/actions/runs/35442617321/job/300?check=new#fragment`,
+    },
+  );
+  assert.equal(
+    exactCheckRunSnapshot(sameTimestampAndAttempt, HEAD_A, LOCKSTEP_REPO)
+      .checks.find((check) => check.name === VITEST_CHECK_NAME)?.state,
+    'SUCCESS',
+    'a parità di timestamp e attempt il workflow-run ID deve precedere il check-run ID',
+  );
+
+  const missingAttempt = checkPages(
+    checkRun(613, VITEST_CHECK_NAME, 'FAILURE', HEAD_A, '2026-09-19T07:31:00Z'),
+    checkRun(614, VITEST_CHECK_NAME, 'SUCCESS', HEAD_A, '2026-09-19T07:31:00Z', {
+      runAttempt: 1,
+    }),
+  );
+  assert.equal(
+    exactCheckRunSnapshot(missingAttempt, HEAD_A, LOCKSTEP_REPO).allow,
+    false,
+    'una presenza parziale di run_attempt non deve diventare il sentinel 0',
+  );
+
+  assert.equal(
+    exactCheckRunSnapshot(checkPages(
+      checkRun(Number.MAX_SAFE_INTEGER + 1, VITEST_CHECK_NAME, 'SUCCESS', HEAD_A),
+    ), HEAD_A, LOCKSTEP_REPO).allow,
+    false,
+    'un check-run ID oltre l intero sicuro deve restare fail-closed',
+  );
+
   const malformedGeneration = [
     ['timestamp mancante', checkPages(checkRun(603, VITEST_CHECK_NAME, 'SUCCESS', HEAD_A, '2026-09-19T08:00:00Z', {
       omitCreatedAt: true, startedAt: null,

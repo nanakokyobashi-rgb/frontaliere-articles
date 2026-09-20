@@ -282,13 +282,17 @@ function checkRunGeneration(run, repository) {
     if (!Number.isSafeInteger(run.run_attempt) || run.run_attempt < 1) return null;
     runAttempt = run.run_attempt;
   }
+  // When the timestamp and attempt tie, the Actions run in `details_url` is
+  // the next generation marker. Keep it on timestamped records too: the
+  // commit check-runs endpoint can expose the same-second reruns with check
+  // IDs assigned in the opposite order to the workflow runs.
+  const workflow = workflowRunIdentity(run.details_url, repository);
   if (!Number.isFinite(createdAt)) {
     // The Check Run REST response's nested `check_suite` example contains an
     // id but not suite timestamps. Its Actions details URL is the authoritative
     // workflow-run/job correlation available in this response; without that
     // identity, selection would be a guess and must remain fail-closed.
     if (suite === undefined) return null;
-    const workflow = workflowRunIdentity(run.details_url, repository);
     if (!workflow) return null;
     if (typeof run.external_id !== 'string' || !UUID_RE.test(run.external_id.trim())) {
       return null;
@@ -298,7 +302,13 @@ function checkRunGeneration(run, repository) {
     // check-run id is the generation order/tie-break within that run.
     return { source, createdAt: null, runAttempt, generationId: run.id, ...workflow };
   }
-  return { source, createdAt, runAttempt, generationId };
+  return {
+    source,
+    createdAt,
+    runAttempt,
+    generationId,
+    workflowRunId: workflow?.workflowRunId ?? null,
+  };
 }
 
 function checkRunVerdictMetadata(run) {
@@ -396,11 +406,29 @@ export function exactCheckRunSnapshot(pages, headSha, repository = null) {
       let newer = !previous;
       if (previous) {
         if (candidate.source === 'timestamp') {
-          newer = candidate.createdAt > previous.createdAt
-            || (candidate.createdAt === previous.createdAt
-              && (candidate.runAttempt > previous.runAttempt
-                || (candidate.runAttempt === previous.runAttempt
-                  && candidate.generationId > previous.generationId)));
+          if (candidate.createdAt !== previous.createdAt) {
+            newer = candidate.createdAt > previous.createdAt;
+          } else if (candidate.runAttempt !== previous.runAttempt
+              && candidate.runAttempt !== 0 && previous.runAttempt !== 0) {
+            newer = candidate.runAttempt > previous.runAttempt;
+          } else if (candidate.workflowRunId !== null && previous.workflowRunId !== null) {
+            const workflowOrder = compareDecimalIds(
+              candidate.workflowRunId,
+              previous.workflowRunId,
+            );
+            newer = workflowOrder > 0
+              || (workflowOrder === 0 && candidate.runAttempt === previous.runAttempt
+                && candidate.generationId > previous.generationId);
+          } else if (candidate.runAttempt === previous.runAttempt
+              && candidate.workflowRunId === previous.workflowRunId
+              && candidate.runAttempt !== 0) {
+            // A verified attempt identifies the generation even when the
+            // optional workflow URL is unavailable; the check ID is only a
+            // tie-break inside that attempt.
+            newer = candidate.generationId > previous.generationId;
+          } else {
+            return deny(`check-run ${run.name} con generazioni timestamped non correlabili`);
+          }
         } else {
           const workflowOrder = compareDecimalIds(
             candidate.workflowRunId,
