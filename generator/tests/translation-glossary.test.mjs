@@ -40,7 +40,11 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { TRANSLATION_GLOSSARY, applyGlossaryCorrections } from '../scripts/lib/translation-glossary.mjs';
+import {
+  TRANSLATION_GLOSSARY,
+  applyGlossaryCorrections,
+  restoreProtectedTokens,
+} from '../scripts/lib/translation-glossary.mjs';
 import { ITALIAN_BORDER_GUARD_ANCHOR } from '../scripts/lib/article-locale-lexicon.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -146,6 +150,18 @@ function collectLocaleTexts(job) {
 }
 
 describe('translation-glossary: frontalier body-safety (issue #723)', () => {
+  it('does not scrub ordinary ZQ percentage prose when a protected token is present', () => {
+    const tokens = [{ hasThird: true, thirdMarker: 'd', upper: false, bracketed: true }];
+    assert.equal(
+      restoreProtectedTokens('ZQ 100%', tokens, 'it', { fieldType: 'description' }),
+      'ZQ 100%',
+    );
+    assert.equal(
+      restoreProtectedTokens('ZQ ①000%', tokens, 'it', { fieldType: 'description' }),
+      '',
+    );
+  });
+
   it('has no TITLE_ONLY guard on any of its rules (documents current shape)', () => {
     assert.ok(frontalierEntry, 'frontalier entry must exist in TRANSLATION_GLOSSARY');
     const allRules = Object.values(frontalierEntry.fixes).flat();

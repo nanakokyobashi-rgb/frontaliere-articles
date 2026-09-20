@@ -121,6 +121,29 @@ describe('GitHub Models request contract', () => {
     assert.equal(modelUsedRef.model, AI_MODELS.GPT4O);
   });
 
+  test('interrompe subito il retry loop su una risposta HTTP 200 vuota', async () => {
+    let calls = 0;
+    globalThis.fetch = async () => {
+      calls += 1;
+      return new Response(JSON.stringify({ choices: [{ message: { content: '' } }] }), {
+        status: 200,
+        headers: { 'content-type': 'application/json' },
+      });
+    };
+
+    await assert.rejects(
+      () => callSingleModel([{ role: 'user', content: 'x' }], {
+        model: AI_MODELS.GPT4O,
+        githubModelsCatalog: [{ id: 'openai/gpt-4o' }],
+        maxRetriesPerModel: 3,
+      }),
+      (error) => error.contentFailure === true && /Empty response/.test(error.message),
+    );
+
+    assert.equal(calls, 1, 'il body vuoto non deve ripagare i retry del modello');
+    assert.equal(getStats().retries, 0, 'il content failure deve arrivare subito al breaker');
+  });
+
   test('il consumer carica e riusa il catalogo osservato per gli ID bare', async () => {
     const calls = [];
     globalThis.fetch = async (url, init) => {

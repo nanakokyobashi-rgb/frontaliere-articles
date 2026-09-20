@@ -21,7 +21,7 @@
  */
 
 import { translateWithMyMemory } from './mymemory-translate.mjs';
-import { finalizeTranslatedText, maskProtectedTokens } from './translation-glossary.mjs';
+import { finalizeTranslatedText, maskProtectedTokens, normalizeGermanGenderForms, normalizeProtectedTokenSentinels } from './translation-glossary.mjs';
 import { translateWithLocalOpusMt, localOpusMtEnabled } from './local-opus-mt.mjs';
 import {
   extractOAuthErrorReason,
@@ -406,9 +406,9 @@ function normalizeBlock(s) {
  * @returns {boolean} true se il motore NON ha tradotto
  */
 export function isSourcePassthrough(sourceText, translatedText) {
-  const src = normalizeBlock(sourceText).toLowerCase();
+  const src = normalizeBlock(normalizeProtectedTokenSentinels(sourceText)).toLowerCase();
   if (!src) return false;
-  return src === normalizeBlock(translatedText).toLowerCase();
+  return src === normalizeBlock(normalizeProtectedTokenSentinels(translatedText)).toLowerCase();
 }
 
 // Un segmento breve puo' essere un titolo, una URL o un placeholder che il
@@ -459,6 +459,19 @@ function rejectedAsPassthrough(tierName, source, out, outcome = null, granularit
   }
   noteTranslationOutcome(outcome, 'passthroughs');
   return true;
+}
+
+function rejectedAsPassthroughWithSourceVariants(
+  tierName,
+  normalizedSource,
+  rawSource,
+  out,
+  outcome = null,
+  granularity = 'field',
+) {
+  if (rejectedAsPassthrough(tierName, normalizedSource, out, outcome, granularity)) return true;
+  return rawSource !== normalizedSource
+    && rejectedAsPassthrough(tierName, rawSource, out, outcome, granularity);
 }
 
 /**
@@ -1337,7 +1350,11 @@ function mergeTranslationOutcome(target, source) {
 }
 
 export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 'title', _outcome = null }) {
-  const sourceClean = normalizeBlock(text);
+  const rawSourceClean = normalizeBlock(text);
+  const sourceInput = fieldType === 'title' && String(sourceLang || '').toLowerCase().startsWith('de')
+    ? normalizeGermanGenderForms(text)
+    : text;
+  const sourceClean = normalizeBlock(sourceInput);
   if (!sourceClean) return '';
   if (sourceLang === targetLang) return sourceClean;
 
@@ -1388,7 +1405,7 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
       // proxy che risponde con l'eco) non e' la cascata che ha fallito. Se
       // rimandano la sorgente TUTTI, `freeTranslate` esce '' e il chiamante
       // legge quello che ha sempre letto: traduzione non avvenuta.
-      if (rejectedAsPassthrough(tierName, clean, result, _outcome)) {
+      if (rejectedAsPassthroughWithSourceVariants(tierName, clean, rawSourceClean, result, _outcome)) {
         return '';
       }
       if (result) {

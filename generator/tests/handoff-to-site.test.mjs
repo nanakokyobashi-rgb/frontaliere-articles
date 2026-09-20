@@ -48,7 +48,28 @@ const SINGLE_MIRROR_BODY = 'Root cause nota: `' + SINGLE_MIRROR_PATH + '` è '
 // Un workflow `identical` che nessun trasporto porta giu'. Era
 // `retry-code-check-after-body-edit.yml` finche' e' rimasto `identical`: dalla
 // PR #1613 e' `adapted` e quindi non e' piu' un gemello fermo.
-const STRANDED_WORKFLOW_PATH = '.github/workflows/observers/workflows/crawler-generation-observer-shadow.yml';
+const STRANDED_WORKFLOW_PATH = '.github/workflows/stranded-test.yml';
+
+function strandedManifestSnapshot() {
+  return {
+    absent: new Set(),
+    locked: new Map([[STRANDED_WORKFLOW_PATH, STRANDED_WORKFLOW_PATH]]),
+    names: new Map([[STRANDED_WORKFLOW_PATH, STRANDED_WORKFLOW_PATH]]),
+    stranded: new Set([STRANDED_WORKFLOW_PATH]),
+  };
+}
+
+function withStrandedManifest(callback) {
+  const file = '/tmp/frontaliere-stranded-twin-' + process.pid + '.json';
+  fs.writeFileSync(file, JSON.stringify({
+    files: [{ path: STRANDED_WORKFLOW_PATH, mode: 'identical' }],
+  }));
+  try {
+    return callback(file);
+  } finally {
+    fs.rmSync(file, { force: true });
+  }
+}
 
 test('instrada il caso mirror: verdetto + repo del sito + path', () => {
   const d = handoffDecision({ verdict: 'blocked-admin-settings', body: MIRROR_BODY });
@@ -600,7 +621,7 @@ test('#1127: una collisione path corpus/site fa fallire la lettura del manifest'
 // --- #972 item 4: `identical` non implica «trasportato» ---------------------
 
 test('#972: i gemelli che nessun trasporto porta giù sono quelli che il trasporto stesso rifiuta', () => {
-  const stuck = strandedTwinPaths();
+  const stuck = withStrandedManifest((manifestPath) => strandedTwinPaths(manifestPath));
   // I 25 workflow nella allowlist sito → corpus hanno un trasporto dedicato:
   // restano locked, ma non stranded. Un workflow fuori da quell'allowlist
   // segue invece la regola generica: `unsafeTarget` lo esclude PER SEMPRE dal
@@ -677,7 +698,11 @@ test('#972: un `blocked-*` su un gemello che non scenderà mai consegna ma NON c
   // e la issue chiusa era l'unico posto in cui quella copia risultava dovuta.
   const body = 'Blocked: il fix va scritto in `' + STRANDED_WORKFLOW_PATH + '` '
     + 'su valerielinc-ops/frontaliere-si-o-no, gemello `identical` di questo.';
-  const d = handoffDecision({ verdict: 'blocked-workflows-scope', body });
+  const d = handoffDecision({
+    verdict: 'blocked-workflows-scope',
+    body,
+    manifestSnapshot: strandedManifestSnapshot(),
+  });
   assert.equal(d.handoff, true, 'la diagnosi va comunque consegnata: la fix si scrive di là');
   assert.equal(d.close, false);
   assert.deepEqual(d.residual, [STRANDED_WORKFLOW_PATH]);
@@ -717,7 +742,11 @@ test('#972: un `no-root-cause` su un gemello fermo lascia il residuo, non lo ass
   // mano), e senza residuo il commento di parcheggio non lo nomina.
   const body = 'Root cause: il concurrency group in `' + STRANDED_WORKFLOW_PATH + '`, '
     + '`mode: identical`: scriverlo qui verrebbe sovrascritto al mirror successivo.';
-  const d = handoffDecision({ verdict: 'no-root-cause', body });
+  const d = handoffDecision({
+    verdict: 'no-root-cause',
+    body,
+    manifestSnapshot: strandedManifestSnapshot(),
+  });
   assert.equal(d.handoff, true);
   assert.equal(d.close, false);
   assert.deepEqual(d.residual, [STRANDED_WORKFLOW_PATH]);
@@ -824,6 +853,7 @@ test('#972: col residuo la run SERVE — il corto-circuito la trasformerebbe in 
   // chiusa. Saltare il run qui vorrebbe dire che nessuno lo farà mai.
   const decision = handoffDecision({
     verdict: 'no-root-cause',
+    manifestSnapshot: strandedManifestSnapshot(),
     body: 'Root cause: il concurrency group in `' + STRANDED_WORKFLOW_PATH + '`, '
       + '`mode: identical`: scriverlo qui verrebbe sovrascritto al mirror successivo.',
   });
