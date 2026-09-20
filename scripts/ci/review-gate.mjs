@@ -23,7 +23,9 @@
  * `## LGTM` e NESSUN finding `🔴 Important`, oppure solo finding su file fuori
  * dal diff corrente già raccolti in una issue follow-up (stessa
  * `REDFLAG_IMPORTANT_RE` che usa il redflag-fixer — una sola regex, nessun
- * drift). Deve portare la revisione del body corrente. Su un commit precedente
+ * drift). Un finding nuovo classificato `DECLASSIFIED-UNCHANGED-LINE` non è
+ * invece fuori diff: apre `UNCHANGED-LINE-RECHECK`, resta rosso e non può
+ * autorizzare auto-merge. Deve portare la revisione del body corrente. Su un commit precedente
  * vale il CARRY-FORWARD se il fingerprint del contributo (3-dot vs merge-base,
  * code-only) e' identico fra i due commit, la PR non ha cambiato il proprio
  * codice — tipicamente un rebase di solo main-merge — e la review resta valida.
@@ -95,6 +97,10 @@ const REVIEW_REVISION = normalizeReviewInputRevision(process.env.REVIEW_REVISION
 // applicherebbero una politica diversa sulla stessa superficie.
 const BODY_CONTRACT_PASSED = process.env.BODY_CONTRACT_OUTCOME === 'success' ? true : null;
 const MARKER = '<!-- REVIEW_GATE_NO_LGTM -->';
+// One deterministic ledger entry for the bounded recheck path. A new
+// unchanged-line Important is not silently accepted as outside-only, but it
+// must not start an unbounded fixer/review loop either.
+const UNCHANGED_LINE_RECHECK_MARKER = '<!-- REVIEW_GATE_UNCHANGED_LINE_RECHECK -->';
 let gateFailureKind = 'verdict';
 
 /**
@@ -384,7 +390,7 @@ function isDriftFile(f) {
 }
 
 /** Commenta UNA sola volta perche' non si accumuli un avviso a ogni push. */
-function commentOnce(body) {
+function commentOnce(body, marker = MARKER) {
   let existing = '';
   try {
     existing = gh(['api', `repos/${REPO}/issues/${PR}/comments`, '--paginate', '--jq', '.[].body'], {
@@ -393,7 +399,7 @@ function commentOnce(body) {
   } catch {
     /* best-effort */
   }
-  if (existing.includes(MARKER)) return;
+  if (existing.includes(marker)) return;
   try {
     execFileSync('gh', ['pr', 'comment', PR, '--repo', REPO, '--body', body], { stdio: 'inherit' });
   } catch {
@@ -444,6 +450,7 @@ async function main() {
   const last = lastBotReview();
   const isCodexReview = isCodexFallbackReview(last);
   const hasFreshCodexEvidence = Boolean(process.env.CODEX_FALLBACK_EVIDENCE_FILE);
+  let unchangedLineRecheckRequired = false;
 
   if (last) {
     const body = last.body || '';
@@ -488,6 +495,12 @@ async function main() {
             `review-gate: ${scope.outside.length} finding Important fuori dal diff → follow-up ${scope.followup?.number || scope.followup?.url || 'coniato'}.`,
           );
         }
+        unchangedLineRecheckRequired = (scope.recheckRequired?.length ?? 0) > 0;
+        if (unchangedLineRecheckRequired) {
+          console.log(
+            `review-gate: UNCHANGED-LINE-RECHECK — ${scope.recheckRequired.length} finding Important nuovo non confermato; una sola recheck deterministica, nessun auto-merge/fixer loop.`,
+          );
+        }
         if (scope.blocking) {
           console.log(
             `review-gate: scope conservativo — ${scope.inScope.length} finding nel diff, ${scope.unresolved.length} non risolvibili → resta bloccante.`,
@@ -504,6 +517,7 @@ async function main() {
     // c'e' niente da tracciare, e pretendere comunque un conio terrebbe rossa
     // una PR i cui unici 🔴 il contratto verde ha gia' chiuso.
     const outsideOnlyApproved = Boolean(applies && hasRedflag && scope?.outsideOnly
+      && !unchangedLineRecheckRequired
       && ((scope?.outside?.length ?? 0) === 0 || scope?.minted));
     const approving = reviewStateAllowsApproval(last)
       && ((body.includes('## LGTM') && !hasRedflag) || outsideOnlyApproved);
@@ -562,8 +576,18 @@ async function main() {
     }
   }
 
+  const commentMarker = unchangedLineRecheckRequired
+    ? UNCHANGED_LINE_RECHECK_MARKER
+    : MARKER;
+  const commentPrefix = unchangedLineRecheckRequired
+    ? `${UNCHANGED_LINE_RECHECK_MARKER}\n${MARKER}`
+    : MARKER;
+  const commentReason = unchangedLineRecheckRequired
+    ? 'un finding 🔴 Important nuovo ancorato a righe non cambiate è solo candidato a recheck, non confermato'
+    : "manca '## LGTM' oppure e' presente un 🔴 Important";
   commentOnce(
-    `${MARKER}\n⚠️ **Review gate bloccato** — sulla head \`${HEAD_SHA}\` non c'e' una review Claude approvante per la revisione \`${REVIEW_REVISION}\`, con \`## LGTM\` e senza \`🔴 Important\`. Il merge resta bloccato finche' non ne arriva una.${RUN_URL ? `\n\nRun: ${RUN_URL}` : ''}`,
+    `${commentPrefix}\n⚠️ **Review gate bloccato** — sulla head \`${HEAD_SHA}\` non c'e' una review Claude approvante per la revisione \`${REVIEW_REVISION}\`: ${commentReason}. Il merge resta bloccato finche' non ne arriva una recheck/approvazione nuova.${RUN_URL ? `\n\nRun: ${RUN_URL}` : ''}`,
+    commentMarker,
   );
   writeFailureKind();
   console.log(

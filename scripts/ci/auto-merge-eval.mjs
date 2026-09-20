@@ -480,6 +480,7 @@ async function main() {
     }
   }
   let outsideOnlyApproved = false;
+  let unchangedLineRecheckRequired = false;
   if (hasRedflag) {
     if (!reviewInputContextStillCurrent(head, reviewRevision)) return;
     try {
@@ -488,6 +489,7 @@ async function main() {
         pr: PR,
         prUrl: `https://github.com/${REPO}/pull/${PR}`,
       });
+      unchangedLineRecheckRequired = (scope.recheckRequired?.length ?? 0) > 0;
       // La follow-up traccia i finding FUORI dal diff: quando non ce ne sono
       // — il caso in cui gli unici 🔴 sono sul body e il contratto
       // deterministico li ha gia' giudicati — non c'e' niente da coniare, e
@@ -495,6 +497,7 @@ async function main() {
       // considera non bloccante. Stessa congiunzione del gate: due politiche
       // sullo stesso verdetto sono il modo in cui questo ciclo si incaglia.
       outsideOnlyApproved = scope.outsideOnly
+        && !unchangedLineRecheckRequired
         && ((scope.outside?.length ?? 0) === 0 || scope.minted);
       if (outsideOnlyApproved) {
         console.log(
@@ -502,7 +505,7 @@ async function main() {
         );
       } else {
         return fail(
-          `Ultima review claude-bot contiene ${scope.inScope.length} finding nel diff e ${scope.unresolved.length} non risolvibili — skip (no merge).`,
+          `Ultima review claude-bot contiene ${scope.inScope.length} finding nel diff, ${scope.unresolved.length} non risolvibili e ${scope.recheckRequired?.length ?? 0} Important nuovi da recheck invariata — skip (no merge).`,
         );
       }
       if (!reviewInputContextStillCurrent(head, reviewRevision)) return;

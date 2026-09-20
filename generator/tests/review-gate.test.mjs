@@ -505,7 +505,7 @@ for (const [label, patch] of [
   });
 }
 
-test('compare con stream di hunk validi → la logica di declassamento resta attiva', () => {
+test('compare con stream di hunk validi → un Important nuovo su riga invariata resta in recheck', () => {
   const r = runGate({
     reviews: HISTORY_REVIEWS,
     files: ['engine/x.ts'],
@@ -523,8 +523,9 @@ test('compare con stream di hunk validi → la logica di declassamento resta att
       ].join('\n'),
     }]),
   });
-  assert.equal(r.status, 0, `uno stream unified valido non deve diventare non confrontabile.\n${r.stdout}`);
+  assert.equal(r.status, 1, `uno stream unified valido non deve autorizzare un Important non confermato.\n${r.stdout}`);
   assert.match(r.stdout, /DECLASSIFIED-UNCHANGED-LINE/i, r.stdout);
+  assert.match(r.stdout, /UNCHANGED-LINE-RECHECK/i, r.stdout);
 });
 
 test('compare con filename CR/LF → il finding resta bloccante', () => {

@@ -432,12 +432,25 @@ export function classifyImportantFindings(body, changedFiles, repositoryPaths = 
     unresolved,
     bodyDeclassified,
     staleDeclassified,
+    // A finding on an unchanged line is still a new funnel-critical claim.
+    // The unchanged-line predicate saves review/fixer tokens by identifying
+    // the narrow recheck candidate, but it is not evidence that the claim was
+    // confirmed. Keep this separate from `blocking`: the fixer must not spend
+    // a repair round on code that did not change, while the gate and native
+    // auto-merge must remain fail-closed until a fresh review settles it.
+    recheckRequired: staleDeclassified,
     bodyOnly: bodyDeclassified.length > 0
       && outside.length === 0
       && inScope.length === 0
-      && unresolved.length === 0,
-    outsideOnly: (outside.length + bodyDeclassified.length + staleDeclassified.length) > 0
-      && inScope.length === 0 && unresolved.length === 0,
+      && unresolved.length === 0
+      && staleDeclassified.length === 0,
+    // `staleDeclassified` is deliberately NOT an outside finding. It is a
+    // recheck candidate on a PR file, and treating it as outside-only was the
+    // bug that let `## LGTM` merge an unconfirmed new 🔴 Important.
+    outsideOnly: (outside.length + bodyDeclassified.length) > 0
+      && inScope.length === 0
+      && unresolved.length === 0
+      && staleDeclassified.length === 0,
     blocking: inScope.length > 0 || unresolved.length > 0,
   };
 }
@@ -892,7 +905,9 @@ async function mintFollowup({ repo, pr, prUrl, body, findings }) {
 
 /**
  * Classifica la review sulla PR reale e, solo se tutti i finding sono fuori
- * scope, conia/aggiorna la singola issue della PR.
+ * scope, conia/aggiorna la singola issue della PR. Un finding nuovo su una
+ * riga non cambiata e' una `recheckRequired`: la classificazione evita il
+ * lavoro ripetuto del fixer, ma non chiude il gate ne' autorizza il merge.
  */
 export async function classifyAndMintReview(body, {
   repo, pr, prUrl, mutate = true, headSha = null,
@@ -936,6 +951,8 @@ export async function classifyAndMintReview(body, {
         reason: `diff non verificabile (${reason})`,
       })),
       bodyDeclassified,
+      staleDeclassified: [],
+      recheckRequired: [],
       bodyOnly: bodyDeclassified.length > 0 && stillOpen.length === 0,
       // Il ramo dichiara di voler sbloccare la PR con diff illeggibile i cui
       // unici 🔴 erano sul body: senza questo, `blocking` diventava false ma
@@ -963,7 +980,7 @@ export async function classifyAndMintReview(body, {
     uncomparablePaths: history.uncomparablePaths ?? null,
   });
   for (const finding of result.staleDeclassified ?? []) {
-    console.log(`review-scope: DECLASSIFIED-UNCHANGED-LINE finding=L${finding.lineNumber} id=${finding.stableId} reason=Important NUOVO ancorato solo su righe non toccate dall'ultima review; per tenerlo bloccante dichiara \`🔴 Important: [regression]\``);
+    console.log(`review-scope: DECLASSIFIED-UNCHANGED-LINE finding=L${finding.lineNumber} id=${finding.stableId} outcome=UNCHANGED-LINE-RECHECK reason=Important NUOVO ancorato solo su righe non toccate dall'ultima review; classificazione token-saving ma NON autorizzazione al merge; serve una sola recheck deterministica (per tenerlo bloccante dichiara \`🔴 Important: [regression]\`)`);
   }
   if (result.outside.length === 0 || !mutate) {
     return {
@@ -1007,6 +1024,8 @@ if (process.argv[1] && process.argv[1].endsWith('review-scope.mjs')) {
       inScope: result.inScope.length,
       unresolved: result.unresolved.length,
       bodyOnly: result.bodyOnly === true,
+      recheckRequired: (result.recheckRequired?.length ?? 0) > 0,
+      recheckCount: result.recheckRequired?.length ?? 0,
       minted: result.minted,
       followup: result.followup || null,
     })}\n`);

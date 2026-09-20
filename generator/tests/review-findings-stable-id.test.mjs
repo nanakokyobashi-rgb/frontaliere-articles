@@ -146,7 +146,7 @@ test('un body malformato non e\' un verdetto', () => {
   ].join('\n')), false);
 });
 
-test('il classificatore del corpus declassa e resta approvabile', () => {
+test('il classificatore conserva il risparmio ma richiede una recheck fail-closed', () => {
   const review = ['## Findings (Important: 1)',
     '`scripts/ci/review-scope.mjs:999`: 🔴 Important: `resolveCitedPath()` non regge.'].join('\n');
   const changedFiles = ['scripts/ci/review-scope.mjs'];
@@ -160,9 +160,11 @@ test('il classificatore del corpus declassa e resta approvabile', () => {
     changedLinesSince: new Map([['scripts/ci/review-scope.mjs', new Set([1, 2])]]),
   });
   assert.equal(declassified.staleDeclassified.length, 1);
+  assert.equal(declassified.recheckRequired.length, 1);
   assert.equal(declassified.blocking, false);
-  assert.equal(declassified.outsideOnly, true,
-    'senza outsideOnly il gate non approverebbe e il declassamento non sbloccherebbe nulla');
+  assert.equal(declassified.outsideOnly, false,
+    'un Important nuovo su una riga invariata non e\' un finding fuori diff e non puo\' sbloccare il gate');
+  assert.equal(declassified.bodyOnly, false);
   assert.ok(declassified.staleDeclassified[0].stableId, 'il log deve poter citare l\'id stabile');
 });
 
@@ -179,6 +181,8 @@ test('la derivazione sta nel classificatore, cosi\' anche il fixer la riceve', (
     'la derivazione non e\' il default quando il chiamante non dichiara nulla');
   assert.match(source, /DECLASSIFIED-UNCHANGED-LINE/u,
     'il declassamento non lascia traccia nel log');
+  assert.match(source, /UNCHANGED-LINE-RECHECK/u,
+    'il declassamento deve aprire una recheck esplicita, non un verdetto positivo');
   const fixer = read('.github/workflows/pr-redflag-fixer.yml');
   assert.match(fixer, /node scripts\/ci\/review-scope\.mjs/u,
     'il fixer deve continuare a passare da questa CLI');

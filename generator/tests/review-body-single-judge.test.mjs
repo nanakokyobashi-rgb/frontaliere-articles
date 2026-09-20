@@ -63,7 +63,7 @@ test('un 🔴 sul body cade quando il contratto deterministico e\' verde', () =>
   assert.equal(declassified.blocking, false);
   assert.equal(declassified.unresolved.length, 0);
   assert.equal(declassified.outsideOnly, true,
-    'un finding declassato non lascia la PR senza una via di approvazione');
+    'un finding del solo body resta approvabile quando il contratto deterministico e\' verde');
 });
 
 test('il declassamento non si concede senza la prova della posizione', () => {
@@ -261,7 +261,7 @@ test('diff illeggibile: i 🔴 sul body cadono E la PR resta approvabile', { con
     assert.equal(result.bodyDeclassified.length, 1, 'il finding sul body va declassato');
     assert.equal(result.blocking, false);
     assert.equal(result.outsideOnly, true,
-      'senza outsideOnly il gate non approva: il ramo non sbloccherebbe nulla');
+      'un finding del solo body resta approvabile quando il contratto deterministico e\' verde');
     assert.equal(result.minted, false, 'non c\'e\' niente fuori dal diff da tracciare');
 
     // Un 🔴 di CODICE nello stesso ramo resta invece bloccante.
@@ -342,4 +342,6 @@ test('auto-merge-eval usa la stessa congiunzione del gate sul verdetto', () => {
   const source = read('scripts/ci/auto-merge-eval.mjs');
   assert.match(source, /\(scope\.outside\?\.length \?\? 0\) === 0 \|\| scope\.minted/u,
     'auto-merge-eval pretende ancora una follow-up coniata che non esiste');
+  assert.match(source, /scope\.recheckRequired\?\.length \?\? 0/u,
+    'auto-merge-eval non deve trattare una recheck invariata come approvazione');
 });
