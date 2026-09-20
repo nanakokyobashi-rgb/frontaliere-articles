@@ -172,6 +172,7 @@ jobs:
           PR_URL=$(printf '%s' "$PR_JSON" | jq -r '.url')
           PR_TITLE=$(printf '%s' "$PR_JSON" | jq -r '.title')
           BASE_REF=$(printf '%s' "$PR_JSON" | jq -r '.baseRefName')
+          PR_HEAD_SHA=$(printf '%s' "$PR_JSON" | jq -r '.headRefOid // ""')
           IS_DRAFT=$(printf '%s' "$PR_JSON" | jq -r '.isDraft')
           PR_AUTHOR_TYPE_FROM_API=$(printf '%s' "$PR_JSON" | jq -r 'if .author.is_bot then "Bot" else "User" end')
 
@@ -232,6 +233,15 @@ jobs:
             *) context_fail "Tipo autore PR #$PR_NUMBER inatteso: il redflag fixer resta fail-closed." ;;
           esac
 
+          if ! printf '%s' "$PR_HEAD_SHA" | grep -qE '^[a-f0-9]{40}$'; then
+            context_fail "HEAD corrente della PR malformata: il redflag fixer resta fail-closed."
+          fi
+          EVENT_HEAD_STALE=false
+          if [ "$EVENT_NAME" != "workflow_dispatch" ] && ! printf '%s\n%s\n' "$PR_HEAD_SHA" "$HEAD_SHA" | awk 'NR==1 { current=tolower($0); next } { event=tolower($0); exit current != event }'; then
+            echo "::notice::La HEAD della PR è cambiata rispetto all'evento review: contesto superato, nessun fixer azionabile."
+            EVENT_HEAD_STALE=true
+          fi
+
           REVIEW_BODY_B64=$(printf '%s' "$REVIEW_BODY" | base64 -w0)
           {
             echo "pr_number=$PR_NUMBER"
@@ -246,6 +256,7 @@ jobs:
             echo "review_commit_id=$REVIEW_COMMIT_ID"
             echo "review_user_type=$REVIEW_USER_TYPE"
             echo "review_user_login=$REVIEW_USER_LOGIN"
+            echo "event_head_stale=$EVENT_HEAD_STALE"
           } >> "$GITHUB_OUTPUT"
 
       - name: PR still actionable?
@@ -263,9 +274,15 @@ jobs:
           REVIEW_USER_LOGIN: ${{ steps.normalize.outputs.review_user_login }}
           IS_DRAFT: ${{ steps.normalize.outputs.is_draft }}
           PR_AUTHOR_TYPE: ${{ steps.normalize.outputs.pr_author_type }}
+          EVENT_HEAD_STALE: ${{ steps.normalize.outputs.event_head_stale }}
         run: |
           set -uo pipefail
           write_scope_output() { printf '%s\n' "$1" >> "$GITHUB_OUTPUT"; }
+          if [ "$EVENT_NAME" != "workflow_dispatch" ] && [ "$EVENT_HEAD_STALE" = "true" ]; then
+            echo "Contesto review stale per la PR #$PR_NUMBER → skip 🔴-fix (no-op, nessun round consumato)."
+            echo "actionable=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
           if ! REVIEW_BODY=$(printf '%s' "$REVIEW_BODY_B64" | base64 --decode 2>/dev/null); then
             echo "::error::Review body non decodificabile: il redflag fixer resta fail-closed."
             echo "actionable=false" >> "$GITHUB_OUTPUT"; exit 0

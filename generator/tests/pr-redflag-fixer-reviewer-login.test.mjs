@@ -105,6 +105,26 @@ test('il redflag fixer ammette Codex solo con contesto PR/review verificato', ()
   );
 });
 
+test('un evento review con HEAD stantia viene scartato prima di scope, lease e marker', () => {
+  const normalizeStart = src.indexOf('- name: Normalize trigger context');
+  const preStart = src.indexOf('- name: PR still actionable?', normalizeStart);
+  const scopeStart = src.indexOf('\n  scope:', preStart);
+  assert.ok(normalizeStart >= 0 && preStart > normalizeStart && scopeStart > preStart);
+
+  const normalize = src.slice(normalizeStart, preStart);
+  assert.match(normalize, /PR_HEAD_SHA=.*\.headRefOid/);
+  assert.match(normalize, /EVENT_HEAD_STALE=false/);
+  assert.match(normalize, /event_head_stale=\$EVENT_HEAD_STALE/);
+  assert.match(normalize, /La HEAD della PR è cambiata rispetto all'evento review/);
+
+  const pre = src.slice(preStart, scopeStart);
+  assert.match(pre, /EVENT_HEAD_STALE: \$\{\{ steps\.normalize\.outputs\.event_head_stale \}\}/);
+  assert.match(pre, /EVENT_HEAD_STALE.*true/);
+  assert.match(pre, /actionable=false/);
+  assert.ok(pre.indexOf('EVENT_HEAD_STALE') < pre.indexOf('REVIEW_BODY='),
+    'lo skip stale deve avvenire prima della classificazione della review');
+});
+
 test('il push guard controlla il token che il push remote usa davvero', () => {
   const at = src.indexOf('- name: Configure push remote');
   const next = src.indexOf('\n      - name:', at + 1);
