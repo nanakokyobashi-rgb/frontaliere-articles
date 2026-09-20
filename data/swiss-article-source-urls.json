@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/u9thm3lcuedlownt4isd4": {
-    "articleId": "esportazioni-svizzera-luglio-2026",
-    "ts": "2026-08-20T06:17:58.491Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1944940/esportazioni-forte-importazioni-cresciute-stagnazione": {
     "articleId": "esportazioni-aumento-svizzera",
     "ts": "2026-08-20T06:39:03.973Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4093774": {
     "articleId": "revolut-hacker-svizzera-pec",
     "ts": "2026-09-20T06:48:51.629Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1951382/iniziativa-consiglio-stato-voto-legge-franchi-chiede-controprogetto-svizzera-cantoni": {
+    "articleId": "votazioni-cantoni-27-settembre",
+    "ts": "2026-09-20T07:41:41.361Z",
     "keyForm": 2
   }
 }
