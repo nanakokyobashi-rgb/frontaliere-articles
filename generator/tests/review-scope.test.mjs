@@ -113,6 +113,38 @@ test('basename ambiguo resta non risolvibile e quindi bloccante', () => {
   assert.equal(result.blocking, true);
 });
 
+test('un finding BODY-only espone un terminale deterministico distinto dal fuori diff', () => {
+  const prBody = [
+    '## Implementato',
+    '- Fix applicato.',
+    '',
+    '## Non implementato (ancora)',
+    '- Decisione esterna: `per scelta`. **Motivo:** serve la finestra reale. **Prossimo passo:** verificare dopo il deploy.',
+  ].join('\n');
+  const bodyOnly = classifyImportantFindings(
+    '`PR body:L5`: 🔴 Important: la voce non e\' un difetto di codice.',
+    ['scripts/ci/review-scope.mjs'],
+    ['scripts/ci/review-scope.mjs'],
+    { bodyContractPassed: true, prBody },
+  );
+  assert.equal(bodyOnly.bodyDeclassified.length, 1);
+  assert.equal(bodyOnly.bodyOnly, true);
+  assert.equal(bodyOnly.outside.length, 0);
+  assert.equal(bodyOnly.blocking, false);
+
+  const mixed = classifyImportantFindings(
+    [
+      '`PR body:L5`: 🔴 Important: la voce non e\' un difetto di codice.',
+      '`scripts/ci/review-scope.mjs:1`: 🔴 Important: il codice e\' rotto.',
+    ].join('\n'),
+    ['scripts/ci/review-scope.mjs'],
+    ['scripts/ci/review-scope.mjs'],
+    { bodyContractPassed: true, prBody },
+  );
+  assert.equal(mixed.bodyOnly, false, 'un finding di codice impedisce il terminale BODY-only');
+  assert.equal(mixed.blocking, true);
+});
+
 test('un path completo assente dal tree resta non risolvibile e bloccante', () => {
   const result = classifyImportantFindings(
     '`scripts/ci/renamed-away.mjs:12`: 🔴 Important: il file citato non esiste.',
