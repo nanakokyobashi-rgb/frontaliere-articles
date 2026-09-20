@@ -48,7 +48,8 @@ function requiredCheckOutcome({ step, eventName, draft, headRef = '', reviewGate
     /\bexit\s+1\b/.test(step);
   const mirrorExemption =
     /github\.event_name\s*!=\s*['"]pull_request['"]/.test(step) &&
-    /github\.event\.pull_request\.head\.ref\s*!=\s*['"]engine-lockstep-auto['"]/.test(step);
+    /github\.event\.pull_request\.head\.ref\s*!=\s*['"]engine-lockstep-auto['"]/.test(step) &&
+    /github\.event\.pull_request\.head\.repo\.full_name\s*!=\s*github\.repository/.test(step);
 
   return failClosedGuard && mirrorExemption && eventName === 'pull_request' && draft === false &&
     headRef !== 'engine-lockstep-auto' && reviewGateOutcome === 'skipped'
@@ -118,4 +119,11 @@ test('workflow_dispatch con `pr_number` può eseguire il gate completo su una PR
   assert.match(skipped, /inputs\.pr_number/);
   assert.match(skipped, /github\.event_name != 'pull_request'/);
   assert.match(skipped, /github\.event\.pull_request\.head\.ref != 'engine-lockstep-auto'/);
+  assert.match(skipped, /github\.event\.pull_request\.head\.repo\.full_name != github\.repository/);
+
+  for (const name of ['PR-body completeness + multi-issue Closes (zero-Claude)', 'Resolve PR']) {
+    const block = stepBlock(yaml, name);
+    assert.match(block, /github\.event\.pull_request\.head\.ref != 'engine-lockstep-auto'/);
+    assert.match(block, /github\.event\.pull_request\.head\.repo\.full_name != github\.repository/);
+  }
 });
