@@ -900,6 +900,12 @@ jobs:
             exit 1
           }
 
+          context_skip() {
+            echo "::notice::$1"
+            echo "context_verified=false" >> "$GITHUB_OUTPUT"
+            echo "context_skipped=true" >> "$GITHUB_OUTPUT"
+          }
+
           # `pull_request_review` può essere consegnato dopo un push. Il suo
           # `head.sha` è quindi solo l'input dell'evento, non una prova che la
           # PR remota sia ancora su quella HEAD. Conservare la risposta REST
@@ -934,7 +940,11 @@ jobs:
             context_fail "HEAD corrente della PR malformata: il redflag fixer resta fail-closed senza Claude."
           fi
           if ! printf '%s\n%s\n' "$current_head_sha" "$HEAD_SHA" | awk 'NR==1 { current=tolower($0); next } { event=tolower($0); exit current != event }'; then
-            context_fail "La HEAD della PR è cambiata rispetto all'evento review: il redflag fixer resta fail-closed senza Claude."
+            # Una review puo' arrivare dopo un push: il contesto e' superato,
+            # ma non e' un errore del fixer. Mantieni il fail-closed e chiudi
+            # questo run come no-op verde, senza spendere Codex.
+            context_skip "La HEAD della PR è cambiata rispetto all'evento review: contesto superato, nessun Claude avviato."
+            exit 0
           fi
           # Derive the body bytes from the same projected snapshot that enters
           # the bundle. Hashing an independent API response would recreate the
@@ -1015,7 +1025,10 @@ jobs:
           ls -la "$OUT"
 
       - name: Fail closed when review context is unavailable
-        if: always() && steps.guard.outputs.proceed == 'true' && steps.ctx.outputs.context_verified != 'true'
+        if: >-
+          always() && steps.guard.outputs.proceed == 'true' &&
+          steps.ctx.outputs.context_verified != 'true' &&
+          steps.ctx.outputs.context_skipped != 'true'
         run: |
           echo "::error::Contesto PR/review non verificato: nessun turno Claude ammesso."
           exit 1
