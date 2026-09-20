@@ -46,6 +46,16 @@ test('un outcome cancelled è retryable anche senza file diagnostico', () => {
   );
 });
 
+test('il timeout interno del watchdog è classificato cancelled e resta retryable', () => {
+  assert.deepEqual(
+    classifyCodexReviewFailure({
+      outcome: 'failure',
+      raw: JSON.stringify({ type: 'codex_timeout', codex_timeout: true, timeout_seconds: 900 }),
+    }),
+    { cause: CODEX_REVIEW_FAILURE_CAUSE.CANCELLED, numTurns: null, source: 'structured' },
+  );
+});
+
 test('stderr rate-limit su stream misto JSON+testo resta retryable', () => {
   const mixed = [
     JSON.stringify({ type: 'item.completed', text: 'The prompt mentions HTTP 429 rate_limit.' }),
