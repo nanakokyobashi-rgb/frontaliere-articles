@@ -51,6 +51,9 @@ const NOT_REACHING_CONTRACT = {
     'host/firebaseAuthPersistence.ts: getFirebaseApiKey() è usata solo dai consumer runtime; ' +
     'host/constants.ts importa esclusivamente FIREBASE_AUTH_SESSION_MARKER_KEY, quindi la ' +
     'lettura non viene valutata dalla superficie pinnata.',
+  POST_WALK_INCREMENTAL:
+    'host/shared/postWalkDerivedDigest.ts: abilita solo la cache del post-walk; la probe del ' +
+    'contratto pinna la forma del WriteCollector, non la sua strategia di conservazione.',
 };
 
 test('ogni test che pinna il contratto normalizza l\'ambiente PRIMA di importare il bootstrap', () => {

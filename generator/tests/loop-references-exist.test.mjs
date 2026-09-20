@@ -1534,6 +1534,13 @@ const DECLARED_ABSENT = {
       'Il file e\' `identical` nel manifest: riscriverla qui fabbricherebbe un `corpus-ahead` ' +
       'su un commento, quindi la correzione va fatta sul sito e fatta scendere.',
   },
+  'scripts/ci/orphan-pr-custodian.mjs :: retry-native-automerge.yml': {
+    kind: 'site-only',
+    reason:
+      'Riferimento descrittivo al workflow di retry del percorso auto-merge posseduto dal sito; ' +
+      'il custode del corpus non lo invoca e nessun percorso runtime locale dipende dalla sua ' +
+      'presenza.',
+  },
 };
 
 // Prima del rollout, i caller reusable esistenti richiedono le dichiarazioni

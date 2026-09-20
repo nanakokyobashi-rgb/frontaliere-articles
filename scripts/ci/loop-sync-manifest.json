@@ -355,7 +355,8 @@
       "baseline": {
         "site": "783de6489ec92d72",
         "corpus": "fa4a9b7210c0f837",
-        "alignedAt": "2026-09-20"
+        "alignedAt": "2026-09-20",
+        "forcedAt": "2026-09-20T08:39:04.396Z"
       }
     },
     {
@@ -1092,18 +1093,18 @@
       "path": "scripts/ci/lib/review-input-revision.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "d869cb07abc6814c",
-        "corpus": "d869cb07abc6814c",
-        "alignedAt": "2026-09-19"
+        "site": "91b7813dd520c328",
+        "corpus": "91b7813dd520c328",
+        "alignedAt": "2026-09-20"
       }
     },
     {
       "path": "scripts/ci/orphan-pr-custodian.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "c6434469fb6fb309",
-        "corpus": "c6434469fb6fb309",
-        "alignedAt": "2026-09-19"
+        "site": "e2a4715a3e983c0e",
+        "corpus": "e2a4715a3e983c0e",
+        "alignedAt": "2026-09-20"
       }
     },
     {
@@ -1723,9 +1724,9 @@
       "mode": "identical",
       "reason": "Push con retry usato dai job che scrivono sugli shard. RIALLINEATO il 2026-08-24 (stranded-twin, 5.2gg): il sito aveva aggiunto il flag opt-in `--soft-fail-exhausted` (warn+exit 0 invece di exit 1 su MAX_ATTEMPTS esaurito, per un caller la cui data e' una recomputation a finestra scorrevole che si riprende da sola al giro dopo — vedi issue del sito #5568). Nessun caller di questo repo lo passa ancora, quindi la copia e' comportamentalmente no-op qui finche' non viene adottato. Il file cita esplicitamente issue del SITO (#2988, #4190, #4557, #3809, #4183, #5568): e' un gemello, non un omonimo. Le registrazioni dei merge driver (`known-slugs-shard`, `orphan-enriched-shard`, `ai-cache`, `compat-shard`) puntano a `scripts/ci/merge-*.mjs` che qui non esistono — innocuo: ogni `git config` finisce in `|| true` e nessun `.gitattributes` locale marca quei path, quindi il driver non viene mai invocato. Se un giorno un `.gitattributes` di questo repo marcasse uno di quei path, il driver mancante diventerebbe un guasto: e' l'unica condizione da tenere d'occhio.",
       "baseline": {
-        "site": "d6f2b1ea4d93825e",
-        "corpus": "d6f2b1ea4d93825e",
-        "alignedAt": "2026-09-18"
+        "site": "e025b374bcde5513",
+        "corpus": "e025b374bcde5513",
+        "alignedAt": "2026-09-20"
       }
     },
     {
@@ -2757,9 +2758,19 @@
       "sitePath": "build-plugins/batchWrite.ts",
       "mode": "identical",
       "baseline": {
-        "site": "d0e045812aef8d35",
-        "corpus": "d0e045812aef8d35",
-        "alignedAt": "2026-08-09"
+        "site": "33e2ddbfa2d92820",
+        "corpus": "33e2ddbfa2d92820",
+        "alignedAt": "2026-09-20"
+      }
+    },
+    {
+      "path": "host/shared/postWalkDerivedDigest.ts",
+      "sitePath": "build-plugins/shared/postWalkDerivedDigest.ts",
+      "mode": "identical",
+      "baseline": {
+        "site": "2e1c78dc51deb33a",
+        "corpus": "2e1c78dc51deb33a",
+        "alignedAt": "2026-09-20"
       }
     },
     {
@@ -2911,9 +2922,9 @@
       "mode": "identical",
       "reason": "Classificazione per locale dei file emessi, usata per dividere gli shard. Allineato il 2026-08-14 (corpus#303): fino a quel giorno il blob qui era quello del sito a `valerielinc-ops@be6b31d5` e la correzione #5327 non era mai scesa — `dist/<loc>.html` e' la homepage di locale, sta alla RADICE di dist e non sotto `dist/<loc>/`, e classificarla per prefisso la mandava in `it`. Sul sito quel difetto aveva prodotto `/en.html` `/de.html` `/fr.html` a 404 in produzione. La copia porta anche #5709 (`404.html`, trampolino SPA che Pages serve solo alla radice dello shard, ora spedito da OGNI shard). Qui il filtro e' inerte finche' `BUILD_LOCALE` resta vuoto, ma e' la meta' `host/` di un contratto condiviso e deve restare byte-uguale.",
       "baseline": {
-        "site": "cb1eb188340ee39e",
-        "corpus": "cb1eb188340ee39e",
-        "alignedAt": "2026-08-14"
+        "site": "167d3c826a97d8cc",
+        "corpus": "167d3c826a97d8cc",
+        "alignedAt": "2026-09-20"
       }
     },
     {
@@ -2992,9 +3003,9 @@
       "sitePath": "build-plugins/sharedWriteRegistry.ts",
       "mode": "identical",
       "baseline": {
-        "site": "a97ed1adc182a002",
-        "corpus": "a97ed1adc182a002",
-        "alignedAt": "2026-08-31"
+        "site": "e93c6a89dc08244e",
+        "corpus": "e93c6a89dc08244e",
+        "alignedAt": "2026-09-20"
       }
     },
     {
@@ -3336,8 +3347,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-01.yml",
       "mode": "identical",
       "baseline": {
-        "site": "bf32f597fb11466f",
-        "corpus": "bf32f597fb11466f",
+        "site": "e0673a94f587fded",
+        "corpus": "e0673a94f587fded",
         "alignedAt": "2026-09-20"
       }
     },
@@ -3346,8 +3357,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-02.yml",
       "mode": "identical",
       "baseline": {
-        "site": "57f945e6d2b8028c",
-        "corpus": "57f945e6d2b8028c",
+        "site": "ea6bd42715ef1068",
+        "corpus": "ea6bd42715ef1068",
         "alignedAt": "2026-09-20"
       }
     },
@@ -3356,8 +3367,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-03.yml",
       "mode": "identical",
       "baseline": {
-        "site": "aa7e8500dc1a16a1",
-        "corpus": "aa7e8500dc1a16a1",
+        "site": "6b52b8b8f27c59a2",
+        "corpus": "6b52b8b8f27c59a2",
         "alignedAt": "2026-09-20"
       }
     },
@@ -3366,8 +3377,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-04.yml",
       "mode": "identical",
       "baseline": {
-        "site": "bbf0f22ea69397e2",
-        "corpus": "bbf0f22ea69397e2",
+        "site": "0f5dfe545f06681c",
+        "corpus": "0f5dfe545f06681c",
         "alignedAt": "2026-09-20"
       }
     },
@@ -3376,8 +3387,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-05.yml",
       "mode": "identical",
       "baseline": {
-        "site": "28dd458903ce8ca7",
-        "corpus": "28dd458903ce8ca7",
+        "site": "ad84b3d560886e53",
+        "corpus": "ad84b3d560886e53",
         "alignedAt": "2026-09-20"
       }
     },
@@ -3386,8 +3397,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-06.yml",
       "mode": "identical",
       "baseline": {
-        "site": "7b7968fd36529abb",
-        "corpus": "7b7968fd36529abb",
+        "site": "430f344bf9c65de6",
+        "corpus": "430f344bf9c65de6",
         "alignedAt": "2026-09-20"
       }
     },
@@ -3396,8 +3407,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-07.yml",
       "mode": "identical",
       "baseline": {
-        "site": "3bb30f775cbef9eb",
-        "corpus": "3bb30f775cbef9eb",
+        "site": "2feebe6cab4234b4",
+        "corpus": "2feebe6cab4234b4",
         "alignedAt": "2026-09-20"
       }
     },
@@ -3406,8 +3417,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-08.yml",
       "mode": "identical",
       "baseline": {
-        "site": "3cb6fad589b241f6",
-        "corpus": "3cb6fad589b241f6",
+        "site": "0c16f7431a72d120",
+        "corpus": "0c16f7431a72d120",
         "alignedAt": "2026-09-20"
       }
     },
@@ -3416,8 +3427,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-09.yml",
       "mode": "identical",
       "baseline": {
-        "site": "2e6089f2dd4b4038",
-        "corpus": "2e6089f2dd4b4038",
+        "site": "6209069e5f8c9f8c",
+        "corpus": "6209069e5f8c9f8c",
         "alignedAt": "2026-09-20"
       }
     },
@@ -3426,8 +3437,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-10.yml",
       "mode": "identical",
       "baseline": {
-        "site": "a6b37e7b8ac578b6",
-        "corpus": "a6b37e7b8ac578b6",
+        "site": "44c80a56f07d38be",
+        "corpus": "44c80a56f07d38be",
         "alignedAt": "2026-09-20"
       }
     },
@@ -3436,8 +3447,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-11.yml",
       "mode": "identical",
       "baseline": {
-        "site": "074d0710faaca461",
-        "corpus": "074d0710faaca461",
+        "site": "1bd4640df8ab3c6d",
+        "corpus": "1bd4640df8ab3c6d",
         "alignedAt": "2026-09-20"
       }
     },
@@ -3446,8 +3457,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-12.yml",
       "mode": "identical",
       "baseline": {
-        "site": "7ae6e5e8fce32bf3",
-        "corpus": "7ae6e5e8fce32bf3",
+        "site": "46870dc1d1165565",
+        "corpus": "46870dc1d1165565",
         "alignedAt": "2026-09-20"
       }
     },
@@ -3456,8 +3467,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-13.yml",
       "mode": "identical",
       "baseline": {
-        "site": "1b686063a333334b",
-        "corpus": "1b686063a333334b",
+        "site": "7e90971d77066edf",
+        "corpus": "7e90971d77066edf",
         "alignedAt": "2026-09-20"
       }
     },
@@ -3466,8 +3477,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-14.yml",
       "mode": "identical",
       "baseline": {
-        "site": "7f91dfbd5c43b8a7",
-        "corpus": "7f91dfbd5c43b8a7",
+        "site": "1e4708b818fa1404",
+        "corpus": "1e4708b818fa1404",
         "alignedAt": "2026-09-20"
       }
     },
@@ -3476,8 +3487,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-15.yml",
       "mode": "identical",
       "baseline": {
-        "site": "f8fa38b80e9054b4",
-        "corpus": "f8fa38b80e9054b4",
+        "site": "d901553181855fb2",
+        "corpus": "d901553181855fb2",
         "alignedAt": "2026-09-20"
       }
     },
@@ -3486,8 +3497,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-16.yml",
       "mode": "identical",
       "baseline": {
-        "site": "163dbe05757ca457",
-        "corpus": "163dbe05757ca457",
+        "site": "93db8e9da2a0e071",
+        "corpus": "93db8e9da2a0e071",
         "alignedAt": "2026-09-20"
       }
     },
@@ -3496,8 +3507,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-17.yml",
       "mode": "identical",
       "baseline": {
-        "site": "9461bf0b1892b4c9",
-        "corpus": "9461bf0b1892b4c9",
+        "site": "38c7b02d308c0ebe",
+        "corpus": "38c7b02d308c0ebe",
         "alignedAt": "2026-09-20"
       }
     },
@@ -3506,8 +3517,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-18.yml",
       "mode": "identical",
       "baseline": {
-        "site": "bc3be2a57d37964b",
-        "corpus": "bc3be2a57d37964b",
+        "site": "3a66e0db2ae1ecb7",
+        "corpus": "3a66e0db2ae1ecb7",
         "alignedAt": "2026-09-20"
       }
     },
@@ -3516,8 +3527,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-19.yml",
       "mode": "identical",
       "baseline": {
-        "site": "7f7cb19021c48c8f",
-        "corpus": "7f7cb19021c48c8f",
+        "site": "0e8ebbb43437644a",
+        "corpus": "0e8ebbb43437644a",
         "alignedAt": "2026-09-20"
       }
     },
@@ -3574,10 +3585,11 @@
     {
       "path": "generator/data/crawler-cross-repo-contract.json",
       "sitePath": ".github/corpus-workflows/contract.json",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "Il contratto trasportato dal sito e' adattato nel corpus per attestare gli artifactSha256 reali dei workflow crawler presenti qui: la copia sito 166b72214eec9faf conserva i digest della generazione precedente, mentre la baseline corpus pinna i file effettivamente verificati da generator/tests/crawler-cross-repo-artifacts.test.mjs. Non e' quindi un gemello byte-identico da sovrascrivere al trasporto successivo.",
       "baseline": {
-        "site": "e3d874922149b22e",
-        "corpus": "e3d874922149b22e",
+        "site": "166b72214eec9faf",
+        "corpus": "26b7b0feb27d1e57",
         "alignedAt": "2026-09-20"
       }
     },
@@ -3601,7 +3613,7 @@
         },
         {
           "path": "generator/data/crawler-cross-repo-contract.json",
-          "mode": "identical"
+          "mode": "adapted"
         },
         {
           "path": "scripts/ci/close-recovered-failure-issues.mjs",

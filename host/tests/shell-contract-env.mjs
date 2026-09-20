@@ -45,6 +45,9 @@
  *     `WriteCollector` (typeof add/flush, `skippedByHash` iniziale);
  *   · `BUILD_LOCALE` (`host/shared/localeEmitFilter.ts`) non è raggiunta dal
  *     contratto.
+ *   · `POST_WALK_INCREMENTAL` (`host/shared/postWalkDerivedDigest.ts`) abilita
+ *     solo la conservazione della cache post-walk nel writer; la probe pinna
+ *     la forma del costruttore e non il comportamento del build incrementale.
  * Se un domani un valore del contratto ne leggesse una nuova, va aggiunta QUI:
  * questa lista è la dichiarazione di quali variabili possono muovere il digest,
  * ed è l'unico posto in cui vive (AGENTS.md #6).
