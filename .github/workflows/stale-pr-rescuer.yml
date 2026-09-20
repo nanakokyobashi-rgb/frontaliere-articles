@@ -660,7 +660,8 @@ jobs:
               else
                 if [ "$TRUSTED_MARKER_AVAILABLE" = "true" ]; then
                   round_state=$(node "$TRUSTED_MARKER_HELPER" --current-round \
-                    --repo "$REPO" --pr "$N" --marker REDFLAG_FIX_ROUND 2>/dev/null || true)
+                    --repo "$REPO" --pr "$N" --marker REDFLAG_FIX_ROUND \
+                    --expected-author github-actions[bot] 2>/dev/null || true)
                   if FIXER_ROUND=$(printf '%s' "$round_state" | jq -er \
                     --arg head "$HEAD" --arg body "$body_sha" --argjson max "$FIXER_MAX_ROUNDS" \
                     'if type == "object" and .headSha == $head and .bodyRevision == $body and (.round | type == "number" and floor == . and . >= 0 and . <= $max) then (.round | tostring) else error("trusted round state stale or malformed") end' 2>/dev/null); then

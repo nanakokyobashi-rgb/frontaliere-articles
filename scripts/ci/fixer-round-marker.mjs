@@ -13,6 +13,7 @@ import { fileURLToPath } from 'node:url';
 
 const SHA_RE = /^[a-f0-9]{40}$/i;
 const MARKER_RE = /^[A-Z][A-Z0-9_]{2,80}$/;
+const TRUSTED_MARKER_ACTOR = 'github-actions[bot]';
 export const MAX_ROUND = 2;
 
 export function canonicalBody(body) {
@@ -60,7 +61,7 @@ function parseArgs(argv) {
 }
 
 function usage() {
-  return 'uso: fixer-round-marker.mjs --repo owner/repo --pr N --marker NAME --round N --expected-head SHA --message TEXT | --current-round | --verify-current --marker NAME --round N --comment-id ID --expected-head SHA --expected-body-revision SHA | --delete-verified --marker NAME --round N --comment-id ID --expected-head SHA --expected-body-revision SHA';
+  return 'uso: fixer-round-marker.mjs --repo owner/repo --pr N --marker NAME --round N --expected-head SHA --message TEXT --expected-author github-actions[bot] | --current-round --expected-author github-actions[bot] | --verify-current --marker NAME --round N --comment-id ID --expected-head SHA --expected-body-revision SHA --expected-author github-actions[bot] | --delete-verified --marker NAME --round N --comment-id ID --expected-head SHA --expected-body-revision SHA --expected-author github-actions[bot]';
 }
 
 function runGh(args, label) {
@@ -97,7 +98,18 @@ function validateInputs(args) {
   }
   if (!SHA_RE.test(expectedHead)) throw new Error('HEAD attesa non valida');
   if (typeof args.message !== 'string') throw new Error('messaggio marker mancante');
-  return { repo, pr, marker, round, expectedHead, message: args.message };
+  return {
+    repo, pr, marker, round, expectedHead, message: args.message,
+    expectedAuthor: validateExpectedAuthor(args['expected-author']),
+  };
+}
+
+function validateExpectedAuthor(value) {
+  const author = String(value || TRUSTED_MARKER_ACTOR);
+  if (author !== TRUSTED_MARKER_ACTOR) {
+    throw new Error(`autore marker non consentito: atteso ${TRUSTED_MARKER_ACTOR}`);
+  }
+  return author;
 }
 
 function readPr(repo, pr) {
@@ -165,11 +177,12 @@ export function verifyMarkerComment({ comments, marker, round, headSha, bodySha,
   return match ? { commentId: Number(match.id), author: expectedAuthor, body: match.body, tokens } : null;
 }
 
-function readMarkerActor() {
-  const actor = runGhJson(['api', 'user'], 'lettura autore marker');
-  const login = String(actor?.login || '');
-  if (!login) throw new Error('lettura autore marker: login assente');
-  return login;
+function readMarkerActor(expectedAuthor = TRUSTED_MARKER_ACTOR) {
+  // GITHUB_TOKEN is an installation token: `/user` is not a supported identity
+  // endpoint for it. These workflows post as the fixed Actions bot, so the
+  // actor is an explicit trusted contract and every comment is checked against
+  // it. Never infer the actor from a comment or an attacker-controlled env var.
+  return validateExpectedAuthor(expectedAuthor);
 }
 
 function exactPostedComment(comments, body, author) {
@@ -213,7 +226,7 @@ export function verifiedCurrentRound({ comments, marker, headSha, bodySha, expec
   return { round, headSha, bodyRevision: bodySha, author: expectedAuthor };
 }
 
-export function readVerifiedCurrentRound({ repo, pr, marker }) {
+export function readVerifiedCurrentRound({ repo, pr, marker, expectedAuthor = TRUSTED_MARKER_ACTOR }) {
   if (!/^[^/\s]+\/[^/\s]+$/.test(repo)) throw new Error('repo non valido');
   if (!/^[1-9][0-9]*$/.test(String(pr))) throw new Error('numero PR non valido');
   if (!MARKER_RE.test(marker)) throw new Error('nome marker non valido');
@@ -233,7 +246,7 @@ export function readVerifiedCurrentRound({ repo, pr, marker }) {
       marker,
       headSha: afterComments.headSha,
       bodySha: afterComments.bodySha,
-      expectedAuthor: readMarkerActor(),
+      expectedAuthor: readMarkerActor(expectedAuthor),
     }),
   };
 }
@@ -267,18 +280,18 @@ function reconcileMalformedPost({ repo, pr, body, author }) {
   return null;
 }
 
-function postComment(repo, pr, body, { refundOnDelete = null } = {}) {
-  const expectedAuthor = readMarkerActor();
+function postComment(repo, pr, body, { refundOnDelete = null, expectedAuthor = TRUSTED_MARKER_ACTOR } = {}) {
+  const trustedAuthor = readMarkerActor(expectedAuthor);
   try {
     const comment = runGhJson([
       'api', '--method', 'POST', `repos/${repo}/issues/${pr}/comments`,
       '--raw-field', `body=${body}`,
     ], 'scrittura marker round');
-    return verifyPostedComment(comment, body, expectedAuthor);
+    return verifyPostedComment(comment, body, trustedAuthor);
   } catch (postError) {
     let reconciledId;
     try {
-      reconciledId = reconcileMalformedPost({ repo, pr, body, author: expectedAuthor });
+      reconciledId = reconcileMalformedPost({ repo, pr, body, author: trustedAuthor });
     } catch (reconcileError) {
       throw new Error(`${postError.message}; riconciliazione POST marker fallita: ${reconcileError.message}`);
     }
@@ -292,7 +305,7 @@ function postComment(repo, pr, body, { refundOnDelete = null } = {}) {
     }
     if (refundOnDelete) {
       try {
-        publishRefundHandle(repo, pr, refundOnDelete.marker, refundOnDelete.round);
+        publishRefundHandle(repo, pr, refundOnDelete.marker, refundOnDelete.round, trustedAuthor);
       } catch (refundError) {
         throw new Error(`${postError.message}; commento ${reconciledId} rimborsato ma handle refund non pubblicato: ${refundError.message}`);
       }
@@ -305,9 +318,9 @@ function deleteComment(repo, commentId) {
   runGh(['api', '--method', 'DELETE', `repos/${repo}/issues/comments/${commentId}`], 'rimborso marker round');
 }
 
-export function deleteVerifiedMarker({ repo, pr, marker, round, expectedHead, expectedBodySha, expectedCommentId }) {
+export function deleteVerifiedMarker({ repo, pr, marker, round, expectedHead, expectedBodySha, expectedCommentId, expectedAuthor = TRUSTED_MARKER_ACTOR }) {
   const comments = readComments(repo, pr);
-  const author = readMarkerActor();
+  const author = readMarkerActor(expectedAuthor);
   const verified = verifyMarkerComment({
     comments, marker, round, headSha: expectedHead, bodySha: expectedBodySha,
     expectedCommentId, expectedAuthor: author,
@@ -324,16 +337,16 @@ function refundMarkerName(marker) {
   return `${marker.slice(0, -'_ROUND'.length)}_REFUNDED`;
 }
 
-function publishRefundHandle(repo, pr, marker, round) {
+function publishRefundHandle(repo, pr, marker, round, expectedAuthor = TRUSTED_MARKER_ACTOR) {
   const refundMarker = refundMarkerName(marker);
   const body = `<!-- ${refundMarker}: ${round} -->\n_Round rimborsato: marker non verificabile; nessun round consumato._`;
-  return postComment(repo, pr, body);
+  return postComment(repo, pr, body, { expectedAuthor });
 }
 
-function deleteAndRefund({ repo, pr, commentId, marker, round, cause }) {
+function deleteAndRefund({ repo, pr, commentId, marker, round, cause, expectedAuthor = TRUSTED_MARKER_ACTOR }) {
   deleteComment(repo, commentId);
   try {
-    publishRefundHandle(repo, pr, marker, round);
+    publishRefundHandle(repo, pr, marker, round, expectedAuthor);
   } catch (error) {
     throw new Error(`${cause}; rimborso commento ${commentId} eseguito ma handle refund non pubblicato: ${error.message}`);
   }
@@ -387,6 +400,7 @@ export function postAndVerifyRoundMarker(args) {
   const commentBody = `${tokens.join('\n')}\n${input.message}`;
   const posted = postComment(input.repo, input.pr, commentBody, {
     refundOnDelete: { marker: input.marker, round: input.round },
+    expectedAuthor: input.expectedAuthor,
   });
   let lastError;
   // GitHub comment reads are eventually consistent. Keep the retry bounded;
@@ -420,6 +434,7 @@ export function postAndVerifyRoundMarker(args) {
       marker: input.marker,
       round: input.round,
       cause: lastError?.message || 'read-back marker fallita',
+      expectedAuthor: input.expectedAuthor,
     });
   } catch (error) {
     throw new Error(`${lastError?.message || 'read-back marker fallita'}; ${error.message}`);
@@ -440,6 +455,7 @@ export function verifyCurrentRoundBaseline({ repo, pr, expectedHead, expectedBod
 
 export function verifyCurrentMarker({
   repo, pr, marker, round, expectedHead, expectedBodySha, expectedCommentId,
+  expectedAuthor = TRUSTED_MARKER_ACTOR,
 }) {
   const current = readPr(repo, pr);
   if (current.headSha !== String(expectedHead).toLowerCase()) {
@@ -455,7 +471,7 @@ export function verifyCurrentMarker({
     throw new Error('round marker non valido subito prima del modello');
   }
   const comments = readComments(repo, pr);
-  const author = readMarkerActor();
+  const author = readMarkerActor(expectedAuthor);
   const afterComments = readPr(repo, pr);
   if (afterComments.headSha !== current.headSha || afterComments.bodySha !== current.bodySha) {
     throw new Error('PR HEAD/body cambiati durante la verifica finale del marker');
@@ -489,6 +505,7 @@ function main() {
   if (args['current-round']) {
     console.log(JSON.stringify(readVerifiedCurrentRound({
       repo: String(args.repo || ''), pr: String(args.pr || ''), marker: String(args.marker || ''),
+      expectedAuthor: validateExpectedAuthor(args['expected-author']),
     })));
   } else if (args['verify-current']) {
     const expectedHead = String(args['expected-head'] || '').toLowerCase();
@@ -504,6 +521,7 @@ function main() {
     console.log(JSON.stringify(verifyCurrentMarker({
       repo: String(args.repo || ''), pr: String(args.pr || ''), marker, round,
       expectedHead, expectedBodySha, expectedCommentId: commentId,
+      expectedAuthor: validateExpectedAuthor(args['expected-author']),
     })));
   } else if (args['delete-verified']) {
     const expectedHead = String(args['expected-head'] || '').toLowerCase();
@@ -519,6 +537,7 @@ function main() {
     console.log(JSON.stringify(deleteVerifiedMarker({
       repo: String(args.repo || ''), pr: String(args.pr || ''), marker, round,
       expectedHead, expectedBodySha, expectedCommentId: commentId,
+      expectedAuthor: validateExpectedAuthor(args['expected-author']),
     })));
   } else {
     console.log(JSON.stringify(postAndVerifyRoundMarker(args)));

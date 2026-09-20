@@ -49,6 +49,8 @@ for (const [file, marker] of [
       `${file}: finalizzazione Codex non vincolata al guard`);
     assert.match(source, /jq -r ['"](?:\([^\n]*\.body|\.body)/,
       `${file}: body revision non usa la fence jq contrattuale`);
+    assert.match(source, /--expected-author github-actions\[bot\]/,
+      `${file}: l'identita' trusted del token installation non e' esplicita`);
   });
 }
 
@@ -60,4 +62,6 @@ test('helper marker: snapshot paginata e prova finale restano fail-closed', () =
   assert.match(helper, /legacy\/incompleto/);
   assert.match(helper, /deleteVerifiedMarker/);
   assert.match(helper, /stesso ID\/autore\/body subito prima del modello/);
+  assert.match(helper, /TRUSTED_MARKER_ACTOR = 'github-actions\[bot\]'/);
+  assert.doesNotMatch(helper, /api', 'user/);
 });

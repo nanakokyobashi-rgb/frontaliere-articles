@@ -23,6 +23,7 @@ const BODY = '## Implementato\n\n- marker body';
 const BODY_SHA = bodyRevision(BODY);
 const REPO = 'example/repo';
 const PR = '7';
+const ACTIONS_ACTOR = 'github-actions[bot]';
 
 function fakeGh({ comments, commentsJsonOverride = null, postBody = '', refundBody = '', failComment = false, malformedPost = false, failCommentsRead = false, head = HEAD, body = BODY }) {
   const temp = mkdtempSync(path.join(os.tmpdir(), 'fixer-round-marker-'));
@@ -33,14 +34,17 @@ function fakeGh({ comments, commentsJsonOverride = null, postBody = '', refundBo
   writeFileSync(log, '');
   writeFileSync(postCount, '0');
   const gh = path.join(bin, 'gh');
-  const commentsJson = commentsJsonOverride ?? JSON.stringify([comments]);
+  const normalizedComments = comments.map((comment) => comment?.user?.login === 'fixture-bot'
+    ? { ...comment, user: { ...comment.user, login: ACTIONS_ACTOR } }
+    : comment);
+  const commentsJson = commentsJsonOverride ?? JSON.stringify([normalizedComments]);
   const postCommand = failComment
     ? 'exit 23'
-    : `count=$(cat "$FAKE_POST_COUNT"); count=$((count + 1)); printf '%s\\n' "$count" > "$FAKE_POST_COUNT"; if [ "$count" -eq 1 ] && [ "$FAKE_MALFORMED_POST" = true ]; then printf '%s\\n' '{'; else body="$FAKE_POST_BODY"; [ "$count" -gt 1 ] && body="$FAKE_REFUND_BODY"; printf '{"id":42,"user":{"login":"fixture-bot"},"body":%s}\\n' "$body"; fi`;
+    : `count=$(cat "$FAKE_POST_COUNT"); count=$((count + 1)); printf '%s\\n' "$count" > "$FAKE_POST_COUNT"; if [ "$count" -eq 1 ] && [ "$FAKE_MALFORMED_POST" = true ]; then printf '%s\\n' '{'; else body="$FAKE_POST_BODY"; [ "$count" -gt 1 ] && body="$FAKE_REFUND_BODY"; printf '{"id":42,"user":{"login":"${ACTIONS_ACTOR}"},"body":%s}\\n' "$body"; fi`;
   writeFileSync(gh, `#!/bin/sh
 echo "$*" >> "$GH_LOG"
 case "$*" in
-  "api user") printf '%s\\n' '{"login":"fixture-bot"}' ;;
+  "api user") exit 42 ;;
   *"api --method POST repos/${REPO}/issues/${PR}/comments"*)
     ${postCommand} ;;
   *"api --method DELETE repos/${REPO}/issues/comments/42"*) exit 0 ;;
@@ -228,8 +232,27 @@ test('la CLI del cap usa il read-back paginato e scarta preseed/stale', () => {
     assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
     assert.match(result.stdout, /"round":1/);
     const log = readFileSync(fake.log, 'utf8');
-    assert.match(log, /api user/);
+    assert.doesNotMatch(log, /api user/);
     assert.match(log, /api --paginate --slurp repos\/example\/repo\/issues\/7\/comments\?per_page=100/);
+  } finally {
+    rmSync(fake.temp, { recursive: true, force: true });
+  }
+});
+
+test('il token installation non usa /user e rifiuta un autore diverso dal bot trusted', () => {
+  const tokens = markerTokens({
+    marker: 'REDCHECK_FIX_ROUND', round: 1, headSha: HEAD, bodySha: BODY_SHA,
+  });
+  const postedBody = `${tokens.join('\n')}\n_round 1/2_`;
+  const fake = fakeGh({
+    comments: [{ id: 42, user: { login: 'attacker' }, body: postedBody }],
+    postBody: postedBody,
+  });
+  try {
+    const result = runVerifyCurrent(fake);
+    assert.equal(result.status, 1, `${result.stdout}\n${result.stderr}`);
+    assert.match(result.stderr, /stesso ID\/autore\/body/);
+    assert.doesNotMatch(readFileSync(fake.log, 'utf8'), /api user/);
   } finally {
     rmSync(fake.temp, { recursive: true, force: true });
   }

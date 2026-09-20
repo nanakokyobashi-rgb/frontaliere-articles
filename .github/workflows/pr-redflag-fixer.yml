@@ -717,7 +717,8 @@ jobs:
             exit 1
           fi
           if ! round_state=$(node "${{ steps.trusted_marker.outputs.path }}" \
-            --current-round --repo "$REPO" --pr "$PR_NUMBER" --marker REDFLAG_FIX_ROUND); then
+            --current-round --repo "$REPO" --pr "$PR_NUMBER" --marker REDFLAG_FIX_ROUND \
+            --expected-author github-actions[bot]); then
             echo "::error::Round REDFLAG_FIX_ROUND non verificabile con il helper trusted: nessun Codex, stato retryable."
             echo "proceed=false" >> "$GITHUB_OUTPUT"
             echo "marker_verified=false" >> "$GITHUB_OUTPUT"
@@ -794,7 +795,8 @@ jobs:
             --marker REDFLAG_FIX_ROUND \
             --round "$NEXT" \
             --expected-head "${{ needs.preflight.outputs.head_sha }}" \
-            --message "$marker_message"); then
+            --message "$marker_message" \
+            --expected-author github-actions[bot]); then
             echo "::error::Marker REDFLAG_FIX_ROUND:$NEXT non persistito o non verificabile (HEAD/body revision/commenti paginati). Nessun Codex: stato retryable, lease rilasciato dal cleanup."
             echo "proceed=false" >> "$GITHUB_OUTPUT"
             echo "marker_verified=false" >> "$GITHUB_OUTPUT"
@@ -1065,6 +1067,7 @@ jobs:
             --comment-id "$EXPECTED_COMMENT_ID" \
             --expected-head "$EXPECTED_HEAD_SHA" \
             --expected-body-revision "$EXPECTED_MARKER_BODY_REVISION" \
+            --expected-author github-actions[bot] \
             > "$OUT/marker-before-claude.json"; then
             context_fail "HEAD/body revision non verificabili con l'helper trusted subito prima di Codex: nessun fix automatico viene avviato."
           fi
@@ -1237,7 +1240,8 @@ jobs:
                 if marker_delete_result=$(node "$TRUSTED_MARKER_HELPER" --delete-verified \
                   --repo "$REPO" --pr "$PR_NUMBER" --marker "$FIX_ROUND_MARKER" \
                   --round "$FIX_ROUND" --comment-id "$MARKER_COMMENT_ID" \
-                  --expected-head "$MARKER_HEAD" --expected-body-revision "$MARKER_BODY_REVISION"); then
+                  --expected-head "$MARKER_HEAD" --expected-body-revision "$MARKER_BODY_REVISION" \
+                  --expected-author github-actions[bot]); then
                   refund_marker="${FIX_ROUND_MARKER%_ROUND}_REFUNDED"
                   gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '<!-- %s: %s -->\n_Round rimborsato: run SUPERSEDED; nessun round consumato._' "$refund_marker" "$FIX_ROUND")" >/dev/null 2>&1 || true
                   echo "round marker $FIX_ROUND_MARKER:$FIX_ROUND deleted after trusted ID/body proof → rimborsato ($marker_delete_result)"
