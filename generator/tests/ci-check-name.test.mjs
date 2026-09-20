@@ -108,13 +108,15 @@ test('il selettore condiviso legge verdetto e step dallo stesso job corrente', a
   const { VITEST_CHECK_NAME, VITEST_EXECUTION_JOB_NAME } = await import('../../scripts/ci/lib/constants.mjs');
   const { latestCompletedVitestConclusion, latestCompletedVitestExecutionRun } = await import('../../scripts/ci/lib/vitestCheck.mjs');
   const latest = {
+    id: 2,
     name: VITEST_CHECK_NAME, status: 'completed', conclusion: 'failure',
+    head_sha: 'a'.repeat(40), created_at: '2026-09-10T06:00:00Z',
     completed_at: '2026-09-10T06:00:00Z', details_url: 'https://github.com/owner/repo/actions/runs/1/job/2',
   };
   const runs = [
-    { ...latest, conclusion: 'success', completed_at: '2026-09-10T05:00:00Z' },
+    { ...latest, id: 1, conclusion: 'success', created_at: '2026-09-10T05:00:00Z', completed_at: '2026-09-10T05:00:00Z' },
     latest,
-    { ...latest, conclusion: 'skipped', completed_at: '2026-09-10T07:00:00Z' },
+    { ...latest, id: 3, conclusion: 'skipped', created_at: '2026-09-10T07:00:00Z', completed_at: '2026-09-10T07:00:00Z' },
   ];
   assert.equal(VITEST_EXECUTION_JOB_NAME, VITEST_CHECK_NAME);
   assert.equal(latestCompletedVitestExecutionRun(runs), latest);

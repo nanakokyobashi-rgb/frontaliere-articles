@@ -25,6 +25,10 @@ import {
   findTestOnlyApproval,
   TEST_REVIEW_MARKER,
 } from './review-test-policy.mjs';
+import {
+  RUN_SELECTION_STATES,
+  latestCompletedRunSelectionByName,
+} from './lib/vitestCheck.mjs';
 
 const TESTS_WORKFLOW_PATH = '.github/workflows/tests.yml';
 const TESTS_WORKFLOW_EVENT = 'pull_request';
@@ -217,35 +221,36 @@ function testOnlyReviewIsApproved(review, head) {
   return reviewHasZeroFindings(review.body) && reviewHasLgtm(review.body);
 }
 
-/** Select the newest completed required check; an active run always blocks. */
+/** Select the newest generation of the required check; active/ambiguous runs block. */
 export function requiredVitestDecision(checkRuns, head) {
   if (!Array.isArray(checkRuns) || typeof head !== 'string' || !head) {
     return { allow: false, reason: 'check-runs non verificabili' };
   }
-  const runs = checkRuns.filter((check) => check?.name === VITEST_CHECK_NAME && check.head_sha === head);
-  if (runs.length === 0) {
+  const selection = latestCompletedRunSelectionByName(checkRuns, VITEST_CHECK_NAME);
+  if (selection.state === RUN_SELECTION_STATES.PENDING) {
+    const reason = selection.reason === 'missing'
+      ? `check required ${VITEST_CHECK_NAME} assente sulla HEAD`
+      : `check required ${VITEST_CHECK_NAME} pending sulla HEAD`;
+    return { allow: false, reason };
+  }
+  if (selection.state === RUN_SELECTION_STATES.AMBIGUOUS || !selection.run) {
+    return { allow: false, reason: `check required ${VITEST_CHECK_NAME} non verificabile sulla HEAD` };
+  }
+  if (selection.run.head_sha !== head) {
     return { allow: false, reason: `check required ${VITEST_CHECK_NAME} assente sulla HEAD` };
   }
-  if (runs.some((check) => check.status !== 'completed')) {
-    return { allow: false, reason: `check required ${VITEST_CHECK_NAME} pending sulla HEAD` };
-  }
-  if (runs.some((check) => !check.conclusion || !Number.isFinite(Date.parse(check.completed_at || '')))) {
-    return { allow: false, reason: `check required ${VITEST_CHECK_NAME} senza verdetto completato` };
-  }
-  const latest = [...runs].sort(
-    (left, right) => Date.parse(left.completed_at) - Date.parse(right.completed_at),
-  ).at(-1);
-  if (latest.conclusion !== 'success') {
-    return { allow: false, reason: `check required ${VITEST_CHECK_NAME} conclusion=${latest.conclusion}` };
+  if (selection.run.conclusion !== 'success') {
+    return { allow: false, reason: `check required ${VITEST_CHECK_NAME} conclusion=${selection.run.conclusion}` };
   }
   return { allow: true, reason: `${VITEST_CHECK_NAME} success sulla HEAD` };
 }
 
 function latestRequiredVitestCheck(checkRuns, head) {
-  const runs = checkRuns.filter((check) => check?.name === VITEST_CHECK_NAME && check.head_sha === head);
-  return [...runs].sort(
-    (left, right) => Date.parse(left.completed_at || '') - Date.parse(right.completed_at || ''),
-  ).at(-1) || null;
+  const selection = latestCompletedRunSelectionByName(checkRuns, VITEST_CHECK_NAME);
+  return selection.state === RUN_SELECTION_STATES.SELECTED
+    && selection.run?.head_sha === head
+    ? selection.run
+    : null;
 }
 
 function validTimestamp(value) {

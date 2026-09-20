@@ -11,7 +11,7 @@ const GATE = resolve(ROOT, 'scripts/ci/native-automerge-gate.mjs');
 const source = readFileSync(WORKFLOW, 'utf8');
 const gateSource = readFileSync(GATE, 'utf8');
 
-const VITEST_IMPORT_RE = /\bimport\s+(?:[^;\n]+\s+from\s+)?['"]\.\/lib\/vitestCheck\.mjs['"]/;
+const VITEST_IMPORT_RE = /\bimport\s+(?:[^;]*?\s+from\s+)?['"]\.\/lib\/vitestCheck\.mjs['"]/s;
 
 test('riattiva il gate sugli eventi che possono cambiare review, check o HEAD', () => {
   assert.match(source, /types: \[opened, reopened, ready_for_review, synchronize\]/);
@@ -78,8 +78,8 @@ test('#1604: il bootstrap ritenta solo letture GitHub transitorie e resta fail-c
   assert.match(source, /download_and_check \\\n\s+'scripts\/ci\/lib\/constants\.mjs' "\$helper_dir\/lib\/constants\.mjs"/);
 });
 
-test('il gate corrente non trascina vitestCheck come dipendenza hard', () => {
-  assert.doesNotMatch(gateSource, VITEST_IMPORT_RE);
+test('il gate corrente usa il selettore tri-state condiviso come dipendenza hard', () => {
+  assert.match(gateSource, VITEST_IMPORT_RE);
   assert.match(source, /gate_requires_vitest=unknown/);
   assert.match(source, /moduleRequests\?\.map\(\(\{ specifier \}\) => specifier\)/);
   assert.match(source, /requests\.includes\('\.\/lib\/vitestCheck\.mjs'\) \? 'true' : 'false'/);

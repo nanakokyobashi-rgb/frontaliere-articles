@@ -297,32 +297,98 @@ jobs:
             if printf '%s\n' "$checks" | jq -s -e 'all(.[]; (.check_runs | length) == 0)' >/dev/null 2>&1; then
               CHECKS_STATE=empty
             fi
-            # ULTIMO check-run COMPLETATO per `completed_at`, non l'ultimo per
-            # ordine API: uno stesso SHA può portare più check omonimi (il run
-            # da `pull_request` più un `workflow_dispatch` manuale), e prendere
-            # un verdetto arbitrario fa mascherare un `success` reale da un
-            # `failure` stantio. Stessa selezione di `vitestCheck.mjs`.
-            #
-            # Il tie-break su `.id` non è cosmetico: `completed_at` è un ISO8601
-            # risolto al SECONDO, e due run sullo stesso SHA che chiudono nello
-            # stesso secondo sono ordinariamente possibili — un rerun parte
-            # quando il primo è quasi finito. A parità di chiave `sort_by` è
-            # STABILE, quindi senza tie-break l'ultimo è quello che l'API ha
-            # elencato per ultimo: cioè un ordine che non è il tempo. `.id` dei
-            # check-run è monotono crescente ed è l'unico discriminante che il
-            # payload offre a quella risoluzione.
-            if ! TESTS_CONCL=$(echo "$checks" | jq -rs --arg n "$CI_CHECK_NAME" \
-              '[.[].check_runs[]? | select(.name==$n and .status=="completed" and .completed_at)] | sort_by([.completed_at, .id]) | last | .conclusion // "none"')
-            then
-              echo "::warning::Verdetto dei check della PR #$N non verificabile — nessun rescue o mutation."
-              continue
-            fi
-            if ! TESTS_PENDING=$(echo "$checks" | jq -rs --arg n "$CI_CHECK_NAME" \
-              '[.[].check_runs[]? | select(.name==$n and .status!="completed")] | length')
-            then
-              echo "::warning::Stato pending dei check della PR #$N non verificabile — nessun rescue o mutation."
-              continue
-            fi
+            # ULTIMA GENERAZIONE verificabile, non l'ultimo runner a finire:
+            # `completed_at` descrive il completamento e un rerun vecchio può
+            # arrivare dopo quello nuovo. La forma REST di check-runs espone
+            # sempre `id` e `head_sha`; `created_at` identifica la generazione
+            # quando presente, altrimenti si usa l'ID del workflow nel
+            # `details_url`. L'id del check-run rompe i pareggi, non è da solo
+            # una generazione certa. Se nessun marcatore è confrontabile, il
+            # rescuer resta pending invece di scegliere un verdetto.
+            TESTS_STATE=$(echo "$checks" | jq -rs --arg n "$CI_CHECK_NAME" --arg head "$HEAD" '
+              def workflow_id:
+                if (.details_url | type) != "string" then null
+                else try (.details_url | capture("^https://github[.]com/[^/]+/[^/]+/actions/runs/(?<id>[1-9][0-9]*)/job/[1-9][0-9]*$").id) catch null
+                end;
+              def parse_time:
+                if type != "string" or length == 0 then null
+                else (try (sub("\\.[0-9]+Z$"; "Z") | fromdateiso8601) catch null)
+                end;
+              def valid_created_at:
+                (.created_at == null)
+                or ((.created_at | parse_time) != null);
+              def valid_run_attempt:
+                (.run_attempt == null)
+                or ((.run_attempt | type) == "number"
+                  and (.run_attempt | floor == . and . >= 1));
+              def valid_suite($expected):
+                (.check_suite == null)
+                or ((.check_suite | type) == "object"
+                  and (.check_suite.id | type) == "number"
+                  and (.check_suite.id | floor == . and . >= 1)
+                  and ((.check_suite.head_sha == null)
+                    or ((.check_suite.head_sha | type) == "string"
+                      and (.check_suite.head_sha | ascii_downcase) == ($expected | ascii_downcase))));
+              def valid_external_id:
+                (.external_id == null)
+                or ((.external_id | type) == "string"
+                  and (.external_id | test("^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"; "i")));
+              def generation:
+                if (.created_at | parse_time) != null
+                then {source: "timestamp", order: (.created_at | parse_time)}
+                elif (.run_attempt | type) == "number"
+                   and (.run_attempt | floor == . and . >= 1)
+                then {source: "attempt", order: .run_attempt}
+                else (workflow_id) as $id
+                  | if $id == null then null else {source: "workflow", order: ($id | tonumber)} end
+                end;
+              def correlation_valid($expected):
+                (valid_created_at and valid_run_attempt and valid_suite($expected) and valid_external_id)
+                and (
+                  ((.created_at | parse_time) != null)
+                  or ((.run_attempt | type) == "number"
+                    and (.run_attempt | floor == . and . >= 1))
+                  or ((workflow_id != null)
+                    and (.check_suite | type) == "object"
+                    and (.external_id | type) == "string"
+                    and (.external_id | test("^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"; "i")))
+                );
+              def invalid_run($expected):
+                if (.head_sha | type) != "string" then true
+                elif (.head_sha | ascii_downcase) != ($expected | ascii_downcase) then true
+                elif (.id | type) != "number" then true
+                elif .id < 1 then true
+                elif ((.id | floor) != .id) then true
+                elif (correlation_valid($expected) | not) then true
+                elif (generation == null) then true
+                elif (.status != "completed" and .status != "queued"
+                      and .status != "in_progress" and .status != "requested"
+                      and .status != "waiting" and .status != "pending") then true
+                elif .status != "completed" then false
+                elif (.completed_at | type) != "string" then true
+                elif (.completed_at | length) == 0 then true
+                elif (.conclusion | type) != "string" then true
+                elif (.conclusion as $value | (["success", "failure", "neutral", "cancelled", "timed_out", "action_required", "stale", "skipped"] | index($value)) == null) then true
+                else false
+                end;
+              [.[].check_runs[]? | select(.name==$n)] as $all
+              | if ($all | length) == 0 then {conclusion: "none", pending: 1}
+                elif any($all[]; invalid_run($head)) then {conclusion: "none", pending: 1}
+                elif (([$all[] | .id] | unique | length) != ($all | length)) then {conclusion: "none", pending: 1}
+                else ($all | map(. + {generation: generation})) as $with_generation
+                  | if ([ $with_generation[] | .generation.source ] | unique | length) != 1 then {conclusion: "none", pending: 1}
+                    else ($with_generation | map(select(.status != "completed" or .conclusion != "skipped"))) as $verdicts
+                      | if ($verdicts | length) == 0 then {conclusion: "none", pending: 1}
+                        else ($verdicts | sort_by([.generation.order, .id]) | last) as $latest
+                          | if $latest.status == "completed"
+                            then {conclusion: $latest.conclusion, pending: 0}
+                            else {conclusion: "none", pending: 1}
+                            end
+                        end
+                    end
+                end')
+            TESTS_CONCL=$(printf '%s' "$TESTS_STATE" | jq -r '.conclusion // "none"' 2>/dev/null || echo "none")
+            TESTS_PENDING=$(printf '%s' "$TESTS_STATE" | jq -r '.pending // 1' 2>/dev/null || echo 1)
 
             # `--paginate`: una PR molto revisionata supera le 30 review di
             # default, e qui si legge l'ULTIMA — cioè proprio quella che una
