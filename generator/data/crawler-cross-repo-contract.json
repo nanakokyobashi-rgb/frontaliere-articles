@@ -1279,7 +1279,7 @@
       "sourceLogic": "crawler-group-20-logic.yml",
       "sourceSha256": "b5ce15708b5cbbd5df6f98048e76b7f765df7e9712cc7ceb95c72b26efb1b9fa",
       "artifactSha256": "bf5085750a3fb0f24a70cfb410d7fccb96000e6569b0e061d3205c4c054a3c4a",
-      "generatorSha256": "4cd338d9390629f287333d43ca9da2c9489b063437d68dc448e13a1c3d251635",
+      "generatorSha256": "80043febaa94a25e57739e8d1902dad3a62a11ace7be34b5940f74e7d59612a9",
       "members": [
         "ottos",
         "kliniken-valens",
@@ -1316,7 +1316,7 @@
       "sourceLogic": "crawler-group-21-logic.yml",
       "sourceSha256": "f5d734e28e9ee5308771d5205db3bd1834f09e794c881a9543f59b90dd1a372a",
       "artifactSha256": "7544849b9ab3b03299cbe5973c2151174285d4fae9262c0b3bc73377383e6ff4",
-      "generatorSha256": "4cd338d9390629f287333d43ca9da2c9489b063437d68dc448e13a1c3d251635",
+      "generatorSha256": "80043febaa94a25e57739e8d1902dad3a62a11ace7be34b5940f74e7d59612a9",
       "members": [
         "orell-fuessli-thalia",
         "stadtspital-zuerich",
@@ -1353,7 +1353,7 @@
       "sourceLogic": "crawler-group-22-logic.yml",
       "sourceSha256": "b8a93908a00b4a36d977923c07d051579aabb9470d946112c2a0e18244a95756",
       "artifactSha256": "c2aae36e4411429f971496f2f289fa25b2532f85a3eb30531de6f28dfe10e9c9",
-      "generatorSha256": "4cd338d9390629f287333d43ca9da2c9489b063437d68dc448e13a1c3d251635",
+      "generatorSha256": "80043febaa94a25e57739e8d1902dad3a62a11ace7be34b5940f74e7d59612a9",
       "members": [
         "rittmeyer",
         "saint-gobain-weber-isover",
@@ -1390,7 +1390,7 @@
       "sourceLogic": "crawler-group-23-logic.yml",
       "sourceSha256": "e4747b34d5843c5e79b8cea179e841643b723795c630d4f61c3f5afc139e8e3f",
       "artifactSha256": "7988233fbf595a84dfbc08cc147d42fd4936f4ecb596e70d86bc4f0b5b21a31e",
-      "generatorSha256": "4cd338d9390629f287333d43ca9da2c9489b063437d68dc448e13a1c3d251635",
+      "generatorSha256": "80043febaa94a25e57739e8d1902dad3a62a11ace7be34b5940f74e7d59612a9",
       "members": [
         "rituals-cosmetics",
         "ruag",
@@ -1427,7 +1427,7 @@
       "sourceLogic": "translate-pending-logic.yml",
       "sourceSha256": "ad8ac8ba9afb9611699ba7fd03c6ec5670ee91226cd7fba413e49f7ebc758347",
       "artifactSha256": "680f356b302f21b8101d79a30e99786f64814bd5a33c4ab9a26eac47a41678be",
-      "generatorSha256": "4cd338d9390629f287333d43ca9da2c9489b063437d68dc448e13a1c3d251635",
+      "generatorSha256": "80043febaa94a25e57739e8d1902dad3a62a11ace7be34b5940f74e7d59612a9",
       "members": []
     }
   ]

@@ -3589,7 +3589,7 @@
       "reason": "Il contratto trasportato dal sito e' adattato nel corpus per attestare gli artifactSha256 reali dei workflow crawler presenti qui: la copia sito 166b72214eec9faf conserva i digest della generazione precedente, mentre la baseline corpus pinna i file effettivamente verificati da generator/tests/crawler-cross-repo-artifacts.test.mjs. Non e' quindi un gemello byte-identico da sovrascrivere al trasporto successivo.",
       "baseline": {
         "site": "166b72214eec9faf",
-        "corpus": "02e8f7f9db8c98d0",
+        "corpus": "26b7b0feb27d1e57",
         "alignedAt": "2026-09-20"
       }
     },

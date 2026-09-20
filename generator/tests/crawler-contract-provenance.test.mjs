@@ -340,6 +340,9 @@ test('il piano reale copre i 49 digest e la lineage del contratto committato', (
   assert.equal(checks.filter((c) => c.localOnly).length, 5 + CONTRACT.artifacts.length + adaptedArtifacts);
   assert.equal(checks.length, 5 + CONTRACT.artifacts.length + 1 + CONTRACT.artifacts.length * 2);
   assert.equal(checks.filter((c) => !c.localOnly).length, 49 - adaptedArtifacts);
+  for (const artifact of CONTRACT.artifacts) {
+    assert.equal(artifact.generatorSha256, CONTRACT.generatorSha256, `${artifact.file}: generatorSha256 fuori lineage`);
+  }
   // Nessun digest resta senza una coordinata sul sito: un `sitePath` null
   // sarebbe `undeclared`, cioè rosso, ma è meglio vederlo qui che allo
   // schedule del giorno dopo.
