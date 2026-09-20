@@ -963,7 +963,7 @@ export async function classifyAndMintReview(body, {
     uncomparablePaths: history.uncomparablePaths ?? null,
   });
   for (const finding of result.staleDeclassified ?? []) {
-    console.log(`review-scope: DECLASSIFIED-UNCHANGED-LINE finding=L${finding.lineNumber} id=${finding.stableId} reason=Important NUOVO ancorato solo su righe non toccate dall'ultima review; per tenerlo bloccante dichiara \`🔴 Important: [regression]\``);
+    console.log(`review-scope: DECLASSIFIED-UNCHANGED-LINE finding=L${finding.lineNumber} id=${finding.stableId} reason=Important NUOVO ancorato solo su righe non toccate dall'ultima review; il gate resta fail-closed, [regression] segnala esplicitamente la classe`);
   }
   if (result.outside.length === 0 || !mutate) {
     return {

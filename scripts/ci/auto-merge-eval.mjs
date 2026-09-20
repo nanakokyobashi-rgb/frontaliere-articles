@@ -25,7 +25,9 @@
  *      girare per workflow-validation 401) ED è di autore fidato ED ha il
  *      completeness contract del body verde → approva su gate deterministici al
  *      posto della review. Un `🔴` su un file nel diff resta bloccante; un
- *      finding fuori diff richiede la issue follow-up prima di approvare.
+ *      finding fuori diff richiede la issue follow-up prima di approvare. Un
+ *      finding nuovo classificato `DECLASSIFIED-UNCHANGED-LINE` resta
+ *      fail-closed e richiede una review successiva esplicita.
  *   3. check-run `CI_CHECK_NAME` (qui `tests (node --test)`) sulla HEAD == `success`
  *      (NON solo != failure: richiede success → niente merge su pending/missing).
  *   4. Generator CI gate (#242): SOLO se la PR tocca i path che fanno scattare
@@ -488,6 +490,15 @@ async function main() {
         pr: PR,
         prUrl: `https://github.com/${REPO}/pull/${PR}`,
       });
+      // Un finding nuovo su righe non cambiate è classificabile per lasciare
+      // traccia nel log, ma non è prova di approvazione. Fail-closed qui evita
+      // che la CLI di diagnosi abbia una politica più permissiva del check
+      // richiesto prodotto da review-gate (regressione #1647).
+      if ((scope.staleDeclassified?.length ?? 0) > 0) {
+        return fail(
+          `La review contiene ${scope.staleDeclassified.length} finding Important nuovo su righe non cambiate (DECLASSIFIED-UNCHANGED-LINE) — skip fail-closed; serve una review successiva che lo risolva esplicitamente.`,
+        );
+      }
       // La follow-up traccia i finding FUORI dal diff: quando non ce ne sono
       // — il caso in cui gli unici 🔴 sono sul body e il contratto
       // deterministico li ha gia' giudicati — non c'e' niente da coniare, e
