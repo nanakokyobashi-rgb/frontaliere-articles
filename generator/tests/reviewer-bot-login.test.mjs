@@ -21,6 +21,7 @@ import {
   REVIEWER_BOT_LOGIN_JQ,
   isReviewerBot,
   isManagedReview,
+  isCodexFallbackReview,
   CODEX_REVIEW_MARKER,
 } from '../../scripts/ci/lib/constants.mjs';
 
@@ -76,6 +77,15 @@ test('isManagedReview allinea login GraphQL e REST dopo la normalizzazione', () 
     }),
     false,
   );
+});
+
+test('il fallback Codex REST usa il login bot esatto senza user.type', () => {
+  const body = `${CODEX_REVIEW_MARKER}\n## LGTM`;
+  assert.equal(isCodexFallbackReview({ user: { login: 'github-actions[bot]' }, body }), true);
+  assert.equal(isCodexFallbackReview({ user: { login: 'frontaliere-automation[bot]' }, body }), true);
+  assert.equal(isManagedReview({ user: { login: 'github-actions[bot]' }, body }), true);
+  assert.equal(isCodexFallbackReview({ user: { login: 'github-actions' }, body }), false);
+  assert.equal(isCodexFallbackReview({ user: { login: 'github-actions[bot]' }, body: '## LGTM' }), false);
 });
 
 test('i workflow di review rispettano il contratto di identità specifico', () => {

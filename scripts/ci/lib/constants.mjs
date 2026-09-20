@@ -324,9 +324,19 @@ export function isCodexFallbackReview(review) {
   const user = review?.user;
   const author = review?.author;
   const reviewer = user ?? author;
+  const rawLogin = String(reviewer?.login || '');
   const login = normalizedBotLogin(reviewer?.login);
-  const botIdentity = user?.type === 'Bot'
-    || (!user && author && CODEX_REVIEWER_LOGIN_RE.test(login));
+  // REST payloads identify the automation account by the exact `[bot]` login;
+  // `user.type` is optional metadata and must not be a second gate. GraphQL
+  // payloads expose `author.login`, which can omit the suffix and is normalized
+  // above. A bare REST login without `[bot]` remains rejected fail-closed.
+  const restBotIdentity = user != null
+    && /\[bot\]$/iu.test(rawLogin)
+    && CODEX_REVIEWER_LOGIN_RE.test(login);
+  const graphBotIdentity = user == null
+    && author != null
+    && CODEX_REVIEWER_LOGIN_RE.test(login);
+  const botIdentity = restBotIdentity || graphBotIdentity;
   return botIdentity
     && CODEX_REVIEWER_LOGIN_RE.test(login)
     && String(review.body || '').includes(CODEX_REVIEW_MARKER);
