@@ -12,10 +12,15 @@
  */
 import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
-import { REDFLAG_IMPORTANT_RE } from './lib/constants.mjs';
+import { REDFLAG_IMPORTANT_RE, REVIEWER_BOT_LOGIN_RE } from './lib/constants.mjs';
 import { fetchPrFiles } from './lib/fetchPrFiles.mjs';
 import { createGithubIssue } from '../lib/github-issue-creator.mjs';
 import { evaluateBodyContract } from '../lib/pr-body-contract-eval.mjs';
+import {
+  changedLinesFromPatch,
+  stableFindingId,
+  unchangedLineImportants,
+} from './lib/review-findings.mjs';
 
 const FOLLOWUP_MARKER = 'OUT_OF_SCOPE_REVIEW_FOLLOWUP';
 // Stesso margine del writer condiviso (`MAX_BODY_LEN`): il tetto API e' 65536.
@@ -277,6 +282,14 @@ export function classifyImportantFindings(body, changedFiles, repositoryPaths = 
   // Body corrente della PR: serve a PROVARE che la riga citata cade dentro
   // `## Non implementato`. Assente → nessun declassamento.
   prBody = null,
+  // Id stabili (`lib/review-findings.mjs`) dei 🔴 gia' emessi dalle review
+  // precedenti su questa PR. Un finding il cui id e' qui NON e' nuovo e non
+  // viene mai declassato dalla regola sulle righe non cambiate.
+  priorFindingIds = null,
+  // Map path → Set(righe) toccate DALL'ultima review a questa HEAD. `null` =
+  // delta non calcolabile → nessuna declassazione: su un dato mancante si
+  // tiene il finding, non lo si butta.
+  changedLinesSince = null,
 } = {}) {
   const changed = [...new Set((changedFiles || []).map(normalizePath).filter(Boolean))];
   const treeAvailable = repositoryPaths !== null && repositoryPaths !== undefined;
@@ -285,8 +298,38 @@ export function classifyImportantFindings(body, changedFiles, repositoryPaths = 
   const inScope = [];
   const unresolved = [];
   const bodyDeclassified = [];
+  const staleDeclassified = [];
 
-  for (const finding of importantFindings(body)) {
+  const allFindings = importantFindings(body);
+  // Righe davvero CONFRONTATE fra l'ultima review e questa HEAD. Il seed con
+  // l'elenco file della PR e' la parte che rende la regola utile: dopo un
+  // merge di main che NON tocca i file della PR il patch e' vuoto, e senza il
+  // seed ogni path citato risulterebbe «mai confrontato» — cioe' esattamente
+  // il caso che la regola deve coprire.
+  const comparedLines = changedLinesSince instanceof Map
+    ? new Map(changed.map((file) => [file, changedLinesSince.get(file) ?? new Set()]))
+    : null;
+  // I candidati si costruiscono QUI, sui soli finding che il parser sa
+  // delimitare: di un finding ambiguo non si puo' dire «punta a una riga non
+  // cambiata», perche' non si sa nemmeno dove finisca. Costruirlo qui invece
+  // che dentro il loop rende la proprieta' indipendente dall'ORDINE dei
+  // controlli — sul sito bastava invertire due righe per lasciar passare una
+  // review malformata.
+  const staleIds = comparedLines
+    ? new Set(unchangedLineImportants({
+      findings: allFindings.filter((finding) => !finding.parserUncertain),
+      priorFindingIds: priorFindingIds instanceof Set
+        ? priorFindingIds
+        : new Set(priorFindingIds || []),
+      changedLines: comparedLines,
+    }).map((finding) => finding.lineNumber))
+    : new Set();
+
+  for (const finding of allFindings) {
+    if (staleIds.has(finding.lineNumber)) {
+      staleDeclassified.push({ ...finding, stableId: stableFindingId(finding) });
+      continue;
+    }
     if (bodyContractPassed && finding.citations.length === 0
         && isContractDomainBodyFinding(finding, prBody)) {
       bodyDeclassified.push(finding);
@@ -328,11 +371,12 @@ export function classifyImportantFindings(body, changedFiles, repositoryPaths = 
     inScope,
     unresolved,
     bodyDeclassified,
+    staleDeclassified,
     bodyOnly: bodyDeclassified.length > 0
       && outside.length === 0
       && inScope.length === 0
       && unresolved.length === 0,
-    outsideOnly: (outside.length + bodyDeclassified.length) > 0
+    outsideOnly: (outside.length + bodyDeclassified.length + staleDeclassified.length) > 0
       && inScope.length === 0 && unresolved.length === 0,
     blocking: inScope.length > 0 || unresolved.length > 0,
   };
@@ -362,6 +406,71 @@ function readPrBody(repo, pr) {
   } catch (error) {
     console.log(`review-scope: body della PR non leggibile (${String(error).slice(0, 160)}) → nessun declassamento.`);
     return null;
+  }
+}
+
+/**
+ * Id stabili dei 🔴 gia' emessi dalle review precedenti, e la finestra di
+ * confronto su cui misurare «righe non cambiate»: il commit dell'ultima review
+ * gestita PRIMA di quella corrente, su un commit DIVERSO. Il commit diverso non
+ * e' un dettaglio — due review sulla stessa HEAD hanno delta vuoto per
+ * costruzione e declasserebbero qualunque rilievo nuovo.
+ *
+ * Deriva qui invece di farsi passare i parametri dal chiamante perche' i
+ * consumer di questo modulo sono due e uno non li passerebbe mai: il review
+ * gate in `tests.yml` e la CLI invocata da `pr-redflag-fixer.yml`. Se solo il
+ * primo li avesse, un 🔴 declassato dal gate farebbe comunque partire il fixer
+ * e brucerebbe un round su lavoro che non esiste — due politiche sullo stesso
+ * verdetto, che e' il modo in cui questo ciclo si incaglia.
+ */
+/** HEAD corrente della PR; stringa vuota se non leggibile. */
+function resolveHeadSha(repo, pr) {
+  try {
+    const head = gh(['api', `repos/${repo}/pulls/${pr}`, '--jq', '.head.sha'], { json: false }).trim();
+    return /^[0-9a-f]{40}$/iu.test(head) ? head : '';
+  } catch {
+    return '';
+  }
+}
+
+function reviewHistoryContext(repo, pr, headSha) {
+  const empty = { priorFindingIds: new Set(), changedLinesSince: null };
+  try {
+    const reviews = gh(['api', `repos/${repo}/pulls/${pr}/reviews`, '--paginate']);
+    const managed = (Array.isArray(reviews) ? reviews : [])
+      .filter((review) => review?.user?.type === 'Bot'
+        && REVIEWER_BOT_LOGIN_RE.test(String(review?.user?.login || ''))
+        && String(review?.state || '') !== 'PENDING'
+        && String(review?.state || '') !== 'DISMISSED');
+    if (managed.length === 0) return empty;
+    const priorFindingIds = new Set();
+    for (const review of managed) {
+      if (String(review?.commit_id || '') === String(headSha)) continue;
+      for (const finding of importantFindings(review?.body || '')) {
+        priorFindingIds.add(stableFindingId(finding));
+      }
+    }
+    const prior = [...managed].reverse()
+      .find((review) => /^[0-9a-f]{40}$/iu.test(String(review?.commit_id || ''))
+        && String(review.commit_id) !== String(headSha));
+    if (!prior || !/^[0-9a-f]{40}$/iu.test(String(headSha || ''))) {
+      return { priorFindingIds, changedLinesSince: null };
+    }
+    const compare = gh(['api', `repos/${repo}/compare/${prior.commit_id}...${headSha}`]);
+    if (!Array.isArray(compare?.files)) return { priorFindingIds, changedLinesSince: null };
+    // `changedLinesFromPatch` vuole un patch unificato con gli header `+++`:
+    // l'API li omette e da' il patch per file, quindi si ricompone. Riusare il
+    // parser gia' testato vale piu' di una seconda lettura dei hunk.
+    const patch = compare.files
+      .filter((file) => typeof file?.patch === 'string' && file?.filename)
+      .map((file) => `+++ b/${file.filename}\n${file.patch}`)
+      .join('\n');
+    return { priorFindingIds, changedLinesSince: changedLinesFromPatch(patch) };
+  } catch (error) {
+    // Delta non calcolabile: nessuna declassazione. Su un dato mancante si
+    // tiene il finding, non lo si butta.
+    console.log(`review-scope: storia delle review non leggibile (${String(error).slice(0, 160)}) → nessuna declassazione per riga.`);
+    return empty;
   }
 }
 
@@ -566,7 +675,8 @@ async function mintFollowup({ repo, pr, prUrl, body, findings }) {
  * scope, conia/aggiorna la singola issue della PR.
  */
 export async function classifyAndMintReview(body, {
-  repo, pr, prUrl, mutate = true,
+  repo, pr, prUrl, mutate = true, headSha = null,
+  priorFindingIds = null, changedLinesSince = null,
   // `null`/assente = «non lo so»: il verdetto si RICALCOLA dal body con gli
   // stessi moduli del gate. Un booleano esplicito lo impone (il review gate
   // passa `true` quando lo step del contratto di quella run e' andato bene).
@@ -620,10 +730,20 @@ export async function classifyAndMintReview(body, {
     };
   }
   const repositoryPaths = fetchRepositoryPaths(repo, pr);
+  // `null` = «non lo so» e si deriva; passarli esplicitamente resta possibile
+  // (i test lo fanno) e disattiva la rete.
+  const history = (priorFindingIds === null && changedLinesSince === null)
+    ? reviewHistoryContext(repo, pr, headSha || resolveHeadSha(repo, pr))
+    : { priorFindingIds, changedLinesSince };
   const result = classifyImportantFindings(body, changed.files, repositoryPaths, {
     bodyContractPassed: contractPassed,
     prBody: effectivePrBody,
+    priorFindingIds: history.priorFindingIds,
+    changedLinesSince: history.changedLinesSince,
   });
+  for (const finding of result.staleDeclassified ?? []) {
+    console.log(`review-scope: DECLASSIFIED-UNCHANGED-LINE finding=L${finding.lineNumber} id=${finding.stableId} reason=Important NUOVO ancorato solo su righe non toccate dall'ultima review; per tenerlo bloccante dichiara \`🔴 Important: [regression]\``);
+  }
   if (result.outside.length === 0 || !mutate) {
     return {
       ...result,

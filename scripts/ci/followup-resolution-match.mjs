@@ -93,7 +93,11 @@ export const AGGREGATE_KEYWORD_RE = /\b(?:sweep|batch|bulk)\b/i;
  * @param {string} text
  * @returns {string}
  */
-function stripFencedBlocks(text) {
+// Esportata: `scripts/ci/lib/review-findings.mjs` deve togliere le fence per
+// decidere se un body di review e' malformato, e una seconda copia della
+// regola (fence annidate, marcatori di lunghezza diversa) e' esattamente il
+// modo in cui le due letture divergono.
+export function stripFencedBlocks(text) {
   const lines = String(text || '').split('\n');
   const out = [];
   let fence = null;
