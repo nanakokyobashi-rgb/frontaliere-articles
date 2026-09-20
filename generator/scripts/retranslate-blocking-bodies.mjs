@@ -95,6 +95,7 @@ import { freeTranslateWithRetry, balanceMarkdownMarkers } from './lib/free-trans
 import { runFactualityGates } from './lib/article-factuality-gates.mjs';
 import {
   MIN_FACTS_PER_SECTION,
+  matchesVacuousValue,
   parseAiSearchSections,
   stripVacuousFacts,
 } from './lib/key-facts-specificity.mjs';
@@ -249,10 +250,16 @@ export function guardTranslatedKeyFacts(sections) {
     };
   }
   const recognizedSections = parseAiSearchSections(result.value);
-  if (!recognizedSections.some((section) => section.bullets.length >= MIN_FACTS_PER_SECTION)) {
+  const hasUsableFact = recognizedSections.some((section) => section.bullets.some(({ value }) => {
+    const text = typeof value === 'string' ? value.trim() : '';
+    return text.length > 0
+      && /[\p{L}\p{N}]/u.test(text)
+      && !matchesVacuousValue(text);
+  }));
+  if (result.residual.length > 0 || !hasUsableFact) {
     return {
       sections,
-      issue: `[key-facts-specificity] la ri-traduzione non conserva una sezione Fatti chiave riconosciuta con almeno ${MIN_FACTS_PER_SECTION} fatti`,
+      issue: '[key-facts-specificity] la ri-traduzione non conserva una sezione Fatti chiave riconosciuta con almeno un fatto non vuoto/non vacuo senza residui',
       changed: false,
       result,
     };
