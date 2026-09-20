@@ -37,6 +37,9 @@ const PR_BODY_ANCHOR_LOOSE_RE = /`?PR body[:#]L?([1-9]\d*)/iu;
 // dentro `## Non implementato` puo' finire fuori — per esempio su una riga di
 // `## Implementato` che il contratto non giudica — e tenerne solo l'estremo
 // iniziale declasserebbe un finding che parla anche di quell'altra riga.
+// L'endpoint `compare` di GitHub restituisce al massimo 300 file e non
+// dichiara il troncamento: raggiunto il tetto, l'elenco non e' una prova.
+const COMPARE_FILES_CAP = 300;
 const PR_BODY_ANCHOR_ALL_RE = /`?PR body[:#]L?([1-9]\d*)(?:\s*[-–]\s*L?([1-9]\d*))?/giu;
 // Cio' che il contratto deterministico NON sa giudicare resta bloccante anche
 // se ancorato al body: il claim di performance senza baseline (REVIEW.md punto
@@ -513,6 +516,16 @@ function reviewHistoryContext(repo, pr, headSha) {
     }
     const compare = gh(['api', `repos/${repo}/compare/${prior.commit_id}...${headSha}`]);
     if (!Array.isArray(compare?.files)) return { priorFindingIds, changedLinesSince: null };
+    // L'endpoint `compare` TRONCA l'elenco dei file a 300 senza dirlo. Su un
+    // elenco troncato un file davvero modificato puo' mancare, e il seed con
+    // i file della PR lo farebbe passare per «confrontato e intatto»: un
+    // finding nuovo su una riga cambiata verrebbe declassato e il bug
+    // entrerebbe nel ciclo. Al limite dell'API il delta NON e' calcolabile, e
+    // «non calcolabile» spegne del tutto la declassazione.
+    if (compare.files.length >= COMPARE_FILES_CAP) {
+      console.log(`review-scope: compare al limite API (${compare.files.length} file) → delta non calcolabile, nessuna declassazione per riga.`);
+      return { priorFindingIds, changedLinesSince: null };
+    }
     // `changedLinesFromPatch` vuole un patch unificato con gli header `+++`:
     // l'API li omette e da' il patch per file, quindi si ricompone. Riusare il
     // parser gia' testato vale piu' di una seconda lettura dei hunk.

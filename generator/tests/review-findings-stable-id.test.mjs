@@ -289,3 +289,18 @@ test('un file cambiato ma non confrontabile riga per riga non e\' «intatto»', 
   assert.equal(declared.staleDeclassified.length, 0, 'dichiarato non confrontabile: resta bloccante');
   assert.equal(declared.blocking, true);
 });
+
+test('un compare al limite API non e\' una prova: delta non calcolabile', () => {
+  // `compare` tronca a 300 file senza dichiararlo. Su un elenco troncato un
+  // file davvero modificato puo' mancare, e il seed lo farebbe passare per
+  // «intatto»: un finding nuovo su una riga CAMBIATA verrebbe declassato e il
+  // bug entrerebbe nel ciclo. Finding della review su #1641.
+  const source = read('scripts/ci/review-scope.mjs');
+  assert.match(source, /const COMPARE_FILES_CAP = 300;/u, 'il tetto dell\'API non e\' dichiarato');
+  assert.match(source, /compare\.files\.length >= COMPARE_FILES_CAP/u,
+    'un compare al limite non viene riconosciuto');
+  const start = source.indexOf('compare.files.length >= COMPARE_FILES_CAP');
+  const block = source.slice(start, start + 400);
+  assert.match(block, /changedLinesSince: null/u,
+    'al limite dell\'API il delta deve diventare non calcolabile, non vuoto');
+});
