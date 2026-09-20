@@ -290,6 +290,22 @@ describe('expandShortItalianContent — il prompt non deve seminare scaffolding'
     expect(issues.map(({ code }) => code)).toContain('leaked-prompt-scaffolding');
   });
 
+  it('riconosce anche il nuovo header del prompt se viene copiato nell’output', () => {
+    const issues = detectLeakedScaffolding(
+      'RIFERIMENTO DEL TITOLO (SOLO INPUT, NON RIPETERE): lavoro transfrontaliero\n\nTesto valido.',
+      { locale: 'it', id: 'regression-expansion-header' },
+    );
+    expect(issues.map(({ code }) => code)).toContain('leaked-prompt-scaffolding');
+  });
+
+  it('riconosce l’etichetta del testo di input con il suo contatore dinamico', () => {
+    const issues = detectLeakedScaffolding(
+      'TESTO ATTUALE (42 parole): testo interno del prompt\n\nTesto valido.',
+      { locale: 'it', id: 'regression-expansion-input-label' },
+    );
+    expect(issues.map(({ code }) => code)).toContain('leaked-prompt-scaffolding');
+  });
+
   it('non consegna al modello l\'etichetta che il detector classifica come leak', () => {
     expect(promptStart).toBeGreaterThan(-1);
     expect(promptEnd).toBeGreaterThan(promptStart);
