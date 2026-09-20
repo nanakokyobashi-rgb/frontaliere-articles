@@ -38,7 +38,7 @@ jobs:
           sparse-checkout: |
             scripts/monitor-jobs-pipeline-queue.mjs
             scripts/lib
-          sparse-checkout-cone-mode: true
+          sparse-checkout-cone-mode: false
 
       - name: Scan queue depth, wait, and utilization
         env:

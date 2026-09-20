@@ -51,3 +51,25 @@ test('Gemini tratta il testo non-stringa come content failure', async () => {
   assert.equal(getStats().successes, 0, 'il payload malformato non deve contare come successo');
   assert.equal(getStats().retries, 0, 'un content failure non va ritentato nello stesso modello');
 });
+
+test('Gemini tratta parts non-array come content failure', async () => {
+  globalThis.fetch = async () => new Response(JSON.stringify({
+    candidates: [{ content: { parts: {} } }],
+  }), {
+    status: 200,
+    headers: { 'content-type': 'application/json' },
+  });
+
+  const error = await callLLM([{ role: 'user', content: 'x' }], {
+    chain: [AI_MODELS.GEMINI_FLASH],
+    maxRetriesPerModel: 1,
+    backoffMs: 1,
+    timeout: 5000,
+    recordScore: false,
+  }).then(() => null, (caught) => caught);
+
+  assert.ok(error, 'parts non-array deve fallire');
+  assert.match(error.message, /invalid content parts: expected array/);
+  assert.equal(getStats().successes, 0, 'il payload malformato non deve contare come successo');
+  assert.equal(getStats().retries, 0, 'un content failure non va ritentato nello stesso modello');
+});

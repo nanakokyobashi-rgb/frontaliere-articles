@@ -8396,7 +8396,13 @@ async function _callGeminiRaw(model, messages, opts) {
         error.contentFailure = true;
         throw error;
       }
-      const textPart = data?.candidates?.[0]?.content?.parts?.find(
+      const parts = data?.candidates?.[0]?.content?.parts;
+      if (parts !== undefined && !Array.isArray(parts)) {
+        const error = new Error(`[${model}] invalid content parts: expected array`);
+        error.contentFailure = true;
+        throw error;
+      }
+      const textPart = parts?.find(
         (part) => part && !part.thought && part.text !== undefined,
       );
       const textValue = textPart?.text;
