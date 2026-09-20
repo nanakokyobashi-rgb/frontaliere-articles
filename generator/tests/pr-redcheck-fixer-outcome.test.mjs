@@ -528,6 +528,72 @@ test('redflag rimborsa il marker di round su SUPERSEDED', () => {
   assert.match(result.ghLog, /REDFLAG_FIX_REFUNDED: 2/);
 });
 
+test('il rimborso pubblica il handle definitivo solo dopo la DELETE trusted', () => {
+  const baseBody = '## Implementato\n\n- body iniziale';
+  const scenarios = [
+    {
+      name: 'redflag superseded',
+      source: REDFLAG_WORKFLOW,
+      actionOutcome: 'failure',
+      startSha: 'pr-sha',
+      baseSha: 'merged-sha',
+      head: 'merged-sha',
+      remote: 'external-sha',
+      marker: 'REDFLAG_FIX_ROUND',
+      expectedStatus: 0,
+    },
+    {
+      name: 'redcheck superseded',
+      source: WORKFLOW,
+      actionOutcome: 'failure',
+      startSha: 'pr-sha',
+      baseSha: 'merged-sha',
+      head: 'merged-sha',
+      remote: 'external-sha',
+      marker: 'REDCHECK_FIX_ROUND',
+      expectedStatus: 0,
+    },
+    {
+      name: 'redflag skipped',
+      source: REDFLAG_WORKFLOW,
+      actionOutcome: 'skipped',
+      marker: 'REDFLAG_FIX_ROUND',
+      expectedStatus: 1,
+    },
+  ];
+
+  for (const scenario of scenarios) {
+    const result = runClassifier({
+      ...scenario,
+      baseBody,
+      currentBody: baseBody,
+      fixRound: '1',
+      fixRoundMarker: scenario.marker,
+      markerCommentId: '42',
+      commentsJson: JSON.stringify([roundMarkerComment({
+        marker: scenario.marker,
+        round: 1,
+        id: 42,
+        body: baseBody,
+      })]),
+    });
+    assert.equal(result.status, scenario.expectedStatus, scenario.name + ': esito inatteso:\n'
+      + result.stdout + '\n' + result.stderr);
+    const lines = result.ghLog.trim().split('\n');
+    const expectedAttempt = scenario.marker.replace('_ROUND', '_REFUND_ATTEMPT') + ': 1';
+    const expectedFinal = scenario.marker.replace('_ROUND', '_REFUNDED') + ': 1';
+    const attemptAt = lines.findIndex((line) => line.includes(expectedAttempt));
+    const deleteAt = lines.findIndex((line) => line.includes('api --method DELETE')
+      && line.includes('/issues/comments/42'));
+    const finalAt = lines.findIndex((line) => line.includes(expectedFinal));
+    assert.ok(attemptAt >= 0, scenario.name + ': commento provvisorio assente\n' + result.ghLog);
+    assert.ok(deleteAt > attemptAt, scenario.name + ': DELETE prima del commento provvisorio\n'
+      + result.ghLog);
+    assert.ok(finalAt > deleteAt, scenario.name + ': handle definitivo prima della DELETE\n'
+      + result.ghLog);
+  }
+});
+
 test('redflag distingue failure/skipped/cancelled/success e contabilizza il marker', () => {
   const baseBody = '## Implementato\n\n- body iniziale';
   const scenarios = [

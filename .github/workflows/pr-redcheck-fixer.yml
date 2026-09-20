@@ -983,18 +983,24 @@ jobs:
               if [ -n "${MARKER_COMMENT_ID:-}" ] && [ -n "${MARKER_HEAD:-}" ] \
                 && [ -n "${MARKER_BODY_REVISION:-}" ] && [ -f "${TRUSTED_MARKER_HELPER:-}" ]; then
                 refund_marker="${FIX_ROUND_MARKER%_ROUND}_REFUNDED"
-                if gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '<!-- %s: %s -->\n_Round rimborsato: run SUPERSEDED; nessun round consumato._' "$refund_marker" "$FIX_ROUND")" >/dev/null 2>&1; then
+                refund_attempt_marker="${FIX_ROUND_MARKER%_ROUND}_REFUND_ATTEMPT"
+                if gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '<!-- %s: %s -->\n_Rimborso preparato; DELETE trusted in corso. Il round non è ancora rimborsato._' "$refund_attempt_marker" "$FIX_ROUND")" >/dev/null 2>&1; then
                   if marker_delete_result=$(node "$TRUSTED_MARKER_HELPER" --delete-verified \
                     --repo "$REPO" --pr "$PR_NUMBER" --marker "$FIX_ROUND_MARKER" \
                     --round "$FIX_ROUND" --comment-id "$MARKER_COMMENT_ID" \
                     --expected-head "$MARKER_HEAD" --expected-body-revision "$MARKER_BODY_REVISION" \
                     --expected-author github-actions[bot]); then
-                    echo "round marker $FIX_ROUND_MARKER:$FIX_ROUND deleted after trusted ID/body proof → rimborsato ($marker_delete_result)"
+                    if gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '<!-- %s: %s -->\n_Round rimborsato: run SUPERSEDED; nessun round consumato._' "$refund_marker" "$FIX_ROUND")" >/dev/null 2>&1; then
+                      echo "round marker $FIX_ROUND_MARKER:$FIX_ROUND deleted after trusted ID/body proof and refund handle published → rimborsato ($marker_delete_result)"
+                    else
+                      echo "::error::SUPERSEDED: marker ID $MARKER_COMMENT_ID cancellato ma handle di rimborso non pubblicabile → refund incompleto, nessun falso handle dichiarato"
+                      exit 1
+                    fi
                   else
-                    echo "::warning::SUPERSEDED: handle di rimborso pubblicato ma il marker ID $MARKER_COMMENT_ID non ha superato la prova trusted → marker conservato"
+                    echo "::warning::SUPERSEDED: DELETE trusted del marker ID $MARKER_COMMENT_ID fallita → marker conservato e nessun handle *_REFUNDED pubblicato"
                   fi
                 else
-                  echo "::warning::SUPERSEDED: handle di rimborso non scrivibile → marker conservato e round ancora contato"
+                  echo "::warning::SUPERSEDED: commento provvisorio di rimborso non scrivibile → marker conservato e round ancora contato"
                 fi
               else
                 echo "::warning::SUPERSEDED: prova trusted del marker $FIX_ROUND_MARKER:$FIX_ROUND incompleta → round ancora contato"
