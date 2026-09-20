@@ -318,6 +318,16 @@
       }
     },
     {
+      "path": "scripts/ci/codex-usage-summary.mjs",
+      "mode": "corpus-only",
+      "reason": "Parser non-secret della telemetria aggregata del review workflow Codex del corpus: il sito non usa questo consumer del percorso `tests.yml` e non ha un gemello da portare, quindi resta corpus-only per costruzione.",
+      "baseline": {
+        "site": null,
+        "corpus": "301ee3f3b2326749",
+        "alignedAt": "2026-09-20"
+      }
+    },
+    {
       "path": "scripts/ci/claude-rate-limit-contract.mjs",
       "mode": "identical",
       "baseline": {
