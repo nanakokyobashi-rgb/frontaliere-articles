@@ -59,9 +59,15 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # I test del floor devono usare la base dell'evento: `HEAD^` non è la
-      # revisione pubblicata quando un push contiene più commit.
+      # revisione pubblicata quando un push contiene più commit. Il mirror,
+      # però, ricostruisce e force-pusha `engine-lockstep-auto` da main a ogni
+      # run: `github.event.before` è la vecchia storia derivata e può non
+      # esistere nel checkout della nuova derivazione. Su quel solo branch la
+      # revisione corrente è una base verificabile e il floor confronta il
+      # corpus con se stesso; ogni push di contenuto resta ancorato a
+      # `github.event.before`, quindi una storia assente resta fail-closed.
       PREFLIGHT_EVENT_NAME: ${{ github.event_name }}
-      PREFLIGHT_PUSH_BASE_REVISION: ${{ github.event.before }}
+      PREFLIGHT_PUSH_BASE_REVISION: ${{ github.ref_name == 'engine-lockstep-auto' && github.sha || github.event.before }}
       PREFLIGHT_PR_BASE_REVISION: ${{ github.event.pull_request.base.sha }}
     steps:
       - uses: actions/checkout@v5
