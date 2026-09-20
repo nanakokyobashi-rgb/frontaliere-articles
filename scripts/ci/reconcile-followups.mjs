@@ -98,7 +98,10 @@ export const COMMENT_LOOKUP_FAILURE_MAX_RATIO = parsePositiveNum(
 );
 export const UNCLASSIFIABLE_LABEL = 'reconcile-unclassifiable';
 export const UNCLASSIFIABLE_MARKER_PREFIX = '<!-- reconcile-unclassifiable';
-export const UNCLASSIFIABLE_MARKER_SCHEMA = 1;
+// Schema 1 used the historical marker grammar (`commit=...`).  The current
+// marker carries classifier and fingerprint fields, so old comments must not
+// be accepted as the current cache entry.
+export const UNCLASSIFIABLE_MARKER_SCHEMA = 2;
 export const UNCLASSIFIABLE_MARKER_RE = /<!-- reconcile-unclassifiable schema=(\d+) classifier=([0-9a-f]{64}) fingerprint=([0-9a-f]{64}) -->/;
 
 /**
@@ -238,6 +241,18 @@ function commentField(comment, camel, snake) {
   return comment?.[camel] ?? comment?.[snake] ?? '';
 }
 
+/**
+ * Compare serialized values by UTF-16 code unit, independently of the
+ * runner's ICU/default locale.  Fingerprints are cache keys: locale collation
+ * would make the same issue produce different hashes on different runners.
+ */
+export function compareCodeUnitStrings(left, right) {
+  const a = String(left);
+  const b = String(right);
+  if (a === b) return 0;
+  return a < b ? -1 : 1;
+}
+
 function isTechnicalComment(body) {
   return TECHNICAL_COMMENT_MARKERS.some((marker) => String(body || '').includes(marker));
 }
@@ -257,7 +272,7 @@ export function unclassifiableIssueFingerprint(issue, comments) {
   const humanComments = comments
     .filter((comment) => !isTechnicalComment(comment?.body))
     .map(fingerprintComment)
-    .sort((a, b) => JSON.stringify(a).localeCompare(JSON.stringify(b)));
+    .sort((a, b) => compareCodeUnitStrings(JSON.stringify(a), JSON.stringify(b)));
   const input = JSON.stringify({
     title: String(issue?.title || ''),
     body: String(issue?.body || ''),
@@ -268,7 +283,10 @@ export function unclassifiableIssueFingerprint(issue, comments) {
 }
 
 function markerCommentOrder(comment, index) {
-  return `${commentField(comment, 'createdAt', 'created_at')}\0${commentField(comment, 'updatedAt', 'updated_at')}\0${String(index).padStart(8, '0')}`;
+  // `gh issue view --json comments` exposes no usable updatedAt for this
+  // surface. Markers are append-only, so creation time is the authoritative
+  // order; id/index only break ties deterministically.
+  return `${commentField(comment, 'createdAt', 'created_at')}\0${String(comment?.id || '')}\0${String(index).padStart(8, '0')}`;
 }
 
 function latestUnclassifiableMarker(comments) {
@@ -276,7 +294,10 @@ function latestUnclassifiableMarker(comments) {
   const candidates = comments
     .map((comment, index) => ({ comment, index }))
     .filter(({ comment }) => String(comment?.body || '').includes(UNCLASSIFIABLE_MARKER_PREFIX))
-    .sort((a, b) => markerCommentOrder(a.comment, a.index).localeCompare(markerCommentOrder(b.comment, b.index)));
+    .sort((a, b) => compareCodeUnitStrings(
+      markerCommentOrder(a.comment, a.index),
+      markerCommentOrder(b.comment, b.index),
+    ));
   if (!candidates.length) return null;
 
   const { comment } = candidates[candidates.length - 1];
