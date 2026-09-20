@@ -9902,7 +9902,7 @@ async function expandShortItalianContent(data, targetWords, { boundToText = fals
 TESTO ATTUALE (${currentWords} parole):
 ${currentText}
 
-TITOLO ARTICOLO: ${it.title || ''}
+RIFERIMENTO DEL TITOLO (SOLO INPUT, NON RIPETERE): ${it.title || ''}
 
 ISTRUZIONI:
 - Riscrivi ed ESPANDI questo testo a circa ${targetFieldWords} parole (MASSIMO ${MAX_BODY_FIELD_WORDS} parole — NON superare questo limite)
@@ -9912,12 +9912,13 @@ ${expandEnrichmentLine(IS_FRONTALIERE, boundToText)}
 - Mantieni la formattazione esistente (##, -, >, 📊, 💡, ⚠️). Citazioni (>) MAX 1 per articolo, solo per citazioni dirette brevi
 - GRASSETTO: massimo 2-3 parole in grassetto nell'intero testo, preferisci ZERO
 - NON cambiare il significato o la prospettiva dell'articolo
+- Non copiare le intestazioni operative del prompt o i suoi delimitatori nell'output: restituisci solo il testo dell'articolo espanso, senza etichette o titoli aggiunti
 - Rispondi con il SOLO testo espanso, senza JSON, senza code fences`;
 
     try {
       const expanded = await callLLM(
         [
-          { role: 'system', content: 'Sei un giornalista finanziario esperto. Rispondi con il solo testo richiesto, senza wrapper.' },
+          { role: 'system', content: 'Sei un giornalista finanziario esperto. Rispondi con il solo testo richiesto, senza wrapper e senza ripetere etichette o intestazioni del prompt.' },
           { role: 'user', content: expandPrompt },
         ],
         { model: GH_MODEL_HEAVY, temperature: 0.7, maxTokens: 3000, timeout: 60_000 },

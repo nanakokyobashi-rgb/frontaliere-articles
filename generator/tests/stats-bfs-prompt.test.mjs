@@ -54,7 +54,11 @@ import { expect } from './lib/expect-shim.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { extractSourceAnchors, renderAnchorForPrompt } from '../scripts/lib/article-factuality-gates.mjs';
+import {
+  detectLeakedScaffolding,
+  extractSourceAnchors,
+  renderAnchorForPrompt,
+} from '../scripts/lib/article-factuality-gates.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const CREATE_ARTICLE = path.join(ROOT, 'generator', 'scripts', 'create-article.mjs');
@@ -269,6 +273,29 @@ describe('expandEnrichmentLine — la variante legata al testo', () => {
     // Un solo punto di costruzione: se il prompt tornasse a incorporare la
     // riga, questo test smetterebbe di misurare ciò che finisce nel prompt.
     expect(src).toContain('${expandEnrichmentLine(IS_FRONTALIERE, boundToText)}');
+  });
+});
+
+describe('expandShortItalianContent — il prompt non deve seminare scaffolding', () => {
+  const src = fs.readFileSync(CREATE_ARTICLE, 'utf-8');
+  const promptStart = src.indexOf('const expandPrompt = `${expandPersona}');
+  const promptEnd = src.indexOf('    try {', promptStart);
+  const expansionPrompt = src.slice(promptStart, promptEnd);
+
+  it('riproduce il detector sul marker storico', () => {
+    const issues = detectLeakedScaffolding(
+      '## TITOLO ARTICOLO: lavoro transfrontaliero\n\nTesto valido.',
+      { locale: 'it', id: 'regression-scaffolding' },
+    );
+    expect(issues.map(({ code }) => code)).toContain('leaked-prompt-scaffolding');
+  });
+
+  it('non consegna al modello l\'etichetta che il detector classifica come leak', () => {
+    expect(promptStart).toBeGreaterThan(-1);
+    expect(promptEnd).toBeGreaterThan(promptStart);
+    expect(expansionPrompt).not.toMatch(/^TITOLO ARTICOLO\s*:/m);
+    expect(expansionPrompt).toMatch(/RIFERIMENTO DEL TITOLO.*NON RIPETERE/i);
+    expect(expansionPrompt).toMatch(/intestazioni operative.*output/i);
   });
 });
 
