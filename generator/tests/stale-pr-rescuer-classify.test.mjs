@@ -151,7 +151,9 @@ function reviews({
   user = { login: 'claude[bot]', type: 'Bot' },
 } = {}) {
   return [{
+    id: 100,
     user,
+    state: 'COMMENTED',
     commit_id: commit,
     body: `${body}\n<!-- REVIEW_INPUT_REVISION: ${reviewRevision} -->`,
   }];
@@ -168,6 +170,12 @@ function runScan({
   comments: posted = [],
   fixerRuns = [],
   fixerRunsError = false,
+  checksError = false,
+  reviewsError = false,
+  commentsError = false,
+  checksMalformed = false,
+  reviewsMalformed = false,
+  commentsMalformed = false,
   dryRun = false,
   // Risposta di `gh api repos/:r/commits/:sha --jq .commit.committer.date`,
   // cioe' l'orologio del gate di eta'. Il default combacia con
@@ -186,6 +194,12 @@ function runScan({
     const fixComments = path.join(dir, 'comments.json');
     const fixFixerRuns = path.join(dir, 'fixer-runs.json');
     const fixFixerRunsError = path.join(dir, 'fixer-runs-error');
+    const fixChecksError = path.join(dir, 'checks-error');
+    const fixReviewsError = path.join(dir, 'reviews-error');
+    const fixCommentsError = path.join(dir, 'comments-error');
+    const fixChecksMalformed = path.join(dir, 'checks-malformed');
+    const fixReviewsMalformed = path.join(dir, 'reviews-malformed');
+    const fixCommentsMalformed = path.join(dir, 'comments-malformed');
     const fixPushedAt = path.join(dir, 'pushed-at');
     writeFileSync(fixPushedAt, String(pushedAt));
     writeFileSync(calls, '');
@@ -195,6 +209,12 @@ function runScan({
     writeFileSync(fixComments, JSON.stringify(posted));
     writeFileSync(fixFixerRuns, JSON.stringify(fixerRuns));
     writeFileSync(fixFixerRunsError, fixerRunsError ? 'true' : 'false');
+    writeFileSync(fixChecksError, checksError ? 'true' : 'false');
+    writeFileSync(fixReviewsError, reviewsError ? 'true' : 'false');
+    writeFileSync(fixCommentsError, commentsError ? 'true' : 'false');
+    writeFileSync(fixChecksMalformed, checksMalformed ? 'true' : 'false');
+    writeFileSync(fixReviewsMalformed, reviewsMalformed ? 'true' : 'false');
+    writeFileSync(fixCommentsMalformed, commentsMalformed ? 'true' : 'false');
 
     // `gh`: serve le letture del rescuer e registra le scritture
     // (add-label, remove-label, comment, workflow run). Ogni
@@ -245,13 +265,22 @@ case "$sub" in
     # L'ordine dei pattern conta: \`.../pulls/N/reviews\` matcha anche
     # \`*/pulls*\`, quindi le foglie vanno prima della lista.
     case "$p" in
-      */check-runs*) cat ${JSON.stringify(fixChecks)} ;;
+      */check-runs*)
+        if [[ "$(cat ${JSON.stringify(fixChecksError)})" == "true" ]]; then exit 1; fi
+        if [[ "$(cat ${JSON.stringify(fixChecksMalformed)})" == "true" ]]; then printf 'not-json\\n'; exit 0; fi
+        cat ${JSON.stringify(fixChecks)} ;;
       # DOPO \`check-runs\` (il cui path e' \`.../commits/<sha>/check-runs\` e
       # matcherebbe anche qui) e prima delle altre foglie: e' la lettura che
       # decide l'eta' della PR.
       */commits/*)   cat ${JSON.stringify(fixPushedAt)} ;;
-      */reviews*)    cat ${JSON.stringify(fixReviews)} ;;
-      */comments*)   cat ${JSON.stringify(fixComments)} ;;
+      */reviews*)
+        if [[ "$(cat ${JSON.stringify(fixReviewsError)})" == "true" ]]; then exit 1; fi
+        if [[ "$(cat ${JSON.stringify(fixReviewsMalformed)})" == "true" ]]; then printf 'not-json\\n'; exit 0; fi
+        cat ${JSON.stringify(fixReviews)} ;;
+      */comments*)
+        if [[ "$(cat ${JSON.stringify(fixCommentsError)})" == "true" ]]; then exit 1; fi
+        if [[ "$(cat ${JSON.stringify(fixCommentsMalformed)})" == "true" ]]; then printf 'not-json\\n'; exit 0; fi
+        cat ${JSON.stringify(fixComments)} ;;
       */pulls/*)
         if [ "$jq" = '.body // ""' ]; then
           node -e 'const fs=require("fs"); const value=require(process.argv[1]); const pr=Array.isArray(value)?value[0]:value; process.stdout.write(String(pr?.body||"")+"\\n")' ${JSON.stringify(fixPrs)}
@@ -546,6 +575,86 @@ test('guard 2 — una PR mai revisionata resta in classe A', opts, () => {
     `«mai revisionata» non è «revisionata e poi superata»: il rimedio è diverso.\n${body}`,
   );
   assert.match(body, /nessuna review li ha coperti/, body);
+});
+
+test('R1 — lista checks vuota valida resta osservabile come classe C', opts, () => {
+  const r = runScan({
+    prs: openPr(),
+    checks: checkRuns({ concl: null }),
+    reviews: [],
+  });
+  assert.deepEqual(r.labeled, [901], r.stdout);
+  assert.match(only(r), /check `tests \(node --test\)` = `none`/, r.stdout);
+});
+
+test('R1 — lista reviews vuota valida resta osservabile come classe A', opts, () => {
+  const r = runScan({
+    prs: openPr(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: [],
+  });
+  assert.deepEqual(r.labeled, [901], r.stdout);
+  assert.match(only(r), /nessuna review li ha coperti/, r.stdout);
+});
+
+test('R1 — errore API su checks o reviews è unavailable e non muta', opts, () => {
+  for (const input of [
+    { checks: checkRuns({ concl: 'success' }), reviews: [], checksError: true },
+    { reviewsError: true, checks: checkRuns({ concl: 'success' }), reviews: [] },
+    { commentsError: true, checks: checkRuns({ concl: 'success' }), reviews: [] },
+  ]) {
+    const r = runScan({ prs: openPr(), ...input });
+    assert.deepEqual(r.labeled, [], r.stdout);
+    assert.deepEqual(r.unlabeled, [], r.stdout);
+    assert.deepEqual(r.comments, [], r.stdout);
+    assert.deepEqual(r.workflowRuns, [], r.stdout);
+    assert.deepEqual(r.reruns, [], r.stdout);
+  }
+});
+
+test('R1 — JSON malformato su checks o reviews è unavailable e non muta', opts, () => {
+  for (const input of [
+    { checks: checkRuns({ concl: 'success' }), reviews: [], checksMalformed: true },
+    { reviewsMalformed: true, checks: checkRuns({ concl: 'success' }), reviews: [] },
+    { commentsMalformed: true, checks: checkRuns({ concl: 'success' }), reviews: [] },
+  ]) {
+    const r = runScan({ prs: openPr(), ...input });
+    assert.deepEqual(r.labeled, [], r.stdout);
+    assert.deepEqual(r.unlabeled, [], r.stdout);
+    assert.deepEqual(r.comments, [], r.stdout);
+    assert.deepEqual(r.workflowRuns, [], r.stdout);
+    assert.deepEqual(r.reruns, [], r.stdout);
+  }
+});
+
+test('R1 — record di verdetto incompleto o non attendibile è unavailable', opts, () => {
+  const badChecks = [
+    { id: 1000, name: CHECK_NAME, status: 'completed' },
+    { id: 1000, name: CHECK_NAME, status: 'completed', completed_at: isoAgo(3), conclusion: '' },
+    { id: 1000, name: CHECK_NAME, status: 'completed', completed_at: 'not-a-date', conclusion: 'success' },
+  ];
+  for (const check of badChecks) {
+    const r = runScan({
+      prs: openPr(),
+      checks: { check_runs: [check] },
+      reviews: [],
+    });
+    assert.deepEqual(r.comments, [], JSON.stringify(check));
+    assert.deepEqual(r.labeled, [], JSON.stringify(check));
+  }
+
+  for (const user of [
+    { login: 'claude[bot]' },
+    { login: 'claude[bot]', type: 'Unknown' },
+  ]) {
+    const r = runScan({
+      prs: openPr(),
+      checks: checkRuns({ concl: 'success' }),
+      reviews: [{ user, state: 'COMMENTED', commit_id: OLD_SHA }],
+    });
+    assert.deepEqual(r.comments, [], JSON.stringify(user));
+    assert.deepEqual(r.labeled, [], JSON.stringify(user));
+  }
 });
 
 test('guard 3 — con i test rossi il rimedio resta quello della classe C', opts, () => {
