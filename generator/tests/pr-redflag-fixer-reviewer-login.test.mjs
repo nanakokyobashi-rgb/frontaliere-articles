@@ -67,6 +67,8 @@ test('il redflag fixer ammette Codex solo con contesto PR/review verificato', ()
 
   const collect = src.slice(collectStart, failClosedStart);
   assert.match(collect, /context_fail\(\)/);
+  assert.match(collect, /context_skip\(\)/);
+  assert.match(collect, /context_skipped=true/);
   assert.match(collect, /if ! gh api "repos\/\$REPO\/pulls\/\$PR_NUMBER"\s*\\\n\s*> "\$OUT\/pr-response\.json"/);
   assert.match(collect, /has\("body"\)/);
   assert.match(collect, /jq '\{title, body, headRefName: \.head\.ref\}' "\$OUT\/pr-response\.json"/);
@@ -78,6 +80,11 @@ test('il redflag fixer ammette Codex solo con contesto PR/review verificato', ()
   assert.match(collect, /if ! printf '%s' "\$current_head_sha" \| grep -qE '\^\[a-f0-9\]\{40\}\$'/);
   assert.match(collect, /printf '%s\\n%s\\n' "\$current_head_sha" "\$HEAD_SHA" \| awk[\s\S]*tolower/);
   assert.match(collect, /La HEAD della PR è cambiata rispetto all'evento review/);
+  const staleHeadAt = collect.indexOf('La HEAD della PR è cambiata rispetto all\'evento review');
+  assert.ok(staleHeadAt >= 0);
+  const staleHeadBlock = collect.slice(Math.max(0, staleHeadAt - 320), staleHeadAt + 240);
+  assert.match(staleHeadBlock, /context_skip/);
+  assert.doesNotMatch(staleHeadBlock, /context_fail/);
   assert.match(collect, /if ! body_sha=/);
   assert.match(collect, /if ! gh api "repos\/\$REPO\/pulls\/\$PR_NUMBER\/files"/);
   assert.match(collect, /if ! reviews_json=/);
@@ -90,11 +97,32 @@ test('il redflag fixer ammette Codex solo con contesto PR/review verificato', ()
 
   const failClosed = src.slice(failClosedStart, codexStart);
   assert.match(failClosed, /steps\.ctx\.outputs\.context_verified != 'true'/);
+  assert.match(failClosed, /steps\.ctx\.outputs\.context_skipped != 'true'/);
   assert.match(failClosed, /exit 1/);
   assert.match(
     src.slice(codexStart, src.indexOf('- name: Cleanup Firebase credentials', codexStart)),
     /if: steps\.guard\.outputs\.proceed == 'true' && steps\.ctx\.outputs\.context_verified == 'true'/,
   );
+});
+
+test('un evento review con HEAD stantia viene scartato prima di scope, lease e marker', () => {
+  const normalizeStart = src.indexOf('- name: Normalize trigger context');
+  const preStart = src.indexOf('- name: PR still actionable?', normalizeStart);
+  const scopeStart = src.indexOf('\n  scope:', preStart);
+  assert.ok(normalizeStart >= 0 && preStart > normalizeStart && scopeStart > preStart);
+
+  const normalize = src.slice(normalizeStart, preStart);
+  assert.match(normalize, /PR_HEAD_SHA=.*\.headRefOid/);
+  assert.match(normalize, /EVENT_HEAD_STALE=false/);
+  assert.match(normalize, /event_head_stale=\$EVENT_HEAD_STALE/);
+  assert.match(normalize, /La HEAD della PR è cambiata rispetto all'evento review/);
+
+  const pre = src.slice(preStart, scopeStart);
+  assert.match(pre, /EVENT_HEAD_STALE: \$\{\{ steps\.normalize\.outputs\.event_head_stale \}\}/);
+  assert.match(pre, /EVENT_HEAD_STALE.*true/);
+  assert.match(pre, /actionable=false/);
+  assert.ok(pre.indexOf('EVENT_HEAD_STALE') < pre.indexOf('REVIEW_BODY='),
+    'lo skip stale deve avvenire prima della classificazione della review');
 });
 
 test('il push guard controlla il token che il push remote usa davvero', () => {
