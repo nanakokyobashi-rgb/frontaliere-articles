@@ -2763,6 +2763,16 @@
       }
     },
     {
+      "path": "host/shared/postWalkDerivedDigest.ts",
+      "sitePath": "build-plugins/shared/postWalkDerivedDigest.ts",
+      "mode": "identical",
+      "baseline": {
+        "site": "2e1c78dc51deb33a",
+        "corpus": "2e1c78dc51deb33a",
+        "alignedAt": "2026-09-20"
+      }
+    },
+    {
       "path": "host/blogContextualLinksData.ts",
       "sitePath": "build-plugins/blogContextualLinksData.ts",
       "mode": "identical",
