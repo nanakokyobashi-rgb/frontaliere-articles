@@ -318,6 +318,16 @@
       }
     },
     {
+      "path": "scripts/ci/codex-usage-summary.mjs",
+      "mode": "corpus-only",
+      "reason": "Parser non-secret della telemetria aggregata del review workflow Codex del corpus: il sito non usa questo consumer del percorso `tests.yml` e non ha un gemello da portare, quindi resta corpus-only per costruzione.",
+      "baseline": {
+        "site": null,
+        "corpus": "301ee3f3b2326749",
+        "alignedAt": "2026-09-20"
+      }
+    },
+    {
       "path": "scripts/ci/claude-rate-limit-contract.mjs",
       "mode": "identical",
       "baseline": {
@@ -343,9 +353,10 @@
       "mode": "adapted",
       "reason": "Fixture F5 della vecchia PR merged contro l'assenza di delivery nel run corrente, con prove di nuova PR, cambio HEAD, transizione OPEN -> MERGED e lookup unavailable. Il sito usa Vitest/TypeScript; il corpus mantiene node:test e il proprio fake-gh senza rete, quindi la suite è un port adattato del contratto e non un copia-incolla.",
       "baseline": {
-        "site": "72d0494026b0b72d",
-        "corpus": "c7bc5d3a14196bd0",
-        "alignedAt": "2026-09-20"
+        "site": "0202d3472daa0de4",
+        "corpus": "c451c1197725a61d",
+        "alignedAt": "2026-09-20",
+        "forcedAt": "2026-09-20T08:39:04.396Z"
       }
     },
     {
@@ -855,8 +866,8 @@
       "mode": "identical",
       "reason": "Predicato unico source-first per provare la delivery corrente di issue-fix: sidecar legato a run+attempt, issue/branch/HEAD e tri-state verified-delivery/verified-none/unavailable. Il workflow resta adapted per i consumer del corpus; questo helper e' trasportato byte-identico insieme al marker, dopo la correzione del solo errore di sintassi nel draft sito.",
       "baseline": {
-        "site": "9e129028cba65186",
-        "corpus": "9e129028cba65186",
+        "site": "1a8d317651bbbc8c",
+        "corpus": "1a8d317651bbbc8c",
         "alignedAt": "2026-09-20"
       }
     },

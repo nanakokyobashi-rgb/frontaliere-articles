@@ -1,14 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1944940/esportazioni-forte-importazioni-cresciute-stagnazione": {
-    "articleId": "esportazioni-aumento-svizzera",
-    "ts": "2026-08-20T06:39:03.973Z",
-    "keyForm": 2
-  },
-  "https://www.rsi.ch/s/4000662": {
-    "articleId": "esportazioni-svizzera-luglio-record",
-    "ts": "2026-08-20T07:21:47.004Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1944952/orologi-esportazioni-luglio-mercato-franchi": {
     "articleId": "orologi-export-svizzera-augusto-2026",
     "ts": "2026-08-20T07:55:53.833Z",
@@ -2497,6 +2487,16 @@
   "https://www.tio.ch/svizzera/politica/1951382/iniziativa-consiglio-stato-voto-legge-franchi-chiede-controprogetto-svizzera-cantoni": {
     "articleId": "votazioni-cantoni-27-settembre",
     "ts": "2026-09-20T07:41:41.361Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1951372/centrali-referendum-firme-svizzera-riuscito-costruzione": {
+    "articleId": "referendum-nuove-centrali-nucleari",
+    "ts": "2026-09-20T08:19:36.273Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1951384/migros-cooperative-duttweiler-svizzera-dieci": {
+    "articleId": "migros-fusione-cooperative-2035",
+    "ts": "2026-09-20T08:43:51.122Z",
     "keyForm": 2
   }
 }

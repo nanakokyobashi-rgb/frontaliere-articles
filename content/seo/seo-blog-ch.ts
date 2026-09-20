@@ -85703,6 +85703,84 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-referendum-nuove-centrali-nucleari': {
+    title: 'Referendum riuscito: 125\'000 firme contro nuove centrali',
+    description: 'Oltre 125\'000 firme raccolte in 3 mesi per il referendum contro nuove centrali nucleari. Voto previsto per il 28 febbraio 2027. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, referendum, riuscito, firme, contro',
+    ogTitle: 'Referendum riuscito: 125\'000 firme contro nuove centrali',
+    ogDescription: 'Il comitato \'No alle nuove centrali nucleari\' ha raccolto oltre 125\'000 firme in 3 mesi. La consegna è fissata al 6 ottobre, con possibile voto il 28 febbraio 2027.',
+    canonicalPath: '/articoli-svizzera/referendum-nuove-centrali-nucleari/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Referendum riuscito: 125'000 firme contro nuove centrali",
+      "description": "Oltre 125'000 firme raccolte in 3 mesi per il referendum contro nuove centrali nucleari. Voto previsto per il 28 febbraio 2027. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/referendum-nuove-centrali-nucleari.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Centrali nucleari e vista sul Lago di Lugano: il referendum contro le nuove costruzioni è riuscito"
+      },
+      "datePublished": "2026-09-20T08:19:36+00:00",
+      "dateModified": "2026-09-20T08:19:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/referendum-nuove-centrali-nucleari/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-migros-fusione-cooperative-2035': {
+    title: 'Migros valuta fusione delle 10 cooperative | Frontaliere Ticino',
+    description: 'Migros valuta la fusione delle 10 cooperative regionali in un\'unica entità nazionale. 2,3 milioni di soci coinvolti, decisione in corso. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, migros, valuta, fusione, cooperative',
+    ogTitle: 'Migros valuta fusione delle 10 cooperative',
+    ogDescription: 'Il CEO di Migros, Mario Irminger, valuta una profonda ristrutturazione: fusione delle 10 cooperative regionali in un\'unica entità nazionale o riduzione a 3. 2,3 milioni di soci potrebbero essere consultati. Dettagli sulla strategia Vision 2035.',
+    canonicalPath: '/articoli-svizzera/migros-fusione-cooperative-2035/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Migros valuta fusione delle 10 cooperative",
+      "description": "Migros valuta la fusione delle 10 cooperative regionali in un'unica entità nazionale. 2,3 milioni di soci coinvolti, decisione in corso. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/migros-fusione-cooperative-2035.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista dell'edificio del Palazzo Federale a Berna, sede delle istituzioni svizzere, al crepuscolo."
+      },
+      "datePublished": "2026-09-20T08:43:50+00:00",
+      "dateModified": "2026-09-20T08:43:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/migros-fusione-cooperative-2035/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
