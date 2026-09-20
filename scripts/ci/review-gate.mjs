@@ -23,7 +23,10 @@
  * `## LGTM` e NESSUN finding `🔴 Important`, oppure solo finding su file fuori
  * dal diff corrente già raccolti in una issue follow-up (stessa
  * `REDFLAG_IMPORTANT_RE` che usa il redflag-fixer — una sola regex, nessun
- * drift). Deve portare la revisione del body corrente. Su un commit precedente
+ * drift). Deve portare la revisione del body corrente. Un finding nuovo
+ * classificato `DECLASSIFIED-UNCHANGED-LINE` non è invece una prova di
+ * approvazione: il gate resta rosso (fail-closed) finché una review successiva
+ * non lo risolve esplicitamente. Su un commit precedente
  * vale il CARRY-FORWARD se il fingerprint del contributo (3-dot vs merge-base,
  * code-only) e' identico fra i due commit, la PR non ha cambiato il proprio
  * codice — tipicamente un rebase di solo main-merge — e la review resta valida.
@@ -488,6 +491,11 @@ async function main() {
             `review-gate: ${scope.outside.length} finding Important fuori dal diff → follow-up ${scope.followup?.number || scope.followup?.url || 'coniato'}.`,
           );
         }
+        if ((scope.staleDeclassified?.length ?? 0) > 0) {
+          console.log(
+            `review-gate: ${scope.staleDeclassified.length} finding Important nuovo su righe non cambiate → fail-closed; serve una review successiva che lo risolva esplicitamente.`,
+          );
+        }
         if (scope.blocking) {
           console.log(
             `review-gate: scope conservativo — ${scope.inScope.length} finding nel diff, ${scope.unresolved.length} non risolvibili → resta bloccante.`,
@@ -503,7 +511,15 @@ async function main() {
     // La follow-up e' la traccia dei finding FUORI dal diff: senza di loro non
     // c'e' niente da tracciare, e pretendere comunque un conio terrebbe rossa
     // una PR i cui unici 🔴 il contratto verde ha gia' chiuso.
+    // A finding nuovo su righe non cambiate è classificabile e lascia una
+    // traccia `DECLASSIFIED-UNCHANGED-LINE`, ma non è una prova di approvazione:
+    // il vecchio ramo lo contava come `outsideOnly` e poteva quindi rendere
+    // verde una review senza LGTM (caso reale #1647). Solo i finding fuori dal
+    // diff con follow-up persistita, o il body già chiuso dal contratto
+    // deterministico, possono usare il percorso non bloccante.
+    const unchangedLineDeclassified = (scope?.staleDeclassified?.length ?? 0) > 0;
     const outsideOnlyApproved = Boolean(applies && hasRedflag && scope?.outsideOnly
+      && !unchangedLineDeclassified
       && ((scope?.outside?.length ?? 0) === 0 || scope?.minted));
     const approving = reviewStateAllowsApproval(last)
       && ((body.includes('## LGTM') && !hasRedflag) || outsideOnlyApproved);
