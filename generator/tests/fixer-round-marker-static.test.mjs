@@ -19,6 +19,8 @@ for (const [file, marker] of [
     assert.ok(trustedAt >= 0, `${file}: materializzazione trusted assente`);
     assert.ok(source.indexOf('git show "$trusted_sha:scripts/ci/fixer-round-marker.mjs"', trustedAt) > trustedAt,
       `${file}: helper non pinned al main SHA`);
+    assert.match(source.slice(trustedAt, helperAt), /available=false/,
+      `${file}: helper assente non produce stato retryable esplicito`);
     assert.ok(helperAt > trustedAt && markerAt > helperAt, `${file}: helper marker trusted assente`);
     assert.match(source, /--current-round[\s\S]{0,180}--marker/,
       `${file}: cap non calcolato dal helper trusted`);

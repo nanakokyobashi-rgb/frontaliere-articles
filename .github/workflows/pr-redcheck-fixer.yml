@@ -300,15 +300,27 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
         run: |
-          set -euo pipefail
-          trusted_sha=$(gh api "repos/$REPO/git/ref/heads/main" --jq '.object.sha')
-          printf '%s' "$trusted_sha" | grep -qE '^[a-f0-9]{40}$'
-          git fetch --no-tags origin "$trusted_sha" -q
+          set -uo pipefail
+          if ! trusted_sha=$(gh api "repos/$REPO/git/ref/heads/main" --jq '.object.sha') \
+            || ! printf '%s' "$trusted_sha" | grep -qE '^[a-f0-9]{40}$'; then
+            echo "::warning::Helper trusted non leggibile da main: nessun Codex in questo run, retryable."
+            echo "available=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if ! git fetch --no-tags origin "$trusted_sha" -q; then
+            echo "::warning::Commit main trusted non materializzabile: nessun Codex in questo run, retryable."
+            echo "available=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
           trusted_path="$RUNNER_TEMP/fixer-round-marker.mjs"
-          git show "$trusted_sha:scripts/ci/fixer-round-marker.mjs" > "$trusted_path"
-          test -s "$trusted_path"
+          if ! git show "$trusted_sha:scripts/ci/fixer-round-marker.mjs" > "$trusted_path" || [ ! -s "$trusted_path" ]; then
+            echo "::warning::Helper trusted assente sul commit main pinned: nessun Codex in questo run, retryable."
+            echo "available=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
           echo "path=$trusted_path" >> "$GITHUB_OUTPUT"
           echo "sha=$trusted_sha" >> "$GITHUB_OUTPUT"
+          echo "available=true" >> "$GITHUB_OUTPUT"
 
       # Profilassi anti-401. Il lane Codex esige che il workflow file in
       # esecuzione sia BYTE-IDENTICO a `main`, e dal 2026-09-03 il workflow che
@@ -450,6 +462,13 @@ jobs:
             echo "::warning::Nessun token operativo runtime → redcheck fixer saltato senza consumare un round."
             echo "proceed=false" >> "$GITHUB_OUTPUT"
             exit 0
+          fi
+          if [ "${{ steps.trusted_marker.outputs.available }}" != 'true' ]; then
+            echo "::error::Helper round-marker trusted non disponibile da main: nessun Codex, claim/lease rilasciati dal cleanup, stato retryable."
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+            echo "marker_verified=false" >> "$GITHUB_OUTPUT"
+            echo "retryable=true" >> "$GITHUB_OUTPUT"
+            exit 1
           fi
 
           if ! comments_json=$(gh api --paginate --slurp \

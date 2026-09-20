@@ -147,6 +147,16 @@ function readMarkerActor() {
   return login;
 }
 
+function exactPostedComment(comments, body, author) {
+  const matches = comments.filter((comment) =>
+    Number.isSafeInteger(Number(comment?.id))
+      && Number(comment.id) > 0
+      && comment?.body === body
+      && comment?.user?.login === author,
+  );
+  return matches.sort((left, right) => Number(left.id) - Number(right.id)).at(-1) || null;
+}
+
 /** Return only complete, trusted markers bound to the current PR snapshot. */
 export function verifiedCurrentRound({ comments, marker, headSha, bodySha, expectedAuthor }) {
   if (!SHA_RE.test(headSha) || !/^[a-f0-9]{64}$/.test(bodySha)) {
@@ -204,13 +214,46 @@ function verifyPostedComment(comment, body, expectedAuthor) {
   return { id: Number(comment.id), author: expectedAuthor, body };
 }
 
+function reconcileMalformedPost({ repo, pr, body, author }) {
+  let lastError;
+  for (const delay of [0, 1, 2, 4]) {
+    if (delay) sleep(delay);
+    try {
+      const exact = exactPostedComment(readComments(repo, pr), body, author);
+      if (exact) return Number(exact.id);
+    } catch (error) {
+      lastError = error;
+    }
+  }
+  if (lastError) throw lastError;
+  return null;
+}
+
 function postComment(repo, pr, body) {
   const expectedAuthor = readMarkerActor();
-  const comment = runGhJson([
-    'api', '--method', 'POST', `repos/${repo}/issues/${pr}/comments`,
-    '--raw-field', `body=${body}`,
-  ], 'scrittura marker round');
-  return verifyPostedComment(comment, body, expectedAuthor);
+  try {
+    const comment = runGhJson([
+      'api', '--method', 'POST', `repos/${repo}/issues/${pr}/comments`,
+      '--raw-field', `body=${body}`,
+    ], 'scrittura marker round');
+    return verifyPostedComment(comment, body, expectedAuthor);
+  } catch (postError) {
+    let reconciledId;
+    try {
+      reconciledId = reconcileMalformedPost({ repo, pr, body, author: expectedAuthor });
+    } catch (reconcileError) {
+      throw new Error(`${postError.message}; riconciliazione POST marker fallita: ${reconcileError.message}`);
+    }
+    if (reconciledId === null) {
+      throw new Error(`${postError.message}; POST marker non riconciliata dopo read-back bounded`);
+    }
+    try {
+      deleteComment(repo, reconciledId);
+    } catch (deleteError) {
+      throw new Error(`${postError.message}; rimborso marker riconciliato ${reconciledId} fallito: ${deleteError.message}`);
+    }
+    throw new Error(`${postError.message}; commento ${reconciledId} rimborsato dopo risposta POST malformata`);
+  }
 }
 
 function deleteComment(repo, commentId) {
@@ -219,11 +262,8 @@ function deleteComment(repo, commentId) {
 
 function readBackPostedComment({ repo, pr, posted, marker, round, headSha, bodySha, body }) {
   const comments = readComments(repo, pr);
-  const exact = comments.find((comment) =>
-    Number(comment?.id) === posted.id
-      && comment?.body === body
-      && comment?.user?.login === posted.author,
-  );
+  const exact = comments.find((comment) => Number(comment?.id) === posted.id
+    && exactPostedComment([comment], body, posted.author));
   if (!exact) throw new Error('commento marker POST non trovato con stesso ID/autore/body');
   return verifyRoundMarker({
     pr: readPr(repo, pr), comments: [exact], marker, round,

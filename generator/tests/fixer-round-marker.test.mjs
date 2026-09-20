@@ -23,7 +23,7 @@ const BODY_SHA = bodyRevision(BODY);
 const REPO = 'example/repo';
 const PR = '7';
 
-function fakeGh({ comments, postBody = '', failComment = false, failCommentsRead = false, head = HEAD, body = BODY }) {
+function fakeGh({ comments, postBody = '', failComment = false, malformedPost = false, failCommentsRead = false, head = HEAD, body = BODY }) {
   const temp = mkdtempSync(path.join(os.tmpdir(), 'fixer-round-marker-'));
   const bin = path.join(temp, 'bin');
   mkdirSync(bin);
@@ -31,12 +31,17 @@ function fakeGh({ comments, postBody = '', failComment = false, failCommentsRead
   writeFileSync(log, '');
   const gh = path.join(bin, 'gh');
   const commentsJson = JSON.stringify([comments]);
+  const postCommand = failComment
+    ? 'exit 23'
+    : malformedPost
+      ? "printf '%s\\n' '{'"
+      : 'printf \'{"id":42,"user":{"login":"fixture-bot"},"body":%s}\\n\' "$FAKE_POST_BODY"';
   writeFileSync(gh, `#!/bin/sh
 echo "$*" >> "$GH_LOG"
 case "$*" in
   "api user") printf '%s\\n' '{"login":"fixture-bot"}' ;;
   *"api --method POST repos/${REPO}/issues/${PR}/comments"*)
-    ${failComment ? 'exit 23' : 'printf \'{"id":42,"user":{"login":"fixture-bot"},"body":%s}\\n\' "$FAKE_POST_BODY"'} ;;
+    ${postCommand} ;;
   *"api --method DELETE repos/${REPO}/issues/comments/42"*) exit 0 ;;
   *"issues/${PR}/comments?per_page=100"*)
     ${failCommentsRead ? 'exit 24' : `printf '%s\\n' '${commentsJson.replaceAll("'", "'\\''")}'`} ;;
@@ -181,6 +186,26 @@ test('failure injection sulla scrittura non permette di arrivare alla verifica o
     const log = readFileSync(fake.log, 'utf8');
     assert.match(log, /api --method POST repos\/example\/repo\/issues\/7\/comments/);
     assert.doesNotMatch(log, /issues\/example\/repo\/comments\?per_page=100/);
+  } finally {
+    rmSync(fake.temp, { recursive: true, force: true });
+  }
+});
+
+test('POST malformata viene riconciliata e rimborsata senza lasciare il marker', () => {
+  const tokens = markerTokens({
+    marker: 'REDCHECK_FIX_ROUND', round: 1, headSha: HEAD, bodySha: BODY_SHA,
+  });
+  const postedBody = `${tokens.join('\n')}\n_round 1/2_`;
+  const fake = fakeGh({
+    comments: [{ id: 42, user: { login: 'fixture-bot' }, body: postedBody }],
+    postBody: postedBody,
+    malformedPost: true,
+  });
+  try {
+    const result = runHelper(fake);
+    assert.equal(result.status, 1, `${result.stdout}\n${result.stderr}`);
+    assert.match(result.stderr, /JSON illeggibile/);
+    assert.match(readFileSync(fake.log, 'utf8'), /api --method DELETE repos\/example\/repo\/issues\/comments\/42/);
   } finally {
     rmSync(fake.temp, { recursive: true, force: true });
   }
