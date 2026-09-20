@@ -503,16 +503,44 @@ jobs:
             echo "retryable=true" >> "$GITHUB_OUTPUT"
             exit 1
           fi
-          if ! ROUND=$(printf '%s' "$round_state" | jq -er \
+          # Il preflight ha catturato HEAD e body prima del checkout. Se nel
+          # frattempo la PR è avanzata, il marker helper restituisce uno
+          # snapshot valido ma diverso: è un no-op, non un failure del ciclo.
+          # Un oggetto non strutturato o un round invalido resta invece
+          # fail-closed, perché non possiamo calcolare il cap in sicurezza.
+          if ! round_state_status=$(printf '%s' "$round_state" | jq -er \
             --arg expected "${{ needs.preflight.outputs.head_sha }}" \
             --arg expected_body "$EXPECTED_BODY_REVISION" --argjson max "$MAX_ROUNDS" \
-            'if type == "object" and .headSha == $expected and .bodyRevision == $expected_body and (.round | type == "number" and floor == . and . >= 0 and . <= $max) then (.round | tostring) else error("round state stale or malformed") end'); then
-            echo "::error::Round REDCHECK_FIX_ROUND stale/malformato rispetto a HEAD o cap: nessun Codex, claim/lease rilasciati dal cleanup, stato retryable."
+            'if type != "object" then "malformed"
+             elif (.headSha | type) != "string" or (.bodyRevision | type) != "string" or (.round | type) != "number" then "malformed"
+             elif (.round | floor) != .round or .round < 0 or .round > $max then "malformed"
+             elif .headSha != $expected or .bodyRevision != $expected_body then "stale"
+             else ("current:" + (.round | tostring)) end'); then
+            echo "::error::Round REDCHECK_FIX_ROUND non classificabile rispetto a HEAD, body o cap: nessun Codex, claim/lease rilasciati dal cleanup, stato retryable."
             echo "proceed=false" >> "$GITHUB_OUTPUT"
             echo "marker_verified=false" >> "$GITHUB_OUTPUT"
             echo "retryable=true" >> "$GITHUB_OUTPUT"
             exit 1
           fi
+          case "$round_state_status" in
+            stale)
+              echo "::notice::Snapshot PR HEAD/body cambiato dopo il preflight → redcheck skip (no-op), senza consumare un round."
+              echo "proceed=false" >> "$GITHUB_OUTPUT"
+              echo "marker_verified=false" >> "$GITHUB_OUTPUT"
+              echo "retryable=false" >> "$GITHUB_OUTPUT"
+              exit 0
+              ;;
+            current:*)
+              ROUND="${round_state_status#current:}"
+              ;;
+            *)
+              echo "::error::Round REDCHECK_FIX_ROUND malformato rispetto a HEAD, body o cap: nessun Codex, claim/lease rilasciati dal cleanup, stato retryable."
+              echo "proceed=false" >> "$GITHUB_OUTPUT"
+              echo "marker_verified=false" >> "$GITHUB_OUTPUT"
+              echo "retryable=true" >> "$GITHUB_OUTPUT"
+              exit 1
+              ;;
+          esac
           NEXT=$((ROUND + 1))
           echo "Round ❌-check-fix correnti: $ROUND (cap $MAX_ROUNDS)"
 
