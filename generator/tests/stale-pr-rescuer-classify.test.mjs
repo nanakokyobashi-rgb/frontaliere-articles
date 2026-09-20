@@ -985,6 +985,40 @@ test('#314 — identità non verificabile: nessun verdetto silenzioso', opts, ()
   assert.deepEqual(r.labeled, [], `Uno SHA diverso deve restare pending.\n${r.stdout}`);
 });
 
+test('#314 — shape REST senza timestamp: il workflow id ordina la generazione', opts, () => {
+  const r = runScan({
+    prs: openPr(),
+    checks: {
+      check_runs: [
+        {
+          id: 701,
+          name: CHECK_NAME,
+          status: 'completed',
+          head_sha: HEAD_SHA,
+          created_at: null,
+          completed_at: isoAgo(2),
+          conclusion: 'success',
+          details_url: 'https://github.com/nanakokyobashi-rgb/frontaliere-articles/actions/runs/2002/job/701',
+        },
+        {
+          id: 799,
+          name: CHECK_NAME,
+          status: 'completed',
+          head_sha: HEAD_SHA,
+          created_at: null,
+          completed_at: isoAgo(1),
+          conclusion: 'failure',
+          details_url: 'https://github.com/nanakokyobashi-rgb/frontaliere-articles/actions/runs/2001/job/799',
+        },
+      ],
+    },
+    reviews: reviews({ commit: OLD_SHA, body: 'un finding, niente LGTM' }),
+  });
+  const body = only(r);
+  assert.match(body, /review più vecchia dell'head/, `Il workflow id nuovo deve vincere.\n${body}`);
+  assert.doesNotMatch(body, /check `tests \\(node --test\\)` = `failure`/, `Il runner vecchio non deve vincere.\n${body}`);
+});
+
 test('#314 — due check completati nello STESSO secondo: vince il più recente per `id`', opts, () => {
   // `completed_at` è ISO8601 risolto al secondo, e due run sullo stesso SHA
   // che chiudono nello stesso secondo sono ordinari (un rerun parte quando il

@@ -22,6 +22,7 @@ function run({
   completedAt = createdAt,
   headSha = HEAD,
   runAttempt,
+  workflowRunId,
 } = {}) {
   const value = {
     id,
@@ -33,6 +34,10 @@ function run({
     completed_at: completedAt,
   };
   if (runAttempt !== undefined) value.run_attempt = runAttempt;
+  if (workflowRunId !== undefined) {
+    value.created_at = null;
+    value.details_url = `https://github.com/owner/repo/actions/runs/${workflowRunId}/job/${id}`;
+  }
   return value;
 }
 
@@ -96,6 +101,27 @@ test('run_attempt precede l id quando la creazione è la stessa', () => {
     latestCompletedRunByName([firstAttempt, rerun], VITEST_CHECK_NAME),
     rerun,
   );
+});
+
+test('la forma REST senza timestamp usa l ID del workflow, non l id del check-run', () => {
+  const newer = run({
+    id: 701,
+    workflowRunId: '2002',
+    conclusion: 'success',
+    createdAt: null,
+    completedAt: '2026-09-20T12:06:00Z',
+  });
+  const oldRerun = run({
+    id: 799,
+    workflowRunId: '2001',
+    conclusion: 'failure',
+    createdAt: null,
+    completedAt: '2026-09-20T12:07:00Z',
+  });
+
+  const selection = latestCompletedRunSelectionByName([newer, oldRerun], VITEST_CHECK_NAME);
+  assert.equal(selection.state, RUN_SELECTION_STATES.SELECTED);
+  assert.equal(selection.run, newer);
 });
 
 test('head SHA misti, id duplicato o metadati invalidi sono ambiguous e fail-closed', () => {

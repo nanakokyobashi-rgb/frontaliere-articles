@@ -348,6 +348,7 @@ jobs:
                             then {conclusion: $latest.conclusion, pending: 0}
                             else {conclusion: "none", pending: 1}
                             end
+                        end
                     end
                 end')
             TESTS_CONCL=$(printf '%s' "$TESTS_STATE" | jq -r '.conclusion // "none"' 2>/dev/null || echo "none")

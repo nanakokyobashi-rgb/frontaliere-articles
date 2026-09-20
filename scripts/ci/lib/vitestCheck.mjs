@@ -17,10 +17,10 @@
  * da solo). La selezione deve seguire la GENERAZIONE del run, non l'istante in
  * cui un runner ha finito: un rerun vecchio può concludersi dopo una
  * generazione nuova. Il selettore quindi verifica l'identità del check
- * (`id` + `head_sha`) e ordina per `created_at`, `run_attempt` e infine `id`;
- * almeno un marcatore di generazione (`created_at` o `run_attempt`) deve essere
- * presente e confrontabile fra i candidati. `completed_at` serve solo a
- * verificare che un run completato sia utilizzabile.
+ * (`id` + `head_sha`) e ordina per `created_at`, `run_attempt`, l'ID del
+ * workflow nel `details_url` e infine l'ID del check-run; almeno un marcatore
+ * di generazione deve essere presente e confrontabile fra i candidati.
+ * `completed_at` serve solo a verificare che un run completato sia utilizzabile.
  * Se la generazione più nuova è ancora in volo, oppure l'identità non è
  * verificabile, il contratto è rispettivamente `pending` o `ambiguous` e
  * nessun verdetto viene scelto. Un job `skipped` è completato ma non è un
@@ -38,6 +38,7 @@ import {
 } from './constants.mjs';
 
 const COMMIT_SHA_RE = /^[0-9a-f]{40}$/i;
+const WORKFLOW_RUN_ID_RE = /^[1-9][0-9]*$/;
 const COMPLETED_RUN_STATUS = 'completed';
 const PENDING_RUN_STATUSES = new Set(['queued', 'in_progress', 'requested', 'waiting', 'pending']);
 
@@ -54,6 +55,35 @@ function runSelection(state, reason, run = null) {
 
 function validTimestamp(value) {
   return typeof value === 'string' && value.length > 0 && Number.isFinite(Date.parse(value));
+}
+
+function workflowRunIdFromDetailsUrl(detailsUrl) {
+  if (typeof detailsUrl !== 'string') return null;
+  let url;
+  try {
+    url = new URL(detailsUrl);
+  } catch {
+    return null;
+  }
+  if (url.protocol !== 'https:' || url.hostname !== 'github.com') return null;
+  const parts = url.pathname.split('/').filter(Boolean);
+  if (parts.length !== 7
+      || parts[2] !== 'actions'
+      || parts[3] !== 'runs'
+      || parts[5] !== 'job'
+      || !WORKFLOW_RUN_ID_RE.test(parts[4])
+      || !WORKFLOW_RUN_ID_RE.test(parts[6])) {
+    return null;
+  }
+  return parts[4];
+}
+
+function compareDecimalIds(left, right) {
+  const a = String(left).replace(/^0+(?=\d)/, '');
+  const b = String(right).replace(/^0+(?=\d)/, '');
+  if (a.length !== b.length) return a.length > b.length ? 1 : -1;
+  if (a === b) return 0;
+  return a > b ? 1 : -1;
 }
 
 /**
@@ -84,17 +114,23 @@ function generationMetadata(run) {
     if (!validTimestamp(run.completed_at)) return null;
   }
 
+  const workflowRunId = workflowRunIdFromDetailsUrl(run.details_url);
+
   // Il solo check-run id è una chiave unica, non una prova sufficiente della
   // generazione: alcune forme REST omettono timestamp e attempt e possono
-  // avere id assegnati in ordine diverso dal workflow-run. In quel caso non
-  // si sceglie silenziosamente fra generazioni concorrenti.
-  if (createdAt === null && runAttempt === null) return null;
+  // avere id assegnati in ordine diverso dal workflow-run. Se il timestamp
+  // manca, si usa l'ID del workflow nel link al job; in assenza anche di
+  // quello, un attempt verificato resta utilizzabile. Altrimenti non si sceglie
+  // silenziosamente fra generazioni concorrenti.
+  if (createdAt === null && runAttempt === null && workflowRunId === null) return null;
 
   return {
     id: run.id,
     headSha: run.head_sha.toLowerCase(),
     createdAt,
     runAttempt,
+    source: createdAt !== null ? 'timestamp' : workflowRunId !== null ? 'workflow-run' : 'attempt',
+    workflowRunId,
   };
 }
 
@@ -106,6 +142,10 @@ function generationMetadata(run) {
 function compareGenerations(left, right) {
   if (left.createdAt !== null && right.createdAt !== null && left.createdAt !== right.createdAt) {
     return left.createdAt - right.createdAt;
+  }
+  if (left.workflowRunId !== null && right.workflowRunId !== null) {
+    const workflowOrder = compareDecimalIds(left.workflowRunId, right.workflowRunId);
+    if (workflowOrder !== 0) return workflowOrder;
   }
   if (left.runAttempt !== null && right.runAttempt !== null && left.runAttempt !== right.runAttempt) {
     return left.runAttempt - right.runAttempt;
@@ -245,9 +285,8 @@ export function latestCompletedRunSelectionByName(checkRuns, name) {
   if (metadata.some((entry) => entry.headSha !== expectedHead)) {
     return runSelection(RUN_SELECTION_STATES.AMBIGUOUS, 'mixed-head-sha');
   }
-  const allHaveCreatedAt = metadata.every((entry) => entry.createdAt !== null);
-  const allHaveRunAttempt = metadata.every((entry) => entry.runAttempt !== null);
-  if (!allHaveCreatedAt && !allHaveRunAttempt) {
+  const sources = new Set(metadata.map((entry) => entry.source));
+  if (sources.size !== 1) {
     return runSelection(RUN_SELECTION_STATES.AMBIGUOUS, 'incomparable-generation-metadata');
   }
 
