@@ -154,16 +154,20 @@ test('la ri-traduzione rifiuta una sezione Fatti chiave eliminata o rinominata',
   );
 });
 
-test('la ri-traduzione rifiuta una sezione riconosciuta sotto la soglia minima', () => {
-  const guarded = guardTranslatedKeyFacts({
-    body1: [
-      '## Fatti chiave',
+test('la ri-traduzione accetta una sezione riconosciuta con uno o due fatti non vacui', () => {
+  for (const facts of [
+    ['- **Cosa**: assegno familiare.'],
+    [
       '- **Cosa**: assegno familiare.',
       '- **Dove**: Cantone di Zugo.',
-    ].join('\n'),
-  });
-  assert.equal(guarded.changed, false);
-  assert.match(guarded.issue, /almeno 3 fatti/);
+    ],
+  ]) {
+    const body1 = ['## Fatti chiave', ...facts].join('\n');
+    const guarded = guardTranslatedKeyFacts({ body1 });
+    assert.equal(guarded.issue, null);
+    assert.equal(guarded.changed, false);
+    assert.equal(guarded.sections.body1, body1);
+  }
 });
 
 test('la guardia dei fatti chiave sta prima del gate e della scrittura atomica', () => {

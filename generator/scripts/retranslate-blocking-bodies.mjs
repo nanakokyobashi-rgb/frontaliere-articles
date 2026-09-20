@@ -249,10 +249,10 @@ export function guardTranslatedKeyFacts(sections) {
     };
   }
   const recognizedSections = parseAiSearchSections(result.value);
-  if (!recognizedSections.some((section) => section.bullets.length >= MIN_FACTS_PER_SECTION)) {
+  if (!recognizedSections.some((section) => section.bullets.length > 0)) {
     return {
       sections,
-      issue: `[key-facts-specificity] la ri-traduzione non conserva una sezione Fatti chiave riconosciuta con almeno ${MIN_FACTS_PER_SECTION} fatti`,
+      issue: '[key-facts-specificity] la ri-traduzione non conserva una sezione Fatti chiave riconosciuta con almeno un fatto',
       changed: false,
       result,
     };
