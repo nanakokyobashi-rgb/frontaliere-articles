@@ -187,3 +187,36 @@ test('la derivazione sta nel classificatore, cosi\' anche il fixer la riceve', (
   assert.match(gate, /isMalformedReviewBody\(body\)/u,
     'il gate non scarta un body malformato');
 });
+
+test('un Important su un path che non risolve NON si declassa mai', () => {
+  // `changedLinesSince.get(file) ?? new Set()` trasforma un file omesso dal
+  // compare — o cancellato — in «confrontato e intatto». Se il declassamento
+  // girasse PRIMA della risoluzione delle citazioni, un Important ancorato a
+  // un path che nell'albero della HEAD non esiste piu' uscirebbe declassato
+  // invece che `unresolved`, e `outsideOnly` potrebbe approvare una
+  // cancellazione che rompe la superficie pubblicata. Finding della review
+  // su #1641.
+  const review = ['## Findings (Important: 1)',
+    '`engine/cancellato.mjs:5`: 🔴 Important: il canonical sparisce.'].join('\n');
+  const result = classifyImportantFindings(review, ['engine/altro.mjs'], ['engine/altro.mjs'], {
+    priorFindingIds: new Set(),
+    changedLinesSince: new Map([['engine/cancellato.mjs', new Set()]]),
+  });
+  assert.equal(result.staleDeclassified.length, 0,
+    'il path non risolve nell\'albero: il finding non e\' declassabile');
+  assert.equal(result.blocking, true);
+  assert.equal(result.unresolved.length, 1);
+});
+
+test('la cronologia riconosce il reviewer PRIMARIO di questo repo', () => {
+  // Il reviewer qui e' `github-actions[bot]` col marker del fallback Codex.
+  // Filtrando sul solo `REVIEWER_BOT_LOGIN_RE` gli id precedenti e il delta
+  // uscivano vuoti su ogni re-review reale: la regola sarebbe stata un no-op.
+  const source = read('scripts/ci/review-scope.mjs');
+  const start = source.indexOf('function reviewHistoryContext(');
+  assert.notEqual(start, -1);
+  const block = source.slice(start, source.indexOf('\nfunction ', start + 10));
+  assert.match(block, /CODEX_FALLBACK_REVIEW/u,
+    'la cronologia scarta le review Codex, cioe\' quasi tutte');
+  assert.match(block, /github-actions\\\[bot\\\]/u);
+});

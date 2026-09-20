@@ -315,21 +315,7 @@ export function classifyImportantFindings(body, changedFiles, repositoryPaths = 
   // che dentro il loop rende la proprieta' indipendente dall'ORDINE dei
   // controlli — sul sito bastava invertire due righe per lasciar passare una
   // review malformata.
-  const staleIds = comparedLines
-    ? new Set(unchangedLineImportants({
-      findings: allFindings.filter((finding) => !finding.parserUncertain),
-      priorFindingIds: priorFindingIds instanceof Set
-        ? priorFindingIds
-        : new Set(priorFindingIds || []),
-      changedLines: comparedLines,
-    }).map((finding) => finding.lineNumber))
-    : new Set();
-
   for (const finding of allFindings) {
-    if (staleIds.has(finding.lineNumber)) {
-      staleDeclassified.push({ ...finding, stableId: stableFindingId(finding) });
-      continue;
-    }
     if (bodyContractPassed && finding.citations.length === 0
         && isContractDomainBodyFinding(finding, prBody)) {
       bodyDeclassified.push(finding);
@@ -363,6 +349,29 @@ export function classifyImportantFindings(body, changedFiles, repositoryPaths = 
       resolved,
     };
     (isInScope ? inScope : outside).push(classified);
+  }
+
+  // Il declassamento per riga non cambiata si applica SOLO ai finding gia'
+  // risolti e gia' dentro il diff della PR. Farlo prima della risoluzione era
+  // un buco: `changedLinesSince.get(file) ?? new Set()` trasforma un file
+  // omesso dal compare — o cancellato — in «confrontato e intatto», e un
+  // Important ancorato a un path che nell'albero della HEAD non esiste piu'
+  // sarebbe uscito declassato invece che `unresolved`. Cosi' invece un
+  // finding puo' essere declassato solo dopo aver dimostrato che il path
+  // esiste, risolve, ed e' fra i file che la PR tocca.
+  if (comparedLines) {
+    const staleKeys = new Set(unchangedLineImportants({
+      findings: inScope.filter((finding) => !finding.parserUncertain),
+      priorFindingIds: priorFindingIds instanceof Set
+        ? priorFindingIds
+        : new Set(priorFindingIds || []),
+      changedLines: comparedLines,
+    }).map((finding) => finding.lineNumber));
+    for (let index = inScope.length - 1; index >= 0; index -= 1) {
+      if (!staleKeys.has(inScope[index].lineNumber)) continue;
+      const [finding] = inScope.splice(index, 1);
+      staleDeclassified.unshift({ ...finding, stableId: stableFindingId(finding) });
+    }
   }
 
   return {
@@ -438,8 +447,16 @@ function reviewHistoryContext(repo, pr, headSha) {
   try {
     const reviews = gh(['api', `repos/${repo}/pulls/${pr}/reviews`, '--paginate']);
     const managed = (Array.isArray(reviews) ? reviews : [])
+      // STESSA identita' che accetta `review-gate.mjs`. Con il solo
+      // `REVIEWER_BOT_LOGIN_RE` si scartavano le review
+      // `github-actions[bot]` col marker `CODEX_FALLBACK_REVIEW` — cioe' il
+      // reviewer PRIMARIO di questo repo: gli id precedenti e il delta
+      // sarebbero usciti vuoti su ogni re-review reale, e la regola sarebbe
+      // stata un no-op che non protegge nulla.
       .filter((review) => review?.user?.type === 'Bot'
-        && REVIEWER_BOT_LOGIN_RE.test(String(review?.user?.login || ''))
+        && (REVIEWER_BOT_LOGIN_RE.test(String(review?.user?.login || ''))
+          || (/^github-actions\[bot\]$/iu.test(String(review?.user?.login || ''))
+            && String(review?.body || '').includes('<!-- CODEX_FALLBACK_REVIEW -->')))
         && String(review?.state || '') !== 'PENDING'
         && String(review?.state || '') !== 'DISMISSED');
     if (managed.length === 0) return empty;
