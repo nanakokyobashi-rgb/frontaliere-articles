@@ -1,5 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -336,6 +337,41 @@ test('tests.yml claims before review work and finalizes without gating the requi
   const incrementalGuard = workflow.slice(workflow.indexOf('last=$(printf'), workflow.indexOf('if [ -z "$last"', workflow.indexOf('last=$(printf')));
   assert.match(incrementalGuard, /--arg revision \"\$REVIEW_REVISION\"/);
   assert.match(incrementalGuard, /has_current_revision\(\$revision\)/);
+  const compareGuard = workflow.slice(workflow.indexOf('compare_json=', workflow.indexOf('last=$(printf')));
+  assert.match(compareGuard, /gh api \"repos\/\$REPO\/compare\/\$last\.\.\.\$HEAD_SHA\"/);
+  assert.match(compareGuard, /type == \"object\"/);
+  assert.match(compareGuard, /\.files \| type == \"array\"/);
+  assert.match(compareGuard, /all\(\.files\[\]\;/);
+  assert.match(compareGuard, /if \[ -z \"\$changed\" \]; then[\s\S]*echo \"skip=true\"/);
+  assert.match(compareGuard, /Compare valido con files=\[\]/);
+  assert.doesNotMatch(compareGuard, /Compare vuoto → review piena/);
+  const schemaStart = compareGuard.indexOf("if ! printf '%s' \"$compare_json\" | jq -e '");
+  const schemaEnd = compareGuard.indexOf("\n          ' >/dev/null", schemaStart);
+  assert.ok(schemaStart >= 0 && schemaEnd > schemaStart, 'schema jq del compare non trovato');
+  const compareSchema = compareGuard
+    .slice(schemaStart + "if ! printf '%s' \"$compare_json\" | jq -e '".length, schemaEnd)
+    .replace(/^\s+/gm, '')
+    .trim();
+  const compareSchemaAccepts = (payload) => {
+    try {
+      execFileSync('jq', ['-e', compareSchema], {
+        input: `${JSON.stringify(payload)}\n`,
+        encoding: 'utf8',
+        stdio: ['pipe', 'ignore', 'ignore'],
+      });
+      return true;
+    } catch {
+      return false;
+    }
+  };
+  assert.equal(compareSchemaAccepts({ files: [] }), true,
+    'files=[] è un compare valido e deve consentire il carry-forward');
+  assert.equal(compareSchemaAccepts({ files: [{ filename: 'scripts/ci/example.mjs' }] }), true,
+    'un compare con un file valido deve proseguire verso la classificazione del delta');
+  assert.equal(compareSchemaAccepts({}), false,
+    'un compare senza files non deve diventare uno skip silenzioso');
+  assert.equal(compareSchemaAccepts({ files: [{}] }), false,
+    'un compare con entry file malformata deve restare fail-closed');
   assert.match(workflow, /steps\.review_claim\.outputs\.claim_allowed == 'true'/);
   assert.match(workflow, /REVIEW_GATE_FALLBACK_APPROVED:/);
 

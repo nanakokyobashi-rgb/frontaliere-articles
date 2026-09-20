@@ -105,6 +105,36 @@ test('run_attempt precede l id quando la creazione è la stessa', () => {
   );
 });
 
+test('metadati di generazione parziali non ricadono sull id del check-run', () => {
+  const sameTimestamp = '2026-09-20T12:30:00Z';
+  const withAttemptAndWorkflow = {
+    ...run({
+      id: 503,
+      conclusion: 'failure',
+      createdAt: sameTimestamp,
+      completedAt: '2026-09-20T12:32:00Z',
+      runAttempt: 1,
+    }),
+    details_url: 'https://github.com/owner/repo/actions/runs/3001/job/503?attempt=1#summary',
+  };
+  const withoutAttemptOrWorkflow = run({
+    id: 502,
+    conclusion: 'success',
+    createdAt: sameTimestamp,
+    completedAt: '2026-09-20T12:31:00Z',
+  });
+
+  for (const checkRuns of [
+    [withAttemptAndWorkflow, withoutAttemptOrWorkflow],
+    [withoutAttemptOrWorkflow, withAttemptAndWorkflow],
+  ]) {
+    const selection = latestCompletedRunSelectionByName(checkRuns, VITEST_CHECK_NAME);
+    assert.equal(selection.state, RUN_SELECTION_STATES.AMBIGUOUS);
+    assert.equal(selection.reason, 'incomparable-generation-metadata');
+    assert.equal(latestCompletedRunByName(checkRuns, VITEST_CHECK_NAME), null);
+  }
+});
+
 test('la forma REST senza timestamp usa l ID del workflow, non l id del check-run', () => {
   const newer = run({
     id: 701,

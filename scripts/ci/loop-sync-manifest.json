@@ -353,10 +353,9 @@
       "mode": "adapted",
       "reason": "Fixture F5 della vecchia PR merged contro l'assenza di delivery nel run corrente, con prove di nuova PR, cambio HEAD, transizione OPEN -> MERGED e lookup unavailable. Il sito usa Vitest/TypeScript; il corpus mantiene node:test e il proprio fake-gh senza rete, quindi la suite è un port adattato del contratto e non un copia-incolla.",
       "baseline": {
-        "site": "0202d3472daa0de4",
-        "corpus": "c451c1197725a61d",
-        "alignedAt": "2026-09-20",
-        "forcedAt": "2026-09-20T08:39:04.396Z"
+        "site": "783de6489ec92d72",
+        "corpus": "fa4a9b7210c0f837",
+        "alignedAt": "2026-09-20"
       }
     },
     {
@@ -866,8 +865,8 @@
       "mode": "identical",
       "reason": "Predicato unico source-first per provare la delivery corrente di issue-fix: sidecar legato a run+attempt, issue/branch/HEAD e tri-state verified-delivery/verified-none/unavailable. Il workflow resta adapted per i consumer del corpus; questo helper e' trasportato byte-identico insieme al marker, dopo la correzione del solo errore di sintassi nel draft sito.",
       "baseline": {
-        "site": "1a8d317651bbbc8c",
-        "corpus": "1a8d317651bbbc8c",
+        "site": "b446a2fe5aa92f7f",
+        "corpus": "b446a2fe5aa92f7f",
         "alignedAt": "2026-09-20"
       }
     },
