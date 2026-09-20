@@ -279,7 +279,8 @@ test('il digest del body è acquisito prima e classificato fail-closed', () => {
   assert.match(base, /echo "body_sha=\$body_sha"/, 'la baseline deve salvare il digest del body della PR');
   assert.match(base, /gh api[\s\S]*> "\$body_file"/, 'lo status di gh deve essere osservabile prima del digest');
   assert.match(base, /if \[ ! -s "\$body_file" \]; then[\s\S]{0,220}?exit 1/, 'la baseline deve rifiutare una risposta API a zero byte');
-  assert.match(base, /s\/\\r\$\/[\s\S]*s\/\[\[:space:\]\]\+\$\//, 'la baseline deve canonizzare CR e spazio in coda');
+  assert.match(base, /sha256sum "\$body_file"/, 'la baseline deve hashare la fence jq senza normalizzarla');
+  assert.doesNotMatch(base, /s\/\\r\$\/[\s\S]*s\/\[\[:space:\]\]\+\$\//, 'la baseline non deve alterare i byte del body');
   assert.match(classify, /BASE_BODY_SHA: \$\{\{ steps\.base\.outputs\.body_sha \}\}/);
   assert.match(classify, /BASE_CAPTURE_OUTCOME: \$\{\{ steps\.base\.outcome \}\}/);
 
@@ -288,7 +289,8 @@ test('il digest del body è acquisito prima e classificato fail-closed', () => {
   assert.ok(currentBodyAt !== -1 && commentsAt !== -1 && currentBodyAt < commentsAt,
     'il body deve essere confrontato prima del fallback sui commenti');
   assert.match(classify, /if \[ ! -s "\$body_file" \]; then[\s\S]{0,240}?exit 1/, 'la lettura finale deve rifiutare una risposta API a zero byte');
-  assert.match(classify, /s\/\\r\$\/[\s\S]*s\/\[\[:space:\]\]\+\$\//, 'la lettura finale deve canonizzare CR e spazio in coda');
+  assert.match(classify, /sha256sum "\$body_file"/, 'la lettura finale deve hashare la fence jq senza normalizzarla');
+  assert.doesNotMatch(classify, /s\/\\r\$\/[\s\S]*s\/\[\[:space:\]\]\+\$\//, 'la lettura finale non deve alterare i byte del body');
   assert.match(classify, /if \[ "\$\{BASE_CAPTURE_OUTCOME:-\}" != "success" \][\s\S]{0,240}?exit 1/,
     'la baseline deve essere ancorata al guard reale e restare bounded');
 

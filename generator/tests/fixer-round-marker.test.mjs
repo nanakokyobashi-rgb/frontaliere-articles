@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { chmodSync, mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import os from 'node:os';
@@ -9,6 +10,7 @@ import { fileURLToPath } from 'node:url';
 import {
   bodyRevision,
   markerTokens,
+  verifiedCurrentRound,
   verifyPersistedMarker,
   verifyRoundMarker,
 } from '../../scripts/ci/fixer-round-marker.mjs';
@@ -70,6 +72,12 @@ function runHelper(fake, extra = []) {
   ], { cwd: ROOT, env: fake.env, encoding: 'utf8', timeout: 10_000 });
 }
 
+function runCurrentRound(fake, marker = 'REDCHECK_FIX_ROUND') {
+  return spawnSync(process.execPath, [HELPER,
+    '--current-round', '--repo', REPO, '--pr', PR, '--marker', marker,
+  ], { cwd: ROOT, env: fake.env, encoding: 'utf8', timeout: 10_000 });
+}
+
 test('il marker lega round, HEAD e body revision allo stesso commento', () => {
   const tokens = markerTokens({
     marker: 'REDCHECK_FIX_ROUND', round: 1, headSha: HEAD, bodySha: BODY_SHA,
@@ -87,6 +95,56 @@ test('il marker lega round, HEAD e body revision allo stesso commento', () => {
     expectedHead: HEAD,
     expectedBodySha: BODY_SHA,
   }), /body revision cambiata/);
+});
+
+test('la body revision conserva i byte API e la newline jq contrattuale', () => {
+  const body = 'body con spazio  \n';
+  assert.equal(bodyRevision(body), createHash('sha256').update(`${body}\n`).digest('hex'));
+  assert.notEqual(bodyRevision(body), bodyRevision(body.trim()));
+});
+
+test('il cap ignora marker preseed/stale e conta solo autore, HEAD e body correnti', () => {
+  const current = markerTokens({ marker: 'REDCHECK_FIX_ROUND', round: 1, headSha: HEAD, bodySha: BODY_SHA });
+  const stale = markerTokens({ marker: 'REDCHECK_FIX_ROUND', round: 2, headSha: 'b'.repeat(40), bodySha: BODY_SHA });
+  const preseed = markerTokens({ marker: 'REDCHECK_FIX_ROUND', round: 2, headSha: HEAD, bodySha: BODY_SHA });
+  const comments = [
+    { id: 8, user: { login: 'attacker' }, body: preseed.join('\n') },
+    { id: 9, user: { login: 'fixture-bot' }, body: stale.join('\n') },
+    { id: 10, user: { login: 'fixture-bot' }, body: current.join('\n') },
+  ];
+  const state = verifiedCurrentRound({
+    comments, marker: 'REDCHECK_FIX_ROUND', headSha: HEAD, bodySha: BODY_SHA, expectedAuthor: 'fixture-bot',
+  });
+  assert.equal(state.round, 1);
+});
+
+test('un marker trusted oltre il cap è un errore fail-closed', () => {
+  const tokens = markerTokens({ marker: 'REDCHECK_FIX_ROUND', round: 3, headSha: HEAD, bodySha: BODY_SHA });
+  assert.throws(() => verifiedCurrentRound({
+    comments: [{ id: 12, user: { login: 'fixture-bot' }, body: tokens.join('\n') }],
+    marker: 'REDCHECK_FIX_ROUND', headSha: HEAD, bodySha: BODY_SHA, expectedAuthor: 'fixture-bot',
+  }), /fuori intervallo/);
+});
+
+test('la CLI del cap usa il read-back paginato e scarta preseed/stale', () => {
+  const current = markerTokens({ marker: 'REDCHECK_FIX_ROUND', round: 1, headSha: HEAD, bodySha: BODY_SHA });
+  const stale = markerTokens({ marker: 'REDCHECK_FIX_ROUND', round: 2, headSha: 'b'.repeat(40), bodySha: BODY_SHA });
+  const preseed = markerTokens({ marker: 'REDCHECK_FIX_ROUND', round: 2, headSha: HEAD, bodySha: BODY_SHA });
+  const fake = fakeGh({ comments: [
+    { id: 8, user: { login: 'attacker' }, body: preseed.join('\n') },
+    { id: 9, user: { login: 'fixture-bot' }, body: stale.join('\n') },
+    { id: 10, user: { login: 'fixture-bot' }, body: current.join('\n') },
+  ] });
+  try {
+    const result = runCurrentRound(fake);
+    assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
+    assert.match(result.stdout, /"round":1/);
+    const log = readFileSync(fake.log, 'utf8');
+    assert.match(log, /api user/);
+    assert.match(log, /api --paginate --slurp repos\/example\/repo\/issues\/7\/comments\?per_page=100/);
+  } finally {
+    rmSync(fake.temp, { recursive: true, force: true });
+  }
 });
 
 test('post + verifica usa i commenti paginati e completa il ciclo', () => {

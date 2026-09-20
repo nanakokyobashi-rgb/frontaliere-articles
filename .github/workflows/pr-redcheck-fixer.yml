@@ -303,7 +303,7 @@ jobs:
           set -euo pipefail
           trusted_sha=$(gh api "repos/$REPO/git/ref/heads/main" --jq '.object.sha')
           printf '%s' "$trusted_sha" | grep -qE '^[a-f0-9]{40}$'
-          git fetch --no-tags --depth=1 origin "$trusted_sha" -q
+          git fetch --no-tags origin "$trusted_sha" -q
           trusted_path="$RUNNER_TEMP/fixer-round-marker.mjs"
           git show "$trusted_sha:scripts/ci/fixer-round-marker.mjs" > "$trusted_path"
           test -s "$trusted_path"
@@ -468,11 +468,20 @@ jobs:
             echo "retryable=true" >> "$GITHUB_OUTPUT"
             exit 1
           fi
-          ROUND=$(printf '%s' "$comments" | grep -oE 'REDCHECK_FIX_ROUND: [0-9]+' \
-            | grep -oE '[0-9]+' | sort -rn | head -1 || true)
-          ROUND=${ROUND:-0}
-          if ! printf '%s' "$ROUND" | grep -qE '^[0-9]{1,3}$' || [ "$ROUND" -gt "$MAX_ROUNDS" ]; then
-            echo "::error::Round marker REDCHECK_FIX_ROUND fuori intervallo 0..$MAX_ROUNDS: '$ROUND'. Nessun Codex: stato retryable."
+          # Il cap conta solo marker completi emessi dall'autore trusted e
+          # legati alla HEAD/body correnti; mai token in un commento preseed o stale.
+          if ! round_state=$(node "${{ steps.trusted_marker.outputs.path }}" \
+            --current-round --repo "$REPO" --pr "$PR_NUMBER" --marker REDCHECK_FIX_ROUND); then
+            echo "::error::Round REDCHECK_FIX_ROUND non verificabile con il helper trusted: nessun Codex, claim/lease rilasciati dal cleanup, stato retryable."
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+            echo "marker_verified=false" >> "$GITHUB_OUTPUT"
+            echo "retryable=true" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+          if ! ROUND=$(printf '%s' "$round_state" | jq -er \
+            --arg expected "${{ needs.preflight.outputs.head_sha }}" --argjson max "$MAX_ROUNDS" \
+            'if type == "object" and .headSha == $expected and (.round | type == "number" and floor == . and . >= 0 and . <= $max) then (.round | tostring) else error("round state stale or malformed") end'); then
+            echo "::error::Round REDCHECK_FIX_ROUND stale/malformato rispetto a HEAD o cap: nessun Codex, claim/lease rilasciati dal cleanup, stato retryable."
             echo "proceed=false" >> "$GITHUB_OUTPUT"
             echo "marker_verified=false" >> "$GITHUB_OUTPUT"
             echo "retryable=true" >> "$GITHUB_OUTPUT"
@@ -643,7 +652,7 @@ jobs:
             echo "::error::La risposta API del body PR prima di Claude e' vuota o non verificabile."
             exit 1
           fi
-          if ! body_sha=$(sed -E -e 's/\r$//' -e 's/[[:space:]]+$//' "$body_file" | sha256sum | cut -d' ' -f1); then
+          if ! body_sha=$(sha256sum "$body_file" | awk '{print $1}'); then
             echo "::error::Impossibile calcolare il digest del body PR prima di Claude."
             exit 1
           fi
@@ -980,7 +989,7 @@ jobs:
             echo "::error::❌-check-fix: la risposta API del body PR dopo Claude e' vuota o non verificabile → classificazione BLOCCANTE, job ROSSO."
             exit 1
           fi
-          if ! now_body_sha=$(sed -E -e 's/\r$//' -e 's/[[:space:]]+$//' "$body_file" | sha256sum | cut -d' ' -f1); then
+          if ! now_body_sha=$(sha256sum "$body_file" | awk '{print $1}'); then
             echo "::error::❌-check-fix: impossibile calcolare il digest del body PR dopo Claude → classificazione BLOCCANTE, job ROSSO."
             exit 1
           fi

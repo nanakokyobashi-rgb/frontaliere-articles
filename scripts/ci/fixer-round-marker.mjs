@@ -16,11 +16,12 @@ const MARKER_RE = /^[A-Z][A-Z0-9_]{2,80}$/;
 export const MAX_ROUND = 2;
 
 export function canonicalBody(body) {
-  return String(body ?? '')
-    .replace(/\r\n?/g, '\n')
-    .split('\n')
-    .map((line) => line.replace(/[ \t]+$/g, ''))
-    .join('\n');
+  if (body === null || body === undefined) return '\n';
+  if (typeof body !== 'string') throw new TypeError('PR body must be a string');
+  // GitHub's `gh api --jq` body projection is the established review fence in
+  // this corpus: jq emits the exact body followed by one LF. Do not trim CR,
+  // trailing spaces, or that terminal LF; the marker must match REVIEW_INPUT_REVISION.
+  return `${body}\n`;
 }
 
 export function bodyRevision(body) {
@@ -41,9 +42,10 @@ function parseArgs(argv) {
     const arg = argv[i];
     if (!arg.startsWith('--')) throw new Error(`argomento inatteso: ${arg}`);
     const key = arg.slice(2);
-    if (key === 'help' || key === 'verify-current') {
+    if (key === 'help' || key === 'verify-current' || key === 'current-round') {
       if (key === 'help') result.help = true;
-      else result['verify-current'] = true;
+      else if (key === 'verify-current') result['verify-current'] = true;
+      else result['current-round'] = true;
       continue;
     }
     const value = argv[i + 1];
@@ -57,7 +59,7 @@ function parseArgs(argv) {
 }
 
 function usage() {
-  return 'uso: fixer-round-marker.mjs --repo owner/repo --pr N --marker NAME --round N --expected-head SHA --message TEXT';
+  return 'uso: fixer-round-marker.mjs --repo owner/repo --pr N --marker NAME --round N --expected-head SHA --message TEXT | --current-round';
 }
 
 function runGh(args, label) {
@@ -138,6 +140,56 @@ export function verifyPersistedMarker({ comments, marker, round, headSha, bodySh
   return match ? { commentId: match.id ?? null, tokens } : null;
 }
 
+function readMarkerActor() {
+  const actor = runGhJson(['api', 'user'], 'lettura autore marker');
+  const login = String(actor?.login || '');
+  if (!login) throw new Error('lettura autore marker: login assente');
+  return login;
+}
+
+/** Return only complete, trusted markers bound to the current PR snapshot. */
+export function verifiedCurrentRound({ comments, marker, headSha, bodySha, expectedAuthor }) {
+  if (!SHA_RE.test(headSha) || !/^[a-f0-9]{64}$/.test(bodySha)) {
+    throw new Error('stato PR non valido per il cap round');
+  }
+  if (!expectedAuthor) throw new Error('autore marker mancante per il cap round');
+  let round = 0;
+  for (const comment of comments) {
+    if (comment?.user?.login !== expectedAuthor || typeof comment.body !== 'string') continue;
+    const match = comment.body.match(new RegExp(`<!-- ${marker}: ([0-9]+) -->`));
+    if (!match) continue;
+    const candidate = Number(match[1]);
+    if (!Number.isSafeInteger(candidate) || candidate < 1 || candidate > MAX_ROUND) {
+      throw new Error(`round marker fuori intervallo 1..${MAX_ROUND}`);
+    }
+    if (verifyPersistedMarker({
+      comments: [comment], marker, round: candidate, headSha, bodySha,
+    })) round = Math.max(round, candidate);
+  }
+  if (!Number.isSafeInteger(round) || round < 0 || round > MAX_ROUND) {
+    throw new Error(`round corrente fuori intervallo 0..${MAX_ROUND}`);
+  }
+  return { round, headSha, bodyRevision: bodySha, author: expectedAuthor };
+}
+
+export function readVerifiedCurrentRound({ repo, pr, marker }) {
+  if (!/^[^/\s]+\/[^/\s]+$/.test(repo)) throw new Error('repo non valido');
+  if (!/^[1-9][0-9]*$/.test(String(pr))) throw new Error('numero PR non valido');
+  if (!MARKER_RE.test(marker)) throw new Error('nome marker non valido');
+  const current = readPr(repo, pr);
+  const comments = readComments(repo, pr);
+  return {
+    marker,
+    ...verifiedCurrentRound({
+      comments,
+      marker,
+      headSha: current.headSha,
+      bodySha: current.bodySha,
+      expectedAuthor: readMarkerActor(),
+    }),
+  };
+}
+
 function verifyPostedComment(comment, body, expectedAuthor) {
   if (!comment || typeof comment !== 'object' || Array.isArray(comment)) {
     throw new Error('risposta POST commento malformata');
@@ -153,9 +205,7 @@ function verifyPostedComment(comment, body, expectedAuthor) {
 }
 
 function postComment(repo, pr, body) {
-  const actor = runGhJson(['api', 'user'], 'lettura autore marker');
-  const expectedAuthor = String(actor?.login || '');
-  if (!expectedAuthor) throw new Error('lettura autore marker: login assente');
+  const expectedAuthor = readMarkerActor();
   const comment = runGhJson([
     'api', '--method', 'POST', `repos/${repo}/issues/${pr}/comments`,
     '--raw-field', `body=${body}`,
@@ -266,7 +316,11 @@ function main() {
     console.log(usage());
     return;
   }
-  if (args['verify-current']) {
+  if (args['current-round']) {
+    console.log(JSON.stringify(readVerifiedCurrentRound({
+      repo: String(args.repo || ''), pr: String(args.pr || ''), marker: String(args.marker || ''),
+    })));
+  } else if (args['verify-current']) {
     const expectedHead = String(args['expected-head'] || '').toLowerCase();
     const expectedBodySha = String(args['expected-body-revision'] || '').toLowerCase();
     if (!SHA_RE.test(expectedHead) || !/^[a-f0-9]{64}$/.test(expectedBodySha)) {

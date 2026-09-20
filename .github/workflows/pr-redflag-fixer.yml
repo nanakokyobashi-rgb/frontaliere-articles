@@ -495,7 +495,7 @@ jobs:
             echo "available=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          if ! git fetch --no-tags --depth=1 origin "$trusted_sha" -q; then
+          if ! git fetch --no-tags origin "$trusted_sha" -q; then
             echo "::warning::Commit main trusted non materializzabile: nessun Codex in questo run, retryable."
             echo "available=false" >> "$GITHUB_OUTPUT"
             exit 0
@@ -696,12 +696,20 @@ jobs:
             echo "proceed=false" >> "$GITHUB_OUTPUT"; exit 0
           fi
 
-          # Round corrente = numero di marker già presenti.
-          ROUND=$(printf '%s' "$comments" | grep -oE 'REDFLAG_FIX_ROUND: [0-9]+' \
-            | grep -oE '[0-9]+' | sort -rn | head -1 || true)
-          ROUND=${ROUND:-0}
-          if ! printf '%s' "$ROUND" | grep -qE '^[0-9]{1,3}$' || [ "$ROUND" -gt "$MAX_ROUNDS" ]; then
-            echo "::error::Round marker REDFLAG_FIX_ROUND fuori intervallo 0..$MAX_ROUNDS: '$ROUND'. Nessun Codex: stato retryable."
+          # Il cap conta solo marker completi emessi dall'autore trusted e
+          # legati alla HEAD/body correnti; mai token in un commento preseed o stale.
+          if ! round_state=$(node "${{ steps.trusted_marker.outputs.path }}" \
+            --current-round --repo "$REPO" --pr "$PR_NUMBER" --marker REDFLAG_FIX_ROUND); then
+            echo "::error::Round REDFLAG_FIX_ROUND non verificabile con il helper trusted: nessun Codex, stato retryable."
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+            echo "marker_verified=false" >> "$GITHUB_OUTPUT"
+            echo "retryable=true" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+          if ! ROUND=$(printf '%s' "$round_state" | jq -er \
+            --arg expected "${{ needs.preflight.outputs.head_sha }}" --argjson max "$MAX_ROUNDS" \
+            'if type == "object" and .headSha == $expected and (.round | type == "number" and floor == . and . >= 0 and . <= $max) then (.round | tostring) else error("round state stale or malformed") end'); then
+            echo "::error::Round REDFLAG_FIX_ROUND stale/malformato rispetto a HEAD o cap: nessun Codex, stato retryable."
             echo "proceed=false" >> "$GITHUB_OUTPUT"
             echo "marker_verified=false" >> "$GITHUB_OUTPUT"
             echo "retryable=true" >> "$GITHUB_OUTPUT"

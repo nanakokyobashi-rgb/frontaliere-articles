@@ -20,6 +20,10 @@ for (const [file, marker] of [
     assert.ok(source.indexOf('git show "$trusted_sha:scripts/ci/fixer-round-marker.mjs"', trustedAt) > trustedAt,
       `${file}: helper non pinned al main SHA`);
     assert.ok(helperAt > trustedAt && markerAt > helperAt, `${file}: helper marker trusted assente`);
+    assert.match(source, /--current-round[\s\S]{0,180}--marker/,
+      `${file}: cap non calcolato dal helper trusted`);
+    assert.doesNotMatch(source, /ROUND=\$\(printf '%s' "\$comments" \| grep -oE '[A-Z]+_FIX_ROUND:/,
+      `${file}: cap ancora basato su token body-only`);
     assert.ok(proceedAt > markerAt, `${file}: proceed=true deve seguire la verifica`);
     assert.match(source.slice(markerAt, proceedAt), /retryable=true/);
     assert.ok(source.indexOf('echo "marker_verified=true"', markerAt) > markerAt,
@@ -29,5 +33,7 @@ for (const [file, marker] of [
     assert.ok(finalVerifyAt > proceedAt, `${file}: verifica finale HEAD/body assente`);
     assert.ok(source.indexOf('if: steps.guard.outputs.proceed == \'true\'', finalVerifyAt) > finalVerifyAt,
       `${file}: finalizzazione Codex non vincolata al guard`);
+    assert.match(source, /jq -r ['"](?:\([^\n]*\.body|\.body)/,
+      `${file}: body revision non usa la fence jq contrattuale`);
   });
 }
