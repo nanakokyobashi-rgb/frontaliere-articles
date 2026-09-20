@@ -146,7 +146,7 @@ test('un body malformato non e\' un verdetto', () => {
   ].join('\n')), false);
 });
 
-test('il classificatore del corpus declassa e resta approvabile', () => {
+test('il classificatore del corpus traccia il declassamento, ma il gate resta fail-closed', () => {
   const review = ['## Findings (Important: 1)',
     '`scripts/ci/review-scope.mjs:999`: 🔴 Important: `resolveCitedPath()` non regge.'].join('\n');
   const changedFiles = ['scripts/ci/review-scope.mjs'];
@@ -162,7 +162,7 @@ test('il classificatore del corpus declassa e resta approvabile', () => {
   assert.equal(declassified.staleDeclassified.length, 1);
   assert.equal(declassified.blocking, false);
   assert.equal(declassified.outsideOnly, true,
-    'senza outsideOnly il gate non approverebbe e il declassamento non sbloccherebbe nulla');
+    'il classificatore deve esporre il ramo perche\' il gate possa applicare il guard fail-closed');
   assert.ok(declassified.staleDeclassified[0].stableId, 'il log deve poter citare l\'id stabile');
 });
 
