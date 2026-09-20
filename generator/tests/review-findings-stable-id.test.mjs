@@ -322,3 +322,40 @@ test('l\'ordine delle review si normalizza, non si eredita dall\'API', () => {
   assert.match(block, /Number\(left\?\.id\)/u,
     'a parita\' di timestamp manca il secondo criterio');
 });
+
+test('un anchor che non si sa verificare per intero non si declassa', () => {
+  // `unchangedLineImportants` guarda `citation.line`, che e' il solo estremo
+  // INIZIALE di un intervallo, e ignora le citazioni senza riga. Con
+  // `file.mjs:L10-20` si proverebbe solo L10; con una citazione al file nudo,
+  // niente. Se L15 o quel file fossero cambiati, il finding uscirebbe da
+  // `inScope` e il gate approverebbe codice non verificato. Finding della
+  // review su #1641.
+  const changed = new Map([['engine/render.mjs', new Set([15])]]);
+  const opts = { priorFindingIds: new Set(), changedLinesSince: changed };
+  const files = ['engine/render.mjs'];
+
+  const range = classifyImportantFindings(
+    ['## Findings (Important: 1)',
+     '`engine/render.mjs:10-20`: 🔴 Important: il blocco perde il locale.'].join('\n'),
+    files, files, opts,
+  );
+  assert.equal(range.staleDeclassified.length, 0, 'un intervallo non si declassa: L15 e\' cambiata');
+  assert.equal(range.blocking, true);
+
+  const bare = classifyImportantFindings(
+    ['## Findings (Important: 1)',
+     '`engine/render.mjs:42`: 🔴 Important: rotto, vedi anche `engine/render.mjs`.'].join('\n'),
+    files, files, opts,
+  );
+  assert.equal(bare.staleDeclassified.length, 0,
+    'una citazione senza riga non si puo\' dimostrare non cambiata');
+  assert.equal(bare.blocking, true);
+
+  // Controllo positivo: anchor singolo e riga intatta → si declassa.
+  const single = classifyImportantFindings(
+    ['## Findings (Important: 1)',
+     '`engine/render.mjs:42`: 🔴 Important: il locale sparisce.'].join('\n'),
+    files, files, opts,
+  );
+  assert.equal(single.staleDeclassified.length, 1);
+});

@@ -276,6 +276,22 @@ export function bodyContractIsGreen(prBody) {
   }
 }
 
+// Intervalli di riga in un anchor: `foo.mjs:L10-20`, `foo.mjs#L10–20`.
+const CITATION_RANGE_RE = /[:#]L?\d+[-–]\d+/u;
+
+/**
+ * Vero se OGNI citazione del finding porta una riga singola verificabile.
+ * Una citazione senza riga, o un intervallo, rende impossibile dimostrare
+ * «nessuna riga citata e' cambiata»: in quel caso non si declassa.
+ */
+function citationsFullyAnchored(finding) {
+  const citations = Array.isArray(finding?.citations) ? finding.citations : [];
+  if (citations.length === 0) return false;
+  if (CITATION_RANGE_RE.test(String(finding?.text || ''))) return false;
+  return citations.every((citation) => citation?.path
+    && Number.isInteger(Number(citation.line)) && Number(citation.line) > 0);
+}
+
 export function classifyImportantFindings(body, changedFiles, repositoryPaths = null, {
   // Il contratto deterministico del body (`scripts/ci/pr-body-contract.mjs`,
   // step `PR-body completeness` di tests.yml) e' passato su QUESTO body nella
@@ -387,6 +403,16 @@ export function classifyImportantFindings(body, changedFiles, repositoryPaths = 
     for (let index = inScope.length - 1; index >= 0; index -= 1) {
       const finding = inScope[index];
       if (finding.parserUncertain) continue;
+      // `unchangedLineImportants` guarda `citation.line`, che qui e' il SOLO
+      // estremo iniziale di un eventuale intervallo, e ignora le citazioni
+      // senza riga. Due buchi nello stesso posto: con `file.mjs:L10-20` si
+      // proverebbe solo L10, e una citazione al file nudo non conterebbe
+      // affatto — se L15, o quel file, fossero cambiati dall'ultima review, il
+      // finding uscirebbe da `inScope` e il gate approverebbe codice non
+      // verificato. Qui si pretende che OGNI citazione porti una riga
+      // verificabile e che nessuna sia un intervallo: un anchor che non si sa
+      // verificare per intero non si declassa.
+      if (!citationsFullyAnchored(finding)) continue;
       const stale = unchangedLineImportants({
         findings: [finding],
         priorFindingIds: known,
