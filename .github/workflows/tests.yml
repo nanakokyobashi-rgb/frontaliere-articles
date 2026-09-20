@@ -398,11 +398,19 @@ jobs:
           fi
           policy_ref=''
           for attempt in 1 2 3; do
-            # `|| true`: sotto `set -euo pipefail` una pipeline fallita dentro
-            # una sostituzione di comando ucciderebbe lo step QUI, prima del
-            # retry e prima del messaggio d'errore esplicito sotto — cioe' con
-            # un rosso muto, che e' il modo peggiore di fallire.
-            policy_ref=$(git ls-remote "https://github.com/${REPO}" refs/heads/main 2>/dev/null | awk 'NR==1{print $1}' || true)
+            # `if cmd=$(...)` invece di `... || true`: sotto `set -euo pipefail`
+            # una pipeline fallita in una sostituzione ucciderebbe lo step QUI,
+            # prima del retry e del messaggio d'errore — un rosso muto — ma
+            # `|| true` INGHIOTTIREBBE l'exit status, e una risposta parziale
+            # con una riga SHA valida passerebbe la regex come se fosse buona.
+            # Dentro la condizione di un `if` lo status resta leggibile e
+            # `set -e` non interviene. `timeout` chiude la connessione appesa:
+            # senza, il contatore dei retry non avanza e il job muore al cap.
+            if ls_remote_out=$(timeout 60 git ls-remote "https://github.com/${REPO}" refs/heads/main 2>/dev/null); then
+              policy_ref=$(printf '%s\n' "$ls_remote_out" | awk 'NR==1{print $1}')
+            else
+              policy_ref=''
+            fi
             if printf '%s' "$policy_ref" | grep -qE '^[0-9a-f]{40}$'; then break; fi
             echo "::warning::Risoluzione della punta di main fallita (tentativo ${attempt}/3); ritento."
             policy_ref=''
@@ -421,6 +429,18 @@ jobs:
 
           review_gate_root="${RUNNER_TEMP}/review-gate-main"
           raw_base_url="https://raw.githubusercontent.com/${REPO}/${policy_ref}"
+          # Il contenuto scaricato si valida per ESTENSIONE: `node --check`
+          # parsa JavaScript e su un `.json` fallisce sempre, quindi usarlo per
+          # tutto avrebbe reso il manifest impossibile da scaricare — e il
+          # messaggio avrebbe detto «download fallito (HTTP 200)», cioe' la
+          # cosa sbagliata.
+          validate_download() {
+            case "$1" in
+              *.json) node -e 'JSON.parse(require("node:fs").readFileSync(process.argv[1], "utf8"))' "$1" ;;
+              *) node --check "$1" ;;
+            esac
+          }
+
           download_main() {
             local path="$1"
             local destination="$2"
@@ -439,7 +459,7 @@ jobs:
                 "$raw_url" > "$status_file" 2> "$error_file" \
                 && [ -s "$destination" ] \
                 && grep -Eq '^2[0-9][0-9]$' "$status_file" \
-                && node --check "$destination"; then
+                && validate_download "$destination"; then
                 rm -f "$error_file" "$status_file"
                 return 0
               fi
@@ -469,30 +489,47 @@ jobs:
             return 1
           }
 
-          download_main scripts/ci/review-gate.mjs "$review_gate_root/scripts/ci/review-gate.mjs"
-          download_main scripts/ci/review-test-policy.mjs "$review_gate_root/scripts/ci/review-test-policy.mjs"
-          download_main scripts/ci/claude-codex-fallback.mjs "$review_gate_root/scripts/ci/claude-codex-fallback.mjs"
-          download_main scripts/ci/claude-rate-limit.mjs "$review_gate_root/scripts/ci/claude-rate-limit.mjs"
-          download_main scripts/ci/claude-rate-limit-contract.mjs "$review_gate_root/scripts/ci/claude-rate-limit-contract.mjs"
-          download_main scripts/ci/auto-merge-eval.mjs "$review_gate_root/scripts/ci/auto-merge-eval.mjs"
-          download_main scripts/ci/lib/constants.mjs "$review_gate_root/scripts/ci/lib/constants.mjs"
-          download_main scripts/ci/lib/fetchPrFiles.mjs "$review_gate_root/scripts/ci/lib/fetchPrFiles.mjs"
-          download_main scripts/ci/lib/vitestCheck.mjs "$review_gate_root/scripts/ci/lib/vitestCheck.mjs"
-          download_main scripts/ci/lib/mergePreviewCheck.mjs "$review_gate_root/scripts/ci/lib/mergePreviewCheck.mjs"
-          download_main scripts/ci/lib/duplicateDeclarations.mjs "$review_gate_root/scripts/ci/lib/duplicateDeclarations.mjs"
-          download_main scripts/ci/review-scope.mjs "$review_gate_root/scripts/ci/review-scope.mjs"
-          download_main scripts/lib/github-issue-creator.mjs "$review_gate_root/scripts/lib/github-issue-creator.mjs"
-          download_main scripts/lib/pr-body-closes-check.mjs "$review_gate_root/scripts/lib/pr-body-closes-check.mjs"
-          # Chiusura del contratto deterministico del body: `review-scope.mjs`
-          # lo ricalcola per declassare un 🔴 ancorato al solo body. Il gate
-          # gira da una directory ISOLATA, quindi un modulo del grafo che manca
-          # qui non e' un import lento, e' ERR_MODULE_NOT_FOUND su ogni PR.
-          # Il guard e' `generator/tests/review-gate-bootstrap-closure.test.mjs`.
-          download_main scripts/lib/pr-body-contract-eval.mjs "$review_gate_root/scripts/lib/pr-body-contract-eval.mjs"
-          download_main scripts/lib/pr-body-sections-check.mjs "$review_gate_root/scripts/lib/pr-body-sections-check.mjs"
-          download_main scripts/lib/pr-body-nextstep-check.mjs "$review_gate_root/scripts/lib/pr-body-nextstep-check.mjs"
-          download_main scripts/ci/lib/false-positive-declaration.mjs "$review_gate_root/scripts/ci/lib/false-positive-declaration.mjs"
-
+          # ── LA LISTA, NON SOLO IL REF ────────────────────────────────
+          #
+          # Pinnare il ref non basta: finche' la LISTA dei moduli vive nello
+          # YAML della PR, una PR aperta prima che un modulo entrasse nel grafo
+          # scarica l'entrypoint NUOVO dalla punta con la lista VECCHIA, e il
+          # gate muore con ERR_MODULE_NOT_FOUND — lo stesso rosso di prima, da
+          # un'altra porta. La lista si legge quindi dallo stesso `policy_ref`
+          # pinnato, insieme ai moduli che descrive.
+          #
+          # Il path del manifest resta l'unica cosa codificata qui, ed e' quello
+          # che deve restare stabile: se cambia, la si rinomina in due posti nello
+          # stesso giro.
+          bootstrap_manifest="$review_gate_root/scripts/ci/review-gate-bootstrap-manifest.json"
+          if ! download_main scripts/ci/review-gate-bootstrap-manifest.json "$bootstrap_manifest"; then
+            echo "::error::Manifest di bootstrap del review gate non leggibile da main @ ${policy_ref}: senza la lista trusted non si puo' comporre il gate."
+            exit 1
+          fi
+          # Ogni voce e' validata prima di diventare un path: il manifest arriva
+          # dalla rete, e un `..` o un path assoluto scriverebbe fuori dalla
+          # directory isolata. Fail-closed su qualunque voce non conforme.
+          if ! bootstrap_modules=$(node -e '
+            const fs = require("node:fs");
+            const manifest = JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
+            const modules = Array.isArray(manifest.modules) ? manifest.modules : null;
+            if (!modules || modules.length === 0) throw new Error("manifest senza lista modules");
+            const safe = /^scripts\/(?:ci|lib)\/(?:[A-Za-z0-9._-]+\/)*[A-Za-z0-9._-]+\.mjs$/;
+            for (const entry of modules) {
+              if (typeof entry !== "string" || !safe.test(entry) || entry.includes("..")) {
+                throw new Error("voce del manifest non ammessa: " + String(entry));
+              }
+            }
+            if (!modules.includes(manifest.entrypoint)) throw new Error("entrypoint fuori dalla lista");
+            process.stdout.write(modules.join("\n"));
+          ' "$bootstrap_manifest"); then
+            echo "::error::Manifest di bootstrap del review gate non valido (main @ ${policy_ref})."
+            exit 1
+          fi
+          while IFS= read -r module_path; do
+            [ -n "$module_path" ] || continue
+            download_main "$module_path" "$review_gate_root/$module_path"
+          done <<< "$bootstrap_modules"
           review_gate_module="$review_gate_root/scripts/ci/review-gate.mjs"
           node --check "$review_gate_module"
           echo "REVIEW_GATE_MAIN_MODULE=$review_gate_module" >> "$GITHUB_ENV"

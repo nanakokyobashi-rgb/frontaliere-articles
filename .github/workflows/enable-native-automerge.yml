@@ -62,7 +62,25 @@ jobs:
           set -euo pipefail
           helper_dir="${RUNNER_TEMP}/native-automerge-helpers"
           mkdir -p "$helper_dir/lib"
-          raw_base_url="https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/main"
+          # Pinna una SHA prima dei download: con `/main` ogni helper arriva
+          # da una lettura indipendente, e un avanzamento di `main` fra due
+          # download puo' comporre una combinazione di revisioni incompatibili
+          # che blocca l'arruolamento. `git ls-remote` non consuma quota REST.
+          #
+          # A differenza del bootstrap di `tests.yml`, qui il fallback su
+          # `main` e' ACCETTABILE e dichiarato: li' ricadere sulla base della
+          # PR reintrodurrebbe un file mancante, mentre qui il rischio e' solo
+          # la combinazione mista, e `main` non e' peggio di oggi. Far fallire
+          # l'arruolamento per un `ls-remote` lento sarebbe un danno nuovo.
+          policy_ref=''
+          if ls_remote_out=$(timeout 60 git ls-remote "https://github.com/${GITHUB_REPOSITORY}" refs/heads/main 2>/dev/null); then
+            policy_ref=$(printf '%s\n' "$ls_remote_out" | awk 'NR==1{print $1}')
+          fi
+          if ! printf '%s' "$policy_ref" | grep -qE '^[0-9a-f]{40}$'; then
+            echo "::warning::Punta di main non risolvibile: gli helper si leggono dal branch e potrebbero venire da commit diversi."
+            policy_ref='main'
+          fi
+          raw_base_url="https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${policy_ref}"
           # Keep the final extension while syntax-checking: Node otherwise
           # parses an `.tmp` file as CommonJS and rejects the helper exports.
           gate_tmp="$helper_dir/native-automerge-gate-check.mjs"

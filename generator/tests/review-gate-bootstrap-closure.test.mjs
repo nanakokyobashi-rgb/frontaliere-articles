@@ -25,11 +25,22 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const WORKFLOW = '.github/workflows/tests.yml';
 const ENTRY = 'scripts/ci/review-gate.mjs';
 
-/** I path che `download_main <path> <dest>` porta accanto al gate. */
-function downloadedPaths(workflowText) {
-  return new Set(
-    [...workflowText.matchAll(/^\s*download_main\s+(\S+)\s+\S+\s*$/gmu)].map((m) => m[1]),
-  );
+const MANIFEST = 'scripts/ci/review-gate-bootstrap-manifest.json';
+
+/**
+ * I moduli che il bootstrap porta accanto al gate.
+ *
+ * La lista NON vive piu' nello YAML: vive nel manifest, che viene letto dallo
+ * stesso `policy_ref` pinnato dei moduli. Era necessario perche' pinnare solo
+ * il ref lasciava aperta la stessa rottura da un'altra porta — una PR aperta
+ * prima che un modulo entrasse nel grafo scaricava l'entrypoint nuovo con la
+ * lista vecchia e il gate moriva con ERR_MODULE_NOT_FOUND.
+ */
+function downloadedPaths() {
+  const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, MANIFEST), 'utf8'));
+  assert.ok(Array.isArray(manifest.modules) && manifest.modules.length > 0,
+    `${MANIFEST}: lista modules mancante o vuota`);
+  return new Set(manifest.modules);
 }
 
 /**
@@ -82,9 +93,18 @@ function importClosure(entry) {
 }
 
 test('ogni modulo del grafo del review gate e\' scaricato dal bootstrap di tests.yml', () => {
+  const downloaded = downloadedPaths();
+  assert.ok(downloaded.has(ENTRY), `${MANIFEST}: il bootstrap non scarica nemmeno ${ENTRY}`);
+  // Lo YAML deve leggere il manifest dal ref pinnato, non tenere una copia
+  // della lista: una lista nello YAML e' la lista della PR, non quella di main.
   const workflow = fs.readFileSync(path.join(ROOT, WORKFLOW), 'utf8');
-  const downloaded = downloadedPaths(workflow);
-  assert.ok(downloaded.has(ENTRY), `${WORKFLOW}: il bootstrap non scarica nemmeno ${ENTRY}`);
+  assert.match(workflow, new RegExp(`download_main ${MANIFEST.replace(/[./]/gu, '\\$&')}`, 'u'),
+    `${WORKFLOW}: il bootstrap non scarica il manifest dal ref trusted`);
+  const hardcoded = [...workflow.matchAll(/^\s*download_main\s+(\S+)\s+\S+\s*$/gmu)]
+    .map((m) => m[1])
+    .filter((entry) => entry !== MANIFEST && !entry.startsWith('"'));
+  assert.deepEqual(hardcoded, [],
+    `${WORKFLOW}: moduli ancora elencati a mano nello YAML — tornerebbero dalla lista della PR: ${hardcoded.join(', ')}`);
 
   const closure = importClosure(ENTRY);
   const missing = [...closure].filter((file) => !downloaded.has(file)).sort();
@@ -95,8 +115,7 @@ test('ogni modulo del grafo del review gate e\' scaricato dal bootstrap di tests
 });
 
 test('il bootstrap non scarica moduli che nessuno del grafo importa', () => {
-  const workflow = fs.readFileSync(path.join(ROOT, WORKFLOW), 'utf8');
-  const downloaded = downloadedPaths(workflow);
+  const downloaded = downloadedPaths();
   const closure = importClosure(ENTRY);
   // `auto-merge-eval.mjs` non e' nel grafo del gate: lo scarica perche' altri
   // step della stessa famiglia lo eseguono dalla stessa directory isolata.

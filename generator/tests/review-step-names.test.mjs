@@ -162,11 +162,15 @@ test('il review gate e il suo grafo di import arrivano dalla main', () => {
     names.indexOf(bootstrapName) < names.indexOf('Require approving Codex review'),
     'il modulo scaricato deve essere pronto prima dell invocazione del gate',
   );
-  assert.match(bootstrap, /download_main\s+scripts\/ci\/review-gate\.mjs\s+"\$review_gate_root\/scripts\/ci\/review-gate\.mjs"/);
+  // La LISTA dei moduli non vive piu' qui: vive nel manifest, letto dallo
+  // stesso ref pinnato. Tenerla nello YAML significava tenerla nella copia
+  // della PR, e una PR aperta prima che un modulo entrasse nel grafo
+  // scaricava l'entrypoint nuovo con la lista vecchia (ERR_MODULE_NOT_FOUND).
+  assert.match(bootstrap, /download_main\s+scripts\/ci\/review-gate-bootstrap-manifest\.json/);
   assert.match(bootstrap, /set -euo pipefail/);
   assert.match(bootstrap, /raw_base_url="https:\/\/raw\.githubusercontent\.com\/\$\{REPO\}\/\$\{policy_ref\}"/);
   const downloaderStart = bootstrap.indexOf('download_main() {');
-  const downloaderEnd = bootstrap.indexOf('\n\n          download_main scripts/ci/review-gate.mjs', downloaderStart);
+  const downloaderEnd = bootstrap.indexOf('\n\n          # ── LA LISTA, NON SOLO IL REF', downloaderStart);
   assert.ok(downloaderStart >= 0 && downloaderEnd > downloaderStart, 'helper downloader block non trovato');
   const downloader = bootstrap.slice(downloaderStart, downloaderEnd);
   assert.doesNotMatch(downloader, /gh api/);
@@ -175,19 +179,20 @@ test('il review gate e il suo grafo di import arrivano dalla main', () => {
   assert.match(downloader, /--write-out '%\{http_code\}'/);
   assert.match(downloader, /&& \[ -s "\$destination" \]/);
   assert.match(downloader, /grep -Eq '\^2\[0-9\]\[0-9\]\$' "\$status_file"/);
-  assert.match(downloader, /node --check "\$destination"/);
+  assert.match(downloader, /validate_download "\$destination"/);
   assert.match(downloader, /retryable=false/);
   assert.match(downloader, /\[ "\$attempt" -eq 3 \] \|\| \[ "\$retryable" != true \]/);
   assert.match(downloader, /sleep "\$\(\(attempt \* 5\)\)"/);
   assert.match(downloader, /return 1/);
   assert.match(bootstrap, /REVIEW_GATE_MAIN_MODULE=/);
   assert.match(bootstrap, /Review gate bootstrap: main @/);
+  const bootstrapManifest = JSON.parse(
+    fs.readFileSync(path.join(ROOT, 'scripts/ci/review-gate-bootstrap-manifest.json'), 'utf8'),
+  );
   for (const relative of closure) {
-    const escaped = relative.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    assert.match(
-      bootstrap,
-      new RegExp(`download_main\\s+${escaped}\\s+"\\$review_gate_root/${escaped}"`),
-      `${relative} e' nel grafo del gate ma non viene scaricato dalla main`,
+    assert.ok(
+      bootstrapManifest.modules.includes(relative),
+      `${relative} e' nel grafo del gate ma non e' nel manifest di bootstrap`,
     );
   }
 
