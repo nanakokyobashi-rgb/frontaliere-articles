@@ -174,6 +174,8 @@ const TRAILING_FOOTNOTE_REF = /\s+\[?\^?\d{1,3}\]?$/;
 // that legitimately discusses "la terminologia" from tripping it.
 const SCAFFOLDING_MARKERS = [
   { re: /^\s*#{0,4}\s*TITOLO ARTICOLO\s*:?/m, what: 'marcatore di sezione del prompt di generazione' },
+  { re: /^\s*#{0,4}\s*RIFERIMENTO DEL TITOLO\s*\([^\n]{0,80}\)\s*:/m, what: 'etichetta di input del prompt di espansione' },
+  { re: /^\s*#{0,4}\s*TESTO ATTUALE\s*\(\d+\s+parole\)\s*:/m, what: 'etichetta del testo di input del prompt di espansione' },
   { re: /^\s*#{0,4}\s*(?:ESEMPIO|ESEMPI) CONCRET[OI]\s*:?\s*$/m, what: 'marcatore di sezione del prompt' },
   { re: /^\s*#{0,4}\s*(?:NOTE|NOTA) PER (?:IL|LA) (?:MODELLO|TRADUZIONE)\s*:?/mi, what: 'nota interna del prompt' },
   // Case-SENSITIVE and line-anchored on purpose. The prompt shouts its headings
