@@ -210,12 +210,22 @@ function runScan({
     const fixReviewsMalformed = path.join(dir, 'reviews-malformed');
     const fixCommentsMalformed = path.join(dir, 'comments-malformed');
     const fixPushedAt = path.join(dir, 'pushed-at');
+    const normalizedComments = posted.map((comment, index) => ({
+      id: Number.isSafeInteger(Number(comment?.id)) && Number(comment.id) > 0 ? Number(comment.id) : index + 1,
+      body: typeof comment?.body === 'string' ? comment.body : '',
+      user: comment?.user && typeof comment.user.login === 'string' && comment.user.login
+        ? comment.user
+        : { login: 'github-actions[bot]' },
+    }));
     writeFileSync(fixPushedAt, String(pushedAt));
     writeFileSync(calls, '');
     writeFileSync(fixPrs, JSON.stringify(prs));
     writeFileSync(fixChecks, JSON.stringify(checks));
     writeFileSync(fixReviews, JSON.stringify(revs));
-    writeFileSync(fixComments, JSON.stringify(posted));
+    // GitHub issue-comment responses always carry id/body/user.login. Keep
+    // fixtures honest so the trusted helper can fail closed on malformed API
+    // shapes instead of silently treating synthetic omissions as real data.
+    writeFileSync(fixComments, JSON.stringify(normalizedComments));
     writeFileSync(fixFixerRuns, JSON.stringify(fixerRuns));
     writeFileSync(fixFixerRunsError, fixerRunsError ? 'true' : 'false');
     writeFileSync(fixChecksError, checksError ? 'true' : 'false');

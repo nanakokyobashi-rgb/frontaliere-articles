@@ -425,7 +425,7 @@ test('un push esterno supersede il round e rilascia il claim prima del ramo di e
     actionOutcome: 'failure',
     fixRound: '1',
     markerCommentId: '42',
-    commentsJson: JSON.stringify([roundComment, activeClaimComment({ state: 'released' })]),
+    commentsJson: JSON.stringify([roundComment, activeClaimComment(), activeClaimComment({ state: 'released' })]),
     claimToken: 'tok-1',
   });
   assert.equal(
@@ -464,7 +464,7 @@ test('un branch solo indietro rispetto a main non è SUPERSEDED', () => {
 });
 
 test('il finalize ereditato dal classify lascia il claim released anche se Codex è failure', () => {
-  const commentsJson = JSON.stringify([activeClaimComment({ state: 'released' })]);
+  const commentsJson = JSON.stringify([activeClaimComment(), activeClaimComment({ state: 'released' })]);
   const result = runFinalize({
     claimStatus: 'released',
     codexOutcome: 'failure',
