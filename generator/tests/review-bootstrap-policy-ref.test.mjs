@@ -141,8 +141,12 @@ test('i moduli si scaricano dalla PUNTA di main, non da base.sha', () => {
   const { status, output, urls } = runBootstrap();
   assert.equal(status, 0, `il bootstrap doveva riuscire:\n${output}`);
   const requested = urls.split('\n').filter((line) => line.startsWith('URL '));
-  assert.ok(requested.length >= 15,
-    `troppe poche richieste registrate (${requested.length}): il grafo del gate ne ha di piu'`);
+  // Il manifest PRIMA, poi esattamente i moduli che elenca: la lista non la
+  // dice piu' lo YAML della PR.
+  assert.equal(requested.length, FAKE_MANIFEST.modules.length + 1,
+    `richieste attese: il manifest piu' i suoi moduli (${requested.length})`);
+  assert.ok(requested[0].endsWith('scripts/ci/review-gate-bootstrap-manifest.json'),
+    'il manifest deve essere la PRIMA cosa letta dal ref trusted');
   for (const line of requested) {
     assert.ok(line.includes(TIP_SHA),
       `un modulo e' stato chiesto a un ref diverso dalla punta di main: ${line}`);
@@ -171,6 +175,26 @@ test('un modulo elencato ma assente nomina il file e il ref, non solo `curl: (22
     'il messaggio non nomina il ref');
   assert.match(notFound.output, /scripts\/lib\/pr-body-contract-eval\.mjs/u,
     'il messaggio non nomina il file mancante');
+});
+
+test('un manifest assente o malformato ferma il gate dicendo che e\' il manifest', () => {
+  const absent = runBootstrap({ servedSha: 'deadbeef' });
+  assert.notEqual(absent.status, 0);
+  assert.match(absent.output, /Manifest di bootstrap del review gate non leggibile/u);
+
+  // Il manifest arriva dalla rete: una voce che esce dalla directory isolata
+  // non deve mai diventare un path.
+  const traversal = runBootstrap({
+    manifest: { entrypoint: 'scripts/ci/review-gate.mjs', modules: ['scripts/ci/review-gate.mjs', '../../etc/passwd'] },
+  });
+  assert.notEqual(traversal.status, 0, 'una voce con `..` deve essere rifiutata');
+  assert.match(traversal.output, /Manifest di bootstrap del review gate non valido/u);
+  assert.ok(!traversal.urls.includes('etc/passwd'), 'la voce non conforme non deve essere scaricata');
+
+  const noEntry = runBootstrap({
+    manifest: { entrypoint: 'scripts/ci/review-gate.mjs', modules: ['scripts/ci/lib/constants.mjs'] },
+  });
+  assert.notEqual(noEntry.status, 0, 'un manifest senza il suo entrypoint e\' incoerente');
 });
 
 test('il contenuto scaricato si valida per estensione, non sempre con node --check', () => {
