@@ -220,3 +220,24 @@ test('la cronologia riconosce il reviewer PRIMARIO di questo repo', () => {
     'la cronologia scarta le review Codex, cioe\' quasi tutte');
   assert.match(block, /github-actions\\\[bot\\\]/u);
 });
+
+test('la storia e\' tutto tranne la review in corso, e la finestra e\' quella precedente', () => {
+  // Escludere ogni review sulla HEAD corrente lasciava fuori il finding
+  // IMMEDIATAMENTE precedente: un 🔴 ripetuto sulla stessa HEAD risultava
+  // «nuovo» e diventava declassabile, cioe' esattamente il caso che la regola
+  // deve lasciar passare intatto. E la finestra deve essere quella della
+  // review precedente, non della piu' recente su un commit diverso: con la
+  // seconda il compare include anche cambiamenti anteriori a quella review.
+  // Finding della review su #1641.
+  const source = read('scripts/ci/review-scope.mjs');
+  const start = source.indexOf('function reviewHistoryContext(');
+  const block = source.slice(start, source.indexOf('\nfunction ', start + 10));
+  assert.match(block, /const history = managed\.slice\(0, -1\);/u,
+    'la storia non e\' «tutto tranne la review in corso»');
+  assert.ok(!/commit_id \|\| ''\) === String\(headSha\)\) continue;/u.test(block),
+    'la raccolta degli id salta ancora le review sulla HEAD corrente');
+  assert.match(block, /const prior = history\[history\.length - 1\];/u,
+    'la finestra non e\' quella della review immediatamente precedente');
+  assert.match(block, /changedLinesSince: new Map\(\)/u,
+    'una review precedente sulla STESSA HEAD deve dare delta VUOTO, non «non calcolabile»');
+});

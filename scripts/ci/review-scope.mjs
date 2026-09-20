@@ -459,18 +459,35 @@ function reviewHistoryContext(repo, pr, headSha) {
             && String(review?.body || '').includes('<!-- CODEX_FALLBACK_REVIEW -->')))
         && String(review?.state || '') !== 'PENDING'
         && String(review?.state || '') !== 'DISMISSED');
-    if (managed.length === 0) return empty;
+    if (managed.length <= 1) return empty;
+    // La storia e' TUTTO tranne la review che stiamo classificando, cioe'
+    // l'ultima. Escludere invece ogni review sulla HEAD corrente era il buco:
+    // dopo una prima review sulla stessa HEAD il finding immediatamente
+    // precedente non entrava in `priorFindingIds`, quindi un 🔴 RIPETUTO
+    // risultava «nuovo» ed era declassabile — esattamente il caso che la
+    // regola deve lasciar passare intatto.
+    const history = managed.slice(0, -1);
     const priorFindingIds = new Set();
-    for (const review of managed) {
-      if (String(review?.commit_id || '') === String(headSha)) continue;
+    for (const review of history) {
       for (const finding of importantFindings(review?.body || '')) {
         priorFindingIds.add(stableFindingId(finding));
       }
     }
-    const prior = [...managed].reverse()
-      .find((review) => /^[0-9a-f]{40}$/iu.test(String(review?.commit_id || ''))
-        && String(review.commit_id) !== String(headSha));
+    // La finestra e' quella della review IMMEDIATAMENTE precedente, non della
+    // piu' recente su un commit diverso: con la seconda, il compare
+    // includerebbe anche cambiamenti anteriori alla review precedente e un
+    // rilievo su codice mosso DOPO di essa sembrerebbe su codice fermo.
+    const prior = history[history.length - 1];
     if (!prior || !/^[0-9a-f]{40}$/iu.test(String(headSha || ''))) {
+      return { priorFindingIds, changedLinesSince: null };
+    }
+    // Review precedente sulla STESSA HEAD: il delta e' vuoto per costruzione,
+    // e una Map vuota e' il dato giusto — `null` direbbe «non calcolabile» e
+    // spegnerebbe la regola proprio nel caso in cui serve.
+    if (String(prior.commit_id || '') === String(headSha)) {
+      return { priorFindingIds, changedLinesSince: new Map() };
+    }
+    if (!/^[0-9a-f]{40}$/iu.test(String(prior.commit_id || ''))) {
       return { priorFindingIds, changedLinesSince: null };
     }
     const compare = gh(['api', `repos/${repo}/compare/${prior.commit_id}...${headSha}`]);
