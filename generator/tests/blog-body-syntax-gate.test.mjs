@@ -428,12 +428,32 @@ test('i workflow passano al preflight la base dell\'evento', () => {
   assert.match(contentGates, /PREFLIGHT_EVENT_NAME:\s*\$\{\{\s*github\.event_name\s*\}\}/);
   assert.match(contentGates, /PREFLIGHT_PUSH_BASE_REVISION:\s*\$\{\{\s*github\.event\.before\s*\}\}/);
 
-  for (const workflow of [GENERATOR_WORKFLOW, TESTS_WORKFLOW]) {
-    const src = fs.readFileSync(workflow, 'utf8');
-    assert.match(src, /PREFLIGHT_EVENT_NAME:\s*\$\{\{\s*github\.event_name\s*\}\}/);
-    assert.match(src, /PREFLIGHT_PUSH_BASE_REVISION:\s*\$\{\{\s*github\.event\.before\s*\}\}/);
-    assert.match(src, /PREFLIGHT_PR_BASE_REVISION:\s*\$\{\{\s*github\.event\.pull_request\.base\.sha\s*\}\}/);
-  }
+  const generator = fs.readFileSync(GENERATOR_WORKFLOW, 'utf8');
+  assert.match(generator, /PREFLIGHT_EVENT_NAME:\s*\$\{\{\s*github\.event_name\s*\}\}/);
+  assert.match(
+    generator,
+    /PREFLIGHT_PUSH_BASE_REVISION:\s*\$\{\{\s*github\.ref_name\s*==\s*'engine-lockstep-auto'\s*&&\s*github\.sha\s*\|\|\s*github\.event\.before\s*\}\}/,
+    'il mirror force-pushato deve usare la propria HEAD verificabile; gli altri push ricadono su github.event.before',
+  );
+  assert.match(generator, /PREFLIGHT_PR_BASE_REVISION:\s*\$\{\{\s*github\.event\.pull_request\.base\.sha\s*\}\}/);
+
+  const tests = fs.readFileSync(TESTS_WORKFLOW, 'utf8');
+  assert.match(tests, /PREFLIGHT_EVENT_NAME:\s*\$\{\{\s*github\.event_name\s*\}\}/);
+  assert.match(tests, /PREFLIGHT_PUSH_BASE_REVISION:\s*\$\{\{\s*github\.event\.before\s*\}\}/);
+  assert.match(tests, /PREFLIGHT_PR_BASE_REVISION:\s*\$\{\{\s*github\.event\.pull_request\.base\.sha\s*\}\}/);
+});
+
+test('solo il mirror può usare la propria HEAD: un push contenuto senza base fallisce chiuso', () => {
+  const current = execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
+  assert.doesNotThrow(
+    () => deriveFloorModel(ROOT, { previousRevision: current }),
+    'la HEAD corrente del branch derivato è una revisione verificabile per il mirror',
+  );
+  assert.throws(
+    () => deriveFloorModel(ROOT, { previousRevision: null }),
+    (error) => error.code === 'MISSING_CORPUS_HISTORY',
+    'un push contenuto senza github.event.before non deve ricadere su HEAD^ né passare',
+  );
 });
 
 test('una meta con cardinalità plausibile ma ID sostituito viene rifiutata', () => {
