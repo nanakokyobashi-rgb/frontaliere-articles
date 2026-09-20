@@ -821,6 +821,12 @@ describe('LOCK — se il template acquisisce un segnaposto, questo test diventa 
       legacy,
       'il matcher storico deve restare ancorato al literal ritirato, non al template corrente',
     );
+    const previous = HISTORICAL_SCHEMA_PLACEHOLDER_LITERALS.find((literal) => literal.includes('(3-8 coppie termine→valore'));
+    assert.ok(previous, 'il contratto 3-8 ritirato deve restare riconoscibile');
+    assert.ok(
+      findPromptPlaceholders(previous).some((hit) => hit.rule === 'legacy-schema-body1-optional-key-facts'),
+      'il matcher storico del contratto 3-8 non viene piu\' riconosciuto',
+    );
   });
 });
 

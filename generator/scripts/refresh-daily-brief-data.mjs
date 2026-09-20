@@ -27,8 +27,8 @@
  *   TODAY_ISO=2026-08-08 …   # pin "today" (tests/CI)
  */
 import path from 'node:path';
-import { readFileSync, appendFileSync } from 'node:fs';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { readFileSync, appendFileSync, realpathSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { getServiceAccountAccessToken } from './lib/google-service-account-token.mjs';
 import { writeJsonAtomic } from './lib/atomic-write-json.mjs';
 import { decodeFields, buildDailyBrief, degradationAlarms, degradationState, isDegradationCarrier, MAX_CONSECUTIVE_DEGRADED_EDITIONS } from './lib/daily-brief-data.mjs';
@@ -412,7 +412,7 @@ async function main() {
 
 const invokedDirectly = (() => {
   try {
-    return import.meta.url === pathToFileURL(process.argv[1] || '').href;
+    return realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1] || '');
   } catch {
     return false;
   }

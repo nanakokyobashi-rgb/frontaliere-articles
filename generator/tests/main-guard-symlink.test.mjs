@@ -16,15 +16,23 @@ const ENTRYPOINTS = [
   'generator/scripts/publish-journalist-article.mjs',
   'generator/scripts/generate-events-digest-article.mjs',
   'generator/scripts/batch-add-faq-to-articles.mjs',
+  'generator/scripts/create-article.mjs',
+  'generator/scripts/generate-daily-brief-article.mjs',
+  'generator/scripts/generate-border-wait-ranking-article.mjs',
+  'generator/scripts/refresh-daily-brief-data.mjs',
+  'generator/scripts/generate-pharmacy-evergreen-guides.mjs',
+  'generator/scripts/fix-faq-locales.mjs',
+  'generator/scripts/repair-source-echo.mjs',
+  'generator/scripts/generate-journalist-image-catalog.mjs',
 ];
 
 test('gli entrypoint generator canonicalizzano entrambi i lati del main-guard', () => {
   for (const relativePath of ENTRYPOINTS) {
     const source = readFileSync(path.join(ROOT, relativePath), 'utf8');
-    const guard = source.slice(source.lastIndexOf('const invokedDirectly'));
-    assert.match(guard, /realpathSync\(fileURLToPath\(import\.meta\.url\)\)/, relativePath);
-    assert.match(guard, /realpathSync\(process\.argv\[1\]\s*\|\|\s*['"]['"]\)/, relativePath);
-    assert.doesNotMatch(guard, /pathToFileURL\(process\.argv\[1\]/, relativePath);
+    assert.match(source, /realpathSync\(fileURLToPath\(import\.meta\.url\)\)/, relativePath);
+    assert.match(source, /realpathSync\(process\.argv\[1\](?:\s*\|\|\s*['"]['"])?\)/, relativePath);
+    assert.doesNotMatch(source, /pathToFileURL\(process\.argv\[1\]/, relativePath);
+    assert.doesNotMatch(source, /import\.meta\.url\s*===\s*`file:\/\/\$\{process\.argv\[1\]\}`/, relativePath);
   }
 });
 
