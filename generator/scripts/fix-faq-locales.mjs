@@ -875,7 +875,14 @@ async function main() {
 // testarne le funzioni pure lo ESEGUE: leggerebbe `content/` e scriverebbe.
 // E' la guardia a rendere testabili `serializeFaqLiteral`/`parseFaqLiteral`,
 // cioe' le due meta' del difetto che questa PR chiude.
-if (process.argv[1] && realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1])) {
+const invokedDirectly = (() => {
+  try {
+    return realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1] || '');
+  } catch {
+    return false;
+  }
+})();
+if (invokedDirectly) {
   main().catch(async err => {
     console.error('Fatal error:', err);
     await exitAfterDrain(1);
