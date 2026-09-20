@@ -95,16 +95,6 @@ function importClosure(entry) {
 test('ogni modulo del grafo del review gate e\' scaricato dal bootstrap di tests.yml', () => {
   const downloaded = downloadedPaths();
   assert.ok(downloaded.has(ENTRY), `${MANIFEST}: il bootstrap non scarica nemmeno ${ENTRY}`);
-  // Lo YAML deve leggere il manifest dal ref pinnato, non tenere una copia
-  // della lista: una lista nello YAML e' la lista della PR, non quella di main.
-  const workflow = fs.readFileSync(path.join(ROOT, WORKFLOW), 'utf8');
-  assert.match(workflow, new RegExp(`download_main ${MANIFEST.replace(/[./]/gu, '\\$&')}`, 'u'),
-    `${WORKFLOW}: il bootstrap non scarica il manifest dal ref trusted`);
-  const hardcoded = [...workflow.matchAll(/^\s*download_main\s+(\S+)\s+\S+\s*$/gmu)]
-    .map((m) => m[1])
-    .filter((entry) => entry !== MANIFEST && !entry.startsWith('"'));
-  assert.deepEqual(hardcoded, [],
-    `${WORKFLOW}: moduli ancora elencati a mano nello YAML — tornerebbero dalla lista della PR: ${hardcoded.join(', ')}`);
 
   const closure = importClosure(ENTRY);
   const missing = [...closure].filter((file) => !downloaded.has(file)).sort();
@@ -128,4 +118,20 @@ test('il bootstrap non scarica moduli che nessuno del grafo importa', () => {
     .sort();
   assert.deepEqual(extras, [],
     `Moduli scaricati dal bootstrap che nessuno importa:\n    ${extras.join('\n    ')}`);
+});
+
+test('la lista nello YAML e il manifest non possono divergere', () => {
+  // Atterraggio in due tempi: il manifest e' il dato trusted, ma il bootstrap
+  // non puo' ancora leggerlo dalla punta di main (il file lo introduce questa
+  // PR, e dalla punta non esiste). Finche' la lista resta scritta nello YAML,
+  // questo test e' cio' che impedisce ai due elenchi di separarsi — cioe'
+  // impedisce che il passaggio al manifest, nella PR concatenata, cambi in
+  // silenzio quali moduli il gate riceve.
+  const workflow = fs.readFileSync(path.join(ROOT, WORKFLOW), 'utf8');
+  const inYaml = [...workflow.matchAll(/^\s*download_main\s+(\S+)\s+\S+\s*$/gmu)]
+    .map((match) => match[1])
+    .filter((entry) => !entry.startsWith('"'));
+  assert.ok(inYaml.length > 0, `${WORKFLOW}: nessun download_main trovato`);
+  assert.deepEqual([...inYaml].sort(), [...downloadedPaths()].sort(),
+    'lo YAML e il manifest elencano moduli diversi: al passaggio al manifest il gate riceverebbe un insieme diverso da quello collaudato');
 });

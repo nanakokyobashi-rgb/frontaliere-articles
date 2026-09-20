@@ -102,7 +102,7 @@ const present = url.includes(served) && !(missing && url.endsWith('/' + missing)
 if (present) {
   // Il manifest e' cio' che il bootstrap legge PRIMA dei moduli: e' lui a
   // dire quali scaricare, e viene dallo stesso ref pinnato.
-  const body = url.endsWith('review-gate-bootstrap-manifest.json')
+  const body = url.endsWith('.json')
     ? ${JSON.stringify(JSON.stringify(manifest))}
     : 'export const ok = 1;\\n';
   fs.writeFileSync(out, body);
@@ -141,10 +141,8 @@ test('i moduli si scaricano dalla PUNTA di main, non da base.sha', () => {
   const { status, output, urls } = runBootstrap();
   assert.equal(status, 0, `il bootstrap doveva riuscire:\n${output}`);
   const requested = urls.split('\n').filter((line) => line.startsWith('URL '));
-  assert.equal(requested.length, FAKE_MANIFEST.modules.length + 1,
-    `richieste attese: il manifest piu' i suoi moduli, non una lista dello YAML (${requested.length})`);
-  assert.ok(requested[0].endsWith('scripts/ci/review-gate-bootstrap-manifest.json'),
-    'il manifest deve essere la PRIMA cosa letta dal ref trusted');
+  assert.ok(requested.length >= 15,
+    `troppe poche richieste registrate (${requested.length}): il grafo del gate ne ha di piu'`);
   for (const line of requested) {
     assert.ok(line.includes(TIP_SHA),
       `un modulo e' stato chiesto a un ref diverso dalla punta di main: ${line}`);
@@ -165,9 +163,8 @@ test('il caso della #1599: base.sha vecchio, modulo aggiunto a main dopo', () =>
 });
 
 test('un modulo elencato ma assente nomina il file e il ref, non solo `curl: (22)`', () => {
-  // Il manifest c'e' e nomina un modulo che non esiste: e' il caso «rinominato
-  // senza aggiornare la lista». Il messaggio deve far partire la diagnosi dal
-  // modulo, non dal job.
+  // E' il caso «modulo rinominato senza aggiornare la lista di bootstrap».
+  // Il messaggio deve far partire la diagnosi dal modulo, non dal job.
   const notFound = runBootstrap({ missingModule: 'scripts/lib/pr-body-contract-eval.mjs' });
   assert.notEqual(notFound.status, 0, 'un 404 su un modulo deve fermare lo step');
   assert.match(notFound.output, new RegExp(`Modulo del review gate assente su main @ ${TIP_SHA}`, 'u'),
@@ -176,24 +173,17 @@ test('un modulo elencato ma assente nomina il file e il ref, non solo `curl: (22
     'il messaggio non nomina il file mancante');
 });
 
-test('un manifest assente o malformato ferma il gate dicendo che e\' il manifest', () => {
-  const absent = runBootstrap({ servedSha: 'deadbeef' });
-  assert.notEqual(absent.status, 0);
-  assert.match(absent.output, /Manifest di bootstrap del review gate non leggibile/u);
-
-  // Voce che esce dalla directory isolata: il manifest arriva dalla rete, e
-  // una voce non conforme non deve mai diventare un path.
-  const traversal = runBootstrap({
-    manifest: { entrypoint: 'scripts/ci/review-gate.mjs', modules: ['scripts/ci/review-gate.mjs', '../../etc/passwd'] },
-  });
-  assert.notEqual(traversal.status, 0, 'una voce con `..` deve essere rifiutata');
-  assert.match(traversal.output, /Manifest di bootstrap del review gate non valido/u);
-  assert.ok(!traversal.urls.includes('etc/passwd'), 'la voce non conforme non deve essere scaricata');
-
-  const noEntry = runBootstrap({
-    manifest: { entrypoint: 'scripts/ci/review-gate.mjs', modules: ['scripts/ci/lib/constants.mjs'] },
-  });
-  assert.notEqual(noEntry.status, 0, 'un manifest senza il suo entrypoint e\' incoerente');
+test('il contenuto scaricato si valida per estensione, non sempre con node --check', () => {
+  // Preparazione della PR concatenata: quando il bootstrap leggera' il
+  // manifest dal ref pinnato, `node --check` su un `.json` fallirebbe SEMPRE
+  // e il messaggio direbbe «download fallito (HTTP 200)», cioe' la cosa
+  // sbagliata. Il guard sta qui perche' il difetto e' dello scaricatore, non
+  // del manifest.
+  const workflow = fs.readFileSync(path.join(ROOT, WORKFLOW), 'utf8');
+  assert.match(workflow, /validate_download\(\) \{[\s\S]{0,300}\*\.json\)/u,
+    'lo scaricatore non distingue un JSON da un modulo');
+  assert.match(workflow, /validate_download "\$destination"/u,
+    'lo scaricatore non usa la validazione per estensione');
 });
 
 test('senza una punta di main verificabile si fallisce, non si ricade su base.sha', () => {

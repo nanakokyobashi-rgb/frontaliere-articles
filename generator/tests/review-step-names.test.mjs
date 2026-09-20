@@ -166,11 +166,11 @@ test('il review gate e il suo grafo di import arrivano dalla main', () => {
   // stesso ref pinnato. Tenerla nello YAML significava tenerla nella copia
   // della PR, e una PR aperta prima che un modulo entrasse nel grafo
   // scaricava l'entrypoint nuovo con la lista vecchia (ERR_MODULE_NOT_FOUND).
-  assert.match(bootstrap, /download_main\s+scripts\/ci\/review-gate-bootstrap-manifest\.json/);
+  assert.match(bootstrap, /download_main\s+scripts\/ci\/review-gate\.mjs\s+"\$review_gate_root\/scripts\/ci\/review-gate\.mjs"/);
   assert.match(bootstrap, /set -euo pipefail/);
   assert.match(bootstrap, /raw_base_url="https:\/\/raw\.githubusercontent\.com\/\$\{REPO\}\/\$\{policy_ref\}"/);
   const downloaderStart = bootstrap.indexOf('download_main() {');
-  const downloaderEnd = bootstrap.indexOf('\n\n          # ── LA LISTA, NON SOLO IL REF', downloaderStart);
+  const downloaderEnd = bootstrap.indexOf('\n\n          # ── LA LISTA, E PERCHE\' E\' ANCORA QUI', downloaderStart);
   assert.ok(downloaderStart >= 0 && downloaderEnd > downloaderStart, 'helper downloader block non trovato');
   const downloader = bootstrap.slice(downloaderStart, downloaderEnd);
   assert.doesNotMatch(downloader, /gh api/);
@@ -190,6 +190,12 @@ test('il review gate e il suo grafo di import arrivano dalla main', () => {
     fs.readFileSync(path.join(ROOT, 'scripts/ci/review-gate-bootstrap-manifest.json'), 'utf8'),
   );
   for (const relative of closure) {
+    const escaped = relative.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    assert.match(
+      bootstrap,
+      new RegExp(`download_main\\s+${escaped}\\s+"\\$review_gate_root/${escaped}"`),
+      `${relative} e' nel grafo del gate ma non viene scaricato dalla main`,
+    );
     assert.ok(
       bootstrapManifest.modules.includes(relative),
       `${relative} e' nel grafo del gate ma non e' nel manifest di bootstrap`,
