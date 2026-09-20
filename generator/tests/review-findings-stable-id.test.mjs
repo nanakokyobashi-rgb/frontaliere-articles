@@ -304,3 +304,21 @@ test('un compare al limite API non e\' una prova: delta non calcolabile', () => 
   assert.match(block, /changedLinesSince: null/u,
     'al limite dell\'API il delta deve diventare non calcolabile, non vuoto');
 });
+
+test('l\'ordine delle review si normalizza, non si eredita dall\'API', () => {
+  // L'ordine dell'array REST non e' un contratto. Senza normalizzazione
+  // «l'ultima» e «la precedente» sono quelle che l'API capita a mettere in
+  // fondo: il compare parte dal commit sbagliato e un finding nuovo puo'
+  // uscire come gia' visto o su righe non cambiate, cioe' il blocco del gate
+  // sparisce per un dettaglio di serializzazione. Finding della review
+  // su #1641.
+  const source = read('scripts/ci/review-scope.mjs');
+  const start = source.indexOf('function reviewHistoryContext(');
+  const block = source.slice(start, source.indexOf('\nfunction ', start + 10));
+  assert.match(block, /\.sort\(\(left, right\) => \{/u,
+    'la cronologia non ordina le review prima di sceglierne l\'ultima');
+  assert.match(block, /submitted_at \|\| review\?\.created_at/u,
+    'l\'ordinamento non usa il timestamp');
+  assert.match(block, /Number\(left\?\.id\)/u,
+    'a parita\' di timestamp manca il secondo criterio');
+});

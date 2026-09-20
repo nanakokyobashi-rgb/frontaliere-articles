@@ -482,7 +482,19 @@ function reviewHistoryContext(repo, pr, headSha) {
           || (/^github-actions\[bot\]$/iu.test(String(review?.user?.login || ''))
             && String(review?.body || '').includes('<!-- CODEX_FALLBACK_REVIEW -->')))
         && String(review?.state || '') !== 'PENDING'
-        && String(review?.state || '') !== 'DISMISSED');
+        && String(review?.state || '') !== 'DISMISSED')
+      // L'ordine dell'array REST non e' un contratto: si normalizza per
+      // timestamp e, a parita', per id. Senza, «l'ultima» e «la precedente»
+      // sono quelle che l'API capita a mettere in fondo, il compare parte dal
+      // commit sbagliato e un finding nuovo puo' uscire come gia' visto o su
+      // righe non cambiate — cioe' il blocco del gate sparisce per un
+      // dettaglio di serializzazione.
+      .sort((left, right) => {
+        const at = (review) => Date.parse(
+          String(review?.submitted_at || review?.created_at || ''),
+        ) || 0;
+        return (at(left) - at(right)) || ((Number(left?.id) || 0) - (Number(right?.id) || 0));
+      });
     if (managed.length <= 1) return empty;
     // La storia e' TUTTO tranne la review che stiamo classificando, cioe'
     // l'ultima. Escludere invece ogni review sulla HEAD corrente era il buco:
