@@ -370,16 +370,53 @@ jobs:
           PR_BASE_REF: ${{ github.event.pull_request.base.ref }}
         run: |
           set -euo pipefail
-          policy_ref="${PR_BASE_SHA:-}"
+          # ── QUALE `main`, e perche' non quella della PR ──────────────────
+          #
+          # Il ref della policy deve essere la PUNTA di `main`, non
+          # `pull_request.base.sha`. `base.sha` e' la fotografia di `main` al
+          # momento in cui la PR e' stata aperta: un modulo che il gate importa
+          # e che `main` ha aggiunto DOPO quella fotografia li' non esiste, e
+          # ogni PR aperta prima va rossa indipendentemente dal suo diff.
+          # Misurato sulla #1599: mancava `scripts/lib/pr-body-contract-eval.mjs`,
+          # aggiunto da #1613, e il job moriva con `curl: (22) 404`; il rosso
+          # si leggeva poi come «gate saltato», che e' la diagnosi sbagliata.
+          # Il grafo del gate cresce (la #1629 gli ha aggiunto quattro moduli),
+          # quindi il difetto si allarga da solo a ogni PR in volo.
+          #
+          # La punta di `main` e' trusted esattamente quanto `base.sha`:
+          # l'autore della PR non puo' scriverci. Si risolve con `git
+          # ls-remote`, che NON consuma quota REST (la ragione della #1635), e
+          # si PINNA a quella SHA: tutti i moduli vengono cosi' dallo stesso
+          # commit anche se `main` si muove durante il download.
           policy_ref_name="${PR_BASE_REF:-}"
-          if [ -z "$policy_ref" ]; then
-            base_ref=$(gh pr view "$PR_NUMBER" --repo "$REPO" --json baseRefName,baseRefOid)
-            policy_ref_name=$(printf '%s' "$base_ref" | jq -r '.baseRefName // empty')
-            policy_ref=$(printf '%s' "$base_ref" | jq -r '.baseRefOid // empty')
+          if [ -z "$policy_ref_name" ]; then
+            policy_ref_name=$(gh pr view "$PR_NUMBER" --repo "$REPO" --json baseRefName --jq '.baseRefName // empty')
           fi
-          if [ "$policy_ref_name" != 'main' ] || ! printf '%s' "$policy_ref" | grep -qE '^[0-9a-f]{40}$'; then
-            echo "::error::Il review gate richiede la SHA della main come POLICY_REF (ref=${policy_ref_name:-empty}, sha=${policy_ref:-empty})."
+          if [ "$policy_ref_name" != 'main' ]; then
+            echo "::error::Il review gate gira solo per le PR che puntano a main (base ref=${policy_ref_name:-empty})."
             exit 1
+          fi
+          policy_ref=''
+          for attempt in 1 2 3; do
+            # `|| true`: sotto `set -euo pipefail` una pipeline fallita dentro
+            # una sostituzione di comando ucciderebbe lo step QUI, prima del
+            # retry e prima del messaggio d'errore esplicito sotto — cioe' con
+            # un rosso muto, che e' il modo peggiore di fallire.
+            policy_ref=$(git ls-remote "https://github.com/${REPO}" refs/heads/main 2>/dev/null | awk 'NR==1{print $1}' || true)
+            if printf '%s' "$policy_ref" | grep -qE '^[0-9a-f]{40}$'; then break; fi
+            echo "::warning::Risoluzione della punta di main fallita (tentativo ${attempt}/3); ritento."
+            policy_ref=''
+            sleep "$((attempt * 5))"
+          done
+          if ! printf '%s' "$policy_ref" | grep -qE '^[0-9a-f]{40}$'; then
+            # Fail-closed, e NON si ricade su `base.sha`: quel fallback e'
+            # esattamente il difetto che questo blocco chiude, e ricadervi in
+            # silenzio lo farebbe riapparire solo quando la rete e' lenta.
+            echo "::error::Punta di main non risolvibile (git ls-remote su ${REPO}) → il review gate non puo' partire da una policy verificabile."
+            exit 1
+          fi
+          if [ -n "${PR_BASE_SHA:-}" ] && [ "$PR_BASE_SHA" != "$policy_ref" ]; then
+            echo "Review gate policy: punta di main ${policy_ref} (la base della PR e' ${PR_BASE_SHA}; i moduli del gate si leggono dalla punta, non dalla base)."
           fi
 
           review_gate_root="${RUNNER_TEMP}/review-gate-main"
@@ -415,6 +452,14 @@ jobs:
               fi
               if [ "$attempt" -eq 3 ] || [ "$retryable" != true ]; then
                 cat "$error_file" >&2
+                # Il messaggio deve NOMINARE il file e il ref. Senza, un 404
+                # arriva come `curl: (22)` e la diagnosi parte dal job invece
+                # che dal modulo mancante: sulla #1599 e' costato ore.
+                if grep -Eq '^404$' "$status_file"; then
+                  echo "::error::Modulo del review gate assente su main @ ${policy_ref}: ${path} (${raw_url}). Se e' stato aggiunto di recente, la punta di main non lo ha ancora; se e' stato rinominato, aggiorna la lista di bootstrap e generator/tests/review-gate-bootstrap-closure.test.mjs."
+                else
+                  echo "::error::Download del modulo del review gate fallito: ${path} da main @ ${policy_ref} (HTTP $(cat "$status_file" 2>/dev/null || echo '?'))."
+                fi
                 rm -f "$destination" "$error_file" "$status_file"
                 return 1
               fi
