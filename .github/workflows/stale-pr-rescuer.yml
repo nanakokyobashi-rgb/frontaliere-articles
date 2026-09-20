@@ -308,7 +308,7 @@ jobs:
             TESTS_STATE=$(echo "$checks" | jq -rs --arg n "$CI_CHECK_NAME" --arg head "$HEAD" '
               def workflow_id:
                 if (.details_url | type) != "string" then null
-                else try (.details_url | capture("^https://github[.]com/[^/]+/[^/]+/actions/runs/(?<id>[1-9][0-9]*)/job/[1-9][0-9]*$").id) catch null
+                else try (.details_url | capture("^https://github[.]com/[^/]+/[^/]+/actions/runs/(?<id>[1-9][0-9]*)/job/[1-9][0-9]*(?:[?#].*)?$").id) catch null
                 end;
               def parse_time:
                 if type != "string" or length == 0 then null
@@ -333,14 +333,25 @@ jobs:
                 (.external_id == null)
                 or ((.external_id | type) == "string"
                   and (.external_id | test("^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"; "i")));
+              def workflow_sort_key:
+                (workflow_id) as $id
+                | if $id == null then [0, 0, ""] else [1, ($id | length), $id] end;
               def generation:
                 if (.created_at | parse_time) != null
-                then {source: "timestamp", order: (.created_at | parse_time)}
+                then {source: "timestamp", order: [
+                  (.created_at | parse_time),
+                  (if (.run_attempt | type) == "number"
+                    and (.run_attempt | floor == . and . >= 1)
+                   then .run_attempt else 0 end),
+                  workflow_sort_key
+                ]}
                 elif (.run_attempt | type) == "number"
                    and (.run_attempt | floor == . and . >= 1)
-                then {source: "attempt", order: .run_attempt}
+                then {source: "attempt", order: [0, .run_attempt, workflow_sort_key]}
                 else (workflow_id) as $id
-                  | if $id == null then null else {source: "workflow", order: ($id | tonumber)} end
+                  | if $id == null then null
+                    else {source: "workflow", order: [0, 0, [1, ($id | length), $id]]}
+                    end
                 end;
               def correlation_valid($expected):
                 (valid_created_at and valid_run_attempt and valid_suite($expected) and valid_external_id)
@@ -358,6 +369,7 @@ jobs:
                 elif (.head_sha | ascii_downcase) != ($expected | ascii_downcase) then true
                 elif (.id | type) != "number" then true
                 elif .id < 1 then true
+                elif .id > 9007199254740991 then true
                 elif ((.id | floor) != .id) then true
                 elif (correlation_valid($expected) | not) then true
                 elif (generation == null) then true

@@ -1058,32 +1058,113 @@ test('#314 — shape REST senza timestamp: il workflow id ordina la generazione'
   assert.doesNotMatch(body, /check `tests \\(node --test\\)` = `failure`/, `Il runner vecchio non deve vincere.\n${body}`);
 });
 
-test('#314 — due check completati nello STESSO secondo: vince il più recente per `id`', opts, () => {
-  // `completed_at` è ISO8601 risolto al secondo, e due run sullo stesso SHA
-  // che chiudono nello stesso secondo sono ordinari (un rerun parte quando il
-  // primo sta finendo). A parità di chiave `sort_by` è STABILE, quindi senza
-  // tie-break `last` è "l'ultimo che l'API ha elencato" — un ordine che non è
-  // il tempo. Qui il `failure` è elencato per ultimo ma ha l'`id` più BASSO:
-  // è il `success` (id maggiore) il verdetto vero.
+test('#314 — la generazione usa run_attempt, workflow id e infine check id', opts, () => {
+  // `created_at` può avere solo precisione al secondo, mentre due rerun dello
+  // stesso SHA possono essere completati fuori ordine. La chiave deve quindi
+  // restare allineata al selettore condiviso: created_at, run_attempt,
+  // workflow-run ID e solo infine check-run ID. I dettagli URL includono
+  // query/fragment per coprire la forma URL valida che il parser JS accetta.
   const sameSecond = isoAgo(3);
-  const r = runScan({
-    prs: openPr(),
-    checks: {
-      total_count: 2,
-      check_runs: [
-        { id: 5002, name: CHECK_NAME, status: 'completed', head_sha: HEAD_SHA, created_at: sameSecond, completed_at: sameSecond, conclusion: 'success' },
-        { id: 5001, name: CHECK_NAME, status: 'completed', head_sha: HEAD_SHA, created_at: sameSecond, completed_at: sameSecond, conclusion: 'failure' },
+  const scenarios = [
+    {
+      label: 'run_attempt',
+      runs: [
+        {
+          id: 5001,
+          name: CHECK_NAME,
+          status: 'completed',
+          head_sha: HEAD_SHA,
+          created_at: sameSecond,
+          completed_at: sameSecond,
+          conclusion: 'success',
+          run_attempt: 2,
+          details_url: 'https://github.com/nanakokyobashi-rgb/frontaliere-articles/actions/runs/2002/job/5001?attempt=2#summary',
+          check_suite: { id: 5001 },
+          external_id: '00000000-0000-4000-8000-000000000501',
+        },
+        {
+          id: 5002,
+          name: CHECK_NAME,
+          status: 'completed',
+          head_sha: HEAD_SHA,
+          created_at: sameSecond,
+          completed_at: sameSecond,
+          conclusion: 'failure',
+          run_attempt: 1,
+          details_url: 'https://github.com/nanakokyobashi-rgb/frontaliere-articles/actions/runs/2001/job/5002',
+          check_suite: { id: 5002 },
+          external_id: '00000000-0000-4000-8000-000000000502',
+        },
       ],
     },
-    reviews: reviews({ commit: OLD_SHA, body: 'un finding, niente LGTM' }),
-  });
-  const body = only(r);
-  assert.match(
-    body,
-    /review più vecchia dell'head/,
-    'Con `sort_by(.completed_at)` senza tie-break vince il `failure` stantio elencato per ultimo ' +
-      `e un success reale viene mascherato: la PR cade in classe C invece che in D.\n${body}`,
-  );
+    {
+      label: 'workflow id',
+      runs: [
+        {
+          id: 5001,
+          name: CHECK_NAME,
+          status: 'completed',
+          head_sha: HEAD_SHA,
+          created_at: sameSecond,
+          completed_at: sameSecond,
+          conclusion: 'success',
+          run_attempt: 1,
+          details_url: 'https://github.com/nanakokyobashi-rgb/frontaliere-articles/actions/runs/2002/job/5001?attempt=1#summary',
+          check_suite: { id: 5001 },
+          external_id: '00000000-0000-4000-8000-000000000501',
+        },
+        {
+          id: 5002,
+          name: CHECK_NAME,
+          status: 'completed',
+          head_sha: HEAD_SHA,
+          created_at: sameSecond,
+          completed_at: sameSecond,
+          conclusion: 'failure',
+          run_attempt: 1,
+          details_url: 'https://github.com/nanakokyobashi-rgb/frontaliere-articles/actions/runs/2001/job/5002',
+          check_suite: { id: 5002 },
+          external_id: '00000000-0000-4000-8000-000000000502',
+        },
+      ],
+    },
+    {
+      label: 'check id',
+      runs: [
+        {
+          id: 5002,
+          name: CHECK_NAME,
+          status: 'completed',
+          head_sha: HEAD_SHA,
+          created_at: sameSecond,
+          completed_at: sameSecond,
+          conclusion: 'success',
+        },
+        {
+          id: 5001,
+          name: CHECK_NAME,
+          status: 'completed',
+          head_sha: HEAD_SHA,
+          created_at: sameSecond,
+          completed_at: sameSecond,
+          conclusion: 'failure',
+        },
+      ],
+    },
+  ];
+  for (const { label, runs } of scenarios) {
+    const r = runScan({
+      prs: openPr(),
+      checks: { total_count: runs.length, check_runs: runs },
+      reviews: reviews({ commit: OLD_SHA, body: 'un finding, niente LGTM' }),
+    });
+    const body = only(r);
+    assert.match(
+      body,
+      /review più vecchia dell'head/,
+      `Senza il tie-break ${label} il failure della generazione vecchia può mascherare il success.\n${body}`,
+    );
+  }
 });
 
 // ── 7. D è un sottoinsieme stretto di A: nessuna PR etichettata in più ──────
