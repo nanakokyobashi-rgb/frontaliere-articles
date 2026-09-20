@@ -652,10 +652,8 @@ jobs:
             [flatten[]
              | select((.state // "") != "PENDING")
              | select(
-                 ((.user.type == "Bot")
-                   and ((.user.login // "") | test("^(claude|frontaliere-automation)";"i")))
-                 or ((.user.type == "Bot")
-                     and ((.user.login // "") | test("^github-actions\\[bot\\]$"; "i"))
+                 ((.user.login // "") | test("^(claude\\[bot\\]|frontaliere-automation\\[bot\\])$";"i"))
+                 or (((.user.login // "") | test("^github-actions\\[bot\\]$"; "i"))
                      and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
                )
              | select(has_current_revision($revision))
@@ -720,9 +718,8 @@ jobs:
               | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
              [flatten[]
              | select((.state // "") != "PENDING" and (.state // "") != "DISMISSED")
-             | select(.user.type == "Bot")
              | select(
-                 ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
+                 ((.user.login // "") | test("^(claude\\[bot\\]|frontaliere-automation\\[bot\\])$";"i"))
                  or (((.user.login // "") | test("^github-actions\\[bot\\]$"; "i"))
                      and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
                )
@@ -936,9 +933,8 @@ jobs:
                 | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
               [flatten[]
                | select((.state // "") != "PENDING" and (.state // "") != "DISMISSED")
-               | select(.user.type == "Bot")
                | select(
-                   ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
+                   ((.user.login // "") | test("^(claude\\[bot\\]|frontaliere-automation\\[bot\\])$";"i"))
                    or (((.user.login // "") | test("^github-actions\\[bot\\]$"; "i"))
                        and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
                  )
@@ -1360,9 +1356,8 @@ jobs:
                     | ascii_downcase)] | unique as $revisions
                   | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
                 flatten | any(.[]?;
-                  (.user.type == "Bot")
-                  and (
-                    ((.user.login // "") | test("^(claude|frontaliere-automation)";"i"))
+                  (
+                    ((.user.login // "") | test("^(claude\\[bot\\]|frontaliere-automation\\[bot\\])$";"i"))
                     or (
                       (.user.login // "") == "github-actions[bot]"
                       and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->"))

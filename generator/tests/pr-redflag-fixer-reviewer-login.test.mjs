@@ -54,8 +54,17 @@ test('collect-review jq, review-gate and auto-merge-eval use the same bot set', 
   assert.match(src, /contains\("<!-- CODEX_FALLBACK_REVIEW -->"\)/);
   assert.match(src, /contains\("## Findings \("\)/);
   const testsYml = fs.readFileSync(path.join(ROOT, '.github/workflows/tests.yml'), 'utf8');
-  assert.match(testsYml, /test\("\^\(claude\|frontaliere-automation\)";"i"\)/);
-  assert.doesNotMatch(testsYml, /test\("claude";"i"\)/);
+  assert.equal(
+    (testsYml.match(/test\("\^\(claude\\\\\[bot\\\\\]\|frontaliere-automation\\\\\[bot\\\\\]\)\$";"i"\)/g) ?? []).length,
+    4,
+    'tests.yml deve usare quattro allowlist reviewer ancorate',
+  );
+  assert.doesNotMatch(testsYml, /test\("\^\(claude\|frontaliere-automation\)";"i"\)/);
+  assert.doesNotMatch(
+    testsYml,
+    /\.user\.type\s*==\s*"Bot"[\s\S]{0,220}test\("\^\(claude\\\\\[bot\\\\\]\|frontaliere-automation\\\\\[bot\\\\\]\)\$";"i"\)/,
+    'il filtro reviewer di tests.yml non deve richiedere il metadata REST type',
+  );
 });
 
 test('il redflag fixer ammette Codex solo con contesto PR/review verificato', () => {

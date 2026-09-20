@@ -287,8 +287,11 @@ test('tests.yml claims before review work and finalizes without gating the requi
   const sameHeadStart = workflow.indexOf('same_head=');
   const sameHeadEnd = workflow.indexOf('if [ "${same_head:-0}"', sameHeadStart);
   const sameHeadGuard = workflow.slice(sameHeadStart, sameHeadEnd);
-  assert.match(sameHeadGuard, /\.user\.type == "Bot"/);
-  assert.match(sameHeadGuard, /test\("\^\(claude\|frontaliere-automation\)";"i"\)/);
+  assert.doesNotMatch(sameHeadGuard, /\.user\.type == "Bot"/);
+  assert.ok(
+    sameHeadGuard.includes('test("^(claude\\\\[bot\\\\]|frontaliere-automation\\\\[bot\\\\])$";"i")'),
+    'il gate deve usare l allowlist reviewer strettamente ancorata',
+  );
   assert.match(sameHeadGuard, /--arg revision \"\$REVIEW_REVISION\"/);
   assert.match(sameHeadGuard, /has_current_revision\(\$expected\)/);
   assert.match(sameHeadGuard, /select\(has_current_revision\(\$revision\)\)/);
