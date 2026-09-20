@@ -21,7 +21,7 @@
 import { readFileSync, writeFileSync, readdirSync, existsSync, renameSync, unlinkSync, realpathSync } from 'fs';
 import { resolve, basename, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { execSync } from 'child_process';
+import { execFileSync, execSync } from 'child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -175,6 +175,31 @@ EXAMPLES:
 
 // ── Constants ────────────────────────────────────────────────
 const LOCALES = ['it', 'en', 'de', 'fr'];
+
+// The workflow deliberately disables actions/checkout credential persistence and
+// grants only contents: read. Checkpoints therefore need the PAT loaded from
+// Remote Config, but it must never be placed in a remote URL or argv: git can
+// echo both in diagnostics and other processes can inspect argv on the runner.
+const GIT_PAT_CREDENTIAL_HELPER = '!f() { test "$1" = get && printf "username=x-access-token\\npassword=%s\\n" "$GITHUB_PAT"; }; f';
+
+export function authenticatedGitArgs(args) {
+  if (!process.env.GITHUB_PAT?.trim()) {
+    throw new Error('GITHUB_PAT missing — refusing checkpoint git operation');
+  }
+  return [
+    '-c', 'credential.helper=',
+    '-c', `credential.helper=${GIT_PAT_CREDENTIAL_HELPER}`,
+    '-c', 'http.https://github.com/.extraheader=',
+    ...args,
+  ];
+}
+
+function authenticatedGit(args, options) {
+  return execFileSync('git', authenticatedGitArgs(args), {
+    ...options,
+    env: { ...process.env, GIT_TERMINAL_PROMPT: '0' },
+  });
+}
 
 // ── Helpers ──────────────────────────────────────────────────
 
@@ -337,16 +362,17 @@ function gitCommitAndPush(label, { sectionBodyDir, progressFile }) {
       `git diff --cached --quiet || git commit -m "❓ FAQ batch checkpoint (${label})"`,
       { cwd: ROOT, stdio: 'pipe', timeout: 30000 }
     );
-    // Push using default GITHUB_TOKEN (permissions: contents: write)
+    // Checkpoint pushes use the Remote Config PAT; the workflow grants only
+    // contents: read and disables checkout's ambient credential persistence.
     try {
-      execSync('git push origin main', { cwd: ROOT, stdio: 'pipe', timeout: 60000 });
+      authenticatedGit(['push', 'origin', 'main'], { cwd: ROOT, stdio: 'pipe', timeout: 60000 });
       outcome = 'pushed';
       console.error(`💾 Checkpoint pushed: ${label}`);
     } catch (pushErr) {
       // Rebase and retry once (handles concurrent pushes)
       try {
-        execSync('git pull --rebase origin main', { cwd: ROOT, stdio: 'pipe', timeout: 30000 });
-        execSync('git push origin main', { cwd: ROOT, stdio: 'pipe', timeout: 60000 });
+        authenticatedGit(['pull', '--rebase', 'origin', 'main'], { cwd: ROOT, stdio: 'pipe', timeout: 30000 });
+        authenticatedGit(['push', 'origin', 'main'], { cwd: ROOT, stdio: 'pipe', timeout: 60000 });
         outcome = 'rebased';
         console.error(`💾 Checkpoint pushed (after rebase): ${label}`);
       } catch {
