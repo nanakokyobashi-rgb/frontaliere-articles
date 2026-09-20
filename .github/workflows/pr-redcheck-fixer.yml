@@ -38,16 +38,21 @@ on:
       pr:
         description: 'Numero PR da riparare (bypassa il gate workflow_run)'
         required: true
+      head_ref:
+        description: 'Branch della PR, usato per serializzare il redispatch con workflow_run'
+        required: true
 
 # Serializzato per BRANCH, non per numero PR: nel contesto `workflow_run` il
 # numero non e' affidabile (`pull_requests` e' spesso vuoto), mentre
 # `head_branch` c'e' sempre. Il gemello mantiene un gruppo distinto: GitHub
 # conserva una sola run pending per gruppo e un gruppo condiviso potrebbe
-# sfrattare silenziosamente un 🔴-fixer. Il preflight sotto impedisce comunque
-# l'overlap: redcheck aspetta il prossimo rosso quando redflag e' attivo, mentre
-# redflag aspetta qui prima di toccare body o branch.
+# sfrattare silenziosamente un 🔴-fixer. Il redispatch body-only passa
+# esplicitamente lo stesso `head_ref`, cosi' workflow_run e workflow_dispatch
+# condividono il gruppo. Il preflight sotto impedisce comunque l'overlap:
+# redcheck aspetta il prossimo rosso quando redflag e' attivo, mentre redflag
+# aspetta qui prima di toccare body o branch.
 concurrency:
-  group: redcheck-fix-${{ github.event.pull_request.head.ref || github.event.workflow_run.head_branch || github.event.inputs.pr }}
+  group: redcheck-fix-${{ github.event.pull_request.head.ref || github.event.workflow_run.head_branch || github.event.inputs.head_ref }}
   cancel-in-progress: false
 
 permissions:
@@ -545,7 +550,8 @@ jobs:
                 exit 1
               fi
               if ! GH_TOKEN="$GITHUB_PAT_NANAKO" gh workflow run pr-redcheck-fixer.yml \
-                --repo "$REPO" --ref "$HEAD_REF" --field "pr=$PR_NUMBER"; then
+                --repo "$REPO" --ref "$HEAD_REF" --field "pr=$PR_NUMBER" \
+                --field "head_ref=$HEAD_REF"; then
                 echo "::error::Retry body-only non dispatchato: gh workflow run non verificato. Stato retryable fail-closed."
                 echo "proceed=false" >> "$GITHUB_OUTPUT"
                 echo "marker_verified=false" >> "$GITHUB_OUTPUT"

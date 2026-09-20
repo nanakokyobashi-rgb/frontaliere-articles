@@ -493,6 +493,21 @@ test('i fixer di PR serializzano la PR senza sfrattare la pending gemella', () =
     'i workflow devono evitare una coda condivisa che sfratta la pending gemella');
   assert.match(redcheckGroup || '', /^redcheck-fix-/);
   assert.match(
+    WORKFLOW,
+    /workflow_dispatch:\n\s+inputs:\n\s+pr:[\s\S]*?\n\s+head_ref:\n\s+description:/,
+    'il redispatch deve ricevere il branch oltre al numero PR',
+  );
+  assert.match(
+    WORKFLOW,
+    /group: redcheck-fix-\$\{\{ github\.event\.pull_request\.head\.ref \|\| github\.event\.workflow_run\.head_branch \|\| github\.event\.inputs\.head_ref \}\}/,
+    'workflow_run e workflow_dispatch devono condividere la chiave basata sul branch',
+  );
+  assert.match(
+    WORKFLOW,
+    /gh workflow run pr-redcheck-fixer\.yml[\s\S]*--field "pr=\$PR_NUMBER" \\\n\s+--field "head_ref=\$HEAD_REF"/,
+    'il retry body-only deve passare lo stesso branch della run originaria',
+  );
+  assert.match(
     redflagGroup || '',
     /^redflag-fix-pr-\$\{\{ inputs\.pr \|\| github\.event\.pull_request\.number \|\| 'unknown' \}\}$/,
     'il fixer deve usare il numero PR anche su workflow_dispatch manuale',
