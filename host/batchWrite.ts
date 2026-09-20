@@ -23,6 +23,10 @@ import path from 'node:path';
 import { getManifest } from './contentHash';
 import { claim, type ClaimOutcome } from './sharedWriteRegistry';
 import { shouldEmitPath, EMIT_ALL_LOCALES } from './shared/localeEmitFilter';
+import {
+ preservePostWalkDerivedOutput,
+ type PostWalkDerivedKind,
+} from './shared/postWalkDerivedDigest';
 
 export interface PendingWrite {
  filePath: string;
@@ -103,6 +107,11 @@ export function getGlobalIntraPluginOverwrites(): number {
   return globalIntraPluginOverwrites;
 }
 
+/** Read-only diagnostic count for the process-wide directory cache. */
+export function getEnsuredDirsSize(): number {
+  return ensuredDirs.size;
+}
+
 /** Called by writeRegistryResetPlugin's buildStart to clear stale state. */
 export function _resetGlobalIntraPluginOverwriteCounter(): void {
   globalIntraPluginOverwrites = 0;
@@ -126,8 +135,10 @@ export interface WriteCollectorOptions {
   * shared write registry. Defaults to `'unknown'` for backward compatibility,
   * but every caller SHOULD pass its own plugin name so collision messages
   * can name both writers. See `sharedWriteRegistry.ts` for the invariant.
-  */
+ */
  pluginName?: string;
+ /** Current derived-output scope, when this collector emits one. */
+ postWalkDerivedKind?: PostWalkDerivedKind | null;
 }
 
 /**
@@ -167,11 +178,13 @@ export class WriteCollector {
  private _overwrittenInPlugin = 0;
  private _distDir: string;
  private _pluginName: string;
+ private _postWalkDerivedKind: PostWalkDerivedKind | null | undefined;
  // Set so completed flushes can self-remove via the `.finally` callback —
  // keeps the bookkeeping bounded by ACTUAL in-flight count instead of
  // accumulating closures of resolved promises.
  private _pendingFlushes: Set<Promise<number>> = new Set();
  private _firstError: Error | null = null;
+ private _writtenPaths = new Set<string>();
  private readonly _concurrency: number;
  private readonly _autoFlushThreshold: number;
 
@@ -181,6 +194,7 @@ export class WriteCollector {
  this._concurrency = opts?.concurrency ?? 500;
  this._autoFlushThreshold = opts?.autoFlushThreshold ?? DEFAULT_AUTO_FLUSH_THRESHOLD;
  this._pluginName = opts?.pluginName ?? 'unknown';
+ this._postWalkDerivedKind = opts?.postWalkDerivedKind;
  }
 
  /** Queue a file write. Skips files unchanged since last build (via content hash manifest). */
@@ -207,6 +221,21 @@ export class WriteCollector {
  // WriteCollisionError in `throw` mode and returns 'skip-write' for
  // idempotent re-claims (identical content) or declared-shared losers.
  const outcome: ClaimOutcome = claim(filePath, this._pluginName, content);
+ if (preservePostWalkDerivedOutput(
+  this._distDir,
+  filePath,
+  content,
+  this._postWalkDerivedKind,
+ )) {
+ // The derived file on disk is the post-walk representation, while the
+ // content-hash manifest tracks the upstream bytes passed to add(). Keep its
+ // current projection populated even though no upstream write is queued.
+ const manifest = getManifest();
+ if (manifest && this._distDir) {
+  manifest.shouldWrite(path.relative(this._distDir, filePath), content);
+ }
+ return;
+ }
  if (outcome === 'skip-write') {
  this._skippedByCollision++;
  return;
@@ -246,7 +275,10 @@ export class WriteCollector {
  this.writes = new Map();
  let flushPromise: Promise<number>;
  // eslint-disable-next-line prefer-const
- flushPromise = flushWrites(batch, this._concurrency).catch((err: unknown) => {
+ flushPromise = flushWrites(batch, this._concurrency).then((written) => {
+  this.markWritten(batch);
+  return written;
+ }).catch((err: unknown) => {
   if (!this._firstError) {
   this._firstError = err instanceof Error ? err : new Error(String(err));
   }
@@ -309,6 +341,15 @@ export class WriteCollector {
   * last-add-wins resolutions. */
  get overwrittenInPlugin() { return this._overwrittenInPlugin; }
 
+ /** True only for paths successfully written by this collector in this build. */
+ hasWritten(filePath: string): boolean {
+  return this._writtenPaths.has(filePath);
+ }
+
+ private markWritten(writes: PendingWrite[]): void {
+  for (const write of writes) this._writtenPaths.add(write.filePath);
+ }
+
  /**
   * Flush all queued writes in parallel batches (see {@link flushWrites}).
   * Awaits any background flushes spawned by auto-flush, drains remaining
@@ -321,7 +362,10 @@ export class WriteCollector {
  if (remaining.length > 0) {
  let drainPromise: Promise<number>;
  // eslint-disable-next-line prefer-const
- drainPromise = flushWrites(remaining, concurrency).finally(() => {
+ drainPromise = flushWrites(remaining, concurrency).then((written) => {
+  this.markWritten(remaining);
+  return written;
+ }).finally(() => {
  this._pendingFlushes.delete(drainPromise);
  });
  this._pendingFlushes.add(drainPromise);

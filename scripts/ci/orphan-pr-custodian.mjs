@@ -18,6 +18,22 @@
  *       stesso check e' verde (corpus #1591: LGTM alle 09:31, ferma fino al
  *       rerun manuale delle 17:40, mergiata due minuti dopo). Vale per QUALSIASI
  *       PR: un rerun non cambia il codice e non decide il merge.
+ *   (c) `stalled-automerge`: la review gestita sulla HEAD chiude con `## LGTM`
+ *       senza 🔴, il check richiesto e' VERDE sulla HEAD e nessuna generazione
+ *       e' cancellata — e l'auto-merge nativo non risulta attivo. E' la stessa
+ *       forma di stallo di (a) con un'altra causa: il merge non arriva e
+ *       nessuno se ne accorge, perche' ogni segnale visibile e' verde. Il
+ *       custode non mergia (non deve): etichetta `orphaned` e scrive perche',
+ *       cosi' lo stato esce dal silenzio entro 2 h invece che mai.
+ *       Misurato sul sito il 2026-09-20, PR #9344: check verdi, review
+ *       `## LGTM`, `autoMergeRequest` nullo, e il job `post-review` della
+ *       #9297 chiuso `success` dopo aver stampato
+ *       «review bot sulla HEAD non e' LGTM senza 🔴 Important» — il suo
+ *       predicato (`reviewHasZeroFindings`, che pretende un conteggio
+ *       dichiarato) non concordava con quello del review gate, che aveva
+ *       approvato la stessa review. `retry-native-automerge.yml` rivaluta lo
+ *       STESSO predicato ogni 20 min, quindi declina identicamente per sempre:
+ *       la PR e' rimasta ferma fino a uno sblocco manuale, un'ora e mezza dopo.
  *   (b) `adopt`: la review sulla HEAD ha un `🔴 Important`, il redflag-fixer ha
  *       gia' dichiarato la PR fuori scope (`REDFLAG_OUT_OF_SCOPE`) e nessuno ha
  *       spinto un commit da allora. Invece dello skip silenzioso la PR riceve
@@ -51,7 +67,6 @@
  * del marker 🔴 arrivano da `scripts/ci/lib/constants.mjs` di ciascun lato.
  */
 import { execFileSync } from 'node:child_process';
-import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { isReviewerBot, REDFLAG_IMPORTANT_RE, VITEST_CHECK_NAME } from './lib/constants.mjs';
@@ -59,7 +74,12 @@ import { isReviewerBot, REDFLAG_IMPORTANT_RE, VITEST_CHECK_NAME } from './lib/co
 // (`\n` come due caratteri) e pretende la riga di contratto completa, esattamente
 // come `review-gate`. Una seconda copia della regex qui sarebbe la deriva che
 // AGENTS.md #6 vieta, e il gate la giudicherebbe con un parser diverso dal nostro.
-import { reviewHasInputRevision, reviewInputRevisions } from './lib/review-input-revision.mjs';
+import {
+  reviewHasInputRevision,
+  reviewInputRevisionFromBody,
+  reviewInputRevisions,
+  acceptedReviewInputRevisionsFromBody,
+} from './lib/review-input-revision.mjs';
 
 export const ORPHAN_MIN_AGE_S = 2 * 60 * 60;
 export const ORPHANED_LABEL = 'orphaned';
@@ -84,20 +104,36 @@ export function actionMarker(action, headSha, key = '') {
 }
 
 /**
- * `body:<sha256>` della rappresentazione esatta con cui il CORPUS emette il
- * marker (`scripts/ci/review-test-policy.mjs`: `sha256(body + "\n")`, la forma
- * che esce da `gh api --jq`). NON e' un duplicato di
- * `scripts/ci/lib/review-input-revision.mjs`: quel modulo esiste solo sul sito
- * e digerisce `sha256(body)` senza newline finale, quindi produrrebbe un
- * digest che non coincide con nessun marker realmente emesso. Questo file e'
- * `identical` fra i due repo e deve validare i marker del lato che li scrive.
- * Sul sito il reviewer non emette il marker (verificato sulle review di
- * `frontaliere-automation[bot]`): li' questa funzione non viene mai confrontata
- * con nulla e la selezione resta quella per HEAD.
+ * `body:<sha256>` della rappresentazione esatta con cui viene emesso il marker
+ * (`gh api --jq`, cioe' il body seguito da newline).
+ *
+ * Non e' piu' una seconda definizione: dal 2026-09-20 la formula vive in
+ * `scripts/ci/lib/review-input-revision.mjs`, che prima digeriva `sha256(body)`
+ * senza newline finale e produceva quindi un digest che non coincideva con
+ * nessun marker realmente emesso. Questa funzione resta come nome locale —
+ * il suo call site e il suo test la usano — ma delega, cosi' le due copie
+ * letterali che AGENTS.md #6 vieta non possono piu' divergere.
+ *
+ * @param {string} body
+ * @returns {string|null} `null` quando il body non e' una stringa
  */
 export function reviewRevisionForBody(body) {
   if (typeof body !== 'string') return null;
-  return `body:${createHash('sha256').update(`${body}\n`).digest('hex')}`;
+  return reviewInputRevisionFromBody(body);
+}
+
+/**
+ * Gli schemi di marker accettabili per questo body, non la sola revisione
+ * corrente. Questo custode gira da `main` e legge marker emessi dal checkout
+ * del branch: e' la stessa asimmetria che il 2026-09-19 ha fermato 6 PR su 6
+ * quando #9328 ha cambiato lo schema (vedi `review-input-revision.mjs`).
+ *
+ * @param {string} body
+ * @returns {string[]} vuoto quando il body non e' una stringa
+ */
+export function acceptedReviewRevisionsForBody(body) {
+  if (typeof body !== 'string') return [];
+  return acceptedReviewInputRevisionsFromBody(body);
 }
 
 
@@ -163,7 +199,11 @@ function runIdFromDetailsUrl(url) {
  * Per ogni check suite, l'ultima generazione del check richiesto sulla HEAD.
  * GitHub valuta il check richiesto per suite: una suite la cui ultima
  * generazione e' `cancelled` blocca il merge anche con una suite verde accanto
- * (corpus #1591). Restituisce le suite bloccate e se una run e' ancora in volo.
+ * (corpus #1591). Restituisce le suite bloccate, se una run e' ancora in volo
+ * e se OGNI suite ha chiuso `success` — quest'ultimo e' il «verde» che lo
+ * stato (c) richiede, e si legge dalle stesse generazioni per-suite invece di
+ * fidarsi del rollup, che una suite cancellata accanto a una verde colora
+ * comunque di verde.
  */
 export function cancelledRequiredSuites(checkRuns, headSha, checkName) {
   const bySuite = new Map();
@@ -181,11 +221,14 @@ export function cancelledRequiredSuites(checkRuns, headSha, checkName) {
     const previous = bySuite.get(suite);
     if (!previous || (run.id || 0) > (previous.id || 0)) bySuite.set(suite, run);
   }
-  const cancelled = [...bySuite.values()]
+  const latest = [...bySuite.values()];
+  const cancelled = latest
     .filter((run) => String(run.conclusion || '').toLowerCase() === 'cancelled')
     .map((run) => ({ checkRunId: run.id, runId: runIdFromDetailsUrl(run.details_url) }))
     .filter((entry) => entry.runId);
-  return { cancelled, inFlight };
+  const succeeded = latest.length > 0
+    && latest.every((run) => String(run.conclusion || '').toLowerCase() === 'success');
+  return { cancelled, inFlight, succeeded };
 }
 
 /**
@@ -218,7 +261,7 @@ export function classifyOrphan({
   const lgtm = review ? /^## LGTM\b/m.test(reviewBody) && !important : false;
 
   if (lgtm) {
-    const { cancelled, inFlight } = cancelledRequiredSuites(checkRuns, pr.headSha, checkName);
+    const { cancelled, inFlight, succeeded } = cancelledRequiredSuites(checkRuns, pr.headSha, checkName);
     if (inFlight) return none(`\`${checkName}\` in volo sulla HEAD`);
     if (cancelled.length > 0) {
       // Il marker e' per-generazione, non per-HEAD: se il rerun finisce a sua
@@ -235,6 +278,29 @@ export function classifyOrphan({
         runIds: [...new Set(cancelled.map((entry) => entry.runId))],
         rerunKey,
         reason: `LGTM sulla HEAD ma \`${checkName}\` ha una generazione cancelled: il merge resta bloccato`,
+      };
+    }
+    // Stato (c). `autoMergeEnabled` si legge dalla risposta fresca di
+    // `/pulls/<n>`, non dallo snapshot della lista: fra le due letture il job
+    // `post-review` puo' avere appena fatto l'opt-in. Il predicato e'
+    // esplicito su ENTRAMBI i valori — `=== false` e non `!== true` — cosi' un
+    // chiamante che non sa dire se l'auto-merge sia attivo (campo assente)
+    // non fa scattare nulla: uno stato non letto non e' uno stato rotto.
+    // `dirty` esce di scena perche' quello e' il dominio di `pr-autorebase`,
+    // che etichetta `has-conflicts` e rimanda la PR da solo.
+    // `needs-human` NON esce di scena qui, al contrario del ramo (b). Li' e'
+    // un veto terminale sull'ADOZIONE — dice che i fixer non devono toccare la
+    // PR — mentre sul merge e' metadato di tracking e basta: una PR con quel
+    // label mergia comunque appena l'auto-merge e' attivo. Escluderla avrebbe
+    // rimesso in silenzio esattamente la classe che questo ramo esiste per far
+    // uscire dal silenzio.
+    if (succeeded && pr.autoMergeEnabled === false && pr.mergeableState !== 'dirty') {
+      if (alreadyDone('stalled-automerge')) {
+        return none('stallo auto-merge gia segnalato su questa HEAD');
+      }
+      return {
+        action: 'stalled-automerge',
+        reason: `LGTM sulla HEAD e \`${checkName}\` verde, ma l'auto-merge nativo non risulta attivo`,
       };
     }
     return none('LGTM senza check cancellati');
@@ -270,8 +336,16 @@ export function classifyOrphan({
   return none('nessuno stato orfano noto');
 }
 
+function trustedGhBin() {
+  const value = String(process.env.TRUSTED_GH_BIN || '').trim();
+  if (!value || !value.startsWith('/') || value.includes('\0')) {
+    throw new Error('TRUSTED_GH_BIN mancante o non assoluto');
+  }
+  return value;
+}
+
 function gh(args, { input } = {}) {
-  return execFileSync('gh', args, {
+  return execFileSync(trustedGhBin(), args, {
     encoding: 'utf8',
     input,
     stdio: ['pipe', 'pipe', 'pipe'],
@@ -340,8 +414,14 @@ function main() {
       // La revisione si rilegge ORA, non dallo snapshot di `/pulls`: fra la
       // lista e questo punto il body puo' essere cambiato, e un verdetto va
       // riusato solo contro la revisione che i gate considerano corrente.
-      const freshBody = JSON.parse(gh(['api', `repos/${repo}/pulls/${pr.number}`])).body ?? '';
-      const reviewRevision = reviewRevisionForBody(String(freshBody)) || '';
+      const fresh = JSON.parse(gh(['api', `repos/${repo}/pulls/${pr.number}`]));
+      const freshBody = fresh.body ?? '';
+      // Stessa lettura, due fatti in piu': l'opt-in all'auto-merge e lo stato
+      // di merge. Vengono da qui e non dalla lista perche' la lista e' uno
+      // snapshot di inizio giro, e l'opt-in puo' essere arrivato nel mezzo.
+      pr.autoMergeEnabled = fresh.auto_merge != null;
+      pr.mergeableState = String(fresh.mergeable_state || '');
+      const reviewRevision = acceptedReviewRevisionsForBody(String(freshBody));
       decision = classifyOrphan({ pr, checkRuns, reviews, comments, nowS, reviewRevision });
     } catch (error) {
       console.log(`::warning::PR #${pr.number}: stato non leggibile (${error.message.split('\n')[0]}) — nessuna azione.`);
@@ -367,6 +447,30 @@ function main() {
         }
       }
       detail = `Rilanciate le generazioni cancellate (run ${decision.runIds.join(', ')}): con il check verde l'auto-merge prosegue da solo.`;
+    } else if (decision.action === 'stalled-automerge') {
+      // Nessun `agent:autofix` qui: non c'e' niente da correggere, e mandare i
+      // fixer su una PR pulita sprecherebbe quota Claude senza toccare la
+      // causa. Solo `orphaned`, che e' il segnale leggibile da un umano, piu'
+      // il commento che dice dove guardare.
+      try {
+        gh(['label', 'create', ORPHANED_LABEL, '--repo', repo, '--color', 'B60205',
+          '--description', 'PR senza agente vivo: adottata dal custode per i fixer']);
+      } catch {
+        // Esiste gia': e' il caso normale.
+      }
+      try {
+        gh(['pr', 'edit', String(pr.number), '--repo', repo, '--add-label', ORPHANED_LABEL]);
+      } catch (error) {
+        ok = false;
+        console.log(`::warning::PR #${pr.number}: label \`${ORPHANED_LABEL}\` non applicata (${error.message.split('\n')[0]}).`);
+      }
+      detail = [
+        `Il check richiesto e' verde sulla HEAD \`${pr.headSha.slice(0, 7)}\` e la review chiude con \`## LGTM\`, ma \`autoMergeRequest\` e' nullo: nessuno sta portando questa PR al merge.`,
+        '',
+        'Dove guardare, in ordine di probabilita\':',
+        '- il job `post-review (auto-merge opt-in + autorebase)` della run `tests` sulla HEAD: se lo step di opt-in ha stampato un motivo e poi e\' uscito `success`, il gate nativo ha DECLINATO — `retry-native-automerge.yml` rivaluta lo stesso predicato ogni 20 min e declinera\' identicamente;',
+        '- il body della review: `native-automerge-gate.mjs` pretende un conteggio dichiarato (`Important: 0`) dentro la sezione `## Findings`, mentre il review gate conta i finding reali. Una review che chiude in prosa («nessun finding azionabile») e\' approvante per il primo gate e non per il secondo.',
+      ].join('\n');
     } else {
       try {
         gh(['label', 'create', ORPHANED_LABEL, '--repo', repo, '--color', 'B60205',

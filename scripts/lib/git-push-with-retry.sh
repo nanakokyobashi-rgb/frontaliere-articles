@@ -89,13 +89,6 @@ git config merge.known-slugs-shard.driver 'node scripts/ci/merge-known-slugs-sha
 # of git's default line merge, which on a re-serialised sorted JSON ARRAY
 # produces duplicate records rather than bloat alone.
 git config merge.orphan-enriched-shard.driver 'node scripts/ci/merge-orphan-enriched-shard.mjs %O %A %B' || true
-# Same registration for the crawlers' AI response cache
-# (.gitattributes `merge=ai-cache`, data/jobs-ai-cache.json, issue #4248
-# follow-up): union by entry key keeping the newest observation, then re-apply
-# the byte budget. Without it git's generic array union can push the merged file
-# back over GitHub's 100 MB limit that the persist-time budget just enforced.
-git config merge.ai-cache.driver 'node scripts/ci/merge-ai-cache.mjs %O %A %B' || true
-
 # ── Clear orphaned .git/index.lock left by a crashed prior git operation ────
 # Same class of bug as scripts/lib/git-commit-data.sh (see that file's header
 # comment for the full incident writeup: group-06 production failure,
@@ -197,7 +190,8 @@ restore_stashed_wip() {
   fi
 
   echo "::warning::Stash restoration conflicted on generated paths; keeping the stashed version for: $(printf '%s' "$conflicted" | tr '\n' ' ')"
-  while IFS= read -r path; do
+  # fd 9, not stdin: the git commands in the body must not consume the list (#7777).
+  while IFS= read -r -u 9 path; do
     [ -n "$path" ] || continue
     git checkout --theirs -- "$path"
     git add -- "$path"
@@ -205,7 +199,7 @@ restore_stashed_wip() {
     # above is required to clear the unmerged index entry; reset the path back
     # to HEAD so generated output keeps that same later-step contract.
     git reset --quiet HEAD -- "$path"
-  done <<< "$conflicted"
+  done 9<<< "$conflicted"
 
   if [ -n "$(git diff --name-only --diff-filter=U || true)" ]; then
     echo "::error::Failed to resolve every stashed working-tree conflict; stash left in stack"
@@ -280,7 +274,8 @@ apply_stashed_wip_for_resolver() {
   fi
 
   all_paths="$(printf '%s\n%s\n%s\n' "$worktree_paths" "$index_paths" "$untracked_paths" | sort -u)"
-  while IFS= read -r path; do
+  # fd 9, not stdin: the git commands in the body must not consume the list (#7777).
+  while IFS= read -r -u 9 path; do
     [ -n "$path" ] || continue
     if [ -n "$excluded_paths" ] && path_is_listed "$path" "$excluded_paths"; then
       continue
@@ -314,7 +309,7 @@ apply_stashed_wip_for_resolver() {
       echo "::error::Failed to restore stashed path before in-place conflict resolver: $path"
       return 1
     fi
-  done <<< "$all_paths"
+  done 9<<< "$all_paths"
 }
 
 # --no-verify: skip the .githooks/pre-push sibling-patterns gate. Every caller
