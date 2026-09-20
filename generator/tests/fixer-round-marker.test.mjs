@@ -24,7 +24,7 @@ const BODY_SHA = bodyRevision(BODY);
 const REPO = 'example/repo';
 const PR = '7';
 
-function fakeGh({ comments, postBody = '', refundBody = '', failComment = false, malformedPost = false, failCommentsRead = false, head = HEAD, body = BODY }) {
+function fakeGh({ comments, commentsJsonOverride = null, postBody = '', refundBody = '', failComment = false, malformedPost = false, failCommentsRead = false, head = HEAD, body = BODY }) {
   const temp = mkdtempSync(path.join(os.tmpdir(), 'fixer-round-marker-'));
   const bin = path.join(temp, 'bin');
   mkdirSync(bin);
@@ -33,7 +33,7 @@ function fakeGh({ comments, postBody = '', refundBody = '', failComment = false,
   writeFileSync(log, '');
   writeFileSync(postCount, '0');
   const gh = path.join(bin, 'gh');
-  const commentsJson = JSON.stringify([comments]);
+  const commentsJson = commentsJsonOverride ?? JSON.stringify([comments]);
   const postCommand = failComment
     ? 'exit 23'
     : `count=$(cat "$FAKE_POST_COUNT"); count=$((count + 1)); printf '%s\\n' "$count" > "$FAKE_POST_COUNT"; if [ "$count" -eq 1 ] && [ "$FAKE_MALFORMED_POST" = true ]; then printf '%s\\n' '{'; else body="$FAKE_POST_BODY"; [ "$count" -gt 1 ] && body="$FAKE_REFUND_BODY"; printf '{"id":42,"user":{"login":"fixture-bot"},"body":%s}\\n' "$body"; fi`;
@@ -161,6 +161,23 @@ test('un marker trusted legacy senza binding HEAD/body blocca il cap fail-closed
       }],
       marker: 'REDCHECK_FIX_ROUND', headSha: HEAD, bodySha: BODY_SHA, expectedAuthor: 'fixture-bot',
     }), /legacy\/incompleto/);
+  }
+});
+
+test('risposta commenti flat o incompleta blocca il cap fail-closed', () => {
+  const marker = markerTokens({ marker: 'REDCHECK_FIX_ROUND', round: 2, headSha: HEAD, bodySha: BODY_SHA });
+  for (const commentsJsonOverride of [
+    JSON.stringify([{ id: 42, body: marker.join('\n'), user: { login: 'fixture-bot' } }]),
+    JSON.stringify([[{ id: 42, body: marker.join('\n') }]]),
+  ]) {
+    const fake = fakeGh({ comments: [], commentsJsonOverride });
+    try {
+      const result = runCurrentRound(fake);
+      assert.equal(result.status, 1, `${result.stdout}\n${result.stderr}`);
+      assert.match(result.stderr, /commenti paginata/);
+    } finally {
+      rmSync(fake.temp, { recursive: true, force: true });
+    }
   }
 });
 

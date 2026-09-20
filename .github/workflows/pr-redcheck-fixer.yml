@@ -1076,8 +1076,12 @@ jobs:
             exit 1
           fi
           printf '%s\n' "$claim_result"
-          if [ "${GUARD_PROCEED:-}" != 'true' ] && ! printf '%s' "$claim_result" | grep -qE '(^|[[:space:]])claim_state=released([[:space:]]|$)'; then
-            echo "::error::Claim redcheck non verificato come released dopo il percorso fail-closed."
+          if ! printf '%s' "$claim_result" | grep -qE '(^|[[:space:]])claim_error=false([[:space:]]|$)'; then
+            echo "::error::Finalizzazione claim redcheck con errore/parsing non verificabile: release non confermato."
+            exit 1
+          fi
+          if ! printf '%s' "$claim_result" | grep -qE "(^|[[:space:]])claim_state=${CLAIM_STATUS}([[:space:]]|$)"; then
+            echo "::error::Claim redcheck non verificato nello stato atteso (${CLAIM_STATUS})."
             exit 1
           fi
 

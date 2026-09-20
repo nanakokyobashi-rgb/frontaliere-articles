@@ -121,13 +121,16 @@ function readComments(repo, pr) {
     'lettura commenti paginata',
   );
   if (!Array.isArray(value)) throw new Error('lettura commenti paginata: risposta non-array');
-  const comments = value.length === 0
-    ? []
-    : value.every(Array.isArray)
-      ? value.flat()
-      : value;
-  if (!comments.every((comment) => comment && typeof comment === 'object' && !Array.isArray(comment))) {
-    throw new Error('lettura commenti paginata: pagina malformata');
+  if (value.length > 0 && !value.every(Array.isArray)) {
+    throw new Error('lettura commenti paginata: risposta non e\' un array di pagine');
+  }
+  const comments = value.flat();
+  if (!comments.every((comment) => comment && typeof comment === 'object' && !Array.isArray(comment)
+    && Number.isSafeInteger(Number(comment.id)) && Number(comment.id) > 0
+    && typeof comment.body === 'string'
+    && comment.user && typeof comment.user === 'object' && !Array.isArray(comment.user)
+    && typeof comment.user.login === 'string' && comment.user.login.length > 0)) {
+    throw new Error('lettura commenti paginata: commento malformato o incompleto');
   }
   return comments;
 }

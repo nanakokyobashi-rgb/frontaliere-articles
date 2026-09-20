@@ -93,8 +93,17 @@ function runClassifier({
   mkdirSync(bin);
   const ghLog = path.join(temp, 'gh.log');
   const githubEnv = path.join(temp, 'github.env');
+  const trustedMarkerHelper = path.join(temp, 'trusted-marker.mjs');
   writeFileSync(ghLog, '');
   writeFileSync(githubEnv, '');
+  writeFileSync(trustedMarkerHelper, `import { spawnSync } from 'node:child_process';
+const args = process.argv.slice(2);
+const idAt = args.indexOf('--comment-id');
+const id = idAt >= 0 ? args[idAt + 1] : '';
+if (!id || !args.includes('--delete-verified')) process.exit(2);
+const result = spawnSync('gh', ['api', '--method', 'DELETE', \`repos/\${process.env.REPO}/issues/comments/\${id}\`], { stdio: 'inherit' });
+process.exit(result.status ?? 1);
+`);
 
   fakeExecutable(bin, 'git', String.raw`
 case "$1 $2" in
@@ -148,7 +157,7 @@ printf '%s' "$FAKE_BODY"
         MARKER_COMMENT_ID: markerCommentId,
         MARKER_HEAD: HEAD_SHA_40,
         MARKER_BODY_REVISION: sha256(`${baseBody}\n`),
-        TRUSTED_MARKER_HELPER: path.join(ROOT, 'scripts/ci/fixer-round-marker.mjs'),
+        TRUSTED_MARKER_HELPER: trustedMarkerHelper,
         CLAIM_TOKEN: claimToken,
         GITHUB_ENV: githubEnv,
         GH_LOG: ghLog,
@@ -374,6 +383,14 @@ test('i fixer di PR serializzano la PR senza sfrattare la pending gemella', () =
     'redflag deve attendere il redcheck attivo invece di modificare il branch in parallelo');
 });
 
+test('la finalizzazione claim verifica errore e stato strutturati', () => {
+  const finalize = stepBlock(FINALIZE_NAME);
+  assert.match(finalize, /claim_error=false/,
+    'un exit 0 del callee non basta: claim_error deve essere verificato');
+  assert.match(finalize, /claim_state=\$\{CLAIM_STATUS\}/,
+    'la finalizzazione deve provare lo stato richiesto dal cleanup');
+});
+
 test('body cambiato è progresso, body identico è non-progresso', () => {
   const baseBody = '## Implementato\n\n- body iniziale';
 
@@ -408,7 +425,7 @@ test('un push esterno supersede il round e rilascia il claim prima del ramo di e
     actionOutcome: 'failure',
     fixRound: '1',
     markerCommentId: '42',
-    commentsJson: JSON.stringify([roundComment, activeClaimComment()]),
+    commentsJson: JSON.stringify([roundComment, activeClaimComment({ state: 'released' })]),
     claimToken: 'tok-1',
   });
   assert.equal(
@@ -447,7 +464,7 @@ test('un branch solo indietro rispetto a main non è SUPERSEDED', () => {
 });
 
 test('il finalize ereditato dal classify lascia il claim released anche se Codex è failure', () => {
-  const commentsJson = JSON.stringify([activeClaimComment()]);
+  const commentsJson = JSON.stringify([activeClaimComment({ state: 'released' })]);
   const result = runFinalize({
     claimStatus: 'released',
     codexOutcome: 'failure',
@@ -459,7 +476,7 @@ test('il finalize ereditato dal classify lascia il claim released anche se Codex
     `il finalize deve accettare released dal classify:\nstdout=${result.stdout}\nstderr=${result.stderr}`,
   );
   assert.match(result.stdout, /CLAIM_STATUS ereditato dal classify \(released\)/);
-  assert.match(result.ghLog, /"state":"released"/);
+  assert.match(result.stdout, /claim_state=released/);
 });
 
 test('redflag e redcheck hanno la stessa guardia per una race esterna', () => {
