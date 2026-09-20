@@ -93,6 +93,20 @@ describe('pr-delivery-evidence', () => {
     assert.equal(evaluate(baseline(), [beforeRun]).status, DELIVERY_STATUS.UNAVAILABLE);
   });
 
+  it('non considera delivery una nuova PR chiusa senza merge', () => {
+    const closed = pr({
+      number: 702,
+      state: 'CLOSED',
+      createdAt: '2026-09-19T10:04:00Z',
+      updatedAt: '2026-09-19T10:05:00Z',
+    });
+    assert.deepEqual(evaluate(baseline(), [closed]), {
+      status: DELIVERY_STATUS.NONE,
+      reason: 'no-current-delivery-evidence',
+      prNumber: null,
+    });
+  });
+
   it('lega la delivery al cambio di HEAD, non a updatedAt da solo', () => {
     const unchangedHead = pr({ updatedAt: '2026-09-19T10:20:00Z' });
     assert.equal(evaluate(baseline(), [unchangedHead]).status, DELIVERY_STATUS.NONE);
