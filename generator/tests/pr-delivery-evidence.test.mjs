@@ -11,6 +11,7 @@ import {
   classifyWorkflowOutcome,
   createDeliveryBaseline,
   evaluatePrDelivery,
+  normalizeDeliveryEvidence,
   normalizePrList,
 } from '../../scripts/ci/lib/pr-delivery-evidence.mjs';
 
@@ -205,6 +206,27 @@ describe('pr-delivery-evidence', () => {
       classification: 'unknown',
       exitCode: 1,
       reason: 'evidence-pr-number-missing',
+    });
+  });
+
+  it('rifiuta prNumber coercibili ma non interi espliciti nel sidecar', () => {
+    for (const prNumber of [true, [1], 1.5, Number.MAX_SAFE_INTEGER + 1]) {
+      assert.deepEqual(normalizeDeliveryEvidence({
+        status: DELIVERY_STATUS.DELIVERED,
+        prNumber,
+      }), {
+        status: DELIVERY_STATUS.UNAVAILABLE,
+        reason: 'evidence-pr-number-invalid',
+        prNumber: null,
+      });
+    }
+    assert.deepEqual(normalizeDeliveryEvidence({
+      status: DELIVERY_STATUS.DELIVERED,
+      prNumber: '701',
+    }), {
+      status: DELIVERY_STATUS.DELIVERED,
+      reason: null,
+      prNumber: 701,
     });
   });
 
