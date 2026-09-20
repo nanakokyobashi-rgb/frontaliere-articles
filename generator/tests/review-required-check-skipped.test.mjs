@@ -8,6 +8,8 @@
  * L'invariante qui sotto modella il comportamento osservabile del workflow:
  * su una PR non-draft, `review_gate=skipped` deve essere un fallimento del job;
  * sugli eventi che non richiedono una review non deve diventare un falso rosso.
+ * L'unica eccezione e' la PR `engine-lockstep-auto`: il mirror e' gia' stato
+ * reviewato sul sito e qui passa dal gate generator-ci engine/host.
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -37,15 +39,20 @@ function stepBlock(src, name) {
  * presenza. Se lo YAML perde la guardia o l'exit non-zero, il caso skipped
  * torna verde e questo test lo espone.
  */
-function requiredCheckOutcome({ step, eventName, draft, reviewGateOutcome }) {
+function requiredCheckOutcome({ step, eventName, draft, headRef = '', reviewGateOutcome }) {
   const failClosedGuard =
     /always\(\)/.test(step) &&
     /github\.event_name\s*==\s*['"]pull_request['"]/.test(step) &&
     /github\.event\.pull_request\.draft\s*==\s*false/.test(step) &&
     /steps\.review_gate\.outcome\s*==\s*['"]skipped['"]/.test(step) &&
     /\bexit\s+1\b/.test(step);
+  const mirrorExemption =
+    /github\.event_name\s*!=\s*['"]pull_request['"]/.test(step) &&
+    /github\.event\.pull_request\.head\.ref\s*!=\s*['"]engine-lockstep-auto['"]/.test(step) &&
+    /github\.event\.pull_request\.head\.repo\.full_name\s*!=\s*github\.repository/.test(step);
 
-  return failClosedGuard && eventName === 'pull_request' && draft === false && reviewGateOutcome === 'skipped'
+  return failClosedGuard && mirrorExemption && eventName === 'pull_request' && draft === false &&
+    headRef !== 'engine-lockstep-auto' && reviewGateOutcome === 'skipped'
     ? 'failure'
     : 'success';
 }
@@ -59,23 +66,33 @@ test('un run PR che soddisfa il check con review gate skipped deve essere rosso'
         step,
         eventName: 'pull_request',
         draft: false,
+        headRef: 'content-fix',
         reviewGateOutcome: 'skipped',
       }),
       requiredCheckOutcome({
         step,
         eventName: 'pull_request',
         draft: false,
+        headRef: 'content-fix',
         reviewGateOutcome: 'failure',
       }),
       requiredCheckOutcome({
         step,
         eventName: 'push',
         draft: false,
+        headRef: '',
+        reviewGateOutcome: 'skipped',
+      }),
+      requiredCheckOutcome({
+        step,
+        eventName: 'pull_request',
+        draft: false,
+        headRef: 'engine-lockstep-auto',
         reviewGateOutcome: 'skipped',
       }),
     ],
-    ['failure', 'success', 'success'],
-    'Una PR con il review gate skipped non deve poter soddisfare verde il check richiesto.',
+    ['failure', 'success', 'success', 'success'],
+    'Una PR di contenuto con il review gate skipped deve essere rossa; la PR mirror e\u0027 esente perche\u0027 reviewata sul sito.',
   );
 });
 
@@ -100,4 +117,13 @@ test('workflow_dispatch con `pr_number` può eseguire il gate completo su una PR
   const skipped = stepBlock(yaml, 'Fail when required review gate is skipped');
   assert.match(skipped, /github\.event_name == 'workflow_dispatch'/);
   assert.match(skipped, /inputs\.pr_number/);
+  assert.match(skipped, /github\.event_name != 'pull_request'/);
+  assert.match(skipped, /github\.event\.pull_request\.head\.ref != 'engine-lockstep-auto'/);
+  assert.match(skipped, /github\.event\.pull_request\.head\.repo\.full_name != github\.repository/);
+
+  for (const name of ['PR-body completeness + multi-issue Closes (zero-Claude)', 'Resolve PR']) {
+    const block = stepBlock(yaml, name);
+    assert.match(block, /github\.event\.pull_request\.head\.ref != 'engine-lockstep-auto'/);
+    assert.match(block, /github\.event\.pull_request\.head\.repo\.full_name != github\.repository/);
+  }
 });
