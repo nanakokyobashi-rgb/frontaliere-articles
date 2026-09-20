@@ -3577,8 +3577,8 @@
       "sitePath": ".github/corpus-workflows/contract.json",
       "mode": "identical",
       "baseline": {
-        "site": "1120df4db6bfb0a1",
-        "corpus": "1120df4db6bfb0a1",
+        "site": "e30e3df3ce70b4a8",
+        "corpus": "e30e3df3ce70b4a8",
         "alignedAt": "2026-09-20"
       }
     },
@@ -3684,7 +3684,7 @@
       "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
       "baseline": {
         "site": null,
-        "corpus": "271dd9652c3c89ae",
+        "corpus": "2cf1736b0826634a",
         "alignedAt": "2026-09-20"
       }
     },
