@@ -148,6 +148,30 @@ test('un `#N` fuori da una riga di bucket non diventa un candidato', () => {
   assert.deepEqual(triageMarkerPersistenceExpectation(marker).buckets, [9102]);
 });
 
+test('un riferimento alla PR sulla riga del bucket non diventa un secondo bucket (#170)', () => {
+  const marker = [
+    '## Post-merge follow-up triage',
+    '',
+    '- Daily bucket: #9182 — follow-up(daily:2026-09-19): 27 item — valerielinc-ops/frontaliere-si-o-no',
+    '- Follow-up item: FU-2026-09-19-027',
+    '',
+    '## Outcome',
+    '- Il finding e\' stato deduplicato nel bucket collecting #9182; la riga Sources e\' stata aggiornata con PR #1593.',
+  ].join('\n');
+  const bucket = {
+    number: 9182,
+    title: 'follow-up(daily:2026-09-19): 27 item — valerielinc-ops/frontaliere-si-o-no',
+    body: '### FU-2026-09-19-027\n- Sources: PR #1593',
+  };
+
+  assert.deepEqual(triageMarkerPersistenceExpectation(marker).buckets, [9182]);
+  assert.equal(verifyTriageMarkerPersistence(marker, 1593, () => bucket), true);
+  assert.deepEqual(
+    triageMarkerPersistenceExpectation('Bucket daily sito: #9102 e bucket daily corpus: #1590').buckets,
+    [9102, 1590],
+  );
+});
+
 /* ── Il verso fail-closed ───────────────────────────────────────────────── */
 
 test('fail-closed: item dichiarati senza nessun bucket nominato', () => {
