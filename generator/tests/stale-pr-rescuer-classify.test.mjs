@@ -1164,6 +1164,11 @@ test('#314 — la generazione usa run_attempt, workflow id e infine check id', o
       /review più vecchia dell'head/,
       `Senza il tie-break ${label} il failure della generazione vecchia può mascherare il success.\n${body}`,
     );
+    assert.doesNotMatch(
+      body,
+      /check `tests \\(node --test\\)` = `failure`/,
+      `Il tie-break ${label} non deve scegliere il failure della generazione vecchia.\n${body}`,
+    );
   }
 });
 
