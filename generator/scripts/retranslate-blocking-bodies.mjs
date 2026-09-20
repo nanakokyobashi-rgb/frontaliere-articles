@@ -86,7 +86,7 @@
  *                      STDOUT ("DeepL key #1 quota exhausted"), quindi un
  *                      `--json` rediretto con `>` non e' parsabile.
  */
-import { readFileSync, writeFileSync, existsSync, renameSync, unlinkSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, renameSync, unlinkSync, realpathSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -799,7 +799,16 @@ function report(results, { APPLY, AS_JSON, total, OUT }) {
   }
 }
 
-// `import` dal test non deve far partire una run di rete.
-if (process.argv[1] && resolve(process.argv[1]) === resolve(fileURLToPath(import.meta.url))) {
+// `import` dal test non deve far partire una run di rete. Risolviamo entrambi
+// i lati per mantenere attiva la guardia anche via symlink.
+const invokedDirectly = (() => {
+  try {
+    return realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1] || '');
+  } catch {
+    return false;
+  }
+})();
+
+if (invokedDirectly) {
   main().catch((err) => { console.error(err); process.exit(1); });
 }
