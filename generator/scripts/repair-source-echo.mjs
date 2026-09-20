@@ -251,4 +251,7 @@ function main() {
   process.exitCode = verifyOnly ? 1 : 0;
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) main();
+if (process.argv[1]
+  && fs.realpathSync(fileURLToPath(import.meta.url)) === fs.realpathSync(process.argv[1])) {
+  main();
+}

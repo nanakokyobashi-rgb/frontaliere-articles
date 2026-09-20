@@ -60,11 +60,11 @@
  * ══════════════════════════════════════════════════════════════
  */
 
-import { readFileSync, writeFileSync, mkdirSync, statSync, readdirSync, copyFileSync, existsSync, unlinkSync, renameSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, statSync, readdirSync, copyFileSync, existsSync, unlinkSync, renameSync, realpathSync } from 'node:fs';
 import { execSync } from 'node:child_process';
 import { createInterface } from 'node:readline';
 import path from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScoresBeforeExit, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens, getDeclaredRequestTokenLimit, isModelAvailable, isPerRunCallCapReached } from './lib/ai-models.mjs';
 import { exitAfterDrain } from './lib/drain-stdio.mjs';
 
@@ -17077,7 +17077,7 @@ export { llmFactCheck };
 // this module (to reuse registerArticleFiles/buildBodyFile) must NOT execute it.
 const invokedDirectly = (() => {
   try {
-    return import.meta.url === pathToFileURL(process.argv[1] || '').href;
+    return realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1] || '');
   } catch {
     return false;
   }

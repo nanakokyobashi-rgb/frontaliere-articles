@@ -30,8 +30,8 @@
  *   TODAY_ISO=2026-08-08 …   # pin "today" (tests/CI)
  */
 import path from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
-import { writeFileSync, mkdirSync, renameSync, unlinkSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { writeFileSync, mkdirSync, renameSync, unlinkSync, realpathSync } from 'node:fs';
 import {
   registerArticleFiles,
   checkArticleIdExists,
@@ -233,7 +233,7 @@ async function main() {
 
 const invokedDirectly = (() => {
   try {
-    return import.meta.url === pathToFileURL(process.argv[1] || '').href;
+    return realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1] || '');
   } catch {
     return false;
   }

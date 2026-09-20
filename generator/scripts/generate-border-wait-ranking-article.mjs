@@ -28,8 +28,8 @@
  *   TODAY_ISO=2027-01-01 npx tsx scripts/...                            # pin "today" (tests/CI)
  */
 import path from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
-import { writeFileSync, mkdirSync, existsSync, readFileSync, renameSync, unlinkSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { writeFileSync, mkdirSync, existsSync, readFileSync, renameSync, unlinkSync, realpathSync } from 'node:fs';
 import { rankingFromStats, trendFromStats, computeFunFacts, computeWeekWindow, computeMovers } from './lib/border-wait-ranking.mjs';
 import { buildBorderWaitRankingArticle } from './lib/border-wait-ranking-content.mjs';
 import {
@@ -315,7 +315,7 @@ async function main() {
 
 const invokedDirectly = (() => {
   try {
-    return import.meta.url === pathToFileURL(process.argv[1] || '').href;
+    return realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1] || '');
   } catch {
     return false;
   }

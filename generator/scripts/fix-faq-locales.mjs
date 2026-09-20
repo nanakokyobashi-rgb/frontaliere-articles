@@ -15,10 +15,10 @@
  * l'array FAQ»). Opt-in: la run schedulata non la passa.
  */
 
-import { readFileSync, writeFileSync, existsSync, readdirSync, unlinkSync, renameSync, mkdirSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync, readdirSync, unlinkSync, renameSync, mkdirSync, realpathSync } from 'fs';
 import { createHash } from 'crypto';
 import { resolve, basename } from 'path';
-import { fileURLToPath, pathToFileURL } from 'url';
+import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import { freeTranslateWithRetry, logCascadeSummary } from './lib/free-translate.mjs';
 import { detectLanguageWithConfidence } from './lib/detect-language.mjs';
@@ -875,7 +875,7 @@ async function main() {
 // testarne le funzioni pure lo ESEGUE: leggerebbe `content/` e scriverebbe.
 // E' la guardia a rendere testabili `serializeFaqLiteral`/`parseFaqLiteral`,
 // cioe' le due meta' del difetto che questa PR chiude.
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (process.argv[1] && realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1])) {
   main().catch(async err => {
     console.error('Fatal error:', err);
     await exitAfterDrain(1);
