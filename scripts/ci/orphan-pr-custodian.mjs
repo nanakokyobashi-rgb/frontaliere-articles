@@ -69,7 +69,11 @@
 import { execFileSync } from 'node:child_process';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { isReviewerBot, REDFLAG_IMPORTANT_RE, VITEST_CHECK_NAME } from './lib/constants.mjs';
+import {
+  isReviewerBot,
+  REDFLAG_IMPORTANT_RE,
+  VITEST_CHECK_NAME,
+} from './lib/constants.mjs';
 // Parser CANONICO dei marker di revisione: normalizza i newline serializzati
 // (`\n` come due caratteri) e pretende la riga di contratto completa, esattamente
 // come `review-gate`. Una seconda copia della regex qui sarebbe la deriva che
@@ -149,7 +153,6 @@ function isManagedReview(review) {
   if (!review || typeof review !== 'object') return false;
   const state = String(review.state || '').toUpperCase();
   if (state === 'PENDING' || state === 'DISMISSED') return false;
-  if (review.user?.type !== 'Bot') return false;
   // Stessa allowlist dei gate (constants.mjs di ciascun repo); il marker Codex
   // resta locale perche' solo il corpus lo esporta.
   if (isReviewerBot(review.user)) return true;

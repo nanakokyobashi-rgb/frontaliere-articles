@@ -2,12 +2,14 @@
  * Reviewer-bot login set — UNA sorgente, sei consumer.
  *
  * `REVIEWER_BOT_LOGIN_RE` decide quali review valgono come verdetto del
- * reviewer. I consumer `.mjs` la importano; i workflow non possono (uno `run:`
- * YAML non importa una const JS) e usano il predicato jq derivato dalla stessa
- * `.source`. Questo guard è il legame fra le due copie: senza, il trigger del
- * 🔴-fixer può accettare l'App bot mentre il bundle e i gate di merge leggono
- * ancora il solo `claude` — un round speso sui findings sbagliati, un `## LGTM`
- * mai riconosciuto, e nessuno dei due fallisce.
+ * reviewer. I consumer `.mjs` la importano; i workflow adattati non possono
+ * (uno `run:` YAML non importa una const JS) e riproducono il predicato jq.
+ * `stale-pr-rescuer.yml` è l'eccezione REST: usa i due login `[bot]` esatti
+ * e non il metadata opzionale `user.type`. Questo guard tiene distinti i
+ * due contratti: senza, il trigger del 🔴-fixer può accettare l'App bot
+ * mentre il bundle e i gate di merge leggono ancora il solo `claude` — un
+ * round speso sui findings sbagliati, un `## LGTM` mai riconosciuto, e
+ * nessuno dei due fallisce.
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -19,6 +21,7 @@ import {
   REVIEWER_BOT_LOGIN_JQ,
   isReviewerBot,
   isManagedReview,
+  isCodexFallbackReview,
   CODEX_REVIEW_MARKER,
 } from '../../scripts/ci/lib/constants.mjs';
 
@@ -39,21 +42,25 @@ test('il predicato jq è derivato dalla regex, non riscritto', () => {
   assert.equal(REVIEWER_BOT_LOGIN_JQ, `test("${REVIEWER_BOT_LOGIN_RE.source}";"i")`);
 });
 
-test('il tipo Bot è parte del predicato condiviso', () => {
+test('il login REST esatto basta anche senza user.type', () => {
   assert.equal(isReviewerBot({ type: 'Bot', login: 'claude[bot]' }), true);
+  assert.equal(isReviewerBot({ login: 'frontaliere-automation[bot]' }), true);
+  assert.equal(isReviewerBot({ type: 'User', login: 'claude[bot]' }), true);
+  assert.equal(isReviewerBot({ type: 'Bot', login: 'frontaliere-automation' }), false);
   assert.equal(isReviewerBot({ type: 'User', login: 'claude-human' }), false);
-  assert.equal(isReviewerBot({ type: 'User', login: 'frontaliere-automation-human' }), false);
 });
 
 test('isManagedReview allinea login GraphQL e REST dopo la normalizzazione', () => {
   assert.equal(isManagedReview({ user: { type: 'Bot', login: 'claude[bot]' } }), true);
-  assert.equal(isManagedReview({ user: { type: 'Bot', login: 'frontaliere-automation' } }), true);
+  assert.equal(isManagedReview({ user: { login: 'frontaliere-automation[bot]' } }), true);
+  assert.equal(isManagedReview({ user: { type: 'Bot', login: 'frontaliere-automation' } }), false);
   assert.equal(isManagedReview({ author: { login: 'claude' } }), true);
   assert.equal(isManagedReview({ author: { login: 'claude[bot]' } }), true);
+  assert.equal(isManagedReview({ author: { login: 'frontaliere-automation' } }), true);
   assert.equal(isManagedReview({ author: { login: 'frontaliere-automation[bot]' } }), true);
   assert.equal(isManagedReview({ user: { login: 'claude[bot]' } }), true);
   assert.equal(isManagedReview({ author: { login: 'claude-code[bot]' } }), true);
-  assert.equal(isManagedReview({ user: { type: 'Bot', login: 'claude-code[bot]' } }), true);
+  assert.equal(isManagedReview({ user: { type: 'Bot', login: 'claude-code[bot]' } }), false);
   assert.equal(isManagedReview({ author: { login: 'claude-human' } }), false);
   assert.equal(isManagedReview({ user: { type: 'User', login: 'claude-human' } }), false);
   assert.equal(
@@ -72,19 +79,45 @@ test('isManagedReview allinea login GraphQL e REST dopo la normalizzazione', () 
   );
 });
 
-test('i workflow adattati usano il predicato jq condiviso', () => {
+test('il fallback Codex REST usa il login bot esatto senza user.type', () => {
+  const body = `${CODEX_REVIEW_MARKER}\n## LGTM`;
+  assert.equal(isCodexFallbackReview({ user: { login: 'github-actions[bot]' }, body }), true);
+  assert.equal(isCodexFallbackReview({ user: { login: 'frontaliere-automation[bot]' }, body }), true);
+  assert.equal(isManagedReview({ user: { login: 'github-actions[bot]' }, body }), true);
+  assert.equal(isCodexFallbackReview({ user: { login: 'github-actions' }, body }), false);
+  assert.equal(isCodexFallbackReview({ user: { login: 'github-actions[bot]' }, body: '## LGTM' }), false);
+});
+
+test('i workflow di review rispettano il contratto di identità specifico', () => {
   const workflows = [
     '.github/workflows/pr-redflag-fixer.yml',
-    '.github/workflows/stale-pr-rescuer.yml',
   ];
   for (const wf of workflows) {
     const src = read(wf);
-    assert.ok(src.includes(REVIEWER_BOT_LOGIN_JQ), `${wf} deve filtrare le review con ${REVIEWER_BOT_LOGIN_JQ}`);
+    assert.equal(
+      src.split(STRICT_REVIEWER_BOT_LOGIN_JQ).length - 1,
+      1,
+      `${wf} deve usare una allowlist REST esatta`,
+    );
+    assert.doesNotMatch(src, /select\(\.user\.type == "Bot"\)/,
+      `${wf} non deve dipendere da user.type`);
     assert.ok(
       !/test\("claude";"i"\)/.test(src),
       `${wf} filtra ancora il solo login claude`,
     );
   }
+  const staleRescuer = read('.github/workflows/stale-pr-rescuer.yml');
+  assert.equal(
+    staleRescuer.split(STRICT_REVIEWER_BOT_LOGIN_JQ).length - 1,
+    2,
+    'stale-pr-rescuer deve usare due allowlist reviewer esatte',
+  );
+  assert.doesNotMatch(staleRescuer, /\.user\.type/, 'stale-pr-rescuer non deve dipendere da user.type');
+  assert.doesNotMatch(
+    staleRescuer,
+    /test\("\^\(claude\|frontaliere-automation\)";"i"\)/,
+    'stale-pr-rescuer non deve usare l allowlist a prefisso',
+  );
   const testsYml = read('.github/workflows/tests.yml');
   const strictCount = testsYml.split(STRICT_REVIEWER_BOT_LOGIN_JQ).length - 1;
   assert.equal(strictCount, 4, 'tests.yml deve avere quattro selettori reviewer strettamente ancorati');
@@ -99,16 +132,12 @@ test('i workflow adattati usano il predicato jq condiviso', () => {
   }
   for (const [wf, expected] of [
     ['.github/workflows/pr-redflag-fixer.yml', 1],
-    ['.github/workflows/stale-pr-rescuer.yml', 2],
   ]) {
     const src = read(wf);
-    // The Codex fallback is an explicit second branch of the jq `select`, so
-    // the shared reviewer predicate is no longer the whole selector string.
-    const loginSelector = REVIEWER_BOT_LOGIN_JQ;
-    const botTypeSelector = 'select(.user.type == "Bot")';
+    const loginSelector = STRICT_REVIEWER_BOT_LOGIN_JQ;
     const count = (needle) => src.split(needle).length - 1;
     assert.equal(count(loginSelector), expected, `${wf} deve avere ${expected} selettori login reviewer`);
-    assert.equal(count(botTypeSelector), expected, `${wf} deve accoppiare user.type == Bot a ogni selettore reviewer`);
+    assert.equal(count('select(.user.type == "Bot")'), 0, `${wf} non deve filtrare user.type`);
   }
 });
 

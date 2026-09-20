@@ -49,7 +49,7 @@
  *
  * Stampa su stdout `body_rereview=true|false` (forma GITHUB_OUTPUT).
  */
-import { REVIEWER_BOT_LOGIN_RE } from './lib/constants.mjs';
+import { REST_REVIEWER_BOT_LOGIN_RE } from './lib/constants.mjs';
 import { importantFindings } from './review-scope.mjs';
 
 /** Raggiunto questo numero di verdetti sulla stessa HEAD non si ammette altro. */
@@ -67,9 +67,8 @@ export function flattenReviewPages(reviews) {
 }
 
 function isManagedBotReview(review) {
-  if (review?.user?.type !== 'Bot') return false;
   const login = String(review?.user?.login || '');
-  if (REVIEWER_BOT_LOGIN_RE.test(login)) return true;
+  if (REST_REVIEWER_BOT_LOGIN_RE.test(login)) return true;
   return /^github-actions\[bot\]$/i.test(login)
     && String(review?.body || '').includes('<!-- CODEX_FALLBACK_REVIEW -->');
 }

@@ -210,15 +210,15 @@ test('un Important su un path che non risolve NON si declassa mai', () => {
 
 test('la cronologia riconosce il reviewer PRIMARIO di questo repo', () => {
   // Il reviewer qui e' `github-actions[bot]` col marker del fallback Codex.
-  // Filtrando sul solo `REVIEWER_BOT_LOGIN_RE` gli id precedenti e il delta
-  // uscivano vuoti su ogni re-review reale: la regola sarebbe stata un no-op.
+  // Il predicato condiviso deve riconoscere il marker Codex: filtrando sul solo
+  // reviewer generico gli id precedenti e il delta uscirebbero vuoti.
   const source = read('scripts/ci/review-scope.mjs');
   const start = source.indexOf('function reviewHistoryContext(');
   assert.notEqual(start, -1);
   const block = source.slice(start, source.indexOf('\nfunction ', start + 10));
   assert.match(block, /CODEX_FALLBACK_REVIEW/u,
     'la cronologia scarta le review Codex, cioe\' quasi tutte');
-  assert.match(block, /github-actions\\\[bot\\\]/u);
+  assert.match(block, /isManagedReview\(review\)/u);
 });
 
 test('la storia e\' tutto tranne la review in corso, e la finestra e\' quella precedente', () => {

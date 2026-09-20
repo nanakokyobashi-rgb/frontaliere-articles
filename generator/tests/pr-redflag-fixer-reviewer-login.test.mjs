@@ -18,18 +18,19 @@ const src = fs.readFileSync(path.join(ROOT, '.github/workflows/pr-redflag-fixer.
 
 test('a frontaliere-automation[bot] review with 🔴 passes the job trigger and reaches author preflight', () => {
   const jobIf = src.match(/\n    if: \|\n([\s\S]*?)\n    runs-on:/)?.[1] ?? '';
-  assert.match(jobIf, /startsWith\(github\.event\.review\.user\.login, 'frontaliere-automation'\)/);
+  assert.match(jobIf, /github\.event\.review\.user\.login == 'frontaliere-automation\[bot\]'/);
   assert.match(jobIf, /contains\(github\.event\.review\.body, '🔴'\)/);
+  assert.doesNotMatch(jobIf, /github\.event\.review\.user\.type/);
   assert.doesNotMatch(jobIf, /github\.event\.pull_request\.user\.type/,
     'il job-level if: deve lasciare il predicato autore al preflight osservabile');
   assert.doesNotMatch(jobIf, /github\.event\.pull_request\.head\.ref/,
     'il job-level if: deve lasciare il predicato branch al preflight osservabile');
   assert.match(src, /PR_AUTHOR_TYPE: \$\{\{ github\.event\.pull_request\.user\.type \}\}/);
   assert.match(src, /if \[ "\$PR_AUTHOR_TYPE" != "Bot" \] && ! printf '%s' "\$HEAD_REF" \| grep -q '\^fix\//);
-  assert.match(jobIf, /github\.event\.review\.user\.type == 'Bot'/,
-    'il trigger deve accettare solo review emesse da un account Bot');
+  assert.doesNotMatch(jobIf, /github\.event\.review\.user\.type == 'Bot'/,
+    'il trigger non deve dipendere dal metadata opzionale user.type');
   assert.match(src, /contains\(github\.event\.review\.body, '🔴'\)/);
-  assert.match(src, /startsWith\(github\.event\.review\.user\.login, 'claude'\) \|\|/);
+  assert.match(jobIf, /github\.event\.review\.user\.login == 'claude\[bot\]'/);
   assert.match(jobIf, /github\.event\.review\.user\.login == 'github-actions\[bot\]'/,
     'il trigger deve riconoscere l\'identità Codex solo in forma esplicita');
   assert.match(jobIf, /CODEX_FALLBACK_REVIEW/,
@@ -48,8 +49,8 @@ test('collect-review jq, review-gate and auto-merge-eval use the same bot set', 
   // `REVIEWER_BOT_LOGIN_RE` da `scripts/ci/lib/constants.mjs`, ed e'
   // `generator/tests/reviewer-bot-login.test.mjs` a pinnare quel legame per
   // tutti e sei i consumer (qui resterebbe una copia della stessa regola).
-  assert.match(src, /select\(\.user\.type == "Bot"\)/);
-  assert.match(src, /test\("\^\(claude\|frontaliere-automation\)";"i"\)/);
+  assert.doesNotMatch(src, /select\(\.user\.type == "Bot"\)/);
+  assert.match(src, /test\("\^\(claude\\\\\[bot\\\\\]\|frontaliere-automation\\\\\[bot\\\\\]\)\$";"i"\)/);
   assert.match(src, /test\("\^github-actions\\\\\[bot\\\\\]\$";"i"\)/);
   assert.match(src, /contains\("<!-- CODEX_FALLBACK_REVIEW -->"\)/);
   assert.match(src, /contains\("## Findings \("\)/);
@@ -60,11 +61,8 @@ test('collect-review jq, review-gate and auto-merge-eval use the same bot set', 
     'tests.yml deve usare quattro allowlist reviewer ancorate',
   );
   assert.doesNotMatch(testsYml, /test\("\^\(claude\|frontaliere-automation\)";"i"\)/);
-  assert.doesNotMatch(
-    testsYml,
-    /\.user\.type\s*==\s*"Bot"[\s\S]{0,220}test\("\^\(claude\\\\\[bot\\\\\]\|frontaliere-automation\\\\\[bot\\\\\]\)\$";"i"\)/,
-    'il filtro reviewer di tests.yml non deve richiedere il metadata REST type',
-  );
+  assert.doesNotMatch(src, /\.user\.type\s*==\s*"Bot"/,
+    'il filtro reviewer di pr-redflag-fixer non deve richiedere il metadata REST type');
 });
 
 test('il redflag fixer ammette Codex solo con contesto PR/review verificato', () => {

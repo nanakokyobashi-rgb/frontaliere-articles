@@ -425,7 +425,10 @@ test('tutti i consumer di review usano la revisione del body corrente', () => {
   const collect = redflag.slice(collectStart, failClosedStart);
   assert.equal((collect.match(/gh api "repos\/\$REPO\/pulls\/\$PR_NUMBER"/g) ?? []).length, 1);
   assert.match(redflag, /La HEAD della PR è cambiata rispetto all'evento review/);
-  assert.match(redflag, /github\.event\.review\.user\.type == 'Bot'/);
+  assert.doesNotMatch(redflag, /github\.event\.review\.user\.type == 'Bot'/,
+    'il redflag fixer non deve dipendere dal metadata REST opzionale');
+  assert.match(redflag, /github\.event\.review\.user\.login == 'claude\[bot\]'/,
+    'il redflag fixer deve usare l allowlist del login bot esatto');
   assert.match(redflag, /id: precodex/);
   assert.match(redflag, /EXPECTED_BODY_REVISION: \$\{\{ steps\.ctx\.outputs\.review_revision \}\}/);
   assert.match(redflag, /EXPECTED_HEAD_SHA: \$\{\{ steps\.ctx\.outputs\.head_sha \}\}/);
