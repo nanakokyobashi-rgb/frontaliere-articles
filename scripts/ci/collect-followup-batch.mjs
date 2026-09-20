@@ -386,11 +386,13 @@ export function triageMarkerPersistenceExpectation(markerBody) {
   const body = String(markerBody || '');
   const items = [...body.matchAll(/Follow-up\s+item\s*:\s*(FU-\d{4}-\d{2}-\d{2}-\d{3})\b/gi)]
     .map((match) => match[1].toUpperCase());
-  // Il `#N` deve stare su una riga che parla di bucket: cosi' un `PR concatenata
-  // #9050` citato fra i drop non diventa un candidato.
+  // Il `#N` deve stare accanto a «bucket»: cosi' un `PR concatenata #9050`
+  // citato fra i drop non diventa un candidato. Prendiamo il primo numero dopo
+  // ciascuna occorrenza di «bucket», non ogni numero della riga: la prosa puo'
+  // citare la PR sorgente sulla stessa riga del bucket (issue #170).
   const buckets = body.split(/\r?\n/)
-    .filter((line) => /\bbucket\b/i.test(line))
-    .flatMap((line) => [...line.matchAll(/#([1-9]\d*)\b/g)].map((match) => Number(match[1])));
+    .flatMap((line) => [...line.matchAll(/\bbucket\b[^#\r\n]*#([1-9]\d*)\b/gi)]
+      .map((match) => Number(match[1])));
   // Una riga H2, non prosa: il modello a volte ripete il prefisso nudo prima
   // dell'intestazione dello zero (marker REALE di PR #1570:
   // `## Post-merge follow-up triage\n\n## Post-merge follow-up triage: zero
