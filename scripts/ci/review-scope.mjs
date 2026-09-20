@@ -328,6 +328,10 @@ export function classifyImportantFindings(body, changedFiles, repositoryPaths = 
     inScope,
     unresolved,
     bodyDeclassified,
+    bodyOnly: bodyDeclassified.length > 0
+      && outside.length === 0
+      && inScope.length === 0
+      && unresolved.length === 0,
     outsideOnly: (outside.length + bodyDeclassified.length) > 0
       && inScope.length === 0 && unresolved.length === 0,
     blocking: inScope.length > 0 || unresolved.length > 0,
@@ -602,6 +606,7 @@ export async function classifyAndMintReview(body, {
         reason: `diff non verificabile (${reason})`,
       })),
       bodyDeclassified,
+      bodyOnly: bodyDeclassified.length > 0 && stillOpen.length === 0,
       // Il ramo dichiara di voler sbloccare la PR con diff illeggibile i cui
       // unici 🔴 erano sul body: senza questo, `blocking` diventava false ma
       // `outsideOnly` restava false e il gate non approvava comunque —
@@ -660,6 +665,7 @@ if (process.argv[1] && process.argv[1].endsWith('review-scope.mjs')) {
       outside: result.outside.length,
       inScope: result.inScope.length,
       unresolved: result.unresolved.length,
+      bodyOnly: result.bodyOnly === true,
       minted: result.minted,
       followup: result.followup || null,
     })}\n`);

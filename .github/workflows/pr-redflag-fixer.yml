@@ -265,6 +265,7 @@ jobs:
           PR_AUTHOR_TYPE: ${{ steps.normalize.outputs.pr_author_type }}
         run: |
           set -uo pipefail
+          write_scope_output() { printf '%s\n' "$1" >> "$GITHUB_OUTPUT"; }
           if ! REVIEW_BODY=$(printf '%s' "$REVIEW_BODY_B64" | base64 --decode 2>/dev/null); then
             echo "::error::Review body non decodificabile: il redflag fixer resta fail-closed."
             echo "actionable=false" >> "$GITHUB_OUTPUT"; exit 0
@@ -378,6 +379,7 @@ jobs:
     outputs:
       blocking: ${{ steps.classify.outputs.blocking }}
       error: ${{ steps.classify.outputs.error }}
+      body_only: ${{ steps.classify.outputs.body_only }}
     steps:
       - name: Checkout dello script di classificazione
         uses: actions/checkout@v5
@@ -408,20 +410,52 @@ jobs:
           printf '%s\n' "$output"
           if [ "$status" -ne 0 ]; then
             echo "::warning::review-scope non verificabile: il fixer resta conservativamente azionabile."
-            echo "blocking=true" >> "$GITHUB_OUTPUT"
-            echo "error=true" >> "$GITHUB_OUTPUT"
+            write_scope_output "blocking=true"
+            write_scope_output "error=true"
+            write_scope_output "body_only=false"
             exit 0
           fi
           summary=$(printf '%s\n' "$output" | tail -n 1)
           blocking=$(printf '%s' "$summary" | jq -r '.blocking' 2>/dev/null || echo true)
+          body_only=$(printf '%s' "$summary" | jq -r '.bodyOnly' 2>/dev/null || echo false)
           if [ "$blocking" != "true" ] && [ "$blocking" != "false" ]; then
             echo "::warning::output review-scope inatteso: il fixer resta conservativamente azionabile."
             blocking=true
-            echo "error=true" >> "$GITHUB_OUTPUT"
+            write_scope_output "error=true"
           else
-            echo "error=false" >> "$GITHUB_OUTPUT"
+            write_scope_output "error=false"
           fi
-          echo "blocking=$blocking" >> "$GITHUB_OUTPUT"
+          if [ "$body_only" != "true" ] && [ "$body_only" != "false" ]; then
+            echo "::warning::flag bodyOnly inatteso: il fixer resta conservativamente azionabile."
+            body_only=false
+            write_scope_output "error=true"
+          fi
+          write_scope_output "blocking=$blocking"
+          write_scope_output "body_only=$body_only"
+
+          # Un finding BODY-only gia' assolto dal contratto deterministico non
+          # e' lavoro per Claude: invocarlo qui riscriverebbe il body senza il
+          # giudice del contratto. Il marker rende il terminale esplicito e
+          # idempotente, cosi' il no-op non resta un verde senza traccia.
+          if [ "$body_only" = "true" ]; then
+            review_sha=$(printf '%s' "$REVIEW_BODY" | sha256sum | awk '{print $1}')
+            marker="<!-- REDFLAG_BODY_DECLASSIFIED: $review_sha -->"
+            if ! comments=$(gh api "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments" \
+              --paginate --jq '.[].body' 2>/dev/null); then
+              echo "::error::ledger commenti BODY-only illeggibile: terminale deterministico non verificabile."
+              write_scope_output "error=true"
+              exit 1
+            fi
+            if printf '%s\n' "$comments" | grep -qF "$marker"; then
+              echo "Finding BODY-only gia' registrato ($review_sha) → nessun round, nessun Claude."
+            else
+              if ! gh pr comment "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --body "$(printf '%s\n\n%s' "$marker" '✅ 🔴-fixer: finding Important solo sul BODY declassato dal contratto deterministico verde; nessun fix automatico o follow-up necessario.')"; then
+                echo "::error::marker BODY-only non scrivibile: terminale deterministico non verificabile."
+                write_scope_output "error=true"
+                exit 1
+              fi
+            fi
+          fi
 
   redflag-fix:
     needs: [preflight, scope]
