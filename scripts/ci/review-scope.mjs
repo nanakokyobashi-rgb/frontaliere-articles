@@ -290,6 +290,9 @@ export function classifyImportantFindings(body, changedFiles, repositoryPaths = 
   // delta non calcolabile → nessuna declassazione: su un dato mancante si
   // tiene il finding, non lo si butta.
   changedLinesSince = null,
+  // Path che il compare ha riportato ma di cui NON ha dato il patch: non si
+  // puo' dire che le loro righe non siano cambiate.
+  uncomparablePaths = null,
 } = {}) {
   const changed = [...new Set((changedFiles || []).map(normalizePath).filter(Boolean))];
   const treeAvailable = repositoryPaths !== null && repositoryPaths !== undefined;
@@ -306,8 +309,18 @@ export function classifyImportantFindings(body, changedFiles, repositoryPaths = 
   // merge di main che NON tocca i file della PR il patch e' vuoto, e senza il
   // seed ogni path citato risulterebbe «mai confrontato» — cioe' esattamente
   // il caso che la regola deve coprire.
+  // I path che il compare ha riportato SENZA patch (binari, file troppo
+  // grandi, patch omessa) non sono «intatti»: sono NON VERIFICABILI riga per
+  // riga, ed e' diverso da «assente dal compare», che invece significa
+  // davvero non toccato nella finestra. Restano quindi fuori dalla mappa, e
+  // `unchangedLineImportants` pretende che OGNI path citato sia dentro.
+  const uncomparable = uncomparablePaths instanceof Set
+    ? uncomparablePaths
+    : new Set(uncomparablePaths || []);
   const comparedLines = changedLinesSince instanceof Map
-    ? new Map(changed.map((file) => [file, changedLinesSince.get(file) ?? new Set()]))
+    ? new Map(changed
+      .filter((file) => !uncomparable.has(file))
+      .map((file) => [file, changedLinesSince.get(file) ?? new Set()]))
     : null;
   // I candidati si costruiscono QUI, sui soli finding che il parser sa
   // delimitare: di un finding ambiguo non si puo' dire «punta a una riga non
@@ -360,16 +373,24 @@ export function classifyImportantFindings(body, changedFiles, repositoryPaths = 
   // finding puo' essere declassato solo dopo aver dimostrato che il path
   // esiste, risolve, ed e' fra i file che la PR tocca.
   if (comparedLines) {
-    const staleKeys = new Set(unchangedLineImportants({
-      findings: inScope.filter((finding) => !finding.parserUncertain),
-      priorFindingIds: priorFindingIds instanceof Set
-        ? priorFindingIds
-        : new Set(priorFindingIds || []),
-      changedLines: comparedLines,
-    }).map((finding) => finding.lineNumber));
+    const known = priorFindingIds instanceof Set
+      ? priorFindingIds
+      : new Set(priorFindingIds || []);
+    // Si interroga il predicato UN FINDING ALLA VOLTA. Una chiave — la riga
+    // del marker, o qualunque altra posizione — non e' un'identita': due
+    // finding distinti che la condividessero verrebbero rimossi insieme, e un
+    // rilievo reale sparirebbe dal blocco del gate perche' un altro era
+    // declassabile. Qui non c'e' nessuna chiave da far collidere.
     for (let index = inScope.length - 1; index >= 0; index -= 1) {
-      if (!staleKeys.has(inScope[index].lineNumber)) continue;
-      const [finding] = inScope.splice(index, 1);
+      const finding = inScope[index];
+      if (finding.parserUncertain) continue;
+      const stale = unchangedLineImportants({
+        findings: [finding],
+        priorFindingIds: known,
+        changedLines: comparedLines,
+      });
+      if (stale.length === 0) continue;
+      inScope.splice(index, 1);
       staleDeclassified.unshift({ ...finding, stableId: stableFindingId(finding) });
     }
   }
@@ -499,7 +520,13 @@ function reviewHistoryContext(repo, pr, headSha) {
       .filter((file) => typeof file?.patch === 'string' && file?.filename)
       .map((file) => `+++ b/${file.filename}\n${file.patch}`)
       .join('\n');
-    return { priorFindingIds, changedLinesSince: changedLinesFromPatch(patch) };
+    // Un file che il compare RIPORTA ma di cui non da' il patch e' cambiato e
+    // non confrontabile riga per riga: dichiararlo, cosi' non passa per
+    // «intatto» attraverso il seed dell'elenco file della PR.
+    const uncomparablePaths = new Set(compare.files
+      .filter((file) => file?.filename && typeof file?.patch !== 'string')
+      .map((file) => String(file.filename)));
+    return { priorFindingIds, changedLinesSince: changedLinesFromPatch(patch), uncomparablePaths };
   } catch (error) {
     // Delta non calcolabile: nessuna declassazione. Su un dato mancante si
     // tiene il finding, non lo si butta.
@@ -774,6 +801,7 @@ export async function classifyAndMintReview(body, {
     prBody: effectivePrBody,
     priorFindingIds: history.priorFindingIds,
     changedLinesSince: history.changedLinesSince,
+    uncomparablePaths: history.uncomparablePaths ?? null,
   });
   for (const finding of result.staleDeclassified ?? []) {
     console.log(`review-scope: DECLASSIFIED-UNCHANGED-LINE finding=L${finding.lineNumber} id=${finding.stableId} reason=Important NUOVO ancorato solo su righe non toccate dall'ultima review; per tenerlo bloccante dichiara \`🔴 Important: [regression]\``);

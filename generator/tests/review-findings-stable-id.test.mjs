@@ -241,3 +241,51 @@ test('la storia e\' tutto tranne la review in corso, e la finestra e\' quella pr
   assert.match(block, /changedLinesSince: new Map\(\)/u,
     'una review precedente sulla STESSA HEAD deve dare delta VUOTO, non «non calcolabile»');
 });
+
+test('due finding sulla stessa riga non si rimuovono a vicenda', () => {
+  // `staleKeys` teneva solo la riga del marker: due finding distinti che la
+  // condividessero venivano rimossi INSIEME, e un rilievo reale spariva dal
+  // blocco del gate perche' un altro era declassabile. Ora il predicato si
+  // interroga un finding alla volta e non c'e' nessuna chiave da far
+  // collidere. Finding della review su #1641.
+  const source = read('scripts/ci/review-scope.mjs');
+  assert.ok(!/staleKeys/u.test(source), 'esiste ancora una chiave posizionale');
+  assert.match(source, /findings: \[finding\],/u,
+    'il predicato non viene interrogato un finding alla volta');
+
+  // Comportamento: uno declassabile e uno no, nello stesso review body.
+  const review = [
+    '## Findings (Important: 2)',
+    '`scripts/ci/review-scope.mjs:900`: 🔴 Important: `resolveCitedPath()` non regge.',
+    '`scripts/ci/review-scope.mjs:2`: 🔴 Important: l\'import e\' sbagliato.',
+  ].join('\n');
+  const result = classifyImportantFindings(review, ['scripts/ci/review-scope.mjs'], null, {
+    priorFindingIds: new Set(),
+    changedLinesSince: new Map([['scripts/ci/review-scope.mjs', new Set([2])]]),
+  });
+  assert.equal(result.staleDeclassified.length, 1, 'solo quello su riga non toccata');
+  assert.equal(result.inScope.length, 1, 'quello sulla riga toccata resta bloccante');
+  assert.equal(result.blocking, true);
+});
+
+test('un file cambiato ma non confrontabile riga per riga non e\' «intatto»', () => {
+  // Il compare riporta il file (quindi E' cambiato) ma senza patch: binario,
+  // troppo grande, o patch omessa. Il seed con l'elenco file della PR lo
+  // marcava «confrontato e intatto» e un Important su quel file finiva
+  // declassato senza prova. Finding della review su #1641.
+  const review = ['## Findings (Important: 1)',
+    '`generator/scripts/big-generated.mjs:1`: 🔴 Important: il file generato e\' corrotto.'].join('\n');
+  const opts = {
+    priorFindingIds: new Set(),
+    changedLinesSince: new Map([['scripts/ci/review-scope.mjs', new Set([2])]]),
+  };
+  const without = classifyImportantFindings(review, ['generator/scripts/big-generated.mjs'], ['generator/scripts/big-generated.mjs'], opts);
+  assert.equal(without.staleDeclassified.length, 1, 'controllo: senza la dichiarazione verrebbe declassato');
+
+  const declared = classifyImportantFindings(review, ['generator/scripts/big-generated.mjs'], ['generator/scripts/big-generated.mjs'], {
+    ...opts,
+    uncomparablePaths: new Set(['generator/scripts/big-generated.mjs']),
+  });
+  assert.equal(declared.staleDeclassified.length, 0, 'dichiarato non confrontabile: resta bloccante');
+  assert.equal(declared.blocking, true);
+});
