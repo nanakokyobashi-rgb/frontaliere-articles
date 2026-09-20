@@ -85,6 +85,7 @@ function runClassifier({
   fixRoundMarker = 'REDCHECK_FIX_ROUND',
   markerCommentId = '',
   commentsJson = '[]',
+  refundCommentStatus = 0,
   claimToken = '',
   source = WORKFLOW,
 } = {}) {
@@ -117,7 +118,7 @@ fakeExecutable(bin, 'gh', String.raw`
 echo "$*" >> "$GH_LOG"
 if echo "$*" | grep -q -- '-X DELETE'; then exit 0; fi
 if echo "$*" | grep -q 'api user'; then printf '{"login":"fixture-bot"}\n'; exit 0; fi
-if echo "$*" | grep -q 'pr comment'; then exit 0; fi
+if echo "$*" | grep -q 'pr comment'; then exit "$REFUND_COMMENT_STATUS"; fi
 if echo "$*" | grep -q 'issues/.*/comments'; then
   if echo "$*" | grep -q -- '--jq'; then
     printf '0\n'
@@ -165,6 +166,7 @@ printf '%s' "$FAKE_BODY"
         FAKE_REMOTE: remote,
         FAKE_BODY: currentBody,
         FAKE_COMMENTS_JSON: commentsJson,
+        REFUND_COMMENT_STATUS: String(refundCommentStatus),
         RUNNER_TEMP: temp,
       },
       encoding: 'utf8',
@@ -524,4 +526,172 @@ test('redflag rimborsa il marker di round su SUPERSEDED', () => {
   assert.match(result.stdout, /rimborsato/);
   assert.match(result.ghLog, /api .*DELETE .*issues\/comments\/77/);
   assert.match(result.ghLog, /REDFLAG_FIX_REFUNDED: 2/);
+});
+
+test('il rimborso pubblica il handle definitivo solo dopo la DELETE trusted', () => {
+  const baseBody = '## Implementato\n\n- body iniziale';
+  const scenarios = [
+    {
+      name: 'redflag superseded',
+      source: REDFLAG_WORKFLOW,
+      actionOutcome: 'failure',
+      startSha: 'pr-sha',
+      baseSha: 'merged-sha',
+      head: 'merged-sha',
+      remote: 'external-sha',
+      marker: 'REDFLAG_FIX_ROUND',
+      expectedStatus: 0,
+    },
+    {
+      name: 'redcheck superseded',
+      source: WORKFLOW,
+      actionOutcome: 'failure',
+      startSha: 'pr-sha',
+      baseSha: 'merged-sha',
+      head: 'merged-sha',
+      remote: 'external-sha',
+      marker: 'REDCHECK_FIX_ROUND',
+      expectedStatus: 0,
+    },
+    {
+      name: 'redflag skipped',
+      source: REDFLAG_WORKFLOW,
+      actionOutcome: 'skipped',
+      marker: 'REDFLAG_FIX_ROUND',
+      expectedStatus: 1,
+    },
+  ];
+
+  for (const scenario of scenarios) {
+    const result = runClassifier({
+      ...scenario,
+      baseBody,
+      currentBody: baseBody,
+      fixRound: '1',
+      fixRoundMarker: scenario.marker,
+      markerCommentId: '42',
+      commentsJson: JSON.stringify([roundMarkerComment({
+        marker: scenario.marker,
+        round: 1,
+        id: 42,
+        body: baseBody,
+      })]),
+    });
+    assert.equal(result.status, scenario.expectedStatus, scenario.name + ': esito inatteso:\n'
+      + result.stdout + '\n' + result.stderr);
+    const lines = result.ghLog.trim().split('\n');
+    const expectedAttempt = scenario.marker.replace('_ROUND', '_REFUND_ATTEMPT') + ': 1';
+    const expectedFinal = scenario.marker.replace('_ROUND', '_REFUNDED') + ': 1';
+    const attemptAt = lines.findIndex((line) => line.includes(expectedAttempt));
+    const deleteAt = lines.findIndex((line) => line.includes('api --method DELETE')
+      && line.includes('/issues/comments/42'));
+    const finalAt = lines.findIndex((line) => line.includes(expectedFinal));
+    assert.ok(attemptAt >= 0, scenario.name + ': commento provvisorio assente\n' + result.ghLog);
+    assert.ok(deleteAt > attemptAt, scenario.name + ': DELETE prima del commento provvisorio\n'
+      + result.ghLog);
+    assert.ok(finalAt > deleteAt, scenario.name + ': handle definitivo prima della DELETE\n'
+      + result.ghLog);
+  }
+});
+
+test('redflag distingue failure/skipped/cancelled/success e contabilizza il marker', () => {
+  const baseBody = '## Implementato\n\n- body iniziale';
+  const scenarios = [
+    { outcome: 'failure', status: 1, refunded: false },
+    { outcome: 'skipped', status: 1, refunded: true },
+    { outcome: 'cancelled', status: 1, refunded: false },
+    { outcome: 'success', status: 0, refunded: false },
+  ];
+
+  for (const { outcome, status, refunded } of scenarios) {
+    const result = runClassifier({
+      source: REDFLAG_WORKFLOW,
+      baseBody,
+      currentBody: baseBody,
+      actionOutcome: outcome,
+      fixRound: '1',
+      fixRoundMarker: 'REDFLAG_FIX_ROUND',
+      markerCommentId: '42',
+      commentsJson: JSON.stringify([roundMarkerComment({
+        marker: 'REDFLAG_FIX_ROUND', round: 1, id: 42, body: baseBody,
+      })]),
+    });
+    assert.equal(
+      result.status,
+      status,
+      `${outcome}: esito inatteso:\nstdout=${result.stdout}\nstderr=${result.stderr}`,
+    );
+    if (refunded) {
+      assert.match(result.ghLog, /api --method DELETE .*issues\/comments\/42/, `${outcome}: marker non cancellato`);
+      assert.match(result.ghLog, /REDFLAG_FIX_REFUNDED: 1/, `${outcome}: handle di rimborso assente`);
+    } else {
+      assert.doesNotMatch(result.ghLog, /issues\/comments\/42/, `${outcome}: marker rimborsato senza prova di skipped`);
+      assert.doesNotMatch(result.ghLog, /REDFLAG_FIX_REFUNDED: 1/, `${outcome}: handle di rimborso inatteso`);
+    }
+  }
+});
+
+test('un rimborso non scrivibile conserva il marker prima della DELETE', () => {
+  const baseBody = '## Implementato\n\n- body iniziale';
+  const scenarios = [
+    {
+      name: 'redflag skipped',
+      source: REDFLAG_WORKFLOW,
+      actionOutcome: 'skipped',
+      expectedStatus: 1,
+    },
+    {
+      name: 'redflag superseded',
+      source: REDFLAG_WORKFLOW,
+      actionOutcome: 'failure',
+      startSha: 'pr-sha',
+      baseSha: 'merged-sha',
+      head: 'merged-sha',
+      remote: 'external-sha',
+      expectedStatus: 0,
+    },
+    {
+      name: 'redcheck superseded',
+      source: WORKFLOW,
+      actionOutcome: 'failure',
+      startSha: 'pr-sha',
+      baseSha: 'merged-sha',
+      head: 'merged-sha',
+      remote: 'external-sha',
+      expectedStatus: 0,
+    },
+  ];
+
+  for (const scenario of scenarios) {
+    const result = runClassifier({
+      ...scenario,
+      baseBody,
+      currentBody: baseBody,
+      fixRound: '1',
+      fixRoundMarker: scenario.source === REDFLAG_WORKFLOW
+        ? 'REDFLAG_FIX_ROUND'
+        : 'REDCHECK_FIX_ROUND',
+      markerCommentId: '42',
+      refundCommentStatus: 1,
+      commentsJson: JSON.stringify([roundMarkerComment({
+        marker: scenario.source === REDFLAG_WORKFLOW
+          ? 'REDFLAG_FIX_ROUND'
+          : 'REDCHECK_FIX_ROUND',
+        round: 1,
+        id: 42,
+        body: baseBody,
+      })]),
+    });
+    assert.equal(
+      result.status,
+      scenario.expectedStatus,
+      `${scenario.name}: esito inatteso:\nstdout=${result.stdout}\nstderr=${result.stderr}`,
+    );
+    assert.match(result.ghLog, /pr comment/, `${scenario.name}: rimborso non tentato`);
+    assert.doesNotMatch(
+      result.ghLog,
+      /api .*DELETE .*issues\/comments\/42/,
+      `${scenario.name}: marker cancellato prima del rimborso`,
+    );
+  }
 });
