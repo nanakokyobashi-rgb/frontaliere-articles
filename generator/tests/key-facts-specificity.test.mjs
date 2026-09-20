@@ -21,9 +21,11 @@ import {
 } from '../scripts/lib/key-facts-specificity.mjs';
 import {
   AI_SEARCH_PROMPT_BLOCK_IT,
+  MAX_KEY_FACTS,
   buildAiSearchMarkdown,
   buildBackfillPrompt,
   getKeyFactsHeading,
+  validateBackfillPayload,
 } from '../scripts/lib/ai-search-template.mjs';
 import { SCHEMA_PLACEHOLDER_LITERALS } from '../scripts/lib/prompt-placeholder-guard.mjs';
 import { scanCorpus, unescapeTs } from '../scripts/scan-vacuous-key-facts.mjs';
@@ -127,8 +129,25 @@ test('le intestazioni emesse dal serializzatore sono tutte leggibili', () => {
   }
 });
 
+test('il serializzatore accetta solo i fatti source-backed disponibili fino al cap', () => {
+  const tldr = ['Un fatto', 'Un altro fatto'];
+  const facts = Array.from({ length: MAX_KEY_FACTS }, (_, index) => ({
+    term: `Fatto ${index + 1}`,
+    value: 'valore dalla fonte',
+  }));
+  for (const count of [0, 1, 2]) {
+    assert.doesNotThrow(() => buildAiSearchMarkdown({ tldr, keyFacts: facts.slice(0, count) }));
+  }
+  assert.throws(
+    () => buildAiSearchMarkdown({ tldr, keyFacts: [...facts, { term: 'Extra', value: 'valore' }] }),
+    /0-8 entries/,
+  );
+});
+
 test('il prompt AI Search ammette tutti i fatti presenti nella fonte senza placeholder', () => {
-  assert.match(AI_SEARCH_PROMPT_BLOCK_IT, /3-8 coppie/);
+  assert.match(AI_SEARCH_PROMPT_BLOCK_IT, /up to 8/);
+  assert.match(AI_SEARCH_PROMPT_BLOCK_IT, /meno di tre fatti utili/i);
+  assert.doesNotMatch(AI_SEARCH_PROMPT_BLOCK_IT, /3-8 coppie/);
   assert.doesNotMatch(AI_SEARCH_PROMPT_BLOCK_IT, /5-8 coppie/);
   assert.match(AI_SEARCH_PROMPT_BLOCK_IT, /termine→valore/);
   assert.match(AI_SEARCH_PROMPT_BLOCK_IT, /dalla fonte/);
@@ -142,26 +161,46 @@ test('il prompt AI Search ammette tutti i fatti presenti nella fonte senza place
 
 test('il backfill AI Search mantiene il budget e i fatti source-backed', () => {
   const prompt = buildBackfillPrompt({ title: 'Titolo', fullBody: 'Testo della fonte.' });
-  assert.match(prompt, /3-8 coppie/);
+  assert.match(prompt, /up to 8/);
+  assert.match(prompt, /anche se sono meno di tre/i);
+  assert.doesNotMatch(prompt, /3-8 coppie/);
   assert.doesNotMatch(prompt, /5-8 coppie/);
   assert.match(prompt, /dati presenti nell'articolo/i);
   assert.match(prompt, /campi assenti/i);
   assert.match(prompt, /niente placeholder/i);
-  assert.equal((prompt.match(/\{"term":/g) || []).length, 3);
+  assert.equal((prompt.match(/\{"term":/g) || []).length, 2);
+});
+
+test('il validatore backfill conserva anche zero-due fatti e usa il cap condiviso', () => {
+  const tldr = ['Uno', 'Due'];
+  const facts = Array.from({ length: MAX_KEY_FACTS + 1 }, (_, index) => ({
+    term: `Fatto ${index + 1}`,
+    value: 'valore dalla fonte',
+  }));
+  for (const count of [0, 1, 2]) {
+    assert.doesNotThrow(() => validateBackfillPayload({ tldr, keyFacts: facts.slice(0, count) }));
+  }
+  const capped = { tldr, keyFacts: facts };
+  assert.doesNotThrow(() => validateBackfillPayload(capped));
+  assert.equal(capped.keyFacts.length, MAX_KEY_FACTS);
 });
 
 test('lo schema body1 condivide il contratto AI Search e il literal del guard', () => {
   const source = fs.readFileSync(CREATE_ARTICLE_PATH, 'utf8');
   const body1 = source.match(/"body1": "([^"]+)"/)?.[1];
   assert.ok(body1, 'literal body1 non trovato nello schema JSON del prompt');
-  assert.match(body1, /3-8 coppie termine→valore presenti nella fonte/);
-  assert.match(body1, /campi assenti, niente placeholder/);
+  assert.match(body1, /sole coppie termine→valore disponibili, up to 8: usa solo fatti presenti nella fonte, anche se sono meno di tre/);
+  assert.doesNotMatch(body1, /3-8 coppie/);
+  assert.match(body1, /campi assenti, senza placeholder/);
   assert.doesNotMatch(body1, /5-8 coppie/);
   assert.doesNotMatch(body1, /\*\*Cosa\/Quando\/Dove\/Chi\/Importo\*\*/);
   assert.ok(
     SCHEMA_PLACEHOLDER_LITERALS.includes(body1),
     'il literal body1 non e\' allineato alla copia usata dal prompt-placeholder guard',
   );
+  assert.match(source, /Ometti il campo o il dettaglio; non usare placeholder/);
+  assert.doesNotMatch(source, /Scrivi "non ancora specificato"/);
+  assert.doesNotMatch(source, /scrivi "non ancora specificato", "in fase di definizione"/);
 });
 
 test('il formato emesso dei fatti chiave viene interpretato dal gate', () => {
