@@ -336,6 +336,14 @@ test('tests.yml claims before review work and finalizes without gating the requi
   const incrementalGuard = workflow.slice(workflow.indexOf('last=$(printf'), workflow.indexOf('if [ -z "$last"', workflow.indexOf('last=$(printf')));
   assert.match(incrementalGuard, /--arg revision \"\$REVIEW_REVISION\"/);
   assert.match(incrementalGuard, /has_current_revision\(\$revision\)/);
+  const compareGuard = workflow.slice(workflow.indexOf('compare_json=', workflow.indexOf('last=$(printf')));
+  assert.match(compareGuard, /gh api \"repos\/\$REPO\/compare\/\$last\.\.\.\$HEAD_SHA\"/);
+  assert.match(compareGuard, /type == \"object\"/);
+  assert.match(compareGuard, /\.files \| type == \"array\"/);
+  assert.match(compareGuard, /all\(\.files\[\]\;/);
+  assert.match(compareGuard, /if \[ -z \"\$changed\" \]; then[\s\S]*echo \"skip=true\"/);
+  assert.match(compareGuard, /Compare valido con files=\[\]/);
+  assert.doesNotMatch(compareGuard, /Compare vuoto → review piena/);
   assert.match(workflow, /steps\.review_claim\.outputs\.claim_allowed == 'true'/);
   assert.match(workflow, /REVIEW_GATE_FALLBACK_APPROVED:/);
 

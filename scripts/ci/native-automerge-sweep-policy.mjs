@@ -408,6 +408,11 @@ export function exactCheckRunSnapshot(pages, headSha, repository = null) {
         if (candidate.source === 'timestamp') {
           if (candidate.createdAt !== previous.createdAt) {
             newer = candidate.createdAt > previous.createdAt;
+          } else if ((candidate.runAttempt === 0) !== (previous.runAttempt === 0)) {
+            // A timestamp tie cannot be ordered when only one check-run has a
+            // verified attempt.  Do not let workflow-run ID turn a partial
+            // generation record into a silent stale/newer choice.
+            return deny(`check-run ${run.name} con attempt timestamped parziale`);
           } else if (candidate.runAttempt !== previous.runAttempt
               && candidate.runAttempt !== 0 && previous.runAttempt !== 0) {
             newer = candidate.runAttempt > previous.runAttempt;
