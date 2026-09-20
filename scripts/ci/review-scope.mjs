@@ -40,6 +40,7 @@ const PR_BODY_ANCHOR_LOOSE_RE = /`?PR body[:#]L?([1-9]\d*)/iu;
 // L'endpoint `compare` di GitHub restituisce al massimo 300 file e non
 // dichiara il troncamento: raggiunto il tetto, l'elenco non e' una prova.
 const COMPARE_FILES_CAP = 300;
+const UNIFIED_HUNK_HEADER_RE = /^@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@[^\r\n]*$/u;
 const PR_BODY_ANCHOR_ALL_RE = /`?PR body[:#]L?([1-9]\d*)(?:\s*[-–]\s*L?([1-9]\d*))?/giu;
 // Cio' che il contratto deterministico NON sa giudicare resta bloccante anche
 // se ancorato al body: il claim di performance senza baseline (REVIEW.md punto
@@ -492,6 +493,113 @@ function resolveHeadSha(repo, pr) {
   }
 }
 
+/**
+ * Verifica uno stream unified completo, non solo la presenza di `@@`.
+ *
+ * Il compare API consegna un `patch` per file senza gli header `+++`; ogni
+ * hunk deve pero' consumare esattamente i conteggi old/new dichiarati. Un
+ * residuo, un hunk successivo malformato, un header `+++` o un corpo con un
+ * prefisso diverso da spazio/+/- (e dal marker «No newline») rende il path
+ * non confrontabile: non lo si passa al parser che calcola le righe.
+ */
+function isValidUnifiedPatch(patch) {
+  if (typeof patch !== 'string' || !patch) return false;
+  const lines = patch.split(/\r?\n/u);
+  // Il newline finale e' normale nel payload; due newline lascerebbero invece
+  // un residuo vuoto che deve invalidare lo stream.
+  if (lines.at(-1) === '') lines.pop();
+  if (lines.length === 0) return false;
+
+  let index = 0;
+  let hunks = 0;
+  while (index < lines.length) {
+    const header = UNIFIED_HUNK_HEADER_RE.exec(lines[index]);
+    if (!header) return false;
+    const oldCount = header[2] === undefined ? 1 : Number(header[2]);
+    const newCount = header[4] === undefined ? 1 : Number(header[4]);
+    if (!Number.isSafeInteger(oldCount) || !Number.isSafeInteger(newCount)
+        || (oldCount === 0 && newCount === 0)) return false;
+    index += 1;
+    let oldRemaining = oldCount;
+    let newRemaining = newCount;
+    let bodyLines = 0;
+    let contentSeen = false;
+    while (oldRemaining > 0 || newRemaining > 0) {
+      if (index >= lines.length) return false;
+      const line = lines[index];
+      if (line === '\\ No newline at end of file') {
+        if (!contentSeen) return false;
+        index += 1;
+        continue;
+      }
+      const prefix = line[0];
+      if (prefix === ' ') {
+        if (oldRemaining === 0 || newRemaining === 0) return false;
+        oldRemaining -= 1;
+        newRemaining -= 1;
+      } else if (prefix === '+') {
+        if (newRemaining === 0) return false;
+        newRemaining -= 1;
+      } else if (prefix === '-') {
+        if (oldRemaining === 0) return false;
+        oldRemaining -= 1;
+      } else {
+        return false;
+      }
+      contentSeen = true;
+      bodyLines += 1;
+      index += 1;
+    }
+    if (bodyLines === 0) return false;
+    // GitHub may put the no-newline marker after the last body line, after
+    // both counters reached zero. It consumes no old/new line.
+    while (index < lines.length && lines[index] === '\\ No newline at end of file') {
+      index += 1;
+    }
+    hunks += 1;
+  }
+  return hunks > 0;
+}
+
+/**
+ * Verifica la parte del payload compare usata per il delta per-riga.
+ *
+ * L'API puo' rispondere con un oggetto valido ma con `files` troncato o con
+ * elementi corrotti. Lasciare che il filtro sotto li scarti trasformerebbe
+ * una risposta non verificabile in una Map vuota: il seed dei file della PR
+ * la leggerebbe come «nessuna riga cambiata», cioe' una prova permissiva.
+ * `null` e' quindi il solo risultato accettabile per una forma invalida.
+ */
+function verifiedCompareFiles(compare) {
+  if (!compare || typeof compare !== 'object' || Array.isArray(compare)
+      || !Array.isArray(compare.files)) return null;
+  const seen = new Set();
+  const files = [];
+  const uncomparablePaths = new Set();
+  for (const file of compare.files) {
+    if (!file || typeof file !== 'object' || Array.isArray(file)
+        || typeof file.filename !== 'string') return null;
+    if (/[\r\n]/u.test(file.filename)) return null;
+    const filename = normalizePath(file.filename);
+    if (!filename || seen.has(filename)) return null;
+    const patch = file.patch;
+    // `patch` assente/null e' una forma legittima per binari o file troppo
+    // grandi e resta non confrontabile; un tipo diverso e' un payload corrotto.
+    if (patch !== undefined && patch !== null && typeof patch !== 'string') return null;
+    // Una stringa senza un hunk unified non e' una prova vuota: includerla nel
+    // parser produce una Map con un Set vuoto e il seed della PR la legge come
+    // «nessuna riga cambiata». Il path resta quindi non confrontabile, come un
+    // patch assente/null, mentre gli altri file validi possono ancora essere
+    // confrontati. Anche un header senza corpo non e' un hunk verificabile.
+    if (!isValidUnifiedPatch(patch)) {
+      uncomparablePaths.add(filename);
+    }
+    seen.add(filename);
+    files.push({ filename, patch });
+  }
+  return { files, uncomparablePaths };
+}
+
 function reviewHistoryContext(repo, pr, headSha) {
   const empty = { priorFindingIds: new Set(), changedLinesSince: null };
   try {
@@ -553,30 +661,30 @@ function reviewHistoryContext(repo, pr, headSha) {
       return { priorFindingIds, changedLinesSince: null };
     }
     const compare = gh(['api', `repos/${repo}/compare/${prior.commit_id}...${headSha}`]);
-    if (!Array.isArray(compare?.files)) return { priorFindingIds, changedLinesSince: null };
+    const comparePayload = verifiedCompareFiles(compare);
+    if (!comparePayload) {
+      console.log('review-scope: risposta compare non verificabile → delta non calcolabile, nessuna declassazione per riga.');
+      return { priorFindingIds, changedLinesSince: null };
+    }
+    const { files: compareFiles, uncomparablePaths } = comparePayload;
     // L'endpoint `compare` TRONCA l'elenco dei file a 300 senza dirlo. Su un
     // elenco troncato un file davvero modificato puo' mancare, e il seed con
     // i file della PR lo farebbe passare per «confrontato e intatto»: un
     // finding nuovo su una riga cambiata verrebbe declassato e il bug
     // entrerebbe nel ciclo. Al limite dell'API il delta NON e' calcolabile, e
     // «non calcolabile» spegne del tutto la declassazione.
-    if (compare.files.length >= COMPARE_FILES_CAP) {
-      console.log(`review-scope: compare al limite API (${compare.files.length} file) → delta non calcolabile, nessuna declassazione per riga.`);
+    if (compareFiles.length >= COMPARE_FILES_CAP) {
+      console.log(`review-scope: compare al limite API (${compareFiles.length} file) → delta non calcolabile, nessuna declassazione per riga.`);
       return { priorFindingIds, changedLinesSince: null };
     }
     // `changedLinesFromPatch` vuole un patch unificato con gli header `+++`:
     // l'API li omette e da' il patch per file, quindi si ricompone. Riusare il
-    // parser gia' testato vale piu' di una seconda lettura dei hunk.
-    const patch = compare.files
-      .filter((file) => typeof file?.patch === 'string' && file?.filename)
+    // parser gia' testato vale piu' di una seconda lettura dei hunk; i path
+    // senza hunk sono gia' esclusi da `uncomparablePaths`.
+    const patch = compareFiles
+      .filter((file) => !uncomparablePaths.has(file.filename))
       .map((file) => `+++ b/${file.filename}\n${file.patch}`)
       .join('\n');
-    // Un file che il compare RIPORTA ma di cui non da' il patch e' cambiato e
-    // non confrontabile riga per riga: dichiararlo, cosi' non passa per
-    // «intatto» attraverso il seed dell'elenco file della PR.
-    const uncomparablePaths = new Set(compare.files
-      .filter((file) => file?.filename && typeof file?.patch !== 'string')
-      .map((file) => String(file.filename)));
     return { priorFindingIds, changedLinesSince: changedLinesFromPatch(patch), uncomparablePaths };
   } catch (error) {
     // Delta non calcolabile: nessuna declassazione. Su un dato mancante si
