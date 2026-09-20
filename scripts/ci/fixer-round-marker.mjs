@@ -8,6 +8,8 @@
  */
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
+import { realpathSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 
 const SHA_RE = /^[a-f0-9]{40}$/i;
 const MARKER_RE = /^[A-Z][A-Z0-9_]{2,80}$/;
@@ -279,7 +281,16 @@ function main() {
   }
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+function invokedAsThisModule() {
+  if (!process.argv[1]) return false;
+  try {
+    return realpathSync(process.argv[1]) === realpathSync(fileURLToPath(import.meta.url));
+  } catch {
+    return false;
+  }
+}
+
+if (invokedAsThisModule()) {
   try {
     main();
   } catch (error) {

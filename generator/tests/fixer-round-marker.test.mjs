@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { chmodSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { chmodSync, mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import os from 'node:os';
 import path from 'node:path';
@@ -139,6 +139,29 @@ test('marker scritto ma API commenti illeggibile resta retryable, rimborsa e fal
     assert.equal(result.status, 1, `${result.stdout}\n${result.stderr}`);
     assert.match(result.stderr, /commenti paginata/);
     assert.match(readFileSync(fake.log, 'utf8'), /api --method DELETE repos\/example\/repo\/issues\/comments\/42/);
+  } finally {
+    rmSync(fake.temp, { recursive: true, force: true });
+  }
+});
+
+test('invocazione via symlink esegue davvero il main e non esce silenziosamente', () => {
+  const tokens = markerTokens({
+    marker: 'REDCHECK_FIX_ROUND', round: 1, headSha: HEAD, bodySha: BODY_SHA,
+  });
+  const postedBody = `${tokens.join('\n')}\n_round 1/2_`;
+  const fake = fakeGh({
+    comments: [{ id: 42, user: { login: 'fixture-bot' }, body: postedBody }],
+    postBody: postedBody,
+  });
+  const link = path.join(fake.temp, 'marker-link.mjs');
+  symlinkSync(HELPER, link);
+  try {
+    const result = spawnSync(process.execPath, [link,
+      '--repo', REPO, '--pr', PR, '--marker', 'REDCHECK_FIX_ROUND', '--round', '1',
+      '--expected-head', HEAD, '--message', '_round 1/2_',
+    ], { cwd: ROOT, env: fake.env, encoding: 'utf8', timeout: 10_000 });
+    assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
+    assert.match(result.stdout, /"commentId":42/);
   } finally {
     rmSync(fake.temp, { recursive: true, force: true });
   }

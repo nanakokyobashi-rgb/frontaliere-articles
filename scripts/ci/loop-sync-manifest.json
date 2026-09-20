@@ -3857,7 +3857,7 @@
       "reason": "Helper trusted dei due fixer PR: persiste il marker round via gh, verifica paginando il commento POST contro ID/autore/body e HEAD/body revision, poi rimborsa il commento se il read-back bounded fallisce. Non esiste sul sito e non deve: il ciclo corpus ha questi fixer adattati e il sito mantiene il proprio percorso.",
       "baseline": {
         "site": null,
-        "corpus": "ccc56aeb93f143f4",
+        "corpus": "30dd770d494e16c0",
         "alignedAt": "2026-09-20"
       }
     },
