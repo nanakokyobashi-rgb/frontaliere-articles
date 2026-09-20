@@ -95,6 +95,42 @@ test('importare il modulo non arma nessun handler di segnale', () => {
   }
 });
 
+test('#625 i checkpoint usano il PAT senza esporlo e falliscono chiusi senza credenziale', () => {
+  const precedente = process.env.GITHUB_PAT;
+  process.env.GITHUB_PAT = 'fixture-token';
+  try {
+    const args = batch.authenticatedGitArgs(['push', 'origin', 'main']);
+    const serializzati = args.join('\0');
+    assert.match(serializzati, /credential\.helper=!f\(\)/);
+    assert.match(serializzati, /\$GITHUB_PAT/);
+    assert.ok(!serializzati.includes('fixture-token'), 'il token non deve finire negli argomenti del processo');
+    assert.match(serializzati, /GIT_TERMINAL_PROMPT|http\.https:\/\/github\.com\/\.extraheader/);
+
+    const source = fs.readFileSync(SCRIPT, 'utf-8');
+    assert.match(source, /GIT_TERMINAL_PROMPT: '0'/);
+    const sezioneCheckpoint = source.slice(source.indexOf('function gitCommitAndPush'));
+    assert.equal(
+      (sezioneCheckpoint.match(/authenticatedGit\(\[/g) || []).length,
+      3,
+      'push iniziale, pull di rebase e retry push devono condividere il helper autenticato',
+    );
+  } finally {
+    if (precedente === undefined) delete process.env.GITHUB_PAT;
+    else process.env.GITHUB_PAT = precedente;
+  }
+
+  delete process.env.GITHUB_PAT;
+  try {
+    assert.throws(
+      () => batch.authenticatedGitArgs(['push', 'origin', 'main']),
+      /GITHUB_PAT missing/,
+      'un checkpoint senza PAT non deve ripiegare su una credenziale ambientale',
+    );
+  } finally {
+    if (precedente !== undefined) process.env.GITHUB_PAT = precedente;
+  }
+});
+
 test('la configurazione CLI resta import-safe e section usa first-wins', () => {
   const options = batch.parseCliOptions([
     '--limit=3',
