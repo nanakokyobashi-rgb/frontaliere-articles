@@ -370,20 +370,77 @@ jobs:
           PR_BASE_REF: ${{ github.event.pull_request.base.ref }}
         run: |
           set -euo pipefail
-          policy_ref="${PR_BASE_SHA:-}"
+          # ── QUALE `main`, e perche' non quella della PR ──────────────────
+          #
+          # Il ref della policy deve essere la PUNTA di `main`, non
+          # `pull_request.base.sha`. `base.sha` e' la fotografia di `main` al
+          # momento in cui la PR e' stata aperta: un modulo che il gate importa
+          # e che `main` ha aggiunto DOPO quella fotografia li' non esiste, e
+          # ogni PR aperta prima va rossa indipendentemente dal suo diff.
+          # Misurato sulla #1599: mancava `scripts/lib/pr-body-contract-eval.mjs`,
+          # aggiunto da #1613, e il job moriva con `curl: (22) 404`; il rosso
+          # si leggeva poi come «gate saltato», che e' la diagnosi sbagliata.
+          # Il grafo del gate cresce (la #1629 gli ha aggiunto quattro moduli),
+          # quindi il difetto si allarga da solo a ogni PR in volo.
+          #
+          # La punta di `main` e' trusted esattamente quanto `base.sha`:
+          # l'autore della PR non puo' scriverci. Si risolve con `git
+          # ls-remote`, che NON consuma quota REST (la ragione della #1635), e
+          # si PINNA a quella SHA: tutti i moduli vengono cosi' dallo stesso
+          # commit anche se `main` si muove durante il download.
           policy_ref_name="${PR_BASE_REF:-}"
-          if [ -z "$policy_ref" ]; then
-            base_ref=$(gh pr view "$PR_NUMBER" --repo "$REPO" --json baseRefName,baseRefOid)
-            policy_ref_name=$(printf '%s' "$base_ref" | jq -r '.baseRefName // empty')
-            policy_ref=$(printf '%s' "$base_ref" | jq -r '.baseRefOid // empty')
+          if [ -z "$policy_ref_name" ]; then
+            policy_ref_name=$(gh pr view "$PR_NUMBER" --repo "$REPO" --json baseRefName --jq '.baseRefName // empty')
           fi
-          if [ "$policy_ref_name" != 'main' ] || ! printf '%s' "$policy_ref" | grep -qE '^[0-9a-f]{40}$'; then
-            echo "::error::Il review gate richiede la SHA della main come POLICY_REF (ref=${policy_ref_name:-empty}, sha=${policy_ref:-empty})."
+          if [ "$policy_ref_name" != 'main' ]; then
+            echo "::error::Il review gate gira solo per le PR che puntano a main (base ref=${policy_ref_name:-empty})."
             exit 1
+          fi
+          policy_ref=''
+          for attempt in 1 2 3; do
+            # `if cmd=$(...)` invece di `... || true`: sotto `set -euo pipefail`
+            # una pipeline fallita in una sostituzione ucciderebbe lo step QUI,
+            # prima del retry e del messaggio d'errore — un rosso muto — ma
+            # `|| true` INGHIOTTIREBBE l'exit status, e una risposta parziale
+            # con una riga SHA valida passerebbe la regex come se fosse buona.
+            # Dentro la condizione di un `if` lo status resta leggibile e
+            # `set -e` non interviene. `timeout` chiude la connessione appesa:
+            # senza, il contatore dei retry non avanza e il job muore al cap.
+            if ls_remote_out=$(timeout 60 git ls-remote "https://github.com/${REPO}" refs/heads/main 2>/dev/null); then
+              policy_ref=$(printf '%s\n' "$ls_remote_out" | awk 'NR==1{print $1}')
+            else
+              policy_ref=''
+            fi
+            if printf '%s' "$policy_ref" | grep -qE '^[0-9a-f]{40}$'; then break; fi
+            echo "::warning::Risoluzione della punta di main fallita (tentativo ${attempt}/3); ritento."
+            policy_ref=''
+            sleep "$((attempt * 5))"
+          done
+          if ! printf '%s' "$policy_ref" | grep -qE '^[0-9a-f]{40}$'; then
+            # Fail-closed, e NON si ricade su `base.sha`: quel fallback e'
+            # esattamente il difetto che questo blocco chiude, e ricadervi in
+            # silenzio lo farebbe riapparire solo quando la rete e' lenta.
+            echo "::error::Punta di main non risolvibile (git ls-remote su ${REPO}) → il review gate non puo' partire da una policy verificabile."
+            exit 1
+          fi
+          if [ -n "${PR_BASE_SHA:-}" ] && [ "$PR_BASE_SHA" != "$policy_ref" ]; then
+            echo "Review gate policy: punta di main ${policy_ref} (la base della PR e' ${PR_BASE_SHA}; i moduli del gate si leggono dalla punta, non dalla base)."
           fi
 
           review_gate_root="${RUNNER_TEMP}/review-gate-main"
           raw_base_url="https://raw.githubusercontent.com/${REPO}/${policy_ref}"
+          # Il contenuto scaricato si valida per ESTENSIONE: `node --check`
+          # parsa JavaScript e su un `.json` fallisce sempre, quindi usarlo per
+          # tutto avrebbe reso il manifest impossibile da scaricare — e il
+          # messaggio avrebbe detto «download fallito (HTTP 200)», cioe' la
+          # cosa sbagliata.
+          validate_download() {
+            case "$1" in
+              *.json) node -e 'JSON.parse(require("node:fs").readFileSync(process.argv[1], "utf8"))' "$1" ;;
+              *) node --check "$1" ;;
+            esac
+          }
+
           download_main() {
             local path="$1"
             local destination="$2"
@@ -402,7 +459,7 @@ jobs:
                 "$raw_url" > "$status_file" 2> "$error_file" \
                 && [ -s "$destination" ] \
                 && grep -Eq '^2[0-9][0-9]$' "$status_file" \
-                && node --check "$destination"; then
+                && validate_download "$destination"; then
                 rm -f "$error_file" "$status_file"
                 return 0
               fi
@@ -415,6 +472,14 @@ jobs:
               fi
               if [ "$attempt" -eq 3 ] || [ "$retryable" != true ]; then
                 cat "$error_file" >&2
+                # Il messaggio deve NOMINARE il file e il ref. Senza, un 404
+                # arriva come `curl: (22)` e la diagnosi parte dal job invece
+                # che dal modulo mancante: sulla #1599 e' costato ore.
+                if grep -Eq '^404$' "$status_file"; then
+                  echo "::error::Modulo del review gate assente su main @ ${policy_ref}: ${path} (${raw_url}). Se e' stato aggiunto di recente, la punta di main non lo ha ancora; se e' stato rinominato, aggiorna la lista di bootstrap e generator/tests/review-gate-bootstrap-closure.test.mjs."
+                else
+                  echo "::error::Download del modulo del review gate fallito: ${path} da main @ ${policy_ref} (HTTP $(cat "$status_file" 2>/dev/null || echo '?'))."
+                fi
                 rm -f "$destination" "$error_file" "$status_file"
                 return 1
               fi
@@ -424,30 +489,42 @@ jobs:
             return 1
           }
 
+          # ── LA LISTA, E PERCHE' E' ANCORA QUI ────────────────────────
+          #
+          # Pinnare il ref non basta: finche' la LISTA vive nello YAML della
+          # PR, una PR aperta prima che un modulo entrasse nel grafo scarica
+          # l'entrypoint NUOVO dalla punta con la lista VECCHIA, e il gate
+          # muore con ERR_MODULE_NOT_FOUND — lo stesso rosso, da un'altra
+          # porta. La lista trusted esiste gia' in
+          # `scripts/ci/review-gate-bootstrap-manifest.json`, ma NON si puo'
+          # leggere da qui in questa PR: il file lo introduce questa PR, e
+          # dalla punta di main non esiste ancora. Leggerlo ora fallirebbe su
+          # ogni PR, e ricadere sulla lista della PR quando manca
+          # riaprirebbe proprio il buco di fiducia da chiudere.
+          #
+          # Quindi il passaggio e' in DUE tempi: qui atterra il manifest come
+          # dato (guardato da `review-gate-bootstrap-closure.test.mjs`, che
+          # pretende manifest == grafo reale == questa lista), e la PR
+          # concatenata fa leggere la lista dal ref pinnato e cancella queste
+          # righe. Nell'intervallo i due elenchi non possono divergere.
           download_main scripts/ci/review-gate.mjs "$review_gate_root/scripts/ci/review-gate.mjs"
           download_main scripts/ci/review-test-policy.mjs "$review_gate_root/scripts/ci/review-test-policy.mjs"
           download_main scripts/ci/claude-codex-fallback.mjs "$review_gate_root/scripts/ci/claude-codex-fallback.mjs"
           download_main scripts/ci/claude-rate-limit.mjs "$review_gate_root/scripts/ci/claude-rate-limit.mjs"
           download_main scripts/ci/claude-rate-limit-contract.mjs "$review_gate_root/scripts/ci/claude-rate-limit-contract.mjs"
           download_main scripts/ci/auto-merge-eval.mjs "$review_gate_root/scripts/ci/auto-merge-eval.mjs"
+          download_main scripts/ci/review-scope.mjs "$review_gate_root/scripts/ci/review-scope.mjs"
           download_main scripts/ci/lib/constants.mjs "$review_gate_root/scripts/ci/lib/constants.mjs"
           download_main scripts/ci/lib/fetchPrFiles.mjs "$review_gate_root/scripts/ci/lib/fetchPrFiles.mjs"
           download_main scripts/ci/lib/vitestCheck.mjs "$review_gate_root/scripts/ci/lib/vitestCheck.mjs"
           download_main scripts/ci/lib/mergePreviewCheck.mjs "$review_gate_root/scripts/ci/lib/mergePreviewCheck.mjs"
           download_main scripts/ci/lib/duplicateDeclarations.mjs "$review_gate_root/scripts/ci/lib/duplicateDeclarations.mjs"
-          download_main scripts/ci/review-scope.mjs "$review_gate_root/scripts/ci/review-scope.mjs"
+          download_main scripts/ci/lib/false-positive-declaration.mjs "$review_gate_root/scripts/ci/lib/false-positive-declaration.mjs"
           download_main scripts/lib/github-issue-creator.mjs "$review_gate_root/scripts/lib/github-issue-creator.mjs"
           download_main scripts/lib/pr-body-closes-check.mjs "$review_gate_root/scripts/lib/pr-body-closes-check.mjs"
-          # Chiusura del contratto deterministico del body: `review-scope.mjs`
-          # lo ricalcola per declassare un 🔴 ancorato al solo body. Il gate
-          # gira da una directory ISOLATA, quindi un modulo del grafo che manca
-          # qui non e' un import lento, e' ERR_MODULE_NOT_FOUND su ogni PR.
-          # Il guard e' `generator/tests/review-gate-bootstrap-closure.test.mjs`.
           download_main scripts/lib/pr-body-contract-eval.mjs "$review_gate_root/scripts/lib/pr-body-contract-eval.mjs"
           download_main scripts/lib/pr-body-sections-check.mjs "$review_gate_root/scripts/lib/pr-body-sections-check.mjs"
           download_main scripts/lib/pr-body-nextstep-check.mjs "$review_gate_root/scripts/lib/pr-body-nextstep-check.mjs"
-          download_main scripts/ci/lib/false-positive-declaration.mjs "$review_gate_root/scripts/ci/lib/false-positive-declaration.mjs"
-
           review_gate_module="$review_gate_root/scripts/ci/review-gate.mjs"
           node --check "$review_gate_module"
           echo "REVIEW_GATE_MAIN_MODULE=$review_gate_module" >> "$GITHUB_ENV"

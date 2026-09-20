@@ -29,7 +29,18 @@ test('riattiva il gate sugli eventi che possono cambiare review, check o HEAD', 
 test('scarica helper affidabili dal main del corpus senza consumare la quota REST', () => {
   assert.match(source, /'generator\/scripts\/load-rc-env\.mjs' "\$helper_dir\/load-rc-env\.mjs"/);
   assert.match(source, /'generator\/scripts\/lib\/google-service-account-token\.mjs'/);
-  assert.match(source, /raw_base_url="https:\/\/raw\.githubusercontent\.com\/\$\{GITHUB_REPOSITORY\}\/main"/);
+  // Gli helper arrivano dal raw CDN sul REPO, non da `gh api` (quota REST) e
+  // non dal checkout della PR. Il ref non e' piu' il branch `main` ma una SHA
+  // pinnata: con `/main` ogni helper e' una lettura indipendente, e un
+  // avanzamento di `main` fra due download comporrebbe revisioni miste.
+  // L'asserzione guarda la FORMA (raw CDN + ref risolto), non la stringa
+  // `/main`, che era il modo in cui il pin veniva scambiato per una
+  // regressione.
+  assert.match(source, /raw_base_url="https:\/\/raw\.githubusercontent\.com\/\$\{GITHUB_REPOSITORY\}\/\$\{policy_ref\}"/);
+  assert.match(source, /git ls-remote "https:\/\/github\.com\/\$\{GITHUB_REPOSITORY\}" refs\/heads\/main/,
+    'il ref pinnato deve essere risolto da git ls-remote, non dalla REST');
+  assert.ok(!/gh api .*contents\//u.test(source),
+    'gli helper non devono tornare a passare dalla quota REST');
   assert.match(source, /curl --fail --location --silent --show-error --retry 0/);
   assert.doesNotMatch(source, /gh api "repos\/\$\{GITHUB_REPOSITORY\}\/contents/);
   assert.match(source, /'scripts\/ci\/native-automerge-gate\.mjs' "\$gate_tmp"/);

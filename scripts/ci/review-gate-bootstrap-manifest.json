@@ -1,0 +1,24 @@
+{
+  "_doc": "Moduli che lo step `Bootstrap trusted review gate from main` di .github/workflows/tests.yml scarica accanto al review gate, che gira da una directory ISOLATA. Questo file vive su main e viene letto dalla PUNTA di main insieme ai moduli: e' il punto in cui la lista smette di essere una copia nello YAML di ogni PR. Una PR aperta prima che un modulo entrasse nel grafo scaricherebbe altrimenti l'entrypoint nuovo con la lista vecchia, e il gate morirebbe con ERR_MODULE_NOT_FOUND. Il guard che tiene questa lista uguale al grafo reale degli import e' generator/tests/review-gate-bootstrap-closure.test.mjs.",
+  "entrypoint": "scripts/ci/review-gate.mjs",
+  "modules": [
+    "scripts/ci/review-gate.mjs",
+    "scripts/ci/review-test-policy.mjs",
+    "scripts/ci/claude-codex-fallback.mjs",
+    "scripts/ci/claude-rate-limit.mjs",
+    "scripts/ci/claude-rate-limit-contract.mjs",
+    "scripts/ci/auto-merge-eval.mjs",
+    "scripts/ci/review-scope.mjs",
+    "scripts/ci/lib/constants.mjs",
+    "scripts/ci/lib/fetchPrFiles.mjs",
+    "scripts/ci/lib/vitestCheck.mjs",
+    "scripts/ci/lib/mergePreviewCheck.mjs",
+    "scripts/ci/lib/duplicateDeclarations.mjs",
+    "scripts/ci/lib/false-positive-declaration.mjs",
+    "scripts/lib/github-issue-creator.mjs",
+    "scripts/lib/pr-body-closes-check.mjs",
+    "scripts/lib/pr-body-contract-eval.mjs",
+    "scripts/lib/pr-body-sections-check.mjs",
+    "scripts/lib/pr-body-nextstep-check.mjs"
+  ]
+}

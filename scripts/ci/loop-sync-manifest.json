@@ -3767,6 +3767,16 @@
       }
     },
     {
+      "path": "scripts/ci/review-gate-bootstrap-manifest.json",
+      "mode": "corpus-only",
+      "reason": "Lista trusted dei moduli che lo step `Bootstrap trusted review gate from main` di `.github/workflows/tests.yml` scarica accanto al gate. Esiste perche' QUI il gate gira da una directory ISOLATA popolata a mano: finche' la lista viveva nello YAML, una PR aperta prima che un modulo entrasse nel grafo scaricava l'entrypoint nuovo dalla punta di main con la lista vecchia e il gate moriva con ERR_MODULE_NOT_FOUND (misurato sulla #1599). Il sito non ha questo bootstrap — il suo review gate gira dal checkout — quindi non c'e' un gemello da portare. Il guard che la tiene uguale al grafo reale degli import e' `generator/tests/review-gate-bootstrap-closure.test.mjs`.",
+      "baseline": {
+        "site": null,
+        "corpus": "b2fc887e0b7f1044",
+        "alignedAt": "2026-09-20"
+      }
+    },
+    {
       "path": "scripts/ci/review-gate.mjs",
       "mode": "adapted",
       "reason": "Gate del check Node del corpus: conserva il carry-forward del contributo e il fallback deterministico per drift del workflow. Come il sito, una review Codex richiede evidenza della run, identità bot ammessa, marker e HEAD esatta.",

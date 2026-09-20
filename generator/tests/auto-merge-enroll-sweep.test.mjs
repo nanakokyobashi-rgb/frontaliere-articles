@@ -39,7 +39,18 @@ test('#1139: auto-merge sweep usa REST paginata e fallisce chiuso sulla lettura'
   assert.doesNotMatch(source, /^\s*prs=\$\(gh pr list/m);
   assert.doesNotMatch(source, /^\s*--limit 200/m);
   assert.doesNotMatch(source, /^\s*.*\|\| true/m);
-  assert.match(source, /raw_base_url="https:\/\/raw\.githubusercontent\.com\/\$\{GITHUB_REPOSITORY\}\/main"/);
+  // Gli helper arrivano dal raw CDN sul REPO, non da `gh api` (quota REST) e
+  // non dal checkout della PR. Il ref non e' piu' il branch `main` ma una SHA
+  // pinnata: con `/main` ogni helper e' una lettura indipendente, e un
+  // avanzamento di `main` fra due download comporrebbe revisioni miste.
+  // L'asserzione guarda la FORMA (raw CDN + ref risolto), non la stringa
+  // `/main`, che era il modo in cui il pin veniva scambiato per una
+  // regressione.
+  assert.match(source, /raw_base_url="https:\/\/raw\.githubusercontent\.com\/\$\{GITHUB_REPOSITORY\}\/\$\{policy_ref\}"/);
+  assert.match(source, /git ls-remote "https:\/\/github\.com\/\$\{GITHUB_REPOSITORY\}" refs\/heads\/main/,
+    'il ref pinnato deve essere risolto da git ls-remote, non dalla REST');
+  assert.ok(!/gh api .*contents\//u.test(source),
+    'gli helper non devono tornare a passare dalla quota REST');
   assert.doesNotMatch(source, /gh api "repos\/\$\{GITHUB_REPOSITORY\}\/contents/);
 });
 
