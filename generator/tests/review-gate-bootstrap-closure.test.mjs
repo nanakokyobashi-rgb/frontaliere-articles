@@ -120,18 +120,19 @@ test('il bootstrap non scarica moduli che nessuno del grafo importa', () => {
     `Moduli scaricati dal bootstrap che nessuno importa:\n    ${extras.join('\n    ')}`);
 });
 
-test('la lista nello YAML e il manifest non possono divergere', () => {
-  // Atterraggio in due tempi: il manifest e' il dato trusted, ma il bootstrap
-  // non puo' ancora leggerlo dalla punta di main (il file lo introduce questa
-  // PR, e dalla punta non esiste). Finche' la lista resta scritta nello YAML,
-  // questo test e' cio' che impedisce ai due elenchi di separarsi — cioe'
-  // impedisce che il passaggio al manifest, nella PR concatenata, cambi in
-  // silenzio quali moduli il gate riceve.
+test('lo YAML non tiene una copia della lista', () => {
+  // La lista la dice il ref trusted. Tenerne una copia qui la rendeva la lista
+  // della PR, e questo rompeva in DUE direzioni opposte: una PR aperta prima
+  // che un modulo entrasse nel grafo scaricava l'entrypoint nuovo con la lista
+  // vecchia (#1599), e una PR che AGGIUNGE un modulo chiedeva alla punta di
+  // main un file che solo lei introduce, quindi non poteva girare affatto
+  // (#1640, #1641).
   const workflow = fs.readFileSync(path.join(ROOT, WORKFLOW), 'utf8');
-  const inYaml = [...workflow.matchAll(/^\s*download_main\s+(\S+)\s+\S+\s*$/gmu)]
+  assert.match(workflow, new RegExp(`download_main ${MANIFEST.replace(/[./]/gu, '\\$&')}`, 'u'),
+    `${WORKFLOW}: il bootstrap non scarica il manifest dal ref trusted`);
+  const hardcoded = [...workflow.matchAll(/^\s*download_main\s+(\S+)\s+\S+\s*$/gmu)]
     .map((match) => match[1])
-    .filter((entry) => !entry.startsWith('"'));
-  assert.ok(inYaml.length > 0, `${WORKFLOW}: nessun download_main trovato`);
-  assert.deepEqual([...inYaml].sort(), [...downloadedPaths()].sort(),
-    'lo YAML e il manifest elencano moduli diversi: al passaggio al manifest il gate riceverebbe un insieme diverso da quello collaudato');
+    .filter((entry) => entry !== MANIFEST && !entry.startsWith('"'));
+  assert.deepEqual(hardcoded, [],
+    `${WORKFLOW}: moduli ancora elencati a mano: tornerebbero dalla lista della PR invece che da main — ${hardcoded.join(', ')}`);
 });

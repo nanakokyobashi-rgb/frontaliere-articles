@@ -489,50 +489,50 @@ jobs:
             return 1
           }
 
-          # ── LA LISTA, E PERCHE' E' ANCORA QUI ────────────────────────
+          # ── LA LISTA VIENE DAL REF TRUSTED, NON DA QUESTO FILE ───────
           #
-          # Pinnare il ref non basta: finche' la LISTA vive nello YAML della
-          # PR, una PR aperta prima che un modulo entrasse nel grafo scarica
-          # l'entrypoint NUOVO dalla punta con la lista VECCHIA, e il gate
-          # muore con ERR_MODULE_NOT_FOUND — lo stesso rosso, da un'altra
-          # porta. La lista trusted esiste gia' in
-          # `scripts/ci/review-gate-bootstrap-manifest.json`, ma NON si puo'
-          # leggere da qui in questa PR: il file lo introduce questa PR, e
-          # dalla punta di main non esiste ancora. Leggerlo ora fallirebbe su
-          # ogni PR, e ricadere sulla lista della PR quando manca
-          # riaprirebbe proprio il buco di fiducia da chiudere.
+          # Pinnare il ref non bastava. Finche' la lista viveva QUI, una PR che
+          # AGGIUNGE un modulo al grafo del gate non poteva girare affatto: il
+          # suo YAML chiedeva alla punta di main un file che solo quella PR
+          # introduce, e il bootstrap rifiutava (misurato su #1640 e #1641).
+          # Nella direzione opposta il difetto era quello della #1599: una PR
+          # aperta prima scaricava l'entrypoint nuovo con la lista vecchia e il
+          # gate moriva con ERR_MODULE_NOT_FOUND. Un solo rimedio copre
+          # entrambi: la lista la dice il ref trusted, insieme ai moduli che
+          # descrive, e la copia nella PR non conta.
           #
-          # Quindi il passaggio e' in DUE tempi: qui atterra il manifest come
-          # dato (guardato da `review-gate-bootstrap-closure.test.mjs`, che
-          # pretende manifest == grafo reale == questa lista), e la PR
-          # concatenata fa leggere la lista dal ref pinnato e cancella queste
-          # righe. Nell'intervallo i due elenchi non possono divergere.
-          download_main scripts/ci/review-gate.mjs "$review_gate_root/scripts/ci/review-gate.mjs"
-          download_main scripts/ci/review-test-policy.mjs "$review_gate_root/scripts/ci/review-test-policy.mjs"
-          download_main scripts/ci/claude-codex-fallback.mjs "$review_gate_root/scripts/ci/claude-codex-fallback.mjs"
-          download_main scripts/ci/claude-rate-limit.mjs "$review_gate_root/scripts/ci/claude-rate-limit.mjs"
-          download_main scripts/ci/claude-rate-limit-contract.mjs "$review_gate_root/scripts/ci/claude-rate-limit-contract.mjs"
-          download_main scripts/ci/auto-merge-eval.mjs "$review_gate_root/scripts/ci/auto-merge-eval.mjs"
-          download_main scripts/ci/review-scope.mjs "$review_gate_root/scripts/ci/review-scope.mjs"
-          download_main scripts/ci/lib/constants.mjs "$review_gate_root/scripts/ci/lib/constants.mjs"
-          download_main scripts/ci/lib/fetchPrFiles.mjs "$review_gate_root/scripts/ci/lib/fetchPrFiles.mjs"
-          download_main scripts/ci/lib/vitestCheck.mjs "$review_gate_root/scripts/ci/lib/vitestCheck.mjs"
-          download_main scripts/ci/lib/mergePreviewCheck.mjs "$review_gate_root/scripts/ci/lib/mergePreviewCheck.mjs"
-          download_main scripts/ci/lib/duplicateDeclarations.mjs "$review_gate_root/scripts/ci/lib/duplicateDeclarations.mjs"
-          # Identita' stabile dei finding (sito #9318): `review-scope.mjs` la usa
-          # per declassare un 🔴 NUOVO ancorato solo a righe non cambiate, e
-          # `review-gate.mjs` per scartare un body malformato. Il modulo riusa
-          # `stripFencedBlocks` da `followup-resolution-match.mjs`, che scende
-          # con lui: una seconda copia della regola sulle fence e' il modo in
-          # cui le due letture divergono.
-          download_main scripts/ci/followup-resolution-match.mjs "$review_gate_root/scripts/ci/followup-resolution-match.mjs"
-          download_main scripts/ci/lib/review-findings.mjs "$review_gate_root/scripts/ci/lib/review-findings.mjs"
-          download_main scripts/ci/lib/false-positive-declaration.mjs "$review_gate_root/scripts/ci/lib/false-positive-declaration.mjs"
-          download_main scripts/lib/github-issue-creator.mjs "$review_gate_root/scripts/lib/github-issue-creator.mjs"
-          download_main scripts/lib/pr-body-closes-check.mjs "$review_gate_root/scripts/lib/pr-body-closes-check.mjs"
-          download_main scripts/lib/pr-body-contract-eval.mjs "$review_gate_root/scripts/lib/pr-body-contract-eval.mjs"
-          download_main scripts/lib/pr-body-sections-check.mjs "$review_gate_root/scripts/lib/pr-body-sections-check.mjs"
-          download_main scripts/lib/pr-body-nextstep-check.mjs "$review_gate_root/scripts/lib/pr-body-nextstep-check.mjs"
+          # Il path del manifest resta l'unica cosa codificata qui ed e' cio'
+          # che deve restare stabile: se cambia, si rinomina in due posti nello
+          # stesso giro.
+          bootstrap_manifest="$review_gate_root/scripts/ci/review-gate-bootstrap-manifest.json"
+          if ! download_main scripts/ci/review-gate-bootstrap-manifest.json "$bootstrap_manifest"; then
+            echo "::error::Manifest di bootstrap del review gate non leggibile da main @ ${policy_ref}: senza la lista trusted non si puo' comporre il gate."
+            exit 1
+          fi
+          # Ogni voce e' validata prima di diventare un path: il manifest arriva
+          # dalla rete, e un `..` o un path assoluto scriverebbe fuori dalla
+          # directory isolata. Fail-closed su qualunque voce non conforme.
+          if ! bootstrap_modules=$(node -e '
+            const fs = require("node:fs");
+            const manifest = JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
+            const modules = Array.isArray(manifest.modules) ? manifest.modules : null;
+            if (!modules || modules.length === 0) throw new Error("manifest senza lista modules");
+            const safe = /^scripts\/(?:ci|lib)\/(?:[A-Za-z0-9._-]+\/)*[A-Za-z0-9._-]+\.mjs$/;
+            for (const entry of modules) {
+              if (typeof entry !== "string" || !safe.test(entry) || entry.includes("..")) {
+                throw new Error("voce del manifest non ammessa: " + String(entry));
+              }
+            }
+            if (!modules.includes(manifest.entrypoint)) throw new Error("entrypoint fuori dalla lista");
+            process.stdout.write(modules.join("\n"));
+          ' "$bootstrap_manifest"); then
+            echo "::error::Manifest di bootstrap del review gate non valido (main @ ${policy_ref})."
+            exit 1
+          fi
+          while IFS= read -r module_path; do
+            [ -n "$module_path" ] || continue
+            download_main "$module_path" "$review_gate_root/$module_path"
+          done <<< "$bootstrap_modules"
           review_gate_module="$review_gate_root/scripts/ci/review-gate.mjs"
           node --check "$review_gate_module"
           echo "REVIEW_GATE_MAIN_MODULE=$review_gate_module" >> "$GITHUB_ENV"
