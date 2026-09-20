@@ -45,15 +45,16 @@ test('la prova di produzione viene applicata deterministicamente ai diff runtime
   const s = step(PRODUCTION_PROOF);
   assert.ok(s, `step «${PRODUCTION_PROOF}» assente: la label resterebbe affidata al prompt dell'agente.`);
   assert.match(s, /if: always\(\) && steps\.claim\.outputs\.claim_acquired == 'true'/);
-  assert.match(s, /--state all/, 'il retry deve riconoscere anche una PR già mergiata');
   assert.match(s, /ACTION_OUTCOME/, 'la hold deve appartenere a una consegna della run corrente');
-  assert.match(s, /run_started_at/, 'la PR va ancorata all\'inizio della run corrente');
-  assert.match(s, /createdAt >= \$started/, 'una PR storica sul branch riusato non deve essere selezionata');
+  assert.match(s, /PR_DELIVERY_EVIDENCE_FILE/, 'la hold deve consumare l\'evidenza sidecar della run corrente');
+  assert.match(s, /verified-delivery/, 'solo una delivery provata può attivare la hold');
+  assert.match(s, /verified-none/, 'una run senza delivery provata deve restare un no-op');
+  assert.match(s, /delivery=.*non verificabile/, 'un lookup non disponibile deve restare fail-closed');
+  assert.doesNotMatch(s, /gh pr list/, 'la hold non deve riscoprire la PR storica fuori dal binding run→PR');
   assert.match(s, /fetch-pr-files\.mjs --repo "\$REPO" --pr "\$PR_NUMBER"/);
   assert.match(s, /\.complete \/\/ false/, 'una lista file incompleta deve fermare il rilevamento');
   assert.ok(s.includes('^\\\\.github/workflows/[^/]+$'), 'manca il selettore dei workflow eseguibili');
   assert.doesNotMatch(s, /claude-codex-fallback\//, 'non creare hold per action path che il drainer non può provare');
-  assert.match(s, /PR_LOOKUP_RC=\$\?/ , 'un errore di lookup PR non deve diventare una PR assente');
   assert.match(s, /for attempt in 1 2 3/, 'le letture e le scritture GitHub devono avere retry bounded');
   assert.match(s, /rest-hard-limit/, 'il cap REST deve essere distinto dalle incompletezze transitorie');
   assert.match(s, /FILES_REASON.*rest-hard-limit/, 'le incompletezze non-hard devono poter ritentare');
@@ -122,13 +123,14 @@ test('il backstop considera solo marker creati dal run corrente', () => {
     /permissions:\n(?:  .*\n)*  actions: read\n/,
     'Il workflow deve poter leggere la run corrente prima di delimitare la telemetria.',
   );
-  assert.match(s, /RUN_STARTED_AT=\$\(gh api "repos\/\$REPO\/actions\/runs\/\$GITHUB_RUN_ID"/);
-  assert.match(s, /--jq '\.run_started_at \/\/ \.created_at'/);
+  assert.match(s, /PR_DELIVERY_BASELINE_FILE/);
+  assert.match(s, /PR_DELIVERY_EVIDENCE_FILE/);
+  assert.match(s, /\.runStartedAt/);
   assert.match(s, /--arg started "\$RUN_STARTED_AT"/);
   assert.match(s, /\.createdAt \/\/ ""\) >= \$started/);
   assert.match(
     s,
-    /RUN_STARTED_AT non disponibile: backstop non emesso\.[\s\S]*?\n\s+exit 0\n\s+fi/,
+    /RUN_STARTED_AT non verificabile dal baseline: backstop non emesso\.[\s\S]*?\n\s+exit 0\n\s+fi/,
     'Se la timestamp della run non e\' leggibile, il backstop non deve invalidare un verdetto storico.',
   );
   assert.doesNotMatch(
@@ -153,28 +155,18 @@ test('il classificatore PUO\' rendere rosso il job (nessun continue-on-error)', 
 
 test('il classificatore guarda il LAVORO, non l\'exit della CLI', () => {
   const s = step(CLASSIFY);
-  // L'ordine dei due rami e' sostanziale: se il controllo sulla PR venisse
-  // DOPO quello sull'outcome della CLI, un run morto ai turni dopo aver aperto
-  // la PR uscirebbe rosso pur avendo consegnato.
-  const prCheck = s.indexOf('PR_STATE=');
-  const cliCheck = s.indexOf('$ACTION_OUTCOME" = "failure"');
-  assert.ok(prCheck !== -1, 'il classificatore non cerca una PR sul branch della issue');
-  assert.ok(cliCheck !== -1, 'il classificatore non guarda l\'outcome della CLI');
-  assert.ok(
-    prCheck < cliCheck,
-    'Il controllo sull\'outcome della CLI viene PRIMA di quello sulla PR: un run morto ai turni\n' +
-      'dopo aver consegnato la PR verrebbe classificato come fallimento.',
-  );
+  assert.match(s, /pr-delivery-evidence\.mjs classify/, 'il classificatore deve usare il helper condiviso');
+  assert.match(s, /--evidence "\$\{PR_DELIVERY_EVIDENCE_FILE:-\}"/, 'la classificazione deve essere legata al sidecar della run');
+  assert.match(s, /--action-outcome "\$\{ACTION_OUTCOME:-\}"/, 'il helper deve distinguere lavoro consegnato ed exit della CLI');
+  assert.doesNotMatch(s, /gh pr list/, 'il classificatore non deve selezionare la PR più recente sul branch');
 });
 
 test('un errore nel lookup delle PR resta distinto dalla non-consegna della CLI', () => {
   const s = step(CLASSIFY);
-  const lookup = s.indexOf('if PR_STATE=$(gh pr list');
-  const cliCheck = s.indexOf('$ACTION_OUTCOME" = "failure"');
-  assert.ok(lookup !== -1, 'il lookup delle PR deve avere un ramo di errore esplicito');
-  assert.ok(cliCheck > lookup, 'il lookup delle PR deve precedere la classificazione della CLI');
-  const lookupBlock = s.slice(lookup, cliCheck);
-  assert.doesNotMatch(lookupBlock, /\|\| true/, 'un errore API non deve diventare una PR assente');
-  assert.match(lookupBlock, /PR_LOOKUP_RC=\$\?/, 'il log deve conservare il codice di uscita di gh');
-  assert.match(lookupBlock, /non classifico la CLI come non-delivery/, 'il lookup fallito non va mascherato');
+  const evaluate = step('Evaluate current PR delivery evidence (zero-Claude)');
+  assert.ok(evaluate, 'manca lo step che produce l\'evidenza della delivery corrente');
+  assert.match(evaluate, /pr-delivery-evidence\.mjs evaluate/, 'l\'evidence deve usare il helper condiviso');
+  assert.match(evaluate, /status":"unavailable"/, 'un errore API deve produrre uno stato unavailable');
+  assert.match(evaluate, /delivery-evaluation-failed/, 'il motivo dell\'errore di lookup deve restare osservabile');
+  assert.match(s, /--evidence/, 'il classificatore deve ricevere lo stato unavailable senza trasformarlo in una lista vuota');
 });
