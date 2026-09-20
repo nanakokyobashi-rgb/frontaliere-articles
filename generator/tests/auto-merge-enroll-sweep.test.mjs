@@ -153,6 +153,7 @@ test('il tree helper scaricato dallo sweep si importa senza dipendenze omesse', 
     ['scripts/ci/native-automerge-gate.mjs', 'native-automerge-gate.mjs'],
     ['scripts/ci/review-test-policy.mjs', 'review-test-policy.mjs'],
     ['scripts/ci/lib/fetchPrFiles.mjs', 'lib/fetchPrFiles.mjs'],
+    ['scripts/ci/lib/vitestCheck.mjs', 'lib/vitestCheck.mjs'],
     ['scripts/ci/lib/constants.mjs', 'lib/constants.mjs'],
     ['scripts/ci/native-automerge-sweep-policy.mjs', 'native-automerge-sweep-policy.mjs'],
   ];
