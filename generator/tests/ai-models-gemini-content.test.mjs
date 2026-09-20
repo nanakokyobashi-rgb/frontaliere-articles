@@ -1,0 +1,53 @@
+import { strict as assert } from 'node:assert';
+import { afterEach, beforeEach, test } from 'node:test';
+
+import {
+  AI_MODELS,
+  callLLM,
+  getStats,
+  resetState,
+} from '../scripts/lib/ai-models.mjs';
+
+const originalFetch = globalThis.fetch;
+const originalEnv = {
+  GEMINI_API_KEY: process.env.GEMINI_API_KEY,
+  VITE_GEMINI_API_KEY: process.env.VITE_GEMINI_API_KEY,
+  AI_MODELS_FORCE_CHAIN: process.env.AI_MODELS_FORCE_CHAIN,
+};
+
+beforeEach(() => {
+  resetState();
+  process.env.GEMINI_API_KEY = 'gemini-content-test';
+  delete process.env.VITE_GEMINI_API_KEY;
+  delete process.env.AI_MODELS_FORCE_CHAIN;
+  globalThis.fetch = async () => new Response(JSON.stringify({
+    candidates: [{ content: { parts: [{ text: { invalid: true } }] } }],
+  }), {
+    status: 200,
+    headers: { 'content-type': 'application/json' },
+  });
+});
+
+afterEach(() => {
+  globalThis.fetch = originalFetch;
+  for (const [key, value] of Object.entries(originalEnv)) {
+    if (value === undefined) delete process.env[key];
+    else process.env[key] = value;
+  }
+  resetState();
+});
+
+test('Gemini tratta il testo non-stringa come content failure', async () => {
+  const error = await callLLM([{ role: 'user', content: 'x' }], {
+    chain: [AI_MODELS.GEMINI_FLASH],
+    maxRetriesPerModel: 1,
+    backoffMs: 1,
+    timeout: 5000,
+    recordScore: false,
+  }).then(() => null, (caught) => caught);
+
+  assert.ok(error, 'il payload Gemini malformato deve fallire');
+  assert.match(error.message, /non-string content: object/);
+  assert.equal(getStats().successes, 0, 'il payload malformato non deve contare come successo');
+  assert.equal(getStats().retries, 0, 'un content failure non va ritentato nello stesso modello');
+});

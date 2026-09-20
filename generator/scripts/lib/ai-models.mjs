@@ -8396,7 +8396,16 @@ async function _callGeminiRaw(model, messages, opts) {
         error.contentFailure = true;
         throw error;
       }
-      const text = data?.candidates?.[0]?.content?.parts?.find((p) => p.text && !p.thought)?.text || '';
+      const textPart = data?.candidates?.[0]?.content?.parts?.find(
+        (part) => part && !part.thought && part.text !== undefined,
+      );
+      const textValue = textPart?.text;
+      if (textValue !== undefined && typeof textValue !== 'string') {
+        const error = new Error(`[${model}] non-string content: ${typeof textValue}`);
+        error.contentFailure = true;
+        throw error;
+      }
+      const text = textValue || '';
       if (!text) {
         if (attempt < opts.maxRetriesPerModel) {
           _stats.retries++;
