@@ -3652,8 +3652,8 @@
       "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
       "baseline": {
         "site": null,
-        "corpus": "1f8ac4d164753ebe",
-        "alignedAt": "2026-09-01"
+        "corpus": "641f6f0228f523d6",
+        "alignedAt": "2026-09-20"
       }
     },
     {
