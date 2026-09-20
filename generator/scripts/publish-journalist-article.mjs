@@ -49,7 +49,7 @@
 
 import path from 'node:path';
 import fs from 'node:fs';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 import {
   registerArticleFiles,
   checkArticleIdExists,
@@ -540,7 +540,9 @@ async function main() {
 
 const invokedDirectly = (() => {
   try {
-    return import.meta.url === pathToFileURL(process.argv[1] || '').href;
+    // Node canonicalizza `import.meta.url` al target reale, mentre argv[1]
+    // conserva il percorso symlinkato usato per avviare lo script.
+    return fs.realpathSync(fileURLToPath(import.meta.url)) === fs.realpathSync(process.argv[1] || '');
   } catch {
     return false;
   }
