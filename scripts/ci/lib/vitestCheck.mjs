@@ -14,21 +14,105 @@
  * lascia un check-run `failure` su quello SHA; `[0]` ne pescava uno ARBITRARIO,
  * così un `failure` stantio mascherava il `success` reale → auto-merge bloccato
  * a oltranza pur con i test verdi (l'auto-merge è event-driven e non ri-valuta
- * da solo). La selezione "ultimo COMPLETATO con verdetto per completed_at" è
- * invariante all'ordine API e ai duplicati: vince il verdetto finito più fresco
- * per il codice all'HEAD. Un job `skipped` è completato ma non è un verdetto e
- * viene escluso.
+ * da solo). La selezione deve seguire la GENERAZIONE del run, non l'istante in
+ * cui un runner ha finito: un rerun vecchio può concludersi dopo una
+ * generazione nuova. Il selettore quindi verifica l'identità del check
+ * (`id` + `head_sha`) e ordina per `created_at`, `run_attempt` e infine `id`;
+ * `completed_at` serve solo a verificare che un run completato sia utilizzabile.
+ * Se la generazione più nuova è ancora in volo, oppure l'identità non è
+ * verificabile, il contratto è rispettivamente `pending` o `ambiguous` e
+ * nessun verdetto viene scelto. Un job `skipped` è completato ma non è un
+ * verdetto e viene escluso.
  *
- * I run in-progress/queued (senza `completed_at`) sono ignorati di proposito:
- * un dispatch manuale appeso non deve bloccare il merge per sempre. Se NESSUN
- * vitest è ancora concluso ritorna '' (gate in attesa) — preserva l'invariante
- * #1454 "niente merge su pending/missing".
+ * I wrapper storici trasformano entrambi gli stati non selezionabili in
+ * `null`/`''`, quindi un consumer che non conosce il contratto tri-state resta
+ * fail-closed. Se NESSUN vitest è ancora concluso ritorna '' (gate in attesa) —
+ * preserva l'invariante #1454 "niente merge su pending/missing".
  */
 import {
   VITEST_CHECK_NAME,
   VITEST_EXECUTION_JOB_NAME,
   VITEST_SHARD_NAME_RE,
 } from './constants.mjs';
+
+const COMMIT_SHA_RE = /^[0-9a-f]{40}$/i;
+const COMPLETED_RUN_STATUS = 'completed';
+const PENDING_RUN_STATUSES = new Set(['queued', 'in_progress', 'requested', 'waiting', 'pending']);
+
+/** Stati osservabili del selettore di una generazione omonima. */
+export const RUN_SELECTION_STATES = Object.freeze({
+  SELECTED: 'selected',
+  PENDING: 'pending',
+  AMBIGUOUS: 'ambiguous',
+});
+
+function runSelection(state, reason, run = null) {
+  return { state, reason, run };
+}
+
+function validTimestamp(value) {
+  return typeof value === 'string' && value.length > 0 && Number.isFinite(Date.parse(value));
+}
+
+/**
+ * Valida i dati che possono identificare una generazione del check-run.
+ * `id` e `head_sha` sono sempre necessari: senza di essi una risposta
+ * paginata o mischiata non può essere distinta da un run stantio.
+ */
+function generationMetadata(run) {
+  if (!run || typeof run !== 'object' || Array.isArray(run)) return null;
+  if (!Number.isSafeInteger(run.id) || run.id <= 0) return null;
+  if (typeof run.head_sha !== 'string' || !COMMIT_SHA_RE.test(run.head_sha)) return null;
+  if (run.status !== COMPLETED_RUN_STATUS && !PENDING_RUN_STATUSES.has(run.status)) return null;
+
+  let createdAt = null;
+  if (Object.hasOwn(run, 'created_at') && run.created_at !== null && run.created_at !== undefined) {
+    if (!validTimestamp(run.created_at)) return null;
+    createdAt = Date.parse(run.created_at);
+  }
+
+  let runAttempt = null;
+  if (Object.hasOwn(run, 'run_attempt') && run.run_attempt !== null && run.run_attempt !== undefined) {
+    if (!Number.isSafeInteger(run.run_attempt) || run.run_attempt < 1) return null;
+    runAttempt = run.run_attempt;
+  }
+
+  if (run.status === COMPLETED_RUN_STATUS) {
+    if (typeof run.conclusion !== 'string' || run.conclusion.length === 0) return null;
+    if (!validTimestamp(run.completed_at)) return null;
+  }
+
+  return {
+    id: run.id,
+    headSha: run.head_sha.toLowerCase(),
+    createdAt,
+    runAttempt,
+  };
+}
+
+/**
+ * Confronta la generazione di due run. `id` è il fallback deterministico per
+ * le forme REST che non espongono `created_at`/`run_attempt`; non si usa mai
+ * `completed_at`, che descrive il runner e non la generazione.
+ */
+function compareGenerations(left, right) {
+  if (left.createdAt !== null && right.createdAt !== null && left.createdAt !== right.createdAt) {
+    return left.createdAt - right.createdAt;
+  }
+  if (left.runAttempt !== null && right.runAttempt !== null && left.runAttempt !== right.runAttempt) {
+    return left.runAttempt - right.runAttempt;
+  }
+  return left.id - right.id;
+}
+
+function sameRunIdentity(left, right) {
+  return left.head_sha === right.head_sha
+    && left.status === right.status
+    && left.conclusion === right.conclusion
+    && left.created_at === right.created_at
+    && left.completed_at === right.completed_at
+    && left.run_attempt === right.run_attempt;
+}
 
 /**
  * Ripete una lettura sincrona finché il dato è utilizzabile.
@@ -89,7 +173,7 @@ export function vitestCheckNeedsPolling(checkRuns) {
  * @param {Array<{name?: string, status?: string, conclusion?: string, completed_at?: string}>} checkRuns
  *   L'array `.check_runs` della GitHub check-runs API.
  * @returns {string} La conclusion del check-run vitest COMPLETATO con verdetto
- *   più recente (per `completed_at`), o '' se nessuno è ancora concluso/presente.
+ *   della generazione più recente, o '' se la selezione è pending/ambiguous.
  */
 export function latestCompletedVitestConclusion(checkRuns) {
   const last = latestCompletedVitestRun(checkRuns);
@@ -100,9 +184,8 @@ export function latestCompletedVitestConclusion(checkRuns) {
  * Come `latestCompletedVitestConclusion` ma ritorna il check-run INTERO, non solo
  * la sua conclusion: serve a chi ha bisogno anche del `completed_at` (quando la
  * PR è stata testata) per correlarlo con lo stato di `main` a quell'istante —
- * vedi `vitestFailureIsNotAttributableToPr`. Stessa identica selezione (ultimo
- * COMPLETATO con verdetto per `completed_at`), estratta per non duplicare il
- * filtro fragile.
+ * vedi `vitestFailureIsNotAttributableToPr`. Stessa identica selezione
+ * generation-aware, estratta per non duplicare il filtro fragile.
  *
  * @param {Array<{name?: string, status?: string, conclusion?: string, completed_at?: string}>} checkRuns
  * @returns {{name?: string, status?: string, conclusion?: string, completed_at?: string}|null}
@@ -124,38 +207,87 @@ export function latestCompletedVitestExecutionRun(checkRuns) {
 }
 
 /**
- * Generalizzazione di `latestCompletedVitestRun` a un check-run name
- * arbitrario — stessa selezione ("ultimo COMPLETATO con verdetto per
- * `completed_at`", non
- * un `[0]` arbitrario), stessa ragione (un SHA immutabile può portare più
- * check-run con lo stesso nome, es. un `workflow_dispatch` manuale sullo
- * stesso branch). Usata anche per `GENERATOR_CI_JOB_NAME` (#242: il gate
- * dell'auto-merge sul check "test" di generator-ci.yml non deve ripetere il
- * bug del `[0]` arbitrario che questo modulo esiste per chiudere).
+ * Selezione generation-aware di un check-run name arbitrario (non un `[0]`
+ * arbitrario e non l'ultimo `completed_at`), con contratto tri-state. Uno SHA
+ * immutabile può portare più check-run con lo stesso nome, es. un
+ * `workflow_dispatch` manuale sullo stesso branch. La funzione è usata anche
+ * per `GENERATOR_CI_JOB_NAME` (#242: il gate dell'auto-merge sul check "test"
+ * di generator-ci.yml non deve ripetere il bug del `[0]` arbitrario che questo
+ * modulo esiste per chiudere).
  *
  * @param {Array<{name?: string, status?: string, conclusion?: string, completed_at?: string}>} checkRuns
  * @param {string} name
- * @returns {{name?: string, status?: string, conclusion?: string, completed_at?: string}|null}
+ * @returns {{state: 'selected'|'pending'|'ambiguous', reason: string,
+ *   run: object|null}}
  */
-export function latestCompletedRunByName(checkRuns, name) {
-  if (!Array.isArray(checkRuns)) return null;
-  const completed = checkRuns
-    .filter(
-      (c) =>
-        c &&
-        c.name === name &&
-        c.status === 'completed' &&
-        c.conclusion !== 'skipped' &&
-        typeof c.completed_at === 'string' &&
-        c.completed_at,
-    )
-    .sort((a, b) => Date.parse(a.completed_at) - Date.parse(b.completed_at));
-  return completed[completed.length - 1] || null;
+export function latestCompletedRunSelectionByName(checkRuns, name) {
+  if (!Array.isArray(checkRuns) || typeof name !== 'string' || name.length === 0) {
+    return runSelection(RUN_SELECTION_STATES.AMBIGUOUS, 'invalid-input');
+  }
+
+  const named = checkRuns.filter((run) => run && run.name === name);
+  if (named.length === 0) return runSelection(RUN_SELECTION_STATES.PENDING, 'missing');
+
+  const metadata = named.map((run) => generationMetadata(run));
+  if (metadata.some((entry) => entry === null)) {
+    return runSelection(RUN_SELECTION_STATES.AMBIGUOUS, 'invalid-generation-metadata');
+  }
+
+  const expectedHead = metadata[0].headSha;
+  if (metadata.some((entry) => entry.headSha !== expectedHead)) {
+    return runSelection(RUN_SELECTION_STATES.AMBIGUOUS, 'mixed-head-sha');
+  }
+
+  const byId = new Map();
+  for (let index = 0; index < named.length; index += 1) {
+    const prior = byId.get(metadata[index].id);
+    if (prior && !sameRunIdentity(prior, named[index])) {
+      return runSelection(RUN_SELECTION_STATES.AMBIGUOUS, 'duplicate-run-id');
+    }
+    byId.set(metadata[index].id, named[index]);
+  }
+
+  // `skipped` non è un verdetto: conserva la compatibilità storica e non
+  // permette a un check saltato di oscurare l'ultimo verdetto utilizzabile.
+  const uniqueRuns = [...byId.values()]
+    .filter((run) => !(run.status === COMPLETED_RUN_STATUS && run.conclusion === 'skipped'));
+  if (uniqueRuns.length === 0) {
+    return runSelection(RUN_SELECTION_STATES.PENDING, 'no-verdict');
+  }
+  const uniqueMetadata = uniqueRuns.map((run) => generationMetadata(run));
+  let latestIndex = 0;
+  for (let index = 1; index < uniqueRuns.length; index += 1) {
+    if (compareGenerations(uniqueMetadata[index], uniqueMetadata[latestIndex]) > 0) {
+      latestIndex = index;
+    }
+  }
+  const latest = uniqueRuns[latestIndex];
+  if (latest.status !== COMPLETED_RUN_STATUS) {
+    return runSelection(
+      RUN_SELECTION_STATES.PENDING,
+      'latest-generation-pending',
+    );
+  }
+  return runSelection(RUN_SELECTION_STATES.SELECTED, 'latest-generation-completed', latest);
 }
 
 /**
- * Conclusion del check-run COMPLETATO con verdetto più recente per un nome arbitrario, o
- * `''` se nessuno è ancora concluso/presente. Sibling di
+ * Compatibilità per i consumer esistenti: solo lo stato `selected` produce un
+ * run. `pending` e `ambiguous` sono entrambi fail-closed e non possono
+ * diventare un verdetto per caso.
+ *
+ * @param {Array<object>} checkRuns
+ * @param {string} name
+ * @returns {object|null}
+ */
+export function latestCompletedRunByName(checkRuns, name) {
+  const selection = latestCompletedRunSelectionByName(checkRuns, name);
+  return selection.state === RUN_SELECTION_STATES.SELECTED ? selection.run : null;
+}
+
+/**
+ * Conclusion del check-run COMPLETATO della generazione più recente per un
+ * nome arbitrario, o `''` se la selezione è pending/ambiguous. Sibling di
  * `latestCompletedVitestConclusion` per check-run diversi da vitest (#242).
  *
  * @param {Array<{name?: string, status?: string, conclusion?: string, completed_at?: string}>} checkRuns

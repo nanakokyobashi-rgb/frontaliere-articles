@@ -30,10 +30,15 @@ import { generatorCiVerdict, NON_VERDICT_CONCLUSIONS } from '../../scripts/ci/ge
 import { GENERATOR_CI_JOB_NAME } from '../../scripts/ci/lib/constants.mjs';
 
 const NAME = GENERATOR_CI_JOB_NAME;
-const run = (conclusion, completed_at, name = NAME) => ({
+const HEAD_SHA = 'a'.repeat(40);
+let nextRunId = 1;
+const run = (conclusion, completed_at, name = NAME, options = {}) => ({
+  id: options.id ?? nextRunId++,
   name,
   status: 'completed',
   conclusion,
+  head_sha: options.head_sha ?? HEAD_SHA,
+  created_at: options.created_at ?? completed_at,
   completed_at,
 });
 

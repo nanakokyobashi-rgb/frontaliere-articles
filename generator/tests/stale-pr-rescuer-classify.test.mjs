@@ -777,10 +777,12 @@ test('lettura del push riuscita ma senza data: si ripiega su `updated_at`, non s
 
 test('nessuna cella muta con review più vecchia dell\'head e nessun run in volo', opts, () => {
   // È questa la forma esatta della direzione 3 della #201. Non serve un ramo
-  // per ogni conclusione: serve che NESSUNA conclusione cada nell'`else` muto.
+  // per ogni conclusione: serve che NESSUNA conclusione verificabile cada
+  // nell'`else` muto. Un check assente è invece `pending` nel contratto
+  // tri-state e non autorizza un rescue scelto in base a `none`.
   const mute = [];
   const claimedByD = [];
-  for (const concl of ['success', 'failure', 'cancelled', 'timed_out', 'neutral', null]) {
+  for (const concl of ['success', 'failure', 'cancelled', 'timed_out', 'neutral']) {
     const r = runScan({
       prs: openPr(),
       checks: checkRuns({ concl }),
@@ -800,6 +802,17 @@ test('nessuna cella muta con review più vecchia dell\'head e nessun run in volo
     claimedByD,
     ['success'],
     `La classe D deve rivendicare SOLO lo stato coi test verdi (guard 3), ma rivendica: ${claimedByD.join(', ')}.`,
+  );
+
+  const missing = runScan({
+    prs: openPr(),
+    checks: checkRuns({ concl: null }),
+    reviews: reviews({ commit: OLD_SHA, body: 'un finding, niente LGTM' }),
+  });
+  assert.deepEqual(
+    missing.comments,
+    [],
+    `Un check assente è pending, non un verdetto 'none' da trasformare silenziosamente in classe C.\n${missing.stdout}`,
   );
 });
 
@@ -924,6 +937,61 @@ test('#314 — nessuna lettura `gh` senza `--paginate`', opts, () => {
     [],
     'Letture `gh` senza `--paginate`: troncano in silenzio.',
   );
+});
+
+test('#314 — un rerun vecchio che finisce dopo non oscura la generazione nuova', opts, () => {
+  const r = runScan({
+    prs: openPr(),
+    checks: {
+      check_runs: [
+        // La generazione nuova è verde, ma termina prima del rerun vecchio.
+        {
+          id: 5002,
+          name: CHECK_NAME,
+          status: 'completed',
+          head_sha: HEAD_SHA,
+          created_at: isoAgo(2),
+          completed_at: isoAgo(2),
+          conclusion: 'success',
+        },
+        {
+          id: 5001,
+          name: CHECK_NAME,
+          status: 'completed',
+          head_sha: HEAD_SHA,
+          created_at: isoAgo(3),
+          completed_at: isoAgo(1),
+          conclusion: 'failure',
+        },
+      ],
+    },
+    reviews: reviews({ commit: OLD_SHA, body: 'un finding, niente LGTM' }),
+  });
+  const body = only(r);
+  assert.match(body, /review più vecchia dell'head/,
+    `La generazione nuova verde deve restare il verdetto del rescuer.\n${body}`);
+  assert.doesNotMatch(body, /check `tests \\(node --test\\)` = `failure`/,
+    `Il rerun vecchio concluso dopo non deve diventare il check rosso.\n${body}`);
+});
+
+test('#314 — identità non verificabile: nessun verdetto silenzioso', opts, () => {
+  const r = runScan({
+    prs: openPr(),
+    checks: {
+      check_runs: [{
+        id: 5003,
+        name: CHECK_NAME,
+        status: 'completed',
+        head_sha: 'b'.repeat(40),
+        created_at: isoAgo(2),
+        completed_at: isoAgo(2),
+        conclusion: 'failure',
+      }],
+    },
+    reviews: reviews({ commit: OLD_SHA, body: 'un finding, niente LGTM' }),
+  });
+  assert.deepEqual(r.comments, [], `Uno SHA diverso non è un failure dell'head corrente.\n${r.stdout}`);
+  assert.deepEqual(r.labeled, [], `Uno SHA diverso deve restare pending.\n${r.stdout}`);
 });
 
 test('#314 — due check completati nello STESSO secondo: vince il più recente per `id`', opts, () => {
