@@ -65,6 +65,9 @@ import { createHash } from 'node:crypto';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const WF_PATH = path.resolve(HERE, '../../.github/workflows/stale-pr-rescuer.yml');
 const WF = readFileSync(WF_PATH, 'utf8');
+const TRUSTED_MARKER_HELPER_B64 = readFileSync(
+  path.resolve(HERE, '../../scripts/ci/fixer-round-marker.mjs'),
+).toString('base64');
 
 const HAS_JQ = spawnSync('jq', ['--version'], { encoding: 'utf8' }).status === 0;
 
@@ -97,6 +100,12 @@ const HEAD_SHA = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
 const OLD_SHA = 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb';
 const PR_BODY = '## Implementato\n- fixture\n\n## Non implementato (ancora)\n- fixture';
 const REVIEW_REVISION = `body:${createHash('sha256').update(`${PR_BODY}\n`).digest('hex')}`;
+const trustedRoundMarker = (round) => [
+  `<!-- REDFLAG_FIX_ROUND: ${round} -->`,
+  `<!-- REDFLAG_FIX_ROUND_HEAD: ${HEAD_SHA} -->`,
+  `<!-- REDFLAG_FIX_ROUND_BODY: ${REVIEW_REVISION.slice('body:'.length)} -->`,
+  `_🔴-fixer round ${round}/2 avviato (auto)._`,
+].join('\n');
 
 const isoAgo = (hours) => new Date(Date.now() - hours * 3600_000).toISOString().replace(/\.\d+Z$/, 'Z');
 const unixAgo = (hours) => Math.floor((Date.now() - hours * 3600_000) / 1000);
@@ -201,12 +210,22 @@ function runScan({
     const fixReviewsMalformed = path.join(dir, 'reviews-malformed');
     const fixCommentsMalformed = path.join(dir, 'comments-malformed');
     const fixPushedAt = path.join(dir, 'pushed-at');
+    const normalizedComments = posted.map((comment, index) => ({
+      id: Number.isSafeInteger(Number(comment?.id)) && Number(comment.id) > 0 ? Number(comment.id) : index + 1,
+      body: typeof comment?.body === 'string' ? comment.body : '',
+      user: comment?.user && typeof comment.user.login === 'string' && comment.user.login
+        ? comment.user
+        : { login: 'github-actions[bot]' },
+    }));
     writeFileSync(fixPushedAt, String(pushedAt));
     writeFileSync(calls, '');
     writeFileSync(fixPrs, JSON.stringify(prs));
     writeFileSync(fixChecks, JSON.stringify(checks));
     writeFileSync(fixReviews, JSON.stringify(revs));
-    writeFileSync(fixComments, JSON.stringify(posted));
+    // GitHub issue-comment responses always carry id/body/user.login. Keep
+    // fixtures honest so the trusted helper can fail closed on malformed API
+    // shapes instead of silently treating synthetic omissions as real data.
+    writeFileSync(fixComments, JSON.stringify(normalizedComments));
     writeFileSync(fixFixerRuns, JSON.stringify(fixerRuns));
     writeFileSync(fixFixerRunsError, fixerRunsError ? 'true' : 'false');
     writeFileSync(fixChecksError, checksError ? 'true' : 'false');
@@ -287,11 +306,17 @@ case "$sub" in
         else
           cat ${JSON.stringify(fixComments)}
         fi ;;
+      user)
+        printf '{"login":"github-actions[bot]"}\n' ;;
+      */git/ref/heads/main)
+        printf '%s\n' 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' ;;
+      */contents/scripts/ci/fixer-round-marker.mjs*)
+        printf '%s\n' ${JSON.stringify(TRUSTED_MARKER_HELPER_B64)} ;;
       */pulls/*)
         if [ "$jq" = '.body // ""' ]; then
           node -e 'const fs=require("fs"); const value=require(process.argv[1]); const pr=Array.isArray(value)?value[0]:value; process.stdout.write(String(pr?.body||"")+"\\n")' ${JSON.stringify(fixPrs)}
         else
-          cat ${JSON.stringify(fixPrs)}
+          node -e 'const fs=require("fs"); const value=require(process.argv[1]); process.stdout.write(JSON.stringify(Array.isArray(value)?value[0]:value)+"\\n")' ${JSON.stringify(fixPrs)}
         fi
         ;;
       */pulls*)      cat ${JSON.stringify(fixPrs)} ;;
@@ -1358,7 +1383,7 @@ test('E — round cap raggiunto: nessun nuovo dispatch del fixer', opts, () => {
     prs: openPr(),
     checks: checkRuns({ concl: 'success' }),
     reviews: reviews({ commit: HEAD_SHA, body: '🔴 **Important**: il cap è terminale' }),
-    comments: [{ body: '<!-- REDFLAG_FIX_ROUND: 2 -->\n_🔴-fixer round 2/2 avviato (auto)._' }],
+    comments: [{ user: { login: 'github-actions[bot]' }, body: trustedRoundMarker(2) }],
     fixerRuns: [],
   });
   assert.deepEqual(r.workflowRuns, [], `Il round cap del fixer deve vietare E.\n${r.stdout}`);
@@ -1472,7 +1497,7 @@ const classB = ({ posted = [], fixerRuns = [FIXER_RUN_OLD], dryRun = false } = {
     dryRun,
   });
 
-const REDFLAG_ROUND = '<!-- REDFLAG_FIX_ROUND: 1 -->\n_🔴-fixer round 1/2 avviato (auto)._';
+const REDFLAG_ROUND = trustedRoundMarker(1);
 
 test('#488 — B + REDFLAG_FIX_ROUND: un rerun del run di tests', opts, () => {
   const r = classB({ posted: [{ body: REDFLAG_ROUND }] });

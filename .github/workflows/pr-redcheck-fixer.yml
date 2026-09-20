@@ -86,6 +86,7 @@ jobs:
       failed_run_id: ${{ steps.pre.outputs.failed_run_id }}
       head_sha: ${{ steps.pre.outputs.head_sha }}
       failed_check_key: ${{ steps.pre.outputs.failed_check_key }}
+      body_revision: ${{ steps.pre.outputs.body_revision }}
     steps:
       - name: Checkout dell'helper del prefilter (solo `scripts/ci/`)
         uses: actions/checkout@v5
@@ -140,6 +141,7 @@ jobs:
           # but empty revision as fail-closed, while its absent-property mode
           # remains backward-compatible for pure callers/tests.
           review_revision=""
+          body_sha=""
           body_file="${RUNNER_TEMP:-/tmp}/redcheck-pr-body-${PR}.txt"
           if printf '%s' "$pr" | jq -r '.body // ""' > "$body_file" 2>/dev/null; then
             body_sha=$(sha256sum "$body_file" | awk '{print $1}')
@@ -266,6 +268,7 @@ jobs:
             echo "failed_run_id=$RUN_ID"
             echo "head_sha=$head_sha"
             echo "failed_check_key=$rollup"
+            echo "body_revision=$body_sha"
           } >> "$GITHUB_OUTPUT"
 
   redcheck-fix:
@@ -293,6 +296,34 @@ jobs:
           filter: blob:none
         # Tetto sullo step → `failure` diagnosticabile invece di `cancelled`.
         timeout-minutes: 15
+
+      - name: Materialize trusted round-marker helper from main
+        id: trusted_marker
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -uo pipefail
+          if ! trusted_sha=$(gh api "repos/$REPO/git/ref/heads/main" --jq '.object.sha') \
+            || ! printf '%s' "$trusted_sha" | grep -qE '^[a-f0-9]{40}$'; then
+            echo "::warning::Helper trusted non leggibile da main: nessun Codex in questo run, retryable."
+            echo "available=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if ! git fetch --no-tags origin "$trusted_sha" -q; then
+            echo "::warning::Commit main trusted non materializzabile: nessun Codex in questo run, retryable."
+            echo "available=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          trusted_path="$RUNNER_TEMP/fixer-round-marker.mjs"
+          if ! git show "$trusted_sha:scripts/ci/fixer-round-marker.mjs" > "$trusted_path" || [ ! -s "$trusted_path" ]; then
+            echo "::warning::Helper trusted assente sul commit main pinned: nessun Codex in questo run, retryable."
+            echo "available=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "path=$trusted_path" >> "$GITHUB_OUTPUT"
+          echo "sha=$trusted_sha" >> "$GITHUB_OUTPUT"
+          echo "available=true" >> "$GITHUB_OUTPUT"
 
       # Profilassi anti-401. Il lane Codex esige che il workflow file in
       # esecuzione sia BYTE-IDENTICO a `main`, e dal 2026-09-03 il workflow che
@@ -417,6 +448,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
+          EXPECTED_BODY_REVISION: ${{ needs.preflight.outputs.body_revision }}
         run: |
           set -uo pipefail
           MAX_ROUNDS=2
@@ -435,12 +467,52 @@ jobs:
             echo "proceed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
+          if [ "${{ steps.trusted_marker.outputs.available }}" != 'true' ]; then
+            echo "::error::Helper round-marker trusted non disponibile da main: nessun Codex, claim/lease rilasciati dal cleanup, stato retryable."
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+            echo "marker_verified=false" >> "$GITHUB_OUTPUT"
+            echo "retryable=true" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
 
-          comments=$(gh api "repos/$REPO/issues/$PR_NUMBER/comments" --paginate \
-            --jq '[.[] | .body] | join("\n")' 2>/dev/null || echo "")
-          ROUND=$(printf '%s' "$comments" | grep -oE 'REDCHECK_FIX_ROUND: [0-9]+' \
-            | grep -oE '[0-9]+' | sort -rn | head -1 || true)
-          ROUND=${ROUND:-0}
+          if ! comments_json=$(gh api --paginate --slurp \
+            "repos/$REPO/issues/$PR_NUMBER/comments?per_page=100" 2>/dev/null); then
+            echo "::error::Commenti PR illeggibili prima del marker REDCHECK_FIX_ROUND: cap non verificabile. Nessun Codex: stato retryable, claim/lease rilasciati dal cleanup."
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+            echo "marker_verified=false" >> "$GITHUB_OUTPUT"
+            echo "retryable=true" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+          if ! comments=$(printf '%s' "$comments_json" | jq -er \
+            'if type == "array" and all(.[]; type == "array") then [flatten[] | (.body // "")] | join("\n") else error("comment pages malformed") end' 2>/dev/null); then
+            echo "::error::Risposta commenti PR malformata prima del marker REDCHECK_FIX_ROUND: cap non verificabile. Nessun Codex: stato retryable, claim/lease rilasciati dal cleanup."
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+            echo "marker_verified=false" >> "$GITHUB_OUTPUT"
+            echo "retryable=true" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+          # Il cap non usa token body-only `REDCHECK_FIX_ROUND: [0-9]+`: conta solo
+          # marker completi emessi dall'autore trusted e
+          # legati alla HEAD/body correnti; mai token in un commento preseed o stale.
+          if ! round_state=$(node "${{ steps.trusted_marker.outputs.path }}" \
+            --current-round --repo "$REPO" --pr "$PR_NUMBER" --marker REDCHECK_FIX_ROUND \
+            --expected-author github-actions[bot]); then
+            echo "::error::Round REDCHECK_FIX_ROUND non verificabile con il helper trusted: nessun Codex, claim/lease rilasciati dal cleanup, stato retryable."
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+            echo "marker_verified=false" >> "$GITHUB_OUTPUT"
+            echo "retryable=true" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+          if ! ROUND=$(printf '%s' "$round_state" | jq -er \
+            --arg expected "${{ needs.preflight.outputs.head_sha }}" \
+            --arg expected_body "$EXPECTED_BODY_REVISION" --argjson max "$MAX_ROUNDS" \
+            'if type == "object" and .headSha == $expected and .bodyRevision == $expected_body and (.round | type == "number" and floor == . and . >= 0 and . <= $max) then (.round | tostring) else error("round state stale or malformed") end'); then
+            echo "::error::Round REDCHECK_FIX_ROUND stale/malformato rispetto a HEAD o cap: nessun Codex, claim/lease rilasciati dal cleanup, stato retryable."
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+            echo "marker_verified=false" >> "$GITHUB_OUTPUT"
+            echo "retryable=true" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
           NEXT=$((ROUND + 1))
           echo "Round ❌-check-fix correnti: $ROUND (cap $MAX_ROUNDS)"
 
@@ -508,10 +580,36 @@ jobs:
 
           # Il marker del round si posta PRIMA di invocare Claude: se la run
           # muore, il round e' comunque contato e l'anti-loop tiene.
-          gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '<!-- REDCHECK_FIX_ROUND: %s -->\n_❌-check-fixer round %s/%s avviato (auto)._' "$NEXT" "$NEXT" "$MAX_ROUNDS")" \
-            2>/dev/null || true
+          marker_message=$(printf '_❌-check-fixer round %s/%s avviato (auto)._' "$NEXT" "$MAX_ROUNDS")
+          if ! marker_result=$(node "${{ steps.trusted_marker.outputs.path }}" \
+            --repo "$REPO" \
+            --pr "$PR_NUMBER" \
+            --marker REDCHECK_FIX_ROUND \
+            --round "$NEXT" \
+            --expected-head "${{ needs.preflight.outputs.head_sha }}" \
+            --message "$marker_message" \
+            --expected-author github-actions[bot]); then
+            echo "::error::Marker REDCHECK_FIX_ROUND:$NEXT non persistito o non verificabile (HEAD/body revision/commenti paginati). Nessun Codex: claim/lease rilasciati dal cleanup, stato retryable."
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+            echo "marker_verified=false" >> "$GITHUB_OUTPUT"
+            echo "retryable=true" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+          if ! printf '%s' "$marker_result" | jq -e \
+            --arg marker REDCHECK_FIX_ROUND --argjson round "$NEXT" --arg head "${{ needs.preflight.outputs.head_sha }}" \
+            'type == "object" and .commentId != null and .postedCommentId == .commentId and (.postedCommentAuthor | type == "string" and length > 0) and .marker == $marker and .round == $round and .headSha == $head and (.bodySha | type == "string" and test("^[a-f0-9]{64}$")) and (.bodyRevision == .bodySha)' >/dev/null 2>&1; then
+            echo "::error::Marker REDCHECK_FIX_ROUND:$NEXT restituito senza prova strutturata valida. Nessun Codex: claim/lease rilasciati dal cleanup, stato retryable."
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+            echo "marker_verified=false" >> "$GITHUB_OUTPUT"
+            echo "retryable=true" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
           echo "proceed=true" >> "$GITHUB_OUTPUT"
           echo "round=$NEXT" >> "$GITHUB_OUTPUT"
+          echo "marker_body_revision=$(printf '%s' \"$marker_result\" | jq -r '.bodyRevision')" >> "$GITHUB_OUTPUT"
+          echo "marker_comment_id=$(printf '%s' \"$marker_result\" | jq -r '.commentId')" >> "$GITHUB_OUTPUT"
+          echo "marker_verified=true" >> "$GITHUB_OUTPUT"
+          echo "retryable=false" >> "$GITHUB_OUTPUT"
 
       # `actions/checkout` persiste `http.https://github.com/.extraheader`, che
       # PREVALE sullo `x-access-token:` del remote: senza azzerarlo il set-url e'
@@ -582,7 +680,7 @@ jobs:
             echo "::error::La risposta API del body PR prima di Claude e' vuota o non verificabile."
             exit 1
           fi
-          if ! body_sha=$(sed -E -e 's/\r$//' -e 's/[[:space:]]+$//' "$body_file" | sha256sum | cut -d' ' -f1); then
+          if ! body_sha=$(sha256sum "$body_file" | awk '{print $1}'); then
             echo "::error::Impossibile calcolare il digest del body PR prima di Claude."
             exit 1
           fi
@@ -737,9 +835,36 @@ jobs:
           CODEX_FALLBACK_MODE: '1'
         run: node scripts/ci/check-quota-backoff.mjs
 
+      - name: Revalidate PR HEAD + body immediately before Codex
+        id: precodex
+        if: steps.guard.outputs.proceed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
+          EXPECTED_HEAD_SHA: ${{ needs.preflight.outputs.head_sha }}
+          EXPECTED_BODY_REVISION: ${{ steps.guard.outputs.marker_body_revision }}
+          EXPECTED_MARKER: REDCHECK_FIX_ROUND
+          EXPECTED_ROUND: ${{ steps.guard.outputs.round }}
+          EXPECTED_COMMENT_ID: ${{ steps.guard.outputs.marker_comment_id }}
+          TRUSTED_MARKER_HELPER: ${{ steps.trusted_marker.outputs.path }}
+        run: |
+          set -euo pipefail
+          if ! node "$TRUSTED_MARKER_HELPER" --verify-current \
+            --repo "$REPO" --pr "$PR_NUMBER" \
+            --marker "$EXPECTED_MARKER" --round "$EXPECTED_ROUND" \
+            --comment-id "$EXPECTED_COMMENT_ID" \
+            --expected-head "$EXPECTED_HEAD_SHA" \
+            --expected-body-revision "$EXPECTED_BODY_REVISION" \
+            --expected-author github-actions[bot] >/dev/null; then
+            echo "::error::HEAD/body revision non verificabili con l'helper trusted subito prima di Codex: nessun fix automatico viene avviato."
+            exit 1
+          fi
+          echo "verified=true" >> "$GITHUB_OUTPUT"
+
       - name: Run Codex Luna Max ❌-check-fix
         id: codex_fix
-        if: steps.guard.outputs.proceed == 'true'
+        if: steps.guard.outputs.proceed == 'true' && steps.precodex.outputs.verified == 'true'
         # Non far fallire il job sull'exit non-zero dell'action: il `Classify
         # outcome` finale decide il colore sul LAVORO reale (commit pushato), non
         # sul subtype della CLI.
@@ -828,6 +953,10 @@ jobs:
           FIX_ROUND: ${{ steps.guard.outputs.round }}
           FIX_ROUND_MARKER: REDCHECK_FIX_ROUND
           CLAIM_TOKEN: ${{ steps.claim.outputs.claim_token }}
+          MARKER_COMMENT_ID: ${{ steps.guard.outputs.marker_comment_id }}
+          MARKER_HEAD: ${{ needs.preflight.outputs.head_sha }}
+          MARKER_BODY_REVISION: ${{ steps.guard.outputs.marker_body_revision }}
+          TRUSTED_MARKER_HELPER: ${{ steps.trusted_marker.outputs.path }}
         run: |
           set -uo pipefail
           HEAD_NOW=$(git rev-parse HEAD 2>/dev/null || echo "")
@@ -851,22 +980,21 @@ jobs:
               echo 'CLAIM_STATUS=released' >> "$GITHUB_ENV"
             fi
             if [ -n "${PR_NUMBER:-}" ] && [ -n "${FIX_ROUND:-}" ] && [ -n "${FIX_ROUND_MARKER:-}" ]; then
-              comments_json=$(gh api --paginate "repos/${REPO}/issues/${PR_NUMBER}/comments?per_page=100" 2>/dev/null || echo '[]')
-              case "$comments_json" in
-                \[*) ;;
-                *) comments_json='[]' ;;
-              esac
-              comment_id=$(printf '%s' "$comments_json" | jq -r --arg m "$FIX_ROUND_MARKER" --arg r "$FIX_ROUND" '[.[]? | select((.body // "") | test("<!--[[:space:]]*" + $m + ":[[:space:]]*" + $r + "[[:space:]]*-->")) | .id] | last // empty' 2>/dev/null || true)
-              if [ -n "$comment_id" ]; then
-                if gh api -X DELETE "repos/${REPO}/issues/comments/${comment_id}"; then
+              if [ -n "${MARKER_COMMENT_ID:-}" ] && [ -n "${MARKER_HEAD:-}" ] \
+                && [ -n "${MARKER_BODY_REVISION:-}" ] && [ -f "${TRUSTED_MARKER_HELPER:-}" ]; then
+                if marker_delete_result=$(node "$TRUSTED_MARKER_HELPER" --delete-verified \
+                  --repo "$REPO" --pr "$PR_NUMBER" --marker "$FIX_ROUND_MARKER" \
+                  --round "$FIX_ROUND" --comment-id "$MARKER_COMMENT_ID" \
+                  --expected-head "$MARKER_HEAD" --expected-body-revision "$MARKER_BODY_REVISION" \
+                  --expected-author github-actions[bot]); then
                   refund_marker="${FIX_ROUND_MARKER%_ROUND}_REFUNDED"
                   gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '<!-- %s: %s -->\n_Round rimborsato: run SUPERSEDED; nessun round consumato._' "$refund_marker" "$FIX_ROUND")" >/dev/null 2>&1 || true
-                  echo "round marker $FIX_ROUND_MARKER:$FIX_ROUND deleted (comment $comment_id) → rimborsato"
+                  echo "round marker $FIX_ROUND_MARKER:$FIX_ROUND deleted after trusted ID/body proof → rimborsato ($marker_delete_result)"
                 else
-                  echo "::warning::SUPERSEDED ma DELETE del marker round $comment_id fallita → round ancora contato"
+                  echo "::warning::SUPERSEDED ma il marker ID $MARKER_COMMENT_ID non ha superato la prova trusted ID/autore/body → round ancora contato"
                 fi
               else
-                echo "SUPERSEDED: marker $FIX_ROUND_MARKER:$FIX_ROUND assente → niente da rimborsare"
+                echo "::warning::SUPERSEDED: prova trusted del marker $FIX_ROUND_MARKER:$FIX_ROUND incompleta → round ancora contato"
               fi
             fi
             if [ -n "${CLAIM_TOKEN:-}" ]; then
@@ -899,7 +1027,7 @@ jobs:
             echo "::error::❌-check-fix: la risposta API del body PR dopo Claude e' vuota o non verificabile → classificazione BLOCCANTE, job ROSSO."
             exit 1
           fi
-          if ! now_body_sha=$(sed -E -e 's/\r$//' -e 's/[[:space:]]+$//' "$body_file" | sha256sum | cut -d' ' -f1); then
+          if ! now_body_sha=$(sha256sum "$body_file" | awk '{print $1}'); then
             echo "::error::❌-check-fix: impossibile calcolare il digest del body PR dopo Claude → classificazione BLOCCANTE, job ROSSO."
             exit 1
           fi
@@ -921,7 +1049,6 @@ jobs:
 
       - name: Finalize redcheck PR + HEAD + failed check claim
         if: always() && steps.claim.outputs.claim_acquired == 'true'
-        continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
@@ -948,7 +1075,19 @@ jobs:
             CLAIM_STATUS=completed
           fi
           export CLAIM_STATUS
-          node scripts/ci/redcheck-review-prefilter.mjs --claim
+          if ! claim_result=$(node scripts/ci/redcheck-review-prefilter.mjs --claim); then
+            echo "::error::Finalizzazione claim redcheck fallita per errore del client/API: release non verificato."
+            exit 1
+          fi
+          printf '%s\n' "$claim_result"
+          if ! printf '%s' "$claim_result" | grep -qE '(^|[[:space:]])claim_error=false([[:space:]]|$)'; then
+            echo "::error::Finalizzazione claim redcheck con errore/parsing non verificabile: release non confermato."
+            exit 1
+          fi
+          if ! printf '%s' "$claim_result" | grep -qE "(^|[[:space:]])claim_state=${CLAIM_STATUS}([[:space:]]|$)"; then
+            echo "::error::Claim redcheck non verificato nello stato atteso (${CLAIM_STATUS})."
+            exit 1
+          fi
 
       - name: Release shared Codex lane quota lease
         if: always() && steps.quota_lease.outputs.lease_allowed == 'true' && steps.quota_lease.outputs.lease_token != ''
