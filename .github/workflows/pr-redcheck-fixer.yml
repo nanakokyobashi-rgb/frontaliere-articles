@@ -487,7 +487,8 @@ jobs:
             echo "retryable=true" >> "$GITHUB_OUTPUT"
             exit 1
           fi
-          # Il cap conta solo marker completi emessi dall'autore trusted e
+          # Il cap non usa token body-only `REDCHECK_FIX_ROUND: [0-9]+`: conta solo
+          # marker completi emessi dall'autore trusted e
           # legati alla HEAD/body correnti; mai token in un commento preseed o stale.
           if ! round_state=$(node "${{ steps.trusted_marker.outputs.path }}" \
             --current-round --repo "$REPO" --pr "$PR_NUMBER" --marker REDCHECK_FIX_ROUND); then
