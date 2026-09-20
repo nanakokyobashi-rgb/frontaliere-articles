@@ -18,7 +18,9 @@
  * cui un runner ha finito: un rerun vecchio può concludersi dopo una
  * generazione nuova. Il selettore quindi verifica l'identità del check
  * (`id` + `head_sha`) e ordina per `created_at`, `run_attempt` e infine `id`;
- * `completed_at` serve solo a verificare che un run completato sia utilizzabile.
+ * almeno un marcatore di generazione (`created_at` o `run_attempt`) deve essere
+ * presente e confrontabile fra i candidati. `completed_at` serve solo a
+ * verificare che un run completato sia utilizzabile.
  * Se la generazione più nuova è ancora in volo, oppure l'identità non è
  * verificabile, il contratto è rispettivamente `pending` o `ambiguous` e
  * nessun verdetto viene scelto. Un job `skipped` è completato ma non è un
@@ -82,6 +84,12 @@ function generationMetadata(run) {
     if (!validTimestamp(run.completed_at)) return null;
   }
 
+  // Il solo check-run id è una chiave unica, non una prova sufficiente della
+  // generazione: alcune forme REST omettono timestamp e attempt e possono
+  // avere id assegnati in ordine diverso dal workflow-run. In quel caso non
+  // si sceglie silenziosamente fra generazioni concorrenti.
+  if (createdAt === null && runAttempt === null) return null;
+
   return {
     id: run.id,
     headSha: run.head_sha.toLowerCase(),
@@ -91,9 +99,9 @@ function generationMetadata(run) {
 }
 
 /**
- * Confronta la generazione di due run. `id` è il fallback deterministico per
- * le forme REST che non espongono `created_at`/`run_attempt`; non si usa mai
- * `completed_at`, che descrive il runner e non la generazione.
+ * Confronta la generazione di due run. `id` è solo il tie-break quando i
+ * marcatori di generazione sono uguali; non si usa mai `completed_at`, che
+ * descrive il runner e non la generazione.
  */
 function compareGenerations(left, right) {
   if (left.createdAt !== null && right.createdAt !== null && left.createdAt !== right.createdAt) {
@@ -236,6 +244,11 @@ export function latestCompletedRunSelectionByName(checkRuns, name) {
   const expectedHead = metadata[0].headSha;
   if (metadata.some((entry) => entry.headSha !== expectedHead)) {
     return runSelection(RUN_SELECTION_STATES.AMBIGUOUS, 'mixed-head-sha');
+  }
+  const allHaveCreatedAt = metadata.every((entry) => entry.createdAt !== null);
+  const allHaveRunAttempt = metadata.every((entry) => entry.runAttempt !== null);
+  if (!allHaveCreatedAt && !allHaveRunAttempt) {
+    return runSelection(RUN_SELECTION_STATES.AMBIGUOUS, 'incomparable-generation-metadata');
   }
 
   const byId = new Map();

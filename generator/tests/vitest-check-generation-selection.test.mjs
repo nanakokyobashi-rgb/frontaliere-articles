@@ -108,6 +108,7 @@ test('head SHA misti, id duplicato o metadati invalidi sono ambiguous e fail-clo
     [valid, run({ id: 501, conclusion: 'failure', createdAt: '2026-09-20T13:01:00Z', headSha: 'b'.repeat(40) })],
     [valid, { ...valid, conclusion: 'failure' }],
     [{ ...valid, created_at: 'not-a-date' }],
+    [{ ...valid, created_at: null }],
     [{ ...valid, id: undefined }],
   ];
 

@@ -137,18 +137,9 @@ const quotaRetryComment = ({
 function checkRuns({ concl = 'success', pending = 0 } = {}) {
   const runs = [];
   if (concl !== null) {
-    runs.push({
-      id: 1000,
-      head_sha: HEAD_SHA,
-      name: CHECK_NAME,
-      status: 'completed',
-      completed_at: isoAgo(3),
-      conclusion: concl,
-    });
+    runs.push({ id: 1000, name: CHECK_NAME, status: 'completed', head_sha: HEAD_SHA, created_at: isoAgo(3), completed_at: isoAgo(3), conclusion: concl });
   }
-  for (let i = 0; i < pending; i++) {
-    runs.push({ id: 2000 + i, head_sha: HEAD_SHA, name: CHECK_NAME, status: 'in_progress', completed_at: null });
-  }
+  for (let i = 0; i < pending; i++) runs.push({ id: 2000 + i, name: CHECK_NAME, status: 'in_progress', head_sha: HEAD_SHA, created_at: isoAgo(3), completed_at: null });
   return { total_count: runs.length, check_runs: runs };
 }
 
@@ -1007,8 +998,8 @@ test('#314 — due check completati nello STESSO secondo: vince il più recente 
     checks: {
       total_count: 2,
       check_runs: [
-        { id: 5002, head_sha: HEAD_SHA, name: CHECK_NAME, status: 'completed', completed_at: sameSecond, conclusion: 'success' },
-        { id: 5001, head_sha: HEAD_SHA, name: CHECK_NAME, status: 'completed', completed_at: sameSecond, conclusion: 'failure' },
+        { id: 5002, name: CHECK_NAME, status: 'completed', head_sha: HEAD_SHA, created_at: sameSecond, completed_at: sameSecond, conclusion: 'success' },
+        { id: 5001, name: CHECK_NAME, status: 'completed', head_sha: HEAD_SHA, created_at: sameSecond, completed_at: sameSecond, conclusion: 'failure' },
       ],
     },
     reviews: reviews({ commit: OLD_SHA, body: 'un finding, niente LGTM' }),
