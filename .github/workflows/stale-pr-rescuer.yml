@@ -305,14 +305,22 @@ jobs:
             # `details_url`. L'id del check-run rompe i pareggi, non è da solo
             # una generazione certa. Se nessun marcatore è confrontabile, il
             # rescuer resta pending invece di scegliere un verdetto.
-            TESTS_STATE=$(echo "$checks" | jq -rs --arg n "$CI_CHECK_NAME" --arg head "$HEAD" '
+            TESTS_STATE=$(echo "$checks" | jq -rs --arg n "$CI_CHECK_NAME" --arg head "$HEAD" --arg repo "$REPO" '
               def workflow_id:
                 if (.details_url | type) != "string" then null
-                else try (.details_url | capture("^https://github[.]com/[^/]+/[^/]+/actions/runs/(?<id>[1-9][0-9]*)/job/[1-9][0-9]*(?:[?#].*)?$").id) catch null
+                else try (
+                  .details_url
+                  | capture("^https://github[.]com/(?<owner>[^/]+)/(?<name>[^/]+)/actions/runs/(?<id>[1-9][0-9]*)/job/[1-9][0-9]*(?:[?#].*)?$")
+                  | if (.owner + "/" + .name) == $repo then .id else null end
+                ) catch null
                 end;
               def parse_time:
                 if type != "string" or length == 0 then null
-                else (try (sub("\\.[0-9]+Z$"; "Z") | fromdateiso8601) catch null)
+                else try (
+                  capture("^(?<base>[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2})(?<fraction>\\.[0-9]+)?Z$")
+                  | ((.base + "Z") | fromdateiso8601)
+                    + (((.fraction // ".0") | ltrimstr(".") | ((. + "000")[0:3]) | tonumber) / 1000)
+                ) catch null
                 end;
               def valid_created_at:
                 (.created_at == null)
@@ -338,20 +346,34 @@ jobs:
                 | if $id == null then [0, 0, ""] else [1, ($id | length), $id] end;
               def generation:
                 if (.created_at | parse_time) != null
-                then {source: "timestamp", order: [
-                  (.created_at | parse_time),
-                  (if (.run_attempt | type) == "number"
-                    and (.run_attempt | floor == . and . >= 1)
-                   then .run_attempt else 0 end),
-                  workflow_sort_key
-                ]}
+                then (workflow_id) as $workflow
+                  | (if (.run_attempt | type) == "number"
+                     and (.run_attempt | floor == . and . >= 1)
+                    then .run_attempt else null end) as $attempt
+                  | {source: "timestamp", timestamp: (.created_at | parse_time), attempt: $attempt,
+                     workflow_id: $workflow, order: [
+                       (.created_at | parse_time),
+                       ($attempt // 0),
+                       workflow_sort_key
+                     ]}
                 elif (.run_attempt | type) == "number"
                    and (.run_attempt | floor == . and . >= 1)
-                then {source: "attempt", order: [0, .run_attempt, workflow_sort_key]}
+                then (workflow_id) as $workflow
+                  | {source: "attempt", timestamp: null, attempt: .run_attempt,
+                     workflow_id: $workflow, order: [0, .run_attempt, workflow_sort_key]}
                 else (workflow_id) as $id
                   | if $id == null then null
-                    else {source: "workflow", order: [0, 0, [1, ($id | length), $id]]}
+                    else {source: "workflow", timestamp: null, attempt: null,
+                          workflow_id: $id, order: [0, 0, [1, ($id | length), $id]]}
                     end
+                end;
+              def comparable_generation($left; $right):
+                if $left.source != $right.source then false
+                elif $left.source == "timestamp"
+                  and $left.timestamp == $right.timestamp
+                then (($left.attempt == null) == ($right.attempt == null))
+                  and (($left.workflow_id == null) == ($right.workflow_id == null))
+                else true
                 end;
               def correlation_valid($expected):
                 (valid_created_at and valid_run_attempt and valid_suite($expected) and valid_external_id)
@@ -391,6 +413,10 @@ jobs:
                   | if ([ $with_generation[] | .generation.source ] | unique | length) != 1 then {conclusion: "none", pending: 1}
                     else ($with_generation | map(select(.status != "completed" or .conclusion != "skipped"))) as $verdicts
                       | if ($verdicts | length) == 0 then {conclusion: "none", pending: 1}
+                        elif any($verdicts[] as $left | $verdicts[] as $right
+                          | ($left.id < $right.id)
+                          and (comparable_generation($left.generation; $right.generation) | not))
+                        then {conclusion: "none", pending: 1}
                         else ($verdicts | sort_by([.generation.order, .id]) | last) as $latest
                           | if $latest.status == "completed"
                             then {conclusion: $latest.conclusion, pending: 0}

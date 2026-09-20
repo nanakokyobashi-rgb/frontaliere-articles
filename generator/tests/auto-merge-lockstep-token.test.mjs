@@ -353,6 +353,24 @@ test('la generazione vince sul completamento fuori ordine e sui tie-break', () =
     'a parità di timestamp e attempt il workflow-run ID deve precedere il check-run ID',
   );
 
+  const sameWorkflowPartialAttempt = checkPages(
+    {
+      ...checkRun(615, VITEST_CHECK_NAME, 'FAILURE', HEAD_A, '2026-09-19T07:30:01Z'),
+      details_url: `https://github.com/${LOCKSTEP_REPO}/actions/runs/35442617322/job/615?attempt=1#summary`,
+    },
+    {
+      ...checkRun(616, VITEST_CHECK_NAME, 'SUCCESS', HEAD_A, '2026-09-19T07:30:01Z', {
+        runAttempt: 1,
+      }),
+      details_url: `https://github.com/${LOCKSTEP_REPO}/actions/runs/35442617322/job/616?attempt=1#summary`,
+    },
+  );
+  assert.equal(
+    exactCheckRunSnapshot(sameWorkflowPartialAttempt, HEAD_A, LOCKSTEP_REPO).allow,
+    false,
+    'attempt parziale nello stesso workflow-run deve restare ambiguous',
+  );
+
   const missingAttempt = checkPages(
     checkRun(613, VITEST_CHECK_NAME, 'FAILURE', HEAD_A, '2026-09-19T07:31:00Z'),
     checkRun(614, VITEST_CHECK_NAME, 'SUCCESS', HEAD_A, '2026-09-19T07:31:00Z', {

@@ -416,9 +416,11 @@ export function exactCheckRunSnapshot(pages, headSha, repository = null) {
               candidate.workflowRunId,
               previous.workflowRunId,
             );
+            if (workflowOrder === 0 && candidate.runAttempt !== previous.runAttempt) {
+              return deny(`check-run ${run.name} con attempt timestamped non correlabili`);
+            }
             newer = workflowOrder > 0
-              || (workflowOrder === 0 && candidate.runAttempt === previous.runAttempt
-                && candidate.generationId > previous.generationId);
+              || (workflowOrder === 0 && candidate.generationId > previous.generationId);
           } else if (candidate.runAttempt === previous.runAttempt
               && candidate.workflowRunId === previous.workflowRunId
               && candidate.runAttempt !== 0) {

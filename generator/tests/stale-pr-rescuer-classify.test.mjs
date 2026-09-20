@@ -1065,6 +1065,10 @@ test('#314 — la generazione usa run_attempt, workflow id e infine check id', o
   // workflow-run ID e solo infine check-run ID. I dettagli URL includono
   // query/fragment per coprire la forma URL valida che il parser JS accetta.
   const sameSecond = isoAgo(3);
+  const fractionalSecondBase = new Date(Math.floor((Date.now() - 3 * 3600_000) / 1000) * 1000)
+    .toISOString().slice(0, 19);
+  const fractionalOlder = `${fractionalSecondBase}.100Z`;
+  const fractionalNewer = `${fractionalSecondBase}.900Z`;
   const scenarios = [
     {
       label: 'run_attempt',
@@ -1151,6 +1155,29 @@ test('#314 — la generazione usa run_attempt, workflow id e infine check id', o
         },
       ],
     },
+    {
+      label: 'frazione di created_at',
+      runs: [
+        {
+          id: 6001,
+          name: CHECK_NAME,
+          status: 'completed',
+          head_sha: HEAD_SHA,
+          created_at: fractionalNewer,
+          completed_at: fractionalNewer,
+          conclusion: 'success',
+        },
+        {
+          id: 6002,
+          name: CHECK_NAME,
+          status: 'completed',
+          head_sha: HEAD_SHA,
+          created_at: fractionalOlder,
+          completed_at: fractionalOlder,
+          conclusion: 'failure',
+        },
+      ],
+    },
   ];
   for (const { label, runs } of scenarios) {
     const r = runScan({
@@ -1170,6 +1197,44 @@ test('#314 — la generazione usa run_attempt, workflow id e infine check id', o
       `Il tie-break ${label} non deve scegliere il failure della generazione vecchia.\n${body}`,
     );
   }
+});
+
+test('#314 — correlabilità mista resta pending', opts, () => {
+  const sameSecond = isoAgo(3);
+  const r = runScan({
+    prs: openPr(),
+    checks: {
+      total_count: 2,
+      check_runs: [
+        {
+          id: 6101,
+          name: CHECK_NAME,
+          status: 'completed',
+          head_sha: HEAD_SHA,
+          created_at: sameSecond,
+          completed_at: sameSecond,
+          conclusion: 'success',
+          run_attempt: 1,
+          details_url: 'https://github.com/nanakokyobashi-rgb/frontaliere-articles/actions/runs/2003/job/6101?attempt=1#summary',
+          check_suite: { id: 6101 },
+          external_id: '00000000-0000-4000-8000-000000000601',
+        },
+        {
+          id: 6102,
+          name: CHECK_NAME,
+          status: 'completed',
+          head_sha: HEAD_SHA,
+          created_at: sameSecond,
+          completed_at: sameSecond,
+          conclusion: 'failure',
+          run_attempt: 1,
+        },
+      ],
+    },
+    reviews: reviews({ commit: OLD_SHA, body: 'un finding, niente LGTM' }),
+  });
+  assert.deepEqual(r.comments, [], `Correlabilità mista non deve produrre un rescue.\n${r.stdout}`);
+  assert.deepEqual(r.labeled, [], `Correlabilità mista non deve scegliere un verdetto.\n${r.stdout}`);
 });
 
 // ── 7. D è un sottoinsieme stretto di A: nessuna PR etichettata in più ──────
