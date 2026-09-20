@@ -61,7 +61,7 @@ function usage() {
 }
 
 function runGh(args, label) {
-  const result = spawnSync('gh', args, { encoding: 'utf8' });
+  const result = spawnSync('gh', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
   if (result.error) throw new Error(`${label}: ${result.error.message}`);
   if (result.status !== 0) {
     const detail = String(result.stderr || '').trim().replace(/\s+/g, ' ').slice(0, 240);
