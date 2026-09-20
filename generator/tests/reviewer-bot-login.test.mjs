@@ -24,6 +24,7 @@ import {
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8');
+const STRICT_REVIEWER_BOT_LOGIN_JQ = 'test("^(claude\\\\[bot\\\\]|frontaliere-automation\\\\[bot\\\\])$";"i")';
 
 test('il set di login copre entrambe le forme di entrambi i bot', () => {
   for (const login of ['claude', 'claude[bot]', 'frontaliere-automation', 'frontaliere-automation[bot]']) {
@@ -71,11 +72,10 @@ test('isManagedReview allinea login GraphQL e REST dopo la normalizzazione', () 
   );
 });
 
-test('i workflow che filtrano le review usano il predicato jq condiviso', () => {
+test('i workflow adattati usano il predicato jq condiviso', () => {
   const workflows = [
     '.github/workflows/pr-redflag-fixer.yml',
     '.github/workflows/stale-pr-rescuer.yml',
-    '.github/workflows/tests.yml',
   ];
   for (const wf of workflows) {
     const src = read(wf);
@@ -84,6 +84,18 @@ test('i workflow che filtrano le review usano il predicato jq condiviso', () => 
       !/test\("claude";"i"\)/.test(src),
       `${wf} filtra ancora il solo login claude`,
     );
+  }
+  const testsYml = read('.github/workflows/tests.yml');
+  const strictCount = testsYml.split(STRICT_REVIEWER_BOT_LOGIN_JQ).length - 1;
+  assert.equal(strictCount, 4, 'tests.yml deve avere quattro selettori reviewer strettamente ancorati');
+  assert.equal(
+    testsYml.split(REVIEWER_BOT_LOGIN_JQ).length - 1,
+    0,
+    'tests.yml non deve usare il predicato prefisso condiviso dai fixer adattati',
+  );
+  for (const match of testsYml.matchAll(/test\("\^\(claude\\\\\[bot\\\\\]\|frontaliere-automation\\\\\[bot\\\\\]\)\$";"i"\)/g)) {
+    const context = testsYml.slice(Math.max(0, match.index - 220), match.index + match[0].length);
+    assert.doesNotMatch(context, /\.user\.type\s*==\s*"Bot"/, 'il gate review non deve dipendere da user.type');
   }
   for (const [wf, expected] of [
     ['.github/workflows/pr-redflag-fixer.yml', 1],
