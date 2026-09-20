@@ -38,6 +38,8 @@ export const REVIEW_GATE_STEP_NAMES = Object.freeze([
   'Require approving Codex review',
 ]);
 const FINDINGS_HEADING_RE = /^\s{0,3}#{1,3}\s+Findings\b[^\n]*$/i;
+const ANY_HEADING_RE = /^\s{0,3}#{1,3}\s+\S/;
+const IMPORTANT_COUNT_RE = /\bImportant\s*:\s*(\d+)\b/gi;
 const LGTM_HEADING_RE = /^\s{0,3}##\s+LGTM\s*$/m;
 const TEST_ONLY_REVIEW_BOT_RE = /^(?:github-actions|frontaliere-automation)\[bot\]$/i;
 const MAX_TRANSIENT_GH_READ_ATTEMPTS = 3;
@@ -136,17 +138,49 @@ export function latestBotReviewOnHead(reviews, head) {
 }
 
 /**
+ * Righe della sezione `## Findings`: dal titolo (incluso) fino al titolo
+ * successivo, escluso. `null` quando la sezione non esiste.
+ */
+function findingsSectionLines(body) {
+  const lines = body.split(/\r?\n/);
+  const start = lines.findIndex((line) => FINDINGS_HEADING_RE.test(line));
+  if (start === -1) return null;
+  const section = [lines[start]];
+  for (let index = start + 1; index < lines.length; index += 1) {
+    if (ANY_HEADING_RE.test(lines[index])) break;
+    section.push(lines[index]);
+  }
+  return section;
+}
+
+/**
  * Zero blocking findings. A missing `## Findings` heading is approving when
  * the body also has no real `🔴 Important`. `🟡 Nit` is advisory (site #9085)
  * and must not block native auto-merge of an otherwise clean `## LGTM`.
+ *
+ * Il conteggio si legge nella SEZIONE, non solo sulla riga del titolo. Il
+ * reviewer emette entrambe le forme: `## Findings (Important: 0, Nit: 0)` e un
+ * titolo nudo `## Findings` con `Important: 0` una riga sotto (osservato sulla
+ * review 5258385493 della PR #9315 del sito, commit e1fe8e3e). Leggendo solo il
+ * titolo la seconda forma risultava non-approvante con zero finding e `## LGTM`
+ * finale, e il gate non apriva l'auto-merge.
+ *
+ * Senza un conteggio riconoscibile nella sezione la risposta resta `false`
+ * (fail-closed): è ciò che la riga del titolo faceva già prima, perché un
+ * `## Findings` nudo non matchava `Important: 0`. Un 🔴 Important reale,
+ * ovunque nel body, blocca comunque.
  */
 export function reviewHasZeroFindings(body) {
   if (typeof body !== 'string') return false;
   REDFLAG_IMPORTANT_RE.lastIndex = 0;
   if (REDFLAG_IMPORTANT_RE.test(body)) return false;
-  const findingsHeading = body.split(/\r?\n/).find((line) => FINDINGS_HEADING_RE.test(line));
-  if (!findingsHeading) return true;
-  return /\bImportant\s*:\s*0\b/i.test(findingsHeading);
+  const section = findingsSectionLines(body);
+  if (!section) return true;
+  IMPORTANT_COUNT_RE.lastIndex = 0;
+  const counts = [...section.join('\n').matchAll(IMPORTANT_COUNT_RE)]
+    .map((match) => Number(match[1]));
+  if (counts.length === 0) return false;
+  return counts.every((count) => count === 0);
 }
 
 export function reviewHasLgtm(body) {

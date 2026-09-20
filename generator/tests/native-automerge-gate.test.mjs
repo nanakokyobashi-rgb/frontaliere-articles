@@ -164,6 +164,16 @@ test('richiede il riepilogo esplicito e vincola l opt-in alla HEAD verificata', 
   assert.equal(reviewIsApproved(review('## Findings (Important: 0, Nit: 1)\n\n`x.mjs:L1`: 🟡 Nit: advisory.\n\n## LGTM')), true);
   assert.equal(reviewHasZeroFindings('## Scope\n\n## LGTM'), true);
   assert.equal(reviewHasZeroFindings('## Findings (Important: 1, Nit: 0)\n\n🔴 Important: not harmless'), false);
+  // Il conteggio sta nella SEZIONE, non sul titolo: shape della review
+  // 5258385493 (PR #9315 del sito). Leggendo solo il titolo il gate non
+  // apriva l'auto-merge su una review a zero finding con `## LGTM`.
+  assert.equal(reviewHasZeroFindings('## Scope\n\nx\n\n## Findings\n\nImportant: 0\n\n## LGTM'), true);
+  assert.equal(reviewIsApproved(review('## Findings\n\nImportant: 0\n\n## LGTM')), true);
+  assert.equal(reviewHasZeroFindings('## Findings\n\nImportant: 2\n\n## LGTM'), false);
+  // Nessun conteggio riconoscibile in sezione → fail-closed, come prima.
+  assert.equal(reviewHasZeroFindings('## Findings\n\nNothing worth blocking on.\n\n## LGTM'), false);
+  // Un 🔴 Important reale batte un conteggio a zero, ovunque si trovi.
+  assert.equal(reviewHasZeroFindings('## Findings\n\nImportant: 0\n\n🔴 Important: not harmless\n\n## LGTM'), false);
   assert.deepEqual(nativeAutoMergeArgs({ repo: 'owner/repo', prNumber: '42', headSha: HEAD }), [
     'pr', 'merge', '42', '--repo', 'owner/repo', '--auto', '--squash', '--delete-branch',
     '--match-head-commit', HEAD,
