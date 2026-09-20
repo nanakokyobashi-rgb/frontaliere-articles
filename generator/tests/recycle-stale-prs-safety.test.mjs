@@ -22,7 +22,7 @@ test('il gate di inattività usa il massimo delle date, non l\'ultimo elemento',
 });
 
 test('il fallback DELETE confronta REF_SHA e HEADSHA prima di cancellare', () => {
-  const deleteAt = WORKFLOW.indexOf('gh api -X DELETE "repos/${REPO}/git/refs/heads/${HEADREF}"');
+  const deleteAt = WORKFLOW.indexOf('gh api -X DELETE "repos/${REPO}/git/refs/heads/${ref_path}"');
   assert.ok(deleteAt >= 0, 'il fallback DELETE deve restare esplicito e verificabile');
 
   const beforeDelete = WORKFLOW.slice(Math.max(0, deleteAt - 6000), deleteAt);

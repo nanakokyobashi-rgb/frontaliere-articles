@@ -87,6 +87,15 @@ jobs:
       # deterministico, dedup sul titolo canonico del monitor daily
       # (gh-pat-expiry-monitor.yml) che resta l'owner dell'auto-close.
       # GH_TOKEN = GITHUB_TOKEN, NON il PAT (e' la cosa rotta).
+      #
+      # Il guard deve misurare la capacita' che questo workflow usa davvero,
+      # non "un token qualsiasi". Il preflight del recycle (step sotto) ammette
+      # SOLO `GITHUB_PAT_NANAKO` con login nel set del sender gate di
+      # issue-fix: l'App token chiude la PR ma non ritriggera il fixer, quindi
+      # non e' un sostituto. Con la vecchia condizione (`APP_TOKEN` basta) uno
+      # scenario App-token-presente + PAT-assente/non-ammesso usciva 0 in
+      # silenzio: nessuna close, nessun re-queue e nessun alert. Qui l'alert
+      # scatta sulla stessa identita' che il preflight richiede.
       - name: Alert token-down (dedup, zero-Claude)
         if: always()
         continue-on-error: true
@@ -94,9 +103,20 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
         run: |
-          if [ -n "${APP_TOKEN:-${GITHUB_PAT_NANAKO:-}}" ]; then
-            echo "Token operativo runtime disponibile: nessun alert token-down."
-            exit 0
+          RECYCLE_PAT="${GITHUB_PAT_NANAKO:-}"
+          if [ -n "$RECYCLE_PAT" ]; then
+            RECYCLE_PAT_LOGIN=$(GH_TOKEN="$RECYCLE_PAT" gh api user --jq '.login' 2>/dev/null || true)
+            case "$RECYCLE_PAT_LOGIN" in
+              nanakokyobashi-rgb|valerielinc-ops|claude*)
+                echo "Token operativo runtime disponibile: PAT con identita' ammessa dal sender gate (login=${RECYCLE_PAT_LOGIN}), nessun alert token-down."
+                exit 0
+                ;;
+              *)
+                echo "::warning::PAT presente ma login=${RECYCLE_PAT_LOGIN:-UNKNOWN} non ammesso dal sender gate di issue-fix: il recycle sarebbe inerte, emetto l'alert token-down."
+                ;;
+            esac
+          else
+            echo "::warning::GITHUB_PAT_NANAKO assente: l'App token non ritriggera issue-fix, il recycle sarebbe inerte. Emetto l'alert token-down."
           fi
           node scripts/ci/alert-pat-down.mjs --workflow "${{ github.workflow }}" --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
@@ -144,7 +164,21 @@ jobs:
             echo "::error::MAX_RECYCLES_PER_RUN supera il limite operativo 100 (ricevuto: $MAX_RECYCLES)."
             exit 1
           fi
+          # Budget UNICO per run, condiviso da riconciliazione e close+re-queue.
+          # Con due contatori separati (RECONCILED + RECYCLE_ATTEMPTS)
+          # `max_recycles=1` autorizzava una riconciliazione PIU' una nuova
+          # close, cioe' fino al doppio del cap dichiarato: il cap descrive il
+          # blast radius distruttivo per run, non per fase.
           RECYCLE_ATTEMPTS=0
+
+          # Un marker di recovery non applicato e' l'unico caso in cui una PR
+          # chiusa esce dalla scansione futura: la riconciliazione la trova
+          # SOLO dalla label. Se il POST fallisce dopo una close riuscita, la
+          # run deve finire ROSSA, altrimenti il silenzio e' indistinguibile
+          # dal successo. Il flag sta su file perche' lo scan principale gira
+          # in una subshell di pipeline: una variabile non risalirebbe.
+          RECOVERY_FAIL_FLAG="$(mktemp)"
+          : >"$RECOVERY_FAIL_FLAG"
 
           # Marker di recovery durevole. La scansione principale vede solo PR
           # APERTE: una PR gia' chiusa il cui re-queue e' fallito a meta'
@@ -174,11 +208,29 @@ jobs:
               fi
             fi
           fi
+          # Ritorna 0 SOLO se il marker e' stato applicato. Il POST e' l'unica
+          # parte che rende la PR chiusa ritrovabile dal run successivo:
+          # riprovarlo e poi propagare l'esito e' il punto. Il commento sulla
+          # issue e' visibilita' per un umano ed e' best-effort: non deve
+          # trasformare un marker riuscito in un fallimento.
           mark_recovery() {
-            gh api --method POST "repos/${REPO}/issues/${N}/labels" -f "labels[]=${RECOVERY_LABEL}" >/dev/null 2>&1 \
-              || echo "::error::PR #${N}: marker ${RECOVERY_LABEL} non applicato."
+            mark_ok=false
+            for mark_attempt in 1 2 3; do
+              if gh api --method POST "repos/${REPO}/issues/${N}/labels" -f "labels[]=${RECOVERY_LABEL}" >/dev/null 2>&1; then
+                mark_ok=true
+                break
+              fi
+              echo "::warning::PR #${N}: POST del marker ${RECOVERY_LABEL} fallito (tentativo ${mark_attempt}/3)."
+              sleep 2
+            done
             gh issue comment "${ISSUE}" --repo "${REPO}" --body "♻️ recovery: PR stale #${N} chiusa dal recycle ma $1. La PR porta il marker \`${RECOVERY_LABEL}\`: il run successivo riprova da solo (guard del ref + re-queue) senza richiuderla; se il marker resta, riapplicare \`agent:fix\` a mano." 2>/dev/null \
-              || echo "::error::commento di recovery su issue #${ISSUE} non pubblicato."
+              || echo "::warning::commento di recovery su issue #${ISSUE} non pubblicato (il marker resta la fonte di verita')."
+            if [ "$mark_ok" != "true" ]; then
+              echo "::error::PR #${N}: marker ${RECOVERY_LABEL} NON applicato dopo 3 tentativi — PR chiusa e issue #${ISSUE} non ri-accodata, nessuna riconciliazione possibile. Riapplicare \`agent:fix\` a mano."
+              printf 'PR #%s -> issue #%s\n' "${N}" "${ISSUE}" >>"$RECOVERY_FAIL_FLAG"
+              return 1
+            fi
+            return 0
           }
 
           # Libera il ref della PR chiusa: 404 confermato, oppure DELETE
@@ -194,10 +246,24 @@ jobs:
             if [ -z "${HEADREF:-}" ]; then
               echo "::warning::PR #${N}: head ref sconosciuto, non posso verificare che sia libero"
             else
+              # Percent-encoding per segmento: gli `/` di `fix/issue-77`
+              # restano separatori di path, tutto il resto viene codificato.
+              ref_path=$(jq -rn --arg r "$HEADREF" '$r | split("/") | map(@uri) | join("/")' 2>/dev/null || true)
+              if [ -z "$ref_path" ]; then
+                echo "::error::PR #${N}: head ref ${HEADREF} non codificabile; NON considero il ref assente."
+                return 1
+              fi
               for attempt in 1 2 3; do
                 probe_file=$(mktemp)
                 probe_err=$(mktemp)
-                if gh api --include "repos/${REPO}/git/refs/heads/${HEADREF}" >"$probe_file" 2>"$probe_err"; then
+                # `git/ref/{ref}` (SINGOLARE) e' il route GET di un ref solo:
+                # 200 con un oggetto quando esiste, 404 quando non esiste.
+                # `git/refs/{ref}` (plurale) e' il route di LISTA con match per
+                # PREFISSO: su `fix/issue-77` restituisce anche `fix/issue-770`
+                # e la risposta diventa un ARRAY senza `.object.sha`, cioe'
+                # "payload malformato"; e un ref assente con un fratello-prefisso
+                # non da' 404. Il DELETE resta sul plurale: e' l'unico che lo ha.
+                if gh api --include "repos/${REPO}/git/ref/heads/${ref_path}" >"$probe_file" 2>"$probe_err"; then
                   http_status=$(sed 's/\r$//' "$probe_file" | sed -n '1s/^HTTP\/[0-9.][0-9.]*[[:space:]]\{1,\}\([0-9][0-9][0-9]\).*/\1/p')
                   probe_body=$(sed 's/\r$//' "$probe_file" | awk 'BEGIN { body=0 } body { print } /^$/ { body=1; next }')
                   if [ "$http_status" != "200" ]; then
@@ -232,7 +298,7 @@ jobs:
                     echo "::warning::PR #${N}: ref ${HEADREF} punta a ${REF_SHA}, diverso dalla head chiusa ${HEADSHA}; skip DELETE"
                     break
                   fi
-                  if ! gh api -X DELETE "repos/${REPO}/git/refs/heads/${HEADREF}" >/dev/null 2>&1; then
+                  if ! gh api -X DELETE "repos/${REPO}/git/refs/heads/${ref_path}" >/dev/null 2>&1; then
                     echo "::error::PR #${N}: DELETE del ref ${HEADREF} fallita; NON ri-accodo issue #${ISSUE}."
                     break
                   fi
@@ -311,10 +377,11 @@ jobs:
             echo "::warning::Query dei marker ${RECOVERY_LABEL} fallita: riconciliazione rimandata al prossimo run."
             rec_lines=""
           fi
-          RECONCILED=0
           while read -r rec; do
             [ -n "$rec" ] || continue
-            if [ "$RECONCILED" -ge "$MAX_RECYCLES" ]; then
+            # Stesso contatore dello scan sotto: il cap e' il numero di
+            # operazioni distruttive per run, non per fase.
+            if [ "$RECYCLE_ATTEMPTS" -ge "$MAX_RECYCLES" ]; then
               echo "::notice::Cap $MAX_RECYCLES raggiunto sulla riconciliazione: il resto al prossimo run."
               break
             fi
@@ -339,7 +406,7 @@ jobs:
             IST=$(gh issue view "$ISSUE" --repo "$REPO" --json state --jq '.state' 2>/dev/null || echo "UNKNOWN")
             if [ "$IST" != "OPEN" ]; then echo "recovery PR #$N → issue #$ISSUE stato=$IST — niente da ri-accodare, lascio il marker"; continue; fi
             if [ "$DRY" = "true" ]; then echo "(dry-run) recovery PR #$N → issue #$ISSUE: skip"; continue; fi
-            RECONCILED=$((RECONCILED + 1))
+            RECYCLE_ATTEMPTS=$((RECYCLE_ATTEMPTS + 1))
             if ! free_ref; then echo "::warning::recovery PR #$N: ref ${HEADREF} non ancora libero — marker lasciato"; continue; fi
             if ! requeue_issue; then echo "::warning::recovery PR #$N: re-queue issue #$ISSUE non verificato — marker lasciato"; continue; fi
             gh api --method DELETE "repos/${REPO}/issues/${N}/labels/${RECOVERY_LABEL}" >/dev/null 2>&1 \
@@ -514,7 +581,8 @@ jobs:
               # prossimo run. Uno stato vuoto/illeggibile invece puo' nascondere
               # una PR gia' chiusa, che la scansione non vedrebbe piu'.
               if [ "$PR_STATE" != "OPEN" ]; then
-                mark_recovery "lo stato dopo la close non è verificabile (state=${PR_STATE:-UNKNOWN})"
+                mark_recovery "lo stato dopo la close non è verificabile (state=${PR_STATE:-UNKNOWN})" \
+                  || echo "::error::PR #${N}: senza marker questa PR non e' piu' raggiungibile da nessuna scansione."
               fi
               continue
             fi
@@ -523,18 +591,28 @@ jobs:
               # Ri-accodare ora significherebbe un push non-fast-forward e zero
               # PR. Il marker di recovery fa riprovare il run successivo.
               echo "::error::PR #${N}: branch ${HEADREF:-?} ancora presente dopo la close — NON ri-accodo issue #${ISSUE}."
-              mark_recovery "il branch \`${HEADREF:-?}\` non è stato cancellato o verificato"
+              mark_recovery "il branch \`${HEADREF:-?}\` non è stato cancellato o verificato" \
+                || echo "::error::PR #${N}: senza marker questa PR non e' piu' raggiungibile da nessuna scansione."
               continue
             fi
 
             if ! requeue_issue; then
-              mark_recovery "il re-queue \`agent:fix\` (remove/verify/add/verify) non è andato a buon fine"
+              mark_recovery "il re-queue \`agent:fix\` (remove/verify/add/verify) non è andato a buon fine" \
+                || echo "::error::PR #${N}: senza marker questa PR non e' piu' raggiungibile da nessuna scansione."
               continue
             fi
             echo "issue #${ISSUE} ri-accodata (agent:fix via PAT)"
 
           done
           echo "Recycle scan completo."
+          if [ -s "$RECOVERY_FAIL_FLAG" ]; then
+            echo "::error::Marker ${RECOVERY_LABEL} non applicato su:"
+            cat "$RECOVERY_FAIL_FLAG"
+            echo "::error::Queste PR sono chiuse, le issue NON ri-accodate e senza marker la riconciliazione del run successivo non le vedra': intervento manuale richiesto."
+            rm -f "$RECOVERY_FAIL_FLAG"
+            exit 1
+          fi
+          rm -f "$RECOVERY_FAIL_FLAG"
 
       # Draft parcheggiate → `needs-human`. DEVE stare PRIMA del digest qui
       # sotto, cosi' una draft etichettata in questo run compare gia' nella

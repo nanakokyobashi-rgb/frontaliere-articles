@@ -71,6 +71,7 @@ case \"$command\" in
       exit 0
     fi
     if printf '%s' \"$args\" | grep -q -- '--method POST .*issues/17/labels'; then
+      if [ \"\${FAKE_MARKER_POST:-ok}\" = fail ]; then exit 1; fi
       set_state MARKER true
       exit 0
     fi
@@ -89,6 +90,19 @@ case \"$command\" in
     fi
     if printf '%s' \"$args\" | grep -q -- '--include'; then
       mode=\"\${FAKE_REF_MODE:-sha}\"
+      # Contratto reale dei due route di GitHub, che NON sono intercambiabili:
+      #   GET git/ref/<ref>  (SINGOLARE) -> un solo ref: 200 oggetto, oppure 404
+      #   GET git/refs/<ref> (PLURALE)   -> lista per PREFISSO: 200 ARRAY
+      # In questo repo finto esiste anche il fratello-prefisso fix/issue-770,
+      # quindi il route plurale non puo' mai rispondere con un oggetto solo.
+      if printf '%s' \"$args\" | grep -q -- '/git/refs/'; then
+        if [ \"$(get_state REF_PRESENT)\" = true ]; then
+          printf 'HTTP/2 200 OK\\n\\n[{\"ref\":\"refs/heads/fix/issue-77\",\"object\":{\"sha\":\"%s\"}},{\"ref\":\"refs/heads/fix/issue-770\",\"object\":{\"sha\":\"%s\"}}]\\n' \"\${FAKE_HEAD_SHA:-${SHA}}\" \"\${FAKE_HEAD_SHA:-${SHA}}\"
+        else
+          printf 'HTTP/2 200 OK\\n\\n[{\"ref\":\"refs/heads/fix/issue-770\",\"object\":{\"sha\":\"%s\"}}]\\n' \"\${FAKE_HEAD_SHA:-${SHA}}\"
+        fi
+        exit 0
+      fi
       if [ \"$mode\" = 404 ]; then
         printf 'HTTP/2 404 Not Found\\n\\n{\"message\":\"Not Found\"}\\n'
         exit 1
@@ -123,14 +137,14 @@ case \"$command\" in
     fi
     if [ \"$sub\" = view ]; then
       if printf '%s' \"$args\" | grep -q -- '--json state,headRepository'; then
-        printf '{\"state\":\"%s\",\"headRepository\":{\"nameWithOwner\":\"owner/repo\"},\"headRefName\":\"fix/issue-77\",\"headRefOid\":\"%s\"}\\n' \"$(get_state PR_STATE)\" \"${SHA}\"
+        printf '{\"state\":\"%s\",\"headRepository\":{\"nameWithOwner\":\"owner/repo\"},\"headRefName\":\"%s\",\"headRefOid\":\"%s\"}\\n' \"$(get_state PR_STATE)\" \"\${FAKE_HEAD_REF:-fix/issue-77}\" \"${SHA}\"
       elif printf '%s' \"$args\" | grep -q -- '--json state'; then
         printf '%s\\n' \"$(get_state PR_STATE)\"
       else
         if [ \"\${FAKE_HEAD_METADATA:-ok}\" = partial ]; then
           printf '{\"commits\":[{\"committedDate\":\"2020-01-01T00:00:00Z\"}],\"headRepository\":{\"nameWithOwner\":\"%s\"}}\\n' "\${FAKE_HEAD_REPO:-owner/repo}"
         else
-          printf '{\"commits\":[{\"committedDate\":\"2020-01-01T00:00:00Z\"}],\"headRepository\":{\"nameWithOwner\":\"%s\"},\"headRepositoryOwner\":{\"login\":\"owner\"},\"headRefName\":\"fix/issue-77\",\"headRefOid\":\"%s\"}\\n' "\${FAKE_HEAD_REPO:-owner/repo}" "${SHA}"
+          printf '{\"commits\":[{\"committedDate\":\"2020-01-01T00:00:00Z\"}],\"headRepository\":{\"nameWithOwner\":\"%s\"},\"headRepositoryOwner\":{\"login\":\"owner\"},\"headRefName\":\"%s\",\"headRefOid\":\"%s\"}\\n' "\${FAKE_HEAD_REPO:-owner/repo}" "\${FAKE_HEAD_REF:-fix/issue-77}" "${SHA}"
         fi
       fi
       exit 0
@@ -420,4 +434,63 @@ test('label recycle-recovery non creabile: nessuna PR chiusa', () => {
   assert.doesNotMatch(log, /^pr close 17/m);
   assert.doesNotMatch(log, /--(add|remove)-label agent:fix/);
   assert.match(result.output, /recycle-recovery assente e non creabile/);
+});
+
+// ── Review 2026-09-19 23:58Z su 7f5c24da ──────────────────────────────────
+
+test('il probe del ref usa il route GET singolare git/ref, non la lista per prefisso', () => {
+  const result = runScenario();
+  const probes = result.events.filter((event) => /^api --include /.test(event));
+  assert.ok(probes.length > 0, 'nessun probe del ref eseguito');
+  for (const probe of probes) {
+    assert.match(probe, /repos\/owner\/repo\/git\/ref\/heads\/fix\/issue-77$/, probe);
+    assert.doesNotMatch(probe, /\/git\/refs\//, probe);
+  }
+  // Col route plurale il fake risponde 200 con un ARRAY (match per prefisso su
+  // fix/issue-770): `.object.sha` non esiste, free_ref lo classifica payload
+  // malformato e non arriva mai al DELETE ne' al re-queue.
+  assert.match(result.events.join('\n'), /^api -X DELETE /m);
+  assert.match(result.output, /issue #77 ri-accodata/);
+});
+
+test('il ref viene percent-encodato per segmento in probe e DELETE', () => {
+  const result = runScenario({ FAKE_HEAD_REF: 'fix/issue 77+a' });
+  const probe = result.events.find((event) => /^api --include /.test(event));
+  assert.match(probe, /\/git\/ref\/heads\/fix\/issue%2077%2Ba$/, probe);
+  const del = result.events.find((event) => /^api -X DELETE /.test(event));
+  assert.match(del, /\/git\/refs\/heads\/fix\/issue%2077%2Ba$/, del);
+  // Gli `/` restano separatori di path: non vanno codificati.
+  assert.doesNotMatch(probe, /%2F/i, probe);
+});
+
+test('marker di recovery non applicato: la run fallisce invece di tacere', () => {
+  const result = runScenario({ FAKE_ADD: 'fail', FAKE_MARKER_POST: 'fail' });
+  assert.ok(result.error, 'lo step deve uscire non-zero quando il marker non atterra');
+  assert.match(result.output, /marker recycle-recovery NON applicato dopo 3 tentativi/);
+  assert.match(result.output, /intervento manuale richiesto/);
+  assert.match(result.stateText, /MARKER=false/);
+  const posts = result.events.filter((event) => /--method POST .*issues\/17\/labels/.test(event));
+  assert.equal(posts.length, 3, 'il POST del marker va ritentato 3 volte prima di arrendersi');
+});
+
+test('marker applicato dopo un re-queue fallito: la run resta verde e riconciliabile', () => {
+  const result = runScenario({ FAKE_ADD: 'fail' });
+  assert.equal(result.error, null, result.output);
+  assert.match(result.stateText, /MARKER=true/);
+});
+
+test('il cap max_recycles e\' un budget unico per run, non uno per fase', () => {
+  const shared = {
+    FAKE_INIT_PR_STATE: 'CLOSED',
+    FAKE_INIT_MARKER: 'true',
+    FAKE_RECOVERY: 'pr',
+  };
+  // Una riconciliazione consuma il budget: con cap 1 la close non parte.
+  const capped = runScenario({ ...shared, MAX_RECYCLES_PER_RUN: '1' });
+  assert.match(capped.output, /recovery PR #17: issue #77 ri-accodata/);
+  assert.doesNotMatch(capped.events.join('\n'), /^pr close 17/m);
+  assert.match(capped.output, /Cap 1 .*raggiunto/);
+  // Controllo: con budget 2 la stessa sequenza arriva alla close.
+  const roomy = runScenario({ ...shared, MAX_RECYCLES_PER_RUN: '2' });
+  assert.match(roomy.events.join('\n'), /^pr close 17/m);
 });
