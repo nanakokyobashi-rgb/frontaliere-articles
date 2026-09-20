@@ -70,6 +70,10 @@ export const LABELS = [
   ['has-conflicts', 'b60205', 'Conflitto reale con main: autorebase sospeso finche il branch non viene risolto'],
   ['needs-human', '7057ff', 'Nessun processo automatico la sbloccherà: serve una mano umana'],
   ['autorebase-reopen-failed', 'b60205', 'close+reopen rotto a meta: NON cancellare l head ref, la PR va riaperta a mano'],
+  // Messa da recycle-stale-prs.yml su una PR CHIUSA il cui re-queue e' fallito
+  // a meta': la scansione vede solo PR aperte, questa label e' l'unico modo in
+  // cui il run successivo la ritrova e la riconcilia.
+  ['recycle-recovery', 'd93f0b', 'PR chiusa dal recycle con re-queue incompleto: il run successivo la riconcilia'],
   ['maybe-resolved', 'bfd4f2', 'Il pre-flight la ritiene forse gia risolta: verificare prima di rilanciare il fixer'],
   // Chiusa dallo stadio 2 di reconcile-followups.mjs: seconda conferma
   // deterministica dopo la finestra di grazia di `maybe-resolved`. La label
