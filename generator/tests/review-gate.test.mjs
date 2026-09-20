@@ -422,6 +422,138 @@ const COMPARE_SAME = {
   },
 };
 
+const HISTORY_FINDING = '`engine/x.ts:10`: 🔴 Important: il controllo non copre il caso X.';
+const HISTORY_REVIEWS = [
+  botReview(OLD, '## LGTM', {
+    id: 100,
+    submitted_at: '2026-09-19T09:00:00Z',
+  }),
+  botReview(HEAD, HISTORY_FINDING, {
+    id: 101,
+    submitted_at: '2026-09-19T10:00:00Z',
+  }),
+];
+
+function compareFromPreviousReview(files) {
+  return {
+    mergeBase: 'c'.repeat(40),
+    byRange: {
+      [`${OLD}...${HEAD}`]: { files },
+    },
+  };
+}
+
+for (const count of [300, 301]) {
+  test(`compare a ${count} file → il finding resta bloccante`, () => {
+    const files = Array.from({ length: count }, (_, index) => ({
+      filename: `engine/generated-${index}.mjs`,
+      status: 'modified',
+      patch: '@@ -1 +1 @@\n-old\n+new',
+    }));
+    const r = runGate({
+      reviews: HISTORY_REVIEWS,
+      files: ['engine/x.ts'],
+      compare: compareFromPreviousReview(files),
+    });
+    assert.equal(r.status, 1, `un compare troncato non deve declassare il finding.\n${r.stdout}`);
+    assert.match(r.stdout, /compare al limite API.*delta non calcolabile/i, r.stdout);
+  });
+}
+
+test('compare con elemento file malformato → il finding resta bloccante', () => {
+  const r = runGate({
+    reviews: HISTORY_REVIEWS,
+    files: ['engine/x.ts'],
+    compare: compareFromPreviousReview([null]),
+  });
+  assert.equal(r.status, 1, `una risposta compare non verificabile non deve approvare.\n${r.stdout}`);
+  assert.match(r.stdout, /risposta compare non verificabile.*delta non calcolabile/i, r.stdout);
+});
+
+test('compare con path duplicato dopo la normalizzazione → il finding resta bloccante', () => {
+  const r = runGate({
+    reviews: HISTORY_REVIEWS,
+    files: ['engine/x.ts'],
+    compare: compareFromPreviousReview([
+      { filename: 'engine/x.ts', status: 'modified', patch: '@@ -1 +1 @@\n-old\n+new' },
+      { filename: 'a/engine/x.ts', status: 'modified', patch: '@@ -1 +1 @@\n-old\n+new' },
+    ]),
+  });
+  assert.equal(r.status, 1, `un compare ambiguo non deve declassare il finding.\n${r.stdout}`);
+  assert.match(r.stdout, /risposta compare non verificabile.*delta non calcolabile/i, r.stdout);
+});
+
+for (const [label, patch] of [
+  ['patch vuota', ''],
+  ['patch malformed', 'not-a-unified-diff'],
+  ['hunk senza corpo', '@@'],
+  ['conteggi incoerenti', '@@ -1,2 +1 @@\n-old\n+new'],
+  ['secondo hunk malformed', '@@ -1 +1 @@\n-old\n+new\n@@ -3 +3 @@'],
+  ['patch null', null],
+]) {
+  test(`compare con ${label} → il finding resta bloccante`, () => {
+    const r = runGate({
+      reviews: HISTORY_REVIEWS,
+      files: ['engine/x.ts'],
+      compare: compareFromPreviousReview([{
+        filename: 'engine/x.ts',
+        status: 'modified',
+        patch,
+      }]),
+    });
+    assert.equal(r.status, 1, `${label} non deve declassare il finding.\n${r.stdout}`);
+  });
+}
+
+test('compare con stream di hunk validi → la logica di declassamento resta attiva', () => {
+  const r = runGate({
+    reviews: HISTORY_REVIEWS,
+    files: ['engine/x.ts'],
+    compare: compareFromPreviousReview([{
+      filename: 'engine/x.ts',
+      status: 'modified',
+      patch: [
+        '@@ -1 +1 @@',
+        '-old',
+        '+new',
+        '@@ -20,2 +20,2 @@',
+        ' context',
+        '-old-again',
+        '+new-again',
+      ].join('\n'),
+    }]),
+  });
+  assert.equal(r.status, 0, `uno stream unified valido non deve diventare non confrontabile.\n${r.stdout}`);
+  assert.match(r.stdout, /DECLASSIFIED-UNCHANGED-LINE/i, r.stdout);
+});
+
+test('compare con filename CR/LF → il finding resta bloccante', () => {
+  const r = runGate({
+    reviews: HISTORY_REVIEWS,
+    files: ['engine/x.ts'],
+    compare: compareFromPreviousReview([{
+      filename: 'engine/x.ts\r\n+++ b/engine/injected.ts',
+      status: 'modified',
+      patch: '@@ -1 +1 @@\n-old\n+new',
+    }]),
+  });
+  assert.equal(r.status, 1, `un filename con newline non deve entrare nell'header del patch.\n${r.stdout}`);
+  assert.match(r.stdout, /risposta compare non verificabile.*delta non calcolabile/i, r.stdout);
+});
+
+test('compare non-oggetto → il finding resta bloccante', () => {
+  const r = runGate({
+    reviews: HISTORY_REVIEWS,
+    files: ['engine/x.ts'],
+    compare: {
+      mergeBase: 'c'.repeat(40),
+      byRange: { [`${OLD}...${HEAD}`]: 'not-an-object' },
+    },
+  });
+  assert.equal(r.status, 1, `un payload compare non-oggetto non deve approvare.\n${r.stdout}`);
+  assert.match(r.stdout, /risposta compare non verificabile.*delta non calcolabile/i, r.stdout);
+});
+
 const DRIFT_META = {
   assoc: 'OWNER',
   login: 'valerielinc-ops',
