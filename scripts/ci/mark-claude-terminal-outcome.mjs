@@ -39,6 +39,8 @@
  *   EXEC_FILE    path dell'execution file della claude-code-action.
  *   RUN_URL      opzionale, link alla run per il commento.
  *   WORKFLOW     opzionale, nome del workflow chiamante (default `issue-fix`).
+ *   PR_DELIVERY_BASELINE_FILE  baseline JSON catturato prima del model step.
+ *   GITHUB_RUN_ID / GITHUB_RUN_ATTEMPT  identità del tentativo corrente.
  *   DRY_RUN      "1" → stampa e basta.
  *
  * Best-effort: non fa MAI fallire il job (exit 0 sempre).
@@ -53,6 +55,12 @@ import {
   formatRateLimitComment,
   parseExecutionMessages,
 } from './claude-rate-limit.mjs';
+import {
+  DELIVERY_STATUS,
+  PR_LIST_FIELDS,
+  PR_LIST_LIMIT,
+  evaluatePrDelivery,
+} from './lib/pr-delivery-evidence.mjs';
 // Il predicato «qual e' il verdetto vigente» e' quello del drainer, importato e non
 // riscritto (AGENTS.md #6): last-wins su `createdAt`, fallback dei backstop esclusi.
 // Un secondo lettore con regole proprie e' esattamente il drift che rende il dedup
@@ -67,13 +75,20 @@ const WORKFLOW = process.env.WORKFLOW || 'issue-fix';
 
 const repoArgs = process.env.GH_REPO ? ['--repo', process.env.GH_REPO] : [];
 
-function gh(args) {
+function ghResult(args) {
   try {
-    return execFileSync('gh', args, { encoding: 'utf-8', maxBuffer: 64 * 1024 * 1024 });
+    return {
+      ok: true,
+      stdout: execFileSync('gh', args, { encoding: 'utf-8', maxBuffer: 64 * 1024 * 1024 }),
+    };
   } catch (e) {
     console.log(`gh fallita (non bloccante): ${e && e.message ? e.message : e}`);
-    return '';
+    return { ok: false, stdout: '' };
   }
+}
+
+function gh(args) {
+  return ghResult(args).stdout;
 }
 
 /**
@@ -149,22 +164,72 @@ export function recoverableBranchWork(issue) {
 // verdetto letto dall'umano che guarda il run.
 
 /**
- * Numero della PR consegnata per la issue (`fix/issue-<N>`, stato OPEN o
- * MERGED), o null. Impura (gh) e FAIL-SAFE: qualunque errore → null, cioè il
- * comportamento di prima (marker `max-turns`).
+ * Current-attempt delivery evidence. An unavailable lookup is intentionally
+ * distinct from a verified empty list: callers must not turn it into a
+ * `pr-created` or `max-turns` marker.
+ * @param {string|number} issue
+ */
+export function deliveryEvidence(issue) {
+  const baselineFile = process.env.PR_DELIVERY_BASELINE_FILE;
+  if (!baselineFile) return { status: DELIVERY_STATUS.UNAVAILABLE, reason: 'baseline-missing', prNumber: null };
+
+  let baseline;
+  try {
+    baseline = JSON.parse(fs.readFileSync(baselineFile, 'utf8'));
+  } catch {
+    return { status: DELIVERY_STATUS.UNAVAILABLE, reason: 'baseline-unreadable', prNumber: null };
+  }
+
+  const repo = process.env.GH_REPO || baseline?.repo;
+  const runId = process.env.GITHUB_RUN_ID;
+  const runAttempt = process.env.GITHUB_RUN_ATTEMPT;
+  const branch = `fix/issue-${issue}`;
+  if (!repo || !runId || !runAttempt) {
+    return { status: DELIVERY_STATUS.UNAVAILABLE, reason: 'run-identity-missing', prNumber: null };
+  }
+
+  const listed = ghResult([
+    'pr',
+    'list',
+    '--head',
+    branch,
+    '--state',
+    'all',
+    '--limit',
+    String(PR_LIST_LIMIT),
+    ...(repo ? ['--repo', repo] : []),
+    '--json',
+    PR_LIST_FIELDS.join(','),
+  ]);
+  if (!listed.ok) return { status: DELIVERY_STATUS.UNAVAILABLE, reason: 'github-read-failed', prNumber: null };
+
+  let currentPrs;
+  try {
+    currentPrs = JSON.parse(listed.stdout);
+  } catch {
+    return { status: DELIVERY_STATUS.UNAVAILABLE, reason: 'pr-list-invalid-json', prNumber: null };
+  }
+  return evaluatePrDelivery({
+    baseline,
+    currentPrs,
+    currentPrsComplete: Array.isArray(currentPrs) && currentPrs.length < PR_LIST_LIMIT,
+    repo,
+    issue,
+    branch,
+    runId,
+    runAttempt,
+  });
+}
+
+/**
+ * Compatibility scalar for callers that only need a verified current PR.
+ * Lookup failure and verified absence both return null; use deliveryEvidence
+ * when the distinction matters.
  * @param {string|number} issue
  */
 export function deliveredPrNumber(issue) {
-  // `sort_by(.createdAt) | last`, non `.[0]`: su un branch `fix/issue-<N>` RIUSATO
-  // dopo un merge — il caso normale su una issue ri-accodata — la lista contiene la
-  // PR vecchia insieme alla nuova, in un ordine che `gh` non documenta. Il marker
-  // resterebbe giusto, ma il numero che l'umano legge nel commento punterebbe al
-  // lavoro sbagliato. La più recente è l'unica che questo run può aver consegnato.
-  const raw = gh(['pr', 'list', '--head', `fix/issue-${issue}`, '--state', 'all', ...repoArgs,
-    '--json', 'number,state,createdAt',
-    '--jq', '[.[] | select(.state=="OPEN" or .state=="MERGED")] | sort_by(.createdAt) | last | .number // empty']).trim();
-  const n = Number(raw);
-  return Number.isFinite(n) && n > 0 ? n : null;
+  const evidence = deliveryEvidence(issue);
+  return evidence.status === DELIVERY_STATUS.DELIVERED ? evidence.prNumber : null;
 }
 
 // --- Idempotenza del commento di consegna -----------------------------------
@@ -324,9 +389,8 @@ export function formatDeliveredDespiteMaxTurnsComment(prNumber) {
   return '<!-- FIX_OUTCOME: pr-created -->\n' +
     `${CAP_HIT_AFTER_DELIVERY_MARKER}\n` +
     `<!-- CAP_HIT_AFTER_DELIVERY_PR: ${prNumber} -->\n` +
-    `_La CLI è uscita \`error_max_turns\`, ma la PR #${prNumber} per questa issue esiste (open/merged): il lavoro è stato consegnato._\n` +
-    '_Il verdetto segue il lavoro, non l\'exit della CLI — stessa regola dello step «Classify outcome» di `issue-fix.yml`. ' +
-    'Senza questa riga il drainer leggerebbe `max-turns` e parcheggerebbe in `needs-human` una issue già risolta._';
+    `_La CLI è uscita \`error_max_turns\`, ma la delivery corrente della PR #${prNumber} è verificata nel tentativo: il lavoro è stato consegnato._\n` +
+    '_Il verdetto separa l\'esito della CLI dall\'evidenza di delivery. Questa riga viene emessa solo con una prova corrente; un lookup non disponibile non viene interpretato come assenza._';
 }
 
 function main() {
@@ -345,8 +409,9 @@ function main() {
 
   // --- max-turns (precedenza, vedi docstring) --------------------------------
   if (subtype === 'error_max_turns') {
-    const deliveredPr = deliveredPrNumber(ISSUE);
-    if (deliveredPr) {
+    const delivery = deliveryEvidence(ISSUE);
+    if (delivery.status === DELIVERY_STATUS.DELIVERED) {
+      const deliveredPr = delivery.prNumber;
       console.log(`Terminal outcome: error_max_turns MA la PR #${deliveredPr} esiste (open/merged) → marker \`pr-created\`, non \`max-turns\`.`);
       if (capHitNoteSupersedesThisRunOnIssue(ISSUE, deliveredPr)) {
         console.log(`Nota già presente per la PR #${deliveredPr}, dentro questa promozione e ancora verdetto vigente → skip (dedup: un commento in più alza \`updatedAt\` e affama il cooldown del parked-retry).`);
@@ -355,6 +420,10 @@ function main() {
       if (DRY_RUN) return;
       gh(['issue', 'comment', ISSUE, ...repoArgs, '--body',
         formatDeliveredDespiteMaxTurnsComment(deliveredPr)]);
+      return;
+    }
+    if (delivery.status === DELIVERY_STATUS.UNAVAILABLE) {
+      console.log(`Terminal outcome: error_max_turns ma delivery non verificabile (${delivery.reason}) → nessun marker terminale.`);
       return;
     }
     console.log('Terminal outcome: error_max_turns → marker granulare `max-turns`.');
