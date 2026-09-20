@@ -371,6 +371,20 @@ test('la generazione vince sul completamento fuori ordine e sui tie-break', () =
     'attempt parziale nello stesso workflow-run deve restare ambiguous',
   );
 
+  const sameAttemptWithoutWorkflow = checkPages(
+    checkRun(617, VITEST_CHECK_NAME, 'FAILURE', HEAD_A, '2026-09-19T07:30:02Z', {
+      runAttempt: 1,
+    }),
+    checkRun(616, VITEST_CHECK_NAME, 'SUCCESS', HEAD_A, '2026-09-19T07:30:02Z', {
+      runAttempt: 1,
+    }),
+  );
+  assert.equal(
+    exactCheckRunSnapshot(sameAttemptWithoutWorkflow, HEAD_A, LOCKSTEP_REPO).allow,
+    false,
+    'attempt uguale senza workflow-run non identifica la generazione',
+  );
+
   const missingAttempt = checkPages(
     checkRun(613, VITEST_CHECK_NAME, 'FAILURE', HEAD_A, '2026-09-19T07:31:00Z'),
     checkRun(614, VITEST_CHECK_NAME, 'SUCCESS', HEAD_A, '2026-09-19T07:31:00Z', {

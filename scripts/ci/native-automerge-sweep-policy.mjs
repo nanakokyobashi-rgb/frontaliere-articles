@@ -423,10 +423,11 @@ export function exactCheckRunSnapshot(pages, headSha, repository = null) {
               || (workflowOrder === 0 && candidate.generationId > previous.generationId);
           } else if (candidate.runAttempt === previous.runAttempt
               && candidate.workflowRunId === previous.workflowRunId
-              && candidate.runAttempt !== 0) {
-            // A verified attempt identifies the generation even when the
-            // optional workflow URL is unavailable; the check ID is only a
-            // tie-break inside that attempt.
+              && candidate.runAttempt !== 0
+              && candidate.workflowRunId !== null) {
+            // A verified attempt is only a safe tie-break inside a correlated
+            // workflow run; without that run identity the candidates may be
+            // different workflows sharing the same attempt number.
             newer = candidate.generationId > previous.generationId;
           } else {
             return deny(`check-run ${run.name} con generazioni timestamped non correlabili`);

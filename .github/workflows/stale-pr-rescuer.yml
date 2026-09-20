@@ -371,8 +371,18 @@ jobs:
                 if $left.source != $right.source then false
                 elif $left.source == "timestamp"
                   and $left.timestamp == $right.timestamp
-                then (($left.attempt == null) == ($right.attempt == null))
-                  and (($left.workflow_id == null) == ($right.workflow_id == null))
+                then if ($left.attempt != null and $right.attempt != null
+                         and $left.attempt != $right.attempt)
+                  then true
+                  elif (($left.attempt == null) == ($right.attempt == null))
+                    and ($left.workflow_id != null and $right.workflow_id != null)
+                  then true
+                  else false
+                  end
+                elif $left.source == "attempt"
+                then if $left.attempt != $right.attempt then true
+                  else ($left.workflow_id != null and $right.workflow_id != null)
+                  end
                 else true
                 end;
               def correlation_valid($expected):

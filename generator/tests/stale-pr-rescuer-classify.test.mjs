@@ -1133,29 +1133,6 @@ test('#314 — la generazione usa run_attempt, workflow id e infine check id', o
       ],
     },
     {
-      label: 'check id',
-      runs: [
-        {
-          id: 5002,
-          name: CHECK_NAME,
-          status: 'completed',
-          head_sha: HEAD_SHA,
-          created_at: sameSecond,
-          completed_at: sameSecond,
-          conclusion: 'success',
-        },
-        {
-          id: 5001,
-          name: CHECK_NAME,
-          status: 'completed',
-          head_sha: HEAD_SHA,
-          created_at: sameSecond,
-          completed_at: sameSecond,
-          conclusion: 'failure',
-        },
-      ],
-    },
-    {
       label: 'frazione di created_at',
       runs: [
         {
@@ -1196,6 +1173,63 @@ test('#314 — la generazione usa run_attempt, workflow id e infine check id', o
       /check `tests \\(node --test\\)` = `failure`/,
       `Il tie-break ${label} non deve scegliere il failure della generazione vecchia.\n${body}`,
     );
+  }
+});
+
+test('#314 — stesso attempt o metadati assenti senza workflow-run resta pending', opts, () => {
+  const sameSecond = isoAgo(3);
+  const cases = [
+    [
+      {
+        id: 6201,
+        name: CHECK_NAME,
+        status: 'completed',
+        head_sha: HEAD_SHA,
+        created_at: sameSecond,
+        completed_at: sameSecond,
+        conclusion: 'success',
+        run_attempt: 1,
+      },
+      {
+        id: 6202,
+        name: CHECK_NAME,
+        status: 'completed',
+        head_sha: HEAD_SHA,
+        created_at: sameSecond,
+        completed_at: sameSecond,
+        conclusion: 'failure',
+        run_attempt: 1,
+      },
+    ],
+    [
+      {
+        id: 6203,
+        name: CHECK_NAME,
+        status: 'completed',
+        head_sha: HEAD_SHA,
+        created_at: sameSecond,
+        completed_at: sameSecond,
+        conclusion: 'success',
+      },
+      {
+        id: 6204,
+        name: CHECK_NAME,
+        status: 'completed',
+        head_sha: HEAD_SHA,
+        created_at: sameSecond,
+        completed_at: sameSecond,
+        conclusion: 'failure',
+      },
+    ],
+  ];
+  for (const check_runs of cases) {
+    const r = runScan({
+      prs: openPr(),
+      checks: { total_count: check_runs.length, check_runs },
+      reviews: reviews({ commit: OLD_SHA, body: 'un finding, niente LGTM' }),
+    });
+    assert.deepEqual(r.comments, [], `Metadati senza workflow-run non devono scegliere un verdetto.\n${r.stdout}`);
+    assert.deepEqual(r.labeled, [], `Metadati senza workflow-run non devono etichettare.\n${r.stdout}`);
   }
 });
 
