@@ -1474,11 +1474,17 @@ jobs:
       # questo step trasforma ogni percorso non risolvibile in un rosso reale.
       # Il gate sopra resta sempre il punto che valuta LGTM, Important e
       # carry-forward; qui si sorveglia soltanto che quel punto abbia girato.
+      # `engine-lockstep-auto` e' l'eccezione intenzionale: `Resolve PR` lo
+      # esclude perche' l'engine e' gia' stato reviewato sul sito, mentre il
+      # `Generator CI gate` in fondo a questo job verifica qui il contratto
+      # engine/host. Uno skip del review gate su quel branch non e' quindi un
+      # bypass accidentale e non deve trasformarsi in un falso rosso.
       - name: Fail when required review gate is skipped
         if: >-
           ${{ steps.body_contract.outcome != 'failure' && always() &&
           ((github.event_name == 'pull_request' && github.event.pull_request.draft == false) ||
            (github.event_name == 'workflow_dispatch' && inputs.pr_number != '')) &&
+          (github.event_name != 'pull_request' || github.event.pull_request.head.ref != 'engine-lockstep-auto') &&
           steps.review_gate.outcome == 'skipped' }}
         run: |
           echo "::error::Required review gate was skipped on a pull request; no approving review verdict was evaluated."
