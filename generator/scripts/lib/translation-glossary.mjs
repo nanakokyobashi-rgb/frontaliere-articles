@@ -445,20 +445,25 @@ const protectedTokenScrubRe = () =>
 const mangledProtectedTokenScrubRe = () =>
   new RegExp(`z${TOKEN_SEP}q${TOKEN_SEP}(?:[①-⑳][\\s\\S]{0,8}?%|x${TOKEN_SEP}[0-9oOxX][\\s\\S]{0,8}?%)`, 'giu');
 
+const PROTECTED_TOKEN_COMPARISON_PLACEHOLDER = '\u0000protected-token\u0000';
+
 /**
- * Remove canonical and mangled protected-token sentinels for comparisons.
- * This runs before the passthrough guard so a provider cannot evade it by
- * changing only the sentinel's spelling. Ordinary `ZQ 100%` prose is not a
- * sentinel and deliberately survives.
+ * Normalize every known protected-token shape to one comparison marker.
+ *
+ * A provider can echo the masked source while changing the sentinel — for
+ * example `ZQX0XQZ` → `ZQ ①000%`. That output is still a passthrough, but the
+ * finalizer must not be the first place that sees the mangled form: it would
+ * scrub the sentinel and publish the source text without the protected token.
+ * Valid sentinels are replaced first so the broad last-resort scrubber cannot
+ * mistake them for mangled debris.
  */
 export function normalizeProtectedTokenSentinels(text = '') {
   const input = String(text ?? '');
   if (!input) return input;
-  const out = input
-    .replace(protectedTokenRe(), ' ')
-    .replace(protectedTokenScrubRe(), ' ')
-    .replace(mangledProtectedTokenScrubRe(), ' ');
-  return out === input ? input : tidySpacing(out);
+  return input
+    .replace(protectedTokenRe(), PROTECTED_TOKEN_COMPARISON_PLACEHOLDER)
+    .replace(protectedTokenScrubRe(), PROTECTED_TOKEN_COMPARISON_PLACEHOLDER)
+    .replace(mangledProtectedTokenScrubRe(), PROTECTED_TOKEN_COMPARISON_PLACEHOLDER);
 }
 
 /**
@@ -596,7 +601,8 @@ export function restoreProtectedTokens(text = '', tokens = [], targetLang = '', 
       seen.add(i);
       return genderTrigraphForLocale(targetLang, token);
     });
-    out = normalizeProtectedTokenSentinels(out);
+    out = out.replace(protectedTokenScrubRe(), '');
+    out = out.replace(mangledProtectedTokenScrubRe(), '');
     // Only tidy when a sentinel was actually swapped out, so the guard never
     // reflows the indentation of a description that had nothing to protect
     // (nested markdown bullets rely on their leading double spaces).

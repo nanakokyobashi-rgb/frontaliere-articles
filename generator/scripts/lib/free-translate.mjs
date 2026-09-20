@@ -461,6 +461,19 @@ function rejectedAsPassthrough(tierName, source, out, outcome = null, granularit
   return true;
 }
 
+function rejectedAsPassthroughWithSourceVariants(
+  tierName,
+  normalizedSource,
+  rawSource,
+  out,
+  outcome = null,
+  granularity = 'field',
+) {
+  if (rejectedAsPassthrough(tierName, normalizedSource, out, outcome, granularity)) return true;
+  return rawSource !== normalizedSource
+    && rejectedAsPassthrough(tierName, rawSource, out, outcome, granularity);
+}
+
 /**
  * Split text into chunks ≤ maxChars at sentence boundaries.
  * Splits at: paragraph breaks (\n\n), newlines (\n), sentence-ending punctuation (. ! ?),
@@ -1337,6 +1350,7 @@ function mergeTranslationOutcome(target, source) {
 }
 
 export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 'title', _outcome = null }) {
+  const rawSourceClean = normalizeBlock(text);
   const sourceInput = fieldType === 'title' && String(sourceLang || '').toLowerCase().startsWith('de')
     ? normalizeGermanGenderForms(text)
     : text;
@@ -1391,7 +1405,7 @@ export async function freeTranslate({ text, sourceLang, targetLang, fieldType = 
       // proxy che risponde con l'eco) non e' la cascata che ha fallito. Se
       // rimandano la sorgente TUTTI, `freeTranslate` esce '' e il chiamante
       // legge quello che ha sempre letto: traduzione non avvenuta.
-      if (rejectedAsPassthrough(tierName, clean, result, _outcome)) {
+      if (rejectedAsPassthroughWithSourceVariants(tierName, clean, rawSourceClean, result, _outcome)) {
         return '';
       }
       if (result) {

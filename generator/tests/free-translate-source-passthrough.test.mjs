@@ -165,6 +165,22 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
     assert.equal(snapshot().hits - before.hits, 0);
   });
 
+  test('rifiuta l’echo della forma tedesca originale dopo la normalizzazione frau:mann', async () => {
+    stubCascade('Fachfrau:mann');
+    const before = snapshot();
+
+    const out = await freeTranslate({
+      text: 'Fachfrau:mann',
+      sourceLang: 'de',
+      targetLang: 'it',
+      fieldType: 'title',
+    });
+
+    assert.equal(out, '');
+    assert.equal(snapshot().passthroughs - before.passthroughs, 1);
+    assert.equal(snapshot().hits - before.hits, 0);
+  });
+
   test('rifiuta il passthrough parziale nel ramo MyMemory a chunk', async () => {
     const longText = Array.from({ length: 140 }, (_, i) => `Frase sorgente numero ${i} con testo sufficiente.`).join(' ');
     let myMemoryCalls = 0;
