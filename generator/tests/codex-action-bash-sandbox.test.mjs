@@ -78,6 +78,10 @@ test('l’action Codex ha un watchdog interno prima del kill del runner', () => 
   assert.match(action, /codex_exec_kill_grace_seconds=30/);
   assert.match(action, /\$codex_timeout_bin[\s\S]*--signal=TERM[\s\S]*--kill-after=/);
   assert.match(action, /"\$\{codex_exec_timeout_seconds\}s" "\$codex_bin" exec/);
+  assert.ok(
+    action.includes("printf '\\n{\"type\":\"codex_timeout\",\"codex_timeout\":true,\"timeout_seconds\":%s}\\n'"),
+    'il marker timeout deve iniziare su una riga JSONL separata anche dopo TERM',
+  );
   assert.match(action, /codex_timed_out=%s/);
   assert.match(action, /CODEX_TIMED_OUT:/);
 });

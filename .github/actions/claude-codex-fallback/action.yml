@@ -1198,8 +1198,9 @@ runs:
           codex_timed_out=true
           # Keep the timeout reason in the same JSONL stream consumed by the
           # review classifier. It is synthetic, non-secret, and written only
-          # after GNU timeout has returned its 124 status.
-          printf '{"type":"codex_timeout","codex_timeout":true,"timeout_seconds":%s}\n' \
+          # after GNU timeout has returned its 124 status. Start with a
+          # delimiter as well: TERM may leave the last JSONL record partial.
+          printf '\n{"type":"codex_timeout","codex_timeout":true,"timeout_seconds":%s}\n' \
             "$codex_exec_timeout_seconds" >> "$codex_diagnostics_destination"
         fi
         codex_finished_ms="$(date +%s%3N 2>/dev/null || printf '0')"
