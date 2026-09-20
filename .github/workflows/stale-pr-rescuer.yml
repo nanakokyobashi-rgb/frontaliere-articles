@@ -332,7 +332,7 @@ jobs:
                 elif (.completed_at | type) != "string" then true
                 elif (.completed_at | length) == 0 then true
                 elif (.conclusion | type) != "string" then true
-                elif (["success", "failure", "neutral", "cancelled", "timed_out", "action_required", "stale", "skipped"] | index(.conclusion)) == null then true
+                elif (.conclusion as $value | (["success", "failure", "neutral", "cancelled", "timed_out", "action_required", "stale", "skipped"] | index($value)) == null) then true
                 else false
                 end;
               [.[].check_runs[]? | select(.name==$n)] as $all

@@ -583,14 +583,15 @@ test('guard 2 — una PR mai revisionata resta in classe A', opts, () => {
   assert.match(body, /nessuna review li ha coperti/, body);
 });
 
-test('R1 — lista checks vuota valida resta osservabile come classe C', opts, () => {
+test('R1 — lista checks vuota valida resta pending, non un verdetto', opts, () => {
   const r = runScan({
     prs: openPr(),
     checks: checkRuns({ concl: null }),
     reviews: [],
   });
-  assert.deepEqual(r.labeled, [901], r.stdout);
-  assert.match(only(r), /check `tests \(node --test\)` = `none`/, r.stdout);
+  assert.deepEqual(r.labeled, [], r.stdout);
+  assert.deepEqual(r.comments, [], r.stdout);
+  assert.match(r.stdout, /check=none pending=1/, r.stdout);
 });
 
 test('R1 — lista reviews vuota valida resta osservabile come classe A', opts, () => {
@@ -934,6 +935,7 @@ test('#314 — un rerun vecchio che finisce dopo non oscura la generazione nuova
   const r = runScan({
     prs: openPr(),
     checks: {
+      total_count: 2,
       check_runs: [
         // La generazione nuova è verde, ma termina prima del rerun vecchio.
         {
@@ -989,6 +991,7 @@ test('#314 — shape REST senza timestamp: il workflow id ordina la generazione'
   const r = runScan({
     prs: openPr(),
     checks: {
+      total_count: 2,
       check_runs: [
         {
           id: 701,
