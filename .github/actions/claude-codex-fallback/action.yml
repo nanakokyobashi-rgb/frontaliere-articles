@@ -117,6 +117,30 @@ outputs:
   side_effect_detected:
     description: "true when Codex may have changed local or remote state before failing."
     value: ${{ steps.finalize.outputs.side_effect_detected }}
+  codex_invocations:
+    description: "Number of Codex invocations observed in the structured stream (0 or 1)."
+    value: ${{ steps.finalize.outputs.codex_invocations }}
+  usage_available:
+    description: "true when complete Codex token usage was observed."
+    value: ${{ steps.finalize.outputs.usage_available }}
+  input_tokens:
+    description: "Aggregate Codex input tokens, excluding cached-input duplication."
+    value: ${{ steps.finalize.outputs.input_tokens }}
+  cached_input_tokens:
+    description: "Aggregate Codex cached input tokens."
+    value: ${{ steps.finalize.outputs.cached_input_tokens }}
+  output_tokens:
+    description: "Aggregate Codex output tokens."
+    value: ${{ steps.finalize.outputs.output_tokens }}
+  duration_ms:
+    description: "Wall-clock duration of the Codex primary process in milliseconds."
+    value: ${{ steps.finalize.outputs.duration_ms }}
+  outcome:
+    description: "Codex telemetry outcome: success, failure, cancelled, skipped, or unknown."
+    value: ${{ steps.finalize.outputs.outcome }}
+  stream_status:
+    description: "Structured stream status: complete, partial, malformed, unavailable, or not_invoked."
+    value: ${{ steps.finalize.outputs.stream_status }}
 
 runs:
   using: composite
@@ -310,6 +334,7 @@ runs:
         snapshot_file "$workspace_root/scripts/ci/claude-codex-fallback.mjs" "$snapshot_root/ci/claude-codex-fallback.mjs"
         snapshot_file "$workspace_root/scripts/ci/claude-rate-limit.mjs" "$snapshot_root/ci/claude-rate-limit.mjs"
         snapshot_file "$workspace_root/scripts/ci/claude-rate-limit-contract.mjs" "$snapshot_root/ci/claude-rate-limit-contract.mjs"
+        snapshot_file "$workspace_root/scripts/ci/codex-usage-summary.mjs" "$snapshot_root/ci/codex-usage-summary.mjs"
         printf 'runtime_root=%s\n' "$snapshot_root" >> "$GITHUB_OUTPUT"
 
     - name: Install pinned Codex CLI (primary, without credentials)
@@ -1123,6 +1148,8 @@ runs:
           *) echo "::error::Unsupported reasoning_effort '$codex_reasoning_effort' (allowed: high, max)."; exit 1 ;;
         esac
         echo "Codex reasoning effort: $codex_reasoning_effort"
+        codex_started_ms="$(date +%s%3N 2>/dev/null || printf '0')"
+        case "$codex_started_ms" in *[!0-9]*|'') codex_started_ms=0 ;; esac
         set +e
         printf '%s' "$prompt" | env -i "${codex_env[@]}" "$codex_bin" exec \
           --ephemeral \
@@ -1142,6 +1169,12 @@ runs:
         pipeline_status=("${PIPESTATUS[@]}")
         codex_status="${pipeline_status[0]:-1}"
         diagnostics_status="${pipeline_status[1]:-1}"
+        codex_finished_ms="$(date +%s%3N 2>/dev/null || printf '0')"
+        case "$codex_finished_ms" in *[!0-9]*|'') codex_finished_ms=0 ;; esac
+        codex_duration_ms=0
+        if [ "$codex_started_ms" -gt 0 ] && [ "$codex_finished_ms" -ge "$codex_started_ms" ]; then
+          codex_duration_ms=$((codex_finished_ms - codex_started_ms))
+        fi
         if [ "$diagnostics_status" -ne 0 ]; then
           echo '::error::Codex diagnostics stream could not be written.'
           [ "$codex_status" -eq 0 ] && codex_status=1
@@ -1169,6 +1202,7 @@ runs:
         printf 'side_effect_detected=%s\n' "$side_effect_detected" >> "$GITHUB_OUTPUT"
         printf 'codex_output=%s\n' "$codex_output_destination" >> "$GITHUB_OUTPUT"
         printf 'codex_diagnostics=%s\n' "$codex_diagnostics_destination" >> "$GITHUB_OUTPUT"
+        printf 'codex_duration_ms=%s\n' "$codex_duration_ms" >> "$GITHUB_OUTPUT"
         exit "$codex_status"
 
     # The Anthropic action receives one github_token input and overwrites GH_TOKEN
@@ -1320,6 +1354,7 @@ runs:
         CODEX_SIDE_EFFECT_DETECTED: ${{ steps.codex.outputs.side_effect_detected }}
         CODEX_OUTPUT: ${{ steps.codex.outputs.codex_output }}
         CODEX_DIAGNOSTICS: ${{ steps.codex.outputs.codex_diagnostics }}
+        CODEX_DURATION_MS: ${{ steps.codex.outputs.codex_duration_ms }}
         CLAUDE_OUTCOME: ${{ steps.claude.outcome }}
         EXEC_FILE: ${{ steps.claude.outputs.execution_file }}
         EVIDENCE_FILE: ${{ runner.temp }}/codex-primary-evidence-${{ github.run_id }}-${{ github.run_attempt }}.md
@@ -1329,6 +1364,66 @@ runs:
       run: |
         set -euo pipefail
         codex_outcome="${CODEX_OUTCOME:-skipped}"
+        codex_metrics='{"codex_invocations":0,"usage_available":false,"input_tokens":0,"cached_input_tokens":0,"output_tokens":0,"duration_ms":0,"outcome":"not_invoked","stream_status":"not_invoked","malformed_lines":0,"usage_records":0}'
+        if [ -n "${TRUSTED_NODE:-}" ] && [ -x "$TRUSTED_NODE" ] \
+          && [ -n "${RUNTIME_ROOT:-}" ] \
+          && [ -f "$RUNTIME_ROOT/ci/codex-usage-summary.mjs" ]; then
+          candidate_metrics=''
+          if candidate_metrics=$("$TRUSTED_NODE" "$RUNTIME_ROOT/ci/codex-usage-summary.mjs" \
+            "${CODEX_DIAGNOSTICS:-}" "$codex_outcome" "${CODEX_DURATION_MS:-}" 2>/dev/null); then
+            if printf '%s' "$candidate_metrics" | jq -e '
+              type == "object"
+              and (.codex_invocations | type == "number")
+              and (.usage_available | type == "boolean")
+              and (.input_tokens | type == "number")
+              and (.cached_input_tokens | type == "number")
+              and (.output_tokens | type == "number")
+              and (.duration_ms | type == "number")
+              and (.outcome | type == "string")
+              and (.stream_status | type == "string")
+            ' >/dev/null 2>&1; then
+              codex_metrics="$candidate_metrics"
+            fi
+          fi
+        fi
+        metric() {
+          local filter="$1" fallback="$2" value
+          if value=$(printf '%s' "$codex_metrics" | jq -er "$filter" 2>/dev/null); then
+            printf '%s' "$value"
+          else
+            printf '%s' "$fallback"
+          fi
+        }
+        codex_invocations="$(metric '.codex_invocations' 0)"
+        usage_available="$(metric '.usage_available' false)"
+        input_tokens="$(metric '.input_tokens' 0)"
+        cached_input_tokens="$(metric '.cached_input_tokens' 0)"
+        output_tokens="$(metric '.output_tokens' 0)"
+        duration_ms="$(metric '.duration_ms' 0)"
+        usage_outcome="$(metric '.outcome' unknown)"
+        stream_status="$(metric '.stream_status' unavailable)"
+        case "$codex_invocations" in 0|1) ;; *) codex_invocations=0 ;; esac
+        case "$usage_available" in true|false) ;; *) usage_available=false ;; esac
+        case "$input_tokens" in ''|*[!0-9]*) input_tokens=0 ;; esac
+        case "$cached_input_tokens" in ''|*[!0-9]*) cached_input_tokens=0 ;; esac
+        case "$output_tokens" in ''|*[!0-9]*) output_tokens=0 ;; esac
+        case "$duration_ms" in ''|*[!0-9]*) duration_ms=0 ;; esac
+        case "$usage_outcome" in success|failure|cancelled|skipped|unknown|not_invoked) ;; *) usage_outcome=unknown ;; esac
+        case "$stream_status" in complete|partial|malformed|unavailable|not_invoked) ;; *) stream_status=unavailable ;; esac
+        if [ -n "${GITHUB_STEP_SUMMARY:-}" ]; then
+          {
+            printf '\n### Codex review usage (non-secret)\n\n'
+            printf '| metric | value |\n|---|---:|\n'
+            printf '| invocations | %s |\n' "$codex_invocations"
+            printf '| usage available | %s |\n' "$usage_available"
+            printf '| input tokens | %s |\n' "$input_tokens"
+            printf '| cached input tokens | %s |\n' "$cached_input_tokens"
+            printf '| output tokens | %s |\n' "$output_tokens"
+            printf '| duration (ms) | %s |\n' "$duration_ms"
+            printf '| outcome | `%s` |\n' "$usage_outcome"
+            printf '| stream status | `%s` |\n' "$stream_status"
+          } >> "$GITHUB_STEP_SUMMARY"
+        fi
         side_effect_detected="${CODEX_SIDE_EFFECT_DETECTED:-unknown}"
         if [ "$codex_outcome" = 'skipped' ]; then
           side_effect_detected=false
@@ -1389,6 +1484,14 @@ runs:
         printf 'fallback_evidence_file=%s\n' "$evidence_file" >> "$GITHUB_OUTPUT"
         printf 'codex_output_file=%s\n' "${CODEX_OUTPUT:-}" >> "$GITHUB_OUTPUT"
         printf 'codex_diagnostics_file=%s\n' "${CODEX_DIAGNOSTICS:-}" >> "$GITHUB_OUTPUT"
+        printf 'codex_invocations=%s\n' "$codex_invocations" >> "$GITHUB_OUTPUT"
+        printf 'usage_available=%s\n' "$usage_available" >> "$GITHUB_OUTPUT"
+        printf 'input_tokens=%s\n' "$input_tokens" >> "$GITHUB_OUTPUT"
+        printf 'cached_input_tokens=%s\n' "$cached_input_tokens" >> "$GITHUB_OUTPUT"
+        printf 'output_tokens=%s\n' "$output_tokens" >> "$GITHUB_OUTPUT"
+        printf 'duration_ms=%s\n' "$duration_ms" >> "$GITHUB_OUTPUT"
+        printf 'outcome=%s\n' "$usage_outcome" >> "$GITHUB_OUTPUT"
+        printf 'stream_status=%s\n' "$stream_status" >> "$GITHUB_OUTPUT"
         printf 'codex_outcome=%s\n' "$codex_outcome" >> "$GITHUB_OUTPUT"
         printf 'claude_outcome=%s\n' "$claude_outcome" >> "$GITHUB_OUTPUT"
         printf 'claude_used=%s\n' "$claude_used" >> "$GITHUB_OUTPUT"
