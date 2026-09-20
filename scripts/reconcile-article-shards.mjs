@@ -57,11 +57,11 @@
 //       1 = superficie annunciata o shard illeggibili/troncati — meglio non
 //           agire su dati parziali che ripubblicare in massa per errore.
 
-import fs from 'node:fs';
+import fs, { realpathSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 import {
   countSourceArticles,
   floorFrom,
@@ -444,7 +444,15 @@ async function main() {
   }
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
+const invokedDirectly = (() => {
+  try {
+    return realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1] || '');
+  } catch {
+    return false;
+  }
+})();
+
+if (invokedDirectly) {
   main().catch((err) => {
     console.error(`::error::[reconcile] ${err && err.stack ? err.stack : err}`);
     process.exit(1);
