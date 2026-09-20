@@ -60,11 +60,11 @@
  * ══════════════════════════════════════════════════════════════
  */
 
-import { readFileSync, writeFileSync, mkdirSync, statSync, readdirSync, copyFileSync, existsSync, unlinkSync, renameSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, statSync, readdirSync, copyFileSync, existsSync, unlinkSync, renameSync, realpathSync } from 'node:fs';
 import { execSync } from 'node:child_process';
 import { createInterface } from 'node:readline';
 import path from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScoresBeforeExit, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens, getDeclaredRequestTokenLimit, isModelAvailable, isPerRunCallCapReached } from './lib/ai-models.mjs';
 import { exitAfterDrain } from './lib/drain-stdio.mjs';
 
@@ -8215,7 +8215,7 @@ ${!_isMeta && sourceContract ? `\n${sourceContract}\n` : ''}
 
 Il tuo articolo è una RISCRITTURA EDITORIALE della fonte, NON un articolo originale. Questo significa:
 - OGNI fatto, cifra, data, legge, aliquota, istituzione e statistica DEVE essere presente nel SOURCE CONTENT sopra.
-- Se la fonte NON specifica una data, un importo, un numero di legge o un nome di istituzione: NON inventarlo. Scrivi "non ancora specificato" o omettilo.
+- Se la fonte NON specifica un dato: omettilo; niente placeholder (es. "non specificato").
 - Le citazioni dirette devono essere VERBATIM dalla fonte. Se parafrasate, usa il discorso indiretto.
 - NON aggiungere "contesto di background" non verificabile (es. date di trattati, numeri di legge, statistiche) a meno che non sia nella fonte.
 
@@ -8345,7 +8345,7 @@ Genera JSON (no markdown, no code fences):
     "it": {${_isBody ? '' : `
       "title": "Titolo giornalistico con keyword (OBBLIGATORIO ≤ 60 caratteri totali, target 50-55. Il suffisso ' | Frontaliere Ticino' viene aggiunto automaticamente — NON includerlo nel title)",
       "excerpt": "Sottotitolo con dati concreti DALLA FONTE (max 160 chars)",`}${_isMeta ? '' : `
-      "body1": "Inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (3-8 coppie termine→valore presenti nella fonte; ometti campi assenti, niente placeholder). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. 300-400 parole (escluse TL;DR/Fatti chiave). Min 1 ### sotto-sezione.",
+      "body1": "Inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (0-8 coppie termine→valore, tutte presenti nella fonte; ometti assenti e placeholder). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. 300-400 parole (escluse TL;DR/Fatti chiave). Min 1 ### sotto-sezione.",
       "body2": "Analisi pratica: implicazioni, confronti, scenari. Contenuto DIVERSO da body1. 300-400 parole. Min 1 ### sotto-sezione.",
       "body3": "Azione: procedura step-by-step, scadenze, strumenti + CTA finale. NON riassumere body1/body2. 300-400 parole."${_isBody ? '' : ','}`}${_isBody ? '' : `
       "faq": [
@@ -8457,7 +8457,7 @@ Rigenera "id" e "slugs" seguendo ESATTAMENTE lo schema richiesto sopra (valore r
 
 REGOLA FONDAMENTALE: Ogni fatto, dato, legge, data, cifra e istituzione nel tuo articolo DEVE provenire dal testo SOURCE CONTENT fornito. Se un'informazione NON è nella fonte, NON includerla. Mai inventare, dedurre o "completare" dati mancanti.
 
-QUANDO LA FONTE NON CONTIENE UN DATO: scrivi "non ancora specificato", "in fase di definizione", o ometti il dettaglio. NON inventare numeri, date o riferimenti normativi per riempire il testo.
+DATI ASSENTI NELLA FONTE: omettili; niente placeholder (es. "non specificato") e niente dettagli inventati.
 
 ${JSON_QUOTE_SAFETY_RULE_IT}
 
@@ -17077,7 +17077,7 @@ export { llmFactCheck };
 // this module (to reuse registerArticleFiles/buildBodyFile) must NOT execute it.
 const invokedDirectly = (() => {
   try {
-    return import.meta.url === pathToFileURL(process.argv[1] || '').href;
+    return realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1] || '');
   } catch {
     return false;
   }

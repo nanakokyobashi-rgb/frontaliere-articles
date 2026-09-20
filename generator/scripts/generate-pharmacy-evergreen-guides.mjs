@@ -17,8 +17,8 @@
  * registrar.
  */
 import path from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
-import { mkdirSync, renameSync, unlinkSync, writeFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { mkdirSync, renameSync, unlinkSync, writeFileSync, realpathSync } from 'node:fs';
 
 import {
   buildPharmacyEvergreenGuides,
@@ -255,7 +255,7 @@ async function main() {
 
 const invokedDirectly = (() => {
   try {
-    return import.meta.url === pathToFileURL(process.argv[1] || '').href;
+    return realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1] || '');
   } catch {
     return false;
   }
