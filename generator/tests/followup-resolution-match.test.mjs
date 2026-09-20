@@ -15,6 +15,7 @@ import {
   citedFiles,
   closingMergedPr,
   closedIssueRefs,
+  commandReferent,
   detectAlreadyResolved,
 } from '../../scripts/ci/followup-resolution-match.mjs';
 
@@ -48,6 +49,12 @@ test('plain paths in Suggested action are resolved as locators', () => {
     readFile: () => 'createRawFetcher( CONTRACT.siteRuntimePaths',
   });
   assert.equal(result.resolved, true);
+});
+
+test('COMANDO accetta directory e file senza estensione, ma non prosa senza referente', () => {
+  assert.equal(commandReferent('find data/all-known-job-slugs/'), 'data/all-known-job-slugs/');
+  assert.equal(commandReferent('node scripts/ci/followup-check'), 'scripts/ci/followup-check');
+  assert.equal(commandReferent('npm test'), null);
 });
 
 test('acceptance token: solo una chiamata eseguibile conta, non commenti stringhe regex o metodi', () => {
