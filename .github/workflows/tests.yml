@@ -582,6 +582,40 @@ jobs:
             exit 0
           fi
 
+          # Un body corretto sulla STESSA HEAD dopo un verdetto non approvante
+          # e' l'unico cambiamento di metadata che merita un secondo giro di
+          # modello — e solo sul body, perche' la HEAD non e' cambiata e il
+          # codice e' identico per costruzione. Senza questo ramo il guard cade
+          # su «nessuna review con la revisione corrente» e compra una review
+          # PIENA (tier high su quasi ogni PR di ciclo) per una riga di prosa.
+          # `lastEditedAt` vuoto = body mai modificato, e l'eccezione non scatta.
+          # shellcheck disable=SC2016 # $owner/$name/$number sono variabili GraphQL, non shell.
+          body_edited_at=$(gh api graphql \
+            -f query='query($owner:String!,$name:String!,$number:Int!){repository(owner:$owner,name:$name){pullRequest(number:$number){lastEditedAt}}}' \
+            -F owner="${REPO%%/*}" -F name="${REPO#*/}" -F number="$PR_NUMBER" \
+            --jq '.data.repository.pullRequest.lastEditedAt // empty' 2>/dev/null || true)
+          # `|| true`: questo ramo sceglie la corsia ECONOMICA. Un helper che
+          # non parte deve lasciare il guard alla sua decisione normale (review
+          # piena), non far morire lo step e togliere il verdetto alla PR.
+          body_rereview=$(printf '%s' "$reviews" \
+            | node scripts/ci/body-rereview-admission.mjs \
+                --head "$HEAD_SHA" --revision "$REVIEW_REVISION" \
+                --body-edited-at "${body_edited_at:-none}" \
+            | sed -n 's/^body_rereview=//p' | tail -n 1 || true)
+
+          # Ordine voluto: il LGTM pulito sulla revisione corrente vince sempre
+          # (il ramo sopra), poi il body corretto. Cosi' un body edit non puo'
+          # mai riaprire una review gia' approvata su quello stesso body.
+          if [ "${body_rereview:-false}" = 'true' ]; then
+            set_claim_fingerprint
+            {
+              echo "skip=false"
+              echo "body_rereview=true"
+            } >> "$GITHUB_OUTPUT"
+            echo "Verdetto non approvante sulla HEAD $HEAD_SHA e body corretto dopo di esso → review minimal sul solo body."
+            exit 0
+          fi
+
           # Il fast-path incrementale parte solo da una review che porta la
           # revisione del body corrente. Se restasse una review del body
           # precedente, il suo compare potrebbe classificare il delta come
@@ -681,6 +715,7 @@ jobs:
           HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
           REPO: ${{ github.repository }}
           REVIEW_REVISION: ${{ steps.review_input.outputs.review_revision }}
+          BODY_REREVIEW: ${{ steps.guard.outputs.body_rereview }}
         # Il tier si decide SOLO sul codice. Funnel-critical qui significa: cio'
         # che produce o rende la superficie pubblicata che il sito consuma —
         # `engine/` (rende le pagine articolo), `host/` (l'altra meta' del
@@ -712,6 +747,16 @@ jobs:
             } >> "$GITHUB_OUTPUT"
             echo "Review tier: $1 ($2, max-turns $3, effort $effort)"
           }
+          # Body corretto sulla stessa HEAD dopo un verdetto non approvante
+          # (ramo `body_rereview` del guard): la HEAD non e' cambiata, quindi
+          # il codice e' identico PER COSTRUZIONE. Si rigiudica solo il body e
+          # i 🔴 di codice ancora aperti restano aperti.
+          if [ "${BODY_REREVIEW:-}" = "true" ]; then
+            echo "code_unchanged_since=$HEAD_SHA" >> "$GITHUB_OUTPUT"
+            echo "Body corretto dopo un verdetto non approvante sulla stessa HEAD → tier minimal (solo body)."
+            set_tier minimal gpt-5.6-luna 12
+            exit 0
+          fi
           # `gh pr view --json files` TRONCA a 100 file senza dirlo, e su questo
           # repo una PR che rigenera il corpus ne ha migliaia: il tier si
           # deciderebbe su un campione, e con >100 file `content/` in testa
@@ -845,6 +890,7 @@ jobs:
           CTX_DIR: ${{ runner.temp }}/review-ctx
           TIER: ${{ steps.tier.outputs.tier }}
           BODY_CONTRACT_OUTCOME: ${{ steps.body_contract.outcome }}
+          CODE_UNCHANGED_SINCE: ${{ steps.tier.outputs.code_unchanged_since }}
           REVIEW_DIFF_EXCLUSIONS: content,data,dist,public
         run: |
           set -uo pipefail
@@ -865,6 +911,28 @@ jobs:
             # Resolve/hydrate the complete scoped patch on the host. A missing
             # patch must fail here, not force the model to rebuild it via API.
             node scripts/ci/prefetch-review-diff.mjs || exit 1
+          fi
+          # Il verdetto precedente sulla stessa HEAD, per la corsia body-only.
+          # `|| :` ovunque: questo e' contesto, non un gate — se manca, il
+          # bundle lo DICHIARA invece di far credere che non ci fosse nulla.
+          : > "$CTX_DIR/previous-review.md"
+          if [ -n "${CODE_UNCHANGED_SINCE:-}" ]; then
+            # `gh api` NON ha `--arg`: quella flag e' di `jq`, e passarla a gh
+            # fa fallire il comando. Con l'errore inghiottito da `|| :` il
+            # bundle riceveva un file VUOTO e prometteva al reviewer un
+            # verdetto precedente che non gli arrivava mai. Si pagina con gh e
+            # si interroga con jq vero; `--slurp` annida le pagine, quindi
+            # `.[][]` le appiattisce.
+            # shellcheck disable=SC2016 # `$head` e' una variabile jq, non di shell.
+            if ! gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate --slurp \
+              | jq -r --arg head "$CODE_UNCHANGED_SINCE" \
+                  '[.[][] | select(.commit_id == $head) | select((.state // "") != "PENDING" and (.state // "") != "DISMISSED")] | last | .body // ""' \
+                  > "$CTX_DIR/previous-review.md"; then
+              # Il fallimento si DICHIARA: un contesto mancante che si traveste
+              # da «non c'era niente» e' peggio di un contesto mancante.
+              echo "::warning::Verdetto precedente su $CODE_UNCHANGED_SINCE non recuperabile: il bundle lo dichiara al reviewer."
+              : > "$CTX_DIR/previous-review.md"
+            fi
           fi
           # Claude non ha bisogno dell'elenco completo dei file di corpus: per la
           # review servono il body, il diff code e i file code toccati.
@@ -900,6 +968,24 @@ jobs:
               echo "Verdict unavailable (${BODY_CONTRACT_OUTCOME:-unknown}): apply the REVIEW.md body rules."
             fi
             echo
+            if [ -n "${CODE_UNCHANGED_SINCE:-}" ]; then
+              echo "## Code contribution unchanged"
+              echo "The PR code contribution is identical to the one reviewed at ${CODE_UNCHANGED_SINCE} (same HEAD, no PR code file changed since). This is a body-only re-review: judge only the PR body, carry every open Important verbatim with its anchor, and never write \`Fix di\` for a code anchor."
+              echo
+              # Il verdetto precedente per intero. L'ammissione a questa corsia
+              # ha gia' PROVATO che non porta Important di codice
+              # (`hasOpenCodeImportant`), quindi qui non si puo' perdere lavoro
+              # di codice: questo blocco esiste perche' il reviewer possa
+              # confermare o chiudere gli Important sul BODY con l'anchor
+              # esatto, invece di riscoprirli.
+              echo "### Previous verdict on this HEAD (verbatim)"
+              if [ -s "$CTX_DIR/previous-review.md" ]; then
+                cat "$CTX_DIR/previous-review.md"
+              else
+                echo "Not retrievable: treat every Important you can see in the PR conversation as still open."
+              fi
+              echo
+            fi
             echo "## Changed code-file list"
             cat "$CTX_DIR/review-code-files.txt"
             echo
@@ -1011,6 +1097,7 @@ jobs:
             **Disciplina turni (budget rigido, tutti i tier tranne `minimal`):** hai ${{ steps.tier.outputs.max_turns }} turni. Un messaggio con tool-call = 1 turno indipendentemente da quanti tool_use contiene, quindi le probe indipendenti vanno emesse in parallelo nello stesso messaggio, mai una per turno. `PR_NUMBER`/`HEAD_SHA`/`INCREMENTAL_BASE` sono gia' nell'env: mai spendere un turno per rileggerli. Il checkout NON ha `node_modules`: niente `npm`/`npx`/test runner, il verdetto si basa sulla lettura statica. Entro cinque turni dal cap DEVI aver postato la review: se hai ancora verifiche aperte, postale come `❓ q:` invece di continuare a probeare. Una review postata con un `❓` sblocca il loop; una review MAI postata brucia il run intero senza verdetto.
 
             **PR body: una sola fonte di verita'.** Il contratto deterministico del body (`scripts/ci/pr-body-contract.mjs`, step `PR-body completeness` di questo stesso run) ha gia' validato sezioni, stato di ogni voce, `Motivo`/`Prossimo passo`, placeholder e `Closes`; il suo verdetto e' nel bundle sotto `## Deterministic body contract`. Quando e' ✅ NON rivalidare quelle regole e non emettere mai un `🔴 Important` sul body: un dubbio su quelle regole vale al massimo un `🟡 Nit` ancorato `PR body:L<n>`, e il review gate declassa comunque un 🔴 cosi' ancorato su un contratto verde. Ogni stato che il contratto accetta in `## Non implementato (ancora)` — `in questa PR`, `PR concatenata #N`, `per scelta`, `by construction` e qualunque altro `blocked: <causa>` — e' valido, e su quelli **non si emette 🔴**. Riemettere un 🔴 su una voce che il contratto ha accettato incastra il ciclo: il fixer declina con una ragione, il cap dei round scatta, e `needs-human` atterra con la diagnosi sbagliata su una PR che non ha niente da riparare. Il claim di performance senza baseline (step 7 di REVIEW.md) NON e' una regola del contratto e resta 🔴. Una regola del body che il contratto non copre si aggiunge al contratto, non si applica a mano.
+            Se il bundle porta una sezione `## Code contribution unchanged`, il codice NON e' cambiato dalla review citata: rigiudica SOLO il body della PR, riporta ogni 🔴 Important di codice ancora aperto con lo stesso path e la stessa riga, non scrivere mai `Fix di` per un anchor di codice, e risolvi un Important sul body solo se il body corrente lo ripara davvero.
 
             **Workflow di review come da REVIEW.md:** completeness contract → `Implementato` con occhio critico → `Non implementato` filtro scopo → scope drift → ripetizione di pattern cross-file → conformita' al piano di test → claim di performance non validati → output.
             - Tier `high`, `high-mega` o `incremental-high`: aggiungi una sezione `## Adversarial check` con esattamente 3 rischi REALI non verificati, prima del summary. Mai «manca un test».
@@ -1040,6 +1127,7 @@ jobs:
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           REVIEW_TIER: ${{ steps.tier.outputs.tier }}
           REVIEW_MAX_TURNS: ${{ steps.tier.outputs.max_turns }}
+          REVIEW_EFFORT: ${{ steps.tier.outputs.effort }}
           REVIEW_REVISION: ${{ steps.review_input.outputs.review_revision }}
           VERDICT_EVIDENCE_FILE: ${{ runner.temp }}/codex-verdict-evidence-${{ github.run_id }}-${{ github.run_attempt }}.md
         run: |
@@ -1054,8 +1142,14 @@ jobs:
           set_review_output verdict_evidence_file ''
           write_verdict_evidence() {
             local evidence_file="${VERDICT_EVIDENCE_FILE:-${RUNNER_TEMP:-/tmp}/codex-verdict-evidence-${RUN_ID:-$$}.md}"
+            # L'evidenza sintetica deve registrare l'effort REALE di questa run,
+            # non il default dello script: una review girata a `high` scritta
+            # come `max` e' telemetria falsa proprio sul percorso in cui si
+            # vorrebbe capire se l'effort ridotto ha causato la morte a
+            # max-turns. Finding 🟡 della review su #1628.
             if ! EVIDENCE_FILE="$evidence_file" \
               EVIDENCE_TRIGGER='codex-primary' \
+              EVIDENCE_EFFORT="${REVIEW_EFFORT:-max}" \
               FALLBACK_STATUS='success' \
               FALLBACK_DETAIL='codex-review-posted-after-max-turns' \
               GITHUB_OUTPUT=/dev/null \

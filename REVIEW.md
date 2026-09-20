@@ -76,6 +76,7 @@ Il tier è calcolato dallo step `Determine review tier` di `tests.yml` e passato
 | **normal** | Tutto il resto, inclusi `scripts/{ci,dev}/` e gli audit read-only | Single-pass standard, nessun adversarial obbligatorio. |
 | **minimal** | PR di soli content/data (zero codice reviewabile) | Percorso corto ≤6 turni: solo il completeness contract del body. Niente REVIEW.md, niente cross-file, niente adversarial. Posta `## LGTM`. |
 | **incremental** / **incremental-high** | Re-review con delta non-funnel / funnel-critical | Reviewa SOLO il delta da `INCREMENTAL_BASE`, non l'intero contributo. Read/grep dei file pieni consentito per il contesto. Riduce i token, **non** la severity: un 🔴 nel delta resta 🔴. |
+| **minimal (body-only)** | Body corretto sulla STESSA HEAD dopo un verdetto non approvante (`scripts/ci/body-rereview-admission.mjs`) | Il codice e' identico per costruzione: si rigiudica SOLO il body. La corsia si apre **solo se il verdetto precedente non porta 🔴 Important di codice**: con codice aperto, correggere il body non basta e si fa la review piena. Il bundle porta `## Code contribution unchanged` e il verdetto precedente VERBATIM, cosi' gli Important sul body si confermano o si chiudono con l'anchor esatto. Un `## LGTM` pulito sulla HEAD resta sticky (nessuna review comprata da un body edit) e i verdetti sulla stessa HEAD sono limitati a 3. |
 
 ### CODE vs DATA nel diff
 
