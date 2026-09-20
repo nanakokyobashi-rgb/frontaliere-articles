@@ -6605,6 +6605,18 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.apprendistato-formazione-professionale-vaud.title': 'Lehre und Berufsausbildung Waadt',
     'blog.article.apprendistato-formazione-professionale-vaud.excerpt': 'Vollständiger Leitfaden zur Suche nach einer Lehrstelle im Kanton Waadt: Vertrag, Lehrlingsentgelt und Berufsmaturität.',
     'blog.article.apprendistato-formazione-professionale-vaud.imageAlt': 'Terrassierte Weinberge im Kanton Waadt bei Sonnenuntergang mit Blick auf den Genfersee',
+    'blog.article.revolut-hacker-svizzera-pec.title': 'Revolut Hacker: Daten von 700 Schweizer Kunden',
+    'blog.article.revolut-hacker-svizzera-pec.excerpt': 'Hacker-Angriff auf Revolut: Fast 700 Schweizer Kunden betroffen. Die Kriminellen fordern 3 Millionen Dollar, um die Daten nicht zu veröffentlichen.',
+    'blog.article.revolut-hacker-svizzera-pec.imageAlt': 'Smartphone mit Banking-App und Sicherheits-Symbol auf Schreibtisch',
+    'blog.article.votazioni-cantoni-27-settembre.title': 'Abstimmungen in neun Kantonen: Steuern und Wahlmobilität',
+    'blog.article.votazioni-cantoni-27-settembre.excerpt': 'Am Sonntag, 27. September, wird in neun Kantonen abgestimmt: Steuer in Waadt, Empfängnisverhütung in Genf und grenzüberschreitende Mobilität von 39,5 Millionen.',
+    'blog.article.votazioni-cantoni-27-settembre.imageAlt': 'Wähler vor einem schweizerischen Regierungsgebäude zu den Kantonsabstimmungen am 27. September',
+    'blog.article.referendum-nuove-centrali-nucleari.title': 'Erfolgreiches Referendum: 125\'000 Unterschriften gegen neue Kraftwerke',
+    'blog.article.referendum-nuove-centrali-nucleari.excerpt': 'Das Komitee hat in 3 Monaten über 125\'000 Unterschriften gesammelt. Die Abstimmung ist für den 28. Februar 2027 vorgesehen.',
+    'blog.article.referendum-nuove-centrali-nucleari.imageAlt': 'Kernkraftwerke und Blick auf den Luganersee: Referendum gegen neue Bauwerke erfolgreich',
+    'blog.article.migros-fusione-cooperative-2035.title': 'Migros Währung Fusion der 10 Genossenschaften',
+    'blog.article.migros-fusione-cooperative-2035.excerpt': 'CEO Irminger bewertet eine einzige nationale Genossenschaft. 2,3 Millionen potenziell beteiligte Mitglieder, Entscheidung im Gange.',
+    'blog.article.migros-fusione-cooperative-2035.imageAlt': 'Ansicht des Bundeshauses in Bern, Sitz der Schweizer Institutionen, bei Dämmerung.',
 };
 
 export default blogMetaChDe;

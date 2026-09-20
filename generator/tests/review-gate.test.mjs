@@ -505,7 +505,7 @@ for (const [label, patch] of [
   });
 }
 
-test('compare con stream di hunk validi → la logica di declassamento resta attiva', () => {
+test('compare con stream di hunk validi → il declassamento resta tracciato ma fail-closed', () => {
   const r = runGate({
     reviews: HISTORY_REVIEWS,
     files: ['engine/x.ts'],
@@ -523,8 +523,45 @@ test('compare con stream di hunk validi → la logica di declassamento resta att
       ].join('\n'),
     }]),
   });
-  assert.equal(r.status, 0, `uno stream unified valido non deve diventare non confrontabile.\n${r.stdout}`);
+  assert.equal(r.status, 1, `un Important declassificato non deve rendere verde il gate.\n${r.stdout}`);
   assert.match(r.stdout, /DECLASSIFIED-UNCHANGED-LINE/i, r.stdout);
+  assert.match(r.stdout, /fail-closed/i, r.stdout);
+});
+
+test('due Important nuovi su righe non cambiate non possono approvare una review senza LGTM', () => {
+  const r = runGate({
+    reviews: [
+      botReview(OLD, 'tutto bene\n\n## LGTM', {
+        id: 100,
+        submitted_at: '2026-09-19T09:00:00Z',
+      }),
+      botReview(HEAD, [
+        '## Findings (Important: 2, 0 Nit)',
+        '`engine/x.ts:10`: 🔴 Important: il controllo A resta incompleto.',
+        '`engine/x.ts:30`: 🔴 Important: il controllo B resta incompleto.',
+      ].join('\n'), {
+        id: 101,
+        submitted_at: '2026-09-19T10:00:00Z',
+      }),
+    ],
+    files: ['engine/x.ts'],
+    compare: compareFromPreviousReview([{
+      filename: 'engine/x.ts',
+      status: 'modified',
+      patch: [
+        '@@ -1 +1 @@',
+        '-old',
+        '+new',
+        '@@ -20,2 +20,2 @@',
+        ' context',
+        '-old-again',
+        '+new-again',
+      ].join('\n'),
+    }]),
+  });
+  assert.equal(r.status, 1, `i due finding non devono essere soppressi dal gate.\n${r.stdout}`);
+  assert.equal((r.stdout.match(/DECLASSIFIED-UNCHANGED-LINE/giu) || []).length, 2, r.stdout);
+  assert.match(r.stdout, /fail-closed/i, r.stdout);
 });
 
 test('compare con filename CR/LF → il finding resta bloccante', () => {

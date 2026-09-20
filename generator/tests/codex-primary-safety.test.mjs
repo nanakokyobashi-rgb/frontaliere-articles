@@ -305,6 +305,28 @@ test('la review Codex esporta eventi strutturati anche quando il processo fallis
   assert.match(action, /CODEX_DIAGNOSTICS: \$\{\{ steps\.codex\.outputs\.codex_diagnostics \}\}/);
 });
 
+test('la review Codex espone solo telemetry aggregata e conserva il cap di 45 minuti', () => {
+  assert.match(action, /codex-usage-summary\.mjs/);
+  assert.match(action, /printf 'codex_duration_ms=%s\\n'/);
+  assert.match(action, /CODEX_DURATION_MS: \$\{\{ steps\.codex\.outputs\.codex_duration_ms \}\}/);
+  for (const output of [
+    'codex_invocations',
+    'usage_available',
+    'input_tokens',
+    'cached_input_tokens',
+    'output_tokens',
+    'duration_ms',
+    'stream_status',
+  ]) {
+    assert.match(action, new RegExp(`printf '${output}=%s\\\\n'`), `${output}: action output mancante`);
+  }
+  assert.doesNotMatch(action, /cat "\$CODEX_DIAGNOSTICS"/,
+    'il diagnostics stream non deve essere riversato nello step summary');
+  const reviewStep = workflowStep(testsWorkflow, 'Run Codex Luna Max review');
+  assert.match(reviewStep, /timeout-minutes:\s*45/,
+    'il cap bounded della review non deve essere ridotto dal wiring telemetry');
+});
+
 test('un verdetto Codex postato nell ultimo turno riceve evidenza effimera verificabile', () => {
   assert.match(testsWorkflow, /VERDICT_EVIDENCE_FILE: \$\{\{ runner\.temp \}\}\/codex-verdict-evidence-/);
   assert.match(testsWorkflow, /EVIDENCE_TRIGGER='codex-primary'/);

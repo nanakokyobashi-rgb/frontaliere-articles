@@ -6605,6 +6605,18 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.apprendistato-formazione-professionale-vaud.title': 'Apprentissage et formation professionnelle Vaud',
     'blog.article.apprendistato-formazione-professionale-vaud.excerpt': 'Guide complet sur la façon de trouver un poste d\'apprentissage dans le canton de Vaud : contrat, rémunération d\'apprenti et maturité professionnelle.',
     'blog.article.apprendistato-formazione-professionale-vaud.imageAlt': 'Vignes en terrasses dans le canton de Vaud au coucher du soleil, surplombant le lac Léman',
+    'blog.article.revolut-hacker-svizzera-pec.title': 'Revolut hacker : données de 700 clients suisses',
+    'blog.article.revolut-hacker-svizzera-pec.excerpt': 'Attaque hacker à Revolut : près de 700 clients suisses touchés. Les criminels demandent 3 millions de dollars pour ne pas publier les données.',
+    'blog.article.revolut-hacker-svizzera-pec.imageAlt': 'Smartphone avec application bancaire et icône de sécurité sur bureau',
+    'blog.article.votazioni-cantoni-27-settembre.title': 'Vote dans neuf cantons : fiscalité et mobilité au vote',
+    'blog.article.votazioni-cantoni-27-settembre.excerpt': 'Le dimanche 27 septembre, on vote dans neuf cantons : fiscalité à Vaud, contraception à Genève et mobilité transfrontalière à 39,5 millions.',
+    'blog.article.votazioni-cantoni-27-settembre.imageAlt': 'Électeurs en file devant un bâtiment gouvernemental suisse pour les votations cantonales du 27 septembre',
+    'blog.article.referendum-nuove-centrali-nucleari.title': 'Référendum réussi : 125\'000 signatures contre de nouvelles centrales',
+    'blog.article.referendum-nuove-centrali-nucleari.excerpt': 'Le comité a recueilli plus de 125\'000 signatures en 3 mois. Le vote est prévu pour le 28 février 2027.',
+    'blog.article.referendum-nuove-centrali-nucleari.imageAlt': 'Centrales nucléaires et vue sur le lac de Lugano: le référendum contre les nouvelles constructions a réussi',
+    'blog.article.migros-fusione-cooperative-2035.title': 'Migros évalue la fusion des 10 coopératives',
+    'blog.article.migros-fusione-cooperative-2035.excerpt': 'PDG Irminger évalue une seule coopérative nationale. 2,3 millions d\'associés potentiellement impliqués, décision en cours.',
+    'blog.article.migros-fusione-cooperative-2035.imageAlt': 'Vue du Palais fédéral à Berne, siège des institutions suisses, au crépuscule.',
 };
 
 export default blogMetaChFr;

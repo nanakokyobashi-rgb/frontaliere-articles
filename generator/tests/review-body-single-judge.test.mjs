@@ -342,4 +342,6 @@ test('auto-merge-eval usa la stessa congiunzione del gate sul verdetto', () => {
   const source = read('scripts/ci/auto-merge-eval.mjs');
   assert.match(source, /\(scope\.outside\?\.length \?\? 0\) === 0 \|\| scope\.minted/u,
     'auto-merge-eval pretende ancora una follow-up coniata che non esiste');
+  assert.match(source, /scope\.staleDeclassified\?\.length \?\? 0/u,
+    'auto-merge-eval deve restare fail-closed sui finding su righe non cambiate');
 });

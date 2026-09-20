@@ -6605,6 +6605,18 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.apprendistato-formazione-professionale-vaud.title': 'Vaud Apprenticeship and Vocational Training',
     'blog.article.apprendistato-formazione-professionale-vaud.excerpt': 'Complete guide on how to find an internship position in the Canton of Vaud: contract, apprenticeship salary and professional maturity.',
     'blog.article.apprendistato-formazione-professionale-vaud.imageAlt': 'Terraced vineyards in Canton Vaud at sunset, overlooking Lake Geneva',
+    'blog.article.revolut-hacker-svizzera-pec.title': 'Revolut hacker: data from 700 Swiss customers',
+    'blog.article.revolut-hacker-svizzera-pec.excerpt': 'Hacker attack on Revolut: almost 700 Swiss customers hit. Criminals are asking for $3 million not to publish the data.',
+    'blog.article.revolut-hacker-svizzera-pec.imageAlt': 'Smartphone with banking app and security icon on desk',
+    'blog.article.votazioni-cantoni-27-settembre.title': 'Voting in nine cantons: tax and voting mobility',
+    'blog.article.votazioni-cantoni-27-settembre.excerpt': 'On Sunday, September 27, nine cantons are voting: tax in Vaud, contraception in Geneva and cross-border mobility of 39.5 million.',
+    'blog.article.votazioni-cantoni-27-settembre.imageAlt': 'Voters queuing outside a Swiss government building for the September 27 cantonal elections',
+    'blog.article.referendum-nuove-centrali-nucleari.title': 'Successful referendum: 125,000 signatures against new plants',
+    'blog.article.referendum-nuove-centrali-nucleari.excerpt': 'The committee collected over 125,000 signatures in 3 months. The vote is scheduled for February 28, 2027.',
+    'blog.article.referendum-nuove-centrali-nucleari.imageAlt': 'Nuclear power plants and view of Lake Lugano: referendum against new constructions succeeded',
+    'blog.article.migros-fusione-cooperative-2035.title': 'Migros evaluates merger of the 10 cooperatives',
+    'blog.article.migros-fusione-cooperative-2035.excerpt': 'CEO Irminger evaluates a single national cooperative. 2.3 million members potentially involved, decision in progress.',
+    'blog.article.migros-fusione-cooperative-2035.imageAlt': 'View of the Federal Palace in Bern, headquarters of Swiss institutions, at dusk.',
 };
 
 export default blogMetaChEn;

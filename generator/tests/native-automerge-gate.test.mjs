@@ -38,11 +38,16 @@ const pr = (overrides = {}) => ({
 });
 
 const check = (overrides = {}) => ({
+  id: 100,
   name: 'tests (node --test)',
   head_sha: HEAD,
   status: 'completed',
   conclusion: 'success',
+  created_at: '2026-09-13T12:00:00Z',
   completed_at: '2026-09-13T12:01:00Z',
+  details_url: 'https://github.com/owner/repo/actions/runs/200/job/300',
+  check_suite: { id: 100 },
+  external_id: '00000000-0000-4000-8000-000000000100',
   ...overrides,
 });
 
@@ -78,6 +83,51 @@ test('usa l ultimo verdetto sulla HEAD e non accetta check pending o su altra HE
   }).allow, true);
   assert.equal(requiredVitestDecision([check({ status: 'in_progress', conclusion: null, completed_at: null })], HEAD).allow, false);
   assert.equal(requiredVitestDecision([check({ head_sha: OLD_HEAD })], HEAD).allow, false);
+});
+
+test('il gate segue la generazione e non completed_at, e resta pending sul run nuovo', () => {
+  const newest = check({
+    id: 200,
+    created_at: '2026-09-13T12:05:00Z',
+    completed_at: '2026-09-13T12:06:00Z',
+    conclusion: 'success',
+    details_url: 'https://github.com/owner/repo/actions/runs/205/job/300',
+    check_suite: { id: 200 },
+    external_id: '00000000-0000-4000-8000-000000000200',
+  });
+  const old = check({
+    id: 199,
+    created_at: '2026-09-13T12:00:00Z',
+    completed_at: '2026-09-13T12:07:00Z',
+    conclusion: 'failure',
+    details_url: 'https://github.com/owner/repo/actions/runs/204/job/300',
+    check_suite: { id: 199 },
+    external_id: '00000000-0000-4000-8000-000000000199',
+  });
+  assert.equal(requiredVitestDecision([newest, old], HEAD).allow, true);
+
+  const pending = check({
+    id: 201,
+    status: 'in_progress',
+    conclusion: null,
+    created_at: '2026-09-13T12:08:00Z',
+    completed_at: null,
+    details_url: 'https://github.com/owner/repo/actions/runs/206/job/300',
+    check_suite: { id: 201 },
+    external_id: '00000000-0000-4000-8000-000000000201',
+  });
+  assert.equal(requiredVitestDecision([newest, pending], HEAD).allow, false);
+  assert.match(requiredVitestDecision([newest, pending], HEAD).reason, /pending/);
+});
+
+test('il gate rifiuta un duplicato con identità di correlazione diversa', () => {
+  const base = check();
+  const conflicting = {
+    ...base,
+    details_url: 'https://github.com/owner/repo/actions/runs/201/job/301',
+    external_id: '00000000-0000-4000-8000-000000000101',
+  };
+  assert.equal(requiredVitestDecision([base, conflicting], HEAD).allow, false);
 });
 
 test('un edit di una review vecchia non nasconde un Important successivo', () => {

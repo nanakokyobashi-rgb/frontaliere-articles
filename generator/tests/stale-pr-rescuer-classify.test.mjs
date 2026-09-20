@@ -137,10 +137,10 @@ const quotaRetryComment = ({
 function checkRuns({ concl = 'success', pending = 0 } = {}) {
   const runs = [];
   if (concl !== null) {
-    runs.push({ id: 1000, name: CHECK_NAME, status: 'completed', completed_at: isoAgo(3), conclusion: concl });
+    runs.push({ id: 1000, name: CHECK_NAME, status: 'completed', head_sha: HEAD_SHA, created_at: isoAgo(3), completed_at: isoAgo(3), conclusion: concl });
   }
-  for (let i = 0; i < pending; i++) runs.push({ id: 2000 + i, name: CHECK_NAME, status: 'in_progress', completed_at: null });
-  return { check_runs: runs };
+  for (let i = 0; i < pending; i++) runs.push({ id: 2000 + i, name: CHECK_NAME, status: 'in_progress', head_sha: HEAD_SHA, created_at: isoAgo(3), completed_at: null });
+  return { total_count: runs.length, check_runs: runs };
 }
 
 /** Una review Claude, o nessuna. */
@@ -151,7 +151,9 @@ function reviews({
   user = { login: 'claude[bot]', type: 'Bot' },
 } = {}) {
   return [{
+    id: 100,
     user,
+    state: 'COMMENTED',
     commit_id: commit,
     body: `${body}\n<!-- REVIEW_INPUT_REVISION: ${reviewRevision} -->`,
   }];
@@ -168,6 +170,12 @@ function runScan({
   comments: posted = [],
   fixerRuns = [],
   fixerRunsError = false,
+  checksError = false,
+  reviewsError = false,
+  commentsError = false,
+  checksMalformed = false,
+  reviewsMalformed = false,
+  commentsMalformed = false,
   dryRun = false,
   // Risposta di `gh api repos/:r/commits/:sha --jq .commit.committer.date`,
   // cioe' l'orologio del gate di eta'. Il default combacia con
@@ -186,6 +194,12 @@ function runScan({
     const fixComments = path.join(dir, 'comments.json');
     const fixFixerRuns = path.join(dir, 'fixer-runs.json');
     const fixFixerRunsError = path.join(dir, 'fixer-runs-error');
+    const fixChecksError = path.join(dir, 'checks-error');
+    const fixReviewsError = path.join(dir, 'reviews-error');
+    const fixCommentsError = path.join(dir, 'comments-error');
+    const fixChecksMalformed = path.join(dir, 'checks-malformed');
+    const fixReviewsMalformed = path.join(dir, 'reviews-malformed');
+    const fixCommentsMalformed = path.join(dir, 'comments-malformed');
     const fixPushedAt = path.join(dir, 'pushed-at');
     writeFileSync(fixPushedAt, String(pushedAt));
     writeFileSync(calls, '');
@@ -195,6 +209,12 @@ function runScan({
     writeFileSync(fixComments, JSON.stringify(posted));
     writeFileSync(fixFixerRuns, JSON.stringify(fixerRuns));
     writeFileSync(fixFixerRunsError, fixerRunsError ? 'true' : 'false');
+    writeFileSync(fixChecksError, checksError ? 'true' : 'false');
+    writeFileSync(fixReviewsError, reviewsError ? 'true' : 'false');
+    writeFileSync(fixCommentsError, commentsError ? 'true' : 'false');
+    writeFileSync(fixChecksMalformed, checksMalformed ? 'true' : 'false');
+    writeFileSync(fixReviewsMalformed, reviewsMalformed ? 'true' : 'false');
+    writeFileSync(fixCommentsMalformed, commentsMalformed ? 'true' : 'false');
 
     // `gh`: serve le letture del rescuer e registra le scritture
     // (add-label, remove-label, comment, workflow run). Ogni
@@ -234,9 +254,11 @@ case "$sub" in
     ;;
   api)
     p=""
+    slurp=false
     while [ $# -gt 0 ]; do
       case "$1" in
-        --paginate|--slurp) shift ;;
+        --paginate) shift ;;
+        --slurp) slurp=true; shift ;;
         --jq) jq="$2"; shift 2 ;;
         -H|-f|-F|-X) shift 2 ;;
         *) if [ -z "$p" ]; then p="$1"; fi; shift ;;
@@ -245,13 +267,26 @@ case "$sub" in
     # L'ordine dei pattern conta: \`.../pulls/N/reviews\` matcha anche
     # \`*/pulls*\`, quindi le foglie vanno prima della lista.
     case "$p" in
-      */check-runs*) cat ${JSON.stringify(fixChecks)} ;;
+      */check-runs*)
+        if [[ "$(cat ${JSON.stringify(fixChecksError)})" == "true" ]]; then exit 1; fi
+        if [[ "$(cat ${JSON.stringify(fixChecksMalformed)})" == "true" ]]; then printf 'not-json\\n'; exit 0; fi
+        cat ${JSON.stringify(fixChecks)} ;;
       # DOPO \`check-runs\` (il cui path e' \`.../commits/<sha>/check-runs\` e
       # matcherebbe anche qui) e prima delle altre foglie: e' la lettura che
       # decide l'eta' della PR.
       */commits/*)   cat ${JSON.stringify(fixPushedAt)} ;;
-      */reviews*)    cat ${JSON.stringify(fixReviews)} ;;
-      */comments*)   cat ${JSON.stringify(fixComments)} ;;
+      */reviews*)
+        if [[ "$(cat ${JSON.stringify(fixReviewsError)})" == "true" ]]; then exit 1; fi
+        if [[ "$(cat ${JSON.stringify(fixReviewsMalformed)})" == "true" ]]; then printf 'not-json\\n'; exit 0; fi
+        cat ${JSON.stringify(fixReviews)} ;;
+      */comments*)
+        if [[ "$(cat ${JSON.stringify(fixCommentsError)})" == "true" ]]; then exit 1; fi
+        if [[ "$(cat ${JSON.stringify(fixCommentsMalformed)})" == "true" ]]; then printf 'not-json\\n'; exit 0; fi
+        if [ "$slurp" = "true" ]; then
+          node -e 'const value=require(process.argv[1]); process.stdout.write(JSON.stringify([value])+"\\n")' ${JSON.stringify(fixComments)}
+        else
+          cat ${JSON.stringify(fixComments)}
+        fi ;;
       */pulls/*)
         if [ "$jq" = '.body // ""' ]; then
           node -e 'const fs=require("fs"); const value=require(process.argv[1]); const pr=Array.isArray(value)?value[0]:value; process.stdout.write(String(pr?.body||"")+"\\n")' ${JSON.stringify(fixPrs)}
@@ -548,6 +583,106 @@ test('guard 2 — una PR mai revisionata resta in classe A', opts, () => {
   assert.match(body, /nessuna review li ha coperti/, body);
 });
 
+test('R1 — lista checks vuota valida resta pending, non un verdetto', opts, () => {
+  const r = runScan({
+    prs: openPr(),
+    checks: checkRuns({ concl: null }),
+    reviews: [],
+  });
+  assert.deepEqual(r.labeled, [], r.stdout);
+  assert.deepEqual(r.comments, [], r.stdout);
+  assert.match(r.stdout, /check=none pending=1/, r.stdout);
+});
+
+test('R1 — lista reviews vuota valida resta osservabile come classe A', opts, () => {
+  const r = runScan({
+    prs: openPr(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: [],
+  });
+  assert.deepEqual(r.labeled, [901], r.stdout);
+  assert.match(only(r), /nessuna review li ha coperti/, r.stdout);
+});
+
+test('R1 — errore API su checks o reviews è unavailable e non muta', opts, () => {
+  for (const input of [
+    { checks: checkRuns({ concl: 'success' }), reviews: [], checksError: true },
+    { reviewsError: true, checks: checkRuns({ concl: 'success' }), reviews: [] },
+    { commentsError: true, checks: checkRuns({ concl: 'success' }), reviews: [] },
+  ]) {
+    const r = runScan({ prs: openPr(), ...input });
+    assert.deepEqual(r.labeled, [], r.stdout);
+    assert.deepEqual(r.unlabeled, [], r.stdout);
+    assert.deepEqual(r.comments, [], r.stdout);
+    assert.deepEqual(r.workflowRuns, [], r.stdout);
+    assert.deepEqual(r.reruns, [], r.stdout);
+  }
+});
+
+test('R1 — JSON malformato su checks o reviews è unavailable e non muta', opts, () => {
+  for (const input of [
+    { checks: checkRuns({ concl: 'success' }), reviews: [], checksMalformed: true },
+    { reviewsMalformed: true, checks: checkRuns({ concl: 'success' }), reviews: [] },
+    { commentsMalformed: true, checks: checkRuns({ concl: 'success' }), reviews: [] },
+  ]) {
+    const r = runScan({ prs: openPr(), ...input });
+    assert.deepEqual(r.labeled, [], r.stdout);
+    assert.deepEqual(r.unlabeled, [], r.stdout);
+    assert.deepEqual(r.comments, [], r.stdout);
+    assert.deepEqual(r.workflowRuns, [], r.stdout);
+    assert.deepEqual(r.reruns, [], r.stdout);
+  }
+});
+
+test('R1 — record di verdetto incompleto o non attendibile è unavailable', opts, () => {
+  const badChecks = [
+    { id: 1000, name: CHECK_NAME, status: 'completed' },
+    { id: 1000, name: CHECK_NAME, status: 'completed', completed_at: isoAgo(3), conclusion: '' },
+    { id: 1000, name: CHECK_NAME, status: 'completed', completed_at: 'not-a-date', conclusion: 'success' },
+  ];
+  for (const check of badChecks) {
+    const r = runScan({
+      prs: openPr(),
+      checks: { check_runs: [check] },
+      reviews: [],
+    });
+    assert.deepEqual(r.comments, [], JSON.stringify(check));
+    assert.deepEqual(r.labeled, [], JSON.stringify(check));
+  }
+
+  for (const user of [
+    { login: 'claude[bot]' },
+    { login: 'claude[bot]', type: 'Unknown' },
+  ]) {
+    const r = runScan({
+      prs: openPr(),
+      checks: checkRuns({ concl: 'success' }),
+      reviews: [{ user, state: 'COMMENTED', commit_id: OLD_SHA }],
+    });
+    assert.deepEqual(r.comments, [], JSON.stringify(user));
+    assert.deepEqual(r.labeled, [], JSON.stringify(user));
+  }
+});
+
+test('R1 — check-run troncati o riferiti a un altro SHA sono unavailable', opts, () => {
+  const valid = checkRuns({ concl: 'success' });
+  const invalid = [
+    { ...valid, total_count: valid.total_count + 1 },
+    {
+      ...valid,
+      check_runs: valid.check_runs.map((run) => ({ ...run, head_sha: OLD_SHA })),
+    },
+  ];
+  for (const checks of invalid) {
+    const r = runScan({ prs: openPr(), checks, reviews: [] });
+    assert.deepEqual(r.comments, [], JSON.stringify(checks));
+    assert.deepEqual(r.labeled, [], JSON.stringify(checks));
+    assert.deepEqual(r.unlabeled, [], JSON.stringify(checks));
+    assert.deepEqual(r.workflowRuns, [], JSON.stringify(checks));
+    assert.deepEqual(r.reruns, [], JSON.stringify(checks));
+  }
+});
+
 test('guard 3 — con i test rossi il rimedio resta quello della classe C', opts, () => {
   const body = only(
     runScan({
@@ -634,10 +769,12 @@ test('lettura del push riuscita ma senza data: si ripiega su `updated_at`, non s
 
 test('nessuna cella muta con review più vecchia dell\'head e nessun run in volo', opts, () => {
   // È questa la forma esatta della direzione 3 della #201. Non serve un ramo
-  // per ogni conclusione: serve che NESSUNA conclusione cada nell'`else` muto.
+  // per ogni conclusione: serve che NESSUNA conclusione verificabile cada
+  // nell'`else` muto. Un check assente è invece `pending` nel contratto
+  // tri-state e non autorizza un rescue scelto in base a `none`.
   const mute = [];
   const claimedByD = [];
-  for (const concl of ['success', 'failure', 'cancelled', 'timed_out', 'neutral', null]) {
+  for (const concl of ['success', 'failure', 'cancelled', 'timed_out', 'neutral']) {
     const r = runScan({
       prs: openPr(),
       checks: checkRuns({ concl }),
@@ -657,6 +794,17 @@ test('nessuna cella muta con review più vecchia dell\'head e nessun run in volo
     claimedByD,
     ['success'],
     `La classe D deve rivendicare SOLO lo stato coi test verdi (guard 3), ma rivendica: ${claimedByD.join(', ')}.`,
+  );
+
+  const missing = runScan({
+    prs: openPr(),
+    checks: checkRuns({ concl: null }),
+    reviews: reviews({ commit: OLD_SHA, body: 'un finding, niente LGTM' }),
+  });
+  assert.deepEqual(
+    missing.comments,
+    [],
+    `Un check assente è pending, non un verdetto 'none' da trasformare silenziosamente in classe C.\n${missing.stdout}`,
   );
 });
 
@@ -783,6 +931,133 @@ test('#314 — nessuna lettura `gh` senza `--paginate`', opts, () => {
   );
 });
 
+test('#314 — un rerun vecchio che finisce dopo non oscura la generazione nuova', opts, () => {
+  const r = runScan({
+    prs: openPr(),
+    checks: {
+      total_count: 2,
+      check_runs: [
+        // La generazione nuova è verde, ma termina prima del rerun vecchio.
+        {
+          id: 5002,
+          name: CHECK_NAME,
+          status: 'completed',
+          head_sha: HEAD_SHA,
+          created_at: isoAgo(2),
+          completed_at: isoAgo(2),
+          conclusion: 'success',
+        },
+        {
+          id: 5001,
+          name: CHECK_NAME,
+          status: 'completed',
+          head_sha: HEAD_SHA,
+          created_at: isoAgo(3),
+          completed_at: isoAgo(1),
+          conclusion: 'failure',
+        },
+      ],
+    },
+    reviews: reviews({ commit: OLD_SHA, body: 'un finding, niente LGTM' }),
+  });
+  const body = only(r);
+  assert.match(body, /review più vecchia dell'head/,
+    `La generazione nuova verde deve restare il verdetto del rescuer.\n${body}`);
+  assert.doesNotMatch(body, /check `tests \\(node --test\\)` = `failure`/,
+    `Il rerun vecchio concluso dopo non deve diventare il check rosso.\n${body}`);
+});
+
+test('#314 — una generazione nuova pending blocca il verdetto completato vecchio', opts, () => {
+  const r = runScan({
+    prs: openPr(),
+    checks: {
+      total_count: 2,
+      check_runs: [
+        {
+          id: 5102,
+          name: CHECK_NAME,
+          status: 'in_progress',
+          head_sha: HEAD_SHA,
+          created_at: isoAgo(1),
+          completed_at: null,
+          conclusion: null,
+        },
+        {
+          id: 5101,
+          name: CHECK_NAME,
+          status: 'completed',
+          head_sha: HEAD_SHA,
+          created_at: isoAgo(3),
+          completed_at: isoAgo(2),
+          conclusion: 'success',
+        },
+      ],
+    },
+    reviews: reviews({ commit: OLD_SHA, body: 'un finding, niente LGTM' }),
+  });
+  assert.deepEqual(r.comments, [], `La generazione nuova è ancora pending: nessun rescue.\n${r.stdout}`);
+  assert.deepEqual(r.labeled, [], `Il verdetto vecchio non deve produrre una mutation.\n${r.stdout}`);
+});
+
+test('#314 — identità non verificabile: nessun verdetto silenzioso', opts, () => {
+  const r = runScan({
+    prs: openPr(),
+    checks: {
+      check_runs: [{
+        id: 5003,
+        name: CHECK_NAME,
+        status: 'completed',
+        head_sha: 'b'.repeat(40),
+        created_at: isoAgo(2),
+        completed_at: isoAgo(2),
+        conclusion: 'failure',
+      }],
+    },
+    reviews: reviews({ commit: OLD_SHA, body: 'un finding, niente LGTM' }),
+  });
+  assert.deepEqual(r.comments, [], `Uno SHA diverso non è un failure dell'head corrente.\n${r.stdout}`);
+  assert.deepEqual(r.labeled, [], `Uno SHA diverso deve restare pending.\n${r.stdout}`);
+});
+
+test('#314 — shape REST senza timestamp: il workflow id ordina la generazione', opts, () => {
+  const r = runScan({
+    prs: openPr(),
+    checks: {
+      total_count: 2,
+      check_runs: [
+        {
+          id: 701,
+          name: CHECK_NAME,
+          status: 'completed',
+          head_sha: HEAD_SHA,
+          created_at: null,
+          completed_at: isoAgo(2),
+          conclusion: 'success',
+          details_url: 'https://github.com/nanakokyobashi-rgb/frontaliere-articles/actions/runs/2002/job/701',
+          check_suite: { id: 701 },
+          external_id: '00000000-0000-4000-8000-000000000701',
+        },
+        {
+          id: 799,
+          name: CHECK_NAME,
+          status: 'completed',
+          head_sha: HEAD_SHA,
+          created_at: null,
+          completed_at: isoAgo(1),
+          conclusion: 'failure',
+          details_url: 'https://github.com/nanakokyobashi-rgb/frontaliere-articles/actions/runs/2001/job/799',
+          check_suite: { id: 799 },
+          external_id: '00000000-0000-4000-8000-000000000799',
+        },
+      ],
+    },
+    reviews: reviews({ commit: OLD_SHA, body: 'un finding, niente LGTM' }),
+  });
+  const body = only(r);
+  assert.match(body, /review più vecchia dell'head/, `Il workflow id nuovo deve vincere.\n${body}`);
+  assert.doesNotMatch(body, /check `tests \\(node --test\\)` = `failure`/, `Il runner vecchio non deve vincere.\n${body}`);
+});
+
 test('#314 — due check completati nello STESSO secondo: vince il più recente per `id`', opts, () => {
   // `completed_at` è ISO8601 risolto al secondo, e due run sullo stesso SHA
   // che chiudono nello stesso secondo sono ordinari (un rerun parte quando il
@@ -794,9 +1069,10 @@ test('#314 — due check completati nello STESSO secondo: vince il più recente 
   const r = runScan({
     prs: openPr(),
     checks: {
+      total_count: 2,
       check_runs: [
-        { id: 5002, name: CHECK_NAME, status: 'completed', completed_at: sameSecond, conclusion: 'success' },
-        { id: 5001, name: CHECK_NAME, status: 'completed', completed_at: sameSecond, conclusion: 'failure' },
+        { id: 5002, name: CHECK_NAME, status: 'completed', head_sha: HEAD_SHA, created_at: sameSecond, completed_at: sameSecond, conclusion: 'success' },
+        { id: 5001, name: CHECK_NAME, status: 'completed', head_sha: HEAD_SHA, created_at: sameSecond, completed_at: sameSecond, conclusion: 'failure' },
       ],
     },
     reviews: reviews({ commit: OLD_SHA, body: 'un finding, niente LGTM' }),

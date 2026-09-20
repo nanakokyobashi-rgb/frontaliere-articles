@@ -181,9 +181,10 @@ jobs:
       #
       # Due esclusioni, entrambe portate qui dal workflow che sostituisce:
       #  - le draft sono lavoro in corso, il body si completa prima di uscirne;
-      #  - `engine-lockstep-auto` e' la PR del MIRROR dell'engine: il body lo
-      #    genera il workflow del sito, non un agente di qui, e pretendere il
-      #    contratto umano su di essa e' un errore di categoria.
+      #  - la PR del MIRROR dell'engine e' esente solo quando il branch e'
+      #    `engine-lockstep-auto` E la HEAD arriva da questo stesso repository:
+      #    il body lo genera il workflow del sito, non un agente di qui, e
+      #    pretendere il contratto umano su di essa e' un errore di categoria.
       # ══════════════════════════════════════════════════════════════════════
       - name: PR-body completeness + multi-issue Closes (zero-Claude)
         id: body_contract
@@ -191,7 +192,8 @@ jobs:
           ${{ !cancelled() &&
           ((github.event_name == 'pull_request' &&
             github.event.pull_request.draft == false &&
-            github.event.pull_request.head.ref != 'engine-lockstep-auto') ||
+            (github.event.pull_request.head.ref != 'engine-lockstep-auto' ||
+             github.event.pull_request.head.repo.full_name != github.repository)) ||
            (github.event_name == 'workflow_dispatch' && inputs.pr_number != '')) }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -301,16 +303,17 @@ jobs:
       # ══════════════════════════════════════════════════════════════════════
       - name: Resolve PR
         id: resolve
-        # `engine-lockstep-auto` e' la PR del mirror dell'engine, il cui
-        # contenuto e' gia' stato reviewato SUL SITO prima di essere mirrorato.
-        # Reviewarlo di nuovo qui spende quota condivisa per ripetere un
-        # giudizio gia' dato — e un `## LGTM` negato bloccherebbe il canale con
-        # cui le correzioni all'engine scendono.
+        # La PR del mirror dell'engine, quando arriva dal repository stesso con
+        # il branch `engine-lockstep-auto`, e' gia' stata reviewata SUL SITO
+        # prima di essere mirrorata. Reviewarla di nuovo qui spende quota
+        # condivisa per ripetere un giudizio gia' dato — e un `## LGTM` negato
+        # bloccherebbe il canale con cui le correzioni all'engine scendono.
         if: >-
           ${{ steps.body_contract.outcome != 'failure' &&
           ((github.event_name == 'pull_request' &&
             github.event.pull_request.draft == false &&
-            github.event.pull_request.head.ref != 'engine-lockstep-auto') ||
+            (github.event.pull_request.head.ref != 'engine-lockstep-auto' ||
+             github.event.pull_request.head.repo.full_name != github.repository)) ||
            (github.event_name == 'workflow_dispatch' && inputs.pr_number != '')) }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -322,7 +325,7 @@ jobs:
           set -uo pipefail
           title=$(gh pr view "$PRN" --repo "$REPO" --json title --jq '.title // ""' 2>/dev/null || true)
           if [ "${EVENT_NAME:-}" = 'workflow_dispatch' ]; then
-            if ! details=$(gh pr view "$PRN" --repo "$REPO" --json state,isDraft,headRefName,headRefOid); then
+            if ! details=$(gh pr view "$PRN" --repo "$REPO" --json state,isDraft,headRefName,headRefOid,headRepository); then
               echo '::error::Impossibile risolvere la PR indicata dal workflow_dispatch.'
               exit 1
             fi
@@ -330,8 +333,10 @@ jobs:
             is_draft=$(printf '%s' "$details" | jq -r '.isDraft // false')
             head_ref=$(printf '%s' "$details" | jq -r '.headRefName // ""')
             resolved_head=$(printf '%s' "$details" | jq -r '.headRefOid // ""')
-            if [ "$state" != 'OPEN' ] || [ "$is_draft" = 'true' ] || [ "$head_ref" = 'engine-lockstep-auto' ]; then
-              echo '::error::La PR indicata deve essere aperta, non draft e non engine-lockstep-auto.'
+            head_repo=$(printf '%s' "$details" | jq -r '.headRepository.nameWithOwner // ""')
+            if [ "$state" != 'OPEN' ] || [ "$is_draft" = 'true' ] || \
+               { [ "$head_ref" = 'engine-lockstep-auto' ] && [ "$head_repo" = "$REPO" ]; }; then
+              echo '::error::La PR indicata deve essere aperta, non draft e non il mirror engine-lockstep-auto del repository.'
               exit 1
             fi
             if [ "$resolved_head" != "$HEAD_SHA" ]; then
@@ -1181,7 +1186,7 @@ jobs:
 
             **Disciplina turni (budget rigido, tutti i tier tranne `minimal`):** hai ${{ steps.tier.outputs.max_turns }} turni. Un messaggio con tool-call = 1 turno indipendentemente da quanti tool_use contiene, quindi le probe indipendenti vanno emesse in parallelo nello stesso messaggio, mai una per turno. `PR_NUMBER`/`HEAD_SHA`/`INCREMENTAL_BASE` sono gia' nell'env: mai spendere un turno per rileggerli. Il checkout NON ha `node_modules`: niente `npm`/`npx`/test runner, il verdetto si basa sulla lettura statica. Entro cinque turni dal cap DEVI aver postato la review: se hai ancora verifiche aperte, postale come `❓ q:` invece di continuare a probeare. Una review postata con un `❓` sblocca il loop; una review MAI postata brucia il run intero senza verdetto.
 
-            **🔴 su righe non cambiate.** L'identita' di un finding e' un id stabile `(path, simbolo, classe, prosa)` che NON contiene il numero di riga: un rebase o un merge di main non la sposta. Un `🔴 Important` NUOVO ancorato SOLO a righe che nessuno ha toccato dall'ultima review viene declassato dal gate (`DECLASSIFIED-UNCHANGED-LINE`): quel codice e' esattamente quello gia' giudicato, quindi o il rilievo valeva anche allora — e allora non e' nuovo — oppure non vale adesso. Se sei convinto che sia una regressione, dichiarala: `🔴 Important: [regression] ...`, col tag SUBITO DOPO i due punti, e resta bloccante. Le classi ammesse sono `regression`, `correctness`, `contract`, `funnel`, `process`, `other`.
+            **🔴 su righe non cambiate.** L'identita' di un finding e' un id stabile `(path, simbolo, classe, prosa)` che NON contiene il numero di riga: un rebase o un merge di main non la sposta. Un `🔴 Important` NUOVO ancorato SOLO a righe che nessuno ha toccato dall'ultima review viene classificato dal gate (`DECLASSIFIED-UNCHANGED-LINE`) per lasciare una traccia verificabile, ma il percorso resta fail-closed: serve una review successiva che lo risolva esplicitamente prima del merge. Se il rilievo valeva anche allora, ripetilo con lo stesso id stabile e una review pulita; se sei convinto che sia una regressione, dichiarala: `🔴 Important: [regression] ...`, col tag SUBITO DOPO i due punti, e resta bloccante. Le classi ammesse sono `regression`, `correctness`, `contract`, `funnel`, `process`, `other`.
 
             **PR body: una sola fonte di verita'.** Il contratto deterministico del body (`scripts/ci/pr-body-contract.mjs`, step `PR-body completeness` di questo stesso run) ha gia' validato sezioni, stato di ogni voce, `Motivo`/`Prossimo passo`, placeholder e `Closes`; il suo verdetto e' nel bundle sotto `## Deterministic body contract`. Quando e' ✅ NON rivalidare quelle regole e non emettere mai un `🔴 Important` sul body: un dubbio su quelle regole vale al massimo un `🟡 Nit` ancorato `PR body:L<n>`, e il review gate declassa comunque un 🔴 cosi' ancorato su un contratto verde. Ogni stato che il contratto accetta in `## Non implementato (ancora)` — `in questa PR`, `PR concatenata #N`, `per scelta`, `by construction` e qualunque altro `blocked: <causa>` — e' valido, e su quelli **non si emette 🔴**. Riemettere un 🔴 su una voce che il contratto ha accettato incastra il ciclo: il fixer declina con una ragione, il cap dei round scatta, e `needs-human` atterra con la diagnosi sbagliata su una PR che non ha niente da riparare. Il claim di performance senza baseline (step 7 di REVIEW.md) NON e' una regola del contratto e resta 🔴. Una regola del body che il contratto non copre si aggiunge al contratto, non si applica a mano.
             Se il bundle porta una sezione `## Code contribution unchanged`, il codice NON e' cambiato dalla review citata: rigiudica SOLO il body della PR, riporta ogni 🔴 Important di codice ancora aperto con lo stesso path e la stessa riga, non scrivere mai `Fix di` per un anchor di codice, e risolvi un Important sul body solo se il body corrente lo ripara davvero.
@@ -1474,11 +1479,19 @@ jobs:
       # questo step trasforma ogni percorso non risolvibile in un rosso reale.
       # Il gate sopra resta sempre il punto che valuta LGTM, Important e
       # carry-forward; qui si sorveglia soltanto che quel punto abbia girato.
+      # `engine-lockstep-auto` e' l'eccezione intenzionale: `Resolve PR` lo
+      # esclude solo quando il branch e' nel repository proprietario, perche'
+      # l'engine e' gia' stato reviewato sul sito; il `Generator CI gate` in
+      # fondo a questo job verifica qui il contratto engine/host. Un branch
+      # omonimo da fork resta nel percorso di review e fail-closed.
       - name: Fail when required review gate is skipped
         if: >-
           ${{ steps.body_contract.outcome != 'failure' && always() &&
           ((github.event_name == 'pull_request' && github.event.pull_request.draft == false) ||
            (github.event_name == 'workflow_dispatch' && inputs.pr_number != '')) &&
+          (github.event_name != 'pull_request' ||
+           github.event.pull_request.head.ref != 'engine-lockstep-auto' ||
+           github.event.pull_request.head.repo.full_name != github.repository) &&
           steps.review_gate.outcome == 'skipped' }}
         run: |
           echo "::error::Required review gate was skipped on a pull request; no approving review verdict was evaluated."
