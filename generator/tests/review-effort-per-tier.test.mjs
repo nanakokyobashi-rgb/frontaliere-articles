@@ -112,6 +112,18 @@ test('tests.yml passa l\'effort del tier e ricade su max quando lo step non lo e
     `${WORKFLOW}: la review non passa l'effort del tier con fallback a max`);
 });
 
+test('l\'evidenza sintetica del ramo max-turns registra l\'effort REALE', () => {
+  // Il percorso `max_turns` pubblica la review e poi fabbrica l'evidenza da
+  // solo. Senza EVIDENCE_EFFORT scriveva il default `max` anche su una run
+  // girata a `high`: telemetria falsa esattamente sul percorso in cui si
+  // vuole capire se l'effort ridotto ha causato la morte al cap.
+  const workflow = read(WORKFLOW);
+  assert.match(workflow, /REVIEW_EFFORT: \$\{\{ steps\.tier\.outputs\.effort \}\}/u,
+    `${WORKFLOW}: lo step di classificazione non riceve l'effort del tier`);
+  assert.match(workflow, /EVIDENCE_EFFORT="\$\{REVIEW_EFFORT:-max\}"/u,
+    `${WORKFLOW}: l'evidenza sintetica non registra l'effort reale della run`);
+});
+
 test('nessun altro chiamante dell\'action abbassa l\'effort', () => {
   const dir = path.join(ROOT, '.github/workflows');
   const callers = fs.readdirSync(dir)

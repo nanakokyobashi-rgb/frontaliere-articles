@@ -298,8 +298,22 @@ test('tests.yml claims before review work and finalizes without gating the requi
   assert.match(sameHeadGuard, /if length == 0 then 0/);
   assert.match(sameHeadGuard, /select\(\(\.state \/\/ ""\) != "PENDING"\)/);
   assert.match(sameHeadGuard, /\.\[-1\] \| \(\(\.state == "COMMENTED" or \.state == "APPROVED"\) and has_clean_lgtm\)/);
-  const dismissedExcludedFromIncremental = /select\(\(\.state \/\/ ""\) != "PENDING" and \(\.state \/\/ ""\) != "DISMISSED"\)/g;
-  assert.equal((workflow.match(dismissedExcludedFromIncremental) ?? []).length, 2);
+  // Le DUE selezioni del percorso incrementale devono escludere `DISMISSED`:
+  // una review ritirata non e' un verdetto e non puo' fare da base.
+  //
+  // Prima questa riga contava le occorrenze nell'INTERO workflow e pretendeva
+  // esattamente 2. Un conteggio non e' il predicato che serve: diventa rosso
+  // quando un terzo punto — corretto — esclude `DISMISSED` per la sua ragione,
+  // e resta verde se una delle due selezioni perde l'esclusione mentre
+  // un'altra la guadagna. Si verifica quindi dentro i due blocchi giusti.
+  const dismissedExcluded = /select\(\(\.state \/\/ ""\) != "PENDING" and \(\.state \/\/ ""\) != "DISMISSED"\)/;
+  for (const [label, marker] of [['last', 'last=$('], ['lastRev', 'lastRev=$(']]) {
+    const start = workflow.indexOf(marker);
+    assert.notEqual(start, -1, `blocco ${label} non trovato in tests.yml`);
+    const block = workflow.slice(start, workflow.indexOf('\n', workflow.indexOf('empty', start)));
+    assert.match(block, dismissedExcluded,
+      `la selezione ${label} non esclude piu' le review DISMISSED`);
+  }
   assert.match(workflow, /scripts\/ci\/review-claim\.mjs --claim/);
   assert.match(workflow, /CLAIM_ACTION: acquire/);
   assert.match(workflow, /CLAIM_ACTION: finalize/);
