@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1944952/orologi-esportazioni-luglio-mercato-franchi": {
-    "articleId": "orologi-export-svizzera-augusto-2026",
-    "ts": "2026-08-20T07:55:53.833Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/ehho7s2a2revqdhypsymt": {
     "articleId": "rallentamento-crescita-demografica-2025",
     "ts": "2026-08-20T08:09:11.199Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1951384/migros-cooperative-duttweiler-svizzera-dieci": {
     "articleId": "migros-fusione-cooperative-2035",
     "ts": "2026-09-20T08:43:51.122Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1951385/franchi-arrotondamento-cassa-lidl-paga": {
+    "articleId": "lidl-abolisce-arrotondamento-cassa",
+    "ts": "2026-09-21T00:16:39.908Z",
     "keyForm": 2
   }
 }
