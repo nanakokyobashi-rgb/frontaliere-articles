@@ -111,6 +111,9 @@ outputs:
   codex_timed_out:
     description: "true when the internal Codex watchdog stopped the primary process."
     value: ${{ steps.finalize.outputs.codex_timed_out }}
+  codex_review_posted:
+    description: "true when the Codex JSONL stream contains a successful command_execution for gh pr review."
+    value: ${{ steps.finalize.outputs.codex_review_posted }}
   claude_used:
     description: "true when the Claude fallback was actually attempted."
     value: ${{ steps.finalize.outputs.claude_used }}
@@ -601,7 +604,7 @@ runs:
         # runner timeout interrupts this step, the always() finalizer can still
         # parse the partial JSONL stream instead of treating the invocation as
         # invisible.
-        printf 'codex_output=%s\ncodex_diagnostics=%s\ncodex_duration_ms=0\n' \
+        printf 'codex_output=%s\ncodex_diagnostics=%s\ncodex_duration_ms=0\ncodex_review_posted=false\n' \
           "$codex_output_destination" "$codex_diagnostics_destination" >> "$GITHUB_OUTPUT"
 
         # The bridge itself lives in the explicitly reopened scratch tree. Its
@@ -1162,7 +1165,11 @@ runs:
         # restore git config, publish diagnostics, and let the workflow's
         # retry classifier run instead of leaving the review step in progress
         # until GitHub kills the whole step.
-        codex_exec_timeout_seconds=900
+        # The Codex review lane is allowed to use the full 1800-second
+        # process budget. The caller's timeout-minutes remains the last-resort
+        # runner kill, while this watchdog still lets the action publish
+        # diagnostics and classify a bounded failure.
+        codex_exec_timeout_seconds=1800
         codex_exec_kill_grace_seconds=30
         codex_timeout_bin=/usr/bin/timeout
         [ -x "$codex_timeout_bin" ] || {
@@ -1193,25 +1200,79 @@ runs:
         pipeline_status=("${PIPESTATUS[@]}")
         codex_status="${pipeline_status[0]:-1}"
         diagnostics_status="${pipeline_status[1]:-1}"
-        codex_timed_out=false
-        if [ "$codex_status" -eq 124 ]; then
-          codex_timed_out=true
-          # Keep the timeout reason in the same JSONL stream consumed by the
-          # review classifier. It is synthetic, non-secret, and written only
-          # after GNU timeout has returned its 124 status. Start with a
-          # delimiter as well: TERM may leave the last JSONL record partial.
-          printf '\n{"type":"codex_timeout","codex_timeout":true,"timeout_seconds":%s}\n' \
-            "$codex_exec_timeout_seconds" >> "$codex_diagnostics_destination"
-        fi
         codex_finished_ms="$(date +%s%3N 2>/dev/null || printf '0')"
         case "$codex_finished_ms" in *[!0-9]*|'') codex_finished_ms=0 ;; esac
         codex_duration_ms=0
         if [ "$codex_started_ms" -gt 0 ] && [ "$codex_finished_ms" -ge "$codex_started_ms" ]; then
           codex_duration_ms=$((codex_finished_ms - codex_started_ms))
         fi
+        codex_timed_out=false
+        # GNU timeout normally returns 124, but a provider/child that exits
+        # on TERM can surface 143 (or another non-zero status) instead. The
+        # wall-clock duration is the second, independent watchdog signal;
+        # without it a partial JSONL stream is misclassified as permanent and
+        # the review gate reports "no review" without allowing a retry.
+        watchdog_threshold_ms=$((codex_exec_timeout_seconds * 1000 - 5000))
+        if [ "$codex_status" -eq 124 ] \
+          || { [ "$codex_status" -ne 0 ] && [ "$codex_duration_ms" -ge "$watchdog_threshold_ms" ]; }; then
+          codex_timed_out=true
+          # Keep the timeout reason in the same JSONL stream consumed by the
+          # review classifier. It is synthetic, non-secret, and written only
+          # after the bounded process has returned. Start with a delimiter as
+          # well: TERM may leave the last JSONL record partial.
+          printf '\n{"type":"codex_timeout","codex_timeout":true,"timeout_seconds":%s}\n' \
+            "$codex_exec_timeout_seconds" >> "$codex_diagnostics_destination"
+        fi
         if [ "$diagnostics_status" -ne 0 ]; then
           echo '::error::Codex diagnostics stream could not be written.'
           [ "$codex_status" -eq 0 ] && codex_status=1
+        fi
+        codex_review_posted=false
+        codex_review_required=false
+        if [ -n "${CODEX_REVIEW_MARKER:-}" ]; then
+          codex_review_required=true
+        fi
+        if [ -s "$codex_diagnostics_destination" ] \
+          && "$node_realpath" --input-type=module - "$codex_diagnostics_destination" <<'NODE'
+        import fs from 'node:fs';
+
+        const file = process.argv[2];
+        let posted = false;
+        for (const line of fs.readFileSync(file, 'utf8').split(/\r?\n/u)) {
+          if (!line.trim()) continue;
+          let event;
+          try {
+            event = JSON.parse(line);
+          } catch {
+            continue;
+          }
+          const item = event?.item;
+          const command = typeof item?.command === 'string' ? item.command : '';
+          const isReviewCommand = /^\/bin\/bash -lc ["']gh\s+pr\s+review\b/u.test(command)
+            || /^gh\s+pr\s+review\b/u.test(command);
+          if (event?.type === 'item.completed'
+              && item?.type === 'command_execution'
+              && item?.exit_code === 0
+              && isReviewCommand) {
+            posted = true;
+            break;
+          }
+        }
+        process.exit(posted ? 0 : 1);
+        NODE
+        then
+          codex_review_posted=true
+        fi
+        # Only the review lane requires the mandated gh pr review command. The
+        # same action also runs ordinary fixer/harvester tasks, where a clean
+        # Codex exit must not be converted into a synthetic no-review failure.
+        if [ "$codex_review_required" = true ] \
+          && [ "$codex_status" -eq 0 ] \
+          && [ "$codex_review_posted" != true ]; then
+          echo '::warning::Codex exited without posting the required gh pr review command.'
+          printf '\n{"type":"codex_no_review","codex_no_review":true}\n' \
+            >> "$codex_diagnostics_destination"
+          codex_status=1
         fi
         if [ "$CODEX_OUTPUT" != "$codex_output_destination" ] && [ -f "$CODEX_OUTPUT" ]; then
           cp -- "$CODEX_OUTPUT" "$codex_output_destination" || echo "::warning::Codex output could not be copied to the workflow artifact path."
@@ -1238,6 +1299,7 @@ runs:
         printf 'codex_diagnostics=%s\n' "$codex_diagnostics_destination" >> "$GITHUB_OUTPUT"
         printf 'codex_duration_ms=%s\n' "$codex_duration_ms" >> "$GITHUB_OUTPUT"
         printf 'codex_timed_out=%s\n' "$codex_timed_out" >> "$GITHUB_OUTPUT"
+        printf 'codex_review_posted=%s\n' "$codex_review_posted" >> "$GITHUB_OUTPUT"
         exit "$codex_status"
 
     # The Anthropic action receives one github_token input and overwrites GH_TOKEN
@@ -1391,6 +1453,7 @@ runs:
         CODEX_DIAGNOSTICS: ${{ steps.codex.outputs.codex_diagnostics }}
         CODEX_DURATION_MS: ${{ steps.codex.outputs.codex_duration_ms }}
         CODEX_TIMED_OUT: ${{ steps.codex.outputs.codex_timed_out }}
+        CODEX_REVIEW_POSTED: ${{ steps.codex.outputs.codex_review_posted }}
         CLAUDE_OUTCOME: ${{ steps.claude.outcome }}
         EXEC_FILE: ${{ steps.claude.outputs.execution_file }}
         EVIDENCE_FILE: ${{ runner.temp }}/codex-primary-evidence-${{ github.run_id }}-${{ github.run_attempt }}.md
@@ -1523,6 +1586,7 @@ runs:
         printf 'codex_output_file=%s\n' "${CODEX_OUTPUT:-}" >> "$GITHUB_OUTPUT"
         printf 'codex_diagnostics_file=%s\n' "${CODEX_DIAGNOSTICS:-}" >> "$GITHUB_OUTPUT"
         printf 'codex_timed_out=%s\n' "$codex_timed_out" >> "$GITHUB_OUTPUT"
+        printf 'codex_review_posted=%s\n' "${CODEX_REVIEW_POSTED:-false}" >> "$GITHUB_OUTPUT"
         printf 'codex_invocations=%s\n' "$codex_invocations" >> "$GITHUB_OUTPUT"
         printf 'usage_available=%s\n' "$usage_available" >> "$GITHUB_OUTPUT"
         printf 'input_tokens=%s\n' "$input_tokens" >> "$GITHUB_OUTPUT"

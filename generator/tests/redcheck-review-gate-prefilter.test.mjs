@@ -44,6 +44,19 @@ function preflightJob() {
   return source.slice(start, end);
 }
 
+test('il redcheck collega la HEAD verificata al branch prima del bridge Codex', () => {
+  const checkout = source.indexOf('\n      - name: Checkout\n');
+  const marker = source.indexOf('\n      - name: Materialize trusted round-marker helper from main', checkout);
+  assert.notEqual(checkout, -1, 'lo step checkout del fixer non e\' stato trovato');
+  assert.notEqual(marker, -1, 'lo step del marker trusted non e\' stato trovato');
+  const block = source.slice(checkout, marker);
+
+  assert.match(block, /Attach verified PR head to its work branch/);
+  assert.match(block, /git switch --force-create "\$HEAD_REF" "\$HEAD_SHA"/);
+  assert.match(block, /git symbolic-ref --quiet HEAD/);
+  assert.match(block, /refs\/heads\/\$HEAD_REF/);
+});
+
 test('il preflight ha sul disco l helper che decide il prefilter', () => {
   const job = preflightJob();
 

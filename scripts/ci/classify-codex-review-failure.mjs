@@ -9,7 +9,7 @@
  * volutamente conservativa e usa prima i campi strutturati; il testo libero è
  * considerato solo quando arriva da un evento esplicitamente fallito/errato.
  *
- * @returns {{cause: 'max_turns'|'rate_limit'|'server_error'|'cancelled'|'non_retryable'|'none', numTurns: number|null, source: 'structured'|'text'|'outcome'|'none', readError?: string}}
+ * @returns {{cause: 'max_turns'|'rate_limit'|'server_error'|'cancelled'|'non_retryable'|'none', numTurns: number|null, source: 'structured'|'text'|'outcome'|'watchdog'|'none', readError?: string}}
  */
 
 import fs from 'node:fs';
@@ -22,6 +22,8 @@ export const CODEX_REVIEW_FAILURE_CAUSE = Object.freeze({
   NON_RETRYABLE: 'non_retryable',
   NONE: 'none',
 });
+
+export const CODEX_REVIEW_WATCHDOG_TIMEOUT_MS = 1_800_000;
 
 function parseJsonEvents(raw) {
   const text = String(raw || '').trim();
@@ -76,7 +78,10 @@ function structuredSignals(events) {
   };
   for (const event of events) {
     const failure = isFailureEvent(event);
-    if (eventType(event) === 'codex_timeout' || event?.codex_timeout === true) {
+    if (eventType(event) === 'codex_timeout'
+        || event?.codex_timeout === true
+        || eventType(event) === 'codex_no_review'
+        || event?.codex_no_review === true) {
       signals.cancelled = true;
     }
     if (eventType(event) === 'rate_limit_event' || eventType(event) === 'rate_limit_error') {
@@ -166,13 +171,20 @@ function textSignals(raw, events) {
 }
 
 /**
- * @param {{outcome?: string, raw?: string}} input
+ * @param {{outcome?: string, raw?: string, timedOut?: boolean, durationMs?: number|string}} input
  */
-export function classifyCodexReviewFailure({ outcome = '', raw = '' } = {}) {
+export function classifyCodexReviewFailure({ outcome = '', raw = '', timedOut = false, durationMs = null } = {}) {
   const normalizedOutcome = String(outcome || '').toLowerCase();
   const events = parseJsonEvents(raw);
   const structured = structuredSignals(events);
   const text = textSignals(raw, events);
+  const measuredDurationMs = Number(durationMs);
+  const watchdogExpired = timedOut === true
+    || (Number.isFinite(measuredDurationMs) && measuredDurationMs >= CODEX_REVIEW_WATCHDOG_TIMEOUT_MS);
+
+  if (watchdogExpired) {
+    return { cause: CODEX_REVIEW_FAILURE_CAUSE.CANCELLED, numTurns: structured.numTurns, source: 'watchdog' };
+  }
 
   if (structured.maxTurns || text.maxTurns) {
     return {
@@ -210,6 +222,8 @@ export function classifyCodexReviewFailure({ outcome = '', raw = '' } = {}) {
 function main() {
   const file = process.argv[2] || process.env.CODEX_DIAGNOSTICS_FILE || '';
   const outcome = process.argv[3] || process.env.REVIEW_OUTCOME || '';
+  const timedOut = String(process.env.CODEX_TIMED_OUT || '').toLowerCase() === 'true';
+  const durationMs = process.env.CODEX_DURATION_MS || null;
   let raw = '';
   let readError = '';
   if (file) {
@@ -219,7 +233,7 @@ function main() {
       readError = String(error?.message || error);
     }
   }
-  const result = classifyCodexReviewFailure({ outcome, raw });
+  const result = classifyCodexReviewFailure({ outcome, raw, timedOut, durationMs });
   const output = readError ? { ...result, readError } : result;
   process.stdout.write(`${JSON.stringify(output)}\n`);
 }

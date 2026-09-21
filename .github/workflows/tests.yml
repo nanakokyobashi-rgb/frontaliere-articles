@@ -144,6 +144,34 @@ jobs:
       PREFLIGHT_PUSH_BASE_REVISION: ${{ github.event.before }}
       PREFLIGHT_PR_BASE_REVISION: ${{ github.event.pull_request.base.sha }}
     steps:
+      # `fetch-pr-files.mjs` executes an attested absolute GitHub CLI path;
+      # resolve it before checkout so the PR cannot influence the executable.
+      - name: Resolve trusted GitHub CLI (before checkout)
+        id: trusted_gh
+        run: |
+          set -euo pipefail
+          gh_bin="$(command -v gh || true)"
+          if [ -z "$gh_bin" ] || [[ "$gh_bin" != /* ]] || [ ! -x "$gh_bin" ]; then
+            echo "::error::GitHub CLI path non assoluto o non eseguibile: ${gh_bin:-missing}"
+            exit 1
+          fi
+          gh_bin="$(realpath "$gh_bin")"
+          case "$gh_bin" in
+            "$GITHUB_WORKSPACE"/*|"$RUNNER_TEMP"/*)
+              echo "::error::GitHub CLI risolve in un path controllabile dal runner: $gh_bin"
+              exit 1
+              ;;
+          esac
+          probe="$gh_bin"
+          while [ "$probe" != "/" ]; do
+            if [ -w "$probe" ]; then
+              echo "::error::GitHub CLI o una directory del suo path è scrivibile dal runner: $probe"
+              exit 1
+            fi
+            probe="$(dirname "$probe")"
+          done
+          printf 'path=%s\n' "$gh_bin" >> "$GITHUB_OUTPUT"
+
       - uses: actions/checkout@v5
         with:
           # I gate dei body usano il high-water della revisione precedente per
@@ -820,6 +848,7 @@ jobs:
         if: steps.body_contract.outcome != 'failure' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true' && steps.review_claim.outputs.claim_allowed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TRUSTED_GH_BIN: ${{ steps.trusted_gh.outputs.path }}
           PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
           HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
           REPO: ${{ github.repository }}
@@ -959,7 +988,7 @@ jobs:
           code_file_count=$(echo "$code_files" | grep -c . || true)
           if funnel_crit "$code_files"; then
             if [ "$code_file_count" -ge 25 ]; then
-              set_tier high-mega gpt-5.6-luna 90
+              set_tier high-mega gpt-5.6-luna 120
             else
               set_tier high gpt-5.6-luna 60
             fi
@@ -1196,13 +1225,15 @@ jobs:
 
             Leggi `REVIEW.md`: e' l'unica fonte di verita' per severity, scope, check richiesti e formato. NON leggere `AGENTS.md` salvo che REVIEW.md richieda un non-negotiable preciso.
 
-            Il bundle deterministico e' gia' pronto in `${{ runner.temp }}/review-ctx/`: `review-bundle.md` e' l'input primario e contiene metadata della PR, la lista dei file code in scope, il diff del solo codice, il delta incrementale quando c'e'. I path rigenerati (`content/`, `data/`, `dist/`, `public/`) sono deliberatamente esclusi: non sono codice, non vanno reviewati riga-per-riga ne' contati come finding — valuta solo se il codice che li genera e' corretto. Leggi il bundle PRIMA di usare gh o gli strumenti sul repo, e non rieseguire `gh pr view`, `gh pr diff` o `gh api compare` salvo che il bundle dichiari incompleta una sezione.
+            Il bundle deterministico e' gia' pronto in `${{ runner.temp }}/review-ctx/`: `review-bundle.md` e' l'input primario e contiene metadata della PR, la lista dei file code in scope, il diff del solo codice, il delta incrementale quando c'e'. I path rigenerati (`content/`, `data/`, `dist/`, `public/`) sono deliberatamente esclusi: non sono codice, non vanno reviewati riga-per-riga ne' contati come finding — valuta solo se il codice che li genera e' corretto. Leggi il bundle PRIMA di usare gh o gli strumenti sul repo, e non rieseguire `gh pr view`, `gh pr diff` o `gh api compare` salvo che il bundle dichiari incompleta una sezione. Non lanciare `git status`/`git diff` sull'intero checkout: su questo corpus possono restare appesi per la dimensione dell'albero e non aggiungono evidenza oltre al bundle; se serve una verifica locale, limita sempre il path ai file gia' elencati.
 
             **Tier `minimal` (PR di soli content/data, ZERO code) — percorso corto, ≤6 turni:** NON leggere `REVIEW.md`, niente cross-file probing, niente adversarial check (no-op senza codice). Fai SOLO: leggi il bundle; verifica il contratto del body (`## Implementato` e `## Non implementato (ancora)` presenti, ogni bullet sensato, nessun placeholder vuoto o `TBD`); se e' a posto posta una review breve che chiude con `## LGTM`, altrimenti `🟡` (o `🔴 Important` se grave) e NIENTE `## LGTM`. Fermati dopo aver postato.
 
             Se `INCREMENTAL_BASE` e' valorizzato, revieva SOLO il delta e le sue interazioni: i commit fino a quel punto sono gia' stati approvati. Sei comunque autorizzato a Read/grep i file pieni per il CONTESTO — l'obiettivo e' non rispendere token su codice gia' approvato, non chiudere gli occhi sulle interazioni.
 
             **Disciplina turni (budget rigido, tutti i tier tranne `minimal`):** hai ${{ steps.tier.outputs.max_turns }} turni. Un messaggio con tool-call = 1 turno indipendentemente da quanti tool_use contiene, quindi le probe indipendenti vanno emesse in parallelo nello stesso messaggio, mai una per turno. `PR_NUMBER`/`HEAD_SHA`/`INCREMENTAL_BASE` sono gia' nell'env: mai spendere un turno per rileggerli. Il checkout NON ha `node_modules`: niente `npm`/`npx`/test runner, il verdetto si basa sulla lettura statica. Entro cinque turni dal cap DEVI aver postato la review: se hai ancora verifiche aperte, postale come `❓ q:` invece di continuare a probeare. Una review postata con un `❓` sblocca il loop; una review MAI postata brucia il run intero senza verdetto.
+
+            Per i tier `high` e `high-mega` non scaricare l'intero bundle in un'unica risposta: limita ogni `sed`/`tail` a circa 450 righe e usa più probe mirate o `rg` per i simboli rilevanti. Per il set ripetitivo dei 19 `crawler-group`, leggi al massimo tre file rappresentativi (01, 04 e 19) e verifica il contratto/pattern comune: non aprire ogni copia. Dopo avere letto il contratto e i pattern principali, posta il verdetto; non restare in lettura del diff senza una review finale.
 
             **🔴 su righe non cambiate.** L'identita' di un finding e' un id stabile `(path, simbolo, classe, prosa)` che NON contiene il numero di riga: un rebase o un merge di main non la sposta. Un `🔴 Important` NUOVO ancorato SOLO a righe che nessuno ha toccato dall'ultima review viene classificato dal gate (`DECLASSIFIED-UNCHANGED-LINE`) per lasciare una traccia verificabile, ma il percorso resta fail-closed: serve una review successiva che lo risolva esplicitamente prima del merge. Se il rilievo valeva anche allora, ripetilo con lo stesso id stabile e una review pulita; se sei convinto che sia una regressione, dichiarala: `🔴 Important: [regression] ...`, col tag SUBITO DOPO i due punti, e resta bloccante. Le classi ammesse sono `regression`, `correctness`, `contract`, `funnel`, `process`, `other`.
 
@@ -1234,6 +1265,8 @@ jobs:
           REVIEW_OUTCOME: ${{ steps.codex_review.outcome }}
           CODEX_DIAGNOSTICS_FILE: ${{ steps.codex_review.outputs.codex_diagnostics_file }}
           CODEX_PRIMARY_SUCCESS: ${{ steps.codex_review.outputs.primary_success }}
+          CODEX_TIMED_OUT: ${{ steps.codex_review.outputs.codex_timed_out }}
+          CODEX_DURATION_MS: ${{ steps.codex_review.outputs.duration_ms }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           REVIEW_TIER: ${{ steps.tier.outputs.tier }}
           REVIEW_MAX_TURNS: ${{ steps.tier.outputs.max_turns }}
@@ -1282,6 +1315,9 @@ jobs:
           CLASSIFICATION_JSON=''
           if [ "${REVIEW_OUTCOME:-}" = 'cancelled' ]; then
             CLASSIFICATION_JSON='{"cause":"cancelled","numTurns":null,"source":"outcome"}'
+          elif [ "${CODEX_TIMED_OUT:-}" = 'true' ] \
+            || { [ "${CODEX_DURATION_MS:-0}" -ge 1800000 ] 2>/dev/null; }; then
+            CLASSIFICATION_JSON='{"cause":"cancelled","numTurns":null,"source":"watchdog"}'
           elif [ -n "${CODEX_DIAGNOSTICS_FILE:-}" ] && [ -f "${CODEX_DIAGNOSTICS_FILE}" ]; then
             if ! CLASSIFICATION_JSON=$(node scripts/ci/classify-codex-review-failure.mjs "${CODEX_DIAGNOSTICS_FILE}" "${REVIEW_OUTCOME:-}"); then
               set_review_output review_abort_cause probe_failed

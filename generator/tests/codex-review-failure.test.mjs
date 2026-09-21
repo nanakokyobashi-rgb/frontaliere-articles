@@ -3,7 +3,12 @@ import assert from 'node:assert/strict';
 import {
   classifyCodexReviewFailure,
   CODEX_REVIEW_FAILURE_CAUSE,
+  CODEX_REVIEW_WATCHDOG_TIMEOUT_MS,
 } from '../../scripts/ci/classify-codex-review-failure.mjs';
+
+test('la soglia watchdog condivisa resta di 1800 secondi', () => {
+  assert.equal(CODEX_REVIEW_WATCHDOG_TIMEOUT_MS, 1_800_000);
+});
 
 test('classifica max_turns dal marker strutturato Codex e conserva i turni', () => {
   assert.deepEqual(
@@ -50,7 +55,32 @@ test('il timeout interno del watchdog è classificato cancelled e resta retryabl
   assert.deepEqual(
     classifyCodexReviewFailure({
       outcome: 'failure',
-      raw: JSON.stringify({ type: 'codex_timeout', codex_timeout: true, timeout_seconds: 900 }),
+      raw: JSON.stringify({ type: 'codex_timeout', codex_timeout: true, timeout_seconds: 1800 }),
+    }),
+    { cause: CODEX_REVIEW_FAILURE_CAUSE.CANCELLED, numTurns: null, source: 'structured' },
+  );
+});
+
+test('un watchdog scaduto resta riconoscibile anche senza marker JSON', () => {
+  assert.deepEqual(
+    classifyCodexReviewFailure({
+      outcome: 'failure',
+      raw: JSON.stringify({ type: 'item.started', item: { type: 'command_execution' } }),
+      durationMs: 1_800_000,
+    }),
+    { cause: CODEX_REVIEW_FAILURE_CAUSE.CANCELLED, numTurns: null, source: 'watchdog' },
+  );
+  assert.deepEqual(
+    classifyCodexReviewFailure({ outcome: 'failure', raw: '', timedOut: true }),
+    { cause: CODEX_REVIEW_FAILURE_CAUSE.CANCELLED, numTurns: null, source: 'watchdog' },
+  );
+});
+
+test('un exit pulito senza gh pr review è un abort retryable', () => {
+  assert.deepEqual(
+    classifyCodexReviewFailure({
+      outcome: 'failure',
+      raw: JSON.stringify({ type: 'codex_no_review', codex_no_review: true }),
     }),
     { cause: CODEX_REVIEW_FAILURE_CAUSE.CANCELLED, numTurns: null, source: 'structured' },
   );
