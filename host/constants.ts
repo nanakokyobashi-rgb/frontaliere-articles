@@ -150,8 +150,11 @@ export const FC_PUBLISHER_ID = ADSENSE_CLIENT_ID.replace(/^ca-/, '');
 
 /**
  * Funding Choices MESSAGING loader, injected PARSE-TIME into the <head> of
- * in-scope STATIC pages. The site's custom newsletter choice is
- * deliberately disabled globally; Ad Manager owns the remaining choices.
+ * in-scope STATIC pages. The site's custom newsletter choice is deliberately
+ * disabled globally; on the Italian Ticino job board the native Offerwall is
+ * filtered so the direct GPT Rewarded Web flow owns the application handoff,
+ * while article and other non-job-board pages keep their configured native
+ * Offerwall.
  *
  * WHY THIS EXISTS (2026-06-16): static SSG HTML (article pages and the Italian
  * job-board pages) does not carry index.html's inline Funding Choices block.
@@ -179,7 +182,7 @@ export const FC_PUBLISHER_ID = ADSENSE_CLIENT_ID.replace(/^ca-/, '');
  * deliberately NOT included here — it is a separate feature, out of scope for
  * the Offerwall render fix.
  */
-export const OFFERWALL_FC_SNIPPET = `<script>(function(){var g=window.googlefc=window.googlefc||{};if(!g.controlledMessagingFunction){g.controlledMessagingFunction=function(message){var E=g.MessageTypeEnum||{};if(E.OFFERWALL===undefined){message.proceed(true);return;}message.proceed(false,[E.OFFERWALL]);};}function loadFc(){if(!document.querySelector('script[data-fc-loader]')){var s=document.createElement('script');s.async=true;s.src='https://fundingchoicesmessages.google.com/i/${FC_PUBLISHER_ID}?ers=1';s.setAttribute('data-fc-loader','1');document.head.appendChild(s);}(function sig(){if(!window.frames['googlefcPresent']){if(document.body){var f=document.createElement('iframe');f.style='width:0;height:0;border:none;z-index:-1000;left:-1000px;top:-1000px;';f.style.display='none';f.name='googlefcPresent';document.body.appendChild(f);}else{setTimeout(sig,0);}}})();}function ricFb(cb){if(document.readyState==='complete'){setTimeout(cb,200);}else{window.addEventListener('load',function(){setTimeout(cb,200);},{once:true});}}function schedule(){(window.requestIdleCallback||ricFb)(loadFc,{timeout:4000});}if(document.readyState==='loading'){window.addEventListener('DOMContentLoaded',schedule,{once:true});}else{schedule();}})();</script>`;
+export const OFFERWALL_FC_SNIPPET = `<script>(function(){var g=window.googlefc=window.googlefc||{};if(!g.controlledMessagingFunction){g.controlledMessagingFunction=function(message){var E=g.MessageTypeEnum||{};var p=window.location&&window.location.pathname||'';var isItalianJobBoard=/^\\/cerca-lavoro-ticino(?:\\/|$)/.test(p);if(!isItalianJobBoard||E.OFFERWALL===undefined){message.proceed(true);return;}message.proceed(false,[E.OFFERWALL]);};}function loadFc(){if(!document.querySelector('script[data-fc-loader]')){var s=document.createElement('script');s.async=true;s.src='https://fundingchoicesmessages.google.com/i/${FC_PUBLISHER_ID}?ers=1';s.setAttribute('data-fc-loader','1');document.head.appendChild(s);}(function sig(){if(!window.frames['googlefcPresent']){if(document.body){var f=document.createElement('iframe');f.style='width:0;height:0;border:none;z-index:-1000;left:-1000px;top:-1000px;';f.style.display='none';f.name='googlefcPresent';document.body.appendChild(f);}else{setTimeout(sig,0);}}})();}function ricFb(cb){if(document.readyState==='complete'){setTimeout(cb,200);}else{window.addEventListener('load',function(){setTimeout(cb,200);},{once:true});}}function schedule(){(window.requestIdleCallback||ricFb)(loadFc,{timeout:4000});}if(document.readyState==='loading'){window.addEventListener('DOMContentLoaded',schedule,{once:true});}else{schedule();}})();</script>`;
 
 export const ADSENSE_SNIPPET = `<meta name="google-adsense-account" content="${ADSENSE_CLIENT_ID}">
  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
