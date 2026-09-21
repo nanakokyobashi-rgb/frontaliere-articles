@@ -80,6 +80,21 @@ test('un Nit sul body della PR non viene assorbito nell\'Important precedente', 
   assert.deepEqual(finding.citations, [{ path: 'scripts/lib/shared.mjs', line: 12 }]);
 });
 
+test('separa un Nit senza due punti dall\'Important precedente', () => {
+  const body = [
+    '## Findings',
+    '',
+    '`scripts/lib/shared.mjs:L12`: 🔴 Important: il parser è ancora insicuro.',
+    '`scripts/update-lastminute-jobs.mjs:L816`: 🟡 Nit Il body non cita il workflow.',
+    '',
+    '## LGTM',
+  ].join('\n');
+  const findings = importantFindings(body);
+  assert.equal(findings.length, 1);
+  assert.doesNotMatch(findings[0].text, /update-lastminute-jobs\.mjs/);
+  assert.deepEqual(findings[0].citations, [{ path: 'scripts/lib/shared.mjs', line: 12 }]);
+});
+
 test('normalizza alias diff e risolve un path citato in forma abbreviata', () => {
   assert.equal(normalizePath('a/scripts/lib/detect-language.mjs:L12'), 'scripts/lib/detect-language.mjs');
   const result = classifyImportantFindings(
