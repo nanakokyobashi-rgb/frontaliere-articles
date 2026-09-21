@@ -1,108 +1,38 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-20T09:40:18.733Z",
-  "dateIso": "2026-09-20",
+  "generatedAt": "2026-09-21T10:31:39.182Z",
+  "dateIso": "2026-09-21",
   "counts": {
     "availableBlocks": 3,
     "crossings": 141,
     "fuelMunicipalities": 0,
     "exchangePoints": 32,
-    "jobsActive": 28083
+    "jobsActive": 26984
   },
   "blocks": {
     "borderWait": {
       "available": true,
-      "updatedAt": "2026-09-20T05:50:21.453Z",
+      "updatedAt": "2026-09-21T09:32:59.542Z",
       "count": 141,
-      "zeroWaitCount": 129,
+      "zeroWaitCount": 139,
       "worst": {
-        "slug": "bad-sackingen-stein-ag",
-        "name": "Bad Säckingen – Stein AG",
-        "waitMinutes": 1
+        "slug": "gaggiolo",
+        "name": "Gaggiolo (Cantello-Stabio)",
+        "waitMinutes": 8
       },
       "crossings": [
         {
-          "slug": "bad-sackingen-stein-ag",
-          "name": "Bad Säckingen – Stein AG",
-          "waitMinutes": 1,
-          "status": "green",
+          "slug": "gaggiolo",
+          "name": "Gaggiolo (Cantello-Stabio)",
+          "waitMinutes": 8,
+          "status": "yellow",
           "direction": null
         },
         {
-          "slug": "blumberg-bargen-sh-autostrasse-h4",
-          "name": "Blumberg – Bargen SH, Autostrasse H4",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "gailingen-am-hochrhein-ramsen-sh",
-          "name": "Gailingen am Hochrhein – Ramsen SH",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "haag-bendern",
-          "name": "Haag-Bendern",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "konstanz-kreuzlingen",
-          "name": "Konstanz – Kreuzlingen",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "konstanz-tagerwilen-gottlieber-strasse",
-          "name": "Konstanz – Tägerwilen, Gottlieber Strasse",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "le-chatelard-vallorcine",
-          "name": "Le Châtelard-Vallorcine",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "lottstetten-rafz-schaffhausener-strasse",
-          "name": "Lottstetten – Rafz, Schaffhausener Strasse",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "oria-gandria",
-          "name": "Oria-Gandria",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "porto-ceresio-brusino",
-          "name": "Porto Ceresio-Brusino",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "ramsen-moskau-rielasingen-worblingen",
-          "name": "Ramsen-Moskau – Rielasingen-Worblingen",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "saltrio-arzo",
-          "name": "Saltrio-Arzo",
-          "waitMinutes": 1,
-          "status": "green",
+          "slug": "san-pietro",
+          "name": "San Pietro (Clivio-Stabio)",
+          "waitMinutes": 8,
+          "status": "yellow",
           "direction": null
         },
         {
@@ -115,6 +45,13 @@
         {
           "slug": "au-lustenau",
           "name": "Au-Lustenau",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": null
+        },
+        {
+          "slug": "bad-sackingen-stein-ag",
+          "name": "Bad Säckingen – Stein AG",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -178,6 +115,13 @@
         {
           "slug": "blumberg-bargen-sh-alte-bargener-strasse",
           "name": "Blumberg – Bargen SH, Alte Bargener Strasse",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": null
+        },
+        {
+          "slug": "blumberg-bargen-sh-autostrasse-h4",
+          "name": "Blumberg – Bargen SH, Autostrasse H4",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -435,15 +379,15 @@
           "direction": null
         },
         {
-          "slug": "gaggiolo",
-          "name": "Gaggiolo (Cantello-Stabio)",
+          "slug": "gailingen-am-hochrhein-dorflingen",
+          "name": "Gailingen am Hochrhein – Dörflingen",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
         },
         {
-          "slug": "gailingen-am-hochrhein-dorflingen",
-          "name": "Gailingen am Hochrhein – Dörflingen",
+          "slug": "gailingen-am-hochrhein-ramsen-sh",
+          "name": "Gailingen am Hochrhein – Ramsen SH",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -500,6 +444,13 @@
         {
           "slug": "grenzach-wyhlen-riehen",
           "name": "Grenzach-Wyhlen – Riehen",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": null
+        },
+        {
+          "slug": "haag-bendern",
+          "name": "Haag-Bendern",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -610,8 +561,22 @@
           "direction": null
         },
         {
+          "slug": "konstanz-kreuzlingen",
+          "name": "Konstanz – Kreuzlingen",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": null
+        },
+        {
           "slug": "konstanz-tagerwilen-autostrada-b33n-a7",
           "name": "Konstanz – Tägerwilen, Autostrada B33n/A7",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": null
+        },
+        {
+          "slug": "konstanz-tagerwilen-gottlieber-strasse",
+          "name": "Konstanz – Tägerwilen, Gottlieber Strasse",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -673,6 +638,13 @@
           "direction": null
         },
         {
+          "slug": "le-chatelard-vallorcine",
+          "name": "Le Châtelard-Vallorcine",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": null
+        },
+        {
           "slug": "les-verrieres",
           "name": "Les Verrières",
           "waitMinutes": 0,
@@ -689,6 +661,13 @@
         {
           "slug": "lottstetten-rafz-landstrasse",
           "name": "Lottstetten – Rafz, Landstrasse",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": null
+        },
+        {
+          "slug": "lottstetten-rafz-schaffhausener-strasse",
+          "name": "Lottstetten – Rafz, Schaffhausener Strasse",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -771,6 +750,13 @@
           "direction": null
         },
         {
+          "slug": "oria-gandria",
+          "name": "Oria-Gandria",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": null
+        },
+        {
           "slug": "passo-dello-spluga",
           "name": "Passo dello Spluga (Montespluga)",
           "waitMinutes": 0,
@@ -794,6 +780,20 @@
         {
           "slug": "ponte-tresa",
           "name": "Ponte Tresa",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": null
+        },
+        {
+          "slug": "porto-ceresio-brusino",
+          "name": "Porto Ceresio-Brusino",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": null
+        },
+        {
+          "slug": "ramsen-moskau-rielasingen-worblingen",
+          "name": "Ramsen-Moskau – Rielasingen-Worblingen",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -869,15 +869,15 @@
           "direction": null
         },
         {
-          "slug": "samnaun-spiss",
-          "name": "Samnaun-Spiss",
+          "slug": "saltrio-arzo",
+          "name": "Saltrio-Arzo",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
         },
         {
-          "slug": "san-pietro",
-          "name": "San Pietro (Clivio-Stabio)",
+          "slug": "samnaun-spiss",
+          "name": "Samnaun-Spiss",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -1013,30 +1013,30 @@
     },
     "fuel": {
       "available": false,
-      "reason": "fuel data is 93h old (max 48h)",
-      "degradedEditions": 2
+      "reason": "fuel data is 118h old (max 48h)",
+      "degradedEditions": 3
     },
     "exchange": {
       "available": true,
       "rate": 1.0555,
-      "lastDate": "2026-09-19",
-      "prevRate": 1.0557,
-      "prevDate": "2026-09-18",
-      "delta1d": -0.0002,
-      "rate7dAgo": 1.059,
-      "delta7d": -0.0035,
+      "lastDate": "2026-09-20",
+      "prevRate": 1.0555,
+      "prevDate": "2026-09-19",
+      "delta1d": 0,
+      "rate7dAgo": 1.0585,
+      "delta7d": -0.003,
       "source": "frankfurter",
       "pointCount": 32,
       "degradedEditions": 0
     },
     "jobs": {
       "available": true,
-      "generatedAt": "2026-09-19T17:38:54.335Z",
-      "activeJobs": 28083,
-      "activeCompanies": 840,
-      "todayAdded": 39,
-      "yesterdayAdded": 39,
-      "last7dAdded": 39,
+      "generatedAt": "2026-09-21T03:54:03.945Z",
+      "activeJobs": 26984,
+      "activeCompanies": 858,
+      "todayAdded": 44,
+      "yesterdayAdded": 2463,
+      "last7dAdded": 3673,
       "degradedEditions": 0
     }
   }
