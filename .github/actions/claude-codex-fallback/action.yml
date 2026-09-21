@@ -1228,6 +1228,10 @@ runs:
           [ "$codex_status" -eq 0 ] && codex_status=1
         fi
         codex_review_posted=false
+        codex_review_required=false
+        if [ -n "${CODEX_REVIEW_MARKER:-}" ]; then
+          codex_review_required=true
+        fi
         if [ -s "$codex_diagnostics_destination" ] \
           && "$node_realpath" --input-type=module - "$codex_diagnostics_destination" <<'NODE'
         import fs from 'node:fs';
@@ -1259,11 +1263,12 @@ runs:
         then
           codex_review_posted=true
         fi
-        # A clean Codex exit is not a successful review when the model stopped
-        # before issuing the mandated review command. Turn this otherwise
-        # silent partial stream into a structured retryable outcome; the gate
-        # can then distinguish it from a genuine non-approving verdict.
-        if [ "$codex_status" -eq 0 ] && [ "$codex_review_posted" != true ]; then
+        # Only the review lane requires the mandated gh pr review command. The
+        # same action also runs ordinary fixer/harvester tasks, where a clean
+        # Codex exit must not be converted into a synthetic no-review failure.
+        if [ "$codex_review_required" = true ] \
+          && [ "$codex_status" -eq 0 ] \
+          && [ "$codex_review_posted" != true ]; then
           echo '::warning::Codex exited without posting the required gh pr review command.'
           printf '\n{"type":"codex_no_review","codex_no_review":true}\n' \
             >> "$codex_diagnostics_destination"

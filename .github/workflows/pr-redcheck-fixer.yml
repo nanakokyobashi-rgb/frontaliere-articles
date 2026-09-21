@@ -329,6 +329,36 @@ jobs:
         # Tetto sullo step → `failure` diagnosticabile invece di `cancelled`.
         timeout-minutes: 15
 
+      - name: Attach verified PR head to its work branch
+        env:
+          HEAD_REF: ${{ needs.preflight.outputs.head_ref }}
+          HEAD_SHA: ${{ needs.preflight.outputs.head_sha }}
+        run: |
+          set -euo pipefail
+          if ! printf '%s' "$HEAD_REF" | grep -Eq '^[A-Za-z0-9][A-Za-z0-9._/-]*$' \
+            || [ "$HEAD_REF" = "main" ] \
+            || [ "$HEAD_REF" = "HEAD" ] \
+            || printf '%s' "$HEAD_REF" | grep -qE '(^|/)\.\.?(/|$)|//|/$|\.lock$'; then
+            echo "::error::Branch PR non compatibile col bridge Git: $HEAD_REF"
+            exit 1
+          fi
+          if ! git check-ref-format "refs/heads/$HEAD_REF" >/dev/null 2>&1; then
+            echo "::error::Ref branch PR non valido: $HEAD_REF"
+            exit 1
+          fi
+          actual_sha="$(git rev-parse HEAD)"
+          if [ "$actual_sha" != "$HEAD_SHA" ]; then
+            echo "::error::Checkout SHA mismatch: expected $HEAD_SHA, got $actual_sha"
+            exit 1
+          fi
+          git switch --force-create "$HEAD_REF" "$HEAD_SHA"
+          actual_ref="$(git symbolic-ref --quiet HEAD)"
+          if [ "$actual_ref" != "refs/heads/$HEAD_REF" ] \
+            || [ "$(git rev-parse HEAD)" != "$HEAD_SHA" ]; then
+            echo "::error::Verified PR head was not attached to its branch."
+            exit 1
+          fi
+
       - name: Materialize trusted round-marker helper from main
         id: trusted_marker
         env:
