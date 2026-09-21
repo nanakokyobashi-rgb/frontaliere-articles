@@ -111,6 +111,9 @@ outputs:
   codex_timed_out:
     description: "true when the internal Codex watchdog stopped the primary process."
     value: ${{ steps.finalize.outputs.codex_timed_out }}
+  codex_review_posted:
+    description: "true when the Codex JSONL stream contains a successful command_execution for gh pr review."
+    value: ${{ steps.finalize.outputs.codex_review_posted }}
   claude_used:
     description: "true when the Claude fallback was actually attempted."
     value: ${{ steps.finalize.outputs.claude_used }}
@@ -601,7 +604,7 @@ runs:
         # runner timeout interrupts this step, the always() finalizer can still
         # parse the partial JSONL stream instead of treating the invocation as
         # invisible.
-        printf 'codex_output=%s\ncodex_diagnostics=%s\ncodex_duration_ms=0\n' \
+        printf 'codex_output=%s\ncodex_diagnostics=%s\ncodex_duration_ms=0\ncodex_review_posted=false\n' \
           "$codex_output_destination" "$codex_diagnostics_destination" >> "$GITHUB_OUTPUT"
 
         # The bridge itself lives in the explicitly reopened scratch tree. Its
@@ -1220,6 +1223,22 @@ runs:
           echo '::error::Codex diagnostics stream could not be written.'
           [ "$codex_status" -eq 0 ] && codex_status=1
         fi
+        codex_review_posted=false
+        if [ -s "$codex_diagnostics_destination" ] \
+          && grep -Eq '"type":"item.completed".*"type":"command_execution".*"command":.*gh[[:space:]]+pr[[:space:]]+review.*"exit_code":0' \
+            "$codex_diagnostics_destination"; then
+          codex_review_posted=true
+        fi
+        # A clean Codex exit is not a successful review when the model stopped
+        # before issuing the mandated review command. Turn this otherwise
+        # silent partial stream into a structured retryable outcome; the gate
+        # can then distinguish it from a genuine non-approving verdict.
+        if [ "$codex_status" -eq 0 ] && [ "$codex_review_posted" != true ]; then
+          echo '::warning::Codex exited without posting the required gh pr review command.'
+          printf '\n{"type":"codex_no_review","codex_no_review":true}\n' \
+            >> "$codex_diagnostics_destination"
+          codex_status=1
+        fi
         if [ "$CODEX_OUTPUT" != "$codex_output_destination" ] && [ -f "$CODEX_OUTPUT" ]; then
           cp -- "$CODEX_OUTPUT" "$codex_output_destination" || echo "::warning::Codex output could not be copied to the workflow artifact path."
         fi
@@ -1245,6 +1264,7 @@ runs:
         printf 'codex_diagnostics=%s\n' "$codex_diagnostics_destination" >> "$GITHUB_OUTPUT"
         printf 'codex_duration_ms=%s\n' "$codex_duration_ms" >> "$GITHUB_OUTPUT"
         printf 'codex_timed_out=%s\n' "$codex_timed_out" >> "$GITHUB_OUTPUT"
+        printf 'codex_review_posted=%s\n' "$codex_review_posted" >> "$GITHUB_OUTPUT"
         exit "$codex_status"
 
     # The Anthropic action receives one github_token input and overwrites GH_TOKEN
@@ -1398,6 +1418,7 @@ runs:
         CODEX_DIAGNOSTICS: ${{ steps.codex.outputs.codex_diagnostics }}
         CODEX_DURATION_MS: ${{ steps.codex.outputs.codex_duration_ms }}
         CODEX_TIMED_OUT: ${{ steps.codex.outputs.codex_timed_out }}
+        CODEX_REVIEW_POSTED: ${{ steps.codex.outputs.codex_review_posted }}
         CLAUDE_OUTCOME: ${{ steps.claude.outcome }}
         EXEC_FILE: ${{ steps.claude.outputs.execution_file }}
         EVIDENCE_FILE: ${{ runner.temp }}/codex-primary-evidence-${{ github.run_id }}-${{ github.run_attempt }}.md
@@ -1530,6 +1551,7 @@ runs:
         printf 'codex_output_file=%s\n' "${CODEX_OUTPUT:-}" >> "$GITHUB_OUTPUT"
         printf 'codex_diagnostics_file=%s\n' "${CODEX_DIAGNOSTICS:-}" >> "$GITHUB_OUTPUT"
         printf 'codex_timed_out=%s\n' "$codex_timed_out" >> "$GITHUB_OUTPUT"
+        printf 'codex_review_posted=%s\n' "${CODEX_REVIEW_POSTED:-false}" >> "$GITHUB_OUTPUT"
         printf 'codex_invocations=%s\n' "$codex_invocations" >> "$GITHUB_OUTPUT"
         printf 'usage_available=%s\n' "$usage_available" >> "$GITHUB_OUTPUT"
         printf 'input_tokens=%s\n' "$input_tokens" >> "$GITHUB_OUTPUT"

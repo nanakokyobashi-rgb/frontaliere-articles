@@ -78,7 +78,10 @@ function structuredSignals(events) {
   };
   for (const event of events) {
     const failure = isFailureEvent(event);
-    if (eventType(event) === 'codex_timeout' || event?.codex_timeout === true) {
+    if (eventType(event) === 'codex_timeout'
+        || event?.codex_timeout === true
+        || eventType(event) === 'codex_no_review'
+        || event?.codex_no_review === true) {
       signals.cancelled = true;
     }
     if (eventType(event) === 'rate_limit_event' || eventType(event) === 'rate_limit_error') {

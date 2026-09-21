@@ -303,6 +303,8 @@ test('la review Codex esporta eventi strutturati anche quando il processo fallis
   assert.match(action, /tee "\$codex_diagnostics_destination"/);
   assert.match(action, /printf 'codex_diagnostics=%s\\n'/);
   assert.match(action, /CODEX_DIAGNOSTICS: \$\{\{ steps\.codex\.outputs\.codex_diagnostics \}\}/);
+  assert.match(action, /codex_no_review/);
+  assert.match(action, /codex_review_posted=%s/);
 });
 
 test('la review Codex espone solo telemetry aggregata e conserva il cap di 45 minuti', () => {
