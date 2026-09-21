@@ -3010,12 +3010,13 @@
     },
     {
       "path": "host/shell-contract-fingerprint.json",
-      "mode": "corpus-only",
-      "reason": "Impronta dei 42 membri di SiteShellContract, prodotta e verificata da `host/tests/shell-contract-fingerprint.test.mjs`. Artefatto di questo lato: e' il gate runtime che impedisce di spedire l'engine senza la sua meta' `host/`.",
+      "sitePath": "tests/articles-shell-contract-fingerprint.json",
+      "mode": "identical",
+      "reason": "Impronta SHA-256 dei 22 campi scalari di SiteShellContract, prodotta e verificata da `host/tests/shell-contract-fingerprint.test.mjs`. Il gemello del sito vive in `tests/articles-shell-contract-fingerprint.json` con lo stesso contenuto; i due artefatti restano `identical` e la baseline ne sorveglia il drift. E' il gate runtime che impedisce di spedire l'engine senza la sua meta' `host/`.",
       "baseline": {
-        "site": null,
-        "corpus": "f8052772228f9d5b",
-        "alignedAt": "2026-09-11"
+        "site": "ad6a0315ae7c6122",
+        "corpus": "ad6a0315ae7c6122",
+        "alignedAt": "2026-09-21"
       }
     },
     {
