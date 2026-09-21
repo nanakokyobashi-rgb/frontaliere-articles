@@ -1316,7 +1316,7 @@ jobs:
           if [ "${REVIEW_OUTCOME:-}" = 'cancelled' ]; then
             CLASSIFICATION_JSON='{"cause":"cancelled","numTurns":null,"source":"outcome"}'
           elif [ "${CODEX_TIMED_OUT:-}" = 'true' ] \
-            || { [ "${CODEX_DURATION_MS:-0}" -ge 900000 ] 2>/dev/null; }; then
+            || { [ "${CODEX_DURATION_MS:-0}" -ge 1800000 ] 2>/dev/null; }; then
             CLASSIFICATION_JSON='{"cause":"cancelled","numTurns":null,"source":"watchdog"}'
           elif [ -n "${CODEX_DIAGNOSTICS_FILE:-}" ] && [ -f "${CODEX_DIAGNOSTICS_FILE}" ]; then
             if ! CLASSIFICATION_JSON=$(node scripts/ci/classify-codex-review-failure.mjs "${CODEX_DIAGNOSTICS_FILE}" "${REVIEW_OUTCOME:-}"); then

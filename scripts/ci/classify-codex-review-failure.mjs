@@ -23,7 +23,7 @@ export const CODEX_REVIEW_FAILURE_CAUSE = Object.freeze({
   NONE: 'none',
 });
 
-export const CODEX_REVIEW_WATCHDOG_TIMEOUT_MS = 900_000;
+export const CODEX_REVIEW_WATCHDOG_TIMEOUT_MS = 1_800_000;
 
 function parseJsonEvents(raw) {
   const text = String(raw || '').trim();
