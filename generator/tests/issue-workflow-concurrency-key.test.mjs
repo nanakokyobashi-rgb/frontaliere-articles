@@ -60,7 +60,7 @@ const WORKFLOW_DIR = path.join(ROOT, '.github/workflows');
  */
 const PER_ISSUE_KEY = /github\.event\.issue\.number/;
 const DRAINER_GLOBAL_RUN_GROUP = 'followup-drainer-${{ github.repository }}';
-const DRAINER_GLOBAL_SCAN_GROUP = 'followup-drainer-scan-${{ github.repository }}';
+const DRAINER_DAILY_LOCK_GROUP = 'followup-daily-${{ github.repository }}';
 
 /**
  * La chiave varia per issue? Estratta dal ciclo perche' e' LA regola del gate, e
@@ -150,7 +150,7 @@ test('ogni workflow su eventi issue serializza su una chiave per-issue', () => {
     // controllo su `${{` lascia passare (follow-up #918).
     for (const group of groups) {
       const isDrainerGlobalMutex = file === 'followup-drainer.yml'
-        && [DRAINER_GLOBAL_RUN_GROUP, DRAINER_GLOBAL_SCAN_GROUP].includes(group);
+        && [DRAINER_GLOBAL_RUN_GROUP, DRAINER_DAILY_LOCK_GROUP].includes(group);
       if (!isPerIssueKey(group) && !isDrainerGlobalMutex) {
         offenders.push(`${file} → group: ${group}`);
       }
@@ -158,8 +158,8 @@ test('ogni workflow su eventi issue serializza su una chiave per-issue', () => {
     if (file === 'followup-drainer.yml') {
       assert.ok(groups.includes(DRAINER_GLOBAL_RUN_GROUP),
         'followup-drainer deve mantenere il mutex globale della run');
-      assert.ok(groups.includes(DRAINER_GLOBAL_SCAN_GROUP),
-        'followup-drainer deve mantenere il semaforo globale del job di scansione');
+      assert.ok(groups.includes(DRAINER_DAILY_LOCK_GROUP),
+        'followup-drainer deve condividere il lock del bucket daily a livello di job');
     }
   }
   assert.deepEqual(

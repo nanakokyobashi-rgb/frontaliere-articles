@@ -57,11 +57,10 @@ test('followup-drainer: cron durevole, wake-up reattivi bounded e fallback Codex
   assert.match(FOLLOWUP_DRAINER, /FOLLOWUP_CODEX_FALLBACK_MODE:\s*['"]1['"]/);
 });
 
-test('followup-drainer: mutex globale separato dal bucket daily', () => {
+test('followup-drainer: run isolata e lock daily condiviso', () => {
   assert.match(FOLLOWUP_DRAINER, /group:\s*followup-drainer-\$\{\{\s*github\.repository\s*\}\}/);
-  assert.match(FOLLOWUP_DRAINER, /group:\s*followup-drainer-scan-\$\{\{\s*github\.repository\s*\}\}/);
+  assert.match(FOLLOWUP_DRAINER, /group:\s*followup-daily-\$\{\{\s*github\.repository\s*\}\}/);
   assert.doesNotMatch(FOLLOWUP_DRAINER, /group:\s*followup-drainer-\$\{\{\s*github\.repository\s*\}\}-\$\{\{\s*github\.event\.issue\.number/);
-  assert.doesNotMatch(FOLLOWUP_DRAINER, /group:\s*followup-daily-\$\{\{\s*github\.repository\s*\}\}/);
 });
 
 /** Il blocco di un job: da `\n  <nome>:` al job successivo allo stesso livello. */
