@@ -21,8 +21,8 @@ name: Follow-up drainer (queue → agent:fix, no-Claude)
 #  - Identità di promozione: `GITHUB_PAT_NANAKO` (niente GitHub App qui).
 #  - Cadenza `*/20` → `*/25` ai minuti dispari, sfasata dal sito.
 #  - Il drainer resta cron-driven per il recupero durevole, con wake-up
-#    `issues`/`workflow_run` bounded; la run evita gli sfratti del bucket daily
-#    e il job condivide con i writer il lock del bucket prima di leggerlo.
+#    `issues`/`workflow_run` bounded; il mutex top-level è condiviso con i
+#    writer daily prima di leggere o riservare un bucket.
 
 on:
   schedule:
@@ -40,11 +40,11 @@ on:
     types: [completed]
 
 concurrency:
-  # Tutti i trigger leggono e aggiornano la stessa coda: la serializzazione
-  # repo-scoped deve quindi stare a livello di run. Questo gruppo resta separato
-  # dal bucket daily per non far sfrattare le wake-up dai writer; il cron resta
-  # il recupero se una pending viene sostituita durante un burst.
-  group: followup-drainer-${{ github.repository }}
+  # Il gruppo della run è il mutex repo-scoped condiviso con i writer daily:
+  # nessun wake-up può leggere lo stesso bucket mentre viene appeso o sigillato.
+  # cancel:false e il cron rendono recuperabile una pending sostituita durante
+  # un burst.
+  group: followup-daily-${{ github.repository }}
   cancel-in-progress: false
 
 permissions:
@@ -54,11 +54,6 @@ permissions:
 
 jobs:
   drain:
-    # Il drainer legge i bucket daily: questo lock è condiviso con i writer e
-    # impedisce uno snapshot parziale mentre un writer appende o sigilla.
-    concurrency:
-      group: followup-daily-${{ github.repository }}
-      cancel-in-progress: false
     if: >-
       github.event_name != 'issues' ||
       github.event.label.name == 'agent:fix-queued' ||

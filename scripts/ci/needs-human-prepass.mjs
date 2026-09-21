@@ -1354,12 +1354,17 @@ function main() {
       console.log(`needs-human-prepass: cap ${MAX_PER_RUN}/run raggiunto → il resto al prossimo giro (no silent cap).`);
       break;
     }
-    acted++;
     const add = d.action === 'requeue' ? 'agent:fix-queued' : 'agent:decompose-queued';
-    const visionApproved = !DRY && visionAutonomy && d.action === 'requeue'
-      && (visionLabelReady || (visionLabelReady = ensureVisionAutonomyLabel()));
+    const needsVisionApproval = visionAutonomy && d.action === 'requeue';
+    const visionApproved = !DRY && needsVisionApproval
+      && (visionLabelReady ??= ensureVisionAutonomyLabel());
+    if (needsVisionApproval && !DRY && !visionApproved) {
+      console.log(`::warning::needs-human-prepass: #${iss.number} non instradata perché il contratto VISION non ha potuto creare ${VISION_AUTONOMY_LABEL}.`);
+      continue;
+    }
+    acted++;
     if (DRY) {
-      console.log(`[dry] #${iss.number} → ${add}${visionAutonomy && d.action === 'requeue' ? ` + ${VISION_AUTONOMY_LABEL}` : ''} (${d.reason}) — "${iss.title.slice(0, 60)}"`);
+      console.log(`[dry] #${iss.number} → ${add}${needsVisionApproval ? ` + ${VISION_AUTONOMY_LABEL}` : ''} (${d.reason}) — "${iss.title.slice(0, 60)}"`);
       continue;
     }
     // Il marker va SOLO sui ri-accodi per scadenza: e' il contatore dell'item 3,

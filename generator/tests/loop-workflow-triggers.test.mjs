@@ -57,9 +57,9 @@ test('followup-drainer: cron durevole, wake-up reattivi bounded e fallback Codex
   assert.match(FOLLOWUP_DRAINER, /FOLLOWUP_CODEX_FALLBACK_MODE:\s*['"]1['"]/);
 });
 
-test('followup-drainer: run isolata e lock daily condiviso', () => {
-  assert.match(FOLLOWUP_DRAINER, /group:\s*followup-drainer-\$\{\{\s*github\.repository\s*\}\}/);
+test('followup-drainer: mutex daily condiviso e recupero cron', () => {
   assert.match(FOLLOWUP_DRAINER, /group:\s*followup-daily-\$\{\{\s*github\.repository\s*\}\}/);
+  assert.doesNotMatch(FOLLOWUP_DRAINER, /group:\s*followup-drainer-\$\{\{\s*github\.repository\s*\}\}/);
   assert.doesNotMatch(FOLLOWUP_DRAINER, /group:\s*followup-drainer-\$\{\{\s*github\.repository\s*\}\}-\$\{\{\s*github\.event\.issue\.number/);
 });
 
