@@ -92,7 +92,7 @@ test('#8090 item 2: il marker corrente bumpa lo schema e ignora il marker legacy
   );
 });
 
-test('#8090 item 1: il marker piu recente usa createdAt, non updatedAt inerte', () => {
+test('#8090 item 1: il marker piu recente usa updatedAt con fallback a createdAt', () => {
   const issue = {
     title: 'follow-up(#8090): 3 items deferred — test',
     body: 'corpo non enumerato',
@@ -106,11 +106,34 @@ test('#8090 item 1: il marker piu recente usa createdAt, non updatedAt inerte', 
   assert.equal(
     isCurrentUnclassifiable(issue, [
       ...human,
-      { id: 'b-current', body: marker, createdAt: sameCreatedAt, updatedAt: '2026-09-02T00:00:01Z' },
-      { id: 'a-stale', body: wrongFingerprint, createdAt: sameCreatedAt, updatedAt: '2026-09-03T00:00:00Z' },
+      { id: 'a-current', body: marker, created_at: sameCreatedAt, updated_at: '2026-09-03T00:00:00Z' },
+      { id: 'z-stale', body: wrongFingerprint, created_at: sameCreatedAt, updated_at: '2026-09-02T00:00:01Z' },
     ], { classifierVersion }),
     true,
   );
+
+  assert.equal(
+    isCurrentUnclassifiable(issue, [
+      ...human,
+      { id: 'a-stale', body: wrongFingerprint, created_at: '2026-09-02T00:00:00Z' },
+      { id: 'z-current', body: marker, created_at: '2026-09-03T00:00:00Z' },
+    ], { classifierVersion }),
+    true,
+    'senza updated_at il fallback resta created_at',
+  );
+});
+
+test('#9439: il parser conserva updated_at dal REST paginato e la query usa l endpoint REST', () => {
+  assert.deepEqual(
+    parseIssueCommentsResponse('[[{"id":1,"created_at":"2026-09-01T00:00:00Z","updated_at":"2026-09-02T00:00:00Z"}],[{"id":2,"created_at":"2026-09-03T00:00:00Z","updated_at":"2026-09-04T00:00:00Z"}]]'),
+    [
+      { id: 1, created_at: '2026-09-01T00:00:00Z', updated_at: '2026-09-02T00:00:00Z' },
+      { id: 2, created_at: '2026-09-03T00:00:00Z', updated_at: '2026-09-04T00:00:00Z' },
+    ],
+  );
+  assert.match(SOURCE, /const endpoint = `repos\/\$\{repository\}\/issues\/\$\{number\}\/comments`/);
+  assert.match(SOURCE, /gh\(\['api', endpoint, '--paginate', '--slurp'/);
+  assert.match(SOURCE, /commentField\(comment, 'updatedAt', 'updated_at'\)/);
 });
 
 test('#8090 item 3: il fingerprint ordina per code unit, non per locale', () => {

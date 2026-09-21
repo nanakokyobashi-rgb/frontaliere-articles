@@ -283,10 +283,12 @@ export function unclassifiableIssueFingerprint(issue, comments) {
 }
 
 function markerCommentOrder(comment, index) {
-  // `gh issue view --json comments` exposes no usable updatedAt for this
-  // surface. Markers are append-only, so creation time is the authoritative
-  // order; id/index only break ties deterministically.
-  return `${commentField(comment, 'createdAt', 'created_at')}\0${String(comment?.id || '')}\0${String(index).padStart(8, '0')}`;
+  // REST comments expose updated_at; fall back to creation time for
+  // transports that do not provide an update timestamp.
+  const createdAt = String(commentField(comment, 'createdAt', 'created_at'));
+  const updatedAt = String(commentField(comment, 'updatedAt', 'updated_at'));
+  const primaryTimestamp = updatedAt || createdAt;
+  return `${primaryTimestamp}\0${createdAt}\0${String(comment?.id || '')}\0${String(index).padStart(8, '0')}`;
 }
 
 function latestUnclassifiableMarker(comments) {
@@ -1169,7 +1171,17 @@ function parseIssueJson(raw) {
 export function parseIssueCommentsResponse(raw) {
   if (raw === null || typeof raw !== 'string') return null;
   if (!raw.trim()) return [];
-  const parsed = parseIssueJson(raw);
+  let parsed;
+  try {
+    parsed = JSON.parse(raw);
+  } catch {
+    return null;
+  }
+  if (Array.isArray(parsed)) {
+    // gh api --paginate --slurp returns one array per page. Accept a single
+    // page as well so the parser remains useful for direct API responses.
+    return parsed.flatMap((page) => Array.isArray(page) ? page : [page]);
+  }
   return Array.isArray(parsed?.comments) ? parsed.comments : null;
 }
 
@@ -1279,7 +1291,9 @@ function mergedAddressedPrs(issueNumber) {
 
 function readIssueComments(number) {
   if (issueCommentCache.has(number)) return issueCommentCache.get(number);
-  const out = gh(['issue', 'view', String(number), ...repoArgs, '--json', 'comments'], { allowFail: true });
+  const repository = REPO || '{owner}/{repo}';
+  const endpoint = `repos/${repository}/issues/${number}/comments`;
+  const out = gh(['api', endpoint, '--paginate', '--slurp'], { allowFail: true });
   const result = parseIssueCommentsResponse(out);
   issueCommentCache.set(number, result);
   return result;
