@@ -58,7 +58,7 @@ test('followup-drainer: cron durevole, wake-up reattivi bounded e fallback Codex
 });
 
 test('followup-drainer: il mutex è separato dal bucket daily', () => {
-  assert.match(FOLLOWUP_DRAINER, /group:\s*followup-drainer-\$\{\{\s*github\.repository\s*\}\}/);
+  assert.match(FOLLOWUP_DRAINER, /group:\s*followup-drainer-\$\{\{\s*github\.repository\s*\}\}-\$\{\{\s*github\.event\.issue\.number\s*\|\|\s*['"]global['"]\s*\}\}/);
   assert.doesNotMatch(FOLLOWUP_DRAINER, /group:\s*followup-daily-\$\{\{\s*github\.repository\s*\}\}/);
 });
 
