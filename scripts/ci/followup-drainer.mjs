@@ -2253,7 +2253,7 @@ function listAllOpenIssues() {
   ], 'issue aperte');
 }
 
-const names = (iss) => (iss.labels || [])
+const names = (iss) => (iss?.labels || [])
   .map((label) => (typeof label === 'string' ? label : label?.name))
   .filter(Boolean);
 const has = (iss, n) => names(iss).includes(n);

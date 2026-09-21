@@ -86,6 +86,7 @@ test('`pr-created` è un esito DELIVERED, non un verdetto fermo né una run mort
 
 test('isCrawlerRescueCandidate conserva i pin con label oggetto o stringa', () => {
   const base = { number: 1234, title: 'Workflow Failure: publish-api' };
+  assert.equal(isCrawlerRescueCandidate(undefined), false);
   assert.equal(isCrawlerRescueCandidate({ ...base, labels: [{ name: 'keep-open' }] }), false);
   assert.equal(isCrawlerRescueCandidate({ ...base, labels: ['keep-open'] }), false);
   assert.equal(isCrawlerRescueCandidate({ ...base, labels: ['agent:no-age-out'] }), false);
