@@ -23,6 +23,30 @@ import {
 const NAV_LINK_RE = /\[[^\]]+\]\(nav:[^)]+\)/g;
 const NAV_SENTINEL_RE = /0NAV(\d+)0/g;
 
+// Free-MT translates titles, excerpts, body sections and FAQ fields through
+// this same function. The absolute floor used for article prose must therefore
+// be scoped to bodyN: applying it to every field would reject healthy short
+// titles/questions and force an Italian fallback for them. A body shorter than
+// the floor is left to the existing thin-content gates; here we only reject a
+// provider response that materially shrank a substantive source body.
+const BODY_FIELD_RE = /^body\d+$/;
+const MIN_BODY_TRANSLATION_CHARS = 100;
+const MIN_BODY_TRANSLATION_RATIO = 0.6;
+
+function bodyTranslationCompletenessMiss(source, translated, fieldName) {
+  if (!BODY_FIELD_RE.test(String(fieldName ?? ''))) return null;
+  const sourceChars = String(source ?? '').trim().length;
+  if (sourceChars < MIN_BODY_TRANSLATION_CHARS) return null;
+  const translatedChars = String(translated ?? '').trim().length;
+  if (translatedChars >= MIN_BODY_TRANSLATION_CHARS
+    && translatedChars >= sourceChars * MIN_BODY_TRANSLATION_RATIO) return null;
+  return {
+    sourceChars,
+    translatedChars,
+    ratio: sourceChars > 0 ? translatedChars / sourceChars : 0,
+  };
+}
+
 // Municipality names are proper names even when their spelling happens to be
 // an ordinary word in the target language (e.g. Martello → "hammer" in an
 // English translation). Keep the list derived from the canonical municipality
@@ -259,9 +283,10 @@ export function maskNavLinks(text) {
 /**
  * Translate a single article text field via the injected free MT translator,
  * preserving internal nav-links and, when requested, municipality names.
- * Returns '' on any failure (empty input, MT error, empty output, or a mangled
- * sentinel) so the caller's per-field recovery (LLM retry → IT fallback) takes
- * over — free MT can only IMPROVE coverage, never produce broken output.
+ * Returns '' on any failure (empty input, MT error, empty output, a mangled
+ * sentinel, or a materially truncated body) so the caller's per-field recovery
+ * (LLM retry → IT fallback) takes over — free MT can only IMPROVE coverage,
+ * never produce broken output.
  *
  * @param {object} args
  * @param {string} args.text                source text
@@ -345,6 +370,20 @@ export async function translateFieldFreeMt({
   if (findLoneSurrogates(balanced).length > 0) {
     onUnusableOutput({ targetLang, fieldType, ...(fieldName ? { fieldName } : {}), reason: 'lone-surrogate' });
     onWarn(`free-MT ${targetLang}:${fieldType} produced a lone surrogate`);
+    return '';
+  }
+  const completenessMiss = bodyTranslationCompletenessMiss(src, balanced, fieldName);
+  if (completenessMiss) {
+    onUnusableOutput({
+      targetLang,
+      fieldType,
+      ...(fieldName ? { fieldName } : {}),
+      reason: 'semantic-truncation',
+    });
+    onWarn(
+      `free-MT ${targetLang}:${fieldName} ha restituito ${completenessMiss.translatedChars}`
+        + `/${completenessMiss.sourceChars} caratteri (${Math.round(completenessMiss.ratio * 100)}%)`,
+    );
     return '';
   }
   // A successful transport response is not necessarily a translation. A
