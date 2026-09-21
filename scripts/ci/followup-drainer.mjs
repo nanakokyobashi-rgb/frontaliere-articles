@@ -85,9 +85,14 @@ import {
 } from './followup-resolution-match.mjs';
 
 // Il sito usa int-from-env.mjs; nel corpus l'helper equivalente riceve il
-// valore grezzo, quindi manteniamo qui il contratto chiamato dal drainer.
+// valore grezzo. Tutte le leve del drainer sono conteggi o durate discrete:
+// una frazione dichiarata viene quindi segnalata e ricade sul default.
 function intFromEnv(name, fallback) {
-  return parsePositiveNum(process.env[name], fallback, { label: name, tool: 'followup-drainer' });
+  return parsePositiveNum(process.env[name], fallback, {
+    label: name,
+    tool: 'followup-drainer',
+    integer: true,
+  });
 }
 
 export {
@@ -1761,11 +1766,10 @@ export function findOverlapFile(paths, prFilesMap) {
  * `issue-triage.yml`/`triage-sweep.mjs`, no drift): `route==='queue'` copre
  * ogni categoria tranne `crawler` (che resta `route='fix'` immediato,
  * production-critical, gestione separata). Pura → testabile.
- * @param {{title?: string, labels?: Array<{name:string}>}} iss
+ * @param {{title?: string, labels?: Array<string|{name:string}>}} iss
  */
 export function isQueueManaged(iss) {
-  const ls = (iss?.labels || []).map((l) => l.name);
-  return classifyIssue(iss?.title, ls).route === 'queue';
+  return classifyIssue(iss?.title, names(iss)).route === 'queue';
 }
 
 /**
@@ -1776,10 +1780,10 @@ export function isQueueManaged(iss) {
  * quella label dalla classificazione e conserviamo gli altri pin
  * (`backlog`, `crawler-transient`, ...), che continuano a escludere il lavoro
  * dal ciclo automatico.
- * @param {{title?: string, labels?: Array<{name:string}>}} iss
+ * @param {{title?: string, labels?: Array<string|{name:string}>}} iss
  */
 export function isRecoverableQueueManaged(iss) {
-  const labels = (iss?.labels || []).map((label) => label?.name).filter(Boolean);
+  const labels = names(iss);
   if (hasActiveAgentClaim(iss)) return false;
   if (!labels.includes('needs-human')) return isQueueManaged(iss);
   const classification = classifyIssue(
@@ -1800,7 +1804,7 @@ export function isRecoverableQueueManaged(iss) {
  * di quota vengono verificati dal ciclo dopo l'ammissione; non devono escludere
  * questo stato dalla scansione, altrimenti una run morta resta bloccata su
  * `agent:fix` senza alcun altro segnale.
- * @param {{title?: string, labels?: Array<{name:string}>}} iss
+ * @param {{title?: string, labels?: Array<string|{name:string}>}} iss
  */
 export function isStuckFixRescueCandidate(iss) {
   return isQueueManaged(iss)
@@ -1824,10 +1828,10 @@ export function isStuckFixRescueCandidate(iss) {
  * La discriminante è la LABEL, mai il titolo: i tracker non vanno rititolati
  * perché il dedup delle issue auto-aperte lavora sul titolo, e un titolo diverso
  * fa nascere una issue nuova invece di ritrovare quella esistente.
- * @param {{labels?: Array<{name:string}>}} iss
+ * @param {{labels?: Array<string|{name:string}>}} iss
  */
 export function isPermanentTracker(iss) {
-  return (iss?.labels || []).map((l) => l.name).includes(LBL_NO_AGE_OUT);
+  return names(iss).includes(LBL_NO_AGE_OUT);
 }
 
 /**
@@ -1836,14 +1840,14 @@ export function isPermanentTracker(iss) {
  * chiamante deve poter decidere se vale la pena SPENDERE una lettura commenti
  * su questa issue: l'inattivita' significativa costa una chiamata, tutto il
  * resto e' gratis e la esclude prima.
- * @param {{title?: string, labels?: Array<{name:string}>, createdAt?: string}} iss
+ * @param {{title?: string, labels?: Array<string|{name:string}>, createdAt?: string}} iss
  * @param {{now:number, ageOutDays:number}} opts
  */
 export function isAgeOutCandidate(iss, { now, ageOutDays }) {
   if (!ageOutDays || ageOutDays <= 0) return false;
   if (!isQueueManaged(iss)) return false;
   if (hasActiveAgentClaim(iss)) return false;
-  const ls = (iss?.labels || []).map((l) => l.name);
+  const ls = names(iss);
   if (isPermanentTracker(iss)) return false; // issue-contatore/tracker permanente, mai eleggibile
   if (ls.includes(LBL_FIX) || ls.includes(LBL_QUEUED)) return false; // in lavorazione/coda
   // Lo stadio di decomposizione è "in lavorazione" quanto la coda fix: una
@@ -2249,7 +2253,9 @@ function listAllOpenIssues() {
   ], 'issue aperte');
 }
 
-const names = (iss) => (iss.labels || []).map((l) => l.name);
+const names = (iss) => (iss.labels || [])
+  .map((label) => (typeof label === 'string' ? label : label?.name))
+  .filter(Boolean);
 const has = (iss, n) => names(iss).includes(n);
 /**
  * Un claim locale o remoto rende l'issue di proprietà di un altro worker.
@@ -2354,7 +2360,7 @@ const RETRY_COOLDOWN_DAYS = intFromEnv('FOLLOWUP_RETRY_COOLDOWN_DAYS', 5);
 const DATA_PENDING_COOLDOWN_DAYS = intFromEnv('FOLLOWUP_DATA_PENDING_COOLDOWN_DAYS', RETRY_COOLDOWN_DAYS * 2);
 /** Cooldown in giorni applicabile a QUESTA parcheggiata. Pura → testabile. */
 export function cooldownDaysFor(iss, { base = RETRY_COOLDOWN_DAYS, dataPending = DATA_PENDING_COOLDOWN_DAYS } = {}) {
-  return (iss?.labels || []).some((l) => l?.name === LBL_DATA_PENDING) ? dataPending : base;
+  return names(iss).includes(LBL_DATA_PENDING) ? dataPending : base;
 }
 const MAX_REPARK_GEN = intFromEnv('FOLLOWUP_MAX_REPARK_GEN', 1);
 const RETRY_MAX_PER_RUN = intFromEnv('FOLLOWUP_RETRY_MAX_PER_RUN', 1);
@@ -2390,7 +2396,7 @@ const reparkGenOf = (iss) => {
  * NB: nessuna di queste condizioni dipende dalla capacità del token. Il
  * capability-guard (WF-scope / secrets-scope) è una decisione DIVERSA e si applica
  * dopo, per candidata, in `isCapabilityScoped`.
- * @param {{number?: number, title?: string, labels?: Array<{name:string}>}} iss
+ * @param {{number?: number, title?: string, labels?: Array<string|{name:string}>}} iss
  */
 export function isReparkableCandidate(iss) {
   if (!isQueueManaged(iss)) return false;
