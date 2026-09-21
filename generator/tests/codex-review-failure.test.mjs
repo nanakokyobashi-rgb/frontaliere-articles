@@ -56,6 +56,21 @@ test('il timeout interno del watchdog è classificato cancelled e resta retryabl
   );
 });
 
+test('un watchdog scaduto resta riconoscibile anche senza marker JSON', () => {
+  assert.deepEqual(
+    classifyCodexReviewFailure({
+      outcome: 'failure',
+      raw: JSON.stringify({ type: 'item.started', item: { type: 'command_execution' } }),
+      durationMs: 900_000,
+    }),
+    { cause: CODEX_REVIEW_FAILURE_CAUSE.CANCELLED, numTurns: null, source: 'watchdog' },
+  );
+  assert.deepEqual(
+    classifyCodexReviewFailure({ outcome: 'failure', raw: '', timedOut: true }),
+    { cause: CODEX_REVIEW_FAILURE_CAUSE.CANCELLED, numTurns: null, source: 'watchdog' },
+  );
+});
+
 test('stderr rate-limit su stream misto JSON+testo resta retryable', () => {
   const mixed = [
     JSON.stringify({ type: 'item.completed', text: 'The prompt mentions HTTP 429 rate_limit.' }),

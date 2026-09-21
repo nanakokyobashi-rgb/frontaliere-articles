@@ -1225,7 +1225,7 @@ jobs:
 
             Leggi `REVIEW.md`: e' l'unica fonte di verita' per severity, scope, check richiesti e formato. NON leggere `AGENTS.md` salvo che REVIEW.md richieda un non-negotiable preciso.
 
-            Il bundle deterministico e' gia' pronto in `${{ runner.temp }}/review-ctx/`: `review-bundle.md` e' l'input primario e contiene metadata della PR, la lista dei file code in scope, il diff del solo codice, il delta incrementale quando c'e'. I path rigenerati (`content/`, `data/`, `dist/`, `public/`) sono deliberatamente esclusi: non sono codice, non vanno reviewati riga-per-riga ne' contati come finding — valuta solo se il codice che li genera e' corretto. Leggi il bundle PRIMA di usare gh o gli strumenti sul repo, e non rieseguire `gh pr view`, `gh pr diff` o `gh api compare` salvo che il bundle dichiari incompleta una sezione.
+            Il bundle deterministico e' gia' pronto in `${{ runner.temp }}/review-ctx/`: `review-bundle.md` e' l'input primario e contiene metadata della PR, la lista dei file code in scope, il diff del solo codice, il delta incrementale quando c'e'. I path rigenerati (`content/`, `data/`, `dist/`, `public/`) sono deliberatamente esclusi: non sono codice, non vanno reviewati riga-per-riga ne' contati come finding — valuta solo se il codice che li genera e' corretto. Leggi il bundle PRIMA di usare gh o gli strumenti sul repo, e non rieseguire `gh pr view`, `gh pr diff` o `gh api compare` salvo che il bundle dichiari incompleta una sezione. Non lanciare `git status`/`git diff` sull'intero checkout: su questo corpus possono restare appesi per la dimensione dell'albero e non aggiungono evidenza oltre al bundle; se serve una verifica locale, limita sempre il path ai file gia' elencati.
 
             **Tier `minimal` (PR di soli content/data, ZERO code) — percorso corto, ≤6 turni:** NON leggere `REVIEW.md`, niente cross-file probing, niente adversarial check (no-op senza codice). Fai SOLO: leggi il bundle; verifica il contratto del body (`## Implementato` e `## Non implementato (ancora)` presenti, ogni bullet sensato, nessun placeholder vuoto o `TBD`); se e' a posto posta una review breve che chiude con `## LGTM`, altrimenti `🟡` (o `🔴 Important` se grave) e NIENTE `## LGTM`. Fermati dopo aver postato.
 
@@ -1263,6 +1263,8 @@ jobs:
           REVIEW_OUTCOME: ${{ steps.codex_review.outcome }}
           CODEX_DIAGNOSTICS_FILE: ${{ steps.codex_review.outputs.codex_diagnostics_file }}
           CODEX_PRIMARY_SUCCESS: ${{ steps.codex_review.outputs.primary_success }}
+          CODEX_TIMED_OUT: ${{ steps.codex_review.outputs.codex_timed_out }}
+          CODEX_DURATION_MS: ${{ steps.codex_review.outputs.duration_ms }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           REVIEW_TIER: ${{ steps.tier.outputs.tier }}
           REVIEW_MAX_TURNS: ${{ steps.tier.outputs.max_turns }}
@@ -1311,6 +1313,9 @@ jobs:
           CLASSIFICATION_JSON=''
           if [ "${REVIEW_OUTCOME:-}" = 'cancelled' ]; then
             CLASSIFICATION_JSON='{"cause":"cancelled","numTurns":null,"source":"outcome"}'
+          elif [ "${CODEX_TIMED_OUT:-}" = 'true' ] \
+            || { [ "${CODEX_DURATION_MS:-0}" -ge 900000 ] 2>/dev/null; }; then
+            CLASSIFICATION_JSON='{"cause":"cancelled","numTurns":null,"source":"watchdog"}'
           elif [ -n "${CODEX_DIAGNOSTICS_FILE:-}" ] && [ -f "${CODEX_DIAGNOSTICS_FILE}" ]; then
             if ! CLASSIFICATION_JSON=$(node scripts/ci/classify-codex-review-failure.mjs "${CODEX_DIAGNOSTICS_FILE}" "${REVIEW_OUTCOME:-}"); then
               set_review_output review_abort_cause probe_failed

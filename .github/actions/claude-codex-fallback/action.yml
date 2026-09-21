@@ -1193,21 +1193,28 @@ runs:
         pipeline_status=("${PIPESTATUS[@]}")
         codex_status="${pipeline_status[0]:-1}"
         diagnostics_status="${pipeline_status[1]:-1}"
-        codex_timed_out=false
-        if [ "$codex_status" -eq 124 ]; then
-          codex_timed_out=true
-          # Keep the timeout reason in the same JSONL stream consumed by the
-          # review classifier. It is synthetic, non-secret, and written only
-          # after GNU timeout has returned its 124 status. Start with a
-          # delimiter as well: TERM may leave the last JSONL record partial.
-          printf '\n{"type":"codex_timeout","codex_timeout":true,"timeout_seconds":%s}\n' \
-            "$codex_exec_timeout_seconds" >> "$codex_diagnostics_destination"
-        fi
         codex_finished_ms="$(date +%s%3N 2>/dev/null || printf '0')"
         case "$codex_finished_ms" in *[!0-9]*|'') codex_finished_ms=0 ;; esac
         codex_duration_ms=0
         if [ "$codex_started_ms" -gt 0 ] && [ "$codex_finished_ms" -ge "$codex_started_ms" ]; then
           codex_duration_ms=$((codex_finished_ms - codex_started_ms))
+        fi
+        codex_timed_out=false
+        # GNU timeout normally returns 124, but a provider/child that exits
+        # on TERM can surface 143 (or another non-zero status) instead. The
+        # wall-clock duration is the second, independent watchdog signal;
+        # without it a partial JSONL stream is misclassified as permanent and
+        # the review gate reports "no review" without allowing a retry.
+        watchdog_threshold_ms=$((codex_exec_timeout_seconds * 1000 - 5000))
+        if [ "$codex_status" -eq 124 ] \
+          || { [ "$codex_status" -ne 0 ] && [ "$codex_duration_ms" -ge "$watchdog_threshold_ms" ]; }; then
+          codex_timed_out=true
+          # Keep the timeout reason in the same JSONL stream consumed by the
+          # review classifier. It is synthetic, non-secret, and written only
+          # after the bounded process has returned. Start with a delimiter as
+          # well: TERM may leave the last JSONL record partial.
+          printf '\n{"type":"codex_timeout","codex_timeout":true,"timeout_seconds":%s}\n' \
+            "$codex_exec_timeout_seconds" >> "$codex_diagnostics_destination"
         fi
         if [ "$diagnostics_status" -ne 0 ]; then
           echo '::error::Codex diagnostics stream could not be written.'
