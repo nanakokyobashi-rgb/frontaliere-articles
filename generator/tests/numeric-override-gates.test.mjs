@@ -32,7 +32,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { parsePositiveNum } from '../../scripts/lib/parse-positive-num.mjs';
 
@@ -82,6 +82,26 @@ test('assente o stringa vuota resta SILENZIOSO: lì il default è la risposta gi
   assert.equal(parsePositiveNum('', 3, { label: 'X', warn }), 3);
   assert.equal(parsePositiveNum('  ', 3, { label: 'X', warn }), 3);
   assert.equal(seen.length, 0, 'nessuna intenzione tradita: non c’era nessun override');
+});
+
+test('followup-drainer rifiuta una finestra frazionaria e segnala il fallback', () => {
+  const mod = new URL('../../scripts/ci/followup-drainer.mjs', import.meta.url).href;
+  const src = `import('${mod}').then((m) => console.log(m.PROMOTION_PAIR_WINDOW_SEC));`;
+  const run = (raw) => spawnSync(process.execPath, ['-e', src], {
+    env: { ...process.env, FOLLOWUP_PROMOTION_PAIR_WINDOW_SEC: raw },
+    encoding: 'utf8',
+  });
+
+  const invalid = run('120.5');
+  assert.equal(invalid.status, 0, invalid.stderr);
+  assert.equal(invalid.stdout.trim().split('\n').at(-1), '120');
+  assert.match(invalid.stderr, /FOLLOWUP_PROMOTION_PAIR_WINDOW_SEC=120\.5/);
+  assert.match(invalid.stderr, /numero intero positivo/);
+
+  const valid = run('60');
+  assert.equal(valid.status, 0, valid.stderr);
+  assert.equal(valid.stdout.trim().split('\n').at(-1), '60');
+  assert.doesNotMatch(valid.stderr, /FOLLOWUP_PROMOTION_PAIR_WINDOW_SEC/);
 });
 
 test('i sentinel restano una scelta del chiamante, non una regola globale', () => {

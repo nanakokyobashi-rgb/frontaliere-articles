@@ -53,6 +53,7 @@ import {
   recoverableFixDecision,
   isRecoverableQueueManaged,
   isGithubNotFoundError,
+  isCrawlerRescueCandidate,
 } from '../../scripts/ci/followup-drainer.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -81,6 +82,15 @@ test('`pr-created` è un esito DELIVERED, non un verdetto fermo né una run mort
     assert.ok(!NON_RETRYABLE.has(code), `${code} non è un verdetto fermo: la issue è ancora aperta di proposito`);
     assert.ok(!ZERO_WORK.has(code), `${code} non è una run morta: l'agent ha letto la issue e consegnato`);
   }
+});
+
+test('isCrawlerRescueCandidate conserva i pin con label oggetto o stringa', () => {
+  const base = { number: 1234, title: 'Workflow Failure: publish-api' };
+  assert.equal(isCrawlerRescueCandidate({ ...base, labels: [{ name: 'keep-open' }] }), false);
+  assert.equal(isCrawlerRescueCandidate({ ...base, labels: ['keep-open'] }), false);
+  assert.equal(isCrawlerRescueCandidate({ ...base, labels: ['agent:no-age-out'] }), false);
+  assert.equal(isCrawlerRescueCandidate({ ...base, labels: ['operations-audit-review'] }), false);
+  assert.equal(isCrawlerRescueCandidate({ ...base, labels: [] }), true);
 });
 
 test('crawlerFixDecision: PR mergiata → ri-arma senza consumare il tentativo', () => {
