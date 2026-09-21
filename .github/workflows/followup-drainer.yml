@@ -1,12 +1,13 @@
 name: Follow-up drainer (queue → agent:fix, no-Claude)
 
 # Drena la coda `agent:fix-queued` fino a 7 issue diverse in parallelo,
-# promuovendo a `agent:fix` solo entro il cap e lasciando serializzati gli eventi
-# dello stesso numero dalla chiave per-issue del workflow.
+# promuovendo a `agent:fix` solo entro il cap e serializzando la scansione
+# della coda con un mutex repo-scoped dedicato.
 #
-# La chiave `issue-fix-${{ github.event.issue.number }}` evita che issue diverse
-# si sfrattino; il cap e il lease Codex-primary impediscono comunque un burst
-# illimitato. Il workflow remoto usa 7 slot; il default locale del modulo resta 5.
+# Il mutex globale evita che issue diverse leggano lo stesso snapshot e
+# riservino due volte il medesimo candidato; il cap e il lease Codex-primary
+# impediscono comunque un burst illimitato. Il workflow remoto usa 7 slot; il
+# default locale del modulo resta 5.
 #
 # Su questo repo il meccanismo conta ancora di più, perché il volume di issue è
 # dominato dai fallimenti di generazione articoli: senza la coda, un provider
@@ -20,7 +21,7 @@ name: Follow-up drainer (queue → agent:fix, no-Claude)
 #  - Identità di promozione: `GITHUB_PAT_NANAKO` (niente GitHub App qui).
 #  - Cadenza `*/20` → `*/25` ai minuti dispari, sfasata dal sito.
 #  - Il drainer resta cron-driven per il recupero durevole, con wake-up
-#    `issues`/`workflow_run` bounded e mutex separato dal bucket daily.
+#    `issues`/`workflow_run` bounded e mutex globali separati dal bucket daily.
 
 on:
   schedule:
@@ -38,12 +39,10 @@ on:
     types: [completed]
 
 concurrency:
-  # Il gruppo della run è per-issue quando il wake-up nasce da `issues:labeled`:
-  # eventi distinti non si sfrattano prima che il job possa valutarli. Il job ha
-  # sotto un semaforo globale del drainer, perché ogni scansione legge la stessa
-  # coda condivisa: così le reservation non possono duplicare una promozione.
-  # Il cron resta il recupero se una pending viene sostituita durante un burst.
-  group: followup-drainer-${{ github.repository }}-${{ github.event.issue.number || 'global' }}
+  # Tutti i trigger leggono e aggiornano la stessa coda: la serializzazione
+  # repo-scoped deve quindi stare a livello di run, non solo di job. Il cron
+  # resta il recupero se una pending viene sostituita durante un burst.
+  group: followup-drainer-${{ github.repository }}
   cancel-in-progress: false
 
 permissions:

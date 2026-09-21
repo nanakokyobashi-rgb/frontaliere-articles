@@ -2,8 +2,9 @@
  * issue-workflow-concurrency-key.test.mjs — ogni workflow innescato da eventi
  * issue deve serializzare la run su una chiave PER-ISSUE, cioe' che interpola
  * `github.event.issue.number`. Un workflow che scansiona una coda condivisa può
- * inoltre avere un semaforo globale A LIVELLO DI JOB: il drainer usa proprio
- * questa forma a due livelli, per non duplicare reservation su issue diverse.
+ * Il drainer fa eccezione: scansiona una coda condivisa e deve avere un mutex
+ * globale A LIVELLO DI WORKFLOW; mantiene anche un semaforo globale di job come
+ * difesa indipendente, per non duplicare reservation su issue diverse.
  *
  * ## Il modo silenzioso in cui questo si rompe
  *
@@ -58,6 +59,7 @@ const WORKFLOW_DIR = path.join(ROOT, '.github/workflows');
  * applica: due regex separate divergerebbero al primo ritocco.
  */
 const PER_ISSUE_KEY = /github\.event\.issue\.number/;
+const DRAINER_GLOBAL_RUN_GROUP = 'followup-drainer-${{ github.repository }}';
 const DRAINER_GLOBAL_SCAN_GROUP = 'followup-drainer-scan-${{ github.repository }}';
 
 /**
@@ -147,13 +149,15 @@ test('ogni workflow su eventi issue serializza su una chiave per-issue', () => {
     // come la costante letterale che questo gate esiste per vietare, ma che un
     // controllo su `${{` lascia passare (follow-up #918).
     for (const group of groups) {
-      const isDrainerScanSemaphore = file === 'followup-drainer.yml'
-        && group === DRAINER_GLOBAL_SCAN_GROUP;
-      if (!isPerIssueKey(group) && !isDrainerScanSemaphore) {
+      const isDrainerGlobalMutex = file === 'followup-drainer.yml'
+        && [DRAINER_GLOBAL_RUN_GROUP, DRAINER_GLOBAL_SCAN_GROUP].includes(group);
+      if (!isPerIssueKey(group) && !isDrainerGlobalMutex) {
         offenders.push(`${file} → group: ${group}`);
       }
     }
     if (file === 'followup-drainer.yml') {
+      assert.ok(groups.includes(DRAINER_GLOBAL_RUN_GROUP),
+        'followup-drainer deve mantenere il mutex globale della run');
       assert.ok(groups.includes(DRAINER_GLOBAL_SCAN_GROUP),
         'followup-drainer deve mantenere il semaforo globale del job di scansione');
     }
@@ -162,7 +166,8 @@ test('ogni workflow su eventi issue serializza su una chiave per-issue', () => {
     offenders,
     [],
     `Chiave di concorrenza non per-issue su un workflow innescato da eventi issue.\n${offenders.join('\n')}\n`
-      + 'Il gruppo deve interpolare `github.event.issue.number`: qualunque altra chiave — costante '
+      + 'Il gruppo deve interpolare `github.event.issue.number`, salvo i due mutex globali espliciti '
+      + 'del followup-drainer: qualunque altra chiave — costante '
       + 'letterale, ma anche `${{ github.ref }}` / `${{ github.workflow }}` / `${{ github.repository }}`, '
       + 'che su un evento `issues:` valgono sempre lo stesso — fa entrare ogni evento issue del repo '
       + 'nella stessa coda profonda 1, sfrattando la pending anche quando l\'`if:` del job la '
