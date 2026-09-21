@@ -19,29 +19,42 @@ name: Follow-up drainer (queue → agent:fix, no-Claude)
 #  - Nessun `npm ci`; ponte RC in `generator/scripts/load-rc-env.mjs`.
 #  - Identità di promozione: `GITHUB_PAT_NANAKO` (niente GitHub App qui).
 #  - Cadenza `*/20` → `*/25` ai minuti dispari, sfasata dal sito.
-#  - Il drainer è cron-driven: i burst `workflow_run` venivano cancellati per
-#    concorrenza prima di poter drenare la coda.
+#  - Il drainer resta cron-driven per il recupero durevole, con wake-up
+#    `issues`/`workflow_run` bounded e mutex separato dal bucket daily.
 
 on:
   schedule:
     - cron: '5,30,55 * * * *'
-  # Non usare workflow_run: ogni completamento del fixer genera un burst di
-  # run concorrenti che GitHub cancella in coda. Il tick cron successivo vede
-  # lo stesso stato e lo drena senza perdere trigger.
   workflow_dispatch:
+  # Wake-up immediato quando una coda viene riempita da triage/sweep con
+  # un'identità che può emettere eventi. Il cron resta il recupero durevole
+  # per le scritture con GITHUB_TOKEN, che GitHub non ri-propaga.
+  issues:
+    types: [labeled]
+  # Wake-up opportunistico dopo un issue-fix: se il fixer libera uno slot o
+  # riaccoda l'issue, la coda non aspetta il prossimo cron.
+  workflow_run:
+    workflows: ['Issue fix (Codex Luna Max → PR)']
+    types: [completed]
 
 concurrency:
-  # Shared repo-scoped mutex with post-merge-followup and followup-reconcile:
-  # queue promotion must not race a daily bucket append or sealing pass.
-  group: followup-daily-${{ github.repository }}
+  # Il drainer ha un mutex proprio: la promozione è idempotente e non deve
+  # restare pending dietro al batch daily, che può durare quaranta minuti.
+  # Il cron resta il recupero se una pending viene sostituita durante un burst.
+  group: followup-drainer-${{ github.repository }}
   cancel-in-progress: false
 
 permissions:
   contents: read
+  actions: read
   issues: write
 
 jobs:
   drain:
+    if: >-
+      github.event_name != 'issues' ||
+      github.event.label.name == 'agent:fix-queued' ||
+      github.event.label.name == 'agent:decompose-queued'
     runs-on: ubuntu-latest
     # Deve restare uguale a JOB_TIMEOUT_MINUTES sotto: `timeout-minutes` non
     # accetta il context `env`, quindi il valore è ripetuto.

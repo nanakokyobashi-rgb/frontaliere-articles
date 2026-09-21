@@ -48,11 +48,18 @@ const TESTS = active(read('.github/workflows/tests.yml'));
 const GA = active(read('.github/workflows/generate-article.yml'));
 const FOLLOWUP_DRAINER = read('.github/workflows/followup-drainer.yml');
 
-test('followup-drainer: cron durevole, niente fan-out workflow_run e fallback Codex', () => {
+test('followup-drainer: cron durevole, wake-up reattivi bounded e fallback Codex', () => {
   assert.match(FOLLOWUP_DRAINER, /schedule:\s*\n\s*- cron: ['"]5,30,55 \* \* \* \*['"]/);
-  assert.doesNotMatch(FOLLOWUP_DRAINER, /\n  workflow_run:/);
   assert.match(FOLLOWUP_DRAINER, /workflow_dispatch:/);
+  assert.match(FOLLOWUP_DRAINER, /\n  issues:\s*\n\s*types:\s*\[labeled\]/);
+  assert.match(FOLLOWUP_DRAINER, /\n  workflow_run:\s*\n\s*workflows:\s*\[['"]Issue fix \(Codex Luna Max → PR\)['"]\]\s*\n\s*types:\s*\[completed\]/);
+  assert.match(FOLLOWUP_DRAINER, /github\.event\.label\.name == 'agent:fix-queued'/);
   assert.match(FOLLOWUP_DRAINER, /FOLLOWUP_CODEX_FALLBACK_MODE:\s*['"]1['"]/);
+});
+
+test('followup-drainer: il mutex è separato dal bucket daily', () => {
+  assert.match(FOLLOWUP_DRAINER, /group:\s*followup-drainer-\$\{\{\s*github\.repository\s*\}\}/);
+  assert.doesNotMatch(FOLLOWUP_DRAINER, /group:\s*followup-daily-\$\{\{\s*github\.repository\s*\}\}/);
 });
 
 /** Il blocco di un job: da `\n  <nome>:` al job successivo allo stesso livello. */
