@@ -1,7 +1,9 @@
 /**
  * issue-workflow-concurrency-key.test.mjs — ogni workflow innescato da eventi
- * issue deve serializzare su una chiave PER-ISSUE, cioe' che interpola
- * `github.event.issue.number`.
+ * issue deve serializzare la run su una chiave PER-ISSUE, cioe' che interpola
+ * `github.event.issue.number`. Un workflow che scansiona una coda condivisa può
+ * Il drainer fa eccezione: scansiona una coda condivisa e deve avere un mutex
+ * globale A LIVELLO DI WORKFLOW, condiviso con i writer dei bucket daily.
  *
  * ## Il modo silenzioso in cui questo si rompe
  *
@@ -56,6 +58,7 @@ const WORKFLOW_DIR = path.join(ROOT, '.github/workflows');
  * applica: due regex separate divergerebbero al primo ritocco.
  */
 const PER_ISSUE_KEY = /github\.event\.issue\.number/;
+const DRAINER_DAILY_LOCK_GROUP = 'followup-daily-${{ github.repository }}';
 
 /**
  * La chiave varia per issue? Estratta dal ciclo perche' e' LA regola del gate, e
@@ -144,14 +147,23 @@ test('ogni workflow su eventi issue serializza su una chiave per-issue', () => {
     // come la costante letterale che questo gate esiste per vietare, ma che un
     // controllo su `${{` lascia passare (follow-up #918).
     for (const group of groups) {
-      if (!isPerIssueKey(group)) offenders.push(`${file} → group: ${group}`);
+      const isDrainerDailyMutex = file === 'followup-drainer.yml'
+        && group === DRAINER_DAILY_LOCK_GROUP;
+      if (!isPerIssueKey(group) && !isDrainerDailyMutex) {
+        offenders.push(`${file} → group: ${group}`);
+      }
+    }
+    if (file === 'followup-drainer.yml') {
+      assert.ok(groups.includes(DRAINER_DAILY_LOCK_GROUP),
+        'followup-drainer deve condividere il mutex daily a livello di run');
     }
   }
   assert.deepEqual(
     offenders,
     [],
     `Chiave di concorrenza non per-issue su un workflow innescato da eventi issue.\n${offenders.join('\n')}\n`
-      + 'Il gruppo deve interpolare `github.event.issue.number`: qualunque altra chiave — costante '
+      + 'Il gruppo deve interpolare `github.event.issue.number`, salvo il mutex daily esplicito '
+      + 'del followup-drainer: qualunque altra chiave — costante '
       + 'letterale, ma anche `${{ github.ref }}` / `${{ github.workflow }}` / `${{ github.repository }}`, '
       + 'che su un evento `issues:` valgono sempre lo stesso — fa entrare ogni evento issue del repo '
       + 'nella stessa coda profonda 1, sfrattando la pending anche quando l\'`if:` del job la '

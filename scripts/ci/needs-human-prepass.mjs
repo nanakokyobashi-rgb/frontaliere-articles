@@ -87,6 +87,9 @@ import { PREPASS_VERDICT_BEATS_FAMILY, isDecomposeEligible } from './followup-dr
 
 const REPO = process.env.GH_REPO || process.env.GITHUB_REPOSITORY || '';
 const DRY = process.argv.includes('--dry-run');
+export const VISION_AUTONOMY_LABEL = 'agent:vision-approved';
+export const VISION_AUTONOMY_MARKER = '<!-- VISION_AUTONOMY: vision-v1 -->';
+let visionAutonomyContract = false;
 
 /**
  * Lettura di una manopola numerica da `process.env`, con fallback.
@@ -684,6 +687,10 @@ export function readVisionRegistry() {
   try {
     const b64 = gh(['api', `repos/${SITE_REPO}/contents/VISION.md`, '--jq', '.content'], { json: false });
     const md = Buffer.from(String(b64).replace(/\s+/g, ''), 'base64').toString('utf8');
+    visionAutonomyContract = /<!--\s*AUTONOMY_CONTRACT:\s*vision-v1\s*-->/u.test(md);
+    if (!visionAutonomyContract) {
+      console.log(`::warning::needs-human-prepass: AUTONOMY_CONTRACT vision-v1 assente in VISION.md di ${SITE_REPO} → nessuna autorizzazione F1/F7 automatica in questo run.`);
+    }
     const rows = parseVisionRegistry(md);
     if (!rows.length) console.log(`::warning::needs-human-prepass: VISION.md di ${SITE_REPO} letto ma senza righe di registro riconosciute → riconoscimento disattivato per questo run.`);
     return rows;
@@ -691,6 +698,10 @@ export function readVisionRegistry() {
     console.log(`::warning::needs-human-prepass: VISION.md di ${SITE_REPO} non recuperabile (${String(e).slice(0, 120)}) → riconoscimento del registro disattivato per questo run.`);
     return [];
   }
+}
+
+export function readVisionAutonomyContract() {
+  return visionAutonomyContract;
 }
 
 /**
@@ -1146,6 +1157,21 @@ function gh(args, { json = true } = {}) {
   return json ? JSON.parse(out) : out;
 }
 
+function ensureVisionAutonomyLabel() {
+  try {
+    gh([
+      'label', 'create', VISION_AUTONOMY_LABEL, '--repo', REPO,
+      '--color', '5319E7',
+      '--description', 'Rientro automatico autorizzato dal contratto VISION.md',
+      '--force',
+    ], { json: false });
+    return true;
+  } catch (e) {
+    console.log(`::warning::needs-human-prepass: label ${VISION_AUTONOMY_LABEL} non disponibile (${String(e).slice(0, 100)}) → policy F1/F7 fail-closed.`);
+    return false;
+  }
+}
+
 /**
  * Lo stato di un riferimento, con cache e budget. `null` = «non lo so» (aperto,
  * non leggibile, budget esaurito) — mai «non scaduto», che sarebbe la stessa
@@ -1196,6 +1222,7 @@ function makeRefResolver() {
 function main() {
   if (!REPO) { console.log('needs-human-prepass: nessun repo risolvibile → niente da fare.'); return; }
   const registry = readVisionRegistry();
+  const visionAutonomy = readVisionAutonomyContract();
   let issues = [];
   try {
     issues = gh(['issue', 'list', '--repo', REPO, '--state', 'open', '--label', 'needs-human',
@@ -1207,7 +1234,7 @@ function main() {
     console.log(`::warning::needs-human-prepass: elenco non leggibile (${String(e).slice(0, 100)}) → nessuna azione.`);
     return;
   }
-  console.log(`needs-human-prepass — repo ${REPO}, ${issues.length} issue \`needs-human\`, registro VISION.md (${SITE_REPO}): ${registry.length} righe${DRY ? ' [DRY-RUN]' : ''}`);
+  console.log(`needs-human-prepass — repo ${REPO}, ${issues.length} issue \`needs-human\`, registro VISION.md (${SITE_REPO}): ${registry.length} righe, autonomy=${visionAutonomy}${DRY ? ' [DRY-RUN]' : ''}`);
 
   // Le più stantie prima: sono quelle che aspettano da più tempo, e il cap non
   // deve tagliarle sempre. `gh issue list` ordina dalla più recente.
@@ -1218,6 +1245,7 @@ function main() {
   let acted = 0;
   let noted = 0;
   let noteCapLogged = false;
+  let visionLabelReady;
   let lookupFailed = 0;
   let lookupAttempted = 0;
   for (const iss of ordered) {
@@ -1273,6 +1301,7 @@ function main() {
       homeScope: HOME_SCOPE,
     });
     counts[d.action]++;
+    const hasVisionMarker = comments.some((c) => String(c?.body || '').includes(VISION_AUTONOMY_MARKER));
 
     // La nota si posta solo se l'idempotenza e' DIMOSTRABILE. Per la famiglia
     // owner-only i commenti non sono stati letti (la decisione non guarda il
@@ -1325,9 +1354,19 @@ function main() {
       console.log(`needs-human-prepass: cap ${MAX_PER_RUN}/run raggiunto → il resto al prossimo giro (no silent cap).`);
       break;
     }
-    acted++;
     const add = d.action === 'requeue' ? 'agent:fix-queued' : 'agent:decompose-queued';
-    if (DRY) { console.log(`[dry] #${iss.number} → ${add} (${d.reason}) — "${iss.title.slice(0, 60)}"`); continue; }
+    const needsVisionApproval = visionAutonomy && d.action === 'requeue';
+    const visionApproved = !DRY && needsVisionApproval
+      && (visionLabelReady ??= ensureVisionAutonomyLabel());
+    if (needsVisionApproval && !DRY && !visionApproved) {
+      console.log(`::warning::needs-human-prepass: #${iss.number} non instradata perché il contratto VISION non ha potuto creare ${VISION_AUTONOMY_LABEL}.`);
+      continue;
+    }
+    acted++;
+    if (DRY) {
+      console.log(`[dry] #${iss.number} → ${add}${needsVisionApproval ? ` + ${VISION_AUTONOMY_LABEL}` : ''} (${d.reason}) — "${iss.title.slice(0, 60)}"`);
+      continue;
+    }
     // Il marker va SOLO sui ri-accodi per scadenza: e' il contatore dell'item 3,
     // e includerlo nei requeue di famiglia normali lo farebbe contare giri che
     // non sono oscillazioni.
@@ -1344,9 +1383,13 @@ function main() {
     const registryVerdict = registry.length
       ? (d.note ? '' : `Nessuna riga del registro «Decisioni del proprietario già prese» di \`VISION.md\` (${SITE_REPO}, sorgente unica) riguarda i riferimenti citati nel corpo: verificato in questo run, non assunto.`)
       : `Il registro di \`VISION.md\` (${SITE_REPO}) non è stato recuperabile in questo run, quindi il riconoscimento del registro non si è pronunciato (fail-open).`;
+    const autonomyNote = visionApproved && !hasVisionMarker
+      ? `${VISION_AUTONOMY_MARKER}\n\nVISION.md **D1/D3/D5**: rientro deterministico e reversibile; F1/F7 resta evidenza per i gate runtime, non un veto di categoria.`
+      : '';
     const note = [
       `🔁 **Pre-pass deterministico dello sweep (zero-Claude)**: ${d.reason}. Questa issue torna nel ciclo autonomo invece di occupare un'azione del cap del run Claude settimanale.`,
       registryVerdict,
+      autonomyNote,
       gate.post ? d.note : '',
       gate.post ? d.marker : '',
     ].filter(Boolean).join('\n\n') + mark;
@@ -1358,8 +1401,10 @@ function main() {
     // tornava selezionabile al giro dopo — che ri-postava la nota e, con essa,
     // il marker che conta le oscillazioni: un fallimento di scrittura si
     // travestiva da oscillazione della issue.
+    const routeArgs = ['issue', 'edit', String(iss.number), '--repo', REPO, '--add-label', add];
+    if (visionApproved) routeArgs.push('--add-label', VISION_AUTONOMY_LABEL);
     const steps = [
-      { what: `label ${add}`, args: ['issue', 'edit', String(iss.number), '--repo', REPO, '--add-label', add] },
+      { what: `label ${add}`, args: routeArgs },
       { what: 'rimozione needs-human', args: ['issue', 'edit', String(iss.number), '--repo', REPO, '--remove-label', 'needs-human'] },
       { what: 'rimozione fu-parked', args: ['issue', 'edit', String(iss.number), '--repo', REPO, '--remove-label', 'fu-parked'] },
       { what: 'nota di instradamento', args: ['issue', 'comment', String(iss.number), '--repo', REPO, '--body', note] },
