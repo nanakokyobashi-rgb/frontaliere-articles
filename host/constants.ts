@@ -12,7 +12,6 @@
  * the next full build overwrites them with. `host/host-drift.test.mjs` is the
  * guard.
  */
-import { FIREBASE_AUTH_SESSION_MARKER_KEY } from './firebaseAuthPersistence';
 
 export const SEO_STATIC_CSS_FILENAME = 'seo-static.css';
 
@@ -150,50 +149,37 @@ export const FC_PUBLISHER_ID = ADSENSE_CLIENT_ID.replace(/^ca-/, '');
  // pub-8628054934855353
 
 /**
- * Offerwall custom-choice registry + Funding Choices MESSAGING loader, injected
- * PARSE-TIME into the <head> of in-scope STATIC article pages.
+ * Funding Choices MESSAGING loader, injected PARSE-TIME into the <head> of
+ * in-scope STATIC pages. The site's custom newsletter choice is
+ * deliberately disabled globally; Ad Manager owns the remaining choices.
  *
- * WHY THIS EXISTS (2026-06-16): the GAM Offerwall is scoped to the article
- * sections, which are emitted as static SSG HTML (staticPagesPlugin) whose head
- * does NOT carry index.html's inline Offerwall block. On those pages the only
- * Funding Choices loader that ever runs is the network-code one pulled in by
- * adsbygoogle.js AFTER hydration — it fetches the Offerwall /f/ message (200,
- * incl. our custom choice) but never instantiates the overlay. The publisher-id
+ * WHY THIS EXISTS (2026-06-16): static SSG HTML (article pages and the Italian
+ * job-board pages) does not carry index.html's inline Funding Choices block.
+ * On those pages the only Funding Choices loader that ever runs is the
+ * network-code one pulled in by adsbygoogle.js AFTER hydration — it fetches
+ * the Offerwall /f/ message (200) but never instantiates the overlay. The
+ * publisher-id
  * MESSAGING loader (`/i/pub-XXX`) — the one index.html uses on SPA roots and the
- * one that actually renders FC messages — is absent. Injecting the registry +
- * pub-id loader at PARSE TIME (before hydration and before adsbygoogle's
+ * one that actually renders FC messages — is absent. Injecting the pub-id
+ * loader at PARSE TIME (before hydration and before adsbygoogle's
  * network-code loader claims the singleton FC instance) brings article pages to
  * parity with index.html's proven render path. (#2312 injected the same loader
  * POST-hydration via the React gate and it never rendered, because FC was
  * already singleton-initialised by the network-code loader — parse-time is the
  * differentiator.)
  *
- * MUST stay byte-aligned with index.html's loadFc()/registry on the essentials
+ * MUST stay aligned with index.html's loadFc() on the essentials
  * (same pub-id loader URL, `data-fc-loader` dedup marker, NO crossOrigin — see
  * tests/index-html-fc-loader.test.ts for the CORS rationale — googlefcPresent
  * signal, requestIdleCallback/DOMContentLoaded deferral for LCP). The drift
- * guard lives in tests/offerwall-static-fc-snippet.test.ts. The registry's
- * behaviour mirrors components/community/OfferwallNewsletterGate.tsx
- * (ensureOfferwallRegistry), which is idempotent (`if (cc.registry) return`) and
- * so no-ops when this parse-time copy already set it — the gate still installs
- * the window.__ftOfferwallSubscribe hook this registry delegates to.
+ * guard lives in tests/offerwall-static-fc-snippet.test.ts. No application
+ * custom-choice registry is emitted here.
  *
  * The anti-adblock fallback IIFE that index.html also runs from loadFc() is
  * deliberately NOT included here — it is a separate feature, out of scope for
  * the Offerwall render fix.
  */
-/**
- * The `hasAccess()` localStorage probe cannot embed the Firebase Web API key:
- * it is public runtime configuration, so static article HTML must remain free
- * of it. authService writes an explicit project-independent marker after
- * Firebase confirms the session. Reading only that marker answers the
- * synchronous pre-bootstrap question without mistaking another project's Auth
- * namespace for this site's session.
- */
-const OFFERWALL_AUTH_CHECK = `if(window.localStorage.getItem('${FIREBASE_AUTH_SESSION_MARKER_KEY}')==='true')return true;`;
-
-export const OFFERWALL_FC_SNIPPET = `<script>(function(){var g=window.googlefc=window.googlefc||{};var ow=g.offerwall=g.offerwall||{};var cc=ow.customchoice=ow.customchoice||{};if(cc.registry)return;function hasAccess(){try{if(window.localStorage.getItem('newsletter_subscribed')==='true')return true;${OFFERWALL_AUTH_CHECK}}catch(e){}return false;}cc.registry={initialize:function(params){var E=cc.InitializeResponseEnum||{};if(hasAccess()){return Promise.resolve(E.ACCESS_GRANTED||'ACCESS_GRANTED');}window.__ftOfferwallLang=(params&&params.offerwallLanguageCode)||null;return Promise.resolve(E.ACCESS_NOT_GRANTED||'ACCESS_NOT_GRANTED');},show:function(){var fn=window.__ftOfferwallSubscribe;function run(f){try{return Promise.resolve(f(window.__ftOfferwallLang)).then(function(ok){return !!ok;});}catch(e){return Promise.resolve(false);}}if(typeof fn!=='function'){return new Promise(function(resolve){var settled=false;function settle(ok){if(settled)return;settled=true;resolve(!!ok);}var q=window.__ftOfferwallShowQueue=window.__ftOfferwallShowQueue||[];var timer=setTimeout(function(){settle(false);},10000);q.push(function(hook){if(settled)return;clearTimeout(timer);run(hook).then(settle,function(){settle(false);});});});}return run(fn);}};})();</script>
- <script>(function(){function loadFc(){if(!document.querySelector('script[data-fc-loader]')){var s=document.createElement('script');s.async=true;s.src='https://fundingchoicesmessages.google.com/i/${FC_PUBLISHER_ID}?ers=1';s.setAttribute('data-fc-loader','1');document.head.appendChild(s);}(function sig(){if(!window.frames['googlefcPresent']){if(document.body){var f=document.createElement('iframe');f.style='width:0;height:0;border:none;z-index:-1000;left:-1000px;top:-1000px;';f.style.display='none';f.name='googlefcPresent';document.body.appendChild(f);}else{setTimeout(sig,0);}}})();}function ricFb(cb){if(document.readyState==='complete'){setTimeout(cb,200);}else{window.addEventListener('load',function(){setTimeout(cb,200);},{once:true});}}function schedule(){(window.requestIdleCallback||ricFb)(loadFc,{timeout:4000});}if(document.readyState==='loading'){window.addEventListener('DOMContentLoaded',schedule,{once:true});}else{schedule();}})();</script>`;
+export const OFFERWALL_FC_SNIPPET = `<script>(function(){var g=window.googlefc=window.googlefc||{};if(!g.controlledMessagingFunction){g.controlledMessagingFunction=function(message){var E=g.MessageTypeEnum||{};if(E.OFFERWALL===undefined){message.proceed(true);return;}message.proceed(false,[E.OFFERWALL]);};}function loadFc(){if(!document.querySelector('script[data-fc-loader]')){var s=document.createElement('script');s.async=true;s.src='https://fundingchoicesmessages.google.com/i/${FC_PUBLISHER_ID}?ers=1';s.setAttribute('data-fc-loader','1');document.head.appendChild(s);}(function sig(){if(!window.frames['googlefcPresent']){if(document.body){var f=document.createElement('iframe');f.style='width:0;height:0;border:none;z-index:-1000;left:-1000px;top:-1000px;';f.style.display='none';f.name='googlefcPresent';document.body.appendChild(f);}else{setTimeout(sig,0);}}})();}function ricFb(cb){if(document.readyState==='complete'){setTimeout(cb,200);}else{window.addEventListener('load',function(){setTimeout(cb,200);},{once:true});}}function schedule(){(window.requestIdleCallback||ricFb)(loadFc,{timeout:4000});}if(document.readyState==='loading'){window.addEventListener('DOMContentLoaded',schedule,{once:true});}else{schedule();}})();</script>`;
 
 export const ADSENSE_SNIPPET = `<meta name="google-adsense-account" content="${ADSENSE_CLIENT_ID}">
  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
