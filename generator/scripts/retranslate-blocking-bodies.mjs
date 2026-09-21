@@ -715,6 +715,7 @@ async function processPair(pair, { CONTENT_ROOT, APPLY }) {
         sourceLang: 'it',
         targetLang: pair.locale,
         fieldType: 'description',
+        fieldName: f,
         translate: freeTranslateWithRetry,
         balanceMarkdown: balanceMarkdownMarkers,
       });
