@@ -161,6 +161,34 @@ jobs:
     # tetto.
     timeout-minutes: 360
     steps:
+      # Pin the runner-owned GitHub CLI before checkout: fetch-pr-files.mjs
+      # executes this exact absolute binary rather than trusting PATH.
+      - name: Resolve trusted GitHub CLI (before checkout)
+        id: trusted_gh
+        run: |
+          set -euo pipefail
+          gh_bin="$(command -v gh || true)"
+          if [ -z "$gh_bin" ] || [[ "$gh_bin" != /* ]] || [ ! -x "$gh_bin" ]; then
+            echo "::error::GitHub CLI path non assoluto o non eseguibile: ${gh_bin:-missing}"
+            exit 1
+          fi
+          gh_bin="$(realpath "$gh_bin")"
+          case "$gh_bin" in
+            "$GITHUB_WORKSPACE"/*|"$RUNNER_TEMP"/*)
+              echo "::error::GitHub CLI risolve in un path controllabile dal runner: $gh_bin"
+              exit 1
+              ;;
+          esac
+          probe="$gh_bin"
+          while [ "$probe" != "/" ]; do
+            if [ -w "$probe" ]; then
+              echo "::error::GitHub CLI o una directory del suo path è scrivibile dal runner: $probe"
+              exit 1
+            fi
+            probe="$(dirname "$probe")"
+          done
+          printf 'path=%s\n' "$gh_bin" >> "$GITHUB_OUTPUT"
+
       - name: Checkout
         uses: actions/checkout@v5
         with:
@@ -758,7 +786,7 @@ jobs:
                Questo container è **già** un checkout isolato monouso: **non** creare worktree interni. La regola worktree-first vale per le sessioni locali con un `main` condiviso, non qui — crearne uno brucia turni rifacendo la meccanica del checkout.
             2. Diagnosi della **root cause**, non del sintomo. **Budget:** se dopo ~15 turni non emerge una root cause chiara, NON continuare a scavare: restringi lo scope o termina pulito con outcome `no-root-cause`.
             3. Fix chirurgico alla **CLASSE del bug, non al singolo file**. Niente refactor drive-by, ma per un fix di pattern (regex, guard, soglia, selettore) cerca con `rg` i gemelli in `generator/`, `engine/`, `host/`, `scripts/` e sweepa l'intera classe **nella stessa PR**, oppure giustifica ogni gemello non toccato in `## Non implementato`. Toccare i file gemelli con lo stesso antipattern non è drive-by: è il fix completo, e previene il 🔴 del reviewer che costerebbe due cicli di quota.
-            4. **Checkpoint WIP — commit e push IMMEDIATI.** Appena il fix è applicato, anche prima di testarlo: `git add -A && git commit -m "wip(issue-$ISSUE_NUMBER): checkpoint pre-test"` e `git push -u origin fix/issue-$ISSUE_NUMBER`. Se il run muore dopo questo punto il branch sopravvive col diff reale, recuperabile al retry. Senza checkpoint, un run morto per max-turns perde il 100% del lavoro col container.
+            4. **Checkpoint WIP — commit e push IMMEDIATI.** Appena il fix è applicato, anche prima di testarlo: `git add -A && git commit -m "wip(issue-$ISSUE_NUMBER): checkpoint pre-test"` e `git push -u origin HEAD:refs/heads/fix/issue-$ISSUE_NUMBER`. Il ref completo è obbligatorio per il bridge Git confinato al branch corrente. Se il run muore dopo questo punto il branch sopravvive col diff reale, recuperabile al retry. Senza checkpoint, un run morto per max-turns perde il 100% del lavoro col container.
             5. Mai abbassare un quality gate o un test per far passare qualcosa.
             6. **Gate test pre-PR (obbligatorio):** `node --test 'generator/tests/*.test.mjs'`. **Non** usare vitest: questo repo non ce l'ha. Non usare `npm test` cieco. Il glob è necessario — `node --test <dir>` su Node 22 collassa la cartella in un unico test fallito invece di scoprire i file. Rosso → fixa la root cause e rigira. Una PR coi test rossi non riceve review e resta ferma: è un ciclo sprecato.
             7. Commit (no-op se dal checkpoint non è cambiato altro — una storia wip+fix sul branch va bene).
@@ -996,6 +1024,7 @@ jobs:
         if: always() && steps.claim.outputs.claim_acquired == 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TRUSTED_GH_BIN: ${{ steps.trusted_gh.outputs.path }}
           REPO: ${{ github.repository }}
           ISSUE: ${{ github.event.issue.number }}
           ACTION_OUTCOME: ${{ steps.codex_fix.outcome || '' }}

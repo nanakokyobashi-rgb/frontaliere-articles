@@ -282,6 +282,33 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
+      # fetch-pr-files.mjs executes an attested absolute GitHub CLI path.
+      - name: Resolve trusted GitHub CLI (before checkout)
+        id: trusted_gh
+        run: |
+          set -euo pipefail
+          gh_bin="$(command -v gh || true)"
+          if [ -z "$gh_bin" ] || [[ "$gh_bin" != /* ]] || [ ! -x "$gh_bin" ]; then
+            echo "::error::GitHub CLI path non assoluto o non eseguibile: ${gh_bin:-missing}"
+            exit 1
+          fi
+          gh_bin="$(realpath "$gh_bin")"
+          case "$gh_bin" in
+            "$GITHUB_WORKSPACE"/*|"$RUNNER_TEMP"/*)
+              echo "::error::GitHub CLI risolve in un path controllabile dal runner: $gh_bin"
+              exit 1
+              ;;
+          esac
+          probe="$gh_bin"
+          while [ "$probe" != "/" ]; do
+            if [ -w "$probe" ]; then
+              echo "::error::GitHub CLI o una directory del suo path è scrivibile dal runner: $probe"
+              exit 1
+            fi
+            probe="$(dirname "$probe")"
+          done
+          printf 'path=%s\n' "$gh_bin" >> "$GITHUB_OUTPUT"
+
       - name: Checkout
         uses: actions/checkout@v5
         with:
@@ -451,6 +478,7 @@ jobs:
         if: steps.claim.outputs.claim_allowed == 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TRUSTED_GH_BIN: ${{ steps.trusted_gh.outputs.path }}
           REPO: ${{ github.repository }}
           PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
           HEAD_REF: ${{ needs.preflight.outputs.head_ref }}
@@ -972,7 +1000,7 @@ jobs:
 
             **Chiusura:**
             - Commit con l'identita' gia' configurata (Valerie Linc), messaggio conventional.
-            - Push sullo stesso branch: `git push origin HEAD:${{ needs.preflight.outputs.head_ref }}`. Il remote e' gia' autenticato col PAT → ri-attiva `tests`, e con esso la re-review.
+            - Push sullo stesso branch: `git push origin HEAD:refs/heads/${{ needs.preflight.outputs.head_ref }}`. Il ref completo è richiesto dal bridge Git confinato al branch corrente. Il remote e' gia' autenticato col PAT → ri-attiva `tests`, e con esso la re-review.
             - Aggiorna il body della PR (`gh pr edit`) mantenendo `## Implementato` (aggiungi cosa hai riparato e perche' il test falliva) e `## Non implementato (ancora)`, con lo stato letterale su ogni bullet.
 
             **Vincoli:**
