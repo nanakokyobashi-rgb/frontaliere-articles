@@ -111,6 +111,18 @@ describe('normalizeLocaleTag / localeHasNullAsWord', () => {
 // ── #868 item 4 — il motore MT free: `Null` e’ un marker, non «zero» ────────
 
 describe('translateFieldFreeMt — l’uscita di un motore non e’ prosa', () => {
+  test('il wrapper di produzione inoltra il nome reale del campo', () => {
+    const start = CREATE_ARTICLE.indexOf('function freeMtField(');
+    const end = CREATE_ARTICLE.indexOf('\n}\n', start);
+    assert.notEqual(start, -1, 'wrapper freeMtField non trovato');
+    assert.notEqual(end, -1, 'chiusura del wrapper freeMtField non trovata');
+    assert.match(
+      CREATE_ARTICLE.slice(start, end + 2),
+      /translateFieldFreeMt\(\{[\s\S]*?fieldName:\s*field,/,
+      'il nome bodyN deve raggiungere il gate di completezza e la telemetria',
+    );
+  });
+
   const run = (out, targetLang = 'de') =>
     translateFieldFreeMt({
       text: 'Un titolo italiano qualunque',
