@@ -125,6 +125,27 @@ test('fail-closed: un formato non riconosciuto NON e\' uno zero (review #1593, ð
   assert.equal(verifyTriageMarkerPersistence(
     '## Post-merge follow-up triage (backfill skipped): PR not eligible (not merged or different author)',
     1600, () => null), true);
+  // La PR #1622 viene saltata dal gate anti-nipote: il finding appartiene
+  // all'issue follow-up genitrice e quindi non deve coniare un bucket locale.
+  const antiNipoteSkip = [
+    '## Post-merge follow-up triage: skipped by anti-nipote gate',
+    '',
+    'La PR dichiara Closes #1621 e #1621 e una issue follow-up.',
+  ].join('\n');
+  const antiNipoteExpectation = triageMarkerPersistenceExpectation(antiNipoteSkip);
+  assert.equal(antiNipoteExpectation.explicitAntiNipoteSkip, true);
+  assert.equal(antiNipoteExpectation.requiresBucket, false);
+  assert.equal(verifyTriageMarkerPersistence(antiNipoteSkip, 1622, () => null), true);
+  // Anche questo marker resta fail-closed se dichiara item contraddittori.
+  const contradictoryAntiNipote = [
+    antiNipoteSkip,
+    '- Follow-up item: FU-2026-09-21-001',
+  ].join('\n');
+  assert.equal(
+    triageMarkerPersistenceExpectation(contradictoryAntiNipote).explicitAntiNipoteSkip,
+    false,
+  );
+  assert.equal(verifyTriageMarkerPersistence(contradictoryAntiNipote, 1622, () => null), false);
   // Uno zero che dichiara comunque un item e' una contraddizione: si prova.
   const contradictory = '## Post-merge follow-up triage: zero outstanding items.\n- Follow-up item: FU-2026-09-18-011\n- Daily bucket: #9102';
   assert.equal(triageMarkerPersistenceExpectation(contradictory).explicitZero, false);
