@@ -2799,7 +2799,7 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti del sito che l'engine legge via SiteShellContract. E' un ESTRATTO PER CHIUSURA di build-plugins/constants.ts (850 righe la': solo le ~15 dichiarazioni che il contratto raggiunge, 177 righe qui), quindi non potra' mai essere byte-identico e adapted e' il mode giusto. Per questa sola entry scalarFingerprint confronta i 22 scalari authoritative: cambiamenti del sorgente fuori dalla chiusura restano stable, ma un digest diverso, mancante, malformato o non dichiarato non puo' mai essere stable. I comportamenti del contratto restano coperti dai fingerprint test esistenti; host/host-drift.test.mjs non esiste e non e' una guardia. Il lato sito della PR #8299 e' ora su main; questa baseline registra l'osservazione verificata dei due lati dopo l'allineamento del marker frontaliere:auth-session, mentre il codice runtime conserva il match sulla chiave Firebase esatta. Il digest 22b3b2bf… resta il fingerprint scalar del contratto e non dipende da segreti o variabili di ambiente del runner.",
+      "reason": "Costanti del sito che l'engine legge via SiteShellContract. E' un ESTRATTO PER CHIUSURA di build-plugins/constants.ts (850 righe la': solo le ~15 dichiarazioni che il contratto raggiunge, 177 righe qui), quindi non potra' mai essere byte-identico e adapted e' il mode giusto. Per questa sola entry scalarFingerprint confronta i 22 scalari authoritative: cambiamenti del sorgente fuori dalla chiusura restano stable, ma un digest diverso, mancante, malformato o non dichiarato non puo' mai essere stable. I comportamenti del contratto restano coperti dai fingerprint test esistenti; host/host-drift.test.mjs non esiste e non e' una guardia. Il lato sito della PR #8299 e' ora su main; questa baseline registra l'osservazione verificata dei due lati dopo l'allineamento del marker frontaliere:auth-session, mentre il codice runtime conserva il match sulla chiave Firebase esatta. Il digest e5b531bf… riflette la rimozione del registro custom-choice applicativo dallo snippet Funding Choices statico e non dipende da segreti o variabili di ambiente del runner.",
       "baseline": {
         "site": "5bedfc2a3453a9f5",
         "corpus": "db9e22109da26397",
@@ -2810,7 +2810,7 @@
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
         "scalarFields": 22,
-        "sha256": "22b3b2bf199de18eab45aa9cd081420b4ae60c29028cbd3a0a24f9a681dd0d89"
+        "sha256": "e5b531bf998837f65ca2d369ad93a91d2e23117600f401cd99a771017fdd06d1"
       }
     },
     {
