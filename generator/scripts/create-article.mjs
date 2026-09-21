@@ -9992,6 +9992,7 @@ function freeMtField(
     sourceLang,
     targetLang,
     fieldType,
+    fieldName: field,
     preserveMunicipalityNames,
     translate: freeTranslateWithRetry,
     balanceMarkdown: balanceMarkdownMarkers,

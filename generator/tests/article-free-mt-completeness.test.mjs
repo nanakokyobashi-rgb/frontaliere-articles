@@ -1,9 +1,14 @@
 import { describe, test } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import { translateFieldFreeMt } from '../scripts/lib/article-free-mt.mjs';
 
 const sourceBody = `${'Paragrafo italiano completo. '.repeat(80)}\n\n${'Secondo blocco completo. '.repeat(80)}`;
+const here = path.dirname(fileURLToPath(import.meta.url));
+const createArticleSource = readFileSync(path.join(here, '..', 'scripts', 'create-article.mjs'), 'utf8');
 
 describe('translateFieldFreeMt — completezza dei body', () => {
   test('rifiuta un body free-MT materialmente troncato e lo manda al recupero', async () => {
@@ -50,5 +55,14 @@ describe('translateFieldFreeMt — completezza dei body', () => {
     });
 
     assert.equal(out, 'Schengen report');
+  });
+
+  test('il wrapper produttivo inoltra il nome del campo alla guardia di completezza', () => {
+    const wrapperStart = createArticleSource.indexOf('function freeMtField(');
+    const wrapperEnd = createArticleSource.indexOf('\n}\n', wrapperStart);
+    const wrapper = createArticleSource.slice(wrapperStart, wrapperEnd + 2);
+
+    assert.ok(wrapperStart >= 0 && wrapperEnd > wrapperStart, 'wrapper freeMtField non trovato');
+    assert.match(wrapper, /\bfieldName:\s*field\b/);
   });
 });
