@@ -10,7 +10,7 @@
 import fs from 'node:fs';
 
 const WORKFLOW_PREFIX = '.github/workflows/';
-const WORKFLOW_REFUSAL_RE = /refusing to allow a GitHub App to create or update workflow\s+[`'\"]?(\.github\/workflows\/[^\s`'\"]+)[`'\"]?\s+without [`'\"]?workflows[`'\"]?\s+permission/gi;
+const WORKFLOW_REFUSAL_RE = /refusing\s+to\s+allow\s+a\s+GitHub\s+App\s+to\s+create\s+or\s+update\s+workflow\s+(?:(?<quote>[`'\"])(?<quotedPath>\.github\/workflows\/[^`'\"\r\n]+)\k<quote>|(?<barePath>\.github\/workflows\/[^\s`'\"]+))\s+without\s+[`'\"]?workflows[`'\"]?\s+permission/gi;
 
 export function isWorkflowPath(rel) {
   return typeof rel === 'string' && rel.startsWith(WORKFLOW_PREFIX) && rel.length > WORKFLOW_PREFIX.length;
@@ -23,7 +23,10 @@ function sortedUnique(paths) {
 /** Classifica solo il rifiuto GitHub osservato; ogni altro errore resta rosso. */
 export function classifyWorkflowPushFailure(output) {
   const rejectedPaths = [];
-  for (const match of String(output ?? '').matchAll(WORKFLOW_REFUSAL_RE)) rejectedPaths.push(match[1]);
+  for (const match of String(output ?? '').matchAll(WORKFLOW_REFUSAL_RE)) {
+    const rel = match.groups?.quotedPath ?? match.groups?.barePath;
+    if (isWorkflowPath(rel)) rejectedPaths.push(rel);
+  }
   const paths = sortedUnique(rejectedPaths);
   return paths.length
     ? { kind: 'workflow-permission', fallback: true, rejectedPaths: paths }
@@ -60,21 +63,44 @@ function restoreProperty(target, source, key) {
   else delete target[key];
 }
 
-/** Ripristina solo baseline/couplingSnapshot dei path workflow indicati. */
+/**
+ * Ripristina baseline/couplingSnapshot e appartenenza al manifest dei workflow
+ * indicati, così il commit resta identico al parent anche per file nuovi o
+ * rimossi.
+ */
 export function restoreWorkflowSnapshots(currentManifest, previousManifest, paths) {
   const workflowPaths = sortedUnique(paths);
   const invalid = workflowPaths.filter((rel) => !isWorkflowPath(rel));
   if (invalid.length) throw new Error(`fallback non autorizzato per path non workflow: ${invalid.join(', ')}`);
 
   const current = clone(currentManifest);
-  const currentFiles = Array.isArray(current.files) ? current.files : [];
-  const previousFiles = Array.isArray(previousManifest?.files) ? previousManifest.files : [];
+  if (!Array.isArray(current.files) || !Array.isArray(previousManifest?.files)) {
+    throw new Error('manifest corrente/precedente senza array files');
+  }
+  const currentFiles = current.files;
+  const previousFiles = previousManifest.files;
   for (const rel of workflowPaths) {
-    const now = currentFiles.find((entry) => entry.path === rel);
-    const old = previousFiles.find((entry) => entry.path === rel);
-    if (!now || !old) throw new Error(`manifest senza voce corrente/precedente per ${rel}`);
-    restoreProperty(now, old, 'baseline');
-    restoreProperty(now, old, 'couplingSnapshot');
+    const nowEntries = currentFiles.filter((entry) => entry?.path === rel);
+    const oldEntries = previousFiles.filter((entry) => entry?.path === rel);
+    if (nowEntries.length > 1 || oldEntries.length > 1) {
+      throw new Error(`manifest con voce workflow duplicata per ${rel}`);
+    }
+    if (!nowEntries.length && !oldEntries.length) {
+      throw new Error(`manifest senza voce corrente/precedente per ${rel}`);
+    }
+    if (!nowEntries.length) {
+      const previousIndex = previousFiles.indexOf(oldEntries[0]);
+      currentFiles.splice(Math.min(Math.max(previousIndex, 0), currentFiles.length), 0, clone(oldEntries[0]));
+      continue;
+    }
+    if (!oldEntries.length) {
+      for (let index = currentFiles.length - 1; index >= 0; index -= 1) {
+        if (currentFiles[index]?.path === rel) currentFiles.splice(index, 1);
+      }
+      continue;
+    }
+    restoreProperty(nowEntries[0], oldEntries[0], 'baseline');
+    restoreProperty(nowEntries[0], oldEntries[0], 'couplingSnapshot');
   }
   return current;
 }
