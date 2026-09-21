@@ -5,7 +5,9 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
@@ -17,6 +19,7 @@ import {
 } from '../../scripts/transport-identical-twins-push-fallback.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+const FALLBACK_SCRIPT = path.join(ROOT, 'scripts/transport-identical-twins-push-fallback.mjs');
 
 const refusal = [
   'remote: error: refusing to allow a GitHub App to create or update workflow .github/workflows/crawler-group-01.yml without workflows permission.',
@@ -28,6 +31,28 @@ test('classifica il rifiuto GitHub esplicito di un workflow', () => {
     kind: 'workflow-permission',
     fallback: true,
     rejectedPaths: ['.github/workflows/crawler-group-01.yml'],
+  });
+});
+
+test('classifica quoting, wrapping e nomi workflow con spazi senza allargare il fallback', () => {
+  const outputs = [
+    'remote: error: refusing to allow a GitHub App to create or update\nworkflow\n`.github/workflows/weekly crawler.yml`\nwithout\n`workflows` permission.',
+    "remote: error: refusing to allow a GitHub App to create or update workflow '.github/workflows/weekly crawler.yml' without 'workflows' permission.",
+    'remote: error: refusing to allow a GitHub App to create or update workflow ".github/workflows/weekly crawler.yml" without "workflows" permission.',
+  ];
+  for (const output of outputs) {
+    assert.deepEqual(classifyWorkflowPushFailure(output), {
+      kind: 'workflow-permission',
+      fallback: true,
+      rejectedPaths: ['.github/workflows/weekly crawler.yml'],
+    });
+  }
+  assert.deepEqual(classifyWorkflowPushFailure(
+    'remote: error: refusing to allow a user to create or update workflow `.github/workflows/weekly crawler.yml` without workflows permission.',
+  ), {
+    kind: 'other',
+    fallback: false,
+    rejectedPaths: [],
   });
 });
 
@@ -152,6 +177,95 @@ test('ripristina baseline e couplingSnapshot dal parent solo sui workflow', () =
     () => restoreWorkflowSnapshots(current, previous, ['scripts/ci/native-automerge-gate.mjs']),
     /non workflow/,
   );
+  assert.throws(
+    () => restoreWorkflowSnapshots({ files: [current.files[0], current.files[0]] }, previous, [
+      '.github/workflows/crawler-group-01.yml',
+    ]),
+    /duplicata/,
+  );
+  assert.throws(
+    () => restoreWorkflowSnapshots({}, previous, ['.github/workflows/crawler-group-01.yml']),
+    /senza array files/,
+  );
+});
+
+function runPrepareFallback({ currentFiles, previousFiles, commitPaths, transported }) {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'transport-fallback-'));
+  const files = {
+    pushLog: path.join(directory, 'push.log'),
+    commitPaths: path.join(directory, 'commit-paths.txt'),
+    manifest: path.join(directory, 'manifest.json'),
+    previousManifest: path.join(directory, 'previous-manifest.json'),
+    report: path.join(directory, 'report.json'),
+  };
+  try {
+    fs.writeFileSync(files.pushLog, `${refusal}\n`);
+    fs.writeFileSync(files.commitPaths, `${commitPaths.join('\n')}\n`);
+    fs.writeFileSync(files.manifest, `${JSON.stringify({ files: currentFiles })}\n`);
+    fs.writeFileSync(files.previousManifest, `${JSON.stringify({ files: previousFiles })}\n`);
+    fs.writeFileSync(files.report, `${JSON.stringify({ manifestChanged: true, transported })}\n`);
+    const result = spawnSync(process.execPath, [
+      FALLBACK_SCRIPT,
+      `--push-log=${files.pushLog}`,
+      `--commit-paths=${files.commitPaths}`,
+      `--manifest=${files.manifest}`,
+      `--previous-manifest=${files.previousManifest}`,
+      `--report=${files.report}`,
+    ], { encoding: 'utf8' });
+    return {
+      result,
+      manifest: JSON.parse(fs.readFileSync(files.manifest, 'utf8')),
+      report: JSON.parse(fs.readFileSync(files.report, 'utf8')),
+    };
+  } finally {
+    fs.rmSync(directory, { recursive: true, force: true });
+  }
+}
+
+test('prepareFallback ripristina il set completo per workflow nuovi o rimossi', () => {
+  const workflowPath = '.github/workflows/crawler-group-01.yml';
+  const nonWorkflowPath = 'scripts/ci/non-workflow.mjs';
+  const previousWorkflow = {
+    path: workflowPath,
+    mode: 'identical',
+    baseline: { site: 'old-site', corpus: 'old-corpus' },
+    couplingSnapshot: [{ path: 'old-coupling', mode: 'identical' }],
+  };
+  const previousNonWorkflow = {
+    path: nonWorkflowPath,
+    mode: 'identical',
+    baseline: { site: 'old-non-workflow', corpus: 'old-non-workflow' },
+  };
+  const currentNonWorkflow = {
+    ...previousNonWorkflow,
+    baseline: { site: 'new-non-workflow', corpus: 'new-non-workflow' },
+  };
+  const scenarios = [
+    {
+      name: 'nuovo',
+      currentFiles: [{ ...currentNonWorkflow }, { ...previousWorkflow, baseline: { site: 'new-site', corpus: 'new-corpus' } }],
+      previousFiles: [{ ...previousNonWorkflow }],
+      expectedFiles: [currentNonWorkflow],
+    },
+    {
+      name: 'rimosso',
+      currentFiles: [currentNonWorkflow],
+      previousFiles: [previousWorkflow, previousNonWorkflow],
+      expectedFiles: [previousWorkflow, currentNonWorkflow],
+    },
+  ];
+  for (const scenario of scenarios) {
+    const run = runPrepareFallback({
+      ...scenario,
+      commitPaths: [workflowPath, nonWorkflowPath],
+      transported: [{ path: workflowPath }, { path: nonWorkflowPath }],
+    });
+    assert.equal(run.result.status, 0, `${scenario.name}: ${run.result.stderr}`);
+    assert.deepEqual(run.manifest.files, scenario.expectedFiles, scenario.name);
+    assert.deepEqual(run.report.transported, [{ path: nonWorkflowPath }], scenario.name);
+    assert.deepEqual(run.report.workflowExcluded, [workflowPath], scenario.name);
+    assert.deepEqual(JSON.parse(run.result.stdout).excludedPaths, [workflowPath], scenario.name);
+  }
 });
 
 test('il workflow usa il helper e non offre un fallback per altri push error', () => {
@@ -161,6 +275,14 @@ test('il workflow usa il helper e non offre un fallback per altri push error', (
   assert.match(source, /fallback_rc/);
   assert.match(source, /git push -u origin "\$BRANCH" > "\$RETRY_LOG" 2>&1/);
   assert.doesNotMatch(source, /git push --force/);
+
+  const excluded = source.indexOf('git rm --cached --ignore-unmatch');
+  const stagedGuard = source.indexOf('if git diff --cached --quiet HEAD^; then', excluded);
+  const retry = source.indexOf('git push -u origin "$BRANCH" > "$RETRY_LOG" 2>&1', stagedGuard);
+  const create = source.indexOf('gh pr create', retry);
+  assert.ok(excluded >= 0 && stagedGuard > excluded, 'il set completo deve essere valutato dopo git rm --cached');
+  assert.ok(retry > stagedGuard && create > retry, 'gh pr create deve arrivare solo dopo il push di retry');
+  assert.match(source.slice(retry, create), /\[ "\$retry_rc" = "0" \] \|\| exit "\$retry_rc"/);
 });
 
 test('il checkout non persiste l’extraheader GITHUB_TOKEN', () => {
