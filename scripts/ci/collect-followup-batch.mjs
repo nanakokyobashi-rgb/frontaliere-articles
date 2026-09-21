@@ -308,7 +308,8 @@ export function parseMergedPRs(prListJson) {
 
 /**
  * True if the PR already carries a `## Post-merge follow-up triage` comment (any
- * variant: the normal summary, "zero outstanding items", "(backfill skipped)"). The
+ * variant: the normal summary, "zero outstanding items", "(backfill skipped)",
+ * "skipped by anti-nipote gate"). The
  * comment is the idempotency marker Claude posts on EVERY processed PR.
  * Proceed-safe: parse error → false (NOT deduped → PR stays a candidate).
  * @param {string} commentsJson  output of `gh pr view N --json comments`
@@ -375,6 +376,10 @@ export function latestTriageCommentBody(commentsJson, prefix = TRIAGE_COMMENT_PR
  *    vuoto (`## Post-merge follow-up triage: zero outstanding items.` oppure
  *    `## Post-merge follow-up triage (backfill skipped): ...`). Conta solo su
  *    una riga H2, mai nella prosa del corpo.
+ *  - uno SKIP esplicito e' l'intestazione "## Post-merge follow-up triage:
+ *    skipped by anti-nipote gate". In questo caso il finding resta di
+ *    proprieta' della follow-up issue genitrice, quindi non esiste un bucket o
+ *    un item da persistere nella PR corrente.
  *
  * Il default e' NON provato. Un marker che non dichiara ne' uno zero esplicito
  * ne' un riferimento verificabile ha un formato che questo parser non
@@ -399,6 +404,8 @@ export function triageMarkerPersistenceExpectation(markerBody) {
   // outstanding items.`), quindi conta qualunque riga H2 del marker.
   const explicitZero = body.split(/\r?\n/).some((line) =>
     /^\s*##\s+Post-merge follow-up triage\s*(?::\s*zero outstanding items\b|\(backfill skipped\))/i.test(line));
+  const explicitAntiNipoteSkip = body.split(/\r?\n/).some((line) =>
+    /^\s*##\s+Post-merge follow-up triage\s*:\s*skipped by anti-nipote gate\b/i.test(line));
   const uniqueItems = [...new Set(items)];
   return {
     items: uniqueItems,
@@ -407,7 +414,15 @@ export function triageMarkerPersistenceExpectation(markerBody) {
     // I bucket citati da un marker a zero sono contesto (nessun item da
     // persistere li' dentro), non una promessa.
     explicitZero: explicitZero && uniqueItems.length === 0,
-    requiresBucket: !(explicitZero && uniqueItems.length === 0),
+    // Lo skip anti-nipote e' valido solo se non dichiara item o bucket:
+    // l'anti-nipote gate non crea un bucket locale per definizione.
+    explicitAntiNipoteSkip: explicitAntiNipoteSkip
+      && uniqueItems.length === 0
+      && buckets.length === 0,
+    requiresBucket: !(
+      (explicitZero || explicitAntiNipoteSkip)
+      && uniqueItems.length === 0
+    ),
   };
 }
 
@@ -526,7 +541,7 @@ function bucketReadResult(result) {
  */
 export function verifyTriageMarkerPersistence(markerBody, prNumber, readIssue, prComments = '') {
   const expectation = triageMarkerPersistenceExpectation(markerBody);
-  if (expectation.explicitZero) return true;
+  if (expectation.explicitZero || expectation.explicitAntiNipoteSkip) return true;
   if (!expectation.buckets.length || typeof readIssue !== 'function') return false;
   let unreadable = false;
   let disproved = false;
