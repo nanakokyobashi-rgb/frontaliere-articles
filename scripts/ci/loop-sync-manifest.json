@@ -3585,12 +3585,11 @@
     {
       "path": "generator/data/crawler-cross-repo-contract.json",
       "sitePath": ".github/corpus-workflows/contract.json",
-      "mode": "adapted",
-      "reason": "Il contratto trasportato dal sito e' adattato nel corpus per attestare gli artifactSha256 reali dei workflow crawler presenti qui: la copia sito 166b72214eec9faf conserva i digest della generazione precedente, mentre la baseline corpus pinna i file effettivamente verificati da generator/tests/crawler-cross-repo-artifacts.test.mjs. Non e' quindi un gemello byte-identico da sovrascrivere al trasporto successivo.",
+      "mode": "identical",
       "baseline": {
-        "site": "166b72214eec9faf",
-        "corpus": "26b7b0feb27d1e57",
-        "alignedAt": "2026-09-20"
+        "site": "2adf206741b6bb8a",
+        "corpus": "2adf206741b6bb8a",
+        "alignedAt": "2026-09-21"
       }
     },
     {
