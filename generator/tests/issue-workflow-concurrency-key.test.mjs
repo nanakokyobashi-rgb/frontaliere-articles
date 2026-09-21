@@ -1,7 +1,9 @@
 /**
  * issue-workflow-concurrency-key.test.mjs — ogni workflow innescato da eventi
- * issue deve serializzare su una chiave PER-ISSUE, cioe' che interpola
- * `github.event.issue.number`.
+ * issue deve serializzare la run su una chiave PER-ISSUE, cioe' che interpola
+ * `github.event.issue.number`. Un workflow che scansiona una coda condivisa può
+ * inoltre avere un semaforo globale A LIVELLO DI JOB: il drainer usa proprio
+ * questa forma a due livelli, per non duplicare reservation su issue diverse.
  *
  * ## Il modo silenzioso in cui questo si rompe
  *
@@ -56,6 +58,7 @@ const WORKFLOW_DIR = path.join(ROOT, '.github/workflows');
  * applica: due regex separate divergerebbero al primo ritocco.
  */
 const PER_ISSUE_KEY = /github\.event\.issue\.number/;
+const DRAINER_GLOBAL_SCAN_GROUP = 'followup-drainer-scan-${{ github.repository }}';
 
 /**
  * La chiave varia per issue? Estratta dal ciclo perche' e' LA regola del gate, e
@@ -144,7 +147,15 @@ test('ogni workflow su eventi issue serializza su una chiave per-issue', () => {
     // come la costante letterale che questo gate esiste per vietare, ma che un
     // controllo su `${{` lascia passare (follow-up #918).
     for (const group of groups) {
-      if (!isPerIssueKey(group)) offenders.push(`${file} → group: ${group}`);
+      const isDrainerScanSemaphore = file === 'followup-drainer.yml'
+        && group === DRAINER_GLOBAL_SCAN_GROUP;
+      if (!isPerIssueKey(group) && !isDrainerScanSemaphore) {
+        offenders.push(`${file} → group: ${group}`);
+      }
+    }
+    if (file === 'followup-drainer.yml') {
+      assert.ok(groups.includes(DRAINER_GLOBAL_SCAN_GROUP),
+        'followup-drainer deve mantenere il semaforo globale del job di scansione');
     }
   }
   assert.deepEqual(

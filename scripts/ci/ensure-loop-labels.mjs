@@ -69,7 +69,7 @@ export const LABELS = [
   ['collision-risk', 'e99695', 'Modifica file gia toccati da un altra PR aperta'],
   ['has-conflicts', 'b60205', 'Conflitto reale con main: autorebase sospeso finche il branch non viene risolto'],
   ['needs-human', '7057ff', 'Nessun processo automatico la sbloccherà: serve una mano umana'],
-  ['agent:vision-approved', '5319e7', 'Rientro automatico autorizzato dal contratto VISION.md vision-v1; transitoria e rimossa dal fixer'],
+  ['agent:vision-approved', '5319e7', 'Rientro automatico autorizzato da VISION.md vision-v1; label transitoria di hand-off al fixer'],
   ['autorebase-reopen-failed', 'b60205', 'close+reopen rotto a meta: NON cancellare l head ref, la PR va riaperta a mano'],
   // Messa da recycle-stale-prs.yml su una PR CHIUSA il cui re-queue e' fallito
   // a meta': la scansione vede solo PR aperte, questa label e' l'unico modo in
