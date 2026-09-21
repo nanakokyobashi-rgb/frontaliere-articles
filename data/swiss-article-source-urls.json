@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1944992/anni-popolazione-svizzera-aumento-dati": {
-    "articleId": "invecchiamento-popolazione-svizzera-2025",
-    "ts": "2026-08-20T09:12:03.432Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/vuhrludgcgupqpiytdbdk": {
     "articleId": "statent-2024-occupazione-svizzera",
     "ts": "2026-08-20T09:27:55.026Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/wmt65fflcyzy": {
     "articleId": "consiglio-federale-modifica-isos",
     "ts": "2026-09-21T00:34:16.256Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1951416/citta-perdita-estate-miliardi-produzione-perdite-causato-due": {
+    "articleId": "estate-2026-perdita-produttivita",
+    "ts": "2026-09-21T04:48:45.986Z",
     "keyForm": 2
   }
 }
