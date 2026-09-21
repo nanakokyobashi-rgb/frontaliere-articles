@@ -6,6 +6,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   QUEUE_MAX_BOUNDARY_SHA,
+  MAX_ACTIVE_JOB_GET_REQUESTS,
+  MAX_LIVENESS_STATUS_GET_REQUESTS,
   MAX_LIVENESS_GET_REQUESTS,
   RERUN_PRESERVATION_PROOF,
   TARGET_BRANCH,
@@ -52,6 +54,12 @@ const CLAIM_PATH_RE = new RegExp(`^${CLAIM_ROOT}/[a-f0-9]{64}\\.json$`);
 const TIMESTAMP_RE = /^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})(?:\.(\d{1,3}))?Z$/;
 const MODES = new Set(['observe_only', 'claim_and_rerun']);
 const PHASES = new Set(['observe', 'claim']);
+
+function expectedLivenessGets(liveness) {
+  const active = liveness?.counts?.active;
+  return MAX_LIVENESS_STATUS_GET_REQUESTS
+    + (active > 0 ? MAX_ACTIVE_JOB_GET_REQUESTS : 0);
+}
 
 export const RECOVERY_REASON_CODES = Object.freeze([
   'active_and_pending_present',
@@ -524,7 +532,7 @@ export async function inspectRecoveryTarget({
   });
   const initialLivenessGets = initialLiveness?.queryBudget?.usedGets;
   if (!Number.isSafeInteger(initialLivenessGets)
-      || initialLivenessGets !== MAX_LIVENESS_GET_REQUESTS
+      || initialLivenessGets !== expectedLivenessGets(initialLiveness)
       || clock() >= deadlineAt
       || initialLiveness.complete !== true
       || initialLiveness.failClosed !== false) {
@@ -625,7 +633,7 @@ export async function inspectRecoveryTarget({
     });
     finalLivenessGets = finalLiveness.queryBudget.usedGets;
     if (finalLiveness.complete !== true || finalLiveness.failClosed !== false
-        || finalLivenessGets !== MAX_LIVENESS_GET_REQUESTS) {
+        || finalLivenessGets !== expectedLivenessGets(finalLiveness)) {
       for (const reason of finalLiveness.reasonCodes ?? []) {
         if (RECOVERY_REASON_CODES.includes(reason)) reasons.add(reason);
       }

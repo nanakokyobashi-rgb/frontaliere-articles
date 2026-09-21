@@ -11,7 +11,7 @@ import {
   RECOVERY_REASON_CODES,
   TARGET_EXECUTION_CAPABILITY,
   TARGET_EXECUTION_CAPABILITY_SCHEMA,
-  TARGET_ONLY_MAX_INSPECTION_GET_REQUESTS,
+  TARGET_ONLY_DETAIL_GET_REQUESTS,
   TARGET_ONLY_OBSERVATION_MODE,
   createRecoveryClaim,
   runRecoveryClaim,
@@ -22,6 +22,7 @@ import {
   runRecoveryExecutor,
 } from '../../scripts/ci/translate-queue-recovery-executor.mjs';
 import {
+  MAX_LIVENESS_STATUS_GET_REQUESTS,
   QUEUE_MAX_BOUNDARY_SHA,
   TARGET_BRANCH,
   TARGET_REPOSITORY,
@@ -105,6 +106,7 @@ function queueRun(id, status, overrides = {}) {
 function fakeGithub({
   ancestryStatus = 'ahead',
   apiFault = null,
+  activeJobsByRun = {},
   dropClaimAfterPut = false,
   initialClaim = null,
   jobsByRun = {},
@@ -190,6 +192,25 @@ function fakeGithub({
       `^/repos/${TARGET_REPOSITORY}/actions/runs/([1-9][0-9]*)/jobs$`,
     ));
     if (options.method === 'GET' && jobsMatch) {
+      if (url.searchParams.get('per_page') === '100') {
+        const round = Math.max(0, Math.floor((livenessCalls - 1) / 5));
+        const snapshot = livenessSnapshots?.[round] ?? listedPages.flat();
+        const active = snapshot.find((row) => (
+          String(row?.id) === jobsMatch[1] && row?.status === 'in_progress'
+        ));
+        return response(200, activeJobsByRun[jobsMatch[1]] ?? (
+          active
+            ? {
+              jobs: [{
+                id: 1,
+                started_at: active.run_started_at ?? active.created_at,
+                status: 'in_progress',
+              }],
+              total_count: 1,
+            }
+            : { jobs: [], total_count: 0 }
+        ));
+      }
       const count = jobsByRun[jobsMatch[1]] ?? 0;
       return response(200, {
         jobs: count === 0 ? [] : [{ id: 1 }],
@@ -472,7 +493,8 @@ test('claim create-only 201 viene verificato byte-identical e abilita solo quest
   assert.equal(report.mutationBudget.usedPuts, 1);
   assert.equal(mutatingCalls(fake).filter(({ options }) => options.method === 'PUT').length, 1);
   assert.equal(mutatingCalls(fake).filter(({ options }) => options.method === 'POST').length, 0);
-  assert.equal(report.queryBudget.usedGets, TARGET_ONLY_MAX_INSPECTION_GET_REQUESTS + 1);
+  assert.equal(report.queryBudget.usedGets,
+    2 + (2 * MAX_LIVENESS_STATUS_GET_REQUESTS) + TARGET_ONLY_DETAIL_GET_REQUESTS);
   assert.ok(report.queryBudget.usedGets <= MAX_PHASE_GET_REQUESTS);
 });
 
@@ -492,7 +514,8 @@ test('target live con dedupe effectively-once e successor guard abilita un solo 
   assert.equal(report.primaryReason, 'claim_created');
   assert.equal(report.complete, true);
   assert.equal(report.failClosed, false);
-  assert.equal(report.queryBudget.usedGets, TARGET_ONLY_MAX_INSPECTION_GET_REQUESTS + 1);
+  assert.equal(report.queryBudget.usedGets,
+    2 + (2 * MAX_LIVENESS_STATUS_GET_REQUESTS) + TARGET_ONLY_DETAIL_GET_REQUESTS);
   assert.equal(mutatingCalls(fake).filter(({ options }) => options.method === 'PUT').length, 1);
   assert.equal(report.mutationBudget.usedPuts, 1);
   assert.deepEqual(TARGET_EXECUTION_CAPABILITY, {
@@ -566,7 +589,8 @@ test('target-only ignora 201 cancellazioni profonde e raggiunge il claim live', 
   assert.equal(report.decision, 'claim_created');
   assert.equal(report.primaryReason, 'claim_created');
   assert.equal(report.failClosed, false);
-  assert.equal(report.queryBudget.usedGets, TARGET_ONLY_MAX_INSPECTION_GET_REQUESTS + 1);
+  assert.equal(report.queryBudget.usedGets,
+    2 + (2 * MAX_LIVENESS_STATUS_GET_REQUESTS) + TARGET_ONLY_DETAIL_GET_REQUESTS);
   assert.ok(!report.reasonCodes.includes('query_budget_exhausted'));
   assert.equal(fake.calls.filter(({ url }) => (
     url.pathname.endsWith(`/actions/workflows/${TARGET_WORKFLOW_ID}/runs`)
