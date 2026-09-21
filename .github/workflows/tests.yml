@@ -988,7 +988,7 @@ jobs:
           code_file_count=$(echo "$code_files" | grep -c . || true)
           if funnel_crit "$code_files"; then
             if [ "$code_file_count" -ge 25 ]; then
-              set_tier high-mega gpt-5.6-luna 90
+              set_tier high-mega gpt-5.6-luna 120
             else
               set_tier high gpt-5.6-luna 60
             fi
@@ -1233,7 +1233,7 @@ jobs:
 
             **Disciplina turni (budget rigido, tutti i tier tranne `minimal`):** hai ${{ steps.tier.outputs.max_turns }} turni. Un messaggio con tool-call = 1 turno indipendentemente da quanti tool_use contiene, quindi le probe indipendenti vanno emesse in parallelo nello stesso messaggio, mai una per turno. `PR_NUMBER`/`HEAD_SHA`/`INCREMENTAL_BASE` sono gia' nell'env: mai spendere un turno per rileggerli. Il checkout NON ha `node_modules`: niente `npm`/`npx`/test runner, il verdetto si basa sulla lettura statica. Entro cinque turni dal cap DEVI aver postato la review: se hai ancora verifiche aperte, postale come `❓ q:` invece di continuare a probeare. Una review postata con un `❓` sblocca il loop; una review MAI postata brucia il run intero senza verdetto.
 
-            Per i tier `high` e `high-mega` non scaricare l'intero bundle in un'unica risposta: limita ogni `sed`/`tail` a circa 450 righe e usa più probe mirate o `rg` per i simboli rilevanti. Dopo avere letto il contratto e i pattern principali, posta il verdetto; non restare in lettura del diff senza una review finale.
+            Per i tier `high` e `high-mega` non scaricare l'intero bundle in un'unica risposta: limita ogni `sed`/`tail` a circa 450 righe e usa più probe mirate o `rg` per i simboli rilevanti. Per il set ripetitivo dei 19 `crawler-group`, leggi al massimo tre file rappresentativi (01, 04 e 19) e verifica il contratto/pattern comune: non aprire ogni copia. Dopo avere letto il contratto e i pattern principali, posta il verdetto; non restare in lettura del diff senza una review finale.
 
             **🔴 su righe non cambiate.** L'identita' di un finding e' un id stabile `(path, simbolo, classe, prosa)` che NON contiene il numero di riga: un rebase o un merge di main non la sposta. Un `🔴 Important` NUOVO ancorato SOLO a righe che nessuno ha toccato dall'ultima review viene classificato dal gate (`DECLASSIFIED-UNCHANGED-LINE`) per lasciare una traccia verificabile, ma il percorso resta fail-closed: serve una review successiva che lo risolva esplicitamente prima del merge. Se il rilievo valeva anche allora, ripetilo con lo stesso id stabile e una review pulita; se sei convinto che sia una regressione, dichiarala: `🔴 Important: [regression] ...`, col tag SUBITO DOPO i due punti, e resta bloccante. Le classi ammesse sono `regression`, `correctness`, `contract`, `funnel`, `process`, `other`.
 

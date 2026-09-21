@@ -1165,7 +1165,11 @@ runs:
         # restore git config, publish diagnostics, and let the workflow's
         # retry classifier run instead of leaving the review step in progress
         # until GitHub kills the whole step.
-        codex_exec_timeout_seconds=900
+        # The Codex review lane is allowed to use the full 1800-second
+        # process budget. The caller's timeout-minutes remains the last-resort
+        # runner kill, while this watchdog still lets the action publish
+        # diagnostics and classify a bounded failure.
+        codex_exec_timeout_seconds=1800
         codex_exec_kill_grace_seconds=30
         codex_timeout_bin=/usr/bin/timeout
         [ -x "$codex_timeout_bin" ] || {
@@ -1225,8 +1229,34 @@ runs:
         fi
         codex_review_posted=false
         if [ -s "$codex_diagnostics_destination" ] \
-          && grep -Eq '"type":"item.completed".*"type":"command_execution".*"command":.*gh[[:space:]]+pr[[:space:]]+review.*"exit_code":0' \
-            "$codex_diagnostics_destination"; then
+          && "$node_realpath" --input-type=module - "$codex_diagnostics_destination" <<'NODE'
+        import fs from 'node:fs';
+
+        const file = process.argv[2];
+        let posted = false;
+        for (const line of fs.readFileSync(file, 'utf8').split(/\r?\n/u)) {
+          if (!line.trim()) continue;
+          let event;
+          try {
+            event = JSON.parse(line);
+          } catch {
+            continue;
+          }
+          const item = event?.item;
+          const command = typeof item?.command === 'string' ? item.command : '';
+          const isReviewCommand = /^\/bin\/bash -lc ["']gh\s+pr\s+review\b/u.test(command)
+            || /^gh\s+pr\s+review\b/u.test(command);
+          if (event?.type === 'item.completed'
+              && item?.type === 'command_execution'
+              && item?.exit_code === 0
+              && isReviewCommand) {
+            posted = true;
+            break;
+          }
+        }
+        process.exit(posted ? 0 : 1);
+        NODE
+        then
           codex_review_posted=true
         fi
         # A clean Codex exit is not a successful review when the model stopped

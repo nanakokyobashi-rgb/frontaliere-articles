@@ -305,6 +305,10 @@ test('la review Codex esporta eventi strutturati anche quando il processo fallis
   assert.match(action, /CODEX_DIAGNOSTICS: \$\{\{ steps\.codex\.outputs\.codex_diagnostics \}\}/);
   assert.match(action, /codex_no_review/);
   assert.match(action, /codex_review_posted=%s/);
+  assert.match(action, /JSON\.parse\(line\)/);
+  assert.match(action, /item\?\.exit_code === 0/);
+  assert.match(action, /codex_exec_timeout_seconds=1800/);
+  assert.doesNotMatch(action, /codex_exec_timeout_seconds=900/);
 });
 
 test('la review Codex espone solo telemetry aggregata e conserva il cap di 45 minuti', () => {
