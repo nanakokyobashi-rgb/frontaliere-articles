@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/ehho7s2a2revqdhypsymt": {
-    "articleId": "rallentamento-crescita-demografica-2025",
-    "ts": "2026-08-20T08:09:11.199Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1944973/lombard-odier-record-patrimoni-percento": {
     "articleId": "lombard-odier-patrimoni-record",
     "ts": "2026-08-20T08:53:00.296Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1951385/franchi-arrotondamento-cassa-lidl-paga": {
     "articleId": "lidl-abolisce-arrotondamento-cassa",
     "ts": "2026-09-21T00:16:39.908Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/fxagmnhpiaxh": {
+    "articleId": "rapporto-schengen-dublino-2026",
+    "ts": "2026-09-21T00:24:46.226Z",
     "keyForm": 2
   }
 }
