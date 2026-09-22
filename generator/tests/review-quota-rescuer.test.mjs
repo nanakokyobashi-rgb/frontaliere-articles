@@ -843,6 +843,15 @@ test('il wiring reagisce al completamento dei consumer e rilascia reservation es
     'il comando rerun non può essere marcato confirmed prima di osservare un attempt nuovo',
   );
   assert.match(workflow, /Retry deferred\/transient reviews/);
+  assert.match(workflow, /Prepare Firebase credentials/);
+  assert.match(workflow, /Load secrets from Remote Config/);
+  assert.match(workflow, /runtime_pat="\$\{GITHUB_PAT_NANAKO:-\}"/);
+  assert.match(workflow, /GH_TOKEN="\$runtime_pat" node scripts\/ci\/review-quota-rescuer\.mjs/);
+  assert.doesNotMatch(
+    workflow,
+    /GH_TOKEN:\s*\$\{\{\s*secrets\.GITHUB_TOKEN\s*\}\}/,
+    'la probe quota non deve ricadere sulla quota installation del GITHUB_TOKEN',
+  );
   const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'));
   assert.equal(
     manifest.files.find((entry) => entry.path === '.github/workflows/review-quota-rescuer.yml')?.mode,
