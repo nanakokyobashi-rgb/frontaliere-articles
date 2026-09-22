@@ -112,15 +112,17 @@ test('blobsByPath accetta anche array semplici (forma JSON del report)', () => {
   assert.equal(v.ok, true);
 });
 
-test('#1060: la baseline adapted di tests.yml è quella della riconciliazione attestata', () => {
+test('#9443: la baseline adapted di tests.yml è quella della riconciliazione attestata', () => {
   const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'));
   const tracked = manifest.files.find((f) => f.path === '.github/workflows/tests.yml');
   assert.ok(tracked);
   assert.equal(tracked.mode, 'adapted');
   assert.match(tracked.baseline.corpus, /^[0-9a-f]{16}$/);
   assert.match(tracked.baseline.site, /^[0-9a-f]{16}$/);
+  assert.equal(tracked.baseline.corpus, 'e518821ae9d725f7');
+  assert.equal(tracked.baseline.site, '65b6d8e17bdcdf99');
   assert.match(tracked.baseline.alignedAt, /^\d{4}-\d{2}-\d{2}$/);
-  assert.match(tracked.reason, new RegExp(`RICONCILIATO ${tracked.baseline.alignedAt} \\(\\#1060\\)`));
+  assert.match(tracked.reason, new RegExp(`RICONCILIATO ${tracked.baseline.alignedAt} \\(\\#9443\\)`));
 });
 
 test('la storia usa il ref canonico e conserva i merge completi', () => {
