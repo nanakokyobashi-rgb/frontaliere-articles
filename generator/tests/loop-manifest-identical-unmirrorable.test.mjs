@@ -48,6 +48,7 @@ const MODE_OF = new Map(MANIFEST.files.map((f) => [f.path, f.mode]));
 
 const FREE_MT = 'generator/scripts/lib/article-free-mt.mjs';
 const VERDICT = 'generator/scripts/lib/body2-payload-verdict.mjs';
+const FREE_MT_ENTRY = MANIFEST.files.find((entry) => entry.path === FREE_MT);
 
 // ── 1. Il verdetto puro ────────────────────────────────────────────────────
 
@@ -179,6 +180,15 @@ test('IL FATTO: article-free-mt.mjs importa un modulo che il sito non ha', () =>
   assert.ok(deps.includes(VERDICT), `atteso l'import di ${VERDICT}, trovati: ${deps.join(', ') || '(nessuno)'}`);
   assert.equal(MODE_OF.get(VERDICT), 'corpus-only');
   assert.notEqual(MODE_OF.get(FREE_MT), 'identical', 'una voce con una dipendenza corpus-only non puo\' dirsi `identical`');
+});
+
+test('la scelta adapted registra la fix sito senza dichiararla ancora mancante', () => {
+  assert.equal(FREE_MT_ENTRY?.mode, 'adapted');
+  assert.match(FREE_MT_ENTRY?.adaptationIssue || '', /\/issues\/1034$/);
+  assert.match(FREE_MT_ENTRY?.reason || '', /site PR #9087/);
+  assert.match(FREE_MT_ENTRY?.reason || '', /usable-content-text\.mjs/);
+  assert.match(FREE_MT_ENTRY?.reason || '', /per scelta/);
+  assert.doesNotMatch(FREE_MT_ENTRY?.reason || '', /il sito ne resta senza/);
 });
 
 test('NESSUNA voce `identical` del manifest importa un modulo assente dal sito', () => {

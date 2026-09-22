@@ -32,8 +32,9 @@ on:
 
 permissions:
   actions: write
+  checks: write
   contents: read
-  pull-requests: read
+  pull-requests: write
 
 concurrency:
   group: body-recovery-${{ github.event.pull_request.number }}
@@ -69,7 +70,12 @@ jobs:
             const editedAt = Date.parse(context.payload.pull_request.updated_at || '');
             const pollMs = Number(process.env.BODY_RECOVERY_POLL_MS) || 5000;
             const waitMs = Number(process.env.BODY_RECOVERY_WAIT_MS) || 300000;
+            const retryMs = Number(process.env.BODY_RECOVERY_RETRY_MS) || 1000;
             const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+            // Read the required context from the same trusted source used by
+            // the CI gates; a duplicated literal could block a different
+            // check if the job is ever renamed.
+            const { VITEST_CHECK_NAME } = await import(`${process.env.GITHUB_WORKSPACE}/scripts/ci/lib/constants.mjs`);
             const { data: pr } = await github.rest.pulls.get({ ...repo, pull_number: number });
             if (pr.state !== 'open' || pr.head.sha !== context.payload.pull_request.head.sha) return;
             const runs = await github.paginate(github.rest.actions.listWorkflowRuns, {
@@ -85,6 +91,63 @@ jobs:
               return;
             }
             const getRun = async () => (await github.rest.actions.getWorkflowRun({ ...repo, run_id: latest.id })).data;
+            const revokeNativeAutoMerge = async () => {
+              let lastError;
+              for (let attempt = 1; attempt <= 3; attempt += 1) {
+                try {
+                  // A red recovery job alone does not invalidate the previous
+                  // green required check. Revoke native auto-merge first, when
+                  // it is still enabled, so an unverifiable body cannot merge.
+                  const { data: currentPr } = await github.rest.pulls.get({ ...repo, pull_number: number });
+                  if (currentPr.state !== 'open' || !currentPr.auto_merge) return;
+                  await github.graphql(`
+                    mutation DisablePullRequestAutoMerge($pullRequestId: ID!) {
+                      disablePullRequestAutoMerge(input: { pullRequestId: $pullRequestId }) {
+                        clientMutationId
+                      }
+                    }
+                  `, { pullRequestId: currentPr.node_id });
+                  core.warning(`Native auto-merge revoked for PR #${number} before fail-closed recovery.`);
+                  return;
+                } catch (error) {
+                  lastError = error;
+                  if (attempt < 3) await sleep(retryMs * attempt);
+                }
+              }
+              throw lastError;
+            };
+            const failClosed = async message => {
+              let revokeError;
+              try {
+                await revokeNativeAutoMerge();
+              } catch (error) {
+                revokeError = error;
+              }
+              if (revokeError) {
+                try {
+                  // If the API cannot confirm the revocation, make the
+                  // required check itself fail on this exact head. A red
+                  // recovery job alone would leave the previous green check
+                  // eligible for native auto-merge.
+                  await github.rest.checks.create({
+                    ...repo,
+                    name: VITEST_CHECK_NAME,
+                    head_sha: pr.head.sha,
+                    status: 'completed',
+                    conclusion: 'failure',
+                    output: {
+                      title: 'Body recovery fail-closed',
+                      summary: `Auto-merge revocation could not be confirmed: ${message}`,
+                    },
+                  });
+                  core.warning(`Required check blocked for PR #${number} because native auto-merge revocation failed.`);
+                } catch (checkError) {
+                  core.setFailed(`Recovery could not revoke native auto-merge or block the required check: ${checkError.message}`);
+                  return;
+                }
+              }
+              core.setFailed(message);
+            };
             const settle = async attempt => {
               let run = await getRun();
               for (const deadline = Date.now() + waitMs; run.status !== 'completed'; run = await getRun()) {
@@ -101,8 +164,16 @@ jobs:
             // cancelling our own rerun. Same-second timestamps count as BEFORE
             // the edit (fail-safe: at worst one extra rerun, never a stale
             // verdict).
+            if (!Number.isFinite(editedAt)) {
+              await failClosed(`Edit timestamp non verificabile per PR #${number}; nessun retry cieco.`);
+              return;
+            }
             const startedAt = Date.parse(target.run_started_at || target.created_at || '');
-            if (!Number.isFinite(editedAt) || !Number.isFinite(startedAt) || startedAt > editedAt) {
+            if (!Number.isFinite(startedAt)) {
+              await failClosed(`Run ${target.id} senza timestamp verificabile; nessun retry cieco.`);
+              return;
+            }
+            if (startedAt > editedAt) {
               core.info(`Run ${target.id} started after the edit; it validates the current body.`);
               return;
             }
@@ -115,7 +186,7 @@ jobs:
               }
               target = await settle(target.run_attempt);
               if (!target) {
-                core.warning(`Run ${latest.id} did not settle within the wait; no retry.`);
+                await failClosed(`Run ${latest.id} did not settle within the wait after cancellation; recovery cannot classify it safely.`);
                 return;
               }
             }
@@ -152,6 +223,9 @@ jobs:
                 : reviewOnlyFailure
                   ? 'the review gate failed'
                   : '';
+            } else if (target.conclusion !== 'success') {
+              await failClosed(`Run ${latest.id} has an unverified conclusion (${target.conclusion || 'missing'}); recovery refuses to preserve a stale verdict.`);
+              return;
             }
             if (!retryReason) {
               core.info(`Run ${latest.id} (${target.conclusion}) did not fail on the body or review alone; preserve the existing code verdict.`);

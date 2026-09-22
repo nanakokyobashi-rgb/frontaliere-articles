@@ -1151,6 +1151,35 @@ test('un realign posticipato rifiuta una baseline.site non fresca', () => {
   assert.deepEqual(manifest, before);
 });
 
+test('il realign normalizza hash legacy maiuscoli e digest SHA-256 completi', () => {
+  const manifest = transported();
+  const full = crypto.createHash('sha256').update('scaricato\r\n').digest('hex').toUpperCase();
+  const { corrections, unreadable } = realignFromCommitted(
+    manifest,
+    [{ path: manifest.files[0].path, site: full }],
+    () => Buffer.from('scaricato\r\n'),
+    { requireFreshSite: true },
+  );
+  assert.deepEqual(unreadable, []);
+  assert.deepEqual(corrections, []);
+  assert.equal(manifest.files[0].baseline.corpus, manifest.files[0].baseline.site);
+});
+
+test('il realign continua a rifiutare hash con forma non SHA-256', () => {
+  for (const invalid of ['0'.repeat(15), '0'.repeat(32), '0'.repeat(40), 'g'.repeat(16), '0'.repeat(65)]) {
+    const manifest = transported();
+    const result = realignFromCommitted(
+      manifest,
+      [{ path: manifest.files[0].path, site: invalid }],
+      () => Buffer.from('scaricato\r\n'),
+      { requireFreshSite: true },
+    );
+    assert.deepEqual(result.corrections, [], invalid);
+    assert.equal(result.unreadable.length, 1, invalid);
+    assert.match(result.unreadable[0].reason, /hash site non valida/, invalid);
+  }
+});
+
 test('il path realign tollera CR, slash ridondanti e case diverso senza perdere la diagnosi', () => {
   const manifest = transported({
     baseline: { site: hash16('scaricato\r\n'), corpus: 'stale00000000000' },

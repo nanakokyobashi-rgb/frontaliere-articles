@@ -1201,7 +1201,14 @@ function localHash(rel) {
  *
  * Ritorna `{ corrections, mismatched, normalization, unreadable }`.
  */
-const REALIGN_HASH_RE = /^[0-9a-f]{16}$/;
+const REALIGN_HASH_RE = /^(?:[0-9a-f]{16}|[0-9a-f]{64})$/iu;
+
+/** Normalize the accepted legacy/full SHA-256 forms to the canonical prefix. */
+function normalizeRealignHash(value) {
+  const raw = String(value);
+  if (!REALIGN_HASH_RE.test(raw)) return null;
+  return raw.slice(0, 16).toLowerCase();
+}
 const NORMALIZATION_ATTRIBUTES = new Set([
   'eol',
   'filter',
@@ -1324,7 +1331,8 @@ function resolveRealignRequests(manifest, paths) {
     const suppliedSite = value && typeof value === 'object'
       ? (value.site ?? value.siteHash ?? value.expectedSite ?? null)
       : null;
-    if (suppliedSite !== null && !REALIGN_HASH_RE.test(String(suppliedSite))) {
+    const site = suppliedSite === null ? null : normalizeRealignHash(suppliedSite);
+    if (suppliedSite !== null && site === null) {
       unreadable.push({ path: parsed.path, reason: `hash site non valida: ${String(suppliedSite)}` });
       continue;
     }
@@ -1349,7 +1357,6 @@ function resolveRealignRequests(manifest, paths) {
       continue;
     }
     const entry = matches[0];
-    const site = suppliedSite === null ? null : String(suppliedSite);
     if (requests.has(entry.path)) {
       const previous = requests.get(entry.path);
       if (previous.site !== site) {
