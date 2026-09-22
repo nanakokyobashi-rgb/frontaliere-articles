@@ -952,3 +952,13 @@ test('#972 (gemello): l\'instradamento passa prima della nota, un effetto per ch
     assert.equal(flags.length, 1, `un solo effetto per chiamata, non ${flags.join('+')} in ${argv}`);
   }
 });
+
+test('VISION: il requeue è fail-closed se la label di provenienza non è disponibile', async () => {
+  const fs = await import('node:fs');
+  const src = fs.readFileSync(new URL('../../scripts/ci/needs-human-prepass.mjs', import.meta.url), 'utf8');
+  const start = src.indexOf('const needsVisionApproval =');
+  const guard = src.slice(start, start + 700);
+  assert.match(guard, /if \(needsVisionApproval && !DRY && !visionApproved\)/);
+  assert.match(guard, /continue;/);
+  assert.ok(guard.indexOf('continue;') < guard.indexOf('acted++'));
+});
