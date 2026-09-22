@@ -1249,8 +1249,14 @@ const isImportOnlyBlock = (block) => block.every((line) => (
   || /^\s*\*/.test(line)
 ));
 
-function resolveImportBlock(ours, theirs, importedBindings) {
+function resolveImportBlock(base, ours, theirs, importedBindings) {
   if (!isImportOnlyBlock(ours) || !isImportOnlyBlock(theirs)) return null;
+  // A diff3 hunk is safe only when both sides retain the exact base sequence.
+  // Otherwise one side may have deleted/replaced an import while the other
+  // merely added one; unioning them would silently resurrect removed code.
+  // Two-way hunks have no base evidence and retain the historical import-only
+  // path.
+  if (base !== null && (!additionsAroundBase(base, ours) || !additionsAroundBase(base, theirs))) return null;
   const seenLines = new Set();
   const union = [];
   for (const line of [...ours, ...theirs]) {
@@ -1283,17 +1289,108 @@ function additionsAroundBase(base, side) {
   return gaps;
 }
 
+function decodeJsStringKey(token) {
+  const quote = token[0];
+  const body = token.slice(1, -1);
+  if (quote === '`' && body.includes('${')) return null;
+  let value = '';
+  for (let i = 0; i < body.length; i += 1) {
+    if (body[i] !== '\\') {
+      value += body[i];
+      continue;
+    }
+    const escaped = body[++i];
+    if (escaped === undefined) return null;
+    if (escaped === 'x' && /^[0-9a-f]{2}$/i.test(body.slice(i + 1, i + 3))) {
+      value += String.fromCharCode(Number.parseInt(body.slice(i + 1, i + 3), 16));
+      i += 2;
+    } else if (escaped === 'u' && /^[0-9a-f]{4}$/i.test(body.slice(i + 1, i + 5))) {
+      value += String.fromCharCode(Number.parseInt(body.slice(i + 1, i + 5), 16));
+      i += 4;
+    } else if (escaped === 'n') value += '\n';
+    else if (escaped === 'r') value += '\r';
+    else if (escaped === 't') value += '\t';
+    else if (escaped === 'b') value += '\b';
+    else if (escaped === 'f') value += '\f';
+    else if (escaped === 'v') value += '\v';
+    else if (escaped === '\n') continue;
+    else value += escaped;
+  }
+  return value;
+}
+
+function normalizeJsPropertyKey(token) {
+  const trimmed = token.trim();
+  if (/^[A-Za-z_$][\w$]*$/.test(trimmed)) return trimmed;
+  if (/^(?:'|"|`)/.test(trimmed) && trimmed.at(-1) === trimmed[0]) {
+    return decodeJsStringKey(trimmed);
+  }
+  return null;
+}
+
+/** Return the only top-level comma when the line contains one entry. */
+function singleTopLevelEntryComma(source) {
+  const commas = [];
+  let quote = null;
+  let escaped = false;
+  let paren = 0;
+  let bracket = 0;
+  let brace = 0;
+  for (let i = 0; i < source.length; i += 1) {
+    const character = source[i];
+    const next = source[i + 1];
+    if (quote) {
+      if (escaped) escaped = false;
+      else if (character === '\\') escaped = true;
+      else if (character === quote) quote = null;
+      continue;
+    }
+    if (character === '\'' || character === '"' || character === '`') {
+      quote = character;
+      continue;
+    }
+    if (character === '/' && next === '/') break;
+    if (character === '(') paren += 1;
+    else if (character === ')' && paren > 0) paren -= 1;
+    else if (character === '[') bracket += 1;
+    else if (character === ']' && bracket > 0) bracket -= 1;
+    else if (character === '{') brace += 1;
+    else if (character === '}' && brace > 0) brace -= 1;
+    else if (character === ',' && paren === 0 && bracket === 0 && brace === 0) commas.push(i);
+  }
+  if (commas.length !== 1) return -1;
+  const tail = source.slice(commas[0] + 1).trim();
+  return tail === '' || tail.startsWith('//') ? commas[0] : -1;
+}
+
 function additiveEntryIdentity(line) {
   const trimmed = line.trim();
   if (!trimmed || /^\/\//.test(trimmed) || /^\/\*/.test(trimmed)
       || /^\*/.test(trimmed) || /^\*\//.test(trimmed)) return '';
-  const quoted = /^((?:'(?:\\.|[^'\\])*'|"(?:\\.|[^"\\])*"|`(?:\\.|[^`\\])*`))\s*,(?:\s*\/\/.*)?$/.exec(trimmed);
-  if (quoted) return `value:${quoted[1]}`;
-  const bare = /^([A-Za-z_$][\w$]*)\s*,(?:\s*\/\/.*)?$/.exec(trimmed);
+  const comma = singleTopLevelEntryComma(trimmed);
+  if (comma < 0) return null;
+  const entry = trimmed.slice(0, comma).trim();
+  if (/^(?:'(?:\\.|[^'\\])*'|"(?:\\.|[^"\\])*"|`(?:\\.|[^`\\])*`)$/.test(entry)) {
+    return `value:${decodeJsStringKey(entry)}`;
+  }
+  const bare = /^([A-Za-z_$][\w$]*)$/.exec(entry);
   if (bare) return `value:${bare[1]}`;
-  const property = /^((?:[A-Za-z_$][\w$]*|'(?:\\.|[^'\\])*'|"(?:\\.|[^"\\])*"))\s*:\s*.+,\s*(?:\/\/.*)?$/.exec(trimmed);
-  if (property) return `key:${property[1]}`;
+  const property = /^((?:[A-Za-z_$][\w$]*|'(?:\\.|[^'\\])*'|"(?:\\.|[^"\\])*"|`(?:\\.|[^`\\])*`))\s*:\s*.+$/s.exec(entry);
+  if (property) {
+    const key = normalizeJsPropertyKey(property[1]);
+    return key === null ? null : `key:${key}`;
+  }
   return null;
+}
+
+function seedBaseEntryIdentities(base, identities) {
+  for (const line of base) {
+    const identity = additiveEntryIdentity(line);
+    if (!identity) continue;
+    if (identities.has(identity)) return false;
+    identities.set(identity, { base: true, normalized: line.trim(), gap: -1 });
+  }
+  return true;
 }
 
 function resolveAdditiveEntryBlock(base, ours, theirs) {
@@ -1303,6 +1400,7 @@ function resolveAdditiveEntryBlock(base, ours, theirs) {
   if (!oursGaps || !theirsGaps) return null;
 
   const identities = new Map();
+  if (!seedBaseEntryIdentities(base, identities)) return null;
   const merged = [];
   for (let gap = 0; gap < oursGaps.length; gap++) {
     const seenLines = new Set();
@@ -1312,6 +1410,7 @@ function resolveAdditiveEntryBlock(base, ours, theirs) {
       if (identity === null) return null;
       if (identity) {
         const prior = identities.get(identity);
+        if (prior?.base) return null;
         if (prior && (prior.normalized !== normalized || prior.gap !== gap)) return null;
         if (prior) continue;
         identities.set(identity, { normalized, gap });
@@ -1337,7 +1436,7 @@ function resolveConflictsInText(text, { allowAdditiveEntries }) {
     }
     const hunk = parseConflictHunk(lines, i);
     if (!hunk) return null;
-    let resolved = resolveImportBlock(hunk.ours, hunk.theirs, importedBindings);
+    let resolved = resolveImportBlock(hunk.base, hunk.ours, hunk.theirs, importedBindings);
     if (resolved === null && allowAdditiveEntries) {
       resolved = resolveAdditiveEntryBlock(hunk.base, hunk.ours, hunk.theirs);
     }

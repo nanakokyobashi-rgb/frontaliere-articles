@@ -89,6 +89,58 @@ test('#606 rifiuta modifiche, statement liberi e collisioni di chiave', () => {
   }
 });
 
+test('#606 non riunisce import quando un lato modifica o cancella il base', () => {
+  const conflicted = [
+    '<<<<<<< HEAD',
+    "import { replacement } from './replacement.mjs';",
+    '||||||| base',
+    "import { shared } from './shared.mjs';",
+    '=======',
+    "import { shared } from './shared.mjs';",
+    "import { addition } from './addition.mjs';",
+    '>>>>>>> origin/main',
+    '',
+  ].join('\n');
+
+  assert.equal(resolveSafeTextConflictsInText(conflicted), null);
+});
+
+test('#606 rifiuta collisioni con chiavi già nel base o con sintassi equivalente', () => {
+  const cases = [
+    [
+      '<<<<<<< HEAD',
+      '  existing: 1,',
+      '||||||| base',
+      '  existing: 1,',
+      '=======',
+      '  existing: 2,',
+      '>>>>>>> origin/main',
+    ],
+    [
+      '<<<<<<< HEAD',
+      '  foo: 1,',
+      '||||||| base',
+      '  stable: 0,',
+      '=======',
+      '  "foo": 2,',
+      '>>>>>>> origin/main',
+    ],
+    [
+      '<<<<<<< HEAD',
+      '  foo: 1, bar: 2,',
+      '||||||| base',
+      '  stable: 0,',
+      '=======',
+      '  baz: 3,',
+      '>>>>>>> origin/main',
+    ],
+  ];
+
+  for (const lines of cases) {
+    assert.equal(resolveSafeTextConflictsInText(lines.join('\n')), null);
+  }
+});
+
 test('#606 il merge usa diff3 e il fallback resta fail-closed', () => {
   const source = readFileSync(SOURCE, 'utf8');
   assert.equal(
