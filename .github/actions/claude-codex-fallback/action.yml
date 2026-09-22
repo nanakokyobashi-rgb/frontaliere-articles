@@ -1248,8 +1248,9 @@ runs:
           }
           const item = event?.item;
           const command = typeof item?.command === 'string' ? item.command : '';
-          const isReviewCommand = /^\/bin\/bash -lc ["']gh\s+pr\s+review\b/u.test(command)
-            || /^gh\s+pr\s+review\b/u.test(command);
+          // Codex may prepare the review body in the same shell command before
+          // invoking gh, so accept a shell command boundary as well as argv 0.
+          const isReviewCommand = /(?:^|[;&|]\s*|["'])gh\s+pr\s+review\b/u.test(command);
           if (event?.type === 'item.completed'
               && item?.type === 'command_execution'
               && item?.exit_code === 0

@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import {
   CORPUS_REPOSITORY,
@@ -314,6 +315,17 @@ test('la review Codex esporta eventi strutturati anche quando il processo fallis
   assert.doesNotMatch(action, /codex_exec_timeout_seconds=900/);
   assert.match(testsWorkflow, /CODEX_DURATION_MS:-0\}.*-ge 1800000/u);
   assert.doesNotMatch(testsWorkflow, /CODEX_DURATION_MS:-0\}.*-ge 900000/u);
+});
+
+test('il detector Codex riconosce gh pr review dopo la preparazione del body', () => {
+  const detectorSource = action.match(/const isReviewCommand = (\/.*\/u)\.test\(command\);/u)?.[1];
+  assert.ok(detectorSource, 'detector del comando gh pr review non trovato');
+  const detector = vm.runInNewContext(detectorSource);
+  assert.equal(
+    detector.test("review_body='...'; gh pr review 1707 --comment --body \"$review_body\""),
+    true,
+  );
+  assert.equal(detector.test('gh pr review 1707 --comment --body "$review_body"'), true);
 });
 
 test('la review Codex espone solo telemetry aggregata e conserva il cap di 45 minuti', () => {

@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "dateIso": "2026-09-21",
+  "dateIso": "2026-09-22",
   "blocks": {
     "borderWait": {
       "degradedEditions": 0
     },
     "fuel": {
-      "degradedEditions": 3
+      "degradedEditions": 4
     },
     "exchange": {
       "degradedEditions": 0
