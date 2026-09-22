@@ -56,6 +56,22 @@ test('classifica quoting, wrapping e nomi workflow con spazi senza allargare il 
   });
 });
 
+test('normalizza ANSI e decodifica pathname C-quotati prima del confronto', () => {
+  const cQuoted = 'remote: error: refusing to allow a GitHub App to create or update workflow ".github/workflows/release\\303\\244\\040candidate\\".yml" without workflows permission.';
+  assert.deepEqual(classifyWorkflowPushFailure('\u001b[31m' + cQuoted + '\u001b[0m'), {
+    kind: 'workflow-permission',
+    fallback: true,
+    rejectedPaths: ['.github/workflows/releaseä candidate".yml'],
+  });
+  assert.deepEqual(classifyWorkflowPushFailure(
+    'remote: error: refusing to allow a GitHub App to create or update workflow ".github/workflows/bad\\303.yml" without workflows permission.',
+  ), {
+    kind: 'other',
+    fallback: false,
+    rejectedPaths: [],
+  });
+});
+
 test('un errore diverso, anche su un workflow, non abilita il fallback', () => {
   const outputs = [
     'remote: error: GH006: Protected branch update failed',

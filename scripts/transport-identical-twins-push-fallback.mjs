@@ -10,7 +10,73 @@
 import fs from 'node:fs';
 
 const WORKFLOW_PREFIX = '.github/workflows/';
-const WORKFLOW_REFUSAL_RE = /refusing\s+to\s+allow\s+a\s+GitHub\s+App\s+to\s+create\s+or\s+update\s+workflow\s+(?:(?<quote>[`'\"])(?<quotedPath>\.github\/workflows\/[^`'\"\r\n]+)\k<quote>|(?<barePath>\.github\/workflows\/[^\s`'\"]+))\s+without\s+[`'\"]?workflows[`'\"]?\s+permission/gi;
+const ANSI_ESCAPE_RE = /\u001B(?:\[[0-?]*[ -/]*[@-~]|\][^\u0007]*(?:\u0007|\u001B\\))/g;
+const WORKFLOW_REFUSAL_RE = /refusing\s+to\s+allow\s+a\s+GitHub\s+App\s+to\s+create\s+or\s+update\s+workflow\s+(?:(?<quote>[`'\"])(?<quotedPath>\.github\/workflows\/(?:\\[^\r\n]|(?!\k<quote>)[^\\\r\n])+)\k<quote>|(?<barePath>\.github\/workflows\/[^\s`'\"]+))\s+without\s+[`'\"]?workflows[`'\"]?\s+permission/gi;
+
+const C_STYLE_ESCAPES = Object.freeze({
+  a: '\x07',
+  b: '\b',
+  f: '\f',
+  n: '\n',
+  r: '\r',
+  t: '\t',
+  v: '\v',
+  '\\': '\\',
+  '"': '"',
+  "'": "'",
+});
+
+/** Decode the C-style path quoting emitted by Git for unusual pathnames. */
+function decodeGitQuotedPath(value) {
+  const bytes = [];
+  for (let index = 0; index < value.length;) {
+    if (value[index] !== '\\') {
+      const codePoint = value.codePointAt(index);
+      const character = String.fromCodePoint(codePoint);
+      bytes.push(...Buffer.from(character));
+      index += character.length;
+      continue;
+    }
+
+    const rest = value.slice(index + 1);
+    const octal = /^[0-7]{1,3}/.exec(rest)?.[0];
+    if (octal) {
+      const byte = Number.parseInt(octal, 8);
+      if (byte > 0xff) return null;
+      bytes.push(byte);
+      index += 1 + octal.length;
+      continue;
+    }
+
+    const escaped = value[index + 1];
+    if (escaped && Object.prototype.hasOwnProperty.call(C_STYLE_ESCAPES, escaped)) {
+      bytes.push(...Buffer.from(C_STYLE_ESCAPES[escaped]));
+      index += 2;
+      continue;
+    }
+    if (escaped === 'x' && /^[0-9a-f]{2}/i.test(rest.slice(1))) {
+      bytes.push(Number.parseInt(rest.slice(1, 3), 16));
+      index += 4;
+      continue;
+    }
+
+    const codePoint = value.codePointAt(index + 1);
+    if (codePoint === undefined) {
+      bytes.push(0x5c);
+      index += 1;
+      continue;
+    }
+    const character = String.fromCodePoint(codePoint);
+    bytes.push(...Buffer.from('\\' + character));
+    index += 1 + character.length;
+  }
+
+  try {
+    return new TextDecoder('utf-8', { fatal: true }).decode(Uint8Array.from(bytes));
+  } catch {
+    return null;
+  }
+}
 
 export function isWorkflowPath(rel) {
   return typeof rel === 'string' && rel.startsWith(WORKFLOW_PREFIX) && rel.length > WORKFLOW_PREFIX.length;
@@ -22,9 +88,15 @@ function sortedUnique(paths) {
 
 /** Classifica solo il rifiuto GitHub osservato; ogni altro errore resta rosso. */
 export function classifyWorkflowPushFailure(output) {
+  // Git may color remote errors. Remove terminal controls before matching while
+  // preserving the acceptance call below for the canonical refusal signature.
+  output = String(output ?? '').replace(ANSI_ESCAPE_RE, '');
   const rejectedPaths = [];
   for (const match of String(output ?? '').matchAll(WORKFLOW_REFUSAL_RE)) {
-    const rel = match.groups?.quotedPath ?? match.groups?.barePath;
+    const rawPath = match.groups?.quotedPath;
+    const rel = rawPath === undefined
+      ? match.groups?.barePath
+      : decodeGitQuotedPath(rawPath);
     if (isWorkflowPath(rel)) rejectedPaths.push(rel);
   }
   const paths = sortedUnique(rejectedPaths);
