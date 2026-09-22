@@ -80,13 +80,16 @@ export const NON_VERDICT_CONCLUSIONS = new Set(['cancelled']);
 
 /**
  * Il verdetto di `generator-ci` sulla head: come
- * `latestCompletedConclusionByName`, ma i check-run che non portano un verdetto
- * (`NON_VERDICT_CONCLUSIONS`) non partecipano alla selezione.
+ * `latestCompletedConclusionByName`, ma una conclusione che non porta un
+ * verdetto (`NON_VERDICT_CONCLUSIONS`) viene restituita come attesa. La run
+ * cancellata PARTECIPA alla selezione della generazione: scartarla prima
+ * permetterebbe a un `success` stantio di vincere sul replacement più recente.
  *
- * Scartarli PRIMA di prendere «l'ultimo completato» e' quel che rende la
- * funzione invariante all'ordine di atterraggio: un `cancelled` che arriva dopo
- * un `success` non lo sovrascrive, e un `cancelled` che arriva prima non
- * anticipa un verdetto che deve ancora concludere.
+ * Il selettore generazionale decide prima quale run è corrente. Solo dopo la
+ * selezione una cancellazione viene convertita in `''`: un `cancelled` che
+ * arriva dopo un `success` non può quindi riutilizzare il verdetto vecchio, e
+ * un `cancelled` che arriva prima non anticipa un verdetto che deve ancora
+ * concludere.
  *
  * @param {Array<{name?: string, status?: string, conclusion?: string, completed_at?: string}>} checkRuns
  * @param {string} name
@@ -94,10 +97,19 @@ export const NON_VERDICT_CONCLUSIONS = new Set(['cancelled']);
  *   o '' se nessun verdetto e' ancora atterrato (il chiamante attende).
  */
 export function generatorCiVerdict(checkRuns, name) {
-  const withVerdict = Array.isArray(checkRuns)
-    ? checkRuns.filter((c) => !NON_VERDICT_CONCLUSIONS.has(c?.conclusion))
-    : [];
-  return latestCompletedConclusionByName(withVerdict, name);
+  const conclusion = latestCompletedConclusionByName(checkRuns, name);
+  if (!NON_VERDICT_CONCLUSIONS.has(conclusion)) return conclusion;
+
+  // Una cancellazione rende stantio un success precedente, ma non deve
+  // mascherare una failure gia' osservata: mantenere il rosso conserva il
+  // comportamento fail-closed del gate mentre si attende un replacement.
+  const previousConclusion = latestCompletedConclusionByName(
+    Array.isArray(checkRuns)
+      ? checkRuns.filter((checkRun) => !NON_VERDICT_CONCLUSIONS.has(checkRun?.conclusion))
+      : [],
+    name,
+  );
+  return previousConclusion && previousConclusion !== 'success' ? previousConclusion : '';
 }
 
 const REPO = process.env.GITHUB_REPOSITORY || '';
