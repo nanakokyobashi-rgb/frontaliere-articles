@@ -32,6 +32,7 @@ on:
 
 permissions:
   actions: write
+  checks: write
   contents: read
   pull-requests: write
 
@@ -69,6 +70,7 @@ jobs:
             const editedAt = Date.parse(context.payload.pull_request.updated_at || '');
             const pollMs = Number(process.env.BODY_RECOVERY_POLL_MS) || 5000;
             const waitMs = Number(process.env.BODY_RECOVERY_WAIT_MS) || 300000;
+            const retryMs = Number(process.env.BODY_RECOVERY_RETRY_MS) || 1000;
             const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
             const { data: pr } = await github.rest.pulls.get({ ...repo, pull_number: number });
             if (pr.state !== 'open' || pr.head.sha !== context.payload.pull_request.head.sha) return;
@@ -85,20 +87,60 @@ jobs:
               return;
             }
             const getRun = async () => (await github.rest.actions.getWorkflowRun({ ...repo, run_id: latest.id })).data;
-            const failClosed = async message => {
-              // A red recovery job alone does not invalidate the previous
-              // green required check. Revoke native auto-merge first, when
-              // it is still enabled, so an unverifiable body cannot merge.
-              const { data: currentPr } = await github.rest.pulls.get({ ...repo, pull_number: number });
-              if (currentPr.state === 'open' && currentPr.auto_merge) {
-                await github.graphql(`
-                  mutation DisablePullRequestAutoMerge($pullRequestId: ID!) {
-                    disablePullRequestAutoMerge(input: { pullRequestId: $pullRequestId }) {
-                      clientMutationId
+            const revokeNativeAutoMerge = async () => {
+              let lastError;
+              for (let attempt = 1; attempt <= 3; attempt += 1) {
+                try {
+                  // A red recovery job alone does not invalidate the previous
+                  // green required check. Revoke native auto-merge first, when
+                  // it is still enabled, so an unverifiable body cannot merge.
+                  const { data: currentPr } = await github.rest.pulls.get({ ...repo, pull_number: number });
+                  if (currentPr.state !== 'open' || !currentPr.auto_merge) return;
+                  await github.graphql(`
+                    mutation DisablePullRequestAutoMerge($pullRequestId: ID!) {
+                      disablePullRequestAutoMerge(input: { pullRequestId: $pullRequestId }) {
+                        clientMutationId
+                      }
                     }
-                  }
-                `, { pullRequestId: currentPr.node_id });
-                core.warning(`Native auto-merge revoked for PR #${number} before fail-closed recovery.`);
+                  `, { pullRequestId: currentPr.node_id });
+                  core.warning(`Native auto-merge revoked for PR #${number} before fail-closed recovery.`);
+                  return;
+                } catch (error) {
+                  lastError = error;
+                  if (attempt < 3) await sleep(retryMs * attempt);
+                }
+              }
+              throw lastError;
+            };
+            const failClosed = async message => {
+              let revokeError;
+              try {
+                await revokeNativeAutoMerge();
+              } catch (error) {
+                revokeError = error;
+              }
+              if (revokeError) {
+                try {
+                  // If the API cannot confirm the revocation, make the
+                  // required check itself fail on this exact head. A red
+                  // recovery job alone would leave the previous green check
+                  // eligible for native auto-merge.
+                  await github.rest.checks.create({
+                    ...repo,
+                    name: 'tests (node --test)',
+                    head_sha: pr.head.sha,
+                    status: 'completed',
+                    conclusion: 'failure',
+                    output: {
+                      title: 'Body recovery fail-closed',
+                      summary: `Auto-merge revocation could not be confirmed: ${message}`,
+                    },
+                  });
+                  core.warning(`Required check blocked for PR #${number} because native auto-merge revocation failed.`);
+                } catch (checkError) {
+                  core.setFailed(`Recovery could not revoke native auto-merge or block the required check: ${checkError.message}`);
+                  return;
+                }
               }
               core.setFailed(message);
             };

@@ -13,6 +13,7 @@ const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
 // The workflow waits for a cancelled run to settle; keep the wait instant here.
 process.env.BODY_RECOVERY_POLL_MS = '1';
 process.env.BODY_RECOVERY_WAIT_MS = '50';
+process.env.BODY_RECOVERY_RETRY_MS = '1';
 process.env.GITHUB_WORKSPACE = fileURLToPath(new URL('../..', import.meta.url));
 const GOOD_BODY = '## Implementato\n\n- una modifica reale e descritta\n\n## Non implementato (ancora)\n\nNessuno.\n';
 let prBody = GOOD_BODY;
@@ -23,11 +24,12 @@ const AFTER_EDIT = '2026-09-19T12:01:00Z';
 
 // `later`: fields the run takes on successive getWorkflowRun reads (the
 // first read is the script's re-read of the listed run).
-async function recover(bodyConclusion, status = 'completed', failedSteps = [], later = [], runOverrides = {}, cancelError = null, autoMerge = null, editTimestamp = EDITED_AT) {
+async function recover(bodyConclusion, status = 'completed', failedSteps = [], later = [], runOverrides = {}, cancelError = null, autoMerge = null, editTimestamp = EDITED_AT, graphqlError = null, checkError = null) {
   const reruns = [];
   const cancels = [];
   const failures = [];
   const autoMergeRevokes = [];
+  const requiredCheckBlocks = [];
   const run = {
     id: 42, run_attempt: 1, status, conclusion: status === 'completed' ? 'failure' : null,
     head_branch: 'feature', event: 'pull_request', run_started_at: BEFORE_EDIT, ...runOverrides,
@@ -51,8 +53,17 @@ async function recover(bodyConclusion, status = 'completed', failedSteps = [], l
         },
         reRunWorkflow: async ({ run_id }) => { reruns.push(run_id); },
       },
+      checks: {
+        create: async ({ name, head_sha, status, conclusion }) => {
+          if (checkError) throw checkError;
+          requiredCheckBlocks.push({ name, head_sha, status, conclusion });
+        },
+      },
     },
-    graphql: async (_query, variables) => { autoMergeRevokes.push(variables.pullRequestId); },
+    graphql: async (_query, variables) => {
+      if (graphqlError) throw graphqlError;
+      autoMergeRevokes.push(variables.pullRequestId);
+    },
     // Like the Jobs API: a step has no conclusion until the run gets there.
     paginate: async endpoint => endpoint === 'runs' ? [{ ...run }] : [{
       conclusion: run.status === 'completed' && failedSteps.length ? 'failure' : null,
@@ -69,6 +80,7 @@ async function recover(bodyConclusion, status = 'completed', failedSteps = [], l
   recover.lastCancels = cancels;
   recover.lastFailures = failures;
   recover.lastAutoMergeRevokes = autoMergeRevokes;
+  recover.lastRequiredCheckBlocks = requiredCheckBlocks;
   return reruns;
 }
 
@@ -87,8 +99,10 @@ test('body edits re-enter through the trusted recovery, not through a tests.yml 
   assert.ok(tests.indexOf('nessuna seconda review, anche dopo un body edit') < tests.indexOf('if [ -z "$changed" ]'));
   assert.match(recovery, /pull_request_target:\n    types: \[edited\]/);
   assert.match(recovery, /pull-requests: write/);
+  assert.match(recovery, /checks: write/);
   assert.match(recovery, /disablePullRequestAutoMerge/);
-  assert.equal((recovery.match(/core\.setFailed/g) || []).length, 1);
+  assert.match(recovery, /github\.rest\.checks\.create/);
+  assert.equal((recovery.match(/core\.setFailed/g) || []).length, 2);
   assert.doesNotMatch(recovery, /createCheckRun/);
   // The only checkout is the trusted base (pull_request_target default ref),
   // sparse on the evaluator, without credentials: never the PR head.
@@ -224,6 +238,19 @@ test('every fail-closed exit revokes native auto-merge before turning red', asyn
   );
   assert.deepEqual(recover.lastAutoMergeRevokes, ['PR_node']);
   assert.match(recover.lastFailures[0], /Edit timestamp/);
+});
+
+test('a revocation API failure blocks the required check on the exact head', async () => {
+  const revokeError = Object.assign(new Error('GraphQL temporarily unavailable'), { status: 502 });
+  assert.deepEqual(
+    await recover('success', 'completed', [], [], { run_started_at: undefined }, null, { enabled_by: 'bot' }, EDITED_AT, revokeError),
+    [],
+  );
+  assert.deepEqual(recover.lastAutoMergeRevokes, []);
+  assert.deepEqual(recover.lastRequiredCheckBlocks, [{
+    name: 'tests (node --test)', head_sha: 'head', status: 'completed', conclusion: 'failure',
+  }]);
+  assert.match(recover.lastFailures[0], /timestamp/);
 });
 
 test('only a run of this PR branch and a PR-bound event is a target', async () => {
