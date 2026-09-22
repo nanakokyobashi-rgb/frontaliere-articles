@@ -131,6 +131,7 @@ test('ogni consumer critico re-inietta il token runtime nel comando che muta Git
     'issue-fix.yml': /SITE_TOKEN="\$\{GITHUB_PAT:-\}" node scripts\/ci\/handoff-to-site\.mjs/,
     'issue-triage.yml': /GITHUB_PAT="\$runtime_pat" node scripts\/ci\/triage-sweep\.mjs/,
     'pr-autorebase.yml': /GH_TOKEN="\$runtime_pat" node scripts\/ci\/pr-autorebase\.mjs/,
+    'review-quota-rescuer.yml': /GH_TOKEN="\$runtime_pat" node scripts\/ci\/review-quota-rescuer\.mjs/,
     'pr-redcheck-fixer.yml': /push_token="\$\{GITHUB_PAT_NANAKO:-\}"/,
     // Il re-queue di recycle deve passare il sender gate di issue-fix: PAT
     // con identita' verificata, non l'App token (frontaliere-automation[bot]).
@@ -164,6 +165,10 @@ test('i consumer che puliscono runtime_pat conservano l’exit status del comand
   assert.match(autorebase, /GH_TOKEN="\$runtime_pat" node scripts\/ci\/pr-autorebase\.mjs\n\s+rc=\$\?/);
   assert.match(autorebase, /unset runtime_pat\n\s+exit "\$rc"/,
     'pr-autorebase: unset non deve mascherare un errore del consumer');
+
+  const rescuer = source('review-quota-rescuer.yml');
+  assert.match(rescuer, /GH_TOKEN="\$runtime_pat" node scripts\/ci\/review-quota-rescuer\.mjs\n\s+rc=\$\?\n\s+unset runtime_pat\n\s+exit "\$rc"/,
+    'review-quota-rescuer: unset non deve mascherare il fallimento della probe o del rerun');
 });
 
 test('la sonda del repo e le regex esportate restano allineate', () => {

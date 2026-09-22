@@ -6,6 +6,13 @@ name: Review quota rescuer (zero-Claude)
 # grafo quando il consumer termina: non crea commit, non invoca Claude e non
 # tocca PR senza un claim/marker deterministico. Il percorso transient è
 # one-shot per PR + HEAD + body revision e rilancia soltanto `tests`.
+#
+# Le letture e le mutazioni del rescuer usano l'identità operativa del corpus,
+# `GITHUB_PAT_NANAKO`, caricata dal solo ponte Remote Config. Il token automatico
+# dell'installation (`secrets.GITHUB_TOKEN`) ha una quota separata e può
+# rispondere 403 già sulla probe read-only (#1623), lasciando il retry non
+# verificato. Il passaggio avviene dalla shell dopo `$GITHUB_ENV`: il contesto
+# YAML `env.*` viene valutato prima che il loader renda disponibile il valore.
 on:
   workflow_run:
     workflows:
@@ -63,15 +70,46 @@ jobs:
           fetch-depth: 1
           sparse-checkout: |
             scripts/ci
+            generator/scripts/load-rc-env.mjs
+            generator/scripts/lib/google-service-account-token.mjs
 
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
           node-version: '22'
 
+      - name: Prepare Firebase credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$FIREBASE_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > /tmp/firebase-sa.json
+            echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/firebase-sa.json" >> "$GITHUB_ENV"
+          else
+            echo "::error::FIREBASE_SERVICE_ACCOUNT_JSON non configurato — impossibile caricare il PAT operativo da Remote Config."
+            exit 1
+          fi
+
+      - name: Load secrets from Remote Config
+        continue-on-error: true
+        run: node generator/scripts/load-rc-env.mjs
+
       - name: Retry deferred/transient reviews (deterministic, zero-Claude)
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           DRY_RUN: ${{ github.event.inputs.dry_run }}
-        run: node scripts/ci/review-quota-rescuer.mjs
+        run: |
+          set -uo pipefail
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          if [ -z "$runtime_pat" ]; then
+            echo "::error::GITHUB_PAT_NANAKO mancante dopo il caricamento Remote Config — rescuer fermato fail-closed, senza fallback su GITHUB_TOKEN."
+            exit 1
+          fi
+          GH_TOKEN="$runtime_pat" node scripts/ci/review-quota-rescuer.mjs
+          rc=$?
+          unset runtime_pat
+          exit "$rc"
+
+      - name: Cleanup Firebase credentials
+        if: always()
+        run: rm -f /tmp/firebase-sa.json
