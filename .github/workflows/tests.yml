@@ -95,10 +95,11 @@ on:
 
 # Union dei permessi dei tre workflow fusi qui dentro: i test non ne chiedevano
 # (default), `pr-body-contract` scriveva la sticky sulla PR, la review posta il
-# proprio verdetto e i commenti di diagnosi.
+# proprio verdetto, e il re-review guard legge lo storico dei check-run.
 permissions:
   contents: read
   actions: read
+  checks: read
   pull-requests: write
   issues: write
   id-token: write
@@ -661,6 +662,38 @@ jobs:
             echo "contribution_fingerprint=$claimFingerprint" >> "$GITHUB_OUTPUT"
           }
 
+          # A Codex verdict is durable only when a successful pull_request run
+          # of this workflow closed the review gate for the same PR and SHA.
+          # Looking at a check name on a commit alone is insufficient: the
+          # same SHA can have a workflow_dispatch run, belong to another PR,
+          # or have an earlier green attempt followed by a failed retry.
+          codex_review_has_green_pull_request_run() {
+            local reviewed_sha="$1"
+            local reviewed_at="${2:-}"
+            local run_history=''
+            if [ -z "$reviewed_at" ]; then
+              return 1
+            fi
+            if ! run_history=$(gh api --paginate --slurp \
+              "repos/$REPO/actions/runs?head_sha=$reviewed_sha&event=pull_request&per_page=100" 2>/dev/null); then
+              return 2
+            fi
+            if ! printf '%s' "$run_history" | jq -e --arg reviewed_sha "$reviewed_sha" --arg pr_number "$PR_NUMBER" --arg reviewed_at "$reviewed_at" '
+              type == "array"
+              and all(.[]; (.workflow_runs | type == "array"))
+              and ([ .[]?.workflow_runs[]?
+                | select(.path == ".github/workflows/tests.yml")
+                | select(.event == "pull_request")
+                | select(.head_sha == $reviewed_sha)
+                | select(.status == "completed" and .conclusion == "success")
+                | select(any(.pull_requests[]?; ((.number // "") | tostring) == $pr_number))
+                | select((.updated_at // "") >= $reviewed_at)
+              ] | length > 0)
+            ' >/dev/null 2>&1; then
+              return 1
+            fi
+          }
+
           # Count every terminal APPROVING managed review on this HEAD only
           # when it authenticates the exact current PR-body revision. A bare
           # HEAD match or an older single marker is not enough: a body edit
@@ -692,10 +725,71 @@ jobs:
                else 0
                end'
           )
-          if [ "${same_head:-0}" -gt 0 ]; then
+
+          # The same-head fast path must not hide an unproven Codex LGTM. The
+          # historical proof is deliberately computed before the early exit;
+          # otherwise a failed run that posted a review leaves the PR blocked
+          # forever while every retry keeps skipping Codex.
+          same_head_last_is_codex_raw=$(printf '%s' "$reviews" | jq -r --arg head "$HEAD_SHA" --arg revision "$REVIEW_REVISION" '
+            def has_current_revision($expected):
+              [((.body // "") | split("\n")[] | rtrimstr("\r")
+                | select(test("^<!-- REVIEW_INPUT_REVISION: body:[0-9a-f]{64} -->$"; "i"))
+                | capture("^<!-- REVIEW_INPUT_REVISION: (?<revision>body:[0-9a-f]{64}) -->$"; "i").revision
+                | ascii_downcase)] | unique as $revisions
+              | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
+            def has_clean_lgtm:
+              (any((.body // "") | split("\n")[];
+                test("^[[:space:]]{0,3}##[[:space:]]+LGTM[[:space:]]*$")))
+              and (((.body // "")
+                | test("🔴[[:space:]]*\\*{0,2}[[:space:]]*Important[[:space:]]*\\*{0,2}[[:space:]]*[:—-]")) | not);
+            [flatten[]
+             | select((.state // "") != "PENDING")
+             | select(
+                 (((.user.login // "") | ascii_downcase) == "claude[bot]")
+                 or (((.user.login // "") | ascii_downcase) == "frontaliere-automation[bot]")
+                 or ((((.user.login // "") | ascii_downcase) == "github-actions[bot]")
+                     and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
+               )
+             | select(has_current_revision($revision))
+             | select(.commit_id == $head)]
+             | sort_by([(.submitted_at // .created_at // ""), ((.id // 0) | tonumber? // 0)])
+             | if length == 0 then "false"
+               elif (.[-1] | ((.state == "COMMENTED" or .state == "APPROVED") and has_clean_lgtm)) then
+                 (.[-1]
+                  | if (
+                       (((.user.login // "") | ascii_downcase) == "github-actions[bot]")
+                       or (((.user.login // "") | ascii_downcase) == "frontaliere-automation[bot]")
+                     )
+                     and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->"))
+                     then [ "true", (.submitted_at // .created_at // "") ] | @tsv
+                     else "false" end)
+              else "false"
+              end' 2>/dev/null || true)
+          same_head_last_is_codex_raw="${same_head_last_is_codex_raw:-false}"
+          same_head_last_reviewed_at="${same_head_last_is_codex_raw#*$'\t'}"
+          same_head_last_is_codex="${same_head_last_is_codex_raw%%$'\t'*}"
+          unproven_codex_same_head=false
+          if [ "${same_head:-0}" -gt 0 ] && [ "$same_head_last_is_codex" = 'true' ]; then
+            if codex_review_has_green_pull_request_run "$HEAD_SHA" "$same_head_last_reviewed_at"; then
+              :
+            else
+              proof_status=$?
+              unproven_codex_same_head=true
+              if [ "$proof_status" -eq 2 ]; then
+                echo "::warning::Storico run della review Codex illeggibile → review piena (conservativa)."
+              else
+                echo "Review Codex sulla stessa HEAD senza una run pull_request verde e verificabile → review piena."
+              fi
+            fi
+          fi
+
+          if [ "${same_head:-0}" -gt 0 ] && [ "$unproven_codex_same_head" != 'true' ]; then
             echo "skip=true" >> "$GITHUB_OUTPUT"
             echo "Esiste gia' una review approvante del reviewer sulla HEAD $HEAD_SHA per la revisione body corrente → nessuna seconda review, anche dopo un body edit."
             exit 0
+          fi
+          if [ "${same_head:-0}" -gt 0 ]; then
+            echo "La review approvante sulla HEAD è Codex ma non ha una prova storica verde → il guard non salta Codex."
           fi
 
           # Un body corretto sulla STESSA HEAD dopo un verdetto non approvante
@@ -722,7 +816,7 @@ jobs:
           # Ordine voluto: il LGTM pulito sulla revisione corrente vince sempre
           # (il ramo sopra), poi il body corretto. Cosi' un body edit non puo'
           # mai riaprire una review gia' approvata su quello stesso body.
-          if [ "${body_rereview:-false}" = 'true' ]; then
+          if [ "${body_rereview:-false}" = 'true' ] && [ "$unproven_codex_same_head" != 'true' ]; then
             set_claim_fingerprint
             {
               echo "skip=false"
@@ -737,6 +831,9 @@ jobs:
           # precedente, il suo compare potrebbe classificare il delta come
           # solo content/data e saltare Claude proprio dopo una correzione del
           # contratto; in quel caso si deve ripartire da una review piena.
+          # Keep the selected review and its identity together: the carry-forward
+          # proof must describe the same review that supplies `last`, not an
+          # older Codex review on the same body.
           last=$(printf '%s' "$reviews" | jq -r --arg revision "$REVIEW_REVISION" '
             def has_current_revision($expected):
               [((.body // "") | split("\n")[] | rtrimstr("\r")
@@ -752,10 +849,52 @@ jobs:
                      and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
                )
              | select(has_current_revision($revision))
-            ] | sort_by(.id // 0) | last | .commit_id // empty' 2>/dev/null || true)
+            ] | sort_by(.id // 0) | last
+            | if . == null then ""
+              else [(.commit_id // ""),
+                    (if (
+                          (((.user.login // "") | ascii_downcase) == "github-actions[bot]")
+                          or (((.user.login // "") | ascii_downcase) == "frontaliere-automation[bot]")
+                        )
+                        and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->"))
+                     then "true" else "false" end),
+                    (.submitted_at // .created_at // "")] | @tsv
+              end' 2>/dev/null || true)
+          last_review_metadata="${last#*$'\t'}"
+          last="${last%%$'\t'*}"
+          last_review_is_codex="${last_review_metadata%%$'\t'*}"
+          last_review_submitted_at="${last_review_metadata#*$'\t'}"
           if [ -z "$last" ]; then
             set_claim_fingerprint
             echo "skip=false" >> "$GITHUB_OUTPUT"; echo "Nessuna review terminale precedente → review piena."; exit 0
+          fi
+          # A Codex review has no durable evidence file after its run. The
+          # review gate therefore accepts its carry-forward only when a
+          # successful pull_request run of this workflow, updated after the
+          # review was posted, proved the reviewed PR and SHA. If that proof is
+          # missing (for example because the old review run failed after
+          # posting the review), force a fresh Codex review instead of skipping
+          # into a gate that can never accept stale evidence.
+          if [ "$last_review_is_codex" = 'true' ]; then
+            if codex_review_has_green_pull_request_run "$last" "$last_review_submitted_at"; then
+              :
+            else
+              proof_status=$?
+              set_claim_fingerprint
+              echo "skip=false" >> "$GITHUB_OUTPUT"
+              if [ "$proof_status" -eq 2 ]; then
+                echo "::warning::Storico run della review Codex illeggibile → review piena (conservativa)."
+              else
+                echo "Review Codex senza una run pull_request verde per la stessa PR e HEAD → review piena."
+              fi
+              exit 0
+            fi
+          fi
+          if [ "$unproven_codex_same_head" = 'true' ]; then
+            set_claim_fingerprint
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+            echo "La review Codex approvante sulla stessa HEAD non è stata chiusa da una run pull_request verde → review piena."
+            exit 0
           fi
           compare_json=''
           if ! compare_json=$(gh api "repos/$REPO/compare/$last...$HEAD_SHA" 2>/dev/null); then
