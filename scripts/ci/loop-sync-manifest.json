@@ -460,11 +460,11 @@
     {
       "path": "scripts/ci/pr-autorebase.mjs",
       "mode": "adapted",
-      "reason": "La discovery paginata e la decisione tri-state di conflitto sono comuni e fail-closed, ma i call-site restano adattati ai due contratti esterni: il sito invoca `tests.yml` con `workflow_dispatch -f pr_number=...` per risolvere la PR e avviare test+review sulla head, mentre il corpus conserva il dispatch `--ref` test-only del ramo needs-human/carry-forward. Il corpus inoltre fissa la revisione body con `currentReviewInputContext`/`reviewInputContextStillCurrent` e `review-test-policy.mjs`, e il suo `tests.yml` mantiene input `pr_number`/`head_sha`, guard body+review ed eventi lifecycle; il sito usa il proprio body-edit retry e i check names locali in constants. Non copiare il file byte-per-byte: ogni lato conserva il proprio percorso PR/body/review e il nome del check richiesto.",
+      "reason": "La discovery paginata e la decisione tri-state di conflitto sono comuni e fail-closed, ma i call-site restano adattati ai due contratti esterni: il sito invoca `tests.yml` con `workflow_dispatch -f pr_number=...` per risolvere la PR e avviare test+review sulla head, mentre il corpus conserva il dispatch `--ref` test-only del ramo needs-human/carry-forward. Il corpus inoltre fissa la revisione body con `currentReviewInputContext`/`reviewInputContextStillCurrent` e `review-test-policy.mjs`, e il suo `tests.yml` mantiene input `pr_number`/`head_sha`, guard body+review ed eventi lifecycle; il sito usa il proprio body-edit retry e i check names locali in constants. Dal 2026-09-23 (#606) il corpus risolve anche hunk diff3 dimostrabilmente additivi: il base deve restare sottosequenza esatta su entrambi i lati e le sole aggiunte ammesse sono entry monoriga terminate da virgola, senza collisioni di chiave; ogni altra forma conserva abort e handoff. La baseline corpus e' riattestata su questa modifica; quella site resta deliberatamente al riferimento gia' revisionato, cosi' il movimento site successivo resta visibile. Non copiare il file byte-per-byte: ogni lato conserva il proprio percorso PR/body/review e il nome del check richiesto.",
       "baseline": {
         "site": "e3cb4fb86fe8ff01",
-        "corpus": "5a87bd0e01473a0d",
-        "alignedAt": "2026-09-19"
+        "corpus": "c77c14a67f3f2b3c",
+        "alignedAt": "2026-09-23"
       }
     },
     {
@@ -1631,11 +1631,11 @@
       "path": "generator/scripts/batch-add-faq-to-articles.mjs",
       "sitePath": "scripts/batch-add-faq-to-articles.mjs",
       "mode": "adapted",
-      "reason": "Batch FAQ su tutti gli articoli (1.138 righe, il piu' grande dei sette). Differenza comune a tutti i gemelli trasportati: `PROJECT_ROOT` risale di due livelli invece di uno, perche' il trasporto ha spostato lo script da `scripts/` a `generator/scripts/`. Oltre a quello: `corpusPath()` sul BODY_DIR, `resolveGitAddPath` importata da `lib/corpus-paths.mjs` invece di `lib/resolve-git-add-path.mjs` (qui i due helper stanno nello stesso modulo), e la funzione `write()` con la guardia sui control char C0 (issue #66). Il corpo — prompt, cascata di traduzione, riparazione del JSON dell'LLM — e' quello del sito.",
+      "reason": "Batch FAQ su tutti gli articoli. Differenza comune a tutti i gemelli trasportati: `PROJECT_ROOT` risale di due livelli invece di uno, perche' il trasporto ha spostato lo script da `scripts/` a `generator/scripts/`. Oltre a quello: `corpusPath()` sul BODY_DIR, `resolveGitAddPath` importata da `lib/corpus-paths.mjs` invece di `lib/resolve-git-add-path.mjs` (qui i due helper stanno nello stesso modulo), e la funzione `write()` con la guardia sui control char C0 (issue #66). Il corpus usa inoltre il PAT Remote Config per i checkpoint perche' checkout disabilita le credenziali ambientali. Dal 2026-09-23 (#625) i cinque comandi commit/push/rebase condividono una deadline complessiva di 30s: le misure live valide erano 309ms pushed e 1675ms rebased, mentre il bound precedente sommava 210s. La baseline corpus e' riattestata su questa modifica; quella site resta deliberatamente al riferimento gia' revisionato, cosi' il movimento site successivo resta visibile. Prompt, cascata di traduzione e riparazione JSON restano adattamenti omologhi al sito, non una copia byte-per-byte.",
       "baseline": {
         "site": "ecfbef46b21f6563",
-        "corpus": "8505e7a2a23cb85d",
-        "alignedAt": "2026-08-09"
+        "corpus": "a1ac1daef8fb15c1",
+        "alignedAt": "2026-09-23"
       }
     },
     {

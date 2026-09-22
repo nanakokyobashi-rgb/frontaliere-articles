@@ -344,14 +344,29 @@ const COMMIT_EVERY = 25;
  * caso peggiore aritmetico (30+60+30+60+30), non una misura — e una deadline
  * scelta sul caso peggiore aritmetico e' esattamente il taglio cieco.
  *
- * Questa riga e' la misura, e a differenza della grace window si produce da
- * sola: la catena gira a ogni checkpoint (uno ogni COMMIT_EVERY articoli), non
- * e' un evento raro, quindi il log del workflow basta e non serve un artifact.
- * Costo: una riga per checkpoint, due `Date.now()`.
+ * Le prime due misure valide dopo il fix delle credenziali sono state 309ms
+ * (`pushed`) e 1675ms (`rebased`). Una deadline complessiva di 30s conserva un
+ * margine di oltre 17x sul percorso live piu' lungo osservato e riduce il bound
+ * seriale da 210s a 30s senza cambiare i timeout nominali dei singoli comandi.
+ * I comandi eseguiti dopo l'avvio del rebase riservano gli ultimi 5s al suo
+ * abort: il tetto non deve reintrodurre il runner wedged che quel cleanup evita.
  *
  * Formato stabile, greppabile:
  *   [git-push-chain] label=<l> ms=<n> outcome=<pushed|rebased|failed|commit-failed>
  */
+export const GIT_PUSH_CHAIN_DEADLINE_MS = 30_000;
+const GIT_REBASE_ABORT_RESERVE_MS = 5_000;
+
+export function gitPushChainTimeoutMs(chainStartedAt, commandTimeoutMs, now = Date.now(), reserveMs = 0) {
+  const remainingMs = GIT_PUSH_CHAIN_DEADLINE_MS - (now - chainStartedAt) - reserveMs;
+  if (remainingMs <= 0) {
+    const error = new Error(`git push chain deadline exceeded (${GIT_PUSH_CHAIN_DEADLINE_MS}ms)`);
+    error.code = 'GIT_PUSH_CHAIN_DEADLINE';
+    throw error;
+  }
+  return Math.min(commandTimeoutMs, remainingMs);
+}
+
 function gitCommitAndPush(label, { sectionBodyDir, progressFile }) {
   const chainStartedAt = Date.now();
   let outcome = 'commit-failed';
@@ -360,28 +375,47 @@ function gitCommitAndPush(label, { sectionBodyDir, progressFile }) {
     execSync(
       `git add ${bodyDirGitPath} && git add -f ${progressFile} 2>/dev/null; ` +
       `git diff --cached --quiet || git commit -m "❓ FAQ batch checkpoint (${label})"`,
-      { cwd: ROOT, stdio: 'pipe', timeout: 30000 }
+      { cwd: ROOT, stdio: 'pipe', timeout: gitPushChainTimeoutMs(chainStartedAt, 30000) }
     );
     // Checkpoint pushes use the Remote Config PAT; the workflow grants only
     // contents: read and disables checkout's ambient credential persistence.
     try {
-      authenticatedGit(['push', 'origin', 'main'], { cwd: ROOT, stdio: 'pipe', timeout: 60000 });
+      authenticatedGit(['push', 'origin', 'main'], {
+        cwd: ROOT,
+        stdio: 'pipe',
+        timeout: gitPushChainTimeoutMs(chainStartedAt, 60000),
+      });
       outcome = 'pushed';
       console.error(`💾 Checkpoint pushed: ${label}`);
     } catch (pushErr) {
       // Rebase and retry once (handles concurrent pushes)
       try {
-        authenticatedGit(['pull', '--rebase', 'origin', 'main'], { cwd: ROOT, stdio: 'pipe', timeout: 30000 });
-        authenticatedGit(['push', 'origin', 'main'], { cwd: ROOT, stdio: 'pipe', timeout: 60000 });
+        authenticatedGit(['pull', '--rebase', 'origin', 'main'], {
+          cwd: ROOT,
+          stdio: 'pipe',
+          timeout: gitPushChainTimeoutMs(chainStartedAt, 30000, Date.now(), GIT_REBASE_ABORT_RESERVE_MS),
+        });
+        authenticatedGit(['push', 'origin', 'main'], {
+          cwd: ROOT,
+          stdio: 'pipe',
+          timeout: gitPushChainTimeoutMs(chainStartedAt, 60000, Date.now(), GIT_REBASE_ABORT_RESERVE_MS),
+        });
         outcome = 'rebased';
         console.error(`💾 Checkpoint pushed (after rebase): ${label}`);
-      } catch {
+      } catch (retryErr) {
         outcome = 'failed';
         // A conflicting rebase leaves an in-progress rebase state that wedges every
         // subsequent run on the same runner; abort it so the loop can't stay stuck
         // (mirrors the `git rebase --abort` recovery added to the bash loops in #2721).
-        try { execSync('git rebase --abort', { cwd: ROOT, stdio: 'pipe', timeout: 30000 }); } catch { /* no rebase in progress */ }
-        console.error(`⚠️  Checkpoint committed but push failed: ${pushErr.message?.slice(0, 100)}`);
+        try {
+          execSync('git rebase --abort', {
+            cwd: ROOT,
+            stdio: 'pipe',
+            timeout: gitPushChainTimeoutMs(chainStartedAt, 30000),
+          });
+        } catch { /* no rebase in progress, oppure deadline complessiva esaurita */ }
+        const failure = retryErr?.code === 'GIT_PUSH_CHAIN_DEADLINE' ? retryErr : pushErr;
+        console.error(`⚠️  Checkpoint committed but push failed: ${failure.message?.slice(0, 100)}`);
       }
     }
   } catch (err) {
