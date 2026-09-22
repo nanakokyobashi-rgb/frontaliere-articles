@@ -1,7 +1,9 @@
 import { createHash } from 'node:crypto';
-import { readFileSync } from 'node:fs';
+import { readFileSync, statSync } from 'node:fs';
+import path from 'node:path';
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
+import { fileURLToPath } from 'node:url';
 import {
   actionMarker,
   cancelledRequiredSuites,
@@ -10,11 +12,63 @@ import {
   reviewRevisionForBody,
 } from '../../scripts/ci/orphan-pr-custodian.mjs';
 import { VITEST_CHECK_NAME } from '../../scripts/ci/lib/constants.mjs';
+import { relativeImportSpecifiers } from '../../scripts/ci/lib/import-specifiers.mjs';
 
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const HEAD = 'a'.repeat(40);
 const OLD = 'b'.repeat(40);
 const NOW_S = Date.parse('2026-09-19T17:40:00Z') / 1000;
 const WORKFLOW = readFileSync(new URL('../../.github/workflows/stale-pr-rescuer.yml', import.meta.url), 'utf8');
+
+function resolveRelativeModule(importer, specifier) {
+  const base = path.resolve(path.dirname(importer), specifier);
+  const candidates = [
+    base,
+    `${base}.mjs`,
+    `${base}.js`,
+    `${base}.ts`,
+    path.join(base, 'index.mjs'),
+    path.join(base, 'index.js'),
+    path.join(base, 'index.ts'),
+  ];
+  return candidates.find((candidate) => {
+    try {
+      return statSync(candidate).isFile();
+    } catch {
+      return false;
+    }
+  }) || null;
+}
+
+function moduleClosure(entryRelative) {
+  const queue = [path.join(ROOT, entryRelative)];
+  const seen = new Set();
+  while (queue.length > 0) {
+    const file = queue.shift();
+    if (seen.has(file)) continue;
+    seen.add(file);
+    const source = readFileSync(file, 'utf8');
+    for (const specifier of relativeImportSpecifiers(source)) {
+      const resolved = resolveRelativeModule(file, specifier);
+      assert.ok(
+        resolved,
+        `${path.relative(ROOT, file)} importa ${specifier}, ma il modulo non esiste nel checkout corpus`,
+      );
+      if (resolved.startsWith(`${ROOT}${path.sep}`)) queue.push(resolved);
+    }
+  }
+  return [...seen].map((file) => path.relative(ROOT, file)).sort();
+}
+
+function sparseCheckoutPathsFor(stepName) {
+  const start = WORKFLOW.indexOf(`- name: ${stepName}`);
+  assert.notEqual(start, -1, `step ${stepName} assente`);
+  const next = WORKFLOW.indexOf('\n      - name:', start + 1);
+  const step = WORKFLOW.slice(start, next === -1 ? undefined : next);
+  const block = step.match(/sparse-checkout: \|\n([\s\S]*?)\n\s+sparse-checkout-cone-mode:/)?.[1];
+  assert.ok(block, `sparse-checkout assente nello step ${stepName}`);
+  return new Set(block.split('\n').map((line) => line.trim()).filter(Boolean));
+}
 
 function pr(overrides = {}) {
   return {
@@ -282,6 +336,17 @@ describe('stale-pr-rescuer — cablaggio', () => {
 
   it('porta il modulo canonico della revisione nel checkout sparse del custode', () => {
     assert.match(WORKFLOW, /sparse-checkout: \|\n(?:\s+\S+\n)*\s+scripts\/ci\/lib\/review-input-revision\.mjs\n/);
+  });
+
+  it('porta l\'intera closure statica e dinamica del custode nel checkout sparse', () => {
+    const sparsePaths = sparseCheckoutPathsFor('Checkout orphan PR custodian');
+    const closure = moduleClosure('scripts/ci/orphan-pr-custodian.mjs');
+    const missing = closure.filter((file) => !sparsePaths.has(file));
+    assert.deepEqual(
+      missing,
+      [],
+      `dipendenze del custode assenti dal checkout sparse:\n${missing.join('\n')}`,
+    );
   });
 
   it('esegue il custode con lo script e le costanti presenti nel checkout sparse', () => {

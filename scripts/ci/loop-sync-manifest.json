@@ -1082,7 +1082,7 @@
     {
       "path": ".github/workflows/stale-pr-rescuer.yml",
       "mode": "adapted",
-      "reason": "Il corpus usa CI_CHECK_NAME e classi di recupero A/B/C/D con il workflow pr-autorebase indipendente; il sito riesegue il run di codice dalla label corrente dentro tests.yml. Si preservano i rimedi specifici del corpus, il rerun della classe B con marker del fixer e la cadenza :35.",
+      "reason": "Il corpus usa CI_CHECK_NAME e classi di recupero A/B/C/D con il workflow pr-autorebase indipendente; il sito riesegue il run di codice dalla label corrente dentro tests.yml. Si preservano i rimedi specifici del corpus, il rerun della classe B con marker del fixer e la cadenza :35. La closure transitiva statica e dinamica del checkout sparse del custode e' verificata da `generator/tests/orphan-pr-custodian.test.mjs` tramite l'estrattore condiviso di #929: site #9528 ha mostrato che nominare l'entrypoint senza un helper importato produce `ERR_MODULE_NOT_FOUND` prima della logica del custode. Questa guardia protegge il lato corpus adapted senza dichiarare risolta la issue site.",
       "baseline": {
         "site": "1d3108398b6a9623",
         "corpus": "dec5c2a2c169d1c9",
@@ -1111,7 +1111,7 @@
       "path": "generator/tests/orphan-pr-custodian.test.mjs",
       "sitePath": "tests/orphan-pr-custodian.test.ts",
       "mode": "adapted",
-      "reason": "Gemello node:test del test Vitest del sito sul custode delle PR orfane: stessi casi sulla decisione pura (rerun di una suite CANCELLED con LGTM, adozione di un 🔴 fuori scope, guardie) e sul cablaggio di stale-pr-rescuer.yml. Cambia solo il runner, e qui asserisce anche il dispatch del redflag-fixer (`REDFLAG_FIXER_DISPATCH_INPUT: pr`), che il sito non ha perche' il suo fixer non accetta workflow_dispatch.",
+      "reason": "Gemello node:test del test Vitest del sito sul custode delle PR orfane: stessi casi sulla decisione pura (rerun di una suite CANCELLED con LGTM, adozione di un 🔴 fuori scope, guardie) e sul cablaggio di stale-pr-rescuer.yml. Cambia il runner; qui asserisce anche il dispatch del redflag-fixer (`REDFLAG_FIXER_DISPATCH_INPUT: pr`), che il sito non ha perche' il suo fixer non accetta workflow_dispatch, e calcola la closure transitiva degli import statici/dinamici che il checkout sparse deve materializzare (#929, site #9528).",
       "baseline": {
         "site": "ceab56f221d07ec1",
         "corpus": "fb8e3ca0ab601792",
@@ -1891,8 +1891,8 @@
       "path": "generator/scripts/lib/article-free-mt.mjs",
       "sitePath": "scripts/lib/article-free-mt.mjs",
       "mode": "adapted",
-      "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/831",
-      "reason": "NON e' piu' `identical` dal 2026-09-05 (#892): dopo #878 questo file importa `hasUsableTranslatedText`/`hasUsableContentText` da `generator/scripts/lib/body2-payload-verdict.mjs`, che e' `corpus-only` e sul sito NON esiste (404 su `scripts/lib/body2-payload-verdict.mjs`). Il mirror non e' \"da fare\": e' impossibile — copiare il file verbatim porterebbe sul sito un `import` che non risolve, rompendo con `ERR_MODULE_NOT_FOUND` i suoi due consumer reali la', `scripts/repair-object-object-bodies.mjs` e `tests/scripts/article-free-mt.test.ts`. Misura del 2026-09-05 su `origin` dei due lati: 190 righe qui, 159 sul sito, 36 solo-corpus e 5 SOLO-SITO — quindi nemmeno una copia nell'altro verso e' innocua. La divergenza e' la fix di #831/#868 item 4 (il marker di fallimento `Null`/`null` letto come prosa e pubblicato): il sito ne resta senza, e se `repair-object-object-bodies.mjs` tratta output di motori MT gratuiti ha la stessa classe di bug, da verificare separatamente sul suo repo. Il ritorno a `identical` passa da una delle due uscite che spostano il confine fra i repo — portare `body2-payload-verdict.mjs` sul sito, o estrarre i due predicati in un modulo terzo dependency-free `identical` da entrambi i lati — e nessuna delle due si decide qui. La baseline NON viene rigenerata: con la baseline intatta il drift check continua a dire che i due lati sono divergenti invece di dichiarare allineato uno stato che non lo e'.",
+      "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/1034",
+      "reason": "ADAPTED per scelta dal 2026-09-22 (#1034). Il corpus importa `hasUsableTranslatedText`/`hasUsableContentText` da `generator/scripts/lib/body2-payload-verdict.mjs`, che resta `corpus-only` perche' contiene anche il verdetto body2 del generatore. Il sito ha chiuso la stessa classe del marker `Null`/`null` con la site PR #9087: usa il proprio modulo dependency-free `scripts/lib/usable-content-text.mjs` in `create-article.mjs`, `article-free-mt.mjs`, `events-utils.mjs` e `repair-object-object-bodies.mjs`, senza copiare il resto del verdetto corpus. Le due copie di `article-free-mt.mjs` restano diverse per responsabilita' reali dei rispettivi producer/consumer; copiarne una verbatim nell'altro repo introdurrebbe dipendenze assenti o cancellerebbe guard specifici. Il confine resta il JSON pubblicato via HTTP, non un import cross-repo. La baseline storica resta il punto comune prima della divergenza intenzionale e non va rigenerata per fingere byte-parity.",
       "baseline": {
         "site": "0f3dd9cefcb52b17",
         "corpus": "0f3dd9cefcb52b17",
