@@ -286,9 +286,21 @@ test('tests.yml claims before review work and finalizes without gating the requi
     'il guard di carry-forward deve poter leggere lo storico dei check-run');
   assert.match(workflow, /Reviews API illeggibile/);
   assert.match(workflow, /same_head/);
+  assert.match(workflow, /same_head_last_is_codex/);
+  assert.match(workflow, /codex_review_has_green_pull_request_run/);
+  assert.match(workflow, /actions\/runs\?head_sha=\$reviewed_sha&event=pull_request&per_page=100/);
+  assert.match(workflow, /\.path == "\.github\/workflows\/tests\.yml"/);
+  assert.match(workflow, /\.event == "pull_request"/);
+  assert.match(workflow, /\.head_sha == \$reviewed_sha/);
+  assert.match(workflow, /any\(\.pull_requests\[\]\?;/);
+  assert.match(workflow, /\.updated_at \/\/ ""\) >= \$reviewed_at/);
+  assert.match(workflow, /frontaliere-automation\[bot\]/);
   const sameHeadStart = workflow.indexOf('same_head=');
-  const sameHeadEnd = workflow.indexOf('if [ "${same_head:-0}"', sameHeadStart);
+  const sameHeadEnd = workflow.indexOf('if [ "${same_head:-0}" -gt 0 ] && [ "$unproven_codex_same_head"', sameHeadStart);
   const sameHeadGuard = workflow.slice(sameHeadStart, sameHeadEnd);
+  const codexSameHeadProof = workflow.indexOf('codex_review_has_green_pull_request_run "$HEAD_SHA" "$same_head_last_reviewed_at"');
+  assert.ok(codexSameHeadProof >= 0 && codexSameHeadProof < sameHeadEnd,
+    'la prova Codex deve precedere l uscita anticipata same-head');
   assert.doesNotMatch(sameHeadGuard, /\.user\.type == "Bot"/);
   assert.ok(
     sameHeadGuard.includes('test("^(claude\\\\[bot\\\\]|frontaliere-automation\\\\[bot\\\\])$";"i")'),
@@ -349,11 +361,11 @@ test('tests.yml claims before review work and finalizes without gating the requi
   const compareGuard = workflow.slice(workflow.indexOf('compare_json=', workflow.indexOf('last=$(printf')));
   assert.match(carryForwardGuard, /last_review_is_codex=/);
   assert.match(carryForwardGuard, /CODEX_FALLBACK_REVIEW/);
-  assert.match(carryForwardGuard, /gh api --paginate --slurp[\s\\\\]*\n?\s*\"repos\/\$REPO\/commits\/\$last\/check-runs\?per_page=100&filter=all\"/);
-  assert.match(carryForwardGuard, /\.name == \"tests \(node --test\)\"/);
-  assert.match(carryForwardGuard, /\.status == \"completed\"/);
-  assert.match(carryForwardGuard, /\.conclusion == \"success\"/);
-  assert.match(carryForwardGuard, /Review Codex senza un check tests \(node --test\) verde precedente/);
+  assert.match(carryForwardGuard, /codex_review_has_green_pull_request_run \"\$last\" \"\$last_review_submitted_at\"/);
+  assert.doesNotMatch(carryForwardGuard, /check-runs\?per_page=100&filter=all/);
+  assert.match(workflow, /\.status == \"completed\"/);
+  assert.match(workflow, /\.conclusion == \"success\"/);
+  assert.match(carryForwardGuard, /Review Codex senza una run pull_request verde per la stessa PR e HEAD/);
   assert.match(compareGuard, /gh api \"repos\/\$REPO\/compare\/\$last\.\.\.\$HEAD_SHA\"/);
   assert.match(compareGuard, /type == \"object\"/);
   assert.match(compareGuard, /\.files \| type == \"array\"/);
@@ -389,17 +401,24 @@ test('tests.yml claims before review work and finalizes without gating the requi
   assert.equal(compareSchemaAccepts({ files: [{}] }), false,
     'un compare con entry file malformata deve restare fail-closed');
 
-  const codexCheckStart = carryForwardGuard.indexOf("if ! printf '%s' \"$previous_checks\" | jq -e '");
-  const codexCheckEnd = carryForwardGuard.indexOf("\n            ' >/dev/null", codexCheckStart);
-  assert.ok(codexCheckStart >= 0 && codexCheckEnd > codexCheckStart,
-    'predicato di accettazione del check Codex non trovato');
-  const codexCheckPredicate = carryForwardGuard
-    .slice(codexCheckStart + "if ! printf '%s' \"$previous_checks\" | jq -e '".length, codexCheckEnd)
+  const codexRunStart = workflow.indexOf("if ! printf '%s' \"$run_history\" | jq -e --arg reviewed_sha");
+  const codexRunQuoteStart = workflow.indexOf("'\n", codexRunStart);
+  const codexRunEnd = workflow.indexOf("\n            ' >/dev/null", codexRunQuoteStart);
+  assert.ok(codexRunStart >= 0 && codexRunQuoteStart > codexRunStart && codexRunEnd > codexRunQuoteStart,
+    'predicato di accettazione della run Codex non trovato');
+  const codexRunPredicate = workflow
+    .slice(codexRunQuoteStart + 2, codexRunEnd)
     .replace(/^\s+/gm, '')
     .trim();
-  const codexCheckHistoryAccepts = (payload) => {
+  const codexRunHistoryAccepts = (payload) => {
     try {
-      execFileSync('jq', ['-e', codexCheckPredicate], {
+      execFileSync('jq', [
+        '-e',
+        '--arg', 'reviewed_sha', HEAD,
+        '--arg', 'pr_number', '8364',
+        '--arg', 'reviewed_at', '2026-09-22T11:00:00Z',
+        codexRunPredicate,
+      ], {
         input: `${JSON.stringify(payload)}\n`,
         encoding: 'utf8',
         stdio: ['pipe', 'ignore', 'ignore'],
@@ -409,14 +428,36 @@ test('tests.yml claims before review work and finalizes without gating the requi
       return false;
     }
   };
-  assert.equal(codexCheckHistoryAccepts([{
-    check_runs: [{ name: 'tests (node --test)', status: 'completed', conclusion: 'success' }],
-  }]), true, 'un check precedente verde deve autorizzare il carry-forward Codex');
-  assert.equal(codexCheckHistoryAccepts([{
-    check_runs: [{ name: 'tests (node --test)', status: 'completed', conclusion: 'failure' }],
-  }]), false, 'un check precedente rosso deve forzare una nuova review Codex');
-  assert.equal(codexCheckHistoryAccepts([{ check_runs: [] }]), false,
-    'assenza del check precedente deve forzare una nuova review Codex');
+  const greenPullRequestRun = {
+    path: '.github/workflows/tests.yml',
+    event: 'pull_request',
+    head_sha: HEAD,
+    status: 'completed',
+    conclusion: 'success',
+    updated_at: '2026-09-22T12:00:00Z',
+    pull_requests: [{ number: 8364 }],
+  };
+  assert.equal(codexRunHistoryAccepts([{ workflow_runs: [greenPullRequestRun] }]), true,
+    'una run pull_request verde della stessa PR e HEAD deve autorizzare il carry-forward Codex');
+  assert.equal(codexRunHistoryAccepts([{ workflow_runs: [] }, { workflow_runs: [greenPullRequestRun] }]), true,
+    'la prova deve funzionare anche su pagine paginate');
+  assert.equal(codexRunHistoryAccepts([{
+    workflow_runs: [{ ...greenPullRequestRun, conclusion: 'failure' }],
+  }]), false, 'una run precedente rossa deve forzare una nuova review Codex');
+  assert.equal(codexRunHistoryAccepts([{
+    workflow_runs: [{ ...greenPullRequestRun, updated_at: '2026-09-22T10:00:00Z' }],
+  }]), false, 'una run verde precedente alla review non deve provare il carry-forward');
+  assert.equal(codexRunHistoryAccepts([{
+    workflow_runs: [{ ...greenPullRequestRun, event: 'workflow_dispatch' }],
+  }]), false, 'una run workflow_dispatch non deve provare una review pull_request');
+  assert.equal(codexRunHistoryAccepts([{
+    workflow_runs: [{ ...greenPullRequestRun, pull_requests: [{ number: 9999 }] }],
+  }]), false, 'una run di un altra PR non deve provare il carry-forward');
+  assert.equal(codexRunHistoryAccepts([{
+    workflow_runs: [{ ...greenPullRequestRun, path: '.github/workflows/other.yml' }],
+  }]), false, 'una run di un altro workflow non deve provare il carry-forward');
+  assert.equal(codexRunHistoryAccepts([{ workflow_runs: [] }]), false,
+    'assenza della run precedente deve forzare una nuova review Codex');
   assert.match(workflow, /steps\.review_claim\.outputs\.claim_allowed == 'true'/);
   assert.match(workflow, /REVIEW_GATE_FALLBACK_APPROVED:/);
 
