@@ -98,6 +98,35 @@ test('un marker senza niente di dichiarato non promette niente da verificare', (
   assert.equal(verifyTriageMarkerPersistence(marker, 1537, () => null), true);
 });
 
+test('il marker reale senza item e con bucket invariato e\' uno zero, non un claim positivo (#9286)', () => {
+  const marker = [
+    '## Post-merge follow-up triage',
+    '',
+    'Created/updated: nessun item per questa PR; bucket giornaliero #9508 non modificato da questa PR.',
+  ].join('\n');
+  const expectation = triageMarkerPersistenceExpectation(marker);
+  let reads = 0;
+
+  assert.equal(expectation.explicitZero, true);
+  assert.equal(expectation.requiresBucket, false);
+  assert.equal(verifyTriageMarkerPersistence(marker, 9435, () => { reads += 1; return null; }), true);
+  assert.equal(reads, 0, 'un bucket dichiarato invariato non va letto come prova positiva');
+
+  for (const positiveOrAmbiguous of [
+    '## Post-merge follow-up triage\n\nCreated/updated: nessun item.',
+    '## Post-merge follow-up triage\n\nCreated/updated: nessun item per questa PR; bucket giornaliero #9508 aggiornato da questa PR.',
+  ]) {
+    const ambiguous = triageMarkerPersistenceExpectation(positiveOrAmbiguous);
+    assert.equal(ambiguous.explicitZero, false, positiveOrAmbiguous);
+    assert.equal(ambiguous.requiresBucket, true, positiveOrAmbiguous);
+    assert.notEqual(
+      verifyTriageMarkerPersistence(positiveOrAmbiguous, 9435, () => null),
+      true,
+      positiveOrAmbiguous,
+    );
+  }
+});
+
 test('fail-closed: un formato non riconosciuto NON e\' uno zero (review #1593, 🔴 L393)', () => {
   // Nessun `Follow-up item:`, nessun `bucket #N`, e l'intestazione non e'
   // quella dello zero imposta dal prompt. Prima: `requiresBucket=false` →

@@ -161,6 +161,14 @@ alla volta, e frammentare moltiplica le run senza aggiungere informazione.
 Nel commento di chiusura sulla PR: cosa è diventato un item, cosa è stato
 droppato **e perché**, e la checklist delle verifiche live.
 
+Con zero item, la prima riga del commento deve essere esattamente
+`## Post-merge follow-up triage: zero outstanding items.`. L'heading generico
+seguito da prosa come `Created/updated: nessun item` non e' un esito zero
+canonico. Per compatibilita' con i marker gia' prodotti, il verifier riconosce
+anche la sola attestazione completa «nessun item per questa PR; bucket #N non
+modificato da questa PR»: entrambe le clausole devono stare sulla stessa riga,
+cosi' un bucket aggiornato o una frase ambigua restano fail-closed.
+
 ## Formato del corpo della issue
 
 Questa struttura **non è cosmetica: è l'unico appiglio che ha la chiusura.**

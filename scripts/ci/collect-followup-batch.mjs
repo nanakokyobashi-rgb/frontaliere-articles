@@ -374,8 +374,11 @@ export function latestTriageCommentBody(commentsJson, prefix = TRIAGE_COMMENT_PR
  *    ordine e con qualunque punteggiatura;
  *  - uno ZERO esplicito e' l'INTESTAZIONE che il prompt impone per l'esito
  *    vuoto (`## Post-merge follow-up triage: zero outstanding items.` oppure
- *    `## Post-merge follow-up triage (backfill skipped): ...`). Conta solo su
- *    una riga H2, mai nella prosa del corpo.
+ *    `## Post-merge follow-up triage (backfill skipped): ...`). La sola altra
+ *    forma ammessa e' l'attestazione strutturale osservata in produzione:
+ *    «nessun item per questa PR» E «bucket #N non modificato da questa PR»
+ *    sulla stessa riga. La coppia dice esplicitamente che il numero e' solo
+ *    contesto, non un claim positivo da verificare nel bucket.
  *  - uno SKIP esplicito e' l'intestazione "## Post-merge follow-up triage:
  *    skipped by anti-nipote gate". In questo caso il finding resta di
  *    proprieta' della follow-up issue genitrice, quindi non esiste un bucket o
@@ -389,22 +392,27 @@ export function latestTriageCommentBody(commentsJson, prefix = TRIAGE_COMMENT_PR
  */
 export function triageMarkerPersistenceExpectation(markerBody) {
   const body = String(markerBody || '');
+  const lines = body.split(/\r?\n/);
   const items = [...body.matchAll(/Follow-up\s+item\s*:\s*(FU-\d{4}-\d{2}-\d{2}-\d{3})\b/gi)]
     .map((match) => match[1].toUpperCase());
   // Il `#N` deve stare accanto a «bucket»: cosi' un `PR concatenata #9050`
   // citato fra i drop non diventa un candidato. Prendiamo il primo numero dopo
   // ciascuna occorrenza di «bucket», non ogni numero della riga: la prosa puo'
   // citare la PR sorgente sulla stessa riga del bucket (issue #170).
-  const buckets = body.split(/\r?\n/)
+  const buckets = lines
     .flatMap((line) => [...line.matchAll(/\bbucket\b[^#\r\n]*#([1-9]\d*)\b/gi)]
       .map((match) => Number(match[1])));
   // Una riga H2, non prosa: il modello a volte ripete il prefisso nudo prima
   // dell'intestazione dello zero (marker REALE di PR #1570:
   // `## Post-merge follow-up triage\n\n## Post-merge follow-up triage: zero
   // outstanding items.`), quindi conta qualunque riga H2 del marker.
-  const explicitZero = body.split(/\r?\n/).some((line) =>
+  const canonicalZero = lines.some((line) =>
     /^\s*##\s+Post-merge follow-up triage\s*(?::\s*zero outstanding items\b|\(backfill skipped\))/i.test(line));
-  const explicitAntiNipoteSkip = body.split(/\r?\n/).some((line) =>
+  const unchangedBucketZero = lines.some((line) =>
+    /\bnessun\s+item\s+per\s+questa\s+PR\b/i.test(line)
+    && /\bbucket\b[^#\r\n]*#[1-9]\d*\b[^\r\n]*\bnon\s+modificat[oa]\s+da\s+questa\s+PR\b/i.test(line));
+  const explicitZero = canonicalZero || unchangedBucketZero;
+  const explicitAntiNipoteSkip = lines.some((line) =>
     /^\s*##\s+Post-merge follow-up triage\s*:\s*skipped by anti-nipote gate\b/i.test(line));
   const uniqueItems = [...new Set(items)];
   return {
