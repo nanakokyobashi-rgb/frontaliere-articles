@@ -33,7 +33,7 @@ on:
 permissions:
   actions: write
   contents: read
-  pull-requests: read
+  pull-requests: write
 
 concurrency:
   group: body-recovery-${{ github.event.pull_request.number }}
@@ -85,6 +85,23 @@ jobs:
               return;
             }
             const getRun = async () => (await github.rest.actions.getWorkflowRun({ ...repo, run_id: latest.id })).data;
+            const failClosed = async message => {
+              // A red recovery job alone does not invalidate the previous
+              // green required check. Revoke native auto-merge first, when
+              // it is still enabled, so an unverifiable body cannot merge.
+              const { data: currentPr } = await github.rest.pulls.get({ ...repo, pull_number: number });
+              if (currentPr.state === 'open' && currentPr.auto_merge) {
+                await github.graphql(`
+                  mutation DisablePullRequestAutoMerge($pullRequestId: ID!) {
+                    disablePullRequestAutoMerge(input: { pullRequestId: $pullRequestId }) {
+                      clientMutationId
+                    }
+                  }
+                `, { pullRequestId: currentPr.node_id });
+                core.warning(`Native auto-merge revoked for PR #${number} before fail-closed recovery.`);
+              }
+              core.setFailed(message);
+            };
             const settle = async attempt => {
               let run = await getRun();
               for (const deadline = Date.now() + waitMs; run.status !== 'completed'; run = await getRun()) {
@@ -102,12 +119,12 @@ jobs:
             // the edit (fail-safe: at worst one extra rerun, never a stale
             // verdict).
             if (!Number.isFinite(editedAt)) {
-              core.setFailed(`Edit timestamp non verificabile per PR #${number}; nessun retry cieco.`);
+              await failClosed(`Edit timestamp non verificabile per PR #${number}; nessun retry cieco.`);
               return;
             }
             const startedAt = Date.parse(target.run_started_at || target.created_at || '');
             if (!Number.isFinite(startedAt)) {
-              core.setFailed(`Run ${target.id} senza timestamp verificabile; nessun retry cieco.`);
+              await failClosed(`Run ${target.id} senza timestamp verificabile; nessun retry cieco.`);
               return;
             }
             if (startedAt > editedAt) {
@@ -123,7 +140,7 @@ jobs:
               }
               target = await settle(target.run_attempt);
               if (!target) {
-                core.setFailed(`Run ${latest.id} did not settle within the wait after cancellation; recovery cannot classify it safely.`);
+                await failClosed(`Run ${latest.id} did not settle within the wait after cancellation; recovery cannot classify it safely.`);
                 return;
               }
             }
@@ -161,7 +178,7 @@ jobs:
                   ? 'the review gate failed'
                   : '';
             } else if (target.conclusion !== 'success') {
-              core.setFailed(`Run ${latest.id} has an unverified conclusion (${target.conclusion || 'missing'}); recovery refuses to preserve a stale verdict.`);
+              await failClosed(`Run ${latest.id} has an unverified conclusion (${target.conclusion || 'missing'}); recovery refuses to preserve a stale verdict.`);
               return;
             }
             if (!retryReason) {

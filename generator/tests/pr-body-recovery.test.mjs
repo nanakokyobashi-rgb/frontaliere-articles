@@ -23,10 +23,11 @@ const AFTER_EDIT = '2026-09-19T12:01:00Z';
 
 // `later`: fields the run takes on successive getWorkflowRun reads (the
 // first read is the script's re-read of the listed run).
-async function recover(bodyConclusion, status = 'completed', failedSteps = [], later = [], runOverrides = {}, cancelError = null) {
+async function recover(bodyConclusion, status = 'completed', failedSteps = [], later = [], runOverrides = {}, cancelError = null, autoMerge = null, editTimestamp = EDITED_AT) {
   const reruns = [];
   const cancels = [];
   const failures = [];
+  const autoMergeRevokes = [];
   const run = {
     id: 42, run_attempt: 1, status, conclusion: status === 'completed' ? 'failure' : null,
     head_branch: 'feature', event: 'pull_request', run_started_at: BEFORE_EDIT, ...runOverrides,
@@ -34,7 +35,10 @@ async function recover(bodyConclusion, status = 'completed', failedSteps = [], l
   const polls = [...later];
   const github = {
     rest: {
-      pulls: { get: async () => ({ data: { state: 'open', head: { sha: 'head', ref: 'feature' }, body: prBody } }) },
+      pulls: { get: async () => ({ data: {
+        node_id: 'PR_node', state: 'open', head: { sha: 'head', ref: 'feature' }, body: prBody,
+        auto_merge: autoMerge,
+      } }) },
       actions: {
         listWorkflowRuns: 'runs', listJobsForWorkflowRun: 'jobs',
         getWorkflowRun: async () => {
@@ -48,6 +52,7 @@ async function recover(bodyConclusion, status = 'completed', failedSteps = [], l
         reRunWorkflow: async ({ run_id }) => { reruns.push(run_id); },
       },
     },
+    graphql: async (_query, variables) => { autoMergeRevokes.push(variables.pullRequestId); },
     // Like the Jobs API: a step has no conclusion until the run gets there.
     paginate: async endpoint => endpoint === 'runs' ? [{ ...run }] : [{
       conclusion: run.status === 'completed' && failedSteps.length ? 'failure' : null,
@@ -59,10 +64,11 @@ async function recover(bodyConclusion, status = 'completed', failedSteps = [], l
   };
   await new AsyncFunction('github', 'context', 'core', script)(github, {
     repo: { owner: 'owner', repo: 'repo' },
-    payload: { pull_request: { number: 1, head: { sha: 'head' }, updated_at: EDITED_AT } },
+    payload: { pull_request: { number: 1, head: { sha: 'head' }, updated_at: editTimestamp } },
   }, { info() {}, warning() {}, setFailed(message) { failures.push(message); } });
   recover.lastCancels = cancels;
   recover.lastFailures = failures;
+  recover.lastAutoMergeRevokes = autoMergeRevokes;
   return reruns;
 }
 
@@ -80,6 +86,9 @@ test('body edits re-enter through the trusted recovery, not through a tests.yml 
   assert.match(tests, /has_clean_lgtm/);
   assert.ok(tests.indexOf('nessuna seconda review, anche dopo un body edit') < tests.indexOf('if [ -z "$changed" ]'));
   assert.match(recovery, /pull_request_target:\n    types: \[edited\]/);
+  assert.match(recovery, /pull-requests: write/);
+  assert.match(recovery, /disablePullRequestAutoMerge/);
+  assert.equal((recovery.match(/core\.setFailed/g) || []).length, 1);
   assert.doesNotMatch(recovery, /createCheckRun/);
   // The only checkout is the trusted base (pull_request_target default ref),
   // sparse on the evaluator, without credentials: never the PR head.
@@ -199,6 +208,22 @@ test('missing run metadata or an unknown conclusion fails closed', async () => {
   assert.match(recover.lastFailures[0], /timestamp/);
   assert.deepEqual(await recover('success', 'completed', [], [], { conclusion: 'neutral' }), []);
   assert.match(recover.lastFailures[0], /unverified conclusion/);
+});
+
+test('every fail-closed exit revokes native auto-merge before turning red', async () => {
+  assert.deepEqual(
+    await recover('success', 'completed', [], [], { run_started_at: undefined }, null, { enabled_by: 'bot' }),
+    [],
+  );
+  assert.deepEqual(recover.lastAutoMergeRevokes, ['PR_node']);
+  assert.match(recover.lastFailures[0], /timestamp/);
+
+  assert.deepEqual(
+    await recover('success', 'completed', [], [], {}, null, { enabled_by: 'bot' }, 'not-a-date'),
+    [],
+  );
+  assert.deepEqual(recover.lastAutoMergeRevokes, ['PR_node']);
+  assert.match(recover.lastFailures[0], /Edit timestamp/);
 });
 
 test('only a run of this PR branch and a PR-bound event is a target', async () => {
