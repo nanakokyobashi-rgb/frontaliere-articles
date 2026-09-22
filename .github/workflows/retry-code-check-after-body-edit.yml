@@ -72,6 +72,10 @@ jobs:
             const waitMs = Number(process.env.BODY_RECOVERY_WAIT_MS) || 300000;
             const retryMs = Number(process.env.BODY_RECOVERY_RETRY_MS) || 1000;
             const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+            // Read the required context from the same trusted source used by
+            // the CI gates; a duplicated literal could block a different
+            // check if the job is ever renamed.
+            const { VITEST_CHECK_NAME } = await import(`${process.env.GITHUB_WORKSPACE}/scripts/ci/lib/constants.mjs`);
             const { data: pr } = await github.rest.pulls.get({ ...repo, pull_number: number });
             if (pr.state !== 'open' || pr.head.sha !== context.payload.pull_request.head.sha) return;
             const runs = await github.paginate(github.rest.actions.listWorkflowRuns, {
@@ -127,7 +131,7 @@ jobs:
                   // eligible for native auto-merge.
                   await github.rest.checks.create({
                     ...repo,
-                    name: 'tests (node --test)',
+                    name: VITEST_CHECK_NAME,
                     head_sha: pr.head.sha,
                     status: 'completed',
                     conclusion: 'failure',

@@ -10,6 +10,8 @@ const recovery = read('.github/workflows/retry-code-check-after-body-edit.yml');
 const script = recovery.slice(recovery.indexOf('          script: |\n') + '          script: |\n'.length)
   .split('\n').map(line => line.replace(/^ {12}/, '')).join('\n');
 const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
+delete process.env.CI_CHECK_NAME;
+const { VITEST_CHECK_NAME } = await import('../../scripts/ci/lib/constants.mjs');
 // The workflow waits for a cancelled run to settle; keep the wait instant here.
 process.env.BODY_RECOVERY_POLL_MS = '1';
 process.env.BODY_RECOVERY_WAIT_MS = '50';
@@ -102,6 +104,8 @@ test('body edits re-enter through the trusted recovery, not through a tests.yml 
   assert.match(recovery, /checks: write/);
   assert.match(recovery, /disablePullRequestAutoMerge/);
   assert.match(recovery, /github\.rest\.checks\.create/);
+  assert.match(recovery, /const \{ VITEST_CHECK_NAME \} = await import\(`\$\{process\.env\.GITHUB_WORKSPACE\}\/scripts\/ci\/lib\/constants\.mjs`\);/);
+  assert.match(recovery, /name: VITEST_CHECK_NAME/);
   assert.equal((recovery.match(/core\.setFailed/g) || []).length, 2);
   assert.doesNotMatch(recovery, /createCheckRun/);
   // The only checkout is the trusted base (pull_request_target default ref),
@@ -248,7 +252,7 @@ test('a revocation API failure blocks the required check on the exact head', asy
   );
   assert.deepEqual(recover.lastAutoMergeRevokes, []);
   assert.deepEqual(recover.lastRequiredCheckBlocks, [{
-    name: 'tests (node --test)', head_sha: 'head', status: 'completed', conclusion: 'failure',
+    name: VITEST_CHECK_NAME, head_sha: 'head', status: 'completed', conclusion: 'failure',
   }]);
   assert.match(recover.lastFailures[0], /timestamp/);
 });
