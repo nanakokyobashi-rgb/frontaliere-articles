@@ -68,6 +68,7 @@ jobs:
         uses: actions/checkout@v5
         with:
           fetch-depth: 1
+          sparse-checkout-cone-mode: false
           sparse-checkout: |
             scripts/ci
             generator/scripts/load-rc-env.mjs
