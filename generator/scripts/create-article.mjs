@@ -1829,7 +1829,8 @@ export function computeMaxGenerationAttempts(
 ) {
   const isZeroSourceNews = (pageContent || '').length === 0 &&
     !String(url || '').startsWith('evergreen://') &&
-    !String(url || '').startsWith('stats-bfs://');
+    !String(url || '').startsWith('stats-bfs://') &&
+    !String(url || '').startsWith('stats-astra://');
   return isZeroSourceNews ? Math.min(fullBudget, zeroSourceCap) : fullBudget;
 }
 
@@ -5608,7 +5609,7 @@ async function llmFactCheck(contentIt, sourceContent = '', sourceUrl = '') {
     contentIt?.body1 || '', contentIt?.body2 || '', contentIt?.body3 || '',
   ].join('\n\n');
 
-  const isEvergreen = !sourceContent || sourceContent.length < 100 || sourceUrl.startsWith('evergreen://') || sourceUrl.startsWith('stats-bfs://');
+  const isEvergreen = !sourceContent || sourceContent.length < 100 || sourceUrl.startsWith('evergreen://') || sourceUrl.startsWith('stats-bfs://') || sourceUrl.startsWith('stats-astra://');
 
   if (articleText.length > MAX_FACTCHECK_ARTICLE_CHARS) {
     console.error(`  ⚠️  Fact-check: articolo di ${articleText.length} chars > cap ${MAX_FACTCHECK_ARTICLE_CHARS} `
@@ -6439,6 +6440,148 @@ function formatStatsBfsPrompt(quarter, data) {
   ].filter(Boolean).join('\n');
 }
 
+// ── Stats-ASTRA prompt builder ──────────────────────────────
+// The vehicle observatory is a closed, aggregated dataset written by the site
+// worker to config/astra_vehicle_stats. It has three editorial cadences:
+// weekly NEUZU_W for the Ticino column, and monthly stock/flow snapshots for
+// the national canton comparison plus the Ticino view. Daily STNR is an
+// internal signal only and deliberately never reaches this article path.
+async function buildStatsAstraPromptContent(token) {
+  const adminMod = await import('firebase-admin');
+  const admin = adminMod.default || adminMod;
+  if (!admin.apps.length) {
+    admin.initializeApp({
+      credential: admin.credential.applicationDefault(),
+      projectId: process.env.GCLOUD_PROJECT || 'frontaliere-ticino',
+    });
+  }
+  const db = admin.firestore();
+  const snap = await db.collection('config').doc('astra_vehicle_stats').get();
+  if (!snap.exists) {
+    throw new Error('config/astra_vehicle_stats Firestore doc missing — refresh-astra-vehicle-stats has not run yet.');
+  }
+  const parts = String(token || '').split('/').map((part) => decodeURIComponent(part));
+  const cadence = parts[0] || 'monthly';
+  const period = parts[1] || '';
+  const section = parts[2] === 'svizzera' || SECTION_NAME === 'svizzera' ? 'svizzera' : 'frontaliere';
+  return formatStatsAstraPrompt(cadence, period, section, snap.data() || {});
+}
+
+/**
+ * Pure formatter for the compact ASTRA Firestore document. Percentages are
+ * intentionally not printed in the source prompt: the factuality gate treats
+ * every percentage in a synthetic source as an anchor the article must repeat.
+ * Counts are the canonical source values; the public dashboard can calculate
+ * display shares without making the writer reproduce 26 derived percentages.
+ */
+function formatStatsAstraPrompt(cadence, requestedPeriod, section, data) {
+  const fmt = (value) => Number(value || 0).toLocaleString('it-IT');
+  const metricLine = (label, metrics) => label + ': totale ' + fmt(metrics?.total) +
+    ', elettrico ' + fmt(metrics?.electric) +
+    ', ibrido plug-in ' + fmt(metrics?.plugInHybrid) +
+    ', ibrido ' + fmt(metrics?.hybrid) +
+    ', benzina ' + fmt(metrics?.petrol) +
+    ', diesel ' + fmt(metrics?.diesel) +
+    ', gas ' + fmt(metrics?.gas) +
+    ', altri ' + fmt(metrics?.other);
+  const monthly = data?.monthly?.latest;
+  const weekly = data?.weekly?.latest;
+  const isWeekly = cadence === 'weekly';
+  const targetPeriod = requestedPeriod || (isWeekly ? weekly?.period : monthly?.period) || 'n/d';
+  const minWords = 550;
+
+  if (isWeekly) {
+    const ticino = weekly?.byCanton?.TI;
+    if (!weekly || !ticino) throw new Error('Incomplete weekly data in config/astra_vehicle_stats Firestore doc.');
+    const history = Array.isArray(data?.weekly?.history) ? data.weekly.history.slice(-12) : [];
+    const historyTable = history
+      .map((point) => '| ' + point.period + ' | ' + fmt(point.nationalTotal) + ' | ' + fmt(point.ticinoTotal) + ' | ' + fmt(point.ticinoElectric) + ' |')
+      .join('\n');
+    return [
+      '[ARTICOLO DATI ASTRA — REPORT SETTIMANALE NUOVE IMMATRICOLAZIONI TICINO]',
+      'Settimana ASTRA/OFROU: ' + targetPeriod + '. Il report è tempestivo e può essere ricalcolato.',
+      '',
+      '=== DATI VERIFICATI (usare ESATTAMENTE questi numeri, non inventarne altri) ===',
+      metricLine('Nuove immatricolazioni svizzere nella settimana ' + weekly.period, weekly.national),
+      metricLine('Nuove immatricolazioni in Ticino nella settimana ' + weekly.period, ticino),
+      '',
+      '=== SERIE STORICA SETTIMANALE ===',
+      '| Settimana | Svizzera | Ticino | Elettrico Ticino |',
+      '|-----------|---------:|-------:|------------------:|',
+      historyTable,
+      '',
+      '=== ANGOLO EDITORIALE RICHIESTO ===',
+      'Scrivi una rubrica breve ma sostanziale: lead con il dato Ticino, confronto con le settimane presenti nella serie, lettura prudente del mix di alimentazioni e spiegazione del carattere provvisorio del report. Non trasformare una settimana in una previsione annuale.',
+      'Lunghezza: body1+body2+body3 devono superare complessivamente le ' + minWords + ' parole. Usa i numeri presenti nella tabella e commentali senza aggiungere cifre, comuni, marche o quote non fornite.',
+      'Ripartizione: body1 = risultato della settimana e confronto; body2 = serie storica e alimentazioni; body3 = cosa osservare per chi lavora in Ticino, con CTA alla dashboard /statistiche/.',
+      'Non introdurre percentuali o numeri diversi da quelli presenti in questo prompt. Il dataset non contiene dati per singoli comuni, aziende, marche o proprietari.',
+      'Tono giornalistico-istituzionale italiano, neutro e leggibile. Usa "i dati ASTRA indicano" e "il report settimanale registra" quando attribuisci i numeri.',
+      'Fonte da citare: Ufficio federale delle strade ASTRA/OFROU, dati aperti IVZ — ' + (data?.source?.overviewUrl || 'https://www.astra.admin.ch/astra/it/home/documentazione/dati-aperti/veicoli.html'),
+    ].filter(Boolean).join('\n');
+  }
+
+  if (!monthly) throw new Error('Incomplete monthly data in config/astra_vehicle_stats Firestore doc.');
+  const rows = Array.isArray(monthly.byCanton) ? monthly.byCanton : [];
+  if (rows.length !== 26) throw new Error('Expected the complete 26-canton table in config/astra_vehicle_stats Firestore doc.');
+
+  if (section === 'svizzera') {
+    const cantonTable = rows
+      .map((row) => '| ' + row.code + ' | ' + fmt(row.stock?.total) + ' | ' + fmt(row.newRegistrations?.total) + ' | ' + fmt(row.usedImports?.total) + ' | ' + fmt(row.stock?.electric) + ' |')
+      .join('\n');
+    return [
+      '[ARTICOLO DATI ASTRA — PARCO VEICOLI E FLUSSI IN SVIZZERA]',
+      'Mese di riferimento ASTRA/OFROU: ' + targetPeriod + '.',
+      '',
+      '=== DATI VERIFICATI (usare ESATTAMENTE questi numeri, non inventarne altri) ===',
+      metricLine('Stock nazionale ' + monthly.period, monthly.national?.stock),
+      metricLine('Nuove immatricolazioni nazionali ' + monthly.period, monthly.national?.newRegistrations),
+      metricLine('Importazioni di veicoli usati ' + monthly.period, monthly.national?.usedImports),
+      '',
+      '=== TABELLA COMPLETA DEI 26 CANTONI ===',
+      '| Cantone | Stock | Nuove immatricolazioni | Import usati | Elettrici nello stock |',
+      '|---------|------:|-----------------------:|-------------:|----------------------:|',
+      cantonTable,
+      '',
+      '=== ANGOLO EDITORIALE RICHIESTO ===',
+      'Costruisci un articolo nazionale leggendo la graduatoria e i contrasti tra cantoni: dimensione del parco, ritmo delle nuove immatricolazioni, import usati e diffusione dei veicoli elettrici in valori assoluti. Evidenzia solo differenze leggibili dalla tabella e non inventare spiegazioni causali.',
+      'Lunghezza: body1+body2+body3 devono superare complessivamente le ' + minWords + ' parole. La tabella dei 26 cantoni è il materiale sufficiente: confronta i valori più alti e più bassi senza introdurre numeri esterni.',
+      'Ripartizione: body1 = quadro nazionale; body2 = confronto tra cantoni; body3 = implicazioni pratiche per chi vive o lavora in Svizzera, con CTA alla dashboard /statistiche/.',
+      'Non introdurre percentuali o numeri diversi da quelli presenti in questo prompt. Il dataset è aggregato: non contiene comuni, marche, aziende, targhe, VIN, proprietari o cause economiche.',
+      'Tono giornalistico-istituzionale italiano, nazionale e non centrato solo sul Ticino.',
+      'Fonte da citare: Ufficio federale delle strade ASTRA/OFROU, dati aperti IVZ — ' + (data?.source?.overviewUrl || 'https://www.astra.admin.ch/astra/it/home/documentazione/dati-aperti/veicoli.html'),
+    ].filter(Boolean).join('\n');
+  }
+
+  const ticino = rows.find((row) => row.code === 'TI');
+  if (!ticino) throw new Error('Ticino row missing in config/astra_vehicle_stats Firestore doc.');
+  const monthlyHistory = Array.isArray(data?.monthly?.history) ? data.monthly.history.slice(-12) : [];
+  const historyTable = monthlyHistory
+    .map((point) => '| ' + point.period + ' | ' + fmt(point.ticinoStock) + ' | ' + fmt(point.ticinoNewRegistrations) + ' | ' + fmt(point.ticinoUsedImports) + ' | ' + fmt(point.ticinoElectric) + ' |')
+    .join('\n');
+  return [
+    '[ARTICOLO DATI ASTRA — PARCO VEICOLI E IMMATRICOLAZIONI IN TICINO]',
+    'Mese di riferimento ASTRA/OFROU: ' + targetPeriod + '.',
+    '',
+    '=== DATI VERIFICATI (usare ESATTAMENTE questi numeri, non inventarne altri) ===',
+    metricLine('Stock veicoli in Ticino ' + monthly.period, ticino.stock),
+    metricLine('Nuove immatricolazioni in Ticino ' + monthly.period, ticino.newRegistrations),
+    metricLine('Importazioni di veicoli usati in Ticino ' + monthly.period, ticino.usedImports),
+    '',
+    '=== SERIE STORICA MENSILE TICINO ===',
+    '| Mese | Stock | Nuove | Import usati | Elettrici nello stock |',
+    '|------|------:|------:|-------------:|----------------------:|',
+    historyTable,
+    '',
+    '=== ANGOLO EDITORIALE RICHIESTO ===',
+    'Scrivi un articolo locale sui cambiamenti del parco ticinese: distingui sempre stock, nuove immatricolazioni e import usati; commenta le alimentazioni in valori assoluti e leggi la serie storica senza trasformarla in una previsione.',
+    'Lunghezza: body1+body2+body3 devono superare complessivamente le ' + minWords + ' parole. Usa la serie mensile e la composizione per alimentazione già fornite, senza aggiungere cifre, comuni, marche o quote non presenti.',
+    'Ripartizione: body1 = fotografia del mese; body2 = serie storica e alimentazioni; body3 = implicazioni pratiche per i frontalieri e CTA alla dashboard /statistiche/.',
+    'Non introdurre percentuali o numeri diversi da quelli presenti in questo prompt. Il dataset non contiene dati per singoli comuni, aziende, marche, targhe, VIN o proprietari.',
+    'Tono giornalistico-istituzionale italiano, concreto e prudente.',
+    'Fonte da citare: Ufficio federale delle strade ASTRA/OFROU, dati aperti IVZ — ' + (data?.source?.overviewUrl || 'https://www.astra.admin.ch/astra/it/home/documentazione/dati-aperti/veicoli.html'),
+  ].filter(Boolean).join('\n');
+}
+
 // ── Isolamento del contenuto principale della pagina scrapata (issue #202) ──
 //
 // ## Il difetto
@@ -6613,6 +6756,13 @@ async function fetchPageContent(url) {
     const quarter = decodeURIComponent(url.slice('stats-bfs://'.length));
     console.error(`📊 Articolo statistica BFS: trimestre ${quarter}`);
     return await buildStatsBfsPromptContent(quarter);
+  }
+  // Handle ASTRA vehicle-data articles — no web page to scrape, build the
+  // prompt from the compact Firestore observatory written by the site worker.
+  if (url.startsWith('stats-astra://')) {
+    const token = decodeURIComponent(url.slice('stats-astra://'.length));
+    console.error(`🚗 Articolo statistica ASTRA: ${token}`);
+    return await buildStatsAstraPromptContent(token);
   }
   // Handle evergreen topics — no URL to fetch, use keyword angle as content.
   //
@@ -8130,7 +8280,7 @@ Se le implicazioni sono DEBOLI o GENERICHE (la fonte non ha un impatto pratico d
   // the dominant failure mode observed on local/fallback runs (2026-07-06).
   // Feeding the same compact brief here closes the generator/checker grounding
   // gap for every model in the cascade, not just local.
-  const isSyntheticSource = url.startsWith('evergreen://') || url.startsWith('stats-bfs://');
+  const isSyntheticSource = url.startsWith('evergreen://') || url.startsWith('stats-bfs://') || url.startsWith('stats-astra://');
 
   // The blocking factuality gates, stated to the writer BEFORE it writes
   // instead of being discovered after it has written — see buildSourceContract
@@ -8144,7 +8294,7 @@ Se le implicazioni sono DEBOLI o GENERICHE (la fonte non ha un impatto pratico d
   // MAX_SOURCE_CHARS is demanded by the gate while being invisible in the
   // prompt. Listing the anchors explicitly is what makes those satisfiable.
   //
-  // Skipped for synthetic sources (evergreen://, stats-bfs://): they carry no
+  // Skipped for synthetic sources (evergreen://, stats-bfs://, stats-astra://): they carry no
   // scraped source text and the fidelity gate does not apply to them.
   const sourceContract = isSyntheticSource ? '' : buildSourceContract({
     sourceText: pageContent || '',
@@ -8199,7 +8349,7 @@ Se le implicazioni sono DEBOLI o GENERICHE (la fonte non ha un impatto pratico d
     const _isBody = part === 'body';
     return `${systemRoleLine}
 
-SOURCE URL: ${url.startsWith('evergreen://') ? '(editorial research)' : url.startsWith('stats-bfs://') ? 'https://www.bfs.admin.ch/bfs/it/home/statistiche/industria-servizi.html (BFS)' : url}
+    SOURCE URL: ${url.startsWith('evergreen://') ? '(editorial research)' : url.startsWith('stats-bfs://') ? 'https://www.bfs.admin.ch/bfs/it/home/statistiche/industria-servizi.html (BFS)' : url.startsWith('stats-astra://') ? 'https://www.astra.admin.ch/astra/it/home/documentazione/dati-aperti/veicoli.html (ASTRA/OFROU)' : url}
 ${_isMeta ? 'ARTICOLO GIÀ SCRITTO (è la TUA unica fonte per i metadati: NON aggiungere fatti, cifre, date o istituzioni che non compaiano qui sotto)' : 'SOURCE CONTENT'}:
 ${sourceBody}
 ${domainFacts}
@@ -14955,7 +15105,7 @@ async function main() {
   }
 
   // ── Manual URL mode ──
-  if (!url || (!url.startsWith('http') && !url.startsWith('evergreen://') && !url.startsWith('stats-bfs://'))) {
+  if (!url || (!url.startsWith('http') && !url.startsWith('evergreen://') && !url.startsWith('stats-bfs://') && !url.startsWith('stats-astra://'))) {
     finalizeRunReport('error', { notes: [...RUN_REPORT.notes, 'Invalid URL input'] });
     console.error('❌ URL non valido. Uso: node scripts/create-article.mjs [url]');
     await exitAfterFlush(1);
@@ -15042,7 +15192,10 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   // prompt. Zero finche' nessun tentativo l'ha detto; vedi il catch piu' sotto.
   let lastPromptTokenBudget = 0;
 
-  const isStatsBfsSource = String(url || '').startsWith('stats-bfs://');
+  // Kept under the historical name because the retry/fact-check gates and
+  // their regression tests already treat BFS as the closed synthetic source.
+  // ASTRA uses the same safety contract: its prompt is the complete dataset.
+  const isStatsBfsSource = String(url || '').startsWith('stats-bfs://') || String(url || '').startsWith('stats-astra://');
   // La lunghezza che le scale adattive devono misurare. Per una fonte reale è
   // il testo scrapato; per `stats-bfs://` non esiste testo scrapato, quindi è
   // vuota — vedi il commento sotto.
@@ -16065,7 +16218,9 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   // — the human-readable citation must point to the public BFS landing page.
   const citationUrl = url.startsWith('stats-bfs://')
     ? 'https://www.bfs.admin.ch/bfs/it/home/statistiche/industria-servizi.html'
-    : url;
+    : url.startsWith('stats-astra://')
+      ? 'https://www.astra.admin.ch/astra/it/home/documentazione/dati-aperti/veicoli.html'
+      : url;
   if (citationUrl && !citationUrl.startsWith('evergreen://')) {
     try {
       const sourceDomain = new URL(citationUrl).hostname.replace(/^www\./, '');
@@ -16157,6 +16312,7 @@ async function generateAndValidateArticle(url, sourceContext = null) {
     sourceContext?.source
       || (url.startsWith('evergreen://') ? 'evergreen'
           : url.startsWith('stats-bfs://') ? 'bfs.admin.ch'
+          : url.startsWith('stats-astra://') ? 'astra.admin.ch'
           : new URL(url).hostname),
   );
   if (SOURCE_QUOTA_ENABLED && sourceDomain && sourceDomain !== 'evergreen') {
