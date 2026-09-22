@@ -143,11 +143,35 @@ test('#606 rifiuta collisioni con chiavi già nel base o con sintassi equivalent
       '  foo: 2,',
       '>>>>>>> origin/main',
     ],
+    [
+      '<<<<<<< HEAD',
+      "  'same-value',",
+      '||||||| base',
+      '  stable: 0,',
+      '=======',
+      "  'same-value',",
+      '>>>>>>> origin/main',
+    ],
   ];
 
   for (const lines of cases) {
     assert.equal(resolveSafeTextConflictsInText(lines.join('\n')), null);
   }
+});
+
+test('#606 rifiuta gli escape Unicode a graffe non supportati', () => {
+  const escapedKey = `${String.fromCharCode(92)}u{66}oo`;
+  const conflicted = [
+    '<<<<<<< HEAD',
+    `  '${escapedKey}': 1,`,
+    '||||||| base',
+    '  stable: 0,',
+    '=======',
+    '  foo: 2,',
+    '>>>>>>> origin/main',
+  ].join('\n');
+
+  assert.equal(resolveSafeTextConflictsInText(conflicted), null);
 });
 
 test('#606 il merge usa diff3 e il fallback resta fail-closed', () => {

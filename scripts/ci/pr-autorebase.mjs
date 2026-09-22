@@ -1301,10 +1301,15 @@ function decodeJsStringKey(token) {
     }
     const escaped = body[++i];
     if (escaped === undefined) return null;
-    if (escaped === 'x' && /^[0-9a-f]{2}$/i.test(body.slice(i + 1, i + 3))) {
+    if (escaped === 'x') {
+      if (!/^[0-9a-f]{2}$/i.test(body.slice(i + 1, i + 3))) return null;
       value += String.fromCharCode(Number.parseInt(body.slice(i + 1, i + 3), 16));
       i += 2;
-    } else if (escaped === 'u' && /^[0-9a-f]{4}$/i.test(body.slice(i + 1, i + 5))) {
+    } else if (escaped === 'u') {
+      // Unicode code-point escapes with braces are deliberately rejected:
+      // accepting only the leading u would make equivalent keys compare
+      // unequal and could admit duplicate object properties.
+      if (!/^[0-9a-f]{4}$/i.test(body.slice(i + 1, i + 5))) return null;
       value += String.fromCharCode(Number.parseInt(body.slice(i + 1, i + 5), 16));
       i += 4;
     } else if (escaped === 'n') value += '\n';
@@ -1371,7 +1376,8 @@ function additiveEntryIdentity(line) {
   if (comma < 0) return null;
   const entry = trimmed.slice(0, comma).trim();
   if (/^(?:'(?:\\.|[^'\\])*'|"(?:\\.|[^"\\])*"|`(?:\\.|[^`\\])*`)$/.test(entry)) {
-    return `value:${decodeJsStringKey(entry)}`;
+    const value = decodeJsStringKey(entry);
+    return value === null ? null : `value:${value}`;
   }
   const bare = /^([A-Za-z_$][\w$]*)$/.exec(entry);
   // A bare identifier is ambiguous here: in an array it is a value, while in
@@ -1415,8 +1421,9 @@ function resolveAdditiveEntryBlock(base, ours, theirs) {
       if (identity) {
         const prior = identities.get(identity);
         if (prior?.base) return null;
-        if (prior && (prior.normalized !== normalized || prior.gap !== gap)) return null;
-        if (prior) continue;
+        // Duplicate values in an array may be meaningful; dropping one while
+        // auto-resolving a conflict would silently change behavior.
+        if (prior) return null;
         identities.set(identity, { normalized, gap });
       } else if (seenLines.has(normalized)) {
         continue;
