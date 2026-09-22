@@ -20,7 +20,10 @@ export const RERUN_PRESERVATION_PROOF = Object.freeze({
 export const MAX_RUN_PAGES = 2;
 export const RUNS_PER_PAGE = 100;
 export const MAX_DEEP_CANDIDATES = 20;
-export const MAX_LIVENESS_GET_REQUESTS = 5;
+export const MAX_LIVENESS_STATUS_GET_REQUESTS = 5;
+export const MAX_ACTIVE_JOB_GET_REQUESTS = 1;
+export const MAX_LIVENESS_GET_REQUESTS =
+  MAX_LIVENESS_STATUS_GET_REQUESTS + MAX_ACTIVE_JOB_GET_REQUESTS;
 export const MAX_TOTAL_GET_REQUESTS = 30;
 export const BOOTSTRAP_GET_REQUESTS = 1;
 export const MAX_GET_REQUESTS = MAX_TOTAL_GET_REQUESTS - BOOTSTRAP_GET_REQUESTS;
@@ -50,9 +53,10 @@ export const MAX_REPORT_BYTES = 16 * 1024;
 //     cresce con la profondita' dell'arretrato e non col guasto: tre run davanti
 //     a 350 min di timeout ciascuna fanno 17,5 h di attesa lecita, quattro ne
 //     fanno 23,3. A dover avanzare e' il detentore, e il suo wall clock
-//     `createdAt`->`updatedAt` misurato ha un massimo di 869 min su 15 run.
-//     Oltre le 24 h (1,66x il massimo osservato) il detentore non sta finendo:
-//     e' il caso job-zero per cui esiste `translate-queue-recovery.yml`.
+//     `jobs.started_at`->now, esclusa l'attesa del mutex, e' il dato che misura
+//     il job vero. Oltre le 24 h (1,66x il massimo osservato prima del mutex)
+//     il detentore non sta finendo: e' il caso job-zero per cui esiste
+//     `translate-queue-recovery.yml`.
 export const QUEUE_UNSERVED_STALE_THRESHOLD_SECONDS = 6 * 60 * 60;
 export const QUEUE_HOLDER_STALE_THRESHOLD_SECONDS = 24 * 60 * 60;
 
@@ -65,7 +69,7 @@ const TIMESTAMP_RE = /^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})(?:\.(\d{1,3}))?Z$/;
 const ALLOWED_EVENTS = new Set(['schedule', 'workflow_dispatch']);
 const ACTIVE_STATUSES = new Set(['in_progress']);
 const PENDING_STATUSES = new Set(['pending', 'queued', 'requested', 'waiting']);
-if (ACTIVE_STATUSES.size + PENDING_STATUSES.size !== MAX_LIVENESS_GET_REQUESTS) {
+if (ACTIVE_STATUSES.size + PENDING_STATUSES.size !== MAX_LIVENESS_STATUS_GET_REQUESTS) {
   throw new TypeError('invalid_liveness_budget');
 }
 const KNOWN_STATUSES = new Set([
@@ -202,6 +206,7 @@ function makeInitialState(nowMs) {
     queueCreatedMs: [],
     pendingCreatedMs: [],
     activeCreatedMs: [],
+    activeStartedMs: [],
     discovery: {
       declaredTotal: 0,
       maxRuns: MAX_RUN_PAGES * RUNS_PER_PAGE,
@@ -340,6 +345,36 @@ async function listCurrentQueueRuns(client, state) {
   return collected.sort(compareRuns);
 }
 
+async function collectActiveJobStart(client, state, currentRuns) {
+  if (!state.complete) return;
+  const activeRuns = currentRuns.filter((run) => ACTIVE_STATUSES.has(run?.status));
+  if (activeRuns.length === 0) return;
+  if (activeRuns.length !== 1) {
+    throw new ObservationFailure('liveness_census_inconclusive');
+  }
+
+  const runId = validRunId(activeRuns[0]?.id);
+  if (runId === null) throw new ObservationFailure('liveness_census_inconclusive');
+  const jobs = await client.getJson(
+    `/repos/${TARGET_REPOSITORY}/actions/runs/${runId}/jobs?filter=latest&per_page=100&page=1`,
+  );
+  if (!Number.isSafeInteger(jobs?.total_count)
+      || jobs.total_count < 0
+      || jobs.total_count > 100
+      || !Array.isArray(jobs?.jobs)
+      || jobs.jobs.length !== jobs.total_count) {
+    throw new ObservationFailure('liveness_census_inconclusive');
+  }
+
+  const activeJobs = jobs.jobs.filter((job) => job?.status === 'in_progress');
+  if (activeJobs.length !== 1) {
+    throw new ObservationFailure('liveness_census_inconclusive');
+  }
+  const startedMs = validTimestamp(activeJobs[0].started_at);
+  if (startedMs === null) throw new ObservationFailure('liveness_census_inconclusive');
+  state.activeStartedMs.push(startedMs);
+}
+
 async function listAllBoundedRuns(client, state) {
   const collected = [];
   let declaredTotal = null;
@@ -446,16 +481,7 @@ function collectShallowFacts(run, state, candidates, { collectQueue = true } = {
     if (collectQueue) {
       if (isActive) {
         state.activeRunIds.push(runId);
-        // Un rerun non azzera `created_at` ma aggiorna `run_started_at`: per
-        // l'eta' del detentore vale il piu' recente dei due, altrimenti un
-        // detentore appena riavviato si legge come fermo da giorni e apre un
-        // alert falso. Se il campo manca o non e' valido si ricade su
-        // `created_at`, cioe' sul comportamento precedente: e' un
-        // raffinamento della misura, non una nuova precondizione.
-        const startedMs = validTimestamp(run.run_started_at);
-        state.activeCreatedMs.push(
-          startedMs === null ? createdMs : Math.max(createdMs, startedMs),
-        );
+        state.activeCreatedMs.push(createdMs);
       }
       if (isPending) {
         state.pendingRunIds.push(runId);
@@ -548,8 +574,11 @@ function buildReport(state, client) {
   const oldestPendingAgeSeconds = oldestPendingMs === null
     ? null
     : Math.max(0, Math.floor((state.nowMs - oldestPendingMs) / 1000));
-  const oldestActiveMs = state.activeCreatedMs.length > 0
+  const oldestActiveCreatedMs = state.activeCreatedMs.length > 0
     ? Math.min(...state.activeCreatedMs)
+    : null;
+  const oldestActiveMs = state.activeStartedMs.length > 0
+    ? Math.min(...state.activeStartedMs)
     : null;
   const oldestActiveAgeSeconds = oldestActiveMs === null
     ? null
@@ -634,7 +663,12 @@ function buildReport(state, client) {
         : Math.max(0, Math.floor((state.nowMs - oldestCreatedMs) / 1000)),
       oldestCreatedAt: oldestCreatedMs === null ? null : new Date(oldestCreatedMs).toISOString(),
       oldestActiveAgeSeconds,
-      oldestActiveCreatedAt: oldestActiveMs === null ? null : new Date(oldestActiveMs).toISOString(),
+      oldestActiveCreatedAt: oldestActiveCreatedMs === null
+        ? null
+        : new Date(oldestActiveCreatedMs).toISOString(),
+      oldestActiveStartedAt: oldestActiveMs === null
+        ? null
+        : new Date(oldestActiveMs).toISOString(),
       oldestPendingAgeSeconds,
       oldestPendingCreatedAt: oldestPendingMs === null ? null : new Date(oldestPendingMs).toISOString(),
       slo: queueSlo,
@@ -685,6 +719,7 @@ export async function observeTranslateQueue({
   try {
     const currentRuns = await listCurrentQueueRuns(client, state);
     for (const run of currentRuns) collectShallowFacts(run, state, [], { collectQueue: true });
+    await collectActiveJobStart(client, state, currentRuns);
     const runs = await listAllBoundedRuns(client, state);
     state.scannedRuns = runs.length;
     if (!state.complete) return buildReport(state, client);
@@ -727,6 +762,7 @@ export async function observeTranslateQueueLiveness({
     try {
       const currentRuns = await listCurrentQueueRuns(client, state);
       for (const run of currentRuns) collectShallowFacts(run, state, [], { collectQueue: true });
+      await collectActiveJobStart(client, state, currentRuns);
     } catch (error) {
       failClosed(state, error instanceof ObservationFailure ? error.code : 'api_incomplete');
     }

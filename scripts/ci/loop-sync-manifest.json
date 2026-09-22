@@ -3693,10 +3693,10 @@
     {
       "path": "scripts/ci/translate-queue-recovery.mjs",
       "mode": "corpus-only",
-      "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
+      "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, misura l'eta' del detentore dal job attivo (`jobs.started_at`) invece che dalla coda del workflow, dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
       "baseline": {
         "site": null,
-        "corpus": "fba84a18d4decb54",
+        "corpus": "e86919aaf45b4647",
         "alignedAt": "2026-09-20"
       }
     },
@@ -3706,7 +3706,7 @@
       "reason": "Contratto Node deterministico corpus-only per watchdog e workflow translate: copre censimento corrente indipendente da oltre 200 run storiche, discovery troncata, budget, prova schedule redatta, assenza by construction di scritture remote e drift del pin blob contro il workflow generato.",
       "baseline": {
         "site": null,
-        "corpus": "a62aeaa126fde1ca",
+        "corpus": "ce9b09c59bb45aa3",
         "alignedAt": "2026-09-01"
       }
     },
@@ -3726,7 +3726,7 @@
       "reason": "Planner e claim CAS zero-dependency corpus-only: usa target-only senza discovery storica, riserva il budget per target/ancestry/blob/jobs/guard finali e richiede capability blob-bound con dedupe effectively-once e successor guard v1; empty_at_observation viene autorizzato solo dopo il guard live.",
       "baseline": {
         "site": null,
-        "corpus": "7c27dc0200d470dc",
+        "corpus": "ebec1886d837829c",
         "alignedAt": "2026-09-01"
       }
     },
@@ -3746,7 +3746,7 @@
       "reason": "Contratto deterministico corpus-only della recovery manuale: copre 201 cancellazioni profonde senza consumare il target-only budget, capability live effectively-once/successor guard v1, race post-status e post-final-liveness a zero write, CAS, failure ambiguity e singolo endpoint mutante.",
       "baseline": {
         "site": null,
-        "corpus": "9152a5594c19b9f5",
+        "corpus": "e4945c14b67726b4",
         "alignedAt": "2026-09-01"
       }
     },

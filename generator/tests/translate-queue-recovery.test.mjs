@@ -80,6 +80,7 @@ function fakeGithub({
   compareByHead = {},
   contentsByHead = {},
   currentRuns = null,
+  activeJobsByRun = {},
   jobsByRun = {},
   pages = [[]],
   totalCount = pages.reduce((sum, page) => sum + page.length, 0),
@@ -116,6 +117,24 @@ function fakeGithub({
       `^/repos/${TARGET_REPOSITORY}/actions/runs/([1-9][0-9]*)/jobs$`,
     ));
     if (jobsMatch) {
+      if (url.searchParams.get('per_page') === '100') {
+        assert.equal(url.searchParams.get('filter'), 'latest');
+        const current = (currentRuns ?? pages.flat()).find((row) => (
+          String(row?.id) === jobsMatch[1]
+        ));
+        return response(200, activeJobsByRun[jobsMatch[1]] ?? (
+          current?.status === 'in_progress'
+            ? {
+              jobs: [{
+                id: `${jobsMatch[1]}-job`,
+                started_at: current.run_started_at ?? current.created_at,
+                status: 'in_progress',
+              }],
+              total_count: 1,
+            }
+            : { jobs: [], total_count: 0 }
+        ));
+      }
       assert.equal(url.searchParams.get('filter'), 'latest');
       assert.equal(url.searchParams.get('per_page'), '1');
       return response(200, jobsByRun[jobsMatch[1]] ?? { jobs: [], total_count: 0 });
@@ -184,8 +203,58 @@ test('classifica active/pending e segnala il superamento del queue SLO', async (
   assert.equal(report.capabilities.recoverySchedule.reason, 'manual_only_by_policy');
   assert.equal(report.capabilities.alreadyRecovered.state, 'not_evaluated');
   assert.equal(report.capabilities.claimState.state, 'not_evaluated');
-  assert.equal(report.queryBudget.usedGets, 12);
+  assert.equal(report.queryBudget.usedGets, 13);
   assert.ok(Buffer.byteLength(json) <= MAX_REPORT_BYTES);
+});
+
+test('misura il detentore dall avvio del job, non dalla coda del workflow', async () => {
+  const holderId = 33500000014;
+  const holder = run(holderId, {
+    created_at: '2026-08-31T12:00:54.000Z',
+    run_started_at: '2026-08-31T12:00:54.000Z',
+    conclusion: null,
+    status: 'in_progress',
+  });
+  const fake = fakeGithub({
+    activeJobsByRun: {
+      [holderId]: {
+        jobs: [{
+          id: 1,
+          started_at: '2026-09-01T14:36:15.000Z',
+          status: 'in_progress',
+        }],
+        total_count: 1,
+      },
+    },
+    currentRuns: [holder],
+    pages: [[]],
+  });
+  const { report } = await observe(fake);
+
+  assert.equal(report.queue.oldestActiveStartedAt, '2026-09-01T14:36:15.000Z');
+  assert.equal(report.queue.slo.measuredAgeSeconds, 10245);
+  assert.equal(report.queue.slo.state, 'within_slo');
+  assert.equal(report.queue.slo.alert, false);
+  assert.equal(report.reasonCodes.includes('queue_slo_breached'), false);
+  assert.equal(report.queryBudget.usedGets, 7);
+});
+
+test('un job attivo non verificabile rende il censimento fail-closed', async () => {
+  const holderId = 33500000015;
+  const fake = fakeGithub({
+    activeJobsByRun: {
+      [holderId]: { jobs: [], total_count: 1 },
+    },
+    currentRuns: [run(holderId, { conclusion: null, status: 'in_progress' })],
+    pages: [[]],
+  });
+  const { report } = await observe(fake);
+
+  assert.equal(report.complete, false);
+  assert.equal(report.failClosed, true);
+  assert.ok(report.reasonCodes.includes('liveness_census_inconclusive'));
+  assert.equal(report.queue.slo.state, 'not_evaluable');
+  assert.equal(report.queryBudget.usedGets, 6);
 });
 
 test('il queue SLO usa solo la run pending più vecchia e apre l alert se nessuno drena', async () => {
@@ -280,16 +349,26 @@ test('un detentore fermo da oltre una giornata apre l alert anche senza arretrat
   assert.ok(report.reasonCodes.includes('queue_slo_breached'));
 });
 
-// Un rerun conserva il `created_at` originale: senza `run_started_at` un
-// detentore riavviato adesso si leggerebbe come fermo da giorni.
-test('un detentore riavviato si misura da run_started_at, non da created_at', async () => {
+// Un rerun puo' conservare sia `created_at` sia `run_started_at` originali:
+// l'eta' del detentore deve seguire l'avvio del job effettivamente in corso.
+test('un detentore riavviato si misura da jobs.started_at', async () => {
+  const holderId = 33500000013;
   const holder = run(33500000013, {
     conclusion: null,
     created_at: '2026-08-30T17:00:00.000Z',
-    run_started_at: '2026-09-01T17:00:00.000Z',
+    run_started_at: '2026-08-30T17:00:00.000Z',
     status: 'in_progress',
   });
-  const { report } = await observe(fakeGithub({ currentRuns: [holder], pages: [[]] }));
+  const { report } = await observe(fakeGithub({
+    activeJobsByRun: {
+      [holderId]: {
+        jobs: [{ id: 1, started_at: '2026-09-01T17:00:00.000Z', status: 'in_progress' }],
+        total_count: 1,
+      },
+    },
+    currentRuns: [holder],
+    pages: [[]],
+  }));
   assert.equal(report.queue.slo.measuredAgeSeconds, 1620);
   assert.equal(report.queue.slo.state, 'within_slo');
   assert.equal(report.reasonCodes.includes('queue_slo_breached'), false);
