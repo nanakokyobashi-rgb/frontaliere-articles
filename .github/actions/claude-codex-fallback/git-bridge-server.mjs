@@ -74,15 +74,34 @@ function isCurrentBranchRef(value, currentBranchRef) {
   return value === currentBranchRef;
 }
 
+// Git also accepts a short branch name in a refspec. Expand it only when it
+// names the already checked-out work branch; other namespaces stay rejected.
+function normalizeCurrentBranchRefspec(refspec, currentBranchRef) {
+  const branchRef = currentWorkBranchRef(currentBranchRef);
+  if (!branchRef || typeof refspec !== 'string') return refspec;
+  const branchName = branchRef.slice(WORK_BRANCH_REF_PREFIX.length);
+  const separator = refspec.indexOf(':');
+  const source = separator === -1 ? refspec : refspec.slice(0, separator);
+  const destination = separator === -1 ? '' : refspec.slice(separator + 1);
+  const normalize = (value) => value === branchName ? branchRef : value;
+  const normalizedSource = normalize(source);
+  const normalizedDestination = separator === -1 ? '' : normalize(destination);
+  if (normalizedSource === source && normalizedDestination === destination) return refspec;
+  return separator === -1
+    ? normalizedSource
+    : `${normalizedSource}:${normalizedDestination}`;
+}
+
 function validatePushRefspecs(refspecs, allowedWorkBranch) {
   const currentBranchRef = currentWorkBranchRef(allowedWorkBranch);
   if (!currentBranchRef) {
     return 'Git push requires a checked-out current work branch under refs/heads; detached HEAD, main, and other namespaces are not permitted';
   }
-  if (refspecs.length !== 1) {
+  const normalizedRefspecs = refspecs.map((refspec) => normalizeCurrentBranchRefspec(refspec, currentBranchRef));
+  if (normalizedRefspecs.length !== 1) {
     return 'Git push requires exactly one explicit work-branch refspec';
   }
-  const refspec = refspecs[0];
+  const refspec = normalizedRefspecs[0];
   if (!refspec || refspec.startsWith('+') || refspec.includes('*')) {
     return `Git push refspec is not permitted by the Codex fallback bridge: ${refspec || '<missing>'}`;
   }
@@ -194,10 +213,14 @@ export function buildGitNetworkArgs(args, expectedRemote, { allowedWorkBranch = 
   }
   const result = [...args];
   const remoteIndex = firstPositionalIndex(result);
-  if (result[0] === 'push' && remoteIndex >= 0 && result.length === remoteIndex + 2 && result[remoteIndex + 1] === 'HEAD') {
+  if (result[0] === 'push' && remoteIndex >= 0 && result.length === remoteIndex + 2) {
     const branchRef = currentWorkBranchRef(allowedWorkBranch);
-    if (!branchRef) throw new Error('Git push requires a checked-out current work branch under refs/heads; detached HEAD, main, and other namespaces are not permitted');
-    result[remoteIndex + 1] = `HEAD:${branchRef}`;
+    const normalizedRefspec = normalizeCurrentBranchRefspec(result[remoteIndex + 1], branchRef);
+    if (normalizedRefspec !== result[remoteIndex + 1]) result[remoteIndex + 1] = normalizedRefspec;
+    if (result[remoteIndex + 1] === 'HEAD') {
+      if (!branchRef) throw new Error('Git push requires a checked-out current work branch under refs/heads; detached HEAD, main, and other namespaces are not permitted');
+      result[remoteIndex + 1] = `HEAD:${branchRef}`;
+    }
   }
   if (remoteIndex >= 0) result[remoteIndex] = remote;
   else result.push(remote);
@@ -245,6 +268,77 @@ export function resolveCurrentWorkBranchRef({ realGit, cwd, env }) {
   });
   if (result.error || result.status !== 0) return '';
   return currentWorkBranchRef(String(result.stdout || '').trim());
+}
+
+/**
+ * The host bridge deliberately disables arbitrary repository hooks: executing
+ * `.githooks/pre-push` in the credential-bearing host process would turn a
+ * repository-controlled shell file into a host-side code path. Preserve the
+ * local hook's deterministic sibling check without re-enabling that trust
+ * boundary. Repositories that do not ship the site hook/checker (for example
+ * the corpus checkout) remain opt-out by construction.
+ */
+export function runRemoteSiblingPrePush({ realGit, cwd, env, workBranchRef }) {
+  const hook = path.join(cwd, '.githooks', 'pre-push');
+  const checker = path.join(cwd, 'scripts', 'ci', 'check-sibling-patterns.mjs');
+  if (!fs.existsSync(hook) || !fs.existsSync(checker)) {
+    return { code: 0, stdout: '', stderr: '' };
+  }
+  if (!currentWorkBranchRef(workBranchRef)) {
+    return {
+      code: 2,
+      stdout: '',
+      stderr: 'Codex Git bridge: sibling pre-push check requires a work branch\n',
+    };
+  }
+  // `env` is the network Git environment and contains the bridge's
+  // Authorization extraheader as numbered GIT_CONFIG_* entries. The checker
+  // only needs the shadow Git metadata, never the credential; do not execute
+  // repository code with that token in its environment.
+  const checkerEnv = Object.fromEntries(
+    Object.entries(env || {}).filter(([key]) =>
+      key !== 'GIT_CONFIG_COUNT' &&
+      !/^GIT_CONFIG_(?:KEY|VALUE)_\d+$/.test(key),
+    ),
+  );
+  // Match the local pre-push input: the bridge only permits the checked-out
+  // work branch, so resolve that exact ref instead of relying on a possibly
+  // detached/stale HEAD in the host checkout.
+  const head = spawnSync(realGit, ['rev-parse', workBranchRef], {
+    cwd,
+    env: checkerEnv,
+    encoding: 'utf8',
+    stdio: ['ignore', 'pipe', 'pipe'],
+    timeout: 5_000,
+  });
+  const headSha = String(head.stdout || '').trim();
+  if (head.error || head.status !== 0 || !/^[0-9a-f]{40}$/i.test(headSha)) {
+    return {
+      code: 2,
+      stdout: '',
+      stderr: `Codex Git bridge: cannot resolve pushed work branch (${head.stderr || head.error?.message || 'invalid SHA'})\n`,
+    };
+  }
+  const result = spawnSync(process.execPath, [checker, '--head', headSha], {
+    cwd,
+    env: checkerEnv,
+    encoding: 'utf8',
+    stdio: ['ignore', 'pipe', 'pipe'],
+    timeout: CHILD_TIMEOUT_MS,
+    maxBuffer: MAX_OUTPUT_BYTES,
+  });
+  if (result.error) {
+    return {
+      code: 2,
+      stdout: String(result.stdout || ''),
+      stderr: `Codex Git bridge: sibling pre-push check failed to start (${result.error.message})\n`,
+    };
+  }
+  return {
+    code: result.status ?? 2,
+    stdout: String(result.stdout || ''),
+    stderr: String(result.stderr || ''),
+  };
 }
 
 function main() {
@@ -401,6 +495,13 @@ function main() {
         finish({ code: 2, stderr: `bridge request: ${error.message}\n` });
         return;
       }
+      const siblingPrePush = args[0] === 'push'
+        ? runRemoteSiblingPrePush({ realGit, cwd, env: baseEnv, workBranchRef: allowedWorkBranch })
+        : { code: 0, stdout: '', stderr: '' };
+      if (siblingPrePush.code !== 0) {
+        finish(siblingPrePush);
+        return;
+      }
       if (isMutatingGitArgs(args)) markSideEffect(sideEffectFile);
       child = spawn(realGit, childArgs, {
         cwd,
@@ -437,7 +538,11 @@ function main() {
         if (useProcessGroups && !terminationRequested) terminateChild('child-exited');
         childExited = true;
         children.delete(child);
-        finish({ code: 1, stdout, stderr: `${stderr}${error.message}\n` });
+        finish({
+          code: 1,
+          stdout: `${siblingPrePush.stdout}${stdout}`,
+          stderr: `${siblingPrePush.stderr}${stderr}${error.message}\n`,
+        });
         if (shuttingDown && children.size === 0 && pendingProcessGroups.size === 0) finalizeShutdown();
       });
       child.on('close', (code) => {
@@ -450,7 +555,11 @@ function main() {
         const detail = timedOut
           ? `${stderr}Codex Git bridge child timed out\n`
           : outputTooLarge ? `${stderr}Codex Git bridge output exceeded its limit\n` : stderr;
-        finish({ code: timedOut || outputTooLarge ? 1 : code ?? 1, stdout, stderr: detail });
+        finish({
+          code: timedOut || outputTooLarge ? 1 : code ?? 1,
+          stdout: `${siblingPrePush.stdout}${stdout}`,
+          stderr: `${siblingPrePush.stderr}${detail}`,
+        });
         if (shuttingDown && children.size === 0 && pendingProcessGroups.size === 0) finalizeShutdown();
       });
     });
