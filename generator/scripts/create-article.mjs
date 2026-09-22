@@ -5028,7 +5028,6 @@ const DETERMINISTIC_BODY_HEURISTIC_CODES = new Set([
   'unbalanced-parentheses',
   'truncated-bold',
   'incomplete-ending',
-  'leaked-prompt-scaffolding',
 ]);
 
 // Among major findings, only these two are deterministic cross-locale
@@ -5296,12 +5295,11 @@ function assertNoFabricatedLaborOfficeCrossLocale(data) {
  * il verdetto di questo gate e quello dell'audit retrospettivo coincidono per
  * costruzione: l'osservatore non puo' divergere dal gate che osserva.
  *
- * `ARTICLE_TRANSLATION_GATE=0` lo disarma (stessa convenzione di
- * `ARTICLE_TRANSLATE_FREE_MT`), per lasciare all'owner la leva sul volume
- * senza un cambio di codice.
+ * Non ha kill switch runtime: il gate non riscrive contenuti e i suoi finding
+ * critici sono il confine di ammissione. Un valore ambientale non deve poter
+ * riaprire il percorso di pubblicazione a un output gia' riconosciuto invalido.
  */
 function assertTranslationsPassFactualityGates(data) {
-  if (String(process.env.ARTICLE_TRANSLATION_GATE ?? '1') === '0') return;
   const it = data?.content?.it;
   if (!it) return;
   // Derivate dalle chiavi `bodyN` presenti, non elencate: sul percorso

@@ -75,8 +75,17 @@ const GATE_SRC = cutFunction('assertTranslationsPassFactualityGates', [
   'runArticleFactualityGates',
   'collectBodySections',
   'qualityReject',
-  'ARTICLE_TRANSLATION_GATE',
 ]);
+
+/** Ritaglia una costante `new Set([...])` usata dall'admission reale. */
+function cutSet(nome) {
+  const anchor = `const ${nome} = new Set([`;
+  const a = src.indexOf(anchor);
+  assert.notEqual(a, -1, `anchor non trovata — aggiornare questo test: ${anchor}`);
+  const rel = src.slice(a).indexOf(']);');
+  assert.notEqual(rel, -1, `chiusura di ${nome} non trovata`);
+  return src.slice(a, a + rel + 3);
+}
 
 // Il gate deriva le sezioni dalle chiavi `bodyN` presenti invece di elencarne
 // tre (#980): il ritaglio va quindi accompagnato dal suo helper, altrimenti
@@ -89,6 +98,10 @@ const ADMISSION_SRC = cutFunction('runArticleFactualityGates', [
   'DETERMINISTIC_BODY_HEURISTIC_CODES',
   'DETERMINISTIC_MAJOR_BLOCKING_CODES',
 ]);
+const ADMISSION_CONSTANTS_SRC = [
+  cutSet('DETERMINISTIC_BODY_HEURISTIC_CODES'),
+  cutSet('DETERMINISTIC_MAJOR_BLOCKING_CODES'),
+].join('\n');
 
 /** Istanzia la funzione vera con le sue dipendenze di chiusura iniettate. */
 function makeGate() {
@@ -96,22 +109,13 @@ function makeGate() {
     'runFactualityGates',
     'formatIssues',
     'console',
-    'DETERMINISTIC_BODY_HEURISTIC_CODES',
-    'DETERMINISTIC_MAJOR_BLOCKING_CODES',
-    `${SECTIONS_SRC}\n${ADMISSION_SRC}\n${GATE_SRC}\nreturn assertTranslationsPassFactualityGates;`,
+    `${SECTIONS_SRC}\n${ADMISSION_CONSTANTS_SRC}\n${ADMISSION_SRC}\n${GATE_SRC}\nreturn assertTranslationsPassFactualityGates;`,
   );
   // console silenziata: il gate stampa i rilievi, non deve sporcare l'output.
   return factory(
     runFactualityGates,
     formatIssues,
     { error: () => {} },
-    new Set([
-      'unbalanced-parentheses',
-      'truncated-bold',
-      'incomplete-ending',
-      'leaked-prompt-scaffolding',
-    ]),
-    new Set(['translation-number-dropped', 'translation-number-added']),
   );
 }
 
@@ -165,12 +169,16 @@ test('#2 lascia passare una traduzione pulita (nessun falso positivo)', () => {
   assert.doesNotThrow(() => gate(articolo({ enBody1: EN_PULITO })));
 });
 
-test('#3 ARTICLE_TRANSLATION_GATE=0 disarma il gate', () => {
+test('#3 ARTICLE_TRANSLATION_GATE=0 non disarma il gate fail-closed', () => {
   const gate = makeGate();
   const prev = process.env.ARTICLE_TRANSLATION_GATE;
   process.env.ARTICLE_TRANSLATION_GATE = '0';
   try {
-    assert.doesNotThrow(() => gate(articolo({ enBody1: EN_NON_ANCORATO })));
+    assert.throws(
+      () => gate(articolo({ enBody1: EN_NON_ANCORATO })),
+      (error) => error?.qualityReject === true && /bloccanti nei body tradotti/.test(error.message),
+      'un valore ambientale non deve riaprire il percorso di pubblicazione',
+    );
   } finally {
     if (prev === undefined) delete process.env.ARTICLE_TRANSLATION_GATE;
     else process.env.ARTICLE_TRANSLATION_GATE = prev;
@@ -251,9 +259,7 @@ test('#1261 i bodyN vengono coercizzati in ogni locale prima dei gate', () => {
 test('#1261 un produttore deterministico esenta solo euristiche di forma', () => {
   const factory = new Function(
     'runFactualityGates',
-    'DETERMINISTIC_BODY_HEURISTIC_CODES',
-    'DETERMINISTIC_MAJOR_BLOCKING_CODES',
-    `${ADMISSION_SRC}\nreturn runArticleFactualityGates;`,
+    `${ADMISSION_CONSTANTS_SRC}\n${ADMISSION_SRC}\nreturn runArticleFactualityGates;`,
   );
   const runGate = factory(() => ({
     issues: [
@@ -261,6 +267,7 @@ test('#1261 un produttore deterministico esenta solo euristiche di forma', () =>
       { code: 'unknown-institution', severity: 'major', message: 'sigla non verificata' },
       { code: 'tax-implausible', severity: 'major', message: 'importo atipico' },
       { code: 'incomplete-ending', severity: 'major', message: '[body2] frase troncata' },
+      { code: 'leaked-prompt-scaffolding', severity: 'critical', message: '[en/body1] istruzione operativa' },
       { code: 'tax-exceeds-income', severity: 'major', message: '[en/body2] declassato dall\'italiano' },
       { code: 'translation-number-dropped', severity: 'major', message: '[en] numero perso' },
       { code: 'translation-number-added', severity: 'major', message: '[en] numero aggiunto' },
@@ -268,16 +275,12 @@ test('#1261 un produttore deterministico esenta solo euristiche di forma', () =>
     ],
     blocking: [],
     passed: false,
-  }), new Set([
-    'unbalanced-parentheses',
-    'truncated-bold',
-    'incomplete-ending',
-    'leaked-prompt-scaffolding',
-  ]), new Set(['translation-number-dropped', 'translation-number-added']));
+  }));
   // The translation-number emitters identify only the locale (`[en]`), so the
   // two named codes must remain blocking even without a `[en/bodyN]` label.
   const result = runGate({ locale: 'en', deterministicBodySections: ['body1'] });
   assert.deepEqual(result.blocking.map((issue) => issue.code), [
+    'leaked-prompt-scaffolding',
     'translation-number-dropped',
     'translation-number-added',
     'critical-fact',
