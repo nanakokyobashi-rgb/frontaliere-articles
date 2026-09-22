@@ -95,10 +95,11 @@ on:
 
 # Union dei permessi dei tre workflow fusi qui dentro: i test non ne chiedevano
 # (default), `pr-body-contract` scriveva la sticky sulla PR, la review posta il
-# proprio verdetto e i commenti di diagnosi.
+# proprio verdetto, e il re-review guard legge lo storico dei check-run.
 permissions:
   contents: read
   actions: read
+  checks: read
   pull-requests: write
   issues: write
   id-token: write
@@ -737,6 +738,9 @@ jobs:
           # precedente, il suo compare potrebbe classificare il delta come
           # solo content/data e saltare Claude proprio dopo una correzione del
           # contratto; in quel caso si deve ripartire da una review piena.
+          # Keep the selected review and its identity together: the carry-forward
+          # proof must describe the same review that supplies `last`, not an
+          # older Codex review on the same body.
           last=$(printf '%s' "$reviews" | jq -r --arg revision "$REVIEW_REVISION" '
             def has_current_revision($expected):
               [((.body // "") | split("\n")[] | rtrimstr("\r")
@@ -752,10 +756,46 @@ jobs:
                      and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
                )
              | select(has_current_revision($revision))
-            ] | sort_by(.id // 0) | last | .commit_id // empty' 2>/dev/null || true)
+            ] | sort_by(.id // 0) | last
+            | if . == null then ""
+              else [(.commit_id // ""),
+                    (if ((.user.login // "") == "github-actions[bot]"
+                         and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
+                     then "true" else "false" end)] | @tsv
+              end' 2>/dev/null || true)
+          last_review_is_codex="${last#*$'\t'}"
+          last="${last%%$'\t'*}"
           if [ -z "$last" ]; then
             set_claim_fingerprint
             echo "skip=false" >> "$GITHUB_OUTPUT"; echo "Nessuna review terminale precedente → review piena."; exit 0
+          fi
+          # A Codex review has no durable evidence file after its run. The
+          # review gate therefore accepts its carry-forward only when the
+          # required tests check was green on the reviewed commit. If that
+          # proof is missing (for example because the old review run failed
+          # after posting the review), force a fresh Codex review instead of
+          # skipping into a gate that can never accept the stale evidence.
+          if [ "$last_review_is_codex" = 'true' ]; then
+            previous_checks=''
+            if ! previous_checks=$(gh api --paginate --slurp \
+              "repos/$REPO/commits/$last/check-runs?per_page=100&filter=all" 2>/dev/null); then
+              set_claim_fingerprint
+              echo "skip=false" >> "$GITHUB_OUTPUT"
+              echo "::warning::Storico check della review Codex illeggibile → review piena (conservativa)."
+              exit 0
+            fi
+            if ! printf '%s' "$previous_checks" | jq -e '
+              [ .[]?.check_runs[]? ]
+              | any(.[];
+                  .name == "tests (node --test)"
+                  and .status == "completed"
+                  and .conclusion == "success")
+            ' >/dev/null 2>&1; then
+              set_claim_fingerprint
+              echo "skip=false" >> "$GITHUB_OUTPUT"
+              echo "Review Codex senza un check tests (node --test) verde precedente → review piena."
+              exit 0
+            fi
           fi
           compare_json=''
           if ! compare_json=$(gh api "repos/$REPO/compare/$last...$HEAD_SHA" 2>/dev/null); then

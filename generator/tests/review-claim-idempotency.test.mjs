@@ -282,6 +282,8 @@ test('claim finalization does not accept an old-body review on the same HEAD', (
 test('tests.yml claims before review work and finalizes without gating the required verdict', () => {
   const workflow = fs.readFileSync(path.join(ROOT, '.github/workflows/tests.yml'), 'utf8');
   assert.match(workflow, /actions:\s*read/);
+  assert.match(workflow, /^  checks: read$/m,
+    'il guard di carry-forward deve poter leggere lo storico dei check-run');
   assert.match(workflow, /Reviews API illeggibile/);
   assert.match(workflow, /same_head/);
   const sameHeadStart = workflow.indexOf('same_head=');
@@ -340,7 +342,18 @@ test('tests.yml claims before review work and finalizes without gating the requi
   const incrementalGuard = workflow.slice(workflow.indexOf('last=$(printf'), workflow.indexOf('if [ -z "$last"', workflow.indexOf('last=$(printf')));
   assert.match(incrementalGuard, /--arg revision \"\$REVIEW_REVISION\"/);
   assert.match(incrementalGuard, /has_current_revision\(\$revision\)/);
+  const carryForwardGuard = workflow.slice(
+    workflow.indexOf('last=$(printf'),
+    workflow.indexOf('compare_json=', workflow.indexOf('last=$(printf')),
+  );
   const compareGuard = workflow.slice(workflow.indexOf('compare_json=', workflow.indexOf('last=$(printf')));
+  assert.match(carryForwardGuard, /last_review_is_codex=/);
+  assert.match(carryForwardGuard, /CODEX_FALLBACK_REVIEW/);
+  assert.match(carryForwardGuard, /gh api --paginate --slurp[\s\\\\]*\n?\s*\"repos\/\$REPO\/commits\/\$last\/check-runs\?per_page=100&filter=all\"/);
+  assert.match(carryForwardGuard, /\.name == \"tests \(node --test\)\"/);
+  assert.match(carryForwardGuard, /\.status == \"completed\"/);
+  assert.match(carryForwardGuard, /\.conclusion == \"success\"/);
+  assert.match(carryForwardGuard, /Review Codex senza un check tests \(node --test\) verde precedente/);
   assert.match(compareGuard, /gh api \"repos\/\$REPO\/compare\/\$last\.\.\.\$HEAD_SHA\"/);
   assert.match(compareGuard, /type == \"object\"/);
   assert.match(compareGuard, /\.files \| type == \"array\"/);
@@ -375,6 +388,35 @@ test('tests.yml claims before review work and finalizes without gating the requi
     'un compare senza files non deve diventare uno skip silenzioso');
   assert.equal(compareSchemaAccepts({ files: [{}] }), false,
     'un compare con entry file malformata deve restare fail-closed');
+
+  const codexCheckStart = carryForwardGuard.indexOf("if ! printf '%s' \"$previous_checks\" | jq -e '");
+  const codexCheckEnd = carryForwardGuard.indexOf("\n            ' >/dev/null", codexCheckStart);
+  assert.ok(codexCheckStart >= 0 && codexCheckEnd > codexCheckStart,
+    'predicato di accettazione del check Codex non trovato');
+  const codexCheckPredicate = carryForwardGuard
+    .slice(codexCheckStart + "if ! printf '%s' \"$previous_checks\" | jq -e '".length, codexCheckEnd)
+    .replace(/^\s+/gm, '')
+    .trim();
+  const codexCheckHistoryAccepts = (payload) => {
+    try {
+      execFileSync('jq', ['-e', codexCheckPredicate], {
+        input: `${JSON.stringify(payload)}\n`,
+        encoding: 'utf8',
+        stdio: ['pipe', 'ignore', 'ignore'],
+      });
+      return true;
+    } catch {
+      return false;
+    }
+  };
+  assert.equal(codexCheckHistoryAccepts([{
+    check_runs: [{ name: 'tests (node --test)', status: 'completed', conclusion: 'success' }],
+  }]), true, 'un check precedente verde deve autorizzare il carry-forward Codex');
+  assert.equal(codexCheckHistoryAccepts([{
+    check_runs: [{ name: 'tests (node --test)', status: 'completed', conclusion: 'failure' }],
+  }]), false, 'un check precedente rosso deve forzare una nuova review Codex');
+  assert.equal(codexCheckHistoryAccepts([{ check_runs: [] }]), false,
+    'assenza del check precedente deve forzare una nuova review Codex');
   assert.match(workflow, /steps\.review_claim\.outputs\.claim_allowed == 'true'/);
   assert.match(workflow, /REVIEW_GATE_FALLBACK_APPROVED:/);
 
