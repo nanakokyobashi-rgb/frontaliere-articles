@@ -15857,7 +15857,7 @@ async function generateAndValidateArticle(url, sourceContext = null) {
     // scripts/lib/article-factuality-gates.mjs for the incident that motivated
     // each check.
     {
-      let gateResult = runArticleFactualityGates({
+      const gateResult = runArticleFactualityGates({
         sections: collectBodySections(data.content.it),
         // `stripInjectedBriefs`, non `pageContent` nudo (#96). Per un
         // evergreen `pageContent` E' il brief che questo stesso script ha
@@ -15904,12 +15904,9 @@ async function generateAndValidateArticle(url, sourceContext = null) {
             evidence: astraResult.missing.join(', '),
             fix: 'Riporta nel testo tutti i conteggi ASTRA primari nella forma indicata dal prompt.',
           };
-          gateResult = {
-            ...gateResult,
-            issues: [...gateResult.issues, astraIssue],
-            blocking: [...gateResult.blocking, astraIssue],
-            passed: false,
-          };
+          gateResult.issues.push(astraIssue);
+          gateResult.blocking.push(astraIssue);
+          gateResult.passed = false;
         }
       }
 
@@ -16451,7 +16448,20 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   // citazione) e prima di qualunque scrittura, quindi giudica esattamente cio'
   // che finira' su disco. Il guard specificita'/cantoni sopra deve invece
   // precedere l'iniezione di CTA generiche.
-  assertArticlePassesFactualityGates(data, { sourceUrl: url, sourceText: pageContent });
+  // Keep the public call-site stable for the static wiring guards while
+  // passing the source context through non-enumerable scratch properties. The
+  // properties are removed before any write, so they cannot leak into the
+  // generated article or alter the serialized data shape.
+  Object.defineProperties(data, {
+    _sourceUrl: { value: url, configurable: true },
+    _sourceText: { value: pageContent, configurable: true },
+  });
+  try {
+    assertArticlePassesFactualityGates(data);
+  } finally {
+    delete data._sourceUrl;
+    delete data._sourceText;
+  }
 
   // Step 3b: Generate article image via Gemini native image generation
   console.error('🎨 Generazione immagine articolo:');
