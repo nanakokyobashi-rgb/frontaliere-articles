@@ -1374,7 +1374,11 @@ function additiveEntryIdentity(line) {
     return `value:${decodeJsStringKey(entry)}`;
   }
   const bare = /^([A-Za-z_$][\w$]*)$/.exec(entry);
-  if (bare) return `value:${bare[1]}`;
+  // A bare identifier is ambiguous here: in an array it is a value, while in
+  // an object literal it is a shorthand property.  Without the surrounding
+  // syntax this resolver cannot prove that `foo,` and `foo: 1,` are distinct;
+  // reject the shorthand instead of risking a duplicate object key.
+  if (bare) return null;
   const property = /^((?:[A-Za-z_$][\w$]*|'(?:\\.|[^'\\])*'|"(?:\\.|[^"\\])*"|`(?:\\.|[^`\\])*`))\s*:\s*.+$/s.exec(entry);
   if (property) {
     const key = normalizeJsPropertyKey(property[1]);

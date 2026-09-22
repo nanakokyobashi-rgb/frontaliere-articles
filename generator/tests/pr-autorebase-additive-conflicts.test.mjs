@@ -134,6 +134,15 @@ test('#606 rifiuta collisioni con chiavi già nel base o con sintassi equivalent
       '  baz: 3,',
       '>>>>>>> origin/main',
     ],
+    [
+      '<<<<<<< HEAD',
+      '  foo,',
+      '||||||| base',
+      '  stable: 0,',
+      '=======',
+      '  foo: 2,',
+      '>>>>>>> origin/main',
+    ],
   ];
 
   for (const lines of cases) {
