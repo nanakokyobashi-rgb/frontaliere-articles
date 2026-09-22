@@ -189,12 +189,18 @@ test('il parser post-merge accetta sia il body storico sia quello corrente', () 
   assert.ok(declared, 'manca il parser delle righe con site hash');
   const parser = new Function(`return ${declared[1]}`)();
   const pathName = 'scripts/ci/check-issue-already-resolved.mjs';
-  for (const suffix of ['sha256', 'site sha256']) {
+  for (const [suffix, hash] of [
+    ['sha256', '3495d7994fa50d84'],
+    ['site sha256', '3495d7994fa50d84'],
+    ['site sha256', '3495D7994FA50D84'],
+    ['sha256', '3495d7994fa50d84'.repeat(4)],
+  ]) {
     parser.lastIndex = 0;
-    const match = parser.exec(`- \`${pathName}\` ← sito (${suffix} \`3495d7994fa50d84\`)`);
+    const match = parser.exec(`- \`${pathName}\` ← sito (${suffix} \`${hash}\`)`);
     assert.equal(match?.[1], pathName, `formato non riconosciuto: ${suffix}`);
-    assert.equal(match?.[2], '3495d7994fa50d84');
+    assert.equal(match?.[2], hash);
   }
+  assert.match(yml, /const siteHash = normalizeSiteHash\(match\[2\]\)/);
 });
 
 test('il body del trasporto descrive lo scope workflow osservato, non uno stato inventato', () => {

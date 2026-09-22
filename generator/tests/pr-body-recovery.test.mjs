@@ -26,6 +26,7 @@ const AFTER_EDIT = '2026-09-19T12:01:00Z';
 async function recover(bodyConclusion, status = 'completed', failedSteps = [], later = [], runOverrides = {}, cancelError = null) {
   const reruns = [];
   const cancels = [];
+  const failures = [];
   const run = {
     id: 42, run_attempt: 1, status, conclusion: status === 'completed' ? 'failure' : null,
     head_branch: 'feature', event: 'pull_request', run_started_at: BEFORE_EDIT, ...runOverrides,
@@ -59,8 +60,9 @@ async function recover(bodyConclusion, status = 'completed', failedSteps = [], l
   await new AsyncFunction('github', 'context', 'core', script)(github, {
     repo: { owner: 'owner', repo: 'repo' },
     payload: { pull_request: { number: 1, head: { sha: 'head' }, updated_at: EDITED_AT } },
-  }, { info() {}, warning() {} });
+  }, { info() {}, warning() {}, setFailed(message) { failures.push(message); } });
   recover.lastCancels = cancels;
+  recover.lastFailures = failures;
   return reruns;
 }
 
@@ -175,6 +177,28 @@ test('a cancelled or timed-out latest run is rerun after an edit', async () => {
   assert.deepEqual(await recover('success', 'completed', [], [], { conclusion: 'cancelled' }), [42]);
   assert.deepEqual(await recover('success', 'completed', [], [], { conclusion: 'timed_out' }), [42]);
   assert.deepEqual(await recover('success', 'completed', [], [], { conclusion: 'success' }), []);
+});
+
+test('a cancelled run that never settles fails closed instead of returning green', async () => {
+  assert.deepEqual(await recover('success', 'in_progress'), []);
+  assert.deepEqual(recover.lastCancels, [42]);
+  assert.equal(recover.lastFailures.length, 1);
+  assert.match(recover.lastFailures[0], /did not settle/);
+});
+
+test('a cancellation error other than the documented 409 race remains fatal', async () => {
+  const error = Object.assign(new Error('permission denied'), { status: 403 });
+  await assert.rejects(
+    () => recover('success', 'in_progress', [], [], {}, error),
+    /permission denied/,
+  );
+});
+
+test('missing run metadata or an unknown conclusion fails closed', async () => {
+  assert.deepEqual(await recover('success', 'completed', [], [], { run_started_at: undefined }), []);
+  assert.match(recover.lastFailures[0], /timestamp/);
+  assert.deepEqual(await recover('success', 'completed', [], [], { conclusion: 'neutral' }), []);
+  assert.match(recover.lastFailures[0], /unverified conclusion/);
 });
 
 test('only a run of this PR branch and a PR-bound event is a target', async () => {

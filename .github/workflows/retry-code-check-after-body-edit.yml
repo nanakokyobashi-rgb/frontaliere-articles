@@ -101,8 +101,16 @@ jobs:
             // cancelling our own rerun. Same-second timestamps count as BEFORE
             // the edit (fail-safe: at worst one extra rerun, never a stale
             // verdict).
+            if (!Number.isFinite(editedAt)) {
+              core.setFailed(`Edit timestamp non verificabile per PR #${number}; nessun retry cieco.`);
+              return;
+            }
             const startedAt = Date.parse(target.run_started_at || target.created_at || '');
-            if (!Number.isFinite(editedAt) || !Number.isFinite(startedAt) || startedAt > editedAt) {
+            if (!Number.isFinite(startedAt)) {
+              core.setFailed(`Run ${target.id} senza timestamp verificabile; nessun retry cieco.`);
+              return;
+            }
+            if (startedAt > editedAt) {
               core.info(`Run ${target.id} started after the edit; it validates the current body.`);
               return;
             }
@@ -115,7 +123,7 @@ jobs:
               }
               target = await settle(target.run_attempt);
               if (!target) {
-                core.warning(`Run ${latest.id} did not settle within the wait; no retry.`);
+                core.setFailed(`Run ${latest.id} did not settle within the wait after cancellation; recovery cannot classify it safely.`);
                 return;
               }
             }
@@ -152,6 +160,9 @@ jobs:
                 : reviewOnlyFailure
                   ? 'the review gate failed'
                   : '';
+            } else if (target.conclusion !== 'success') {
+              core.setFailed(`Run ${latest.id} has an unverified conclusion (${target.conclusion || 'missing'}); recovery refuses to preserve a stale verdict.`);
+              return;
             }
             if (!retryReason) {
               core.info(`Run ${latest.id} (${target.conclusion}) did not fail on the body or review alone; preserve the existing code verdict.`);

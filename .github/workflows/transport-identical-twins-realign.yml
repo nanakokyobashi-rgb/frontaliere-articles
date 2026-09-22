@@ -77,14 +77,19 @@ jobs:
               console.log("Path non-identical esclusi dal realign post-merge: " + excluded.join(", "));
             }
             const found = new Map();
-            const re = /^- `([^`\n]+)` .*?\((?:site )?sha256 `([0-9a-f]{16})`\)\s*$/gm;
+            const normalizeSiteHash = (value) => {
+              const normalized = value.toLowerCase();
+              return normalized.length === 64 ? normalized.slice(0, 16) : normalized;
+            };
+            const re = /^- `([^`\n]+)` .*?\((?:site )?sha256 `([0-9a-fA-F]{16}|[0-9a-fA-F]{64})`\)\s*$/gm;
             for (const match of body.matchAll(re)) {
               if (!changed.has(match[1])) throw new Error("il body cita un path non presente nei file della PR: " + match[1]);
               if (!identical.has(match[1])) continue;
-              if (found.has(match[1]) && found.get(match[1]) !== match[2]) {
+              const siteHash = normalizeSiteHash(match[2]);
+              if (found.has(match[1]) && found.get(match[1]) !== siteHash) {
                 throw new Error("il body cita lo stesso path con site hash diverse: " + match[1]);
               }
-              found.set(match[1], match[2]);
+              found.set(match[1], siteHash);
             }
             const missing = expected.filter((filename) => !found.has(filename));
             if (missing.length) {
