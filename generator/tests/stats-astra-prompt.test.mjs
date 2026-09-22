@@ -27,6 +27,11 @@ const formatStatsAstraPrompt = new Function(
   sliceFn(source, 'function formatStatsAstraPrompt(cadence, requestedPeriod, section, data) {')
   + '\nreturn formatStatsAstraPrompt;',
 )();
+const checkStatsAstraCountFidelity = new Function(
+  sliceFn(source, 'export function checkStatsAstraCountFidelity(articleText, sourceText) {')
+    .replace(/^export /, '')
+  + '\nreturn checkStatsAstraCountFidelity;',
+)();
 
 function metrics(total, electric = 0) {
   return {
@@ -50,13 +55,17 @@ const cantonRows = Array.from({ length: 26 }, (_unused, index) => {
     usedImports: metrics(50 + index),
   };
 });
+const weeklyCantonMap = Object.fromEntries(
+  cantonRows.map((row, index) => [row.code, metrics(500 + index, index)]),
+);
+weeklyCantonMap.TI = metrics(13414, 2750);
 const DATA = {
   source: { overviewUrl: 'https://www.astra.admin.ch/astra/it/home/documentazione/dati-aperti/veicoli.html' },
   weekly: {
     latest: {
       period: '2026-W38',
       national: metrics(255550),
-      byCanton: { TI: metrics(13414, 2750) },
+      byCanton: weeklyCantonMap,
     },
     history: [
       { period: '2026-W37', nationalTotal: 250000, ticinoTotal: 13000, ticinoElectric: 2600 },
@@ -86,7 +95,13 @@ describe('formatStatsAstraPrompt', () => {
     expect(prompt).toContain('[ARTICOLO DATI ASTRA — REPORT SETTIMANALE NUOVE IMMATRICOLAZIONI TICINO]');
     expect(prompt).toContain('13.414');
     expect(prompt).toContain('2026-W37');
+    expect(prompt).toContain('=== CONTEGGI ASTRA DA CITARE ===');
     expect(prompt).not.toContain('%');
+  });
+
+  it('rejects a requested period that is not the current compact snapshot', () => {
+    expect(() => formatStatsAstraPrompt('weekly', '2026-W37', 'frontaliere', DATA))
+      .toThrow(/not available/);
   });
 
   it('creates a complete national table with all 26 cantons', () => {
@@ -102,5 +117,20 @@ describe('formatStatsAstraPrompt', () => {
     expect(prompt).toContain('Stock veicoli in Ticino 2026-09');
     expect(prompt).toContain('2026-08');
     expect(prompt).not.toContain('TABELLA COMPLETA DEI 26 CANTONI');
+  });
+
+  it('blocks an ASTRA article that drops a primary count', () => {
+    const prompt = formatStatsAstraPrompt('weekly', '2026-W38', 'frontaliere', DATA);
+    const complete = checkStatsAstraCountFidelity(
+      'La settimana registra 255.550 veicoli in Svizzera, 13.414 in Ticino e 2750 elettrici.',
+      prompt,
+    );
+    expect(complete.passed).toBe(true);
+    const incomplete = checkStatsAstraCountFidelity(
+      'La settimana registra 255.550 veicoli in Svizzera, ma il dato ticinese è in aggiornamento.',
+      prompt,
+    );
+    expect(incomplete.passed).toBe(false);
+    expect(incomplete.reason).toContain('13.414');
   });
 });

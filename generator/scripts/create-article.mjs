@@ -5072,7 +5072,7 @@ function runArticleFactualityGates({ deterministicBodySections = [], ...params }
  * `registerArticleFiles()` is also called by the deterministic producers,
  * which do not pass through the primary generation loop.
  */
-export function assertArticlePassesFactualityGates(data) {
+export function assertArticlePassesFactualityGates(data, { sourceUrl = '', sourceText = '' } = {}) {
   coerceContentBodyFields(data?.content);
   const it = data?.content?.it;
   if (it) {
@@ -5093,6 +5093,18 @@ export function assertArticlePassesFactualityGates(data) {
       const err = new Error(`Articolo rigettato dai gate deterministici: ${formatIssues(result.blocking)}`);
       err.qualityReject = true;
       throw err;
+    }
+    const astraSourceUrl = String(sourceUrl || data?._sourceUrl || '');
+    if (astraSourceUrl.startsWith('stats-astra://')) {
+      const astraResult = checkStatsAstraCountFidelity(
+        joinBodySections(it),
+        sourceText || data?._sourceText || '',
+      );
+      if (!astraResult.passed) {
+        const err = new Error(`Articolo ASTRA rigettato dal gate dei conteggi: ${astraResult.reason}`);
+        err.qualityReject = true;
+        throw err;
+      }
     }
   }
   assertTranslationsPassFactualityGates(data);
@@ -5609,7 +5621,7 @@ async function llmFactCheck(contentIt, sourceContent = '', sourceUrl = '') {
     contentIt?.body1 || '', contentIt?.body2 || '', contentIt?.body3 || '',
   ].join('\n\n');
 
-  const isEvergreen = !sourceContent || sourceContent.length < 100 || sourceUrl.startsWith('evergreen://') || sourceUrl.startsWith('stats-bfs://') || sourceUrl.startsWith('stats-astra://');
+  const isEvergreen = !sourceContent || sourceContent.length < 100 || sourceUrl.startsWith('evergreen://') || sourceUrl.startsWith('stats-bfs://');
 
   if (articleText.length > MAX_FACTCHECK_ARTICLE_CHARS) {
     console.error(`  ⚠️  Fact-check: articolo di ${articleText.length} chars > cap ${MAX_FACTCHECK_ARTICLE_CHARS} `
@@ -6475,7 +6487,72 @@ async function buildStatsAstraPromptContent(token) {
  * display shares without making the writer reproduce 26 derived percentages.
  */
 function formatStatsAstraPrompt(cadence, requestedPeriod, section, data) {
-  const fmt = (value) => Number(value || 0).toLocaleString('it-IT');
+  const COUNT_FIELDS = [
+    'total',
+    'electric',
+    'plugInHybrid',
+    'hybrid',
+    'petrol',
+    'diesel',
+    'gas',
+    'other',
+  ];
+  const SWISS_CANTONS = new Set([
+    'AG', 'AI', 'AR', 'BE', 'BL', 'BS', 'FR', 'GE', 'GL', 'GR', 'JU', 'LU',
+    'NE', 'NW', 'OW', 'SG', 'SH', 'SO', 'SZ', 'TG', 'TI', 'UR', 'VD', 'VS',
+    'ZG', 'ZH',
+  ]);
+  const assertCount = (value, label) => {
+    if (!Number.isSafeInteger(value) || value < 0) {
+      throw new Error(`Invalid ASTRA count at ${label}; expected a finite non-negative integer.`);
+    }
+  };
+  const assertMetric = (metrics, label) => {
+    if (!metrics || typeof metrics !== 'object') {
+      throw new Error(`Missing ASTRA metrics at ${label}.`);
+    }
+    for (const key of COUNT_FIELDS) assertCount(metrics[key], `${label}.${key}`);
+  };
+  const assertPeriod = (value, label) => {
+    if (typeof value !== 'string' || value.trim() === '') {
+      throw new Error(`Missing ASTRA period at ${label}.`);
+    }
+    return value.trim();
+  };
+  const assertHistory = (history, label, fields) => {
+    if (history == null) return [];
+    if (!Array.isArray(history)) throw new Error(`Invalid ASTRA history at ${label}.`);
+    for (const [index, point] of history.entries()) {
+      assertPeriod(point?.period, `${label}[${index}].period`);
+      for (const field of fields) assertCount(point?.[field], `${label}[${index}].${field}`);
+    }
+    return history.slice().sort((a, b) => String(a.period).localeCompare(String(b.period)));
+  };
+  const assertCantonMap = (byCanton, label) => {
+    if (!byCanton || typeof byCanton !== 'object' || Array.isArray(byCanton)) {
+      throw new Error(`Missing ASTRA canton map at ${label}.`);
+    }
+    const codes = Object.keys(byCanton);
+    if (codes.length !== SWISS_CANTONS.size || new Set(codes).size !== codes.length
+      || codes.some((code) => !SWISS_CANTONS.has(code))) {
+      throw new Error(`Incomplete ASTRA canton map at ${label}; expected the 26 distinct Swiss cantons.`);
+    }
+    for (const code of codes) assertMetric(byCanton[code], `${label}.${code}`);
+  };
+  const assertRequestedPeriod = (latestPeriod, label) => {
+    const latest = assertPeriod(latestPeriod, `${label}.latest.period`);
+    const requested = String(requestedPeriod || '').trim();
+    if (requested && requested !== latest) {
+      throw new Error(
+        `ASTRA ${label} period ${requested} is not available in the compact Firestore snapshot; latest is ${latest}.`,
+      );
+    }
+    return latest;
+  };
+  const fmt = (value) => {
+    assertCount(value, 'prompt');
+    return value.toLocaleString('it-IT');
+  };
   const metricLine = (label, metrics) => label + ': totale ' + fmt(metrics?.total) +
     ', elettrico ' + fmt(metrics?.electric) +
     ', ibrido plug-in ' + fmt(metrics?.plugInHybrid) +
@@ -6487,13 +6564,26 @@ function formatStatsAstraPrompt(cadence, requestedPeriod, section, data) {
   const monthly = data?.monthly?.latest;
   const weekly = data?.weekly?.latest;
   const isWeekly = cadence === 'weekly';
-  const targetPeriod = requestedPeriod || (isWeekly ? weekly?.period : monthly?.period) || 'n/d';
   const minWords = 550;
+  const countAnchorBlock = (pairs) => [
+    '=== CONTEGGI ASTRA DA CITARE ===',
+    ...pairs.map(([label, value]) => '- ' + label + ': ' + fmt(value)),
+  ];
 
   if (isWeekly) {
+    if (section !== 'frontaliere') {
+      throw new Error('Weekly ASTRA articles are available only for the frontaliere/Ticino section.');
+    }
     const ticino = weekly?.byCanton?.TI;
     if (!weekly || !ticino) throw new Error('Incomplete weekly data in config/astra_vehicle_stats Firestore doc.');
-    const history = Array.isArray(data?.weekly?.history) ? data.weekly.history.slice(-12) : [];
+    const targetPeriod = assertRequestedPeriod(weekly.period, 'weekly');
+    assertMetric(weekly.national, 'weekly.latest.national');
+    assertCantonMap(weekly.byCanton, 'weekly.latest.byCanton');
+    const history = assertHistory(
+      data?.weekly?.history,
+      'weekly.history',
+      ['nationalTotal', 'ticinoTotal', 'ticinoElectric'],
+    ).slice(-12);
     const historyTable = history
       .map((point) => '| ' + point.period + ' | ' + fmt(point.nationalTotal) + ' | ' + fmt(point.ticinoTotal) + ' | ' + fmt(point.ticinoElectric) + ' |')
       .join('\n');
@@ -6504,6 +6594,11 @@ function formatStatsAstraPrompt(cadence, requestedPeriod, section, data) {
       '=== DATI VERIFICATI (usare ESATTAMENTE questi numeri, non inventarne altri) ===',
       metricLine('Nuove immatricolazioni svizzere nella settimana ' + weekly.period, weekly.national),
       metricLine('Nuove immatricolazioni in Ticino nella settimana ' + weekly.period, ticino),
+      ...countAnchorBlock([
+        ['Totale nazionale settimana ' + weekly.period, weekly.national.total],
+        ['Totale Ticino settimana ' + weekly.period, ticino.total],
+        ['Elettrici Ticino settimana ' + weekly.period, ticino.electric],
+      ]),
       '',
       '=== SERIE STORICA SETTIMANALE ===',
       '| Settimana | Svizzera | Ticino | Elettrico Ticino |',
@@ -6521,8 +6616,29 @@ function formatStatsAstraPrompt(cadence, requestedPeriod, section, data) {
   }
 
   if (!monthly) throw new Error('Incomplete monthly data in config/astra_vehicle_stats Firestore doc.');
+  const targetPeriod = assertRequestedPeriod(monthly.period, 'monthly');
+  if (!monthly.national || typeof monthly.national !== 'object') {
+    throw new Error('Missing ASTRA monthly national metrics.');
+  }
+  for (const [key, metrics] of Object.entries(monthly.national)) {
+    assertMetric(metrics, `monthly.latest.national.${key}`);
+  }
   const rows = Array.isArray(monthly.byCanton) ? monthly.byCanton : [];
   if (rows.length !== 26) throw new Error('Expected the complete 26-canton table in config/astra_vehicle_stats Firestore doc.');
+  const rowCodes = rows.map((row) => row?.code);
+  if (new Set(rowCodes).size !== 26 || rowCodes.some((code) => !SWISS_CANTONS.has(code))) {
+    throw new Error('Expected 26 distinct Swiss canton codes in config/astra_vehicle_stats Firestore doc.');
+  }
+  for (const row of rows) {
+    assertMetric(row.stock, `monthly.latest.byCanton.${row.code}.stock`);
+    assertMetric(row.newRegistrations, `monthly.latest.byCanton.${row.code}.newRegistrations`);
+    assertMetric(row.usedImports, `monthly.latest.byCanton.${row.code}.usedImports`);
+  }
+  const monthlyHistory = assertHistory(
+    data?.monthly?.history,
+    'monthly.history',
+    ['nationalStock', 'ticinoStock', 'ticinoNewRegistrations', 'ticinoUsedImports', 'ticinoElectric'],
+  ).slice(-12);
 
   if (section === 'svizzera') {
     const cantonTable = rows
@@ -6536,6 +6652,11 @@ function formatStatsAstraPrompt(cadence, requestedPeriod, section, data) {
       metricLine('Stock nazionale ' + monthly.period, monthly.national?.stock),
       metricLine('Nuove immatricolazioni nazionali ' + monthly.period, monthly.national?.newRegistrations),
       metricLine('Importazioni di veicoli usati ' + monthly.period, monthly.national?.usedImports),
+      ...countAnchorBlock([
+        ['Stock nazionale ' + monthly.period, monthly.national.stock.total],
+        ['Nuove immatricolazioni nazionali ' + monthly.period, monthly.national.newRegistrations.total],
+        ['Import usati nazionali ' + monthly.period, monthly.national.usedImports.total],
+      ]),
       '',
       '=== TABELLA COMPLETA DEI 26 CANTONI ===',
       '| Cantone | Stock | Nuove immatricolazioni | Import usati | Elettrici nello stock |',
@@ -6554,7 +6675,6 @@ function formatStatsAstraPrompt(cadence, requestedPeriod, section, data) {
 
   const ticino = rows.find((row) => row.code === 'TI');
   if (!ticino) throw new Error('Ticino row missing in config/astra_vehicle_stats Firestore doc.');
-  const monthlyHistory = Array.isArray(data?.monthly?.history) ? data.monthly.history.slice(-12) : [];
   const historyTable = monthlyHistory
     .map((point) => '| ' + point.period + ' | ' + fmt(point.ticinoStock) + ' | ' + fmt(point.ticinoNewRegistrations) + ' | ' + fmt(point.ticinoUsedImports) + ' | ' + fmt(point.ticinoElectric) + ' |')
     .join('\n');
@@ -6566,6 +6686,12 @@ function formatStatsAstraPrompt(cadence, requestedPeriod, section, data) {
     metricLine('Stock veicoli in Ticino ' + monthly.period, ticino.stock),
     metricLine('Nuove immatricolazioni in Ticino ' + monthly.period, ticino.newRegistrations),
     metricLine('Importazioni di veicoli usati in Ticino ' + monthly.period, ticino.usedImports),
+    ...countAnchorBlock([
+      ['Stock Ticino ' + monthly.period, ticino.stock.total],
+      ['Nuove immatricolazioni Ticino ' + monthly.period, ticino.newRegistrations.total],
+      ['Import usati Ticino ' + monthly.period, ticino.usedImports.total],
+      ['Elettrici nello stock Ticino ' + monthly.period, ticino.stock.electric],
+    ]),
     '',
     '=== SERIE STORICA MENSILE TICINO ===',
     '| Mese | Stock | Nuove | Import usati | Elettrici nello stock |',
@@ -6580,6 +6706,57 @@ function formatStatsAstraPrompt(cadence, requestedPeriod, section, data) {
     'Tono giornalistico-istituzionale italiano, concreto e prudente.',
     'Fonte da citare: Ufficio federale delle strade ASTRA/OFROU, dati aperti IVZ — ' + (data?.source?.overviewUrl || 'https://www.astra.admin.ch/astra/it/home/documentazione/dati-aperti/veicoli.html'),
   ].filter(Boolean).join('\n');
+}
+
+/**
+ * ASTRA's source is a closed aggregate, so the generic source-fidelity gate
+ * (percentages, dates, acronyms) does not see its vehicle counts. The prompt
+ * therefore carries a small explicit set of primary count anchors; this gate
+ * checks those anchors on the final Italian article before publication.
+ */
+export function checkStatsAstraCountFidelity(articleText, sourceText) {
+  const marker = '=== CONTEGGI ASTRA DA CITARE ===';
+  const source = String(sourceText || '');
+  const start = source.indexOf(marker);
+  if (start < 0) {
+    return {
+      passed: false,
+      anchors: [],
+      missing: [],
+      reason: 'ASTRA count-anchor block missing from the source prompt.',
+    };
+  }
+  const block = source.slice(start + marker.length).split('\n===')[0];
+  const anchors = [];
+  for (const line of block.split(/\r?\n/)) {
+    const match = line.match(/^\s*-\s+[^:\n]+:\s+([0-9][0-9.]*)\s*$/);
+    if (match) anchors.push(match[1]);
+  }
+  const uniqueAnchors = [...new Set(anchors)];
+  if (uniqueAnchors.length === 0) {
+    return {
+      passed: false,
+      anchors: [],
+      missing: [],
+      reason: 'ASTRA count-anchor block is empty.',
+    };
+  }
+  const article = String(articleText || '');
+  const missing = uniqueAnchors.filter((anchor) => {
+    const groups = anchor.split('.');
+    const pattern = groups[0] + groups.slice(1)
+      .map((group) => `(?:[.\\s'’]?${group})`)
+      .join('');
+    return !new RegExp(`(?<!\\d)${pattern}(?!\\d)`).test(article);
+  });
+  return {
+    passed: missing.length === 0,
+    anchors: uniqueAnchors,
+    missing,
+    reason: missing.length === 0
+      ? ''
+      : `ASTRA primary counts missing from the Italian article: ${missing.join(', ')}`,
+  };
 }
 
 // ── Isolamento del contenuto principale della pagina scrapata (issue #202) ──
@@ -15680,7 +15857,7 @@ async function generateAndValidateArticle(url, sourceContext = null) {
     // scripts/lib/article-factuality-gates.mjs for the incident that motivated
     // each check.
     {
-      const gateResult = runArticleFactualityGates({
+      let gateResult = runArticleFactualityGates({
         sections: collectBodySections(data.content.it),
         // `stripInjectedBriefs`, non `pageContent` nudo (#96). Per un
         // evergreen `pageContent` E' il brief che questo stesso script ha
@@ -15713,6 +15890,28 @@ async function generateAndValidateArticle(url, sourceContext = null) {
         memory: defectMemory(),
         deterministicBodySections: data?._deterministicBodySections,
       });
+
+      if (url.startsWith('stats-astra://')) {
+        const astraResult = checkStatsAstraCountFidelity(
+          [data.content.it?.title || '', joinBodySections(data.content.it)].join('\n'),
+          pageContent,
+        );
+        if (!astraResult.passed) {
+          const astraIssue = {
+            code: 'stats-astra-counts-missing',
+            severity: 'critical',
+            message: astraResult.reason,
+            evidence: astraResult.missing.join(', '),
+            fix: 'Riporta nel testo tutti i conteggi ASTRA primari nella forma indicata dal prompt.',
+          };
+          gateResult = {
+            ...gateResult,
+            issues: [...gateResult.issues, astraIssue],
+            blocking: [...gateResult.blocking, astraIssue],
+            passed: false,
+          };
+        }
+      }
 
       // Feed the learning loop. Recorded for EVERY attempt, including the ones
       // that go on to be rejected: an acronym the source does not back up is
@@ -16252,7 +16451,7 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   // citazione) e prima di qualunque scrittura, quindi giudica esattamente cio'
   // che finira' su disco. Il guard specificita'/cantoni sopra deve invece
   // precedere l'iniezione di CTA generiche.
-  assertArticlePassesFactualityGates(data);
+  assertArticlePassesFactualityGates(data, { sourceUrl: url, sourceText: pageContent });
 
   // Step 3b: Generate article image via Gemini native image generation
   console.error('🎨 Generazione immagine articolo:');
