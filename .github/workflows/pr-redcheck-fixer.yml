@@ -726,8 +726,8 @@ jobs:
           fi
           echo "proceed=true" >> "$GITHUB_OUTPUT"
           echo "round=$NEXT" >> "$GITHUB_OUTPUT"
-          echo "marker_body_revision=$(printf '%s' \"$marker_result\" | jq -r '.bodyRevision')" >> "$GITHUB_OUTPUT"
-          echo "marker_comment_id=$(printf '%s' \"$marker_result\" | jq -r '.commentId')" >> "$GITHUB_OUTPUT"
+          echo "marker_body_revision=$(printf '%s' "$marker_result" | jq -r '.bodyRevision')" >> "$GITHUB_OUTPUT"
+          echo "marker_comment_id=$(printf '%s' "$marker_result" | jq -r '.commentId')" >> "$GITHUB_OUTPUT"
           echo "marker_verified=true" >> "$GITHUB_OUTPUT"
           echo "retryable=false" >> "$GITHUB_OUTPUT"
 

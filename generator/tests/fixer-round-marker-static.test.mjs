@@ -49,6 +49,10 @@ for (const [file, marker] of [
       `${file}: finalizzazione Codex non vincolata al guard`);
     assert.match(source, /jq -r ['"](?:\([^\n]*\.body|\.body)/,
       `${file}: body revision non usa la fence jq contrattuale`);
+    assert.match(source, /printf '%s' "\$marker_result" \| jq -r '\.bodyRevision'/,
+      `${file}: estrazione bodyRevision non passa il JSON marker come argomento shell unico`);
+    assert.match(source, /printf '%s' "\$marker_result" \| jq -r '\.commentId'/,
+      `${file}: estrazione commentId non passa il JSON marker come argomento shell unico`);
     assert.match(source, /--expected-author github-actions\[bot\]/,
       `${file}: l'identita' trusted del token installation non e' esplicita`);
   });
