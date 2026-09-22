@@ -3944,6 +3944,16 @@
       }
     },
     {
+      "path": "scripts/ci/verify-github-webhook-registration.mjs",
+      "mode": "corpus-only",
+      "reason": "Osservatore della registrazione GitHub del receiver event-driven dedicato al corpus (#1508): verifica l'endpoint pubblico gh-nanako, la consegna TLS/JSON e gli eventi terminali necessari senza leggere o stampare il secret. Il sito usa un receiver e un'identita' distinti (gh-default), quindi questa configurazione non e' un gemello copiabile.",
+      "baseline": {
+        "site": null,
+        "corpus": "2f384caae7b8e1a4",
+        "alignedAt": "2026-09-22"
+      }
+    },
+    {
       "path": "scripts/ci/verify-manifest-baseline-history.mjs",
       "mode": "corpus-only",
       "reason": "Verifica INTEGRALE delle `baseline.corpus` di questo manifest contro la storia locale dei path (issue #978, item 4 della #954). Non esiste sul sito e non deve: il manifest e' del lato che RICEVE il ciclo, come il drift check e il trasporto. E' il terzo sguardo sulla provenienza delle baseline, e nasce dai buchi degli altri due: `checkBaselineProvenance()` guarda tutte le voci ma via rete, con un cap sulla storia e solo al cron DOPO il merge; `loop-baseline-pr-gate.mjs` guarda pre-merge ma solo le voci cambiate nella PR, quindi ogni baseline gia' presente quando quel gate e' nato non passa da nessuna verifica. Misurato: una voce entrata sette ore prima del gate con un `baseline.corpus` mai esistito a quel path.",
