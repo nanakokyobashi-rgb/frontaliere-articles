@@ -1396,6 +1396,7 @@ function additiveEntryIdentity(line) {
 function seedBaseEntryIdentities(base, identities) {
   for (const line of base) {
     const identity = additiveEntryIdentity(line);
+    if (identity === null) return false;
     if (!identity) continue;
     if (identities.has(identity)) return false;
     identities.set(identity, { base: true, normalized: line.trim(), gap: -1 });

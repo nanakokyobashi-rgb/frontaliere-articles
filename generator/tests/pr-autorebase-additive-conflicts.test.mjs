@@ -152,6 +152,16 @@ test('#606 rifiuta collisioni con chiavi già nel base o con sintassi equivalent
       "  'same-value',",
       '>>>>>>> origin/main',
     ],
+    [
+      '<<<<<<< HEAD',
+      "  200: 'OK',",
+      "  '200': 'new',",
+      '||||||| base',
+      "  200: 'OK',",
+      '=======',
+      "  other: 'value',",
+      '>>>>>>> origin/main',
+    ],
   ];
 
   for (const lines of cases) {
