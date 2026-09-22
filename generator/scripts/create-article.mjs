@@ -6757,8 +6757,6 @@ async function fetchPageContent(url) {
     console.error(`📊 Articolo statistica BFS: trimestre ${quarter}`);
     return await buildStatsBfsPromptContent(quarter);
   }
-  // Handle ASTRA vehicle-data articles — no web page to scrape, build the
-  // prompt from the compact Firestore observatory written by the site worker.
   if (url.startsWith('stats-astra://')) {
     const token = decodeURIComponent(url.slice('stats-astra://'.length));
     console.error(`🚗 Articolo statistica ASTRA: ${token}`);
