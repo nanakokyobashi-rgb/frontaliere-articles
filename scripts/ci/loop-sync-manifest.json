@@ -3568,8 +3568,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-23.yml",
       "mode": "identical",
       "baseline": {
-        "site": "b67d559d6c8fe939",
-        "corpus": "b67d559d6c8fe939",
+        "site": "9bcafc3c17a40d74",
+        "corpus": "9bcafc3c17a40d74",
         "alignedAt": "2026-09-23"
       }
     },
@@ -3589,8 +3589,8 @@
       "mode": "identical",
       "reason": "Riallineato il 2026-09-21 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono ora byte-identici fra sito e corpus, con il roster corrente di 616 crawler.",
       "baseline": {
-        "site": "0e1739105c940608",
-        "corpus": "0e1739105c940608",
+        "site": "bbd9554942240c08",
+        "corpus": "bbd9554942240c08",
         "alignedAt": "2026-09-23"
       }
     },
@@ -3599,9 +3599,9 @@
       "sitePath": ".github/corpus-workflows/observers/generator/tests/crawler-cross-repo-artifacts.test.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "84871c4f99c400d7",
-        "corpus": "84871c4f99c400d7",
-        "alignedAt": "2026-09-16"
+        "site": "6df6f6d52de98577",
+        "corpus": "6df6f6d52de98577",
+        "alignedAt": "2026-09-23"
       },
       "couplingSnapshot": [
         {
@@ -3635,9 +3635,9 @@
       "sitePath": ".github/corpus-workflows/observers/workflows/crawler-generation-observer-shadow.yml",
       "mode": "identical",
       "baseline": {
-        "site": "41a6342737247042",
-        "corpus": "41a6342737247042",
-        "alignedAt": "2026-09-06"
+        "site": "ed4c573af9a850d0",
+        "corpus": "ed4c573af9a850d0",
+        "alignedAt": "2026-09-23"
       }
     },
     {
@@ -3645,9 +3645,9 @@
       "sitePath": ".github/corpus-workflows/observers/scripts/crawler-generation-observer-selector.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "f317e033d892d702",
-        "corpus": "f317e033d892d702",
-        "alignedAt": "2026-09-16"
+        "site": "45f69c95d49117f4",
+        "corpus": "45f69c95d49117f4",
+        "alignedAt": "2026-09-23"
       }
     },
     {
@@ -3665,9 +3665,9 @@
       "sitePath": ".github/corpus-workflows/observers/scripts/lib/crawler-generation-observer-report.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "0a32d9f5ee5bc961",
-        "corpus": "0a32d9f5ee5bc961",
-        "alignedAt": "2026-09-16"
+        "site": "669089dedb9485e0",
+        "corpus": "669089dedb9485e0",
+        "alignedAt": "2026-09-23"
       }
     },
     {
@@ -4260,6 +4260,16 @@
         "site": null,
         "corpus": "327602469d56b49f",
         "alignedAt": "2026-09-18"
+      }
+    },
+    {
+      "path": ".github/workflows/crawler-group-24.yml",
+      "sitePath": ".github/corpus-workflows/crawler-group-24.yml",
+      "mode": "identical",
+      "baseline": {
+        "site": "b580684b0391b367",
+        "corpus": "b580684b0391b367",
+        "alignedAt": "2026-09-23"
       }
     }
   ]
