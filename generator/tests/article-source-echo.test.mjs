@@ -200,7 +200,12 @@ describe('cablaggio in fetchPageContent', () => {
     // gia' pubblicato un titolo tutto maiuscolo (vedi blog-title-casing).
     const at = SRC.indexOf('async function fetchPageContent(url) {');
     assert.notEqual(at, -1);
-    const body = SRC.slice(at, at + 6000);
+    const end = SRC.indexOf('\n// ── Date filtering:', at);
+    assert.ok(end > at, 'delimitatore di fetchPageContent non trovato');
+    // Delimita la funzione alla sezione successiva invece di usare un numero
+    // fisso di caratteri: commenti e guardie aggiunti prima della chiamata
+    // non devono far sparire il wiring dal controllo statico.
+    const body = SRC.slice(at, end);
     const isolateAt = body.indexOf('const isolation = isolateMainSourceHtml(html);');
     const extractAt = body.indexOf('extractArticleText(isolation.html');
     assert.ok(isolateAt !== -1, 'fetchPageContent non isola la pagina');

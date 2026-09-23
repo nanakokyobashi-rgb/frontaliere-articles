@@ -6653,6 +6653,12 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.dff-progressione-freddo-imposte-2027.title': 'Federal Tax 2027: DFF Offsets Cold Progression',
     'blog.article.dff-progressione-freddo-imposte-2027.excerpt': 'The DFF adjusts rates and deductions for fiscal year 2027 against a cumulative increase of 0.47% recorded as of June 30, 2026.',
     'blog.article.dff-progressione-freddo-imposte-2027.imageAlt': 'Federal Palace in Bern, seat of the Federal Department of Finance',
+    'blog.article.costi-auto-elettrica-benzina.title': 'Electric car vs petrol costs: the TCS analysis',
+    'blog.article.costi-auto-elettrica-benzina.excerpt': 'With petrol at 2.14 fr./litre and diesel at 2.46 fr./litre, electric is only suitable if you recharge at home. Analysis based on data from the Swiss Touring Club.',
+    'blog.article.costi-auto-elettrica-benzina.imageAlt': 'Electric car charging station and petrol pump in Switzerland',
+    'blog.article.parco-veicoli-svizzera-2026.title': 'Vehicle fleet Switzerland: data updated in September 2026',
+    'blog.article.parco-veicoli-svizzera-2026.excerpt': 'Analysis of the Swiss vehicle fleet: over 7.1 million vehicles in circulation. ASTRA data on new registrations and imports of used goods in the 26 cantons.',
+    'blog.article.parco-veicoli-svizzera-2026.imageAlt': 'Urban traffic in a Swiss city with various types of vehicles',
 };
 
 export default blogMetaChEn;

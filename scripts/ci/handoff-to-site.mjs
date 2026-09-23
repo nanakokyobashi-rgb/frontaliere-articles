@@ -113,13 +113,26 @@ export const HANDOFF_VERDICTS = new Set([
  */
 export const MIRROR_LOCKED_MODES = new Set(['identical']);
 
+const CRAWLER_CONTRACT_PATH = fileURLToPath(new URL('../../generator/data/crawler-cross-repo-contract.json', import.meta.url));
+
+function readCrawlerGroupCount(contractPath = CRAWLER_CONTRACT_PATH) {
+  const contract = JSON.parse(readFileSync(contractPath, 'utf8'));
+  const groupCount = Number(contract?.groupCount);
+  if (!Number.isSafeInteger(groupCount) || groupCount < 1) {
+    throw new Error(`crawler cross-repo contract has invalid groupCount: ${String(contract?.groupCount)}`);
+  }
+  return groupCount;
+}
+
+const CRAWLER_GROUP_COUNT = readCrawlerGroupCount();
+
 /**
  * Workflow consegnati dal canale dedicato sito → corpus, non dal trasporto
  * generico dei gemelli identical. Restano locked, ma non stranded: il canale
  * che li porta giù esiste e la sua allowlist è esplicita.
  */
 export const DEDICATED_CRAWLER_TRANSPORT_PATHS = new Set([
-  ...Array.from({ length: 23 }, (_, index) =>
+  ...Array.from({ length: CRAWLER_GROUP_COUNT }, (_, index) =>
     `.github/workflows/crawler-group-${String(index + 1).padStart(2, '0')}.yml`),
   '.github/workflows/translate-pending.yml',
   '.github/workflows/crawler-generation-observer-shadow.yml',

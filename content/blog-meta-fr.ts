@@ -11926,6 +11926,15 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-09-23.imageAlt': 'Les chiffres du jour pour les frontaliers – 23 septembre 2026 : attentes aux douanes, prix de l\'essence, taux CHF-EUR et offres d\'emploi',
     'blog.article.bollettino-frontaliere-2026-09-23.seoDescription': 'Bulletin du frontalier du 23 septembre 2026 : les files aux douanes ce matin, l\'essence la moins chère, taux franc-euro et nouvelles offres d\'emploi en Suisse.',
     'blog.article.bollettino-frontaliere-2026-09-23.ogDescription': 'Les chiffres du 23 septembre 2026 pour les frontaliers : combien de temps on attend ce matin à chaque douane, où l\'essence coûte le moins cher, ce que vaut le franc aujourd\'hui et combien d\'offres d\'emploi sont parues en Suisse.',
+    'blog.article.rimborso-imposta-lpp-2024.title': 'Remboursement de la taxe LPP bloquée pour les frontaliers',
+    'blog.article.rimborso-imposta-lpp-2024.excerpt': 'Depuis 2024, le canton du Tessin ne rembourse plus l\'impôt à la source de 7 % sur le capital LPP, obligeant les frontaliers à payer également l\'impôt de remplacement italien de 5 %.',
+    'blog.article.rimborso-imposta-lpp-2024.imageAlt': 'Bâtiment moderne à Bellinzona avec les drapeaux suisse et italien au crépuscule',
+    'blog.article.parco-veicoli-ticino-settembre-2026.title': 'Parc de véhicules au Tessin : les données ASTRA de septembre 2026',
+    'blog.article.parco-veicoli-ticino-settembre-2026.excerpt': 'Analyse du parc roulant tessinois : 336 430 véhicules au total, 13 293 nouvelles immatriculations et 1 532 importations d\'occasion selon les données ASTRA.',
+    'blog.article.parco-veicoli-ticino-settembre-2026.imageAlt': 'Trafic routier sur une route tessinoise avec vue sur les Alpes',
+    'blog.article.immatricolazioni-veicoli-ticino-w38-2026.title': 'Nouvelles immatriculations de voitures au Tessin : les données ASTRA W38',
+    'blog.article.immatricolazioni-veicoli-ticino-w38-2026.excerpt': 'Analyse des données sur les nouvelles immatriculations au Tessin pour la semaine 2026-W38 selon l\'Office fédéral des routes ASTRA/OFROU.',
+    'blog.article.immatricolazioni-veicoli-ticino-w38-2026.imageAlt': 'Véhicules en transit sur une route tessinoise.',
 };
 
 export default blogMetaFr;

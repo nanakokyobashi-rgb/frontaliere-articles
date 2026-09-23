@@ -1,14 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1945007/miliardi-svizzera-franchi-investimenti-assicuratori": {
-    "articleId": "assicurazioni-svizzera-risultati-2025",
-    "ts": "2026-08-20T11:38:35.952Z",
-    "keyForm": 2
-  },
-  "https://www.admin.ch/it/newnsb/1elmzo8luqale1dmsde4w": {
-    "articleId": "preventivo-confederazione-2027",
-    "ts": "2026-08-20T12:07:26.345Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/attualita/1945002/fabbisogno-stato-consiglio-calcolo-dati-pianificazione-quadranti-consultazione": {
     "articleId": "pianificazione-ospedaliera-ticino-2026",
     "ts": "2026-08-20T12:21:44.093Z",
@@ -2497,6 +2487,16 @@
   "https://www.admin.ch/it/newnsb/rq9rumbcaofx": {
     "articleId": "dff-progressione-freddo-imposte-2027",
     "ts": "2026-09-23T01:17:40.104Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1952117/auto-benzina-ogni-chilometri-costi-costa-prezzi-rendono": {
+    "articleId": "costi-auto-elettrica-benzina",
+    "ts": "2026-09-23T11:31:38.661Z",
+    "keyForm": 2
+  },
+  "stats-astra://monthly/2026-09/svizzera": {
+    "articleId": "parco-veicoli-svizzera-2026",
+    "ts": "2026-09-23T12:36:37.366Z",
     "keyForm": 2
   }
 }

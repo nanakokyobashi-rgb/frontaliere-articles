@@ -6653,6 +6653,12 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.dff-progressione-freddo-imposte-2027.title': 'Imposta federale 2027: DFF compensa la progressione a freddo',
     'blog.article.dff-progressione-freddo-imposte-2027.excerpt': 'Il DFF adegua tariffe e deduzioni per l\'anno fiscale 2027 a fronte di un rincaro cumulato dello 0,47% registrato al 30 giugno 2026.',
     'blog.article.dff-progressione-freddo-imposte-2027.imageAlt': 'Palazzo federale a Berna, sede del Dipartimento federale delle finanze',
+    'blog.article.costi-auto-elettrica-benzina.title': 'Costi auto elettrica vs benzina: l\'analisi del TCS',
+    'blog.article.costi-auto-elettrica-benzina.excerpt': 'Con la benzina a 2,14 fr./litro e il diesel a 2,46 fr./litro, l\'elettrico conviene solo se si ricarica a casa. Analisi basata sui dati del Touring Club Svizzero.',
+    'blog.article.costi-auto-elettrica-benzina.imageAlt': 'Stazione di ricarica auto elettrica e pompa di benzina in Svizzera',
+    'blog.article.parco-veicoli-svizzera-2026.title': 'Parco veicoli Svizzera: i dati aggiornati a settembre 2026',
+    'blog.article.parco-veicoli-svizzera-2026.excerpt': 'Analisi del parco veicoli svizzero: oltre 7,1 milioni di mezzi circolanti. Dati ASTRA sulle nuove immatricolazioni e importazioni di usati nei 26 cantoni.',
+    'blog.article.parco-veicoli-svizzera-2026.imageAlt': 'Traffico urbano in una città svizzera con veicoli di diverse tipologie',
 };
 
 export default blogMetaChIt;

@@ -955,9 +955,14 @@ jobs:
           CODEX_FALLBACK_MODE: '1'
         run: node scripts/ci/check-quota-backoff.mjs
 
+      # La PR puo' avanzare dopo il marker, mentre un autore o il fixer gemello
+      # sta lavorando. La verifica resta fail-closed e impedisce Codex; il
+      # classificatore decide se il mismatch e' una race SUPERSEDED provata
+      # dall'avanzamento remoto o un errore locale da lasciare rosso.
       - name: Revalidate PR HEAD + body immediately before Codex
         id: precodex
         if: steps.guard.outputs.proceed == 'true'
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}

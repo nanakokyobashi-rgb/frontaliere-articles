@@ -113,6 +113,30 @@ test('un errore diverso, anche su un workflow, non abilita il fallback', () => {
   }
 });
 
+test('un log misto con una seconda remote error resta fail-closed', () => {
+  const mixed = [
+    refusal,
+    'remote: error: protected branch update rejected by repository policy.',
+  ].join('\n');
+  assert.deepEqual(classifyWorkflowPushFailure(mixed), {
+    kind: 'other',
+    fallback: false,
+    rejectedPaths: [],
+  });
+});
+
+test('un secondo rifiuto GitHub-App senza firma workflow resta fail-closed', () => {
+  const mixed = [
+    refusal,
+    'remote: error: refusing to allow a GitHub App to create or update repository metadata without repository permission.',
+  ].join('\n');
+  assert.deepEqual(classifyWorkflowPushFailure(mixed), {
+    kind: 'other',
+    fallback: false,
+    rejectedPaths: [],
+  });
+});
+
 test('il fallback seleziona tutti e soli i workflow del commit', () => {
   const paths = selectWorkflowFallbackPaths(
     classifyWorkflowPushFailure(refusal),
@@ -228,6 +252,19 @@ test('ripristina baseline e couplingSnapshot dal parent solo sui workflow', () =
   assert.throws(
     () => restoreWorkflowSnapshots({}, previous, ['.github/workflows/crawler-group-01.yml']),
     /senza array files/,
+  );
+  assert.throws(
+    () => restoreWorkflowSnapshots({ files: [{ path: 'scripts/ci/ok.mjs' }, null] }, previous, [
+      '.github/workflows/crawler-group-01.yml',
+    ]),
+    /entry non-oggetto/,
+  );
+  assert.throws(
+    () => restoreWorkflowSnapshots({ files: [
+      { path: 'scripts/ci/ok.mjs' },
+      { path: 'scripts/ci/ok.mjs' },
+    ] }, previous, ['.github/workflows/crawler-group-01.yml']),
+    /duplicata/,
   );
 });
 

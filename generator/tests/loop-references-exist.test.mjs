@@ -89,8 +89,9 @@ const crawlerContractAbsolute = path.join(ROOT, CRAWLER_CONTRACT_PATH);
 const CRAWLER_CONTRACT = fs.existsSync(crawlerContractAbsolute)
   ? JSON.parse(fs.readFileSync(crawlerContractAbsolute, 'utf8'))
   : null;
+const EXPECTED_CRAWLER_GROUP_COUNT = CRAWLER_CONTRACT?.groupCount ?? 24;
 const EXPECTED_CRAWLER_ARTIFACTS = [
-  ...Array.from({ length: 23 }, (_, index) => `crawler-group-${String(index + 1).padStart(2, '0')}.yml`),
+  ...Array.from({ length: EXPECTED_CRAWLER_GROUP_COUNT }, (_, index) => `crawler-group-${String(index + 1).padStart(2, '0')}.yml`),
   'translate-pending.yml',
 ];
 const EXPECTED_CRAWLER_ARTIFACT_SET = new Set(EXPECTED_CRAWLER_ARTIFACTS);
@@ -1623,12 +1624,12 @@ test('ogni path citato dagli script del ciclo esiste, o la sua assenza è dichia
   );
 });
 
-test('con il contract, l eccezione runtime è chiusa sui 24 artifact e sull observer hashati', {
+test('con il contract, l eccezione runtime è chiusa sugli artifact e sull observer hashati', {
   skip: !CRAWLER_CONTRACT && 'contract crawler non ancora trasportato',
 }, () => {
   const files = CRAWLER_CONTRACT.artifacts.map((artifact) => artifact.file).sort();
   assert.deepEqual(files, [...EXPECTED_CRAWLER_ARTIFACTS].sort());
-  assert.equal(CRAWLER_ARTIFACT_RELS.size, 24);
+  assert.equal(CRAWLER_ARTIFACT_RELS.size, EXPECTED_CRAWLER_ARTIFACTS.length);
   assert.equal(CRAWLER_CONTRACT.observers.length, CRAWLER_CONTRACT.observerCount);
   assert.equal(
     new Set(CRAWLER_CONTRACT.observers.map((observer) => observer.target)).size,

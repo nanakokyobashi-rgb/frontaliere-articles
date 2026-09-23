@@ -1,15 +1,15 @@
 import { digestDocument } from './canonical-json-digest.mjs';
 import { isCrawlerGenerationToken } from './crawler-generation-token.mjs';
+import {
+  deriveCrawlerGroupIdsFromGroups,
+  normalizeCrawlerGroupIds,
+} from './crawler-generation-group-ids.mjs';
 
 export const CRAWLER_GENERATION_OBSERVER_REPORT_SCHEMA_VERSION = 2;
 export const ARTIFACT_MISSING_GRACE_MS = 6 * 60 * 60 * 1_000;
 const HASH_RE = /^sha256:[a-f0-9]{64}$/;
 const COMMIT_RE = /^(?:[a-f0-9]{40}|[a-f0-9]{64})$/;
 const STATUS_SET = new Set(['ready', 'blocked', 'waiting', 'infrastructure_error']);
-const GROUP_IDS = Object.freeze(Array.from(
-  { length: 23 },
-  (_, index) => String(index + 1).padStart(2, '0'),
-));
 const DISPATCH_STATUS_SET = new Set([
   'direct', 'reconciled_transport_error', 'reconciled_protocol_mismatch', 'rejected',
   'missing', 'duplicate', 'invalid_200_response', 'binding_mismatch',
@@ -66,9 +66,17 @@ function withoutDigest(value) {
   return Object.fromEntries(Object.entries(value).filter(([key]) => key !== 'digest'));
 }
 
-function validDispatchDiagnostics(value) {
-  if (!exactKeys(value, GROUP_IDS)) return false;
-  return GROUP_IDS.every((group) => {
+function validDispatchDiagnostics(value, expectedGroupIds = null) {
+  let groupIds;
+  try {
+    groupIds = expectedGroupIds === null
+      ? deriveCrawlerGroupIdsFromGroups(value)
+      : normalizeCrawlerGroupIds(expectedGroupIds);
+  } catch {
+    return false;
+  }
+  if (!exactKeys(value, groupIds)) return false;
+  return groupIds.every((group) => {
     const diagnostic = value[group];
     if (!exactKeys(diagnostic, ['status', 'runId'])
         || !DISPATCH_STATUS_SET.has(diagnostic.status)
@@ -130,6 +138,10 @@ export function createCrawlerGenerationObserverReport({
 
 export function validateCrawlerGenerationObserverReport(report, expected = null) {
   const errors = [];
+  let expectedGroupIds = null;
+  if (expected?.groupIds !== undefined) {
+    try { expectedGroupIds = normalizeCrawlerGroupIds(expected.groupIds); } catch { expectedGroupIds = []; }
+  }
   if (!exactKeys(report, REPORT_KEYS)) return { valid: false, errors: ['unsupported_schema'] };
   if (report.schemaVersion !== CRAWLER_GENERATION_OBSERVER_REPORT_SCHEMA_VERSION) {
     errors.push('unsupported_schema_version');
@@ -171,11 +183,12 @@ export function validateCrawlerGenerationObserverReport(report, expected = null)
       : report.observer?.reasons?.length < 1) {
     errors.push('invalid_observer_reasons');
   }
-  if (report.dispatchDiagnostics !== null && !validDispatchDiagnostics(report.dispatchDiagnostics)) {
+  if (report.dispatchDiagnostics !== null
+      && !validDispatchDiagnostics(report.dispatchDiagnostics, expectedGroupIds)) {
     errors.push('invalid_dispatch_diagnostics');
   }
   if (['ready', 'blocked'].includes(report.observer?.status)
-      && !validDispatchDiagnostics(report.dispatchDiagnostics)) {
+      && !validDispatchDiagnostics(report.dispatchDiagnostics, expectedGroupIds)) {
     errors.push('missing_terminal_dispatch_diagnostics');
   }
   if (!exactKeys(report.translation, ['mode', 'wouldDispatch', 'dispatched'])

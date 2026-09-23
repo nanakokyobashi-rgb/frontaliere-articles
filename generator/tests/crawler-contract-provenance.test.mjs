@@ -61,6 +61,8 @@ const PROVENANCE_SCRIPT = readFileSync(
   path.join(ROOT, 'scripts/ci/verify-crawler-contract-provenance.mjs'),
   'utf8',
 );
+const CRAWLER_GROUP_COUNT = CONTRACT.artifacts.filter((artifact) => /^crawler-group-\d{2}\.yml$/.test(artifact.file)).length;
+const CRAWLER_ARTIFACT_COUNT = CONTRACT.artifacts.length;
 
 const HASH = 'a'.repeat(64);
 const OTHER = 'b'.repeat(64);
@@ -328,7 +330,7 @@ test('un artifact `adapted` senza digest resta `undeclared` e rosso', () => {
   assert.equal(verdict.red, true);
 });
 
-test('il piano reale copre i 49 digest e la lineage del contratto committato', () => {
+test(`il piano reale copre i ${1 + CRAWLER_ARTIFACT_COUNT * 2} digest e la lineage del contratto committato`, () => {
   const checks = planProvenanceChecks(CONTRACT, MANIFEST);
   const adaptedArtifacts = CONTRACT.artifacts.filter((artifact) => MANIFEST.files.some(
     (entry) => entry.path === `.github/workflows/${artifact.file}` && entry.mode === 'adapted',
@@ -339,7 +341,7 @@ test('il piano reale copre i 49 digest e la lineage del contratto committato', (
   );
   assert.equal(checks.filter((c) => c.localOnly).length, 5 + CONTRACT.artifacts.length + adaptedArtifacts);
   assert.equal(checks.length, 5 + CONTRACT.artifacts.length + 1 + CONTRACT.artifacts.length * 2);
-  assert.equal(checks.filter((c) => !c.localOnly).length, 49 - adaptedArtifacts);
+  assert.equal(checks.filter((c) => !c.localOnly).length, 1 + CRAWLER_ARTIFACT_COUNT * 2 - adaptedArtifacts);
   for (const artifact of CONTRACT.artifacts) {
     assert.equal(artifact.generatorSha256, CONTRACT.generatorSha256, `${artifact.file}: generatorSha256 fuori lineage`);
   }
@@ -656,7 +658,7 @@ test('evaluateProvenance nomina il path osservato nel report', () => {
   assert.equal(source.sitePath, elsewhere, 'il report deve nominare il file davvero letto');
 });
 
-test('24 `*-logic.yml` assenti in blocco accusano la coordinata, non gli artifact', () => {
+test(`${CRAWLER_GROUP_COUNT} \`*-logic.yml\` assenti in blocco accusano la coordinata, non gli artifact`, () => {
   const checks = planProvenanceChecks(CONTRACT, MANIFEST);
   const observed = new Map(checks.map((c) => [
     c.field,
@@ -674,7 +676,7 @@ test('24 `*-logic.yml` assenti in blocco accusano la coordinata, non gli artifac
   for (const cand of source.sitePathCandidates) assert.ok(source.detail.includes(cand), cand);
 });
 
-test('24 sorgenti presenti ma non riconosciute accusano la coordinata, non gli artifact', () => {
+test(`${CRAWLER_GROUP_COUNT} sorgenti presenti ma non riconosciute accusano la coordinata, non gli artifact`, () => {
   const checks = planProvenanceChecks(CONTRACT, MANIFEST);
   const observed = new Map(checks.map((c) => [
     c.field,
@@ -743,10 +745,10 @@ test('il digest locale pinna i byte raw, non il re-encode UTF-8', () => {
   assert.notEqual(digest(invalid), digest(reencoded));
 });
 
-test('i 23 gruppi crawler restano fail-closed se continue-on-error perde wait_outcome', () => {
+test('i gruppi crawler restano fail-closed se continue-on-error perde wait_outcome', () => {
   const workflowsDir = path.join(ROOT, '.github/workflows');
   const groups = CONTRACT.artifacts.filter((artifact) => /^crawler-group-\d{2}\.yml$/.test(artifact.file));
-  assert.equal(groups.length, 23);
+  assert.equal(groups.length, CRAWLER_GROUP_COUNT);
   for (const artifact of groups) {
     const text = readFileSync(path.join(workflowsDir, artifact.file), 'utf8');
     assert.match(
@@ -768,12 +770,12 @@ test('i 23 gruppi crawler restano fail-closed se continue-on-error perde wait_ou
   }
 });
 
-test('evaluateProvenance resta fail-closed se un digest remoto dei 24 artifact diverge', () => {
-  assert.equal(CONTRACT.artifactCount, 24);
-  assert.equal(CONTRACT.artifacts.length, 24);
+test('evaluateProvenance resta fail-closed se un digest remoto di un artifact diverge', () => {
+  assert.equal(CONTRACT.artifactCount, CRAWLER_ARTIFACT_COUNT);
+  assert.equal(CONTRACT.artifacts.length, CRAWLER_ARTIFACT_COUNT);
   const checks = planProvenanceChecks(CONTRACT, MANIFEST);
-  assert.equal(checks.filter((c) => c.field.endsWith('#sourceSha256')).length, 24);
-  assert.equal(checks.filter((c) => c.field.endsWith('#artifactSha256')).length, 24);
+  assert.equal(checks.filter((c) => c.field.endsWith('#sourceSha256')).length, CRAWLER_ARTIFACT_COUNT);
+  assert.equal(checks.filter((c) => c.field.endsWith('#artifactSha256')).length, CRAWLER_ARTIFACT_COUNT);
   assert.equal(checks.duplicateManifestPaths.length, 0);
 
   const observed = new Map(checks.map((c) => [c.field, { sha256: c.expected }]));
@@ -784,5 +786,5 @@ test('evaluateProvenance resta fail-closed se un digest remoto dei 24 artifact d
   const verdict = evaluateProvenance(checks, observed);
   assert.equal(verdict.red, true);
   assert.equal(verdict.results.find((r) => r.field === victim.field).state, 'drifted');
-  assert.match(verdict.reason, /24 artifact|digest del contratto non corrispondono/);
+  assert.match(verdict.reason, new RegExp(`${CRAWLER_ARTIFACT_COUNT} artifact|digest del contratto non corrispondono`));
 });

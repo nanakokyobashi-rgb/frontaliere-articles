@@ -110,6 +110,19 @@ test('encodeEventImage limita ENTRAMBI gli assi e non ingrandisce mai un file gi
   assert.match(fn, /catch[\s\S]*return \{ buf, ext: originalExt \}/);
 });
 
+test('mirrorEventImage legge il body in streaming e cancella le risposte oltre il cap', () => {
+  const readerFn = body('readEventImageBody');
+  assert.match(readerFn, /content-length/);
+  assert.match(readerFn, /getReader/);
+  assert.match(readerFn, /reader\.read\(\)/);
+  assert.match(readerFn, /reader\.cancel\(\)/);
+  assert.doesNotMatch(readerFn, /arrayBuffer\(\)/);
+
+  const mirrorFn = body('mirrorEventImage');
+  assert.match(mirrorFn, /cancelEventImageResponse/);
+  assert.match(mirrorFn, /readEventImageBody/);
+});
+
 test('sharp e\' una dipendenza dichiarata: l\'import dinamico deve poter risolvere', () => {
   const pkg = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'));
   assert.ok(pkg.dependencies?.sharp || pkg.devDependencies?.sharp, 'sharp assente da package.json');
