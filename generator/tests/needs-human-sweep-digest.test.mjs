@@ -91,8 +91,11 @@ test('il valore del titolo digest è validato prima del prompt Codex e passato c
   assert.doesNotMatch(validate, /\n\s+DIGEST_TITLE:\s+\$\{\{/, 'la sorgente del titolo non deve essere duplicata nello step');
   assert.match(validate, /\[ -n "\$DIGEST_TITLE" \]/, 'un titolo vuoto deve essere un errore osservabile');
   assert.match(validate, /printf 'title=%s\\n' "\$DIGEST_TITLE" >> "\$GITHUB_OUTPUT"/, 'il valore validato deve diventare un output machine-stabile');
+  assert.match(validate, /- name: Prefetch site vision registry for Codex/, 'VISION.md deve essere prelevata prima del bridge Codex');
+  assert.match(validate, /\/tmp\/frontaliere-site-VISION\.md/, 'il prefetch deve produrre un file locale osservabile');
 
   const prompt = stepBlock('Run Codex Luna Max sweep');
+  assert.match(prompt, /Leggi `\/tmp\/frontaliere-site-VISION\.md` PER INTERO/, 'il prompt deve leggere la copia prefetchata, non interrogare il repo remoto');
   assert.match(
     prompt,
     /titolo ESATTO `\$\{\{ steps\.digest_title\.outputs\.title \}\}`/,

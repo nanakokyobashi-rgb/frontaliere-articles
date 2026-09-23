@@ -33,14 +33,16 @@ name: Automation backlog sweep (Codex Luna Max, weekly)
 #
 # ── ADATTAMENTI rispetto al sito ────────────────────────────────────────────
 #
-# 1. **`VISION.md` NON viene copiato qui.** Resta sorgente unica sul sito e si
-#    recupera via API, con lo STESSO comando che usa già `issue-decompose.yml`
-#    (vedi il prompt sotto). Le due repo sono PUBBLICHE, quindi il
-#    `GITHUB_TOKEN` del run basta a leggerlo: nessun PAT per la lettura
-#    cross-repo. Una copia locale divergerebbe in silenzio — è esattamente il
-#    modo di rompersi che `loop-drift-check` esiste per intercettare.
+# 1. **`VISION.md` NON viene copiato qui.** Resta sorgente unica sul sito e la
+#    job `sweep` la preleva in un file temporaneo prima di avviare Codex, usando
+#    il `GITHUB_TOKEN` del runner. Il prompt legge quel file locale: il bridge
+#    `gh` dell'agente non supporta `gh api --repo` cross-repo, quindi lasciare
+#    quella chiamata al run Codex faceva fallire il bootstrap senza classificare
+#    nessuna issue. Una copia persistente divergerebbe in silenzio — è
+#    esattamente il modo di rompersi che `loop-drift-check` esiste per
+#    intercettare.
 #    Dal 2026-09-05 lo stesso recupero lo fa anche il PRE-PASS, non solo il run
-#    Claude: `readVisionRegistry()` in `scripts/ci/needs-human-prepass.mjs`
+#    Codex: `readVisionRegistry()` in `scripts/ci/needs-human-prepass.mjs`
 #    legge il registro delle decisioni gia' prese con lo stesso `gh api` e con
 #    lo stesso `GITHUB_TOKEN`, ed e' fail-open — se il recupero non riesce il
 #    pre-pass torna al comportamento precedente invece di morire.
@@ -218,6 +220,18 @@ jobs:
           }
           printf 'title=%s\n' "$DIGEST_TITLE" >> "$GITHUB_OUTPUT"
 
+      - name: Prefetch site vision registry for Codex
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          gh api \
+            --repo valerielinc-ops/frontaliere-si-o-no \
+            repos/valerielinc-ops/frontaliere-si-o-no/contents/VISION.md \
+            --jq .content \
+            | base64 --decode > /tmp/frontaliere-site-VISION.md
+          test -s /tmp/frontaliere-site-VISION.md
+
       - name: Run Codex Luna Max sweep
         id: codex_sweep
         if: always() && steps.digest_title.outcome == 'success'
@@ -235,7 +249,7 @@ jobs:
             Sei lo sweep settimanale del backlog `needs-human` + `automation-deferred` di questo repo (il CORPUS, `$REPO`). Il tuo compito: lasciare all'umano solo decisioni realmente mancanti e rimettere il resto nel ciclo autonomo. NON implementi fix e NON apri PR.
 
             **Bootstrap:**
-            1. Leggi `VISION.md` PER INTERO. Questo repo NON ne ha una copia, ed è deliberato: la sorgente unica è quella del SITO. Recuperala con lo stesso comando di `issue-decompose.yml`: `gh api --repo valerielinc-ops/frontaliere-si-o-no repos/valerielinc-ops/frontaliere-si-o-no/contents/VISION.md --jq .content | base64 -d`. I driver di decisione (D1-D8) e il registro delle decisioni già prese sono il tuo criterio di classificazione. La lista «Sempre umano» è stata RIMOSSA il 2026-08-24 (istruzione diretta del proprietario, registro in VISION.md): non esiste più una categoria di business riservata all'umano. Se il recupero fallisce, FERMATI e posta il motivo sul digest: senza i driver non hai criterio, e classificare a intuito è il modo di far implementare al fixer scelte che non gli spettano.
+            1. Leggi `/tmp/frontaliere-site-VISION.md` PER INTERO. Questo repo NON ne ha una copia, ed è deliberato: la sorgente unica è quella del SITO. Il file è stato prelevato dal runner prima di avviare Codex; non tentare `gh api --repo` cross-repo dal bridge dell'agente, perché quel flag non è disponibile in questo ambiente. I driver di decisione (D1-D8) e il registro delle decisioni già prese sono il tuo criterio di classificazione. La lista «Sempre umano» è stata RIMOSSA il 2026-08-24 (istruzione diretta del proprietario, registro in VISION.md): non esiste più una categoria di business riservata all'umano. Se il file non è leggibile, FERMATI e posta il motivo sul digest: senza i driver non hai criterio, e classificare a intuito è il modo di far implementare al fixer scelte che non gli spettano.
             2. `gh issue list --repo $REPO --state open --label needs-human --json number,title,labels,createdAt,updatedAt --limit 100` e `gh issue list --repo $REPO --state open --label automation-deferred --json number,title,labels,createdAt,updatedAt --limit 100` — unisci per numero e ordina per updatedAt crescente (le più ferme prima).
 
             **Per ogni issue (MASSIMO 15 azioni totali in questo run — un'azione = un cambio di label/stato; le issue oltre il cap restano al giro successivo):**
