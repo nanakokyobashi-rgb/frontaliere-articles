@@ -125,6 +125,18 @@ test('un log misto con una seconda remote error resta fail-closed', () => {
   });
 });
 
+test('un secondo rifiuto GitHub-App senza firma workflow resta fail-closed', () => {
+  const mixed = [
+    refusal,
+    'remote: error: refusing to allow a GitHub App to create or update repository metadata without repository permission.',
+  ].join('\n');
+  assert.deepEqual(classifyWorkflowPushFailure(mixed), {
+    kind: 'other',
+    fallback: false,
+    rejectedPaths: [],
+  });
+});
+
 test('il fallback seleziona tutti e soli i workflow del commit', () => {
   const paths = selectWorkflowFallbackPaths(
     classifyWorkflowPushFailure(refusal),

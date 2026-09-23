@@ -170,4 +170,19 @@ describe('synthetic source contract', () => {
     expect(error.qualityReject).toBe(true);
     expect(error.syntheticSourceReject).toBe(true);
   });
+
+  it('keeps the raw ASTRA suffix at the fetch boundary for contract decoding', () => {
+    const start = source.indexOf("if (url.startsWith('stats-astra://'))");
+    const end = source.indexOf('  // Handle evergreen topics', start);
+    const branch = source.slice(start, end);
+    expect(branch).not.toMatch(/decodeURIComponent/);
+    expect(branch).toContain('buildStatsAstraPromptContent(token)');
+  });
+
+  it('keeps the missing-document guard inside ASTRA quality validation', () => {
+    const start = source.indexOf('async function buildStatsAstraPromptContent(token) {');
+    const end = source.indexOf('function formatStatsAstraPrompt', start);
+    const builder = source.slice(start, end);
+    expect(builder).toMatch(/try\s*\{[\s\S]*if \(!snap\.exists\)[\s\S]*markSyntheticSourceValidation/);
+  });
 });

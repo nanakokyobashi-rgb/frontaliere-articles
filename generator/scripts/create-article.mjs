@@ -6469,14 +6469,14 @@ async function buildStatsAstraPromptContent(token) {
   }
   const db = admin.firestore();
   const snap = await db.collection('config').doc('astra_vehicle_stats').get();
-  if (!snap.exists) {
-    throw new Error('config/astra_vehicle_stats Firestore doc missing — refresh-astra-vehicle-stats has not run yet.');
-  }
   const parts = String(token || '').split('/').map((part) => decodeSyntheticSourceToken(part, 'ASTRA'));
   const cadence = parts[0] || 'monthly';
   const period = parts[1] || '';
   const section = parts[2] === 'svizzera' || SECTION_NAME === 'svizzera' ? 'svizzera' : 'frontaliere';
   try {
+    if (!snap.exists) {
+      throw new Error('config/astra_vehicle_stats Firestore doc missing — refresh-astra-vehicle-stats has not run yet.');
+    }
     return formatStatsAstraPrompt(cadence, period, section, snap.data() || {});
   } catch (error) {
     throw markSyntheticSourceValidation(error, 'ASTRA');
@@ -6939,7 +6939,10 @@ async function fetchPageContent(url) {
     return await buildStatsBfsPromptContent(quarter);
   }
   if (url.startsWith('stats-astra://')) {
-    const token = decodeURIComponent(url.slice('stats-astra://'.length));
+    // Keep the raw suffix here: the ASTRA source contract owns decoding so a
+    // malformed token becomes a per-candidate quality rejection instead of an
+    // uncaught URIError that aborts the whole run.
+    const token = url.slice('stats-astra://'.length);
     console.error(`🚗 Articolo statistica ASTRA: ${token}`);
     return await buildStatsAstraPromptContent(token);
   }

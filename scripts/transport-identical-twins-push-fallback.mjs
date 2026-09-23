@@ -80,9 +80,14 @@ function sortedUnique(paths) {
 }
 
 function hasUnrelatedRemoteError(output) {
-  return String(output ?? '').split(/\r?\n/).some((line) => {
-    if (!/^\s*remote:\s*(?:error|fatal):/i.test(line)) return false;
-    return !/^\s*remote:\s*error:\s*refusing\s+to\s+allow\s+a\s+GitHub\s+App\b/i.test(line);
+  const text = String(output ?? '');
+  const canonicalRanges = [...text.matchAll(WORKFLOW_REFUSAL_RE)].map((match) => {
+    const end = (match.index ?? 0) + match[0].length;
+    return [text.lastIndexOf('\n', match.index ?? 0) + 1, end];
+  });
+  return [...text.matchAll(/^\s*remote:\s*(?:error|fatal):/gim)].some((line) => {
+    const start = line.index ?? 0;
+    return !canonicalRanges.some(([from, to]) => start >= from && start < to);
   });
 }
 
