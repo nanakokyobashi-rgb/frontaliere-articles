@@ -1059,10 +1059,13 @@ jobs:
       # Il body e la HEAD possono cambiare fra la prefetch e l'avvio della
       # action Claude. Rifare il read/hash nell'ultimo step prima di consumare
       # quota Claude evita di applicare un finding a un contesto ormai stantio;
-      # il mismatch è un errore fail-closed, non un bundle vuoto.
+      # il mismatch resta fail-closed e impedisce Codex. Lo step e' tollerato
+      # a livello job cosi' il classificatore puo' distinguere una race
+      # SUPERSEDED provata dall'avanzamento remoto da un errore locale.
       - name: Revalidate PR + review context immediately before Codex
         id: precodex
         if: steps.guard.outputs.proceed == 'true' && steps.ctx.outputs.context_verified == 'true'
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
