@@ -2917,6 +2917,16 @@
       }
     },
     {
+      "path": "host/shared/literalMarkdown.ts",
+      "sitePath": "build-plugins/shared/literalMarkdown.ts",
+      "mode": "identical",
+      "baseline": {
+        "site": "97bcd768eba4e593",
+        "corpus": "97bcd768eba4e593",
+        "alignedAt": "2026-09-24"
+      }
+    },
+    {
       "path": "host/shared/localeEmitFilter.ts",
       "sitePath": "build-plugins/shared/localeEmitFilter.ts",
       "mode": "identical",
@@ -2942,9 +2952,9 @@
       "sitePath": "build-plugins/shared/safeTruncate.ts",
       "mode": "identical",
       "baseline": {
-        "site": "776508d2f174584f",
-        "corpus": "776508d2f174584f",
-        "alignedAt": "2026-08-09"
+        "site": "74d50e20ead3bca0",
+        "corpus": "74d50e20ead3bca0",
+        "alignedAt": "2026-09-23"
       }
     },
     {
@@ -2973,9 +2983,9 @@
       "sitePath": "build-plugins/shared/stripLiteralMarkdown.ts",
       "mode": "identical",
       "baseline": {
-        "site": "2b5eaa91882d5993",
-        "corpus": "2b5eaa91882d5993",
-        "alignedAt": "2026-09-15"
+        "site": "df5935507d67e4b2",
+        "corpus": "df5935507d67e4b2",
+        "alignedAt": "2026-09-23"
       }
     },
     {
