@@ -13,6 +13,7 @@ import { fileURLToPath } from 'node:url';
 import {
   classifyWorkflowPushFailure,
   isWorkflowPath,
+  readLines,
   removeWorkflowPathsFromReport,
   restoreWorkflowSnapshots,
   selectWorkflowFallbackPaths,
@@ -54,6 +55,47 @@ test('classifica quoting, wrapping e nomi workflow con spazi senza allargare il 
     fallback: false,
     rejectedPaths: [],
   });
+});
+
+test('normalizza ANSI e decodifica pathname C-quotati prima del confronto', () => {
+  const cQuoted = 'remote: error: refusing to allow a GitHub App to create or update workflow ".github/workflows/release\\303\\244\\040candidate\\".yml" without workflows permission.';
+  assert.deepEqual(classifyWorkflowPushFailure('\u001b[31m' + cQuoted + '\u001b[0m'), {
+    kind: 'workflow-permission',
+    fallback: true,
+    rejectedPaths: ['.github/workflows/releaseä candidate".yml'],
+  });
+  assert.deepEqual(classifyWorkflowPushFailure(
+    'remote: error: refusing to allow a GitHub App to create or update workflow ".github/workflows/bad\\303.yml" without workflows permission.',
+  ), {
+    kind: 'other',
+    fallback: false,
+    rejectedPaths: [],
+  });
+  assert.deepEqual(classifyWorkflowPushFailure(
+    'remote: error: refusing to allow a GitHub App to create or update workflow ".github/workflows/bad\\q.yml" without workflows permission.',
+  ), {
+    kind: 'other',
+    fallback: false,
+    rejectedPaths: [],
+  });
+  assert.deepEqual(classifyWorkflowPushFailure(
+    'remote: error: refusing to allow a GitHub App to create or update workflow ".github/workflows/bad\\x.yml" without workflows permission.',
+  ), {
+    kind: 'other',
+    fallback: false,
+    rejectedPaths: [],
+  });
+});
+
+test('decodifica i pathname C-quotati usati da git diff --name-only', () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'transport-paths-'));
+  const file = path.join(directory, 'paths.txt');
+  try {
+    fs.writeFileSync(file, '".github/workflows/release\\303\\244.yml"\n');
+    assert.deepEqual(readLines(file), ['.github/workflows/releaseä.yml']);
+  } finally {
+    fs.rmSync(directory, { recursive: true, force: true });
+  }
 });
 
 test('un errore diverso, anche su un workflow, non abilita il fallback', () => {
