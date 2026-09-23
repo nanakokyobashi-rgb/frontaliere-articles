@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1945013/franchi-litro-benzina-due-tcs": {
-    "articleId": "benzina-due-franchi-agosto-2026",
-    "ts": "2026-08-20T10:24:48.098Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1945003/calo-primo-semestre-postfinance-ricavi": {
     "articleId": "postfinance-utile-calo-primo-semestre",
     "ts": "2026-08-20T11:15:18.823Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/politica/1951882/assicurati-dati-avs-scambio-standardizzato": {
     "articleId": "avs-ai-accesso-digitale-dati",
     "ts": "2026-09-23T00:27:40.014Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1951859/epidemie-legge-revisione-svizzera-imprese": {
+    "articleId": "revisione-legge-epidemie-svizzera",
+    "ts": "2026-09-23T00:40:58.724Z",
     "keyForm": 2
   }
 }
