@@ -37,6 +37,10 @@ for (const [file, marker] of [
       `${file}: finalizzazione non lega la prova allo stesso ID del marker`);
     assert.match(source.slice(finalVerifyAt - 500, finalVerifyAt + 700), /EXPECTED_COMMENT_ID/,
       `${file}: ID marker finale non proviene dall'output trusted del POST`);
+    const precodexStart = source.lastIndexOf('      - name: ', finalVerifyAt);
+    assert.ok(precodexStart >= 0, `${file}: step precodex non trovato`);
+    assert.match(source.slice(precodexStart, finalVerifyAt), /continue-on-error:\s*true/,
+      `${file}: un mismatch stantio deve arrivare al classificatore senza autorizzare Codex`);
     const supersededAt = source.indexOf('echo "::warning::SUPERSEDED:');
     assert.ok(supersededAt >= 0, `${file}: ramo SUPERSEDED assente`);
     assert.match(source.slice(Math.max(0, supersededAt - 1100), supersededAt + 1600), /--delete-verified/,
