@@ -151,7 +151,7 @@ jobs:
             echo "::error::Lease quota condiviso illeggibile o non verificabile → issue-decompose fermato fail-closed."
             exit 1
           fi
-          gh issue edit "$ISSUE" --repo "$GH_REPO" --add-label agent:decompose-queued --remove-label agent:decompose
+          gh issue edit "$ISSUE" --repo "$GH_REPO" --add-label agent:decompose-queued --remove-label agent:decompose --remove-label automation-deferred
           echo "::warning::Lease quota condiviso negato (${{ steps.quota_lease.outputs.lease_reason }}) → issue #$ISSUE ri-accodata senza consumare quota Claude."
 
       - name: Run Codex Luna Max decompose
@@ -178,8 +178,8 @@ jobs:
 
             **Triage preliminare — tre uscite rapide (scegli la prima che si applica):**
             - **Già risolta**: se la claim non è più vera (rimisurala col comando del body se c'è), posta un commento con la misura osservata e il comando, poi: `gh issue edit $ISSUE_NUMBER --add-label maybe-resolved --remove-label agent:decompose` e ultimo commento con `<!-- DECOMPOSE_OUTCOME: already-resolved -->`. STOP.
-            - **Atomica**: se descrive UNA sola causa con UN target chiaro, NON scomporla artificialmente. Arricchiscila con un commento `## Scheda` (formato sotto), poi `gh issue edit $ISSUE_NUMBER --add-label from-decompose --add-label agent:fix-queued --remove-label agent:decompose` e ultimo commento con `<!-- DECOMPOSE_OUTCOME: atomic-requeue -->`. STOP.
-            - **Decisione del proprietario**: se lo scope richiede una decisione che i driver non coprono o riservano al proprietario (dati personali, spese, ritiro editoriale di articoli pubblicati, invii massivi), posta la DOMANDA DECIDIBILE (opzioni + misura che serve a rispondere), poi `gh issue edit $ISSUE_NUMBER --add-label needs-human --remove-label agent:decompose` e ultimo commento con `<!-- DECOMPOSE_OUTCOME: needs-human-decision -->`. STOP.
+            - **Atomica**: se descrive UNA sola causa con UN target chiaro, NON scomporla artificialmente. Arricchiscila con un commento `## Scheda` (formato sotto), poi `gh issue edit $ISSUE_NUMBER --add-label from-decompose --add-label agent:fix-queued --remove-label agent:decompose --remove-label automation-deferred` e ultimo commento con `<!-- DECOMPOSE_OUTCOME: atomic-requeue -->`. STOP.
+            - **Decisione del proprietario**: usa questa uscita SOLO se, dopo aver letto VISION.md e DECISIONS.md, manca davvero una decisione necessaria per scegliere lo scope. Non inferire un bisogno umano da dati personali, spese, ritiro editoriale di articoli pubblicati o invii massivi se i documenti hanno già una regola applicabile. Formula la DOMANDA DECIDIBILE con opzioni, evidenza richiesta e criterio di accettazione; poi `gh issue edit $ISSUE_NUMBER --add-label needs-human --remove-label automation-deferred --remove-label agent:decompose` e ultimo commento con `<!-- DECOMPOSE_OUTCOME: needs-human-decision -->` e `<!-- OWNER_DECISION_REQUEST: ... -->`. STOP.
 
             **Decomposizione (il caso normale):**
             1. Identifica da 2 a 6 unità di lavoro ATOMICHE: una root cause ciascuna, file target propri, indipendenti dove possibile. Se le unità naturali sono più di 6: crea le 5 di massimo valore (pubblicazione rotta > engine > generazione > qualità contenuto > resto) più UNA issue-contenitore col residuo — la issue-contenitore NON riceve `from-decompose`, così il ciclo la ri-decompone al giro successivo.
@@ -208,8 +208,8 @@ jobs:
             - NON modificare file del repo, NON aprire PR, NON implementare. Solo lettura + issue.
             - Massimo 6 figlie nuove per run; mai una figlia-contenitore (eccetto l'unica residua del punto 1).
             - Riferimento al padre nelle figlie: `Parent: #N` — MAI `Closes`/`Fixes`/`Resolves` adiacente a `#N`.
-            - Se non riesci a produrre NEMMENO una scheda valida: trattala come «decisione del proprietario» (commento con ciò che manca + `needs-human` + `<!-- DECOMPOSE_OUTCOME: needs-human-decision -->`).
-            - L'ULTIMO commento sul padre porta SEMPRE `<!-- DECOMPOSE_OUTCOME: <code> -->` con `<code>` ∈ `decomposed-K` · `atomic-requeue` · `needs-human-decision` · `already-resolved` · `stale-dispatch`.
+            - Se non riesci a produrre NEMMENO una scheda valida: è un blocco tecnico di contesto, non una decisione umana. Commenta ciò che manca, applica `automation-deferred`, rimuovi `agent:decompose` e usa `<!-- DECOMPOSE_OUTCOME: automation-deferred -->` + `<!-- AUTOMATION_DEFERRED: technical -->`.
+            - L'ULTIMO commento sul padre porta SEMPRE `<!-- DECOMPOSE_OUTCOME: <code> -->` con `<code>` ∈ `decomposed-K` · `atomic-requeue` · `needs-human-decision` · `automation-deferred` · `already-resolved` · `stale-dispatch`.
 
       - name: Emit DECOMPOSE_OUTCOME telemetry (deterministic backstop)
         if: always() && steps.stale.outputs.stale_dispatch != 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
@@ -233,7 +233,7 @@ jobs:
           ACTION_OUTCOME: ${{ steps.codex_decompose.outcome }}
         run: |
           set -uo pipefail
-          DONE=$(gh issue view "$ISSUE" --json comments --jq '[.comments[].body | select(test("<!-- DECOMPOSE_OUTCOME: (decomposed-[0-9]+|atomic-requeue|needs-human-decision|already-resolved|stale-dispatch) -->"))] | length' 2>/dev/null || echo 0)
+          DONE=$(gh issue view "$ISSUE" --json comments --jq '[.comments[].body | select(test("<!-- DECOMPOSE_OUTCOME: (decomposed-[0-9]+|atomic-requeue|needs-human-decision|automation-deferred|already-resolved|stale-dispatch) -->"))] | length' 2>/dev/null || echo 0)
           echo "issue=$ISSUE outcome-markers=$DONE claude=$ACTION_OUTCOME"
           if [ "${DONE:-0}" != "0" ]; then
             echo "✓ verdetto di decomposizione presente → run SUCCESS."

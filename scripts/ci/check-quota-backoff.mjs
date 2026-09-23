@@ -1123,7 +1123,10 @@ function main() {
       `\`${LBL_REQUEUE}\` e riparte da sola appena la finestra si chiude.`,
     ].join('\n');
     gh(['issue', 'comment', ISSUE, ...repoArgs, '--body', body]);
-    gh(['issue', 'edit', ISSUE, ...repoArgs, '--add-label', LBL_REQUEUE, '--remove-label', LBL_ACTIVE]);
+    gh(['issue', 'edit', ISSUE, ...repoArgs,
+      '--add-label', LBL_REQUEUE,
+      '--remove-label', LBL_ACTIVE,
+      '--remove-label', 'automation-deferred']);
   }
 
   setOutput(true, resetsAt, false);

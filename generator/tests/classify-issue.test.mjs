@@ -122,6 +122,7 @@ test('needs-human non instrada mai: e\' assorbente, solo needs-human-sweep.yml l
   // un tracker che "non ha una causa singola da riparare". Osservato su #649.
   const r = classifyIssue('🧭 Decisioni del proprietario — digest', ['needs-human', 'automation', 'agent:no-age-out']);
   assert.equal(r.route, 'none');
+  assert.equal(r.autofix, false);
   assert.equal(r.fuPrio, null);
 });
 
@@ -134,6 +135,12 @@ test('needs-human non cambia la category (resta visibile per telemetria, solo il
   const r = classifyIssue('Workflow Failure: engine lockstep drift', ['needs-human']);
   assert.equal(r.category, 'engine');
   assert.equal(r.route, 'none');
+});
+
+test('automation-deferred esclude la coda senza chiedere una decisione umana', () => {
+  const r = classifyIssue('Workflow Failure: crawler transport', ['automation-deferred']);
+  assert.equal(r.route, 'none');
+  assert.equal(r.autofix, false);
 });
 
 test('i pin locali del classificatore tengono l\'issue fuori dal fixer', () => {

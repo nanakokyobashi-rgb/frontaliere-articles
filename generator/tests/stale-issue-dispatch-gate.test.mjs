@@ -247,5 +247,5 @@ for (const wf of ['issue-fix.yml', 'issue-decompose.yml']) {
 
 test('issue-decompose raccoglie anche lo stale-dispatch come esito chiuso', () => {
   const src = fs.readFileSync(path.join(ROOT, '.github/workflows/issue-decompose.yml'), 'utf8');
-  assert.match(src, /DECOMPOSE_OUTCOME: \(decomposed-\[0-9\]\+\|atomic-requeue\|needs-human-decision\|already-resolved\|stale-dispatch\)/);
+  assert.match(src, /DECOMPOSE_OUTCOME: \(decomposed-\[0-9\]\+\|atomic-requeue\|needs-human-decision\|automation-deferred\|already-resolved\|stale-dispatch\)/);
 });

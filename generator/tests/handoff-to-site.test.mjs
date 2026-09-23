@@ -19,6 +19,7 @@ import {
   originWriteSteps,
   hasParkMarker,
   PARK_MARKER,
+  AUTOMATION_DEFERRED_MARKER,
   readManifestSnapshot,
   lastVerdictComment,
   HANDOFF_VERDICTS,
@@ -520,20 +521,22 @@ test('#972: lo STATO passa prima del commento', () => {
   }
 });
 
-test('#972: un effetto per chiamata — le tre label non sono piu\' atomiche', () => {
+test('#972: un effetto per chiamata — le quattro transizioni non sono piu\' atomiche', () => {
   const steps = originWriteSteps({ issue: '316', repo: 'o/r', close: false, comment: 'consegnata' });
   const labelSteps = steps.filter((s) => s.args[0] === 'issue' && s.args[1] === 'edit');
-  assert.equal(labelSteps.length, 3, 'add + due remove = tre chiamate indipendenti');
+  assert.equal(labelSteps.length, 4, 'add + tre remove = quattro chiamate indipendenti');
   for (const s of labelSteps) {
     const flags = s.args.filter((a) => a === '--add-label' || a === '--remove-label');
     assert.equal(flags.length, 1, `un solo effetto per chiamata, non ${flags.join('+')}: `
-      + 'con `--add-label needs-human --remove-label agent:fix --remove-label agent:fix-queued` '
+      + 'con `--add-label automation-deferred --remove-label needs-human --remove-label agent:fix --remove-label agent:fix-queued` '
       + 'una sola label non risolvibile faceva cadere anche il parcheggio');
   }
   // L'aggiunta prima delle rimozioni: un run che muore in mezzo lascia la issue
-  // parcheggiata due volte, mai senza nessuna label.
-  assert.deepEqual(steps.map((s) => s.args.at(-1)),
-    ['needs-human', 'agent:fix', 'agent:fix-queued', 'consegnata']);
+  // fuori dalla coda attiva, mai senza nessuna label tecnica.
+  assert.deepEqual(steps.filter((s) => s.args[0] === 'issue').map((s) => s.args.at(-1)),
+    ['automation-deferred', 'needs-human', 'agent:fix', 'agent:fix-queued', 'consegnata']);
+  assert.ok(steps.some((s) => s.args[0] === 'label'
+    && s.args[1] === 'create' && s.args.includes('automation-deferred')));
 });
 
 test('#972: il ramo close chiude e NON tocca le label di routing', () => {
@@ -546,10 +549,10 @@ test('#972: il ramo close chiude e NON tocca le label di routing', () => {
 test('#1142: originWriteSteps del blocked-workflows-scope rimuove entrambe le label di routing', () => {
   const steps = originWriteSteps({ issue: '1142', repo: 'o/r', close: false, comment: 'consegnata' });
   const states = steps.filter((s) => s.kind === 'state');
-  assert.ok(states.some((s) => s.args.includes('--add-label') && s.args.includes('needs-human')));
+  assert.ok(states.some((s) => s.args.includes('--add-label') && s.args.includes('automation-deferred')));
   assert.deepEqual(
     states.filter((s) => s.args.includes('--remove-label')).map((s) => s.args.at(-1)),
-    ['agent:fix', 'agent:fix-queued'],
+    ['needs-human', 'agent:fix', 'agent:fix-queued'],
   );
 });
 
@@ -558,7 +561,7 @@ test('#972: senza commento restano i soli passi idempotenti (ramo dedup)', () =>
   // niente, ri-postare il commento a ogni giro sarebbe rumore.
   const steps = originWriteSteps({ issue: '316', repo: 'o/r', close: false });
   assert.ok(steps.every((s) => s.kind === 'state'));
-  assert.equal(steps.length, 3);
+  assert.equal(steps.length, 5);
 });
 
 test('#972: il dedup ripara lo stato invece di uscire', async () => {
@@ -603,6 +606,8 @@ test('#1119: chiusura idempotente e parcheggio marcato', () => {
   assert.deepEqual(originWriteSteps({ issue: '548', repo: 'o/r', close: true, issueState: 'CLOSED' }), []);
   assert.equal(hasParkMarker([{}]), false);
   assert.equal(hasParkMarker([{ body: `${PARK_MARKER}\nparcheggiata` }]), true);
+  assert.equal(hasParkMarker([{ body: `${AUTOMATION_DEFERRED_MARKER}\nparcheggiata` }]), false,
+    'il marker tecnico non deve essere scambiato per il marker di dedup del handoff');
 });
 
 test('#1127: una collisione path corpus/site fa fallire la lettura del manifest', () => {

@@ -320,7 +320,7 @@ test('#780: il predicato e\' QUELLO del promotore, non una parafrasi', () => {
   // Se il drainer aggiunge un'esclusione, il pre-pass la eredita gratis: qui si
   // pretende che le due letture non possano divergere per costruzione.
   const title = 'follow-up(#6205): 3 items deferred — REST files-cap';
-  for (const l of ['decomposed:1', 'from-decompose', 'maybe-resolved', 'agent:decompose', 'agent:decompose-queued']) {
+  for (const l of ['decomposed:1', 'from-decompose', 'maybe-resolved', 'agent:decompose', 'agent:decompose-queued', 'automation-deferred']) {
     const eligible = isDecomposeEligible({ labels: [{ name: l }] });
     assert.equal(eligible, false, l);
     assert.equal(prepassDecision({ title, labels: [l] }).action, 'keep', l);
@@ -934,6 +934,19 @@ test('#923: la famiglia owner-only ha una nota, quindi ha un marker da verificar
   assert.equal(noteGate({ marker: d.marker, comments: [], commentsRead: false }).post, false);
 });
 
+test('il rientro tecnico accoda e rimuove il defer nella stessa transizione', async () => {
+  const fs = await import('node:fs');
+  const src = fs.readFileSync(new URL('../../scripts/ci/needs-human-prepass.mjs', import.meta.url), 'utf8');
+  const start = src.indexOf('const routeArgs = [');
+  const block = src.slice(start, start + 700);
+  assert.match(block, /'--add-label', add/);
+  assert.match(block, /'--remove-label', AUTOMATION_DEFERRED_LABEL/);
+  assert.ok(
+    block.indexOf("'--add-label', add") < block.indexOf("'--remove-label', AUTOMATION_DEFERRED_LABEL"),
+    'la rimozione del defer deve accompagnare, non seguire, la scrittura della nuova coda',
+  );
+});
+
 test('#972 (gemello): l\'instradamento passa prima della nota, un effetto per chiamata', async () => {
   // Stessa classe di `handoff-to-site.mjs`: la nota — cosmetica — viaggiava
   // prima della transizione di label, e le tre label stavano in UN solo
@@ -949,7 +962,12 @@ test('#972 (gemello): l\'instradamento passa prima della nota, un effetto per ch
     'la label che toglie la issue dal parcheggio e\' l\'effetto che conta: va per prima');
   for (const argv of src.match(/\[[^[\]]*'--(?:add|remove)-label'[^[\]]*\]/g) || []) {
     const flags = argv.match(/'--(?:add|remove)-label'/g) || [];
-    assert.equal(flags.length, 1, `un solo effetto per chiamata, non ${flags.join('+')} in ${argv}`);
+    // La sola eccezione è l'edit atomico che accoda e rimuove il defer tecnico:
+    // è una transizione di stato inseparabile, non due effetti indipendenti.
+    const isQueueTransition = argv.includes("'--add-label', add")
+      && argv.includes("'--remove-label', AUTOMATION_DEFERRED_LABEL");
+    assert.ok(isQueueTransition ? flags.length === 2 : flags.length === 1,
+      `effetti inattesi (${flags.join('+')}) in ${argv}`);
   }
 });
 

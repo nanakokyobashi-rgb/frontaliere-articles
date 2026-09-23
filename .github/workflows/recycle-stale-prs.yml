@@ -614,7 +614,7 @@ jobs:
           fi
           rm -f "$RECOVERY_FAIL_FLAG"
 
-      # Draft parcheggiate → `needs-human`. DEVE stare PRIMA del digest qui
+      # Draft PR parcheggiate → `needs-human`. DEVE stare PRIMA del digest qui
       # sotto, cosi' una draft etichettata in questo run compare gia' nella
       # issue dello stesso run invece che 24h dopo.
       #
@@ -645,13 +645,11 @@ jobs:
             node scripts/ci/parked-pr-detector.mjs --dry-run
           fi
 
-      # Visibilita' needs-human: quattro sorgenti convergono su questa label — il
-      # 🔴-fixer al round-cap, che etichetta e STOPPA (by-design), lo step qui
-      # sopra per le draft parcheggiate, il followup-drainer per le issue
-      # too-large, e da #413 l'escalation cronica di
-      # scripts/ci/close-recovered-failure-issues.mjs. In tutti i casi NESSUN
-      # processo rilancia o segnala quell'oggetto — resta fermo finche' l'owner
-      # non guarda a mano (osservato #1526: 102h di latenza).
+      # Visibilita' needs-human: per le PR, il 🔴-fixer al round-cap e lo step
+      # sopra per le draft parcheggiate segnalano un oggetto che richiede review.
+      # Per le issue questa label e' riservata alle decisioni reali del
+      # proprietario; i parcheggi tecnici del drainer e del closer usano
+      # `automation-deferred` e non entrano in questo digest.
       #
       # PERCHE' ANCHE LE ISSUE, e perche' QUI. Su `needs-human` la label non e'
       # un selettore ma un filtro di ESCLUSIONE: followup-drainer.mjs la usa per
@@ -928,7 +926,7 @@ jobs:
           [ -n "$PRS" ] || PRS='_(nessuna)_'
           [ -n "$ISSUES" ] || ISSUES='_(nessuna)_'
           # shellcheck disable=SC2016
-          DESC=$(printf '%b\n\nNessun processo automatico sblocchera questi oggetti, e su `needs-human` la label e un filtro di ESCLUSIONE dalle code del drainer, non una segnalazione. Servono occhi umani.\n\n**PR** (%s) — il fixer dei red-flag ha raggiunto il round-cap e si e fermato (anti-loop), oppure sono draft parcheggiate, che ogni strato del ciclo salta by-design:\n\n%s\n\n**Issue** (%s) — escalate dal followup-drainer (too-large) o dal gate cronico di close-recovered-failure-issues.mjs (un guasto che ricorre oltre soglia). Restano fuori dal pool dei retry parcheggiati e dal rescue agent:fix dei crawler finche portano la label. Esclusi i tracker permanenti, riconosciuti per TITOLO (il digest dello sweep, il ledger transient): sono aperti per costruzione e non sono item da sbloccare. Escludere per label non sarebbe la stessa cosa — `agent:no-age-out` vuol dire «non scade», e nasconderebbe da qui una issue davvero bloccata:\n\n%s\n\n_Issue dedup giornaliera da recycle-stale-prs.yml (zero-Claude); si aggiorna con un commento di recurrence finche esiste qualcosa di needs-human, e si richiude da sola al primo run in cui entrambe le liste sono vuote (i tracker permanenti non contano come residuo)._' "$DIGEST_PREFIX" "$PR_COUNT" "$PRS" "$ISSUE_COUNT" "$ISSUES")
+          DESC=$(printf '%b\n\nNessun processo automatico sblocchera questi oggetti, e su `needs-human` la label e un filtro di ESCLUSIONE dalle code del drainer, non una segnalazione. Servono occhi umani.\n\n**PR** (%s) — il fixer dei red-flag ha raggiunto il round-cap e si e fermato (anti-loop), oppure sono draft parcheggiate, che ogni strato del ciclo salta by-design:\n\n%s\n\n**Issue** (%s) — qui compaiono solo decisioni reali del proprietario che richiedono una risposta esplicita. I blocchi tecnici del followup-drainer e del closer sono marcati `automation-deferred` e rientrano nello sweep automatico, non in questo canale. Esclusi i tracker permanenti, riconosciuti per TITOLO (il digest dello sweep, il ledger transient): sono aperti per costruzione e non sono item da sbloccare. Escludere per label non sarebbe la stessa cosa — `agent:no-age-out` vuol dire «non scade», e nasconderebbe da qui una issue davvero bloccata:\n\n%s\n\n_Issue dedup giornaliera da recycle-stale-prs.yml (zero-Claude); si aggiorna con un commento di recurrence finche esiste qualcosa di needs-human, e si richiude da sola al primo run in cui entrambe le liste sono vuote (i tracker permanenti non contano come residuo)._' "$DIGEST_PREFIX" "$PR_COUNT" "$PRS" "$ISSUE_COUNT" "$ISSUES")
           PUBLISH_OUTPUT=$(node scripts/ci/publish-needs-human-digest.mjs \
             --fail-on-write \
             --title "$DEDUP_TITLE" \

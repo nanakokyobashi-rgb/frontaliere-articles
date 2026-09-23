@@ -44,6 +44,11 @@
  *               conta, perché una issue di backlog può nominare qualunque
  *               cosa nel corpo (publish, engine, …) senza essere quel guasto.
  *
+ * `automation-deferred` è un handoff tecnico (policy/capacità/input), non una
+ * richiesta al proprietario. Le issue con questa label restano fuori dal
+ * routing finché lo sweep non cambia il contesto; `needs-human` rimane per una
+ * decisione del proprietario realmente mancante.
+ *
  * `route: 'queue'` non è un declassamento: è l'anti-starvation. Le issue in
  * coda vengono promosse UNA alla volta dal drainer, solo a slot del fixer
  * libero, quindi non muoiono cancellate in coda. Sul sito, estendere l'autofix
@@ -57,6 +62,7 @@
  */
 
 const FIXER_EXEMPT_LABELS = new Set(['backlog', 'needs-human', 'operations-audit-review']);
+export const AUTOMATION_DEFERRED_LABEL = 'automation-deferred';
 
 /**
  * Labels che tengono un'issue fuori dal ciclo automatico del corpus.
@@ -74,7 +80,7 @@ export function isFixerExempt(labels = []) {
   return names.some((name) => FIXER_EXEMPT_LABELS.has(name));
 }
 
-export function classifyIssue(title = '', labels = []) {
+export function classifyIssue(title = '', labels = [], _body = '', _options = {}) {
   const set = new Set((labels || []).map((s) => String(s).toLowerCase()));
   const has = (name) => set.has(String(name).toLowerCase());
   const t = (re) => re.test(title || '');
@@ -126,7 +132,8 @@ export function classifyIssue(title = '', labels = []) {
   // Come sul sito: nessuna categoria è human-only. Le safety-valve del fixer
   // (root-cause non determinabile, capability-guard su workflows/secret) sono
   // generiche e restano — non sono guardrail di categoria.
-  const autofix = true;
+  const automationDeferred = has(AUTOMATION_DEFERRED_LABEL);
+  const autofix = !needsHuman && !automationDeferred;
   // `crawler-transient` è l'esito, non un bug da instradare: la issue è già la
   // ledger (o un commento su di essa) che assorbe i blip sotto-soglia — vedi
   // `findOrCreateTransientLedger` in `github-issue-creator.mjs`. Instradarla al
@@ -137,7 +144,7 @@ export function classifyIssue(title = '', labels = []) {
   // fin dalla nascita) è finita in coda ed è stata promossa al fixer. Il guard
   // vive qui, sorgente unica per entrambi i percorsi.
   const route =
-    has('backlog') || has('crawler-transient') || needsHuman || operationsAuditReview
+    has('backlog') || has('crawler-transient') || needsHuman || operationsAuditReview || automationDeferred
       ? 'none'
       : category === 'publish'
         ? 'fix'

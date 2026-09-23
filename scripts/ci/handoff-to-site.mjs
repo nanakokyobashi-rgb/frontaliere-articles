@@ -142,6 +142,8 @@ const MANIFEST_PATH = fileURLToPath(new URL('./loop-sync-manifest.json', import.
 
 /** Marker scritto nel commento quando una consegna lascia la issue parcheggiata. */
 export const PARK_MARKER = '<!-- HANDOFF_PARKED -->';
+/** Il parcheggio del handoff è tecnico per costruzione, non una decisione del proprietario. */
+export const AUTOMATION_DEFERRED_MARKER = '<!-- AUTOMATION_DEFERRED: technical -->';
 
 /**
  * Legge il manifest una volta e costruisce tutte le viste usate dalla decisione.
@@ -701,8 +703,9 @@ export function handoffDecision({
  *
  * ## Il ciclo a vuoto, misurato sul percorso reale
  *
- * Una consegna che non chiude parcheggia in `needs-human`, e da lì la issue
- * rientra: `needs-human-prepass.mjs` la ri-accoda quando il verdetto scade
+ * Una consegna che non chiude parcheggia in `automation-deferred`, e da lì la
+ * issue rientra: `needs-human-prepass.mjs` la rivaluta senza chiedere al
+ * proprietario quando il verdetto scade
  * (`VERDICT_MAX_AGE_DAYS`), lo sweep settimanale può rimetterla in coda. Il giro
  * successivo paga una run Claude INTERA sulla quota condivisa col sito, l'agente
  * ri-diagnostica lo stesso file bloccato dal mirror, riemette lo stesso verdetto
@@ -803,11 +806,11 @@ export function handoffTitle(issueNumber, corpusTitle) {
  *   issue dalla coda: farlo per secondo significa che l'unico effetto che conta
  *   è anche il solo che può non avvenire. Ora lo stato passa per primo, e se a
  *   fallire è il commento la issue è comunque parcheggiata (o chiusa).
- * - **Indipendenza.** `--add-label needs-human --remove-label agent:fix
- *   --remove-label agent:fix-queued` è atomico per `gh`: se una sola delle tre
- *   label non è risolvibile (non esiste nel repo, permessi, 404) cade tutta la
- *   transizione, `needs-human` compreso. Una chiamata per effetto rende il
- *   fallimento parziale davvero parziale.
+ * - **Indipendenza.** `--add-label automation-deferred --remove-label
+ *   needs-human --remove-label agent:fix --remove-label agent:fix-queued` è
+ *   atomico per `gh`: se una sola label non è risolvibile (non esiste nel
+ *   repo, permessi, 404) cade tutta la transizione. Una chiamata per effetto
+ *   rende il fallimento parziale davvero parziale.
  *
  * Perché non basta «riprova al giro dopo»: il giro dopo corto-circuita sul
  * dedup — la issue del sito ORA esiste, quindi `main` esce prima di arrivare
@@ -827,10 +830,16 @@ export function originWriteSteps({ issue, repo, close, comment, issueState } = {
   const steps = close
     ? [{ kind: 'state', what: 'chiusura', args: ['issue', 'close', num, ...repoArgs, '--reason', 'completed'] }]
     : [
-      // L'aggiunta sta PRIMA delle rimozioni: se il run muore in mezzo, la
-      // issue è in `needs-human` senza routing (parcheggiata due volte) e non
-      // senza nessuna label (invisibile a entrambi i cicli).
-      { kind: 'state', what: 'label needs-human', args: ['issue', 'edit', num, ...repoArgs, '--add-label', 'needs-human'] },
+      // La label è nuova rispetto ai vecchi parcheggi `needs-human`: il
+      // handoff deve essere autosufficiente anche se il bootstrap globale delle
+      // label non è passato o questo script viene eseguito da solo.
+      { kind: 'state', what: 'creazione label automation-deferred', args: ['label', 'create', 'automation-deferred', ...repoArgs, '--color', 'FBCA04', '--description', 'Lavoro automatico differito da policy/capacità; rientra nello sweep', '--force'] },
+      // Il handoff è un esito tecnico, non una decisione del proprietario:
+      // l'eventuale `needs-human` lasciato dai vecchi cicli viene ripulito.
+      // L'aggiunta sta PRIMA delle rimozioni, così la issue non diventa
+      // invisibile a entrambi i cicli se il run muore in mezzo.
+      { kind: 'state', what: 'label automation-deferred', args: ['issue', 'edit', num, ...repoArgs, '--add-label', 'automation-deferred'] },
+      { kind: 'state', what: 'rimozione needs-human tecnico', args: ['issue', 'edit', num, ...repoArgs, '--remove-label', 'needs-human'] },
       { kind: 'state', what: 'rimozione agent:fix', args: ['issue', 'edit', num, ...repoArgs, '--remove-label', 'agent:fix'] },
       { kind: 'state', what: 'rimozione agent:fix-queued', args: ['issue', 'edit', num, ...repoArgs, '--remove-label', 'agent:fix-queued'] },
     ];
@@ -985,7 +994,7 @@ function preflight() {
   if (process.env.GITHUB_STEP_SUMMARY) {
     appendFileSync(
       process.env.GITHUB_STEP_SUMMARY,
-      `## Pre-flight handoff: issue #${ISSUE} corto-circuitata\n- ${r.reason}\n- ${r.close ? 'chiusa' : 'parcheggiata in `needs-human`'} senza pagare la run Claude\n`,
+      `## Pre-flight handoff: issue #${ISSUE} corto-circuitata\n- ${r.reason}\n- ${r.close ? 'chiusa' : 'parcheggiata in `automation-deferred`'} senza pagare la run Claude\n`,
     );
   }
   return setPreflightOutput(true);
@@ -1067,16 +1076,18 @@ function main() {
   // portatore, in silenzio e per effetto della consegna stessa.
   //
   // Quando resta un path citato che il mirror non porta si consegna e si
-  // PARCHEGGIA: `needs-human` + via le label di routing è l'esclusione che il
+  // PARCHEGGIA: `automation-deferred` + via le label di routing è l'esclusione che il
   // drainer già usa (`followup-drainer.mjs`, i filtri di promozione), quindi la
   // issue non ri-paga le run che questo script esiste per togliere, e
-  // `needs-human-sweep.yml` è la porta di rientro nel ciclo.
+  // `needs-human-sweep.yml` è la porta di rientro nel ciclo. `needs-human` è
+  // riservata alle decisioni reali del proprietario e viene rimossa qui se era
+  // stata aggiunta da un vecchio parcheggio tecnico.
   const residual = d.residual || [];
   const tail = d.close
     ? 'Chiudo qui: quando la fix scenderà col mirror, la condizione che ha aperto questa issue non ci sarà più.'
     : residual.length
-      ? `${PARK_MARKER}\n**Non la chiudo**: la diagnosi cita anche ${residual.map((p) => `\`${p}\``).join(', ')}, che nessun canale di discesa porta giù — o non è \`identical\` (lavoro di questo repo), o è un gemello che \`transport-identical-twins.mjs\` rifiuta per sempre e la cui discesa è una copia a mano. In entrambi i casi questa issue ne resta l'unico portatore. La parcheggio in \`needs-human\` togliendo le label di routing, così non ri-paga run mentre aspetta.`
-      : `${PARK_MARKER}\n**Non la chiudo**: il verdetto è \`no-root-cause\`, che copre anche il vicolo cieco vero — «consegnata» non implica «risolta», e una chiusura sbagliata farebbe evaporare l'unico portatore della diagnosi. La parcheggio in \`needs-human\` togliendo le label di routing: non ri-paga run, e \`needs-human-sweep.yml\` è la porta di rientro.`;
+      ? `${PARK_MARKER}\n${AUTOMATION_DEFERRED_MARKER}\n**Non la chiudo**: la diagnosi cita anche ${residual.map((p) => `\`${p}\``).join(', ')}, che nessun canale di discesa porta giù — o non è \`identical\` (lavoro di questo repo), o è un gemello che \`transport-identical-twins.mjs\` rifiuta per sempre e la cui discesa è una copia a mano. In entrambi i casi questa issue ne resta l'unico portatore. La parcheggio in \`automation-deferred\` togliendo le label di routing, così non ri-paga run mentre aspetta.`
+      : `${PARK_MARKER}\n${AUTOMATION_DEFERRED_MARKER}\n**Non la chiudo**: il verdetto è \`no-root-cause\`, che copre anche il vicolo cieco vero — «consegnata» non implica «risolta», e una chiusura sbagliata farebbe evaporare l'unico portatore della diagnosi. La parcheggio in \`automation-deferred\` togliendo le label di routing: non ri-paga run, e \`needs-human-sweep.yml\` è la porta di rientro automatica.`;
   runOriginSteps(originWriteSteps({
     issue: ISSUE,
     repo: REPO,

@@ -277,9 +277,9 @@ test('il marcatore 🔁 è ancora quello che il reporter scrive', () => {
   assert.ok(src.includes('${RECURRENCE_MARKER} **Reopened**'), 'commento di riapertura');
 });
 
-// ── De-escalation: `needs-human` non è una porta a senso unico ──────────────
+// ── De-escalation: `automation-deferred` non è una porta a senso unico ───────
 //
-// `needs-human` è un filtro di ESCLUSIONE, non un selettore: followup-drainer.mjs
+// `automation-deferred` è un filtro di ESCLUSIONE, non un selettore: followup-drainer.mjs
 // lo legge per tenere una issue fuori dal pool dei retry parcheggiati (:1091) e
 // fuori dal rescue `agent:fix` dei crawler (:1204). Se l'escalation lo applicasse
 // senza mai toglierlo, una issue rientrata si richiuderebbe ma tornerebbe già
@@ -291,11 +291,11 @@ test('rientrata sotto soglia: i label cronici vengono tolti', () => {
   assert.equal(decision.hold, false, 'un solo commento senza 🔁 non è cronico');
   const d = decideChronicDeescalation({
     comments: [escalated()],
-    labels: ['bug', 'priority:urgent', 'needs-human', 'fu-parked'],
+    labels: ['bug', 'priority:urgent', 'automation-deferred', 'fu-parked'],
     decision,
   });
   assert.equal(d.clear, true);
-  assert.deepEqual(d.labels, ['priority:urgent', 'needs-human']);
+  assert.deepEqual(d.labels, ['priority:urgent', 'automation-deferred']);
 });
 
 test('ancora cronica: non si tocca niente', () => {
@@ -314,12 +314,12 @@ test('label già assenti: nessuna chiamata gh sprecata a ogni passata oraria', (
 });
 
 test('mai escalata: la de-escalation non tocca label messi da altri', () => {
-  // `needs-human` arriva anche dal followup-drainer (too-large). Toglierlo senza
+  // `automation-deferred` arriva anche dal followup-drainer (too-large). Toglierlo senza
   // aver visto il NOSTRO marker vorrebbe dire disfare la decisione di un altro
   // strato del ciclo.
   const comments = [{ body: 'un commento qualsiasi', createdAt: new Date(NOW - 3600e3).toISOString() }];
   const decision = decideChronicEscalation(comments, opts);
-  assert.equal(decideChronicDeescalation({ comments, labels: ['needs-human'], decision }).clear, false);
+  assert.equal(decideChronicDeescalation({ comments, labels: ['automation-deferred'], decision }).clear, false);
 });
 
 test('commenti illeggibili: non si toglie niente', () => {

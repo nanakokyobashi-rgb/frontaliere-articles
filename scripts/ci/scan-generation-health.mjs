@@ -2088,7 +2088,7 @@ const val = (n, d) => {
  * slot con `cancel-in-progress: false`, e la promozione uno-alla-volta è del
  * drainer. Best-effort: un routing mancato è un warning, non una run rossa.
  */
-export const ROUTING_LABELS_ALREADY_SET = ['agent:fix', 'agent:fix-queued', 'agent:in-progress', 'fu-parked'];
+export const ROUTING_LABELS_ALREADY_SET = ['agent:fix', 'agent:fix-queued', 'agent:in-progress', 'fu-parked', 'automation-deferred'];
 
 function routeToQueue(issue) {
   const number = issue && (issue.number || issue.issueNumber);
@@ -2110,7 +2110,8 @@ function routeToQueue(issue) {
   }
 
   const res = gh(['issue', 'edit', String(number), ...repoFlag,
-    '--add-label', 'agent:fix-queued', '--add-label', 'fu-prio:high']);
+    '--add-label', 'agent:fix-queued', '--add-label', 'fu-prio:high',
+    '--remove-label', 'automation-deferred']);
   if (res === null) {
     console.warn(`::warning::[generation-health] routing di #${number} non applicato (label assenti? scope del token?) — il triage la riprenderà su \`issues: opened\`.`);
   } else {
