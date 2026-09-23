@@ -707,7 +707,11 @@ export function resetEventImageManifestCache() {
   eventImageManifest = null;
   eventImageManifestFile = null;
 }
-export const EVENT_IMAGE_MAX_BYTES = 4 * 1024 * 1024; // 4MB guard against a mis-served asset
+// Accept print-resolution source files before the bounded 1600x1600 re-encode
+// below. The previous 4 MiB guard dropped valid MySwitzerland originals (the
+// affected catalog examples are 5.2 MiB and 17.5 MiB); 20 MiB still rejects
+// clearly mis-served assets without allowing unbounded downloads.
+export const EVENT_IMAGE_MAX_BYTES = 20 * 1024 * 1024;
 const EVENT_IMAGE_USER_AGENT = 'Mozilla/5.0 (compatible; FrontaliereTicinoBot/1.0; +https://frontaliereticino.ch)';
 
 // Re-encode before storing: the source sites serve print-resolution originals
@@ -727,6 +731,57 @@ const EVENT_IMAGE_MAX_WIDTH = 1600;
 const EVENT_IMAGE_MAX_HEIGHT = 1600;
 const EVENT_IMAGE_WEBP_QUALITY = 82;
 const EVENT_IMAGE_WEBP_EFFORT = 6;
+
+/**
+ * Read a response body without ever accumulating more than maxBytes.
+ * Content-Length is an early rejection; chunked responses and lying lengths
+ * are still bounded while the stream is consumed. The body is cancelled on
+ * every oversize path so a rejected image cannot strand a crawler connection.
+ */
+async function readEventImageBody(response, maxBytes) {
+  const rawContentLength = response.headers.get('content-length');
+  const parsedContentLength = rawContentLength === null ? NaN : Number(rawContentLength);
+  const declaredLength = Number.isSafeInteger(parsedContentLength) && parsedContentLength >= 0
+    ? parsedContentLength
+    : null;
+  if (declaredLength !== null && declaredLength > maxBytes) {
+    await cancelEventImageResponse(response);
+    return null;
+  }
+
+  const reader = response.body?.getReader?.();
+  if (!reader) {
+    await cancelEventImageResponse(response);
+    return null;
+  }
+
+  const capacity = declaredLength ?? maxBytes;
+  const buffer = Buffer.allocUnsafe(capacity);
+  let totalBytes = 0;
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      const chunkBytes = value?.byteLength;
+      if (!Number.isSafeInteger(chunkBytes) || chunkBytes < 0
+        || totalBytes > maxBytes - chunkBytes || totalBytes > capacity - chunkBytes) {
+        try { await reader.cancel('event image exceeds byte limit'); } catch { /* cap remains authoritative */ }
+        return null;
+      }
+      if (chunkBytes === 0) continue;
+
+      buffer.set(value, totalBytes);
+      totalBytes += chunkBytes;
+    }
+    return buffer.subarray(0, totalBytes);
+  } catch (error) {
+    try { await reader.cancel(); } catch { /* best effort after a read failure */ }
+    throw error;
+  } finally {
+    reader.releaseLock?.();
+  }
+}
 
 function extFromContentType(contentType) {
   const ct = String(contentType || '').toLowerCase();
@@ -770,6 +825,15 @@ async function encodeEventImage(buf, contentType) {
   }
 }
 
+async function cancelEventImageResponse(response) {
+  try {
+    await response?.body?.cancel?.();
+  } catch {
+    // The size/type verdict remains authoritative even if the transport cannot
+    // cancel its body cleanly.
+  }
+}
+
 /**
  * Download an event's source image once and store it locally under
  * `public/images/events/<sourceKey>-<rawId>.<ext>`. Returns the site-relative
@@ -805,11 +869,17 @@ export async function mirrorEventImage(sourceUrl, stableId) {
 
   try {
     const res = await fetch(sourceUrl, { headers: { 'User-Agent': EVENT_IMAGE_USER_AGENT } });
-    if (!res.ok) return null;
+    if (!res.ok) {
+      await cancelEventImageResponse(res);
+      return null;
+    }
     const contentType = res.headers.get('content-type') || '';
-    if (!contentType.startsWith('image/')) return null;
-    const raw = Buffer.from(await res.arrayBuffer());
-    if (raw.byteLength === 0 || raw.byteLength > EVENT_IMAGE_MAX_BYTES) return null;
+    if (!contentType.startsWith('image/')) {
+      await cancelEventImageResponse(res);
+      return null;
+    }
+    const raw = await readEventImageBody(res, EVENT_IMAGE_MAX_BYTES);
+    if (!raw || raw.byteLength === 0) return null;
     const { buf, ext } = await encodeEventImage(raw, contentType);
     const fileName = `${safeId}.${ext}`;
     writeFileSync(path.join(EVENT_IMAGE_DIR, fileName), buf);
