@@ -266,7 +266,11 @@ test('il rescue queue-managed ha lo stesso ramo del gemello crawler', () => {
   const stuck = src.slice(src.indexOf('for (const iss of stuckFix) {'));
   const branch = /if \(outcome && DELIVERED\.has\(outcome\)\) \{([\s\S]*?)\n {4}\}/.exec(stuck);
   assert.ok(branch, 'il rescue queue-managed deve avere il ramo DELIVERED');
-  assert.match(branch[1], /add: \[LBL_QUEUED\], remove: \[LBL_FIX\]/, 'ri-accoda');
+  assert.match(
+    branch[1],
+    /add: \[LBL_QUEUED\], remove: \[LBL_FIX(?:, LBL_AUTOMATION_DEFERRED)?\]/,
+    'ri-accoda',
+  );
   // Solo il CODICE: il commento accanto nomina `fu-attempt` per spiegare perché
   // non lo tocca.
   const code = branch[1].split('\n').filter((l) => !l.trim().startsWith('//')).join('\n');
