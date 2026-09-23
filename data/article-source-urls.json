@@ -960,5 +960,10 @@
     "articleId": "rimborso-imposta-lpp-2024",
     "ts": "2026-09-23T10:40:11.794Z",
     "keyForm": 2
+  },
+  "stats-astra://monthly/2026-09/frontaliere": {
+    "articleId": "parco-veicoli-ticino-settembre-2026",
+    "ts": "2026-09-23T11:09:07.308Z",
+    "keyForm": 2
   }
 }
