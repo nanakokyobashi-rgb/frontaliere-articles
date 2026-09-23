@@ -139,15 +139,15 @@ test('crawler group 07 usa gli stessi id canonici in step, expected roster e art
   assert.equal(expected.some((entry) => entry.crawlerId === 'vf'), false);
 });
 
-test('il contratto censisce 23 gruppi + translate-pending e tutti i crawler unici', () => {
+test('il contratto censisce 24 gruppi + translate-pending e tutti i crawler unici', () => {
   assert.equal(CONTRACT.schemaVersion, 1);
-  assert.equal(CONTRACT.groupCount, 23);
-  assert.equal(CONTRACT.artifactCount, 24);
+  assert.equal(CONTRACT.groupCount, 24);
+  assert.equal(CONTRACT.artifactCount, 25);
   assert.equal(CONTRACT.observerCount, 7);
-  assert.equal(CONTRACT.artifacts.length, 24);
+  assert.equal(CONTRACT.artifacts.length, 25);
 
   const groups = CONTRACT.artifacts.filter((artifact) => /^crawler-group-\d{2}\.yml$/.test(artifact.file));
-  assert.equal(groups.length, 23);
+  assert.equal(groups.length, 24);
   const members = groups.flatMap((artifact) => artifact.members);
   assert.equal(members.length, CONTRACT.crawlerCount);
   assert.equal(new Set(members).size, CONTRACT.crawlerCount);
@@ -179,7 +179,7 @@ test('il contratto censisce 23 gruppi + translate-pending e tutti i crawler unic
     [...observerWorkflow.matchAll(/^      - (Crawler Group \d{2} \(sparse cross-repo execution\))$/gm)]
       .map((match) => match[1]),
     Array.from(
-      { length: 23 },
+      { length: 24 },
       (_, index) => `Crawler Group ${String(index + 1).padStart(2, '0')} (sparse cross-repo execution)`,
     ),
   );
@@ -335,7 +335,7 @@ test('il reporter diagnostico usa identita e workflow standalone corpus richiudi
       assert.match(text, /name: Report failure to GitHub Issues/);
     }
   }
-  assert.equal(reporterCount, 24);
+  assert.equal(reporterCount, CONTRACT.artifactCount);
 });
 
 test('nessun artifact usa codeload/reusable cross-repo o replica la logica dopo un fallimento parziale', () => {
