@@ -119,3 +119,11 @@ test('il valore del titolo digest è validato prima del prompt Codex e passato c
     'il verdetto deve verificare il titolo prima del comando che interroga GitHub',
   );
 });
+
+test('la label tecnica viene garantita prima del pre-pass deterministico', () => {
+  const bootstrap = stepBlock('Ensure automation-deferred label (zero-Claude)');
+  assert.match(bootstrap, /gh label create automation-deferred/);
+  const bootstrapAt = text.indexOf('- name: Ensure automation-deferred label (zero-Claude)');
+  const prepassAt = text.indexOf('- name: Pre-pass deterministico (zero-Claude)');
+  assert.ok(bootstrapAt !== -1 && prepassAt !== -1 && bootstrapAt < prepassAt, 'il bootstrap deve precedere lo script che scrive la label');
+});
