@@ -734,14 +734,29 @@ const EVENT_IMAGE_WEBP_EFFORT = 6;
 
 /**
  * Read a response body without ever accumulating more than maxBytes.
- * Content-Length is only an early rejection; chunked responses and lying
- * lengths still have to be bounded while the stream is consumed.
+ * Content-Length is an early rejection; chunked responses and lying lengths
+ * are still bounded while the stream is consumed. The body is cancelled on
+ * every oversize path so a rejected image cannot strand a crawler connection.
  */
 async function readEventImageBody(response, maxBytes) {
-  const reader = response.body?.getReader?.();
-  if (!reader) return null;
+  const rawContentLength = response.headers.get('content-length');
+  const parsedContentLength = rawContentLength === null ? NaN : Number(rawContentLength);
+  const declaredLength = Number.isSafeInteger(parsedContentLength) && parsedContentLength >= 0
+    ? parsedContentLength
+    : null;
+  if (declaredLength !== null && declaredLength > maxBytes) {
+    await cancelEventImageResponse(response);
+    return null;
+  }
 
-  const chunks = [];
+  const reader = response.body?.getReader?.();
+  if (!reader) {
+    await cancelEventImageResponse(response);
+    return null;
+  }
+
+  const capacity = declaredLength ?? maxBytes;
+  const buffer = Buffer.allocUnsafe(capacity);
   let totalBytes = 0;
   try {
     while (true) {
@@ -749,18 +764,22 @@ async function readEventImageBody(response, maxBytes) {
       if (done) break;
 
       const chunkBytes = value?.byteLength;
-      if (!Number.isSafeInteger(chunkBytes) || chunkBytes < 0 || totalBytes > maxBytes - chunkBytes) {
-        await reader.cancel('event image exceeds byte limit');
+      if (!Number.isSafeInteger(chunkBytes) || chunkBytes < 0
+        || totalBytes > maxBytes - chunkBytes || totalBytes > capacity - chunkBytes) {
+        try { await reader.cancel('event image exceeds byte limit'); } catch { /* cap remains authoritative */ }
         return null;
       }
       if (chunkBytes === 0) continue;
 
-      chunks.push(Buffer.from(value));
+      buffer.set(value, totalBytes);
       totalBytes += chunkBytes;
     }
-    return Buffer.concat(chunks, totalBytes);
+    return buffer.subarray(0, totalBytes);
+  } catch (error) {
+    try { await reader.cancel(); } catch { /* best effort after a read failure */ }
+    throw error;
   } finally {
-    reader.releaseLock();
+    reader.releaseLock?.();
   }
 }
 
@@ -806,6 +825,15 @@ async function encodeEventImage(buf, contentType) {
   }
 }
 
+async function cancelEventImageResponse(response) {
+  try {
+    await response?.body?.cancel?.();
+  } catch {
+    // The size/type verdict remains authoritative even if the transport cannot
+    // cancel its body cleanly.
+  }
+}
+
 /**
  * Download an event's source image once and store it locally under
  * `public/images/events/<sourceKey>-<rawId>.<ext>`. Returns the site-relative
@@ -841,11 +869,15 @@ export async function mirrorEventImage(sourceUrl, stableId) {
 
   try {
     const res = await fetch(sourceUrl, { headers: { 'User-Agent': EVENT_IMAGE_USER_AGENT } });
-    if (!res.ok) return null;
+    if (!res.ok) {
+      await cancelEventImageResponse(res);
+      return null;
+    }
     const contentType = res.headers.get('content-type') || '';
-    if (!contentType.startsWith('image/')) return null;
-    const declaredLength = Number(res.headers.get('content-length'));
-    if (Number.isFinite(declaredLength) && declaredLength > EVENT_IMAGE_MAX_BYTES) return null;
+    if (!contentType.startsWith('image/')) {
+      await cancelEventImageResponse(res);
+      return null;
+    }
     const raw = await readEventImageBody(res, EVENT_IMAGE_MAX_BYTES);
     if (!raw || raw.byteLength === 0) return null;
     const { buf, ext } = await encodeEventImage(raw, contentType);
