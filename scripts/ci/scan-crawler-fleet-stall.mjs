@@ -73,7 +73,7 @@
  */
 
 import { execFileSync } from 'node:child_process';
-import { readdirSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { createGithubIssue } from '../lib/github-issue-creator.mjs';
 import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
 
@@ -96,7 +96,8 @@ const SITE_REPO = process.env.SITE_REPO || 'valerielinc-ops/frontaliere-si-o-no'
 export const GROUP_COMMIT_RE = /^Auto-update crawler group (\d{2}) jobs/;
 
 /**
- * Quanti crawler-group esistono, CONTATI dai workflow invece di dichiarati.
+ * Quanti crawler-group esistono, dalla cardinalità del contratto invece di una
+ * costante duplicata nel rilevatore.
  *
  * Era una costante 23, e la review ha ragione: regex, denominatore e soglia
  * tarati su una cardinalita' fissa smettono di rappresentare "meta' della
@@ -104,13 +105,28 @@ export const GROUP_COMMIT_RE = /^Auto-update crawler group (\d{2}) jobs/;
  * soglia a 12 su 24 — cioe' avrebbe richiesto che METÀ ESATTA fallisse prima
  * di suonare, silenziosamente piu' permissiva ogni volta che il fleet cresce.
  *
- * Il conteggio e' locale e offline: i workflow generati stanno in questo
- * checkout. Fallback a 24 se la directory non e' leggibile, cioe' la cardinalita'
- * attuale della flotta, e degrada al comportamento noto invece che a zero.
+ * Il contratto e' la sorgente autorevole anche quando il checkout e' sparse o
+ * sta attraversando il trasporto sito→corpus. I workflow locali servono solo
+ * come fallback quando il contratto non e' leggibile; l'ultimo fallback resta
+ * la cardinalità corrente nota invece di zero.
  */
 export const FALLBACK_GROUP_COUNT = 24;
 
-export function countCrawlerGroups(dir = '.github/workflows') {
+const CONTRACT_PATH = 'generator/data/crawler-cross-repo-contract.json';
+
+function readContractGroupCount(contractPath = CONTRACT_PATH) {
+  try {
+    const contract = JSON.parse(readFileSync(contractPath, 'utf8'));
+    const n = Number(contract?.groupCount);
+    return Number.isInteger(n) && n > 0 ? n : null;
+  } catch {
+    return null;
+  }
+}
+
+export function countCrawlerGroups(dir = '.github/workflows', contractPath = CONTRACT_PATH) {
+  const contractCount = readContractGroupCount(contractPath);
+  if (contractCount !== null) return contractCount;
   try {
     const n = readdirSync(dir).filter((f) => /^crawler-group-\d+\.yml$/.test(f)).length;
     return n > 0 ? n : FALLBACK_GROUP_COUNT;
