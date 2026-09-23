@@ -732,6 +732,38 @@ const EVENT_IMAGE_MAX_HEIGHT = 1600;
 const EVENT_IMAGE_WEBP_QUALITY = 82;
 const EVENT_IMAGE_WEBP_EFFORT = 6;
 
+/**
+ * Read a response body without ever accumulating more than maxBytes.
+ * Content-Length is only an early rejection; chunked responses and lying
+ * lengths still have to be bounded while the stream is consumed.
+ */
+async function readEventImageBody(response, maxBytes) {
+  const reader = response.body?.getReader?.();
+  if (!reader) return null;
+
+  const chunks = [];
+  let totalBytes = 0;
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      const chunkBytes = value?.byteLength;
+      if (!Number.isSafeInteger(chunkBytes) || chunkBytes < 0 || totalBytes > maxBytes - chunkBytes) {
+        await reader.cancel('event image exceeds byte limit');
+        return null;
+      }
+      if (chunkBytes === 0) continue;
+
+      chunks.push(Buffer.from(value));
+      totalBytes += chunkBytes;
+    }
+    return Buffer.concat(chunks, totalBytes);
+  } finally {
+    reader.releaseLock();
+  }
+}
+
 function extFromContentType(contentType) {
   const ct = String(contentType || '').toLowerCase();
   if (ct.includes('png')) return 'png';
@@ -812,8 +844,10 @@ export async function mirrorEventImage(sourceUrl, stableId) {
     if (!res.ok) return null;
     const contentType = res.headers.get('content-type') || '';
     if (!contentType.startsWith('image/')) return null;
-    const raw = Buffer.from(await res.arrayBuffer());
-    if (raw.byteLength === 0 || raw.byteLength > EVENT_IMAGE_MAX_BYTES) return null;
+    const declaredLength = Number(res.headers.get('content-length'));
+    if (Number.isFinite(declaredLength) && declaredLength > EVENT_IMAGE_MAX_BYTES) return null;
+    const raw = await readEventImageBody(res, EVENT_IMAGE_MAX_BYTES);
+    if (!raw || raw.byteLength === 0) return null;
     const { buf, ext } = await encodeEventImage(raw, contentType);
     const fileName = `${safeId}.${ext}`;
     writeFileSync(path.join(EVENT_IMAGE_DIR, fileName), buf);
