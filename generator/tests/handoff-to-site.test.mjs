@@ -622,7 +622,11 @@ test('#1127: una collisione path corpus/site fa fallire la lettura del manifest'
 
 test('#972: i gemelli che nessun trasporto porta giù sono quelli che il trasporto stesso rifiuta', () => {
   const stuck = withStrandedManifest((manifestPath) => strandedTwinPaths(manifestPath));
-  // I 25 workflow nella allowlist sito → corpus hanno un trasporto dedicato:
+  const crawlerContract = JSON.parse(fs.readFileSync(new URL('../data/crawler-cross-repo-contract.json', import.meta.url), 'utf8'));
+  const crawlerWorkflowPaths = [...DEDICATED_CRAWLER_TRANSPORT_PATHS].filter((path) => /crawler-group-\d+\.yml$/.test(path));
+  assert.equal(crawlerWorkflowPaths.length, crawlerContract.groupCount, 'la allowlist deve seguire il groupCount del contratto');
+  assert.ok(DEDICATED_CRAWLER_TRANSPORT_PATHS.has(`.github/workflows/crawler-group-${String(crawlerContract.groupCount).padStart(2, '0')}.yml`));
+  // I workflow nella allowlist sito → corpus hanno un trasporto dedicato:
   // restano locked, ma non stranded. Un workflow fuori da quell'allowlist
   // segue invece la regola generica: `unsafeTarget` lo esclude PER SEMPRE dal
   // trasporto — «il token del ciclo non ha lo scope `workflows`» — ed è
