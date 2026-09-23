@@ -113,19 +113,35 @@ export const HANDOFF_VERDICTS = new Set([
  */
 export const MIRROR_LOCKED_MODES = new Set(['identical']);
 
+const MANIFEST_PATH = fileURLToPath(new URL('./loop-sync-manifest.json', import.meta.url));
+
+function readDedicatedCrawlerTransportPaths(manifestPath = MANIFEST_PATH) {
+  try {
+    const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
+    const groups = Array.isArray(manifest?.files)
+      ? manifest.files
+        .map((entry) => entry?.path)
+        .filter((entry) => /^\.github\/workflows\/crawler-group-\d{2}\.yml$/.test(entry))
+      : [];
+    return new Set([
+      ...groups,
+      '.github/workflows/translate-pending.yml',
+      '.github/workflows/crawler-generation-observer-shadow.yml',
+    ]);
+  } catch {
+    // A manifest read failure must not make a path look transportable: the
+    // caller will conservatively treat every identical workflow as stranded.
+    return new Set();
+  }
+}
+
 /**
  * Workflow consegnati dal canale dedicato sito → corpus, non dal trasporto
  * generico dei gemelli identical. Restano locked, ma non stranded: il canale
- * che li porta giù esiste e la sua allowlist è esplicita.
+ * che li porta giù esiste e la sua allowlist dei gruppi è letta dal manifest,
+ * così l'aggiunta di un nuovo gruppo non lascia una diagnosi sul sito.
  */
-export const DEDICATED_CRAWLER_TRANSPORT_PATHS = new Set([
-  ...Array.from({ length: 23 }, (_, index) =>
-    `.github/workflows/crawler-group-${String(index + 1).padStart(2, '0')}.yml`),
-  '.github/workflows/translate-pending.yml',
-  '.github/workflows/crawler-generation-observer-shadow.yml',
-]);
-
-const MANIFEST_PATH = fileURLToPath(new URL('./loop-sync-manifest.json', import.meta.url));
+export const DEDICATED_CRAWLER_TRANSPORT_PATHS = readDedicatedCrawlerTransportPaths();
 
 /** Marker scritto nel commento quando una consegna lascia la issue parcheggiata. */
 export const PARK_MARKER = '<!-- HANDOFF_PARKED -->';
@@ -278,8 +294,9 @@ export function mirrorLockedPaths(manifestPath = MANIFEST_PATH) {
  *     bloccati — per questo `outOfScopePrefixes` resta vuoto;
  *   - `transport-identical-twins.mjs`, che gira qui e tira giu' gli `identical`
  *     del manifest — tranne quelli che `permanentBlock` esclude **per sempre**;
- *     i 25 workflow della allowlist dedicata sito → corpus sono l'eccezione
- *     esplicita, perche' hanno un canale di discesa distinto.
+ *     i 24 workflow `crawler-group-*.yml`, `translate-pending.yml` e
+ *     `crawler-generation-observer-shadow.yml` della allowlist dedicata sito →
+ *     corpus sono l'eccezione esplicita, perche' hanno un canale distinto.
  *
  * I workflow `identical` fuori dalla allowlist dedicata cadono nel secondo caso
  * (il token del ciclo non ha lo scope `workflows`: «restano una copia a mano»),

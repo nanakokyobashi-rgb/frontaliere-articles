@@ -114,6 +114,22 @@ test('i verdetti instradabili sono solo quelli osservati', () => {
   }
 });
 
+test('la allowlist dedicata copre tutti i gruppi dichiarati dal manifest', () => {
+  const manifest = JSON.parse(fs.readFileSync(
+    new URL('../../scripts/ci/loop-sync-manifest.json', import.meta.url),
+    'utf8',
+  ));
+  const groups = manifest.files
+    .map((entry) => entry.path)
+    .filter((entry) => /^\.github\/workflows\/crawler-group-\d{2}\.yml$/.test(entry));
+  assert.ok(groups.length >= 24);
+  for (const group of groups) {
+    assert.ok(DEDICATED_CRAWLER_TRANSPORT_PATHS.has(group), `${group}: trasporto dedicato mancante`);
+  }
+  assert.ok(DEDICATED_CRAWLER_TRANSPORT_PATHS.has('.github/workflows/translate-pending.yml'));
+  assert.ok(DEDICATED_CRAWLER_TRANSPORT_PATHS.has('.github/workflows/crawler-generation-observer-shadow.yml'));
+});
+
 // --- #316: il discriminante di `no-root-cause` è il manifest, non il verdetto ---
 
 const LOCKED = new Set(['scripts/ci/followup-drainer.mjs']);
