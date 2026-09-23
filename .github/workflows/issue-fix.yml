@@ -506,7 +506,7 @@ jobs:
             echo "::error::Lease quota condiviso illeggibile o non verificabile → issue-fix saltato fail-closed, nessuna mutazione cieca."
             exit 1
           fi
-          gh issue edit "$ISSUE_NUMBER" --repo "$GH_REPO" --add-label agent:fix-queued --remove-label agent:fix
+          gh issue edit "$ISSUE_NUMBER" --repo "$GH_REPO" --add-label agent:fix-queued --remove-label agent:fix --remove-label automation-deferred
           echo "Lease quota condiviso negato (${{ steps.quota_lease.outputs.lease_reason }}) → issue #$ISSUE_NUMBER ri-accodata senza consumare un tentativo Codex."
 
       - name: Determine fix tier

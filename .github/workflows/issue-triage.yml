@@ -214,13 +214,15 @@ jobs:
               gh issue edit "$ISSUE_NUMBER" --repo "$REPO" \
                 --add-label agent:fix-queued --add-label fu-prio:low \
                 --remove-label operations-audit-review \
+                --remove-label automation-deferred \
                 --add-label agent:triaged
               exit 0
             fi
             echo "L11 contract valido → agent:fix-queued via PAT."
             GH_TOKEN="$routing_token" gh issue edit "$ISSUE_NUMBER" --repo "$REPO" \
               --add-label agent:fix-queued --add-label fu-prio:low \
-              --remove-label operations-audit-review
+              --remove-label operations-audit-review \
+              --remove-label automation-deferred
             gh issue edit "$ISSUE_NUMBER" --repo "$REPO" --add-label agent:triaged || true
             exit 0
           fi
@@ -375,11 +377,11 @@ jobs:
               if [ -n "$runtime_pat" ]; then
                 GH_TOKEN="$runtime_pat" gh issue edit "$number" --repo "$GH_REPO" \
                   --add-label agent:fix-queued --add-label fu-prio:low \
-                  --remove-label operations-audit-review >/dev/null 2>&1 || echo "::warning::L11 #$number PAT routing fallito"
+                  --remove-label operations-audit-review --remove-label automation-deferred >/dev/null 2>&1 || echo "::warning::L11 #$number PAT routing fallito"
               else
                 gh issue edit "$number" --repo "$GH_REPO" \
                   --add-label agent:fix-queued --add-label fu-prio:low \
-                  --remove-label operations-audit-review >/dev/null 2>&1 || echo "::warning::L11 #$number queue fallback fallito"
+                  --remove-label operations-audit-review --remove-label automation-deferred >/dev/null 2>&1 || echo "::warning::L11 #$number queue fallback fallito"
               fi
             else
               echo "L11 #$number contract assente/invalido o review-only → review + triaged"

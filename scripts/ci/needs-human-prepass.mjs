@@ -1416,12 +1416,20 @@ function main() {
     // tornava selezionabile al giro dopo — che ri-postava la nota e, con essa,
     // il marker che conta le oscillazioni: un fallimento di scrittura si
     // travestiva da oscillazione della issue.
-    const routeArgs = ['issue', 'edit', String(iss.number), '--repo', REPO, '--add-label', add];
+    // La nuova coda e la rimozione del vecchio defer devono essere una sola
+    // transizione: se il drainer legge fra due chiamate separate può vedere
+    // `agent:*queued` + `automation-deferred`, applicare il veto e togliere la
+    // coda appena scritta. L'edit combinato è idempotente e converge anche se
+    // il producer precedente aveva lasciato uno stato parziale.
+    const routeArgs = [
+      'issue', 'edit', String(iss.number), '--repo', REPO,
+      '--add-label', add,
+      '--remove-label', AUTOMATION_DEFERRED_LABEL,
+    ];
     if (visionApproved) routeArgs.push('--add-label', VISION_AUTONOMY_LABEL);
     const steps = [
       { what: `label ${add}`, args: routeArgs },
       { what: 'rimozione needs-human', args: ['issue', 'edit', String(iss.number), '--repo', REPO, '--remove-label', 'needs-human'] },
-      { what: `rimozione ${AUTOMATION_DEFERRED_LABEL}`, args: ['issue', 'edit', String(iss.number), '--repo', REPO, '--remove-label', AUTOMATION_DEFERRED_LABEL] },
       { what: 'rimozione fu-parked', args: ['issue', 'edit', String(iss.number), '--repo', REPO, '--remove-label', 'fu-parked'] },
       { what: 'nota di instradamento', args: ['issue', 'comment', String(iss.number), '--repo', REPO, '--body', note] },
     ];

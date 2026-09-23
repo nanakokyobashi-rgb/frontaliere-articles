@@ -54,9 +54,23 @@ test('#826: un padre decomposed:1 non è promuovibile dal DRAIN', () => {
 });
 
 test('#826: lo stadio decompose e il park restano esclusi come nei gemelli', () => {
-  for (const l of ['agent:decompose', 'agent:decompose-queued', 'fu-parked']) {
+  for (const l of ['agent:decompose', 'agent:decompose-queued', 'fu-parked', 'automation-deferred']) {
     assert.equal(isDrainPromotable(iss('agent:fix-queued', l)), false, l);
   }
+});
+
+test('il defer tecnico è un veto fail-closed per entrambe le porte di promozione', () => {
+  assert.equal(isDrainPromotable(iss('agent:fix-queued', 'automation-deferred')), false);
+  assert.equal(isDecomposeEligible(iss('automation-deferred')), false);
+  assert.equal(isDecomposeEligible(iss('agent:decompose-queued', 'automation-deferred')), false);
+
+  // Il gate decompose è inline, quindi difendiamo anche il call-site: il solo
+  // predicato di ammissione non basta se la lista di promozione lo parafrasa.
+  assert.match(
+    SRC,
+    /listIssues\(LBL_DECOMP_QUEUED\)[\s\S]*!has\(i, LBL_AUTOMATION_DEFERRED\)/,
+  );
+  assert.match(SRC, /if \(has\(iss, LBL_AUTOMATION_DEFERRED\)\) \{/);
 });
 
 test('#826: una follow-up normale resta promuovibile (nessun over-block)', () => {
@@ -123,9 +137,10 @@ test('#1076: il rescue vede agent:fix senza PR/beacon e non tocca i concorrenti'
   assert.equal(isStuckFixRescueCandidate(queueIssue(['agent:fix-queued'])), false);
   assert.equal(isStuckFixRescueCandidate(queueIssue(['fu-parked'])), false);
   assert.equal(isStuckFixRescueCandidate(queueIssue(['decomposed:1'])), false);
+  assert.equal(isStuckFixRescueCandidate(queueIssue(['automation-deferred'])), false);
   assert.match(SRC, /allFix\.filter\(isStuckFixRescueCandidate\)/);
   assert.match(SRC, /const rescueGate = staleFixRescueGate\(/);
-  assert.match(SRC, /add: \[LBL_QUEUED\][\s\S]*remove: \[LBL_FIX\]/);
+  assert.match(SRC, /add: \[LBL_QUEUED(?:,[^\]]+)?\][\s\S]*remove: \[LBL_FIX/);
   assert.equal(
     staleFixRescueGate({ outcome: null, ageMin: 31, hasPR: false, orphanMinAgeMin: 30 }).action,
     'rearm',

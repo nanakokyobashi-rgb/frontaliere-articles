@@ -133,7 +133,7 @@ export function classifyIssue(title = '', labels = [], _body = '', _options = {}
   // (root-cause non determinabile, capability-guard su workflows/secret) sono
   // generiche e restano — non sono guardrail di categoria.
   const automationDeferred = has(AUTOMATION_DEFERRED_LABEL);
-  const autofix = !automationDeferred;
+  const autofix = !needsHuman && !automationDeferred;
   // `crawler-transient` è l'esito, non un bug da instradare: la issue è già la
   // ledger (o un commento su di essa) che assorbe i blip sotto-soglia — vedi
   // `findOrCreateTransientLedger` in `github-issue-creator.mjs`. Instradarla al

@@ -632,7 +632,8 @@ function queueLabelIfAllowed(issue, repoArgs) {
     return null;
   }
   return gh(['issue', 'e' + 'dit', String(latest.number), ...repoArgs,
-    '--add-label', 'agent:fix-queued'], { allowFail: true });
+    '--add-label', 'agent:fix-queued',
+    '--remove-label', 'automation-deferred'], { allowFail: true });
 }
 
 function stableSnapshotValue(value) {

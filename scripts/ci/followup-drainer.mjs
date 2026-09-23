@@ -474,9 +474,10 @@ const PARENT_DEQUEUE_MAX_PER_RUN = intFromEnv('FOLLOWUP_PARENT_DEQUEUE_MAX_PER_R
  * seconda morte park» diventa illimitato: ogni giro brucia una run di scorporo
  * sulla stessa issue troppo grande. La label non viene mai rimossa, per cui
  * l'esclusione è definitiva by-construction (#7280).
- * NON esclude una decisione `needs-human`: i call-site di routing agiscono PRIMA che quel
- * label venga applicato, e un'issue grande già marcata a mano resta comunque
- * decomponibile se qualcuno la ri-accoda.
+ * `automation-deferred` è invece un veto tecnico fail-closed: se una scrittura
+ * parziale lascia la coda insieme al defer, il planner non deve spendere un run
+ * per ripetere lo stesso contesto. Lo sweep rimuove il veto solo dopo avere
+ * cambiato input o osservabilità.
  * @param {{labels?: Array<{name:string}>}} iss
  */
 export function isDecomposeEligible(iss) {
@@ -484,6 +485,7 @@ export function isDecomposeEligible(iss) {
   return !ls.includes(LBL_DECOMPOSED) && !ls.includes(LBL_FROM_DECOMP)
     && !ls.includes(LBL_DECOMP_QUEUED) && !ls.includes(LBL_DECOMP)
     && !ls.includes(LBL_MAYBE_RESOLVED) && !ls.includes(LBL_DECOMP_RETRIED)
+    && !ls.includes(LBL_AUTOMATION_DEFERRED)
     && !hasActiveAgentClaim(iss);
 }
 
@@ -516,13 +518,19 @@ export function isDecomposedParent(iss) {
 
 /**
  * Il DRAIN può promuovere questa issue a `agent:fix`? Una issue già attiva,
- * nello stadio decompose o un padre decomposto è lavoro assegnato altrove,
- * non un candidato del fixer. Il predicato resta puro per poter difendere
- * l'invariante nei test e nei call-site del DRAIN.
+ * nello stadio decompose, un defer tecnico o un padre decomposto è lavoro
+ * assegnato altrove/non ancora rivalutabile, non un candidato del fixer. Il
+ * predicato resta puro per poter difendere l'invariante nei test e nei call-site
+ * del DRAIN.
  * @param {{labels?: Array<{name:string}>}} iss
  */
 export function isDrainPromotable(iss) {
   if (has(iss, LBL_PARKED)) return false;
+  // Fail-closed contro scritture parziali e producer vecchi: il defer tecnico
+  // deve restare assorbente finché lo sweep non cambia il contesto e rimuove
+  // esplicitamente il pin. Senza questa guardia una coda stantia ripagherebbe
+  // lo stesso run appena differito.
+  if (has(iss, LBL_AUTOMATION_DEFERRED)) return false;
   if (hasActiveAgentClaim(iss)) return false;
   // La riconciliazione può aver già visto il conflitto durante la finestra
   // non atomica di `gh issue edit`. Lasciarlo fuori evita una seconda
@@ -1816,6 +1824,7 @@ export function isStuckFixRescueCandidate(iss) {
     && !hasActiveAgentClaim(iss)
     && !has(iss, LBL_QUEUED)
     && !has(iss, LBL_PARKED)
+    && !has(iss, LBL_AUTOMATION_DEFERRED)
     && !isDecomposedParent(iss);
 }
 
@@ -2936,7 +2945,12 @@ function prepareIssueGroup(group) {
 function routeToDecompose(num, { remove = [], note }) {
   if (DRY) { console.log(`[dry] decompose-route #${num}`); return; }
   if (note) commentIssue(num, note, 'decompose-route');
-  return edit(num, { add: [LBL_DECOMP_QUEUED], remove });
+  return edit(num, {
+    add: [LBL_DECOMP_QUEUED],
+    // Ogni intenzionale rientro cambia il contesto: non lasciare il vecchio
+    // pin tecnico accanto alla nuova coda, dove il gate lo bloccherebbe.
+    remove: [...new Set([...remove, LBL_AUTOMATION_DEFERRED])],
+  });
 }
 
 /** Esiste una PR fix APERTA per questa issue? (head fix/issue-N).
@@ -4122,7 +4136,7 @@ export function runDrain() {
             : `♻️ **Ri-accodata dal followup-drainer (zero-Claude): era parcheggiata senza un solo tentativo.**\n\nQuesta issue portava \`${LBL_PARKED}\` e \`fu-attempt:${attemptOf(iss) || '?'}\`, ma nei suoi commenti non c'è **nessun** \`FIX_OUTCOME\`: nessuna run del fixer l'ha mai lavorata. Il contatore dei tentativi è stato alzato dal RESCUE su promozioni che la coda di concorrenza di \`issue-fix.yml\` aveva sfrattato (\`cancelled\` prima di eseguire uno step), non su fix falliti.\n\nTolgo \`${LBL_PARKED}\` e il contatore e la rimetto in coda con \`${LBL_QUEUED}\`. Il primo giro vero comincia adesso.`;
         if (!edit(iss.number, {
           add: [LBL_QUEUED, LBL_UNPARKED],
-          remove: [LBL_PARKED, ...names(iss).filter((n) => /^fu-attempt:\d+$/.test(n))],
+          remove: [LBL_PARKED, LBL_AUTOMATION_DEFERRED, ...names(iss).filter((n) => /^fu-attempt:\d+$/.test(n))],
         })) continue;
         succeeded++;
         commentIssue(iss.number, unparkBody, 'unpark comment');
@@ -4413,7 +4427,7 @@ export function runDrain() {
       // parked stabile (no loop infinito).
       if (!edit(iss.number, {
         add: [LBL_QUEUED, `fu-reparked:${gen}`],
-        remove: [LBL_PARKED, prevGen, prevAttempt].filter(Boolean),
+        remove: [LBL_PARKED, LBL_AUTOMATION_DEFERRED, prevGen, prevAttempt].filter(Boolean),
       })) continue;
       console.log(`PARKED-RETRY #${iss.number} → agent:fix-queued (gen ${gen}/${MAX_REPARK_GEN}, attempts reset) — "${iss.title?.slice(0, 50)}"`);
       retried++;
@@ -4668,7 +4682,7 @@ export function runDrain() {
         console.log(`RE-QUEUE #${iss.number} (${recoverableDecision.reason}, branch ${recoverable?.branch} ahead=${recoverable?.aheadBy}) → resume-aware retry`);
         edit(iss.number, {
           add: [LBL_QUEUED, `fu-attempt:${recoverableDecision.nextAttempt}`],
-          remove: [LBL_FIX, previousLabel].filter(Boolean),
+          remove: [LBL_FIX, LBL_AUTOMATION_DEFERRED, previousLabel].filter(Boolean),
         });
       }
       continue;
@@ -4706,7 +4720,7 @@ export function runDrain() {
         continue;
       }
       console.log(`RE-QUEUE #${iss.number} (${outcome}, finestra quota chiusa) → tentativo NON consumato (la run non ha mai letto la issue)`);
-      edit(iss.number, { add: [LBL_QUEUED], remove: [LBL_FIX] });
+      edit(iss.number, { add: [LBL_QUEUED], remove: [LBL_FIX, LBL_AUTOMATION_DEFERRED] });
       continue;
     }
     if (outcome && NON_RETRYABLE.has(outcome)) {
@@ -4737,7 +4751,7 @@ export function runDrain() {
         promotedAt: promotion.at,
       })) {
         console.log(`RE-QUEUE #${iss.number} (${outcome}, PR fix mergiata in questo ciclo) → tentativo NON consumato (la run ha consegnato)`);
-        edit(iss.number, { add: [LBL_QUEUED], remove: [LBL_FIX] });
+        edit(iss.number, { add: [LBL_QUEUED], remove: [LBL_FIX, LBL_AUTOMATION_DEFERRED] });
         continue;
       }
       // Il fail-closed qui sotto è corretto, ma quando a spostare `promotedAt`
@@ -4797,7 +4811,7 @@ export function runDrain() {
       console.log(`RE-QUEUE #${iss.number} (orfano, attempt ${attempt})`);
       edit(iss.number, {
         add: [LBL_QUEUED, `fu-attempt:${attempt}`],
-        remove: [LBL_FIX, prevAttemptLabel].filter(Boolean),
+        remove: [LBL_FIX, LBL_AUTOMATION_DEFERRED, prevAttemptLabel].filter(Boolean),
       });
     }
   }
@@ -4873,12 +4887,12 @@ export function runDrain() {
     }
     if (d.action === 'requeue-delivered') {
       console.log(`RE-QUEUE CRAWLER ${tag} (${d.reason}) → agent:fix-queued, tentativo NON consumato`);
-      edit(iss.number, { add: [LBL_QUEUED], remove: [LBL_FIX] });
+      edit(iss.number, { add: [LBL_QUEUED], remove: [LBL_FIX, LBL_AUTOMATION_DEFERRED] });
       continue;
     }
     if (d.action === 'requeue-zero-work') {
       console.log(`RE-ARM CRAWLER ${tag} (${d.reason}) → agent:fix-queued, il DRAIN lo ripromuove a slot libero`);
-      edit(iss.number, { add: [LBL_QUEUED, 'fu-prio:high'], remove: [LBL_FIX] });
+      edit(iss.number, { add: [LBL_QUEUED, 'fu-prio:high'], remove: [LBL_FIX, LBL_AUTOMATION_DEFERRED] });
       continue;
     }
     if (d.action === 'decompose') {
@@ -4893,7 +4907,7 @@ export function runDrain() {
       console.log(`RE-ARM CRAWLER ${tag} (${d.reason}) → agent:fix-queued + fu-attempt:${d.nextAttempt}`);
       edit(iss.number, {
         add: [LBL_QUEUED, 'fu-prio:high', `fu-attempt:${d.nextAttempt}`],
-        remove: [LBL_FIX, prevAttemptLabel].filter(Boolean),
+        remove: [LBL_FIX, LBL_AUTOMATION_DEFERRED, prevAttemptLabel].filter(Boolean),
       });
       continue;
     }
@@ -4953,7 +4967,10 @@ export function runDrain() {
           continue;
         }
         console.log(`RE-ARM DECOMPOSE #${iss.number} (run morta senza esito) → agent:decompose-queued + decompose-retried`);
-        edit(iss.number, { add: [LBL_DECOMP_QUEUED, LBL_DECOMP_RETRIED], remove: [LBL_DECOMP] });
+        edit(iss.number, {
+          add: [LBL_DECOMP_QUEUED, LBL_DECOMP_RETRIED],
+          remove: [LBL_DECOMP, LBL_AUTOMATION_DEFERRED],
+        });
       }
       // La PROMOZIONE invece onora la finestra riservata al peer.
       if (fairnessHold) {
@@ -4970,7 +4987,10 @@ export function runDrain() {
           console.log(`decompose: promozione in assestamento (${settling.map((i) => `#${i.number}`).join(', ')}) → nessuna promozione decompose in questo tick.`);
           } else {
             const dq = listIssues(LBL_DECOMP_QUEUED)
-              .filter((i) => !has(i, LBL_PARKED))
+              // Un defer tecnico può convivere con la coda se un producer
+              // vecchio o una scrittura parziale ha lasciato entrambe le label:
+              // non promuoverlo finché lo sweep non cambia il contesto.
+              .filter((i) => !has(i, LBL_PARKED) && !has(i, LBL_AUTOMATION_DEFERRED))
               .sort((a, b) => prioRank(a) - prioRank(b) || Date.parse(a.createdAt) - Date.parse(b.createdAt));
           if (dq.length && budget.take(`#${dq[0].number} (decompose-drain)`, ITEM_COST_MS)) {
             if (!liveClaimAllowsMutation(dq[0].number)) {
@@ -5042,6 +5062,11 @@ export function runDrain() {
     if (!budget.take(`#${iss.number} (drain pre-flight)`, ITEM_COST_MS)) break;
     if (has(iss, LBL_FIX)) {
       console.log(`DRAIN-SKIP #${iss.number} (agent:fix + agent:fix-queued: conflitto fresco) → lascio decidere alla riconciliazione nel prossimo tick`);
+      continue;
+    }
+    if (has(iss, LBL_AUTOMATION_DEFERRED)) {
+      console.log(`DEQUEUE #${iss.number} (${LBL_AUTOMATION_DEFERRED}) → tolgo ${LBL_QUEUED}; lo sweep deve cambiare il contesto prima del rientro`);
+      if (!DRY) edit(iss.number, { remove: [LBL_QUEUED] });
       continue;
     }
     if (!has(iss, LBL_DECOMPOSED)) {

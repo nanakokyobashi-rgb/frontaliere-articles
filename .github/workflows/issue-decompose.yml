@@ -151,7 +151,7 @@ jobs:
             echo "::error::Lease quota condiviso illeggibile o non verificabile → issue-decompose fermato fail-closed."
             exit 1
           fi
-          gh issue edit "$ISSUE" --repo "$GH_REPO" --add-label agent:decompose-queued --remove-label agent:decompose
+          gh issue edit "$ISSUE" --repo "$GH_REPO" --add-label agent:decompose-queued --remove-label agent:decompose --remove-label automation-deferred
           echo "::warning::Lease quota condiviso negato (${{ steps.quota_lease.outputs.lease_reason }}) → issue #$ISSUE ri-accodata senza consumare quota Claude."
 
       - name: Run Codex Luna Max decompose
@@ -178,7 +178,7 @@ jobs:
 
             **Triage preliminare — tre uscite rapide (scegli la prima che si applica):**
             - **Già risolta**: se la claim non è più vera (rimisurala col comando del body se c'è), posta un commento con la misura osservata e il comando, poi: `gh issue edit $ISSUE_NUMBER --add-label maybe-resolved --remove-label agent:decompose` e ultimo commento con `<!-- DECOMPOSE_OUTCOME: already-resolved -->`. STOP.
-            - **Atomica**: se descrive UNA sola causa con UN target chiaro, NON scomporla artificialmente. Arricchiscila con un commento `## Scheda` (formato sotto), poi `gh issue edit $ISSUE_NUMBER --add-label from-decompose --add-label agent:fix-queued --remove-label agent:decompose` e ultimo commento con `<!-- DECOMPOSE_OUTCOME: atomic-requeue -->`. STOP.
+            - **Atomica**: se descrive UNA sola causa con UN target chiaro, NON scomporla artificialmente. Arricchiscila con un commento `## Scheda` (formato sotto), poi `gh issue edit $ISSUE_NUMBER --add-label from-decompose --add-label agent:fix-queued --remove-label agent:decompose --remove-label automation-deferred` e ultimo commento con `<!-- DECOMPOSE_OUTCOME: atomic-requeue -->`. STOP.
             - **Decisione del proprietario**: usa questa uscita SOLO se, dopo aver letto VISION.md e DECISIONS.md, manca davvero una decisione necessaria per scegliere lo scope. Non inferire un bisogno umano da dati personali, spese, ritiro editoriale di articoli pubblicati o invii massivi se i documenti hanno già una regola applicabile. Formula la DOMANDA DECIDIBILE con opzioni, evidenza richiesta e criterio di accettazione; poi `gh issue edit $ISSUE_NUMBER --add-label needs-human --remove-label automation-deferred --remove-label agent:decompose` e ultimo commento con `<!-- DECOMPOSE_OUTCOME: needs-human-decision -->` e `<!-- OWNER_DECISION_REQUEST: ... -->`. STOP.
 
             **Decomposizione (il caso normale):**

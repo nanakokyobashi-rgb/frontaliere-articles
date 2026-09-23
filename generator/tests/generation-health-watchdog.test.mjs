@@ -44,6 +44,7 @@ import {
   ROSTER_RETIRED_CODES,
   ROSTER_RETIRED_RATE,
   RUN_LOOKBACK_HOURS_DEFAULT,
+  ROUTING_LABELS_ALREADY_SET,
   SATURATION_MIN_RUNS,
   SATURATION_RATE,
   SECTIONS,
@@ -1259,6 +1260,19 @@ describe('il cablaggio esiste davvero — non solo nei commenti', () => {
     const entry = manifest.files.find((f) => f.path === 'scripts/ci/scan-generation-health.mjs');
     assert.ok(entry, 'scan-generation-health.mjs non è nel manifest');
     assert.equal(entry.mode, 'corpus-only');
+  });
+
+  test('un defer tecnico pinna il routing e il rientro lo rimuove nella stessa edit', () => {
+    assert.ok(
+      ROUTING_LABELS_ALREADY_SET.includes('automation-deferred'),
+      'una issue differita non deve essere riaccodata da una misura deduplicata',
+    );
+    const source = fs.readFileSync(path.join(ROOT, 'scripts', 'ci', 'scan-generation-health.mjs'), 'utf8');
+    const routing = source.slice(
+      source.indexOf('export const ROUTING_LABELS_ALREADY_SET'),
+      source.indexOf('export async function collectMeasurements'),
+    );
+    assert.match(routing, /'--add-label', 'agent:fix-queued'[\s\S]*'--remove-label', 'automation-deferred'/);
   });
 });
 
