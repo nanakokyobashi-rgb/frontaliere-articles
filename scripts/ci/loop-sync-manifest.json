@@ -2917,6 +2917,16 @@
       }
     },
     {
+      "path": "host/shared/literalMarkdown.ts",
+      "sitePath": "build-plugins/shared/literalMarkdown.ts",
+      "mode": "identical",
+      "baseline": {
+        "site": "97bcd768eba4e593",
+        "corpus": "97bcd768eba4e593",
+        "alignedAt": "2026-09-24"
+      }
+    },
+    {
       "path": "host/shared/localeEmitFilter.ts",
       "sitePath": "build-plugins/shared/localeEmitFilter.ts",
       "mode": "identical",
