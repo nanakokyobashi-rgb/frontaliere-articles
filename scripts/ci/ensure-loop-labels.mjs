@@ -55,6 +55,7 @@ export const LABELS = [
   ['fu-prio:high', 'b60205', 'Drenata prima dalla coda'],
   ['fu-prio:low', 'c2e0c6', 'Drenata dopo'],
   ['fu-parked', '5319e7', 'Fuori dalla coda attiva dopo troppi tentativi'],
+  ['automation-deferred', 'fbca04', 'Lavoro automatico differito da policy/capacità; rientra nello sweep'],
   ['fu-attempt:1', 'fbca04', 'Tentativo fix 1 (contatore del rescue)'],
   ['fu-attempt:2', 'fbca04', 'Tentativo fix 2'],
   ['fu-attempt:3', 'fbca04', 'Tentativo fix 3 (al tetto: fu-parked)'],

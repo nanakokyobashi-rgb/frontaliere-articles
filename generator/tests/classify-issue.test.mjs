@@ -136,6 +136,12 @@ test('needs-human non cambia la category (resta visibile per telemetria, solo il
   assert.equal(r.route, 'none');
 });
 
+test('automation-deferred esclude la coda senza chiedere una decisione umana', () => {
+  const r = classifyIssue('Workflow Failure: crawler transport', ['automation-deferred']);
+  assert.equal(r.route, 'none');
+  assert.equal(r.autofix, false);
+});
+
 test('i pin locali del classificatore tengono l\'issue fuori dal fixer', () => {
   assert.equal(isFixerExempt(['backlog']), true);
   assert.equal(isFixerExempt([{ name: 'needs-human' }]), true);

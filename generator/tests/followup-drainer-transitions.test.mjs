@@ -55,11 +55,16 @@ test('close, flag ed escalate commentano solo dopo edit confermato', () => {
     src.indexOf('const d = verdictExitDecision(outcome, {'),
     src.indexOf('// --- TOO-LARGE ESCALATION'),
   );
-  const branchEnds = ["if (d.action === 'flag')", '// escalate', 'if (succeeded) console.log'];
-  for (const [index, marker] of ["if (d.action === 'close')", "if (d.action === 'flag')", '// escalate'].entries()) {
+  const branchEnds = ["if (d.action === 'flag')", '// Defer tecnico', 'if (succeeded) console.log'];
+  for (const [index, marker] of ["if (d.action === 'close')", "if (d.action === 'flag')", '// Defer tecnico'].entries()) {
     const start = verdict.indexOf(marker);
     assert.ok(start >= 0, `branch ${marker} non trovato`);
     const branch = verdict.slice(start, verdict.indexOf(branchEnds[index], start));
+    if (marker === '// Defer tecnico') {
+      assert.ok(branch.includes('deferAutomationIssue('), 'il defer tecnico deve passare dall helper che verifica edit e commento');
+      assert.ok(branch.indexOf('deferAutomationIssue(') < branch.lastIndexOf('succeeded++'));
+      continue;
+    }
     const edit = branch.indexOf('edit(iss.number');
     const comment = branch.indexOf("gh(['issue', 'comment'");
     assert.ok(edit >= 0, `edit del branch ${marker} non trovato`);

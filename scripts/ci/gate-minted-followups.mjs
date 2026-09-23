@@ -114,6 +114,7 @@ const COLLECTION_OK = process.env.COLLECTION_OK === 'true';
 // in cui sbagliare, perché il testo degli item è già al sicuro sulla PR e un commento
 // duplicato costa una riga, mentre perderli è irreversibile.
 const MINT_GATE_MARKER = '<!-- followup-mint-gate -->';
+export const AUTOMATION_DEFERRED_LABEL = 'automation-deferred';
 
 /**
  * Spezza il corpo coniato in testa + item, e partiziona gli item con l'oracolo
@@ -586,12 +587,20 @@ function rawIssueLabelName(label) {
   return typeof label === 'string' ? label.trim() : label.name.trim();
 }
 
+export function hasAutomationDeferredLabel(issue) {
+  return isValidRawIssueLabels(issue?.labels)
+    && issue.labels.some((label) => rawIssueLabelName(label).toLowerCase() === AUTOMATION_DEFERRED_LABEL);
+}
+
 function queueLabelDecision(issue) {
   if (!isValidRawIssueLabels(issue?.labels)) {
     return { allowed: false, code: 'labels-unverifiable', reason: 'missing-or-malformed-labels' };
   }
   if (issue.labels.some((label) => rawIssueLabelName(label).toLowerCase() === 'needs-human')) {
     return { allowed: false, code: 'needs-human', reason: 'needs-human-veto' };
+  }
+  if (hasAutomationDeferredLabel(issue)) {
+    return { allowed: false, code: AUTOMATION_DEFERRED_LABEL, reason: 'automation-deferred' };
   }
   return { allowed: true, code: 'labels-verified', reason: 'labels-clear' };
 }

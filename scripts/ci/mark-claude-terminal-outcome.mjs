@@ -24,7 +24,7 @@
  * Precedenza: `max-turns` PRIMA di `rate-limited`. Sono mutuamente esclusivi nei
  * payload osservati, ma se mai coesistessero il budget di turni esaurito è il
  * verdetto più informativo (indica una issue too-large, che il drainer parka
- * subito con `needs-human`), mentre il 429 è una condizione ambientale
+ * subito con `automation-deferred`), mentre il 429 è una condizione ambientale
  * transitoria. Stessa precedenza che il precedente ramo bash del reviewer
  * applicava già.
  *
@@ -151,11 +151,11 @@ export function recoverableBranchWork(issue) {
 // esauriscono. Misurato sul sito il 2026-09-05, finestra 5 giorni: 124 issue
 // distinte con marker `max-turns`, di cui **74 avevano una PR da
 // `fix/issue-<N>` e tutte e 74 erano già MERGED**; 10 di quelle risultano
-// comunque parcheggiate `needs-human`/`agent:decompose`.
+// comunque parcheggiate `automation-deferred`/`agent:decompose`.
 //
 // Il danno non è il marker sbagliato in sé, è dove finisce: `max-turns` sta in
 // `PREPASS_VERDICT_BEATS_FAMILY` di `followup-drainer.mjs`, quindi al primo
-// tentativo manda la issue in `fu-parked` + `needs-human` (stato assorbente) o
+// tentativo manda la issue in `fu-parked` + `automation-deferred` (handoff tecnico) o
 // nella coda di decomposizione — su una issue il cui fix è già in `main`.
 //
 // Il predicato è quello che lo step «Classify outcome» di `issue-fix.yml` usa
@@ -260,7 +260,7 @@ export function deliveredPrNumber(issue) {
 //
 // Resta anche il vincolo del giro 1 — la nota dev'essere il VERDETTO VIGENTE, cioè
 // nessun `FIX_OUTCOME` più recente l'ha scavalcata: un `max-turns` posteriore sta in
-// `PREPASS_VERDICT_BEATS_FAMILY` e parcheggerebbe `needs-human` una issue consegnata.
+// `PREPASS_VERDICT_BEATS_FAMILY` e parcheggerebbe `automation-deferred` una issue consegnata.
 // Le tre condizioni insieme lasciano al dedup ESATTAMENTE il caso per cui esiste: lo
 // stesso step che rigira dentro la stessa promozione sulla stessa PR. Non è dedupata
 // contro il `pr-created` che l'agente posta da sé, perché quel commento non dice «sono
@@ -324,7 +324,7 @@ export function hasCapHitAfterDeliveryNote(comments) {
  *  - **verdetto vigente** — un `FIX_OUTCOME` più recente (tipicamente `max-turns`, da
  *    una run in cui `deliveredPrNumber()` è caduta sul fail-safe) l'ha scavalcata:
  *    `max-turns` sta in `PREPASS_VERDICT_BEATS_FAMILY` del drainer, quindi la issue
- *    verrebbe parcheggiata `needs-human` benché consegnata — la regressione silenziosa
+ *    verrebbe parcheggiata `automation-deferred` benché consegnata — la regressione silenziosa
  *    che questo ramo esiste per eliminare. Ripetere la nota è lì tutto il suo mestiere.
  *
  * Ogni dato mancante o illeggibile (nessuno stamp di PR, `createdAt` non parsabile,

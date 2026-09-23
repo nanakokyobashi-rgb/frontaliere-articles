@@ -36,7 +36,7 @@
  * Estensione 2026-08-10 (#5514): i crawler, unica categoria `route='fix'`, erano
  * per ciò stesso l'unica ESCLUSA dal rescue (`isQueueManaged`) — e una loro run
  * cancellata dalla coda concurrency non veniva né ri-accodata né parkata né
- * marcata `needs-human`. Ora hanno un rescue proprio, gemello di quello
+ * marcata `automation-deferred`. Ora hanno un rescue proprio, gemello di quello
  * queue-managed: vedi `crawlerFixDecision`.
  */
 import { realpathSync } from 'node:fs';
@@ -261,7 +261,7 @@ const isFixerExempt = (labels = []) => {
 // triage-sweep.mjs) instead of the two constants drifting apart in silence —
 // `gh issue edit --add-label` fails on a label that was never created, so a
 // bump here without a matching label would strand issues at the new ceiling
-// forever, unnoticed (no error, just a park that never reaches `needs-human`
+// forever, unnoticed (no error, just a park that never reaches `automation-deferred`
 // nor gets excluded from re-triage by `ROUTING_LABELS`).
 export const MAX_ATTEMPTS = 3;
 // Cap di letture `gh issue view` per la scansione del beacon di quota. Il beacon
@@ -402,6 +402,8 @@ if (MAX_INFLIGHT_FIX < REQUESTED_MAX_INFLIGHT_FIX) {
 const LBL_QUEUED = 'agent:fix-queued';
 const LBL_FIX = 'agent:fix';
 const LBL_PARKED = 'fu-parked';
+export const LBL_AUTOMATION_DEFERRED = 'automation-deferred';
+export const AUTOMATION_DEFERRED_DESCRIPTION = 'Lavoro automatico differito da policy/capacità; rientra nello sweep';
 // Claim condiviso con `/fix-issue` locale e con i fixer remoti. Il drainer
 // legge la presenza di una qualunque label di claim come lavoro assegnato:
 // anche un owner label senza `agent:in-progress` va protetto, perché è uno
@@ -424,12 +426,12 @@ const LBL_NO_AGE_OUT = 'agent:no-age-out';
 
 // --- STADIO DI DECOMPOSIZIONE (2026-08-21) -----------------------------------
 // Prima di questo stadio, ogni issue "troppo grande" usciva dal ciclo autonomo:
-// `max-turns` al 1° tentativo → `fu-parked`+`needs-human` (stato assorbente:
+// `max-turns` al 1° tentativo → `fu-parked`+`automation-deferred` (handoff tecnico:
 // nessun meccanismo le riprendeva), e i detector epic/backlog parcheggiavano con
 // un commento che CHIEDEVA lo scorporo in issue singole senza che nessuno lo
 // facesse. Misurato sulla finestra 07→21/08: esito finale delle issue lavorate
 // 11 `pr-created` contro 11 `max-turns` — metà dei run bruciata su issue che il
-// turn-budget non può contenere, e 47 issue aperte in `needs-human`.
+// turn-budget non può contenere, e 47 issue aperte in `automation-deferred`.
 //
 // Il rimedio è lo stesso che il commento del park prescriveva a mano: scorporare.
 // `agent:decompose-queued` → (promozione qui sotto, 1 per tick, slot proprio) →
@@ -466,13 +468,13 @@ const PARENT_DEQUEUE_MAX_PER_RUN = intFromEnv('FOLLOWUP_PARENT_DEQUEUE_MAX_PER_R
  * che accompagna quell'esito la rende di nuovo eleggibile al giro successivo
  * (#6275: re-queue infinito).
  * Esclude anche chi ha già bruciato il suo unico ri-armo (`decompose-retried`):
- * il park del RESCUE più sotto lascia `fu-parked` + `needs-human` +
+ * il park del RESCUE più sotto lascia `fu-parked` + `automation-deferred` +
  * `decompose-retried` e TOGLIE `agent:decompose`, quindi senza questa clausola
  * la issue parcheggiata torna eleggibile e il bound «ri-arma UNA volta, alla
  * seconda morte park» diventa illimitato: ogni giro brucia una run di scorporo
  * sulla stessa issue troppo grande. La label non viene mai rimossa, per cui
  * l'esclusione è definitiva by-construction (#7280).
- * NON esclude `needs-human`: i call-site di routing agiscono PRIMA che quel
+ * NON esclude una decisione `needs-human`: i call-site di routing agiscono PRIMA che quel
  * label venga applicato, e un'issue grande già marcata a mano resta comunque
  * decomponibile se qualcuno la ri-accoda.
  * @param {{labels?: Array<{name:string}>}} iss
@@ -638,7 +640,7 @@ export const NON_RETRYABLE = new Set([
 ]);
 
 /**
- * Verdetti su cui il PRE-PASS deterministico di `needs-human`
+ * Verdetti su cui il PRE-PASS deterministico del backlog
  * (`needs-human-prepass.mjs`) NON può ri-accodare da solo: il riconoscimento di
  * famiglia dal titolo non li scavalca, e la issue resta al giudizio dello sweep
  * settimanale.
@@ -651,7 +653,7 @@ export const NON_RETRYABLE = new Set([
  *
  * Misurato sull'escalation #7307 (bucket `fix-outcome:max-turns`, 6 issue nella
  * finestra 14gg). Tutte e sei hanno lo stesso ciclo: morte `max-turns` con ZERO
- * file toccati → il drainer le parcheggia `fu-parked` + `needs-human` (path
+ * file toccati → il drainer le parcheggia `fu-parked` + `automation-deferred` (path
  * `max-turns` non eleggibile alla decomposizione, riga ~2439) → vengono
  * ri-accodate → muoiono di nuovo. Chi le ha liberate però NON è lo stesso:
  *   • #7096 #7158 #7174 #7203 — lo sweep Claude (2026-09-04T08:36-08:37), che
@@ -669,7 +671,7 @@ export const NON_RETRYABLE = new Set([
 // `NON_RETRYABLE` è «il verdetto è fermo», questo è «lo stadio che legge non sa
 // cambiare niente prima di rimettere in coda». Chi aggiunge un verdetto a
 // `NON_RETRYABLE` lo aggiunge in silenzio anche qui, e nel pre-pass la
-// conseguenza è più pesante: `needs-human` lì non ha altro drenaggio
+// conseguenza è più pesante: `automation-deferred` lì non ha altro drenaggio
 // automatico oltre allo sweep settimanale. Se il verdetto che stai aggiungendo
 // sopra è transiente, non appartiene a questo insieme: elencalo qui a mano
 // invece di ereditarlo. (Nit della review su nanako#778.)
@@ -721,11 +723,11 @@ export const PREPASS_VERDICT_BEATS_FAMILY = new Set([...NON_RETRYABLE, 'max-turn
 //                      difetto non c'è più»: più forte del token-match con cui
 //                      `reconcile-followups.mjs` già auto-chiude. Reversibile —
 //                      il monitor che l'ha aperta riapre alla ricorrenza.
-//   gli altri        → `needs-human`. Sono capacità che la CI non ha (secret,
+//   gli altri        → `automation-deferred`. Sono capacità che la CI non ha (secret,
 //                      admin, scope workflows), lavoro editoriale/manuale, o una
 //                      causa che il fixer non ha trovato: nessuno dei tre si
-//                      sblocca ri-provando. `needs-human` li mette nello sweep
-//                      del lunedì (VISION.md), che è la sola porta di rientro.
+//                      sblocca ri-provando. `automation-deferred` li mette nello
+//                      sweep del lunedì (VISION.md), che è la porta di rientro.
 //
 // `FOLLOWUP_NO_AUTOCLOSE=1` degrada la chiusura a `maybe-resolved` + commento,
 // stesso interruttore semantico di `NO_AUTOCLOSE` in reconcile-followups.mjs:
@@ -1039,12 +1041,13 @@ export function productionProofDecision({
 // 2. NETWORK-AUDIT (#2224-class) — RIMOSSA il 2026-08-21: la premessa (fixer
 //    confinato a `Bash(node:*)`, niente `curl`) è falsa dal 2026-07-02, quando
 //    `--dangerously-skip-permissions` ha sostituito gli allowedTools scoped in
-//    issue-fix.yml. Il detector parcheggiava con `needs-human` (assorbente)
+//    issue-fix.yml. Il detector parcheggiava con `automation-deferred`
+//    (esclusione tecnica)
 //    issue perfettamente lavorabili.
 //
 // Pattern: pre-flight CONSERVATIVO (bias a PROMUOVERE) — stessa filosofia di
-// detectWorkflowScoped. Park con `needs-human` per evitare ri-accodo (parked-retry
-// loop) su issue strutturalmente non-fixabili dall'automazione CI.
+// detectWorkflowScoped. Park con `automation-deferred` per evitare ri-accodo
+// (parked-retry loop) su issue strutturalmente non-fixabili dall'automazione CI.
 
 /**
  * Conteggio di item dichiarato nel TITOLO di una follow-up aggregata
@@ -1242,7 +1245,7 @@ export function detectBacklogTracker(title, body) {
 // prose alone left ISSUES.md at ~23.0KB, still over the 22000B ceiling — the fix that
 // actually landed (#5519) extracted an appendix into a new file, a structural
 // editorial call a mechanical prose-edit does not reach. Promoting it re-pays the
-// same run (and, once it exhausts the turn budget, the same needs-human park) every
+// same run (and, once it exhausts the turn budget, the same automation-deferred park) every
 // time the ratchet re-fires. Park pre-promotion instead — the title is a fixed,
 // machine-generated constant the ratchet itself emits verbatim (never edited by a
 // human), so an exact match carries no false-positive risk.
@@ -1416,9 +1419,10 @@ function siblingFileHints(text) {
 // finestra citata dai bullet reali è dell'ordine della settimana. Default =
 // 2× il cooldown normale, con env dedicata.
 //
-// Niente `needs-human`: `isReparkableCandidate` lo tratta come stato assorbente
-// e la issue non tornerebbe mai in coda — cioè esattamente il «ferma per
-// sempre» che questo ramo esiste per togliere.
+// Niente nuova domanda `needs-human`: il cap tecnico usa `automation-deferred`,
+// che `isReparkableCandidate` tratta come stato assorbente finché lo sweep non
+// cambia il contesto — cioè esattamente il «ferma per sempre» che questo ramo
+// esiste per togliere senza coinvolgere il proprietario.
 const LBL_DATA_PENDING = 'fu-data-pending';
 
 const DATA_PENDING_RE = new RegExp([
@@ -1775,8 +1779,9 @@ export function isQueueManaged(iss) {
 /**
  * Candidate per il solo recovery di un checkpoint WIP parcheggiato.
  *
- * `classifyIssue` tratta `needs-human` come veto assorbente per il routing
- * normale. Qui il branch live è una prova più forte del veto: togliamo SOLO
+ * `classifyIssue` tratta `needs-human` e `automation-deferred` come veto
+ * assorbente per il routing normale. Qui il branch live è una prova più forte:
+ * togliamo SOLO
  * quella label dalla classificazione e conserviamo gli altri pin
  * (`backlog`, `crawler-transient`, ...), che continuano a escludere il lavoro
  * dal ciclo automatico.
@@ -1785,10 +1790,10 @@ export function isQueueManaged(iss) {
 export function isRecoverableQueueManaged(iss) {
   const labels = names(iss);
   if (hasActiveAgentClaim(iss)) return false;
-  if (!labels.includes('needs-human')) return isQueueManaged(iss);
+  if (!labels.includes('needs-human') && !labels.includes(LBL_AUTOMATION_DEFERRED)) return isQueueManaged(iss);
   const classification = classifyIssue(
     iss?.title,
-    labels.filter((label) => label !== 'needs-human'),
+    labels.filter((label) => label !== 'needs-human' && label !== LBL_AUTOMATION_DEFERRED),
   );
   // `publish` è l'unica categoria con route diretto `fix`: un crawler-fix può
   // parcheggiare anche questa issue dopo aver già pushato il checkpoint. Il
@@ -2390,7 +2395,7 @@ const reparkGenOf = (iss) => {
  * funzione, non un controllo sul testo del sorgente.
  *
  * Esclude: chi non è queue-managed; chi è già in lavorazione o in coda; chi è già
- * escalato a `needs-human` (too-large); i tracker permanenti (vedi
+ * differito a `automation-deferred` (too-large); i tracker permanenti (vedi
  * `isPermanentTracker`); chi ha esaurito il generation-cap.
  *
  * NB: nessuna di queste condizioni dipende dalla capacità del token. Il
@@ -2403,7 +2408,7 @@ export function isReparkableCandidate(iss) {
   if (hasActiveAgentClaim(iss)) return false;
   if (has(iss, LBL_FIX) || has(iss, LBL_QUEUED)) return false; // già in lavoro/coda
   if (has(iss, LBL_DECOMP_QUEUED) || has(iss, LBL_DECOMP) || has(iss, LBL_DECOMPOSED)) return false; // nello stadio decompose
-  if (has(iss, 'needs-human')) return false;                   // già escalato (too-large)
+  if (has(iss, 'needs-human') || has(iss, LBL_AUTOMATION_DEFERRED)) return false; // già differita/escalata
   if (isPermanentTracker(iss)) return false;                   // tracker permanente (#5615/#5544)
   return reparkGenOf(iss) < MAX_REPARK_GEN;                    // generation-cap
 }
@@ -2426,7 +2431,8 @@ export function isCrawlerRescueCandidate(iss) {
   if (hasActiveAgentClaim(iss)) return false;
   if (isQueueManaged(iss)) return false;      // quelli li prende `stuckFix`
   if (isFixerExempt(names(iss))) return false; // pin fuori dal ciclo (#7648)
-  if (has(iss, LBL_QUEUED) || has(iss, LBL_PARKED) || has(iss, 'needs-human')) return false;
+  if (has(iss, LBL_QUEUED) || has(iss, LBL_PARKED)
+      || has(iss, 'needs-human') || has(iss, LBL_AUTOMATION_DEFERRED)) return false;
   return !isDecomposedParent(iss);
 }
 
@@ -2620,7 +2626,9 @@ export function isIssueGroupable(issue, {
   if (!issueGroupingKey(issue, { repository })) return false;
   if (hasActiveAgentClaim(issue)) return false;
   if (isFixerExempt(names(issue))) return false;
-  if (has(issue, LBL_FIX) || has(issue, LBL_PARKED) || has(issue, 'needs-human') || has(issue, LBL_PROOF)) return false;
+  if (has(issue, LBL_FIX) || has(issue, LBL_PARKED)
+      || has(issue, 'needs-human') || has(issue, LBL_AUTOMATION_DEFERRED)
+      || has(issue, LBL_PROOF)) return false;
   if (isDecomposedParent(issue) || has(issue, LBL_DECOMP_QUEUED) || has(issue, LBL_DECOMP)) return false;
   if (detectCompressContractDocsRatchet(title) || detectMalformedBody(title, body)) return false;
   if (detectEpicTracker(title, body) || detectBacklogTracker(title, body)) return false;
@@ -2748,6 +2756,49 @@ function editChecked(num, { add = [], remove = [] }) {
     console.log(`::warning::edit checked #${num} fallito: ${String(e).slice(0, 160)}`);
     return false;
   }
+}
+
+let automationDeferredLabelReady = false;
+
+/** Ensure the technical handoff label exists before any terminal transition. */
+export function ensureAutomationDeferredLabel() {
+  if (automationDeferredLabelReady) return true;
+  const status = ensureLabel(
+    LBL_AUTOMATION_DEFERRED,
+    'fbca04',
+    AUTOMATION_DEFERRED_DESCRIPTION,
+  );
+  automationDeferredLabelReady = status !== 'failed';
+  return automationDeferredLabelReady;
+}
+
+/**
+ * Move an issue to the technical autonomous handoff state.
+ * The marker is the machine-readable reason consumed by the pre-pass/sweep;
+ * it deliberately never creates a new `needs-human` request.
+ */
+export function deferAutomationIssue(number, {
+  add = [],
+  remove = [],
+  reason = 'technical',
+  note = '',
+} = {}) {
+  const markerReason = String(reason || 'technical').toLowerCase().replace(/[^a-z0-9-]/g, '-') || 'technical';
+  if (DRY) {
+    console.log(`[dry] defer #${number} → ${LBL_AUTOMATION_DEFERRED} (${markerReason})`);
+    return true;
+  }
+  if (!ensureAutomationDeferredLabel()) return false;
+  if (!editChecked(number, {
+    add: [LBL_AUTOMATION_DEFERRED, ...add],
+    remove,
+  })) return false;
+  commentIssue(
+    number,
+    `<!-- AUTOMATION_DEFERRED: ${markerReason} -->${note ? `\n\n${note}` : ''}`,
+    'automation-deferred marker',
+  );
+  return true;
 }
 
 /** Close con la stessa rilettura live dei claim usata dagli edit. */
@@ -3323,8 +3374,8 @@ export function staleFixRescueGate({
 // discutibile; (c) col burst disinnescato a monte (triage-sweep: un solo
 // `agent:fix` diretto per run, e solo a slot libero) un secondo tentativo è già
 // raro — se ne servono tre, a uccidere la run è qualcos'altro rispetto alla coda
-// concurrency, ed è esattamente il momento in cui deve guardarla una persona.
-// Al tetto: `fu-parked` + `needs-human` (i crawler non passano dal parked-retry,
+// concurrency; il cap tecnico la esclude senza trasformarla in una domanda umana.
+// Al tetto: `fu-parked` + `automation-deferred` (i crawler non passano dal parked-retry,
 // che filtra su `isQueueManaged` → `fu-parked` da solo sarebbe uno stato
 // terminale che non guarda nessuno).
 export const CRAWLER_MAX_ATTEMPTS = intFromEnv('FOLLOWUP_CRAWLER_MAX_ATTEMPTS', MAX_ATTEMPTS);
@@ -3651,7 +3702,7 @@ export function runDrain() {
     const previousAttempt = attemptOf(iss);
     const previousAttemptLabel = previousAttempt ? `fu-attempt:${previousAttempt}` : null;
     const add = [LBL_QUEUED, `fu-attempt:${decision.nextAttempt}`];
-    const remove = [LBL_PARKED, 'needs-human', previousAttemptLabel].filter(Boolean);
+    const remove = [LBL_PARKED, 'needs-human', LBL_AUTOMATION_DEFERRED, previousAttemptLabel].filter(Boolean);
     if (DRY) {
       console.log(`[dry] RE-QUEUE PARKED-WIP #${iss.number} (${decision.reason}, branch ${recoverable.branch} ahead=${recoverable.aheadBy}) → agent:fix-queued`);
       parkedWipRequeued++;
@@ -3941,7 +3992,8 @@ export function runDrain() {
       // Chi è già in coda, in lavoro, nello stadio decompose o già escalato non
       // ha bisogno di un'uscita: ce l'ha. `needs-human` incluso, altrimenti
       // questo stadio ri-commenterebbe a ogni tick ciò che ha già instradato.
-      .filter((iss) => !has(iss, LBL_FIX) && !has(iss, LBL_QUEUED) && !has(iss, 'needs-human'))
+      .filter((iss) => !has(iss, LBL_FIX) && !has(iss, LBL_QUEUED)
+        && !has(iss, 'needs-human') && !has(iss, LBL_AUTOMATION_DEFERRED))
       .filter((iss) => !has(iss, LBL_DECOMP_QUEUED) && !has(iss, LBL_DECOMP) && !has(iss, LBL_DECOMPOSED))
       // Già flaggata da un giro precedente del ramo `flag`: rientrare non
       // produce nulla (il ramo fa `continue` sul marker) ma consuma uno slot del
@@ -4128,14 +4180,16 @@ export function runDrain() {
         continue;
       }
 
-      // escalate
-      if (DRY) { succeeded++; console.log(`[dry] escalate #${iss.number} → needs-human (verdict-exit: ${d.reason})`); continue; }
-      if (!edit(iss.number, { add: ['needs-human'], remove: [LBL_FIX, LBL_QUEUED] })) continue;
-      succeeded++;
-      commentIssue(iss.number,
-        `🙋 **Escalata dal followup-drainer (zero-Claude)**: verdetto \`FIX_OUTCOME: ${outcome}\`. È una capacità che la CI non ha (secret, admin, scope \`workflows\`), un lavoro manuale/editoriale, o una causa che il fixer non ha trovato: ri-provare riproduce lo stesso verdetto allo stesso prezzo.\n\nPrima di questa escalation la issue restava \`fu-parked\` e nessuno stadio la guardava. Ora entra nello sweep \`needs-human\` (VISION.md), che è la porta di rientro.`,
-        'verdict-exit escalation comment');
-      console.log(`VERDICT-EXIT escalate #${iss.number} → needs-human (${outcome}) — "${iss.title?.slice(0, 50)}"`);
+      // Defer tecnico: un verdetto fermo non è una decisione del proprietario.
+      const note = `⏸️ **Differita dal followup-drainer (zero-Claude)**: verdetto \`FIX_OUTCOME: ${outcome}\`. Riprovare senza cambiare input riprodurrebbe lo stesso esito allo stesso prezzo; lo sweep deve prima cambiare contesto, scheda o capacità.`;
+      if (deferAutomationIssue(iss.number, {
+        remove: [LBL_FIX, LBL_QUEUED],
+        reason: 'technical',
+        note,
+      })) {
+        succeeded++;
+        console.log(`VERDICT-EXIT defer #${iss.number} → ${LBL_AUTOMATION_DEFERRED} (${outcome}) — "${iss.title?.slice(0, 50)}"`);
+      }
     }
     if (succeeded) console.log(`verdict-exit: ${succeeded} uscite terminali su ${scanned} candidate lette (tentate ${attempted}, pool parked ${parked.length}).`);
     else if (scanned) {
@@ -4151,16 +4205,17 @@ export function runDrain() {
   // col fixer migliorato e NON ha MAI prodotto una PR = pure-run-death
   // (error_max_turns ripetuto / too-large). NON va ri-tentato: ~3 run opus per
   // generazione bruciati per nulla (#1806/#1823/#1688/#1911 osservati parked
-  // gen-1 PR-ever:0, 10 fail issue-fix/4h). Escala a `needs-human` SUBITO —
-  // è la decisione "smetti di ritentare", l'OPPOSTO di un re-queue, quindi NON
+  // gen-1 PR-ever:0, 10 fail issue-fix/4h). Differisce con `automation-deferred` SUBITO —
+  // è una decisione tecnica "smetti di ritentare", l'OPPOSTO di un re-queue, quindi NON
   // deve essere gated dal cooldown del re-queue (bug wave12: il cooldown 2gg
   // teneva questi item parked-e-riciclati invece di escalarli). Gira sempre;
-  // needs-human li toglie dal reparkable → mai più ri-bruciati. WF-scope esclusi.
+  // automation-deferred li toglie dal reparkable → mai più ri-bruciati. WF-scope esclusi.
   {
     const tooLarge = listIssues(LBL_PARKED)
       .filter((iss) => isQueueManaged(iss))
       .filter((iss) => !hasActiveAgentClaim(iss))
-      .filter((iss) => !has(iss, LBL_FIX) && !has(iss, LBL_QUEUED) && !has(iss, 'needs-human'))
+      .filter((iss) => !has(iss, LBL_FIX) && !has(iss, LBL_QUEUED)
+        && !has(iss, 'needs-human') && !has(iss, LBL_AUTOMATION_DEFERRED))
       .filter((iss) => reparkGenOf(iss) >= 1)
       .filter((iss) => !isWorkflowScoped(iss.number))
       .filter((iss) => !hasFixPREver(iss.number));
@@ -4169,7 +4224,7 @@ export function runDrain() {
       if (!budget.take(`#${iss.number} (too-large)`, ITEM_COST_MS)) break;
       // Too-large con lo stadio di decomposizione attivo NON è più un vicolo
       // cieco: "troppo grande per un run" è esattamente il caso d'uso dello
-      // scorporo. `needs-human` resta il fallback per chi non è eleggibile
+      // scorporo. `automation-deferred` resta il fallback tecnico per chi non è eleggibile
       // (già decomposta una volta, o figlia di una decomposizione: lì il
       // ri-scorporo non è la risposta e serve davvero una persona).
       if (DECOMPOSE_ENABLED && isDecomposeEligible(iss)) {
@@ -4180,11 +4235,12 @@ export function runDrain() {
         });
         continue;
       }
-      if (DRY) { console.log(`[dry] too-large #${iss.number} (gen ${reparkGenOf(iss)}, 0 PR) → needs-human`); continue; }
-      if (!edit(iss.number, { add: ['needs-human'], remove: [] })) continue;
-      console.log(`TOO-LARGE #${iss.number} → needs-human (gen ${reparkGenOf(iss)}, mai una PR = error_max_turns/too-large; non eleggibile alla decomposizione) — "${iss.title?.slice(0, 45)}"`);
+      const note = `⏸️ **Differita dal followup-drainer (zero-Claude)**: ${reparkGenOf(iss)} generazione/i senza una PR e senza decomposizione possibile. Serve cambiare l'input prima di un nuovo tentativo automatico.`;
+      if (deferAutomationIssue(iss.number, { reason: 'technical', note })) {
+        console.log(`TOO-LARGE #${iss.number} → ${LBL_AUTOMATION_DEFERRED} (gen ${reparkGenOf(iss)}, mai una PR; non eleggibile alla decomposizione) — "${iss.title?.slice(0, 45)}"`);
+      }
     }
-    if (tooLarge.length) console.log(`too-large escalation: ${tooLarge.length} processate (decompose se eleggibili, altrimenti needs-human).`);
+    if (tooLarge.length) console.log(`too-large escalation: ${tooLarge.length} processate (decompose se eleggibili, altrimenti automation-deferred).`);
   }
 
   // --- SIBLING-DEBT: etichetta il gemello dichiarato in prosa ----------------
@@ -4601,10 +4657,12 @@ export function runDrain() {
       const previousAttempt = attemptOf(iss);
       const previousLabel = previousAttempt ? `fu-attempt:${previousAttempt}` : null;
       if (recoverableDecision.action === 'park-attempts') {
-        console.log(`PARK #${iss.number} (${recoverableDecision.reason}, branch ${recoverable?.branch} ahead=${recoverable?.aheadBy}) → fu-parked + needs-human`);
-        edit(iss.number, {
-          add: [LBL_PARKED, 'needs-human', `fu-attempt:${recoverableDecision.nextAttempt}`],
+        console.log(`PARK #${iss.number} (${recoverableDecision.reason}, branch ${recoverable?.branch} ahead=${recoverable?.aheadBy}) → fu-parked + ${LBL_AUTOMATION_DEFERRED}`);
+        deferAutomationIssue(iss.number, {
+          add: [LBL_PARKED, `fu-attempt:${recoverableDecision.nextAttempt}`],
           remove: [LBL_FIX, LBL_QUEUED, previousLabel].filter(Boolean),
+          reason: 'technical',
+          note: '⏸️ Il checkpoint WIP esiste ma il run ha raggiunto il tetto di tentativi: il retry automatico richiede un contesto aggiornato.',
         });
       } else {
         console.log(`RE-QUEUE #${iss.number} (${recoverableDecision.reason}, branch ${recoverable?.branch} ahead=${recoverable?.aheadBy}) → resume-aware retry`);
@@ -4696,7 +4754,7 @@ export function runDrain() {
     // lo stesso item lo riproduce a parità di turni. Con il circuit-breaker
     // (is_aggregate un item alla volta) e il cap alzato (50 turni high / 40 normal),
     // chi esaurisce il budget al primo colpo è genuinamente too-large — il retry
-    // non lo salva. Park + needs-human SUBITO: 1 attempt invece di 2 (#2052).
+    // non lo salva. Park + automation-deferred SUBITO: 1 attempt invece di 2 (#2052).
     // Marker `max-turns` emesso da issue-fix.yml SOLO sul subtype error_max_turns
     // (i fail transienti hanno altro subtype → restano ri-tentabili: nessuna
     // falsa escalation). Boundary: già fissato dal too-large-escalation pass
@@ -4704,7 +4762,7 @@ export function runDrain() {
     if (outcome === 'max-turns') {
       // error_max_turns è deterministico sul turn-budget: ri-tentare TAL QUALE
       // riproduce l'esito. Ma da quando esiste lo stadio di decomposizione, la
-      // risposta giusta non è più l'uscita dal ciclo (`needs-human` assorbente,
+      // risposta giusta non è più l’uscita dal ciclo (`automation-deferred`,
       // 47 issue accumulate al 2026-08-21): è lo scorporo in unità che nel
       // budget ci stanno. Il run bruciato resta bruciato; il prossimo lavora
       // su sub-issue con scheda, dove il fixer ha la resa più alta (misurato:
@@ -4717,8 +4775,13 @@ export function runDrain() {
         });
         continue;
       }
-      console.log(`PARK #${iss.number} → needs-human (error_max_turns, non eleggibile alla decomposizione: già decomposta o figlia di una decomposizione)`);
-      edit(iss.number, { add: [LBL_PARKED, 'needs-human'], remove: [LBL_FIX, LBL_QUEUED] });
+      console.log(`PARK #${iss.number} → ${LBL_AUTOMATION_DEFERRED} (error_max_turns, non eleggibile alla decomposizione: già decomposta o figlia di una decomposizione)`);
+      deferAutomationIssue(iss.number, {
+        add: [LBL_PARKED],
+        remove: [LBL_FIX, LBL_QUEUED],
+        reason: 'technical',
+        note: '⏸️ Il turn-budget è esaurito su un input già decomposto: il prossimo tentativo richiede nuovo contesto, non una ripetizione identica.',
+      });
       continue;
     }
     // rescue/park per età-tentativi (run davvero morta, nessun verdetto)
@@ -4835,16 +4898,18 @@ export function runDrain() {
       continue;
     }
     // park-max-turns | park-verdict | park-attempts → stato terminale VISIBILE.
-    // `needs-human` e non solo `fu-parked`: i crawler non passano dal
+    // `automation-deferred` e non solo `fu-parked`: i crawler non passano dal
     // parked-retry (filtra su `isQueueManaged`) né dall'age-out close (idem),
     // quindi `fu-parked` da solo sarebbe uno stato che non guarda nessuno. Il
     // contatore dei tentativi resta sulla issue come tracciato forense; solo il
     // park al tetto lo aggiorna (prev → next).
     const bumped = d.action === 'park-attempts';
-    console.log(`PARK CRAWLER ${tag} (${d.reason}) → fu-parked + needs-human`);
-    edit(iss.number, {
-      add: [LBL_PARKED, 'needs-human', ...(bumped ? [`fu-attempt:${d.nextAttempt}`] : [])],
+    console.log(`PARK CRAWLER ${tag} (${d.reason}) → fu-parked + ${LBL_AUTOMATION_DEFERRED}`);
+    deferAutomationIssue(iss.number, {
+      add: [LBL_PARKED, ...(bumped ? [`fu-attempt:${d.nextAttempt}`] : [])],
       remove: [LBL_FIX, ...(bumped ? [prevAttemptLabel] : [])].filter(Boolean),
+      reason: 'technical',
+      note: `⏸️ Crawler parcheggiato per un blocco tecnico (${d.reason}). Lo sweep deve cambiare input o osservabilità prima del retry.`,
     });
   }
 
@@ -4859,7 +4924,7 @@ export function runDrain() {
   // RESCUE: una run issue-decompose morta (sfratto in coda concurrency, crash,
   // 429) lascia `agent:decompose` senza esito né figlie — lo stesso stato
   // orfano di `agent:fix` (#5514). Ri-arma UNA volta (`decompose-retried`),
-  // alla seconda morte park+needs-human: bounded, niente loop. Il guard
+  // alla seconda morte park+automation-deferred: bounded, niente loop. Il guard
   // `inFlightDecomposeCount()==0` impedisce di yankare la label da una run VIVA.
   if (DECOMPOSE_ENABLED && !quotaBlocksPromotions) {
     const decompInFlight = inFlightDecomposeCount();
@@ -4878,8 +4943,13 @@ export function runDrain() {
         const ageMin = minutesSince(iss.updatedAt);
         if (ageMin < ORPHAN_MIN_AGE_MIN) continue; // run appena partita/registrata → aspetta
         if (has(iss, LBL_DECOMP_RETRIED)) {
-          console.log(`PARK DECOMPOSE #${iss.number} (seconda run morta senza esito) → fu-parked + needs-human`);
-          edit(iss.number, { add: [LBL_PARKED, 'needs-human'], remove: [LBL_DECOMP] });
+          console.log(`PARK DECOMPOSE #${iss.number} (seconda run morta senza esito) → fu-parked + ${LBL_AUTOMATION_DEFERRED}`);
+          deferAutomationIssue(iss.number, {
+            add: [LBL_PARKED],
+            remove: [LBL_DECOMP],
+            reason: 'technical',
+            note: '⏸️ La decomposizione è morta due volte senza produrre schede: serve nuovo contesto prima di riaprire il planner.',
+          });
           continue;
         }
         console.log(`RE-ARM DECOMPOSE #${iss.number} (run morta senza esito) → agent:decompose-queued + decompose-retried`);
@@ -5215,10 +5285,14 @@ export function runDrain() {
     if (detectMalformedBody(cand.title, body)) {
       const blen = String(body || '').trim().length;
       console.log(`PARK #${cand.number} (malformed body, ${blen} chars) → no promozione, fixer non ha contesto`);
-      const note = `⛔ **Pre-flight drainer (zero-Claude, #2291)**: il body di questa follow-up è vuoto o malformato (${blen} chars, nessuna sezione \`## Origine\`/\`### N.\`). Promuoverla a \`agent:fix\` brucerebbe turni senza produrre una PR — il fixer non ha contesto su cosa fixare.\n\n**Non promuovo**: correggi il body dell'issue (sezioni \`## Origine\` + \`## Item\` obbligatorie) o ri-apri il follow-up con una descrizione completa. Parko con \`needs-human\`.\n\n<!-- FIX_OUTCOME: no-root-cause -->`;
+      const note = `⛔ **Pre-flight drainer (zero-Claude, #2291)**: il body di questa follow-up è vuoto o malformato (${blen} chars, nessuna sezione \`## Origine\`/\`### N.\`). Promuoverla a \`agent:fix\` brucerebbe turni senza produrre una PR — il fixer non ha contesto su cosa fixare.\n\n**Non promuovo**: correggi il body dell'issue (sezioni \`## Origine\` + \`## Item\` obbligatorie) o ri-apri il follow-up con una descrizione completa. Il blocco tecnico rientra nello sweep automatico.\n\n<!-- FIX_OUTCOME: no-root-cause -->`;
       if (DRY) { console.log(`[dry] park #${cand.number} (malformed body)`); continue; }
-      commentIssue(cand.number, note, 'malformed-body park comment');
-      edit(cand.number, { add: [LBL_PARKED, 'needs-human'], remove: [LBL_QUEUED, LBL_FIX] });
+      deferAutomationIssue(cand.number, {
+        add: [LBL_PARKED],
+        remove: [LBL_QUEUED, LBL_FIX],
+        reason: 'technical',
+        note,
+      });
       continue; // prova il prossimo in coda
     }
 

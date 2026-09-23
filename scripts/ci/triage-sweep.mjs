@@ -67,7 +67,11 @@
  *       GITHUB_PAT (routing), GH_REPO/GITHUB_REPOSITORY.
  */
 import { execFileSync } from 'node:child_process';
-import { classifyIssue, isFixerExempt } from '../lib/classify-issue.mjs';
+import {
+  AUTOMATION_DEFERRED_LABEL,
+  classifyIssue,
+  isFixerExempt,
+} from '../lib/classify-issue.mjs';
 
 const REPO = process.env.GH_REPO || process.env.GITHUB_REPOSITORY || '';
 const PAT = process.env.GITHUB_PAT || '';
@@ -141,7 +145,15 @@ const has = (iss, n) => names(iss).includes(n);
 // quindi la label non nuova non arriva mai sulla issue mentre quella vecchia non
 // viene mai rimossa — la issue resta bloccata sul contatore precedente,
 // ritentata a ogni giro senza mai raggiungere `fu-parked`.
-export const ROUTING_LABELS = ['agent:fix', 'agent:fix-queued', 'fu-parked', 'fu-attempt:1', 'fu-attempt:2', 'fu-attempt:3'];
+export const ROUTING_LABELS = [
+  'agent:fix',
+  'agent:fix-queued',
+  'fu-parked',
+  AUTOMATION_DEFERRED_LABEL,
+  'fu-attempt:1',
+  'fu-attempt:2',
+  'fu-attempt:3',
+];
 
 /** Il secondo passaggio non deve riesaminare i pin già esclusi dal routing. */
 export function isTriagedButNotRouted(iss) {
@@ -252,7 +264,8 @@ function main() {
         if (DRY) { console.log(`[dry] #${n} → agent:fix-queued + fu-prio:${prio}${why}`); if (crawlerToQueue) crawlerQueued++; else routedQueue++; continue; }
         try {
           gh(['issue', 'edit', String(n), '--repo', REPO,
-            '--add-label', 'agent:fix-queued', '--add-label', `fu-prio:${prio}`], { json: false, token: PAT });
+            '--add-label', 'agent:fix-queued', '--add-label', `fu-prio:${prio}`,
+            '--remove-label', AUTOMATION_DEFERRED_LABEL], { json: false, token: PAT });
           console.log(`#${n} → agent:fix-queued + fu-prio:${prio} (drainer).${why}`);
           if (crawlerToQueue) crawlerQueued++; else routedQueue++;
         } catch (e) { console.log(`::warning::#${n} accodamento PAT fallito: ${String(e).slice(0, 100)}`); }
@@ -260,7 +273,8 @@ function main() {
         // crawler non-transient → agent:fix (sotto cap, già verificato sopra).
         if (DRY) { console.log(`[dry] #${n} → agent:fix (crawler)`); routedFix++; continue; }
         try {
-          gh(['issue', 'edit', String(n), '--repo', REPO, '--add-label', 'agent:fix'], { json: false, token: PAT });
+          gh(['issue', 'edit', String(n), '--repo', REPO,
+            '--add-label', 'agent:fix', '--remove-label', AUTOMATION_DEFERRED_LABEL], { json: false, token: PAT });
           console.log(`#${n} → agent:fix (crawler, triggera issue-fix).`);
           routedFix++;
         } catch (e) { console.log(`::warning::#${n} agent:fix PAT fallito: ${String(e).slice(0, 100)}`); }
@@ -319,14 +333,16 @@ function main() {
         if (DRY) { console.log(`[dry] #${n} triaged-no-route → agent:fix-queued + fu-prio:${prio}${why}`); if (crawlerToQueue) crawlerQueued++; else routedQueue++; continue; }
         try {
           gh(['issue', 'edit', String(n), '--repo', REPO,
-            '--add-label', 'agent:fix-queued', '--add-label', `fu-prio:${prio}`], { json: false, token: PAT });
+            '--add-label', 'agent:fix-queued', '--add-label', `fu-prio:${prio}`,
+            '--remove-label', AUTOMATION_DEFERRED_LABEL], { json: false, token: PAT });
           console.log(`#${n} triaged-no-route → agent:fix-queued + fu-prio:${prio}.${why}`);
           if (crawlerToQueue) crawlerQueued++; else routedQueue++;
         } catch (e) { console.log(`::warning::#${n} triaged-no-route accodamento fallito: ${String(e).slice(0, 100)}`); }
       } else if (route === 'fix') {
         if (DRY) { console.log(`[dry] #${n} triaged-no-route → agent:fix (crawler)`); routedFix++; continue; }
         try {
-          gh(['issue', 'edit', String(n), '--repo', REPO, '--add-label', 'agent:fix'], { json: false, token: PAT });
+          gh(['issue', 'edit', String(n), '--repo', REPO,
+            '--add-label', 'agent:fix', '--remove-label', AUTOMATION_DEFERRED_LABEL], { json: false, token: PAT });
           console.log(`#${n} triaged-no-route → agent:fix (crawler).`);
           routedFix++;
         } catch (e) { console.log(`::warning::#${n} triaged-no-route agent:fix fallito: ${String(e).slice(0, 100)}`); }

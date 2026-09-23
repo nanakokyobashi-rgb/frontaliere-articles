@@ -72,6 +72,7 @@
  */
 import { execFileSync } from 'node:child_process';
 import { isAggregate } from './check-issue-already-resolved.mjs';
+import { AUTOMATION_DEFERRED_LABEL } from '../lib/classify-issue.mjs';
 // Il marker di verdetto ha UNA definizione, non una quinta copia: vedi il punto
 // 4 dell'intestazione.
 import { FIX_OUTCOME_RE } from './close-recovered-failure-issues.mjs';
@@ -961,6 +962,17 @@ function decideAction({
     if (labels.includes(l)) return { action: 'keep', reason: `già in lavorazione (${l})` };
   }
 
+  // Un defer tecnico è un handoff interno, non una domanda per il proprietario.
+  // Lo sweep settimanale è il solo stadio autorizzato a cambiare l'input e
+  // rimuovere questa label; il pre-pass giornaliero non deve ripetere alla cieca
+  // una diagnosi che ha già prodotto un terminale tecnico.
+  if (labels.includes(AUTOMATION_DEFERRED_LABEL)) {
+    return {
+      action: 'keep',
+      reason: 'handoff tecnico: serve nuovo contesto o una nuova misura prima del requeue automatico',
+    };
+  }
+
   // PRIMA del verdetto: una rotazione di credenziale resta del proprietario
   // qualunque cosa un fixer abbia registrato passando di lì.
   const ownerOnly = OWNER_ONLY_TITLE_PATTERNS.find((re) => re.test(title));
@@ -1225,16 +1237,19 @@ function main() {
   const visionAutonomy = readVisionAutonomyContract();
   let issues = [];
   try {
-    issues = gh(['issue', 'list', '--repo', REPO, '--state', 'open', '--label', 'needs-human',
-      // `body` entra qui e non con una chiamata per issue: `gh issue list` lo
-      // serve nella stessa risposta, quindi il riconoscimento del registro e
-      // quello dei blocchi scaduti costano ZERO chiamate in piu' sull'elenco.
-      '--json', 'number,title,body,labels,updatedAt', '--limit', '300']);
+    const fields = ['--json', 'number,title,body,labels,updatedAt', '--limit', '300'];
+    const human = gh(['issue', 'list', '--repo', REPO, '--state', 'open', '--label', 'needs-human', ...fields]);
+    const deferred = gh(['issue', 'list', '--repo', REPO, '--state', 'open', '--label', AUTOMATION_DEFERRED_LABEL, ...fields]);
+    const byNumber = new Map();
+    for (const issue of [...(human || []), ...(deferred || [])]) byNumber.set(String(issue.number), issue);
+    issues = [...byNumber.values()];
   } catch (e) {
     console.log(`::warning::needs-human-prepass: elenco non leggibile (${String(e).slice(0, 100)}) → nessuna azione.`);
     return;
   }
-  console.log(`needs-human-prepass — repo ${REPO}, ${issues.length} issue \`needs-human\`, registro VISION.md (${SITE_REPO}): ${registry.length} righe, autonomy=${visionAutonomy}${DRY ? ' [DRY-RUN]' : ''}`);
+  const humanCount = issues.filter((issue) => (issue.labels || []).some((label) => label.name === 'needs-human')).length;
+  const deferredCount = issues.filter((issue) => (issue.labels || []).some((label) => label.name === AUTOMATION_DEFERRED_LABEL)).length;
+  console.log(`needs-human-prepass — repo ${REPO}, ${issues.length} issue candidate (${humanCount} \`needs-human\`, ${deferredCount} \`${AUTOMATION_DEFERRED_LABEL}\`), registro VISION.md (${SITE_REPO}): ${registry.length} righe, autonomy=${visionAutonomy}${DRY ? ' [DRY-RUN]' : ''}`);
 
   // Le più stantie prima: sono quelle che aspettano da più tempo, e il cap non
   // deve tagliarle sempre. `gh issue list` ordina dalla più recente.
@@ -1406,6 +1421,7 @@ function main() {
     const steps = [
       { what: `label ${add}`, args: routeArgs },
       { what: 'rimozione needs-human', args: ['issue', 'edit', String(iss.number), '--repo', REPO, '--remove-label', 'needs-human'] },
+      { what: `rimozione ${AUTOMATION_DEFERRED_LABEL}`, args: ['issue', 'edit', String(iss.number), '--repo', REPO, '--remove-label', AUTOMATION_DEFERRED_LABEL] },
       { what: 'rimozione fu-parked', args: ['issue', 'edit', String(iss.number), '--repo', REPO, '--remove-label', 'fu-parked'] },
       { what: 'nota di instradamento', args: ['issue', 'comment', String(iss.number), '--repo', REPO, '--body', note] },
     ];

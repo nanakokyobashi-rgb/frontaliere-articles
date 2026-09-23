@@ -1,11 +1,11 @@
-name: Needs-human sweep (Codex Luna Max, weekly)
+name: Automation backlog sweep (Codex Luna Max, weekly)
 
-# L'UNICA porta di rientro dallo stato `needs-human` — adattamento corpus del
-# gemello del sito (manifest: `adapted`), portato qui il 2026-08-25.
+# Sweep degli stati `needs-human` + `automation-deferred` — adattamento corpus
+# del gemello del sito (manifest: `adapted`), portato qui il 2026-08-25.
 #
 # ## Perché serviva anche qui
 #
-# `needs-human` è ASSORBENTE su questo repo: verificato il 2026-08-25, zero
+# `needs-human` era ASSORBENTE su questo repo: verificato il 2026-08-25, zero
 # workflow sotto `.github/workflows/` nomina `needs-human` o `vision`. Il sito ha
 # chiuso il buco il 2026-08-21; il corpus non ha mai ricevuto l'infrastruttura,
 # ed è rimasto nello stesso stato che il sito aveva PRIMA di quella data.
@@ -26,9 +26,10 @@ name: Needs-human sweep (Codex Luna Max, weekly)
 # - è **bounded**: max 15 azioni per run, il resto al giro successivo.
 #
 # Esiti per issue: (A) decisione vera del proprietario → resta `needs-human` ed
-# entra nel digest con la domanda DECIDIBILE; (B) capability oggi disponibile /
-# difetto tecnico → rientra in coda (fix o decompose); (C) claim non più vera →
-# chiusa con la misura; (D) parcheggiata giusta → non si tocca.
+# entra nel digest con la domanda DECIDIBILE; (B) capability/input/diagnosi
+# tecnica → rientra in coda dopo aver cambiato il contesto; (C) claim non più
+# vera → chiusa con la misura; (D) defer tecnico ancora reale → resta
+# `automation-deferred`, senza domanda al proprietario.
 #
 # ── ADATTAMENTI rispetto al sito ────────────────────────────────────────────
 #
@@ -231,24 +232,24 @@ jobs:
           codex_github_token: ${{ env.GITHUB_PAT_NANAKO }}
           codex_site_github_token: ${{ env.GITHUB_PAT }}
           prompt: |
-            Sei lo sweep settimanale delle issue `needs-human` di questo repo (il CORPUS, `$REPO`). Il tuo compito: separare le decisioni VERE del proprietario dal resto, e rimettere il resto nel ciclo autonomo. NON implementi fix e NON apri PR.
+            Sei lo sweep settimanale del backlog `needs-human` + `automation-deferred` di questo repo (il CORPUS, `$REPO`). Il tuo compito: lasciare all'umano solo decisioni realmente mancanti e rimettere il resto nel ciclo autonomo. NON implementi fix e NON apri PR.
 
             **Bootstrap:**
             1. Leggi `VISION.md` PER INTERO. Questo repo NON ne ha una copia, ed è deliberato: la sorgente unica è quella del SITO. Recuperala con lo stesso comando di `issue-decompose.yml`: `gh api --repo valerielinc-ops/frontaliere-si-o-no repos/valerielinc-ops/frontaliere-si-o-no/contents/VISION.md --jq .content | base64 -d`. I driver di decisione (D1-D8) e il registro delle decisioni già prese sono il tuo criterio di classificazione. La lista «Sempre umano» è stata RIMOSSA il 2026-08-24 (istruzione diretta del proprietario, registro in VISION.md): non esiste più una categoria di business riservata all'umano. Se il recupero fallisce, FERMATI e posta il motivo sul digest: senza i driver non hai criterio, e classificare a intuito è il modo di far implementare al fixer scelte che non gli spettano.
-            2. `gh issue list --repo $REPO --state open --label needs-human --json number,title,labels,createdAt,updatedAt --limit 100` — ordina per updatedAt crescente (le più ferme prima).
+            2. `gh issue list --repo $REPO --state open --label needs-human --json number,title,labels,createdAt,updatedAt --limit 100` e `gh issue list --repo $REPO --state open --label automation-deferred --json number,title,labels,createdAt,updatedAt --limit 100` — unisci per numero e ordina per updatedAt crescente (le più ferme prima).
 
             **Per ogni issue (MASSIMO 15 azioni totali in questo run — un'azione = un cambio di label/stato; le issue oltre il cap restano al giro successivo):**
             1. Leggi body + commenti + data di apertura (`gh issue view N --repo $REPO --json body,comments,labels,createdAt`). Cerca PRIMA una decisione del proprietario già registrata nel registro di VISION.md: se c'è, la issue non è più una domanda — applicala.
             2. Classifica in UNA delle quattro:
-               - **A — vero vicolo cieco**: NESSUN driver la copre, e non è un blocco di capacità (quello è B). Con «Sempre umano» rimossa questa classe dovrebbe essere quasi sempre vuota: prima di usarla, verifica che non sia semplicemente una decisione di prodotto/contenuto che ORA il ciclo può prendere da sé citando D1-D8. Se davvero nessun driver risponde, NON toccare le label e aggiungila al digest formulando la domanda in modo DECIDIBILE.
-               - **B — capability/permessi**: era bloccata da una capacità che oggi esiste (i secret sono autorizzati in modo permanente dal 2026-08-24 e `issue-fix.yml` carica Remote Config prima del run; `GITHUB_PAT_NANAKO` dà lo scope `workflows`; lo stadio di decomposizione esiste per le issue grandi). Commento che cita il driver o la capacità + `gh issue edit N --repo $REPO --remove-label needs-human --remove-label fu-parked --add-label agent:fix-queued --add-label agent:vision-approved` (issue singola con causa chiara) oppure `--add-label agent:decompose-queued` (issue grande/contenitore: più cause o più target). Per una issue riaperta nel fixer, includi anche `<!-- VISION_AUTONOMY: vision-v1 -->` nel commento: è il contratto auditabile del rientro automatico.
+               - **A — decisione del proprietario davvero mancante**: VISION.md e DECISIONS.md non rispondono alla scelta necessaria. NON formulare «serve indagine» o «approvare il fix»: posta una domanda decidibile con opzioni, evidenza richiesta e criterio di accettazione; aggiungi `needs-human` e il marker `<!-- OWNER_DECISION_REQUEST: ... -->`, rimuovi `automation-deferred` solo se era un handoff tecnico. Questa è l'unica uscita che può richiedere una risposta del proprietario.
+               - **B — capability/input o diagnosi tecnica**: la decisione esiste già nei documenti oppure il lavoro è eseguibile con le capacità attuali. Misura la causa, completa la scheda se manca, quindi rimuovi `needs-human`/`automation-deferred`/`fu-parked` e usa `agent:fix-queued` per una issue atomica o `agent:decompose-queued` per una grande/contenitore; aggiungi `agent:vision-approved` quando il rientro F1/F7 è autorizzato dal contratto VISION. Per una issue riaperta nel fixer, includi anche `<!-- VISION_AUTONOMY: vision-v1 -->` nel commento.
                - **C — claim scaduta**: il difetto descritto non esiste più (verificalo con la misura più economica che decide: un comando dal body, un grep sul codice, una gh api). Ricorda che i numeri nelle issue scadono: rimisura, non fidarti del body. Commento con la misura osservata e il comando che la riproduce, poi `gh issue close N --repo $REPO`. Se NON riesci a misurare, NON chiudere: trattala come A o lasciala.
-               - **D — parcheggiata giusta**: `needs-human` corretto e già nel digest/registro. Non toccare nulla, non rimetterla nel digest se già presente. Ci rientra la famiglia delle CREDENZIALI (`Agent loop down: GITHUB_PAT…`, `GH_PAT expiry warning:`): la rotazione è stata DECLINATA dal proprietario il 2026-08-18 e il ciclo non può comunque agirci — non riproporla.
+               - **D — defer tecnico ancora reale**: il fixer ha fallito per input/turn-budget/causa non convergente o capability assente. Non chiedere nulla al proprietario: riscrivi il body/commento con ciò che manca e lascia `automation-deferred`; fai rientrare solo dopo avere cambiato l'input. Un terminale tecnico non diventa `needs-human`.
             3. VINCOLI: mai chiudere ciò che non hai misurato; mai rimuovere `agent:no-age-out`; un'issue con PR aperta collegata non si tocca; prima di instradare una fix verifica il `mode` in `scripts/ci/loop-sync-manifest.json` — una issue su un file `identical` si ripara SUL SITO, e ri-accodarla qui produrrebbe una PR che il mirror sovrascrive.
 
             **Guardia obbligatoria per la chiusura delle issue di failure.** Prima di qualsiasi `gh issue close` su un titolo che corrisponde a `^(Workflow|Crawler|CI) Failure: `, applica lo stesso oracolo di `scripts/ci/close-recovered-failure-issues.mjs`: per `Workflow Failure:` e `CI Failure:` esegui `gh run list -w "$workflow_name" -b main -L 100 --json databaseId,conclusion,status,createdAt`, filtra le sole run con `status == `completed``, ordinale per `createdAt` decrescente e usa l'ultima; deve avere `conclusion == `success`` e una data successiva a `createdAt` dell'issue. Per `Crawler Failure: Run <slug>` devi usare la stessa risoluzione gruppo→step del reconciler e verificare la conclusione dello step nella run completata più recente su `main`. Se l'ultima run/step è rossa, `cancelled`, assente o non leggibile, **NON chiudere**: lascia l'issue aperta e commenta la misura. Un `maybe-resolved`, un verdetto o una decisione di sweep non sostituiscono questa prova.
 
-            **Digest (ultima azione, sempre):** una sola issue col titolo ESATTO `${{ steps.digest_title.outputs.title }}` (cerca fra le aperte con `gh search issues --repo $REPO`; se trovi più di una issue col titolo esatto, NON scegliere la prima: fermati e segnala l'ambiguità). Se non esiste creala con label `needs-human,automation,agent:no-age-out`. Sostituisci/aggiorna il body con: l'elenco delle domande di classe A (numero, domanda decidibile, opzioni), le decisioni applicate in questo run (classe B/C, con issue e driver citato), e il conteggio residuo `needs-human`. Il body deve restare leggibile in 2 minuti: le domande sono POCHE e decidibili, o lo sweep ha fallito il suo compito.
+            **Digest (ultima azione, sempre):** una sola issue col titolo ESATTO `${{ steps.digest_title.outputs.title }}` (cerca fra le aperte con `gh search issues --repo $REPO`; se trovi più di una issue col titolo esatto, NON scegliere la prima: fermati e segnala l'ambiguità). Se non esiste creala con label `needs-human,automation,agent:no-age-out`. Sostituisci/aggiorna il body con: l'elenco delle domande di classe A (numero, domanda decidibile, opzioni), le decisioni applicate in questo run (classe B/C, con issue e driver citato), e due conteggi residui separati: `needs-human` e `automation-deferred`. Il body deve restare leggibile in 2 minuti: le domande sono POCHE e decidibili, o lo sweep ha fallito il suo compito.
 
             **Telemetria:** chiudi postando sul digest un commento con l'ultimo marker su riga propria: `<!-- SWEEP_OUTCOME: a=<n> b=<n> c=<n> d=<n> -->`.
 
