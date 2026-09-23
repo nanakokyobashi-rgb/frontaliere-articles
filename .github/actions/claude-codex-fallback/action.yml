@@ -1179,6 +1179,11 @@ runs:
         codex_started_ms="$(date +%s%3N 2>/dev/null || printf '0')"
         case "$codex_started_ms" in *[!0-9]*|'') codex_started_ms=0 ;; esac
         set +e
+        # Keep the JSONL stream in its bounded diagnostics file only. Sending
+        # every event to the Actions log gives the runner's log sink a second
+        # write surface; when that sink closes or rate-limits during watchdog
+        # termination, `pipefail` misreports its failure as a diagnostics-file
+        # write failure. The file below is the canonical classifier input.
         printf '%s' "$prompt" | env -i "${codex_env[@]}" "$codex_timeout_bin" \
           --signal=TERM \
           --kill-after="${codex_exec_kill_grace_seconds}s" \
@@ -1196,7 +1201,7 @@ runs:
           -c "shell_environment_policy.include_only=$codex_env_patterns" \
           --json \
           --output-last-message "$CODEX_OUTPUT" \
-          - 2>&1 | tee "$codex_diagnostics_destination"
+          - 2>&1 | tee "$codex_diagnostics_destination" >/dev/null
         pipeline_status=("${PIPESTATUS[@]}")
         codex_status="${pipeline_status[0]:-1}"
         diagnostics_status="${pipeline_status[1]:-1}"

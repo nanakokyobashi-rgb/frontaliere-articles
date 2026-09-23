@@ -11906,6 +11906,12 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-09-22.imageAlt': 'Les chiffres du jour pour les frontaliers – 22 septembre 2026 : attentes aux douanes, prix de l\'essence, taux CHF-EUR et offres d\'emploi',
     'blog.article.bollettino-frontaliere-2026-09-22.seoDescription': 'Bulletin du frontalier du 22 septembre 2026 : les files aux douanes ce matin, l\'essence la moins chère, taux franc-euro et nouvelles offres d\'emploi en Suisse.',
     'blog.article.bollettino-frontaliere-2026-09-22.ogDescription': 'Les chiffres du 22 septembre 2026 pour les frontaliers : combien de temps on attend ce matin à chaque douane, où l\'essence coûte le moins cher, ce que vaut le franc aujourd\'hui et combien d\'offres d\'emploi sont parues en Suisse.',
+    'blog.article.como-corso-farmacia-svizzera.title': 'Cours en pharmacie à Côme : stages sur le territoire et en Suisse',
+    'blog.article.como-corso-farmacia-svizzera.excerpt': 'Le nouveau programme de maîtrise en pharmacie à l\'Insubria de Como a démarré avec quarante-sept étudiants et stages également en Suisse.',
+    'blog.article.como-corso-farmacia-svizzera.imageAlt': 'Etudiants en pharmacie a l\'universite de Como',
+    'blog.article.carburanti-prezzi-tasse-ticino.title': 'Cher prix des carburants au Tessin : demande de réduction d\'impôt',
+    'blog.article.carburanti-prezzi-tasse-ticino.excerpt': 'Une motion a été déposée à Berne pour alléger la charge fiscale sur l\'essence, le diesel et l\'huile de chauffage face à des hausses historiques.',
+    'blog.article.carburanti-prezzi-tasse-ticino.imageAlt': 'Prix de l\'essence et du diesel en hausse dans une station-service au Tessin',
 };
 
 export default blogMetaFr;
