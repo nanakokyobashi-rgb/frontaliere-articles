@@ -13,6 +13,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8');
+const CONTRACT = JSON.parse(read('generator/data/crawler-cross-repo-contract.json'));
 const SOCKET = '${{ steps.setup_claude_haiku_fallback.outputs.codex_auth_broker_socket }}';
 const SECRET = '${{ secrets.CODEX_AUTH_JSON }}';
 const ACTION = './.github/actions/setup-claude-haiku-fallback';
@@ -52,7 +53,7 @@ function stepBlock(lines, index) {
 }
 
 test('every active article CLI caller wires the OAuth Codex broker', () => {
-  assert.equal(workflowFiles.length, 24, 'caller inventory changed: review new/removed consumers');
+  assert.equal(workflowFiles.length, CONTRACT.artifactCount, 'caller inventory changed: review new/removed consumers');
   for (const rel of workflowFiles) {
     const source = read(rel);
     const lines = source.split('\n');

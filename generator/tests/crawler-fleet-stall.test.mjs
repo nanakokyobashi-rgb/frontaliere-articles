@@ -18,6 +18,7 @@ import { readFileSync } from 'node:fs';
 import {
   GROUP_COMMIT_RE,
   EXPECTED_GROUPS,
+  FALLBACK_GROUP_COUNT,
   MIN_COVERAGE_FRACTION,
   countCrawlerGroups,
   MIN_GROUPS_PER_DAY,
@@ -94,26 +95,26 @@ test('zero consegne leggibili suonano invece di uscire fail-open', () => {
 });
 
 test('un fleet sano non suona', () => {
-  // 09-13: 23/23 in un'unica ondata.
+  // 09-13: un'ondata completa in un'unica ondata.
   const v = stallVerdict({
-    deliveries: wave(23, 2), nowMs: NOW, stallHours: 6, readable: true,
+    deliveries: wave(EXPECTED_GROUPS, 2), nowMs: NOW, stallHours: 6, readable: true,
   });
   assert.equal(v.stalled, false);
   assert.equal(v.reason, 'delivering');
-  assert.equal(v.coverage, 23);
+  assert.equal(v.coverage, EXPECTED_GROUPS);
 });
 
 test('LA MISURA: la soglia separa i giorni sani da quelli rotti senza sovrapposizione', () => {
   // Minimo osservato sano = 21; massimo osservato rotto = 6.
-  const healthy = [21, 22, 23];
+  const healthy = [21, 22, EXPECTED_GROUPS];
   const broken = [0, 2, 2, 4, 6];
   for (const n of healthy) {
-    assert.ok(n >= MIN_GROUPS_PER_DAY, `giorno sano ${n}/23 non deve suonare`);
+    assert.ok(n >= MIN_GROUPS_PER_DAY, `giorno sano ${n}/${EXPECTED_GROUPS} non deve suonare`);
     const v = stallVerdict({ deliveries: wave(n, 2), nowMs: NOW, stallHours: 6, readable: true });
-    assert.equal(v.stalled, false, `${n}/23 è sano`);
+    assert.equal(v.stalled, false, `${n}/${EXPECTED_GROUPS} è sano`);
   }
   for (const n of broken) {
-    assert.ok(n < MIN_GROUPS_PER_DAY, `giorno rotto ${n}/23 deve suonare`);
+    assert.ok(n < MIN_GROUPS_PER_DAY, `giorno rotto ${n}/${EXPECTED_GROUPS} deve suonare`);
   }
   assert.ok(Math.max(...broken) < MIN_GROUPS_PER_DAY && MIN_GROUPS_PER_DAY <= Math.min(...healthy),
     'la soglia deve stare nell intervallo vuoto fra le due popolazioni');
@@ -133,7 +134,7 @@ test('LA REGRESSIONE: «zero consegne in 6h» non rileva lo stallo reale', () =>
 
 test('uno stop totale suona come hard-stop, non come sotto-copertura', () => {
   const v = stallVerdict({
-    deliveries: wave(23, 40), nowMs: NOW, stallHours: 6, readable: true,
+    deliveries: wave(EXPECTED_GROUPS, 40), nowMs: NOW, stallHours: 6, readable: true,
   });
   assert.equal(v.stalled, true);
   assert.equal(v.reason, 'hard-stop');
@@ -160,7 +161,7 @@ test('la finestra di copertura contiene almeno un ondata intera', () => {
   // positivo. Le ondate osservate sono 1-2 al giorno, quindi 24h ne contiene
   // sempre una.
   assert.equal(COVERAGE_WINDOW_HOURS, 24);
-  assert.equal(EXPECTED_GROUPS, 23);
+  assert.ok(EXPECTED_GROUPS > 0);
 });
 
 test('il riepilogo per giorno conta gruppi DISTINTI, non commit', () => {
@@ -182,12 +183,11 @@ test('la flotta si CONTA, non si dichiara: la soglia resta meta anche se cresce'
   // La review: regex, denominatore e soglia tarati su cardinalità fissa smettono
   // di rappresentare «metà della flotta» appena la flotta cresce. Con 24 gruppi
   // e soglia fissa 12 servirebbe che metà esatta fallisse prima di suonare.
-  assert.equal(countCrawlerGroups('/nonexistent-dir'), 23, 'fallback al valore misurato, non a zero');
+  assert.equal(countCrawlerGroups('/nonexistent-dir'), FALLBACK_GROUP_COUNT, 'fallback alla cardinalita corrente, non a zero');
   assert.equal(MIN_COVERAGE_FRACTION, 0.5);
   assert.equal(MIN_GROUPS_PER_DAY, Math.max(2, Math.round(EXPECTED_GROUPS * MIN_COVERAGE_FRACTION)));
-  // Con la flotta osservata oggi la soglia resta quella misurata.
-  assert.equal(EXPECTED_GROUPS, 23);
-  assert.equal(MIN_GROUPS_PER_DAY, 12);
+  assert.equal(FALLBACK_GROUP_COUNT, 24);
+  assert.equal(MIN_GROUPS_PER_DAY, Math.max(2, Math.round(EXPECTED_GROUPS * MIN_COVERAGE_FRACTION)));
 });
 
 test('un timestamp nel futuro non vale come consegna recente', () => {
