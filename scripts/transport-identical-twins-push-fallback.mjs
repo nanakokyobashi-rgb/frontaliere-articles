@@ -49,6 +49,7 @@ function decodeGitQuotedPath(value) {
     }
 
     const escaped = value[index + 1];
+    if (escaped === undefined) return null;
     if (escaped && Object.prototype.hasOwnProperty.call(C_STYLE_ESCAPES, escaped)) {
       bytes.push(...Buffer.from(C_STYLE_ESCAPES[escaped]));
       index += 2;
@@ -60,15 +61,7 @@ function decodeGitQuotedPath(value) {
       continue;
     }
 
-    const codePoint = value.codePointAt(index + 1);
-    if (codePoint === undefined) {
-      bytes.push(0x5c);
-      index += 1;
-      continue;
-    }
-    const character = String.fromCodePoint(codePoint);
-    bytes.push(...Buffer.from('\\' + character));
-    index += 1 + character.length;
+    return null;
   }
 
   try {
@@ -199,8 +192,17 @@ function requiredArg(name) {
   return value;
 }
 
-function readLines(file) {
-  return fs.readFileSync(file, 'utf8').split('\n').map((line) => line.replace(/\r$/, '')).filter(Boolean);
+export function readLines(file) {
+  return fs.readFileSync(file, 'utf8')
+    .split('\n')
+    .map((line) => line.replace(/\r$/, ''))
+    .filter(Boolean)
+    .map((line) => {
+      if (!(line.startsWith('"') && line.endsWith('"'))) return line;
+      const decoded = decodeGitQuotedPath(line.slice(1, -1));
+      if (decoded === null) throw new Error(`pathname Git C-quotata non decodificabile: ${line}`);
+      return decoded;
+    });
 }
 
 function writeJson(file, value) {
