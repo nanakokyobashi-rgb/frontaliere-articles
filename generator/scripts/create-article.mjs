@@ -67,6 +67,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScoresBeforeExit, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens, getDeclaredRequestTokenLimit, isModelAvailable, isPerRunCallCapReached } from './lib/ai-models.mjs';
 import { exitAfterDrain } from './lib/drain-stdio.mjs';
+import { decodeSyntheticSourceToken, isZeroSourceForGenerationBudget, markSyntheticSourceValidation } from './lib/synthetic-source-contract.mjs';
 
 // ── Il modello preferito per la SOLA generazione del corpo ──────────────────
 //
@@ -1818,6 +1819,9 @@ const CREATE_ARTICLE_ZERO_SOURCE_RETRIES = Math.max(
  * fetchPageContent() always synthesizes non-empty prompt content for them
  * (EVERGREEN_FACTS_BRIEF / BFS quarter data), so they keep the full retry
  * budget and their own separate fact-check tolerance, untouched by this cap.
+ * An empty stats-astra:// source is deliberately NOT exempt: a valid ASTRA
+ * snapshot must produce a non-empty prompt, so an empty one gets the bounded
+ * zero-source budget instead of burning the full generation roster.
  *
  * Pure + exported for testability (no network, no I/O).
  */
@@ -1827,11 +1831,9 @@ export function computeMaxGenerationAttempts(
   fullBudget = CREATE_ARTICLE_MIN_WORDS_RETRIES,
   zeroSourceCap = CREATE_ARTICLE_ZERO_SOURCE_RETRIES,
 ) {
-  const isZeroSourceNews = (pageContent || '').length === 0 &&
-    !String(url || '').startsWith('evergreen://') &&
-    !String(url || '').startsWith('stats-bfs://') &&
-    !String(url || '').startsWith('stats-astra://');
-  return isZeroSourceNews ? Math.min(fullBudget, zeroSourceCap) : fullBudget;
+  return isZeroSourceForGenerationBudget(pageContent, url)
+    ? Math.min(fullBudget, zeroSourceCap)
+    : fullBudget;
 }
 
 const RUN_REPORT = {
@@ -6467,14 +6469,18 @@ async function buildStatsAstraPromptContent(token) {
   }
   const db = admin.firestore();
   const snap = await db.collection('config').doc('astra_vehicle_stats').get();
-  if (!snap.exists) {
-    throw new Error('config/astra_vehicle_stats Firestore doc missing — refresh-astra-vehicle-stats has not run yet.');
-  }
-  const parts = String(token || '').split('/').map((part) => decodeURIComponent(part));
+  const parts = String(token || '').split('/').map((part) => decodeSyntheticSourceToken(part, 'ASTRA'));
   const cadence = parts[0] || 'monthly';
   const period = parts[1] || '';
   const section = parts[2] === 'svizzera' || SECTION_NAME === 'svizzera' ? 'svizzera' : 'frontaliere';
-  return formatStatsAstraPrompt(cadence, period, section, snap.data() || {});
+  try {
+    if (!snap.exists) {
+      throw new Error('config/astra_vehicle_stats Firestore doc missing — refresh-astra-vehicle-stats has not run yet.');
+    }
+    return formatStatsAstraPrompt(cadence, period, section, snap.data() || {});
+  } catch (error) {
+    throw markSyntheticSourceValidation(error, 'ASTRA');
+  }
 }
 
 /**
@@ -6928,12 +6934,15 @@ async function fetchPageContent(url) {
   // Handle BFS stats-update articles — no web page to scrape, build the
   // prompt from Firestore numbers written by refresh-bfs-stats.
   if (url.startsWith('stats-bfs://')) {
-    const quarter = decodeURIComponent(url.slice('stats-bfs://'.length));
+    const quarter = decodeSyntheticSourceToken(url.slice('stats-bfs://'.length), 'BFS');
     console.error(`📊 Articolo statistica BFS: trimestre ${quarter}`);
     return await buildStatsBfsPromptContent(quarter);
   }
   if (url.startsWith('stats-astra://')) {
-    const token = decodeURIComponent(url.slice('stats-astra://'.length));
+    // Keep the raw suffix here: the ASTRA source contract owns decoding so a
+    // malformed token becomes a per-candidate quality rejection instead of an
+    // uncaught URIError that aborts the whole run.
+    const token = url.slice('stats-astra://'.length);
     console.error(`🚗 Articolo statistica ASTRA: ${token}`);
     return await buildStatsAstraPromptContent(token);
   }
@@ -6992,10 +7001,10 @@ async function fetchPageContent(url) {
     // da li' che firma di redazione, invito a commentare e spalla «ultimi
     // commenti» sono finiti nel corpo di tre articoli pubblicati.
     const isolation = isolateMainSourceHtml(html);
+    const { text, method, paragraphCount, publishedAt } = extractArticleText(isolation.html, { maxChars: 8000 });
     // Use structured extractor (JSON-LD → article → main → og + paragraphs → naive)
     // to feed the generator and fact-checker the actual article body instead of
     // 70%+ nav/footer/ads noise. See scripts/lib/extract-article-text.mjs.
-    const { text, method, paragraphCount, publishedAt } = extractArticleText(isolation.html, { maxChars: 8000 });
     lastSourcePublishedAt = publishedAt || '';
     const ageNote = lastSourcePublishedAt
       ? ` — fonte del ${lastSourcePublishedAt.slice(0, 10)}`
