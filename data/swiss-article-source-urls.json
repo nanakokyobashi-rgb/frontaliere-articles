@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1945003/calo-primo-semestre-postfinance-ricavi": {
-    "articleId": "postfinance-utile-calo-primo-semestre",
-    "ts": "2026-08-20T11:15:18.823Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1945007/miliardi-svizzera-franchi-investimenti-assicuratori": {
     "articleId": "assicurazioni-svizzera-risultati-2025",
     "ts": "2026-08-20T11:38:35.952Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/politica/1951859/epidemie-legge-revisione-svizzera-imprese": {
     "articleId": "revisione-legge-epidemie-svizzera",
     "ts": "2026-09-23T00:40:58.724Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/rq9rumbcaofx": {
+    "articleId": "dff-progressione-freddo-imposte-2027",
+    "ts": "2026-09-23T01:17:40.104Z",
     "keyForm": 2
   }
 }
