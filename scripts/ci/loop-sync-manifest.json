@@ -624,9 +624,9 @@
       "path": "scripts/lib/workflow-scope-detect.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "08dcb09e080c286b",
-        "corpus": "08dcb09e080c286b",
-        "alignedAt": "2026-08-14"
+        "site": "1ae49b1d896e4463",
+        "corpus": "1ae49b1d896e4463",
+        "alignedAt": "2026-09-23"
       }
     },
     {
