@@ -301,7 +301,7 @@ test('Claude fallback is suppressed when Codex side effects are possible', () =>
 test('la review Codex esporta eventi strutturati anche quando il processo fallisce', () => {
   assert.match(action, /codex_diagnostics_file:/);
   assert.match(action, /--json \\\n\s+--output-last-message/);
-  assert.match(action, /tee "\$codex_diagnostics_destination"/);
+  assert.match(action, /tee "\$codex_diagnostics_destination" >\/dev\/null/);
   assert.match(action, /printf 'codex_diagnostics=%s\\n'/);
   assert.match(action, /CODEX_DIAGNOSTICS: \$\{\{ steps\.codex\.outputs\.codex_diagnostics \}\}/);
   assert.match(action, /codex_no_review/);
