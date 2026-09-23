@@ -7001,10 +7001,10 @@ async function fetchPageContent(url) {
     // da li' che firma di redazione, invito a commentare e spalla «ultimi
     // commenti» sono finiti nel corpo di tre articoli pubblicati.
     const isolation = isolateMainSourceHtml(html);
+    const { text, method, paragraphCount, publishedAt } = extractArticleText(isolation.html, { maxChars: 8000 });
     // Use structured extractor (JSON-LD → article → main → og + paragraphs → naive)
     // to feed the generator and fact-checker the actual article body instead of
     // 70%+ nav/footer/ads noise. See scripts/lib/extract-article-text.mjs.
-    const { text, method, paragraphCount, publishedAt } = extractArticleText(isolation.html, { maxChars: 8000 });
     lastSourcePublishedAt = publishedAt || '';
     const ageNote = lastSourcePublishedAt
       ? ` — fonte del ${lastSourcePublishedAt.slice(0, 10)}`
