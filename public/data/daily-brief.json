@@ -1,26 +1,33 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-22T09:43:01.786Z",
-  "dateIso": "2026-09-22",
+  "generatedAt": "2026-09-23T09:50:18.798Z",
+  "dateIso": "2026-09-23",
   "counts": {
     "availableBlocks": 3,
     "crossings": 141,
     "fuelMunicipalities": 0,
     "exchangePoints": 32,
-    "jobsActive": 24046
+    "jobsActive": 24050
   },
   "blocks": {
     "borderWait": {
       "available": true,
-      "updatedAt": "2026-09-22T09:00:54.425Z",
+      "updatedAt": "2026-09-23T07:37:24.568Z",
       "count": 141,
-      "zeroWaitCount": 141,
+      "zeroWaitCount": 140,
       "worst": {
-        "slug": "anieres",
-        "name": "Anières",
-        "waitMinutes": 0
+        "slug": "san-pietro",
+        "name": "San Pietro (Clivio-Stabio)",
+        "waitMinutes": 8
       },
       "crossings": [
+        {
+          "slug": "san-pietro",
+          "name": "San Pietro (Clivio-Stabio)",
+          "waitMinutes": 8,
+          "status": "yellow",
+          "direction": null
+        },
         {
           "slug": "anieres",
           "name": "Anières",
@@ -876,13 +883,6 @@
           "direction": null
         },
         {
-          "slug": "san-pietro",
-          "name": "San Pietro (Clivio-Stabio)",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": null
-        },
-        {
           "slug": "sauverny",
           "name": "Sauverny",
           "waitMinutes": 0,
@@ -1013,30 +1013,30 @@
     },
     "fuel": {
       "available": false,
-      "reason": "fuel data is 141h old (max 48h)",
-      "degradedEditions": 4
+      "reason": "fuel data is 165h old (max 48h)",
+      "degradedEditions": 5
     },
     "exchange": {
       "available": true,
-      "rate": 1.0569,
-      "lastDate": "2026-09-21",
-      "prevRate": 1.0557,
-      "prevDate": "2026-09-20",
-      "delta1d": 0.0012,
-      "rate7dAgo": 1.0581,
-      "delta7d": -0.0012,
+      "rate": 1.0592,
+      "lastDate": "2026-09-22",
+      "prevRate": 1.0579,
+      "prevDate": "2026-09-21",
+      "delta1d": 0.0013,
+      "rate7dAgo": 1.0596,
+      "delta7d": -0.0004,
       "source": "frankfurter",
       "pointCount": 32,
       "degradedEditions": 0
     },
     "jobs": {
       "available": true,
-      "generatedAt": "2026-09-22T07:17:12.403Z",
-      "activeJobs": 24046,
+      "generatedAt": "2026-09-23T07:02:14.886Z",
+      "activeJobs": 24050,
       "activeCompanies": 862,
-      "todayAdded": 152,
-      "yesterdayAdded": 639,
-      "last7dAdded": 4240,
+      "todayAdded": 43,
+      "yesterdayAdded": 153,
+      "last7dAdded": 4098,
       "degradedEditions": 0
     }
   }
