@@ -10,6 +10,11 @@ import { expect } from './lib/expect-shim.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import {
+  decodeSyntheticSourceToken,
+  isZeroSourceForGenerationBudget,
+  markSyntheticSourceValidation,
+} from '../scripts/lib/synthetic-source-contract.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const CREATE_ARTICLE = path.join(ROOT, 'generator', 'scripts', 'create-article.mjs');
@@ -132,5 +137,37 @@ describe('formatStatsAstraPrompt', () => {
     );
     expect(incomplete.passed).toBe(false);
     expect(incomplete.reason).toContain('13.414');
+  });
+
+  it('rejects an incomplete canton table instead of formatting a partial source', () => {
+    const partial = structuredClone(DATA);
+    partial.monthly.latest.byCanton = partial.monthly.latest.byCanton.slice(0, 25);
+    expect(() => formatStatsAstraPrompt('monthly', '2026-09', 'svizzera', partial))
+      .toThrow(/complete 26-canton table/);
+  });
+});
+
+describe('synthetic source contract', () => {
+  it('turns malformed percent-encoding into a deferible quality rejection', () => {
+    expect(() => decodeSyntheticSourceToken('%E0%A4%A', 'ASTRA')).toThrow(/malformed percent-encoding/);
+    try {
+      decodeSyntheticSourceToken('%E0%A4%A', 'ASTRA');
+    } catch (error) {
+      expect(error.qualityReject).toBe(true);
+      expect(error.syntheticSourceReject).toBe(true);
+    }
+  });
+
+  it('caps empty ASTRA source content but preserves synthetic BFS/evergreen budgets', () => {
+    expect(isZeroSourceForGenerationBudget('', 'stats-astra://monthly/2026-09/frontaliere')).toBe(true);
+    expect(isZeroSourceForGenerationBudget('', 'stats-bfs://2026-Q3')).toBe(false);
+    expect(isZeroSourceForGenerationBudget('', 'evergreen://tasse')).toBe(false);
+  });
+
+  it('marks partial-source validation as a quality rejection', () => {
+    const error = markSyntheticSourceValidation(new Error('partial ASTRA document'), 'ASTRA');
+    expect(error.message).toContain('partial ASTRA document');
+    expect(error.qualityReject).toBe(true);
+    expect(error.syntheticSourceReject).toBe(true);
   });
 });

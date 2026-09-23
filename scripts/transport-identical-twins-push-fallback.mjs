@@ -79,11 +79,24 @@ function sortedUnique(paths) {
   return [...new Set(paths)].sort();
 }
 
+function hasUnrelatedRemoteError(output) {
+  return String(output ?? '').split(/\r?\n/).some((line) => {
+    if (!/^\s*remote:\s*(?:error|fatal):/i.test(line)) return false;
+    return !/^\s*remote:\s*error:\s*refusing\s+to\s+allow\s+a\s+GitHub\s+App\b/i.test(line);
+  });
+}
+
 /** Classifica solo il rifiuto GitHub osservato; ogni altro errore resta rosso. */
 export function classifyWorkflowPushFailure(output) {
   // Git may color remote errors. Remove terminal controls before matching while
   // preserving the acceptance call below for the canonical refusal signature.
   output = String(output ?? '').replace(ANSI_ESCAPE_RE, '');
+  // A workflow-permission refusal is recoverable only when it is the sole
+  // remote error. A mixed push log must stay fail-closed: falling back would
+  // hide the second rejection and could publish an incomplete transport.
+  if (hasUnrelatedRemoteError(output)) {
+    return { kind: 'other', fallback: false, rejectedPaths: [] };
+  }
   const rejectedPaths = [];
   for (const match of String(output ?? '').matchAll(WORKFLOW_REFUSAL_RE)) {
     const rawPath = match.groups?.quotedPath;
@@ -123,6 +136,21 @@ function clone(value) {
   return structuredClone(value);
 }
 
+function assertManifestFiles(files, label) {
+  if (!Array.isArray(files)) throw new Error(`manifest ${label} senza array files`);
+  const seen = new Set();
+  for (const [index, entry] of files.entries()) {
+    if (!entry || typeof entry !== 'object' || Array.isArray(entry)
+      || typeof entry.path !== 'string' || entry.path.length === 0) {
+      throw new Error(`manifest ${label} con entry non-oggetto/path non valido all'indice ${index}`);
+    }
+    if (seen.has(entry.path)) {
+      throw new Error(`manifest ${label} con voce duplicata per ${entry.path}`);
+    }
+    seen.add(entry.path);
+  }
+}
+
 function restoreProperty(target, source, key) {
   if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = clone(source[key]);
   else delete target[key];
@@ -139,9 +167,8 @@ export function restoreWorkflowSnapshots(currentManifest, previousManifest, path
   if (invalid.length) throw new Error(`fallback non autorizzato per path non workflow: ${invalid.join(', ')}`);
 
   const current = clone(currentManifest);
-  if (!Array.isArray(current.files) || !Array.isArray(previousManifest?.files)) {
-    throw new Error('manifest corrente/precedente senza array files');
-  }
+  assertManifestFiles(current?.files, 'corrente');
+  assertManifestFiles(previousManifest?.files, 'precedente');
   const currentFiles = current.files;
   const previousFiles = previousManifest.files;
   for (const rel of workflowPaths) {
