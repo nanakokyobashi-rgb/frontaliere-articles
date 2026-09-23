@@ -105,15 +105,17 @@ export const GROUP_COMMIT_RE = /^Auto-update crawler group (\d{2}) jobs/;
  * di suonare, silenziosamente piu' permissiva ogni volta che il fleet cresce.
  *
  * Il conteggio e' locale e offline: i workflow generati stanno in questo
- * checkout. Fallback a 23 se la directory non e' leggibile, che e' il valore
- * misurato il 2026-09-18 e degrada al comportamento noto invece che a zero.
+ * checkout. Fallback a 24 se la directory non e' leggibile, cioe' la cardinalita'
+ * attuale della flotta, e degrada al comportamento noto invece che a zero.
  */
+export const FALLBACK_GROUP_COUNT = 24;
+
 export function countCrawlerGroups(dir = '.github/workflows') {
   try {
     const n = readdirSync(dir).filter((f) => /^crawler-group-\d+\.yml$/.test(f)).length;
-    return n > 0 ? n : 23;
+    return n > 0 ? n : FALLBACK_GROUP_COUNT;
   } catch {
-    return 23;
+    return FALLBACK_GROUP_COUNT;
   }
 }
 
