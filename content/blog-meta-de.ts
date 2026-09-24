@@ -257,7 +257,7 @@ const blogMetaDe: Record<string, string> = {
  'blog.article.costo-pendolare-auto-ticino-2026.excerpt': 'Benzin, Verschleiss, Parken und Vignette: die komplette Kostenanalyse 2026. Ein Pendler gibt bis zu 7.500 CHF pro Jahr aus. Vergleich mit Zug und Bus.',
  'blog.article.costo-pendolare-auto-ticino-2026.imageAlt': 'Autoschlange von Grenzgängern am Grenzübergang Chiasso-Brogeda im Tessin am frühen Morgen.',
  'blog.article.guida-dichiarazione-redditi-frontalieri.title': 'Steuererklärung für Grenzgänger: Leitfaden zum 730 für Tessin',
- 'blog.article.guida-dichiarazione-redditi-frontalieri.excerpt': 'Formular 730/2026: Wie man das Feld CE ausfüllt, die Steuergutschrift berechnet und welche Dokumente benötigt werden. Der komplette Leitfaden für Grenzgänger im Tessin.',
+ 'blog.article.guida-dichiarazione-redditi-frontalieri.excerpt': 'Formular 730/2026 und Redditi PF: Wo der Schweizer Lohn eingetragen wird, wie man die Steuergutschrift berechnet und welche Dokumente benötigt werden. Der komplette Leitfaden für Grenzgänger im Tessin.',
  'blog.article.guida-dichiarazione-redditi-frontalieri.imageAlt': 'Grenzgänger füllt das italienische Steuerformular 730 mit Schweizer und italienischen Dokumenten auf einem Schreibtisch mit Blick auf Bellinzona aus.',
  'blog.article.checklist-documenti-lavoro-svizzera.title': 'Arbeiten in der Schweiz: Nötige Dokumente 2026',
  'blog.article.checklist-documenti-lavoro-svizzera.excerpt': 'Die definitive Checkliste für Grenzgänger im Tessin: von der G-Bewilligung über das Bankkonto bis zur AHV und der Wahl der LAMal. So starten Sie fehlerfrei.',

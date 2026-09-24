@@ -257,7 +257,7 @@ const blogMetaFr: Record<string, string> = {
  'blog.article.costo-pendolare-auto-ticino-2026.excerpt': 'Essence, usure, parking et vignette : l\'analyse complète des coûts 2026. Un pendulaire dépense jusqu\'à 7 500 CHF par an. Comparaison avec le train et le bus.',
  'blog.article.costo-pendolare-auto-ticino-2026.imageAlt': 'File de voitures de frontaliers au poste-frontière de Chiasso-Brogeda au Tessin tôt le matin.',
  'blog.article.guida-dichiarazione-redditi-frontalieri.title': 'Déclaration de revenus frontalier : Guide 730 pour le Tessin',
- 'blog.article.guida-dichiarazione-redditi-frontalieri.excerpt': 'Modèle 730/2026 : comment remplir le Cadre CE, calculer le crédit d\'impôt et quels documents sont nécessaires. Le guide complet pour les frontaliers du Tessin.',
+ 'blog.article.guida-dichiarazione-redditi-frontalieri.excerpt': 'Modèle 730/2026 et Redditi PF : où déclarer le salaire suisse, comment calculer le crédit d\'impôt et quels documents sont nécessaires. Le guide complet pour les frontaliers du Tessin.',
  'blog.article.guida-dichiarazione-redditi-frontalieri.imageAlt': 'Travailleur frontalier remplissant le formulaire fiscal italien 730 avec des documents suisses et italiens sur un bureau avec vue sur Bellinzona.',
  'blog.article.checklist-documenti-lavoro-svizzera.title': 'Travailler en Suisse: les documents nécessaires en 2026',
  'blog.article.checklist-documenti-lavoro-svizzera.excerpt': 'La checklist définitive pour le frontalier au Tessin : du Permis G au compte bancaire, en passant par l\'AVS et le choix LAMal. Voici comment démarrer sans erreur.',

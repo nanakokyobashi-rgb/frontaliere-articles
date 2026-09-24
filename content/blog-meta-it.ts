@@ -257,7 +257,7 @@ const blogMetaIt: Record<string, string> = {
  'blog.article.costo-pendolare-auto-ticino-2026.excerpt': 'Benzina, usura, parcheggio e vignette: l\'analisi completa dei costi 2026. Un pendolare spende fino a 7.500 CHF all\'anno. Confronto con treno e bus.',
  'blog.article.costo-pendolare-auto-ticino-2026.imageAlt': 'Coda di auto di frontalieri al valico di Chiasso-Brogeda in Ticino al mattino presto.',
  'blog.article.guida-dichiarazione-redditi-frontalieri.title': 'Dichiarazione Redditi Frontaliere: Guida 730 per il Ticino',
- 'blog.article.guida-dichiarazione-redditi-frontalieri.excerpt': 'Modello 730/2026: come compilare il Quadro CE, calcolare il credito d\'imposta e quali documenti servono. La guida completa per i frontalieri del Ticino.',
+ 'blog.article.guida-dichiarazione-redditi-frontalieri.excerpt': 'Modello 730/2026 e Redditi PF: dove indicare lo stipendio svizzero, come calcolare il credito d\'imposta e quali documenti servono. La guida completa per i frontalieri del Ticino.',
  'blog.article.guida-dichiarazione-redditi-frontalieri.imageAlt': 'Frontaliere compila il Modello 730 con documenti svizzeri e italiani sulla scrivania con vista su Bellinzona.',
  'blog.article.checklist-documenti-lavoro-svizzera.title': 'Lavoro in Svizzera: i documenti necessari nel 2026',
  'blog.article.checklist-documenti-lavoro-svizzera.excerpt': 'La checklist definitiva per il frontaliere in Ticino: dal Permesso G al conto bancario, passando per l\'AVS e la scelta LAMal. Ecco come partire senza errori.',
