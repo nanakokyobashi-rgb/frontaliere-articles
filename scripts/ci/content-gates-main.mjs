@@ -146,6 +146,7 @@ export const CONTENT_GATES = [
   'generator/tests/blog-headline-validation.test.mjs',
   'generator/tests/blog-title-casing.test.mjs',
   'generator/tests/escaped-tab-marker-corpus.test.mjs',
+  'generator/tests/evergreen-lamal-cmi-scelta-frontaliere-2026-refresh.test.mjs',
   'generator/tests/evergreen-triad-refresh.test.mjs',
   'generator/tests/faq-locale-consistency.test.mjs',
   'generator/tests/frontaliere-sitemap-shadow.test.mjs',

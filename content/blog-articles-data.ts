@@ -791,6 +791,7 @@ const RAW_ARTICLES = [
  id: 'lamal-cmi-scelta-frontaliere-2026',
  category: 'pratico',
  date: '2026-02-23T15:56:13.506Z',
+ updatedAt: '2026-09-24',
  image: '/images/blog/lamal-cmi-scelta-frontaliere-2026.webp',
  hasCalculator: true,
  authorSlug: 'laura-bianchi',
