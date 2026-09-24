@@ -742,13 +742,13 @@ const EVENT_IMAGE_CANCEL_TIMEOUT_MS = 1_000;
  * are still bounded while the stream is consumed. The body is cancelled on
  * every oversize path so a rejected image cannot strand a crawler connection.
  *
- * Memory budget: what the upstream declared or actually sent, never the cap.
- * A declared length (already <= maxBytes) is preallocated exactly; a chunked
- * response keeps its chunks and concatenates them once, so a 40 KB image
- * served without Content-Length no longer reserves the full 20 MiB cap.
- * Concurrency is 1 by construction: every caller awaits `mirrorEventImage`
- * inside a serial loop, so the process-wide peak is one response (at most
- * 2 x maxBytes transiently, chunks plus their concatenation).
+ * Allocation follows what the upstream declared or actually sent, never the
+ * cap: a declared length (already <= maxBytes) is preallocated exactly; a
+ * chunked response keeps its chunks and concatenates them once, so an image
+ * served without Content-Length no longer reserves the full 20 MiB cap. The
+ * per-response cap is unchanged. This bounds the reserved ArrayBuffer memory,
+ * not RSS: the old uninitialised cap buffer was mostly never paged in (before
+ * and after measurements are in PR #1770).
  */
 async function readEventImageBody(response, maxBytes) {
   const rawContentLength = response.headers.get('content-length');
