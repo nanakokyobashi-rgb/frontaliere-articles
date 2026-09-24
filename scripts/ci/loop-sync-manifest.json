@@ -1141,7 +1141,7 @@
     {
       "path": ".github/workflows/post-merge-followup.yml",
       "mode": "adapted",
-      "reason": "Tre adattamenti sostanziali: FOLLOWUP_ELIGIBLE_AUTHORS con gli autori di QUESTO repo (senza, il filtro resta quello del sito e il batch sarebbe SEMPRE vuoto — il workflow girerebbe ogni tre ore senza trovare nulla e senza un errore); il gate autore dentro il prompt allineato; QUOTA_BEACON_PEER_REPO per cedere al sito; cron 40 */3 sfasato.",
+      "reason": "Adattamenti sostanziali: FOLLOWUP_ELIGIBLE_AUTHORS con gli autori di QUESTO repo (senza, il filtro resta quello del sito e il batch sarebbe SEMPRE vuoto — il workflow girerebbe ogni tre ore senza trovare nulla e senza un errore); il gate autore dentro il prompt allineato; QUOTA_BEACON_PEER_REPO per cedere al sito; cron 40 */3 sfasato; budget della sessione Codex piu' largo del sito (job 55 min, step 47, `exec_timeout_seconds: '2520'` contro 40/32/1500), perche' qui il triage di 4 PR misura 1670s (35973121007) e ha superato il watchdog da 1800s (36009410204) mentre sul sito chiude in ~780s.",
       "baseline": {
         "site": "5e8e926af147845d",
         "corpus": "cdb587f35f2f3209",
