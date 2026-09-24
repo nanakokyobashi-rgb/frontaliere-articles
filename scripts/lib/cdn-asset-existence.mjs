@@ -165,18 +165,33 @@ export function nextRequestTimeoutMs({ budgetRemainingMs, urlRemainingMs }) {
 
 /**
  * Chiude il body di un fallback GET senza trasformare un errore di cleanup in
- * un verdetto sul CDN. Il tempo del cancel resta dentro verifyCdnAssetRefs,
- * quindi il chiamante misura anche il costo reale della risposta.
+ * un verdetto sul CDN. Il cancel è best-effort ma bounded dal residuo del
+ * timeout dell'asset: un body che non si chiude non può trattenere
+ * verifyCdnAssetRefs oltre il suo budget.
  *
  * @param {Response|{body?: {cancel?: () => Promise<void>}}|null} response
+ * @param {number} timeoutMs tempo massimo da attendere per il cleanup
  */
-async function cancelResponseBody(response) {
+async function cancelResponseBody(response, timeoutMs) {
   if (typeof response?.body?.cancel !== 'function') return;
+  const cleanup = Promise.resolve().then(() => response.body.cancel());
+  if (!Number.isFinite(timeoutMs) || timeoutMs < 1) {
+    cleanup.catch(() => {});
+    return;
+  }
+  let timer;
   try {
-    await response.body.cancel();
+    await Promise.race([
+      cleanup,
+      new Promise((resolve) => {
+        timer = setTimeout(resolve, timeoutMs);
+      }),
+    ]);
   } catch {
     // Il controllo è fail-open: un body che non si lascia cancellare non deve
     // cambiare lo stato già determinato dalla risposta HTTP.
+  } finally {
+    if (timer !== undefined) clearTimeout(timer);
   }
 }
 
@@ -262,7 +277,7 @@ export async function verifyCdnAssetRefs({
           continue;
         }
         res = await fetchImpl(url, { method: 'GET', redirect: 'follow', signal: makeSignal(getTimeout) });
-        await cancelResponseBody(res);
+        await cancelResponseBody(res, nextTimeout());
       }
       if (res.ok) {
         results.push({ url, state: 'present', status: res.status, error: null });

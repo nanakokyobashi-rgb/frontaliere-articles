@@ -123,6 +123,34 @@ test('verifyCdnAssetRefs ripiega su GET quando HEAD non è implementata', async 
   assert.equal(results[0].state, 'present');
 });
 
+test('fallback GET: cleanup del body bounded anche se cancel non si risolve', async () => {
+  let cancelCalled = false;
+  const startedAt = Date.now();
+  const results = await verifyCdnAssetRefs({
+    urls: [`${CDN}/assets/cleanup-pende.js`],
+    timeoutMs: 5,
+    budgetMs: 100,
+    now: () => 0,
+    makeSignal: () => undefined,
+    fetchImpl: async (_url, opts) => opts.method === 'HEAD'
+      ? { ok: false, status: 405 }
+      : {
+          ok: true,
+          status: 200,
+          body: {
+            cancel: async () => {
+              cancelCalled = true;
+              await new Promise(() => {});
+            },
+          },
+        },
+  });
+
+  assert.equal(cancelCalled, true);
+  assert.deepEqual(results.map((result) => [result.state, result.status]), [['present', 200]]);
+  assert.ok(Date.now() - startedAt < 1_000, 'cancel del body ha bloccato il verificatore');
+});
+
 test('formatCdnAssetReport avvisa SOLO sui mancanti', () => {
   const lines = formatCdnAssetReport([
     { url: `${CDN}/assets/ok.js`, state: 'present', status: 200, error: null },

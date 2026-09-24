@@ -78,7 +78,7 @@ const MARCATORI_FRONTALIERI = [
   'Accordo Frontalieri',
   'IRPEF',
   'imposta alla fonte',
-  '9 DICEMBRE 1976',
+  '9 MARZO 1976',
   'frontalieri',
   '7’500',
   '10’000',

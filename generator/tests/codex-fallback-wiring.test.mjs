@@ -181,3 +181,25 @@ test('il pre-scan local-only considera Codex come alternativa non-local', () => 
   assert.match(probe, /\[\.\.\.DEFAULT_CHAIN,\s*\.\.\.PREFERRED_GENERATION_MODELS\]/);
   assert.match(probe, /m !== AI_MODELS\.LOCAL_FALLBACK/);
 });
+
+test('la preferenza Codex/Claude vale su ogni tentativo di generazione, non solo sul primo', () => {
+  // Run 36022627600: Codex ha scritto il tentativo 1, il fact-check lo ha
+  // bocciato, e il tentativo 2 senza preferenza e' ricaduto sui modelli free
+  // morti fino a `prompt-floor-irreducible`. Decisione del proprietario: il
+  // ritentativo torna ai lane in abbonamento.
+  const createArticle = read('generator/scripts/create-article.mjs');
+  assert.match(createArticle, /\n\s*const _preferActiveThisAttempt = true;\n/);
+  assert.doesNotMatch(createArticle, /_preferActiveThisAttempt\s*=\s*generationAttempt\s*===\s*1/);
+  // Il gate resta l'unico interruttore: ogni chiamata del corpo continua a
+  // passare `PREFERRED_GENERATION_MODELS` solo attraverso di lui.
+  const uses = createArticle.match(/prefer: \(?_preferActiveThisAttempt[^,]*\? PREFERRED_GENERATION_MODELS : undefined/g) ?? [];
+  assert.ok(uses.length >= 3, `attese le chiamate del corpo gated da _preferActiveThisAttempt, trovate ${uses.length}`);
+  // Ogni chiamata che genera il corpo passa dal gate, compresi i rami dello
+  // slot `gemini` della rotazione (tentativo 3): senza, quel tentativo
+  // saltava Codex e Claude e tornava sulla cascata free (review di #1751).
+  const bodyCalls = createArticle.split('\n')
+    .filter((line) => /callLLM\(.*jsonSchema: (?:articleSchema|_splitCall1\.schema)\b/.test(line));
+  assert.ok(bodyCalls.length >= 5, `attese almeno 5 chiamate di generazione del corpo, trovate ${bodyCalls.length}`);
+  const senzaGate = bodyCalls.filter((line) => !/prefer: \(?_preferActiveThisAttempt[^,]*\? PREFERRED_GENERATION_MODELS : undefined/.test(line));
+  assert.deepEqual(senzaGate.map((line) => line.trim()), [], 'chiamate del corpo senza la preferenza Codex/Claude');
+});
