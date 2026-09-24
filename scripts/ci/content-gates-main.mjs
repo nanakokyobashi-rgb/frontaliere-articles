@@ -146,6 +146,7 @@ export const CONTENT_GATES = [
   'generator/tests/blog-headline-validation.test.mjs',
   'generator/tests/blog-title-casing.test.mjs',
   'generator/tests/escaped-tab-marker-corpus.test.mjs',
+  'generator/tests/evergreen-calcolo-pensione-avs-inps-refresh.test.mjs',
   'generator/tests/evergreen-costo-vita-ticino-vs-lombardia-refresh.test.mjs',
   'generator/tests/evergreen-guida-dichiarazione-redditi-frontalieri-refresh.test.mjs',
   'generator/tests/evergreen-lamal-cmi-scelta-frontaliere-2026-refresh.test.mjs',
