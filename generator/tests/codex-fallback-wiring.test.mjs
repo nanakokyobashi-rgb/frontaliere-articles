@@ -167,7 +167,7 @@ test('Codex primary keeps Luna Max and is reusable across crawler calls', () => 
   assert.match(broker, /CODEX_EFFORT\s*=\s*['"]max['"]/);
   assert.match(broker, /maxRequests/);
   assert.doesNotMatch(broker.slice(broker.indexOf('async function _callCodexCli'), broker.indexOf('function _callOmniRoute')), /_claimCodexCliFallback/);
-  assert.match(broker, /const configPath = path\.join\(codexHome, ['"]config\.toml['"]\)/);
+  assert.match(broker, /const configPath = path\.join\(authHome, ['"]config\.toml['"]\)/);
   assert.doesNotMatch(broker, /['"]--profile['"]\s*,\s*CODEX_PROFILE/);
   assert.doesNotMatch(read('.github/workflows/translate-pending.yml'), /^\s+AI_MODELS_PREFER:/m,
     'translation must not inherit the body-generation preference globally');

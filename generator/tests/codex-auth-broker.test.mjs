@@ -453,3 +453,98 @@ process.stdin.on('end', () => {
     fs.rmSync(cliPrefix, { recursive: true, force: true });
   }
 });
+
+// Il refresh token del login ChatGPT e' monouso e Codex riscrive il login
+// rinnovato in CODEX_HOME/auth.json. Con una home nuova per richiesta quella
+// scrittura si perdeva, e ogni chiamata successiva dello stesso job rigiocava
+// il token speso («refresh token already used»). Il Codex finto fa il refresh
+// a ogni chiamata: la successiva deve partire dal login rinnovato.
+test('una sola CODEX_HOME per job: il login rinnovato dalla chiamata N serve la N+1', async () => {
+  const brokerDir = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-broker-refresh-test.'));
+  const cliPrefix = fs.mkdtempSync(path.join(os.tmpdir(), 'claude-haiku-codex-cli.'));
+  const socketPath = path.join(brokerDir, 'auth.sock');
+  const cliPath = path.join(cliPrefix, 'codex');
+  const fakeCli = `#!/usr/bin/env node
+import fs from 'node:fs';
+import path from 'node:path';
+const args = process.argv.slice(2);
+if (args.includes('--version')) { console.log('codex 0.153.4'); process.exit(0); }
+const output = args[args.indexOf('--output-last-message') + 1];
+const workspace = args[args.indexOf('--cd') + 1];
+let prompt = '';
+process.stdin.setEncoding('utf8');
+process.stdin.on('data', (chunk) => { prompt += chunk; });
+process.stdin.on('end', () => {
+  const authPath = path.join(process.env.CODEX_HOME, 'auth.json');
+  const seen = fs.readFileSync(authPath, 'utf8');
+  const login = JSON.parse(seen);
+  if (prompt.includes('corrupt')) fs.writeFileSync(authPath, '{"refresh_token":');
+  else fs.writeFileSync(authPath, JSON.stringify({ ...login, refresh_token: 'rt-' + (login.generation + 1), generation: login.generation + 1 }));
+  fs.writeFileSync(output, JSON.stringify({
+    seen: JSON.parse(seen),
+    home: process.env.CODEX_HOME,
+    homeMode: fs.statSync(process.env.CODEX_HOME).mode & 0o777,
+    authMode: fs.statSync(authPath).mode & 0o777,
+    workspace,
+  }));
+});
+`;
+  fs.writeFileSync(cliPath, fakeCli, { mode: 0o700 });
+  fs.chmodSync(cliPath, 0o700);
+  const cliSha256 = crypto.createHash('sha256').update(fs.readFileSync(cliPath)).digest('hex');
+  const broker = spawn(process.execPath, [
+    BROKER,
+    '--socket', socketPath,
+    '--ttl-ms', '60000',
+    '--max-requests', '4',
+    '--codex-bin', cliPath,
+    '--codex-realpath', cliPath,
+    '--codex-sha256', cliSha256,
+    '--codex-prefix', cliPrefix,
+  ], {
+    cwd: ROOT,
+    env: { PATH: process.env.PATH },
+    stdio: ['pipe', 'ignore', 'pipe'],
+  });
+  let stderr = '';
+  broker.stderr.setEncoding('utf8');
+  broker.stderr.on('data', (chunk) => { stderr += chunk; });
+  broker.stdin.end('{"refresh_token":"rt-0","generation":0}');
+
+  const exec = async (prompt) => {
+    const response = await request(socketPath, { op: 'exec', prompt, timeoutMs: 5000 });
+    assert.equal(response.ok, true, `${JSON.stringify(response)} ${stderr}`);
+    return JSON.parse(response.result);
+  };
+  try {
+    await waitForSocket(socketPath, broker);
+    const first = await exec('first');
+    const second = await exec('second');
+    assert.deepEqual(first.seen, { refresh_token: 'rt-0', generation: 0 });
+    assert.deepEqual(second.seen, { refresh_token: 'rt-1', generation: 1 }, 'la seconda chiamata ha rigiocato il login iniziale');
+    assert.equal(second.home, first.home, 'CODEX_HOME deve essere una sola per job');
+    assert.equal(first.homeMode, 0o700);
+    assert.equal(first.authMode, 0o600);
+    const relative = path.relative(path.resolve(first.workspace), path.resolve(first.home));
+    assert.ok(relative.startsWith('..') || path.isAbsolute(relative), 'la home del login non deve stare nel workspace');
+    assert.equal(fs.existsSync(first.workspace), false, 'il workspace resta per-richiesta');
+
+    // Codex ucciso a meta' riscrittura: la richiesta dopo riparte dall'ultimo
+    // login buono, non dal secret iniziale.
+    const corrupting = await exec('corrupt');
+    assert.deepEqual(corrupting.seen, { refresh_token: 'rt-2', generation: 2 });
+    const afterCorruption = await exec('after');
+    assert.deepEqual(afterCorruption.seen, { refresh_token: 'rt-2', generation: 2 });
+
+    assert.equal(fs.existsSync(first.home), true);
+    const cleaned = await request(socketPath, { op: 'cleanup' });
+    assert.deepEqual(cleaned, { ok: true, cleaned: true });
+    assert.equal(await waitForExit(broker), 0, stderr);
+    assert.equal(fs.existsSync(first.home), false, 'la home del login deve sparire con il broker');
+  } finally {
+    if (broker.exitCode === null) broker.kill('SIGTERM');
+    await waitForExit(broker).catch(() => {});
+    fs.rmSync(brokerDir, { recursive: true, force: true });
+    fs.rmSync(cliPrefix, { recursive: true, force: true });
+  }
+});
