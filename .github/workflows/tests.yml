@@ -268,6 +268,16 @@ jobs:
           # The file list is produced by a trusted repository script; keep the
           # exact expansion consumed by the gate and silence SC2086 here.
           files=$(node scripts/ci/list-pr-gate-tests.mjs)
+          # Destinazione deterministica del report JSON: i reporter e le
+          # destinazioni si accoppiano per POSIZIONE (spec -> stdout, reporter
+          # strutturato -> file). Un file rimasto da un tentativo precedente
+          # non deve poter passare per il report di questa run, e un file
+          # mancante dopo `node --test` e' un reporter rotto: rosso esplicito
+          # anche se i test sono passati. Provato eseguendo questo blocco in
+          # generator/tests/node-test-failure-reporter.test.mjs.
+          rm -f "$NODE_TEST_REPORT_FILE"
+          mkdir -p "$(dirname "$NODE_TEST_REPORT_FILE")"
+          node_status=0
           # shellcheck disable=SC2086
           node \
             --test \
@@ -275,7 +285,12 @@ jobs:
             --test-reporter=./scripts/ci/node-test-failure-reporter.mjs \
             --test-reporter-destination=stdout \
             --test-reporter-destination="$NODE_TEST_REPORT_FILE" \
-            $files
+            $files || node_status=$?
+          if [ ! -s "$NODE_TEST_REPORT_FILE" ]; then
+            echo "::error::node-test-failure-reporter non ha scritto $NODE_TEST_REPORT_FILE (exit node --test=$node_status): il report strutturato dei test falliti manca." >&2
+            if [ "$node_status" -eq 0 ]; then node_status=1; fi
+          fi
+          exit "$node_status"
 
       - name: Report node:test failures on PR
         # The test gate is intentionally still the blocking step. This
