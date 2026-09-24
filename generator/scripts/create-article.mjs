@@ -9384,7 +9384,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // `call=1/2` e 0 `call=2/2` sulle 4 run del 2026-08-18; `roster_blocked`
     // 12 e 11 volte sulle due del 2026-08-19). Vedi #485.
     const rawBody = useGeminiDirect
-      ? await callLLM(_splitCall1.msgs, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _splitCall1.schema, expectedFields: BODY_ONLY_FIELDS })
+      ? await callLLM(_splitCall1.msgs, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _splitCall1.schema, prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: BODY_ONLY_FIELDS })
       : await callLLM(_splitCall1.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _splitCall1.schema, prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: BODY_ONLY_FIELDS });
     let bodyData;
     try {
@@ -9864,8 +9864,14 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // richiesti — ma dedurlo dalla prosa e' esattamente cio' che si e' rotto
     // sulla meta' body: una riformulazione dell'istruzione non deve poter
     // cambiare in silenzio COSA viene validato.
-    itRaw = await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema, expectedFields: REQUIRED_IT_BODY_FIELDS });
-    console.error(`  ↪ Completato con Gemini ${AI_MODELS.GEMINI_FLASH}`);
+    //
+    // Lo slot `gemini` della rotazione (tentativo 3) e' un modello di
+    // partenza come gli altri, non un'uscita dalla preferenza: dal 2026-09-24
+    // `_preferActiveThisAttempt` vale su ogni tentativo, quindi anche questi
+    // rami passano da Codex e Claude prima di Gemini. Senza `prefer` il
+    // tentativo 3 tornava sulla sola cascata free (review di #1751).
+    itRaw = await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: REQUIRED_IT_BODY_FIELDS });
+    console.error(`  ↪ Completato (slot Gemini ${AI_MODELS.GEMINI_FLASH})`);
   } else {
     const _optsUnica = { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: REQUIRED_IT_BODY_FIELDS };
     try {
@@ -9925,7 +9931,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     console.error(`  🔄 Retry IT con maxTokens=${retryTokens}${isTruncation ? ' (troncamento rilevato)' : ''}...`);
     try {
       const itRaw2 = useGeminiDirect
-        ? await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema, expectedFields: REQUIRED_IT_BODY_FIELDS })
+        ? await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema, prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: REQUIRED_IT_BODY_FIELDS })
         // Stessa preferenza della chiamata che sta ripetendo, e stesso gate
         // `_preferActiveThisAttempt`, che dal 2026-09-24 vale su ogni
         // tentativo — vedi il commento su `_preferSenzaCap` sopra. E' anche la
