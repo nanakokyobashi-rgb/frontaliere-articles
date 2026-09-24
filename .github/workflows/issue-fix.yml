@@ -1130,13 +1130,26 @@ jobs:
             echo "::error::production-proof: gruppo B19 senza membri — hold non applicato"
             exit 1
           fi
+          # Gruppo B19 (FU-2026-09-20-012): prima si valida TUTTA la lista,
+          # poi si tenta OGNI membro. Uscire al primo membro fallito lasciava
+          # i successivi senza hold, cioe' un gruppo misto in cui il drainer
+          # poteva riaccodare un membro della stessa PR. Ora una lista
+          # malformata non produce nessuna edit, un membro fallito non ferma
+          # gli altri, e lo step resta rosso elencando i membri senza hold.
+          # L'edit e' idempotente: rieseguire lo step completa i membri
+          # mancanti senza toccare quelli gia' sospesi.
           IFS=',' read -r -a ISSUE_LIST <<< "$TARGET_ISSUES"
+          HOLD_TARGETS=()
           for target_issue in "${ISSUE_LIST[@]}"; do
             target_issue="${target_issue//[[:space:]]/}"
             if [[ ! "$target_issue" =~ ^[0-9]+$ ]]; then
-              echo "::error::production-proof: membro issue non valido: $target_issue"
+              echo "::error::production-proof: membro issue non valido: $target_issue — nessun hold applicato al gruppo"
               exit 1
             fi
+            HOLD_TARGETS+=("$target_issue")
+          done
+          HOLD_FAILED=()
+          for target_issue in "${HOLD_TARGETS[@]}"; do
             ISSUE_EDIT_RC=1
             for attempt in 1 2 3; do
               if gh issue edit "$target_issue" --repo "$REPO" --add-label awaiting-production-proof; then
@@ -1148,10 +1161,15 @@ jobs:
             done
             if [ "$ISSUE_EDIT_RC" -ne 0 ]; then
               echo "::error::production-proof: label non applicata alla issue #$target_issue dopo i retry"
-              exit 1
+              HOLD_FAILED+=("$target_issue")
+              continue
             fi
             echo "production-proof: issue #$target_issue sospesa per PR #$PR_NUMBER"
           done
+          if [ "${#HOLD_FAILED[@]}" -ne 0 ]; then
+            echo "::error::production-proof: hold incompleto per PR #$PR_NUMBER, membri senza hold: ${HOLD_FAILED[*]}"
+            exit 1
+          fi
 
       # Simmetrico al claim, e su OGNI percorso terminale (successo, blocco,
       # max-turns, fallimento infra). `agent:in-progress` e' mutua esclusione,
