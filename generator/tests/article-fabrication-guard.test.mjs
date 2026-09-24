@@ -32,7 +32,7 @@
  * known hallucination patterns:
  * - Fabricated Swiss/Italian laws and legal references
  * - Fabricated institutions and acronyms
- * - Known incorrect facts (wrong convention dates, fake tax rates)
+ * - Known incorrect facts (fake tax rates)
  * - Fabricated statistics (unsourced precise percentages)
  *
  * This test acts as a permanent safety net: any article containing
@@ -111,10 +111,13 @@ const FABRICATED_ACRONYMS = [
   { pattern: /\bUFML\b/, desc: '"UFML" non esiste (reale: SEM)' },
 ];
 
-// Known incorrect facts (proximity-constrained patterns)
+// Known incorrect facts (proximity-constrained patterns).
+// No Convention-date pattern: the one that stood here rejected «9 marzo
+// 1976», which is the correct date (RS 0.672.945.41, Fedlex). The inverse
+// pattern cannot be added yet — about 550 IT bodies still carry «9 dicembre
+// 1976» from the old prompt ground truth. New articles are held to the right
+// date by mentionsWrongConventionDate in the generator.
 const INCORRECT_FACTS = [
-  { pattern: /convenzione.*9\s+marzo\s+1976/i, desc: 'Convenzione italo-svizzera: 9 DICEMBRE 1976, non marzo' },
-  { pattern: /9\s+marzo\s+1976.*convenzione/i, desc: 'Convenzione italo-svizzera: 9 DICEMBRE 1976, non marzo' },
   { pattern: /tassa\s+(?:sulla\s+)?salute\s+(?:\w+\s+){0,5}(?:del\s+)?10\s*%/i, desc: '"Tassa sulla salute del 10%" è un dato inventato' },
 ];
 
