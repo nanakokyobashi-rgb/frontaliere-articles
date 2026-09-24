@@ -1631,11 +1631,11 @@
       "path": "generator/scripts/batch-add-faq-to-articles.mjs",
       "sitePath": "scripts/batch-add-faq-to-articles.mjs",
       "mode": "adapted",
-      "reason": "Batch FAQ su tutti gli articoli. Differenza comune a tutti i gemelli trasportati: `PROJECT_ROOT` risale di due livelli invece di uno, perche' il trasporto ha spostato lo script da `scripts/` a `generator/scripts/`. Oltre a quello: `corpusPath()` sul BODY_DIR, `resolveGitAddPath` importata da `lib/corpus-paths.mjs` invece di `lib/resolve-git-add-path.mjs` (qui i due helper stanno nello stesso modulo), e la funzione `write()` con la guardia sui control char C0 (issue #66). Il corpus usa inoltre il PAT Remote Config per i checkpoint perche' checkout disabilita le credenziali ambientali. Dal 2026-09-23 (#625) i cinque comandi commit/push/rebase condividono una deadline complessiva di 30s: le misure live valide erano 309ms pushed e 1675ms rebased, mentre il bound precedente sommava 210s. La baseline corpus e' riattestata su questa modifica; quella site resta deliberatamente al riferimento gia' revisionato, cosi' il movimento site successivo resta visibile. Prompt, cascata di traduzione e riparazione JSON restano adattamenti omologhi al sito, non una copia byte-per-byte.",
+      "reason": "Batch FAQ su tutti gli articoli. Differenza comune a tutti i gemelli trasportati: `PROJECT_ROOT` risale di due livelli invece di uno, perche' il trasporto ha spostato lo script da `scripts/` a `generator/scripts/`. Oltre a quello: `corpusPath()` sul BODY_DIR, `resolveGitAddPath` importata da `lib/corpus-paths.mjs` invece di `lib/resolve-git-add-path.mjs` (qui i due helper stanno nello stesso modulo), e la funzione `write()` con la guardia sui control char C0 (issue #66). Il corpus usa inoltre il PAT Remote Config per i checkpoint perche' checkout disabilita le credenziali ambientali. Dal 2026-09-23 (#625) i cinque comandi commit/push/rebase condividono una deadline complessiva di 30s: le misure live valide erano 309ms pushed e 1675ms rebased, mentre il bound precedente sommava 210s. La baseline corpus e' riattestata su questa modifica; quella site resta deliberatamente al riferimento gia' revisionato, cosi' il movimento site successivo resta visibile. Prompt, cascata di traduzione e riparazione JSON restano adattamenti omologhi al sito, non una copia byte-per-byte. Dal 2026-09-24 lo script scrive anche l'esito della run su `$GITHUB_OUTPUT` (`processed`/`succeeded`/`all_failed`, decisione in `faqRunOutcome()`): e' il segnale con cui `batch-faq-articles.yml` diventa rosso quando ogni articolo tentato fallisce, invece di uscire verde con «Succeeded: 0» come nelle run 35690020249 e 35958863091. Adattamento corpus-only: il gate vive nel workflow di questo repo. Baseline corpus riattestata su questa modifica, quella site resta al riferimento gia' revisionato.",
       "baseline": {
         "site": "ecfbef46b21f6563",
-        "corpus": "a1ac1daef8fb15c1",
-        "alignedAt": "2026-09-23"
+        "corpus": "a6f00623208361ca",
+        "alignedAt": "2026-09-24"
       }
     },
     {
@@ -2311,10 +2311,10 @@
       "mode": "adapted",
       "baseline": {
         "site": "37ec8b868eb9a730",
-        "corpus": "a7ec2a7ee7533fc3",
-        "alignedAt": "2026-09-20"
+        "corpus": "1ba802eb9a8618ed",
+        "alignedAt": "2026-09-24"
       },
-      "reason": "Il corpus conserva adattamenti propri della cascata di traduzione (fingerprint delle capability per il memo eventi, neutralità dei tier opzionali non configurati, retry OAuth Google Cloud, attribuzione rung/durata e rifiuto dei payload OPUS-MT troncati); la copia byte-identica del sito cancellerebbe questi comportamenti e rende rossi i test di passthrough del corpus. In questa PR si portano la normalizzazione tedesca `frau:mann`, il guard sui sentinel mangled e il confronto con la sorgente raw prima della normalizzazione, mantenendo gli adattamenti locali dichiarati."
+      "reason": "Il corpus conserva adattamenti propri della cascata di traduzione (fingerprint delle capability per il memo eventi, neutralità dei tier opzionali non configurati, retry OAuth Google Cloud e conteggio dei suoi rifiuti silenziosi nel riepilogo della cascata, attribuzione rung/durata e rifiuto dei payload OPUS-MT troncati); la copia byte-identica del sito cancellerebbe questi comportamenti e rende rossi i test di passthrough del corpus. In questa PR si portano la normalizzazione tedesca `frau:mann`, il guard sui sentinel mangled e il confronto con la sorgente raw prima della normalizzazione, mantenendo gli adattamenti locali dichiarati. Dal 2026-09-24 il tier Google Cloud, che su token mancante, 403/429, !ok o timeout rende '' senza lanciare (quindi fuori da `tierErrors`), registra quanti rifiuti ha dato e l'ultimo motivo: il riepilogo diceva `0/16000 daily chars used` sia per «mai chiamato» sia per «ogni chiamata rifiutata»."
     },
     {
       "path": "generator/scripts/lib/google-service-account-token.mjs",
