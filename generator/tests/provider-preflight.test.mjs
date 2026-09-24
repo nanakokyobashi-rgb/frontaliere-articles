@@ -202,3 +202,30 @@ test('GitHub Models preflight ruota tutti i PAT e basta un account pronto', asyn
   assert.equal(report.providers[0].status, 'ready');
   assert.equal(report.providers[0].reason, 'catalog_reachable');
 });
+
+test('GitHub Models ritirato: un catalogo in 200 «OK» non e\' piu\' `ready`', async () => {
+  // Dal 2026-07-30 models.github.ai risponde `200 text/plain «OK»` a qualunque
+  // path (run 36022627600): lo status da solo lo dava `catalog_reachable`.
+  process.env.GH_MODELS_PAT = 'preflight-test-pat';
+  const report = await runProviderPreflight({
+    models: [AI_MODELS.GPT4O],
+    lookup: async () => [],
+    fetchImpl: async () => new Response('OK\r\n', { status: 200, headers: { 'content-type': 'text/plain; charset=utf-8' } }),
+    now: () => '2026-09-24T16:00:00.000Z',
+  });
+  assert.equal(report.providers[0].status, 'provider_unavailable');
+  assert.equal(report.providers[0].reason, 'github_models_retired');
+  assert.equal(report.providers[0].httpStatus, 200);
+  assert.equal(report.readyProviders.includes('github'), false);
+});
+
+test('un catalogo GitHub in 200 con JSON vero resta `ready`', async () => {
+  process.env.GH_MODELS_PAT = 'preflight-test-pat';
+  const report = await runProviderPreflight({
+    models: [AI_MODELS.GPT4O],
+    lookup: async () => [],
+    fetchImpl: async () => new Response('[{"id":"openai/gpt-4o"}]', { status: 200, headers: { 'content-type': 'application/json' } }),
+  });
+  assert.equal(report.providers[0].status, 'ready');
+  assert.equal(report.providers[0].reason, 'catalog_reachable');
+});

@@ -75,10 +75,10 @@ const SLUGS = [
     // sostituite — stessa scelta di #306, perche' una citazione «giusta» al
     // loro posto sposterebbe soltanto il punto in cui si inventa.
     // `25 giugno 1978` invece era la data SBAGLIATA di una Convenzione che
-    // esiste davvero, ed e' l'unico caso corretto e non rimosso: il repo ha
-    // gia' il proprio oracolo verificato — `create-article.mjs` ripete in
-    // quattro punti «Convenzione italo-svizzera: firmata 9 DICEMBRE 1976» e
-    // `article-fabrication-guard.test.mjs` ne fa un pattern bloccante.
+    // esiste davvero, ed e' l'unico caso corretto e non rimosso. La data
+    // giusta e' il 9 marzo 1976 (RS 0.672.945.41): e' quella che i prompt di
+    // `create-article.mjs` dettano e che `mentionsWrongConventionDate` fa
+    // rispettare (fino a #1751 dettavano, sbagliando, il 9 dicembre 1976).
     slug: 'infernieri-frontalieri-ticino',
     ref: 'corpus#317',
     citations: ['TF 1992', 'OD 1993', '25 giugno 1978'],
