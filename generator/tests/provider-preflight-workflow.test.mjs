@@ -16,12 +16,16 @@ test('Generate Blog Article esegue il preflight dopo il setup opzionale e prima 
   assert.match(WORKFLOW.slice(preflight, generate), /node generator\/scripts\/lib\/provider-preflight\.mjs/);
   assert.match(WORKFLOW.slice(preflight, generate), /PROVIDER_PREFLIGHT_OUTPUT:/);
   assert.match(WORKFLOW.slice(preflight, generate), /CODEX_AUTH_BROKER_SOCKET:/);
-  assert.match(WORKFLOW.slice(preflight, generate), /CLAUDE_CODE_OAUTH_TOKEN:/);
+  // Solo Codex (decisione del proprietario, 2026-09-24): il token Claude non
+  // arriva al preflight, cosi' non riporta come pronta una lane non usata.
+  assert.doesNotMatch(WORKFLOW.slice(preflight, generate), /CLAUDE_CODE_OAUTH_TOKEN:/);
   assert.match(WORKFLOW.slice(preflight, generate), /Upload provider preflight report/);
   assert.match(WORKFLOW.slice(preflight, generate), /actions\/upload-artifact@v4/);
   const nextStep = WORKFLOW.indexOf('\n      - ', generate + 1);
   const generateBlock = WORKFLOW.slice(generate, nextStep === -1 ? undefined : nextStep);
-  assert.match(generateBlock, /CLAUDE_CODE_OAUTH_TOKEN:/);
+  // Niente token Claude sul processo che chiama callLLM: claude-cli/haiku
+  // resta non disponibile e gli articoli li scrive solo Codex.
+  assert.doesNotMatch(generateBlock, /CLAUDE_CODE_OAUTH_TOKEN:/);
   assert.match(generateBlock, /CODEX_AUTH_BROKER_SOCKET:/);
 });
 

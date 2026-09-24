@@ -721,13 +721,14 @@ jobs:
       # che quel prompt lo reggevano sono i due CLI subscription — Codex prima,
       # Haiku poi — saltati in precedenza con «no API key». Il gate in
       # ai-models.mjs offre Codex solo quando action + broker sono pronti, e
-      # Claude quando il flag + token sono presenti. Il token va passato allo
-      # step di generazione qui sotto via `env:`: deve esistere nel processo che
-      # chiama callLLM.
+      # Claude quando il flag + token sono presenti.
       #
-      # Il secret esiste gia' in questo repo (CLAUDE_CODE_OAUTH_TOKEN, lo stesso
-      # del piano Max usato dalla review in tests.yml e da issue-fix.yml): non c'e' nulla
-      # da provisionare, mancava solo il cablaggio.
+      # Dal 2026-09-24 gli articoli li scrive solo Codex (decisione del
+      # proprietario): CLAUDE_CODE_OAUTH_TOKEN non viene piu' passato agli step
+      # di preflight e di generazione, quindi la lane Claude Haiku resta spenta
+      # anche se l'action installa il CLI. Per riaccenderla basta ripassare il
+      # token a quei due step via `env:`: deve esistere nel processo che chiama
+      # callLLM.
       # continue-on-error: true — issue #367. Gli step delle composite action
       # non supportano continue-on-error (nulla lo assorbe dentro
       # setup-claude-haiku-fallback/action.yml), quindi va sullo STEP
@@ -749,8 +750,6 @@ jobs:
         id: provider_preflight
         if: steps.mode.outputs.dry != 'true'
         env:
-          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          CLAUDE_CLI_BIN: ${{ steps.setup_claude_haiku_fallback.outputs.claude_cli_bin }}
           CODEX_AUTH_BROKER_SOCKET: ${{ steps.setup_claude_haiku_fallback.outputs.codex_auth_broker_socket }}
           PROVIDER_PREFLIGHT_OUTPUT: ${{ runner.temp }}/provider-preflight.json
         run: node generator/scripts/lib/provider-preflight.mjs
@@ -855,12 +854,13 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           CHAIN_LINK: ${{ steps.mode.outputs.chain_link }}
           # Issue #313 — la meta' che DEVE stare sul processo che chiama callLLM:
-          # ai-models.mjs offre Codex quando il broker action-owned e' attivo,
-          # e claude-cli/haiku solo se hasClaudeCodeOauthToken() e il relativo
-          # flag sono veri QUI dentro. L'action sopra prepara la prima lane e
-          # questo passa il token della seconda; senza i prerequisiti il
-          # provider resta semplicemente «non disponibile».
-          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          # ai-models.mjs offre Codex quando il broker action-owned e' attivo.
+          # Solo Codex, niente Claude Haiku (decisione del proprietario,
+          # 2026-09-24): il token OAuth di Claude non arriva ne' qui ne' al
+          # preflight, quindi hasClaudeCodeOauthToken() e' falso e
+          # claude-cli/haiku resta «non disponibile» in tutto il processo,
+          # preferenza compresa. L'action installa ancora il CLI Claude (circa
+          # 2 secondi) perche' e' condivisa, ma senza token nessuno lo chiama.
           CODEX_AUTH_BROKER_SOCKET: ${{ steps.setup_claude_haiku_fallback.outputs.codex_auth_broker_socket }}
         run: |
           # `set +e` explicitly: GitHub's default shell is `bash -eo pipefail`,

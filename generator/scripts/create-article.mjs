@@ -72,8 +72,10 @@ import { decodeSyntheticSourceToken, isZeroSourceForGenerationBudget, markSynthe
 // ── Il modello preferito per la SOLA generazione del corpo ──────────────────
 //
 // Decisione del proprietario: per la generazione editoriale ad alto valore la
-// prima scelta e' Codex via subscription; Claude Haiku e' il fallback
-// immediato, poi si passa alla cascata disponibile. Questo e' quel punto: la
+// prima scelta e' Codex via subscription, poi si passa alla cascata
+// disponibile. Claude Haiku era il fallback immediato fino al 2026-09-24; da
+// allora generate-article.yml non gli passa il token (solo Codex) e la voce
+// sotto resta vuota. Questo e' quel punto: la
 // generazione del corpo italiano e' l'unica chiamata i cui gate (fedelta' alla
 // fonte, tassi chiave, lunghezza minima) bocciano davvero l'output dei modelli
 // free.
@@ -94,8 +96,10 @@ const PREFERRED_GENERATION_MODELS = [
   AI_MODELS.CODEX_CLI_PRIMARY,
   // Crawler groups do not receive the Claude OAuth token. Keep Claude out of
   // their declared preference rather than advertising a lane that
-  // isModelAvailable() will immediately discard; the wired article workflow
-  // adds it here when its flag and token are both present.
+  // isModelAvailable() will immediately discard. Since 2026-09-24
+  // generate-article.yml does not pass the token either (owner decision:
+  // articles are written by Codex only), so this entry stays empty there
+  // too; it comes back only if a caller passes the flag and the token.
   ...(isModelAvailable(AI_MODELS.CLAUDE_CLI_HAIKU)
     ? [AI_MODELS.CLAUDE_CLI_HAIKU]
     : []),
@@ -17675,7 +17679,7 @@ if (invokedDirectly) {
       + ` contro un cap massimo di ${cap.maxSkippedReqLimit} (oltre di ~${over}).`
       + ` NON e' un esaurimento di quota: nessuna finestra oraria rimpicciolisce un prompt, quindi differire qui e' un ciclo infinito`
       + ` (issue #313: 60+ run 'success' consecutive senza un articolo). Accorciare il prompt di almeno ${over} token,`
-      + ` oppure rendere raggiungibile un modello con contesto adeguato (claude-cli/haiku).`,
+      + ` oppure rendere raggiungibile un modello con contesto adeguato (codex-cli, il lane preferito).`,
     );
     console.error(`::error::roster-cannot-serve-prompt: est=${cap.estimatedRequestTokens} best_cap=${cap.maxSkippedReqLimit} over=${over} refusals=${cap.count}`);
     await exitAfterFlush(EXIT_ROSTER_CANNOT_SERVE_PROMPT);

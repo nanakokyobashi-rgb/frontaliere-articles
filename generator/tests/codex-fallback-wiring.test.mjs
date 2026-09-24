@@ -129,13 +129,20 @@ test('la preferenza Claude esiste solo quando la lane è disponibile nel process
   );
 });
 
-test('il preflight riceve il percorso del CLI Claude attested dall action', () => {
+test('Generate Blog Article scrive solo con Codex: nessuno step riceve la lane Claude', () => {
+  // Decisione del proprietario (2026-09-24): «Solo codex no haiku». Senza
+  // CLAUDE_CODE_OAUTH_TOKEN nel processo, hasClaudeCodeOauthToken() e' falso e
+  // claude-cli/haiku non e' disponibile, preferenza compresa.
   const workflow = read('.github/workflows/generate-article.yml');
+  const stepsStart = workflow.indexOf('\n    steps:');
+  assert.ok(stepsStart >= 0, 'steps not found');
+  const steps = workflow.slice(stepsStart);
+  assert.doesNotMatch(steps, /^\s+CLAUDE_CODE_OAUTH_TOKEN:/m, 'no step may receive the Claude OAuth token');
+  assert.doesNotMatch(steps, /^\s+CLAUDE_CLI_BIN:/m, 'no step may receive the Claude CLI path');
   const preflightStart = workflow.indexOf('id: provider_preflight');
   const preflightEnd = workflow.indexOf('run: node generator/scripts/lib/provider-preflight.mjs', preflightStart);
   assert.ok(preflightStart >= 0 && preflightEnd > preflightStart, 'provider preflight step not found');
-  const preflight = workflow.slice(preflightStart, preflightEnd);
-  assert.match(preflight, /CLAUDE_CLI_BIN:\s+\$\{\{\s*steps\.setup_claude_haiku_fallback\.outputs\.claude_cli_bin\s*\}\}/);
+  assert.match(workflow.slice(preflightStart, preflightEnd), /CODEX_AUTH_BROKER_SOCKET:/);
 });
 
 test('Codex primary keeps Luna Max and is reusable across crawler calls', () => {
