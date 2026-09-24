@@ -3588,9 +3588,9 @@
       "sitePath": ".github/corpus-workflows/translate-pending.yml",
       "mode": "identical",
       "baseline": {
-        "site": "680f356b302f21b8",
-        "corpus": "680f356b302f21b8",
-        "alignedAt": "2026-09-20"
+        "site": "bc7345b6dad7db4d",
+        "corpus": "bc7345b6dad7db4d",
+        "alignedAt": "2026-09-24"
       }
     },
     {
@@ -3599,8 +3599,8 @@
       "mode": "identical",
       "reason": "Riallineato il 2026-09-24 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono ora byte-identici fra sito e corpus, con il roster corrente di 621 crawler.",
       "baseline": {
-        "site": "3be4caadecd7e8d8",
-        "corpus": "3be4caadecd7e8d8",
+        "site": "d834ccfa671faef3",
+        "corpus": "d834ccfa671faef3",
         "alignedAt": "2026-09-24"
       }
     },
@@ -3706,8 +3706,8 @@
       "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, misura l'eta' del detentore dal job attivo (`jobs.started_at`) invece che dalla coda del workflow, dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
       "baseline": {
         "site": null,
-        "corpus": "e86919aaf45b4647",
-        "alignedAt": "2026-09-20"
+        "corpus": "08a40d134e582755",
+        "alignedAt": "2026-09-24"
       }
     },
     {
