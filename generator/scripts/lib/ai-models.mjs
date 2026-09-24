@@ -350,8 +350,10 @@ export const AI_MODELS = Object.freeze({
   // crawler group through one bounded lane. The crawler action explicitly
   // prefers this model before the normal provider cascade.
   // The model is intentionally absent from DEFAULT_CHAIN: Codex is reserved for
-  // the high-value article-body generation path, not translations, metadata,
-  // FAQ work or fact-check consensus.
+  // the high-value article-body generation path (plus the headline-selection
+  // retry once the free cascade has failed, see HEADLINE_SELECTION_FALLBACK in
+  // create-article.mjs), not translations, metadata, FAQ work or fact-check
+  // consensus.
   CODEX_CLI_PRIMARY: `codex-cli/${CODEX_FALLBACK_MODEL}`,
 
   // ── Claude CLI Haiku fallback (article-body explicit opt-in) ─────────────
@@ -4839,8 +4841,9 @@ function sortChainByScore(chain) {
 // dal punteggio. Proprio per questo NON e' mai un default — si attiva solo se
 // qualcuno la chiede esplicitamente, in uno dei due modi:
 //
-//   1. `opts.prefer` su UNA chiamata (create-article.mjs la mette sulla sola
-//      generazione del corpo, non su traduzioni/meta/FAQ/classificazione);
+//   1. `opts.prefer` su UNA chiamata (create-article.mjs la mette sulla
+//      generazione del corpo e, dopo un tentativo fallito dei free, sulla
+//      selezione headline; mai su traduzioni/meta/FAQ/classificazione);
 //   2. `AI_MODELS_PREFER` impostata a mano da UNO step di workflow — oggi
 //      `translate-pending.yml` del sito, che dipende da questa semantica e ha
 //      un gate dedicato (`tests/relocalize-traffic-priority.test.ts`).
@@ -4870,8 +4873,9 @@ function sortChainByScore(chain) {
 // di tier, non regala priorita'. Il default violava quella riga, ed e' il
 // motivo per cui i due repo non potevano convergere finche' esisteva.
 //
-// Ora la preferenza e' una sola, esplicita, e vive dove serve: sulla chiamata
-// che genera il corpo dell'articolo. `DEFAULT_MODELS_PREFER` resta esportata e
+// Ora la preferenza e' esplicita e vive dove serve: sulla chiamata che genera
+// il corpo dell'articolo, e sul ritentativo della selezione headline quando la
+// cascata free ha appena fallito. `DEFAULT_MODELS_PREFER` resta esportata e
 // vuota, come punto unico in cui un default tornerebbe se mai lo si volesse —
 // ma chi lo riempie riapre esattamente il buco descritto qui sopra.
 export const DEFAULT_MODELS_PREFER = [];
