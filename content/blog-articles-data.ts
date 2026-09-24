@@ -785,6 +785,7 @@ const RAW_ARTICLES = [
  id: 'simulazione-fiscale-frontaliere-2026',
  category: 'fiscale',
  date: '2026-02-23T15:48:03.684Z',
+ updatedAt: '2026-09-24',
  image: '/images/blog/simulazione-fiscale-frontaliere-2026.webp',
  hasCalculator: true,
  authorSlug: 'marco-ferrari',
