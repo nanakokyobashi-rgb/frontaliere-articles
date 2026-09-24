@@ -167,10 +167,17 @@ function makeWorld({ comments, faults = [] }) {
   writeFileSync(gh, FAKE_GH);
   chmodSync(gh, 0o755);
   const git = path.join(bin, 'git');
+  // Dal #1771 il classificatore legge la head remota due volte e la usa solo
+  // se le letture concordano: `rev-parse --verify` sul ref appena scaricato e
+  // `ls-remote` sul remoto. Qui la head esterna e' stabile, quindi entrambe
+  // rispondono `external-sha`; senza queste due voci ogni scenario finiva in
+  // REMOTE_HEAD_UNVERIFIED prima di arrivare al rimborso.
   writeFileSync(git, `#!/bin/sh
 case "$1 $2" in
   "rev-parse HEAD") printf '%s\\n' merged-sha ;;
   "rev-parse origin/"*) printf '%s\\n' external-sha ;;
+  "rev-parse --verify") printf '%s\\n' external-sha ;;
+  "ls-remote "*) printf 'external-sha\\trefs/heads/%s\\n' "$HEAD_REF" ;;
   fetch*) exit 0 ;;
   *) exit 64 ;;
 esac
