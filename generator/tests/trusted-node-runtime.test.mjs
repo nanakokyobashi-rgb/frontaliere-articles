@@ -1,5 +1,6 @@
 /**
- * Contratto del resolver Node/npm usato dal fallback Haiku.
+ * Contratto del resolver Node/npm usato dalla lane Codex degli articoli (era
+ * condiviso con il fallback Haiku, spento dal proprietario il 2026-09-24).
  *
  * L'action è YAML con una composite action: il test verifica il contratto
  * sorgente senza fingere di poter emulare il runner GitHub in node:test.
@@ -25,10 +26,9 @@ const BROKER = fs.readFileSync(
 );
 
 const runtimeStart = ACTION.indexOf('- name: Resolve trusted Node/npm toolchain');
-const claudeStart = ACTION.indexOf('- name: Setup Claude CLI Haiku fallback');
-assert.ok(runtimeStart !== -1 && claudeStart > runtimeStart, 'blocco trusted toolchain non trovato');
-const RUNTIME = ACTION.slice(runtimeStart, claudeStart);
-const CLAUDE = ACTION.slice(claudeStart);
+const runtimeEnd = ACTION.indexOf('- name: Prepare Linux sandbox for Codex primary');
+assert.ok(runtimeStart !== -1 && runtimeEnd > runtimeStart, 'blocco trusted toolchain non trovato');
+const RUNTIME = ACTION.slice(runtimeStart, runtimeEnd);
 
 test('il resolver ammette solo prefissi di sistema e mantiene il controllo dei componenti', () => {
   const roots = RUNTIME.match(/for trusted_root in ([^;]+); do/)?.[1] ?? '';
@@ -63,7 +63,7 @@ test('la diagnostica espone PATH, realpath e il verdetto dei due controlli', () 
   assert.match(RUNTIME, /trusted-runtime selected node_realpath=%s npm_realpath=%s/);
 });
 
-test('nessuna coppia attestabile disattiva Haiku senza aggirare il controllo', () => {
+test('nessuna coppia attestabile disattiva la lane CLI senza aggirare il controllo', () => {
   const noPair = RUNTIME.match(
     /if \[ -z "\$node_realpath" \] \|\| \[ -z "\$npm_realpath" \]; then([\s\S]*?)fi/,
   )?.[1] ?? '';
@@ -76,62 +76,25 @@ test('nessuna coppia attestabile disattiva Haiku senza aggirare il controllo', (
   );
 });
 
-test('anche una CLI Haiku non installabile lascia disponibile la cascata normale', () => {
-  assert.match(CLAUDE, /set \+e\n\s*\(/);
-  assert.match(CLAUDE, /setup_status=\$\?/);
-  assert.match(CLAUDE, /printf 'available=true\\n' >> "\$GITHUB_OUTPUT"/);
-  assert.match(CLAUDE, /printf 'available=false\\n' >> "\$GITHUB_OUTPUT"/);
-  assert.match(CLAUDE, /Haiku fallback disabled|Haiku setup unavailable/);
-  assert.match(CLAUDE, /steps\.trusted_toolchain\.outputs\.available == 'true'/);
-});
-
-test('la CLI Haiku viene installata in un prefisso attestato e passa il suo path al consumer', () => {
-  assert.match(CLAUDE, /claude_prefix=.*\/opt\/runner\/claude-haiku-cli/);
-  assert.match(CLAUDE, /NPM_CONFIG_PREFIX="\$claude_prefix"/);
-  assert.match(CLAUDE, /claude_cli_bin=/);
-  assert.match(CLAUDE, /claude_cli_sha256=/);
-  assert.match(CLAUDE, /CLAUDE_CLI_BIN=/);
-  assert.match(CLAUDE, /CLAUDE_CLI_SHA256=/);
-  assert.match(CLAUDE, /root-owned Claude CLI prefix/);
-});
-
-test('la pulizia della cache npm scritta da root non può disattivare Haiku', () => {
-  // Run 36001495484: CLI installata e attestata, poi `rm -rf "$install_root"`
-  // senza sudo falliva con EACCES sulla cache npm scritta da root, e sotto
-  // `set -e` la subshell usciva prima di pubblicare claude_cli_bin.
-  const setupEnd = CLAUDE.indexOf('- name: Prepare Linux sandbox for Codex primary');
-  assert.ok(setupEnd !== -1, 'fine dello step Claude CLI non trovata');
-  const setup = CLAUDE.slice(0, setupEnd);
-  assert.match(setup, /npm_config_cache="\$install_root\/cache"/);
-  assert.match(setup, /"\$sudo_cmd" -n \/usr\/bin\/env -i "\$\{clean_env\[@\]\}"[^\n]*install --global/);
-  const removals = setup
-    .split('\n')
-    .filter((line) => !line.trim().startsWith('#') && /\brm\b[^\n]*"\$install_root"/.test(line));
-  assert.ok(removals.length > 0, 'la pulizia di $install_root non è stata trovata');
-  for (const line of removals) {
-    assert.match(line, /"\$sudo_cmd" -n \/usr\/bin\/rm -rf -- "\$install_root"/, `rimozione senza sudo: ${line.trim()}`);
-  }
-  const cleanup = setup.match(/"\$sudo_cmd" -n \/usr\/bin\/rm -rf -- "\$install_root"[^\n]*\n([^\n]*)/);
-  assert.ok(cleanup, 'pulizia non trovata');
-  assert.match(cleanup[0], /\\\n\s*\|\| echo "::warning::/, 'la pulizia deve restare non fatale');
-  assert.ok(
-    setup.indexOf(cleanup[0]) < setup.indexOf("printf 'claude_cli_bin=%s"),
-    'la pulizia precede la pubblicazione del path attestato',
-  );
+// Decisione del proprietario del 2026-09-24 («Disattiva haiku! Voglio solo
+// codex»): l'action non installa, non attesta e non pubblica piu' la CLI
+// Claude. Qui stavano i test della sua installazione (prefisso root-owned,
+// pulizia della cache npm con sudo, probe semver): il loro oggetto non esiste
+// piu', e questo test impedisce che rientri in silenzio.
+test('l\'action non installa ne\' pubblica la CLI Claude: la lane CLI e\' solo Codex', () => {
+  // Solo outputs e steps: la `description` in testa nomina apposta cio' che
+  // l'action NON fa piu'.
+  const body = ACTION.slice(ACTION.indexOf('\ninputs:'));
+  assert.doesNotMatch(body, /@anthropic-ai\/claude-code/);
+  assert.doesNotMatch(body, /id: setup_claude_cli|claude_cli_bin|claude_cli_sha256/);
+  assert.doesNotMatch(body, /CLAUDE_CLI_BIN=|CLAUDE_CLI_SHA256=/);
+  assert.doesNotMatch(body, /ENABLE_HAIKU_ARTICLE_FALLBACK=1/);
+  assert.doesNotMatch(body, /\/opt\/runner\/claude-haiku-cli/);
+  assert.match(body, /@openai\/codex@0\.153\.4/);
+  assert.match(body, /id: start_codex_auth_broker/);
 });
 
 test('le probe CLI tollerano il suffisso di --version senza allentare il pin semver', () => {
-  const claudePattern = CLAUDE.match(
-    /printf '%s\\n' "\$claude_cli_version" \| \/usr\/bin\/grep -Eq '([^']+)'/,
-  )?.[1];
-  assert.ok(claudePattern, 'probe semver della CLI Claude non trovata');
-  const claudeVersion = new RegExp(claudePattern);
-  assert.match('2.1.267 (Claude Code)', claudeVersion);
-  assert.doesNotMatch('2.1.2670', claudeVersion);
-  assert.doesNotMatch('2.1.267.1', claudeVersion);
-  assert.doesNotMatch('2.1.267-beta', claudeVersion);
-  assert.doesNotMatch(CLAUDE, /\[\s*"\$claude_cli_version"\s*(?:!=|=)\s*'[^']+'\s*\]/);
-
   const codexPatterns = [...CODEX_ACTION.matchAll(
     /printf '%s\\n' "\$codex_version" \| \/usr\/bin\/grep -Eq '([^']+)'/g,
   )].map((match) => match[1]);

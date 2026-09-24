@@ -117,25 +117,29 @@ test('every active article CLI caller wires the OAuth Codex broker', () => {
     'translation must stay outside the Codex broker lane');
 });
 
-test('la preferenza Claude esiste solo quando la lane è disponibile nel processo', () => {
+// Decisione del proprietario del 2026-09-24 («Disattiva haiku! Voglio solo
+// codex»): la preferenza del corpo e' SOLO Codex, e nessuno step riceve piu'
+// il token o il binario della CLI Claude.
+test('la preferenza del corpo e\' solo Codex: Claude non entra nemmeno condizionato', () => {
   const createArticle = read('generator/scripts/create-article.mjs');
   const preferenceStart = createArticle.indexOf('const PREFERRED_GENERATION_MODELS');
   const preferenceEnd = createArticle.indexOf('];', preferenceStart);
   assert.ok(preferenceStart >= 0 && preferenceEnd > preferenceStart, 'article preference not found');
-  assert.match(
-    createArticle.slice(preferenceStart, preferenceEnd),
-    /AI_MODELS\.CODEX_CLI_PRIMARY[\s\S]*\.\.\.\(isModelAvailable\(AI_MODELS\.CLAUDE_CLI_HAIKU\)[\s\S]*\[AI_MODELS\.CLAUDE_CLI_HAIKU\][\s\S]*:\s*\[\]\)/,
-    'Claude must be added conditionally, after the Codex primary',
-  );
+  const preference = createArticle.slice(preferenceStart, preferenceEnd);
+  assert.match(preference, /AI_MODELS\.CODEX_CLI_PRIMARY/);
+  assert.doesNotMatch(preference, /CLAUDE_CLI_HAIKU|claude-cli/, 'Haiku is disabled: it must not be in the article preference');
 });
 
-test('il preflight riceve il percorso del CLI Claude attested dall action', () => {
+test('il preflight e la generazione non ricevono token ne\' binario Claude', () => {
   const workflow = read('.github/workflows/generate-article.yml');
   const preflightStart = workflow.indexOf('id: provider_preflight');
   const preflightEnd = workflow.indexOf('run: node generator/scripts/lib/provider-preflight.mjs', preflightStart);
   assert.ok(preflightStart >= 0 && preflightEnd > preflightStart, 'provider preflight step not found');
   const preflight = workflow.slice(preflightStart, preflightEnd);
-  assert.match(preflight, /CLAUDE_CLI_BIN:\s+\$\{\{\s*steps\.setup_claude_haiku_fallback\.outputs\.claude_cli_bin\s*\}\}/);
+  assert.match(preflight, /CODEX_AUTH_BROKER_SOCKET:\s+\$\{\{\s*steps\.setup_claude_haiku_fallback\.outputs\.codex_auth_broker_socket\s*\}\}/);
+  const wiring = workflow.split('\n').filter((line) => !line.trim().startsWith('#')).join('\n');
+  assert.doesNotMatch(wiring, /CLAUDE_CODE_OAUTH_TOKEN|CLAUDE_CLI_BIN|claude_cli_bin/,
+    'generate-article.yml must not wire the disabled Claude lane into any step');
 });
 
 test('Codex primary keeps Luna Max and is reusable across crawler calls', () => {
@@ -152,8 +156,8 @@ test('Codex primary keeps Luna Max and is reusable across crawler calls', () => 
   const codexPreference = createArticle.indexOf('AI_MODELS.CODEX_CLI_PRIMARY', preferenceStart);
   const preferenceEnd = createArticle.indexOf('];', codexPreference);
   assert.ok(preferenceStart >= 0 && codexPreference >= 0, 'Codex must be the article preference');
-  assert.match(createArticle.slice(preferenceStart, preferenceEnd), /CLAUDE_CLI_HAIKU/);
-  assert.match(action, /name: "Setup Codex primary with Claude fallback"/);
+  assert.doesNotMatch(createArticle.slice(preferenceStart, preferenceEnd), /CLAUDE_CLI_HAIKU/);
+  assert.match(action, /name: "Setup Codex Luna Max article lane"/);
   assert.match(action, /--max-requests\s+4096/,
     'the production broker must keep the shared crawler/job lane bounded');
   assert.doesNotMatch(action, /indirect Codex fallback/);

@@ -939,11 +939,11 @@ function getOmniRouteUrl() { return (process.env.OMNIROUTE_URL || OMNIROUTE_DEFA
 // key, so keep a sentinel, same pattern as Local/getLocalLlmApiKey.
 function getOmniRouteApiKey() { return (process.env.OMNIROUTE_API_KEY || 'omniroute-no-key').trim(); }
 
-// ── CLI article lane (Codex primary, Claude body fallback) ─────────────────
+// ── CLI article lane (Codex Luna Max only) ─────────────────────────────────
 // ENABLE_HAIKU_ARTICLE_FALLBACK is the historical Remote Config flag loaded by
 // load-rc-env.mjs. Keep accepting it while the action also publishes the more
 // truthful ENABLE_CODEX_ARTICLE_FALLBACK name: existing callers and the RC
-// kill-switch remain compatible, but the preferred path now starts with Codex.
+// kill-switch remain compatible, and the only CLI model it opens is Codex.
 function isTruthyEnv(name) {
   return /^(1|true|yes|on)$/i.test((process.env[name] || '').trim()); // env-scan: name is restricted to the literal CLI flag/gate names in this module
 }
@@ -953,8 +953,16 @@ function isArticleCliLaneEnabled() {
   return isTruthyEnv('ENABLE_CODEX_ARTICLE_FALLBACK')
     || isTruthyEnv('ENABLE_HAIKU_ARTICLE_FALLBACK');
 }
+// Decisione del proprietario (2026-09-24, «Disattiva haiku! Voglio solo
+// codex»): la lane Claude Haiku e' spenta NEL CODICE, non solo dal kill-switch
+// di Remote Config. ENABLE_HAIKU_ARTICLE_FALLBACK=1 resta il gate storico della
+// lane CLI (apre Codex, vedi isArticleCliLaneEnabled) ma non rende piu'
+// disponibile `claude-cli/haiku`: con questa funzione a false
+// getApiKeyForProvider(CLAUDE_CLI) e' vuota, quindi isModelAvailable, il
+// preflight e la cascata di callLLM lo saltano anche se un chiamante lo passa
+// in `prefer`, in `AI_MODELS_PREFER` o come `model`.
 function isClaudeCliFallbackEnabled() {
-  return isArticleCliLaneEnabled() && isTruthyEnv('ENABLE_HAIKU_ARTICLE_FALLBACK');
+  return false;
 }
 function isCodexCliPrimaryEnabled() {
   return isArticleCliLaneEnabled()
@@ -1650,8 +1658,9 @@ export function getApiKeyForProvider(provider) {
     // of requests, so every crawler worker can use the same primary lane.
     case PROVIDER.CODEX_CLI:   return isCodexCliPrimaryEnabled() ? 'codex-cli-no-key' : '';
     // No real key — auth is the CLAUDE_CODE_OAUTH_TOKEN env var, read directly
-    // by the `claude` CLI subprocess. Gate on RC flag + token presence so the
-    // chain only offers this model when both are actually usable. Mirrors Local.
+    // by the `claude` CLI subprocess. Spenta dal proprietario il 2026-09-24:
+    // isClaudeCliFallbackEnabled() e' false, quindi questa voce e' sempre ''
+    // e ogni claude-cli/* viene saltato con «no API key», flag e token o no.
     case PROVIDER.CLAUDE_CLI:  return (!_claudeCliBinaryMissing && !_claudeCliTimeoutStormDetected && isClaudeCliFallbackEnabled() && hasClaudeCodeOauthToken()) ? 'claude-cli-no-key' : '';
     // OmniRoute needs no real key from us either; gate purely on the opt-in
     // flag, same sentinel pattern as Local. '' when disabled → every
