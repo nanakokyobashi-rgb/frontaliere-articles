@@ -120,10 +120,11 @@ const RAW_ARTICLES = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
-  {
+ {
  id: 'casa-oltre-confine-ticino',
  category: 'pratico',
  date: '2026-02-17T14:00:00Z',
+ updatedAt: '2026-09-24',
  image: '/images/places/gandria.webp',
  hasCalculator: true,
  authorSlug: 'redazione',
