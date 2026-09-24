@@ -235,20 +235,26 @@ jobs:
           printf 'title=%s\n' "$DIGEST_TITLE" >> "$GITHUB_OUTPUT"
 
       - name: Prefetch site vision registry for Codex
+        id: site_vision
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
+          vision_dir="${RUNNER_TEMP:-/tmp}/review-ctx"
+          mkdir -p "$vision_dir"
+          chmod 700 "$vision_dir"
           gh api \
-            --repo valerielinc-ops/frontaliere-si-o-no \
             repos/valerielinc-ops/frontaliere-si-o-no/contents/VISION.md \
             --jq .content \
-            | base64 --decode > /tmp/frontaliere-site-VISION.md
-          test -s /tmp/frontaliere-site-VISION.md
+            | base64 --decode > "$vision_dir/site-VISION.md"
+          test -s "$vision_dir/site-VISION.md"
+          grep -Fqx '# VISION — driver di decisione del ciclo autonomo' "$vision_dir/site-VISION.md"
+          grep -Fq '## Driver di decisione autonoma' "$vision_dir/site-VISION.md"
+          grep -Fq '**D1 —' "$vision_dir/site-VISION.md"
 
       - name: Run Codex Luna Max sweep
         id: codex_sweep
-        if: always() && steps.digest_title.outcome == 'success'
+        if: always() && steps.digest_title.outcome == 'success' && steps.site_vision.outcome == 'success'
         continue-on-error: true
         uses: ./.github/actions/claude-codex-fallback
         env:
@@ -263,7 +269,7 @@ jobs:
             Sei lo sweep settimanale del backlog `needs-human` + `automation-deferred` di questo repo (il CORPUS, `$REPO`). Il tuo compito: lasciare all'umano solo decisioni realmente mancanti e rimettere il resto nel ciclo autonomo. NON implementi fix e NON apri PR.
 
             **Bootstrap:**
-            1. Leggi `/tmp/frontaliere-site-VISION.md` PER INTERO. Questo repo NON ne ha una copia, ed è deliberato: la sorgente unica è quella del SITO. Il file è stato prelevato dal runner prima di avviare Codex; non tentare `gh api --repo` cross-repo dal bridge dell'agente, perché quel flag non è disponibile in questo ambiente. I driver di decisione (D1-D8) e il registro delle decisioni già prese sono il tuo criterio di classificazione. La lista «Sempre umano» è stata RIMOSSA il 2026-08-24 (istruzione diretta del proprietario, registro in VISION.md): non esiste più una categoria di business riservata all'umano. Se il file non è leggibile, FERMATI e posta il motivo sul digest: senza i driver non hai criterio, e classificare a intuito è il modo di far implementare al fixer scelte che non gli spettano.
+            1. Leggi `${{ runner.temp }}/review-ctx/site-VISION.md` PER INTERO. Questo repo NON ne ha una copia, ed è deliberato: la sorgente unica è quella del SITO. Il runner ha verificato il contenuto e l'action trasferisce `review-ctx/` nel tuo scratch isolato prima di avviare Codex; non tentare `gh api --repo` cross-repo dal bridge dell'agente, perché quel flag non è disponibile in questo ambiente. I driver di decisione (D1-D8) e il registro delle decisioni già prese sono il tuo criterio di classificazione. La lista «Sempre umano» è stata RIMOSSA il 2026-08-24 (istruzione diretta del proprietario, registro in VISION.md): non esiste più una categoria di business riservata all'umano. Se il file non è leggibile, FERMATI e posta il motivo sul digest: senza i driver non hai criterio, e classificare a intuito è il modo di far implementare al fixer scelte che non gli spettano.
             2. `gh issue list --repo $REPO --state open --label needs-human --json number,title,labels,createdAt,updatedAt --limit 100` e `gh issue list --repo $REPO --state open --label automation-deferred --json number,title,labels,createdAt,updatedAt --limit 100` — unisci per numero e ordina per updatedAt crescente (le più ferme prima).
 
             **Per ogni issue (MASSIMO 15 azioni totali in questo run — un'azione = un cambio di label/stato; le issue oltre il cap restano al giro successivo):**
