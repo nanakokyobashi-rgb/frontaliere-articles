@@ -91,8 +91,16 @@ test('il valore del titolo digest è validato prima del prompt Codex e passato c
   assert.doesNotMatch(validate, /\n\s+DIGEST_TITLE:\s+\$\{\{/, 'la sorgente del titolo non deve essere duplicata nello step');
   assert.match(validate, /\[ -n "\$DIGEST_TITLE" \]/, 'un titolo vuoto deve essere un errore osservabile');
   assert.match(validate, /printf 'title=%s\\n' "\$DIGEST_TITLE" >> "\$GITHUB_OUTPUT"/, 'il valore validato deve diventare un output machine-stabile');
+  assert.match(validate, /- name: Prefetch site vision registry for Codex/, 'VISION.md deve essere prelevata prima del bridge Codex');
+  assert.match(validate, /id: site_vision/, 'il prefetch deve avere un output osservabile');
+  assert.match(validate, /vision_dir="\$\{RUNNER_TEMP:-\/tmp\}\/review-ctx"/, 'il file deve stare nella directory temporanea copiata dall action');
+  assert.doesNotMatch(validate, /gh api \\\s*\n\s*--repo valerielinc-ops\/frontaliere-si-o-no/, 'il prefetch non deve usare il flag --repo non supportato dal bridge');
+  assert.match(validate, /grep -Fqx '# VISION — driver di decisione del ciclo autonomo'/, 'il payload deve essere verificato come VISION.md');
+  assert.match(validate, /grep -Fq '## Driver di decisione autonoma'/, 'il payload deve contenere i driver di decisione');
 
   const prompt = stepBlock('Run Codex Luna Max sweep');
+  assert.match(prompt, /Leggi `\$\{\{ runner\.temp \}\}\/review-ctx\/site-VISION\.md` PER INTERO/, 'il prompt deve leggere la copia prefetchata, non interrogare il repo remoto');
+  assert.match(prompt, /steps\.site_vision\.outcome == 'success'/, 'Codex non deve partire se il prefetch della VISION fallisce');
   assert.match(
     prompt,
     /titolo ESATTO `\$\{\{ steps\.digest_title\.outputs\.title \}\}`/,
@@ -115,4 +123,12 @@ test('il valore del titolo digest è validato prima del prompt Codex e passato c
     validationGuardAt !== -1 && searchCommandAt !== -1 && validationGuardAt < searchCommandAt,
     'il verdetto deve verificare il titolo prima del comando che interroga GitHub',
   );
+});
+
+test('la label tecnica viene garantita prima del pre-pass deterministico', () => {
+  const bootstrap = stepBlock('Ensure automation-deferred label (zero-Claude)');
+  assert.match(bootstrap, /gh label create automation-deferred/);
+  const bootstrapAt = text.indexOf('- name: Ensure automation-deferred label (zero-Claude)');
+  const prepassAt = text.indexOf('- name: Pre-pass deterministico (zero-Claude)');
+  assert.ok(bootstrapAt !== -1 && prepassAt !== -1 && bootstrapAt < prepassAt, 'il bootstrap deve precedere lo script che scrive la label');
 });

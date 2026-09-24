@@ -425,7 +425,9 @@ test('the corpus review loads its host-side PAT before invoking Codex', () => {
   assert.match(issueDecomposeWorkflow, /codex_site_github_token: \$\{\{ env\.GITHUB_PAT \}\}/);
   assert.match(issueDecomposeWorkflow, /gh api --repo valerielinc-ops\/frontaliere-si-o-no repos\/valerielinc-ops\/frontaliere-si-o-no\/contents\/VISION\.md/);
   assert.match(needsHumanWorkflow, /codex_site_github_token: \$\{\{ env\.GITHUB_PAT \}\}/);
-  assert.match(needsHumanWorkflow, /gh api --repo valerielinc-ops\/frontaliere-si-o-no repos\/valerielinc-ops\/frontaliere-si-o-no\/contents\/VISION\.md/);
+  assert.match(needsHumanWorkflow, /- name: Prefetch site vision registry for Codex[\s\S]*?id: site_vision[\s\S]*?gh api[\s\S]*?contents\/VISION\.md[\s\S]*?review-ctx\/site-VISION\.md/);
+  assert.match(needsHumanWorkflow, /Leggi `\$\{\{ runner\.temp \}\}\/review-ctx\/site-VISION\.md` PER INTERO/);
+  assert.match(needsHumanWorkflow, /steps\.site_vision\.outcome == 'success'/);
   assert.match(mintGate, /GATE_PR_TOKEN/);
   assert.match(mintGate, /function ghPr\(/);
   assert.match(mintGate, /ghPr\(\['pr', 'comment'/);
