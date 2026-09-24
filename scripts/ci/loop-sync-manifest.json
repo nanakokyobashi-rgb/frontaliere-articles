@@ -3599,8 +3599,8 @@
       "mode": "identical",
       "reason": "Riallineato il 2026-09-24 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono ora byte-identici fra sito e corpus, con il roster corrente di 621 crawler.",
       "baseline": {
-        "site": "3be4caadecd7e8d8",
-        "corpus": "3be4caadecd7e8d8",
+        "site": "6dc93a9ddd43ba51",
+        "corpus": "6dc93a9ddd43ba51",
         "alignedAt": "2026-09-24"
       }
     },
