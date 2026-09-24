@@ -114,6 +114,7 @@ const RAW_ARTICLES = [
  id: 'tassa-salute-tensioni-ticino',
  category: 'fiscale',
  date: '2026-02-17T10:00:00Z',
+ updatedAt: '2026-09-24',
  image: '/images/places/bellinzona.webp',
  hasCalculator: false,
  authorSlug: 'laura-bianchi',
