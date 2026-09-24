@@ -731,6 +731,10 @@ const EVENT_IMAGE_MAX_WIDTH = 1600;
 const EVENT_IMAGE_MAX_HEIGHT = 1600;
 const EVENT_IMAGE_WEBP_QUALITY = 82;
 const EVENT_IMAGE_WEBP_EFFORT = 6;
+// Body cancellation is cleanup, not part of the response verdict. Keep a
+// source that stops acknowledging a broken upstream instead of letting one
+// stalled cancel hold the serial crawler forever.
+const EVENT_IMAGE_CANCEL_TIMEOUT_MS = 1_000;
 
 /**
  * Read a response body without ever accumulating more than maxBytes.
@@ -766,7 +770,7 @@ async function readEventImageBody(response, maxBytes) {
       const chunkBytes = value?.byteLength;
       if (!Number.isSafeInteger(chunkBytes) || chunkBytes < 0
         || totalBytes > maxBytes - chunkBytes || totalBytes > capacity - chunkBytes) {
-        try { await reader.cancel('event image exceeds byte limit'); } catch { /* cap remains authoritative */ }
+        await awaitEventImageCleanup(() => reader.cancel('event image exceeds byte limit'));
         return null;
       }
       if (chunkBytes === 0) continue;
@@ -776,7 +780,7 @@ async function readEventImageBody(response, maxBytes) {
     }
     return buffer.subarray(0, totalBytes);
   } catch (error) {
-    try { await reader.cancel(); } catch { /* best effort after a read failure */ }
+    await awaitEventImageCleanup(() => reader.cancel());
     throw error;
   } finally {
     reader.releaseLock?.();
@@ -825,13 +829,24 @@ async function encodeEventImage(buf, contentType) {
   }
 }
 
-async function cancelEventImageResponse(response) {
+async function awaitEventImageCleanup(cleanup) {
+  let timer;
   try {
-    await response?.body?.cancel?.();
+    await Promise.race([
+      Promise.resolve().then(cleanup),
+      new Promise((resolve) => {
+        timer = setTimeout(resolve, EVENT_IMAGE_CANCEL_TIMEOUT_MS);
+      }),
+    ]);
   } catch {
-    // The size/type verdict remains authoritative even if the transport cannot
-    // cancel its body cleanly.
+    // The size/type verdict remains authoritative even if cleanup rejects.
+  } finally {
+    if (timer !== undefined) clearTimeout(timer);
   }
+}
+
+async function cancelEventImageResponse(response) {
+  await awaitEventImageCleanup(() => response?.body?.cancel?.());
 }
 
 /**
