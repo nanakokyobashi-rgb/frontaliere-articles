@@ -5379,8 +5379,8 @@ ALIQUOTE SVIZZERE:
 - LPP: dal 25 anni, contributi variabili per fascia d'età (7%-18% salario coordinato)
 
 ALIQUOTE ITALIANE:
-- IRPEF dal periodo d'imposta ${IRPEF_ANNO_CORRENTE}: ${irpefScaglioniTesto(IRPEF_ANNO_CORRENTE)} (${IRPEF_FONTE_CORRENTE})
-- IRPEF periodi d'imposta 2024-${IRPEF_ANNO_PRECEDENTE}: ${irpefScaglioniTesto(IRPEF_ANNO_PRECEDENTE)} — CORRETTO se riferito a quei redditi (es. dichiarazione presentata nel ${IRPEF_ANNO_CORRENTE} sui redditi ${IRPEF_ANNO_PRECEDENTE}), errato se presentato come aliquota ${IRPEF_ANNO_CORRENTE}
+- IRPEF dal ${IRPEF_ANNO_CORRENTE}: ${irpefScaglioniTesto(IRPEF_ANNO_CORRENTE)} (${IRPEF_FONTE_CORRENTE})
+- IRPEF 2024-${IRPEF_ANNO_PRECEDENTE}: ${irpefAliquoteBreve(IRPEF_ANNO_PRECEDENTE)} — corretta SOLO per redditi di quegli anni
 - Franchigia nuovo accordo: €10'000 esenti per NUOVI frontalieri (dal 2024)
 - Vecchi frontalieri (ante 17/7/2023): esenzione €7'500 fino al 2033
 
@@ -5452,9 +5452,13 @@ ASSICURAZIONI:
 // Changed 2026-09-24 (issue #1777): the IRPEF line now comes from
 // lib/irpef-scaglioni.mjs — 2026 brackets (33% second bracket, Legge 199/2025)
 // plus a short 2024–2025 reminder, so an article about the 2025 tax return is
-// not steered away from the (then correct) 35%. About +60 chars (~15-20 est.
-// tokens) on top of the ~7333 above: still well under the 8000 cap. Not
-// re-measured on a live run.
+// not steered away from the (then correct) second-bracket rate. Measured on
+// the ASSEMBLED first-attempt evergreen prompt with the same estimator
+// (evergreenPrompt() in tests/news-prompt-token-budget.test.mjs): frontaliere
+// 7486 -> 7506 est. tokens (+20), svizzera 7662 unchanged; that test keeps
+// both under the 8000 cap. The fact-check sheet (VERIFIED_DOMAIN_FACTS plus
+// criteria 3-4) grows 2830 -> 2980 chars (+150, ~43 est. tokens); it rides on up to 24000 chars of
+// article, so its admission is set by the article, not by this delta.
 const EVERGREEN_FACTS_BRIEF = `FATTI VERIFICATI (ground truth — il fact-checker blocca l'articolo se diverghi da questi valori):
 - Imposta alla fonte sul reddito da lavoro: trattenuta SOLO in Svizzera per i frontalieri (MAI "in entrambi i paesi"). L'Italia evita la doppia imposizione con il credito d'imposta (quadro CE del 730).
 - Nuovo Accordo Frontalieri: firmato 23/12/2020, in vigore dal 1° GENNAIO 2024 (NON 2026). Ratifica IT: Legge 83 del 13/6/2023.
@@ -5665,9 +5669,9 @@ VERIFICA SISTEMATICA — controlla OGNI categoria:
 
 2. **ISTITUZIONI E ENTI**: Ogni istituzione menzionata deve esistere realmente. Confronta con la lista di istituzioni reali nei fatti verificati. Segnala qualsiasi acronimo NON presente in quella lista come sospetto. NON esiste: "Codice federale del lavoro", "CFL", "UFOL", "UWL", "Commissione federale per i frontalieri", "Ufficio federale dell'integrazione sanitaria (UFIS)".
 
-3. **ALIQUOTE E CIFRE FISCALI**: Confronta OGNI aliquota con i valori nei fatti verificati. AVS=5.3%, AC=1.1%, IRPEF ${IRPEF_ANNO_CORRENTE} ${irpefAliquoteBreve(IRPEF_ANNO_CORRENTE)} (redditi 2024-${IRPEF_ANNO_PRECEDENTE}: ${irpefAliquoteBreve(IRPEF_ANNO_PRECEDENTE)}, corretto solo se riferito a quegli anni). Se un'aliquota non corrisponde = critical.
+3. **ALIQUOTE E CIFRE FISCALI**: Confronta OGNI aliquota con i valori nei fatti verificati. AVS=5.3%, AC=1.1%, IRPEF ${irpefAliquoteBreve(IRPEF_ANNO_CORRENTE)} (2024-${IRPEF_ANNO_PRECEDENTE}: ${irpefAliquoteBreve(IRPEF_ANNO_PRECEDENTE)}). Se un'aliquota non corrisponde = critical.
 
-4. **STATISTICHE E PERCENTUALI**: Percentuali precise con decimali (es. "il 73,2% dei frontalieri") DEVONO provenire da studi reali citati per nome E ISTITUTO. Senza attribuzione precisa = probabile invenzione. ECCEZIONE: arrotondamenti a numeri interi da fonti note (es. "circa il 30% della forza lavoro" da USTAT) sono accettabili. Non segnalare aliquote esplicitamente elencate nei fatti verificati (AVS=5.3%, AC=1.1%, IRPEF ${irpefAliquoteBreve(IRPEF_ANNO_CORRENTE)} e, per i redditi 2024-${IRPEF_ANNO_PRECEDENTE}, ${irpefAliquoteBreve(IRPEF_ANNO_PRECEDENTE)}, franchigia 10.000 euro) come issue se sono riportate correttamente.
+4. **STATISTICHE E PERCENTUALI**: Percentuali precise con decimali (es. "il 73,2% dei frontalieri") DEVONO provenire da studi reali citati per nome E ISTITUTO. Senza attribuzione precisa = probabile invenzione. ECCEZIONE: arrotondamenti a numeri interi da fonti note (es. "circa il 30% della forza lavoro" da USTAT) sono accettabili. Non segnalare aliquote esplicitamente elencate nei fatti verificati (AVS=5.3%, AC=1.1%, IRPEF ${irpefAliquoteBreve(IRPEF_ANNO_CORRENTE)} o 2024-${IRPEF_ANNO_PRECEDENTE} ${irpefAliquoteBreve(IRPEF_ANNO_PRECEDENTE)}, franchigia 10.000 euro) come issue se sono riportate correttamente.
 
 5. **DATE E EVENTI**: Confronta con le date verificate: Convenzione 9/3/1976, Nuovo Accordo 23/12/2020, vigenza dal 1/1/2024, Legge 83/2023. ${isEvergreen ? '' : 'Date presenti nell\'articolo ma ASSENTI dalla fonte = altamente sospette.'}
 

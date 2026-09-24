@@ -4328,7 +4328,7 @@
       "reason": "Sorgente unica degli scaglioni IRPEF (2024-2025: 23/35/43; dal 2026: 23/33/43, Legge 199/2025) interpolata da create-article.mjs nel foglio VERIFIED_DOMAIN_FACTS, nei criteri 3-4 di llmFactCheck e in EVERGREEN_FACTS_BRIEF (issue #1777). Corpus-only perche' i prompt di generazione e fact-check girano solo qui: il gemello adapted del sito (scripts/create-article.mjs) non esegue piu' la generazione, quindi non c'e' un helper da portare.",
       "baseline": {
         "site": null,
-        "corpus": "0ca8eaa27da201b9",
+        "corpus": "5aa13da79a543661",
         "alignedAt": "2026-09-24"
       }
     },

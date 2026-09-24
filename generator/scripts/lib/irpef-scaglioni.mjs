@@ -31,16 +31,28 @@ const scaglioni = (secondo) => Object.freeze([
 ]);
 
 /**
- * Regimi per anno d'imposta. La chiave e' il primo anno di vigenza;
- * `irpefScaglioniPer(anno)` risolve l'ultimo regime iniziato entro `anno`.
+ * Regimi per anno d'imposta, contigui e ordinati: `dal`/`al` inclusivi,
+ * `al: null` per il regime in vigore.
  */
 export const IRPEF_REGIMI = Object.freeze([
   Object.freeze({ dal: 2024, al: 2025, scaglioni: scaglioni(35) }), // D.Lgs. 216/2023, L. 207/2024
   Object.freeze({ dal: 2026, al: null, scaglioni: scaglioni(33) }), // L. 199/2025 art. 1 c. 3
 ]);
 
+// La tabella deve restare contigua e ordinata: un buco o una sovrapposizione
+// assegnerebbe un anno al regime sbagliato senza errore. Fallisce all'import.
+IRPEF_REGIMI.forEach((r, i) => {
+  const next = IRPEF_REGIMI[i + 1];
+  const ok = next ? r.al !== null && next.dal === r.al + 1 : r.al === null;
+  if (!ok || (r.al !== null && r.al < r.dal)) {
+    throw new Error(`irpef-scaglioni: IRPEF_REGIMI non contigua al regime dal ${r.dal}`);
+  }
+});
+
+/** Risolve il regime con `dal <= anno <= al`; `al: null` = in vigore. */
 export function irpefScaglioniPer(anno) {
-  const regime = [...IRPEF_REGIMI].reverse().find((r) => anno >= r.dal);
+  if (!Number.isInteger(anno)) throw new TypeError(`irpef-scaglioni: anno d'imposta non intero: ${anno}`);
+  const regime = IRPEF_REGIMI.find((r) => anno >= r.dal && (r.al === null || anno <= r.al));
   if (!regime) throw new RangeError(`irpef-scaglioni: nessun regime a tre scaglioni per l'anno ${anno}`);
   return regime.scaglioni;
 }

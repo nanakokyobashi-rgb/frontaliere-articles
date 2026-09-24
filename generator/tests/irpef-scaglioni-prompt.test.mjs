@@ -70,6 +70,18 @@ test('sorgente unica: 33% dal 2026, 35% nel 2024-2025, limiti invariati', () => 
   assert.equal(IRPEF.irpefScaglioniTesto(2025), "23% fino €28'000, 35% €28'001–€50'000, 43% oltre €50'000");
   assert.match(IRPEF.IRPEF_FONTE_CORRENTE, /Legge 199\/2025/);
   assert.throws(() => IRPEF.irpefScaglioniPer(2023), RangeError, 'prima del 2024 gli scaglioni erano quattro: non inventarli');
+  assert.throws(() => IRPEF.irpefScaglioniPer(2025.5), TypeError);
+  assert.throws(() => IRPEF.irpefScaglioniPer('2026'), TypeError);
+});
+
+test('IRPEF_REGIMI: contigua, ordinata, ogni anno risolto dal regime che lo contiene', () => {
+  const R = IRPEF.IRPEF_REGIMI;
+  assert.equal(R.at(-1).al, null, "l'ultimo regime e' quello in vigore");
+  for (let i = 1; i < R.length; i += 1) assert.equal(R[i].dal, R[i - 1].al + 1, `buco o sovrapposizione prima del ${R[i].dal}`);
+  for (const r of R) {
+    const last = r.al ?? r.dal + 5;
+    for (let y = r.dal; y <= last; y += 1) assert.equal(IRPEF.irpefScaglioniPer(y), r.scaglioni, `anno ${y}`);
+  }
 });
 
 test('create-article.mjs non scrive a mano aliquote IRPEF del triplo 23/33/35/43', () => {
@@ -93,16 +105,16 @@ function assert35OnlyAs2025(text, label) {
 
 test('foglio VERIFIED_DOMAIN_FACTS: scaglioni 2026 con fonte, 2024-2025 marcati come tali', () => {
   const facts = renderTemplate(extractConstTemplate('VERIFIED_DOMAIN_FACTS'));
-  assert.ok(facts.includes("IRPEF dal periodo d'imposta 2026: 23% fino €28'000, 33% €28'001–€50'000"), facts);
+  assert.ok(facts.includes("IRPEF dal 2026: 23% fino €28'000, 33% €28'001–€50'000"), facts);
   assert.ok(facts.includes('Legge 199/2025'));
-  assert.ok(facts.includes("IRPEF periodi d'imposta 2024-2025: 23% fino €28'000, 35%"));
+  assert.ok(facts.includes(`IRPEF 2024-2025: ${RATE_2025} — corretta SOLO per redditi di quegli anni`), facts);
   assert35OnlyAs2025(facts, 'VERIFIED_DOMAIN_FACTS');
 });
 
 test('criteri 3 e 4 del fact-check: IRPEF 2026 = 23%/33%/43%', () => {
   const c3 = renderTemplate(extractPromptLine('**ALIQUOTE E CIFRE FISCALI**'));
   const c4 = renderTemplate(extractPromptLine('**STATISTICHE E PERCENTUALI**'));
-  assert.ok(c3.includes(`IRPEF 2026 ${RATE_2026}`), c3);
+  assert.ok(c3.includes(`IRPEF ${RATE_2026} (2024-2025: ${RATE_2025})`), c3);
   assert.ok(c4.includes(`IRPEF ${RATE_2026}`), c4);
   assert35OnlyAs2025(c3, 'criterio 3');
   assert35OnlyAs2025(c4, 'criterio 4');
