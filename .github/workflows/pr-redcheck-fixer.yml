@@ -1046,6 +1046,9 @@ jobs:
             - Una sola passata: diagnostica, fixa, valida, committa, pusha, aggiorna il body, STOP.
 
       # Il colore del job e' il LAVORO reale del round, non l'exit della CLI.
+      #  - head remota non verificabile (fetch fallito o head cambiata fra le
+      #    due letture, dopo i retry) → ROSSO esplicito PRIMA di ogni verdetto:
+      #    niente SUCCESS/SUPERSEDED su una fotografia stantia o intermedia.
       #  - commit pushato sul branch → SUCCESS (la re-review girera'). Vale anche
       #    se la CLI e' morta ai turni DOPO il push.
       #  - branch remoto avanzato da un altro writer dopo START_SHA (pre-merge)
@@ -1085,8 +1088,41 @@ jobs:
         run: |
           set -uo pipefail
           HEAD_NOW=$(git rev-parse HEAD 2>/dev/null || echo "")
-          git fetch origin "$HEAD_REF" -q 2>/dev/null || true
-          REMOTE_SHA=$(git rev-parse "origin/$HEAD_REF" 2>/dev/null || echo "")
+          # Head remota verificata prima di classificare (#1763). Un fetch
+          # fallito lascerebbe origin/$HEAD_REF alla fotografia dello step
+          # align; una head che avanza fra fetch e lettura darebbe una
+          # fotografia intermedia. In entrambi i casi SUCCESS, SUPERSEDED e il
+          # rimborso del round sarebbero decisi su una head non verificata.
+          # Si classifica solo su uno SHA confermato da due letture concordi
+          # (fetch con refspec esplicito + ls-remote), con retry bounded e
+          # backoff; altrimenti errore esplicito PRIMA di ogni ramo che scrive
+          # stato: niente SUPERSEDED, niente rimborso, marker conservato.
+          REMOTE_SHA=""
+          remote_head_attempts=3
+          remote_head_attempt=1
+          while [ "$remote_head_attempt" -le "$remote_head_attempts" ]; do
+            fetched_sha=""
+            reread_sha=""
+            if git fetch --no-tags -q origin "+refs/heads/$HEAD_REF:refs/remotes/origin/$HEAD_REF"; then
+              fetched_sha=$(git rev-parse --verify --quiet "refs/remotes/origin/$HEAD_REF^{commit}" 2>/dev/null || echo "")
+              reread_sha=$(git ls-remote --exit-code origin "refs/heads/$HEAD_REF" 2>/dev/null | awk 'NR == 1 { print $1 }' || echo "")
+              if [ -n "$fetched_sha" ] && [ "$fetched_sha" = "$reread_sha" ]; then
+                REMOTE_SHA="$fetched_sha"
+                break
+              fi
+              echo "::warning::head remota di $HEAD_REF non stabile (tentativo $remote_head_attempt/$remote_head_attempts): fetch=${fetched_sha:-<vuoto>} rilettura=${reread_sha:-<vuoto>}"
+            else
+              echo "::warning::git fetch di $HEAD_REF fallito (tentativo $remote_head_attempt/$remote_head_attempts)"
+            fi
+            if [ "$remote_head_attempt" -lt "$remote_head_attempts" ]; then
+              sleep $((remote_head_attempt * 5))
+            fi
+            remote_head_attempt=$((remote_head_attempt + 1))
+          done
+          if [ -z "$REMOTE_SHA" ]; then
+            echo "::error::REMOTE_HEAD_UNVERIFIED: head remota di $HEAD_REF non determinabile dopo $remote_head_attempts tentativi (fetch fallito o head cambiata fra le letture) → classificazione BLOCCANTE, job ROSSO. Nessun SUPERSEDED, nessun rimborso: il marker di round resta contato."
+            exit 1
+          fi
           echo "start=$START_SHA base=$BASE_SHA local=$HEAD_NOW remote=$REMOTE_SHA claude=$ACTION_OUTCOME"
           if [ "${BASE_CAPTURE_OUTCOME:-}" != "success" ] || \
              ! printf '%s\n' "$BASE_BODY_SHA" | grep -Eq '^[0-9a-f]{64}$'; then

@@ -206,12 +206,19 @@ function runClassifier({
   refundCommentStatus = 0,
   claimToken = '',
   source = WORKFLOW,
+  fetchStatuses = '',
+  fetchedSequence = '',
+  rereadSequence = '',
 } = {}) {
   const temp = mkdtempSync(path.join(os.tmpdir(), 'pr-redcheck-outcome-'));
   const bin = path.join(temp, 'bin');
   mkdirSync(bin);
   const ghLog = path.join(temp, 'gh.log');
   const githubEnv = path.join(temp, 'github.env');
+  const gitState = path.join(temp, 'git-state');
+  mkdirSync(gitState);
+  const sleepLog = path.join(temp, 'sleep.log');
+  writeFileSync(sleepLog, '');
   const trustedMarkerHelper = path.join(temp, 'trusted-marker.mjs');
   writeFileSync(ghLog, '');
   writeFileSync(githubEnv, '');
@@ -224,14 +231,38 @@ const result = spawnSync('gh', ['api', '--method', 'DELETE', \`repos/\${process.
 process.exit(result.status ?? 1);
 `);
 
+  // Fake git a sequenze: ogni tentativo di fetch/lettura consuma il valore
+  // successivo di FAKE_FETCH_STATUSES / FAKE_FETCHED / FAKE_REREAD (spazi come
+  // separatore; vuoto = exit 0 / FAKE_REMOTE). Il ref remote-tracking resta
+  // leggibile anche dopo un fetch fallito: e' la fotografia stantia che il
+  // classificatore NON deve usare (#1763).
   fakeExecutable(bin, 'git', String.raw`
+next_value() {
+  n=$(cat "$FAKE_GIT_STATE/$1" 2>/dev/null || echo 0)
+  n=$((n + 1))
+  echo "$n" > "$FAKE_GIT_STATE/$1"
+  printf '%s\n' $2 | sed -n "$n p"
+}
 case "$1 $2" in
   "rev-parse HEAD") printf '%s\n' "$FAKE_HEAD" ;;
   "rev-parse origin/"*) printf '%s\n' "$FAKE_REMOTE" ;;
-  fetch*) exit 0 ;;
+  "rev-parse --verify")
+    v=$(next_value fetched "$FAKE_FETCHED")
+    [ -n "$v" ] || v="$FAKE_REMOTE"
+    printf '%s\n' "$v" ;;
+  "ls-remote "*)
+    v=$(next_value reread "$FAKE_REREAD")
+    [ -n "$v" ] || v="$FAKE_REMOTE"
+    printf '%s\trefs/heads/%s\n' "$v" "$HEAD_REF" ;;
+  fetch*)
+    echo fetch >> "$FAKE_GIT_STATE/fetch.log"
+    st=$(next_value fetch "$FAKE_FETCH_STATUSES")
+    [ -n "$st" ] || st=0
+    exit "$st" ;;
   *) exit 64 ;;
 esac
 `);
+  fakeExecutable(bin, 'sleep', String.raw`echo "$1" >> "$SLEEP_LOG"`);
 fakeExecutable(bin, 'gh', String.raw`
 echo "$*" >> "$GH_LOG"
 if echo "$*" | grep -q -- '-X DELETE'; then exit 0; fi
@@ -282,6 +313,11 @@ printf '%s' "$FAKE_BODY"
         GH_LOG: ghLog,
         FAKE_HEAD: head,
         FAKE_REMOTE: remote,
+        FAKE_GIT_STATE: gitState,
+        FAKE_FETCH_STATUSES: fetchStatuses,
+        FAKE_FETCHED: fetchedSequence,
+        FAKE_REREAD: rereadSequence,
+        SLEEP_LOG: sleepLog,
         FAKE_BODY: currentBody,
         FAKE_COMMENTS_JSON: commentsJson,
         REFUND_COMMENT_STATUS: String(refundCommentStatus),
@@ -293,6 +329,10 @@ printf '%s' "$FAKE_BODY"
     assert.ifError(result.error);
     result.githubEnv = readFileSync(githubEnv, 'utf8');
     result.ghLog = readFileSync(ghLog, 'utf8');
+    result.sleepLog = readFileSync(sleepLog, 'utf8');
+    const fetchLog = path.join(gitState, 'fetch.log');
+    result.fetchCount = readFileSync(fetchLog, { encoding: 'utf8', flag: 'a+' })
+      .split('\n').filter(Boolean).length;
     return result;
   } finally {
     rmSync(temp, { recursive: true, force: true });
@@ -596,6 +636,112 @@ test('un branch solo indietro rispetto a main non è SUPERSEDED', () => {
   assert.doesNotMatch(result.stdout, /run SUPERSEDED/);
   assert.equal(result.githubEnv, '');
   assert.doesNotMatch(result.ghLog, /-X DELETE/);
+});
+
+// #1763: la head remota letta dal classificatore deve essere verificata.
+// Scenario base di una race esterna (START_SHA=pr-sha, remote=external-sha):
+// con una head verificata e' SUPERSEDED + rimborso; con una head NON
+// verificata deve diventare un errore esplicito, senza scrivere stato.
+function supersedeScenario(source, overrides = {}) {
+  const baseBody = '## Implementato\n\n- body iniziale';
+  const marker = source === REDFLAG_WORKFLOW ? 'REDFLAG_FIX_ROUND' : 'REDCHECK_FIX_ROUND';
+  return runClassifier({
+    source,
+    baseBody,
+    currentBody: baseBody,
+    startSha: 'pr-sha',
+    baseSha: 'merged-sha',
+    head: 'merged-sha',
+    remote: 'external-sha',
+    actionOutcome: 'failure',
+    fixRound: '1',
+    fixRoundMarker: marker,
+    markerCommentId: '42',
+    commentsJson: JSON.stringify([
+      roundMarkerComment({ marker, body: baseBody }),
+      activeClaimComment(),
+      activeClaimComment({ state: 'released' }),
+    ]),
+    claimToken: source === REDFLAG_WORKFLOW ? '' : 'tok-1',
+    ...overrides,
+  });
+}
+
+function assertFailClosed(name, result) {
+  assert.equal(result.status, 1,
+    `${name}: head remota non verificata deve dare job ROSSO:\nstdout=${result.stdout}\nstderr=${result.stderr}`);
+  assert.match(result.stdout, /::error::REMOTE_HEAD_UNVERIFIED/, `${name}: errore esplicito atteso`);
+  assert.doesNotMatch(result.stdout, /run SUPERSEDED/, `${name}: nessun SUPERSEDED spurio`);
+  assert.doesNotMatch(result.stdout, /round SUCCESS/, `${name}: nessun SUCCESS su head stantia`);
+  assert.equal(result.githubEnv, '', `${name}: CLAIM_STATUS non deve essere scritto`);
+  assert.doesNotMatch(result.ghLog, /pr comment|DELETE|_REFUND/,
+    `${name}: nessun marker terminale/rimborso, nessuna DELETE del marker di round`);
+  assert.equal(result.fetchCount, 3, `${name}: retry bounded a 3 tentativi`);
+  assert.deepEqual(result.sleepLog.split('\n').filter(Boolean), ['5', '10'],
+    `${name}: backoff crescente fra i tentativi`);
+}
+
+for (const [name, source] of [['redcheck', WORKFLOW], ['redflag', REDFLAG_WORKFLOW]]) {
+  test(`${name}: fetch fallito non classifica sulla ref remote-tracking stantia`, () => {
+    // La ref stantia (external-sha) direbbe SUPERSEDED: il fetch fallito deve
+    // impedirne l'uso.
+    assertFailClosed(name, supersedeScenario(source, { fetchStatuses: '128 128 128' }));
+    // Stessa cosa per il ramo SUCCESS: una ref stantia uguale a HEAD_NOW non
+    // prova che il push sia atterrato.
+    assertFailClosed(`${name} success-branch`, supersedeScenario(source, {
+      remote: 'merged-sha',
+      fetchStatuses: '1 1 1',
+    }));
+  });
+
+  test(`${name}: head cambiata fra fetch e rilettura non produce SUPERSEDED`, () => {
+    assertFailClosed(name, supersedeScenario(source, {
+      fetchedSequence: 'external-1 external-2 external-3',
+      rereadSequence: 'external-2 external-3 external-4',
+    }));
+  });
+
+  test(`${name}: un errore transitorio recupera con una head verificata`, () => {
+    const fetchRecovered = supersedeScenario(source, { fetchStatuses: '128 0' });
+    assert.equal(fetchRecovered.status, 0,
+      `fetch recuperato al 2° tentativo:\nstdout=${fetchRecovered.stdout}\nstderr=${fetchRecovered.stderr}`);
+    assert.match(fetchRecovered.stdout, /run SUPERSEDED/);
+    assert.equal(fetchRecovered.fetchCount, 2);
+    assert.deepEqual(fetchRecovered.sleepLog.split('\n').filter(Boolean), ['5']);
+
+    // La head si muove una volta: si classifica sulla lettura stabile
+    // successiva, non su quella intermedia.
+    const moved = supersedeScenario(source, {
+      fetchedSequence: 'external-1 external-2',
+      rereadSequence: 'external-2 external-2',
+    });
+    assert.equal(moved.status, 0, `stdout=${moved.stdout}\nstderr=${moved.stderr}`);
+    assert.match(moved.stdout, /remote=external-2 /);
+    assert.doesNotMatch(moved.stdout, /remote=external-1 /);
+    assert.match(moved.stdout, /run SUPERSEDED/);
+  });
+}
+
+test('redflag e redcheck leggono la head remota con lo stesso blocco verificato', () => {
+  const extract = (source) => {
+    const classify = runScript(stepBlockFrom(source, CLASSIFY_NAME));
+    const start = classify.indexOf('# Head remota verificata prima di classificare');
+    const end = classify.indexOf('REMOTE_HEAD_UNVERIFIED');
+    assert.ok(start >= 0 && end > start, 'blocco head remota non trovato');
+    return classify.slice(start, end);
+  };
+  assert.equal(extract(REDFLAG_WORKFLOW), extract(WORKFLOW),
+    'i due gemelli devono condividere la stessa lettura verificata della head');
+  for (const source of [WORKFLOW, REDFLAG_WORKFLOW]) {
+    const classify = runScript(stepBlockFrom(source, CLASSIFY_NAME));
+    assert.doesNotMatch(classify, /git fetch[^\n]*\|\| true/,
+      'il fetch della head non deve essere best-effort');
+    const guardAt = classify.indexOf('REMOTE_HEAD_UNVERIFIED');
+    for (const verdict of ['round SUCCESS', 'CLAIM_STATUS=released', 'run SUPERSEDED']) {
+      assert.ok(classify.indexOf(verdict) > guardAt,
+        `il guard fail-closed deve precedere «${verdict}»`);
+    }
+  }
 });
 
 test('il finalize ereditato dal classify lascia il claim released anche se Codex è failure', () => {
