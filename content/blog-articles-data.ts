@@ -836,6 +836,7 @@ const RAW_ARTICLES = [
  id: 'guida-dichiarazione-redditi-frontalieri',
  category: 'fiscale',
  date: '2026-02-23T17:37:11.718Z',
+ updatedAt: '2026-09-24',
  image: '/images/blog/guida-dichiarazione-redditi-frontalieri.webp',
  hasCalculator: true,
  authorSlug: 'marco-ferrari',

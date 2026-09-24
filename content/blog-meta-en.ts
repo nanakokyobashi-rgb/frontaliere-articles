@@ -257,7 +257,7 @@ const blogMetaEn: Record<string, string> = {
  'blog.article.costo-pendolare-auto-ticino-2026.excerpt': 'Fuel, wear and tear, parking, and vignette: the complete 2026 cost analysis. A commuter spends up to CHF 7,500 per year. Comparison with train and bus.',
  'blog.article.costo-pendolare-auto-ticino-2026.imageAlt': 'Queue of cross-border commuter cars at the Chiasso-Brogeda border crossing in Ticino in the early morning.',
  'blog.article.guida-dichiarazione-redditi-frontalieri.title': 'Cross-Border Worker Tax Return: 730 Guide for Ticino',
- 'blog.article.guida-dichiarazione-redditi-frontalieri.excerpt': 'Form 730/2026: how to fill out Quadro CE, calculate the tax credit, and what documents are needed. The complete guide for cross-border workers in Ticino.',
+ 'blog.article.guida-dichiarazione-redditi-frontalieri.excerpt': 'Form 730/2026 and Redditi PF: where to report your Swiss salary, how to calculate the tax credit, and what documents are needed. The complete guide for cross-border workers in Ticino.',
  'blog.article.guida-dichiarazione-redditi-frontalieri.imageAlt': 'Cross-border worker filling out the Italian 730 tax form with Swiss and Italian documents on a desk overlooking Bellinzona.',
  'blog.article.checklist-documenti-lavoro-svizzera.title': 'Working in Switzerland: Necessary Documents in 2026',
  'blog.article.checklist-documenti-lavoro-svizzera.excerpt': 'The definitive checklist for cross-border workers in Ticino: from the G Permit to the bank account, through AVS and the LAMal choice. Here\'s how to start without mistakes.',
