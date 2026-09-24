@@ -29,6 +29,10 @@
  * dipendenza npm. Lo stesso vincolo per cui il build usa `tsx` e non `node`
  * (AGENTS.md, Build e test). Si legge il sorgente, come
  * `loop-scripts-closure.test.mjs`, senza eseguire niente.
+ *
+ * Eccezione: il lettore del body (`readEventImageBody` e il suo cleanup) usa
+ * solo builtin, quindi in fondo al file se ne estraggono le funzioni dal
+ * sorgente e si ESEGUONO (#1745 FU-002/FU-003).
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -154,4 +158,117 @@ test('.gitignore esclude le immagini mirrorate senza uccidere l\'eccezione catal
   assert.ok(!lines.includes('public/images/events/'), 'pattern a directory: la negazione sarebbe morta');
   // L'indice deve restare tracciato: e' cio' che sopravvive senza i byte.
   assert.ok(!lines.some((l) => l.includes('events-image-manifest')), 'il manifest non va ignorato');
+});
+
+// ── Comportamento eseguito del lettore del body (#1745 FU-002/FU-003) ──────
+// Il modulo non e' importabile sotto `node --test` (vedi l'intestazione), ma il
+// lettore del body usa solo builtin: se ne estraggono le funzioni dal sorgente
+// e si ESEGUONO contro stream finti e contro la `Response` built-in di Node
+// (undici), cioe' l'implementazione fetch con cui il crawler gira in CI.
+function loadBodyReader() {
+  const constant = SRC.match(/^const EVENT_IMAGE_CANCEL_TIMEOUT_MS = [^;]+;$/m);
+  assert.ok(constant, 'EVENT_IMAGE_CANCEL_TIMEOUT_MS assente');
+  const names = ['awaitEventImageCleanup', 'cancelEventImageResponse', 'releaseEventImageReader', 'readEventImageBody'];
+  const source = [constant[0], ...names.map((name) => `${body(name)}\n}`)].join('\n\n');
+  // eslint-disable-next-line no-new-func
+  return new Function('Buffer', `${source}\nreturn { readEventImageBody };`)(Buffer);
+}
+
+function fakeResponse(reader, headers = {}) {
+  const lower = Object.fromEntries(Object.entries(headers).map(([k, v]) => [k.toLowerCase(), v]));
+  return {
+    headers: { get: (name) => lower[name.toLowerCase()] ?? null },
+    body: { getReader: () => reader, cancel: async () => {} },
+  };
+}
+
+function readerOf(chunks, extra = {}) {
+  const queue = chunks.map((c) => Uint8Array.from(c));
+  return {
+    read: async () => (queue.length ? { done: false, value: queue.shift() } : { done: true, value: undefined }),
+    cancel: async () => {},
+    releaseLock() {},
+    ...extra,
+  };
+}
+
+/** Registra le dimensioni richieste a Buffer.allocUnsafe durante `fn`. */
+async function recordAllocations(fn) {
+  const original = Buffer.allocUnsafe;
+  const sizes = [];
+  Buffer.allocUnsafe = function patched(size, ...rest) {
+    sizes.push(size);
+    return original.call(this, size, ...rest);
+  };
+  try {
+    return { result: await fn(), sizes };
+  } finally {
+    Buffer.allocUnsafe = original;
+  }
+}
+
+test('FU-002: una risposta chunked senza Content-Length non riserva il cap da 20 MiB', async () => {
+  const { readEventImageBody } = loadBodyReader();
+  const cap = 20 * 1024 * 1024;
+  const response = new Response(new ReadableStream({
+    start(controller) {
+      controller.enqueue(Uint8Array.from([1, 2, 3]));
+      controller.enqueue(Uint8Array.from([4, 5]));
+      controller.close();
+    },
+  }));
+  assert.equal(response.headers.get('content-length'), null);
+  const { result, sizes } = await recordAllocations(() => readEventImageBody(response, cap));
+  assert.deepEqual([...result], [1, 2, 3, 4, 5]);
+  assert.ok(sizes.every((size) => size < 1024 * 1024), `allocazione sproporzionata: ${sizes.join(', ')}`);
+});
+
+test('FU-002: con Content-Length dichiarato si prealloca la lunghezza dichiarata e il cap resta per risposta', async () => {
+  const { readEventImageBody } = loadBodyReader();
+  const { result, sizes } = await recordAllocations(
+    () => readEventImageBody(fakeResponse(readerOf([[9, 8], [7]]), { 'content-length': '3' }), 10),
+  );
+  assert.deepEqual([...result], [9, 8, 7]);
+  assert.ok(sizes.includes(3));
+  assert.ok(!sizes.includes(10), 'allocato il cap invece della lunghezza dichiarata');
+
+  // Chunked oltre il cap: rifiutata e cancellata anche senza buffer preallocato.
+  let cancelled = false;
+  const over = await readEventImageBody(
+    fakeResponse(readerOf([[1, 2, 3, 4], [5, 6, 7]], { cancel: async () => { cancelled = true; } })),
+    6,
+  );
+  assert.equal(over, null);
+  assert.equal(cancelled, true);
+});
+
+test('FU-003: un releaseLock() che lancia non trasforma un\'immagine letta in null', async () => {
+  const { readEventImageBody } = loadBodyReader();
+  const reader = readerOf([[1, 2], [3]], {
+    releaseLock() { throw new TypeError('Invalid state: reader released with pending read requests'); },
+  });
+  const result = await readEventImageBody(fakeResponse(reader), 10);
+  assert.deepEqual([...result], [1, 2, 3]);
+
+  // Il verdetto oversize resta null e l'errore di lettura resta quello originale.
+  const over = await readEventImageBody(fakeResponse(readerOf([[1, 2, 3]], {
+    releaseLock() { throw new TypeError('released'); },
+  })), 2);
+  assert.equal(over, null);
+  const failing = readerOf([], {
+    read: async () => { throw new Error('upstream reset'); },
+    releaseLock() { throw new TypeError('released'); },
+  });
+  await assert.rejects(readEventImageBody(fakeResponse(failing), 10), /upstream reset/);
+});
+
+test('FU-003: con la Response built-in (undici) cancel + releaseLock sul ramo oversize non lanciano', async () => {
+  const { readEventImageBody } = loadBodyReader();
+  const response = new Response(new ReadableStream({
+    pull(controller) { controller.enqueue(new Uint8Array(4)); },
+  }));
+  const started = Date.now();
+  assert.equal(await readEventImageBody(response, 10), null);
+  assert.ok(Date.now() - started < 1_000, 'cleanup appeso oltre il tetto');
+  assert.equal(response.body.locked, false, 'il lock del reader non e\' stato rilasciato');
 });

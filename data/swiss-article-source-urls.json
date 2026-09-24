@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1945027/uss-delegati-interesse-tasso-svizzera-pensionati": {
-    "articleId": "uss-pensionati-rendite-2027",
-    "ts": "2026-08-20T13:02:28.980Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1945045/posta-semestre-lettere-utili-rispetto": {
     "articleId": "posta-utile-in-salita",
     "ts": "2026-08-20T13:41:51.579Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4104265": {
     "articleId": "parlamento-nega-naturalizzazione-dopo-5-anni",
     "ts": "2026-09-24T10:23:44.778Z",
+    "keyForm": 2
+  },
+  "https://www.cdt.ch/news/casi-di-tubercolosi-in-svizzera-al-livello-piu-alto-dal-2018-440025": {
+    "articleId": "tubercolosi-svizzera-aumento-2025",
+    "ts": "2026-09-24T17:43:40.366Z",
     "keyForm": 2
   }
 }
