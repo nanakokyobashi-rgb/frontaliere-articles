@@ -120,7 +120,7 @@ const RAW_ARTICLES = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
- {
+  {
  id: 'casa-oltre-confine-ticino',
  category: 'pratico',
  date: '2026-02-17T14:00:00Z',
