@@ -14,6 +14,7 @@ import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { isManagedReview, REDFLAG_IMPORTANT_RE } from './lib/constants.mjs';
 import { fetchPrFiles } from './lib/fetchPrFiles.mjs';
+import { isTerminalReviewState } from './lib/review-states.mjs';
 import { createGithubIssue } from '../lib/github-issue-creator.mjs';
 import { evaluateBodyContract } from '../lib/pr-body-contract-eval.mjs';
 import {
@@ -612,8 +613,7 @@ function reviewHistoryContext(repo, pr, headSha) {
       // sarebbero usciti vuoti su ogni re-review reale, e la regola sarebbe
       // stata un no-op che non protegge nulla.
       .filter((review) => isManagedReview(review)
-        && String(review?.state || '') !== 'PENDING'
-        && String(review?.state || '') !== 'DISMISSED')
+        && isTerminalReviewState(review?.state))
       // L'ordine dell'array REST non e' un contratto: si normalizza per
       // timestamp e, a parita', per id. Senza, «l'ultima» e «la precedente»
       // sono quelle che l'API capita a mettere in fondo, il compare parte dal

@@ -379,6 +379,16 @@
       }
     },
     {
+      "path": "scripts/ci/lib/review-states.mjs",
+      "mode": "corpus-only",
+      "reason": "Enum unico degli stati review (#1762): terminali APPROVED/CHANGES_REQUESTED/COMMENTED, non terminali PENDING/DISMISSED, ogni altro valore fail-closed. Genera anche le due righe `def` jq che `tests.yml`, `pr-redflag-fixer.yml` e `stale-pr-rescuer.yml` copiano alla lettera, legate da `generator/tests/review-state-normalization.test.mjs`. Il sito tiene la stessa semantica dentro `scripts/ci/lib/pr-review-admission.mjs` (`KNOWN_REVIEW_STATES`), un modulo che questo repo non ha: qui i consumer sono jq inline, quindi non c'e' un gemello byte-verificabile da trasportare.",
+      "baseline": {
+        "site": null,
+        "corpus": "95adf9d2c94be232",
+        "alignedAt": "2026-09-24"
+      }
+    },
+    {
       "path": "scripts/ci/node-test-failure-reporter.mjs",
       "mode": "corpus-only",
       "reason": "Reporter strutturato del corpus: consuma gli eventi `test:fail` di `node:test` e scrive il JSON che il passo successivo pubblica sulla PR. Il sito usa Vitest e il proprio reporter JSON, quindi non esiste un gemello byte-verificabile da trasportare.",

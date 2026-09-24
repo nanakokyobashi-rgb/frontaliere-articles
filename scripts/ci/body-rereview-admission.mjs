@@ -50,6 +50,7 @@
  * Stampa su stdout `body_rereview=true|false` (forma GITHUB_OUTPUT).
  */
 import { REST_REVIEWER_BOT_LOGIN_RE } from './lib/constants.mjs';
+import { isTerminalReviewState } from './lib/review-states.mjs';
 import { importantFindings } from './review-scope.mjs';
 
 /** Raggiunto questo numero di verdetti sulla stessa HEAD non si ammette altro. */
@@ -73,9 +74,10 @@ function isManagedBotReview(review) {
     && String(review?.body || '').includes('<!-- CODEX_FALLBACK_REVIEW -->');
 }
 
+// Verdetto inviato e non ritirato. Uno stato fuori dall'enum noto non e'
+// «non PENDING, quindi terminale»: e' uno schema sconosciuto (#1762).
 function isTerminal(review) {
-  const state = String(review?.state || '');
-  return state !== '' && state !== 'PENDING' && state !== 'DISMISSED';
+  return isTerminalReviewState(review?.state);
 }
 
 /** Revisioni body dichiarate da una review; piu' di una = marker ambiguo. */
