@@ -3578,8 +3578,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-23.yml",
       "mode": "identical",
       "baseline": {
-        "site": "c80541c8e32061fc",
-        "corpus": "c80541c8e32061fc",
+        "site": "f22218b336b49e90",
+        "corpus": "f22218b336b49e90",
         "alignedAt": "2026-09-24"
       }
     },
@@ -3599,8 +3599,8 @@
       "mode": "identical",
       "reason": "Riallineato il 2026-09-21 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono ora byte-identici fra sito e corpus, con il roster corrente di 616 crawler.",
       "baseline": {
-        "site": "741e1acbf9c44453",
-        "corpus": "741e1acbf9c44453",
+        "site": "3be4caadecd7e8d8",
+        "corpus": "3be4caadecd7e8d8",
         "alignedAt": "2026-09-24"
       }
     },
