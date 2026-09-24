@@ -124,9 +124,9 @@ jobs:
       # l'issue canonica apre/aggiorna quando resta lavoro, senza un rovescio
       # che la chiuda quando il run SUCCESSIVO trova zero fantasmi — misurato
       # su #590, backfillato 4 minuti dopo l'apertura ma rimasto aperto.
-      # Il wrapper qui sotto delega il no-op a `resolveGithubIssue` quando non
-      # c'è niente da chiudere, ma verifica la post-condizione quando il close
-      # è richiesto: un rifiuto non deve più risultare verde in silenzio.
+      # Il wrapper qui sotto cerca le issue aperte con questo titolo ESATTO (non
+      # per prefisso), le chiude per numero e verifica la post-condizione: un
+      # rifiuto non deve più risultare verde in silenzio.
       - name: Close ghost-articles issue (coda drenata)
         continue-on-error: true
         if: steps.detect.outcome == 'success' && steps.detect.outputs.missing == '0'
