@@ -12,10 +12,25 @@
  * titolo e `gh issue view` per numero per il digest, evitando l'indice di
  * ricerca eventualmente in ritardo. Uno stato non leggibile e' sempre
  * trattato come non verificato.
+ *
+ * Tre regole della post-condizione (follow-up sito #8334, FU-028..030):
+ *
+ * - il ramo per titolo confronta il titolo INTERO con uguaglianza. I call-site
+ *   passano il titolo canonico con cui `github-issue-creator.mjs` apre l'issue
+ *   (`title.slice(0, 200)`); un prefisso di 60 caratteri selezionerebbe anche
+ *   una gemella collidente e la chiuderebbe al posto della canonica. Per lo
+ *   stesso motivo il close avviene per numero, non delegando a
+ *   `resolveGithubIssue`, che sceglie il primo match per prefisso;
+ * - la lista e' leggibile solo se OGNI riga e' un numero: una risposta con
+ *   exit 0 ma contenuto inatteso (pagina troncata, errore stampato su stdout)
+ *   e' «non leggibile», mai «nessuna issue aperta»;
+ * - un close ACCETTATO (exit 0) non si ripete: se la rilettura immediata
+ *   mostra ancora `open` e' consistenza eventuale, quindi il secondo giro
+ *   attende e rilegge soltanto. Si ripete il close solo se il primo e' stato
+ *   respinto o non e' partito.
  */
 import { spawnSync } from 'node:child_process';
 
-import { resolveGithubIssue, searchSafePrefix } from '../lib/github-issue-creator.mjs';
 import { pinnedBy } from './manifest-pinned-issues.mjs';
 
 const REPO = process.env.GH_REPO || process.env.GITHUB_REPOSITORY || '';
@@ -60,46 +75,64 @@ export function readIssueState(number, deps = {}) {
 }
 
 /**
- * Elenca tutte le issue aperte (non PR) il cui titolo inizia col prefisso usato
- * dal chiuditore condiviso. `null` indica una query non leggibile.
+ * Elenca tutte le issue aperte (non PR) il cui titolo e' ESATTAMENTE `title`.
+ * `null` indica una query non leggibile: exit non-zero oppure una riga che non
+ * e' un numero di issue. Una lista vuota e' tale solo se lo stdout e' vuoto.
  */
-export function findOpenByPrefix(prefix, deps = {}) {
+export function findOpenByTitle(title, deps = {}) {
   const result = runGh(
     [
       'api',
       '--paginate',
       `repos/${REPO}/issues?state=open&per_page=100`,
       '--jq',
-      '.[] | select(.pull_request | not) | select(.title | startswith(env.RESOLVE_PREFIX)) | .number',
+      '.[] | select(.pull_request | not) | select(.title == env.RESOLVE_TITLE) | .number',
     ],
     {
       ...deps,
-      env: { ...process.env, RESOLVE_PREFIX: prefix },
+      env: { ...process.env, RESOLVE_TITLE: title },
     },
   );
   if (!result.ok) return null;
-  return result.stdout
-    .split('\n')
-    .map((line) => Number(line.trim()))
-    .filter((number) => Number.isInteger(number) && number > 0);
+  const lines = result.stdout.split('\n').map((line) => line.trim()).filter(Boolean);
+  const numbers = lines.map(Number);
+  if (numbers.some((number) => !Number.isInteger(number) || number <= 0)) return null;
+  return [...new Set(numbers)];
+}
+
+/** Titolo con cui `github-issue-creator.mjs` apre l'issue (`--title` troncato a 200). */
+export function canonicalTitle(title) {
+  return String(title || '').slice(0, 200);
+}
+
+/** Nota di chiusura allineata a quella di `resolveGithubIssue`. */
+function resolvedNote({ workflow, runUrl }) {
+  return [
+    '✅ Auto-resolved — the failing check is green again' + (workflow ? ` (${workflow})` : '') + '.',
+    runUrl ? `\nGreen run: ${runUrl}` : '',
+    '\nClosed automatically; it will reopen if the same failure recurs.',
+  ].join('');
 }
 
 function pinOf(number, deps) {
   return deps.pinnedBy ? deps.pinnedBy(number, REPO) : pinnedBy(number, REPO);
 }
 
-function closeNumber(number, comment, deps) {
+/** Esegue il close e dice se GitHub l'ha accettato (exit 0). */
+function closeNumber(number, { comment, reason } = {}, deps = {}) {
   const args = ['issue', 'close', String(number)];
   if (comment) args.push('--comment', comment);
+  if (reason) args.push('--reason', reason);
   args.push(...repoArgs());
   const result = runGh(args, deps);
   if (!result.ok && result.stderr) console.error(result.stderr);
+  return result.ok;
 }
 
 function numberMode({ number, comment }, deps) {
   return {
     subject: `#${number}`,
-    attempt: () => closeNumber(number, comment, deps),
+    attempt: () => closeNumber(number, { comment }, deps),
     verify: () => {
       const state = readIssueState(number, deps);
       return {
@@ -111,29 +144,31 @@ function numberMode({ number, comment }, deps) {
 }
 
 function titleMode({ title, workflow, runUrl }, deps) {
-  const prefix = searchSafePrefix(title);
-  const close = deps.resolve || resolveGithubIssue;
+  const canonical = canonicalTitle(title);
 
   return {
-    subject: `titolo "${prefix}"`,
+    subject: `titolo "${canonical}"`,
     attempt: () => {
-      const open = findOpenByPrefix(prefix, deps);
+      const open = findOpenByTitle(canonical, deps);
       // Non chiudere alla cieca se il preflight non e' osservabile: la verifica
       // successiva produrra' il rosso, oppure il retry potra' recuperare un 5xx.
-      if (open === null) return;
-
+      if (open === null) return false;
+      // Una pinnata dal manifest non si chiude mai: si chiudono per numero
+      // solo le issue dimostrate libere, anche quando convivono con un pin.
       const unpinned = open.filter((number) => !pinOf(number, deps));
-      if (unpinned.length === 0) return;
-      if (open.length === unpinned.length) {
-        close(title, { workflow, runUrl });
-        return;
+      let accepted = true;
+      for (const number of unpinned) {
+        const ok = closeNumber(
+          number,
+          { comment: resolvedNote({ workflow, runUrl }), reason: 'completed' },
+          deps,
+        );
+        accepted = accepted && ok;
       }
-      // `resolveGithubIssue` sceglierebbe il primo match, che potrebbe essere
-      // il pin. In presenza di un pin chiudiamo solo i numeri dimostrati liberi.
-      for (const number of unpinned) closeNumber(number, undefined, deps);
+      return accepted;
     },
     verify: () => {
-      const open = findOpenByPrefix(prefix, deps);
+      const open = findOpenByTitle(canonical, deps);
       if (open === null) return { done: false, detail: 'query di verifica non leggibile' };
       const residual = open.filter((number) => !pinOf(number, deps));
       return {
@@ -144,9 +179,17 @@ function titleMode({ title, workflow, runUrl }, deps) {
   };
 }
 
+/** Attesa sincrona: il wrapper e' un processo CLI a un solo flusso. */
+function defaultSleep(ms) {
+  Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
+}
+
+export const STALE_READ_WAIT_MS = 3000;
+
 /**
- * Esegue al massimo due tentativi. La chiusura e' riuscita solo quando la
- * post-condizione osservata e' vera.
+ * Esegue al massimo due giri. La chiusura e' riuscita solo quando la
+ * post-condizione osservata e' vera. Il secondo giro ripete il close solo se
+ * il primo non e' stato accettato; altrimenti attende e rilegge soltanto.
  */
 export function resolveVerified(options, deps = {}) {
   if (options.number && pinOf(options.number, deps)) {
@@ -154,16 +197,26 @@ export function resolveVerified(options, deps = {}) {
     return 0;
   }
 
+  const sleep = deps.sleep || defaultSleep;
   const mode = options.number ? numberMode(options, deps) : titleMode(options, deps);
+  let accepted = false;
   for (let attempt = 1; attempt <= 2; attempt += 1) {
-    mode.attempt();
+    if (attempt === 1 || !accepted) {
+      accepted = mode.attempt();
+    } else {
+      sleep(STALE_READ_WAIT_MS);
+    }
     const result = mode.verify();
     if (result.done) {
       console.log(`[resolve-verified] ${mode.subject}: chiusura verificata (tentativo ${attempt}).`);
       return 0;
     }
     if (attempt === 1) {
-      console.log(`[resolve-verified] ${mode.subject}: ${result.detail} — ritento una volta.`);
+      console.log(
+        accepted
+          ? `[resolve-verified] ${mode.subject}: close accettato ma ${result.detail} — rileggo senza ripetere il close.`
+          : `[resolve-verified] ${mode.subject}: ${result.detail} — ritento una volta.`,
+      );
     } else {
       console.error(
         `::error::Chiusura NON verificata per ${mode.subject} (${result.detail}). ` +
