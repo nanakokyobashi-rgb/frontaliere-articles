@@ -602,3 +602,51 @@ process.stdin.on('end', () => {
     fs.rmSync(cliPrefix, { recursive: true, force: true });
   }
 });
+
+// Il file del socket compare al bind(), un attimo prima del listen(): chi
+// aspetta che il path esista (lo step di setup, questi test) poteva connettersi
+// nel mezzo e ricevere ECONNREFUSED (PR 1773, run 36038787680). Il broker ora
+// ascolta su un nome temporaneo nella stessa directory 0700 e lo rinomina solo
+// quando accetta connessioni: «il socket esiste» vuol dire «pronto».
+test('il socket compare solo quando il broker accetta gia\' connessioni', async () => {
+  const brokerDir = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-broker-ready-test.'));
+  const cliPrefix = fs.mkdtempSync(path.join(os.tmpdir(), 'claude-haiku-codex-cli.'));
+  const socketPath = path.join(brokerDir, 'auth.sock');
+  const cliPath = path.join(cliPrefix, 'codex');
+  fs.writeFileSync(cliPath, "#!/usr/bin/env node\nif (process.argv.includes('--version')) { console.log('codex 0.153.4'); process.exit(0); }\n", { mode: 0o700 });
+  fs.chmodSync(cliPath, 0o700);
+  const cliSha256 = crypto.createHash('sha256').update(fs.readFileSync(cliPath)).digest('hex');
+  const broker = spawn(process.execPath, [
+    BROKER,
+    '--socket', socketPath,
+    '--ttl-ms', '60000',
+    '--max-requests', '1',
+    '--codex-bin', cliPath,
+    '--codex-realpath', cliPath,
+    '--codex-sha256', cliSha256,
+    '--codex-prefix', cliPrefix,
+  ], { cwd: ROOT, stdio: ['pipe', 'ignore', 'pipe'] });
+  let stderr = '';
+  broker.stderr.setEncoding('utf8');
+  broker.stderr.on('data', (chunk) => { stderr += chunk; });
+  broker.stdin.end('{"access_token":"test"}');
+  try {
+    await waitForSocket(socketPath, broker);
+    assert.equal(fs.statSync(socketPath).mode & 0o777, 0o600, stderr);
+    assert.deepEqual(
+      fs.readdirSync(brokerDir).filter((name) => name.endsWith('.listening')),
+      [],
+      'il nome temporaneo di ascolto non deve restare accanto al socket',
+    );
+    // La prima connessione dopo che il path esiste va accettata subito.
+    const cleaned = await request(socketPath, { op: 'cleanup' });
+    assert.deepEqual(cleaned, { ok: true, cleaned: true });
+    assert.equal(await waitForExit(broker), 0, stderr);
+    assert.equal(fs.existsSync(socketPath), false);
+  } finally {
+    if (broker.exitCode === null) broker.kill('SIGTERM');
+    await waitForExit(broker).catch(() => {});
+    fs.rmSync(brokerDir, { recursive: true, force: true });
+    fs.rmSync(cliPrefix, { recursive: true, force: true });
+  }
+});
