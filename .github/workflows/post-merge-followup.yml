@@ -526,11 +526,18 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
+          # I daily del corpus contengono anche item instradati dal sito
+          # (FOLLOWUP.md § Routing cross-repository) con `Sources: PR #N` del
+          # sito: senza questo repository gemello il recovery storico cercava
+          # quelle PR qui, `gh` rispondeva «Could not resolve to a PullRequest»
+          # e il daily #1508 (2026-09-15) restava `collecting` a ogni run. Il
+          # token arriva dalla shell dopo load-rc-env, non dal contesto `env.*`.
+          GATE_ALT_PR_REPO: valerielinc-ops/frontaliere-si-o-no
           BATCH_PRS: ${{ steps.collect.outputs.batch_prs }}
           TRIAGE_DAILY_KEY: ${{ steps.collect.outputs.daily_key }}
           COLLECTION_OK: ${{ steps.collect.outputs.collection_ok }}
           TRIAGE_COMPLETE: ${{ steps.triage_complete.outputs.triage_complete }}
-        run: node scripts/ci/gate-minted-followups.mjs
+        run: GATE_ALT_PR_TOKEN="${GITHUB_PAT_SITE:-${GITHUB_PAT:-}}" node scripts/ci/gate-minted-followups.mjs
 
       # Le follow-up che riguardano il producer vengono coniate sul corpus, non sul
       # sito. Il gate deve quindi leggere/scrivere le issue su Nanako ma commentare la
@@ -541,6 +548,7 @@ jobs:
         env:
           GH_REPO: nanakokyobashi-rgb/frontaliere-articles
           GATE_PR_REPO: ${{ github.repository }}
+          GATE_ALT_PR_REPO: valerielinc-ops/frontaliere-si-o-no
           BATCH_PRS: ${{ steps.collect.outputs.batch_prs }}
           TRIAGE_DAILY_KEY: ${{ steps.collect.outputs.daily_key }}
           COLLECTION_OK: ${{ steps.collect.outputs.collection_ok }}
@@ -551,7 +559,8 @@ jobs:
             echo "::warning::Gate sul conio corpus saltato: GITHUB_PAT_NANAKO/GITHUB_PAT assente; issue lasciate intatte."
             exit 0
           fi
-          GH_TOKEN="$corpus_token" GATE_PR_TOKEN="$corpus_token" node scripts/ci/gate-minted-followups.mjs
+          GH_TOKEN="$corpus_token" GATE_PR_TOKEN="$corpus_token" \
+            GATE_ALT_PR_TOKEN="${GITHUB_PAT_SITE:-${GITHUB_PAT:-}}" node scripts/ci/gate-minted-followups.mjs
 
       # Quando il batch corpus conia item che puntano a file del sito, il gate
       # precedente non li vede: GH_REPO è volutamente il corpus. Il gate deve girare
