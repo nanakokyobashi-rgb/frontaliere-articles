@@ -8929,14 +8929,19 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   // Percorso verificato end-to-end il 2026-08-18 (callLLM reale, catena di
   // modelli capped, prompt da 60.500 token → retryRequestTokenBudget=8000).
   //
-  // Vale SOLO al primo tentativo, ed e' applicato anche qui, non solo alla
-  // `prefer` passata a callLLM sotto: dal secondo tentativo in poi il retry
-  // loop min-words (selectMinWordsRetryModel) sceglie deliberatamente un
-  // modello diverso da quello precedente per uscire da un fallimento
-  // ripetuto, e quel modello ha quasi sempre un cap dichiarato — la scala di
-  // riduzione deve tornare a mordere per lui, non restare skippata pensando
-  // ai CLI che non verranno piu' chiamati. Vedi il gate sulla `prefer:` sotto.
-  const _preferActiveThisAttempt = generationAttempt === 1;
+  // Vale per OGNI tentativo (decisione del proprietario, 2026-09-24), ed e'
+  // applicato anche qui, non solo alla `prefer` passata a callLLM sotto.
+  // Prima valeva solo al primo: dal secondo il retry loop min-words
+  // (selectMinWordsRetryModel) ruotava di proposito su un modello free
+  // diverso per uscire da un fallimento ripetuto. Con il roster free a terra
+  // (402 da Mistral, SambaNova, Cerebras e HuggingFace; GitHub Models ritirato)
+  // quella rotazione finiva su modelli morti: nella run 36022627600 Codex ha
+  // scritto il tentativo 1, il fact-check l'ha bocciato per una data, e il
+  // tentativo 2 e' ricaduto sui free fino a `prompt-floor-irreducible`. Ora il
+  // ritentativo, con il feedback del gate, torna a Codex e poi a Claude; la
+  // rotazione resta la cascata dietro di loro, e la scala di riduzione torna
+  // a mordere solo quando la flotta detta un budget (`_promptTokenBudget`).
+  const _preferActiveThisAttempt = true;
   const _preferSenzaCap = _preferActiveThisAttempt && _preferisceModelloSenzaCap(PREFERRED_GENERATION_MODELS);
   const _saltaScala = _preferSenzaCap && !(Number(sourceContext?._promptTokenBudget) > 0);
 
@@ -9921,18 +9926,16 @@ Rispondi SOLO con JSON valido, senza markdown.` },
       const itRaw2 = useGeminiDirect
         ? await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema, expectedFields: REQUIRED_IT_BODY_FIELDS })
         // Stessa preferenza della chiamata che sta ripetendo, e stesso gate
-        // `_preferActiveThisAttempt`: solo al primo tentativo del retry loop
-        // min-words, cosi' da non scavalcare la rotazione di diversificazione
-        // (selectMinWordsRetryModel) dal secondo tentativo in poi — vedi il
-        // commento su `_preferSenzaCap` sopra. E' anche la seconda chiamata
-        // preferita per tentativo su cui e' dimensionato
+        // `_preferActiveThisAttempt`, che dal 2026-09-24 vale su ogni
+        // tentativo — vedi il commento su `_preferSenzaCap` sopra. E' anche la
+        // seconda chiamata preferita per tentativo su cui e' dimensionato
         // DEFAULT_CLAUDE_CLI_MAX_CALLS_PER_RUN (40 = 20 tentativi × 2). Non
-        // e' piu' un upper bound stretto: il ri-bracketing puo' aggiungere
-        // 1 chiamata preferita (ramo scala) o 2 (ramo split) e solo
-        // sull'attempt 1, dove la preferenza vive. Il tetto vero lo tiene lo
-        // storm breaker di claude-cli, che dopo 3 fallimenti consecutivi lo
-        // spegne per tutta la run — ed e' proprio il caso in cui il
-        // ri-bracketing si arma.
+        // e' un upper bound stretto: il ri-bracketing puo' aggiungere 1
+        // chiamata preferita (ramo scala) o 2 (ramo split), e Claude e' il
+        // secondo preferito, chiamato solo quando Codex fallisce. Il tetto
+        // vero lo tiene lo storm breaker di claude-cli, che dopo 3 fallimenti
+        // consecutivi lo spegne per tutta la run — ed e' proprio il caso in cui
+        // il ri-bracketing si arma.
         //
         // issue #460: `!_preferDegradataDalRibracket` in piu' rispetto a
         // prima. Se questo tentativo e' passato dal ri-bracketing,
