@@ -123,6 +123,21 @@ test('mirrorEventImage legge il body in streaming e cancella le risposte oltre i
   assert.match(mirrorFn, /readEventImageBody/);
 });
 
+test('il cleanup del body e del reader ha un tetto e non puo\' bloccare il crawler', () => {
+  const cleanupFn = body('awaitEventImageCleanup');
+  assert.match(SRC, /EVENT_IMAGE_CANCEL_TIMEOUT_MS\s*=\s*1_000/);
+  assert.match(cleanupFn, /Promise\.race/);
+  assert.match(cleanupFn, /setTimeout/);
+  assert.match(cleanupFn, /clearTimeout/);
+
+  const responseFn = body('cancelEventImageResponse');
+  assert.match(responseFn, /awaitEventImageCleanup/);
+  assert.doesNotMatch(responseFn, /await\s+response\?\.body\?\.cancel/);
+
+  const readerFn = body('readEventImageBody');
+  assert.equal((readerFn.match(/awaitEventImageCleanup\(\(\) => reader\.cancel/g) || []).length, 2);
+});
+
 test('sharp e\' una dipendenza dichiarata: l\'import dinamico deve poter risolvere', () => {
   const pkg = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'));
   assert.ok(pkg.dependencies?.sharp || pkg.devDependencies?.sharp, 'sharp assente da package.json');
