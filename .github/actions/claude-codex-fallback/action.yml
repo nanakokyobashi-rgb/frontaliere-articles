@@ -1203,8 +1203,11 @@ runs:
           --output-last-message "$CODEX_OUTPUT" \
           - 2>&1 | tee "$codex_diagnostics_destination" >/dev/null
         pipeline_status=("${PIPESTATUS[@]}")
-        codex_status="${pipeline_status[0]:-1}"
-        diagnostics_status="${pipeline_status[1]:-1}"
+        # This pipeline has three processes: printf (0), Codex (1), tee (2).
+        # Reading 0/1 here misclassifies a Codex timeout as a diagnostics-write
+        # failure because printf normally exits successfully.
+        codex_status="${pipeline_status[1]:-1}"
+        tee_status="${pipeline_status[2]:-1}"
         codex_finished_ms="$(date +%s%3N 2>/dev/null || printf '0')"
         case "$codex_finished_ms" in *[!0-9]*|'') codex_finished_ms=0 ;; esac
         codex_duration_ms=0
@@ -1228,7 +1231,7 @@ runs:
           printf '\n{"type":"codex_timeout","codex_timeout":true,"timeout_seconds":%s}\n' \
             "$codex_exec_timeout_seconds" >> "$codex_diagnostics_destination"
         fi
-        if [ "$diagnostics_status" -ne 0 ]; then
+        if [ "$tee_status" -ne 0 ]; then
           echo '::error::Codex diagnostics stream could not be written.'
           [ "$codex_status" -eq 0 ] && codex_status=1
         fi
