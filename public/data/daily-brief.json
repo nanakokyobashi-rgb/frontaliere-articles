@@ -1,26 +1,33 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-23T09:50:18.798Z",
-  "dateIso": "2026-09-23",
+  "generatedAt": "2026-09-24T09:47:13.291Z",
+  "dateIso": "2026-09-24",
   "counts": {
     "availableBlocks": 3,
     "crossings": 141,
     "fuelMunicipalities": 0,
     "exchangePoints": 32,
-    "jobsActive": 24050
+    "jobsActive": 23843
   },
   "blocks": {
     "borderWait": {
       "available": true,
-      "updatedAt": "2026-09-23T07:37:24.568Z",
+      "updatedAt": "2026-09-24T07:37:38.539Z",
       "count": 141,
-      "zeroWaitCount": 140,
+      "zeroWaitCount": 139,
       "worst": {
-        "slug": "san-pietro",
-        "name": "San Pietro (Clivio-Stabio)",
+        "slug": "gaggiolo",
+        "name": "Gaggiolo (Cantello-Stabio)",
         "waitMinutes": 8
       },
       "crossings": [
+        {
+          "slug": "gaggiolo",
+          "name": "Gaggiolo (Cantello-Stabio)",
+          "waitMinutes": 8,
+          "status": "yellow",
+          "direction": null
+        },
         {
           "slug": "san-pietro",
           "name": "San Pietro (Clivio-Stabio)",
@@ -367,13 +374,6 @@
         {
           "slug": "forcola-di-livigno",
           "name": "Forcola di Livigno",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "gaggiolo",
-          "name": "Gaggiolo (Cantello-Stabio)",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -1013,30 +1013,30 @@
     },
     "fuel": {
       "available": false,
-      "reason": "fuel data is 165h old (max 48h)",
-      "degradedEditions": 5
+      "reason": "fuel data is 189h old (max 48h)",
+      "degradedEditions": 6
     },
     "exchange": {
       "available": true,
-      "rate": 1.0592,
-      "lastDate": "2026-09-22",
-      "prevRate": 1.0579,
-      "prevDate": "2026-09-21",
+      "rate": 1.0627,
+      "lastDate": "2026-09-23",
+      "prevRate": 1.0614,
+      "prevDate": "2026-09-22",
       "delta1d": 0.0013,
-      "rate7dAgo": 1.0596,
-      "delta7d": -0.0004,
+      "rate7dAgo": 1.0584,
+      "delta7d": 0.0043,
       "source": "frankfurter",
       "pointCount": 32,
       "degradedEditions": 0
     },
     "jobs": {
       "available": true,
-      "generatedAt": "2026-09-23T07:02:14.886Z",
-      "activeJobs": 24050,
-      "activeCompanies": 862,
-      "todayAdded": 43,
-      "yesterdayAdded": 153,
-      "last7dAdded": 4098,
+      "generatedAt": "2026-09-24T04:48:04.715Z",
+      "activeJobs": 23843,
+      "activeCompanies": 866,
+      "todayAdded": 1309,
+      "yesterdayAdded": 387,
+      "last7dAdded": 5265,
       "degradedEditions": 0
     }
   }
