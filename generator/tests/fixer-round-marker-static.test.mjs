@@ -6,9 +6,12 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
-for (const [file, marker] of [
-  ['pr-redflag-fixer.yml', 'REDFLAG_FIX_ROUND'],
-  ['pr-redcheck-fixer.yml', 'REDCHECK_FIX_ROUND'],
+// Il redcheck rimborsa il SUPERSEDED con la macchina a stati idempotente
+// `--refund-superseded` e un rimborso non dimostrabile e' ROSSO (#9617); il
+// redflag conserva ancora il ramo `--delete-verified` con avviso.
+for (const [file, marker, supersededEcho, cleanupFlag] of [
+  ['pr-redflag-fixer.yml', 'REDFLAG_FIX_ROUND', 'echo "::warning::SUPERSEDED:', /--delete-verified/],
+  ['pr-redcheck-fixer.yml', 'REDCHECK_FIX_ROUND', 'echo "::error::SUPERSEDED:', /--refund-superseded/],
 ]) {
   test(`${file}: il modello parte solo dopo marker trusted verificato`, () => {
     const source = readFileSync(path.join(ROOT, '.github/workflows', file), 'utf8');
@@ -41,9 +44,9 @@ for (const [file, marker] of [
     assert.ok(precodexStart >= 0, `${file}: step precodex non trovato`);
     assert.match(source.slice(precodexStart, finalVerifyAt), /continue-on-error:\s*true/,
       `${file}: un mismatch stantio deve arrivare al classificatore senza autorizzare Codex`);
-    const supersededAt = source.indexOf('echo "::warning::SUPERSEDED:');
+    const supersededAt = source.indexOf(supersededEcho);
     assert.ok(supersededAt >= 0, `${file}: ramo SUPERSEDED assente`);
-    assert.match(source.slice(Math.max(0, supersededAt - 1100), supersededAt + 1600), /--delete-verified/,
+    assert.match(source.slice(Math.max(0, supersededAt - 1100), supersededAt + 1600), cleanupFlag,
       `${file}: cleanup SUPERSEDED non usa la prova trusted dell'ID marker`);
     assert.match(source.slice(Math.max(0, supersededAt - 1100), supersededAt + 1600), /MARKER_COMMENT_ID/,
       `${file}: cleanup SUPERSEDED non usa l'ID restituito dal marker`);
