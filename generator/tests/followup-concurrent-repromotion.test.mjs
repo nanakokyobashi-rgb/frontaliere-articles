@@ -70,7 +70,7 @@ test('un merge conta solo se successivo all\'ultimo verdetto FIX_OUTCOME', () =>
   assert.equal(mergeAfterFixOutcomeAt(mergedAt, null), null);
 });
 
-// La promozione del DRAIN: `edit(cand, { add: [LBL_FIX], remove: [LBL_QUEUED] })`
+// La promozione del DRAIN: `promoteToFix(cand)`, una sola `gh issue edit` con add agent:fix + remove agent:fix-queued
 // → i due eventi arrivano dalla stessa chiamata, a un secondo di distanza.
 const drainPromotion = (at) => [unlabeled('agent:fix-queued', at), labeled('agent:fix', at + 1000)];
 

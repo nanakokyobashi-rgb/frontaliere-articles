@@ -39,7 +39,7 @@
  * `agent:fix` e' gia' stato consumato come token di dispatch — toglierlo non
  * richiama la run partita, e lascerebbe un fixer in volo su una issue che
  * nessuna label descrive. E' anche esattamente cio' che fa il drainer quando
- * promuove (`edit(n, { add: [LBL_FIX], remove: [LBL_QUEUED] })`), quindi la
+ * promuove (`promoteToFix(n)`: una `gh issue edit` che aggiunge `agent:fix` e toglie `agent:fix-queued`), quindi la
  * riconciliazione non introduce una semantica nuova: ripristina l'unica che il
  * ciclo ha sempre avuto.
  *
