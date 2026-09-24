@@ -148,6 +148,7 @@ export const CONTENT_GATES = [
   'generator/tests/escaped-tab-marker-corpus.test.mjs',
   'generator/tests/evergreen-costo-vita-ticino-vs-lombardia-refresh.test.mjs',
   'generator/tests/evergreen-guida-dichiarazione-redditi-frontalieri-refresh.test.mjs',
+  'generator/tests/evergreen-lamal-cmi-scelta-frontaliere-2026-refresh.test.mjs',
   'generator/tests/evergreen-tassazione-individuale-refresh.test.mjs',
   'generator/tests/evergreen-triad-refresh.test.mjs',
   'generator/tests/faq-locale-consistency.test.mjs',
