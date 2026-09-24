@@ -59,6 +59,12 @@ export const MAX_REPORT_BYTES = 16 * 1024;
 //     `translate-queue-recovery.yml`.
 export const QUEUE_UNSERVED_STALE_THRESHOLD_SECONDS = 6 * 60 * 60;
 export const QUEUE_HOLDER_STALE_THRESHOLD_SECONDS = 24 * 60 * 60;
+// L'eta' e' `max(0, now - timestamp)`: un istante di misura nel futuro (clock
+// skew, risposta API incoerente) la azzererebbe e dichiarerebbe `within_slo`
+// anche un detentore fermo da giorni (#1811). Uno skew fino a questa
+// tolleranza resta una misura valida con eta' 0; oltre, il timestamp non e'
+// una misura e il censimento fallisce chiuso con `future_timestamp`.
+export const MAX_CLOCK_SKEW_SECONDS = 5 * 60;
 
 const API_ROOT = 'https://api.github.com';
 const REQUEST_TIMEOUT_MS = 8_000;
@@ -113,6 +119,7 @@ export const REASON_CODES = Object.freeze([
   'cancelled_with_jobs',
   'claim_state_not_evaluated',
   'deep_candidate_limit_exceeded',
+  'future_timestamp',
   'invalid_created_at',
   'invalid_head_sha',
   'invalid_mode',
@@ -180,6 +187,10 @@ function validTimestamp(value) {
   if (!Number.isFinite(milliseconds)) return null;
   const canonical = `${match[1]}.${(match[2] ?? '').padEnd(3, '0')}Z`;
   return new Date(milliseconds).toISOString() === canonical ? milliseconds : null;
+}
+
+function isFutureMeasurement(state, milliseconds) {
+  return milliseconds > state.nowMs + MAX_CLOCK_SKEW_SECONDS * 1000;
 }
 
 function validRequiredString(value) {
@@ -374,6 +385,10 @@ async function collectActiveJobStart(client, state, currentRuns) {
   }
   const startedMs = validTimestamp(activeJobs[0].started_at);
   if (startedMs === null) throw new ObservationFailure('liveness_census_inconclusive');
+  if (isFutureMeasurement(state, startedMs)) {
+    failClosed(state, 'future_timestamp', runId);
+    return;
+  }
   state.activeStartedMs.push(startedMs);
 }
 
@@ -502,6 +517,12 @@ function collectShallowFacts(run, state, candidates, { collectQueue = true } = {
             return;
           }
           waitStartedMs = runStartedMs;
+        }
+        // `run_started_at >= created_at`, quindi basta controllare l'istante
+        // da cui parte l'attesa: copre sia il primo attempt sia il rerun.
+        if (isFutureMeasurement(state, waitStartedMs)) {
+          failClosed(state, 'future_timestamp', runId);
+          return;
         }
         state.pendingRunIds.push(runId);
         state.pendingCreatedMs.push(createdMs);

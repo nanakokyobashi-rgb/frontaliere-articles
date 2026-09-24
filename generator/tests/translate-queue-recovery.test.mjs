@@ -6,6 +6,7 @@ import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 import {
   BOOTSTRAP_GET_REQUESTS,
+  MAX_CLOCK_SKEW_SECONDS,
   MAX_DEEP_CANDIDATES,
   MAX_GET_REQUESTS,
   MAX_REPORT_BYTES,
@@ -453,6 +454,99 @@ test('un rerun pending senza run_started_at valido fallisce chiuso', async (t) =
       assert.equal(report.queue.slo.alert, false);
     });
   }
+});
+
+// #1811: l'eta' e' `max(0, now - timestamp)`, quindi un timestamp futuro (clock
+// skew, risposta API incoerente) azzerava l'eta' e dichiarava `within_slo` un
+// detentore fermo da 48 h. Oltre la tolleranza di skew il timestamp non e' una
+// misura: il censimento fallisce chiuso e il watchdog esce 1.
+function isoFromNow(offsetSeconds) {
+  return new Date(NOW + offsetSeconds * 1000).toISOString();
+}
+
+test('la tolleranza di skew e esplicita e di pochi minuti', () => {
+  assert.equal(MAX_CLOCK_SKEW_SECONDS, 5 * 60);
+});
+
+test('un detentore con jobs.started_at nel futuro fallisce chiuso', async () => {
+  const holderId = 33500000019;
+  const holder = run(holderId, {
+    conclusion: null,
+    created_at: '2026-08-30T17:00:00.000Z',
+    status: 'in_progress',
+  });
+  const { report } = await observe(fakeGithub({
+    activeJobsByRun: {
+      [holderId]: {
+        jobs: [{ id: 1, started_at: isoFromNow(24 * 60 * 60), status: 'in_progress' }],
+        total_count: 1,
+      },
+    },
+    currentRuns: [holder],
+    pages: [[]],
+  }));
+  assert.equal(report.complete, false);
+  assert.equal(report.failClosed, true);
+  assert.equal(report.counts.byReason.future_timestamp, 1);
+  assert.deepEqual(report.samples.future_timestamp, [String(holderId)]);
+  assert.equal(report.queue.slo.state, 'not_evaluable');
+  assert.equal(report.queue.slo.alert, false);
+});
+
+test('un pending con timestamp di misura nel futuro fallisce chiuso', async (t) => {
+  const cases = [
+    ['created_at attempt 1', { created_at: isoFromNow(24 * 60 * 60) }],
+    ['run_started_at rerun', {
+      created_at: '2026-08-30T17:00:00.000Z',
+      run_attempt: 2,
+      run_started_at: isoFromNow(24 * 60 * 60),
+    }],
+    ['appena oltre la tolleranza', { created_at: isoFromNow(MAX_CLOCK_SKEW_SECONDS + 1) }],
+  ];
+  for (const [name, overrides] of cases) {
+    await t.test(name, async () => {
+      const pending = run(33500000020, { conclusion: null, status: 'queued', ...overrides });
+      const { report } = await observe(fakeGithub({ currentRuns: [pending], pages: [[]] }));
+      assert.equal(report.complete, false);
+      assert.equal(report.failClosed, true);
+      assert.equal(report.counts.byReason.future_timestamp, 1);
+      assert.deepEqual(report.samples.future_timestamp, ['33500000020']);
+      assert.equal(report.queue.slo.state, 'not_evaluable');
+      assert.equal(report.queue.slo.alert, false);
+    });
+  }
+});
+
+test('uno skew entro la tolleranza resta una misura valida con eta zero', async (t) => {
+  await t.test('detentore a +60 s', async () => {
+    const holderId = 33500000021;
+    const { report } = await observe(fakeGithub({
+      activeJobsByRun: {
+        [holderId]: {
+          jobs: [{ id: 1, started_at: isoFromNow(60), status: 'in_progress' }],
+          total_count: 1,
+        },
+      },
+      currentRuns: [run(holderId, { conclusion: null, status: 'in_progress' })],
+      pages: [[]],
+    }));
+    assert.equal(report.failClosed, false);
+    assert.equal(report.counts.byReason.future_timestamp, 0);
+    assert.equal(report.queue.slo.measuredAgeSeconds, 0);
+    assert.equal(report.queue.slo.state, 'within_slo');
+  });
+  await t.test('pending esattamente al limite', async () => {
+    const pending = run(33500000022, {
+      conclusion: null,
+      created_at: isoFromNow(MAX_CLOCK_SKEW_SECONDS),
+      status: 'queued',
+    });
+    const { report } = await observe(fakeGithub({ currentRuns: [pending], pages: [[]] }));
+    assert.equal(report.failClosed, false);
+    assert.equal(report.counts.byReason.future_timestamp, 0);
+    assert.equal(report.queue.slo.measuredAgeSeconds, 0);
+    assert.equal(report.queue.slo.state, 'within_slo');
+  });
 });
 
 test('un detentore che non finisce da oltre una giornata apre l alert', async () => {
