@@ -225,13 +225,28 @@ function runClassifier({
   const trustedMarkerHelper = path.join(temp, 'trusted-marker.mjs');
   writeFileSync(ghLog, '');
   writeFileSync(githubEnv, '');
+  // Helper finto e stateless: redflag chiama `--delete-verified`, redcheck
+  // (dal #1779) `--refund-superseded` e ne valida l'esito JSON. Qui basta la
+  // forma di quell'esito; l'idempotenza del rimborso la prova l'helper vero in
+  // redcheck-superseded-refund-idempotency.test.mjs.
   writeFileSync(trustedMarkerHelper, `import { spawnSync } from 'node:child_process';
 const args = process.argv.slice(2);
-const idAt = args.indexOf('--comment-id');
-const id = idAt >= 0 ? args[idAt + 1] : '';
-if (!id || !args.includes('--delete-verified')) process.exit(2);
-const result = spawnSync('gh', ['api', '--method', 'DELETE', \`repos/\${process.env.REPO}/issues/comments/\${id}\`], { stdio: 'inherit' });
-process.exit(result.status ?? 1);
+const valueOf = (flag) => { const at = args.indexOf(flag); return at >= 0 ? args[at + 1] : ''; };
+const id = valueOf('--comment-id');
+const refund = args.includes('--refund-superseded');
+if (!id || !(refund || args.includes('--delete-verified'))) process.exit(2);
+const result = spawnSync('gh', ['api', '--method', 'DELETE', \`repos/\${process.env.REPO}/issues/comments/\${id}\`], { stdio: ['ignore', 'ignore', 'inherit'] });
+if ((result.status ?? 1) !== 0) process.exit(result.status ?? 1);
+if (refund) {
+  console.log(JSON.stringify({
+    refundMarker: valueOf('--marker').replace(/_ROUND$/, '_REFUNDED'),
+    round: Number(valueOf('--round')),
+    commentId: Number(id),
+    markerPresent: false,
+    handleId: 1,
+  }));
+}
+process.exit(0);
 `);
 
   // Fake git a sequenze: ogni tentativo di fetch/lettura consuma il valore
@@ -277,7 +292,7 @@ exec "$@"
 `);
 fakeExecutable(bin, 'gh', String.raw`
 echo "$*" >> "$GH_LOG"
-if echo "$*" | grep -q -- '-X DELETE'; then exit 0; fi
+if echo "$*" | grep -Eq -- '(-X|--method) DELETE'; then exit 0; fi
 if echo "$*" | grep -q 'api user'; then printf '{"login":"fixture-bot"}\n'; exit 0; fi
 if echo "$*" | grep -q 'pr comment'; then exit "$REFUND_COMMENT_STATUS"; fi
 if echo "$*" | grep -q 'issues/.*/comments'; then
