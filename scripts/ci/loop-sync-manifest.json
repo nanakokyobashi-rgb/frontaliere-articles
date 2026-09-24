@@ -4287,9 +4287,9 @@
       "path": ".github/actions/setup-codex-sandbox/action.yml",
       "mode": "identical",
       "baseline": {
-        "site": "049e7b7f8547fc10",
-        "corpus": "049e7b7f8547fc10",
-        "alignedAt": "2026-09-14"
+        "site": "c4559f16c9dbcb41",
+        "corpus": "c4559f16c9dbcb41",
+        "alignedAt": "2026-09-24"
       }
     },
     {
