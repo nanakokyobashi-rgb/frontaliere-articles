@@ -67,9 +67,16 @@ const fileFlags = new Set(['--body-file', '--input', '--template']);
 const fieldFlags = new Set(['-F', '--field', '-f', '--raw-field']);
 const apiBodyFlags = new Set(['--input', '-F', '--field', '-f', '--raw-field']);
 const absoluteUrlPattern = /^(?:[a-z][a-z0-9+.-]*:\/\/|\/\/)/i;
+// Every `gh api` flag that consumes the NEXT argument. A value flag missing
+// here makes apiEndpoint() read its value as the endpoint: `gh api --jq '.x'
+// repos/<repo>/issues` was rejected as an off-repository endpoint because the
+// jq expression came first (follow-up site #8334, FU-2026-09-12-003). Boolean
+// flags (`--paginate`, `--slurp`, `--silent`, `--include`, `--verbose`) take no
+// value and must not be listed.
 const apiEndpointValueFlags = new Set([
   '--method', '-X', '--header', '-H', '--hostname', '--repo', '-R',
-  '--input', '--template', '-F', '--field', '-f', '--raw-field',
+  '--input', '--template', '-t', '-F', '--field', '-f', '--raw-field',
+  '--jq', '-q', '--cache', '--preview', '-p',
 ]);
 const prBodyFileFlags = new Set(['--body-file', '-F']);
 const prBodyInlineFlags = new Set(['--body', '-b']);

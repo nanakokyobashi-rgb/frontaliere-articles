@@ -63,6 +63,20 @@ function isFailureEvent(event) {
     || event?.error != null;
 }
 
+/**
+ * Marker strutturato di quota, a qualunque profondita' dell'evento. Una sola
+ * regola per il top level e per gli oggetti annidati: un `rate_limit_event`
+ * incapsulato in un evento contenitore (`{type:'event', payload:{...}}`) o un
+ * `rate_limit_info.status: rejected` senza `type` cadevano nel ramo
+ * `non_retryable` e congelavano il gate senza retry (follow-up sito #8334,
+ * FU-2026-09-12-011).
+ */
+function isRateLimitMarker(object) {
+  const type = eventType(object);
+  if (type === 'rate_limit_event' || type === 'rate_limit_error') return true;
+  return String(object?.rate_limit_info?.status || '').toLowerCase() === 'rejected';
+}
+
 function statusCode(value) {
   const number = Number(value);
   return Number.isInteger(number) ? number : null;
@@ -84,14 +98,8 @@ function structuredSignals(events) {
         || event?.codex_no_review === true) {
       signals.cancelled = true;
     }
-    if (eventType(event) === 'rate_limit_event' || eventType(event) === 'rate_limit_error') {
-      signals.rateLimit = true;
-    }
-    if (eventType(event) === 'rate_limit_event'
-        && String(event?.rate_limit_info?.status || '').toLowerCase() === 'rejected') {
-      signals.rateLimit = true;
-    }
     walk(event, (object) => {
+      if (isRateLimitMarker(object)) signals.rateLimit = true;
       for (const [key, value] of Object.entries(object)) {
         const normalizedKey = key.replace(/[-_]/g, '').toLowerCase();
         const text = String(value ?? '').toLowerCase();
