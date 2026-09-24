@@ -295,3 +295,215 @@ process.stdin.on('end', () => fs.writeFileSync(output, JSON.stringify({ prompt }
     fs.rmSync(cliPrefix, { recursive: true, force: true });
   }
 });
+
+// Run 36001495484: ogni chiamata Codex usciva con code 1 prima del modello.
+// Il profilo negava ":slash_tmp", ma il broker costruisce workspace, CODEX_HOME
+// e TMPDIR sotto os.tmpdir(), cioè /tmp: il deny copriva il workspace stesso.
+// Il codex finto qui registra dove il broker lo lancia e quale profilo gli
+// scrive, così il contratto si verifica sui percorsi reali e non sul testo.
+test('il profilo sandbox del broker non nega il workspace in cui lancia Codex', async () => {
+  const brokerDir = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-broker-profile-test.'));
+  const cliPrefix = fs.mkdtempSync(path.join(os.tmpdir(), 'claude-haiku-codex-cli.'));
+  const socketPath = path.join(brokerDir, 'auth.sock');
+  const cliPath = path.join(cliPrefix, 'codex');
+  const fakeCli = `#!/usr/bin/env node
+import fs from 'node:fs';
+import path from 'node:path';
+const args = process.argv.slice(2);
+if (args.includes('--version')) { console.log('codex 0.153.4'); process.exit(0); }
+const output = args[args.indexOf('--output-last-message') + 1];
+if (!output) process.exit(2);
+process.stdin.resume();
+process.stdin.on('end', () => fs.writeFileSync(output, JSON.stringify({
+  cwd: process.cwd(),
+  cd: args[args.indexOf('--cd') + 1],
+  tmpdir: process.env.TMPDIR,
+  codexHome: process.env.CODEX_HOME,
+  config: fs.readFileSync(path.join(process.env.CODEX_HOME, 'config.toml'), 'utf8'),
+}), 'utf8'));
+`;
+  fs.writeFileSync(cliPath, fakeCli, { mode: 0o700 });
+  fs.chmodSync(cliPath, 0o700);
+  const cliSha256 = crypto.createHash('sha256').update(fs.readFileSync(cliPath)).digest('hex');
+  // Come la setup action: `env -i PATH=...`, quindi nessun TMPDIR ereditato.
+  const broker = spawn(process.execPath, [
+    BROKER,
+    '--socket', socketPath,
+    '--ttl-ms', '60000',
+    '--max-requests', '1',
+    '--codex-bin', cliPath,
+    '--codex-realpath', cliPath,
+    '--codex-sha256', cliSha256,
+    '--codex-prefix', cliPrefix,
+  ], {
+    cwd: ROOT,
+    env: { PATH: process.env.PATH },
+    stdio: ['pipe', 'ignore', 'pipe'],
+  });
+  let stderr = '';
+  broker.stderr.setEncoding('utf8');
+  broker.stderr.on('data', (chunk) => { stderr += chunk; });
+  broker.stdin.end('{"access_token":"test"}');
+
+  try {
+    await waitForSocket(socketPath, broker);
+    const response = await request(socketPath, { op: 'exec', prompt: 'profile', timeoutMs: 5000 });
+    assert.equal(response.ok, true, stderr);
+    const seen = JSON.parse(response.result);
+    assert.equal(seen.cd, seen.cwd, 'Codex deve girare nel workspace che riceve con --cd');
+
+    const filesystem = {};
+    let inFilesystem = false;
+    for (const line of seen.config.split('\n')) {
+      const header = line.match(/^\[(.+)\]\s*$/);
+      if (header) {
+        inFilesystem = /^permissions\.[^.]+\.filesystem$/.test(header[1]);
+        continue;
+      }
+      const entry = inFilesystem && line.match(/^"([^"]+)"\s*=\s*"([^"]+)"\s*$/);
+      if (entry) filesystem[entry[1]] = entry[2];
+    }
+    // ":root" resta il muro che nasconde auth.json: il workspace lo scavalca
+    // per costruzione, ogni altro deny no.
+    assert.equal(filesystem[':root'], 'deny', 'senza ":root" deny auth.json diventerebbe leggibile');
+    const special = { ':slash_tmp': '/tmp', ':tmpdir': seen.tmpdir };
+    const real = (target) => {
+      try { return fs.realpathSync(target); } catch { return path.resolve(target); }
+    };
+    const workspace = real(seen.cwd);
+    for (const [rule, access] of Object.entries(filesystem)) {
+      if (access !== 'deny' || rule === ':root') continue;
+      const target = special[rule] ?? (path.isAbsolute(rule) ? rule : null);
+      assert.ok(target, `regola deny non risolvibile dal test: ${rule}`);
+      const relative = path.relative(real(target), workspace);
+      const coversWorkspace = relative === '' || (!relative.startsWith('..') && !path.isAbsolute(relative));
+      assert.equal(coversWorkspace, false, `${rule} = "deny" copre il workspace ${workspace}`);
+    }
+    const homeInWorkspace = path.relative(workspace, real(seen.codexHome));
+    assert.ok(
+      homeInWorkspace.startsWith('..') || path.isAbsolute(homeInWorkspace),
+      'CODEX_HOME (auth.json) non deve stare dentro il workspace leggibile',
+    );
+
+    const cleaned = await request(socketPath, { op: 'cleanup' });
+    assert.deepEqual(cleaned, { ok: true, cleaned: true });
+    assert.equal(await waitForExit(broker), 0, stderr);
+  } finally {
+    if (broker.exitCode === null) broker.kill('SIGTERM');
+    await waitForExit(broker).catch(() => {});
+    fs.rmSync(brokerDir, { recursive: true, force: true });
+    fs.rmSync(cliPrefix, { recursive: true, force: true });
+  }
+});
+
+test('un Codex che esce con errore restituisce la causa, senza token', async () => {
+  const brokerDir = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-broker-reason-test.'));
+  const cliPrefix = fs.mkdtempSync(path.join(os.tmpdir(), 'claude-haiku-codex-cli.'));
+  const socketPath = path.join(brokerDir, 'auth.sock');
+  const cliPath = path.join(cliPrefix, 'codex');
+  const token = `eyJ${'a'.repeat(40)}.${'b'.repeat(40)}.${'c'.repeat(40)}`;
+  const fakeCli = `#!/usr/bin/env node
+const args = process.argv.slice(2);
+if (args.includes('--version')) { console.log('codex 0.153.4'); process.exit(0); }
+process.stdin.resume();
+process.stdin.on('end', () => {
+  process.stderr.write('\\x1b[31m2026-09-24T13:59:26Z ERROR codex_models_manager: 401 with ${token}\\x1b[0m\\n');
+  process.stderr.write('Error: thread/start failed: ' + 'error creating thread: '.repeat(15) + 'session ${token}: bwrap: Can\\'t mkdir parents for /tmp/w/tmp: Read-only file system (code -32603)\\n');
+  process.exit(1);
+});
+`;
+  fs.writeFileSync(cliPath, fakeCli, { mode: 0o700 });
+  fs.chmodSync(cliPath, 0o700);
+  const cliSha256 = crypto.createHash('sha256').update(fs.readFileSync(cliPath)).digest('hex');
+  const broker = spawn(process.execPath, [
+    BROKER,
+    '--socket', socketPath,
+    '--ttl-ms', '60000',
+    '--max-requests', '1',
+    '--codex-bin', cliPath,
+    '--codex-realpath', cliPath,
+    '--codex-sha256', cliSha256,
+    '--codex-prefix', cliPrefix,
+  ], {
+    cwd: ROOT,
+    stdio: ['pipe', 'ignore', 'pipe'],
+  });
+  let stderr = '';
+  broker.stderr.setEncoding('utf8');
+  broker.stderr.on('data', (chunk) => { stderr += chunk; });
+  broker.stdin.end('{"access_token":"test"}');
+
+  try {
+    await waitForSocket(socketPath, broker);
+    const response = await request(socketPath, { op: 'exec', prompt: 'fail', timeoutMs: 5000 });
+    assert.equal(response.ok, false, stderr);
+    assert.match(response.error, /^Codex CLI exited with code 1: …/);
+    assert.match(response.error, /bwrap: Can't mkdir parents for \/tmp\/w\/tmp: Read-only file system \(code -32603\)$/);
+    assert.ok(response.error.length <= 300, response.error);
+    assert.match(response.error, /\[redacted\]/, 'il token nella riga scelta va oscurato');
+    assert.doesNotMatch(response.error, /eyJ|[abc]{32,}|\x1b/);
+
+    const cleaned = await request(socketPath, { op: 'cleanup' });
+    assert.deepEqual(cleaned, { ok: true, cleaned: true });
+    assert.equal(await waitForExit(broker), 0, stderr);
+  } finally {
+    if (broker.exitCode === null) broker.kill('SIGTERM');
+    await waitForExit(broker).catch(() => {});
+    fs.rmSync(brokerDir, { recursive: true, force: true });
+    fs.rmSync(cliPrefix, { recursive: true, force: true });
+  }
+});
+
+test('un errore API stampato come JSON restituisce anche il suo "message"', async () => {
+  const brokerDir = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-broker-apierror-test.'));
+  const cliPrefix = fs.mkdtempSync(path.join(os.tmpdir(), 'claude-haiku-codex-cli.'));
+  const socketPath = path.join(brokerDir, 'auth.sock');
+  const cliPath = path.join(cliPrefix, 'codex');
+  const fakeCli = `#!/usr/bin/env node
+const args = process.argv.slice(2);
+if (args.includes('--version')) { console.log('codex 0.153.4'); process.exit(0); }
+process.stdin.resume();
+process.stdin.on('end', () => {
+  process.stderr.write('ERROR: unexpected status 400 Bad Request: {\\n  "error": {\\n    "message": "Invalid schema for response_format: \\'additionalProperties\\' is required to be supplied and to be false.",\\n    "type": "invalid_request_error",\\n    "param": "text.format.schema",\\n    "code": "invalid_json_schema"\\n  }\\n}\\n');
+  process.exit(1);
+});
+`;
+  fs.writeFileSync(cliPath, fakeCli, { mode: 0o700 });
+  fs.chmodSync(cliPath, 0o700);
+  const cliSha256 = crypto.createHash('sha256').update(fs.readFileSync(cliPath)).digest('hex');
+  const broker = spawn(process.execPath, [
+    BROKER,
+    '--socket', socketPath,
+    '--ttl-ms', '60000',
+    '--max-requests', '1',
+    '--codex-bin', cliPath,
+    '--codex-realpath', cliPath,
+    '--codex-sha256', cliSha256,
+    '--codex-prefix', cliPrefix,
+  ], {
+    cwd: ROOT,
+    stdio: ['pipe', 'ignore', 'pipe'],
+  });
+  let stderr = '';
+  broker.stderr.setEncoding('utf8');
+  broker.stderr.on('data', (chunk) => { stderr += chunk; });
+  broker.stdin.end('{"access_token":"test"}');
+
+  try {
+    await waitForSocket(socketPath, broker);
+    const response = await request(socketPath, { op: 'exec', prompt: 'fail', timeoutMs: 5000 });
+    assert.equal(response.ok, false, stderr);
+    assert.match(response.error, /invalid_request_error/);
+    assert.match(response.error, /additionalProperties' is required to be supplied and to be false/);
+    assert.ok(response.error.length <= 300, response.error);
+
+    const cleaned = await request(socketPath, { op: 'cleanup' });
+    assert.deepEqual(cleaned, { ok: true, cleaned: true });
+    assert.equal(await waitForExit(broker), 0, stderr);
+  } finally {
+    if (broker.exitCode === null) broker.kill('SIGTERM');
+    await waitForExit(broker).catch(() => {});
+    fs.rmSync(brokerDir, { recursive: true, force: true });
+    fs.rmSync(cliPrefix, { recursive: true, force: true });
+  }
+});

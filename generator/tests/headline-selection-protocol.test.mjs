@@ -493,3 +493,110 @@ test('il retry della selezione esiste, è limitato e passa dal parser', () => {
     assert.ok(n >= 2 && n <= 4, `${name}=${n} fuori dall'intervallo sensato (2-4): il retry costa quota LLM`);
   }
 });
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Strato 3 — il ripiego Codex dopo un tentativo free fallito
+// ─────────────────────────────────────────────────────────────────────────────
+//
+// Run 36001495484: 24 risposte rigettate su 24 dall'unico modello free rimasto.
+// Run 36010807545: ALL_MODELS_EXHAUSTED sulla cascata free prima che Codex,
+// pronto, venisse mai chiamato. Il primo tentativo resta free; i successivi
+// passano a Codex con `prefer`, e il ripiego resta acceso per la run.
+
+const CODEX = 'codex-cli/modello-di-prova';
+
+test('una risposta free rigettata passa il tentativo successivo a Codex', async () => {
+  const RUN_REPORT = freshRunReport();
+  const seen = [];
+  const callLLM = async (_messages, opts) => {
+    seen.push(opts.prefer);
+    return seen.length === 1
+      ? 'We need to pick a headline from the list…'
+      : '{"selectedId": "H2", "reason": "scelta da Codex"}';
+  };
+  const fallback = { models: [CODEX], engaged: false };
+  const requestHeadlineSelection = buildRequestHeadlineSelection({ callLLM, RUN_REPORT });
+  const { value: r } = await captureStderr(
+    () => requestHeadlineSelection('PROMPT-BASE', 2, 'Batch 1', 2, fallback),
+  );
+
+  assert.equal(r.ok, true);
+  assert.equal(r.index, 1);
+  assert.equal(r.attempts, 2);
+  assert.deepEqual(seen, [undefined, [CODEX]], 'il primo tentativo deve restare free, il secondo su Codex');
+  assert.equal(fallback.engaged, true, 'il ripiego deve restare acceso per le selezioni successive della run');
+  assert.equal(RUN_REPORT.selectionUsage.rejectionReasons[SELECTION_REJECTION.UNPARSEABLE], 1);
+});
+
+test('la cascata free esaurita non e\' il roster a terra finche\' Codex non e\' stato provato', async () => {
+  const RUN_REPORT = freshRunReport();
+  const seen = [];
+  const callLLM = async (_messages, opts) => {
+    seen.push(opts.prefer);
+    if (seen.length === 1) throw rosterExhausted({ transient: false });
+    return '{"selectedId": "H1", "reason": "scelta da Codex"}';
+  };
+  const fallback = { models: [CODEX], engaged: false };
+  const requestHeadlineSelection = buildRequestHeadlineSelection({ callLLM, RUN_REPORT });
+  const { value: r, lines } = await captureStderr(
+    () => requestHeadlineSelection('PROMPT-BASE', 2, 'Batch 1', 2, fallback),
+  );
+
+  assert.equal(r.ok, true, 'la selezione e\' morta sulla cascata free senza provare Codex');
+  assert.deepEqual(seen, [undefined, [CODEX]]);
+  assert.ok(lines.some((l) => /cascata free esaurita/.test(l) && l.includes(CODEX)), lines.join('\n'));
+  assert.equal(
+    RUN_REPORT.selectionUsage.rejectionReasons[SELECTION_REJECTION.INFRA_ERROR],
+    undefined,
+    'una cascata esaurita non e\' un rigetto della selezione e non va contata come tale',
+  );
+});
+
+test('con Codex gia\' provato ALL_MODELS_EXHAUSTED risale intatto, e il ripiego parte subito', async () => {
+  for (const transient of [false, true]) {
+    const RUN_REPORT = freshRunReport();
+    const seen = [];
+    const callLLM = async (_messages, opts) => { seen.push(opts.prefer); throw rosterExhausted({ transient }); };
+    const fallback = { models: [CODEX], engaged: true };
+    const requestHeadlineSelection = buildRequestHeadlineSelection({ callLLM, RUN_REPORT });
+    const { value } = await captureStderr(
+      () => requestHeadlineSelection('PROMPT-BASE', 2, 'Batch 2', 3, fallback).then(
+        (v) => ({ resolved: v }),
+        (e) => ({ err: e }),
+      ),
+    );
+    assert.ok(value.err, `transient=${transient}: il roster intero a terra e' stato declassato (${JSON.stringify(value.resolved)})`);
+    assert.equal(value.err.code, 'ALL_MODELS_EXHAUSTED');
+    assert.equal(value.err.transientExhaustion, transient);
+    assert.deepEqual(seen, [[CODEX]], 'un ripiego gia\' acceso deve valere dal primo tentativo, e un roster a terra non si ritenta');
+  }
+});
+
+test('senza Codex disponibile la selezione resta quella di prima', async () => {
+  const RUN_REPORT = freshRunReport();
+  const seen = [];
+  const callLLM = async (_messages, opts) => { seen.push(opts.prefer); throw rosterExhausted({ transient: true }); };
+  const fallback = { models: [], engaged: false };
+  const requestHeadlineSelection = buildRequestHeadlineSelection({ callLLM, RUN_REPORT });
+  const { value } = await captureStderr(
+    () => requestHeadlineSelection('PROMPT-BASE', 2, 'Batch 1', 2, fallback).then(
+      (v) => ({ resolved: v }),
+      (e) => ({ err: e }),
+    ),
+  );
+  assert.equal(value.err?.code, 'ALL_MODELS_EXHAUSTED');
+  assert.deepEqual(seen, [undefined]);
+  assert.equal(fallback.engaged, false);
+});
+
+test('entrambe le selezioni di selectArticle usano lo stesso ripiego di run', () => {
+  const selectArticleCode = cutDecl('async function selectArticle(');
+  const uses = selectArticleCode.match(/requestHeadlineSelection\([\s\S]*?\);/g) ?? [];
+  assert.equal(uses.length, 2, 'attese due chiamate (batch e finale)');
+  for (const use of uses) assert.match(use, /HEADLINE_SELECTION_FALLBACK/);
+  assert.match(
+    src,
+    /const HEADLINE_SELECTION_FALLBACK = \{\n\s*models: isModelAvailable\(AI_MODELS\.CODEX_CLI_PRIMARY\) \? \[AI_MODELS\.CODEX_CLI_PRIMARY\] : \[\],/,
+    'il ripiego deve essere Codex, e solo quando la lane e\' disponibile nel processo',
+  );
+});
