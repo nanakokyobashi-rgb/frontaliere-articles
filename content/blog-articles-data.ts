@@ -773,6 +773,7 @@ const RAW_ARTICLES = [
  id: 'calcolo-pensione-avs-inps',
  category: 'pensione',
  date: '2026-02-23T15:28:19.421Z',
+ updatedAt: '2026-09-24',
  image: '/images/blog/calcolo-pensione-avs-inps.webp',
  hasCalculator: true,
  authorSlug: 'redazione',
