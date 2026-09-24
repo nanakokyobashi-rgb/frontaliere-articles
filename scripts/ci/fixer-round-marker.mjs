@@ -43,11 +43,10 @@ function parseArgs(argv) {
     const arg = argv[i];
     if (!arg.startsWith('--')) throw new Error(`argomento inatteso: ${arg}`);
     const key = arg.slice(2);
-    if (key === 'help' || key === 'verify-current' || key === 'current-round' || key === 'delete-verified') {
+    if (key === 'help' || key === 'verify-current' || key === 'current-round' || key === 'delete-verified'
+      || key === 'refund-superseded') {
       if (key === 'help') result.help = true;
-      else if (key === 'verify-current') result['verify-current'] = true;
-      else if (key === 'current-round') result['current-round'] = true;
-      else result['delete-verified'] = true;
+      else result[key] = true;
       continue;
     }
     const value = argv[i + 1];
@@ -61,7 +60,7 @@ function parseArgs(argv) {
 }
 
 function usage() {
-  return 'uso: fixer-round-marker.mjs --repo owner/repo --pr N --marker NAME --round N --expected-head SHA --message TEXT --expected-author github-actions[bot] | --current-round --expected-author github-actions[bot] | --verify-current --marker NAME --round N --comment-id ID --expected-head SHA --expected-body-revision SHA --expected-author github-actions[bot] | --delete-verified --marker NAME --round N --comment-id ID --expected-head SHA --expected-body-revision SHA --expected-author github-actions[bot]';
+  return 'uso: fixer-round-marker.mjs --repo owner/repo --pr N --marker NAME --round N --expected-head SHA --message TEXT --expected-author github-actions[bot] | --current-round --expected-author github-actions[bot] | --verify-current --marker NAME --round N --comment-id ID --expected-head SHA --expected-body-revision SHA --expected-author github-actions[bot] | --delete-verified --marker NAME --round N --comment-id ID --expected-head SHA --expected-body-revision SHA --expected-author github-actions[bot] | --refund-superseded --marker NAME --round N --comment-id ID --expected-head SHA --expected-body-revision SHA --expected-author github-actions[bot]';
 }
 
 function runGh(args, label) {
@@ -352,6 +351,197 @@ function deleteAndRefund({ repo, pr, commentId, marker, round, cause, expectedAu
   }
 }
 
+/**
+ * Bodies of the two SUPERSEDED refund comments. Both carry the ID of the
+ * round marker they refund: the `_REFUNDED: N` handle alone is per round, and
+ * a PR can legitimately re-open round N after an earlier refund, so an
+ * unbound handle cannot prove *this* marker was already refunded. The
+ * `<PREFIX>_REFUNDED: N` token stays the first line, unchanged, because the
+ * stale-PR rescuer matches exactly that prefix.
+ */
+export function supersededRefundBodies({ marker, round, commentId }) {
+  const refundMarker = refundMarkerName(marker);
+  const prefix = refundMarker.slice(0, -'_REFUNDED'.length);
+  const binding = `<!-- ${prefix}_REFUND_FOR: ${Number(commentId)} -->`;
+  return {
+    refundMarker,
+    attempt: `<!-- ${prefix}_REFUND_ATTEMPT: ${round} -->\n${binding}\n`
+      + '_Rimborso preparato; DELETE trusted in corso. Il round non è ancora rimborsato._',
+    refunded: `<!-- ${refundMarker}: ${round} -->\n${binding}\n`
+      + '_Round rimborsato: run SUPERSEDED; nessun round consumato._',
+  };
+}
+
+function exactTrustedIds(comments, body, author) {
+  return comments
+    .filter((comment) => comment?.user?.login === author && comment?.body === body
+      && Number.isSafeInteger(Number(comment?.id)) && Number(comment.id) > 0)
+    .map((comment) => Number(comment.id))
+    .sort((left, right) => left - right);
+}
+
+/**
+ * Pure classification of the SUPERSEDED refund state. It never guesses: a
+ * marker comment that still exists but no longer proves the snapshot, or a
+ * vanished marker without our bound attempt, is an error rather than a state
+ * to paper over.
+ */
+export function classifySupersededRefund({
+  comments, marker, round, headSha, bodySha, expectedCommentId, expectedAuthor,
+}) {
+  const commentId = Number(expectedCommentId);
+  if (!Number.isSafeInteger(commentId) || commentId <= 0) {
+    throw new Error('ID marker persistito mancante o non valido per il rimborso');
+  }
+  const author = validateExpectedAuthor(expectedAuthor);
+  const bodies = supersededRefundBodies({ marker, round, commentId });
+  const markerComment = comments.find((comment) => Number(comment?.id) === commentId) || null;
+  if (markerComment && !verifyMarkerComment({
+    comments: [markerComment], marker, round, headSha, bodySha,
+    expectedCommentId: commentId, expectedAuthor: author,
+  })) {
+    throw new Error(`commento ${commentId} presente ma non e' il marker ${marker}:${round} atteso (ID/autore/snapshot)`);
+  }
+  return {
+    ...bodies,
+    commentId,
+    author,
+    markerPresent: Boolean(markerComment),
+    attemptIds: exactTrustedIds(comments, bodies.attempt, author),
+    handleIds: exactTrustedIds(comments, bodies.refunded, author),
+  };
+}
+
+function readCommentsWithRetry(repo, pr, accept) {
+  let lastError;
+  let comments = [];
+  for (const delay of [0, 1, 2, 4]) {
+    if (delay) sleep(delay);
+    try {
+      comments = readComments(repo, pr);
+      lastError = null;
+      if (accept(comments)) return comments;
+    } catch (error) {
+      lastError = error;
+    }
+  }
+  if (lastError) throw lastError;
+  return comments;
+}
+
+function deleteIfPresent(repo, pr, commentId, label) {
+  try {
+    deleteComment(repo, commentId);
+    return true;
+  } catch (deleteError) {
+    // A concurrent finalizer may have deleted the same comment first (404).
+    // That is convergence only if a fresh read proves the comment is gone.
+    const comments = readCommentsWithRetry(repo, pr,
+      (rows) => !rows.some((comment) => Number(comment?.id) === Number(commentId)));
+    if (comments.some((comment) => Number(comment?.id) === Number(commentId))) {
+      throw new Error(`${label}: DELETE del commento ${commentId} fallita e commento ancora presente (${deleteError.message})`);
+    }
+    return false;
+  }
+}
+
+/**
+ * Make exactly one trusted comment with `body` exist. Idempotent: an existing
+ * copy is reused, a POST whose response is lost is recovered by read-back,
+ * and duplicates from a concurrent writer collapse onto the lowest ID (every
+ * writer applies the same rule, so any interleaving converges).
+ */
+function ensureSingleComment({ repo, pr, body, author, label }) {
+  let ids = exactTrustedIds(readComments(repo, pr), body, author);
+  let posted = false;
+  if (ids.length === 0) {
+    let postError = null;
+    try {
+      runGh(['api', '--method', 'POST', `repos/${repo}/issues/${pr}/comments`, '--raw-field', `body=${body}`], label);
+    } catch (error) {
+      postError = error;
+    }
+    ids = exactTrustedIds(
+      readCommentsWithRetry(repo, pr, (rows) => exactTrustedIds(rows, body, author).length > 0),
+      body, author,
+    );
+    if (ids.length === 0) {
+      throw new Error(`${label}: commento non persistito dopo read-back bounded${postError ? ` (${postError.message})` : ''}`);
+    }
+    posted = true;
+  }
+  const [keep, ...duplicates] = ids;
+  let removed = 0;
+  for (const duplicate of duplicates) {
+    if (deleteIfPresent(repo, pr, duplicate, `${label} (duplicato)`)) removed += 1;
+  }
+  return { id: keep, posted, duplicatesRemoved: removed };
+}
+
+/**
+ * SUPERSEDED refund of a pre-model round marker, as one retryable state
+ * machine instead of three independent side effects:
+ *
+ *   marker present, no handle → bound attempt → verified DELETE → bound handle
+ *   marker gone, attempt present, no handle (interrupted after DELETE) → handle
+ *   marker gone, handle present (already refunded) → no write
+ *
+ * Every step is re-entrant, so a rerun or a concurrent finalizer converges on
+ * the same end state: marker absent, exactly one bound `_REFUNDED` handle.
+ * Any state that cannot be proven throws: the caller must turn it red.
+ */
+export function refundSupersededMarker({
+  repo, pr, marker, round, expectedHead, expectedBodySha, expectedCommentId,
+  expectedAuthor = TRUSTED_MARKER_ACTOR,
+}) {
+  const classify = (comments) => classifySupersededRefund({
+    comments, marker, round, headSha: expectedHead, bodySha: expectedBodySha,
+    expectedCommentId, expectedAuthor,
+  });
+  const initial = classify(readComments(repo, pr));
+  const alreadyRefunded = !initial.markerPresent && initial.handleIds.length > 0;
+  let markerDeleted = false;
+  let attempt = null;
+
+  if (initial.markerPresent) {
+    if (initial.handleIds.length === 0) {
+      // Persist the intent before the irreversible DELETE: after an
+      // interruption the bound attempt is the proof that lets a retry
+      // publish the handle for a marker that is already gone.
+      attempt = ensureSingleComment({
+        repo, pr, body: initial.attempt, author: initial.author, label: 'tentativo rimborso',
+      });
+    }
+    markerDeleted = deleteIfPresent(repo, pr, initial.commentId, 'rimborso marker round');
+  } else if (initial.handleIds.length === 0 && initial.attemptIds.length === 0) {
+    throw new Error(`marker ${initial.commentId} assente senza tentativo di rimborso vincolato: rimborso non dimostrabile`);
+  }
+
+  const handle = ensureSingleComment({
+    repo, pr, body: initial.refunded, author: initial.author, label: 'handle rimborso',
+  });
+  const final = classify(readCommentsWithRetry(repo, pr, (rows) => {
+    const state = classify(rows);
+    return !state.markerPresent && state.handleIds.length === 1;
+  }));
+  if (final.markerPresent || final.handleIds.length !== 1) {
+    throw new Error(`rimborso non convergente: marker ${final.markerPresent ? 'presente' : 'assente'}, handle ${final.handleIds.length}`);
+  }
+  return {
+    outcome: alreadyRefunded ? 'already-refunded' : 'refunded',
+    marker,
+    refundMarker: final.refundMarker,
+    round: Number(round),
+    commentId: final.commentId,
+    markerPresent: false,
+    markerDeleted,
+    attemptId: attempt?.id ?? final.attemptIds[0] ?? null,
+    handleId: final.handleIds[0],
+    handlePosted: handle.posted,
+    duplicatesRemoved: (attempt?.duplicatesRemoved || 0) + handle.duplicatesRemoved,
+  };
+}
+
 function readBackPostedComment({ repo, pr, posted, marker, round, headSha, bodySha, body }) {
   const comments = readComments(repo, pr);
   const exact = comments.find((comment) => Number(comment?.id) === posted.id
@@ -520,6 +710,24 @@ function main() {
     }
     console.log(JSON.stringify(verifyCurrentMarker({
       repo: String(args.repo || ''), pr: String(args.pr || ''), marker, round,
+      expectedHead, expectedBodySha, expectedCommentId: commentId,
+      expectedAuthor: validateExpectedAuthor(args['expected-author']),
+    })));
+  } else if (args['refund-superseded']) {
+    const expectedHead = String(args['expected-head'] || '').toLowerCase();
+    const expectedBodySha = String(args['expected-body-revision'] || '').toLowerCase();
+    const marker = String(args.marker || '');
+    const round = Number(args.round);
+    const commentId = Number(args['comment-id']);
+    if (!/^[^/\s]+\/[^/\s]+$/.test(String(args.repo || '')) || !/^[1-9][0-9]*$/.test(String(args.pr || ''))
+      || !SHA_RE.test(expectedHead) || !/^[a-f0-9]{64}$/.test(expectedBodySha)
+      || !MARKER_RE.test(marker) || !marker.endsWith('_ROUND')
+      || !Number.isSafeInteger(round) || round < 1 || round > MAX_ROUND
+      || !Number.isSafeInteger(commentId) || commentId <= 0) {
+      throw new Error('input rimborso SUPERSEDED non validi (repo/PR/marker/round/ID/HEAD/body revision)');
+    }
+    console.log(JSON.stringify(refundSupersededMarker({
+      repo: String(args.repo), pr: String(args.pr), marker, round,
       expectedHead, expectedBodySha, expectedCommentId: commentId,
       expectedAuthor: validateExpectedAuthor(args['expected-author']),
     })));

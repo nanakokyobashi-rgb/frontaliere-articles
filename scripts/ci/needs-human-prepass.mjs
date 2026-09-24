@@ -1231,6 +1231,39 @@ function makeRefResolver() {
   return resolve;
 }
 
+/**
+ * Le candidate del pre-pass: le issue `needs-human` piu' quelle
+ * `automation-deferred`, deduplicate per numero.
+ *
+ * Le due letture NON sono simmetriche. Senza la prima non c'e' niente da
+ * decidere: l'errore risale e il chiamante non agisce. La seconda aggiunge
+ * soltanto candidate; se fallisce, prima il catch comune scartava anche la
+ * lista `needs-human` gia' letta e rinviava tutto al giro successivo
+ * (follow-up FU-2026-09-24-030 di PR #1739). Ora la lista gia' letta resta,
+ * e `deferredUnreadable` dice al chiamante che le differite di questo giro
+ * non sono state guardate: non e' «nessuna differita». Ogni decisione del
+ * pre-pass e' per singola issue e legge le label della issue stessa, quindi
+ * lavorare sulle sole `needs-human` equivale a un giro senza differite.
+ *
+ * @param {(label: string) => Array<object>} listByLabel  lancia su errore
+ * @returns {{ issues: object[], deferredUnreadable: boolean, deferredError: string }}
+ */
+export function readPrepassCandidates(listByLabel) {
+  const human = listByLabel('needs-human');
+  let deferred = [];
+  let deferredUnreadable = false;
+  let deferredError = '';
+  try {
+    deferred = listByLabel(AUTOMATION_DEFERRED_LABEL);
+  } catch (e) {
+    deferredUnreadable = true;
+    deferredError = String(e).slice(0, 100);
+  }
+  const byNumber = new Map();
+  for (const issue of [...(human || []), ...(deferred || [])]) byNumber.set(String(issue.number), issue);
+  return { issues: [...byNumber.values()], deferredUnreadable, deferredError };
+}
+
 function main() {
   if (!REPO) { console.log('needs-human-prepass: nessun repo risolvibile → niente da fare.'); return; }
   const registry = readVisionRegistry();
@@ -1238,13 +1271,14 @@ function main() {
   let issues = [];
   try {
     const fields = ['--json', 'number,title,body,labels,updatedAt', '--limit', '300'];
-    const human = gh(['issue', 'list', '--repo', REPO, '--state', 'open', '--label', 'needs-human', ...fields]);
-    const deferred = gh(['issue', 'list', '--repo', REPO, '--state', 'open', '--label', AUTOMATION_DEFERRED_LABEL, ...fields]);
-    const byNumber = new Map();
-    for (const issue of [...(human || []), ...(deferred || [])]) byNumber.set(String(issue.number), issue);
-    issues = [...byNumber.values()];
+    const read = readPrepassCandidates((label) =>
+      gh(['issue', 'list', '--repo', REPO, '--state', 'open', '--label', label, ...fields]));
+    issues = read.issues;
+    if (read.deferredUnreadable) {
+      console.log(`::warning::needs-human-prepass: elenco \`${AUTOMATION_DEFERRED_LABEL}\` non leggibile (${read.deferredError}) → le differite NON sono guardate in questo giro; procedo sulle sole \`needs-human\` gia' lette.`);
+    }
   } catch (e) {
-    console.log(`::warning::needs-human-prepass: elenco non leggibile (${String(e).slice(0, 100)}) → nessuna azione.`);
+    console.log(`::warning::needs-human-prepass: elenco \`needs-human\` non leggibile (${String(e).slice(0, 100)}) → nessuna azione.`);
     return;
   }
   const humanCount = issues.filter((issue) => (issue.labels || []).some((label) => label.name === 'needs-human')).length;

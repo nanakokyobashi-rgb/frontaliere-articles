@@ -327,7 +327,19 @@ export function hasTriageComment(commentsJson, prefix = TRIAGE_COMMENT_PREFIX) {
   return comments.some((c) => typeof c?.body === 'string' && c.body.trimStart().startsWith(prefix));
 }
 
-/** Return the latest follow-up marker body, or null when comments are unreadable. */
+/**
+ * Return the latest follow-up marker body, or null when it is not provable.
+ *
+ * «Ultimo» e' TEMPORALE, non la posizione nell'array: `gh pr view --json
+ * comments` restituisce oggi i commenti in ordine di creazione, ma nessun
+ * contratto lo garantisce, e un marker vecchio scelto al posto del nuovo fa
+ * verificare il triage sbagliato (follow-up FU-2026-09-24-010 di PR #1718).
+ * Con UN solo marker non c'e' nessun ordine da decidere. Con piu' marker
+ * ognuno deve portare un `createdAt` leggibile: se anche uno solo non lo
+ * porta, l'ultimo non e' dimostrabile e la funzione ritorna `null`, che il
+ * chiamante tratta come marker non provato (la PR resta nel batch). A parita'
+ * di timestamp vince la posizione successiva.
+ */
 export function latestTriageCommentBody(commentsJson, prefix = TRIAGE_COMMENT_PREFIX) {
   let data;
   try {
@@ -339,10 +351,65 @@ export function latestTriageCommentBody(commentsJson, prefix = TRIAGE_COMMENT_PR
     ? data
     : data && Array.isArray(data.comments) ? data.comments : null;
   if (!comments) return null;
-  const bodies = comments
-    .map((comment) => typeof comment?.body === 'string' ? comment.body : '')
-    .filter((body) => body.trimStart().startsWith(prefix));
-  return bodies.length ? bodies[bodies.length - 1] : null;
+  const markers = comments
+    .map((comment, index) => ({
+      body: typeof comment?.body === 'string' ? comment.body : '',
+      at: Date.parse(typeof comment?.createdAt === 'string' ? comment.createdAt : ''),
+      index,
+    }))
+    .filter((marker) => marker.body.trimStart().startsWith(prefix));
+  if (!markers.length) return null;
+  if (markers.length === 1) return markers[0].body;
+  if (markers.some((marker) => !Number.isFinite(marker.at))) return null;
+  markers.sort((left, right) => (left.at - right.at) || (left.index - right.index));
+  return markers[markers.length - 1].body;
+}
+
+/**
+ * I `#N` che una riga attribuisce a un bucket: per ogni occorrenza di «bucket»
+ * il primo `#N` successivo sulla stessa riga che NON e' una citazione di PR.
+ *
+ * Prima si prendeva il primo `#N` dopo «bucket» e basta: in `bucket per PR
+ * #1718: #9102` il candidato diventava la PR, cioe' un numero che non e' un
+ * bucket (follow-up FU-2026-09-24-008 di PR #1718). Un `#N` preceduto da `PR`
+ * o `pull request` viene saltato; se sulla riga non resta nessun altro numero
+ * il bucket non e' dichiarato e la verifica resta non provata (fail-closed).
+ */
+function bucketReferencesOnLine(line) {
+  const refs = [];
+  for (const bucket of line.matchAll(/\bbucket\b/gi)) {
+    const rest = line.slice(bucket.index + bucket[0].length);
+    for (const ref of rest.matchAll(/#([1-9]\d*)\b/g)) {
+      if (/\b(?:PR|pull\s+request)\s*$/i.test(rest.slice(0, ref.index))) continue;
+      refs.push(Number(ref[1]));
+      break;
+    }
+  }
+  return refs;
+}
+
+/**
+ * Le righe che possono ATTESTARE un esito (zero o skip): fuori dai blocchi di
+ * codice recintati e dalle citazioni `>`. Una frase riportata come esempio o
+ * citata da un altro commento non e' l'esito di questo triage (follow-up
+ * FU-2026-09-24-009 di PR #1718). Serve solo a restringere le attestazioni
+ * negative: item e bucket si contano sull'intero corpo, perche' un claim in
+ * piu' chiede una prova in piu' e non puo' mai far saltare una PR.
+ */
+function attestationLines(lines) {
+  const out = [];
+  let fence = null;
+  for (const line of lines) {
+    const opener = /^\s{0,3}(`{3,}|~{3,})/.exec(line);
+    if (opener) {
+      if (fence === null) fence = opener[1][0];
+      else if (opener[1][0] === fence) fence = null;
+      continue;
+    }
+    if (fence !== null || /^\s{0,3}>/.test(line)) continue;
+    out.push(line);
+  }
+  return out;
 }
 
 /**
@@ -371,14 +438,18 @@ export function latestTriageCommentBody(commentsJson, prefix = TRIAGE_COMMENT_PR
  *    formato e' l'unica cosa che il prompt impone davvero al marker, ed e' lo
  *    stesso ID che compare nel corpo del bucket;
  *  - un BUCKET citato e' un `#N` su una riga che dice «bucket», in qualunque
- *    ordine e con qualunque punteggiatura;
+ *    ordine e con qualunque punteggiatura, esclusi i `#N` preceduti da `PR`
+ *    (la PR sorgente citata sulla stessa riga non e' un bucket);
  *  - uno ZERO esplicito e' l'INTESTAZIONE che il prompt impone per l'esito
  *    vuoto (`## Post-merge follow-up triage: zero outstanding items.` oppure
  *    `## Post-merge follow-up triage (backfill skipped): ...`). La sola altra
  *    forma ammessa e' l'attestazione strutturale osservata in produzione:
  *    «nessun item per questa PR» E «bucket #N non modificato da questa PR»
  *    sulla stessa riga. La coppia dice esplicitamente che il numero e' solo
- *    contesto, non un claim positivo da verificare nel bucket.
+ *    contesto, non un claim positivo da verificare nel bucket. Zero e skip
+ *    contano solo su righe fuori da blocchi di codice recintati e citazioni
+ *    `>`, e la coppia solo fuori da span di codice: una frase riportata come
+ *    esempio non e' un esito.
  *  - uno SKIP esplicito e' l'intestazione "## Post-merge follow-up triage:
  *    skipped by anti-nipote gate". In questo caso il finding resta di
  *    proprieta' della follow-up issue genitrice, quindi non esiste un bucket o
@@ -398,21 +469,26 @@ export function triageMarkerPersistenceExpectation(markerBody) {
   // Il `#N` deve stare accanto a «bucket»: cosi' un `PR concatenata #9050`
   // citato fra i drop non diventa un candidato. Prendiamo il primo numero dopo
   // ciascuna occorrenza di «bucket», non ogni numero della riga: la prosa puo'
-  // citare la PR sorgente sulla stessa riga del bucket (issue #170).
-  const buckets = lines
-    .flatMap((line) => [...line.matchAll(/\bbucket\b[^#\r\n]*#([1-9]\d*)\b/gi)]
-      .map((match) => Number(match[1])));
+  // citare la PR sorgente sulla stessa riga del bucket (issue #170), anche
+  // PRIMA del numero del bucket (`bucket per PR #1718: #9102`).
+  const buckets = lines.flatMap(bucketReferencesOnLine);
+  // Zero e skip si attestano solo fuori da codice recintato e citazioni.
+  const attesting = attestationLines(lines);
   // Una riga H2, non prosa: il modello a volte ripete il prefisso nudo prima
   // dell'intestazione dello zero (marker REALE di PR #1570:
   // `## Post-merge follow-up triage\n\n## Post-merge follow-up triage: zero
   // outstanding items.`), quindi conta qualunque riga H2 del marker.
-  const canonicalZero = lines.some((line) =>
+  const canonicalZero = attesting.some((line) =>
     /^\s*##\s+Post-merge follow-up triage\s*(?::\s*zero outstanding items\b|\(backfill skipped\))/i.test(line));
-  const unchangedBucketZero = lines.some((line) =>
-    /\bnessun\s+item\s+per\s+questa\s+PR\b/i.test(line)
-    && /\bbucket\b[^#\r\n]*#[1-9]\d*\b[^\r\n]*\bnon\s+modificat[oa]\s+da\s+questa\s+PR\b/i.test(line));
+  // La coppia strutturale vale solo come prosa del marker: le due clausole
+  // dentro uno span di codice `...` sono una frase citata, non un esito.
+  const unchangedBucketZero = attesting.some((line) => {
+    const prose = line.replace(/(`+)[^`]*?\1/g, ' ');
+    return /\bnessun\s+item\s+per\s+questa\s+PR\b/i.test(prose)
+      && /\bbucket\b[^#\r\n]*#[1-9]\d*\b[^\r\n]*\bnon\s+modificat[oa]\s+da\s+questa\s+PR\b/i.test(prose);
+  });
   const explicitZero = canonicalZero || unchangedBucketZero;
-  const explicitAntiNipoteSkip = lines.some((line) =>
+  const explicitAntiNipoteSkip = attesting.some((line) =>
     /^\s*##\s+Post-merge follow-up triage\s*:\s*skipped by anti-nipote gate\b/i.test(line));
   const uniqueItems = [...new Set(items)];
   return {

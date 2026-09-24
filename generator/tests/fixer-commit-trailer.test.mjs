@@ -34,6 +34,27 @@ test("l'hook marca il commit e non duplica il trailer su --amend", () => {
   }
 });
 
+test("--amend di un round diverso lascia UN trailer, col round nuovo (FU-2026-09-20-022)", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'fixer-trailer-'));
+  const git = (...args) => execFileSync('git', ['-C', dir, ...args], { encoding: 'utf8' }).trim();
+  try {
+    git('init', '-q');
+    git('config', 'user.email', 'test@example.invalid');
+    git('config', 'user.name', 'test');
+    installCommitMsgHook('redcheck', 1, { cwd: dir });
+    fs.writeFileSync(path.join(dir, 'a.txt'), 'a\n');
+    git('add', 'a.txt');
+    git('commit', '-qm', 'fix: primo round');
+    assert.equal(git('log', '-1', '--format=%(trailers:key=Fixer,valueonly)'), 'redcheck-round-1');
+    installCommitMsgHook('redcheck', 2, { cwd: dir });
+    git('commit', '-q', '--amend', '-m', git('log', '-1', '--format=%B'));
+    const values = git('log', '-1', '--format=%(trailers:key=Fixer,valueonly)').split('\n').filter(Boolean);
+    assert.deepEqual(values, ['redcheck-round-2']);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
 for (const [file, kind, marker] of [
   ['pr-redflag-fixer.yml', 'redflag', 'REDFLAG_NEEDS_HUMAN'],
   ['pr-redcheck-fixer.yml', 'redcheck', 'REDCHECK_NEEDS_HUMAN'],

@@ -547,33 +547,11 @@ test('body cambiato è progresso, body identico è non-progresso', () => {
   );
 });
 
-test('un push esterno supersede il round e rilascia il claim prima del ramo di errore', () => {
-  const baseBody = '## Implementato\n\n- body iniziale';
-  const roundComment = roundMarkerComment({ body: baseBody });
-  const result = runClassifier({
-    baseBody,
-    currentBody: baseBody,
-    startSha: 'pr-sha',
-    baseSha: 'merged-sha',
-    head: 'merged-sha',
-    remote: 'external-sha',
-    actionOutcome: 'failure',
-    fixRound: '1',
-    markerCommentId: '42',
-    commentsJson: JSON.stringify([roundComment, activeClaimComment(), activeClaimComment({ state: 'released' })]),
-    claimToken: 'tok-1',
-  });
-  assert.equal(
-    result.status,
-    0,
-    `un branch avanzato da un altro writer non deve diventare un falso rosso:\nstdout=${result.stdout}\nstderr=${result.stderr}`,
-  );
-  assert.match(result.stdout, /run SUPERSEDED/);
-  assert.match(result.githubEnv, /CLAIM_STATUS=released/);
-  assert.match(result.stdout, /rimborsato/);
-  assert.match(result.ghLog, /api .*DELETE .*issues\/comments\/42/);
-  assert.match(result.ghLog, /REDCHECK_FIX_REFUNDED: 1/);
-});
+// Il SUPERSEDED di redcheck (claim released, DELETE del marker, handle
+// `REDCHECK_FIX_REFUNDED`, ordine tentativo → DELETE → handle, rosso su un
+// rimborso non scrivibile) gira con l'helper vero contro un `gh` con stato in
+// `redcheck-superseded-refund-idempotency.test.mjs` (#9617): il fake helper
+// stateless qui sotto non puo' provare l'idempotenza del rimborso.
 
 test('un branch solo indietro rispetto a main non è SUPERSEDED', () => {
   const baseBody = '## Implementato\n\n- body iniziale';
@@ -676,17 +654,6 @@ test('il rimborso pubblica il handle definitivo solo dopo la DELETE trusted', ()
       expectedStatus: 0,
     },
     {
-      name: 'redcheck superseded',
-      source: WORKFLOW,
-      actionOutcome: 'failure',
-      startSha: 'pr-sha',
-      baseSha: 'merged-sha',
-      head: 'merged-sha',
-      remote: 'external-sha',
-      marker: 'REDCHECK_FIX_ROUND',
-      expectedStatus: 0,
-    },
-    {
       name: 'redflag skipped',
       source: REDFLAG_WORKFLOW,
       actionOutcome: 'skipped',
@@ -776,16 +743,6 @@ test('un rimborso non scrivibile conserva il marker prima della DELETE', () => {
     {
       name: 'redflag superseded',
       source: REDFLAG_WORKFLOW,
-      actionOutcome: 'failure',
-      startSha: 'pr-sha',
-      baseSha: 'merged-sha',
-      head: 'merged-sha',
-      remote: 'external-sha',
-      expectedStatus: 0,
-    },
-    {
-      name: 'redcheck superseded',
-      source: WORKFLOW,
       actionOutcome: 'failure',
       startSha: 'pr-sha',
       baseSha: 'merged-sha',
