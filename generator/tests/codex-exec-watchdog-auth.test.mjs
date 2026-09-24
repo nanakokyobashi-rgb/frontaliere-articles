@@ -95,7 +95,7 @@ function runPipeline(mode, { timeoutSeconds = 60, diagnosticsIsDirectory = false
       'codex_diagnostics_destination="$TEST_DIAGNOSTICS"',
       'git_bridge_host_scratch="$TEST_ROOT/host"',
       PIPELINE,
-      'printf "RESULT codex=%s diagnostics=%s timed_out=%s auth=%s\\n" "$codex_status" "$diagnostics_status" "$codex_timed_out" "$codex_auth_failure"',
+      'printf "RESULT codex=%s diagnostics=%s timed_out=%s auth=%s\\n" "$codex_status" "$tee_status" "$codex_timed_out" "$codex_auth_failure"',
     ].join('\n');
     const result = spawnSync('/bin/bash', ['-c', script], {
       encoding: 'utf8',
@@ -124,7 +124,7 @@ function runPipeline(mode, { timeoutSeconds = 60, diagnosticsIsDirectory = false
 
 test('pipeline: lo stato di Codex e del tee vengono dagli stadi giusti', () => {
   assert.match(ACTION, /codex_status="\$\{pipeline_status\[1\]:-1\}"/u);
-  assert.match(ACTION, /diagnostics_status="\$\{pipeline_status\[2\]:-1\}"/u);
+  assert.match(ACTION, /tee_status="\$\{pipeline_status\[2\]:-1\}"/u);
 
   const ok = runPipeline('ok');
   assert.deepEqual([ok.codex, ok.diagnostics, ok.timed_out, ok.auth], ['0', '0', 'false', 'false']);

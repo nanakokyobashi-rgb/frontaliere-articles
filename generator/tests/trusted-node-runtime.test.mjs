@@ -94,31 +94,6 @@ test('l\'action non installa ne\' pubblica la CLI Claude: la lane CLI e\' solo C
   assert.match(body, /id: start_codex_auth_broker/);
 });
 
-test('la pulizia della cache npm scritta da root non può disattivare Haiku', () => {
-  // Run 36001495484: CLI installata e attestata, poi `rm -rf "$install_root"`
-  // senza sudo falliva con EACCES sulla cache npm scritta da root, e sotto
-  // `set -e` la subshell usciva prima di pubblicare claude_cli_bin.
-  const setupEnd = CLAUDE.indexOf('- name: Prepare Linux sandbox for Codex primary');
-  assert.ok(setupEnd !== -1, 'fine dello step Claude CLI non trovata');
-  const setup = CLAUDE.slice(0, setupEnd);
-  assert.match(setup, /npm_config_cache="\$install_root\/cache"/);
-  assert.match(setup, /"\$sudo_cmd" -n \/usr\/bin\/env -i "\$\{clean_env\[@\]\}"[^\n]*install --global/);
-  const removals = setup
-    .split('\n')
-    .filter((line) => !line.trim().startsWith('#') && /\brm\b[^\n]*"\$install_root"/.test(line));
-  assert.ok(removals.length > 0, 'la pulizia di $install_root non è stata trovata');
-  for (const line of removals) {
-    assert.match(line, /"\$sudo_cmd" -n \/usr\/bin\/rm -rf -- "\$install_root"/, `rimozione senza sudo: ${line.trim()}`);
-  }
-  const cleanup = setup.match(/"\$sudo_cmd" -n \/usr\/bin\/rm -rf -- "\$install_root"[^\n]*\n([^\n]*)/);
-  assert.ok(cleanup, 'pulizia non trovata');
-  assert.match(cleanup[0], /\\\n\s*\|\| echo "::warning::/, 'la pulizia deve restare non fatale');
-  assert.ok(
-    setup.indexOf(cleanup[0]) < setup.indexOf("printf 'claude_cli_bin=%s"),
-    'la pulizia precede la pubblicazione del path attestato',
-  );
-});
-
 test('le probe CLI tollerano il suffisso di --version senza allentare il pin semver', () => {
   const codexPatterns = [...CODEX_ACTION.matchAll(
     /printf '%s\\n' "\$codex_version" \| \/usr\/bin\/grep -Eq '([^']+)'/g,
