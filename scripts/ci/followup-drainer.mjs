@@ -839,7 +839,7 @@ export const DELIVERED = new Set(['pr-created']);
 
 /** Finestra entro cui `labeled agent:fix` e `unlabeled agent:fix-queued` si
  * leggono come UNA sola `gh issue edit` — quella con cui il DRAIN promuove
- * (`edit(cand, { add: [LBL_FIX], remove: [LBL_QUEUED] })`). GitHub scrive i due
+ * (`promoteToFix(cand)`: `--add-label agent:fix --remove-label agent:fix-queued`). GitHub scrive i due
  * eventi con lo stesso secondo, ma i `created_at` hanno granularità al secondo
  * e l'ordine fra i due non è garantito: 120s è largo abbastanza da non perdere
  * mai una promozione del drainer, e stretto abbastanza da non catturare un
@@ -2763,6 +2763,52 @@ function editChecked(num, { add = [], remove = [] }) {
     return true;
   } catch (e) {
     console.log(`::warning::edit checked #${num} fallito: ${String(e).slice(0, 160)}`);
+    return false;
+  }
+}
+
+/**
+ * Rilettura live subito prima della promozione (follow-up sito #8334,
+ * FU-2026-09-12-016). `pool` e' una snapshot presa all'inizio del DRAIN: fra
+ * quella lettura e la mutazione una run concorrente puo' aver aggiunto
+ * `agent:fix`, un claim, un defer, un park o lo stadio decompose, oppure aver
+ * gia' tolto `agent:fix-queued`. Il predicato `isDrainPromotable` si rivaluta
+ * quindi sulle label LIVE; se non regge piu' non si muta nulla e
+ * `agent:fix-queued` resta intatta per la riconciliazione del tick successivo.
+ * Pura → testabile.
+ * @param {{labels?: Array<{name:string}>}|null} live
+ * @returns {{ok: boolean, reason: string}}
+ */
+export function promotionLiveCheck(live) {
+  if (!live || !Array.isArray(live.labels)) return { ok: false, reason: 'label live non leggibili' };
+  if (!has(live, LBL_QUEUED)) return { ok: false, reason: `${LBL_QUEUED} gia' rimossa da una run concorrente` };
+  if (has(live, LBL_FIX)) return { ok: false, reason: `${LBL_FIX} comparsa dopo la lettura della coda` };
+  if (!isDrainPromotable(live)) {
+    return { ok: false, reason: "non piu' promuovibile (claim, defer, park o stadio decompose)" };
+  }
+  return { ok: true, reason: '' };
+}
+
+/**
+ * La promozione a `agent:fix`: UNA rilettura live valutata da
+ * `promotionLiveCheck`, poi UNA `gh issue edit` che aggiunge `agent:fix` e
+ * toglie `agent:fix-queued` insieme (la coppia letta da
+ * `PROMOTION_PAIR_WINDOW_SEC`). La rilettura sostituisce quella del solo
+ * claim fatta da `edit()`/`editChecked()`: `isDrainPromotable` la include.
+ */
+function promoteToFix(num) {
+  const args = ['issue', 'edit', String(num), '--repo', REPO, '--add-label', LBL_FIX, '--remove-label', LBL_QUEUED];
+  if (DRY) { console.log(`[dry] promote #${num} +[${LBL_FIX}] -[${LBL_QUEUED}]`); return true; }
+  const decision = promotionLiveCheck(liveIssueForClaim(num));
+  if (!decision.ok) {
+    console.log(`DRAIN-RACE-SKIP #${num}: ${decision.reason} → nessuna mutazione, ${LBL_QUEUED} lasciata alla riconciliazione.`);
+    return false;
+  }
+  try {
+    gh(args, { json: false });
+    return true;
+  } catch (e) {
+    console.log(`::warning::promozione #${num} fallita: ${String(e).slice(0, 160)}`);
     return false;
   }
 }
@@ -5536,7 +5582,7 @@ export function runDrain() {
         console.log(`GROUP-SKIP #${cand.number}: claim live comparso su un membro dopo la preparazione, lease quota rilasciato.`);
         continue;
       }
-      if (!editChecked(cand.number, { add: [LBL_FIX], remove: [LBL_QUEUED] })) {
+      if (!promoteToFix(cand.number)) {
         releaseQuotaLease(cand.number, 'issue-fix', quotaLease.token);
         console.log(`::warning::GROUP-SKIP #${cand.number}: promozione del leader fallita, membri lasciati in coda.`);
         groupStates.set(groupLabel, 'failed');
@@ -5546,7 +5592,7 @@ export function runDrain() {
       console.log(`PROMUOVO GRUPPO ${groupLabel} (${plannedGroup.issues.length} issue, chiave ${plannedGroup.source}) → leader #${cand.number} [${promoted + 1}/${promoteBudget}]`);
     } else {
       console.log(`PROMUOVO #${cand.number} (${has(cand, 'fu-prio:high') ? 'high' : 'low'}) → ${LBL_FIX} [${promoted + 1}/${promoteBudget}]`);
-      if (!edit(cand.number, { add: [LBL_FIX], remove: [LBL_QUEUED] })) {
+      if (!promoteToFix(cand.number)) {
         releaseQuotaLease(cand.number, 'issue-fix', quotaLease.token);
         console.log(`::warning::DRAIN-SKIP #${cand.number}: promozione fallita, lease quota rilasciato.`);
         continue;
