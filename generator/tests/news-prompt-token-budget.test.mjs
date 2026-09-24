@@ -711,18 +711,15 @@ const PREFERISCE_CODEX = { PREFERRED_GENERATION_MODELS: [REAL_AI_MODELS.CODEX_CL
  */
 function conCodexDisponibile(fn) {
   const salvate = {
-    gate: process.env.HAIKU_FALLBACK_GATE,
     flag: process.env.ENABLE_CODEX_ARTICLE_FALLBACK,
     socket: process.env.CODEX_AUTH_BROKER_SOCKET,
   };
-  delete process.env.HAIKU_FALLBACK_GATE;
   process.env.ENABLE_CODEX_ARTICLE_FALLBACK = '1';
   process.env.CODEX_AUTH_BROKER_SOCKET = '/nonexistent/codex-broker-test.sock';
   try {
     return fn();
   } finally {
     for (const [key, value] of [
-      ['HAIKU_FALLBACK_GATE', salvate.gate],
       ['ENABLE_CODEX_ARTICLE_FALLBACK', salvate.flag],
       ['CODEX_AUTH_BROKER_SOCKET', salvate.socket],
     ]) {

@@ -74,7 +74,6 @@ const ENV_KEYS = [
   'CLAUDE_CODE_OAUTH_TOKEN',
   'ENABLE_HAIKU_ARTICLE_FALLBACK',
   'ENABLE_CODEX_ARTICLE_FALLBACK',
-  'HAIKU_FALLBACK_GATE',
   'CODEX_AUTH_BROKER_SOCKET',
   'CLAUDE_CLI_MAX_CALLS_PER_RUN',
 ];
@@ -100,7 +99,6 @@ beforeEach(() => {
   // getPreferredModel guarda solo la disponibilita'.
   process.env.ENABLE_CODEX_ARTICLE_FALLBACK = '1';
   process.env.CODEX_AUTH_BROKER_SOCKET = '/nonexistent/codex-broker-test.sock';
-  delete process.env.HAIKU_FALLBACK_GATE;
   delete process.env.AI_MODELS_FORCE_CHAIN;
   delete process.env.CLAUDE_CLI_MAX_CALLS_PER_RUN;
 });

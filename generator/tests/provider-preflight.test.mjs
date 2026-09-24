@@ -64,9 +64,10 @@ test('il report resta bloccato quando nessun provider è utilizzabile', () => {
 });
 
 test('il preflight include il Codex action-owned quando il broker è pronto', async () => {
-  const names = ['HAIKU_FALLBACK_GATE', 'ENABLE_CODEX_ARTICLE_FALLBACK', 'CODEX_AUTH_BROKER_SOCKET'];
+  const names = ['ENABLE_HAIKU_ARTICLE_FALLBACK', 'ENABLE_CODEX_ARTICLE_FALLBACK', 'CODEX_AUTH_BROKER_SOCKET'];
   const previous = Object.fromEntries(names.map((name) => [name, process.env[name]]));
-  process.env.HAIKU_FALLBACK_GATE = '1';
+  // Il flag Haiku spento non tocca Codex: la lane ha solo il suo interruttore.
+  process.env.ENABLE_HAIKU_ARTICLE_FALLBACK = '0';
   process.env.ENABLE_CODEX_ARTICLE_FALLBACK = '1';
   process.env.CODEX_AUTH_BROKER_SOCKET = '/tmp/codex-preflight-test.sock';
   try {
@@ -90,7 +91,6 @@ test('il preflight include il Codex action-owned quando il broker è pronto', as
 // riacceso la lane nel codice.
 test('il preflight non include Claude nemmeno quando flag, token e CLI ci sono (Haiku spento)', async () => {
   const names = [
-    'HAIKU_FALLBACK_GATE',
     'ENABLE_HAIKU_ARTICLE_FALLBACK',
     'ENABLE_CODEX_ARTICLE_FALLBACK',
     'CODEX_AUTH_BROKER_SOCKET',
@@ -102,7 +102,6 @@ test('il preflight non include Claude nemmeno quando flag, token e CLI ci sono (
   const cliPath = path.join(tempDir, 'claude');
   fs.writeFileSync(cliPath, '#!/bin/sh\nexit 0\n');
   fs.chmodSync(cliPath, 0o755);
-  process.env.HAIKU_FALLBACK_GATE = '1';
   process.env.ENABLE_HAIKU_ARTICLE_FALLBACK = '1';
   process.env.CLAUDE_CODE_OAUTH_TOKEN = 'preflight-claude-test-token';
   process.env.CLAUDE_CLI_BIN = cliPath;
@@ -126,7 +125,6 @@ test('il preflight non include Claude nemmeno quando flag, token e CLI ci sono (
 
 test('Claude chiesto esplicitamente resta non configurato anche con flag, token e CLI eseguibile', async () => {
   const names = [
-    'HAIKU_FALLBACK_GATE',
     'ENABLE_HAIKU_ARTICLE_FALLBACK',
     'CLAUDE_CODE_OAUTH_TOKEN',
     'CLAUDE_CLI_BIN',
@@ -136,7 +134,6 @@ test('Claude chiesto esplicitamente resta non configurato anche con flag, token 
   const cliPath = path.join(tempDir, 'claude');
   fs.writeFileSync(cliPath, '#!/bin/sh\nexit 0\n');
   fs.chmodSync(cliPath, 0o755);
-  process.env.HAIKU_FALLBACK_GATE = '1';
   process.env.ENABLE_HAIKU_ARTICLE_FALLBACK = '1';
   process.env.CLAUDE_CODE_OAUTH_TOKEN = 'preflight-claude-test-token';
   process.env.CLAUDE_CLI_BIN = cliPath;

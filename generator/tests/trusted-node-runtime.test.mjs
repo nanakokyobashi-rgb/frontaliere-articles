@@ -67,12 +67,12 @@ test('nessuna coppia attestabile disattiva la lane CLI senza aggirare il control
   const noPair = RUNTIME.match(
     /if \[ -z "\$node_realpath" \] \|\| \[ -z "\$npm_realpath" \]; then([\s\S]*?)fi/,
   )?.[1] ?? '';
-  assert.match(noPair, /disable_haiku/);
+  assert.match(noPair, /disable_codex_lane/);
   assert.doesNotMatch(noPair, /exit 1/);
   assert.match(RUNTIME, /printf 'available=false\\n' >> "\$GITHUB_OUTPUT"/);
   assert.match(
     RUNTIME,
-    /printf 'HAIKU_FALLBACK_GATE=0\\nENABLE_HAIKU_ARTICLE_FALLBACK=0\\nENABLE_CODEX_ARTICLE_FALLBACK=0\\n' >> "\$GITHUB_ENV"/,
+    /printf 'CODEX_ARTICLE_LANE_GATE=0\\nENABLE_CODEX_ARTICLE_FALLBACK=0\\n' >> "\$GITHUB_ENV"/,
   );
 });
 

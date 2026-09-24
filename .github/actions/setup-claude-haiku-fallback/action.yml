@@ -4,16 +4,18 @@ description: >-
   available, Codex is attempted first via a private broker socket. Requests
   are serialized in a bounded job-wide lane; if one attempt fails, the
   generator tries its normal model cascade for that call without consuming
-  the other crawler calls. The historical ENABLE_HAIKU_ARTICLE_FALLBACK flag
-  remains the Remote Config kill-switch for this optional lane, so existing
-  callers keep working (the action path keeps its historical name for the
-  same reason).
+  the other crawler calls. The lane's only switch is
+  ENABLE_CODEX_ARTICLE_FALLBACK (Remote Config via load-rc-env.mjs): unset
+  means ON, only an explicit 0/false/no/off turns it off. The action path
+  keeps its historical name so existing callers keep working.
   The Claude Code Haiku lane is DISABLED by owner decision (2026-09-24, "only
   Codex"): this action no longer installs or attests the Claude CLI, never
-  exports CLAUDE_CLI_BIN or ENABLE_HAIKU_ARTICLE_FALLBACK=1, and ai-models.mjs
-  never offers claude-cli/haiku (isClaudeCliFallbackEnabled is false).
+  exports CLAUDE_CLI_BIN, and ai-models.mjs never offers claude-cli/haiku
+  (isClaudeCliFallbackEnabled is false). ENABLE_HAIKU_ARTICLE_FALLBACK has
+  no effect at all any more: it used to gate this lane too, so turning Haiku
+  off in Remote Config would have turned Codex off as well.
   Caller MUST run "node generator/scripts/load-rc-env.mjs" before this action so
-  env.ENABLE_HAIKU_ARTICLE_FALLBACK reflects Remote Config.
+  env.ENABLE_CODEX_ARTICLE_FALLBACK reflects Remote Config.
   The lane is fail-open by construction: if the runner has no immutable,
   attested Node/npm pair, the normal model cascade remains available.
   Official runner-toolcache components are normalized before attestation when
@@ -25,11 +27,11 @@ description: >-
   29676088799, propagated into setup-omniroute/action.yml via PR #4816):
   env.* is NOT immune to the null/unset->0 coercion previously blamed only
   on vars.* — `if: env.X != '0'` also evaluates FALSE when env.X was never
-  set anywhere (confirmed live: this repo's RC value for
-  ENABLE_HAIKU_ARTICLE_FALLBACK happens to be the explicit string 'true',
-  so this action's gate has never actually exercised the true-unset path in
-  production). Fixed below by resolving the default in bash — where
-  `${ENABLE_HAIKU_ARTICLE_FALLBACK:-1}` unambiguously treats unset as
+  set anywhere (confirmed live: this repo's RC value for the historical
+  ENABLE_HAIKU_ARTICLE_FALLBACK gate happened to be the explicit string
+  'true', so the gate never exercised the true-unset path in production).
+  Fixed below by resolving the default in bash — where
+  `${ENABLE_CODEX_ARTICLE_FALLBACK:-1}` unambiguously treats unset as
   `1` — before the `if:` expression ever sees it, same pattern as
   setup-omniroute/action.yml and translate-pending.yml's
   TRANSLATE_ARGOS_FIRST_DISABLE (`!= '1'`) gate.
@@ -53,15 +55,22 @@ runs:
     # bash instead of GitHub Actions' `if:` expression language, which
     # evaluates a true-unset env.X as equal to '0' rather than as ''. See
     # the CORRECTED CLAIM note above.
+    # Only the Codex switch counts; ENABLE_HAIKU_ARTICLE_FALLBACK is ignored.
+    # Same normalization as isCodexArticleLaneSwitchOn() in ai-models.mjs.
     - name: Resolve Codex article lane gate
       shell: bash
       run: |
-        echo "HAIKU_FALLBACK_GATE=${ENABLE_HAIKU_ARTICLE_FALLBACK:-1}" >> "$GITHUB_ENV"
-        echo 'ENABLE_CODEX_ARTICLE_FALLBACK=0' >> "$GITHUB_ENV"
+        codex_switch="${ENABLE_CODEX_ARTICLE_FALLBACK:-1}"
+        case "${codex_switch,,}" in
+          0|false|no|off) resolved_gate=0 ;;
+          *) resolved_gate=1 ;;
+        esac
+        echo "CODEX_ARTICLE_LANE_GATE=$resolved_gate" >> "$GITHUB_ENV"
+        echo "ENABLE_CODEX_ARTICLE_FALLBACK=$resolved_gate" >> "$GITHUB_ENV"
 
     - name: Resolve trusted Node/npm toolchain
       id: trusted_toolchain
-      if: env.HAIKU_FALLBACK_GATE != '0'
+      if: env.CODEX_ARTICLE_LANE_GATE != '0'
       shell: bash
       env:
         CODEX_ACTION_PATH: ${{ github.action_path }}
@@ -73,33 +82,33 @@ runs:
         action_path="${CODEX_ACTION_PATH:?Codex action path unavailable}"
         runner_temp="${RUNNER_TEMP:-${TMPDIR:-/tmp}}"
         runner_home="${RUNNER_HOME:-${HOME:-/home/runner}}"
-        disable_haiku() {
+        disable_codex_lane() {
           local reason="$1"
           echo "::warning::${reason} Codex article lane disabled; the normal model cascade remains available"
           printf 'available=false\n' >> "$GITHUB_OUTPUT"
-          printf 'HAIKU_FALLBACK_GATE=0\nENABLE_HAIKU_ARTICLE_FALLBACK=0\nENABLE_CODEX_ARTICLE_FALLBACK=0\n' >> "$GITHUB_ENV"
+          printf 'CODEX_ARTICLE_LANE_GATE=0\nENABLE_CODEX_ARTICLE_FALLBACK=0\n' >> "$GITHUB_ENV"
           exit 0
         }
         realpath_cmd=''
         for candidate_realpath in /usr/bin/realpath /bin/realpath; do
           if [ -x "$candidate_realpath" ]; then realpath_cmd="$candidate_realpath"; break; fi
         done
-        [ -n "$realpath_cmd" ] || disable_haiku 'Trusted realpath utility is unavailable.'
+        [ -n "$realpath_cmd" ] || disable_codex_lane 'Trusted realpath utility is unavailable.'
         tr_cmd=/usr/bin/tr
         [ -x "$tr_cmd" ] || tr_cmd=/bin/tr
-        [ -x "$tr_cmd" ] || disable_haiku 'Trusted tr utility is unavailable.'
+        [ -x "$tr_cmd" ] || disable_codex_lane 'Trusted tr utility is unavailable.'
         stat_cmd=/usr/bin/stat
         [ -x "$stat_cmd" ] || stat_cmd=/bin/stat
-        [ -x "$stat_cmd" ] || disable_haiku 'Trusted stat utility is unavailable.'
+        [ -x "$stat_cmd" ] || disable_codex_lane 'Trusted stat utility is unavailable.'
         id_cmd=/usr/bin/id
         [ -x "$id_cmd" ] || id_cmd=/bin/id
-        [ -x "$id_cmd" ] || disable_haiku 'Trusted id utility is unavailable.'
+        [ -x "$id_cmd" ] || disable_codex_lane 'Trusted id utility is unavailable.'
         cut_cmd=/usr/bin/cut
         [ -x "$cut_cmd" ] || cut_cmd=/bin/cut
-        [ -x "$cut_cmd" ] || disable_haiku 'Trusted cut utility is unavailable.'
+        [ -x "$cut_cmd" ] || disable_codex_lane 'Trusted cut utility is unavailable.'
         chmod_cmd=/usr/bin/chmod
         [ -x "$chmod_cmd" ] || chmod_cmd=/bin/chmod
-        [ -x "$chmod_cmd" ] || disable_haiku 'Trusted chmod utility is unavailable.'
+        [ -x "$chmod_cmd" ] || disable_codex_lane 'Trusted chmod utility is unavailable.'
         sudo_cmd=''
         for candidate_sudo in /usr/bin/sudo /bin/sudo; do
           if [ -x "$candidate_sudo" ] && "$candidate_sudo" -n true >/dev/null 2>&1; then
@@ -309,17 +318,17 @@ runs:
         node_realpath="$(find_trusted_node || true)"
         npm_realpath="$(find_trusted_npm || true)"
         if [ -z "$node_realpath" ] || [ -z "$npm_realpath" ]; then
-          disable_haiku 'Trusted Node/npm runtime must resolve outside writable runner trees.'
+          disable_codex_lane 'Trusted Node/npm runtime must resolve outside writable runner trees.'
         fi
         node_version="$("$node_realpath" --version 2>/dev/null || true)"
         case "$node_version" in
           v[0-9]*.[0-9]*.[0-9]*) ;;
-          *) disable_haiku 'Trusted Node runtime returned an invalid version.' ;;
+          *) disable_codex_lane 'Trusted Node runtime returned an invalid version.' ;;
         esac
         node_major="${node_version#v}"
         node_major="${node_major%%.*}"
         [ "$node_major" -ge 18 ] || {
-          disable_haiku 'Trusted Node runtime is older than Node 18.'
+          disable_codex_lane 'Trusted Node runtime is older than Node 18.'
         }
         toolchain_path="$(/usr/bin/dirname "$npm_realpath"):$("/usr/bin/dirname" "$node_realpath"):/usr/bin:/bin"
         npm_global_config="$(/usr/bin/mktemp "$runner_temp/claude-haiku-toolchain.XXXXXX")"
@@ -328,7 +337,7 @@ runs:
         /bin/rm -f -- "$npm_global_config"
         case "$npm_version" in
           [0-9]*.[0-9]*.[0-9]*) ;;
-          *) disable_haiku 'Trusted npm launcher returned an invalid version.' ;;
+          *) disable_codex_lane 'Trusted npm launcher returned an invalid version.' ;;
         esac
         sha256_file() {
           if [ -x /usr/bin/sha256sum ]; then
@@ -345,7 +354,7 @@ runs:
         npm_sha256="$(sha256_file "$npm_realpath" || true)"
         if ! printf '%s' "$node_sha256" | /usr/bin/grep -Eq '^[a-f0-9]{64}$' || \
           ! printf '%s' "$npm_sha256" | /usr/bin/grep -Eq '^[a-f0-9]{64}$'; then
-          disable_haiku 'Unable to attest trusted Node/npm runtime.'
+          disable_codex_lane 'Unable to attest trusted Node/npm runtime.'
         fi
         printf 'available=true\nnode_realpath=%s\nnode_version=%s\nnode_sha256=%s\nnpm_realpath=%s\nnpm_version=%s\nnpm_sha256=%s\n' \
           "$node_realpath" "$node_version" "$node_sha256" \
@@ -357,7 +366,7 @@ runs:
         if [ "$resolver_status" -ne 0 ]; then
           echo '::warning::Trusted Node/npm resolver could not complete; Codex article lane disabled; the normal model cascade remains available'
           printf 'available=false\n' >> "$GITHUB_OUTPUT"
-          printf 'HAIKU_FALLBACK_GATE=0\nENABLE_HAIKU_ARTICLE_FALLBACK=0\nENABLE_CODEX_ARTICLE_FALLBACK=0\n' >> "$GITHUB_ENV"
+          printf 'CODEX_ARTICLE_LANE_GATE=0\nENABLE_CODEX_ARTICLE_FALLBACK=0\n' >> "$GITHUB_ENV"
         fi
 
     # Keep the Codex binary outside the mutable checkout and out of the global
@@ -367,12 +376,12 @@ runs:
     - name: Prepare Linux sandbox for Codex primary
       id: setup_codex_sandbox
       continue-on-error: true
-      if: env.HAIKU_FALLBACK_GATE != '0' && steps.trusted_toolchain.outputs.available == 'true' && inputs.codex_auth_json != ''
+      if: env.CODEX_ARTICLE_LANE_GATE != '0' && steps.trusted_toolchain.outputs.available == 'true' && inputs.codex_auth_json != ''
       uses: ./.github/actions/setup-codex-sandbox
 
     - name: Install pinned Codex CLI for the primary lane
       id: install_codex_cli
-      if: env.HAIKU_FALLBACK_GATE != '0' && steps.trusted_toolchain.outputs.available == 'true' && inputs.codex_auth_json != '' && steps.setup_codex_sandbox.outcome == 'success'
+      if: env.CODEX_ARTICLE_LANE_GATE != '0' && steps.trusted_toolchain.outputs.available == 'true' && inputs.codex_auth_json != '' && steps.setup_codex_sandbox.outcome == 'success'
       shell: bash
       env:
         TRUSTED_NODE: ${{ steps.trusted_toolchain.outputs.node_realpath }}
@@ -491,7 +500,7 @@ runs:
     # steps do not inherit a broker capability.
     - name: Start Codex auth broker for the primary lane
       id: start_codex_auth_broker
-      if: env.HAIKU_FALLBACK_GATE != '0' && inputs.codex_auth_json != '' && steps.install_codex_cli.outputs.codex_bin != ''
+      if: env.CODEX_ARTICLE_LANE_GATE != '0' && inputs.codex_auth_json != '' && steps.install_codex_cli.outputs.codex_bin != ''
       shell: bash
       env:
         CODEX_AUTH_JSON: ${{ inputs.codex_auth_json }}
@@ -595,8 +604,9 @@ runs:
       env:
         CODEX_CLI_BIN: ${{ steps.install_codex_cli.outputs.codex_bin }}
       run: |
-        echo "ENABLE_HAIKU_ARTICLE_FALLBACK=${ENABLE_HAIKU_ARTICLE_FALLBACK:-<unset>} (raw RC value, gates the Codex lane only)"
-        echo "HAIKU_FALLBACK_GATE=${HAIKU_FALLBACK_GATE:-<unset>} (resolved gate)"
+        echo "ENABLE_CODEX_ARTICLE_FALLBACK=${ENABLE_CODEX_ARTICLE_FALLBACK:-<unset>} (Codex lane switch)"
+        echo "CODEX_ARTICLE_LANE_GATE=${CODEX_ARTICLE_LANE_GATE:-<unset>} (resolved gate)"
+        echo "ENABLE_HAIKU_ARTICLE_FALLBACK=${ENABLE_HAIKU_ARTICLE_FALLBACK:-<unset>} (ignored: Haiku is disabled and no longer gates Codex)"
         echo "claude CLI: disabled by owner decision — not installed, claude-cli/haiku is never offered"
         if [ -n "$CODEX_CLI_BIN" ]; then
           echo "codex CLI: attested at $CODEX_CLI_BIN (version 0.153.4)"

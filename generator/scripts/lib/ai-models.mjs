@@ -940,24 +940,22 @@ function getOmniRouteUrl() { return (process.env.OMNIROUTE_URL || OMNIROUTE_DEFA
 function getOmniRouteApiKey() { return (process.env.OMNIROUTE_API_KEY || 'omniroute-no-key').trim(); }
 
 // ── CLI article lane (Codex Luna Max only) ─────────────────────────────────
-// ENABLE_HAIKU_ARTICLE_FALLBACK is the historical Remote Config flag loaded by
-// load-rc-env.mjs. Keep accepting it while the action also publishes the more
-// truthful ENABLE_CODEX_ARTICLE_FALLBACK name: existing callers and the RC
-// kill-switch remain compatible, and the only CLI model it opens is Codex.
-function isTruthyEnv(name) {
-  return /^(1|true|yes|on)$/i.test((process.env[name] || '').trim()); // env-scan: name is restricted to the literal CLI flag/gate names in this module
-}
-function isArticleCliLaneEnabled() {
-  const resolvedGate = String(process.env.HAIKU_FALLBACK_GATE || '').trim();
-  if (resolvedGate) return isTruthyEnv('HAIKU_FALLBACK_GATE');
-  return isTruthyEnv('ENABLE_CODEX_ARTICLE_FALLBACK')
-    || isTruthyEnv('ENABLE_HAIKU_ARTICLE_FALLBACK');
+// Il suo interruttore e' SOLO ENABLE_CODEX_ARTICLE_FALLBACK (mappato in
+// load-rc-env.mjs, acceso quando non e' impostato: lo spegne solo un valore
+// esplicito 0/false/no/off), piu' il socket del broker che la setup action
+// pubblica quando CODEX_AUTH_JSON c'e' e il broker e' pronto. Fino al
+// 2026-09-24 la lane derivava il gate da ENABLE_HAIKU_ARTICLE_FALLBACK
+// (HAIKU_FALLBACK_GATE): spegnere Haiku da Remote Config avrebbe spento anche
+// Codex. Ora quel flag non ha alcun effetto, qui e nell'action.
+// Stessa regola del bash del gate in setup-claude-haiku-fallback/action.yml.
+const CODEX_ARTICLE_LANE_OFF_RE = /^(0|false|no|off)$/i;
+function isCodexArticleLaneSwitchOn() {
+  return !CODEX_ARTICLE_LANE_OFF_RE.test((process.env.ENABLE_CODEX_ARTICLE_FALLBACK || '').trim());
 }
 // Decisione del proprietario (2026-09-24, «Disattiva haiku! Voglio solo
 // codex»): la lane Claude Haiku e' spenta NEL CODICE, non solo dal kill-switch
-// di Remote Config. ENABLE_HAIKU_ARTICLE_FALLBACK=1 resta il gate storico della
-// lane CLI (apre Codex, vedi isArticleCliLaneEnabled) ma non rende piu'
-// disponibile `claude-cli/haiku`: con questa funzione a false
+// di Remote Config. ENABLE_HAIKU_ARTICLE_FALLBACK non rende piu' disponibile
+// `claude-cli/haiku` (ne' apre o chiude Codex): con questa funzione a false
 // getApiKeyForProvider(CLAUDE_CLI) e' vuota, quindi isModelAvailable, il
 // preflight e la cascata di callLLM lo saltano anche se un chiamante lo passa
 // in `prefer`, in `AI_MODELS_PREFER` o come `model`.
@@ -965,8 +963,7 @@ function isClaudeCliFallbackEnabled() {
   return false;
 }
 function isCodexCliPrimaryEnabled() {
-  return isArticleCliLaneEnabled()
-    && isTruthyEnv('ENABLE_CODEX_ARTICLE_FALLBACK')
+  return isCodexArticleLaneSwitchOn()
     && !!String(process.env.CODEX_AUTH_BROKER_SOCKET || '').trim();
 }
 function hasClaudeCodeOauthToken() {
