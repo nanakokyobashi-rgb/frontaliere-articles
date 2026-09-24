@@ -10,8 +10,12 @@
  *
  * Il commit lo fa l'agente, non uno step `run:`: per non dipendere dal prompt
  * il trailer lo aggiunge un hook `commit-msg` installato nel checkout prima
- * dell'agente. `git interpret-trailers --if-exists addIfDifferent` lo rende
- * idempotente (un `--amend` non lo duplica).
+ * dell'agente. `git interpret-trailers --if-exists replace` tiene UN solo
+ * trailer `Fixer:` per commit: un `--amend` dello stesso round non lo duplica,
+ * e un `--amend` di un round DIVERSO sostituisce il valore invece di
+ * aggiungerne un secondo. Con `addIfDifferent` quel caso lasciava due valori
+ * (`redcheck-round-1` e `redcheck-round-2`) e il log non diceva piu' quale
+ * round aveva prodotto il commit (follow-up FU-2026-09-20-022 di PR #1617).
  *
  * Formato UNICO per i due workflow e allineato al sito:
  *   Fixer: redflag-round-N   /   Fixer: redcheck-round-N
@@ -41,7 +45,7 @@ export function commitMsgHook(trailer) {
   return [
     '#!/bin/sh',
     '# Installato da scripts/ci/fixer-commit-trailer.mjs: marca il commit del fixer.',
-    `exec git interpret-trailers --in-place --if-exists addIfDifferent --trailer ${quoted} "$1"`,
+    `exec git interpret-trailers --in-place --if-exists replace --trailer ${quoted} "$1"`,
     '',
   ].join('\n');
 }
