@@ -117,6 +117,7 @@ export const REASON_CODES = Object.freeze([
   'invalid_head_sha',
   'invalid_mode',
   'invalid_repository',
+  'invalid_run_started_at',
   'liveness_census_inconclusive',
   'malformed_run',
   'missing_token',
@@ -205,6 +206,7 @@ function makeInitialState(nowMs) {
     pendingRunIds: [],
     queueCreatedMs: [],
     pendingCreatedMs: [],
+    pendingWaitStartedMs: [],
     activeCreatedMs: [],
     activeStartedMs: [],
     discovery: {
@@ -484,8 +486,26 @@ function collectShallowFacts(run, state, candidates, { collectQueue = true } = {
         state.activeCreatedMs.push(createdMs);
       }
       if (isPending) {
+        // Un rerun conserva il `created_at` della prima esecuzione, mentre
+        // `run_started_at` riparte dall'attempt corrente (misura #1781:
+        // attempt 2 con `created_at` 18:15:19Z e `run_started_at` 18:19:42Z).
+        // Datare un rerun pending da `created_at` misura l'eta' della PRIMA
+        // coda e produce un falso breach su una coda sana. Senza un avvio
+        // leggibile, e non anteriore alla creazione, l'attesa dell'attempt
+        // corrente non e' misurabile: si fallisce chiusi invece di ricadere in
+        // silenzio su `created_at`.
+        let waitStartedMs = createdMs;
+        if (run.run_attempt > 1) {
+          const runStartedMs = validTimestamp(run.run_started_at);
+          if (runStartedMs === null || runStartedMs < createdMs) {
+            failClosed(state, 'invalid_run_started_at', runId);
+            return;
+          }
+          waitStartedMs = runStartedMs;
+        }
         state.pendingRunIds.push(runId);
         state.pendingCreatedMs.push(createdMs);
+        state.pendingWaitStartedMs.push(waitStartedMs);
       }
       state.queueCreatedMs.push(createdMs);
     }
@@ -571,9 +591,14 @@ function buildReport(state, client) {
   const oldestPendingMs = state.pendingCreatedMs.length > 0
     ? Math.min(...state.pendingCreatedMs)
     : null;
-  const oldestPendingAgeSeconds = oldestPendingMs === null
+  // L'eta' del pending segue l'attesa dell'attempt corrente (`created_at` per
+  // il primo attempt, `run_started_at` per un rerun), non la creazione.
+  const oldestPendingWaitMs = state.pendingWaitStartedMs.length > 0
+    ? Math.min(...state.pendingWaitStartedMs)
+    : null;
+  const oldestPendingAgeSeconds = oldestPendingWaitMs === null
     ? null
-    : Math.max(0, Math.floor((state.nowMs - oldestPendingMs) / 1000));
+    : Math.max(0, Math.floor((state.nowMs - oldestPendingWaitMs) / 1000));
   const oldestActiveCreatedMs = state.activeCreatedMs.length > 0
     ? Math.min(...state.activeCreatedMs)
     : null;
@@ -671,6 +696,9 @@ function buildReport(state, client) {
         : new Date(oldestActiveMs).toISOString(),
       oldestPendingAgeSeconds,
       oldestPendingCreatedAt: oldestPendingMs === null ? null : new Date(oldestPendingMs).toISOString(),
+      oldestPendingWaitStartedAt: oldestPendingWaitMs === null
+        ? null
+        : new Date(oldestPendingWaitMs).toISOString(),
       slo: queueSlo,
       staleThreshold: thresholdSeconds,
     },
