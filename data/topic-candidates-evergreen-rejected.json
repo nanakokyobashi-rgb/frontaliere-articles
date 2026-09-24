@@ -1,12 +1,5 @@
 {
   "keywords": [
-    "vivere a Comerio e lavorare in Ticino da frontaliere",
-    "vivere a Gornate Olona e lavorare in Ticino da frontaliere",
-    "mercato degli affitti canton Friburgo canoni medi e diritto di locazione",
-    "avs e prestazioni complementari canton Friburgo cassa di compensazione",
-    "patente di guida canton Friburgo conversione ed esami",
-    "imposta di successione e donazione canton Friburgo aliquote",
-    "permesso di dimora B canton Soletta requisiti e rinnovo",
     "sistema scolastico canton Soletta iscrizione e cicli",
     "frontaliere agente di sicurezza ticino stipendio requisiti",
     "terzo pilastro 3a svizzera vantaggi 2026 canton Vaud",
@@ -499,7 +492,14 @@
     "sistema sanitario svizzero lamal guida 2026 canton Ginevra",
     "patente di guida canton Zugo conversione ed esami",
     "imposta di successione e donazione canton Zugo aliquote",
-    "premi cassa malati canton Friburgo e riduzione premi"
+    "premi cassa malati canton Friburgo e riduzione premi",
+    "permesso di domicilio C canton Friburgo requisiti e domanda",
+    "permesso L di breve durata canton Friburgo validità e proroga",
+    "apprendistato e formazione professionale canton Friburgo",
+    "asilo nido e custodia bambini canton Friburgo costi",
+    "avs e prestazioni complementari canton Friburgo cassa di compensazione",
+    "patente di guida canton Friburgo conversione ed esami",
+    "vivere a Figino Serenza e lavorare in Ticino da frontaliere"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -771,6 +771,7 @@
     "vivere a Duno e lavorare in Ticino da frontaliere": 1,
     "naturalizzazione canton Nidvaldo requisiti e procedura": 1,
     "vivere a Arizzano e lavorare in Ticino da frontaliere": 1,
-    "permesso di domicilio C canton Friburgo requisiti e domanda": 1
+    "permesso di domicilio C canton Friburgo requisiti e domanda": 1,
+    "mercato degli affitti canton Friburgo canoni medi e diritto di locazione": 1
   }
 }
