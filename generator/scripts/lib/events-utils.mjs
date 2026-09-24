@@ -741,6 +741,14 @@ const EVENT_IMAGE_CANCEL_TIMEOUT_MS = 1_000;
  * Content-Length is an early rejection; chunked responses and lying lengths
  * are still bounded while the stream is consumed. The body is cancelled on
  * every oversize path so a rejected image cannot strand a crawler connection.
+ *
+ * Allocation follows what the upstream declared or actually sent, never the
+ * cap: a declared length (already <= maxBytes) is preallocated exactly; a
+ * chunked response keeps its chunks and concatenates them once, so an image
+ * served without Content-Length no longer reserves the full 20 MiB cap. The
+ * per-response cap is unchanged. This bounds the reserved ArrayBuffer memory,
+ * not RSS: the old uninitialised cap buffer was mostly never paged in (before
+ * and after measurements are in PR #1770).
  */
 async function readEventImageBody(response, maxBytes) {
   const rawContentLength = response.headers.get('content-length');
@@ -760,7 +768,8 @@ async function readEventImageBody(response, maxBytes) {
   }
 
   const capacity = declaredLength ?? maxBytes;
-  const buffer = Buffer.allocUnsafe(capacity);
+  const buffer = declaredLength === null ? null : Buffer.allocUnsafe(capacity);
+  const chunks = [];
   let totalBytes = 0;
   try {
     while (true) {
@@ -775,15 +784,32 @@ async function readEventImageBody(response, maxBytes) {
       }
       if (chunkBytes === 0) continue;
 
-      buffer.set(value, totalBytes);
+      if (buffer) buffer.set(value, totalBytes);
+      else chunks.push(value);
       totalBytes += chunkBytes;
     }
-    return buffer.subarray(0, totalBytes);
+    return buffer ? buffer.subarray(0, totalBytes) : Buffer.concat(chunks, totalBytes);
   } catch (error) {
     await awaitEventImageCleanup(() => reader.cancel());
     throw error;
   } finally {
+    releaseEventImageReader(reader);
+  }
+}
+
+/**
+ * Releasing the reader lock is cleanup, like the cancel above: it must never
+ * replace the verdict already reached. Current Node/undici streams reject any
+ * pending read instead of throwing, but older WHATWG implementations and
+ * polyfilled bodies throw a TypeError from `releaseLock()` (pending read, or
+ * a stream left mid-cancel by the bounded cleanup timeout). Thrown from the
+ * `finally`, that error would turn a fully read image into `null`.
+ */
+function releaseEventImageReader(reader) {
+  try {
     reader.releaseLock?.();
+  } catch {
+    // The byte/size verdict stays authoritative.
   }
 }
 

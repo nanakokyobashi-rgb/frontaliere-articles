@@ -1046,11 +1046,16 @@ jobs:
             - Una sola passata: diagnostica, fixa, valida, committa, pusha, aggiorna il body, STOP.
 
       # Il colore del job e' il LAVORO reale del round, non l'exit della CLI.
+      #  - head remota non verificabile (fetch fallito o head cambiata fra le
+      #    due letture, dopo i retry) → ROSSO esplicito PRIMA di ogni verdetto:
+      #    niente SUCCESS/SUPERSEDED su una fotografia stantia o intermedia.
       #  - commit pushato sul branch → SUCCESS (la re-review girera'). Vale anche
       #    se la CLI e' morta ai turni DOPO il push.
       #  - branch remoto avanzato da un altro writer dopo START_SHA (pre-merge)
       #    → run SUPERSEDED: CLAIM_STATUS=released e' visibile al finalize
-      #    successivo; il marker di round pre-Codex viene rimborsato.
+      #    successivo (unico writer del claim); il marker di round pre-Codex
+      #    viene rimborsato in modo idempotente, e un rimborso non
+      #    dimostrabile colora il job di ROSSO invece di un warning.
       #  - nessun push + CLI fallita → non-progresso reale → ROSSO.
       #  - nessun push + CLI pulita + body PR cambiato → progresso body-only,
       #    quindi SUCCESS.
@@ -1085,8 +1090,56 @@ jobs:
         run: |
           set -uo pipefail
           HEAD_NOW=$(git rev-parse HEAD 2>/dev/null || echo "")
-          git fetch origin "$HEAD_REF" -q 2>/dev/null || true
-          REMOTE_SHA=$(git rev-parse "origin/$HEAD_REF" 2>/dev/null || echo "")
+          # Head remota verificata prima di classificare (#1763). Un fetch
+          # fallito lascerebbe origin/$HEAD_REF alla fotografia dello step
+          # align; una head che avanza fra fetch e lettura darebbe una
+          # fotografia intermedia. In entrambi i casi SUCCESS, SUPERSEDED e il
+          # rimborso del round sarebbero decisi su una head non verificata.
+          # Si classifica solo su uno SHA confermato da due letture concordi
+          # (fetch con refspec esplicito + ls-remote), con retry bounded e
+          # backoff; altrimenti errore esplicito PRIMA di ogni ramo che scrive
+          # stato: niente SUPERSEDED, niente rimborso, marker conservato.
+          # Ogni comando di rete ha un timeout proprio (il timeout del job non
+          # deve decidere l'esito) e l'esito transitorio viene esportato come
+          # CLAIM_STATUS=failed-transient, come il ramo SUPERSEDED esporta
+          # released: dove un finalize del claim lo legge (redcheck), il claim
+          # resta retryable invece di essere ricostruito come terminale
+          # dall'outcome di Codex.
+          REMOTE_SHA=""
+          remote_head_attempts=3
+          remote_head_attempt=1
+          while [ "$remote_head_attempt" -le "$remote_head_attempts" ]; do
+            fetched_sha=""
+            reread_sha=""
+            if timeout 60 git fetch --no-tags -q origin "+refs/heads/$HEAD_REF:refs/remotes/origin/$HEAD_REF"; then
+              fetched_sha=$(git rev-parse --verify --quiet "refs/remotes/origin/$HEAD_REF^{commit}" 2>/dev/null) || fetched_sha=""
+              # Una rilettura che esce non-zero conta come fallita anche se ha
+              # stampato una riga: si usa l'output solo con exit 0.
+              if ls_remote_out=$(timeout 30 git ls-remote --exit-code origin "refs/heads/$HEAD_REF" 2>/dev/null); then
+                reread_sha=$(printf '%s\n' "$ls_remote_out" | awk 'NR == 1 { print $1 }')
+              fi
+              if [ -n "$fetched_sha" ] && [ "$fetched_sha" = "$reread_sha" ]; then
+                REMOTE_SHA="$fetched_sha"
+                break
+              fi
+              echo "::warning::head remota di $HEAD_REF non stabile (tentativo $remote_head_attempt/$remote_head_attempts): fetch=${fetched_sha:-<vuoto>} rilettura=${reread_sha:-<vuoto>}"
+            else
+              echo "::warning::git fetch di $HEAD_REF fallito (tentativo $remote_head_attempt/$remote_head_attempts)"
+            fi
+            if [ "$remote_head_attempt" -lt "$remote_head_attempts" ]; then
+              sleep $((remote_head_attempt * 5))
+            fi
+            remote_head_attempt=$((remote_head_attempt + 1))
+          done
+          if [ -z "$REMOTE_SHA" ]; then
+            CLAIM_STATUS=failed-transient
+            export CLAIM_STATUS
+            if [ -n "${GITHUB_ENV:-}" ]; then
+              echo 'CLAIM_STATUS=failed-transient' >> "$GITHUB_ENV"
+            fi
+            echo "::error::REMOTE_HEAD_UNVERIFIED: head remota di $HEAD_REF non determinabile dopo $remote_head_attempts tentativi (fetch fallito o head cambiata fra le letture) → classificazione BLOCCANTE, job ROSSO. Nessun SUPERSEDED, nessun rimborso: il marker di round resta contato; claim failed-transient (retryable)."
+            exit 1
+          fi
           echo "start=$START_SHA base=$BASE_SHA local=$HEAD_NOW remote=$REMOTE_SHA claude=$ACTION_OUTCOME"
           if [ "${BASE_CAPTURE_OUTCOME:-}" != "success" ] || \
              ! printf '%s\n' "$BASE_BODY_SHA" | grep -Eq '^[0-9a-f]{64}$'; then
@@ -1104,39 +1157,41 @@ jobs:
             if [ -n "${GITHUB_ENV:-}" ]; then
               echo 'CLAIM_STATUS=released' >> "$GITHUB_ENV"
             fi
-            if [ -n "${PR_NUMBER:-}" ] && [ -n "${FIX_ROUND:-}" ] && [ -n "${FIX_ROUND_MARKER:-}" ]; then
-              if [ -n "${MARKER_COMMENT_ID:-}" ] && [ -n "${MARKER_HEAD:-}" ] \
-                && [ -n "${MARKER_BODY_REVISION:-}" ] && [ -f "${TRUSTED_MARKER_HELPER:-}" ]; then
-                refund_marker="${FIX_ROUND_MARKER%_ROUND}_REFUNDED"
-                refund_attempt_marker="${FIX_ROUND_MARKER%_ROUND}_REFUND_ATTEMPT"
-                if gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '<!-- %s: %s -->\n_Rimborso preparato; DELETE trusted in corso. Il round non è ancora rimborsato._' "$refund_attempt_marker" "$FIX_ROUND")" >/dev/null 2>&1; then
-                  if marker_delete_result=$(node "$TRUSTED_MARKER_HELPER" --delete-verified \
-                    --repo "$REPO" --pr "$PR_NUMBER" --marker "$FIX_ROUND_MARKER" \
-                    --round "$FIX_ROUND" --comment-id "$MARKER_COMMENT_ID" \
-                    --expected-head "$MARKER_HEAD" --expected-body-revision "$MARKER_BODY_REVISION" \
-                    --expected-author github-actions[bot]); then
-                    if gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '<!-- %s: %s -->\n_Round rimborsato: run SUPERSEDED; nessun round consumato._' "$refund_marker" "$FIX_ROUND")" >/dev/null 2>&1; then
-                      echo "round marker $FIX_ROUND_MARKER:$FIX_ROUND deleted after trusted ID/body proof and refund handle published → rimborsato ($marker_delete_result)"
-                    else
-                      echo "::error::SUPERSEDED: marker ID $MARKER_COMMENT_ID cancellato ma handle di rimborso non pubblicabile → refund incompleto, nessun falso handle dichiarato"
-                      exit 1
-                    fi
-                  else
-                    echo "::warning::SUPERSEDED: DELETE trusted del marker ID $MARKER_COMMENT_ID fallita → marker conservato e nessun handle *_REFUNDED pubblicato"
-                  fi
-                else
-                  echo "::warning::SUPERSEDED: commento provvisorio di rimborso non scrivibile → marker conservato e round ancora contato"
-                fi
-              else
-                echo "::warning::SUPERSEDED: prova trusted del marker $FIX_ROUND_MARKER:$FIX_ROUND incompleta → round ancora contato"
-              fi
+            # Rimborso del marker di round come UNA macchina a stati ritentabile
+            # (fixer-round-marker.mjs --refund-superseded), non tre side effect
+            # indipendenti: tentativo vincolato all'ID del marker → DELETE
+            # verificata → handle `${FIX_ROUND_MARKER%_ROUND}_REFUNDED` vincolato.
+            # Una riesecuzione dopo un'interruzione riprende dal passo mancante,
+            # un handle gia' presente non viene duplicato e un finalizzatore
+            # concorrente converge sullo stesso stato. Ogni stato non
+            # dimostrabile e' ROSSO, mai declassato ad avviso.
+            refund_marker="${FIX_ROUND_MARKER%_ROUND}_REFUNDED"
+            if [ -z "${PR_NUMBER:-}" ] || [ -z "${FIX_ROUND:-}" ] || [ -z "${FIX_ROUND_MARKER:-}" ] \
+              || [ -z "${MARKER_COMMENT_ID:-}" ] || [ -z "${MARKER_HEAD:-}" ] \
+              || [ -z "${MARKER_BODY_REVISION:-}" ] || [ ! -f "${TRUSTED_MARKER_HELPER:-}" ]; then
+              echo "::error::SUPERSEDED: prova trusted del marker ${FIX_ROUND_MARKER:-?}:${FIX_ROUND:-?} incompleta (ID/HEAD/body/helper) → rimborso non eseguibile, round ancora contato. Job ROSSO."
+              exit 1
             fi
-            if [ -n "${CLAIM_TOKEN:-}" ]; then
-              CLAIM_ACTION=finalize
-              GH_REPO="${GH_REPO:-$REPO}"
-              export CLAIM_ACTION GH_REPO
-              node scripts/ci/redcheck-review-prefilter.mjs --claim || echo "::warning::SUPERSEDED ma finalizzazione claim released non verificabile"
+            if ! refund_result=$(node "$TRUSTED_MARKER_HELPER" --refund-superseded \
+              --repo "$REPO" --pr "$PR_NUMBER" --marker "$FIX_ROUND_MARKER" \
+              --round "$FIX_ROUND" --comment-id "$MARKER_COMMENT_ID" \
+              --expected-head "$MARKER_HEAD" --expected-body-revision "$MARKER_BODY_REVISION" \
+              --expected-author github-actions[bot]); then
+              echo "::error::SUPERSEDED: rimborso del marker $FIX_ROUND_MARKER:$FIX_ROUND (ID $MARKER_COMMENT_ID) non convergente → Job ROSSO. Lo stato resta ritentabile: rieseguire riprende dal passo interrotto senza duplicare DELETE o handle."
+              exit 1
             fi
+            if ! printf '%s' "$refund_result" | jq -e \
+              --arg marker "$refund_marker" --arg round "$FIX_ROUND" --arg id "$MARKER_COMMENT_ID" \
+              '.refundMarker == $marker and (.round | tostring) == $round and (.commentId | tostring) == $id
+               and .markerPresent == false and (.handleId | type) == "number"' >/dev/null 2>&1; then
+              echo "::error::SUPERSEDED: esito del rimborso senza prova strutturata ($refund_marker:$FIX_ROUND per ID $MARKER_COMMENT_ID) → Job ROSSO."
+              exit 1
+            fi
+            echo "round marker $FIX_ROUND_MARKER:$FIX_ROUND → $refund_marker rimborsato ($refund_result)"
+            # Il claim NON si finalizza qui: CLAIM_STATUS=released e' in
+            # GITHUB_ENV e lo step `Finalize` successivo (always()) lo rilascia
+            # una sola volta, verificando claim_error e claim_state. Un secondo
+            # finalize qui duplicava la scrittura e ne mascherava l'errore.
             echo "⚠️ Branch avanzato da un altro writer dopo l'avvio del round (start=$START_SHA local=$HEAD_NOW remote=$REMOTE_SHA) → run SUPERSEDED; claim rilasciato, nessun round consumato."
             exit 0
           fi

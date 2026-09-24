@@ -123,9 +123,9 @@ jobs:
       # Gemello del fix in reconcile-article-shards.yml (issue #590): l'issue
       # canonica qui sotto apre/aggiorna quando resta lavoro, ma niente la
       # richiudeva quando un run successivo (rilancio manuale) trova zero
-      # sporchi. Il wrapper delega il no-op a `resolveGithubIssue` quando non
-      # c'e' niente da chiudere, ma verifica la post-condizione del close quando
-      # l'issue esiste.
+      # sporchi. Il wrapper cerca le issue aperte con questo titolo ESATTO (non
+      # per prefisso), le chiude per numero e verifica la post-condizione del
+      # close; nessun match e' un no-op verificato.
       - name: Close dirty-content issue (coda drenata)
         continue-on-error: true
         if: steps.detect.outcome == 'success' && steps.detect.outputs.distinct == '0'

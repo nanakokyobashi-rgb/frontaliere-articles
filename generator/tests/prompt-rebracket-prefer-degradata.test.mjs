@@ -96,13 +96,16 @@ test('i due call-site del body sono coperti dal gate, nessuno resta scoperto', (
   // `(_preferActiveThisAttempt && !_preferDegradataDalRibracket)`, mentre il
   // fallback scala spegne `prefer` incondizionatamente perche' e' GIA' dentro
   // `_eseguiRibracket` (verificato nel test sopra).
+  // Quattro, non due: split e retry malformato hanno ciascuno il ramo
+  // generico e quello dello slot `gemini` della rotazione, e dal 2026-09-24
+  // (review di #1751) anche il ramo Gemini passa dalla preferenza.
   const gateInCodice = SRC.match(
     /prefer: \(_preferActiveThisAttempt && !_preferDegradataDalRibracket\) \? PREFERRED_GENERATION_MODELS : undefined/g,
   ) || [];
   assert.ok(occorrenze.length > 0, 'il flag deve comparire almeno una volta nel file');
   assert.equal(
     gateInCodice.length,
-    2,
-    'split e retry malformato devono portare il gate letterale sul `prefer`',
+    4,
+    'split e retry malformato, nei rami generico e Gemini, devono portare il gate letterale sul `prefer`',
   );
 });

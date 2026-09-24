@@ -12,6 +12,9 @@ import {
   getScoreBoard,
   isRetryableError,
   githubModelIdForLookup,
+  isGitHubModelsRetired,
+  isGitHubModelsRetiredResponse,
+  isModelAvailable,
   qualifyGitHubModelId,
   resetState,
 } from '../scripts/lib/ai-models.mjs';
@@ -399,6 +402,79 @@ describe('GitHub Models request contract', () => {
       warnings.some((line) => line.includes('non leggibile come JSON') && line.includes(caught.githubModelsCatalogBodyShape)),
       `la forma del body non e' finita nel log:\n${warnings.join('\n')}`,
     );
+  });
+
+  test('riconosce la firma del servizio ritirato e nient\'altro', () => {
+    assert.equal(isGitHubModelsRetiredResponse(200, 'text/plain; charset=utf-8', 'OK\r\n'), true);
+    assert.equal(isGitHubModelsRetiredResponse(200, 'text/plain', 'ok'), true);
+    assert.equal(isGitHubModelsRetiredResponse(200, 'text/plain', '{'), false, 'un JSON troncato resta transitorio');
+    assert.equal(isGitHubModelsRetiredResponse(200, 'application/json', 'OK'), false);
+    assert.equal(isGitHubModelsRetiredResponse(503, 'text/plain', 'OK'), false);
+    assert.equal(isGitHubModelsRetiredResponse(200, 'text/plain', 'OK, service healthy'), false);
+  });
+
+  test('un catalogo in 200 «OK» spegne i modelli GitHub per la run, e resetState li riapre', async () => {
+    // GitHub Models e' ritirato dal 2026-07-30 e l'host risponde «OK» a tutto
+    // (run 36022627600): non e' un guasto da riprovare.
+    let catalogCalls = 0;
+    globalThis.fetch = async (url) => {
+      if (String(url).endsWith('/catalog/models')) {
+        catalogCalls++;
+        return new Response('OK\r\n', { status: 200, headers: { 'content-type': 'text/plain' } });
+      }
+      throw new Error('la completion non deve partire');
+    };
+    const warn = console.warn;
+    console.warn = () => {};
+    try {
+      await assert.rejects(
+        () => callSingleModel([{ role: 'user', content: 'x' }], { model: AI_MODELS.GPT4O, maxRetriesPerModel: 1 }),
+        (error) => error.nonRetryableReason === 'github_models_retired'
+          && error.nonRetryable === true
+          && /ritirato/.test(error.message),
+      );
+    } finally {
+      console.warn = warn;
+    }
+    assert.equal(catalogCalls, 1);
+    assert.equal(isGitHubModelsRetired(), true);
+    assert.equal(isModelAvailable(AI_MODELS.GPT_4_1), false, 'un modello GitHub mai chiamato deve uscire comunque dalla cascata');
+    assert.equal(isModelAvailable(AI_MODELS.GPT4O_MINI), false);
+    resetState();
+    assert.equal(isGitHubModelsRetired(), false);
+    assert.equal(isModelAvailable(AI_MODELS.GPT_4_1), true);
+  });
+
+  test('dopo il ritiro la cascata salta i modelli GitHub senza voto e senza dettare il tetto di input', async () => {
+    let fetchCalls = 0;
+    globalThis.fetch = async (url) => {
+      fetchCalls++;
+      if (String(url).endsWith('/catalog/models')) {
+        return new Response('OK', { status: 200, headers: { 'content-type': 'text/plain' } });
+      }
+      throw new Error('la completion non deve partire');
+    };
+    const warn = console.warn;
+    const logs = [];
+    console.warn = (...args) => { logs.push(args.map(String).join(' ')); };
+    try {
+      await callSingleModel([{ role: 'user', content: 'x' }], { model: AI_MODELS.GPT4O, maxRetriesPerModel: 1 }).catch(() => {});
+      const before = fetchCalls;
+      // Un prompt ben oltre i 4000 token di gpt-4o-mini: prima del ritiro
+      // riconosciuto, quel modello lo scartava per tetto di input e il suo
+      // tetto diventava il budget della flotta.
+      const bigPrompt = 'parola '.repeat(9000);
+      const error = await callLLM(
+        [{ role: 'user', content: bigPrompt }],
+        { chain: [AI_MODELS.GPT4O_MINI, AI_MODELS.GPT_4_1], maxRetriesPerModel: 1 },
+      ).then(() => null, (e) => e);
+      assert.ok(error, 'con la sola cascata GitHub ritirata la chiamata non puo\' riuscire');
+      assert.equal(fetchCalls, before, 'nessuna richiesta verso un servizio ritirato');
+      assert.equal(error.inputCapReport, null, `il tetto dei modelli ritirati non deve contare: ${JSON.stringify(error.inputCapReport)}`);
+      assert.doesNotMatch(String(error.message), /exceed 4000-token limit/);
+    } finally {
+      console.warn = warn;
+    }
   });
 
   test('usa l id bare per il parametro e il cap dei modelli qualificati', async () => {

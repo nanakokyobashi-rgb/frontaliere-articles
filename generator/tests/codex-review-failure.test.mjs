@@ -107,3 +107,36 @@ test('stderr server-error su stream misto JSON+testo resta retryable', () => {
     { cause: CODEX_REVIEW_FAILURE_CAUSE.SERVER_ERROR, numTurns: null, source: 'text' },
   );
 });
+
+test('un marker di quota annidato vale come quello al top level (FU-2026-09-12-011)', () => {
+  const nestedCases = [
+    { type: 'event', payload: { type: 'rate_limit_event', rate_limit_info: { status: 'rejected' } } },
+    { type: 'item.completed', item: { type: 'rate_limit_error' } },
+    { type: 'turn.failed', error: { details: [{ rate_limit_info: { status: 'rejected' } }] } },
+    { type: 'stream', events: [{ event: 'rate_limit_event', rate_limit_info: { status: 'rejected' } }] },
+  ];
+  for (const event of nestedCases) {
+    assert.equal(
+      classifyCodexReviewFailure({ outcome: 'failure', raw: JSON.stringify(event) }).cause,
+      CODEX_REVIEW_FAILURE_CAUSE.RATE_LIMIT,
+      JSON.stringify(event),
+    );
+  }
+  // Stessa regola a ogni profondita': il payload annidato classifica come lo
+  // stesso payload al top level, anche in NDJSON con righe diagnostiche.
+  const marker = { type: 'rate_limit_event', rate_limit_info: { status: 'rejected' } };
+  const top = classifyCodexReviewFailure({ outcome: 'failure', raw: JSON.stringify(marker) });
+  const nested = classifyCodexReviewFailure({
+    outcome: 'failure',
+    raw: ['[codex] diagnostic line', JSON.stringify({ type: 'thread.started' }), JSON.stringify({ type: 'event', payload: marker })].join('\n'),
+  });
+  assert.equal(nested.cause, top.cause);
+  // Uno status diverso da `rejected` senza tipo di quota non e' un marker.
+  assert.equal(
+    classifyCodexReviewFailure({
+      outcome: 'failure',
+      raw: JSON.stringify({ type: 'event', payload: { rate_limit_info: { status: 'allowed' } } }),
+    }).cause,
+    CODEX_REVIEW_FAILURE_CAUSE.NON_RETRYABLE,
+  );
+});
