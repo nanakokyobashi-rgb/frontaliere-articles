@@ -7612,18 +7612,20 @@ function _codexFallbackJsonRequest(opts = {}) {
   const wantsJson = !!opts.jsonMode || !!opts.jsonSchema;
   const schemaMode = getSchemaMode();
   const requestedSchema = opts.jsonSchema?.schema || opts.jsonSchema;
-  const schemaApplied = wantsJson && schemaMode !== 'off';
+  // Only a caller's explicit schema reaches `--output-schema`. Codex hands it to
+  // OpenAI structured outputs in strict mode, which rejects a bare
+  // `{ type: 'object' }` (every object needs `additionalProperties: false` and
+  // every property in `required`, see buildArticleJsonSchema in
+  // create-article.mjs): the schema-less headline selection got
+  // `invalid_request_error` on every Codex call (run 36020533094). A jsonMode
+  // call without a schema sends none; the prompt asks for one JSON object and
+  // _validateCodexCliResult enforces it here.
+  const schemaApplied = wantsJson && schemaMode !== 'off'
+    && !!requestedSchema && typeof requestedSchema === 'object';
   return {
     wantsJson,
     schemaApplied,
-    // A schema-less jsonMode call still gets an object schema when the global
-    // switch is on. This keeps Codex's structured-output path and the local
-    // output contract aligned with the other providers.
-    schema: schemaApplied
-      ? (requestedSchema && typeof requestedSchema === 'object'
-        ? requestedSchema
-        : { type: 'object' })
-      : null,
+    schema: schemaApplied ? requestedSchema : null,
   };
 }
 
@@ -7635,8 +7637,9 @@ function _validateCodexCliResult(result, { wantsJson, schemaApplied }) {
   } catch {
     throw new Error('Codex CLI returned invalid JSON for a JSON-mode request');
   }
-  // When the kill-switch disables schema mode there is no provider-side shape
-  // guarantee, but jsonMode still promises a JSON object to its caller.
+  // Without a schema sent (kill-switch off, or a schema-less jsonMode call)
+  // there is no provider-side shape guarantee, but jsonMode still promises a
+  // JSON object to its caller.
   if (!schemaApplied && (!parsed || typeof parsed !== 'object' || Array.isArray(parsed))) {
     throw new Error('Codex CLI returned JSON that is not an object');
   }
