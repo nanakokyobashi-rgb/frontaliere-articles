@@ -1,14 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1945045/posta-semestre-lettere-utili-rispetto": {
-    "articleId": "posta-utile-in-salita",
-    "ts": "2026-08-20T13:41:51.579Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/economia/1944955/opzione-gas-svizzera-caso-italia-inverno-francia": {
-    "articleId": "gas-svizzera-inverno-opzione",
-    "ts": "2026-08-20T13:58:27.012Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/attualita/1945006/potrebbe-viticoltori-siccita-qualita-vendemmia-uve-mercato-emergenza-messa": {
     "articleId": "viticoltura-ticino-2026-sfide",
     "ts": "2026-08-20T14:19:34.421Z",
@@ -2497,6 +2487,16 @@
   "https://www.cdt.ch/news/casi-di-tubercolosi-in-svizzera-al-livello-piu-alto-dal-2018-440025": {
     "articleId": "tubercolosi-svizzera-aumento-2025",
     "ts": "2026-09-24T17:43:40.366Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/cn%3a-lavoratori-interinali-meglio-protetti-in-caso-di-intemperie/92112898": {
+    "articleId": "indennita-maltempo-sei-mesi",
+    "ts": "2026-09-24T19:15:47.751Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1952414/capitale-approva-bns-requisiti-ubs": {
+    "articleId": "ubs-capitale-90-bns",
+    "ts": "2026-09-24T20:09:09.369Z",
     "keyForm": 2
   }
 }
