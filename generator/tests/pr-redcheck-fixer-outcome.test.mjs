@@ -209,6 +209,7 @@ function runClassifier({
   fetchStatuses = '',
   fetchedSequence = '',
   rereadSequence = '',
+  lsRemoteStatuses = '',
 } = {}) {
   const temp = mkdtempSync(path.join(os.tmpdir(), 'pr-redcheck-outcome-'));
   const bin = path.join(temp, 'bin');
@@ -219,6 +220,8 @@ function runClassifier({
   mkdirSync(gitState);
   const sleepLog = path.join(temp, 'sleep.log');
   writeFileSync(sleepLog, '');
+  const timeoutLog = path.join(temp, 'timeout.log');
+  writeFileSync(timeoutLog, '');
   const trustedMarkerHelper = path.join(temp, 'trusted-marker.mjs');
   writeFileSync(ghLog, '');
   writeFileSync(githubEnv, '');
@@ -253,7 +256,10 @@ case "$1 $2" in
   "ls-remote "*)
     v=$(next_value reread "$FAKE_REREAD")
     [ -n "$v" ] || v="$FAKE_REMOTE"
-    printf '%s\trefs/heads/%s\n' "$v" "$HEAD_REF" ;;
+    printf '%s\trefs/heads/%s\n' "$v" "$HEAD_REF"
+    st=$(next_value ls-remote "$FAKE_LSREMOTE_STATUSES")
+    [ -n "$st" ] || st=0
+    exit "$st" ;;
   fetch*)
     echo fetch >> "$FAKE_GIT_STATE/fetch.log"
     st=$(next_value fetch "$FAKE_FETCH_STATUSES")
@@ -263,6 +269,12 @@ case "$1 $2" in
 esac
 `);
   fakeExecutable(bin, 'sleep', String.raw`echo "$1" >> "$SLEEP_LOG"`);
+  // timeout deterministico: registra il limite e il sottocomando, poi lo esegue.
+  fakeExecutable(bin, 'timeout', String.raw`
+echo "$1 $2 $3" >> "$TIMEOUT_LOG"
+shift
+exec "$@"
+`);
 fakeExecutable(bin, 'gh', String.raw`
 echo "$*" >> "$GH_LOG"
 if echo "$*" | grep -q -- '-X DELETE'; then exit 0; fi
@@ -317,7 +329,9 @@ printf '%s' "$FAKE_BODY"
         FAKE_FETCH_STATUSES: fetchStatuses,
         FAKE_FETCHED: fetchedSequence,
         FAKE_REREAD: rereadSequence,
+        FAKE_LSREMOTE_STATUSES: lsRemoteStatuses,
         SLEEP_LOG: sleepLog,
+        TIMEOUT_LOG: timeoutLog,
         FAKE_BODY: currentBody,
         FAKE_COMMENTS_JSON: commentsJson,
         REFUND_COMMENT_STATUS: String(refundCommentStatus),
@@ -330,6 +344,7 @@ printf '%s' "$FAKE_BODY"
     result.githubEnv = readFileSync(githubEnv, 'utf8');
     result.ghLog = readFileSync(ghLog, 'utf8');
     result.sleepLog = readFileSync(sleepLog, 'utf8');
+    result.timeoutLog = readFileSync(timeoutLog, 'utf8');
     const fetchLog = path.join(gitState, 'fetch.log');
     result.fetchCount = readFileSync(fetchLog, { encoding: 'utf8', flag: 'a+' })
       .split('\n').filter(Boolean).length;
@@ -673,7 +688,10 @@ function assertFailClosed(name, result) {
   assert.match(result.stdout, /::error::REMOTE_HEAD_UNVERIFIED/, `${name}: errore esplicito atteso`);
   assert.doesNotMatch(result.stdout, /run SUPERSEDED/, `${name}: nessun SUPERSEDED spurio`);
   assert.doesNotMatch(result.stdout, /round SUCCESS/, `${name}: nessun SUCCESS su head stantia`);
-  assert.equal(result.githubEnv, '', `${name}: CLAIM_STATUS non deve essere scritto`);
+  // L'esito transitorio arriva al finalize: il claim resta retryable invece
+  // di essere ricostruito come terminale dall'outcome di Codex.
+  assert.equal(result.githubEnv, 'CLAIM_STATUS=failed-transient\n',
+    `${name}: unico stato esportato = failed-transient (mai released)`);
   assert.doesNotMatch(result.ghLog, /pr comment|DELETE|_REFUND/,
     `${name}: nessun marker terminale/rimborso, nessuna DELETE del marker di round`);
   assert.equal(result.fetchCount, 3, `${name}: retry bounded a 3 tentativi`);
@@ -701,6 +719,18 @@ for (const [name, source] of [['redcheck', WORKFLOW], ['redflag', REDFLAG_WORKFL
     }));
   });
 
+  test(`${name}: ls-remote che stampa una riga valida ma esce non-zero è una lettura fallita`, () => {
+    assertFailClosed(name, supersedeScenario(source, { lsRemoteStatuses: '2 2 2' }));
+  });
+
+  test(`${name}: fetch e rilettura hanno un timeout per comando`, () => {
+    const result = supersedeScenario(source);
+    assert.equal(result.status, 0, `stdout=${result.stdout}\nstderr=${result.stderr}`);
+    const calls = result.timeoutLog.split('\n').filter(Boolean);
+    assert.deepEqual(calls, ['60 git fetch', '30 git ls-remote'],
+      `${name}: ogni comando di rete passa da timeout`);
+  });
+
   test(`${name}: un errore transitorio recupera con una head verificata`, () => {
     const fetchRecovered = supersedeScenario(source, { fetchStatuses: '128 0' });
     assert.equal(fetchRecovered.status, 0,
@@ -722,6 +752,35 @@ for (const [name, source] of [['redcheck', WORKFLOW], ['redflag', REDFLAG_WORKFL
   });
 }
 
+test('dopo REMOTE_HEAD_UNVERIFIED il finalize redcheck chiude il claim failed-transient e resta retryable', async () => {
+  const classified = supersedeScenario(WORKFLOW, { fetchStatuses: '128 128 128' });
+  assert.equal(classified.status, 1);
+  const inherited = /^CLAIM_STATUS=(.+)$/m.exec(classified.githubEnv)?.[1];
+  assert.equal(inherited, 'failed-transient');
+
+  // Codex 'success' ricostruirebbe `completed` (terminale): lo stato ereditato
+  // dal classify deve prevalere.
+  const finalized = runFinalize({
+    claimStatus: inherited,
+    codexOutcome: 'success',
+    // Il fake gh restituisce la lista gia' comprensiva dell'evento pubblicato,
+    // come nel test del finalize `released`.
+    commentsJson: JSON.stringify([activeClaimComment(), activeClaimComment({ state: 'failed-transient' })]),
+  });
+  assert.equal(finalized.status, 0, `stdout=${finalized.stdout}\nstderr=${finalized.stderr}`);
+  assert.match(finalized.stdout, /CLAIM_STATUS ereditato dal classify \(failed-transient\)/);
+  assert.match(finalized.stdout, /claim_state=failed-transient/);
+
+  const { redcheckFixClaimDecision, redcheckFixClaimKey } = await import('../../scripts/ci/redcheck-review-prefilter.mjs');
+  const key = redcheckFixClaimKey({ prNumber: '7', headSha: HEAD_SHA_40, checkFailureKey: CHECK_FAILURE_KEY });
+  const decision = redcheckFixClaimDecision({
+    key,
+    comments: [activeClaimComment(), activeClaimComment({ state: 'failed-transient' })],
+  });
+  assert.equal(decision.allowed, true, `il claim failed-transient deve restare retryable: ${JSON.stringify(decision)}`);
+  assert.equal(decision.reason, 'same-red-claim-retryable');
+});
+
 test('redflag e redcheck leggono la head remota con lo stesso blocco verificato', () => {
   const extract = (source) => {
     const classify = runScript(stepBlockFrom(source, CLASSIFY_NAME));
@@ -736,6 +795,8 @@ test('redflag e redcheck leggono la head remota con lo stesso blocco verificato'
     const classify = runScript(stepBlockFrom(source, CLASSIFY_NAME));
     assert.doesNotMatch(classify, /git fetch[^\n]*\|\| true/,
       'il fetch della head non deve essere best-effort');
+    assert.doesNotMatch(classify, /ls-remote[^\n]*\|\| echo/,
+      'una rilettura non-zero non deve essere mascherata da un fallback');
     const guardAt = classify.indexOf('REMOTE_HEAD_UNVERIFIED');
     for (const verdict of ['round SUCCESS', 'CLAIM_STATUS=released', 'run SUPERSEDED']) {
       assert.ok(classify.indexOf(verdict) > guardAt,
