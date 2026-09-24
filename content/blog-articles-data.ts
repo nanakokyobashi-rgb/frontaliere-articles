@@ -104,6 +104,7 @@ const RAW_ARTICLES = [
  id: 'costo-vita-ticino-vs-lombardia',
  category: 'pratico',
  date: '2025-11-28',
+ updatedAt: '2026-09-24',
  image: '/images/places/foxtown.webp',
  hasCalculator: true,
  authorSlug: 'marco-ferrari',
