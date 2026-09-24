@@ -153,7 +153,7 @@
     {
       "path": "scripts/ci/native-automerge-gate.mjs",
       "mode": "adapted",
-      "reason": "Il gate del corpus mantiene la stessa logica di enrollment, ma il nome dello step review è una costante locale: il bootstrap non trascina vitestCheck.mjs come dipendenza hard e lo scarica solo quando il grafo del gate lo richiede. Adattamento necessario per il contract del corpus (#1507).",
+      "reason": "Il gate del corpus mantiene la stessa logica di enrollment, ma il nome dello step review è una costante locale: il bootstrap non trascina vitestCheck.mjs come dipendenza hard e lo scarica solo quando il grafo del gate lo richiede. Adattamento necessario per il contract del corpus (#1507). Seconda divergenza dal 2026-09-24 (#1784): `parseActionsJobUrl` accetta solo la forma grezza canonica del `details_url` (niente dot-segment anche codificati, whitespace, userinfo/porta, slash finali, zeri iniziali), la stessa regola di `workflowRunIdentity` in native-automerge-sweep-policy.mjs legata da generator/tests/actions-details-url-canonical.test.mjs; il gemello del sito legge ancora il path gia' normalizzato da `new URL`, e la risalita va fatta la'.",
       "baseline": {
         "site": "fe0d90a363d6b3c4",
         "corpus": "17ef9a9d8340acc4",
@@ -3971,6 +3971,16 @@
         "site": null,
         "corpus": "75333f0662fd2700",
         "alignedAt": "2026-09-04"
+      }
+    },
+    {
+      "path": "scripts/ci/transport-realign-body.mjs",
+      "mode": "corpus-only",
+      "reason": "Formato delle righe `(site sha256 ...)` del body delle PR di trasporto e parser del realign post-merge (follow-up sito #9443, item 010/011; issue #1784). Vive solo qui come transport-identical-twins.mjs: produttore (transport-identical-twins.yml) e consumatore (transport-identical-twins-realign.yml) sono entrambi workflow di questo repo, e il sito non riceve trasporti.",
+      "baseline": {
+        "site": null,
+        "corpus": "1d22f9c2ad660610",
+        "alignedAt": "2026-09-24"
       }
     },
     {
