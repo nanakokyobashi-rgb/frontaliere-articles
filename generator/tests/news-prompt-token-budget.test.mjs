@@ -60,6 +60,7 @@ import { buildSourceContract } from '../scripts/lib/article-factuality-gates.mjs
 // di modulo — e QUI si importano davvero, invece di ritagliarli dal sorgente:
 // il modulo e' importabile, quindi il test misura la funzione vera.
 import { PROMPT_SCAFFOLD_FLOOR_TOKENS, isBudgetBelowScaffoldFloor } from '../scripts/lib/exhaustion-disposition.mjs';
+import * as IRPEF from '../scripts/lib/irpef-scaglioni.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
@@ -99,9 +100,14 @@ const IT_GENERATION_MAX_TOKENS = numericConst('IT_GENERATION_MAX_TOKENS');
 // ── I pezzi di create-article.mjs che il prompt usa ───────────────────────
 const briefBlock = cut('const EVERGREEN_FACTS_BRIEF = `', 'export function stripInjectedBriefs(', { includeEnd: false })
   + cutDecl('export function stripInjectedBriefs(');
+// Il brief interpola gli scaglioni IRPEF dalla loro sorgente unica (issue
+// #1777): il blocco ritagliato non ha gli import del modulo, quindi quei nomi
+// entrano come parametri — gli stessi export che create-article.mjs importa.
+const irpefNames = Object.keys(IRPEF);
 const { evergreenFactsBriefFor } = new Function(
+  ...irpefNames,
   `${briefBlock.replace(/^export function /gm, 'function ')}\nreturn { evergreenFactsBriefFor };`,
-)();
+)(...irpefNames.map((k) => IRPEF[k]));
 
 const buildArticleJsonSchema = new Function(
   `${cutDecl('function buildArticleJsonSchema(')}\nreturn buildArticleJsonSchema;`,
