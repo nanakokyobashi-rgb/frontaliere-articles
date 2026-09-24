@@ -821,6 +821,12 @@ const _githubModelsCatalogFaults = new Map();
 // cosi' su ogni run (36010807545) mentre il preflight vedeva il catalogo con
 // HTTP 200. Il catalogo e' pubblico e l'estratto e' corto e ripulito; nessun
 // header della richiesta vi entra.
+//
+// L'estratto va nel LOG e in una proprieta' dedicata, MAI in `error.message`:
+// quel messaggio finisce in `classificationErrors`, e classifyExhaustionCause
+// lo vota per parole chiave (`temporarily`, `429`, `credit`, `401`…). Un body
+// che cominciasse con una di quelle parole sposterebbe il voto transitorio/
+// persistente dell'intero roster — cioe' il differimento verde o il rosso.
 function _githubCatalogBodyShape(res, raw) {
   const type = String(res?.headers?.get?.('content-type') || 'n/d').split(';')[0].trim() || 'n/d';
   const text = String(raw ?? '');
@@ -864,7 +870,11 @@ async function _getGitHubModelsCatalog(apiKey, timeout) {
     try {
       parsed = JSON.parse(raw);
     } catch {
-      throw _githubModelsCatalogTransportError(`JSON non valido (${_githubCatalogBodyShape(res, raw)})`);
+      const bodyShape = _githubCatalogBodyShape(res, raw);
+      console.warn(`⚠️  [GitHub] catalogo in HTTP ${res.status} non leggibile come JSON — ${bodyShape}`);
+      throw Object.assign(_githubModelsCatalogTransportError('JSON non valido'), {
+        githubModelsCatalogBodyShape: bodyShape,
+      });
     }
     const hasCatalogArray = Array.isArray(parsed)
       || ['models', 'data', 'items'].some((key) => Array.isArray(parsed?.[key]));
