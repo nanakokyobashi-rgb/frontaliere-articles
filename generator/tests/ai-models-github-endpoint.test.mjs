@@ -356,7 +356,10 @@ describe('GitHub Models request contract', () => {
       }),
       (error) => error.githubModelsCatalogFault === true
         && error.nonRetryable === false
-        && error.markExhausted === false,
+        && error.markExhausted === false
+        // La forma del body deve arrivare nel log: e' cio' che serve a capire
+        // perche' un catalogo in HTTP 200 non si lascia leggere.
+        && /JSON non valido \(content-type text\/plain, 1 caratteri, inizio «\{»\)/.test(error.message),
     );
     assert.deepEqual(getStats().exhaustedModels, []);
     assert.equal(

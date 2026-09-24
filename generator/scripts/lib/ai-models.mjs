@@ -816,6 +816,18 @@ export function qualifyGitHubModelId(model, catalog) {
 const _githubModelsCatalogPromises = new Map();
 const _githubModelsCatalogFaults = new Map();
 
+// Senza la forma del body, «JSON non valido» non distingue una pagina HTML, un
+// body vuoto o troncato e un BOM: il 2026-09-24 ogni modello GitHub falliva
+// cosi' su ogni run (36010807545) mentre il preflight vedeva il catalogo con
+// HTTP 200. Il catalogo e' pubblico e l'estratto e' corto e ripulito; nessun
+// header della richiesta vi entra.
+function _githubCatalogBodyShape(res, raw) {
+  const type = String(res?.headers?.get?.('content-type') || 'n/d').split(';')[0].trim() || 'n/d';
+  const text = String(raw ?? '');
+  const head = text.slice(0, 60).replace(/[^\x20-\x7e]/g, '?').replace(/\s+/g, ' ');
+  return `content-type ${type}, ${text.length} caratteri, inizio «${head}»`;
+}
+
 async function _getGitHubModelsCatalog(apiKey, timeout) {
   const cacheKey = String(apiKey || '');
   const fault = _githubModelsCatalogFaults.get(cacheKey);
@@ -852,7 +864,7 @@ async function _getGitHubModelsCatalog(apiKey, timeout) {
     try {
       parsed = JSON.parse(raw);
     } catch {
-      throw _githubModelsCatalogTransportError('JSON non valido');
+      throw _githubModelsCatalogTransportError(`JSON non valido (${_githubCatalogBodyShape(res, raw)})`);
     }
     const hasCatalogArray = Array.isArray(parsed)
       || ['models', 'data', 'items'].some((key) => Array.isArray(parsed?.[key]));
