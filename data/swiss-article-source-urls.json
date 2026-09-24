@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/monopattini-elettrici%2c-casco-obbligatorio-in-futuro%3f/91926470": {
-    "articleId": "monopattini-obbligo-casco",
-    "ts": "2026-08-20T14:44:15.766Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4001799": {
     "articleId": "svizzera-cina-accordo-libero-scambio",
     "ts": "2026-08-20T15:30:19.568Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/politica/1952411/mozione-manifestazioni-nazionale-organizzatori-disordini-stati": {
     "articleId": "mozione-costi-manifestazioni-stati",
     "ts": "2026-09-24T21:22:12.848Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/bns-lascia-tasso-guida-allo-0%2c0%25/92111318": {
+    "articleId": "bns-tasso-guida-zero-2026",
+    "ts": "2026-09-24T22:00:36.109Z",
     "keyForm": 2
   }
 }
