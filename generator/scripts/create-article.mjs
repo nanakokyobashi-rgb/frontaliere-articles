@@ -185,7 +185,7 @@ import {
   MAJOR_BLOCK_WEIGHT_THRESHOLD,
   dropSourceContradictedIssues,
 } from './lib/fact-check-consensus.mjs';
-import { runFactualityGates, formatIssues, formatRemediation, buildSourceContract, FACT_CHECK_CATEGORIES, assertNoFabricatedNormAcronyms, detectTruncation } from './lib/article-factuality-gates.mjs';
+import { runFactualityGates, formatIssues, formatRemediation, buildSourceContract, FACT_CHECK_CATEGORIES, assertNoFabricatedNormAcronyms, detectTruncation, mentionsWrongConventionDate, CONVENTION_DATE_IT } from './lib/article-factuality-gates.mjs';
 import { loadDefectMemory, learnedDenylist, learnedSuspects } from './lib/article-defect-memory.mjs';
 import {
   stripCompetitorPromotion,
@@ -5158,9 +5158,10 @@ function assertNoFabricatedReferences(contentIt) {
     }
   }
 
-  // Check for commonly hallucinated convention date
-  if (/convenzione.*9\s+marzo\s+1976/i.test(articleText) || /9\s+marzo\s+1976.*convenzione/i.test(articleText)) {
-    issues.push('Convenzione italo-svizzera: 9 dicembre 1976, non 9 marzo');
+  // Wrong convention date (it is 9 March 1976, RS 0.672.945.41 — see
+  // mentionsWrongConventionDate for the sources and run 36029664367).
+  if (mentionsWrongConventionDate(articleText)) {
+    issues.push(`Convenzione italo-svizzera: ${CONVENTION_DATE_IT}, non 9 dicembre`);
   }
 
   // Check for fabricated "secondo uno studio/sondaggio" with suspiciously precise percentages
@@ -5358,7 +5359,7 @@ const VERIFIED_DOMAIN_FACTS = `
 FATTI VERIFICATI DI RIFERIMENTO — usa come ground truth:
 
 CONVENZIONI E ACCORDI:
-- Convenzione italo-svizzera contro le doppie imposizioni: firmata 9 DICEMBRE 1976 (NON marzo, NON 1974)
+- Convenzione italo-svizzera contro le doppie imposizioni: firmata il 9 MARZO 1976 (NON dicembre, NON 1974)
 - Nuovo Accordo Frontalieri: firmato 23 DICEMBRE 2020, in vigore dal 1° GENNAIO 2024
 - Periodo transitorio: dal 2024 al 2033 (10 anni) per chi era già frontaliere prima del 17/7/2023
 - Ratifica italiana: Legge 83 del 13 GIUGNO 2023
@@ -5443,7 +5444,7 @@ const EVERGREEN_FACTS_BRIEF = `FATTI VERIFICATI (ground truth — il fact-checke
 - Imposta alla fonte sul reddito da lavoro: trattenuta SOLO in Svizzera per i frontalieri (MAI "in entrambi i paesi"). L'Italia evita la doppia imposizione con il credito d'imposta (quadro CE del 730).
 - Nuovo Accordo Frontalieri: firmato 23/12/2020, in vigore dal 1° GENNAIO 2024 (NON 2026). Ratifica IT: Legge 83 del 13/6/2023.
 - Vecchi frontalieri (già tali prima del 17/7/2023): esenzione €7'500, regime transitorio 2024–2033. Nuovi frontalieri: franchigia €10'000.
-- Convenzione doppie imposizioni Italia-Svizzera: firmata il 9 DICEMBRE 1976. La Svizzera NON è membro UE/SEE.
+- Convenzione doppie imposizioni Italia-Svizzera: firmata il 9 MARZO 1976 (NON dicembre). La Svizzera NON è membro UE/SEE.
 - Aliquote/contributi svizzeri: AVS/AI/IPG 5.3% dipendente, AD/AC 1.1% (cap CHF 148'200), LAINF 0.7–1.5%, LPP 7–18% per fascia età (dal 25 anni). IRPEF italiana: 23% fino €28'000, 35% €28'001–50'000, 43% oltre €50'000.
 - Acronimi/enti VALIDI (non inventarne altri): SECO, SEM, USTAT, UFSP/BAG, SUVA, INPS, Agenzia delle Entrate, MEF, BFS (Ufficio Federale di Statistica), AFC/ESTV (Amministrazione Federale delle Contribuzioni).
 - Le aliquote fiscali (imposta alla fonte, aliquote federali/cantonali) sono stabilite da leggi federali/cantonali e amministrate da AFC/ESTV a livello federale e dalle amministrazioni cantonali delle contribuzioni — MAI da UFAS (previdenza sociale, AVS/AI) né da BFS (statistica: rileva dati, non fissa aliquote).
@@ -5653,7 +5654,7 @@ VERIFICA SISTEMATICA — controlla OGNI categoria:
 
 4. **STATISTICHE E PERCENTUALI**: Percentuali precise con decimali (es. "il 73,2% dei frontalieri") DEVONO provenire da studi reali citati per nome E ISTITUTO. Senza attribuzione precisa = probabile invenzione. ECCEZIONE: arrotondamenti a numeri interi da fonti note (es. "circa il 30% della forza lavoro" da USTAT) sono accettabili. Non segnalare aliquote esplicitamente elencate nei fatti verificati (AVS=5.3%, AC=1.1%, IRPEF 23%/35%/43%, franchigia 10.000 euro) come issue se sono riportate correttamente.
 
-5. **DATE E EVENTI**: Confronta con le date verificate: Convenzione 9/12/1976, Nuovo Accordo 23/12/2020, vigenza dal 1/1/2024, Legge 83/2023. ${isEvergreen ? '' : 'Date presenti nell\'articolo ma ASSENTI dalla fonte = altamente sospette.'}
+5. **DATE E EVENTI**: Confronta con le date verificate: Convenzione 9/3/1976, Nuovo Accordo 23/12/2020, vigenza dal 1/1/2024, Legge 83/2023. ${isEvergreen ? '' : 'Date presenti nell\'articolo ma ASSENTI dalla fonte = altamente sospette.'}
 
 6. **COERENZA CON LA FONTE**: ${isEvergreen ? 'N/A per evergreen.' : "Confronta ogni affermazione dell'articolo con la fonte originale. DISTINGUI tra: (a) arricchimento contestuale con fatti di dominio CORRETTI e verificabili (contesto frontaliere, aliquote note, geografia ticinese) = 'minor', (b) fatti specifici inventati (leggi/decreti inesistenti, statistiche precise senza fonte, istituzioni inventate, eventi mai avvenuti) NON presenti nella fonte = 'critical', (c) informazione che CONTRADDICE la fonte o i fatti verificati = 'critical'."}
 
@@ -8628,7 +8629,7 @@ LEGGI E DECRETI:
 - Cita riferimenti normativi SOLO se appaiono LETTERALMENTE nella fonte.
 - Se la fonte dice "la nuova normativa" senza specificare il numero, scrivi "la nuova normativa" — NON inventare "D.Lgs XXX/YYYY".
 - Leggi verificate (usabili SOLO se pertinenti e nella fonte): DPR 917/1986 (TUIR), D.Lgs 147/2015, DL 167/2024, L. 207/2024 (Bilancio 2025), D.Lgs 241/1997, DL 78/2010.
-- La Convenzione italo-svizzera è del 9 DICEMBRE 1976. Il Nuovo Accordo Frontalieri è stato firmato il 23 DICEMBRE 2020.
+- La Convenzione italo-svizzera è del 9 MARZO 1976 (NON dicembre). Il Nuovo Accordo Frontalieri è stato firmato il 23 DICEMBRE 2020.
 
 ISTITUZIONI:
 - NON inventare acronimi. Enti reali: SECO, USTAT, UFSP/BAG, SUVA, DFE, DSS, SEM, INPS, Agenzia Entrate, MEF.
@@ -8929,14 +8930,19 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   // Percorso verificato end-to-end il 2026-08-18 (callLLM reale, catena di
   // modelli capped, prompt da 60.500 token → retryRequestTokenBudget=8000).
   //
-  // Vale SOLO al primo tentativo, ed e' applicato anche qui, non solo alla
-  // `prefer` passata a callLLM sotto: dal secondo tentativo in poi il retry
-  // loop min-words (selectMinWordsRetryModel) sceglie deliberatamente un
-  // modello diverso da quello precedente per uscire da un fallimento
-  // ripetuto, e quel modello ha quasi sempre un cap dichiarato — la scala di
-  // riduzione deve tornare a mordere per lui, non restare skippata pensando
-  // ai CLI che non verranno piu' chiamati. Vedi il gate sulla `prefer:` sotto.
-  const _preferActiveThisAttempt = generationAttempt === 1;
+  // Vale per OGNI tentativo (decisione del proprietario, 2026-09-24), ed e'
+  // applicato anche qui, non solo alla `prefer` passata a callLLM sotto.
+  // Prima valeva solo al primo: dal secondo il retry loop min-words
+  // (selectMinWordsRetryModel) ruotava di proposito su un modello free
+  // diverso per uscire da un fallimento ripetuto. Con il roster free a terra
+  // (402 da Mistral, SambaNova, Cerebras e HuggingFace; GitHub Models ritirato)
+  // quella rotazione finiva su modelli morti: nella run 36022627600 Codex ha
+  // scritto il tentativo 1, il fact-check l'ha bocciato per una data, e il
+  // tentativo 2 e' ricaduto sui free fino a `prompt-floor-irreducible`. Ora il
+  // ritentativo, con il feedback del gate, torna a Codex e poi a Claude; la
+  // rotazione resta la cascata dietro di loro, e la scala di riduzione torna
+  // a mordere solo quando la flotta detta un budget (`_promptTokenBudget`).
+  const _preferActiveThisAttempt = true;
   const _preferSenzaCap = _preferActiveThisAttempt && _preferisceModelloSenzaCap(PREFERRED_GENERATION_MODELS);
   const _saltaScala = _preferSenzaCap && !(Number(sourceContext?._promptTokenBudget) > 0);
 
@@ -9921,18 +9927,16 @@ Rispondi SOLO con JSON valido, senza markdown.` },
       const itRaw2 = useGeminiDirect
         ? await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema, expectedFields: REQUIRED_IT_BODY_FIELDS })
         // Stessa preferenza della chiamata che sta ripetendo, e stesso gate
-        // `_preferActiveThisAttempt`: solo al primo tentativo del retry loop
-        // min-words, cosi' da non scavalcare la rotazione di diversificazione
-        // (selectMinWordsRetryModel) dal secondo tentativo in poi — vedi il
-        // commento su `_preferSenzaCap` sopra. E' anche la seconda chiamata
-        // preferita per tentativo su cui e' dimensionato
+        // `_preferActiveThisAttempt`, che dal 2026-09-24 vale su ogni
+        // tentativo — vedi il commento su `_preferSenzaCap` sopra. E' anche la
+        // seconda chiamata preferita per tentativo su cui e' dimensionato
         // DEFAULT_CLAUDE_CLI_MAX_CALLS_PER_RUN (40 = 20 tentativi × 2). Non
-        // e' piu' un upper bound stretto: il ri-bracketing puo' aggiungere
-        // 1 chiamata preferita (ramo scala) o 2 (ramo split) e solo
-        // sull'attempt 1, dove la preferenza vive. Il tetto vero lo tiene lo
-        // storm breaker di claude-cli, che dopo 3 fallimenti consecutivi lo
-        // spegne per tutta la run — ed e' proprio il caso in cui il
-        // ri-bracketing si arma.
+        // e' un upper bound stretto: il ri-bracketing puo' aggiungere 1
+        // chiamata preferita (ramo scala) o 2 (ramo split), e Claude e' il
+        // secondo preferito, chiamato solo quando Codex fallisce. Il tetto
+        // vero lo tiene lo storm breaker di claude-cli, che dopo 3 fallimenti
+        // consecutivi lo spegne per tutta la run — ed e' proprio il caso in cui
+        // il ri-bracketing si arma.
         //
         // issue #460: `!_preferDegradataDalRibracket` in piu' rispetto a
         // prima. Se questo tentativo e' passato dal ri-bracketing,

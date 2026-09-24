@@ -19,6 +19,7 @@ import {
   getGhModelsPats,
   getProviderForModel,
   GH_MODELS_CATALOG_URL,
+  isGitHubModelsRetiredResponse,
 } from './ai-models.mjs';
 
 export const PROVIDER_PREFLIGHT_TIMEOUT_MS = 8_000;
@@ -220,6 +221,22 @@ async function probeProvider(group, {
         redirect: 'manual',
         signal: AbortSignal.timeout(normalizeTimeoutMs(timeoutMs)),
       });
+      // GitHub Models e' ritirato e l'host risponde 200 «OK» a tutto: lo
+      // status da solo lo dava `ready`. Stessa firma del runtime, una sola
+      // sorgente (isGitHubModelsRetiredResponse in ai-models.mjs).
+      if (group.provider === 'github' && response.status === 200 && typeof response.text === 'function') {
+        const body = await response.text().catch(() => '');
+        const contentType = response.headers?.get?.('content-type');
+        if (isGitHubModelsRetiredResponse(response.status, contentType, body)) {
+          return {
+            ...base,
+            status: 'provider_unavailable',
+            reason: 'github_models_retired',
+            quota: 'unknown',
+            httpStatus: response.status,
+          };
+        }
+      }
       lastResult = {
         ...base,
         ...classifyProviderProbe({ provider: group.provider, configured, mode: probe.mode, httpStatus: response.status }),

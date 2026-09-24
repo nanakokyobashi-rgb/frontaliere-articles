@@ -816,6 +816,26 @@ export function qualifyGitHubModelId(model, catalog) {
 const _githubModelsCatalogPromises = new Map();
 const _githubModelsCatalogFaults = new Map();
 
+// GitHub Models e' stato ritirato il 2026-07-30: catalogo, API di inferenza e
+// playground chiusi, senza un endpoint sostitutivo
+// (https://github.blog/changelog/2026-07-30-github-models-is-now-retired/).
+// Da allora models.github.ai risponde `200 text/plain` con «OK» a qualunque
+// path — misurato il 2026-09-24 sul catalogo (run 36022627600) e su /, su
+// /v1/models e sull'inferenza. Quella risposta non e' un guasto di trasporto
+// da riprovare: e' il servizio che non c'e' piu'. Riconosciuta, spegne i
+// modelli GitHub per il resto del processo (`_githubModelsRetired`), cosi'
+// smettono di occupare la cascata e — soprattutto — di dettarle il tetto di
+// input: gpt-4o-mini e i DeepSeek (4000 token) portavano la flotta a un budget
+// sotto il pavimento del prompt e all'uscita `prompt-floor-irreducible`.
+// Un body JSON troncato (`{`) resta invece un guasto transitorio.
+export function isGitHubModelsRetiredResponse(status, contentType, body) {
+  return Number(status) === 200
+    && /^text\/plain\b/i.test(String(contentType || '').trim())
+    && /^ok$/i.test(String(body ?? '').trim());
+}
+let _githubModelsRetired = false;
+export function isGitHubModelsRetired() { return _githubModelsRetired; }
+
 // Senza la forma del body, «JSON non valido» non distingue una pagina HTML, un
 // body vuoto o troncato e un BOM: il 2026-09-24 ogni modello GitHub falliva
 // cosi' su ogni run (36010807545) mentre il preflight vedeva il catalogo con
@@ -866,6 +886,14 @@ async function _getGitHubModelsCatalog(apiKey, timeout) {
       }
       throw _githubModelsCatalogTransportError('risposta HTTP non riuscita', res.status);
     }
+    if (isGitHubModelsRetiredResponse(res.status, res.headers?.get?.('content-type'), raw)) {
+      _githubModelsRetired = true;
+      console.warn('⚠️  [GitHub] GitHub Models e\' ritirato (models.github.ai risponde «OK» a ogni richiesta): modelli GitHub esclusi per il resto della run');
+      throw _githubModelsError(
+        'catalogo GitHub Models ritirato: models.github.ai risponde «OK» a ogni richiesta (servizio chiuso il 2026-07-30)',
+        'github_models_retired',
+      );
+    }
     let parsed;
     try {
       parsed = JSON.parse(raw);
@@ -886,6 +914,7 @@ async function _getGitHubModelsCatalog(apiKey, timeout) {
   })();
   const tracked = promise.catch((error) => {
     if (error?.nonRetryableReason !== 'github_models_catalog_brownout'
+        && error?.nonRetryableReason !== 'github_models_retired'
         && _githubModelsCatalogPromises.get(cacheKey) === tracked) {
       _githubModelsCatalogPromises.delete(cacheKey);
       _githubModelsCatalogFaults.set(cacheKey, error);
@@ -2782,6 +2811,7 @@ const AUTHORITATIVE_PERSISTENT_REASONS = new Set([
   'persistent',
   'github_models_retirement_brownout',
   'github_models_catalog_brownout',
+  'github_models_retired',
   'github_models_mapping_unavailable',
   'github_models_mapping_ambiguous',
 ]);
@@ -5146,6 +5176,7 @@ function _shouldSkipExhausted(model) {
 
 /** Check whether a model is still usable this run */
 export function isModelAvailable(modelId) {
+  if (_githubModelsRetired && getProvider(modelId) === PROVIDER.GITHUB) return false;
   if (_shouldSkipExhausted(modelId)) return false;
   // Check that we have the API key for the model's provider
   return !!getApiKeyForProvider(getProvider(modelId));
@@ -5478,6 +5509,7 @@ export function resetState() {
   _responseCache.clear();
   _githubModelsCatalogPromises.clear();
   _githubModelsCatalogFaults.clear();
+  _githubModelsRetired = false;
   _claudeCliBinaryMissing = false;
   _claudeCliConsecutiveTimeouts = 0;
   _claudeCliTimeoutStormDetected = false;
@@ -8940,6 +8972,14 @@ export async function callLLM(messages, opts = {}) {
     // transient/persistent vote that decides whether a run with no article is
     // green. See _providerCooldownReason.
     const provider = getProvider(model);
+    // Un servizio ritirato non e' un membro del roster: lo si salta PRIMA dei
+    // controlli su cooldown e tetto di input, e senza una riga in `errors`,
+    // cosi' non vota nella classificazione transitorio/persistente e non detta
+    // il budget di token (vedi isGitHubModelsRetiredResponse).
+    if (_githubModelsRetired && provider === PROVIDER.GITHUB) {
+      _logPreflightSkipOnce(model, 'availability', 'GitHub Models retired (2026-07-30)');
+      continue;
+    }
     if (isProviderCoolingDown(provider)) {
       const skipPhrase = providerCooldownSkipPhrase(provider);
       _logPreflightSkipOnce(model, 'cooldown', `provider ${provider} ${skipPhrase}`);
