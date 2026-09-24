@@ -290,7 +290,18 @@ function codexFailureReason(stderr) {
     .split(/\r?\n/)
     .map((line) => line.trim())
     .filter(Boolean);
-  const line = [...lines].reverse().find((candidate) => /error/i.test(candidate)) || lines.at(-1) || '';
+  let index = lines.length - 1;
+  for (let i = lines.length - 1; i >= 0; i--) {
+    if (/error/i.test(lines[i])) { index = i; break; }
+  }
+  let line = lines[index] || '';
+  // An API error printed as pretty JSON ends on `"type": "invalid_request_error",`
+  // (run 36020533094); the explanation is on the "message" field just above.
+  if (/^"\w+"\s*:/.test(line)) {
+    for (let i = index - 1; i >= Math.max(0, index - 6); i--) {
+      if (/^"message"\s*:/.test(lines[i])) { line = `${line} ${lines[i]}`; break; }
+    }
+  }
   const safe = line
     .replace(/eyJ[\w-]+\.[\w-]+\.[\w-]+/g, '[redacted]')
     .replace(/[A-Za-z0-9_+=-]{32,}/g, '[redacted]')

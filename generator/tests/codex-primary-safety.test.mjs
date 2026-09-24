@@ -313,6 +313,15 @@ test('la review Codex esporta eventi strutturati anche quando il processo fallis
   assert.match(action, /item\?\.exit_code === 0/);
   assert.match(action, /codex_exec_timeout_seconds="\$\{CODEX_EXEC_TIMEOUT_SECONDS:-1800\}"/);
   assert.match(action, /exec_timeout_seconds:\n\s+description: "[^"]+"\n\s+required: false\n\s+default: "1800"/);
+  assert.match(
+    action,
+    /pipeline_status=\("\$\{PIPESTATUS\[@\]\}"\)\n\s+# This pipeline has three processes: printf \(0\), Codex \(1\), tee \(2\)\.[\s\S]*?codex_status="\$\{pipeline_status\[1\]:-1\}"\n\s+tee_status="\$\{pipeline_status\[2\]:-1\}"/,
+    'the three-process diagnostics pipeline must classify Codex and tee separately',
+  );
+  assert.doesNotMatch(action, /codex_status="\$\{pipeline_status\[0\]:-1\}"/,
+    'printf must not be used as the Codex exit status');
+  assert.doesNotMatch(action, /diagnostics_status="\$\{pipeline_status\[1\]:-1\}"/,
+    'the Codex exit status must not be reported as a diagnostics-write failure');
   assert.doesNotMatch(action, /codex_exec_timeout_seconds=900/);
   assert.match(testsWorkflow, /CODEX_DURATION_MS:-0\}.*-ge 1800000/u);
   assert.doesNotMatch(testsWorkflow, /CODEX_DURATION_MS:-0\}.*-ge 900000/u);

@@ -365,6 +365,42 @@ describe('GitHub Models request contract', () => {
     );
   });
 
+  test('la forma di un catalogo illeggibile va nel log, mai nel messaggio che classifica il roster', async () => {
+    // `error.message` finisce in classificationErrors e viene votato per parole
+    // chiave: un body che comincia con «temporarily unavailable» non deve poter
+    // spostare il verdetto transitorio/persistente dell'intero roster.
+    const body = 'temporarily unavailable, retry after 429 credit';
+    globalThis.fetch = async (url) => {
+      if (String(url).endsWith('/catalog/models')) return new Response(body, { status: 200 });
+      throw new Error('la completion non deve partire');
+    };
+    const warnings = [];
+    const originalWarn = console.warn;
+    console.warn = (...args) => { warnings.push(args.map(String).join(' ')); };
+    let caught;
+    try {
+      await callSingleModel([{ role: 'user', content: 'x' }], {
+        model: AI_MODELS.GPT4O,
+        maxRetriesPerModel: 1,
+      });
+    } catch (error) {
+      caught = error;
+    } finally {
+      console.warn = originalWarn;
+    }
+    assert.ok(caught?.githubModelsCatalogFault, 'atteso un guasto del catalogo');
+    assert.equal(caught.message, '[GitHub] catalogo GitHub Models non disponibile: JSON non valido');
+    assert.doesNotMatch(caught.message, /temporarily|429|credit/);
+    assert.equal(
+      caught.githubModelsCatalogBodyShape,
+      `content-type text/plain, ${body.length} caratteri, inizio «${body}»`,
+    );
+    assert.ok(
+      warnings.some((line) => line.includes('non leggibile come JSON') && line.includes(caught.githubModelsCatalogBodyShape)),
+      `la forma del body non e' finita nel log:\n${warnings.join('\n')}`,
+    );
+  });
+
   test('usa l id bare per il parametro e il cap dei modelli qualificati', async () => {
     const calls = [];
     globalThis.fetch = async (url, init) => {

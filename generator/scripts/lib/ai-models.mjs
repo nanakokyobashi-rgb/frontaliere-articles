@@ -350,8 +350,10 @@ export const AI_MODELS = Object.freeze({
   // crawler group through one bounded lane. The crawler action explicitly
   // prefers this model before the normal provider cascade.
   // The model is intentionally absent from DEFAULT_CHAIN: Codex is reserved for
-  // the high-value article-body generation path, not translations, metadata,
-  // FAQ work or fact-check consensus.
+  // the high-value article-body generation path (plus the headline-selection
+  // retry once the free cascade has failed, see HEADLINE_SELECTION_FALLBACK in
+  // create-article.mjs), not translations, metadata, FAQ work or fact-check
+  // consensus.
   CODEX_CLI_PRIMARY: `codex-cli/${CODEX_FALLBACK_MODEL}`,
 
   // ── Claude CLI Haiku fallback (article-body explicit opt-in) ─────────────
@@ -814,6 +816,24 @@ export function qualifyGitHubModelId(model, catalog) {
 const _githubModelsCatalogPromises = new Map();
 const _githubModelsCatalogFaults = new Map();
 
+// Senza la forma del body, «JSON non valido» non distingue una pagina HTML, un
+// body vuoto o troncato e un BOM: il 2026-09-24 ogni modello GitHub falliva
+// cosi' su ogni run (36010807545) mentre il preflight vedeva il catalogo con
+// HTTP 200. Il catalogo e' pubblico e l'estratto e' corto e ripulito; nessun
+// header della richiesta vi entra.
+//
+// L'estratto va nel LOG e in una proprieta' dedicata, MAI in `error.message`:
+// quel messaggio finisce in `classificationErrors`, e classifyExhaustionCause
+// lo vota per parole chiave (`temporarily`, `429`, `credit`, `401`…). Un body
+// che cominciasse con una di quelle parole sposterebbe il voto transitorio/
+// persistente dell'intero roster — cioe' il differimento verde o il rosso.
+function _githubCatalogBodyShape(res, raw) {
+  const type = String(res?.headers?.get?.('content-type') || 'n/d').split(';')[0].trim() || 'n/d';
+  const text = String(raw ?? '');
+  const head = text.slice(0, 60).replace(/[^\x20-\x7e]/g, '?').replace(/\s+/g, ' ');
+  return `content-type ${type}, ${text.length} caratteri, inizio «${head}»`;
+}
+
 async function _getGitHubModelsCatalog(apiKey, timeout) {
   const cacheKey = String(apiKey || '');
   const fault = _githubModelsCatalogFaults.get(cacheKey);
@@ -850,7 +870,11 @@ async function _getGitHubModelsCatalog(apiKey, timeout) {
     try {
       parsed = JSON.parse(raw);
     } catch {
-      throw _githubModelsCatalogTransportError('JSON non valido');
+      const bodyShape = _githubCatalogBodyShape(res, raw);
+      console.warn(`⚠️  [GitHub] catalogo in HTTP ${res.status} non leggibile come JSON — ${bodyShape}`);
+      throw Object.assign(_githubModelsCatalogTransportError('JSON non valido'), {
+        githubModelsCatalogBodyShape: bodyShape,
+      });
     }
     const hasCatalogArray = Array.isArray(parsed)
       || ['models', 'data', 'items'].some((key) => Array.isArray(parsed?.[key]));
@@ -4845,8 +4869,9 @@ function sortChainByScore(chain) {
 // dal punteggio. Proprio per questo NON e' mai un default — si attiva solo se
 // qualcuno la chiede esplicitamente, in uno dei due modi:
 //
-//   1. `opts.prefer` su UNA chiamata (create-article.mjs la mette sulla sola
-//      generazione del corpo, non su traduzioni/meta/FAQ/classificazione);
+//   1. `opts.prefer` su UNA chiamata (create-article.mjs la mette sulla
+//      generazione del corpo e, dopo un tentativo fallito dei free, sulla
+//      selezione headline; mai su traduzioni/meta/FAQ/classificazione);
 //   2. `AI_MODELS_PREFER` impostata a mano da UNO step di workflow — oggi
 //      `translate-pending.yml` del sito, che dipende da questa semantica e ha
 //      un gate dedicato (`tests/relocalize-traffic-priority.test.ts`).
@@ -4876,8 +4901,9 @@ function sortChainByScore(chain) {
 // di tier, non regala priorita'. Il default violava quella riga, ed e' il
 // motivo per cui i due repo non potevano convergere finche' esisteva.
 //
-// Ora la preferenza e' una sola, esplicita, e vive dove serve: sulla chiamata
-// che genera il corpo dell'articolo. `DEFAULT_MODELS_PREFER` resta esportata e
+// Ora la preferenza e' esplicita e vive dove serve: sulla chiamata che genera
+// il corpo dell'articolo, e sul ritentativo della selezione headline quando la
+// cascata free ha appena fallito. `DEFAULT_MODELS_PREFER` resta esportata e
 // vuota, come punto unico in cui un default tornerebbe se mai lo si volesse —
 // ma chi lo riempie riapre esattamente il buco descritto qui sopra.
 export const DEFAULT_MODELS_PREFER = [];
@@ -7602,18 +7628,20 @@ function _codexFallbackJsonRequest(opts = {}) {
   const wantsJson = !!opts.jsonMode || !!opts.jsonSchema;
   const schemaMode = getSchemaMode();
   const requestedSchema = opts.jsonSchema?.schema || opts.jsonSchema;
-  const schemaApplied = wantsJson && schemaMode !== 'off';
+  // Only a caller's explicit schema reaches `--output-schema`. Codex hands it to
+  // OpenAI structured outputs in strict mode, which rejects a bare
+  // `{ type: 'object' }` (every object needs `additionalProperties: false` and
+  // every property in `required`, see buildArticleJsonSchema in
+  // create-article.mjs): the schema-less headline selection got
+  // `invalid_request_error` on every Codex call (run 36020533094). A jsonMode
+  // call without a schema sends none; the prompt asks for one JSON object and
+  // _validateCodexCliResult enforces it here.
+  const schemaApplied = wantsJson && schemaMode !== 'off'
+    && !!requestedSchema && typeof requestedSchema === 'object';
   return {
     wantsJson,
     schemaApplied,
-    // A schema-less jsonMode call still gets an object schema when the global
-    // switch is on. This keeps Codex's structured-output path and the local
-    // output contract aligned with the other providers.
-    schema: schemaApplied
-      ? (requestedSchema && typeof requestedSchema === 'object'
-        ? requestedSchema
-        : { type: 'object' })
-      : null,
+    schema: schemaApplied ? requestedSchema : null,
   };
 }
 
@@ -7625,8 +7653,9 @@ function _validateCodexCliResult(result, { wantsJson, schemaApplied }) {
   } catch {
     throw new Error('Codex CLI returned invalid JSON for a JSON-mode request');
   }
-  // When the kill-switch disables schema mode there is no provider-side shape
-  // guarantee, but jsonMode still promises a JSON object to its caller.
+  // Without a schema sent (kill-switch off, or a schema-less jsonMode call)
+  // there is no provider-side shape guarantee, but jsonMode still promises a
+  // JSON object to its caller.
   if (!schemaApplied && (!parsed || typeof parsed !== 'object' || Array.isArray(parsed))) {
     throw new Error('Codex CLI returned JSON that is not an object');
   }

@@ -86,9 +86,11 @@ import { decodeSyntheticSourceToken, isZeroSourceForGenerationBudget, markSynthe
 // subscription e' condivisa con i workflow agentici, e una preferenza globale
 // la brucerebbe affamando il ciclo dei merge.
 //
-// NON e' passata a: traduzioni, meta, FAQ, classificazione, selezione headline,
-// riformulazione del titolo — li' i modelli free funzionano e i gate lo
-// confermano. E nemmeno al fact-check: quello e' un consenso fra verificatori
+// NON e' passata a: traduzioni, meta, FAQ, classificazione, riformulazione del
+// titolo — li' i modelli free funzionano e i gate lo confermano. La selezione
+// headline parte anch'essa dai free, ma ricade su Codex quando un tentativo
+// fallisce: vedi HEADLINE_SELECTION_FALLBACK, che spiega perche' i free li'
+// non bastano piu'. E nemmeno al fact-check: quello e' un consenso fra verificatori
 // INDIPENDENTI, e mandarli tutti sullo stesso modello collasserebbe
 // l'indipendenza che il guard «local/fallback cannot self-verify» difende.
 const PREFERRED_GENERATION_MODELS = [
@@ -7806,7 +7808,29 @@ function prioritizeFrontalieriHeadlines(headlines) {
 const HEADLINE_SELECTION_MAX_ATTEMPTS_BATCH = 2;
 const HEADLINE_SELECTION_MAX_ATTEMPTS_FINAL = 3;
 
-async function requestHeadlineSelection(basePrompt, candidateCount, label, maxAttempts) {
+// ── Codex come ripiego della selezione (decisione del proprietario, 2026-09-24)
+//
+// La selezione resta sui modelli free: e' una chiamata piccola, e la quota
+// subscription e' condivisa con i workflow agentici. Ma «li' i modelli free
+// funzionano» non e' piu' vero: il 2026-09-24 Mistral, SambaNova, Cerebras e
+// HuggingFace rispondono 402, GitHub Models non serve il catalogo, e l'unico
+// modello rimasto rispondeva in prosa («We need to pick…») invece che in JSON.
+// Run 36001495484: 24 risposte rigettate su 24. Run 36010807545: la cascata
+// free e' finita in ALL_MODELS_EXHAUSTED alla selezione, e la run e' morta
+// prima della generazione del corpo, dove Codex era pronto.
+//
+// Quindi: il primo tentativo resta free; un tentativo fallito (risposta
+// rigettata, errore, o cascata free esaurita) passa i successivi a Codex con
+// `prefer`, che riordina senza togliere niente. `engaged` resta acceso per la
+// run, cosi' i batch e i giri successivi non rispendono minuti su una cascata
+// appena vista fallire. Senza Codex disponibile `models` e' vuoto e il
+// comportamento e' quello di prima, ALL_MODELS_EXHAUSTED compreso.
+const HEADLINE_SELECTION_FALLBACK = {
+  models: isModelAvailable(AI_MODELS.CODEX_CLI_PRIMARY) ? [AI_MODELS.CODEX_CLI_PRIMARY] : [],
+  engaged: false,
+};
+
+async function requestHeadlineSelection(basePrompt, candidateCount, label, maxAttempts, fallback = { models: [], engaged: false }) {
   let last = null;
   // I modelli la cui risposta HTTP 200 il protocollo ha RIGETTATO in questa
   // selezione. Per la cascata quella era una chiamata riuscita (+2): nella run
@@ -7815,9 +7839,8 @@ async function requestHeadlineSelection(basePrompt, candidateCount, label, maxAt
   // rimetteva primo, e ogni giro chiudeva con 0 finalisti. Il rigetto conta
   // ora come fallimento di contenuto (recordModelContentFailure: penalita', e
   // al secondo di fila il modello e' escluso per la run) e il tentativo
-  // successivo di QUESTA selezione non torna sullo stesso modello. Nessun CLI
-  // entra qui: la decisione sul `prefer` (vedi PREFERRED_GENERATION_MODELS)
-  // resta quella.
+  // successivo di QUESTA selezione non torna sullo stesso modello. Si somma al
+  // ripiego Codex qui sopra: il rigetto accende anche `fallback.engaged`.
   const rejectedModels = [];
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     // Dopo un INFRA_ERROR non c'e' nessuna risposta da correggere: appendere il
@@ -7826,6 +7849,7 @@ async function requestHeadlineSelection(basePrompt, candidateCount, label, maxAt
     const prompt = (attempt === 1 || last?.rejection === SELECTION_REJECTION.INFRA_ERROR)
       ? basePrompt
       : `${basePrompt}\n\n${selectionCorrectionNote(last?.rejection, candidateCount)}`;
+    const useFallback = fallback.engaged && fallback.models.length > 0;
     let rawText;
     const modelUsedRef = { model: null };
     const callOpts = {
@@ -7835,6 +7859,7 @@ async function requestHeadlineSelection(basePrompt, candidateCount, label, maxAt
       jsonMode: true,
       modelUsedRef,
       ...(rejectedModels.length ? { excludeModels: [...rejectedModels] } : {}),
+      ...(useFallback ? { prefer: fallback.models } : {}),
     };
     try {
       rawText = await callLLM(
@@ -7868,7 +7893,21 @@ async function requestHeadlineSelection(basePrompt, candidateCount, label, maxAt
       // `generator/tests/roster-exhaustion-red.test.mjs` esiste per impedire.
       // Ritentare non servirebbe comunque, perche' sotto hanno gia' fallito
       // tutti i modelli della cascata con i loro retry.
-      if (err?.code === 'ALL_MODELS_EXHAUSTED') throw err;
+      //
+      // Con il ripiego Codex disponibile e non ancora provato, pero', la
+      // cascata esaurita e' solo quella FREE: Codex non ne fa parte finche'
+      // `prefer` non lo mette in testa. Il roster intero e' a terra solo dopo
+      // che anche Codex ha fallito, e allora l'errore risale intatto.
+      if (err?.code === 'ALL_MODELS_EXHAUSTED') {
+        if (useFallback || fallback.models.length === 0 || attempt === maxAttempts) throw err;
+        fallback.engaged = true;
+        last = { rejection: SELECTION_REJECTION.INFRA_ERROR, detail: String(err?.message ?? err) };
+        console.error(
+          `  ⚠️  ${label}: cascata free esaurita — tentativo ${attempt}/${maxAttempts}, il prossimo passa a ${fallback.models.join(', ')}`,
+        );
+        continue;
+      }
+      if (fallback.models.length > 0) fallback.engaged = true;
       last = { rejection: SELECTION_REJECTION.INFRA_ERROR, detail: String(err?.message ?? err) };
       console.error(
         `  ⚠️  ${label}: errore infrastrutturale (${last.detail}) — tentativo ${attempt}/${maxAttempts}`,
@@ -7892,6 +7931,7 @@ async function requestHeadlineSelection(basePrompt, candidateCount, label, maxAt
     // CONTENUTO del modello che l'ha data, non un successo di trasporto.
     recordModelContentFailure(modelUsedRef.model, { recordScore: callOpts.recordScore });
     if (modelUsedRef.model && !rejectedModels.includes(modelUsedRef.model)) rejectedModels.push(modelUsedRef.model);
+    if (fallback.models.length > 0) fallback.engaged = true;
     last = parsed;
     console.error(
       `  ⚠️  ${label}: risposta RIGETTATA (${parsed.rejection}: ${parsed.detail}) — tentativo ${attempt}/${maxAttempts}`,
@@ -7952,6 +7992,7 @@ async function selectArticle(headlines) {
         batch.length,
         `Batch ${batchIdx + 1}`,
         HEADLINE_SELECTION_MAX_ATTEMPTS_BATCH,
+        HEADLINE_SELECTION_FALLBACK,
       );
       if (!picked.ok) {
         // Niente clamp: un batch senza una scelta valida si SALTA. Prendere la
@@ -7981,6 +8022,7 @@ async function selectArticle(headlines) {
     trimmed.length,
     'Selezione finale',
     HEADLINE_SELECTION_MAX_ATTEMPTS_FINAL,
+    HEADLINE_SELECTION_FALLBACK,
   );
   if (!picked.ok) {
     // Qui stava «fallback a indice 0». Ripiegare sulla prima headline pubblica

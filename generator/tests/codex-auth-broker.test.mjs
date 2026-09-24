@@ -548,3 +548,57 @@ process.stdin.on('end', () => {
     fs.rmSync(cliPrefix, { recursive: true, force: true });
   }
 });
+
+test('un errore API stampato come JSON restituisce anche il suo "message"', async () => {
+  const brokerDir = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-broker-apierror-test.'));
+  const cliPrefix = fs.mkdtempSync(path.join(os.tmpdir(), 'claude-haiku-codex-cli.'));
+  const socketPath = path.join(brokerDir, 'auth.sock');
+  const cliPath = path.join(cliPrefix, 'codex');
+  const fakeCli = `#!/usr/bin/env node
+const args = process.argv.slice(2);
+if (args.includes('--version')) { console.log('codex 0.153.4'); process.exit(0); }
+process.stdin.resume();
+process.stdin.on('end', () => {
+  process.stderr.write('ERROR: unexpected status 400 Bad Request: {\\n  "error": {\\n    "message": "Invalid schema for response_format: \\'additionalProperties\\' is required to be supplied and to be false.",\\n    "type": "invalid_request_error",\\n    "param": "text.format.schema",\\n    "code": "invalid_json_schema"\\n  }\\n}\\n');
+  process.exit(1);
+});
+`;
+  fs.writeFileSync(cliPath, fakeCli, { mode: 0o700 });
+  fs.chmodSync(cliPath, 0o700);
+  const cliSha256 = crypto.createHash('sha256').update(fs.readFileSync(cliPath)).digest('hex');
+  const broker = spawn(process.execPath, [
+    BROKER,
+    '--socket', socketPath,
+    '--ttl-ms', '60000',
+    '--max-requests', '1',
+    '--codex-bin', cliPath,
+    '--codex-realpath', cliPath,
+    '--codex-sha256', cliSha256,
+    '--codex-prefix', cliPrefix,
+  ], {
+    cwd: ROOT,
+    stdio: ['pipe', 'ignore', 'pipe'],
+  });
+  let stderr = '';
+  broker.stderr.setEncoding('utf8');
+  broker.stderr.on('data', (chunk) => { stderr += chunk; });
+  broker.stdin.end('{"access_token":"test"}');
+
+  try {
+    await waitForSocket(socketPath, broker);
+    const response = await request(socketPath, { op: 'exec', prompt: 'fail', timeoutMs: 5000 });
+    assert.equal(response.ok, false, stderr);
+    assert.match(response.error, /invalid_request_error/);
+    assert.match(response.error, /additionalProperties' is required to be supplied and to be false/);
+    assert.ok(response.error.length <= 300, response.error);
+
+    const cleaned = await request(socketPath, { op: 'cleanup' });
+    assert.deepEqual(cleaned, { ok: true, cleaned: true });
+    assert.equal(await waitForExit(broker), 0, stderr);
+  } finally {
+    if (broker.exitCode === null) broker.kill('SIGTERM');
+    await waitForExit(broker).catch(() => {});
+    fs.rmSync(brokerDir, { recursive: true, force: true });
+    fs.rmSync(cliPrefix, { recursive: true, force: true });
+  }
+});
