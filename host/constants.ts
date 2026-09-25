@@ -162,13 +162,13 @@ const ADS_CONSENT_STORAGE_KEY = 'frontaliere_ads_consent';
  * Job-board section prefixes and pathname matcher (site source:
  * scripts/lib/jobBoardSections.mjs JOB_BOARD_SECTION_PREFIX_SOURCE and
  * JOB_BOARD_SECTION_PATHNAME_RX). Every canton, the Switzerland aggregator
- * and every locale (optional `/en|/de|/fr`). Read here only by the gate below,
+ * and every locale (optional `/it|/en|/de|/fr`). Read here only by the gate below,
  * which embeds `.source`; the SiteShellContract fingerprint pins the result
  * byte-for-byte against the site.
  */
 const JOB_BOARD_SECTION_PREFIX_SOURCE = 'cerca-lavoro|find-jobs|trouver-emploi|jobs-in|jobs-im';
 const JOB_BOARD_SECTION_PATHNAME_RX =
-  new RegExp(`^(?:/(?:en|de|fr))?/(?:${JOB_BOARD_SECTION_PREFIX_SOURCE})-[a-z][a-z-]*(?:/|$)`);
+  new RegExp(`^(?:/(?:it|en|de|fr))?/(?:${JOB_BOARD_SECTION_PREFIX_SOURCE})-[a-z][a-z-]*(?:/|$)`);
 
 /**
  * Click-only Offerwall gate (site source: build-plugins/constants.ts, where
