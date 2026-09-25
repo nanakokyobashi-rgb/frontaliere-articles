@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1945274/svizzera-aziende-siccita-due-migros-franchi-difficolta": {
-    "articleId": "migros-sostegno-agricoltura",
-    "ts": "2026-08-21T11:53:59.589Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/politica/1945336/costi-pischiatria-svizzera-sanita-mozione": {
     "articleId": "costi-psichiatria-svizzera-2024",
     "ts": "2026-08-21T16:09:28.139Z",
@@ -2497,6 +2492,11 @@
   "https://www.seco.admin.ch/it/newnsb/kviax2aqippd": {
     "articleId": "sanzioni-onu-ordinanze-2026",
     "ts": "2026-09-25T17:20:41.087Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4107565": {
+    "articleId": "francese-autonomia-cantoni",
+    "ts": "2026-09-25T18:17:10.197Z",
     "keyForm": 2
   }
 }
