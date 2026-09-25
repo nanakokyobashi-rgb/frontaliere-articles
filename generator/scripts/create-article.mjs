@@ -62,6 +62,7 @@
 
 import { readFileSync, writeFileSync, mkdirSync, statSync, readdirSync, copyFileSync, existsSync, unlinkSync, renameSync, realpathSync } from 'node:fs';
 import { execSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { createInterface } from 'node:readline';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -6108,9 +6109,10 @@ function normalizeFactCheckIssues(issues, { isEvergreen = false } = {}) {
   });
 }
 
-// (requested model, prompt) → the model that answered it, for resolving the
-// 'cache' that callLLM reports on a response-cache hit. In-process, like the
-// cache it mirrors.
+// sha256(requested model, prompt) → the model that answered it, for resolving
+// the 'cache' that callLLM reports on a response-cache hit. In-process, like
+// the cache it mirrors; keyed by digest so a long run holds 64 characters per
+// entry, not a copy of every fact-check prompt.
 const _factCheckServedBy = new Map();
 
 async function _runSingleFactCheck(model, prompt, opts = {}) {
@@ -6148,7 +6150,7 @@ async function _runSingleFactCheck(model, prompt, opts = {}) {
   // (model, prompt) here. Needed twice: the consensus counts one vote per
   // answering model, and a cached local answer must not slip past the
   // self-verification guard below just because it came back as 'cache'.
-  const servedMemoKey = `${model}\u0000${prompt}`;
+  const servedMemoKey = createHash('sha256').update(`${model}\u0000${prompt}`).digest('hex');
   let servedBy = modelUsedRef.model;
   if (servedBy === 'cache') servedBy = _factCheckServedBy.get(servedMemoKey) || null;
   else if (servedBy) _factCheckServedBy.set(servedMemoKey, servedBy);
@@ -6172,14 +6174,19 @@ async function _runSingleFactCheck(model, prompt, opts = {}) {
 
   // Balanced-object extraction instead of first-`{`-to-last-`}`: prose
   // around the verdict, or a stray brace in it, no longer turns a valid
-  // answer into "JSON non valido". Only an object with a PASS/FAIL verdict
-  // counts: any other JSON is not a vote. When there is still no verdict, the
+  // answer into "JSON non valido". Only a reply with exactly one root-level
+  // PASS/FAIL verdict counts: any other JSON, a nested verdict, or two
+  // verdicts in one reply is not a vote. When there is still no verdict, the
   // log shows what came back and which model actually answered, so the next
   // failure is diagnosable instead of a bare "risposta non JSON".
   const { result, error } = extractFactCheckJson(raw);
   if (!result) {
     const via = servedBy && servedBy !== model ? ` via ${servedBy}` : '';
-    const label = { 'no-json': 'risposta non JSON', 'no-verdict': 'JSON senza verdetto PASS/FAIL' }[error] || 'JSON non valido';
+    const label = {
+      'no-json': 'risposta non JSON',
+      'no-verdict': 'JSON senza verdetto PASS/FAIL',
+      ambiguous: 'più verdetti nella stessa risposta, nessuno scelto',
+    }[error] || 'JSON non valido';
     console.error(`  ⚠️  LLM fact-check (${model}${via}): ${label} — ${factCheckRawSnippet(raw)}`);
     return null;
   }

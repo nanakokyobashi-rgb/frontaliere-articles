@@ -82,20 +82,28 @@ function isFactCheckVerdict(parsed) {
 }
 
 /**
- * Extract the fact-check verdict object from a raw model reply: the first
+ * Extract the fact-check verdict object from a raw model reply: the ONE
  * root-level object that parses and has the verdict shape above.
+ *
+ * Exactly one, not the first (third review of PR #1848): a reply that quotes
+ * the schema or an example `{"verdict":"PASS"}` before its real `FAIL` has two
+ * candidates, and nothing in the text says which is the answer. Picking
+ * either is a guess that can publish an article the checker rejected, so two
+ * or more verdicts make the reply `ambiguous` — no vote, like prose.
  *
  * `no-json`: no brace at all. `invalid-json`: braces, but nothing parses
  * (a brace that never closes included). `no-verdict`: JSON parses, but no
- * root-level object carries a PASS/FAIL verdict.
+ * root-level object carries a PASS/FAIL verdict. `ambiguous`: more than one
+ * does.
  *
  * @param {string} raw
- * @returns {{ result: object|null, error: null|'no-json'|'invalid-json'|'no-verdict' }}
+ * @returns {{ result: object|null, error: null|'no-json'|'invalid-json'|'no-verdict'|'ambiguous' }}
  */
 export function extractFactCheckJson(raw) {
   const text = typeof raw === 'string' ? raw : '';
   let sawSpan = false;
   let sawParsed = false;
+  const verdicts = [];
   for (const span of rootObjectSpans(text)) {
     sawSpan = true;
     let parsed;
@@ -105,8 +113,10 @@ export function extractFactCheckJson(raw) {
       continue;
     }
     sawParsed = true;
-    if (isFactCheckVerdict(parsed)) return { result: parsed, error: null };
+    if (isFactCheckVerdict(parsed)) verdicts.push(parsed);
   }
+  if (verdicts.length === 1) return { result: verdicts[0], error: null };
+  if (verdicts.length > 1) return { result: null, error: 'ambiguous' };
   if (!sawSpan) return { result: null, error: text.includes('{') ? 'invalid-json' : 'no-json' };
   return { result: null, error: sawParsed ? 'no-verdict' : 'invalid-json' };
 }

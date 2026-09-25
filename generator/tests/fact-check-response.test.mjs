@@ -70,6 +70,20 @@ test('JSON without a PASS/FAIL verdict is not a vote', () => {
   assert.deepEqual(extractFactCheckJson('{ "verdict": "PASS|FAIL", "confidence": 0.0, "issues": [] }'), noVerdict);
 });
 
+test('two verdicts in one reply are ambiguous: neither is counted', () => {
+  // Third review of PR #1848: the first valid verdict used to win, so a reply
+  // that quotes an example PASS before its real FAIL passed the article.
+  const example = '{"verdict": "PASS", "confidence": 1, "issues": []}';
+  const real = '{"verdict": "FAIL", "confidence": 0.9, "issues": [{"claim": "x", "severity": "critical"}]}';
+  const ambiguous = { result: null, error: 'ambiguous' };
+  assert.deepEqual(extractFactCheckJson(`Esempio di formato: ${example}\nVerdetto: ${real}`), ambiguous);
+  assert.deepEqual(extractFactCheckJson(`${real}\n${example}`), ambiguous);
+  // Even two identical answers: which issues list is the answer is still a guess.
+  assert.deepEqual(extractFactCheckJson(`${real}\n${real}`), ambiguous);
+  // An invalid example next to one valid verdict leaves one candidate, not two.
+  assert.equal(extractFactCheckJson(`{"verdict": "PASS|FAIL"}\n${real}`).result.verdict, 'FAIL');
+});
+
 test('a verdict nested inside another object is not a top-level verdict', () => {
   // Second review of PR #1848: every balanced span used to be a candidate, so
   // once the outer object failed the check its inner object was accepted.
