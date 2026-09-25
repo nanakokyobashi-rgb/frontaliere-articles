@@ -8,7 +8,9 @@
  * Vitest check on the current HEAD before calling `gh pr merge --auto`. The
  * required check is the complete `tests` job, so its green result is the
  * authority for the review gate's validated LGTM carry-forward when the
- * review commit is older than the current HEAD.
+ * review commit is older than the current HEAD. A Codex fallback LGTM on an
+ * older commit is narrower: the green check alone does not admit it. It needs
+ * the structured carry-forward proof of `codexCarryForwardDecision` (#1870).
  */
 import { execFileSync } from 'node:child_process';
 import { realpathSync } from 'node:fs';
@@ -23,9 +25,16 @@ import {
 } from './lib/constants.mjs';
 import {
   findTestOnlyApproval,
+  normalizeReviewInputRevision,
+  reviewHasInputRevision,
+  reviewInputContextFromPullRequest,
   TEST_REVIEW_MARKER,
 } from './review-test-policy.mjs';
 import {
+  CODEX_REVIEW_STEP_NAME,
+  REVIEW_ABORT_STEP_NAME,
+  REVIEW_CLAIM_STEP_NAME,
+  REVIEW_GUARD_STEP_NAME,
   RUN_SELECTION_STATES,
   latestCompletedRunSelectionByName,
 } from './lib/vitestCheck.mjs';
@@ -123,10 +132,33 @@ function isCodexFallbackReviewOnHead(review, head) {
     && isCodexFallbackReview(review);
 }
 
-/** Select a normal reviewer or the explicitly marked Codex evidence candidate. */
+/**
+ * A Codex fallback verdict on an earlier commit of the PR, typically before an
+ * autorebase merge of `main` (#1870). The `tests.yml` guard carries it forward
+ * without running Codex again, so no newer Codex review will ever appear on
+ * the HEAD. It is a candidate only for `codexCarryForwardDecision`; a review
+ * whose author is also in the reviewer allowlist keeps the allowlist path.
+ */
+function isCodexCarryForwardCandidate(review, head) {
+  return typeof head === 'string'
+    && /^[0-9a-f]{40}$/iu.test(head)
+    && /^[0-9a-f]{40}$/iu.test(String(review?.commit_id || ''))
+    && review.commit_id !== head
+    && !isReviewerBot(review?.user)
+    && isCodexFallbackReview(review);
+}
+
+/**
+ * Select the latest managed verdict: a normal reviewer, or an explicitly
+ * marked Codex fallback on any commit. An older Codex verdict is selected so
+ * that an even older allowlist LGTM cannot overtake it; it is then admitted
+ * only through the carry-forward proof.
+ */
 function latestReviewGateCandidate(reviews, head) {
   return latestReviewMatching(reviews, (review) => isManagedReview(review)
-    && (isReviewerBot(review?.user) || isCodexFallbackReviewOnHead(review, head)));
+    && (isReviewerBot(review?.user)
+      || isCodexFallbackReviewOnHead(review, head)
+      || isCodexCarryForwardCandidate(review, head)));
 }
 
 /** Return the latest reviewer-bot review, regardless of the commit it names. */
@@ -331,8 +363,10 @@ export function reviewGateEvidenceDecision({
   if (typeof head !== 'string' || !/^[0-9a-f]{40}$/iu.test(head)) {
     return deny('HEAD non verificabile per la prova review-gate');
   }
+  const codexCarryForward = isCodexCarryForwardCandidate(review, head);
   if (!isManagedReview(review) || (!isReviewerBot(review?.user)
-      && !isCodexFallbackReviewOnHead(review, head))) {
+      && !isCodexFallbackReviewOnHead(review, head)
+      && !codexCarryForward)) {
     return deny('identità review non autorizzata per la prova review-gate');
   }
   const reviewId = reviewIdKey(review?.id);
@@ -422,13 +456,134 @@ export function reviewGateEvidenceDecision({
     return deny('ordine temporale review-gate non verificabile');
   }
 
-  return {
+  const verified = {
     allow: true,
     reason: `step ${step.name} successivo alla review raw sulla stessa HEAD`,
     runId: workflow.id,
     jobId: job.id,
     checkId: check.id,
     reviewId,
+  };
+  if (!codexCarryForward) return verified;
+  const carry = codexCarryForwardDecision({
+    evidence,
+    repo,
+    head,
+    review,
+    steps: job.steps,
+    gateStartedAt: stepStartedAt,
+    reviewAt,
+  });
+  if (!carry.allow) return deny(`carry-forward Codex non verificato: ${carry.reason}`);
+  return { ...verified, reason: carry.reason, codexCarryForward: true };
+}
+
+/**
+ * The extra proof a Codex fallback LGTM on an earlier commit needs (#1870).
+ *
+ * The caller has already bound the evidence to the latest green `tests` run
+ * of the current HEAD and to a review gate step that started after this
+ * review. That alone does not show that the run carried THIS review: the gate
+ * step picks the latest review for the body revision of its own run, and a
+ * green check says nothing about why Codex did not run again. Every layer
+ * below comes from data the native gate reads itself; no free-form text is
+ * trusted:
+ *
+ *   - the review is a clean `## LGTM` without `🔴 Important`;
+ *   - its only `REVIEW_INPUT_REVISION` marker is the digest of the CURRENT PR
+ *     body, and that body was last edited before the review gate step started,
+ *     so it is also the revision the run verified (the gate re-reads the body
+ *     and fails on a mismatch);
+ *   - the `Re-review guard` succeeded after the review existed, and its skip
+ *     is visible in the Jobs API: the claim step is `skipped` only when the
+ *     guard wrote `skip=true`, and the Codex and abort steps did not run;
+ *   - the reviewed commit itself has a green `tests` check completed after the
+ *     review, the durable proof the guard and the review gate also require.
+ *
+ * The contribution fingerprint is computed by the trusted `tests.yml` guard and
+ * review gate; the proof above shows that both accepted this review on this
+ * HEAD. Anything missing, ambiguous or out of order is a deny.
+ */
+function codexCarryForwardDecision({
+  evidence,
+  repo,
+  head,
+  review,
+  steps,
+  gateStartedAt,
+  reviewAt,
+} = {}) {
+  const deny = (reason) => ({ allow: false, reason });
+  if (!reviewHasZeroFindings(review.body) || !reviewHasLgtm(review.body)) {
+    return deny('la review non è una LGTM senza 🔴 Important');
+  }
+
+  const input = evidence.pullRequest;
+  const currentRevision = normalizeReviewInputRevision(input?.reviewRevision);
+  if (!input || typeof input !== 'object'
+      || String(input.headSha || '').toLowerCase() !== head.toLowerCase()
+      || !currentRevision) {
+    return deny('revisione del body PR corrente non verificabile');
+  }
+  if (!reviewHasInputRevision(review.body, currentRevision)) {
+    return deny('REVIEW_INPUT_REVISION della review diversa dal body PR corrente');
+  }
+  if (!Object.hasOwn(input, 'lastEditedAt')) {
+    return deny('ultima modifica del body PR non verificabile');
+  }
+  if (input.lastEditedAt !== null) {
+    const editedAt = validTimestamp(input.lastEditedAt);
+    if (editedAt === null || !(editedAt < gateStartedAt)) {
+      return deny('body PR modificato dopo l’inizio del review gate');
+    }
+  }
+
+  const single = (name) => {
+    const matches = steps.filter((step) => step?.name === name);
+    return matches.length === 1 ? matches[0] : null;
+  };
+  const guard = single(REVIEW_GUARD_STEP_NAME);
+  const skippedSteps = [REVIEW_CLAIM_STEP_NAME, CODEX_REVIEW_STEP_NAME, REVIEW_ABORT_STEP_NAME]
+    .map(single);
+  if (!guard || skippedSteps.some((step) => !step)) {
+    return deny('step del re-review guard assenti o ambigui');
+  }
+  const guardStartedAt = validTimestamp(guard.started_at);
+  const guardCompletedAt = validTimestamp(guard.completed_at);
+  if (guard.status !== 'completed'
+      || guard.conclusion !== 'success'
+      || guardStartedAt === null
+      || guardCompletedAt === null
+      || !(reviewAt <= guardStartedAt
+        && guardStartedAt <= guardCompletedAt
+        && guardCompletedAt <= gateStartedAt)) {
+    return deny('re-review guard non riuscito dopo la review e prima del review gate');
+  }
+  const ran = skippedSteps.find((step) => step.status !== 'completed' || step.conclusion !== 'skipped');
+  if (ran) {
+    return deny(`lo step «${ran.name}» non è skipped: il guard non ha saltato Codex`);
+  }
+
+  const reviewedAt = reviewTimestamp(review);
+  const reviewedCommitAccepted = reviewedAt !== null
+    && Array.isArray(evidence.reviewedCommitChecks)
+    && evidence.reviewedCommitChecks.some((check) => {
+      const completedAt = validTimestamp(check?.completed_at);
+      return check?.name === VITEST_CHECK_NAME
+        && check.head_sha === review.commit_id
+        && check.status === 'completed'
+        && check.conclusion === 'success'
+        && parseActionsJobUrl(check.details_url, repo) !== null
+        && completedAt !== null
+        && completedAt >= reviewedAt;
+    });
+  if (!reviewedCommitAccepted) {
+    return deny(`nessun ${VITEST_CHECK_NAME} verde sul commit della review dopo la review`);
+  }
+
+  return {
+    allow: true,
+    reason: `LGTM carry-forward Codex da ${review.commit_id.slice(0, 12)}: guard senza Codex e review gate verde sulla stessa revisione body`,
   };
 }
 
@@ -458,6 +613,8 @@ export function evaluateNativeAutoMerge({
   // applies the repository's fingerprint-based carry-forward policy, so the
   // native helper must not reject a valid older LGTM merely because the PR
   // received a data-only or otherwise review-preserving commit afterward.
+  // A Codex fallback LGTM gets the same outcome only with the structured
+  // carry-forward proof checked by `codexCarryForwardDecision` (#1870).
   const review = latestReviewGateCandidate(reviews, pr.headRefOid);
   const testOnlyApproval = !review
     && testOnlyReviewIsApproved(verifiedTestOnlyReview, pr.headRefOid);
@@ -473,6 +630,12 @@ export function evaluateNativeAutoMerge({
     })
     : { allow: false, reason: 'review raw già approvante' };
   if (review && !reviewIsApproved(review) && !reviewGateException.allow) {
+    if (isCodexCarryForwardCandidate(review, pr.headRefOid)) {
+      return {
+        allow: false,
+        reason: `review Codex su ${String(review.commit_id).slice(0, 12)} non riportabile sulla HEAD — ${reviewGateException.reason}`,
+      };
+    }
     return { allow: false, reason: 'review bot sulla HEAD non è LGTM senza 🔴 Important' };
   }
 
@@ -487,6 +650,8 @@ export function evaluateNativeAutoMerge({
   const approval = review || verifiedTestOnlyReview;
   const reviewScope = testOnlyApproval
     ? 'tests-only review verificata sul current HEAD'
+    : reviewGateException.codexCarryForward
+    ? reviewGateException.reason
     : reviewGateException.allow
     ? 'review-gate outside-diff verificato sulla stessa HEAD'
     : review.commit_id === pr.headRefOid
@@ -663,15 +828,60 @@ function loadReviews(repo, pr) {
   });
 }
 
-function loadCheckRuns(repo, head) {
+/**
+ * `filter=all` keeps every attempt: GitHub's default `latest` view hides a
+ * green attempt once the same check is rerun, and the reviewed-commit proof of
+ * the Codex carry-forward needs that durable history (same reading as
+ * `codexReviewWasPreviouslyAccepted` in review-gate.mjs).
+ */
+function loadCheckRuns(repo, sha, { allAttempts = false } = {}) {
+  const query = allAttempts ? 'per_page=100&filter=all' : 'per_page=100';
   const pages = ghReadJson([
-    'api', `repos/${repo}/commits/${head}/check-runs?per_page=100`, '--paginate', '--slurp',
+    'api', `repos/${repo}/commits/${sha}/check-runs?${query}`, '--paginate', '--slurp',
   ]);
   return (Array.isArray(pages) ? pages : [pages])
     .flatMap((page) => Array.isArray(page?.check_runs) ? page.check_runs : []);
 }
 
-function loadReviewGateEvidence(repo, head, checkRuns, review) {
+const PR_LAST_EDITED_QUERY =
+  'query($owner:String!,$name:String!,$number:Int!){repository(owner:$owner,name:$name){pullRequest(number:$number){lastEditedAt}}}';
+
+/**
+ * Inputs only the Codex carry-forward needs (#1870). The REST body is read
+ * BEFORE `lastEditedAt`: an edit landing between the two reads then shows up
+ * as a late `lastEditedAt` and is denied, instead of pairing an old body with
+ * an old edit time. The body digest is the one `tests.yml` and
+ * `review-gate.mjs` compute (`reviewInputContextFromPullRequest`).
+ */
+function loadCodexCarryForwardInputs(repo, prNumber, review) {
+  const context = reviewInputContextFromPullRequest(ghReadJson([
+    'api', `repos/${repo}/pulls/${prNumber}`,
+  ]));
+  const [owner, name] = String(repo).split('/');
+  const response = ghReadJson([
+    'api', 'graphql',
+    '-f', `query=${PR_LAST_EDITED_QUERY}`,
+    '-F', `owner=${owner}`,
+    '-F', `name=${name}`,
+    '-F', `number=${prNumber}`,
+  ]);
+  if (Array.isArray(response?.errors) && response.errors.length > 0) {
+    throw new Error(response.errors.map((error) => error.message || String(error)).join('; '));
+  }
+  const pullRequest = response?.data?.repository?.pullRequest;
+  const pullRequestInput = context
+    ? { headSha: context.headSha, reviewRevision: context.reviewRevision }
+    : null;
+  if (pullRequestInput && pullRequest && Object.hasOwn(pullRequest, 'lastEditedAt')) {
+    pullRequestInput.lastEditedAt = pullRequest.lastEditedAt;
+  }
+  return {
+    pullRequest: pullRequestInput,
+    reviewedCommitChecks: loadCheckRuns(repo, review.commit_id, { allAttempts: true }),
+  };
+}
+
+function loadReviewGateEvidence(repo, prNumber, head, checkRuns, review) {
   if (!review || reviewIsApproved(review)) return null;
   const checkDecision = requiredVitestDecision(checkRuns, head);
   if (!checkDecision.allow) return null;
@@ -684,12 +894,14 @@ function loadReviewGateEvidence(repo, head, checkRuns, review) {
   const job = ghReadJson([
     'api', `repos/${repo}/actions/jobs/${location.jobId}`,
   ]);
-  return {
+  const evidence = {
     reviewId: reviewIdKey(review.id),
     check,
     workflow,
     job,
   };
+  if (!isCodexCarryForwardCandidate(review, head)) return evidence;
+  return { ...evidence, ...loadCodexCarryForwardInputs(repo, prNumber, review) };
 }
 
 const DISABLE_AUTO_MERGE_MUTATION =
@@ -793,6 +1005,7 @@ function main() {
     verifiedTestOnlyReview = loadVerifiedTestOnlyReview(repo, prNumber, pr.headRefOid, reviews);
     reviewGateEvidence = loadReviewGateEvidence(
       repo,
+      prNumber,
       pr.headRefOid,
       checkRuns,
       latestReviewGateCandidate(reviews, pr.headRefOid),
@@ -862,6 +1075,7 @@ function main() {
     );
     finalReviewGateEvidence = loadReviewGateEvidence(
       repo,
+      prNumber,
       current.headRefOid,
       finalCheckRuns,
       latestReviewGateCandidate(finalReviews, current.headRefOid),

@@ -1242,13 +1242,20 @@ async function fillLocaleGaps(byLocale, cache, { eventId, fieldType, locales, de
   const normalizedSource = normalizeText(sourceText).replace(/\s+/g, ' ');
   const updated = { ...clean };
   const cacheKey = eventTranslationCacheKey({ fieldType, sourceLocale, normalizedSource });
-  const negativeCacheKey = eventTranslationNegativeCacheKey({
+  // La fingerprint della cascata puo' cambiare DENTRO questo loop: la lane
+  // Codex si ferma quando esaurisce il budget o dopo tre fallimenti, e da li'
+  // vale `codex: false`. La chiave si legge all'inizio per il lookup e si
+  // ricalcola a ogni scrittura: un passthrough ottenuto a lane ferma va sotto
+  // la chiave della lane ferma, altrimenti la run dopo (budget pieno) lo
+  // troverebbe sotto la propria chiave e non ritenterebbe.
+  const negativeKeyNow = async () => eventTranslationNegativeCacheKey({
     eventId,
     fieldType,
     sourceLocale,
     normalizedSource,
-    cascadeConfigurationKey: getTranslationCascadeConfigurationKey(),
+    cascadeConfigurationKey: await getTranslationCascadeConfigurationKey(),
   });
+  const negativeCacheKey = await negativeKeyNow();
   const sharedEntry = cache[cacheKey] || {};
   const negativeEntry = negativeCacheKey ? (cache[negativeCacheKey] || {}) : {};
   for (const target of needing) {
@@ -1287,9 +1294,11 @@ async function fillLocaleGaps(byLocale, cache, { eventId, fieldType, locales, de
     ) {
       // Keep the negative memo as null: writing sourceText into a missing target
       // locale would publish Italian under the requested locale.
-      if (negativeCacheKey) {
-        negativeEntry[target] = null;
-        cache[negativeCacheKey] = negativeEntry;
+      const writeKey = await negativeKeyNow();
+      if (writeKey) {
+        const writeEntry = writeKey === negativeCacheKey ? negativeEntry : (cache[writeKey] || {});
+        writeEntry[target] = null;
+        cache[writeKey] = writeEntry;
       }
     }
   }
