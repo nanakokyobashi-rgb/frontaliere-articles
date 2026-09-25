@@ -1031,10 +1031,26 @@ jobs:
               context_fail "Selezione della review corrente non verificabile: il redflag fixer resta fail-closed senza Claude."
             fi
           }
+          # La STESSA funzione serve la rilettura dello step `precodex`, subito
+          # prima di Codex: la si serializza invece di riscriverla (AGENTS.md
+          # #6). Fra questo step e il precodex gira codice del checkout della
+          # PR (il probe quota), quindi l'hash della funzione e quello della
+          # selezione escono come output dello step, che nessuno step
+          # successivo puo' riscrivere: il precodex non carica una funzione e
+          # non confronta una selezione diverse da quelle prodotte qui.
+          if ! declare -f select_current_review > "$OUT/select-current-review.sh" \
+            || ! review_selector_sha=$(sha256sum "$OUT/select-current-review.sh" | awk '{print $1}') \
+            || ! printf '%s' "$review_selector_sha" | grep -qE '^[a-f0-9]{64}$'; then
+            context_fail "Selezione della review non serializzabile per la rilettura pre-Codex: il redflag fixer resta fail-closed senza Claude."
+          fi
           select_current_review "$OUT/review-selection.json"
           select_current_review "$OUT/review-selection-reread.json"
           if ! cmp -s "$OUT/review-selection.json" "$OUT/review-selection-reread.json"; then
             context_fail "La review selezionata è cambiata fra due letture consecutive (dismissal o review concorrente): il redflag fixer resta fail-closed senza Claude."
+          fi
+          if ! review_selection_sha=$(sha256sum "$OUT/review-selection.json" | awk '{print $1}') \
+            || ! printf '%s' "$review_selection_sha" | grep -qE '^[a-f0-9]{64}$'; then
+            context_fail "Hash della review selezionata non calcolabile: il redflag fixer resta fail-closed senza Claude."
           fi
           if ! jq -r '.body // empty' "$OUT/review-selection.json" > "$OUT/latest-review.md" 2>/dev/null; then
             context_fail "Selezione della review corrente non verificabile: il redflag fixer resta fail-closed senza Claude."
@@ -1058,6 +1074,8 @@ jobs:
           {
             echo "review_revision=$review_revision"
             echo "head_sha=$current_head_sha"
+            echo "review_selector_sha256=$review_selector_sha"
+            echo "review_selection_sha256=$review_selection_sha"
             echo "context_verified=true"
           } >> "$GITHUB_OUTPUT"
           echo "Prefetched redflag context in $OUT:"
@@ -1086,9 +1104,10 @@ jobs:
           CODEX_FALLBACK_MODE: '1'
         run: node scripts/ci/check-quota-backoff.mjs
 
-      # Il body e la HEAD possono cambiare fra la prefetch e l'avvio della
-      # action Claude. Rifare il read/hash nell'ultimo step prima di consumare
-      # quota Claude evita di applicare un finding a un contesto ormai stantio;
+      # Il body, la HEAD e la review corrente possono cambiare fra la prefetch
+      # e l'avvio della action Claude. Rifare il read/hash nell'ultimo step
+      # prima di consumare quota Claude evita di applicare un finding a un
+      # contesto ormai stantio (anche una review ritirata o sostituita, #1762);
       # il mismatch resta fail-closed e impedisce Codex. Lo step e' tollerato
       # a livello job cosi' il classificatore puo' distinguere una race
       # SUPERSEDED provata dall'avanzamento remoto da un errore locale.
@@ -1103,6 +1122,8 @@ jobs:
           EVENT_HEAD_SHA: ${{ needs.preflight.outputs.head_sha }}
           EXPECTED_HEAD_SHA: ${{ steps.ctx.outputs.head_sha }}
           EXPECTED_BODY_REVISION: ${{ steps.ctx.outputs.review_revision }}
+          EXPECTED_REVIEW_SELECTOR_SHA256: ${{ steps.ctx.outputs.review_selector_sha256 }}
+          EXPECTED_REVIEW_SELECTION_SHA256: ${{ steps.ctx.outputs.review_selection_sha256 }}
           EXPECTED_MARKER_BODY_REVISION: ${{ steps.guard.outputs.marker_body_revision }}
           EXPECTED_MARKER: REDFLAG_FIX_ROUND
           EXPECTED_ROUND: ${{ steps.guard.outputs.round }}
@@ -1159,8 +1180,35 @@ jobs:
           if [ "$current_revision" != "$EXPECTED_BODY_REVISION" ]; then
             context_fail "Il body della PR è cambiato fra prefetch e Claude: nessun fix automatico viene avviato."
           fi
+
+          # Rilettura delle review subito prima di Codex (#1762). Lo step ctx
+          # ha confrontato due letture consecutive, ma fra quel confronto e
+          # questo punto una review puo' ancora essere ritirata (DISMISSED) o
+          # sostituita: Codex lavorerebbe su un verdetto che non e' piu' quello
+          # corrente. Stessa funzione di selezione del ctx, caricata solo se il
+          # suo hash e' quello dichiarato dal ctx; stessa HEAD e revisione body
+          # appena verificate. Una selezione diversa da quella del bundle e' un
+          # contesto stantio: fail-closed, nessun Codex.
+          review_selector="$OUT/select-current-review.sh"
+          if [ -z "$EXPECTED_REVIEW_SELECTOR_SHA256" ] || [ -z "$EXPECTED_REVIEW_SELECTION_SHA256" ] \
+            || [ ! -s "$review_selector" ] \
+            || ! review_selector_sha=$(sha256sum "$review_selector" | awk '{print $1}') \
+            || [ "$review_selector_sha" != "$EXPECTED_REVIEW_SELECTOR_SHA256" ]; then
+            context_fail "Selezione della review del contesto non verificabile prima di Claude: il redflag fixer resta fail-closed."
+          fi
+          # shellcheck source=/dev/null
+          . "$review_selector"
+          # shellcheck disable=SC2034 # letti dalla funzione caricata qui sopra.
+          HEAD_SHA="$EXPECTED_HEAD_SHA"
+          # shellcheck disable=SC2034
+          review_revision="$EXPECTED_BODY_REVISION"
+          select_current_review "$OUT/review-selection-before-claude.json"
+          if ! review_selection_sha=$(sha256sum "$OUT/review-selection-before-claude.json" | awk '{print $1}') \
+            || [ "$review_selection_sha" != "$EXPECTED_REVIEW_SELECTION_SHA256" ]; then
+            context_fail "La review selezionata è cambiata fra prefetch e Claude (dismissal o review concorrente): nessun fix automatico viene avviato."
+          fi
           echo "verified=true" >> "$GITHUB_OUTPUT"
-          echo "Contesto PR/review ancora identico alla prefetch (HEAD + body revision): Codex autorizzato."
+          echo "Contesto PR/review ancora identico alla prefetch (HEAD + body revision + review selezionata): Codex autorizzato."
 
       - name: Run Codex Luna Max 🔴-fix
         id: codex_review
