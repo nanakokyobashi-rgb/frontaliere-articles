@@ -3728,7 +3728,7 @@
       "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, misura l'eta' del detentore dal job attivo (`jobs.started_at`) invece che dalla coda del workflow e quella di un rerun pending dall'attempt corrente (`run_started_at`, fail-closed se illeggibile o anteriore a `created_at`) invece che dalla prima creazione, rifiuta fail-closed (`future_timestamp`) ogni istante di misura oltre la tolleranza di skew `MAX_CLOCK_SKEW_SECONDS` invece di azzerarne l'eta', dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
       "baseline": {
         "site": null,
-        "corpus": "91e80c2ebad4e5d8",
+        "corpus": "659e15df6072e027",
         "alignedAt": "2026-09-25"
       }
     },
