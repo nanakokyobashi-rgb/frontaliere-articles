@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1945205/svizzera-alimentazione-neutralita-testa-votazioni-vista": {
-    "articleId": "votazioni-settembre-neutralita-alimentazione",
-    "ts": "2026-08-21T06:53:46.773Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/banca-cantonale-grigione%3a-utile-semestrale-record-di-137%2c2-milioni/91932297": {
     "articleId": "bcg-utile-semestrale-record",
     "ts": "2026-08-21T07:14:22.956Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1952448/allianz-svizzera-studio-rischi-prevenzione": {
     "articleId": "canicola-danni-economici-2026",
     "ts": "2026-09-25T06:41:56.848Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/zx9onk8tui-z": {
+    "articleId": "nuova-legge-cibersicurezza-lcib",
+    "ts": "2026-09-25T09:35:24.015Z",
     "keyForm": 2
   }
 }
