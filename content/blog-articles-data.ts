@@ -1285,6 +1285,7 @@ const RAW_ARTICLES = [
  id: 'prelievo-secondo-pilastro-frontaliere',
  category: 'pensione',
  date: '2026-02-25T13:11:38.175Z',
+ updatedAt: '2026-09-25',
  image: '/images/blog/prelievo-secondo-pilastro-frontaliere.webp',
  hasCalculator: true,
  authorSlug: 'marco-ferrari',
