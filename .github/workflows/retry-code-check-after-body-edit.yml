@@ -120,7 +120,10 @@ jobs:
                   if (!isRateLimitError(error) || attempt >= rateLimitRetries) throw error;
                   const delay = retryDelay(error, attempt);
                   if (Date.now() + delay > deadline) {
-                    throw new Error(`GitHub API rate limit while ${label}; retry window exhausted`, { cause: error });
+                    const exhausted = new Error(`GitHub API rate limit while ${label}; retry window exhausted`, { cause: error });
+                    exhausted.status = error?.status ?? error?.response?.status;
+                    exhausted.response = error?.response;
+                    throw exhausted;
                   }
                   core.warning(`GitHub API rate limit while ${label}; retrying in ${delay}ms (${attempt + 1}/${rateLimitRetries}).`);
                   await sleep(delay);
