@@ -1224,6 +1224,12 @@ runs:
         # write surface; when that sink closes or rate-limits during watchdog
         # termination, `pipefail` misreports its failure as a diagnostics-file
         # write failure. The file below is the canonical classifier input.
+        # The stderr tee is a process substitution, not a pipeline stage, so
+        # the shell does not wait for it directly. Its stdout must stay the
+        # pipe into the diagnostics tee: that tee only reaches EOF once the
+        # stderr tee has exited, so `$codex_stderr` is complete before the
+        # auth grep below. Redirecting it elsewhere (e.g. `>&2`) would let the
+        # grep race the flush (codex-exec-watchdog-auth.test.mjs, auth-late).
         printf '%s' "$prompt" | env -i "${codex_env[@]}" "$codex_timeout_bin" \
           --signal=TERM \
           --kill-after="${codex_exec_kill_grace_seconds}s" \

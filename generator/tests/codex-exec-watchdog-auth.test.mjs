@@ -67,6 +67,7 @@ case "$FAKE_MODE" in
   auth) echo 'ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was already used' >&2; exit 1 ;;
   auth-in-answer) echo '{"type":"item.completed","item":{"type":"agent_message","text":"401 Unauthorized: Failed to refresh token"}}'; exit 1 ;;
   auth-warning-ok) echo 'WARN codex_login: Failed to refresh token, retrying' >&2; echo '{"type":"turn.completed"}'; exit 0 ;;
+  auth-late) ( sleep 1; echo 'ERROR codex_login::auth::manager: Failed to refresh token: refresh token was already used' >&2 ) >/dev/null & exit 1 ;;
   hang) echo '{"type":"thread.started"}'; exec sleep 30 ;;
 esac
 `;
@@ -160,6 +161,17 @@ test('classificatore auth: solo stderr di Codex con uscita non-zero', () => {
   assert.equal(runPipeline('auth-in-answer').auth, 'false', 'il testo della risposta non e\' un errore di auth');
   assert.equal(runPipeline('auth-warning-ok').auth, 'false', 'un run riuscito non e\' bloccato');
   assert.equal(runPipeline('fail').auth, 'false');
+});
+
+test('classificatore auth: legge lo stderr solo dopo che il suo tee ha finito', () => {
+  // Codex esce subito, ma un figlio che tiene aperto lo stderr scrive la riga
+  // di auth un secondo dopo. Il tee dello stderr in process substitution non e'
+  // uno stadio della pipeline: la attende solo perche' il suo stdout e' la pipe
+  // verso il tee del diagnostics. Se quello stdout venisse rediretto altrove,
+  // il grep leggerebbe il file prima del flush e l'alert auth salterebbe.
+  const late = runPipeline('auth-late');
+  assert.equal(late.auth, 'true', late.stdout);
+  assert.match(late.stream, /refresh token was already used/u);
 });
 
 // ---------------------------------------------------------------------------
