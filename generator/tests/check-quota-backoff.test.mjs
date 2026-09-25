@@ -11,6 +11,7 @@ import {
   quotaLeaseDecision,
   reviewQuotaDeferredBody,
   parseReviewQuotaDeferredMarker,
+  runQuotaGitHubCommand,
 } from '../../scripts/ci/check-quota-backoff.mjs';
 import { quotaPromotionDecision } from '../../scripts/ci/followup-drainer.mjs';
 
@@ -401,6 +402,43 @@ test('#8365: il percorso CLI del lease è fail-closed e non altera il manifest',
   assert.match(src, /lease-api-or-parse-error/);
   assert.match(src, /api', '--paginate', '--slurp/);
   assert.doesNotMatch(src, /dist\/api\/manifest\.json.*write|write.*dist\/api\/manifest\.json/s);
+});
+
+test('#1881: il gate quota ritenta un 403 primario del bucket REST', () => {
+  const calls = [];
+  const sleeps = [];
+  let limited = true;
+  const rateLimit = Object.assign(new Error('Command failed: gh'), {
+    stderr: 'gh: API rate limit exceeded for installation (HTTP 403)',
+  });
+  const result = runQuotaGitHubCommand(['api', 'repos/example/repo/issues/12/comments'], {
+    context: 'test quota lease',
+    now: () => Date.parse('2026-09-25T07:00:00Z'),
+    sleep: (ms) => sleeps.push(ms),
+    random: () => 0,
+    jitterMaxMs: 0,
+    budget: { waits: 1 },
+    log: () => {},
+    exec: (_bin, args) => {
+      calls.push(args.join(' '));
+      if (args[0] === 'api' && args[1] === 'rate_limit') {
+        return JSON.stringify({ resources: { core: { remaining: 0, reset: 1_790_319_660 } } });
+      }
+      if (limited) {
+        limited = false;
+        throw rateLimit;
+      }
+      return '[{"id":12}]';
+    },
+  });
+
+  assert.equal(result, '[{"id":12}]');
+  assert.deepEqual(calls, [
+    'api repos/example/repo/issues/12/comments',
+    'api rate_limit',
+    'api repos/example/repo/issues/12/comments',
+  ]);
+  assert.deepEqual(sleeps, [60_000]);
 });
 
 test('#8365: una contesa dopo la rilettura lascia il marker per il rescuer PR', () => {

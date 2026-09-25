@@ -60,12 +60,12 @@
  *   GITHUB_OUTPUT             file di output dello step Actions.
  */
 
-import { execFileSync } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { isBackoffActive, maxQuotaResetsAt } from './claude-rate-limit.mjs';
+import { ghWithRateLimitRetry } from './lib/gh-rate-limit.mjs';
 
 const DRY_RUN = process.env.DRY_RUN === '1';
 const CODEX_FALLBACK_MODE = process.env.CODEX_FALLBACK_MODE === '1';
@@ -514,8 +514,22 @@ function writeLeaseOutputs(result, { writeOutput = true } = {}) {
   return { ...result, ...fields };
 }
 
+/**
+ * Tutte le chiamate GitHub del gate condividono il retry bounded del bucket REST.
+ * Il lease resta fail-closed se il reset è lontano o il retry fallisce, ma un
+ * 403 primario transitorio non deve diventare un falso "lease unavailable".
+ * `options` è iniettabile per il test offline del confine col helper condiviso.
+ */
+export function runQuotaGitHubCommand(args, options = {}) {
+  const context = options.context || `quota GitHub: gh ${args.slice(0, 2).join(' ')}`;
+  const { context: _ignoredContext, ...retryOptions } = options;
+  return ghWithRateLimitRetry(args, { ...retryOptions, context });
+}
+
 function leaseGh(args) {
-  return execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
+  return runQuotaGitHubCommand(args, {
+    context: `quota lease: gh ${args.slice(0, 2).join(' ')}`,
+  });
 }
 
 function leaseJson(args, label) {
@@ -892,7 +906,9 @@ const PEER_REPO = process.env.QUOTA_BEACON_PEER_REPO || '';
 
 function gh(args, { allowFail = true } = {}) {
   try {
-    return execFileSync('gh', args, { encoding: 'utf-8', maxBuffer: 64 * 1024 * 1024 });
+    return runQuotaGitHubCommand(args, {
+      context: `quota beacon: gh ${args.slice(0, 2).join(' ')}`,
+    });
   } catch (e) {
     if (allowFail) return '';
     throw e;
