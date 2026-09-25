@@ -158,6 +158,7 @@ export const CONTENT_GATES = [
   'generator/tests/evergreen-naspi-frontaliere-italia-requisiti-refresh.test.mjs',
   'generator/tests/evergreen-ristorni-fiscali-ticino-refresh.test.mjs',
   'generator/tests/evergreen-simulazione-fiscale-frontaliere-2026-refresh.test.mjs',
+  'generator/tests/evergreen-smart-working-frontalieri-2026-refresh.test.mjs',
   'generator/tests/evergreen-tassa-salute-tensioni-ticino-refresh.test.mjs',
   'generator/tests/evergreen-tassazione-individuale-refresh.test.mjs',
   'generator/tests/evergreen-tassazione-individuale-voto-refresh.test.mjs',

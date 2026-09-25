@@ -683,11 +683,12 @@
     {
       "path": ".github/workflows/tests.yml",
       "mode": "adapted",
-      "reason": "Un solo check obbligatorio per codice, test e review in entrambi i repo; gli edit del body sono gestiti dal recupero selettivo esterno. Il sito usa Vitest e un contratto API prima del checkout; il corpus usa node:test e i propri validatori modulari del body dopo il checkout. Il corpus conserva il gate generator-ci path-scoped, le esclusioni draft/engine-lockstep-auto e la review senza proxy Headroom. RICONCILIATO 2026-09-22 (#9443): baseline riattestata dopo la convergenza sui ref canonici; i due digest registrano le revisioni correnti dei lati adattati, non una falsa identità byte-a-byte.",
+      "reason": "Un solo check obbligatorio per codice, test e review in entrambi i repo; gli edit del body sono gestiti dal recupero selettivo esterno. Il sito usa Vitest e un contratto API prima del checkout; il corpus usa node:test e i propri validatori modulari del body dopo il checkout. Il corpus conserva il gate generator-ci path-scoped, le esclusioni draft/engine-lockstep-auto e la review senza proxy Headroom. RICONCILIATO 2026-09-25: dopo la riconciliazione #9443 il sito ha cambiato il file solo in valerielinc-ops/frontaliere-si-o-no#9715 (prompt di review postato con --body-file), portato nel corpus da #1773; baseline riregistrata con --force. I due digest registrano le revisioni correnti dei lati adattati, non una falsa identità byte-a-byte.",
       "baseline": {
-        "site": "65b6d8e17bdcdf99",
-        "corpus": "e518821ae9d725f7",
-        "alignedAt": "2026-09-22"
+        "site": "898810d03711dfd2",
+        "corpus": "848e36e29f7c83c5",
+        "alignedAt": "2026-09-25",
+        "forcedAt": "2026-09-25T05:32:09.362Z"
       }
     },
     {
