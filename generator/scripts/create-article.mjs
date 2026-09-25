@@ -2160,6 +2160,10 @@ function addDuplicateReason(key) {
   RUN_REPORT.duplicateReasonBreakdown[k] = (RUN_REPORT.duplicateReasonBreakdown[k] || 0) + 1;
 }
 
+// The value of the "Segnali:" field, on its own line: `\s*` would cross the
+// newline of an empty field and read the "Dettaglio:" line as the signals.
+const DUPLICATE_SIGNALS_RE = /Segnali:[^\S\n]*([^\n]*\S)/;
+
 function captureDuplicateReasons(errorMessage = '') {
   const msg = String(errorMessage || '');
   if (!msg.includes('DUPLICATO')) return;
@@ -2167,7 +2171,7 @@ function captureDuplicateReasons(errorMessage = '') {
   if (msg.includes('L\'ID "') && msg.includes('esiste già')) addDuplicateReason('id_exists');
   if (msg.includes('Lo slug "') && msg.includes('esiste già')) addDuplicateReason('slug_exists');
 
-  const signalLine = msg.match(/Segnali:\s*(.+)/);
+  const signalLine = msg.match(DUPLICATE_SIGNALS_RE);
   const cosineLine = msg.match(/Cosine:\s*([\d.]+)\s*≥/);
   if (signalLine?.[1]) {
     addDuplicateReason('multi_signal');
@@ -2180,15 +2184,16 @@ function captureDuplicateReasons(errorMessage = '') {
       else if (p.startsWith('entità+combinato:')) addDuplicateReason('signal_entity');
       else addDuplicateReason('signal_other');
     }
-  } else if (cosineLine?.[1]) {
+  }
+  if (cosineLine?.[1]) {
     // checkSemanticNearDuplicate() rejection (#3138 follow-up) — previously
     // fell into the generic 'other' bucket because this branch only
     // recognized the lexical checkForDuplicates() "Segnali:" format, making
-    // semantic rejections invisible in the run's own summary.
+    // semantic rejections invisible in the run's own summary. An error that
+    // carries both fields counts in both buckets instead of hiding one.
     addDuplicateReason('semantic_cosine');
-  } else {
-    addDuplicateReason('other');
   }
+  if (!signalLine?.[1] && !cosineLine?.[1]) addDuplicateReason('other');
 }
 
 // Short, log-friendly reason tag for a DUPLICATO error, so the retry/
@@ -2198,10 +2203,12 @@ function captureDuplicateReasons(errorMessage = '') {
 // logs (#3138 follow-up).
 function duplicateReasonTag(errorMessage = '') {
   const msg = String(errorMessage || '');
+  const tags = [];
   const cosineLine = msg.match(/Cosine:\s*([\d.]+)\s*≥\s*([\d.]+)/);
-  if (cosineLine) return `semantico, cosine=${cosineLine[1]} ≥ ${cosineLine[2]}`;
-  const signalLine = msg.match(/Segnali:\s*(.+)/);
-  if (signalLine?.[1]) return `lessicale (${signalLine[1].trim()})`;
+  if (cosineLine) tags.push(`semantico, cosine=${cosineLine[1]} ≥ ${cosineLine[2]}`);
+  const signalLine = msg.match(DUPLICATE_SIGNALS_RE);
+  if (signalLine?.[1]) tags.push(`lessicale (${signalLine[1].trim()})`);
+  if (tags.length > 0) return tags.join('; ');
   if (msg.includes('esiste già')) return 'id/slug già esistente';
   return 'motivo non riconosciuto';
 }
@@ -2210,12 +2217,14 @@ function duplicateReasonTag(errorMessage = '') {
 // rejection logs are self-contained and auditable without extra tooling. Both
 // shapes: the semantic gate writes `Esistente: [slug]`, checkForDuplicates
 // writes `Esistente: "title" [slug]` — the old pattern only knew the first,
-// so every lexical rejection logged "vicino: ?" (run 36096755072).
+// so every lexical rejection logged "vicino: ?" (run 36096755072). Titles are
+// written unescaped and may contain quotes or brackets, so each field is read
+// as its whole line, with the slug in the last brackets.
 // Returns '' for errors with neither field (id/slug collisions).
 function duplicateCandidateDetail(errorMessage = '') {
   const msg = String(errorMessage || '');
-  const candidateMatch = msg.match(/Nuovo:\s*"([^"]+)"/);
-  const neighborMatch = msg.match(/Esistente:\s*(?:"(?:[^"\\]|\\.)*"\s*)?\[([^\]]+)\]/);
+  const candidateMatch = msg.match(/^[^\S\n]*Nuovo:[^\S\n]*"(.*)"[^\S\n]*\[[^\]\n]*\][^\S\n]*$/m);
+  const neighborMatch = msg.match(/^[^\S\n]*Esistente:.*\[([^\]\n]+)\][^\S\n]*$/m);
   if (!candidateMatch && !neighborMatch) return '';
   return ` — candidato: "${candidateMatch?.[1] ?? '?'}" → vicino: ${neighborMatch?.[1] ?? '?'}`;
 }

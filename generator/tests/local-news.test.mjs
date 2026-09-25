@@ -3,9 +3,10 @@
  *
  * Owner decision of 2026-09-25: «Fai passare anche queste notizie: cronaca
  * nera, sport, cultura e incidenti stradali», in Ticino and in the provinces
- * of Varese, Como and VCO. The review of PR #1871 asked for the place to be
- * decided deterministically: the anchor gate of the scan also accepts Zurich,
- * Bern and the border comuni of Sondrio and Lecco.
+ * of Varese, Como and VCO. The reviews of PR #1871 asked for the place to be
+ * decided from a complete geographic source, filtered by canton and province
+ * (the anchor gate of the scan also accepts Zurich, Bern and the border comuni
+ * of Sondrio and Lecco), and for the kind to be matched on word boundaries.
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -27,7 +28,7 @@ test('local news in Ticino and in the provinces of Varese, Como and VCO', () => 
     'Incidente a Porto Ceresio, strada chiusa per due ore',
     'Furto a Domodossola, fermato un uomo',
     'Mostra al museo di Varese fino a marzo',
-    'Incidente in galleria sul Gottardo, coda di 5 km',
+    'Scontro fra due auto a Cantello: un incidente senza feriti',
   ]) {
     assert.equal(isLocalNews(text), true, `non riconosciuta come cronaca locale: ${text}`);
   }
@@ -39,14 +40,56 @@ test('the same kinds of news elsewhere are not local', () => {
     'Arresto a Sondrio per spaccio',
     'Concerto a Lecco sabato sera',
     'Omicidio a Milano, fermato il sospettato',
+    'Festa a Tirano, concerto in piazza',
   ]) {
     assert.equal(isLocalNews(text), false, `presa per cronaca locale: ${text}`);
   }
 });
 
-test('Ticino comuni that are also ordinary words do not make a place', () => {
+test('every Ticino comune and locality counts, from the BFS list', () => {
+  // Localities that are not comuni of their own (aliases of the BFS list).
+  assert.equal(isInLocalNewsArea('Furto in un negozio di Pregassona'), true);
+  assert.equal(isInLocalNewsArea('Incendio in un capannone a Giubiasco'), true);
+  // Two-part names: the whole and each part.
+  assert.equal(isInLocalNewsArea('Sagra di Tenero-Contra'), true);
+});
+
+test('Ticino comuni that are also ordinary words count only after a locative', () => {
+  assert.equal(isLocalNews('Incidente a Paradiso, strada chiusa'), true);
+  assert.equal(isLocalNews('Concerto di Tenero in piazza'), true);
+  assert.equal(isLocalNews('Rissa a Vaglio, due feriti'), true);
   assert.equal(isInLocalNewsArea('Tenero incontro al festival di Berna'), false);
   assert.equal(isInLocalNewsArea('Paradiso fiscale e omicidio a Roma'), false);
+  assert.equal(isInLocalNewsArea('Al vaglio degli inquirenti un omicidio a Roma'), false);
+  assert.equal(isLocalNews('Furto a Vira, fermato un uomo'), true);
+  assert.equal(isInLocalNewsArea('Il governo vira sul salario minimo'), false);
+  // Followed by another capitalised word, it is a different place.
+  assert.equal(isInLocalNewsArea('Rapina a Sessa Aurunca'), false);
+  assert.equal(isInLocalNewsArea('Incidente a Torricella Peligna'), false);
+});
+
+test('localities named by a common noun count only in their full form', () => {
+  assert.equal(isInLocalNewsArea('Concerto a Locarno Monti'), true);
+  assert.equal(isInLocalNewsArea('Sagra di paese in un borgo dei monti'), false);
+});
+
+test('places outside the area that contain a Ticino name do not count', () => {
+  assert.equal(isInLocalNewsArea('Incidente a Castel San Pietro Terme'), false);
+  assert.equal(isInLocalNewsArea('Incidente a Castel San Pietro'), true);
+});
+
+test('names that span the border of the area do not place a text', () => {
+  // Lago Maggiore also touches Novara, the Lario Lecco, the Gottardo Uri,
+  // San Bernardino is in Graubünden.
+  for (const text of [
+    'Incidente in galleria sul Gottardo, coda di 5 km',
+    'Festival ad Arona sul Lago Maggiore',
+    'Incidente sul Lario, chiusa la statale',
+    'Incidente al San Bernardino, passo chiuso',
+    'Rapina a Berna, fermati due uomini',
+  ]) {
+    assert.equal(isLocalNews(text), false, `presa per cronaca locale: ${text}`);
+  }
 });
 
 test('border comuni count only in the three provinces of the area', () => {
@@ -62,7 +105,28 @@ test('kind and place are both needed, and the hit count is zero outside the area
   assert.equal(countLocalNewsHits('Incidente e poi un altro incidente a Lugano'), 2);
 });
 
-test('no stem fires inside a common unrelated word', () => {
-  assert.equal(hasLocalNewsSignal('Trasporti pubblici: nuovi orari TILO'), false);
-  assert.equal(hasLocalNewsSignal('I dati dimostrano una crescita'), false);
+test('a stem fires only at the start of a word', () => {
+  for (const text of [
+    'Trasporti pubblici: nuovi orari TILO',
+    'I dati dimostrano una crescita',
+    'Nuovo sportello per i frontalieri a Chiasso',
+    'Concertazione sociale sul salario minimo a Lugano',
+    'Una società multiculturale e plurilingue',
+  ]) {
+    assert.equal(hasLocalNewsSignal(text), false, `segnale dentro una parola: ${text}`);
+  }
+  assert.equal(hasLocalNewsSignal('Arrestato a Mendrisio'), true);
+  assert.equal(hasLocalNewsSignal('Due squadre sportive a Lugano'), true);
+});
+
+test('ordinary economic words are not signals', () => {
+  // investito (invested), rassegna stampa, esposizione al rischio, mostra (verb).
+  for (const text of [
+    "L'azienda ha investito 10 milioni a Lugano",
+    'Rassegna stampa del Ticino',
+    "Esposizione al rischio di cambio per chi lavora a Chiasso",
+    "Il sondaggio mostra che i salari a Lugano crescono",
+  ]) {
+    assert.equal(isLocalNews(text), false, `presa per cronaca locale: ${text}`);
+  }
 });

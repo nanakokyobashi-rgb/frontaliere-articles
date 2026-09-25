@@ -4368,10 +4368,10 @@
     {
       "path": "generator/scripts/lib/local-news.mjs",
       "mode": "corpus-only",
-      "reason": "Cronaca locale che la sezione frontaliere pubblica anche senza angolo frontaliere (cronaca nera, incidenti stradali, sport, cultura ed eventi), decisione del proprietario del 2026-09-25: il genere (lessico) E il luogo (Ticino e province di Varese, Como e VCO, con i comuni di confine presi dall'indice di topic-coverage-guard.mjs per provincia). In create-article.mjs aggiunge un segnale all'ammissione (hasAdmissionSignal / countAdmissionHits) e decide il ramo cronaca del prompt e del controllo di densita'. Corpus-only per la stessa ragione di fact-check-response.mjs: la generazione gira solo in questo repo.",
+      "reason": "Cronaca locale che la sezione frontaliere pubblica anche senza angolo frontaliere (cronaca nera, incidenti stradali, sport, cultura ed eventi), decisione del proprietario del 2026-09-25: il genere (radici a inizio parola sul testo normalizzato) E il luogo (Ticino dall'elenco BFS di generator/data/ticino-municipalities.json, i nomi comuni solo dopo una preposizione di luogo; comuni di confine delle sole province VA, CO e VB dall'indice di topic-coverage-guard.mjs). In create-article.mjs aggiunge un segnale all'ammissione (hasAdmissionSignal / countAdmissionHits) e decide il ramo cronaca del prompt e del controllo di densita'. Corpus-only per la stessa ragione di fact-check-response.mjs: la generazione gira solo in questo repo.",
       "baseline": {
         "site": null,
-        "corpus": "daae4232fb268264",
+        "corpus": "ddc6de3c0ed8daa5",
         "alignedAt": "2026-09-25"
       }
     },

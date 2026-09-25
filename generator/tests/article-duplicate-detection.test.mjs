@@ -464,3 +464,61 @@ describe('drift guard — checkForDuplicates in create-article.mjs', () => {
     expect(at10000).toBeLessThan(0.86);
   });
 });
+
+// ── Diagnostica dei rifiuti: il log deve dire chi e perché ──
+//
+// Review di PR #1871: un titolo con virgolette troncava il candidato e
+// perdeva il vicino, un campo «Segnali:» vuoto faceva leggere la riga
+// «Dettaglio:» come segnali, e un errore con «Segnali:» e «Cosine:» insieme
+// nascondeva il motivo semantico. I tre helper stanno in create-article.mjs,
+// che un test non può importare: il blocco viene ritagliato dal sorgente.
+
+describe('diagnostica dei rifiuti duplicato', () => {
+  const src = readFileSync(new URL('../scripts/create-article.mjs', import.meta.url), 'utf-8');
+  const start = src.indexOf('// The value of the "Segnali:" field');
+  const end = src.indexOf('/**\n * Which article, if any, the run ended up publishing');
+  const reasons = [];
+  const { captureDuplicateReasons, duplicateReasonTag, duplicateCandidateDetail } = new Function(
+    'addDuplicateReason',
+    `${src.slice(start, end)}\nreturn { captureDuplicateReasons, duplicateReasonTag, duplicateCandidateDetail };`,
+  )((key) => reasons.push(key));
+
+  const lexical = (signals) => '❌ DUPLICATO RILEVATO:\n'
+    + '   Nuovo:     "Vivere a "Erba" [guida] da frontaliere" [vivere-a-erba]\n'
+    + '   Esistente: "Il "caso" Erba" [vivere-a-erba-2025]\n'
+    + `   Segnali:   ${signals}\n`
+    + '   Dettaglio: ID=80% Titolo=70% Excerpt=40% Entità=100% [comune:erba] Combinato=60%\n'
+    + '   Scegli un argomento diverso o più specifico.';
+
+  it('il blocco esiste nel sorgente', () => {
+    expect(start).toBeGreaterThan(-1);
+    expect(end).toBeGreaterThan(start);
+  });
+
+  it('titoli con virgolette e parentesi: candidato intero, vicino giusto', () => {
+    expect(duplicateCandidateDetail(lexical('Titolo: 90% ≥ 82%')))
+      .toBe(' — candidato: "Vivere a "Erba" [guida] da frontaliere" → vicino: vivere-a-erba-2025');
+    const semantic = '❌ DUPLICATO SEMANTICO RILEVATO:\n'
+      + '   Nuovo:     "Titolo "citato"" [nuovo-id]\n'
+      + '   Esistente: [slug-vicino]\n'
+      + '   Cosine:    0.941 ≥ 0.92 (near-duplicate)\n';
+    expect(duplicateCandidateDetail(semantic)).toBe(' — candidato: "Titolo "citato"" → vicino: slug-vicino');
+    expect(duplicateCandidateDetail('❌ DUPLICATO: L\'ID "x" esiste già')).toBe('');
+  });
+
+  it('un campo «Segnali:» vuoto non legge la riga successiva', () => {
+    reasons.length = 0;
+    captureDuplicateReasons(lexical(''));
+    expect(reasons).toEqual(['other']);
+    expect(duplicateReasonTag(lexical(''))).toBe('motivo non riconosciuto');
+  });
+
+  it('segnali lessicali e cosine insieme contano entrambi', () => {
+    const both = `${lexical('Titolo: 90% ≥ 82% | Entità+Combinato: 100% ≥ 65% e 60% ≥ 45%')}\n   Cosine:    0.941 ≥ 0.92 (near-duplicate)`;
+    reasons.length = 0;
+    captureDuplicateReasons(both);
+    expect(reasons).toEqual(['multi_signal', 'signal_title', 'signal_entity', 'semantic_cosine']);
+    expect(duplicateReasonTag(both))
+      .toBe('semantico, cosine=0.941 ≥ 0.92; lessicale (Titolo: 90% ≥ 82% | Entità+Combinato: 100% ≥ 65% e 60% ≥ 45%)');
+  });
+});
