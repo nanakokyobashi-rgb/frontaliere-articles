@@ -72,6 +72,29 @@ name: Stale PR rescuer (self-healing signal)
 # DETERMINISTICO, zero Claude. L'azione è una label + UN commento idempotente:
 # nessun push automatico, quindi è sicuro girarlo accanto ad agent attivi.
 #
+# ── Quanto costa, e perche' il `workflow_run` non riscandisce piu' tutto ──────
+# Ogni lettura qui spende il bucket REST del `GITHUB_TOKEN`: 1.000 richieste
+# l'ora per l'INTERO repo, condivise con i gate delle PR in `tests.yml`. Uno
+# scan completo costa ~2 + (1 + 9·Pa)·PR autonome + (1 + 4·Pa)·PR aperte
+# letture (Pa = PR con push >2h), cioe' 30-150 per run; ripetuto su ogni
+# completamento di `tests` (18 run nell'ora dell'incidente) e' stato fra i primi
+# consumatori del bucket esaurito il 2026-09-25 06:58-07:10 UTC, quando i gate
+# delle PR sono diventati rossi con «API rate limit exceeded for installation»
+# e il custode qui sotto e' morto 15 volte sulla sua prima lettura.
+#
+# Il trigger `workflow_run` serve a DUE cose, e il costo stava tutto nella
+# seconda: (1) guardare la PR appena revisionata, subito; (2) fare da battito al
+# posto del cron, che qui GitHub salta per ore (3 run schedulati su ~12 attesi
+# fra il 2026-09-24 18:51 e il 2026-09-25 07:15). Lo step `Decide scan scope`
+# le separa: il primo run che parte in ogni finestra di 30 minuti fa lo scan
+# COMPLETO (battito + custode); gli altri run `workflow_run` della stessa
+# finestra classificano SOLO le PR del run di `tests` che li ha fatti nascere
+# (`github.event.workflow_run.pull_requests`), con le stesse regole e le stesse
+# mutation. Cron e dispatch restano sempre completi. Una PR ferma e' quindi
+# vista entro ~30 minuti dalla soglia di 2h finche' c'e' attivita' (e dal cron
+# quando non ce n'e'), e il costo scende da ~18 scan completi l'ora a <=2 (+ il
+# cron) piu' ~2 letture per ogni altro completamento.
+
 # ── ADATTAMENTO chiave (manifest: `adapted`) ────────────────────────────────
 # Il nome del check-run sul sito è hardcoded due volte dentro jq. Qui arriva da
 # `CI_CHECK_NAME` e viene passato a jq con `--arg`: un literal in più nello
@@ -83,7 +106,9 @@ name: Stale PR rescuer (self-healing signal)
 on:
   # Primario: subito dopo ogni review — cioè esattamente quando uno stallo
   # inizierebbe. Il cron da solo non basta: GitHub lo deprioritizza sotto
-  # carico e può saltare ore.
+  # carico e può saltare ore. Dal 2026-09-25 un solo run per finestra di 30
+  # minuti riscandisce TUTTE le PR; gli altri guardano la PR del trigger (vedi
+  # `Decide scan scope`).
   workflow_run:
     workflows: ['tests']
     types: [completed]
@@ -151,6 +176,59 @@ jobs:
           done
           printf 'path=%s\n' "$gh_bin" >> "$GITHUB_OUTPUT"
 
+      # Il battito completo costa decine di letture; un completamento di
+      # `tests` ne arriva ogni ~3 minuti. Il primo run PARTITO in una finestra
+      # di 30 minuti (slot allineati, `FULL_SCAN_SLOT_S`) fa lo scan completo;
+      # gli altri run `workflow_run` della stessa finestra guardano solo le PR
+      # del trigger. «Partito» = `run_started_at` di un run COMPLETATO che ha
+      # davvero girato (success/failure/timed_out): i run `cancelled` in coda
+      # e quelli `skipped` non hanno scandito niente e non contano. La
+      # concurrency del workflow serializza i run, quindi il primo della
+      # finestra vede zero predecessori e ogni successivo ne vede almeno uno.
+      # Una lettura sola (`created` limitato all'ultima ora e mezza, quindi
+      # una pagina) invece di uno scan intero. Se la lettura fallisce si resta
+      # sullo scope ridotto: un'API gia' in difficolta' non deve pagare lo
+      # scan completo, e il cron o la finestra successiva lo recuperano.
+      - name: Decide scan scope
+        id: scope
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          EVENT_NAME: ${{ github.event_name }}
+          RUN_ID: ${{ github.run_id }}
+          TRIGGER_PRS: ${{ join(github.event.workflow_run.pull_requests.*.number, ' ') }}
+          FULL_SCAN_SLOT_S: '1800'
+        run: |
+          set -uo pipefail
+          mode=full
+          if [ "$EVENT_NAME" = "workflow_run" ]; then
+            mode=scoped
+            now=$(date -u +%s)
+            slot_start=$(( now - now % FULL_SCAN_SLOT_S ))
+            # Un run creato fino a un'ora prima puo' essere partito in questa
+            # finestra dopo la coda: il filtro `created` lo deve includere.
+            since=$(jq -rn --argjson t "$(( slot_start - 3600 ))" '$t | todate')
+            if ! runs=$(gh api --paginate "repos/$REPO/actions/workflows/stale-pr-rescuer.yml/runs?per_page=100&exclude_pull_requests=true&created=%3E%3D$since" 2>/dev/null); then
+              echo "::warning::Run recenti di stale-pr-rescuer illeggibili — scan limitato alle PR del trigger."
+            elif ! prior=$(printf '%s\n' "$runs" | jq -rs --argjson me "$RUN_ID" --argjson start "$slot_start" '
+                if length == 0 or any(.[]; type != "object" or (.workflow_runs | type) != "array")
+                then error("risposta runs inattesa") else . end
+                | [ .[].workflow_runs[]
+                    | select(.id != $me)
+                    | select(.status == "completed" and ((.conclusion // "") | IN("success", "failure", "timed_out")))
+                    | select((try ((.run_started_at // .created_at) | fromdateiso8601) catch 0) >= $start) ]
+                | if length == 0 then "none" else (sort_by(.run_started_at // .created_at) | .[0].id | tostring) end
+              ' 2>/dev/null); then
+              echo "::warning::Run recenti di stale-pr-rescuer non interpretabili — scan limitato alle PR del trigger."
+            elif [ "$prior" = "none" ]; then
+              mode=full
+              echo "Primo run della finestra di $(( FULL_SCAN_SLOT_S / 60 )) minuti: scan completo di tutte le PR aperte."
+            else
+              echo "Scan completo gia' partito in questa finestra (run $prior): solo le PR del trigger (${TRIGGER_PRS:-nessuna})."
+            fi
+          fi
+          echo "mode=$mode" >> "$GITHUB_OUTPUT"
+
       - name: Scan open PRs and flag stalled ones
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -158,6 +236,10 @@ jobs:
           DRY_RUN: ${{ github.event.inputs.dry_run }}
           # Unica sorgente del nome del check anche per questo workflow.
           CI_CHECK_NAME: 'tests (node --test)'
+          # `full` o `scoped` (step precedente). Vuoto = completo: e' la
+          # forma di cron, dispatch e dei test che eseguono questo blocco.
+          SCAN_MODE: ${{ steps.scope.outputs.mode }}
+          SCAN_SCOPE_PRS: ${{ join(github.event.workflow_run.pull_requests.*.number, ' ') }}
         run: |
           set -uo pipefail
           NOW=$(date -u +%s)
@@ -167,19 +249,27 @@ jobs:
           # trusted già presente su main, materializzato dal contenuto del blob
           # a SHA pinnato. Non eseguire mai un helper preso dal branch della PR
           # e non ricadere sul parser body-only se la materializzazione fallisce.
+          # Materializzato alla PRIMA PR che arriva a leggere il cap, non in
+          # testa: due letture in meno per ogni run in cui nessuna PR supera il
+          # gate di eta' (il caso normale dello scope ridotto).
           TRUSTED_MARKER_HELPER="${RUNNER_TEMP:-/tmp}/stale-fixer-round-marker.mjs"
           TRUSTED_MARKER_AVAILABLE=false
-          MAIN_SHA=$(gh api --paginate "repos/$REPO/git/ref/heads/main" --jq '.object.sha' 2>/dev/null || true)
-          if printf '%s\n' "$MAIN_SHA" | grep -qE '^[a-f0-9]{40}$'; then
-            if marker_b64=$(gh api --paginate "repos/$REPO/contents/scripts/ci/fixer-round-marker.mjs?ref=$MAIN_SHA" --jq '.content' 2>/dev/null) \
-              && printf '%s' "$marker_b64" | base64 --decode > "$TRUSTED_MARKER_HELPER" \
-              && [ -s "$TRUSTED_MARKER_HELPER" ]; then
-              TRUSTED_MARKER_AVAILABLE=true
+          TRUSTED_MARKER_LOADED=false
+          load_trusted_marker_helper() {
+            [ "$TRUSTED_MARKER_LOADED" = "true" ] && return 0
+            TRUSTED_MARKER_LOADED=true
+            MAIN_SHA=$(gh api --paginate "repos/$REPO/git/ref/heads/main" --jq '.object.sha' 2>/dev/null || true)
+            if printf '%s\n' "$MAIN_SHA" | grep -qE '^[a-f0-9]{40}$'; then
+              if marker_b64=$(gh api --paginate "repos/$REPO/contents/scripts/ci/fixer-round-marker.mjs?ref=$MAIN_SHA" --jq '.content' 2>/dev/null) \
+                && printf '%s' "$marker_b64" | base64 --decode > "$TRUSTED_MARKER_HELPER" \
+                && [ -s "$TRUSTED_MARKER_HELPER" ]; then
+                TRUSTED_MARKER_AVAILABLE=true
+              fi
             fi
-          fi
-          if [ "$TRUSTED_MARKER_AVAILABLE" != "true" ]; then
-            echo "::warning::Helper round-marker trusted non disponibile da main ($MAIN_SHA) — il cap REDFLAG resta non verificabile e non farà dispatch."
-          fi
+            if [ "$TRUSTED_MARKER_AVAILABLE" != "true" ]; then
+              echo "::warning::Helper round-marker trusted non disponibile da main ($MAIN_SHA) — il cap REDFLAG resta non verificabile e non farà dispatch."
+            fi
+          }
 
           # `gh api --paginate` e non il vecchio `gh pr list --limit 50`: quel
           # sottocomando NON ha `--paginate` e il suo `--limit` TRONCA in
@@ -190,6 +280,15 @@ jobs:
           # Con `--paginate` la risposta arriva come una SEQUENZA di array (uno
           # per pagina): `jq -c '.[]'` la legge come stream, senza `--slurp`.
           prs=$(gh api --paginate "repos/$REPO/pulls?state=open&per_page=100" 2>/dev/null || echo '[]')
+          # Scope ridotto (`Decide scan scope`): le stesse regole, applicate
+          # alle sole PR del run di `tests` che ha fatto nascere questo run. Il
+          # filtro agisce su ogni pagina e conserva la sequenza di array.
+          if [ "${SCAN_MODE:-full}" = "scoped" ]; then
+            # shellcheck disable=SC2086 # numeri separati da spazio, splittati apposta
+            scope_prs=$(printf '%s\n' ${SCAN_SCOPE_PRS:-} | jq -R 'select(test("^[0-9]+$")) | tonumber' | jq -cs '.')
+            prs=$(printf '%s\n' "$prs" | jq -c --argjson scope "${scope_prs:-[]}" '[.[] | select(.number as $n | $scope | index($n))]')
+            echo "Scope ridotto: solo le PR del trigger (${SCAN_SCOPE_PRS:-nessuna})."
+          fi
 
           echo "$prs" | jq -c '.[] | {
               number,
@@ -674,6 +773,7 @@ jobs:
                 echo "::warning::Commenti della PR #$N malformati — cap/needs-human non verificabili, nessun rescue del fixer."
                 COMMENT_LOOKUP_OK=false
               else
+                load_trusted_marker_helper
                 if [ "$TRUSTED_MARKER_AVAILABLE" = "true" ]; then
                   round_state=$(node "$TRUSTED_MARKER_HELPER" --current-round \
                     --repo "$REPO" --pr "$N" --marker REDFLAG_FIX_ROUND \
@@ -1050,7 +1150,12 @@ jobs:
       # custode e' identico a quello del sito: rilancia un check richiesto
       # CANCELLED su una HEAD con LGTM e adotta per i fixer le PR con un 🔴
       # dichiarato fuori scope, dispatchando subito `pr-redflag-fixer.yml`.
+      # Solo nello scan completo: il custode legge TUTTE le PR aperte (una
+      # lettura per PR anche quando non agisce) e agisce solo su HEAD ferme da
+      # >2h, per le quali attendere il battito della finestra successiva (<=30
+      # minuti) non cambia l'esito. Il cron e il dispatch lo portano sempre.
       - name: Checkout orphan PR custodian
+        if: steps.scope.outputs.mode == 'full'
         uses: actions/checkout@v5
         with:
           fetch-depth: 1
@@ -1061,11 +1166,13 @@ jobs:
           sparse-checkout-cone-mode: false
 
       - name: Setup Node.js
+        if: steps.scope.outputs.mode == 'full'
         uses: actions/setup-node@v5
         with:
           node-version: '22'
 
       - name: Orphan PR custodian
+        if: steps.scope.outputs.mode == 'full'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TRUSTED_GH_BIN: ${{ steps.trusted_gh.outputs.path }}
