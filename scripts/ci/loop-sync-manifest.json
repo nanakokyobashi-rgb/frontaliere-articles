@@ -215,9 +215,9 @@
       "path": "scripts/ci/check-issue-already-resolved.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "3495d7994fa50d84",
-        "corpus": "3495d7994fa50d84",
-        "alignedAt": "2026-09-19"
+        "site": "0dcda143bcb6bd73",
+        "corpus": "0dcda143bcb6bd73",
+        "alignedAt": "2026-09-25"
       }
     },
     {
@@ -1301,9 +1301,9 @@
       "path": "scripts/ci/stale-claim-detector.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "eec365b184635f17",
-        "corpus": "eec365b184635f17",
-        "alignedAt": "2026-09-19"
+        "site": "5441803216ff13c9",
+        "corpus": "5441803216ff13c9",
+        "alignedAt": "2026-09-25"
       }
     },
     {
@@ -2943,9 +2943,9 @@
       "sitePath": "build-plugins/shared/literalMarkdown.ts",
       "mode": "identical",
       "baseline": {
-        "site": "97bcd768eba4e593",
-        "corpus": "97bcd768eba4e593",
-        "alignedAt": "2026-09-24"
+        "site": "a2b91b4cb69b035f",
+        "corpus": "a2b91b4cb69b035f",
+        "alignedAt": "2026-09-25"
       }
     },
     {
@@ -2974,9 +2974,9 @@
       "sitePath": "build-plugins/shared/safeTruncate.ts",
       "mode": "identical",
       "baseline": {
-        "site": "74d50e20ead3bca0",
-        "corpus": "74d50e20ead3bca0",
-        "alignedAt": "2026-09-23"
+        "site": "392ed6e280a9c039",
+        "corpus": "392ed6e280a9c039",
+        "alignedAt": "2026-09-25"
       }
     },
     {
@@ -3610,9 +3610,9 @@
       "sitePath": ".github/corpus-workflows/translate-pending.yml",
       "mode": "identical",
       "baseline": {
-        "site": "bc7345b6dad7db4d",
-        "corpus": "bc7345b6dad7db4d",
-        "alignedAt": "2026-09-24"
+        "site": "89e67dab5f9353ff",
+        "corpus": "89e67dab5f9353ff",
+        "alignedAt": "2026-09-25"
       }
     },
     {
@@ -3621,8 +3621,8 @@
       "mode": "identical",
       "reason": "Riallineato il 2026-09-24 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono ora byte-identici fra sito e corpus, con il roster corrente di 621 crawler.",
       "baseline": {
-        "site": "da4e8e66520fd652",
-        "corpus": "da4e8e66520fd652",
+        "site": "6c15547832433ff3",
+        "corpus": "6c15547832433ff3",
         "alignedAt": "2026-09-25"
       }
     },
@@ -3817,9 +3817,9 @@
       "sitePath": "scripts/lib/github-actions-read-client.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "a3c0b3742061e9e1",
-        "corpus": "a3c0b3742061e9e1",
-        "alignedAt": "2026-09-23"
+        "site": "90d86156213f814f",
+        "corpus": "90d86156213f814f",
+        "alignedAt": "2026-09-25"
       }
     },
     {
@@ -4148,9 +4148,9 @@
       "path": "scripts/ci/prefetch-review-diff.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "8a8ff7af4f50e560",
-        "corpus": "8a8ff7af4f50e560",
-        "alignedAt": "2026-09-21"
+        "site": "933a0bf94509b594",
+        "corpus": "933a0bf94509b594",
+        "alignedAt": "2026-09-25"
       }
     },
     {
