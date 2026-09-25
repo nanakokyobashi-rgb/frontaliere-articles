@@ -180,3 +180,20 @@ test('a demonym or a river does not place the event', () => {
   }
   assert.equal(isLocalNews('Incidente in Ticino, due feriti'), true);
 });
+
+test('the place of the event decides over the organiser or the owner', () => {
+  // Fifth review of PR #1871: the nearest place was the organiser's.
+  assert.equal(isLocalNews('Festival del Comune di Lugano a Zurigo'), false);
+  assert.equal(isLocalNews('Arrestato un uomo fuggito da Chiasso a Milano'), false);
+  // With no place of the event, the genitive place is where it happens.
+  assert.equal(isLocalNews('Il Festival del film di Locarno apre con un record'), true);
+  assert.equal(isLocalNews('Rapina in una gioielleria di Lugano, due arresti'), true);
+  // A multi-word place with an article inside it.
+  assert.equal(isLocalNews('Concerto al Palazzo dei Congressi di Lugano'), true);
+});
+
+test('the word «sport» counts, «sportello» does not', () => {
+  assert.equal(hasLocalNewsSignal('Sport a Lugano'), true);
+  assert.equal(isLocalNews('Sport a Lugano: il Lugano chiude la stagione'), true);
+  assert.equal(hasLocalNewsSignal('Nuovo sportello a Chiasso'), false);
+});

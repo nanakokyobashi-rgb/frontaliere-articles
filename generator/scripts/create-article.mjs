@@ -10608,7 +10608,12 @@ async function expandShortItalianContent(data, targetWords, { boundToText = fals
     const currentWords = countWords(currentText);
     const targetFieldWords = currentWords + perField;
 
-    const expandPersona = IS_FRONTALIERE
+    // Local news keeps its own persona here too (review of PR #1871): the
+    // cross-border finance journalist is the voice that adds the procedures
+    // and frontaliere context the local branch forbids.
+    const expandPersona = localNews
+      ? 'Sei un giornalista di cronaca locale in Ticino e nelle province di Varese, Como e VCO.'
+      : IS_FRONTALIERE
       ? 'Sei un giornalista finanziario esperto di lavoro transfrontaliero in Ticino.'
       : 'Sei un giornalista finanziario esperto di affari svizzeri a livello nazionale.';
     const expandPrompt = `${expandPersona}
@@ -10632,7 +10637,7 @@ ${expandEnrichmentLine(IS_FRONTALIERE, boundToText, localNews)}
     try {
       const expanded = await callLLM(
         [
-          { role: 'system', content: 'Sei un giornalista finanziario esperto. Rispondi con il solo testo richiesto, senza wrapper e senza ripetere etichette o intestazioni del prompt.' },
+          { role: 'system', content: `${localNews ? 'Sei un giornalista di cronaca locale.' : 'Sei un giornalista finanziario esperto.'} Rispondi con il solo testo richiesto, senza wrapper e senza ripetere etichette o intestazioni del prompt.` },
           { role: 'user', content: expandPrompt },
         ],
         { model: GH_MODEL_HEAVY, temperature: 0.7, maxTokens: 3000, timeout: 60_000 },

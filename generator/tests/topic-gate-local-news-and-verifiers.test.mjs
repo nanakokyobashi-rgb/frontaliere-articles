@@ -146,6 +146,13 @@ test('the flag comes from the same local-news predicate as the prompt, and is dr
   assert.match(SRC, /const localNewsExpansion = IS_FRONTALIERE && isLocalNewsWithoutFrontaliereAngle\(pageContent\);\n\s+data = await expandShortItalianContent\(data, adaptiveMinWords, \{\n\s+boundToText: isStatsBfsSource,\n\s+localNews: localNewsExpansion,/);
 });
 
+test('the expansion of a local story speaks as a local reporter', () => {
+  // Fifth review of PR #1871: the expansion kept the cross-border finance
+  // persona, the voice that adds the procedures the local branch forbids.
+  assert.match(SRC, /const expandPersona = localNews\n\s+\? 'Sei un giornalista di cronaca locale in Ticino e nelle province di Varese, Como e VCO\.'/);
+  assert.match(SRC, /content: `\$\{localNews \? 'Sei un giornalista di cronaca locale\.' : 'Sei un giornalista finanziario esperto\.'\} Rispondi con il solo testo richiesto/);
+});
+
 test('the expansion of a local story passes the fact-check even on the last attempt', () => {
   // Fourth review of PR #1871: the expansion is fact-checked only before the
   // last attempt, and a local story expanded there reached the corpus with no

@@ -36,8 +36,11 @@
  *
  * BOTH TOGETHER — the kind and the place must describe the same event: they
  * are read sentence by sentence, and a stem takes the place NEAREST to it
- * among the places the sentence introduces with a preposition («a Chiasso»,
- * «nel Mendrisiotto») or as a dateline («Lugano, rapina…»). «Arresto a
+ * among the places where the sentence says the event happens («a Chiasso»,
+ * «nel Mendrisiotto», a dateline «Lugano, rapina…»). A genitive place (the
+ * organiser or the owner: «il Festival del Comune di Lugano a Zurigo») decides
+ * only when the sentence names no place of the event («il Festival del film di
+ * Locarno»). «Arresto a
  * Milano, ricercato anche in Ticino» is an arrest in Milan. A capitalised
  * word after a preposition that is not in the area counts as a place outside
  * it, unless it is plainly not a place (a road like A2, an acronym, a feast
@@ -70,9 +73,18 @@ export const LOCAL_NEWS_STEMS = Object.freeze([
   'manifestazion',
 ]);
 
+/**
+ * Whole words: a stem would also fire inside «sportello» or «sportivamente»
+ * of an unrelated story.
+ */
+export const LOCAL_NEWS_WORDS = Object.freeze(['sport']);
+
 const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-const LOCAL_NEWS_RE = new RegExp(`\\b(?:${LOCAL_NEWS_STEMS.map(escapeRe).join('|')})`);
+const LOCAL_NEWS_RE = new RegExp(
+  `\\b(?:${LOCAL_NEWS_STEMS.map(escapeRe).join('|')}|(?:${LOCAL_NEWS_WORDS.map(escapeRe).join('|')})\\b)`,
+);
 const STEM_PARTS = LOCAL_NEWS_STEMS.map((stem) => stem.split(' '));
+const LOCAL_NEWS_WORD_SET = new Set(LOCAL_NEWS_WORDS);
 
 /** Local clubs: the stem is also the place. */
 const LOCAL_TEAM_STEMS = new Set(['fc lugano', 'hc lugano', 'ambri piotta']);
@@ -82,7 +94,7 @@ const LOCAL_TEAM_STEMS = new Set(['fc lugano', 'hc lugano', 'ambri piotta']);
  * is Ticino sport. A sport stem needs the area anywhere in its sentence.
  */
 const SPORT_STEMS = new Set([
-  'calcio', 'hockey', 'campionat', 'derby', 'allenator', 'sportiv', 'tennis', 'ciclism',
+  'sport', 'calcio', 'hockey', 'campionat', 'derby', 'allenator', 'sportiv', 'tennis', 'ciclism',
   'maratona', 'torneo',
 ]);
 
@@ -212,17 +224,35 @@ function mentionsArea(text, namesRe) {
 const RIVER_PREPOSITIONS = new Set(['sul', 'sull', 'sulla', 'lungo']);
 const AREA_RIVERS = new Set(['ticino', 'tresa', 'maggia', 'verzasca']);
 
-const LOCATIVE_PREPOSITIONS = new Set([
-  'a', 'ad', 'in', 'di', 'da', 'tra', 'fra', 'presso', 'verso',
+/**
+ * Prepositions that say where the event happens: «a Chiasso», «nel
+ * Mendrisiotto», «sulla A2».
+ */
+const EVENT_PREPOSITIONS = new Set([
+  'a', 'ad', 'in', 'tra', 'fra', 'presso',
   'al', 'allo', 'alla', 'all', 'ai', 'agli', 'alle',
   'nel', 'nello', 'nella', 'nell', 'nei', 'negli', 'nelle',
   'sul', 'sullo', 'sulla', 'sull', 'sui', 'sugli', 'sulle',
+]);
+/**
+ * Prepositions that name a place without saying the event happens there:
+ * the organiser, the owner, the origin («il Festival del Comune di Lugano a
+ * Zurigo», «fuggito da Chiasso»). Such a place decides only when the sentence
+ * has no place of the event.
+ */
+const GENITIVE_PREPOSITIONS = new Set([
+  'di', 'da', 'verso',
   'del', 'dello', 'della', 'dell', 'dei', 'degli', 'delle',
   'dal', 'dallo', 'dalla', 'dall', 'dai', 'dagli', 'dalle',
 ]);
 
-/** Lower-case words inside a place name: «Ronco sopra Ascona», «Collina d'Oro». */
-const PLACE_CONNECTORS = new Set(['di', 'd', 'del', 'della', 'sopra', 'sotto']);
+/**
+ * Lower-case words inside a place name: «Ronco sopra Ascona», «Collina d'Oro»,
+ * «Palazzo dei Congressi di Lugano».
+ */
+const PLACE_CONNECTORS = new Set([
+  'di', 'd', 'del', 'della', 'dello', 'dell', 'dei', 'degli', 'delle', 'sopra', 'sotto',
+]);
 
 /**
  * Capitalised words after a preposition, or before a dateline colon, that are
@@ -262,6 +292,10 @@ function tokensOf(sentence) {
 function stemHits(tokens) {
   const hits = [];
   for (let i = 0; i < tokens.length; i += 1) {
+    if (LOCAL_NEWS_WORD_SET.has(tokens[i].norm)) {
+      hits.push({ index: i, team: false, sport: SPORT_STEMS.has(tokens[i].norm) });
+      continue;
+    }
     for (const parts of STEM_PARTS) {
       if (i + parts.length > tokens.length) continue;
       const last = parts.length - 1;
@@ -280,16 +314,18 @@ function stemHits(tokens) {
 
 /**
  * Places a sentence introduces: after a preposition, or as a dateline at its
- * start. Each is { index, inArea } — inArea false for a place outside the
- * area; words that are plainly not places are dropped.
+ * start. Each is { index, inArea, event } — inArea false for a place outside
+ * the area, event false for a genitive place (organiser, owner, origin);
+ * words that are plainly not places are dropped.
  */
 function placesOf(sentence, tokens) {
   const places = [];
   const gap = (a, b) => sentence.slice(tokens[a].end, tokens[b].start);
   for (let j = 0; j < tokens.length; j += 1) {
     if (!tokens[j].upper) continue;
+    const preposition = j > 0 ? tokens[j - 1].norm : '';
     const afterPreposition = j > 0
-      && LOCATIVE_PREPOSITIONS.has(tokens[j - 1].norm)
+      && (EVENT_PREPOSITIONS.has(preposition) || GENITIVE_PREPOSITIONS.has(preposition))
       && /^[\s'’]+$/.test(gap(j - 1, j));
     let k = j;
     while (k + 1 < tokens.length) {
@@ -308,14 +344,16 @@ function placesOf(sentence, tokens) {
       && RIVER_PREPOSITIONS.has(tokens[j - 1].norm) && AREA_RIVERS.has(tokens[j].norm);
     if ((afterPreposition || dateline) && !river) {
       const name = sentence.slice(tokens[j].start, tokens[k].end);
-      const preposition = afterPreposition ? tokens[j - 1].norm : 'a';
-      if (isInLocalNewsArea(`${preposition} ${name}`)) {
-        places.push({ index: j, inArea: true });
+      const lead = afterPreposition ? preposition : 'a';
+      // A dateline («Lugano, rapina…») says where the event happened.
+      const event = !afterPreposition || EVENT_PREPOSITIONS.has(preposition);
+      if (isInLocalNewsArea(`${lead} ${name}`)) {
+        places.push({ index: j, inArea: true, event });
       } else if (!/\d/.test(tokens[j].raw)
         && !(tokens[j].raw === tokens[j].raw.toUpperCase() && tokens[j].raw.length <= 5)
         && !NOT_A_PLACE.has(tokens[j].norm)
         && !startsWithStem(tokens[j].norm)) {
-        places.push({ index: j, inArea: false });
+        places.push({ index: j, inArea: false, event });
       }
       j = k;
     }
@@ -345,8 +383,12 @@ function localStemHits(text) {
         continue;
       }
       if (places.length === 0) continue;
-      let nearest = places[0];
-      for (const place of places) {
+      // The place of the event decides; a genitive place only when the
+      // sentence names no place of the event.
+      const eventPlaces = places.filter((place) => place.event);
+      const candidates = eventPlaces.length > 0 ? eventPlaces : places;
+      let nearest = candidates[0];
+      for (const place of candidates) {
         if (Math.abs(place.index - hit.index) < Math.abs(nearest.index - hit.index)) nearest = place;
       }
       if (nearest.inArea) count += 1;
