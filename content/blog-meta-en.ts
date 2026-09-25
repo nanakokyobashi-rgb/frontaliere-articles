@@ -11991,6 +11991,15 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.trenord-abbandono-passeggeri-gallarate.title': 'Trenord leaves 30 passengers stranded in Gallarate, Region must intervene',
     'blog.article.trenord-abbandono-passeggeri-gallarate.excerpt': 'During the night between September 22 and 23, around thirty passengers bound for Malpensa were left stranded at Gallarate after the departure of the last empty train, without assistance or connections.',
     'blog.article.trenord-abbandono-passeggeri-gallarate.imageAlt': 'Empty Ticino train station at night with a lone passenger facing the departure board',
+    'blog.article.lavori-verde-a8-d08.title': 'Night closures A8 and D08: deviations in Varese from 28 September',
+    'blog.article.lavori-verde-a8-d08.excerpt': 'Three nights of closures between A8 and D08 from 21:00 to 5:00, green maintenance work between Busto Arsizio, Besnate and Cavaria, detours on state, provincial and municipal roads.',
+    'blog.article.lavori-verde-a8-d08.imageAlt': 'Green maintenance work on the A8 highway near Busto Arsizio at night',
+    'blog.article.ticket-stipendio-acquisti-ticino.title': 'Salary ticket: the proposal to buy in Ticino',
+    'blog.article.ticket-stipendio-acquisti-ticino.excerpt': 'Ticket-salary in Ticino: the Young People of the Centre propose to allocate up to 5% of the salary to local purchases, with a tax voucher of 25%.',
+    'blog.article.ticket-stipendio-acquisti-ticino.imageAlt': 'Salary voucher and purchases in a Ticino shop',
+    'blog.article.furti-auto-lusso-ticino.title': 'Luxury car thefts in Ticino: three arrested',
+    'blog.article.furti-auto-lusso-ticino.excerpt': 'Four high-end vehicles stolen in Manno, Lamone and Camorino. Three young men arrested and a fourth suspect wanted after joint investigations.',
+    'blog.article.furti-auto-lusso-ticino.imageAlt': 'Luxury car in a Ticino dealership',
 };
 
 export default blogMetaEn;

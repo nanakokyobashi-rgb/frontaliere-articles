@@ -11992,6 +11992,15 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.trenord-abbandono-passeggeri-gallarate.title': 'Trenord lascia 30 passeggeri a Gallarate, Regione intervenga',
     'blog.article.trenord-abbandono-passeggeri-gallarate.excerpt': 'Nella notte tra il 22 e il 23 settembre, una trentina di passeggeri diretti a Malpensa è rimasta a Gallarate dopo la partenza del’ultimo convoglio vuoto, senza assistenza né collegamenti.',
     'blog.article.trenord-abbandono-passeggeri-gallarate.imageAlt': 'Stazione ticinese di notte, banchine vuote e viaggiatore solo davanti al tabellone degli orari',
+    'blog.article.lavori-verde-a8-d08.title': 'Chiusure notturne A8 e D08: deviazioni nel Varesotto dal 28 settembre',
+    'blog.article.lavori-verde-a8-d08.excerpt': 'Tre notti di chiusure tra A8 e D08 dalle 21:00 alle 5:00, lavori di manutenzione del verde tra Busto Arsizio, Besnate e Cavaria, deviazioni su strade statali, provinciali e comunali.',
+    'blog.article.lavori-verde-a8-d08.imageAlt': 'Lavori di manutenzione del verde sull\'autostrada A8 vicino a Busto Arsizio di notte',
+    'blog.article.ticket-stipendio-acquisti-ticino.title': 'Ticket-stipendio: la proposta per comprare in Ticino',
+    'blog.article.ticket-stipendio-acquisti-ticino.excerpt': 'Ticket-stipendio in Ticino: i Giovani del Centro propongono di destinare fino al 5% dello stipendio agli acquisti locali, con un buono fiscale sul 25%.',
+    'blog.article.ticket-stipendio-acquisti-ticino.imageAlt': 'Voucher salariale e acquisti in un negozio del Ticino',
+    'blog.article.furti-auto-lusso-ticino.title': 'Furti auto di lusso in Ticino: tre arrestati',
+    'blog.article.furti-auto-lusso-ticino.excerpt': 'Rubate quattro vetture di alta gamma a Manno, Lamone e Camorino. Tre giovani arrestati e un quarto sospettato ricercato dopo indagini congiunte.',
+    'blog.article.furti-auto-lusso-ticino.imageAlt': 'Auto di lusso in un rivenditore in Ticino',
 };
 
 export default blogMetaIt;

@@ -11990,6 +11990,15 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.trenord-abbandono-passeggeri-gallarate.title': 'Trenord lässt 30 Passagiere in Gallarate, Region intervenieren',
     'blog.article.trenord-abbandono-passeggeri-gallarate.excerpt': 'In der Nacht vom 22. auf den 23. September saßen etwa dreißig nach Malpensa reisende Passagiere nach der Abfahrt des letzten leeren Zuges bei Gallarate fest, ohne Unterstützung oder Anschlussverbindungen.',
     'blog.article.trenord-abbandono-passeggeri-gallarate.imageAlt': 'Leerer Ticiner Bahnhof nachts mit einem alleinstehenden Reisenden vor der Anzeigetafel',
+    'blog.article.lavori-verde-a8-d08.title': 'Nachtschliessungen A8 und D08: Abweichungen im Varesotto ab 28. September',
+    'blog.article.lavori-verde-a8-d08.excerpt': 'Drei Nächte Schließung zwischen A8 und D08 von 21:00 bis 5:00 Uhr, Grünpflegearbeiten zwischen Busto Arsizio, Besnate und Cavaria, Umleitungen auf Staats-, Provinz- und Gemeindestraßen.',
+    'blog.article.lavori-verde-a8-d08.imageAlt': 'Grünflächenpflege auf der Autobahn A8 bei Busto Arsizio nachts',
+    'blog.article.ticket-stipendio-acquisti-ticino.title': 'Lohn-Ticket: der Vorschlag zum Einkaufen im Tessin',
+    'blog.article.ticket-stipendio-acquisti-ticino.excerpt': 'Ticket-Gehalt im Tessin: Die Jugend des Zentrums schlägt vor, bis zu 5% des Gehalts für lokale Einkäufe zu verwenden, mit einem Steuergutschein von 25%.',
+    'blog.article.ticket-stipendio-acquisti-ticino.imageAlt': 'Lohn-Gutschein und Einkäufe in einem Geschäft im Tessin',
+    'blog.article.furti-auto-lusso-ticino.title': 'Luxusautodiebstähle im Tessin: drei Festgenommene',
+    'blog.article.furti-auto-lusso-ticino.excerpt': 'Es wurden vier High-End-Autos aus Manno, Lamone und Camorino gestohlen. Drei Jugendliche wurden verhaftet und ein vierter Verdächtiger nach gemeinsamen Ermittlungen gesucht.',
+    'blog.article.furti-auto-lusso-ticino.imageAlt': 'Luxusauto bei einem Händler im Tessin',
 };
 
 export default blogMetaDe;

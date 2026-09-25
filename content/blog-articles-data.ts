@@ -35982,6 +35982,33 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'lavori-verde-a8-d08',
+ category: 'pratico',
+ date: '2026-09-25T17:54:10.380Z',
+ image: '/images/blog/lavori-verde-a8-d08.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'ticket-stipendio-acquisti-ticino',
+ category: 'novita',
+ date: '2026-09-25T18:43:53.949Z',
+ image: '/images/blog/ticket-stipendio-acquisti-ticino.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'furti-auto-lusso-ticino',
+ category: 'novita',
+ date: '2026-09-25T19:58:24.420Z',
+ image: '/images/blog/furti-auto-lusso-ticino.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
