@@ -1,5 +1,7 @@
 import { createHash } from 'node:crypto';
-import { readFileSync, statSync } from 'node:fs';
+import { chmodSync, mkdtempSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import os from 'node:os';
 import path from 'node:path';
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
@@ -293,6 +295,33 @@ describe('orphan-pr-custodian — adozione di un 🔴 fuori scope (sito #9221/#9
   it('usa la stessa definizione di autonomia dei fixer', () => {
     assert.equal(isAutonomousPr(pr({ headRef: 'automerge-x' })), true);
     assert.equal(isAutonomousPr(pr()), false);
+  });
+
+  it('tratta un rate-limit sull’inventario iniziale come no-op ritentabile', () => {
+    const tempDir = mkdtempSync(path.join(os.tmpdir(), 'orphan-pr-custodian-rate-limit-'));
+    const ghStub = path.join(tempDir, 'gh');
+    writeFileSync(
+      ghStub,
+      '#!/usr/bin/env node\nconsole.error("gh: API rate limit exceeded for installation");\nprocess.exit(1);\n',
+    );
+    chmodSync(ghStub, 0o755);
+    try {
+      const result = spawnSync(
+        process.execPath,
+        [path.join(ROOT, 'scripts/ci/orphan-pr-custodian.mjs')],
+        {
+          encoding: 'utf8',
+          env: { ...process.env, REPO: 'example/repo', TRUSTED_GH_BIN: ghStub },
+        },
+      );
+      assert.equal(result.error, undefined);
+      assert.equal(result.status, 0, result.stderr);
+      assert.match(result.stdout, /Inventario PR non leggibile/);
+      assert.match(result.stdout, /API rate limit exceeded/);
+      assert.match(result.stdout, /inventario PR non disponibile, 0 azioni/);
+    } finally {
+      rmSync(tempDir, { recursive: true, force: true });
+    }
   });
 });
 
