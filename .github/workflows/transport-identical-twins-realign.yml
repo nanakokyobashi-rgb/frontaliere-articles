@@ -52,53 +52,14 @@ jobs:
           set -euo pipefail
           gh api --paginate "repos/$REPO/pulls/$PR_NUMBER" --jq '.body // ""' > "$RUNNER_TEMP/transport-body.md"
           gh api --paginate "repos/$REPO/pulls/$PR_NUMBER/files?per_page=100" --jq '.[].filename' > "$RUNNER_TEMP/transport-files.txt"
-          # shellcheck disable=SC2016
-          node -e '
-            const fs = require("fs");
-            const body = fs.readFileSync(process.env.RUNNER_TEMP + "/transport-body.md", "utf8");
-            const changed = new Set(fs.readFileSync(process.env.RUNNER_TEMP + "/transport-files.txt", "utf8").split(/\r?\n/).filter(Boolean));
-            const manifestPath = "scripts/ci/loop-sync-manifest.json";
-            const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
-            const declared = new Set((manifest.files || []).map((entry) => entry.path));
-            const identical = new Set((manifest.files || []).filter((entry) => entry.mode === "identical").map((entry) => entry.path));
-            const unknown = [...changed]
-              .filter((filename) => filename !== manifestPath && !declared.has(filename))
-              .sort();
-            if (unknown.length) {
-              throw new Error("file modificati dalla PR non dichiarati nel manifest: " + unknown.join(", "));
-            }
-            const expected = [...changed]
-              .filter((filename) => filename !== manifestPath && identical.has(filename))
-              .sort();
-            const excluded = [...changed]
-              .filter((filename) => filename !== manifestPath && declared.has(filename) && !identical.has(filename))
-              .sort();
-            if (excluded.length) {
-              console.log("Path non-identical esclusi dal realign post-merge: " + excluded.join(", "));
-            }
-            const found = new Map();
-            const normalizeSiteHash = (value) => {
-              const normalized = value.toLowerCase();
-              return normalized.length === 64 ? normalized.slice(0, 16) : normalized;
-            };
-            const re = /^- `([^`\n]+)` .*?\((?:site )?sha256 `([0-9a-fA-F]{16}|[0-9a-fA-F]{64})`\)\s*$/gm;
-            for (const match of body.matchAll(re)) {
-              if (!changed.has(match[1])) throw new Error("il body cita un path non presente nei file della PR: " + match[1]);
-              if (!identical.has(match[1])) continue;
-              const siteHash = normalizeSiteHash(match[2]);
-              if (found.has(match[1]) && found.get(match[1]) !== siteHash) {
-                throw new Error("il body cita lo stesso path con site hash diverse: " + match[1]);
-              }
-              found.set(match[1], siteHash);
-            }
-            const missing = expected.filter((filename) => !found.has(filename));
-            if (missing.length) {
-              throw new Error("il body non cita tutti i file trasportati e modificati dalla PR: " + missing.join(", "));
-            }
-            const unique = [...found].map(([filename, siteHash]) => filename + "\t" + siteHash).sort();
-            fs.writeFileSync(process.env.RUNNER_TEMP + "/transport-realign.tsv", unique.length ? unique.join("\n") + "\n" : "");
-            console.log("Path realign post-merge: " + unique.length + " citati su " + expected.length + " attesi; " + excluded.length + " non-identical esclusi");
-          '
+          # Formato e parser vivono in scripts/ci/transport-realign-body.mjs,
+          # lo stesso modulo con cui transport-identical-twins.yml scrive le
+          # righe: path con backtick, hash storiche e bullet duplicati hanno una
+          # sola definizione, coperta da generator/tests/transport-realign-body.test.mjs.
+          node scripts/ci/transport-realign-body.mjs \
+            "$RUNNER_TEMP/transport-body.md" \
+            "$RUNNER_TEMP/transport-files.txt" \
+            "$RUNNER_TEMP/transport-realign.tsv"
 
       # Il PAT corpus-owned permette il push sul branch protetto quando le
       # regole lo consentono; senza caricarlo il job non può materializzare la

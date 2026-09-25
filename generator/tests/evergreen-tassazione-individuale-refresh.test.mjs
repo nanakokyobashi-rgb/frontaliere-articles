@@ -16,6 +16,18 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const SLUG = 'tassazione-individuale-lavoro-ticino';
 const LOCALES = ['it', 'en', 'de', 'fr'];
 const REFRESHED_ON = '2026-09-24';
+const UNSUPPORTED_FAQ_CLAIMS = Object.freeze({
+  it: ['crescita +8% rispetto al 2024', "3\\'200 nuove offerte", 'può ridurre il tempo medio di ricerca da 3 a 1,5 mesi'],
+  en: ['growth +8% compared to 2024', "3\\'200 new offers", 'can reduce the average search time from 3 to 1.5 months'],
+  de: ['Wachstum +8% gegenüber 2024', "3\\'200 neue Angebote", 'die durchschnittliche Suchzeit von 3 auf 1,5 Monate reduzieren'],
+  fr: ['croissance +8% par rapport à 2024', "3\\'200 nouvelles offres", 'peut réduire le temps de recherche moyen de 3 à 1,5 mois'],
+});
+const FAQ_SOURCE_DISCLAIMERS = Object.freeze({
+  it: 'Non è disponibile una fonte ufficiale',
+  en: 'No official source was found',
+  de: 'Eine offizielle Quelle',
+  fr: 'Aucune source officielle',
+});
 
 function bodySource(locale) {
   return fs.readFileSync(path.join(ROOT, 'content', 'blog-body', locale, `${SLUG}.ts`), 'utf8');
@@ -45,5 +57,13 @@ for (const locale of LOCALES) {
     assert.doesNotMatch(source, /2\\'600 CHF/, 'netto inventato');
     assert.doesNotMatch(source, /70%/, 'statistica attribuita a EFD 2022');
     assert.doesNotMatch(source, /Ticino votes|in Ticino l\\'8 marzo|imponibile individuale in Ticino|Ticino potrebbe introdurre/);
+  });
+
+  test(`${locale}: le FAQ non inventano numeri su settori o networking`, () => {
+    const source = bodySource(locale);
+    for (const claim of UNSUPPORTED_FAQ_CLAIMS[locale]) {
+      assert.equal(source.includes(claim), false, `affermazione non verificata ancora presente: ${claim}`);
+    }
+    assert.equal(source.includes(FAQ_SOURCE_DISCLAIMERS[locale]), true, 'manca la qualificazione editoriale della fonte');
   });
 }
