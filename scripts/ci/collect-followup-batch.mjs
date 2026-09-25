@@ -328,6 +328,16 @@ export function hasTriageComment(commentsJson, prefix = TRIAGE_COMMENT_PREFIX) {
 }
 
 /**
+ * L'istante di un commento `gh pr view --json comments`, in millisecondi, o
+ * `NaN` quando `createdAt` manca o non e' una data leggibile. Unico parsing di
+ * `createdAt` del modulo: lo usano sia la scelta del marker corrente sia
+ * l'ordinamento della prova del gate sul conio rispetto a quel marker.
+ */
+function commentInstant(createdAt) {
+  return Date.parse(typeof createdAt === 'string' ? createdAt : '');
+}
+
+/**
  * Return the latest follow-up marker body, or null when it is not provable.
  *
  * «Ultimo» e' TEMPORALE, non la posizione nell'array: `gh pr view --json
@@ -341,6 +351,17 @@ export function hasTriageComment(commentsJson, prefix = TRIAGE_COMMENT_PREFIX) {
  * di timestamp vince la posizione successiva.
  */
 export function latestTriageCommentBody(commentsJson, prefix = TRIAGE_COMMENT_PREFIX) {
+  const marker = latestTriageComment(commentsJson, prefix);
+  return marker ? marker.body : null;
+}
+
+/**
+ * Come `latestTriageCommentBody`, ma restituisce anche l'istante del marker
+ * scelto: `{ body, at }`, con `at` in millisecondi o `NaN` quando l'unico marker
+ * non porta un `createdAt` leggibile. `null` negli stessi casi di
+ * `latestTriageCommentBody`.
+ */
+export function latestTriageComment(commentsJson, prefix = TRIAGE_COMMENT_PREFIX) {
   let data;
   try {
     data = JSON.parse(commentsJson || '');
@@ -354,15 +375,16 @@ export function latestTriageCommentBody(commentsJson, prefix = TRIAGE_COMMENT_PR
   const markers = comments
     .map((comment, index) => ({
       body: typeof comment?.body === 'string' ? comment.body : '',
-      at: Date.parse(typeof comment?.createdAt === 'string' ? comment.createdAt : ''),
+      at: commentInstant(comment?.createdAt),
       index,
     }))
     .filter((marker) => marker.body.trimStart().startsWith(prefix));
   if (!markers.length) return null;
-  if (markers.length === 1) return markers[0].body;
+  if (markers.length === 1) return { body: markers[0].body, at: markers[0].at };
   if (markers.some((marker) => !Number.isFinite(marker.at))) return null;
   markers.sort((left, right) => (left.at - right.at) || (left.index - right.index));
-  return markers[markers.length - 1].body;
+  const latest = markers[markers.length - 1];
+  return { body: latest.body, at: latest.at };
 }
 
 /**
@@ -516,10 +538,21 @@ export function triageMarkerPersistenceExpectation(markerBody) {
  * The gate may remove every item sourced by a PR when none has a falsifiable
  * acceptance condition. It keeps the complete item in a comment on the source
  * PR, so the daily bucket no longer contains Sources: PR #N even though the
- * triage result is durable. The bucket number is part of that comment to keep
- * an old demotion from satisfying a newer marker.
+ * triage result is durable.
+ *
+ * Il numero del bucket da solo NON lega la prova al marker corrente: un
+ * re-triage della stessa PR nello stesso bucket giornaliero, o il retry di una
+ * PR con piu' bucket, trovava il commento del gate di un triage PRECEDENTE e
+ * certificava una scrittura nuova mai persistita (#1812). Nel workflow il gate
+ * posta il suo commento sempre DOPO il marker che certifica (lo step `Verify
+ * complete follow-up triage` precede `Gate sul conio`), quindi vale solo un
+ * commento con `createdAt` leggibile e >= `markerCreatedAt`, l'istante del
+ * marker corrente (ISO string o millisecondi). Istante del marker o del
+ * commento mancante o illeggibile: la prova non vale e la PR resta nel batch.
  */
-export function gatePreservedFollowupMatches(commentsJson, bucketNumber, prNumber) {
+export function gatePreservedFollowupMatches(commentsJson, bucketNumber, prNumber, markerCreatedAt) {
+  const markerAt = typeof markerCreatedAt === 'number' ? markerCreatedAt : commentInstant(markerCreatedAt);
+  if (!Number.isFinite(markerAt)) return false;
   let data;
   try {
     data = JSON.parse(commentsJson || '');
@@ -535,21 +568,28 @@ export function gatePreservedFollowupMatches(commentsJson, bucketNumber, prNumbe
   const sourcePattern = new RegExp('^\\s*-\\s+Sources?\\s*:[^\\n]*\\bPR\\s+#' + pr + '\\b', 'im');
   return comments.some((comment) => {
     const body = typeof comment?.body === 'string' ? comment.body : '';
+    const at = commentInstant(comment?.createdAt);
     return body.includes('<!-- followup-mint-gate -->')
+      && Number.isFinite(at)
+      && at >= markerAt
       && bucketPattern.test(body)
       && sourcePattern.test(body);
   });
 }
 
-/** Prove one persisted daily bucket contains a live item sourced by this PR. */
-export function persistedBucketIssueMatches(issue, prNumber, prComments = '') {
+/**
+ * Prove one persisted daily bucket contains a live item sourced by this PR,
+ * or that the mint gate preserved it AFTER the current marker
+ * (`markerCreatedAt`, vedi `gatePreservedFollowupMatches`).
+ */
+export function persistedBucketIssueMatches(issue, prNumber, prComments = '', markerCreatedAt = undefined) {
   const info = dailyBucketInfo(issue?.title || '');
   const body = String(issue?.body || '');
   const pr = String(Number(prNumber));
   if (!info) return false;
   const directEvidence = /^###\s+FU-\d{4}-\d{2}-\d{2}-\d{3}\b/m.test(body)
     && new RegExp('^\\s*-\\s+Sources?\\s*:[^\\n]*\\bPR\\s+#' + pr + '\\b', 'im').test(body);
-  return directEvidence || gatePreservedFollowupMatches(prComments, issue.number, prNumber);
+  return directEvidence || gatePreservedFollowupMatches(prComments, issue.number, prNumber, markerCreatedAt);
 }
 
 /**
@@ -621,18 +661,23 @@ function bucketReadResult(result) {
  * Gli ID `FU-...` dichiarati NON vengono cercati uno per uno: il gate sul conio
  * ricompone il corpo e RINUMERA gli item validi, quindi l'ID del marker puo'
  * legittimamente non comparire piu' nel bucket. La prova per bucket resta
- * «item vivo con `Sources: PR #N`» oppure il commento di conservazione del gate.
+ * «item vivo con `Sources: PR #N`» oppure il commento di conservazione del gate
+ * POSTERIORE al marker verificato. L'istante del marker si legge da
+ * `prComments`: vale solo se `markerBody` e' proprio il marker corrente di quei
+ * commenti (`latestTriageComment`), altrimenti la prova del gate non vale.
  */
 export function verifyTriageMarkerPersistence(markerBody, prNumber, readIssue, prComments = '') {
   const expectation = triageMarkerPersistenceExpectation(markerBody);
   if (expectation.explicitZero || expectation.explicitAntiNipoteSkip) return true;
   if (!expectation.buckets.length || typeof readIssue !== 'function') return false;
+  const current = latestTriageComment(prComments);
+  const markerAt = current && current.body === markerBody ? current.at : Number.NaN;
   let unreadable = false;
   let disproved = false;
   for (const number of expectation.buckets) {
     const read = bucketReadResult(readIssue(number));
     const proved = read.candidates.some((issue) => Number(issue?.number) === number
-      && persistedBucketIssueMatches(issue, prNumber, prComments));
+      && persistedBucketIssueMatches(issue, prNumber, prComments, markerAt));
     if (proved) continue;
     if (read.unreadable) unreadable = true;
     else disproved = true;

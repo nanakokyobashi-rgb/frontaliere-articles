@@ -318,6 +318,13 @@ import { findIdListLiteralSpan } from '../../scripts/lib/ts-literals.mjs';
 import { SECTIONS as ARTICLE_SURFACES } from '../../scripts/lib/article-surfaces.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 import {
+  IRPEF_ANNO_CORRENTE,
+  IRPEF_ANNO_PRECEDENTE,
+  IRPEF_FONTE_CORRENTE,
+  irpefScaglioniTesto,
+  irpefAliquoteBreve,
+} from './lib/irpef-scaglioni.mjs';
+import {
   beginRegisterLock as beginRegisterLockImpl,
   endRegisterLock as endRegisterLockImpl,
   resolveRegisterLock as resolveRegisterLockImpl,
@@ -5367,8 +5374,9 @@ ALIQUOTE SVIZZERE:
 - IGM (IJM): ~0.5%-1.0% (perdita guadagno malattia, non obbligatoria federale)
 - LPP: dal 25 anni, contributi variabili per fascia d'età (7%-18% salario coordinato)
 
-ALIQUOTE ITALIANE (2024-2026):
-- IRPEF: 23% fino €28'000, 35% €28'001-€50'000, 43% oltre €50'000
+ALIQUOTE ITALIANE:
+- IRPEF dal ${IRPEF_ANNO_CORRENTE}: ${irpefScaglioniTesto(IRPEF_ANNO_CORRENTE)} (${IRPEF_FONTE_CORRENTE})
+- IRPEF 2024-${IRPEF_ANNO_PRECEDENTE}: ${irpefAliquoteBreve(IRPEF_ANNO_PRECEDENTE)} — corretta SOLO per redditi di quegli anni
 - Franchigia nuovo accordo: €10'000 esenti per NUOVI frontalieri (dal 2024)
 - Vecchi frontalieri (ante 17/7/2023): esenzione €7'500 fino al 2033
 
@@ -5436,12 +5444,23 @@ ASSICURAZIONI:
 // feeds whichever model the chain picks) has the real names before writing,
 // instead of only being graded against them after the fact. New estTokens
 // ~7333 (+118 vs the measurement above) — still ~667 under the 8000 cap.
+//
+// Changed 2026-09-24 (issue #1777): the IRPEF line now comes from
+// lib/irpef-scaglioni.mjs — 2026 brackets (33% second bracket, Legge 199/2025)
+// plus a short 2024–2025 reminder, so an article about the 2025 tax return is
+// not steered away from the (then correct) second-bracket rate. Measured on
+// the ASSEMBLED first-attempt evergreen prompt with the same estimator
+// (evergreenPrompt() in tests/news-prompt-token-budget.test.mjs): frontaliere
+// 7486 -> 7506 est. tokens (+20), svizzera 7662 unchanged; that test keeps
+// both under the 8000 cap. The fact-check sheet (VERIFIED_DOMAIN_FACTS plus
+// criteria 3-4) grows 2830 -> 2980 chars (+150, ~43 est. tokens); it rides on up to 24000 chars of
+// article, so its admission is set by the article, not by this delta.
 const EVERGREEN_FACTS_BRIEF = `FATTI VERIFICATI (ground truth — il fact-checker blocca l'articolo se diverghi da questi valori):
 - Imposta alla fonte sul reddito da lavoro: trattenuta SOLO in Svizzera per i frontalieri (MAI "in entrambi i paesi"). L'Italia evita la doppia imposizione con il credito d'imposta (quadro CE del 730).
 - Nuovo Accordo Frontalieri: firmato 23/12/2020, in vigore dal 1° GENNAIO 2024 (NON 2026). Ratifica IT: Legge 83 del 13/6/2023.
 - Vecchi frontalieri (già tali prima del 17/7/2023): esenzione €7'500, regime transitorio 2024–2033. Nuovi frontalieri: franchigia €10'000.
 - Convenzione doppie imposizioni Italia-Svizzera: firmata il 9 MARZO 1976 (NON dicembre). La Svizzera NON è membro UE/SEE.
-- Aliquote/contributi svizzeri: AVS/AI/IPG 5.3% dipendente, AD/AC 1.1% (cap CHF 148'200), LAINF 0.7–1.5%, LPP 7–18% per fascia età (dal 25 anni). IRPEF italiana: 23% fino €28'000, 35% €28'001–50'000, 43% oltre €50'000.
+- Aliquote/contributi svizzeri: AVS/AI/IPG 5.3% dipendente, AD/AC 1.1% (cap CHF 148'200), LAINF 0.7–1.5%, LPP 7–18% per fascia età (dal 25 anni). IRPEF italiana dal ${IRPEF_ANNO_CORRENTE}: ${irpefScaglioniTesto(IRPEF_ANNO_CORRENTE)} (${IRPEF_FONTE_CORRENTE}; redditi 2024–${IRPEF_ANNO_PRECEDENTE}: ${irpefAliquoteBreve(IRPEF_ANNO_PRECEDENTE)}).
 - Acronimi/enti VALIDI (non inventarne altri): SECO, SEM, USTAT, UFSP/BAG, SUVA, INPS, Agenzia delle Entrate, MEF, BFS (Ufficio Federale di Statistica), AFC/ESTV (Amministrazione Federale delle Contribuzioni).
 - Le aliquote fiscali (imposta alla fonte, aliquote federali/cantonali) sono stabilite da leggi federali/cantonali e amministrate da AFC/ESTV a livello federale e dalle amministrazioni cantonali delle contribuzioni — MAI da UFAS (previdenza sociale, AVS/AI) né da BFS (statistica: rileva dati, non fissa aliquote).
 - LAMal = assicurazione malattia (NON "tassa sulla salute"); frontalieri G hanno diritto d'opzione; franchige adulti CHF 300–2500.`;
@@ -5646,9 +5665,9 @@ VERIFICA SISTEMATICA — controlla OGNI categoria:
 
 2. **ISTITUZIONI E ENTI**: Ogni istituzione menzionata deve esistere realmente. Confronta con la lista di istituzioni reali nei fatti verificati. Segnala qualsiasi acronimo NON presente in quella lista come sospetto. NON esiste: "Codice federale del lavoro", "CFL", "UFOL", "UWL", "Commissione federale per i frontalieri", "Ufficio federale dell'integrazione sanitaria (UFIS)".
 
-3. **ALIQUOTE E CIFRE FISCALI**: Confronta OGNI aliquota con i valori nei fatti verificati. AVS=5.3%, AC=1.1%, IRPEF 23%/35%/43%. Se un'aliquota non corrisponde = critical.
+3. **ALIQUOTE E CIFRE FISCALI**: Confronta OGNI aliquota con i valori nei fatti verificati. AVS=5.3%, AC=1.1%, IRPEF ${irpefAliquoteBreve(IRPEF_ANNO_CORRENTE)} (2024-${IRPEF_ANNO_PRECEDENTE}: ${irpefAliquoteBreve(IRPEF_ANNO_PRECEDENTE)}). Se un'aliquota non corrisponde = critical.
 
-4. **STATISTICHE E PERCENTUALI**: Percentuali precise con decimali (es. "il 73,2% dei frontalieri") DEVONO provenire da studi reali citati per nome E ISTITUTO. Senza attribuzione precisa = probabile invenzione. ECCEZIONE: arrotondamenti a numeri interi da fonti note (es. "circa il 30% della forza lavoro" da USTAT) sono accettabili. Non segnalare aliquote esplicitamente elencate nei fatti verificati (AVS=5.3%, AC=1.1%, IRPEF 23%/35%/43%, franchigia 10.000 euro) come issue se sono riportate correttamente.
+4. **STATISTICHE E PERCENTUALI**: Percentuali precise con decimali (es. "il 73,2% dei frontalieri") DEVONO provenire da studi reali citati per nome E ISTITUTO. Senza attribuzione precisa = probabile invenzione. ECCEZIONE: arrotondamenti a numeri interi da fonti note (es. "circa il 30% della forza lavoro" da USTAT) sono accettabili. Non segnalare aliquote esplicitamente elencate nei fatti verificati (AVS=5.3%, AC=1.1%, IRPEF ${irpefAliquoteBreve(IRPEF_ANNO_CORRENTE)} o 2024-${IRPEF_ANNO_PRECEDENTE} ${irpefAliquoteBreve(IRPEF_ANNO_PRECEDENTE)}, franchigia 10.000 euro) come issue se sono riportate correttamente.
 
 5. **DATE E EVENTI**: Confronta con le date verificate: Convenzione 9/3/1976, Nuovo Accordo 23/12/2020, vigenza dal 1/1/2024, Legge 83/2023. ${isEvergreen ? '' : 'Date presenti nell\'articolo ma ASSENTI dalla fonte = altamente sospette.'}
 
