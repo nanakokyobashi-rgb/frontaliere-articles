@@ -43,10 +43,15 @@ test('un claim vecchio senza PR aperta è stale', () => {
   assert.deepEqual(nums(selectStaleClaims(issues, new Set(), NOW)), [4248]);
 });
 
-test('un claim locale vecchio NON viene rilasciato automaticamente', () => {
-  const issues = [{ number: 4248, labels: LOCAL_CLAIM, updatedAt: hoursAgo(30) }];
+test('un claim locale sotto soglia resta protetto anche se updatedAt è più vecchio', () => {
+  const issues = [{ number: 4248, labels: LOCAL_CLAIM, updatedAt: hoursAgo(30), claimedAt: hoursAgo(23) }];
   assert.equal(claimOwner(LOCAL_CLAIM), 'local');
   assert.deepEqual(nums(selectStaleClaims(issues, new Set(), NOW)), []);
+});
+
+test('un claim locale oltre la soglia estesa è stale', () => {
+  const issues = [{ number: 4248, labels: LOCAL_CLAIM, updatedAt: hoursAgo(30), claimedAt: hoursAgo(25) }];
+  assert.deepEqual(nums(selectStaleClaims(issues, new Set(), NOW)), [4248]);
 });
 
 test('un claim remoto vecchio resta liberabile dal detector', () => {
@@ -64,7 +69,7 @@ test('un owner-only remoto è visibile e resta liberabile dopo una scrittura par
 
 test('un owner-only locale resta protetto anche senza il mutex base', () => {
   const ownerOnly = [{ name: 'agent:local' }];
-  const issues = [{ number: 4248, labels: ownerOnly, updatedAt: hoursAgo(30) }];
+  const issues = [{ number: 4248, labels: ownerOnly, updatedAt: hoursAgo(30), claimedAt: hoursAgo(23) }];
   assert.equal(claimOwner(ownerOnly), 'local');
   assert.deepEqual(nums(selectStaleClaims(issues, new Set(), NOW)), []);
 });
