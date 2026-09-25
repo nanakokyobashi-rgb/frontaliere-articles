@@ -383,7 +383,7 @@ function removeAuthHome() {
   }
 }
 
-function runCodex({ authJson: credential, prompt, timeoutMs, schema }) {
+function runCodex({ authJson: credential, prompt, timeoutMs, schema, onSpawn }) {
   // Per-request tree: workspace, TMPDIR and the output files. The login lives
   // in the per-job home instead (prepareAuthHome), outside this tree.
   const runtimeRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-haiku-broker-'));
@@ -460,6 +460,9 @@ function runCodex({ authJson: credential, prompt, timeoutMs, schema }) {
         detached: process.platform !== 'win32',
       });
       activeChild = child;
+      // Only a process that really started counts as started: a spawn that
+      // fails emits 'error' instead, and the request is answered from there.
+      if (onSpawn) child.once('spawn', onSpawn);
       let stderrTail = '';
       child.stderr.setEncoding('utf8');
       child.stderr.on('data', (chunk) => {
@@ -628,21 +631,27 @@ function startNextRequest() {
   job.started = true;
   activeRequest = job;
   const timeoutMs = Number(job.parsed.timeoutMs);
-  job.client.setTimeout(Math.max(5000, timeoutMs + 10_000), () => {
-    cancelRequest(job);
-    job.client.destroy();
-  });
-  if (job.parsed.notifyStart === true) {
-    // A client that left meanwhile emits 'error'/'close', which cancel the
-    // request like any other disconnect.
-    try { job.client.write(CLIENT_START_SIGNAL); } catch { /* client already closed */ }
-  }
+  // The execution budget, on both sides of the socket, starts when the Codex
+  // process has actually spawned, not when the request leaves the queue.
+  const onSpawn = () => {
+    if (job.cancelled || job.client.destroyed) return;
+    job.client.setTimeout(Math.max(5000, timeoutMs + 10_000), () => {
+      cancelRequest(job);
+      job.client.destroy();
+    });
+    if (job.parsed.notifyStart === true) {
+      // A client that left meanwhile emits 'error'/'close', which cancel the
+      // request like any other disconnect.
+      try { job.client.write(CLIENT_START_SIGNAL); } catch { /* client already closed */ }
+    }
+  };
   const credential = authJson;
   runCodex({
     authJson: credential,
     prompt: job.parsed.prompt,
     timeoutMs,
     schema: job.parsed.schema ?? null,
+    onSpawn,
   }).then(
     (result) => {
       if (job.cancelled) return;

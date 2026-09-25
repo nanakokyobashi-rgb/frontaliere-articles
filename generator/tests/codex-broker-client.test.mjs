@@ -18,6 +18,7 @@ import {
   AI_MODELS,
   __installScoreStoreForTests,
   callLLM,
+  classifyExhaustionCause,
   getScoreBoard,
   isModelAvailable,
   resetState,
@@ -114,7 +115,7 @@ test('chiede il segnale di avvio e toglie i byte di controllo prima della rispos
 
 test('una richiesta mai partita scade come attesa in coda, senza toccare lo score', async () => {
   behavior = (client) => { client.write('\0'); };
-  await assert.rejects(() => callCodex({ deadlineMs: Date.now() + 1500 }), /queue wait exceeded \d+s before Codex started/);
+  await assert.rejects(() => callCodex({ deadlineMs: Date.now() + 1500 }), /queue wait timed out after \d+s before Codex started/);
   assert.match(logged(), /guasto di trasporto/);
   assert.equal(codexScore(), 0);
 });
@@ -135,11 +136,37 @@ test('un broker sparito spegne la lane per il processo al primo ENOENT', async (
   assert.match(logged(), /broker non raggiungibile \(ENOENT\)/);
   assert.match(logged(), /guasto di trasporto/);
   assert.equal(isModelAvailable(CODEX), false);
-  await assert.rejects(() => callCodex(), /no API key for provider codex_cli/);
+  await assert.rejects(() => callCodex(), /skipped — Codex auth broker temporarily unavailable \(socket gone for this job\)/);
   assert.equal(codexScore(), 0);
 
   process.env.CODEX_AUTH_BROKER_SOCKET = path.join(root, 'other.sock');
   assert.equal(isModelAvailable(CODEX), true, 'un socket diverso riapre la lane');
+});
+
+// Quando tutta la catena fallisce, il testo degli errori decide fra
+// differimento (transitorio) e Workflow Failure (persistente). Una coda o un
+// broker sparito si riparano al run successivo: devono votare transitorio, non
+// restare ambigui ne' finire nel secchio di «no API key».
+test('ogni guasto del canale broker vota transitorio nel tally di esaurimento', async () => {
+  const rows = [];
+  behavior = (client) => { client.write('\0'); };
+  await callCodex({ deadlineMs: Date.now() + 1200 }).catch((error) => rows.push(String(error.message)));
+  behavior = (client) => { client.end(); };
+  await callCodex().catch((error) => rows.push(String(error.message)));
+  for (const socket of sockets) socket.destroy();
+  await new Promise((resolve) => server.close(resolve));
+  fs.rmSync(socketPath, { force: true });
+  await callCodex().catch((error) => rows.push(String(error.message)));
+  await callCodex().catch((error) => rows.push(String(error.message)));
+
+  const codexRows = rows.map((message) => message.match(/Errors: (.*)$/s)?.[1] ?? message);
+  assert.equal(codexRows.length, 4);
+  const tally = classifyExhaustionCause(codexRows);
+  assert.deepEqual(
+    { transient: tally.transient, persistent: tally.persistent },
+    { transient: 4, persistent: 0 },
+    codexRows.join('\n'),
+  );
 });
 
 test('un broker che chiude senza risposta e\' un guasto di trasporto', async () => {
