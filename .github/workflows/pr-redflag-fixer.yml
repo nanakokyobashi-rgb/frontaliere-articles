@@ -1059,6 +1059,32 @@ jobs:
             context_fail "Nessuna review Claude verificabile sulla HEAD e revisione body correnti: il redflag fixer resta fail-closed senza Claude."
           fi
 
+          # Le sezioni vincolanti devono provenire dalla base canonica, non dalla
+          # head della PR: una PR che modifica REVIEW.md/AGENTS.md non deve poter
+          # disabilitare il contratto usato dal fixer che la esamina. Il fetch e
+          # l'estrazione sono fail-closed: senza base o heading validi, nessun
+          # prompt Codex viene costruito.
+          if ! git fetch --no-tags origin main:refs/remotes/origin/main >/dev/null 2>&1; then
+            context_fail "Impossibile leggere origin/main per estrarre le sezioni vincolanti; nessun Codex viene avviato."
+          fi
+          mkdir -p "$OUT/canonical-docs"
+          for doc in REVIEW.md AGENTS.md; do
+            if ! git show "origin/main:$doc" > "$OUT/canonical-docs/$doc" 2>/dev/null; then
+              context_fail "Documento vincolante assente in origin/main: $doc; nessun Codex viene avviato."
+            fi
+          done
+          if ! REDFLAG_DOC_ROOT="$OUT/canonical-docs" node scripts/ci/redflag-doc-sections.mjs > "$OUT/redflag-doc-sections.md"; then
+            context_fail "Impossibile estrarre le sezioni vincolanti da REVIEW.md/AGENTS.md; nessun Codex viene avviato."
+          fi
+          if grep -Fqx 'REDFLAG_DOC_SECTIONS_EOF' "$OUT/redflag-doc-sections.md"; then
+            context_fail "Il documento vincolante contiene il delimiter di REDFLAG_DOC_SECTIONS; nessun Codex viene avviato."
+          fi
+          {
+            echo 'REDFLAG_DOC_SECTIONS<<REDFLAG_DOC_SECTIONS_EOF'
+            cat "$OUT/redflag-doc-sections.md"
+            echo 'REDFLAG_DOC_SECTIONS_EOF'
+          } >> "$GITHUB_ENV"
+
           {
             echo "# Redflag-fix bundle — PR #$PR_NUMBER"
             echo
@@ -1265,15 +1291,19 @@ jobs:
           prompt: |
             Sei l'agent di chiusura 🔴 per la PR #${{ needs.preflight.outputs.pr_number }} ("${{ needs.preflight.outputs.pr_title }}"). Tier: ${{ steps.guard.outputs.tier }}. Round: ${{ steps.guard.outputs.round }}/2.
 
+            **Contratto documentale vincolante (prefetch zero-Claude):**
+            Le sezioni vincolanti sono già dentro questa richiesta, non in un output del tool:
+            ${{ env.REDFLAG_DOC_SECTIONS }}
+
             **Bootstrap:**
-            1. Leggi `REVIEW.md` (severity/scopo) + `AGENTS.md` (non-negotiables + Privacy). VINCOLANTI.
+            1. Usa il contratto documentale già incluso sopra: `REVIEW.md` (scopo + severity) e `AGENTS.md` (Non-negoziabili + Credenziali). Se una sezione manca, considera il prefetch fallito e fermati: non procedere con un contratto incompleto.
             2. Il bundle deterministico è già pronto in `${{ runner.temp }}/redflag/redflag-bundle.md` (prefetch zero-Claude): PR metadata (title/body/headRefName), elenco file completo (REST paginata, non tronca a 100), ultima review Claude con i 🔴. **Leggilo con `Read` come prima cosa; non rieseguire `gh pr view` o `gh api .../reviews` per gli stessi dati** — solo se una sezione risulta vuota/mancante e ti serve davvero, ripeti la singola chiamata mancante. Il branch è già checkoutato sulla head della PR.
 
             **Obiettivo:** applica un fix CLASS-COMPLETE ai SOLI findings `🔴 Important` della review più recente su QUESTO branch. NON mergiare.
 
             **Regole:**
             - Fix CHIRURGICO alla CLASSE del bug (AGENTS.md non-negotiable #6): se il 🔴 segnala un pattern (regex/guard/floor/threshold/selector/idiom), `rg` i sibling funnel-critical (`scripts/update-*.mjs`, `scripts/lib/*-parser.mjs`, `build-plugins/**`, `services/seoService.ts`) e sweepa l'intera classe nella STESSA commit, oppure giustifica ogni sibling non toccato in `## Non implementato`.
-            - Mai abbassare quality gate/test/validation/SEO gate per "far passare" (#1). Mai disabilitare AdSense Auto Ads (#7). Mai path home assoluti o email personali (Privacy).
+            - Mai abbassare quality gate/test/validation/SEO gate per "far passare" (#1). Mai path home assoluti o email personali (AGENTS.md #7).
             - CODE vs DATA: non scorrere i blob `data/**`/`public/**`; fixa il CODE che li genera.
             - Esegui i test pertinenti: `npm test` (o il subset rilevante) per validare il fix prima di committare.
             - Commit con identity canonica già configurata (Valerie Linc <valerielinc@gmail.com>), messaggio conventional, nessuna email non-canonica in coda.
