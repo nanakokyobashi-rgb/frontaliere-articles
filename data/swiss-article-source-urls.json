@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1945082/cina-esportazioni-dazi-svizzera": {
-    "articleId": "svizzera-cina-dazi-export",
-    "ts": "2026-08-20T16:20:14.907Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4001205": {
     "articleId": "monopattini-casco-sicurezza",
     "ts": "2026-08-20T17:02:35.709Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4102957": {
     "articleId": "turismo-agosto-ospiti-estero",
     "ts": "2026-09-24T22:53:55.016Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1952370/salasso-alla-pompa-dopo-il-diesel-ora-tocchera-alla-benzina": {
+    "articleId": "salasso-alla-pompa-benzina",
+    "ts": "2026-09-25T01:29:16.672Z",
     "keyForm": 2
   }
 }
