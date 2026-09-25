@@ -636,6 +636,15 @@ export const REVIEW_ABORT_STEP_NAME = 'Fail on transient API error (no review po
 /** Nome dello step che decide se Codex va saltato sul contributo invariato. */
 export const REVIEW_GUARD_STEP_NAME = 'Re-review guard (skip Codex when no code changed since last LGTM)';
 
+/**
+ * Nome dello step che acquisisce il claim della review. La sua `if:` dipende
+ * da `steps.guard.outputs.skip`: in un job verde, con il review gate eseguito,
+ * lo step risulta `skipped` solo quando il guard ha scritto `skip=true`. La
+ * Jobs API non espone gli output degli step, quindi e' questo il segnale che il
+ * gate nativo legge per il carry-forward Codex (#1870).
+ */
+export const REVIEW_CLAIM_STEP_NAME = 'Claim review PR + HEAD + contribution (zero-agent)';
+
 /** Nome dello step che distingue un gate rosso per verdetto da un errore transitorio. */
 export const REVIEW_GATE_FAILURE_STEP_NAME = 'Classify review gate failure';
 
