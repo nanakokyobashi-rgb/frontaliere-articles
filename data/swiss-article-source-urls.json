@@ -1,14 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1945097/costi-svizzera-costruzione-reattori-rapporto-nucleare-miliardi-franchi-nuovo": {
-    "articleId": "centrale-nucleare-costi-14-43-miliardi",
-    "ts": "2026-08-20T23:22:00.482Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/voto-27-settembre%3a-neutralit%c3%a0-verso-no%2c-alimentazione-pi%c3%b9-tirata/91931497": {
-    "articleId": "voto-27-settembre-neutralita",
-    "ts": "2026-08-21T06:03:50.509Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1945207/fermacell-holcim-accordo-gruppo-primo": {
     "articleId": "holcim-acquista-fermacell",
     "ts": "2026-08-21T06:35:01.282Z",
@@ -2497,6 +2487,16 @@
   "https://www.tio.ch/svizzera/politica/1952348/iniziativa-sulla-neutralita-iniziativa-sull-alimentazione-come-avete-votato": {
     "articleId": "urne-due-iniziative-2026",
     "ts": "2026-09-25T03:15:17.893Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/gk9oevj1cu2z": {
+    "articleId": "conferenza-protezione-popolazione-berna",
+    "ts": "2026-09-25T04:12:08.523Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/ohtzzau7ift5": {
+    "articleId": "lumpy-skin-disease-fine-vaccinazione",
+    "ts": "2026-09-25T04:56:43.757Z",
     "keyForm": 2
   }
 }

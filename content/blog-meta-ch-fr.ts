@@ -6689,6 +6689,12 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.urne-due-iniziative-2026.title': 'Note Suisse : neutralité et alimentation',
     'blog.article.urne-due-iniziative-2026.excerpt': 'Le 27 septembre 2026, la Suisse vote sur la neutralité et l\'alimentation. La source vous invite à participer au sondage de 20 minutes et Tamedia.',
     'blog.article.urne-due-iniziative-2026.imageAlt': 'Vote suisse sur neutralité et alimentation',
+    'blog.article.conferenza-protezione-popolazione-berna.title': 'Conférence sur la protection de la population : diffusion cellulaire accélérée',
+    'blog.article.conferenza-protezione-popolazione-berna.excerpt': 'Le 23 septembre 2026 à Berne, le Conseil fédéral accélère le cell broadcast et Marc Siegenthaler participe à la conférence.',
+    'blog.article.conferenza-protezione-popolazione-berna.imageAlt': 'Délégués cantonaux réunis à Berne pour discuter de la protection de la population et du cell broadcast.',
+    'blog.article.lumpy-skin-disease-fine-vaccinazione.title': 'LSD : fin de la vaccination bovine le 30 septembre 2026',
+    'blog.article.lumpy-skin-disease-fine-vaccinazione.excerpt': 'La campagne se termine le 30/09/2026. À partir du 1er octobre, une attente de 8 mois avec surveillance ciblée commence jusqu\'en juin 2027.',
+    'blog.article.lumpy-skin-disease-fine-vaccinazione.imageAlt': 'Vache dans un pâturage suisse avec des montagnes à l\'arrière-plan, contexte de la surveillance LSD',
 };
 
 export default blogMetaChFr;
