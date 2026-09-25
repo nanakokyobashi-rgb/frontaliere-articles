@@ -390,14 +390,19 @@ jobs:
           # del body (`pr-body-contract`) lo leggerebbe come assente.
           # Questo punto e' DOPO il push/fallback: il report e' cosi' quello
           # effettivamente pubblicato, non il batch rifiutato al primo tentativo.
+          # Le righe `(site sha256 ...)` sono il contratto letto dal realign
+          # post-merge: le scrive lo stesso modulo che le rilegge
+          # (scripts/ci/transport-realign-body.mjs), cosi' un path con backtick
+          # non diventa un code span rotto.
           # shellcheck disable=SC2016
-          node -e '
-            const fs = require("fs");
-            const r = require("/tmp/transport.json");
-            const list = r.transported.map((t) => "- `" + t.path + "` \u2190 `" + t.sitePath + "` del sito (site sha256 `" + t.to + "`)").join("\n");
-            const deltas = (r.couplingDelta || []).map((d) => "- Snapshot accoppiamenti per `" + d.path + "`: +" + d.added.length + "/-" + d.removed.length + (d.initialized ? " (prima osservazione)" : " (delta dalla passata precedente)" ) + ".").join("\n");
-            const excluded = (r.realignExcluded || []).map((p) => "- `" + p + "` escluso dal commit per mismatch/normalizzazione dei byte; blocked: diagnosi realign da correggere a mano.").join("\n");
-            const workflowExcluded = (r.workflowExcluded || []).map((p) => "- `" + p + "` escluso dal commit dopo il rifiuto esplicito GitHub dello scope `workflows`; blocked: resta `site-ahead` e verra ritentato in un giro futuro.").join("\n");
+          node --input-type=module -e '
+            import fs from "node:fs";
+            import { markdownCodeSpan, transportBulletLine } from "./scripts/ci/transport-realign-body.mjs";
+            const r = JSON.parse(fs.readFileSync("/tmp/transport.json", "utf8"));
+            const list = r.transported.map((t) => transportBulletLine(t)).join("\n");
+            const deltas = (r.couplingDelta || []).map((d) => "- Snapshot accoppiamenti per " + markdownCodeSpan(d.path) + ": +" + d.added.length + "/-" + d.removed.length + (d.initialized ? " (prima osservazione)" : " (delta dalla passata precedente)" ) + ".").join("\n");
+            const excluded = (r.realignExcluded || []).map((p) => "- " + markdownCodeSpan(p) + " escluso dal commit per mismatch/normalizzazione dei byte; blocked: diagnosi realign da correggere a mano.").join("\n");
+            const workflowExcluded = (r.workflowExcluded || []).map((p) => "- " + markdownCodeSpan(p) + " escluso dal commit dopo il rifiuto esplicito GitHub dello scope `workflows`; blocked: resta `site-ahead` e verra ritentato in un giro futuro.").join("\n");
             const workflowsBlocked = process.env.PAT_WORKFLOWS_SCOPE !== "true";
             const deferred = workflowExcluded || (workflowsBlocked
               ? "- Le voci `adapted` restano escluse per costruzione; i gemelli sotto `.github/workflows/` richiedono lo scope `workflows`: blocked: PAT_WORKFLOWS_SCOPE non è true per questa identità."

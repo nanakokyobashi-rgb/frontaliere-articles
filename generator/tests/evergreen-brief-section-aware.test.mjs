@@ -38,6 +38,7 @@ import { fileURLToPath } from 'node:url';
 
 import { extractSourceAnchors, checkSourceFidelity } from '../scripts/lib/article-factuality-gates.mjs';
 import { svizzeraEvergreenPool, clearStrikesForPool } from '../scripts/reset-evergreen-strikes.mjs';
+import * as IRPEF from '../scripts/lib/irpef-scaglioni.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
@@ -64,9 +65,14 @@ function loadBriefBlock() {
   // `export` non e' valido dentro `new Function`: il blocco viene valutato come
   // corpo di funzione, non come modulo.
   const body = block.replace(/^export function /gm, 'function ');
+  // Il brief frontaliero interpola gli scaglioni IRPEF dalla loro unica
+  // sorgente (lib/irpef-scaglioni.mjs, issue #1777): il blocco estratto non ha
+  // gli import del modulo, quindi quei nomi entrano come parametri — gli
+  // stessi export che create-article.mjs importa, non una replica.
+  const irpefNames = Object.keys(IRPEF);
   // eslint-disable-next-line no-new-func
-  const factory = new Function(`${body}\nreturn { EVERGREEN_FACTS_BRIEF, EVERGREEN_FACTS_BRIEF_CH, EVERGREEN_FACTS_BRIEFS, evergreenFactsBriefFor, stripInjectedBriefs };`);
-  return factory();
+  const factory = new Function(...irpefNames, `${body}\nreturn { EVERGREEN_FACTS_BRIEF, EVERGREEN_FACTS_BRIEF_CH, EVERGREEN_FACTS_BRIEFS, evergreenFactsBriefFor, stripInjectedBriefs };`);
+  return factory(...irpefNames.map((k) => IRPEF[k]));
 }
 
 const B = loadBriefBlock();

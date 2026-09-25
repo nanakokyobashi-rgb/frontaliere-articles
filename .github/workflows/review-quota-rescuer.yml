@@ -17,8 +17,8 @@ on:
   workflow_run:
     workflows:
       - tests
-      - Issue fix (Claude → PR)
-      - Issue decompose (Claude → sub-issues)
+      - Issue fix (Codex Luna Max → PR)
+      - Issue decompose (Codex Luna Max → sub-issues)
       - PR 🔴 fixer (bounded loop-closure on bot PRs)
       - PR ❌ check fixer (bounded, check richiesto rosso su PR bot)
       - Follow-up drainer (queue → agent:fix, no-Claude)
