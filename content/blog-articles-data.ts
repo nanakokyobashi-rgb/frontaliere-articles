@@ -1440,6 +1440,7 @@ const RAW_ARTICLES = [
  id: 'dichiarazione-redditi-ticino-2026',
  category: 'fiscale',
  date: '2026-02-26T13:36:25.627Z',
+ updatedAt: '2026-09-24',
  image: '/images/blog/dichiarazione-redditi-ticino-2026.webp',
  hasCalculator: true,
  authorSlug: 'marco-ferrari',
