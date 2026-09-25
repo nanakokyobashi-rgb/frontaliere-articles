@@ -307,10 +307,21 @@ const THIRD_LANG_MIN_CONFIDENCE = 0.6; // affidabilita' dichiarata dal rilevator
 const THIRD_LANG_MIN_SCORE = 500;      // evidenza assoluta, non solo margine
 const THIRD_LANG_SHORT_TEXT_CONFIDENCE = 0.85; // ramo strong-marker senza scores
 
-/** La chiave stabile di una coppia FAQ (confronto normalizzato, non `===`). */
-function pairKey(pair) {
-  if (!pair) return null;
-  return `${normPairText(pair.q)}\u0000${normPairText(pair.a)}`;
+/**
+ * I campi sorgente per NOME di campo (confronto normalizzato, non `===`): una
+ * domanda si confronta con le domande, una risposta con le risposte. Per
+ * contenuto e non per indice, perche' una FAQ potata o riordinata sposta le
+ * coppie (vedi `wrongLocalePair`).
+ */
+function sourceFieldSets(sourceFaq) {
+  const fields = { q: new Set(), a: new Set() };
+  for (const pair of sourceFaq) {
+    for (const field of ['q', 'a']) {
+      const key = normPairText(pair?.[field]);
+      if (key) fields[field].add(key);
+    }
+  }
+  return fields;
 }
 
 /**
@@ -360,8 +371,8 @@ function pairKey(pair) {
  * singolo ramo di lingua.
  *
  * Da cui la forma: piu' segnali, non uno scelto fra i tanti. L'uguaglianza con
- * la coppia sorgente e' il riferimento che non mente e non ha bisogno di
- * soglie; il rilevatore di lingua copre il passthrough che il motore ha
+ * la sorgente (per CAMPO, vedi sotto) e' il riferimento che non mente e non ha
+ * bisogno di soglie; il rilevatore di lingua copre il passthrough che il motore ha
  * ritoccato quanto basta a non essere piu' byte-uguale. Il valore del ramo
  * verbatim NON e' visibile in questa tabella (il suo recall e' 7/7 per
  * costruzione della verita' di riferimento): e' che sul percorso di SCRITTURA
@@ -405,11 +416,37 @@ function pairKey(pair) {
  * cioe' si spegnerebbe. Il ramo dell'uguaglianza non ha soglia perche' non e'
  * una stima.
  *
+ * ── IL RAMO VERBATIM E' PER CAMPO (issue #1816, dal sito #8574) ────────────
+ *
+ * «Uguale a una coppia sorgente» copriva un solo percorso: il fallback di
+ * `translateFaqArray()`, che rimette l'intera coppia italiana. Ma il
+ * rilevatore di `main()` (e quello di `batch-add-faq-to-articles.mjs`, che
+ * importa questo predicato) giudica anche FAQ gia' pubblicate da altri
+ * scrittori, e li' il passthrough puo' riguardare UN campo: la domanda
+ * italiana verbatim sopra una risposta tradotta. La coppia intera non combacia
+ * con nessuna sorgente e sul testo concatenato la risposta domina, quindi
+ * nessuno dei tre rami la vedeva. Il sito l'ha chiusa con la PR
+ * valerielinc-ops/frontaliere-si-o-no#8574 (`hasSourcePassthroughField`,
+ * confronto per indice); qui il confronto resta per CONTENUTO, perche' la
+ * potatura (`filterWrongLocalePairs`) e il riordino spostano gli indici.
+ *
+ * Misurato sul corpus pubblicato (`origin/main` f9b70e877, 2026-09-25: 18'363
+ * articoli×locale, 65'979 coppie): 31 coppie con UN solo campo italiano
+ * verbatim, tutte domande, lette una per una e tutte italiane. Il ramo di
+ * lingua ne coglieva 14; le altre 17, in 7 articoli×locale, passavano, e 5 di
+ * quei locale non venivano nemmeno selezionati come `wrong_locale`. Col
+ * confronto per campo le coppie rifiutate passano da 112 a 129 — le 17 e
+ * nessun'altra; le 14 cambiano solo `via`, da `lingua` a `verbatim` — e i
+ * locale selezionati da 93 a 98. La verita' di riferimento della tabella
+ * sopra (coppia INTERA uguale = passthrough) contava queste 31 come tradotte:
+ * era lo stesso punto cieco, non un falso positivo del ramo nuovo.
+ *
  * @param {{q: string, a: string}[]} faqArray  le coppie da giudicare
  * @param {string} expectedLocale
  * @param {{q: string, a: string}[]|null} [sourceFaq] le coppie SORGENTE, quando
  *   il chiamante ce l'ha. Senza, resta il solo controllo di lingua e si perde
- *   il ramo che coglie il fallback per-coppia di `translateFaqArray()`.
+ *   il ramo dell'uguaglianza per campo, che coglie sia il fallback per-coppia
+ *   di `translateFaqArray()` sia il singolo campo italiano rimasto.
  * @param {string} [sourceLang='it']
  * @returns {Array<{index: number, detected: string, via: 'verbatim'|'lingua'|'terza-lingua'}>|null}
  */
@@ -417,12 +454,13 @@ export function wrongLocalePair(faqArray, expectedLocale, sourceFaq = null, sour
   // Su `expectedLocale === sourceLang` non c'e' traduzione da giudicare: la
   // sorgente italiana sotto `/it/` e' l'esito giusto, non un passthrough.
   if (expectedLocale === sourceLang) return null;
-  const sourcePairs = Array.isArray(sourceFaq)
-    ? new Set(sourceFaq.map(pairKey).filter(Boolean))
-    : null;
+  const sourceFields = Array.isArray(sourceFaq) ? sourceFieldSets(sourceFaq) : null;
   const wrong = [];
   for (let i = 0; i < faqArray.length; i++) {
-    if (sourcePairs?.has(pairKey(faqArray[i]))) {
+    // Basta UN campo: la domanda italiana verbatim sopra una risposta tradotta
+    // e' un passthrough anche se la coppia intera non e' uguale a nessuna.
+    if (sourceFields
+      && (sourceFields.q.has(normPairText(faqArray[i]?.q)) || sourceFields.a.has(normPairText(faqArray[i]?.a)))) {
       wrong.push({ index: i, detected: sourceLang, via: 'verbatim' });
       continue;
     }
