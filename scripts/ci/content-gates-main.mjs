@@ -167,6 +167,7 @@ export const CONTENT_GATES = [
   'generator/tests/evergreen-naspi-ex-frontalieri-guida-refresh.test.mjs',
   'generator/tests/evergreen-naspi-frontaliere-italia-requisiti-refresh.test.mjs',
   'generator/tests/evergreen-naspi-frontalieri-italia-requisiti-calcolo-domanda-refresh.test.mjs',
+  'generator/tests/evergreen-naspi-frontendalieri-requisiti-calcolo-2024-refresh.test.mjs',
   'generator/tests/evergreen-prelievo-secondo-pilastro-frontaliere-refresh.test.mjs',
   'generator/tests/evergreen-ristorni-fiscali-ticino-refresh.test.mjs',
   'generator/tests/evergreen-ritenuta-lpp-intermediario-residente-refresh.test.mjs',
