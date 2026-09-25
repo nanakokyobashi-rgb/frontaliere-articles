@@ -151,6 +151,7 @@ export const CONTENT_GATES = [
   'generator/tests/evergreen-comuni-frontalieri-distanza-refresh.test.mjs',
   'generator/tests/evergreen-costo-pendolare-auto-ticino-2026-refresh.test.mjs',
   'generator/tests/evergreen-costo-vita-ticino-vs-lombardia-refresh.test.mjs',
+  'generator/tests/evergreen-credito-imposta-doppia-tassazione-refresh.test.mjs',
   'generator/tests/evergreen-dichiarazione-redditi-ticino-2026-refresh.test.mjs',
   'generator/tests/evergreen-guida-dichiarazione-redditi-frontalieri-refresh.test.mjs',
   'generator/tests/evergreen-lamal-cmi-scelta-frontaliere-2026-refresh.test.mjs',
