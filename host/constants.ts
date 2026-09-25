@@ -2,15 +2,16 @@
  * Site constants the article engine reads through SiteShellContract.
  *
  * Transported BY FUNCTION CLOSURE from the main repo's
- * `build-plugins/constants.ts` (746 lines): only the 15 declarations the
- * contract reaches. The whole file also imports botPatterns,
+ * `build-plugins/constants.ts` (about 1,200 lines on 2026-09-25): only the 18
+ * declarations the contract reaches. The whole file also imports botPatterns,
  * posthog-error-filter, resilientImport, adSlotHtml and redirectStubMarker,
  * none of which the article path touches.
  *
  * These values MUST stay byte-equal to the main repo's. They end up in every
  * rendered <head>; a drift here makes fast-published pages differ from what
- * the next full build overwrites them with. `host/host-drift.test.mjs` is the
- * guard.
+ * the next full build overwrites them with. The guard is the SiteShellContract
+ * fingerprint both repos assert (`host/tests/shell-contract-fingerprint.test.mjs`
+ * here, `tests/articles-shell-contract-fingerprint.test.ts` in the site).
  */
 
 export const SEO_STATIC_CSS_FILENAME = 'seo-static.css';
