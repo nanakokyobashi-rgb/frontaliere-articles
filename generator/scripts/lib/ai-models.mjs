@@ -1103,6 +1103,14 @@ const CODEX_BROKER_QUEUE_WAIT_DEFAULT_MS = 20 * 60_000;
 const CODEX_BROKER_QUEUE_WAIT_MAX_MS = 30 * 60_000;
 const CODEX_BROKER_START_SIGNAL = '\x01';
 const CODEX_BROKER_GONE_CODES = new Set(['ENOENT', 'ECONNREFUSED', 'ENOTSOCK']);
+// Errori del socket che si riparano da soli (broker finito in questo job,
+// connessione caduta): vocabolario transitorio. Tutti gli altri — EACCES,
+// EPERM, ENAMETOOLONG, EINVAL… — dicono che il broker e' configurato male e
+// non si riparano al run successivo: devono votare persistente (review di
+// valerielinc-ops/frontaliere-si-o-no#9855).
+const CODEX_BROKER_TRANSIENT_SOCKET_CODES = new Set([
+  ...CODEX_BROKER_GONE_CODES, 'ECONNRESET', 'EPIPE', 'ETIMEDOUT', 'EAGAIN',
+]);
 const CODEX_FALLBACK_MARKER_PREFIX = 'codex-article-primary';
 // The atomic marker below is retained only for the legacy indirect fallback
 // path. The direct Codex primary uses the action-owned broker, which accepts
@@ -7732,7 +7740,15 @@ function _requestCodexExecution({ prompt, timeoutMs, schema, deadlineMs }) {
         _codexBrokerGoneSocket = socketPath;
         console.warn(`⏹️  [codex-cli] broker non raggiungibile (${code}) — lane Codex spenta per il resto del processo`);
       }
-      const wrapped = _codexTransportError(`Codex auth broker temporarily unavailable (${code}): ${String(error?.message || error)}`);
+      const detail = String(error?.message || error);
+      // `nonRetryableReason: 'persistent'` vince sulla causa autorevole
+      // `transport` che `transportFault` darebbe altrimenti in callLLM.
+      const wrapped = CODEX_BROKER_TRANSIENT_SOCKET_CODES.has(error?.code)
+        ? _codexTransportError(`Codex auth broker temporarily unavailable (${code}): ${detail}`)
+        : Object.assign(
+          _codexTransportError(`Codex auth broker socket unusable (${code}), non-retryable: ${detail}`),
+          { nonRetryable: true, nonRetryableReason: 'persistent' },
+        );
       wrapped.code = error?.code;
       finish(wrapped);
     });
