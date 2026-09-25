@@ -1189,6 +1189,7 @@ const RAW_ARTICLES = [
  id: 'ristorni-fiscali-ticino',
  category: 'fiscale',
  date: '2026-02-25T07:56:29.739Z',
+ updatedAt: '2026-09-25',
  image: '/images/blog/ristorni-fiscali-ticino.webp',
  hasCalculator: true,
  authorSlug: 'redazione',
