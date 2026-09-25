@@ -166,6 +166,17 @@ const ADS_CONSENT_STORAGE_KEY = 'frontaliere_ads_consent';
  * Offerwall is suppressed, so the CMP shows at once. The first, enum-less
  * call and every other page proceed at once: on article pages this gate is a
  * pass-through.
+ *
+ * A "Candidati" click that lands BEFORE Funding Choices reaches this gate is
+ * deliberately not queued. The site's consumer (services/offerwallClickGate.ts
+ * and components/community/RewardedApplicationOffer.tsx) reads the gate as
+ * `absent`, reports `rewarded_offerwall_not_shown` with `reason=not_held`, and
+ * takes the GPT path, whose no-fill ends in a same-tab employer hand-off: the
+ * visitor never waits on a second click. A call held later on that page view
+ * stays held on purpose. Replaying the click into it would render an
+ * Offerwall on top of the GPT request already in flight, the double flow the
+ * site's review ruled out. The value is transported: change it in the site
+ * first, since the SiteShellContract fingerprint must match on both sides.
  */
 export const FC_JOBBOARD_OFFERWALL_GATE_JS = `(function(){var g=window.googlefc=window.googlefc||{};if(g.controlledMessagingFunction)return;g.controlledMessagingFunction=function(message){var E=g.MessageTypeEnum||{};var p=window.location&&window.location.pathname||'';if(E.OFFERWALL===undefined||!/^\\/cerca-lavoro-ticino(?:\\/|$)/.test(p)){message.proceed(true);return;}var d=false;try{d=!!window.localStorage.getItem('${ADS_CONSENT_STORAGE_KEY}');}catch(e){}if(d){var c=(window.document&&window.document.cookie||'').match(/(?:^|;\\s*)FCCDCF=([^;]*)/),v='';try{v=c?decodeURIComponent(c[1]):'';}catch(e){}d=/\\x22C[A-Za-z0-9_-]{20,}/.test(v);}if(!d){window.__ftOfferwallGate=window.__ftOfferwallGate||{state:'suppressed',held:[]};message.proceed(false,[E.OFFERWALL]);return;}var w=window.__ftOfferwallGate=window.__ftOfferwallGate||{state:'idle',held:[]};if(w.state==='released'){message.proceed(true);return;}w.held.push(message);w.state='held';w.release=function(){if(w.state!=='held')return false;w.state='released';var h=w.held.splice(0);for(var i=0;i<h.length;i++){try{h[i].proceed(true);}catch(e){}}return true;};};})();`;
 
