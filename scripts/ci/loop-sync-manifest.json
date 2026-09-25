@@ -3939,6 +3939,16 @@
       }
     },
     {
+      "path": "scripts/ci/redflag-doc-sections.mjs",
+      "mode": "corpus-only",
+      "reason": "Estrae le sezioni vincolanti di `REVIEW.md` e `AGENTS.md` dalla base canonica e le valida prima che il `pr-redflag-fixer.yml` le scriva in `GITHUB_ENV`. E' un helper specifico del fixer corpus: il workflow qui e' adattato e il sito mantiene il proprio percorso di trasporto del contratto, quindi non esiste un gemello site-owned da sorvegliare.",
+      "baseline": {
+        "site": null,
+        "corpus": "f0e1f073d1d65cf5",
+        "alignedAt": "2026-09-25"
+      }
+    },
+    {
       "path": "scripts/ci/redcheck-review-prefilter.mjs",
       "mode": "corpus-only",
       "reason": "Predicato fail-closed del preflight di `pr-redcheck-fixer.yml`: distingue il rosso esclusivo del review gate con un finding `🔴 Important` sulla HEAD (proprietà del redflag-fixer) dall'abort transiente della review senza failure di codice (nessun fixer deve spendere Claude senza una diagnosi). Non esiste sul sito e non deve: il workflow corpus ha questo preflight adattato e il sito mantiene il proprio percorso.",
