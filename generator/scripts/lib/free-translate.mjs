@@ -173,7 +173,7 @@ const DEEPL_LANG_MAP = { it: 'IT', en: 'EN', de: 'DE', fr: 'FR' };
  * negative passthrough memo made while optional tiers are unavailable must not
  * suppress a later retry after those tiers are configured again.
  */
-export function getTranslationCascadeConfigurationKey() {
+export async function getTranslationCascadeConfigurationKey() {
   return JSON.stringify({
     version: 2,
     deepl: DEEPL_API_KEYS.length > 0,
@@ -187,24 +187,34 @@ export function getTranslationCascadeConfigurationKey() {
     // (version 2, 2026-09-25). Una lane che non puo' piu' servire questa run
     // vale come assente: il fallimento memorizzato da quel punto in poi non
     // deve restare valido per la run dopo, che riparte con il budget pieno.
-    codex: _codexLaneUsableForFingerprint() ? _codexTierPosition() : false,
+    codex: (await _codexLaneUsableForFingerprint()) ? _codexTierPosition() : false,
   });
 }
 
 /**
- * La lane Codex puo' ancora servire una chiamata in questa run? Fermata
- * (budget scoperto al tentativo successivo o tre fallimenti di fila), senza
- * socket, oppure con il budget di chiamate o di tempo GIA' esaurito
- * dall'ultima chiamata: `_codexStopReason` si imposta solo al tentativo dopo,
- * e senza questo controllo il passthrough dell'ultima chiamata finiva sotto
- * la chiave della lane disponibile (review di #1869, 5315911624). Stessi
- * limiti di `_translateWithCodexNow`.
+ * La lane Codex puo' ancora servire una chiamata in questa run? Gli stessi
+ * controlli di `_translateWithCodexNow`, nello stesso ordine, e per il modello
+ * la stessa guardia: `isModelAvailable(CODEX_CLI_PRIMARY)` di ai-models.mjs,
+ * che copre il kill-switch ENABLE_CODEX_ARTICLE_FALLBACK, la chiave/socket del
+ * provider e l'esaurimento del modello nel processo. Una copia di quei
+ * controlli qui dimenticava sempre qualcosa: prima lo stop, poi il budget
+ * esaurito dall'ultima chiamata, poi la guardia del modello (review di #1869,
+ * 5315911624 e 5316061360). ai-models.mjs si carica solo con lane configurata
+ * (socket presente, budget residuo), cioe' quando la lane lo caricherebbe
+ * comunque; senza socket non si importa, come prima.
  */
-function _codexLaneUsableForFingerprint() {
+async function _codexLaneUsableForFingerprint() {
   if (_codexStopReason || !_codexSocketPresent()) return false;
   const maxCalls = _codexBudget('FREE_TRANSLATE_CODEX_MAX_CALLS', CODEX_TRANSLATE_MAX_CALLS_DEFAULT);
   const maxMs = _codexBudget('FREE_TRANSLATE_CODEX_MAX_MS', CODEX_TRANSLATE_MAX_MS_DEFAULT);
-  return _codexCalls < maxCalls && maxMs - _codexSpentMs >= CODEX_TRANSLATE_MIN_CALL_MS;
+  if (_codexCalls >= maxCalls || maxMs - _codexSpentMs < CODEX_TRANSLATE_MIN_CALL_MS) return false;
+  _codexLane ??= import('./ai-models.mjs');
+  try {
+    const ai = await _codexLane;
+    return ai.isModelAvailable(ai.AI_MODELS.CODEX_CLI_PRIMARY);
+  } catch {
+    return false;
+  }
 }
 
 // ── Instance Health Tracking ────────────────────────────────────────────────

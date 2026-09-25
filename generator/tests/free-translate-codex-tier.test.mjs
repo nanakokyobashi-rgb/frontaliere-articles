@@ -333,44 +333,54 @@ test('tre echi di fila fermano il tier come tre fallimenti, e restano contati co
   assert.equal(lines.filter((l) => l.includes('3 fallimenti consecutivi')).length, 1);
 });
 
-test('la fingerprint della cascata segue la lane Codex e la sua posizione (memo eventi)', () => {
+test('la fingerprint della cascata segue la lane Codex e la sua posizione (memo eventi)', async () => {
   // Stato del tier azzerato: il caso precedente lo ha fermato con tre echi.
   stubCodex(`CODEX ${EN}`);
-  const key = () => JSON.parse(getTranslationCascadeConfigurationKey());
-  assert.equal(key().version, 2);
-  assert.equal(key().codex, 'after-premium');
+  const key = async () => JSON.parse(await getTranslationCascadeConfigurationKey());
+  assert.equal((await key()).version, 2);
+  assert.equal((await key()).codex, 'after-premium');
   process.env.FREE_TRANSLATE_CODEX_TIER = 'last';
   try {
-    assert.equal(key().codex, 'last');
+    assert.equal((await key()).codex, 'last');
   } finally {
     delete process.env.FREE_TRANSLATE_CODEX_TIER;
   }
   process.env.CODEX_AUTH_BROKER_SOCKET = path.join(tmp, 'broker-scaduto.sock');
   try {
-    assert.equal(key().codex, false);
+    assert.equal((await key()).codex, false);
   } finally {
     process.env.CODEX_AUTH_BROKER_SOCKET = SOCKET;
   }
   process.env.FREE_TRANSLATE_CODEX_MAX_CALLS = '0';
   try {
-    assert.equal(key().codex, false);
+    assert.equal((await key()).codex, false);
   } finally {
     delete process.env.FREE_TRANSLATE_CODEX_MAX_CALLS;
   }
+  // Stessa guardia del modello della lane (isModelAvailable): con il
+  // kill-switch spento la lane non serve, anche con socket e budget (review
+  // di #1869, 5316061360).
+  process.env.ENABLE_CODEX_ARTICLE_FALLBACK = '0';
+  try {
+    assert.equal((await key()).codex, false);
+  } finally {
+    delete process.env.ENABLE_CODEX_ARTICLE_FALLBACK;
+  }
+  assert.equal((await key()).codex, 'after-premium');
 });
 
 test('la fingerprint tratta come assente una lane fermata nella run (budget esaurito o breaker)', async () => {
-  const key = () => JSON.parse(getTranslationCascadeConfigurationKey());
+  const key = async () => JSON.parse(await getTranslationCascadeConfigurationKey());
   process.env.FREE_TRANSLATE_CODEX_MAX_CALLS = '1';
   try {
     stubCodex(`CODEX ${EN}`);
-    assert.equal(key().codex, 'after-premium');
+    assert.equal((await key()).codex, 'after-premium');
     await captureLog(() => it());
     // L'unica chiamata ha consumato il budget: la lane non puo' piu' servire
     // la run anche se lo stop si registra solo al tentativo successivo.
-    assert.equal(key().codex, false);
+    assert.equal((await key()).codex, false);
     await captureLog(() => it());
-    assert.equal(key().codex, false);
+    assert.equal((await key()).codex, false);
   } finally {
     delete process.env.FREE_TRANSLATE_CODEX_MAX_CALLS;
   }
@@ -382,16 +392,16 @@ test('la fingerprint tratta come assente una lane fermata nella run (budget esau
   Date.now = () => realNow() + offset;
   try {
     stubCodex(async () => { offset += 10_000; return `CODEX ${EN}`; });
-    assert.equal(key().codex, 'after-premium');
+    assert.equal((await key()).codex, 'after-premium');
     await captureLog(() => it());
-    assert.equal(key().codex, false);
+    assert.equal((await key()).codex, false);
   } finally {
     Date.now = realNow;
     delete process.env.FREE_TRANSLATE_CODEX_MAX_MS;
   }
   // Una run nuova (qui: il seam azzera lo stato) riparte con la lane viva.
   stubCodex(`CODEX ${EN}`);
-  assert.equal(key().codex, 'after-premium');
+  assert.equal((await key()).codex, 'after-premium');
 });
 
 test('FREE_TRANSLATE_CODEX_TIER=last: Codex non prende il testo prima dei tier senza quota', async () => {
