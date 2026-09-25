@@ -26,12 +26,27 @@ const AFTER_EDIT = '2026-09-19T12:01:00Z';
 
 // `later`: fields the run takes on successive getWorkflowRun reads (the
 // first read is the script's re-read of the listed run).
-async function recover(bodyConclusion, status = 'completed', failedSteps = [], later = [], runOverrides = {}, cancelError = null, autoMerge = null, editTimestamp = EDITED_AT, graphqlError = null, checkError = null) {
+async function recover(bodyConclusion, status = 'completed', failedSteps = [], later = [], runOverrides = {}, cancelError = null, autoMerge = null, editTimestamp = EDITED_AT, graphqlError = null, checkError = null, rateLimitFailures = {}) {
   const reruns = [];
   const cancels = [];
   const failures = [];
   const autoMergeRevokes = [];
   const requiredCheckBlocks = [];
+  const remainingRateLimitFailures = new Map(Object.entries(rateLimitFailures));
+  const maybeRateLimit = name => {
+    const remaining = remainingRateLimitFailures.get(name) || 0;
+    if (!remaining) return;
+    remainingRateLimitFailures.set(name, remaining - 1);
+    const error = Object.assign(new Error('API rate limit exceeded for installation'), {
+      status: 403,
+      response: {
+        status: 403,
+        headers: { 'x-ratelimit-remaining': '0', 'x-ratelimit-reset': String(Math.floor(Date.now() / 1000)) },
+        data: { message: 'API rate limit exceeded for installation' },
+      },
+    });
+    throw error;
+  };
   const run = {
     id: 42, run_attempt: 1, status, conclusion: status === 'completed' ? 'failure' : null,
     head_branch: 'feature', event: 'pull_request', run_started_at: BEFORE_EDIT, ...runOverrides,
@@ -39,10 +54,13 @@ async function recover(bodyConclusion, status = 'completed', failedSteps = [], l
   const polls = [...later];
   const github = {
     rest: {
-      pulls: { get: async () => ({ data: {
+      pulls: { get: async () => {
+        maybeRateLimit('pulls.get');
+        return { data: {
         node_id: 'PR_node', state: 'open', head: { sha: 'head', ref: 'feature' }, body: prBody,
         auto_merge: autoMerge,
-      } }) },
+        } };
+      } },
       actions: {
         listWorkflowRuns: 'runs', listJobsForWorkflowRun: 'jobs',
         getWorkflowRun: async () => {
@@ -142,6 +160,10 @@ test('body edits re-enter through the trusted recovery, not through a tests.yml 
 
 test('a corrected failed body retries the code run', async () => {
   assert.deepEqual(await recover('failure'), [42]);
+});
+
+test('an installation rate limit is retried before recovery classifies the body', async () => {
+  assert.deepEqual(await recover('failure', 'completed', [], [], {}, null, null, EDITED_AT, null, null, { 'pulls.get': 1 }), [42]);
 });
 
 test('a body rejected only by the review gate retries the code run', async () => {
