@@ -153,7 +153,7 @@
     {
       "path": "scripts/ci/native-automerge-gate.mjs",
       "mode": "adapted",
-      "reason": "Il gate del corpus mantiene la stessa logica di enrollment, ma il nome dello step review è una costante locale: il bootstrap non trascina vitestCheck.mjs come dipendenza hard e lo scarica solo quando il grafo del gate lo richiede. Adattamento necessario per il contract del corpus (#1507).",
+      "reason": "Il gate del corpus mantiene la stessa logica di enrollment, ma il nome dello step review è una costante locale: il bootstrap non trascina vitestCheck.mjs come dipendenza hard e lo scarica solo quando il grafo del gate lo richiede. Adattamento necessario per il contract del corpus (#1507). Seconda divergenza dal 2026-09-24 (#1784): `parseActionsJobUrl` accetta solo la forma grezza canonica del `details_url` (niente dot-segment anche codificati, whitespace, userinfo/porta, slash finali, zeri iniziali), la stessa regola di `workflowRunIdentity` in native-automerge-sweep-policy.mjs legata da generator/tests/actions-details-url-canonical.test.mjs; il gemello del sito legge ancora il path gia' normalizzato da `new URL`, e la risalita va fatta la'.",
       "baseline": {
         "site": "fe0d90a363d6b3c4",
         "corpus": "17ef9a9d8340acc4",
@@ -379,6 +379,16 @@
       }
     },
     {
+      "path": "scripts/ci/lib/review-states.mjs",
+      "mode": "corpus-only",
+      "reason": "Enum unico degli stati review (#1762): terminali APPROVED/CHANGES_REQUESTED/COMMENTED, non terminali PENDING/DISMISSED, ogni altro valore fail-closed. Genera anche le due righe `def` jq che `tests.yml`, `pr-redflag-fixer.yml` e `stale-pr-rescuer.yml` copiano alla lettera, legate da `generator/tests/review-state-normalization.test.mjs`. Il sito tiene la stessa semantica dentro `scripts/ci/lib/pr-review-admission.mjs` (`KNOWN_REVIEW_STATES`), un modulo che questo repo non ha: qui i consumer sono jq inline, quindi non c'e' un gemello byte-verificabile da trasportare.",
+      "baseline": {
+        "site": null,
+        "corpus": "95adf9d2c94be232",
+        "alignedAt": "2026-09-24"
+      }
+    },
+    {
       "path": "scripts/ci/node-test-failure-reporter.mjs",
       "mode": "corpus-only",
       "reason": "Reporter strutturato del corpus: consuma gli eventi `test:fail` di `node:test` e scrive il JSON che il passo successivo pubblica sulla PR. Il sito usa Vitest e il proprio reporter JSON, quindi non esiste un gemello byte-verificabile da trasportare.",
@@ -517,7 +527,7 @@
     {
       "path": "scripts/ci/scan-job-timeouts.mjs",
       "mode": "identical",
-      "reason": "RICONCILIATO 2026-09-03 (both-moved, issue #760). Baseline f0a07afa era reale da entrambi i lati (corpus 38f32dc, sito 40ba839, 2026-08-31). Poi si sono mossi tutti e due sullo STESSO problema: qui #700 (issue #692 item 1) ha limitato il fetch lato server con `created` >= cutoff - MAX_RUN_DURATION_MIN (350+60 min) piu' un RUN_LISTING_SAFETY_CAP di 2000; il sito, in valerielinc-ops#7101, ha portato lo stesso fix e lo ha esteso. Riconciliazione a favore del sito, ripristinando `identical`, perche' la sua versione e' un superinsieme stretto della nostra su entrambi i punti in cui la nostra sbaglia: (a) l'orizzonte. `MAX_RUN_DURATION_MIN` presume che una run non possa essere piu' vecchia del job piu' lungo, ma il timeout di un job non limita l'eta' della RUN — coda, `needs` e attesa di approvazione stanno tutti prima; il bound lato server e' 35 giorni (`MAX_WORKFLOW_RUN_AGE_MIN`), l'unico che non escluda una run ancora capace di aggiornarsi dentro il cutoff. Con la finestra stretta un timeout su una run in coda da ore restava invisibile, cioe' esattamente il blind spot che #692 voleva chiudere. (b) il cap dell'API. Con un filtro `created` GitHub restituisce al massimo 1.000 risultati per search: allargare l'orizzonte a 35 giorni senza bisecare la finestra troncherebbe in silenzio, e il nostro cap locale a 2000 era gia' irraggiungibile. Il sito biseca `created` finche' ogni search sta sotto il limite, pagina tutte le pagine e deduplica per run id. Il solo residuo locale, `e'` -> `è` in un commento, non e' una divergenza da difendere. NOTA 2026-09-04 (issue #858): la riconciliazione qui sopra e' durata un giorno — questa voce e' di nuovo `corpus-ahead`, e la frase «ripristinando `identical`» non descrive piu' lo stato di oggi. Rimisurato su `origin/main` dei due repo: sito `ae283f60522fc850` (identico a `baseline.site`, fermo dal 2026-09-03), qui `391c710bfbc41178`. Il delta e' tutto di questo lato: la PR #837 (issue #816) ha reso `readTimeoutAnnotation` robusto a una risposta NON-array dell'endpoint annotations (`if (!Array.isArray(annotations)) return null`, piu' `a?.message`), dove il vecchio `|| []` copriva solo il caso `null` e sull'oggetto `{ message: 'Not Found' }` lo scanner moriva in mezzo alla passata — 12 righe di diff, l'unica differenza fra i due lati. Vale la stessa regola di instradamento di `exhaustion-disposition.mjs`: finche' il gemello non e' portato al sito, una fix su questo scanner si applica QUI, e un mirror sito->corpus applicato alla lettera cancellerebbe #816. Il `mode` resta `identical` perche' e' l'obiettivo, non lo stato: la direzione giusta e' portare #816 al sito. La baseline del 2026-09-03 NON viene rigenerata, quindi `loop-drift-check` continua a emettere `corpus-ahead` / `actionable: true` su questa voce — la nota documenta il segnale, non lo silenzia.",
+      "reason": "RICONCILIATO 2026-09-03 (both-moved, issue #760). Baseline f0a07afa era reale da entrambi i lati (corpus 38f32dc, sito 40ba839, 2026-08-31). Poi si sono mossi tutti e due sullo STESSO problema: qui #700 (issue #692 item 1) ha limitato il fetch lato server con `created` >= cutoff - MAX_RUN_DURATION_MIN (350+60 min) piu' un RUN_LISTING_SAFETY_CAP di 2000; il sito, in valerielinc-ops#7101, ha portato lo stesso fix e lo ha esteso. Riconciliazione a favore del sito, ripristinando `identical`, perche' la sua versione e' un superinsieme stretto della nostra su entrambi i punti in cui la nostra sbaglia: (a) l'orizzonte. `MAX_RUN_DURATION_MIN` presume che una run non possa essere piu' vecchia del job piu' lungo, ma il timeout di un job non limita l'eta' della RUN — coda, `needs` e attesa di approvazione stanno tutti prima; il bound lato server e' 35 giorni (`MAX_WORKFLOW_RUN_AGE_MIN`), l'unico che non escluda una run ancora capace di aggiornarsi dentro il cutoff. Con la finestra stretta un timeout su una run in coda da ore restava invisibile, cioe' esattamente il blind spot che #692 voleva chiudere. (b) il cap dell'API. Con un filtro `created` GitHub restituisce al massimo 1.000 risultati per search: allargare l'orizzonte a 35 giorni senza bisecare la finestra troncherebbe in silenzio, e il nostro cap locale a 2000 era gia' irraggiungibile. Il sito biseca `created` finche' ogni search sta sotto il limite, pagina tutte le pagine e deduplica per run id. Il solo residuo locale, `e'` -> `è` in un commento, non e' una divergenza da difendere. NOTA 2026-09-04 (issue #858): la riconciliazione qui sopra e' durata un giorno — questa voce e' di nuovo `corpus-ahead`, e la frase «ripristinando `identical`» non descrive piu' lo stato di oggi. Rimisurato su `origin/main` dei due repo: sito `ae283f60522fc850` (identico a `baseline.site`, fermo dal 2026-09-03), qui `391c710bfbc41178`. Il delta e' tutto di questo lato: la PR #837 (issue #816) ha reso `readTimeoutAnnotation` robusto a una risposta NON-array dell'endpoint annotations (`if (!Array.isArray(annotations)) return null`, piu' `a?.message`), dove il vecchio `|| []` copriva solo il caso `null` e sull'oggetto `{ message: 'Not Found' }` lo scanner moriva in mezzo alla passata — 12 righe di diff, l'unica differenza fra i due lati. Vale la stessa regola di instradamento che la nota del 2026-09-04 fissava per `exhaustion-disposition.mjs` (quella voce e' stata riallineata il 2026-09-25, issue #1815; questa no): finche' il gemello non e' portato al sito, una fix su questo scanner si applica QUI, e un mirror sito->corpus applicato alla lettera cancellerebbe #816. Il `mode` resta `identical` perche' e' l'obiettivo, non lo stato: la direzione giusta e' portare #816 al sito. La baseline del 2026-09-03 NON viene rigenerata, quindi `loop-drift-check` continua a emettere `corpus-ahead` / `actionable: true` su questa voce — la nota documenta il segnale, non lo silenzia.",
       "baseline": {
         "site": "ae283f60522fc850",
         "corpus": "ae283f60522fc850",
@@ -1141,7 +1151,7 @@
     {
       "path": ".github/workflows/post-merge-followup.yml",
       "mode": "adapted",
-      "reason": "Tre adattamenti sostanziali: FOLLOWUP_ELIGIBLE_AUTHORS con gli autori di QUESTO repo (senza, il filtro resta quello del sito e il batch sarebbe SEMPRE vuoto — il workflow girerebbe ogni tre ore senza trovare nulla e senza un errore); il gate autore dentro il prompt allineato; QUOTA_BEACON_PEER_REPO per cedere al sito; cron 40 */3 sfasato.",
+      "reason": "Adattamenti sostanziali: FOLLOWUP_ELIGIBLE_AUTHORS con gli autori di QUESTO repo (senza, il filtro resta quello del sito e il batch sarebbe SEMPRE vuoto — il workflow girerebbe ogni tre ore senza trovare nulla e senza un errore); il gate autore dentro il prompt allineato; QUOTA_BEACON_PEER_REPO per cedere al sito; cron 40 */3 sfasato; budget della sessione Codex piu' largo del sito (job 55 min, step 47, `exec_timeout_seconds: '2520'` contro 40/32/1500), perche' qui il triage di 4 PR misura 1670s (35973121007) e ha superato il watchdog da 1800s (36009410204) mentre sul sito chiude in ~780s.",
       "baseline": {
         "site": "5e8e926af147845d",
         "corpus": "cdb587f35f2f3209",
@@ -1631,11 +1641,11 @@
       "path": "generator/scripts/batch-add-faq-to-articles.mjs",
       "sitePath": "scripts/batch-add-faq-to-articles.mjs",
       "mode": "adapted",
-      "reason": "Batch FAQ su tutti gli articoli. Differenza comune a tutti i gemelli trasportati: `PROJECT_ROOT` risale di due livelli invece di uno, perche' il trasporto ha spostato lo script da `scripts/` a `generator/scripts/`. Oltre a quello: `corpusPath()` sul BODY_DIR, `resolveGitAddPath` importata da `lib/corpus-paths.mjs` invece di `lib/resolve-git-add-path.mjs` (qui i due helper stanno nello stesso modulo), e la funzione `write()` con la guardia sui control char C0 (issue #66). Il corpus usa inoltre il PAT Remote Config per i checkpoint perche' checkout disabilita le credenziali ambientali. Dal 2026-09-23 (#625) i cinque comandi commit/push/rebase condividono una deadline complessiva di 30s: le misure live valide erano 309ms pushed e 1675ms rebased, mentre il bound precedente sommava 210s. La baseline corpus e' riattestata su questa modifica; quella site resta deliberatamente al riferimento gia' revisionato, cosi' il movimento site successivo resta visibile. Prompt, cascata di traduzione e riparazione JSON restano adattamenti omologhi al sito, non una copia byte-per-byte.",
+      "reason": "Batch FAQ su tutti gli articoli. Differenza comune a tutti i gemelli trasportati: `PROJECT_ROOT` risale di due livelli invece di uno, perche' il trasporto ha spostato lo script da `scripts/` a `generator/scripts/`. Oltre a quello: `corpusPath()` sul BODY_DIR, `resolveGitAddPath` importata da `lib/corpus-paths.mjs` invece di `lib/resolve-git-add-path.mjs` (qui i due helper stanno nello stesso modulo), e la funzione `write()` con la guardia sui control char C0 (issue #66). Il corpus usa inoltre il PAT Remote Config per i checkpoint perche' checkout disabilita le credenziali ambientali. Dal 2026-09-23 (#625) i cinque comandi commit/push/rebase condividono una deadline complessiva di 30s: le misure live valide erano 309ms pushed e 1675ms rebased, mentre il bound precedente sommava 210s. La baseline corpus e' riattestata su questa modifica; quella site resta deliberatamente al riferimento gia' revisionato, cosi' il movimento site successivo resta visibile. Prompt, cascata di traduzione e riparazione JSON restano adattamenti omologhi al sito, non una copia byte-per-byte. Dal 2026-09-24 lo script scrive anche l'esito della run su `$GITHUB_OUTPUT` (`processed`/`succeeded`/`all_failed`, decisione in `faqRunOutcome()`): e' il segnale con cui `batch-faq-articles.yml` diventa rosso quando ogni articolo tentato fallisce, invece di uscire verde con «Succeeded: 0» come nelle run 35690020249 e 35958863091. Adattamento corpus-only: il gate vive nel workflow di questo repo. Baseline corpus riattestata su questa modifica, quella site resta al riferimento gia' revisionato.",
       "baseline": {
         "site": "ecfbef46b21f6563",
-        "corpus": "a1ac1daef8fb15c1",
-        "alignedAt": "2026-09-23"
+        "corpus": "a6f00623208361ca",
+        "alignedAt": "2026-09-24"
       }
     },
     {
@@ -1822,9 +1832,10 @@
       "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/787",
       "reason": "DIVERGENTE dal 2026-08-18, rimisurato il 2026-09-04 su `origin/main` dei due repo: sito `615eb909aef5dc12` (361.252 byte), qui `fcb9ec8865bc6bf6` (393.684 byte). La voce era `identical` con baseline `5dbca2532ac754ab` per lato (la riconciliazione di `AI_MODELS_PREFER` del 2026-08-18, `valerielinc-ops#6004` + `#418`), ma da allora ENTRAMBI i lati si sono mossi in modo indipendente e quel `mode` e' diventato una bugia di INSTRADAMENTO: `identical` promette «la fix si fa sul sito e scende copiabile qui», e non e' piu' vero in nessuna delle due direzioni. Qui vive, e sul sito NON esiste, tutta la classificazione dell'host irraggiungibile con il cooldown a causa persistente — `classifyHostUnreachable`, `HOST_UNREACHABLE_CODES`, `_isHostUnreachableExempt`, `classifyTransientResolver` / `RESOLVER_FLAP_*`, `COOLDOWN_SEVERITY` / `PROVIDER_COOLDOWN_*`, l'opt-out di `recordScore` (issue #475, #630, #767, #769, #770, #781, #783, #802, #803): il tag `hostUnreachable` compare 15 volte qui e ZERO nella copia del sito. Dal lato opposto il sito ha il ledger delle correzioni di ranking (`_rankingCorrections`, `_consumeUnvalidatedSuccess`) e i segmenti di testo dell'assistant, che qui non ci sono. Le due conseguenze del mode sbagliato sono opposte e tutte e due costose: una fix su questo ramo instradata «sul sito» non troverebbe la' nemmeno il codice da toccare, e un mirror sito->corpus che applicasse la voce alla lettera riporterebbe indietro il file cancellando #475 e #767. `adapted` e' la dichiarazione onesta finche' i due lati non vengono riconciliati (parent #787), e non abbassa niente: la baseline del 2026-08-18 NON viene rigenerata — `--init` riscriverebbe TUTTE le voci del manifest dichiarando allineato cio' che nessuno ha letto — quindi `loop-drift-check` continua a emettere `both-moved` / `actionable: true` su questa voce, e un `site-ahead` futuro chiedera' di rileggere e riapplicare a mano invece di copiare sopra.",
       "baseline": {
-        "site": "4f5d339918426b43",
-        "corpus": "a29eafc434638d4c",
-        "alignedAt": "2026-09-20"
+        "site": "e0025b9005d9266f",
+        "corpus": "aedcc4aebcb82408",
+        "alignedAt": "2026-09-25",
+        "forcedAt": "2026-09-25T03:55:41.802Z"
       }
     },
     {
@@ -2311,10 +2322,10 @@
       "mode": "adapted",
       "baseline": {
         "site": "37ec8b868eb9a730",
-        "corpus": "a7ec2a7ee7533fc3",
-        "alignedAt": "2026-09-20"
+        "corpus": "1ba802eb9a8618ed",
+        "alignedAt": "2026-09-24"
       },
-      "reason": "Il corpus conserva adattamenti propri della cascata di traduzione (fingerprint delle capability per il memo eventi, neutralità dei tier opzionali non configurati, retry OAuth Google Cloud, attribuzione rung/durata e rifiuto dei payload OPUS-MT troncati); la copia byte-identica del sito cancellerebbe questi comportamenti e rende rossi i test di passthrough del corpus. In questa PR si portano la normalizzazione tedesca `frau:mann`, il guard sui sentinel mangled e il confronto con la sorgente raw prima della normalizzazione, mantenendo gli adattamenti locali dichiarati."
+      "reason": "Il corpus conserva adattamenti propri della cascata di traduzione (fingerprint delle capability per il memo eventi, neutralità dei tier opzionali non configurati, retry OAuth Google Cloud e conteggio dei suoi rifiuti silenziosi nel riepilogo della cascata, attribuzione rung/durata e rifiuto dei payload OPUS-MT troncati); la copia byte-identica del sito cancellerebbe questi comportamenti e rende rossi i test di passthrough del corpus. In questa PR si portano la normalizzazione tedesca `frau:mann`, il guard sui sentinel mangled e il confronto con la sorgente raw prima della normalizzazione, mantenendo gli adattamenti locali dichiarati. Dal 2026-09-24 il tier Google Cloud, che su token mancante, 403/429, !ok o timeout rende '' senza lanciare (quindi fuori da `tierErrors`), registra quanti rifiuti ha dato e l'ultimo motivo: il riepilogo diceva `0/16000 daily chars used` sia per «mai chiamato» sia per «ogni chiamata rifiutata»."
     },
     {
       "path": "generator/scripts/lib/google-service-account-token.mjs",
@@ -2717,20 +2728,20 @@
       "sitePath": "scripts/lib/translation-glossary.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "2f13be14632d23d5",
-        "corpus": "2f13be14632d23d5",
-        "alignedAt": "2026-09-20"
+        "site": "03387084038e0dc3",
+        "corpus": "03387084038e0dc3",
+        "alignedAt": "2026-09-25"
       }
     },
     {
       "path": "generator/scripts/lib/exhaustion-disposition.mjs",
       "sitePath": "scripts/lib/exhaustion-disposition.mjs",
       "mode": "identical",
-      "reason": "PROMOSSA il 2026-08-15 (sito PR #5935): la regola nata `corpus-only-pending` con la PR #357 e completata il 2026-08-14 (EXIT_NO_ARTICLE_DECLARED + isLegitimateQuotaDeferral, issue #359) e' ora atterrata anche sul sito, byte a byte identica — verificato con `diff` fra `origin/main:scripts/lib/exhaustion-disposition.mjs` del sito e questo file, output vuoto, stesso hash sui due lati. La cronaca del difetto (pareggio transient/persistent, run 31817957722 e 31823202761) resta nella issue #359, ora chiudibile lato tracking. RIALLINEATA il 2026-08-26 (issue #618): la baseline del 2026-08-15 era stantia da entrambi i lati — il sito aveva portato `PROMPT_SCAFFOLD_FLOOR_TOKENS`, `isBudgetBelowScaffoldFloor`, `isPromptFloorIrreducible` e `promptFloorSummary` con la PR sito #6460 (merged 2026-08-25) — ma i due lati sono di nuovo byte-identici (hash `847866660c4601aa` su entrambi, verificato ora), quindi non e' un `both-moved` da riconciliare a mano, solo una baseline da rinfrescare. NOTA 2026-09-04 (issue #858): questa voce NON e' piu' byte-identica — e' `corpus-ahead`, e la prosa qui sopra (\"stesso hash sui due lati\") descrive uno stato superato. Rimisurato su `origin/main` dei due repo: sito `847866660c4601aa` (16.570 byte, identico a `baseline.site`, fermo dal 2026-08-26), qui `71499d868fe36651`. Il delta e' tutto di questo lato: la PR #820 (issue #805) ha aggiunto `deferralTally` e la sottrazione degli echi di cooldown dal denominatore di `isLegitimateQuotaDeferral` — `deferralTally` compare 9 volte qui e ZERO nella copia del sito — e la PR #863 (issue #856) ha esteso la stessa sottrazione a `isInputCapDeferralVeto`. Perche' la nota serve, dato che `loop-drift-check` stampa gia' `[corpus-ahead]`: il verdetto e' calcolato dagli hash, ma la `reason` e' cio' che un agente legge per INSTRADARE, e «identical ⇒ la fix si fa sul sito e scende copiabile qui» qui manda a toccare un file dove il codice da cambiare non esiste. E' lo stesso errore che la nota del 2026-09-04 su `ai-models.mjs` (#806) ha gia' dovuto correggere una volta. Quindi: finche' il gemello non e' portato al sito, una fix su questa regola si applica QUI; e un mirror sito->corpus applicato alla lettera riporterebbe indietro il file cancellando #805 e #856. Il `mode` resta `identical` DI PROPOSITO: non descrive lo stato di oggi ma l'obiettivo — i due lati DEVONO tornare uguali, e la direzione giusta e' portare #805/#856 al sito, non riallineare all'indietro. E la baseline del 2026-08-26 NON viene rigenerata: `--init` dichiarerebbe allineato cio' che nessuno ha letto, e spegnerebbe il segnale. Cosi' `loop-drift-check` continua a emettere `corpus-ahead` / `actionable: true` su questa voce finche' i due lati divergono — la nota documenta il segnale, non lo silenzia.",
+      "reason": "PROMOSSA il 2026-08-15 (sito PR #5935): la regola nata `corpus-only-pending` con la PR #357 e completata il 2026-08-14 (EXIT_NO_ARTICLE_DECLARED + isLegitimateQuotaDeferral, issue #359) e' ora atterrata anche sul sito, byte a byte identica — verificato con `diff` fra `origin/main:scripts/lib/exhaustion-disposition.mjs` del sito e questo file, output vuoto, stesso hash sui due lati. La cronaca del difetto (pareggio transient/persistent, run 31817957722 e 31823202761) resta nella issue #359, ora chiudibile lato tracking. RIALLINEATA il 2026-08-26 (issue #618): la baseline del 2026-08-15 era stantia da entrambi i lati — il sito aveva portato `PROMPT_SCAFFOLD_FLOOR_TOKENS`, `isBudgetBelowScaffoldFloor`, `isPromptFloorIrreducible` e `promptFloorSummary` con la PR sito #6460 (merged 2026-08-25) — ma i due lati sono di nuovo byte-identici (hash `847866660c4601aa` su entrambi, verificato ora), quindi non e' un `both-moved` da riconciliare a mano, solo una baseline da rinfrescare. NOTA 2026-09-04 (issue #858), SUPERATA dal riallineamento sotto: la voce era diventata `corpus-ahead` — la PR #820 (issue #805) aveva aggiunto `deferralTally` e la sottrazione degli echi di cooldown dal denominatore di `isLegitimateQuotaDeferral`, la PR #863 (issue #856) aveva esteso la stessa sottrazione a `isInputCapDeferralVeto` — e la nota instradava le fix di questa regola su QUESTO lato finche' il delta non fosse risalito al sito, lasciando di proposito la baseline del 2026-08-26 per non spegnere il segnale. Il delta e' risalito: la PR sito valerielinc-ops/frontaliere-si-o-no#8446 (2026-09-13) ha incorporato tutto il lato corpus (#805/#820, #856/#863, poi #1449 e #1468) e ci ha aggiunto il rifiuto dell'attribuzione incoerente degli echi (`attributionCoherent` / `attributableHidden` in `transientMajorityVerdict`: un eco addebitato a un secchio che non lo puo' contenere chiude il voto sul ramo `margin` senza maggioranza, e il voto diagnostico non scende sotto zero); la PR sito #9436 (2026-09-21) ha portato il guardrail degli echi di `isLegitimateQuotaDeferral` da `providerCooldownSkips > total` a `>=`, cosi' la sottrazione non ribalta da sola un pareggio lordo neanche quando gli echi sono esattamente meta' delle prove. RIALLINEATA il 2026-09-25 (issue #1815, figlia di valerielinc-ops/frontaliere-si-o-no#7483): lo stato era `both-moved`, con il sito superinsieme stretto del corpus (5 hunk, tutti righe in piu' sul sito, nessun export tolto) e fuori dal trasporto automatico, che copia solo i `site-ahead`. Questo file e' ora la copia byte per byte di `origin/main:scripts/lib/exhaustion-disposition.mjs` del sito (sha256[:16] `e0cafd2d88b39e3e` su entrambi i lati): porta qui anche la scelta `>=` di #9436, che decide l'item 2 di #832 dalla sorgente `identical` invece che da una nuova misura. La baseline e' rigenerata sui due hash uguali, quindi `identical` torna a descrivere lo stato e non solo l'obiettivo: una fix a questa regola si fa di nuovo sul sito e scende copiabile qui.",
       "baseline": {
-        "site": "847866660c4601aa",
-        "corpus": "847866660c4601aa",
-        "alignedAt": "2026-08-26"
+        "site": "e0cafd2d88b39e3e",
+        "corpus": "e0cafd2d88b39e3e",
+        "alignedAt": "2026-09-25"
       }
     },
     {
@@ -3588,9 +3599,9 @@
       "sitePath": ".github/corpus-workflows/translate-pending.yml",
       "mode": "identical",
       "baseline": {
-        "site": "680f356b302f21b8",
-        "corpus": "680f356b302f21b8",
-        "alignedAt": "2026-09-20"
+        "site": "bc7345b6dad7db4d",
+        "corpus": "bc7345b6dad7db4d",
+        "alignedAt": "2026-09-24"
       }
     },
     {
@@ -3599,8 +3610,8 @@
       "mode": "identical",
       "reason": "Riallineato il 2026-09-24 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono ora byte-identici fra sito e corpus, con il roster corrente di 621 crawler.",
       "baseline": {
-        "site": "3be4caadecd7e8d8",
-        "corpus": "3be4caadecd7e8d8",
+        "site": "68476dd05f7dd08a",
+        "corpus": "68476dd05f7dd08a",
         "alignedAt": "2026-09-24"
       }
     },
@@ -3703,21 +3714,21 @@
     {
       "path": "scripts/ci/translate-queue-recovery.mjs",
       "mode": "corpus-only",
-      "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, misura l'eta' del detentore dal job attivo (`jobs.started_at`) invece che dalla coda del workflow, dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
+      "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, misura l'eta' del detentore dal job attivo (`jobs.started_at`) invece che dalla coda del workflow e quella di un rerun pending dall'attempt corrente (`run_started_at`, fail-closed se illeggibile o anteriore a `created_at`) invece che dalla prima creazione, rifiuta fail-closed (`future_timestamp`) ogni istante di misura oltre la tolleranza di skew `MAX_CLOCK_SKEW_SECONDS` invece di azzerarne l'eta', dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
       "baseline": {
         "site": null,
-        "corpus": "e86919aaf45b4647",
-        "alignedAt": "2026-09-20"
+        "corpus": "91e80c2ebad4e5d8",
+        "alignedAt": "2026-09-25"
       }
     },
     {
       "path": "generator/tests/translate-queue-recovery.test.mjs",
       "mode": "corpus-only",
-      "reason": "Contratto Node deterministico corpus-only per watchdog e workflow translate: copre censimento corrente indipendente da oltre 200 run storiche, discovery troncata, budget, prova schedule redatta, assenza by construction di scritture remote e drift del pin blob contro il workflow generato.",
+      "reason": "Contratto Node deterministico corpus-only per watchdog e workflow translate: copre censimento corrente indipendente da oltre 200 run storiche, eta' dei rerun pending dall'attempt corrente, timestamp futuri oltre la tolleranza di skew, discovery troncata, budget, prova schedule redatta, assenza by construction di scritture remote e drift del pin blob contro il workflow generato.",
       "baseline": {
         "site": null,
-        "corpus": "ce9b09c59bb45aa3",
-        "alignedAt": "2026-09-01"
+        "corpus": "ee6cc8ebb4d6c257",
+        "alignedAt": "2026-09-24"
       }
     },
     {
@@ -3971,6 +3982,16 @@
         "site": null,
         "corpus": "75333f0662fd2700",
         "alignedAt": "2026-09-04"
+      }
+    },
+    {
+      "path": "scripts/ci/transport-realign-body.mjs",
+      "mode": "corpus-only",
+      "reason": "Formato delle righe `(site sha256 ...)` del body delle PR di trasporto e parser del realign post-merge (follow-up sito #9443, item 010/011; issue #1784). Vive solo qui come transport-identical-twins.mjs: produttore (transport-identical-twins.yml) e consumatore (transport-identical-twins-realign.yml) sono entrambi workflow di questo repo, e il sito non riceve trasporti.",
+      "baseline": {
+        "site": null,
+        "corpus": "1d22f9c2ad660610",
+        "alignedAt": "2026-09-24"
       }
     },
     {
@@ -4287,9 +4308,9 @@
       "path": ".github/actions/setup-codex-sandbox/action.yml",
       "mode": "identical",
       "baseline": {
-        "site": "049e7b7f8547fc10",
-        "corpus": "049e7b7f8547fc10",
-        "alignedAt": "2026-09-14"
+        "site": "c4559f16c9dbcb41",
+        "corpus": "c4559f16c9dbcb41",
+        "alignedAt": "2026-09-24"
       }
     },
     {
@@ -4307,8 +4328,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-24.yml",
       "mode": "identical",
       "baseline": {
-        "site": "7f681b9dc8038cbe",
-        "corpus": "7f681b9dc8038cbe",
+        "site": "1c07e8838ef0d315",
+        "corpus": "1c07e8838ef0d315",
         "alignedAt": "2026-09-24"
       }
     },
@@ -4320,6 +4341,16 @@
         "site": null,
         "corpus": "e2644fd6a024dc90",
         "alignedAt": "2026-09-23"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/irpef-scaglioni.mjs",
+      "mode": "corpus-only",
+      "reason": "Sorgente unica degli scaglioni IRPEF (2024-2025: 23/35/43; dal 2026: 23/33/43, Legge 199/2025) interpolata da create-article.mjs nel foglio VERIFIED_DOMAIN_FACTS, nei criteri 3-4 di llmFactCheck e in EVERGREEN_FACTS_BRIEF (issue #1777). Corpus-only perche' i prompt di generazione e fact-check girano solo qui: il gemello adapted del sito (scripts/create-article.mjs) non esegue piu' la generazione, quindi non c'e' un helper da portare.",
+      "baseline": {
+        "site": null,
+        "corpus": "5aa13da79a543661",
+        "alignedAt": "2026-09-24"
       }
     },
     {

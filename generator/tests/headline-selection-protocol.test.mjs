@@ -327,12 +327,17 @@ test('INFRA_ERROR è una causa di rigetto DISTINTA, non un riuso di UNPARSEABLE'
  * grep sulla forma è precisamente ciò che non avrebbe visto il difetto: prima
  * della fix il loop era sintatticamente corretto, gli mancava solo il `catch`.
  */
-function buildRequestHeadlineSelection({ callLLM, RUN_REPORT }) {
+function buildRequestHeadlineSelection({
+  callLLM,
+  RUN_REPORT,
+  recordModelContentFailure = () => {},
+  recordModelContentSuccess = () => {},
+}) {
   const retrySrc = cutDecl('async function requestHeadlineSelection(');
   assert.ok(retrySrc.length > 600, 'estrazione di requestHeadlineSelection sospettosamente corta');
   const factory = new Function(
     '__d',
-    'const { callLLM, GH_MODEL_LIGHT, parseHeadlineSelection, selectionCorrectionNote, SELECTION_REJECTION, RUN_REPORT } = __d;\n'
+    'const { callLLM, GH_MODEL_LIGHT, parseHeadlineSelection, selectionCorrectionNote, SELECTION_REJECTION, RUN_REPORT, recordModelContentFailure, recordModelContentSuccess } = __d;\n'
     + `${retrySrc}\n`
     + 'return requestHeadlineSelection;',
   );
@@ -343,6 +348,8 @@ function buildRequestHeadlineSelection({ callLLM, RUN_REPORT }) {
     selectionCorrectionNote,
     SELECTION_REJECTION,
     RUN_REPORT,
+    recordModelContentFailure,
+    recordModelContentSuccess,
   });
 }
 
@@ -495,7 +502,134 @@ test('il retry della selezione esiste, è limitato e passa dal parser', () => {
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Strato 3 — il ripiego Codex dopo un tentativo free fallito
+// Strato 3 — una risposta 200 rigettata e' un FALLIMENTO del modello che l'ha
+// data, e il tentativo successivo gira su un altro modello
+// ─────────────────────────────────────────────────────────────────────────────
+//
+// Run 36010807545: nvidia/nemotron-3-super-120b-a12b rispondeva HTTP 200 con
+// prosa di ragionamento («We need to pick a headline…»), il parser la
+// rigettava come `unparseable`, ma per la cascata era un successo (+2) e il
+// suo tasso storico lo rimetteva primo a ogni tentativo: 0 finalisti per giro.
+
+/** Un modello che risponde prosa, uno che risponde il JSON del protocollo. */
+const PROSA = 'We need to pick a headline from the list, respecting criteria. First priority: any headline marked with ⭐FRONTALIERI.';
+const JSON_VALIDO = '{"selectedId": "H2", "reason": "rilevante per i frontalieri"}';
+
+test('una risposta 200 illeggibile conta come fallimento e il ritentativo esclude quel modello', async () => {
+  const RUN_REPORT = freshRunReport();
+  const chiamate = [];
+  const punteggi = { failure: [], success: [] };
+  // Una cascata finta che, come quella vera, mette sempre primo il modello A
+  // (tasso storico piu' alto) finche' nessuno lo esclude.
+  const callLLM = async (messages, opts) => {
+    chiamate.push(opts);
+    const esclusi = opts.excludeModels ?? [];
+    const servito = esclusi.includes('modello-A') ? 'modello-B' : 'modello-A';
+    opts.modelUsedRef.model = servito;
+    return servito === 'modello-A' ? PROSA : JSON_VALIDO;
+  };
+  const requestHeadlineSelection = buildRequestHeadlineSelection({
+    callLLM,
+    RUN_REPORT,
+    recordModelContentFailure: (m) => punteggi.failure.push(m),
+    recordModelContentSuccess: (m) => punteggi.success.push(m),
+  });
+  const { value: r } = await captureStderr(
+    () => requestHeadlineSelection('PROMPT-BASE', 3, 'Batch 1', 2),
+  );
+
+  assert.equal(r.ok, true, 'con due tentativi il modello B doveva essere raggiunto');
+  assert.equal(r.index, 1);
+  assert.equal(r.attempts, 2);
+  assert.deepEqual(punteggi.failure, ['modello-A'], 'la risposta 200 rigettata non e\' stata contata come fallimento del modello A');
+  assert.deepEqual(punteggi.success, ['modello-B']);
+  assert.equal(chiamate[0].excludeModels, undefined, 'il primo tentativo non esclude niente');
+  assert.deepEqual(chiamate[1].excludeModels, ['modello-A'], 'il ritentativo e\' tornato sul modello che aveva appena fallito');
+  assert.equal(chiamate[1].model, chiamate[0].model, 'il modello leggero di partenza resta quello');
+  assert.equal(RUN_REPORT.selectionUsage.responsesRejected, 1);
+  assert.equal(RUN_REPORT.selectionUsage.rejectionReasons[SELECTION_REJECTION.UNPARSEABLE], 1);
+});
+
+test('un errore infrastrutturale NON e\' un fallimento di contenuto e non esclude nessuno', async () => {
+  const RUN_REPORT = freshRunReport();
+  const chiamate = [];
+  const punteggi = { failure: [], success: [] };
+  const callLLM = async (messages, opts) => {
+    chiamate.push(opts);
+    if (chiamate.length === 1) throw new Error('503 overloaded');
+    opts.modelUsedRef.model = 'modello-A';
+    return JSON_VALIDO;
+  };
+  const requestHeadlineSelection = buildRequestHeadlineSelection({
+    callLLM,
+    RUN_REPORT,
+    recordModelContentFailure: (m) => punteggi.failure.push(m),
+    recordModelContentSuccess: (m) => punteggi.success.push(m),
+  });
+  const { value: r } = await captureStderr(
+    () => requestHeadlineSelection('PROMPT-BASE', 3, 'Batch 1', 2),
+  );
+  assert.equal(r.ok, true);
+  assert.deepEqual(punteggi.failure, [], 'la cascata ha gia\' contato il fallimento di trasporto: contarlo di nuovo lo raddoppierebbe');
+  assert.equal(chiamate[1].excludeModels, undefined);
+});
+
+test('con la cascata VERA: A risponde prosa, B JSON — B viene selezionato entro il budget', async () => {
+  // Stesso scenario, ma attraverso `callLLM` di ai-models.mjs con due modelli
+  // NVIDIA e fetch finto: A ha un tasso storico altissimo, quindi senza
+  // l'esclusione il sort lo rimetterebbe primo anche al secondo tentativo.
+  const aiModels = await import('../scripts/lib/ai-models.mjs');
+  const A = 'nvidia/nvidia/nemotron-3-super-120b-a12b';
+  const B = 'nvidia/meta/llama-3.1-8b-instruct';
+  const envBackup = { NVIDIA_API_KEY: process.env.NVIDIA_API_KEY, AI_MODELS_FORCE_CHAIN: process.env.AI_MODELS_FORCE_CHAIN };
+  const originalFetch = globalThis.fetch;
+  process.env.NVIDIA_API_KEY = 'dummy-per-test';
+  delete process.env.AI_MODELS_FORCE_CHAIN;
+  aiModels.resetState();
+  for (let i = 0; i < 200; i++) aiModels.recordModelSuccess(A, { recordScore: false });
+  const serviti = [];
+  globalThis.fetch = async (url, init) => {
+    const body = JSON.parse(init.body);
+    serviti.push(body.model);
+    const content = body.model.includes('nemotron') ? PROSA : JSON_VALIDO;
+    return new Response(JSON.stringify({ choices: [{ message: { content } }] }), {
+      status: 200,
+      headers: { 'content-type': 'application/json' },
+    });
+  };
+  try {
+    const RUN_REPORT = freshRunReport();
+    const callLLM = (messages, opts) => aiModels.callLLM(messages, {
+      ...opts,
+      model: undefined,
+      chain: [A, B],
+      recordScore: false,
+    });
+    const requestHeadlineSelection = buildRequestHeadlineSelection({
+      callLLM,
+      RUN_REPORT,
+      recordModelContentFailure: (m) => aiModels.recordModelContentFailure(m, { recordScore: false }),
+      recordModelContentSuccess: (m) => aiModels.recordModelContentSuccess(m),
+    });
+    const { value: r } = await captureStderr(
+      () => requestHeadlineSelection('PROMPT-BASE', 3, 'Batch 1', 2),
+    );
+    assert.equal(r.ok, true, `B non raggiunto: serviti ${JSON.stringify(serviti)}`);
+    assert.equal(r.index, 1);
+    assert.equal(serviti.length, 2, `chiamate al provider: ${JSON.stringify(serviti)}`);
+    assert.match(serviti[0], /nemotron/, 'il primo tentativo va al modello col tasso storico piu\' alto');
+    assert.match(serviti[1], /llama/, 'il ritentativo e\' tornato sul modello che rispondeva prosa');
+  } finally {
+    globalThis.fetch = originalFetch;
+    for (const [k, v] of Object.entries(envBackup)) {
+      if (v === undefined) delete process.env[k]; else process.env[k] = v;
+    }
+    aiModels.resetState();
+  }
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Strato 4 — il ripiego Codex dopo un tentativo free fallito
 // ─────────────────────────────────────────────────────────────────────────────
 //
 // Run 36001495484: 24 risposte rigettate su 24 dall'unico modello free rimasto.

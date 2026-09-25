@@ -70,6 +70,17 @@ const _gcOAuthAvailable = !!(
 );
 let _googleCloudDailyChars = 0;
 const GOOGLE_CLOUD_DAILY_LIMIT = 16000;
+// Ultimo motivo per cui il tier Google Cloud ha reso '' senza tradurre. Il tier
+// non lancia (ritorna ''), quindi `tierErrors` non lo vede: senza questo il
+// riepilogo mostrava `0/16000 daily chars used` sia per «mai chiamato» sia per
+// «ogni chiamata rifiutata» (403 scope/API disabilitata), e il tier poteva
+// restare morto in silenzio mentre DeepL e Azure erano esauriti.
+let _googleCloudLastFailure = '';
+let _googleCloudFailures = 0;
+function _noteGoogleCloudFailure(reason) {
+  _googleCloudLastFailure = reason;
+  _googleCloudFailures += 1;
+}
 
 // Hugging Face OPUS-MT (Helsinki-NLP open-source translation models)
 const HF_TOKEN = (process.env.HF_TOKEN || process.env.HUGGINGFACE_API_KEY || '').trim();
@@ -318,7 +329,10 @@ export function logCascadeSummary() {
     console.log(`   🔑 Azure: ${active}/${AZURE_TRANSLATOR_KEYS.length} keys active, region=${AZURE_REGION}${_azureExhaustedKeys.size > 0 ? ` (${_azureExhaustedKeys.size} exhausted)` : ''}`);
   }
   const gcAuth = _gcOAuthAvailable ? 'OAuth2' : 'none';
-  console.log(`   🔑 Google Cloud Translation: auth=${gcAuth}, ${_googleCloudDailyChars}/${GOOGLE_CLOUD_DAILY_LIMIT} daily chars used`);
+  const gcFailures = _googleCloudFailures
+    ? `, ${_googleCloudFailures} call(s) refused (last: ${_googleCloudLastFailure})`
+    : '';
+  console.log(`   🔑 Google Cloud Translation: auth=${gcAuth}, ${_googleCloudDailyChars}/${GOOGLE_CLOUD_DAILY_LIMIT} daily chars used${gcFailures}`);
 }
 
 /**
@@ -1090,6 +1104,7 @@ async function translateWithGoogleCloud(text, sourceLang, targetLang, outcome = 
   try {
     const token = await _getGoogleCloudAccessToken();
     if (!token) {
+      _noteGoogleCloudFailure('access-token-unavailable');
       noteTranslationOutcome(outcome, 'incomplete');
       return '';
     }
@@ -1105,10 +1120,12 @@ async function translateWithGoogleCloud(text, sourceLang, targetLang, outcome = 
       signal: AbortSignal.timeout(TIMEOUT_MS),
     });
     if (res.status === 403 || res.status === 429) {
+      _noteGoogleCloudFailure(`HTTP ${res.status}`);
       noteTranslationOutcome(outcome, 'incomplete');
-      return ''; // quota exceeded
+      return ''; // quota exceeded, or API/scope not enabled for this token
     }
     if (!res.ok) {
+      _noteGoogleCloudFailure(`HTTP ${res.status}`);
       noteTranslationOutcome(outcome, 'incomplete');
       return '';
     }
@@ -1124,7 +1141,8 @@ async function translateWithGoogleCloud(text, sourceLang, targetLang, outcome = 
     // rispettare. Il giudizio «e' la sorgente?» e' salito in `tryTier`.
     _googleCloudDailyChars += clean.length;
     return translated;
-  } catch {
+  } catch (error) {
+    _noteGoogleCloudFailure(error?.name === 'TimeoutError' ? 'timeout' : 'request-error');
     noteTranslationOutcome(outcome, 'incomplete');
     return '';
   }

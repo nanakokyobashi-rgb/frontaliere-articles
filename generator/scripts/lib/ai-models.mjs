@@ -992,26 +992,31 @@ function getOmniRouteUrl() { return (process.env.OMNIROUTE_URL || OMNIROUTE_DEFA
 // key, so keep a sentinel, same pattern as Local/getLocalLlmApiKey.
 function getOmniRouteApiKey() { return (process.env.OMNIROUTE_API_KEY || 'omniroute-no-key').trim(); }
 
-// ── CLI article lane (Codex primary, Claude body fallback) ─────────────────
-// ENABLE_HAIKU_ARTICLE_FALLBACK is the historical Remote Config flag loaded by
-// load-rc-env.mjs. Keep accepting it while the action also publishes the more
-// truthful ENABLE_CODEX_ARTICLE_FALLBACK name: existing callers and the RC
-// kill-switch remain compatible, but the preferred path now starts with Codex.
-function isTruthyEnv(name) {
-  return /^(1|true|yes|on)$/i.test((process.env[name] || '').trim()); // env-scan: name is restricted to the literal CLI flag/gate names in this module
+// ── CLI article lane (Codex Luna Max only) ─────────────────────────────────
+// Il suo interruttore e' SOLO ENABLE_CODEX_ARTICLE_FALLBACK (mappato in
+// load-rc-env.mjs, acceso quando non e' impostato: lo spegne solo un valore
+// esplicito 0/false/no/off), piu' il socket del broker che la setup action
+// pubblica quando CODEX_AUTH_JSON c'e' e il broker e' pronto. Fino al
+// 2026-09-24 la lane derivava il gate da ENABLE_HAIKU_ARTICLE_FALLBACK
+// (HAIKU_FALLBACK_GATE): spegnere Haiku da Remote Config avrebbe spento anche
+// Codex. Ora quel flag non ha alcun effetto, qui e nell'action.
+// Stessa regola del bash del gate in setup-claude-haiku-fallback/action.yml.
+const CODEX_ARTICLE_LANE_OFF_RE = /^(0|false|no|off)$/i;
+function isCodexArticleLaneSwitchOn() {
+  return !CODEX_ARTICLE_LANE_OFF_RE.test((process.env.ENABLE_CODEX_ARTICLE_FALLBACK || '').trim());
 }
-function isArticleCliLaneEnabled() {
-  const resolvedGate = String(process.env.HAIKU_FALLBACK_GATE || '').trim();
-  if (resolvedGate) return isTruthyEnv('HAIKU_FALLBACK_GATE');
-  return isTruthyEnv('ENABLE_CODEX_ARTICLE_FALLBACK')
-    || isTruthyEnv('ENABLE_HAIKU_ARTICLE_FALLBACK');
-}
+// Decisione del proprietario (2026-09-24, «Disattiva haiku! Voglio solo
+// codex»): la lane Claude Haiku e' spenta NEL CODICE, non solo dal kill-switch
+// di Remote Config. ENABLE_HAIKU_ARTICLE_FALLBACK non rende piu' disponibile
+// `claude-cli/haiku` (ne' apre o chiude Codex): con questa funzione a false
+// getApiKeyForProvider(CLAUDE_CLI) e' vuota, quindi isModelAvailable, il
+// preflight e la cascata di callLLM lo saltano anche se un chiamante lo passa
+// in `prefer`, in `AI_MODELS_PREFER` o come `model`.
 function isClaudeCliFallbackEnabled() {
-  return isArticleCliLaneEnabled() && isTruthyEnv('ENABLE_HAIKU_ARTICLE_FALLBACK');
+  return false;
 }
 function isCodexCliPrimaryEnabled() {
-  return isArticleCliLaneEnabled()
-    && isTruthyEnv('ENABLE_CODEX_ARTICLE_FALLBACK')
+  return isCodexArticleLaneSwitchOn()
     && !!String(process.env.CODEX_AUTH_BROKER_SOCKET || '').trim();
 }
 function hasClaudeCodeOauthToken() {
@@ -1703,8 +1708,9 @@ export function getApiKeyForProvider(provider) {
     // of requests, so every crawler worker can use the same primary lane.
     case PROVIDER.CODEX_CLI:   return isCodexCliPrimaryEnabled() ? 'codex-cli-no-key' : '';
     // No real key — auth is the CLAUDE_CODE_OAUTH_TOKEN env var, read directly
-    // by the `claude` CLI subprocess. Gate on RC flag + token presence so the
-    // chain only offers this model when both are actually usable. Mirrors Local.
+    // by the `claude` CLI subprocess. Spenta dal proprietario il 2026-09-24:
+    // isClaudeCliFallbackEnabled() e' false, quindi questa voce e' sempre ''
+    // e ogni claude-cli/* viene saltato con «no API key», flag e token o no.
     case PROVIDER.CLAUDE_CLI:  return (!_claudeCliBinaryMissing && !_claudeCliTimeoutStormDetected && isClaudeCliFallbackEnabled() && hasClaudeCodeOauthToken()) ? 'claude-cli-no-key' : '';
     // OmniRoute needs no real key from us either; gate purely on the opt-in
     // flag, same sentinel pattern as Local. '' when disabled → every
@@ -8802,6 +8808,10 @@ export async function callSingleModel(messages, opts = {}) {
  * @param {object} opts — Options (same as callSingleModel, plus `chain`)
  * @param {string} [opts.model] — Starting model (overrides chain start)
  * @param {string[]} [opts.chain] — Custom fallback chain
+ * @param {string[]} [opts.excludeModels] — Models to leave out of THIS call's
+ *   chain (after sort and preference), e.g. the model whose HTTP-200 answer the
+ *   caller just rejected. Ignored under AI_MODELS_FORCE_CHAIN and when it would
+ *   leave the chain empty; disables the response cache for the call.
  * @returns {Promise<string>} — Text content from whichever model succeeded
  */
 export async function callLLM(messages, opts = {}) {
@@ -8818,7 +8828,12 @@ export async function callLLM(messages, opts = {}) {
   // (e.g. fact-check re-checking an unchanged article body across regeneration
   // attempts). A hit avoids the entire fallback cascade — the dominant intra-run
   // burn — at zero risk, since the key includes the full prompt + model + params.
-  const _cacheOn = o.cache === true;
+  // Una chiamata che esclude dei modelli sta ritentando DOPO aver rigettato una
+  // risposta: rispondere dalla cache potrebbe restituire proprio quella.
+  const _excludedModels = Array.isArray(o.excludeModels)
+    ? [...new Set(o.excludeModels.filter((m) => typeof m === 'string' && m))]
+    : [];
+  const _cacheOn = o.cache === true && _excludedModels.length === 0;
   let _cacheKey = null;
   if (_cacheOn) {
     _cacheKey = _responseCacheKey(messages, o);
@@ -8877,6 +8892,15 @@ export async function callLLM(messages, opts = {}) {
     // `opts.prefer` o sull'opt-in esplicito `AI_MODELS_PREFER` — mai da un
     // default, che e' vuoto. Vedi il blocco di commento su applyModelsPrefer.
     chain = applyModelsPrefer(chain, o.prefer);
+    // Esclusione per-chiamata, DOPO sort e preferenza: un chiamante che ha
+    // appena rigettato la risposta HTTP 200 di un modello (selezione headline:
+    // prosa di ragionamento invece del JSON) ritenta sugli altri, invece di
+    // tornare sullo stesso che il tasso di successo storico rimette primo.
+    // Non tronca a vuoto: se toglierebbe tutto, la catena resta com'era.
+    if (_excludedModels.length) {
+      const remaining = chain.filter((m) => !_excludedModels.includes(m));
+      if (remaining.length) chain = remaining;
+    }
   }
 
   // Keep the user-facing summary bounded, but retain the full reason and any

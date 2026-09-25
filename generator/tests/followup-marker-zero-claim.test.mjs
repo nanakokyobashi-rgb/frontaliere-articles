@@ -369,33 +369,111 @@ test('un bucket illeggibile tiene la PR nel batch anche se un altro e\' provato'
 
 /* ── La prova per gli item demoti dal gate sul conio ───────────────────── */
 
-test('accetta la prova del gate quando tutti gli item della PR sono stati demoti', () => {
-  const bucket = {
-    number: 8944,
-    title: 'follow-up(daily:2026-09-17): 5 items — valerielinc-ops/frontaliere-si-o-no',
-    body: 'State: sealed\n\n### FU-2026-09-17-001 — item rimasto\n- Sources: PR #1520\n',
-  };
-  const gateComments = JSON.stringify({ comments: [{ body: [
-    '<!-- followup-mint-gate -->',
-    '## Item demoti dal gate sul conio',
-    'Issue #8944 resta aperta con 5 item validi.',
-    '',
-    '### item demoto',
-    '- Sources: PR #1535',
-  ].join('\n') }] });
+/*
+ * Il gate sul conio posta il suo commento SEMPRE dopo il marker che certifica:
+ * nel workflow lo step `Verify complete follow-up triage` precede `Gate sul
+ * conio`. Un commento del gate ANTERIORE al marker corrente appartiene quindi
+ * a un triage precedente, e non prova niente sulla scrittura nuova (#1812).
+ */
+const MINT_GATE_BUCKET = {
+  number: 8944,
+  title: 'follow-up(daily:2026-09-17): 5 items — valerielinc-ops/frontaliere-si-o-no',
+  body: 'State: sealed\n\n### FU-2026-09-17-001 — item rimasto\n- Sources: PR #1520\n',
+};
+const MINT_GATE_MARKER = '## Post-merge follow-up triage\n\n- Daily bucket: #8944\n- Follow-up item: FU-2026-09-17-009';
+const MINT_GATE_BODY = [
+  '<!-- followup-mint-gate -->',
+  '## Item demoti dal gate sul conio',
+  'Issue #8944 resta aperta con 5 item validi.',
+  '',
+  '### item demoto',
+  '- Sources: PR #1535',
+].join('\n');
+const MARKER_AT = '2026-09-17T14:00:00Z';
 
-  assert.equal(gatePreservedFollowupMatches(gateComments, 8944, 1535), true);
-  assert.equal(persistedBucketIssueMatches(bucket, 1535, gateComments), true);
+/** Commenti della PR: il marker corrente più un commento del gate a `gateAt`. */
+function prCommentsWithGateAt(gateAt) {
+  return JSON.stringify({ comments: [
+    { body: MINT_GATE_MARKER, createdAt: MARKER_AT },
+    { body: MINT_GATE_BODY, createdAt: gateAt },
+  ] });
+}
+
+test('accetta la prova del gate quando tutti gli item della PR sono stati demoti', () => {
+  const gateComments = prCommentsWithGateAt('2026-09-17T14:05:00Z');
+
+  assert.equal(gatePreservedFollowupMatches(gateComments, 8944, 1535, MARKER_AT), true);
+  assert.equal(persistedBucketIssueMatches(MINT_GATE_BUCKET, 1535, gateComments, MARKER_AT), true);
   assert.equal(
-    verifyTriageMarkerPersistence(
-      '## Post-merge follow-up triage\n\n- Daily bucket: #8944\n- Follow-up item: FU-2026-09-17-005',
-      1535,
-      () => bucket,
-      gateComments,
-    ),
+    verifyTriageMarkerPersistence(MINT_GATE_MARKER, 1535, () => MINT_GATE_BUCKET, gateComments),
     true,
     'il gate demota gli item e cancella il loro `Sources`: la prova resta il suo commento',
   );
+});
+
+test('un commento del gate anteriore al marker corrente non prova la scrittura nuova (#1812)', () => {
+  // Fixture della scheda: marker corrente delle 14:00, commento del gate
+  // storico delle 08:00 con `Issue #8944` e `- Sources: PR #1535`, bucket che
+  // non contiene più la PR. Su origin/main il verdetto era `true`: la scrittura
+  // non persistita veniva certificata e la PR usciva dal batch per sempre.
+  const comments = JSON.stringify({ comments: [
+    { body: '## Post-merge follow-up triage\n\n- Daily bucket: #8944\n- Follow-up item: FU-2026-09-17-002', createdAt: '2026-09-17T07:00:00Z' },
+    { body: MINT_GATE_BODY, createdAt: '2026-09-17T08:00:00Z' },
+    { body: MINT_GATE_MARKER, createdAt: MARKER_AT },
+  ] });
+  assert.equal(gatePreservedFollowupMatches(comments, 8944, 1535, MARKER_AT), false);
+  assert.equal(persistedBucketIssueMatches(MINT_GATE_BUCKET, 1535, comments, MARKER_AT), false);
+  assert.equal(verifyTriageMarkerPersistence(MINT_GATE_MARKER, 1535, () => MINT_GATE_BUCKET, comments), false);
+});
+
+test('la prova del gate vale anche nello stesso istante del marker', () => {
+  const comments = prCommentsWithGateAt(MARKER_AT);
+  assert.equal(verifyTriageMarkerPersistence(MINT_GATE_MARKER, 1535, () => MINT_GATE_BUCKET, comments), true);
+});
+
+test('fail-closed: `createdAt` illeggibile del gate o del marker non prova niente', () => {
+  for (const bad of [undefined, '', 'ieri', 42]) {
+    const gateBad = JSON.stringify({ comments: [
+      { body: MINT_GATE_MARKER, createdAt: MARKER_AT },
+      { body: MINT_GATE_BODY, createdAt: bad },
+    ] });
+    assert.equal(gatePreservedFollowupMatches(gateBad, 8944, 1535, MARKER_AT), false, `gate ${String(bad)}`);
+    assert.equal(
+      verifyTriageMarkerPersistence(MINT_GATE_MARKER, 1535, () => MINT_GATE_BUCKET, gateBad),
+      false,
+      `gate ${String(bad)}`,
+    );
+
+    const markerBad = JSON.stringify({ comments: [
+      { body: MINT_GATE_MARKER, createdAt: bad },
+      { body: MINT_GATE_BODY, createdAt: '2026-09-17T14:05:00Z' },
+    ] });
+    // Il parametro diretto accetta anche millisecondi: lì un numero è un istante.
+    if (typeof bad !== 'number') {
+      assert.equal(gatePreservedFollowupMatches(markerBad, 8944, 1535, bad), false, `marker ${String(bad)}`);
+    }
+    assert.equal(
+      verifyTriageMarkerPersistence(MINT_GATE_MARKER, 1535, () => MINT_GATE_BUCKET, markerBad),
+      false,
+      `marker ${String(bad)}`,
+    );
+  }
+  // Senza l'istante del marker la prova del gate non vale: nessun default.
+  assert.equal(gatePreservedFollowupMatches(prCommentsWithGateAt('2026-09-17T14:05:00Z'), 8944, 1535), false);
+});
+
+test('fail-closed: il marker verificato deve essere quello corrente dei commenti', () => {
+  // Il gate è successivo al marker corrente, ma il chiamante verifica un
+  // marker diverso: l'istante non è attribuibile e la prova non vale.
+  const comments = prCommentsWithGateAt('2026-09-17T14:05:00Z');
+  const other = '## Post-merge follow-up triage\n\n- Daily bucket: #8944\n- Follow-up item: FU-2026-09-17-004';
+  assert.equal(verifyTriageMarkerPersistence(other, 1535, () => MINT_GATE_BUCKET, comments), false);
+});
+
+test('la prova diretta nel bucket non dipende dagli istanti', () => {
+  const bucket = { ...MINT_GATE_BUCKET, body: `${MINT_GATE_BUCKET.body}\n### FU-2026-09-17-004 — item vivo\n- Sources: PR #1535\n` };
+  assert.equal(persistedBucketIssueMatches(bucket, 1535), true);
+  assert.equal(verifyTriageMarkerPersistence(MINT_GATE_MARKER, 1535, () => bucket), true);
 });
 
 test('la prova del gate resta fail-closed per bucket o PR diversi', () => {
@@ -403,9 +481,10 @@ test('la prova del gate resta fail-closed per bucket o PR diversi', () => {
     '<!-- followup-mint-gate -->',
     'Issue #8944 resta aperta con 7 item validi.',
     '- Sources: PR #1535',
-  ].join('\n') }] });
-  assert.equal(gatePreservedFollowupMatches(comments, 8943, 1535), false);
-  assert.equal(gatePreservedFollowupMatches(comments, 8944, 1536), false);
+  ].join('\n'), createdAt: '2026-09-17T14:05:00Z' }] });
+  assert.equal(gatePreservedFollowupMatches(comments, 8943, 1535, MARKER_AT), false);
+  assert.equal(gatePreservedFollowupMatches(comments, 8944, 1536, MARKER_AT), false);
+  assert.equal(gatePreservedFollowupMatches(comments, 8944, 1535, MARKER_AT), true);
 });
 
 /* ── Il gemello bash non esiste più ─────────────────────────────────────── */

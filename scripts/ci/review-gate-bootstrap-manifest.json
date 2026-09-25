@@ -9,6 +9,7 @@
     "scripts/ci/claude-rate-limit-contract.mjs",
     "scripts/ci/auto-merge-eval.mjs",
     "scripts/ci/review-scope.mjs",
+    "scripts/ci/lib/review-states.mjs",
     "scripts/ci/lib/constants.mjs",
     "scripts/ci/lib/fetchPrFiles.mjs",
     "scripts/ci/lib/vitestCheck.mjs",

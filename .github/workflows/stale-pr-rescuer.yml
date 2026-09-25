@@ -490,13 +490,13 @@ jobs:
             # Anche qui una lista vuota è valida; errore, JSON vuoto o review
             # priva di body/actor verificabile sono `unavailable`, non «nessuna
             # review» autorizzante una classe A/B/D.
-            REVIEWS_STATE=available
-            if ! reviews=$(gh api --paginate "repos/$REPO/pulls/$N/reviews?per_page=100" 2>/dev/null); then
-              REVIEWS_STATE=unavailable
-            elif [ -z "${reviews//[[:space:]]/}" ] || ! printf '%s\n' "$reviews" | jq -s -e '
-              def review_state:
-                . as $state
-                | ["APPROVED", "CHANGES_REQUESTED", "COMMENTED", "PENDING", "DISMISSED"] | index($state);
+            # Schema e selezione vivono in UNA variabile ciascuno perche' si
+            # applicano identici a due letture consecutive (#1762, sotto).
+            # L'enum degli stati e' quello di scripts/ci/lib/review-states.mjs:
+            # uno stato sconosciuto rende la lettura `unavailable`, mai «non
+            # PENDING, quindi un verdetto».
+            REVIEW_SCHEMA_JQ='
+              def review_state_known: (.state | type) == "string" and (.state | IN("APPROVED", "CHANGES_REQUESTED", "COMMENTED", "PENDING", "DISMISSED"));
               length > 0
               and all(.[];
                 type == "array"
@@ -504,8 +504,7 @@ jobs:
                   type == "object"
                   and (.id | type) == "number"
                   and (.id | floor == . and . >= 1)
-                  and (.state | type) == "string"
-                  and ((.state | review_state) != null)
+                  and review_state_known
                   and (.user | type) == "object"
                   and (.user.login | type) == "string"
                   and (.user.login | length > 0)
@@ -513,18 +512,9 @@ jobs:
                   and (.commit_id | test("^[a-f0-9]{40}$"; "i"))
                   and (.body | type) == "string"
                 )
-              )
-            ' >/dev/null 2>&1; then
-              REVIEWS_STATE=unavailable
-            fi
-            if [ "$REVIEWS_STATE" = "unavailable" ]; then
-              echo "::warning::Review della PR #$N non verificabile — nessun rescue o mutation."
-              continue
-            fi
-            if printf '%s\n' "$reviews" | jq -s -e 'all(.[]; length == 0)' >/dev/null 2>&1; then
-              REVIEWS_STATE=empty
-            fi
-            if ! LAST_REVIEW_BODIES=$(echo "$reviews" | jq -c -rs --arg head "$HEAD" --arg revision "$REVIEW_REVISION" '
+              )'
+            # shellcheck disable=SC2016 # `$head`/`$revision` sono variabili jq, non di shell.
+            REVIEW_SELECTION_JQ='
               def review_revisions:
                 [((.body // "") | split("\n")[] | rtrimstr("\r")
                   | select(test("^<!-- REVIEW_INPUT_REVISION: body:[0-9a-f]{64} -->$"; "i"))
@@ -533,8 +523,10 @@ jobs:
               def has_current_revision($expected):
                 review_revisions as $revisions
                 | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
+              def review_state_known: (.state | type) == "string" and (.state | IN("APPROVED", "CHANGES_REQUESTED", "COMMENTED", "PENDING", "DISMISSED"));
+              def review_state_terminal: review_state_known and (.state | IN("APPROVED", "CHANGES_REQUESTED", "COMMENTED"));
               [.[][]?
-               | select((.state // "") != "PENDING" and (.state // "") != "DISMISSED")
+               | select(review_state_terminal)
                | select(
                    ((.user.login // "") | test("^(claude\\[bot\\]|frontaliere-automation\\[bot\\])$";"i"))
                    or (((.user.login // "") | test("^github-actions\\[bot\\]$";"i"))
@@ -542,38 +534,69 @@ jobs:
                  )] as $managed
               | ($managed | map(select(has_current_revision($revision))) | sort_by(.id // 0) | last // {}) as $current
               | ($managed | map(select(.commit_id == $head)) | sort_by(.id // 0) | last // {}) as $head_review
-              | {current: ($current.body // ""), head: ($head_review.body // "") }'); then
+              | {current: ($current.body // ""), current_id: ($current.id // null),
+                 current_cid: ($current.commit_id // ""),
+                 head: ($head_review.body // ""), head_id: ($head_review.id // null)}'
+
+            # `--paginate`: una PR molto revisionata supera le 30 review di
+            # default, e qui si legge l'ULTIMA — cioè proprio quella che una
+            # risposta troncata non contiene. Sequenza di ARRAY: `.[][]?`.
+            # Anche qui una lista vuota è valida; errore, JSON vuoto, stato
+            # fuori enum o review priva di body/actor verificabile sono
+            # `unavailable`, non «nessuna review» autorizzante una classe A/B/D.
+            REVIEWS_STATE=available
+            if ! reviews=$(gh api --paginate "repos/$REPO/pulls/$N/reviews?per_page=100" 2>/dev/null); then
+              REVIEWS_STATE=unavailable
+            elif [ -z "${reviews//[[:space:]]/}" ] || ! printf '%s\n' "$reviews" | jq -s -e "$REVIEW_SCHEMA_JQ" >/dev/null 2>&1; then
+              REVIEWS_STATE=unavailable
+            fi
+            if [ "$REVIEWS_STATE" = "unavailable" ]; then
+              echo "::warning::Review della PR #$N non verificabile (API, schema o stato review fuori enum) — nessun rescue o mutation."
+              continue
+            fi
+            if printf '%s\n' "$reviews" | jq -s -e 'all(.[]; length == 0)' >/dev/null 2>&1; then
+              REVIEWS_STATE=empty
+            fi
+            if ! REVIEW_SELECTION=$(printf '%s\n' "$reviews" | jq -c -s --arg head "$HEAD" --arg revision "$REVIEW_REVISION" "$REVIEW_SELECTION_JQ"); then
               echo "::warning::Verdetto review della PR #$N non verificabile — nessun rescue o mutation."
               continue
             fi
-            if ! LAST_BODY=$(printf '%s' "$LAST_REVIEW_BODIES" | jq -r '.current // ""') \
-              || ! LAST_HEAD_BODY=$(printf '%s' "$LAST_REVIEW_BODIES" | jq -r '.head // ""'); then
+
+            # Seconda lettura PRIMA di agire (#1762): la paginazione non e'
+            # atomica e fra la prima lettura e la mutation una review puo'
+            # essere ritirata (DISMISSED) o sostituita, o la PR puo' ricevere
+            # un push o un body edit. Si rileggono HEAD, body e review con gli
+            # STESSI programmi: se la selezione o l'input non coincidono, lo
+            # snapshot e' stantio e questo giro non tocca la PR.
+            # Il body si rilegge con lo STESSO comando che ha prodotto
+            # `REVIEW_REVISION` sopra: stessi byte, stesso hash.
+            reread_body_file="${RUNNER_TEMP:-/tmp}/stale-pr-body-${N}-reread.txt"
+            if ! reread_head=$(gh api --paginate "repos/$REPO/pulls/$N" --jq '.head.sha' 2>/dev/null) \
+              || ! printf '%s' "$reread_head" | grep -qE '^[a-f0-9]{40}$' \
+              || ! gh api --paginate "repos/$REPO/pulls/$N" --jq '.body // ""' > "$reread_body_file" 2>/dev/null \
+              || ! reread_body_sha=$(sha256sum "$reread_body_file" | awk '{print $1}'); then
+              echo "::warning::Rilettura HEAD/body della PR #$N non verificabile — nessun rescue o mutation."
+              continue
+            fi
+            if [ "$reread_head" != "$HEAD" ] || [ "body:$reread_body_sha" != "$REVIEW_REVISION" ]; then
+              echo "::warning::PR #$N cambiata durante la lettura (HEAD o body) — snapshot stantio, nessun rescue o mutation."
+              continue
+            fi
+            if ! reviews_reread=$(gh api --paginate "repos/$REPO/pulls/$N/reviews?per_page=100" 2>/dev/null) \
+              || [ -z "${reviews_reread//[[:space:]]/}" ] \
+              || ! printf '%s\n' "$reviews_reread" | jq -s -e "$REVIEW_SCHEMA_JQ" >/dev/null 2>&1 \
+              || ! REVIEW_SELECTION_REREAD=$(printf '%s\n' "$reviews_reread" | jq -c -s --arg head "$HEAD" --arg revision "$REVIEW_REVISION" "$REVIEW_SELECTION_JQ"); then
+              echo "::warning::Rilettura delle review della PR #$N non verificabile — nessun rescue o mutation."
+              continue
+            fi
+            if [ "$REVIEW_SELECTION" != "$REVIEW_SELECTION_REREAD" ]; then
+              echo "::warning::Review della PR #$N cambiate fra due letture consecutive (dismissal o review concorrente) — nessun rescue o mutation."
+              continue
+            fi
+            if ! LAST_BODY=$(printf '%s' "$REVIEW_SELECTION" | jq -r '.current // ""') \
+              || ! LAST_HEAD_BODY=$(printf '%s' "$REVIEW_SELECTION" | jq -r '.head // ""') \
+              || ! LAST_CID=$(printf '%s' "$REVIEW_SELECTION" | jq -r '.current_cid // ""'); then
               echo "::warning::Verdetto review della PR #$N non verificabile — nessun rescue o mutation."
-              continue
-            fi
-            if ! LAST_REVIEW_CIDS=$(echo "$reviews" | jq -c -rs --arg revision "$REVIEW_REVISION" '
-              def review_revisions:
-                [((.body // "") | split("\n")[] | rtrimstr("\r")
-                  | select(test("^<!-- REVIEW_INPUT_REVISION: body:[0-9a-f]{64} -->$"; "i"))
-                  | capture("^<!-- REVIEW_INPUT_REVISION: (?<revision>body:[0-9a-f]{64}) -->$"; "i").revision
-                  | ascii_downcase)] | unique;
-              def has_current_revision($expected):
-                review_revisions as $revisions
-                | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
-              [.[][]?
-               | select((.state // "") != "PENDING" and (.state // "") != "DISMISSED")
-               | select(
-                   ((.user.login // "") | test("^(claude\\[bot\\]|frontaliere-automation\\[bot\\])$";"i"))
-                   or (((.user.login // "") | test("^github-actions\\[bot\\]$";"i"))
-                       and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
-                 )] as $managed
-              | ($managed | map(select(has_current_revision($revision))) | sort_by(.id // 0) | last // {})
-              | {current: (.commit_id // "")}'); then
-              echo "::warning::Commit della review della PR #$N non verificabile — nessun rescue o mutation."
-              continue
-            fi
-            if ! LAST_CID=$(printf '%s' "$LAST_REVIEW_CIDS" | jq -r '.current // ""'); then
-              echo "::warning::Commit della review della PR #$N non verificabile — nessun rescue o mutation."
               continue
             fi
 
