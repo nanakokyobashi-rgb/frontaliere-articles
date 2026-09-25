@@ -2942,7 +2942,8 @@
     {
       "path": "host/shared/literalMarkdown.ts",
       "sitePath": "build-plugins/shared/literalMarkdown.ts",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "I due host condivisi sono temporaneamente diversi: il corpus conserva il normalizzatore del trasporto #1872 e il sito main conserva l'altra regola di estrazione; le baseline attestano i due blob reali e impediscono al trasporto automatico di sovrascrivere un lato. La riallineatura è tracciata nella PR sito #9881 e richiede il successivo trasporto del gemello.",
       "baseline": {
         "site": "a2b91b4cb69b035f",
         "corpus": "aa45de3e9c51906e",
@@ -2973,7 +2974,8 @@
     {
       "path": "host/shared/safeTruncate.ts",
       "sitePath": "build-plugins/shared/safeTruncate.ts",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "I due host condivisi sono temporaneamente diversi: il corpus conserva l'ottimizzazione senza il claim quantitativo e il sito main conserva il commento precedente; le baseline attestano i due blob reali e impediscono al trasporto automatico di sovrascrivere un lato. La riallineatura è tracciata nella PR sito #9881 e richiede il successivo trasporto del gemello.",
       "baseline": {
         "site": "392ed6e280a9c039",
         "corpus": "5ced05e5850f4279",
