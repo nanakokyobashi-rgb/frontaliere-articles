@@ -11,7 +11,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const BROKER = path.join(ROOT, '.github/actions/setup-claude-haiku-fallback/codex-auth-broker.mjs');
 
-function waitForSocket(socketPath, child, timeoutMs = 5000) {
+function waitForSocket(socketPath, child, timeoutMs = 5000, getStderr = () => '') {
   const startedAt = Date.now();
   return new Promise((resolve, reject) => {
     const poll = () => {
@@ -20,7 +20,10 @@ function waitForSocket(socketPath, child, timeoutMs = 5000) {
         return;
       }
       if (child.exitCode !== null) {
-        reject(new Error(`broker exited before becoming ready (${child.exitCode})`));
+        setImmediate(() => {
+          const stderr = getStderr().trim();
+          reject(new Error(`broker exited before becoming ready (${child.exitCode})${stderr ? `: ${stderr}` : ''}`));
+        });
         return;
       }
       if (Date.now() - startedAt >= timeoutMs) {
@@ -128,7 +131,7 @@ process.stdin.on('end', () => fs.writeFileSync(output, JSON.stringify({ prompt }
   broker.stdin.end('{"access_token":"test"}');
 
   try {
-    await waitForSocket(socketPath, broker);
+    await waitForSocket(socketPath, broker, 5000, () => stderr);
     const [first, second] = await Promise.all([
       request(socketPath, { op: 'exec', prompt: 'first', timeoutMs: 5000 }),
       request(socketPath, { op: 'exec', prompt: 'second', timeoutMs: 5000 }),
@@ -194,7 +197,7 @@ process.stdin.on('end', () => fs.writeFileSync(output, JSON.stringify({ prompt }
   broker.stdin.end('{"access_token":"test"}');
 
   try {
-    await waitForSocket(socketPath, broker).catch((error) => {
+    await waitForSocket(socketPath, broker, 5000, () => stderr).catch((error) => {
       throw new Error(`${error.message}: ${stderr}`);
     });
     const first = await request(socketPath, { op: 'exec', prompt: 'first', timeoutMs: 5000 });
@@ -255,7 +258,7 @@ process.stdin.on('end', () => fs.writeFileSync(output, JSON.stringify({ prompt }
   broker.stdin.end('{"access_token":"test"}');
 
   try {
-    await waitForSocket(socketPath, broker);
+    await waitForSocket(socketPath, broker, 5000, () => stderr);
     const firstHold = openRequest(socketPath, { op: 'exec', prompt: 'first', timeoutMs: 5000 });
     await delay(40);
     const cancelled = await openRequest(socketPath, { op: 'exec', prompt: 'cancelled', timeoutMs: 5000 });
@@ -346,11 +349,16 @@ process.stdin.on('end', () => fs.writeFileSync(output, JSON.stringify({
   broker.stdin.end('{"access_token":"test"}');
 
   try {
-    await waitForSocket(socketPath, broker);
+    await waitForSocket(socketPath, broker, 5000, () => stderr);
     const response = await request(socketPath, { op: 'exec', prompt: 'profile', timeoutMs: 5000 });
     assert.equal(response.ok, true, stderr);
     const seen = JSON.parse(response.result);
-    assert.equal(seen.cd, seen.cwd, 'Codex deve girare nel workspace che riceve con --cd');
+    const normalizeTempPath = (value) => path.resolve(value).replace(/^\/private(?=\/tmp(?:\/|$))/, '');
+    assert.equal(
+      normalizeTempPath(seen.cd),
+      normalizeTempPath(seen.cwd),
+      'Codex deve girare nel workspace che riceve con --cd',
+    );
 
     const filesystem = {};
     let inFilesystem = false;
@@ -434,7 +442,7 @@ process.stdin.on('end', () => {
   broker.stdin.end('{"access_token":"test"}');
 
   try {
-    await waitForSocket(socketPath, broker);
+    await waitForSocket(socketPath, broker, 5000, () => stderr);
     const response = await request(socketPath, { op: 'exec', prompt: 'fail', timeoutMs: 5000 });
     assert.equal(response.ok, false, stderr);
     assert.match(response.error, /^Codex CLI exited with code 1: …/);
@@ -517,7 +525,7 @@ process.stdin.on('end', () => {
     return JSON.parse(response.result);
   };
   try {
-    await waitForSocket(socketPath, broker);
+    await waitForSocket(socketPath, broker, 5000, () => stderr);
     const first = await exec('first');
     const second = await exec('second');
     assert.deepEqual(first.seen, { refresh_token: 'rt-0', generation: 0 });
@@ -585,7 +593,7 @@ process.stdin.on('end', () => {
   broker.stdin.end('{"access_token":"test"}');
 
   try {
-    await waitForSocket(socketPath, broker);
+    await waitForSocket(socketPath, broker, 5000, () => stderr);
     const response = await request(socketPath, { op: 'exec', prompt: 'fail', timeoutMs: 5000 });
     assert.equal(response.ok, false, stderr);
     assert.match(response.error, /invalid_request_error/);
@@ -631,7 +639,7 @@ test('il socket compare solo quando il broker accetta gia\' connessioni', async 
   broker.stderr.on('data', (chunk) => { stderr += chunk; });
   broker.stdin.end('{"access_token":"test"}');
   try {
-    await waitForSocket(socketPath, broker);
+    await waitForSocket(socketPath, broker, 5000, () => stderr);
     assert.equal(fs.statSync(socketPath).mode & 0o777, 0o600, stderr);
     assert.deepEqual(
       fs.readdirSync(brokerDir).filter((name) => name.endsWith('.listening')),
