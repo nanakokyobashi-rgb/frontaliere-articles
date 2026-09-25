@@ -160,6 +160,7 @@ export const CONTENT_GATES = [
   'generator/tests/evergreen-dichiarazione-redditi-ticino-2026-refresh.test.mjs',
   'generator/tests/evergreen-guida-contributi-sociali-svizzera-refresh.test.mjs',
   'generator/tests/evergreen-guida-dichiarazione-redditi-frontalieri-refresh.test.mjs',
+  'generator/tests/evergreen-irpef-secondo-scaglione-2026.test.mjs',
   'generator/tests/evergreen-lamal-cmi-scelta-frontaliere-2026-refresh.test.mjs',
   'generator/tests/evergreen-mappa-fiscale-comuni-frontiera-refresh.test.mjs',
   'generator/tests/evergreen-naspi-disoccupazione-frontalieri-refresh.test.mjs',
