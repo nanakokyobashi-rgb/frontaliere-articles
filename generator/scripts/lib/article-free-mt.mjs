@@ -195,8 +195,9 @@ export function ensureMunicipalityNames(sourceText, translatedText) {
  *
  * Failing CLOSED here — returning null rather than a stringified object — is what
  * makes the existing recovery work: the field reads as missing, so the per-field
- * missing-translation retry runs and, failing that, falls back to the IT source.
- * A stringified object is unrecoverable; a missing field is not.
+ * missing-translation retry runs and, failing that, a body stays untranslated
+ * (#1875; title/excerpt fall back to the IT source). A stringified object is
+ * unrecoverable; a missing field is not.
  *
  * Il test di non-vuoto e' `hasUsableTranslatedText` e non un `value.trim()` nudo:
  * un modello che serializza il `null` come STRINGA (`"null"` — la forma
@@ -205,7 +206,8 @@ export function ensureMunicipalityNames(sourceText, translatedText) {
  * `validateItalianPayload` gira solo su `content.it`. Un `body1` de/en/fr con
  * testo `null` andrebbe dritto in `content/`, in `dist/api/meta-<locale>.json`
  * e nei feed RSS. Fallendo CHIUSI qui il campo si legge come mancante e la
- * recovery per-campo (retry mirato -> fallback IT) lo recupera.
+ * recovery per-campo lo recupera (retry mirato; se fallisce, il body resta non
+ * tradotto — #1875 — e title/excerpt ricadono sull'IT).
  *
  * Il predicato e' quello dei campi TRADOTTI, ed e' PER LOCALE: su `de` solo la
  * forma serializzata (`null` minuscolo) e' scartata, perche' `Null` maiuscolo
@@ -224,24 +226,54 @@ export function translatedStringOrNull(value, targetLang) {
 }
 
 /**
+ * La «traduzione» e' la sorgente ricopiata? Confronto normalizzato: spazi ai
+ * bordi tolti e ogni sequenza di whitespace ridotta a uno spazio, lo stesso
+ * criterio con cui la cascata free-MT riconosce un passthrough (#1084).
+ *
+ * UNICO predicato per OGNI punto che accetta un body tradotto (#1875): la
+ * cascata free-MT, il ramo LLM legacy (`ARTICLE_TRANSLATE_FREE_MT=0`, chiamata
+ * singola e a chunk), il retry mirato sul campo mancante e il retry del
+ * troncamento in `create-article.mjs`. Una copia italiana ha gli stessi numeri
+ * della sorgente e passa ogni gate di fedelta': se un punto di accettazione
+ * non la rifiuta qui, il testo italiano esce sotto /en/ /de/ /fr/ come
+ * traduzione. Rifiutata, il campo segue la recovery per-campo e, se nessun
+ * tier traduce, resta in attesa.
+ *
+ * @param {unknown} translated
+ * @param {unknown} source
+ * @returns {boolean}
+ */
+export function isSourcePassthrough(translated, source) {
+  if (typeof translated !== 'string' || typeof source !== 'string') return false;
+  const normalize = (value) => value.trim().replace(/\s+/g, ' ');
+  const src = normalize(source);
+  return src.length > 0 && normalize(translated) === src;
+}
+
+/**
  * Joins per-chunk translations of one body field, refusing to stringify a chunk
  * the model returned as a non-string.
  *
  * Returns null when ANY chunk is unusable: a body silently missing its third
  * paragraph is worse than a body the recovery path re-translates whole, and the
- * caller cannot tell the difference once the chunks are joined.
+ * caller cannot tell the difference once the chunks are joined. With
+ * `sourceChunks`, a chunk that is its Italian source copied verbatim
+ * (`isSourcePassthrough`) is unusable too: one untranslated paragraph inside
+ * translated prose is the partial form of the #1875 defect.
  *
  * @param {unknown[]} results  per-chunk parsed JSON objects
  * @param {string} bodyKey     un campo `bodyN` dell'articolo
  * @param {string} [targetLang] locale dei chunk tradotti ('en' | 'de' | 'fr')
+ * @param {string[]} [sourceChunks] i chunk italiani, nello stesso ordine
  * @returns {string|null}
  */
-export function joinTranslatedChunks(results, bodyKey, targetLang) {
+export function joinTranslatedChunks(results, bodyKey, targetLang, sourceChunks = null) {
   if (!Array.isArray(results) || results.length === 0) return null;
   const parts = [];
-  for (const r of results) {
+  for (const [index, r] of results.entries()) {
     const part = translatedStringOrNull(r?.[bodyKey], targetLang);
     if (part === null) return null;
+    if (Array.isArray(sourceChunks) && isSourcePassthrough(part, sourceChunks[index])) return null;
     parts.push(part);
   }
   return parts.join('\n\n');
@@ -285,8 +317,8 @@ export function maskNavLinks(text) {
  * preserving internal nav-links and, when requested, municipality names.
  * Returns '' on any failure (empty input, MT error, empty output, a mangled
  * sentinel, or a materially truncated body) so the caller's per-field recovery
- * (LLM retry → IT fallback) takes over — free MT can only IMPROVE coverage,
- * never produce broken output.
+ * takes over (LLM retry, then IT fallback for title/excerpt or an untranslated
+ * body, #1875) — free MT can only IMPROVE coverage, never produce broken output.
  *
  * @param {object} args
  * @param {string} args.text                source text
@@ -389,7 +421,7 @@ export async function translateFieldFreeMt({
   // A successful transport response is not necessarily a translation. A
   // normalized verbatim copy of the source is a failed free-MT attempt and
   // must fall through to the existing recovery path (#1084).
-  if (sourceLang !== targetLang && balanced.trim().replace(/\s+/g, ' ') === src.replace(/\s+/g, ' ')) {
+  if (sourceLang !== targetLang && isSourcePassthrough(balanced, src)) {
     onUnusableOutput({ targetLang, fieldType, ...(fieldName ? { fieldName } : {}), reason: 'passthrough' });
     onWarn(`free-MT ${targetLang}:${fieldType} returned the source verbatim`);
     return '';

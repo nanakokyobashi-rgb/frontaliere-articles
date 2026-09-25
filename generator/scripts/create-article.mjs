@@ -151,6 +151,7 @@ import { freeTranslateWithRetry, balanceMarkdownMarkers } from './lib/free-trans
 import {
   translateFieldFreeMt,
   translatedStringOrNull,
+  isSourcePassthrough,
   joinTranslatedChunks,
   ensureMunicipalityNames,
 } from './lib/article-free-mt.mjs';
@@ -161,6 +162,9 @@ import {
   wasFreeMtUnusable,
   maxFreeMtLlmFallbacksPerLocale,
   MAX_FREE_MT_LLM_FALLBACKS_PER_RUN,
+  resetBodyTranslationPending,
+  markBodyTranslationPending,
+  isBodyTranslationPending,
 } from './lib/free-mt-recovery.mjs';
 import { isReservedPublishedSlug } from '../../scripts/lib/published-slug-guard.mjs';
 import { AI_SEARCH_PROMPT_BLOCK_IT } from './lib/ai-search-template.mjs';
@@ -2249,7 +2253,9 @@ function finalizeRunReport(status, extra = {}) {
       // La ripartizione per locale e' il numero che dice se la quota ha fatto
       // il suo mestiere: `en:3` con `de`/`fr` a zero è una degradazione osservabile.
       + ` by_locale=${Object.entries(recovery.llmFallbacksByLocale || {}).map(([l, n]) => `${l}:${n}`).join(',') || 'none'}`
-      + ` capped=${recovery.llmFallbackCapped ? 1 : 0}`,
+      + ` capped=${recovery.llmFallbackCapped ? 1 : 0}`
+      // I body lasciati NON tradotti (#1875): prima erano fallback IT muti.
+      + ` pending_bodies=${JSON.stringify(recovery.pendingBodyFields || {})}`,
     );
   }
 
@@ -10510,7 +10516,8 @@ const ARTICLE_TRANSLATE_FREE_MT = String(process.env.ARTICLE_TRANSLATE_FREE_MT ?
 
 // Thin in-script wrapper: bind the lib field-translator to the prod MT cascade,
 // markdown repair, and logger. Returns '' on any failure so the caller's
-// per-field recovery (LLM retry → IT fallback) takes over.
+// per-field recovery takes over (LLM retry → IT fallback for title/excerpt/FAQ,
+// body left untranslated for bodyN — #1875).
 // `field` e' il nome del campo di contenuto (`title`, `excerpt`, `body1`...),
 // distinto dal `fieldType` che il motore MT riceve (`title`/`description`): e'
 // la chiave con cui il loop missing-field piu' sotto chiede «questo campo l'ha
@@ -10569,7 +10576,8 @@ function preserveMunicipalityNamesInMetadata(data) {
 // Free-MT replacement for translateContent: same return shape ({title, excerpt,
 // body1..bodyN, faq?}) but each field via the quota-free cascade. Missing/failed
 // fields are simply omitted → the existing missing-field recovery loop in
-// translateArticle re-translates them (LLM) or falls back to IT.
+// translateArticle re-translates them (LLM); if that fails, title/excerpt/FAQ
+// fall back to IT and a bodyN stays untranslated (#1875).
 async function translateContentFreeMt(sourceLang, targetLang, targetLabel, sourceContent) {
   console.error(`🌍 [${targetLabel}] Traduzione ${targetLang.toUpperCase()} via cascade MT gratuita (no quota LLM)...`);
   const bodyFields = Object.keys(collectBodySections(sourceContent));
@@ -10646,6 +10654,7 @@ async function translateArticle(data) {
   const faqCount = Array.isArray(data?.content?.it?.faq) ? data.content.it.faq.length : 0;
   const bodyFieldCount = Object.keys(collectBodySections(data?.content?.it)).length;
   RUN_REPORT.translation = createFreeMtRecoveryReport({ faqCount, bodyFieldCount });
+  resetBodyTranslationPending(data);
 
   async function callWithRetry(prompt, maxTokens, label) {
     const safePrompt = `${prompt}\n\n${JSON_QUOTE_SAFETY_RULE_IT}`;
@@ -10733,14 +10742,18 @@ async function translateArticle(data) {
         ),
       ),
     );
-    return joinTranslatedChunks(translated, fieldKey, targetLang);
+    // `chunks` passati al join: un chunk tornato identico al suo italiano
+    // rende nullo l'intero campo (`isSourcePassthrough`, #1875), come un chunk
+    // non-stringa.
+    return joinTranslatedChunks(translated, fieldKey, targetLang, chunks);
   }
 
   async function translateContent(sourceLang, targetLang, targetLabel, sourceContent) {
     // Quota-free path: route through the dedicated free MT cascade so the LLM
     // daily quota is reserved for generation. Per-field failures are omitted and
-    // recovered downstream (LLM retry → IT fallback), so this never degrades
-    // below the legacy path's worst case. Opt-out via ARTICLE_TRANSLATE_FREE_MT=0.
+    // recovered downstream (LLM retry, then IT fallback for title/excerpt/FAQ or
+    // an untranslated body for bodyN — #1875), so this never degrades below the
+    // legacy path's worst case. Opt-out via ARTICLE_TRANSLATE_FREE_MT=0.
     if (ARTICLE_TRANSLATE_FREE_MT) {
       return translateContentFreeMt(sourceLang, targetLang, targetLabel, sourceContent);
     }
@@ -10806,10 +10819,19 @@ ${terminologyByLang[targetLang] || ''}`;
         // valid JSON. Returning it would carry an object into a string context
         // downstream, which stringifies to the literal "[object Object]" and
         // ships as prose. Drop the key instead so the per-field missing-
-        // translation retry (and then the IT fallback) can recover it.
+        // translation retry can recover it (or leave the body untranslated,
+        // #1875).
         const text = translatedStringOrNull(result?.[bodyKey], lang);
         if (text === null) {
           console.error(`  ⚠️  ${lang}:${bodyKey} non è una stringa (${typeof result?.[bodyKey]}) — campo scartato, recupero per-campo downstream`);
+          return {};
+        }
+        // Stesso controllo della cascata free-MT: una risposta che e' l'italiano
+        // ricopiato non e' una traduzione. Accettata qui, il loop di recovery la
+        // leggeva come campo usabile e l'italiano usciva sotto /en/ /de/ /fr/
+        // (#1875, percorso `ARTICLE_TRANSLATE_FREE_MT=0`).
+        if (isSourcePassthrough(text, bodyText)) {
+          console.error(`  ⚠️  ${lang}:${bodyKey} identico all'italiano — campo scartato, recupero per-campo downstream`);
           return {};
         }
         return { [bodyKey]: sanitizeBodyText(text) };
@@ -10833,7 +10855,7 @@ ${terminologyByLang[targetLang] || ''}`;
         lang,
       );
       if (joined === null) {
-        console.error(`  ⚠️  ${lang}:${bodyKey} — almeno un chunk non è una stringa, campo scartato: recupero per-campo downstream`);
+        console.error(`  ⚠️  ${lang}:${bodyKey} — almeno un chunk non è una stringa o è l'italiano ricopiato, campo scartato: recupero per-campo downstream`);
         return {};
       }
       return { [bodyKey]: sanitizeBodyText(joined) };
@@ -10855,8 +10877,8 @@ ${terminologyByLang[targetLang] || ''}`;
     // (run 27924137758: de:meta JSON parse failure after 3 retries hard-threw and
     // killed an otherwise-fine article). Each call falls back to `{}`; the
     // downstream missing-field validation loop (#1266) then re-translates the
-    // affected field in isolation or falls back to the IT source — same
-    // graceful-degradation philosophy already used for FAQ below.
+    // affected field in isolation; if that fails too, title/excerpt fall back to
+    // the IT source and a body stays untranslated (#1875).
     const onTranslateFail = (label) => (err) => {
       if (err instanceof TypeError || err instanceof ReferenceError) throw err;
       console.error(`  ⚠️  ${label} translation failed: ${err.message} — fallback al recupero per-campo`);
@@ -10894,9 +10916,9 @@ ${terminologyByLang[targetLang] || ''}`;
   // per-chunk Promise.all (line ~4308, no inner catch). Such a throw would reject
   // THIS Promise.all and discard ALL three locales + the whole otherwise-fine
   // article. Catch at the locale boundary and return {} so the downstream
-  // missing-field validation (#1266) re-translates each field in isolation or
-  // falls back to the IT source — the same graceful-degradation contract as
-  // onTranslateFail, applied one level up.
+  // missing-field validation (#1266) re-translates each field in isolation (or
+  // falls back to the IT source for title/excerpt/FAQ and leaves a body
+  // untranslated, #1875) — the same contract as onTranslateFail, one level up.
   const translateLocaleSafe = async (target, label) => {
     try {
       return await translateContent('it', target, label, itContent);
@@ -10931,12 +10953,15 @@ ${terminologyByLang[targetLang] || ''}`;
   //
   // Structural fix: instead of hard-throwing (which discarded the whole article
   // including the fine IT source), retry the missing field once via a focused
-  // re-translation, and only if THAT also fails fall back to the Italian source
-  // value. Shipping the IT value under a localized URL is an hreflang compromise
-  // (esp. for body1/2/3), so we genuinely re-attempt the translation first; the
-  // IT fallback is the last resort that keeps the page indexable rather than
-  // nuking the article. Only throw if the field is missing from the IT source
-  // itself (a real upstream defect we cannot paper over).
+  // re-translation. If THAT also fails, title/excerpt/FAQ fall back to the
+  // Italian source value (last resort that keeps the meta and the slug usable),
+  // while a `bodyN` is left UNTRANSLATED — absent from the locale content, never
+  // the Italian text (#1875: the IT body fallback put Italian prose under
+  // /en/ /de/ /fr/ for 48% of the new articles since 2026-09-18). See
+  // `markBodyTranslationPending` in lib/free-mt-recovery.mjs for why the
+  // absence is the pending marker and how the site already renders it.
+  // Only throw if the field is missing from the IT source itself (a real
+  // upstream defect we cannot paper over).
   for (const locale of ['en', 'de', 'fr']) {
     const langName = locale === 'en' ? 'inglese' : locale === 'de' ? 'tedesco' : 'francese';
     for (const field of [
@@ -11006,7 +11031,13 @@ ${terminologyByLang[targetLang] || ''}`;
       const floorMiss = traduzioneUsabile ? metaFieldPlausibilityMiss(field, valoreTradotto) : null;
       const freeMtRejected = ARTICLE_TRANSLATE_FREE_MT
         && wasFreeMtUnusable(RUN_REPORT.translation, locale, recoveryField);
-      if (traduzioneUsabile && !floorMiss && !freeMtRejected) continue;
+      // Un `bodyN` tradotto che e' l'italiano ricopiato non e' usabile, da
+      // qualunque percorso arrivi (#1875): entra nella recovery e, se nessun
+      // tier traduce, resta in attesa. Solo sui body: per title/excerpt la
+      // copia identica ha gia' il suo retry dedicato piu' sotto.
+      const bodyPassthrough = !faqPart && /^body\d+$/.test(field)
+        && isSourcePassthrough(valoreTradotto, readField(itContent));
+      if (traduzioneUsabile && !floorMiss && !freeMtRejected && !bodyPassthrough) continue;
       // ULTIMA RISORSA ASIMMETRICA. Un campo implausibile e' comunque prosa
       // NELLA LINGUA GIUSTA: se il retry non produce di meglio si tiene quello,
       // MAI il fallback IT, che pubblicherebbe italiano sotto `/de/` (#831).
@@ -11015,6 +11046,15 @@ ${terminologyByLang[targetLang] || ''}`;
       // veri) oltre ai tre `...`. Su quei cinque il costo massimo e' UNA
       // chiamata di retry in piu', mai una pubblicazione peggiore di oggi.
       const ultimaRisorsa = floorMiss ? valoreTradotto : null;
+      // Un `bodyN` senza traduzione usabile resta NON tradotto, mai italiano
+      // (#1875): vedi `markBodyTranslationPending` in fondo al loop.
+      const isBodyField = !faqPart && /^body\d+$/.test(field);
+      const esitoSenzaTraduzione = ultimaRisorsa
+        ? 'valore tradotto mantenuto'
+        : isBodyField
+          ? 'body lasciato NON tradotto, niente fallback IT (#1875)'
+          : 'fallback al valore italiano';
+      let pendingReason = 'retry-unusable';
       const itValue = readField(itContent);
       // `itValue` composto di solo whitespace (es. ' ') è truthy: senza
       // `.trim()` bypassa questo guard e viene comunque assegnato sotto come
@@ -11030,7 +11070,9 @@ ${terminologyByLang[targetLang] || ''}`;
       console.error(
         floorMiss
           ? `  ⚠️  Campo ${field} nella traduzione ${locale} troppo corto per essere un ${field} (${floorMiss}) — retry traduzione mirata...`
-          : `  ⚠️  Campo ${field} mancante nella traduzione ${locale} — retry traduzione mirata...`,
+          : bodyPassthrough
+            ? `  ⚠️  Campo ${field} nella traduzione ${locale} identico all'italiano — retry traduzione mirata...`
+            : `  ⚠️  Campo ${field} mancante nella traduzione ${locale} — retry traduzione mirata...`,
       );
       // IL CAP E' SCOPATO AI SOLI CAMPI CHE IL FREE-MT HA DAVVERO RIFIUTATO,
       // ED E' UNA QUOTA PER LOCALE.
@@ -11061,12 +11103,14 @@ ${terminologyByLang[targetLang] || ''}`;
             RUN_REPORT.translation.bodyFieldCount,
           )} fallback free-MT per locale `
           + `(cap ${MAX_FREE_MT_LLM_FALLBACKS_PER_RUN} per run) — `
-          + `${ultimaRisorsa ? 'valore tradotto mantenuto' : 'fallback al valore italiano'}`,
+          + esitoSenzaTraduzione,
         );
         if (ultimaRisorsa) continue;
-        // NIENTE `continue` qui: il ramo del cap cade sullo STESSO fallback IT
-        // in fondo al loop, quindi passa per `detectTruncation(itValue)` come
-        // il percorso normale. Assegnare `itValue` qui saltava quel check e
+        pendingReason = 'retry-capped';
+        // NIENTE `continue` qui: il ramo del cap cade sullo STESSO esito in
+        // fondo al loop — il body in attesa, oppure il fallback IT di
+        // title/excerpt/FAQ, che passa per `detectTruncation(itValue)` come il
+        // percorso normale. Assegnare `itValue` qui saltava quel check e
         // pubblicava un fallback IT esso stesso troncato senza il `🔴 ...
         // richiede verifica manuale` (#705).
       } else {
@@ -11080,25 +11124,41 @@ ${terminologyByLang[targetLang] || ''}`;
           );
           // `String(retried)` on an object yields "[object Object]" — truthy and
           // different from the IT value, so the old check ASSIGNED it. Require a
-          // real string so a non-string retry falls through to the IT fallback.
+          // real string so a non-string retry falls through to the no-translation
+          // outcome below (pending body, or IT fallback for title/excerpt/FAQ).
           const retried = translatedStringOrNull(readRetryValue(parsed), locale);
           // Il floor vale anche sull'ESITO del retry: un retry che risponde `...`
           // e' la stessa degenerazione, solo un turno piu' tardi.
           const retriedMiss = retried ? metaFieldPlausibilityMiss(field, retried) : null;
-          if (retried && !retriedMiss && String(retried).trim() !== String(itValue).trim()) {
+          const retriedPassthrough = isSourcePassthrough(retried, itValue);
+          if (retriedPassthrough) pendingReason = 'retry-passthrough';
+          if (retried && !retriedMiss && !retriedPassthrough) {
             writeField(data.content[locale], retried);
             console.error(`  ✅ Campo ${field} (${locale}) ritradotto con successo dopo missing-field retry`);
             continue;
           }
-          console.error(`  ⚠️  Retry ${field} (${locale}) non ha prodotto una traduzione valida${retriedMiss ? ` (${retriedMiss})` : ''} — ${ultimaRisorsa ? 'valore tradotto mantenuto' : 'fallback al valore italiano'}`);
+          console.error(`  ⚠️  Retry ${field} (${locale}) non ha prodotto una traduzione valida${retriedMiss ? ` (${retriedMiss})` : ''} — ${esitoSenzaTraduzione}`);
         } catch (retryErr) {
-          console.error(`  ⚠️  Retry ${field} (${locale}) fallito: ${retryErr.message} — ${ultimaRisorsa ? 'valore tradotto mantenuto' : 'fallback al valore italiano'}`);
+          pendingReason = 'retry-error';
+          console.error(`  ⚠️  Retry ${field} (${locale}) fallito: ${retryErr.message} — ${esitoSenzaTraduzione}`);
         }
       }
       // Vedi `ultimaRisorsa` sopra: sul solo floor-miss non si scende MAI sul
       // fallback IT. Italiano sotto `/de/` (#831) e' peggio di un titolo corto.
       if (ultimaRisorsa) {
         console.warn(`  🔴 ${field} (${locale}) resta sotto il floor (${floorMiss}) dopo il retry — valore tradotto mantenuto, richiede verifica manuale`);
+        continue;
+      }
+      // #1875 (causa B): qui un `bodyN` cadeva su `writeField(..., itValue)` e
+      // l'italiano finiva in `content/blog-body/<locale>/` come se fosse la
+      // traduzione. Nessuna rete a valle lo vede: una copia italiana ha gli
+      // stessi numeri della sorgente, quindi passa anche i gate di fedelta'.
+      // Il campo resta ASSENTE: e' il marker «in attesa» che il sito rende gia'
+      // (vedi `markBodyTranslationPending`), e che un recupero ritrova
+      // confrontando le chiavi con l'italiano.
+      if (isBodyField) {
+        markBodyTranslationPending(data, { locale, field, reason: pendingReason, report: RUN_REPORT.translation });
+        console.warn(`  🔴 ${field} (${locale}): nessuna traduzione utilizzabile (${pendingReason}) — campo lasciato NON tradotto, niente fallback IT (#1875)`);
         continue;
       }
       // itValue non è mai ri-verificato con detectTruncation() prima di
@@ -11121,10 +11181,10 @@ ${terminologyByLang[targetLang] || ''}`;
   // introduces on its own (a different call, a different output-cap hit), and
   // the missing-field loop above only catches a field that came back EMPTY,
   // not one that came back non-empty but cut off before the final sentence.
-  // Reuse the same detectTruncation() the post-hoc corpus check runs, retry
-  // the field once, and only fall back to the Italian value (same last-resort
-  // philosophy as the missing-field retry above) if the retry is still
-  // truncated.
+  // Reuse the same detectTruncation() the post-hoc corpus check runs and retry
+  // the field once. If the retry is still truncated (or fails), the body is
+  // left UNTRANSLATED — same outcome as a body the missing-field loop above
+  // cannot recover (#1875) — instead of being replaced by the Italian value.
   for (const locale of ['en', 'de', 'fr']) {
     const langName = locale === 'en' ? 'inglese' : locale === 'de' ? 'tedesco' : 'francese';
     for (const field of Object.keys(itContent || {})
@@ -11140,6 +11200,7 @@ ${terminologyByLang[targetLang] || ''}`;
       const isTruncated = detectTruncation(text, { label: `${locale}/${field}` }).length > 0;
       if (!isTruncated) continue;
       const itValue = itContent[field];
+      let pendingReason = 'truncation-retry-unusable';
       console.error(`  ⚠️  Traduzione ${field} (${locale}) troncata — retry traduzione mirata...`);
       const buildRetryPrompt = (chunkText, i, total) => {
         const partLabel = total > 1 ? `, parte ${i + 1} di ${total}` : '';
@@ -11171,14 +11232,21 @@ ${terminologyByLang[targetLang] || ''}`;
           );
           retried = translatedStringOrNull(parsed?.[field], locale);
         }
-        if (retried && detectTruncation(retried, { label: `${locale}/${field}` }).length === 0) {
+        // Il retry puo' restituire l'italiano completo: non troncato, quindi il
+        // solo `detectTruncation` lo accettava e la copia italiana restava
+        // pubblicata (#1875). Stesso predicato di ogni altro punto di
+        // accettazione di un body tradotto.
+        const retriedPassthrough = isSourcePassthrough(retried, itValue);
+        if (retriedPassthrough) pendingReason = 'truncation-retry-passthrough';
+        if (retried && !retriedPassthrough && detectTruncation(retried, { label: `${locale}/${field}` }).length === 0) {
           data.content[locale][field] = sanitizeBodyText(retried);
           console.error(`  ✅ ${field} (${locale}) ritradotto con successo dopo troncamento`);
           continue;
         }
-        console.error(`  ⚠️  Retry ${field} (${locale}) ancora troncato — fallback al valore italiano`);
+        console.error(`  ⚠️  Retry ${field} (${locale}) ancora troncato — body lasciato NON tradotto, niente fallback IT (#1875)`);
       } catch (retryErr) {
-        console.error(`  ⚠️  Retry troncamento ${field} (${locale}) fallito: ${retryErr.message} — fallback al valore italiano`);
+        pendingReason = 'truncation-retry-error';
+        console.error(`  ⚠️  Retry troncamento ${field} (${locale}) fallito: ${retryErr.message} — body lasciato NON tradotto, niente fallback IT (#1875)`);
       }
       // Un fallback IT vuoto/assente non deve sovrascrivere il body tradotto
       // troncato: perderebbe anche il testo parziale già presente, peggiorando
@@ -11189,20 +11257,21 @@ ${terminologyByLang[targetLang] || ''}`;
       // intercettato. `itValue` di soli spazi (es. ' ') è truthy: senza
       // `.trim()` il guard non scatta e sovrascrive il body tradotto
       // troncato-ma-presente con un valore quasi-vuoto (#691, follow-up a #689).
+      // Lo stesso vale per il marker di attesa: senza italiano la SPA non ha
+      // niente su cui ripiegare, e togliere il campo cancellerebbe la sola
+      // parte leggibile.
       if (!itValue?.trim()) {
-        console.warn(`  ⚠️  ${field} (${locale}) resta troncato: fallback IT vuoto/assente, valore tradotto troncato mantenuto`);
+        console.warn(`  ⚠️  ${field} (${locale}) resta troncato: sorgente IT vuota/assente, valore tradotto troncato mantenuto`);
         continue;
       }
-      // itValue passa qui perché è il campo IT sorgente — il commento a
-      // L9517-9519 sopra assume che abbia già superato detectTruncation() allo
-      // Step 3a.0b-bis, ma quel gate gira una volta sola, PRIMA di
-      // translateArticle(): non viene ripetuto qui. Se itValue arriva a questo
-      // fallback esso stesso troncato, veniva finora pubblicato senza alcun
-      // segnale (#705, follow-up a #699).
-      if (detectTruncation(itValue, { label: `it/${field}` }).length > 0) {
-        console.warn(`  🔴 ${field} (${locale}): fallback IT risulta ESSO STESSO troncato — pubblicato come ultima risorsa, richiede verifica manuale`);
-      }
-      data.content[locale][field] = itValue;
+      // #1875 (causa B): qui il body troncato veniva SOSTITUITO dal valore
+      // italiano (`data.content[locale][field] = itValue`), pubblicato come
+      // traduzione en/de/fr. Il body resta invece NON tradotto: la traduzione
+      // troncata si scarta come prima, l'italiano non si scrive. Il warning
+      // #705 sull'italiano esso stesso troncato non ha piu' oggetto qui:
+      // l'italiano non viene pubblicato sotto il locale.
+      markBodyTranslationPending(data, { locale, field, reason: pendingReason, report: RUN_REPORT.translation });
+      console.warn(`  🔴 ${field} (${locale}): traduzione ancora troncata (${pendingReason}) — campo lasciato NON tradotto, niente fallback IT (#1875)`);
     }
   }
 
@@ -11803,7 +11872,16 @@ function validate(data, opts = {}) {
       }
     }
     for (const field of bodyFields) {
-      let text = data.content[locale][field] || '';
+      // Mai CREARE un campo assente: `expectedBodyFields` viene dall'italiano,
+      // e su en/de/fr un `bodyN` assente e' il marker «traduzione in attesa»
+      // (#1875, `markBodyTranslationPending`). Scriverci `''` lo trasformava in
+      // un body vuoto che `buildBodyFile()` emette come chiave presente, e che
+      // nella SPA vince sul fallback italiano. Oggi `validate()` gira prima di
+      // `translateArticle()`, quindi il caso non si produce sul flusso
+      // primario; il guard rende l'invariante indipendente dall'ordine. Sul
+      // locale `it` e' un no-op: i body attesi sono gia' pretesi sopra.
+      if (typeof data.content[locale][field] !== 'string') continue;
+      let text = data.content[locale][field];
       // Remove raw <a href="..."> tags the AI might have inserted — they cause redirect issues
       text = text.replace(/<a\s+href="[^"]*"[^>]*>(.*?)<\/a>/gi, '$1');
 
@@ -12016,6 +12094,14 @@ function validateAndEnforceCTA(data) {
 
   for (const locale of ['it', 'en', 'de', 'fr']) {
     if (!data.content[locale]) continue; // translations may not exist yet
+    // Un body3 lasciato NON tradotto (#1875) non va ricreato con la sola CTA:
+    // il moncone cancellerebbe il marker di attesa e, nella SPA, vincerebbe
+    // sul body3 italiano completo che il sito mostra al posto della chiave
+    // mancante (quella versione porta gia' la CTA italiana).
+    if (isBodyTranslationPending(data, locale, 'body3')) {
+      console.error(`  ⏳ CTA [${locale}] saltata: body3 non tradotto, resta in attesa (#1875)`);
+      continue;
+    }
     const body3 = (data.content[locale].body3 || '').toLowerCase();
     const keywords = localeKeywords[locale];
     const hasCTA = keywords.some(kw => body3.includes(kw));
@@ -12097,6 +12183,13 @@ function enforceStrongInternalLinks(data) {
     const totalLinks = [...combined.matchAll(/\[[^\]]+\]\(nav:[a-z-]+\)/g)].length;
 
     if (!hasAllClusterLinks || totalLinks < 2) {
+      // Stessa ragione della CTA: un body2 non tradotto (#1875) non si ricrea
+      // con il solo blocco di link, che prenderebbe il posto del body2
+      // italiano mostrato dal sito al posto della chiave mancante.
+      if (isBodyTranslationPending(data, locale, 'body2')) {
+        console.error(`  ⏳ Link interni [${locale}] saltati: body2 non tradotto, resta in attesa (#1875)`);
+        continue;
+      }
       data.content[locale].body2 = `${body2}${INTERNAL_LINK_BLOCK[locale][cluster]}`;
       console.error(`  🔗 Link interni rinforzati in ${locale}.body2 (cluster: ${cluster})`);
     }

@@ -49,9 +49,9 @@
  *
  * Se un campo torna vuoto dalla cascata (motore giu', sentinella nav-link
  * mangled, marker `Null` di fallimento) l'articolo si SALTA per intero: in
- * produzione il chiamante ha una recovery per-campo (retry LLM → fallback IT),
- * qui no, e mezza traduzione nuova cucita su mezza vecchia sarebbe testo che
- * nessuna pipeline ha mai prodotto.
+ * produzione il chiamante ha una recovery per-campo (retry LLM, poi body
+ * lasciato non tradotto — #1875), qui no, e mezza traduzione nuova cucita su
+ * mezza vecchia sarebbe testo che nessuna pipeline ha mai prodotto.
  *
  * ── COSTO ──────────────────────────────────────────────────────────────────
  *
