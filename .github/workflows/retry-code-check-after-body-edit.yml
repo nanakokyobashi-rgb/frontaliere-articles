@@ -73,25 +73,44 @@ jobs:
             const retryMs = Number(process.env.BODY_RECOVERY_RETRY_MS) || 1000;
             const rateLimitRetries = Number(process.env.BODY_RECOVERY_RATE_LIMIT_RETRIES) || 3;
             const rateLimitWaitMs = Number(process.env.BODY_RECOVERY_RATE_LIMIT_WAIT_MS) || 300000;
+            const recoveryWindowMs = Math.min(waitMs, rateLimitWaitMs);
+            const recoveryDeadline = Date.now() + recoveryWindowMs;
+            // Leave a bounded slice of the same recovery window for the
+            // fail-closed path to revoke auto-merge or publish a blocking
+            // check after a retry budget is exhausted.
+            const failClosedReserveMs = Math.min(15000, Math.max(1, Math.floor(recoveryWindowMs / 10)));
+            const retryDeadline = recoveryDeadline - failClosedReserveMs;
             const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
             const headerValue = (headers, name) => {
               if (typeof headers?.get === 'function') return headers.get(name);
               return headers?.[name] ?? headers?.[name.toLowerCase()] ?? null;
             };
+            const errorHeaders = error => error?.response?.headers ?? error?.headers ?? null;
+            const errorPayload = error => error?.response?.data ?? error?.data ?? null;
+            const errorMessages = error => [
+              error?.message,
+              errorPayload(error)?.message,
+              ...(Array.isArray(error?.errors) ? error.errors : []),
+              ...(Array.isArray(errorPayload(error)?.errors) ? errorPayload(error).errors : []),
+            ].map(value => typeof value === 'string' ? value : value?.message || value?.type || '')
+              .filter(Boolean).join(' ');
             const isRateLimitError = error => {
               const status = Number(error?.status ?? error?.response?.status);
-              const headers = error?.response?.headers;
-              const message = [error?.message, error?.response?.data?.message]
-                .filter(Boolean).join(' ');
+              const headers = errorHeaders(error);
+              const remaining = String(headerValue(headers, 'x-ratelimit-remaining') ?? '');
+              const message = errorMessages(error);
+              const graphqlErrors = Array.isArray(error?.errors)
+                || Array.isArray(errorPayload(error)?.errors);
               return status === 429
+                || /rate limit|secondary rate|abuse detection|rate[_ -]?limited/i.test(message)
                 || (status === 403 && (
-                  /rate limit|secondary rate|abuse detection/i.test(message)
-                  || headerValue(headers, 'retry-after') !== null
-                  || headerValue(headers, 'x-ratelimit-remaining') === '0'
-                ));
+                  headerValue(headers, 'retry-after') !== null
+                  || remaining === '0'
+                ))
+                || (graphqlErrors && remaining === '0');
             };
             const retryDelay = (error, attempt) => {
-              const headers = error?.response?.headers;
+              const headers = errorHeaders(error);
               const retryAfterRaw = headerValue(headers, 'retry-after');
               const retryAfterSeconds = Number(retryAfterRaw);
               const retryAfterMs = Number.isFinite(retryAfterSeconds) && retryAfterSeconds >= 0
@@ -112,14 +131,13 @@ jobs:
             // every other API error remains fatal and every exhausted retry
             // still fails closed.
             const apiCall = async (label, operation) => {
-              const deadline = Date.now() + rateLimitWaitMs;
               for (let attempt = 0; ; attempt += 1) {
                 try {
                   return await operation();
                 } catch (error) {
                   if (!isRateLimitError(error) || attempt >= rateLimitRetries) throw error;
                   const delay = retryDelay(error, attempt);
-                  if (Date.now() + delay > deadline) {
+                  if (Date.now() + delay > retryDeadline) {
                     const exhausted = new Error(`GitHub API rate limit while ${label}; retry window exhausted`, { cause: error });
                     exhausted.status = error?.status ?? error?.response?.status;
                     exhausted.response = error?.response;
@@ -150,29 +168,21 @@ jobs:
             }
             const getRun = async () => (await apiCall(`read workflow run ${latest.id}`, () => github.rest.actions.getWorkflowRun({ ...repo, run_id: latest.id }))).data;
             const revokeNativeAutoMerge = async () => {
-              let lastError;
-              for (let attempt = 1; attempt <= 3; attempt += 1) {
-                try {
-                  // A red recovery job alone does not invalidate the previous
-                  // green required check. Revoke native auto-merge first, when
-                  // it is still enabled, so an unverifiable body cannot merge.
-                  const { data: currentPr } = await apiCall('check native auto-merge', () => github.rest.pulls.get({ ...repo, pull_number: number }));
-                  if (currentPr.state !== 'open' || !currentPr.auto_merge) return;
-                  await apiCall('disable native auto-merge', () => github.graphql(`
-                    mutation DisablePullRequestAutoMerge($pullRequestId: ID!) {
-                      disablePullRequestAutoMerge(input: { pullRequestId: $pullRequestId }) {
-                        clientMutationId
-                      }
-                    }
-                  `, { pullRequestId: currentPr.node_id }));
-                  core.warning(`Native auto-merge revoked for PR #${number} before fail-closed recovery.`);
-                  return;
-                } catch (error) {
-                  lastError = error;
-                  if (attempt < 3 && !isRateLimitError(error)) await sleep(retryMs * attempt);
+              // A red recovery job alone does not invalidate the previous
+              // green required check. Revoke native auto-merge first, when
+              // it is still enabled, so an unverifiable body cannot merge.
+              // apiCall owns the single recovery deadline and bounded retry;
+              // an outer retry loop could consume the fail-closed reserve.
+              const { data: currentPr } = await apiCall('check native auto-merge', () => github.rest.pulls.get({ ...repo, pull_number: number }));
+              if (currentPr.state !== 'open' || !currentPr.auto_merge) return;
+              await apiCall('disable native auto-merge', () => github.graphql(`
+                mutation DisablePullRequestAutoMerge($pullRequestId: ID!) {
+                  disablePullRequestAutoMerge(input: { pullRequestId: $pullRequestId }) {
+                    clientMutationId
+                  }
                 }
-              }
-              throw lastError;
+              `, { pullRequestId: currentPr.node_id }));
+              core.warning(`Native auto-merge revoked for PR #${number} before fail-closed recovery.`);
             };
             const failClosed = async message => {
               let revokeError;
@@ -208,9 +218,11 @@ jobs:
             };
             const settle = async attempt => {
               let run = await getRun();
-              for (const deadline = Date.now() + waitMs; run.status !== 'completed'; run = await getRun()) {
-                if (run.run_attempt !== attempt || Date.now() > deadline) return null;
-                await sleep(pollMs);
+              while (run.status !== 'completed') {
+                if (run.run_attempt !== attempt || Date.now() > retryDeadline) return null;
+                await sleep(Math.min(pollMs, Math.max(0, retryDeadline - Date.now())));
+                if (Date.now() > retryDeadline) return null;
+                run = await getRun();
               }
               return run.run_attempt === attempt ? run : null;
             };
