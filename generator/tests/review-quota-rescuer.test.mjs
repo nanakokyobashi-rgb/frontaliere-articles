@@ -30,7 +30,16 @@ import {
   sourceRunAlreadyHandled,
   retryStateForObservedAttempt,
   transientRetryStateForRun,
+  MAX_RATE_LIMIT_FAILED_ATTEMPTS,
+  parseReviewRateLimitRetryMarker,
+  RATE_LIMIT_RESET_GRACE_SEC,
+  RATE_LIMIT_WINDOW_SEC,
+  rateLimitEvidence,
+  rateLimitRerunCandidates,
+  reviewRateLimitRetryAdmission,
+  reviewRateLimitRetryBody,
 } from '../../scripts/ci/review-quota-rescuer.mjs';
+import { rateLimitMarker } from '../../scripts/ci/lib/gh-rate-limit.mjs';
 import {
   reviewClaimDedupeKey,
   reviewClaimKey,
@@ -858,4 +867,179 @@ test('il wiring reagisce al completamento dei consumer e rilascia reservation es
     manifest.files.find((entry) => entry.path === '.github/workflows/review-quota-rescuer.yml')?.mode,
     'corpus-only',
   );
+});
+
+// ── Run `tests` rossi per rate limit del GITHUB_TOKEN (2026-09-25) ──────────
+
+const RL_HEAD = 'd'.repeat(40);
+const RL_REF = 'fix/rate-limited';
+const RL_NOW = Date.parse('2026-09-25T08:00:00Z') / 1000;
+const rlIso = (sec) => new Date(sec * 1000).toISOString().replace(/\.\d{3}Z$/, 'Z');
+const rlPr = (over = {}) => ({ number: 1800, draft: false, head: { sha: RL_HEAD, ref: RL_REF }, ...over });
+const rlRun = (over = {}) => ({
+  id: 36105446627,
+  run_attempt: 1,
+  event: 'pull_request',
+  head_sha: RL_HEAD,
+  head_branch: RL_REF,
+  status: 'completed',
+  conclusion: 'failure',
+  created_at: rlIso(RL_NOW - 3600),
+  updated_at: rlIso(RL_NOW - 3500),
+  ...over,
+});
+const rlComment = (state, id = 10, over = {}) => ({
+  id,
+  created_at: rlIso(RL_NOW - 1000 + id),
+  user: { login: 'nanakokyobashi-rgb' },
+  body: reviewRateLimitRetryBody({
+    head: RL_HEAD, sourceRunId: '36105446627', sourceAttempt: 1, resetAt: RL_NOW - 2000, state, runId: '9', issuedAt: RL_NOW - 1000,
+  }),
+  ...over,
+});
+
+test('rate limit: la prova viene dalle annotation failure del job, col reset del marker', () => {
+  const marker = `Resolve review input revision: GitHub API rate limit esaurito ${rateLimitMarker({ resource: 'core', resetAt: RL_NOW - 60 })}`;
+  assert.deepEqual(rateLimitEvidence([{ annotation_level: 'failure', message: marker }], { completedAt: rlIso(RL_NOW - 600) }), { resetAt: RL_NOW - 60 });
+  // 403 grezzo senza marker (review-gate troncato): reset = fine del job + 1 h.
+  assert.deepEqual(
+    rateLimitEvidence([{ annotation_level: 'failure', message: 'review-gate: contesto PR illeggibile: gh: API rate limit exceeded for installat' }], { completedAt: rlIso(RL_NOW - 600) }),
+    { resetAt: RL_NOW - 600 + RATE_LIMIT_WINDOW_SEC },
+  );
+  // Marker senza reset leggibile: stesso ripiego.
+  assert.deepEqual(
+    rateLimitEvidence([{ annotation_level: 'failure', message: rateLimitMarker({ resetAt: 0 }) }], { completedAt: rlIso(RL_NOW - 600) }),
+    { resetAt: RL_NOW - 600 + RATE_LIMIT_WINDOW_SEC },
+  );
+  // Un'attesa riuscita lascia solo un warning: non e' un rosso da rate limit.
+  assert.equal(rateLimitEvidence([{ annotation_level: 'warning', message: `x ${rateLimitMarker({ resetAt: RL_NOW })}` }], { completedAt: rlIso(RL_NOW) }), null);
+  assert.equal(rateLimitEvidence([{ annotation_level: 'failure', message: 'Nessuna review Claude approvante sulla head' }], { completedAt: rlIso(RL_NOW) }), null);
+  // Senza un momento ricavabile non c'e' un rerun sicuro.
+  assert.equal(rateLimitEvidence([{ annotation_level: 'failure', message: 'API rate limit exceeded' }], { completedAt: '' }), null);
+});
+
+test('rate limit: il marker durevole fa andata e ritorno e rifiuta le forme spurie', () => {
+  const event = parseReviewRateLimitRetryMarker(rlComment('requested').body);
+  assert.equal(event.head, RL_HEAD);
+  assert.equal(event.state, 'requested');
+  assert.equal(event.sourceRunId, '36105446627');
+  assert.equal(parseReviewRateLimitRetryMarker('<!-- REVIEW_RATE_LIMIT_RETRY: {"version":1,"head":"x"} -->'), null);
+  assert.equal(parseReviewRateLimitRetryMarker(rlComment('confirmed').body.replace('"requested"', '"confirmed"')), null);
+});
+
+test('rate limit: un solo rerun per HEAD, un failed riapre fino al tetto', () => {
+  assert.deepEqual(reviewRateLimitRetryAdmission([], RL_HEAD), { admitted: true, failed: 0 });
+  assert.equal(reviewRateLimitRetryAdmission([rlComment('requested')], RL_HEAD).admitted, false);
+  assert.equal(reviewRateLimitRetryAdmission([rlComment('requested', 10), rlComment('failed', 11)], RL_HEAD).admitted, true);
+  assert.equal(
+    reviewRateLimitRetryAdmission([rlComment('requested', 10), rlComment('failed', 11), rlComment('requested', 12), rlComment('failed', 13)], RL_HEAD).admitted,
+    false,
+    `al massimo ${MAX_RATE_LIMIT_FAILED_ATTEMPTS} fallimenti`,
+  );
+  // Un marker di un'altra HEAD o di un autore non fidato non conta.
+  assert.equal(reviewRateLimitRetryAdmission([rlComment('requested')], 'e'.repeat(40)).admitted, true);
+  assert.equal(reviewRateLimitRetryAdmission([rlComment('requested', 10, { user: { login: 'someone' } })], RL_HEAD).admitted, true);
+});
+
+test('rate limit: candidata solo l\'ULTIMA run pull_request della HEAD, rossa e recente', () => {
+  const pr = rlPr();
+  assert.equal(rateLimitRerunCandidates([pr], [rlRun()], { nowSec: RL_NOW }).length, 1);
+  // Una run piu' nuova sulla stessa HEAD (anche in volo) supera la rossa.
+  assert.deepEqual(rateLimitRerunCandidates([pr], [rlRun(), rlRun({ id: 36105446700, created_at: rlIso(RL_NOW - 100), status: 'in_progress', conclusion: null })], { nowSec: RL_NOW }), []);
+  assert.deepEqual(rateLimitRerunCandidates([pr], [rlRun({ conclusion: 'success' })], { nowSec: RL_NOW }), []);
+  // Dispatch test-only, altro branch o altra HEAD: non sono la run della PR.
+  assert.deepEqual(rateLimitRerunCandidates([pr], [rlRun({ event: 'workflow_dispatch' })], { nowSec: RL_NOW }), []);
+  assert.deepEqual(rateLimitRerunCandidates([pr], [rlRun({ head_branch: 'main' })], { nowSec: RL_NOW }), []);
+  assert.deepEqual(rateLimitRerunCandidates([pr], [rlRun({ head_sha: 'e'.repeat(40) })], { nowSec: RL_NOW }), []);
+  assert.deepEqual(rateLimitRerunCandidates([pr], [rlRun({ updated_at: rlIso(RL_NOW - 4 * 3600) })], { nowSec: RL_NOW }), []);
+});
+
+/**
+ * Il rescuer vero, con un `gh` finto che serve PR, commenti, run `tests`, job e
+ * annotation e registra le scritture.
+ */
+function runRateLimitRescuer({ resetAt, comments = [], runs = [rlRun()], scan, annotationLevel = 'failure' }) {
+  const dir = fs.mkdtempSync(path.join(fs.realpathSync('/tmp'), 'review-rate-limit-rescuer-'));
+  const calls = path.join(dir, 'calls');
+  const fixture = path.join(dir, 'fixture.json');
+  fs.writeFileSync(calls, '');
+  fs.writeFileSync(fixture, JSON.stringify({
+    prs: [[rlPr()]],
+    comments: [comments],
+    runs: [{ total_count: runs.length, workflow_runs: runs }],
+    jobs: { total_count: 1, jobs: [{ id: 777, name: 'tests (node --test)', conclusion: 'failure', check_run_url: 'https://api.github.com/repos/o/r/check-runs/777', completed_at: rlIso(RL_NOW - 3500) }] },
+    annotations: [[{ annotation_level: annotationLevel, message: `Resolve review input revision: rate limit ${rateLimitMarker({ resource: 'core', resetAt })}` }]],
+  }));
+  fs.writeFileSync(path.join(dir, 'gh'), `#!/usr/bin/env node
+const fs = require('node:fs');
+const args = process.argv.slice(2);
+const line = args.join(' ');
+fs.appendFileSync(${JSON.stringify(calls)}, line + '\\n');
+const f = JSON.parse(fs.readFileSync(${JSON.stringify(fixture)}, 'utf8'));
+const out = (value) => { process.stdout.write(JSON.stringify(value)); process.exit(0); };
+if (args[0] === 'pr' && args[1] === 'comment') process.exit(0);
+if (args[0] === 'run' && args[1] === 'rerun') process.exit(0);
+if (line.includes('/pulls?state=open')) out(f.prs);
+if (line.includes('/issues/1800/comments')) out(f.comments);
+if (line.includes('/actions/workflows/tests.yml/runs?')) out(f.runs);
+if (line.includes('/actions/runs/36105446627/jobs')) out(f.jobs);
+if (line.includes('/check-runs/777/annotations')) out(f.annotations);
+process.stderr.write('chiamata non prevista: ' + line + '\\n');
+process.exit(3);
+`);
+  fs.chmodSync(path.join(dir, 'gh'), 0o755);
+  try {
+    const env = {
+      ...process.env,
+      GH_REPO: 'nanakokyobashi-rgb/frontaliere-articles',
+      PATH: dir + ':' + (process.env.PATH || ''),
+      GITHUB_RUN_ID: '9',
+    };
+    delete env.REVIEW_RATE_LIMIT_SCAN;
+    if (scan !== undefined) env.REVIEW_RATE_LIMIT_SCAN = scan;
+    const r = spawnSync(process.execPath, [path.join(ROOT, 'scripts/ci/review-quota-rescuer.mjs')], { encoding: 'utf8', env });
+    return { ...r, calls: fs.readFileSync(calls, 'utf8').trim().split('\n').filter(Boolean) };
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+}
+
+test('rate limit: dopo il reset il run tests viene rilanciato UNA volta, marker prima del rerun', () => {
+  const nowSec = Math.floor(Date.now() / 1000);
+  // Il fixture usa RL_NOW come «adesso» delle run: le date assolute servono
+  // solo a restare nella finestra di osservazione, quindi le ricalcoliamo.
+  const recent = rlRun({ created_at: rlIso(nowSec - 1800), updated_at: rlIso(nowSec - 1700) });
+  const r = runRateLimitRescuer({ resetAt: nowSec - RATE_LIMIT_RESET_GRACE_SEC - 5, runs: [recent] });
+  assert.equal(r.status, 0, r.stderr);
+  const commentAt = r.calls.findIndex((c) => c.startsWith('pr comment 1800'));
+  const rerunAt = r.calls.findIndex((c) => c === 'run rerun 36105446627 --repo nanakokyobashi-rgb/frontaliere-articles');
+  assert.ok(commentAt >= 0 && rerunAt > commentAt, `marker requested PRIMA del rerun:\n${r.calls.join('\n')}`);
+  assert.match(r.calls[commentAt], /REVIEW_RATE_LIMIT_RETRY: .*"state":"requested"/);
+  assert.match(r.stdout, /rate-limit richiesti=1/);
+});
+
+test('rate limit: prima del reset nessun rerun (rientrerebbe nel bucket vuoto)', () => {
+  const nowSec = Math.floor(Date.now() / 1000);
+  const recent = rlRun({ created_at: rlIso(nowSec - 600), updated_at: rlIso(nowSec - 500) });
+  const r = runRateLimitRescuer({ resetAt: nowSec + 900, runs: [recent] });
+  assert.equal(r.status, 0, r.stderr);
+  assert.equal(r.calls.some((c) => c.startsWith('run rerun') || c.startsWith('pr comment')), false, r.calls.join('\n'));
+  assert.match(r.stdout, /rerun rimandato di \d+ s/);
+});
+
+test('rate limit: un marker requested sulla HEAD chiude il percorso, senza leggere job e annotation', () => {
+  const nowSec = Math.floor(Date.now() / 1000);
+  const recent = rlRun({ created_at: rlIso(nowSec - 1800), updated_at: rlIso(nowSec - 1700) });
+  const r = runRateLimitRescuer({ resetAt: nowSec - 600, runs: [recent], comments: [rlComment('requested')] });
+  assert.equal(r.status, 0, r.stderr);
+  assert.equal(r.calls.some((c) => c.includes('/jobs') || c.startsWith('run rerun')), false, r.calls.join('\n'));
+  assert.match(r.stdout, /rerun post-reset gia' richiesto/);
+});
+
+test('rate limit: fuori dai completamenti di tests lo scan non legge nemmeno le run', () => {
+  const r = runRateLimitRescuer({ resetAt: 1, scan: 'false' });
+  assert.equal(r.status, 0, r.stderr);
+  assert.equal(r.calls.some((c) => c.includes('/actions/workflows/tests.yml/runs')), false, r.calls.join('\n'));
+  const workflow = fs.readFileSync(path.join(ROOT, '.github/workflows/review-quota-rescuer.yml'), 'utf8');
+  assert.match(workflow, /REVIEW_RATE_LIMIT_SCAN: \$\{\{ github\.event_name != 'workflow_run' \|\| github\.event\.workflow_run\.name == 'tests' \}\}/);
 });

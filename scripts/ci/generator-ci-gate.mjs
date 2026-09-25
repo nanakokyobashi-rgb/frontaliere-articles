@@ -58,15 +58,36 @@
  * ignoto). L'unica cosa che smette di accadere e' scambiare il rumore della
  * concurrency per un contratto rotto.
  *
+ * ## Quanto costa aspettare (2026-09-25)
+ *
+ * Ogni lettura dei check-run spende una richiesta del bucket REST del
+ * `GITHUB_TOKEN`, 1.000 l'ora per TUTTO il repo. Il polling a 20 s costava fino
+ * a 90 letture per run nei 30 minuti del tetto, ed e' uno dei consumatori che il
+ * 2026-09-25 hanno esaurito il bucket (06:58-07:10 UTC, gate rossi su PR
+ * sane). Ora la prima lettura e' immediata e le successive distano 60 s,
+ * crescendo di 1,5x fino a 120 s (`pollDelayMs`): al massimo ~17 letture nel
+ * tetto. L'ultima attesa e' tagliata sulla scadenza, quindi il verdetto finale
+ * si legge ancora esattamente alla scadenza: la semantica del tetto non cambia.
+ *
+ * Le letture passano da `lib/gh-rate-limit.mjs`: un 403 da rate limit primario
+ * attende il reset (entro 15 min e mai oltre la scadenza del gate, che parte
+ * prima della lettura dei file) e riprova una volta; altrimenti il gate esce
+ * ROSSO nominando il rate limit e il reset, invece di scambiarlo per «file
+ * illeggibili» o per un `generator-ci` lento.
+ *
  * Uso:  node scripts/ci/generator-ci-gate.mjs
  * Env:  GH_TOKEN, GITHUB_REPOSITORY, PR_NUMBER, HEAD_SHA,
  *       GENERATOR_CI_GATE_TIMEOUT_MS (opzionale, default 30 min)
  * Exit: 0 non applicabile o success · 1 fallito/pending oltre il tetto
  */
-import { execFileSync } from 'node:child_process';
 import { touchesGeneratorCiPaths } from './auto-merge-eval.mjs';
 import { GENERATOR_CI_JOB_NAME } from './lib/constants.mjs';
 import { latestCompletedConclusionByName } from './lib/vitestCheck.mjs';
+import {
+  GitHubRateLimitError,
+  ghWithRateLimitRetry,
+  RATE_LIMIT_MAX_WAIT_MS,
+} from './lib/gh-rate-limit.mjs';
 
 /**
  * Conclusion che NON sono un verdetto sul codice, ma l'assenza di un verdetto.
@@ -112,14 +133,29 @@ export function generatorCiVerdict(checkRuns, name) {
   return previousConclusion && previousConclusion !== 'success' ? previousConclusion : '';
 }
 
+/** Prima attesa fra due letture dei check-run, poi backoff fino al tetto. */
+export const POLL_BASE_MS = 60_000;
+export const POLL_MAX_MS = 120_000;
+const POLL_FACTOR = 1.5;
+
+/**
+ * Attesa prima della lettura `attempt + 1` (0 = dopo la prima lettura),
+ * tagliata sulla scadenza: l'ultima lettura cade esattamente sul tetto, come
+ * con il polling fisso. Pura.
+ */
+export function pollDelayMs(attempt, { nowMs, deadlineMs } = {}) {
+  const step = Math.min(POLL_MAX_MS, Math.round(POLL_BASE_MS * POLL_FACTOR ** Math.max(0, attempt)));
+  if (!Number.isFinite(nowMs) || !Number.isFinite(deadlineMs)) return step;
+  return Math.max(0, Math.min(step, deadlineMs - nowMs));
+}
+
 const REPO = process.env.GITHUB_REPOSITORY || '';
 const PR = process.env.PR_NUMBER || '';
 const HEAD_SHA = process.env.HEAD_SHA || '';
 const TIMEOUT_MS = Number(process.env.GENERATOR_CI_GATE_TIMEOUT_MS || 30 * 60 * 1000);
-const POLL_MS = 20_000;
 
-function gh(args, { json = true } = {}) {
-  const out = execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
+function gh(args, { json = true, maxWaitMs = RATE_LIMIT_MAX_WAIT_MS } = {}) {
+  const out = ghWithRateLimitRetry(args, { context: 'generator-ci-gate', maxWaitMs });
   return json ? JSON.parse(out) : out;
 }
 
@@ -130,18 +166,26 @@ async function main() {
     console.log('::error::generator-ci-gate: GITHUB_REPOSITORY, PR_NUMBER e HEAD_SHA sono obbligatori.');
     process.exit(1);
   }
+  // La scadenza parte PRIMA della lettura dei file: un'attesa del reset su
+  // quella lettura consuma lo stesso tetto, quindi lo step intero resta entro
+  // `TIMEOUT_MS` anche col bucket esaurito (review della PR #1865).
+  const deadline = Date.now() + TIMEOUT_MS;
+  const readBudgetMs = () => Math.max(0, Math.min(RATE_LIMIT_MAX_WAIT_MS, deadline - Date.now()));
   let files;
   try {
     files = gh(['api', `repos/${REPO}/pulls/${PR}/files`, '--paginate', '--jq', '.[].filename'], {
       json: false,
+      maxWaitMs: readBudgetMs(),
     })
       .split('\n')
       .map((s) => s.trim())
       .filter(Boolean);
   } catch (e) {
     // Conservativo: senza la lista file non so se il gate si applica, e non
-    // posso escluderlo. Rosso, non verde per default.
-    console.log(`::error::generator-ci-gate: file della PR illeggibili (${String(e).slice(0, 160)}).`);
+    // posso escluderlo. Rosso, non verde per default. Un rate limit ha gia'
+    // la sua annotation (causa + reset) scritta dall'helper.
+    const cause = e instanceof GitHubRateLimitError ? 'rate limit del token' : String(e).slice(0, 160);
+    console.log(`::error::generator-ci-gate: file della PR illeggibili (${cause}).`);
     process.exit(1);
   }
   if (!touchesGeneratorCiPaths(files)) {
@@ -152,18 +196,25 @@ async function main() {
     `generator-ci-gate: la PR tocca i path di generator-ci.yml — attendo il check-run '${GENERATOR_CI_JOB_NAME}' sulla head ${HEAD_SHA}.`,
   );
 
-  const deadline = Date.now() + TIMEOUT_MS;
   let last = '';
-  for (;;) {
+  for (let attempt = 0; ; attempt += 1) {
     let checkRuns = [];
     try {
       // Stessa forma di `auto-merge-eval.mjs`: la risposta e' un oggetto con
       // `check_runs`, non un array. `--paginate` + `--jq` qui non servono (100
       // check-run per commit sono un tetto che questo repo non avvicina) e
       // cambierebbero la forma della risposta sotto ai lettori.
-      const cr = gh(['api', `repos/${REPO}/commits/${HEAD_SHA}/check-runs?per_page=100`]);
+      // L'attesa di un reset non puo' superare la scadenza del gate: oltre,
+      // il rosso nomina il rate limit e il rescuer rilancia dopo il reset.
+      const cr = gh(['api', `repos/${REPO}/commits/${HEAD_SHA}/check-runs?per_page=100`], {
+        maxWaitMs: readBudgetMs(),
+      });
       checkRuns = (cr && cr.check_runs) || [];
     } catch (e) {
+      if (e instanceof GitHubRateLimitError) {
+        console.log(`::error::generator-ci-gate: check-run di '${GENERATOR_CI_JOB_NAME}' illeggibili per rate limit del token — nessun merge su uno stato ignoto.`);
+        process.exit(1);
+      }
       console.log(`generator-ci-gate: check-runs illeggibili (${String(e).slice(0, 120)}) — riprovo.`);
     }
     const conclusion = generatorCiVerdict(checkRuns, GENERATOR_CI_JOB_NAME);
@@ -187,8 +238,9 @@ async function main() {
       .filter((c) => c?.name === GENERATOR_CI_JOB_NAME)
       .map((c) => `${c.status}/${c.conclusion ?? '-'}`)
       .join(',');
-    console.log(`generator-ci-gate: ancora in corso (${last || 'nessun check-run'}) — ricontrollo fra ${POLL_MS / 1000}s.`);
-    await sleep(POLL_MS);
+    const delay = pollDelayMs(attempt, { nowMs: Date.now(), deadlineMs: deadline });
+    console.log(`generator-ci-gate: ancora in corso (${last || 'nessun check-run'}) — ricontrollo fra ${Math.round(delay / 1000)}s.`);
+    await sleep(delay);
   }
 }
 
