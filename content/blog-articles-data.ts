@@ -1501,6 +1501,7 @@ const RAW_ARTICLES = [
  id: 'calcolo-tasse-entro-confine',
  category: 'fiscale',
  date: '2026-02-27T06:19:48.213Z',
+ updatedAt: '2026-09-25',
  image: '/images/blog/calcolo-tasse-entro-confine.webp',
  hasCalculator: true,
  authorSlug: 'marco-ferrari',

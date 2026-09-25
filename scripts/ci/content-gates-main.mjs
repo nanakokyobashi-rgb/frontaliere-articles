@@ -148,6 +148,7 @@ export const CONTENT_GATES = [
   'generator/tests/escaped-tab-marker-corpus.test.mjs',
   'generator/tests/evergreen-addizionale-irpef-mappa-comuni-refresh.test.mjs',
   'generator/tests/evergreen-calcolo-pensione-avs-inps-refresh.test.mjs',
+  'generator/tests/evergreen-calcolo-tasse-entro-confine-refresh.test.mjs',
   'generator/tests/evergreen-costo-pendolare-auto-ticino-2026-refresh.test.mjs',
   'generator/tests/evergreen-costo-vita-ticino-vs-lombardia-refresh.test.mjs',
   'generator/tests/evergreen-dichiarazione-redditi-ticino-2026-refresh.test.mjs',
