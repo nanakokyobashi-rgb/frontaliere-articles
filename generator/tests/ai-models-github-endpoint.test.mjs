@@ -323,6 +323,35 @@ describe('GitHub Models request contract', () => {
     assert.equal(catalogCalls, 2, 'resetState deve consentire il retry nel ciclo successivo');
   });
 
+  // Un PAT scaduto non è un guasto di canale: il suo `401` deve votare
+  // persistente. La causa autorevole `transport` vale solo per i canali locali
+  // claude-cli/codex-cli (review di nanakokyobashi-rgb/frontaliere-articles#1874).
+  test('un catalogo 401 con l\'unico PAT resta persistente nel verdetto della run', async () => {
+    globalThis.fetch = async (url) => {
+      if (String(url).endsWith('/catalog/models')) {
+        return new Response('{"message":"bad credentials"}', { status: 401 });
+      }
+      return new Response(JSON.stringify({ choices: [{ message: { content: 'ok' } }] }), {
+        status: 200,
+        headers: { 'content-type': 'application/json' },
+      });
+    };
+    await assert.rejects(
+      () => callLLM([{ role: 'user', content: 'x' }], {
+        chain: [AI_MODELS.GPT4O],
+        maxRetriesPerModel: 1,
+        recordScore: false,
+      }),
+      (error) => {
+        assert.match(error.message, /401/);
+        assert.equal(error.exhaustionBreakdown.transient, 0, error.message);
+        assert.equal(error.exhaustionBreakdown.persistent, 1, error.message);
+        assert.notEqual(error.transientExhaustion, true);
+        return true;
+      },
+    );
+  });
+
   test('i mapping GitHub non osservabili o ambigui sono persistenti nel verdetto della run', async () => {
     for (const githubModelsCatalog of [
       [],

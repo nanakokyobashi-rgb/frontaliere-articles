@@ -11,6 +11,12 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const BROKER = path.join(ROOT, '.github/actions/setup-claude-haiku-fallback/codex-auth-broker.mjs');
 
+// macOS limits Unix-socket paths to a little over 100 bytes. Keep the broker
+// directory prefix short because the broker briefly appends `.listening` while
+// it binds the socket.
+const tempBrokerDir = () => fs.mkdtempSync(path.join(os.tmpdir(), 'cb.'));
+const normalizeTempPath = (value) => path.normalize(value).replace(/^\/private\/tmp(?=\/|$)/, '/tmp');
+
 function waitForSocket(socketPath, child, timeoutMs = 5000, getStderr = () => '') {
   const startedAt = Date.now();
   return new Promise((resolve, reject) => {
@@ -94,7 +100,7 @@ function waitForExit(child, timeoutMs = 5000) {
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 test('il broker Codex serializza più richieste senza consumare una slot globale', async () => {
-  const brokerDir = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-broker-test.'));
+  const brokerDir = tempBrokerDir();
   const cliPrefix = fs.mkdtempSync(path.join(os.tmpdir(), 'claude-haiku-codex-cli.'));
   const socketPath = path.join(brokerDir, 'auth.sock');
   const cliPath = path.join(cliPrefix, 'codex');
@@ -160,7 +166,7 @@ process.stdin.on('end', () => fs.writeFileSync(output, JSON.stringify({ prompt }
 });
 
 test('il TTL del broker è idle e non scade mentre la coda riceve richieste', async () => {
-  const brokerDir = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-broker-idle-test.'));
+  const brokerDir = tempBrokerDir();
   const cliPrefix = fs.mkdtempSync(path.join(os.tmpdir(), 'claude-haiku-codex-cli.'));
   const socketPath = path.join(brokerDir, 'auth.sock');
   const cliPath = path.join(cliPrefix, 'codex');
@@ -220,7 +226,7 @@ process.stdin.on('end', () => fs.writeFileSync(output, JSON.stringify({ prompt }
 });
 
 test('una richiesta cancellata prima dell esecuzione non consuma la quota', async () => {
-  const brokerDir = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-broker-cancel-test.'));
+  const brokerDir = tempBrokerDir();
   const cliPrefix = fs.mkdtempSync(path.join(os.tmpdir(), 'claude-haiku-codex-cli.'));
   const socketPath = path.join(brokerDir, 'auth.sock');
   const cliPath = path.join(cliPrefix, 'codex');
@@ -305,7 +311,7 @@ process.stdin.on('end', () => fs.writeFileSync(output, JSON.stringify({ prompt }
 // Il codex finto qui registra dove il broker lo lancia e quale profilo gli
 // scrive, così il contratto si verifica sui percorsi reali e non sul testo.
 test('il profilo sandbox del broker non nega il workspace in cui lancia Codex', async () => {
-  const brokerDir = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-broker-profile-test.'));
+  const brokerDir = tempBrokerDir();
   const cliPrefix = fs.mkdtempSync(path.join(os.tmpdir(), 'claude-haiku-codex-cli.'));
   const socketPath = path.join(brokerDir, 'auth.sock');
   const cliPath = path.join(cliPrefix, 'codex');
@@ -353,7 +359,6 @@ process.stdin.on('end', () => fs.writeFileSync(output, JSON.stringify({
     const response = await request(socketPath, { op: 'exec', prompt: 'profile', timeoutMs: 5000 });
     assert.equal(response.ok, true, stderr);
     const seen = JSON.parse(response.result);
-    const normalizeTempPath = (value) => path.resolve(value).replace(/^\/private(?=\/tmp(?:\/|$))/, '');
     assert.equal(
       normalizeTempPath(seen.cd),
       normalizeTempPath(seen.cwd),
@@ -405,7 +410,7 @@ process.stdin.on('end', () => fs.writeFileSync(output, JSON.stringify({
 });
 
 test('un Codex che esce con errore restituisce la causa, senza token', async () => {
-  const brokerDir = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-broker-reason-test.'));
+  const brokerDir = tempBrokerDir();
   const cliPrefix = fs.mkdtempSync(path.join(os.tmpdir(), 'claude-haiku-codex-cli.'));
   const socketPath = path.join(brokerDir, 'auth.sock');
   const cliPath = path.join(cliPrefix, 'codex');
@@ -468,7 +473,7 @@ process.stdin.on('end', () => {
 // il token speso («refresh token already used»). Il Codex finto fa il refresh
 // a ogni chiamata: la successiva deve partire dal login rinnovato.
 test('una sola CODEX_HOME per job: il login rinnovato dalla chiamata N serve la N+1', async () => {
-  const brokerDir = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-broker-refresh-test.'));
+  const brokerDir = tempBrokerDir();
   const cliPrefix = fs.mkdtempSync(path.join(os.tmpdir(), 'claude-haiku-codex-cli.'));
   const socketPath = path.join(brokerDir, 'auth.sock');
   const cliPath = path.join(cliPrefix, 'codex');
@@ -558,7 +563,7 @@ process.stdin.on('end', () => {
 });
 
 test('un errore API stampato come JSON restituisce anche il suo "message"', async () => {
-  const brokerDir = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-broker-apierror-test.'));
+  const brokerDir = tempBrokerDir();
   const cliPrefix = fs.mkdtempSync(path.join(os.tmpdir(), 'claude-haiku-codex-cli.'));
   const socketPath = path.join(brokerDir, 'auth.sock');
   const cliPath = path.join(cliPrefix, 'codex');
@@ -617,7 +622,7 @@ process.stdin.on('end', () => {
 // ascolta su un nome temporaneo nella stessa directory 0700 e lo rinomina solo
 // quando accetta connessioni: «il socket esiste» vuol dire «pronto».
 test('il socket compare solo quando il broker accetta gia\' connessioni', async () => {
-  const brokerDir = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-broker-ready-test.'));
+  const brokerDir = tempBrokerDir();
   const cliPrefix = fs.mkdtempSync(path.join(os.tmpdir(), 'claude-haiku-codex-cli.'));
   const socketPath = path.join(brokerDir, 'auth.sock');
   const cliPath = path.join(cliPrefix, 'codex');
@@ -657,4 +662,117 @@ test('il socket compare solo quando il broker accetta gia\' connessioni', async 
     fs.rmSync(brokerDir, { recursive: true, force: true });
     fs.rmSync(cliPrefix, { recursive: true, force: true });
   }
+});
+
+// Codex finto che dorme `sleep:<ms>` preso dal prompt prima di rispondere.
+const SLEEPING_CLI = `#!/usr/bin/env node
+import fs from 'node:fs';
+const args = process.argv.slice(2);
+if (args.includes('--version')) { console.log('codex 0.153.4'); process.exit(0); }
+const output = args[args.indexOf('--output-last-message') + 1];
+if (!output) process.exit(2);
+let prompt = '';
+process.stdin.setEncoding('utf8');
+process.stdin.on('data', (chunk) => { prompt += chunk; });
+process.stdin.on('end', () => {
+  const wait = Number(prompt.match(/sleep:(\\d+)/)?.[1] || 0);
+  setTimeout(() => fs.writeFileSync(output, JSON.stringify({ prompt }), 'utf8'), wait);
+});
+`;
+
+async function withSleepingBroker(ttlMs, body) {
+  const brokerDir = tempBrokerDir();
+  const cliPrefix = fs.mkdtempSync(path.join(os.tmpdir(), 'claude-haiku-codex-cli.'));
+  const socketPath = path.join(brokerDir, 'auth.sock');
+  const cliPath = path.join(cliPrefix, 'codex');
+  fs.writeFileSync(cliPath, SLEEPING_CLI, { mode: 0o700 });
+  fs.chmodSync(cliPath, 0o700);
+  const cliSha256 = crypto.createHash('sha256').update(fs.readFileSync(cliPath)).digest('hex');
+  const broker = spawn(process.execPath, [
+    BROKER,
+    '--socket', socketPath,
+    '--ttl-ms', String(ttlMs),
+    '--max-requests', '16',
+    '--codex-bin', cliPath,
+    '--codex-realpath', cliPath,
+    '--codex-sha256', cliSha256,
+    '--codex-prefix', cliPrefix,
+  ], {
+    cwd: ROOT,
+    stdio: ['pipe', 'ignore', 'pipe'],
+  });
+  let stderr = '';
+  broker.stderr.setEncoding('utf8');
+  broker.stderr.on('data', (chunk) => { stderr += chunk; });
+  broker.stdin.end('{"access_token":"test"}');
+  try {
+    await waitForSocket(socketPath, broker).catch((error) => {
+      throw new Error(`${error.message}: ${stderr}`);
+    });
+    await body({ broker, socketPath, stderr: () => stderr });
+  } finally {
+    if (broker.exitCode === null) broker.kill('SIGTERM');
+    await waitForExit(broker).catch(() => {});
+    fs.rmSync(brokerDir, { recursive: true, force: true });
+    fs.rmSync(cliPrefix, { recursive: true, force: true });
+  }
+}
+
+/** Scambio grezzo con timestamp: mostra i byte di controllo prima della riga JSON. */
+function rawRequest(socketPath, payload) {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    const client = net.createConnection(socketPath);
+    client.setEncoding('utf8');
+    client.setTimeout(10_000, () => reject(new Error('broker request timed out')));
+    client.on('error', reject);
+    client.on('data', (chunk) => chunks.push({ at: Date.now(), data: String(chunk) }));
+    client.on('end', () => resolve({ raw: chunks.map((c) => c.data).join(''), chunks }));
+    client.on('connect', () => client.end(`${JSON.stringify(payload)}\n`));
+  });
+}
+
+const jsonLine = (raw) => JSON.parse(raw.replace(/^[\0\x01]+/, ''));
+
+// Il timer di SIGKILL parte sull'evento 'spawn', come il segnale al client:
+// deve comunque scattare e rispondere, anche per un Codex che non esce mai.
+test('un Codex che non risponde viene ucciso al budget contato dallo spawn', async () => {
+  await withSleepingBroker(60_000, async ({ socketPath, stderr }) => {
+    const startedAt = Date.now();
+    const hung = await rawRequest(socketPath, { op: 'exec', prompt: 'sleep:60000', timeoutMs: 400, notifyStart: true });
+    const elapsed = Date.now() - startedAt;
+    assert.ok(hung.raw.includes('\x01'), 'il segnale di avvio precede la risposta');
+    assert.deepEqual(jsonLine(hung.raw), { ok: false, error: 'Codex CLI timed out after 400ms' }, stderr());
+    assert.ok(elapsed >= 400, `ucciso dopo ${elapsed}ms, prima del budget`);
+    const next = await rawRequest(socketPath, { op: 'exec', prompt: 'sleep:10', timeoutMs: 5000 });
+    assert.equal(jsonLine(next.raw).ok, true, 'la coda riparte dopo il SIGKILL');
+  });
+});
+
+test('una richiesta più lunga del TTL completa: il broker scade solo da inattivo', async () => {
+  await withSleepingBroker(300, async ({ broker, socketPath, stderr }) => {
+    const long = await rawRequest(socketPath, { op: 'exec', prompt: 'sleep:900', timeoutMs: 5000 });
+    assert.equal(jsonLine(long.raw).ok, true, stderr());
+    assert.equal(await waitForExit(broker, 3000), 0, stderr());
+    assert.equal(fs.existsSync(socketPath), false);
+  });
+});
+
+test('il segnale di avvio arriva quando la richiesta esce dalla coda, e solo a chi lo chiede', async () => {
+  await withSleepingBroker(60_000, async ({ socketPath, stderr }) => {
+    const first = rawRequest(socketPath, { op: 'exec', prompt: 'sleep:600', timeoutMs: 5000, notifyStart: true });
+    await delay(100);
+    const queued = rawRequest(socketPath, { op: 'exec', prompt: 'sleep:10', timeoutMs: 5000, notifyStart: true });
+    const legacy = rawRequest(socketPath, { op: 'exec', prompt: 'sleep:10', timeoutMs: 5000 });
+    const [a, b, c] = await Promise.all([first, queued, legacy]);
+
+    assert.ok(a.raw.startsWith('\x01') || a.raw.startsWith('\0\x01'), JSON.stringify(a.raw.slice(0, 4)));
+    assert.equal(jsonLine(a.raw).ok, true, stderr());
+    assert.equal(jsonLine(b.raw).ok, true, stderr());
+    const firstAnswered = a.chunks.find((chunk) => chunk.data.includes('{')).at;
+    const queuedStarted = b.chunks.find((chunk) => chunk.data.includes('\x01')).at;
+    assert.ok(queuedStarted >= firstAnswered, 'la richiesta in coda parte dopo la risposta alla precedente');
+    assert.equal(c.raw.includes('\x01'), false, 'senza notifyStart il protocollo resta quello di prima');
+    assert.equal(jsonLine(c.raw).ok, true, stderr());
+  });
 });
