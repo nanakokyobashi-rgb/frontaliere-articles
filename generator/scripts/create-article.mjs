@@ -9392,7 +9392,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   // si arma SOLO quando `err.retryRequestTokenBudget` viene dal roster
   // (`_budgetDettato`), cioe' quando la libreria ha visto ALMENO un modello
   // saltato per cap di INPUT — ma l'unico membro di
-  // `PREFERRED_GENERATION_MODELS` (Codex + claude-cli/haiku) non dichiara
+  // `PREFERRED_GENERATION_MODELS` (solo Codex, Haiku e' spento) non dichiara
   // nessun cap di input (getDeclaredRequestTokenLimit li salta sempre), quindi non possono
   // MAI essere fra i modelli saltati per dimensione. Se ha fallito, ha fallito
   // per un'altra ragione (timeout, quota, rate-limit) che ridimensionare il
