@@ -1613,6 +1613,7 @@ const RAW_ARTICLES = [
  id: 'comuni-frontalieri-distanza',
  category: 'fiscale',
  date: '2026-02-28T08:58:42.082Z',
+ updatedAt: '2026-09-25',
  image: '/images/blog/comuni-frontalieri-distanza.webp',
  hasCalculator: true,
  authorSlug: 'redazione',
