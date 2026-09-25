@@ -369,6 +369,18 @@ function errorSummary(error) {
     || 'errore non specificato';
 }
 
+export function inventoryWarning(error) {
+  return `::warning::Inventario PR non leggibile (${errorSummary(error)}) — nessuna azione; il prossimo tick ritenta.`;
+}
+
+export function readOpenPulls(repo, fetchPages = ghPages) {
+  try {
+    return { pulls: fetchPages(`repos/${repo}/pulls?state=open&per_page=100`).flat(), warning: null };
+  } catch (error) {
+    return { pulls: null, warning: inventoryWarning(error) };
+  }
+}
+
 function commentBody(action, reason, detail) {
   return [
     `🧭 **orphan-pr-custodian** (auto): ${reason}.`,
@@ -390,14 +402,13 @@ function main() {
   // un altro errore transitorio, non c'è nessuna PR sicura da mutare in questo
   // tick. Il prossimo cron deve poter ritentare senza trasformare l'assenza di
   // dati in un nuovo "Workflow Failure".
-  let pulls;
-  try {
-    pulls = ghPages(`repos/${repo}/pulls?state=open&per_page=100`).flat();
-  } catch (error) {
-    console.log(`::warning::Inventario PR non leggibile (${errorSummary(error)}) — nessuna azione; il prossimo tick ritenta.`);
+  const inventory = readOpenPulls(repo);
+  if (!inventory.pulls) {
+    console.log(inventory.warning);
     console.log('orphan-pr-custodian: inventario PR non disponibile, 0 azioni.');
     return;
   }
+  const pulls = inventory.pulls;
   let acted = 0;
   for (const raw of pulls) {
     const pr = {
