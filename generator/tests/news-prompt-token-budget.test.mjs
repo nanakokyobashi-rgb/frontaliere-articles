@@ -386,6 +386,10 @@ test('cronaca locale senza angolo frontaliere: niente sei termini obbligatori, e
   ]) {
     assert.doesNotMatch(local.prompt, frontaliereOnly);
   }
+  assert.match(local.prompt, /"hasCalculator": false/);
+  assert.doesNotMatch(local.prompt, /CTA: body3 DEVE terminare/);
+  assert.doesNotMatch(local.prompt, /LINK INTERNI — sintassi ESCLUSIVA.*MINIMO 3/s);
+  assert.doesNotMatch(local.prompt, /Azione: procedura step-by-step, scadenze, strumenti \+ CTA finale/);
   assert.ok(local.estTokens <= PROMPT_TOKEN_CEILING, `prompt cronaca a ${local.estTokens} token`);
   // Una notizia frontaliere vera resta sul ramo storico.
   const news = newsPrompt();

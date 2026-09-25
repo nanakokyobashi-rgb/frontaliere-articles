@@ -7884,7 +7884,12 @@ async function scanNewsSources() {
     let droppedTopic = 0;
     for (const h of list) {
       const text = `${h.headline || ''} ${h.url || ''}`;
-      if (dropAnchorless && !hasDomainAnchor(text) && !(IS_FRONTALIERE && isInLocalNewsArea(h.headline || ''))) {
+      // Local-news candidates are allowed through the old domain-anchor gate:
+      // the complete Ticino index is a stronger geographic source than the
+      // legacy anchor regex, and otherwise aliases such as Taverne are
+      // discarded before `hasAdmissionSignal()` can see them.
+      const localNewsCandidate = IS_FRONTALIERE && isLocalNews(h.headline || text);
+      if (dropAnchorless && !hasDomainAnchor(text) && !localNewsCandidate) {
         droppedAnchor += 1;
         continue;
       }
@@ -8741,8 +8746,11 @@ NON inventare un angolo "implicazioni pratiche" su un evento irrilevante per rie
   const editorialFundamentalBlock = localNewsSource
     ? `REGOLA EDITORIALE FONDAMENTALE — CRONACA LOCALE:
 La fonte è cronaca locale (cronaca nera, incidente, sport, cultura o evento) in Ticino o nelle province di Varese, Como e VCO: il nesso richiesto da REGOLA #0 è il luogo, non i frontalieri. NON rifiutare per mancanza di un angolo frontalieri.
-- Racconta chi, cosa, dove e quando, con le dichiarazioni, le reazioni e gli sviluppi della fonte.
-- NON aggiungere procedure, checklist, scadenze, consigli o strumenti per frontalieri, né un paragrafo "impatto sui frontalieri": la notizia non li richiede.`
+- body1 deve riportare i fatti verificabili della fonte, senza costruire un angolo frontaliere.
+- body2 deve aggiungere soltanto contesto, sviluppi, dati o reazioni locali documentati dalla fonte.
+- body3 deve descrivere le ricadute locali soltanto quando la fonte le documenta.
+- NON aggiungere permessi, fiscalità, procedure, scadenze, strumenti del sito o consigli per frontalieri che la fonte non sostiene.
+- Se la fonte non documenta un'azione concreta, chiudi senza procedura, tool, CTA o link nav obbligatorio: la completezza non giustifica l'invenzione.`
     : IS_FRONTALIERE
     ? `REGOLA EDITORIALE FONDAMENTALE — FRONTALIERI AL CENTRO (CONDIZIONALE):
 Se la fonte ha implicazioni CONCRETE e SPECIFICHE per il frontaliere (importi CHF/EUR cambiati, scadenze fiscali, procedure modificate, permessi, valichi, accordi CH-IT, AVS/LPP/LAMal, busta paga, autostrade A2/A9, sciopero che blocca pendolari):
@@ -9008,7 +9016,7 @@ Genera JSON (no markdown, no code fences):
   "id": "<<ID: kebab-case ASCII, 3-5 parole, max 40 char>>",
   "category": "one of: ${CATEGORIES.join(', ')}",
   "image": "one of: ${AVAILABLE_IMAGES.slice(0, 15).join(', ')}... (scegli la più adatta)",
-  "hasCalculator": true,
+  "hasCalculator": ${localNewsSource ? 'false' : 'true'},
   ${imagePromptSchemaLine}
   "imageAlt": { "it": "max 125 chars", "en": "max 125 chars", "de": "max 125 chars", "fr": "max 125 chars" },
   "slugs": { "it": "<<SLUG:it = ID>>", "en": "<<SLUG:en>>", "de": "<<SLUG:de>>", "fr": "<<SLUG:fr>>" },`}
@@ -9041,7 +9049,7 @@ ${localNewsSource ? `      "body2": "Contesto: sviluppi, reazioni e dati della f
 REGOLE FINALI:
 - Contenuto IT primario. EN/DE/FR verranno generati separatamente.
 ${_isBody ? '' : `- Slug: lowercase, trattini, no accenti, max 50 chars
-- hasCalculator: true sempre
+${localNewsSource ? '- hasCalculator: false per cronaca locale, salvo un bisogno concreto documentato dalla fonte.' : '- hasCalculator: true sempre'}
 `}- Apostrofi diritti ('), normative 2026
 ${_isBody ? '' : `- FAQ: genera 3-5 coppie domanda/risposta basate sui FATTI ${_isMeta ? "dell'ARTICOLO qui sopra" : 'della fonte'}. Risposte: 50-100 parole, con dati concreti ${_isMeta ? "dall'articolo" : 'dalla fonte'}.`}`;
   };
@@ -9072,13 +9080,16 @@ ${generationAttempt > 1 ? `- ⚠️ RETRY ${generationAttempt}/${generationAttem
   // articles under degraded free-model quality — drafts stuck since 2026-06-18).
   // Targeted feedback, NOT a relaxed gate: every flagged claim must be dropped
   // or restated strictly from SOURCE CONTENT.
+  const factCheckWordRecoveryGuidance = localNewsSource
+    ? 'sviluppi, reazioni e conseguenze locali già presenti nella fonte'
+    : 'procedure, scenari e confronti già sostenuti dalla fonte';
   const factCheckRefinementInstruction = sourceContext?._factCheckRefinement
     ? `\n\n═══ ⚠️ TENTATIVO PRECEDENTE RIGETTATO DAL FACT-CHECK — CORREGGI QUESTE AFFERMAZIONI ═══
 Il fact-checker indipendente ha bocciato la bozza precedente perché le seguenti affermazioni NON sono supportate dal SOURCE CONTENT:
 ${sourceContext._factCheckRefinement}
 ISTRUZIONI TASSATIVE per questo tentativo:
 - Per OGNI affermazione elencata sopra: RIMUOVILA del tutto, oppure riscrivila usando SOLO ciò che è LETTERALMENTE nel SOURCE CONTENT.
-- NON sostituire una cifra/data/legge/istituzione inventata con un'altra inventata: se il dato non è nella fonte, OMETTILO e raggiungi il minimo parole con procedure, scenari e confronti (come da REGOLA #1).
+- NON sostituire una cifra/data/legge/istituzione inventata con un'altra inventata: se il dato non è nella fonte, OMETTILO e raggiungi il minimo parole con ${factCheckWordRecoveryGuidance} (come da REGOLA #1).
 - NON reintrodurre lo stesso tipo di invenzione altrove nel testo.`
     : '';
 
@@ -9117,7 +9128,9 @@ Rigenera "id" e "slugs" seguendo ESATTAMENTE lo schema richiesto sopra (valore r
     ? 'NON includere content.en, content.de, content.fr — verranno generati separatamente.'
     : 'NON includere le altre 3 lingue — verranno generate separatamente.';
 
-  const systemRoleQualifier = IS_FRONTALIERE
+  const systemRoleQualifier = localNewsSource
+    ? 'di cronaca locale in Ticino e nelle province di Varese, Como e VCO'
+    : IS_FRONTALIERE
     ? 'di lavoro transfrontaliero in Ticino'
     : 'di affari svizzeri a livello nazionale';
   // `part` seleziona la coda del messaggio utente come `buildPrompt` seleziona
@@ -12162,8 +12175,8 @@ function validateAndEnforceCTA(data) {
   if (contentIt && typeof data._cantonGuardBodyBeforeCta !== 'string') {
     data._cantonGuardBodyBeforeCta = bodyTextForQuality(contentIt);
   }
-  if (data._localNewsSource) {
-    console.error('  📰 Cronaca locale: nessuna CTA frontaliere aggiunta');
+  if (data?._localNewsSource === true) {
+    console.error('  ℹ️  CTA omessa: cronaca locale senza bisogno concreto documentato dalla fonte.');
     return data;
   }
   const localeKeywords = { it: CTA_KEYWORDS_IT, en: CTA_KEYWORDS_EN, de: CTA_KEYWORDS_DE, fr: CTA_KEYWORDS_FR };
@@ -12228,7 +12241,10 @@ const INTERNAL_LINK_BLOCK = {
 };
 
 function enforceStrongInternalLinks(data) {
-  if (data._localNewsSource) return data; // see Step 3d: no frontaliere tool block on local news
+  if (data?._localNewsSource === true) {
+    console.error('  ℹ️  Link interni automatici omessi: cronaca locale senza destinazione nav documentata.');
+    return data;
+  }
   for (const locale of ['it', 'en', 'de', 'fr']) {
     if (!data.content[locale]) continue;
 
