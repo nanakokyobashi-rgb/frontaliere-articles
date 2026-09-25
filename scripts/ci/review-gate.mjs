@@ -81,6 +81,7 @@ import {
 } from './lib/constants.mjs';
 import { classifyAndMintReview, prBodyFindingLine } from './review-scope.mjs';
 import { isMalformedReviewBody, reviewBodyDefects } from './lib/review-findings.mjs';
+import { ghWithRateLimitRetry } from './lib/gh-rate-limit.mjs';
 
 const REPO = process.env.GITHUB_REPOSITORY || '';
 const PR = process.env.PR_NUMBER || '';
@@ -133,8 +134,16 @@ function writeGateOutput(name, value) {
   }
 }
 
+/**
+ * Letture del gate. Un 403 da rate limit primario del `GITHUB_TOKEN` (bucket
+ * REST orario condiviso da tutti i workflow, esaurito il 2026-09-25) attende
+ * il reset se e' entro 15 min e riprova una volta; altrimenti fallisce con
+ * l'annotation `[gh-rate-limit ...]` che `review-quota-rescuer.mjs` usa per
+ * rilanciare il run dopo il reset. I catch dei chiamanti la trattano come ogni
+ * errore di lettura: `markTransientFailure()`, mai un verdetto.
+ */
 function gh(args, { json = true } = {}) {
-  const out = execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
+  const out = ghWithRateLimitRetry(args, { context: 'review-gate' });
   return json ? JSON.parse(out) : out;
 }
 

@@ -590,6 +590,18 @@ jobs:
       # The body is an input to the reviewer, not executable content. Its
       # trusted API hash gives the durable claim ledger a new revision when a
       # body correction arrives on the same code HEAD.
+      #
+      # Rate limit (2026-09-25, 06:58-07:10 UTC): il bucket REST orario del
+      # GITHUB_TOKEN e' uno solo per tutti i workflow del repo, e quando si
+      # esaurisce questa lettura rendeva rossa una PR sana («PR body
+      # illeggibile»). La lettura passa quindi da `lib/gh-rate-limit.mjs`: reset
+      # entro 15 min → attesa + UN retry; oltre → rosso che nomina il rate limit
+      # e il reset, con il marker che `review-quota-rescuer` usa per rilanciare
+      # il run dopo il reset. L'helper e' la copia TRUSTED di `main` che il
+      # bootstrap ha appena messo accanto al review gate (lo importa
+      # `review-gate.mjs`, quindi e' nella lista del manifest): questo step non
+      # esegue mai codice del checkout della PR. Finche' `main` non lo porta, o
+      # se il bootstrap non lo ha prodotto, la lettura resta quella diretta.
       - name: Resolve review input revision (zero-Claude)
         id: review_input
         if: steps.body_contract.outcome != 'failure' && steps.resolve.outputs.should_review == 'true'
@@ -598,9 +610,18 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
           PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
           BODY_FILE: ${{ runner.temp }}/review-body.txt
+          TRUSTED_GH_BIN: ${{ steps.trusted_gh.outputs.path }}
         run: |
           set -euo pipefail
-          if ! gh api "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER" \
+          rate_limit_helper="$(dirname "${REVIEW_GATE_MAIN_MODULE:-/nonexistent/review-gate.mjs}")/lib/gh-rate-limit.mjs"
+          read_pr() {
+            if [ -f "$rate_limit_helper" ]; then
+              node "$rate_limit_helper" --gh "$TRUSTED_GH_BIN" --context 'Resolve review input revision' -- "$@"
+            else
+              "$TRUSTED_GH_BIN" "$@"
+            fi
+          }
+          if ! read_pr api "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER" \
             --jq 'if type != "object" then error("PR response is not an object") elif (has("body") | not) then error("PR response has no body field") elif .body != null and (.body | type) != "string" then error("PR body is not a string or null") else (.body // "") end' \
             > "$BODY_FILE"; then
             echo "::error::PR body illeggibile → review input revision fail-closed."
