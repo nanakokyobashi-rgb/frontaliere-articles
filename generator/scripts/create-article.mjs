@@ -9025,9 +9025,10 @@ Genera JSON (no markdown, no code fences):
     "it": {${_isBody ? '' : `
       "title": "Titolo giornalistico con keyword (OBBLIGATORIO ≤ 60 caratteri totali, target 50-55. Il suffisso ' | Frontaliere Ticino' viene aggiunto automaticamente — NON includerlo nel title)",
       "excerpt": "Sottotitolo con dati concreti DALLA FONTE (max 160 chars)",`}${_isMeta ? '' : `
-      "body1": "Inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (0-8 coppie termine→valore, tutte presenti nella fonte; ometti assenti e placeholder). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. 300-400 parole (escluse TL;DR/Fatti chiave). Min 1 ### sotto-sezione.",
-${localNewsSource ? `      "body2": "Contesto: sviluppi, reazioni e dati della fonte. Contenuto DIVERSO da body1. 300-400 parole. Min 1 ### sotto-sezione.",
-      "body3": "Seguito: cosa succede ora secondo la fonte. NON riassumere body1/body2. 300-400 parole."` : `      "body2": "Analisi pratica: implicazioni, confronti, scenari. Contenuto DIVERSO da body1. 300-400 parole. Min 1 ### sotto-sezione.",
+${localNewsSource ? `      "body1": "Cronaca locale — inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (0-8 coppie termine→valore, tutte presenti nella fonte; ometti assenti e placeholder). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. Lunghezza secondo MINIMUM LENGTH (escluse TL;DR/Fatti chiave).",
+      "body2": "Contesto: sviluppi, reazioni e dati della fonte. Contenuto DIVERSO da body1. Lunghezza secondo MINIMUM LENGTH.",
+      "body3": "Seguito: cosa succede ora secondo la fonte. NON riassumere body1/body2. Lunghezza secondo MINIMUM LENGTH."` : `      "body1": "Inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (0-8 coppie termine→valore, tutte presenti nella fonte; ometti assenti e placeholder). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. 300-400 parole (escluse TL;DR/Fatti chiave). Min 1 ### sotto-sezione.",
+      "body2": "Analisi pratica: implicazioni, confronti, scenari. Contenuto DIVERSO da body1. 300-400 parole. Min 1 ### sotto-sezione.",
       "body3": "Azione: procedura step-by-step, scadenze, strumenti + CTA finale. NON riassumere body1/body2. 300-400 parole."`}${_isBody ? '' : ','}`}${_isBody ? '' : `
       "faq": [
         {"q": "Domanda frequente 1 basata sui fatti dell'articolo?", "a": "Risposta con dati DALLA FONTE. 50-100 parole."},
@@ -9055,11 +9056,17 @@ ${localNewsSource ? '- hasCalculator: false per cronaca locale, salvo un bisogno
 ${_isBody ? '' : `- FAQ: genera 3-5 coppie domanda/risposta basate sui FATTI ${_isMeta ? "dell'ARTICOLO qui sopra" : 'della fonte'}. Risposte: 50-100 parole, con dati concreti ${_isMeta ? "dall'articolo" : 'dalla fonte'}.`}`;
   };
 
+  // The per-field minimum is a third of the total the validator enforces, not
+  // a fixed 300: computeAdaptiveMinWords lowers the total to 400-700 for a
+  // thin source precisely so the model does not have to invent, and a fixed
+  // 300 per field put 900 words back into the prompt (review of PR #1871, on a
+  // short local story). At the full 900-word target the text is unchanged.
+  const minWordsPerField = Math.ceil(minItalianWords / 3);
   const minWordsInstruction = `\n\nMINIMUM LENGTH (CRITICAL — STRICTLY ENFORCED):
 - body1+body2+body3 MUST total ≥${minItalianWords} words. This is HARD-enforced: content below this threshold will be REJECTED.
-- EACH body field (body1, body2, body3) MUST be at least 300 words individually. Target 350-400 words each.
+- EACH body field (body1, body2, body3) MUST be at least ${minWordsPerField} words individually. Target ${minWordsPerField + 50}-${minWordsPerField + 100} words each.
 - Count your words before finalizing. If the total is <${minItalianWords}, ADD more content — con i mezzi elencati in «COME RAGGIUNGERE IL MINIMO DI PAROLE SENZA INVENTARE».
-${generationAttempt > 1 ? `- ⚠️ RETRY ${generationAttempt}/${generationAttemptMax}: previous attempt was REJECTED because it was only ~${sourceContext?._previousWordCount || '???'} words (minimum: ${minItalianWords}). You MUST write SIGNIFICANTLY MORE this time. Each body: 350-450 words.` : ''}`;
+${generationAttempt > 1 ? `- ⚠️ RETRY ${generationAttempt}/${generationAttemptMax}: previous attempt was REJECTED because it was only ~${sourceContext?._previousWordCount || '???'} words (minimum: ${minItalianWords}). You MUST write SIGNIFICANTLY MORE this time. Each body: ${minWordsPerField + 50}-${minWordsPerField + 150} words.` : ''}`;
 
   // A5 headline refinement: when the previous attempt produced a non-conformant
   // headline (clickbait, too long, leading digit, etc.) we inject explicit rules
@@ -16520,9 +16527,10 @@ async function generateAndValidateArticle(url, sourceContext = null) {
       // future non-serializable field on `data` degrades to `shortErr` like
       // every other failure on this path, instead of escaping uncaught.
       const preExpansionData = structuredClone(data);
+      const localNewsExpansion = IS_FRONTALIERE && isLocalNewsWithoutFrontaliereAngle(pageContent);
       data = await expandShortItalianContent(data, adaptiveMinWords, {
         boundToText: isStatsBfsSource,
-        localNews: IS_FRONTALIERE && isLocalNewsWithoutFrontaliereAngle(pageContent),
+        localNews: localNewsExpansion,
       });
 
       // Re-run the SAME repetition check the main loop uses above — this
@@ -16584,8 +16592,12 @@ async function generateAndValidateArticle(url, sourceContext = null) {
       // normale. Costa 2 chiamate, che la fix di Step 3a.0b-ter ha gia'
       // ripagato molte volte: il bilancio netto resta negativo.
       // Sull'ultima spiaggia NON si ripassa, per non introdurre un modo nuovo
-      // di perdere un articolo che oggi si pubblica.
-      if (!isLastAttempt && expandGateResult.passed) {
+      // di perdere un articolo che oggi si pubblica. La cronaca locale senza
+      // angolo frontalieri ripassa anche li' (review di PR #1871): prima di
+      // questa PR non si pubblicava affatto, quindi nessun articolo di oggi va
+      // perso, e fuori dal fact-check la sua espansione non ha altro controllo
+      // contro i fatti inventati.
+      if ((!isLastAttempt || localNewsExpansion) && expandGateResult.passed) {
         let expandFactOk = true;
         let expandFactIssues = null;
         try {

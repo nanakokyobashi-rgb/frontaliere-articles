@@ -137,7 +137,14 @@ test('the flag comes from the same local-news predicate as the prompt, and is dr
   const step = SRC.slice(SRC.indexOf('// Step 3d: Enforce CTA / internal links (all 4 locales)'));
   assert.match(step.slice(0, 1200), /value: IS_FRONTALIERE && isLocalNewsWithoutFrontaliereAngle\(pageContent\),/);
   assert.match(step.slice(0, 1400), /validateAndEnforceCTA\(data\);\n\s+enforceStrongInternalLinks\(data\);\n\s+delete data\._localNewsSource;/);
-  assert.match(SRC, /localNews: IS_FRONTALIERE && isLocalNewsWithoutFrontaliereAngle\(pageContent\),/);
+  assert.match(SRC, /const localNewsExpansion = IS_FRONTALIERE && isLocalNewsWithoutFrontaliereAngle\(pageContent\);\n\s+data = await expandShortItalianContent\(data, adaptiveMinWords, \{\n\s+boundToText: isStatsBfsSource,\n\s+localNews: localNewsExpansion,/);
+});
+
+test('the expansion of a local story passes the fact-check even on the last attempt', () => {
+  // Fourth review of PR #1871: the expansion is fact-checked only before the
+  // last attempt, and a local story expanded there reached the corpus with no
+  // check against invented facts.
+  assert.match(SRC, /if \(\(!isLastAttempt \|\| localNewsExpansion\) && expandGateResult\.passed\) \{\n\s+let expandFactOk = true;/);
 });
 
 test('the pre-spend classifier admits the same local news', () => {

@@ -197,10 +197,19 @@ test('② le tre reti di sicurezza dell espansione restano tutte al loro posto',
   assert.match(body, /const expandGateResult = run(?:Article)?FactualityGates\(\{/);
 });
 
-test('② l espansione ANTICIPATA ripassa il fact-check; quella di ultima spiaggia no', () => {
+test('② l espansione ANTICIPATA ripassa il fact-check; quella di ultima spiaggia no, salvo la cronaca locale', () => {
   const gen = extractBlock('async function generateAndValidateArticle(');
   const body = gen.text;
-  const guard = 'if (!isLastAttempt && expandGateResult.passed) {';
+  // La cronaca locale senza angolo frontalieri (PR #1871) ripassa anche
+  // sull'ultima spiaggia: prima di quella PR non si pubblicava, quindi nessun
+  // articolo di oggi va perso. Per ogni altro articolo la condizione resta
+  // quella di prima: `localNewsExpansion` e' il solo predicato della cronaca.
+  const guard = 'if ((!isLastAttempt || localNewsExpansion) && expandGateResult.passed) {';
+  assert.match(
+    body,
+    /const localNewsExpansion = IS_FRONTALIERE && isLocalNewsWithoutFrontaliereAngle\(pageContent\);/,
+    'l eccezione all ultima spiaggia deve valere per la sola cronaca locale',
+  );
   const i = body.indexOf(guard);
   assert.notEqual(
     i, -1,

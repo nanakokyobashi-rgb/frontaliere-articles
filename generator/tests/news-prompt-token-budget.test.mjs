@@ -391,8 +391,32 @@ test('cronaca locale senza angolo frontaliere: niente sei termini obbligatori, e
   assert.doesNotMatch(local.prompt, /LINK INTERNI — sintassi ESCLUSIVA.*MINIMO 3/s);
   assert.doesNotMatch(local.prompt, /Azione: procedura step-by-step, scadenze, strumenti \+ CTA finale/);
   assert.ok(local.estTokens <= PROMPT_TOKEN_CEILING, `prompt cronaca a ${local.estTokens} token`);
+  // Review di PR #1871: nessuna lunghezza fissa per campo nello schema locale,
+  // e su una fonte corta il minimo per campo segue il totale richiesto.
+  assert.doesNotMatch(local.prompt, /"body[123]": "[^"]*300-400 parole/);
+  const shortLocal = assemble({
+    pageContent: CRONACA.slice(0, 900),
+    url: 'https://www.tio.ch/ticino/cronaca/1812399/rapina-gioielleria-lugano',
+    IS_FRONTALIERE: true,
+    SECTION_NAME: 'frontaliere',
+    sourceContext: {
+      headline: 'Rapina in gioielleria a Lugano, due arresti',
+      relatedHeadlines: [],
+      _generationAttempt: 2,
+      _generationAttemptMax: 6,
+      _minItalianWords: 400,
+      _primaryLocale: 'it',
+    },
+  });
+  // Il minimo di parole viaggia nel messaggio utente, non in `prompt`.
+  const userText = (built) => built.llmMessages[built.llmMessages.length - 1].content;
+  assert.match(userText(shortLocal), /MUST total ≥400 words/);
+  assert.match(userText(shortLocal), /EACH body field \(body1, body2, body3\) MUST be at least 134 words individually\. Target 184-234 words each\./);
+  assert.match(userText(shortLocal), /Each body: 184-284 words\./);
+  assert.doesNotMatch(userText(shortLocal), /at least 300 words individually/);
   // Una notizia frontaliere vera resta sul ramo storico.
   const news = newsPrompt();
+  assert.match(userText(news), /EACH body field \(body1, body2, body3\) MUST be at least 300 words individually\. Target 350-400 words each\./);
   assert.equal(isLocalNewsWithoutFrontaliereAngle(NEWS_PAGE_CONTENT), false);
   assert.match(news.prompt, /Almeno 6 dei seguenti termini DEVONO comparire/);
   assert.match(news.prompt, /FRONTALIERI AL CENTRO/);
