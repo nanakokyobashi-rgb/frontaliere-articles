@@ -6344,15 +6344,16 @@ function sleep(ms) {
  */
 export function stripThinkTags(text) {
   if (!text) return text;
-  const withoutBlocks = text.replace(/<think>[\s\S]*?<\/think>\s*/g, '');
+  const withoutBlocks = text.replace(/<think>[\s\S]*?<\/think>\s*/gi, '');
   // Reasoning templates that put the opening tag in the prompt (Nemotron,
   // Qwen3) return the chain of thought with only the CLOSING tag. The pair
   // regex above cannot see it, so the reasoning reached the caller in front
   // of the answer: a fact-check reply became prose, then "risposta non JSON"
   // (run 36096755072). Everything up to the last orphan `</think>` is
-  // reasoning; no valid answer of ours contains the tag.
-  const orphanClose = withoutBlocks.lastIndexOf('</think>');
-  const answer = orphanClose === -1 ? withoutBlocks : withoutBlocks.slice(orphanClose + '</think>'.length);
+  // reasoning; no valid answer of ours contains the tag. Any case: a
+  // provider that upper-cases the tag must not turn a good reply into prose.
+  const orphanClose = [...withoutBlocks.matchAll(/<\/think>/gi)].at(-1);
+  const answer = orphanClose ? withoutBlocks.slice(orphanClose.index + orphanClose[0].length) : withoutBlocks;
   return answer.trim();
 }
 

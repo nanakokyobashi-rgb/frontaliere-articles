@@ -5800,9 +5800,17 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
   // ALL models have exhausted their per-model retries.
   const FACTCHECK_429_BACKOFF_CAP_MS = 30_000;
   let fcLastRejectMsgs = [];
-  for (let fcAttempt = 1; fcAttempt <= FACTCHECK_INFRA_RETRIES && modelResults.length === 0; fcAttempt++) {
+  // True when an attempt's two verifiers collapsed into one model and no
+  // independent second opinion came back: that attempt holds one opinion where
+  // the consensus needs two, so it is retried like a verifier outage and, if
+  // the second opinion never arrives, fails closed like one (review of #1848).
+  // A verifier that plainly failed still leaves a single-model verdict, as
+  // before: that is the degraded path the rules below already weigh.
+  let missingSecondOpinion = false;
+  for (let fcAttempt = 1; fcAttempt <= FACTCHECK_INFRA_RETRIES && (modelResults.length === 0 || missingSecondOpinion); fcAttempt++) {
     if (fcAttempt > 1) {
-      console.error(`  🔁 Fact-check: nessun verdetto al tentativo ${fcAttempt - 1} (checker giù/JSON invalido) — ri-eseguo solo la verifica (${fcAttempt}/${FACTCHECK_INFRA_RETRIES})...`);
+      const why = missingSecondOpinion ? 'un solo parere indipendente' : 'nessun verdetto';
+      console.error(`  🔁 Fact-check: ${why} al tentativo ${fcAttempt - 1} (checker giù/JSON invalido/stesso modello) — ri-eseguo solo la verifica (${fcAttempt}/${FACTCHECK_INFRA_RETRIES})...`);
       // If the previous attempt failed with 429 rate-limit errors, a 1500ms
       // wait won't clear the limit — read retry-after from the error body when
       // present, otherwise fall back to 10s. Always cap at 30s to avoid stall.
@@ -5820,6 +5828,10 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
       await new Promise(r => setTimeout(r, backoffMs));
     }
     fcLastRejectMsgs = [];
+    // Each attempt starts from zero votes: a lone opinion kept from the
+    // previous one could be counted again next to a fresh copy of itself.
+    modelResults.length = 0;
+    missingSecondOpinion = false;
 
     // Query up to 2 models in parallel for consensus
     const modelsToQuery = verificationModels.slice(0, 2);
@@ -5863,6 +5875,10 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
         fcLastRejectMsgs.push(err.message || '');
         console.error(`  ⚠️  LLM fact-check secondo parere (${next}): ${err.message}`);
       }
+      if (modelResults.length < 2) {
+        missingSecondOpinion = true;
+        console.error(`  ⚠️  LLM fact-check: un solo parere indipendente (${modelResults[0]?.servedBy}) — non è un consenso, non lo conto`);
+      }
     }
 
     // If both primary models failed, try fallback
@@ -5877,7 +5893,7 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     }
   }
 
-  if (modelResults.length === 0) {
+  if (modelResults.length === 0 || missingSecondOpinion) {
     // 2026-07-01 (#3138 follow-up) made this fail OPEN: on pure verifier-infra
     // unavailability it returned `passed: true` so a possibly-good article was
     // published rather than discarded, on the reasoning that prompt-level
@@ -5893,12 +5909,21 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     // Fail CLOSED. The deterministic gates in article-factuality-gates.mjs
     // still run — they need no model and cannot be taken down — so an outage
     // degrades verification depth without ever publishing something unchecked.
-    console.error('  🚫 LLM fact-check: TUTTI i modelli di verifica hanno fallito (rate-limit/infra) — articolo SCARTATO, mai pubblicato non verificato');
+    //
+    // Same for an article whose two verifiers kept collapsing into one model:
+    // one opinion counted twice is not a verification either.
+    if (missingSecondOpinion) {
+      console.error('  🚫 LLM fact-check: le verifiche sono state servite da un solo modello, nessun secondo parere indipendente — articolo SCARTATO, mai pubblicato non verificato');
+    } else {
+      console.error('  🚫 LLM fact-check: TUTTI i modelli di verifica hanno fallito (rate-limit/infra) — articolo SCARTATO, mai pubblicato non verificato');
+    }
     return {
       passed: false,
       issues: [{
         claim: '(verifica non eseguita)',
-        reason: 'Tutti i modelli di verifica non hanno prodotto un verdetto (rate-limit/infra) dopo '
+        reason: (missingSecondOpinion
+          ? 'Le verifiche sono state servite da un solo modello e nessun secondo parere indipendente è arrivato dopo '
+          : 'Tutti i modelli di verifica non hanno prodotto un verdetto (rate-limit/infra) dopo ')
           + `${FACTCHECK_INFRA_RETRIES} tentativi con backoff — l'articolo non è stato verificato`,
         severity: 'critical',
         category: 'infra',

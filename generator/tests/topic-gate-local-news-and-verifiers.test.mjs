@@ -98,6 +98,22 @@ test('the consensus counts one vote per model that answered, and seeks a second 
   assert.match(line, /excludeModels: opts\.excludeModels/);
 });
 
+test('two verifiers collapsed into one model with no second opinion are retried, then fail closed', () => {
+  // Second review of PR #1848: after dropping the duplicate, a failed extra
+  // call left one vote and the outer loop (which only retried on zero votes)
+  // let a single PASS through on the very path meant to guarantee two.
+  const start = SRC.indexOf('let missingSecondOpinion = false;');
+  assert.notEqual(start, -1, 'stato del secondo parere mancante sparito');
+  const region = SRC.slice(start, SRC.indexOf('// ── Drop verdicts the source itself refutes ──', start));
+  assert.match(region, /fcAttempt <= FACTCHECK_INFRA_RETRIES && \(modelResults\.length === 0 \|\| missingSecondOpinion\)/);
+  assert.match(region, /modelResults\.length = 0;\n\s+missingSecondOpinion = false;/, 'ogni tentativo deve ripartire da zero voti');
+  assert.match(region, /if \(modelResults\.length < 2\) \{\n\s+missingSecondOpinion = true;/);
+  assert.match(region, /if \(modelResults\.length === 0 \|\| missingSecondOpinion\) \{/, 'il secondo parere mancante deve chiudere come un guasto dei verificatori');
+  const failClosed = region.slice(region.indexOf('if (modelResults.length === 0 || missingSecondOpinion) {'));
+  assert.match(failClosed, /passed: false,/);
+  assert.match(failClosed, /unverified: true,/);
+});
+
 test('the served model survives a cache hit, and the local guard checks it', () => {
   const fn = SRC.slice(SRC.indexOf('async function _runSingleFactCheck('), SRC.indexOf('// assertNoFabricatedStatistics() REMOVED'));
   assert.match(fn, /if \(servedBy === 'cache'\) servedBy = _factCheckServedBy\.get\(servedMemoKey\) \|\| null;/);

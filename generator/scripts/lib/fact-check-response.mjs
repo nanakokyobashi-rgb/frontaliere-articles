@@ -17,19 +17,29 @@
 const VERDICTS = new Set(['PASS', 'FAIL']);
 
 /**
- * Every balanced `{…}` span in `text`, in order of appearance, honouring
- * string literals so a brace inside a quoted claim does not close the object.
- * Lazy: the caller stops at the first span that carries a verdict, so a
- * normal reply costs one scan, not one per brace.
+ * The root-level balanced `{…}` spans of `text`, in order of appearance,
+ * honouring string literals so a brace inside a quoted claim does not close
+ * the object.
+ *
+ * Root-level only: an object nested inside another is never a candidate of
+ * its own, so `{"result": {"verdict": "PASS"}}` does not yield the inner
+ * verdict (review of PR #1848). A brace that never closes ends the scan:
+ * everything after it sits inside that brace — typically a reply cut off at
+ * maxTokens, e.g. `{"analisi": {"verdict": "PASS"}, "verdict": "FAIL", …` —
+ * and reading an inner object as the answer would take a nested value for
+ * the verdict. Fail-closed: no candidate, no vote. Each character is visited
+ * once, so a brace-heavy reply costs one linear pass.
  *
  * @param {string} text
  * @returns {Generator<string>}
  */
-function* balancedObjectSpans(text) {
-  for (let start = text.indexOf('{'); start !== -1; start = text.indexOf('{', start + 1)) {
+function* rootObjectSpans(text) {
+  let start = text.indexOf('{');
+  while (start !== -1) {
     let depth = 0;
     let inString = false;
     let escaped = false;
+    let end = -1;
     for (let i = start; i < text.length; i++) {
       const ch = text[i];
       if (inString) {
@@ -43,11 +53,14 @@ function* balancedObjectSpans(text) {
       else if (ch === '}') {
         depth--;
         if (depth === 0) {
-          yield text.slice(start, i + 1);
+          end = i;
           break;
         }
       }
     }
+    if (end === -1) return;
+    yield text.slice(start, end + 1);
+    start = text.indexOf('{', end + 1);
   }
 }
 
@@ -70,10 +83,11 @@ function isFactCheckVerdict(parsed) {
 
 /**
  * Extract the fact-check verdict object from a raw model reply: the first
- * balanced object that parses and has the verdict shape above.
+ * root-level object that parses and has the verdict shape above.
  *
- * `no-json`: no brace at all. `invalid-json`: braces, but nothing parses.
- * `no-verdict`: JSON parses, but no object carries a PASS/FAIL verdict.
+ * `no-json`: no brace at all. `invalid-json`: braces, but nothing parses
+ * (a brace that never closes included). `no-verdict`: JSON parses, but no
+ * root-level object carries a PASS/FAIL verdict.
  *
  * @param {string} raw
  * @returns {{ result: object|null, error: null|'no-json'|'invalid-json'|'no-verdict' }}
@@ -82,7 +96,7 @@ export function extractFactCheckJson(raw) {
   const text = typeof raw === 'string' ? raw : '';
   let sawSpan = false;
   let sawParsed = false;
-  for (const span of balancedObjectSpans(text)) {
+  for (const span of rootObjectSpans(text)) {
     sawSpan = true;
     let parsed;
     try {
@@ -133,7 +147,9 @@ export function addIndependentVote(votes, requested, value) {
  * @returns {string}
  */
 export function factCheckRawSnippet(raw, edge = 120) {
-  const text = (typeof raw === 'string' ? raw : '').replace(/\s+/g, ' ').trim();
+  // Control characters (ANSI escapes included) become spaces: the snippet is
+  // one log line, whatever the provider sent.
+  const text = (typeof raw === 'string' ? raw : '').replace(/[\u0000-\u001f\u007f-\u009f]/g, ' ').replace(/\s+/g, ' ').trim();
   if (!text) return '<vuota>';
   if (text.length <= edge * 2 + 5) return text;
   return `${text.slice(0, edge)} … ${text.slice(-edge)} (${text.length} char)`;

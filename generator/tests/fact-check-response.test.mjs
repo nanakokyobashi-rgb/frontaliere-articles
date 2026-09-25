@@ -70,6 +70,31 @@ test('JSON without a PASS/FAIL verdict is not a vote', () => {
   assert.deepEqual(extractFactCheckJson('{ "verdict": "PASS|FAIL", "confidence": 0.0, "issues": [] }'), noVerdict);
 });
 
+test('a verdict nested inside another object is not a top-level verdict', () => {
+  // Second review of PR #1848: every balanced span used to be a candidate, so
+  // once the outer object failed the check its inner object was accepted.
+  assert.deepEqual(extractFactCheckJson('{"result": {"verdict": "PASS", "issues": []}}'), { result: null, error: 'no-verdict' });
+  // The real answer is the outer FAIL; the nested PASS must never stand in for it.
+  const both = { analisi: { verdict: 'PASS', issues: [] }, verdict: 'FAIL', confidence: 0.9, issues: [] };
+  assert.equal(extractFactCheckJson(JSON.stringify(both)).result.verdict, 'FAIL');
+});
+
+test('a reply cut off inside its object yields nothing, not the object nested in it', () => {
+  const truncated = '{"analisi": {"verdict": "PASS", "issues": []}, "verdict": "FAIL", "issues": [{"claim": "la data';
+  assert.deepEqual(extractFactCheckJson(truncated), { result: null, error: 'invalid-json' });
+  // Same for an unclosed brace in prose ahead of the answer: fail-closed.
+  assert.deepEqual(extractFactCheckJson(`Nota { aperta\n${JSON.stringify(VERDICT)}`), { result: null, error: 'invalid-json' });
+});
+
+test('a brace-heavy reply is scanned in one pass', () => {
+  // One root object holding 20k nested braces: the old scan restarted from
+  // every `{` and re-read the same suffix each time.
+  const deep = `${'{"a":'.repeat(20_000)}1${'}'.repeat(20_000)}`;
+  const started = process.hrtime.bigint();
+  assert.equal(extractFactCheckJson(deep).result, null);
+  assert.ok(Number(process.hrtime.bigint() - started) / 1e6 < 2_000, 'scansione non lineare');
+});
+
 test('the verdict is read in any case, and a malformed object does not hide a valid one after it', () => {
   assert.equal(extractFactCheckJson('{"verdict": "fail", "issues": []}').result.verdict, 'fail');
   const raw = `{"verdict": "PASS", "issues": "nessuno"}\n${JSON.stringify(VERDICT)}`;
@@ -113,6 +138,11 @@ test('paired <think> blocks are still stripped, and an answer without tags is un
   assert.equal(stripThinkTags(JSON.stringify(VERDICT)), JSON.stringify(VERDICT));
 });
 
+test('the reasoning tags are stripped in any case', () => {
+  assert.equal(stripThinkTags(`ragiono ancora</THINK>\n${JSON.stringify(VERDICT)}`), JSON.stringify(VERDICT));
+  assert.equal(stripThinkTags(`<Think>ragiono</Think>\n${JSON.stringify(VERDICT)}`), JSON.stringify(VERDICT));
+});
+
 test('the log snippet shows head and tail of a long reply, on one line', () => {
   const long = `inizio ${'x'.repeat(500)}\n fine`;
   const snippet = factCheckRawSnippet(long);
@@ -121,4 +151,10 @@ test('the log snippet shows head and tail of a long reply, on one line', () => {
   assert.ok(snippet.endsWith(`(${long.replace(/\s+/g, ' ').trim().length} char)`));
   assert.ok(!snippet.includes('\n'));
   assert.equal(factCheckRawSnippet(''), '<vuota>');
+});
+
+test('the log snippet carries no control characters', () => {
+  const snippet = factCheckRawSnippet('\u001b[2Jrisposta\u001b[31m rossa\r\u0007fine\u0085');
+  assert.doesNotMatch(snippet, /[\u0000-\u001f\u007f-\u009f]/);
+  assert.equal(snippet, '[2Jrisposta [31m rossa fine');
 });
