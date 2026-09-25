@@ -217,7 +217,20 @@ function workflowRunIdentity(detailsUrl, repository) {
     return null;
   }
   if (url.protocol !== 'https:' || url.hostname !== 'github.com') return null;
-  const parts = url.pathname.split('/').filter(Boolean);
+  // The WHATWG parser normalizes before we read the path: dot-segments (also
+  // percent-encoded `%2e%2e`) are resolved, tab/newline are stripped, and
+  // userinfo/port are accepted. The parsed run id can then differ from the
+  // text GitHub stored, so a non-canonical raw form has no workflow identity
+  // (fail-closed). Query and fragment (`?attempt=1#summary`, `?pr=N`) are
+  // real Actions shapes and stay accepted. Same rule as `parseActionsJobUrl`
+  // in native-automerge-gate.mjs; generator/tests/actions-details-url-canonical.test.mjs
+  // runs one variant table against both.
+  if (/\s/.test(detailsUrl)
+      || detailsUrl.split(/[?#]/, 1)[0] !== `https://github.com${url.pathname}`) {
+    return null;
+  }
+  const parts = url.pathname.split('/');
+  parts.shift();
   if (parts.length !== 7 || `${parts[0]}/${parts[1]}` !== repository
       || parts[2] !== 'actions' || parts[3] !== 'runs' || parts[5] !== 'job'
       || !/^[1-9]\d*$/.test(parts[4]) || !/^[1-9]\d*$/.test(parts[6])) {
@@ -413,6 +426,12 @@ export function exactCheckRunSnapshot(pages, headSha, repository = null) {
             // verified attempt.  Do not let workflow-run ID turn a partial
             // generation record into a silent stale/newer choice.
             return deny(`check-run ${run.name} con attempt timestamped parziale`);
+          } else if ((candidate.workflowRunId === null) !== (previous.workflowRunId === null)) {
+            // Same rule for the workflow-run identity: a tie between a record
+            // correlated to an Actions run and one without that identity mixes
+            // two API shapes. Ordering them by attempt would pick a generation
+            // the payload cannot prove (FU-2026-09-22-003).
+            return deny(`check-run ${run.name} con identità workflow-run timestamped parziale`);
           } else if (candidate.runAttempt !== previous.runAttempt
               && candidate.runAttempt !== 0 && previous.runAttempt !== 0) {
             newer = candidate.runAttempt > previous.runAttempt;

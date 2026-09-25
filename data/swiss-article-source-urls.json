@@ -1,44 +1,4 @@
 {
-  "https://www.tio.ch/ticino/attualita/1945006/potrebbe-viticoltori-siccita-qualita-vendemmia-uve-mercato-emergenza-messa": {
-    "articleId": "viticoltura-ticino-2026-sfide",
-    "ts": "2026-08-20T14:19:34.421Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/monopattini-elettrici%2c-casco-obbligatorio-in-futuro%3f/91926470": {
-    "articleId": "monopattini-obbligo-casco",
-    "ts": "2026-08-20T14:44:15.766Z",
-    "keyForm": 2
-  },
-  "https://www.rsi.ch/s/4001799": {
-    "articleId": "svizzera-cina-accordo-libero-scambio",
-    "ts": "2026-08-20T15:30:19.568Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/economia/1945082/cina-esportazioni-dazi-svizzera": {
-    "articleId": "svizzera-cina-dazi-export",
-    "ts": "2026-08-20T16:20:14.907Z",
-    "keyForm": 2
-  },
-  "https://www.rsi.ch/s/4001205": {
-    "articleId": "monopattini-casco-sicurezza",
-    "ts": "2026-08-20T17:02:35.709Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/attualita/1945111/croce-rossa-svizzera-nome-uso-neutralita-azione-campagna-legale": {
-    "articleId": "croce-rossa-azione-legale-nome",
-    "ts": "2026-08-20T18:09:47.222Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/economia/1945097/costi-svizzera-costruzione-reattori-rapporto-nucleare-miliardi-franchi-nuovo": {
-    "articleId": "centrale-nucleare-costi-14-43-miliardi",
-    "ts": "2026-08-20T23:22:00.482Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/voto-27-settembre%3a-neutralit%c3%a0-verso-no%2c-alimentazione-pi%c3%b9-tirata/91931497": {
-    "articleId": "voto-27-settembre-neutralita",
-    "ts": "2026-08-21T06:03:50.509Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1945207/fermacell-holcim-accordo-gruppo-primo": {
     "articleId": "holcim-acquista-fermacell",
     "ts": "2026-08-21T06:35:01.282Z",
@@ -2497,6 +2457,46 @@
   "https://www.tio.ch/svizzera/economia/1952414/capitale-approva-bns-requisiti-ubs": {
     "articleId": "ubs-capitale-90-bns",
     "ts": "2026-09-24T20:09:09.369Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1952411/mozione-manifestazioni-nazionale-organizzatori-disordini-stati": {
+    "articleId": "mozione-costi-manifestazioni-stati",
+    "ts": "2026-09-24T21:22:12.848Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/bns-lascia-tasso-guida-allo-0%2c0%25/92111318": {
+    "articleId": "bns-tasso-guida-zero-2026",
+    "ts": "2026-09-24T22:00:36.109Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4102957": {
+    "articleId": "turismo-agosto-ospiti-estero",
+    "ts": "2026-09-24T22:53:55.016Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1952370/salasso-alla-pompa-dopo-il-diesel-ora-tocchera-alla-benzina": {
+    "articleId": "salasso-alla-pompa-benzina",
+    "ts": "2026-09-25T01:29:16.672Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1952394/made-europe-switzerld-ministri-industria": {
+    "articleId": "made-in-europe-svizzera",
+    "ts": "2026-09-25T02:02:09.100Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1952348/iniziativa-sulla-neutralita-iniziativa-sull-alimentazione-come-avete-votato": {
+    "articleId": "urne-due-iniziative-2026",
+    "ts": "2026-09-25T03:15:17.893Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/gk9oevj1cu2z": {
+    "articleId": "conferenza-protezione-popolazione-berna",
+    "ts": "2026-09-25T04:12:08.523Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/ohtzzau7ift5": {
+    "articleId": "lumpy-skin-disease-fine-vaccinazione",
+    "ts": "2026-09-25T04:56:43.757Z",
     "keyForm": 2
   }
 }

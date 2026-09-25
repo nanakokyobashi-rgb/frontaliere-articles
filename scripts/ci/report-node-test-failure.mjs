@@ -17,16 +17,17 @@ function readReport(file) {
   }
 }
 
-function gh(args) {
+function runGh(args) {
   try {
-    execFileSync('gh', args, {
+    const stdout = execFileSync('gh', args, {
       encoding: 'utf8',
       timeout: 120_000,
-      stdio: ['ignore', 'pipe', 'inherit'],
+      stdio: ['ignore', 'pipe', 'pipe'],
     });
-    return true;
-  } catch {
-    return false;
+    return { ok: true, stdout };
+  } catch (err) {
+    const reason = String(err?.stderr || err?.message || 'errore sconosciuto').trim().split('\n')[0];
+    return { ok: false, error: reason || 'errore sconosciuto' };
   }
 }
 
@@ -93,14 +94,24 @@ function publishComment(repo, prNumber, body) {
   try { comments = JSON.parse(raw); } catch { /* best-effort: create a new comment */ }
   const previous = comments.find((comment) => String(comment.body || '').includes(MARKER));
   if (previous?.id) {
-    return gh([
+    return runGh([
       'api',
       '--method', 'PATCH',
       `repos/${repo}/issues/comments/${previous.id}`,
       '-f', `body=${body}`,
     ]);
   }
-  return gh(['pr', 'comment', prNumber, '--repo', repo, '--body', body]);
+  return runGh(['pr', 'comment', prNumber, '--repo', repo, '--body', body]);
+}
+
+function writeStepSummary(body) {
+  const summaryPath = process.env.GITHUB_STEP_SUMMARY || '';
+  if (!summaryPath) return;
+  try {
+    fs.appendFileSync(summaryPath, `\n${body}\n`);
+  } catch (err) {
+    console.log(`::warning title=node:test failure report::Impossibile scrivere GITHUB_STEP_SUMMARY: ${String(err?.message || err)}`);
+  }
 }
 
 function main() {
@@ -116,8 +127,13 @@ function main() {
     runId: process.env.RUN_ID || '',
     headSha: process.env.HEAD_SHA || '',
   });
-  const posted = publishComment(repo, prNumber, body);
-  console.log(posted ? `Commento failure node:test pubblicato/aggiornato sulla PR #${prNumber}.` : 'Impossibile pubblicare il commento failure node:test (best-effort).');
+  const result = publishComment(repo, prNumber, body);
+  if (result.ok) {
+    console.log(`Commento failure node:test pubblicato/aggiornato sulla PR #${prNumber}.`);
+    return;
+  }
+  console.log(`::warning title=node:test failure report::Impossibile pubblicare il commento sticky node:test sulla PR #${prNumber} (repo ${repo}): ${result.error}`);
+  writeStepSummary(body);
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === path.resolve(new URL(import.meta.url).pathname)) main();

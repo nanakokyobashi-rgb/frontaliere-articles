@@ -277,8 +277,16 @@ export function parseActionsJobUrl(value, repo) {
     return null;
   }
   if (url.protocol !== 'https:' || url.hostname !== 'github.com') return null;
+  // Canonical raw form only: `new URL` resolves dot-segments (also `%2e%2e`),
+  // strips tab/newline and accepts userinfo/port, so the parsed run id could
+  // differ from the stored text. Query/fragment stay accepted. Same rule as
+  // `workflowRunIdentity` in native-automerge-sweep-policy.mjs, tied by
+  // generator/tests/actions-details-url-canonical.test.mjs.
+  if (/\s/.test(value) || value.split(/[?#]/, 1)[0] !== `https://github.com${url.pathname}`) {
+    return null;
+  }
   const match = url.pathname.match(
-    /^\/([^/]+\/[^/]+)\/actions\/runs\/(\d+)\/job\/(\d+)\/?$/u,
+    /^\/([^/]+\/[^/]+)\/actions\/runs\/([1-9]\d*)\/job\/([1-9]\d*)$/u,
   );
   if (!match || match[1] !== repo) return null;
   const runId = Number(match[2]);
