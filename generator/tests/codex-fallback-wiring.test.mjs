@@ -52,8 +52,34 @@ function stepBlock(lines, index) {
   return lines.slice(start, end).join('\n');
 }
 
+// Inventario esplicito dei chiamanti. Prima il totale si confrontava con
+// CONTRACT.artifactCount, che conta anche translate-pending (fuori dalla lane)
+// e tornava solo perche' generate-article ne compensava il posto: un consumer
+// aggiunto o tolto faceva scattare il controllo, ma senza dire quale. I crawler
+// group restano legati al contratto cross-repo, i produttori non-crawler sono
+// nominati uno per uno. batch-faq-articles e' entrato il 2026-09-25 per il tier
+// Codex della cascata di traduzione (free-translate.mjs). translate-pending ha
+// un test suo (sotto): e' generato dal sito e arriva col lockstep, quindi puo'
+// essere nell'uno o nell'altro stato mentre la modifica del sito viaggia.
+const CRAWLER_GROUP_WORKFLOW = /^\.github\/workflows\/crawler-group-\d+\.yml$/;
+const TRANSLATION_WORKFLOW = '.github/workflows/translate-pending.yml';
+const NON_CRAWLER_CONSUMERS = [
+  '.github/workflows/batch-faq-articles.yml',
+  '.github/workflows/generate-article.yml',
+];
+
 test('every active article CLI caller wires the OAuth Codex broker', () => {
-  assert.equal(workflowFiles.length, CONTRACT.artifactCount, 'caller inventory changed: review new/removed consumers');
+  const crawlerArtifacts = CONTRACT.artifacts.filter((artifact) => /^crawler-group-\d+\.yml$/.test(artifact.file)).length;
+  assert.equal(
+    workflowFiles.filter((rel) => CRAWLER_GROUP_WORKFLOW.test(rel)).length,
+    crawlerArtifacts,
+    'crawler caller inventory changed: review new/removed consumers',
+  );
+  assert.deepEqual(
+    workflowFiles.filter((rel) => !CRAWLER_GROUP_WORKFLOW.test(rel) && rel !== TRANSLATION_WORKFLOW).sort(),
+    NON_CRAWLER_CONSUMERS,
+    'caller inventory changed: review new/removed consumers',
+  );
   for (const rel of workflowFiles) {
     const source = read(rel);
     const lines = source.split('\n');
@@ -112,9 +138,42 @@ test('every active article CLI caller wires the OAuth Codex broker', () => {
     assert.match(cleanup, /--cleanup\s+--socket\s+"\$CODEX_AUTH_BROKER_SOCKET"/, `${rel}: cleanup command incomplete`);
     assert.equal((source.match(/CODEX_AUTH_JSON/g) ?? []).length, 1, `${rel}: raw Codex OAuth leaked beyond setup input`);
   }
-  const translationWorkflow = read('.github/workflows/translate-pending.yml');
-  assert.doesNotMatch(translationWorkflow, /setup-claude-haiku-fallback|CODEX_AUTH_BROKER_SOCKET/,
-    'translation must stay outside the Codex broker lane');
+});
+
+// Decisione del proprietario del 2026-09-25: «Per il translate pending aggiungi
+// codex ma dopo argos e i sistemi che non consumano quota». L'artifact e'
+// generato dal sito (translate-pending-logic.yml) e arriva col lockstep: prima
+// non tocca il broker, dopo lo usa solo cosi'. Mai a meta'.
+test('translate-pending: Codex solo dopo Argos, in coda alla cascata delle fasi 2d/2e', () => {
+  const source = read(TRANSLATION_WORKFLOW);
+  const lines = source.split('\n');
+  const setupIndex = lines.findIndex((line) => /^\s*-?\s*uses:\s*\.\/\.github\/actions\/setup-claude-haiku-fallback\s*$/.test(line));
+  if (setupIndex < 0) {
+    assert.doesNotMatch(source, /CODEX_AUTH_BROKER_SOCKET|FREE_TRANSLATE_CODEX_TIER/,
+      'without the broker setup no step may expect the Codex socket');
+    return;
+  }
+  const stepStart = (pattern) => lines.findIndex((line) => pattern.test(line));
+  const argosBulk = stepStart(/^\s*- name: "Phase 2a: .*Argos/);
+  const argosMopup = stepStart(/^\s*- name: "Phase 2c mop-up: .*Argos/);
+  assert.ok(argosBulk >= 0 && argosMopup >= 0, 'Argos phases not found');
+  assert.ok(setupIndex > argosBulk && setupIndex > argosMopup, 'the Codex broker must start after both Argos passes');
+  assert.match(stepBlock(lines, setupIndex), /broker_idle_ttl_ms:\s*"?(\d+)"?/);
+
+  const consumers = lines
+    .map((line, index) => /^\s+CODEX_AUTH_BROKER_SOCKET:/.test(line) ? stepBlock(lines, index) : null)
+    .filter((block) => block && !block.includes('- name: Cleanup Codex auth broker'));
+  assert.deepEqual(
+    consumers.map((block) => /- name: "?([^"\n]+)"?/.exec(block)?.[1]),
+    ['Phase 2d: Fix untranslated titles (free cascade)', 'Phase 2e: Fix untranslated descriptions (free cascade)'],
+    'only the post-Argos repair phases may receive the Codex socket',
+  );
+  for (const block of consumers) {
+    assert.match(block, /FREE_TRANSLATE_CODEX_TIER:\s*last/, 'Codex must sit at the end of the cascade');
+    assert.match(block, /FREE_TRANSLATE_CODEX_MAX_CALLS:\s*"?\d+"?/, 'per-run call budget missing');
+    assert.match(block, /FREE_TRANSLATE_CODEX_MAX_MS:\s*"?\d+"?/, 'per-run time budget missing');
+  }
+  assert.doesNotMatch(source, /^\s+AI_MODELS_PREFER:/m);
 });
 
 // Decisione del proprietario del 2026-09-24 («Disattiva haiku! Voglio solo
@@ -202,4 +261,27 @@ test('la preferenza Codex/Claude vale su ogni tentativo di generazione, non solo
   assert.ok(bodyCalls.length >= 5, `attese almeno 5 chiamate di generazione del corpo, trovate ${bodyCalls.length}`);
   const senzaGate = bodyCalls.filter((line) => !/prefer: \(?_preferActiveThisAttempt[^,]*\? PREFERRED_GENERATION_MODELS : undefined/.test(line));
   assert.deepEqual(senzaGate.map((line) => line.trim()), [], 'chiamate del corpo senza la preferenza Codex/Claude');
+});
+
+// Il TTL del broker e' di inattivita': si rinnova solo quando arriva una
+// richiesta. In batch-faq-articles il tier di traduzione Codex entra solo quando
+// DeepL e Azure finiscono, anche ore dopo l'avvio, e il secondo step parte dopo
+// il primo: con i 30 minuti di default il socket spariva prima e il tier si
+// saltava in silenzio (review Codex di #1846).
+test('batch-faq-articles tiene vivo il broker per tutta la durata del job', () => {
+  const workflow = read('.github/workflows/batch-faq-articles.yml');
+  const timeoutMinutes = Number(/^\s+timeout-minutes:\s*(\d+)\s*$/m.exec(workflow)?.[1]);
+  assert.ok(timeoutMinutes > 30, 'timeout del job non trovato');
+  const setupStart = workflow.indexOf(`uses: ${ACTION}`);
+  assert.ok(setupStart >= 0, 'setup del broker non trovato');
+  const setup = workflow.slice(setupStart, workflow.indexOf('\n      - ', setupStart));
+  const ttl = Number(/broker_idle_ttl_ms:\s*'(\d+)'/.exec(setup)?.[1]);
+  assert.ok(ttl >= timeoutMinutes * 60_000, `TTL ${ttl} ms sotto il timeout del job (${timeoutMinutes} min)`);
+  assert.ok(ttl <= 21_600_000, 'TTL oltre il tetto accettato dall\'action: tornerebbe al default');
+
+  const action = read('.github/actions/setup-claude-haiku-fallback/action.yml');
+  assert.match(action, /broker_idle_ttl_ms:\n\s+description:/);
+  assert.match(action, /BROKER_IDLE_TTL_MS: \$\{\{ inputs\.broker_idle_ttl_ms \}\}/);
+  assert.match(action, /--ttl-ms "\$broker_ttl_ms"/);
+  assert.doesNotMatch(action, /--ttl-ms 1800000/);
 });
