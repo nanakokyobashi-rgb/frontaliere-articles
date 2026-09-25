@@ -160,18 +160,30 @@ describe('la FAQ segnaposto TRADOTTA — cio\' che i letterali italiani non poss
   // vede e cosa no, invece di dire «non vede niente», che dal 2026-08-14 e'
   // falso — un test che afferma il falso e' come quello che codificava la
   // scappatoia: passa, e mente sul motivo.
+  //
+  // Dal 2026-09-24 `faq-numbered-label` copre anche l'etichetta numerata
+  // TRADOTTA (`FAQ_NUMBERED_LABEL_RX`): in en/fr le coppie 2 e 3 sono lo
+  // schema tradotto alla lettera («Frequently Asked Question 2?», «Foire aux
+  // questions 2 ?») e ora si vedono. In de il modello ha scritto `FAQ 2?`, che
+  // non e' l'etichetta tradotta ma un'abbreviazione: resta invisibile, quindi
+  // la premessa di `orphanFaqLocales` regge ancora, su una locale su tre.
+  const ATTESI = {
+    en: { reasons: ['source-echo-allcaps', 'faq-numbered-label', 'faq-numbered-label'], kept: undefined },
+    de: { reasons: ['source-echo-allcaps'], kept: 2 },
+    fr: { reasons: ['source-echo-allcaps', 'faq-numbered-label', 'faq-numbered-label'], kept: undefined },
+  };
   for (const [locale, pairs] of Object.entries(TRADOTTE)) {
-    it(`cleanFaqPairs vede SOLO la coppia col marcatore ALL-CAPS in '${locale}': le altre due restano invisibili`, () => {
+    it(`cleanFaqPairs in '${locale}': marcatore ALL-CAPS ed etichetta numerata tradotta, nient'altro`, () => {
       const { dropped, pairs: kept } = cleanFaqPairs(pairs, { dropShort: false });
       assert.deepEqual(
         dropped.map((d) => d.reason),
-        ['source-echo-allcaps'],
-        'la prima coppia va scartata per il marcatore nella risposta, e per quello soltanto',
+        ATTESI[locale].reasons,
+        'la prima coppia cade per il marcatore nella risposta; le altre solo se portano l\'etichetta numerata tradotta',
       );
       assert.equal(
         kept?.length,
-        2,
-        'le coppie 2 e 3 non hanno marcatore: nessun letterale italiano le vede, ed e\' questa la ragione per cui orphanFaqLocales esiste',
+        ATTESI[locale].kept,
+        'in de `FAQ 2?` non e\' un\'etichetta tradotta: nessun rilevatore la vede, ed e\' questa la ragione per cui orphanFaqLocales esiste',
       );
     });
   }
@@ -361,6 +373,28 @@ describe('etichette dello schema dentro il corpo — si tolgono, non si butta l\
     const { value, stripped } = stripFaqNumberedLabels('1. **Domanda frequente 1**: Quali sono i servizi inclusi negli spazi di coworking a Lugano?');
     assert.equal(stripped, 1);
     assert.equal(value, '1. Quali sono i servizi inclusi negli spazi di coworking a Lugano?');
+  });
+
+  it('la stessa etichetta numerata TRADOTTA, che la traduzione portava oltre il guard (coworking-spazi-lugano e cercare-lavoro-svizzera-estero-guida, en/de/fr)', () => {
+    // Verbatim da origin/main il 2026-09-24: l'`it` era gia' stato ripulito,
+    // le traduzioni no, perche' la regola numerata vedeva solo l'italiano.
+    const casi = [
+      ['1. **Häufig gestellte Frage 1**: Welche Dienstleistungen sind in Coworking Spaces in Lugano enthalten?', '1. Welche Dienstleistungen sind in Coworking Spaces in Lugano enthalten?'],
+      ['2. Frequently asked question 2: What are the Swiss rates and contributions for cross-border commuters?', '2. What are the Swiss rates and contributions for cross-border commuters?'],
+      ['### FAQ\n\nFrequently Asked Question 1: What are the steps to obtain a work permit in Switzerland?', '### FAQ\n\nWhat are the steps to obtain a work permit in Switzerland?'],
+      ['2. Question fréquemment posée 2 : Quels sont les tarifs et contributions suisses pour les navetteurs transfrontaliers ?', '2. Quels sont les tarifs et contributions suisses pour les navetteurs transfrontaliers ?'],
+      ['### FAQ\n\nFoire aux questions 1 : Quels sont les portails d’emploi les plus populaires en Suisse ?', '### FAQ\n\nQuels sont les portails d’emploi les plus populaires en Suisse ?'],
+    ];
+    for (const [input, expected] of casi) {
+      assert.deepEqual(findPromptPlaceholders(input).map((hit) => hit.rule), ['faq-numbered-label'], input);
+      assert.deepEqual(stripFaqNumberedLabels(input), { value: expected, stripped: 1 }, input);
+    }
+  });
+
+  it('una heading FAQ tradotta seguita da un elenco numerato NON e\' un\'etichetta (milionari-reddito-svizzera-2022.body3)', () => {
+    const body = '### Frequently Asked Questions\n\n1. Where can I find more information about taxes in Switzerland?';
+    assert.deepEqual(findPromptPlaceholders(body), []);
+    assert.deepEqual(stripFaqNumberedLabels(body), { value: body, stripped: 0 });
   });
 
   it('«- Domanda frequente 1: …» conserva lo spazio del bullet (violenza-sessuale-conseguenze-ticino.body3)', () => {

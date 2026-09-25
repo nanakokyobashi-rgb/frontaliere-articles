@@ -250,6 +250,26 @@ test('quando gli echi sono la maggioranza la sottrazione non ribalta il verdetto
   assert.equal(isLegitimateQuotaDeferral(quotaVera), true);
 });
 
+test('il guardrail degli echi scatta anche quando gli echi sono esattamente meta\' (#832 item 2, sito #9436)', () => {
+  // Gemello del caso che il sito ha aggiunto con la PR valerielinc-ops#9436 in
+  // `tests/roster-exhaustion-red.test.ts`. 53 echi su 106 righe: la
+  // sottrazione lascia 53 transitori su 53 netti (share 1,0) e concederebbe il
+  // differimento; il lordo e' pero' 53/106, un pareggio che non conferma la
+  // quota. Con `providerCooldownSkips > total` il guardrail restava spento
+  // alla parita' esatta: la sottrazione, che e' META' delle prove, ribaltava da
+  // sola il verdetto. `>=` la tratta come maggioranza non-minoritaria.
+  const err = conEchi({
+    transient: 53, persistent: 53, total: 106,
+    echi: { total: 53, transient: 0, persistent: 53 },
+  });
+  const s = quotaDeferralShare(err);
+  assert.equal(s.total, 53, 'premessa: le 53 righe di eco escono dal denominatore');
+  assert.equal(s.providerCooldownSkips, s.total, 'premessa: parita\' esatta, echi == righe rimaste');
+  assert.ok(s.share > s.required, `premessa: sul netto passerebbe (${s.share})`);
+  assert.equal(isLegitimateQuotaDeferral(err), false,
+    'alla parita\' la sottrazione non ribalta da sola il pareggio lordo 53/106');
+});
+
 test('senza il campo nuovo il verdetto e\' quello di oggi, byte per byte (#805)', () => {
   // Retro-compatibilita': un errore serializzato prima di #805, o un chiamante
   // che non popola il campo, non deve cambiare comportamento.

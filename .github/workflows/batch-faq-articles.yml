@@ -322,6 +322,22 @@ jobs:
           echo "::error::push failed after 3 attempts (git output above)"
           exit 1
 
+      # Una run che ha tentato lavoro FAQ e non ne ha prodotto NESSUNO non e'
+      # verde: e' lo stesso silenzio verde di #313 su generate-article. Il
+      # 2026-09-22 e il 2026-09-24 questo workflow e' uscito `success` con
+      # «Succeeded: 0 / Failed: 36» (DeepL e Azure esauriti, Google Cloud muto),
+      # e `scan-failed-runs.mjs`, che raccoglie solo le run `failure`, non aveva
+      # niente da raccogliere. La decisione e' `faqRunOutcome()` nello script;
+      # qui la si propaga, DOPO il commit, perche' fix-faq-locales e il push di
+      # cio' che e' riuscito non devono dipendere da questo verdetto.
+      - name: Fail when every attempted FAQ article failed
+        if: steps.mode.outputs.dry != 'true' && steps.faq.outputs.all_failed == 'true'
+        env:
+          FAQ_PROCESSED: ${{ steps.faq.outputs.processed }}
+        run: |
+          echo "::error::batch-faq: 0/${FAQ_PROCESSED} articoli riusciti. Il riepilogo della cascata nel log di «Run batch FAQ generation» dice quale tier manca (chiavi DeepL/Azure esaurite, rifiuti di Google Cloud)."
+          exit 1
+
       - name: Summary
         if: always()
         run: |
@@ -331,6 +347,7 @@ jobs:
             echo "- Limit: ${{ inputs.limit || '200' }}"
             echo "- Concurrency: ${{ inputs.concurrency || '1' }}"
             echo "- Skip translate: ${{ inputs.skip_translate || 'false' }}"
+            echo "- Articles succeeded: ${{ steps.faq.outputs.succeeded || '0' }}/${{ steps.faq.outputs.processed || '0' }}"
             echo "- Modified files: ${{ steps.count.outputs.modified_count || '0' }}"
             echo "- Target ref: ${{ github.ref_name }}"
           } >> "$GITHUB_STEP_SUMMARY"

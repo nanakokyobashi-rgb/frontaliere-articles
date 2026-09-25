@@ -8,6 +8,7 @@
  */
 
 import path from 'node:path';
+import { inspect } from 'node:util';
 
 const MAX_FAILURES = 50;
 const MAX_MESSAGE_LENGTH = 3000;
@@ -26,10 +27,42 @@ function relativeTestFile(file) {
   return relative || '(file non disponibile)';
 }
 
+// `node:test` avvolge ogni eccezione in un Error `ERR_TEST_FAILURE` il cui
+// stack e' solo `Error [ERR_TEST_FAILURE]: <messaggio>`: il file e la riga
+// dell'asserzione vivono nel `cause`. Profondita' limitata: un `cause` ciclico
+// non deve bloccare il reporter.
+const MAX_CAUSE_DEPTH = 3;
+
+function textField(value) {
+  return typeof value === 'string' ? value.trim() : '';
+}
+
+/**
+ * Descrizione leggibile di cio' che un test ha lanciato. Mai `String(error)`
+ * su un oggetto: un `details.error = {}` (o un valore lanciato che non e' un
+ * Error) diventerebbe `[object Object]`, che al lettore del commento sulla PR
+ * non dice ne' cosa e' fallito ne' dove.
+ */
+export function describeError(error, depth = 0) {
+  if (error === undefined || error === null) return 'errore senza messaggio nel report node:test';
+  if (typeof error === 'string') return error.trim() || 'errore con messaggio vuoto nel report node:test';
+  if (typeof error !== 'object' && typeof error !== 'function') {
+    return `valore non-Error lanciato (${typeof error}): ${inspect(error)}`;
+  }
+  if (error.code === 'ERR_TEST_FAILURE' && error.cause !== undefined && depth < MAX_CAUSE_DEPTH) {
+    return describeError(error.cause, depth + 1);
+  }
+  const stack = textField(error.stack);
+  if (stack) return stack;
+  const message = textField(error.message);
+  if (message) return message;
+  const kind = error.constructor?.name || 'Object';
+  const shape = inspect(error, { depth: 4, breakLength: Infinity, compact: 3 });
+  return `errore senza stack ne' message (${kind}): ${shape}`;
+}
+
 function errorMessage(error) {
-  if (!error) return 'errore senza messaggio nel report node:test';
-  if (typeof error === 'string') return trimMessage(error);
-  return trimMessage(error.stack || error.message || String(error));
+  return trimMessage(describeError(error));
 }
 
 export function normalizeFailure(data = {}) {

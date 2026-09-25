@@ -176,6 +176,8 @@ function runScan({
   prs,
   checks,
   reviews: revs,
+  // Risposta della SECONDA lettura delle review (#1762); assente = identica.
+  reviewsReread,
   comments: posted = [],
   fixerRuns = [],
   fixerRunsError = false,
@@ -200,6 +202,8 @@ function runScan({
     const fixPrs = path.join(dir, 'prs.json');
     const fixChecks = path.join(dir, 'checks.json');
     const fixReviews = path.join(dir, 'reviews.json');
+    const fixReviewsReread = path.join(dir, 'reviews-reread.json');
+    const fixReviewsReads = path.join(dir, 'reviews-reads');
     const fixComments = path.join(dir, 'comments.json');
     const fixFixerRuns = path.join(dir, 'fixer-runs.json');
     const fixFixerRunsError = path.join(dir, 'fixer-runs-error');
@@ -222,6 +226,8 @@ function runScan({
     writeFileSync(fixPrs, JSON.stringify(prs));
     writeFileSync(fixChecks, JSON.stringify(checks));
     writeFileSync(fixReviews, JSON.stringify(revs));
+    writeFileSync(fixReviewsReread, reviewsReread === undefined ? '' : JSON.stringify(reviewsReread));
+    writeFileSync(fixReviewsReads, '');
     // GitHub issue-comment responses always carry id/body/user.login. Keep
     // fixtures honest so the trusted helper can fail closed on malformed API
     // shapes instead of silently treating synthetic omissions as real data.
@@ -297,7 +303,15 @@ case "$sub" in
       */reviews*)
         if [[ "$(cat ${JSON.stringify(fixReviewsError)})" == "true" ]]; then exit 1; fi
         if [[ "$(cat ${JSON.stringify(fixReviewsMalformed)})" == "true" ]]; then printf 'not-json\\n'; exit 0; fi
-        cat ${JSON.stringify(fixReviews)} ;;
+        # Dalla seconda lettura in poi (la rilettura #1762) si serve
+        # \`reviewsReread\` quando il test lo fornisce: e' la dismissal o la
+        # review concorrente arrivata fra le due letture.
+        printf 'x' >> ${JSON.stringify(fixReviewsReads)}
+        if [ "$(wc -c < ${JSON.stringify(fixReviewsReads)})" -gt 1 ] && [ -s ${JSON.stringify(fixReviewsReread)} ]; then
+          cat ${JSON.stringify(fixReviewsReread)}
+        else
+          cat ${JSON.stringify(fixReviews)}
+        fi ;;
       */comments*)
         if [[ "$(cat ${JSON.stringify(fixCommentsError)})" == "true" ]]; then exit 1; fi
         if [[ "$(cat ${JSON.stringify(fixCommentsMalformed)})" == "true" ]]; then printf 'not-json\\n'; exit 0; fi
@@ -313,7 +327,9 @@ case "$sub" in
       */contents/scripts/ci/fixer-round-marker.mjs*)
         printf '%s\n' ${JSON.stringify(TRUSTED_MARKER_HELPER_B64)} ;;
       */pulls/*)
-        if [ "$jq" = '.body // ""' ]; then
+        if [ "$jq" = '.head.sha' ]; then
+          node -e 'const value=require(process.argv[1]); const pr=Array.isArray(value)?value[0]:value; process.stdout.write(String(pr?.head?.sha||"")+"\\n")' ${JSON.stringify(fixPrs)}
+        elif [ "$jq" = '.body // ""' ]; then
           node -e 'const fs=require("fs"); const value=require(process.argv[1]); const pr=Array.isArray(value)?value[0]:value; process.stdout.write(String(pr?.body||"")+"\\n")' ${JSON.stringify(fixPrs)}
         else
           node -e 'const fs=require("fs"); const value=require(process.argv[1]); process.stdout.write(JSON.stringify(Array.isArray(value)?value[0]:value)+"\\n")' ${JSON.stringify(fixPrs)}
@@ -1356,6 +1372,56 @@ test('E — 🔴 sulla HEAD senza run recente del fixer: dispatch della PR', opt
   assert.match(r.workflowRuns[0], /-f pr=901/);
   assert.deepEqual(r.reruns, [], `E non deve rilanciare tests: ${r.reruns.join(' | ')}`);
   assert.match(only(r), /class=E/);
+});
+
+// ── #1762: stato fresco e fail-closed prima di agire ────────────────────────
+//
+// Stesso scenario del caso E sopra (🔴 sulla HEAD, nessuna run del fixer: il
+// rescuer dispatcherebbe). Tre varianti non devono produrre NESSUNA mutation:
+// la review ritirata, lo stato fuori enum e la dismissal fra le due letture.
+
+const importantOnHead = (state = 'COMMENTED') => reviews({
+  commit: HEAD_SHA,
+  body: '🔴 **Important**: il fixer deve essere riattivato',
+}).map((r) => ({ ...r, state }));
+
+const assertNoMutation = (r, label) => {
+  assert.deepEqual(r.workflowRuns, [], `${label}: dispatch inatteso\n${r.stdout}`);
+  assert.deepEqual(r.comments, [], `${label}: commento inatteso\n${r.stdout}`);
+  assert.deepEqual(r.reruns, [], `${label}: rerun inatteso\n${r.stdout}`);
+};
+
+test('#1762 — una review DISMISSED non e\' un 🔴 azionabile: nessun dispatch', opts, () => {
+  const r = runScan({
+    prs: openPr(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: importantOnHead('DISMISSED'),
+    fixerRuns: [],
+  });
+  assert.deepEqual(r.workflowRuns, [], `dispatch su una review ritirata\n${r.stdout}`);
+});
+
+test('#1762 — stato review fuori enum: unavailable, log esplicito, nessuna mutation', opts, () => {
+  const r = runScan({
+    prs: openPr(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: importantOnHead('SUPERSEDED'),
+    fixerRuns: [],
+  });
+  assertNoMutation(r, 'stato ignoto');
+  assert.match(r.stdout, /stato review fuori enum/);
+});
+
+test('#1762 — dismissal concorrente fra le due letture: nessuna mutation', opts, () => {
+  const r = runScan({
+    prs: openPr(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: importantOnHead('COMMENTED'),
+    reviewsReread: importantOnHead('DISMISSED'),
+    fixerRuns: [],
+  });
+  assertNoMutation(r, 'dismissal concorrente');
+  assert.match(r.stdout, /cambiate fra due letture consecutive/);
 });
 
 test('E — una run del fixer già in volo sulla HEAD non viene duplicata', opts, () => {
