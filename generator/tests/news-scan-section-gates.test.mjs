@@ -50,7 +50,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { hasDomainAnchor } from '../scripts/lib/discovery/domainAnchor.mjs';
-import { countLocalNewsHits, isLocalNews } from '../scripts/lib/local-news.mjs';
+import { countLocalNewsHits, isInLocalNewsArea, isLocalNews } from '../scripts/lib/local-news.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
@@ -110,6 +110,7 @@ function loadGates(section) {
     'console',
     'isLocalNews',
     'countLocalNewsHits',
+    'isInLocalNewsArea',
     `${LEXICON_SRC}\n${FILTER_SRC}\n${PRIORITIZE_SRC}\nreturn {
        TOPICAL_KEYWORDS, SVIZZERA_TOPICAL_KEYWORDS, FRONTALIERI_KEYWORDS,
        FRONTALIERE_ADMISSION_KEYWORDS,
@@ -125,6 +126,7 @@ function loadGates(section) {
     { error: (...a) => logs.push(a.join(' ')) },
     isLocalNews,
     countLocalNewsHits,
+    isInLocalNewsArea,
   );
   return { ...api, logs, runReport };
 }
@@ -384,6 +386,21 @@ test('the same kinds of news outside the area stay out, whatever the anchor gate
 test('filterByAnchor on frontaliere admits an anchored festival headline in the area', () => {
   const festival = h('Ecco i vincitori di Open Doors 2026, tra fiere e rassegne culturali a Locarno');
   assert.deepEqual(FRONT.filterByAnchor([festival]), [festival]);
+});
+
+test('filterByAnchor on frontaliere anchors a Ticino place that only the BFS list knows', () => {
+  // Review of PR #1871: hasDomainAnchor does not know Cadenazzo or Pregassona
+  // so a local story named only by them died at the anchor drop.
+  const local = [
+    h('Incendio in un capannone a Cadenazzo, nessun ferito'),
+    h('Furto in un negozio di Pregassona, fermato un uomo'),
+  ];
+  for (const item of local) {
+    assert.equal(hasDomainAnchor(item.headline), false, `presupposto del test: ${item.headline}`);
+  }
+  assert.deepEqual(FRONT.filterByAnchor(local), local);
+  // The svizzera section keeps its own anchor gate.
+  assert.deepEqual(CH.filterByAnchor(local), []);
 });
 
 test('admission is unchanged on svizzera: no downstream density gate exists there for events/culture', () => {

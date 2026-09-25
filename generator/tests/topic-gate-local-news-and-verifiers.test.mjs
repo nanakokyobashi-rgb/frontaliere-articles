@@ -92,6 +92,54 @@ test('the post-generation density abort spares local news without a frontaliere 
   assert.match(SRC, /function isLocalNewsWithoutFrontaliereAngle\(text\) \{\n\s+return isLocalNews\(text\) && checkFrontaliereDensity\(text\)\.hits === 0;/);
 });
 
+// Review of PR #1871: past the density bypass, every frontaliere-only demand
+// needs a local branch too, or a robbery still gets a salary-calculator CTA
+// and a «Tool consigliati» block appended after generation.
+function ctaAndLinkEnforcers() {
+  const start = SRC.indexOf('const CTA_KEYWORDS_IT = [');
+  const end = SRC.indexOf('/** Lazy-loaded set of normalized existing IT blog titles', start);
+  assert.ok(start !== -1 && end > start, 'blocco CTA/link interni non trovato');
+  return new Function(
+    'bodyTextForQuality',
+    'collectBodySections',
+    `${SRC.slice(start, end)}\nreturn { validateAndEnforceCTA, enforceStrongInternalLinks };`,
+  )(
+    (content) => `${content.body1} ${content.body2} ${content.body3}`,
+    (content) => ({ body1: content.body1, body2: content.body2, body3: content.body3 }),
+  );
+}
+
+function article(localNews) {
+  const content = {};
+  for (const locale of ['it', 'en', 'de', 'fr']) {
+    content[locale] = { title: 'Rapina a Lugano', excerpt: '', body1: 'Fatti.', body2: 'Contesto.', body3: 'Seguito.' };
+  }
+  const data = { id: 'rapina-lugano', category: 'novita', content };
+  Object.defineProperty(data, '_localNewsSource', { value: localNews, configurable: true });
+  return data;
+}
+
+test('local news gets no frontaliere CTA and no tool block after generation', () => {
+  const { validateAndEnforceCTA, enforceStrongInternalLinks } = ctaAndLinkEnforcers();
+  const local = enforceStrongInternalLinks(validateAndEnforceCTA(article(true)));
+  for (const locale of ['it', 'en', 'de', 'fr']) {
+    assert.equal(local.content[locale].body2, 'Contesto.');
+    assert.equal(local.content[locale].body3, 'Seguito.');
+  }
+  // The canton guard snapshot is still taken before the early return.
+  assert.equal(typeof local._cantonGuardBodyBeforeCta, 'string');
+  const frontaliere = enforceStrongInternalLinks(validateAndEnforceCTA(article(false)));
+  assert.match(frontaliere.content.it.body3, /\(nav:[a-z-]+\)/);
+  assert.match(frontaliere.content.it.body2, /\(nav:[a-z-]+\)/);
+});
+
+test('the flag comes from the same local-news predicate as the prompt, and is dropped after use', () => {
+  const step = SRC.slice(SRC.indexOf('// Step 3d: Enforce CTA / internal links (all 4 locales)'));
+  assert.match(step.slice(0, 1200), /value: IS_FRONTALIERE && isLocalNewsWithoutFrontaliereAngle\(pageContent\),/);
+  assert.match(step.slice(0, 1400), /validateAndEnforceCTA\(data\);\n\s+enforceStrongInternalLinks\(data\);\n\s+delete data\._localNewsSource;/);
+  assert.match(SRC, /localNews: IS_FRONTALIERE && isLocalNewsWithoutFrontaliereAngle\(pageContent\),/);
+});
+
 test('the pre-spend classifier admits the same local news', () => {
   const start = SRC.indexOf('Sei un editor del sito frontaliereticino.ch');
   assert.notEqual(start, -1);

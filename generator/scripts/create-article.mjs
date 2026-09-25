@@ -170,7 +170,7 @@ import { stripVacuousFacts } from './lib/key-facts-specificity.mjs';
 import { checkCantonToponymConsistency } from './lib/cantone-toponimi-coerenza.mjs';
 import { tokenizeIt, jaccardSim, containmentSim, normalizeItWord, STOP_WORDS_IT } from './lib/it-text-similarity.mjs';
 import { articleEntities, commonEntityMinDf, corpusCommonEntities, distinctiveEntities } from './lib/dup-entities.mjs';
-import { countLocalNewsHits, isLocalNews } from './lib/local-news.mjs';
+import { countLocalNewsHits, isInLocalNewsArea, isLocalNews } from './lib/local-news.mjs';
 import { fixMicrocopy } from './lib/it-microcopy-guard.mjs';
 import { DOMAIN_DUP_STOPLIST, filterDistinctive } from './lib/dup-stoplist.mjs';
 import { JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagnostics, repairLlmJson } from './lib/llm-json-repair.mjs';
@@ -7872,6 +7872,11 @@ async function scanNewsSources() {
   // than disabled: sampled 25 runs on 2026-08-10, frontaliere reaches the
   // pre-spend classifier with 47-56 candidates, and that is the cost envelope
   // this pipeline is sized for. Removing the topical drop would push ~495.
+  // On the frontaliere section a place of the local-news area also anchors:
+  // hasDomainAnchor misses 97 of the 162 Ticino names of the BFS list
+  // (Cadenazzo, Pregassona…), and a local story named only by one of them
+  // would be dropped here before the local-news admission below could see it
+  // (review of PR #1871).
   const filterByAnchor = (list) => {
     if (!dropAnchorless && !dropNonTopical) return list;
     const kept = [];
@@ -7879,7 +7884,7 @@ async function scanNewsSources() {
     let droppedTopic = 0;
     for (const h of list) {
       const text = `${h.headline || ''} ${h.url || ''}`;
-      if (dropAnchorless && !hasDomainAnchor(text)) {
+      if (dropAnchorless && !hasDomainAnchor(text) && !(IS_FRONTALIERE && isInLocalNewsArea(h.headline || ''))) {
         droppedAnchor += 1;
         continue;
       }
@@ -8664,6 +8669,20 @@ AVS/AHV, LPP/BVG, LAMal/KVG, imposta federale diretta, IVA, SECO, UST/BFS, BNS/S
     : IS_FRONTALIERE
     ? `- Analizza le IMPLICAZIONI PRATICHE per i frontalieri (cosa cambia nella vita quotidiana)`
     : `- Analizza le IMPLICAZIONI PRATICHE a livello nazionale/cantonale (cosa cambia nella vita di chi vive o lavora in Svizzera)`;
+  // Local news has no procedure, scenario or site tool to offer: its words
+  // come from the facts, statements and local context of the source. Every
+  // frontaliere-only demand below has a local branch for the same reason
+  // (review of PR #1871): one left behind is the off-topic copy the density
+  // bypass would otherwise publish.
+  const reachMinimumMethodLines = localNewsSource
+    ? `- Riporta dichiarazioni, reazioni e sviluppi presenti nella fonte
+- Dai il contesto locale che la fonte fornisce (luogo, precedenti, organizzatori, risultati)`
+    : `- Descrivi PROCEDURE concrete (cosa fare, dove andare, quali documenti servono)
+- Aggiungi SCENARI "cosa succede se" basati sui fatti della fonte
+- Confronta con la situazione precedente (prima vs dopo il cambiamento descritto nella fonte)`;
+  const reachMinimumToolsLine = localNewsSource
+    ? `- NON aggiungere procedure, checklist, scadenze o strumenti del sito che la notizia non richiede`
+    : `- Collega agli strumenti del sito (calcolatore, comparatore, guide) per approfondire`;
 
   const topicalRelevanceGate = IS_FRONTALIERE
     ? `═══ REGOLA #0 — GATE DI RILEVANZA TOPICA (BLOCCANTE — PRIMA DI TUTTO) ═══
@@ -8719,7 +8738,12 @@ NON inventare un angolo "implicazioni pratiche" su un evento irrilevante per rie
     ? `Colore locale: valichi (Brogeda, Gaggiolo), comuni (Chiasso, Mendrisio, Lugano, Bellinzona, Locarno), enti (Canton Ticino, SUPSI, USI, EOC, DFE, SECO).`
     : `Colore nazionale: cantoni e città (Zurigo, Ginevra, Berna, Basilea, Losanna, Lugano…), istituzioni federali (Consiglio federale, Parlamento, Amministrazione federale, UST/BFS, SECO, BNS/SNB), uffici cantonali.`;
 
-  const editorialFundamentalBlock = IS_FRONTALIERE
+  const editorialFundamentalBlock = localNewsSource
+    ? `REGOLA EDITORIALE FONDAMENTALE — CRONACA LOCALE:
+La fonte è cronaca locale (cronaca nera, incidente, sport, cultura o evento) in Ticino o nelle province di Varese, Como e VCO: il nesso richiesto da REGOLA #0 è il luogo, non i frontalieri. NON rifiutare per mancanza di un angolo frontalieri.
+- Racconta chi, cosa, dove e quando, con le dichiarazioni, le reazioni e gli sviluppi della fonte.
+- NON aggiungere procedure, checklist, scadenze, consigli o strumenti per frontalieri, né un paragrafo "impatto sui frontalieri": la notizia non li richiede.`
+    : IS_FRONTALIERE
     ? `REGOLA EDITORIALE FONDAMENTALE — FRONTALIERI AL CENTRO (CONDIZIONALE):
 Se la fonte ha implicazioni CONCRETE e SPECIFICHE per il frontaliere (importi CHF/EUR cambiati, scadenze fiscali, procedure modificate, permessi, valichi, accordi CH-IT, AVS/LPP/LAMal, busta paga, autostrade A2/A9, sciopero che blocca pendolari):
 - Il frontaliere deve essere il PROTAGONISTA dell'articolo dall'inizio alla fine.
@@ -8746,13 +8770,30 @@ Se le implicazioni sono DEBOLI o GENERICHE (la fonte non ha un impatto pratico d
     : IS_FRONTALIERE
     ? `- body2 = ANALISI PRATICA: implicazioni per i frontalieri, confronti prima/dopo, scenari concreti. Informazione che NON era nel body1.`
     : `- body2 = ANALISI PRATICA: implicazioni concrete a livello nazionale/cantonale, confronti prima/dopo, scenari concreti. Informazione che NON era nel body1.`;
-  const body3AntiRepLine = IS_FRONTALIERE
+  const body3AntiRepLine = localNewsSource
+    ? `- body3 = SEGUITO: cosa succede ora secondo la fonte (indagini, prossime tappe, date e luoghi dell'evento, viabilità). NON riassumere body1 o body2.`
+    : IS_FRONTALIERE
     ? `- body3 = AZIONE: cosa fare concretamente, scadenze, procedura step-by-step, strumenti del sito. NON riassumere body1 o body2.`
     : `- body3 = AZIONE: cosa fare concretamente in Svizzera, scadenze, procedura step-by-step, strumenti del sito. NON riassumere body1 o body2.`;
 
-  const ctaDefaultLine = IS_FRONTALIERE
+  const ctaDefaultLine = localNewsSource
+    ? `CTA: nessuna CTA obbligatoria. Chiudi body3 con un link nav: solo se un tool è davvero pertinente alla notizia (es. strade e valichi → border, traffic-history).`
+    : IS_FRONTALIERE
     ? `CTA: body3 DEVE terminare con CTA verso il tool più pertinente al tema (default: calcolatore stipendio). Oltre al catalogo nav: qui sotto, sono disponibili: casa→renovation, telefonia→mobile, vivere CH→living-ch, vivibilità→livability.`
     : `CTA: body3 DEVE terminare con CTA verso il tool più pertinente al tema (default: calcolatore stipendio). Oltre al catalogo nav: qui sotto, sono disponibili: casa→renovation, telefonia→mobile, vivere CH→living-ch, vivibilità→livability.`;
+
+  const internalLinksRuleLines = localNewsSource
+    ? `LINK INTERNI — sintassi ESCLUSIVA \`[testo](nav:azione)\`, SOLO se pertinenti alla notizia: nessun minimo, e zero link è corretto per cronaca, sport e cultura.`
+    : `LINK INTERNI — sintassi ESCLUSIVA \`[testo](nav:azione)\`, MINIMO 3 per articolo (4 se supera 1200 parole):
+- 1 in body1 o body2 (contestuale al fatto)
+- 1 in body2 o body3 (contestuale all'analisi)
+- 1 nella CTA finale di body3 (calculator preferito)`;
+  const body2SchemaText = localNewsSource
+    ? 'Contesto: sviluppi, reazioni e dati della fonte'
+    : 'Analisi pratica: implicazioni, confronti, scenari';
+  const body3SchemaText = localNewsSource
+    ? 'Seguito: cosa succede ora secondo la fonte'
+    : 'Azione: procedura step-by-step, scadenze, strumenti + CTA finale';
 
   // Una sola volta. La specifica di `imagePrompt` era dichiarata due volte —
   // qui dentro lo schema JSON e di nuovo in REGOLE FINALI
@@ -8862,12 +8903,10 @@ Il tuo articolo è una RISCRITTURA EDITORIALE della fonte, NON un articolo origi
 
 ${_isMeta ? '' : `COME RAGGIUNGERE IL MINIMO DI PAROLE SENZA INVENTARE:
 ${reachMinimumImplicationsLine}
-- Descrivi PROCEDURE concrete (cosa fare, dove andare, quali documenti servono)
-- Aggiungi SCENARI "cosa succede se" basati sui fatti della fonte
-- Confronta con la situazione precedente (prima vs dopo il cambiamento descritto nella fonte)
+${reachMinimumMethodLines}
 - NON includere sezioni FAQ nel body — le FAQ vengono generate nel campo "faq" separato e mostrate come accordion
 - Usa tabelle comparative per rendere i dati della fonte più leggibili
-- Collega agli strumenti del sito (calcolatore, comparatore, guide) per approfondire`}
+${reachMinimumToolsLine}`}
 ${primaryLocaleBlock}${targetKeywordBlock}${_isBody ? '' : peopleAlsoAskBlock}${_isMeta ? '' : mustCoverLsiBlock}${_isMeta ? '' : AI_SEARCH_PROMPT_BLOCK_IT}
 ${_isMeta ? '' : `═══ REGOLE EDITORIALI ═══
 
@@ -8916,10 +8955,7 @@ TOPIC GUARD: per articoli su "tassa salute", NON invertire la platea (es. "lavor
 
 ${_isMeta ? '' : `${ctaDefaultLine}
 
-LINK INTERNI — sintassi ESCLUSIVA \`[testo](nav:azione)\`, MINIMO 3 per articolo (4 se supera 1200 parole):
-- 1 in body1 o body2 (contestuale al fatto)
-- 1 in body2 o body3 (contestuale all'analisi)
-- 1 nella CTA finale di body3 (calculator preferito)
+${internalLinksRuleLines}
 ${IS_FRONTALIERE ? `Azioni e SEMANTICA STRETTA (il testo del link DEVE matchare l'azione, altrimenti il link viene strippato):
 - calculator → calcolatore FISCALE: stipendio, netto, busta paga, imposte, tasse.
 - exchange → comparatore CHF/EUR (cambio valuta).
@@ -8987,8 +9023,8 @@ Genera JSON (no markdown, no code fences):
       "title": "Titolo giornalistico con keyword (OBBLIGATORIO ≤ 60 caratteri totali, target 50-55. Il suffisso ' | Frontaliere Ticino' viene aggiunto automaticamente — NON includerlo nel title)",
       "excerpt": "Sottotitolo con dati concreti DALLA FONTE (max 160 chars)",`}${_isMeta ? '' : `
       "body1": "Inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (0-8 coppie termine→valore, tutte presenti nella fonte; ometti assenti e placeholder). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. 300-400 parole (escluse TL;DR/Fatti chiave). Min 1 ### sotto-sezione.",
-      "body2": "Analisi pratica: implicazioni, confronti, scenari. Contenuto DIVERSO da body1. 300-400 parole. Min 1 ### sotto-sezione.",
-      "body3": "Azione: procedura step-by-step, scadenze, strumenti + CTA finale. NON riassumere body1/body2. 300-400 parole."${_isBody ? '' : ','}`}${_isBody ? '' : `
+      "body2": "${body2SchemaText}. Contenuto DIVERSO da body1. 300-400 parole. Min 1 ### sotto-sezione.",
+      "body3": "${body3SchemaText}. NON riassumere body1/body2. 300-400 parole."${_isBody ? '' : ','}`}${_isBody ? '' : `
       "faq": [
         {"q": "Domanda frequente 1 basata sui fatti dell'articolo?", "a": "Risposta con dati DALLA FONTE. 50-100 parole."},
         {"q": "Domanda frequente 2?", "a": "Risposta pratica basata sulla fonte."},
@@ -10497,7 +10533,13 @@ function italianBodyWordCount(data) {
  * LAMal. Nessuno di questi dati esiste in `config/bfs_stats`. È uscito agli
  * iscritti con tutti i gate verdi.
  */
-function expandEnrichmentLine(isFrontaliere, boundToText = false) {
+function expandEnrichmentLine(isFrontaliere, boundToText = false, localNews = false) {
+  // Local news without a frontaliere angle (review of PR #1871): the default
+  // line asks for regulations, amounts and checklists a robbery or a match
+  // does not have, and the model would find them in its training.
+  if (localNews) {
+    return '- Aggiungi PROFONDITÀ solo con ciò che il testo già contiene: dettagli dei fatti, dichiarazioni, reazioni, contesto del luogo. NON aggiungere normative, importi, checklist, consigli o strumenti per frontalieri, né NESSUN fatto, numero, nome o data che non sia già scritto nel TESTO ATTUALE qui sopra.';
+  }
   if (boundToText) {
     return '- Aggiungi PROFONDITÀ sui dati che il testo già contiene: confronti fra i numeri citati, lettura della tendenza, implicazioni qualitative, contesto verificabile. NON introdurre NESSUN numero, comune, aliquota, importo, data o percentuale che non sia già scritto nel TESTO ATTUALE qui sopra: la fonte di questo articolo è un dataset chiuso e ogni cifra in più sarebbe inventata.';
   }
@@ -10531,7 +10573,7 @@ const EARLY_EXPANSION_MIN_ATTEMPT = 2;
  * `boundToText` limita l'arricchimento a ciò che il testo già dice — vedi
  * expandEnrichmentLine per il motivo e per l'incidente che lo motiva.
  */
-async function expandShortItalianContent(data, targetWords, { boundToText = false } = {}) {
+async function expandShortItalianContent(data, targetWords, { boundToText = false, localNews = false } = {}) {
   const it = data?.content?.it;
   if (!it) return data;
 
@@ -10557,7 +10599,7 @@ RIFERIMENTO DEL TITOLO (SOLO INPUT, NON RIPETERE): ${it.title || ''}
 ISTRUZIONI:
 - Riscrivi ed ESPANDI questo testo a circa ${targetFieldWords} parole (MASSIMO ${MAX_BODY_FIELD_WORDS} parole — NON superare questo limite)
 - Mantieni lo stesso tono, stile e struttura
-${expandEnrichmentLine(IS_FRONTALIERE, boundToText)}
+${expandEnrichmentLine(IS_FRONTALIERE, boundToText, localNews)}
 - NON aggiungere frasi generiche o filler — solo informazioni utili e verificabili
 - Mantieni la formattazione esistente (##, -, >, 📊, 💡, ⚠️). Citazioni (>) MAX 1 per articolo, solo per citazioni dirette brevi
 - GRASSETTO: massimo 2-3 parole in grassetto nell'intero testo, preferisci ZERO
@@ -12125,6 +12167,10 @@ function validateAndEnforceCTA(data) {
   if (contentIt && typeof data._cantonGuardBodyBeforeCta !== 'string') {
     data._cantonGuardBodyBeforeCta = bodyTextForQuality(contentIt);
   }
+  if (data._localNewsSource) {
+    console.error('  📰 Cronaca locale: nessuna CTA frontaliere aggiunta');
+    return data;
+  }
   const localeKeywords = { it: CTA_KEYWORDS_IT, en: CTA_KEYWORDS_EN, de: CTA_KEYWORDS_DE, fr: CTA_KEYWORDS_FR };
   const cta = pickDefaultCTA(data.category);
 
@@ -12187,6 +12233,7 @@ const INTERNAL_LINK_BLOCK = {
 };
 
 function enforceStrongInternalLinks(data) {
+  if (data._localNewsSource) return data; // see Step 3d: no frontaliere tool block on local news
   for (const locale of ['it', 'en', 'de', 'fr']) {
     if (!data.content[locale]) continue;
 
@@ -16461,7 +16508,10 @@ async function generateAndValidateArticle(url, sourceContext = null) {
       // future non-serializable field on `data` degrades to `shortErr` like
       // every other failure on this path, instead of escaping uncaught.
       const preExpansionData = structuredClone(data);
-      data = await expandShortItalianContent(data, adaptiveMinWords, { boundToText: isStatsBfsSource });
+      data = await expandShortItalianContent(data, adaptiveMinWords, {
+        boundToText: isStatsBfsSource,
+        localNews: IS_FRONTALIERE && isLocalNewsWithoutFrontaliereAngle(pageContent),
+      });
 
       // Re-run the SAME repetition check the main loop uses above — this
       // expansion call is the path MOST likely to produce it (see
@@ -16745,9 +16795,19 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   assertGeneratedArticleQuality(data);
 
   // Step 3d: Enforce CTA / internal links (all 4 locales)
+  // Local news without a frontaliere angle gets neither the salary-calculator
+  // CTA nor the «Tool consigliati» block: its prompt no longer asks for them,
+  // and appending them here would bring back the off-topic frontaliere copy
+  // (review of PR #1871). Non-enumerable like the scratch properties below,
+  // so it never reaches the serialized article.
+  Object.defineProperty(data, '_localNewsSource', {
+    value: IS_FRONTALIERE && isLocalNewsWithoutFrontaliereAngle(pageContent),
+    configurable: true,
+  });
   console.error('🔗 Verifica CTA e link interni:');
   validateAndEnforceCTA(data);
   enforceStrongInternalLinks(data);
+  delete data._localNewsSource;
 
   // Step 3e: Append source citation to body3 (E-E-A-T compliance)
   // For stats-bfs:// articles, the URL is a synthetic per-quarter dedup key

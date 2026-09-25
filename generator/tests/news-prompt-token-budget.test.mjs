@@ -369,11 +369,32 @@ test('cronaca locale senza angolo frontaliere: niente sei termini obbligatori, e
   assert.match(local.prompt, /Cronaca locale: nomina luoghi, enti e persone della fonte/);
   assert.doesNotMatch(local.prompt, /Almeno 6 dei seguenti termini DEVONO comparire/);
   assert.match(local.prompt, /body2 = CONTESTO: sviluppi, dati, reazioni e ricadute locali/);
+  // Review di PR #1871: ogni richiesta solo-frontaliere ha il suo ramo locale.
+  assert.match(local.prompt, /REGOLA EDITORIALE FONDAMENTALE — CRONACA LOCALE:/);
+  assert.match(local.prompt, /body3 = SEGUITO: cosa succede ora secondo la fonte/);
+  assert.match(local.prompt, /CTA: nessuna CTA obbligatoria/);
+  assert.match(local.prompt, /LINK INTERNI — sintassi ESCLUSIVA `\[testo\]\(nav:azione\)`, SOLO se pertinenti alla notizia: nessun minimo/);
+  assert.match(local.prompt, /"body3": "Seguito: cosa succede ora secondo la fonte\./);
+  for (const frontaliereOnly of [
+    /FRONTALIERI AL CENTRO/,
+    /body3 = AZIONE/,
+    /MINIMO 3 per articolo/,
+    /calculator preferito/,
+    /Descrivi PROCEDURE concrete/,
+    /Collega agli strumenti del sito/,
+    /"body3": "Azione: procedura step-by-step/,
+  ]) {
+    assert.doesNotMatch(local.prompt, frontaliereOnly);
+  }
   assert.ok(local.estTokens <= PROMPT_TOKEN_CEILING, `prompt cronaca a ${local.estTokens} token`);
   // Una notizia frontaliere vera resta sul ramo storico.
   const news = newsPrompt();
   assert.equal(isLocalNewsWithoutFrontaliereAngle(NEWS_PAGE_CONTENT), false);
   assert.match(news.prompt, /Almeno 6 dei seguenti termini DEVONO comparire/);
+  assert.match(news.prompt, /FRONTALIERI AL CENTRO/);
+  assert.match(news.prompt, /MINIMO 3 per articolo/);
+  assert.match(news.prompt, /Descrivi PROCEDURE concrete/);
+  assert.match(news.prompt, /"body3": "Azione: procedura step-by-step, scadenze, strumenti \+ CTA finale\./);
 });
 
 test('il ramo NEWS SVIZZERA resta sotto il tetto — non solo l\'evergreen svizzera', () => {

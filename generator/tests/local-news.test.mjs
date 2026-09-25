@@ -130,3 +130,37 @@ test('ordinary economic words are not signals', () => {
     assert.equal(isLocalNews(text), false, `presa per cronaca locale: ${text}`);
   }
 });
+
+test('kind and place must describe the same event', () => {
+  // Third review of PR #1871: two independent scans of the whole text let an
+  // arrest in Milan through on an incidental mention of Ticino.
+  for (const text of [
+    'Arresto a Milano, ricercato anche in Ticino',
+    'Arresto a Milano. Il Ticino rafforza i controlli alla frontiera.',
+    'La polizia ticinese ha arrestato un uomo a Milano',
+    'Omicidio a Milano https://www.rsi.ch/news/ticino/omicidio-lugano-123',
+    'Cronaca: omicidio a Milano',
+  ]) {
+    assert.equal(isLocalNews(text), false, `presa per cronaca locale: ${text}`);
+  }
+  assert.equal(countLocalNewsHits('Rapina a Lugano. Rapina a Milano.'), 1);
+});
+
+test('the place of the event: after a preposition, as a dateline, or the area in the same sentence', () => {
+  for (const text of [
+    'Lugano, rapina in banca',
+    'Chiasso: due arresti per spaccio',
+    'Incidente sulla A2 a Bellinzona', // a road is not a place
+    'Concerto di Natale a Lugano', // nor is a feast day
+    'Il Festival del film di Locarno apre con un record',
+    'La polizia ticinese ha arrestato due uomini',
+  ]) {
+    assert.equal(isLocalNews(text), true, `non riconosciuta come cronaca locale: ${text}`);
+  }
+});
+
+test('sport is placed by the club, not by the venue', () => {
+  assert.equal(isLocalNews('Calcio, il Lugano pareggia a Basilea'), true);
+  assert.equal(isLocalNews("Hockey: l'Ambrì vince a Zurigo"), true);
+  assert.equal(isLocalNews('Calcio: il Basilea batte lo Young Boys a Berna'), false);
+});
