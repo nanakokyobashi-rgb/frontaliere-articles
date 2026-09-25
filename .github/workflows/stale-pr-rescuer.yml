@@ -206,7 +206,9 @@ jobs:
             now=$(date -u +%s)
             slot_start=$(( now - now % FULL_SCAN_SLOT_S ))
             # Un run creato fino a un'ora prima puo' essere partito in questa
-            # finestra dopo la coda: il filtro `created` lo deve includere.
+            # finestra dopo la coda: il filtro `created` lo deve includere. Un
+            # run rimasto in coda piu' a lungo sfugge al filtro, e l'errore va
+            # nella direzione sicura: uno scan completo in piu', mai uno in meno.
             since=$(jq -rn --argjson t "$(( slot_start - 3600 ))" '$t | todate')
             if ! runs=$(gh api --paginate "repos/$REPO/actions/workflows/stale-pr-rescuer.yml/runs?per_page=100&exclude_pull_requests=true&created=%3E%3D$since" 2>/dev/null); then
               echo "::warning::Run recenti di stale-pr-rescuer illeggibili — scan limitato alle PR del trigger."

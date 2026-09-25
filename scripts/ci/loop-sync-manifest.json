@@ -3868,7 +3868,7 @@
     {
       "path": "scripts/ci/generator-ci-gate.mjs",
       "mode": "corpus-only",
-      "reason": "Porta il gate condizionale su generator-ci.yml (ex gate 4 di auto-merge-eval) dentro il job che produce il check richiesto dal ruleset: il ruleset puo' richiedere solo contesti presenti su OGNI PR, e generator-ci.yml e' path-scoped. Non ha e non puo' avere un gemello: generator-ci.yml esiste solo qui. Dal 2026-09-25 il polling dei check-run parte da 60 s con backoff fino a 120 s (era 20 s fisso: fino a 90 letture per run sul bucket REST condiviso) e le letture passano da `lib/gh-rate-limit.mjs`; la scadenza di 30 minuti e la sua semantica restano identiche.",
+      "reason": "Porta il gate condizionale su generator-ci.yml (ex gate 4 di auto-merge-eval) dentro il job che produce il check richiesto dal ruleset: il ruleset puo' richiedere solo contesti presenti su OGNI PR, e generator-ci.yml e' path-scoped. Non ha e non puo' avere un gemello: generator-ci.yml esiste solo qui. Dal 2026-09-25 il polling dei check-run parte da 60 s con backoff fino a 120 s (era 20 s fisso: fino a 90 letture per run sul bucket REST condiviso) e le letture passano da `lib/gh-rate-limit.mjs`; la scadenza di 30 minuti resta il tetto e ora copre l'intero step, compresa un'eventuale attesa del reset sulla lettura dei file.",
       "baseline": {
         "site": null,
         "corpus": "fa25df2f5bba0fa1",

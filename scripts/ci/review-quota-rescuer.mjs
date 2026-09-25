@@ -1342,6 +1342,9 @@ function failedRequiredJobAnnotations(run) {
   const job = jobsPage.jobs.find((candidate) => candidate?.name === VITEST_CHECK_NAME
     && candidate?.conclusion === 'failure');
   if (!job) return null;
+  // In Actions l'id del job E' l'id del suo check-run: `check_run_url` e'
+  // la forma esplicita, l'id del job il ripiego equivalente. Un id non
+  // numerico, o annotation illeggibili, lanciano: il chiamante non rilancia.
   const checkRunId = String(job.check_run_url || '').match(/\/check-runs\/(\d+)$/)?.[1] || String(job.id || '');
   if (!/^\d+$/.test(checkRunId)) throw new Error(`check-run del job ${VITEST_CHECK_NAME} non identificabile`);
   const pages = parseJson(gh(['api', '--paginate', '--slurp', `repos/${REPO}/check-runs/${checkRunId}/annotations?per_page=100`]), null);

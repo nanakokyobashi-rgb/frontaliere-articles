@@ -70,9 +70,10 @@
  * si legge ancora esattamente alla scadenza: la semantica del tetto non cambia.
  *
  * Le letture passano da `lib/gh-rate-limit.mjs`: un 403 da rate limit primario
- * attende il reset (entro 15 min e mai oltre la scadenza del gate) e riprova una
- * volta; altrimenti il gate esce ROSSO nominando il rate limit e il reset,
- * invece di scambiarlo per «file illeggibili» o per un `generator-ci` lento.
+ * attende il reset (entro 15 min e mai oltre la scadenza del gate, che parte
+ * prima della lettura dei file) e riprova una volta; altrimenti il gate esce
+ * ROSSO nominando il rate limit e il reset, invece di scambiarlo per «file
+ * illeggibili» o per un `generator-ci` lento.
  *
  * Uso:  node scripts/ci/generator-ci-gate.mjs
  * Env:  GH_TOKEN, GITHUB_REPOSITORY, PR_NUMBER, HEAD_SHA,
@@ -165,10 +166,16 @@ async function main() {
     console.log('::error::generator-ci-gate: GITHUB_REPOSITORY, PR_NUMBER e HEAD_SHA sono obbligatori.');
     process.exit(1);
   }
+  // La scadenza parte PRIMA della lettura dei file: un'attesa del reset su
+  // quella lettura consuma lo stesso tetto, quindi lo step intero resta entro
+  // `TIMEOUT_MS` anche col bucket esaurito (review della PR #1865).
+  const deadline = Date.now() + TIMEOUT_MS;
+  const readBudgetMs = () => Math.max(0, Math.min(RATE_LIMIT_MAX_WAIT_MS, deadline - Date.now()));
   let files;
   try {
     files = gh(['api', `repos/${REPO}/pulls/${PR}/files`, '--paginate', '--jq', '.[].filename'], {
       json: false,
+      maxWaitMs: readBudgetMs(),
     })
       .split('\n')
       .map((s) => s.trim())
@@ -189,7 +196,6 @@ async function main() {
     `generator-ci-gate: la PR tocca i path di generator-ci.yml — attendo il check-run '${GENERATOR_CI_JOB_NAME}' sulla head ${HEAD_SHA}.`,
   );
 
-  const deadline = Date.now() + TIMEOUT_MS;
   let last = '';
   for (let attempt = 0; ; attempt += 1) {
     let checkRuns = [];
@@ -201,7 +207,7 @@ async function main() {
       // L'attesa di un reset non puo' superare la scadenza del gate: oltre,
       // il rosso nomina il rate limit e il rescuer rilancia dopo il reset.
       const cr = gh(['api', `repos/${REPO}/commits/${HEAD_SHA}/check-runs?per_page=100`], {
-        maxWaitMs: Math.max(0, Math.min(RATE_LIMIT_MAX_WAIT_MS, deadline - Date.now())),
+        maxWaitMs: readBudgetMs(),
       });
       checkRuns = (cr && cr.check_runs) || [];
     } catch (e) {

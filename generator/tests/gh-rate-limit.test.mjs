@@ -468,6 +468,35 @@ test('generator-ci-gate: file della PR illeggibili per rate limit → rosso che 
   }
 });
 
+test('generator-ci-gate: l\'attesa sui file consuma la stessa scadenza del gate', () => {
+  // Reset fra 5 minuti: entro i 15 dell'helper, ma oltre il tetto di 1 minuto
+  // del gate. Prima la scadenza partiva DOPO la lettura dei file e l'attesa si
+  // sommava al tetto; ora il gate esce subito, rosso e con la causa.
+  const reset = nowS() + 300;
+  const { dir, bin } = binWithGh(limitedGh(reset));
+  try {
+    const started = Date.now();
+    const r = spawnSync(process.execPath, [path.join(ROOT, 'scripts/ci/generator-ci-gate.mjs')], {
+      encoding: 'utf8',
+      timeout: 20_000,
+      env: {
+        ...cliEnv,
+        PATH: `${bin}${path.delimiter}${process.env.PATH}`,
+        GITHUB_REPOSITORY: 'nanakokyobashi-rgb/frontaliere-articles',
+        PR_NUMBER: '1234',
+        HEAD_SHA: 'a'.repeat(40),
+        GENERATOR_CI_GATE_TIMEOUT_MS: '60000',
+      },
+    });
+    assert.equal(r.status, 1, r.stdout + r.stderr);
+    assert.ok(Date.now() - started < 15_000, 'nessuna attesa oltre la scadenza del gate');
+    assert.match(r.stdout, /file della PR illeggibili \(rate limit del token\)/);
+    assert.match(r.stderr, /oltre l'attesa massima di 1 min/);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
 test('generator-ci-gate: check-run illeggibili per rate limit → rosso subito, non «non ha concluso»', () => {
   const { dir, bin } = binWithGh(limitedGh(nowS() + 3000, { allow: [['/pulls/1234/files', 'generator/changed.mjs\n']] }));
   try {
