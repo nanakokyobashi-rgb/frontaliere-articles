@@ -150,6 +150,8 @@ export const CONTENT_GATES = [
   'generator/tests/evergreen-costo-vita-ticino-vs-lombardia-refresh.test.mjs',
   'generator/tests/evergreen-guida-dichiarazione-redditi-frontalieri-refresh.test.mjs',
   'generator/tests/evergreen-lamal-cmi-scelta-frontaliere-2026-refresh.test.mjs',
+  'generator/tests/evergreen-naspi-ex-frontalieri-2026-refresh.test.mjs',
+  'generator/tests/evergreen-naspi-frontaliere-italia-requisiti-refresh.test.mjs',
   'generator/tests/evergreen-simulazione-fiscale-frontaliere-2026-refresh.test.mjs',
   'generator/tests/evergreen-tassa-salute-tensioni-ticino-refresh.test.mjs',
   'generator/tests/evergreen-tassazione-individuale-refresh.test.mjs',

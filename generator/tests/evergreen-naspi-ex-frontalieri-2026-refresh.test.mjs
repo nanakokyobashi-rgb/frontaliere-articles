@@ -10,10 +10,14 @@ import { fileURLToPath } from 'node:url';
 // settimane (art. 3) e ha abolito le 30 giornate per le cessazioni dal
 // 1.1.2022 (art. 3 c. 1-bis); per il frontaliere disoccupato completo l'art.
 // 65 del regolamento (CE) 883/2004 attribuisce la prestazione allo Stato di
-// residenza durante l'ultimo impiego. Fonti:
+// residenza durante l'ultimo impiego. La FAQ sulla disoccupazione svizzera
+// cita l'art. 7 della legge 83/2023 (primi tre mesi all'importo svizzero, se
+// piu' alto) con il suo stato: non ancora applicato a settembre 2026. Fonti:
 // https://www.lavoro.gov.it/temi-e-priorita/ammortizzatori-sociali/focus-on/indennita-disoccupazione/naspi/pagine/naspi
 // https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2015-03-04;22
+// https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2023-06-13;83~art7
 // https://eur-lex.europa.eu/legal-content/IT/TXT/?uri=CELEX:02004R0883-20190731
+// INPS circolare n. 2 del 4.1.2022 (abolizione delle 30 giornate).
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const SLUG = 'naspi-ex-frontalieri-2026';
@@ -40,6 +44,11 @@ for (const locale of LOCALES) {
     assert.match(source, /normattiva\.it\/uri-res\/N2Ls\?urn:nir:stato:decreto\.legislativo:2015-03-04;22/);
     assert.match(source, /lavoro\.gov\.it\/temi-e-priorita\/ammortizzatori-sociali\/focus-on\/indennita-disoccupazione\/naspi/);
     assert.match(source, /CELEX:02004R0883/);
+    assert.match(source, /circolare-numero-2-del-04-01-2022/);
+    assert.match(source, /urn:nir:stato:legge:2023-06-13;83~art7/);
+    assert.match(source, /83\/2023/, 'art. 7 della legge 83/2023');
+    assert.match(source, /(?:settembre|September|septembre) 2026/, 'stato di applicazione dell\'art. 7');
+    assert.match(source, /(?:artt\.|Arts\.|Art\.|art\.) 3-6 \(https:\/\/www\.normattiva\.it/, 'articoli 3-6 del D.Lgs. 22/2015');
   });
 
   test(`${locale}: niente requisiti superati`, () => {
