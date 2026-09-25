@@ -237,6 +237,14 @@ export const AI_MODELS = Object.freeze({
   // Keep one static NVIDIA pin: discovery is best-effort and its catalog has no
   // context field, while the provider-wide pre-flight cap still protects it.
   NV_NEMOTRON_SUPER:    'nvidia/nvidia/nemotron-3-super-120b-a12b',
+  // Fact-check verifiers (2026-09-25). The two NVIDIA ids with the best record
+  // in the runs of 2026-09-24/25 — nemotron-3-ultra 33 ok / 1 ko on run
+  // 36096755072, google/gemma-4-31b-it 28 ok / 2 ko across the three logged
+  // runs — and two different model families, so the fact-check pair is a real
+  // second opinion. Pinned rather than left to discovery because llmFactCheck
+  // names them explicitly; they are NOT added to DEFAULT_CHAIN.
+  NV_NEMOTRON_ULTRA:    'nvidia/nvidia/nemotron-3-ultra-550b-a55b',
+  NV_GEMMA_4_31B:       'nvidia/google/gemma-4-31b-it',
   HF_MISTRAL_7B:   'hf/mistralai/Mistral-7B-Instruct-v0.3',
   HF_ZEPHYR_7B:    'hf/HuggingFaceH4/zephyr-7b-beta',
   HF_LLAMA_3_3_70B:'hf/meta-llama/Llama-3.3-70B-Instruct',
@@ -6334,9 +6342,19 @@ function sleep(ms) {
  * Reasoning models (DeepSeek-R1, Qwen3) wrap their chain-of-thought
  * in these tags. We only want the final answer.
  */
-function stripThinkTags(text) {
+export function stripThinkTags(text) {
   if (!text) return text;
-  return text.replace(/<think>[\s\S]*?<\/think>\s*/g, '').trim();
+  const withoutBlocks = text.replace(/<think>[\s\S]*?<\/think>\s*/gi, '');
+  // Reasoning templates that put the opening tag in the prompt (Nemotron,
+  // Qwen3) return the chain of thought with only the CLOSING tag. The pair
+  // regex above cannot see it, so the reasoning reached the caller in front
+  // of the answer: a fact-check reply became prose, then "risposta non JSON"
+  // (run 36096755072). Everything up to the last orphan `</think>` is
+  // reasoning; no valid answer of ours contains the tag. Any case: a
+  // provider that upper-cases the tag must not turn a good reply into prose.
+  const orphanClose = [...withoutBlocks.matchAll(/<\/think>/gi)].at(-1);
+  const answer = orphanClose ? withoutBlocks.slice(orphanClose.index + orphanClose[0].length) : withoutBlocks;
+  return answer.trim();
 }
 
 /** Set of model IDs known to include <think> tags in their output */
