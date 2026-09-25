@@ -2323,7 +2323,7 @@
       "mode": "adapted",
       "baseline": {
         "site": "37ec8b868eb9a730",
-        "corpus": "3b011d436396cf04",
+        "corpus": "5069883aa0d01892",
         "alignedAt": "2026-09-25"
       },
       "reason": "Il corpus conserva adattamenti propri della cascata di traduzione (fingerprint delle capability per il memo eventi, neutralità dei tier opzionali non configurati, retry OAuth Google Cloud e conteggio dei suoi rifiuti silenziosi nel riepilogo della cascata, attribuzione rung/durata e rifiuto dei payload OPUS-MT troncati); la copia byte-identica del sito cancellerebbe questi comportamenti e rende rossi i test di passthrough del corpus. In questa PR si portano la normalizzazione tedesca `frau:mann`, il guard sui sentinel mangled e il confronto con la sorgente raw prima della normalizzazione, mantenendo gli adattamenti locali dichiarati. Dal 2026-09-24 il tier Google Cloud, che su token mancante, 403/429, !ok o timeout rende '' senza lanciare (quindi fuori da `tierErrors`), registra quanti rifiuti ha dato e l'ultimo motivo: il riepilogo diceva `0/16000 daily chars used` sia per «mai chiamato» sia per «ogni chiamata rifiutata». Dal 2026-09-25 i due lati portano lo stesso tier Codex Luna Max dopo DeepL e Azure (sezione `translateWithCodex` byte-identica nei due file, decisione del proprietario): la PR gemella del sito porta la stessa sezione, quindi il suo `site-ahead` si riconcilia confrontando quella. Baseline corpus riattestata su questa modifica, quella site resta al riferimento gia' revisionato."
