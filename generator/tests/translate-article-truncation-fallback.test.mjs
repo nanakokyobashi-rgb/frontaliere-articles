@@ -38,6 +38,8 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildSectionFeeds, RSS_SECTIONS } from '../../engine/rssFeeds.mjs';
+import { escapeForSingleQuoteTS, META_SEO_FIELDS } from '../scripts/lib/article-meta-block.mjs';
+import { decodeHtmlEntities } from '../scripts/lib/decode-html-entities.mjs';
 // I predicati sono quelli VERI, non una copia: `translatedStringOrNull` e'
 // esattamente la funzione che il loop ritagliato riceve in produzione, e una
 // copia locale nel test divergerebbe in silenzio dal fix (AGENTS.md #6).
@@ -899,4 +901,126 @@ test('#1875: un body in attesa non rompe i feed RSS di build-api e non ci porta 
   assert.match(en, /First English body[\s\S]*Third English body/, 'le parti tradotte arrivano nel feed');
   assert.doesNotMatch(en, /SECONDO CORPO ITALIANO/, 'nessun italiano nel feed en');
   assert.match(byName.get(section.feedFile('it')), /SECONDO CORPO ITALIANO/, 'il feed it resta completo');
+});
+
+// ── End-to-end: dal marker di attesa al file di body emesso ────────────────
+//
+// Review della PR #1877: un passaggio che scrive `bodyN = ''` (o un moncone)
+// su una chiave assente distrugge il marker, perche' `buildBodyFile()` emette
+// ogni chiave stringa. Qui gira la catena REALE, nell'ordine di
+// `generateAndValidateArticle()` dopo `translateArticle()`, con ogni blocco
+// ritagliato VERBATIM dal sorgente: i due loop di recovery, lo Step 3c
+// (grassetto + URL + nav), CTA e link interni, lo Step 3e (citazione in
+// body3), poi la decodifica delle entita' e `buildBodyFile()` di
+// `writeSectionLocale()`. Il file emesso per il locale in attesa NON deve
+// contenere la chiave. Sul codice di prima e' rosso: i loop scrivevano
+// l'italiano, CTA e link ricreavano body3/body2.
+function sliceBetween(startMarker, endMarker) {
+  const a = src.indexOf(startMarker);
+  assert.notEqual(a, -1, `${startMarker.trim().slice(0, 60)} non trovato — aggiornare questo test`);
+  const e = src.indexOf(endMarker, a);
+  assert.notEqual(e, -1, `${endMarker.trim().slice(0, 60)} non trovato dopo l'inizio — aggiornare questo test`);
+  return src.slice(a, e);
+}
+
+const STEP_3C_SRC = sliceBetween('  // Step 3c: Sanitize bold + URLs + nav links on translated content', '\n  // Step 3a.1: Reject/repair prompt-schema');
+const STEP_3E_SRC = sliceBetween("  const citationUrl = url.startsWith('stats-bfs://')", '\n  console.error(`\\n📝 Articolo generato');
+const BOLD_SRC = extractFunctionSource('function sanitizeBoldFormatting(data) {');
+const DECODE_ENTITIES_SRC = extractFunctionSource('function decodeLocaleContentEntities(data, locale) {');
+const BUILD_BODY_FILE_SRC = extractFunctionSource('function buildBodyFile(data, locale) {');
+const MAX_BODY_KEYS = (() => {
+  const m = src.match(/const MAX_BODY_KEYS = (\d+);/);
+  assert.ok(m, 'MAX_BODY_KEYS non trovato nel sorgente — aggiornare questo test');
+  return Number(m[1]);
+})();
+
+function runPostTranslationToBodyFiles(data, url) {
+  const fn = new Function(
+    'data', 'url', 'isBodyTranslationPending', 'console',
+    'bodyTextForQuality', 'pickDefaultCTA', 'CTA_KEYWORDS_IT', 'CTA_KEYWORDS_EN', 'CTA_KEYWORDS_DE', 'CTA_KEYWORDS_FR',
+    'decodeHtmlEntities', 'META_SEO_FIELDS', 'escapeForSingleQuoteTS', 'MAX_BODY_KEYS',
+    `${COLLECT_BODY_SECTIONS_SRC}\n${BOLD_SRC}\n${LINKS_SRC}\n${CTA_SRC}\n${DECODE_ENTITIES_SRC}\n${BUILD_BODY_FILE_SRC}\n`
+    + `${STEP_3C_SRC}\nvalidateAndEnforceCTA(data);\nenforceStrongInternalLinks(data);\n${STEP_3E_SRC}\n`
+    + "const out = {};\nfor (const locale of ['it', 'en', 'de', 'fr']) { decodeLocaleContentEntities(data, locale); out[locale] = buildBodyFile(data, locale); }\nreturn out;",
+  );
+  const cta = { it: '\n\nCTA it calcolatore', en: '\n\nCTA en calculator', de: '\n\nCTA de rechner', fr: '\n\nCTA fr calculateur' };
+  return fn(
+    data, url, isBodyTranslationPending, { error: () => {}, warn: () => {} },
+    () => '', () => cta, ['calcolatore'], ['calculator'], ['rechner'], ['calculateur'],
+    decodeHtmlEntities, META_SEO_FIELDS, escapeForSingleQuoteTS, MAX_BODY_KEYS,
+  );
+}
+
+test('#1875 end-to-end: la chiave in attesa resta ASSENTE nel file di body emesso da buildBodyFile()', async () => {
+  const id = 'catena-in-attesa';
+  const it = { ...META_PLAUSIBILI, body1: 'Primo corpo italiano.', body2: 'Secondo corpo italiano.', body3: 'Terzo corpo italiano.' };
+  const lang = (l) => ({ ...META_PLAUSIBILI, body1: `First ${l} body.`, body2: `Second ${l} body.`, body3: `Third ${l} body.` });
+  const fr = lang('fr');
+  delete fr.body1; // rifiutato dal free-MT
+  const de = lang('de');
+  delete de.body3; // idem
+  const en = lang('en');
+  en.body2 = 'This second body is cut off and'; // troncato: passa dal loop truncation-retry
+  const data = { id, category: 'novita', content: { it, en, de, fr } };
+  const translationReport = createFreeMtRecoveryReport({ bodyFieldCount: 3 });
+  recordFreeMtUnusableOutput(translationReport, { reason: 'semantic-truncation', targetLang: 'fr', field: 'body1' });
+  recordFreeMtUnusableOutput(translationReport, { reason: 'semantic-truncation', targetLang: 'de', field: 'body3' });
+  const failing = async () => { throw Object.assign(new Error('All AI models failed'), { code: 'ALL_MODELS_EXHAUSTED' }); };
+
+  await runMissingFieldLoop({ data, itContent: it, callWithRetry: failing, translationReport });
+  await runTruncationRetryLoop({
+    data,
+    itContent: it,
+    detectTruncation: (text) => (String(text).endsWith(' and') ? ['incomplete-ending'] : []),
+    callWithRetry: failing,
+    translationReport,
+  });
+  assert.deepEqual(
+    pendingBodyTranslations(data).map((r) => `${r.locale}:${r.field}:${r.reason}`).sort(),
+    ['de:body3:retry-error', 'en:body2:truncation-retry-error', 'fr:body1:retry-error'],
+  );
+
+  const files = runPostTranslationToBodyFiles(data, 'https://www.rsi.ch/news/ticino/articolo');
+  const keysOf = (file) => [...file.matchAll(new RegExp(`'blog\\.article\\.${id}\\.(body\\d+)'`, 'g'))].map((m) => m[1]);
+
+  assert.deepEqual(keysOf(files.it), ['body1', 'body2', 'body3'], 'l\'italiano resta completo');
+  assert.deepEqual(keysOf(files.fr), ['body2', 'body3'], 'fr: body1 in attesa, assente dal file');
+  assert.deepEqual(keysOf(files.de), ['body1', 'body2'], 'de: body3 in attesa, niente body3 di sola CTA/citazione');
+  assert.deepEqual(keysOf(files.en), ['body1', 'body3'], 'en: body2 in attesa, niente body2 di soli link interni');
+  for (const locale of ['en', 'de', 'fr']) {
+    assert.doesNotMatch(files[locale], /corpo italiano/, `nessun testo italiano nel file ${locale}`);
+    assert.doesNotMatch(files[locale], /\.body\d+': '',/, `nessun body vuoto emesso nel file ${locale}`);
+  }
+  assert.match(files.fr, /Third fr body\.[\s\S]*CTA fr calculateur/, 'dove il body c\'e\' la CTA continua ad arrivare');
+});
+
+// ── validate(): il sanitizer dei body non crea chiavi assenti ──────────────
+//
+// Il finding della review sulla PR #1877 indica questo loop di `validate()`.
+// Oggi gira PRIMA di `translateArticle()` (generateAndValidateArticle), quindi
+// sul flusso primario non incontra un body in attesa; ma scriveva
+// `data.content[locale][field] = text` con `text = campo || ''` per OGNI
+// body atteso dall'italiano, cioe' creava `''` dove la chiave mancava. Il
+// guard rende l'invariante «il marker sopravvive» indipendente dall'ordine.
+test('#1875: il sanitizer dei body di validate() non ricrea una chiave assente (niente body vuoto)', () => {
+  const block = sliceBetween('  // ── Validate internal links in body content ──', '\n  // Coerce all seo fields to strings');
+  const fn = new Function(
+    'data', 'expectedBodyFields', 'stripFabricatedExamples', 'stripCompetitorPromotion', 'sanitizeNavLinkSemantics', 'console',
+    `${block}\nreturn data;`,
+  );
+  const passThrough = (text) => ({ text, removedSections: 0, removed: 0, stripped: 0, examples: [] });
+  const data = {
+    id: 'x',
+    content: {
+      it: { title: 'T', body1: 'Uno.', body2: 'Due.', body3: 'Tre.' },
+      fr: { title: 'T', body2: 'Deux [lien](nav:inesistente).', body3: 'Trois.' },
+    },
+  };
+  markBodyTranslationPending(data, { locale: 'fr', field: 'body1', reason: 'retry-error' });
+
+  fn(data, ['body1', 'body2', 'body3'], passThrough, passThrough, passThrough, { error: () => {}, warn: () => {} });
+
+  assert.equal(Object.hasOwn(data.content.fr, 'body1'), false, 'la chiave in attesa non diventa un body vuoto');
+  assert.equal(data.content.fr.body2, 'Deux lien.', 'i body presenti sono ancora sanitizzati (link nav invalido rimosso)');
+  assert.deepEqual(Object.keys(data.content.it).filter((k) => k.startsWith('body')), ['body1', 'body2', 'body3']);
 });

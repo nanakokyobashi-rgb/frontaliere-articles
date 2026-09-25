@@ -10575,7 +10575,8 @@ function preserveMunicipalityNamesInMetadata(data) {
 // Free-MT replacement for translateContent: same return shape ({title, excerpt,
 // body1..bodyN, faq?}) but each field via the quota-free cascade. Missing/failed
 // fields are simply omitted → the existing missing-field recovery loop in
-// translateArticle re-translates them (LLM) or falls back to IT.
+// translateArticle re-translates them (LLM); if that fails, title/excerpt/FAQ
+// fall back to IT and a bodyN stays untranslated (#1875).
 async function translateContentFreeMt(sourceLang, targetLang, targetLabel, sourceContent) {
   console.error(`🌍 [${targetLabel}] Traduzione ${targetLang.toUpperCase()} via cascade MT gratuita (no quota LLM)...`);
   const bodyFields = Object.keys(collectBodySections(sourceContent));
@@ -11843,7 +11844,16 @@ function validate(data, opts = {}) {
       }
     }
     for (const field of bodyFields) {
-      let text = data.content[locale][field] || '';
+      // Mai CREARE un campo assente: `expectedBodyFields` viene dall'italiano,
+      // e su en/de/fr un `bodyN` assente e' il marker «traduzione in attesa»
+      // (#1875, `markBodyTranslationPending`). Scriverci `''` lo trasformava in
+      // un body vuoto che `buildBodyFile()` emette come chiave presente, e che
+      // nella SPA vince sul fallback italiano. Oggi `validate()` gira prima di
+      // `translateArticle()`, quindi il caso non si produce sul flusso
+      // primario; il guard rende l'invariante indipendente dall'ordine. Sul
+      // locale `it` e' un no-op: i body attesi sono gia' pretesi sopra.
+      if (typeof data.content[locale][field] !== 'string') continue;
+      let text = data.content[locale][field];
       // Remove raw <a href="..."> tags the AI might have inserted — they cause redirect issues
       text = text.replace(/<a\s+href="[^"]*"[^>]*>(.*?)<\/a>/gi, '$1');
 
