@@ -72,8 +72,11 @@ import { decodeSyntheticSourceToken, isZeroSourceForGenerationBudget, markSynthe
 // ── Il modello preferito per la SOLA generazione del corpo ──────────────────
 //
 // Decisione del proprietario: per la generazione editoriale ad alto valore la
-// prima scelta e' Codex via subscription; Claude Haiku e' il fallback
-// immediato, poi si passa alla cascata disponibile. Questo e' quel punto: la
+// prima scelta e' Codex via subscription, poi si passa alla cascata
+// disponibile. Claude Haiku NON e' piu' un fallback: il 2026-09-24 il
+// proprietario l'ha spento («Disattiva haiku! Voglio solo codex»), e
+// ai-models.mjs non lo rende disponibile nemmeno con il flag RC acceso
+// (isClaudeCliFallbackEnabled). Questo e' quel punto: la
 // generazione del corpo italiano e' l'unica chiamata i cui gate (fedelta' alla
 // fonte, tassi chiave, lunghezza minima) bocciano davvero l'output dei modelli
 // free.
@@ -92,13 +95,6 @@ import { decodeSyntheticSourceToken, isZeroSourceForGenerationBudget, markSynthe
 // l'indipendenza che il guard «local/fallback cannot self-verify» difende.
 const PREFERRED_GENERATION_MODELS = [
   AI_MODELS.CODEX_CLI_PRIMARY,
-  // Crawler groups do not receive the Claude OAuth token. Keep Claude out of
-  // their declared preference rather than advertising a lane that
-  // isModelAvailable() will immediately discard; the wired article workflow
-  // adds it here when its flag and token are both present.
-  ...(isModelAvailable(AI_MODELS.CLAUDE_CLI_HAIKU)
-    ? [AI_MODELS.CLAUDE_CLI_HAIKU]
-    : []),
 ];
 
 /**
@@ -6145,6 +6141,10 @@ async function callLLM(messages, opts = {}) {
     // attempt consumed nearly all of it). ...opts still wins if a caller passes
     // its own deadlineMs (or explicit null to opt out of the cap entirely).
     const result = await _aiCallLLM(messages, { temperature: 0.7, maxTokens: 4000, timeout: 90_000, deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS, ...llmOpts, modelUsedRef });
+    // `modelUsedRef` del chiamante: il wrapper usa il suo per la validazione e
+    // gli copia sopra il modello servito, cosi' chi valida a valle una risposta
+    // (la selezione headline) puo' dire a QUALE modello attribuire il rigetto.
+    if (opts.modelUsedRef && typeof opts.modelUsedRef === 'object') opts.modelUsedRef.model = modelUsedRef.model;
     if (modelUsedRef.model === AI_MODELS.LOCAL_FALLBACK) _localFallbackUsedThisHeadline = true;
     if (isBody2Check) {
       let itContent = null;
@@ -7852,6 +7852,16 @@ const HEADLINE_SELECTION_FALLBACK = {
 
 async function requestHeadlineSelection(basePrompt, candidateCount, label, maxAttempts, fallback = { models: [], engaged: false }) {
   let last = null;
+  // I modelli la cui risposta HTTP 200 il protocollo ha RIGETTATO in questa
+  // selezione. Per la cascata quella era una chiamata riuscita (+2): nella run
+  // 36010807545 nvidia/nemotron-3-super ha risposto con prosa di ragionamento
+  // («We need to pick…») a OGNI tentativo, il suo tasso di successo storico lo
+  // rimetteva primo, e ogni giro chiudeva con 0 finalisti. Il rigetto conta
+  // ora come fallimento di contenuto (recordModelContentFailure: penalita', e
+  // al secondo di fila il modello e' escluso per la run) e il tentativo
+  // successivo di QUESTA selezione non torna sullo stesso modello. Si somma al
+  // ripiego Codex qui sopra: il rigetto accende anche `fallback.engaged`.
+  const rejectedModels = [];
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     // Dopo un INFRA_ERROR non c'e' nessuna risposta da correggere: appendere il
     // promemoria direbbe al modello che ha sbagliato quando non ha nemmeno
@@ -7861,6 +7871,16 @@ async function requestHeadlineSelection(basePrompt, candidateCount, label, maxAt
       : `${basePrompt}\n\n${selectionCorrectionNote(last?.rejection, candidateCount)}`;
     const useFallback = fallback.engaged && fallback.models.length > 0;
     let rawText;
+    const modelUsedRef = { model: null };
+    const callOpts = {
+      model: GH_MODEL_LIGHT,
+      temperature: 0.3,
+      maxTokens: 512,
+      jsonMode: true,
+      modelUsedRef,
+      ...(rejectedModels.length ? { excludeModels: [...rejectedModels] } : {}),
+      ...(useFallback ? { prefer: fallback.models } : {}),
+    };
     try {
       rawText = await callLLM(
         [{ role: 'user', content: prompt }],
@@ -7873,13 +7893,7 @@ async function requestHeadlineSelection(basePrompt, candidateCount, label, maxAt
         // ritaglia ED ESEGUE questa funzione con le sole dipendenze iniettate,
         // quindi il no-op la romperebbe. Il termine e' pinnato da
         // llm-call-budget.test.mjs sul wrapper, dove vive davvero.
-        {
-          model: GH_MODEL_LIGHT,
-          temperature: 0.3,
-          maxTokens: 512,
-          jsonMode: true,
-          ...(useFallback ? { prefer: fallback.models } : {}),
-        },
+        callOpts,
       );
     } catch (err) {
       // Il fallimento di UNA chiamata (payload jsonMode incompleto, retry del
@@ -7929,7 +7943,14 @@ async function requestHeadlineSelection(basePrompt, candidateCount, label, maxAt
       continue;
     }
     const parsed = parseHeadlineSelection(rawText, candidateCount);
-    if (parsed.ok) return { ...parsed, attempts: attempt };
+    if (parsed.ok) {
+      recordModelContentSuccess(modelUsedRef.model);
+      return { ...parsed, attempts: attempt };
+    }
+    // Una risposta arrivata e rigettata dal protocollo e' un fallimento di
+    // CONTENUTO del modello che l'ha data, non un successo di trasporto.
+    recordModelContentFailure(modelUsedRef.model, { recordScore: callOpts.recordScore });
+    if (modelUsedRef.model && !rejectedModels.includes(modelUsedRef.model)) rejectedModels.push(modelUsedRef.model);
     if (fallback.models.length > 0) fallback.engaged = true;
     last = parsed;
     console.error(
@@ -9371,7 +9392,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   // si arma SOLO quando `err.retryRequestTokenBudget` viene dal roster
   // (`_budgetDettato`), cioe' quando la libreria ha visto ALMENO un modello
   // saltato per cap di INPUT — ma l'unico membro di
-  // `PREFERRED_GENERATION_MODELS` (Codex + claude-cli/haiku) non dichiara
+  // `PREFERRED_GENERATION_MODELS` (solo Codex, Haiku e' spento) non dichiara
   // nessun cap di input (getDeclaredRequestTokenLimit li salta sempre), quindi non possono
   // MAI essere fra i modelli saltati per dimensione. Se ha fallito, ha fallito
   // per un'altra ragione (timeout, quota, rate-limit) che ridimensionare il
@@ -17694,7 +17715,7 @@ if (invokedDirectly) {
       + ` contro un cap massimo di ${cap.maxSkippedReqLimit} (oltre di ~${over}).`
       + ` NON e' un esaurimento di quota: nessuna finestra oraria rimpicciolisce un prompt, quindi differire qui e' un ciclo infinito`
       + ` (issue #313: 60+ run 'success' consecutive senza un articolo). Accorciare il prompt di almeno ${over} token,`
-      + ` oppure rendere raggiungibile un modello con contesto adeguato (claude-cli/haiku).`,
+      + ` oppure rendere raggiungibile un modello con contesto adeguato (codex-cli, lane CODEX_AUTH_JSON).`,
     );
     console.error(`::error::roster-cannot-serve-prompt: est=${cap.estimatedRequestTokens} best_cap=${cap.maxSkippedReqLimit} over=${over} refusals=${cap.count}`);
     await exitAfterFlush(EXIT_ROSTER_CANNOT_SERVE_PROMPT);

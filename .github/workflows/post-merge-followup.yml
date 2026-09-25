@@ -54,7 +54,10 @@ jobs:
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     # 30→40 (2026-07-17): headroom per il cap turni dinamico alzato (max 60→80).
-    timeout-minutes: 40 # batch di N PR in una sessione (era 10 per una sola PR)
+    # 40→55 (2026-09-24): la sessione Codex del batch ha misurato 1670s
+    # (35973121007) ed e' morta sul watchdog da 1800s (36009410204) con lo
+    # step da 32 min gia' pieno (job 35m42s su 40). Vedi lo step Codex.
+    timeout-minutes: 55 # batch di N PR in una sessione (era 10 per una sola PR)
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -229,12 +232,12 @@ jobs:
 
       - name: Run Codex Luna Max follow-up triage (batch)
         # Tetto sullo step: senza, l'unico limite era il cap del job
-        # (40min) e la run ci moriva `cancelled` — che NON fa scattare
+        # (ora 55min) e la run ci moriva `cancelled` — che NON fa scattare
         # nessun `if: failure()` e si vede solo dallo scan periodico
         # (`scripts/ci/scan-job-timeouts.mjs`). Stessa classe di #7310.
-        # 32min = cap del job meno il setup pre-provider misurato (~98s
-        # sulle ultime run) e una coda per gli step `if: always()`.
-        timeout-minutes: 32
+        # 47min = cap del job meno il pre-step misurato (~102s) e la coda
+        # degli step successivi (~122s, run 36009410204) con margine.
+        timeout-minutes: 47
         id: followup
         # Gira SOLO se il batch ha almeno una PR. Per le altre run (finestra vuota /
         # tutte già-triagiate / tutte scartate dai gate) la sessione del provider è
@@ -265,6 +268,12 @@ jobs:
           # belongs to the site. Keep Valerie's cross-repo PAT in the
           # host-side site scope; Codex receives neither PAT.
           codex_site_github_token: ${{ env.GITHUB_PAT }}
+          # Watchdog Codex 1800s→2520s: 36009410204 e' stata uccisa a 1803s
+          # con 4 PR verificate e persistite ma `action_ok=false`, la run
+          # precedente ha chiuso a 1670s. 2520s + setup Codex (~2-4 min) +
+          # kill grace + coda restano sotto lo step da 47 min, cosi' il
+          # watchdog scatta prima del kill del runner.
+          exec_timeout_seconds: '2520'
           # Il merge che alimenta questo workflow può arrivare da automation interna:
           # i token host-side sono espliciti e separati per repository; il token del
           # job resta confinato ai passi zero-agent che lo dichiarano.
@@ -526,11 +535,18 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
+          # I daily del corpus contengono anche item instradati dal sito
+          # (FOLLOWUP.md § Routing cross-repository) con `Sources: PR #N` del
+          # sito: senza questo repository gemello il recovery storico cercava
+          # quelle PR qui, `gh` rispondeva «Could not resolve to a PullRequest»
+          # e il daily #1508 (2026-09-15) restava `collecting` a ogni run. Il
+          # token arriva dalla shell dopo load-rc-env, non dal contesto `env.*`.
+          GATE_ALT_PR_REPO: valerielinc-ops/frontaliere-si-o-no
           BATCH_PRS: ${{ steps.collect.outputs.batch_prs }}
           TRIAGE_DAILY_KEY: ${{ steps.collect.outputs.daily_key }}
           COLLECTION_OK: ${{ steps.collect.outputs.collection_ok }}
           TRIAGE_COMPLETE: ${{ steps.triage_complete.outputs.triage_complete }}
-        run: node scripts/ci/gate-minted-followups.mjs
+        run: GATE_ALT_PR_TOKEN="${GITHUB_PAT_SITE:-${GITHUB_PAT:-}}" node scripts/ci/gate-minted-followups.mjs
 
       # Le follow-up che riguardano il producer vengono coniate sul corpus, non sul
       # sito. Il gate deve quindi leggere/scrivere le issue su Nanako ma commentare la
@@ -541,6 +557,7 @@ jobs:
         env:
           GH_REPO: nanakokyobashi-rgb/frontaliere-articles
           GATE_PR_REPO: ${{ github.repository }}
+          GATE_ALT_PR_REPO: valerielinc-ops/frontaliere-si-o-no
           BATCH_PRS: ${{ steps.collect.outputs.batch_prs }}
           TRIAGE_DAILY_KEY: ${{ steps.collect.outputs.daily_key }}
           COLLECTION_OK: ${{ steps.collect.outputs.collection_ok }}
@@ -551,7 +568,8 @@ jobs:
             echo "::warning::Gate sul conio corpus saltato: GITHUB_PAT_NANAKO/GITHUB_PAT assente; issue lasciate intatte."
             exit 0
           fi
-          GH_TOKEN="$corpus_token" GATE_PR_TOKEN="$corpus_token" node scripts/ci/gate-minted-followups.mjs
+          GH_TOKEN="$corpus_token" GATE_PR_TOKEN="$corpus_token" \
+            GATE_ALT_PR_TOKEN="${GITHUB_PAT_SITE:-${GITHUB_PAT:-}}" node scripts/ci/gate-minted-followups.mjs
 
       # Quando il batch corpus conia item che puntano a file del sito, il gate
       # precedente non li vede: GH_REPO è volutamente il corpus. Il gate deve girare
