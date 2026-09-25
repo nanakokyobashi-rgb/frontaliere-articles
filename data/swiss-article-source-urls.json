@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4003491": {
-    "articleId": "esercito-misure-discriminazione",
-    "ts": "2026-08-21T10:21:15.193Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1945250/vendemmia-siccita-puo-dovrebbe-alcune": {
     "articleId": "vendemmia-svizzera-2026-qualita",
     "ts": "2026-08-21T11:36:32.928Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/ticino/politica/1952705/un-incentivo-fiscale-per-chi-compra-locale-la-proposta-del-centro": {
     "articleId": "incentivo-fiscale-acquisto-locale",
     "ts": "2026-09-25T14:19:43.522Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/newsblog/valute-e-frontiere/1952699/franco-cambio-euro-svizzero-anni-settimane-segnali-ribasso": {
+    "articleId": "franco-svizzero-ribasso-settembre-novembre",
+    "ts": "2026-09-25T15:24:07.473Z",
     "keyForm": 2
   }
 }
