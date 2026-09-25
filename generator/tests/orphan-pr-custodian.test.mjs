@@ -8,7 +8,9 @@ import {
   actionMarker,
   cancelledRequiredSuites,
   classifyOrphan,
+  inventoryWarning,
   isAutonomousPr,
+  readOpenPulls,
   reviewRevisionForBody,
 } from '../../scripts/ci/orphan-pr-custodian.mjs';
 import { VITEST_CHECK_NAME } from '../../scripts/ci/lib/constants.mjs';
@@ -293,6 +295,18 @@ describe('orphan-pr-custodian — adozione di un 🔴 fuori scope (sito #9221/#9
   it('usa la stessa definizione di autonomia dei fixer', () => {
     assert.equal(isAutonomousPr(pr({ headRef: 'automerge-x' })), true);
     assert.equal(isAutonomousPr(pr()), false);
+  });
+
+  it('tratta un rate-limit sull’inventario iniziale come no-op ritentabile', () => {
+    const rateLimit = new Error('Command failed');
+    rateLimit.stderr = 'gh: API rate limit exceeded for installation';
+    const result = readOpenPulls('example/repo', () => { throw rateLimit; });
+    assert.equal(result.pulls, null);
+    assert.match(result.warning, /API rate limit exceeded/);
+    assert.equal(result.warning, inventoryWarning(rateLimit));
+
+    const healthy = readOpenPulls('example/repo', () => [[{ number: 1 }], [{ number: 2 }]]);
+    assert.deepEqual(healthy.pulls, [{ number: 1 }, { number: 2 }]);
   });
 });
 

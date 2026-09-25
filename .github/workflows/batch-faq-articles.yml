@@ -11,10 +11,18 @@ name: Batch FAQ Generation
 #   - No `mint-app-token.mjs`. That mints a token for the site repo's GitHub App
 #     installation, which is scoped to valerielinc-ops/frontaliere-si-o-no and has
 #     no rights here. The push identity is GITHUB_PAT, pulled from Remote Config.
-#   - No `setup-omniroute` / `setup-claude-haiku-fallback` composite actions. Both
-#     are OPTIONAL model tiers behind their own RC kill-switches, and neither was
-#     part of the transport manifest. The primary providers all arrive through
-#     load-rc-env.mjs, so dropping them costs fallback depth, not capability.
+#   - No `setup-omniroute` composite action. It is an OPTIONAL model tier behind
+#     its own RC kill-switch and was not part of the transport manifest. The
+#     primary providers all arrive through load-rc-env.mjs, so dropping it costs
+#     fallback depth, not capability.
+#   - `setup-claude-haiku-fallback` DOES run here since 2026-09-25, for the
+#     translation cascade only (owner: "Quando deepl e azure translation sono
+#     fuori quota USA codex luna Max"). Run 36097655591 had both DeepL keys
+#     exhausted, both Azure keys at 401 and 288/288 FAQ fields served by
+#     MyMemory. With the broker socket, free-translate.mjs's Codex Luna Max
+#     tier serves those fields once DeepL and Azure are out, capped at
+#     FREE_TRANSLATE_CODEX_MAX_CALLS per process. No AI_MODELS_PREFER: FAQ
+#     generation itself stays on the free cascade.
 #   - No `npm run test:articles`. Those are site tests, some of which assert on
 #     React rendering (§4).
 #   - No `trigger-deploy.sh` and no corpus-mirror dispatch. Neither exists here:
@@ -174,6 +182,21 @@ jobs:
       - name: Ensure progress directory exists
         run: mkdir -p data
 
+      # Codex Luna Max broker for the translation tier only (see the header).
+      # Its idle TTL matches the job's 360-minute timeout: the tier engages only
+      # once DeepL and Azure run out, which can be hours into the first step,
+      # and the second step starts after it. With the default 30 minutes the
+      # socket vanished during that silence and the tier was skipped without a
+      # word. The cleanup step below still ends the broker. It never fails the
+      # job — without it the tier is skipped and the cascade is the one it
+      # always was. Dry runs make no AI calls, so they skip it.
+      - id: setup_claude_haiku_fallback
+        if: steps.mode.outputs.dry != 'true'
+        uses: ./.github/actions/setup-claude-haiku-fallback
+        with:
+          codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
+          broker_idle_ttl_ms: '21600000'
+
       - name: Run batch FAQ generation
         id: faq
         env:
@@ -181,6 +204,14 @@ jobs:
           FAQ_CONCURRENCY: ${{ inputs.concurrency || '1' }}
           FAQ_SKIP_TRANSLATE: ${{ inputs.skip_translate }}
           FAQ_DRY_RUN: ${{ steps.mode.outputs.dry }}
+          CODEX_AUTH_BROKER_SOCKET: ${{ steps.setup_claude_haiku_fallback.outputs.codex_auth_broker_socket }}
+          # Daily heavy-volume caller (~200 articles x 3 locales x FAQ pairs):
+          # the Codex quota is shared with the owner's interactive use, so the
+          # call cap stays below the free-translate.mjs default of 40. The time
+          # cap is above its 5-minute default: this job has hours, not the
+          # 40-minute kill of create-article.
+          FREE_TRANSLATE_CODEX_MAX_CALLS: '20'
+          FREE_TRANSLATE_CODEX_MAX_MS: '1200000'
         run: |
           set -euo pipefail
           ARGS=(--limit "$FAQ_LIMIT" --concurrency "$FAQ_CONCURRENCY")
@@ -195,7 +226,24 @@ jobs:
 
       - name: Fix FAQ locales (translate missing/wrong-locale FAQs)
         if: steps.mode.outputs.dry != 'true'
+        env:
+          CODEX_AUTH_BROKER_SOCKET: ${{ steps.setup_claude_haiku_fallback.outputs.codex_auth_broker_socket }}
+          FREE_TRANSLATE_CODEX_MAX_CALLS: '20'
+          FREE_TRANSLATE_CODEX_MAX_MS: '1200000'
         run: node generator/scripts/fix-faq-locales.mjs --limit 500
+
+      - name: Cleanup Codex auth broker
+        if: always()
+        continue-on-error: true
+        env:
+          CODEX_AUTH_BROKER_SOCKET: ${{ steps.setup_claude_haiku_fallback.outputs.codex_auth_broker_socket }}
+        run: |
+          if [ -z "$CODEX_AUTH_BROKER_SOCKET" ] || [ ! -S "$CODEX_AUTH_BROKER_SOCKET" ]; then
+            exit 0
+          fi
+          node .github/actions/setup-claude-haiku-fallback/codex-auth-broker.mjs \
+            --cleanup --socket "$CODEX_AUTH_BROKER_SOCKET" \
+            || echo "::warning::Codex auth broker cleanup did not complete"
 
       # No git-add-resolved.mjs here: that exists in the site repo because
       # services/locales/blog-body is a SYMLINK into packages/articles, and
