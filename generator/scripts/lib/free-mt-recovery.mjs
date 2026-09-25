@@ -129,6 +129,9 @@ export function createFreeMtRecoveryReport({
     // Mappa serializzabile (il RUN_REPORT finisce in JSON: un Set diventerebbe
     // `{}`) delle coppie (locale, campo) che il free-MT ha davvero rifiutato.
     unusableFields: {},
+    // `<locale>:<bodyN>` -> motivo, per i body che nessun tier ha tradotto e
+    // che restano quindi NON tradotti (vedi `markBodyTranslationPending`).
+    pendingBodyFields: {},
   };
 }
 
@@ -157,7 +160,8 @@ export function recordFreeMtUnusableOutput(report, { reason, targetLang, field, 
  * run? Solo per questi il cap ha titolo di negare il retry mirato: un campo
  * mancante per cause estranee al free-MT (floor-miss, output vuoto del
  * percorso LLM) non consuma budget e non deve mai saltare il retry, perche'
- * il suo fallback pubblica ITALIANO sotto `/en/`, `/de/`, `/fr/` (#831).
+ * senza traduzione un title/excerpt/FAQ ricade sull'ITALIANO sotto `/en/`,
+ * `/de/`, `/fr/` (#831) e un bodyN resta non tradotto (#1875).
  */
 export function wasFreeMtUnusable(report, targetLang, field) {
   if (!report || typeof report !== 'object') return false;
@@ -244,4 +248,90 @@ export function claimFreeMtLlmFallback(
   report.llmFallbacks = (report.llmFallbacks || 0) + 1;
   report.llmFallbacksByLocale[key] = usedHere + 1;
   return true;
+}
+
+// ── Esito terminale della recovery su un bodyN: NON tradotto (#1875) ─────────
+//
+// Quando ne' il free-MT ne' il retry LLM mirato producono un `bodyN` usabile
+// (tier a quota esaurita, retry saltato dal cap, traduzione ancora troncata),
+// `translateArticle()` pubblicava il valore ITALIANO come body en/de/fr: la
+// run 36119335123 ha messo online `fr/ridurre-tempi-ripristino-a2-mezzovico`
+// in italiano, e dal 18-09 e' successo al 48% degli articoli nuovi. Nessun
+// gate lo vede dopo: una copia italiana ha gli stessi numeri della sorgente.
+//
+// Ora il campo resta ASSENTE dal contenuto del locale, e l'assenza e' il
+// marker di «traduzione in attesa»:
+//   - e' deterministica. Su origin/main 85fd0abf nessuna delle 18.558 coppie
+//     articolo×locale di `content/blog-body{,-ch}` manca di un `bodyN` che
+//     l'italiano ha, quindi chi recupera la trova confrontando le chiavi, senza
+//     un rilevatore di lingua;
+//   - il sito la gestisce gia'. La SPA risolve una chiave mancante
+//     sull'italiano (`t()` in services/i18n.ts), il prerender rende solo le
+//     sezioni presenti senza spostare le intestazioni (ogPagesPlugin), i feed
+//     concatenano le parti presenti, e `scripts/build-api.mjs` non legge i body.
+//
+// Il marker vive anche su `data`, come proprieta' NON enumerabile, perche' i
+// mutatori a valle (CTA in body3, link interni in body2) non ricreino il campo
+// con un moncone di sola CTA: cancellerebbe il marker e, nella SPA, il moncone
+// vincerebbe sull'intero body italiano.
+const PENDING_BODY_TRANSLATIONS = '_pendingBodyTranslations';
+
+function pendingList(data, { create = false } = {}) {
+  if (!data || typeof data !== 'object') return null;
+  const existing = data[PENDING_BODY_TRANSLATIONS];
+  if (Array.isArray(existing)) return existing;
+  if (!create) return null;
+  const list = [];
+  Object.defineProperty(data, PENDING_BODY_TRANSLATIONS, {
+    value: list,
+    configurable: true,
+    writable: true,
+    enumerable: false,
+  });
+  return list;
+}
+
+/** Azzera i marker: `translateArticle()` riparte sempre da una traduzione nuova. */
+export function resetBodyTranslationPending(data) {
+  if (data && typeof data === 'object' && PENDING_BODY_TRANSLATIONS in data) {
+    delete data[PENDING_BODY_TRANSLATIONS];
+  }
+}
+
+/**
+ * Lascia `data.content[locale][field]` NON tradotto: toglie qualunque valore
+ * inutilizzabile (vuoto, `null` serializzato, traduzione troncata) e registra
+ * `{id, locale, field, reason}` su `data` e, se passato, nel report della run.
+ * Non scrive MAI il valore italiano.
+ */
+export function markBodyTranslationPending(data, { locale, field, reason = 'unknown', report = null } = {}) {
+  if (!/^body\d+$/.test(String(field || ''))) {
+    throw new Error(`markBodyTranslationPending: "${field}" non e' un campo bodyN`);
+  }
+  const content = data?.content?.[locale];
+  if (content && typeof content === 'object') delete content[field];
+  const record = { id: data?.id ?? null, locale, field, reason };
+  const list = pendingList(data, { create: true });
+  if (list) {
+    const at = list.findIndex((r) => r.locale === locale && r.field === field);
+    if (at === -1) list.push(record);
+    else list[at] = record;
+  }
+  if (report && typeof report === 'object') {
+    if (!report.pendingBodyFields || typeof report.pendingBodyFields !== 'object') report.pendingBodyFields = {};
+    report.pendingBodyFields[freeMtFieldKey(locale, field)] = reason;
+  }
+  return { ...record };
+}
+
+/** Il `field` di `locale` e' stato lasciato non tradotto da questa traduzione? */
+export function isBodyTranslationPending(data, locale, field) {
+  const list = pendingList(data);
+  return Boolean(list && list.some((r) => r.locale === locale && r.field === field));
+}
+
+/** Copia dei marker, per log e report. */
+export function pendingBodyTranslations(data) {
+  const list = pendingList(data);
+  return list ? list.map((r) => ({ ...r })) : [];
 }

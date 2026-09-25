@@ -195,8 +195,9 @@ export function ensureMunicipalityNames(sourceText, translatedText) {
  *
  * Failing CLOSED here — returning null rather than a stringified object — is what
  * makes the existing recovery work: the field reads as missing, so the per-field
- * missing-translation retry runs and, failing that, falls back to the IT source.
- * A stringified object is unrecoverable; a missing field is not.
+ * missing-translation retry runs and, failing that, a body stays untranslated
+ * (#1875; title/excerpt fall back to the IT source). A stringified object is
+ * unrecoverable; a missing field is not.
  *
  * Il test di non-vuoto e' `hasUsableTranslatedText` e non un `value.trim()` nudo:
  * un modello che serializza il `null` come STRINGA (`"null"` — la forma
@@ -205,7 +206,8 @@ export function ensureMunicipalityNames(sourceText, translatedText) {
  * `validateItalianPayload` gira solo su `content.it`. Un `body1` de/en/fr con
  * testo `null` andrebbe dritto in `content/`, in `dist/api/meta-<locale>.json`
  * e nei feed RSS. Fallendo CHIUSI qui il campo si legge come mancante e la
- * recovery per-campo (retry mirato -> fallback IT) lo recupera.
+ * recovery per-campo lo recupera (retry mirato; se fallisce, il body resta non
+ * tradotto — #1875 — e title/excerpt ricadono sull'IT).
  *
  * Il predicato e' quello dei campi TRADOTTI, ed e' PER LOCALE: su `de` solo la
  * forma serializzata (`null` minuscolo) e' scartata, perche' `Null` maiuscolo
@@ -285,8 +287,8 @@ export function maskNavLinks(text) {
  * preserving internal nav-links and, when requested, municipality names.
  * Returns '' on any failure (empty input, MT error, empty output, a mangled
  * sentinel, or a materially truncated body) so the caller's per-field recovery
- * (LLM retry → IT fallback) takes over — free MT can only IMPROVE coverage,
- * never produce broken output.
+ * takes over (LLM retry, then IT fallback for title/excerpt or an untranslated
+ * body, #1875) — free MT can only IMPROVE coverage, never produce broken output.
  *
  * @param {object} args
  * @param {string} args.text                source text
