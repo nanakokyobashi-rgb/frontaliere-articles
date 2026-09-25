@@ -1189,8 +1189,8 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.traffico-da-record.title': 'Trafic record : coûts de 117 milliards de francs et voitures toujours en tête',
     'blog.article.traffico-da-record.excerpt': 'Le trafic en Suisse a généré des coûts d\'environ 117 milliards de francs. L\'automobile est le moyen de transport dominant.',
     'blog.article.traffico-da-record.imageAlt': 'Lugano, vue panoramique de la ville.',
-    'blog.article.naspi-frontendalieri-requisiti-calcolo-2024.title': 'Masques pour ex-frontières : exigences et calcul',
-    'blog.article.naspi-frontendalieri-requisiti-calcolo-2024.excerpt': 'Le nouvel accord frontalier prévoit l\'introduction du ruban adhésif pour les frontaliers en Suisse. Voici les exigences, le calcul du montant, la durée et comment postuler.',
+    'blog.article.naspi-frontendalieri-requisiti-calcolo-2024.title': 'NASPI pour ex-frontaliers : exigences et calcul',
+    'blog.article.naspi-frontendalieri-requisiti-calcolo-2024.excerpt': 'Pour le frontalier résidant en Italie, la NASpI est versée par l\'INPS : il faut 13 semaines de cotisations en quatre ans, périodes suisses comprises. Conditions, calcul 2026, durée et demande.',
     'blog.article.naspi-frontendalieri-requisiti-calcolo-2024.imageAlt': 'Image d\'un frontalière dans une situation similaire',
     'blog.article.assicurazione-rc-auto-svizzera-differenze-italia-frontalieri.title': 'RC auto : différences entre la Suisse et l\'Italie pour les frontaliers',
     'blog.article.assicurazione-rc-auto-svizzera-differenze-italia-frontalieri.excerpt': 'L\'assurance RC auto en Suisse pour les frontaliers : ce qui change par rapport à la police italienne, bonus-malus, immatriculation du véhicule',
@@ -6698,6 +6698,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.canicola-danni-economici-2026.title': 'Canicule en Suisse : 400 millions de dégâts en 2026',
     'blog.article.canicola-danni-economici-2026.excerpt': 'L\'été torride 2026 a causé 400 millions de francs de dégâts en Suisse. Allianz Trade met en garde contre les risques économiques de 2027.',
     'blog.article.canicola-danni-economici-2026.imageAlt': 'Des travailleurs en pause pendant une canicule dans une ville suisse',
+    'blog.article.nuova-legge-cibersicurezza-lcib.title': 'Suisse : nouvelle loi autonome sur la cybersécurité LCib',
+    'blog.article.nuova-legge-cibersicurezza-lcib.excerpt': 'Le Conseil fédéral charge le DDPS d\'élaborer d\'ici juin 2027 la LCib, basée sur le Cyber Resilience Act européen pour les produits et données numériques.',
+    'blog.article.nuova-legge-cibersicurezza-lcib.imageAlt': 'Infrastructure numérique et serveurs pour la cybersécurité en Suisse',
 };
 
 export default blogMetaChFr;

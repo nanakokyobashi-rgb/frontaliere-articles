@@ -1190,7 +1190,7 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.traffico-da-record.excerpt': 'Il traffico in Svizzera ha generato costi per circa 117 miliardi di franchi. L\'automobile è il mezzo di trasporto dominante.',
     'blog.article.traffico-da-record.imageAlt': 'Lugano, vista panoramica della città.',
     'blog.article.naspi-frontendalieri-requisiti-calcolo-2024.title': 'NASPI per ex-frontalieri: requisiti e calcolo',
-    'blog.article.naspi-frontendalieri-requisiti-calcolo-2024.excerpt': 'Il Nuovo Accordo Frontalieri prevede l\'introduzione del NASPI per i frontalieri in Svizzera. Ecco i requisiti, il calcolo dell\'importo, la durata e come fare domanda.',
+    'blog.article.naspi-frontendalieri-requisiti-calcolo-2024.excerpt': 'Al frontaliere residente in Italia la NASpI la paga l\'INPS: servono 13 settimane di contributi in quattro anni, periodi svizzeri compresi. Requisiti, calcolo 2026, durata e domanda.',
     'blog.article.naspi-frontendalieri-requisiti-calcolo-2024.imageAlt': 'Immagine di un frontaliere che si trova in una situazione simile',
     'blog.article.assicurazione-rc-auto-svizzera-differenze-italia-frontalieri.title': 'RC auto: differenze tra Svizzera e Italia per i frontalieri',
     'blog.article.assicurazione-rc-auto-svizzera-differenze-italia-frontalieri.excerpt': 'L\'assicurazione RC auto in Svizzera per i frontalieri: cosa cambia rispetto alla polizza italiana, bonus-malus, immatricolazione del veicolo',
@@ -6698,6 +6698,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.canicola-danni-economici-2026.title': 'Canicola in Svizzera: 400 milioni di danni nel 2026',
     'blog.article.canicola-danni-economici-2026.excerpt': 'L\'estate torrida 2026 ha causato 400 milioni di franchi di danni in Svizzera. Allianz Trade avverte sui rischi economici del 2027.',
     'blog.article.canicola-danni-economici-2026.imageAlt': 'Lavoratori in pausa durante la canicola in una città svizzera',
+    'blog.article.nuova-legge-cibersicurezza-lcib.title': 'Svizzera: nuova legge autonoma sulla cibersicurezza LCib',
+    'blog.article.nuova-legge-cibersicurezza-lcib.excerpt': 'Il Consiglio federale incarica il DDPS di elaborare entro giugno 2027 la LCib, basata sul Cyber Resilience Act europeo per prodotti e dati digitali.',
+    'blog.article.nuova-legge-cibersicurezza-lcib.imageAlt': 'Infrastruttura digitale e server per la sicurezza informatica in Svizzera',
 };
 
 export default blogMetaChIt;

@@ -119,17 +119,37 @@ jobs:
           if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
             PR="$DISPATCH_PR"
             HEAD_SHA=$(gh api "repos/$REPO/pulls/$PR" --jq '.head.sha' 2>/dev/null || echo "")
-            RUN_ID=$(gh run list --repo "$REPO" --workflow=tests.yml --limit 20 \
-              --json databaseId,headSha,conclusion \
-              --jq "[.[] | select(.headSha==\"$HEAD_SHA\" and .conclusion==\"failure\")][0].databaseId" 2>/dev/null || echo "")
+            if ! [[ "$HEAD_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+              echo "::error::HEAD di #$PR illeggibile: senza SHA la ricerca per head_sha restituirebbe le run di qualunque PR."
+              exit 1
+            fi
+            # La run rossa si cerca per SHA, non fra le ultime 20 run del repo:
+            # qui 20 run coprono circa 50 minuti (misurato: 05:26Z → 06:17Z del
+            # 2026-09-25), quindi il dispatch su una PR rossa da piu' di un'ora
+            # finiva sempre in no-op. Stessa correzione del sito
+            # (valerielinc-ops/frontaliere-si-o-no#9807).
+            if ! RUN_ID=$(gh api "repos/$REPO/actions/workflows/tests.yml/runs?head_sha=$HEAD_SHA&status=failure&per_page=1" \
+              --jq '.workflow_runs[0].id // empty'); then
+              echo "::error::Run di tests.yml sulla HEAD di #$PR illeggibili: non le tratto come «nessuna run fallita»."
+              exit 1
+            fi
             if [ -z "$RUN_ID" ] || [ "$RUN_ID" = "null" ]; then
               skip "Nessuna run tests fallita sulla HEAD di #$PR → niente da riparare (no-op)."
             fi
           else
             # `pull_requests` del workflow_run e' spesso vuoto: la via robusta e'
-            # cercare la PR aperta con questo head branch.
-            PR=$(gh api "repos/$REPO/pulls?state=open&per_page=100" \
-              --jq "[.[] | select(.head.ref==\"$RUN_BRANCH\")][0].number" 2>/dev/null || echo "")
+            # cercare la PR aperta con questo head branch. Paginata (oltre 100
+            # PR aperte la prima pagina non basta) e senza `--slurp`, che il gh
+            # reale rifiuta insieme a `--jq`; la prima riga si prende in bash.
+            # Una lista illeggibile fa fallire il job invece di sembrare
+            # «nessuna PR» (sul sito questo fallback ha nascosto per 5 giorni un
+            # preflight rotto: valerielinc-ops/frontaliere-si-o-no#9797).
+            if ! PR_MATCHES=$(gh api "repos/$REPO/pulls?state=open&per_page=100" --paginate \
+              --jq ".[] | select(.head.ref==\"$RUN_BRANCH\") | .number"); then
+              echo "::error::Lista PR aperte illeggibile per il branch '$RUN_BRANCH': non la tratto come «nessuna PR»."
+              exit 1
+            fi
+            PR="${PR_MATCHES%%$'\n'*}"
             if [ -z "$PR" ] || [ "$PR" = "null" ]; then
               skip "Nessuna PR aperta per il branch '$RUN_BRANCH' → skip (no-op)."
             fi

@@ -1190,7 +1190,7 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.traffico-da-record.excerpt': 'Traffic in Switzerland generated costs of about 117 billion francs. The car is the dominant means of transport.',
     'blog.article.traffico-da-record.imageAlt': 'Lugano, panoramic view of the city.',
     'blog.article.naspi-frontendalieri-requisiti-calcolo-2024.title': 'NASPI for former frontiersmen: requirements and calculation',
-    'blog.article.naspi-frontendalieri-requisiti-calcolo-2024.excerpt': 'The New Frontier Agreement provides for the introduction of NASPI for border guards in Switzerland. Here are the requirements, the calculation of the amount, the duration and how to apply.',
+    'blog.article.naspi-frontendalieri-requisiti-calcolo-2024.excerpt': 'For cross-border workers living in Italy, NASpI is paid by INPS: 13 weeks of contributions in four years are needed, Swiss periods included. Requirements, 2026 calculation, duration and application.',
     'blog.article.naspi-frontendalieri-requisiti-calcolo-2024.imageAlt': 'Image of a frontaliere in a similar situation',
     'blog.article.assicurazione-rc-auto-svizzera-differenze-italia-frontalieri.title': 'RC auto: differences between Switzerland and Italy for border workers',
     'blog.article.assicurazione-rc-auto-svizzera-differenze-italia-frontalieri.excerpt': 'Car liability insurance in Switzerland for border workers: what changes compared to the Italian policy, bonus-malus, vehicle registration',
@@ -6698,6 +6698,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.canicola-danni-economici-2026.title': 'Canicola in Switzerland: 400 million damages in 2026',
     'blog.article.canicola-danni-economici-2026.excerpt': 'The torrid summer of 2026 caused 400 million francs of damage in Switzerland. Allianz Trade warns about the economic risks of 2027.',
     'blog.article.canicola-danni-economici-2026.imageAlt': 'Workers taking a break during a heatwave in a Swiss city',
+    'blog.article.nuova-legge-cibersicurezza-lcib.title': 'Switzerland: new standalone cybersecurity law LCib',
+    'blog.article.nuova-legge-cibersicurezza-lcib.excerpt': 'The Federal Council instructs DDPS to draft the LCib by June 2027, based on the European Cyber Resilience Act for digital products and data.',
+    'blog.article.nuova-legge-cibersicurezza-lcib.imageAlt': 'Digital infrastructure and servers for cybersecurity in Switzerland',
 };
 
 export default blogMetaChEn;

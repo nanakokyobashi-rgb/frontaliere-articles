@@ -8,6 +8,10 @@
  * slot quando è libero e rilancia SOLO il run sorgente sulla stessa HEAD. Il
  * workflow rilanciato adotta poi la reservation e la rilascia nel proprio
  * finally.
+ *
+ * Terzo percorso (2026-09-25): un run `tests` rosso perche' il bucket REST
+ * orario del GITHUB_TOKEN era esaurito viene rilanciato UNA volta per HEAD,
+ * dopo il reset letto dalle sue annotation (vedi `rescueRateLimitedTests`).
  */
 
 import { execFileSync } from 'node:child_process';
@@ -28,6 +32,8 @@ import {
 } from './review-claim.mjs';
 import { latestRedcheckFixClaims } from './redcheck-review-prefilter.mjs';
 import { normalizeReviewInputRevision, PR_BODY_JQ } from './review-test-policy.mjs';
+import { isPrimaryRateLimitError, parseRateLimitMarker } from './lib/gh-rate-limit.mjs';
+import { VITEST_CHECK_NAME } from './lib/constants.mjs';
 
 export const REVIEW_QUOTA_RETRY_MARKER = '<!-- REVIEW_QUOTA_RETRY:';
 export const REVIEW_TRANSIENT_RETRY_MARKER = '<!-- REVIEW_TRANSIENT_RETRY:';
@@ -1154,6 +1160,276 @@ function reconcileRequestedRetry(candidate, number) {
   return true;
 }
 
+// ── Run `tests` rossi per rate limit del GITHUB_TOKEN (2026-09-25) ──────────
+//
+// Il 2026-09-25 fra le 06:58 e le 07:10 UTC il bucket REST orario del
+// `GITHUB_TOKEN` (1.000 richieste per l'intero repo) si e' esaurito e i gate
+// delle PR sono diventati rossi con «API rate limit exceeded for installation».
+// Il percorso transient qui sopra non li vede: pretende un claim
+// `failed-transient`, che il run scrive DOPO la review e con lo STESSO token —
+// cioe' mai, quando il bucket e' vuoto (e il rosso arriva spesso prima del
+// claim, in «Resolve review input revision»). La prova quindi non puo' essere
+// un commento: e' nel run stesso, nelle annotation del job richiesto, che il
+// runner scrive senza API. `lib/gh-rate-limit.mjs` le marca con
+// `[gh-rate-limit resource=… reset=<epoch>]`; un 403 grezzo senza marker vale
+// come prova con reset = fine del job + 1 h (il bucket e' orario, quindi a quel
+// punto il reset e' certo).
+//
+// Il rerun avviene solo DOPO il reset (+ `RATE_LIMIT_RESET_GRACE_SEC`): prima
+// rientrerebbe nello stesso bucket vuoto. Una volta per HEAD: il marker
+// `requested` e' scritto PRIMA del rerun (fence durevole, come i percorsi
+// sopra); un rerun fallito scrive `failed` e riapre la HEAD al massimo
+// `MAX_RATE_LIMIT_FAILED_ATTEMPTS` volte. Questo rescuer usa il PAT, cioe' un
+// bucket diverso da quello esaurito.
+//
+// Costo: una lettura delle run `tests` recenti (una pagina) e due letture (job +
+// annotation) per al massimo `MAX_RATE_LIMIT_INSPECTIONS` candidati, scelti a
+// rotazione. Gira sui tick cron/dispatch e sui completamenti di `tests` (il
+// workflow passa `REVIEW_RATE_LIMIT_SCAN`), non sugli altri ~70 trigger l'ora.
+
+export const REVIEW_RATE_LIMIT_RETRY_MARKER = '<!-- REVIEW_RATE_LIMIT_RETRY:';
+const REVIEW_RATE_LIMIT_RETRY_RE = /<!-- REVIEW_RATE_LIMIT_RETRY:\s*(\{[\s\S]*?\})\s*-->/;
+const REVIEW_RATE_LIMIT_RETRY_STATES = new Set(['requested', 'failed']);
+export const RATE_LIMIT_WINDOW_SEC = 60 * 60;
+export const RATE_LIMIT_RESET_GRACE_SEC = 60;
+export const RATE_LIMIT_LOOKBACK_SEC = 3 * 60 * 60;
+export const MAX_RATE_LIMIT_FAILED_ATTEMPTS = 2;
+const MAX_RATE_LIMIT_INSPECTIONS = positiveInt(process.env.REVIEW_RATE_LIMIT_RESCUER_MAX_INSPECTIONS, 2);
+const MAX_RATE_LIMIT_RETRIES = positiveInt(process.env.REVIEW_RATE_LIMIT_RESCUER_MAX_RETRIES, 1);
+const RATE_LIMIT_SCAN = process.env.REVIEW_RATE_LIMIT_SCAN !== 'false';
+
+function epochSec(value) {
+  const parsed = Date.parse(String(value || ''));
+  return Number.isFinite(parsed) ? Math.floor(parsed / 1000) : 0;
+}
+
+/**
+ * Prova di un rosso da rate limit primario nelle annotation `failure` del job
+ * richiesto. `{ resetAt }` (epoch s) o `null`. Pura e fail-closed: senza un
+ * reset ricavabile non c'e' un momento sicuro per rilanciare.
+ */
+export function rateLimitEvidence(annotations = [], { completedAt = '' } = {}) {
+  const completed = epochSec(completedAt);
+  const fallbackReset = completed > 0 ? completed + RATE_LIMIT_WINDOW_SEC : 0;
+  let resetAt = 0;
+  for (const annotation of Array.isArray(annotations) ? annotations : []) {
+    if (String(annotation?.annotation_level || '') !== 'failure') continue;
+    const text = `${annotation?.title || ''}\n${annotation?.message || ''}`;
+    const marker = parseRateLimitMarker(text);
+    if (marker) {
+      resetAt = Math.max(resetAt, marker.resetAt > 0 ? marker.resetAt : fallbackReset);
+    } else if (isPrimaryRateLimitError(text)) {
+      resetAt = Math.max(resetAt, fallbackReset);
+    }
+  }
+  return resetAt > 0 ? { resetAt } : null;
+}
+
+/** Marker durevole del rerun post-reset. Pura. */
+export function parseReviewRateLimitRetryMarker(body) {
+  const match = String(body || '').match(REVIEW_RATE_LIMIT_RETRY_RE);
+  if (!match) return null;
+  let event;
+  try { event = JSON.parse(match[1]); } catch { return null; }
+  const sourceAttempt = Number(event?.sourceAttempt);
+  const resetAt = Number(event?.resetAt);
+  if (!event || event.version !== 1
+      || !PR_HEAD_RE.test(String(event.head || ''))
+      || !/^\d+$/.test(String(event.sourceRunId || ''))
+      || !Number.isSafeInteger(sourceAttempt) || sourceAttempt < 1
+      || !Number.isSafeInteger(resetAt) || resetAt < 1
+      || !REVIEW_RATE_LIMIT_RETRY_STATES.has(String(event.state || ''))) return null;
+  return {
+    ...event,
+    head: String(event.head).toLowerCase(),
+    sourceRunId: String(event.sourceRunId),
+    sourceAttempt,
+    resetAt,
+    state: String(event.state),
+  };
+}
+
+export function reviewRateLimitRetryBody({
+  head, sourceRunId, sourceAttempt, resetAt, state = 'requested', runId = '',
+  issuedAt = Math.floor(Date.now() / 1000),
+}) {
+  const event = {
+    version: 1,
+    head: String(head).toLowerCase(),
+    sourceRunId: String(sourceRunId),
+    sourceAttempt: Number(sourceAttempt),
+    resetAt: Number(resetAt),
+    state: String(state),
+    runId: String(runId),
+    issuedAt: Number(issuedAt),
+  };
+  return `${REVIEW_RATE_LIMIT_RETRY_MARKER} ${JSON.stringify(event)} -->\n`
+    + `_Rate-limit rescuer zero-Claude: run \`tests\` #${event.sourceRunId} rosso per il rate limit `
+    + `del GITHUB_TOKEN sulla HEAD ${event.head.slice(0, 12)}; ${event.state === 'failed' ? 'rerun non riuscito' : 'rilanciato una volta'} `
+    + `dopo il reset del ${new Date(event.resetAt * 1000).toISOString()}._`;
+}
+
+/**
+ * Una sola richiesta di rerun per HEAD: l'ultimo marker `requested` la chiude,
+ * un `failed` la riapre finche' i fallimenti restano sotto il tetto. Pura.
+ */
+export function reviewRateLimitRetryAdmission(comments = [], head = '', {
+  maxFailed = MAX_RATE_LIMIT_FAILED_ATTEMPTS,
+} = {}) {
+  const expected = String(head).toLowerCase();
+  const events = [];
+  for (const [index, comment] of (comments || []).entries()) {
+    if (!isTrustedAutomationComment(comment)) continue;
+    const event = parseReviewRateLimitRetryMarker(comment?.body);
+    if (!event || event.head !== expected) continue;
+    events.push({ event, rank: commentRank(comment, index) });
+  }
+  const failed = events.filter(({ event }) => event.state === 'failed').length;
+  if (!events.length) return { admitted: true, failed };
+  events.sort((a, b) => compareRanks(a.rank, b.rank));
+  if (events.at(-1).event.state === 'requested') {
+    return { admitted: false, failed, reason: 'rerun post-reset gia\' richiesto su questa HEAD' };
+  }
+  if (failed >= maxFailed) {
+    return { admitted: false, failed, reason: `rerun post-reset fallito ${failed} volte su questa HEAD` };
+  }
+  return { admitted: true, failed };
+}
+
+/**
+ * PR la cui ULTIMA run `tests` (evento `pull_request`, branch e HEAD correnti)
+ * e' conclusa `failure` entro la finestra di osservazione. Una run piu' nuova
+ * sulla stessa HEAD, anche in volo, la sostituisce: non si rilancia un
+ * verdetto gia' superato. Pura.
+ */
+export function rateLimitRerunCandidates(prs = [], runs = [], {
+  nowSec = Math.floor(Date.now() / 1000),
+  lookbackSec = RATE_LIMIT_LOOKBACK_SEC,
+} = {}) {
+  return (prs || []).flatMap((pr) => {
+    const head = String(pr?.head?.sha || '').toLowerCase();
+    const ref = String(pr?.head?.ref || '');
+    if (!PR_HEAD_RE.test(head) || !ref) return [];
+    const latest = (runs || [])
+      .filter((run) => String(run?.head_sha || '').toLowerCase() === head
+        && run?.event === 'pull_request'
+        && String(run?.head_branch || '') === ref
+        && Number.isSafeInteger(Number(run?.id)) && Number(run.id) > 0)
+      .sort((a, b) => (epochSec(a.created_at) - epochSec(b.created_at)) || (Number(a.id) - Number(b.id)))
+      .at(-1);
+    if (!latest || latest.status !== 'completed' || latest.conclusion !== 'failure') return [];
+    const completed = epochSec(latest.updated_at);
+    if (!completed || nowSec - completed > lookbackSec) return [];
+    return [{ pr, head, run: latest }];
+  });
+}
+
+function listRecentPullRequestTestsRuns(nowSec) {
+  const since = new Date((nowSec - RATE_LIMIT_LOOKBACK_SEC) * 1000).toISOString().replace(/\.\d{3}Z$/, 'Z');
+  const endpoint = `repos/${REPO}/actions/workflows/tests.yml/runs?event=pull_request&per_page=100`
+    + `&created=%3E%3D${since}`;
+  const pages = parseJson(gh(['api', '--paginate', '--slurp', endpoint]), null);
+  if (!Array.isArray(pages) || pages.some((page) => !Array.isArray(page?.workflow_runs))) {
+    throw new Error('elenco run tests malformato: attese pagine con workflow_runs');
+  }
+  return pages.flatMap((page) => page.workflow_runs);
+}
+
+/** Annotation del job richiesto della run (ultimo attempt). Lancia se illeggibile. */
+function failedRequiredJobAnnotations(run) {
+  const jobsPage = parseJson(gh(['api', `repos/${REPO}/actions/runs/${run.id}/jobs?filter=latest&per_page=100`]), null);
+  if (!Array.isArray(jobsPage?.jobs)) throw new Error(`job della run ${run.id} malformati`);
+  const job = jobsPage.jobs.find((candidate) => candidate?.name === VITEST_CHECK_NAME
+    && candidate?.conclusion === 'failure');
+  if (!job) return null;
+  // In Actions l'id del job E' l'id del suo check-run: `check_run_url` e'
+  // la forma esplicita, l'id del job il ripiego equivalente. Un id non
+  // numerico, o annotation illeggibili, lanciano: il chiamante non rilancia.
+  const checkRunId = String(job.check_run_url || '').match(/\/check-runs\/(\d+)$/)?.[1] || String(job.id || '');
+  if (!/^\d+$/.test(checkRunId)) throw new Error(`check-run del job ${VITEST_CHECK_NAME} non identificabile`);
+  const pages = parseJson(gh(['api', '--paginate', '--slurp', `repos/${REPO}/check-runs/${checkRunId}/annotations?per_page=100`]), null);
+  if (!Array.isArray(pages) || pages.some((page) => !Array.isArray(page))) {
+    throw new Error(`annotation del check-run ${checkRunId} malformate`);
+  }
+  return { annotations: pages.flat(), completedAt: job.completed_at || run.updated_at };
+}
+
+function postRateLimitRetryComment(number, body) {
+  try {
+    gh(['pr', 'comment', String(number), '--repo', REPO, '--body', body]);
+    return true;
+  } catch (error) {
+    console.log(`::warning::commento rate-limit retry fallito su #${number}: ${String(error?.message || error).slice(0, 180)}`);
+    return false;
+  }
+}
+
+/** Rilancia al massimo `MAX_RATE_LIMIT_RETRIES` run `tests` rossi per rate limit. */
+function rescueRateLimitedTests(prs, commentsByPr, nowSec = Math.floor(Date.now() / 1000)) {
+  if (!RATE_LIMIT_SCAN) {
+    console.log('review-quota-rescuer: scan rate-limit saltato su questo trigger (REVIEW_RATE_LIMIT_SCAN=false).');
+    return 0;
+  }
+  if (!prs.length) return 0;
+  const admitted = rateLimitRerunCandidates(prs, listRecentPullRequestTestsRuns(nowSec), { nowSec })
+    .filter((candidate) => {
+      const admission = reviewRateLimitRetryAdmission(commentsByPr.get(Number(candidate.pr.number)) || [], candidate.head);
+      if (!admission.admitted) console.log(`PR #${candidate.pr.number}: ${admission.reason}.`);
+      return admission.admitted;
+    });
+  const cursor = nonNegativeInt(process.env.REVIEW_QUOTA_RESCUER_CURSOR ?? process.env.GITHUB_RUN_NUMBER, 0);
+  const selection = roundRobinWindow(admitted, { limit: MAX_RATE_LIMIT_INSPECTIONS, cursor });
+  let retried = 0;
+  for (const { pr, head, run } of selection.items) {
+    if (retried >= MAX_RATE_LIMIT_RETRIES) break;
+    const number = Number(pr.number);
+    let evidence = null;
+    try {
+      const job = failedRequiredJobAnnotations(run);
+      evidence = job ? rateLimitEvidence(job.annotations, { completedAt: job.completedAt }) : null;
+    } catch (error) {
+      console.log(`::warning::PR #${number}: annotation della run tests #${run.id} non verificabili — nessun rerun (${String(error?.message || error).slice(0, 180)}).`);
+      continue;
+    }
+    if (!evidence) {
+      console.log(`PR #${number}: run tests #${run.id} rossa senza prova di rate limit — non e' compito di questo percorso.`);
+      continue;
+    }
+    const dueAt = evidence.resetAt + RATE_LIMIT_RESET_GRACE_SEC;
+    if (nowSec < dueAt) {
+      console.log(`PR #${number}: run tests #${run.id} rossa per rate limit; reset ${new Date(evidence.resetAt * 1000).toISOString()}, rerun rimandato di ${dueAt - nowSec} s.`);
+      continue;
+    }
+    const fields = {
+      head,
+      sourceRunId: String(run.id),
+      sourceAttempt: Number(run.run_attempt) || 1,
+      resetAt: evidence.resetAt,
+      runId: process.env.GITHUB_RUN_ID || 'review-rate-limit-rescuer',
+    };
+    if (DRY_RUN) {
+      console.log(`[dry] PR #${number}: rilancerei tests #${run.id} (rate limit, reset passato) sulla HEAD ${head.slice(0, 12)}.`);
+      continue;
+    }
+    if (!postRateLimitRetryComment(number, reviewRateLimitRetryBody({ ...fields, state: 'requested' }))) {
+      console.log(`::warning::PR #${number}: marker rate-limit non pubblicato → rerun non richiesto.`);
+      continue;
+    }
+    try {
+      gh(['run', 'rerun', String(run.id), '--repo', REPO]);
+    } catch (error) {
+      console.log(`::warning::rerun tests #${run.id} fallito per PR #${number}: ${String(error?.message || error).slice(0, 180)}`);
+      if (!postRateLimitRetryComment(number, reviewRateLimitRetryBody({ ...fields, state: 'failed' }))) {
+        console.log(`::warning::PR #${number}: marker rate-limit failed non pubblicabile; requested resta fence anti-duplicato.`);
+      }
+      continue;
+    }
+    console.log(`PR #${number}: tests #${run.id} rilanciato una volta dopo il reset del rate limit sulla HEAD ${head.slice(0, 12)}.`);
+    retried += 1;
+  }
+  return retried;
+}
+
 function main() {
   if (!REPO) {
     throw new Error('repository mancante: scansione non verificabile');
@@ -1289,7 +1565,8 @@ function main() {
     if (transientRetried >= MAX_TRANSIENT_RETRIES) break;
     if (rescueTransientReview(candidate)) transientRetried += 1;
   }
-  console.log(`review-quota-rescuer: retry quota richiesti=${retried}, transient richiesti=${transientRetried}.`);
+  const rateLimitRetried = rescueRateLimitedTests(prs, commentsByPr);
+  console.log(`review-quota-rescuer: retry quota richiesti=${retried}, transient richiesti=${transientRetried}, rate-limit richiesti=${rateLimitRetried}.`);
 }
 
 if (process.argv[1] && path.resolve(fileURLToPath(import.meta.url)) === path.resolve(process.argv[1])) {

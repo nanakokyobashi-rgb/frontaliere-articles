@@ -389,6 +389,16 @@
       }
     },
     {
+      "path": "scripts/ci/lib/gh-rate-limit.mjs",
+      "mode": "corpus-only",
+      "reason": "Lettura `gh` che sopravvive all'esaurimento del bucket REST orario del `GITHUB_TOKEN` (1.000 richieste l'ora per l'intero repo, esaurito il 2026-09-25 06:58-07:10 UTC con i gate delle PR rossi su PR sane): su un 403 da rate limit primario legge il reset da `gh api rate_limit` (che non consuma quota), attende al massimo 15 min e riprova una volta, altrimenti fallisce con un `::error::` che nomina rate limit e reset e porta il marker `[gh-rate-limit resource=... reset=...]` letto da `review-quota-rescuer.mjs`. La usano `review-gate.mjs` (scaricata dal bootstrap trusted), `generator-ci-gate.mjs` e lo step `Resolve review input revision` di `tests.yml`. Corpus-only per costruzione: il sito legge con un App token dal bucket separato e non ha questi consumer.",
+      "baseline": {
+        "site": null,
+        "corpus": "9ca33628cddd7ce8",
+        "alignedAt": "2026-09-25"
+      }
+    },
+    {
       "path": "scripts/ci/node-test-failure-reporter.mjs",
       "mode": "corpus-only",
       "reason": "Reporter strutturato del corpus: consuma gli eventi `test:fail` di `node:test` e scrive il JSON che il passo successivo pubblica sulla PR. Il sito usa Vitest e il proprio reporter JSON, quindi non esiste un gemello byte-verificabile da trasportare.",
@@ -683,10 +693,10 @@
     {
       "path": ".github/workflows/tests.yml",
       "mode": "adapted",
-      "reason": "Un solo check obbligatorio per codice, test e review in entrambi i repo; gli edit del body sono gestiti dal recupero selettivo esterno. Il sito usa Vitest e un contratto API prima del checkout; il corpus usa node:test e i propri validatori modulari del body dopo il checkout. Il corpus conserva il gate generator-ci path-scoped, le esclusioni draft/engine-lockstep-auto e la review senza proxy Headroom. RICONCILIATO 2026-09-25: dopo la riconciliazione #9443 il sito ha cambiato il file solo in valerielinc-ops/frontaliere-si-o-no#9715 (prompt di review postato con --body-file), portato nel corpus da #1773; baseline riregistrata con --force. I due digest registrano le revisioni correnti dei lati adattati, non una falsa identità byte-a-byte.",
+      "reason": "Un solo check obbligatorio per codice, test e review in entrambi i repo; gli edit del body sono gestiti dal recupero selettivo esterno. Il sito usa Vitest e un contratto API prima del checkout; il corpus usa node:test e i propri validatori modulari del body dopo il checkout. Il corpus conserva il gate generator-ci path-scoped, le esclusioni draft/engine-lockstep-auto e la review senza proxy Headroom. RICONCILIATO 2026-09-25: dopo la riconciliazione #9443 il sito ha cambiato il file solo in valerielinc-ops/frontaliere-si-o-no#9715 (prompt di review postato con --body-file), portato nel corpus da #1773; baseline riregistrata con --force. I due digest registrano le revisioni correnti dei lati adattati, non una falsa identità byte-a-byte. Dal 2026-09-25 il corpus legge il body in `Resolve review input revision` tramite `scripts/ci/lib/gh-rate-limit.mjs` (attesa del reset entro 15 min e un solo retry, altrimenti rosso che nomina il rate limit e il reset), preso dalla directory trusted del bootstrap del review gate e mai dal checkout della PR: il bucket REST del `GITHUB_TOKEN` e' uno solo per tutti i workflow di questo repo e si e' esaurito il 2026-09-25 06:58-07:10 UTC. Adattamento corpus: baseline corpus riattestata su questa modifica, quella site resta al riferimento gia' registrato cosi' il movimento del sito resta visibile.",
       "baseline": {
         "site": "898810d03711dfd2",
-        "corpus": "848e36e29f7c83c5",
+        "corpus": "d860abda56bb1e73",
         "alignedAt": "2026-09-25",
         "forcedAt": "2026-09-25T05:32:09.362Z"
       }
@@ -1093,7 +1103,7 @@
     {
       "path": ".github/workflows/stale-pr-rescuer.yml",
       "mode": "adapted",
-      "reason": "Il corpus usa CI_CHECK_NAME e classi di recupero A/B/C/D con il workflow pr-autorebase indipendente; il sito riesegue il run di codice dalla label corrente dentro tests.yml. Si preservano i rimedi specifici del corpus, il rerun della classe B con marker del fixer e la cadenza :35. La closure transitiva statica e dinamica del checkout sparse del custode e' verificata da `generator/tests/orphan-pr-custodian.test.mjs` tramite l'estrattore condiviso di #929: site #9528 ha mostrato che nominare l'entrypoint senza un helper importato produce `ERR_MODULE_NOT_FOUND` prima della logica del custode. Questa guardia protegge il lato corpus adapted senza dichiarare risolta la issue site.",
+      "reason": "Il corpus usa CI_CHECK_NAME e classi di recupero A/B/C/D con il workflow pr-autorebase indipendente; il sito riesegue il run di codice dalla label corrente dentro tests.yml. Si preservano i rimedi specifici del corpus, il rerun della classe B con marker del fixer e la cadenza :35. La closure transitiva statica e dinamica del checkout sparse del custode e' verificata da `generator/tests/orphan-pr-custodian.test.mjs` tramite l'estrattore condiviso di #929: site #9528 ha mostrato che nominare l'entrypoint senza un helper importato produce `ERR_MODULE_NOT_FOUND` prima della logica del custode. Questa guardia protegge il lato corpus adapted senza dichiarare risolta la issue site. Dal 2026-09-25 (bucket REST del `GITHUB_TOKEN` esaurito, 15 run del custode morte sulla prima lettura) il trigger `workflow_run` fa lo scan completo e il custode solo nel primo run partito in ogni finestra di 30 minuti (step `Decide scan scope`); gli altri run `workflow_run` classificano soltanto le PR del run di `tests` che li ha fatti nascere, e l'helper trusted del round-marker si materializza solo quando serve. Cron e dispatch restano completi. Il sito gira con un App token dal bucket separato: non e' un movimento da portare.",
       "baseline": {
         "site": "1d3108398b6a9623",
         "corpus": "dec5c2a2c169d1c9",
@@ -1832,12 +1842,11 @@
       "sitePath": "scripts/lib/ai-models.mjs",
       "mode": "adapted",
       "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/787",
-      "reason": "DIVERGENTE dal 2026-08-18, rimisurato il 2026-09-04 su `origin/main` dei due repo: sito `615eb909aef5dc12` (361.252 byte), qui `fcb9ec8865bc6bf6` (393.684 byte). La voce era `identical` con baseline `5dbca2532ac754ab` per lato (la riconciliazione di `AI_MODELS_PREFER` del 2026-08-18, `valerielinc-ops#6004` + `#418`), ma da allora ENTRAMBI i lati si sono mossi in modo indipendente e quel `mode` e' diventato una bugia di INSTRADAMENTO: `identical` promette «la fix si fa sul sito e scende copiabile qui», e non e' piu' vero in nessuna delle due direzioni. Qui vive, e sul sito NON esiste, tutta la classificazione dell'host irraggiungibile con il cooldown a causa persistente — `classifyHostUnreachable`, `HOST_UNREACHABLE_CODES`, `_isHostUnreachableExempt`, `classifyTransientResolver` / `RESOLVER_FLAP_*`, `COOLDOWN_SEVERITY` / `PROVIDER_COOLDOWN_*`, l'opt-out di `recordScore` (issue #475, #630, #767, #769, #770, #781, #783, #802, #803): il tag `hostUnreachable` compare 15 volte qui e ZERO nella copia del sito. Dal lato opposto il sito ha il ledger delle correzioni di ranking (`_rankingCorrections`, `_consumeUnvalidatedSuccess`) e i segmenti di testo dell'assistant, che qui non ci sono. Le due conseguenze del mode sbagliato sono opposte e tutte e due costose: una fix su questo ramo instradata «sul sito» non troverebbe la' nemmeno il codice da toccare, e un mirror sito->corpus che applicasse la voce alla lettera riporterebbe indietro il file cancellando #475 e #767. `adapted` e' la dichiarazione onesta finche' i due lati non vengono riconciliati (parent #787), e non abbassa niente: la baseline del 2026-08-18 NON viene rigenerata — `--init` riscriverebbe TUTTE le voci del manifest dichiarando allineato cio' che nessuno ha letto — quindi `loop-drift-check` continua a emettere `both-moved` / `actionable: true` su questa voce, e un `site-ahead` futuro chiedera' di rileggere e riapplicare a mano invece di copiare sopra.",
+      "reason": "DIVERGENTE dal 2026-08-18, rimisurato il 2026-09-04 su `origin/main` dei due repo: sito `615eb909aef5dc12` (361.252 byte), qui `fcb9ec8865bc6bf6` (393.684 byte). La voce era `identical` con baseline `5dbca2532ac754ab` per lato (la riconciliazione di `AI_MODELS_PREFER` del 2026-08-18, `valerielinc-ops#6004` + `#418`), ma da allora ENTRAMBI i lati si sono mossi in modo indipendente e quel `mode` e' diventato una bugia di INSTRADAMENTO: `identical` promette «la fix si fa sul sito e scende copiabile qui», e non e' piu' vero in nessuna delle due direzioni. Qui vive, e sul sito NON esiste, tutta la classificazione dell'host irraggiungibile con il cooldown a causa persistente — `classifyHostUnreachable`, `HOST_UNREACHABLE_CODES`, `_isHostUnreachableExempt`, `classifyTransientResolver` / `RESOLVER_FLAP_*`, `COOLDOWN_SEVERITY` / `PROVIDER_COOLDOWN_*`, l'opt-out di `recordScore` (issue #475, #630, #767, #769, #770, #781, #783, #802, #803): il tag `hostUnreachable` compare 15 volte qui e ZERO nella copia del sito. Dal lato opposto il sito ha il ledger delle correzioni di ranking (`_rankingCorrections`, `_consumeUnvalidatedSuccess`) e i segmenti di testo dell'assistant, che qui non ci sono. Le due conseguenze del mode sbagliato sono opposte e tutte e due costose: una fix su questo ramo instradata «sul sito» non troverebbe la' nemmeno il codice da toccare, e un mirror sito->corpus che applicasse la voce alla lettera riporterebbe indietro il file cancellando #475 e #767. `adapted` e' la dichiarazione onesta finche' i due lati non vengono riconciliati (parent #787), e non abbassa niente: la baseline del 2026-08-18 NON viene rigenerata — `--init` riscriverebbe TUTTE le voci del manifest dichiarando allineato cio' che nessuno ha letto — quindi `loop-drift-check` continua a emettere `both-moved` / `actionable: true` su questa voce, e un `site-ahead` futuro chiedera' di rileggere e riapplicare a mano invece di copiare sopra. Dal 2026-09-25 i due lati spengono gli stessi provider free morti con lo stesso blocco `RETIRED_FREE_PROVIDERS` (fuori da `DEFAULT_CHAIN` e dalla discovery, decisione del proprietario): la PR gemella del sito porta la stessa modifica, quindi il suo `site-ahead` si riconcilia rileggendo quel blocco. Baseline corpus riattestata su questa modifica, quella site resta al riferimento gia' revisionato.",
       "baseline": {
         "site": "e0025b9005d9266f",
-        "corpus": "aedcc4aebcb82408",
-        "alignedAt": "2026-09-25",
-        "forcedAt": "2026-09-25T03:55:41.802Z"
+        "corpus": "5ef14642274dd3ed",
+        "alignedAt": "2026-09-25"
       }
     },
     {
@@ -2324,10 +2333,10 @@
       "mode": "adapted",
       "baseline": {
         "site": "37ec8b868eb9a730",
-        "corpus": "1ba802eb9a8618ed",
-        "alignedAt": "2026-09-24"
+        "corpus": "6278585943b43ac0",
+        "alignedAt": "2026-09-25"
       },
-      "reason": "Il corpus conserva adattamenti propri della cascata di traduzione (fingerprint delle capability per il memo eventi, neutralità dei tier opzionali non configurati, retry OAuth Google Cloud e conteggio dei suoi rifiuti silenziosi nel riepilogo della cascata, attribuzione rung/durata e rifiuto dei payload OPUS-MT troncati); la copia byte-identica del sito cancellerebbe questi comportamenti e rende rossi i test di passthrough del corpus. In questa PR si portano la normalizzazione tedesca `frau:mann`, il guard sui sentinel mangled e il confronto con la sorgente raw prima della normalizzazione, mantenendo gli adattamenti locali dichiarati. Dal 2026-09-24 il tier Google Cloud, che su token mancante, 403/429, !ok o timeout rende '' senza lanciare (quindi fuori da `tierErrors`), registra quanti rifiuti ha dato e l'ultimo motivo: il riepilogo diceva `0/16000 daily chars used` sia per «mai chiamato» sia per «ogni chiamata rifiutata»."
+      "reason": "Il corpus conserva adattamenti propri della cascata di traduzione (fingerprint delle capability per il memo eventi, neutralità dei tier opzionali non configurati, retry OAuth Google Cloud e conteggio dei suoi rifiuti silenziosi nel riepilogo della cascata, attribuzione rung/durata e rifiuto dei payload OPUS-MT troncati); la copia byte-identica del sito cancellerebbe questi comportamenti e rende rossi i test di passthrough del corpus. In questa PR si portano la normalizzazione tedesca `frau:mann`, il guard sui sentinel mangled e il confronto con la sorgente raw prima della normalizzazione, mantenendo gli adattamenti locali dichiarati. Dal 2026-09-24 il tier Google Cloud, che su token mancante, 403/429, !ok o timeout rende '' senza lanciare (quindi fuori da `tierErrors`), registra quanti rifiuti ha dato e l'ultimo motivo: il riepilogo diceva `0/16000 daily chars used` sia per «mai chiamato» sia per «ogni chiamata rifiutata». Dal 2026-09-25 i due lati portano lo stesso tier Codex Luna Max dopo DeepL e Azure (sezione `translateWithCodex` byte-identica nei due file, decisione del proprietario): la PR gemella del sito porta la stessa sezione, quindi il suo `site-ahead` si riconcilia confrontando quella. Anche la posizione `last` del tier (FREE_TRANSLATE_CODEX_TIER, usata da translate-pending nelle fasi 2d/2e dopo Argos) e la sua chiamata in coda alla cascata sono uguali nei due file. La lane Codex nella fingerprint del memo eventi (`getTranslationCascadeConfigurationKey`, version 2) e' un adattamento del corpus, come il resto della fingerprint. Baseline corpus riattestata su questa modifica, quella site resta al riferimento gia' revisionato."
     },
     {
       "path": "generator/scripts/lib/google-service-account-token.mjs",
@@ -3837,7 +3846,7 @@
     {
       "path": "scripts/ci/review-gate.mjs",
       "mode": "adapted",
-      "reason": "Gate del check Node del corpus: conserva il carry-forward del contributo e il fallback deterministico per drift del workflow. Come il sito, una review Codex richiede evidenza della run, identità bot ammessa, marker e HEAD esatta.",
+      "reason": "Gate del check Node del corpus: conserva il carry-forward del contributo e il fallback deterministico per drift del workflow. Come il sito, una review Codex richiede evidenza della run, identità bot ammessa, marker e HEAD esatta. Dal 2026-09-25 le letture del gate passano da `lib/gh-rate-limit.mjs` (attesa del reset entro 15 min e un solo retry, altrimenti rosso `failure_kind=transient` con il marker che `review-quota-rescuer.mjs` usa per rilanciare dopo il reset); il modulo e' nel manifest del bootstrap trusted. Adattamento al bucket REST del `GITHUB_TOKEN` di questo repo, che il sito non condivide.",
       "baseline": {
         "site": "164fe984b258c1ed",
         "corpus": "31450af30ed026ec",
@@ -3858,7 +3867,7 @@
     {
       "path": "scripts/ci/generator-ci-gate.mjs",
       "mode": "corpus-only",
-      "reason": "Porta il gate condizionale su generator-ci.yml (ex gate 4 di auto-merge-eval) dentro il job che produce il check richiesto dal ruleset: il ruleset puo' richiedere solo contesti presenti su OGNI PR, e generator-ci.yml e' path-scoped. Non ha e non puo' avere un gemello: generator-ci.yml esiste solo qui.",
+      "reason": "Porta il gate condizionale su generator-ci.yml (ex gate 4 di auto-merge-eval) dentro il job che produce il check richiesto dal ruleset: il ruleset puo' richiedere solo contesti presenti su OGNI PR, e generator-ci.yml e' path-scoped. Non ha e non puo' avere un gemello: generator-ci.yml esiste solo qui. Dal 2026-09-25 il polling dei check-run parte da 60 s con backoff fino a 120 s (era 20 s fisso: fino a 90 letture per run sul bucket REST condiviso) e le letture passano da `lib/gh-rate-limit.mjs`; la scadenza di 30 minuti resta il tetto e ora copre l'intero step, compresa un'eventuale attesa del reset sulla lettura dei file.",
       "baseline": {
         "site": null,
         "corpus": "fa25df2f5bba0fa1",
@@ -4167,7 +4176,7 @@
     {
       "path": "scripts/ci/review-quota-rescuer.mjs",
       "mode": "corpus-only",
-      "reason": "Consumer zero-Claude che riattiva le run PR differite dal lease condiviso, verificando HEAD, ruolo e workflow sorgente prima del rerun. I marker v2 includono PR/HEAD, workflow/evento allowlisted; workflow_run cita il run tests che prova la HEAD, mentre workflow_dispatch dimostra l'intent del preflight trusted contro la PR HEAD corrente senza inventare un trigger tests. Un attempt avanzato chiude la fence solo con claim terminale dello stesso run o step fixer realmente avviato, mentre uno skip resta retryable. E' un percorso del ciclo Claude del corpus; il sito non possiede questo lease condiviso ne' il relativo consumer, quindi non c'e' un gemello da portare e la classificazione e' `corpus-only` per costruzione.",
+      "reason": "Consumer zero-Claude che riattiva le run PR differite dal lease condiviso, verificando HEAD, ruolo e workflow sorgente prima del rerun. I marker v2 includono PR/HEAD, workflow/evento allowlisted; workflow_run cita il run tests che prova la HEAD, mentre workflow_dispatch dimostra l'intent del preflight trusted contro la PR HEAD corrente senza inventare un trigger tests. Un attempt avanzato chiude la fence solo con claim terminale dello stesso run o step fixer realmente avviato, mentre uno skip resta retryable. E' un percorso del ciclo Claude del corpus; il sito non possiede questo lease condiviso ne' il relativo consumer, quindi non c'e' un gemello da portare e la classificazione e' `corpus-only` per costruzione. Dal 2026-09-25 rilancia anche, una volta per HEAD e solo DOPO il reset, il run `tests` rosso per il rate limit del `GITHUB_TOKEN`: la prova viene dalle annotation del job richiesto (marker `[gh-rate-limit ...]` o 403 grezzo) e l'idempotenza dal marker `REVIEW_RATE_LIMIT_RETRY`, perche' un claim `failed-transient` in quel caso non puo' esistere: si scrive con lo stesso token esaurito.",
       "baseline": {
         "site": null,
         "corpus": "7088f7d382ddebe4",
@@ -4177,7 +4186,7 @@
     {
       "path": ".github/workflows/review-quota-rescuer.yml",
       "mode": "corpus-only",
-      "reason": "Workflow zero-Claude che osserva la fine dei consumer e il cron per riattivare le review PR differite dal lease condiviso. Il sito non possiede questo lease ne' questo consumer, quindi non esiste un gemello da portare.",
+      "reason": "Workflow zero-Claude che osserva la fine dei consumer e il cron per riattivare le review PR differite dal lease condiviso. Il sito non possiede questo lease ne' questo consumer, quindi non esiste un gemello da portare. Dal 2026-09-25 passa `REVIEW_RATE_LIMIT_SCAN` per limitare la lettura dei run `tests` rossi per rate limit ai tick cron/dispatch e ai completamenti di `tests`.",
       "baseline": {
         "site": null,
         "corpus": "ae9dda84d95be040",
