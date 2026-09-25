@@ -53,6 +53,7 @@ process.env.VITEST = '1';
 const {
   freeTranslate,
   getCascadeStats,
+  getTranslationCascadeConfigurationKey,
   logCascadeSummary,
   setCodexTranslateCallForTests,
 } = await import('../scripts/lib/free-translate.mjs');
@@ -320,6 +321,40 @@ test('tre fallimenti consecutivi fermano il tier, contati come errori del tier',
   assert.equal(lines.filter((l) => l.includes('3 fallimenti consecutivi')).length, 1);
   // Il messaggio dell'errore non finisce nel log.
   assert.ok(lines.every((l) => !l.includes('broker non raggiungibile')));
+});
+
+test('tre echi di fila fermano il tier come tre fallimenti, e restano contati come passthrough', async () => {
+  const before = codexCounters();
+  const calls = stubCodex(IT);
+  const { value, lines } = await captureLog(async () => [await it(), await it(), await it(), await it()]);
+  assert.deepEqual(value, Array(4).fill(`MYMEMORY ${EN}`));
+  assert.equal(calls.length, 3);
+  assert.equal(codexCounters().passthroughs - before.passthroughs, 3);
+  assert.equal(lines.filter((l) => l.includes('3 fallimenti consecutivi')).length, 1);
+});
+
+test('la fingerprint della cascata segue la lane Codex e la sua posizione (memo eventi)', () => {
+  const key = () => JSON.parse(getTranslationCascadeConfigurationKey());
+  assert.equal(key().version, 2);
+  assert.equal(key().codex, 'after-premium');
+  process.env.FREE_TRANSLATE_CODEX_TIER = 'last';
+  try {
+    assert.equal(key().codex, 'last');
+  } finally {
+    delete process.env.FREE_TRANSLATE_CODEX_TIER;
+  }
+  process.env.CODEX_AUTH_BROKER_SOCKET = path.join(tmp, 'broker-scaduto.sock');
+  try {
+    assert.equal(key().codex, false);
+  } finally {
+    process.env.CODEX_AUTH_BROKER_SOCKET = SOCKET;
+  }
+  process.env.FREE_TRANSLATE_CODEX_MAX_CALLS = '0';
+  try {
+    assert.equal(key().codex, false);
+  } finally {
+    delete process.env.FREE_TRANSLATE_CODEX_MAX_CALLS;
+  }
 });
 
 test('FREE_TRANSLATE_CODEX_TIER=last: Codex non prende il testo prima dei tier senza quota', async () => {

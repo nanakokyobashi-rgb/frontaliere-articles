@@ -175,13 +175,19 @@ const DEEPL_LANG_MAP = { it: 'IT', en: 'EN', de: 'DE', fr: 'FR' };
  */
 export function getTranslationCascadeConfigurationKey() {
   return JSON.stringify({
-    version: 1,
+    version: 2,
     deepl: DEEPL_API_KEYS.length > 0,
     azure: AZURE_TRANSLATOR_KEYS.length > 0,
     googleCloud: _gcOAuthAvailable,
     localOpusMt: localOpusMtEnabled(),
     libreTranslateSelfHosted: Boolean(LIBRETRANSLATE_SELF_HOSTED),
     huggingFace: Boolean(HF_TOKEN),
+    // Lane Codex del processo (socket del broker e budget) e sua posizione:
+    // un evento fallito senza broker va ritentato quando il broker c'e'
+    // (version 2, 2026-09-25).
+    codex: _codexSocketPresent() && _codexBudget('FREE_TRANSLATE_CODEX_MAX_CALLS', CODEX_TRANSLATE_MAX_CALLS_DEFAULT) > 0
+      ? _codexTierPosition()
+      : false,
   });
 }
 
@@ -1285,6 +1291,14 @@ async function _translateWithCodexNow(clean, sourceLang, targetLang, outcome) {
       _noteCodexFailure();
       noteTranslationOutcome(outcome, 'incomplete');
       return '';
+    }
+    // Un eco della sorgente non e' una traduzione: `tryTier` lo rifiuta e lo
+    // conta fra i passthrough, e qui conta come fallimento. Azzerare lo streak
+    // su un eco lasciava consumare tutto il budget a una lane che rimanda
+    // indietro il testo, senza mai far scattare lo stop.
+    if (isSourcePassthrough(clean, out)) {
+      _noteCodexFailure();
+      return out;
     }
     _codexConsecutiveFailures = 0;
     return out;
