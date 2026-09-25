@@ -12,7 +12,11 @@
  *     consecutivi fermano il tier con UNA riga di log;
  *   · la risposta passa da `tryTier`/`finalize` come ogni altro tier: un eco
  *     della sorgente e' rifiutato e contato in `tierPassthroughs.codex`, i
- *     token protetti tornano nella forma della lingua di arrivo.
+ *     token protetti tornano nella forma della lingua di arrivo;
+ *   · la cornice si toglie solo con i marcatori della chiamata: un testo che
+ *     contiene davvero `END_TEXT` resta intero;
+ *   · le chiamate del processo passano una alla volta, quindi le chiamate
+ *     concorrenti non superano insieme il budget di tempo.
  *
  * Nessuna rete e nessun Codex vero: `fetch` e' uno stub (DeepL, Azure e
  * MyMemory) e la chiamata a Codex passa da `setCodexTranslateCallForTests`.
@@ -77,6 +81,11 @@ globalThis.fetch = async (url) => {
   throw new Error('offline nel test');
 };
 after(() => { globalThis.fetch = realFetch; });
+
+/** Suffisso dei marcatori della chiamata, letto dal messaggio utente. */
+function markerOf(messages) {
+  return /^BEGIN_TEXT_([A-Z0-9]{8})\n/.exec(messages.find((m) => m.role === 'user').content)?.[1];
+}
 
 /** Contatori del tier Codex: `getCascadeStats` copia solo il primo livello. */
 function codexCounters() {
@@ -143,7 +152,11 @@ test('DeepL 456 e Azure 401: tier Codex, con il prompt stretto e la sola lane Co
   assert.match(system, /URLs/);
   assert.match(system, /ZQX0XQZ/);
   assert.match(system, /translated text only/);
-  assert.equal(messages.find((m) => m.role === 'user').content, `BEGIN_TEXT\n${IT}\nEND_TEXT`);
+  const user = messages.find((m) => m.role === 'user').content;
+  const framed = /^BEGIN_TEXT_([A-Z0-9]{8})\n([\s\S]*)\nEND_TEXT_\1$/.exec(user);
+  assert.ok(framed, 'testo incorniciato dai marcatori della chiamata');
+  assert.equal(framed[2], IT);
+  assert.ok(system.includes(`between BEGIN_TEXT_${framed[1]} and END_TEXT_${framed[1]}`));
   assert.deepEqual(opts.chain, [AI_MODELS.CODEX_CLI_PRIMARY]);
   assert.deepEqual(opts.prefer, [AI_MODELS.CODEX_CLI_PRIMARY]);
   assert.equal(opts.bypassForceChain, true);
@@ -155,12 +168,26 @@ test('la risposta passa da finalize: cornice tolta, token protetto rimesso nella
     const user = messages.find((m) => m.role === 'user').content;
     const token = /ZQX\d+XQZ/.exec(user)?.[0];
     assert.ok(token, 'il trigramma di genere deve arrivare mascherato');
-    return `\`\`\`\nBEGIN_TEXT\nInfermiere diplomato ${token}\nEND_TEXT\n\`\`\``;
+    const marker = markerOf(messages);
+    return `\`\`\`\nBEGIN_TEXT_${marker}\nInfermiere diplomato ${token}\nEND_TEXT_${marker}\n\`\`\``;
   });
   const out = await freeTranslate({ text: 'Pflegefachperson HF (m/w/d)', sourceLang: 'de', targetLang: 'it' });
   assert.equal(calls.length, 1);
   assert.match(out, /^Infermiere diplomato/);
   assert.doesNotMatch(out, /ZQX|BEGIN_TEXT|END_TEXT|```/);
+});
+
+test('un testo che contiene davvero BEGIN_TEXT o END_TEXT resta intero', async () => {
+  const source = 'BEGIN_TEXT apre il blocco e il modulo si chiude con END_TEXT';
+  const translated = 'BEGIN_TEXT opens the block and the form closes with END_TEXT';
+  const calls = stubCodex((messages) => {
+    const marker = markerOf(messages);
+    assert.ok(marker, 'marcatori della chiamata presenti');
+    assert.ok(!source.includes(marker), 'il suffisso non compare nella sorgente');
+    return translated;
+  });
+  assert.equal(await it(source), translated);
+  assert.equal(calls.length, 1);
 });
 
 test('un eco della sorgente e\' rifiutato e contato, la cascata prosegue', async () => {
@@ -228,6 +255,53 @@ test('le chiamate concorrenti non superano il budget', async () => {
   } finally {
     delete process.env.FREE_TRANSLATE_CODEX_MAX_CALLS;
   }
+});
+
+test('le chiamate concorrenti passano una alla volta e non superano insieme il budget di tempo', async () => {
+  // Orologio finto: ogni chiamata "dura" 10 s. Con 20 s di budget la prima
+  // chiamata lascia 10 s, sotto il minimo di 15 s per chiamata: le altre non
+  // partono. Lette in parallelo prima dell'await, tutte e tre avrebbero visto
+  // 20 s di residuo e sarebbero partite.
+  process.env.FREE_TRANSLATE_CODEX_MAX_MS = '20000';
+  const realNow = Date.now;
+  let offset = 0;
+  Date.now = () => realNow() + offset;
+  try {
+    let inFlight = 0;
+    let maxInFlight = 0;
+    const calls = stubCodex(async () => {
+      inFlight += 1;
+      maxInFlight = Math.max(maxInFlight, inFlight);
+      await new Promise((resolve) => setTimeout(resolve, 5));
+      offset += 10_000;
+      inFlight -= 1;
+      return `CODEX ${EN}`;
+    });
+    const { value, lines } = await captureLog(() => Promise.all([it(), it(), it()]));
+    assert.equal(calls.length, 1);
+    assert.equal(maxInFlight, 1);
+    assert.deepEqual(value, [`CODEX ${EN}`, `MYMEMORY ${EN}`, `MYMEMORY ${EN}`]);
+    assert.equal(lines.filter((l) => l.includes('budget di 20s esaurito')).length, 1);
+  } finally {
+    Date.now = realNow;
+    delete process.env.FREE_TRANSLATE_CODEX_MAX_MS;
+  }
+});
+
+test('in coda le chiamate non si sovrappongono mai', async () => {
+  let inFlight = 0;
+  let maxInFlight = 0;
+  const calls = stubCodex(async () => {
+    inFlight += 1;
+    maxInFlight = Math.max(maxInFlight, inFlight);
+    await new Promise((resolve) => setTimeout(resolve, 5));
+    inFlight -= 1;
+    return `CODEX ${EN}`;
+  });
+  const out = await captureLog(() => Promise.all(Array.from({ length: 4 }, () => it())));
+  assert.deepEqual(out.value, Array(4).fill(`CODEX ${EN}`));
+  assert.equal(calls.length, 4);
+  assert.equal(maxInFlight, 1);
 });
 
 test('tre fallimenti consecutivi fermano il tier, contati come errori del tier', async () => {

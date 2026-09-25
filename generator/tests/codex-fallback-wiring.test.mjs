@@ -226,3 +226,26 @@ test('la preferenza Codex/Claude vale su ogni tentativo di generazione, non solo
   const senzaGate = bodyCalls.filter((line) => !/prefer: \(?_preferActiveThisAttempt[^,]*\? PREFERRED_GENERATION_MODELS : undefined/.test(line));
   assert.deepEqual(senzaGate.map((line) => line.trim()), [], 'chiamate del corpo senza la preferenza Codex/Claude');
 });
+
+// Il TTL del broker e' di inattivita': si rinnova solo quando arriva una
+// richiesta. In batch-faq-articles il tier di traduzione Codex entra solo quando
+// DeepL e Azure finiscono, anche ore dopo l'avvio, e il secondo step parte dopo
+// il primo: con i 30 minuti di default il socket spariva prima e il tier si
+// saltava in silenzio (review Codex di #1846).
+test('batch-faq-articles tiene vivo il broker per tutta la durata del job', () => {
+  const workflow = read('.github/workflows/batch-faq-articles.yml');
+  const timeoutMinutes = Number(/^\s+timeout-minutes:\s*(\d+)\s*$/m.exec(workflow)?.[1]);
+  assert.ok(timeoutMinutes > 30, 'timeout del job non trovato');
+  const setupStart = workflow.indexOf(`uses: ${ACTION}`);
+  assert.ok(setupStart >= 0, 'setup del broker non trovato');
+  const setup = workflow.slice(setupStart, workflow.indexOf('\n      - ', setupStart));
+  const ttl = Number(/broker_idle_ttl_ms:\s*'(\d+)'/.exec(setup)?.[1]);
+  assert.ok(ttl >= timeoutMinutes * 60_000, `TTL ${ttl} ms sotto il timeout del job (${timeoutMinutes} min)`);
+  assert.ok(ttl <= 21_600_000, 'TTL oltre il tetto accettato dall\'action: tornerebbe al default');
+
+  const action = read('.github/actions/setup-claude-haiku-fallback/action.yml');
+  assert.match(action, /broker_idle_ttl_ms:\n\s+description:/);
+  assert.match(action, /BROKER_IDLE_TTL_MS: \$\{\{ inputs\.broker_idle_ttl_ms \}\}/);
+  assert.match(action, /--ttl-ms "\$broker_ttl_ms"/);
+  assert.doesNotMatch(action, /--ttl-ms 1800000/);
+});

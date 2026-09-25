@@ -183,14 +183,19 @@ jobs:
         run: mkdir -p data
 
       # Codex Luna Max broker for the translation tier only (see the header).
-      # Started right before its consumers: the broker lives 30 minutes. It
-      # never fails the job — without it the tier is skipped and the cascade is
-      # the one it always was. Dry runs make no AI calls, so they skip it.
+      # Its idle TTL matches the job's 360-minute timeout: the tier engages only
+      # once DeepL and Azure run out, which can be hours into the first step,
+      # and the second step starts after it. With the default 30 minutes the
+      # socket vanished during that silence and the tier was skipped without a
+      # word. The cleanup step below still ends the broker. It never fails the
+      # job — without it the tier is skipped and the cascade is the one it
+      # always was. Dry runs make no AI calls, so they skip it.
       - id: setup_claude_haiku_fallback
         if: steps.mode.outputs.dry != 'true'
         uses: ./.github/actions/setup-claude-haiku-fallback
         with:
           codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
+          broker_idle_ttl_ms: '21600000'
 
       - name: Run batch FAQ generation
         id: faq
