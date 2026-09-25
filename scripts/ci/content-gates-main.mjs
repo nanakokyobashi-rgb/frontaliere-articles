@@ -155,6 +155,7 @@ export const CONTENT_GATES = [
   'generator/tests/evergreen-contributi-sociali-busta-paga-refresh.test.mjs',
   'generator/tests/evergreen-costo-pendolare-auto-ticino-2026-refresh.test.mjs',
   'generator/tests/evergreen-costo-vita-ticino-vs-lombardia-refresh.test.mjs',
+  'generator/tests/evergreen-costo-vivere-lugano-trasferirsi-refresh.test.mjs',
   'generator/tests/evergreen-credito-imposta-doppia-tassazione-refresh.test.mjs',
   'generator/tests/evergreen-dichiarazione-redditi-ticino-2026-refresh.test.mjs',
   'generator/tests/evergreen-guida-contributi-sociali-svizzera-refresh.test.mjs',

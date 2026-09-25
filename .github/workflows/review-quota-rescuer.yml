@@ -7,6 +7,13 @@ name: Review quota rescuer (zero-Claude)
 # tocca PR senza un claim/marker deterministico. Il percorso transient è
 # one-shot per PR + HEAD + body revision e rilancia soltanto `tests`.
 #
+# Dal 2026-09-25 c'e' un terzo arco: un run `tests` rosso perche' il bucket REST
+# orario del GITHUB_TOKEN era esaurito (annotation `[gh-rate-limit …]` o 403
+# «API rate limit exceeded» nel job richiesto) viene rilanciato UNA volta per
+# HEAD, e solo DOPO il reset. Quello scan legge le run `tests` e le annotation,
+# quindi gira sui tick cron/dispatch e sui completamenti di `tests` — dove un
+# rosso nuovo puo' comparire — e non sugli altri trigger (`REVIEW_RATE_LIMIT_SCAN`).
+#
 # Le letture e le mutazioni del rescuer usano l'identità operativa del corpus,
 # `GITHUB_PAT_NANAKO`, caricata dal solo ponte Remote Config. Il token automatico
 # dell'installation (`secrets.GITHUB_TOKEN`) ha una quota separata e può
@@ -99,6 +106,7 @@ jobs:
         env:
           GH_REPO: ${{ github.repository }}
           DRY_RUN: ${{ github.event.inputs.dry_run }}
+          REVIEW_RATE_LIMIT_SCAN: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.name == 'tests' }}
         run: |
           set -uo pipefail
           runtime_pat="${GITHUB_PAT_NANAKO:-}"

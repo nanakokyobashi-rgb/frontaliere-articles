@@ -193,6 +193,10 @@ function runScan({
   // `updated_at: isoAgo(5)` della fixture: senza questo stub la chiamata
   // cadeva nel ramo `*) echo '{}'` e OGNI PR risultava fresca.
   pushedAt = isoAgo(5),
+  // Scope dello step `Decide scan scope` (2026-09-25). Assente = scan
+  // completo, cioe' la forma di cron e dispatch.
+  scanMode,
+  scopePrs,
 }) {
   const dir = mkdtempSync(path.join(tmpdir(), 'stale-pr-rescuer-'));
   try {
@@ -435,6 +439,8 @@ exec /usr/bin/grep "$@"
         CI_CHECK_NAME: CHECK_NAME,
         GH_TOKEN: 'x',
         DRY_RUN: dryRun ? 'true' : 'false',
+        ...(scanMode === undefined ? {} : { SCAN_MODE: scanMode }),
+        ...(scopePrs === undefined ? {} : { SCAN_SCOPE_PRS: scopePrs }),
       },
     });
 
@@ -1711,4 +1717,159 @@ test('#488 — D + REDFLAG_FIX_ROUND: zero invocazioni extra (il rerun resta nel
       `un rerun extra riaprirebbe una review che il commento ha già chiesto a un umano.\n${r.stdout}`,
   );
   assert.match(only(r), /gh run rerun/);
+});
+
+// ── 2026-09-25: il `workflow_run` non riscandisce tutte le PR a ogni review ──
+//
+// Il bucket REST del GITHUB_TOKEN (1.000/h per l'intero repo) si e' esaurito
+// alle 06:58 UTC; uno scan completo per ogni completamento di `tests` era fra i
+// primi consumatori. `Decide scan scope` concede lo scan completo al primo run
+// PARTITO in ogni finestra di 30 minuti; gli altri run `workflow_run` guardano
+// solo le PR del trigger. Qui lo step viene ESEGUITO con `gh` e `date`
+// stubbati, come il blocco di classificazione.
+
+const SCOPE_RUN = extractRun('Decide scan scope');
+const SLOT_START = 1_790_323_200; // 2026-09-25T08:00:00Z, allineato a 1800 s
+const SELF_RUN_ID = 5000;
+const iso = (sec) => new Date(sec * 1000).toISOString().replace(/\.\d{3}Z$/, 'Z');
+const rescuerRun = (over = {}) => ({
+  id: 4000,
+  status: 'completed',
+  conclusion: 'success',
+  event: 'workflow_run',
+  created_at: iso(SLOT_START + 60),
+  run_started_at: iso(SLOT_START + 90),
+  ...over,
+});
+
+function runScope({ event = 'workflow_run', runs = [], runsError = false, raw = null, nowS = SLOT_START + 600 }) {
+  const dir = mkdtempSync(path.join(tmpdir(), 'stale-pr-scope-'));
+  try {
+    const bin = path.join(dir, 'bin');
+    mkdirSync(bin, { recursive: true });
+    const calls = path.join(dir, 'calls');
+    const output = path.join(dir, 'output');
+    const payload = path.join(dir, 'runs.json');
+    writeFileSync(calls, '');
+    writeFileSync(output, '');
+    writeFileSync(payload, raw ?? JSON.stringify({ total_count: runs.length, workflow_runs: runs }));
+    writeFileSync(path.join(bin, 'gh'), `#!/usr/bin/env bash
+printf '%s\\n' "$*" >> ${JSON.stringify(calls)}
+${runsError ? 'exit 1' : `cat ${JSON.stringify(payload)}`}
+`);
+    writeFileSync(path.join(bin, 'date'), `#!/usr/bin/env bash
+echo ${nowS}
+`);
+    chmodSync(path.join(bin, 'gh'), 0o755);
+    chmodSync(path.join(bin, 'date'), 0o755);
+    const script = path.join(dir, 'scope.sh');
+    writeFileSync(script, SCOPE_RUN);
+    const stdout = execFileSync('bash', [script], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+      env: {
+        ...process.env,
+        PATH: `${bin}:${process.env.PATH}`,
+        GH_TOKEN: 'x',
+        REPO: 'nanakokyobashi-rgb/frontaliere-articles',
+        EVENT_NAME: event,
+        RUN_ID: String(SELF_RUN_ID),
+        TRIGGER_PRS: '901',
+        FULL_SCAN_SLOT_S: '1800',
+        GITHUB_OUTPUT: output,
+      },
+    });
+    const mode = (readFileSync(output, 'utf8').match(/^mode=(\w+)$/m) || [])[1];
+    return { mode, stdout, calls: readFileSync(calls, 'utf8').trim().split('\n').filter(Boolean) };
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+}
+
+test('scope — cron e dispatch fanno sempre lo scan completo, senza letture', opts, () => {
+  for (const event of ['schedule', 'workflow_dispatch']) {
+    const r = runScope({ event, runs: [rescuerRun()] });
+    assert.equal(r.mode, 'full', `${event}: ${r.stdout}`);
+    assert.deepEqual(r.calls, [], `${event}: nessuna lettura per decidere`);
+  }
+});
+
+test('scope — il primo run partito nella finestra fa lo scan completo', opts, () => {
+  const r = runScope({
+    runs: [
+      // Il run corrente e i run partiti nella finestra PRECEDENTE non contano.
+      rescuerRun({ id: SELF_RUN_ID, status: 'in_progress', conclusion: null }),
+      rescuerRun({ id: 3999, created_at: iso(SLOT_START - 200), run_started_at: iso(SLOT_START - 100) }),
+    ],
+  });
+  assert.equal(r.mode, 'full', r.stdout);
+  assert.equal(r.calls.length, 1, r.calls.join('\n'));
+  assert.ok(
+    r.calls[0].includes(`actions/workflows/stale-pr-rescuer.yml/runs?per_page=100&created=%3E%3D${iso(SLOT_START - 3600)}`),
+    `una lettura sola, limitata all'ultima ora e mezza: ${r.calls[0]}`,
+  );
+  assert.ok(r.calls[0].includes('--paginate'), 'la lettura e\' paginata come ogni altra del workflow');
+});
+
+test('scope — uno scan gia\' partito nella finestra riduce il run alle PR del trigger', opts, () => {
+  for (const conclusion of ['success', 'failure', 'timed_out']) {
+    const r = runScope({ runs: [rescuerRun({ conclusion })] });
+    assert.equal(r.mode, 'scoped', `${conclusion}: ${r.stdout}`);
+    assert.match(r.stdout, /run 4000/);
+  }
+  // Creato nella finestra precedente ma PARTITO in questa (coda): conta.
+  const queued = runScope({ runs: [rescuerRun({ created_at: iso(SLOT_START - 30), run_started_at: iso(SLOT_START + 5) })] });
+  assert.equal(queued.mode, 'scoped', queued.stdout);
+});
+
+test('scope — run cancellati in coda o saltati non hanno scandito niente', opts, () => {
+  const r = runScope({
+    runs: [
+      rescuerRun({ id: 4001, conclusion: 'cancelled' }),
+      rescuerRun({ id: 4002, conclusion: 'skipped' }),
+      rescuerRun({ id: 4003, status: 'queued', conclusion: null }),
+    ],
+  });
+  assert.equal(r.mode, 'full', r.stdout);
+});
+
+test('scope — lettura fallita o illeggibile: scope ridotto, mai lo scan completo', opts, () => {
+  const failed = runScope({ runsError: true });
+  assert.equal(failed.mode, 'scoped', failed.stdout);
+  assert.match(failed.stdout, /::warning::Run recenti di stale-pr-rescuer illeggibili/);
+  for (const raw of ['not-json', '{"total_count":0}', '']) {
+    const malformed = runScope({ raw });
+    assert.equal(malformed.mode, 'scoped', `${JSON.stringify(raw)}: ${malformed.stdout}`);
+    assert.match(malformed.stdout, /::warning::Run recenti di stale-pr-rescuer non interpretabili/);
+  }
+});
+
+test('scope ridotto: la classificazione tocca SOLO le PR del trigger', opts, () => {
+  const twoPrs = [...openPr(), ...openPr({ number: 902 })];
+  const common = {
+    prs: twoPrs,
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: OLD_SHA, body: '🔴 **Important**: manca il guard' }),
+  };
+  const full = runScan(common);
+  assert.deepEqual(full.comments.map((c) => c.pr).sort(), [901, 902], full.stdout);
+
+  const scoped = runScan({ ...common, scanMode: 'scoped', scopePrs: '902' });
+  assert.deepEqual(scoped.comments.map((c) => c.pr), [902], scoped.stdout);
+  assert.match(scoped.comments[0].body, /review più vecchia dell'head/, 'stesse regole dello scan completo');
+
+  const none = runScan({ ...common, scanMode: 'scoped', scopePrs: '' });
+  assert.deepEqual(none.comments, [], none.stdout);
+  assert.deepEqual(none.labeled, [], none.stdout);
+});
+
+test('il custode delle PR orfane gira solo nello scan completo', () => {
+  for (const step of ['Checkout orphan PR custodian', 'Orphan PR custodian']) {
+    const at = WF.indexOf(`      - name: ${step}\n`);
+    assert.notEqual(at, -1, step);
+    const header = WF.slice(at, WF.indexOf('\n', WF.indexOf('\n', at) + 1));
+    assert.match(header, /if: steps\.scope\.outputs\.mode == 'full'/, `${step} senza gate sullo scope`);
+  }
+  assert.ok(WF.indexOf('- name: Decide scan scope') < WF.indexOf('- name: Scan open PRs and flag stalled ones'));
+  assert.match(WF, /SCAN_MODE: \$\{\{ steps\.scope\.outputs\.mode \}\}/);
 });
