@@ -650,3 +650,101 @@ test('il socket compare solo quando il broker accetta gia\' connessioni', async 
     fs.rmSync(cliPrefix, { recursive: true, force: true });
   }
 });
+
+// Codex finto che dorme `sleep:<ms>` preso dal prompt prima di rispondere.
+const SLEEPING_CLI = `#!/usr/bin/env node
+import fs from 'node:fs';
+const args = process.argv.slice(2);
+if (args.includes('--version')) { console.log('codex 0.153.4'); process.exit(0); }
+const output = args[args.indexOf('--output-last-message') + 1];
+if (!output) process.exit(2);
+let prompt = '';
+process.stdin.setEncoding('utf8');
+process.stdin.on('data', (chunk) => { prompt += chunk; });
+process.stdin.on('end', () => {
+  const wait = Number(prompt.match(/sleep:(\\d+)/)?.[1] || 0);
+  setTimeout(() => fs.writeFileSync(output, JSON.stringify({ prompt }), 'utf8'), wait);
+});
+`;
+
+async function withSleepingBroker(ttlMs, body) {
+  const brokerDir = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-broker-queue-test.'));
+  const cliPrefix = fs.mkdtempSync(path.join(os.tmpdir(), 'claude-haiku-codex-cli.'));
+  const socketPath = path.join(brokerDir, 'auth.sock');
+  const cliPath = path.join(cliPrefix, 'codex');
+  fs.writeFileSync(cliPath, SLEEPING_CLI, { mode: 0o700 });
+  fs.chmodSync(cliPath, 0o700);
+  const cliSha256 = crypto.createHash('sha256').update(fs.readFileSync(cliPath)).digest('hex');
+  const broker = spawn(process.execPath, [
+    BROKER,
+    '--socket', socketPath,
+    '--ttl-ms', String(ttlMs),
+    '--max-requests', '16',
+    '--codex-bin', cliPath,
+    '--codex-realpath', cliPath,
+    '--codex-sha256', cliSha256,
+    '--codex-prefix', cliPrefix,
+  ], {
+    cwd: ROOT,
+    stdio: ['pipe', 'ignore', 'pipe'],
+  });
+  let stderr = '';
+  broker.stderr.setEncoding('utf8');
+  broker.stderr.on('data', (chunk) => { stderr += chunk; });
+  broker.stdin.end('{"access_token":"test"}');
+  try {
+    await waitForSocket(socketPath, broker).catch((error) => {
+      throw new Error(`${error.message}: ${stderr}`);
+    });
+    await body({ broker, socketPath, stderr: () => stderr });
+  } finally {
+    if (broker.exitCode === null) broker.kill('SIGTERM');
+    await waitForExit(broker).catch(() => {});
+    fs.rmSync(brokerDir, { recursive: true, force: true });
+    fs.rmSync(cliPrefix, { recursive: true, force: true });
+  }
+}
+
+/** Scambio grezzo con timestamp: mostra i byte di controllo prima della riga JSON. */
+function rawRequest(socketPath, payload) {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    const client = net.createConnection(socketPath);
+    client.setEncoding('utf8');
+    client.setTimeout(10_000, () => reject(new Error('broker request timed out')));
+    client.on('error', reject);
+    client.on('data', (chunk) => chunks.push({ at: Date.now(), data: String(chunk) }));
+    client.on('end', () => resolve({ raw: chunks.map((c) => c.data).join(''), chunks }));
+    client.on('connect', () => client.end(`${JSON.stringify(payload)}\n`));
+  });
+}
+
+const jsonLine = (raw) => JSON.parse(raw.replace(/^[\0\x01]+/, ''));
+
+test('una richiesta più lunga del TTL completa: il broker scade solo da inattivo', async () => {
+  await withSleepingBroker(300, async ({ broker, socketPath, stderr }) => {
+    const long = await rawRequest(socketPath, { op: 'exec', prompt: 'sleep:900', timeoutMs: 5000 });
+    assert.equal(jsonLine(long.raw).ok, true, stderr());
+    assert.equal(await waitForExit(broker, 3000), 0, stderr());
+    assert.equal(fs.existsSync(socketPath), false);
+  });
+});
+
+test('il segnale di avvio arriva quando la richiesta esce dalla coda, e solo a chi lo chiede', async () => {
+  await withSleepingBroker(60_000, async ({ socketPath, stderr }) => {
+    const first = rawRequest(socketPath, { op: 'exec', prompt: 'sleep:600', timeoutMs: 5000, notifyStart: true });
+    await delay(100);
+    const queued = rawRequest(socketPath, { op: 'exec', prompt: 'sleep:10', timeoutMs: 5000, notifyStart: true });
+    const legacy = rawRequest(socketPath, { op: 'exec', prompt: 'sleep:10', timeoutMs: 5000 });
+    const [a, b, c] = await Promise.all([first, queued, legacy]);
+
+    assert.ok(a.raw.startsWith('\x01') || a.raw.startsWith('\0\x01'), JSON.stringify(a.raw.slice(0, 4)));
+    assert.equal(jsonLine(a.raw).ok, true, stderr());
+    assert.equal(jsonLine(b.raw).ok, true, stderr());
+    const firstAnswered = a.chunks.find((chunk) => chunk.data.includes('{')).at;
+    const queuedStarted = b.chunks.find((chunk) => chunk.data.includes('\x01')).at;
+    assert.ok(queuedStarted >= firstAnswered, 'la richiesta in coda parte dopo la risposta alla precedente');
+    assert.equal(c.raw.includes('\x01'), false, 'senza notifyStart il protocollo resta quello di prima');
+    assert.equal(jsonLine(c.raw).ok, true, stderr());
+  });
+});

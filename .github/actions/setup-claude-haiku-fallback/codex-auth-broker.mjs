@@ -22,8 +22,14 @@
  * The socket is deliberately the only job-wide hand-off. Its parent directory
  * is 0700 and the socket is 0600. A malformed request never receives auth or
  * consumes a request slot. The idle TTL is a backstop for persistent runners
- * and is refreshed whenever an accepted request starts or completes; callers
- * should still invoke the explicit cleanup operation at the end of a job.
+ * and is refreshed whenever an accepted request starts or completes; it never
+ * fires while a request is running or queued. Callers should still invoke the
+ * explicit cleanup operation at the end of a job.
+ *
+ * Requests run one at a time, so a request can wait in the queue behind
+ * others. A client that sends `notifyStart: true` receives one
+ * CLIENT_START_SIGNAL byte when its own Codex process starts, and can time the
+ * execution from there instead of from connect().
  */
 
 import fs from 'node:fs';
@@ -50,6 +56,13 @@ const MAX_STDERR_TAIL_CHARS = 16 * 1024;
 // Fits the 300-character error the broker returns, after its own prefix.
 const MAX_FAILURE_REASON_CHARS = 200;
 const CLIENT_LIVENESS_PROBE = '\0';
+// Written before the JSON line when the request leaves the queue and Codex
+// starts. The client used to time the execution from connect(): with several
+// callers queued, every request expired while its Codex had just started, the
+// broker killed it half-way and moved on to the next one, already about to
+// expire too (site twin, send-newsletter run 36116142119: no answer for 16
+// minutes).
+const CLIENT_START_SIGNAL = '\x01';
 
 function argument(name, fallback = '') {
   const index = process.argv.indexOf(name);
@@ -523,8 +536,19 @@ let expiry;
 function refreshIdleExpiry() {
   if (closed) return;
   clearTimeout(expiry);
-  expiry = setTimeout(cleanup, ttlMs);
+  expiry = setTimeout(expireIfIdle, ttlMs);
   expiry.unref?.();
+}
+
+// A TTL shorter than one Codex request (the action accepts 60 s) used to close
+// the broker under a running request. Expiry now re-arms while there is work.
+function expireIfIdle() {
+  if (closed) return;
+  if (activeRequest || pendingRequests.some((job) => !job.cancelled && !job.client.destroyed)) {
+    refreshIdleExpiry();
+    return;
+  }
+  cleanup();
 }
 
 function cleanupRuntime() {
@@ -608,6 +632,11 @@ function startNextRequest() {
     cancelRequest(job);
     job.client.destroy();
   });
+  if (job.parsed.notifyStart === true) {
+    // A client that left meanwhile emits 'error'/'close', which cancel the
+    // request like any other disconnect.
+    try { job.client.write(CLIENT_START_SIGNAL); } catch { /* client already closed */ }
+  }
   const credential = authJson;
   runCodex({
     authJson: credential,
