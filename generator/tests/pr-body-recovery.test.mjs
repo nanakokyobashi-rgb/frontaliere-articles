@@ -26,23 +26,44 @@ const AFTER_EDIT = '2026-09-19T12:01:00Z';
 
 // `later`: fields the run takes on successive getWorkflowRun reads (the
 // first read is the script's re-read of the listed run).
-async function recover(bodyConclusion, status = 'completed', failedSteps = [], later = [], runOverrides = {}, cancelError = null, autoMerge = null, editTimestamp = EDITED_AT, graphqlError = null, checkError = null) {
+async function recover(bodyConclusion, status = 'completed', failedSteps = [], later = [], runOverrides = {}, cancelError = null, autoMerge = null, editTimestamp = EDITED_AT, graphqlError = null, checkError = null, rateLimitFailures = {}) {
   const reruns = [];
   const cancels = [];
   const failures = [];
   const autoMergeRevokes = [];
   const requiredCheckBlocks = [];
+  const remainingRateLimitFailures = new Map(Object.entries(rateLimitFailures));
+  const maybeRateLimit = name => {
+    const remaining = remainingRateLimitFailures.get(name) || 0;
+    if (!remaining) return;
+    remainingRateLimitFailures.set(name, remaining - 1);
+    const error = Object.assign(new Error('API rate limit exceeded for installation'), {
+      status: 403,
+      response: {
+        status: 403,
+        headers: { 'x-ratelimit-remaining': '0', 'x-ratelimit-reset': String(Math.floor(Date.now() / 1000)) },
+        data: { message: 'API rate limit exceeded for installation' },
+      },
+    });
+    throw error;
+  };
   const run = {
     id: 42, run_attempt: 1, status, conclusion: status === 'completed' ? 'failure' : null,
     head_branch: 'feature', event: 'pull_request', run_started_at: BEFORE_EDIT, ...runOverrides,
   };
   const polls = [...later];
+  const graphqlErrors = Array.isArray(graphqlError)
+    ? [...graphqlError]
+    : graphqlError ? [graphqlError] : [];
   const github = {
     rest: {
-      pulls: { get: async () => ({ data: {
+      pulls: { get: async () => {
+        maybeRateLimit('pulls.get');
+        return { data: {
         node_id: 'PR_node', state: 'open', head: { sha: 'head', ref: 'feature' }, body: prBody,
         auto_merge: autoMerge,
-      } }) },
+        } };
+      } },
       actions: {
         listWorkflowRuns: 'runs', listJobsForWorkflowRun: 'jobs',
         getWorkflowRun: async () => {
@@ -63,7 +84,7 @@ async function recover(bodyConclusion, status = 'completed', failedSteps = [], l
       },
     },
     graphql: async (_query, variables) => {
-      if (graphqlError) throw graphqlError;
+      if (graphqlErrors.length) throw graphqlErrors.shift();
       autoMergeRevokes.push(variables.pullRequestId);
     },
     // Like the Jobs API: a step has no conclusion until the run gets there.
@@ -144,6 +165,27 @@ test('a corrected failed body retries the code run', async () => {
   assert.deepEqual(await recover('failure'), [42]);
 });
 
+test('an installation rate limit is retried before recovery classifies the body', async () => {
+  assert.deepEqual(await recover('failure', 'completed', [], [], {}, null, null, EDITED_AT, null, null, { 'pulls.get': 1 }), [42]);
+});
+
+test('a GraphQL HTTP 200 rate limit envelope is retried before fail-closed recovery', async () => {
+  const graphqlRateLimit = Object.assign(new Error('GraphQL request failed'), {
+    status: 200,
+    headers: {
+      'x-ratelimit-remaining': '0',
+      'x-ratelimit-reset': String(Math.floor(Date.now() / 1000)),
+    },
+    errors: [{ type: 'RATE_LIMITED', message: 'API rate limit exceeded' }],
+  });
+  assert.deepEqual(
+    await recover('success', 'completed', [], [], { run_started_at: undefined }, null, { enabled_by: 'bot' }, EDITED_AT, [graphqlRateLimit]),
+    [],
+  );
+  assert.deepEqual(recover.lastAutoMergeRevokes, ['PR_node']);
+  assert.match(recover.lastFailures[0], /timestamp/);
+});
+
 test('a body rejected only by the review gate retries the code run', async () => {
   // Without `edited` on tests.yml this is the only path by which a body the
   // reviewer rejected gets re-reviewed on the same HEAD.
@@ -213,12 +255,10 @@ test('a cancelled run that never settles fails closed instead of returning green
   assert.match(recover.lastFailures[0], /did not settle/);
 });
 
-test('a cancellation error other than the documented 409 race remains fatal', async () => {
+test('a cancellation error other than the documented 409 race fails closed', async () => {
   const error = Object.assign(new Error('permission denied'), { status: 403 });
-  await assert.rejects(
-    () => recover('success', 'in_progress', [], [], {}, error),
-    /permission denied/,
-  );
+  assert.deepEqual(await recover('success', 'in_progress', [], [], {}, error), []);
+  assert.match(recover.lastFailures[0], /permission denied/);
 });
 
 test('missing run metadata or an unknown conclusion fails closed', async () => {
