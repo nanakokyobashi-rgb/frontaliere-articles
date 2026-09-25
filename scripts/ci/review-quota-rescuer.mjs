@@ -1327,7 +1327,7 @@ export function rateLimitRerunCandidates(prs = [], runs = [], {
 function listRecentPullRequestTestsRuns(nowSec) {
   const since = new Date((nowSec - RATE_LIMIT_LOOKBACK_SEC) * 1000).toISOString().replace(/\.\d{3}Z$/, 'Z');
   const endpoint = `repos/${REPO}/actions/workflows/tests.yml/runs?event=pull_request&per_page=100`
-    + `&exclude_pull_requests=true&created=%3E%3D${since}`;
+    + `&created=%3E%3D${since}`;
   const pages = parseJson(gh(['api', '--paginate', '--slurp', endpoint]), null);
   if (!Array.isArray(pages) || pages.some((page) => !Array.isArray(page?.workflow_runs))) {
     throw new Error('elenco run tests malformato: attese pagine con workflow_runs');

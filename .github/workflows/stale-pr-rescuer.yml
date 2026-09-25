@@ -210,7 +210,7 @@ jobs:
             # run rimasto in coda piu' a lungo sfugge al filtro, e l'errore va
             # nella direzione sicura: uno scan completo in piu', mai uno in meno.
             since=$(jq -rn --argjson t "$(( slot_start - 3600 ))" '$t | todate')
-            if ! runs=$(gh api --paginate "repos/$REPO/actions/workflows/stale-pr-rescuer.yml/runs?per_page=100&exclude_pull_requests=true&created=%3E%3D$since" 2>/dev/null); then
+            if ! runs=$(gh api --paginate "repos/$REPO/actions/workflows/stale-pr-rescuer.yml/runs?per_page=100&created=%3E%3D$since" 2>/dev/null); then
               echo "::warning::Run recenti di stale-pr-rescuer illeggibili — scan limitato alle PR del trigger."
             elif ! prior=$(printf '%s\n' "$runs" | jq -rs --argjson me "$RUN_ID" --argjson start "$slot_start" '
                 if length == 0 or any(.[]; type != "object" or (.workflow_runs | type) != "array")

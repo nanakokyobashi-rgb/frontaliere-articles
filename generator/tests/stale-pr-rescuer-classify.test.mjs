@@ -1805,7 +1805,7 @@ test('scope — il primo run partito nella finestra fa lo scan completo', opts, 
   assert.equal(r.mode, 'full', r.stdout);
   assert.equal(r.calls.length, 1, r.calls.join('\n'));
   assert.ok(
-    r.calls[0].includes(`actions/workflows/stale-pr-rescuer.yml/runs?per_page=100&exclude_pull_requests=true&created=%3E%3D${iso(SLOT_START - 3600)}`),
+    r.calls[0].includes(`actions/workflows/stale-pr-rescuer.yml/runs?per_page=100&created=%3E%3D${iso(SLOT_START - 3600)}`),
     `una lettura sola, limitata all'ultima ora e mezza: ${r.calls[0]}`,
   );
   assert.ok(r.calls[0].includes('--paginate'), 'la lettura e\' paginata come ogni altra del workflow');
