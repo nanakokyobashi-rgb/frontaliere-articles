@@ -195,7 +195,7 @@ import {
 // `create-article.mjs`). Il modulo nuovo e' assente dal manifest, quindi non ha
 // vincolo di mirror, ed e' condiviso dai due scrittori di body del corpus.
 import { sanitizeBodyText } from './lib/sanitize-body-braces.mjs';
-import { extractFactCheckJson, factCheckRawSnippet } from './lib/fact-check-response.mjs';
+import { addIndependentVote, extractFactCheckJson, factCheckRawSnippet } from './lib/fact-check-response.mjs';
 import { decodeHtmlEntities } from './lib/decode-html-entities.mjs';
 import {
   PERFORMANCE_PATH as ARTICLE_PERF_PATH,
@@ -5826,10 +5826,19 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     const promises = modelsToQuery.map(model => _runSingleFactCheck(model, prompt, { isEvergreen }));
     const settled = await Promise.allSettled(promises);
 
+    // One vote per model that ANSWERED, not per model asked: callLLM re-sorts
+    // the cascade and falls through it, so both verifiers can be served by the
+    // same fallback — and two copies of one opinion would satisfy the
+    // "≥2 modelli" critical rule below on their own. See addIndependentVote.
+    let droppedDuplicate = false;
     for (let i = 0; i < settled.length; i++) {
       const s = settled[i];
       if (s.status === 'fulfilled' && s.value) {
-        modelResults.push({ model: modelsToQuery[i], ...s.value });
+        const earlier = addIndependentVote(modelResults, modelsToQuery[i], s.value);
+        if (earlier) {
+          droppedDuplicate = true;
+          console.error(`  ⚠️  LLM fact-check (${modelsToQuery[i]}): servito da ${earlier.servedBy}, che ha già votato per ${earlier.requested} — voto scartato, non è un secondo parere`);
+        }
       } else {
         const reason = s.status === 'rejected' ? s.reason?.message : 'no result';
         fcLastRejectMsgs.push(reason || '');
@@ -5837,11 +5846,30 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
       }
     }
 
+    // Both verifiers fell through to the same model: ask once more with every
+    // model that already voted excluded from the chain, so the consensus still
+    // weighs two opinions. A verifier that plainly failed has already walked
+    // the cascade inside callLLM, so that case is not retried here.
+    if (droppedDuplicate) {
+      const voted = modelResults.map((r) => r.servedBy);
+      const next = verificationModels.slice(2).find((m) => !voted.includes(m))
+        || verificationModels.find((m) => !voted.includes(m))
+        || modelsToQuery[1];
+      try {
+        const extra = await _runSingleFactCheck(next, prompt, { isEvergreen, excludeModels: voted });
+        const earlier = extra ? addIndependentVote(modelResults, next, extra) : null;
+        if (earlier) console.error(`  ⚠️  LLM fact-check (${next}): servito di nuovo da ${earlier.servedBy} — resta un solo voto`);
+      } catch (err) {
+        fcLastRejectMsgs.push(err.message || '');
+        console.error(`  ⚠️  LLM fact-check secondo parere (${next}): ${err.message}`);
+      }
+    }
+
     // If both primary models failed, try fallback
     if (modelResults.length === 0 && verificationModels.length > 2) {
       try {
         const fallback = await _runSingleFactCheck(verificationModels[2], prompt, { isEvergreen });
-        if (fallback) modelResults.push({ model: verificationModels[2], ...fallback });
+        if (fallback) addIndependentVote(modelResults, verificationModels[2], fallback);
       } catch (err) {
         fcLastRejectMsgs.push(err.message || '');
         console.error(`  ⚠️  LLM fact-check fallback (${verificationModels[2]}): ${err.message}`);
@@ -6055,6 +6083,11 @@ function normalizeFactCheckIssues(issues, { isEvergreen = false } = {}) {
   });
 }
 
+// (requested model, prompt) → the model that answered it, for resolving the
+// 'cache' that callLLM reports on a response-cache hit. In-process, like the
+// cache it mirrors.
+const _factCheckServedBy = new Map();
+
 async function _runSingleFactCheck(model, prompt, opts = {}) {
   const modelUsedRef = { model: null };
   const raw = await _aiCallLLM(
@@ -6079,8 +6112,21 @@ async function _runSingleFactCheck(model, prompt, opts = {}) {
     // JSON valido», but without response_format the NVIDIA verifiers answered
     // in prose — eight "risposta non JSON" in a row on run 36096755072. The
     // generation calls on the same cascade already send it and get JSON back.
-    buildFactCheckCallOptions({ model, temperature: 0.0, maxTokens: 4000, timeout: 60_000, bypassForceChain: true, deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS, modelUsedRef, jsonMode: true })
+    // excludeModels: only on the second-opinion call in llmFactCheck, which
+    // must not be answered by a model that already voted (callLLM also skips
+    // the response cache for it).
+    buildFactCheckCallOptions({ model, temperature: 0.0, maxTokens: 4000, timeout: 60_000, bypassForceChain: true, deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS, modelUsedRef, jsonMode: true, excludeModels: opts.excludeModels })
   );
+  // The model that really answered. callLLM reports a cache hit as 'cache';
+  // the cache key is prompt + requested model + these fixed params, so the
+  // model that answered the first time is the one recorded under the same
+  // (model, prompt) here. Needed twice: the consensus counts one vote per
+  // answering model, and a cached local answer must not slip past the
+  // self-verification guard below just because it came back as 'cache'.
+  const servedMemoKey = `${model}\u0000${prompt}`;
+  let servedBy = modelUsedRef.model;
+  if (servedBy === 'cache') servedBy = _factCheckServedBy.get(servedMemoKey) || null;
+  else if (servedBy) _factCheckServedBy.set(servedMemoKey, servedBy);
   // Guard: if the full remote cascade is exhausted, callLLM falls through to
   // local/fallback — the same model that may have generated the content.
   // Self-verification (local grading local) produces circular self-consensus
@@ -6095,28 +6141,29 @@ async function _runSingleFactCheck(model, prompt, opts = {}) {
   // as an equivalent self-consensus risk would itself be an unverified
   // assumption. Left as-is deliberately; revisit if OmniRoute's routing
   // behavior is ever characterized (e.g. sticky-provider-per-window).
-  if (modelUsedRef.model === AI_MODELS.LOCAL_FALLBACK) {
+  if (servedBy === AI_MODELS.LOCAL_FALLBACK) {
     throw new Error(`fact-check deferred: all remote verifiers exhausted — local/fallback cannot self-verify (requested: ${model})`);
   }
 
   // Balanced-object extraction instead of first-`{`-to-last-`}`: prose
   // around the verdict, or a stray brace in it, no longer turns a valid
-  // answer into "JSON non valido". When there is still no verdict, the log
-  // shows what came back and which model actually answered, so the next
+  // answer into "JSON non valido". Only an object with a PASS/FAIL verdict
+  // counts: any other JSON is not a vote. When there is still no verdict, the
+  // log shows what came back and which model actually answered, so the next
   // failure is diagnosable instead of a bare "risposta non JSON".
   const { result, error } = extractFactCheckJson(raw);
   if (!result) {
-    const servedBy = modelUsedRef.model && modelUsedRef.model !== model ? ` via ${modelUsedRef.model}` : '';
-    const label = error === 'no-json' ? 'risposta non JSON' : 'JSON non valido';
-    console.error(`  ⚠️  LLM fact-check (${model}${servedBy}): ${label} — ${factCheckRawSnippet(raw)}`);
+    const via = servedBy && servedBy !== model ? ` via ${servedBy}` : '';
+    const label = { 'no-json': 'risposta non JSON', 'no-verdict': 'JSON senza verdetto PASS/FAIL' }[error] || 'JSON non valido';
+    console.error(`  ⚠️  LLM fact-check (${model}${via}): ${label} — ${factCheckRawSnippet(raw)}`);
     return null;
   }
 
-  const verdict = (result.verdict || '').toUpperCase();
+  const verdict = result.verdict.trim().toUpperCase();
   const confidence = Number(result.confidence) || 0;
   const issues = normalizeFactCheckIssues(result.issues, opts);
 
-  return { verdict, confidence, issues };
+  return { verdict, confidence, issues, servedBy };
 }
 
 // assertNoFabricatedStatistics() REMOVED — replaced by LLM-based fact-checking.

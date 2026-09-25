@@ -1,5 +1,6 @@
 /**
- * fact-check-response.mjs — read the verdict out of a fact-checker's reply.
+ * fact-check-response.mjs — read the verdict out of a fact-checker's reply,
+ * and count each verifier's vote once per model that actually answered.
  *
  * The old parser in create-article.mjs took everything from the first `{` to
  * the last `}` and fed it to JSON.parse. That fails twice over on the replies
@@ -13,15 +14,18 @@
  * This module is pure (no network, no process state) so the test can run it.
  */
 
+const VERDICTS = new Set(['PASS', 'FAIL']);
+
 /**
  * Every balanced `{…}` span in `text`, in order of appearance, honouring
  * string literals so a brace inside a quoted claim does not close the object.
+ * Lazy: the caller stops at the first span that carries a verdict, so a
+ * normal reply costs one scan, not one per brace.
  *
  * @param {string} text
- * @returns {string[]}
+ * @returns {Generator<string>}
  */
-function balancedObjectSpans(text) {
-  const spans = [];
+function* balancedObjectSpans(text) {
   for (let start = text.indexOf('{'); start !== -1; start = text.indexOf('{', start + 1)) {
     let depth = 0;
     let inString = false;
@@ -39,42 +43,84 @@ function balancedObjectSpans(text) {
       else if (ch === '}') {
         depth--;
         if (depth === 0) {
-          spans.push(text.slice(start, i + 1));
+          yield text.slice(start, i + 1);
           break;
         }
       }
     }
   }
-  return spans;
 }
 
 /**
- * Extract the fact-check verdict object from a raw model reply.
+ * A fact-check verdict the consensus can count: a top-level `verdict` of
+ * PASS or FAIL (any case) and, when present, an `issues` array. Anything
+ * else — an echo of the schema, a `{"nota": …}` draft, `{"verdict": "OK"}` —
+ * is not a vote, and counting it as one would let an empty issues list
+ * pass the article.
  *
- * Preference order: the first parseable object that carries a `verdict` key;
- * then the first parseable object at all; then nothing.
+ * @param {unknown} parsed
+ * @returns {boolean}
+ */
+function isFactCheckVerdict(parsed) {
+  if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) return false;
+  if (typeof parsed.verdict !== 'string' || !VERDICTS.has(parsed.verdict.trim().toUpperCase())) return false;
+  if (parsed.issues !== undefined && !Array.isArray(parsed.issues)) return false;
+  return true;
+}
+
+/**
+ * Extract the fact-check verdict object from a raw model reply: the first
+ * balanced object that parses and has the verdict shape above.
+ *
+ * `no-json`: no brace at all. `invalid-json`: braces, but nothing parses.
+ * `no-verdict`: JSON parses, but no object carries a PASS/FAIL verdict.
  *
  * @param {string} raw
- * @returns {{ result: object|null, error: null|'no-json'|'invalid-json' }}
+ * @returns {{ result: object|null, error: null|'no-json'|'invalid-json'|'no-verdict' }}
  */
 export function extractFactCheckJson(raw) {
   const text = typeof raw === 'string' ? raw : '';
-  const spans = balancedObjectSpans(text);
-  if (spans.length === 0) return { result: null, error: 'no-json' };
-  let firstParsed = null;
-  for (const span of spans) {
+  let sawSpan = false;
+  let sawParsed = false;
+  for (const span of balancedObjectSpans(text)) {
+    sawSpan = true;
     let parsed;
     try {
       parsed = JSON.parse(span);
     } catch {
       continue;
     }
-    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) continue;
-    if (Object.prototype.hasOwnProperty.call(parsed, 'verdict')) return { result: parsed, error: null };
-    if (!firstParsed) firstParsed = parsed;
+    sawParsed = true;
+    if (isFactCheckVerdict(parsed)) return { result: parsed, error: null };
   }
-  if (firstParsed) return { result: firstParsed, error: null };
-  return { result: null, error: 'invalid-json' };
+  if (!sawSpan) return { result: null, error: text.includes('{') ? 'invalid-json' : 'no-json' };
+  return { result: null, error: sawParsed ? 'no-verdict' : 'invalid-json' };
+}
+
+/**
+ * Add one verifier's verdict to the consensus, at most once per model that
+ * actually served it.
+ *
+ * `callLLM` treats the requested model as a starting point, not a pin: it
+ * re-sorts the cascade by score and falls through to the rest of the chain
+ * when that model fails. Two verifiers asked of two different models can
+ * therefore both be answered by the same fallback — and counting those as
+ * two votes turns one model's opinion into a "consensus", which is what the
+ * critical-issue rule relies on.
+ *
+ * @param {Array<object>} votes the consensus so far; appended to in place
+ * @param {string} requested the verifier that was asked
+ * @param {{ servedBy?: string|null }} value the parsed verdict, with the model
+ *   that answered (`modelUsedRef.model`); a missing one counts as `requested`
+ * @returns {object|null} the earlier vote from the same model, when this one
+ *   was dropped as a duplicate; `null` when it was counted
+ */
+export function addIndependentVote(votes, requested, value) {
+  const servedBy = value.servedBy || requested;
+  const earlier = votes.find((v) => v.servedBy === servedBy);
+  if (earlier) return earlier;
+  votes.push({ ...value, model: servedBy, requested, servedBy });
+  return null;
 }
 
 /**

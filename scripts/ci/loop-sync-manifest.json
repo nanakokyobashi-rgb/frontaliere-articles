@@ -4348,10 +4348,10 @@
     {
       "path": "generator/scripts/lib/fact-check-response.mjs",
       "mode": "corpus-only",
-      "reason": "Estrazione del verdetto dalla risposta del fact-checker (oggetto JSON bilanciato con `verdict`, anche in mezzo a prosa) e spezzone diagnostico per il log quando manca; la usa `_runSingleFactCheck` in create-article.mjs. Corpus-only perche' il fact-check gira solo qui: il gemello adapted del sito (scripts/create-article.mjs) non esegue piu' la generazione.",
+      "reason": "Estrazione del verdetto dalla risposta del fact-checker (primo oggetto JSON bilanciato con `verdict` PASS/FAIL e `issues` array, anche in mezzo a prosa; nessun altro JSON conta come voto), conteggio di un voto per modello che ha davvero risposto (`addIndependentVote`) e spezzone diagnostico per il log quando manca; la usano `llmFactCheck` e `_runSingleFactCheck` in create-article.mjs. Corpus-only perche' il fact-check gira solo qui: il gemello adapted del sito (scripts/create-article.mjs) non esegue piu' la generazione.",
       "baseline": {
         "site": null,
-        "corpus": "7b852f16b52bd5a6",
+        "corpus": "33e81943cd572545",
         "alignedAt": "2026-09-25"
       }
     },

@@ -10,7 +10,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { extractFactCheckJson, factCheckRawSnippet } from '../scripts/lib/fact-check-response.mjs';
+import { addIndependentVote, extractFactCheckJson, factCheckRawSnippet } from '../scripts/lib/fact-check-response.mjs';
 import { stripThinkTags } from '../scripts/lib/ai-models.mjs';
 
 const VERDICT = { verdict: 'PASS', confidence: 0.9, issues: [] };
@@ -52,6 +52,53 @@ test('no brace at all is reported as no-json, a broken object as invalid-json', 
   assert.deepEqual(extractFactCheckJson('Il testo mi sembra corretto.'), { result: null, error: 'no-json' });
   assert.deepEqual(extractFactCheckJson('{"verdict": "PASS", "issues": [}'), { result: null, error: 'invalid-json' });
   assert.deepEqual(extractFactCheckJson(undefined), { result: null, error: 'no-json' });
+  // A reply cut off before its closing brace is broken JSON, not prose.
+  assert.deepEqual(extractFactCheckJson('{"verdict": "PASS", "issues": ['), { result: null, error: 'invalid-json' });
+});
+
+test('JSON without a PASS/FAIL verdict is not a vote', () => {
+  // Review of PR #1848: the first draft of this parser fell back to the first
+  // parseable object, so `{"nota":"bozza"}` came back as a result with no
+  // verdict and no issues, and the consensus would have counted it.
+  const noVerdict = { result: null, error: 'no-verdict' };
+  assert.deepEqual(extractFactCheckJson('{"nota":"bozza"}'), noVerdict);
+  assert.deepEqual(extractFactCheckJson('{"issues": []}'), noVerdict);
+  assert.deepEqual(extractFactCheckJson('{"verdict": "OK", "issues": []}'), noVerdict);
+  assert.deepEqual(extractFactCheckJson('{"verdict": true}'), noVerdict);
+  assert.deepEqual(extractFactCheckJson('{"verdict": "PASS", "issues": "nessuno"}'), noVerdict);
+  // The prompt's own schema line, echoed back, is not an answer either.
+  assert.deepEqual(extractFactCheckJson('{ "verdict": "PASS|FAIL", "confidence": 0.0, "issues": [] }'), noVerdict);
+});
+
+test('the verdict is read in any case, and a malformed object does not hide a valid one after it', () => {
+  assert.equal(extractFactCheckJson('{"verdict": "fail", "issues": []}').result.verdict, 'fail');
+  const raw = `{"verdict": "PASS", "issues": "nessuno"}\n${JSON.stringify(VERDICT)}`;
+  assert.deepEqual(extractFactCheckJson(raw).result, VERDICT);
+});
+
+test('two verifiers answered by the same model count as one vote', () => {
+  // Review of PR #1848: callLLM re-sorts the cascade and falls through it, so
+  // a verifier asked of gemma and one asked of nemotron-ultra can both be
+  // served by nemotron-super — one opinion, not a consensus.
+  const votes = [];
+  const first = { verdict: 'FAIL', confidence: 0.9, issues: [], servedBy: 'nvidia/nvidia/nemotron-3-super-120b-a12b' };
+  const second = { verdict: 'FAIL', confidence: 0.8, issues: [], servedBy: 'nvidia/nvidia/nemotron-3-super-120b-a12b' };
+  assert.equal(addIndependentVote(votes, 'nvidia/google/gemma-4-31b-it', first), null);
+  const earlier = addIndependentVote(votes, 'nvidia/nvidia/nemotron-3-ultra-550b-a55b', second);
+  assert.equal(votes.length, 1);
+  assert.equal(earlier, votes[0]);
+  assert.equal(votes[0].requested, 'nvidia/google/gemma-4-31b-it');
+  assert.equal(votes[0].model, 'nvidia/nvidia/nemotron-3-super-120b-a12b', 'il log deve nominare chi ha risposto');
+});
+
+test('two verifiers answered by two models are two votes; an unknown server counts as the one asked', () => {
+  const votes = [];
+  assert.equal(addIndependentVote(votes, 'a', { verdict: 'PASS', confidence: 1, issues: [], servedBy: 'a' }), null);
+  assert.equal(addIndependentVote(votes, 'b', { verdict: 'PASS', confidence: 1, issues: [], servedBy: 'c' }), null);
+  assert.equal(addIndependentVote(votes, 'd', { verdict: 'PASS', confidence: 1, issues: [], servedBy: null }), null);
+  assert.deepEqual(votes.map((v) => v.servedBy), ['a', 'c', 'd']);
+  assert.notEqual(addIndependentVote(votes, 'c', { verdict: 'PASS', confidence: 1, issues: [] }), null);
+  assert.equal(votes.length, 3);
 });
 
 test('reasoning that only carries the closing </think> tag is stripped', () => {
