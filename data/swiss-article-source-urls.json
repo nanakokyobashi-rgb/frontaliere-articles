@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/ghq4_joau7alp0hkqeybr": {
-    "articleId": "parere-governo-infrastrutture-ferroviarie",
-    "ts": "2026-08-21T08:44:43.681Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1945247/contratto-stadler-rail-friburghesi-trasporti": {
     "articleId": "stadler-rail-friburgo-117-milioni",
     "ts": "2026-08-21T09:43:21.828Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/y58ivlijeyw6": {
     "articleId": "finanziamento-federale-universita-sup",
     "ts": "2026-09-25T12:24:28.955Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4111117": {
+    "articleId": "fondi-integrazione-svizzera-2028",
+    "ts": "2026-09-25T13:29:00.234Z",
     "keyForm": 2
   }
 }
