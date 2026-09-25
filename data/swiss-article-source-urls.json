@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1945247/contratto-stadler-rail-friburghesi-trasporti": {
-    "articleId": "stadler-rail-friburgo-117-milioni",
-    "ts": "2026-08-21T09:43:21.828Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4003491": {
     "articleId": "esercito-misure-discriminazione",
     "ts": "2026-08-21T10:21:15.193Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4111117": {
     "articleId": "fondi-integrazione-svizzera-2028",
     "ts": "2026-09-25T13:29:00.234Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/politica/1952705/un-incentivo-fiscale-per-chi-compra-locale-la-proposta-del-centro": {
+    "articleId": "incentivo-fiscale-acquisto-locale",
+    "ts": "2026-09-25T14:19:43.522Z",
     "keyForm": 2
   }
 }
