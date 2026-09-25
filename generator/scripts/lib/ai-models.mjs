@@ -9697,7 +9697,8 @@ export async function callLLM(messages, opts = {}) {
       // rapido per rendere invisibile il prossimo incidente.
       // Il canale del broker Codex segue la stessa regola: socket sparito,
       // coda, connessione caduta o budget scaduto (vedi _requestCodexExecution).
-      const transportOnly = (!!e.transportFault && (provider === PROVIDER.CLAUDE_CLI || provider === PROVIDER.CODEX_CLI))
+      const transportOnly = (!!e.transportFault && provider === PROVIDER.CLAUDE_CLI)
+        || (!!e.transportFault && provider === PROVIDER.CODEX_CLI)
         || !!e.githubModelsCatalogFault
         || perMachineEndpointFault;
       // Gemello del ramo di successo: gate sul PARAMETRO, cosi' il fallimento
