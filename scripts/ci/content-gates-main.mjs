@@ -149,6 +149,7 @@ export const CONTENT_GATES = [
   'generator/tests/evergreen-addizionale-irpef-mappa-comuni-refresh.test.mjs',
   'generator/tests/evergreen-bonus-famiglia-frontalieri-2026-refresh.test.mjs',
   'generator/tests/evergreen-calcolo-pensione-avs-inps-refresh.test.mjs',
+  'generator/tests/evergreen-calcolo-tasse-entro-confine-refresh.test.mjs',
   'generator/tests/evergreen-comuni-frontalieri-distanza-refresh.test.mjs',
   'generator/tests/evergreen-congedo-genitori-frontaliere-ticino-refresh.test.mjs',
   'generator/tests/evergreen-contributi-sociali-busta-paga-refresh.test.mjs',
