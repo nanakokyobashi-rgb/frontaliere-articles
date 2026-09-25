@@ -524,6 +524,40 @@ test('wrongLocalePair confronta il contenuto anche quando le coppie sono riordin
     'una coppia guasta non deve costare la coppia sana');
 });
 
+test('wrongLocalePair rifiuta la coppia con UN SOLO campo italiano verbatim (verifica per campo del sito #8574)', () => {
+  // Coppia PRESA DAL CORPUS pubblicato (`blog-body/en/concierge-ticino-lonza-ch.ts`,
+  // coppia 1): domanda italiana verbatim, risposta tradotta. La coppia intera
+  // non e' uguale a nessuna coppia sorgente, e sul testo concatenato la
+  // risposta inglese domina: senza il confronto per CAMPO la domanda
+  // italiana resta pubblicata sotto `/en/`.
+  const IT_SOURCE = {
+    q: 'Quali sono i requisiti specifici per candidarsi?',
+    a: 'I requisiti specifici non sono stati divulgati, ma si presume esperienza in ruoli simili, buone capacità comunicative e conoscenza delle procedure di sicurezza. Verificare i dettagli sul sito Lonza.',
+  };
+  const PUBLISHED = {
+    q: IT_SOURCE.q,
+    a: 'The specific requirements have not been disclosed, but it is presumed to require experience in similar roles, strong communication skills, and knowledge of safety procedures. Check the details on the Lonza website.',
+  };
+  assert.equal(detectLanguage(`${PUBLISHED.q} ${PUBLISHED.a}`, 'en'), 'en',
+    'il fixture deve sfuggire al ramo di lingua, altrimenti non prova il ramo per campo');
+  assert.deepEqual(wrongLocalePair([PUBLISHED], 'en', [IT_SOURCE]),
+    [{ index: 0, detected: 'it', via: 'verbatim' }]);
+
+  // La forma del test del sito: stessa coppia sorgente, un solo campo tradotto.
+  assert.deepEqual(wrongLocalePair([{ q: IT_PAIR.q, a: EN_PAIR.a }], 'en', [IT_PAIR]),
+    [{ index: 0, detected: 'it', via: 'verbatim' }]);
+
+  // Il confronto e' per contenuto, non per indice come sul sito: una FAQ
+  // potata (`filterWrongLocalePairs`) o riordinata sposta le coppie, e il
+  // campo italiano va riconosciuto dovunque sia finito.
+  assert.deepEqual(wrongLocalePair([EN_PAIR, PUBLISHED], 'en', [IT_SOURCE, IT_PAIR]),
+    [{ index: 1, detected: 'it', via: 'verbatim' }]);
+
+  // Falsificazione: la coppia tradotta per intero resta scrivibile.
+  assert.equal(wrongLocalePair([EN_PAIR], 'en', [IT_PAIR]), null);
+  assert.equal(wrongLocalePair([EN_PAIR, EN_PAIR], 'en', [IT_SOURCE, IT_PAIR]), null);
+});
+
 test('wrongLocalePair attiva il ramo terza-lingua anche con scores vuoto del rilevatore corto', () => {
   const shortGerman = {
     q: 'Und wo sind die Aufgaben?',
