@@ -529,6 +529,23 @@ test('#1025: il sorgente echo del workflow non vale come prova runtime', () => {
   assert.equal(ISSUE_FIX_NON_DELIVERY_RE.test(`fix 2026-09-12Z ${ISSUE_FIX_FAILURE_LOG}`), true);
 });
 
+// Lo step classificatore oggi non stampa piu' la riga `::error::issue-fix #N:`:
+// esegue `pr-delivery-evidence.mjs classify`, che scrive il verdetto in JSON.
+// Senza questa seconda firma la soppressione non scattava mai.
+test('#1025: il JSON runtime del classificatore attuale vale come non-consegna', () => {
+  const runtime = 'fix\tClassify outcome (work-done, not CLI exit)\t2026-09-24T10:00:00Z '
+    + '{"classification":"non-delivery","exitCode":1,"reason":"no-current-delivery-evidence"}';
+  assert.equal(ISSUE_FIX_NON_DELIVERY_RE.test(runtime), true);
+  assert.equal(isExpectedIssueFixNonDelivery(ISSUE_FIX_WORKFLOW_NAME, [classifierJob()], runtime), true);
+  // `unknown` (evidenza illeggibile) resta segnalabile, e il sorgente dello
+  // step contiene solo il comando, mai il JSON.
+  assert.equal(ISSUE_FIX_NON_DELIVERY_RE.test('{"classification":"unknown","exitCode":1,"reason":"x"}'), false);
+  assert.equal(
+    ISSUE_FIX_NON_DELIVERY_RE.test('node scripts/ci/lib/pr-delivery-evidence.mjs classify --issue "$ISSUE"'),
+    false,
+  );
+});
+
 test('#1025: un errore diverso nello stesso workflow resta segnalabile', () => {
   assert.equal(
     isExpectedIssueFixNonDelivery(ISSUE_FIX_WORKFLOW_NAME, [classifierJob()], 'TypeError: classifier crashed'),

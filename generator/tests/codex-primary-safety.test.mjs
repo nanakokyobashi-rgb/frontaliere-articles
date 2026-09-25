@@ -311,7 +311,8 @@ test('la review Codex esporta eventi strutturati anche quando il processo fallis
   assert.match(action, /\[ "\$codex_review_required" = true \]/);
   assert.match(action, /JSON\.parse\(line\)/);
   assert.match(action, /item\?\.exit_code === 0/);
-  assert.match(action, /codex_exec_timeout_seconds=1800/);
+  assert.match(action, /codex_exec_timeout_seconds="\$\{CODEX_EXEC_TIMEOUT_SECONDS:-1800\}"/);
+  assert.match(action, /exec_timeout_seconds:\n\s+description: "[^"]+"\n\s+required: false\n\s+default: "1800"/);
   assert.match(
     action,
     /pipeline_status=\("\$\{PIPESTATUS\[@\]\}"\)\n\s+# This pipeline has three processes: printf \(0\), Codex \(1\), tee \(2\)\.[\s\S]*?codex_status="\$\{pipeline_status\[1\]:-1\}"\n\s+tee_status="\$\{pipeline_status\[2\]:-1\}"/,
@@ -335,6 +336,24 @@ test('il detector Codex riconosce gh pr review dopo la preparazione del body', (
     true,
   );
   assert.equal(detector.test('gh pr review 1707 --comment --body "$review_body"'), true);
+  // Il prompt chiede ora un comando separato con --body-file: Codex lo esegue
+  // come `/bin/bash -lc "gh pr review ..."`, quindi il comando parte dopo un apice.
+  assert.equal(detector.test('/bin/bash -lc "gh pr review 1746 --comment --body-file \\"$TMPDIR/review.md\\""'), true);
+  // Heredoc e gh nello stesso comando, separati solo da un a capo.
+  assert.equal(
+    detector.test("/bin/bash -lc 'cat > \"$TMPDIR/review.md\" <<'\\''REVIEW_EOF'\\''\n## LGTM\nREVIEW_EOF\ngh pr review 1746 --comment --body-file \"$TMPDIR/review.md\"'"),
+    true,
+  );
+  assert.equal(detector.test('echo review && ghx pr review 1746'), false);
+});
+
+test('il prompt della review chiede --body-file e vieta --body inline (#1746)', () => {
+  // PR #1746: `--body "..."` ha lasciato `\\n` letterali e ha eseguito i backtick
+  // del markdown; il marker non era piu' su una riga propria e il gate ha
+  // risposto "Nessuna review Codex marcata sulla HEAD".
+  assert.match(testsWorkflow, /gh pr review \$\{PR_NUMBER\} --comment --body-file "\$TMPDIR\/review\.md"/u);
+  assert.match(testsWorkflow, /<<'REVIEW_EOF'/u);
+  assert.doesNotMatch(testsWorkflow, /gh pr review \$\{PR_NUMBER\} --comment --body "</u);
 });
 
 test('la review Codex espone solo telemetry aggregata e conserva il cap di 45 minuti', () => {

@@ -60,6 +60,7 @@ import { buildSourceContract } from '../scripts/lib/article-factuality-gates.mjs
 // di modulo — e QUI si importano davvero, invece di ritagliarli dal sorgente:
 // il modulo e' importabile, quindi il test misura la funzione vera.
 import { PROMPT_SCAFFOLD_FLOOR_TOKENS, isBudgetBelowScaffoldFloor } from '../scripts/lib/exhaustion-disposition.mjs';
+import * as IRPEF from '../scripts/lib/irpef-scaglioni.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
@@ -99,9 +100,14 @@ const IT_GENERATION_MAX_TOKENS = numericConst('IT_GENERATION_MAX_TOKENS');
 // ── I pezzi di create-article.mjs che il prompt usa ───────────────────────
 const briefBlock = cut('const EVERGREEN_FACTS_BRIEF = `', 'export function stripInjectedBriefs(', { includeEnd: false })
   + cutDecl('export function stripInjectedBriefs(');
+// Il brief interpola gli scaglioni IRPEF dalla loro sorgente unica (issue
+// #1777): il blocco ritagliato non ha gli import del modulo, quindi quei nomi
+// entrano come parametri — gli stessi export che create-article.mjs importa.
+const irpefNames = Object.keys(IRPEF);
 const { evergreenFactsBriefFor } = new Function(
+  ...irpefNames,
   `${briefBlock.replace(/^export function /gm, 'function ')}\nreturn { evergreenFactsBriefFor };`,
-)();
+)(...irpefNames.map((k) => IRPEF[k]));
 
 const buildArticleJsonSchema = new Function(
   `${cutDecl('function buildArticleJsonSchema(')}\nreturn buildArticleJsonSchema;`,
@@ -695,35 +701,42 @@ test('il marker pubblica il gradino di riduzione', () => {
 // I test qui sotto bloccano i due versi: che non accorci quando il preferito
 // non ha cap, e che TORNI ad accorciare appena quella condizione cade.
 
-const PREFERISCE_HAIKU = { PREFERRED_GENERATION_MODELS: [REAL_AI_MODELS.CLAUDE_CLI_HAIKU] };
+// Dal 2026-09-24 il preferito senza cap e' SOLO Codex: il proprietario ha
+// spento Haiku («Disattiva haiku! Voglio solo codex»), che non e' piu'
+// disponibile nemmeno con flag e token. Il meccanismo della scala non cambia:
+// cambia il modello che lo attiva, quindi i test usano Codex.
+const PREFERISCE_CODEX = { PREFERRED_GENERATION_MODELS: [REAL_AI_MODELS.CODEX_CLI_PRIMARY] };
 
 /**
- * Rende claude-cli/haiku DISPONIBILE per la durata di `fn`.
+ * Rende codex-cli DISPONIBILE per la durata di `fn`.
  *
  * `_preferisceModelloSenzaCap` chiede anche `isModelAvailable`, non solo
  * «hai un cap?»: un preferito che non c'e' non deve far costruire il prompt
  * intero per una flotta che lo rifiutera' tutta. Senza queste due variabili il
  * ramo con preferenza misurerebbe il ramo SENZA, e passerebbe a vuoto.
  */
-function conHaikuDisponibile(fn) {
+function conCodexDisponibile(fn) {
   const salvate = {
-    tok: process.env.CLAUDE_CODE_OAUTH_TOKEN,
-    flag: process.env.ENABLE_HAIKU_ARTICLE_FALLBACK,
+    flag: process.env.ENABLE_CODEX_ARTICLE_FALLBACK,
+    socket: process.env.CODEX_AUTH_BROKER_SOCKET,
   };
-  process.env.CLAUDE_CODE_OAUTH_TOKEN = 'test-token';
-  process.env.ENABLE_HAIKU_ARTICLE_FALLBACK = 'true';
+  process.env.ENABLE_CODEX_ARTICLE_FALLBACK = '1';
+  process.env.CODEX_AUTH_BROKER_SOCKET = '/nonexistent/codex-broker-test.sock';
   try {
     return fn();
   } finally {
-    if (salvate.tok === undefined) delete process.env.CLAUDE_CODE_OAUTH_TOKEN;
-    else process.env.CLAUDE_CODE_OAUTH_TOKEN = salvate.tok;
-    if (salvate.flag === undefined) delete process.env.ENABLE_HAIKU_ARTICLE_FALLBACK;
-    else process.env.ENABLE_HAIKU_ARTICLE_FALLBACK = salvate.flag;
+    for (const [key, value] of [
+      ['ENABLE_CODEX_ARTICLE_FALLBACK', salvate.flag],
+      ['CODEX_AUTH_BROKER_SOCKET', salvate.socket],
+    ]) {
+      if (value === undefined) delete process.env[key];
+      else process.env[key] = value;
+    }
   }
 }
 
 test('col preferito senza cap il primo tentativo divide il prompt per i fallback capped', () => {
-  const conPreferenza = conHaikuDisponibile(() => newsPrompt({}, 'frontaliere', PREFERISCE_HAIKU));
+  const conPreferenza = conCodexDisponibile(() => newsPrompt({}, 'frontaliere', PREFERISCE_CODEX));
   const senzaPreferenza = newsPrompt();
 
   assert.equal(
@@ -763,7 +776,7 @@ test('appena il preferito dichiara un cap, la scala torna a mordere', () => {
   // primo 413 e lo persiste su Firestore. Il giorno in cui haiku ne prende uno,
   // questo ramo deve tornare da solo al comportamento di prima — senza che
   // nessuno si ricordi di una costante da aggiornare.
-  const conCap = conHaikuDisponibile(() => newsPrompt({}, 'frontaliere', { PREFERRED_GENERATION_MODELS: ['nvidia/nvidia/nemotron-3-super-120b-a12b'] }));
+  const conCap = conCodexDisponibile(() => newsPrompt({}, 'frontaliere', { PREFERRED_GENERATION_MODELS: ['nvidia/nvidia/nemotron-3-super-120b-a12b'] }));
   assert.ok(
     conCap.estTokens <= PROMPT_TOKEN_BUDGET,
     `preferito CON cap dichiarato e prompt a ${conCap.estTokens} token, sopra ${PROMPT_TOKEN_BUDGET}: `
@@ -790,10 +803,10 @@ test('il budget dettato dalla flotta vince sulla preferenza, al retry', () => {
   // ottenuto qualcosa, e il prompt partiva sopra il budget lo stesso.
   // 8100 e' il primo valore che la scala raggiunge davvero su questo fixture
   // (gradino 3, 8045 token): qui `shrink > 0` prova cio' che dice.
-  const alRetry = conHaikuDisponibile(() => newsPrompt(
+  const alRetry = conCodexDisponibile(() => newsPrompt(
     { _generationAttempt: 2, _promptTokenBudget: 8100 },
     'frontaliere',
-    PREFERISCE_HAIKU,
+    PREFERISCE_CODEX,
   ));
   assert.equal(alRetry.target, 8100, 'il budget dettato non e\' arrivato al target della scala');
   assert.ok(
@@ -828,10 +841,10 @@ test('un budget dettato SOTTO l\'impalcatura non fa mutilare il prompt per nient
   // comunque, ma fallisce DICENDOLO, e se nella cascata c'e' un modello senza
   // cap riceve un prompt completo invece di uno mutilato.
   for (const budget of [3000, 4000]) {
-    const r = conHaikuDisponibile(() => newsPrompt(
+    const r = conCodexDisponibile(() => newsPrompt(
       { _generationAttempt: 2, _promptTokenBudget: budget },
       'frontaliere',
-      PREFERISCE_HAIKU,
+      PREFERISCE_CODEX,
     ));
     assert.equal(
       r.shrink, 0,
@@ -845,24 +858,24 @@ test('un budget dettato SOTTO l\'impalcatura non fa mutilare il prompt per nient
 });
 
 test('preferito NON disponibile: la scala morde subito, niente tentativo buttato', () => {
-  // ENABLE_HAIKU_ARTICLE_FALLBACK spento / token assente: il preferito non c'e'.
+  // Lane Codex spenta / broker assente: il preferito non c'e'.
   // Costruire il prompt intero qui significherebbe un `ALL_MODELS_EXHAUSTED`
   // garantito al primo tentativo per OGNI headline — il rimedio del budget
   // dettato funziona, ma pagarlo quando si sa gia' che il preferito manca e'
-  // spreco. Nessun wrapper `conHaikuDisponibile` qui: e' il punto del test.
-  const orig = { tok: process.env.CLAUDE_CODE_OAUTH_TOKEN, flag: process.env.ENABLE_HAIKU_ARTICLE_FALLBACK };
-  delete process.env.CLAUDE_CODE_OAUTH_TOKEN;
-  delete process.env.ENABLE_HAIKU_ARTICLE_FALLBACK;
+  // spreco. Nessun wrapper `conCodexDisponibile` qui: e' il punto del test.
+  const orig = { socket: process.env.CODEX_AUTH_BROKER_SOCKET, flag: process.env.ENABLE_CODEX_ARTICLE_FALLBACK };
+  delete process.env.CODEX_AUTH_BROKER_SOCKET;
+  delete process.env.ENABLE_CODEX_ARTICLE_FALLBACK;
   try {
-    const senzaHaiku = newsPrompt({}, 'frontaliere', PREFERISCE_HAIKU);
+    const senzaHaiku = newsPrompt({}, 'frontaliere', PREFERISCE_CODEX);
     assert.ok(
       senzaHaiku.estTokens <= PROMPT_TOKEN_BUDGET,
       `preferito assente e prompt a ${senzaHaiku.estTokens} token, sopra ${PROMPT_TOKEN_BUDGET}: `
       + 'la scala non ha morso e il primo tentativo di ogni headline e\' buttato',
     );
   } finally {
-    if (orig.tok === undefined) delete process.env.CLAUDE_CODE_OAUTH_TOKEN; else process.env.CLAUDE_CODE_OAUTH_TOKEN = orig.tok;
-    if (orig.flag === undefined) delete process.env.ENABLE_HAIKU_ARTICLE_FALLBACK; else process.env.ENABLE_HAIKU_ARTICLE_FALLBACK = orig.flag;
+    if (orig.socket === undefined) delete process.env.CODEX_AUTH_BROKER_SOCKET; else process.env.CODEX_AUTH_BROKER_SOCKET = orig.socket;
+    if (orig.flag === undefined) delete process.env.ENABLE_CODEX_ARTICLE_FALLBACK; else process.env.ENABLE_CODEX_ARTICLE_FALLBACK = orig.flag;
   }
 });
 
@@ -889,9 +902,9 @@ test('cap di chiamate per-run esaurito: la scala torna a mordere subito', () => 
   // funzione che `callLLM` interroga (una definizione sola, vedi
   // `isPerRunCallCapReached` in ai-models.mjs), e qui interessa il ramo «cap
   // gia' esaurito», non il conteggio che ci arriva.
-  const capEsaurito = conHaikuDisponibile(() => newsPrompt({}, 'frontaliere', {
-    ...PREFERISCE_HAIKU,
-    isPerRunCallCapReached: (m) => m === REAL_AI_MODELS.CLAUDE_CLI_HAIKU,
+  const capEsaurito = conCodexDisponibile(() => newsPrompt({}, 'frontaliere', {
+    ...PREFERISCE_CODEX,
+    isPerRunCallCapReached: (m) => m === REAL_AI_MODELS.CODEX_CLI_PRIMARY,
   }));
 
   assert.ok(
@@ -909,8 +922,8 @@ test('cap di chiamate per-run esaurito: la scala torna a mordere subito', () => 
   // Il contro-verso: finche' il cap NON e' esaurito il comportamento nominale
   // resta quello, cioe' prompt intero. Senza questa riga il test passerebbe
   // anche se la guardia si fosse rotta del tutto.
-  const capLibero = conHaikuDisponibile(() => newsPrompt({}, 'frontaliere', {
-    ...PREFERISCE_HAIKU,
+  const capLibero = conCodexDisponibile(() => newsPrompt({}, 'frontaliere', {
+    ...PREFERISCE_CODEX,
     isPerRunCallCapReached: () => false,
   }));
   assert.equal(
@@ -1042,7 +1055,7 @@ test('divisione in due chiamate: un prompt di retry non esce mai con fatti=0ch',
 // capped ricevono un payload spedibile o uno gia' bocciato.
 
 test('ri-bracketing: degradando su un modello con cap 8000 il prompt rientra in 8000', () => {
-  const r = conHaikuDisponibile(() => newsPrompt({}, 'frontaliere', PREFERISCE_HAIKU));
+  const r = conCodexDisponibile(() => newsPrompt({}, 'frontaliere', PREFERISCE_CODEX));
 
   // Le due premesse del difetto, riaffermate qui cosi' che il test non passi
   // per il motivo sbagliato (es. una scala che ha ricominciato a mordere).
@@ -1101,7 +1114,7 @@ test('ri-bracketing: degradando su un modello con cap 8000 il prompt rientra in 
 test('ri-bracketing: vale anche sul ramo NEWS SVIZZERA, che e\' il piu\' pesante', () => {
   // La run misurata sforava di piu' proprio qui: est=8208 contro 8120 del
   // ramo frontaliere. Un rimedio che entra solo sul ramo leggero non serve.
-  const r = conHaikuDisponibile(() => newsPrompt({}, 'svizzera', PREFERISCE_HAIKU));
+  const r = conCodexDisponibile(() => newsPrompt({}, 'svizzera', PREFERISCE_CODEX));
   assert.ok(typeof r.ribracket === 'function', 'il blocco non espone nessun ri-dimensionamento');
   const rb = r.ribracket(PROMPT_TOKEN_BUDGET);
   assert.ok(rb, `nessun piano di ri-bracketing a ${PROMPT_TOKEN_BUDGET} sul ramo svizzera`);
@@ -1119,7 +1132,7 @@ test('ri-bracketing: sotto il pavimento dell\'impalcatura NON finge un rimedio',
   // scrittura costa 5850 token — e il ri-bracketing deve dirlo tornando
   // `null`, non spendere una seconda chiamata su un prompt che verra' saltato
   // esattamente come il primo.
-  const r = conHaikuDisponibile(() => newsPrompt({}, 'frontaliere', PREFERISCE_HAIKU));
+  const r = conCodexDisponibile(() => newsPrompt({}, 'frontaliere', PREFERISCE_CODEX));
   assert.ok(typeof r.ribracket === 'function', 'il blocco non espone nessun ri-dimensionamento');
   for (const budget of [3000, 4000]) {
     assert.equal(
