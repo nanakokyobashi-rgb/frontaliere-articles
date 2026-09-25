@@ -334,6 +334,8 @@ test('tre echi di fila fermano il tier come tre fallimenti, e restano contati co
 });
 
 test('la fingerprint della cascata segue la lane Codex e la sua posizione (memo eventi)', () => {
+  // Stato del tier azzerato: il caso precedente lo ha fermato con tre echi.
+  stubCodex(`CODEX ${EN}`);
   const key = () => JSON.parse(getTranslationCascadeConfigurationKey());
   assert.equal(key().version, 2);
   assert.equal(key().codex, 'after-premium');
@@ -355,6 +357,23 @@ test('la fingerprint della cascata segue la lane Codex e la sua posizione (memo 
   } finally {
     delete process.env.FREE_TRANSLATE_CODEX_MAX_CALLS;
   }
+});
+
+test('la fingerprint tratta come assente una lane fermata nella run (budget esaurito o breaker)', async () => {
+  const key = () => JSON.parse(getTranslationCascadeConfigurationKey());
+  process.env.FREE_TRANSLATE_CODEX_MAX_CALLS = '1';
+  try {
+    stubCodex(`CODEX ${EN}`);
+    assert.equal(key().codex, 'after-premium');
+    await captureLog(async () => [await it(), await it()]);
+    // Seconda chiamata: budget di 1 esaurito, tier fermato.
+    assert.equal(key().codex, false);
+  } finally {
+    delete process.env.FREE_TRANSLATE_CODEX_MAX_CALLS;
+  }
+  // Una run nuova (qui: il seam azzera lo stato) riparte con la lane viva.
+  stubCodex(`CODEX ${EN}`);
+  assert.equal(key().codex, 'after-premium');
 });
 
 test('FREE_TRANSLATE_CODEX_TIER=last: Codex non prende il testo prima dei tier senza quota', async () => {

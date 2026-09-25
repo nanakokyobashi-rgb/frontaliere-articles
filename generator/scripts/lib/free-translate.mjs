@@ -184,8 +184,12 @@ export function getTranslationCascadeConfigurationKey() {
     huggingFace: Boolean(HF_TOKEN),
     // Lane Codex del processo (socket del broker e budget) e sua posizione:
     // un evento fallito senza broker va ritentato quando il broker c'e'
-    // (version 2, 2026-09-25).
-    codex: _codexSocketPresent() && _codexBudget('FREE_TRANSLATE_CODEX_MAX_CALLS', CODEX_TRANSLATE_MAX_CALLS_DEFAULT) > 0
+    // (version 2, 2026-09-25). Una lane fermata nella run (budget esaurito o
+    // tre fallimenti di fila) vale come assente: il fallimento memorizzato da
+    // quel punto in poi non deve restare valido per la run dopo, che riparte
+    // con il budget pieno.
+    codex: !_codexStopReason && _codexSocketPresent()
+      && _codexBudget('FREE_TRANSLATE_CODEX_MAX_CALLS', CODEX_TRANSLATE_MAX_CALLS_DEFAULT) > 0
       ? _codexTierPosition()
       : false,
   });
