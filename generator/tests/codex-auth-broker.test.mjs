@@ -734,6 +734,21 @@ function rawRequest(socketPath, payload) {
 
 const jsonLine = (raw) => JSON.parse(raw.replace(/^[\0\x01]+/, ''));
 
+// Il timer di SIGKILL parte sull'evento 'spawn', come il segnale al client:
+// deve comunque scattare e rispondere, anche per un Codex che non esce mai.
+test('un Codex che non risponde viene ucciso al budget contato dallo spawn', async () => {
+  await withSleepingBroker(60_000, async ({ socketPath, stderr }) => {
+    const startedAt = Date.now();
+    const hung = await rawRequest(socketPath, { op: 'exec', prompt: 'sleep:60000', timeoutMs: 400, notifyStart: true });
+    const elapsed = Date.now() - startedAt;
+    assert.ok(hung.raw.includes('\x01'), 'il segnale di avvio precede la risposta');
+    assert.deepEqual(jsonLine(hung.raw), { ok: false, error: 'Codex CLI timed out after 400ms' }, stderr());
+    assert.ok(elapsed >= 400, `ucciso dopo ${elapsed}ms, prima del budget`);
+    const next = await rawRequest(socketPath, { op: 'exec', prompt: 'sleep:10', timeoutMs: 5000 });
+    assert.equal(jsonLine(next.raw).ok, true, 'la coda riparte dopo il SIGKILL');
+  });
+});
+
 test('una richiesta più lunga del TTL completa: il broker scade solo da inattivo', async () => {
   await withSleepingBroker(300, async ({ broker, socketPath, stderr }) => {
     const long = await rawRequest(socketPath, { op: 'exec', prompt: 'sleep:900', timeoutMs: 5000 });

@@ -460,24 +460,31 @@ function runCodex({ authJson: credential, prompt, timeoutMs, schema, onSpawn = (
         detached: process.platform !== 'win32',
       });
       activeChild = child;
-      // Only a process that really started counts as started: a spawn that
-      // fails emits 'error' instead, and the request is answered from there.
-      if (onSpawn) child.once('spawn', onSpawn);
       let stderrTail = '';
       child.stderr.setEncoding('utf8');
       child.stderr.on('data', (chunk) => {
         stderrTail = (stderrTail + chunk).slice(-MAX_STDERR_TAIL_CHARS);
       });
       let settled = false;
-      const timer = setTimeout(() => {
+      let timer = null;
+      // Only a process that really started counts as started: a spawn that
+      // fails emits 'error' instead, and the request is answered from there.
+      // The SIGKILL budget, the broker socket timer and the client's start
+      // signal all begin at this same event, so no side can cut the execution
+      // budget short of what the other side is measuring.
+      child.once('spawn', () => {
         if (settled) return;
-        settled = true;
-        terminateChild(child, 'SIGKILL');
-        const error = new Error(`Codex CLI timed out after ${timeoutMs}ms`);
-        error.name = 'TimeoutError';
-        reject(error);
-      }, timeoutMs);
-      timer.unref?.();
+        timer = setTimeout(() => {
+          if (settled) return;
+          settled = true;
+          terminateChild(child, 'SIGKILL');
+          const error = new Error(`Codex CLI timed out after ${timeoutMs}ms`);
+          error.name = 'TimeoutError';
+          reject(error);
+        }, timeoutMs);
+        timer.unref?.();
+        onSpawn();
+      });
       child.on('error', (error) => {
         if (settled) return;
         settled = true;
