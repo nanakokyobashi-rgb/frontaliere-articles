@@ -337,7 +337,7 @@ test('la fingerprint della cascata segue la lane Codex e la sua posizione (memo 
   // Stato del tier azzerato: il caso precedente lo ha fermato con tre echi.
   stubCodex(`CODEX ${EN}`);
   const key = async () => JSON.parse(await getTranslationCascadeConfigurationKey());
-  assert.equal((await key()).version, 2);
+  assert.equal((await key()).version, 3);
   assert.equal((await key()).codex, 'after-premium');
   process.env.FREE_TRANSLATE_CODEX_TIER = 'last';
   try {
