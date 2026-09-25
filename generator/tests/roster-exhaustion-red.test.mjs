@@ -231,6 +231,33 @@ test('un breakdown senza `providerCooldownSkips` vota come prima (retro-compatib
   assert.equal(isInputCapDeferralVeto(legacy), false);
 });
 
+test('veta il replay quando gli echi non possono stare nel secchio persistente (sito #8446)', () => {
+  // Gemello del caso che il sito ha aggiunto con la PR valerielinc-ops#8446
+  // («reject incoherent echo attribution») in `tests/roster-exhaustion-red.test.ts`.
+  // 60 transitori, 40 persistenti e 100 echi senza split: il consumatore
+  // input-cap addebita i 100 echi al secchio persistente, che ne contiene 40.
+  // Prima del riallineamento il voto persistente scendeva a -60 e il
+  // transitorio «vinceva» 60 contro -60: un'attribuzione impossibile comprava
+  // il differimento. Ora l'attribuzione incoerente chiude il voto sul ramo
+  // `margin` senza maggioranza, e il veto resta.
+  const err = echoingExhaustionError({
+    transient: 60,
+    persistent: 40,
+    total: 100,
+    echo: { total: 100 },
+    capCount: 1,
+  });
+  assert.equal(isTransientMajority(err.exhaustionBreakdown, {
+    tie: 'persistent',
+    marginAttribution: 'persistent',
+  }), false);
+  assert.equal(isInputCapDeferralVeto(err), true, 'un dato incoerente non compra il differimento');
+  const s = inputCapVetoSummary(err);
+  assert.equal(s.decidedBy, 'margin');
+  assert.equal(s.echoHiddenInBuckets, 100, 'il campo grezzo arriva intatto al margine');
+  assert.equal(s.votedPersistent, 0, 'il margine addebitato e\' limitato alla capienza del secchio');
+});
+
 test('il voto non passa per `total`: un totale incoerente non toglie il veto', () => {
   // `deferralTally` clampa il persistente a `netTotal - netTransient` perche'
   // fa un quoziente; quel clamp toglie righe al SOLO secchio che il veto
