@@ -55,6 +55,7 @@ import {
 } from '../scripts/lib/it-text-similarity.mjs';
 import { normalizeText } from '../scripts/lib/profession-taxonomy.mjs';
 import { computeAdaptiveEvergreenThresholds } from '../scripts/lib/scoring/constants.mjs';
+import { articleEntities } from '../scripts/lib/dup-entities.mjs';
 
 const corpusUrl = (rel) => new URL(`../../content/${rel}`, import.meta.url);
 
@@ -425,19 +426,16 @@ describe('i gate lessicali pre-esistenti non catturano la coppia', () => {
     .split(/\s+/)
     .filter((w) => w.length > 2 && !STOP_WORDS_IT.has(w))
     .map((w) => normalizeItWord(w));
-  const entities = (text) => {
-    const out = new Set();
-    for (const m of String(text || '').matchAll(/\d[\d.'',]*\d/g)) out.add(m[0].replace(/[.''',]/g, ''));
-    for (const m of String(text || '').matchAll(/\b(\d+)[.,]?(\d*)\s*%/g)) out.add(`${m[1]}${m[2]}%`);
-    return [...out];
-  };
+  // Entità dal modulo condiviso col generatore (numeri + comuni del titolo).
+  // Nessun corpus qui, quindi nessun boilerplate da togliere.
+  const entities = (a) => articleEntities(a.title, a.excerpt);
   const idWords = (id) => id.split('-').filter((w) => w.length > 1).map((w) => normalizeItWord(w));
 
   function lexicalCheck(a, b, corpusSize = 3794) {
     const idSim = jaccardSim(idWords(a.id), idWords(b.id));
     const titleSim = jaccardSim(significant(a.title), significant(b.title));
     const excerptSim = jaccardSim(significant(a.excerpt), significant(b.excerpt));
-    const entitySim = jaccardSim(entities(`${a.title} ${a.excerpt}`), entities(`${b.title} ${b.excerpt}`));
+    const entitySim = jaccardSim(entities(a), entities(b));
     const combined = 0.25 * idSim + 0.30 * titleSim + 0.25 * excerptSim + 0.20 * entitySim;
     const TITLE = computeAdaptiveEvergreenThresholds(corpusSize).titleJaccard;
     const isDuplicate = (idSim >= 0.72 && titleSim >= 0.40)

@@ -61,6 +61,7 @@ import { buildSourceContract } from '../scripts/lib/article-factuality-gates.mjs
 // il modulo e' importabile, quindi il test misura la funzione vera.
 import { PROMPT_SCAFFOLD_FLOOR_TOKENS, isBudgetBelowScaffoldFloor } from '../scripts/lib/exhaustion-disposition.mjs';
 import * as IRPEF from '../scripts/lib/irpef-scaglioni.mjs';
+import { isLocalNews } from '../scripts/lib/local-news.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
@@ -146,6 +147,9 @@ const DEPS = [
   'isPerRunCallCapReached',
   // Issue #452: il pavimento e il predicato che lo legge, importati sopra.
   'PROMPT_SCAFFOLD_FLOOR_TOKENS', 'isBudgetBelowScaffoldFloor',
+  // Cronaca locale senza angolo frontaliere (2026-09-25): sceglie il blocco
+  // MUST-COVER e le righe body2/implicazioni della cronaca.
+  'isLocalNewsWithoutFrontaliereAngle',
 ];
 
 // `_clampSourceBody` e' una dichiarazione a livello di modulo che il blocco
@@ -159,6 +163,14 @@ const clampDecl = cutDecl('function _clampRemediation(') + '\n' + cutDecl('funct
 // scala di riduzione morde al primo tentativo, quindi va RITAGLIATA dal
 // sorgente, non riscritta qui. Una copia a mano direbbe che la copia funziona.
 const preferDecl = cutDecl('function _preferisceModelloSenzaCap(');
+
+// Il predicato della cronaca locale, ritagliato dal sorgente insieme alla
+// densita' frontaliere su cui si regge; `isLocalNews` viene dallo stesso
+// modulo che create-article.mjs importa.
+const isLocalNewsWithoutFrontaliereAngle = new Function(
+  'isLocalNews',
+  `${cut('const FRONTALIERE_DENSITY_TERMS = [', '];')}\n${cutDecl('function checkFrontaliereDensity(')}\n${cutDecl('function isLocalNewsWithoutFrontaliereAngle(')}\nreturn isLocalNewsWithoutFrontaliereAngle;`,
+)(isLocalNews);
 
 const assemblePrompt = new Function(
   '__d',
@@ -217,6 +229,7 @@ const BASE_DEPS = {
   isPerRunCallCapReached,
   PROMPT_SCAFFOLD_FLOOR_TOKENS,
   isBudgetBelowScaffoldFloor,
+  isLocalNewsWithoutFrontaliereAngle,
   AI_MODELS: { GEMINI_FLASH: 'gemini-2.5-flash' },
   GH_MODEL_HEAVY: 'gpt-4o',
   lastSourcePublishedAt: '2026-03-12T08:00:00.000Z',
@@ -330,6 +343,86 @@ test('IL TEST CENTRALE: il prompt NEWS nel caso peggiore resta sotto il tetto', 
     + 'compensato altrove, non assorbito alzando il tetto — sopra PROMPT_TOKEN_BUDGET '
     + `(${PROMPT_TOKEN_BUDGET}) ogni modello GitHub Models e Groq viene saltato dal pre-flight.`,
   );
+});
+
+test('cronaca locale senza angolo frontaliere: niente sei termini obbligatori, e il prompt non cresce', () => {
+  // Decisione del proprietario 2026-09-25: cronaca nera, incidenti, sport e
+  // cultura in Ticino e nelle province di confine si pubblicano anche senza
+  // nesso coi frontalieri. Pretendere «permesso G, AVS, LPP…» in un pezzo su
+  // una rapina a Lugano e' il keyword stuffing che il fact-check segnala.
+  const CRONACA = 'Rapina in una gioielleria di Lugano: la polizia cantonale ha arrestato due uomini dopo un inseguimento in centro. Nessun ferito, la refurtiva e\' stata recuperata. '.repeat(40).slice(0, 6000);
+  const local = assemble({
+    pageContent: CRONACA,
+    url: 'https://www.tio.ch/ticino/cronaca/1812399/rapina-gioielleria-lugano',
+    IS_FRONTALIERE: true,
+    SECTION_NAME: 'frontaliere',
+    sourceContext: {
+      headline: 'Rapina in gioielleria a Lugano, due arresti',
+      relatedHeadlines: [],
+      _generationAttempt: 1,
+      _generationAttemptMax: 6,
+      _minItalianWords: 900,
+      _primaryLocale: 'it',
+    },
+  });
+  assert.equal(isLocalNewsWithoutFrontaliereAngle(CRONACA), true);
+  assert.match(local.prompt, /Cronaca locale: nomina luoghi, enti e persone della fonte/);
+  assert.doesNotMatch(local.prompt, /Almeno 6 dei seguenti termini DEVONO comparire/);
+  assert.match(local.prompt, /body2 = CONTESTO: sviluppi, dati, reazioni e ricadute locali/);
+  // Review di PR #1871: ogni richiesta solo-frontaliere ha il suo ramo locale.
+  assert.match(local.prompt, /REGOLA EDITORIALE FONDAMENTALE — CRONACA LOCALE:/);
+  assert.match(local.prompt, /body3 = SEGUITO: cosa succede ora secondo la fonte/);
+  assert.match(local.prompt, /CTA: nessuna CTA obbligatoria/);
+  assert.match(local.prompt, /LINK INTERNI — sintassi ESCLUSIVA `\[testo\]\(nav:azione\)`, SOLO se pertinenti alla notizia: nessun minimo/);
+  assert.match(local.prompt, /"body3": "Seguito: cosa succede ora secondo la fonte\./);
+  for (const frontaliereOnly of [
+    /FRONTALIERI AL CENTRO/,
+    /body3 = AZIONE/,
+    /MINIMO 3 per articolo/,
+    /calculator preferito/,
+    /Descrivi PROCEDURE concrete/,
+    /Collega agli strumenti del sito/,
+    /"body3": "Azione: procedura step-by-step/,
+  ]) {
+    assert.doesNotMatch(local.prompt, frontaliereOnly);
+  }
+  assert.match(local.prompt, /"hasCalculator": false/);
+  assert.doesNotMatch(local.prompt, /CTA: body3 DEVE terminare/);
+  assert.doesNotMatch(local.prompt, /LINK INTERNI — sintassi ESCLUSIVA.*MINIMO 3/s);
+  assert.doesNotMatch(local.prompt, /Azione: procedura step-by-step, scadenze, strumenti \+ CTA finale/);
+  assert.ok(local.estTokens <= PROMPT_TOKEN_CEILING, `prompt cronaca a ${local.estTokens} token`);
+  // Review di PR #1871: nessuna lunghezza fissa per campo nello schema locale,
+  // e su una fonte corta il minimo per campo segue il totale richiesto.
+  assert.doesNotMatch(local.prompt, /"body[123]": "[^"]*300-400 parole/);
+  const shortLocal = assemble({
+    pageContent: CRONACA.slice(0, 900),
+    url: 'https://www.tio.ch/ticino/cronaca/1812399/rapina-gioielleria-lugano',
+    IS_FRONTALIERE: true,
+    SECTION_NAME: 'frontaliere',
+    sourceContext: {
+      headline: 'Rapina in gioielleria a Lugano, due arresti',
+      relatedHeadlines: [],
+      _generationAttempt: 2,
+      _generationAttemptMax: 6,
+      _minItalianWords: 400,
+      _primaryLocale: 'it',
+    },
+  });
+  // Il minimo di parole viaggia nel messaggio utente, non in `prompt`.
+  const userText = (built) => built.llmMessages[built.llmMessages.length - 1].content;
+  assert.match(userText(shortLocal), /MUST total ≥400 words/);
+  assert.match(userText(shortLocal), /EACH body field \(body1, body2, body3\) MUST be at least 134 words individually\. Target 184-234 words each\./);
+  assert.match(userText(shortLocal), /Each body: 184-284 words\./);
+  assert.doesNotMatch(userText(shortLocal), /at least 300 words individually/);
+  // Una notizia frontaliere vera resta sul ramo storico.
+  const news = newsPrompt();
+  assert.match(userText(news), /EACH body field \(body1, body2, body3\) MUST be at least 300 words individually\. Target 350-400 words each\./);
+  assert.equal(isLocalNewsWithoutFrontaliereAngle(NEWS_PAGE_CONTENT), false);
+  assert.match(news.prompt, /Almeno 6 dei seguenti termini DEVONO comparire/);
+  assert.match(news.prompt, /FRONTALIERI AL CENTRO/);
+  assert.match(news.prompt, /MINIMO 3 per articolo/);
+  assert.match(news.prompt, /Descrivi PROCEDURE concrete/);
+  assert.match(news.prompt, /"body3": "Azione: procedura step-by-step, scadenze, strumenti \+ CTA finale\./);
 });
 
 test('il ramo NEWS SVIZZERA resta sotto il tetto — non solo l\'evergreen svizzera', () => {

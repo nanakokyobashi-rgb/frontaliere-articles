@@ -50,6 +50,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { hasDomainAnchor } from '../scripts/lib/discovery/domainAnchor.mjs';
+import { countLocalNewsHits, isLocalNews } from '../scripts/lib/local-news.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
@@ -107,6 +108,8 @@ function loadGates(section) {
     'hasDomainAnchor',
     'RUN_REPORT',
     'console',
+    'isLocalNews',
+    'countLocalNewsHits',
     `${LEXICON_SRC}\n${FILTER_SRC}\n${PRIORITIZE_SRC}\nreturn {
        TOPICAL_KEYWORDS, SVIZZERA_TOPICAL_KEYWORDS, FRONTALIERI_KEYWORDS,
        FRONTALIERE_ADMISSION_KEYWORDS,
@@ -120,6 +123,8 @@ function loadGates(section) {
     hasDomainAnchor,
     runReport,
     { error: (...a) => logs.push(a.join(' ')) },
+    isLocalNews,
+    countLocalNewsHits,
   );
   return { ...api, logs, runReport };
 }
@@ -324,14 +329,19 @@ test('prioritizeFrontalieriHeadlines is a no-op on the national section', () => 
   assert.ok(keptFront.every(x => x._frontalieriBoosted));
 });
 
-// ── 5. Admission vs ranking lexicon (issue #189) ────────────────────────────
+// ── 5. Admission vs ranking lexicon (issue #189, then the owner) ────────────
 //
 // TOPICAL_KEYWORDS admits events/culture content (festival, sagra, …) that
-// the downstream frontaliere-density gate (REGOLA #0) has no words for, so a
+// the downstream frontaliere-density gate (REGOLA #0) had no words for, so a
 // Locarno-Film-Festival-shaped source paid for a full generation before
-// being rejected. The admission lexicon must exclude those 8 tokens while
-// the ranking lexicon (TOPICAL_KEYWORDS itself) keeps them, since they are
-// data-justified for ranking real traffic.
+// being rejected. The admission lexicon excludes those 8 tokens while the
+// ranking lexicon (TOPICAL_KEYWORDS itself) keeps them.
+//
+// Since 2026-09-25 the owner makes LOCAL cronaca nera, sport, culture and road
+// accidents publishable on this section, and the judges downstream admit them
+// in Ticino and in the provinces of Varese, Como and VCO. They enter admission
+// through lib/local-news.mjs, which checks the kind AND the place: in the area
+// they are admitted, anywhere else the #189 rule still holds.
 
 test('the admission lexicon drops the events/culture tokens the ranking lexicon keeps', () => {
   const eventsCultureTokens = [
@@ -342,27 +352,53 @@ test('the admission lexicon drops the events/culture tokens the ranking lexicon 
     assert.ok(FRONT.TOPICAL_KEYWORDS.includes(tok), `presupposto del test: "${tok}" deve restare nella lista di ranking`);
     assert.ok(
       !FRONT.FRONTALIERE_ADMISSION_KEYWORDS.includes(tok),
-      `"${tok}" non deve ammettere un candidato: il gate a valle (REGOLA #0) lo rigetta comunque`,
+      `"${tok}" non deve ammettere da solo: fuori dall'area locale REGOLA #0 lo rigetta comunque`,
     );
   }
 });
 
-test('a headline that only matches an events/culture token ranks as topical but is not admitted, on frontaliere', () => {
-  const text = 'Ecco i vincitori del Locarno Film Festival 2026 https://www.laregione.ch/culture/locarno-film-festival';
-  assert.equal(
-    FRONT.hasTopicalSignal(text), true,
-    'presupposto del test: il gate di ranking legacy considera questo candidato topico (bug di #189)',
-  );
-  assert.equal(
-    FRONT.hasAdmissionSignal(text), false,
-    'il gate di ammissione non deve pagare una generazione che REGOLA #0 rigetterà comunque',
-  );
+test('local cronaca, road accidents, sport and culture are admitted on frontaliere, in the area', () => {
+  for (const text of [
+    'Ecco i vincitori del Locarno Film Festival 2026',
+    'Incidente stradale a Lugano, nessun ferito grave',
+    'Rapina in gioielleria a Chiasso, due arresti',
+    'Hockey, l\'HC Lugano vince il derby con l\'Ambrì',
+    'Furto a Domodossola, fermato un uomo',
+  ]) {
+    assert.equal(FRONT.hasAdmissionSignal(text), true, `non ammesso sulla sezione frontaliere: ${text}`);
+  }
 });
 
-test('filterByAnchor on frontaliere now drops a festival headline it used to admit', () => {
+test('the same kinds of news outside the area stay out, whatever the anchor gate says', () => {
+  // The anchor gate accepts Zurich, Bern and the border comuni of Sondrio and
+  // Lecco: the place is decided by lib/local-news.mjs, not by the anchor.
+  for (const text of [
+    'Grande festival internazionale a Zurigo, fiera con migliaia di visitatori',
+    'Arresto a Sondrio per spaccio',
+    'Concerto a Lecco sabato sera',
+  ]) {
+    assert.equal(FRONT.hasAdmissionSignal(text), false, `ammesso fuori dall'area: ${text}`);
+  }
+});
+
+test('filterByAnchor on frontaliere admits an anchored festival headline in the area', () => {
   const festival = h('Ecco i vincitori di Open Doors 2026, tra fiere e rassegne culturali a Locarno');
-  const kept = FRONT.filterByAnchor([festival]);
-  assert.deepEqual(kept, [], 'un candidato solo-eventi non deve superare l\'ammissione sulla sezione frontaliere');
+  assert.deepEqual(FRONT.filterByAnchor([festival]), [festival]);
+});
+
+test('filterByAnchor on frontaliere anchors a Ticino place that only the BFS list knows', () => {
+  // Review of PR #1871: hasDomainAnchor does not know Cadenazzo or Pregassona
+  // so a local story named only by them died at the anchor drop.
+  const local = [
+    h('Incendio in un capannone a Cadenazzo, nessun ferito'),
+    h('Furto in un negozio di Pregassona, fermato un uomo'),
+  ];
+  for (const item of local) {
+    assert.equal(hasDomainAnchor(item.headline), false, `presupposto del test: ${item.headline}`);
+  }
+  assert.deepEqual(FRONT.filterByAnchor(local), local);
+  // The svizzera section keeps its own anchor gate.
+  assert.deepEqual(CH.filterByAnchor(local), []);
 });
 
 test('admission is unchanged on svizzera: no downstream density gate exists there for events/culture', () => {
@@ -413,11 +449,16 @@ test('SOURCE_DROP_OFF_TOPIC: a national-agenda source page is admitted on svizze
   );
 });
 
-test('SOURCE_DROP_OFF_TOPIC: a genuinely off-topic source page is still dropped on both sections', () => {
+test('SOURCE_DROP_OFF_TOPIC: a road accident page is admitted on frontaliere, still dropped on svizzera', () => {
   const pageBody = "Incidente stradale a Lugano, nessun ferito grave, la circolazione è ripresa dopo un'ora.";
-  assert.equal(FRONT.countAdmissionHits(pageBody), 0);
+  assert.ok(FRONT.countAdmissionHits(pageBody) > 0, 'la cronaca locale è pubblicabile sulla sezione frontaliere');
   assert.equal(
     CH.countAdmissionHits(pageBody), 0,
-    'il gate deve continuare a scartare la cronaca pura anche sulla sezione nazionale',
+    'il gate deve continuare a scartare la cronaca pura sulla sezione nazionale',
   );
+});
+
+test('SOURCE_DROP_OFF_TOPIC: a page with no work, fiscal, commute or local-news signal is still dropped', () => {
+  const pageBody = 'Una chiesetta ortodossa macedone apre le porte ai fedeli della regione.';
+  assert.equal(FRONT.countAdmissionHits(pageBody), 0);
 });

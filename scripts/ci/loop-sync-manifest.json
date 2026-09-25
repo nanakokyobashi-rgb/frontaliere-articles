@@ -4356,6 +4356,26 @@
       }
     },
     {
+      "path": "generator/scripts/lib/dup-entities.mjs",
+      "mode": "corpus-only",
+      "reason": "Il segnale «Entità» di checkForDuplicates (create-article.mjs): numeri di titolo + excerpt e comuni del titolo (indice comuni di topic-coverage-guard.mjs), meno i numeri che il corpus pubblicato ripete (frequenza documentale >= 0,5% del corpus, minimo 20); i comuni non sono mai boilerplate. Nato dal falso duplicato «vivere a Erba» della run 36096755072, respinto per un «2026» in comune con un altro comune. Corpus-only perche' il controllo duplicati del generatore gira solo qui: il gemello adapted del sito (scripts/create-article.mjs) non esegue piu' la generazione; il test del sito article-duplicate-detection.test.ts replica ancora l'algoritmo vecchio.",
+      "baseline": {
+        "site": null,
+        "corpus": "a96413eb2e6780c2",
+        "alignedAt": "2026-09-25"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/local-news.mjs",
+      "mode": "corpus-only",
+      "reason": "Cronaca locale che la sezione frontaliere pubblica anche senza angolo frontaliere (cronaca nera, incidenti stradali, sport, cultura ed eventi), decisione del proprietario del 2026-09-25: il genere (radici a inizio parola sul testo normalizzato) E il luogo (Ticino dall'elenco BFS di generator/data/ticino-municipalities.json, i nomi comuni solo dopo una preposizione di luogo; comuni di confine delle sole province VA, CO e VB dall'indice di topic-coverage-guard.mjs), legati frase per frase: il luogo piu' vicino al genere, introdotto da una preposizione di luogo dell'evento o come dateline, decide dove e' avvenuto il fatto (un luogo al genitivo, organizzatore o proprietario, decide solo se la frase non ne nomina uno dell'evento); un demonimo («un ticinese») o un fiume («sul Ticino») non lo collocano, e lo sport si colloca con il luogo della squadra, non con quello della partita. Sulla sezione frontaliere una headline che isLocalNews ancora anche il gate geografico della scansione (filterByAnchor). In create-article.mjs aggiunge un segnale all'ammissione (hasAdmissionSignal / countAdmissionHits) e decide il ramo cronaca del prompt, dell'espansione, di CTA e link interni e del controllo di densita'. Corpus-only per la stessa ragione di fact-check-response.mjs: la generazione gira solo in questo repo.",
+      "baseline": {
+        "site": null,
+        "corpus": "f90a6a7728fa1c95",
+        "alignedAt": "2026-09-25"
+      }
+    },
+    {
       "path": "generator/scripts/lib/fact-check-response.mjs",
       "mode": "corpus-only",
       "reason": "Estrazione del verdetto dalla risposta del fact-checker (l'unico oggetto JSON bilanciato di primo livello con `verdict` PASS/FAIL e `issues` array, anche in mezzo a prosa; due verdetti nella stessa risposta la rendono ambigua, e un oggetto annidato o dentro una graffa mai chiusa non conta, ne' conta qualunque altro JSON), conteggio di un voto per modello che ha davvero risposto (`addIndependentVote`) e spezzone diagnostico per il log quando manca; la usano `llmFactCheck` e `_runSingleFactCheck` in create-article.mjs. Corpus-only perche' il fact-check gira solo qui: il gemello adapted del sito (scripts/create-article.mjs) non esegue piu' la generazione.",

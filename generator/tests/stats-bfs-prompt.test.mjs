@@ -252,7 +252,7 @@ describe('istruzioni che il writer deve poter eseguire', () => {
 describe('expandEnrichmentLine — la variante legata al testo', () => {
   const src = fs.readFileSync(CREATE_ARTICLE, 'utf-8');
   const expandEnrichmentLine = new Function(
-    sliceFn(src, 'function expandEnrichmentLine(isFrontaliere, boundToText = false) {')
+    sliceFn(src, 'function expandEnrichmentLine(isFrontaliere, boundToText = false, localNews = false) {')
     + '\nreturn expandEnrichmentLine;',
   )();
 
@@ -268,11 +268,20 @@ describe('expandEnrichmentLine — la variante legata al testo', () => {
     expect(bound).toMatch(/NON introdurre NESSUN numero, comune, aliquota, importo, data o percentuale/);
   });
 
+  it('la cronaca locale non chiede normative, importi né checklist per frontalieri', () => {
+    // Review di PR #1871: una rapina o una partita non hanno normative o
+    // importi da aggiungere, e il modello li troverebbe nel training.
+    const local = expandEnrichmentLine(true, false, true);
+    expect(local).not.toContain('normative con date e importi');
+    expect(local).not.toContain('checklist operative');
+    expect(local).toMatch(/NON aggiungere normative, importi, checklist, consigli o strumenti per frontalieri/);
+  });
+
   it('è la variante che stats-bfs riceve al passo di espansione', () => {
-    expect(src).toContain('expandShortItalianContent(data, adaptiveMinWords, { boundToText: isStatsBfsSource })');
+    expect(src).toContain('expandShortItalianContent(data, adaptiveMinWords, {\n        boundToText: isStatsBfsSource,');
     // Un solo punto di costruzione: se il prompt tornasse a incorporare la
     // riga, questo test smetterebbe di misurare ciò che finisce nel prompt.
-    expect(src).toContain('${expandEnrichmentLine(IS_FRONTALIERE, boundToText)}');
+    expect(src).toContain('${expandEnrichmentLine(IS_FRONTALIERE, boundToText, localNews)}');
   });
 });
 
