@@ -6196,10 +6196,13 @@ export function classifyNonRetryableError(status, bodyText = '', providerName = 
   const b = String(bodyText).toLowerCase();
   const isGitHubModels = _normalizeProviderKey(providerName) === _normalizeProviderKey(PROVIDER.GITHUB);
 
-  // GitHub Models returns this while the service is in its retirement brownout.
-  // It is a provider-wide permanent response for this run, not a retryable
-  // overload and not a reason to rotate through identical PATs.
-  if (isGitHubModels && (status === GH_MODELS_BROWNOUT_STATUS || b.includes('github_models_retirement_brownout'))) {
+  // GitHub Models returns this exact signature while the service is in its
+  // retirement brownout. A bare 410 can be model-specific (or an intermediary
+  // response), so let the generic 410 classifier handle it instead of
+  // assigning the provider-wide retirement reason to the selected model.
+  if (isGitHubModels
+      && status === GH_MODELS_BROWNOUT_STATUS
+      && b.includes('github_models_retirement_brownout')) {
     return {
       nonRetryable: true,
       markExhausted: true,
