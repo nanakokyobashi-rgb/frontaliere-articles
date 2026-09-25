@@ -21,6 +21,11 @@
  *   · `REVIEW_GATE_FAILURE_STEP_NAME` — se e' `failure`, il gate ha scritto
  *     `failure_kind=verdict`; se e' `success`, il gate era rosso per API,
  *     rate-limit o causa sconosciuta e il one-shot resta disponibile (#1140).
+ *   · `REVIEW_CLAIM_STEP_NAME` — non lo legge pr-autorebase ma il gate
+ *     dell'auto-merge nativo: `skipped` in un job verde significa che il
+ *     `Re-review guard` ha scritto `skip=true`, ed e' una delle prove del
+ *     carry-forward di una LGTM Codex su un commit precedente (#1870). Per
+ *     questo si pinna anche la sua `if:`.
  *
  * Un rename di uno step e' esattamente il tipo di modifica che sembra innocua.
  * Se si separano non esplode niente: `vitestFailureIsReviewGate` smette di
@@ -99,15 +104,21 @@ function repoRelativeImportClosure(entry) {
 }
 
 test('i nomi di step su cui pr-autorebase decide combaciano con tests.yml', async () => {
-  const { REVIEW_GATE_STEP_NAME, CLAUDE_REVIEW_STEP_NAME, REVIEW_ABORT_STEP_NAME, REVIEW_GUARD_STEP_NAME, REVIEW_GATE_FAILURE_STEP_NAME } = await import(
-    '../../scripts/ci/lib/vitestCheck.mjs'
-  );
+  const {
+    REVIEW_GATE_STEP_NAME,
+    CLAUDE_REVIEW_STEP_NAME,
+    REVIEW_ABORT_STEP_NAME,
+    REVIEW_GUARD_STEP_NAME,
+    REVIEW_CLAIM_STEP_NAME,
+    REVIEW_GATE_FAILURE_STEP_NAME,
+  } = await import('../../scripts/ci/lib/vitestCheck.mjs');
   const names = stepNames(yaml);
   for (const [constName, value] of [
     ['REVIEW_GATE_STEP_NAME', REVIEW_GATE_STEP_NAME],
     ['CLAUDE_REVIEW_STEP_NAME', CLAUDE_REVIEW_STEP_NAME],
     ['REVIEW_ABORT_STEP_NAME', REVIEW_ABORT_STEP_NAME],
     ['REVIEW_GUARD_STEP_NAME', REVIEW_GUARD_STEP_NAME],
+    ['REVIEW_CLAIM_STEP_NAME', REVIEW_CLAIM_STEP_NAME],
     ['REVIEW_GATE_FAILURE_STEP_NAME', REVIEW_GATE_FAILURE_STEP_NAME],
   ]) {
     assert.ok(
@@ -131,6 +142,38 @@ test('lo step della review e\' `skipped` PER il guard: la sua condizione lo dice
       '`reviewSkippedByGuard` legge `skipped` su quello step per dedurre che il guard ha ' +
       'saltato Claude: senza questa dipendenza il segnale diventa un\'altra cosa, e il ' +
       'one-shot verrebbe negato (o concesso) su una premessa che non vale piu\'.',
+  );
+});
+
+// `native-automerge-gate.mjs` legge `skipped` sullo step del claim come prova
+// che il guard ha scritto `skip=true` (carry-forward Codex, #1870). La prova
+// regge solo finche' la condizione del claim e' ESATTAMENTE questa congiunzione:
+// i primi due termini sono gia' veri quando il review gate gira, quindi in un
+// job verde resta solo il guard. Un termine in piu' renderebbe `skipped` anche
+// per un'altra causa, e il gate nativo arruolerebbe senza lo skip del guard.
+test('lo step del claim e\' `skipped` solo per lo skip del guard', async () => {
+  const { REVIEW_CLAIM_STEP_NAME, REVIEW_GATE_STEP_NAME, REVIEW_GUARD_STEP_NAME } = await import(
+    '../../scripts/ci/lib/vitestCheck.mjs'
+  );
+  const claim = stepBlock(yaml, REVIEW_CLAIM_STEP_NAME);
+  const cond = claim.match(/^\s*if:\s*(.+)$/m);
+  assert.ok(cond, `lo step \`${REVIEW_CLAIM_STEP_NAME}\` non ha un \`if:\``);
+  assert.equal(
+    cond[1].trim(),
+    "steps.body_contract.outcome != 'failure' && steps.resolve.outputs.should_review == 'true' && steps.guard.outputs.skip != 'true'",
+    'la condizione del claim e\' cambiata: rivedi `codexCarryForwardDecision` in native-automerge-gate.mjs, '
+      + 'che deduce lo skip del guard da questo step saltato.',
+  );
+  assert.match(stepBlock(yaml, REVIEW_GUARD_STEP_NAME), /^\s*id:\s*guard\s*$/m);
+  const gate = stepBlock(yaml, REVIEW_GATE_STEP_NAME).match(/^\s*if:\s*(.+)$/m);
+  assert.ok(gate, `lo step \`${REVIEW_GATE_STEP_NAME}\` non ha un \`if:\``);
+  assert.match(gate[1], /steps\.body_contract\.outcome != 'failure'/);
+  assert.match(gate[1], /steps\.resolve\.outputs\.should_review == 'true'/);
+  const names = stepNames(yaml);
+  assert.ok(
+    names.indexOf(REVIEW_GUARD_STEP_NAME) < names.indexOf(REVIEW_CLAIM_STEP_NAME)
+      && names.indexOf(REVIEW_CLAIM_STEP_NAME) < names.indexOf(REVIEW_GATE_STEP_NAME),
+    'guard, claim e review gate devono restare in quest ordine',
   );
 });
 
