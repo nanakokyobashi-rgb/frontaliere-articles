@@ -93556,6 +93556,123 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-barco-saronno-agitazione-sciopero-2026': {
+    title: 'Barco Saronno: tagli, sciopero e stato di agitazione',
+    description: 'Alla Barco di Saronno i sindacati aprono lo stato di agitazione dopo l\'annuncio di riorganizzazione. Sciopero di un\'ora per turno, coinvolti somministrati',
+    keywords: 'frontalieri, ticino, svizzera, italia, barco, saronno, tagli, sciopero',
+    ogTitle: 'Barco Saronno: tagli, sciopero e stato di agitazione',
+    ogDescription: 'I sindacati Fiom, Fim e Uilm hanno proclamato lo stato di agitazione alla Barco di Saronno, multinazionale belga che produce monitor per sale operatorie. Dopo l\'annuncio di una riorganizzazione con ricadute su somministrati, staff leasing',
+    canonicalPath: '/articoli-frontaliere/barco-saronno-agitazione-sciopero-2026',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Barco Saronno: tagli, sciopero e stato di agitazione",
+      "description": "Alla Barco di Saronno i sindacati aprono lo stato di agitazione dopo l'annuncio di riorganizzazione. Sciopero di un'ora per turno, coinvolti somministrati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/barco-saronno-agitazione-sciopero-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Stabilimento industriale a Mendrisio con montagne sullo sfondo"
+      },
+      "datePublished": "2026-09-25T20:56:18+00:00",
+      "dateModified": "2026-09-25T20:56:18+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/barco-saronno-agitazione-sciopero-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-kof-consensus-forecast-svizzera-2026': {
+    title: 'PIL svizzera 2026 rivisto al rialzo: +1,7% secondo il KOF',
+    description: 'Le ultime previsioni del KOF del Politecnico di Zurigo mostrano una crescita del PIL svizzero rivista al rialzo al +1,7% per il 2026, inflazione allo 0,6%',
+    keywords: 'frontalieri, ticino, svizzera, italia, rivisto, rialzo, secondo, stima',
+    ogTitle: 'PIL svizzera 2026 rivisto al rialzo: +1,7% secondo KOF',
+    ogDescription: 'Il nuovo sondaggio del KOF, 123esima edizione del Consensus Forecast, rivela che gli esperti svizzeri prevedono per il 2026 una crescita del PIL dell\'1,7% (contro lo 0,9% di giugno) e un\'inflazione allo 0,6%. L\'euro è atteso a 0,93 franchi tra tre',
+    canonicalPath: '/articoli-frontaliere/kof-consensus-forecast-svizzera-2026',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "PIL svizzera 2026 rivisto al rialzo: +1,7% secondo il KOF",
+      "description": "Le ultime previsioni del KOF del Politecnico di Zurigo mostrano una crescita del PIL svizzero rivista al rialzo al +1,7% per il 2026, inflazione allo 0,6%",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/kof-consensus-forecast-svizzera-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica del lago di Lugano con le Alpi sullo sfondo e barche a vela sull'acqua"
+      },
+      "datePublished": "2026-09-25T21:37:37+00:00",
+      "dateModified": "2026-09-25T21:37:37+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/kof-consensus-forecast-svizzera-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-plr-bellinzona-investimento-fortezza': {
+    title: 'Fortezza Bellinzona: il Sì del PLR all\'investimento',
+    description: 'Bellinzona vota il 27 settembre sulla Fortezza: il PLR sostiene il Messaggio 1019, con oltre 14 milioni di indotto e circa 4,5 milioni a carico della Città.',
+    keywords: 'frontalieri, ticino, svizzera, italia, fortezza, bellinzona, investimento, vota',
+    ogTitle: 'Fortezza Bellinzona: il Sì del PLR al voto',
+    ogDescription: 'Il PLR Bellinzona sostiene il voto del 27 settembre sul Messaggio 1019: la Fortezza riunisce Tre Castelli, Murata e cinta muraria, con spazi museali rinnovati, nuove aree per eventi e un indotto stimato oltre 14 milioni di franchi.',
+    canonicalPath: '/articoli-frontaliere/plr-bellinzona-investimento-fortezza',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Fortezza Bellinzona: il Sì del PLR all'investimento",
+      "description": "Bellinzona vota il 27 settembre sulla Fortezza: il PLR sostiene il Messaggio 1019, con oltre 14 milioni di indotto e circa 4,5 milioni a carico della Città.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/plr-bellinzona-investimento-fortezza.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Tre Castelli e cinta muraria di Bellinzona, patrimonio mondiale UNESCO"
+      },
+      "datePublished": "2026-09-25T22:29:51+00:00",
+      "dateModified": "2026-09-25T22:29:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/plr-bellinzona-investimento-fortezza/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

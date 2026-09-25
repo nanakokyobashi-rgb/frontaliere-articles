@@ -6725,6 +6725,12 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.svizzera-difesa-bilancio-iva.title': 'IVA al 0,2% e fondo difesa da 24 miliardi: il compromesso agli Stati',
     'blog.article.svizzera-difesa-bilancio-iva.excerpt': 'Con 25 voti contro 17, il Consiglio degli Stati approva +0,2 punti IVA per 18 anni, un fondo difesa fino a 24 miliardi e indebitamento fino a 12 miliardi. Riduzione F-35 a ~30 e credito aggiuntivo di 394 milioni.',
     'blog.article.svizzera-difesa-bilancio-iva.imageAlt': 'Vista aerea delle Alpi svizzere con sagoma di un caccia, simbolo del dibattito su difesa e finanze',
+    'blog.article.costi-sanita-incentivi.title': 'La sanità ticinese ha bisogno di nuovi incentivi',
+    'blog.article.costi-sanita-incentivi.excerpt': 'Il Covid ha lasciato costi straordinari e duraturi; le casse malati trattengono al massimo il 5% della spesa; fino a un quinto della spesa sanitaria è legato a prestazioni inutili.',
+    'blog.article.costi-sanita-incentivi.imageAlt': 'Lago Lugano con montagne, simbolo delle sfide dei costi sanitari in Ticino.',
+    'blog.article.cembra-vontobel-sede-baden-baar.title': 'Cembra e Vontobel lasciano Zurigo: fisco e spazi spingono il trasloco',
+    'blog.article.cembra-vontobel-sede-baden-baar.excerpt': 'Cembra sposta 660 dipendenti a Baden (15% imposte) in autunno 2027; Vontobel porta 1.500 posti a Baar (12%) entro il 2030. Zurigo al 20%.',
+    'blog.article.cembra-vontobel-sede-baden-baar.imageAlt': 'Veduta del distretto finanziario di Lugano con uffici moderni e lago',
 };
 
 export default blogMetaChIt;

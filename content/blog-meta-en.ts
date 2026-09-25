@@ -12000,6 +12000,15 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.furti-auto-lusso-ticino.title': 'Luxury car thefts in Ticino: three arrested',
     'blog.article.furti-auto-lusso-ticino.excerpt': 'Four high-end vehicles stolen in Manno, Lamone and Camorino. Three young men arrested and a fourth suspect wanted after joint investigations.',
     'blog.article.furti-auto-lusso-ticino.imageAlt': 'Luxury car in a Ticino dealership',
+    'blog.article.barco-saronno-agitazione-sciopero-2026.title': 'Barco Saronno: cuts, strike and state of agitation',
+    'blog.article.barco-saronno-agitazione-sciopero-2026.excerpt': 'Fiom, Fim and Uilm declare industrial action at Barco in Saronno following the announcement of a reorganization. One hour of strike per shift, involving temporary agency workers and permanent employees.',
+    'blog.article.barco-saronno-agitazione-sciopero-2026.imageAlt': 'Industrial plant in Mendrisio with mountains background',
+    'blog.article.kof-consensus-forecast-svizzera-2026.title': 'Swiss GDP 2026 revised upwards: +1.7% according to the KOF',
+    'blog.article.kof-consensus-forecast-svizzera-2026.excerpt': 'KOF estimates GDP growth of 1.7% for 2026 (versus 0.9% in June) and inflation at 0.6%; euro at 0.93 francs in three months and 0.92 in one year.',
+    'blog.article.kof-consensus-forecast-svizzera-2026.imageAlt': 'Panoramic view of Lake Lugano with the Alps in the background and sailboats on the water',
+    'blog.article.plr-bellinzona-investimento-fortezza.title': 'Bellinzona Fortress: the PLR\'s Yes to the investment',
+    'blog.article.plr-bellinzona-investimento-fortezza.excerpt': 'Bellinzona votes on 27 settembre on the Fortress: the PLR supports Message 1019, with over 14 million in economic impact and approximately 4,5 million borne by the City.',
+    'blog.article.plr-bellinzona-investimento-fortezza.imageAlt': 'Three Castles and Bellinzona city walls, UNESCO World Heritage site',
 };
 
 export default blogMetaEn;

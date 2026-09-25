@@ -20201,6 +20201,24 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'costi-sanita-incentivi',
+    category: 'pratico',
+    date: '2026-09-25T21:17:42.290Z',
+    image: '/images/blog/costi-sanita-incentivi.webp',
+    hasCalculator: true,
+    authorSlug: 'laura-bianchi',
+    authorName: 'Laura Bianchi',
+   },
+   {
+    id: 'cembra-vontobel-sede-baden-baar',
+    category: 'fiscale',
+    date: '2026-09-25T22:08:30.423Z',
+    image: '/images/blog/cembra-vontobel-sede-baden-baar.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

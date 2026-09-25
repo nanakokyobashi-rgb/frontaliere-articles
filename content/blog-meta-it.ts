@@ -12001,6 +12001,15 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.furti-auto-lusso-ticino.title': 'Furti auto di lusso in Ticino: tre arrestati',
     'blog.article.furti-auto-lusso-ticino.excerpt': 'Rubate quattro vetture di alta gamma a Manno, Lamone e Camorino. Tre giovani arrestati e un quarto sospettato ricercato dopo indagini congiunte.',
     'blog.article.furti-auto-lusso-ticino.imageAlt': 'Auto di lusso in un rivenditore in Ticino',
+    'blog.article.barco-saronno-agitazione-sciopero-2026.title': 'Barco Saronno: tagli, sciopero e stato di agitazione',
+    'blog.article.barco-saronno-agitazione-sciopero-2026.excerpt': 'Fiom, Fim e Uilm aprono stato di agitazione alla Barco di Saronno dopo annuncio riorganizzazione. Un\'ora di sciopero per turno, coinvolti somministrati e indeterminati.',
+    'blog.article.barco-saronno-agitazione-sciopero-2026.imageAlt': 'Stabilimento industriale a Mendrisio con montagne sullo sfondo',
+    'blog.article.kof-consensus-forecast-svizzera-2026.title': 'PIL svizzera 2026 rivisto al rialzo: +1,7% secondo il KOF',
+    'blog.article.kof-consensus-forecast-svizzera-2026.excerpt': 'Il KOF stima per il 2026 una crescita del PIL dell\'1,7% (contro lo 0,9% di giugno) e inflazione allo 0,6%; euro a 0,93 franchi tra tre mesi e 0,92 fra un anno.',
+    'blog.article.kof-consensus-forecast-svizzera-2026.imageAlt': 'Vista panoramica del lago di Lugano con le Alpi sullo sfondo e barche a vela sull\'acqua',
+    'blog.article.plr-bellinzona-investimento-fortezza.title': 'Fortezza Bellinzona: il Sì del PLR all\'investimento',
+    'blog.article.plr-bellinzona-investimento-fortezza.excerpt': 'Bellinzona vota il 27 settembre sulla Fortezza: il PLR sostiene il Messaggio 1019, con oltre 14 milioni di indotto e circa 4,5 milioni a carico della Città.',
+    'blog.article.plr-bellinzona-investimento-fortezza.imageAlt': 'Tre Castelli e cinta muraria di Bellinzona, patrimonio mondiale UNESCO',
 };
 
 export default blogMetaIt;

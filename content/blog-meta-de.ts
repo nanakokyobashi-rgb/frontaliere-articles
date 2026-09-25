@@ -11999,6 +11999,15 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.furti-auto-lusso-ticino.title': 'Luxusautodiebstähle im Tessin: drei Festgenommene',
     'blog.article.furti-auto-lusso-ticino.excerpt': 'Es wurden vier High-End-Autos aus Manno, Lamone und Camorino gestohlen. Drei Jugendliche wurden verhaftet und ein vierter Verdächtiger nach gemeinsamen Ermittlungen gesucht.',
     'blog.article.furti-auto-lusso-ticino.imageAlt': 'Luxusauto bei einem Händler im Tessin',
+    'blog.article.barco-saronno-agitazione-sciopero-2026.title': 'Barco Saronno: Kürzungen, Streik und Arbeitskampf',
+    'blog.article.barco-saronno-agitazione-sciopero-2026.excerpt': 'Fiom, Fim und Uilm rufen bei Barco in Saronno nach der Ankündigung einer Umstrukturierung den Arbeitskampf aus. Eine Stunde Streik pro Schicht, betroffen sind Leiharbeitskräfte und unbefristet Beschäftigte.',
+    'blog.article.barco-saronno-agitazione-sciopero-2026.imageAlt': 'Industrieanlage in Mendrisio mit Bergkulisse',
+    'blog.article.kof-consensus-forecast-svizzera-2026.title': 'Schweizer BIP 2026 nach oben revidiert: +1,7% laut KOF',
+    'blog.article.kof-consensus-forecast-svizzera-2026.excerpt': 'KOF schätzt für 2026 ein BIP-Wachstum von 1,7% (gegenüber 0,9% im Juni) und eine Inflation von 0,6%; der Euro bei 0,93 Franken in drei Monaten und 0,92 in einem Jahr.',
+    'blog.article.kof-consensus-forecast-svizzera-2026.imageAlt': 'Panoramablick auf den Luganer See mit den Alpen im Hintergrund und Segelbooten auf dem Wasser',
+    'blog.article.plr-bellinzona-investimento-fortezza.title': 'Festung Bellinzona: das Ja der PLR zur Investition',
+    'blog.article.plr-bellinzona-investimento-fortezza.excerpt': 'Bellinzona stimmt am 27. September über die Festung ab: Die PLR unterstützt die Botschaft 1019, mit einem wirtschaftlichen Impuls von über 14 Millionen und rund 4,5 Millionen zulasten der Stadt.',
+    'blog.article.plr-bellinzona-investimento-fortezza.imageAlt': 'Drei Burgen und Stadtmauer von Bellinzona, UNESCO-Welterbestätte',
 };
 
 export default blogMetaDe;
