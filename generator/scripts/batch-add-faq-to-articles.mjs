@@ -18,7 +18,7 @@
  * Progress is saved to data/batch-faq-progress.json for resumability.
  */
 
-import { readFileSync, writeFileSync, readdirSync, existsSync, renameSync, unlinkSync, realpathSync } from 'fs';
+import { readFileSync, writeFileSync, appendFileSync, readdirSync, existsSync, renameSync, unlinkSync, realpathSync } from 'fs';
 import { resolve, basename, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { execFileSync, execSync } from 'child_process';
@@ -1437,6 +1437,28 @@ async function processTranslation(articleId, file, itFaq, missingLocales, { body
   return { success: fixed > 0, faqCount: fixed };
 }
 
+// ── Esito della run per il workflow ──────────────────────────
+//
+// Il processo esce 0 anche quando ogni articolo tentato fallisce: il riepilogo
+// stampa «Succeeded: 0» e nient'altro lo guarda. Cosi' batch-faq-articles.yml e'
+// rimasto verde per giorni con 0/36 FAQ tradotte (DeepL e Azure esauriti, run
+// 35690020249 e 35958863091). La DECISIONE sta qui, in una funzione pura; il
+// workflow la legge da `$GITHUB_OUTPUT` e diventa rosso dopo il commit, cosi'
+// fix-faq-locales e il push di cio' che e' riuscito girano comunque.
+export function faqRunOutcome({ succeeded = 0, failed = 0 } = {}) {
+  const processed = succeeded + failed;
+  return { processed, succeeded, allFailed: processed > 0 && succeeded === 0 };
+}
+
+export function writeFaqRunOutcome(outcome, outputPath = process.env.GITHUB_OUTPUT) {
+  if (!outputPath) return false;
+  appendFileSync(
+    outputPath,
+    `processed=${outcome.processed}\nsucceeded=${outcome.succeeded}\nall_failed=${outcome.allFailed}\n`,
+  );
+  return true;
+}
+
 // ── Concurrency control ──────────────────────────────────────
 
 async function runWithConcurrency(tasks, concurrency) {
@@ -1632,6 +1654,8 @@ async function main(argv = process.argv.slice(2)) {
       console.error(`  • ${f.id}: ${f.error}`);
     }
   }
+
+  writeFaqRunOutcome(faqRunOutcome({ succeeded: successCount, failed: failCount }));
 }
 
 // Only auto-run the batch job when this file is executed directly (`node

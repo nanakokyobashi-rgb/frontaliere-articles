@@ -764,17 +764,24 @@ describe('propagazione di recordScore dal call site di produzione', () => {
     'utf-8',
   );
 
-  it('create-article.mjs passa opts.recordScore a recordModelContentFailure', () => {
+  it('create-article.mjs passa il recordScore della chiamata a OGNI recordModelContentFailure', () => {
+    // Due call site dal 2026-09-24: la validazione body2 del wrapper `callLLM`
+    // (`opts`) e la selezione headline, che conta come fallimento di contenuto
+    // una risposta 200 rigettata dal protocollo (`callOpts`, le opzioni della
+    // chiamata che quella risposta l'ha prodotta). La regola resta una: il flag
+    // viaggia dalla chiamata al punteggio.
     const calls = [...SRC.matchAll(/recordModelContentFailure\(([^)]*)\)/g)]
       .map((m) => m[1])
       .filter((args) => !/^\s*$/.test(args));
 
-    assert.equal(calls.length, 1, `atteso un solo call site, visti: ${JSON.stringify(calls)}`);
-    assert.match(
-      calls[0],
-      /recordScore:\s*opts\.recordScore/,
-      `il call site non propaga il flag — l'opt-out del ledger resta irraggiungibile: ${calls[0]}`,
-    );
+    assert.equal(calls.length, 2, `attesi i due call site noti, visti: ${JSON.stringify(calls)}`);
+    for (const call of calls) {
+      assert.match(
+        call,
+        /recordScore:\s*(?:opts|callOpts)\.recordScore/,
+        `il call site non propaga il flag — l'opt-out del ledger resta irraggiungibile: ${call}`,
+      );
+    }
   });
 });
 

@@ -390,17 +390,25 @@ export function isDeclaredSkipOnly(jobs) {
 // `issue-fix.yml` usa deliberatamente un classificatore rosso quando la CLI
 // fallisce senza aver consegnato una PR. Il marker `FIX_OUTCOME`/il drainer
 // tiene gia' quel segnale sulla issue di lavoro; farlo riaprire da questo
-// scanner come `Workflow Failure: Issue fix (Claude → PR)` crea una seconda
-// issue per lo stesso tentativo e riavvia il workflow sul proprio allarme
-// (#1025). Il rosso del classifier resta intatto per drainer e health report.
-export const ISSUE_FIX_WORKFLOW_NAME = 'Issue fix (Claude → PR)';
+// scanner come `Workflow Failure: Issue fix (Codex Luna Max → PR)` crea una
+// seconda issue per lo stesso tentativo e riavvia il workflow sul proprio
+// allarme (#1025). Il rosso del classifier resta intatto per drainer e health
+// report. Il nome DEVE restare uguale al `name:` di issue-fix.yml: il test
+// `workflow-run-source-names` lo verifica, perche' il rename a Codex lo aveva
+// reso lettera morta senza che nulla fallisse.
+export const ISSUE_FIX_WORKFLOW_NAME = 'Issue fix (Codex Luna Max → PR)';
 export const ISSUE_FIX_CLASSIFIER_STEP_RE = /^Classify outcome \(work-done, not CLI exit\)$/;
 // `gh run view --log-failed` include anche il sorgente dello shell step. La
-// firma deve quindi richiedere la riga runtime `::error::issue-fix #<N>:`;
-// altrimenti il semplice `echo "...#$ISSUE..."` del workflow puo' bastare a
-// sopprimere un errore diverso del classifier.
+// firma deve quindi richiedere una riga RUNTIME, mai il sorgente: altrimenti il
+// semplice `echo "...#$ISSUE..."` del workflow puo' bastare a sopprimere un
+// errore diverso del classifier. Le firme runtime sono due: la riga storica
+// `::error::issue-fix #<N>: ...` e il JSON che
+// `scripts/ci/lib/pr-delivery-evidence.mjs classify` stampa oggi nello step
+// classificatore (`{"classification":"non-delivery","exitCode":1,...}`). Il
+// sorgente dello step contiene solo il comando, mai il JSON, quindi nemmeno la
+// seconda firma puo' essere soddisfatta dall'eco dello script.
 export const ISSUE_FIX_NON_DELIVERY_RE =
-  /(?:^|\n)[^\n]*::error::issue-fix #\d+:\s+nessuna PR aperta\/mergiata e la CLI [^;\n]*?-> non-delivery reale\./i;
+  /(?:^|\n)[^\n]*(?:::error::issue-fix #\d+:\s+nessuna PR aperta\/mergiata e la CLI [^;\n]*?-> non-delivery reale\.|\{"classification":"non-delivery","exitCode":1[,}])/i;
 
 /**
  * True solo per l'esito di non-consegna gia' posseduto dal ciclo issue-fix.

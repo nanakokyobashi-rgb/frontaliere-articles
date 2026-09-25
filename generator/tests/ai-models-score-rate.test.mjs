@@ -22,14 +22,17 @@ import { strict as assert } from 'node:assert';
 import { describe, it, beforeEach, afterEach } from 'node:test';
 
 import {
-  AI_MODELS,
   getPreferredModel,
   recordModelSuccess,
   recordModelFailure,
   resetState,
 } from '../scripts/lib/ai-models.mjs';
 
-const BROKEN = AI_MODELS.CLAUDE_CLI_HAIKU;
+// Era `claude-cli/haiku`, spento dal proprietario il 2026-09-24: non e' piu'
+// disponibile, quindi getPreferredModel lo salterebbe e il test misurerebbe la
+// disponibilita' invece dell'ordinamento. Serve solo un secondo id della
+// stessa catena e dello stesso tier, con la stessa provider key finta.
+const BROKEN = 'nvidia/meta/llama-3.1-8b-instruct';
 // Un secondo id di catena con provider key finta disponibile — stesso
 // espediente di ai-models-prefer-per-call.test.mjs.
 const RELIABLE = 'nvidia/nvidia/nemotron-3-super-120b-a12b';

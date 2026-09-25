@@ -273,12 +273,19 @@ test('un `echo.total` sopra le righe che esistono non compra `echoDominated` (#9
 test('il limite NON risale alla sorgente: l\'eccedenza resta nel dato grezzo (#932, #938)', () => {
   // Clampare `echoTotalReported` dentro `echoBuckets` avrebbe servito il
   // guardrail indebolendo gli altri due lettori. Questa forma e' il caso
-  // minimo: due echi dichiarati su UNA riga sola. Col campo grezzo il margine
-  // toglie l'eccedenza al vincitore e il transitorio non e' maggioranza.
-  // Il predicato generico continua a non considerarlo una prova transitoria;
-  // il consumatore input-cap, pero', attribuisce esplicitamente il margine alla
-  // causa persistente dichiarata, senza trasformare un dato corrotto in un veto
-  // transitorio inventato.
+  // minimo: due echi dichiarati su UNA riga sola. Il campo grezzo arriva
+  // intatto al margine, che lo confronta con la capienza del secchio a cui
+  // lo addebita: due echi non stanno in una riga, l'attribuzione e'
+  // incoerente e il voto si chiude sul ramo `margin` senza maggioranza
+  // transitoria (sito PR valerielinc-ops#8446, «reject incoherent echo
+  // attribution»: prima il ramo era `net`, con lo stesso verdetto).
+  // Il predicato generico continua a non considerarlo una prova transitoria, e
+  // ora nemmeno il consumatore input-cap: attribuisce il margine alla causa
+  // persistente dichiarata, ma due echi non stanno nel suo secchio (zero
+  // righe). Prima di #8446 il secchio persistente scendeva a -2 e il transitorio
+  // «vinceva» 1 contro -2, cioe' un dato corrotto comprava il differimento;
+  // ora l'attribuzione incoerente chiude il voto senza maggioranza e il veto
+  // resta, come nel caso 60/40/100 del sito (`roster-exhaustion-red.test.ts`).
   const contraddittorio = {
     transient: 1,
     persistent: 0,
@@ -286,15 +293,21 @@ test('il limite NON risale alla sorgente: l\'eccedenza resta nel dato grezzo (#9
     providerCooldownSkips: { total: 2 },
   };
   assert.deepEqual(bothTies(contraddittorio), { transient: false, persistent: false });
-  assert.equal(vote(contraddittorio).decidedBy, 'net');
+  assert.equal(vote(contraddittorio).echoHiddenInBuckets, 2,
+    'il margine legge il campo grezzo: l\'eccedenza non viene clampata alla sorgente');
+  assert.equal(vote(contraddittorio).decidedBy, 'margin',
+    'due echi su una riga: attribuzione incoerente, decide il margine');
   const inputCap = {
     code: 'ALL_MODELS_EXHAUSTED',
     inputCapReport: { count: 1, estimatedRequestTokens: 9, maxSkippedReqLimit: 4 },
     exhaustionBreakdown: contraddittorio,
   };
-  assert.equal(inputCapVetoSummary(inputCap).marginAttribution, 'persistent');
-  assert.equal(isInputCapDeferralVeto(inputCap), false,
-    'il dato grezzo non viene clampato, ma il margine non puo\' falsificare la causa dichiarata');
+  const summary = inputCapVetoSummary(inputCap);
+  assert.equal(summary.marginAttribution, 'persistent');
+  assert.equal(summary.votedPersistent, 0,
+    'il margine addebitato e\' limitato alla capienza del secchio: mai un voto negativo');
+  assert.equal(isInputCapDeferralVeto(inputCap), true,
+    'il dato grezzo non viene clampato, e un\'attribuzione incoerente non compra il differimento (#8446)');
 });
 
 test('la popolazione e\' `max(total, secchi)`: un `total` incoerente non fa da metro (#932)', () => {
@@ -303,6 +316,10 @@ test('la popolazione e\' `max(total, secchi)`: un `total` incoerente non fa da m
   // guardrail (2 echi contro 2 righe nette) e il netto 2 vs 0 toglierebbe DA
   // SOLO il veto che il lordo 2 vs 2 mette col pareggio al persistente: un
   // secondo campo rotto non puo' fare da metro al primo.
+  // Dalla PR sito valerielinc-ops#8446 il voto si chiude prima del ramo
+  // `gross`: l'eco non attribuito (1) eccede il secchio transitorio netto (0)
+  // a cui il margine lo addebita, quindi l'attribuzione e' incoerente e decide
+  // `margin`, sempre senza maggioranza. `echoDominated` resta calcolato.
   const totaleIncoerente = {
     transient: 2,
     persistent: 2,
@@ -311,7 +328,8 @@ test('la popolazione e\' `max(total, secchi)`: un `total` incoerente non fa da m
   };
   const s = vote(totaleIncoerente);
   assert.equal(s.echoDominated, true);
-  assert.equal(s.decidedBy, 'gross', 'la sottrazione non e\' affidabile: decide il lordo');
+  assert.equal(s.decidedBy, 'margin',
+    'la sottrazione non e\' affidabile e l\'attribuzione e\' incoerente: nessun differimento');
   assert.equal(isTransientMajority(totaleIncoerente, { tie: 'persistent' }), false,
     'il lordo 2 vs 2 non e\' una maggioranza stretta → veto');
 });

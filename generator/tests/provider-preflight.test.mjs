@@ -64,9 +64,10 @@ test('il report resta bloccato quando nessun provider è utilizzabile', () => {
 });
 
 test('il preflight include il Codex action-owned quando il broker è pronto', async () => {
-  const names = ['HAIKU_FALLBACK_GATE', 'ENABLE_CODEX_ARTICLE_FALLBACK', 'CODEX_AUTH_BROKER_SOCKET'];
+  const names = ['ENABLE_HAIKU_ARTICLE_FALLBACK', 'ENABLE_CODEX_ARTICLE_FALLBACK', 'CODEX_AUTH_BROKER_SOCKET'];
   const previous = Object.fromEntries(names.map((name) => [name, process.env[name]]));
-  process.env.HAIKU_FALLBACK_GATE = '1';
+  // Il flag Haiku spento non tocca Codex: la lane ha solo il suo interruttore.
+  process.env.ENABLE_HAIKU_ARTICLE_FALLBACK = '0';
   process.env.ENABLE_CODEX_ARTICLE_FALLBACK = '1';
   process.env.CODEX_AUTH_BROKER_SOCKET = '/tmp/codex-preflight-test.sock';
   try {
@@ -84,9 +85,12 @@ test('il preflight include il Codex action-owned quando il broker è pronto', as
   }
 });
 
-test('il preflight include il fallback Claude quando la lane body è autenticata', async () => {
+// Haiku spento dal proprietario il 2026-09-24 («Disattiva haiku! Voglio solo
+// codex»): con flag, token e CLI eseguibile tutti presenti, claude_cli NON e'
+// un provider pronto. Se questo test torna a vedere claude_cli, qualcuno ha
+// riacceso la lane nel codice.
+test('il preflight non include Claude nemmeno quando flag, token e CLI ci sono (Haiku spento)', async () => {
   const names = [
-    'HAIKU_FALLBACK_GATE',
     'ENABLE_HAIKU_ARTICLE_FALLBACK',
     'ENABLE_CODEX_ARTICLE_FALLBACK',
     'CODEX_AUTH_BROKER_SOCKET',
@@ -98,7 +102,6 @@ test('il preflight include il fallback Claude quando la lane body è autenticata
   const cliPath = path.join(tempDir, 'claude');
   fs.writeFileSync(cliPath, '#!/bin/sh\nexit 0\n');
   fs.chmodSync(cliPath, 0o755);
-  process.env.HAIKU_FALLBACK_GATE = '1';
   process.env.ENABLE_HAIKU_ARTICLE_FALLBACK = '1';
   process.env.CLAUDE_CODE_OAUTH_TOKEN = 'preflight-claude-test-token';
   process.env.CLAUDE_CLI_BIN = cliPath;
@@ -110,7 +113,7 @@ test('il preflight include il fallback Claude quando la lane body è autenticata
       fetchImpl: async () => ({ status: 200 }),
       now: () => '2026-09-14T12:00:00.000Z',
     });
-    assert.ok(report.readyProviders.includes('claude_cli'));
+    assert.ok(!report.readyProviders.includes('claude_cli'), JSON.stringify(report.readyProviders));
   } finally {
     for (const name of names) {
       if (previous[name] === undefined) delete process.env[name];
@@ -120,19 +123,20 @@ test('il preflight include il fallback Claude quando la lane body è autenticata
   }
 });
 
-test('il preflight esclude Claude se il token esiste ma il CLI non è eseguibile', async () => {
+test('Claude chiesto esplicitamente resta non configurato anche con flag, token e CLI eseguibile', async () => {
   const names = [
-    'HAIKU_FALLBACK_GATE',
     'ENABLE_HAIKU_ARTICLE_FALLBACK',
     'CLAUDE_CODE_OAUTH_TOKEN',
     'CLAUDE_CLI_BIN',
   ];
   const previous = Object.fromEntries(names.map((name) => [name, process.env[name]]));
   const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'provider-preflight-'));
-  process.env.HAIKU_FALLBACK_GATE = '1';
+  const cliPath = path.join(tempDir, 'claude');
+  fs.writeFileSync(cliPath, '#!/bin/sh\nexit 0\n');
+  fs.chmodSync(cliPath, 0o755);
   process.env.ENABLE_HAIKU_ARTICLE_FALLBACK = '1';
   process.env.CLAUDE_CODE_OAUTH_TOKEN = 'preflight-claude-test-token';
-  process.env.CLAUDE_CLI_BIN = path.join(tempDir, 'missing-claude');
+  process.env.CLAUDE_CLI_BIN = cliPath;
   try {
     const report = await runProviderPreflight({
       models: [AI_MODELS.CLAUDE_CLI_HAIKU],
@@ -140,8 +144,8 @@ test('il preflight esclude Claude se il token esiste ma il CLI non è eseguibile
       fetchImpl: async () => ({ status: 200 }),
     });
     assert.equal(report.ready, false);
-    assert.equal(report.providers[0].status, 'provider_unavailable');
-    assert.equal(report.providers[0].reason, 'cli_not_executable');
+    assert.equal(report.providers[0].configured, false);
+    assert.equal(report.providers[0].status, 'credential_missing');
   } finally {
     for (const name of names) {
       if (previous[name] === undefined) delete process.env[name];
