@@ -1,14 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/politica/1945336/costi-pischiatria-svizzera-sanita-mozione": {
-    "articleId": "costi-psichiatria-svizzera-2024",
-    "ts": "2026-08-21T16:09:28.139Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/politica/1945331/federale-consiglio-commissione-stipendi-casse-malattia-salari-ministro": {
-    "articleId": "manager-casse-malattia-commissione",
-    "ts": "2026-08-21T16:21:58.431Z",
-    "keyForm": 2
-  },
   "https://lenews.ch/2026/08/21/swiss-exporters-set-for-major-tariff-breakthrough-in-china": {
     "articleId": "svizzera-cina-accordo-tariffe",
     "ts": "2026-08-21T23:35:19.805Z",
@@ -2497,6 +2487,16 @@
   "https://www.rsi.ch/s/4107565": {
     "articleId": "francese-autonomia-cantoni",
     "ts": "2026-09-25T18:17:10.197Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4108261": {
+    "articleId": "svizzera-difesa-bilancio-iva",
+    "ts": "2026-09-25T20:31:43.992Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/rubriche/ospite/1952768/la-sanita-ha-bisogno-di-incentivi": {
+    "articleId": "costi-sanita-incentivi",
+    "ts": "2026-09-25T21:17:42.608Z",
     "keyForm": 2
   }
 }

@@ -87146,6 +87146,84 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-svizzera-difesa-bilancio-iva': {
+    title: 'IVA al 0,2% e fondo difesa da 24 miliardi: il compromesso agli Stati',
+    description: 'Il Consiglio degli Stati approva un aumento temporaneo dell\'IVA di 0,2 punti per 18 anni e un fondo difesa da 24 miliardi, con possibilità di indebitamento fino',
+    keywords: 'frontalieri, ticino, svizzera, italia, fondo, difesa, miliardi, compromesso',
+    ogTitle: 'IVA al 0,2% e fondo difesa da 24 miliardi: il compromesso agli Stati',
+    ogDescription: 'Il compromesso raggiunto dal Consiglio degli Stati prevede un aumento dell\'IVA di 0,2 punti per 18 anni per finanziare un fondo per la difesa con capacità massima di 24 miliardi e possibilità di indebitamento fino a 12 miliardi. Gli acquisti di F-35',
+    canonicalPath: '/articoli-svizzera/svizzera-difesa-bilancio-iva/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "IVA al 0,2% e fondo difesa da 24 miliardi: il compromesso agli Stati",
+      "description": "Il Consiglio degli Stati approva un aumento temporaneo dell'IVA di 0,2 punti per 18 anni e un fondo difesa da 24 miliardi, con possibilità di indebitamento fino",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/svizzera-difesa-bilancio-iva.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea delle Alpi svizzere con sagoma di un caccia, simbolo del dibattito su difesa e finanze"
+      },
+      "datePublished": "2026-09-25T20:31:43+00:00",
+      "dateModified": "2026-09-25T20:31:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/svizzera-difesa-bilancio-iva/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-costi-sanita-incentivi': {
+    title: 'La sanità ticinese ha bisogno di nuovi incentivi',
+    description: 'Analisi dei costi sanitari in Ticino dopo il Covid: limiti del 5% per le casse malati, fino al 20% di spesa in prestazioni inutili e necessità di nuovi',
+    keywords: 'frontalieri, ticino, svizzera, italia, sanità, ticinese, bisogno, nuovi',
+    ogTitle: 'La sanità ticinese ha bisogno di nuovi incentivi',
+    ogDescription: 'L\'articolo esamina la situazione della sanità ticinese sottolineando come i costi straordinari e duraturi legati al Covid abbiano messo in luce le debolezze del modello attuale, dove nessun attore ha incentivi reali a ridurre le prestazioni inutili',
+    canonicalPath: '/articoli-svizzera/costi-sanita-incentivi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "La sanità ticinese ha bisogno di nuovi incentivi",
+      "description": "Analisi dei costi sanitari in Ticino dopo il Covid: limiti del 5% per le casse malati, fino al 20% di spesa in prestazioni inutili e necessità di nuovi",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/costi-sanita-incentivi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lago Lugano con montagne, simbolo delle sfide dei costi sanitari in Ticino."
+      },
+      "datePublished": "2026-09-25T21:17:42+00:00",
+      "dateModified": "2026-09-25T21:17:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/costi-sanita-incentivi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

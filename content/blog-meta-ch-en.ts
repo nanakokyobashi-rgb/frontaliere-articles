@@ -6722,6 +6722,12 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.francese-autonomia-cantoni.title': 'French at school: the cantons defend autonomy',
     'blog.article.francese-autonomia-cantoni.excerpt': 'The CDPE defends cantonal prerogatives regarding languages and does not choose between the two federal variants: consultation until 5 October.',
     'blog.article.francese-autonomia-cantoni.imageAlt': 'Swiss school with French and German language books',
+    'blog.article.svizzera-difesa-bilancio-iva.title': 'VAT at 0,2% and a 24-billion defense fund: the compromise for the States',
+    'blog.article.svizzera-difesa-bilancio-iva.excerpt': 'With 25 votes against 17, the Council of States approves +0.2 percentage points VAT for 18 years, a defense fund of up to 24 billion and borrowing of up to 12 billion. Reduction of F-35s to ~30 and additional credit of 394 million.',
+    'blog.article.svizzera-difesa-bilancio-iva.imageAlt': 'Aerial view of the Swiss Alps with a fighter jet silhouette, representing the defense spending debate',
+    'blog.article.costi-sanita-incentivi.title': 'Ticino\'s healthcare system needs new incentives',
+    'blog.article.costi-sanita-incentivi.excerpt': 'Covid has left extraordinary and lasting costs; health insurers retain at most 5% of expenditure; up to one fifth of healthcare spending is linked to unnecessary services.',
+    'blog.article.costi-sanita-incentivi.imageAlt': 'Lake Lugano with mountains, representing healthcare cost challenges in Ticino.',
 };
 
 export default blogMetaChEn;

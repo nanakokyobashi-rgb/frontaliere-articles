@@ -655,6 +655,7 @@ describe('GitHub Models request contract', () => {
 
 test('classifica 410 e 403 generici senza alterare il brownout GitHub', () => {
   const nvidiaGoneBody = '{"type":"about:blank","title":"Gone","status":410,"detail":"The model \'meta/llama-3.1-8b-instruct\' has reached its end of life on 2026-08-26T09:00:00Z..."}';
+  const githubModelGoneBody = '{"error":{"message":"model openai/gpt-4o has been retired"}}';
   const openRouterForbiddenBody = '{"error":{"message":"thinkingmachines/inkling-small:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app..."}}';
   const githubForbiddenBody = '{"message":"bad credentials"}';
   const transientBody = '{"error":{"message":"temporarily unavailable"}}';
@@ -673,6 +674,18 @@ test('classifica 410 e 403 generici senza alterare il brownout GitHub', () => {
     markExhausted: false,
   });
   assert.deepEqual(classifyNonRetryableError(410, transientBody, 'NVIDIA'), {
+    nonRetryable: false,
+    markExhausted: false,
+  });
+  assert.deepEqual(classifyNonRetryableError(410, githubModelGoneBody, 'GitHub'), {
+    nonRetryable: true,
+    markExhausted: true,
+  });
+  assert.deepEqual(classifyNonRetryableError(410, '', 'GitHub'), {
+    nonRetryable: true,
+    markExhausted: false,
+  });
+  assert.deepEqual(classifyNonRetryableError(500, githubBrownoutBody, 'GitHub'), {
     nonRetryable: false,
     markExhausted: false,
   });

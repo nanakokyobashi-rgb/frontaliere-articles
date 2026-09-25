@@ -20192,6 +20192,24 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'svizzera-difesa-bilancio-iva',
+    category: 'fiscale',
+    date: '2026-09-25T20:31:43.667Z',
+    image: '/images/blog/svizzera-difesa-bilancio-iva.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
+   {
+    id: 'costi-sanita-incentivi',
+    category: 'pratico',
+    date: '2026-09-25T21:17:42.290Z',
+    image: '/images/blog/costi-sanita-incentivi.webp',
+    hasCalculator: true,
+    authorSlug: 'laura-bianchi',
+    authorName: 'Laura Bianchi',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
