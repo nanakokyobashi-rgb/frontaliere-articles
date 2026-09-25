@@ -30,6 +30,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { AI_MODELS } from '../scripts/lib/ai-models.mjs';
+import { isBodyTranslationPending } from '../scripts/lib/free-mt-recovery.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const SRC = fs.readFileSync(path.join(HERE, '..', 'scripts', 'create-article.mjs'), 'utf8');
@@ -99,13 +100,18 @@ function ctaAndLinkEnforcers() {
   const start = SRC.indexOf('const CTA_KEYWORDS_IT = [');
   const end = SRC.indexOf('/** Lazy-loaded set of normalized existing IT blog titles', start);
   assert.ok(start !== -1 && end > start, 'blocco CTA/link interni non trovato');
+  // The module-scope names the block reads: the two content helpers are
+  // stubbed on the test's own article shape, `isBodyTranslationPending` is the
+  // real one from the module create-article.mjs imports it from.
   return new Function(
     'bodyTextForQuality',
     'collectBodySections',
+    'isBodyTranslationPending',
     `${SRC.slice(start, end)}\nreturn { validateAndEnforceCTA, enforceStrongInternalLinks };`,
   )(
     (content) => `${content.body1} ${content.body2} ${content.body3}`,
     (content) => ({ body1: content.body1, body2: content.body2, body3: content.body3 }),
+    isBodyTranslationPending,
   );
 }
 
