@@ -173,6 +173,25 @@ test('ogni guasto del canale broker vota transitorio nel tally di esaurimento', 
   );
 });
 
+// Un socket che esiste ma non si puo' aprire (permessi) e' un broker
+// configurato male: non si ripara al run successivo, quindi vota persistente
+// (anche come causa autorevole) e non spegne la lane come un broker sparito.
+test('un EACCES sul socket vota persistente, non transitorio', { skip: process.getuid?.() === 0 }, async () => {
+  fs.chmodSync(socketPath, 0o000);
+  let caught = null;
+  await callCodex().catch((error) => { caught = error; });
+  assert.ok(caught, 'atteso un errore');
+  assert.match(caught.message, /socket unusable \(EACCES\), non-retryable/);
+  assert.deepEqual(
+    { transient: caught.exhaustionBreakdown.transient, persistent: caught.exhaustionBreakdown.persistent },
+    { transient: 0, persistent: 1 },
+    caught.message,
+  );
+  assert.notEqual(caught.transientExhaustion, true);
+  assert.equal(isModelAvailable(CODEX), true);
+  assert.equal(codexScore(), 0);
+});
+
 test('un broker che chiude senza risposta e\' un guasto di trasporto', async () => {
   behavior = (client) => { client.end(); };
   await assert.rejects(() => callCodex(), (error) => {
