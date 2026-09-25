@@ -46,9 +46,10 @@
  * it, unless it is plainly not a place (a road like A2, an acronym, a feast
  * day, an institution) or a river («sul Ticino»). A sentence with no such
  * place does not place its event: «un ticinese arrestato» names a person, not
- * where the arrest happened. Sport is placed by the club, so a place of the
- * area named in the sentence is enough there («il Lugano pareggia a
- * Basilea»), but not a demonym («il tennista ticinese vince a Parigi»). URLs
+ * where the arrest happened. Sport is placed by the club: a place of the area
+ * named in the sentence outside the venue counts («il Lugano pareggia a
+ * Basilea»), the venue alone does not («il Basilea batte lo Young Boys a
+ * Lugano»), nor does a demonym («il tennista ticinese vince a Parigi»). URLs
  * are not prose and are left out.
  */
 import { readFileSync } from 'node:fs';
@@ -131,7 +132,7 @@ const TICINO_SOURCE = path.resolve(
  * «di Tenero», not «paradiso fiscale», «il governo vira», «a Sessa Aurunca».
  */
 const AMBIGUOUS_TICINO_NAMES = new Set([
-  'paradiso', 'pura', 'quinto', 'tenero', 'contra', 'agno', 'riviera', 'tresa',
+  'paradiso', 'pura', 'quinto', 'tenero', 'contra', 'agno', 'tresa',
   'campo', 'bosco', 'lema', 'vaglio', 'taverne', 'montagnola', 'rodi', 'agra',
   'rivera', 'serravalle', 'vernate', 'muzzano', 'lumino', 'curio', 'sessa', 'manno',
   'carona', 'castione', 'lodrino', 'gudo', 'melano', 'comano', 'cadro', 'piotta',
@@ -139,10 +140,12 @@ const AMBIGUOUS_TICINO_NAMES = new Set([
 ]);
 
 /**
- * Localities of the BFS list whose name alone is a common noun: they count
- * only in their full form, «Locarno Monti», «Mendrisio Borgo».
+ * Names of the BFS list that alone name something else: «Monti», «Borgo»
+ * count only in their full form («Locarno Monti», «Mendrisio Borgo»), and
+ * «Riviera» is far more often the Ligurian or Romagnol coast than the comune,
+ * whose localities (Cresciano, Iragna, Lodrino, Osogna) count by name.
  */
-const GENERIC_ALONE = new Set(['monti', 'borgo']);
+const GENERIC_ALONE = new Set(['monti', 'borgo', 'riviera']);
 
 /** Places outside the area whose name contains a Ticino comune. */
 const OUTSIDE_AREA_HOMONYMS_RE = /\b(?:castel san pietro terme|sant antonino di susa)\b/g;
@@ -188,12 +191,29 @@ function mentionsTicinoPlace(text, norm) {
       if (plain.has(phrase)) return true;
       if (n === 1 && ambiguous.has(phrase)) {
         const display = escapeRe(ambiguous.get(phrase));
-        const locative = new RegExp(`(?:^|[^\\p{L}])(?:a|ad|di|da|in|comune di)\\s+${display}(?![\\p{L}]|\\s+\\p{Lu})`, 'u');
+        const locative = new RegExp(`(?:^|[^\\p{L}])(?:${ambiguousNameLeads()})(?:\\s+|['’]\\s*)${display}(?![\\p{L}]|\\s+\\p{Lu})`, 'u');
         if (locative.test(text)) return true;
       }
     }
   }
   return false;
+}
+
+let _ambiguousNameLeads = null;
+
+/**
+ * The words that may introduce an ambiguous Ticino name: the same
+ * prepositions the event matcher reads (placesOf), so «Concerto presso
+ * Tenero» places the event as «Concerto a Tenero» does, plus «comune di».
+ * Either case for the first letter, so a sentence may start with them.
+ */
+function ambiguousNameLeads() {
+  if (_ambiguousNameLeads !== null) return _ambiguousNameLeads;
+  const words = [...EVENT_PREPOSITIONS, ...GENITIVE_PREPOSITIONS, 'comune di']
+    .sort((a, b) => b.length - a.length)
+    .map((word) => `[${word[0]}${word[0].toUpperCase()}]${escapeRe(word.slice(1)).replace(/ /g, '\\s+')}`);
+  _ambiguousNameLeads = words.join('|');
+  return _ambiguousNameLeads;
 }
 
 /**
@@ -314,9 +334,10 @@ function stemHits(tokens) {
 
 /**
  * Places a sentence introduces: after a preposition, or as a dateline at its
- * start. Each is { index, inArea, event } — inArea false for a place outside
- * the area, event false for a genitive place (organiser, owner, origin);
- * words that are plainly not places are dropped.
+ * start. Each is { index, inArea, event, start, end } — inArea false for a
+ * place outside the area, event false for a genitive place (organiser, owner,
+ * origin), start/end the characters of the preposition and the name; words
+ * that are plainly not places are dropped.
  */
 function placesOf(sentence, tokens) {
   const places = [];
@@ -347,13 +368,14 @@ function placesOf(sentence, tokens) {
       const lead = afterPreposition ? preposition : 'a';
       // A dateline («Lugano, rapina…») says where the event happened.
       const event = !afterPreposition || EVENT_PREPOSITIONS.has(preposition);
+      const span = { start: afterPreposition ? tokens[j - 1].start : tokens[j].start, end: tokens[k].end };
       if (isInLocalNewsArea(`${lead} ${name}`)) {
-        places.push({ index: j, inArea: true, event });
+        places.push({ index: j, inArea: true, event, ...span });
       } else if (!/\d/.test(tokens[j].raw)
         && !(tokens[j].raw === tokens[j].raw.toUpperCase() && tokens[j].raw.length <= 5)
         && !NOT_A_PLACE.has(tokens[j].norm)
         && !startsWithStem(tokens[j].norm)) {
-        places.push({ index: j, inArea: false, event });
+        places.push({ index: j, inArea: false, event, ...span });
       }
       j = k;
     }
@@ -372,7 +394,15 @@ function localStemHits(text) {
     const hits = stemHits(tokens);
     if (hits.length === 0) continue;
     const places = placesOf(sentence, tokens);
-    const clubPlace = mentionsAreaPlace(sentence);
+    // The club's place, not the venue's: a place named as where the match is
+    // played («a Lugano», a dateline) is blanked out before looking, so
+    // «il Basilea batte lo Young Boys a Lugano» is not Ticino sport while
+    // «il Lugano pareggia a Basilea» is.
+    let venueless = sentence;
+    for (const place of places) {
+      if (place.event) venueless = venueless.slice(0, place.start) + ' '.repeat(place.end - place.start) + venueless.slice(place.end);
+    }
+    const clubPlace = mentionsAreaPlace(venueless);
     for (const hit of hits) {
       if (hit.team) {
         count += 1;

@@ -197,3 +197,20 @@ test('the word «sport» counts, «sportello» does not', () => {
   assert.equal(isLocalNews('Sport a Lugano: il Lugano chiude la stagione'), true);
   assert.equal(hasLocalNewsSignal('Nuovo sportello a Chiasso'), false);
 });
+
+test('sport is placed by the club, not by the venue alone', () => {
+  // Sixth review of PR #1871: a match between two outside clubs played in
+  // Lugano is not Ticino sport.
+  assert.equal(isLocalNews('Calcio: il Basilea batte lo Young Boys a Lugano'), false);
+  assert.equal(isLocalNews('Sport a Lugano: il Lugano chiude la stagione'), true);
+  assert.equal(isLocalNews('La maratona di Lugano attira mille corridori'), true);
+});
+
+test('ambiguous Ticino names take the same prepositions as the event matcher', () => {
+  // Sixth review of PR #1871: «presso Tenero» was not a place.
+  assert.equal(isLocalNews('Concerto presso Tenero'), true);
+  assert.equal(isLocalNews('A Paradiso rapina in banca'), true);
+  // «Riviera» alone is the coast far more often than the comune.
+  assert.equal(isLocalNews('Incendio nella Riviera ligure'), false);
+  assert.equal(isLocalNews('Incendio a Lodrino, evacuate due case'), true);
+});
