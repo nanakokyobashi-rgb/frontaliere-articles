@@ -778,7 +778,10 @@ function start(auth, cliConfig) {
   // in between and get ECONNREFUSED (PR 1773, run 36038787680). Listen on a
   // temporary name in the same private 0700 directory and rename it into place
   // only once it accepts connections, so «the socket exists» means «ready».
-  listeningPath = `${socketPath}.${process.pid}.listening`;
+  // Keep the temporary basename short: Unix-domain socket paths have a small
+  // platform-specific limit, and appending a suffix to the requested path can
+  // exceed it even when the final socket path itself is valid.
+  listeningPath = path.join(path.dirname(socketPath), `.l-${process.pid}`);
   server.listen(listeningPath, () => {
     try {
       fs.chmodSync(listeningPath, 0o600);
