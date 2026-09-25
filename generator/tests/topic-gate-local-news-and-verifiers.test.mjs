@@ -30,6 +30,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { AI_MODELS } from '../scripts/lib/ai-models.mjs';
+import { isBodyTranslationPending } from '../scripts/lib/free-mt-recovery.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const SRC = fs.readFileSync(path.join(HERE, '..', 'scripts', 'create-article.mjs'), 'utf8');
@@ -99,13 +100,18 @@ function ctaAndLinkEnforcers() {
   const start = SRC.indexOf('const CTA_KEYWORDS_IT = [');
   const end = SRC.indexOf('/** Lazy-loaded set of normalized existing IT blog titles', start);
   assert.ok(start !== -1 && end > start, 'blocco CTA/link interni non trovato');
+  // The module-scope names the block reads: the two content helpers are
+  // stubbed on the test's own article shape, `isBodyTranslationPending` is the
+  // real one from the module create-article.mjs imports it from.
   return new Function(
     'bodyTextForQuality',
     'collectBodySections',
+    'isBodyTranslationPending',
     `${SRC.slice(start, end)}\nreturn { validateAndEnforceCTA, enforceStrongInternalLinks };`,
   )(
     (content) => `${content.body1} ${content.body2} ${content.body3}`,
     (content) => ({ body1: content.body1, body2: content.body2, body3: content.body3 }),
+    isBodyTranslationPending,
   );
 }
 
@@ -137,7 +143,14 @@ test('the flag comes from the same local-news predicate as the prompt, and is dr
   const step = SRC.slice(SRC.indexOf('// Step 3d: Enforce CTA / internal links (all 4 locales)'));
   assert.match(step.slice(0, 1200), /value: IS_FRONTALIERE && isLocalNewsWithoutFrontaliereAngle\(pageContent\),/);
   assert.match(step.slice(0, 1400), /validateAndEnforceCTA\(data\);\n\s+enforceStrongInternalLinks\(data\);\n\s+delete data\._localNewsSource;/);
-  assert.match(SRC, /localNews: IS_FRONTALIERE && isLocalNewsWithoutFrontaliereAngle\(pageContent\),/);
+  assert.match(SRC, /const localNewsExpansion = IS_FRONTALIERE && isLocalNewsWithoutFrontaliereAngle\(pageContent\);\n\s+data = await expandShortItalianContent\(data, adaptiveMinWords, \{\n\s+boundToText: isStatsBfsSource,\n\s+localNews: localNewsExpansion,/);
+});
+
+test('the expansion of a local story passes the fact-check even on the last attempt', () => {
+  // Fourth review of PR #1871: the expansion is fact-checked only before the
+  // last attempt, and a local story expanded there reached the corpus with no
+  // check against invented facts.
+  assert.match(SRC, /if \(\(!isLastAttempt \|\| localNewsExpansion\) && expandGateResult\.passed\) \{\n\s+let expandFactOk = true;/);
 });
 
 test('the pre-spend classifier admits the same local news', () => {

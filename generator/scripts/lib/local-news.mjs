@@ -23,7 +23,7 @@
  * The scan's anchor gate (domainAnchor.mjs) is not enough: it also accepts
  * Zurich, Bern and every border comune of Sondrio, Lecco or Aosta, and it
  * misses 97 of the 162 Ticino names, so on the frontaliere section the scan
- * also anchors on isInLocalNewsArea (filterByAnchor). Names that
+ * also anchors a headline that isLocalNews (filterByAnchor). Names that
  * span the border of the area are not used: Lago Maggiore (also Novara), Lario
  * (also Lecco), Gottardo (also Uri), San Bernardino (Graubünden).
  *
@@ -41,10 +41,12 @@
  * Milano, ricercato anche in Ticino» is an arrest in Milan. A capitalised
  * word after a preposition that is not in the area counts as a place outside
  * it, unless it is plainly not a place (a road like A2, an acronym, a feast
- * day, an institution). With no such place in the sentence, a mention of the
- * area in the same sentence («la polizia ticinese») is enough; sport is
- * placed by the club, so a mention of the area in the sentence always is
- * («il Lugano pareggia a Basilea»). URLs are not prose and are left out.
+ * day, an institution) or a river («sul Ticino»). A sentence with no such
+ * place does not place its event: «un ticinese arrestato» names a person, not
+ * where the arrest happened. Sport is placed by the club, so a place of the
+ * area named in the sentence is enough there («il Lugano pareggia a
+ * Basilea»), but not a demonym («il tennista ticinese vince a Parigi»). URLs
+ * are not prose and are left out.
  */
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
@@ -89,12 +91,21 @@ export const LOCAL_NEWS_PROVINCES = Object.freeze(['VA', 'CO', 'VB']);
 const LOCAL_PROVINCE_SET = new Set(LOCAL_NEWS_PROVINCES);
 
 /** The canton, its regions and the Italian side by name (normalizeText output). */
-const AREA_NAMES_RE = new RegExp(`\\b(?:${[
-  'ticin[a-z]*', 'luganes[ei]', 'mendrisiott[oa]', 'locarnes[ei]', 'bellinzones[ei]',
-  'leventina', 'malcantone', 'vallemaggia', 'valle maggia', 'tre valli', 'ceresio',
-  'brogeda', 'gaggiolo',
-  'varese', 'varesott[oa]', 'comasc[oa]', 'vco', 'ossola', 'ossolan[oa]',
-].join('|')})\\b`);
+const AREA_PLACE_NAMES = [
+  'ticino', 'mendrisiotto', 'leventina', 'malcantone', 'vallemaggia', 'valle maggia',
+  'tre valli', 'ceresio', 'brogeda', 'gaggiolo', 'varese', 'vco', 'ossola',
+];
+/**
+ * Adjectives and demonyms of the area. After a preposition they name a region
+ * («nel Luganese», «nel Varesotto»); on their own they name people or things
+ * («un ticinese arrestato a Milano») and place no event.
+ */
+const AREA_ADJECTIVES = [
+  'ticines[ei]', 'luganes[ei]', 'mendrisiott[ai]', 'locarnes[ei]', 'bellinzones[ei]',
+  'varesott[oai]', 'varesin[oaie]', 'comasc[oaih]+', 'ossolan[oaie]',
+];
+const AREA_PLACE_NAMES_RE = new RegExp(`\\b(?:${AREA_PLACE_NAMES.join('|')})\\b`);
+const AREA_NAMES_RE = new RegExp(`\\b(?:${[...AREA_PLACE_NAMES, ...AREA_ADJECTIVES].join('|')})\\b`);
 
 const TICINO_SOURCE = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -181,12 +192,25 @@ function mentionsTicinoPlace(text, norm) {
  * @returns {boolean}
  */
 export function isInLocalNewsArea(text) {
+  return mentionsArea(text, AREA_NAMES_RE);
+}
+
+/** A place of the area named as a place: no demonyms or adjectives. */
+function mentionsAreaPlace(text) {
+  return mentionsArea(text, AREA_PLACE_NAMES_RE);
+}
+
+function mentionsArea(text, namesRe) {
   if (!text || typeof text !== 'string') return false;
   const norm = normalizeText(text);
-  if (AREA_NAMES_RE.test(norm)) return true;
+  if (namesRe.test(norm)) return true;
   if (mentionsTicinoPlace(text, norm)) return true;
   return comuniMentioned(text).some((slug) => LOCAL_PROVINCE_SET.has(municipalityProvince(slug)));
 }
+
+/** «sul Ticino», «sulla Tresa»: the rivers, which also flow outside the area. */
+const RIVER_PREPOSITIONS = new Set(['sul', 'sull', 'sulla', 'lungo']);
+const AREA_RIVERS = new Set(['ticino', 'tresa', 'maggia', 'verzasca']);
 
 const LOCATIVE_PREPOSITIONS = new Set([
   'a', 'ad', 'in', 'di', 'da', 'tra', 'fra', 'presso', 'verso',
@@ -280,7 +304,9 @@ function placesOf(sentence, tokens) {
       }
     }
     const dateline = j === 0 && /^\s*[,:–—-]/.test(sentence.slice(tokens[k].end));
-    if (afterPreposition || dateline) {
+    const river = afterPreposition && j === k
+      && RIVER_PREPOSITIONS.has(tokens[j - 1].norm) && AREA_RIVERS.has(tokens[j].norm);
+    if ((afterPreposition || dateline) && !river) {
       const name = sentence.slice(tokens[j].start, tokens[k].end);
       const preposition = afterPreposition ? tokens[j - 1].norm : 'a';
       if (isInLocalNewsArea(`${preposition} ${name}`)) {
@@ -291,8 +317,10 @@ function placesOf(sentence, tokens) {
         && !startsWithStem(tokens[j].norm)) {
         places.push({ index: j, inArea: false });
       }
+      j = k;
     }
-    j = k;
+    // A capitalised run that is not a place («Concerto di Tenero») does not
+    // swallow the words after it: «di Tenero» is read on its own.
   }
   return places;
 }
@@ -306,16 +334,17 @@ function localStemHits(text) {
     const hits = stemHits(tokens);
     if (hits.length === 0) continue;
     const places = placesOf(sentence, tokens);
-    const areaMention = isInLocalNewsArea(sentence);
+    const clubPlace = mentionsAreaPlace(sentence);
     for (const hit of hits) {
       if (hit.team) {
         count += 1;
         continue;
       }
-      if (hit.sport || places.length === 0) {
-        if (areaMention) count += 1;
+      if (hit.sport) {
+        if (clubPlace) count += 1;
         continue;
       }
+      if (places.length === 0) continue;
       let nearest = places[0];
       for (const place of places) {
         if (Math.abs(place.index - hit.index) < Math.abs(nearest.index - hit.index)) nearest = place;

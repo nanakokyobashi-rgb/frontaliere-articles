@@ -22,8 +22,14 @@
  * The socket is deliberately the only job-wide hand-off. Its parent directory
  * is 0700 and the socket is 0600. A malformed request never receives auth or
  * consumes a request slot. The idle TTL is a backstop for persistent runners
- * and is refreshed whenever an accepted request starts or completes; callers
- * should still invoke the explicit cleanup operation at the end of a job.
+ * and is refreshed whenever an accepted request starts or completes; it never
+ * fires while a request is running or queued. Callers should still invoke the
+ * explicit cleanup operation at the end of a job.
+ *
+ * Requests run one at a time, so a request can wait in the queue behind
+ * others. A client that sends `notifyStart: true` receives one
+ * CLIENT_START_SIGNAL byte when its own Codex process starts, and can time the
+ * execution from there instead of from connect().
  */
 
 import fs from 'node:fs';
@@ -50,6 +56,13 @@ const MAX_STDERR_TAIL_CHARS = 16 * 1024;
 // Fits the 300-character error the broker returns, after its own prefix.
 const MAX_FAILURE_REASON_CHARS = 200;
 const CLIENT_LIVENESS_PROBE = '\0';
+// Written before the JSON line when the request leaves the queue and Codex
+// starts. The client used to time the execution from connect(): with several
+// callers queued, every request expired while its Codex had just started, the
+// broker killed it half-way and moved on to the next one, already about to
+// expire too (site twin, send-newsletter run 36116142119: no answer for 16
+// minutes).
+const CLIENT_START_SIGNAL = '\x01';
 
 function argument(name, fallback = '') {
   const index = process.argv.indexOf(name);
@@ -370,7 +383,7 @@ function removeAuthHome() {
   }
 }
 
-function runCodex({ authJson: credential, prompt, timeoutMs, schema }) {
+function runCodex({ authJson: credential, prompt, timeoutMs, schema, onSpawn = () => {} }) {
   // Per-request tree: workspace, TMPDIR and the output files. The login lives
   // in the per-job home instead (prepareAuthHome), outside this tree.
   const runtimeRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-haiku-broker-'));
@@ -453,15 +466,25 @@ function runCodex({ authJson: credential, prompt, timeoutMs, schema }) {
         stderrTail = (stderrTail + chunk).slice(-MAX_STDERR_TAIL_CHARS);
       });
       let settled = false;
-      const timer = setTimeout(() => {
+      let timer = null;
+      // Only a process that really started counts as started: a spawn that
+      // fails emits 'error' instead, and the request is answered from there.
+      // The SIGKILL budget, the broker socket timer and the client's start
+      // signal all begin at this same event, so no side can cut the execution
+      // budget short of what the other side is measuring.
+      child.once('spawn', () => {
         if (settled) return;
-        settled = true;
-        terminateChild(child, 'SIGKILL');
-        const error = new Error(`Codex CLI timed out after ${timeoutMs}ms`);
-        error.name = 'TimeoutError';
-        reject(error);
-      }, timeoutMs);
-      timer.unref?.();
+        timer = setTimeout(() => {
+          if (settled) return;
+          settled = true;
+          terminateChild(child, 'SIGKILL');
+          const error = new Error(`Codex CLI timed out after ${timeoutMs}ms`);
+          error.name = 'TimeoutError';
+          reject(error);
+        }, timeoutMs);
+        timer.unref?.();
+        onSpawn();
+      });
       child.on('error', (error) => {
         if (settled) return;
         settled = true;
@@ -523,8 +546,19 @@ let expiry;
 function refreshIdleExpiry() {
   if (closed) return;
   clearTimeout(expiry);
-  expiry = setTimeout(cleanup, ttlMs);
+  expiry = setTimeout(expireIfIdle, ttlMs);
   expiry.unref?.();
+}
+
+// A TTL shorter than one Codex request (the action accepts 60 s) used to close
+// the broker under a running request. Expiry now re-arms while there is work.
+function expireIfIdle() {
+  if (closed) return;
+  if (activeRequest || pendingRequests.some((job) => !job.cancelled && !job.client.destroyed)) {
+    refreshIdleExpiry();
+    return;
+  }
+  cleanup();
 }
 
 function cleanupRuntime() {
@@ -604,16 +638,27 @@ function startNextRequest() {
   job.started = true;
   activeRequest = job;
   const timeoutMs = Number(job.parsed.timeoutMs);
-  job.client.setTimeout(Math.max(5000, timeoutMs + 10_000), () => {
-    cancelRequest(job);
-    job.client.destroy();
-  });
+  // The execution budget, on both sides of the socket, starts when the Codex
+  // process has actually spawned, not when the request leaves the queue.
+  const onSpawn = () => {
+    if (job.cancelled || job.client.destroyed) return;
+    job.client.setTimeout(Math.max(5000, timeoutMs + 10_000), () => {
+      cancelRequest(job);
+      job.client.destroy();
+    });
+    if (job.parsed.notifyStart === true) {
+      // A client that left meanwhile emits 'error'/'close', which cancel the
+      // request like any other disconnect.
+      try { job.client.write(CLIENT_START_SIGNAL); } catch { /* client already closed */ }
+    }
+  };
   const credential = authJson;
   runCodex({
     authJson: credential,
     prompt: job.parsed.prompt,
     timeoutMs,
     schema: job.parsed.schema ?? null,
+    onSpawn,
   }).then(
     (result) => {
       if (job.cancelled) return;

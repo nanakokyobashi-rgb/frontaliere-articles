@@ -1,14 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/banca-cantonale-grigione%3a-utile-semestrale-record-di-137%2c2-milioni/91932297": {
-    "articleId": "bcg-utile-semestrale-record",
-    "ts": "2026-08-21T07:14:22.956Z",
-    "keyForm": 2
-  },
-  "https://www.rsi.ch/s/4002291": {
-    "articleId": "richiedenti-asilo-severe-misure",
-    "ts": "2026-08-21T08:01:12.366Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/ghq4_joau7alp0hkqeybr": {
     "articleId": "parere-governo-infrastrutture-ferroviarie",
     "ts": "2026-08-21T08:44:43.681Z",
@@ -2497,6 +2487,16 @@
   "https://www.admin.ch/it/newnsb/zx9onk8tui-z": {
     "articleId": "nuova-legge-cibersicurezza-lcib",
     "ts": "2026-09-25T09:35:24.015Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/i41kaec0maca": {
+    "articleId": "omologazione-fitosanitari-arretrato-2032",
+    "ts": "2026-09-25T11:39:48.664Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/y58ivlijeyw6": {
+    "articleId": "finanziamento-federale-universita-sup",
+    "ts": "2026-09-25T12:24:28.955Z",
     "keyForm": 2
   }
 }

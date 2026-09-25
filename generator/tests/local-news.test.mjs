@@ -153,7 +153,7 @@ test('the place of the event: after a preposition, as a dateline, or the area in
     'Incidente sulla A2 a Bellinzona', // a road is not a place
     'Concerto di Natale a Lugano', // nor is a feast day
     'Il Festival del film di Locarno apre con un record',
-    'La polizia ticinese ha arrestato due uomini',
+    'Rapina nel Luganese, due arresti', // after a preposition the adjective is a region
   ]) {
     assert.equal(isLocalNews(text), true, `non riconosciuta come cronaca locale: ${text}`);
   }
@@ -163,4 +163,20 @@ test('sport is placed by the club, not by the venue', () => {
   assert.equal(isLocalNews('Calcio, il Lugano pareggia a Basilea'), true);
   assert.equal(isLocalNews("Hockey: l'Ambrì vince a Zurigo"), true);
   assert.equal(isLocalNews('Calcio: il Basilea batte lo Young Boys a Berna'), false);
+  // A demonym is a person, not a club.
+  assert.equal(isLocalNews('Il tennista ticinese vince a Parigi'), false);
+});
+
+test('a demonym or a river does not place the event', () => {
+  // Fourth review of PR #1871: with no place in the sentence, «ticinese» or
+  // the river Ticino used to be enough.
+  for (const text of [
+    'Un ticinese arrestato',
+    'La polizia ticinese ha arrestato due uomini',
+    'Incidente sul fiume Ticino',
+    'Incidente sul Ticino a Pavia',
+  ]) {
+    assert.equal(isLocalNews(text), false, `presa per cronaca locale: ${text}`);
+  }
+  assert.equal(isLocalNews('Incidente in Ticino, due feriti'), true);
 });
