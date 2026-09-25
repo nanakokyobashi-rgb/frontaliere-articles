@@ -34,6 +34,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { EXIT_MANUAL_NEEDED, manualTransportReason } from '../../scripts/ci/transport-identical-twins.mjs';
+import { TRANSPORT_BULLET_RE, parseTransportBullets } from '../../scripts/ci/transport-realign-body.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8');
@@ -41,6 +42,7 @@ const read = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8');
 const SCRIPT = 'scripts/ci/transport-identical-twins.mjs';
 const WORKFLOW = '.github/workflows/transport-identical-twins.yml';
 const REALIGN_WORKFLOW = '.github/workflows/transport-identical-twins-realign.yml';
+const REALIGN_PARSER = 'scripts/ci/transport-realign-body.mjs';
 
 test('--files= vuoto è un errore prima del no-op e non produce un falso successo', () => {
   const src = read('scripts/cf-purge-cache.mjs');
@@ -166,16 +168,23 @@ test('il job post-merge usa hash site freschi e committa solo il manifest su mai
   assert.match(yml, /github\.event\.pull_request\.head\.repo\.full_name == github\.repository/);
   assert.match(yml, /group: transport-identical-twins-realign-main/);
   assert.doesNotMatch(yml, /group: transport-identical-twins-realign-\$\{\{ github\.event\.pull_request\.number \}\}/);
-  assert.match(yml, /\(\?:site \)\?sha256/);
   assert.match(yml, /ref: main[\s\S]{0,100}fetch-depth: 0/);
-  assert.match(yml, /const declared = new Set\(\(manifest\.files \|\| \[\]\)\.map/);
-  assert.match(yml, /const unknown = \[\.\.\.changed\][\s\S]{0,180}!declared\.has\(filename\)/);
-  assert.match(yml, /file modificati dalla PR non dichiarati nel manifest/);
-  assert.match(yml, /const expected = \[\.\.\.changed\][\s\S]{0,180}identical\.has\(filename\)/);
-  assert.match(yml, /declared\.has\(filename\) && !identical\.has\(filename\)/);
-  assert.match(yml, /if \(!identical\.has\(match\[1\]\)\) continue;/);
-  assert.match(yml, /const missing = expected\.filter/);
-  assert.match(yml, /non cit[aà] tutti i file trasportati/);
+  // Il parser del body vive nel modulo condiviso col produttore: il workflow
+  // lo invoca, e le stesse garanzie si pinnano sul modulo.
+  assert.match(
+    yml,
+    /node scripts\/ci\/transport-realign-body\.mjs \\\s+"\$RUNNER_TEMP\/transport-body\.md" \\\s+"\$RUNNER_TEMP\/transport-files\.txt" \\\s+"\$RUNNER_TEMP\/transport-realign\.tsv"/,
+  );
+  const parser = read(REALIGN_PARSER);
+  assert.match(parser, /\(\?:site \)\?sha256/);
+  assert.match(parser, /const declared = new Set\(files\.map/);
+  assert.match(parser, /const unknown = \[\.\.\.changed\][\s\S]{0,180}!declared\.has\(filename\)/);
+  assert.match(parser, /file modificati dalla PR non dichiarati nel manifest/);
+  assert.match(parser, /const expected = \[\.\.\.changed\][\s\S]{0,180}identical\.has\(filename\)/);
+  assert.match(parser, /declared\.has\(filename\) && !identical\.has\(filename\)/);
+  assert.match(parser, /if \(!identical\.has\(bullet\.path\)\) continue;/);
+  assert.match(parser, /const missing = expected\.filter/);
+  assert.match(parser, /non cit[aà] tutti i file trasportati/);
   assert.match(yml, /--realign="\$RUNNER_TEMP\/transport-realign\.tsv" --json/);
   assert.match(yml, /git push origin HEAD:main/);
   assert.match(yml, /for attempt in 1 2 3/);
@@ -184,10 +193,7 @@ test('il job post-merge usa hash site freschi e committa solo il manifest su mai
 });
 
 test('il parser post-merge accetta sia il body storico sia quello corrente', () => {
-  const yml = read(REALIGN_WORKFLOW);
-  const declared = yml.match(/const re = (\/\^-.*\/gm);/);
-  assert.ok(declared, 'manca il parser delle righe con site hash');
-  const parser = new Function(`return ${declared[1]}`)();
+  const parser = new RegExp(TRANSPORT_BULLET_RE.source, TRANSPORT_BULLET_RE.flags);
   const pathName = 'scripts/ci/check-issue-already-resolved.mjs';
   for (const [suffix, hash] of [
     ['sha256', '3495d7994fa50d84'],
@@ -197,10 +203,13 @@ test('il parser post-merge accetta sia il body storico sia quello corrente', () 
   ]) {
     parser.lastIndex = 0;
     const match = parser.exec(`- \`${pathName}\` ← sito (${suffix} \`${hash}\`)`);
-    assert.equal(match?.[1], pathName, `formato non riconosciuto: ${suffix}`);
-    assert.equal(match?.[2], hash);
+    assert.equal(match?.[2], pathName, `formato non riconosciuto: ${suffix}`);
+    assert.equal(match?.[3], hash);
+    assert.deepEqual(
+      parseTransportBullets(`- \`${pathName}\` ← sito (${suffix} \`${hash}\`)`),
+      [{ path: pathName, siteHash: hash.toLowerCase().slice(0, 16) }],
+    );
   }
-  assert.match(yml, /const siteHash = normalizeSiteHash\(match\[2\]\)/);
 });
 
 test('il body del trasporto descrive lo scope workflow osservato, non uno stato inventato', () => {

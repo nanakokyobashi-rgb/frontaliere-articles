@@ -598,6 +598,17 @@ const TEXT_LITERALS = SCHEMA_PLACEHOLDER_LITERALS.filter((l) => !SLUG_OWNED_LITE
 // repair cannot drift apart.
 const FAQ_LABEL_RX = String.raw`(?:domanda[ \t]+frequente|frequently[ \t]+asked[ \t]+questions?|foire[ \t]+aux[ \t]+questions?|question[ \t]+fr[eé]quemment[ \t]+pos[eé]e|h[aä]ufig[ \t]+gestellte[ \t]+fragen?)`;
 const FAQ_LINE_PREFIX_RX = String.raw`(?:\d+[.)][ \t]*|[*#>\-–—]+[ \t]*)?`;
+// La forma NUMERATA della stessa etichetta, in ogni lingua. Finche' copriva il
+// solo `domanda frequente N`, `translateArticle()` rendeva «Domanda frequente
+// 1:» come «Häufig gestellte Frage 1:» / «Frequently asked question 1:» /
+// «Question fréquemment posée 2 :», `sanitizePromptPlaceholders()` (che gira
+// DOPO la traduzione) non la vedeva e il body tradotto la pubblicava: 9 campi
+// en/de/fr su origin/main al 2026-09-24, visti dal gate del sito (che copre
+// gia' le forme tradotte) e non da quello di questo repo. `domanda frequente`
+// tiene il separatore `\s+` storico; le forme tradotte vogliono il numero
+// sulla STESSA riga, altrimenti «### Frequently Asked Questions\n\n1. …» —
+// una heading editoriale seguita da un elenco — diventerebbe un'etichetta.
+const FAQ_NUMBERED_LABEL_RX = String.raw`(?:domanda\s+frequente\s+|${FAQ_LABEL_RX}[ \t]*)\d+`;
 
 /**
  * ── LE REGOLE ─────────────────────────────────────────────────────────────
@@ -761,7 +772,7 @@ export const PLACEHOLDER_RULES = Object.freeze([
   {
     id: 'faq-numbered-label',
     kind: 'schema-label',
-    rx: /(?:^|[\s*#>\-–—.)\]])\**\s*domanda\s+frequente\s+\d+\**\s*[:.?\-–—]/i,
+    rx: new RegExp(String.raw`(?:^|[\s*#>\-–—.)\]])\**\s*${FAQ_NUMBERED_LABEL_RX}\**\s*[:.?\-–—]`, 'i'),
     why: "L'etichetta numerata dello schema FAQ, usata come intestazione o come domanda. Lo schema si ferma a 3: la regola conta qualunque cifra.",
   },
   {
@@ -864,7 +875,8 @@ export function hasPromptPlaceholder(value) {
 // ─────────────────────────────────────────────────────────────────────────────
 
 /**
- * Toglie l'etichetta `Domanda frequente N:` lasciando il contenuto vero.
+ * Toglie l'etichetta `Domanda frequente N:` (o la sua traduzione,
+ * `FAQ_NUMBERED_LABEL_RX`) lasciando il contenuto vero.
  *
  * Osservata in 7 campi body e in 1 campo faq: il modello ha scritto una FAQ
  * REALE e le ha incollato davanti il numero dello schema. Buttare il campo
@@ -886,7 +898,7 @@ export function stripFaqNumberedLabels(value) {
   // riparata. Il passaggio in due regex mantiene inoltre la lista numerata
   // («1. Domanda frequente 1: …») gia' supportata.
   const patterns = [
-    /((?:^|[\s\n*#>\-–—.)\]])\s*)\**\s*[Dd]omanda\s+frequente\s+\d+\**\s*[:.?\-–—]\s*(?=\S)/g,
+    new RegExp(String.raw`((?:^|[\s\n*#>\-–—.)\]])\s*)\**\s*${FAQ_NUMBERED_LABEL_RX}\**\s*[:.?\-–—]\s*(?=\S)`, 'gi'),
     new RegExp(String.raw`((?:^|\n)[ \t]*${FAQ_LINE_PREFIX_RX})\**[ \t]*${FAQ_LABEL_RX}\**[ \t]*[:.?\-–—][ \t]*(?=\S)`, 'gim'),
   ];
   let out = value;

@@ -314,7 +314,11 @@ test('tests.yml claims before review work and finalizes without gating the requi
   assert.match(sameHeadGuard, /sort_by\(\[\(\.submitted_at \/\/ \.created_at/);
   assert.match(sameHeadGuard, /select\(\.commit_id == \$head\)\]\s*\|\s*sort_by\(/);
   assert.match(sameHeadGuard, /if length == 0 then 0/);
-  assert.match(sameHeadGuard, /select\(\(\.state \/\/ ""\) != "PENDING"\)/);
+  // Stato review: solo i terminali dell'enum condiviso (#1762,
+  // scripts/ci/lib/review-states.mjs). PENDING, DISMISSED e uno stato
+  // sconosciuto non sono verdetti; il legame con il modulo e' in
+  // review-state-normalization.test.mjs.
+  assert.match(sameHeadGuard, /select\(review_state_terminal\)/);
   assert.match(sameHeadGuard, /\.\[-1\] \| \(\(\.state == "COMMENTED" or \.state == "APPROVED"\) and has_clean_lgtm\)/);
   // Le DUE selezioni del percorso incrementale devono escludere `DISMISSED`:
   // una review ritirata non e' un verdetto e non puo' fare da base.
@@ -324,7 +328,7 @@ test('tests.yml claims before review work and finalizes without gating the requi
   // quando un terzo punto — corretto — esclude `DISMISSED` per la sua ragione,
   // e resta verde se una delle due selezioni perde l'esclusione mentre
   // un'altra la guadagna. Si verifica quindi dentro i due blocchi giusti.
-  const dismissedExcluded = /select\(\(\.state \/\/ ""\) != "PENDING" and \(\.state \/\/ ""\) != "DISMISSED"\)/;
+  const dismissedExcluded = /select\(review_state_terminal\)/;
   for (const [label, marker] of [['last', 'last=$('], ['lastRev', 'lastRev=$(']]) {
     const start = workflow.indexOf(marker);
     assert.notEqual(start, -1, `blocco ${label} non trovato in tests.yml`);
@@ -526,11 +530,13 @@ test('tutti i consumer di review usano la revisione del body corrente', () => {
   assert.doesNotMatch(redflag, /has_single_revision|applies_to_current_input/);
 
   const stale = fs.readFileSync(path.join(ROOT, '.github/workflows/stale-pr-rescuer.yml'), 'utf8');
-  const terminalReviewFilter = /select\(\(\.state \/\/ ""\) != "PENDING" and \(\.state \/\/ ""\) != "DISMISSED"\)/g;
+  // UNA selezione per workflow: nel rescuer lo stesso programma
+  // (`REVIEW_SELECTION_JQ`) serve la prima lettura e la rilettura (#1762).
+  const terminalReviewFilter = /select\(review_state_terminal\)/g;
   assert.equal((redflag.match(terminalReviewFilter) ?? []).length, 1);
-  assert.equal((stale.match(terminalReviewFilter) ?? []).length, 2);
+  assert.equal((stale.match(terminalReviewFilter) ?? []).length, 1);
   assert.match(stale, /REVIEW_REVISION=\"body:\$body_sha\"/);
   assert.match(stale, /split\("\\n"\)\[\][\s\S]*REVIEW_INPUT_REVISION/);
-  assert.equal((stale.match(/select\(has_current_revision\(\$revision\)\)/g) ?? []).length, 2);
+  assert.equal((stale.match(/select\(has_current_revision\(\$revision\)\)/g) ?? []).length, 1);
   assert.doesNotMatch(stale, /has_single_revision|applies_to_current_input/);
 });

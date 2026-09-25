@@ -7,7 +7,7 @@ export const REPORT_SCHEMA = 'translate-queue-recovery-watchdog/v1';
 export const TARGET_REPOSITORY = 'nanakokyobashi-rgb/frontaliere-articles';
 export const TARGET_WORKFLOW_ID = 342441975;
 export const TARGET_WORKFLOW_PATH = '.github/workflows/translate-pending.yml';
-export const TARGET_WORKFLOW_BLOB_SHA = 'c20a52f65b77837eaa1f8bf963173bed96f0a7b1';
+export const TARGET_WORKFLOW_BLOB_SHA = 'fe2f61bb76e6bbe57cdb0bc40f543c075da24ea6';
 export const TARGET_BRANCH = 'main';
 export const QUEUE_MAX_BOUNDARY_SHA = '5e5114b73f37a0c47625f00baff13942fe8b186b';
 export const RERUN_PRESERVATION_PROOF = Object.freeze({
@@ -59,6 +59,12 @@ export const MAX_REPORT_BYTES = 16 * 1024;
 //     `translate-queue-recovery.yml`.
 export const QUEUE_UNSERVED_STALE_THRESHOLD_SECONDS = 6 * 60 * 60;
 export const QUEUE_HOLDER_STALE_THRESHOLD_SECONDS = 24 * 60 * 60;
+// L'eta' e' `max(0, now - timestamp)`: un istante di misura nel futuro (clock
+// skew, risposta API incoerente) la azzererebbe e dichiarerebbe `within_slo`
+// anche un detentore fermo da giorni (#1811). Uno skew fino a questa
+// tolleranza resta una misura valida con eta' 0; oltre, il timestamp non e'
+// una misura e il censimento fallisce chiuso con `future_timestamp`.
+export const MAX_CLOCK_SKEW_SECONDS = 5 * 60;
 
 const API_ROOT = 'https://api.github.com';
 const REQUEST_TIMEOUT_MS = 8_000;
@@ -113,10 +119,12 @@ export const REASON_CODES = Object.freeze([
   'cancelled_with_jobs',
   'claim_state_not_evaluated',
   'deep_candidate_limit_exceeded',
+  'future_timestamp',
   'invalid_created_at',
   'invalid_head_sha',
   'invalid_mode',
   'invalid_repository',
+  'invalid_run_started_at',
   'liveness_census_inconclusive',
   'malformed_run',
   'missing_token',
@@ -181,6 +189,10 @@ function validTimestamp(value) {
   return new Date(milliseconds).toISOString() === canonical ? milliseconds : null;
 }
 
+function isFutureMeasurement(state, milliseconds) {
+  return milliseconds > state.nowMs + MAX_CLOCK_SKEW_SECONDS * 1000;
+}
+
 function validRequiredString(value) {
   return typeof value === 'string' && value.length > 0 && value.trim() === value;
 }
@@ -205,6 +217,7 @@ function makeInitialState(nowMs) {
     pendingRunIds: [],
     queueCreatedMs: [],
     pendingCreatedMs: [],
+    pendingWaitStartedMs: [],
     activeCreatedMs: [],
     activeStartedMs: [],
     discovery: {
@@ -372,6 +385,10 @@ async function collectActiveJobStart(client, state, currentRuns) {
   }
   const startedMs = validTimestamp(activeJobs[0].started_at);
   if (startedMs === null) throw new ObservationFailure('liveness_census_inconclusive');
+  if (isFutureMeasurement(state, startedMs)) {
+    failClosed(state, 'future_timestamp', runId);
+    return;
+  }
   state.activeStartedMs.push(startedMs);
 }
 
@@ -484,8 +501,32 @@ function collectShallowFacts(run, state, candidates, { collectQueue = true } = {
         state.activeCreatedMs.push(createdMs);
       }
       if (isPending) {
+        // Un rerun conserva il `created_at` della prima esecuzione, mentre
+        // `run_started_at` riparte dall'attempt corrente (misura #1781:
+        // attempt 2 con `created_at` 18:15:19Z e `run_started_at` 18:19:42Z).
+        // Datare un rerun pending da `created_at` misura l'eta' della PRIMA
+        // coda e produce un falso breach su una coda sana. Senza un avvio
+        // leggibile, e non anteriore alla creazione, l'attesa dell'attempt
+        // corrente non e' misurabile: si fallisce chiusi invece di ricadere in
+        // silenzio su `created_at`.
+        let waitStartedMs = createdMs;
+        if (run.run_attempt > 1) {
+          const runStartedMs = validTimestamp(run.run_started_at);
+          if (runStartedMs === null || runStartedMs < createdMs) {
+            failClosed(state, 'invalid_run_started_at', runId);
+            return;
+          }
+          waitStartedMs = runStartedMs;
+        }
+        // `run_started_at >= created_at`, quindi basta controllare l'istante
+        // da cui parte l'attesa: copre sia il primo attempt sia il rerun.
+        if (isFutureMeasurement(state, waitStartedMs)) {
+          failClosed(state, 'future_timestamp', runId);
+          return;
+        }
         state.pendingRunIds.push(runId);
         state.pendingCreatedMs.push(createdMs);
+        state.pendingWaitStartedMs.push(waitStartedMs);
       }
       state.queueCreatedMs.push(createdMs);
     }
@@ -571,9 +612,14 @@ function buildReport(state, client) {
   const oldestPendingMs = state.pendingCreatedMs.length > 0
     ? Math.min(...state.pendingCreatedMs)
     : null;
-  const oldestPendingAgeSeconds = oldestPendingMs === null
+  // L'eta' del pending segue l'attesa dell'attempt corrente (`created_at` per
+  // il primo attempt, `run_started_at` per un rerun), non la creazione.
+  const oldestPendingWaitMs = state.pendingWaitStartedMs.length > 0
+    ? Math.min(...state.pendingWaitStartedMs)
+    : null;
+  const oldestPendingAgeSeconds = oldestPendingWaitMs === null
     ? null
-    : Math.max(0, Math.floor((state.nowMs - oldestPendingMs) / 1000));
+    : Math.max(0, Math.floor((state.nowMs - oldestPendingWaitMs) / 1000));
   const oldestActiveCreatedMs = state.activeCreatedMs.length > 0
     ? Math.min(...state.activeCreatedMs)
     : null;
@@ -671,6 +717,9 @@ function buildReport(state, client) {
         : new Date(oldestActiveMs).toISOString(),
       oldestPendingAgeSeconds,
       oldestPendingCreatedAt: oldestPendingMs === null ? null : new Date(oldestPendingMs).toISOString(),
+      oldestPendingWaitStartedAt: oldestPendingWaitMs === null
+        ? null
+        : new Date(oldestPendingWaitMs).toISOString(),
       slo: queueSlo,
       staleThreshold: thresholdSeconds,
     },

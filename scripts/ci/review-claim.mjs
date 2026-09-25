@@ -17,6 +17,7 @@ import fs from 'node:fs';
 import { pathToFileURL } from 'node:url';
 import { normalizeReviewInputRevision, reviewHasInputRevision } from './review-test-policy.mjs';
 import { isManagedReview } from './lib/constants.mjs';
+import { isKnownReviewState } from './lib/review-states.mjs';
 
 export const REVIEW_CLAIM_MARKER = '<!-- PR_REVIEW_CLAIM:';
 export const REVIEW_CLAIM_STATES = Object.freeze([
@@ -279,7 +280,15 @@ export function reviewWasPosted(repo, prNumber, headSha, reviewRevision = '', gh
   if (!Array.isArray(pages) || !pages.every((page) => Array.isArray(page))) {
     throw new Error('review PR: risposta non e\' un array di pagine');
   }
-  return pages.flat().some((review) => review
+  const reviews = pages.flat();
+  // Uno stato fuori dall'enum noto (#1762) non e' «una review postata»:
+  // l'errore arriva al chiamante, che resta fail-closed e lo scrive nel log.
+  const unknown = reviews.find((review) => review && typeof review === 'object'
+    && !isKnownReviewState(review.state));
+  if (unknown) {
+    throw new Error(`review PR: stato review sconosciuto ${JSON.stringify(unknown.state ?? null)}`);
+  }
+  return reviews.some((review) => review
     && typeof review === 'object'
     && review.state !== 'PENDING'
     && review.commit_id === headSha
