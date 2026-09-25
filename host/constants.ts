@@ -149,12 +149,33 @@ export const FC_PUBLISHER_ID = ADSENSE_CLIENT_ID.replace(/^ca-/, '');
  // pub-8628054934855353
 
 /**
+ * localStorage key of the site's advertising-consent gate (site source:
+ * services/adsConsent.ts ADS_CONSENT_STORAGE_KEY). Written by the site's
+ * Funding Choices consent bridge; read here only by the job-board gate below.
+ */
+const ADS_CONSENT_STORAGE_KEY = 'frontaliere_ads_consent';
+
+/**
+ * Click-only Offerwall gate for the Italian job board (site source:
+ * build-plugins/constants.ts, where the live probes behind it are recorded).
+ * On /cerca-lavoro-ticino pages the Funding Choices call that carries
+ * OFFERWALL (it also carries the GDPR consent message) is HELD only when a
+ * consent decision is stored on both sides — the site's key AND a TC string
+ * in Funding Choices' `FCCDCF` cookie — and `window.__ftOfferwallGate.release()`
+ * proceeds it when the visitor clicks "Candidati". Otherwise only the
+ * Offerwall is suppressed, so the CMP shows at once. The first, enum-less
+ * call and every other page proceed at once: on article pages this gate is a
+ * pass-through.
+ */
+export const FC_JOBBOARD_OFFERWALL_GATE_JS = `(function(){var g=window.googlefc=window.googlefc||{};if(g.controlledMessagingFunction)return;g.controlledMessagingFunction=function(message){var E=g.MessageTypeEnum||{};var p=window.location&&window.location.pathname||'';if(E.OFFERWALL===undefined||!/^\\/cerca-lavoro-ticino(?:\\/|$)/.test(p)){message.proceed(true);return;}var d=false;try{d=!!window.localStorage.getItem('${ADS_CONSENT_STORAGE_KEY}');}catch(e){}if(d){var c=(window.document&&window.document.cookie||'').match(/(?:^|;\\s*)FCCDCF=([^;]*)/),v='';try{v=c?decodeURIComponent(c[1]):'';}catch(e){}d=/\\x22C[A-Za-z0-9_-]{20,}/.test(v);}if(!d){window.__ftOfferwallGate=window.__ftOfferwallGate||{state:'suppressed',held:[]};message.proceed(false,[E.OFFERWALL]);return;}var w=window.__ftOfferwallGate=window.__ftOfferwallGate||{state:'idle',held:[]};if(w.state==='released'){message.proceed(true);return;}w.held.push(message);w.state='held';w.release=function(){if(w.state!=='held')return false;w.state='released';var h=w.held.splice(0);for(var i=0;i<h.length;i++){try{h[i].proceed(true);}catch(e){}}return true;};};})();`;
+
+/**
  * Funding Choices MESSAGING loader, injected PARSE-TIME into the <head> of
  * in-scope STATIC pages. The site's custom newsletter choice is deliberately
- * disabled globally; on the Italian Ticino job board the native Offerwall is
- * filtered so the direct GPT Rewarded Web flow owns the application handoff,
- * while article and other non-job-board pages keep their configured native
- * Offerwall.
+ * disabled globally; on the Italian Ticino job board
+ * FC_JOBBOARD_OFFERWALL_GATE_JS holds the native Offerwall until the visitor
+ * clicks "Candidati", while article and other non-job-board pages keep their
+ * configured native Offerwall.
  *
  * WHY THIS EXISTS (2026-06-16): static SSG HTML (article pages and the Italian
  * job-board pages) does not carry index.html's inline Funding Choices block.
@@ -182,7 +203,7 @@ export const FC_PUBLISHER_ID = ADSENSE_CLIENT_ID.replace(/^ca-/, '');
  * deliberately NOT included here — it is a separate feature, out of scope for
  * the Offerwall render fix.
  */
-export const OFFERWALL_FC_SNIPPET = `<script>(function(){var g=window.googlefc=window.googlefc||{};if(!g.controlledMessagingFunction){g.controlledMessagingFunction=function(message){var E=g.MessageTypeEnum||{};var p=window.location&&window.location.pathname||'';var isItalianJobBoard=/^\\/cerca-lavoro-ticino(?:\\/|$)/.test(p);if(!isItalianJobBoard||E.OFFERWALL===undefined){message.proceed(true);return;}message.proceed(false,[E.OFFERWALL]);};}function loadFc(){if(!document.querySelector('script[data-fc-loader]')){var s=document.createElement('script');s.async=true;s.src='https://fundingchoicesmessages.google.com/i/${FC_PUBLISHER_ID}?ers=1';s.setAttribute('data-fc-loader','1');document.head.appendChild(s);}(function sig(){if(!window.frames['googlefcPresent']){if(document.body){var f=document.createElement('iframe');f.style='width:0;height:0;border:none;z-index:-1000;left:-1000px;top:-1000px;';f.style.display='none';f.name='googlefcPresent';document.body.appendChild(f);}else{setTimeout(sig,0);}}})();}function ricFb(cb){if(document.readyState==='complete'){setTimeout(cb,200);}else{window.addEventListener('load',function(){setTimeout(cb,200);},{once:true});}}function schedule(){(window.requestIdleCallback||ricFb)(loadFc,{timeout:4000});}if(document.readyState==='loading'){window.addEventListener('DOMContentLoaded',schedule,{once:true});}else{schedule();}})();</script>`;
+export const OFFERWALL_FC_SNIPPET = `<script>${FC_JOBBOARD_OFFERWALL_GATE_JS}(function(){function loadFc(){if(!document.querySelector('script[data-fc-loader]')){var s=document.createElement('script');s.async=true;s.src='https://fundingchoicesmessages.google.com/i/${FC_PUBLISHER_ID}?ers=1';s.setAttribute('data-fc-loader','1');document.head.appendChild(s);}(function sig(){if(!window.frames['googlefcPresent']){if(document.body){var f=document.createElement('iframe');f.style='width:0;height:0;border:none;z-index:-1000;left:-1000px;top:-1000px;';f.style.display='none';f.name='googlefcPresent';document.body.appendChild(f);}else{setTimeout(sig,0);}}})();}function ricFb(cb){if(document.readyState==='complete'){setTimeout(cb,200);}else{window.addEventListener('load',function(){setTimeout(cb,200);},{once:true});}}function schedule(){(window.requestIdleCallback||ricFb)(loadFc,{timeout:4000});}if(document.readyState==='loading'){window.addEventListener('DOMContentLoaded',schedule,{once:true});}else{schedule();}})();</script>`;
 
 export const ADSENSE_SNIPPET = `<meta name="google-adsense-account" content="${ADSENSE_CLIENT_ID}">
  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
