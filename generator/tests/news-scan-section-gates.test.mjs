@@ -210,6 +210,25 @@ test('the frontaliere lexicon is untouched — the national list extends it, nev
   assert.equal(FRONT.hasTopicalSignal('Ristorni ai frontalieri, nuovo accordo fiscale'), true);
 });
 
+// Owner decision 2026-09-25: road closures on the commute, job cuts at
+// employers in Ticino and the cantonal budget are frontaliere news even when
+// the headline does not say "frontalieri". Run 36096755072 lost all eight of
+// its news headlines to exactly these topics. The ones below carry none of
+// the older work/fiscal/commute stems, so they fell under the lexicon before.
+test('frontaliere: commute disruptions, Ticino job cuts and the cantonal budget pass the topical gate', () => {
+  for (const headline of [
+    'Cavalcavia Boesio, deviazioni a Laveno Mombello fino a fine mese',
+    'Neggia-Fosano, chiusura notturna della cantonale',
+    'Castronno, cantiere sulla SS 341 per due settimane',
+    'FFS Cargo riorganizza: 80 dipendenti a Bellinzona in attesa',
+    'Preventivo 2027: il Cantone chiude con un deficit di 120 milioni',
+  ]) {
+    assert.equal(FRONT.hasTopicalSignal(`${headline} https://www.rsi.ch/s/1`), true, `frontaliere: "${headline}" deve passare`);
+  }
+  // Cronaca pura resta fuori: niente stem generico `strad`.
+  assert.equal(FRONT.hasTopicalSignal('Incidente stradale a Lugano, nessun ferito grave'), false);
+});
+
 // ── 2. Substring traps ────────────────────────────────────────────────────
 //
 // The lexicons are matched with `String.includes`, so a stem like `oro` would

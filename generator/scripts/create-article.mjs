@@ -195,6 +195,7 @@ import {
 // `create-article.mjs`). Il modulo nuovo e' assente dal manifest, quindi non ha
 // vincolo di mirror, ed e' condiviso dai due scrittori di body del corpus.
 import { sanitizeBodyText } from './lib/sanitize-body-braces.mjs';
+import { extractFactCheckJson, factCheckRawSnippet } from './lib/fact-check-response.mjs';
 import { decodeHtmlEntities } from './lib/decode-html-entities.mjs';
 import {
   PERFORMANCE_PATH as ARTICLE_PERF_PATH,
@@ -484,6 +485,14 @@ const TOPICAL_KEYWORDS = [
   'banc', 'bors', 'investiment', 'finanz',
   // Transport / commute
   'treno', 'ferrovi', 'tilo', 'autostrada', 'mobilit', 'traffic',
+  // Commute disruptions and cantonal finances (2026-09-25, owner decision):
+  // road closures on the commute, Ticino job cuts and the cantonal budget
+  // were being dropped as off-topic. The anchor gate still requires a Ticino
+  // or border-town token, and the classifier still rejects single episodes.
+  // No bare `strad`: it would admit every "incidente stradale", which is
+  // cronaca, not a disruption of the commute.
+  'viabilit', 'cantier', 'deviazion', 'chiusur', 'ffs',
+  'preventivo', 'deficit',
   // Housing
   'alloggio', 'affitto', 'immobil',
   // Policy / politics affecting frontalieri
@@ -538,7 +547,7 @@ const TOPICAL_KEYWORDS = [
 // (matches "confusione"), no `oro` (matches "lavoro"), no `import` (matches
 // "importante"), no `volo` (matches "volontario"), no `legge` (matches
 // "leggere" — `legisla` instead), no `cure` (matches "sicure").
-const SVIZZERA_TOPICAL_KEYWORDS = [
+const SVIZZERA_TOPICAL_KEYWORDS = [...new Set([
   ...TOPICAL_KEYWORDS,
   // Macro / national accounts / foreign trade
   'congiuntur', 'crescita', 'recession', 'prodotto interno lordo',
@@ -580,7 +589,9 @@ const SVIZZERA_TOPICAL_KEYWORDS = [
   'ffs', 'aeroport', 'aviazion', 'gottardo',
   // Agriculture / food supply
   'agricol', 'contadin', 'allevament', 'derrate',
-];
+// Deduplicated: 'ffs' and 'preventivo' are in both lists, and a duplicate
+// stem would count twice in countTopicalHits.
+])];
 
 /**
  * The topical lexicon for the section this process is generating for.
@@ -804,7 +815,7 @@ async function _classifyFrontaliereRelevanceUncached(headline, summary, sourceUr
   const prompt = IS_FRONTALIERE
     ? `Sei un editor del sito frontaliereticino.ch, focalizzato ESCLUSIVAMENTE sui FRONTALIERI ITALO-SVIZZERI che lavorano in Ticino.
 
-È RILEVANTE: lavoro/occupazione frontalieri TI, fiscalità (imposta alla fonte, ristorni, AVS/LPP), permessi B/G/C, salute (LAMal/cassa malati), trasporti pendolari, accordi Italia-Svizzera, riforme normative, mercato del lavoro ticinese, cambio CHF-EUR. ATTENZIONE: una notizia o statistica sui frontalieri ITALIANI aggregata a livello nazionale/svizzero (non limitata esplicitamente a un'altra regione) è RILEVANTE anche se non nomina il Ticino — il Ticino è il canton con la maggioranza dei frontalieri italiani, quindi un dato aggregato Italia-Svizzera lo riguarda per costruzione.
+È RILEVANTE: lavoro/occupazione frontalieri TI, fiscalità (imposta alla fonte, ristorni, AVS/LPP), permessi B/G/C, salute (LAMal/cassa malati), trasporti pendolari, accordi Italia-Svizzera, riforme normative, mercato del lavoro ticinese, cambio CHF-EUR. È RILEVANTE anche se non nomina i frontalieri: viabilità del tragitto casa-lavoro (chiusure, cantieri, deviazioni su strade ticinesi, A2/A9, strade delle province di Varese, Como e VCO, treni TILO/FFS), posti di lavoro in aziende o enti in Ticino (licenziamenti, riorganizzazioni, appalti, assunzioni), finanze e politica del Canton Ticino (preventivo, imposte, servizi). ATTENZIONE: una notizia o statistica sui frontalieri ITALIANI aggregata a livello nazionale/svizzero (non limitata esplicitamente a un'altra regione) è RILEVANTE anche se non nomina il Ticino — il Ticino è il canton con la maggioranza dei frontalieri italiani, quindi un dato aggregato Italia-Svizzera lo riguarda per costruzione.
 
 NON è rilevante:
 - Cronaca dove "frontaliere/transfrontaliero" appare solo come aggettivo (cittadino frontaliere, area frontaliera, comune di confine) senza tema lavorativo/fiscale/permessi
@@ -5700,7 +5711,7 @@ VERIFICA SISTEMATICA — controlla OGNI categoria:
    - Ministri o funzionari con nomi plausibili ma non verificabili
    - Accordi/protocolli bilaterali mai firmati (controllare attentamente)
 
-${IS_FRONTALIERE ? `11. **RILEVANZA TOPICA AL FRONTALIERE TICINO-ITALIA (CRITICO)**: L'articolo deve avere un nesso REALE, SPECIFICO e VERIFICABILE con la vita del frontaliere Ticino-Italia. Sono nessi reali: norme/sentenze su Permesso G o B, fiscalità CH-IT (imposta alla fonte, nuovo accordo, ristorni, doppia imposizione), AVS/LPP/LAMal/CMI, busta paga svizzera, dogane/valichi (Chiasso, Brogeda, Gaggiolo, Ponte Tresa), pendolarismo CH-IT, mercato del lavoro ticinese, telelavoro frontaliere, salari ticinesi, accordi bilaterali CH-IT/UE, autostrade A2/A9 svizzere, banche e cambio CHF-EUR per frontalieri.
+${IS_FRONTALIERE ? `11. **RILEVANZA TOPICA AL FRONTALIERE TICINO-ITALIA (CRITICO)**: L'articolo deve avere un nesso REALE, SPECIFICO e VERIFICABILE con la vita del frontaliere Ticino-Italia. Sono nessi reali: norme/sentenze su Permesso G o B, fiscalità CH-IT (imposta alla fonte, nuovo accordo, ristorni, doppia imposizione), AVS/LPP/LAMal/CMI, busta paga svizzera, dogane/valichi (Chiasso, Brogeda, Gaggiolo, Ponte Tresa), pendolarismo CH-IT e viabilità del tragitto casa-lavoro (chiusure, cantieri, deviazioni su A2/A9, strade ticinesi e delle province di Varese, Como e VCO, treni TILO/FFS), mercato del lavoro ticinese anche quando la fonte non nomina i frontalieri (licenziamenti, riorganizzazioni, appalti, salari, dumping), politica e finanze del Canton Ticino (preventivo, imposte cantonali, servizi), telelavoro frontaliere, accordi bilaterali CH-IT/UE, banche e cambio CHF-EUR per frontalieri.
 
    ${isEvergreen ? '' : 'NON sono nessi reali (segnala "critical" come "rilevanza_topica"): cronaca nera italiana o estera senza nesso lavoro CH (es. arresti per omicidio comune, eventi USA, criminalità urbana italiana), eventi sportivi, gossip, cultura locale non-frontaliera, infrastruttura italiana lontana dal confine (es. eventi a Roma/Napoli/Palermo), eventi a Malpensa SENZA impatto sui voli o trasporti frontalieri.'}
 
@@ -5753,11 +5764,24 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
   // the frontaliere section stall (#2675/#2672). Interleaving Gemini (Gemini API
   // free) into the pair makes a GitHub Models outage survivable on the first pass
   // and also strengthens consensus (two model families, not two OpenAI siblings).
-  const verificationModels = [
-    AI_MODELS.GPT_4_1,        // GitHub Models (OpenAI flagship)
-    AI_MODELS.GEMINI_FLASH,   // Gemini API free — distinct provider → pair survives a GH Models outage
-    AI_MODELS.GPT4O,          // GitHub Models — fallback when the primary pair yields nothing
+  // The pair used to be gpt-4.1 + gemini-2.5-flash, with gpt-4o as the third.
+  // GitHub Models was retired on 2026-07-30 and the Gemini free quota is spent
+  // most days, so both "verifiers" fell through the same cascade to the same
+  // nemotron-3-super: two votes from one model, and when that model answered
+  // in prose the article was discarded as unverified (run 36096755072). The
+  // NVIDIA ids below are the ones with the best record in the runs of
+  // 2026-09-24/25. Gemini keeps the second slot, so the pair spans two
+  // providers whenever it has quota; when it is exhausted the availability
+  // filter drops it and the pair becomes two NVIDIA models of different
+  // families (Gemma, Nemotron) — still two opinions, not one model twice.
+  const verificationCandidates = [
+    AI_MODELS.NV_GEMMA_4_31B,     // NVIDIA NIM — Google Gemma 4 31B
+    AI_MODELS.GEMINI_FLASH,       // Gemini API free — second provider, when its daily quota allows
+    AI_MODELS.NV_NEMOTRON_ULTRA,  // NVIDIA NIM — Nemotron 3 Ultra (different family from Gemma)
+    AI_MODELS.NV_NEMOTRON_SUPER,  // NVIDIA NIM — last resort
   ].filter(Boolean);
+  const availableVerifiers = verificationCandidates.filter((m) => isModelAvailable(m));
+  const verificationModels = availableVerifiers.length >= 2 ? availableVerifiers : verificationCandidates;
 
   const modelResults = [];
 
@@ -6051,7 +6075,11 @@ async function _runSingleFactCheck(model, prompt, opts = {}) {
     // cascata dei modelli remoti oltre il budget wall-clock del run, e nessun
     // guard a monte lo ferma: e' il percorso che paga 2 chiamate per bozza e,
     // sulla run 32086523370, ne ha spese 91.
-    buildFactCheckCallOptions({ model, temperature: 0.0, maxTokens: 4000, timeout: 60_000, bypassForceChain: true, deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS, modelUsedRef })
+    // jsonMode (2026-09-25): the prompt already ends with «Rispondi SOLO in
+    // JSON valido», but without response_format the NVIDIA verifiers answered
+    // in prose — eight "risposta non JSON" in a row on run 36096755072. The
+    // generation calls on the same cascade already send it and get JSON back.
+    buildFactCheckCallOptions({ model, temperature: 0.0, maxTokens: 4000, timeout: 60_000, bypassForceChain: true, deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS, modelUsedRef, jsonMode: true })
   );
   // Guard: if the full remote cascade is exhausted, callLLM falls through to
   // local/fallback — the same model that may have generated the content.
@@ -6071,17 +6099,16 @@ async function _runSingleFactCheck(model, prompt, opts = {}) {
     throw new Error(`fact-check deferred: all remote verifiers exhausted — local/fallback cannot self-verify (requested: ${model})`);
   }
 
-  const jsonMatch = raw.match(/\{[\s\S]*\}/);
-  if (!jsonMatch) {
-    console.error(`  ⚠️  LLM fact-check (${model}): risposta non JSON`);
-    return null;
-  }
-
-  let result;
-  try {
-    result = JSON.parse(jsonMatch[0]);
-  } catch {
-    console.error(`  ⚠️  LLM fact-check (${model}): JSON non valido`);
+  // Balanced-object extraction instead of first-`{`-to-last-`}`: prose
+  // around the verdict, or a stray brace in it, no longer turns a valid
+  // answer into "JSON non valido". When there is still no verdict, the log
+  // shows what came back and which model actually answered, so the next
+  // failure is diagnosable instead of a bare "risposta non JSON".
+  const { result, error } = extractFactCheckJson(raw);
+  if (!result) {
+    const servedBy = modelUsedRef.model && modelUsedRef.model !== model ? ` via ${modelUsedRef.model}` : '';
+    const label = error === 'no-json' ? 'risposta non JSON' : 'JSON non valido';
+    console.error(`  ⚠️  LLM fact-check (${model}${servedBy}): ${label} — ${factCheckRawSnippet(raw)}`);
     return null;
   }
 
@@ -8451,24 +8478,24 @@ AVS/AHV, LPP/BVG, LAMal/KVG, imposta federale diretta, IVA, SECO, UST/BFS, BNS/S
   const topicalRelevanceGate = IS_FRONTALIERE
     ? `═══ REGOLA #0 — GATE DI RILEVANZA TOPICA (BLOCCANTE — PRIMA DI TUTTO) ═══
 
-Prima di scrivere qualunque cosa, valuta se la fonte ha un nesso REALE e VERIFICABILE con la vita del frontaliere Ticino-Italia. Esempi di nesso reale:
-- Norme/sentenze su Permesso G o B, fiscalità CH-IT (imposta alla fonte, nuovo accordo, ristorni, doppia imposizione, dichiarazione frontalieri)
-- AVS/LPP/LAMal/CMI, busta paga svizzera, secondo/terzo pilastro
-- Dogane e valichi (Chiasso, Brogeda, Gaggiolo, Ponte Tresa), pendolarismo CH-IT, autostrade A2/A9, traffico transfrontaliero, scioperi/eventi che bloccano i flussi pendolari
-- Mercato del lavoro ticinese, salari/sciopero in aziende che assumono frontalieri, telelavoro frontaliere
-- Accordi bilaterali CH-IT/UE, banche e cambio CHF-EUR, costo della vita Ticino vs Italia di confine
+Prima di scrivere, valuta se la fonte ha un nesso REALE e VERIFICABILE con chi vive al confine e lavora in Ticino, anche se non nomina i frontalieri. Esempi di nesso reale:
+- Permesso G/B, fiscalità CH-IT (imposta alla fonte, nuovo accordo, ristorni, doppia imposizione), AVS/LPP/LAMal/CMI, busta paga
+- Tragitto casa-lavoro: valichi, A2/A9, strade ticinesi e delle province di Varese, Como e VCO, TILO/FFS (chiusure, cantieri, deviazioni, scioperi)
+- Lavoro in Ticino: licenziamenti, riorganizzazioni, appalti, assunzioni (es. FFS Cargo), salari, dumping, telelavoro
+- Canton Ticino: preventivo, deficit, imposte, servizi pubblici
+- Accordi CH-IT/UE, cambio CHF-EUR, costo della vita al confine
+- Statistiche sui frontalieri italiani in Svizzera, salvo se limitate a un altro cantone
 
-ATTENZIONE: statistiche frontalieri ITALIANI aggregate a livello nazionale/svizzero sono nesso reale anche senza citare il Ticino (ne e' il canton maggioritario) — salvo che siano limitate esplicitamente a un altro cantone (Grigioni, Vallese).
+NON sono nesso reale: cronaca nera, sport, cultura, eventi esteri senza impatto su tragitto o lavoro, Italia lontana dal confine, Malpensa senza impatto su voli/transito.
 
-Esempi che NON sono nesso reale: cronaca nera senza nesso lavoro CH (omicidi comuni, sparizioni, processi non-frontalieri), eventi USA/UE/ROW senza impatto pendolare, sport, cultura/intrattenimento non-frontaliero, infrastruttura italiana lontana dal confine (Roma/Napoli/Palermo), eventi a Malpensa SENZA impatto sui voli/transito frontaliero.
+Se il nesso è il tragitto o il lavoro, di' chi è toccato con i soli fatti della fonte: NON inventare quanti frontalieri impiega un'azienda, percorsi alternativi, orari o importi.
 
-REGOLA OPERATIVA — se il nesso NON c'è in modo concreto e specifico, devi RIFIUTARTI di generare l'articolo e restituire SOLTANTO questo JSON:
+Se il nesso NON c'è, RIFIUTATI e restituisci SOLTANTO:
 {
   "abort_topical_relevance": true,
-  "reason": "<1-2 frasi che spiegano perché la fonte non ha un nesso reale con il frontaliere Ticino-Italia>"
+  "reason": "<1-2 frasi: perché la fonte non ha un nesso reale con il frontaliere Ticino-Italia>"
 }
-
-NON inventare un angolo "implicazioni per i frontalieri" su un evento non-frontaliero per riempire spazio. NON aggiungere paragrafi di consigli generici (consulta un avvocato, verifica l'assicurazione, conosci i tuoi diritti) come surrogato di un nesso reale. Meglio rifiutare e far passare il prossimo articolo.`
+NON inventare un angolo "implicazioni per i frontalieri" né consigli generici (consulta un avvocato, verifica l'assicurazione) al posto del nesso.`
     : `═══ REGOLA #0 — GATE DI RILEVANZA TOPICA (BLOCCANTE — PRIMA DI TUTTO) ═══
 
 Prima di scrivere qualunque cosa, valuta se la fonte ha un nesso REALE e VERIFICABILE con la vita di chi vive o lavora in Svizzera a livello NAZIONALE. Esempi di nesso reale:
