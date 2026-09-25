@@ -3601,9 +3601,9 @@
       "sitePath": ".github/corpus-workflows/translate-pending.yml",
       "mode": "identical",
       "baseline": {
-        "site": "bc7345b6dad7db4d",
-        "corpus": "bc7345b6dad7db4d",
-        "alignedAt": "2026-09-24"
+        "site": "2265705c901ea567",
+        "corpus": "2265705c901ea567",
+        "alignedAt": "2026-09-25"
       }
     },
     {
@@ -3612,8 +3612,8 @@
       "mode": "identical",
       "reason": "Riallineato il 2026-09-24 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono ora byte-identici fra sito e corpus, con il roster corrente di 621 crawler.",
       "baseline": {
-        "site": "da4e8e66520fd652",
-        "corpus": "da4e8e66520fd652",
+        "site": "f52897f58e781ec8",
+        "corpus": "f52897f58e781ec8",
         "alignedAt": "2026-09-25"
       }
     },
