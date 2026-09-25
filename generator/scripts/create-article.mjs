@@ -8788,12 +8788,6 @@ Se le implicazioni sono DEBOLI o GENERICHE (la fonte non ha un impatto pratico d
 - 1 in body1 o body2 (contestuale al fatto)
 - 1 in body2 o body3 (contestuale all'analisi)
 - 1 nella CTA finale di body3 (calculator preferito)`;
-  const body2SchemaText = localNewsSource
-    ? 'Contesto: sviluppi, reazioni e dati della fonte'
-    : 'Analisi pratica: implicazioni, confronti, scenari';
-  const body3SchemaText = localNewsSource
-    ? 'Seguito: cosa succede ora secondo la fonte'
-    : 'Azione: procedura step-by-step, scadenze, strumenti + CTA finale';
 
   // Una sola volta. La specifica di `imagePrompt` era dichiarata due volte —
   // qui dentro lo schema JSON e di nuovo in REGOLE FINALI
@@ -9023,8 +9017,9 @@ Genera JSON (no markdown, no code fences):
       "title": "Titolo giornalistico con keyword (OBBLIGATORIO ≤ 60 caratteri totali, target 50-55. Il suffisso ' | Frontaliere Ticino' viene aggiunto automaticamente — NON includerlo nel title)",
       "excerpt": "Sottotitolo con dati concreti DALLA FONTE (max 160 chars)",`}${_isMeta ? '' : `
       "body1": "Inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (0-8 coppie termine→valore, tutte presenti nella fonte; ometti assenti e placeholder). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. 300-400 parole (escluse TL;DR/Fatti chiave). Min 1 ### sotto-sezione.",
-      "body2": "${body2SchemaText}. Contenuto DIVERSO da body1. 300-400 parole. Min 1 ### sotto-sezione.",
-      "body3": "${body3SchemaText}. NON riassumere body1/body2. 300-400 parole."${_isBody ? '' : ','}`}${_isBody ? '' : `
+${localNewsSource ? `      "body2": "Contesto: sviluppi, reazioni e dati della fonte. Contenuto DIVERSO da body1. 300-400 parole. Min 1 ### sotto-sezione.",
+      "body3": "Seguito: cosa succede ora secondo la fonte. NON riassumere body1/body2. 300-400 parole."` : `      "body2": "Analisi pratica: implicazioni, confronti, scenari. Contenuto DIVERSO da body1. 300-400 parole. Min 1 ### sotto-sezione.",
+      "body3": "Azione: procedura step-by-step, scadenze, strumenti + CTA finale. NON riassumere body1/body2. 300-400 parole."`}${_isBody ? '' : ','}`}${_isBody ? '' : `
       "faq": [
         {"q": "Domanda frequente 1 basata sui fatti dell'articolo?", "a": "Risposta con dati DALLA FONTE. 50-100 parole."},
         {"q": "Domanda frequente 2?", "a": "Risposta pratica basata sulla fonte."},

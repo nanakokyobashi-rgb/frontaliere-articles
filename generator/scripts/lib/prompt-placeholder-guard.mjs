@@ -138,6 +138,10 @@ export const SCHEMA_PLACEHOLDER_LITERALS = Object.freeze([
   "Inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (0-8 coppie termine→valore, tutte presenti nella fonte; ometti assenti e placeholder). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. 300-400 parole (escluse TL;DR/Fatti chiave). Min 1 ### sotto-sezione.",
   'Analisi pratica: implicazioni, confronti, scenari. Contenuto DIVERSO da body1. 300-400 parole. Min 1 ### sotto-sezione.',
   'Azione: procedura step-by-step, scadenze, strumenti + CTA finale. NON riassumere body1/body2. 300-400 parole.',
+  // Ramo della cronaca locale senza angolo frontalieri (PR #1871): stesso
+  // schema, body2/body3 senza analisi pratica, procedure né CTA.
+  'Contesto: sviluppi, reazioni e dati della fonte. Contenuto DIVERSO da body1. 300-400 parole. Min 1 ### sotto-sezione.',
+  'Seguito: cosa succede ora secondo la fonte. NON riassumere body1/body2. 300-400 parole.',
   "Domanda frequente 1 basata sui fatti dell'articolo?",
   'Risposta con dati DALLA FONTE. 50-100 parole.',
   'Domanda frequente 2?',
