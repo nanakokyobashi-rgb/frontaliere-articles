@@ -1,6 +1,5 @@
 {
   "keywords": [
-    "assegni familiari canton Vallese importi e domanda",
     "avs e prestazioni complementari canton Soletta cassa di compensazione",
     "aprire un'attività canton Soletta registro di commercio e costi",
     "patente di guida canton Soletta conversione ed esami",
@@ -499,7 +498,8 @@
     "vivere a Comerio e lavorare in Ticino da frontaliere",
     "vivere a Proserpio e lavorare in Ticino da frontaliere",
     "vivere a Gornate Olona e lavorare in Ticino da frontaliere",
-    "vivere a Erba e lavorare in Ticino da frontaliere"
+    "vivere a Erba e lavorare in Ticino da frontaliere",
+    "vivere a Plesio e lavorare in Ticino da frontaliere"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -776,6 +776,6 @@
     "frontaliere agente di sicurezza ticino stipendio requisiti": 1,
     "vivere a Gemonio e lavorare in Ticino da frontaliere": 1,
     "vivere a Proserpio e lavorare in Ticino da frontaliere": 1,
-    "vivere a Merone e lavorare in Ticino da frontaliere": 1
+    "vivere a Merone e lavorare in Ticino da frontaliere": 2
   }
 }
