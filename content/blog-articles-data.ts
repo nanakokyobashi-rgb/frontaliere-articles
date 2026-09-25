@@ -23818,6 +23818,7 @@ const RAW_ARTICLES = [
  id: 'ritenuta-lpp-intermediario-residente',
  category: 'fiscale',
  date: '2026-05-30T03:59:46.315Z',
+ updatedAt: '2026-09-25',
  image: '/images/blog/ritenuta-lpp-intermediario-residente.webp',
  hasCalculator: true,
  authorSlug: 'laura-bianchi',
