@@ -4347,20 +4347,20 @@
     {
       "path": "generator/scripts/lib/dup-entities.mjs",
       "mode": "corpus-only",
-      "reason": "Il segnale «Entità» di checkForDuplicates (create-article.mjs): numeri di titolo + excerpt e comuni del titolo (indice comuni di topic-coverage-guard.mjs), meno i numeri che il corpus pubblicato ripete (frequenza documentale >= 0,5% del corpus, minimo 20). Nato dal falso duplicato «vivere a Erba» della run 36096755072, respinto per un «2026» in comune con un altro comune. Corpus-only perche' il controllo duplicati del generatore gira solo qui: il gemello adapted del sito (scripts/create-article.mjs) non esegue piu' la generazione; il test del sito article-duplicate-detection.test.ts replica ancora l'algoritmo vecchio.",
+      "reason": "Il segnale «Entità» di checkForDuplicates (create-article.mjs): numeri di titolo + excerpt e comuni del titolo (indice comuni di topic-coverage-guard.mjs), meno i numeri che il corpus pubblicato ripete (frequenza documentale >= 0,5% del corpus, minimo 20); i comuni non sono mai boilerplate. Nato dal falso duplicato «vivere a Erba» della run 36096755072, respinto per un «2026» in comune con un altro comune. Corpus-only perche' il controllo duplicati del generatore gira solo qui: il gemello adapted del sito (scripts/create-article.mjs) non esegue piu' la generazione; il test del sito article-duplicate-detection.test.ts replica ancora l'algoritmo vecchio.",
       "baseline": {
         "site": null,
-        "corpus": "dcc396a9cbbcdbb5",
+        "corpus": "a96413eb2e6780c2",
         "alignedAt": "2026-09-25"
       }
     },
     {
       "path": "generator/scripts/lib/local-news.mjs",
       "mode": "corpus-only",
-      "reason": "Lessico della cronaca locale (cronaca nera, incidenti stradali, sport, cultura ed eventi) che la sezione frontaliere pubblica anche senza angolo frontaliere, decisione del proprietario del 2026-09-25: entra nel lessico di ammissione (FRONTALIERE_ADMISSION_KEYWORDS) e decide il ramo cronaca del prompt e del controllo di densita' in create-article.mjs. Corpus-only per la stessa ragione di fact-check-response.mjs: la generazione gira solo in questo repo.",
+      "reason": "Cronaca locale che la sezione frontaliere pubblica anche senza angolo frontaliere (cronaca nera, incidenti stradali, sport, cultura ed eventi), decisione del proprietario del 2026-09-25: il genere (lessico) E il luogo (Ticino e province di Varese, Como e VCO, con i comuni di confine presi dall'indice di topic-coverage-guard.mjs per provincia). In create-article.mjs aggiunge un segnale all'ammissione (hasAdmissionSignal / countAdmissionHits) e decide il ramo cronaca del prompt e del controllo di densita'. Corpus-only per la stessa ragione di fact-check-response.mjs: la generazione gira solo in questo repo.",
       "baseline": {
         "site": null,
-        "corpus": "bd0de61950faff86",
+        "corpus": "daae4232fb268264",
         "alignedAt": "2026-09-25"
       }
     },

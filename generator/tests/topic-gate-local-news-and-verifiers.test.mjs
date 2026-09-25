@@ -89,7 +89,7 @@ test('the svizzera section keeps excluding cronaca, sport and culture', () => {
 
 test('the post-generation density abort spares local news without a frontaliere angle', () => {
   assert.match(SRC, /if \(attempt === 1 && IS_FRONTALIERE && !isLocalNewsWithoutFrontaliereAngle\(pageContent\)\) \{/);
-  assert.match(SRC, /function isLocalNewsWithoutFrontaliereAngle\(text\) \{\n\s+return hasLocalNewsSignal\(text\) && checkFrontaliereDensity\(text\)\.hits === 0;/);
+  assert.match(SRC, /function isLocalNewsWithoutFrontaliereAngle\(text\) \{\n\s+return isLocalNews\(text\) && checkFrontaliereDensity\(text\)\.hits === 0;/);
 });
 
 test('the pre-spend classifier admits the same local news', () => {
@@ -132,7 +132,7 @@ test('the consensus counts one vote per model that answered, and seeks a second 
   assert.notEqual(start, -1);
   // Up to the fail-closed block (the Codex fallback included): an anchor that
   // no longer exists would make indexOf return -1 and the slice run to EOF.
-  const end = SRC.indexOf('if (modelResults.length === 0 || missingSecondOpinion) {', start);
+  const end = SRC.indexOf('if (modelResults.length === 0 || lacksSecondOpinion) {', start);
   assert.ok(end > start, 'fine del ciclo di consenso non trovata');
   const loop = SRC.slice(start, end);
   assert.doesNotMatch(loop, /modelResults\.push\(/, 'un voto aggiunto senza passare da addIndependentVote');
@@ -143,18 +143,21 @@ test('the consensus counts one vote per model that answered, and seeks a second 
   assert.match(line, /excludeModels: opts\.excludeModels/);
 });
 
-test('two verifiers collapsed into one model with no second opinion are retried, then fail closed', () => {
+test('a lone free vote never decides: collapsed verifiers are retried, and without a second opinion the article fails closed', () => {
   // Second review of PR #1848: after dropping the duplicate, a failed extra
   // call left one vote and the outer loop (which only retried on zero votes)
   // let a single PASS through on the very path meant to guarantee two.
+  // Review of PR #1871: the same single PASS got through when one verifier
+  // plainly failed. One vote that is not Codex's now fails closed.
   const start = SRC.indexOf('let missingSecondOpinion = false;');
   assert.notEqual(start, -1, 'stato del secondo parere mancante sparito');
   const region = SRC.slice(start, SRC.indexOf('// ── Drop verdicts the source itself refutes ──', start));
   assert.match(region, /fcAttempt <= FACTCHECK_INFRA_RETRIES && \(modelResults\.length === 0 \|\| missingSecondOpinion\)/);
   assert.match(region, /modelResults\.length = 0;\n\s+missingSecondOpinion = false;/, 'ogni tentativo deve ripartire da zero voti');
   assert.match(region, /if \(modelResults\.length < 2\) \{\n\s+missingSecondOpinion = true;/);
-  assert.match(region, /if \(modelResults\.length === 0 \|\| missingSecondOpinion\) \{/, 'il secondo parere mancante deve chiudere come un guasto dei verificatori');
-  const failClosed = region.slice(region.indexOf('if (modelResults.length === 0 || missingSecondOpinion) {'));
+  assert.match(region, /const lacksSecondOpinion = modelResults\.length === 1 && modelResults\[0\]\.servedBy !== AI_MODELS\.CODEX_CLI_PRIMARY;/);
+  assert.match(region, /if \(modelResults\.length === 0 \|\| lacksSecondOpinion\) \{/, 'un solo voto free deve chiudere come un guasto dei verificatori');
+  const failClosed = region.slice(region.indexOf('if (modelResults.length === 0 || lacksSecondOpinion) {'));
   assert.match(failClosed, /passed: false,/);
   assert.match(failClosed, /unverified: true,/);
 });

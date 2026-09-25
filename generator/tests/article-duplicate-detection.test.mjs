@@ -324,6 +324,18 @@ describe('Article duplicate detection (multi-signal, algoritmo ATTUALE)', () => 
       expect([...common]).toEqual(['2026']);
       expect(distinctiveEntities(['2026', '411000'], common)).toEqual(['411000']);
     });
+
+    it('un comune non è mai boilerplate, per quante pagine lo nominino', () => {
+      // Review di PR #1871: con il filtro anche sui comuni, Como e Varese —
+      // dove stanno più pagine — perdevano il segnale che le protegge.
+      const lists = Array.from({ length: 40 }, () => ['2026', 'comune:como']);
+      const common = corpusCommonEntities(lists, 20);
+      expect(common.has('2026')).toBe(true);
+      expect(common.has('comune:como')).toBe(false);
+      const a = { id: 'vivere-como-lavorare-ticino-frontaliere', title: 'Vivere a Como e lavorare in Ticino da frontaliere', excerpt: 'Guida 2026 per chi vive a Como.' };
+      const b = { id: 'trasferirsi-como-frontaliere-pro-contro', title: 'Trasferirsi a Como da frontaliere: pro e contro', excerpt: 'Costi e tragitto nel 2026.' };
+      expect(checkDuplicate(a, b, CORPUS_SIZE_AT_RECORDING, common).entitySim).toBe(1);
+    });
   });
 
   describe('sinonimi: vivi nel tokenizer anche dove la soglia non scatta', () => {

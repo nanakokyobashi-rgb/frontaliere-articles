@@ -170,7 +170,7 @@ import { stripVacuousFacts } from './lib/key-facts-specificity.mjs';
 import { checkCantonToponymConsistency } from './lib/cantone-toponimi-coerenza.mjs';
 import { tokenizeIt, jaccardSim, containmentSim, normalizeItWord, STOP_WORDS_IT } from './lib/it-text-similarity.mjs';
 import { articleEntities, commonEntityMinDf, corpusCommonEntities, distinctiveEntities } from './lib/dup-entities.mjs';
-import { LOCAL_NEWS_KEYWORDS, hasLocalNewsSignal } from './lib/local-news.mjs';
+import { countLocalNewsHits, isLocalNews } from './lib/local-news.mjs';
 import { fixMicrocopy } from './lib/it-microcopy-guard.mjs';
 import { DOMAIN_DUP_STOPLIST, filterDistinctive } from './lib/dup-stoplist.mjs';
 import { JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagnostics, repairLlmJson } from './lib/llm-json-repair.mjs';
@@ -496,8 +496,8 @@ const TOPICAL_KEYWORDS = [
   // or border-town token.
   // No bare `strad`: this list also ranks candidates and feeds the svizzera
   // lexicon, where "incidente stradale" is not news. The frontaliere section
-  // admits road accidents through LOCAL_NEWS_KEYWORDS instead (see the
-  // admission lexicon below).
+  // admits road accidents in its own area through lib/local-news.mjs instead
+  // (see hasAdmissionSignal below).
   'viabilit', 'cantier', 'deviazion', 'chiusur', 'ffs',
   'preventivo', 'deficit',
   // Housing
@@ -620,35 +620,48 @@ function sectionTopicalKeywords(national) {
 // worth paying for a full generation attempt — the headline topical-gate and
 // the pre-LLM source pre-filter in generateAndValidateArticle).
 //
-// Until 2026-09-25 the frontaliere admission lexicon was TOPICAL_KEYWORDS
-// MINUS the 8 events/culture stems: the Locarno Film Festival case of #189
-// passed admission and was then rejected by REGOLA #0 after a full paid
-// generation. The owner has since made local cronaca nera, sport, culture and
-// road accidents publishable news for this section («Fai passare anche queste
+// The admission gates feed candidates toward REGOLA #0 / the
+// frontaliere-density check (FRONTALIERE_DENSITY_TERMS above), which has no
+// events/culture terms. A candidate that only matches 'festival'/'sagra'/etc.
+// therefore sailed through admission and was rejected only after a full paid
+// generation — the Locarno Film Festival case measured in #189. The 8
+// events/culture tokens (added 2026-07-17, see the comment on
+// TOPICAL_KEYWORDS above) are excluded from the admission lexicon; they stay
+// in TOPICAL_KEYWORDS for ranking, where they are justified by real traffic
+// data.
+//
+// Since 2026-09-25 the owner makes LOCAL cronaca nera, sport, culture and
+// road accidents publishable on this section («Fai passare anche queste
 // notizie»), and REGOLA #0, the pre-spend classifier and fact-check point 11
-// now admit them in Ticino and in the provinces of Varese, Como and VCO. So
-// admission takes the whole TOPICAL_KEYWORDS list plus LOCAL_NEWS_KEYWORDS
-// (lib/local-news.mjs): the contradiction #189 fixed is gone because the
-// downstream judges changed, not because admission was loosened alone. The
-// national (svizzera) section keeps its own lexicon; none of this applies
-// there.
-const FRONTALIERE_ADMISSION_KEYWORDS = [...new Set([
-  ...TOPICAL_KEYWORDS,
-  ...LOCAL_NEWS_KEYWORDS,
-])];
+// admit them in Ticino and in the provinces of Varese, Como and VCO. They
+// enter admission through lib/local-news.mjs, which checks the kind AND the
+// place: hasAdmissionSignal / countAdmissionHits below add a local-news hit
+// only when the text is in that area. So a festival in Locarno is admitted
+// (the judges downstream now accept it) while a festival in Zurich still is
+// not — the #189 contradiction does not come back for anything outside the
+// area. Scoped to the frontaliere section only: the national (svizzera)
+// section has no equivalent downstream density gate (both checks above are
+// `if (IS_FRONTALIERE)`-only), so there is no contradiction to fix there.
+const FRONTALIERE_EVENTS_CULTURE_KEYWORDS = new Set([
+  'festival', 'sagra', 'mercatin', 'fiera', 'manifestazion',
+  'spettacol', 'rassegna', 'concert',
+]);
+const FRONTALIERE_ADMISSION_KEYWORDS = TOPICAL_KEYWORDS.filter(
+  (k) => !FRONTALIERE_EVENTS_CULTURE_KEYWORDS.has(k)
+);
 
 /**
- * Local news with no frontaliere angle at all: a local-news signal and zero
- * frontaliere-density terms. For these the article prompt stops demanding
- * the frontaliere vocabulary (permesso G, AVS, …) and the post-generation
- * density abort does not fire — both would otherwise turn a Lugano robbery
- * into keyword stuffing, or discard it.
+ * Local news with no frontaliere angle at all: local news (kind and place,
+ * lib/local-news.mjs) with zero frontaliere-density terms. For these the
+ * article prompt stops demanding the frontaliere vocabulary (permesso G, AVS,
+ * …) and the post-generation density abort does not fire — both would
+ * otherwise turn a Lugano robbery into keyword stuffing, or discard it.
  *
  * @param {string} text source text (or headline + source)
  * @returns {boolean}
  */
 function isLocalNewsWithoutFrontaliereAngle(text) {
-  return hasLocalNewsSignal(text) && checkFrontaliereDensity(text).hits === 0;
+  return isLocalNews(text) && checkFrontaliereDensity(text).hits === 0;
 }
 
 function sectionAdmissionKeywords(national) {
@@ -656,16 +669,23 @@ function sectionAdmissionKeywords(national) {
   return isNational ? SVIZZERA_TOPICAL_KEYWORDS : FRONTALIERE_ADMISSION_KEYWORDS;
 }
 
+// On the frontaliere section a local-news hit (cronaca, incidenti, sport,
+// cultura IN Ticino or the provinces of Varese, Como and VCO) also admits:
+// see the comment above FRONTALIERE_EVENTS_CULTURE_KEYWORDS.
 function hasAdmissionSignal(text, national) {
   if (!text || typeof text !== 'string') return false;
   const lower = text.toLowerCase();
-  return sectionAdmissionKeywords(national).some(k => lower.includes(k));
+  if (sectionAdmissionKeywords(national).some(k => lower.includes(k))) return true;
+  const isNational = national === undefined ? !IS_FRONTALIERE : Boolean(national);
+  return !isNational && isLocalNews(text);
 }
 
 function countAdmissionHits(text, national) {
   if (!text || typeof text !== 'string') return 0;
   const lower = text.toLowerCase();
-  return sectionAdmissionKeywords(national).reduce((acc, k) => acc + (lower.split(k).length - 1), 0);
+  const hits = sectionAdmissionKeywords(national).reduce((acc, k) => acc + (lower.split(k).length - 1), 0);
+  const isNational = national === undefined ? !IS_FRONTALIERE : Boolean(national);
+  return isNational ? hits : hits + countLocalNewsHits(text);
 }
 
 function hasTopicalSignal(text, national) {
@@ -5824,10 +5844,10 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
   let fcLastRejectMsgs = [];
   // True when an attempt's two verifiers collapsed into one model and no
   // independent second opinion came back: that attempt holds one opinion where
-  // the consensus needs two, so it is retried like a verifier outage and, if
-  // the second opinion never arrives, fails closed like one (review of #1848).
-  // A verifier that plainly failed still leaves a single-model verdict, as
-  // before: that is the degraded path the rules below already weigh.
+  // the consensus needs two, so it is retried like a verifier outage (review of
+  // #1848). A verifier that plainly failed is not retried here — it already
+  // walked the cascade — but its missing vote is asked of Codex below, and a
+  // single free vote never decides alone (review of #1871).
   let missingSecondOpinion = false;
   for (let fcAttempt = 1; fcAttempt <= FACTCHECK_INFRA_RETRIES && (modelResults.length === 0 || missingSecondOpinion); fcAttempt++) {
     if (fcAttempt > 1) {
@@ -5923,19 +5943,21 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
   //  - no vote at all: Codex verifies alone, and its verdict decides through
   //    the single-model rules below (a FAIL with confidence ≥ 0.5 and
   //    non-minor issues blocks, a PASS passes);
-  //  - one independent vote (the two verifiers collapsed into one model):
-  //    Codex becomes the second opinion. Codex is not in DEFAULT_CHAIN, so no
-  //    free verifier can have been served by it: independent by construction.
+  //  - one vote — the other verifier failed, or the two collapsed into one
+  //    model: Codex becomes the second opinion. Codex is not in
+  //    DEFAULT_CHAIN, so no free verifier can have been served by it:
+  //    independent by construction.
   // The call is pinned to Codex (`codexOnly`) instead of walking the free
   // cascade that just failed. If Codex does not answer either, or its lane is
-  // off, the fact-check closes as before: the article is discarded.
+  // off, the article is discarded: a lone free vote is one opinion, and only
+  // Codex is trusted to decide alone (review of #1871).
   //
   // The known limit: when Codex also wrote the article body, it is grading
   // its own work here — the circularity the `local/fallback cannot
   // self-verify` guard avoids for the local model. The owner chose this
   // knowingly; the log says so on every such article.
   let codexFallbackTried = false;
-  if ((modelResults.length === 0 || missingSecondOpinion) && isModelAvailable(AI_MODELS.CODEX_CLI_PRIMARY)) {
+  if (modelResults.length < 2 && isModelAvailable(AI_MODELS.CODEX_CLI_PRIMARY)) {
     const codex = AI_MODELS.CODEX_CLI_PRIMARY;
     codexFallbackTried = true;
     const why = modelResults.length === 0 ? 'nessun verificatore ha dato un verdetto' : 'manca un secondo parere indipendente';
@@ -5943,15 +5965,16 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     console.error(`  🛟 LLM fact-check: ${why}, verifico con ${codex}${selfCheck}`);
     try {
       const vote = await _runSingleFactCheck(codex, prompt, { isEvergreen, codexOnly: true });
-      const earlier = vote ? addIndependentVote(modelResults, codex, vote) : null;
-      if (vote && !earlier) missingSecondOpinion = false;
+      if (vote) addIndependentVote(modelResults, codex, vote);
     } catch (err) {
       fcLastRejectMsgs.push(err.message || '');
       console.error(`  ⚠️  LLM fact-check (${codex}): ${err.message}`);
     }
   }
 
-  if (modelResults.length === 0 || missingSecondOpinion) {
+  // One vote left and it is not Codex's: one free opinion, no verification.
+  const lacksSecondOpinion = modelResults.length === 1 && modelResults[0].servedBy !== AI_MODELS.CODEX_CLI_PRIMARY;
+  if (modelResults.length === 0 || lacksSecondOpinion) {
     // 2026-07-01 (#3138 follow-up) made this fail OPEN: on pure verifier-infra
     // unavailability it returned `passed: true` so a possibly-good article was
     // published rather than discarded, on the reasoning that prompt-level
@@ -5968,13 +5991,13 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     // still run — they need no model and cannot be taken down — so an outage
     // degrades verification depth without ever publishing something unchecked.
     //
-    // Same for an article whose two verifiers kept collapsing into one model:
-    // one opinion counted twice is not a verification either. Codex Luna Max
-    // (above) is the last verifier asked; reaching here means it did not
-    // answer or its lane is off.
+    // Same for an article left with a single free vote — one verifier failed,
+    // or the two kept collapsing into one model: one opinion is not a
+    // verification either. Codex Luna Max (above) is the last verifier asked;
+    // reaching here means it did not answer or its lane is off.
     const codexNote = codexFallbackTried ? 'anche Codex Luna Max senza verdetto' : 'Codex Luna Max non disponibile';
-    if (missingSecondOpinion) {
-      console.error(`  🚫 LLM fact-check: le verifiche sono state servite da un solo modello, nessun secondo parere indipendente (${codexNote}) — articolo SCARTATO, mai pubblicato non verificato`);
+    if (lacksSecondOpinion) {
+      console.error(`  🚫 LLM fact-check: un solo parere indipendente, nessun secondo parere (${codexNote}) — articolo SCARTATO, mai pubblicato non verificato`);
     } else {
       console.error(`  🚫 LLM fact-check: TUTTI i modelli di verifica hanno fallito (rate-limit/infra; ${codexNote}) — articolo SCARTATO, mai pubblicato non verificato`);
     }
@@ -5982,8 +6005,8 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
       passed: false,
       issues: [{
         claim: '(verifica non eseguita)',
-        reason: (missingSecondOpinion
-          ? 'Le verifiche sono state servite da un solo modello e nessun secondo parere indipendente è arrivato dopo '
+        reason: (lacksSecondOpinion
+          ? 'Un solo verificatore ha dato un verdetto e nessun secondo parere indipendente è arrivato dopo '
           : 'Tutti i modelli di verifica non hanno prodotto un verdetto (rate-limit/infra) dopo ')
           + `${FACTCHECK_INFRA_RETRIES} tentativi con backoff — l'articolo non è stato verificato`,
         severity: 'critical',
@@ -6123,7 +6146,9 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     return { passed: false, issues: allMajor };
   }
 
-  // If only 1 model ran and it said FAIL with low confidence, still block
+  // A single vote here is Codex Luna Max verifying alone (a lone free vote is
+  // discarded above). If it said FAIL with confidence ≥ 0.5 and non-minor
+  // issues, block.
   if (modelResults.length === 1 && modelResults[0].verdict === 'FAIL') {
     const r = modelResults[0];
     if (r.confidence >= 0.5 && (r.issues.filter(i => i.severity !== 'minor').length > 0)) {
@@ -15623,8 +15648,9 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   // negatives on observed cases (asilo, chiesetta, cuoco, etc.). A
   // legitimate frontaliere article contains at least one
   // lavoro/fisco/permesso/transport/economy token in the source body — or,
-  // since 2026-09-25, a local-news one (cronaca, incidenti, sport, cultura:
-  // LOCAL_NEWS_KEYWORDS, part of the admission lexicon).
+  // since 2026-09-25, a local-news one (cronaca, incidenti, sport, cultura in
+  // Ticino and the provinces of Varese, Como and VCO: countLocalNewsHits,
+  // added by countAdmissionHits).
   // Env-gated for rollback.
   const dropOffTopicSource = (process.env.SOURCE_DROP_OFF_TOPIC ?? '1') !== '0';
   if (dropOffTopicSource && typeof pageContent === 'string' && pageContent.length > 0) {

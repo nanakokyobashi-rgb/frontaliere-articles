@@ -119,21 +119,25 @@ describe('the call is pinned to Codex', () => {
 
 describe('llmFactCheck wiring', () => {
   const start = SRC.indexOf('// ── Codex Luna Max when the free verifiers are not enough ──');
-  const failClosed = SRC.indexOf('if (modelResults.length === 0 || missingSecondOpinion) {', start);
+  const failClosed = SRC.indexOf('if (modelResults.length === 0 || lacksSecondOpinion) {', start);
   const block = SRC.slice(start, failClosed);
 
   test('Codex is asked after the free verifiers and before the article is discarded', () => {
     assert.notEqual(start, -1, 'blocco Codex sparito');
     assert.ok(failClosed > start, 'il blocco Codex deve precedere il fail-closed');
     assert.ok(SRC.indexOf('const modelsToQuery = verificationModels.slice(0, 2);') < start, 'Codex non deve precedere i verificatori free');
-    assert.match(block, /if \(\(modelResults\.length === 0 \|\| missingSecondOpinion\) && isModelAvailable\(AI_MODELS\.CODEX_CLI_PRIMARY\)\) \{/);
+    // Fewer than two votes: none at all, one verifier failed, or the two
+    // collapsed into one model (review of PR #1871: the plain failure was
+    // left out and a single free PASS published the article).
+    assert.match(block, /if \(modelResults\.length < 2 && isModelAvailable\(AI_MODELS\.CODEX_CLI_PRIMARY\)\) \{/);
     assert.match(block, /await _runSingleFactCheck\(codex, prompt, \{ isEvergreen, codexOnly: true \}\)/);
   });
 
-  test('its verdict is one vote like any other, and clears the missing second opinion', () => {
+  test('its verdict is one vote like any other', () => {
     assert.doesNotMatch(block, /modelResults\.push\(/, 'il voto di Codex deve passare da addIndependentVote');
-    assert.match(block, /const earlier = vote \? addIndependentVote\(modelResults, codex, vote\) : null;/);
-    assert.match(block, /if \(vote && !earlier\) missingSecondOpinion = false;/);
+    assert.match(block, /if \(vote\) addIndependentVote\(modelResults, codex, vote\);/);
+    // After Codex, one vote decides only when it is Codex's own.
+    assert.match(SRC.slice(failClosed - 300, failClosed), /const lacksSecondOpinion = modelResults\.length === 1 && modelResults\[0\]\.servedBy !== AI_MODELS\.CODEX_CLI_PRIMARY;/);
   });
 
   test('the call line pins the chain to Codex only for the fallback', () => {

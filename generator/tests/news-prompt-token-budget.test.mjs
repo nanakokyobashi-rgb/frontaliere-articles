@@ -61,7 +61,7 @@ import { buildSourceContract } from '../scripts/lib/article-factuality-gates.mjs
 // il modulo e' importabile, quindi il test misura la funzione vera.
 import { PROMPT_SCAFFOLD_FLOOR_TOKENS, isBudgetBelowScaffoldFloor } from '../scripts/lib/exhaustion-disposition.mjs';
 import * as IRPEF from '../scripts/lib/irpef-scaglioni.mjs';
-import { hasLocalNewsSignal } from '../scripts/lib/local-news.mjs';
+import { isLocalNews } from '../scripts/lib/local-news.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
@@ -165,12 +165,12 @@ const clampDecl = cutDecl('function _clampRemediation(') + '\n' + cutDecl('funct
 const preferDecl = cutDecl('function _preferisceModelloSenzaCap(');
 
 // Il predicato della cronaca locale, ritagliato dal sorgente insieme alla
-// densita' frontaliere su cui si regge; `hasLocalNewsSignal` viene dallo
-// stesso modulo che create-article.mjs importa.
+// densita' frontaliere su cui si regge; `isLocalNews` viene dallo stesso
+// modulo che create-article.mjs importa.
 const isLocalNewsWithoutFrontaliereAngle = new Function(
-  'hasLocalNewsSignal',
+  'isLocalNews',
   `${cut('const FRONTALIERE_DENSITY_TERMS = [', '];')}\n${cutDecl('function checkFrontaliereDensity(')}\n${cutDecl('function isLocalNewsWithoutFrontaliereAngle(')}\nreturn isLocalNewsWithoutFrontaliereAngle;`,
-)(hasLocalNewsSignal);
+)(isLocalNews);
 
 const assemblePrompt = new Function(
   '__d',

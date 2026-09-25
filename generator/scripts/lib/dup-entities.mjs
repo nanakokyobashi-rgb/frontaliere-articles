@@ -23,7 +23,8 @@
  *
  *  1. Numbers shared by many published articles are boilerplate and leave
  *     the comparison (`corpusCommonEntities`, document frequency over the
- *     existing corpus, same corpus the check already reads).
+ *     existing corpus, same corpus the check already reads). Comuni never
+ *     do, however many pages name them.
  *  2. The comuni an article's title names become entities (`comune:<slug>`,
  *     from the municipality index of topic-coverage-guard.mjs). That is what the rule's
  *     own comment always claimed the signal was — "same place/date/event" —
@@ -37,6 +38,8 @@
  * from data/municipalities.ts and caches.
  */
 import { comuniMentioned } from './topic-coverage-guard.mjs';
+
+const COMUNE_PREFIX = 'comune:';
 
 /**
  * Numbers and percentages in `text`.
@@ -76,7 +79,7 @@ export function extractKeyEntities(text) {
  */
 export function articleEntities(title, excerpt) {
   const entities = extractKeyEntities(`${title || ''} ${excerpt || ''}`);
-  for (const comune of comuniMentioned(title)) entities.push(`comune:${comune}`);
+  for (const comune of comuniMentioned(title)) entities.push(`${COMUNE_PREFIX}${comune}`);
   return entities;
 }
 
@@ -94,7 +97,13 @@ export function commonEntityMinDf(corpusSize) {
 }
 
 /**
- * The entities that at least `minDf` of the given entity lists contain.
+ * The NUMBERS that at least `minDf` of the given entity lists contain.
+ *
+ * Numbers only: a comune is never boilerplate. Como or Varese in a title is
+ * common because many pages are about them, and two of those pages about the
+ * same place with different wording are exactly the duplicate the comune
+ * entity exists to catch (review of PR #1871) — dropping it for frequent
+ * comuni would leave the big ones, where most pages are, unprotected.
  *
  * @param {Iterable<string[]>} entityLists one list per existing article
  * @param {number} minDf
@@ -103,7 +112,10 @@ export function commonEntityMinDf(corpusSize) {
 export function corpusCommonEntities(entityLists, minDf) {
   const df = new Map();
   for (const list of entityLists) {
-    for (const entity of new Set(list)) df.set(entity, (df.get(entity) || 0) + 1);
+    for (const entity of new Set(list)) {
+      if (entity.startsWith(COMUNE_PREFIX)) continue;
+      df.set(entity, (df.get(entity) || 0) + 1);
+    }
   }
   const common = new Set();
   for (const [entity, count] of df) if (count >= minDf) common.add(entity);

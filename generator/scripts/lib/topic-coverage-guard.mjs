@@ -560,6 +560,32 @@ export function comuniMentioned(text) {
   return [...new Set(comuneMatchAll(text).map((m) => m.value))];
 }
 
+let _provinceBySlug = null;
+
+/**
+ * La sigla di provincia (CO, VA, VB, …) di un comune dell'indice, dal suo
+ * slug — lo stesso che rendono `comuneTopicKey` e `comuniMentioned` — o null.
+ * Stesso file e stessa normalizzazione dell'indice; letto una volta sola.
+ *
+ * @param {string} slug
+ * @returns {string|null}
+ */
+export function municipalityProvince(slug) {
+  if (_provinceBySlug === null) {
+    _provinceBySlug = new Map();
+    try {
+      const src = readFileSync(MUNICIPALITIES_SOURCE, 'utf-8');
+      for (const m of src.matchAll(/^\s*\{\s*name:\s*'((?:[^'\\]|\\.)*)',\s*province:\s*'([A-Z]{2})'/gm)) {
+        const norm = normalizeText(m[1].replace(/\\'/g, "'"));
+        if (norm) _provinceBySlug.set(norm.replace(/ /g, '-'), m[2]);
+      }
+    } catch {
+      // Stesso fail-open dell'indice: nessuna provincia nota.
+    }
+  }
+  return _provinceBySlug.get(slug) ?? null;
+}
+
 /**
  * Come `comuneTopicKey`, ma dice anche DOVE il nome ha combaciato.
  *
@@ -890,6 +916,7 @@ const _keyCache = new Map();
 export function resetTopicCoverageCaches() {
   _keyCache.clear();
   _municipalityIndex = null;
+  _provinceBySlug = null;
 }
 
 /**
