@@ -6,6 +6,7 @@ import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 import {
   BOOTSTRAP_GET_REQUESTS,
+  MAX_CLOCK_SKEW_SECONDS,
   MAX_DEEP_CANDIDATES,
   MAX_GET_REQUESTS,
   MAX_REPORT_BYTES,
@@ -349,8 +350,13 @@ test('un detentore fermo da oltre una giornata apre l alert anche senza arretrat
   assert.ok(report.reasonCodes.includes('queue_slo_breached'));
 });
 
-// Un rerun puo' conservare sia `created_at` sia `run_started_at` originali:
-// l'eta' del detentore deve seguire l'avvio del job effettivamente in corso.
+// Un rerun conserva il `created_at` della prima esecuzione, mentre
+// `run_started_at` riparte dall'attempt corrente (misura registrata in #1781:
+// attempt 2 con `created_at` 18:15:19Z e `run_started_at` 18:19:42Z). Per il
+// detentore nessuno dei due basta: `run_started_at` include l'attesa del mutex,
+// quindi l'eta' deve seguire l'avvio del job effettivamente in corso. La
+// fixture tiene i due campi uguali per provare che `jobs.started_at` vince
+// anche quando la run non porta alcun segnale di riavvio.
 test('un detentore riavviato si misura da jobs.started_at', async () => {
   const holderId = 33500000013;
   const holder = run(33500000013, {
@@ -372,6 +378,175 @@ test('un detentore riavviato si misura da jobs.started_at', async () => {
   assert.equal(report.queue.slo.measuredAgeSeconds, 1620);
   assert.equal(report.queue.slo.state, 'within_slo');
   assert.equal(report.reasonCodes.includes('queue_slo_breached'), false);
+});
+
+// #1806: un rerun pending conserva il `created_at` della prima esecuzione, e
+// datarlo da li' misurava l'eta' della prima coda, non l'attesa dell'attempt
+// corrente: su una coda sana il watchdog dichiarava `breached` a 174.420 s e
+// apriva una recovery inutile. L'attesa dell'attempt corrente parte da
+// `run_started_at`, che il rerun azzera.
+test('un rerun pending si misura dall avvio dell attempt corrente', async () => {
+  const rerun = run(33500000016, {
+    conclusion: null,
+    created_at: '2026-08-30T17:00:00.000Z',
+    run_attempt: 2,
+    run_started_at: '2026-09-01T17:17:00.000Z',
+    status: 'queued',
+  });
+  const { report } = await observe(fakeGithub({ currentRuns: [rerun], pages: [[]] }));
+  assert.equal(report.complete, true);
+  assert.equal(report.failClosed, false);
+  assert.equal(report.counts.pending, 1);
+  assert.equal(report.queue.oldestPendingCreatedAt, '2026-08-30T17:00:00.000Z');
+  assert.equal(report.queue.oldestPendingWaitStartedAt, '2026-09-01T17:17:00.000Z');
+  assert.equal(report.queue.oldestPendingAgeSeconds, 600);
+  assert.equal(report.queue.slo.measured, 'oldest_pending_age');
+  assert.equal(report.queue.slo.measuredAgeSeconds, 600);
+  assert.equal(report.queue.slo.state, 'within_slo');
+  assert.equal(report.queue.slo.alert, false);
+  assert.equal(report.reasonCodes.includes('queue_slo_breached'), false);
+});
+
+// Un rerun che riporta `run_started_at` uguale a `created_at` resta misurato
+// come prima: la fix sposta la base solo quando l'attempt corrente e' davvero
+// ripartito, e una coda ferma resta `breached`.
+test('un rerun pending con run_started_at pari a created_at resta breached', async () => {
+  const rerun = run(33500000017, {
+    conclusion: null,
+    created_at: '2026-08-30T17:00:00.000Z',
+    run_attempt: 2,
+    run_started_at: '2026-08-30T17:00:00.000Z',
+    status: 'queued',
+  });
+  const { report } = await observe(fakeGithub({ currentRuns: [rerun], pages: [[]] }));
+  assert.equal(report.failClosed, false);
+  assert.equal(report.queue.slo.measuredAgeSeconds, 174420);
+  assert.equal(report.queue.slo.state, 'breached');
+  assert.equal(report.queue.slo.alert, true);
+});
+
+// Un rerun pending senza un `run_started_at` leggibile, o con un avvio anteriore
+// alla creazione, non ha una misura dell'attempt corrente: ricadere in silenzio
+// su `created_at` rifarebbe il falso breach, quindi il censimento fallisce chiuso.
+test('un rerun pending senza run_started_at valido fallisce chiuso', async (t) => {
+  const cases = [
+    ['missing', undefined],
+    ['null', null],
+    ['malformed', 'not-a-timestamp'],
+    ['impossible date', '2026-02-30T17:00:00.000Z'],
+    ['before created_at', '2026-08-30T16:59:59.000Z'],
+  ];
+  for (const [name, runStartedAt] of cases) {
+    await t.test(name, async () => {
+      const rerun = run(33500000018, {
+        conclusion: null,
+        created_at: '2026-08-30T17:00:00.000Z',
+        run_attempt: 2,
+        run_started_at: runStartedAt,
+        status: 'queued',
+      });
+      const { report } = await observe(fakeGithub({ currentRuns: [rerun], pages: [[]] }));
+      assert.equal(report.complete, false);
+      assert.equal(report.failClosed, true);
+      assert.equal(report.counts.byReason.invalid_run_started_at, 1);
+      assert.deepEqual(report.samples.invalid_run_started_at, ['33500000018']);
+      assert.equal(report.queue.slo.state, 'not_evaluable');
+      assert.equal(report.queue.slo.alert, false);
+    });
+  }
+});
+
+// #1811: l'eta' e' `max(0, now - timestamp)`, quindi un timestamp futuro (clock
+// skew, risposta API incoerente) azzerava l'eta' e dichiarava `within_slo` un
+// detentore fermo da 48 h. Oltre la tolleranza di skew il timestamp non e' una
+// misura: il censimento fallisce chiuso e il watchdog esce 1.
+function isoFromNow(offsetSeconds) {
+  return new Date(NOW + offsetSeconds * 1000).toISOString();
+}
+
+test('la tolleranza di skew e esplicita e di pochi minuti', () => {
+  assert.equal(MAX_CLOCK_SKEW_SECONDS, 5 * 60);
+});
+
+test('un detentore con jobs.started_at nel futuro fallisce chiuso', async () => {
+  const holderId = 33500000019;
+  const holder = run(holderId, {
+    conclusion: null,
+    created_at: '2026-08-30T17:00:00.000Z',
+    status: 'in_progress',
+  });
+  const { report } = await observe(fakeGithub({
+    activeJobsByRun: {
+      [holderId]: {
+        jobs: [{ id: 1, started_at: isoFromNow(24 * 60 * 60), status: 'in_progress' }],
+        total_count: 1,
+      },
+    },
+    currentRuns: [holder],
+    pages: [[]],
+  }));
+  assert.equal(report.complete, false);
+  assert.equal(report.failClosed, true);
+  assert.equal(report.counts.byReason.future_timestamp, 1);
+  assert.deepEqual(report.samples.future_timestamp, [String(holderId)]);
+  assert.equal(report.queue.slo.state, 'not_evaluable');
+  assert.equal(report.queue.slo.alert, false);
+});
+
+test('un pending con timestamp di misura nel futuro fallisce chiuso', async (t) => {
+  const cases = [
+    ['created_at attempt 1', { created_at: isoFromNow(24 * 60 * 60) }],
+    ['run_started_at rerun', {
+      created_at: '2026-08-30T17:00:00.000Z',
+      run_attempt: 2,
+      run_started_at: isoFromNow(24 * 60 * 60),
+    }],
+    ['appena oltre la tolleranza', { created_at: isoFromNow(MAX_CLOCK_SKEW_SECONDS + 1) }],
+  ];
+  for (const [name, overrides] of cases) {
+    await t.test(name, async () => {
+      const pending = run(33500000020, { conclusion: null, status: 'queued', ...overrides });
+      const { report } = await observe(fakeGithub({ currentRuns: [pending], pages: [[]] }));
+      assert.equal(report.complete, false);
+      assert.equal(report.failClosed, true);
+      assert.equal(report.counts.byReason.future_timestamp, 1);
+      assert.deepEqual(report.samples.future_timestamp, ['33500000020']);
+      assert.equal(report.queue.slo.state, 'not_evaluable');
+      assert.equal(report.queue.slo.alert, false);
+    });
+  }
+});
+
+test('uno skew entro la tolleranza resta una misura valida con eta zero', async (t) => {
+  await t.test('detentore a +60 s', async () => {
+    const holderId = 33500000021;
+    const { report } = await observe(fakeGithub({
+      activeJobsByRun: {
+        [holderId]: {
+          jobs: [{ id: 1, started_at: isoFromNow(60), status: 'in_progress' }],
+          total_count: 1,
+        },
+      },
+      currentRuns: [run(holderId, { conclusion: null, status: 'in_progress' })],
+      pages: [[]],
+    }));
+    assert.equal(report.failClosed, false);
+    assert.equal(report.counts.byReason.future_timestamp, 0);
+    assert.equal(report.queue.slo.measuredAgeSeconds, 0);
+    assert.equal(report.queue.slo.state, 'within_slo');
+  });
+  await t.test('pending esattamente al limite', async () => {
+    const pending = run(33500000022, {
+      conclusion: null,
+      created_at: isoFromNow(MAX_CLOCK_SKEW_SECONDS),
+      status: 'queued',
+    });
+    const { report } = await observe(fakeGithub({ currentRuns: [pending], pages: [[]] }));
+    assert.equal(report.failClosed, false);
+    assert.equal(report.counts.byReason.future_timestamp, 0);
+    assert.equal(report.queue.slo.measuredAgeSeconds, 0);
+    assert.equal(report.queue.slo.state, 'within_slo');
+  });
 });
 
 test('un detentore che non finisce da oltre una giornata apre l alert', async () => {

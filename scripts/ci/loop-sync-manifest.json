@@ -153,7 +153,7 @@
     {
       "path": "scripts/ci/native-automerge-gate.mjs",
       "mode": "adapted",
-      "reason": "Il gate del corpus mantiene la stessa logica di enrollment, ma il nome dello step review è una costante locale: il bootstrap non trascina vitestCheck.mjs come dipendenza hard e lo scarica solo quando il grafo del gate lo richiede. Adattamento necessario per il contract del corpus (#1507).",
+      "reason": "Il gate del corpus mantiene la stessa logica di enrollment, ma il nome dello step review è una costante locale: il bootstrap non trascina vitestCheck.mjs come dipendenza hard e lo scarica solo quando il grafo del gate lo richiede. Adattamento necessario per il contract del corpus (#1507). Seconda divergenza dal 2026-09-24 (#1784): `parseActionsJobUrl` accetta solo la forma grezza canonica del `details_url` (niente dot-segment anche codificati, whitespace, userinfo/porta, slash finali, zeri iniziali), la stessa regola di `workflowRunIdentity` in native-automerge-sweep-policy.mjs legata da generator/tests/actions-details-url-canonical.test.mjs; il gemello del sito legge ancora il path gia' normalizzato da `new URL`, e la risalita va fatta la'.",
       "baseline": {
         "site": "fe0d90a363d6b3c4",
         "corpus": "17ef9a9d8340acc4",
@@ -3703,21 +3703,21 @@
     {
       "path": "scripts/ci/translate-queue-recovery.mjs",
       "mode": "corpus-only",
-      "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, misura l'eta' del detentore dal job attivo (`jobs.started_at`) invece che dalla coda del workflow, dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
+      "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, misura l'eta' del detentore dal job attivo (`jobs.started_at`) invece che dalla coda del workflow e quella di un rerun pending dall'attempt corrente (`run_started_at`, fail-closed se illeggibile o anteriore a `created_at`) invece che dalla prima creazione, rifiuta fail-closed (`future_timestamp`) ogni istante di misura oltre la tolleranza di skew `MAX_CLOCK_SKEW_SECONDS` invece di azzerarne l'eta', dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
       "baseline": {
         "site": null,
-        "corpus": "e86919aaf45b4647",
-        "alignedAt": "2026-09-20"
+        "corpus": "d0055bc11d7356cc",
+        "alignedAt": "2026-09-24"
       }
     },
     {
       "path": "generator/tests/translate-queue-recovery.test.mjs",
       "mode": "corpus-only",
-      "reason": "Contratto Node deterministico corpus-only per watchdog e workflow translate: copre censimento corrente indipendente da oltre 200 run storiche, discovery troncata, budget, prova schedule redatta, assenza by construction di scritture remote e drift del pin blob contro il workflow generato.",
+      "reason": "Contratto Node deterministico corpus-only per watchdog e workflow translate: copre censimento corrente indipendente da oltre 200 run storiche, eta' dei rerun pending dall'attempt corrente, timestamp futuri oltre la tolleranza di skew, discovery troncata, budget, prova schedule redatta, assenza by construction di scritture remote e drift del pin blob contro il workflow generato.",
       "baseline": {
         "site": null,
-        "corpus": "ce9b09c59bb45aa3",
-        "alignedAt": "2026-09-01"
+        "corpus": "ee6cc8ebb4d6c257",
+        "alignedAt": "2026-09-24"
       }
     },
     {
@@ -3971,6 +3971,16 @@
         "site": null,
         "corpus": "75333f0662fd2700",
         "alignedAt": "2026-09-04"
+      }
+    },
+    {
+      "path": "scripts/ci/transport-realign-body.mjs",
+      "mode": "corpus-only",
+      "reason": "Formato delle righe `(site sha256 ...)` del body delle PR di trasporto e parser del realign post-merge (follow-up sito #9443, item 010/011; issue #1784). Vive solo qui come transport-identical-twins.mjs: produttore (transport-identical-twins.yml) e consumatore (transport-identical-twins-realign.yml) sono entrambi workflow di questo repo, e il sito non riceve trasporti.",
+      "baseline": {
+        "site": null,
+        "corpus": "1d22f9c2ad660610",
+        "alignedAt": "2026-09-24"
       }
     },
     {
@@ -4320,6 +4330,16 @@
         "site": null,
         "corpus": "e2644fd6a024dc90",
         "alignedAt": "2026-09-23"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/irpef-scaglioni.mjs",
+      "mode": "corpus-only",
+      "reason": "Sorgente unica degli scaglioni IRPEF (2024-2025: 23/35/43; dal 2026: 23/33/43, Legge 199/2025) interpolata da create-article.mjs nel foglio VERIFIED_DOMAIN_FACTS, nei criteri 3-4 di llmFactCheck e in EVERGREEN_FACTS_BRIEF (issue #1777). Corpus-only perche' i prompt di generazione e fact-check girano solo qui: il gemello adapted del sito (scripts/create-article.mjs) non esegue piu' la generazione, quindi non c'e' un helper da portare.",
+      "baseline": {
+        "site": null,
+        "corpus": "5aa13da79a543661",
+        "alignedAt": "2026-09-24"
       }
     },
     {
