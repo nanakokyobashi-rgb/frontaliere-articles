@@ -161,8 +161,7 @@ jobs:
                         clientMutationId
                       }
                     }
-                  `, { pullRequestId: currentPr.node_id });
-                  ));
+                  `, { pullRequestId: currentPr.node_id }));
                   core.warning(`Native auto-merge revoked for PR #${number} before fail-closed recovery.`);
                   return;
                 } catch (error) {
