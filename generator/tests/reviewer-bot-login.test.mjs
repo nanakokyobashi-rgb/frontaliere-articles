@@ -109,8 +109,11 @@ test('i workflow di review rispettano il contratto di identità specifico', () =
   const staleRescuer = read('.github/workflows/stale-pr-rescuer.yml');
   assert.equal(
     staleRescuer.split(STRICT_REVIEWER_BOT_LOGIN_JQ).length - 1,
-    2,
-    'stale-pr-rescuer deve usare due allowlist reviewer esatte',
+    // Una sola selezione (`REVIEW_SELECTION_JQ`), applicata identica alla
+    // lettura e alla rilettura delle review (#1762): prima erano due
+    // programmi, uno per i body e uno per il commit.
+    1,
+    'stale-pr-rescuer deve usare l\'allowlist reviewer esatta nella sua unica selezione',
   );
   assert.doesNotMatch(staleRescuer, /\.user\.type/, 'stale-pr-rescuer non deve dipendere da user.type');
   assert.doesNotMatch(

@@ -268,6 +268,16 @@ jobs:
           # The file list is produced by a trusted repository script; keep the
           # exact expansion consumed by the gate and silence SC2086 here.
           files=$(node scripts/ci/list-pr-gate-tests.mjs)
+          # Destinazione deterministica del report JSON: i reporter e le
+          # destinazioni si accoppiano per POSIZIONE (spec -> stdout, reporter
+          # strutturato -> file). Un file rimasto da un tentativo precedente
+          # non deve poter passare per il report di questa run, e un file
+          # mancante dopo `node --test` e' un reporter rotto: rosso esplicito
+          # anche se i test sono passati. Provato eseguendo questo blocco in
+          # generator/tests/node-test-failure-reporter.test.mjs.
+          rm -f "$NODE_TEST_REPORT_FILE"
+          mkdir -p "$(dirname "$NODE_TEST_REPORT_FILE")"
+          node_status=0
           # shellcheck disable=SC2086
           node \
             --test \
@@ -275,7 +285,12 @@ jobs:
             --test-reporter=./scripts/ci/node-test-failure-reporter.mjs \
             --test-reporter-destination=stdout \
             --test-reporter-destination="$NODE_TEST_REPORT_FILE" \
-            $files
+            $files || node_status=$?
+          if [ ! -s "$NODE_TEST_REPORT_FILE" ]; then
+            echo "::error::node-test-failure-reporter non ha scritto $NODE_TEST_REPORT_FILE (exit node --test=$node_status): il report strutturato dei test falliti manca." >&2
+            if [ "$node_status" -eq 0 ]; then node_status=1; fi
+          fi
+          exit "$node_status"
 
       - name: Report node:test failures on PR
         # The test gate is intentionally still the blocking step. This
@@ -629,6 +644,33 @@ jobs:
             echo "::error::Risposta Reviews API malformata → claim review fail-closed, nessun nuovo Codex."
             exit 1
           fi
+          # Enum degli stati review da scripts/ci/lib/review-states.mjs (#1762):
+          # uno stato sconosciuto non e' «non PENDING, quindi un verdetto».
+          if ! unknown_review_states=$(printf '%s' "$reviews" | jq -r '
+            def review_state_known: (.state | type) == "string" and (.state | IN("APPROVED", "CHANGES_REQUESTED", "COMMENTED", "PENDING", "DISMISSED"));
+            [flatten[] | select(review_state_known | not) | (.state | tojson)] | unique | join(", ")'); then
+            echo "::error::Stati delle review non verificabili → claim review fail-closed, nessun nuovo Codex."
+            exit 1
+          fi
+          if [ -n "$unknown_review_states" ]; then
+            echo "::error::Stato review sconosciuto ($unknown_review_states) → claim review fail-closed, nessun nuovo Codex."
+            exit 1
+          fi
+          # Seconda lettura completa: la paginazione non e' atomica. Una review
+          # ritirata (DISMISSED) o nuova fra le due letture cambierebbe il
+          # verdetto su cui il guard sta per saltare Codex: se la proiezione
+          # (id, stato, commit, body) non coincide, fail-closed.
+          if ! reviews_reread=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate --slurp 2>/dev/null); then
+            echo "::error::Seconda lettura della Reviews API illeggibile → claim review fail-closed, nessun nuovo Codex."
+            exit 1
+          fi
+          review_projection='[flatten[] | {id: (.id // null), state: (.state // null), commit_id: (.commit_id // null), body: (.body // null)}] | sort_by(.id // 0)'
+          if ! reviews_first_view=$(printf '%s' "$reviews" | jq -c "$review_projection" 2>/dev/null) \
+            || ! reviews_second_view=$(printf '%s' "$reviews_reread" | jq -c "$review_projection" 2>/dev/null) \
+            || [ "$reviews_first_view" != "$reviews_second_view" ]; then
+            echo "::error::Le review della PR sono cambiate fra due letture consecutive (dismissal o review concorrente) → claim review fail-closed, nessun nuovo Codex."
+            exit 1
+          fi
           # Conta ogni review terminale del reviewer, non solo `## LGTM`:
           # un Important, una domanda o un nit senza LGTM e' comunque un
           # giudizio gia' emesso. Il fallback Codex vale solo con il marker
@@ -710,8 +752,10 @@ jobs:
                 test("^[[:space:]]{0,3}##[[:space:]]+LGTM[[:space:]]*$")))
               and (((.body // "")
                 | test("🔴[[:space:]]*\\*{0,2}[[:space:]]*Important[[:space:]]*\\*{0,2}[[:space:]]*[:—-]")) | not);
+            def review_state_known: (.state | type) == "string" and (.state | IN("APPROVED", "CHANGES_REQUESTED", "COMMENTED", "PENDING", "DISMISSED"));
+            def review_state_terminal: review_state_known and (.state | IN("APPROVED", "CHANGES_REQUESTED", "COMMENTED"));
             [flatten[]
-             | select((.state // "") != "PENDING")
+             | select(review_state_terminal)
              | select(
                  ((.user.login // "") | test("^(claude\\[bot\\]|frontaliere-automation\\[bot\\])$";"i"))
                  or (((.user.login // "") | test("^github-actions\\[bot\\]$"; "i"))
@@ -742,8 +786,10 @@ jobs:
                 test("^[[:space:]]{0,3}##[[:space:]]+LGTM[[:space:]]*$")))
               and (((.body // "")
                 | test("🔴[[:space:]]*\\*{0,2}[[:space:]]*Important[[:space:]]*\\*{0,2}[[:space:]]*[:—-]")) | not);
+            def review_state_known: (.state | type) == "string" and (.state | IN("APPROVED", "CHANGES_REQUESTED", "COMMENTED", "PENDING", "DISMISSED"));
+            def review_state_terminal: review_state_known and (.state | IN("APPROVED", "CHANGES_REQUESTED", "COMMENTED"));
             [flatten[]
-             | select((.state // "") != "PENDING")
+             | select(review_state_terminal)
              | select(
                  (((.user.login // "") | ascii_downcase) == "claude[bot]")
                  or (((.user.login // "") | ascii_downcase) == "frontaliere-automation[bot]")
@@ -841,8 +887,10 @@ jobs:
                 | capture("^<!-- REVIEW_INPUT_REVISION: (?<revision>body:[0-9a-f]{64}) -->$"; "i").revision
                 | ascii_downcase)] | unique as $revisions
               | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
+            def review_state_known: (.state | type) == "string" and (.state | IN("APPROVED", "CHANGES_REQUESTED", "COMMENTED", "PENDING", "DISMISSED"));
+            def review_state_terminal: review_state_known and (.state | IN("APPROVED", "CHANGES_REQUESTED", "COMMENTED"));
              [flatten[]
-             | select((.state // "") != "PENDING" and (.state // "") != "DISMISSED")
+             | select(review_state_terminal)
              | select(
                  ((.user.login // "") | test("^(claude\\[bot\\]|frontaliere-automation\\[bot\\])$";"i"))
                  or (((.user.login // "") | test("^github-actions\\[bot\\]$"; "i"))
@@ -1091,7 +1139,9 @@ jobs:
 
           # Re-review incrementale: se esiste gia' una review Claude su un commit
           # precedente, si valuta SOLO il delta, non l'intera PR.
-          lastRev=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate --slurp 2>/dev/null \
+          # Uno stato review sconosciuto (#1762) fa fallire jq: niente base
+          # incrementale, review piena — e il motivo resta nel log.
+          if ! lastRev=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate --slurp 2>/dev/null \
             | jq -r --arg revision "$REVIEW_REVISION" '
               def has_current_revision($expected):
                 [((.body // "") | split("\n")[] | rtrimstr("\r")
@@ -1099,15 +1149,23 @@ jobs:
                   | capture("^<!-- REVIEW_INPUT_REVISION: (?<revision>body:[0-9a-f]{64}) -->$"; "i").revision
                   | ascii_downcase)] | unique as $revisions
                 | (($revisions | length) == 1 and $revisions[0] == ($expected | ascii_downcase));
-              [flatten[]
-               | select((.state // "") != "PENDING" and (.state // "") != "DISMISSED")
+              def review_state_known: (.state | type) == "string" and (.state | IN("APPROVED", "CHANGES_REQUESTED", "COMMENTED", "PENDING", "DISMISSED"));
+              def review_state_terminal: review_state_known and (.state | IN("APPROVED", "CHANGES_REQUESTED", "COMMENTED"));
+              if any(flatten[]; review_state_known | not)
+              then error("stato review sconosciuto")
+              else . end
+              | [flatten[]
+               | select(review_state_terminal)
                | select(
                    ((.user.login // "") | test("^(claude\\[bot\\]|frontaliere-automation\\[bot\\])$";"i"))
                    or (((.user.login // "") | test("^github-actions\\[bot\\]$"; "i"))
                        and ((.body // "") | contains("<!-- CODEX_FALLBACK_REVIEW -->")))
                  )
                | select(has_current_revision($revision))
-              ] | sort_by(.id // 0) | last | .commit_id // empty' 2>/dev/null || true)
+              ] | sort_by(.id // 0) | last | .commit_id // empty' 2>/dev/null); then
+            echo "::warning::Review precedenti illeggibili o con stato sconosciuto → nessuna base incrementale, review piena."
+            lastRev=""
+          fi
           if [ -n "$lastRev" ] && [ "$lastRev" != "$HEAD_SHA" ]; then
             delta_code=$(gh api "repos/$REPO/compare/$lastRev...$HEAD_SHA" --jq '.files[] | .filename, (.previous_filename // empty)' 2>/dev/null \
               | grep -Fxf <(echo "$code_files") || true)
@@ -1202,7 +1260,10 @@ jobs:
             # shellcheck disable=SC2016 # `$head` e' una variabile jq, non di shell.
             if ! gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate --slurp \
               | jq -r --arg head "$CODE_UNCHANGED_SINCE" \
-                  '[.[][] | select(.commit_id == $head) | select((.state // "") != "PENDING" and (.state // "") != "DISMISSED")] | last | .body // ""' \
+                  'def review_state_known: (.state | type) == "string" and (.state | IN("APPROVED", "CHANGES_REQUESTED", "COMMENTED", "PENDING", "DISMISSED"));
+                  def review_state_terminal: review_state_known and (.state | IN("APPROVED", "CHANGES_REQUESTED", "COMMENTED"));
+                  if any(.[][]; review_state_known | not) then error("stato review sconosciuto") else . end
+                  | [.[][] | select(.commit_id == $head) | select(review_state_terminal)] | last | .body // ""' \
                   > "$CTX_DIR/previous-review.md"; then
               # Il fallimento si DICHIARA: un contesto mancante che si traveste
               # da «non c'era niente» e' peggio di un contesto mancante.
@@ -1387,7 +1448,7 @@ jobs:
 
             Se il bundle elenca un Important storico sul contratto del body con un anchor `PR body:L<n>`, quando lo hai risolto devi riportare la conferma in forma esatta `Fix di \`PR body:L<n>\`: ok.` (una riga per ogni anchor), prima di `Important: 0` e `## LGTM`; non sostituirla con una parafrasi del bullet. Per un Important senza anchor di file o body usa invece il testo normalizzato richiesto dal bundle, sempre dentro i backtick della conferma.
 
-            Posta ESATTAMENTE una review con `gh pr review ${PR_NUMBER} --comment --body "<markdown nel formato di REVIEW.md>"`. Chiudi con `## LGTM` solo quando non c'e' un `🔴 Important` aperto, nessuna domanda funnel-critical irrisolta e il contratto del body e' valido. Incerto → `❓ q:`, mai speculazione. Lavora read-only: niente edit, commit, push, npm o test. Fermati subito dopo aver postato.
+            Posta ESATTAMENTE una review: scrivi prima il markdown nel formato di REVIEW.md in un file con un heredoc a delimitatore quotato (`cat > "$TMPDIR/review.md" <<'REVIEW_EOF'` … `REVIEW_EOF`, righe vere, niente `\n` letterali), poi, in un comando shell separato, `gh pr review ${PR_NUMBER} --comment --body-file "$TMPDIR/review.md"`. Mai `--body "..."`: dentro le doppie virgolette la shell esegue i backtick del markdown e lascia `\n` come testo, e il gate scarta la review. Chiudi con `## LGTM` solo quando non c'e' un `🔴 Important` aperto, nessuna domanda funnel-critical irrisolta e il contratto del body e' valido. Incerto → `❓ q:`, mai speculazione. Lavora read-only: niente edit, commit, push, npm o test. Fermati subito dopo aver postato.
 
       # La review Codex puo' uscire 0 anche quando il run e' abortito su un
       # errore API transiente SENZA aver postato una review: il job sembra verde
