@@ -166,6 +166,7 @@ export const CONTENT_GATES = [
   'generator/tests/evergreen-tassa-salute-tensioni-ticino-refresh.test.mjs',
   'generator/tests/evergreen-tassazione-individuale-refresh.test.mjs',
   'generator/tests/evergreen-tassazione-individuale-voto-refresh.test.mjs',
+  'generator/tests/evergreen-telelavoro-accordo-definitivo-italia-refresh.test.mjs',
   'generator/tests/evergreen-triad-refresh.test.mjs',
   'generator/tests/faq-locale-consistency.test.mjs',
   'generator/tests/frontaliere-sitemap-shadow.test.mjs',
