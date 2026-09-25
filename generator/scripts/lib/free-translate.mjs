@@ -184,15 +184,27 @@ export function getTranslationCascadeConfigurationKey() {
     huggingFace: Boolean(HF_TOKEN),
     // Lane Codex del processo (socket del broker e budget) e sua posizione:
     // un evento fallito senza broker va ritentato quando il broker c'e'
-    // (version 2, 2026-09-25). Una lane fermata nella run (budget esaurito o
-    // tre fallimenti di fila) vale come assente: il fallimento memorizzato da
-    // quel punto in poi non deve restare valido per la run dopo, che riparte
-    // con il budget pieno.
-    codex: !_codexStopReason && _codexSocketPresent()
-      && _codexBudget('FREE_TRANSLATE_CODEX_MAX_CALLS', CODEX_TRANSLATE_MAX_CALLS_DEFAULT) > 0
-      ? _codexTierPosition()
-      : false,
+    // (version 2, 2026-09-25). Una lane che non puo' piu' servire questa run
+    // vale come assente: il fallimento memorizzato da quel punto in poi non
+    // deve restare valido per la run dopo, che riparte con il budget pieno.
+    codex: _codexLaneUsableForFingerprint() ? _codexTierPosition() : false,
   });
+}
+
+/**
+ * La lane Codex puo' ancora servire una chiamata in questa run? Fermata
+ * (budget scoperto al tentativo successivo o tre fallimenti di fila), senza
+ * socket, oppure con il budget di chiamate o di tempo GIA' esaurito
+ * dall'ultima chiamata: `_codexStopReason` si imposta solo al tentativo dopo,
+ * e senza questo controllo il passthrough dell'ultima chiamata finiva sotto
+ * la chiave della lane disponibile (review di #1869, 5315911624). Stessi
+ * limiti di `_translateWithCodexNow`.
+ */
+function _codexLaneUsableForFingerprint() {
+  if (_codexStopReason || !_codexSocketPresent()) return false;
+  const maxCalls = _codexBudget('FREE_TRANSLATE_CODEX_MAX_CALLS', CODEX_TRANSLATE_MAX_CALLS_DEFAULT);
+  const maxMs = _codexBudget('FREE_TRANSLATE_CODEX_MAX_MS', CODEX_TRANSLATE_MAX_MS_DEFAULT);
+  return _codexCalls < maxCalls && maxMs - _codexSpentMs >= CODEX_TRANSLATE_MIN_CALL_MS;
 }
 
 // ── Instance Health Tracking ────────────────────────────────────────────────

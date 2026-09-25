@@ -365,11 +365,29 @@ test('la fingerprint tratta come assente una lane fermata nella run (budget esau
   try {
     stubCodex(`CODEX ${EN}`);
     assert.equal(key().codex, 'after-premium');
-    await captureLog(async () => [await it(), await it()]);
-    // Seconda chiamata: budget di 1 esaurito, tier fermato.
+    await captureLog(() => it());
+    // L'unica chiamata ha consumato il budget: la lane non puo' piu' servire
+    // la run anche se lo stop si registra solo al tentativo successivo.
+    assert.equal(key().codex, false);
+    await captureLog(() => it());
     assert.equal(key().codex, false);
   } finally {
     delete process.env.FREE_TRANSLATE_CODEX_MAX_CALLS;
+  }
+  // Budget di tempo: una chiamata che lascia meno del minimo per la prossima
+  // (15 s) rende la lane assente, anche senza stop registrato.
+  process.env.FREE_TRANSLATE_CODEX_MAX_MS = '20000';
+  const realNow = Date.now;
+  let offset = 0;
+  Date.now = () => realNow() + offset;
+  try {
+    stubCodex(async () => { offset += 10_000; return `CODEX ${EN}`; });
+    assert.equal(key().codex, 'after-premium');
+    await captureLog(() => it());
+    assert.equal(key().codex, false);
+  } finally {
+    Date.now = realNow;
+    delete process.env.FREE_TRANSLATE_CODEX_MAX_MS;
   }
   // Una run nuova (qui: il seam azzera lo stato) riparte con la lane viva.
   stubCodex(`CODEX ${EN}`);
