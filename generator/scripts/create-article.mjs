@@ -170,7 +170,7 @@ import { stripVacuousFacts } from './lib/key-facts-specificity.mjs';
 import { checkCantonToponymConsistency } from './lib/cantone-toponimi-coerenza.mjs';
 import { tokenizeIt, jaccardSim, containmentSim, normalizeItWord, STOP_WORDS_IT } from './lib/it-text-similarity.mjs';
 import { articleEntities, commonEntityMinDf, corpusCommonEntities, distinctiveEntities } from './lib/dup-entities.mjs';
-import { countLocalNewsHits, isInLocalNewsArea, isLocalNews } from './lib/local-news.mjs';
+import { countLocalNewsHits, isLocalNews } from './lib/local-news.mjs';
 import { fixMicrocopy } from './lib/it-microcopy-guard.mjs';
 import { DOMAIN_DUP_STOPLIST, filterDistinctive } from './lib/dup-stoplist.mjs';
 import { JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagnostics, repairLlmJson } from './lib/llm-json-repair.mjs';
@@ -7872,7 +7872,8 @@ async function scanNewsSources() {
   // than disabled: sampled 25 runs on 2026-08-10, frontaliere reaches the
   // pre-spend classifier with 47-56 candidates, and that is the cost envelope
   // this pipeline is sized for. Removing the topical drop would push ~495.
-  // On the frontaliere section a place of the local-news area also anchors:
+  // On the frontaliere section a local-news headline (isLocalNews: the kind
+  // of news and a place of the area, for the same event) also anchors:
   // hasDomainAnchor misses 97 of the 162 Ticino names of the BFS list
   // (Cadenazzo, Pregassona…), and a local story named only by one of them
   // would be dropped here before the local-news admission below could see it

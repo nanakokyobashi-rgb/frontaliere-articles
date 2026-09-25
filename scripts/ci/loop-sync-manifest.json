@@ -4368,10 +4368,10 @@
     {
       "path": "generator/scripts/lib/local-news.mjs",
       "mode": "corpus-only",
-      "reason": "Cronaca locale che la sezione frontaliere pubblica anche senza angolo frontaliere (cronaca nera, incidenti stradali, sport, cultura ed eventi), decisione del proprietario del 2026-09-25: il genere (radici a inizio parola sul testo normalizzato) E il luogo (Ticino dall'elenco BFS di generator/data/ticino-municipalities.json, i nomi comuni solo dopo una preposizione di luogo; comuni di confine delle sole province VA, CO e VB dall'indice di topic-coverage-guard.mjs), legati frase per frase: il luogo piu' vicino al genere, introdotto da una preposizione o come dateline, decide dove e' avvenuto il fatto. isInLocalNewsArea ancora anche il gate geografico della scansione (filterByAnchor) sulla sezione frontaliere. In create-article.mjs aggiunge un segnale all'ammissione (hasAdmissionSignal / countAdmissionHits) e decide il ramo cronaca del prompt, dell'espansione, di CTA e link interni e del controllo di densita'. Corpus-only per la stessa ragione di fact-check-response.mjs: la generazione gira solo in questo repo.",
+      "reason": "Cronaca locale che la sezione frontaliere pubblica anche senza angolo frontaliere (cronaca nera, incidenti stradali, sport, cultura ed eventi), decisione del proprietario del 2026-09-25: il genere (radici a inizio parola sul testo normalizzato) E il luogo (Ticino dall'elenco BFS di generator/data/ticino-municipalities.json, i nomi comuni solo dopo una preposizione di luogo; comuni di confine delle sole province VA, CO e VB dall'indice di topic-coverage-guard.mjs), legati frase per frase: il luogo piu' vicino al genere, introdotto da una preposizione o come dateline, decide dove e' avvenuto il fatto. Sulla sezione frontaliere una headline che isLocalNews ancora anche il gate geografico della scansione (filterByAnchor). In create-article.mjs aggiunge un segnale all'ammissione (hasAdmissionSignal / countAdmissionHits) e decide il ramo cronaca del prompt, dell'espansione, di CTA e link interni e del controllo di densita'. Corpus-only per la stessa ragione di fact-check-response.mjs: la generazione gira solo in questo repo.",
       "baseline": {
         "site": null,
-        "corpus": "64086c62dc6010e1",
+        "corpus": "8a3309a1cd0888c8",
         "alignedAt": "2026-09-25"
       }
     },

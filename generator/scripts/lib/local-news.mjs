@@ -23,7 +23,7 @@
  * The scan's anchor gate (domainAnchor.mjs) is not enough: it also accepts
  * Zurich, Bern and every border comune of Sondrio, Lecco or Aosta, and it
  * misses 97 of the 162 Ticino names, so on the frontaliere section the scan
- * also anchors on isInLocalNewsArea (filterByAnchor). Names that
+ * also anchors a headline that isLocalNews (filterByAnchor). Names that
  * span the border of the area are not used: Lago Maggiore (also Novara), Lario
  * (also Lecco), Gottardo (also Uri), San Bernardino (Graubünden).
  *
