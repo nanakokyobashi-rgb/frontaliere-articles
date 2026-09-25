@@ -16,6 +16,13 @@ import { fileURLToPath } from 'node:url';
 //   dell'anno successivo: https://www.bazg.admin.ch/it/faq-contrassegno-e-acquisto-e-vignetta
 // - Annuale transfrontaliero Arcobaleno Como-Lugano 2a classe 1638 CHF, valido
 //   dal 14.12.2025: https://arcobaleno.ch/it/home/abbonamenti/abbonamento-annuale-transfrontaliero
+// - FAQ fiscale: la risposta prometteva detrazioni in Italia per carburante,
+//   assicurazione e manutenzione. Per chi rientra nell'Accordo CH-IT del
+//   23.12.2020 l'imposta alla fonte e' definitiva e la TOU non e' piu' ammessa:
+//   https://www4.ti.ch/dfe/dc/dichiarazione/imposte-alla-fonte-1/richiesta-di-correzione-dellimposizione-alla-fonte
+//   In Italia il reddito di lavoro dipendente e' costituito da tutte le somme
+//   percepite (art. 51 c. 1 TUIR), senza deduzioni per l'auto casa-lavoro:
+//   https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.del.presidente.della.repubblica:1986-12-22;917~art51
 // Conti: 13.200 km x 6,5 l/100 km x 2,154 = 1.848 EUR -> 1.850 EUR -> 1.740 CHF;
 // 950 EUR -> 890 CHF; visibili 1.740 + 40 + 1.800 = 3.580; nascosti
 // 890 + 900 + 3.300 = 5.090; totale 8.670; risparmio 8.670 - 1.638 > 7.000.
@@ -30,6 +37,13 @@ const n = (digits) => digits.replace(/^(\d+)(\d{3})$/, '$1[.,  ]$2');
 
 function bodySource(locale) {
   return fs.readFileSync(path.join(ROOT, 'content', 'blog-body', locale, `${SLUG}.ts`), 'utf8');
+}
+
+function faqAnswers(locale) {
+  const line = bodySource(locale).split('\n').find((l) => l.includes(`'blog.article.${SLUG}.faq'`));
+  assert.ok(line, `faq ${locale} presente`);
+  const literal = line.slice(line.indexOf(": '") + 3, line.lastIndexOf("',"));
+  return JSON.parse(literal.replace(/\\'/g, "'")).map((item) => item.a).join('\n');
 }
 
 function metaExcerpt(locale) {
@@ -79,5 +93,14 @@ for (const locale of LOCALES) {
     assert.doesNotMatch(source, /\b920 CHF|CHF 920\b|\*\*920/, 'assicurazione al vecchio cambio');
     assert.doesNotMatch(source, /TCS/, 'fonte non verificata');
     assert.doesNotMatch(metaExcerpt(locale), new RegExp(n('7500')), 'excerpt con tetto superato');
+  });
+
+  test(`${locale}: la FAQ fiscale non promette detrazioni per l'auto`, () => {
+    const answers = faqAnswers(locale);
+    assert.match(answers, /23(?:\.)? (?:dicembre|December|Dezember|décembre) 2020/, 'Accordo CH-IT del 23.12.2020');
+    assert.match(answers, /tassazione ordinaria ulteriore|nachträgliche ordentliche Veranlagung|taxation ordinaire ultérieure|subsequent ordinary assessment/);
+    assert.match(answers, /art\. 51 TUIR/i);
+    assert.doesNotMatch(answers, /beneficiare di detrazioni fiscali per le spese di trasporto|Steuerabzügen für Transportkosten|déductions fiscales pour les coûts de transport|tax deductions for transport costs/);
+    assert.doesNotMatch(answers, /Frontiers can|Les frontières peuvent|Die Grenzen können/);
   });
 }
