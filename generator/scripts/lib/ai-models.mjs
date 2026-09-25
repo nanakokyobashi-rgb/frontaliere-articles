@@ -7660,9 +7660,10 @@ export function __claimCodexFallbackForTests() {
  * retried by the next run, it is not a persistent fault of the roster.
  */
 function _codexBrokerQueueWaitMs() {
-  const raw = Number.parseInt((process.env.CODEX_BROKER_QUEUE_WAIT_MS || '').trim(), 10);
-  if (!Number.isFinite(raw) || raw < 0) return CODEX_BROKER_QUEUE_WAIT_DEFAULT_MS;
-  return Math.min(raw, CODEX_BROKER_QUEUE_WAIT_MAX_MS);
+  // Solo cifre: `parseInt('20m')` darebbe 20 ms, cioe' nessuna attesa in coda.
+  const raw = String(process.env.CODEX_BROKER_QUEUE_WAIT_MS || '').trim();
+  if (!/^\d+$/.test(raw)) return CODEX_BROKER_QUEUE_WAIT_DEFAULT_MS;
+  return Math.min(Number(raw), CODEX_BROKER_QUEUE_WAIT_MAX_MS);
 }
 
 function _codexTransportError(message) {
@@ -9338,13 +9339,18 @@ export async function callLLM(messages, opts = {}) {
         `${model}: ${msg.slice(0, 200).replace(ENTRY_TAIL_SEPARATOR_RE, '')}`,
         {
           reason: `${model}: ${msg}`,
-          // Socket/queue failures are authoritative transient evidence even
-          // when their wording contains neither "timeout" nor "temporarily".
-          // Without this, Codex's "queue wait exceeded" and "closed without a
-          // response" errors disappear from the aggregate exhaustion tally.
+          // Socket/queue failures of the local CLI lanes are authoritative
+          // transient evidence even when their wording contains neither
+          // "timeout" nor "temporarily". Only for claude-cli/codex-cli, the
+          // same set as `transportOnly` below: `transportFault` is also set
+          // on a GitHub Models catalog 401 (expired PAT), a persistent fault
+          // that must keep its `401` vote instead of turning a missing
+          // article into a green deferral.
           authoritative: isAuthoritativePersistentReason(e.nonRetryableReason)
             ? 'persistent'
-            : e.transportFault ? 'transport' : null,
+            : (e.transportFault && (provider === PROVIDER.CLAUDE_CLI || provider === PROVIDER.CODEX_CLI))
+              ? 'transport'
+              : null,
         },
       );
       _recordLastResortOutcome(model, 'failed');
