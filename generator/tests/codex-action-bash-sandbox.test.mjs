@@ -74,7 +74,9 @@ test('post-merge-followup non porta variabili di sandbox Claude', () => {
 test('l’action Codex ha un watchdog interno prima del kill del runner', () => {
   const action = readFileSync(ACTION_FILE, 'utf8');
   assert.match(action, /\/usr\/bin\/timeout/);
-  assert.match(action, /codex_exec_timeout_seconds=1800/);
+  // Per caller (input exec_timeout_seconds), default invariato a 1800s:
+  // intervallo e override sono in codex-exec-watchdog-auth.test.mjs.
+  assert.match(action, /codex_exec_timeout_seconds="\$\{CODEX_EXEC_TIMEOUT_SECONDS:-1800\}"/);
   assert.match(action, /codex_exec_kill_grace_seconds=30/);
   assert.match(action, /\$codex_timeout_bin[\s\S]*--signal=TERM[\s\S]*--kill-after=/);
   assert.match(action, /"\$\{codex_exec_timeout_seconds\}s" "\$codex_bin" exec/);

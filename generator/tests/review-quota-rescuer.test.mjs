@@ -799,7 +799,8 @@ test('un transient attempt nuovo diventa confirmed o failed solo a completamento
 test('il wiring reagisce al completamento dei consumer e rilascia reservation esistenti', () => {
   const workflow = fs.readFileSync(path.join(ROOT, '.github/workflows/review-quota-rescuer.yml'), 'utf8');
   const tests = fs.readFileSync(path.join(ROOT, '.github/workflows/tests.yml'), 'utf8');
-  assert.match(workflow, /workflow_run:[\s\S]*- tests[\s\S]*- Issue fix \(Claude → PR\)/);
+  assert.match(workflow, /workflow_run:[\s\S]*- tests[\s\S]*- Issue fix \(Codex Luna Max → PR\)/);
+  assert.match(workflow, /- Issue decompose \(Codex Luna Max → sub-issues\)/);
   assert.match(workflow, /PR 🔴 fixer \(bounded loop-closure on bot PRs\)/);
   assert.match(workflow, /PR ❌ check fixer \(bounded, check richiesto rosso su PR bot\)/);
   assert.match(workflow, /review-quota-rescuer\.mjs/);
