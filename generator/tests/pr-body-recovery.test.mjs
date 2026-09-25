@@ -255,12 +255,10 @@ test('a cancelled run that never settles fails closed instead of returning green
   assert.match(recover.lastFailures[0], /did not settle/);
 });
 
-test('a cancellation error other than the documented 409 race remains fatal', async () => {
+test('a cancellation error other than the documented 409 race fails closed', async () => {
   const error = Object.assign(new Error('permission denied'), { status: 403 });
-  await assert.rejects(
-    () => recover('success', 'in_progress', [], [], {}, error),
-    /permission denied/,
-  );
+  assert.deepEqual(await recover('success', 'in_progress', [], [], {}, error), []);
+  assert.match(recover.lastFailures[0], /permission denied/);
 });
 
 test('missing run metadata or an unknown conclusion fails closed', async () => {

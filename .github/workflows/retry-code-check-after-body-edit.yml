@@ -120,10 +120,15 @@ jobs:
                   return Number.isFinite(retryAt) ? Math.max(0, retryAt - Date.now()) : 0;
                 })();
               const resetAt = Number(headerValue(headers, 'x-ratelimit-reset'));
-              const resetMs = Number.isFinite(resetAt) && resetAt > 0
+              const remaining = String(headerValue(headers, 'x-ratelimit-remaining') ?? '');
+              const resetMs = remaining === '0' && Number.isFinite(resetAt) && resetAt > 0
                 ? Math.max(0, resetAt * 1000 - Date.now())
                 : 0;
-              return Math.max(retryAfterMs, resetMs, retryMs * 2 ** attempt);
+              if (retryAfterRaw !== null && retryAfterRaw !== '') return retryAfterMs;
+              if (remaining === '0' && Number.isFinite(resetAt) && resetAt > 0) return resetMs;
+              // GitHub recommends at least one minute for a secondary limit
+              // when neither Retry-After nor a usable reset is available.
+              return Math.max(60000, retryMs * 2 ** attempt);
             };
             // The installation token can exhaust its shared core quota while
             // several workflows are inspecting the same PR. A rate-limit 403
@@ -152,21 +157,7 @@ jobs:
             // the CI gates; a duplicated literal could block a different
             // check if the job is ever renamed.
             const { VITEST_CHECK_NAME } = await import(`${process.env.GITHUB_WORKSPACE}/scripts/ci/lib/constants.mjs`);
-            const { data: pr } = await apiCall('load pull request', () => github.rest.pulls.get({ ...repo, pull_number: number }));
-            if (pr.state !== 'open' || pr.head.sha !== context.payload.pull_request.head.sha) return;
-            const runs = await apiCall('list tests workflow runs', () => github.paginate(github.rest.actions.listWorkflowRuns, {
-              ...repo, workflow_id: 'tests.yml', head_sha: pr.head.sha, per_page: 100,
-            }));
-            // Only runs that carry this PR's body contract and review: the
-            // `pull_request` event on the PR branch.
-            const latest = runs
-              .filter(run => run.head_branch === pr.head.ref && run.event === 'pull_request')
-              .sort((a, b) => b.id - a.id)[0];
-            if (!latest) {
-              core.info(`No tests run of PR #${number} exists on ${pr.head.sha}; the next push re-enters the code check.`);
-              return;
-            }
-            const getRun = async () => (await apiCall(`read workflow run ${latest.id}`, () => github.rest.actions.getWorkflowRun({ ...repo, run_id: latest.id }))).data;
+            let pr = null;
             const revokeNativeAutoMerge = async () => {
               // A red recovery job alone does not invalidate the previous
               // green required check. Revoke native auto-merge first, when
@@ -200,7 +191,7 @@ jobs:
                   await apiCall('block the required check', () => github.rest.checks.create({
                     ...repo,
                     name: VITEST_CHECK_NAME,
-                    head_sha: pr.head.sha,
+                    head_sha: pr?.head?.sha ?? context.payload.pull_request.head.sha,
                     status: 'completed',
                     conclusion: 'failure',
                     output: {
@@ -216,6 +207,22 @@ jobs:
               }
               core.setFailed(message);
             };
+            const main = async () => {
+              pr = (await apiCall('load pull request', () => github.rest.pulls.get({ ...repo, pull_number: number }))).data;
+            if (pr.state !== 'open' || pr.head.sha !== context.payload.pull_request.head.sha) return;
+            const runs = await apiCall('list tests workflow runs', () => github.paginate(github.rest.actions.listWorkflowRuns, {
+              ...repo, workflow_id: 'tests.yml', head_sha: pr.head.sha, per_page: 100,
+            }));
+            // Only runs that carry this PR's body contract and review: the
+            // `pull_request` event on the PR branch.
+            const latest = runs
+              .filter(run => run.head_branch === pr.head.ref && run.event === 'pull_request')
+              .sort((a, b) => b.id - a.id)[0];
+            if (!latest) {
+              core.info(`No tests run of PR #${number} exists on ${pr.head.sha}; the next push re-enters the code check.`);
+              return;
+            }
+            const getRun = async () => (await apiCall(`read workflow run ${latest.id}`, () => github.rest.actions.getWorkflowRun({ ...repo, run_id: latest.id }))).data;
             const settle = async attempt => {
               let run = await getRun();
               while (run.status !== 'completed') {
@@ -311,3 +318,7 @@ jobs:
                 currentRun.status !== 'completed' || currentRun.run_attempt !== target.run_attempt) return;
             await apiCall(`rerun workflow ${latest.id}`, () => github.rest.actions.reRunWorkflow({ ...repo, run_id: latest.id }));
             core.info(`Retrying code run ${latest.id}: ${retryReason} and the description changed.`);
+            };
+            await main().catch(async error => {
+              await failClosed(`Body recovery API failure: ${error.message}`);
+            });
