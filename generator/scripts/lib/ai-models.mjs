@@ -746,6 +746,11 @@ function _githubModelsError(message, reason = 'github_models_mapping_unavailable
 
 function _githubModelsCatalogTransportError(message, status = 0) {
   const accountFailure = status === 401 || status === 429;
+  // A 401 is an invalid/expired PAT, not a channel outage: letting it carry
+  // `transportFault` would make the aggregate classify it as transient and
+  // could defer a run with no usable GitHub credential. A 429 remains a
+  // transient rate limit and 5xx/network failures remain channel faults.
+  const channelFault = status !== 401;
   const shownStatus = status ? ` HTTP ${status}` : '';
   return _githubModelsError(
     `catalogo GitHub Models non disponibile${shownStatus}: ${message}`,
@@ -753,7 +758,7 @@ function _githubModelsCatalogTransportError(message, status = 0) {
     {
       nonRetryable: false,
       markExhausted: false,
-      transportFault: true,
+      transportFault: channelFault,
       githubModelsCatalogFault: true,
       githubModelsCatalogAccountFailure: accountFailure,
     },

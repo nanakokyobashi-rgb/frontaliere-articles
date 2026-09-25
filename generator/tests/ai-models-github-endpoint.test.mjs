@@ -323,8 +323,7 @@ describe('GitHub Models request contract', () => {
     assert.equal(catalogCalls, 2, 'resetState deve consentire il retry nel ciclo successivo');
   });
 
-  // Il catalogo 401 porta `transportFault` (il catalogo non e' il modello), ma
-  // un PAT scaduto non si ripara al run successivo: il suo `401` deve votare
+  // Un PAT scaduto non è un guasto di canale: il suo `401` deve votare
   // persistente. La causa autorevole `transport` vale solo per i canali locali
   // claude-cli/codex-cli (review di nanakokyobashi-rgb/frontaliere-articles#1874).
   test('un catalogo 401 con l\'unico PAT resta persistente nel verdetto della run', async () => {
