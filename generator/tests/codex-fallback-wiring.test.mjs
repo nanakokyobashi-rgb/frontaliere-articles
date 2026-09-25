@@ -52,8 +52,31 @@ function stepBlock(lines, index) {
   return lines.slice(start, end).join('\n');
 }
 
+// Inventario esplicito dei chiamanti. Prima il totale si confrontava con
+// CONTRACT.artifactCount, che conta anche translate-pending (fuori dalla lane)
+// e tornava solo perche' generate-article ne compensava il posto: un consumer
+// aggiunto o tolto faceva scattare il controllo, ma senza dire quale. I crawler
+// group restano legati al contratto cross-repo, i produttori non-crawler sono
+// nominati uno per uno. batch-faq-articles e' entrato il 2026-09-25 per il tier
+// Codex della cascata di traduzione (free-translate.mjs).
+const CRAWLER_GROUP_WORKFLOW = /^\.github\/workflows\/crawler-group-\d+\.yml$/;
+const NON_CRAWLER_CONSUMERS = [
+  '.github/workflows/batch-faq-articles.yml',
+  '.github/workflows/generate-article.yml',
+];
+
 test('every active article CLI caller wires the OAuth Codex broker', () => {
-  assert.equal(workflowFiles.length, CONTRACT.artifactCount, 'caller inventory changed: review new/removed consumers');
+  const crawlerArtifacts = CONTRACT.artifacts.filter((artifact) => /^crawler-group-\d+\.yml$/.test(artifact.file)).length;
+  assert.equal(
+    workflowFiles.filter((rel) => CRAWLER_GROUP_WORKFLOW.test(rel)).length,
+    crawlerArtifacts,
+    'crawler caller inventory changed: review new/removed consumers',
+  );
+  assert.deepEqual(
+    workflowFiles.filter((rel) => !CRAWLER_GROUP_WORKFLOW.test(rel)).sort(),
+    NON_CRAWLER_CONSUMERS,
+    'caller inventory changed: review new/removed consumers',
+  );
   for (const rel of workflowFiles) {
     const source = read(rel);
     const lines = source.split('\n');

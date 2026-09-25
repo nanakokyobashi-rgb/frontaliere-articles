@@ -356,8 +356,9 @@ export const AI_MODELS = Object.freeze({
   // The model is intentionally absent from DEFAULT_CHAIN: Codex is reserved for
   // the high-value article-body generation path (plus the headline-selection
   // retry once the free cascade has failed, see HEADLINE_SELECTION_FALLBACK in
-  // create-article.mjs), not translations, metadata, FAQ work or fact-check
-  // consensus.
+  // create-article.mjs), not metadata, FAQ work or fact-check consensus.
+  // Translations reach it only through free-translate.mjs's budgeted tier,
+  // when DeepL and Azure are both out for the run (owner decision 2026-09-25).
   CODEX_CLI_PRIMARY: `codex-cli/${CODEX_FALLBACK_MODEL}`,
 
   // ── Claude CLI Haiku fallback (article-body explicit opt-in) ─────────────
