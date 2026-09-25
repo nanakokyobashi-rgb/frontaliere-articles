@@ -11,6 +11,11 @@
  *    admitted by one is rejected by the next: the pre-spend classifier, the
  *    REGOLA #0 gate in the generation prompt, and point 11 of the fact-check.
  *
+ *    Later the same day the owner widened it again: «Fai passare anche queste
+ *    notizie: cronaca nera, sport, cultura e incidenti stradali» — local news
+ *    of Ticino and of the provinces of Varese, Como and VCO, with or without
+ *    a frontaliere angle. The same judges must agree on that too.
+ *
  * 2. The fact-check must get an answer it can read. Its verifiers were
  *    gpt-4.1 and gemini-2.5-flash (GitHub Models retired, Gemini quota spent),
  *    so both fell through to the same nemotron model, which answered in prose.
@@ -44,11 +49,47 @@ test('REGOLA #0 counts the commute, work in Ticino and the cantonal budget as a 
   assert.match(gate, /Canton Ticino: preventivo, deficit, imposte/);
 });
 
-test('REGOLA #0 still refuses pure cronaca and still forbids inventing the link', () => {
+test('REGOLA #0 admits local cronaca, sport and culture, only in the area, and still forbids inventing the link', () => {
+  // Second owner decision of 2026-09-25: «Fai passare anche queste notizie:
+  // cronaca nera, sport, cultura e incidenti stradali».
   const gate = frontaliereGate();
-  assert.match(gate, /NON sono nesso reale: cronaca nera, sport, cultura/);
-  assert.match(gate, /NON inventare quanti frontalieri impiega un'azienda, percorsi alternativi, orari o importi/);
+  assert.match(gate, /- Cronaca locale in Ticino e nelle province di Varese, Como e VCO: cronaca nera, incidenti stradali, sport, cultura ed eventi/);
+  assert.match(gate, /NON sono nesso reale: cronaca fuori da quest'area, eventi esteri senza impatto su tragitto o lavoro/);
+  assert.doesNotMatch(gate, /NON sono nesso reale: cronaca nera, sport, cultura/);
+  assert.match(gate, /NON inventare un legame con i frontalieri, quanti ne impiega un'azienda, percorsi alternativi, orari o importi/);
   assert.match(gate, /"abort_topical_relevance": true/);
+});
+
+test('the classifier, the headline selector and fact-check point 11 admit the same local news', () => {
+  const start = SRC.indexOf('Sei un editor del sito frontaliereticino.ch');
+  const classifier = SRC.slice(start, SRC.indexOf('HEADLINE:', start));
+  assert.match(classifier, /cronaca locale in Ticino e nelle province di Varese, Como e VCO \(cronaca nera, incidenti stradali, sport, cultura ed eventi\)/);
+  assert.match(classifier, /- Cronaca, sport, cultura ed eventi FUORI dal Ticino e dalle province di Varese, Como e VCO/);
+  assert.doesNotMatch(classifier, /Eventi culturali, sportivi, festival, gastronomia \(anche se localizzati a Ticino/);
+  assert.doesNotMatch(classifier, /Singoli episodi di cronaca \(multe, incidenti, arresti, abbandono rifiuti\)/);
+  assert.doesNotMatch(classifier, /focalizzato ESCLUSIVAMENTE sui FRONTALIERI/, 'un editor «solo frontalieri» rigetterebbe la cronaca che la lista ammette');
+
+  assert.match(SRC, /5\. CRONACA LOCALE: cronaca nera, incidenti, sport e cultura vanno bene se avvengono in Ticino o nelle province di Varese, Como e VCO; altrove no/);
+  const selectorFront = SRC.slice(SRC.indexOf('5. CRONACA LOCALE:'), SRC.indexOf('${JSON_QUOTE_SAFETY_RULE_IT}', SRC.indexOf('5. CRONACA LOCALE:')));
+  assert.doesNotMatch(selectorFront, /NO SPORT/);
+
+  const p11 = SRC.slice(SRC.indexOf('**RILEVANZA TOPICA AL FRONTALIERE TICINO-ITALIA (CRITICO)**'), SRC.indexOf('**RILEVANZA TOPICA NAZIONALE SVIZZERA (CRITICO)**'));
+  assert.match(p11, /cronaca locale in Ticino e nelle province di Varese, Como e VCO anche senza nesso con i frontalieri \(cronaca nera, incidenti stradali, sport, cultura ed eventi\)/);
+  assert.match(p11, /cronaca, sport e cultura fuori dal Ticino e dalle province di Varese, Como e VCO/);
+  assert.doesNotMatch(p11, /eventi sportivi, gossip, cultura locale non-frontaliera/);
+  // Padding and a fabricated frontaliere angle still fail the article.
+  assert.match(p11, /o con un angolo frontalieri che la fonte non ha, il verdetto è FAIL/);
+});
+
+test('the svizzera section keeps excluding cronaca, sport and culture', () => {
+  const national = SRC.slice(SRC.indexOf('Sei un editor di un sito che informa CHIUNQUE viva o lavori in Svizzera'));
+  assert.match(national.slice(0, 3000), /- Eventi culturali, sportivi, festival, gastronomia/);
+  assert.match(SRC, /Esempi che NON sono nesso reale: cronaca nera senza rilevanza politico-economica/);
+});
+
+test('the post-generation density abort spares local news without a frontaliere angle', () => {
+  assert.match(SRC, /if \(attempt === 1 && IS_FRONTALIERE && !isLocalNewsWithoutFrontaliereAngle\(pageContent\)\) \{/);
+  assert.match(SRC, /function isLocalNewsWithoutFrontaliereAngle\(text\) \{\n\s+return hasLocalNewsSignal\(text\) && checkFrontaliereDensity\(text\)\.hits === 0;/);
 });
 
 test('the pre-spend classifier admits the same local news', () => {
@@ -89,7 +130,11 @@ test('the consensus counts one vote per model that answered, and seeks a second 
   // through addIndependentVote (unit-tested in fact-check-response.test.mjs).
   const start = SRC.indexOf('const modelsToQuery = verificationModels.slice(0, 2);');
   assert.notEqual(start, -1);
-  const loop = SRC.slice(start, SRC.indexOf('if (modelResults.length === 0) {', start));
+  // Up to the fail-closed block (the Codex fallback included): an anchor that
+  // no longer exists would make indexOf return -1 and the slice run to EOF.
+  const end = SRC.indexOf('if (modelResults.length === 0 || missingSecondOpinion) {', start);
+  assert.ok(end > start, 'fine del ciclo di consenso non trovata');
+  const loop = SRC.slice(start, end);
   assert.doesNotMatch(loop, /modelResults\.push\(/, 'un voto aggiunto senza passare da addIndependentVote');
   assert.match(loop, /addIndependentVote\(modelResults, modelsToQuery\[i\], s\.value\)/);
   assert.match(loop, /_runSingleFactCheck\(next, prompt, \{ isEvergreen, excludeModels: voted \}\)/);

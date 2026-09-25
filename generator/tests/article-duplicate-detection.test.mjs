@@ -37,6 +37,16 @@
  * condizioni composte di checkForDuplicates cambiano ancora, fallisce QUESTO
  * file, con l'istruzione di riallineare replica e attese.
  *
+ * ## Entità (2026-09-25, run 36096755072)
+ *
+ * Il segnale «Entità» non è più replicato qui: viene da
+ * generator/scripts/lib/dup-entities.mjs, lo stesso modulo che il generatore
+ * importa. Sono i numeri di titolo + excerpt e i comuni del titolo, MENO i
+ * numeri che il corpus pubblicato ripete (anni, zona dei 20 km, 7500/10000
+ * dell'accordo 2024). Prima contavano, e due pagine-comune che dicevano
+ * entrambe «2026» valevano Entità=100%: bastava il modello di titolo condiviso
+ * per scartare «vivere a Erba» come doppione di un altro comune.
+ *
  * ## ADATTAMENTI rispetto al sito (oltre a quanto sopra)
  *  - `node:test` + generator/tests/lib/expect-shim.mjs al posto di vitest.
  *  - Lo stemmer inline del sito (stemIt) non è replicato: le asserzioni sui
@@ -51,6 +61,13 @@ import {
   STOP_WORDS_IT,
 } from '../scripts/lib/it-text-similarity.mjs';
 import { computeAdaptiveEvergreenThresholds } from '../scripts/lib/scoring/constants.mjs';
+import {
+  articleEntities,
+  commonEntityMinDf,
+  corpusCommonEntities,
+  distinctiveEntities,
+  extractKeyEntities,
+} from '../scripts/lib/dup-entities.mjs';
 
 // Taglia del corpus alla registrazione delle attese (3.768 titoli IT misurati
 // il 2026-08-08). La soglia titolo è adattiva MA satura al ceiling 0.85, e a
@@ -69,15 +86,19 @@ function getSignificantWords(text) {
     .map((w) => normalizeItWord(w));
 }
 
-function extractKeyEntities(text) {
-  const entities = new Set();
-  const s = String(text || '');
-  for (const m of s.matchAll(/\d[\d.'',]*\d/g)) entities.add(m[0].replace(/[.''',]/g, ''));
-  for (const m of s.matchAll(/\b(\d+)[.,]?(\d*)\s*%/g)) entities.add(`${m[1]}${m[2]}%`);
-  return [...entities];
-}
+// Il boilerplate numerico del corpus, come lo misura il generatore (≥ 0,5%
+// degli articoli pubblicati). Qui la frequenza viene da un corpus sintetico,
+// così le attese non dipendono dal contenuto del checkout: 25 pagine-modello
+// che portano gli stessi anni e le stesse cifre dell'accordo 2024. La misura
+// sul corpus VERO (2026 in 929 articoli su 6181, 7500 in 35) è nel commento
+// di testa di dup-entities.mjs; leggerlo da qui farebbe di questo file un gate
+// sul contenuto (content-gates-main.test.mjs).
+const BOILERPLATE = corpusCommonEntities(
+  Array.from({ length: 25 }, () => ['2026', '2025', '2024', '10', '20', '7500', '10000']),
+  commonEntityMinDf(0),
+);
 
-function checkDuplicate(newArticle, existingArticle, corpusSize = CORPUS_SIZE_AT_RECORDING) {
+function checkDuplicate(newArticle, existingArticle, corpusSize = CORPUS_SIZE_AT_RECORDING, common = BOILERPLATE) {
   const ID_THRESHOLD = 0.72;
   const TITLE_THRESHOLD = computeAdaptiveEvergreenThresholds(corpusSize).titleJaccard;
   const EXCERPT_THRESHOLD = 0.62;
@@ -89,8 +110,8 @@ function checkDuplicate(newArticle, existingArticle, corpusSize = CORPUS_SIZE_AT
   const titleSim = jaccardSim(getSignificantWords(newArticle.title), getSignificantWords(existingArticle.title));
   const excerptSim = jaccardSim(getSignificantWords(newArticle.excerpt), getSignificantWords(existingArticle.excerpt));
   const entitySim = jaccardSim(
-    extractKeyEntities(newArticle.title + ' ' + newArticle.excerpt),
-    extractKeyEntities(existingArticle.title + ' ' + existingArticle.excerpt),
+    distinctiveEntities(articleEntities(newArticle.title, newArticle.excerpt), common),
+    distinctiveEntities(articleEntities(existingArticle.title, existingArticle.excerpt), common),
   );
 
   const combinedScore = 0.25 * idSim + 0.30 * titleSim + 0.25 * excerptSim + 0.20 * entitySim;
@@ -177,11 +198,12 @@ describe('Article duplicate detection (multi-signal, algoritmo ATTUALE)', () => 
       expect(checkDuplicate(ANOTHER_DIFFERENT, ARTICLE_1).isDuplicate).toBe(false);
     });
 
-    it('does not flag LAMal vs pillar-3 articles (entità identiche ma tutto il resto diverso)', () => {
-      // Entrambi citano solo "2026": entitySim 1.00. È il caso che il gate
-      // entità richiede accompagnato da combinato ≥ 0.45 — qui 0.23.
+    it('does not flag LAMal vs pillar-3 articles (condividono solo «2026»)', () => {
+      // Entrambi citano solo "2026", che il corpus ripete ovunque: non è
+      // un'entità in comune, entitySim 0.
       const result = checkDuplicate(DIFFERENT_ARTICLE, ANOTHER_DIFFERENT);
       expect(result.isDuplicate).toBe(false);
+      expect(result.entitySim).toBe(0);
     });
 
     it('does not flag articles with same source data but very different framing', () => {
@@ -204,6 +226,103 @@ describe('Article duplicate detection (multi-signal, algoritmo ATTUALE)', () => 
           'Nuovi orari FFS e TILO per i pendolari transfrontalieri. Abbonamenti Arcobaleno in arrivo.',
       };
       expect(checkDuplicate(genericNew, ARTICLE_1).isDuplicate).toBe(false);
+    });
+  });
+
+  describe('pagine-comune (run 36096755072): il luogo conta, il boilerplate no', () => {
+    // Pubblicati, verbatim dal corpus.
+    const BRISSAGO = {
+      id: 'vivere-brissago-valtravaglia-ticino',
+      title: 'Vivere a Brissago-Valtravaglia, lavorare in Ticino: guida frontaliere',
+      excerpt: 'Permesso G, tassazione, AVS, LAMal: tutto quello che devi sapere per trasferirsi a Brissago-Valtravaglia e lavorare da frontaliere in Ticino nel 2026.',
+    };
+    const TOVO = {
+      id: 'vivere-tovo-di-sant-agata-e-lavorare-in-grigioni-da-frontaliere',
+      title: "Vivere a Tovo di Sant'Agata e lavorare in Grigioni da frontaliere",
+      excerpt: "Il Nuovo Accordo Frontalieri del 2024 è entrato in vigore dal 1° gennaio 2024 e prevede l'esenzione di € 7.500 per i vecchi frontalieri e di € 10.000 per i nuovi frontalieri.",
+    };
+    const SPRIANA = {
+      id: 'vivere-spriana-grigioni-frontaliere',
+      title: 'Vivere a Spriana, lavorare in Grigioni da frontaliere',
+      excerpt: 'Guida completa per frontalieri: Nuovo Accordo 2024, imposta alla fonte solo Svizzera, esenzione €7.500-€10.000, Permesso G, AVS/LPP e ristorno italiano.',
+    };
+    const GORNATE = {
+      id: 'gornate-olona-regime-fiscale',
+      title: 'Gornate Olona: lavorare in Ticino da frontaliere',
+      excerpt: "Da Gornate Olona al Ticino: accordo frontalieri in vigore dal 1° gennaio 2024, imposta alla fonte, esenzione €7'500 o franchigia €10'000, AVS e LAMal.",
+    };
+    const TRASQUERA_A = {
+      id: 'vivere-a-trasquera-e-lavorare-in-ticino-da-frontaliere',
+      title: 'Vivere a Trasquera, lavorare in Ticino: collegamenti e costo della vita',
+      excerpt: 'La regione di Trasquera offre una qualità della vita elevata e un ambiente naturale unico. Tuttavia, lavorare in Ticino può presentare alcuni sfidi per i frontalieri.',
+    };
+    const TRASQUERA_B = {
+      id: 'vivere-trasquera-lavorare-ticino',
+      title: 'Vivere a Trasquera e lavorare in Ticino da frontaliere',
+      excerpt: 'Guida pratica per i frontalieri: imposte, nuovo accordo fiscale e gestione del reddito tra Italia e Canton Ticino.',
+    };
+    // Generati nella run e scartati: titolo dal log, excerpt sullo stesso
+    // modello delle pagine pubblicate.
+    const ERBA = {
+      id: 'vivere-erba-lavorare-ticino-frontaliere',
+      title: 'Vivere a Erba e lavorare in Ticino da frontaliere',
+      excerpt: 'Tragitto, tassazione, AVS e LAMal: cosa sapere per vivere a Erba e lavorare da frontaliere in Ticino nel 2026.',
+    };
+    const GORNATE_FISCALE = {
+      id: 'gornate-olona-guida-fiscale-frontalieri',
+      title: 'Guida fiscale per frontalieri a Gornate Olona',
+      excerpt: "Da Gornate Olona al Ticino: imposta alla fonte, esenzione €7'500 o franchigia €10'000 del nuovo accordo 2024, ristorni e dichiarazione dei redditi.",
+    };
+
+    it('«vivere a Erba» non è più il doppione di un altro comune per un «2026» in comune', () => {
+      const result = checkDuplicate(ERBA, BRISSAGO);
+      expect(result.isDuplicate).toBe(false);
+      expect(result.entitySim).toBe(0);
+      // Con il segnale di prima (tutti i numeri contano) era 100%.
+      const before = jaccardSim(
+        extractKeyEntities(`${ERBA.title} ${ERBA.excerpt}`),
+        extractKeyEntities(`${BRISSAGO.title} ${BRISSAGO.excerpt}`),
+      );
+      expect(before).toBe(1);
+    });
+
+    it('due comuni diversi con le stesse cifre dell\'accordo 2024 non sono doppioni', () => {
+      // Il falso positivo pubblicato: combinato 0,47 con entità 1,00 prima.
+      const result = checkDuplicate(TOVO, SPRIANA);
+      expect(result.isDuplicate).toBe(false);
+      expect(result.entitySim).toBe(0);
+    });
+
+    it('lo stesso comune resta un doppione, ora per il luogo e non per le cifre', () => {
+      const result = checkDuplicate(GORNATE_FISCALE, GORNATE);
+      expect(articleEntities(GORNATE.title, '')).toContain('comune:gornate-olona');
+      expect(result.entitySim).toBe(1);
+      expect(result.isDuplicate).toBe(true);
+    });
+
+    it('due pagine pubblicate sullo stesso comune vengono riconosciute', () => {
+      const result = checkDuplicate(TRASQUERA_B, TRASQUERA_A);
+      expect(result.isDuplicate).toBe(true);
+    });
+
+    it('il comune viene dal titolo, non dall\'excerpt che nomina i vicini', () => {
+      const entities = articleEntities('Vivere ad Allein, lavorare in Vallese', 'A pochi minuti da Aosta, con il Gran San Bernardo.');
+      expect(entities).toContain('comune:allein');
+      expect(entities).not.toContain('comune:aosta');
+    });
+  });
+
+  describe('boilerplate numerico', () => {
+    it('la soglia è lo 0,5% del corpus, mai sotto 20', () => {
+      expect(commonEntityMinDf(0)).toBe(20);
+      expect(commonEntityMinDf(3000)).toBe(20);
+      expect(commonEntityMinDf(6181)).toBe(31);
+    });
+
+    it('conta gli articoli, non le occorrenze', () => {
+      const common = corpusCommonEntities([['2026', '2026'], ['2026'], ['411000']], 2);
+      expect([...common]).toEqual(['2026']);
+      expect(distinctiveEntities(['2026', '411000'], common)).toEqual(['411000']);
     });
   });
 
@@ -312,6 +431,11 @@ describe('drift guard — checkForDuplicates in create-article.mjs', () => {
     expect(src).toContain('(excerptSim >= EXCERPT_THRESHOLD && entitySim >= 0.20) ||');
     expect(src).toContain('(entitySim >= 0.65 && combinedScore >= 0.45) ||');
     expect(src).toContain('.map(w => normalizeItWord(w))');
+    // Le entità vengono dal modulo condiviso, al netto del boilerplate del corpus.
+    expect(src).toContain('const existingEntityLists = existingArticles.map((a) => articleEntities(a.title, a.excerpt));');
+    expect(src).toContain('const commonEntities = corpusCommonEntities(existingEntityLists, commonEntityMinDf(existingArticles.length));');
+    expect(src).toContain('const existingEntities = distinctiveEntities(existingEntityLists[index], commonEntities);');
+    expect(src).not.toContain('function extractKeyEntities(text)');
 
     // I pesi del combinato, riga per riga come stanno nel sorgente.
     expect(src).toContain('0.25 * idSim +');

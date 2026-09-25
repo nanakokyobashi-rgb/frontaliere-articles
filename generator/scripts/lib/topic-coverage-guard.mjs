@@ -547,6 +547,20 @@ function comuneMatchAll(text) {
 }
 
 /**
+ * Gli slug di OGNI comune nominato nel testo, senza ripetizioni, in ordine di
+ * prima comparsa. Stesse regole di `comuneTopicKey` (sequenza completa, nomi
+ * ambigui e troppo corti esclusi, indice vuoto → nessun comune), ma senza
+ * sceglierne uno: serve al controllo duplicati di create-article.mjs, che
+ * confronta i LUOGHI di due articoli come entità (vedi dup-entities.mjs).
+ *
+ * @param {string} text
+ * @returns {string[]}
+ */
+export function comuniMentioned(text) {
+  return [...new Set(comuneMatchAll(text).map((m) => m.value))];
+}
+
+/**
  * Come `comuneTopicKey`, ma dice anche DOVE il nome ha combaciato.
  *
  * La posizione non serve alla chiave — serve a `professionEvidenceIsOnlyAComuneName`,

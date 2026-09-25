@@ -364,7 +364,9 @@ export const AI_MODELS = Object.freeze({
   // The model is intentionally absent from DEFAULT_CHAIN: Codex is reserved for
   // the high-value article-body generation path (plus the headline-selection
   // retry once the free cascade has failed, see HEADLINE_SELECTION_FALLBACK in
-  // create-article.mjs), not metadata, FAQ work or fact-check consensus.
+  // create-article.mjs), not metadata or FAQ work. The fact-check reaches it
+  // only as its last verifier, pinned, when the free verifiers give no verdict
+  // or no second opinion (owner decision 2026-09-25, llmFactCheck).
   // Translations reach it only through free-translate.mjs's budgeted tier,
   // when DeepL and Azure are both out for the run (owner decision 2026-09-25).
   CODEX_CLI_PRIMARY: `codex-cli/${CODEX_FALLBACK_MODEL}`,
@@ -1489,10 +1491,12 @@ async function _withClaudeCliSlot(fn) {
 // (la scala di riduzione morde di piu' ai retry) e producono il thin-content che
 // la preferenza esiste per evitare.
 //
-// Il fact-check NON entra in questo conto: resta deliberatamente sui modelli
-// free. E' un consenso fra verificatori indipendenti, e preferire un solo
-// modello per tutti i membri collasserebbe l'indipendenza che il guard
-// `local/fallback cannot self-verify` esiste per difendere.
+// Il fact-check NON entra in questo conto: i suoi verificatori restano i
+// modelli free, perche' preferire un solo modello per tutti i membri
+// collasserebbe l'indipendenza del consenso. L'unico modello del piano che il
+// fact-check chiama e' Codex Luna Max, come ultimo verificatore con la catena
+// fissata su di lui, al massimo una volta per fact-check (decisione del
+// proprietario 2026-09-25): un'altra lane, fuori da questo tetto claude-cli.
 //
 // NON alzarlo a 300 come `translate-pending.yml` del sito (#5885): li' il tetto
 // e' dimensionato su 900 job in un workflow di traduzione, qui su una singola

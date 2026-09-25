@@ -91,9 +91,11 @@ import { decodeSyntheticSourceToken, isZeroSourceForGenerationBudget, markSynthe
 // titolo — li' i modelli free funzionano e i gate lo confermano. La selezione
 // headline parte anch'essa dai free, ma ricade su Codex quando un tentativo
 // fallisce: vedi HEADLINE_SELECTION_FALLBACK, che spiega perche' i free li'
-// non bastano piu'. E nemmeno al fact-check: quello e' un consenso fra verificatori
-// INDIPENDENTI, e mandarli tutti sullo stesso modello collasserebbe
-// l'indipendenza che il guard «local/fallback cannot self-verify» difende.
+// non bastano piu'. Il fact-check non la PREFERISCE: e' un consenso fra
+// verificatori INDIPENDENTI sui modelli free, e mandarli tutti sullo stesso
+// modello collasserebbe quell'indipendenza. Codex ci entra solo come ultimo
+// verificatore, quando i free non danno un verdetto o un secondo parere
+// (decisione del proprietario 2026-09-25, vedi llmFactCheck).
 const PREFERRED_GENERATION_MODELS = [
   AI_MODELS.CODEX_CLI_PRIMARY,
 ];
@@ -167,6 +169,8 @@ import { AI_SEARCH_PROMPT_BLOCK_IT } from './lib/ai-search-template.mjs';
 import { stripVacuousFacts } from './lib/key-facts-specificity.mjs';
 import { checkCantonToponymConsistency } from './lib/cantone-toponimi-coerenza.mjs';
 import { tokenizeIt, jaccardSim, containmentSim, normalizeItWord, STOP_WORDS_IT } from './lib/it-text-similarity.mjs';
+import { articleEntities, commonEntityMinDf, corpusCommonEntities, distinctiveEntities } from './lib/dup-entities.mjs';
+import { LOCAL_NEWS_KEYWORDS, hasLocalNewsSignal } from './lib/local-news.mjs';
 import { fixMicrocopy } from './lib/it-microcopy-guard.mjs';
 import { DOMAIN_DUP_STOPLIST, filterDistinctive } from './lib/dup-stoplist.mjs';
 import { JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagnostics, repairLlmJson } from './lib/llm-json-repair.mjs';
@@ -489,9 +493,11 @@ const TOPICAL_KEYWORDS = [
   // Commute disruptions and cantonal finances (2026-09-25, owner decision):
   // road closures on the commute, Ticino job cuts and the cantonal budget
   // were being dropped as off-topic. The anchor gate still requires a Ticino
-  // or border-town token, and the classifier still rejects single episodes.
-  // No bare `strad`: it would admit every "incidente stradale", which is
-  // cronaca, not a disruption of the commute.
+  // or border-town token.
+  // No bare `strad`: this list also ranks candidates and feeds the svizzera
+  // lexicon, where "incidente stradale" is not news. The frontaliere section
+  // admits road accidents through LOCAL_NEWS_KEYWORDS instead (see the
+  // admission lexicon below).
   'viabilit', 'cantier', 'deviazion', 'chiusur', 'ffs',
   'preventivo', 'deficit',
   // Housing
@@ -612,25 +618,38 @@ function sectionTopicalKeywords(national) {
 // lexicon: RANKING (ordering already-safe candidates, e.g. the svizzera
 // restore backstop below) and ADMISSION (deciding whether a candidate is
 // worth paying for a full generation attempt — the headline topical-gate and
-// the pre-LLM source pre-filter in generateAndValidateArticle). The
-// admission gates feed candidates toward REGOLA #0 / the frontaliere-density
-// check (FRONTALIERE_DENSITY_TERMS above), which has no events/culture
-// terms. A candidate that only matches 'festival'/'sagra'/etc. therefore
-// sailed through admission and was rejected only after a full paid
-// generation — the Locarno Film Festival case measured in #189. The 8
-// events/culture tokens (added 2026-07-17, see the comment on
-// TOPICAL_KEYWORDS above) are excluded from the admission lexicon; they stay
-// in TOPICAL_KEYWORDS for ranking, where they are justified by real traffic
-// data. Scoped to the frontaliere section only: the national (svizzera)
-// section has no equivalent downstream density gate (both checks above are
-// `if (IS_FRONTALIERE)`-only), so there is no contradiction to fix there.
-const FRONTALIERE_EVENTS_CULTURE_KEYWORDS = new Set([
-  'festival', 'sagra', 'mercatin', 'fiera', 'manifestazion',
-  'spettacol', 'rassegna', 'concert',
-]);
-const FRONTALIERE_ADMISSION_KEYWORDS = TOPICAL_KEYWORDS.filter(
-  (k) => !FRONTALIERE_EVENTS_CULTURE_KEYWORDS.has(k)
-);
+// the pre-LLM source pre-filter in generateAndValidateArticle).
+//
+// Until 2026-09-25 the frontaliere admission lexicon was TOPICAL_KEYWORDS
+// MINUS the 8 events/culture stems: the Locarno Film Festival case of #189
+// passed admission and was then rejected by REGOLA #0 after a full paid
+// generation. The owner has since made local cronaca nera, sport, culture and
+// road accidents publishable news for this section («Fai passare anche queste
+// notizie»), and REGOLA #0, the pre-spend classifier and fact-check point 11
+// now admit them in Ticino and in the provinces of Varese, Como and VCO. So
+// admission takes the whole TOPICAL_KEYWORDS list plus LOCAL_NEWS_KEYWORDS
+// (lib/local-news.mjs): the contradiction #189 fixed is gone because the
+// downstream judges changed, not because admission was loosened alone. The
+// national (svizzera) section keeps its own lexicon; none of this applies
+// there.
+const FRONTALIERE_ADMISSION_KEYWORDS = [...new Set([
+  ...TOPICAL_KEYWORDS,
+  ...LOCAL_NEWS_KEYWORDS,
+])];
+
+/**
+ * Local news with no frontaliere angle at all: a local-news signal and zero
+ * frontaliere-density terms. For these the article prompt stops demanding
+ * the frontaliere vocabulary (permesso G, AVS, …) and the post-generation
+ * density abort does not fire — both would otherwise turn a Lugano robbery
+ * into keyword stuffing, or discard it.
+ *
+ * @param {string} text source text (or headline + source)
+ * @returns {boolean}
+ */
+function isLocalNewsWithoutFrontaliereAngle(text) {
+  return hasLocalNewsSignal(text) && checkFrontaliereDensity(text).hits === 0;
+}
 
 function sectionAdmissionKeywords(national) {
   const isNational = national === undefined ? !IS_FRONTALIERE : Boolean(national);
@@ -814,15 +833,14 @@ async function _classifyFrontaliereRelevanceUncached(headline, summary, sourceUr
   const sourceHint = classifierSourceHint(sourceUrl);
   const model = process.env.PRESPEND_GATE_MODEL || AI_MODELS.GEMINI_FLASH_LITE;
   const prompt = IS_FRONTALIERE
-    ? `Sei un editor del sito frontaliereticino.ch, focalizzato ESCLUSIVAMENTE sui FRONTALIERI ITALO-SVIZZERI che lavorano in Ticino.
+    ? `Sei un editor del sito frontaliereticino.ch, per i FRONTALIERI ITALO-SVIZZERI che lavorano in Ticino e per chi vive in Ticino e nelle province di confine.
 
-È RILEVANTE: lavoro/occupazione frontalieri TI, fiscalità (imposta alla fonte, ristorni, AVS/LPP), permessi B/G/C, salute (LAMal/cassa malati), trasporti pendolari, accordi Italia-Svizzera, riforme normative, mercato del lavoro ticinese, cambio CHF-EUR. È RILEVANTE anche se non nomina i frontalieri: viabilità del tragitto casa-lavoro (chiusure, cantieri, deviazioni su strade ticinesi, A2/A9, strade delle province di Varese, Como e VCO, treni TILO/FFS), posti di lavoro in aziende o enti in Ticino (licenziamenti, riorganizzazioni, appalti, assunzioni), finanze e politica del Canton Ticino (preventivo, imposte, servizi). ATTENZIONE: una notizia o statistica sui frontalieri ITALIANI aggregata a livello nazionale/svizzero (non limitata esplicitamente a un'altra regione) è RILEVANTE anche se non nomina il Ticino — il Ticino è il canton con la maggioranza dei frontalieri italiani, quindi un dato aggregato Italia-Svizzera lo riguarda per costruzione.
+È RILEVANTE: lavoro/occupazione frontalieri TI, fiscalità (imposta alla fonte, ristorni, AVS/LPP), permessi B/G/C, salute (LAMal/cassa malati), trasporti pendolari, accordi Italia-Svizzera, riforme normative, mercato del lavoro ticinese, cambio CHF-EUR. È RILEVANTE anche se non nomina i frontalieri: viabilità del tragitto casa-lavoro (chiusure, cantieri, deviazioni su strade ticinesi, A2/A9, strade delle province di Varese, Como e VCO, treni TILO/FFS), posti di lavoro in aziende o enti in Ticino (licenziamenti, riorganizzazioni, appalti, assunzioni), finanze e politica del Canton Ticino (preventivo, imposte, servizi), cronaca locale in Ticino e nelle province di Varese, Como e VCO (cronaca nera, incidenti stradali, sport, cultura ed eventi). ATTENZIONE: una notizia o statistica sui frontalieri ITALIANI aggregata a livello nazionale/svizzero (non limitata esplicitamente a un'altra regione) è RILEVANTE anche se non nomina il Ticino — il Ticino è il canton con la maggioranza dei frontalieri italiani, quindi un dato aggregato Italia-Svizzera lo riguarda per costruzione.
 
 NON è rilevante:
 - Cronaca dove "frontaliere/transfrontaliero" appare solo come aggettivo (cittadino frontaliere, area frontaliera, comune di confine) senza tema lavorativo/fiscale/permessi
 - Frontalieri di confini DIVERSI da Italia-Svizzera (Francia-Svizzera, Italia-Slovenia, Germania-Svizzera, ecc.), oppure frontalieri italiani specifici di un altro cantone svizzero non-Ticino (Grigioni, Vallese, ecc.) quando la notizia è limitata esplicitamente a quella regione e non è un dato aggregato nazionale/svizzero
-- Eventi culturali, sportivi, festival, gastronomia (anche se localizzati a Ticino o area di confine)
-- Singoli episodi di cronaca (multe, incidenti, arresti, abbandono rifiuti) senza implicazioni di policy o impatto sui pendolari
+- Cronaca, sport, cultura ed eventi FUORI dal Ticino e dalle province di Varese, Como e VCO
 - Infrastruttura italiana lontana dal confine, eventi USA/UE senza impatto pendolare
 
 HEADLINE: ${String(headline || '').slice(0, 240)}
@@ -2139,6 +2157,7 @@ function captureDuplicateReasons(errorMessage = '') {
       else if (p.startsWith('titolo:')) addDuplicateReason('signal_title');
       else if (p.startsWith('excerpt:')) addDuplicateReason('signal_excerpt');
       else if (p.startsWith('combinato:')) addDuplicateReason('signal_combined');
+      else if (p.startsWith('entità+combinato:')) addDuplicateReason('signal_entity');
       else addDuplicateReason('signal_other');
     }
   } else if (cosineLine?.[1]) {
@@ -2167,13 +2186,16 @@ function duplicateReasonTag(errorMessage = '') {
   return 'motivo non riconosciuto';
 }
 
-// Extract candidate title + matched neighbour slug from a checkSemanticNearDuplicate
-// error so rejection logs are self-contained and auditable without extra tooling.
-// Returns '' for non-semantic rejections (no "Nuovo:"/"Esistente:" fields).
+// Extract candidate title + matched neighbour slug from a duplicate error so
+// rejection logs are self-contained and auditable without extra tooling. Both
+// shapes: the semantic gate writes `Esistente: [slug]`, checkForDuplicates
+// writes `Esistente: "title" [slug]` — the old pattern only knew the first,
+// so every lexical rejection logged "vicino: ?" (run 36096755072).
+// Returns '' for errors with neither field (id/slug collisions).
 function duplicateCandidateDetail(errorMessage = '') {
   const msg = String(errorMessage || '');
   const candidateMatch = msg.match(/Nuovo:\s*"([^"]+)"/);
-  const neighborMatch = msg.match(/Esistente:\s*\[([^\]]+)\]/);
+  const neighborMatch = msg.match(/Esistente:\s*(?:"(?:[^"\\]|\\.)*"\s*)?\[([^\]]+)\]/);
   if (!candidateMatch && !neighborMatch) return '';
   return ` — candidato: "${candidateMatch?.[1] ?? '?'}" → vicino: ${neighborMatch?.[1] ?? '?'}`;
 }
@@ -3241,9 +3263,8 @@ CRITERI DI SELEZIONE (in ordine di priorità):
    - cambio CHF EUR e ottimizzazione conversione
 3. NOVITÀ: Preferisci notizie recenti e con impatto concreto (nuove leggi, dati, statistiche)
 4. ⚠️ NO DUPLICATI (CRITICO): Non scegliere MAI un tema già coperto. Se la headline tratta lo stesso argomento/dati/statistiche di un articolo esistente (anche con un angolo diverso), SCARTALA. Due articoli sugli stessi dati UST/SECO/BFS sono duplicati anche se il titolo è diverso.
-5. NO CRONACA NERA: Evita incidenti, crimini, disastri naturali
-6. NO SPORT: Evita risultati sportivi, partite, campionati
-7. SPECIFICITÀ TICINO: La notizia deve riguardare il Canton Ticino o la regione di confine
+5. CRONACA LOCALE: cronaca nera, incidenti, sport e cultura vanno bene se avvengono in Ticino o nelle province di Varese, Como e VCO; altrove no
+6. SPECIFICITÀ TICINO: La notizia deve riguardare il Canton Ticino o la regione di confine
 
 ${JSON_QUOTE_SAFETY_RULE_IT}
 
@@ -5712,13 +5733,13 @@ VERIFICA SISTEMATICA — controlla OGNI categoria:
    - Ministri o funzionari con nomi plausibili ma non verificabili
    - Accordi/protocolli bilaterali mai firmati (controllare attentamente)
 
-${IS_FRONTALIERE ? `11. **RILEVANZA TOPICA AL FRONTALIERE TICINO-ITALIA (CRITICO)**: L'articolo deve avere un nesso REALE, SPECIFICO e VERIFICABILE con la vita del frontaliere Ticino-Italia. Sono nessi reali: norme/sentenze su Permesso G o B, fiscalità CH-IT (imposta alla fonte, nuovo accordo, ristorni, doppia imposizione), AVS/LPP/LAMal/CMI, busta paga svizzera, dogane/valichi (Chiasso, Brogeda, Gaggiolo, Ponte Tresa), pendolarismo CH-IT e viabilità del tragitto casa-lavoro (chiusure, cantieri, deviazioni su A2/A9, strade ticinesi e delle province di Varese, Como e VCO, treni TILO/FFS), mercato del lavoro ticinese anche quando la fonte non nomina i frontalieri (licenziamenti, riorganizzazioni, appalti, salari, dumping), politica e finanze del Canton Ticino (preventivo, imposte cantonali, servizi), telelavoro frontaliere, accordi bilaterali CH-IT/UE, banche e cambio CHF-EUR per frontalieri.
+${IS_FRONTALIERE ? `11. **RILEVANZA TOPICA AL FRONTALIERE TICINO-ITALIA (CRITICO)**: L'articolo deve avere un nesso REALE, SPECIFICO e VERIFICABILE con la vita del frontaliere Ticino-Italia. Sono nessi reali: norme/sentenze su Permesso G o B, fiscalità CH-IT (imposta alla fonte, nuovo accordo, ristorni, doppia imposizione), AVS/LPP/LAMal/CMI, busta paga svizzera, dogane/valichi (Chiasso, Brogeda, Gaggiolo, Ponte Tresa), pendolarismo CH-IT e viabilità del tragitto casa-lavoro (chiusure, cantieri, deviazioni su A2/A9, strade ticinesi e delle province di Varese, Como e VCO, treni TILO/FFS), mercato del lavoro ticinese anche quando la fonte non nomina i frontalieri (licenziamenti, riorganizzazioni, appalti, salari, dumping), politica e finanze del Canton Ticino (preventivo, imposte cantonali, servizi), cronaca locale in Ticino e nelle province di Varese, Como e VCO anche senza nesso con i frontalieri (cronaca nera, incidenti stradali, sport, cultura ed eventi), telelavoro frontaliere, accordi bilaterali CH-IT/UE, banche e cambio CHF-EUR per frontalieri.
 
-   ${isEvergreen ? '' : 'NON sono nessi reali (segnala "critical" come "rilevanza_topica"): cronaca nera italiana o estera senza nesso lavoro CH (es. arresti per omicidio comune, eventi USA, criminalità urbana italiana), eventi sportivi, gossip, cultura locale non-frontaliera, infrastruttura italiana lontana dal confine (es. eventi a Roma/Napoli/Palermo), eventi a Malpensa SENZA impatto sui voli o trasporti frontalieri.'}
+   ${isEvergreen ? '' : 'NON sono nessi reali (segnala "critical" come "rilevanza_topica"): cronaca, sport e cultura fuori dal Ticino e dalle province di Varese, Como e VCO (es. arresti a Milano, eventi USA, criminalità urbana a Roma/Napoli/Palermo), gossip, infrastruttura italiana lontana dal confine, eventi a Malpensa SENZA impatto sui voli o trasporti frontalieri.'}
 
    SEGNALE D'ALLARME (= "critical: rilevanza_topica"): paragrafi con titoli del tipo "Implicazioni per i frontalieri", "I frontalieri devono essere consapevoli di…", "Cosa significa per i frontalieri", su un evento SENZA implicazione concreta. Sezioni di consigli generici ("consulta un avvocato", "verifica la copertura assicurativa", "informati sui tuoi diritti") inserite per riempire spazio su un argomento non-frontaliere sono indicatori di forzatura.
 
-   ${isEvergreen ? '' : "Se l'articolo è un commento generico (procedure di estradizione generiche, consigli legali universali, considerazioni assicurative generiche) attaccato a una notizia di cronaca che NON menziona frontalieri/permesso G/AVS/LAMal/dogana/ecc. nella fonte originale, il verdetto è FAIL — l'articolo non doveva essere generato."}` : `11. **RILEVANZA TOPICA NAZIONALE SVIZZERA (CRITICO)**: L'articolo deve avere un nesso REALE, SPECIFICO e VERIFICABILE con la vita, l'economia o la politica in Svizzera a livello nazionale o cantonale. Sono nessi reali: policy federale/cantonale, fiscalità (imposta federale diretta, IVA, imposte cantonali), AVS/LPP/LAMal, mercato del lavoro e salari svizzeri, costo della vita, affitti e casa, previdenza, economia e BNS, decisioni del Consiglio federale o dei Cantoni, accordi internazionali della Svizzera. NON è richiesto alcun nesso frontaliere/Ticino: un articolo nazionale (es. salario minimo cantonale, IVA, affitti) è PIENAMENTE rilevante.
+   ${isEvergreen ? '' : "Se l'articolo sostituisce i fatti di una notizia di cronaca con un commento generico (procedure di estradizione generiche, consigli legali universali, considerazioni assicurative generiche) o con un angolo frontalieri che la fonte non ha, il verdetto è FAIL."}` : `11. **RILEVANZA TOPICA NAZIONALE SVIZZERA (CRITICO)**: L'articolo deve avere un nesso REALE, SPECIFICO e VERIFICABILE con la vita, l'economia o la politica in Svizzera a livello nazionale o cantonale. Sono nessi reali: policy federale/cantonale, fiscalità (imposta federale diretta, IVA, imposte cantonali), AVS/LPP/LAMal, mercato del lavoro e salari svizzeri, costo della vita, affitti e casa, previdenza, economia e BNS, decisioni del Consiglio federale o dei Cantoni, accordi internazionali della Svizzera. NON è richiesto alcun nesso frontaliere/Ticino: un articolo nazionale (es. salario minimo cantonale, IVA, affitti) è PIENAMENTE rilevante.
 
    ${isEvergreen ? '' : 'NON sono nessi reali (segnala "critical" come "rilevanza_topica"): cronaca nera senza implicazione di policy/economia, eventi sportivi, gossip, intrattenimento, eventi esteri senza impatto sulla Svizzera.'}
 
@@ -5894,6 +5915,42 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     }
   }
 
+  // ── Codex Luna Max when the free verifiers are not enough ──
+  //
+  // Owner decision, 2026-09-25: «se i verificatori non funzionano usa codex
+  // luna Max senza secondo parere». After the attempts above two cases are
+  // left without a consensus:
+  //  - no vote at all: Codex verifies alone, and its verdict decides through
+  //    the single-model rules below (a FAIL with confidence ≥ 0.5 and
+  //    non-minor issues blocks, a PASS passes);
+  //  - one independent vote (the two verifiers collapsed into one model):
+  //    Codex becomes the second opinion. Codex is not in DEFAULT_CHAIN, so no
+  //    free verifier can have been served by it: independent by construction.
+  // The call is pinned to Codex (`codexOnly`) instead of walking the free
+  // cascade that just failed. If Codex does not answer either, or its lane is
+  // off, the fact-check closes as before: the article is discarded.
+  //
+  // The known limit: when Codex also wrote the article body, it is grading
+  // its own work here — the circularity the `local/fallback cannot
+  // self-verify` guard avoids for the local model. The owner chose this
+  // knowingly; the log says so on every such article.
+  let codexFallbackTried = false;
+  if ((modelResults.length === 0 || missingSecondOpinion) && isModelAvailable(AI_MODELS.CODEX_CLI_PRIMARY)) {
+    const codex = AI_MODELS.CODEX_CLI_PRIMARY;
+    codexFallbackTried = true;
+    const why = modelResults.length === 0 ? 'nessun verificatore ha dato un verdetto' : 'manca un secondo parere indipendente';
+    const selfCheck = _codexWroteThisHeadline ? ' — ha scritto anche questo articolo: si verifica da solo (decisione del proprietario)' : '';
+    console.error(`  🛟 LLM fact-check: ${why}, verifico con ${codex}${selfCheck}`);
+    try {
+      const vote = await _runSingleFactCheck(codex, prompt, { isEvergreen, codexOnly: true });
+      const earlier = vote ? addIndependentVote(modelResults, codex, vote) : null;
+      if (vote && !earlier) missingSecondOpinion = false;
+    } catch (err) {
+      fcLastRejectMsgs.push(err.message || '');
+      console.error(`  ⚠️  LLM fact-check (${codex}): ${err.message}`);
+    }
+  }
+
   if (modelResults.length === 0 || missingSecondOpinion) {
     // 2026-07-01 (#3138 follow-up) made this fail OPEN: on pure verifier-infra
     // unavailability it returned `passed: true` so a possibly-good article was
@@ -5912,11 +5969,14 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     // degrades verification depth without ever publishing something unchecked.
     //
     // Same for an article whose two verifiers kept collapsing into one model:
-    // one opinion counted twice is not a verification either.
+    // one opinion counted twice is not a verification either. Codex Luna Max
+    // (above) is the last verifier asked; reaching here means it did not
+    // answer or its lane is off.
+    const codexNote = codexFallbackTried ? 'anche Codex Luna Max senza verdetto' : 'Codex Luna Max non disponibile';
     if (missingSecondOpinion) {
-      console.error('  🚫 LLM fact-check: le verifiche sono state servite da un solo modello, nessun secondo parere indipendente — articolo SCARTATO, mai pubblicato non verificato');
+      console.error(`  🚫 LLM fact-check: le verifiche sono state servite da un solo modello, nessun secondo parere indipendente (${codexNote}) — articolo SCARTATO, mai pubblicato non verificato`);
     } else {
-      console.error('  🚫 LLM fact-check: TUTTI i modelli di verifica hanno fallito (rate-limit/infra) — articolo SCARTATO, mai pubblicato non verificato');
+      console.error(`  🚫 LLM fact-check: TUTTI i modelli di verifica hanno fallito (rate-limit/infra; ${codexNote}) — articolo SCARTATO, mai pubblicato non verificato`);
     }
     return {
       passed: false,
@@ -6142,7 +6202,12 @@ async function _runSingleFactCheck(model, prompt, opts = {}) {
     // excludeModels: only on the second-opinion call in llmFactCheck, which
     // must not be answered by a model that already voted (callLLM also skips
     // the response cache for it).
-    buildFactCheckCallOptions({ model, temperature: 0.0, maxTokens: 4000, timeout: 60_000, bypassForceChain: true, deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS, modelUsedRef, jsonMode: true, excludeModels: opts.excludeModels })
+    // codexOnly: the Codex Luna Max fallback in llmFactCheck. `chain` pins the
+    // call to that one model instead of the free cascade that just failed;
+    // `prefer` keeps an AI_MODELS_PREFER from prepending another model to it.
+    // Codex has its own timeout (_codexFallbackTimeoutMs, bounded by the same
+    // deadlineMs); `timeout` here only applies to the HTTP providers.
+    buildFactCheckCallOptions({ model, temperature: 0.0, maxTokens: 4000, timeout: 60_000, bypassForceChain: true, deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS, modelUsedRef, jsonMode: true, excludeModels: opts.excludeModels, ...(opts.codexOnly ? { chain: [model], prefer: [model] } : {}) })
   );
   // The model that really answered. callLLM reports a cache hit as 'cache';
   // the cache key is prompt + requested model + these fixed params, so the
@@ -6252,6 +6317,7 @@ async function callLLM(messages, opts = {}) {
     // (la selezione headline) puo' dire a QUALE modello attribuire il rigetto.
     if (opts.modelUsedRef && typeof opts.modelUsedRef === 'object') opts.modelUsedRef.model = modelUsedRef.model;
     if (modelUsedRef.model === AI_MODELS.LOCAL_FALLBACK) _localFallbackUsedThisHeadline = true;
+    if (modelUsedRef.model === AI_MODELS.CODEX_CLI_PRIMARY) _codexWroteThisHeadline = true;
     if (isBody2Check) {
       let itContent = null;
       let parseErr = null;
@@ -8527,10 +8593,19 @@ Le risposte devono includere dati concreti dalla fonte/contesto e rispettare il 
     : '';
 
   // ── Patch C: MUST-COVER LSI entities (always present) ──
-  const mustCoverLsiBlock = IS_FRONTALIERE
+  // Local news without a frontaliere angle (cronaca, incidenti, sport,
+  // cultura — publishable since 2026-09-25): the frontaliere vocabulary is
+  // asked for only where the source gives a reason, as on the svizzera
+  // branch. Demanding six of these terms in a story about a Lugano robbery is
+  // the keyword stuffing fact-check point 11 flags as forcing.
+  const localNewsSource = IS_FRONTALIERE && isLocalNewsWithoutFrontaliereAngle(pageContent);
+  const mustCoverLsiBlock = IS_FRONTALIERE && !localNewsSource
     ? `\n═══ MUST-COVER ENTITIES (E-E-A-T + LSI) ═══
 Almeno 6 dei seguenti termini DEVONO comparire naturalmente nel testo (no keyword stuffing):
 permesso G, AVS, LPP, LAMal, ristorni, imposta alla fonte, Brogeda, INPS, Canton Ticino, frontaliere, nuovo accordo fiscale 2026, doppia imposizione.\n`
+    : localNewsSource
+    ? `\n═══ MUST-COVER ENTITIES (E-E-A-T + LSI) ═══
+Cronaca locale: nomina luoghi, enti e persone della fonte (comune, polizia cantonale, società sportiva, organizzatori). Termini frontalieri solo se la fonte ne dà motivo.\n`
     : `\n═══ MUST-COVER ENTITIES (E-E-A-T + LSI) ═══
 Almeno 6 dei seguenti termini, SE PERTINENTI al tema, DEVONO comparire naturalmente nel testo (no keyword stuffing):
 AVS/AHV, LPP/BVG, LAMal/KVG, imposta federale diretta, IVA, SECO, UST/BFS, BNS/SNB, Consiglio federale, Cantoni, salario minimo, costo della vita.\n`;
@@ -8550,7 +8625,9 @@ AVS/AHV, LPP/BVG, LAMal/KVG, imposta federale diretta, IVA, SECO, UST/BFS, BNS/S
     ? `You write for "Frontaliere Ticino" (frontaliereticino.ch). Based on the following source, write a blog article.`
     : `You write for "Frontaliere Ticino" (frontaliereticino.ch), national Switzerland section — economy, fiscal policy, labour market, cost of living, housing, federal & cantonal politics, for a general Swiss-resident audience. Based on the following source, write a blog article.`;
 
-  const reachMinimumImplicationsLine = IS_FRONTALIERE
+  const reachMinimumImplicationsLine = localNewsSource
+    ? `- Racconta i fatti della fonte e cosa cambia per chi vive o si sposta nella zona; i frontalieri solo se la fonte ne parla`
+    : IS_FRONTALIERE
     ? `- Analizza le IMPLICAZIONI PRATICHE per i frontalieri (cosa cambia nella vita quotidiana)`
     : `- Analizza le IMPLICAZIONI PRATICHE a livello nazionale/cantonale (cosa cambia nella vita di chi vive o lavora in Svizzera)`;
 
@@ -8564,10 +8641,11 @@ Prima di scrivere, valuta se la fonte ha un nesso REALE e VERIFICABILE con chi v
 - Canton Ticino: preventivo, deficit, imposte, servizi pubblici
 - Accordi CH-IT/UE, cambio CHF-EUR, costo della vita al confine
 - Statistiche sui frontalieri italiani in Svizzera, salvo se limitate a un altro cantone
+- Cronaca locale in Ticino e nelle province di Varese, Como e VCO: cronaca nera, incidenti stradali, sport, cultura ed eventi
 
-NON sono nesso reale: cronaca nera, sport, cultura, eventi esteri senza impatto su tragitto o lavoro, Italia lontana dal confine, Malpensa senza impatto su voli/transito.
+NON sono nesso reale: cronaca fuori da quest'area, eventi esteri senza impatto su tragitto o lavoro, Malpensa senza impatto su voli/transito.
 
-Se il nesso è il tragitto o il lavoro, di' chi è toccato con i soli fatti della fonte: NON inventare quanti frontalieri impiega un'azienda, percorsi alternativi, orari o importi.
+Racconta chi è toccato con i soli fatti della fonte: NON inventare un legame con i frontalieri, quanti ne impiega un'azienda, percorsi alternativi, orari o importi.
 
 Se il nesso NON c'è, RIFIUTATI e restituisci SOLTANTO:
 {
@@ -8629,7 +8707,9 @@ Se le implicazioni sono DEBOLI o GENERICHE (la fonte non ha un impatto pratico d
 - Onestamente dichiara nel body1 cosa la fonte dice E NULLA DI PIÙ, e segnala in body2/body3 i 1-2 ganci pratici reali (se esistono). Meglio un articolo da 400 parole onesto che 1200 parole di forzatura.
 - Se anche 1-2 paragrafi di nesso reale non esistono → torna al GATE DI RILEVANZA TOPICA (REGOLA #0) e rifiuta con "abort_topical_relevance": true.`;
 
-  const body2AntiRepLine = IS_FRONTALIERE
+  const body2AntiRepLine = localNewsSource
+    ? `- body2 = CONTESTO: sviluppi, dati, reazioni e ricadute locali riportati dalla fonte. Informazione che NON era nel body1.`
+    : IS_FRONTALIERE
     ? `- body2 = ANALISI PRATICA: implicazioni per i frontalieri, confronti prima/dopo, scenari concreti. Informazione che NON era nel body1.`
     : `- body2 = ANALISI PRATICA: implicazioni concrete a livello nazionale/cantonale, confronti prima/dopo, scenari concreti. Informazione che NON era nel body1.`;
   const body3AntiRepLine = IS_FRONTALIERE
@@ -12611,29 +12691,26 @@ function checkForDuplicates(data) {
     return jaccardSim(wordsA, wordsB);
   }
 
-  // Extract key numbers, percentages, and statistics from text
-  // These are strong duplicate signals (e.g. both articles cite "411.000" and "-1,0%")
-  function extractKeyEntities(text) {
-    const entities = new Set();
-    const s = String(text || '');
-    // Normalize: keep digits, dots, commas, %, +/-
-    // Numbers like 411.000, 78'809, 411000
-    for (const m of s.matchAll(/\d[\d.'',]*\d/g)) {
-      entities.add(m[0].replace(/[.''',]/g, '')); // normalize to plain digits
-    }
-    // Standalone single digits with context (e.g. "Q4", "1%")
-    for (const m of s.matchAll(/\b(\d+)[.,]?(\d*)\s*%/g)) {
-      entities.add(`${m[1]}${m[2]}%`);
-    }
-    return [...entities];
-  }
+  // ── Entities: what facts two articles share (dup-entities.mjs) ──
+  // Numbers of title + excerpt and the comuni the title names, minus the
+  // corpus boilerplate: a number that 0.5% of the published articles carry
+  // ("2026", the 20 km zone, the 2024 accord's 7500/10000) identifies no
+  // article. It used to count, and two comune pages that both said "2026"
+  // scored Entità=100% — enough, with the shared "Vivere a … e lavorare in
+  // Ticino" template, to reject a new comune as a duplicate of another one
+  // (run 36096755072: Erba). Measured on the 306 published comune pages: the
+  // two cross-comune false positives go, and the pairs about the SAME comune
+  // are caught through the comune entity instead of by number luck.
+  const existingEntityLists = existingArticles.map((a) => articleEntities(a.title, a.excerpt));
+  const commonEntities = corpusCommonEntities(existingEntityLists, commonEntityMinDf(existingArticles.length));
 
   // ── Prepare new article signals ────────────────────────────
   const newIdWords = data.id.split('-').filter(w => w.length > 1).map(w => normalizeItWord(w));
   const newTitleWords = getSignificantWords(data.content.it.title);
   const newExcerptWords = getSignificantWords(data.content.it.excerpt || '');
-  const newEntities = extractKeyEntities(
-    data.content.it.title + ' ' + (data.content.it.excerpt || '')
+  const newEntities = distinctiveEntities(
+    articleEntities(data.content.it.title, data.content.it.excerpt || ''),
+    commonEntities,
   );
 
   // ── Thresholds ─────────────────────────────────────────────
@@ -12658,11 +12735,11 @@ function checkForDuplicates(data) {
 
   console.error(`  🔍 Controllo duplicati multi-segnale (${existingArticles.length} articoli esistenti)...`);
 
-  for (const existing of existingArticles) {
+  for (const [index, existing] of existingArticles.entries()) {
     const existingIdWords = existing.id.split('-').filter(w => w.length > 1).map(w => normalizeItWord(w));
     const existingTitleWords = getSignificantWords(existing.title);
     const existingExcerptWords = getSignificantWords(existing.excerpt);
-    const existingEntities = extractKeyEntities(existing.title + ' ' + existing.excerpt);
+    const existingEntities = distinctiveEntities(existingEntityLists[index], commonEntities);
 
     // Compute individual similarity scores
     const idSim = jaccardSimilarity(newIdWords, existingIdWords);
@@ -12682,7 +12759,7 @@ function checkForDuplicates(data) {
       (idSim >= ID_THRESHOLD && titleSim >= 0.40) ||
       titleSim >= TITLE_THRESHOLD ||
       (excerptSim >= EXCERPT_THRESHOLD && entitySim >= 0.20) ||
-      // High entity overlap (same place/date/event) with moderate combined score
+      // High entity overlap (same comune, same figures) with moderate combined score
       (entitySim >= 0.65 && combinedScore >= 0.45) ||
       combinedScore >= COMBINED_THRESHOLD;
 
@@ -12696,13 +12773,17 @@ function checkForDuplicates(data) {
         signals.push(`Excerpt: ${(excerptSim * 100).toFixed(0)}% ≥ ${EXCERPT_THRESHOLD * 100}%`);
       if (combinedScore >= COMBINED_THRESHOLD)
         signals.push(`Combinato: ${(combinedScore * 100).toFixed(0)}% ≥ ${COMBINED_THRESHOLD * 100}%`);
+      // The entity clause used to leave "Segnali" empty, so the log line and
+      // the run report read the Dettaglio line instead of a reason.
+      if (entitySim >= 0.65 && combinedScore >= 0.45)
+        signals.push(`Entità+Combinato: ${(entitySim * 100).toFixed(0)}% ≥ 65% e ${(combinedScore * 100).toFixed(0)}% ≥ 45%`);
 
       throw new Error(
         `❌ DUPLICATO RILEVATO:\n` +
         `   Nuovo:     "${data.content.it.title}" [${data.id}]\n` +
         `   Esistente: "${existing.title}" [${existing.id}]\n` +
         `   Segnali:   ${signals.join(' | ')}\n` +
-        `   Dettaglio: ID=${(idSim * 100).toFixed(0)}% Titolo=${(titleSim * 100).toFixed(0)}% Excerpt=${(excerptSim * 100).toFixed(0)}% Entità=${(entitySim * 100).toFixed(0)}% Combinato=${(combinedScore * 100).toFixed(0)}%\n` +
+        `   Dettaglio: ID=${(idSim * 100).toFixed(0)}% Titolo=${(titleSim * 100).toFixed(0)}% Excerpt=${(excerptSim * 100).toFixed(0)}% Entità=${(entitySim * 100).toFixed(0)}% [${[...newEntities].filter((e) => existingEntities.includes(e)).join(', ')}] Combinato=${(combinedScore * 100).toFixed(0)}%\n` +
         `   Scegli un argomento diverso o più specifico.`
       );
     }
@@ -14397,6 +14478,13 @@ function wallBudgetExceeded() {
  */
 let _localFallbackUsedThisHeadline = false;
 /**
+ * True once Codex Luna Max has served a call for the current headline — in
+ * practice the article body, the only per-headline call that prefers it. Read
+ * by the Codex fallback of llmFactCheck, which says in the log when Codex is
+ * about to verify an article it wrote. Reset with the flag above.
+ */
+let _codexWroteThisHeadline = false;
+/**
  * Minimum wall-clock remaining (ms) to risk another local/fallback attempt
  * once one has already run for this headline. Local/fallback (qwen2.5:14b via Ollama)
  * full inference for this prompt size took ~17.5min and ~12.5min in the two
@@ -14841,8 +14929,9 @@ async function main() {
       // ── Pre-spend topic gate (REGOLA #0 short-circuit, 2026-05-15) ──
       // Before the Tentativo loop burns ~5-7k tokens per headline on
       // full article generation, run a cheap anchor-regex + tiny-LLM
-      // classifier to drop off-topic news (cronaca nera, sport, eventi
-      // non-frontalieri). Full rationale + env gates: see
+      // classifier to drop off-topic news (on frontaliere: cronaca, sport
+      // and events OUTSIDE Ticino and the border provinces, which since
+      // 2026-09-25 are publishable inside them). Full rationale + env gates: see
       // `applyPreSpendTopicGate` doc block above. REGOLA #0 in the
       // article-gen prompt stays in place as defense-in-depth.
       const beforePreSpendGate = headlines.length;
@@ -15157,8 +15246,9 @@ async function main() {
             }
             // Fact-check / quality failures → skip this article, try next.
             // Includes REGOLA #0 topic-gate aborts: when the LLM correctly
-            // refuses to fabricate a frontaliere angle on a cronaca-nera or
-            // non-relevant source (see line ~2787), the error carries
+            // refuses a source with no real link (e.g. cronaca outside Ticino
+            // and the border provinces) instead of fabricating a frontaliere
+            // angle (see line ~2787), the error carries
             // err.topicGateAbort=true. Without this branch the abort
             // propagates to main() and fails the whole run instead of
             // letting the loop try a different headline (run 25697916845,
@@ -15513,6 +15603,7 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   // articles" failure via a different path than the one this guard exists
   // to fix.
   _localFallbackUsedThisHeadline = false;
+  _codexWroteThisHeadline = false;
   if (isGoogleNewsRssUrl(url)) {
     const err = new Error(`topic-gate abort: Google News RSS wrapper senza fonte diretta (${url})`);
     err.topicGateAbort = true;
@@ -15531,7 +15622,9 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   // costs ~50ms and catches the same off-topic pages with zero false
   // negatives on observed cases (asilo, chiesetta, cuoco, etc.). A
   // legitimate frontaliere article contains at least one
-  // lavoro/fisco/permesso/transport/economy token in the source body.
+  // lavoro/fisco/permesso/transport/economy token in the source body — or,
+  // since 2026-09-25, a local-news one (cronaca, incidenti, sport, cultura:
+  // LOCAL_NEWS_KEYWORDS, part of the admission lexicon).
   // Env-gated for rollback.
   const dropOffTopicSource = (process.env.SOURCE_DROP_OFF_TOPIC ?? '1') !== '0';
   if (dropOffTopicSource && typeof pageContent === 'string' && pageContent.length > 0) {
@@ -15893,7 +15986,10 @@ async function generateAndValidateArticle(url, sourceContext = null) {
     // topic for the cross-border section. For the NATIONAL svizzera section a
     // body with 0 frontaliere keywords is EXPECTED and correct, so this abort
     // must not fire — otherwise every national article would be skipped.
-    if (attempt === 1 && IS_FRONTALIERE) {
+    // Local news (cronaca, incidenti, sport, cultura in Ticino and the border
+    // provinces) is publishable without a frontaliere angle since 2026-09-25:
+    // for those sources 0 frontaliere keywords is the expected, honest body.
+    if (attempt === 1 && IS_FRONTALIERE && !isLocalNewsWithoutFrontaliereAngle(pageContent)) {
       const itBodyEarly = `${data.content?.it?.body1 || ''} ${data.content?.it?.body2 || ''} ${data.content?.it?.body3 || ''}`;
       const earlyDensity = checkFrontaliereDensity(itBodyEarly);
       if (earlyDensity.hits === 0 && earlyDensity.wordCount > 0) {
