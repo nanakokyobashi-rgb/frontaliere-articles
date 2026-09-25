@@ -43,7 +43,7 @@ import { decodeHtmlEntities } from '../scripts/lib/decode-html-entities.mjs';
 // I predicati sono quelli VERI, non una copia: `translatedStringOrNull` e'
 // esattamente la funzione che il loop ritagliato riceve in produzione, e una
 // copia locale nel test divergerebbe in silenzio dal fix (AGENTS.md #6).
-import { translatedStringOrNull } from '../scripts/lib/article-free-mt.mjs';
+import { translatedStringOrNull, isSourcePassthrough, joinTranslatedChunks, translateFieldFreeMt } from '../scripts/lib/article-free-mt.mjs';
 import { hasUsableContentText, hasUsableTranslatedText, metaFieldPlausibilityMiss } from '../scripts/lib/body2-payload-verdict.mjs';
 import {
   createFreeMtRecoveryReport,
@@ -121,7 +121,7 @@ const MISSING_FIELD_LOOP_SRC = extractMissingFieldLoop();
  * passano esplicitamente non esercitano il ramo warning IT-esso-stesso-troncato
  * (#705). `warnings` raccoglie i messaggi di `console.warn` per assert.
  */
-async function runMissingFieldLoop({ data, itContent, callWithRetry, detectTruncation, warnings = [], translationReport }) {
+async function runMissingFieldLoop({ data, itContent, callWithRetry, detectTruncation, warnings = [], translationReport, freeMt = true }) {
   const capturingConsole = { error: () => {}, warn: (msg) => warnings.push(msg) };
   const RUN_REPORT = { translation: translationReport || createFreeMtRecoveryReport() };
   // `markBodyTranslationPending` e' quello VERO (#1875): e' lui a decidere che
@@ -130,13 +130,13 @@ async function runMissingFieldLoop({ data, itContent, callWithRetry, detectTrunc
   const fn = new Function(
     'data', 'itContent', 'callWithRetry', 'translatedStringOrNull', 'hasUsableTranslatedText', 'metaFieldPlausibilityMiss', 'detectTruncation', 'console',
     'ARTICLE_TRANSLATE_FREE_MT', 'claimFreeMtLlmFallback', 'wasFreeMtUnusable', 'maxFreeMtLlmFallbacksPerLocale', 'RUN_REPORT', 'MAX_FREE_MT_LLM_FALLBACKS_PER_RUN', 'MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE',
-    'markBodyTranslationPending',
+    'markBodyTranslationPending', 'isSourcePassthrough',
     `return (async () => { ${MISSING_FIELD_LOOP_SRC} })();`,
   );
   // `metaFieldPlausibilityMiss` e' il floor VERO (#798), non un mock: il ramo
   // floor-miss del loop tiene il valore tradotto invece di cadere sul fallback
   // IT, e un mock qui non proverebbe quel comportamento.
-  await fn(data, itContent, callWithRetry, translatedStringOrNull, hasUsableTranslatedText, metaFieldPlausibilityMiss, detectTruncation || (() => []), capturingConsole, true, claimFreeMtLlmFallback, wasFreeMtUnusable, maxFreeMtLlmFallbacksPerLocale, RUN_REPORT, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN, MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE, markBodyTranslationPending);
+  await fn(data, itContent, callWithRetry, translatedStringOrNull, hasUsableTranslatedText, metaFieldPlausibilityMiss, detectTruncation || (() => []), capturingConsole, freeMt, claimFreeMtLlmFallback, wasFreeMtUnusable, maxFreeMtLlmFallbacksPerLocale, RUN_REPORT, MAX_FREE_MT_LLM_FALLBACKS_PER_RUN, MAX_FREE_MT_LLM_FALLBACKS_PER_LOCALE, markBodyTranslationPending, isSourcePassthrough);
   return RUN_REPORT;
 }
 
@@ -171,13 +171,13 @@ async function runTruncationRetryLoop({ data, itContent, detectTruncation, callW
   const fn = new Function(
     'data', 'itContent', 'detectTruncation', 'callWithRetry', 'translateInChunks',
     'TRANSLATION_CHUNK_THRESHOLD', 'translatedStringOrNull', 'sanitizeBodyText', 'countWords', 'console',
-    'markBodyTranslationPending', 'RUN_REPORT',
+    'markBodyTranslationPending', 'RUN_REPORT', 'isSourcePassthrough',
     `return (async () => { ${LOOP_SRC} })();`,
   );
   await fn(
     data, itContent, detectTruncation, callWithRetry, translateInChunks || noopTranslateInChunks,
     TRANSLATION_CHUNK_THRESHOLD, translatedStringOrNull, sanitizeBodyText, countWords, capturingConsole,
-    markBodyTranslationPending, RUN_REPORT,
+    markBodyTranslationPending, RUN_REPORT, isSourcePassthrough,
   );
   return RUN_REPORT;
 }
@@ -362,7 +362,9 @@ test('ramo missing-field: fallback IT esso stesso troncato — warning esplicito
 test('ramo missing-field: body1 tradotto = "null" viene letto come MANCANTE e ritradotto (#799)', async () => {
   const complete = { ...META_PLAUSIBILI, body1: 'B1', body2: 'B2', body3: 'B3' };
   const data = { content: { en: { ...complete }, de: { ...complete, body1: 'null' }, fr: { ...complete } } };
-  const itContent = { body1: 'Corpo italiano reale.', ...META_PLAUSIBILI, body2: 'B2', body3: 'B3' };
+  // body2/body3 italiani DIVERSI da quelli tradotti: un body identico
+  // all'italiano e' ora un passthrough e partirebbe anche lui in retry (#1875).
+  const itContent = { body1: 'Corpo italiano reale.', ...META_PLAUSIBILI, body2: 'B2it', body3: 'B3it' };
   const calls = [];
   const callWithRetry = async (_prompt, _tokens, label) => {
     calls.push(label);
@@ -765,7 +767,7 @@ test('#1875: un retry che restituisce l\'italiano verbatim non passa per traduzi
   await runMissingFieldLoop({ data, itContent, callWithRetry });
 
   assert.equal(Object.hasOwn(data.content.en, 'body2'), false);
-  assert.equal(pendingBodyTranslations(data)[0].reason, 'retry-unusable');
+  assert.equal(pendingBodyTranslations(data)[0].reason, 'retry-passthrough');
 });
 
 test('#1875: title/excerpt/FAQ mantengono il fallback IT (fuori da questa causa), solo i bodyN restano in attesa', async () => {
@@ -1023,4 +1025,134 @@ test('#1875: il sanitizer dei body di validate() non ricrea una chiave assente (
   assert.equal(Object.hasOwn(data.content.fr, 'body1'), false, 'la chiave in attesa non diventa un body vuoto');
   assert.equal(data.content.fr.body2, 'Deux lien.', 'i body presenti sono ancora sanitizzati (link nav invalido rimosso)');
   assert.deepEqual(Object.keys(data.content.it).filter((k) => k.startsWith('body')), ['body1', 'body2', 'body3']);
+});
+
+// ── Risposta = italiano: UN predicato per ogni punto di accettazione ───────
+//
+// Review della PR #1877 (HEAD 2a010c2f): due punti accettavano come
+// traduzione un body che era l'italiano ricopiato, e lo pubblicavano sotto
+// /en/ /de/ /fr/ scavalcando il marker di attesa. `isSourcePassthrough`
+// (lib/article-free-mt.mjs) e' ora l'unico predicato: cascata free-MT, ramo
+// LLM legacy (chiamata singola e a chunk), loop missing-field, retry mirato,
+// retry del troncamento. Un test per percorso; tutti tranne la cascata
+// free-MT (che il controllo lo aveva gia') sono rossi su 2a010c2f.
+test('isSourcePassthrough: confronto normalizzato su bordi e whitespace, mai su testo diverso', () => {
+  assert.equal(isSourcePassthrough('  Testo   italiano\n completo. ', 'Testo italiano completo.'), true);
+  assert.equal(isSourcePassthrough('Italian text, translated.', 'Testo italiano.'), false);
+  assert.equal(isSourcePassthrough('', ''), false, 'una sorgente vuota non rende passthrough niente');
+  assert.equal(isSourcePassthrough(null, 'Testo'), false);
+});
+
+test('percorso free-MT: la cascata rifiuta il passthrough con lo stesso predicato (anche con whitespace diverso)', async () => {
+  const signals = [];
+  const out = await translateFieldFreeMt({
+    text: 'Il Consiglio di Stato ha approvato il messaggio.',
+    sourceLang: 'it',
+    targetLang: 'fr',
+    fieldType: 'description',
+    fieldName: 'body1',
+    translate: async () => '  Il Consiglio di Stato  ha approvato il messaggio.\n',
+    onUnusableOutput: (e) => signals.push(e.reason),
+  });
+  assert.equal(out, '');
+  assert.deepEqual(signals, ['passthrough']);
+});
+
+// Il ramo `ARTICLE_TRANSLATE_FREE_MT=0`: `translateContent` ritagliata VERBATIM
+// (e' una chiusura di `translateArticle`), con `callWithRetry` finto.
+const TRANSLATE_CONTENT_SRC = (() => {
+  const a = src.indexOf('  async function translateContent(sourceLang, targetLang, targetLabel, sourceContent) {');
+  assert.notEqual(a, -1, 'translateContent non trovata — aggiornare questo test');
+  return src.slice(a, src.indexOf('\n  }\n', a) + 4);
+})();
+const TRANSLATE_IN_CHUNKS_SRC = (() => {
+  const a = src.indexOf('  async function translateInChunks(bodyText, fieldKey, makeChunkPrompt, labelPrefix, targetLang) {');
+  assert.notEqual(a, -1, 'translateInChunks non trovata — aggiornare questo test');
+  return src.slice(a, src.indexOf('\n  }\n', a) + 4);
+})();
+const SPLIT_CHUNKS_SRC = extractFunctionSource('function splitIntoTranslationChunks(bodyText, chunkTarget = 500) {');
+const COUNT_WORDS_SRC = extractFunctionSource("function countWords(text = '') {");
+
+async function runLegacyTranslateContent(sourceContent, callWithRetry) {
+  const fn = new Function(
+    'sourceContent', 'callWithRetry', 'ARTICLE_TRANSLATE_FREE_MT', 'translateContentFreeMt', 'TRANSLATION_CHUNK_THRESHOLD',
+    'translatedStringOrNull', 'isSourcePassthrough', 'sanitizeBodyText', 'joinTranslatedChunks', 'console',
+    `${COLLECT_BODY_SECTIONS_SRC}\n${COUNT_WORDS_SRC}\n${SPLIT_CHUNKS_SRC}\n${TRANSLATE_IN_CHUNKS_SRC}\n${TRANSLATE_CONTENT_SRC}\n`
+    + "return translateContent('it', 'fr', '4/5', sourceContent);",
+  );
+  return fn(
+    sourceContent, callWithRetry, false, async () => { throw new Error('ramo free-MT non atteso'); }, TRANSLATION_CHUNK_THRESHOLD,
+    translatedStringOrNull, isSourcePassthrough, (v) => v, joinTranslatedChunks, { error: () => {}, warn: () => {} },
+  );
+}
+
+test('percorso legacy ARTICLE_TRANSLATE_FREE_MT=0, chiamata singola: un body identico all\'italiano non esce da translateContent', async () => {
+  const sourceContent = { title: 'Titolo', excerpt: 'Riassunto', body1: 'Primo corpo italiano.', body2: 'Secondo corpo italiano.' };
+  const callWithRetry = async (prompt) => {
+    if (prompt.includes('- title:')) return { title: 'Titre', excerpt: 'Résumé' };
+    if (prompt.includes('- body1:')) return { body1: ' Primo corpo  italiano.\n' }; // l'italiano, ricopiato
+    return { body2: 'Deuxième corps traduit.' };
+  };
+
+  const out = await runLegacyTranslateContent(sourceContent, callWithRetry);
+
+  assert.equal(Object.hasOwn(out, 'body1'), false, 'la copia italiana e\' scartata: il campo entra nella recovery');
+  assert.equal(out.body2, 'Deuxième corps traduit.');
+});
+
+test('percorso legacy ARTICLE_TRANSLATE_FREE_MT=0, a chunk: un chunk identico al suo italiano scarta il campo', async () => {
+  const para = (n) => Array.from({ length: 400 }, (_, i) => `parola${n}x${i}`).join(' ');
+  const body1 = `${para(1)}\n\n${para(2)}`;
+  const sourceContent = { title: 'Titolo', excerpt: 'Riassunto', body1 };
+  const callWithRetry = async (prompt) => {
+    if (prompt.includes('- title:')) return { title: 'Titre', excerpt: 'Résumé' };
+    const chunk = prompt.slice(prompt.indexOf('- body1: ') + '- body1: '.length, prompt.indexOf('\n\nREGOLE'));
+    return { body1: chunk.startsWith('parola1') ? 'Premier paragraphe traduit.' : chunk }; // il secondo resta italiano
+  };
+
+  const out = await runLegacyTranslateContent(sourceContent, callWithRetry);
+
+  assert.equal(Object.hasOwn(out, 'body1'), false, 'mezzo body italiano non passa per traduzione');
+  assert.equal(joinTranslatedChunks([{ body1: 'A' }, { body1: 'Due' }], 'body1', 'fr', ['Uno', 'Due']), null);
+  assert.equal(joinTranslatedChunks([{ body1: 'A' }, { body1: 'B' }], 'body1', 'fr', ['Uno', 'Due']), 'A\n\nB');
+});
+
+test('loop missing-field con ARTICLE_TRANSLATE_FREE_MT=0: un body presente ma identico all\'italiano entra nella recovery e resta in attesa', async () => {
+  const complete = { ...META_PLAUSIBILI, body1: 'B1', body2: 'B2', body3: 'B3' };
+  const bodyIt = 'Corpo italiano che il modello ha ricopiato.';
+  const data = { content: { en: { ...complete }, de: { ...complete }, fr: { ...complete, body1: `${bodyIt}\n` } } };
+  const itContent = { ...META_PLAUSIBILI, body1: bodyIt, body2: 'B2it', body3: 'B3it' };
+  const calls = [];
+  const callWithRetry = async (_p, _t, label) => { calls.push(label); throw new Error('All AI models failed'); };
+
+  await runMissingFieldLoop({ data, itContent, callWithRetry, freeMt: false });
+
+  assert.deepEqual(calls, ['fr:body1-missing-retry'], 'la copia italiana non e\' letta come campo usabile');
+  assert.equal(Object.hasOwn(data.content.fr, 'body1'), false);
+  assert.equal(pendingBodyTranslations(data)[0].reason, 'retry-error');
+});
+
+test('retry mirato: l\'italiano con whitespace diverso non passa per traduzione (retry-passthrough)', async () => {
+  const complete = { ...META_PLAUSIBILI, body1: 'B1', body2: 'B2', body3: 'B3' };
+  const data = { content: { en: { ...complete }, de: { ...complete, body3: '' }, fr: { ...complete } } };
+  const itContent = { ...META_PLAUSIBILI, body1: 'B1it', body2: 'B2it', body3: 'Terzo corpo italiano.' };
+  const callWithRetry = async () => ({ body3: 'Terzo  corpo\nitaliano.' });
+
+  await runMissingFieldLoop({ data, itContent, callWithRetry });
+
+  assert.equal(Object.hasOwn(data.content.de, 'body3'), false);
+  assert.equal(pendingBodyTranslations(data)[0].reason, 'retry-passthrough');
+});
+
+test('retry del troncamento: l\'italiano completo (non troncato) non sostituisce il body, resta in attesa', async () => {
+  const itBody = 'Testo italiano completo, con la frase finale.';
+  const data = { content: { de: { body2: 'Dieser Satz endet nie und' } } };
+  const itContent = { body2: itBody };
+  const detectTruncation = (text) => (String(text).endsWith(' und') ? ['incomplete-ending'] : []);
+  const callWithRetry = async () => ({ body2: itBody });
+
+  await runTruncationRetryLoop({ data, itContent, detectTruncation, callWithRetry });
+
+  assert.equal(Object.hasOwn(data.content.de, 'body2'), false, 'la copia italiana non e\' accettata come retry riuscito');
+  assert.equal(pendingBodyTranslations(data)[0].reason, 'truncation-retry-passthrough');
 });

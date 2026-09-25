@@ -226,24 +226,54 @@ export function translatedStringOrNull(value, targetLang) {
 }
 
 /**
+ * La «traduzione» e' la sorgente ricopiata? Confronto normalizzato: spazi ai
+ * bordi tolti e ogni sequenza di whitespace ridotta a uno spazio, lo stesso
+ * criterio con cui la cascata free-MT riconosce un passthrough (#1084).
+ *
+ * UNICO predicato per OGNI punto che accetta un body tradotto (#1875): la
+ * cascata free-MT, il ramo LLM legacy (`ARTICLE_TRANSLATE_FREE_MT=0`, chiamata
+ * singola e a chunk), il retry mirato sul campo mancante e il retry del
+ * troncamento in `create-article.mjs`. Una copia italiana ha gli stessi numeri
+ * della sorgente e passa ogni gate di fedelta': se un punto di accettazione
+ * non la rifiuta qui, il testo italiano esce sotto /en/ /de/ /fr/ come
+ * traduzione. Rifiutata, il campo segue la recovery per-campo e, se nessun
+ * tier traduce, resta in attesa.
+ *
+ * @param {unknown} translated
+ * @param {unknown} source
+ * @returns {boolean}
+ */
+export function isSourcePassthrough(translated, source) {
+  if (typeof translated !== 'string' || typeof source !== 'string') return false;
+  const normalize = (value) => value.trim().replace(/\s+/g, ' ');
+  const src = normalize(source);
+  return src.length > 0 && normalize(translated) === src;
+}
+
+/**
  * Joins per-chunk translations of one body field, refusing to stringify a chunk
  * the model returned as a non-string.
  *
  * Returns null when ANY chunk is unusable: a body silently missing its third
  * paragraph is worse than a body the recovery path re-translates whole, and the
- * caller cannot tell the difference once the chunks are joined.
+ * caller cannot tell the difference once the chunks are joined. With
+ * `sourceChunks`, a chunk that is its Italian source copied verbatim
+ * (`isSourcePassthrough`) is unusable too: one untranslated paragraph inside
+ * translated prose is the partial form of the #1875 defect.
  *
  * @param {unknown[]} results  per-chunk parsed JSON objects
  * @param {string} bodyKey     un campo `bodyN` dell'articolo
  * @param {string} [targetLang] locale dei chunk tradotti ('en' | 'de' | 'fr')
+ * @param {string[]} [sourceChunks] i chunk italiani, nello stesso ordine
  * @returns {string|null}
  */
-export function joinTranslatedChunks(results, bodyKey, targetLang) {
+export function joinTranslatedChunks(results, bodyKey, targetLang, sourceChunks = null) {
   if (!Array.isArray(results) || results.length === 0) return null;
   const parts = [];
-  for (const r of results) {
+  for (const [index, r] of results.entries()) {
     const part = translatedStringOrNull(r?.[bodyKey], targetLang);
     if (part === null) return null;
+    if (Array.isArray(sourceChunks) && isSourcePassthrough(part, sourceChunks[index])) return null;
     parts.push(part);
   }
   return parts.join('\n\n');
@@ -391,7 +421,7 @@ export async function translateFieldFreeMt({
   // A successful transport response is not necessarily a translation. A
   // normalized verbatim copy of the source is a failed free-MT attempt and
   // must fall through to the existing recovery path (#1084).
-  if (sourceLang !== targetLang && balanced.trim().replace(/\s+/g, ' ') === src.replace(/\s+/g, ' ')) {
+  if (sourceLang !== targetLang && isSourcePassthrough(balanced, src)) {
     onUnusableOutput({ targetLang, fieldType, ...(fieldName ? { fieldName } : {}), reason: 'passthrough' });
     onWarn(`free-MT ${targetLang}:${fieldType} returned the source verbatim`);
     return '';

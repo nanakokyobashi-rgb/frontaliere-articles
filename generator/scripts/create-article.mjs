@@ -151,6 +151,7 @@ import { freeTranslateWithRetry, balanceMarkdownMarkers } from './lib/free-trans
 import {
   translateFieldFreeMt,
   translatedStringOrNull,
+  isSourcePassthrough,
   joinTranslatedChunks,
   ensureMunicipalityNames,
 } from './lib/article-free-mt.mjs';
@@ -10741,7 +10742,10 @@ async function translateArticle(data) {
         ),
       ),
     );
-    return joinTranslatedChunks(translated, fieldKey, targetLang);
+    // `chunks` passati al join: un chunk tornato identico al suo italiano
+    // rende nullo l'intero campo (`isSourcePassthrough`, #1875), come un chunk
+    // non-stringa.
+    return joinTranslatedChunks(translated, fieldKey, targetLang, chunks);
   }
 
   async function translateContent(sourceLang, targetLang, targetLabel, sourceContent) {
@@ -10822,6 +10826,14 @@ ${terminologyByLang[targetLang] || ''}`;
           console.error(`  ⚠️  ${lang}:${bodyKey} non è una stringa (${typeof result?.[bodyKey]}) — campo scartato, recupero per-campo downstream`);
           return {};
         }
+        // Stesso controllo della cascata free-MT: una risposta che e' l'italiano
+        // ricopiato non e' una traduzione. Accettata qui, il loop di recovery la
+        // leggeva come campo usabile e l'italiano usciva sotto /en/ /de/ /fr/
+        // (#1875, percorso `ARTICLE_TRANSLATE_FREE_MT=0`).
+        if (isSourcePassthrough(text, bodyText)) {
+          console.error(`  ⚠️  ${lang}:${bodyKey} identico all'italiano — campo scartato, recupero per-campo downstream`);
+          return {};
+        }
         return { [bodyKey]: sanitizeBodyText(text) };
       }
 
@@ -10843,7 +10855,7 @@ ${terminologyByLang[targetLang] || ''}`;
         lang,
       );
       if (joined === null) {
-        console.error(`  ⚠️  ${lang}:${bodyKey} — almeno un chunk non è una stringa, campo scartato: recupero per-campo downstream`);
+        console.error(`  ⚠️  ${lang}:${bodyKey} — almeno un chunk non è una stringa o è l'italiano ricopiato, campo scartato: recupero per-campo downstream`);
         return {};
       }
       return { [bodyKey]: sanitizeBodyText(joined) };
@@ -11019,7 +11031,13 @@ ${terminologyByLang[targetLang] || ''}`;
       const floorMiss = traduzioneUsabile ? metaFieldPlausibilityMiss(field, valoreTradotto) : null;
       const freeMtRejected = ARTICLE_TRANSLATE_FREE_MT
         && wasFreeMtUnusable(RUN_REPORT.translation, locale, recoveryField);
-      if (traduzioneUsabile && !floorMiss && !freeMtRejected) continue;
+      // Un `bodyN` tradotto che e' l'italiano ricopiato non e' usabile, da
+      // qualunque percorso arrivi (#1875): entra nella recovery e, se nessun
+      // tier traduce, resta in attesa. Solo sui body: per title/excerpt la
+      // copia identica ha gia' il suo retry dedicato piu' sotto.
+      const bodyPassthrough = !faqPart && /^body\d+$/.test(field)
+        && isSourcePassthrough(valoreTradotto, readField(itContent));
+      if (traduzioneUsabile && !floorMiss && !freeMtRejected && !bodyPassthrough) continue;
       // ULTIMA RISORSA ASIMMETRICA. Un campo implausibile e' comunque prosa
       // NELLA LINGUA GIUSTA: se il retry non produce di meglio si tiene quello,
       // MAI il fallback IT, che pubblicherebbe italiano sotto `/de/` (#831).
@@ -11052,7 +11070,9 @@ ${terminologyByLang[targetLang] || ''}`;
       console.error(
         floorMiss
           ? `  ⚠️  Campo ${field} nella traduzione ${locale} troppo corto per essere un ${field} (${floorMiss}) — retry traduzione mirata...`
-          : `  ⚠️  Campo ${field} mancante nella traduzione ${locale} — retry traduzione mirata...`,
+          : bodyPassthrough
+            ? `  ⚠️  Campo ${field} nella traduzione ${locale} identico all'italiano — retry traduzione mirata...`
+            : `  ⚠️  Campo ${field} mancante nella traduzione ${locale} — retry traduzione mirata...`,
       );
       // IL CAP E' SCOPATO AI SOLI CAMPI CHE IL FREE-MT HA DAVVERO RIFIUTATO,
       // ED E' UNA QUOTA PER LOCALE.
@@ -11110,7 +11130,9 @@ ${terminologyByLang[targetLang] || ''}`;
           // Il floor vale anche sull'ESITO del retry: un retry che risponde `...`
           // e' la stessa degenerazione, solo un turno piu' tardi.
           const retriedMiss = retried ? metaFieldPlausibilityMiss(field, retried) : null;
-          if (retried && !retriedMiss && String(retried).trim() !== String(itValue).trim()) {
+          const retriedPassthrough = isSourcePassthrough(retried, itValue);
+          if (retriedPassthrough) pendingReason = 'retry-passthrough';
+          if (retried && !retriedMiss && !retriedPassthrough) {
             writeField(data.content[locale], retried);
             console.error(`  ✅ Campo ${field} (${locale}) ritradotto con successo dopo missing-field retry`);
             continue;
@@ -11210,7 +11232,13 @@ ${terminologyByLang[targetLang] || ''}`;
           );
           retried = translatedStringOrNull(parsed?.[field], locale);
         }
-        if (retried && detectTruncation(retried, { label: `${locale}/${field}` }).length === 0) {
+        // Il retry puo' restituire l'italiano completo: non troncato, quindi il
+        // solo `detectTruncation` lo accettava e la copia italiana restava
+        // pubblicata (#1875). Stesso predicato di ogni altro punto di
+        // accettazione di un body tradotto.
+        const retriedPassthrough = isSourcePassthrough(retried, itValue);
+        if (retriedPassthrough) pendingReason = 'truncation-retry-passthrough';
+        if (retried && !retriedPassthrough && detectTruncation(retried, { label: `${locale}/${field}` }).length === 0) {
           data.content[locale][field] = sanitizeBodyText(retried);
           console.error(`  ✅ ${field} (${locale}) ritradotto con successo dopo troncamento`);
           continue;
