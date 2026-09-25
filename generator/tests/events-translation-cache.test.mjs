@@ -2,6 +2,9 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
 import { enrichEventsWithLocaleFallbackTranslations } from '../scripts/lib/events-utils.mjs';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
 import { getTranslationCascadeConfigurationKey } from '../scripts/lib/free-translate.mjs';
 
 const SAME_TITLE = 'Locarno Film Festival';
@@ -114,7 +117,7 @@ test('mantiene il memo negativo per evento senza perdere il dedup positivo', asy
 
   assert.deepEqual(out.map((event) => event.titleByLocale), [{ it: SAME_TITLE }, { it: SAME_TITLE }]);
   assert.equal(calls, 2, 'un passthrough negativo descrive il singolo evento');
-  const cascadeKey = getTranslationCascadeConfigurationKey();
+  const cascadeKey = await getTranslationCascadeConfigurationKey();
   assert.deepEqual(Object.keys(cache).map((key) => JSON.parse(key)).sort((a, b) => a[1].localeCompare(b[1])), [
     ['title', 'url:https://events.test/one', 'it', 'locarno film festival', cascadeKey],
     ['title', 'url:https://events.test/two', 'it', 'locarno film festival', cascadeKey],
@@ -294,7 +297,48 @@ test('non pubblica il testo sorgente quando il translator segnala passthrough es
     'id:guidle:explicit-source',
     'it',
     'locarno film festival',
-    getTranslationCascadeConfigurationKey(),
+    await getTranslationCascadeConfigurationKey(),
   ]);
   assert.equal(cache[key].en, null);
+});
+
+// Review Codex di #1869 (5315790709): la fingerprint puo' cambiare a meta' del
+// loop dei target, quando la lane Codex si ferma. Il passthrough ottenuto dopo
+// va sotto la chiave nuova (`codex: false`), non sotto quella letta
+// all'inizio, altrimenti la run successiva con il budget pieno lo riusa e non
+// ritenta.
+test('il memo negativo scritto dopo un cambio della lane Codex va sotto la fingerprint corrente', async () => {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'events-lane-'));
+  const socket = path.join(tmp, 'broker.sock');
+  fs.writeFileSync(socket, '');
+  const previous = process.env.CODEX_AUTH_BROKER_SOCKET;
+  process.env.CODEX_AUTH_BROKER_SOCKET = socket;
+  try {
+    const before = await getTranslationCascadeConfigurationKey();
+    assert.notEqual(JSON.parse(before).codex, false);
+    const cache = {};
+    await enrichEventsWithLocaleFallbackTranslations(
+      [{ id: 'guidle:lane-stop', titleByLocale: { it: SAME_TITLE } }],
+      cache,
+      {
+        locales: ['it', 'en', 'de'],
+        delayMs: 0,
+        translateFn: async ({ targetLang }) => {
+          // Dopo il primo target la lane sparisce (broker scaduto o fermato).
+          if (targetLang === 'en') fs.rmSync(socket, { force: true });
+          return { text: '', passthrough: true };
+        },
+      },
+    );
+    const after = await getTranslationCascadeConfigurationKey();
+    assert.equal(JSON.parse(after).codex, false);
+    const keyFor = (cascade) => JSON.stringify(['title', 'id:guidle:lane-stop', 'it', 'locarno film festival', cascade]);
+    // Entrambi i passthrough sono arrivati a lane ferma: sotto la chiave nuova.
+    assert.deepEqual(cache[keyFor(after)], { en: null, de: null });
+    assert.equal(cache[keyFor(before)], undefined);
+  } finally {
+    if (previous === undefined) delete process.env.CODEX_AUTH_BROKER_SOCKET;
+    else process.env.CODEX_AUTH_BROKER_SOCKET = previous;
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
 });

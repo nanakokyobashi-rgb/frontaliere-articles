@@ -173,9 +173,12 @@ const DEEPL_LANG_MAP = { it: 'IT', en: 'EN', de: 'DE', fr: 'FR' };
  * negative passthrough memo made while optional tiers are unavailable must not
  * suppress a later retry after those tiers are configured again.
  */
-export function getTranslationCascadeConfigurationKey() {
+export async function getTranslationCascadeConfigurationKey() {
   return JSON.stringify({
-    version: 2,
+    // version 3 (2026-09-25): `codex` ora vale false anche con lane fermata,
+    // budget esaurito o modello non disponibile. I memo scritti con la v2, che
+    // a lane ferma diceva ancora disponibile, non devono combaciare.
+    version: 3,
     deepl: DEEPL_API_KEYS.length > 0,
     azure: AZURE_TRANSLATOR_KEYS.length > 0,
     googleCloud: _gcOAuthAvailable,
@@ -183,12 +186,39 @@ export function getTranslationCascadeConfigurationKey() {
     libreTranslateSelfHosted: Boolean(LIBRETRANSLATE_SELF_HOSTED),
     huggingFace: Boolean(HF_TOKEN),
     // Lane Codex del processo (socket del broker e budget) e sua posizione:
-    // un evento fallito senza broker va ritentato quando il broker c'e'
-    // (version 2, 2026-09-25).
-    codex: _codexSocketPresent() && _codexBudget('FREE_TRANSLATE_CODEX_MAX_CALLS', CODEX_TRANSLATE_MAX_CALLS_DEFAULT) > 0
-      ? _codexTierPosition()
-      : false,
+    // un evento fallito senza broker va ritentato quando il broker c'e'. Una lane che non puo' piu' servire questa run
+    // vale come assente: il fallimento memorizzato da quel punto in poi non
+    // deve restare valido per la run dopo, che riparte con il budget pieno.
+    codex: (await _codexLaneUsableForFingerprint()) ? _codexTierPosition() : false,
   });
+}
+
+/**
+ * La lane Codex puo' ancora servire una chiamata in questa run? Gli stessi
+ * controlli di `_translateWithCodexNow`, nello stesso ordine, e per il modello
+ * la stessa guardia: `isModelAvailable(CODEX_CLI_PRIMARY)` di ai-models.mjs,
+ * che copre il kill-switch ENABLE_CODEX_ARTICLE_FALLBACK, la chiave/socket del
+ * provider e l'esaurimento del modello nel processo. Una copia di quei
+ * controlli qui dimenticava sempre qualcosa: prima lo stop, poi il budget
+ * esaurito dall'ultima chiamata, poi la guardia del modello (review di #1869,
+ * 5315911624 e 5316061360). ai-models.mjs si carica solo con lane configurata
+ * (socket presente, budget residuo), cioe' quando la lane lo caricherebbe
+ * comunque; senza socket non si importa, come prima.
+ */
+async function _codexLaneUsableForFingerprint() {
+  if (_codexStopReason || !_codexSocketPresent()) return false;
+  const maxCalls = _codexBudget('FREE_TRANSLATE_CODEX_MAX_CALLS', CODEX_TRANSLATE_MAX_CALLS_DEFAULT);
+  const maxMs = _codexBudget('FREE_TRANSLATE_CODEX_MAX_MS', CODEX_TRANSLATE_MAX_MS_DEFAULT);
+  if (_codexCalls >= maxCalls || maxMs - _codexSpentMs < CODEX_TRANSLATE_MIN_CALL_MS) return false;
+  _codexLane ??= import('./ai-models.mjs');
+  try {
+    const ai = await _codexLane;
+    return ai.isModelAvailable(ai.AI_MODELS.CODEX_CLI_PRIMARY);
+  } catch {
+    // Import rifiutato: come nella lane, il tier si ferma per il processo.
+    _stopCodex('ai-models.mjs non caricabile');
+    return false;
+  }
 }
 
 // ── Instance Health Tracking ────────────────────────────────────────────────
