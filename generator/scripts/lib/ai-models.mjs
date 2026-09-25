@@ -9338,7 +9338,13 @@ export async function callLLM(messages, opts = {}) {
         `${model}: ${msg.slice(0, 200).replace(ENTRY_TAIL_SEPARATOR_RE, '')}`,
         {
           reason: `${model}: ${msg}`,
-          authoritative: isAuthoritativePersistentReason(e.nonRetryableReason) ? 'persistent' : null,
+          // Socket/queue failures are authoritative transient evidence even
+          // when their wording contains neither "timeout" nor "temporarily".
+          // Without this, Codex's "queue wait exceeded" and "closed without a
+          // response" errors disappear from the aggregate exhaustion tally.
+          authoritative: isAuthoritativePersistentReason(e.nonRetryableReason)
+            ? 'persistent'
+            : e.transportFault ? 'transport' : null,
         },
       );
       _recordLastResortOutcome(model, 'failed');
@@ -9858,6 +9864,7 @@ export function causeIndex(re, reason) {
 }
 
 function authoritativeCauseBucket(value) {
+  if (value === 'transport') return 'transient';
   if (value === 'resolver flap') return 'transient';
   if (value === 'unreachable' || value === 'persistent') return 'persistent';
   return null;

@@ -383,7 +383,7 @@ function removeAuthHome() {
   }
 }
 
-function runCodex({ authJson: credential, prompt, timeoutMs, schema, onSpawn }) {
+function runCodex({ authJson: credential, prompt, timeoutMs, schema, onSpawn = () => {} }) {
   // Per-request tree: workspace, TMPDIR and the output files. The login lives
   // in the per-job home instead (prepareAuthHome), outside this tree.
   const runtimeRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-haiku-broker-'));

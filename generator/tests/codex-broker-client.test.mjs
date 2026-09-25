@@ -115,7 +115,11 @@ test('chiede il segnale di avvio e toglie i byte di controllo prima della rispos
 
 test('una richiesta mai partita scade come attesa in coda, senza toccare lo score', async () => {
   behavior = (client) => { client.write('\0'); };
-  await assert.rejects(() => callCodex({ deadlineMs: Date.now() + 1500 }), /queue wait timed out after \d+s before Codex started/);
+  await assert.rejects(() => callCodex({ deadlineMs: Date.now() + 1500 }), (error) => {
+    assert.match(error.message, /queue wait timed out after \d+s before Codex started/);
+    assert.equal(error.transientExhaustion, true);
+    return true;
+  });
   assert.match(logged(), /guasto di trasporto/);
   assert.equal(codexScore(), 0);
 });
@@ -171,7 +175,11 @@ test('ogni guasto del canale broker vota transitorio nel tally di esaurimento', 
 
 test('un broker che chiude senza risposta e\' un guasto di trasporto', async () => {
   behavior = (client) => { client.end(); };
-  await assert.rejects(() => callCodex(), /closed without a response/);
+  await assert.rejects(() => callCodex(), (error) => {
+    assert.match(error.message, /closed without a response/);
+    assert.equal(error.transientExhaustion, true);
+    return true;
+  });
   assert.match(logged(), /guasto di trasporto/);
   assert.equal(codexScore(), 0);
 });

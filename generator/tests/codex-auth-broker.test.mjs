@@ -11,6 +11,12 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const BROKER = path.join(ROOT, '.github/actions/setup-claude-haiku-fallback/codex-auth-broker.mjs');
 
+// macOS limits Unix-socket paths to a little over 100 bytes. Keep the broker
+// directory prefix short because the broker briefly appends `.listening` while
+// it binds the socket.
+const tempBrokerDir = () => fs.mkdtempSync(path.join(os.tmpdir(), 'cb.'));
+const normalizeTempPath = (value) => path.normalize(value).replace(/^\/private\/tmp(?=\/|$)/, '/tmp');
+
 function waitForSocket(socketPath, child, timeoutMs = 5000) {
   const startedAt = Date.now();
   return new Promise((resolve, reject) => {
@@ -91,7 +97,7 @@ function waitForExit(child, timeoutMs = 5000) {
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 test('il broker Codex serializza più richieste senza consumare una slot globale', async () => {
-  const brokerDir = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-broker-test.'));
+  const brokerDir = tempBrokerDir();
   const cliPrefix = fs.mkdtempSync(path.join(os.tmpdir(), 'claude-haiku-codex-cli.'));
   const socketPath = path.join(brokerDir, 'auth.sock');
   const cliPath = path.join(cliPrefix, 'codex');
@@ -157,7 +163,7 @@ process.stdin.on('end', () => fs.writeFileSync(output, JSON.stringify({ prompt }
 });
 
 test('il TTL del broker è idle e non scade mentre la coda riceve richieste', async () => {
-  const brokerDir = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-broker-idle-test.'));
+  const brokerDir = tempBrokerDir();
   const cliPrefix = fs.mkdtempSync(path.join(os.tmpdir(), 'claude-haiku-codex-cli.'));
   const socketPath = path.join(brokerDir, 'auth.sock');
   const cliPath = path.join(cliPrefix, 'codex');
@@ -217,7 +223,7 @@ process.stdin.on('end', () => fs.writeFileSync(output, JSON.stringify({ prompt }
 });
 
 test('una richiesta cancellata prima dell esecuzione non consuma la quota', async () => {
-  const brokerDir = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-broker-cancel-test.'));
+  const brokerDir = tempBrokerDir();
   const cliPrefix = fs.mkdtempSync(path.join(os.tmpdir(), 'claude-haiku-codex-cli.'));
   const socketPath = path.join(brokerDir, 'auth.sock');
   const cliPath = path.join(cliPrefix, 'codex');
@@ -302,7 +308,7 @@ process.stdin.on('end', () => fs.writeFileSync(output, JSON.stringify({ prompt }
 // Il codex finto qui registra dove il broker lo lancia e quale profilo gli
 // scrive, così il contratto si verifica sui percorsi reali e non sul testo.
 test('il profilo sandbox del broker non nega il workspace in cui lancia Codex', async () => {
-  const brokerDir = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-broker-profile-test.'));
+  const brokerDir = tempBrokerDir();
   const cliPrefix = fs.mkdtempSync(path.join(os.tmpdir(), 'claude-haiku-codex-cli.'));
   const socketPath = path.join(brokerDir, 'auth.sock');
   const cliPath = path.join(cliPrefix, 'codex');
@@ -350,7 +356,11 @@ process.stdin.on('end', () => fs.writeFileSync(output, JSON.stringify({
     const response = await request(socketPath, { op: 'exec', prompt: 'profile', timeoutMs: 5000 });
     assert.equal(response.ok, true, stderr);
     const seen = JSON.parse(response.result);
-    assert.equal(seen.cd, seen.cwd, 'Codex deve girare nel workspace che riceve con --cd');
+    assert.equal(
+      normalizeTempPath(seen.cd),
+      normalizeTempPath(seen.cwd),
+      'Codex deve girare nel workspace che riceve con --cd',
+    );
 
     const filesystem = {};
     let inFilesystem = false;
@@ -397,7 +407,7 @@ process.stdin.on('end', () => fs.writeFileSync(output, JSON.stringify({
 });
 
 test('un Codex che esce con errore restituisce la causa, senza token', async () => {
-  const brokerDir = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-broker-reason-test.'));
+  const brokerDir = tempBrokerDir();
   const cliPrefix = fs.mkdtempSync(path.join(os.tmpdir(), 'claude-haiku-codex-cli.'));
   const socketPath = path.join(brokerDir, 'auth.sock');
   const cliPath = path.join(cliPrefix, 'codex');
@@ -460,7 +470,7 @@ process.stdin.on('end', () => {
 // il token speso («refresh token already used»). Il Codex finto fa il refresh
 // a ogni chiamata: la successiva deve partire dal login rinnovato.
 test('una sola CODEX_HOME per job: il login rinnovato dalla chiamata N serve la N+1', async () => {
-  const brokerDir = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-broker-refresh-test.'));
+  const brokerDir = tempBrokerDir();
   const cliPrefix = fs.mkdtempSync(path.join(os.tmpdir(), 'claude-haiku-codex-cli.'));
   const socketPath = path.join(brokerDir, 'auth.sock');
   const cliPath = path.join(cliPrefix, 'codex');
@@ -550,7 +560,7 @@ process.stdin.on('end', () => {
 });
 
 test('un errore API stampato come JSON restituisce anche il suo "message"', async () => {
-  const brokerDir = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-broker-apierror-test.'));
+  const brokerDir = tempBrokerDir();
   const cliPrefix = fs.mkdtempSync(path.join(os.tmpdir(), 'claude-haiku-codex-cli.'));
   const socketPath = path.join(brokerDir, 'auth.sock');
   const cliPath = path.join(cliPrefix, 'codex');
@@ -609,7 +619,7 @@ process.stdin.on('end', () => {
 // ascolta su un nome temporaneo nella stessa directory 0700 e lo rinomina solo
 // quando accetta connessioni: «il socket esiste» vuol dire «pronto».
 test('il socket compare solo quando il broker accetta gia\' connessioni', async () => {
-  const brokerDir = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-broker-ready-test.'));
+  const brokerDir = tempBrokerDir();
   const cliPrefix = fs.mkdtempSync(path.join(os.tmpdir(), 'claude-haiku-codex-cli.'));
   const socketPath = path.join(brokerDir, 'auth.sock');
   const cliPath = path.join(cliPrefix, 'codex');
@@ -668,7 +678,7 @@ process.stdin.on('end', () => {
 `;
 
 async function withSleepingBroker(ttlMs, body) {
-  const brokerDir = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-broker-queue-test.'));
+  const brokerDir = tempBrokerDir();
   const cliPrefix = fs.mkdtempSync(path.join(os.tmpdir(), 'claude-haiku-codex-cli.'));
   const socketPath = path.join(brokerDir, 'auth.sock');
   const cliPath = path.join(cliPrefix, 'codex');
