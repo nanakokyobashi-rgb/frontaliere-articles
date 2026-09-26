@@ -1155,6 +1155,9 @@ jobs:
           # align; una head che avanza fra fetch e lettura darebbe una
           # fotografia intermedia. In entrambi i casi SUCCESS, SUPERSEDED e il
           # rimborso del round sarebbero decisi su una head non verificata.
+          # La coppia fetch/ls-remote è solo uno snapshot: si rilegge la head
+          # anche subito prima della classificazione e del rimborso, fallendo
+          # chiuso se nel frattempo è cambiata.
           # Si classifica solo su uno SHA confermato da due letture concordi
           # (fetch con refspec esplicito + ls-remote), con retry bounded e
           # backoff; altrimenti errore esplicito PRIMA di ogni ramo che scrive
@@ -1166,6 +1169,25 @@ jobs:
           # resta retryable invece di essere ricostruito come terminale
           # dall'outcome di Codex.
           REMOTE_SHA=""
+          confirm_remote_head() {
+            # fetched_sha è lo snapshot già confermato dal fetch iniziale.
+            local fetched_sha="${1:-}"
+            local reread_sha=""
+            local ls_remote_out=""
+            if ls_remote_out=$(timeout 30 git ls-remote --exit-code origin "refs/heads/$HEAD_REF" 2>/dev/null); then
+              reread_sha=$(printf '%s\n' "$ls_remote_out" | awk 'NR == 1 { print $1 }')
+            fi
+            [ -n "$fetched_sha" ] && [ "$fetched_sha" = "$reread_sha" ]
+          }
+          fail_remote_head_unverified() {
+            CLAIM_STATUS=failed-transient
+            export CLAIM_STATUS
+            if [ -n "${GITHUB_ENV:-}" ]; then
+              echo 'CLAIM_STATUS=failed-transient' >> "$GITHUB_ENV"
+            fi
+            echo "::error::REMOTE_HEAD_UNVERIFIED: head remota di $HEAD_REF cambiata o non leggibile $1 → classificazione/rimborso bloccati, marker conservato; claim failed-transient (retryable)."
+            exit 1
+          }
           remote_head_attempts=3
           remote_head_attempt=1
           while [ "$remote_head_attempt" -le "$remote_head_attempts" ]; do
@@ -1212,6 +1234,9 @@ jobs:
             echo "::error::❌-check-fix: baseline del body PR assente o illeggibile → classificazione BLOCCANTE, job ROSSO."
             exit 1
           fi
+          if ! confirm_remote_head "$REMOTE_SHA"; then
+            fail_remote_head_unverified "prima della classificazione"
+          fi
           if [ -n "$HEAD_NOW" ] && [ -n "$BASE_SHA" ] && [ "$HEAD_NOW" != "$BASE_SHA" ] && [ "$REMOTE_SHA" = "$HEAD_NOW" ]; then
             echo "Fix pushato questo round (HEAD avanzato e presente su origin/$HEAD_REF) → round SUCCESS. Job verde anche se la CLI e' uscita '$ACTION_OUTCOME'."
             exit 0
@@ -1237,6 +1262,9 @@ jobs:
               || [ -z "${MARKER_BODY_REVISION:-}" ] || [ ! -f "${TRUSTED_MARKER_HELPER:-}" ]; then
               echo "::error::SUPERSEDED: prova trusted del marker ${FIX_ROUND_MARKER:-?}:${FIX_ROUND:-?} incompleta (ID/HEAD/body/helper) → rimborso non eseguibile, round ancora contato. Job ROSSO."
               exit 1
+            fi
+            if ! confirm_remote_head "$REMOTE_SHA"; then
+              fail_remote_head_unverified "prima del rimborso"
             fi
             if ! refund_result=$(node "$TRUSTED_MARKER_HELPER" --refund-superseded \
               --repo "$REPO" --pr "$PR_NUMBER" --marker "$FIX_ROUND_MARKER" \
