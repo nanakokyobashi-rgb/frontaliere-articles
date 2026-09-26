@@ -11,7 +11,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const SLUG = 'tassa-salute-tensioni-ticino';
 const LOCALES = ['it', 'en', 'de', 'fr'];
-const REFRESHED_ON = '2026-09-24';
+const REFRESHED_ON = '2026-09-26';
 
 function bodySource(locale) {
   return fs.readFileSync(
@@ -58,13 +58,15 @@ test('tassa-salute-tensioni-ticino: la tassa e\' una quota italiana (L. 213/2023
   }
 });
 
-test('tassa-salute-tensioni-ticino: commissione mista = art. 6 dell\'Accordo 2020, riunita a ottobre 2025', () => {
+test('tassa-salute-tensioni-ticino: commissione mista = art. 6 dell\'Accordo 2020 senza data o esito non documentati', () => {
   for (const locale of LOCALES) {
     const source = bodySource(locale);
     assert.match(source, /(?:articolo|Article|Artikel|article) 6\b/, `${locale}: articolo 6`);
     assert.doesNotMatch(source, /(?:articolo|Article|Artikel|article) 5\b/, `${locale}: articolo 5 errato`);
-    assert.match(source, /ottobre 2025|Oktober 2025/, `${locale}: data commissione`);
-    assert.doesNotMatch(source, /ottobre 2023|Oktober 2023/, `${locale}: data commissione errata`);
+    assert.match(source, /(?:Accordo 2020|2020 agreement|Abkommen 2020|Accord 2020)/, `${locale}: base giuridica`);
+    assert.match(source, /(?:senza un comunicato ufficiale|without an official release|ohne eine offizielle Mitteilung|sans communiqué officiel)/, `${locale}: qualifica sulla fonte`);
+    assert.doesNotMatch(source, /ottobre 2025|October 2025|Oktober 2025|octobre 2025/, `${locale}: data commissione non documentata`);
+    assert.doesNotMatch(source, /(?:circa|around|rund|environ) 30 (?:comuni|Italian border municipalities|italienische Grenzgemeinden|municipalités)/i, `${locale}: conteggio comuni non documentato`);
   }
 });
 

@@ -1,7 +1,7 @@
 /**
  * Refresh evergreen di `lamal-cmi-scelta-frontaliere-2026` (corpus #1761, sito #9628).
  *
- * Fissa nelle quattro lingue i fatti verificati il 2026-09-24 e fallisce se
+ * Fissa nelle quattro lingue i fatti verificati il 2026-09-26 e fallisce se
  * tornano i valori smentiti dalle fonti ufficiali:
  *  - termine dell'opzione: 3 mesi dall'inizio dell'attivita' in Svizzera
  *    (IAS Ticino, UFSP), non "90 giorni dal varco di frontiera";
@@ -24,7 +24,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const SLUG = 'lamal-cmi-scelta-frontaliere-2026';
 const LOCALES = ['it', 'en', 'de', 'fr'];
-const REFRESHED_ON = '2026-09-24';
+const REFRESHED_ON = '2026-09-26';
 
 function read(rel) {
   return fs.readFileSync(path.join(ROOT, rel), 'utf8');
@@ -50,8 +50,11 @@ test('i quattro body portano i fatti verificati e le fonti ufficiali', () => {
     assert.match(source, /2027/, `${locale}: premi 2027 dichiarati non ancora pubblicati`);
     assert.match(source, /priminfo\.admin\.ch\/downloads\/gesamtbericht_eu\.pdf/);
     assert.match(source, /bag\.admin\.ch/);
+    assert.match(source, /angehoerige-von-grenzgaenger-aus-italien-mit-arbeitsort-ch\.pdf/, `${locale}: caso familiare documentato dal BAG/OFSP`);
+    assert.match(source, /(?:nascita di un figlio|birth of a child|Geburt eines Kindes|naissance d.{0,2}un enfant)/i, `${locale}: nuovo diritto di opzione documentato`);
     assert.match(source, /ti\.ch\/fileadmin\/DSS\/IAS/);
     assert.match(source, /gazzettaufficiale\.it/);
+    assert.doesNotMatch(source, /(?:Scelta vincolante e irreversibile salvo|Choice for CMI is binding, can only be changed|Nur bei Wechsel des Arbeitgebers|Choix CMI souvent définitif sauf changement)/, `${locale}: eccezione generica non verificata`);
   }
 });
 
