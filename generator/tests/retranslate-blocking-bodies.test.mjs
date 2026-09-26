@@ -61,6 +61,7 @@ import {
   ITALIAN_RESIDUE_MIN_LINES,
   scanItalianResidue,
   hasItalianResidue,
+  currentBlockingCodes,
 } from '../scripts/retranslate-blocking-bodies.mjs';
 // Dal modulo corpus-only, NON da `lib/article-sanitizers.mjs`: quello e'
 // `identical` nel manifest del ciclo e un export aggiunto dal corpus lo
@@ -320,6 +321,37 @@ test('la soglia lascia fuori una riga italiana isolata e il locale sorgente', ()
   assert.equal(scanItalianResidue(oneLine, 'fr').length, 2);
   assert.equal(hasItalianResidue(oneLine, 'fr'), false);
   assert.deepEqual(scanItalianResidue(oneLine, 'it'), []);
+});
+
+test('un finding scan-v2 obsoleto non fa sovrascrivere un body locale gia pulito', () => {
+  const [staleAuditPair] = blockingPairsFromAudit({
+    results: [{
+      lang: 'en',
+      slug: 'traduzione-gia-pulita',
+      count: ITALIAN_RESIDUE_MIN_LINES,
+      hits: Array.from({ length: ITALIAN_RESIDUE_MIN_LINES }, () => ({ field: 'body1' })),
+    }],
+  });
+  assert.deepEqual(staleAuditPair.codes, ['italian-residue']);
+
+  const currentSections = {
+    body1: [
+      '## Key facts',
+      '- **What**: The CUV assembly is planned for 2026',
+      '- **Where**: Malpensa and nearby municipalities',
+      '- **Issues**: Higher air traffic and environmental impact',
+    ].join('\n'),
+  };
+  const oldCodes = currentBlockingCodes({
+    factualityCodes: [],
+    italianResidue: scanItalianResidue(currentSections, 'en'),
+  });
+
+  assert.deepEqual(oldCodes, []);
+  assert.deepEqual(
+    shouldWrite({ oldCodes, newCodes: [], missingField: null }),
+    { write: false, reason: 'vecchia-gia-pulita' },
+  );
 });
 
 test('shouldWrite tratta italian-residue come difetto bloccante della pagina vecchia', () => {

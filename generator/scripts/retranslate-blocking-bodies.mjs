@@ -181,6 +181,13 @@ export function hasItalianResidue(sections, locale) {
   return scanItalianResidue(sections, locale).length >= ITALIAN_RESIDUE_MIN_LINES;
 }
 
+export function currentBlockingCodes({ factualityCodes = [], italianResidue = [] }) {
+  return [...new Set([
+    ...factualityCodes,
+    ...(italianResidue.length >= ITALIAN_RESIDUE_MIN_LINES ? ['italian-residue'] : []),
+  ])].sort();
+}
+
 /**
  * L'audit riporta il path del SYMLINK (`services/locales/blog-body`), non
  * quello reale. Su `services/...` `git log` rende vuoto con exit 0, e ogni
@@ -801,13 +808,7 @@ async function processPair(pair, { CONTENT_ROOT, APPLY }) {
   }
   const factualityCodes = criticalCodes(runFactualityGates({ sections: oldSections, locale: pair.locale, italianSections }));
   const oldItalianResidue = scanItalianResidue(oldSections, pair.locale);
-  const oldCodes = [...new Set([
-    ...factualityCodes,
-    ...(pair.codes?.includes('italian-residue')
-      || oldItalianResidue.length >= ITALIAN_RESIDUE_MIN_LINES
-      ? ['italian-residue']
-      : []),
-  ])].sort();
+  const oldCodes = currentBlockingCodes({ factualityCodes, italianResidue: oldItalianResidue });
 
   const newSections = {};
   let missingField = null;
