@@ -164,7 +164,7 @@ function restoreProperty(target, source, key) {
 /**
  * Ripristina baseline/couplingSnapshot e appartenenza al manifest dei workflow
  * indicati, così il commit resta identico al parent anche per file nuovi o
- * rimossi.
+ * rimossi, conservando l'ordine precedente relativo alle altre voci presenti.
  */
 export function restoreWorkflowSnapshots(currentManifest, previousManifest, paths) {
   const workflowPaths = sortedUnique(paths);
@@ -176,6 +176,7 @@ export function restoreWorkflowSnapshots(currentManifest, previousManifest, path
   assertManifestFiles(previousManifest?.files, 'precedente');
   const currentFiles = current.files;
   const previousFiles = previousManifest.files;
+  const missingPreviousEntries = [];
   for (const rel of workflowPaths) {
     const nowEntries = currentFiles.filter((entry) => entry?.path === rel);
     const oldEntries = previousFiles.filter((entry) => entry?.path === rel);
@@ -186,8 +187,10 @@ export function restoreWorkflowSnapshots(currentManifest, previousManifest, path
       throw new Error(`manifest senza voce corrente/precedente per ${rel}`);
     }
     if (!nowEntries.length) {
-      const previousIndex = previousFiles.indexOf(oldEntries[0]);
-      currentFiles.splice(Math.min(Math.max(previousIndex, 0), currentFiles.length), 0, clone(oldEntries[0]));
+      missingPreviousEntries.push({
+        entry: oldEntries[0],
+        index: previousFiles.indexOf(oldEntries[0]),
+      });
       continue;
     }
     if (!oldEntries.length) {
@@ -198,6 +201,27 @@ export function restoreWorkflowSnapshots(currentManifest, previousManifest, path
     }
     restoreProperty(nowEntries[0], oldEntries[0], 'baseline');
     restoreProperty(nowEntries[0], oldEntries[0], 'couplingSnapshot');
+  }
+
+  missingPreviousEntries.sort((left, right) => left.index - right.index);
+  for (const { entry, index } of missingPreviousEntries) {
+    const nextExisting = previousFiles
+      .slice(index + 1)
+      .find((previousEntry) => currentFiles.some(({ path }) => path === previousEntry.path));
+    let insertionIndex = nextExisting
+      ? currentFiles.findIndex(({ path }) => path === nextExisting.path)
+      : -1;
+
+    if (insertionIndex < 0) {
+      const previousExisting = previousFiles
+        .slice(0, index)
+        .reverse()
+        .find((previousEntry) => currentFiles.some(({ path }) => path === previousEntry.path));
+      insertionIndex = previousExisting
+        ? currentFiles.findIndex(({ path }) => path === previousExisting.path) + 1
+        : Math.min(index, currentFiles.length);
+    }
+    currentFiles.splice(insertionIndex, 0, clone(entry));
   }
   return current;
 }
