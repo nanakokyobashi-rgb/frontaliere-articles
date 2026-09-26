@@ -6794,6 +6794,12 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.avenergy-lobby-clima.title': 'Avenergy e la lobby del petrolio: clima in Svizzera',
     'blog.article.avenergy-lobby-clima.excerpt': 'Uno studio ricostruisce la comunicazione di Avenergy, associazione degli importatori di petrolio, e la rete di interessi che arriva al Consiglio federale.',
     'blog.article.avenergy-lobby-clima.imageAlt': 'Bellinzona e le montagne svizzere sotto un cielo nuvoloso, immagine sul clima nazionale',
+    'blog.article.assicurazione-grandine-2026.title': 'Assicurazione grandine: premi a rischio nel 2026',
+    'blog.article.assicurazione-grandine-2026.excerpt': 'Nel 2026 Grandine Svizzera prevede perdite finanziarie e risarcimenti fino a 170 milioni di franchi, con raccolti di barbabietole, patate e mais in calo fino al 30%.',
+    'blog.article.assicurazione-grandine-2026.imageAlt': 'Campo agricolo svizzero colpito da grandine con nuvole minacciose',
+    'blog.article.ubs-sede-elvetica-costi.title': 'Ubs: trasferimento sede poco probabile per Keller-Sutter',
+    'blog.article.ubs-sede-elvetica-costi.excerpt': 'Secondo Karin Keller‑Sutter, spostare la sede di Ubs all’estero sarebbe molto più costoso e giuridicamente complesso; il Consiglio federale ha già concesso agevolazioni sull’ordinanza sui fondi propri.',
+    'blog.article.ubs-sede-elvetica-costi.imageAlt': 'Edificio della sede di Ubs nel distretto finanziario svizzero',
 };
 
 export default blogMetaChIt;

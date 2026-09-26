@@ -6794,6 +6794,12 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.avenergy-lobby-clima.title': 'Avenergy and the oil lobby: climate in Switzerland',
     'blog.article.avenergy-lobby-clima.excerpt': 'A study reconstructs the communications of Avenergy, the association of oil importers, and the network of interests that reaches the Federal Council.',
     'blog.article.avenergy-lobby-clima.imageAlt': 'Bellinzona and Swiss mountains under a cloudy sky, evoking the national climate debate',
+    'blog.article.assicurazione-grandine-2026.title': 'Hail insurance: premiums at risk in 2026',
+    'blog.article.assicurazione-grandine-2026.excerpt': 'In 2026, Grandine Svizzera expects financial losses and compensation payments of up to 170 million francs, with beet, potato and corn harvests declining by up to 30%.',
+    'blog.article.assicurazione-grandine-2026.imageAlt': 'Swiss agricultural field affected by hail under threatening clouds',
+    'blog.article.ubs-sede-elvetica-costi.title': 'Ubs: relocation of headquarters unlikely, according to Keller-Sutter',
+    'blog.article.ubs-sede-elvetica-costi.excerpt': 'According to Karin Keller‑Sutter, moving Ubs’s headquarters abroad would be much more costly and legally complex; the Federal Council has already granted concessions regarding the Capital Adequacy Ordinance.',
+    'blog.article.ubs-sede-elvetica-costi.imageAlt': 'Ubs headquarters building in the Swiss financial district',
 };
 
 export default blogMetaChEn;
