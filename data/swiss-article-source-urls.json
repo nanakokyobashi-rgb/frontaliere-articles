@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1945603/salt-sunrise-rete-cooperazione-stretta": {
-    "articleId": "sunrise-salt-rete-cooperazione",
-    "ts": "2026-08-24T06:19:30.674Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1945619/trattamento-diritti-obesita-roche-hanmi": {
     "articleId": "roche-acquisisce-diritti-trattamento-obesita",
     "ts": "2026-08-24T07:44:45.472Z",
@@ -2497,6 +2492,11 @@
   "https://www.laregione.ch/economia/economia/1952460/come-la-lobby-del-petrolio-ha-bollito-il-clima-in-svizzera": {
     "articleId": "avenergy-lobby-clima",
     "ts": "2026-09-26T16:40:49.503Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/assicurazione-grandine%3a-di-questo-passo-premi-saranno-insostenibili/92123404": {
+    "articleId": "assicurazione-grandine-2026",
+    "ts": "2026-09-26T17:26:33.723Z",
     "keyForm": 2
   }
 }
