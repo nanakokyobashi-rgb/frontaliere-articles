@@ -105,7 +105,7 @@ import {
 import { unescapeTsString } from './lib/unescape-ts-string.mjs';
 import { escapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
 import { sanitizeBodyText } from './lib/sanitize-body-braces.mjs';
-import { detectLanguage } from './lib/detect-language.mjs';
+import { detectLanguage, detectLanguageWithConfidence } from './lib/detect-language.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 
@@ -126,34 +126,9 @@ export const BODY_FIELDS = ['body1', 'body2', 'body3'];
  * non e' abbastanza probante per autorizzare una riscrittura automatica.
  */
 export const ITALIAN_RESIDUE_MIN_LINES = 3;
+const ITALIAN_RESIDUE_MIN_CONFIDENCE = 0.15;
 const ITALIAN_RESIDUE_HEADING_RE = /^(?:#{1,6}\s*)?(?:in breve|fatti chiave|domande frequenti|punti chiave|conclusione|conclusioni|fonti|consiglio pratico|cosa cambia|attenzione|da sapere|in sintesi)\s*:?[ \t]*$/iu;
 const ITALIAN_RESIDUE_WORD_RE = /[\p{L}]+(?:['’][\p{L}]+)*/gu;
-
-// Parole ad alto potere discriminante per la prosa di questo corpus. Le
-// parole-funzione da sole non bastano: "in", "a" e "per" compaiono anche in
-// EN/DE/FR. Due marcatori lessicali sulla stessa riga sono invece il segnale
-// usato dallo scan-v2 per le righe che entrano nella bonifica.
-const ITALIAN_RESIDUE_STRONG_WORDS = new Set([
-  'accordo', 'accordi', 'ambientale', 'ambientali', 'assemblea', 'associazione',
-  'associazioni', 'attenzione', 'aumento', 'candidato', 'candidati', 'canton',
-  'cantone', 'cantonale', 'crescita', 'cosa', 'convocazione', 'contributo',
-  'contributi', 'dall', 'dalla', 'delle', 'dello', 'dichiarare', 'dichiarazione',
-  'domande', 'dove', 'entro', 'esigenze', 'famiglie', 'fatti', 'fonti', 'frontaliere',
-  'importo', 'imposte', 'italiana', 'italiane', 'italiano', 'italiani',
-  'lavoratori', 'lavora', 'legge', 'lettera', 'maggior', 'mensa', 'mensile',
-  'misura', 'nuova', 'obiettivi', 'oltre', 'passeggeri', 'perché', 'perche',
-  'problema', 'problemi', 'previsto', 'prevista', 'pubblicata', 'quando',
-  'richiesta', 'richiedono', 'richiesto', 'reddito', 'requisiti', 'scadenza',
-  'scambio', 'secondo', 'sono', 'territorio', 'traffico', 'unione', 'valore',
-  'valori', 'viene', 'vengono', 'verso',
-]);
-const ITALIAN_RESIDUE_FUNCTION_WORDS = new Set([
-  'a', 'ad', 'al', 'alla', 'alle', 'allo', 'ai', 'agli', 'anche', 'che', 'chi',
-  'come', 'con', 'da', 'dal', 'dalla', 'dalle', 'dei', 'degli', 'del', 'della',
-  'delle', 'di', 'dove', 'e', 'è', 'gli', 'ha', 'i', 'il', 'in', 'la', 'le',
-  'lo', 'ma', 'nel', 'nella', 'nelle', 'non', 'per', 'più', 'quando', 'questa',
-  'queste', 'questo', 'sono', 'sua', 'sul', 'sulla', 'tra', 'un', 'una', 'uno',
-]);
 
 function normalizeItalianResidueLine(line) {
   return String(line ?? '')
@@ -162,10 +137,6 @@ function normalizeItalianResidueLine(line) {
     .replace(/[\*_`>#|]/gu, ' ')
     .replace(/\s+/gu, ' ')
     .trim();
-}
-
-function residueWordKey(word) {
-  return word.normalize('NFD').replace(/[\u0300-\u036f]/gu, '').toLowerCase();
 }
 
 /** Ritorna il tipo di segnale, oppure null se la riga non e' probante. */
@@ -177,18 +148,8 @@ function italianResidueLineReason(line, locale) {
 
   const words = clean.match(ITALIAN_RESIDUE_WORD_RE) || [];
   if (words.length < 3) return null;
-  const keys = words.map(residueWordKey);
-  const strongHits = keys.filter((word) => ITALIAN_RESIDUE_STRONG_WORDS.has(word)).length;
-  if (strongHits >= 2) return 'lexical';
-
-  // Second signal for ordinary Italian prose outside the article-specific
-  // vocabulary above. French also has many final vowels, so the morphology
-  // branch requires three Italian function words and a clear vowel-ending
-  // majority; it is never enough on its own for a one-word line.
-  const functionHits = keys.filter((word) => ITALIAN_RESIDUE_FUNCTION_WORDS.has(word)).length;
-  const vowelEndingWords = keys.filter((word) => word.length >= 3 && /[aeiou]$/u.test(word)).length;
-  const vowelRatio = vowelEndingWords / words.length;
-  return functionHits >= 3 && vowelRatio >= 0.55 ? 'morphology' : null;
+  const { lang, confidence } = detectLanguageWithConfidence(clean, locale);
+  return lang === 'it' && confidence >= ITALIAN_RESIDUE_MIN_CONFIDENCE ? 'language' : null;
 }
 
 /**

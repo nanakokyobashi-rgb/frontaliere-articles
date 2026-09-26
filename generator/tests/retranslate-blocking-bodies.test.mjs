@@ -290,6 +290,19 @@ test('lo scan per riga vede il blocco italiano ma non una traduzione con gli ste
   assert.equal(hasItalianResidue(translated, 'en'), false);
 });
 
+test('lo scan per riga riconosce prosa italiana comune senza segnalare il francese', () => {
+  const italian = scanItalianResidue({
+    body1: 'Le autorità hanno deciso nuove misure',
+  }, 'en');
+  const french = scanItalianResidue({
+    body1: 'Une frontalière du canton',
+  }, 'fr');
+
+  assert.equal(italian.length, 1);
+  assert.equal(italian[0].reason, 'language');
+  assert.deepEqual(french, []);
+});
+
 test('la soglia lascia fuori una riga italiana isolata e il locale sorgente', () => {
   const oneLine = { body1: '## Fatti chiave\n- **Cosa**: Convocazione dell’assemblea CUV.' };
   assert.equal(scanItalianResidue(oneLine, 'fr').length, 2);
