@@ -464,15 +464,46 @@ const DECLARED_ABSENT = {
       'La consolidazione dei crawler-group e\' del sito; qui non esistono crawler group. ' +
       'Citata per spiegare perche\' i nomi dei workflow cambiano sotto i piedi.',
   },
-  'scripts/ci/scan-failed-runs.mjs :: scripts/ci/report-validate-dist-failure.mjs': {
+  'scripts/ci/report-validate-dist-failure.mjs :: audit-dist-from-run.yml': {
     kind: 'site-only',
     reason:
-      'Citato come MODELLO: e\' il reporter di issue diagnostica ricca del sito, e i tre ' +
-      'contratti che il rilevatore «articolo generato e perso» onora (dedup sul titolo, ' +
-      'esclusione dal closer, path dei workflow nel body per il capability guard) sono ' +
-      'documentati la\'. Descrittiva: qui non lo chiama nessuno e niente dipende dalla sua ' +
-      'esistenza — il rilevatore e\' autonomo e testato da ' +
-      '`generator/tests/scan-failed-runs-filter.test.mjs`.',
+      'Comando `gh workflow run audit-dist-from-run.yml` citato nel replay del reporter: e\' il ' +
+      'workflow di re-audit da artifact di deploy del sito, che qui non esiste perche\' il corpus ' +
+      'non ha una pipeline dist/deploy paragonabile. Il modulo e\' stato portato VERBATIM (identical) ' +
+      'per soddisfare l\'import non dichiarato di scan-job-timeouts.mjs (both-moved, non ancora ' +
+      'riconciliato): qui non lo chiama nessuno e niente dipende dall\'esistenza del workflow.',
+  },
+  'scripts/ci/report-validate-dist-failure.mjs :: deploy-publish.yml': {
+    kind: 'site-only',
+    reason:
+      'Citato in un commento per spiegare da dove viene il Build SHA (`deploy_ref` = ' +
+      'workflow_run.head_sha) quando il run e\' innescato da deploy-publish.yml: workflow di ' +
+      'pubblicazione del sito, assente nel corpus per costruzione (nessuna pipeline dist/deploy ' +
+      'equivalente). Descrittiva: nessun consumer del corpus dipende dalla sua esistenza.',
+  },
+  'scripts/ci/report-validate-dist-failure.mjs :: post-deploy-validate-dist.yml': {
+    kind: 'site-only',
+    reason:
+      'Citato in un commento per documentare da quale workflow arriva il formato riga ' +
+      '`❌ FAIL <gate> <sec> rc=<n>` che il reporter fa il parsing: e\' il gate di validazione ' +
+      'post-deploy del sito, assente qui perche\' il corpus non ha quella pipeline. Descrittiva, ' +
+      'non un referente runtime del modulo portato.',
+  },
+  'scripts/ci/report-validate-dist-failure.mjs :: scripts/ci/assert-dist-complete.mjs': {
+    kind: 'site-only',
+    reason:
+      'Citato come suggerimento di debug quando nessun gate e\' riconosciuto («partire dagli ' +
+      'estratti log e da assert-dist-complete.mjs») e come fallback di `## Suggested action`: e\' ' +
+      'uno script del gate dist del sito, assente qui. Il reporter e\' stato portato VERBATIM e ' +
+      'resta non chiamato da nessun consumer del corpus finche\' scan-job-timeouts.mjs (both-moved) ' +
+      'non viene riconciliato.',
+  },
+  'scripts/ci/report-validate-dist-failure.mjs :: scripts/ci/classify-validate-dist-failures.mjs': {
+    kind: 'site-only',
+    reason:
+      'Fallback di `## Suggested action` quando il gate non mappa a un path noto: script del sito ' +
+      'che classifica il fallimento per gate, assente qui per lo stesso motivo (nessuna pipeline ' +
+      'dist/deploy nel corpus). Descrittiva, non un referente runtime.',
   },
   'scripts/lib/cf-analytics.mjs :: scripts/cf-status-report.mjs': {
     kind: 'site-only',

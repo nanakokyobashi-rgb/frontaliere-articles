@@ -400,6 +400,26 @@
       }
     },
     {
+      "path": "scripts/ci/report-validate-dist-failure.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "6b96e6fcbb2942d1",
+        "corpus": "6b96e6fcbb2942d1",
+        "alignedAt": "2026-09-26"
+      },
+      "reason": "Dipendenza non dichiarata di scripts/ci/scan-job-timeouts.mjs, importata dal sito in #7462 (05/09) come './report-validate-dist-failure.mjs' ma assente qui: il corpus-ahead-check del sito la segnala 'import-not-declared'. Portato VERBATIM per non lasciare rotto un futuro trasporto di scan-job-timeouts.mjs (both-moved), che qui NON viene ancora riconciliato: resta un modulo raggiungibile solo da altri eventuali import diretti finche' quella riconciliazione non arriva. Registrata lontano dalla voce di scan-job-timeouts.mjs per non creare conflitto quando quel trasporto verra' fatto."
+    },
+    {
+      "path": "scripts/ci/lib/pr-review-admission.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "ba066c9ffa1f69cf",
+        "corpus": "ba066c9ffa1f69cf",
+        "alignedAt": "2026-09-26"
+      },
+      "reason": "Dipendenza non dichiarata di scripts/ci/orphan-pr-custodian.mjs, importata dal sito in #9525 (22/09) come './lib/pr-review-admission.mjs' ma assente qui: il corpus-ahead-check del sito la segnala 'import-not-declared'. Portato VERBATIM (import risolti su ./constants.mjs e ./review-input-revision.mjs, gia' presenti nel corpus) per non lasciare rotto un futuro trasporto di orphan-pr-custodian.mjs (both-moved), che qui NON viene ancora riconciliato. Registrata lontano dalla voce di orphan-pr-custodian.mjs per non creare conflitto quando quel trasporto verra' fatto."
+    },
+    {
       "path": "scripts/ci/node-test-failure-reporter.mjs",
       "mode": "corpus-only",
       "reason": "Reporter strutturato del corpus: consuma gli eventi `test:fail` di `node:test` e scrive il JSON che il passo successivo pubblica sulla PR. Il sito usa Vitest e il proprio reporter JSON, quindi non esiste un gemello byte-verificabile da trasportare.",
