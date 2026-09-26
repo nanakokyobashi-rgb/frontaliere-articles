@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/ticino/attualita/1945325/altre-uova-richiamate-dal-mercato-sospetta-contaminazione-da-salmonella": {
-    "articleId": "richiamo-uova-salmonella-migros",
-    "ts": "2026-08-22T01:28:58.833Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/qf84dpcpawamaonis9irt": {
     "articleId": "esercito-bilancio-misure-violenza",
     "ts": "2026-08-22T02:23:53.119Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/attualita/1952642/prezzi-benzina-economia-carburante-sgravio": {
     "articleId": "carburante-sgravio-berna",
     "ts": "2026-09-26T03:41:13.498Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/zugo%3a-%22basta-promozione-economica%22%2c-dice-numero-uno-patriziato/92119901": {
+    "articleId": "keiser-stop-promozione-zugo",
+    "ts": "2026-09-26T05:15:32.168Z",
     "keyForm": 2
   }
 }
