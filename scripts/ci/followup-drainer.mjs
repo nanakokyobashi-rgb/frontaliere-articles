@@ -66,7 +66,7 @@ import {
   maxQuotaResetsAt,
 } from './claude-rate-limit.mjs';
 import { quotaFallbackDecision, runQuotaLease } from './check-quota-backoff.mjs';
-import { FIX_OUTCOME_RE } from './close-recovered-failure-issues.mjs';
+import { FIX_OUTCOME_RE, TITLE_RE as RECONCILER_TITLE_RE } from './close-recovered-failure-issues.mjs';
 import { runBudgetFromEnv } from './lib/run-budget.mjs';
 import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
 import { pinnedBy } from './manifest-pinned-issues.mjs';
@@ -1849,6 +1849,64 @@ export function isPermanentTracker(iss) {
 }
 
 /**
+ * La issue è un ALLARME automatico che ha un chiuditore proprio? Pura → testabile.
+ *
+ * Un allarme di fallimento ha un ciclo di vita che appartiene a chi lo apre: si
+ * apre o si RIAPRE sul rosso e si chiude sul verde. L'age-out non ha niente da
+ * dire su quella condizione, e chiudendola la rende invisibile mentre è ancora
+ * vera. Il caso che l'ha provato è del sito (valerielinc-ops/frontaliere-si-o-no
+ * #9833): `CI Failure (build): Deploy to GitHub Pages` (#7918), creata il 07/09,
+ * RIAPERTA dal leg del deploy alle 23:56:22Z del 24/09 e chiusa dal drainer alle
+ * 00:07:16Z come «nessun evento significativo da ≥7gg». Qui la stessa forma è
+ * `Workflow Failure: Post-merge follow-up triage` (#1721): aperta il 22/09 e
+ * chiusa/riaperta più volte fra il reconciler (run verde) e il reporter (run
+ * rossa). Da questo lato la riapertura la firma il PAT del proprietario, che per
+ * `isBotComment` non è un bot, quindi ogni ricorrenza azzera l'inattività: la
+ * finestra si apre quando il reporter tace mentre l'ultima run completata resta
+ * rossa (workflow fermo, solo run annullate), cioè proprio quando l'allarme dice
+ * ancora il vero e il reconciler lo tiene aperto apposta.
+ *
+ * ADATTATO, non copiato. Il sito esclude due insiemi di titoli:
+ *   - il `TITLE_RE` del reconciler (`close-recovered-failure-issues.mjs`), cioè
+ *     `Workflow|Crawler|CI Failure: <nome>`. Qui il reconciler esiste identico e
+ *     gira ogni ora (`close-recovered-failure-issues.yml`, cron `:47`), quindi
+ *     la regex è IMPORTATA e non ricopiata: se cambia la sua forma cambia anche
+ *     questa esclusione. Il prezzo è quello accettato dal sito: un titolo che il
+ *     reconciler non sa risolvere (il «Known edge» del suo docstring) resta
+ *     aperto e visibile invece di sparire per inattività. Il test qui sotto
+ *     verifica che i nomi coniati nei workflow risolvano, con una baseline che
+ *     può solo restringersi per i due step crawler che oggi non risolvono;
+ *   - `OWNER_CLOSED_SCOPED_ALARM_RE` del sito, cioè `CI Failure (build|deploy)`
+ *     e `Validation Failure (dist|live)`, chiusi dai job del deploy e dai
+ *     validatori post-deploy del sito. In questo repo nessuno li apre e nessuno
+ *     li chiude: portarli qui dichiarerebbe un chiuditore che non esiste, e un
+ *     titolo del genere — scritto a mano o arrivato con un porting futuro —
+ *     diventerebbe una issue immortale. `generator/tests/followup-drainer-ageout-alarm-issues.test.mjs`
+ *     diventa rosso se una di quelle famiglie comincia a essere coniata qui.
+ *
+ * Restano candidate all'age-out, perché per loro l'age-out è l'unico
+ * chiuditore che esiste:
+ *   - `CI Failure (<evento>): …`, che `scopedTitle` di `scan-job-timeouts.mjs`
+ *     conia per una run FUORI da `main` e che il reconciler lascia stare per
+ *     costruzione;
+ *   - `Loop drift: …` di `loop-drift-check.mjs`, che apre e aggiorna ma non
+ *     chiude;
+ *   - `Validation Failure (…)` e `Campaign goal FAILED: …`, per cui in questo
+ *     repo non esiste né un opener né un chiuditore.
+ * I monitor che si richiudono da soli con `resolveGithubIssue` (watchdog della
+ * generazione e del news-ticker, `gate content su main`, `Lockstep engine
+ * incagliata`, articoli fantasma e C0) sono fuori da questa esclusione come lo
+ * sono i loro gemelli sul sito: il perimetro è quello degli allarmi di
+ * fallimento di `AUTO_TITLE_RE`, lo stesso nei due repo.
+ *
+ * @param {{title?: string}} iss
+ * @returns {boolean}
+ */
+export function isOwnerClosedFailureAlarm(iss) {
+  return RECONCILER_TITLE_RE.test(String(iss?.title || ''));
+}
+
+/**
  * Tutto cio' che rende una issue eleggibile all'age-out TRANNE l'inattivita'.
  * Puro (niente gh) → testabile. Estratto da `isAgeOutEligible` perche' il
  * chiamante deve poter decidere se vale la pena SPENDERE una lettura commenti
@@ -1861,6 +1919,8 @@ export function isAgeOutCandidate(iss, { now, ageOutDays }) {
   if (!ageOutDays || ageOutDays <= 0) return false;
   if (!isQueueManaged(iss)) return false;
   if (hasActiveAgentClaim(iss)) return false;
+  // La chiusura di un allarme spetta a chi lo apre, non all'inattività.
+  if (isOwnerClosedFailureAlarm(iss)) return false;
   const ls = names(iss);
   if (isPermanentTracker(iss)) return false; // issue-contatore/tracker permanente, mai eleggibile
   if (ls.includes(LBL_FIX) || ls.includes(LBL_QUEUED)) return false; // in lavorazione/coda
