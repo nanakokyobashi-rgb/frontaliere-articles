@@ -45,6 +45,7 @@ const HAS_SHA256SUM = spawnSync('sh', ['-c', 'command -v sha256sum'], { encoding
 const [KNOWN_DEF, TERMINAL_DEF] = REVIEW_STATE_JQ_DEFS;
 
 const HEAD = 'a'.repeat(40);
+const CANONICAL_DOC_SHA = 'c'.repeat(40);
 const REVISION = `body:${'b'.repeat(64)}`;
 
 function jq(program, input, args = []) {
@@ -223,6 +224,15 @@ function runRedflagPrecodex({ reviewsByRead, tamper }) {
     const stub = path.join(dir, 'stub');
     const runnerTemp = path.join(dir, 'runner');
     for (const d of [bin, stub, runnerTemp]) fs.mkdirSync(d);
+    const canonicalDocs = path.join(stub, 'canonical-docs');
+    fs.mkdirSync(canonicalDocs);
+    for (const file of ['REVIEW.md', 'AGENTS.md']) {
+      fs.copyFileSync(path.join(ROOT, file), path.join(canonicalDocs, file));
+    }
+    fs.copyFileSync(
+      path.join(ROOT, 'scripts/ci/redflag-doc-sections.mjs'),
+      path.join(canonicalDocs, 'redflag-doc-sections.mjs'),
+    );
     const prBody = '## Implementato\n- fixture';
     const revision = `body:${createHash('sha256').update(`${prBody}\n`).digest('hex')}`;
     fs.writeFileSync(path.join(stub, 'pr.json'),
@@ -245,8 +255,24 @@ case "$*" in
   *"/pulls/"*) cat "$STUB/pr.json" ;;
   *) echo "gh finto: chiamata inattesa $*" >&2; exit 1 ;;
 esac
-`);
+    `);
     fs.chmodSync(path.join(bin, 'gh'), 0o755);
+    fs.writeFileSync(path.join(bin, 'git'), `#!/usr/bin/env bash
+set -eu
+case "$1" in
+  fetch) exit 0 ;;
+  rev-parse) printf '%s\\n' "$CANONICAL_DOC_SHA" ;;
+  show)
+    case "$2" in
+      "$CANONICAL_DOC_SHA:REVIEW.md") cat "$STUB/canonical-docs/REVIEW.md" ;;
+      "$CANONICAL_DOC_SHA:AGENTS.md") cat "$STUB/canonical-docs/AGENTS.md" ;;
+      "$CANONICAL_DOC_SHA:scripts/ci/redflag-doc-sections.mjs") cat "$STUB/canonical-docs/redflag-doc-sections.mjs" ;;
+      *) echo "git finto: blob canonico inatteso $2" >&2; exit 1 ;;
+    esac ;;
+  *) echo "git finto: chiamata inattesa $*" >&2; exit 1 ;;
+esac
+`);
+    fs.chmodSync(path.join(bin, 'git'), 0o755);
     const helper = path.join(dir, 'marker-helper.mjs');
     fs.writeFileSync(helper, 'process.stdout.write("{}\\n");\n');
     const ctxScript = path.join(dir, 'ctx.sh');
@@ -261,6 +287,7 @@ esac
       GH_TOKEN: 'x',
       REPO: 'nanakokyobashi-rgb/frontaliere-articles',
       PR_NUMBER: '7',
+      CANONICAL_DOC_SHA,
       REVIEWER_BOT_REVIEW_FILTER: filter,
     };
     // Stessa shell dei runner GitHub per `run:` senza `shell:`.

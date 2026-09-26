@@ -86,6 +86,7 @@ test('il context usa parser e documenti dalla stessa SHA canonica e passa l’ou
   assert.match(context, /CANONICAL_DOC_SHA=\$\(git rev-parse --verify 'origin\/main\^\{commit\}'/);
   assert.match(context, /git show "\$CANONICAL_DOC_SHA:\$doc" > "\$OUT\/canonical-docs\/\$doc"/);
   assert.match(context, /git show "\$CANONICAL_DOC_SHA:scripts\/ci\/redflag-doc-sections\.mjs"/);
+  assert.match(context, /context_fail "Helper documentale assente nella SHA canonica di origin\/main/);
   assert.match(context, /node "\$OUT\/canonical-docs\/redflag-doc-sections\.mjs"/);
   assert.match(context, /redflag_doc_sections<<REDFLAG_DOC_SECTIONS_EOF/);
   assert.match(context, /cat "\$OUT\/redflag-doc-sections\.md"/);
