@@ -1,19 +1,4 @@
 {
-  "https://www.rsi.ch/info/economia/le-esportazioni-svizzere-accelerano-a-luglio-e-raggiungono-livelli-record--4000662.html": {
-    "articleId": "export-svizzera-luglio-2026",
-    "ts": "2026-08-23T07:06:53.914Z",
-    "keyForm": 2
-  },
-  "https://www.rsi.ch/info/svizzera/aviazione-acqua-elettricit%c3%a0-e-co2-diventano-cherosene-sintetico--4004394.html": {
-    "articleId": "cherosene-sintetico-svizzera-aviazione",
-    "ts": "2026-08-23T09:26:41.736Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/economia/1945504/commercianti-twint-commissioni-associazione-pagamento-perizia-doppio": {
-    "articleId": "commissioni-twint-piccoli-commercianti",
-    "ts": "2026-08-23T21:59:08.775Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4007097": {
     "articleId": "classi-scolastiche-create-algoritmo",
     "ts": "2026-08-24T05:51:30.610Z",
@@ -2497,6 +2482,21 @@
   "https://www.swissinfo.ch/ita/dertour-suisse-%c3%a8-in-ripresa%2c-punta-a-superare-miliardo-di-fatturato/92121786": {
     "articleId": "dertour-suisse-ripresa-fatturato",
     "ts": "2026-09-26T12:56:20.531Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/svizzera/svizzera/1952885/auto-elettriche-la-svizzera-arretra-nel-confronto-europeo": {
+    "articleId": "svizzera-auto-elettriche-classifica",
+    "ts": "2026-09-26T13:50:34.683Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1952894/premi-carico-reddito-famiglie-franchi-sussidi-rimasto-svizzera-crescita-malati": {
+    "articleId": "premi-cassa-malati-stabilita-famiglie",
+    "ts": "2026-09-26T14:59:40.671Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4114264": {
+    "articleId": "protesta-asilo-berna-diritti",
+    "ts": "2026-09-26T15:55:24.543Z",
     "keyForm": 2
   }
 }

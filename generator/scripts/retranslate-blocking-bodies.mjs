@@ -6,7 +6,8 @@
  * ── PERCHE' ESISTE ─────────────────────────────────────────────────────────
  *
  * `audit-article-factuality.mjs` sa DIRE quali pagine pubblicate la guardia
- * rifiuterebbe, ma nessuno script sapeva RIPARARLE: `create-article.mjs` e'
+ * rifiuterebbe, e lo scan-v2 di #1875 sa DIRE quali contengono residui
+ * italiani per riga, ma nessuno script sapeva RIPARARLE: `create-article.mjs` e'
  * append-only (`registerArticleFiles: article "..." already exists`) e
  * `translateArticle()` lavora solo su un articolo nuovo in memoria, mai su un
  * `content/**` gia' scritto. Lo stock misurato il 2026-09-06 e' 459 coppie
@@ -26,7 +27,7 @@
  * falsi positivi, e un rilevatore abbastanza buono da SEGNALARE un campo non
  * e' abbastanza buono da EDITARLO.
  *
- * Da cui le due regole che governano la scrittura, entrambe verificate dal
+ * Da cui le regole che governano la scrittura, tutte verificate dal
  * test `retranslate-blocking-bodies.test.mjs`:
  *
  *   1. si scrive SOLO se la nuova traduzione passa la guardia con zero
@@ -34,7 +35,9 @@
  *      pubblicata resta com'e';
  *   2. si scrive SOLO se la vecchia era bloccante — mai "migliorare" una
  *      pagina che la guardia gia' accetta;
- *   3. si scrive SOLO se il testo nuovo supera i due controlli che la guardia
+ *   3. una pagina con almeno tre righe italiane porta il codice bloccante
+ *      `italian-residue`, anche se la guardia factuality non trova `critical`;
+ *   4. si scrive SOLO se il testo nuovo supera i controlli che la guardia
  *      NON fa (`translationSanityIssue`): non e' drasticamente piu' corto del
  *      body pubblicato — il tier HuggingFace tronca la SORGENTE a 2000
  *      caratteri e il taglio esce con marker bilanciati e zero `critical` — e
@@ -66,8 +69,8 @@
  *   ...--audit a.json --apply                                      # scrive
  *
  * Flag:
- *   --audit <file>     JSON di audit-article-factuality.mjs --json
- *                      (richiesto, salvo --slug)
+ *   --audit <file>     JSON di audit-article-factuality.mjs --json oppure
+ *                      scan-v2 (`results[]`); richiesto, salvo --slug
  *   --slug a,b         id articolo (slug) da trattare. Con --audit filtra;
  *                      senza, sintetizza le coppie dai file gia' in content/.
  *                      E' l'entry point in-place per uno slug arbitrario,
@@ -102,7 +105,7 @@ import {
 import { unescapeTsString } from './lib/unescape-ts-string.mjs';
 import { escapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
 import { sanitizeBodyText } from './lib/sanitize-body-braces.mjs';
-import { detectLanguage } from './lib/detect-language.mjs';
+import { detectLanguage, detectLanguageWithConfidence } from './lib/detect-language.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 
@@ -113,6 +116,77 @@ const ROOT = resolve(__dirname, '..', '..');
 
 /** I campi che la guardia concatena: si ri-traducono insieme o niente. */
 export const BODY_FIELDS = ['body1', 'body2', 'body3'];
+
+/**
+ * Lo scan storico degli articoli misura i residui per RIGA, non sul body
+ * concatenato: un blocco italiano di tre righe dentro una traduzione buona
+ * deve restare visibile anche quando la lingua dominante e' quella attesa.
+ * La soglia e' deliberatamente quella usata dal report di #1875: la coda di
+ * una o due righe contiene toponimi, nomi propri e tabelle legittime, quindi
+ * non e' abbastanza probante per autorizzare una riscrittura automatica.
+ */
+export const ITALIAN_RESIDUE_MIN_LINES = 3;
+const ITALIAN_RESIDUE_MIN_CONFIDENCE = 0.15;
+const ITALIAN_RESIDUE_HEADING_RE = /^(?:#{1,6}\s*)?(?:in breve|fatti chiave|domande frequenti|punti chiave|conclusione|conclusioni|fonti|consiglio pratico|cosa cambia|attenzione|da sapere|in sintesi)\s*:?[ \t]*$/iu;
+const ITALIAN_RESIDUE_WORD_RE = /[\p{L}]+(?:['’][\p{L}]+)*/gu;
+
+function normalizeItalianResidueLine(line) {
+  return String(line ?? '')
+    .replace(/\[([^\]]*)\]\([^)]*\)/gu, '$1')
+    .replace(/https?:\/\/\S+/gu, ' ')
+    .replace(/[\*_`>#|]/gu, ' ')
+    .replace(/\s+/gu, ' ')
+    .trim();
+}
+
+/** Ritorna il tipo di segnale, oppure null se la riga non e' probante. */
+function italianResidueLineReason(line, locale) {
+  if (locale === 'it') return null;
+  const clean = normalizeItalianResidueLine(line);
+  if (!clean) return null;
+  if (ITALIAN_RESIDUE_HEADING_RE.test(clean)) return 'heading';
+
+  const words = clean.match(ITALIAN_RESIDUE_WORD_RE) || [];
+  if (words.length < 3) return null;
+  const { lang, confidence } = detectLanguageWithConfidence(clean, locale);
+  return lang === 'it' && confidence >= ITALIAN_RESIDUE_MIN_CONFIDENCE ? 'language' : null;
+}
+
+/**
+ * Scans the fields independently, preserving field and line provenance for
+ * the dry-run report. A field is not concatenated with its siblings: that was
+ * the exact blind spot that let an Italian AI-search block hide in a good
+ * translation.
+ */
+export function scanItalianResidue(sections, locale) {
+  if (!sections || typeof sections !== 'object' || locale === 'it') return [];
+  const hits = [];
+  for (const [field, value] of Object.entries(sections)) {
+    if (typeof value !== 'string') continue;
+    value.split(/\r?\n/u).forEach((line, index) => {
+      const reason = italianResidueLineReason(line, locale);
+      if (!reason) return;
+      hits.push({
+        field,
+        line: index + 1,
+        reason,
+        text: normalizeItalianResidueLine(line).slice(0, 300),
+      });
+    });
+  }
+  return hits;
+}
+
+export function hasItalianResidue(sections, locale) {
+  return scanItalianResidue(sections, locale).length >= ITALIAN_RESIDUE_MIN_LINES;
+}
+
+export function currentBlockingCodes({ factualityCodes = [], italianResidue = [] }) {
+  return [...new Set([
+    ...factualityCodes,
+    ...(italianResidue.length >= ITALIAN_RESIDUE_MIN_LINES ? ['italian-residue'] : []),
+  ])].sort();
+}
 
 /**
  * L'audit riporta il path del SYMLINK (`services/locales/blog-body`), non
@@ -318,7 +392,7 @@ export const LENGTH_FLOOR = { VS_OLD: 0.7, VS_IT: 0.4 };
 export const LANG_CHECK_MIN_CHARS = 50;
 
 /**
- * I due modi in cui una ri-traduzione puo' essere INUTILIZZABILE senza che la
+ * I modi in cui una ri-traduzione puo' essere INUTILIZZABILE senza che la
  * guardia se ne accorga. Nessuno dei due e' nel vocabolario di
  * `runFactualityGates`, che sul ramo non-italiano fa solo aggiudicazione
  * numerica, coerenza dei numeri e falsi amici:
@@ -332,11 +406,18 @@ export const LANG_CHECK_MIN_CHARS = 50;
  *      primi 2000 caratteri dell'italiano, senza un errore.
  *   2. PASSTHROUGH DELL'ITALIANO. Un italiano ricopiato ha per costruzione gli
  *      stessi numeri e nessun falso amico: zero `critical`, si scriverebbe.
+ *   3. RESIDUO PARZIALE. Un blocco italiano puo' essere minoritario rispetto
+ *      alla prosa tradotta: per questo `scanItalianResidue()` guarda le righe
+ *      e non la lingua del body concatenato.
  *
  * Ritorna `null` se il testo e' scrivibile, altrimenti la ragione del rifiuto
  * (che il report conta come tale, invece di lasciarla nel secchio "altro").
  */
 export function translationSanityIssue({ oldSections, newSections, italianSections, locale }) {
+  const italianResidue = scanItalianResidue(newSections, locale);
+  if (italianResidue.length >= ITALIAN_RESIDUE_MIN_LINES) {
+    return `italian-residue: ${italianResidue.length} righe residue`;
+  }
   for (const [f, text] of Object.entries(newSections)) {
     // DUE confronti, non uno scelto fra i due. Il pavimento contro la
     // pubblicata non puo' vedere un troncamento che vecchio e nuovo
@@ -388,16 +469,50 @@ export function translationSanityIssue({ oldSections, newSections, italianSectio
   return null;
 }
 
-/** Coppie bloccanti dall'audit, con i codici `critical` di ciascuna. */
+const SCAN_V2_BODY_DIR = 'services/locales/blog-body';
+
+/**
+ * Coppie bloccanti dall'audit factuality o dal JSON prodotto da scan-v2.
+ *
+ * `scan-v2` non conosce la struttura dell'audit factuality: espone invece
+ * `results: [{ lang, slug, count, hits }]`. Supportare entrambi i formati in
+ * questo punto evita che il rilevatore dica «808 coppie» e il retranslator
+ * torni comunque a zero perche' cercava solo `findings[].criticalCount`.
+ */
 export function blockingPairsFromAudit(audit) {
-  return (audit.findings || [])
+  const factualityPairs = (audit?.findings || [])
     .filter((f) => f.criticalCount > 0)
     .map((f) => ({
       id: f.id,
       locale: f.locale,
       dir: f.dir,
-      codes: [...new Set(f.issues.filter((i) => i.severity === 'critical').map((i) => i.code))].sort(),
+      codes: [...new Set((f.issues || [])
+        .filter((i) => i.severity === 'critical')
+        .map((i) => i.code))].sort(),
     }));
+  const residuePairs = (audit?.results || [])
+    .filter((r) => ['en', 'de', 'fr'].includes(r?.lang))
+    .filter((r) => {
+      const count = Array.isArray(r.hits) ? r.hits.length : Number(r.count);
+      return Number.isFinite(count) && count >= ITALIAN_RESIDUE_MIN_LINES;
+    })
+    .map((r) => ({
+      id: r.slug,
+      locale: r.lang,
+      dir: SCAN_V2_BODY_DIR,
+      codes: ['italian-residue'],
+    }));
+  const merged = new Map();
+  for (const pair of [...factualityPairs, ...residuePairs]) {
+    const key = `${pair.dir || ''}\u0000${pair.locale}\u0000${pair.id}`;
+    const current = merged.get(key);
+    if (!current) {
+      merged.set(key, { ...pair, codes: [...new Set(pair.codes)] });
+      continue;
+    }
+    current.codes = [...new Set([...current.codes, ...pair.codes])].sort();
+  }
+  return [...merged.values()];
 }
 
 /** Id articolo da `--slug a,b`. Vuoto se il flag manca o e' una stringa vuota. */
@@ -691,7 +806,9 @@ async function processPair(pair, { CONTENT_ROOT, APPLY }) {
       if (v) oldSections[f] = v;
     }
   }
-  const oldCodes = criticalCodes(runFactualityGates({ sections: oldSections, locale: pair.locale, italianSections }));
+  const factualityCodes = criticalCodes(runFactualityGates({ sections: oldSections, locale: pair.locale, italianSections }));
+  const oldItalianResidue = scanItalianResidue(oldSections, pair.locale);
+  const oldCodes = currentBlockingCodes({ factualityCodes, italianResidue: oldItalianResidue });
 
   const newSections = {};
   let missingField = null;
@@ -775,6 +892,7 @@ function report(results, { APPLY, AS_JSON, total, OUT }) {
   const empty = results.filter((r) => r.reason === 'campo-vuoto-dalla-cascata').length;
   const truncated = results.filter((r) => r.reason.startsWith('troncata')).length;
   const wrongLang = results.filter((r) => r.reason.startsWith('lingua-sbagliata')).length;
+  const residue = results.filter((r) => r.oldCodes?.includes('italian-residue')).length;
 
   console.log(`\nmodalità: ${APPLY ? 'APPLY (scrive)' : 'DRY-RUN (non scrive)'} — coppie trattate: ${results.length}/${total}`);
   console.log(`  ri-traduzione pulita : ${clean}${APPLY ? ` (scritte ${written})` : ''}`);
@@ -782,6 +900,7 @@ function report(results, { APPLY, AS_JSON, total, OUT }) {
   console.log(`  campo vuoto (skip)   : ${empty}`);
   console.log(`  troncata (skip)      : ${truncated}`);
   console.log(`  lingua sbagliata     : ${wrongLang}`);
+  console.log(`  italian-residue      : ${residue}`);
   console.log(`  altro                : ${results.length - clean - refailed - empty - truncated - wrongLang}`);
 
   // Per-codice: e' la misura che decide se un codice va escluso dal lotto.
