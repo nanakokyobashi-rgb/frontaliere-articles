@@ -3944,7 +3944,7 @@
       "reason": "Estrae le sezioni vincolanti di `REVIEW.md` e `AGENTS.md` dalla base canonica e le valida prima che il `pr-redflag-fixer.yml` le scriva in `GITHUB_ENV`. E' un helper specifico del fixer corpus: il workflow qui e' adattato e il sito mantiene il proprio percorso di trasporto del contratto, quindi non esiste un gemello site-owned da sorvegliare.",
       "baseline": {
         "site": null,
-        "corpus": "f0e1f073d1d65cf5",
+        "corpus": "f0e1f073d1d65cf6",
         "alignedAt": "2026-09-25"
       }
     },
