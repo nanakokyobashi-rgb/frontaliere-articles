@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/qf84dpcpawamaonis9irt": {
-    "articleId": "esercito-bilancio-misure-violenza",
-    "ts": "2026-08-22T02:23:53.119Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4005012": {
     "articleId": "dimissioni-fondazione-beloved",
     "ts": "2026-08-22T03:29:07.544Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/zugo%3a-%22basta-promozione-economica%22%2c-dice-numero-uno-patriziato/92119901": {
     "articleId": "keiser-stop-promozione-zugo",
     "ts": "2026-09-26T05:15:32.168Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/du299gbe1zok": {
+    "articleId": "integrazione-pic4-fondi-2028-2032",
+    "ts": "2026-09-26T07:20:05.619Z",
     "keyForm": 2
   }
 }
