@@ -33,7 +33,13 @@ import * as IRPEF from '../scripts/lib/irpef-scaglioni.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
+const IRPEF_SOURCE = readFileSync(path.resolve(HERE, '../scripts/lib/irpef-scaglioni.mjs'), 'utf-8');
 const SRC = readFileSync(CREATE_ARTICLE, 'utf-8');
+
+function importFromSource(source) {
+  const encoded = Buffer.from(source).toString('base64');
+  return import(`data:text/javascript;base64,${encoded}`);
+}
 
 function renderTemplate(raw) {
   const names = Object.keys(IRPEF);
@@ -81,6 +87,35 @@ test('IRPEF_REGIMI: contigua, ordinata, ogni anno risolto dal regime che lo cont
   for (const r of R) {
     const last = r.al ?? r.dal + 5;
     for (let y = r.dal; y <= last; y += 1) assert.equal(IRPEF.irpefScaglioniPer(y), r.scaglioni, `anno ${y}`);
+  }
+});
+
+test('IRPEF_REGIMI rifiuta confini dal/al non interi anche se la tabella resta contigua', async () => {
+  const malformed = [
+    IRPEF_SOURCE.replace('dal: 2024, al: 2025', 'dal: 2024.5, al: 2025'),
+    IRPEF_SOURCE
+      .replace('dal: 2024, al: 2025', 'dal: 2024, al: 2025.5')
+      .replace('dal: 2026, al: null', 'dal: 2026.5, al: null'),
+  ];
+
+  for (const source of malformed) {
+    assert.notEqual(source, IRPEF_SOURCE, 'la fixture deve cambiare il confine atteso');
+    await assert.rejects(importFromSource(source), /confini non interi/);
+  }
+});
+
+test('IRPEF_REGIMI rifiuta tre scaglioni malformati o soglie non finite', async () => {
+  const malformed = [
+    IRPEF_SOURCE.replace(
+      'scaglioni: scaglioni(35)',
+      'scaglioni: [{ fino: 28000, aliquota: 23 }, { fino: null, aliquota: 43 }]',
+    ),
+    IRPEF_SOURCE.replace('fino: 28000, aliquota: 23', 'fino: Infinity, aliquota: 23'),
+  ];
+
+  for (const source of malformed) {
+    assert.notEqual(source, IRPEF_SOURCE, 'la fixture deve cambiare la tabella attesa');
+    await assert.rejects(importFromSource(source), /scaglioni non validi/);
   }
 });
 

@@ -39,9 +39,23 @@ export const IRPEF_REGIMI = Object.freeze([
   Object.freeze({ dal: 2026, al: null, scaglioni: scaglioni(33) }), // L. 199/2025 art. 1 c. 3
 ]);
 
+function assertScaglioniValidi(value, anno) {
+  const valid = Array.isArray(value) && value.length === 3
+    && value.every((s, i) => s && Number.isFinite(s.aliquota)
+      && (i === 2 ? s.fino === null : Number.isFinite(s.fino)));
+  if (!valid) {
+    throw new Error(`irpef-scaglioni: scaglioni non validi per il regime dal ${anno}`);
+  }
+}
+
 // La tabella deve restare contigua e ordinata: un buco o una sovrapposizione
 // assegnerebbe un anno al regime sbagliato senza errore. Fallisce all'import.
 IRPEF_REGIMI.forEach((r, i) => {
+  if (!Number.isInteger(r.dal) || (r.al !== null && !Number.isInteger(r.al))) {
+    throw new Error(`irpef-scaglioni: confini non interi nel regime dal ${r.dal}`);
+  }
+  assertScaglioniValidi(r.scaglioni, r.dal);
+
   const next = IRPEF_REGIMI[i + 1];
   const ok = next ? r.al !== null && next.dal === r.al + 1 : r.al === null;
   if (!ok || (r.al !== null && r.al < r.dal)) {
@@ -61,7 +75,9 @@ const eur = (n) => `€${String(n).replace(/\B(?=(\d{3})+(?!\d))/g, "'")}`;
 
 /** «23% fino €28'000, 33% €28'001–€50'000, 43% oltre €50'000» */
 export function irpefScaglioniTesto(anno) {
-  const [a, b, c] = irpefScaglioniPer(anno);
+  const value = irpefScaglioniPer(anno);
+  assertScaglioniValidi(value, anno);
+  const [a, b, c] = value;
   return `${a.aliquota}% fino ${eur(a.fino)}, ${b.aliquota}% ${eur(a.fino + 1)}–${eur(b.fino)}, `
     + `${c.aliquota}% oltre ${eur(b.fino)}`;
 }
