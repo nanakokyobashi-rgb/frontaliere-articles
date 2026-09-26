@@ -1544,6 +1544,9 @@ jobs:
               echo "::error::🔴-fix: Codex skipped ma la prova trusted del marker è incompleta → marker conservato e job RED."
               exit 1
             fi
+            if ! confirm_remote_head "$REMOTE_SHA"; then
+              fail_remote_head_unverified "prima del rimborso skipped"
+            fi
             refund_marker="${FIX_ROUND_MARKER%_ROUND}_REFUNDED"
             refund_attempt_marker="${FIX_ROUND_MARKER%_ROUND}_REFUND_ATTEMPT"
             if ! gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$(printf '<!-- %s: %s -->\n_Rimborso preparato; DELETE trusted in corso. Il round non è ancora rimborsato._' "$refund_attempt_marker" "$FIX_ROUND")"; then

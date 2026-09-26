@@ -972,6 +972,27 @@ test('il rimborso pubblica il handle definitivo solo dopo la DELETE trusted', ()
   }
 });
 
+test('redflag skipped blocca il rimborso se la head avanza dopo la classificazione', () => {
+  const baseBody = '## Implementato\n\n- body iniziale';
+  const result = runClassifier({
+    source: REDFLAG_WORKFLOW,
+    baseBody,
+    currentBody: baseBody,
+    actionOutcome: 'skipped',
+    fixRound: '1',
+    fixRoundMarker: 'REDFLAG_FIX_ROUND',
+    markerCommentId: '42',
+    commentsJson: JSON.stringify([roundMarkerComment({
+      marker: 'REDFLAG_FIX_ROUND', round: 1, id: 42, body: baseBody,
+    })]),
+    // Lettura iniziale e pre-classificazione concordano; la terza rilettura,
+    // subito prima dei side effect del rimborso skipped, vede la race.
+    rereadSequence: 'base-sha base-sha advanced-before-skipped-refund',
+  });
+
+  assertRecheckFailClosed('redflag skipped prima del rimborso', result);
+});
+
 test('redflag distingue failure/skipped/cancelled/success e contabilizza il marker', () => {
   const baseBody = '## Implementato\n\n- body iniziale';
   const scenarios = [
