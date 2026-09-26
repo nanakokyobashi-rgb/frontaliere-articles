@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4007097": {
-    "articleId": "classi-scolastiche-create-algoritmo",
-    "ts": "2026-08-24T05:51:30.610Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1945603/salt-sunrise-rete-cooperazione-stretta": {
     "articleId": "sunrise-salt-rete-cooperazione",
     "ts": "2026-08-24T06:19:30.674Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4114264": {
     "articleId": "protesta-asilo-berna-diritti",
     "ts": "2026-09-26T15:55:24.543Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/economia/economia/1952460/come-la-lobby-del-petrolio-ha-bollito-il-clima-in-svizzera": {
+    "articleId": "avenergy-lobby-clima",
+    "ts": "2026-09-26T16:40:49.503Z",
     "keyForm": 2
   }
 }
