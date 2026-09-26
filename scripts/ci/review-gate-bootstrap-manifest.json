@@ -7,6 +7,7 @@
     "scripts/ci/claude-codex-fallback.mjs",
     "scripts/ci/claude-rate-limit.mjs",
     "scripts/ci/claude-rate-limit-contract.mjs",
+    "scripts/lib/codex-fallback-contract.mjs",
     "scripts/ci/auto-merge-eval.mjs",
     "scripts/ci/review-scope.mjs",
     "scripts/ci/lib/review-states.mjs",

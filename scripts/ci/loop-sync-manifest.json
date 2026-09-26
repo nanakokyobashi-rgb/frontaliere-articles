@@ -565,6 +565,15 @@
       }
     },
     {
+      "path": "scripts/lib/codex-fallback-contract.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "339d945b935b757d",
+        "corpus": "339d945b935b757d",
+        "alignedAt": "2026-09-26"
+      }
+    },
+    {
       "path": "scripts/lib/github-issue-creator.mjs",
       "mode": "identical",
       "baseline": {
