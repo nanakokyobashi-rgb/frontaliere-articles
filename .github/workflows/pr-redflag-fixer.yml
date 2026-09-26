@@ -1067,23 +1067,36 @@ jobs:
           if ! git fetch --no-tags origin main:refs/remotes/origin/main >/dev/null 2>&1; then
             context_fail "Impossibile leggere origin/main per estrarre le sezioni vincolanti; nessun Codex viene avviato."
           fi
+          # Un'unica fotografia di main governa sia i documenti sia il parser.
+          # Il parser entra in main con questa PR; prima del merge la sua assenza
+          # resta fail-closed invece di eseguire il parser modificabile dalla PR.
+          CANONICAL_DOC_SHA=$(git rev-parse --verify 'origin/main^{commit}' 2>/dev/null) \
+            || context_fail "Impossibile fissare la SHA canonica di origin/main; nessun Codex viene avviato."
+          if [[ ! "$CANONICAL_DOC_SHA" =~ ^[a-f0-9]{40}$ ]]; then
+            context_fail "SHA canonica di origin/main malformata; nessun Codex viene avviato."
+          fi
           mkdir -p "$OUT/canonical-docs"
           for doc in REVIEW.md AGENTS.md; do
-            if ! git show "origin/main:$doc" > "$OUT/canonical-docs/$doc" 2>/dev/null; then
+            if ! git show "$CANONICAL_DOC_SHA:$doc" > "$OUT/canonical-docs/$doc" 2>/dev/null; then
               context_fail "Documento vincolante assente in origin/main: $doc; nessun Codex viene avviato."
             fi
           done
-          if ! REDFLAG_DOC_ROOT="$OUT/canonical-docs" node scripts/ci/redflag-doc-sections.mjs > "$OUT/redflag-doc-sections.md"; then
+          if ! git show "$CANONICAL_DOC_SHA:scripts/ci/redflag-doc-sections.mjs" \
+            > "$OUT/canonical-docs/redflag-doc-sections.mjs" 2>/dev/null; then
+            context_fail "Helper documentale assente nella SHA canonica di origin/main; nessun Codex viene avviato."
+          fi
+          if ! REDFLAG_DOC_ROOT="$OUT/canonical-docs" \
+            node "$OUT/canonical-docs/redflag-doc-sections.mjs" > "$OUT/redflag-doc-sections.md"; then
             context_fail "Impossibile estrarre le sezioni vincolanti da REVIEW.md/AGENTS.md; nessun Codex viene avviato."
           fi
           if grep -Fqx 'REDFLAG_DOC_SECTIONS_EOF' "$OUT/redflag-doc-sections.md"; then
             context_fail "Il documento vincolante contiene il delimiter di REDFLAG_DOC_SECTIONS; nessun Codex viene avviato."
           fi
           {
-            echo 'REDFLAG_DOC_SECTIONS<<REDFLAG_DOC_SECTIONS_EOF'
+            echo 'redflag_doc_sections<<REDFLAG_DOC_SECTIONS_EOF'
             cat "$OUT/redflag-doc-sections.md"
             echo 'REDFLAG_DOC_SECTIONS_EOF'
-          } >> "$GITHUB_ENV"
+          } >> "$GITHUB_OUTPUT"
 
           {
             echo "# Redflag-fix bundle — PR #$PR_NUMBER"
@@ -1293,7 +1306,7 @@ jobs:
 
             **Contratto documentale vincolante (prefetch zero-Claude):**
             Le sezioni vincolanti sono già dentro questa richiesta, non in un output del tool:
-            ${{ env.REDFLAG_DOC_SECTIONS }}
+            ${{ steps.ctx.outputs.redflag_doc_sections }}
 
             **Bootstrap:**
             1. Usa il contratto documentale già incluso sopra: `REVIEW.md` (scopo + severity) e `AGENTS.md` (Non-negoziabili + Credenziali). Se una sezione manca, considera il prefetch fallito e fermati: non procedere con un contratto incompleto.

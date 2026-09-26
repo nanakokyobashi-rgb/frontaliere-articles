@@ -28,7 +28,7 @@ function stepBlock(source, name) {
   return next === -1 ? rest : rest.slice(0, next);
 }
 
-test('estrae le sezioni vincolanti reali del corpus e le valida per GITHUB_ENV', () => {
+test('estrae le sezioni vincolanti reali del corpus e le valida per GITHUB_OUTPUT', () => {
   const document = buildRedflagDocumentSections({
     read: (file) => (file === 'REVIEW.md' ? REVIEW : AGENTS),
   });
@@ -72,28 +72,31 @@ test('il validatore impedisce collisioni col delimiter e crescita oltre il cap U
   );
   assert.throws(
     () => validateRedflagDocumentSections('è'.repeat(REDFLAG_DOC_SECTIONS_MAX_BYTES)),
-    /too large for GITHUB_ENV/,
+    /too large for GITHUB_OUTPUT/,
   );
 });
 
-test('il context prefetcha origin/main e passa il documento nel prompt senza Read troncato', () => {
+test('il context usa parser e documenti dalla stessa SHA canonica e passa l’output al prompt', () => {
   const context = stepBlock(WORKFLOW, 'Collect PR + review context (zero-Claude)');
   const promptStart = WORKFLOW.indexOf('          prompt: |');
   assert.notEqual(promptStart, -1, 'prompt Codex non trovato');
   const prompt = WORKFLOW.slice(promptStart);
 
   assert.match(context, /git fetch --no-tags origin main:refs\/remotes\/origin\/main/);
-  assert.match(context, /git show "origin\/main:\$doc" > "\$OUT\/canonical-docs\/\$doc"/);
-  assert.match(context, /node scripts\/ci\/redflag-doc-sections\.mjs > "\$OUT\/redflag-doc-sections\.md"/);
-  assert.match(context, /REDFLAG_DOC_SECTIONS<<REDFLAG_DOC_SECTIONS_EOF/);
+  assert.match(context, /CANONICAL_DOC_SHA=\$\(git rev-parse --verify 'origin\/main\^\{commit\}'/);
+  assert.match(context, /git show "\$CANONICAL_DOC_SHA:\$doc" > "\$OUT\/canonical-docs\/\$doc"/);
+  assert.match(context, /git show "\$CANONICAL_DOC_SHA:scripts\/ci\/redflag-doc-sections\.mjs"/);
+  assert.match(context, /node "\$OUT\/canonical-docs\/redflag-doc-sections\.mjs"/);
+  assert.match(context, /redflag_doc_sections<<REDFLAG_DOC_SECTIONS_EOF/);
   assert.match(context, /cat "\$OUT\/redflag-doc-sections\.md"/);
   assert.ok(
-    context.indexOf('node scripts/ci/redflag-doc-sections.mjs')
-      < context.indexOf('REDFLAG_DOC_SECTIONS<<REDFLAG_DOC_SECTIONS_EOF'),
+    context.indexOf('node "$OUT/canonical-docs/redflag-doc-sections.mjs"')
+      < context.indexOf('redflag_doc_sections<<REDFLAG_DOC_SECTIONS_EOF'),
     'il documento deve essere validato prima di essere scritto nel heredoc',
   );
   assert.match(prompt, /sezioni vincolanti sono già dentro questa richiesta/);
-  assert.match(prompt, /\$\{\{ env\.REDFLAG_DOC_SECTIONS \}\}/);
+  assert.match(prompt, /\$\{\{ steps\.ctx\.outputs\.redflag_doc_sections \}\}/);
+  assert.doesNotMatch(prompt, /\$\{\{ env\.REDFLAG_DOC_SECTIONS \}\}/);
   assert.match(prompt, /REVIEW\.md.*scopo.*severity/i);
   assert.match(prompt, /AGENTS\.md.*Non-negoziabili/i);
 });

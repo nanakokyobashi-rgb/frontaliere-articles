@@ -17,12 +17,12 @@ export const REQUIRED_SECTIONS = Object.freeze([
   { file: 'AGENTS.md', heading: '## Credenziali' },
 ]);
 
-// This exact marker is written by pr-redflag-fixer.yml to $GITHUB_ENV. A
-// literal line equal to it would terminate the heredoc early and turn the
-// remaining contract into unrelated environment-file records.
+// This exact marker is written by pr-redflag-fixer.yml to $GITHUB_OUTPUT. A
+// literal line equal to it would terminate the heredoc early and corrupt the
+// step output passed to the action prompt.
 export const REDFLAG_DOC_SECTIONS_EOF = 'REDFLAG_DOC_SECTIONS_EOF';
 
-// The value is interpolated into the action prompt after it leaves $GITHUB_ENV.
+// The value is interpolated into the action prompt from the ctx step output.
 // Keep a bounded, UTF-8 byte-sized budget so document growth fails closed
 // before the runner or action silently truncates the contract.
 export const REDFLAG_DOC_SECTIONS_MAX_BYTES = 16_384;
@@ -149,7 +149,7 @@ export function validateRedflagDocumentSections(document) {
   const bytes = Buffer.byteLength(value, 'utf8');
   if (bytes > REDFLAG_DOC_SECTIONS_MAX_BYTES) {
     throw new Error(
-      `Redflag document too large for GITHUB_ENV: ${bytes} bytes > ${REDFLAG_DOC_SECTIONS_MAX_BYTES}-byte limit`,
+      `Redflag document too large for GITHUB_OUTPUT: ${bytes} bytes > ${REDFLAG_DOC_SECTIONS_MAX_BYTES}-byte limit`,
     );
   }
   return value;
