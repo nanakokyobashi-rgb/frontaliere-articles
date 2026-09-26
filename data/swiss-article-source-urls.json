@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/politica/1945427/mazzone-verdi-rosti-cf-datec": {
-    "articleId": "mazzone-clima-consiglio-federale",
-    "ts": "2026-08-22T11:07:34.249Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4005261": {
     "articleId": "radiologi-premi-aumenti-2027",
     "ts": "2026-08-22T14:46:32.522Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4107574": {
     "articleId": "bns-inflazione-pil-previsioni-2026",
     "ts": "2026-09-26T09:28:08.478Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4105030": {
+    "articleId": "valutazione-universitaria-intelligenza-artificiale",
+    "ts": "2026-09-26T10:40:51.740Z",
     "keyForm": 2
   }
 }
