@@ -122,7 +122,9 @@ try {
     save();
     return comment;
   };
-  if (args[0] === 'api' && args.includes('--slurp')) {
+  if (args[0] === 'api' && /^repos\/.*\/pulls\/[0-9]+$/.test(args[1] || '')) {
+    process.stdout.write('{"state":"open"}\n');
+  } else if (args[0] === 'api' && args.includes('--slurp')) {
     process.stdout.write(JSON.stringify([state.comments]) + '\n');
   } else if (args[0] === 'api' && args[1] === '--method' && args[2] === 'POST') {
     const body = args[args.indexOf('--raw-field') + 1].replace(/^body=/, '');
@@ -522,7 +524,9 @@ test('un commento con l\'ID del marker ma snapshot diverso blocca il rimborso', 
 
 test('il classify non finalizza più il claim né degrada il rimborso a warning', () => {
   const classify = stepScript(CLASSIFY_NAME);
-  const superseded = classify.slice(classify.indexOf('CLAIM_STATUS=released'), classify.indexOf('run SUPERSEDED'));
+  const supersededEnd = classify.indexOf('run SUPERSEDED');
+  const supersededStart = classify.lastIndexOf('CLAIM_STATUS=released\n', supersededEnd);
+  const superseded = classify.slice(supersededStart, supersededEnd);
   assert.match(superseded, /--refund-superseded/);
   assert.match(superseded, /refund_marker="\$\{FIX_ROUND_MARKER%_ROUND\}_REFUNDED"/);
   assert.doesNotMatch(superseded, /redcheck-review-prefilter\.mjs --claim/,
