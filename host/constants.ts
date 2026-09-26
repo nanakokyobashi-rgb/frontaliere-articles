@@ -2,10 +2,12 @@
  * Site constants the article engine reads through SiteShellContract.
  *
  * Transported BY FUNCTION CLOSURE from the main repo's
- * `build-plugins/constants.ts` (about 1,200 lines on 2026-09-25): only the 18
- * declarations the contract reaches. The whole file also imports botPatterns,
- * posthog-error-filter, resilientImport, adSlotHtml and redirectStubMarker,
- * none of which the article path touches.
+ * `build-plugins/constants.ts` (about 1,200 lines on 2026-09-26): only the 20
+ * declarations the contract reaches, two of them local copies of
+ * `scripts/lib/jobBoardSections.mjs` values. The whole file also imports
+ * botPatterns, posthog-error-filter, resilientImport, adSlotHtml,
+ * redirectStubMarker and jobBoardSections, none of which the article path
+ * touches except through the job-board path regex below.
  *
  * These values MUST stay byte-equal to the main repo's. They end up in every
  * rendered <head>; a drift here makes fast-published pages differ from what
@@ -157,37 +159,55 @@ export const FC_PUBLISHER_ID = ADSENSE_CLIENT_ID.replace(/^ca-/, '');
 const ADS_CONSENT_STORAGE_KEY = 'frontaliere_ads_consent';
 
 /**
- * Click-only Offerwall gate for the Italian job board (site source:
- * build-plugins/constants.ts, where the live probes behind it are recorded).
- * On /cerca-lavoro-ticino pages the Funding Choices call that carries
- * OFFERWALL (it also carries the GDPR consent message) is HELD only when a
- * consent decision is stored on both sides — the site's key AND a TC string
- * in Funding Choices' `FCCDCF` cookie — and `window.__ftOfferwallGate.release()`
- * proceeds it when the visitor clicks "Candidati". Otherwise only the
- * Offerwall is suppressed, so the CMP shows at once. The first, enum-less
- * call and every other page proceed at once: on article pages this gate is a
- * pass-through.
+ * Job-board section prefixes and pathname matcher (site source:
+ * scripts/lib/jobBoardSections.mjs JOB_BOARD_SECTION_PREFIX_SOURCE and
+ * JOB_BOARD_SECTION_PATHNAME_RX). Every canton, the Switzerland aggregator
+ * and every locale (optional `/it|/en|/de|/fr`). Read here only by the gate below,
+ * which embeds `.source`; the SiteShellContract fingerprint pins the result
+ * byte-for-byte against the site.
+ */
+const JOB_BOARD_SECTION_PREFIX_SOURCE = 'cerca-lavoro|find-jobs|trouver-emploi|jobs-in|jobs-im';
+const JOB_BOARD_SECTION_PATHNAME_RX =
+  new RegExp(`^(?:/(?:it|en|de|fr))?/(?:${JOB_BOARD_SECTION_PREFIX_SOURCE})-[a-z][a-z-]*(?:/|$)`);
+
+/**
+ * Click-only Offerwall gate (site source: build-plugins/constants.ts, where
+ * the live probes behind it are recorded). AdSense includes the whole site
+ * (owner decision 2026-09-26), so the gate decides where the Offerwall may
+ * open. For the Funding Choices call that carries OFFERWALL (it also carries
+ * the GDPR consent message and the ad-block message):
+ *  - off the job-board sections, article pages included, only the Offerwall
+ *    is suppressed and the gate is marked `off_board`; it never proceeds
+ *    there, because "Candidati" does not exist on those pages;
+ *  - on every job-board section the call is HELD only when a consent decision
+ *    is stored on both sides — the site's key AND a TC string in Funding
+ *    Choices' `FCCDCF` cookie — and `window.__ftOfferwallGate.release()`
+ *    proceeds it when the visitor clicks "Candidati". Otherwise only the
+ *    Offerwall is suppressed (`suppressed`), so the CMP shows at once.
+ * The first, enum-less call proceeds at once everywhere.
  *
  * A "Candidati" click that lands BEFORE Funding Choices reaches this gate is
  * deliberately not queued. The site's consumer (services/offerwallClickGate.ts
  * and components/community/RewardedApplicationOffer.tsx) reads the gate as
  * `absent`, reports `rewarded_offerwall_not_shown` with `reason=not_held`, and
  * takes the GPT path, whose no-fill ends in a same-tab employer hand-off: the
- * visitor never waits on a second click. A call held later on that page view
- * stays held on purpose. Replaying the click into it would render an
- * Offerwall on top of the GPT request already in flight, the double flow the
- * site's review ruled out. The value is transported: change it in the site
- * first, since the SiteShellContract fingerprint must match on both sides.
+ * visitor never waits on a second click. A visit that started off the board
+ * reads `off_board` (`reason=off_board_page`) and takes the same GPT path. A
+ * call held later on that page view stays held on purpose. Replaying the
+ * click into it would render an Offerwall on top of the GPT request already
+ * in flight, the double flow the site's review ruled out. The value is
+ * transported: change it in the site first, since the SiteShellContract
+ * fingerprint must match on both sides.
  */
-export const FC_JOBBOARD_OFFERWALL_GATE_JS = `(function(){var g=window.googlefc=window.googlefc||{};if(g.controlledMessagingFunction)return;g.controlledMessagingFunction=function(message){var E=g.MessageTypeEnum||{};var p=window.location&&window.location.pathname||'';if(E.OFFERWALL===undefined||!/^\\/cerca-lavoro-ticino(?:\\/|$)/.test(p)){message.proceed(true);return;}var d=false;try{d=!!window.localStorage.getItem('${ADS_CONSENT_STORAGE_KEY}');}catch(e){}if(d){var c=(window.document&&window.document.cookie||'').match(/(?:^|;\\s*)FCCDCF=([^;]*)/),v='';try{v=c?decodeURIComponent(c[1]):'';}catch(e){}d=/\\x22C[A-Za-z0-9_-]{20,}/.test(v);}if(!d){window.__ftOfferwallGate=window.__ftOfferwallGate||{state:'suppressed',held:[]};message.proceed(false,[E.OFFERWALL]);return;}var w=window.__ftOfferwallGate=window.__ftOfferwallGate||{state:'idle',held:[]};if(w.state==='released'){message.proceed(true);return;}w.held.push(message);w.state='held';w.release=function(){if(w.state!=='held')return false;w.state='released';var h=w.held.splice(0);for(var i=0;i<h.length;i++){try{h[i].proceed(true);}catch(e){}}return true;};};})();`;
+export const FC_JOBBOARD_OFFERWALL_GATE_JS = `(function(){var g=window.googlefc=window.googlefc||{};if(g.controlledMessagingFunction)return;g.controlledMessagingFunction=function(message){var E=g.MessageTypeEnum||{};if(E.OFFERWALL===undefined){message.proceed(true);return;}var p=window.location&&window.location.pathname||'';if(!/${JOB_BOARD_SECTION_PATHNAME_RX.source}/.test(p)){window.__ftOfferwallGate=window.__ftOfferwallGate||{state:'off_board',held:[]};message.proceed(false,[E.OFFERWALL]);return;}var d=false;try{d=!!window.localStorage.getItem('${ADS_CONSENT_STORAGE_KEY}');}catch(e){}if(d){var c=(window.document&&window.document.cookie||'').match(/(?:^|;\\s*)FCCDCF=([^;]*)/),v='';try{v=c?decodeURIComponent(c[1]):'';}catch(e){}d=/\\x22C[A-Za-z0-9_-]{20,}/.test(v);}if(!d){window.__ftOfferwallGate=window.__ftOfferwallGate||{state:'suppressed',held:[]};message.proceed(false,[E.OFFERWALL]);return;}var w=window.__ftOfferwallGate=window.__ftOfferwallGate||{state:'idle',held:[]};if(w.state==='released'){message.proceed(true);return;}w.held.push(message);w.state='held';w.release=function(){if(w.state!=='held')return false;w.state='released';var h=w.held.splice(0);for(var i=0;i<h.length;i++){try{h[i].proceed(true);}catch(e){}}return true;};};})();`;
 
 /**
  * Funding Choices MESSAGING loader, injected PARSE-TIME into the <head> of
  * in-scope STATIC pages. The site's custom newsletter choice is deliberately
- * disabled globally; on the Italian Ticino job board
- * FC_JOBBOARD_OFFERWALL_GATE_JS holds the native Offerwall until the visitor
- * clicks "Candidati", while article and other non-job-board pages keep their
- * configured native Offerwall.
+ * disabled globally; on every job-board section FC_JOBBOARD_OFFERWALL_GATE_JS
+ * holds the native Offerwall until the visitor clicks "Candidati", and on
+ * article and every other page it suppresses the Offerwall alone (the CMP
+ * still shows).
  *
  * WHY THIS EXISTS (2026-06-16): static SSG HTML (article pages and the Italian
  * job-board pages) does not carry index.html's inline Funding Choices block.

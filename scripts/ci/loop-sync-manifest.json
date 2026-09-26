@@ -2823,7 +2823,7 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti del sito che l'engine legge via SiteShellContract. E' un ESTRATTO PER CHIUSURA di build-plugins/constants.ts (circa 1.200 righe la': solo le 18 dichiarazioni che il contratto raggiunge, 227 righe qui al 2026-09-25), quindi non potra' mai essere byte-identico e adapted e' il mode giusto. Per questa sola entry scalarFingerprint confronta i 22 scalari authoritative: cambiamenti del sorgente fuori dalla chiusura restano stable, ma un digest diverso, mancante, malformato o non dichiarato non puo' mai essere stable. I comportamenti del contratto restano coperti dai fingerprint test esistenti; host/host-drift.test.mjs non esiste e non e' una guardia. Il lato sito della PR #8299 e' ora su main; questa baseline registra l'osservazione verificata dei due lati dopo l'allineamento del marker frontaliere:auth-session, mentre il codice runtime conserva il match sulla chiave Firebase esatta. Il digest c036077d… riflette lo snippet Funding Choices statico che trattiene l'Offerwall del job board italiano fino al click su «Candidati» (FC_JOBBOARD_OFFERWALL_GATE_JS e la chiave ADS_CONSENT_STORAGE_KEY entrano nella chiusura; sito PR #9788); non dipende da segreti o variabili di ambiente del runner.",
+      "reason": "Costanti del sito che l'engine legge via SiteShellContract. E' un ESTRATTO PER CHIUSURA di build-plugins/constants.ts (circa 1.200 righe la': solo le 20 dichiarazioni che il contratto raggiunge, 247 righe qui al 2026-09-26), quindi non potra' mai essere byte-identico e adapted e' il mode giusto. Per questa sola entry scalarFingerprint confronta i 22 scalari authoritative: cambiamenti del sorgente fuori dalla chiusura restano stable, ma un digest diverso, mancante, malformato o non dichiarato non puo' mai essere stable. I comportamenti del contratto restano coperti dai fingerprint test esistenti; host/host-drift.test.mjs non esiste e non e' una guardia. Il lato sito della PR #8299 e' ora su main; questa baseline registra l'osservazione verificata dei due lati dopo l'allineamento del marker frontaliere:auth-session, mentre il codice runtime conserva il match sulla chiave Firebase esatta. Il digest cb5f800b… riflette lo snippet Funding Choices statico che trattiene l'Offerwall fino al click su «Candidati» su ogni sezione job board (tutti i cantoni, l'aggregatore Svizzera, prefisso opzionale /it|/en|/de|/fr) e fuori dal job board sopprime solo l'Offerwall (FC_JOBBOARD_OFFERWALL_GATE_JS, la chiave ADS_CONSENT_STORAGE_KEY e le copie locali JOB_BOARD_SECTION_PREFIX_SOURCE/JOB_BOARD_SECTION_PATHNAME_RX di scripts/lib/jobBoardSections.mjs del sito entrano nella chiusura; sito PR #9788, estesa il 2026-09-26 a ogni sezione job board); non dipende da segreti o variabili di ambiente del runner.",
       "baseline": {
         "site": "5bedfc2a3453a9f5",
         "corpus": "db9e22109da26397",
@@ -2834,7 +2834,7 @@
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
         "scalarFields": 22,
-        "sha256": "c036077de5390df05f87da862312dda1fa0bdce94b9ffe6961ee9c8894efe536"
+        "sha256": "cb5f800bdee6c9a96e9df05629574a8c3dd711aef78aa2daab9444e8fa58d943"
       }
     },
     {
@@ -3050,9 +3050,9 @@
       "mode": "identical",
       "reason": "Impronta SHA-256 dei 22 campi scalari di SiteShellContract, prodotta e verificata da `host/tests/shell-contract-fingerprint.test.mjs`. Il gemello del sito vive in `tests/articles-shell-contract-fingerprint.json` con lo stesso contenuto; i due artefatti restano `identical` e la baseline ne sorveglia il drift. E' il gate runtime che impedisce di spedire l'engine senza la sua meta' `host/`.",
       "baseline": {
-        "site": "fcfdda6c88ee2694",
-        "corpus": "fcfdda6c88ee2694",
-        "alignedAt": "2026-09-25"
+        "site": "ba2611ed02087515",
+        "corpus": "ba2611ed02087515",
+        "alignedAt": "2026-09-26"
       }
     },
     {
