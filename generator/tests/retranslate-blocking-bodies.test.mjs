@@ -58,6 +58,9 @@ import {
   rewriteExistingLocaleBody,
   sanitizeTranslatedField,
   inlineBoolean,
+  ITALIAN_RESIDUE_MIN_LINES,
+  scanItalianResidue,
+  hasItalianResidue,
 } from '../scripts/retranslate-blocking-bodies.mjs';
 // Dal modulo corpus-only, NON da `lib/article-sanitizers.mjs`: quello e'
 // `identical` nel manifest del ciclo e un export aggiunto dal corpus lo
@@ -238,6 +241,94 @@ test('blockingPairsFromAudit tiene solo le coppie con almeno un critical', () =>
   });
   assert.deepEqual(pairs.map((p) => p.id), ['a']);
   assert.deepEqual(pairs[0].codes, ['truncated-bold']);
+});
+
+test('blockingPairsFromAudit consuma il formato scan-v2 e crea il codice italian-residue', () => {
+  const pairs = blockingPairsFromAudit({
+    summary: { en: { slugs: 1, lines: 3, slugsGe3: 1 } },
+    results: [
+      {
+        lang: 'en',
+        slug: 'articolo-con-residuo',
+        count: ITALIAN_RESIDUE_MIN_LINES,
+        hits: Array.from({ length: ITALIAN_RESIDUE_MIN_LINES }, () => ({ field: 'body1' })),
+      },
+      { lang: 'de', slug: 'coda-troppo-corta', count: ITALIAN_RESIDUE_MIN_LINES - 1 },
+      { lang: 'it', slug: 'sorgente', count: 20 },
+    ],
+  });
+
+  assert.deepEqual(pairs, [{
+    id: 'articolo-con-residuo',
+    locale: 'en',
+    dir: 'services/locales/blog-body',
+    codes: ['italian-residue'],
+  }]);
+});
+
+test('lo scan per riga vede il blocco italiano ma non una traduzione con gli stessi marker', () => {
+  const residual = {
+    body1: [
+      '## Fatti chiave',
+      '- **Cosa**: Convocazione dell’assemblea CUV per il 2026',
+      '- **Dove**: Malpensa e comuni del territorio',
+      '- **Problemi**: Aumento del traffico aereo e impatto ambientale',
+    ].join('\n'),
+  };
+  const translated = {
+    body1: [
+      '## Key facts',
+      '- **What**: The CUV assembly is planned for 2026',
+      '- **Where**: Malpensa and nearby municipalities',
+      '- **Issues**: Higher air traffic and environmental impact',
+    ].join('\n'),
+  };
+
+  assert.equal(scanItalianResidue(residual, 'en').length, ITALIAN_RESIDUE_MIN_LINES + 1);
+  assert.equal(hasItalianResidue(residual, 'en'), true);
+  assert.deepEqual(scanItalianResidue(translated, 'en'), []);
+  assert.equal(hasItalianResidue(translated, 'en'), false);
+});
+
+test('la soglia lascia fuori una riga italiana isolata e il locale sorgente', () => {
+  const oneLine = { body1: '## Fatti chiave\n- **Cosa**: Convocazione dell’assemblea CUV.' };
+  assert.equal(scanItalianResidue(oneLine, 'fr').length, 2);
+  assert.equal(hasItalianResidue(oneLine, 'fr'), false);
+  assert.deepEqual(scanItalianResidue(oneLine, 'it'), []);
+});
+
+test('shouldWrite tratta italian-residue come difetto bloccante della pagina vecchia', () => {
+  assert.deepEqual(
+    shouldWrite({ oldCodes: ['italian-residue'], newCodes: [], missingField: null }),
+    { write: true, reason: 'pulita' },
+  );
+  assert.equal(
+    shouldWrite({
+      oldCodes: ['italian-residue'],
+      newCodes: [],
+      missingField: null,
+      sanity: 'italian-residue: 3 righe residue',
+    }).write,
+    false,
+  );
+});
+
+test('translationSanityIssue rifiuta una nuova traduzione che conserva tre righe italiane', () => {
+  const sections = {
+    body1: [
+      '## Faits clés',
+      '- **Cosa**: Convocazione dell’assemblea CUV per il 2026',
+      '- **Dove**: Malpensa e comuni del territorio',
+      '- **Problemi**: Aumento del traffico aereo e impatto ambientale',
+    ].join('\n'),
+  };
+  const reason = translationSanityIssue({
+    oldSections: sections,
+    newSections: sections,
+    italianSections: { body1: 'Testo italiano sorgente.' },
+    locale: 'fr',
+  });
+  assert.equal(reason, 'italian-residue: 4 righe residue');
 });
 
 test('stratify copre piu codici invece di prendere i primi N dello stesso', () => {
