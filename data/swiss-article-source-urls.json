@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/q6jr-zvg4mhp9iqqr2w4_": {
-    "articleId": "keller-sutter-ministri-finanze-germanofoni",
-    "ts": "2026-08-22T16:12:01.627Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/dal-mondo/politica/1945455/irlanda-italia-dublinanti-media-asilo": {
     "articleId": "irlanda-dublinanti-asilo-italia",
     "ts": "2026-08-22T17:06:46.363Z",
@@ -2497,6 +2492,11 @@
   "https://www.laregione.ch/svizzera/svizzera/1952856/congedo-parentale-l-iniziativa-popolare-raggiunge-il-quorum": {
     "articleId": "iniziativa-congedo-parentale-quorum",
     "ts": "2026-09-26T11:23:28.575Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4110607": {
+    "articleId": "mobilitazione-esercito-ponte",
+    "ts": "2026-09-26T12:04:40.554Z",
     "keyForm": 2
   }
 }
