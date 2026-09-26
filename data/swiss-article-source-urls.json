@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4006818": {
-    "articleId": "festival-scientifica-zurigo-ricerca",
-    "ts": "2026-08-24T09:29:29.145Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/info/scienza-e-tecnologia/ritorno-a-scuola-l%e2%80%99estate-%c3%a8-un-problema-per-l%e2%80%99apprendimento--4004355.html": {
     "articleId": "pausa-estiva-apprendimento-scuola",
     "ts": "2026-08-24T09:38:26.377Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/politica/1952916/svizzera-lotta-esseri-trafficanti-jans-monaco": {
     "articleId": "jans-monaco-lotta-trafficanti",
     "ts": "2026-09-26T20:28:16.680Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1952853/svizzera-aebi-premi-grandine-risarcimenti": {
+    "articleId": "risarcimenti-grandine-svizzera-2026",
+    "ts": "2026-09-26T21:39:23.297Z",
     "keyForm": 2
   }
 }
