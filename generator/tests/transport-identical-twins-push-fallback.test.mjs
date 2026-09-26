@@ -268,6 +268,40 @@ test('ripristina baseline e couplingSnapshot dal parent solo sui workflow', () =
   );
 });
 
+test('il ripristino mantiene l’ordine precedente dei workflow rimossi', () => {
+  const previous = {
+    files: [
+      { path: 'scripts/ci/a.mjs' },
+      { path: '.github/workflows/z.yml' },
+      { path: 'scripts/ci/m.mjs' },
+      { path: '.github/workflows/a.yml' },
+      { path: 'scripts/ci/z.mjs' },
+    ],
+  };
+  const current = {
+    files: [
+      { path: 'scripts/ci/new.mjs' },
+      { path: 'scripts/ci/a.mjs' },
+      { path: 'scripts/ci/m.mjs' },
+      { path: 'scripts/ci/z.mjs' },
+    ],
+  };
+
+  const restored = restoreWorkflowSnapshots(current, previous, [
+    '.github/workflows/z.yml',
+    '.github/workflows/a.yml',
+  ]);
+
+  assert.deepEqual(restored.files.map((entry) => entry.path), [
+    'scripts/ci/new.mjs',
+    'scripts/ci/a.mjs',
+    '.github/workflows/z.yml',
+    'scripts/ci/m.mjs',
+    '.github/workflows/a.yml',
+    'scripts/ci/z.mjs',
+  ]);
+});
+
 function runPrepareFallback({ currentFiles, previousFiles, commitPaths, transported }) {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'transport-fallback-'));
   const files = {
