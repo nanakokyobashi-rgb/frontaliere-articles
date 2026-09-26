@@ -73,6 +73,13 @@ test('i nove parametri JOB_EMAIL_RANKING preservano il segnale empty/off', () =>
   }
 });
 
+test('application-intent ranking flag is mapped and missing remains fail-closed', () => {
+  const source = fs.readFileSync(path.join(ROOT, 'scripts/load-rc-env.mjs'), 'utf8');
+  assert.match(source, /APPLICATION_INTENT_RANKING_ENABLED:\s*\['APPLICATION_INTENT_RANKING_ENABLED'\]/);
+  assert.equal(shouldExportRcValue('false', 'APPLICATION_INTENT_RANKING_ENABLED'), true);
+  assert.equal(shouldExportRcValue(null, 'APPLICATION_INTENT_RANKING_ENABLED'), false);
+});
+
 test('il loader nomina i parametri RC irrisolti senza loggare valori', () => {
   assert.equal(
     formatMissingRcKeys(['JOB_EMAIL_RANKING_SHRINK_K', 'JOB_EMAIL_RANKING_MAX_CONSECUTIVE_EXPOSURES']),
