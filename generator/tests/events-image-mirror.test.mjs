@@ -242,6 +242,28 @@ test('FU-002: con Content-Length dichiarato si prealloca la lunghezza dichiarata
   assert.equal(cancelled, true);
 });
 
+test('FU-004: conserva una copia di ogni chunk quando il reader riusa il buffer', async () => {
+  const { readEventImageBody } = loadBodyReader();
+  const reused = Uint8Array.from([1, 2]);
+  let read = 0;
+  const reader = {
+    read: async () => {
+      read += 1;
+      if (read === 1) return { done: false, value: reused };
+      if (read === 2) {
+        reused.set([3, 4]);
+        return { done: false, value: reused };
+      }
+      return { done: true, value: undefined };
+    },
+    cancel: async () => {},
+    releaseLock() {},
+  };
+
+  const result = await readEventImageBody(fakeResponse(reader), 10);
+  assert.deepEqual([...result], [1, 2, 3, 4]);
+});
+
 test('FU-003: un releaseLock() che lancia non trasforma un\'immagine letta in null', async () => {
   const { readEventImageBody } = loadBodyReader();
   const reader = readerOf([[1, 2], [3]], {
