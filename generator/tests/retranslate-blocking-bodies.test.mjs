@@ -291,15 +291,27 @@ test('lo scan per riga vede il blocco italiano ma non una traduzione con gli ste
 });
 
 test('lo scan per riga riconosce prosa italiana comune senza segnalare il francese', () => {
-  const italian = scanItalianResidue({
-    body1: 'Le autorità hanno deciso nuove misure',
-  }, 'en');
+  const italianBody = {
+    body1: [
+      'Le autorità hanno deciso nuove misure',
+      'Il governo ha annunciato controlli nei cantoni',
+      'L’economia locale ha bisogno di nuove strategie',
+    ].join('\n'),
+  };
+  const italian = scanItalianResidue(italianBody, 'en');
   const french = scanItalianResidue({
     body1: 'Une frontalière du canton',
   }, 'fr');
 
-  assert.equal(italian.length, 1);
-  assert.equal(italian[0].reason, 'language');
+  assert.equal(italian.length, ITALIAN_RESIDUE_MIN_LINES);
+  assert.ok(italian.every((hit) => hit.reason === 'language'));
+  assert.equal(hasItalianResidue(italianBody, 'en'), true);
+  assert.equal(translationSanityIssue({
+    oldSections: {},
+    newSections: italianBody,
+    italianSections: {},
+    locale: 'en',
+  }), 'italian-residue: 3 righe residue');
   assert.deepEqual(french, []);
 });
 
