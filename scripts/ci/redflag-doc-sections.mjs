@@ -130,7 +130,7 @@ function buildDocumentSections(requiredSections, title, { read } = {}) {
 }
 
 /**
- * Validate the exact value that pr-redflag-fixer.yml writes to $GITHUB_ENV.
+ * Validate the exact value that pr-redflag-fixer.yml writes to $GITHUB_OUTPUT.
  *
  * @param {string} document
  * @returns {string}
