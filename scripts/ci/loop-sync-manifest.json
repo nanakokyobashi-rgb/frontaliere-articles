@@ -303,9 +303,9 @@
       "path": "scripts/ci/claude-codex-fallback.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "aa15ba50bb2256ff",
-        "corpus": "aa15ba50bb2256ff",
-        "alignedAt": "2026-09-19"
+        "site": "9f50ff6b8bdb5b52",
+        "corpus": "9f50ff6b8bdb5b52",
+        "alignedAt": "2026-09-26"
       }
     },
     {
@@ -562,6 +562,15 @@
         "site": null,
         "corpus": "7d8990ce9bc61b10",
         "alignedAt": "2026-09-12"
+      }
+    },
+    {
+      "path": "scripts/lib/codex-fallback-contract.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "339d945b935b757d",
+        "corpus": "339d945b935b757d",
+        "alignedAt": "2026-09-26"
       }
     },
     {
