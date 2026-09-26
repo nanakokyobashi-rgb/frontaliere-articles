@@ -210,6 +210,7 @@ function runClassifier({
   fetchedSequence = '',
   rereadSequence = '',
   lsRemoteStatuses = '',
+  prState = 'open',
 } = {}) {
   const temp = mkdtempSync(path.join(os.tmpdir(), 'pr-redcheck-outcome-'));
   const bin = path.join(temp, 'bin');
@@ -294,6 +295,10 @@ fakeExecutable(bin, 'gh', String.raw`
 echo "$*" >> "$GH_LOG"
 if echo "$*" | grep -Eq -- '(-X|--method) DELETE'; then exit 0; fi
 if echo "$*" | grep -q 'api user'; then printf '{"login":"fixture-bot"}\n'; exit 0; fi
+if echo "$*" | grep -Eq 'api repos/.*/pulls/[0-9]+$'; then
+  printf '{"state":"%s"}\n' "$FAKE_PR_STATE"
+  exit 0
+fi
 if echo "$*" | grep -q 'pr comment'; then exit "$REFUND_COMMENT_STATUS"; fi
 if echo "$*" | grep -q 'issues/.*/comments'; then
   if echo "$*" | grep -q -- '--jq'; then
@@ -345,6 +350,7 @@ printf '%s' "$FAKE_BODY"
         FAKE_FETCHED: fetchedSequence,
         FAKE_REREAD: rereadSequence,
         FAKE_LSREMOTE_STATUSES: lsRemoteStatuses,
+        FAKE_PR_STATE: prState,
         SLEEP_LOG: sleepLog,
         TIMEOUT_LOG: timeoutLog,
         FAKE_BODY: currentBody,
@@ -646,6 +652,26 @@ test('un branch solo indietro rispetto a main non è SUPERSEDED', () => {
   assert.doesNotMatch(result.ghLog, /-X DELETE/);
 });
 
+for (const [name, source] of [['redcheck', WORKFLOW], ['redflag', REDFLAG_WORKFLOW]]) {
+  test(`${name}: una PR chiusa mentre il fixer gira è un terminale verde senza fetch`, () => {
+    const baseBody = '## Implementato\n\n- body iniziale';
+    const result = runClassifier({
+      source,
+      baseBody,
+      currentBody: baseBody,
+      prState: 'closed',
+      actionOutcome: 'failure',
+      fetchStatuses: '128 128 128',
+    });
+    assert.equal(result.status, 0,
+      `PR chiusa con branch cancellato deve essere terminale:\nstdout=${result.stdout}\nstderr=${result.stderr}`);
+    assert.match(result.stdout, /non più OPEN/);
+    assert.match(result.githubEnv, /^CLAIM_STATUS=released\n$/);
+    assert.equal(result.fetchCount, 0, 'state=closed deve evitare il fetch del branch eliminato');
+    assert.doesNotMatch(result.ghLog, /git fetch|pr comment|DELETE|_REFUND/);
+  });
+}
+
 // #1763: la head remota letta dal classificatore deve essere verificata.
 // Scenario base di una race esterna (START_SHA=pr-sha, remote=external-sha):
 // con una head verificata e' SUPERSEDED + rimborso; con una head NON
@@ -791,10 +817,12 @@ test('redflag e redcheck leggono la head remota con lo stesso blocco verificato'
     assert.doesNotMatch(classify, /ls-remote[^\n]*\|\| echo/,
       'una rilettura non-zero non deve essere mascherata da un fallback');
     const guardAt = classify.indexOf('REMOTE_HEAD_UNVERIFIED');
-    for (const verdict of ['round SUCCESS', 'CLAIM_STATUS=released', 'run SUPERSEDED']) {
+    for (const verdict of ['round SUCCESS', 'run SUPERSEDED']) {
       assert.ok(classify.indexOf(verdict) > guardAt,
         `il guard fail-closed deve precedere «${verdict}»`);
     }
+    assert.ok(classify.indexOf('CLAIM_STATUS=released', guardAt) > guardAt,
+      'il rilascio per race SUPERSEDED deve restare dopo il guard fail-closed');
   }
 });
 
