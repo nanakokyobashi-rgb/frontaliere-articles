@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1944956/asilo-reati-richiedenti-sem-domande": {
-    "articleId": "asilo-maghreb-reati-80-percento",
-    "ts": "2026-08-22T00:14:33.198Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/attualita/1945240/misure-esercito-discriminazioni-azione-piano": {
     "articleId": "discriminazioni-esercito-piano",
     "ts": "2026-08-22T00:26:46.831Z",
@@ -2497,6 +2492,11 @@
   "https://lenews.ch/2026/09/25/more-than-700-medicines-face-shortages-in-switzerland": {
     "articleId": "carenze-medicinali-svizzera-2026",
     "ts": "2026-09-26T00:42:55.689Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4110760": {
+    "articleId": "kof-consensus-forecast-pil-2026",
+    "ts": "2026-09-26T01:18:48.741Z",
     "keyForm": 2
   }
 }
