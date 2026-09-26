@@ -1,4 +1,4 @@
-// Fissa i fatti verificati il 2026-09-24 per `guida-dichiarazione-redditi-frontalieri`
+// Fissa i fatti verificati il 2026-09-26 per `guida-dichiarazione-redditi-frontalieri`
 // (issue corpus #1760). Ogni asserzione fallisce con i valori precedenti al refresh:
 // franchigia 7.500 euro attribuita ai vecchi frontalieri, quadro CE indicato per il 730,
 // cambio medio annuale, sanzioni "a partire dal 120%" per gli errori, credito
@@ -14,7 +14,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const SLUG = 'guida-dichiarazione-redditi-frontalieri';
 const LOCALES = ['it', 'en', 'de', 'fr'];
-const REFRESHED_ON = '2026-09-24';
+const REFRESHED_ON = '2026-09-26';
 
 const read = (...parts) => fs.readFileSync(path.join(ROOT, ...parts), 'utf8');
 const body = (locale) => read('content', 'blog-body', locale, `${SLUG}.ts`);
@@ -97,8 +97,12 @@ for (const locale of LOCALES) {
   test(`${locale}: fonti ufficiali citate`, () => {
     const src = body(locale);
     assert.match(src, /agenziaentrate\.gov\.it/);
+    assert.match(src, /quadro-g-crediti-d-imposta/);
     assert.match(src, /admin\.ch/);
     assert.match(src, /normattiva\.it/);
+    assert.doesNotMatch(src, /(?:fornita dall|provided by the cantonal tax office|ausgestellt vom kantonalen Steueramt|fournie par l'office cantonal)/i, `${locale}: emittente non verificato`);
+    assert.doesNotMatch(src, /(?:almeno cinque anni|at least five years|mindestens fünf Jahre|au moins cinq ans)/i, `${locale}: conservazione quinquennale non documentata`);
+    assert.match(src, /(?:periodo previsto dalle regole applicabili|period required by the applicable rules|nach den anwendbaren Regeln erforderlichen Zeitraum|période prévue par les règles applicables)/i, `${locale}: regola di conservazione qualificata`);
   });
 
   test(`${locale}: excerpt senza quadro CE attribuito al 730`, () => {

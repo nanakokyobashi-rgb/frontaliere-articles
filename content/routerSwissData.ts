@@ -2269,6 +2269,20 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'carenze-medicinali-svizzera-2026': { it: 'carenze-medicinali-svizzera-2026', en: 'medicines-shortages-switzerland-2026', de: 'arzneimittel-mangel-schweiz-2026', fr: 'penurie-medicaments-suisse-2026' },
  'kof-consensus-forecast-pil-2026': { it: 'kof-consensus-forecast-pil-2026', en: 'kof-forecast-swiss-gdp-2026', de: 'kof-vorhersage-schweizer-bip-2026', fr: 'kof-prevision-pib-suisse-2026' },
  'voci-morgan-stanley-ubs': { it: 'voci-morgan-stanley-ubs', en: 'ubs-morgan-stanley-merger-rumors', de: 'ubs-morgan-stanley-fusionsgeruechte', fr: 'rumeurs-fusion-ubs-morgan-stanley' },
+ 'destra-ticino-elezioni-aprile': { it: 'destra-ticino-elezioni-aprile', en: 'ticino-right-elections-april', de: 'tessin-rechte-wahlen-april', fr: 'tessin-droite-elections-avril' },
+ 'carburante-sgravio-berna': { it: 'carburante-sgravio-berna', en: 'no-fuel-discount-bern-confirms-full-price', de: 'keine-entlastung-beim-treibstoff-bern-bestatigt-das-teure-tanken', fr: 'aucun-allegement-sur-le-carburant-berne-confirme-le-plein-hors-de-prix' },
+ 'portali-cv-lucerna': { it: 'portali-cv-lucerna', en: 'swiss-job-search-lucerne-2026', de: 'arbeitssuche-schweiz-luzern-2026', fr: 'recherche-emploi-suisse-lucerne-2026' },
+ 'keiser-stop-promozione-zugo': { it: 'keiser-stop-promozione-zugo', en: 'keiser-stop-economic-promotion-zug', de: 'keiser-stop-wirtschaftsfoerderung-zug', fr: 'keiser-arret-promotion-economique-zoug' },
+ 'seco-commercio-misure-2026': { it: 'seco-commercio-misure-2026', en: 'seco-trade-measures-2026', de: 'seco-handelsmassnahmen-2026', fr: 'seco-mesures-commerce-2026' },
+ 'voto-settembre-integrazione-2026': { it: 'voto-settembre-integrazione-2026', en: 'september-vote-integration-2026', de: 'september-abstimmung-integration-2026', fr: 'vote-septembre-integration-2026' },
+ 'integrazione-pic4-fondi-2028-2032': { it: 'integrazione-pic4-fondi-2028-2032', en: 'integration-pic4-funds-2028-2032', de: 'integration-pic4-mittel-2028-2032', fr: 'integration-pic4-fonds-2028-2032' },
+ 'indennita-infermiere-bregaglia': { it: 'indennita-infermiere-bregaglia', en: 'bregaglia-nurse-indemnities', de: 'bregaglia-pflege-entschaedigungen', fr: 'bregaglia-indemnites-infirmieres' },
+ 'importazione-granoturco-foraggio-proroga': { it: 'importazione-granoturco-foraggio-proroga', en: 'import-forage-corn-proroga', de: 'einfuhr-futtermais-proroga', fr: 'importation-mais-fourrager-proroga' },
+ 'bns-inflazione-pil-previsioni-2026': { it: 'bns-inflazione-pil-previsioni-2026', en: 'bns-inflation-gdp-forecasts-2026', de: 'bns-inflation-bip-prognosen-2026', fr: 'bns-inflation-pib-previsions-2026' },
+ 'valutazione-universitaria-intelligenza-artificiale': { it: 'valutazione-universitaria-intelligenza-artificiale', en: 'university-assessment-artificial-intelligence', de: 'universitaetsbewertung-kuenstliche-intelligenz', fr: 'evaluation-universitaire-intelligence-artificielle' },
+ 'iniziativa-congedo-parentale-quorum': { it: 'iniziativa-congedo-parentale-quorum', en: 'parental-leave-initiative-quorum', de: 'elternurlaub-initiative-quorum', fr: 'initiative-conge-parental-quorum' },
+ 'mobilitazione-esercito-ponte': { it: 'mobilitazione-esercito-ponte', en: 'swiss-army-rapid-mobilization', de: 'schnelle-mobilisierung-armee', fr: 'mobilisation-rapide-armee-suisse' },
+ 'dertour-suisse-ripresa-fatturato': { it: 'dertour-suisse-ripresa-fatturato', en: 'dertour-suisse-aims-to-surpass-one-billion-in-revenue', de: 'dertour-suisse-will-die-umsatzmilliarde-ubertreffen', fr: 'dertour-suisse-vise-a-depasser-le-milliard-de-chiffre-d-affaires' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

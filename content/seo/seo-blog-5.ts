@@ -93751,6 +93751,591 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-cavalcavia-boesio-chiusura-lavori-2026': {
+    title: 'Chiusura cavalcavia boesio laveno mombello 25 settembre 2026',
+    description: 'Venerdì 25 settembre 2026, dalle 9:00 alle 17:00, chiusura totale del Cavalcavia Boesio (S.P. 32 e S.P. 69) per l\'installazione di tre portali limitatori; dopo',
+    keywords: 'frontalieri, ticino, svizzera, italia, chiusura, cavalcavia, boesio, laveno',
+    ogTitle: 'Chiusura Cavalcavia Boesio Laveno Mombello 25 settembre 2026',
+    ogDescription: 'Il 25 settembre 2026, dalle 9 alle 17, il Cavalcavia Boesio nel comune di Laveno Mombello sarà chiuso totalmente per consentire l\'installazione di tre portali limitatori di sagoma sulle S.P. 32 e S.P. 69. Dopo i lavori resteranno in vigore il divieto',
+    canonicalPath: '/articoli-frontaliere/cavalcavia-boesio-chiusura-lavori-2026',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Chiusura cavalcavia boesio laveno mombello 25 settembre 2026",
+      "description": "Venerdì 25 settembre 2026, dalle 9:00 alle 17:00, chiusura totale del Cavalcavia Boesio (S.P. 32 e S.P. 69) per l'installazione di tre portali limitatori; dopo",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/cavalcavia-boesio-chiusura-lavori-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Chiusura del Cavalcavia Boesio a Laveno Mombello con deviazioni sulla viabilità comunale"
+      },
+      "datePublished": "2026-09-26T02:34:11+00:00",
+      "dateModified": "2026-09-26T02:34:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/cavalcavia-boesio-chiusura-lavori-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-simex-26-emergenza-agno': {
+    title: 'Incidente aereo simulato all’aeroporto di Agno',
+    description: 'All’aeroporto di Agno SIMEX 26 ha simulato un incidente aereo: testati allarmi, soccorsi, comunicazione e coordinamento sotto la supervisione dell’UFAC.',
+    keywords: 'frontalieri, ticino, svizzera, italia, incidente, aereo, simulato, aeroporto',
+    ogTitle: 'Agno, esercitazione SIMEX 26 su un incidente aereo',
+    ogDescription: 'Giovedì sera l’aeroporto di Agno ha ospitato una simulazione su larga scala: testati la catena di allarme, l’intervento dei soccorsi, il Comitato di crisi e la gestione delle informazioni in emergenza.',
+    canonicalPath: '/articoli-frontaliere/simex-26-emergenza-agno',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Incidente aereo simulato all’aeroporto di Agno",
+      "description": "All’aeroporto di Agno SIMEX 26 ha simulato un incidente aereo: testati allarmi, soccorsi, comunicazione e coordinamento sotto la supervisione dell’UFAC.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/simex-26-emergenza-agno.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Aeroporto di Agno durante un’esercitazione di emergenza"
+      },
+      "datePublished": "2026-09-26T03:27:10+00:00",
+      "dateModified": "2026-09-26T03:27:10+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/simex-26-emergenza-agno/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-bilaterali-tre-primo-test': {
+    title: 'Bilaterali III: lunedì il test al Consiglio degli Stati',
+    description: 'Bilaterali III al Consiglio degli Stati da lunedì: il pacchetto Svizzera-Ue apre un dibattito fiume, con scintille attese nel confronto parlamentare sul dossier',
+    keywords: 'frontalieri, ticino, svizzera, italia, bilaterali, lunedì, test, consiglio',
+    ogTitle: 'Bilaterali III: lunedì il test agli Stati',
+    ogDescription: 'Il pacchetto di accordi tra Svizzera e Ue entra da lunedì nel Consiglio degli Stati. La fonte descrive un dibattito fiume e prevede scintille: per i frontalieri, nessuna modifica operativa è indicata nel testo disponibile.',
+    canonicalPath: '/articoli-frontaliere/bilaterali-tre-primo-test',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bilaterali III: lunedì il test al Consiglio degli Stati",
+      "description": "Bilaterali III al Consiglio degli Stati da lunedì: il pacchetto Svizzera-Ue apre un dibattito fiume, con scintille attese nel confronto parlamentare sul dossier",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bilaterali-tre-primo-test.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Bellinzona e le montagne ticinesi in un'immagine per i Bilaterali III"
+      },
+      "datePublished": "2026-09-26T04:01:12+00:00",
+      "dateModified": "2026-09-26T04:01:12+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/bilaterali-tre-primo-test/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-incidente-lozza-gazzada-vedano': {
+    title: 'Incidente tra Lozza e Gazzada: code fino a Vedano',
+    description: 'Incidente tra Lozza e Gazzada Schianno il 23 settembre: secondo le prime informazioni non ci sarebbero feriti. Code e traffico fino al ponte di Vedano.',
+    keywords: 'frontalieri, ticino, svizzera, italia, incidente, lozza, gazzada, code',
+    ogTitle: 'Incidente Lozza-Gazzada: code fino al ponte di Vedano',
+    ogDescription: 'Incidente sulla provinciale tra Lozza e Gazzada Schianno: le code si sono formate dalla rotonda del Keynes e si sono estese fino al ponte di Vedano. Secondo le prime informazioni non ci sarebbero feriti; la dinamica è ancora in ricostruzione.',
+    canonicalPath: '/articoli-frontaliere/incidente-lozza-gazzada-vedano',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Incidente tra Lozza e Gazzada: code fino a Vedano",
+      "description": "Incidente tra Lozza e Gazzada Schianno il 23 settembre: secondo le prime informazioni non ci sarebbero feriti. Code e traffico fino al ponte di Vedano.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/incidente-lozza-gazzada-vedano.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Auto in coda su una strada provinciale vicino a una rotonda"
+      },
+      "datePublished": "2026-09-26T04:55:11+00:00",
+      "dateModified": "2026-09-26T04:55:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/incidente-lozza-gazzada-vedano/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-aggressioni-notte-lugano': {
+    title: 'Aggressioni e notti violente: giovani ticinesi raccontano',
+    description: 'Il 1° agosto 2025 un 19enne è stato pestato sotto la pensilina di Mario Botta a Lugano; nel 2024 la magistratura minorile ha aperto 912 incarti (+18%); Taha, 24',
+    keywords: 'frontalieri, ticino, svizzera, italia, aggressioni, notti, violente, giovani',
+    ogTitle: 'Aggressioni e notti violente: giovani ticinesi raccontano',
+    ogDescription: 'A Lugano, la notte del 1° agosto 2025 ha visto un diciannovenne bellinzonese vittima di un brutale pestaggio sotto la pensilina di Mario Botta. Il episodio si inserisce in un contesto di crescente violenza giovanile: nel 2024 la magistratura minorile',
+    canonicalPath: '/articoli-frontaliere/aggressioni-notte-lugano',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aggressioni e notti violente: giovani ticinesi raccontano",
+      "description": "Il 1° agosto 2025 un 19enne è stato pestato sotto la pensilina di Mario Botta a Lugano; nel 2024 la magistratura minorile ha aperto 912 incarti (+18%); Taha, 24",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/aggressioni-notte-lugano.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Visione notturna della pensilina di Mario Botta a Lugano, luogo dell'aggressione del 1° agosto 2025."
+      },
+      "datePublished": "2026-09-26T05:34:08+00:00",
+      "dateModified": "2026-09-26T05:34:08+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/aggressioni-notte-lugano/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-saronno-lavori-via-volonterio': {
+    title: 'Saronno, lavori in via Volonterio: traffico modificato',
+    description: 'Dal 28 settembre lavori ai marciapiedi di via Volonterio a Saronno: sosta vietata, senso unico verso via Varese e deviazioni fino al 16 ottobre. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, saronno, lavori, volonterio, traffico',
+    ogTitle: 'Saronno, lavori in via Volonterio: cosa cambia',
+    ogDescription: 'Da lunedì 28 settembre il rifacimento dei marciapiedi restringe la carreggiata in via Volonterio. Previsti divieto di sosta con rimozione forzata, senso unico verso via Varese e divieto di transito verso l\'Ospedale per chi arriva dal cavalcavia.',
+    canonicalPath: '/articoli-frontaliere/saronno-lavori-via-volonterio',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Saronno, lavori in via Volonterio: traffico modificato",
+      "description": "Dal 28 settembre lavori ai marciapiedi di via Volonterio a Saronno: sosta vietata, senso unico verso via Varese e deviazioni fino al 16 ottobre. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/saronno-lavori-via-volonterio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lavori stradali e deviazioni del traffico in un'area urbana del Saronnese"
+      },
+      "datePublished": "2026-09-26T06:21:03+00:00",
+      "dateModified": "2026-09-26T06:21:03+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/saronno-lavori-via-volonterio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-telelavoro-frontalieri-limite-italia': {
+    title: 'Smart working frontalieri: limite 25% dalle giornate',
+    description: 'Scopri la soglia fiscale del 25% per lo smart working dei frontalieri: entrata in vigore il 9 febbraio 2026, retroattiva dal 1 gennaio 2024. Esempi di calcolo',
+    keywords: 'frontalieri, ticino, svizzera, italia, smart, working, limite, dalle',
+    ogTitle: 'Smart working frontalieri: limite 25% dalle giornate',
+    ogDescription: 'La soglia fiscale per lo smart working dei frontalieri è fissata al 25% del tempo di lavoro. Scopri come calcolare le giornate consentite, le date di entrata in vigore del protocollo (9 febbraio 2026, retroattivo dal 1 gennaio 2024) e cosa prevede',
+    canonicalPath: '/articoli-frontaliere/telelavoro-frontalieri-limite-italia',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Smart working frontalieri: limite 25% dalle giornate",
+      "description": "Scopri la soglia fiscale del 25% per lo smart working dei frontalieri: entrata in vigore il 9 febbraio 2026, retroattiva dal 1 gennaio 2024. Esempi di calcolo",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/telelavoro-frontalieri-limite-italia.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lavoratore frontaliere che svolge smart working da casa con vista sul lago di Lugano"
+      },
+      "datePublished": "2026-09-26T06:53:27+00:00",
+      "dateModified": "2026-09-26T06:53:27+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/telelavoro-frontalieri-limite-italia/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-castronno-chiusure-notturni-ottobre-2026': {
+    title: 'Chiusure notturne SS 341 e A8 a Castronno ottobre 2026',
+    description: 'Le notti del 5‑6 e 6‑7 ottobre 2026, dalle 21:00 alle 05:00, la SS 341 e il tratto A8 a Castronno saranno chiusi contemporaneamente. Possibile ritardo',
+    keywords: 'frontalieri, ticino, svizzera, italia, chiusure, notturne, castronno, ottobre',
+    ogTitle: 'Chiusure notturne SS 341 e A8 a Castronno ottobre 2026',
+    ogDescription: 'Durante le notti del 5‑6 e 6‑7 ottobre 2026, dalle 21:00 alle 05:00, la Strada Statale 341 e il tratto autostradale dell\'A8 a Castronno resteranno chiusi contemporaneamente per consentire interventi programmati sulla rete stradale. L\'avvio effettivo',
+    canonicalPath: '/articoli-frontaliere/castronno-chiusure-notturni-ottobre-2026',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Chiusure notturne SS 341 e A8 a Castronno ottobre 2026",
+      "description": "Le notti del 5‑6 e 6‑7 ottobre 2026, dalle 21:00 alle 05:00, la SS 341 e il tratto A8 a Castronno saranno chiusi contemporaneamente. Possibile ritardo",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/castronno-chiusure-notturni-ottobre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Chiusura notturna della SS 341 e dell'A8 a Castronno con segnaletica di deviazione e luci dei lavori"
+      },
+      "datePublished": "2026-09-26T07:38:57+00:00",
+      "dateModified": "2026-09-26T07:38:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/castronno-chiusure-notturni-ottobre-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-eco-barriere-statale-707': {
+    title: 'Barriere fonoassorbenti: rumore sulla bretella di Varese',
+    description: 'Un lettore segnala un eco o una vibrazione a ogni auto sulla strada statale 707, udibile in via Goldoni, viale Borri e largo Flaiano, e chiede risposte ad ANAS.',
+    keywords: 'frontalieri, ticino, svizzera, italia, barriere, fonoassorbenti, rumore, sulla',
+    ogTitle: 'Barriere fonoassorbenti: rumore sulla bretella di Varese',
+    ogDescription: 'Le barriere installate da ANAS sulla strada statale 707 dovevano ridurre il rumore. Un lettore denuncia invece un suono fastidioso a ogni passaggio delle auto, udibile in tre luoghi di Varese, e chiede quando il problema sarà risolto.',
+    canonicalPath: '/articoli-frontaliere/eco-barriere-statale-707',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Barriere fonoassorbenti: rumore sulla bretella di Varese",
+      "description": "Un lettore segnala un eco o una vibrazione a ogni auto sulla strada statale 707, udibile in via Goldoni, viale Borri e largo Flaiano, e chiede risposte ad ANAS.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/eco-barriere-statale-707.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Barriere fonoassorbenti lungo una strada, immagine illustrativa per la bretella di Varese"
+      },
+      "datePublished": "2026-09-26T08:22:22+00:00",
+      "dateModified": "2026-09-26T08:22:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/eco-barriere-statale-707/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-iwt-pharma-casale-litta-ampliamento': {
+    title: 'IWT Pharma inaugura nuovo building a Casale Litta',
+    description: 'IWT Pharma inaugura a Casale Litta un nuovo building di circa 9.000 mq aggiuntivi, con investimento di 15 milioni di euro, puntando a raddoppiare capacità',
+    keywords: 'frontalieri, ticino, svizzera, italia, pharma, inaugura, nuovo, building',
+    ogTitle: 'IWT Pharma inaugura nuovo building a Casale Litta',
+    ogDescription: 'Il nuovo building di IWT Pharma a Casale Litta aggiunge circa 9.000 metri quadrati agli esistenti 12.000, per un totale oltre 21.000 mq. L\'investimento è di circa 15 milioni di euro e prevede pannelli fotovoltaici, colonnine di ricarica elettrica',
+    canonicalPath: '/articoli-frontaliere/iwt-pharma-casale-litta-ampliamento',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "IWT Pharma inaugura nuovo building a Casale Litta",
+      "description": "IWT Pharma inaugura a Casale Litta un nuovo building di circa 9.000 mq aggiuntivi, con investimento di 15 milioni di euro, puntando a raddoppiare capacità",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/iwt-pharma-casale-litta-ampliamento.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio industriale moderno con pannelli fotovoltaici e colonnine di ricarica elettrica vicino a un fiume circondato da verde"
+      },
+      "datePublished": "2026-09-26T09:04:11+00:00",
+      "dateModified": "2026-09-26T09:04:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/iwt-pharma-casale-litta-ampliamento/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-bollettino-frontaliere-2026-09-26': {
+    title: 'Bollettino del frontaliere – 26 settembre 2026: 769 nuovi annunci di lavoro ieri',
+    description: 'Bollettino frontalieri del 26 settembre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
+    keywords: 'bollettino frontaliere, dogana, attesa dogana, code valichi ticino, prezzi benzina confine, cambio franco euro, lavoro svizzera, frontalieri ticino',
+    ogTitle: 'Bollettino del frontaliere – 26 settembre 2026: 769 nuovi annunci di lavoro ieri',
+    ogDescription: 'I numeri del 26 settembre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    canonicalPath: '/articoli-frontaliere/bollettino-frontaliere-2026-09-26',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bollettino del frontaliere – 26 settembre 2026: 769 nuovi annunci di lavoro ieri",
+      "description": "Bollettino frontalieri del 26 settembre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bollettino-frontaliere-2026-09-26.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "I numeri del giorno per i frontalieri – 26 settembre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro"
+      },
+      "datePublished": "2026-09-26T09:46:31+00:00",
+      "dateModified": "2026-09-26T09:46:31+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/bollettino-frontaliere-2026-09-26/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-varese-biglietto-a-bordo-doppio': {
+    title: 'Varese, biglietto a bordo costa il doppio: la testimonianza',
+    description: 'Una studentessa dell\'Università dell\'Insubria ha pagato 3,20 euro per un biglietto autobus a bordo, il doppio del prezzo normale, dopo il guasto del pagamento',
+    keywords: 'frontalieri, ticino, svizzera, italia, varese, biglietto, bordo, costa',
+    ogTitle: 'Varese, biglietto a bordo costa il doppio: la testimonianza',
+    ogDescription: 'Il caso della studentessa universitaria di Varese che ha dovuto pagare 3,20 euro per un biglietto autobus acquistato a bordo, il doppio del costo abituale, a causa del malfunzionamento del lettore di carte. L\'articolo riporta le sue dichiarazioni',
+    canonicalPath: '/articoli-frontaliere/varese-biglietto-a-bordo-doppio',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Varese, biglietto a bordo costa il doppio: la testimonianza",
+      "description": "Una studentessa dell'Università dell'Insubria ha pagato 3,20 euro per un biglietto autobus a bordo, il doppio del prezzo normale, dopo il guasto del pagamento",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/varese-biglietto-a-bordo-doppio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Autobus urbano alla fermata in un contesto ticinese, passeggeri in attesa"
+      },
+      "datePublished": "2026-09-26T09:58:17+00:00",
+      "dateModified": "2026-09-26T09:58:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/varese-biglietto-a-bordo-doppio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-cotonificio-liuc-industrial-quest': {
+    title: 'Cotonificio LIUC protagonista di Industrial Quest 2026',
+    description: 'La prima edizione di Industrial Quest 2026 ha visto il Cotonificio Cantoni LIUC di Castellanza rappresentare l’Italia con 5 squadre, 40 punti per Zamponari e 35',
+    keywords: 'frontalieri, ticino, svizzera, italia, cotonificio, liuc, protagonista, industrial',
+    ogTitle: 'Cotonificio LIUC protagonista di Industrial Quest 2026',
+    ogDescription: 'Il 12‑13 settembre 2026 la LIUC – Università Cattaneo ha portato l’Italia alla prima edizione europea di Industrial Quest, ospitando il percorso dedicato al Cotonificio Cantoni nel campus di Castellanza. Con cinque squadre partecipanti, Zamponari ha',
+    canonicalPath: '/articoli-frontaliere/cotonificio-liuc-industrial-quest',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cotonificio LIUC protagonista di Industrial Quest 2026",
+      "description": "La prima edizione di Industrial Quest 2026 ha visto il Cotonificio Cantoni LIUC di Castellanza rappresentare l’Italia con 5 squadre, 40 punti per Zamponari e 35",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/cotonificio-liuc-industrial-quest.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista del lago di Lugano con le montagne sullo sfondo, luce del mattino"
+      },
+      "datePublished": "2026-09-26T11:03:12+00:00",
+      "dateModified": "2026-09-26T11:03:12+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/cotonificio-liuc-industrial-quest/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-incendio-capannone-turate': {
+    title: 'Incendio a Turate, paura per gli animali nel capannone',
+    description: 'Incendio in un\'azienda agricola di Turate: fumo visibile a chilometri, traffico rallentato tra Turate e Cislago e animali segnalati nel capannone. Vigili',
+    keywords: 'frontalieri, ticino, svizzera, italia, incendio, turate, paura, animali',
+    ogTitle: 'Incendio a Turate, paura per gli animali',
+    ogDescription: 'Nel pomeriggio di mercoledì 23 settembre un vasto incendio è divampato in un\'azienda agricola di via Como, a Turate. La colonna di fumo era visibile dal basso Varesotto e dalla Statale 336; traffico rallentato tra Turate e Cislago.',
+    canonicalPath: '/articoli-frontaliere/incendio-capannone-turate',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Incendio a Turate, paura per gli animali nel capannone",
+      "description": "Incendio in un'azienda agricola di Turate: fumo visibile a chilometri, traffico rallentato tra Turate e Cislago e animali segnalati nel capannone. Vigili",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/incendio-capannone-turate.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Fumo denso sopra un'azienda agricola durante l'incendio a Turate"
+      },
+      "datePublished": "2026-09-26T11:47:41+00:00",
+      "dateModified": "2026-09-26T11:47:41+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/incendio-capannone-turate/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-arresto-mente-bennet-tavernola': {
+    title: 'Rapina al Bennet: arrestata la presunta mente in Ticino',
+    description: 'Arrestati un 32enne del Bellinzonese e un 25enne di Monza per la rapina alla gioielleria Stroili del Bennet di Tavernola: bottino stimato in circa 90\'000 euro.',
+    keywords: 'frontalieri, ticino, svizzera, italia, rapina, bennet, arrestata, presunta',
+    ogTitle: 'Rapina al Bennet: arrestata la presunta mente',
+    ogDescription: 'Un 32enne del Bellinzonese e un 25enne della provincia di Monza sono stati arrestati per la rapina alla gioielleria Stroili del Bennet di Tavernola. La Squadra Mobile di Como aveva già arrestato gli altri tre componenti del gruppo.',
+    canonicalPath: '/articoli-frontaliere/arresto-mente-bennet-tavernola',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Rapina al Bennet: arrestata la presunta mente in Ticino",
+      "description": "Arrestati un 32enne del Bellinzonese e un 25enne di Monza per la rapina alla gioielleria Stroili del Bennet di Tavernola: bottino stimato in circa 90'000 euro.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/arresto-mente-bennet-tavernola.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Arrestata la presunta mente della rapina al Bennet di Tavernola, residente nel Bellinzonese"
+      },
+      "datePublished": "2026-09-26T12:34:13+00:00",
+      "dateModified": "2026-09-26T12:34:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/arresto-mente-bennet-tavernola/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

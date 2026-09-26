@@ -1,54 +1,4 @@
 {
-  "https://www.tio.ch/rubriche/ospite/1945352/essere-digitalizzazione-processi-dovrebbe-puo-quando-improvvisazione-biaggio-elio": {
-    "articleId": "digitalizzazione-processi-competenze",
-    "ts": "2026-08-22T01:15:09.676Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/ticino/attualita/1945325/altre-uova-richiamate-dal-mercato-sospetta-contaminazione-da-salmonella": {
-    "articleId": "richiamo-uova-salmonella-migros",
-    "ts": "2026-08-22T01:28:58.833Z",
-    "keyForm": 2
-  },
-  "https://www.admin.ch/it/newnsb/qf84dpcpawamaonis9irt": {
-    "articleId": "esercito-bilancio-misure-violenza",
-    "ts": "2026-08-22T02:23:53.119Z",
-    "keyForm": 2
-  },
-  "https://www.rsi.ch/s/4005012": {
-    "articleId": "dimissioni-fondazione-beloved",
-    "ts": "2026-08-22T03:29:07.544Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/assemblee-udc-e-verdi%2c-si-discute-dell%27iniziativa-sulla-neutralit%c3%a0/91938138": {
-    "articleId": "udc-verdi-iniziativa-neutralita",
-    "ts": "2026-08-22T07:06:10.572Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/udc-si-prepara-a-lanciare-referendum-contro-accordi-con-l%27ue/91938785": {
-    "articleId": "udc-referendum-accordi-ue",
-    "ts": "2026-08-22T09:51:21.028Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/politica/1945427/mazzone-verdi-rosti-cf-datec": {
-    "articleId": "mazzone-clima-consiglio-federale",
-    "ts": "2026-08-22T11:07:34.249Z",
-    "keyForm": 2
-  },
-  "https://www.rsi.ch/s/4005261": {
-    "articleId": "radiologi-premi-aumenti-2027",
-    "ts": "2026-08-22T14:46:32.522Z",
-    "keyForm": 2
-  },
-  "https://www.admin.ch/it/newnsb/q6jr-zvg4mhp9iqqr2w4_": {
-    "articleId": "keller-sutter-ministri-finanze-germanofoni",
-    "ts": "2026-08-22T16:12:01.627Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/dal-mondo/politica/1945455/irlanda-italia-dublinanti-media-asilo": {
-    "articleId": "irlanda-dublinanti-asilo-italia",
-    "ts": "2026-08-22T17:06:46.363Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/info/economia/le-esportazioni-svizzere-accelerano-a-luglio-e-raggiungono-livelli-record--4000662.html": {
     "articleId": "export-svizzera-luglio-2026",
     "ts": "2026-08-23T07:06:53.914Z",
@@ -1065,8 +1015,8 @@
     "keyForm": 2
   },
   "https://www.seco.admin.ch/it": {
-    "articleId": "dazi-usa-seco-commercio",
-    "ts": "2026-09-13T07:38:13.012Z",
+    "articleId": "seco-commercio-misure-2026",
+    "ts": "2026-09-26T05:54:33.489Z",
     "keyForm": 2
   },
   "https://www.admin.ch/it/newnsb/nsut8um5sbxj": {
@@ -1745,8 +1695,8 @@
     "keyForm": 2
   },
   "https://www.admin.ch/it": {
-    "articleId": "consiglio-federale-decisioni-2026",
-    "ts": "2026-09-14T01:45:57.321Z",
+    "articleId": "voto-settembre-integrazione-2026",
+    "ts": "2026-09-26T06:34:34.218Z",
     "keyForm": 2
   },
   "https://www.tio.ch/svizzera/economia/1948849/modelli-intelligenza-nestle-gruppo-consumatori": {
@@ -1880,8 +1830,8 @@
     "keyForm": 2
   },
   "https://www.tvsvizzera.it/tvs/svizzera-istruzioni-per-luso": {
-    "articleId": "lotta-denaro-sporco-svizzera",
-    "ts": "2026-09-16T02:34:31.750Z",
+    "articleId": "destra-ticino-elezioni-aprile",
+    "ts": "2026-09-26T02:53:36.284Z",
     "keyForm": 2
   },
   "https://www.tio.ch/svizzera/politica/1949060/federale-essere-amherd-consiglio-prescrizione-consigliera-viola-chiede-acquisto-f-35": {
@@ -2497,6 +2447,56 @@
   "https://www.tio.ch/svizzera/economia/1952663/ubs-voci-morgan-stanley-titolo": {
     "articleId": "voci-morgan-stanley-ubs",
     "ts": "2026-09-26T01:59:30.420Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1952642/prezzi-benzina-economia-carburante-sgravio": {
+    "articleId": "carburante-sgravio-berna",
+    "ts": "2026-09-26T03:41:13.498Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/zugo%3a-%22basta-promozione-economica%22%2c-dice-numero-uno-patriziato/92119901": {
+    "articleId": "keiser-stop-promozione-zugo",
+    "ts": "2026-09-26T05:15:32.168Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/du299gbe1zok": {
+    "articleId": "integrazione-pic4-fondi-2028-2032",
+    "ts": "2026-09-26T07:20:05.619Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/gr%3a-infermiere-licenziate-in-bregaglia-riceveranno-indennit%c3%a0/92120676": {
+    "articleId": "indennita-infermiere-bregaglia",
+    "ts": "2026-09-26T07:56:08.710Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/r-0jeifutzxy": {
+    "articleId": "importazione-granoturco-foraggio-proroga",
+    "ts": "2026-09-26T08:43:53.226Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4107574": {
+    "articleId": "bns-inflazione-pil-previsioni-2026",
+    "ts": "2026-09-26T09:28:08.478Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4105030": {
+    "articleId": "valutazione-universitaria-intelligenza-artificiale",
+    "ts": "2026-09-26T10:40:51.740Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/svizzera/svizzera/1952856/congedo-parentale-l-iniziativa-popolare-raggiunge-il-quorum": {
+    "articleId": "iniziativa-congedo-parentale-quorum",
+    "ts": "2026-09-26T11:23:28.575Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4110607": {
+    "articleId": "mobilitazione-esercito-ponte",
+    "ts": "2026-09-26T12:04:40.554Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/dertour-suisse-%c3%a8-in-ripresa%2c-punta-a-superare-miliardo-di-fatturato/92121786": {
+    "articleId": "dertour-suisse-ripresa-fatturato",
+    "ts": "2026-09-26T12:56:20.531Z",
     "keyForm": 2
   }
 }

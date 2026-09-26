@@ -1359,6 +1359,46 @@ jobs:
         run: |
           set -uo pipefail
           HEAD_NOW=$(git rev-parse HEAD 2>/dev/null || echo "")
+          # La PR può essere mergiata/chiusa mentre Codex è ancora in esecuzione
+          # (race osservata su #911). In quel caso GitHub può cancellare il branch:
+          # la sua assenza non è una head «non verificabile», ma un target ormai
+          # terminale. Una PR ancora OPEN, invece, resta soggetta alla guardia
+          # fail-closed della head remota.
+          read_pr_state() {
+            local pr_json
+            if ! pr_json=$(gh api "repos/$REPO/pulls/$PR_NUMBER" 2>/dev/null); then
+              return 1
+            fi
+            PR_STATE=$(printf '%s' "$pr_json" | jq -er '
+              if type == "object"
+                and (.state | type) == "string"
+                and (.state == "open" or .state == "closed")
+              then .state
+              else error("invalid pull request state")
+              end
+            ' 2>/dev/null) || return 1
+          }
+          release_closed_pr() {
+            CLAIM_STATUS=released
+            export CLAIM_STATUS
+            if [ -n "${GITHUB_ENV:-}" ]; then
+              echo 'CLAIM_STATUS=released' >> "$GITHUB_ENV"
+            fi
+            echo "PR #$PR_NUMBER non più OPEN (state=$PR_STATE) → target terminato; la cancellazione del branch non richiede una head remota da classificare. Job verde."
+            exit 0
+          }
+          if ! read_pr_state; then
+            CLAIM_STATUS=failed-transient
+            export CLAIM_STATUS
+            if [ -n "${GITHUB_ENV:-}" ]; then
+              echo 'CLAIM_STATUS=failed-transient' >> "$GITHUB_ENV"
+            fi
+            echo "::error::Stato della PR #$PR_NUMBER non leggibile o malformato → classificazione BLOCCANTE, job ROSSO."
+            exit 1
+          fi
+          if [ "$PR_STATE" = "closed" ]; then
+            release_closed_pr
+          fi
           # Head remota verificata prima di classificare (#1763). Un fetch
           # fallito lascerebbe origin/$HEAD_REF alla fotografia dello step
           # align; una head che avanza fra fetch e lettura darebbe una
@@ -1401,6 +1441,12 @@ jobs:
             remote_head_attempt=$((remote_head_attempt + 1))
           done
           if [ -z "$REMOTE_SHA" ]; then
+            # La PR può essersi chiusa fra la prima lettura e il fetch. Una
+            # seconda prova API autorizza il terminale solo per state=closed;
+            # un errore o state=open resta REMOTE_HEAD_UNVERIFIED.
+            if read_pr_state && [ "$PR_STATE" = "closed" ]; then
+              release_closed_pr
+            fi
             CLAIM_STATUS=failed-transient
             export CLAIM_STATUS
             if [ -n "${GITHUB_ENV:-}" ]; then

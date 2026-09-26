@@ -303,9 +303,9 @@
       "path": "scripts/ci/claude-codex-fallback.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "aa15ba50bb2256ff",
-        "corpus": "aa15ba50bb2256ff",
-        "alignedAt": "2026-09-19"
+        "site": "9f50ff6b8bdb5b52",
+        "corpus": "9f50ff6b8bdb5b52",
+        "alignedAt": "2026-09-26"
       }
     },
     {
@@ -398,6 +398,27 @@
         "corpus": "9ca33628cddd7ce8",
         "alignedAt": "2026-09-25"
       }
+    },
+    {
+      "path": "scripts/ci/report-validate-dist-failure.mjs",
+      "mode": "adapted",
+      "baseline": {
+        "site": "6b96e6fcbb2942d1",
+        "corpus": "f128bfdc2aa3243e",
+        "alignedAt": "2026-09-26",
+        "forcedAt": "2026-09-26T11:35:00.000Z"
+      },
+      "reason": "Dipendenza non dichiarata di scripts/ci/scan-job-timeouts.mjs, importata dal sito in #7462 (05/09) come './report-validate-dist-failure.mjs' ma assente qui: il corpus-ahead-check del sito la segnala 'import-not-declared'. Portato quasi-VERBATIM per non lasciare rotto un futuro trasporto di scan-job-timeouts.mjs (both-moved), che qui NON viene ancora riconciliato: resta un modulo raggiungibile solo da altri eventuali import diretti finche' quella riconciliazione non arriva. Registrata lontano dalla voce di scan-job-timeouts.mjs per non creare conflitto quando quel trasporto verra' fatto. Diverge dal sito per un bug trovato dalla review Codex su questa stessa PR (#1894): `reportDist` troncava a MAX_PER_GATE_ISSUES la lista dei JOB falliti PRIMA di estrarne i gate, invece di troncare solo i gate/payload dopo la deduplicazione — con piu' di tre job validate-dist falliti (la matrice tipica e' a 4 locale), il quarto job perdeva per sempre il proprio gate. Fix applicata SOLO qui perche' il sito non va toccato da questo ciclo; e' un candidato di backport per il sito, non ancora fatto."
+    },
+    {
+      "path": "scripts/ci/lib/pr-review-admission.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "ba066c9ffa1f69cf",
+        "corpus": "ba066c9ffa1f69cf",
+        "alignedAt": "2026-09-26"
+      },
+      "reason": "Dipendenza non dichiarata di scripts/ci/orphan-pr-custodian.mjs, importata dal sito in #9525 (22/09) come './lib/pr-review-admission.mjs' ma assente qui: il corpus-ahead-check del sito la segnala 'import-not-declared'. Portato VERBATIM (import risolti su ./constants.mjs e ./review-input-revision.mjs, gia' presenti nel corpus) per non lasciare rotto un futuro trasporto di orphan-pr-custodian.mjs (both-moved), che qui NON viene ancora riconciliato. Registrata lontano dalla voce di orphan-pr-custodian.mjs per non creare conflitto quando quel trasporto verra' fatto."
     },
     {
       "path": "scripts/ci/node-test-failure-reporter.mjs",
@@ -562,6 +583,15 @@
         "site": null,
         "corpus": "7d8990ce9bc61b10",
         "alignedAt": "2026-09-12"
+      }
+    },
+    {
+      "path": "scripts/lib/codex-fallback-contract.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "339d945b935b757d",
+        "corpus": "339d945b935b757d",
+        "alignedAt": "2026-09-26"
       }
     },
     {
@@ -856,7 +886,7 @@
     {
       "path": "scripts/ci/followup-drainer.mjs",
       "mode": "adapted",
-      "reason": "Portato lo stadio di decomposizione (sito #6228) con gli adattamenti corpus: parser numerico locale `parse-positive-num.mjs`, classificatore/route del corpus e guard `manifest-pinned-issues.mjs` su age-out, parent-close e verdict-exit. La riconciliazione post-#1284 del 2026-09-10 conferma che il grouping B19 (`ISSUE_GROUP_MAX_SIZE`, `ISSUE_GROUP_LABEL_PATTERN`, `autoTitleGroupingKey()`, `prepareIssueGroup()`) è già presente nel gemello del sito dal 2026-09-09 (#8081) e nel corpus da #1284: il vecchio segnale `corpus-ahead` è stato assorbito nella baseline attestata da #1310. Il file non è più mirror-locked: la sorgente dei pin e il contratto del parser non esistono byte-identici sul sito.",
+      "reason": "Portato lo stadio di decomposizione (sito #6228) con gli adattamenti corpus: parser numerico locale `parse-positive-num.mjs`, classificatore/route del corpus e guard `manifest-pinned-issues.mjs` su age-out, parent-close e verdict-exit. La riconciliazione post-#1284 del 2026-09-10 conferma che il grouping B19 (`ISSUE_GROUP_MAX_SIZE`, `ISSUE_GROUP_LABEL_PATTERN`, `autoTitleGroupingKey()`, `prepareIssueGroup()`) è già presente nel gemello del sito dal 2026-09-09 (#8081) e nel corpus da #1284: il vecchio segnale `corpus-ahead` è stato assorbito nella baseline attestata da #1310. Il file non è più mirror-locked: la sorgente dei pin e il contratto del parser non esistono byte-identici sul sito. Age-out degli allarmi (sito #9833, portato il 2026-09-26): `isOwnerClosedFailureAlarm` importa il `TITLE_RE` del reconciler come sul sito, ma NON porta `OWNER_CLOSED_SCOPED_ALARM_RE` (`CI Failure (build|deploy)`, `Validation Failure (dist|live)`): in questo repo nessuno apre né chiude quelle famiglie, e dichiararle chiuse da un proprietario le renderebbe immortali. `generator/tests/followup-drainer-ageout-alarm-issues.test.mjs` diventa rosso se cominciano a essere coniate qui. La baseline non è stata rigenerata: il resto del delta col sito non è stato riconciliato in questo giro.",
       "baseline": {
         "site": "2224d435396695c7",
         "corpus": "400c0e21db98b8ab",
@@ -1156,8 +1186,8 @@
       "reason": "Niente npm ci, ponte RC del corpus, identita' GITHUB_PAT_NANAKO, e lo scope-check «PR autonoma» sta nell'`if:` di job invece che nel preflight. RIALLINEATO 2026-08-09 senza portare nulla: il sito aveva cambiato una riga sola, `HAS_PAT: ${{ env.APP_TOKEN != '' || env.GITHUB_PAT != '' }}` -> `${{ env.APP_TOKEN_WORKFLOWS == 'true' || env.GITHUB_PAT != '' }}`. Qui la riga 212 e' gia' `HAS_PAT: ${{ env.GITHUB_PAT_NANAKO != '' }}`: la modifica cade dentro la zona adattata al 100%, e questo repo non ha una GitHub App da cui leggere APP_TOKEN_WORKFLOWS. RICONCILIATO 2026-09-06 (#977 item 3) da `both-moved`: dalla baseline del 2026-09-03 il sito si e' mosso due volte — #7600 (il `grep -qP` allineato alla PRIMA forma posizionale di `REDFLAG_IMPORTANT_RE`) e #7651 (il set dei reviewer bot accetta anche l'App bot, nell'`if:` e nel `--jq` del bundle). Entrambe sono gia' qui in forma piu' forte: il grep e' quello di #1106 (pinnato verbatim dal guard `mirror bash` di generator/tests/redflag-important-marker.test.mjs) e il set reviewer e' `startsWith(..., 'frontaliere-automation')` + `REVIEWER_BOT_LOGIN_JQ` da #970, che copre anche il login GraphQL senza `[bot]`. Niente da riportare in giu'. RESIDUO NOTO, non chiuso qui: il commento sopra HAS_PAT (righe 195-204) afferma ancora che «HAS_PAT accetta ORA anche APP_TOKEN», falso su questo repo, e lo step di push (riga 279) si gata su `env.APP_TOKEN != '' || env.GITHUB_PAT != ''` mentre PUSH_TOKEN e' GITHUB_PAT_NANAKO (riga 281) — variabili disallineate. Il gate passa comunque perche' GITHUB_PAT e' mappato in load-rc-env.mjs, quindi l'effetto pratico non e' stato verificato.",
       "baseline": {
         "site": "99dd0bb1b3d86d95",
-        "corpus": "18391f42974c24a3",
-        "alignedAt": "2026-09-06"
+        "corpus": "52a7bedfd74f7a0b",
+        "alignedAt": "2026-09-26"
       }
     },
     {
@@ -2823,7 +2853,7 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti del sito che l'engine legge via SiteShellContract. E' un ESTRATTO PER CHIUSURA di build-plugins/constants.ts (circa 1.200 righe la': solo le 18 dichiarazioni che il contratto raggiunge, 227 righe qui al 2026-09-25), quindi non potra' mai essere byte-identico e adapted e' il mode giusto. Per questa sola entry scalarFingerprint confronta i 22 scalari authoritative: cambiamenti del sorgente fuori dalla chiusura restano stable, ma un digest diverso, mancante, malformato o non dichiarato non puo' mai essere stable. I comportamenti del contratto restano coperti dai fingerprint test esistenti; host/host-drift.test.mjs non esiste e non e' una guardia. Il lato sito della PR #8299 e' ora su main; questa baseline registra l'osservazione verificata dei due lati dopo l'allineamento del marker frontaliere:auth-session, mentre il codice runtime conserva il match sulla chiave Firebase esatta. Il digest c036077d… riflette lo snippet Funding Choices statico che trattiene l'Offerwall del job board italiano fino al click su «Candidati» (FC_JOBBOARD_OFFERWALL_GATE_JS e la chiave ADS_CONSENT_STORAGE_KEY entrano nella chiusura; sito PR #9788); non dipende da segreti o variabili di ambiente del runner.",
+      "reason": "Costanti del sito che l'engine legge via SiteShellContract. E' un ESTRATTO PER CHIUSURA di build-plugins/constants.ts (circa 1.200 righe la': solo le 20 dichiarazioni che il contratto raggiunge, 247 righe qui al 2026-09-26), quindi non potra' mai essere byte-identico e adapted e' il mode giusto. Per questa sola entry scalarFingerprint confronta i 22 scalari authoritative: cambiamenti del sorgente fuori dalla chiusura restano stable, ma un digest diverso, mancante, malformato o non dichiarato non puo' mai essere stable. I comportamenti del contratto restano coperti dai fingerprint test esistenti; host/host-drift.test.mjs non esiste e non e' una guardia. Il lato sito della PR #8299 e' ora su main; questa baseline registra l'osservazione verificata dei due lati dopo l'allineamento del marker frontaliere:auth-session, mentre il codice runtime conserva il match sulla chiave Firebase esatta. Il digest 327730ab… riflette lo snippet Funding Choices statico che trattiene l'Offerwall fino al click su «Candidati» su ogni sezione job board (tutti i cantoni, l'aggregatore Svizzera, prefisso opzionale /it|/en|/de|/fr) e fuori dal job board sopprime solo l'Offerwall; segue anche i cambi di rotta client-side pushState/replaceState/popstate e riacquisisce il callback Offerwall corrente quando una visita SPA fuori dal job board entra in una sezione job board (FC_JOBBOARD_OFFERWALL_GATE_JS, la chiave ADS_CONSENT_STORAGE_KEY e le copie locali JOB_BOARD_SECTION_PREFIX_SOURCE/JOB_BOARD_SECTION_PATHNAME_RX di scripts/lib/jobBoardSections.mjs del sito entrano nella chiusura; sito PR #9939); non dipende da segreti o variabili di ambiente del runner.",
       "baseline": {
         "site": "5bedfc2a3453a9f5",
         "corpus": "db9e22109da26397",
@@ -2834,7 +2864,7 @@
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
         "scalarFields": 22,
-        "sha256": "c036077de5390df05f87da862312dda1fa0bdce94b9ffe6961ee9c8894efe536"
+        "sha256": "327730abf430d481d7d70d737b111921908fdb3af0789bd51901210b2b451d26"
       }
     },
     {
@@ -3050,9 +3080,9 @@
       "mode": "identical",
       "reason": "Impronta SHA-256 dei 22 campi scalari di SiteShellContract, prodotta e verificata da `host/tests/shell-contract-fingerprint.test.mjs`. Il gemello del sito vive in `tests/articles-shell-contract-fingerprint.json` con lo stesso contenuto; i due artefatti restano `identical` e la baseline ne sorveglia il drift. E' il gate runtime che impedisce di spedire l'engine senza la sua meta' `host/`.",
       "baseline": {
-        "site": "fcfdda6c88ee2694",
-        "corpus": "fcfdda6c88ee2694",
-        "alignedAt": "2026-09-25"
+        "site": "ba2611ed02087515",
+        "corpus": "ba2611ed02087515",
+        "alignedAt": "2026-09-26"
       }
     },
     {
@@ -4055,8 +4085,8 @@
       "reason": "Gemello del workflow del sito per il check richiesto ROSSO su una PR autonoma, il sintomo che il 🔴-fixer non copre (quello legge il diff, non la CI). Adattato su quattro punti non copiabili: (1) identita' di push GITHUB_PAT_NANAKO da Remote Config, non un token di GitHub App — questo repo non ha la App del sito; (2) niente npm ci ne' vitest: i gate qui sono dependency-free e il fixer riproduce con node --test; (3) il filtro del log e' TAP (`not ok N`, `✖`), non le righe `FAIL ` di vitest — copiare il filtro del sito darebbe un contesto VUOTO su ogni rosso, che e' peggio di nessun contesto perche' l'agente lo legge e conclude che non c'e' niente; (4) niente proxy di compressione, per la stessa ragione della review in tests.yml: qui l'input dell'agente e' un log. In piu' qui: lo skip su engine-lockstep-auto e il paragrafo del prompt che spiega quali QUATTRO cose porta il check richiesto e quale delle quattro NON e' compito suo (il verdetto della review lo ripara il gemello). Due divergenze in piu' dal sito, entrambe da un finding della review su questa stessa PR: (a) il contesto raccoglie ANCHE le righe `::error::` e, quando nominano il gate di generator-ci, scarica il log fallito di generator-ci.yml sullo stesso sha — il check richiesto qui porta quattro famiglie e solo una parla TAP, quindi il filtro TAP da solo lasciava fuori il rosso vero nelle altre tre; (b) il checkout usa lo SHA verificato dal preflight, non il nome del branch, cosi' l'albero e la diagnosi non possono divergere se arriva un push nel frattempo.",
       "baseline": {
         "site": "84011cb61e180899",
-        "corpus": "3c4389f6fd2b0a62",
-        "alignedAt": "2026-09-03"
+        "corpus": "ab8c8a19dcf83e53",
+        "alignedAt": "2026-09-26"
       }
     },
     {

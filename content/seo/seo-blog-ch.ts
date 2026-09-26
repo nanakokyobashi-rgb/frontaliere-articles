@@ -87380,6 +87380,552 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-destra-ticino-elezioni-aprile': {
+    title: 'Destra unita in Ticino: elezioni cantonali 2027',
+    description: 'In Ticino le due fazioni di destra correranno insieme alle elezioni cantonali di aprile 2027: la ricucitura dello strappo punta a una maggiore stabilità futura.',
+    keywords: 'frontalieri, ticino, svizzera, italia, destra, unita, elezioni, cantonali',
+    ogTitle: 'Destra unita in Ticino: elezioni cantonali 2027',
+    ogDescription: 'Il voto cantonale ticinese previsto per aprile 2027 vedrà correre insieme le due fazioni di destra. La ricucitura dello strappo in corso da mesi mira a dare maggiore stabilità futura alla destra nella Svizzera italiana, secondo la notizia.',
+    canonicalPath: '/articoli-svizzera/destra-ticino-elezioni-aprile/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Destra unita in Ticino: elezioni cantonali 2027",
+      "description": "In Ticino le due fazioni di destra correranno insieme alle elezioni cantonali di aprile 2027: la ricucitura dello strappo punta a una maggiore stabilità futura.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/destra-ticino-elezioni-aprile.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Elezioni cantonali in Ticino previste per aprile 2027"
+      },
+      "datePublished": "2026-09-26T02:53:36+00:00",
+      "dateModified": "2026-09-26T02:53:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/destra-ticino-elezioni-aprile/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-carburante-sgravio-berna': {
+    title: 'Nessuno sgravio sul carburante: Berna conferma il pieno caro',
+    description: 'Il 25 settembre 2026 la SECO ha escluso uno sgravio sul carburante: diesel al massimo storico, benzina oltre 2 franchi/litro. Nessun aiuto previsto',
+    keywords: 'frontalieri, ticino, svizzera, italia, nessuno, sgravio, carburante, berna',
+    ogTitle: 'Nessuno sgravio sul carburante: Berna conferma il pieno caro',
+    ogDescription: 'Berna, tramite la SECO, ha confermato che non ci saranno sussidi sul carburante nonostante il diesel abbia toccato il massimo storico e la benzina superi i 2 franchi al litro. L\'autorità considera i prezzi alti un segnale di scarsità che promuove',
+    canonicalPath: '/articoli-svizzera/carburante-sgravio-berna/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Nessuno sgravio sul carburante: Berna conferma il pieno caro",
+      "description": "Il 25 settembre 2026 la SECO ha escluso uno sgravio sul carburante: diesel al massimo storico, benzina oltre 2 franchi/litro. Nessun aiuto previsto",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/carburante-sgravio-berna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Pompa di carburante su strada svizzera con Alpi sullo sfondo, simbolo dei prezzi alti del diesel e della benzina"
+      },
+      "datePublished": "2026-09-26T03:41:13+00:00",
+      "dateModified": "2026-09-26T03:41:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/carburante-sgravio-berna/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-portali-cv-lucerna': {
+    title: 'Cercare lavoro in Svizzera: guida 2026 a Lucerna',
+    description: 'Cercare lavoro in Svizzera nel 2026: portali, CV, colloqui, permessi e regole su salario, tasse, LAMal e affitti con focus su Lucerna e confronto nazionale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, cercare, lavoro, lucerna, portali',
+    ogTitle: 'Guida 2026: cercare lavoro in Svizzera, focus Lucerna',
+    ogDescription: 'Portali e CV svizzero, colloqui, permessi L e B, contributi AVS/AHV e LPP/BVG, LAMal e affitti: una guida pratica 2026 per orientarsi nel mercato del lavoro svizzero con un focus sul canton Lucerna e confronto nazionale.',
+    canonicalPath: '/articoli-svizzera/portali-cv-lucerna/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cercare lavoro in Svizzera: guida 2026 a Lucerna",
+      "description": "Cercare lavoro in Svizzera nel 2026: portali, CV, colloqui, permessi e regole su salario, tasse, LAMal e affitti con focus su Lucerna e confronto nazionale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/portali-cv-lucerna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Persona in cerca di lavoro esamina un CV svizzero in un quartiere di uffici a Lucerna."
+      },
+      "datePublished": "2026-09-26T04:35:33+00:00",
+      "dateModified": "2026-09-26T04:35:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/portali-cv-lucerna/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-keiser-stop-promozione-zugo': {
+    title: 'Zugo: stop promozione economica, 272 alloggi sotto 1800 franchi',
+    description: 'Urban Keiser, presidente Korporation Zug, chiede stop promozione economica: crescita 50% in 20 anni, affitti insostenibili. 272 alloggi a <1800 CHF, criteri',
+    keywords: 'frontalieri, ticino, svizzera, italia, zugo, stop, promozione, economica',
+    ogTitle: 'Zugo: stop promozione economica, 272 alloggi accessibili sotto 1800 franchi',
+    ogDescription: 'Il presidente della Korporation Zug Urban Keiser lancia l\'allarme: la promozione economica va fermata perché la crescita ha reso gli affitti intollerabili. La corporazione costruisce 272 appartamenti a meno di 1800 franchi per 3,5 locali, ma la lista',
+    canonicalPath: '/articoli-svizzera/keiser-stop-promozione-zugo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Zugo: stop promozione economica, 272 alloggi sotto 1800 franchi",
+      "description": "Urban Keiser, presidente Korporation Zug, chiede stop promozione economica: crescita 50% in 20 anni, affitti insostenibili. 272 alloggi a <1800 CHF, criteri",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/keiser-stop-promozione-zugo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta aerea di Zugo con lago, montagne e cantieri edili"
+      },
+      "datePublished": "2026-09-26T05:15:31+00:00",
+      "dateModified": "2026-09-26T05:15:31+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/keiser-stop-promozione-zugo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-seco-commercio-misure-2026': {
+    title: 'SECO: dazi USA fino al 12,5% e dimissioni | Frontaliere Ticino',
+    description: 'La SECO informa sui dazi USA fino al 12,5% per le importazioni svizzere, sulle dimissioni di Helene Budliger Artieda e sui negoziati commerciali del 2026.',
+    keywords: 'frontalieri, ticino, svizzera, italia, seco, dazi, fino, dimissioni',
+    ogTitle: 'SECO: dazi USA e dimissioni di Helene Budliger',
+    ogDescription: 'Nuovi dazi USA variabili, fino al 12,5%, sulle importazioni dalla Svizzera. La SECO comunica le dimissioni di Helene Budliger Artieda e la conclusione, il 20 agosto 2026, dei negoziati sull\'accordo di libero scambio.',
+    canonicalPath: '/articoli-svizzera/seco-commercio-misure-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "SECO: dazi USA fino al 12,5% e dimissioni",
+      "description": "La SECO informa sui dazi USA fino al 12,5% per le importazioni svizzere, sulle dimissioni di Helene Budliger Artieda e sui negoziati commerciali del 2026.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/seco-commercio-misure-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio amministrativo svizzero e documenti sul commercio internazionale"
+      },
+      "datePublished": "2026-09-26T05:54:33+00:00",
+      "dateModified": "2026-09-26T05:54:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/seco-commercio-misure-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-voto-settembre-integrazione-2026': {
+    title: 'Consiglio federale: voto e decisioni 2026 | Frontaliere Ticino',
+    description: 'Votazione del 27 settembre 2026, fondi per l\'integrazione, pigioni, cibersicurezza e pacchetto Svizzera-UE: i dossier del Consiglio federale. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, consiglio, federale, voto, decisioni',
+    ogTitle: 'Le decisioni del Consiglio federale per il 2026',
+    ogDescription: 'Il 27 settembre 2026 si vota su neutralità e alimentazione. Intanto il Consiglio federale chiede 334,5 milioni per l\'integrazione, propone un controprogetto sulle pigioni, prepara una legge sulla cibersicurezza e segue il pacchetto Svizzera-UE.',
+    canonicalPath: '/articoli-svizzera/voto-settembre-integrazione-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Consiglio federale: voto e decisioni 2026",
+      "description": "Votazione del 27 settembre 2026, fondi per l'integrazione, pigioni, cibersicurezza e pacchetto Svizzera-UE: i dossier del Consiglio federale. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/voto-settembre-integrazione-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documenti sulle decisioni federali svizzere e una scheda per la votazione del 27 settembre 2026"
+      },
+      "datePublished": "2026-09-26T06:34:33+00:00",
+      "dateModified": "2026-09-26T06:34:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/voto-settembre-integrazione-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-integrazione-pic4-fondi-2028-2032': {
+    title: 'Consiglio federale: 334,5 milioni per integrazione 2028-2032',
+    description: 'Nuovo credito d\'impegno 334,5 mln per PIC 4 e programmi nazionali 2028-2032. Priorità: lingua, formazione, lavoro e integrazione donne. Occupazione immigrati',
+    keywords: 'frontalieri, ticino, svizzera, italia, consiglio, federale, milioni, integrazione',
+    ogTitle: 'Consiglio federale rafforza integrazione: 334,5 mln per 2028-2032',
+    ogDescription: 'Il Consiglio federale stanzia 334,5 milioni per i programmi d\'integrazione 2028-2032. Più fondi a Cantoni per lingua, formazione e lavoro, con focus su donne e percorsi formativi. Occupazione immigrati al 77% in area OCSE.',
+    canonicalPath: '/articoli-svizzera/integrazione-pic4-fondi-2028-2032/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Consiglio federale: 334,5 milioni per integrazione 2028-2032",
+      "description": "Nuovo credito d'impegno 334,5 mln per PIC 4 e programmi nazionali 2028-2032. Priorità: lingua, formazione, lavoro e integrazione donne. Occupazione immigrati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/integrazione-pic4-fondi-2028-2032.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna con bandiere svizzere"
+      },
+      "datePublished": "2026-09-26T07:20:05+00:00",
+      "dateModified": "2026-09-26T07:20:05+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/integrazione-pic4-fondi-2028-2032/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-indennita-infermiere-bregaglia': {
+    title: 'Bregaglia, indennità per quattro infermiere licenziate',
+    description: 'Il CSB riconosce indennità a quattro infermiere licenziate nel febbraio 2025 dopo un accordo davanti alla Pretura. Il VPOD aveva impugnato i licenziamenti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, bregaglia, indennità, quattro, infermiere',
+    ogTitle: 'Indennità a quattro infermiere: accordo in Bregaglia',
+    ogDescription: 'Il Centro Sanitario Bregaglia ha raggiunto davanti alla Pretura un accordo con quattro infermiere licenziate. Il VPOD aveva contestato le modalità delle decisioni e il mancato coinvolgimento delle rappresentanze del personale.',
+    canonicalPath: '/articoli-svizzera/indennita-infermiere-bregaglia/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bregaglia, indennità per quattro infermiere licenziate",
+      "description": "Il CSB riconosce indennità a quattro infermiere licenziate nel febbraio 2025 dopo un accordo davanti alla Pretura. Il VPOD aveva impugnato i licenziamenti.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/indennita-infermiere-bregaglia.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Centro sanitario in Bregaglia, al centro dell'accordo per quattro infermiere licenziate."
+      },
+      "datePublished": "2026-09-26T07:56:08+00:00",
+      "dateModified": "2026-09-26T07:56:08+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/indennita-infermiere-bregaglia/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-importazione-granoturco-foraggio-proroga': {
+    title: 'Proroga esenzione dazi granoturco foraggio fino aprile 2027',
+    description: 'Il comunicato del DEFR del 25 settembre 2026 proroga l\'esenzione dazi per granoturco da foraggio fino al 30 aprile 2027 e introduce dal 1 ottobre 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, proroga, esenzione, dazi, granoturco',
+    ogTitle: 'Proroga esenzione dazi granoturco foraggio fino aprile 2027',
+    ogDescription: 'Il DEFR ha prorogato fino al 30 aprile 2027 l\'esenzione dai dazi doganali per il granoturco fresco o insilato con tenore di sostanza secca non superiore al 60%, destinato all\'alimentazione animale. Parallelamente, dal 1 ottobre 2026 scatta',
+    canonicalPath: '/articoli-svizzera/importazione-granoturco-foraggio-proroga/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Proroga esenzione dazi granoturco foraggio fino aprile 2027",
+      "description": "Il comunicato del DEFR del 25 settembre 2026 proroga l'esenzione dazi per granoturco da foraggio fino al 30 aprile 2027 e introduce dal 1 ottobre 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/importazione-granoturco-foraggio-proroga.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Mais da foraggio esente da dazio per alimentazione animale in Svizzera"
+      },
+      "datePublished": "2026-09-26T08:43:53+00:00",
+      "dateModified": "2026-09-26T08:43:53+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/importazione-granoturco-foraggio-proroga/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-bns-inflazione-pil-previsioni-2026': {
+    title: 'BNS lascia tasso allo 0%, PIL 2026 all\'1,5-2% | Frontaliere Ticino',
+    description: 'La BNS mantiene il tasso di riferimento allo 0% il 24 settembre 2026. Inflazione 2026 allo 0,7%, PIL rivisto tra 1,5% e 2,0%. Differenze con Fed e BCE.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lascia, tasso, allo, invariato',
+    ogTitle: 'BNS conferma tasso allo 0%: crescita rivista al rialzo, inflazione sotto controllo',
+    ogDescription: 'Il 24 settembre 2026 la Banca nazionale svizzera ha lasciato invariato il tasso di riferimento allo 0%. Le stime sul PIL 2026 salgono all\'1,5-2,0%, inflazione allo 0,7%. La BNS si distingue da Fed e BCE che hanno alzato i tassi. Petrolio, cambi',
+    canonicalPath: '/articoli-svizzera/bns-inflazione-pil-previsioni-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "BNS lascia tasso allo 0%, PIL 2026 all'1,5-2%",
+      "description": "La BNS mantiene il tasso di riferimento allo 0% il 24 settembre 2026. Inflazione 2026 allo 0,7%, PIL rivisto tra 1,5% e 2,0%. Differenze con Fed e BCE.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bns-inflazione-pil-previsioni-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sede della Banca nazionale svizzera a Zurigo con bandiera elvetica"
+      },
+      "datePublished": "2026-09-26T09:28:08+00:00",
+      "dateModified": "2026-09-26T09:28:08+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/bns-inflazione-pil-previsioni-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-valutazione-universitaria-intelligenza-artificiale': {
+    title: 'Università svizzere: l\'IA cambia la valutazione delle tesi',
+    description: 'Università di Zurigo, ZHAW e SUPSI cambiano i metodi di valutazione delle tesi a causa dell\'IA: più orali e focus sul processo di studio. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, università, svizzere, cambia, valutazione',
+    ogTitle: 'Università svizzere: l\'IA cambia la valutazione delle tesi',
+    ogDescription: 'L\'Università di Zurigo, la ZHAW e la SUPSI rivedono i criteri di valutazione: meno peso al prodotto finale e più attenzione al percorso, con l\'introduzione di discussioni orali e trasparenza nell\'uso dell\'IA.',
+    canonicalPath: '/articoli-svizzera/valutazione-universitaria-intelligenza-artificiale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Università svizzere: l'IA cambia la valutazione delle tesi",
+      "description": "Università di Zurigo, ZHAW e SUPSI cambiano i metodi di valutazione delle tesi a causa dell'IA: più orali e focus sul processo di studio. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/valutazione-universitaria-intelligenza-artificiale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Studente universitario svizzero al lavoro con laptop e libri"
+      },
+      "datePublished": "2026-09-26T10:40:51+00:00",
+      "dateModified": "2026-09-26T10:40:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/valutazione-universitaria-intelligenza-artificiale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-iniziativa-congedo-parentale-quorum': {
+    title: 'Congedo parentale: l\'iniziativa raggiunge il quorum',
+    description: 'L\'iniziativa per il congedo parentale retribuito ha raccolto 136\'000 firme. Proposta 18 settimane per madri e padri. Scopri i dettagli della proposta.',
+    keywords: 'frontalieri, ticino, svizzera, italia, congedo, parentale, iniziativa, raggiunge',
+    ogTitle: 'Congedo parentale: l\'iniziativa raggiunge il quorum',
+    ogDescription: 'Sono state raccolte 136\'000 firme per l\'iniziativa «Società ed economia forti grazie al congedo parentale». La proposta prevede 18 settimane retribuite per ciascun genitore.',
+    canonicalPath: '/articoli-svizzera/iniziativa-congedo-parentale-quorum/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Congedo parentale: l'iniziativa raggiunge il quorum",
+      "description": "L'iniziativa per il congedo parentale retribuito ha raccolto 136'000 firme. Proposta 18 settimane per madri e padri. Scopri i dettagli della proposta.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/iniziativa-congedo-parentale-quorum.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo Federale a Berna, sede della Cancelleria federale"
+      },
+      "datePublished": "2026-09-26T11:23:28+00:00",
+      "dateModified": "2026-09-26T11:23:28+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/iniziativa-congedo-parentale-quorum/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-mobilitazione-esercito-ponte': {
+    title: 'L\'esercito svizzero testa la mobilitazione rapida',
+    description: 'MOBILO 26: circa 3\'000 militari, 300 veicoli e 50 blindati hanno percorso 300 km da Bière a Frauenfeld; i pontonieri 26 hanno assemblato un ponte galleggiante.',
+    keywords: 'frontalieri, ticino, svizzera, italia, esercito, svizzero, testa, mobilitazione',
+    ogTitle: 'MOBILO 26: test di mobilitazione rapida',
+    ogDescription: 'MOBILO 26 si è conclusa venerdì dopo uno spostamento di circa 300 chilometri tra Bière e Frauenfeld. L\'esercitazione ha coinvolto circa 3\'000 militari, pontonieri, artiglieria, sistemi di supporto e il drone ADS 15.',
+    canonicalPath: '/articoli-svizzera/mobilitazione-esercito-ponte/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "L'esercito svizzero testa la mobilitazione rapida",
+      "description": "MOBILO 26: circa 3'000 militari, 300 veicoli e 50 blindati hanno percorso 300 km da Bière a Frauenfeld; i pontonieri 26 hanno assemblato un ponte galleggiante.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/mobilitazione-esercito-ponte.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Militari svizzeri assemblano un ponte galleggiante durante MOBILO 26"
+      },
+      "datePublished": "2026-09-26T12:04:40+00:00",
+      "dateModified": "2026-09-26T12:04:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/mobilitazione-esercito-ponte/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-dertour-suisse-ripresa-fatturato': {
+    title: 'Dertour Suisse punta a superare il miliardo di fatturato',
+    description: 'Dertour Suisse mira a oltre 1 miliardo di franchi di fatturato grazie all\'acquisizione di Hotelplan; le prenotazioni estive 2026 mostrano il 14% per mete',
+    keywords: 'frontalieri, ticino, svizzera, italia, dertour, suisse, punta, superare',
+    ogTitle: 'Dertour Suisse punta a superare il miliardo di fatturato',
+    ogDescription: 'Dertour Suisse, principale tour operator svizzero, annuncia l\'obiettivo di superare il miliardo di franchi di fatturato dopo l\'acquisizione di Hotelplan. Le prenotazioni sono tornate sopra i livelli dell\'anno precedente e il 14% delle prenotazioni',
+    canonicalPath: '/articoli-svizzera/dertour-suisse-ripresa-fatturato/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Dertour Suisse punta a superare il miliardo di fatturato",
+      "description": "Dertour Suisse mira a oltre 1 miliardo di franchi di fatturato grazie all'acquisizione di Hotelplan; le prenotazioni estive 2026 mostrano il 14% per mete",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/dertour-suisse-ripresa-fatturato.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lago Lugano con barche a vela e montagne sullo sfondo, simbolo del turismo svizzero."
+      },
+      "datePublished": "2026-09-26T12:56:20+00:00",
+      "dateModified": "2026-09-26T12:56:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/dertour-suisse-ripresa-fatturato/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
