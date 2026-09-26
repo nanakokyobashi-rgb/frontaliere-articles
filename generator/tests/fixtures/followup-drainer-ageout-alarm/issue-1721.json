@@ -1,0 +1,39 @@
+{
+  "_source": "nanakokyobashi-rgb/frontaliere-articles#1721, letta il 2026-09-26 con `gh issue view 1721 --json number,title,labels,createdAt,updatedAt,comments`. Corpi dei commenti ridotti alla prima riga; i marker FIX_OUTCOME sono conservati, i payload dei lease omessi.",
+  "number": 1721,
+  "title": "Workflow Failure: Post-merge follow-up triage",
+  "state": "OPEN",
+  "createdAt": "2026-09-22T23:48:02Z",
+  "updatedAt": "2026-09-26T05:27:53Z",
+  "labels": [
+    {"name":"bug"},
+    {"name":"agent:triaged"},
+    {"name":"fu-prio:high"},
+    {"name":"fu-parked"},
+    {"name":"priority:high"},
+    {"name":"maybe-resolved"}
+  ],
+  "comments": [
+    {"author":{"login":"nanakokyobashi-rgb"},"createdAt":"2026-09-22T23:49:53Z","body":"<!-- CLAUDE_QUOTA_LEASE: (payload omesso nella fixture) -->"},
+    {"author":{"login":"github-actions"},"createdAt":"2026-09-22T23:51:58Z","body":"<!-- CLAUDE_QUOTA_LEASE: (payload omesso nella fixture) -->"},
+    {"author":{"login":"nanakokyobashi-rgb"},"createdAt":"2026-09-23T00:12:14Z","body":"<!-- FIX_OUTCOME: pr-created --> (testo del verdetto omesso nella fixture)"},
+    {"author":{"login":"github-actions"},"createdAt":"2026-09-23T00:13:09Z","body":"<!-- CLAUDE_QUOTA_LEASE: (payload omesso nella fixture) -->"},
+    {"author":{"login":"nanakokyobashi-rgb"},"createdAt":"2026-09-24T11:43:29Z","body":"🔁 **Reopened** — ricorrenza il 2026-09-24T11:43:28.945Z: la stessa condizione si è ripresentata entro 720h da"},
+    {"author":{"login":"nanakokyobashi-rgb"},"createdAt":"2026-09-24T15:28:38Z","body":"<!-- CLAUDE_QUOTA_LEASE: (payload omesso nella fixture) -->"},
+    {"author":{"login":"github-actions"},"createdAt":"2026-09-24T15:31:00Z","body":"<!-- CLAUDE_QUOTA_LEASE: (payload omesso nella fixture) -->"},
+    {"author":{"login":"nanakokyobashi-rgb"},"createdAt":"2026-09-24T15:50:43Z","body":"<!-- FIX_OUTCOME: pr-created --> (testo del verdetto omesso nella fixture)"},
+    {"author":{"login":"github-actions"},"createdAt":"2026-09-24T15:51:25Z","body":"<!-- CLAUDE_QUOTA_LEASE: (payload omesso nella fixture) -->"},
+    {"author":{"login":"nanakokyobashi-rgb"},"createdAt":"2026-09-24T17:06:35Z","body":"🔁 **Reopened** — ricorrenza il 2026-09-24T17:06:33.412Z: la stessa condizione si è ripresentata entro 720h da"},
+    {"author":{"login":"nanakokyobashi-rgb"},"createdAt":"2026-09-25T01:53:09Z","body":"🔁 Recurrence on workflow run."},
+    {"author":{"login":"nanakokyobashi-rgb"},"createdAt":"2026-09-25T05:23:32Z","body":"<!-- CLAUDE_QUOTA_LEASE: (payload omesso nella fixture) -->"},
+    {"author":{"login":"github-actions"},"createdAt":"2026-09-25T05:25:48Z","body":"<!-- CLAUDE_QUOTA_LEASE: (payload omesso nella fixture) -->"},
+    {"author":{"login":"nanakokyobashi-rgb"},"createdAt":"2026-09-25T05:31:50Z","body":"<!-- FIX_OUTCOME: already-fixed --> (testo del verdetto omesso nella fixture)"},
+    {"author":{"login":"github-actions"},"createdAt":"2026-09-25T05:32:23Z","body":"<!-- CLAUDE_QUOTA_LEASE: (payload omesso nella fixture) -->"},
+    {"author":{"login":"nanakokyobashi-rgb"},"createdAt":"2026-09-25T06:27:02Z","body":"🔎 **followup-drainer (zero-Claude)**: verdetto `already-fixed` — il fixer ha verificato che il difetto non c'"},
+    {"author":{"login":"github-actions"},"createdAt":"2026-09-25T06:42:35Z","body":"⏸️ **Ultima run verde, issue tenuta aperta: il guasto ricorre.** L'ultima run di `Post-merge follow-up triage`"},
+    {"author":{"login":"github-actions"},"createdAt":"2026-09-25T12:21:13Z","body":"✅ Auto-resolved — the failing check is green again (Post-merge follow-up triage)."},
+    {"author":{"login":"nanakokyobashi-rgb"},"createdAt":"2026-09-25T13:42:51Z","body":"🔁 **Reopened** — ricorrenza il 2026-09-25T13:42:51.002Z: la stessa condizione si è ripresentata entro 720h da"},
+    {"author":{"login":"github-actions"},"createdAt":"2026-09-25T17:35:22Z","body":"✅ Auto-resolved — the failing check is green again (Post-merge follow-up triage)."},
+    {"author":{"login":"nanakokyobashi-rgb"},"createdAt":"2026-09-26T05:27:53Z","body":"🔁 **Reopened** — ricorrenza il 2026-09-26T05:27:53.179Z: la stessa condizione si è ripresentata entro 720h da"}
+  ]
+}
