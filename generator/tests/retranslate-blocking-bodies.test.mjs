@@ -328,7 +328,7 @@ test('translationSanityIssue rifiuta una nuova traduzione che conserva tre righe
     italianSections: { body1: 'Testo italiano sorgente.' },
     locale: 'fr',
   });
-  assert.equal(reason, 'italian-residue: 4 righe residue');
+  assert.equal(reason, 'italian-residue: 3 righe residue');
 });
 
 test('stratify copre piu codici invece di prendere i primi N dello stesso', () => {

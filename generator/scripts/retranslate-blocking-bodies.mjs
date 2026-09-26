@@ -27,7 +27,7 @@
  * falsi positivi, e un rilevatore abbastanza buono da SEGNALARE un campo non
  * e' abbastanza buono da EDITARLO.
  *
- * Da cui le due regole che governano la scrittura, entrambe verificate dal
+ * Da cui le regole che governano la scrittura, tutte verificate dal
  * test `retranslate-blocking-bodies.test.mjs`:
  *
  *   1. si scrive SOLO se la nuova traduzione passa la guardia con zero
@@ -37,7 +37,7 @@
  *      pagina che la guardia gia' accetta;
  *   3. una pagina con almeno tre righe italiane porta il codice bloccante
  *      `italian-residue`, anche se la guardia factuality non trova `critical`;
- *   4. si scrive SOLO se il testo nuovo supera i due controlli che la guardia
+ *   4. si scrive SOLO se il testo nuovo supera i controlli che la guardia
  *      NON fa (`translationSanityIssue`): non e' drasticamente piu' corto del
  *      body pubblicato — il tier HuggingFace tronca la SORGENTE a 2000
  *      caratteri e il taglio esce con marker bilanciati e zero `critical` — e
@@ -410,7 +410,7 @@ export const LENGTH_FLOOR = { VS_OLD: 0.7, VS_IT: 0.4 };
 export const LANG_CHECK_MIN_CHARS = 50;
 
 /**
- * I due modi in cui una ri-traduzione puo' essere INUTILIZZABILE senza che la
+ * I modi in cui una ri-traduzione puo' essere INUTILIZZABILE senza che la
  * guardia se ne accorga. Nessuno dei due e' nel vocabolario di
  * `runFactualityGates`, che sul ramo non-italiano fa solo aggiudicazione
  * numerica, coerenza dei numeri e falsi amici:
@@ -424,6 +424,9 @@ export const LANG_CHECK_MIN_CHARS = 50;
  *      primi 2000 caratteri dell'italiano, senza un errore.
  *   2. PASSTHROUGH DELL'ITALIANO. Un italiano ricopiato ha per costruzione gli
  *      stessi numeri e nessun falso amico: zero `critical`, si scriverebbe.
+ *   3. RESIDUO PARZIALE. Un blocco italiano puo' essere minoritario rispetto
+ *      alla prosa tradotta: per questo `scanItalianResidue()` guarda le righe
+ *      e non la lingua del body concatenato.
  *
  * Ritorna `null` se il testo e' scrivibile, altrimenti la ragione del rifiuto
  * (che il report conta come tale, invece di lasciarla nel secchio "altro").
@@ -517,7 +520,17 @@ export function blockingPairsFromAudit(audit) {
       dir: SCAN_V2_BODY_DIR,
       codes: ['italian-residue'],
     }));
-  return [...factualityPairs, ...residuePairs];
+  const merged = new Map();
+  for (const pair of [...factualityPairs, ...residuePairs]) {
+    const key = `${pair.dir || ''}\u0000${pair.locale}\u0000${pair.id}`;
+    const current = merged.get(key);
+    if (!current) {
+      merged.set(key, { ...pair, codes: [...new Set(pair.codes)] });
+      continue;
+    }
+    current.codes = [...new Set([...current.codes, ...pair.codes])].sort();
+  }
+  return [...merged.values()];
 }
 
 /** Id articolo da `--slug a,b`. Vuoto se il flag manca o e' una stringa vuota. */
@@ -903,6 +916,7 @@ function report(results, { APPLY, AS_JSON, total, OUT }) {
   const empty = results.filter((r) => r.reason === 'campo-vuoto-dalla-cascata').length;
   const truncated = results.filter((r) => r.reason.startsWith('troncata')).length;
   const wrongLang = results.filter((r) => r.reason.startsWith('lingua-sbagliata')).length;
+  const residue = results.filter((r) => r.oldCodes?.includes('italian-residue')).length;
 
   console.log(`\nmodalità: ${APPLY ? 'APPLY (scrive)' : 'DRY-RUN (non scrive)'} — coppie trattate: ${results.length}/${total}`);
   console.log(`  ri-traduzione pulita : ${clean}${APPLY ? ` (scritte ${written})` : ''}`);
@@ -910,6 +924,7 @@ function report(results, { APPLY, AS_JSON, total, OUT }) {
   console.log(`  campo vuoto (skip)   : ${empty}`);
   console.log(`  troncata (skip)      : ${truncated}`);
   console.log(`  lingua sbagliata     : ${wrongLang}`);
+  console.log(`  italian-residue      : ${residue}`);
   console.log(`  altro                : ${results.length - clean - refailed - empty - truncated - wrongLang}`);
 
   // Per-codice: e' la misura che decide se un codice va escluso dal lotto.
