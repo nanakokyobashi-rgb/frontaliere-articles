@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/assemblee-udc-e-verdi%2c-si-discute-dell%27iniziativa-sulla-neutralit%c3%a0/91938138": {
-    "articleId": "udc-verdi-iniziativa-neutralita",
-    "ts": "2026-08-22T07:06:10.572Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/udc-si-prepara-a-lanciare-referendum-contro-accordi-con-l%27ue/91938785": {
     "articleId": "udc-referendum-accordi-ue",
     "ts": "2026-08-22T09:51:21.028Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/gr%3a-infermiere-licenziate-in-bregaglia-riceveranno-indennit%c3%a0/92120676": {
     "articleId": "indennita-infermiere-bregaglia",
     "ts": "2026-09-26T07:56:08.710Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/r-0jeifutzxy": {
+    "articleId": "importazione-granoturco-foraggio-proroga",
+    "ts": "2026-09-26T08:43:53.226Z",
     "keyForm": 2
   }
 }
