@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/dal-mondo/politica/1945455/irlanda-italia-dublinanti-media-asilo": {
-    "articleId": "irlanda-dublinanti-asilo-italia",
-    "ts": "2026-08-22T17:06:46.363Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/info/economia/le-esportazioni-svizzere-accelerano-a-luglio-e-raggiungono-livelli-record--4000662.html": {
     "articleId": "export-svizzera-luglio-2026",
     "ts": "2026-08-23T07:06:53.914Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4110607": {
     "articleId": "mobilitazione-esercito-ponte",
     "ts": "2026-09-26T12:04:40.554Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/dertour-suisse-%c3%a8-in-ripresa%2c-punta-a-superare-miliardo-di-fatturato/92121786": {
+    "articleId": "dertour-suisse-ripresa-fatturato",
+    "ts": "2026-09-26T12:56:20.531Z",
     "keyForm": 2
   }
 }
