@@ -6731,6 +6731,15 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.cembra-vontobel-sede-baden-baar.title': 'Cembra and Vontobel leave Zurich: taxes and space drive the move',
     'blog.article.cembra-vontobel-sede-baden-baar.excerpt': 'Cembra moves 660 employees to Baden (15% taxes) in autumn 2027; Vontobel brings 1.500 jobs to Baar (12%) by 2030. Zurich at 20%.',
     'blog.article.cembra-vontobel-sede-baden-baar.imageAlt': 'Lugano financial district view with modern offices and lake',
+    'blog.article.carenze-medicinali-svizzera-2026.title': 'Medicine shortages: 700 products at risk in Switzerland',
+    'blog.article.carenze-medicinali-svizzera-2026.excerpt': 'Drugshortage.ch reports 67 medicines in critical shortage involving 42 active ingredients. The National Council supports the counterproposal.',
+    'blog.article.carenze-medicinali-svizzera-2026.imageAlt': 'Swiss hospital pharmacy shelf with medicines and tablet for stock monitoring',
+    'blog.article.kof-consensus-forecast-pil-2026.title': 'KOF: Swiss GDP 2026 at +1,7%, inflation at 0,6%',
+    'blog.article.kof-consensus-forecast-pil-2026.excerpt': 'The KOF\'s 123rd Consensus Forecast reveals 1,7% growth for 2026 and expected inflation of 0,6%.',
+    'blog.article.kof-consensus-forecast-pil-2026.imageAlt': 'View of a modern building in Zurich with economic charts in the background',
+    'blog.article.voci-morgan-stanley-ubs.title': 'Rumors about Morgan Stanley, UBS rises above 3%',
+    'blog.article.voci-morgan-stanley-ubs.excerpt': 'UBS shares are up more than 3% in Zurich and close to 41 francs after rumours about a possible merger with Morgan Stanley.',
+    'blog.article.voci-morgan-stanley-ubs.imageAlt': 'Stock-market screens in Zurich during the rise of UBS shares',
 };
 
 export default blogMetaChEn;

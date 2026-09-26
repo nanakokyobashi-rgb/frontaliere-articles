@@ -12010,6 +12010,12 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.plr-bellinzona-investimento-fortezza.title': 'Fortezza Bellinzona: il Sì del PLR all\'investimento',
     'blog.article.plr-bellinzona-investimento-fortezza.excerpt': 'Bellinzona vota il 27 settembre sulla Fortezza: il PLR sostiene il Messaggio 1019, con oltre 14 milioni di indotto e circa 4,5 milioni a carico della Città.',
     'blog.article.plr-bellinzona-investimento-fortezza.imageAlt': 'Tre Castelli e cinta muraria di Bellinzona, patrimonio mondiale UNESCO',
+    'blog.article.cattura-latitante-provincia-como.title': 'Como, arrestato il latitante della rapina a Campione',
+    'blog.article.cattura-latitante-provincia-como.excerpt': 'Dario De Bernardi, 55 anni, è stato arrestato il 23 settembre: deve scontare oltre 19 anni ed è indicato come esecutore della rapina da 750.000 franchi a Campione.',
+    'blog.article.cattura-latitante-provincia-como.imageAlt': 'Panorama di Mendrisio per una notizia di cronaca sul caso del Casinò di Campione',
+    'blog.article.centri-asilanti-chiasso-pasture.title': 'Centri asilanti Chiasso-Pasture: 40 posti a rischio 2027',
+    'blog.article.centri-asilanti-chiasso-pasture.excerpt': 'Dal 1° gennaio 2027 il mandato federale passa da AOZ a ORS Service; i sindacati VPOD e OCST avvertono fino a 40 licenziamenti a Chiasso e Pasture su 120 dipendenti AOZ Ticino.',
+    'blog.article.centri-asilanti-chiasso-pasture.imageAlt': 'Vista aerea dei centri di accoglienza di Chiasso e Pasture in Ticino, con montagne sullo sfondo',
 };
 
 export default blogMetaIt;

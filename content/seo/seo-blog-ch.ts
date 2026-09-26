@@ -87263,6 +87263,123 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-carenze-medicinali-svizzera-2026': {
+    title: 'Carenze farmaci: 700 prodotti a rischio in Svizzera',
+    description: 'Oltre 700 medicinali in carenza in Svizzera: 67 in stato critico. Analisi di drugshortage.ch e posizione del Consiglio nazionale sulla controproposta federale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, carenze, farmaci, prodotti, rischio',
+    ogTitle: 'Carenze farmaci: 700 prodotti a rischio in Svizzera',
+    ogDescription: 'Oltre 700 medicinali sono in carenza in Svizzera, di cui 67 in stato critico o molto critico. La piattaforma drugshortage.ch amplia il monitoraggio federale. Il Consiglio nazionale sostiene la controproposta diretta del governo federale, respingendo',
+    canonicalPath: '/articoli-svizzera/carenze-medicinali-svizzera-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Carenze farmaci: 700 prodotti a rischio in Svizzera",
+      "description": "Oltre 700 medicinali in carenza in Svizzera: 67 in stato critico. Analisi di drugshortage.ch e posizione del Consiglio nazionale sulla controproposta federale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/carenze-medicinali-svizzera-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scaffale di farmacia ospedaliera svizzera con medicinali e tablet per il monitoraggio scorte"
+      },
+      "datePublished": "2026-09-26T00:42:55+00:00",
+      "dateModified": "2026-09-26T00:42:55+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/carenze-medicinali-svizzera-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-kof-consensus-forecast-pil-2026': {
+    title: 'KOF: PIL svizzera 2026 al +1,7%, inflazione al 0,6%',
+    description: 'La 123esima Consensus Forecast del KOF prevede un PIL svizzero al +1,7% nel 2026 e un\'inflazione dello 0,6%. Dettagli su prezzi e lavoro. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, inflazione, 123esima, consensus, forecast',
+    ogTitle: 'KOF: PIL svizzero 2026 al +1,7%, inflazione al 0,6%',
+    ogDescription: 'Il KOF del Politecnico di Zurigo ha rivisto al rialzo le previsioni per il 2026: PIL al +1,7% e inflazione allo 0,6%. Scopri i dettagli della 123esima Consensus Forecast e l\'impatto su prezzi e mercato del lavoro.',
+    canonicalPath: '/articoli-svizzera/kof-consensus-forecast-pil-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "KOF: PIL svizzera 2026 al +1,7%, inflazione al 0,6%",
+      "description": "La 123esima Consensus Forecast del KOF prevede un PIL svizzero al +1,7% nel 2026 e un'inflazione dello 0,6%. Dettagli su prezzi e lavoro. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/kof-consensus-forecast-pil-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista di un edificio moderno a Zurigo con grafici economici sullo sfondo"
+      },
+      "datePublished": "2026-09-26T01:18:48+00:00",
+      "dateModified": "2026-09-26T01:18:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/kof-consensus-forecast-pil-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-voci-morgan-stanley-ubs': {
+    title: 'Voci su Morgan Stanley, UBS sale oltre il 3% | Frontaliere Ticino',
+    description: 'Le azioni UBS guadagnano oltre il 3% a Zurigo dopo le voci su Morgan Stanley. Gli ambienti borsistici osservano con cautela: il titolo sfiora i 41 franchi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, voci, morgan, stanley, sale',
+    ogTitle: 'Voci Morgan Stanley: UBS sale oltre il 3%',
+    ogDescription: 'Il rialzo del titolo UBS riaccende le indiscrezioni su una possibile unione con Morgan Stanley. Semafor Business cita un interesse già presente, mentre a Zurigo ricordano precedenti voci e mantengono prudenza.',
+    canonicalPath: '/articoli-svizzera/voci-morgan-stanley-ubs/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Voci su Morgan Stanley, UBS sale oltre il 3%",
+      "description": "Le azioni UBS guadagnano oltre il 3% a Zurigo dopo le voci su Morgan Stanley. Gli ambienti borsistici osservano con cautela: il titolo sfiora i 41 franchi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/voci-morgan-stanley-ubs.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Schermi di borsa a Zurigo durante il rialzo del titolo UBS"
+      },
+      "datePublished": "2026-09-26T01:59:30+00:00",
+      "dateModified": "2026-09-26T01:59:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/voci-morgan-stanley-ubs/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -20219,6 +20219,33 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'carenze-medicinali-svizzera-2026',
+    category: 'pratico',
+    date: '2026-09-26T00:42:55.373Z',
+    image: '/images/blog/carenze-medicinali-svizzera-2026.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'kof-consensus-forecast-pil-2026',
+    category: 'novita',
+    date: '2026-09-26T01:18:48.415Z',
+    image: '/images/blog/kof-consensus-forecast-pil-2026.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'voci-morgan-stanley-ubs',
+    category: 'novita',
+    date: '2026-09-26T01:59:30.130Z',
+    image: '/images/blog/voci-morgan-stanley-ubs.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

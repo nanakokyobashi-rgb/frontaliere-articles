@@ -1,19 +1,4 @@
 {
-  "https://www.rsi.ch/s/4004394": {
-    "articleId": "cherosene-sintetico-aviazione",
-    "ts": "2026-08-21T23:59:56.438Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/attualita/1944956/asilo-reati-richiedenti-sem-domande": {
-    "articleId": "asilo-maghreb-reati-80-percento",
-    "ts": "2026-08-22T00:14:33.198Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/attualita/1945240/misure-esercito-discriminazioni-azione-piano": {
-    "articleId": "discriminazioni-esercito-piano",
-    "ts": "2026-08-22T00:26:46.831Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/rubriche/ospite/1945352/essere-digitalizzazione-processi-dovrebbe-puo-quando-improvvisazione-biaggio-elio": {
     "articleId": "digitalizzazione-processi-competenze",
     "ts": "2026-08-22T01:15:09.676Z",
@@ -2497,6 +2482,21 @@
   "https://www.rsi.ch/s/4111351": {
     "articleId": "cembra-vontobel-sede-baden-baar",
     "ts": "2026-09-25T22:08:30.741Z",
+    "keyForm": 2
+  },
+  "https://lenews.ch/2026/09/25/more-than-700-medicines-face-shortages-in-switzerland": {
+    "articleId": "carenze-medicinali-svizzera-2026",
+    "ts": "2026-09-26T00:42:55.689Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4110760": {
+    "articleId": "kof-consensus-forecast-pil-2026",
+    "ts": "2026-09-26T01:18:48.741Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1952663/ubs-voci-morgan-stanley-titolo": {
+    "articleId": "voci-morgan-stanley-ubs",
+    "ts": "2026-09-26T01:59:30.420Z",
     "keyForm": 2
   }
 }

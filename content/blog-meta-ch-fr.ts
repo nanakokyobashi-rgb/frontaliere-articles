@@ -6731,6 +6731,15 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.cembra-vontobel-sede-baden-baar.title': 'Cembra et Vontobel quittent Zurich : fiscalité et locaux',
     'blog.article.cembra-vontobel-sede-baden-baar.excerpt': 'Cembra déplace 660 employés à Baden (15 % d\'impôts) à l\'automne 2027 ; Vontobel apporte 1 500 postes à Baar (12 %) d\'ici 2030. Zurich à 20 %.',
     'blog.article.cembra-vontobel-sede-baden-baar.imageAlt': 'Vue du quartier financier de Lugano avec bureaux modernes et lac',
+    'blog.article.carenze-medicinali-svizzera-2026.title': 'Pénuries de médicaments : 700 produits à risque en Suisse',
+    'blog.article.carenze-medicinali-svizzera-2026.excerpt': 'Drugshortage.ch signale 67 médicaments en pénurie critique concernant 42 principes actifs. Le Conseil national soutient le contre-projet.',
+    'blog.article.carenze-medicinali-svizzera-2026.imageAlt': 'Étagère de pharmacie hospitalière suisse avec médicaments et tablette pour le suivi des stocks',
+    'blog.article.kof-consensus-forecast-pil-2026.title': 'KOF : PIB suisse 2026 à +1,7%, inflation à 0,6%',
+    'blog.article.kof-consensus-forecast-pil-2026.excerpt': 'Le 123e consensus prévisionnel du KOF révèle une croissance de 1,7% pour 2026 et une inflation attendue de 0,6%.',
+    'blog.article.kof-consensus-forecast-pil-2026.imageAlt': 'Vue d\'un bâtiment moderne à Zurich avec des graphiques économiques en arrière-plan',
+    'blog.article.voci-morgan-stanley-ubs.title': 'Rumeurs sur Morgan Stanley, UBS gagne plus de 3 %',
+    'blog.article.voci-morgan-stanley-ubs.excerpt': 'Les actions UBS progressent de plus de 3% à Zurich et frôlent les 41 francs après des rumeurs d’une possible fusion avec Morgan Stanley.',
+    'blog.article.voci-morgan-stanley-ubs.imageAlt': 'Écrans boursiers à Zurich durant la hausse de l\'action UBS',
 };
 
 export default blogMetaChFr;

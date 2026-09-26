@@ -6731,6 +6731,15 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.cembra-vontobel-sede-baden-baar.title': 'Cembra & Vontobel Zürich: Steuern & Räume treiben Umzug',
     'blog.article.cembra-vontobel-sede-baden-baar.excerpt': 'Cembra verlegt im Herbst 2027 660 Mitarbeitende nach Baden (15% Steuern); Vontobel verlegt bis 2030 1.500 Arbeitsplätze nach Baar (12%). Zürich bei 20%.',
     'blog.article.cembra-vontobel-sede-baden-baar.imageAlt': 'Lugano Finanzdistrikt mit modernen Büros und See',
+    'blog.article.carenze-medicinali-svizzera-2026.title': 'Arzneimittelengpässe: 700 Produkte in der Schweiz gefährdet',
+    'blog.article.carenze-medicinali-svizzera-2026.excerpt': 'Drugshortage.ch meldet 67 Arzneimittel mit kritischem Mangel bei 42 Wirkstoffen. Der Nationalrat unterstützt den Gegenvorschlag.',
+    'blog.article.carenze-medicinali-svizzera-2026.imageAlt': 'Schweizer Krankenhaus-Apothekeregal mit Medikamenten und Tablet zur Bestandsüberwachung',
+    'blog.article.kof-consensus-forecast-pil-2026.title': 'KOF: Schweizer BIP 2026 bei +1,7%, Inflation bei 0,6%',
+    'blog.article.kof-consensus-forecast-pil-2026.excerpt': 'Der 123. KOF Consensus Forecast zeigt für 2026 ein Wachstum von 1,7% und eine erwartete Inflation von 0,6%.',
+    'blog.article.kof-consensus-forecast-pil-2026.imageAlt': 'Ansicht eines modernen Gebäudes in Zürich mit Wirtschaftskurven im Hintergrund',
+    'blog.article.voci-morgan-stanley-ubs.title': 'Gerüchte über Morgan Stanley, UBS steigt um mehr als 3%',
+    'blog.article.voci-morgan-stanley-ubs.excerpt': 'Die UBS-Aktien steigen in Zürich um mehr als 3 % und nähern sich 41 Franken nach Gerüchten über eine mögliche Fusion mit Morgan Stanley.',
+    'blog.article.voci-morgan-stanley-ubs.imageAlt': 'Börsenbildschirme in Zürich während des Anstiegs der UBS-Aktie',
 };
 
 export default blogMetaChDe;
