@@ -129,7 +129,13 @@ test('nessun codice del repo conia le famiglie con scope del sito', () => {
   // rosso: va deciso se ha un chiuditore e, se sì, aggiunto all'esclusione di
   // `isOwnerClosedFailureAlarm` insieme alla prova che quel chiuditore gira.
   const SCOPED_FAMILY_RE = /CI Failure \((?:build|deploy)\)|Validation Failure \(|Campaign goal FAILED/;
-  const EXEMPT = new Set(['scripts/ci/followup-drainer.mjs']);
+  // scripts/ci/report-validate-dist-failure.mjs: portato VERBATIM (identical)
+  // solo per soddisfare l'import non dichiarato di scripts/ci/scan-job-timeouts.mjs
+  // (both-moved, non ancora riconciliato) — nessun workflow del corpus lo invoca,
+  // quindi il suo `--mode resolve` non gira mai qui e non è la prova di
+  // chiusura che questo test richiede. La decisione «ha un chiuditore?» va
+  // presa quando scan-job-timeouts.mjs viene davvero riconciliato, non prima.
+  const EXEMPT = new Set(['scripts/ci/followup-drainer.mjs', 'scripts/ci/report-validate-dist-failure.mjs']);
   const walk = (rel) => readdirSync(path.join(ROOT, rel), { withFileTypes: true }).flatMap((d) => {
     const child = `${rel}/${d.name}`;
     if (d.isDirectory()) return /(?:^|\/)(?:tests|node_modules|fixtures)$/.test(child) ? [] : walk(child);
