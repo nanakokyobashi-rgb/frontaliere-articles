@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/ticino/attualita/1945600/meno-stranieri-facoltosi-scelgono-la-tassazione-fissa-ma-in-ticino-gli-incassi-volano": {
-    "articleId": "tassazione-forfettaria-ticino-incassi",
-    "ts": "2026-08-24T09:22:08.169Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4006818": {
     "articleId": "festival-scientifica-zurigo-ricerca",
     "ts": "2026-08-24T09:29:29.145Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/kviax2aqippd": {
     "articleId": "sanzioni-finanziarie-onu-2026",
     "ts": "2026-09-26T19:39:44.093Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1952916/svizzera-lotta-esseri-trafficanti-jans-monaco": {
+    "articleId": "jans-monaco-lotta-trafficanti",
+    "ts": "2026-09-26T20:28:16.680Z",
     "keyForm": 2
   }
 }
