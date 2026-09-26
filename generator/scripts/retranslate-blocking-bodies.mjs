@@ -139,13 +139,20 @@ const ITALIAN_RESIDUE_STRONG_WORDS = new Set([
   'cantone', 'cantonale', 'crescita', 'cosa', 'convocazione', 'contributo',
   'contributi', 'dall', 'dalla', 'delle', 'dello', 'dichiarare', 'dichiarazione',
   'domande', 'dove', 'entro', 'esigenze', 'famiglie', 'fatti', 'fonti', 'frontaliere',
-  'frontaliere', 'importo', 'imposte', 'italiana', 'italiane', 'italiano',
-  'italiani', 'lavoratori', 'lavora', 'legge', 'lettera', 'maggior', 'mensa',
-  'mensile', 'migliorare', 'obiettivi', 'oltre', 'passeggeri', 'perché',
-  'perche', 'problema', 'problemi', 'previsto', 'prevista', 'pubblicata',
-  'quando', 'richiesta', 'richiedono', 'richiesto', 'reddito', 'requisiti',
-  'scadenza', 'scambio', 'secondo', 'sono', 'territorio', 'traffico', 'unione',
-  'valore', 'valori', 'viene', 'vengono', 'verso',
+  'importo', 'imposte', 'italiana', 'italiane', 'italiano', 'italiani',
+  'lavoratori', 'lavora', 'legge', 'lettera', 'maggior', 'mensa', 'mensile',
+  'misura', 'nuova', 'obiettivi', 'oltre', 'passeggeri', 'perché', 'perche',
+  'problema', 'problemi', 'previsto', 'prevista', 'pubblicata', 'quando',
+  'richiesta', 'richiedono', 'richiesto', 'reddito', 'requisiti', 'scadenza',
+  'scambio', 'secondo', 'sono', 'territorio', 'traffico', 'unione', 'valore',
+  'valori', 'viene', 'vengono', 'verso',
+]);
+const ITALIAN_RESIDUE_FUNCTION_WORDS = new Set([
+  'a', 'ad', 'al', 'alla', 'alle', 'allo', 'ai', 'agli', 'anche', 'che', 'chi',
+  'come', 'con', 'da', 'dal', 'dalla', 'dalle', 'dei', 'degli', 'del', 'della',
+  'delle', 'di', 'dove', 'e', 'è', 'gli', 'ha', 'i', 'il', 'in', 'la', 'le',
+  'lo', 'ma', 'nel', 'nella', 'nelle', 'non', 'per', 'più', 'quando', 'questa',
+  'queste', 'questo', 'sono', 'sua', 'sul', 'sulla', 'tra', 'un', 'una', 'uno',
 ]);
 
 function normalizeItalianResidueLine(line) {
@@ -170,11 +177,18 @@ function italianResidueLineReason(line, locale) {
 
   const words = clean.match(ITALIAN_RESIDUE_WORD_RE) || [];
   if (words.length < 3) return null;
-  const strongHits = words.reduce(
-    (count, word) => count + (ITALIAN_RESIDUE_STRONG_WORDS.has(residueWordKey(word)) ? 1 : 0),
-    0,
-  );
-  return strongHits >= 2 ? 'lexical' : null;
+  const keys = words.map(residueWordKey);
+  const strongHits = keys.filter((word) => ITALIAN_RESIDUE_STRONG_WORDS.has(word)).length;
+  if (strongHits >= 2) return 'lexical';
+
+  // Second signal for ordinary Italian prose outside the article-specific
+  // vocabulary above. French also has many final vowels, so the morphology
+  // branch requires three Italian function words and a clear vowel-ending
+  // majority; it is never enough on its own for a one-word line.
+  const functionHits = keys.filter((word) => ITALIAN_RESIDUE_FUNCTION_WORDS.has(word)).length;
+  const vowelEndingWords = keys.filter((word) => word.length >= 3 && /[aeiou]$/u.test(word)).length;
+  const vowelRatio = vowelEndingWords / words.length;
+  return functionHits >= 3 && vowelRatio >= 0.55 ? 'morphology' : null;
 }
 
 /**
