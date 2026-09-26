@@ -718,6 +718,20 @@ function assertFailClosed(name, result) {
     `${name}: backoff crescente fra i tentativi`);
 }
 
+function assertRecheckFailClosed(name, result) {
+  assert.equal(result.status, 1,
+    `${name}: head cambiata dopo lo snapshot stabile deve dare job ROSSO:\nstdout=${result.stdout}\nstderr=${result.stderr}`);
+  assert.match(result.stdout, /::error::REMOTE_HEAD_UNVERIFIED/, `${name}: errore esplicito atteso`);
+  assert.doesNotMatch(result.stdout, /run SUPERSEDED|round SUCCESS/, `${name}: nessun verdetto su uno snapshot stantio`);
+  const claimStates = result.githubEnv.split('\n')
+    .filter((line) => line.startsWith('CLAIM_STATUS='))
+    .map((line) => line.slice('CLAIM_STATUS='.length));
+  assert.equal(claimStates.at(-1), 'failed-transient', `${name}: il claim deve restare retryable`);
+  assert.doesNotMatch(result.ghLog, /pr comment|DELETE|_REFUND/,
+    `${name}: nessun commento o rimborso prima di una head verificata`);
+  assert.equal(result.fetchCount, 1, `${name}: la race dopo uno snapshot non avvia un nuovo ciclo di fetch`);
+}
+
 for (const [name, source] of [['redcheck', WORKFLOW], ['redflag', REDFLAG_WORKFLOW]]) {
   test(`${name}: fetch fallito non classifica sulla ref remote-tracking stantia`, () => {
     // La ref stantia (external-sha) direbbe SUPERSEDED: il fetch fallito deve
@@ -738,6 +752,15 @@ for (const [name, source] of [['redcheck', WORKFLOW], ['redflag', REDFLAG_WORKFL
     }));
   });
 
+  test(`${name}: una head avanzata dopo la coppia concorde blocca classificazione e rimborso`, () => {
+    assertRecheckFailClosed(`${name} prima della classificazione`, supersedeScenario(source, {
+      rereadSequence: 'external-sha advanced-before-classification',
+    }));
+    assertRecheckFailClosed(`${name} prima del rimborso`, supersedeScenario(source, {
+      rereadSequence: 'external-sha external-sha advanced-before-refund',
+    }));
+  });
+
   test(`${name}: ls-remote che stampa una riga valida ma esce non-zero è una lettura fallita`, () => {
     assertFailClosed(name, supersedeScenario(source, { lsRemoteStatuses: '2 2 2' }));
   });
@@ -746,7 +769,12 @@ for (const [name, source] of [['redcheck', WORKFLOW], ['redflag', REDFLAG_WORKFL
     const result = supersedeScenario(source);
     assert.equal(result.status, 0, `stdout=${result.stdout}\nstderr=${result.stderr}`);
     const calls = result.timeoutLog.split('\n').filter(Boolean);
-    assert.deepEqual(calls, ['60 git fetch', '30 git ls-remote'],
+    assert.deepEqual(calls, [
+      '60 git fetch',
+      '30 git ls-remote',
+      '30 git ls-remote',
+      '30 git ls-remote',
+    ],
       `${name}: ogni comando di rete passa da timeout`);
   });
 
@@ -762,7 +790,7 @@ for (const [name, source] of [['redcheck', WORKFLOW], ['redflag', REDFLAG_WORKFL
     // successiva, non su quella intermedia.
     const moved = supersedeScenario(source, {
       fetchedSequence: 'external-1 external-2',
-      rereadSequence: 'external-2 external-2',
+      rereadSequence: 'external-2 external-2 external-2 external-2',
     });
     assert.equal(moved.status, 0, `stdout=${moved.stdout}\nstderr=${moved.stderr}`);
     assert.match(moved.stdout, /remote=external-2 /);
