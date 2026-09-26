@@ -529,7 +529,12 @@ function reportDist({ dryRun }) {
       const failed = (data.jobs || []).filter(
         (j) => j.conclusion === 'failure' && /validate-dist/.test(j.name || ''),
       );
-      for (const job of failed.slice(0, MAX_PER_GATE_ISSUES)) {
+      // NON troncare qui a MAX_PER_GATE_ISSUES: i gate si estraggono per-job
+      // (buildIssuePayloads dedupa per nome gate SOLO dopo), quindi un quarto
+      // job fallito perderebbe per sempre il proprio gate se il log non viene
+      // nemmeno scaricato. Il limite si applica ai payload/gate deduplicati
+      // (allGates, excerptSections), non alla raccolta dei job.
+      for (const job of failed) {
         const log = fetchJobLog(repo, job.id);
         const parsed = log ? parseGateLines(log) : { failedGates: [], summaryLines: [] };
         failedJobs.push({

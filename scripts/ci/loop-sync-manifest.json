@@ -401,13 +401,14 @@
     },
     {
       "path": "scripts/ci/report-validate-dist-failure.mjs",
-      "mode": "identical",
+      "mode": "adapted",
       "baseline": {
         "site": "6b96e6fcbb2942d1",
-        "corpus": "6b96e6fcbb2942d1",
-        "alignedAt": "2026-09-26"
+        "corpus": "f128bfdc2aa3243e",
+        "alignedAt": "2026-09-26",
+        "forcedAt": "2026-09-26T11:35:00.000Z"
       },
-      "reason": "Dipendenza non dichiarata di scripts/ci/scan-job-timeouts.mjs, importata dal sito in #7462 (05/09) come './report-validate-dist-failure.mjs' ma assente qui: il corpus-ahead-check del sito la segnala 'import-not-declared'. Portato VERBATIM per non lasciare rotto un futuro trasporto di scan-job-timeouts.mjs (both-moved), che qui NON viene ancora riconciliato: resta un modulo raggiungibile solo da altri eventuali import diretti finche' quella riconciliazione non arriva. Registrata lontano dalla voce di scan-job-timeouts.mjs per non creare conflitto quando quel trasporto verra' fatto."
+      "reason": "Dipendenza non dichiarata di scripts/ci/scan-job-timeouts.mjs, importata dal sito in #7462 (05/09) come './report-validate-dist-failure.mjs' ma assente qui: il corpus-ahead-check del sito la segnala 'import-not-declared'. Portato quasi-VERBATIM per non lasciare rotto un futuro trasporto di scan-job-timeouts.mjs (both-moved), che qui NON viene ancora riconciliato: resta un modulo raggiungibile solo da altri eventuali import diretti finche' quella riconciliazione non arriva. Registrata lontano dalla voce di scan-job-timeouts.mjs per non creare conflitto quando quel trasporto verra' fatto. Diverge dal sito per un bug trovato dalla review Codex su questa stessa PR (#1894): `reportDist` troncava a MAX_PER_GATE_ISSUES la lista dei JOB falliti PRIMA di estrarne i gate, invece di troncare solo i gate/payload dopo la deduplicazione — con piu' di tre job validate-dist falliti (la matrice tipica e' a 4 locale), il quarto job perdeva per sempre il proprio gate. Fix applicata SOLO qui perche' il sito non va toccato da questo ciclo; e' un candidato di backport per il sito, non ancora fatto."
     },
     {
       "path": "scripts/ci/lib/pr-review-admission.mjs",
