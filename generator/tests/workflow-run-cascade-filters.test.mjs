@@ -33,13 +33,15 @@ test('review-quota-rescuer: niente filtro branches (i fixer sorgente girano su m
   assert.match(src, /\n {2}schedule:\n/);
 });
 
-test('review-quota-rescuer: salta tests su push e le sorgenti skipped, non cron/dispatch', () => {
+test('review-quota-rescuer: salta tests su push e dispatch su main, non cron/dispatch utili', () => {
   const src = read('.github/workflows/review-quota-rescuer.yml');
   const job = src.slice(src.indexOf('\n  rescue:\n'));
   const cond = job.match(/\n {4}if: >-\n((?: {6}.+\n)+)/)[1].replace(/\s+/g, ' ').trim();
   assert.equal(cond,
     "github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion != 'skipped' && "
-    + "!(github.event.workflow_run.name == 'tests' && github.event.workflow_run.event == 'push'))");
+    + "!(github.event.workflow_run.name == 'tests' && (github.event.workflow_run.event == 'push' || "
+    + "(github.event.workflow_run.event == 'workflow_dispatch' && "
+    + "github.event.workflow_run.head_branch == 'main'))))");
 });
 
 test('review-quota-rescuer: concurrency a livello di job, cosi\' un job saltato non sfratta la pending', () => {
