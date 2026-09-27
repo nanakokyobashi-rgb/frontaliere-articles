@@ -5,15 +5,15 @@
  * tornano i valori smentiti dalle fonti ufficiali:
  *  - termine dell'opzione: 3 mesi dall'inizio dell'attivita' in Svizzera
  *    (IAS Ticino, UFSP), non "90 giorni dal varco di frontiera";
- *  - premi LAMal 2026 per adulti residenti in Italia: 279.00-487.20 CHF/mese
- *    (UFSP, panoramica dei premi UE/AELS/UK 2026, senza infortuni), non la
- *    stima "350 CHF in Ticino";
+ *  - i premi LAMal variano per assicuratore, anno e residenza: il body non
+ *    hard-coda una forchetta annuale e rimanda alla panoramica ufficiale
+ *    UFSP/Priminfo, evitando che il refresh 2027 diventi stale;
  *  - la CMI e' il SSN via esenzione, non una polizza privata "da 180 euro"
  *    con massimali; compartecipazione legge 213/2023 3-6%, 30-200 euro/mese;
  *  - l'ufficio competente e' l'IAS, Ufficio dei contributi (non "UAM");
  *  - con la LAMal il frontaliere si cura anche in Italia (UFSP), non solo
  *    urgenze con la TEAM.
- * I premi 2027 non erano pubblicati alla data del refresh: il body lo dichiara.
+ * Il body conserva il contesto 2026 ma rimanda sempre al dato corrente ufficiale.
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -42,12 +42,13 @@ test('i quattro body portano i fatti verificati e le fonti ufficiali', () => {
   for (const locale of LOCALES) {
     const source = read(`content/blog-body/${locale}/${SLUG}.ts`);
     assert.match(source, /\b3 (?:mesi|months|Monate|Monaten|mois)\b/, `${locale}: termine di 3 mesi`);
-    assert.match(source, /279\.00/, `${locale}: premio minimo Italia 2026`);
-    assert.match(source, /487\.20/, `${locale}: premio massimo Italia 2026`);
+    assert.match(source, /(?:Premio LAMal|LAMal premium|LAMal-Prämie|Prime LAMal)/, `${locale}: premio LAMal qualificato`);
+    assert.doesNotMatch(source, /279\.00|487\.20/, `${locale}: forchetta annuale hard-coded`);
     assert.match(source, /213\/2023/, `${locale}: legge di bilancio 2024`);
     assert.match(source, /\b30\b[^.]{0,80}\b200\b/, `${locale}: minimo e massimo mensile`);
     assert.match(source, /IAS/, `${locale}: ufficio competente`);
-    assert.match(source, /2027/, `${locale}: premi 2027 dichiarati non ancora pubblicati`);
+    assert.match(source, /2027/, `${locale}: contesto 2027 esplicito`);
+    assert.match(source, /priminfo\.admin\.ch\/it\/downloads\/aktuell/, `${locale}: panoramica ufficiale corrente`);
     assert.match(source, /priminfo\.admin\.ch\/downloads\/gesamtbericht_eu\.pdf/);
     assert.match(source, /bag\.admin\.ch/);
     assert.match(source, /angehoerige-von-grenzgaenger-aus-italien-mit-arbeitsort-ch\.pdf/, `${locale}: caso familiare documentato dal BAG/OFSP`);
@@ -73,6 +74,7 @@ test('nessun body ne excerpt ripropone i valori smentiti', () => {
     const excerpt = meta.split('\n').find((l) => l.includes(`'blog.article.${SLUG}.excerpt'`));
     assert.ok(excerpt, `${locale}: excerpt presente`);
     assert.doesNotMatch(excerpt, /350|180/, `${locale}: excerpt con premi smentiti`);
-    assert.match(excerpt, /279/);
+    assert.match(excerpt, /UFSP|FOPH|BAG|OFSP|Priminfo/i);
+    assert.doesNotMatch(excerpt, /279|487/);
   }
 });
