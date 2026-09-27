@@ -3,7 +3,12 @@
  * issue deve serializzare la run su una chiave PER-ISSUE, cioe' che interpola
  * `github.event.issue.number`. Un workflow che scansiona una coda condivisa può
  * Il drainer fa eccezione: scansiona una coda condivisa e deve avere un mutex
- * globale A LIVELLO DI WORKFLOW, condiviso con i writer dei bucket daily.
+ * globale, condiviso con i writer dei bucket daily. Lo prende A LIVELLO DI JOB
+ * (stesso group dei writer, che lo tengono a livello di workflow: GitHub li
+ * tratta come lo stesso mutex), cosi' gli eventi che l'`if:` del job scarta non
+ * entrano nel gruppo e non sfrattano la pending utile — il difetto descritto
+ * qui sotto, che a livello di run colpiva anche lui (145 run cancellate contro
+ * 64 riuscite in 31h, 2026-09-27).
  *
  * ## Il modo silenzioso in cui questo si rompe
  *
@@ -155,7 +160,10 @@ test('ogni workflow su eventi issue serializza su una chiave per-issue', () => {
     }
     if (file === 'followup-drainer.yml') {
       assert.ok(groups.includes(DRAINER_DAILY_LOCK_GROUP),
-        'followup-drainer deve condividere il mutex daily a livello di run');
+        'followup-drainer deve condividere il mutex daily');
+      assert.ok(!/^concurrency:/m.test(yaml),
+        'followup-drainer: il mutex daily sta sul job `drain`, non sulla run — a livello di run '
+          + 'ogni evento scartato dall\'`if:` entra nel gruppo e sfratta la pending utile');
     }
   }
   assert.deepEqual(

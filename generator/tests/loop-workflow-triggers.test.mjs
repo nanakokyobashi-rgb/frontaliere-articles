@@ -63,6 +63,25 @@ test('followup-drainer: mutex daily condiviso e recupero cron', () => {
   assert.doesNotMatch(FOLLOWUP_DRAINER, /group:\s*followup-drainer-\$\{\{\s*github\.repository\s*\}\}-\$\{\{\s*github\.event\.issue\.number/);
 });
 
+// 2026-09-27: a livello di run ogni `issues: labeled` irrilevante e ogni
+// `workflow_run` di un issue-fix skipped entrava nel gruppo e sfrattava la
+// pending utile (145 cancellate / 64 riuscite in 31h). Sul job, un job saltato
+// dal suo `if:` non entra nel gruppo.
+test('followup-drainer: il mutex daily sta sul job drain e scarta gli issue-fix skipped', () => {
+  assert.doesNotMatch(FOLLOWUP_DRAINER, /^concurrency:/m);
+  const drain = FOLLOWUP_DRAINER.slice(FOLLOWUP_DRAINER.indexOf('\n  drain:\n'));
+  assert.match(
+    drain,
+    /\n    concurrency:\n      group: followup-daily-\$\{\{ github\.repository \}\}\n      cancel-in-progress: false\n/,
+  );
+  const condition = /\n    if: >-\n((?:      .*\n)+)/.exec(drain)?.[1].replace(/\s+/g, ' ') ?? '';
+  assert.ok(
+    condition.includes("github.event_name != 'workflow_run' || github.event.workflow_run.conclusion != 'skipped'"),
+    `if: del job drain senza il filtro workflow_run skipped: ${condition}`,
+  );
+  assert.match(condition, /\)\s*&&\s*\(/);
+});
+
 /** Il blocco di un job: da `\n  <nome>:` al job successivo allo stesso livello. */
 function jobBlock(src, name) {
   const start = src.indexOf(`\n  ${name}:\n`);
