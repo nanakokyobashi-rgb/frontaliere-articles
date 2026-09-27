@@ -38,10 +38,18 @@ import { freeTranslateWithRetry, logCascadeSummary } from './lib/free-translate.
 import { repairLlmJsonArray, JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagnostics } from './lib/llm-json-repair.mjs';
 import {
   belowFaqFloor,
+  belowFaqSourceCount,
+  FAQ_REJECTION_LEDGER_GIT_PATH,
+  FAQ_REJECTION_MAX_CONSECUTIVE,
+  faqLocaleIssueKey,
   filterWrongLocalePairs,
+  loadFaqRejectionLedger,
   MIN_FAQ_PAIRS,
   minPairsForWrite,
+  nextFaqRejection,
   parseFaqLimitArgs,
+  saveFaqRejectionLedger,
+  selectFaqIssuesForProcessing,
   wrongLocalePair,
 } from './fix-faq-locales.mjs';
 import { unescapeTsString } from './lib/unescape-ts-string.mjs';
@@ -367,14 +375,26 @@ export function gitPushChainTimeoutMs(chainStartedAt, commandTimeoutMs, now = Da
   return Math.min(commandTimeoutMs, remainingMs);
 }
 
+/**
+ * Il comando di stage+commit di un checkpoint. Oltre al corpus e al progress
+ * file mette in stage il registro dei rifiuti FAQ, come fa lo step di commit
+ * finale di `batch-faq-articles.yml`: il batch lo aggiorna a ogni rifiuto, e un
+ * checkpoint (anche quello su SIGTERM) che lo lasciasse nel worktree farebbe
+ * ritentare alla run successiva i locale gia' parcheggiati.
+ */
+export function checkpointCommitCommand({ bodyDirGitPath, progressFile, label }) {
+  return `git add ${bodyDirGitPath} && git add -f ${progressFile} 2>/dev/null; `
+    + `if [ -e ${FAQ_REJECTION_LEDGER_GIT_PATH} ]; then git add -f ${FAQ_REJECTION_LEDGER_GIT_PATH}; fi; `
+    + `git diff --cached --quiet || git commit -m "❓ FAQ batch checkpoint (${label})"`;
+}
+
 function gitCommitAndPush(label, { sectionBodyDir, progressFile }) {
   const chainStartedAt = Date.now();
   let outcome = 'commit-failed';
   try {
     const bodyDirGitPath = resolveGitAddPath(ROOT, `services/locales/${sectionBodyDir}/`);
     execSync(
-      `git add ${bodyDirGitPath} && git add -f ${progressFile} 2>/dev/null; ` +
-      `git diff --cached --quiet || git commit -m "❓ FAQ batch checkpoint (${label})"`,
+      checkpointCommitCommand({ bodyDirGitPath, progressFile, label }),
       { cwd: ROOT, stdio: 'pipe', timeout: gitPushChainTimeoutMs(chainStartedAt, 30000) }
     );
     // Checkpoint pushes use the Remote Config PAT; the workflow grants only
@@ -702,9 +722,12 @@ export function extractFaqFromContent(fileContent, articleId) {
  * Discover articles that need work:
  * - needsGeneration: IT has no .faq key → needs AI generation
  * - needsTopUp: IT .faq exists but < MIN_FAQ_PAIRS → needs extra AI pairs
- * - needsTranslation: EN/DE/FR missing or wrong locale
+ * - needsTranslation: EN/DE/FR missing, wrong locale, or with fewer pairs than
+ *   the Italian source (same three predicates as `fix-faq-locales.mjs`: a
+ *   pruned write registered as `prunedWrite` must stay visible, or the locale
+ *   remains below the Italian count forever)
  */
-function discoverArticles(bodyDir) {
+export function discoverArticles(bodyDir) {
   const itDir = resolve(bodyDir, 'it');
   const files = readdirSync(itDir).filter(f => f.endsWith('.ts')).sort();
   const needsGeneration = [];
@@ -743,7 +766,7 @@ function discoverArticles(bodyDir) {
         missingLocales.push(locale);
       } else {
         const localeFaq = extractFaqFromContent(locContent, articleId);
-        if (localeFaq && wrongLocalePair(localeFaq, locale, itFaq)) {
+        if (localeFaq && (wrongLocalePair(localeFaq, locale, itFaq) || belowFaqSourceCount(localeFaq, itFaq))) {
           missingLocales.push(locale);
         }
       }
@@ -1204,9 +1227,124 @@ export function insertFaqIntoBodyFile(filePath, articleId, faqArray) {
   return true;
 }
 
+// ── Registro dei rifiuti FAQ (condiviso con fix-faq-locales.mjs) ──
+//
+// `fix-faq-locales.mjs` parcheggia un locale dopo
+// `FAQ_REJECTION_MAX_CONSECUTIVE` rifiuti consecutivi sulla stessa impronta
+// della sorgente italiana (il registro vive li', path compreso). Questo scrittore
+// non lo consultava: la run 36297637209 di `batch-faq-articles.yml` ha
+// ritradotto gli stessi 36 articoli gia' parcheggiati, consumando le 20
+// chiamate Codex del giorno, e ne ha scritti 0 — il giorno dopo di nuovo.
+// Qui si usano le STESSE funzioni e lo STESSO file: selezione con
+// `selectFaqIssuesForProcessing`, aggiornamento con `nextFaqRejection`.
+
+/**
+ * Toglie dalla coda di traduzione i locale gia' parcheggiati dal registro.
+ * Un articolo resta in coda con i soli locale ancora azionabili; se non ne ha
+ * piu' esce dalla coda e non consuma il `--limit`.
+ */
+export function partitionThrottledTranslations(needsTranslation, rejectionLedger, section) {
+  const issues = needsTranslation.flatMap((article) => article.missingLocales.map((locale) => ({
+    articleId: article.id,
+    locale,
+    itFaq: article.itFaq,
+  })));
+  const { toProcess, throttled } = selectFaqIssuesForProcessing(issues, rejectionLedger, section, Infinity);
+  const eligibleLocales = new Map();
+  for (const issue of toProcess) {
+    if (!eligibleLocales.has(issue.articleId)) eligibleLocales.set(issue.articleId, []);
+    eligibleLocales.get(issue.articleId).push(issue.locale);
+  }
+  const eligible = needsTranslation
+    .filter((article) => eligibleLocales.has(article.id))
+    .map((article) => ({ ...article, missingLocales: eligibleLocales.get(article.id) }));
+  return { eligible, throttled };
+}
+
+/**
+ * Aggiorna il registro con l'esito di UNA traduzione, con le stesse regole di
+ * `fix-faq-locales.mjs`: rifiuto sotto pavimento -> rifiuto consecutivo;
+ * scrittura potata sopra pavimento -> `prunedWrite`; scrittura completa ->
+ * voce cancellata. Un fallimento del MOTORE (nessuna FAQ, nessun rifiuto) non
+ * e' un rifiuto deterministico e non tocca il registro.
+ *
+ * Una FAQ tradotta conta solo se lo SCRITTORE l'ha davvero scritta
+ * (`written === true`): se `insertFaqIntoBodyFile` restituisce `false` il
+ * locale resta mancante o sbagliato, e registrarlo come `prunedWrite` lo
+ * parcheggerebbe dopo due run senza che niente sia stato pubblicato. Un
+ * fallimento dello scrittore resta quindi ritentabile. Il rifiuto di lingua
+ * non passa dallo scrittore, e si registra comunque.
+ *
+ * @returns {boolean} true se il registro e' cambiato e va salvato
+ */
+export function recordFaqTranslationOutcome(rejectionLedger, key, sourceFaq, res, { written = false } = {}) {
+  if (!rejectionLedger || !res) return false;
+  if (res.rejected) {
+    rejectionLedger[key] = nextFaqRejection(rejectionLedger[key], sourceFaq);
+    return true;
+  }
+  if (!res.faq || written !== true) return false;
+  if (belowFaqSourceCount(res.faq, sourceFaq)) {
+    rejectionLedger[key] = nextFaqRejection(rejectionLedger[key], sourceFaq, {
+      prunedWrite: true,
+      keptPairs: res.faq.length,
+    });
+    return true;
+  }
+  if (rejectionLedger[key]) {
+    delete rejectionLedger[key];
+    return true;
+  }
+  return false;
+}
+
+// Salvataggi del registro falliti in questa run: il riepilogo li stampa.
+const ledgerSaveStats = { failures: 0 };
+export function faqLedgerSaveFailures() {
+  return ledgerSaveStats.failures;
+}
+
+/**
+ * Aggiorna e salva il registro. BEST-EFFORT e non lancia MAI: il chiamante sta
+ * dentro il percorso di traduzione, e un errore di salvataggio arrivato li'
+ * veniva letto come errore di traduzione — in `processTopUp` il `catch`
+ * riscriveva allora la FAQ locale appena tradotta con l'italiano intero
+ * (review di #1935). Un registro non salvato costa al piu' un ritentativo in
+ * piu'; una FAQ italiana su `/de/` e' contenuto sbagliato pubblicato.
+ * `options.saveLedger` esiste solo per i test.
+ */
+export function recordTranslation(options, articleId, locale, sourceFaq, res, written = false) {
+  const { rejectionLedger, section, dryRun, saveLedger = saveFaqRejectionLedger } = options;
+  try {
+    const key = faqLocaleIssueKey(articleId, locale, section);
+    if (!recordFaqTranslationOutcome(rejectionLedger, key, sourceFaq, res, { written })) return;
+    if (res?.rejected) {
+      console.error(`[${articleId}] ${locale.toUpperCase()} rifiuto consecutivo `
+        + `${rejectionLedger[key].consecutive}/${FAQ_REJECTION_MAX_CONSECUTIVE} registrato`);
+    }
+    if (!dryRun) saveLedger(rejectionLedger);
+  } catch (err) {
+    ledgerSaveStats.failures++;
+    console.warn(`[${articleId}] ${locale.toUpperCase()} ⚠️  registro dei rifiuti FAQ non aggiornato `
+      + `(${err.message}): la FAQ resta com'e', il locale sara' solo ritentato`);
+  }
+}
+
+/**
+ * Scrive una FAQ TRADOTTA sul body del locale e poi aggiorna il registro col
+ * vero esito dello scrittore. Forma unica per i tre percorsi di traduzione.
+ * @returns {boolean} true se la traduzione e' stata scritta
+ */
+export function writeTranslatedFaq(options, { localePath, articleId, locale, sourceFaq, res }) {
+  const written = insertFaqIntoBodyFile(localePath, articleId, res.faq) === true;
+  recordTranslation(options, articleId, locale, sourceFaq, res, written);
+  return written;
+}
+
 // ── Process single article ───────────────────────────────────
 
-async function processArticle(articleId, file, itBodyContent, { bodyDir, skipTranslate }) {
+async function processArticle(articleId, file, itBodyContent, options) {
+  const { bodyDir, skipTranslate } = options;
   const label = `[${articleId}]`;
 
   // 1. Extract Italian body text
@@ -1296,6 +1434,7 @@ async function processArticle(articleId, file, itBodyContent, { bodyDir, skipTra
       // pubblicherebbe la FAQ italiana intera sul body di questo locale, cioe'
       // esattamente cio' che il rifiuto voleva evitare, e in dose piena.
       if (res?.rejected) {
+        recordTranslation(options, articleId, locale, validFaq, res);
         console.error(`${label} ⚠️  ${locale.toUpperCase()} traduzione rifiutata (lingua sbagliata): `
           + 'non scrivo la FAQ per questo locale, si recupera al giro dopo');
         continue;
@@ -1310,7 +1449,12 @@ async function processArticle(articleId, file, itBodyContent, { bodyDir, skipTra
         faqForLocale = validFaq;
       }
 
-      insertFaqIntoBodyFile(localePath, articleId, faqForLocale);
+      // Il registro si aggiorna DOPO lo scrittore, e solo se ha scritto.
+      if (res?.faq) {
+        writeTranslatedFaq(options, { localePath, articleId, locale, sourceFaq: validFaq, res });
+      } else {
+        insertFaqIntoBodyFile(localePath, articleId, faqForLocale);
+      }
     }
   }
 
@@ -1319,7 +1463,8 @@ async function processArticle(articleId, file, itBodyContent, { bodyDir, skipTra
 
 // ── Process article top-up (existing FAQ < MIN_FAQ_PAIRS) ────
 
-async function processTopUp(articleId, file, itContent, existingFaq, { bodyDir, skipTranslate }) {
+async function processTopUp(articleId, file, itContent, existingFaq, options) {
+  const { bodyDir, skipTranslate } = options;
   const label = `[${articleId}] [TOP-UP ${existingFaq.length}→${MIN_FAQ_PAIRS}+]`;
 
   // Stessa guardia di `processArticle`: niente chiave `bodyN` per questo id
@@ -1381,12 +1526,16 @@ async function processTopUp(articleId, file, itContent, existingFaq, { bodyDir, 
       const localePath = `${bodyDir}/${locale}/${file}`;
       if (!existsSync(resolve(localePath))) continue;
 
+      // Il fallback italiano vale solo finche' la traduzione NON e' scritta:
+      // dopo, un errore qualunque non deve sovrascriverla con l'italiano.
+      let written = false;
       try {
         const res = await translateFaq(validMerged, locale);
         if (res.faq) {
-          insertFaqIntoBodyFile(localePath, articleId, res.faq);
+          written = writeTranslatedFaq(options, { localePath, articleId, locale, sourceFaq: validMerged, res });
           console.error(`${label} ✅ ${locale.toUpperCase()} translated (${res.faq.length} pairs)`);
         } else if (res.rejected) {
+          recordTranslation(options, articleId, locale, validMerged, res);
           // Stesso motivo di processGeneration: scrivere `validMerged` qui
           // significa pubblicare l'italiano intero sul locale, in dose piena.
           console.error(`${label} ⚠️  ${locale.toUpperCase()} traduzione rifiutata (lingua sbagliata): `
@@ -1396,8 +1545,13 @@ async function processTopUp(articleId, file, itContent, existingFaq, { bodyDir, 
           console.error(`${label} ⚠️  ${locale.toUpperCase()} translation failed, using Italian`);
         }
       } catch (err) {
-        insertFaqIntoBodyFile(localePath, articleId, validMerged);
-        console.error(`${label} ⚠️  ${locale.toUpperCase()} error: ${err.message}, using Italian`);
+        if (written) {
+          console.error(`${label} ⚠️  ${locale.toUpperCase()} error after the translation was written: `
+            + `${err.message}; keeping the translation`);
+        } else {
+          insertFaqIntoBodyFile(localePath, articleId, validMerged);
+          console.error(`${label} ⚠️  ${locale.toUpperCase()} error: ${err.message}, using Italian`);
+        }
       }
     }
   }
@@ -1407,7 +1561,8 @@ async function processTopUp(articleId, file, itContent, existingFaq, { bodyDir, 
 
 // ── Process translation-only (IT FAQ ok, locale missing/wrong) ──
 
-async function processTranslation(articleId, file, itFaq, missingLocales, { bodyDir }) {
+async function processTranslation(articleId, file, itFaq, missingLocales, options) {
+  const { bodyDir } = options;
   const label = `[${articleId}] [TRANSLATE ${missingLocales.join(',')}]`;
   let fixed = 0;
 
@@ -1420,10 +1575,15 @@ async function processTranslation(articleId, file, itFaq, missingLocales, { body
       if (res.faq) {
         // Nessun controllo di lingua qui: la guardia sta in `translateFaq()`,
         // l'unico punto da cui esce una FAQ tradotta.
-        insertFaqIntoBodyFile(localePath, articleId, res.faq);
-        console.error(`${label} ✅ ${locale.toUpperCase()} (${res.faq.length} pairs)`);
-        fixed++;
+        const written = writeTranslatedFaq(options, { localePath, articleId, locale, sourceFaq: itFaq, res });
+        if (written) {
+          console.error(`${label} ✅ ${locale.toUpperCase()} (${res.faq.length} pairs)`);
+          fixed++;
+        } else {
+          console.error(`${label} ❌ ${locale.toUpperCase()} scrittura non riuscita: il locale resta ritentabile`);
+        }
       } else {
+        if (res.rejected) recordTranslation(options, articleId, locale, itFaq, res);
         // Questo ramo non scriveva niente nemmeno prima: e' l'unico dei tre
         // che gia' si comportava bene su un fallimento.
         console.error(`${label} ⚠️  ${locale.toUpperCase()} `
@@ -1519,10 +1679,22 @@ async function main(argv = process.argv.slice(2)) {
 
   // 1. Discover articles needing work
   console.error('📂 Scanning articles...');
-  const { needsGeneration, needsTopUp, needsTranslation } = discoverArticles(bodyDir);
+  const { needsGeneration, needsTopUp, needsTranslation: discoveredTranslation } = discoverArticles(bodyDir);
+  // Prima del `--limit`: un locale parcheggiato non deve occupare lo slot di
+  // un lavoro azionabile (stessa regola di `selectFaqIssuesForProcessing`).
+  const rejectionLedger = loadFaqRejectionLedger();
+  const { eligible: needsTranslation, throttled: throttledTranslations } = partitionThrottledTranslations(
+    discoveredTranslation, rejectionLedger, options.section,
+  );
+  options.rejectionLedger = rejectionLedger;
   console.error(`   🆕 Need generation:  ${needsGeneration.length}`);
   console.error(`   📈 Need top-up (<${MIN_FAQ_PAIRS} pairs): ${needsTopUp.length}`);
   console.error(`   🌐 Need translation: ${needsTranslation.length}`);
+  console.error(`   ⏭️  Locale parcheggiati dal registro dei rifiuti: ${throttledTranslations.length}`
+    + ` (>= ${FAQ_REJECTION_MAX_CONSECUTIVE} rifiuti consecutivi sulla stessa sorgente)`);
+  for (const issue of throttledTranslations.slice(0, 50)) {
+    console.error(`      • ${issue.articleId} [${issue.locale}]`);
+  }
 
   // 2. Load progress and filter already-completed (only for generation)
   const progress = loadProgress(progressFile);
@@ -1533,7 +1705,9 @@ async function main(argv = process.argv.slice(2)) {
 
   const totalWork = pendingGeneration.length + needsTopUp.length + needsTranslation.length;
   if (totalWork === 0) {
-    console.error('\n✅ Nothing to process — all articles have ≥3 FAQ pairs in all locales.');
+    console.error(throttledTranslations.length > 0
+      ? `\n⏭️  Nothing actionable — ${throttledTranslations.length} locale parked by the FAQ rejection ledger.`
+      : '\n✅ Nothing to process — all articles have ≥3 FAQ pairs in all locales.');
     return;
   }
 
@@ -1639,6 +1813,8 @@ async function main(argv = process.argv.slice(2)) {
   console.error(`  🤖 AI calls:        ${stats.calls || 0}`);
   console.error(`  🔄 AI fallbacks:    ${stats.fallbacks || 0}`);
   console.error(`  📊 Total completed: ${progress.completed.length}/${needsGeneration.length + progress.completed.length}`);
+  console.error(`  🗂️  Ledger save failures: ${faqLedgerSaveFailures()}`
+    + (faqLedgerSaveFailures() > 0 ? ' (registro dei rifiuti non aggiornato: quei locale saranno solo ritentati)' : ''));
   console.error('═══════════════════════════════════════════════════════════');
   // FRO-325: full run summary (cache hits, exhausted models, cooldowns,
   // 429 streaks, error count) — superset of the calls/fallbacks lines
