@@ -30,6 +30,8 @@ import {
   orderCandidatesFifo,
   selectFollowupSessionBatch,
   FOLLOWUP_SESSION_BATCH_LIMIT,
+  FOLLOWUP_COMPLETED_BATCH_UPPER_BOUND_DURATION_MS,
+  FOLLOWUP_COMPLETED_BATCH_UPPER_BOUND_PR_COUNT,
 } from '../../scripts/ci/collect-followup-batch.mjs';
 
 test('la finestra e un lookback fisso, indipendente dallo storico delle run', () => {
@@ -83,12 +85,13 @@ test('ordine FIFO: il cap rinvia le PR recenti, non quelle vecchie', () => {
 // gap mediano 4,9h) = ~20 PR/giorno contro rinvii di 29-146 PR a ogni run.
 // Tre vincoli, letti dal workflow reale così che cap, watchdog, step e cron non
 // possano divergere in silenzio:
-//  1. cap x caso peggiore misurato per PR (451 s, 36009410204, bootstrap
-//     incluso) <= watchdog Codex;
+//  1. cap <= PR della sessione COMPLETATA misurata (36352293610: 14 PR,
+//     1.502.814 ms, triage_complete=true), e quella durata sotto il watchdog.
+//     Si confronta la sessione intera: la media per PR non è un upper bound, e
+//     >=451 s/PR di 36009410204 è censurato (run uccisa), non un bound;
 //  2. watchdog + setup/kill grace/coda (300 s) STRETTAMENTE sotto lo step;
 //  3. cap x run reali/giorno (cron nominali x 62%) >= picco di ~80 candidati
 //     al giorno (sito: 110 merge x ~72% oltre i gate).
-const WORST_SECONDS_PER_PR = 451;
 const CODEX_SETUP_AND_TAIL_SECONDS = 300;
 const CRON_EXECUTED_RATIO = 0.62;
 const PEAK_CANDIDATES_PER_DAY = 80;
@@ -106,12 +109,16 @@ function workflowBudget() {
   return { watchdog, stepMinutes, cronPerDay: 24 / hours };
 }
 
-test('il cap x il caso peggiore per PR sta sotto il watchdog, e il watchdog sotto lo step', () => {
+test('la sessione completata dimensiona il cap sotto watchdog e step', () => {
   const { watchdog, stepMinutes } = workflowBudget();
   assert.ok(watchdog > 0 && stepMinutes > 0, 'watchdog o timeout dello step non trovati');
   assert.ok(
-    FOLLOWUP_SESSION_BATCH_LIMIT * WORST_SECONDS_PER_PR <= watchdog,
-    `cap ${FOLLOWUP_SESSION_BATCH_LIMIT} x ${WORST_SECONDS_PER_PR}s > watchdog ${watchdog}s`,
+    FOLLOWUP_SESSION_BATCH_LIMIT <= FOLLOWUP_COMPLETED_BATCH_UPPER_BOUND_PR_COUNT,
+    `cap ${FOLLOWUP_SESSION_BATCH_LIMIT} oltre la sessione completata misurata`,
+  );
+  assert.ok(
+    FOLLOWUP_COMPLETED_BATCH_UPPER_BOUND_DURATION_MS < watchdog * 1000,
+    `sessione misurata ${FOLLOWUP_COMPLETED_BATCH_UPPER_BOUND_DURATION_MS}ms oltre il watchdog ${watchdog}s`,
   );
   assert.ok(
     watchdog + CODEX_SETUP_AND_TAIL_SECONDS < stepMinutes * 60,

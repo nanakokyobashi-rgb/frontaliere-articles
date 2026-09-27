@@ -1,7 +1,7 @@
 name: Post-merge follow-up triage
 
 # SCHEDULED-BATCH (era pull_request:[closed] per-PR). Una sola sessione Codex Luna Max ogni
-# ~3h triagia TUTTE le PR mergiate dall'owner dalla finestra precedente, invece di
+# ~2h (cron `40 */2`, era ~3h) triagia TUTTE le PR mergiate dall'owner dalla finestra precedente, invece di
 # UNA run per ogni merge. Il ~60-80% delle run per-PR creava zero issue → spreco
 # sulla quota Max OAuth CONDIVISA (AGENTS.md § frugalità — "più batched"). Sicurezza
 # garantita dal marker di idempotenza per-PR, che e' il cursore durevole (vedi
@@ -280,11 +280,11 @@ jobs:
           # Watchdog Codex 1800s→2520s: 36009410204 e' stata uccisa a 1803s
           # con 4 PR verificate e persistite ma `action_ok=false`, la run
           # precedente ha chiuso a 1670s.
-          # 2520s→6840s (2026-09-27, cap di sessione 4→14 PR): dimensionato
-          # sul caso peggiore misurato, >=451 s/PR (36009410204):
-          # 14 x 451s = 6314s, ~8% sotto 6840s. 6840s + setup/kill grace/coda
-          # (300s) = 7140s, sotto lo step da 120 min (7200s), cosi' il
-          # watchdog scatta prima del kill del runner.
+          # 2520s→6840s (2026-09-27, cap di sessione 4→14 PR): la sessione
+          # completata da 14 PR (36352293610) ha misurato 1.502.814 ms, il 22%
+          # del watchdog. 6840s + setup/kill grace/coda (300s) = 7140s, sotto
+          # lo step da 120 min (7200s), cosi' il watchdog scatta prima del
+          # kill del runner.
           exec_timeout_seconds: '6840'
           # Il merge che alimenta questo workflow può arrivare da automation interna:
           # i token host-side sono espliciti e separati per repository; il token del

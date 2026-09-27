@@ -181,7 +181,7 @@ test('classificatore auth: legge lo stderr solo dopo che il suo tee ha finito', 
 // Override espliciti: solo i caller batch che hanno misurato sessioni vicine
 // o oltre il default. post-merge-followup: 1670s (35973121007) e 1803s,
 // uccisa (36009410204) con 4 PR; 6840s dal 2026-09-27, quando il cap di
-// sessione è passato a 14 PR (14 x 451 s/PR, caso peggiore misurato = 6314s).
+// sessione è passato a 14 PR (sessione completata da 14 PR: 1.502.814 ms, 36352293610).
 const EXEC_TIMEOUT_OVERRIDES = { 'post-merge-followup.yml': '6840' };
 // Setup Codex (Node, CLI, sandbox apt: ~105s misurati il 2026-09-24), kill
 // grace di 30s e coda di finalize/cleanup.

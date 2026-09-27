@@ -107,16 +107,20 @@ const SEARCH_PAGE_SIZE = 100;
 // cadenza reale ~5,1 run/giorno sul cron da 3h (gap mediano 4,9h: GitHub ne
 // esegue ~62% del nominale) = ~20 PR/giorno, contro rinvii di 29-146 PR a OGNI
 // run (sito 36112598869..36325938055, corpus 36127041310..36315187017).
-// Il cap è dimensionato sul CASO PEGGIORE misurato, non sul tipico: >=451 s/PR
-// (36009410204, 4 PR uccise dal watchdog a 1803 s, bootstrap incluso).
-// 14 x 451 s = 6314 s, sotto il watchdog Codex da 6840 s (~8% di margine);
-// 6840 s + setup/kill grace/coda (300 s) = 7140 s < step da 120 min (il tetto
-// per gli step agentici). Un cap più alto non ci sta: 15 x 451 = 6765 s
-// lascerebbe 75 s. La capacità mancante la dà la cadenza: 12 cron/giorno x 62%
-// = ~7,4 run reali x 14 = ~104 PR/giorno, oltre il picco di ~80 candidati/giorno
-// del sito. Il tipico è molto più basso: 144-399 s/PR con 4 PR, ~85 s/PR sul
-// batch da 36 di 34602892494 (21 PR commentate in 1792 s), ~58 s/PR sul batch
-// da 19 di 34602590662 (sito): il bootstrap è condiviso.
+// Il cap NON è dimensionato dal run 36009410204: 4 PR furono uccise dal
+// watchdog a 1803 s, quindi >=451 s/PR è una misura CENSURATA e non un upper
+// bound. La base è una sessione production-equivalent COMPLETATA della stessa
+// taglia del cap: run 36352293610 (2026-09-27, primo giro col cap 14),
+// batch_count=14, sessione Codex 1.502.814 ms, triage_complete=true con 14/14
+// PR verificate, job 29 min. È un envelope di SESSIONE INTERA (bootstrap
+// incluso), non una media per PR: 22% del watchdog Codex da 6840 s. Supporto,
+// non base: 34602892494 commentò 21 PR in 1.792.000 ms prima del tetto di
+// allora (batch 36, sessione NON completata). 6840 s + setup/kill grace/coda
+// (300 s) = 7140 s < step da 120 min (il tetto per gli step agentici).
+// La capacità mancante la dà la cadenza: 12 cron/giorno x 62% = ~7,4 run reali
+// x 14 = ~104 PR/giorno, oltre il picco di ~80 candidati/giorno del sito. Il
+// tipico: 144-399 s/PR con 4 PR qui, ~58 s/PR sul batch da 19 del sito
+// (34602590662). Stesso modello del gemello del sito (`adapted`).
 //
 // Una finestra più larga del cap NON è un errore di raccolta: è un rinvio
 // PIANIFICATO. Il troncamento viene dichiarato in `deferred_count`, mentre
@@ -126,6 +130,8 @@ const SEARCH_PAGE_SIZE = 100;
 // deve tenere il watermark indietro, un rinvio pianificato deve lasciarlo
 // avanzare, altrimenti il residuo non si drena mai. Confuse, producevano il
 // ratchet documentato sopra (34 run rosse consecutive, 157,7 h).
+export const FOLLOWUP_COMPLETED_BATCH_UPPER_BOUND_DURATION_MS = 1_502_814;
+export const FOLLOWUP_COMPLETED_BATCH_UPPER_BOUND_PR_COUNT = 14;
 export const FOLLOWUP_SESSION_BATCH_LIMIT = 14;
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const GATE_DIRECTORY_SENTINELS = [
