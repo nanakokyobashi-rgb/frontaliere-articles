@@ -15,6 +15,7 @@ import {
   chmodSync,
   mkdirSync,
   mkdtempSync,
+  readdirSync,
   readFileSync,
   rmSync,
   writeFileSync,
@@ -211,6 +212,8 @@ function runClassifier({
   rereadSequence = '',
   lsRemoteStatuses = '',
   prState = 'open',
+  commentPages = '0',
+  commentsStatus = 0,
 } = {}) {
   const temp = mkdtempSync(path.join(os.tmpdir(), 'pr-redcheck-outcome-'));
   const bin = path.join(temp, 'bin');
@@ -302,7 +305,8 @@ fi
 if echo "$*" | grep -q 'pr comment'; then exit "$REFUND_COMMENT_STATUS"; fi
 if echo "$*" | grep -q 'issues/.*/comments'; then
   if echo "$*" | grep -q -- '--jq'; then
-    printf '0\n'
+    if [ "$FAKE_COMMENTS_STATUS" != "0" ]; then exit "$FAKE_COMMENTS_STATUS"; fi
+    printf '%b\n' "$FAKE_COMMENT_PAGES"
     exit 0
   fi
   if echo "$*" | grep -q -- '--slurp'; then
@@ -355,6 +359,8 @@ printf '%s' "$FAKE_BODY"
         TIMEOUT_LOG: timeoutLog,
         FAKE_BODY: currentBody,
         FAKE_COMMENTS_JSON: commentsJson,
+        FAKE_COMMENT_PAGES: commentPages,
+        FAKE_COMMENTS_STATUS: String(commentsStatus),
         REFUND_COMMENT_STATUS: String(refundCommentStatus),
         RUNNER_TEMP: temp,
       },
@@ -447,7 +453,7 @@ exit 64
   }
 }
 
-function runBaseCapture({ body, emptyResponse = false }) {
+function runBaseCapture({ body, emptyResponse = false, commentPages = '0', commentsStatus = 0 }) {
   const temp = mkdtempSync(path.join(os.tmpdir(), 'pr-redcheck-base-'));
   const bin = path.join(temp, 'bin');
   mkdirSync(bin);
@@ -461,7 +467,9 @@ esac
 `);
   fakeExecutable(bin, 'gh', String.raw`
 case "$*" in
-  *issues/*/comments*) printf '0\n' ;;
+  *issues/*/comments*)
+    if [ "$FAKE_COMMENTS_STATUS" != "0" ]; then exit "$FAKE_COMMENTS_STATUS"; fi
+    printf '%b\n' "$FAKE_COMMENT_PAGES" ;;
   *pulls*)
     if [ "$FAKE_EMPTY_RESPONSE" = "1" ]; then exit 0; fi
     printf '%s\n' "$FAKE_BODY" ;;
@@ -470,7 +478,7 @@ esac
 `);
 
   try {
-    return spawnSync('/bin/bash', ['-c', `export PATH="$TEST_BIN:$PATH"\n${runScript(stepBlock('Record base SHA (pre-Codex)'))}`], {
+    const result = spawnSync('/bin/bash', ['-c', `export PATH="$TEST_BIN:$PATH"\n${runScript(stepBlock('Record base SHA (pre-Codex)'))}`], {
       cwd: temp,
       env: {
         ...process.env,
@@ -482,10 +490,14 @@ esac
         GITHUB_OUTPUT: output,
         FAKE_BODY: body,
         FAKE_EMPTY_RESPONSE: emptyResponse ? '1' : '0',
+        FAKE_COMMENT_PAGES: commentPages,
+        FAKE_COMMENTS_STATUS: String(commentsStatus),
       },
       encoding: 'utf8',
       timeout: 10_000,
     });
+    result.githubOutput = readFileSync(output, { encoding: 'utf8', flag: 'a+' });
+    return result;
   } finally {
     rmSync(temp, { recursive: true, force: true });
   }
@@ -1082,5 +1094,45 @@ test('un rimborso non scrivibile conserva il marker prima della DELETE', () => {
       /api .*DELETE .*issues\/comments\/42/,
       `${scenario.name}: marker cancellato prima del rimborso`,
     );
+  }
+});
+
+test('i conteggi dei commenti sommano le pagine di --paginate --jq length', () => {
+  // `gh api --paginate --jq 'length'` stampa un numero PER PAGINA: `100\n5`
+  // rompeva `$GITHUB_OUTPUT` e il confronto `-le` del classify.
+  const base = runBaseCapture({ body: 'b', commentPages: '100\\n5' });
+  assert.equal(base.status, 0, `${base.stdout}\n${base.stderr}`);
+  assert.match(base.githubOutput, /^comments=105$/m, base.githubOutput);
+  assert.doesNotMatch(base.githubOutput, /^100$|^5$/m, base.githubOutput);
+
+  const unreadable = runBaseCapture({ body: 'b', commentsStatus: 1 });
+  assert.equal(unreadable.status, 0, `${unreadable.stdout}\n${unreadable.stderr}`);
+  assert.match(unreadable.githubOutput, /^comments=0$/m, unreadable.githubOutput);
+
+  const baseBody = '## Implementato\n\n- body iniziale';
+  const explained = runClassifier({ baseBody, currentBody: baseBody, commentPages: '100\\n5' });
+  assert.equal(explained.status, 0,
+    `105 commenti > 0 di baseline sono una spiegazione nuova:\nstdout=${explained.stdout}\nstderr=${explained.stderr}`);
+  assert.doesNotMatch(explained.stderr, /integer expression expected/, explained.stderr);
+
+  const failed = runClassifier({ baseBody, currentBody: baseBody, commentsStatus: 1 });
+  assert.equal(failed.status, 1,
+    `una lettura fallita ricade sulla baseline e resta non-progresso:\nstdout=${failed.stdout}\nstderr=${failed.stderr}`);
+});
+
+test('nessun workflow usa un conteggio paginato per pagina o --slurp con --jq', () => {
+  const dir = path.join(ROOT, '.github/workflows');
+  for (const name of readdirSync(dir).filter((f) => /\.ya?ml$/.test(f))) {
+    const lines = readFileSync(path.join(dir, name), 'utf8').split('\n');
+    lines.forEach((line, i) => {
+      if (/^\s*#/.test(line)) return;
+      const cmd = [line, lines[i + 1] || '', lines[i + 2] || ''].join(' ');
+      if (!/\bgh api\b/.test(line)) return;
+      if (/--paginate/.test(cmd) && /--jq '(?:length|\[[^']*\]\s*\|\s*length)'/.test(cmd)) {
+        assert.match(cmd, /\|\s*awk '\{s\+=\$1\} END \{print s\+0\}'|comment_pages=|now_comment_pages=/,
+          `${name}:${i + 1}: --paginate --jq length stampa un numero per pagina, va sommato`);
+      }
+      assert.ok(!(/--slurp/.test(line) && /--jq/.test(line)), `${name}:${i + 1}: gh rifiuta --slurp con --jq`);
+    });
   }
 });

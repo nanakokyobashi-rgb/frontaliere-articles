@@ -286,7 +286,7 @@ test('lo step di abort gira anche quando la review muore, e sta PRIMA del gate',
 test('max_turns distingue una review gia\' postata sulla HEAD nella run corrente', async () => {
   const { REVIEW_ABORT_STEP_NAME } = await import('../../scripts/ci/lib/vitestCheck.mjs');
   const block = stepBlock(yaml, REVIEW_ABORT_STEP_NAME);
-  assert.match(yaml, /^\s*actions:\s*read\s*$/m, 'la probe della run deve poter leggere Actions API');
+  assert.match(yaml, /^\s*actions:\s*(?:read|write)\s*$/m, 'la probe della run deve poter leggere Actions API');
   assert.match(block, /classify-codex-review-failure\.mjs "\$\{CODEX_DIAGNOSTICS_FILE\}"/);
   assert.match(block, /CODEX_DIAGNOSTICS_FILE/);
   assert.match(block, /jq -e/);

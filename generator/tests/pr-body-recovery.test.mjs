@@ -332,3 +332,20 @@ test('a failed body stops every later independent family so edit recovery can se
     assert.ok(condition.includes("steps.body_contract.outcome != 'failure'"), condition);
   }
 });
+
+test('the recovery window outlasts a cancelled tests run and fits the job timeout', () => {
+  // Una run `tests` cancellata impiega ~5 min a chiudersi (36250348342:
+  // chiusa alle 15:04:36, recovery arreso alle 15:04:20 con 285 s di attesa).
+  const envMs = name => Number(recovery.match(new RegExp(`^\\s+${name}: '(\\d+)'$`, 'm'))?.[1]);
+  const defaultMs = name => Number(recovery.match(new RegExp(`Number\\(process\\.env\\.${name}\\) \\|\\| (\\d+)`))?.[1]);
+  const wait = envMs('BODY_RECOVERY_WAIT_MS');
+  const rateLimitWait = envMs('BODY_RECOVERY_RATE_LIMIT_WAIT_MS');
+  assert.equal(defaultMs('BODY_RECOVERY_WAIT_MS'), wait, 'default e env della finestra divergono');
+  assert.equal(defaultMs('BODY_RECOVERY_RATE_LIMIT_WAIT_MS'), rateLimitWait, 'default e env del rate limit divergono');
+  const windowMs = Math.min(wait, rateLimitWait);
+  const reserveMs = Math.min(15000, Math.floor(windowMs / 10));
+  assert.ok(windowMs - reserveMs >= 8 * 60 * 1000, `attesa effettiva ${windowMs - reserveMs} ms < 8 min`);
+  const timeoutMin = Number(recovery.match(/^ {4}timeout-minutes: (\d+)$/m)?.[1]);
+  assert.ok(timeoutMin * 60 * 1000 >= windowMs + 3 * 60 * 1000,
+    `timeout-minutes ${timeoutMin} non lascia 3 min oltre la finestra di ${windowMs} ms`);
+});

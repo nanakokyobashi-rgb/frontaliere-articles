@@ -795,7 +795,15 @@ jobs:
           # Baseline dei commenti PRE-Claude (dopo il marker del round): serve al
           # classify per distinguere «Claude ha lasciato una spiegazione» da
           # «Claude non ha fatto ne' detto nulla» quando esce pulito senza push.
-          n=$(gh api "repos/$REPO/issues/$PR_NUMBER/comments" --paginate --jq 'length' 2>/dev/null || echo 0)
+          # `--paginate --jq 'length'` stampa UN numero per pagina (`100\n5`):
+          # si sommano con awk. Niente `--slurp` insieme a `--jq`: gh lo rifiuta.
+          # L'output di gh e' catturato prima della somma, cosi' con pipefail un
+          # errore di lettura ricade sul fallback invece di stampare `0\n0`.
+          if comment_pages=$(gh api "repos/$REPO/issues/$PR_NUMBER/comments" --paginate --jq 'length' 2>/dev/null); then
+            n=$(printf '%s\n' "$comment_pages" | awk '{s+=$1} END {print s+0}')
+          else
+            n=0
+          fi
           echo "comments=${n:-0}" >> "$GITHUB_OUTPUT"
           # Il body e' l'altro artefatto che Claude puo' consegnare. Accetta
           # solo la forma prevista dall'API (oggetto con body stringa/null) e
@@ -1322,7 +1330,12 @@ jobs:
             echo "Body PR cambiato senza push, CLI terminata con success → progresso body-only. Job verde."
             exit 0
           fi
-          NOW_COMMENTS=$(gh api "repos/$REPO/issues/$PR_NUMBER/comments" --paginate --jq 'length' 2>/dev/null || echo "${BASE_COMMENTS:-0}")
+          # Somma per pagina: vedi il baseline `comments` (stessa forma).
+          if now_comment_pages=$(gh api "repos/$REPO/issues/$PR_NUMBER/comments" --paginate --jq 'length' 2>/dev/null); then
+            NOW_COMMENTS=$(printf '%s\n' "$now_comment_pages" | awk '{s+=$1} END {print s+0}')
+          else
+            NOW_COMMENTS="${BASE_COMMENTS:-0}"
+          fi
           if [ "${NOW_COMMENTS:-0}" -le "${BASE_COMMENTS:-0}" ]; then
             echo "::error::❌-check-fix: nessun commit pushato, CLI uscita '$ACTION_OUTCOME', body invariato e nessun commento nuovo a spiegare perche' (commenti ${BASE_COMMENTS:-0}→${NOW_COMMENTS:-0}) → non-progresso SILENZIOSO, non un terminale legittimo. Job ROSSO."
             exit 1

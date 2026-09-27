@@ -96,9 +96,12 @@ on:
 # Union dei permessi dei tre workflow fusi qui dentro: i test non ne chiedevano
 # (default), `pr-body-contract` scriveva la sticky sulla PR, la review posta il
 # proprio verdetto, e il re-review guard legge lo storico dei check-run.
+# `actions: write` serve solo allo step `Dispatch 🔴-fixer`: la review Codex e'
+# pubblicata col GITHUB_TOKEN, un evento di quel token non avvia
+# `pull_request_review`, e `workflow_dispatch` e' l'eccezione ammessa.
 permissions:
   contents: read
-  actions: read
+  actions: write
   checks: read
   pull-requests: write
   issues: write
@@ -1725,6 +1728,33 @@ jobs:
           set -euo pipefail
           echo "Executing trusted review gate from $REVIEW_GATE_MAIN_MODULE"
           node "$REVIEW_GATE_MAIN_MODULE"
+
+      # Il 🔴-fixer (`pr-redflag-fixer.yml`) parte su `pull_request_review`,
+      # ma la review Codex qui sopra e' pubblicata col GITHUB_TOKEN (autore
+      # `github-actions[bot]`) e GitHub non avvia workflow da eventi creati da
+      # quel token: dal 17-09 nessuna review 🔴 del corpus ha mai svegliato il
+      # fixer (es. PR #1924, 27-09). `workflow_dispatch` e' l'eccezione
+      # ammessa. Il gate scrive `redflag_open` solo per un 🔴 Important vivo
+      # sulla HEAD esatta, cioe' la review che il ramo dispatch del fixer
+      # ritrova partendo dal solo numero PR. Solo per `github-actions[bot]`:
+      # un'identita' App avvia gia' `pull_request_review` e il dispatch
+      # duplicherebbe la run (la concurrency per-PR del fixer e il fingerprint
+      # dei finding la renderebbero comunque un no-op). Non-gating: exit 0
+      # sempre, per non toccare `vitestFailureIsReviewGate`.
+      - name: Dispatch 🔴-fixer for a GITHUB_TOKEN review
+        if: >-
+          ${{ steps.body_contract.outcome != 'failure' && always() && steps.review_gate.outputs.redflag_open == 'true' &&
+          steps.review_gate.outputs.redflag_review_login == 'github-actions[bot]' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
+        run: |
+          set -u
+          if gh workflow run pr-redflag-fixer.yml --repo "$GITHUB_REPOSITORY" -f pr="$PR_NUMBER"; then
+            echo "🔴-fixer dispatchato per la PR #$PR_NUMBER."
+          else
+            echo "::warning::Dispatch di pr-redflag-fixer.yml fallito per la PR #$PR_NUMBER: il 🔴 resta al redcheck."
+          fi
 
       # La Jobs API espone solo la conclusion del review gate, non la ragione
       # che lo ha fatto uscire 1. Il processo scrive failure_kind su

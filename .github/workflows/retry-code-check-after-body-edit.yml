@@ -44,7 +44,13 @@ jobs:
   recover:
     if: github.event.changes.body != null
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    # Deve contenere la finestra di recovery sotto (540 s) piu' checkout e
+    # fail-closed: con 10 min e 300 s di finestra il recovery rinunciava prima
+    # che una run `tests` cancellata si chiudesse (~5 min misurati: la
+    # 36250348342 si e' chiusa alle 15:04:36, il recovery aveva gia' ceduto
+    # alle 15:04:20; 4 run rosse «did not settle»). Il legame e' tenuto da
+    # generator/tests/pr-body-recovery.test.mjs.
+    timeout-minutes: 12
     steps:
       # Trusted code only: `pull_request_target` checks out the BASE branch,
       # never the PR head, and only the body-contract evaluator is read.
@@ -62,17 +68,19 @@ jobs:
         uses: actions/github-script@v8
         env:
           BODY_RECOVERY_POLL_MS: '5000'
-          BODY_RECOVERY_WAIT_MS: '300000'
+          # La finestra effettiva e' il minimo dei due: vanno alzati insieme.
+          BODY_RECOVERY_WAIT_MS: '540000'
+          BODY_RECOVERY_RATE_LIMIT_WAIT_MS: '540000'
         with:
           script: |
             const repo = context.repo;
             const number = context.payload.pull_request.number;
             const editedAt = Date.parse(context.payload.pull_request.updated_at || '');
             const pollMs = Number(process.env.BODY_RECOVERY_POLL_MS) || 5000;
-            const waitMs = Number(process.env.BODY_RECOVERY_WAIT_MS) || 300000;
+            const waitMs = Number(process.env.BODY_RECOVERY_WAIT_MS) || 540000;
             const retryMs = Number(process.env.BODY_RECOVERY_RETRY_MS) || 1000;
             const rateLimitRetries = Number(process.env.BODY_RECOVERY_RATE_LIMIT_RETRIES) || 3;
-            const rateLimitWaitMs = Number(process.env.BODY_RECOVERY_RATE_LIMIT_WAIT_MS) || 300000;
+            const rateLimitWaitMs = Number(process.env.BODY_RECOVERY_RATE_LIMIT_WAIT_MS) || 540000;
             const recoveryWindowMs = Math.min(waitMs, rateLimitWaitMs);
             const recoveryDeadline = Date.now() + recoveryWindowMs;
             // Leave a bounded slice of the same recovery window for the

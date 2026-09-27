@@ -281,7 +281,9 @@ test('claim finalization does not accept an old-body review on the same HEAD', (
 
 test('tests.yml claims before review work and finalizes without gating the required verdict', () => {
   const workflow = fs.readFileSync(path.join(ROOT, '.github/workflows/tests.yml'), 'utf8');
-  assert.match(workflow, /actions:\s*read/);
+  // Il guard legge lo storico delle run: `write` include `read` ed e' richiesto
+  // dal dispatch del 🔴-fixer (redflag-dispatch-from-review.test.mjs).
+  assert.match(workflow, /^  actions: (?:read|write)$/m);
   assert.match(workflow, /^  checks: read$/m,
     'il guard di carry-forward deve poter leggere lo storico dei check-run');
   assert.match(workflow, /Reviews API illeggibile/);
