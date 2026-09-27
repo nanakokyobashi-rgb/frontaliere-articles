@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/defr%3a-pagare-in-negozi-con-carta-credito-anche-con-panne-internet/91947461": {
-    "articleId": "carte-credito-pagamenti-offline-2027",
-    "ts": "2026-08-24T15:21:52.254Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/qwjyyblgsc0lcqqwoz9wk": {
     "articleId": "stabilita-svizzera-bilaterali-neutralita",
     "ts": "2026-08-24T17:05:08.054Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/iniziativa-alimentazione%3a-nettamente-respinta-da-cantoni/92126488": {
     "articleId": "iniziativa-alimentazione-respinta",
     "ts": "2026-09-27T12:30:20.123Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/votazioni%3a-vd%2c-%22s%c3%ac%22-a-riduzione-delle-imposte-del-12%25/92127573": {
+    "articleId": "vaud-voto-taglio-fiscale",
+    "ts": "2026-09-27T13:05:48.707Z",
     "keyForm": 2
   }
 }
