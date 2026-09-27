@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/qwjyyblgsc0lcqqwoz9wk": {
-    "articleId": "stabilita-svizzera-bilaterali-neutralita",
-    "ts": "2026-08-24T17:05:08.054Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4009563": {
     "articleId": "piano-emergenza-pagamenti-digitali",
     "ts": "2026-08-24T17:27:43.181Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/votazioni%3a-vd%2c-%22s%c3%ac%22-a-riduzione-delle-imposte-del-12%25/92127573": {
     "articleId": "vaud-voto-taglio-fiscale",
     "ts": "2026-09-27T13:05:48.707Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4102741": {
+    "articleId": "strage-parlamento-zugo-sicurezza",
+    "ts": "2026-09-27T13:57:40.790Z",
     "keyForm": 2
   }
 }
