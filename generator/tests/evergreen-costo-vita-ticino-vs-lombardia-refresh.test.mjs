@@ -6,8 +6,9 @@
 //   2,6% per gli alimentari, 8,1% aliquota normale;
 // - benzina: media svizzera UST agosto 2026 CHF 1.95/l, media italiana MIMIT
 //   self 2,154 EUR/l al 24.9.2026 (non piu' 1,85 CHF / 1,75 EUR);
-// - LAMal: premio medio adulti 26+ in Ticino 2026 CHF 582.60/mese (UFSP),
-//   non "assicurazioni private CHF 800-1.500 all'anno".
+// - LAMal: il premio varia per cantone, eta' e assicuratore; il body rimanda
+//   alla pagina ufficiale Priminfo invece di congelare un valore annuale,
+//   evitando che il refresh 2027 diventi stale.
 // Il registry deve portare `updatedAt` alla data del refresh fattuale.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -52,10 +53,11 @@ test('benzina: valori UST/MIMIT correnti al posto di 1,85 CHF / 1,75 EUR', () =>
   }
 });
 
-test('sanita: premio medio LAMal adulti Ticino 2026 al posto di CHF 800-1.500 all anno', () => {
+test('sanita: premio LAMal corrente via Priminfo al posto di un valore annuale congelato', () => {
   for (const locale of LOCALES) {
     const source = bodySource(locale);
-    assert.match(source, /582[.,]60/, `${locale}: premio medio UFSP adulti TI 2026`);
+    assert.match(source, /priminfo\.admin\.ch\/it\/downloads\/aktuell/, `${locale}: link Priminfo corrente`);
+    assert.doesNotMatch(source, /582[.,]60/, `${locale}: premio annuale congelato`);
     assert.doesNotMatch(source, /CHF 800 (?:e|und|et|and) 1[.,]500/, `${locale}: premio superato`);
   }
 });
