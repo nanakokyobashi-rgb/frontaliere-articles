@@ -991,7 +991,10 @@ export function summarizeRuns(runs) {
       // (`finalizeRunReport`), quindi la prima leggibile basta.
       const st = (r.gates || []).map((g) => g.status).find(Boolean);
       if (st && isDegradedOutcome(st)) oversizeDegraded++;
-      else if (st) oversizeGenerated++;
+      // Only the explicit producer verdict is evidence of publication. A
+      // future/unknown status must remain unmeasured so the resolver stays
+      // fail-closed until the contract is understood.
+      else if (st === 'generated') oversizeGenerated++;
     }
     for (const s of r.tokenLimitSkips) {
       if (s.estimated > maxEstimated) maxEstimated = s.estimated;
