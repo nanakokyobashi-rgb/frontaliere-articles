@@ -707,7 +707,12 @@ export function selectFaqIssuesForProcessing(issues, rejectionLedger, section, l
   };
 }
 
-const FAQ_REJECTION_LEDGER_PATH = resolve(ROOT, 'data/faq-locale-rejections.json');
+// Path relativo alla radice del repo: UNA sorgente per chi legge/scrive il
+// registro e per chi lo mette in stage (i checkpoint di
+// `batch-add-faq-to-articles.mjs`; lo step di commit di
+// `batch-faq-articles.yml` usa lo stesso letterale, legato da test).
+export const FAQ_REJECTION_LEDGER_GIT_PATH = 'data/faq-locale-rejections.json';
+const FAQ_REJECTION_LEDGER_PATH = resolve(ROOT, FAQ_REJECTION_LEDGER_GIT_PATH);
 
 // Esportati perche' il registro e' UNO per i due scrittori:
 // `batch-add-faq-to-articles.mjs` lo legge per non ritradurre un locale gia'

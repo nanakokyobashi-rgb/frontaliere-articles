@@ -39,6 +39,7 @@ import { repairLlmJsonArray, JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, 
 import {
   belowFaqFloor,
   belowFaqSourceCount,
+  FAQ_REJECTION_LEDGER_GIT_PATH,
   FAQ_REJECTION_MAX_CONSECUTIVE,
   faqLocaleIssueKey,
   filterWrongLocalePairs,
@@ -374,14 +375,26 @@ export function gitPushChainTimeoutMs(chainStartedAt, commandTimeoutMs, now = Da
   return Math.min(commandTimeoutMs, remainingMs);
 }
 
+/**
+ * Il comando di stage+commit di un checkpoint. Oltre al corpus e al progress
+ * file mette in stage il registro dei rifiuti FAQ, come fa lo step di commit
+ * finale di `batch-faq-articles.yml`: il batch lo aggiorna a ogni rifiuto, e un
+ * checkpoint (anche quello su SIGTERM) che lo lasciasse nel worktree farebbe
+ * ritentare alla run successiva i locale gia' parcheggiati.
+ */
+export function checkpointCommitCommand({ bodyDirGitPath, progressFile, label }) {
+  return `git add ${bodyDirGitPath} && git add -f ${progressFile} 2>/dev/null; `
+    + `if [ -e ${FAQ_REJECTION_LEDGER_GIT_PATH} ]; then git add -f ${FAQ_REJECTION_LEDGER_GIT_PATH}; fi; `
+    + `git diff --cached --quiet || git commit -m "❓ FAQ batch checkpoint (${label})"`;
+}
+
 function gitCommitAndPush(label, { sectionBodyDir, progressFile }) {
   const chainStartedAt = Date.now();
   let outcome = 'commit-failed';
   try {
     const bodyDirGitPath = resolveGitAddPath(ROOT, `services/locales/${sectionBodyDir}/`);
     execSync(
-      `git add ${bodyDirGitPath} && git add -f ${progressFile} 2>/dev/null; ` +
-      `git diff --cached --quiet || git commit -m "❓ FAQ batch checkpoint (${label})"`,
+      checkpointCommitCommand({ bodyDirGitPath, progressFile, label }),
       { cwd: ROOT, stdio: 'pipe', timeout: gitPushChainTimeoutMs(chainStartedAt, 30000) }
     );
     // Checkpoint pushes use the Remote Config PAT; the workflow grants only
@@ -709,9 +722,12 @@ export function extractFaqFromContent(fileContent, articleId) {
  * Discover articles that need work:
  * - needsGeneration: IT has no .faq key → needs AI generation
  * - needsTopUp: IT .faq exists but < MIN_FAQ_PAIRS → needs extra AI pairs
- * - needsTranslation: EN/DE/FR missing or wrong locale
+ * - needsTranslation: EN/DE/FR missing, wrong locale, or with fewer pairs than
+ *   the Italian source (same three predicates as `fix-faq-locales.mjs`: a
+ *   pruned write registered as `prunedWrite` must stay visible, or the locale
+ *   remains below the Italian count forever)
  */
-function discoverArticles(bodyDir) {
+export function discoverArticles(bodyDir) {
   const itDir = resolve(bodyDir, 'it');
   const files = readdirSync(itDir).filter(f => f.endsWith('.ts')).sort();
   const needsGeneration = [];
@@ -750,7 +766,7 @@ function discoverArticles(bodyDir) {
         missingLocales.push(locale);
       } else {
         const localeFaq = extractFaqFromContent(locContent, articleId);
-        if (localeFaq && wrongLocalePair(localeFaq, locale, itFaq)) {
+        if (localeFaq && (wrongLocalePair(localeFaq, locale, itFaq) || belowFaqSourceCount(localeFaq, itFaq))) {
           missingLocales.push(locale);
         }
       }

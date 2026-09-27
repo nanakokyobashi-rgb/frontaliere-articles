@@ -28,14 +28,21 @@
  *   diventa rosso.
  * - Portare `WEAK_FUNCTION_WORD_WEIGHT` a 1: il caso del titolo inglese citato
  *   in una risposta francese diventa rosso.
+ * - Togliere `belowFaqSourceCount` da `discoverArticles()`: il test della
+ *   discovery sotto il conteggio sorgente diventa rosso.
+ * - Togliere il registro da `checkpointCommitCommand()`: il test del checkpoint
+ *   diventa rosso.
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import {
+  FAQ_REJECTION_LEDGER_GIT_PATH,
   FAQ_REJECTION_MAX_CONSECUTIVE,
   faqLocaleIssueKey,
   functionWordMargin,
@@ -44,6 +51,9 @@ import {
   wrongLocalePair,
 } from '../scripts/fix-faq-locales.mjs';
 import {
+  checkpointCommitCommand,
+  discoverArticles,
+  insertFaqIntoBodyFile,
   partitionThrottledTranslations,
   recordFaqTranslationOutcome,
 } from '../scripts/batch-add-faq-to-articles.mjs';
@@ -233,4 +243,82 @@ test('cablaggio: main() filtra PRIMA del limite e i tre percorsi di traduzione r
   }
   // UNA sorgente per il registro: il batch non conosce il path del file.
   assert.doesNotMatch(BATCH_SRC, /faq-locale-rejections\.json/);
+});
+
+// ── Review di #1935: discovery sotto il conteggio sorgente e checkpoint ──
+
+// content/blog-body/de/laivin-festival-cassano-valcuvia-2026.ts: tre coppie
+// tedesche corrette, che `wrongLocalePair` non tocca.
+const DE_LAIVIN = [
+  { q: 'Wo findet das Festival LaivIn Plus statt?', a: 'Das Festival LaivIn Plus findet in Cassano Valcuvia und Mantua vom 26. bis 28. Mai 2026 statt.' },
+  { q: 'Wer organisiert das Festival LaivIn Plus?', a: 'Das Festival LaivIn Plus wird von Teatro Periferico mit Alchemilla im Auftrag der Fondazione Cariplo organisiert.' },
+  { q: 'Wer kann am Festival LaivIn Plus teilnehmen?', a: 'Das Festival ist offen für Schüler der weiterführenden Schulen in Lombardei und Piemont, unbegleitete ausländische Minderjährige und Jugendliche mit Behinderungen.' },
+];
+const IT_LAIVIN = [
+  { q: 'Dove si svolge il festival LaivIn Plus?', a: 'Il festival LaivIn Plus si svolge a Cassano Valcuvia e a Mantova dal 26 al 28 maggio 2026.' },
+  { q: 'Chi organizza il festival LaivIn Plus?', a: 'Il festival LaivIn Plus è organizzato dal Teatro Periferico con Alchemilla per conto della Fondazione Cariplo.' },
+  { q: 'Chi può partecipare al festival LaivIn Plus?', a: 'Il festival è aperto agli studenti delle scuole superiori della Lombardia e del Piemonte e ai minori stranieri non accompagnati.' },
+  { q: 'Quanti studenti partecipano al festival?', a: 'Al festival partecipano circa 300 studenti in tre giorni di spettacoli e laboratori teatrali.' },
+];
+
+function bodyDirWith(itFaq, deFaq) {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'faq-discovery-'));
+  const id = 'laivin-festival-cassano-valcuvia-2026';
+  for (const [locale, faq] of [['it', itFaq], ['de', deFaq]]) {
+    fs.mkdirSync(path.join(dir, locale));
+    const file = path.join(dir, locale, `${id}.ts`);
+    fs.writeFileSync(file, `const body: Record<string, string> = {\n    'blog.article.${id}.body1': 'Testo.',\n};\n\nexport default body;\n`);
+    assert.equal(insertFaqIntoBodyFile(file, id, faq), true);
+  }
+  return dir;
+}
+
+test('la discovery del batch riaccoda un locale pubblicato con MENO coppie della sorgente', () => {
+  // Premessa: le coppie tedesche sono sane, quindi SOLO il conteggio le riaccoda.
+  assert.equal(wrongLocalePair(DE_LAIVIN, 'de', IT_LAIVIN), null);
+  const pruned = bodyDirWith(IT_LAIVIN, DE_LAIVIN);
+  try {
+    const { needsTranslation } = discoverArticles(pruned);
+    assert.deepEqual(needsTranslation.map((a) => [a.id, a.missingLocales]),
+      [['laivin-festival-cassano-valcuvia-2026', ['de']]]);
+  } finally {
+    fs.rmSync(pruned, { recursive: true, force: true });
+  }
+  // Controllo: stesso numero di coppie della sorgente -> niente da fare.
+  const full = bodyDirWith(IT_LAIVIN.slice(0, 3), DE_LAIVIN);
+  try {
+    assert.deepEqual(discoverArticles(full).needsTranslation, []);
+  } finally {
+    fs.rmSync(full, { recursive: true, force: true });
+  }
+});
+
+test('ogni checkpoint del batch mette in stage anche il registro dei rifiuti', () => {
+  const cmd = checkpointCommitCommand({ bodyDirGitPath: 'content/blog-body/', progressFile: 'data/batch-faq-progress.json', label: 'step 1' });
+  assert.match(cmd, new RegExp(`git add -f ${FAQ_REJECTION_LEDGER_GIT_PATH.replace(/[.]/g, '\\.')}`));
+  // Lo step di commit finale del workflow usa lo STESSO path.
+  const workflow = fs.readFileSync(path.join(QUI, '..', '..', '.github', 'workflows', 'batch-faq-articles.yml'), 'utf8');
+  assert.ok(workflow.includes(`git add -f ${FAQ_REJECTION_LEDGER_GIT_PATH}`));
+
+  // Eseguito davvero in un repo git temporaneo: il commit del checkpoint
+  // contiene il registro (che .gitignore o no, e' `add -f`).
+  const repo = fs.mkdtempSync(path.join(os.tmpdir(), 'faq-checkpoint-'));
+  try {
+    const git = (...args) => spawnSync('git', args, { cwd: repo, encoding: 'utf8' });
+    git('init', '-q');
+    git('config', 'user.email', 'test@example.invalid');
+    git('config', 'user.name', 'test');
+    fs.mkdirSync(path.join(repo, 'content', 'blog-body'), { recursive: true });
+    fs.mkdirSync(path.join(repo, 'data'), { recursive: true });
+    fs.writeFileSync(path.join(repo, 'content', 'blog-body', 'x.ts'), 'x');
+    fs.writeFileSync(path.join(repo, 'data', 'batch-faq-progress.json'), '{}');
+    fs.writeFileSync(path.join(repo, FAQ_REJECTION_LEDGER_GIT_PATH), '{"frontaliere/x/de":{"consecutive":1}}');
+    fs.writeFileSync(path.join(repo, '.gitignore'), 'data/\n');
+    const run = spawnSync('sh', ['-c', cmd], { cwd: repo, encoding: 'utf8' });
+    assert.equal(run.status, 0, run.stderr);
+    const files = git('show', '--name-only', '--format=', 'HEAD').stdout.trim().split('\n').sort();
+    assert.deepEqual(files, ['content/blog-body/x.ts', 'data/batch-faq-progress.json', FAQ_REJECTION_LEDGER_GIT_PATH].sort());
+  } finally {
+    fs.rmSync(repo, { recursive: true, force: true });
+  }
 });
