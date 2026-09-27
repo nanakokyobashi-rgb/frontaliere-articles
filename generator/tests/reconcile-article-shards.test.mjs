@@ -44,6 +44,7 @@ import {
   unquoteGitPath,
   normalizeTreePaths,
   fetchAnnouncedSurface,
+  ANNOUNCED_SURFACE_RETRY_DELAY_MS,
 } from '../../scripts/reconcile-article-shards.mjs';
 
 // Base slug reali (scripts/lib/section-shard-slugs.json) per le due sezioni.
@@ -424,7 +425,7 @@ test('la superficie incoerente durante un deploy Pages viene ritentata come snap
   });
   assert.equal(calls.length, 8, 'due osservazioni complete da quattro documenti');
   assert.deepEqual(calls.map((call) => call.attempt), [1, 1, 1, 1, 2, 2, 2, 2]);
-  assert.deepEqual(waits, [15_000]);
+  assert.deepEqual(waits, [ANNOUNCED_SURFACE_RETRY_DELAY_MS]);
   assert.ok(calls.every(({ file }) => Object.hasOwn(payloads, file)));
   assert.deepEqual([...new Set(calls.map((call) => call.cacheBust))], ['123-1', '123-2']);
 });
@@ -459,7 +460,7 @@ test('una superficie incoerente persistente resta fail-closed dopo il budget di 
   );
 
   assert.equal(calls.length, 8, 'il retry resta bounded e ripete tutti i quattro documenti');
-  assert.deepEqual(waits, [15_000]);
+  assert.deepEqual(waits, [ANNOUNCED_SURFACE_RETRY_DELAY_MS]);
 });
 
 // ── treeLooksSane: un clone rotto non deve dichiarare fantasma il corpus ────

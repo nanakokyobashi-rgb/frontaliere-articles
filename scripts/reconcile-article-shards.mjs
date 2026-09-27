@@ -354,8 +354,14 @@ export async function fetchAnnouncedSurface(
     let retryContext;
     try {
       const cacheBust = `${now()}-${attempt}`;
-      const [manifest, slugs, articles, swissArticles] = await Promise.all(
-        ANNOUNCED_SURFACE_FILES.map((file) => fetchJsonImpl(
+      // Il manifest resta la prima lettura: counts e commit sono il gate che
+      // autorizza l'uso degli altri documenti, anche quando il loro fetch è
+      // poi parallelo per accorciare la finestra di una pubblicazione mista.
+      const manifest = await fetchJsonImpl(
+        cacheBustedSurfaceUrl(apiBase, ANNOUNCED_SURFACE_FILES[0], cacheBust),
+      );
+      const [slugs, articles, swissArticles] = await Promise.all(
+        ANNOUNCED_SURFACE_FILES.slice(1).map((file) => fetchJsonImpl(
           cacheBustedSurfaceUrl(apiBase, file, cacheBust),
         )),
       );
