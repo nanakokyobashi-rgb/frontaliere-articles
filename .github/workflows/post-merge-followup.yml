@@ -57,7 +57,10 @@ jobs:
     # 40→55 (2026-09-24): la sessione Codex del batch ha misurato 1670s
     # (35973121007) ed e' morta sul watchdog da 1800s (36009410204) con lo
     # step da 32 min gia' pieno (job 35m42s su 40). Vedi lo step Codex.
-    timeout-minutes: 55 # batch di N PR in una sessione (era 10 per una sola PR)
+    # 55→140 (2026-09-27): il cap di sessione passa da 4 a 16 PR
+    # (FOLLOWUP_SESSION_BATCH_LIMIT). 140 = step Codex 120 + pre-step misurato
+    # (checkout+collect fino a ~10 min con 200 PR in finestra) + coda ~2 min.
+    timeout-minutes: 140 # batch di N PR in una sessione (era 10 per una sola PR)
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -232,12 +235,15 @@ jobs:
 
       - name: Run Codex Luna Max follow-up triage (batch)
         # Tetto sullo step: senza, l'unico limite era il cap del job
-        # (ora 55min) e la run ci moriva `cancelled` — che NON fa scattare
+        # (ora 140min) e la run ci moriva `cancelled` — che NON fa scattare
         # nessun `if: failure()` e si vede solo dallo scan periodico
         # (`scripts/ci/scan-job-timeouts.mjs`). Stessa classe di #7310.
-        # 47min = cap del job meno il pre-step misurato (~102s) e la coda
-        # degli step successivi (~122s, run 36009410204) con margine.
-        timeout-minutes: 47
+        # 120min = il tetto massimo ammesso per uno step agentico
+        # (claude-step-timeout.test.mjs); il watchdog Codex (6900s) + setup
+        # Codex (~2-4 min) + kill grace 30s + finalize ci stanno dentro. Resta
+        # sotto il job da 140 min con il pre-step e la coda degli step
+        # successivi (~122s, run 36009410204).
+        timeout-minutes: 120
         id: followup
         # Gira SOLO se il batch ha almeno una PR. Per le altre run (finestra vuota /
         # tutte già-triagiate / tutte scartate dai gate) la sessione del provider è
@@ -270,10 +276,14 @@ jobs:
           codex_site_github_token: ${{ env.GITHUB_PAT }}
           # Watchdog Codex 1800s→2520s: 36009410204 e' stata uccisa a 1803s
           # con 4 PR verificate e persistite ma `action_ok=false`, la run
-          # precedente ha chiuso a 1670s. 2520s + setup Codex (~2-4 min) +
-          # kill grace + coda restano sotto lo step da 47 min, cosi' il
-          # watchdog scatta prima del kill del runner.
-          exec_timeout_seconds: '2520'
+          # precedente ha chiuso a 1670s.
+          # 2520s→6900s (2026-09-27, cap di sessione 4→16 PR): con 4 PR le
+          # sessioni misurate vanno da 575s a 1597s (144-399 s/PR, bootstrap
+          # incluso; run 36127041310..36315187017). 16 x 399s = 6384s, sotto
+          # 6900s. 6900s + setup/kill grace/coda (300s) = 7200s restano sotto
+          # lo step da 120 min, cosi' il watchdog scatta prima del kill del
+          # runner.
+          exec_timeout_seconds: '6900'
           # Il merge che alimenta questo workflow può arrivare da automation interna:
           # i token host-side sono espliciti e separati per repository; il token del
           # job resta confinato ai passi zero-agent che lo dichiarano.

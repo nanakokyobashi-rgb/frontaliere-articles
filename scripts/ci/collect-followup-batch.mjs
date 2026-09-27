@@ -101,9 +101,20 @@ export function positiveHours(raw, fallback) {
   return Number.isFinite(n) && n > 0 ? n : fallback;
 }
 const SEARCH_PAGE_SIZE = 100;
-// Capacity evidence: run 34602892494 reached the provider's 32-minute ceiling
-// while processing a 36-PR window. Four is therefore a conservative operational
-// cap, not a promise of measured per-PR capacity.
+// Capacità della sessione provider: 16 PR (era 4, 2026-09-27).
+// Il 4 nasceva dalla run 34602892494, arrivata al tetto provider di allora (32
+// minuti) su una finestra di 36 PR. Con 4 la coda non si smaltiva: cadenza reale ~5 run/giorno (cron ogni 3h, gap
+// mediano misurato 4,9h) = ~20 PR/giorno, contro 33-124 merge/giorno sul sito
+// (~72% passa i gate) e rinvii di 29-146 PR a OGNI run (sito 36112598869..
+// 36325938055, corpus 36127041310..36315187017); ciò che resta oltre il lookback
+// di 48h esce dalla finestra non triagiato.
+// Tempo per PR misurato con 4 PR in sessione (include il bootstrap fisso):
+// sito 32-259 s/PR, corpus 144-399 s/PR, caso peggiore storico >=451 s/PR
+// (36009410204, uccisa a 1803 s). 16 x 399 s = 106 min sotto il watchdog Codex
+// da 115 min (6900 s), step 120 (il tetto per gli step agentici) e job 140:
+// vedi post-merge-followup.yml. Il limite resta un cap operativo, e il
+// benchmark del sito (27 PR in 30,3 min) conferma che il costo per PR scende
+// con il batch perché il bootstrap è condiviso.
 //
 // Una finestra più larga del cap NON è un errore di raccolta: è un rinvio
 // PIANIFICATO. Il troncamento viene dichiarato in `deferred_count`, mentre
@@ -113,7 +124,7 @@ const SEARCH_PAGE_SIZE = 100;
 // deve tenere il watermark indietro, un rinvio pianificato deve lasciarlo
 // avanzare, altrimenti il residuo non si drena mai. Confuse, producevano il
 // ratchet documentato sopra (34 run rosse consecutive, 157,7 h).
-export const FOLLOWUP_SESSION_BATCH_LIMIT = 4;
+export const FOLLOWUP_SESSION_BATCH_LIMIT = 16;
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const GATE_DIRECTORY_SENTINELS = [
   'followup-resolution-match.mjs',
