@@ -1041,5 +1041,5 @@ test('rate limit: fuori dai completamenti di tests lo scan non legge nemmeno le 
   assert.equal(r.status, 0, r.stderr);
   assert.equal(r.calls.some((c) => c.includes('/actions/workflows/tests.yml/runs')), false, r.calls.join('\n'));
   const workflow = fs.readFileSync(path.join(ROOT, '.github/workflows/review-quota-rescuer.yml'), 'utf8');
-  assert.match(workflow, /REVIEW_RATE_LIMIT_SCAN: \$\{\{ github\.event_name != 'workflow_run' \|\| github\.event\.workflow_run\.name == 'tests' \}\}/);
+  assert.match(workflow, /REVIEW_RATE_LIMIT_SCAN: \$\{\{ github\.event_name != 'workflow_run' \|\| github\.event\.workflow_run\.path == '\.github\/workflows\/tests\.yml' \}\}/);
 });

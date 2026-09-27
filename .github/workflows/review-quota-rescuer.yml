@@ -28,7 +28,12 @@ on:
       - Issue decompose (Codex Luna Max → sub-issues)
       - PR 🔴 fixer (bounded loop-closure on bot PRs)
       - PR ❌ check fixer (bounded, check richiesto rosso su PR bot)
-      - Follow-up drainer (queue → agent:fix, no-Claude)
+    # Niente `Follow-up drainer`: riserva lo slot issue-fix e lo passa alla
+    # run promossa (o lo rilascia nella stessa run), quindi alla fine non ha
+    # liberato nessuno slot che una review differita stesse aspettando; lo
+    # slot si libera al completamento di `Issue fix`, gia' in lista. Il 26-27/09
+    # era la prima sorgente del rescuer: 211 run in 24 h (112 cancelled dal suo
+    # mutex), tutte con `quota-candidate=0`.
     types: [completed]
   schedule:
     - cron: '7,22,37,52 * * * *'
@@ -59,10 +64,17 @@ jobs:
     #    stessa semantica di run manuale fuori dalla famiglia review.
     #  - una run sorgente `skipped`: nessun job e' partito, quindi nessun lease.
     # Il cron e il dispatch restano la rete che scandisce TUTTE le PR aperte.
+    #
+    # `tests` si riconosce dal PATH e non da `workflow_run.name`: tests.yml ha
+    # un `run-name:` («Code checks and review · …») e `workflow_run.name` e' il
+    # nome della RUN, non il `name:` del workflow. Il confronto con 'tests'
+    # non era mai vero (#1614 non ha mai saltato nulla: 81 run su push di main
+    # eseguite il 26-27/09) e `REVIEW_RATE_LIMIT_SCAN` restava sempre `false`
+    # sui completamenti di `tests`.
     if: >-
       github.event_name != 'workflow_run' ||
       (github.event.workflow_run.conclusion != 'skipped' &&
-       !(github.event.workflow_run.name == 'tests' &&
+       !(github.event.workflow_run.path == '.github/workflows/tests.yml' &&
          (github.event.workflow_run.event == 'push' ||
           (github.event.workflow_run.event == 'workflow_dispatch' &&
            github.event.workflow_run.head_branch == 'main'))))
@@ -110,7 +122,7 @@ jobs:
         env:
           GH_REPO: ${{ github.repository }}
           DRY_RUN: ${{ github.event.inputs.dry_run }}
-          REVIEW_RATE_LIMIT_SCAN: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.name == 'tests' }}
+          REVIEW_RATE_LIMIT_SCAN: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.path == '.github/workflows/tests.yml' }}
         run: |
           set -uo pipefail
           runtime_pat="${GITHUB_PAT_NANAKO:-}"
