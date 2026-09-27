@@ -61,6 +61,15 @@ export function isTestOnlySnapshot(snapshot) {
   return snapshot?.complete === true && Array.isArray(snapshot.files)
     && snapshot.files.length > 0 && snapshot.files.every(isReviewTestPath);
 }
+/**
+ * `gh api --paginate --slurp` restituisce l'array delle pagine: lo appiattisce.
+ * Un valore non-array passa intatto, così i controlli a valle vedono ancora
+ * l'API illeggibile.
+ */
+function flattenGhPages(value) {
+  return Array.isArray(value) ? value.flat() : value;
+}
+
 export function gh(args, { json = true, allowFail = false, input } = {}) {
   try {
     const out = execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, input });
@@ -134,7 +143,7 @@ export function postTestOnlyReview({
   if (!/^[\w.-]+\/[\w.-]+$/.test(repo ?? '') || !/^\d+$/.test(String(pr)) || !/^[a-f0-9]{40}$/.test(head ?? '')) throw new Error('Invalid review target');
   const revisionMarker = reviewInputRevisionMarker(reviewRevision);
   if (!verifyTestOnlyHead(ghFn, repo, pr, head)) throw new Error('PR is not a complete tests-only change on the expected HEAD');
-  const reviews = ghFn(['api', `repos/${repo}/pulls/${pr}/reviews`, '--paginate']);
+  const reviews = flattenGhPages(ghFn(['api', `repos/${repo}/pulls/${pr}/reviews`, '--paginate', '--slurp']));
   if (findTestOnlyApproval(reviews, head, { ghFn, repo, pr, reviewRevision })) return;
   const body = [
     TEST_REVIEW_MARKER,

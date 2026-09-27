@@ -1313,8 +1313,8 @@ function main() {
     // confonderle e' esattamente il difetto dell'item 1 di #923.
     let commentsRead = false;
     const readComments = () => {
-      const cs = gh(['api', `repos/${REPO}/issues/${iss.number}/comments?per_page=100`, '--paginate']);
-      comments = Array.isArray(cs) ? cs : [];
+      const cs = gh(['api', `repos/${REPO}/issues/${iss.number}/comments?per_page=100`, '--paginate', '--slurp']);
+      comments = Array.isArray(cs) ? cs.flat() : [];
       commentsRead = true;
     };
     if (needsVerdictLookup(iss.title)) {

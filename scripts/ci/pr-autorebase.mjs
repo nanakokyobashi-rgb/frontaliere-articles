@@ -68,6 +68,7 @@ import {
   VITEST_EXECUTION_JOB_NAME,
   isManagedReview,
 } from './lib/constants.mjs';
+import { flattenReviewPages, isTerminalReviewState } from './lib/pr-review-admission.mjs';
 import {
   latestCompletedVitestConclusion,
   latestCompletedVitestExecutionRun,
@@ -448,7 +449,12 @@ function pushBranch(branch) {
  * HEAD → nuova review → 🔴 (stesso loop misurato sul sito, #9959: 45 merge di
  * main in 24h, 43 review; corretto lì da valerielinc-ops/frontaliere-si-o-no#10068).
  *
- * @returns {'lgtm'|'blocking'|'none'|'unknown'} `unknown` = API/revision illeggibile.
+ * Contano solo le review inviate e non ritirate (`isTerminalReviewState`):
+ * una review `DISMISSED` o `PENDING` con `## LGTM` non è un verdetto
+ * approvante e non deve sbloccare il rebase di una PR `needs-human`.
+ *
+ * @returns {'lgtm'|'blocking'|'none'|'unknown'} `unknown` = API/revision illeggibile,
+ *   oppure review gestite presenti ma nessuna in stato terminale.
  */
 export function latestReviewerVerdict(reviews, head, reviewRevision) {
   if (!Array.isArray(reviews) || !reviewRevision) return 'unknown';
@@ -457,10 +463,12 @@ export function latestReviewerVerdict(reviews, head, reviewRevision) {
     .filter(({ review }) => review && isManagedReview(review)
       && reviewHasInputRevision(review.body, reviewRevision));
   if (!managed.length) return 'none';
+  const submitted = managed.filter(({ review }) => isTerminalReviewState(review.state));
+  if (!submitted.length) return 'unknown';
   const current = String(head || '').toLowerCase();
-  const onHead = managed.filter(({ review }) => current
+  const onHead = submitted.filter(({ review }) => current
     && String(review.commit_id || '').toLowerCase() === current);
-  const pool = onHead.length ? onHead : managed;
+  const pool = onHead.length ? onHead : submitted;
   const at = ({ review }) => {
     const t = Date.parse(review.submitted_at || '');
     return Number.isFinite(t) ? t : Number.NEGATIVE_INFINITY;
@@ -485,9 +493,19 @@ export function needsHumanBlocksAutorebase({ labels = [], verdict }) {
   return hasNeedsHuman && (verdict === 'blocking' || verdict === 'unknown');
 }
 
+/**
+ * Tutte le review della PR come UN array. `--paginate` da solo stampa un array
+ * JSON per pagina (`[...][...]`): oltre le 30 review `JSON.parse` falliva e la
+ * lettura diventava `null` (verdetto `unknown`) proprio sulle PR con più giri
+ * di review. `--slurp` restituisce l'array delle pagine; `null` = API illeggibile.
+ */
+function readPullRequestReviews(num) {
+  const pages = gh(['api', `repos/${REPO}/pulls/${num}/reviews?per_page=100`, '--paginate', '--slurp'], { allowFail: true });
+  return Array.isArray(pages) ? flattenReviewPages(pages) : null;
+}
+
 function readReviewerVerdict(num, head, reviewRevision) {
-  const reviews = gh(['api', `repos/${REPO}/pulls/${num}/reviews`, '--paginate'], { allowFail: true });
-  return latestReviewerVerdict(reviews, head, reviewRevision);
+  return latestReviewerVerdict(readPullRequestReviews(num), head, reviewRevision);
 }
 
 /** Esiste ALMENO una review gestita della revisione body corrente (LGTM o 🔴,
@@ -497,7 +515,7 @@ function readReviewerVerdict(num, head, reviewRevision) {
  * redflag-fixer, NON va ri-triggerata qui). */
 function hasAnyManagedReview(num, reviewRevision = currentReviewInputRevision(num)) {
   if (!reviewRevision) return true; // API body illeggibile: non aprire/retriggerare alla cieca
-  const reviews = gh(['api', `repos/${REPO}/pulls/${num}/reviews`, '--paginate'], { allowFail: true });
+  const reviews = readPullRequestReviews(num);
   if (!Array.isArray(reviews)) return true; // fail-safe: su errore API assumi review esistente (no reopen)
   return reviews.some((r) => isManagedReview(r) && reviewHasInputRevision(r.body, reviewRevision));
 }
