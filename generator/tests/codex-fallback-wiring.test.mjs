@@ -285,3 +285,28 @@ test('batch-faq-articles tiene vivo il broker per tutta la durata del job', () =
   assert.match(action, /--ttl-ms "\$broker_ttl_ms"/);
   assert.doesNotMatch(action, /--ttl-ms 1800000/);
 });
+
+test('batch-faq-articles abilita il fallback locale Opus-MT per le FAQ', () => {
+  const workflow = read('.github/workflows/batch-faq-articles.yml');
+  const lines = workflow.split('\n');
+  const cacheIndex = lines.findIndex((line) => line === '      - name: Cache local Opus-MT models');
+  assert.ok(cacheIndex >= 0, 'cache locale Opus-MT non configurata');
+  const cache = stepBlock(lines, cacheIndex);
+  assert.match(cache, /if: steps\.mode\.outputs\.dry != 'true'/);
+  assert.match(cache, /uses: actions\/cache@v5/);
+  assert.match(cache, /path: \.cache\/transformers/);
+  assert.match(cache, /key: local-mt-models-v2-opus-e5/);
+
+  for (const stepName of [
+    'Run batch FAQ generation',
+    'Fix FAQ locales (translate missing/wrong-locale FAQs)',
+  ]) {
+    const stepIndex = lines.findIndex((line) => line === `      - name: ${stepName}`);
+    assert.ok(stepIndex >= 0, `${stepName}: step non trovato`);
+    const step = stepBlock(lines, stepIndex);
+    assert.match(step, /MT_LOCAL_OPUSMT:\s*['"]1['"]/,
+      `${stepName}: fallback locale disabilitato`);
+    assert.match(step, /TRANSFORMERS_CACHE:\s*\.cache\/transformers/,
+      `${stepName}: cache locale non condivisa`);
+  }
+});

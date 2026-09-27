@@ -23,6 +23,10 @@ name: Batch FAQ Generation
 #     tier serves those fields once DeepL and Azure are out, capped at
 #     FREE_TRANSLATE_CODEX_MAX_CALLS per process. No AI_MODELS_PREFER: FAQ
 #     generation itself stays on the free cascade.
+#   - Local Opus-MT is enabled for both FAQ translation passes. The model cache
+#     is shared with translate-pending, and the local tier runs before MyMemory
+#     for EN/DE/FR. It fails closed when the model cannot load, so the locale
+#     guards remain authoritative instead of accepting source-language pairs.
 #   - No `npm run test:articles`. Those are site tests, some of which assert on
 #     React rendering (§4).
 #   - No `trigger-deploy.sh` and no corpus-mirror dispatch. Neither exists here:
@@ -137,6 +141,16 @@ jobs:
       - name: Install dependencies
         run: bash scripts/lib/npm-ci-retry.sh
 
+      - name: Cache local Opus-MT models
+        if: steps.mode.outputs.dry != 'true'
+        uses: actions/cache@v5
+        with:
+          path: .cache/transformers
+          key: local-mt-models-v2-opus-e5
+          restore-keys: |
+            local-mt-models-
+            opus-mt-models-
+
       - name: Prepare Firebase credentials
         env:
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
@@ -204,6 +218,8 @@ jobs:
           FAQ_CONCURRENCY: ${{ inputs.concurrency || '1' }}
           FAQ_SKIP_TRANSLATE: ${{ inputs.skip_translate }}
           FAQ_DRY_RUN: ${{ steps.mode.outputs.dry }}
+          MT_LOCAL_OPUSMT: '1'
+          TRANSFORMERS_CACHE: .cache/transformers
           CODEX_AUTH_BROKER_SOCKET: ${{ steps.setup_claude_haiku_fallback.outputs.codex_auth_broker_socket }}
           # Daily heavy-volume caller (~200 articles x 3 locales x FAQ pairs):
           # the Codex quota is shared with the owner's interactive use, so the
@@ -227,6 +243,8 @@ jobs:
       - name: Fix FAQ locales (translate missing/wrong-locale FAQs)
         if: steps.mode.outputs.dry != 'true'
         env:
+          MT_LOCAL_OPUSMT: '1'
+          TRANSFORMERS_CACHE: .cache/transformers
           CODEX_AUTH_BROKER_SOCKET: ${{ steps.setup_claude_haiku_fallback.outputs.codex_auth_broker_socket }}
           FREE_TRANSLATE_CODEX_MAX_CALLS: '20'
           FREE_TRANSLATE_CODEX_MAX_MS: '1200000'
