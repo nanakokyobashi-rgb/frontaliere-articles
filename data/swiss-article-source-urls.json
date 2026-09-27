@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1945743/defr-internet-credito-negozi-carta": {
-    "articleId": "pagamenti-offline-negozi-svizzera",
-    "ts": "2026-08-24T15:15:06.720Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/defr%3a-pagare-in-negozi-con-carta-credito-anche-con-panne-internet/91947461": {
     "articleId": "carte-credito-pagamenti-offline-2027",
     "ts": "2026-08-24T15:21:52.254Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/iniziativa-neutralit%c3%a0%3a-proiezione%2c-no-al-71%25/92126403": {
     "articleId": "iniziativa-neutralita-respinta",
     "ts": "2026-09-27T11:49:47.033Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/iniziativa-alimentazione%3a-nettamente-respinta-da-cantoni/92126488": {
+    "articleId": "iniziativa-alimentazione-respinta",
+    "ts": "2026-09-27T12:30:20.123Z",
     "keyForm": 2
   }
 }
