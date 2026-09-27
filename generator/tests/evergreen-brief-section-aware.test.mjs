@@ -256,8 +256,15 @@ test('i punti di iniezione usano il selettore di sezione, non il brief nudo', ()
   // — il guard falliva sul codice CORRETTO, che e' il modo piu' rapido di far
   // disattivare un guard da chi ha fretta.
   const gateBlock = src.slice(gateCall, gateCall + 3000);
+  // Due forme equivalenti: l'espressione inline o l'helper condiviso con il
+  // gate finale (`factualityGateSourceText`). Con l'helper, il guard segue la
+  // definizione: deve restituire '' per evergreen://, altrimenti il brief
+  // rientra nel denominatore da li'.
+  const inlineGuard = /sourceText: url\.startsWith\('evergreen:\/\/'\) \? '' : pageContent/.test(gateBlock);
+  const helperGuard = /sourceText: factualityGateSourceText\(url, pageContent\)/.test(gateBlock)
+    && /function factualityGateSourceText\(url, pageContent\) \{\n\s*return String\(url \|\| ''\)\.startsWith\('evergreen:\/\/'\) \? '' : \(pageContent \|\| ''\);/.test(src);
   assert.ok(
-    /sourceText: url\.startsWith\('evergreen:\/\/'\) \? '' : pageContent/.test(gateBlock),
+    inlineGuard || helperGuard,
     'runFactualityGates riceve di nuovo pageContent nudo: il brief e\' tornato nel denominatore del gate di recall',
   );
   assert.equal(
