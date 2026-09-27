@@ -43,6 +43,7 @@ import {
   orderAndCap,
   unquoteGitPath,
   normalizeTreePaths,
+  fetchAnnouncedSurface,
 } from '../../scripts/reconcile-article-shards.mjs';
 
 // Base slug reali (scripts/lib/section-shard-slugs.json) per le due sezioni.
@@ -378,6 +379,87 @@ test('un registro con id duplicati o mancanti viene rifiutato prima del confront
 test('manifest senza counts viene rifiutato subito', () => {
   const errors = validateAnnouncedSurface({ manifest: {}, slugs: {}, articles: [], swissArticles: [] });
   assert.equal(errors.length, 1);
+});
+
+test('la superficie incoerente durante un deploy Pages viene ritentata come snapshot intero', async () => {
+  const coherent = goodSurface();
+  const mixed = {
+    ...coherent,
+    slugs: { ...coherent.slugs, swiss: { altro: { it: 'altro' } } },
+  };
+  const payloads = {
+    'manifest.json': coherent.manifest,
+    'slugs.json': coherent.slugs,
+    'articles.json': coherent.articles,
+    'swiss-articles.json': coherent.swissArticles,
+  };
+  const mixedPayloads = {
+    'manifest.json': mixed.manifest,
+    'slugs.json': mixed.slugs,
+    'articles.json': mixed.articles,
+    'swiss-articles.json': mixed.swissArticles,
+  };
+  const calls = [];
+  const waits = [];
+
+  const fetched = async (url) => {
+    const parsed = new URL(url);
+    const file = parsed.pathname.split('/').pop();
+    const attempt = Number(parsed.searchParams.get('reconcile').split('-').pop());
+    calls.push({ file, attempt, cacheBust: parsed.searchParams.get('reconcile') });
+    return (attempt === 1 ? mixedPayloads : payloads)[file];
+  };
+
+  const surface = await fetchAnnouncedSurface('https://api.example.test/articles', coherent.sourceCounts, {
+    fetchJsonImpl: fetched,
+    wait: async (ms) => waits.push(ms),
+    now: () => 123,
+  });
+
+  assert.deepEqual(surface, {
+    manifest: coherent.manifest,
+    slugs: coherent.slugs,
+    articles: coherent.articles,
+    swissArticles: coherent.swissArticles,
+  });
+  assert.equal(calls.length, 8, 'due osservazioni complete da quattro documenti');
+  assert.deepEqual(calls.map((call) => call.attempt), [1, 1, 1, 1, 2, 2, 2, 2]);
+  assert.deepEqual(waits, [15_000]);
+  assert.ok(calls.every(({ file }) => Object.hasOwn(payloads, file)));
+  assert.deepEqual([...new Set(calls.map((call) => call.cacheBust))], ['123-1', '123-2']);
+});
+
+test('una superficie incoerente persistente resta fail-closed dopo il budget di retry', async () => {
+  const surface = goodSurface();
+  const calls = [];
+  const waits = [];
+
+  await assert.rejects(
+    () => fetchAnnouncedSurface('https://api.example.test/articles', surface.sourceCounts, {
+      fetchJsonImpl: async (url) => {
+        const parsed = new URL(url);
+        const file = parsed.pathname.split('/').pop();
+        calls.push(file);
+        if (file === 'slugs.json') return { blog: surface.slugs.blog, swiss: { wrong: { it: 'wrong' } } };
+        return {
+          'manifest.json': surface.manifest,
+          'articles.json': surface.articles,
+          'swiss-articles.json': surface.swissArticles,
+        }[file];
+      },
+      wait: async (ms) => waits.push(ms),
+      now: () => 456,
+      maxAttempts: 2,
+    }),
+    (error) => {
+      assert.equal(error.name, 'AnnouncedSurfaceIncoherentError');
+      assert.ok(error.surfaceErrors.some((entry) => entry.includes('slugs.swiss')));
+      return true;
+    },
+  );
+
+  assert.equal(calls.length, 8, 'il retry resta bounded e ripete tutti i quattro documenti');
+  assert.deepEqual(waits, [15_000]);
 });
 
 // ── treeLooksSane: un clone rotto non deve dichiarare fantasma il corpus ────

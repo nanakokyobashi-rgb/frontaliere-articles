@@ -20,9 +20,11 @@
 // annunciate non ha trovato NESSUN altro 404.
 //
 // COSA FA QUESTO SCRIPT (solo DETECTION — non pubblica niente):
-//   1. legge la superficie annunciata dall'API pubblicata (manifest.json per
-//      primo: `commit` + `counts` permettono di rifiutare un set troncato
-//      prima di usarlo; poi slugs.json e i registri per le date);
+//   1. legge la superficie annunciata dall'API pubblicata (manifest.json è il
+//      primo riferimento: `commit` + `counts` permettono di rifiutare un set
+//      troncato prima di usarlo; poi slugs.json e i registri per le date). La
+//      lettura viene ripetuta se i documenti attraversano una pubblicazione
+//      Pages non atomica: si accetta solo uno snapshot che passa tutto il gate;
 //   2. legge le pagine REALI di ogni shard via `git ls-tree` su un clone
 //      `--filter=blob:none --no-checkout` (solo oggetti tree, zero blob:
 //      ~0,5 MB a shard invece di migliaia di HEAD HTTP — e niente cache
@@ -282,6 +284,15 @@ export function orderAndCap(missing, dateById, cap) {
 // ── Da qui in giù: solo I/O del CLI (niente da testare in purezza) ──────────
 
 const API_BASE_DEFAULT = 'https://nanakokyobashi-rgb.github.io/frontaliere-articles';
+// GitHub Pages/edge può esporre i documenti di una nuova pubblicazione in
+// tempi diversi. Il run #1952 ha letto swiss-articles.json nuovo insieme a
+// manifest.json e slugs.json vecchi, 39s prima che publish-api terminasse.
+// Ritentiamo l'intera superficie per ~2m15s, ma l'ultimo snapshot resta
+// fail-closed: una superficie incoerente persistente deve ancora rendere rosso
+// il detector, mai trasformarsi in una riconciliazione su dati parziali.
+export const ANNOUNCED_SURFACE_MAX_ATTEMPTS = 10;
+export const ANNOUNCED_SURFACE_RETRY_DELAY_MS = 15_000;
+const ANNOUNCED_SURFACE_FILES = ['manifest.json', 'slugs.json', 'articles.json', 'swiss-articles.json'];
 
 async function fetchJson(url) {
   let lastErr;
@@ -296,6 +307,84 @@ async function fetchJson(url) {
     }
   }
   throw new Error(`fetch di ${url} fallito dopo 3 tentativi: ${lastErr}`);
+}
+
+/** Errore conservativo: l'ultimo snapshot era leggibile, ma non coerente. */
+export class AnnouncedSurfaceIncoherentError extends Error {
+  constructor(surfaceErrors) {
+    super(`superficie annunciata incoerente: ${surfaceErrors.join('; ')}`);
+    this.name = 'AnnouncedSurfaceIncoherentError';
+    this.surfaceErrors = surfaceErrors;
+  }
+}
+
+function cacheBustedSurfaceUrl(apiBase, file, cacheBust) {
+  const url = new URL(`${apiBase}/${file}`);
+  url.searchParams.set('reconcile', cacheBust);
+  return url.href;
+}
+
+/**
+ * Legge e valida la superficie come un'unica osservazione logica.
+ *
+ * Una Pages deployment non garantisce che quattro URL statiche cambino nello
+ * stesso istante (e la cache edge può trattenere una risposta per file). Una
+ * lettura mista non è un motivo per riconciliare: è un motivo per aspettare e
+ * ripetere l'osservazione con URL cache-busted. Il callback è solo telemetria;
+ * la decisione resta in questa funzione e il limite è sempre bounded.
+ */
+export async function fetchAnnouncedSurface(
+  apiBase,
+  sourceCounts,
+  {
+    fetchJsonImpl = fetchJson,
+    wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms)),
+    now = Date.now,
+    maxAttempts = ANNOUNCED_SURFACE_MAX_ATTEMPTS,
+    retryDelayMs = ANNOUNCED_SURFACE_RETRY_DELAY_MS,
+    onRetry,
+  } = {},
+) {
+  let lastFailure;
+  const attempts = Number.isInteger(maxAttempts) && maxAttempts > 0
+    ? maxAttempts
+    : ANNOUNCED_SURFACE_MAX_ATTEMPTS;
+
+  for (let attempt = 1; attempt <= attempts; attempt++) {
+    let retryContext;
+    try {
+      const cacheBust = `${now()}-${attempt}`;
+      const [manifest, slugs, articles, swissArticles] = await Promise.all(
+        ANNOUNCED_SURFACE_FILES.map((file) => fetchJsonImpl(
+          cacheBustedSurfaceUrl(apiBase, file, cacheBust),
+        )),
+      );
+      const surfaceErrors = validateAnnouncedSurface({
+        manifest,
+        slugs,
+        articles,
+        swissArticles,
+        sourceCounts,
+      });
+      if (surfaceErrors.length === 0) return { manifest, slugs, articles, swissArticles };
+      lastFailure = new AnnouncedSurfaceIncoherentError(surfaceErrors);
+      retryContext = { errors: surfaceErrors };
+    } catch (error) {
+      lastFailure = error;
+      retryContext = { error };
+    }
+
+    if (attempt < attempts) {
+      onRetry?.({ attempt, maxAttempts: attempts, ...retryContext });
+      await wait(retryDelayMs);
+    }
+  }
+
+  if (lastFailure instanceof AnnouncedSurfaceIncoherentError) throw lastFailure;
+  throw new Error(
+    `lettura della superficie annunciata fallita dopo ${attempts} tentativi: ${lastFailure}`,
+    { cause: lastFailure },
+  );
 }
 
 /**
@@ -349,20 +438,27 @@ async function main() {
   const apiBase = (process.env.RECONCILE_API_BASE || API_BASE_DEFAULT).replace(/\/+$/, '');
   const cap = args.cap ?? process.env.RECONCILE_BACKFILL_CAP ?? 3;
 
-  // 1. Superficie annunciata. manifest.json per primo — commit + counts.
-  const manifest = await fetchJson(`${apiBase}/manifest.json`);
-  const slugs = await fetchJson(`${apiBase}/slugs.json`);
-  const articles = await fetchJson(`${apiBase}/articles.json`);
-  const swissArticles = await fetchJson(`${apiBase}/swiss-articles.json`);
-
   const sourceCounts = Object.fromEntries(
     SECTIONS.map(({ section }) => [section, countSourceArticles(ROOT_DIR, section)]),
   );
-  const surfaceErrors = validateAnnouncedSurface({ manifest, slugs, articles, swissArticles, sourceCounts });
-  if (surfaceErrors.length > 0) {
-    for (const e of surfaceErrors) console.error(`::error::[reconcile] superficie annunciata incoerente: ${e}`);
-    process.exit(1);
+  // 1. Superficie annunciata. manifest.json è il primo riferimento — commit +
+  // counts — ma l'osservazione viene ritentata se il deploy edge è a metà.
+  let surface;
+  try {
+    surface = await fetchAnnouncedSurface(apiBase, sourceCounts, {
+      onRetry: ({ attempt, maxAttempts, errors, error }) => {
+        const reason = errors?.join('; ') || `lettura fallita: ${error}`;
+        console.error(`::warning::[reconcile] superficie non ancora coerente (tentativo ${attempt}/${maxAttempts}): ${reason}`);
+      },
+    });
+  } catch (error) {
+    if (Array.isArray(error?.surfaceErrors)) {
+      for (const e of error.surfaceErrors) console.error(`::error::[reconcile] superficie annunciata incoerente: ${e}`);
+      process.exit(1);
+    }
+    throw error;
   }
+  const { manifest, slugs, articles, swissArticles } = surface;
 
   // 2. Esclusioni: gli id svizzeri shadowed viaggiano col corpus, non con
   // l'API. File OBBLIGATORIO nel checkout: senza, 12 articoli de-listati
