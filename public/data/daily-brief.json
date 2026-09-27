@@ -1,26 +1,47 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-26T09:46:28.541Z",
-  "dateIso": "2026-09-26",
+  "generatedAt": "2026-09-27T10:26:21.455Z",
+  "dateIso": "2026-09-27",
   "counts": {
     "availableBlocks": 4,
     "crossings": 141,
     "fuelMunicipalities": 518,
     "exchangePoints": 32,
-    "jobsActive": 23544
+    "jobsActive": 25757
   },
   "blocks": {
     "borderWait": {
       "available": true,
-      "updatedAt": "2026-09-26T06:07:36.340Z",
+      "updatedAt": "2026-09-27T10:09:04.182Z",
       "count": 141,
-      "zeroWaitCount": 141,
+      "zeroWaitCount": 138,
       "worst": {
-        "slug": "anieres",
-        "name": "Anières",
-        "waitMinutes": 0
+        "slug": "chiasso-brogeda",
+        "name": "Chiasso-Brogeda",
+        "waitMinutes": 8
       },
       "crossings": [
+        {
+          "slug": "chiasso-brogeda",
+          "name": "Chiasso-Brogeda",
+          "waitMinutes": 8,
+          "status": "yellow",
+          "direction": null
+        },
+        {
+          "slug": "gaggiolo",
+          "name": "Gaggiolo (Cantello-Stabio)",
+          "waitMinutes": 8,
+          "status": "yellow",
+          "direction": null
+        },
+        {
+          "slug": "san-pietro",
+          "name": "San Pietro (Clivio-Stabio)",
+          "waitMinutes": 8,
+          "status": "yellow",
+          "direction": null
+        },
         {
           "slug": "anieres",
           "name": "Anières",
@@ -232,13 +253,6 @@
           "direction": null
         },
         {
-          "slug": "chiasso-brogeda",
-          "name": "Chiasso-Brogeda",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": null
-        },
-        {
           "slug": "chiasso-strada",
           "name": "Chiasso-Strada",
           "waitMinutes": 0,
@@ -360,13 +374,6 @@
         {
           "slug": "forcola-di-livigno",
           "name": "Forcola di Livigno",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "gaggiolo",
-          "name": "Gaggiolo (Cantello-Stabio)",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -876,13 +883,6 @@
           "direction": null
         },
         {
-          "slug": "san-pietro",
-          "name": "San Pietro (Clivio-Stabio)",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": null
-        },
-        {
           "slug": "sauverny",
           "name": "Sauverny",
           "waitMinutes": 0,
@@ -1013,11 +1013,11 @@
     },
     "fuel": {
       "available": true,
-      "generatedAt": "2026-09-26T06:37:17.563Z",
+      "generatedAt": "2026-09-27T08:34:19.295Z",
       "municipalityCount": 518,
-      "cheaperItalyCount": 35,
-      "cheaperSwissCount": 107,
-      "tieCount": 2,
+      "cheaperItalyCount": 29,
+      "cheaperSwissCount": 111,
+      "tieCount": 5,
       "cheapestItaly": [
         {
           "municipality": "Livigno",
@@ -1070,13 +1070,13 @@
           "saving50LEur": 20.35
         },
         {
-          "municipality": "Caronno Varesino",
-          "province": "VA",
+          "municipality": "Luisago",
+          "province": "CO",
           "cheaperCountry": "CH",
-          "italyPriceEur": 2.218,
+          "italyPriceEur": 2.226,
           "swissPriceEur": 1.832,
           "swissPriceChf": 1.73,
-          "saving50LEur": 19.3
+          "saving50LEur": 19.7
         }
       ],
       "cheapestSwissStation": null,
@@ -1084,25 +1084,25 @@
     },
     "exchange": {
       "available": true,
-      "rate": 1.0631,
-      "lastDate": "2026-09-25",
-      "prevRate": 1.064,
-      "prevDate": "2026-09-24",
-      "delta1d": -0.0009,
+      "rate": 1.0602,
+      "lastDate": "2026-09-26",
+      "prevRate": 1.0604,
+      "prevDate": "2026-09-25",
+      "delta1d": -0.0002,
       "rate7dAgo": 1.0557,
-      "delta7d": 0.0074,
+      "delta7d": 0.0045,
       "source": "frankfurter",
       "pointCount": 32,
       "degradedEditions": 0
     },
     "jobs": {
       "available": true,
-      "generatedAt": "2026-09-26T05:30:38.763Z",
-      "activeJobs": 23544,
-      "activeCompanies": 866,
-      "todayAdded": 39,
-      "yesterdayAdded": 769,
-      "last7dAdded": 6166,
+      "generatedAt": "2026-09-27T07:26:44.916Z",
+      "activeJobs": 25757,
+      "activeCompanies": 861,
+      "todayAdded": 44,
+      "yesterdayAdded": 3544,
+      "last7dAdded": 7252,
       "degradedEditions": 0
     }
   }
