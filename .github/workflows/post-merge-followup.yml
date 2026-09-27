@@ -16,7 +16,10 @@ name: Post-merge follow-up triage
 # una finestra non viene mai persa, al più ri-triagiata (no-op grazie all'idempotenza).
 on:
   schedule:
-    - cron: '0 */3 * * *' # ogni 3h
+    # 3h→2h (2026-09-27): GitHub esegue ~62% dei cron nominali (gap mediano
+    # misurato 4,9h sul cron da 3h); con il cap di sessione a 14 PR servono
+    # ~7 run reali/giorno per coprire il flusso. Minuto sfasato dal sito (:00).
+    - cron: '40 */2 * * *' # ogni 2h
   workflow_dispatch:
     inputs:
       pr_number:
@@ -42,7 +45,7 @@ concurrency:
 jobs:
   followup:
     # Trigger:
-    # - `schedule`: batch automatico ogni 3h delle PR mergiate dall'owner
+    # - `schedule`: batch automatico ogni 2h delle PR mergiate dall'owner
     #   (`valerielinc-ops` / `frontaliere-automation[bot]`) — il filtro autore vive
     #   ora in `collect-followup-batch.mjs`, non più nell'`if:` del job.
     # - `workflow_dispatch` (closes #774): backfill manuale di UNA PR già mergiata ma
@@ -57,7 +60,7 @@ jobs:
     # 40→55 (2026-09-24): la sessione Codex del batch ha misurato 1670s
     # (35973121007) ed e' morta sul watchdog da 1800s (36009410204) con lo
     # step da 32 min gia' pieno (job 35m42s su 40). Vedi lo step Codex.
-    # 55→140 (2026-09-27): il cap di sessione passa da 4 a 16 PR
+    # 55→140 (2026-09-27): il cap di sessione passa da 4 a 14 PR
     # (FOLLOWUP_SESSION_BATCH_LIMIT). 140 = step Codex 120 + pre-step misurato
     # (checkout+collect fino a ~10 min con 200 PR in finestra) + coda ~2 min.
     timeout-minutes: 140 # batch di N PR in una sessione (era 10 per una sola PR)
@@ -239,7 +242,7 @@ jobs:
         # nessun `if: failure()` e si vede solo dallo scan periodico
         # (`scripts/ci/scan-job-timeouts.mjs`). Stessa classe di #7310.
         # 120min = il tetto massimo ammesso per uno step agentico
-        # (claude-step-timeout.test.mjs); il watchdog Codex (6900s) + setup
+        # (claude-step-timeout.test.mjs); il watchdog Codex (6840s) + setup
         # Codex (~2-4 min) + kill grace 30s + finalize ci stanno dentro. Resta
         # sotto il job da 140 min con il pre-step e la coda degli step
         # successivi (~122s, run 36009410204).
@@ -277,13 +280,12 @@ jobs:
           # Watchdog Codex 1800s→2520s: 36009410204 e' stata uccisa a 1803s
           # con 4 PR verificate e persistite ma `action_ok=false`, la run
           # precedente ha chiuso a 1670s.
-          # 2520s→6900s (2026-09-27, cap di sessione 4→16 PR): con 4 PR le
-          # sessioni misurate vanno da 575s a 1597s (144-399 s/PR, bootstrap
-          # incluso; run 36127041310..36315187017). 16 x 399s = 6384s, sotto
-          # 6900s. 6900s + setup/kill grace/coda (300s) = 7200s restano sotto
-          # lo step da 120 min, cosi' il watchdog scatta prima del kill del
-          # runner.
-          exec_timeout_seconds: '6900'
+          # 2520s→6840s (2026-09-27, cap di sessione 4→14 PR): dimensionato
+          # sul caso peggiore misurato, >=451 s/PR (36009410204):
+          # 14 x 451s = 6314s, ~8% sotto 6840s. 6840s + setup/kill grace/coda
+          # (300s) = 7140s, sotto lo step da 120 min (7200s), cosi' il
+          # watchdog scatta prima del kill del runner.
+          exec_timeout_seconds: '6840'
           # Il merge che alimenta questo workflow può arrivare da automation interna:
           # i token host-side sono espliciti e separati per repository; il token del
           # job resta confinato ai passi zero-agent che lo dichiarano.
@@ -321,7 +323,7 @@ jobs:
             - Cerca prima un issue aperto con quella chiave e quel repository. Se esiste, rileggi il body immediatamente prima dell'append; confronta la baseline (o una hash), ricostruisci l'append dalla lettura nuova su divergenza e non sovrascrivere contenuto concorrente. Se trovi un bucket `collecting` storico che contiene una PR della finestra, riusa quella chiave/titolo anche se il retry è entrato nel giorno successivo: mai sdoppiare la finestra. Se non esiste, crea UNA sola issue per gruppo con `State: collecting`; non aggiungere `agent:fix` né `agent:fix-queued` durante la raccolta.
             - Ogni item deve avere un ID stabile `FU-YYYY-MM-DD-NNN`, assegnato una sola volta, iniziare con `- State: open` e avere i campi `Target repository`, `Target file`, `Original text`, `Suggested action`, `Acceptance token`, `Sources`. Deduplica col fingerprint `target repository + target file + token/azione normalizzata`; su match aggiungi la PR alla riga `Sources`, non un secondo item.
             - Il body resta `State: collecting` finché tutti i chunk seriali del batch sono conclusi. Non troncare mai il set per un cap “max 10”: il cap vale solo per chunk/sessione. Un errore lascia il bucket collecting e la finestra senza avanzare; il retry riusa la stessa chiave e le PR già commentate restano idempotenti.
-            - Se la finestra supera il budget della sessione, il collector emette al massimo `FOLLOWUP_SESSION_BATCH_LIMIT` PR (oggi 16) e dichiara il residuo in `deferred_count`, con `collection_ok=true`: il troncamento è un rinvio pianificato e la run deve restare VERDE. Processa le PR emesse e nient'altro; il residuo tocca alla finestra successiva, che salta per idempotenza le PR già commentate. Non aprire un secondo bucket per lo stesso `(daily_key, target repository)`.
+            - Se la finestra supera il budget della sessione, il collector emette al massimo `FOLLOWUP_SESSION_BATCH_LIMIT` PR (oggi 14) e dichiara il residuo in `deferred_count`, con `collection_ok=true`: il troncamento è un rinvio pianificato e la run deve restare VERDE. Processa le PR emesse e nient'altro; il residuo tocca alla finestra successiva, che salta per idempotenza le PR già commentate. Non aprire un secondo bucket per lo stesso `(daily_key, target repository)`.
             - Solo il gate zero-provider successivo demota gli item privi di acceptance falsificabile, porta il bucket a `State: sealed` e aggiunge `agent:fix-queued`. Un bucket collecting non è lavorabile dal drainer.
             - Una PR di fix daily con `Addresses #<bucket>` e `Follow-up item: FU-...` passa il gate anti-nipote solo per cercare finding nuovi: non creare issue figlie. Leggi il bucket padre nello stesso repository target; i finding già coperti dal padre aggiornano `Sources`/si deduplicano, quelli genuinamente nuovi si appendono al padre (se sealed, riportalo a collecting per il gate successivo). Se il padre è illeggibile, posta il blocco sulla PR e non creare un contenitore alternativo.
 

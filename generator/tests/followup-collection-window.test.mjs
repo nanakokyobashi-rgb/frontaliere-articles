@@ -78,34 +78,54 @@ test('ordine FIFO: il cap rinvia le PR recenti, non quelle vecchie', () => {
   assert.deepEqual(orderCandidatesFifo(null), []);
 });
 
-// Capacità vs flusso (2026-09-27). Con cap 4 la coda non si smaltiva: ~5 run
-// reali/giorno (cron ogni 3h, gap mediano misurato 4,9h) = ~20 PR/giorno contro
-// rinvii di 29-146 PR a ogni run. Il cap deve coprire il picco misurato dei
-// candidati del sito (~80/giorno: 110 merge x ~72% oltre i gate) alla cadenza
-// REALE, e il caso peggiore per PR misurato sul corpus (399 s/PR, bootstrap
-// incluso) moltiplicato per il cap deve stare sotto il watchdog Codex del
-// workflow. Alzare il cap senza il watchdog (o viceversa) rompe questo test.
-const MEASURED_RUNS_PER_DAY = 5;
+// Capacità vs flusso (2026-09-27). Con cap 4 e cron ogni 3h la coda non si
+// smaltiva: GitHub esegue ~62% dei cron nominali (5,1 run reali/giorno su 8,
+// gap mediano 4,9h) = ~20 PR/giorno contro rinvii di 29-146 PR a ogni run.
+// Tre vincoli, letti dal workflow reale così che cap, watchdog, step e cron non
+// possano divergere in silenzio:
+//  1. cap x caso peggiore misurato per PR (451 s, 36009410204, bootstrap
+//     incluso) <= watchdog Codex;
+//  2. watchdog + setup/kill grace/coda (300 s) STRETTAMENTE sotto lo step;
+//  3. cap x run reali/giorno (cron nominali x 62%) >= picco di ~80 candidati
+//     al giorno (sito: 110 merge x ~72% oltre i gate).
+const WORST_SECONDS_PER_PR = 451;
+const CODEX_SETUP_AND_TAIL_SECONDS = 300;
+const CRON_EXECUTED_RATIO = 0.62;
 const PEAK_CANDIDATES_PER_DAY = 80;
-const WORST_SECONDS_PER_PR = 399;
 
-test('il cap di sessione copre il picco di candidati alla cadenza reale', () => {
-  assert.ok(
-    FOLLOWUP_SESSION_BATCH_LIMIT * MEASURED_RUNS_PER_DAY >= PEAK_CANDIDATES_PER_DAY,
-    `cap ${FOLLOWUP_SESSION_BATCH_LIMIT} x ${MEASURED_RUNS_PER_DAY} run/giorno < ${PEAK_CANDIDATES_PER_DAY}`,
-  );
-});
-
-test('il cap di sessione x il caso peggiore per PR sta sotto il watchdog Codex', () => {
+function workflowBudget() {
   const workflow = readFileSync(
     new URL('../../.github/workflows/post-merge-followup.yml', import.meta.url),
     'utf8',
   );
   const watchdog = Number(/exec_timeout_seconds: '(\d+)'/u.exec(workflow)?.[1]);
-  assert.ok(watchdog > 0, 'exec_timeout_seconds non trovato nel workflow');
+  const stepAt = workflow.indexOf('id: followup\n');
+  const stepHead = workflow.slice(workflow.lastIndexOf('      - name:', stepAt), stepAt);
+  const stepMinutes = Number(/timeout-minutes: (\d+)/u.exec(stepHead)?.[1]);
+  const hours = Number(/cron: '\d+ \*\/(\d+) \* \* \*'/u.exec(workflow)?.[1]);
+  return { watchdog, stepMinutes, cronPerDay: 24 / hours };
+}
+
+test('il cap x il caso peggiore per PR sta sotto il watchdog, e il watchdog sotto lo step', () => {
+  const { watchdog, stepMinutes } = workflowBudget();
+  assert.ok(watchdog > 0 && stepMinutes > 0, 'watchdog o timeout dello step non trovati');
   assert.ok(
     FOLLOWUP_SESSION_BATCH_LIMIT * WORST_SECONDS_PER_PR <= watchdog,
     `cap ${FOLLOWUP_SESSION_BATCH_LIMIT} x ${WORST_SECONDS_PER_PR}s > watchdog ${watchdog}s`,
+  );
+  assert.ok(
+    watchdog + CODEX_SETUP_AND_TAIL_SECONDS < stepMinutes * 60,
+    `watchdog ${watchdog}s + ${CODEX_SETUP_AND_TAIL_SECONDS}s non sta sotto lo step da ${stepMinutes} min`,
+  );
+});
+
+test('il cap alla cadenza reale del cron copre il picco di candidati', () => {
+  const { cronPerDay } = workflowBudget();
+  assert.ok(Number.isFinite(cronPerDay), 'cron */N non trovato nel workflow');
+  const capacity = FOLLOWUP_SESSION_BATCH_LIMIT * cronPerDay * CRON_EXECUTED_RATIO;
+  assert.ok(
+    capacity >= PEAK_CANDIDATES_PER_DAY,
+    `capacità ${capacity.toFixed(1)} PR/giorno < picco ${PEAK_CANDIDATES_PER_DAY}`,
   );
 });
 
