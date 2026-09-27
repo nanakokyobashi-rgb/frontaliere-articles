@@ -307,6 +307,65 @@ const THIRD_LANG_MIN_CONFIDENCE = 0.6; // affidabilita' dichiarata dal rilevator
 const THIRD_LANG_MIN_SCORE = 500;      // evidenza assoluta, non solo margine
 const THIRD_LANG_SHORT_TEXT_CONFIDENCE = 0.85; // ramo strong-marker senza scores
 
+// Segnale minimo per rifiutare come ITALIANO (ramo `lingua`): il rilevatore da
+// solo non basta, serve anche un eccesso di parole funzionali italiane su
+// quelle della lingua attesa, sulla coppia intera o su uno dei due campi.
+//
+// Perche': il profilo a trigrammi del rilevatore (tarato su annunci di lavoro)
+// legge come italiano i NOMI PROPRI italiani che ogni traduzione conserva
+// (Villa Visconti Borromeo Litta, Fondazione Cariplo, Campione d'Italia) e
+// perfino il tedesco `findet ... statt`. Misurato il 2026-09-27 sulle FAQ
+// pubblicate (origin/main b9bd92f0c, 67'113 coppie de/en/fr): il ramo rifiutava
+// 88 coppie non verbatim, lette una per una, e TUTTE 88 sono traduzioni
+// corrette — 0 italiane. Sono le stesse coppie dei 43 rifiuti `it/lingua`
+// della run 36297637209 di `batch-faq-articles.yml` (0/36 articoli riusciti).
+//
+// Una soglia su confidenza/punteggio non le separa dall'italiano vero: i
+// falsi arrivano a confidenza 0,79 e punteggio `it` 1097, mentre le 67'128
+// coppie italiane sorgente giudicate sotto en/de/fr hanno confidenza mediana
+// 0,47. `confidence >= 0.5 && it >= 2*atteso` lasciava 6/88 falsi rifiuti e
+// ACCETTAVA il 59% dell'italiano vero; `>= 0.7 && it >= 300`, 0 falsi ma 97%
+// dell'italiano accettato. Le parole funzionali invece separano del tutto:
+// con margine >= 1 i falsi rifiuti vanno da 88 a 0 (e da 43 a 0 sui casi della
+// run) e l'italiano vero rifiutato resta 65'736 su 65'736 — 0 italiani
+// accettati in piu'. Sui falsi il margine massimo misurato e' 0.
+//
+// Un token presente in ENTRAMBE le liste confrontate (`la`, `le`, `un`, `se`
+// fra it e fr) non e' evidenza e si scarta. Per sourceLang/locale senza
+// lista il ramo resta quello di prima: rifiuta sul solo rilevatore.
+const SOURCE_LANG_MIN_FUNCTION_WORD_MARGIN = 1;
+const FUNCTION_WORDS = Object.fromEntries(Object.entries({
+  it: 'il lo la le gli un uno una di del dello della dei degli delle che è e ed con non se si sì ci ne sono nel nello nella nei negli nelle al allo alla ai agli alle dal dallo dalla dai dagli dalle anche più questo questa questi queste quali quale cosa quando dove chi perché sulla sul sui sugli sulle ha hanno essere stato stata stati viene vengono sarà saranno ma tra fra suo sua suoi sue mio mia miei mie tuo tua tuoi tue loro può possono posso puoi devo deve devono ogni dopo già solo molto cui quanto quanti quante qui quel quelle sera son sa ce',
+  en: 'the of and to is are was were will what which who how when where with for on by from that this it be has have does can an at their its been than there not or as would should into they you your our after about during',
+  de: 'der die das und ist sind von mit im den dem zu für auf wird werden ein eine einen einem einer nicht sich des am bei wie wer was wann wo welche welcher welches welchen nach aus auch oder über um hat haben kann können noch nur zum zur vom beim es sie er wurde wurden statt gibt als ihre ihr seine sein durch',
+  fr: 'le les la de des du et est un une en pour dans sur au aux qui que sont pas par avec ce cette ces elle ils se sa son ses où quand quel quelle quels quelles comment combien été être à ont sera seront plus leur leurs ne lors après dont mais ou aussi comme nous vous cet sans sous peut doit fait',
+}).map(([lang, words]) => [lang, new Set(words.split(' '))]));
+
+/**
+ * Parole funzionali di `sourceLang` meno quelle di `expectedLocale` in `text`.
+ * `Infinity` quando una delle due lingue non ha lista: nessuna evidenza
+ * contraria, quindi il ramo `lingua` resta com'era.
+ */
+export function functionWordMargin(text, sourceLang, expectedLocale) {
+  const src = FUNCTION_WORDS[sourceLang];
+  const exp = FUNCTION_WORDS[expectedLocale];
+  if (!src || !exp) return Infinity;
+  let margin = 0;
+  for (const token of String(text ?? '').toLowerCase().split(/[^\p{L}]+/u)) {
+    if (!token) continue;
+    const inSrc = src.has(token);
+    const inExp = exp.has(token);
+    if (inSrc === inExp) continue; // assente da entrambe, o ambiguo fra le due
+    margin += inSrc ? 1 : -1;
+  }
+  return margin;
+}
+
+function hasSourceLangFunctionWordSignal(pair, sourceLang, expectedLocale) {
+  return [`${pair.q} ${pair.a}`, pair.q, pair.a].some((text) =>
+    functionWordMargin(text, sourceLang, expectedLocale) >= SOURCE_LANG_MIN_FUNCTION_WORD_MARGIN);
+}
+
 /**
  * I campi sorgente per NOME di campo (confronto normalizzato, non `===`): una
  * domanda si confronta con le domande, una risposta con le risposte. Per
@@ -441,6 +500,18 @@ function sourceFieldSets(sourceFaq) {
  * sopra (coppia INTERA uguale = passthrough) contava queste 31 come tradotte:
  * era lo stesso punto cieco, non un falso positivo del ramo nuovo.
  *
+ * ── ANCHE IL RAMO `lingua` HA UN PAVIMENTO (2026-09-27) ────────────────────
+ *
+ * `detected === sourceLang` da solo rifiutava traduzioni corrette che
+ * conservano nomi propri italiani: sul corpus pubblicato 88 coppie su 88 del
+ * ramo erano falsi positivi, e hanno fermato 36/36 articoli della run
+ * 36297637209. Il ramo ora pretende anche un eccesso di parole funzionali
+ * italiane (`SOURCE_LANG_MIN_FUNCTION_WORD_MARGIN`, misura accanto alla
+ * costante). Il costo dichiarato: una coppia che il rilevatore dice `it` ma
+ * che non ha NESSUN articolo o preposizione italiana in piu' di quelle
+ * della lingua attesa passa; sull'italiano sorgente non succede mai (0 su
+ * 65'736), e il passthrough byte-identico resta al ramo verbatim.
+ *
  * @param {{q: string, a: string}[]} faqArray  le coppie da giudicare
  * @param {string} expectedLocale
  * @param {{q: string, a: string}[]|null} [sourceFaq] le coppie SORGENTE, quando
@@ -468,7 +539,12 @@ export function wrongLocalePair(faqArray, expectedLocale, sourceFaq = null, sour
     if (text.length < 50) continue; // too short to detect
     const { lang: detected, confidence, scores } = detectLanguageWithConfidence(text, expectedLocale);
     if (detected === sourceLang) {
-      wrong.push({ index: i, detected, via: 'lingua' });
+      // Il rilevatore da solo non basta (vedi SOURCE_LANG_MIN_FUNCTION_WORD_MARGIN):
+      // senza parole funzionali della sorgente e' una traduzione con nomi
+      // propri italiani, e non va giudicata nemmeno come terza lingua.
+      if (hasSourceLangFunctionWordSignal(faqArray[i], sourceLang, expectedLocale)) {
+        wrong.push({ index: i, detected, via: 'lingua' });
+      }
       continue;
     }
     // Terza lingua: rifiuta solo col segnale forte (vedi sopra), altrimenti il
@@ -619,7 +695,12 @@ export function selectFaqIssuesForProcessing(issues, rejectionLedger, section, l
 
 const FAQ_REJECTION_LEDGER_PATH = resolve(ROOT, 'data/faq-locale-rejections.json');
 
-function loadFaqRejectionLedger() {
+// Esportati perche' il registro e' UNO per i due scrittori:
+// `batch-add-faq-to-articles.mjs` lo legge per non ritradurre un locale gia'
+// parcheggiato e lo aggiorna a ogni rifiuto (run 36297637209: 36 articoli
+// ritradotti ogni giorno col budget Codex, 0 scritti).
+
+export function loadFaqRejectionLedger() {
   if (!existsSync(FAQ_REJECTION_LEDGER_PATH)) return {};
   try {
     const parsed = JSON.parse(readFileSync(FAQ_REJECTION_LEDGER_PATH, 'utf-8'));
@@ -630,7 +711,7 @@ function loadFaqRejectionLedger() {
   }
 }
 
-function saveFaqRejectionLedger(ledger) {
+export function saveFaqRejectionLedger(ledger) {
   mkdirSync(dirname(FAQ_REJECTION_LEDGER_PATH), { recursive: true });
   const ordered = Object.fromEntries(Object.entries(ledger).sort(([a], [b]) => a.localeCompare(b)));
   const tmp = `${FAQ_REJECTION_LEDGER_PATH}.${process.pid}.tmp`;
