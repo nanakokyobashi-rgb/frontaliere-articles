@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1945642/chiamate-spoofing-luglio-contrassegnare-telecomunicazioni": {
-    "articleId": "truffe-spoofing-in-calo",
-    "ts": "2026-08-24T10:27:17.861Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/attualita/1945678/abitazioni-co2-tonnellate-edifici-involucro": {
     "articleId": "risanamento-abitazioni-co2-berna",
     "ts": "2026-08-24T10:59:37.144Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/politica/1952875/congedo-settimane-iniziativa-firme-genitore": {
     "articleId": "congedo-parentale-136000-firme",
     "ts": "2026-09-27T01:48:34.503Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/ceo-amag%3a-%22sulle-auto-elettriche-la-svizzera-perde-posizioni%22/92124562": {
+    "articleId": "amag-auto-elettriche-svizzera",
+    "ts": "2026-09-27T02:23:04.304Z",
     "keyForm": 2
   }
 }
