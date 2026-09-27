@@ -65,7 +65,7 @@ test('followup-drainer: mutex daily condiviso e recupero cron', () => {
 
 // 2026-09-27: a livello di run ogni `issues: labeled` irrilevante e ogni
 // `workflow_run` di un issue-fix skipped entrava nel gruppo e sfrattava la
-// pending utile (145 cancellate / 64 riuscite in 31h). Sul job, un job saltato
+// pending utile, per poi essere skippato lui stesso. Sul job, un job saltato
 // dal suo `if:` non entra nel gruppo.
 test('followup-drainer: il mutex daily sta sul job drain e scarta gli issue-fix skipped', () => {
   assert.doesNotMatch(FOLLOWUP_DRAINER, /^concurrency:/m);

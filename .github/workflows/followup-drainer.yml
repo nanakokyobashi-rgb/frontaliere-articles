@@ -58,10 +58,11 @@ jobs:
     # (post-merge-followup.yml, followup-reconcile.yml, a livello di workflow):
     # nessun wake-up può leggere lo stesso bucket mentre viene appeso o sigillato.
     # Sta sul JOB, non sulla run: un job saltato dal suo `if:` non entra nel
-    # gruppo. A livello di run ogni `issues: labeled` irrilevante e ogni
-    # `workflow_run` di un issue-fix skipped entrava nel gruppo e sostituiva la
-    # pending utile, per poi essere skippato (misurato: 145 run cancellate
-    # contro 64 riuscite in 31h). cancel:false e il cron rendono recuperabile
+    # gruppo. È una questione di correttezza, non di costo: a livello di run
+    # ogni `issues: labeled` irrilevante e ogni `workflow_run` di un issue-fix
+    # skipped entrava nel gruppo e, con una sola pending ammessa, sostituiva la
+    # run pending utile, per poi essere skippato dall'`if:` lui stesso — il
+    # wake-up utile andava perso. cancel:false e il cron rendono recuperabile
     # una pending sostituita durante un burst.
     concurrency:
       group: followup-daily-${{ github.repository }}

@@ -7,8 +7,7 @@
  * (stesso group dei writer, che lo tengono a livello di workflow: GitHub li
  * tratta come lo stesso mutex), cosi' gli eventi che l'`if:` del job scarta non
  * entrano nel gruppo e non sfrattano la pending utile — il difetto descritto
- * qui sotto, che a livello di run colpiva anche lui (145 run cancellate contro
- * 64 riuscite in 31h, 2026-09-27).
+ * qui sotto, che a livello di run colpiva anche lui.
  *
  * ## Il modo silenzioso in cui questo si rompe
  *
