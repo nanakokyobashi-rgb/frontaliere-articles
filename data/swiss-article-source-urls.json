@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1945678/abitazioni-co2-tonnellate-edifici-involucro": {
-    "articleId": "risanamento-abitazioni-co2-berna",
-    "ts": "2026-08-24T10:59:37.144Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/attualita/1945625/voli-aereo-skyguide-giorno-luglio-traffico-estate": {
     "articleId": "skyguide-luglio-2026-voli-record",
     "ts": "2026-08-24T11:38:03.885Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/ceo-amag%3a-%22sulle-auto-elettriche-la-svizzera-perde-posizioni%22/92124562": {
     "articleId": "amag-auto-elettriche-svizzera",
     "ts": "2026-09-27T02:23:04.304Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1952887/auto-svizzera-benzina-incentivi-domanda": {
+    "articleId": "svizzera-auto-elettriche-2026",
+    "ts": "2026-09-27T03:10:44.090Z",
     "keyForm": 2
   }
 }
