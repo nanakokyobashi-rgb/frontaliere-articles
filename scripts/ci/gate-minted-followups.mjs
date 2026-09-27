@@ -94,6 +94,8 @@ import {
 } from './followup-resolution-match.mjs';
 import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
 import { hasTriageComment } from './collect-followup-batch.mjs';
+
+const TRIAGE_MARKER_PREFIX = '## Post-merge follow-up triage';
 import { pinnedBy } from './manifest-pinned-issues.mjs';
 
 const DRY_RUN = process.env.DRY_RUN === '1';
@@ -410,7 +412,10 @@ export function decideDailyMintGate(issue, opts = {}) {
   // structure) is not a safe item boundary. Keep the bucket collecting rather
   // than sealing a body whose item set we cannot prove complete.
   if (!isLosslessSplit(src)) return { action: 'skip', reason: 'unsafe-rewrite', valid, demoted, duplicates, body: null };
-  if (!valid.length) return { action: 'suppress', reason: 'no-valid-item', valid: [], demoted, duplicates, body: null };
+  // Testo, non l'item parsato: `demotedBlock()` lo conserva sulla PR sorgente, e un
+  // oggetto diventava `[object Object]` — il testo dell'item perso e la prova del
+  // gate (`Sources: PR #N`) impossibile da trovare per il collector.
+  if (!valid.length) return { action: 'suppress', reason: 'no-valid-item', valid: [], demoted: demoted.map((item) => item.text), duplicates, body: null };
   if (demoted.length) {
     if (!isLosslessSplit(src)) return { action: 'skip', reason: 'unsafe-rewrite', valid, demoted, duplicates, body: null };
     return {
@@ -910,20 +915,129 @@ function sourcePrLookups(prRepoArgs) {
   }));
 }
 
+/** Testo di un item demoto: il ramo `suppress` dei daily consegna item parsati. */
+function demotedItemText(item) {
+  return typeof item === 'string' ? item : String(item?.text ?? item?.raw ?? '');
+}
+
 /**
- * Commenta la PR sorgente nel primo repository in cui N e' una PR (stessa
- * risoluzione del recovery): gli item demoti di un daily con Sources
- * cross-repository restano leggibili sulla loro PR invece di bloccare la
- * demozione per sempre. `null` = non riuscito, come `gh()` con `allowFail`.
+ * Le PR citate dalla `Sources`/`Source` di UN item demoto. Stesso parser delle
+ * Sources del bucket (`dailyBucketSourcePrNumbers`, fuori da fence e citazioni):
+ * il testo di un item demoto parte dopo la sua intestazione, quindi gliene si
+ * ridà una neutra invece di riscrivere il parser.
  */
-function commentOnSourcePr(number, body, lookups) {
-  for (const lookup of lookups) {
-    const result = ghOnSourcePr(lookup, 'comment', number, ['--body', body]);
-    if (result.ok) return result.out;
-    if (!result.notPr) return null;
+export function itemSourcePrNumbers(itemText) {
+  return dailyBucketSourcePrNumbers(`### FU-0000-00-00-000 — item\n${String(itemText || '')}`);
+}
+
+/**
+ * Raggruppa gli item demoti per PR sorgente: ogni item va SOLO sulle PR citate
+ * nella `Sources` di quell'item. Prima il commento con TUTTI gli item demoti
+ * del bucket finiva su TUTTE le PR del bucket: corpus #1742 ha ricevuto gli
+ * item di #1740, #1741 e #1771 ma mai il proprio, e la prova di persistenza del
+ * collector (`gatePreservedFollowupMatches`) non combaciava mai. Un item senza
+ * Sources leggibili va a `fallbackTargets` (le Sources del bucket o la PR del
+ * batch): il suo testo resta conservato, come prima.
+ *
+ * @returns {Array<{ pr: number, items: string[] }>}
+ */
+export function demotedItemsBySourcePr(demoted, fallbackTargets = []) {
+  const byPr = new Map();
+  for (const item of demoted || []) {
+    const text = demotedItemText(item);
+    const own = itemSourcePrNumbers(text);
+    for (const pr of (own.length ? own : positivePrNumbers(fallbackTargets))) {
+      if (!byPr.has(pr)) byPr.set(pr, []);
+      byPr.get(pr).push(text);
+    }
   }
-  console.log(`gh pr comment ${number} → fallito: non è una PR in ${lookups.map((lookup) => lookup.repo).join(' né in ')}`);
-  return null;
+  return [...byPr].map(([pr, items]) => ({ pr, items }));
+}
+
+/**
+ * Un marker di triage della PR cita il bucket `#N` su una riga che dice
+ * «bucket» (un `#N` preceduto da `PR` e' la PR, non il bucket).
+ */
+export function triageMarkerCitesBucket(commentsJson, bucketNumber) {
+  let data;
+  try {
+    data = JSON.parse(commentsJson || '');
+  } catch {
+    return false;
+  }
+  const comments = Array.isArray(data) ? data : Array.isArray(data?.comments) ? data.comments : [];
+  const ref = new RegExp(`(?<!\\b(?:PR|pull\\s+request)\\s*)#${Number(bucketNumber)}\\b`, 'i');
+  return comments.some((comment) => {
+    const body = typeof comment?.body === 'string' ? comment.body : '';
+    if (!body.trimStart().startsWith(TRIAGE_MARKER_PREFIX)) return false;
+    return body.split(/\r?\n/).some((line) => /\bbucket\b/i.test(line) && ref.test(line));
+  });
+}
+
+/**
+ * Qualifica col repository la PR sorgente `number` di un item del bucket
+ * `bucketNumber`. `Sources: PR #N` non porta il repository, e i due repository
+ * numerano le PR in modo indipendente: la vecchia risoluzione «primo repository
+ * in cui N e' una PR» mandava gli item di corpus #1742 sulla PR #1742 del SITO.
+ * La PR giusta e' quella il cui marker di triage cita questo bucket; se nessun
+ * repository la dimostra cosi', resta la risoluzione legacy (primo repository in
+ * cui N e' una PR), cosi' il testo non viene mai perso.
+ *
+ * @returns {Array<object>|null} i lookup su cui commentare; `[]` se N non e' una
+ *   PR in nessun repository; `null` se una lettura era indisponibile prima di
+ *   poter decidere (fail-closed: niente riscrittura, retry al prossimo giro).
+ */
+export function qualifySourcePrLookups(number, bucketNumber, lookups) {
+  const cited = [];
+  let firstPr = null;
+  for (const lookup of Array.isArray(lookups) ? lookups : []) {
+    const result = lookup?.read?.(number);
+    if (result?.ok === true) {
+      if (!firstPr) firstPr = lookup;
+      if (triageMarkerCitesBucket(result.comments, bucketNumber)) cited.push(lookup);
+      continue;
+    }
+    if (result?.notPr !== true) return null;
+  }
+  if (cited.length) return cited;
+  return firstPr ? [firstPr] : [];
+}
+
+/**
+ * Conserva gli item demoti di un daily bucket sulle loro PR sorgente: un
+ * commento per PR (qualificata col repository), con i SOLI item la cui Sources
+ * la cita. Ritorna un risultato per commento tentato; `null` = non riuscito,
+ * come `gh()` con `allowFail`. `post(lookup, pr, body)` e' iniettabile nei test.
+ */
+export function preserveDemotedOnSourcePrs({
+  bucketNumber,
+  demoted,
+  fallbackTargets = [],
+  intro,
+  lookups,
+  post = (lookup, pr, body) => {
+    const result = ghOnSourcePr(lookup, 'comment', pr, ['--body', body]);
+    return result.ok ? result.out : null;
+  },
+  log = console.log,
+}) {
+  const results = [];
+  for (const { pr, items } of demotedItemsBySourcePr(demoted, fallbackTargets)) {
+    const targets = qualifySourcePrLookups(pr, bucketNumber, lookups);
+    if (targets === null) {
+      log(`gh pr comment ${pr} → rinviato: lettura della PR sorgente indisponibile, repository non qualificabile.`);
+      results.push(null);
+      continue;
+    }
+    if (!targets.length) {
+      log(`gh pr comment ${pr} → fallito: non è una PR in ${(lookups || []).map((lookup) => lookup.repo).join(' né in ')}`);
+      results.push(null);
+      continue;
+    }
+    const body = `${intro}\n\n${demotedBlock(items)}`;
+    for (const lookup of targets) results.push(post(lookup, pr, body));
+  }
+  return results;
 }
 
 /**
@@ -1225,7 +1339,8 @@ function main() {
         });
         let commentTargets = daily ? sourcePrNumbers(iss.body, pr) : [pr];
         // Le Sources di un daily possono essere PR dell'altro repository: si
-        // commentano dove sono PR (`commentOnSourcePr`), non alla cieca in GATE_PR_REPO.
+        // commentano sulla PR qualificata col repository (`preserveDemotedOnSourcePrs`),
+        // un item per volta, non alla cieca in GATE_PR_REPO.
         let commentViaSources = Boolean(daily);
         console.log(`#${iss.number} (${daily ? `daily:${daily.dailyKey}` : `PR #${pr}`}) → ${d.action} (${d.reason}; validi ${d.valid.length}, demoti ${d.demoted.length})`);
         tally.push({ pr, issue: iss.number, action: d.action, reason: d.reason, demoted: d.demoted.length, kept: d.valid.length });
@@ -1328,7 +1443,10 @@ function main() {
         // issue. Il verso opposto — riscrivi il corpo, poi prova a commentare — perde gli
         // item per sempre se la seconda chiamata fallisce, ed e' proprio la finestra in
         // cui `gh` fallisce piu' spesso (rate limit dopo N scritture in un batch).
-        let commentBody = `${MINT_GATE_MARKER}\n## Item demoti dal gate sul conio\n\nNon tracciati come item (nessuna condizione di accettazione falsificabile), ma **conservati qui integralmente**, come i \`Live-verification\`. ${d.action === 'suppress' ? `Issue #${iss.number} chiusa in ingresso: non restava nessun item valido.` : `Issue #${iss.number} resta aperta con ${d.valid.length} item valid${d.valid.length === 1 ? 'o' : 'i'}; questi sono stati tolti dal suo corpo e vivono solo qui.`}\n\n${verbatim}`;
+        // L'intestazione e' comune; il blocco verbatim di un daily si compone PER PR
+        // sorgente (`preserveDemotedOnSourcePrs`), con i soli item che la citano.
+        let commentIntro = `${MINT_GATE_MARKER}\n## Item demoti dal gate sul conio\n\nNon tracciati come item (nessuna condizione di accettazione falsificabile), ma **conservati qui integralmente**, come i \`Live-verification\`. ${d.action === 'suppress' ? `Issue #${iss.number} chiusa in ingresso: non restava nessun item valido.` : `Issue #${iss.number} resta aperta con ${d.valid.length} item valid${d.valid.length === 1 ? 'o' : 'i'}; questi sono stati tolti dal suo corpo e vivono solo qui.`}`;
+        let commentBody = `${commentIntro}\n\n${verbatim}`;
         if (!commentTargets.length && d.action !== 'dedupe') {
           console.log(`⚠️ #${iss.number}: nessuna PR sorgente leggibile per conservare gli item demoti → issue lasciata intatta.`);
           report.push(`- ⚠️ #${iss.number} demozione/soppressione rinviata, PR sorgente assente`);
@@ -1338,9 +1456,15 @@ function main() {
         // ['pr', 'comment', String(pr), ...prRepoArgs
         const commentResults = d.action === 'dedupe'
           ? []
-          : commentTargets.map((targetPr) => (commentViaSources
-            ? commentOnSourcePr(targetPr, commentBody, sourceLookups)
-            : ghPr(['pr', 'comment', String(targetPr), ...prRepoArgs, '--body', commentBody], { allowFail: true })));
+          : commentViaSources
+            ? preserveDemotedOnSourcePrs({
+              bucketNumber: iss.number,
+              demoted: d.demoted,
+              fallbackTargets: commentTargets,
+              intro: commentIntro,
+              lookups: sourceLookups,
+            })
+            : commentTargets.map((targetPr) => ghPr(['pr', 'comment', String(targetPr), ...prRepoArgs, '--body', commentBody], { allowFail: true }));
         const posted = d.action === 'dedupe' || commentResults.every((result) => result !== null) ? 'posted' : null;
         if (d.action === 'demote' && posted === null) {
           console.log(`⚠️ #${iss.number}: commento sulla PR #${pr} non riuscito → NON riscrivo il corpo. Gli item demoti restano dove sono; il prossimo giro riprova.`);
@@ -1380,7 +1504,8 @@ function main() {
             const latestVerbatim = demotedBlock(latestDecision.demoted);
             const latestList = latestDecision.demoted.map((it) => `- «${itemHeadline(it)}»`).join('\n');
             const latestWhy = `${MINT_GATE_MARKER}\n🚧 **Gate deterministico sul conio** (zero-Claude): ${latestDecision.demoted.length} item non porta${latestDecision.demoted.length === 1 ? '' : 'no'} una condizione di accettazione falsificabile — né un token-codice distintivo in una riga \`Suggested action\`, né una scheda con un \`COMANDO\` che nomini un referente — quindi nessuna evidenza potrà mai provarl${latestDecision.demoted.length === 1 ? 'o' : 'i'} affrontat${latestDecision.demoted.length === 1 ? 'o' : 'i'}. Oracolo: \`hasFalsifiableAcceptance()\` in \`scripts/ci/followup-resolution-match.mjs\`, lo STESSO che chiude l'item.\n\n${latestList}`;
-            const latestCommentBody = `${MINT_GATE_MARKER}\n## Item demoti dal gate sul conio\n\nNon tracciati come item (nessuna condizione di accettazione falsificabile), ma **conservati qui integralmente**, come i \`Live-verification\`. Issue #${latestBeforeClose.number} chiusa in ingresso: non restava nessun item valido.\n\n${latestVerbatim}`;
+            const latestCommentIntro = `${MINT_GATE_MARKER}\n## Item demoti dal gate sul conio\n\nNon tracciati come item (nessuna condizione di accettazione falsificabile), ma **conservati qui integralmente**, come i \`Live-verification\`. Issue #${latestBeforeClose.number} chiusa in ingresso: non restava nessun item valido.`;
+            const latestCommentBody = `${latestCommentIntro}\n\n${latestVerbatim}`;
             if (!latestTargets.length) {
               console.log(`⚠️ #${iss.number}: nessuna PR sorgente nella baseline finale → issue lasciata aperta.`);
               report.push(`- ⚠️ #${iss.number} soppressione rinviata, PR sorgente assente nella baseline finale`);
@@ -1388,9 +1513,15 @@ function main() {
             }
             // Stessa risoluzione del primo commento: le Sources della baseline
             // finale di un daily possono essere PR dell'altro repository.
-            const refreshedResults = latestTargets.map((targetPr) => (latestDaily
-              ? commentOnSourcePr(targetPr, latestCommentBody, sourceLookups)
-              : ghPr(['pr', 'comment', String(targetPr), ...prRepoArgs, '--body', latestCommentBody], { allowFail: true })));
+            const refreshedResults = latestDaily
+              ? preserveDemotedOnSourcePrs({
+                bucketNumber: latestBeforeClose.number,
+                demoted: latestDecision.demoted,
+                fallbackTargets: latestTargets,
+                intro: latestCommentIntro,
+                lookups: sourceLookups,
+              })
+              : latestTargets.map((targetPr) => ghPr(['pr', 'comment', String(targetPr), ...prRepoArgs, '--body', latestCommentBody], { allowFail: true }));
             if (refreshedResults.some((result) => result === null)) {
               console.log(`⚠️ #${iss.number}: conservazione della baseline finale sulla PR non riuscita → issue lasciata aperta.`);
               report.push(`- ⚠️ #${iss.number} soppressione rinviata (commento finale sulla PR fallito)`);
