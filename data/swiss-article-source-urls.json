@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1945625/voli-aereo-skyguide-giorno-luglio-traffico-estate": {
-    "articleId": "skyguide-luglio-2026-voli-record",
-    "ts": "2026-08-24T11:38:03.885Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/07wveqtusqvt": {
     "articleId": "siccita-aziende-biologiche-2026",
     "ts": "2026-08-24T11:45:03.521Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1952887/auto-svizzera-benzina-incentivi-domanda": {
     "articleId": "svizzera-auto-elettriche-2026",
     "ts": "2026-09-27T03:10:44.090Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/iniziativa-popolare-per-un-congedo-parentale-%c3%a8-riuscita/92123623": {
+    "articleId": "congedo-parentale-firme-riuscita",
+    "ts": "2026-09-27T03:45:48.989Z",
     "keyForm": 2
   }
 }
