@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/ticino/attualita/1945651/usi-e-supsi-aumenteranno-le-tasse-semestrali": {
-    "articleId": "usi-supsi-aumentano-tasse-studenti",
-    "ts": "2026-08-24T12:17:40.515Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/siccit%c3%a0%3a-aziende-bio-possono-acquistare-20%25-foraggio-convenzionale/91946346": {
     "articleId": "aziende-bio-foraggio-convenzionale",
     "ts": "2026-08-24T12:35:17.835Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/attualita/1952645/esercito-divisa-uniformi-riciclaggio-migliaia": {
     "articleId": "esercito-divisa-grigia-dismissione",
     "ts": "2026-09-27T04:24:48.906Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1952898/diritti-migranti-piazza-migliaia-berna": {
+    "articleId": "manifestazione-diritti-migranti-berna",
+    "ts": "2026-09-27T05:04:57.913Z",
     "keyForm": 2
   }
 }
