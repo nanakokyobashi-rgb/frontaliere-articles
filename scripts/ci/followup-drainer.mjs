@@ -3228,8 +3228,8 @@ export function mergeAfterFixOutcomeAt(mergedAt, outcomeAt) {
  * facilmente le 30 voci di default e la promozione più recente è in fondo. */
 function fixPromotion(num) {
   try {
-    const events = gh(['api', `repos/${REPO}/issues/${num}/events?per_page=100`, '--paginate']);
-    return lastFixPromotion(Array.isArray(events) ? events : []);
+    const pages = gh(['api', `repos/${REPO}/issues/${num}/events?per_page=100`, '--paginate', '--slurp']);
+    return lastFixPromotion(Array.isArray(pages) ? pages.flat() : []);
   } catch {
     return { at: null, byDrainer: false };
   }
@@ -3346,8 +3346,8 @@ function mergedFixPr(num) {
 
 function labelAddedAt(num, label) {
   try {
-    const events = gh(['api', `repos/${REPO}/issues/${num}/events?per_page=100`, '--paginate']);
-    return lastLabelEventAt(Array.isArray(events) ? events : [], label);
+    const pages = gh(['api', `repos/${REPO}/issues/${num}/events?per_page=100`, '--paginate', '--slurp']);
+    return lastLabelEventAt(Array.isArray(pages) ? pages.flat() : [], label);
   } catch {
     return null;
   }
@@ -3623,8 +3623,8 @@ function issueComments(num) {
  * sbagliato. `per_page=100` tiene le pagine (e quindi le chiamate) al minimo. */
 function issueCommentsRest(num) {
   try {
-    const out = gh(['api', `repos/${REPO}/issues/${num}/comments?per_page=100`, '--paginate']);
-    return Array.isArray(out) ? out : [];
+    const out = gh(['api', `repos/${REPO}/issues/${num}/comments?per_page=100`, '--paginate', '--slurp']);
+    return Array.isArray(out) ? out.flat() : [];
   } catch {
     return null;
   }

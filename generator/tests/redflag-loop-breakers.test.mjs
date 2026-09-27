@@ -222,6 +222,31 @@ describe('3. autorebase: ultimo verdetto e veto needs-human', () => {
     assert.equal(latestReviewerVerdict([], HEAD, ''), 'unknown');
   });
 
+  it('una review DISMISSED o PENDING non è un verdetto: il suo LGTM non sblocca', () => {
+    const withState = (body, commit, at, state) => ({ ...review(body, commit, at), state });
+    assert.equal(latestReviewerVerdict([
+      review(RED, HEAD, '2026-09-27T10:00:00Z'),
+      withState(LGTM, HEAD, '2026-09-27T11:00:00Z', 'DISMISSED'),
+    ], HEAD, REV), 'blocking');
+    assert.equal(latestReviewerVerdict([
+      review(RED, HEAD, '2026-09-27T10:00:00Z'),
+      withState(LGTM, HEAD, '2026-09-27T11:00:00Z', 'PENDING'),
+    ], HEAD, REV), 'blocking');
+    // Solo review gestite non terminali: verdetto illeggibile, non «nessuna review».
+    assert.equal(latestReviewerVerdict([
+      withState(LGTM, HEAD, '2026-09-27T11:00:00Z', 'DISMISSED'),
+    ], HEAD, REV), 'unknown');
+  });
+
+  it('le letture paginate di review/eventi/commenti usano --slurp (niente `[...][...]` a JSON.parse)', () => {
+    const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+    for (const file of ['pr-autorebase', 'auto-merge-eval', 'review-test-policy', 'followup-drainer', 'needs-human-prepass']) {
+      const src = fs.readFileSync(path.join(repoRoot, 'scripts', 'ci', `${file}.mjs`), 'utf8');
+      const bare = src.split('\n').filter((line) => /\/(reviews|events|comments)[^'`]*`, '--paginate'\]/.test(line));
+      assert.deepEqual(bare, [], `${file}.mjs legge una lista paginata senza --slurp né --jq`);
+    }
+  });
+
   it('needs-human veta solo con verdetto bloccante o illeggibile', () => {
     assert.equal(needsHumanBlocksAutorebase({ labels: ['needs-human'], verdict: 'blocking' }), true);
     assert.equal(needsHumanBlocksAutorebase({ labels: [{ name: 'needs-human' }], verdict: 'unknown' }), true);
