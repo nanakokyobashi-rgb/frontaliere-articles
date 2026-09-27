@@ -112,9 +112,11 @@ const SEARCH_PAGE_SIZE = 100;
 // sito 32-259 s/PR, corpus 144-399 s/PR, caso peggiore storico >=451 s/PR
 // (36009410204, uccisa a 1803 s). 16 x 399 s = 106 min sotto il watchdog Codex
 // da 115 min (6900 s), step 120 (il tetto per gli step agentici) e job 140:
-// vedi post-merge-followup.yml. Il limite resta un cap operativo, e il
-// benchmark del sito (27 PR in 30,3 min) conferma che il costo per PR scende
-// con il batch perché il bootstrap è condiviso.
+// vedi post-merge-followup.yml. Misure reali su batch più grandi di 16, stesso
+// provider (Codex, effort max), prima del cap: corpus 34602892494, batch 36,
+// 21 PR commentate in 1792 s di sessione (~85 s/PR) prima del tetto di allora;
+// sito 34602590662, batch 19, sessione 1106 s (~58 s/PR). Il bootstrap è
+// condiviso, quindi il costo per PR scende con il batch.
 //
 // Una finestra più larga del cap NON è un errore di raccolta: è un rinvio
 // PIANIFICATO. Il troncamento viene dichiarato in `deferred_count`, mentre
