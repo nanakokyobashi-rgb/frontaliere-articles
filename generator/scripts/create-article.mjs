@@ -14618,9 +14618,18 @@ const RUN_START_MS = Date.now();
  * rimasti scendono ai tier successivi o restano a translate-pending. I 30 s,
  * sommati ai 60 s che il workflow lascia fra CREATE_ARTICLE_MAX_WALL_MS e il
  * SIGTERM, restano a immagine e scrittura dei file.
+ *
+ * Installata SOLO nel percorso CLI (`if (invokedDirectly)` in fondo al file),
+ * mai all'import: i producer secondari che importano questo modulo per
+ * `registerArticleFiles()` non hanno dichiarato alcun tetto, e ereditare il
+ * default di 30 minuti fermerebbe la loro lane Codex a meta' drenaggio,
+ * lasciando body non tradotti in una superficie scritta comunque.
  */
 const TRANSLATE_DEADLINE_MARGIN_MS = 30_000;
-setCodexTranslateProcessDeadline(RUN_START_MS + RUN_WALL_BUDGET_MS - TRANSLATE_DEADLINE_MARGIN_MS);
+
+function installCodexTranslateProcessDeadline() {
+  setCodexTranslateProcessDeadline(RUN_START_MS + RUN_WALL_BUDGET_MS - TRANSLATE_DEADLINE_MARGIN_MS);
+}
 
 /**
  * Cooperative-stop flag armed by SIGTERM (issue #525).
@@ -18050,6 +18059,9 @@ if (invokedDirectly) {
   // before exiting instead of dying immediately on Node's default action.
   process.on('SIGTERM', () => requestCooperativeStop('SIGTERM'));
   process.on('SIGINT', () => requestCooperativeStop('SIGINT'));
+  // Stesso confine dei due handler qui sopra: il tetto di durata e' del
+  // processo CLI (CREATE_ARTICLE_MAX_WALL_MS), non di chi importa il modulo.
+  installCodexTranslateProcessDeadline();
 
   // When LOCAL_LLM_ENABLED and the model fills the runner disk, even
   // process.stdout/stderr writes fail with ENOSPC — Node.js crashes with an
