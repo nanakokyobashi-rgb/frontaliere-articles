@@ -61,51 +61,7 @@ const SOGLIA_2 = CORRENTE[1].fino; // 50'000
  */
 const CALC = 'esempio di calcolo: gli importi derivati dal 35% vanno ricalcolati con il 33% insieme alla catena a valle (lotto calc di #1876)';
 const DICH_730 = 'dichiarazione 2026 dei redditi 2025: il 35% e\' corretto per il 2025, va qualificato e affiancato dal 33% del 2026, non sostituito';
-const RESIDUI = Object.freeze({
-  // Flag `calc` nella tabella di #1876.
-  'briosco-pendolare-ticino-lavoro': { motivo: CALC, it: 2, en: 2, de: 2, fr: 2 },
-  'cadorago-frontaliere-pendolare-guida': { motivo: CALC, it: 1, en: 1, de: 1, fr: 1 },
-  'cambio-euro-franco-conviene': { motivo: CALC, it: 3, en: 3, de: 3, fr: 3 },
-  'costo-vita-lugano-milano-scelta': { motivo: CALC, it: 3, en: 3, de: 3, fr: 3 },
-  'credito-imposta-2026-single': { motivo: CALC, it: 5, en: 3, de: 3, fr: 3 },
-  'credito-imposta-frontalieri-2026': { motivo: CALC, it: 3, en: 3, de: 3, fr: 3 },
-  'frontaliere-documenti-primo-giorno-lavoro-ticino-2026-famiglia-con-figli': { motivo: CALC, it: 1, en: 1, de: 1, fr: 1 },
-  'frontaliere-tasse-single-2026': { motivo: CALC, it: 2, en: 2, de: 2, fr: 2 },
-  'frontalieri-busta-paga-2026-simulazione': { motivo: CALC, it: 4, en: 4, de: 4, fr: 4 },
-  'frontalieri-nuova-imposta-sostitutiva-2024': { motivo: CALC, it: 1, en: 1, de: 1, fr: 1 },
-  'frontalieri-ticino-ergoterapista': { motivo: CALC, it: 2, en: 2, de: 2, fr: 2 },
-  'imposte-frontalieri-20km-distanza': { motivo: CALC, it: 4, en: 4, de: 4, fr: 4 },
-  'partita-iva-frontaliere-svizzera-2024': { motivo: CALC, it: 2, en: 1, de: 1, fr: 1 },
-  'stipendio-frontaliere-single-2026': { motivo: CALC, it: 1, en: 1, de: 1, fr: 1 },
-  'stipendio-gessatore-frontaliere-ticino': { motivo: CALC, it: 1, en: 1, de: 1, fr: 1 },
-  'tasse-frontalieri-distanza-confine': { motivo: CALC, it: 4, en: 3, de: 3, fr: 3 },
-  'trasferirsi-non-frontaliere-guida': { motivo: CALC, it: 1, en: 1 },
-  'vivere-incudine-lavorare-grigioni-frontaliere': { motivo: CALC, it: 2, en: 1, de: 1, fr: 1 },
-  'vivere-monvalle-lavorare-ticino-frontaliere': { motivo: CALC, it: 1, en: 1, de: 1, fr: 1 },
-  'vivere-novedrate-lavorare-ticino-frontaliere': { motivo: CALC, it: 1, en: 1, de: 1, fr: 1 },
-  'vivere-valbondione-lavorare-grigioni-frontaliere': { motivo: CALC, it: 1, en: 1, de: 1, fr: 1 },
-  // Esempi di calcolo trovati nel lotto 1, senza flag nella tabella.
-  'stipendio-muratore-frontaliere-ticino': {
-    motivo: `${CALC}; l'esempio it deriva «quindi la retribuzione è di €45'825» dal 35%`,
-    it: 4, en: 1, de: 1, fr: 1,
-  },
-  'vivere-martello-lavorare-grigioni-frontaliere': {
-    motivo: `${CALC}; l'esempio it su €50'000 «risparmierebbe €17'350» usa il 35%`,
-    it: 3, en: 2, de: 2, fr: 2,
-  },
-  // Flag `730` nella tabella di #1876 (frontaliere-730-ristorni-2026 e
-  // frontaliere-dichiarazione-730-2026 hanno anche il flag `calc`).
-  'credito-dichiarazione-redditi-2026': { motivo: DICH_730, it: 2, en: 2, de: 2, fr: 2 },
-  'frontaliere-730-ristorni-2026': { motivo: DICH_730, it: 4, en: 3, de: 3, fr: 3 },
-  'frontaliere-dichiarazione-730-2026': { motivo: DICH_730, it: 2, en: 2, de: 2, fr: 2 },
-  // Contesto al passato: «Prima del Nuovo Accordo ... l'Italia poteva chiedere
-  // l'IRPEF (23%, 35%, 43%)» non e' la regola in vigore; serve una scelta
-  // editoriale (qualificare l'anno o riscrivere), non una sostituzione.
-  'vivere-brezzo-bedero-lavorare-ticino': {
-    motivo: 'terna in una frase al passato sul regime prima del Nuovo Accordo: va riscritta, non sostituita',
-    it: 1, en: 1, de: 1, fr: 1,
-  },
-});
+const RESIDUI = Object.freeze({});
 
 // ── Rilevatore ──────────────────────────────────────────────────────────────
 // Il testo e' il sorgente TS: `\n` e' letterale (backslash + n) e l'apostrofo
