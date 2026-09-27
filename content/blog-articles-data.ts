@@ -36313,6 +36313,15 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'finissage-turner-como',
+ category: 'novita',
+ date: '2026-09-27T01:34:42.496Z',
+ image: '/images/blog/finissage-turner-como.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
