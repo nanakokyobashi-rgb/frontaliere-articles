@@ -32,6 +32,8 @@
  *   discovery sotto il conteggio sorgente diventa rosso.
  * - Togliere il registro da `checkpointCommitCommand()`: il test del checkpoint
  *   diventa rosso.
+ * - Togliere il try/catch da `recordTranslation()`: il test del registro che
+ *   lancia dopo una scrittura riuscita diventa rosso.
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -53,6 +55,8 @@ import {
 import {
   checkpointCommitCommand,
   discoverArticles,
+  faqLedgerSaveFailures,
+  writeTranslatedFaq,
   insertFaqIntoBodyFile,
   partitionThrottledTranslations,
   recordFaqTranslationOutcome,
@@ -235,12 +239,15 @@ test('cablaggio: main() filtra PRIMA del limite e i tre percorsi di traduzione r
     const start = BATCH_SRC.indexOf(`async function ${fn}(`);
     const end = BATCH_SRC.indexOf('\nasync function ', start + 1);
     const body = BATCH_SRC.slice(start, end);
-    assert.match(body, /recordTranslation\(options, articleId, locale,/, `${fn} non registra l'esito`);
-    // L'esito di una FAQ tradotta si registra DOPO lo scrittore, col suo esito.
-    const write = body.search(/const written = insertFaqIntoBodyFile\(/);
-    const record = body.search(/recordTranslation\([^)]*, written\)/);
-    assert.ok(write > 0 && record > write, `${fn}: il registro deve seguire lo scrittore`);
+    assert.match(body, /recordTranslation\(options, articleId, locale,/, `${fn} non registra il rifiuto`);
+    // Una FAQ tradotta passa SOLO da writeTranslatedFaq: scrittore, poi registro
+    // col vero esito (comportamento provato sotto, su file reale).
+    assert.match(body, /writeTranslatedFaq\(options, \{ localePath, articleId, locale, sourceFaq:/, `${fn} scrive la traduzione fuori da writeTranslatedFaq`);
+    assert.doesNotMatch(body, /insertFaqIntoBodyFile\([^)]*res\.faq\)/, `${fn} scrive res.faq senza aggiornare il registro`);
   }
+  // processTopUp: il fallback italiano del catch vale solo se la traduzione non e' scritta.
+  const topUp = BATCH_SRC.slice(BATCH_SRC.indexOf('async function processTopUp('), BATCH_SRC.indexOf('async function processTranslation('));
+  assert.match(topUp, /\} catch \(err\) \{\s*if \(written\) \{/);
   // UNA sorgente per il registro: il batch non conosce il path del file.
   assert.doesNotMatch(BATCH_SRC, /faq-locale-rejections\.json/);
 });
@@ -320,5 +327,37 @@ test('ogni checkpoint del batch mette in stage anche il registro dei rifiuti', (
     assert.deepEqual(files, ['content/blog-body/x.ts', 'data/batch-faq-progress.json', FAQ_REJECTION_LEDGER_GIT_PATH].sort());
   } finally {
     fs.rmSync(repo, { recursive: true, force: true });
+  }
+});
+
+test('un registro che lancia DOPO una scrittura riuscita non tocca la FAQ tradotta (niente fallback italiano)', () => {
+  const dir = bodyDirWith(IT_LAIVIN, DE_LAIVIN.slice(0, 1));
+  const id = 'laivin-festival-cassano-valcuvia-2026';
+  const localePath = path.join(dir, 'de', `${id}.ts`);
+  const warn = console.warn;
+  console.warn = () => {};
+  try {
+    const failuresBefore = faqLedgerSaveFailures();
+    const options = {
+      rejectionLedger: {},
+      section: 'frontaliere',
+      dryRun: false,
+      saveLedger: () => { throw new Error('EACCES: registro non scrivibile'); },
+    };
+    // 3 coppie su 4: scrittura potata -> il registro va aggiornato e salvato.
+    const res = { faq: DE_LAIVIN, rejected: false };
+    let written;
+    assert.doesNotThrow(() => {
+      written = writeTranslatedFaq(options, { localePath, articleId: id, locale: 'de', sourceFaq: IT_LAIVIN, res });
+    });
+    assert.equal(written, true);
+    assert.equal(faqLedgerSaveFailures(), failuresBefore + 1);
+    const content = fs.readFileSync(localePath, 'utf8');
+    assert.ok(content.includes('Wer organisiert das Festival LaivIn Plus?'), 'la traduzione tedesca deve restare');
+    assert.ok(!content.includes('Chi organizza il festival'), 'nessun italiano sul body tedesco');
+    assert.equal(options.rejectionLedger[faqLocaleIssueKey(id, 'de', 'frontaliere')].prunedWrite, true);
+  } finally {
+    console.warn = warn;
+    fs.rmSync(dir, { recursive: true, force: true });
   }
 });
