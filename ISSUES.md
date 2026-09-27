@@ -146,7 +146,11 @@ Non ogni issue produce una PR, e forzarne una è peggio che non farla:
   per poi scoprire il blocco al push spreca l'intero run.
 - **Overlap** — una PR aperta modifica già uno dei file target: fermarsi evita
   un conflitto o un doppione.
-- **Già risolta** o **PR già in volo**.
+- **Già risolta / recovery verificata** — se una fix è già su `main` o una finestra runtime
+  post-fix dimostra che il difetto è rientrato, termina senza PR: commenta
+  l'evidenza e usa `already-fixed`; non inventare codici come
+  `verified-recovered`. Una run verde isolata non basta se la failure ricorre.
+- **PR già in volo**.
 
 ## Telemetria degli esiti (obbligatoria)
 
