@@ -56,11 +56,14 @@ const {
   getTranslationCascadeConfigurationKey,
   logCascadeSummary,
   setCodexTranslateCallForTests,
+  setCodexTranslateProcessDeadline,
+  codexCallDeadlineMs,
 } = await import('../scripts/lib/free-translate.mjs');
 const { AI_MODELS } = await import('../scripts/lib/ai-models.mjs');
 
 after(() => {
   setCodexTranslateCallForTests(null);
+  setCodexTranslateProcessDeadline(null);
   fs.rmSync(tmp, { recursive: true, force: true });
 });
 
@@ -443,5 +446,76 @@ test('senza FREE_TRANSLATE_CODEX_TIER la posizione resta quella di default, senz
     assert.equal(failing.length, 1);
   } finally {
     free.mymemoryEcho = false;
+  }
+});
+
+// ── Scadenza del processo (run 36309380063 e 36305591991) ─────────────────
+// create-article ucciso dal `timeout` del workflow a 657 s con l'articolo IT
+// pronto e le traduzioni Codex ancora in corso: il budget del tier (300 s
+// cumulati) non conosceva l'orologio del processo.
+
+test('clamp della deadline: minimo fra tetto della chiamata, budget del tier e scadenza del processo', () => {
+  const now = 1_000_000;
+  // Senza scadenza del processo: invariato rispetto a prima (tetto 180 s).
+  assert.equal(codexCallDeadlineMs({ now, budgetRemainingMs: 300_000, processDeadlineMs: null }), now + 180_000);
+  // Il budget del tier resta un limite.
+  assert.equal(codexCallDeadlineMs({ now, budgetRemainingMs: 40_000, processDeadlineMs: null }), now + 40_000);
+  // La scadenza del processo vince quando e' la piu' vicina.
+  assert.equal(codexCallDeadlineMs({ now, budgetRemainingMs: 300_000, processDeadlineMs: now + 60_000 }), now + 60_000);
+  // E non allunga mai la finestra oltre gli altri due limiti.
+  assert.equal(codexCallDeadlineMs({ now, budgetRemainingMs: 300_000, processDeadlineMs: now + 900_000 }), now + 180_000);
+  // Sotto il minimo per chiamata (15 s) la chiamata non si avvia.
+  assert.equal(codexCallDeadlineMs({ now, budgetRemainingMs: 300_000, processDeadlineMs: now + 14_999 }), null);
+  assert.equal(codexCallDeadlineMs({ now, budgetRemainingMs: 300_000, processDeadlineMs: now - 1 }), null);
+  assert.equal(codexCallDeadlineMs({ now, budgetRemainingMs: 300_000, processDeadlineMs: now + 15_000 }), now + 15_000);
+});
+
+test('scadenza del processo lontana: la deadline passata a Codex non la supera', async () => {
+  const deadline = Date.now() + 60_000;
+  setCodexTranslateProcessDeadline(deadline);
+  try {
+    const calls = stubCodex(`CODEX ${EN}`);
+    assert.equal(await it(), `CODEX ${EN}`);
+    assert.equal(calls.length, 1);
+    assert.ok(calls[0].opts.deadlineMs <= deadline, 'la deadline della chiamata supera la scadenza del processo');
+    assert.ok(calls[0].opts.deadlineMs > Date.now());
+  } finally {
+    setCodexTranslateProcessDeadline(null);
+  }
+});
+
+test('scadenza del processo sotto il minimo per chiamata: Codex non parte, una riga, la cascata prosegue', async () => {
+  setCodexTranslateProcessDeadline(Date.now() + 10_000);
+  try {
+    const calls = stubCodex(`CODEX ${EN}`);
+    const { value, lines } = await captureLog(async () => [await it(), await it()]);
+    assert.deepEqual(value, [`MYMEMORY ${EN}`, `MYMEMORY ${EN}`]);
+    assert.equal(calls.length, 0);
+    assert.equal(lines.filter((l) => l.includes('scadenza del processo')).length, 1);
+    // Una lane che non puo' piu' servire la run vale come assente anche per
+    // la fingerprint della cascata.
+    assert.equal(JSON.parse(await getTranslationCascadeConfigurationKey()).codex, false);
+  } finally {
+    setCodexTranslateProcessDeadline(null);
+  }
+});
+
+test('la scadenza si rivaluta in coda: la chiamata che la consuma ferma le successive', async () => {
+  const realNow = Date.now;
+  let offset = 0;
+  Date.now = () => realNow() + offset;
+  setCodexTranslateProcessDeadline(realNow() + 30_000);
+  try {
+    const calls = stubCodex(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 5));
+      offset += 20_000;
+      return `CODEX ${EN}`;
+    });
+    const { value } = await captureLog(() => Promise.all([it(), it(), it()]));
+    assert.equal(calls.length, 1);
+    assert.deepEqual(value, [`CODEX ${EN}`, `MYMEMORY ${EN}`, `MYMEMORY ${EN}`]);
+  } finally {
+    Date.now = realNow;
+    setCodexTranslateProcessDeadline(null);
   }
 });
