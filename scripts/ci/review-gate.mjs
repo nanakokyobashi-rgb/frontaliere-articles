@@ -559,6 +559,16 @@ async function main() {
       console.log(
         `review-gate: l'ultima review del bot (${last.commit_id}) non e' approvante — manca '## LGTM' oppure contiene un 🔴 Important.`,
       );
+      // Segnale per lo step `Dispatch 🔴-fixer` di tests.yml. La review Codex
+      // e' pubblicata col GITHUB_TOKEN (autore `github-actions[bot]`) e un
+      // evento creato da quel token non avvia `pull_request_review`: senza un
+      // dispatch esplicito `pr-redflag-fixer.yml` non parte mai (fermo dal
+      // 17-09). Solo un 🔴 vivo sulla HEAD esatta: il ramo workflow_dispatch
+      // del fixer cerca la review su `headRefOid` e scarta tutto il resto.
+      if (applies && hasRedflag && last.commit_id === HEAD_SHA) {
+        writeGateOutput('redflag_open', 'true');
+        writeGateOutput('redflag_review_login', String(last.user?.login || ''));
+      }
     } else {
       const headFp = fingerprint(HEAD_SHA);
       const revFp = fingerprint(last.commit_id);

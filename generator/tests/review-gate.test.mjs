@@ -326,6 +326,38 @@ test('LGTM accanto a un 🔴 Important → il check e\' ROSSO', () => {
     reviews: [botReview(HEAD, '🔴 Important: manca il guard\n\n## LGTM')],
   });
   assert.equal(r.status, 1, `Un 🔴 Important accanto al LGTM deve bloccare.\n${r.stdout}`);
+  // Il dispatch del 🔴-fixer in tests.yml legge questi output: la review
+  // pubblicata col GITHUB_TOKEN non avvia `pull_request_review`.
+  assert.match(r.gateOutput, /^redflag_open=true$/m, r.gateOutput);
+  assert.match(r.gateOutput, /^redflag_review_login=claude\[bot\]$/m, r.gateOutput);
+});
+
+test('🔴 Important di una review Codex sulla HEAD → redflag_open con login github-actions[bot]', () => {
+  const r = runGate({
+    reviews: [botReview(HEAD, '<!-- CODEX_FALLBACK_REVIEW -->\n## Findings (Important: 1, 0 Nit)\n`generator/scripts/in-scope.mjs:10`: 🔴 Important: manca il guard.', {
+      user: { type: 'Bot', login: 'github-actions[bot]' },
+    })],
+    files: ['generator/scripts/in-scope.mjs'],
+    meta: { base: { sha: 'c'.repeat(40) }, head: { sha: HEAD } },
+  });
+  assert.equal(r.status, 1, r.stdout);
+  assert.match(r.gateOutput, /^redflag_open=true$/m, r.gateOutput);
+  assert.match(r.gateOutput, /^redflag_review_login=github-actions\[bot\]$/m, r.gateOutput);
+});
+
+test('review senza LGTM ma senza 🔴 Important → nessun redflag_open (niente dispatch del fixer)', () => {
+  const r = runGate({ reviews: [botReview(HEAD, '🟡 Nit: una virgola')] });
+  assert.equal(r.status, 1, r.stdout);
+  assert.doesNotMatch(r.gateOutput, /redflag_open/, r.gateOutput);
+});
+
+test('🔴 Important su un commit precedente → nessun redflag_open (il dispatch cerca la review sulla HEAD)', () => {
+  const r = runGate({
+    reviews: [botReview(OLD, '🔴 Important: manca il guard')],
+    files: ['generator/scripts/create-article.mjs'],
+  });
+  assert.equal(r.status, 1, r.stdout);
+  assert.doesNotMatch(r.gateOutput, /redflag_open/, r.gateOutput);
 });
 
 test('Important fuori dal diff → il gate e\' verde e il finding diventa follow-up', () => {

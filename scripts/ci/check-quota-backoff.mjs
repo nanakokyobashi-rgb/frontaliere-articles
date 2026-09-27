@@ -131,6 +131,44 @@ const RUN_ID_RE = /^[1-9][0-9]*$/;
 // vincolante per la decomposizione e per ruoli sconosciuti.
 const QUEUE_FLOOR_BYPASS_ROLES = new Set(['review', 'redflag', 'redcheck']);
 
+// Profondita' della coda issue-fix per il floor qui sopra: conta SOLO le issue
+// `agent:fix-queued` che il DRAIN di `followup-drainer.mjs` puo' davvero
+// promuovere. Una `fu-parked` (o `automation-deferred`, claim attivo, stadio
+// decompose, conflitto `agent:fix`) resta etichettata `agent:fix-queued` ma il
+// drainer non la promuove mai: contarla teneva il floor «non riservato» per
+// sempre e negava il lease a `issue-decompose` (dal 12-09, #1495 parcheggiata
+// → «DECOMPOSE DRAIN sospeso ... issue-fix-floor-unreserved»). Specchio di
+// `isDrainPromotable`: il drainer importa questo modulo, quindi l'import
+// inverso sarebbe ciclico; il legame e' tenuto da
+// `generator/tests/check-quota-backoff.test.mjs` (AGENTS.md #6).
+export const FIX_QUEUE_NON_PROMOTABLE_LABELS = Object.freeze([
+  'fu-parked',
+  'automation-deferred',
+  'agent:in-progress',
+  'agent:local',
+  'agent:remote',
+  'agent:fix',
+  'agent:decompose-queued',
+  'agent:decompose',
+  'decomposed:1',
+]);
+const FIX_QUEUE_NON_PROMOTABLE = new Set(FIX_QUEUE_NON_PROMOTABLE_LABELS);
+// Una riga senza label leggibili resta contata: il floor protegge issue-fix,
+// quindi l'incertezza deve tenerlo riservato come prima.
+export function isPromotableFixQueueRow(row) {
+  if (!row || !Array.isArray(row.labels)) return true;
+  return !row.labels.some((label) => FIX_QUEUE_NON_PROMOTABLE.has(
+    typeof label === 'string' ? label : String(label?.name || ''),
+  ));
+}
+export function promotableFixQueueDepth(rows) {
+  return (Array.isArray(rows) ? rows : []).filter(isPromotableFixQueueRow).length;
+}
+// La coda puo' contenere piu' parcheggiate dello scan dei lease: la profondita'
+// legge una pagina GraphQL intera, cosi' le promuovibili non restano oltre il
+// limite dietro le parcheggiate.
+const FIX_QUEUE_DEPTH_SCAN_MAX = 100;
+
 function validLeaseTarget(targetType, target) {
   return QUOTA_LEASE_TARGET_TYPES.has(targetType)
     && /^[1-9][0-9]*$/.test(String(target || ''));
@@ -560,10 +598,10 @@ function leaseComments(repo, targetType, target) {
   return comments;
 }
 
-function leaseIssueRows(repo, label, max) {
+function leaseIssueRows(repo, label, max, fields = 'number,updatedAt') {
   return leaseRows(leaseJson([
     'issue', 'list', '--repo', repo, '--state', 'open', '--label', label,
-    '--json', 'number,updatedAt', '--limit', String(max),
+    '--json', fields, '--limit', String(max),
   ], `issue ${label}`), `issue ${label}`);
 }
 
@@ -726,7 +764,9 @@ export function runQuotaLease({
     }
 
     const scan = scanQuotaLeases(repo, targetType, target, max, nowSec);
-    const queueDepth = leaseIssueRows(repo, 'agent:fix-queued', max).length;
+    const queueDepth = promotableFixQueueDepth(leaseIssueRows(
+      repo, 'agent:fix-queued', Math.max(max, FIX_QUEUE_DEPTH_SCAN_MAX), 'number,updatedAt,labels',
+    ));
     const decision = quotaLeaseDecision({
       action,
       role,

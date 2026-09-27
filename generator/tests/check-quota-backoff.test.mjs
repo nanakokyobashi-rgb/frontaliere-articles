@@ -12,8 +12,11 @@ import {
   reviewQuotaDeferredBody,
   parseReviewQuotaDeferredMarker,
   runQuotaGitHubCommand,
+  FIX_QUEUE_NON_PROMOTABLE_LABELS,
+  isPromotableFixQueueRow,
+  promotableFixQueueDepth,
 } from '../../scripts/ci/check-quota-backoff.mjs';
-import { quotaPromotionDecision } from '../../scripts/ci/followup-drainer.mjs';
+import { quotaPromotionDecision, isDrainPromotable } from '../../scripts/ci/followup-drainer.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -447,4 +450,54 @@ test('#8365: una contesa dopo la rilettura lascia il marker per il rescuer PR', 
   assert.match(contention, /postReviewQuotaDeferred\(/,
     'il perdente della contesa non deve sparire senza deferral head-pinned');
   assert.match(contention, /shared-quota-lease-contention/);
+});
+
+test('#1495: una agent:fix-queued parcheggiata non tiene il floor issue-fix e non blocca issue-decompose', () => {
+  const nowSec = 1_800_000_000;
+  // Caso reale dal 12-09: #1495 porta sia `agent:fix-queued` sia `fu-parked`;
+  // il drainer non la promuove mai, quindi non e' coda per il floor.
+  const rows = [{ number: 1495, labels: [{ name: 'agent:fix-queued' }, { name: 'fu-parked' }] }];
+  const queueDepth = promotableFixQueueDepth(rows);
+  assert.equal(queueDepth, 0);
+  const decision = quotaLeaseDecision({
+    action: 'acquire', role: 'issue-decompose', targetType: 'issue', target: '1084',
+    activeLeases: [], queueDepth, nowSec,
+  });
+  assert.equal(decision.allowed, true, decision.reason);
+  assert.notEqual(decision.reason, 'issue-fix-floor-unreserved');
+
+  // Una promuovibile accanto alla parcheggiata riserva ancora il floor.
+  const withLive = [...rows, { number: 1500, labels: [{ name: 'agent:fix-queued' }] }];
+  assert.equal(promotableFixQueueDepth(withLive), 1);
+  assert.equal(quotaLeaseDecision({
+    action: 'acquire', role: 'issue-decompose', targetType: 'issue', target: '1084',
+    activeLeases: [], queueDepth: promotableFixQueueDepth(withLive), nowSec,
+  }).reason, 'issue-fix-floor-unreserved');
+
+  // Label illeggibili: fail-closed, la riga resta contata.
+  assert.equal(promotableFixQueueDepth([{ number: 7 }]), 1);
+});
+
+test('#1495: la profondita della coda e\' lo specchio esatto di isDrainPromotable del drainer', () => {
+  const extra = ['agent:fix-queued', 'priority:high', 'from-decompose', 'needs-human'];
+  const universe = [...new Set([...FIX_QUEUE_NON_PROMOTABLE_LABELS, ...extra])];
+  const issue = (labels) => ({ labels: labels.map((name) => ({ name })) });
+  // Ogni label da sola e ogni coppia: un'etichetta che il drainer salta e che
+  // la coda conta (o viceversa) rompe qui, non nel lease di produzione.
+  const cases = [[], ...universe.map((l) => ['agent:fix-queued', l])];
+  for (let i = 0; i < universe.length; i += 1) {
+    for (let j = i + 1; j < universe.length; j += 1) cases.push(['agent:fix-queued', universe[i], universe[j]]);
+  }
+  for (const labels of cases) {
+    assert.equal(
+      isPromotableFixQueueRow(issue(labels)),
+      isDrainPromotable(issue(labels)),
+      `divergenza con isDrainPromotable su [${labels.join(', ')}]`,
+    );
+  }
+});
+
+test('#1495: il lease legge le label della coda per calcolarne la profondita', () => {
+  const source = fs.readFileSync(path.join(ROOT, 'scripts/ci/check-quota-backoff.mjs'), 'utf8');
+  assert.match(source, /const queueDepth = promotableFixQueueDepth\(leaseIssueRows\(\s*repo, 'agent:fix-queued', [^\n]*'number,updatedAt,labels'/);
 });
