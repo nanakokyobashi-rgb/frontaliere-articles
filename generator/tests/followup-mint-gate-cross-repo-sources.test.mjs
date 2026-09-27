@@ -22,7 +22,16 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import test from 'node:test';
 
-import { resolveSourcePrTriage } from '../../scripts/ci/gate-minted-followups.mjs';
+import {
+  decideMintGate,
+  demotedBlock,
+  demotedItemsBySourcePr,
+  preserveDemotedOnSourcePrs,
+  qualifySourcePrLookups,
+  resolveSourcePrTriage,
+  triageMarkerCitesBucket,
+} from '../../scripts/ci/gate-minted-followups.mjs';
+import { verifyTriageMarkerPersistence } from '../../scripts/ci/collect-followup-batch.mjs';
 
 const GATE = fileURLToPath(new URL('../../scripts/ci/gate-minted-followups.mjs', import.meta.url));
 const WORKFLOW = readFileSync(new URL('../../.github/workflows/post-merge-followup.yml', import.meta.url), 'utf8');
@@ -201,4 +210,176 @@ test('i due gate corpus di post-merge-followup dichiarano il sito come repositor
     assert.match(block, /GATE_ALT_PR_TOKEN="\$\{GITHUB_PAT_SITE:-\$\{GITHUB_PAT:-\}\}"/, step);
     assert.doesNotMatch(block, /GATE_ALT_PR_TOKEN: \$\{\{/, step);
   }
+});
+
+/* ── Un item demoto va SOLO sulla sua PR sorgente, qualificata col repository ── */
+
+// Caso reale corpus #1742 (run 36214063543, 35973121007): «PR #1742 bucket non
+// leggibile (item=1, bucket=[9769])». Il bucket #9769 vive nel SITO e cita
+// `Sources: PR #1742` della PR del CORPUS; anche il sito ha una PR #1742. Il
+// gate commentava TUTTI gli item demoti su TUTTE le Sources, risolvendo ogni
+// numero nel primo repository in cui era una PR: corpus #1742 ha ricevuto gli
+// item di #1740, #1741 e #1771 ma mai il proprio.
+const BUCKET = 9769;
+const MARKER_AT = '2026-09-25T00:15:59Z';
+const MARKER_1742 = [
+  '## Post-merge follow-up triage',
+  'Bucket giornaliero: #9769 (`follow-up(daily:2026-09-25): 9 items — valerielinc-ops/frontaliere-si-o-no`).',
+  'Follow-up item: FU-2026-09-25-009',
+].join('\n');
+const markerFor = (bucket) => JSON.stringify({ comments: [{ createdAt: MARKER_AT, body: MARKER_1742.replace('#9769', `#${bucket}`) }] });
+const demotedText = (pr, what) => `\n- State: open\n- Target repository: valerielinc-ops/frontaliere-si-o-no\n- Sources: PR #${pr}\n- Suggested action: controllare ${what}\n`;
+
+test('ogni item demoto viene raggruppato solo sotto le PR della SUA Sources', () => {
+  const groups = demotedItemsBySourcePr([demotedText(1742, 'uno'), demotedText(1740, 'due')], [1740, 1741, 1742, 1771]);
+  assert.deepEqual(groups.map(({ pr, items }) => [pr, items.length]), [[1742, 1], [1740, 1]]);
+  assert.match(groups[0].items[0], /controllare uno/);
+});
+
+test('la PR sorgente e\' quella il cui marker cita il bucket, non la prima omonima', () => {
+  const site = lookup('site/r', { 1742: { ok: true, comments: markerFor(1234) } });
+  const corpus = lookup('corpus/r', { 1742: { ok: true, comments: markerFor(BUCKET) } });
+  assert.equal(triageMarkerCitesBucket(markerFor(BUCKET), BUCKET), true);
+  assert.deepEqual(qualifySourcePrLookups(1742, BUCKET, [site, corpus]).map((l) => l.repo), ['corpus/r']);
+  // Nessun marker cita il bucket: resta la risoluzione legacy, il testo non si perde.
+  assert.deepEqual(qualifySourcePrLookups(1742, 5555, [site, corpus]).map((l) => l.repo), ['site/r']);
+  // Un guasto prima di poter decidere: null, nessuna riscrittura del bucket.
+  assert.equal(qualifySourcePrLookups(1742, BUCKET, [site, { repo: 'corpus/r', read: () => ({ ok: false, notPr: false }) }]), null);
+});
+
+test('contratto gate → collector: il commento sulla PR sorgente rende OK la verifica dell item demotato dopo il marker', () => {
+  const posts = [];
+  const results = preserveDemotedOnSourcePrs({
+    bucketNumber: BUCKET,
+    demoted: [demotedText(1742, 'item-di-1742'), demotedText(1740, 'item-di-1740')],
+    fallbackTargets: [1740, 1742],
+    intro: `<!-- followup-mint-gate -->\n## Item demoti dal gate sul conio\n\nIssue #${BUCKET} resta aperta con 7 item validi; questi sono stati tolti dal suo corpo e vivono solo qui.`,
+    lookups: [
+      lookup('site/r', { 1742: { ok: true, comments: markerFor(1234) } }),
+      lookup('corpus/r', { 1742: { ok: true, comments: markerFor(BUCKET) }, 1740: { ok: true, comments: markerFor(BUCKET) } }),
+    ],
+    post: (l, pr, body) => { posts.push({ repo: l.repo, pr, body }); return 'ok'; },
+    log: () => {},
+  });
+  assert.deepEqual(results, ['ok', 'ok']);
+  assert.deepEqual(posts.map((p) => `${p.repo}#${p.pr}`), ['corpus/r#1742', 'corpus/r#1740']);
+  assert.match(posts[0].body, /item-di-1742/);
+  assert.doesNotMatch(posts[0].body, /item-di-1740/);
+
+  // Il bucket, dopo la demozione, non cita piu' #1742: la sola prova e' il commento.
+  const bucketAfter = {
+    number: BUCKET,
+    title: 'follow-up(daily:2026-09-25): 7 items — valerielinc-ops/frontaliere-si-o-no',
+    body: '### FU-2026-09-25-001 — altro\n- Sources: PR #9560\n',
+  };
+  const prComments = (gateBody) => JSON.stringify({ comments: [
+    { createdAt: MARKER_AT, body: MARKER_1742 },
+    { createdAt: '2026-09-25T00:18:40Z', body: gateBody },
+  ] });
+  assert.equal(verifyTriageMarkerPersistence(MARKER_1742, 1742, () => bucketAfter, prComments(posts[0].body)), true);
+  // Il commento che #1742 riceveva prima (i soli item di un'altra PR) non prova nulla.
+  assert.equal(verifyTriageMarkerPersistence(MARKER_1742, 1742, () => bucketAfter, prComments(posts[1].body)), false);
+});
+
+test('gate vero: stesso numero di PR nei due repository, commento solo sulla PR sorgente dell item', () => {
+  const root = mkdtempSync(join(tmpdir(), 'followup-same-number-'));
+  const calls = join(root, 'calls');
+  const state = join(root, 'state.json');
+  writeFileSync(calls, '');
+  const valid = [
+    '### FU-2026-09-25-001 — queue candidate',
+    '- State: open',
+    '- Target repository: site/r',
+    '- Target file: `scripts/example.mjs`',
+    '- Sources: PR #9633',
+    '- Original text:',
+    '  > controllo non sempre applicato',
+    '- Suggested action: aggiungi `firstGuard()` in scripts/example.mjs',
+    '- Acceptance token: `firstGuard()`',
+    '',
+  ].join('\n');
+  const vague = (id, pr, what) => [
+    `### ${id} — ${what}`,
+    '- State: open',
+    '- Target repository: site/r',
+    '- Target file: `scripts/example.mjs`',
+    `- Sources: PR #${pr}`,
+    `- Suggested action: controllare ${what}`,
+    '',
+  ].join('\n');
+  writeFileSync(state, JSON.stringify({
+    number: BUCKET,
+    title: 'follow-up(daily:2026-09-25): 3 items — site/r',
+    body: ['## Batch', '- Daily key: 2026-09-25 (Europe/Zurich)', '- State: collecting', '- Target repository: site/r', '',
+      '## Item', '', valid, vague('FU-2026-09-25-002', 1742, 'item-di-1742'), vague('FU-2026-09-25-003', 1740, 'item-di-1740')].join('\n'),
+    labels: [{ name: 'follow-up' }],
+    createdAt: new Date().toISOString(),
+  }));
+  writeFileSync(join(root, 'gh'), `#!/usr/bin/env node
+const fs = require('node:fs');
+const args = process.argv.slice(2);
+const repo = args.includes('--repo') ? args[args.indexOf('--repo') + 1] : '';
+fs.appendFileSync(${JSON.stringify(calls)}, JSON.stringify({ args, token: process.env.GH_TOKEN }) + '\\n');
+const readState = () => JSON.parse(fs.readFileSync(${JSON.stringify(state)}, 'utf8'));
+const marker = (bucket) => ({ body: '## Post-merge follow-up triage\\nBucket giornaliero: #' + bucket + ' (daily).' });
+const prs = { 'site/r': { '9633': [marker(9769)], '1742': [marker(1234)] }, 'corpus/r': { '1742': [marker(9769)], '1740': [marker(9769)] } };
+if (args[0] === 'api') {
+  const c = readState();
+  process.stdout.write(JSON.stringify([[{ number: c.number, title: c.title, state: 'open', labels: c.labels, created_at: c.createdAt }]]));
+} else if (args[0] === 'issue' && args[1] === 'view') process.stdout.write(JSON.stringify(readState()));
+else if (args[0] === 'pr' && (args[1] === 'view' || args[1] === 'comment')) {
+  const comments = (prs[repo] || {})[args[2]];
+  if (!comments) { process.stderr.write('GraphQL: Could not resolve to a PullRequest with the number of ' + args[2] + '. (repository.pullRequest)\\n'); process.exit(1); }
+  if (args[1] === 'view') process.stdout.write(JSON.stringify({ comments }));
+} else if (args[0] === 'issue' && args[1] === 'edit' && args.includes('--body-file')) {
+  const u = readState();
+  u.body = fs.readFileSync(args[args.indexOf('--body-file') + 1], 'utf8');
+  fs.writeFileSync(${JSON.stringify(state)}, JSON.stringify(u));
+}
+`);
+  chmodSync(join(root, 'gh'), 0o755);
+  const env = {
+    ...process.env,
+    PATH: `${root}:${process.env.PATH}`,
+    GH_REPO: 'site/r',
+    GH_TOKEN: 'site-token',
+    GATE_ALT_PR_REPO: 'corpus/r',
+    GATE_ALT_PR_TOKEN: 'corpus-token',
+    BATCH_PRS: '',
+    TRIAGE_COMPLETE: 'true',
+    COLLECTION_OK: 'true',
+    DRY_RUN: '',
+    GITHUB_STEP_SUMMARY: '',
+  };
+  delete env.GATE_PR_REPO;
+  delete env.GATE_PR_TOKEN;
+  try {
+    const result = spawnSync(process.execPath, [GATE], { encoding: 'utf8', env });
+    assert.equal(result.status, 0, result.stdout + result.stderr);
+    const recorded = readFileSync(calls, 'utf8').trim().split('\n').map((line) => JSON.parse(line));
+    const comments = recorded.filter((c) => c.args[0] === 'pr' && c.args[1] === 'comment');
+    const where = (c) => `${c.args[c.args.indexOf('--repo') + 1]}#${c.args[2]}`;
+    const body = (c) => c.args[c.args.indexOf('--body') + 1];
+    assert.deepEqual(comments.map(where).sort(), ['corpus/r#1740', 'corpus/r#1742'], result.stdout);
+    const on1742 = comments.find((c) => c.args[2] === '1742');
+    assert.equal(on1742.token, 'corpus-token');
+    assert.match(body(on1742), /Issue #9769/);
+    assert.match(body(on1742), /- Sources: PR #1742/);
+    assert.doesNotMatch(body(on1742), /item-di-1740/);
+    const after = JSON.parse(readFileSync(state, 'utf8')).body;
+    assert.doesNotMatch(after, /item-di-174[02]/);
+    assert.match(after, /FU-2026-09-25-001/);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('il ramo suppress di un daily conserva il TESTO dell item, non [object Object]', () => {
+  const body = ['## Batch', '- Daily key: 2026-09-25 (Europe/Zurich)', '- State: collecting', '- Target repository: o/r', '',
+    '### FU-2026-09-25-001 — vago', '- State: open', '- Target repository: o/r', '- Sources: PR #1742', '- Suggested action: controllare il file', ''].join('\n');
+  const d = decideMintGate({ title: 'follow-up(daily:2026-09-25): 1 item — o/r', body }, { triageComplete: true });
+  assert.equal(d.action, 'suppress');
+  assert.ok(d.demoted.every((it) => typeof it === 'string'));
+  assert.match(demotedBlock(d.demoted), /- Sources: PR #1742/);
+  assert.doesNotMatch(demotedBlock(d.demoted), /\[object Object\]/);
 });
