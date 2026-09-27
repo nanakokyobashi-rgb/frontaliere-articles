@@ -383,3 +383,63 @@ test('il ramo suppress di un daily conserva il TESTO dell item, non [object Obje
   assert.match(demotedBlock(d.demoted), /- Sources: PR #1742/);
   assert.doesNotMatch(demotedBlock(d.demoted), /\[object Object\]/);
 });
+
+test('suppress di un daily con conservazione fallita sulla PR sorgente: nessun close, issue aperta', () => {
+  // Review di valerielinc-ops/frontaliere-si-o-no#10070, stesso ramo qui: la
+  // soppressione chiudeva la issue anche quando `preserveDemotedOnSourcePrs()`
+  // non era riuscito, perdendo l'unica copia integrale degli item demoti.
+  // `gh pr comment` fallisce con un guasto (non «non e' una PR»).
+  const root = mkdtempSync(join(tmpdir(), 'followup-suppress-guard-'));
+  const calls = join(root, 'calls');
+  const state = join(root, 'state.json');
+  writeFileSync(calls, '');
+  writeFileSync(state, JSON.stringify({
+    number: 1950,
+    title: 'follow-up(daily:2026-09-26): 1 item — corpus/r',
+    body: ['## Batch', '- Daily key: 2026-09-26 (Europe/Zurich)', '- State: collecting', '- Target repository: corpus/r', '',
+      '## Item', '', '### FU-2026-09-26-001 — senza condizione di accettazione', '- State: open', '- Target repository: corpus/r',
+      '- Target file: `scripts/example.mjs`', '- Sources: PR #1742', '- Suggested action: controllare il file', ''].join('\n'),
+    state: 'open',
+    labels: [{ name: 'follow-up' }],
+    createdAt: new Date().toISOString(),
+  }));
+  writeFileSync(join(root, 'gh'), `#!/usr/bin/env node
+const fs = require('node:fs');
+const args = process.argv.slice(2);
+fs.appendFileSync(${JSON.stringify(calls)}, JSON.stringify({ args }) + '\\n');
+const readState = () => JSON.parse(fs.readFileSync(${JSON.stringify(state)}, 'utf8'));
+if (args[0] === 'api') {
+  const c = readState();
+  process.stdout.write(JSON.stringify([[{ number: c.number, title: c.title, state: 'open', labels: c.labels, created_at: c.createdAt }]]));
+} else if (args[0] === 'issue' && args[1] === 'view') process.stdout.write(JSON.stringify(readState()));
+else if (args[0] === 'pr' && args[1] === 'view') process.stdout.write(JSON.stringify({ comments: [{ body: '## Post-merge follow-up triage\\nBucket giornaliero: #1950.' }] }));
+else if (args[0] === 'pr' && args[1] === 'comment') { process.stderr.write('HTTP 502: Bad Gateway\\n'); process.exit(1); }
+else if (args[0] === 'issue' && args[1] === 'close') { const u = readState(); u.state = 'closed'; fs.writeFileSync(${JSON.stringify(state)}, JSON.stringify(u)); }
+`);
+  chmodSync(join(root, 'gh'), 0o755);
+  const env = {
+    ...process.env,
+    PATH: `${root}:${process.env.PATH}`,
+    GH_REPO: 'corpus/r',
+    GH_TOKEN: 'corpus-token',
+    BATCH_PRS: '',
+    TRIAGE_COMPLETE: 'true',
+    COLLECTION_OK: 'true',
+    DRY_RUN: '',
+    GITHUB_STEP_SUMMARY: '',
+  };
+  for (const key of ['GATE_PR_REPO', 'GATE_PR_TOKEN', 'GATE_ALT_PR_REPO', 'GATE_ALT_PR_TOKEN']) delete env[key];
+  try {
+    const result = spawnSync(process.execPath, [GATE], { encoding: 'utf8', env });
+    assert.equal(result.status, 0, result.stdout + result.stderr);
+    assert.match(result.stdout, /#1950 \(daily:2026-09-26\) → suppress/);
+    const recorded = readFileSync(calls, 'utf8').trim().split('\n').map((line) => JSON.parse(line));
+    assert.ok(recorded.some((c) => c.args[0] === 'pr' && c.args[1] === 'comment'), 'la conservazione va tentata');
+    assert.equal(recorded.some((c) => c.args[0] === 'issue' && c.args[1] === 'close'), false, result.stdout);
+    assert.equal(recorded.some((c) => c.args[0] === 'issue' && c.args[1] === 'comment'), false, result.stdout);
+    assert.equal(JSON.parse(readFileSync(state, 'utf8')).state, 'open');
+    assert.match(result.stdout, /NON chiudo la issue/);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
