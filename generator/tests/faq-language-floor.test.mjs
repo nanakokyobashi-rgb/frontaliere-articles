@@ -24,6 +24,10 @@
  *   vero» sulla coppia corta del credito d'imposta diventa rosso.
  * - Togliere `partitionThrottledTranslations` da `main()` del batch: il test di
  *   cablaggio diventa rosso.
+ * - Ignorare `written` in `recordFaqTranslationOutcome`: il test writer=false
+ *   diventa rosso.
+ * - Portare `WEAK_FUNCTION_WORD_WEIGHT` a 1: il caso del titolo inglese citato
+ *   in una risposta francese diventa rosso.
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -113,6 +117,24 @@ test('le parole funzionali ambigue fra le due lingue non sono evidenza', () => {
   assert.equal(functionWordMargin('qualunque testo', 'it', 'es'), Infinity);
 });
 
+test('`a`, `in`, `per` sono italiane ma pesano meta\': due bastano, una da sola no', () => {
+  // Condivise con l'inglese: contro en non sono evidenza.
+  assert.equal(functionWordMargin('a in per', 'it', 'en'), 0);
+  // Contro fr/de contano, a meta' peso.
+  assert.equal(functionWordMargin('per', 'it', 'fr'), 0.5);
+  assert.equal(functionWordMargin('in per', 'it', 'fr'), 1);
+  assert.equal(functionWordMargin('a per', 'it', 'de'), 1);
+  // content/blog-body-ch/fr/come-si-diventa-ricchi-...: risposta francese
+  // corretta con un titolo inglese citato. A peso pieno la sola `in` la
+  // rifiutava (review di #1935, rimisura 1/88).
+  const FR_TITLE = {
+    q: 'Qui est Joseph Moore ?',
+    a: "L'historien américain Joseph Moore a écrit un livre intitulé « How to Get Rich in American History ».",
+  };
+  assert.equal(detectLanguageWithConfidence(`${FR_TITLE.q} ${FR_TITLE.a}`, 'fr').lang, 'it');
+  assert.equal(wrongLocalePair([FR_TITLE], 'fr'), null);
+});
+
 // ── Fix 2: il batch consulta e aggiorna lo stesso registro ──────────────
 
 const SRC = [
@@ -141,14 +163,31 @@ test('un fallimento del motore non e\' un rifiuto; una scrittura completa cancel
   const before = structuredClone(ledger);
   assert.equal(recordFaqTranslationOutcome(ledger, key, SRC, { faq: null, rejected: false }), false);
   assert.deepEqual(ledger, before);
-  assert.equal(recordFaqTranslationOutcome(ledger, key, SRC, { faq: SRC, rejected: false }), true);
+  assert.equal(recordFaqTranslationOutcome(ledger, key, SRC, { faq: SRC, rejected: false }, { written: true }), true);
   assert.equal(key in ledger, false);
+});
+
+test('se lo scrittore fallisce (writer=false) il locale NON viene parcheggiato e resta ritentabile', () => {
+  const key = faqLocaleIssueKey('art', 'de', 'frontaliere');
+  const partial = { faq: SRC, rejected: false }; // potata: 3 coppie su 4
+  const ledger = {};
+  for (let run = 0; run < FAQ_REJECTION_MAX_CONSECUTIVE + 1; run++) {
+    assert.equal(recordFaqTranslationOutcome(ledger, key, SRC_CHANGED, partial, { written: false }), false);
+  }
+  assert.deepEqual(ledger, {});
+  assert.equal(shouldSkipFaqRejection(ledger[key], SRC_CHANGED), false);
+  // Senza il flag esplicito vale lo stesso: il default e' «non scritto».
+  assert.equal(recordFaqTranslationOutcome(ledger, key, SRC_CHANGED, partial), false);
+  // Anche una scrittura completa fallita non cancella una voce esistente.
+  const parked = { [key]: nextFaqRejection(undefined, SRC) };
+  assert.equal(recordFaqTranslationOutcome(parked, key, SRC, { faq: SRC, rejected: false }, { written: false }), false);
+  assert.ok(key in parked);
 });
 
 test('una scrittura potata sopra il pavimento e\' registrata come prunedWrite', () => {
   const ledger = {};
   const key = faqLocaleIssueKey('art', 'fr', 'frontaliere');
-  assert.equal(recordFaqTranslationOutcome(ledger, key, SRC_CHANGED, { faq: SRC, rejected: false }), true);
+  assert.equal(recordFaqTranslationOutcome(ledger, key, SRC_CHANGED, { faq: SRC, rejected: false }, { written: true }), true);
   assert.equal(ledger[key].prunedWrite, true);
   assert.equal(ledger[key].keptPairs, SRC.length);
 });
@@ -185,7 +224,12 @@ test('cablaggio: main() filtra PRIMA del limite e i tre percorsi di traduzione r
   for (const fn of ['processArticle', 'processTopUp', 'processTranslation']) {
     const start = BATCH_SRC.indexOf(`async function ${fn}(`);
     const end = BATCH_SRC.indexOf('\nasync function ', start + 1);
-    assert.match(BATCH_SRC.slice(start, end), /recordTranslation\(options, articleId, locale,/, `${fn} non registra l'esito`);
+    const body = BATCH_SRC.slice(start, end);
+    assert.match(body, /recordTranslation\(options, articleId, locale,/, `${fn} non registra l'esito`);
+    // L'esito di una FAQ tradotta si registra DOPO lo scrittore, col suo esito.
+    const write = body.search(/const written = insertFaqIntoBodyFile\(/);
+    const record = body.search(/recordTranslation\([^)]*, written\)/);
+    assert.ok(write > 0 && record > write, `${fn}: il registro deve seguire lo scrittore`);
   }
   // UNA sorgente per il registro: il batch non conosce il path del file.
   assert.doesNotMatch(BATCH_SRC, /faq-locale-rejections\.json/);

@@ -328,21 +328,34 @@ const THIRD_LANG_SHORT_TEXT_CONFIDENCE = 0.85; // ramo strong-marker senza score
 // dell'italiano accettato. Le parole funzionali invece separano del tutto:
 // con margine >= 1 i falsi rifiuti vanno da 88 a 0 (e da 43 a 0 sui casi della
 // run) e l'italiano vero rifiutato resta 65'736 su 65'736 — 0 italiani
-// accettati in piu'. Sui falsi il margine massimo misurato e' 0.
+// accettati in piu'.
 //
 // Un token presente in ENTRAMBE le liste confrontate (`la`, `le`, `un`, `se`
-// fra it e fr) non e' evidenza e si scarta. Per sourceLang/locale senza
-// lista il ramo resta quello di prima: rifiuta sul solo rilevatore.
+// fra it e fr; `a`, `in`, `per` fra it e en) non e' evidenza e si scarta. Per
+// sourceLang/locale senza lista il ramo resta quello di prima: rifiuta sul
+// solo rilevatore.
+//
+// `a`, `in`, `per` (review di #1935) sono preposizioni italiane comuni, ma
+// anche parole di altre lingue che una traduzione conserva nei titoli citati:
+// a peso pieno la sola `in` di «How to Get Rich in American History» dentro
+// una risposta francese corretta portava il margine a 1 e ne faceva di nuovo
+// un falso rifiuto (1/88). Pesano quindi META': due bastano, una da sola no.
+// Rimisurato con le tre parole: falsi rifiuti 0/88 (margine massimo 0,5),
+// italiano vero rifiutato 65'736 su 65'736 — invariato, perche' nessuna
+// coppia italiana misurata dipendeva da queste tre sole.
 const SOURCE_LANG_MIN_FUNCTION_WORD_MARGIN = 1;
+const WEAK_FUNCTION_WORDS = new Set(['a', 'in', 'per']);
+const WEAK_FUNCTION_WORD_WEIGHT = 0.5;
 const FUNCTION_WORDS = Object.fromEntries(Object.entries({
-  it: 'il lo la le gli un uno una di del dello della dei degli delle che è e ed con non se si sì ci ne sono nel nello nella nei negli nelle al allo alla ai agli alle dal dallo dalla dai dagli dalle anche più questo questa questi queste quali quale cosa quando dove chi perché sulla sul sui sugli sulle ha hanno essere stato stata stati viene vengono sarà saranno ma tra fra suo sua suoi sue mio mia miei mie tuo tua tuoi tue loro può possono posso puoi devo deve devono ogni dopo già solo molto cui quanto quanti quante qui quel quelle sera son sa ce',
-  en: 'the of and to is are was were will what which who how when where with for on by from that this it be has have does can an at their its been than there not or as would should into they you your our after about during',
-  de: 'der die das und ist sind von mit im den dem zu für auf wird werden ein eine einen einem einer nicht sich des am bei wie wer was wann wo welche welcher welches welchen nach aus auch oder über um hat haben kann können noch nur zum zur vom beim es sie er wurde wurden statt gibt als ihre ihr seine sein durch',
-  fr: 'le les la de des du et est un une en pour dans sur au aux qui que sont pas par avec ce cette ces elle ils se sa son ses où quand quel quelle quels quelles comment combien été être à ont sera seront plus leur leurs ne lors après dont mais ou aussi comme nous vous cet sans sous peut doit fait',
+  it: 'a in per il lo la le gli un uno una di del dello della dei degli delle che è e ed con non se si sì ci ne sono nel nello nella nei negli nelle al allo alla ai agli alle dal dallo dalla dai dagli dalle anche più questo questa questi queste quali quale cosa quando dove chi perché sulla sul sui sugli sulle ha hanno essere stato stata stati viene vengono sarà saranno ma tra fra suo sua suoi sue mio mia miei mie tuo tua tuoi tue loro può possono posso puoi devo deve devono ogni dopo già solo molto cui quanto quanti quante qui quel quelle sera son sa ce',
+  en: 'a in per the of and to is are was were will what which who how when where with for on by from that this it be has have does can an at their its been than there not or as would should into they you your our after about during',
+  de: 'in der die das und ist sind von mit im den dem zu für auf wird werden ein eine einen einem einer nicht sich des am bei wie wer was wann wo welche welcher welches welchen nach aus auch oder über um hat haben kann können noch nur zum zur vom beim es sie er wurde wurden statt gibt als ihre ihr seine sein durch',
+  fr: 'a le les la de des du et est un une en pour dans sur au aux qui que sont pas par avec ce cette ces elle ils se sa son ses où quand quel quelle quels quelles comment combien été être à ont sera seront plus leur leurs ne lors après dont mais ou aussi comme nous vous cet sans sous peut doit fait',
 }).map(([lang, words]) => [lang, new Set(words.split(' '))]));
 
 /**
- * Parole funzionali di `sourceLang` meno quelle di `expectedLocale` in `text`.
+ * Parole funzionali di `sourceLang` meno quelle di `expectedLocale` in `text`
+ * (peso 1, `WEAK_FUNCTION_WORD_WEIGHT` per `a`/`in`/`per`).
  * `Infinity` quando una delle due lingue non ha lista: nessuna evidenza
  * contraria, quindi il ramo `lingua` resta com'era.
  */
@@ -356,7 +369,8 @@ export function functionWordMargin(text, sourceLang, expectedLocale) {
     const inSrc = src.has(token);
     const inExp = exp.has(token);
     if (inSrc === inExp) continue; // assente da entrambe, o ambiguo fra le due
-    margin += inSrc ? 1 : -1;
+    const weight = WEAK_FUNCTION_WORDS.has(token) ? WEAK_FUNCTION_WORD_WEIGHT : 1;
+    margin += inSrc ? weight : -weight;
   }
   return margin;
 }

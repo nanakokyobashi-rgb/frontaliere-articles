@@ -1252,15 +1252,22 @@ export function partitionThrottledTranslations(needsTranslation, rejectionLedger
  * voce cancellata. Un fallimento del MOTORE (nessuna FAQ, nessun rifiuto) non
  * e' un rifiuto deterministico e non tocca il registro.
  *
+ * Una FAQ tradotta conta solo se lo SCRITTORE l'ha davvero scritta
+ * (`written === true`): se `insertFaqIntoBodyFile` restituisce `false` il
+ * locale resta mancante o sbagliato, e registrarlo come `prunedWrite` lo
+ * parcheggerebbe dopo due run senza che niente sia stato pubblicato. Un
+ * fallimento dello scrittore resta quindi ritentabile. Il rifiuto di lingua
+ * non passa dallo scrittore, e si registra comunque.
+ *
  * @returns {boolean} true se il registro e' cambiato e va salvato
  */
-export function recordFaqTranslationOutcome(rejectionLedger, key, sourceFaq, res) {
+export function recordFaqTranslationOutcome(rejectionLedger, key, sourceFaq, res, { written = false } = {}) {
   if (!rejectionLedger || !res) return false;
   if (res.rejected) {
     rejectionLedger[key] = nextFaqRejection(rejectionLedger[key], sourceFaq);
     return true;
   }
-  if (!res.faq) return false;
+  if (!res.faq || written !== true) return false;
   if (belowFaqSourceCount(res.faq, sourceFaq)) {
     rejectionLedger[key] = nextFaqRejection(rejectionLedger[key], sourceFaq, {
       prunedWrite: true,
@@ -1275,9 +1282,9 @@ export function recordFaqTranslationOutcome(rejectionLedger, key, sourceFaq, res
   return false;
 }
 
-function recordTranslation({ rejectionLedger, section, dryRun }, articleId, locale, sourceFaq, res) {
+function recordTranslation({ rejectionLedger, section, dryRun }, articleId, locale, sourceFaq, res, written = false) {
   const key = faqLocaleIssueKey(articleId, locale, section);
-  if (!recordFaqTranslationOutcome(rejectionLedger, key, sourceFaq, res)) return;
+  if (!recordFaqTranslationOutcome(rejectionLedger, key, sourceFaq, res, { written })) return;
   if (res?.rejected) {
     console.error(`[${articleId}] ${locale.toUpperCase()} rifiuto consecutivo `
       + `${rejectionLedger[key].consecutive}/${FAQ_REJECTION_MAX_CONSECUTIVE} registrato`);
@@ -1374,11 +1381,11 @@ async function processArticle(articleId, file, itBodyContent, options) {
       }
 
       const res = translations[i].status === 'fulfilled' ? translations[i].value : null;
-      recordTranslation(options, articleId, locale, validFaq, res);
       // Lingua sbagliata: si SALTA la scrittura. Il fallback italiano qui sotto
       // pubblicherebbe la FAQ italiana intera sul body di questo locale, cioe'
       // esattamente cio' che il rifiuto voleva evitare, e in dose piena.
       if (res?.rejected) {
+        recordTranslation(options, articleId, locale, validFaq, res);
         console.error(`${label} ⚠️  ${locale.toUpperCase()} traduzione rifiutata (lingua sbagliata): `
           + 'non scrivo la FAQ per questo locale, si recupera al giro dopo');
         continue;
@@ -1393,7 +1400,9 @@ async function processArticle(articleId, file, itBodyContent, options) {
         faqForLocale = validFaq;
       }
 
-      insertFaqIntoBodyFile(localePath, articleId, faqForLocale);
+      const written = insertFaqIntoBodyFile(localePath, articleId, faqForLocale);
+      // Il registro si aggiorna DOPO lo scrittore, e solo se ha scritto.
+      if (res?.faq) recordTranslation(options, articleId, locale, validFaq, res, written);
     }
   }
 
@@ -1467,11 +1476,12 @@ async function processTopUp(articleId, file, itContent, existingFaq, options) {
 
       try {
         const res = await translateFaq(validMerged, locale);
-        recordTranslation(options, articleId, locale, validMerged, res);
         if (res.faq) {
-          insertFaqIntoBodyFile(localePath, articleId, res.faq);
+          const written = insertFaqIntoBodyFile(localePath, articleId, res.faq);
+          recordTranslation(options, articleId, locale, validMerged, res, written);
           console.error(`${label} ✅ ${locale.toUpperCase()} translated (${res.faq.length} pairs)`);
         } else if (res.rejected) {
+          recordTranslation(options, articleId, locale, validMerged, res);
           // Stesso motivo di processGeneration: scrivere `validMerged` qui
           // significa pubblicare l'italiano intero sul locale, in dose piena.
           console.error(`${label} ⚠️  ${locale.toUpperCase()} traduzione rifiutata (lingua sbagliata): `
@@ -1503,14 +1513,19 @@ async function processTranslation(articleId, file, itFaq, missingLocales, option
 
     try {
       const res = await translateFaq(itFaq, locale);
-      recordTranslation(options, articleId, locale, itFaq, res);
       if (res.faq) {
         // Nessun controllo di lingua qui: la guardia sta in `translateFaq()`,
         // l'unico punto da cui esce una FAQ tradotta.
-        insertFaqIntoBodyFile(localePath, articleId, res.faq);
-        console.error(`${label} ✅ ${locale.toUpperCase()} (${res.faq.length} pairs)`);
-        fixed++;
+        const written = insertFaqIntoBodyFile(localePath, articleId, res.faq);
+        recordTranslation(options, articleId, locale, itFaq, res, written);
+        if (written) {
+          console.error(`${label} ✅ ${locale.toUpperCase()} (${res.faq.length} pairs)`);
+          fixed++;
+        } else {
+          console.error(`${label} ❌ ${locale.toUpperCase()} scrittura non riuscita: il locale resta ritentabile`);
+        }
       } else {
+        if (res.rejected) recordTranslation(options, articleId, locale, itFaq, res);
         // Questo ramo non scriveva niente nemmeno prima: e' l'unico dei tre
         // che gia' si comportava bene su un fallimento.
         console.error(`${label} ⚠️  ${locale.toUpperCase()} `
