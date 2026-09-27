@@ -13,13 +13,13 @@ function workflowEnv(yaml, name) {
   return match[1];
 }
 
-test('il pool remoto del corpus usa dieci fixer e dieci lease', () => {
+test('il pool remoto del corpus usa quindici fixer e quindici lease', () => {
   const workflow = readFileSync(path.join(ROOT, '.github/workflows/followup-drainer.yml'), 'utf8');
-  assert.equal(workflowEnv(workflow, 'FOLLOWUP_MAX_INFLIGHT_FIX'), '10');
-  assert.equal(workflowEnv(workflow, 'QUOTA_LEASE_MAX_INFLIGHT_FIX'), '10');
+  assert.equal(workflowEnv(workflow, 'FOLLOWUP_MAX_INFLIGHT_FIX'), '15');
+  assert.equal(workflowEnv(workflow, 'QUOTA_LEASE_MAX_INFLIGHT_FIX'), '15');
 });
 
 test('il lease del workflow issue-fix è allineato al cap del drainer', () => {
   const workflow = readFileSync(path.join(ROOT, '.github/workflows/issue-fix.yml'), 'utf8');
-  assert.equal(workflowEnv(workflow, 'QUOTA_LEASE_MAX_INFLIGHT_FIX'), '10');
+  assert.equal(workflowEnv(workflow, 'QUOTA_LEASE_MAX_INFLIGHT_FIX'), '15');
 });
