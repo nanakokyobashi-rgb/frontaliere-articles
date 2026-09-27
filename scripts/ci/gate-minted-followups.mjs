@@ -1471,6 +1471,14 @@ function main() {
           report.push(`- ⏭️ #${iss.number} demozione rinviata (commento sulla PR non riuscito) — PR #${pr}`);
           continue;
         }
+        // Stessa regola per la soppressione: chiudere la issue senza aver conservato
+        // gli item sulla PR sorgente (lookup o commento non riusciti) ne perderebbe
+        // l'unica copia leggibile fuori dalla coda. Issue lasciata aperta, retry.
+        if (d.action === 'suppress' && posted === null) {
+          console.log(`⚠️ #${iss.number}: conservazione sulla PR sorgente non riuscita → NON chiudo la issue. Il prossimo giro riprova.`);
+          report.push(`- ⏭️ #${iss.number} soppressione rinviata (commento sulla PR non riuscito) — PR #${pr}`);
+          continue;
+        }
         if (d.action === 'suppress') {
           // The source-PR preservation comment above is itself a concurrent write.
           // Take the final issue snapshot after it, recompute the decision from that
