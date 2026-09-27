@@ -522,7 +522,10 @@ test('tutti i consumer di review usano la revisione del body corrente', () => {
   assert.match(redflag, /EXPECTED_BODY_REVISION: \$\{\{ steps\.ctx\.outputs\.review_revision \}\}/);
   assert.match(redflag, /EXPECTED_HEAD_SHA: \$\{\{ steps\.ctx\.outputs\.head_sha \}\}/);
   assert.match(redflag, /pr-before-claude\.json/);
-  assert.match(redflag, /Il body della PR è cambiato fra prefetch e Claude/);
+  // Il controllo resta; dal gemello di valerielinc-ops/frontaliere-si-o-no#10068 un body cambiato fra
+  // prefetch e Codex è una sostituzione benigna (Codex non parte, round
+  // rimborsato, job verde) invece di un rosso.
+  assert.match(redflag, /context_superseded "il body della PR è cambiato fra prefetch e Codex/);
   assert.match(redflag, /steps\.precodex\.outputs\.verified == 'true'/);
   assert.match(testsWorkflow, /PR response is not an object/);
   assert.match(testsWorkflow, /PR body is not a string or null/);
