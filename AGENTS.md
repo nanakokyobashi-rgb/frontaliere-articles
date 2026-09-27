@@ -58,7 +58,11 @@ set troncato è il caso peggiore proprio perché non fallisce.
    fra uno script e lo YAML che lo invoca: se non possono importarsi, il legame
    va coperto da un test (è esattamente ciò che fa
    `generator/tests/ci-check-name.test.mjs`).
-7. **Niente path assoluti della home né email personali** nei commit.
+7. **Niente path assoluti della home né email personali** nei commit. Autore
+   dei commit: l'app del repo; qui `frontaliere-automation` non è installata,
+   quindi `github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>`
+   (sul sito `frontaliere-automation[bot]`). Verifica `git config user.email`
+   prima del commit; se diverge, `git -c user.name=… -c user.email=… commit`.
 8. **La prosa che asserisce un invariante si aggiorna col diff.** Commento,
    docstring o `reason` di `loop-sync-manifest.json` che dichiarano una garanzia
    o una divergenza che il tuo cambio ha appena eliminato continuano a essere
