@@ -1,12 +1,12 @@
 name: Follow-up drainer (queue → agent:fix, no-Claude)
 
-# Drena la coda `agent:fix-queued` fino a 7 issue diverse in parallelo,
+# Drena la coda `agent:fix-queued` fino a 10 issue diverse in parallelo,
 # promuovendo a `agent:fix` solo entro il cap e serializzando la scansione
 # della coda con un mutex repo-scoped dedicato.
 #
 # Il mutex globale evita che issue diverse leggano lo stesso snapshot e
 # riservino due volte il medesimo candidato; il cap e il lease Codex-primary
-# impediscono comunque un burst illimitato. Il workflow remoto usa 7 slot; il
+# impediscono comunque un burst illimitato. Il workflow remoto usa 10 slot; il
 # default locale del modulo resta 5.
 #
 # Su questo repo il meccanismo conta ancora di più, perché il volume di issue è
@@ -178,10 +178,10 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           # Pool bounded dei fixer remoti Codex-primary. Il valore coincide
-          # con il cap letto dal drainer; il workflow remoto usa 7 slot e il
+          # con il cap letto dal drainer; il workflow remoto usa 10 slot e il
           # default locale resta separato.
-          FOLLOWUP_MAX_INFLIGHT_FIX: '7'
-          QUOTA_LEASE_MAX_INFLIGHT_FIX: '7'
+          FOLLOWUP_MAX_INFLIGHT_FIX: '10'
+          QUOTA_LEASE_MAX_INFLIGHT_FIX: '10'
           # Il beacon di quota cross-repo vale anche qui: promuovere una issue
           # mentre la quota condivisa è esaurita significa bruciare lo slot per
           # una run che morirà su 429 al primo turno.
