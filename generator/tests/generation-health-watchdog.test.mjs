@@ -136,6 +136,11 @@ const LOG_OVERSIZE = [
   'generate\tGenerate the article\t2026-08-10T12:36:06.1Z ⏭️  [gpt-4.1] Skipped — request would exceed 8000-token limit (estimated 10930)',
 ].join('\n');
 
+const LOG_OVERSIZE_GENERATED = [
+  LOG_OVERSIZE,
+  'generate\tGenerate the article\t2026-08-10T12:36:10.1Z PRESPEND_GATE_OUTCOME emptied=0 recovered=news before=20 kept=12 status=generated section=frontaliere',
+].join('\n');
+
 // Ricorrenza reale di #313 (2026-08-26): cinque modelli con cap basso saltati,
 // ma la stima resta sotto il cap massimo della flotta. Deve restare diagnostica
 // nei contatori globali senza diventare una run `prompt-oversize`.
@@ -854,6 +859,17 @@ describe('le condizioni sono ACCESE sui guasti realmente accaduti', () => {
     const v = verdictFor(m, 'prompt-oversize');
     assert.equal(v.firing, true, 'due run con 5 modelli e uno skip a 8000 sono un oversize reale');
     assert.match(v.body, /cap massimo di 8000 token/);
+  });
+
+  test('prompt-oversize: chiude il segnale quando le run oversize pubblicano', () => {
+    const m = healthy();
+    m.runs.oversize = summarizeRuns([
+      parseRunLog(LOG_OVERSIZE_GENERATED),
+      parseRunLog(LOG_OVERSIZE_GENERATED),
+    ]).oversize;
+    assert.equal(m.runs.oversize.degradedRuns, 0);
+    assert.equal(m.runs.oversize.generatedRuns, 2);
+    assert.equal(verdictFor(m, 'prompt-oversize').firing, false);
   });
 
   test('duplicate-topic-burst: la coppia piastrellista del 2026-08-09 (23 minuti)', () => {
