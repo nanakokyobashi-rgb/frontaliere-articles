@@ -3534,8 +3534,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-13.yml",
       "mode": "identical",
       "baseline": {
-        "site": "7682ff00d736828e",
-        "corpus": "7682ff00d736828e",
+        "site": "5be5ce78121e08d6",
+        "corpus": "5be5ce78121e08d6",
         "alignedAt": "2026-09-27"
       }
     },
@@ -3634,8 +3634,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-23.yml",
       "mode": "identical",
       "baseline": {
-        "site": "6964772f2817f902",
-        "corpus": "6964772f2817f902",
+        "site": "5231739c19cdcd56",
+        "corpus": "5231739c19cdcd56",
         "alignedAt": "2026-09-27"
       }
     },
@@ -3644,9 +3644,9 @@
       "sitePath": ".github/corpus-workflows/translate-pending.yml",
       "mode": "identical",
       "baseline": {
-        "site": "a476a2af5fe37ee9",
-        "corpus": "a476a2af5fe37ee9",
-        "alignedAt": "2026-09-25"
+        "site": "3606a1213a7ad207",
+        "corpus": "3606a1213a7ad207",
+        "alignedAt": "2026-09-27"
       }
     },
     {
@@ -3655,8 +3655,8 @@
       "mode": "identical",
       "reason": "Riallineato il 2026-09-24 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono ora byte-identici fra sito e corpus, con il roster corrente di 621 crawler.",
       "baseline": {
-        "site": "d9f1efd951c6e756",
-        "corpus": "d9f1efd951c6e756",
+        "site": "c644a2fbb2a62446",
+        "corpus": "c644a2fbb2a62446",
         "alignedAt": "2026-09-27"
       }
     },
@@ -3762,8 +3762,8 @@
       "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, misura l'eta' del detentore dal job attivo (`jobs.started_at`) invece che dalla coda del workflow e quella di un rerun pending dall'attempt corrente (`run_started_at`, fail-closed se illeggibile o anteriore a `created_at`) invece che dalla prima creazione, rifiuta fail-closed (`future_timestamp`) ogni istante di misura oltre la tolleranza di skew `MAX_CLOCK_SKEW_SECONDS` invece di azzerarne l'eta', dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
       "baseline": {
         "site": null,
-        "corpus": "ea8e2637a874ab92",
-        "alignedAt": "2026-09-25"
+        "corpus": "9358cb0d2d128b9c",
+        "alignedAt": "2026-09-27"
       }
     },
     {
@@ -4383,8 +4383,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-24.yml",
       "mode": "identical",
       "baseline": {
-        "site": "0b0bb0f72653eedd",
-        "corpus": "0b0bb0f72653eedd",
+        "site": "8c1bee0f44b6a179",
+        "corpus": "8c1bee0f44b6a179",
         "alignedAt": "2026-09-27"
       }
     },
