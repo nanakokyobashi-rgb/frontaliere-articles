@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4010109": {
-    "articleId": "sistema-sanitario-difficolta-cittadini",
-    "ts": "2026-08-25T05:32:42.009Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/tx-group-penalizzato-dalle-svalutazioni-nel-primo-semestre/91949007": {
     "articleId": "tx-group-penalizzato-svalutazioni",
     "ts": "2026-08-25T06:15:04.778Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/conclusa-la-valutazione-del-secondo-sistema-di-difesa-terra-aria/92127489": {
     "articleId": "valutazione-secondo-sistema-difesa",
     "ts": "2026-09-27T19:02:02.472Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/votazioni%3a-ge%2c-%22s%c3%ac%22-a-contraccezione-gratuita/92127912": {
+    "articleId": "votazioni-ginevra-contraccezione-libera",
+    "ts": "2026-09-27T19:40:15.145Z",
     "keyForm": 2
   }
 }
