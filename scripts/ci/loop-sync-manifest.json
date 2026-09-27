@@ -987,10 +987,10 @@
       "mode": "adapted",
       "reason": "Niente npm ci; ponte RC del corpus; promozione via GITHUB_PAT_NANAKO; cadenza sfasata dal sito.",
       "baseline": {
-        "site": "f78b4128cab80562",
-        "corpus": "415aef09bd9f7e59",
-        "alignedAt": "2026-09-11",
-        "forcedAt": "2026-09-11T23:21:49.006Z"
+        "site": "575a6adab631ac38",
+        "corpus": "003b503a130719da",
+        "alignedAt": "2026-09-27",
+        "forcedAt": "2026-09-27T12:13:57.648Z"
       }
     },
     {
