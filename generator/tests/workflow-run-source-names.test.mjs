@@ -95,3 +95,27 @@ test('#1025: la firma riconosce la non-consegna stampata dal classificatore vero
   assert.equal(unknown.classification, 'unknown');
   assert.equal(ISSUE_FIX_NON_DELIVERY_RE.test(JSON.stringify(unknown)), false);
 });
+
+// `github.event.workflow_run.name` e' il nome della RUN: se il workflow
+// sorgente dichiara `run-name:`, vale quel titolo («Code checks and review ·
+// PR #N · …» per tests.yml) e non il suo `name:`. Un confronto con il `name:`
+// e' quindi sempre falso, senza errori: review-quota-rescuer.yml ha eseguito
+// per settimane le run su push di `main` che il suo `if:` doveva saltare e non
+// ha mai attivato lo scan rate-limit sui completamenti di `tests`. Per questi
+// sorgenti si confronta `github.event.workflow_run.path`.
+test('nessun confronto workflow_run.name con un sorgente che ha run-name', () => {
+  const withRunName = new Set();
+  for (const src of sources.values()) {
+    const name = workflowName(src);
+    if (name && /^run-name:/m.test(src)) withRunName.add(name);
+  }
+  const dead = [];
+  const re = /workflow_run\.name\s*[!=]=\s*(['"])(.*?)\1|(['"])(.*?)\3\s*[!=]=\s*github\.event\.workflow_run\.name/g;
+  for (const [file, src] of sources) {
+    for (const m of src.matchAll(re)) {
+      const literal = m[2] ?? m[4];
+      if (withRunName.has(literal)) dead.push(`${file}: workflow_run.name vs '${literal}'`);
+    }
+  }
+  assert.deepEqual(dead, []);
+});
