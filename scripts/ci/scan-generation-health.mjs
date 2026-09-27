@@ -991,7 +991,10 @@ export function summarizeRuns(runs) {
       // (`finalizeRunReport`), quindi la prima leggibile basta.
       const st = (r.gates || []).map((g) => g.status).find(Boolean);
       if (st && isDegradedOutcome(st)) oversizeDegraded++;
-      else if (st) oversizeGenerated++;
+      // Only the explicit producer verdict is evidence of publication. A
+      // future/unknown status must remain unmeasured so the resolver stays
+      // fail-closed until the contract is understood.
+      else if (st === 'generated') oversizeGenerated++;
     }
     for (const s of r.tokenLimitSkips) {
       if (s.estimated > maxEstimated) maxEstimated = s.estimated;
@@ -1478,6 +1481,14 @@ export const CONDITIONS = [
       if (!m.runs.available) return { available: false };
       const o = m.runs.oversize;
       if (o.runs < OVERSIZE_MIN_RUNS) return { firing: false };
+      // Saltare modelli a cap basso o al cap massimo è il comportamento
+      // previsto del cascade quando una run riesce comunque a pubblicare.
+      // Il segnale deve restare acceso solo se almeno una run oversize ha
+      // avuto un esito noto degradato; con sole uscite `generated`, il cap ha
+      // protetto la richiesta e non c'è una regressione da aprire.
+      const allOversizeRunsMeasuredGenerated = o.degradedRuns === 0
+        && o.generatedRuns === o.runs;
+      if (allOversizeRunsMeasuredGenerated) return { firing: false };
       return {
         firing: true,
         body: [
