@@ -437,16 +437,57 @@ function pushBranch(branch) {
   );
 }
 
-/** Una review gestita con `## LGTM` sulla revisione body corrente? */
-function hasLgtmReview(num, reviewRevision = currentReviewInputRevision(num)) {
-  if (!reviewRevision) return false;
+/**
+ * Verdetto dell'ULTIMA review gestita della revisione body corrente: la più
+ * recente sulla HEAD corrente se esiste, altrimenti la più recente in assoluto
+ * (HEAD appena rebasata, review non ancora arrivata: vale l'ultimo giudizio).
+ *
+ * Prima bastava un `## LGTM` su QUALUNQUE commit con la stessa revisione body:
+ * un LGTM vecchio seguito da un 🔴 su ogni HEAD successiva lasciava la PR
+ * «near-merge» per sempre, e ogni avanzamento di main la ribasava → nuova
+ * HEAD → nuova review → 🔴 (stesso loop misurato sul sito, #9959: 45 merge di
+ * main in 24h, 43 review; corretto lì da valerielinc-ops/frontaliere-si-o-no#10068).
+ *
+ * @returns {'lgtm'|'blocking'|'none'|'unknown'} `unknown` = API/revision illeggibile.
+ */
+export function latestReviewerVerdict(reviews, head, reviewRevision) {
+  if (!Array.isArray(reviews) || !reviewRevision) return 'unknown';
+  const managed = reviews
+    .map((review, index) => ({ review, index }))
+    .filter(({ review }) => review && isManagedReview(review)
+      && reviewHasInputRevision(review.body, reviewRevision));
+  if (!managed.length) return 'none';
+  const current = String(head || '').toLowerCase();
+  const onHead = managed.filter(({ review }) => current
+    && String(review.commit_id || '').toLowerCase() === current);
+  const pool = onHead.length ? onHead : managed;
+  const at = ({ review }) => {
+    const t = Date.parse(review.submitted_at || '');
+    return Number.isFinite(t) ? t : Number.NEGATIVE_INFINITY;
+  };
+  // Ordine per `submitted_at`; a parità (o se manca a entrambe) vince la
+  // posizione successiva nell'API, che è già cronologica.
+  const latest = pool.reduce((best, cur) => (at(cur) - at(best) < 0 ? best : cur));
+  return String(latest.review.body || '').includes('## LGTM') ? 'lgtm' : 'blocking';
+}
+
+/**
+ * `needs-human` + ultimo verdetto BLOCCANTE (o illeggibile) = nessuna passata
+ * di autorebase. La passata unica per cambio di stato (`decideNeedsHumanPass`)
+ * non basta: l'impronta contiene il numero di review, e ogni rebase produce
+ * una review nuova, quindi ogni passata abilita la successiva. Con un verdetto
+ * bloccante il merge di main non cambia il verdetto: genera solo un'altra
+ * review e un altro giro del 🔴-fixer. Senza verdetto bloccante la label resta
+ * il gate a passata unica di sempre.
+ */
+export function needsHumanBlocksAutorebase({ labels = [], verdict }) {
+  const hasNeedsHuman = labels.some((label) => (typeof label === 'string' ? label : label?.name) === 'needs-human');
+  return hasNeedsHuman && (verdict === 'blocking' || verdict === 'unknown');
+}
+
+function readReviewerVerdict(num, head, reviewRevision) {
   const reviews = gh(['api', `repos/${REPO}/pulls/${num}/reviews`, '--paginate'], { allowFail: true });
-  if (!Array.isArray(reviews)) return false;
-  return reviews.some(
-    (r) => isManagedReview(r)
-      && reviewHasInputRevision(r.body, reviewRevision)
-      && (r.body || '').includes('## LGTM')
-  );
+  return latestReviewerVerdict(reviews, head, reviewRevision);
 }
 
 /** Esiste ALMENO una review gestita della revisione body corrente (LGTM o 🔴,
@@ -1550,6 +1591,25 @@ async function processPR(pr) {
     return;
   }
 
+  // Contesto HEAD+body e ultimo verdetto del reviewer, letti PRIMA del gate
+  // `needs-human`: il veto sotto deve precedere anche la scrittura del suo
+  // commento sticky. Tutte le decisioni sul verdetto usano la stessa
+  // revisione del body; un LGTM del body precedente non conta.
+  const reviewContext = currentReviewInputContext(num);
+  if (!reviewContext || reviewContext.headSha !== String(head || '').toLowerCase()) {
+    console.log(`PR #${num}: HEAD o body della PR non verificabili prima della selezione review — skip questo tick.`);
+    return;
+  }
+  const reviewRevision = reviewContext.reviewRevision;
+  const reviewerVerdict = readReviewerVerdict(num, head, reviewRevision);
+
+  // Veto `needs-human` + ultimo verdetto bloccante: nessuna passata, nessuna
+  // scrittura. Dopo la rilevazione conflitti (sola lettura + label).
+  if (needsHumanBlocksAutorebase({ labels, verdict: reviewerVerdict })) {
+    console.log(`::notice::PR #${num} needs-human con ultimo verdetto del reviewer ${reviewerVerdict} → nessun rebase automatico: il merge di main non cambia il verdetto, genererebbe solo un'altra review.`);
+    return;
+  }
+
   // GATE `needs-human`: una passata SOLO se lo stato è cambiato.
   //
   // Deve stare QUI — subito dopo il solo stuck-red, e prima di tutto il resto —
@@ -1597,16 +1657,10 @@ async function processPR(pr) {
     console.log(`PR #${num}: ${d.reason}`);
   }
 
-  // GATE frugalità: solo near-merge. Tutte le decisioni sul verdetto usano la
-  // stessa revisione del body; un LGTM del body precedente non rende la PR
-  // near-merge e non può scegliere il ramo di solo dispatch.
-  const reviewContext = currentReviewInputContext(num);
-  if (!reviewContext || reviewContext.headSha !== String(head || '').toLowerCase()) {
-    console.log(`PR #${num}: HEAD o body della PR non verificabili prima della selezione review — skip questo tick.`);
-    return;
-  }
-  const reviewRevision = reviewContext.reviewRevision;
-  const lgtm = hasLgtmReview(num, reviewRevision);
+  // GATE frugalità: solo near-merge. Conta l'ULTIMO verdetto del reviewer
+  // sulla revisione body corrente (`latestReviewerVerdict`), non un LGTM
+  // qualsiasi della storia della PR.
+  const lgtm = reviewerVerdict === 'lgtm';
   let nearMerge =
     labels.includes('collision-risk') ||
     labels.includes('stale-review') ||

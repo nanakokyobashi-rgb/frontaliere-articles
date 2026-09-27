@@ -213,7 +213,7 @@ function workflowEnvBlock(source, name) {
  * rilettura del precodex. `tamper` puo' alterare `$OUT` fra i due step, come
  * potrebbe fare il codice del checkout della PR che gira in mezzo.
  */
-function runRedflagPrecodex({ reviewsByRead, tamper }) {
+function runRedflagPrecodex({ reviewsByRead, tamper, envOverrides = {} }) {
   const source = read('pr-redflag-fixer.yml');
   const ctxRun = stepRun(source, 'Collect PR + review context (zero-Claude)');
   const precodexRun = stepRun(source, 'Revalidate PR + review context immediately before Codex');
@@ -320,11 +320,14 @@ esac
       EXPECTED_ROUND: '1',
       EXPECTED_COMMENT_ID: '1',
       TRUSTED_MARKER_HELPER: helper,
+      ...envOverrides,
     });
     return {
       status: precodex.status,
       log: `${precodex.stdout}\n${precodex.stderr}`,
       verified: /^verified=true$/m.test(fs.readFileSync(precodexOutput, 'utf8')),
+      superseded: /^superseded=true$/m.test(fs.readFileSync(precodexOutput, 'utf8')),
+      revision: outputs.review_revision,
       reads: Number(fs.readFileSync(path.join(stub, 'reviews-reads'), 'utf8').trim()),
     };
   } finally {
@@ -356,7 +359,10 @@ test('replay pr-redflag-fixer: il precodex rilegge le review e una dismissal dop
   });
   assert.notEqual(dismissed.status, 0, 'una review ritirata non deve arrivare a Codex');
   assert.equal(dismissed.verified, false);
-  assert.match(dismissed.log, /::error::La review selezionata è cambiata fra prefetch e Claude/);
+  // Una dismissal è una sostituzione benigna: Codex non parte, ma il classify
+  // la chiude verde (vedi redflag-loop-breakers.test.mjs), non come errore.
+  assert.match(dismissed.log, /::notice::run sostituita: la review selezionata è cambiata fra prefetch e Codex/);
+  assert.equal(dismissed.superseded, true);
 
   // Una review nuova con altri 🔴 sostituisce quella del bundle.
   const superseded = runRedflagPrecodex({
@@ -391,6 +397,43 @@ test('replay pr-redflag-fixer: il precodex rilegge le review e una dismissal dop
   assert.notEqual(tampered.status, 0);
   assert.equal(tampered.verified, false);
   assert.match(tampered.log, /Selezione della review del contesto non verificabile prima di Claude/);
+  assert.equal(tampered.superseded, false, 'una selezione manomessa non è una sostituzione');
+  assert.equal(unknown.superseded, false, 'uno stato fuori enum non è una sostituzione');
+});
+
+test('replay pr-redflag-fixer: HEAD/body cambiati sono sostituzioni, valori attesi malformati restano rossi', { skip: !HAS_PRECODEX_TOOLS && 'jq o sha256sum assenti' }, () => {
+  const important = (revision) => review({ id: 2, revision });
+  const reviewsByRead = [(r) => [important(r)]];
+  const OTHER = 'b'.repeat(40);
+
+  // HEAD dell'evento ben formata ma diversa dalla HEAD corrente (autorebase).
+  const moved = runRedflagPrecodex({ reviewsByRead, envOverrides: { EVENT_HEAD_SHA: OTHER } });
+  assert.notEqual(moved.status, 0, 'Codex non deve partire');
+  assert.equal(moved.verified, false);
+  assert.equal(moved.superseded, true, moved.log);
+  assert.match(moved.log, /::notice::run sostituita: la HEAD della PR non coincide più/);
+
+  // Body riscritto fra prefetch e Codex: revisione attesa ben formata, diversa.
+  const edited = runRedflagPrecodex({
+    reviewsByRead,
+    envOverrides: { EXPECTED_BODY_REVISION: `body:${'d'.repeat(64)}` },
+  });
+  assert.equal(edited.superseded, true, edited.log);
+  assert.match(edited.log, /::notice::run sostituita: il body della PR è cambiato/);
+
+  // Valori attesi mancanti o malformati: rifiuto rosso, MAI sostituzione.
+  for (const envOverrides of [
+    { EXPECTED_HEAD_SHA: '' },
+    { EVENT_HEAD_SHA: 'nope' },
+    { EXPECTED_BODY_REVISION: '' },
+    { EXPECTED_BODY_REVISION: 'body:zz' },
+  ]) {
+    const bad = runRedflagPrecodex({ reviewsByRead, envOverrides });
+    assert.notEqual(bad.status, 0, JSON.stringify(envOverrides));
+    assert.equal(bad.verified, false);
+    assert.equal(bad.superseded, false, `${JSON.stringify(envOverrides)}\n${bad.log}`);
+    assert.match(bad.log, /::error::.*malformata/);
+  }
 });
 
 test('replay tests.yml: guard e contesto non contano review DISMISSED o ignote, e rileggono prima di saltare Codex', { skip: !HAS_JQ && 'jq assente' }, () => {

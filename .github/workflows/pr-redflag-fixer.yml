@@ -337,6 +337,20 @@ jobs:
             echo "PR #$PR_NUMBER non più OPEN (state=$state) → già risolta, skip 🔴-fix (no-op)."
             echo "actionable=false" >> "$GITHUB_OUTPUT"; exit 0
           fi
+          # `needs-human` è il segnale che il loop deve fermarsi: lo mette il
+          # round cap (o uno stallo) oppure un umano, e lo toglie solo un umano.
+          # Il round cap da solo non basta: conta i marker per HEAD+body, e ogni
+          # merge di main dell'autorebase riparte dal primo round (misurato sul
+          # sito, #9959: 11 run redflag in 5h, tutte round 1). Vale anche per il
+          # dispatch esplicito da tests.yml. Una lettura fallita non è il
+          # segnale: si prosegue come prima e decide il round cap.
+          needs_human=$(gh pr view "$PR_NUMBER" --repo "$REPO" --json labels \
+            --jq 'if any(.labels[]?.name; . == "needs-human") then "true" else "false" end' \
+            2>/dev/null || echo false)
+          if [ "$needs_human" = "true" ]; then
+            echo "::notice::PR #$PR_NUMBER ha la label needs-human → il 🔴-fixer si ferma (nessun Codex, nessun round). Togli la label per riattivarlo."
+            echo "actionable=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
           if ! gh api "repos/$REPO/branches/$HEAD_REF" --jq '.name' >/dev/null 2>&1; then
             echo "Branch '$HEAD_REF' sparito (PR risolta + delete_branch_on_merge) → skip 🔴-fix (no-op)."
             echo "actionable=false" >> "$GITHUB_OUTPUT"; exit 0
@@ -1175,16 +1189,28 @@ jobs:
             echo "::error::$1"
             exit 1
           }
+          # Sostituzione BENIGNA: un writer legittimo (push, merge di main
+          # dell'autorebase, riscrittura del body, review nuova o ritirata) ha
+          # rimpiazzato l'input dopo la prefetch. Codex non parte comunque
+          # (exit 1, step continue-on-error → Codex skipped), ma `superseded`
+          # dice al classify che è una run sostituita, non un errore: il round
+          # viene rimborsato e il job esce verde. Solo su valori BEN FORMATI.
+          context_superseded() {
+            echo "superseded=true" >> "$GITHUB_OUTPUT"
+            echo "::notice::run sostituita: $1"
+            exit 1
+          }
 
-          if ! node "$TRUSTED_MARKER_HELPER" --verify-current \
-            --repo "$REPO" --pr "$PR_NUMBER" \
-            --marker "$EXPECTED_MARKER" --round "$EXPECTED_ROUND" \
-            --comment-id "$EXPECTED_COMMENT_ID" \
-            --expected-head "$EXPECTED_HEAD_SHA" \
-            --expected-body-revision "$EXPECTED_MARKER_BODY_REVISION" \
-            --expected-author github-actions[bot] \
-            > "$OUT/marker-before-claude.json"; then
-            context_fail "HEAD/body revision non verificabili con l'helper trusted subito prima di Codex: nessun fix automatico viene avviato."
+          # Forma dei valori attesi PRIMA di ogni confronto: un valore mancante
+          # o malformato non combacia con niente, e senza questo controllo
+          # diventerebbe una «sostituzione» verde invece di un rifiuto rosso.
+          for expected in "$EXPECTED_HEAD_SHA" "$EVENT_HEAD_SHA"; do
+            if ! printf '%s' "$expected" | grep -qiE '^[a-f0-9]{40}$'; then
+              context_fail "HEAD attesa del contesto malformata prima di Codex: il redflag fixer resta fail-closed."
+            fi
+          done
+          if ! printf '%s' "$EXPECTED_BODY_REVISION" | grep -qE '^body:[a-f0-9]{64}$'; then
+            context_fail "Body revision attesa del contesto malformata prima di Codex: il redflag fixer resta fail-closed."
           fi
 
           pr_before_claude="$OUT/pr-before-claude.json"
@@ -1199,10 +1225,10 @@ jobs:
             context_fail "HEAD corrente malformata prima di Claude: il redflag fixer resta fail-closed."
           fi
           if ! printf '%s\n%s\n' "$current_head_sha" "$EXPECTED_HEAD_SHA" | awk 'NR==1 { current=tolower($0); next } { expected=tolower($0); exit current != expected }'; then
-            context_fail "La HEAD della PR è cambiata fra prefetch e Claude: nessun fix automatico viene avviato."
+            context_superseded "la HEAD della PR è cambiata fra prefetch e Codex; la nuova HEAD riceve una review propria."
           fi
           if ! printf '%s\n%s\n' "$current_head_sha" "$EVENT_HEAD_SHA" | awk 'NR==1 { current=tolower($0); next } { event=tolower($0); exit current != event }'; then
-            context_fail "La HEAD della PR non coincide con l'evento review: nessun fix automatico viene avviato."
+            context_superseded "la HEAD della PR non coincide più con l'evento review; la nuova HEAD riceve una review propria."
           fi
 
           body_file="$OUT/body-before-claude.txt"
@@ -1217,7 +1243,21 @@ jobs:
           fi
           current_revision="body:$body_sha"
           if [ "$current_revision" != "$EXPECTED_BODY_REVISION" ]; then
-            context_fail "Il body della PR è cambiato fra prefetch e Claude: nessun fix automatico viene avviato."
+            context_superseded "il body della PR è cambiato fra prefetch e Codex; la nuova revisione riceve una review propria."
+          fi
+
+          # Il marker del round, legato a HEAD+body appena verificati. Un suo
+          # fallimento qui non è una sostituzione (HEAD e body combaciavano):
+          # resta rosso.
+          if ! node "$TRUSTED_MARKER_HELPER" --verify-current \
+            --repo "$REPO" --pr "$PR_NUMBER" \
+            --marker "$EXPECTED_MARKER" --round "$EXPECTED_ROUND" \
+            --comment-id "$EXPECTED_COMMENT_ID" \
+            --expected-head "$EXPECTED_HEAD_SHA" \
+            --expected-body-revision "$EXPECTED_MARKER_BODY_REVISION" \
+            --expected-author github-actions[bot] \
+            > "$OUT/marker-before-claude.json"; then
+            context_fail "HEAD/body revision non verificabili con l'helper trusted subito prima di Codex: nessun fix automatico viene avviato."
           fi
 
           # Rilettura delle review subito prima di Codex (#1762). Lo step ctx
@@ -1244,7 +1284,10 @@ jobs:
           select_current_review "$OUT/review-selection-before-claude.json"
           if ! review_selection_sha=$(sha256sum "$OUT/review-selection-before-claude.json" | awk '{print $1}') \
             || [ "$review_selection_sha" != "$EXPECTED_REVIEW_SELECTION_SHA256" ]; then
-            context_fail "La review selezionata è cambiata fra prefetch e Claude (dismissal o review concorrente): nessun fix automatico viene avviato."
+            if [ -n "${review_selection_sha:-}" ]; then
+              context_superseded "la review selezionata è cambiata fra prefetch e Codex (dismissal o review concorrente)."
+            fi
+            context_fail "Selezione della review non calcolabile prima di Codex: il redflag fixer resta fail-closed."
           fi
           echo "verified=true" >> "$GITHUB_OUTPUT"
           echo "Contesto PR/review ancora identico alla prefetch (HEAD + body revision + review selezionata): Codex autorizzato."
@@ -1363,6 +1406,7 @@ jobs:
           START_SHA: ${{ steps.align.outputs.start_sha }}
           BASE_SHA: ${{ steps.base.outputs.sha }}
           ACTION_OUTCOME: ${{ steps.codex_review.outcome }}
+          PRECODEX_SUPERSEDED: ${{ steps.precodex.outputs.superseded }}
           FIX_ROUND: ${{ steps.guard.outputs.round }}
           FIX_ROUND_MARKER: REDFLAG_FIX_ROUND
           MARKER_COMMENT_ID: ${{ steps.guard.outputs.marker_comment_id }}
@@ -1566,6 +1610,14 @@ jobs:
               exit 1
             fi
             echo "round marker $FIX_ROUND_MARKER:$FIX_ROUND deleted after trusted ID/body proof and refund handle published → rimborsato ($marker_delete_result)"
+            # Il precodex ha provato una sostituzione BENIGNA su valori ben
+            # formati (HEAD/body/review cambiati da un writer legittimo): la
+            # nuova HEAD o revisione riceve una review propria. Non è un
+            # non-progress: round rimborsato, job verde.
+            if [ "${PRECODEX_SUPERSEDED:-}" = "true" ]; then
+              echo "::notice::run sostituita: il contesto è cambiato fra prefetch e Codex; round rimborsato, nessun Codex."
+              exit 0
+            fi
             echo "::error::🔴-fix: Codex non invocato: lo step è skipped dopo un precodex failure → non-progress reale. Job RED; il round è stato rimborsato."
             exit 1
           fi
