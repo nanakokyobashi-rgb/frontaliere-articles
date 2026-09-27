@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/tx-group-penalizzato-dalle-svalutazioni-nel-primo-semestre/91949007": {
-    "articleId": "tx-group-penalizzato-svalutazioni",
-    "ts": "2026-08-25T06:15:04.778Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/mfigs3127ahfrl1mufg2i": {
     "articleId": "pil-svizzera-2025-crescita",
     "ts": "2026-08-25T07:04:59.299Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/votazioni%3a-ge%2c-%22s%c3%ac%22-a-contraccezione-gratuita/92127912": {
     "articleId": "votazioni-ginevra-contraccezione-libera",
     "ts": "2026-09-27T19:40:15.145Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/votazioni%3a-zh%2c-%22s%c3%ac%22-a-suicidio-assistito-in-strutture-sanitarie/92128289": {
+    "articleId": "zurigo-suicidio-assistito",
+    "ts": "2026-09-27T20:26:35.177Z",
     "keyForm": 2
   }
 }
