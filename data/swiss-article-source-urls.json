@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4007913": {
-    "articleId": "cieli-affollati-estate-2026",
-    "ts": "2026-08-24T14:05:23.956Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1945743/defr-internet-credito-negozi-carta": {
     "articleId": "pagamenti-offline-negozi-svizzera",
     "ts": "2026-08-24T15:15:06.720Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4110205": {
     "articleId": "urne-27-settembre-2026",
     "ts": "2026-09-27T10:59:16.827Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/iniziativa-neutralit%c3%a0%3a-proiezione%2c-no-al-71%25/92126403": {
+    "articleId": "iniziativa-neutralita-respinta",
+    "ts": "2026-09-27T11:49:47.033Z",
     "keyForm": 2
   }
 }
