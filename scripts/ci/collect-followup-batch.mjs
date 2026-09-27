@@ -8,7 +8,7 @@
  * `followup-has-candidates.mjs` arrivavano dopo aver già speso una run, oppure il
  * triage girava a vuoto). Sulla quota Max OAuth CONDIVISA con la sessione interattiva
  * owner (AGENTS.md § frugalità) è il #2 consumatore. Questo script converte il modello
- * a SCHEDULED-BATCH: una sola sessione ogni ~3h triagia tutte le PR mergiate dalla
+ * a SCHEDULED-BATCH: una sola sessione ogni ~2h (era ~3h) triagia tutte le PR mergiate dalla
  * finestra precedente.
  *
  * SICUREZZA > VELOCITÀ — mai perdere un follow-up:
@@ -101,9 +101,22 @@ export function positiveHours(raw, fallback) {
   return Number.isFinite(n) && n > 0 ? n : fallback;
 }
 const SEARCH_PAGE_SIZE = 100;
-// Capacity evidence: run 34602892494 reached the provider's 32-minute ceiling
-// while processing a 36-PR window. Four is therefore a conservative operational
-// cap, not a promise of measured per-PR capacity.
+// Capacità della sessione provider: 14 PR (era 4, 2026-09-27), con cron ogni
+// 2h (era 3h). Il 4 nasceva dalla run 34602892494, arrivata al tetto provider di
+// allora (32 minuti) su una finestra di 36 PR. Con 4 la coda non si smaltiva:
+// cadenza reale ~5,1 run/giorno sul cron da 3h (gap mediano 4,9h: GitHub ne
+// esegue ~62% del nominale) = ~20 PR/giorno, contro rinvii di 29-146 PR a OGNI
+// run (sito 36112598869..36325938055, corpus 36127041310..36315187017).
+// Il cap è dimensionato sul CASO PEGGIORE misurato, non sul tipico: >=451 s/PR
+// (36009410204, 4 PR uccise dal watchdog a 1803 s, bootstrap incluso).
+// 14 x 451 s = 6314 s, sotto il watchdog Codex da 6840 s (~8% di margine);
+// 6840 s + setup/kill grace/coda (300 s) = 7140 s < step da 120 min (il tetto
+// per gli step agentici). Un cap più alto non ci sta: 15 x 451 = 6765 s
+// lascerebbe 75 s. La capacità mancante la dà la cadenza: 12 cron/giorno x 62%
+// = ~7,4 run reali x 14 = ~104 PR/giorno, oltre il picco di ~80 candidati/giorno
+// del sito. Il tipico è molto più basso: 144-399 s/PR con 4 PR, ~85 s/PR sul
+// batch da 36 di 34602892494 (21 PR commentate in 1792 s), ~58 s/PR sul batch
+// da 19 di 34602590662 (sito): il bootstrap è condiviso.
 //
 // Una finestra più larga del cap NON è un errore di raccolta: è un rinvio
 // PIANIFICATO. Il troncamento viene dichiarato in `deferred_count`, mentre
@@ -113,7 +126,7 @@ const SEARCH_PAGE_SIZE = 100;
 // deve tenere il watermark indietro, un rinvio pianificato deve lasciarlo
 // avanzare, altrimenti il residuo non si drena mai. Confuse, producevano il
 // ratchet documentato sopra (34 run rosse consecutive, 157,7 h).
-export const FOLLOWUP_SESSION_BATCH_LIMIT = 4;
+export const FOLLOWUP_SESSION_BATCH_LIMIT = 14;
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const GATE_DIRECTORY_SENTINELS = [
   'followup-resolution-match.mjs',

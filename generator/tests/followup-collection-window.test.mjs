@@ -22,6 +22,7 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import {
   collectionWindowStartISO,
   positiveHours,
@@ -51,25 +52,81 @@ test('un override malformato non sposta il confine nel futuro', () => {
 });
 
 test('ordine FIFO: il cap rinvia le PR recenti, non quelle vecchie', () => {
-  // Ordine naturale della Search API: dal più recente.
-  const searchApiOrder = [
-    { number: 1572, mergedAt: '2026-09-18T12:00:00Z' },
-    { number: 1560, mergedAt: '2026-09-18T06:00:00Z' },
-    { number: 1552, mergedAt: '2026-09-17T23:00:00Z' },
-    { number: 1545, mergedAt: '2026-09-17T08:00:00Z' },
-    { number: 1530, mergedAt: '2026-09-17T01:00:00Z' },
-  ];
+  // Ordine naturale della Search API: dal più recente. Una PR oltre il cap,
+  // così il test resta vero qualunque sia il valore di FOLLOWUP_SESSION_BATCH_LIMIT.
+  const total = FOLLOWUP_SESSION_BATCH_LIMIT + 1;
+  const base = Date.parse('2026-09-17T00:00:00Z');
+  const searchApiOrder = Array.from({ length: total }, (_, i) => ({
+    number: 2000 - i,
+    mergedAt: new Date(base + (total - i) * 3600_000).toISOString(),
+  }));
   const ordered = orderCandidatesFifo(searchApiOrder);
-  assert.deepEqual(ordered.map((p) => p.number), [1530, 1545, 1552, 1560, 1572]);
+  assert.deepEqual(
+    ordered.map((p) => p.number),
+    searchApiOrder.map((p) => p.number).reverse(),
+  );
   const session = selectFollowupSessionBatch(ordered.map((p) => p.number));
   assert.equal(session.length, FOLLOWUP_SESSION_BATCH_LIMIT);
-  assert.deepEqual(session, [1530, 1545, 1552, 1560]);
+  // Le più VECCHIE entrano in sessione; la più recente (#2000) è quella rinviata.
+  assert.ok(!session.includes(2000));
+  assert.equal(session[0], 2000 - FOLLOWUP_SESSION_BATCH_LIMIT);
   assert.equal(deferredCount(ordered, session), 1);
   // L'input non viene mutato e una data illeggibile non fa esplodere l'ordine.
   const snapshot = searchApiOrder.map((p) => p.number);
   orderCandidatesFifo([...searchApiOrder, { number: 9, mergedAt: 'nope' }]);
   assert.deepEqual(searchApiOrder.map((p) => p.number), snapshot);
   assert.deepEqual(orderCandidatesFifo(null), []);
+});
+
+// Capacità vs flusso (2026-09-27). Con cap 4 e cron ogni 3h la coda non si
+// smaltiva: GitHub esegue ~62% dei cron nominali (5,1 run reali/giorno su 8,
+// gap mediano 4,9h) = ~20 PR/giorno contro rinvii di 29-146 PR a ogni run.
+// Tre vincoli, letti dal workflow reale così che cap, watchdog, step e cron non
+// possano divergere in silenzio:
+//  1. cap x caso peggiore misurato per PR (451 s, 36009410204, bootstrap
+//     incluso) <= watchdog Codex;
+//  2. watchdog + setup/kill grace/coda (300 s) STRETTAMENTE sotto lo step;
+//  3. cap x run reali/giorno (cron nominali x 62%) >= picco di ~80 candidati
+//     al giorno (sito: 110 merge x ~72% oltre i gate).
+const WORST_SECONDS_PER_PR = 451;
+const CODEX_SETUP_AND_TAIL_SECONDS = 300;
+const CRON_EXECUTED_RATIO = 0.62;
+const PEAK_CANDIDATES_PER_DAY = 80;
+
+function workflowBudget() {
+  const workflow = readFileSync(
+    new URL('../../.github/workflows/post-merge-followup.yml', import.meta.url),
+    'utf8',
+  );
+  const watchdog = Number(/exec_timeout_seconds: '(\d+)'/u.exec(workflow)?.[1]);
+  const stepAt = workflow.indexOf('id: followup\n');
+  const stepHead = workflow.slice(workflow.lastIndexOf('      - name:', stepAt), stepAt);
+  const stepMinutes = Number(/timeout-minutes: (\d+)/u.exec(stepHead)?.[1]);
+  const hours = Number(/cron: '\d+ \*\/(\d+) \* \* \*'/u.exec(workflow)?.[1]);
+  return { watchdog, stepMinutes, cronPerDay: 24 / hours };
+}
+
+test('il cap x il caso peggiore per PR sta sotto il watchdog, e il watchdog sotto lo step', () => {
+  const { watchdog, stepMinutes } = workflowBudget();
+  assert.ok(watchdog > 0 && stepMinutes > 0, 'watchdog o timeout dello step non trovati');
+  assert.ok(
+    FOLLOWUP_SESSION_BATCH_LIMIT * WORST_SECONDS_PER_PR <= watchdog,
+    `cap ${FOLLOWUP_SESSION_BATCH_LIMIT} x ${WORST_SECONDS_PER_PR}s > watchdog ${watchdog}s`,
+  );
+  assert.ok(
+    watchdog + CODEX_SETUP_AND_TAIL_SECONDS < stepMinutes * 60,
+    `watchdog ${watchdog}s + ${CODEX_SETUP_AND_TAIL_SECONDS}s non sta sotto lo step da ${stepMinutes} min`,
+  );
+});
+
+test('il cap alla cadenza reale del cron copre il picco di candidati', () => {
+  const { cronPerDay } = workflowBudget();
+  assert.ok(Number.isFinite(cronPerDay), 'cron */N non trovato nel workflow');
+  const capacity = FOLLOWUP_SESSION_BATCH_LIMIT * cronPerDay * CRON_EXECUTED_RATIO;
+  assert.ok(
+    capacity >= PEAK_CANDIDATES_PER_DAY,
+    `capacità ${capacity.toFixed(1)} PR/giorno < picco ${PEAK_CANDIDATES_PER_DAY}`,
+  );
 });
 
 test('deferredCount: conta il residuo del cap senza inventarlo', () => {
