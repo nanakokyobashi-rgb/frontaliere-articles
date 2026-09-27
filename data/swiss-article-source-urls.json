@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/siccit%c3%a0%3a-aziende-bio-possono-acquistare-20%25-foraggio-convenzionale/91946346": {
-    "articleId": "aziende-bio-foraggio-convenzionale",
-    "ts": "2026-08-24T12:35:17.835Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/attualita/1945283/ruba-l-identita-a-un-altra-donna-per-utilizzare-pornhub-e-contattare-ospedali": {
     "articleId": "identita-rubata-pornhub",
     "ts": "2026-08-24T12:57:22.796Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/attualita/1952898/diritti-migranti-piazza-migliaia-berna": {
     "articleId": "manifestazione-diritti-migranti-berna",
     "ts": "2026-09-27T05:04:57.913Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/politica/1951802/che-neutralita-vogliamo-oggi-e-il-giorno-della-verita": {
+    "articleId": "voti-federali-neutralita-alimentazione",
+    "ts": "2026-09-27T06:56:40.445Z",
     "keyForm": 2
   }
 }
