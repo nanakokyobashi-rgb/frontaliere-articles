@@ -65,6 +65,25 @@ test('og:title non promette un tetto inferiore al totale calcolato', () => {
   assert.match(block, /ogTitle: 'L\\'auto ti costa quasi 8\.700 CHF/);
 });
 
+// Follow-up #1917 / FU-2026-09-27-001: the official Arcobaleno page publishes
+// the verified Como-Lugano fare and sends other destinations to its calculator;
+// it does not support an editorial Varese-Mendrisio estimate in this corpus.
+test('nessuna localizzazione presenta una stima non documentata Varese-Mendrisio', () => {
+  for (const locale of LOCALES) {
+    const source = bodySource(locale);
+    assert.doesNotMatch(
+      source,
+      /(?:Varese|Varèse)[\s\S]{0,220}1[.,'’ ]300/i,
+      `stima Varese-Mendrisio non verificata riapparsa (${locale})`,
+    );
+    assert.doesNotMatch(
+      source,
+      /1[.,'’ ]300\s*[-–]\s*1[.,'’ ]638/i,
+      `forchetta transfrontaliera non documentata riapparsa (${locale})`,
+    );
+  }
+});
+
 for (const locale of LOCALES) {
   test(`${locale}: cifre ufficiali datate e totale ricalcolato`, () => {
     const source = bodySource(locale);
