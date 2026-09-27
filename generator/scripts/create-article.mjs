@@ -149,7 +149,7 @@ function _preferisceModelloSenzaCap(prefer) {
 // (scripts/lib/dedicated-crawler-common.mjs, batch-add-faq-to-articles.mjs).
 // Routing article translation through it instead of the generation LLM frees
 // ~60% of per-article LLM calls for actual generation (the quota bottleneck).
-import { freeTranslateWithRetry, balanceMarkdownMarkers } from './lib/free-translate.mjs';
+import { freeTranslateWithRetry, balanceMarkdownMarkers, setCodexTranslateProcessDeadline } from './lib/free-translate.mjs';
 import {
   translateFieldFreeMt,
   translatedStringOrNull,
@@ -5142,18 +5142,49 @@ function runArticleFactualityGates({ deterministicBodySections = [], ...params }
 }
 
 /**
+ * Il testo di fonte che i gate deterministici devono vedere per `url`.
+ *
+ * UNA sola espressione per tutti i punti che giudicano l'articolo italiano: il
+ * gate del ciclo di generazione, quello dopo l'espansione e il gate finale.
+ * Per un evergreen `pageContent` e' il brief che create-article ha scritto da
+ * se' (#96), non una fonte da ricitare: la stringa vuota fa scattare la
+ * guardia gia' esistente per fonte troppo sottile, e `collectInstitutionAcronyms`
+ * torna a `unknown` invece di fabbricare `absent` (vedi il commento al gate
+ * del ciclo). Il gate finale riceveva ancora `pageContent` nudo, e rigettava
+ * con `[source-fidelity-low] 1/31` ogni evergreen che il ciclo aveva appena
+ * approvato: keyword (Friburgo) ritirate a 3/3 tentativi per un gate che
+ * giudicava l'articolo contro il suo stesso brief.
+ */
+function factualityGateSourceText(url, pageContent) {
+  return String(url || '').startsWith('evergreen://') ? '' : (pageContent || '');
+}
+
+/**
  * Factuality choke point shared by the AI path and the direct writers.
  * `registerArticleFiles()` is also called by the deterministic producers,
  * which do not pass through the primary generation loop.
  */
-export function assertArticlePassesFactualityGates(data, { sourceUrl = '', sourceText = '' } = {}) {
+export function assertArticlePassesFactualityGates(data, options = {}) {
+  assertItalianArticlePassesFactualityGates(data, options);
+  assertTranslationsPassFactualityGates(data);
+}
+
+/**
+ * La meta' ITALIANA di `assertArticlePassesFactualityGates`: non legge le
+ * traduzioni, quindi il flusso primario la esegue anche PRIMA di
+ * `translateArticle()` e un articolo destinato allo scarto non consuma il
+ * budget delle traduzioni. Il gate completo resta comunque dopo tutte le
+ * mutazioni del testo, prima della scrittura.
+ */
+function assertItalianArticlePassesFactualityGates(data, { sourceUrl = '', sourceText = '' } = {}) {
   coerceContentBodyFields(data?.content);
   const it = data?.content?.it;
   if (it) {
+    const gateSourceUrl = String(sourceUrl || data?._sourceUrl || '');
     const result = runArticleFactualityGates({
       sections: collectBodySections(it),
       locale: 'it',
-      sourceText: data?._sourceText || '',
+      sourceText: factualityGateSourceText(gateSourceUrl, sourceText || data?._sourceText || ''),
       sourceDate: data?._sourceDate,
       publishedAt: new Date().toISOString(),
       memory: defectMemory(),
@@ -5168,8 +5199,7 @@ export function assertArticlePassesFactualityGates(data, { sourceUrl = '', sourc
       err.qualityReject = true;
       throw err;
     }
-    const astraSourceUrl = String(sourceUrl || data?._sourceUrl || '');
-    if (astraSourceUrl.startsWith('stats-astra://')) {
+    if (gateSourceUrl.startsWith('stats-astra://')) {
       const astraResult = checkStatsAstraCountFidelity(
         joinBodySections(it),
         sourceText || data?._sourceText || '',
@@ -5181,7 +5211,6 @@ export function assertArticlePassesFactualityGates(data, { sourceUrl = '', sourc
       }
     }
   }
-  assertTranslationsPassFactualityGates(data);
 }
 
 /** Il testo di tutte le sezioni di corpo presenti, unite da `sep`. */
@@ -14578,6 +14607,22 @@ const RUN_WALL_BUDGET_MS = Number.isNaN(CREATE_ARTICLE_MAX_WALL_MS_PARSED)
 const RUN_START_MS = Date.now();
 
 /**
+ * Margine fra la scadenza del tier di traduzione Codex e il budget wall-clock.
+ *
+ * Il budget del tier (FREE_TRANSLATE_CODEX_MAX_MS, 300 s cumulati) non conosce
+ * l'orologio di questo processo: sulle run 36309380063 e 36305591991 le
+ * traduzioni erano ancora in corso quando il `timeout` del workflow ha ucciso
+ * il processo a 657 s, con l'articolo IT gia' pronto. Con la scadenza
+ * dichiarata il tier non avvia chiamate che non possono finire entro
+ * `RUN_START_MS + RUN_WALL_BUDGET_MS - TRANSLATE_DEADLINE_MARGIN_MS`: i testi
+ * rimasti scendono ai tier successivi o restano a translate-pending. I 30 s,
+ * sommati ai 60 s che il workflow lascia fra CREATE_ARTICLE_MAX_WALL_MS e il
+ * SIGTERM, restano a immagine e scrittura dei file.
+ */
+const TRANSLATE_DEADLINE_MARGIN_MS = 30_000;
+setCodexTranslateProcessDeadline(RUN_START_MS + RUN_WALL_BUDGET_MS - TRANSLATE_DEADLINE_MARGIN_MS);
+
+/**
  * Cooperative-stop flag armed by SIGTERM (issue #525).
  *
  * `generate-article.yml` kills this process with
@@ -14611,6 +14656,9 @@ const COOPERATIVE_STOP_GRACE_MS = 45_000;
 function requestCooperativeStop(signal) {
   if (_sigtermStopRequested) return; // idempotent: a second SIGTERM must not re-log
   _sigtermStopRequested = true;
+  // Nessuna nuova chiamata di traduzione Codex dopo lo stop: quella in volo
+  // resta limitata dalla propria deadline, le successive non partono.
+  setCodexTranslateProcessDeadline(Date.now());
   const spentS = Math.round((Date.now() - RUN_START_MS) / 1000);
   // `::warning` and not `::error`: the run is not broken, it is being stopped.
   // A declared stop that prints nothing is indistinguishable from a crash, and
@@ -16390,7 +16438,7 @@ async function generateAndValidateArticle(url, sourceContext = null) {
         // `stats-bfs://` conserva il gate (quel prompt non nomina il brief).
         // Nessuna soglia toccata: con '' scatta la guardia gia' esistente per
         // fonte troppo sottile.
-        sourceText: url.startsWith('evergreen://') ? '' : pageContent,
+        sourceText: factualityGateSourceText(url, pageContent),
         sourceDate: lastSourcePublishedAt || undefined,
         publishedAt: new Date().toISOString(),
         memory: defectMemory(),
@@ -16655,7 +16703,7 @@ async function generateAndValidateArticle(url, sourceContext = null) {
       // to the pre-expansion draft rather than publish unchecked content.
       const expandGateResult = runArticleFactualityGates({
         sections: collectBodySections(data.content.it),
-        sourceText: url.startsWith('evergreen://') ? '' : pageContent,
+        sourceText: factualityGateSourceText(url, pageContent),
         sourceDate: lastSourcePublishedAt || undefined,
         publishedAt: new Date().toISOString(),
         memory: defectMemory(),
@@ -16825,6 +16873,17 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   // già stabili qui, su ogni percorso di generazione.
   assertComuneTitleMatchesSlug(data);
 
+  // Step 3a.6: gate deterministico ITALIANO prima della traduzione. E' la
+  // meta' IT del gate finale (Step 3a.2 piu' sotto), con lo stesso testo di
+  // fonte: un articolo che quel gate rigetterebbe esce qui, prima di spendere
+  // il budget traduzioni (Codex in testa). Il gate finale NON si sposta:
+  // continua a giudicare l'italiano finale (dopo CTA, link e citazione) e le
+  // traduzioni, prima di ogni scrittura.
+  assertItalianArticlePassesFactualityGates(data, {
+    sourceUrl: url,
+    sourceText: factualityGateSourceText(url, pageContent),
+  });
+
   // Step 3b: Translate to EN/DE/FR (only runs if not a duplicate)
   await translateArticle(data);
 
@@ -16978,7 +17037,7 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   // generated article or alter the serialized data shape.
   Object.defineProperties(data, {
     _sourceUrl: { value: url, configurable: true },
-    _sourceText: { value: pageContent, configurable: true },
+    _sourceText: { value: factualityGateSourceText(url, pageContent), configurable: true },
   });
   try {
     assertArticlePassesFactualityGates(data);
