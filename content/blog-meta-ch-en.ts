@@ -6947,6 +6947,15 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.lingotti-oro-export-svizzera.title': 'Gold bars: Italian exports to Switzerland +57%',
     'blog.article.lingotti-oro-export-svizzera.excerpt': 'In August, Italian exports outside the EU grew by 16.1%: +57% to Switzerland, with gold bars indicated by ISTAT. Detailed data will come later.',
     'blog.article.lingotti-oro-export-svizzera.imageAlt': 'Gold bars linked to Italian exports to Switzerland',
+    'blog.article.parlamento-rete-elettrica-svizzera.title': 'Faster and more modern grids: Parliament accelerates the electric revolution',
+    'blog.article.parlamento-rete-elettrica-svizzera.excerpt': 'Over 60% of the very high voltage lines are close to the end of life; the threshold for overhead lines is 220 kV, while the distribution network involves voltages >36 kV and the new stations will not be able to exceed 20 m2 in surface area and 3 m in height.',
+    'blog.article.parlamento-rete-elettrica-svizzera.imageAlt': 'High-voltage power line across the Swiss Alps under a clear sky with a valley visible',
+    'blog.article.riserva-elettrica-nazionale-monthey.title': 'Reserve power plants: the National Council approves 131,3 million',
+    'blog.article.riserva-elettrica-nazionale-monthey.excerpt': 'The National Council has allocated 131,3 million francs for the planning and transitional solution of Monthey until 2030.',
+    'blog.article.riserva-elettrica-nazionale-monthey.imageAlt': 'High-voltage electricity pylon in Switzerland, symbol of energy security',
+    'blog.article.norme-biosicurezza-peste-suina.title': 'New regulations against African swine fever',
+    'blog.article.norme-biosicurezza-peste-suina.excerpt': 'The FSVO sets biosecurity requirements for pig farms: ASF compliance facilitates animal movements in the event of an outbreak.',
+    'blog.article.norme-biosicurezza-peste-suina.imageAlt': 'Swiss pig farm with biosecurity measures against African swine fever',
 };
 
 export default blogMetaChEn;

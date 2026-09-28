@@ -90071,6 +90071,123 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-parlamento-rete-elettrica-svizzera': {
+    title: 'Reti più rapide e moderne: il Parlamento accelera la rivoluzione elettrica',
+    description: 'La revisione della legge sugli impianti elettrici prevede la preferenza per le linee aeree a 220 kV, il rinnovo di oltre il 60% delle linee ad altissima',
+    keywords: 'frontalieri, ticino, svizzera, italia, reti, rapide, moderne, parlamento',
+    ogTitle: 'Reti più rapide e moderne: il Parlamento accelera la rivoluzione elettrica',
+    ogDescription: 'Il Parlamento svizzero ha trovato l\'intesa sulla revisione della legge sugli impianti elettrici: si privilegia l\'installazione aerea delle linee a 220 kV, oltre il 60% delle linee ad altissima tensione sarà rinnovato, le stazioni di trasformazione',
+    canonicalPath: '/articoli-svizzera/parlamento-rete-elettrica-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Reti più rapide e moderne: il Parlamento accelera la rivoluzione elettrica",
+      "description": "La revisione della legge sugli impianti elettrici prevede la preferenza per le linee aeree a 220 kV, il rinnovo di oltre il 60% delle linee ad altissima",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/parlamento-rete-elettrica-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Linea elettrica ad alta tensione tra le montagne svizzere con cielo sereno e vallata visibile"
+      },
+      "datePublished": "2026-09-28T16:28:09+00:00",
+      "dateModified": "2026-09-28T16:28:09+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/parlamento-rete-elettrica-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-riserva-elettrica-nazionale-monthey': {
+    title: 'Centrali di riserva: il Nazionale approva 131,3 milioni',
+    description: 'Il Consiglio nazionale approva 131,3 milioni di franchi per le centrali elettriche di riserva e la soluzione transitoria di Monthey fino al 2030.',
+    keywords: 'frontalieri, ticino, svizzera, italia, centrali, riserva, nazionale, approva',
+    ogTitle: 'Centrali di riserva: il Nazionale approva 131,3 milioni',
+    ogDescription: 'Il Consiglio nazionale ha stanziato 131,3 milioni di franchi per la pianificazione e la centrale di Monthey (VS). La decisione per i 2,18 miliardi per quattro nuove centrali è rinviata al prossimo anno.',
+    canonicalPath: '/articoli-svizzera/riserva-elettrica-nazionale-monthey/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Centrali di riserva: il Nazionale approva 131,3 milioni",
+      "description": "Il Consiglio nazionale approva 131,3 milioni di franchi per le centrali elettriche di riserva e la soluzione transitoria di Monthey fino al 2030.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/riserva-elettrica-nazionale-monthey.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Traliccio elettrico ad alta tensione in Svizzera, simbolo della sicurezza energetica"
+      },
+      "datePublished": "2026-09-28T17:18:35+00:00",
+      "dateModified": "2026-09-28T17:18:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/riserva-elettrica-nazionale-monthey/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-norme-biosicurezza-peste-suina': {
+    title: 'Nuove norme contro la peste suina africana | Frontaliere Ticino',
+    description: 'L\'USAV fissa requisiti per gli allevamenti suini: cinghiali, accessi, igiene e registri. In caso di epidemia, la conformità agevola il traffico di animali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, nuove, norme, contro, peste',
+    ogTitle: 'USAV: nuove regole di biosicurezza per i suini',
+    ogDescription: 'Le aziende suinicole professionali e amatoriali sono interessate da requisiti comuni: separazione tra suini domestici e cinghiali, accessi definiti, igiene nelle stalle e registrazioni aggiornate. Se si verifica un\'epizoozia, si passa al livello 2',
+    canonicalPath: '/articoli-svizzera/norme-biosicurezza-peste-suina/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Nuove norme contro la peste suina africana",
+      "description": "L'USAV fissa requisiti per gli allevamenti suini: cinghiali, accessi, igiene e registri. In caso di epidemia, la conformità agevola il traffico di animali.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/norme-biosicurezza-peste-suina.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Allevamento suino svizzero con misure di biosicurezza contro la peste suina africana"
+      },
+      "datePublished": "2026-09-28T17:36:44+00:00",
+      "dateModified": "2026-09-28T17:36:44+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/norme-biosicurezza-peste-suina/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
