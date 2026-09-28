@@ -37,12 +37,13 @@
  *      pagina che la guardia gia' accetta;
  *   3. una pagina con almeno tre righe italiane porta il codice bloccante
  *      `italian-residue`, anche se la guardia factuality non trova `critical`;
- *   4. si scrive SOLO se il testo nuovo supera i controlli che la guardia
- *      NON fa (`translationSanityIssue`): non e' drasticamente piu' corto del
- *      body pubblicato — il tier HuggingFace tronca la SORGENTE a 2000
- *      caratteri e il taglio esce con marker bilanciati e zero `critical` — e
- *      non e' un passthrough dell'italiano, che per costruzione ha gli stessi
- *      numeri e nessun falso amico.
+ *   4. si scrive SOLO se il testo nuovo supera anche i controlli locali di
+ *      `translationSanityIssue`: non e' drasticamente piu' corto del body
+ *      pubblicato — il tier HuggingFace tronca la SORGENTE a 2000 caratteri e
+ *      il taglio esce con marker bilanciati e zero `critical` — e ogni campo
+ *      resta nella lingua richiesta. Il passthrough esatto e' gia' rifiutato
+ *      fail-closed dalla cascata condivisa; questo controllo resta una difesa
+ *      ulteriore per residui parziali o per chiamanti futuri della funzione.
  *
  * E dalla regola di forma: l'uscita della cascata passa da `sanitizeBodyText()`
  * come nel percorso di produzione. Le graffe spaiate dell'MT (la chiusura mal
@@ -451,14 +452,13 @@ export function translationSanityIssue({ oldSections, newSections, italianSectio
       }
     }
     // PER CAMPO, come il pavimento di lunghezza accanto, e non sui tre campi
-    // concatenati. La cascata traduce un campo alla volta e
-    // `translateFieldFreeMt` non ha nessuna guardia "uscita == sorgente": scarta
-    // il vuoto, il marker `null` e la sentinella nav mangled, non un passthrough.
-    // Quindi il fallimento PIU' PROBABILE non e' totale, e' parziale — un solo
-    // `body2` che torna verbatim in italiano. Sul testo concatenato quel campo e'
-    // un terzo del totale: il rilevatore vede due terzi di inglese, risponde
-    // `en`, e la pagina /en/ pubblicata si prende un paragrafo italiano. Il
-    // controllo che doveva fermarlo sopravviveva solo al caso meno probabile.
+    // concatenati. `translateFieldFreeMt` rifiuta gia' il passthrough esatto
+    // confrontando l'uscita normalizzata con la sorgente (#1084); qui resta la
+    // difesa indipendente contro un residuo PARZIALE o un chiamante che fornisca
+    // direttamente le sezioni. Sul testo concatenato un solo `body2` italiano
+    // sarebbe un terzo del totale: il rilevatore vedrebbe due terzi di inglese,
+    // risponderebbe `en`, e la pagina /en/ prenderebbe comunque un paragrafo
+    // italiano.
     if (text.length >= LANG_CHECK_MIN_CHARS) {
       // `locale` come fallback: un testo su cui il rilevatore non ha segnale non
       // deve diventare un rifiuto. Stessa forma di `isWrongLocale()`.
