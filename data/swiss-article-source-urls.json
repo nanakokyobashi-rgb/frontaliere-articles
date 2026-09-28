@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/cronaca/1945874/avvocato-sentieri-processo-difesa-procura-bondo": {
-    "articleId": "processo-bondo-critica-procura",
-    "ts": "2026-08-26T02:15:54.607Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/rubriche/ospite/1946011/giovani-futuro-scuola-quando-elio-ricomincia-biaggio": {
     "articleId": "scuola-futuro-giovani-ticino",
     "ts": "2026-08-26T02:36:55.928Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/dal-mondo/attualita/1953110/caro-carburanti-eni-abbassa-i-prezzi-parte-l-effetto-domino-e-in-svizzera": {
     "articleId": "eni-prezzo-carburante-italia-svizzera",
     "ts": "2026-09-28T11:23:17.517Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1953170/parita-discriminazioni-lavoro-sessuale-genere": {
+    "articleId": "parita-sessuale-consiglio-stati",
+    "ts": "2026-09-28T11:54:41.402Z",
     "keyForm": 2
   }
 }
