@@ -44,6 +44,7 @@ import {
   unquoteGitPath,
   normalizeTreePaths,
   fetchAnnouncedSurface,
+  ANNOUNCED_SURFACE_MAX_ATTEMPTS,
   ANNOUNCED_SURFACE_RETRY_DELAY_MS,
 } from '../../scripts/reconcile-article-shards.mjs';
 
@@ -383,7 +384,16 @@ test('manifest senza counts viene rifiutato subito', () => {
   assert.equal(errors.length, 1);
 });
 
-test('una superficie senza marker di release viene rifiutata fail-closed', () => {
+test('una superficie legacy senza marker di release non attiva il gate in migrazione', () => {
+  const s = goodSurface();
+  delete s.slugs.commit;
+  for (const registry of [s.articles, s.swissArticles]) {
+    for (const article of registry) delete article.commit;
+  }
+  assert.deepEqual(validateAnnouncedSurface(s), []);
+});
+
+test('un contratto di marker parzialmente emesso resta fail-closed', () => {
   const s = goodSurface();
   delete s.slugs.commit;
   delete s.articles[0].commit;
@@ -489,6 +499,37 @@ test('una superficie incoerente persistente resta fail-closed dopo il budget di 
 
   assert.equal(calls.length, 8, 'il retry resta bounded e ripete tutti i quattro documenti');
   assert.deepEqual(waits, [ANNOUNCED_SURFACE_RETRY_DELAY_MS]);
+});
+
+test('il budget wall-clock condiviso taglia retry e backoff per-URL', async () => {
+  let clock = 0;
+  const calls = [];
+  const deadlines = [];
+  const waits = [];
+
+  await assert.rejects(
+    () => fetchAnnouncedSurface('https://api.example.test/articles', {}, {
+      fetchJsonImpl: async (url, options) => {
+        calls.push(url);
+        deadlines.push(options.deadline);
+        clock += 60;
+        throw new Error('network down');
+      },
+      wait: async (ms) => {
+        waits.push(ms);
+        clock += ms;
+      },
+      now: () => clock,
+      maxAttempts: ANNOUNCED_SURFACE_MAX_ATTEMPTS,
+      maxDurationMs: 250,
+      retryDelayMs: 100,
+    }),
+    /budget 250ms/,
+  );
+
+  assert.ok(calls.length < ANNOUNCED_SURFACE_MAX_ATTEMPTS, 'il deadline deve prevalere sul numero massimo di tentativi');
+  assert.deepEqual([...new Set(deadlines)], [250]);
+  assert.deepEqual(waits, [100, 30]);
 });
 
 // ── treeLooksSane: un clone rotto non deve dichiarare fantasma il corpus ────
