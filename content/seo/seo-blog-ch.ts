@@ -89096,6 +89096,84 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-neutralita-scelta-caso': {
+    title: 'Neutralità, Cassis: siamo neutrali e lo resteremo',
+    description: 'Dopo la bocciatura dell\'iniziativa, Ignazio Cassis difende la neutralità svizzera: definizione non irrigidita e sanzioni valutate caso per caso in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, neutralità, cassis, siamo, neutrali',
+    ogTitle: 'Cassis dopo il voto: neutralità e sanzioni caso per caso',
+    ogDescription: 'La bocciatura dell\'iniziativa sulla neutralità, secondo Ignazio Cassis, non è un voto contro il principio. Il consigliere federale difende la prassi attuale, l\'adattamento ai periodi e la possibilità di valutare caso per caso le sanzioni economiche.',
+    canonicalPath: '/articoli-svizzera/neutralita-scelta-caso/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Neutralità, Cassis: siamo neutrali e lo resteremo",
+      "description": "Dopo la bocciatura dell'iniziativa, Ignazio Cassis difende la neutralità svizzera: definizione non irrigidita e sanzioni valutate caso per caso in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/neutralita-scelta-caso.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ignazio Cassis commenta il voto sull'iniziativa sulla neutralità svizzera"
+      },
+      "datePublished": "2026-09-28T00:17:56+00:00",
+      "dateModified": "2026-09-28T00:17:56+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/neutralita-scelta-caso/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-voto-svizzera-esiti-politici': {
+    title: 'Svizzera: bocciate alimentazione e neutralità | Frontaliere Ticino',
+    description: 'L\'iniziativa sull\'alimentazione è stata bocciata dal 72,5% dei voti. Ignazio Cassis conferma la continuità della prassi di neutralità svizzera. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, bocciate, alimentazione, neutralità, votanti',
+    ogTitle: 'Svizzera: bocciate iniziative su alimentazione e neutralità',
+    ogDescription: 'Il 72,5% dei votanti svizzeri ha respinto l\'iniziativa sull\'alimentazione. Il consigliere federale Ignazio Cassis ribadisce la validità della prassi attuale sulla neutralità.',
+    canonicalPath: '/articoli-svizzera/voto-svizzera-esiti-politici/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Svizzera: bocciate alimentazione e neutralità",
+      "description": "L'iniziativa sull'alimentazione è stata bocciata dal 72,5% dei voti. Ignazio Cassis conferma la continuità della prassi di neutralità svizzera. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/voto-svizzera-esiti-politici.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna, sede del governo svizzero"
+      },
+      "datePublished": "2026-09-28T00:44:48+00:00",
+      "dateModified": "2026-09-28T00:44:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/voto-svizzera-esiti-politici/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
