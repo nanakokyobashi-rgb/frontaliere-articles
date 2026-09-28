@@ -99,6 +99,11 @@ import {
   countSourceSitemapEntries,
   sectionFloor,
 } from './lib/corpus-floors.mjs';
+import {
+  RELEASE_MARKER_CONTRACT_FIELD,
+  RELEASE_MARKER_CONTRACT_VERSION,
+  validateReleaseMarkers,
+} from './lib/announced-surface.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'dist', 'api');
@@ -177,8 +182,23 @@ if (!Array.isArray(SWISS_ARTICLES)) {
   throw new Error('SWISS_ARTICLES is not an array');
 }
 
-write('articles.json', ARTICLES);
-write('swiss-articles.json', SWISS_ARTICLES);
+const commit = (() => {
+  try {
+    return execSync('git rev-parse HEAD', { cwd: ROOT }).toString().trim();
+  } catch {
+    return null;
+  }
+})();
+if (!commit) {
+  throw new Error('git commit non verificabile — refusing to publish an unmarked release');
+}
+
+// Ogni documento che il detector legge deve portare la stessa release del
+// manifest. Senza il marker per-riga, counts e insieme di ID possono restare
+// identici mentre il registro appartiene a un commit diverso da slugs.json.
+const markRegistryRelease = (registry) => registry.map((article) => ({ ...article, commit }));
+write('articles.json', markRegistryRelease(ARTICLES));
+write('swiss-articles.json', markRegistryRelease(SWISS_ARTICLES));
 
 for (const loc of LOCALES) {
   const meta = (await load(`content/blog-meta-${loc}.ts`)).default;
@@ -216,6 +236,7 @@ if (reservedSlugEntries.length > 0) {
   throw new Error(`reserved published slug(s) in source maps: ${reservedSlugEntries.join(', ')}`);
 }
 write('slugs.json', {
+  commit,
   blog: blogSlugs.BLOG_SLUGS,
   blogReverse: blogSlugs.REVERSE_BLOG,
   fallbackReasons: {
@@ -225,14 +246,6 @@ write('slugs.json', {
   swiss: swissSlugs.SWISS_SLUGS ?? null,
   swissReverse: swissSlugs.REVERSE_SWISS ?? null,
 });
-
-const commit = (() => {
-  try {
-    return execSync('git rev-parse HEAD', { cwd: ROOT }).toString().trim();
-  } catch {
-    return null;
-  }
-})();
 
 
 
@@ -885,6 +898,7 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
 // Written last: it records the byte size of every other artifact.
 write('manifest.json', {
   schema: 1,
+  [RELEASE_MARKER_CONTRACT_FIELD]: RELEASE_MARKER_CONTRACT_VERSION,
   commit,
   generatedAt: new Date().toISOString(),
   counts: {
@@ -1136,6 +1150,17 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
     mismatches.push('slugs.json: assente da dist/api — la sorgente dei canonical e\' sempre emessa');
   } else {
     const slugs = jsonOut('slugs.json');
+    mismatches.push(
+      ...validateReleaseMarkers(
+        {
+          manifest: jsonOut('manifest.json'),
+          slugs,
+          articles: exists('articles.json') ? jsonOut('articles.json') : null,
+          swissArticles: exists('swiss-articles.json') ? jsonOut('swiss-articles.json') : null,
+        },
+        { requireMarkers: true },
+      ),
+    );
     const indexed = { blog: ['articles.json', 'articles'], swiss: ['swiss-articles.json', 'swissArticles'] };
     for (const [section, [registry, counter]] of Object.entries(indexed)) {
       const keys = Object.keys(slugs?.[section] ?? {});

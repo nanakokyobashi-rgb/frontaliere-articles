@@ -130,29 +130,37 @@ import { findControlChars, isInvalidControlCode, sanitizeHtmlDocument } from './
 // L'import non esegue niente: quel modulo lancia `main()` solo se e' lui
 // l'entry point di `process.argv[1]`.
 import { LOCALES, SECTIONS, expectedShardPath } from './reconcile-article-shards.mjs';
+import {
+  ANNOUNCED_SURFACE_FILES,
+  ANNOUNCED_SURFACE_MAX_ATTEMPTS,
+  ANNOUNCED_SURFACE_MAX_DURATION_MS,
+  ANNOUNCED_SURFACE_RETRY_DELAY_MS,
+  AnnouncedSurfaceIncoherentError,
+  fetchAnnouncedSurfaceSnapshot,
+  validateReleaseMarkers,
+} from './lib/announced-surface.mjs';
 
 const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 export { LOCALES };
+export {
+  ANNOUNCED_SURFACE_FILES,
+  ANNOUNCED_SURFACE_MAX_ATTEMPTS,
+  ANNOUNCED_SURFACE_MAX_DURATION_MS,
+  ANNOUNCED_SURFACE_RETRY_DELAY_MS,
+  AnnouncedSurfaceIncoherentError,
+};
 
 const API_BASE_DEFAULT = 'https://nanakokyobashi-rgb.github.io/frontaliere-articles';
-
-// GitHub Pages/edge puo' esporre gli artefatti di una nuova pubblicazione in
-// tempi diversi. Questo lettore usa gli slug per costruire il canonical da
-// sondare: una coppia mista manifest/slugs puo' quindi dichiarare pulito il
-// vecchio URL e perdere la nuova pagina. Osserviamo l'intera superficie con
-// lo stesso cache-bust e teniamo solo uno snapshot che supera il gate.
-export const ANNOUNCED_SURFACE_MAX_ATTEMPTS = 10;
-export const ANNOUNCED_SURFACE_RETRY_DELAY_MS = 15_000;
-const ANNOUNCED_SURFACE_FILES = ['manifest.json', 'slugs.json', 'articles.json', 'swiss-articles.json'];
 
 /**
  * Rifiuta una superficie pubblica troncata o composta da insiemi diversi.
  *
  * Il rilevatore ha bisogno solo di slugs, ma manifest.counts e i due registri
  * sono il controllo indipendente che rifiuta payload troncati o con un insieme
- * di id sostituito durante il deploy. Il cache-bust condiviso e i retry
- * bounded coprono la finestra di pubblicazione non atomica.
+ * di id sostituito durante il deploy. Il gate di release e il cache-bust
+ * condivisi con `validateAnnouncedSurface` coprono anche la pubblicazione di
+ * documenti appartenenti a commit diversi.
  */
 export function validateDirtySurfaceSnapshot({ manifest, slugs, articles, swissArticles }) {
   const errors = [];
@@ -161,6 +169,7 @@ export function validateDirtySurfaceSnapshot({ manifest, slugs, articles, swissA
     errors.push('manifest.json senza counts.articles/counts.swissArticles');
     return errors;
   }
+  errors.push(...validateReleaseMarkers({ manifest, slugs, articles, swissArticles }));
 
   for (const [section, registry, counter, label] of [
     ['blog', articles, 'articles', 'articles.json'],
@@ -203,21 +212,6 @@ export function validateDirtySurfaceSnapshot({ manifest, slugs, articles, swissA
     }
   }
   return errors;
-}
-
-/** Errore conservativo: l'ultimo snapshot leggibile era incoerente. */
-export class AnnouncedSurfaceIncoherentError extends Error {
-  constructor(surfaceErrors) {
-    super('superficie annunciata incoerente: ' + surfaceErrors.join('; '));
-    this.name = 'AnnouncedSurfaceIncoherentError';
-    this.surfaceErrors = surfaceErrors;
-  }
-}
-
-function cacheBustedSurfaceUrl(apiBase, file, cacheBust) {
-  const url = new URL(apiBase + '/' + file);
-  url.searchParams.set('reconcile', cacheBust);
-  return url.href;
 }
 
 /** Directory dei corpi articolo -> sezione (id = nome file, locale = sottocartella). */
@@ -1059,79 +1053,21 @@ export async function filterCandidatesByLivePage(
 
 // ── Da qui in giu': solo I/O del CLI ────────────────────────────────────────
 
-async function fetchJson(url, fetchImpl = fetch) {
-  let lastErr;
-  for (let attempt = 1; attempt <= 3; attempt++) {
-    try {
-      const res = await fetchImpl(url, { signal: AbortSignal.timeout(30000) });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      return await res.json();
-    } catch (err) {
-      lastErr = err;
-      if (attempt < 3) await new Promise((r) => setTimeout(r, 2000 * attempt));
-    }
-  }
-  throw new Error(`fetch di ${url} fallito dopo 3 tentativi: ${lastErr}`);
-}
-
 /**
  * Legge e valida la superficie come un'unica osservazione logica.
  *
- * Una pubblicazione Pages non cambia tutti gli URL statici nello stesso
- * istante. Una lettura mista non autorizza il filtro live: si aspetta e
- * ripete l'osservazione completa con URL cache-busted. Il limite resta
- * bounded e l'ultimo fallimento e' fail-closed.
+ * Il contratto di cache-bust, retry per-URL e deadline è condiviso con
+ * `reconcile-article-shards.mjs`; qui si aggiunge il gate counts/insiemi del
+ * detector dirty-content prima di usare gli slug per il filtro live.
  */
 export async function fetchAnnouncedSurface(
   apiBase,
-  {
-    fetchJsonImpl = fetchJson,
-    wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms)),
-    now = Date.now,
-    maxAttempts = ANNOUNCED_SURFACE_MAX_ATTEMPTS,
-    retryDelayMs = ANNOUNCED_SURFACE_RETRY_DELAY_MS,
-    onRetry,
-  } = {},
+  options = {},
 ) {
-  let lastFailure;
-  const attempts = Number.isInteger(maxAttempts) && maxAttempts > 0
-    ? maxAttempts
-    : ANNOUNCED_SURFACE_MAX_ATTEMPTS;
-
-  for (let attempt = 1; attempt <= attempts; attempt++) {
-    let retryContext;
-    try {
-      const cacheBust = String(now()) + '-' + attempt;
-      // manifest resta la prima lettura; tutti gli altri documenti condividono
-      // lo stesso cache-bust, e il gate decide solo dopo averli osservati tutti.
-      const manifest = await fetchJsonImpl(
-        cacheBustedSurfaceUrl(apiBase, ANNOUNCED_SURFACE_FILES[0], cacheBust),
-      );
-      const [slugs, articles, swissArticles] = await Promise.all(
-        ANNOUNCED_SURFACE_FILES.slice(1).map((file) => fetchJsonImpl(
-          cacheBustedSurfaceUrl(apiBase, file, cacheBust),
-        )),
-      );
-      const surfaceErrors = validateDirtySurfaceSnapshot({ manifest, slugs, articles, swissArticles });
-      if (surfaceErrors.length === 0) return { manifest, slugs, articles, swissArticles };
-      lastFailure = new AnnouncedSurfaceIncoherentError(surfaceErrors);
-      retryContext = { errors: surfaceErrors };
-    } catch (error) {
-      lastFailure = error;
-      retryContext = { error };
-    }
-
-    if (attempt < attempts) {
-      onRetry?.({ attempt, maxAttempts: attempts, ...retryContext });
-      await wait(retryDelayMs);
-    }
-  }
-
-  if (lastFailure instanceof AnnouncedSurfaceIncoherentError) throw lastFailure;
-  throw new Error(
-    'lettura della superficie annunciata fallita dopo ' + attempts + ' tentativi: ' + lastFailure,
-    { cause: lastFailure },
-  );
+  return fetchAnnouncedSurfaceSnapshot(apiBase, {
+    ...options,
+    validateSnapshot: validateDirtySurfaceSnapshot,
+  });
 }
 
 function parseArgs(argv) {

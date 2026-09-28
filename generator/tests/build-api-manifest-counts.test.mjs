@@ -113,6 +113,15 @@ test('slugs.json e’ confrontato col manifest dal lato che pubblica, non solo d
   assert.match(consumer, /slugs\.blog ha \$\{blogKeys\} id ma il manifest ne annuncia/);
 });
 
+test('producer e reader condividono il marker della release sui registri', () => {
+  assert.match(SRC, /const markRegistryRelease = \(registry\) => registry\.map/);
+  assert.match(SRC, /write\('articles\.json', markRegistryRelease\(ARTICLES\)\)/);
+  assert.match(SRC, /write\('swiss-articles\.json', markRegistryRelease\(SWISS_ARTICLES\)\)/);
+  assert.match(SRC, /write\('slugs\.json', \{\n  commit,/);
+  assert.match(SRC, /RELEASE_MARKER_CONTRACT_FIELD\]: RELEASE_MARKER_CONTRACT_VERSION/);
+  assert.match(SRC, /validateReleaseMarkers\([\s\S]*requireMarkers: true/);
+});
+
 test('slugs.json e’ confrontato per INSIEME, non per cardinalita’, da entrambi i lati', () => {
   // La cardinalita' da sola non vede l'id SOSTITUITO: un articolo rimosso e uno
   // nuovo nello stesso giro lasciano il conto identico da entrambi i lati, e
