@@ -79,13 +79,22 @@ test('isManagedReview allinea login GraphQL e REST dopo la normalizzazione', () 
   );
 });
 
-test('il fallback Codex REST usa il login bot esatto senza user.type', () => {
+test('il fallback Codex REST accetta entrambe le identita bot esatte e resta fail-closed', () => {
   const body = `${CODEX_REVIEW_MARKER}\n## LGTM`;
-  assert.equal(isCodexFallbackReview({ user: { login: 'github-actions[bot]' }, body }), true);
-  assert.equal(isCodexFallbackReview({ user: { login: 'frontaliere-automation[bot]' }, body }), true);
-  assert.equal(isManagedReview({ user: { login: 'github-actions[bot]' }, body }), true);
-  assert.equal(isCodexFallbackReview({ user: { login: 'github-actions' }, body }), false);
-  assert.equal(isCodexFallbackReview({ user: { login: 'github-actions[bot]' }, body: '## LGTM' }), false);
+  const logins = ['github-actions[bot]', 'frontaliere-automation[bot]'];
+  const reviews = logins.map((login) => ({ user: { login }, body }));
+
+  assert.equal(reviews.filter(isCodexFallbackReview).length, 2);
+  for (const review of reviews) {
+    assert.equal(isManagedReview(review), true);
+    assert.equal(isCodexFallbackReview({ ...review, body: '## LGTM' }), false);
+    assert.equal(isCodexFallbackReview({ ...review, user: { ...review.user, type: 'User' } }), false);
+    assert.equal(
+      isCodexFallbackReview({ ...review, user: { login: review.user.login.replace('[bot]', '') } }),
+      false,
+    );
+  }
+  assert.equal(isCodexFallbackReview({ user: { login: 'other[bot]' }, body }), false);
 });
 
 test('i workflow di review rispettano il contratto di identità specifico', () => {
