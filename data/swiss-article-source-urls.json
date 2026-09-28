@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/h1kko6intypin3yfktvay": {
-    "articleId": "indennita-parentali-2027",
-    "ts": "2026-08-26T10:06:28.919Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4014133": {
     "articleId": "allerte-popolazione-cell-broadcast",
     "ts": "2026-08-26T10:54:48.329Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/politica/1953227/essere-linee-zona-parlamento-reti": {
     "articleId": "parlamento-rete-elettrica-svizzera",
     "ts": "2026-09-28T16:28:09.322Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1953272/riserva-nazionale-centrali-destinati-monthey": {
+    "articleId": "riserva-elettrica-nazionale-monthey",
+    "ts": "2026-09-28T17:18:35.581Z",
     "keyForm": 2
   }
 }
