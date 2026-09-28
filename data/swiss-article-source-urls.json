@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1945921/domande-asilo-svizzera-richieste-insieme": {
-    "articleId": "calo-domande-asilo-2026",
-    "ts": "2026-08-25T23:30:57.733Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/politica/1945991/il-parlamento-argoviese-vuole-vietare-il-velo-nelle-scuole-pubbliche": {
     "articleId": "parlamento-svizzero-velo-divieto-diritti",
     "ts": "2026-08-25T23:47:24.656Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1953127/fornitori-pressione-navi-navigazione-burckhardt": {
     "articleId": "navigazione-sostenibile-svizzera",
     "ts": "2026-09-28T09:59:20.421Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/cronaca/1953158/primo-soccorso-pediatrico-chiesta-una-formazione-obbligatoria-per-chi-si-occupa-di-bambini": {
+    "articleId": "formazione-primo-soccorso-pediatrico-ticino",
+    "ts": "2026-09-28T10:44:52.727Z",
     "keyForm": 2
   }
 }
