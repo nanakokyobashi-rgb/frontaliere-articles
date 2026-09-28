@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/lavoratori-migliori-ottengono-aumenti-doppi-rispetto-alla-media/91959011": {
-    "articleId": "stipendi-aumenti-differenziati-2026",
-    "ts": "2026-08-26T13:44:49.980Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1946177/svizzera-edilizia-societa-costi-prezzi": {
     "articleId": "mobiliare-edilizia-popolare-200m",
     "ts": "2026-08-26T14:14:59.403Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/politica/1953286/federale-riserva-centrali-consiglio-legge": {
     "articleId": "parlamento-svizzera-cripto-centrali",
     "ts": "2026-09-28T19:21:55.388Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1953031/ubs-svizzera-banca-fusione-sede": {
+    "articleId": "ubs-pressione-capitali-fusione",
+    "ts": "2026-09-28T20:38:47.135Z",
     "keyForm": 2
   }
 }
