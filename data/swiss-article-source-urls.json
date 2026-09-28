@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/z-jlxixpvkzj6al0r7rkj": {
-    "articleId": "pagamenti-offline-carte-2026",
-    "ts": "2026-08-25T11:17:06.111Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/attualita/1945646/svizzera-iniziativa-diritti-organizzazione-amnesty-deve-capacita-reagire-guerra-neutralita": {
     "articleId": "amnesty-neutralita-crimini-guerra",
     "ts": "2026-08-25T11:22:28.795Z",
@@ -2497,6 +2492,11 @@
   "https://lenews.ch/2026/09/27/swiss-voters-decisively-reject-initiatives-on-neutrality-and-food-security": {
     "articleId": "voto-iniziative-neutralita-cibo",
     "ts": "2026-09-28T01:11:41.327Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/iniziativa-neutralit%c3%a0%3a-affossata-dal-popolo%2c-no-al-70%2c2%25/92126403": {
+    "articleId": "esito-iniziativa-neutralita-svizzera",
+    "ts": "2026-09-28T01:52:17.695Z",
     "keyForm": 2
   }
 }
