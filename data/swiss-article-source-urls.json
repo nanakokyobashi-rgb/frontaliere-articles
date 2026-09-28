@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/politica/1946160/federale-supplementari-siccita-bosco-cambiamenti": {
-    "articleId": "fondi-siccita-foreste-agricoltura",
-    "ts": "2026-08-26T13:12:39.503Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/lavoratori-migliori-ottengono-aumenti-doppi-rispetto-alla-media/91959011": {
     "articleId": "stipendi-aumenti-differenziati-2026",
     "ts": "2026-08-26T13:44:49.980Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/ticino/attualita/1953247/snl-servizio-decisione-cantone-societa-navigazione-personale-conseguenze-contratto": {
     "articleId": "snl-contratto-alternativo-personale",
     "ts": "2026-09-28T18:40:39.804Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1953286/federale-riserva-centrali-consiglio-legge": {
+    "articleId": "parlamento-svizzera-cripto-centrali",
+    "ts": "2026-09-28T19:21:55.388Z",
     "keyForm": 2
   }
 }
