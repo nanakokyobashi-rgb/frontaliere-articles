@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1946177/svizzera-edilizia-societa-costi-prezzi": {
-    "articleId": "mobiliare-edilizia-popolare-200m",
-    "ts": "2026-08-26T14:14:59.403Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/attualita/1946192/elettricita-e-gas-meno-cari-nel-2027": {
     "articleId": "elettricita-gas-meno-cari-2027",
     "ts": "2026-08-26T15:25:32.735Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1953031/ubs-svizzera-banca-fusione-sede": {
     "articleId": "ubs-pressione-capitali-fusione",
     "ts": "2026-09-28T20:38:47.135Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4119484": {
+    "articleId": "vaud-riduzione-reddito-sostanza",
+    "ts": "2026-09-28T21:32:07.385Z",
     "keyForm": 2
   }
 }
