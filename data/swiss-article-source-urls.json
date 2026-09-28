@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/%22iniziativa-neutralit%c3%a0-indebolisce-ruolo-svizzera-promozione-pace%22/91951495": {
-    "articleId": "iniziativa-neutralita-svizzera-pace",
-    "ts": "2026-08-25T21:52:39.694Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/attualita/1945947/percento-popolazione-social-anni-svizzera-utilizzo-media-utilizza-sondaggio-ia": {
     "articleId": "utilizzo-ia-svizzera-2026",
     "ts": "2026-08-25T22:28:08.459Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/cambiare-regolarmente-cassa-malati-permette-di-risparmiare/92130430": {
     "articleId": "cambiare-cassa-malati-risparmio",
     "ts": "2026-09-28T08:28:02.250Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1953116/non-sai-se-devi-andare-al-pronto-soccorso-chiedi-al-medico": {
+    "articleId": "pronto-consulto-mendrisiotto-basso-ceresio",
+    "ts": "2026-09-28T09:07:41.987Z",
     "keyForm": 2
   }
 }
