@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4010873": {
-    "articleId": "diesel-rincaro-geopolitica-svizzera",
-    "ts": "2026-08-25T10:48:50.465Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/amrize%3a-il-cfo-lascia-a-sorpresa%2c-gi%c3%b9-in-borsa/91950409": {
     "articleId": "amrize-cfo-lascia-sorpresa-borsa",
     "ts": "2026-08-25T10:57:25.149Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/iniziativa-neutralit%c3%a0%3a-cassis%2c-siamo-neutrali-e-lo-resteremo/92128684": {
     "articleId": "neutralita-scelta-caso",
     "ts": "2026-09-28T00:17:56.588Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1952949/bellinzona": {
+    "articleId": "voto-svizzera-esiti-politici",
+    "ts": "2026-09-28T00:44:48.636Z",
     "keyForm": 2
   }
 }
