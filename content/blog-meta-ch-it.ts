@@ -6866,6 +6866,12 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.sanita-alta-engadina-samedan.title': 'Sanità Alta Engadina: approvati accordi fino al 2029',
     'blog.article.sanita-alta-engadina-samedan.excerpt': 'Il voto degli undici Comuni assicura quasi 28,5 milioni di franchi per l\'ospedale di Samedan, case anziani, Spitex e l\'ente Sanadura dal 2027 al 2029.',
     'blog.article.sanita-alta-engadina-samedan.imageAlt': 'Struttura sanitaria in ambiente alpino svizzero',
+    'blog.article.fisioterapia-ticino-moratoria.title': 'Fisioterapia in Ticino: moratoria non basta, Physioswiss',
+    'blog.article.fisioterapia-ticino-moratoria.excerpt': 'In Ticino la fisioterapia ambulatoriale cresce; i rimborsi per assicurato sono aumentati del 42% tra 2017 e 2023 e lo studio SUPSI è stato consegnato a maggio 2026.',
+    'blog.article.fisioterapia-ticino-moratoria.imageAlt': 'Fisioterapista che assiste un paziente in una clinica ambulatoriale a Lugano con vista sul lago',
+    'blog.article.zurigo-norme-grattacieli-votazione.title': 'Zurigo approva norme più severe per i grattacieli',
+    'blog.article.zurigo-norme-grattacieli-votazione.excerpt': 'Zurigo ha approvato la variante più severa del piano regolatore con il 62,6% dei voti e una partecipazione del 45,8%, mentre la città conta circa 300 edifici oltre 25 metri.',
+    'blog.article.zurigo-norme-grattacieli-votazione.imageAlt': 'Veduta dello skyline di Zurigo con zone limitate per grattacieli vicino ai binari ferroviari e a Oerlikon',
 };
 
 export default blogMetaChIt;

@@ -6866,6 +6866,12 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.sanita-alta-engadina-samedan.title': 'Upper Engadine Healthcare: agreements approved through 2029',
     'blog.article.sanita-alta-engadina-samedan.excerpt': 'The vote of the eleven Municipalities ensures almost 28.5 million francs for the Samedan hospital, elderly homes, Spitex and the Sanadura entity from 2027 to 2029.',
     'blog.article.sanita-alta-engadina-samedan.imageAlt': 'Healthcare facility in a Swiss Alpine environment',
+    'blog.article.fisioterapia-ticino-moratoria.title': 'Physiotherapy in Ticino: moratorium is not enough, Physioswiss',
+    'blog.article.fisioterapia-ticino-moratoria.excerpt': 'In Ticino, outpatient physiotherapy is growing; reimbursements per insured person increased by 42% between 2017 and 2023, and the SUPSI study was delivered in May 2026.',
+    'blog.article.fisioterapia-ticino-moratoria.imageAlt': 'Physiotherapist assisting a patient in an outpatient clinic in Lugano with lake view',
+    'blog.article.zurigo-norme-grattacieli-votazione.title': 'Zurich approves stricter regulations for skyscrapers',
+    'blog.article.zurigo-norme-grattacieli-votazione.excerpt': 'Zurich approved the stricter variant of the zoning plan with 62,6% of the vote and a turnout of 45,8%, while the city has around 300 buildings taller than 25 meters.',
+    'blog.article.zurigo-norme-grattacieli-votazione.imageAlt': 'View of Zurich skyline with limited high‑rise zones near railway tracks and Oerlikon',
 };
 
 export default blogMetaChEn;

@@ -20626,6 +20626,24 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'laura-bianchi',
     authorName: 'Laura Bianchi',
    },
+   {
+    id: 'fisioterapia-ticino-moratoria',
+    category: 'novita',
+    date: '2026-09-27T22:52:15.976Z',
+    image: '/images/blog/fisioterapia-ticino-moratoria.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'zurigo-norme-grattacieli-votazione',
+    category: 'novita',
+    date: '2026-09-27T23:44:33.128Z',
+    image: '/images/blog/zurigo-norme-grattacieli-votazione.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

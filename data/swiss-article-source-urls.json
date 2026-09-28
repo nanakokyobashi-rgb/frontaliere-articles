@@ -1,14 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1945847/minuten-risultato-franchi-azienda-trasformazione": {
-    "articleId": "20-minuten-utile-pubblicita-digitale",
-    "ts": "2026-08-25T07:23:50.821Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/attualita/1942131/da-soli-si-paga-di-piu-tasche-vuote-per-i-single": {
-    "articleId": "single-paga-di-piu-svizzera",
-    "ts": "2026-08-25T08:47:56.270Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/verdi-chiedono-creazione-segretaria-di-stato-protezione-clima/91951025": {
     "articleId": "verdi-richiesta-clima-2026",
     "ts": "2026-08-25T10:33:39.080Z",
@@ -2497,6 +2487,16 @@
   "https://www.swissinfo.ch/ita/gr%3a-ospedale-di-samedan%2c-futuro-assicurato-per-i-prossimi-3-anni/92127049": {
     "articleId": "sanita-alta-engadina-samedan",
     "ts": "2026-09-27T21:30:24.464Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1953019/ticino-physioswiss-fisioterapia-supsi-moratoria-crescita": {
+    "articleId": "fisioterapia-ticino-moratoria",
+    "ts": "2026-09-27T22:52:16.185Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/votazioni%3a-zurigo%2c-norme-pi%c3%b9-severe-per-i-grattacieli/92128720": {
+    "articleId": "zurigo-norme-grattacieli-votazione",
+    "ts": "2026-09-27T23:44:33.445Z",
     "keyForm": 2
   }
 }
