@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/carburanti%2c-prezzi-alti-alla-pompa-malgrado-calo-del-petrolio/91952169": {
-    "articleId": "benzina-diesel-paradosso-petrolio",
-    "ts": "2026-08-25T15:29:11.103Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/politica/1945994/svizzera-attivita-commissione-chiede-intelligence": {
     "articleId": "spionaggio-svizzera-controlli",
     "ts": "2026-08-25T16:20:54.893Z",
@@ -2497,6 +2492,11 @@
   "https://www.laregione.ch/svizzera/svizzera/1952964/l-iniziativa-sulla-neutralita-nettamente-bocciata-dal-popolo-svizzero": {
     "articleId": "popolo-svizzero-boccia-neutralita",
     "ts": "2026-09-28T03:12:15.928Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4115932": {
+    "articleId": "voto-neutralita-alimentazione-respinto",
+    "ts": "2026-09-28T03:51:29.427Z",
     "keyForm": 2
   }
 }
