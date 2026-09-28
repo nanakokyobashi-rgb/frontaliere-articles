@@ -41,7 +41,11 @@ test('un ledger FAQ non leggibile fallisce esplicitamente', () => {
       assert.equal(error.cause.code, 'EISDIR');
       return true;
     });
+  });
+});
 
+test('un symlink rotto al ledger FAQ fallisce esplicitamente invece di sembrare assente', () => {
+  withTempDir((dir) => {
     const brokenSymlink = path.join(dir, 'broken-ledger.json');
     symlinkSync(path.join(dir, 'missing-target.json'), brokenSymlink);
     assert.throws(() => loadFaqRejectionLedger(brokenSymlink), (error) => {
