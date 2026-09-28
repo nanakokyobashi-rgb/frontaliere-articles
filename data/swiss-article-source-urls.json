@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/rubriche/ospite/1946011/giovani-futuro-scuola-quando-elio-ricomincia-biaggio": {
-    "articleId": "scuola-futuro-giovani-ticino",
-    "ts": "2026-08-26T02:36:55.928Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/raiffeisen-svizzera-taglia-fino-a-180-posti-di-lavoro/91954902": {
     "articleId": "raiffeisen-160-milioni-risparmio-2027",
     "ts": "2026-08-26T05:24:21.649Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/ticino/attualita/1953170/parita-discriminazioni-lavoro-sessuale-genere": {
     "articleId": "parita-sessuale-consiglio-stati",
     "ts": "2026-09-28T11:54:41.402Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4118350": {
+    "articleId": "misure-poverta-lavoro-svizzera",
+    "ts": "2026-09-28T12:32:39.601Z",
     "keyForm": 2
   }
 }
