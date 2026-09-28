@@ -150,9 +150,9 @@ const ANNOUNCED_SURFACE_FILES = ['manifest.json', 'slugs.json', 'articles.json',
  * Rifiuta una superficie pubblica troncata o composta da insiemi diversi.
  *
  * Il rilevatore ha bisogno solo di slugs, ma manifest.counts e i due registri
- * sono il controllo indipendente che dimostra che gli slug appartengono alla
- * stessa generazione osservata. Senza questo gate una cardinalita' uguale puo'
- * nascondere un id sostituito durante il deploy.
+ * sono il controllo indipendente che rifiuta payload troncati o con un insieme
+ * di id sostituito durante il deploy. Il cache-bust condiviso e i retry
+ * bounded coprono la finestra di pubblicazione non atomica.
  */
 export function validateDirtySurfaceSnapshot({ manifest, slugs, articles, swissArticles }) {
   const errors = [];
@@ -1102,8 +1102,8 @@ export async function fetchAnnouncedSurface(
     let retryContext;
     try {
       const cacheBust = String(now()) + '-' + attempt;
-      // manifest resta la prima lettura: counts e commit autorizzano l'uso
-      // degli altri documenti, che condividono lo stesso cache-bust.
+      // manifest resta la prima lettura; tutti gli altri documenti condividono
+      // lo stesso cache-bust, e il gate decide solo dopo averli osservati tutti.
       const manifest = await fetchJsonImpl(
         cacheBustedSurfaceUrl(apiBase, ANNOUNCED_SURFACE_FILES[0], cacheBust),
       );

@@ -65,6 +65,9 @@ import {
   findEscapedTabResidues,
   residuesFromEscapedTabResidues,
   BODY_DIR_SECTIONS,
+  validateDirtySurfaceSnapshot,
+  fetchAnnouncedSurface,
+  ANNOUNCED_SURFACE_RETRY_DELAY_MS,
 } from '../../scripts/find-dirty-content-ids.mjs';
 
 test('sectionForBodyDir mappa le due directory dei corpi, null altrove', () => {
@@ -148,6 +151,110 @@ test('orderAndCap con cap non numerico usa il default (10), non lo tronca a zero
   const { selected, leftover } = orderAndCap(ids, 'not-a-number');
   assert.equal(selected.length, 3);
   assert.equal(leftover.length, 0);
+});
+
+function announcedSurfaceFixture() {
+  return {
+    manifest: { commit: 'generation-1', counts: { articles: 2, swissArticles: 1 } },
+    slugs: {
+      blog: { id0: { it: 'slug-0' }, id1: { it: 'slug-1' } },
+      swiss: { sw0: { it: 'swiss-0' } },
+    },
+    articles: [{ id: 'id0' }, { id: 'id1' }],
+    swissArticles: [{ id: 'sw0' }],
+  };
+}
+
+test('validateDirtySurfaceSnapshot rifiuta un id sostituito anche a cardinalita uguale', () => {
+  const surface = announcedSurfaceFixture();
+  const errors = validateDirtySurfaceSnapshot({
+    ...surface,
+    slugs: {
+      ...surface.slugs,
+      blog: { id0: { it: 'slug-0' }, nuovo: { it: 'slug-nuovo' } },
+    },
+  });
+  assert.ok(errors.some((error) => error.includes('slugs.blog') && error.includes('id1')), errors.join('; '));
+});
+
+test('la superficie incoerente viene ritentata come snapshot intero con cache-bust condiviso', async () => {
+  const coherent = announcedSurfaceFixture();
+  const mixed = {
+    ...coherent,
+    slugs: {
+      ...coherent.slugs,
+      blog: { id0: { it: 'slug-0' }, nuovo: { it: 'slug-nuovo' } },
+    },
+  };
+  const payloads = {
+    'manifest.json': coherent.manifest,
+    'slugs.json': coherent.slugs,
+    'articles.json': coherent.articles,
+    'swiss-articles.json': coherent.swissArticles,
+  };
+  const mixedPayloads = {
+    ...payloads,
+    'slugs.json': mixed.slugs,
+  };
+  const calls = [];
+  const waits = [];
+
+  const surface = await fetchAnnouncedSurface('https://api.example.test/articles', {
+    fetchJsonImpl: async (url) => {
+      const parsed = new URL(url);
+      const file = parsed.pathname.split('/').pop();
+      const cacheBust = parsed.searchParams.get('reconcile');
+      const attempt = Number(cacheBust.split('-').pop());
+      calls.push({ file, attempt, cacheBust });
+      return (attempt === 1 ? mixedPayloads : payloads)[file];
+    },
+    wait: async (ms) => waits.push(ms),
+    now: () => 123,
+  });
+
+  assert.deepEqual(surface, coherent);
+  assert.equal(calls.length, 8, 'due osservazioni complete da quattro documenti');
+  assert.deepEqual(calls.map((call) => call.attempt), [1, 1, 1, 1, 2, 2, 2, 2]);
+  assert.deepEqual(waits, [ANNOUNCED_SURFACE_RETRY_DELAY_MS]);
+  assert.deepEqual([...new Set(calls.map((call) => call.cacheBust))], ['123-1', '123-2']);
+});
+
+test('una superficie incoerente persistente resta fail-closed dopo il budget', async () => {
+  const coherent = announcedSurfaceFixture();
+  const payloads = {
+    'manifest.json': coherent.manifest,
+    'articles.json': coherent.articles,
+    'swiss-articles.json': coherent.swissArticles,
+  };
+  const calls = [];
+  const waits = [];
+
+  await assert.rejects(
+    () => fetchAnnouncedSurface('https://api.example.test/articles', {
+      fetchJsonImpl: async (url) => {
+        const file = new URL(url).pathname.split('/').pop();
+        calls.push(file);
+        if (file === 'slugs.json') {
+          return {
+            ...coherent.slugs,
+            blog: { id0: { it: 'slug-0' }, vecchio: { it: 'slug-vecchio' } },
+          };
+        }
+        return payloads[file];
+      },
+      wait: async (ms) => waits.push(ms),
+      now: () => 456,
+      maxAttempts: 2,
+    }),
+    (error) => {
+      assert.equal(error.name, 'AnnouncedSurfaceIncoherentError');
+      assert.ok(error.surfaceErrors.some((entry) => entry.includes('slugs.blog')));
+      return true;
+    },
+  );
+
+  assert.equal(calls.length, 8, 'il retry ripete tutti i quattro documenti');
+  assert.deepEqual(waits, [ANNOUNCED_SURFACE_RETRY_DELAY_MS]);
 });
 
 // ── scanContentForDirtyIds: fixture su disco (unico punto che tocca fs) ────
