@@ -1768,7 +1768,7 @@
       "reason": "Helper introdotto con #1956 perche' `scripts/find-dirty-content-ids.mjs` e `scripts/reconcile-article-shards.mjs` validino gli stessi quattro JSON pubblicati come snapshot di release, con retry e deadline condivisi. Entrambi sono reader interni del publisher corpus; il sito consuma questa superficie via HTTP e non ha un reader equivalente ne' un gemello in `origin/main`. Corpus-only per costruzione: non c'e' comportamento da trasportare e non serve una issue di porting.",
       "baseline": {
         "site": null,
-        "corpus": "64a01235b340f84c",
+        "corpus": "0693c262231502db",
         "alignedAt": "2026-09-28"
       }
     },
