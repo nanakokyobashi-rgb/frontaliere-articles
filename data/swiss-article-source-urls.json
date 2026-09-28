@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/raiffeisen-svizzera-taglia-fino-a-180-posti-di-lavoro/91954902": {
-    "articleId": "raiffeisen-160-milioni-risparmio-2027",
-    "ts": "2026-08-26T05:24:21.649Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/cronaca/1946075/brienz-brinzauls-ricollocazione-alvaneu-tiefencastel": {
     "articleId": "brienz-ricollocazione-sicurezza",
     "ts": "2026-08-26T06:38:12.552Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4118350": {
     "articleId": "misure-poverta-lavoro-svizzera",
     "ts": "2026-09-28T12:32:39.601Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/swiss-dota-la-propria-flotta-di-internet-satellitare/92131071": {
+    "articleId": "swiss-starlink-flotta",
+    "ts": "2026-09-28T12:49:03.699Z",
     "keyForm": 2
   }
 }
