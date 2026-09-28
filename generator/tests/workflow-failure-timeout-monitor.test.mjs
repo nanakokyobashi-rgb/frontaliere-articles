@@ -9,7 +9,11 @@ import {
   isTimeoutScannerOwnedFailure,
   partitionFailedJobsByOwner,
 } from '../../scripts/ci/scan-failed-runs.mjs';
-import { scopedTitle } from '../../scripts/ci/scan-job-timeouts.mjs';
+import {
+  assertRunAgeHorizon,
+  scanLookbackMinutes,
+  scopedTitle,
+} from '../../scripts/ci/scan-job-timeouts.mjs';
 import { searchSafePrefix } from '../../scripts/lib/github-issue-creator.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
@@ -66,8 +70,36 @@ test('il monitor centrale ha permessi check e inoltra dry-run/lookback senza cam
   // context `env.*` del passo successivo (stessa trappola del PAT, review #1568).
   assert.match(step, /TIMEOUT_SCAN_LOOKBACK_INPUT: \$\{\{ github\.event\.inputs\.lookback_min \}\}/);
   assert.match(step, /export TIMEOUT_SCAN_LOOKBACK_MINUTES="\$\{TIMEOUT_SCAN_LOOKBACK_INPUT:-\$\{SCAN_RESOLVED_LOOKBACK_MIN:-40\}\}"/);
+  assert.match(step, /TIMEOUT_SCAN_ALLOW_TRUNCATED_CREATED_HORIZON: 'true'/);
   assert.match(step, /HOST_KILL_SETTLE_MS: '120000'/);
   assert.match(step, /if \[ "\$\{\{ github\.event\.inputs\.dry_run \}\}" = "true" \]; then/);
+});
+
+test('orizzonte created fail-closed e lookback derivato realmente cappato a 12 ore', () => {
+  assert.throws(
+    () => assertRunAgeHorizon({ maxRunAgeMinutes: 3 * 24 * 60, allowTruncated: false }),
+    /truncates the 35-day run retention/,
+  );
+  assert.doesNotThrow(
+    () => assertRunAgeHorizon({ maxRunAgeMinutes: 3 * 24 * 60, allowTruncated: true }),
+  );
+  assert.doesNotThrow(
+    () => assertRunAgeHorizon({ maxRunAgeMinutes: 35 * 24 * 60, allowTruncated: false }),
+  );
+
+  const nowMs = Date.parse('2026-09-28T19:34:00Z');
+  assert.deepEqual(scanLookbackMinutes({
+    nowMs,
+    previousScanStartedMs: nowMs - 30 * 60_000,
+    baseMinutes: 31 * 60,
+    maxMinutes: 12 * 60,
+  }), { minutes: 720, neededMinutes: 45, truncated: true });
+  assert.deepEqual(scanLookbackMinutes({
+    nowMs,
+    previousScanStartedMs: Number.NaN,
+    baseMinutes: 31 * 60,
+    maxMinutes: 12 * 60,
+  }), { minutes: 720, neededMinutes: null, truncated: true });
 });
 
 test('scanner generico e specializzato condividono finestra e clock di completamento', () => {
@@ -95,7 +127,7 @@ test('scanner generico e specializzato condividono finestra e clock di completam
   assert.doesNotMatch(TIMEOUT_SCANNER, /Date\.parse\(run\.created_at\) < cutoffMs/);
 });
 
-test('un timeout iniziato 350 minuti fa resta osservabile dentro il budget di ricerca di 3 giorni', () => {
+test('il deep scan osserva una run creata oltre 3 giorni fa ma aggiornata nel cutoff', () => {
   const binDir = mkdtempSync(path.join(os.tmpdir(), 'timeout-updated-at-gh-'));
   const ghPath = path.join(binDir, 'gh');
   const argsLog = path.join(binDir, 'args.log');
@@ -106,7 +138,7 @@ test('un timeout iniziato 350 minuti fa resta osservabile dentro il budget di ri
     conclusion: 'cancelled',
     event: 'schedule',
     head_branch: 'main',
-    created_at: new Date(now - 350 * 60_000).toISOString(),
+    created_at: new Date(now - 4 * 24 * 60 * 60_000).toISOString(),
     updated_at: new Date(now - 60_000).toISOString(),
     html_url: 'https://github.com/o/r/actions/runs/456',
   };
@@ -143,6 +175,7 @@ esac
         ARGS_LOG: argsLog,
         GH_REPO: 'o/r',
         TIMEOUT_SCAN_LOOKBACK_MINUTES: '40',
+        TIMEOUT_SCAN_MAX_RUN_AGE_MINUTES: String(35 * 24 * 60),
       },
     });
     assert.equal(result.status, 0, result.stderr);
@@ -156,7 +189,7 @@ esac
     const created = new URLSearchParams(cancelledListing.split('?')[1]).get('created');
     assert.ok(created?.includes('..'), 'range created mancante');
     const [oldest] = created.split('..');
-    const expectedHorizonMs = (3 * 24 * 60 + 40) * 60_000;
+    const expectedHorizonMs = (35 * 24 * 60 + 40) * 60_000;
     const observedHorizonMs = now - Date.parse(oldest);
     assert.ok(observedHorizonMs >= expectedHorizonMs - 1_000, `${observedHorizonMs}ms`);
     assert.ok(observedHorizonMs < expectedHorizonMs + 60_000, `${observedHorizonMs}ms`);

@@ -559,10 +559,10 @@
     {
       "path": "scripts/ci/scan-job-timeouts.mjs",
       "mode": "identical",
-      "reason": "RICONCILIATO 2026-09-28 (issue #1110, trasporto concatenato da Site #10266 dopo #9715/#10264): lo scanner torna byte-identico al sito, conserva la lettura robusta delle annotazioni gia presente nel Corpus e limita a 3 giorni l’orizzonte `created` predefinito pur osservando `updated_at`. Il test Corpus misura sia il budget di ricerca sia una run aggiornata dopo 350 minuti; la prova live con hard timeout 12s resta il gate operativo.",
+      "reason": "RICONCILIATO 2026-09-28 (issue #1110, trasporto concatenato da Site #10266 e follow-up #10273): lo scanner torna byte-identico al sito. Il lookback derivato ha un ceiling effettivo di 12 ore; l'orizzonte `created` realtime di 3 giorni e' fail-closed senza opt-in esplicito, mentre l'override retention-complete a 35 giorni conserva le run create oltre 3 giorni ma aggiornate nel cutoff. Split e paginazione evitano il limite di 1.000 risultati per search.",
       "baseline": {
-        "site": "08da4d3900a94e7d",
-        "corpus": "08da4d3900a94e7d",
+        "site": "f0a4e40bd5a59d9f",
+        "corpus": "f0a4e40bd5a59d9f",
         "alignedAt": "2026-09-28"
       }
     },
@@ -816,11 +816,11 @@
     {
       "path": ".github/workflows/workflow-failure-issues.yml",
       "mode": "corpus-only",
-      "reason": "Il sito apre le issue di fallimento con uno step dentro ognuno dei suoi 135 workflow. Qui la scansione e' centrale: modificare i workflow di generazione (il core operativo del repo) per una preoccupazione che non e' la loro lascerebbe comunque scoperto ogni workflow nuovo. Il sito e' gia' arrivato alla stessa conclusione per il lato che CHIUDE (close-recovered, 'without wiring a per-workflow step into ~300 YAML files'): questa e' la meta' simmetrica, ed e' un candidato a risalire.",
+      "reason": "Il sito apre le issue di fallimento con uno step dentro ognuno dei suoi 135 workflow. Qui la scansione e' centrale: modificare i workflow di generazione (il core operativo del repo) per una preoccupazione che non e' la loro lascerebbe comunque scoperto ogni workflow nuovo. Il sito e' gia' arrivato alla stessa conclusione per il lato che CHIUDE (close-recovered, 'without wiring a per-workflow step into ~300 YAML files'): questa e' la meta' simmetrica, ed e' un candidato a risalire. Dal trasporto #1971 il monitor dichiara anche l'opt-in al budget realtime di 3 giorni sul filtro `created`; un deep scan a 35 giorni resta retention-complete senza opt-in.",
       "baseline": {
         "site": null,
-        "corpus": "ad6d8ac3d5a44261",
-        "alignedAt": "2026-08-07"
+        "corpus": "d7402fdbbfacddb2",
+        "alignedAt": "2026-09-28"
       }
     },
     {
