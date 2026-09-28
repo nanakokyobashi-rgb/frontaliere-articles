@@ -1272,11 +1272,11 @@
     },
     {
       "path": "scripts/ci/lessons-harvester-registry.json",
-      "mode": "corpus-only",
-      "reason": "Registro versionato delle decisioni del lessons-harvester di questo corpus: il workflow e `harvest-agent-lessons.mjs` lo usano per non riproporre cluster gia' decisi. Il sito non ha questo registro ne' il consumer corpus-side, quindi non esiste un gemello da portare e il file resta corpus-only.",
+      "mode": "adapted",
+      "reason": "Registro delle decisioni del lessons-harvester: stesso schema del sito (parseLessonsRegistry nel gemello identical harvest-agent-lessons.mjs, sito #10225), ma voci diverse per costruzione, perche' ogni repo registra i propri cluster e le proprie PR. Si corregge lo schema nel sito, le voci in ciascun repo.",
       "baseline": {
-        "site": null,
-        "corpus": "c1f3b12275a69cc9",
+        "site": "5d68789d78ab1bcd",
+        "corpus": "68fb354dfe1ef885",
         "alignedAt": "2026-09-28"
       }
     },
