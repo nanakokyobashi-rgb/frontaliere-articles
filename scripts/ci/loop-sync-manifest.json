@@ -824,6 +824,16 @@
       }
     },
     {
+      "path": "generator/tests/workflow-failure-timeout-monitor.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Gate adattato del monitor centrale Corpus: esercita insieme workflow-failure-issues.yml, lo scanner identical e il gemello corpus-only scan-failed-runs.mjs. Il sito copre gli stessi invarianti con i test Vitest tests/scan-job-timeouts-gap-window.test.ts e tests/scan-job-timeouts-observation-window.test.ts, quindi non esiste un file omonimo da trasportare byte-identico. Dal trasporto #1971 inchioda l'opt-in realtime, il fail-closed sotto 35 giorni, il cap 720m e una run creata 4 giorni prima ma aggiornata nel cutoff.",
+      "baseline": {
+        "site": null,
+        "corpus": "c17bebeb12dbd7fa",
+        "alignedAt": "2026-09-28"
+      }
+    },
+    {
       "path": "scripts/ci/scan-failed-runs.mjs",
       "mode": "corpus-only",
       "reason": "Lo scanner centrale dei fallimenti. Tre filtri misurati su questo repo: solo conclusion=failure (mai cancelled — l'outage GitHub del 2026-08-06 avrebbe generato decine di falsi bug), niente run da pull_request (un tests rosso e' problema della PR, non una issue), e gate sui fallimenti consecutivi (9 Generate Blog Article + 8 fast-publish-article su 18 fallimenti in 7 giorni sono transienti da provider LLM). Il `## Suggested action` conosce ora tutte e tre le categorie dell'helper di rebase (#255/#281/#285): prima ne descriveva due e rimandava la terza al proprietario, e da quando la terza esiste quel testo avrebbe consigliato di mettere un registro fra le cache — cioe' di cancellare dal registro l'articolo appena generato.",
