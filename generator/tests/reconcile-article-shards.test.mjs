@@ -301,18 +301,19 @@ test('la classe intera: uno slug accentato quotato NON è un fantasma dopo la no
 // ── validateAnnouncedSurface: mai riconciliare su dati troncati ─────────────
 
 function goodSurface() {
+  const commit = 'release-1';
   const blog = {};
   const articles = [];
   for (let i = 0; i < 150; i++) {
     blog[`id${i}`] = { it: `s${i}` };
-    articles.push({ id: `id${i}`, date: '2026-01-01' });
+    articles.push({ id: `id${i}`, date: '2026-01-01', commit });
   }
   return {
-    manifest: { counts: { articles: 150, swissArticles: 1 } },
+    manifest: { commit, counts: { articles: 150, swissArticles: 1 } },
     sourceCounts: { frontaliere: 150, svizzera: 1 },
-    slugs: { blog, swiss: { sw1: { it: 'sw1' } } },
+    slugs: { commit, blog, swiss: { sw1: { it: 'sw1' } } },
     articles,
-    swissArticles: [{ id: 'sw1', date: '2026-01-01' }],
+    swissArticles: [{ id: 'sw1', date: '2026-01-01', commit }],
   };
 }
 
@@ -382,11 +383,38 @@ test('manifest senza counts viene rifiutato subito', () => {
   assert.equal(errors.length, 1);
 });
 
+test('una superficie senza marker di release viene rifiutata fail-closed', () => {
+  const s = goodSurface();
+  delete s.slugs.commit;
+  delete s.articles[0].commit;
+  const errors = validateAnnouncedSurface(s).join('\n');
+  assert.match(errors, /slugs\.json senza commit di release verificabile/);
+  assert.match(errors, /articles\.json senza commit di release verificabile su 1 voci/);
+});
+
+test('un marker di release diverso viene rifiutato anche con cardinalità e ID identici', () => {
+  const s = goodSurface();
+  s.slugs.commit = 'release-2';
+  s.slugs.blog.id0 = { it: 'slug-nuovo' };
+  s.articles[0].commit = 'release-2';
+  const errors = validateAnnouncedSurface(s).join('\n');
+  assert.match(errors, /slugs\.json appartiene al commit release-2/);
+  assert.match(errors, /articles\.json appartiene a un commit diverso/);
+  assert.doesNotMatch(errors, /slugs\.blog ha/);
+  assert.doesNotMatch(errors, /insieme diverso da articles\.json/);
+});
+
 test('la superficie incoerente durante un deploy Pages viene ritentata come snapshot intero', async () => {
   const coherent = goodSurface();
   const mixed = {
     ...coherent,
-    slugs: { ...coherent.slugs, swiss: { altro: { it: 'altro' } } },
+    slugs: {
+      ...coherent.slugs,
+      commit: 'release-2',
+      blog: { ...coherent.slugs.blog, id0: { it: 'slug-nuovo' } },
+    },
+    articles: coherent.articles.map((article) => ({ ...article, commit: 'release-2' })),
+    swissArticles: coherent.swissArticles.map((article) => ({ ...article, commit: 'release-2' })),
   };
   const payloads = {
     'manifest.json': coherent.manifest,

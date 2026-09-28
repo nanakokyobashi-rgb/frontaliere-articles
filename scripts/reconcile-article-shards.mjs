@@ -22,9 +22,11 @@
 // COSA FA QUESTO SCRIPT (solo DETECTION — non pubblica niente):
 //   1. legge la superficie annunciata dall'API pubblicata (manifest.json è il
 //      primo riferimento: `commit` + `counts` permettono di rifiutare un set
-//      troncato prima di usarlo; poi slugs.json e i registri per le date). La
-//      lettura viene ripetuta se i documenti attraversano una pubblicazione
-//      Pages non atomica: si accetta solo uno snapshot che passa tutto il gate;
+//      troncato, mentre il commit ripetuto su ogni documento prova che lo
+//      snapshot è della stessa release; poi slugs.json e i registri per le
+//      date). La lettura viene ripetuta se i documenti attraversano una
+//      pubblicazione Pages non atomica: si accetta solo uno snapshot che passa
+//      tutto il gate;
 //   2. legge le pagine REALI di ogni shard via `git ls-tree` su un clone
 //      `--filter=blob:none --no-checkout` (solo oggetti tree, zero blob:
 //      ~0,5 MB a shard invece di migliaia di HEAD HTTP — e niente cache
@@ -101,7 +103,11 @@ export function expectedShardPath(baseSlug, locale, slug) {
  * né falsi «tutto presente» né (peggio) una lista di mancanti sbagliata.
  * `sourceCounts` e' il riferimento indipendente ricontato dal checkout che
  * esegue la riconciliazione: il manifest e le tre liste dell'API potrebbero
- * essere tutte coerentemente troncate nello stesso fetch.
+ * essere tutte coerentemente troncate nello stesso fetch. Il commit di
+ * release e' obbligatorio in ogni documento: `manifest.commit` da solo non
+ * dimostra che slugs e registri siano arrivati dalla stessa pubblicazione.
+ * Nei due registri il marker sta su ogni riga, per non cambiare la forma
+ * pubblica degli array con un envelope; in `slugs.json` sta al livello root.
  *
  * Ritorna la lista dei problemi; vuota = superficie coerente.
  */
@@ -111,6 +117,45 @@ export function validateAnnouncedSurface({ manifest, slugs, articles, swissArtic
   if (!counts || typeof counts.articles !== 'number' || typeof counts.swissArticles !== 'number') {
     errors.push('manifest.json senza counts.articles/counts.swissArticles');
     return errors;
+  }
+  const releaseCommit = manifest.commit;
+  if (typeof releaseCommit !== 'string' || releaseCommit.trim() === '') {
+    errors.push('manifest.json senza commit di release verificabile');
+    return errors;
+  }
+
+  if (typeof slugs?.commit !== 'string' || slugs.commit.trim() === '') {
+    errors.push('slugs.json senza commit di release verificabile');
+  } else if (slugs.commit !== releaseCommit) {
+    errors.push(
+      `slugs.json appartiene al commit ${slugs.commit}, ma manifest.json annuncia ${releaseCommit}`,
+    );
+  }
+
+  for (const [label, registry] of [
+    ['articles.json', articles],
+    ['swiss-articles.json', swissArticles],
+  ]) {
+    if (!Array.isArray(registry)) {
+      errors.push(`${label} senza righe su cui verificare il commit di release`);
+      continue;
+    }
+    const missingCommit = registry.filter(
+      (article) => typeof article?.commit !== 'string' || article.commit.trim() === '',
+    );
+    if (missingCommit.length) {
+      errors.push(`${label} senza commit di release verificabile su ${missingCommit.length} voci`);
+    }
+    const mismatched = registry
+      .filter((article) => typeof article?.commit === 'string' && article.commit !== releaseCommit)
+      .map((article) => article?.id)
+      .filter((id) => id != null);
+    if (mismatched.length) {
+      errors.push(
+        `${label} appartiene a un commit diverso da manifest.json ` +
+          `(id: ${mismatched.slice(0, 5).join(', ')})`,
+      );
+    }
   }
   for (const [section, counter] of Object.entries(SECTION_COUNTERS)) {
     const source = sourceCounts?.[section];
