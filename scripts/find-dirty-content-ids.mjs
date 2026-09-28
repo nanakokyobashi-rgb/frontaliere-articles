@@ -137,6 +137,89 @@ export { LOCALES };
 
 const API_BASE_DEFAULT = 'https://nanakokyobashi-rgb.github.io/frontaliere-articles';
 
+// GitHub Pages/edge puo' esporre gli artefatti di una nuova pubblicazione in
+// tempi diversi. Questo lettore usa gli slug per costruire il canonical da
+// sondare: una coppia mista manifest/slugs puo' quindi dichiarare pulito il
+// vecchio URL e perdere la nuova pagina. Osserviamo l'intera superficie con
+// lo stesso cache-bust e teniamo solo uno snapshot che supera il gate.
+export const ANNOUNCED_SURFACE_MAX_ATTEMPTS = 10;
+export const ANNOUNCED_SURFACE_RETRY_DELAY_MS = 15_000;
+const ANNOUNCED_SURFACE_FILES = ['manifest.json', 'slugs.json', 'articles.json', 'swiss-articles.json'];
+
+/**
+ * Rifiuta una superficie pubblica troncata o composta da insiemi diversi.
+ *
+ * Il rilevatore ha bisogno solo di slugs, ma manifest.counts e i due registri
+ * sono il controllo indipendente che rifiuta payload troncati o con un insieme
+ * di id sostituito durante il deploy. Il cache-bust condiviso e i retry
+ * bounded coprono la finestra di pubblicazione non atomica.
+ */
+export function validateDirtySurfaceSnapshot({ manifest, slugs, articles, swissArticles }) {
+  const errors = [];
+  const counts = manifest && manifest.counts;
+  if (!counts || typeof counts.articles !== 'number' || typeof counts.swissArticles !== 'number') {
+    errors.push('manifest.json senza counts.articles/counts.swissArticles');
+    return errors;
+  }
+
+  for (const [section, registry, counter, label] of [
+    ['blog', articles, 'articles', 'articles.json'],
+    ['swiss', swissArticles, 'swissArticles', 'swiss-articles.json'],
+  ]) {
+    const index = slugs && slugs[section];
+    const keys = index && typeof index === 'object' && !Array.isArray(index) ? Object.keys(index) : [];
+    if (!index || typeof index !== 'object' || Array.isArray(index)) {
+      errors.push("slugs." + section + " non e' una mappa di id");
+    } else if (keys.length !== counts[counter]) {
+      errors.push(
+        'slugs.' + section + ' ha ' + keys.length + ' id ma il manifest ne annuncia ' + counts[counter],
+      );
+    }
+
+    if (!Array.isArray(registry)) {
+      errors.push(label + " non e' un array");
+      continue;
+    }
+    if (registry.length !== counts[counter]) {
+      errors.push(label + ' ha ' + registry.length + ' voci, attese ' + counts[counter]);
+    }
+
+    const ids = registry.map((article) => article && article.id);
+    const duplicates = [...new Set(ids.filter((id) => id != null).filter((id, i) => ids.indexOf(id) !== i))];
+    const missingId = ids.filter((id) => id == null).length;
+    if (duplicates.length) errors.push(label + ' contiene id duplicati: ' + duplicates.slice(0, 5).join(', '));
+    if (missingId) errors.push(label + ' contiene ' + missingId + ' id mancanti');
+
+    const known = new Set(ids.filter((id) => id != null));
+    const indexed = new Set(keys);
+    const missing = [...known].filter((id) => !indexed.has(id));
+    const extra = keys.filter((id) => !known.has(id));
+    if (missing.length || extra.length) {
+      errors.push(
+        'slugs.' + section + ' indicizza un insieme diverso da ' + label + ': ' +
+          missing.length + ' id senza slug (' + (missing.slice(0, 5).join(', ') || '—') + '), ' +
+          extra.length + ' slug senza articolo (' + (extra.slice(0, 5).join(', ') || '—') + ')',
+      );
+    }
+  }
+  return errors;
+}
+
+/** Errore conservativo: l'ultimo snapshot leggibile era incoerente. */
+export class AnnouncedSurfaceIncoherentError extends Error {
+  constructor(surfaceErrors) {
+    super('superficie annunciata incoerente: ' + surfaceErrors.join('; '));
+    this.name = 'AnnouncedSurfaceIncoherentError';
+    this.surfaceErrors = surfaceErrors;
+  }
+}
+
+function cacheBustedSurfaceUrl(apiBase, file, cacheBust) {
+  const url = new URL(apiBase + '/' + file);
+  url.searchParams.set('reconcile', cacheBust);
+  return url.href;
+}
+
 /** Directory dei corpi articolo -> sezione (id = nome file, locale = sottocartella). */
 export const BODY_DIR_SECTIONS = {
   'blog-body': 'frontaliere',
@@ -991,6 +1074,66 @@ async function fetchJson(url, fetchImpl = fetch) {
   throw new Error(`fetch di ${url} fallito dopo 3 tentativi: ${lastErr}`);
 }
 
+/**
+ * Legge e valida la superficie come un'unica osservazione logica.
+ *
+ * Una pubblicazione Pages non cambia tutti gli URL statici nello stesso
+ * istante. Una lettura mista non autorizza il filtro live: si aspetta e
+ * ripete l'osservazione completa con URL cache-busted. Il limite resta
+ * bounded e l'ultimo fallimento e' fail-closed.
+ */
+export async function fetchAnnouncedSurface(
+  apiBase,
+  {
+    fetchJsonImpl = fetchJson,
+    wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms)),
+    now = Date.now,
+    maxAttempts = ANNOUNCED_SURFACE_MAX_ATTEMPTS,
+    retryDelayMs = ANNOUNCED_SURFACE_RETRY_DELAY_MS,
+    onRetry,
+  } = {},
+) {
+  let lastFailure;
+  const attempts = Number.isInteger(maxAttempts) && maxAttempts > 0
+    ? maxAttempts
+    : ANNOUNCED_SURFACE_MAX_ATTEMPTS;
+
+  for (let attempt = 1; attempt <= attempts; attempt++) {
+    let retryContext;
+    try {
+      const cacheBust = String(now()) + '-' + attempt;
+      // manifest resta la prima lettura; tutti gli altri documenti condividono
+      // lo stesso cache-bust, e il gate decide solo dopo averli osservati tutti.
+      const manifest = await fetchJsonImpl(
+        cacheBustedSurfaceUrl(apiBase, ANNOUNCED_SURFACE_FILES[0], cacheBust),
+      );
+      const [slugs, articles, swissArticles] = await Promise.all(
+        ANNOUNCED_SURFACE_FILES.slice(1).map((file) => fetchJsonImpl(
+          cacheBustedSurfaceUrl(apiBase, file, cacheBust),
+        )),
+      );
+      const surfaceErrors = validateDirtySurfaceSnapshot({ manifest, slugs, articles, swissArticles });
+      if (surfaceErrors.length === 0) return { manifest, slugs, articles, swissArticles };
+      lastFailure = new AnnouncedSurfaceIncoherentError(surfaceErrors);
+      retryContext = { errors: surfaceErrors };
+    } catch (error) {
+      lastFailure = error;
+      retryContext = { error };
+    }
+
+    if (attempt < attempts) {
+      onRetry?.({ attempt, maxAttempts: attempts, ...retryContext });
+      await wait(retryDelayMs);
+    }
+  }
+
+  if (lastFailure instanceof AnnouncedSurfaceIncoherentError) throw lastFailure;
+  throw new Error(
+    'lettura della superficie annunciata fallita dopo ' + attempts + ' tentativi: ' + lastFailure,
+    { cause: lastFailure },
+  );
+}
+
 function parseArgs(argv) {
   const out = {};
   for (let i = 0; i < argv.length; i++) {
@@ -1022,8 +1165,13 @@ async function main() {
 
   if (!skipLive && candidates.length > 0) {
     try {
-      const manifest = await fetchJson(`${apiBase}/manifest.json`);
-      const slugs = await fetchJson(`${apiBase}/slugs.json`);
+      const surface = await fetchAnnouncedSurface(apiBase, {
+        onRetry: ({ attempt, maxAttempts, errors, error }) => {
+          const reason = errors?.join('; ') || `lettura fallita: ${error}`;
+          console.log(`::warning::[find-dirty-content-ids] superficie non ancora coerente (tentativo ${attempt}/${maxAttempts}): ${reason}`);
+        },
+      });
+      const { manifest, slugs } = surface;
       apiCommit = manifest.commit ?? null;
       const sectionShardSlugs = JSON.parse(
         fs.readFileSync(path.join(ROOT_DIR, 'scripts', 'lib', 'section-shard-slugs.json'), 'utf8'),
