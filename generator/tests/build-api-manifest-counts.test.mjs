@@ -118,6 +118,7 @@ test('producer e reader condividono il marker della release sui registri', () =>
   assert.match(SRC, /write\('articles\.json', markRegistryRelease\(ARTICLES\)\)/);
   assert.match(SRC, /write\('swiss-articles\.json', markRegistryRelease\(SWISS_ARTICLES\)\)/);
   assert.match(SRC, /write\('slugs\.json', \{\n  commit,/);
+  assert.match(SRC, /RELEASE_MARKER_CONTRACT_FIELD\]: RELEASE_MARKER_CONTRACT_VERSION/);
   assert.match(SRC, /validateReleaseMarkers\([\s\S]*requireMarkers: true/);
 });
 

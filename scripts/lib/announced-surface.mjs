@@ -22,6 +22,8 @@ export const ANNOUNCED_SURFACE_FILES = Object.freeze([
 export const ANNOUNCED_SURFACE_MAX_ATTEMPTS = 10;
 export const ANNOUNCED_SURFACE_RETRY_DELAY_MS = 15_000;
 export const ANNOUNCED_SURFACE_MAX_DURATION_MS = 180_000;
+export const RELEASE_MARKER_CONTRACT_FIELD = 'releaseMarkerContractVersion';
+export const RELEASE_MARKER_CONTRACT_VERSION = 1;
 
 export class AnnouncedSurfaceDeadlineError extends Error {
   constructor() {
@@ -41,11 +43,11 @@ export class AnnouncedSurfaceIncoherentError extends Error {
 /**
  * Valida il legame fra manifest e documenti della stessa release.
  *
- * I marker sui documenti diversi dal manifest restano opt-in per poter leggere
- * una superficie legacy durante la migrazione. Appena uno compare, però, il
- * contratto diventa completo e fail-closed; il producer può usare
- * `requireMarkers: true` per verificare la propria emissione prima di
- * pubblicare.
+ * Un manifest con `releaseMarkerContractVersion` attiva esplicitamente il
+ * contratto dei marker. Un manifest senza quel campo resta leggibile come
+ * superficie legacy; appena compare un marker laterale, però, il contratto
+ * diventa completo e fail-closed. Il producer può usare `requireMarkers: true`
+ * per verificare la propria emissione prima di pubblicare.
  */
 export function validateReleaseMarkers(
   { manifest, slugs, articles, swissArticles } = {},
@@ -58,8 +60,23 @@ export function validateReleaseMarkers(
     return errors;
   }
 
+  const manifestDeclaresMarkerContract = Boolean(
+    manifest && typeof manifest === 'object' &&
+      Object.hasOwn(manifest, RELEASE_MARKER_CONTRACT_FIELD),
+  );
+  if (
+    manifestDeclaresMarkerContract &&
+    manifest[RELEASE_MARKER_CONTRACT_FIELD] !== RELEASE_MARKER_CONTRACT_VERSION
+  ) {
+    errors.push(
+      `manifest.json dichiara ${RELEASE_MARKER_CONTRACT_FIELD} non supportato ` +
+        `(${manifest[RELEASE_MARKER_CONTRACT_FIELD]})`,
+    );
+  }
+
   const markerContractActive = Boolean(
     requireMarkers ||
+      manifestDeclaresMarkerContract ||
       (slugs && typeof slugs === 'object' && Object.hasOwn(slugs, 'commit')) ||
       [articles, swissArticles].some((registry) =>
         Array.isArray(registry) && registry.some(

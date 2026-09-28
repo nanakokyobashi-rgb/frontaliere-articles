@@ -99,7 +99,11 @@ import {
   countSourceSitemapEntries,
   sectionFloor,
 } from './lib/corpus-floors.mjs';
-import { validateReleaseMarkers } from './lib/announced-surface.mjs';
+import {
+  RELEASE_MARKER_CONTRACT_FIELD,
+  RELEASE_MARKER_CONTRACT_VERSION,
+  validateReleaseMarkers,
+} from './lib/announced-surface.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'dist', 'api');
@@ -894,6 +898,7 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
 // Written last: it records the byte size of every other artifact.
 write('manifest.json', {
   schema: 1,
+  [RELEASE_MARKER_CONTRACT_FIELD]: RELEASE_MARKER_CONTRACT_VERSION,
   commit,
   generatedAt: new Date().toISOString(),
   counts: {

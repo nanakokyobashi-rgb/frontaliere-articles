@@ -71,6 +71,7 @@ import {
   ANNOUNCED_SURFACE_MAX_DURATION_MS,
   ANNOUNCED_SURFACE_RETRY_DELAY_MS,
 } from '../../scripts/find-dirty-content-ids.mjs';
+import { RELEASE_MARKER_CONTRACT_VERSION } from '../../scripts/lib/announced-surface.mjs';
 
 test('sectionForBodyDir mappa le due directory dei corpi, null altrove', () => {
   assert.equal(sectionForBodyDir('blog-body'), 'frontaliere');
@@ -188,6 +189,15 @@ test('validateDirtySurfaceSnapshot rifiuta una release diversa anche con counts 
   assert.match(errors, /slugs\.json appartiene al commit generation-2/);
   assert.match(errors, /articles\.json appartiene a un commit diverso/);
   assert.match(errors, /swiss-articles\.json appartiene a un commit diverso/);
+});
+
+test('un manifest della nuova release attiva il gate anche se i documenti laterali sono legacy', () => {
+  const surface = announcedSurfaceFixture();
+  surface.manifest.releaseMarkerContractVersion = RELEASE_MARKER_CONTRACT_VERSION;
+  const errors = validateDirtySurfaceSnapshot(surface).join('\n');
+  assert.match(errors, /slugs\.json senza commit di release verificabile/);
+  assert.match(errors, /articles\.json senza commit di release verificabile su 2 voci/);
+  assert.match(errors, /swiss-articles\.json senza commit di release verificabile su 1 voci/);
 });
 
 test('la superficie incoerente viene ritentata come snapshot intero con cache-bust condiviso', async () => {
