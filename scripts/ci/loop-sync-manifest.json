@@ -2903,9 +2903,9 @@
       "sitePath": "services/seo/imageObjectLd.ts",
       "mode": "identical",
       "baseline": {
-        "site": "f4b83c5927233968",
-        "corpus": "f4b83c5927233968",
-        "alignedAt": "2026-08-09"
+        "site": "732ad6959a3fecc2",
+        "corpus": "732ad6959a3fecc2",
+        "alignedAt": "2026-09-28"
       }
     },
     {
