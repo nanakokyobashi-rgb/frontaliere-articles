@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/fh%3a-%22export-orologi-sta-aumentando%2c-ma-occorre-rimanere-prudenti%22/91953517": {
-    "articleId": "orologi-export-fh-prudenza",
-    "ts": "2026-08-25T18:00:13.638Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/attualita/1945960/asilo-e-reati-l-esperto-le-prigioni-svizzere-non-fanno-paura": {
     "articleId": "asilo-reati-prigioni-maghreb",
     "ts": "2026-08-25T18:58:14.427Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/camere%3a-al-via-maratona-sui-bilaterali-iii/92129739": {
     "articleId": "maratona-bilaterali-iii-consiglio",
     "ts": "2026-09-28T06:09:19.738Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/neutralit%c3%a0%2c-%22una-sconfitta-totale%22-per-l%27udc%2c-rassegna-stampa/92129828": {
+    "articleId": "esito-campagna-blocher",
+    "ts": "2026-09-28T07:05:30.167Z",
     "keyForm": 2
   }
 }
