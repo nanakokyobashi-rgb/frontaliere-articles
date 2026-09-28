@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/politica/1945991/il-parlamento-argoviese-vuole-vietare-il-velo-nelle-scuole-pubbliche": {
-    "articleId": "parlamento-svizzero-velo-divieto-diritti",
-    "ts": "2026-08-25T23:47:24.656Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/cronaca/1945874/avvocato-sentieri-processo-difesa-procura-bondo": {
     "articleId": "processo-bondo-critica-procura",
     "ts": "2026-08-26T02:15:54.607Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/ticino/cronaca/1953158/primo-soccorso-pediatrico-chiesta-una-formazione-obbligatoria-per-chi-si-occupa-di-bambini": {
     "articleId": "formazione-primo-soccorso-pediatrico-ticino",
     "ts": "2026-09-28T10:44:52.727Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/dal-mondo/attualita/1953110/caro-carburanti-eni-abbassa-i-prezzi-parte-l-effetto-domino-e-in-svizzera": {
+    "articleId": "eni-prezzo-carburante-italia-svizzera",
+    "ts": "2026-09-28T11:23:17.517Z",
     "keyForm": 2
   }
 }
