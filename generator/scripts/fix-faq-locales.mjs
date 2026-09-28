@@ -630,9 +630,22 @@ export function faqLocaleIssueKey(articleId, locale, section = 'frontaliere') {
   return `${String(section)}/${String(articleId)}/${String(locale)}`;
 }
 
+function canonicalizeFaqFingerprintValue(value) {
+  if (Array.isArray(value)) return value.map(canonicalizeFaqFingerprintValue);
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(
+      Object.keys(value).sort().map((key) => [key, canonicalizeFaqFingerprintValue(value[key])]),
+    );
+  }
+  return value;
+}
+
 export function faqSourceFingerprint(sourceFaq) {
+  const canonicalSource = Array.isArray(sourceFaq)
+    ? canonicalizeFaqFingerprintValue(sourceFaq)
+    : null;
   return createHash('sha256')
-    .update(JSON.stringify(Array.isArray(sourceFaq) ? sourceFaq : null))
+    .update(JSON.stringify(canonicalSource))
     .digest('hex')
     .slice(0, 16);
 }

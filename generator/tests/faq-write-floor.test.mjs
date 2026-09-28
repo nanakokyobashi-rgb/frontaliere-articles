@@ -125,6 +125,32 @@ test('il rilevatore riaccoda un locale che ha meno FAQ della sorgente', () => {
   assert.equal(belowFaqSourceCount(null, pairs(8)), false, 'un literal illeggibile non e\' misurabile qui');
 });
 
+test('il fingerprint FAQ ignora ricorsivamente l\'ordine delle chiavi degli oggetti', () => {
+  const source = [{
+    q: 'domanda',
+    a: 'risposta',
+    details: { z: 2, a: [{ second: true, first: 'valore' }] },
+  }];
+  const sameContent = [{
+    details: { a: [{ first: 'valore', second: true }], z: 2 },
+    a: 'risposta',
+    q: 'domanda',
+  }];
+
+  assert.equal(faqSourceFingerprint(source), faqSourceFingerprint(sameContent));
+});
+
+test('il fingerprint FAQ conserva l\'ordine degli array al livello FAQ e annidato', () => {
+  const source = [{ q: 'prima', a: 'risposta 1' }, { q: 'seconda', a: 'risposta 2' }];
+  const nestedArray = [{ q: 'domanda', a: 'risposta', choices: ['it', 'de'] }];
+
+  assert.notEqual(faqSourceFingerprint(source), faqSourceFingerprint([...source].reverse()));
+  assert.notEqual(
+    faqSourceFingerprint(nestedArray),
+    faqSourceFingerprint([{ q: 'domanda', a: 'risposta', choices: ['de', 'it'] }]),
+  );
+});
+
 test('una potatura sopra il pavimento registra una scrittura parziale senza congelarla', () => {
   assert.equal(belowFaqFloor(pairs(5), pairs(8)), false, '5/8 supera il pavimento minimo');
   assert.equal(belowFaqSourceCount(pairs(5), pairs(8)), true, '5/8 non e\' una scrittura completa');
