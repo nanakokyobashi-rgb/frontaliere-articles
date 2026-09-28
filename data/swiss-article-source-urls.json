@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4011485": {
-    "articleId": "richieste-asilo-sotto-10-mila-primo-semestre",
-    "ts": "2026-08-25T14:27:13.309Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/carburanti%2c-prezzi-alti-alla-pompa-malgrado-calo-del-petrolio/91952169": {
     "articleId": "benzina-diesel-paradosso-petrolio",
     "ts": "2026-08-25T15:29:11.103Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/politica/1952986/qualita-iniziativa-istruzione-respinta-cantone": {
     "articleId": "bern-istruzione-qualita-respinta",
     "ts": "2026-09-28T02:29:03.547Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/svizzera/svizzera/1952964/l-iniziativa-sulla-neutralita-nettamente-bocciata-dal-popolo-svizzero": {
+    "articleId": "popolo-svizzero-boccia-neutralita",
+    "ts": "2026-09-28T03:12:15.928Z",
     "keyForm": 2
   }
 }
