@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1945646/svizzera-iniziativa-diritti-organizzazione-amnesty-deve-capacita-reagire-guerra-neutralita": {
-    "articleId": "amnesty-neutralita-crimini-guerra",
-    "ts": "2026-08-25T11:22:28.795Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1945933/orologi-rimane-export-mercati-due": {
     "articleId": "export-orologi-2026-prudenza-mercati",
     "ts": "2026-08-25T13:53:51.627Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/iniziativa-neutralit%c3%a0%3a-affossata-dal-popolo%2c-no-al-70%2c2%25/92126403": {
     "articleId": "esito-iniziativa-neutralita-svizzera",
     "ts": "2026-09-28T01:52:17.695Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/votazioni%3a-lu%2c-hooliganismo%2c-approvati-iniziativa-a-controprogetto/92128472": {
+    "articleId": "lucerna-voto-tifosi-ocse",
+    "ts": "2026-09-28T02:11:48.299Z",
     "keyForm": 2
   }
 }
