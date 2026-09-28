@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4011866": {
-    "articleId": "fondo-esercito-iva-compromesso",
-    "ts": "2026-08-25T21:11:37.666Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/%22iniziativa-neutralit%c3%a0-indebolisce-ruolo-svizzera-promozione-pace%22/91951495": {
     "articleId": "iniziativa-neutralita-svizzera-pace",
     "ts": "2026-08-25T21:52:39.694Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/attualita/1952641/digitale-al-massimo-difese-al-minimo": {
     "articleId": "svizzera-digitale-cyber-preparazione",
     "ts": "2026-09-28T07:42:43.778Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/cambiare-regolarmente-cassa-malati-permette-di-risparmiare/92130430": {
+    "articleId": "cambiare-cassa-malati-risparmio",
+    "ts": "2026-09-28T08:28:02.250Z",
     "keyForm": 2
   }
 }
