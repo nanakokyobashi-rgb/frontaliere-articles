@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1945933/orologi-rimane-export-mercati-due": {
-    "articleId": "export-orologi-2026-prudenza-mercati",
-    "ts": "2026-08-25T13:53:51.627Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4011485": {
     "articleId": "richieste-asilo-sotto-10-mila-primo-semestre",
     "ts": "2026-08-25T14:27:13.309Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/votazioni%3a-lu%2c-hooliganismo%2c-approvati-iniziativa-a-controprogetto/92128472": {
     "articleId": "lucerna-voto-tifosi-ocse",
     "ts": "2026-09-28T02:11:48.299Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1952986/qualita-iniziativa-istruzione-respinta-cantone": {
+    "articleId": "bern-istruzione-qualita-respinta",
+    "ts": "2026-09-28T02:29:03.547Z",
     "keyForm": 2
   }
 }
