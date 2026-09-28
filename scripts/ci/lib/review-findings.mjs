@@ -53,6 +53,16 @@ const EXTENSION_RE = /\.(?:cjs|css|html|js|json|md|mjs|rules|sh|ts|tsx|txt|toml|
 const BACKTICK_RE = /`([^`\n]{1,120})`/gu;
 const MARKER_RE = /(?:🔴|🟡|🟣|❓)[^\n]*/u;
 
+// A reviewer may explicitly dispose of a non-funnel Nit/question with the
+// contract suffix below. Keep this predicate shared by the review gate and
+// the lessons harvester: counting a Nit that the review contract already says
+// is deferred as a recurring rule failure creates a false escalation.
+const NON_FUNNEL_DISPOSITION_RE = /(?:^|[—–])\s*deferred\s*,\s*non\s+funnel-critical\.\s*$/iu;
+
+export function isExplicitNonFunnelDisposition(text) {
+  return NON_FUNNEL_DISPOSITION_RE.test(String(text || ''));
+}
+
 /**
  * Classe dichiarata dal reviewer. Assente o sconosciuta → `other`: una classe
  * inventata non deve comprare l'eccezione riservata a `regression`.
@@ -340,11 +350,16 @@ export function renderFindingsLedger({ open = [], confirmed = [], needsVerificat
   if (uniqueOpen.length === 0 && uniqueToVerify.length === 0 && uniqueConfirmed.length === 0) {
     return 'Nessun finding Important storico: questa è la prima review utile.';
   }
-  lines.push('Ogni voce porta il suo id stabile `(path, simbolo, classe)`, invariante alla riga.');
+  lines.push('Ogni voce porta il suo id stabile `(path, simbolo, classe, prosa)`, invariante alla riga.');
   lines.push('Riporta un `open` con lo STESSO id e testo; non rialzare un `confirmed`.');
+  // #9959: senza questa riga il reviewer non sapeva chiudere un `open` senza
+  // file e ne rialzava uno nuovo sul ledger stesso, a ogni giro.
+  // #10025: anche con file citati l'id è la conferma che regge righe spostate
+  // e più 🔴 sullo stesso file; `path:L<n>` si accoppiava solo per conteggio.
+  lines.push('Un `open` risolto si chiude con `` Fix di `<id>`: ok. `` più `` Fix di `path:L<riga attuale>`: ok. `` per ogni file citato (del body: `PR body:L<n>`); mai un 🔴 sul ledger stesso.');
   if (uniqueToVerify.length > 0) {
     lines.push(`Un \`${LEDGER_NEEDS_VERIFICATION}\` è aperto per il gate, ma una review approvante successiva ha confermato un fix sullo stesso file: `
-      + 'apri l’anchor all’HEAD e verifica. Se il fix c’è scrivi `` Fix di `path:L<riga attuale>`: ok. ``; '
+      + 'apri l’anchor all’HEAD e verifica. Se il fix c’è scrivi `` Fix di `<id>`: ok. `` e `` Fix di `path:L<riga attuale>`: ok. `` per ogni file citato; '
       + 'ripresentalo come 🔴 solo con evidenza dal codice attuale, mai ricopiandolo.');
   }
   lines.push('');

@@ -185,9 +185,9 @@
       "mode": "identical",
       "reason": "Identita' stabile dei finding, classe dichiarata, igiene del body e delta riga-per-riga. Sceso VERBATIM dal sito (valerielinc-ops/frontaliere-si-o-no#9318): il modulo e' puro, non importa il gate e riceve i finding gia' parsati, quindi non ha superficie da adattare — sono i CONSUMER a divergere (qui il classificatore vive in `review-scope.mjs`, la' dentro `review-gate.mjs`). Registrato nel manifest perche' senza voce il drift check non lo sorveglia, e una discesa futura porterebbe l'import senza il modulo.",
       "baseline": {
-        "site": "2bd1e1e5ee1ec58f",
-        "corpus": "2bd1e1e5ee1ec58f",
-        "alignedAt": "2026-09-27"
+        "site": "b699c4682cb95b7f",
+        "corpus": "b699c4682cb95b7f",
+        "alignedAt": "2026-09-28"
       }
     },
     {
@@ -215,9 +215,9 @@
       "path": "scripts/ci/check-issue-already-resolved.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "0dcda143bcb6bd73",
-        "corpus": "0dcda143bcb6bd73",
-        "alignedAt": "2026-09-25"
+        "site": "ec154784e099f89c",
+        "corpus": "ec154784e099f89c",
+        "alignedAt": "2026-09-28"
       }
     },
     {
@@ -3007,9 +3007,9 @@
       "sitePath": "build-plugins/shared/railGutters.ts",
       "mode": "identical",
       "baseline": {
-        "site": "649ba978a7be7869",
-        "corpus": "649ba978a7be7869",
-        "alignedAt": "2026-08-09"
+        "site": "1b55f084ebc648f8",
+        "corpus": "1b55f084ebc648f8",
+        "alignedAt": "2026-09-28"
       }
     },
     {
@@ -4202,9 +4202,9 @@
       "path": "scripts/ci/prefetch-review-diff.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "933a0bf94509b594",
-        "corpus": "933a0bf94509b594",
-        "alignedAt": "2026-09-25"
+        "site": "2e4eddd56e011cc4",
+        "corpus": "2e4eddd56e011cc4",
+        "alignedAt": "2026-09-28"
       }
     },
     {
@@ -4346,9 +4346,9 @@
       "path": ".github/actions/claude-codex-fallback/git-bridge-server.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "a14f24f6ef8e4b4c",
-        "corpus": "a14f24f6ef8e4b4c",
-        "alignedAt": "2026-09-22"
+        "site": "25f8137c77e8af1c",
+        "corpus": "25f8137c77e8af1c",
+        "alignedAt": "2026-09-28"
       }
     },
     {
