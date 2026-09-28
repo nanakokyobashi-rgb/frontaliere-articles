@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/cronaca/1946075/brienz-brinzauls-ricollocazione-alvaneu-tiefencastel": {
-    "articleId": "brienz-ricollocazione-sicurezza",
-    "ts": "2026-08-26T06:38:12.552Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/ffs-archiviano-un-buon-primo-semestre/91955616": {
     "articleId": "ffs-crescita-primo-semestre-2026",
     "ts": "2026-08-26T07:42:41.094Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/swiss-dota-la-propria-flotta-di-internet-satellitare/92131071": {
     "articleId": "swiss-starlink-flotta",
     "ts": "2026-09-28T12:49:03.699Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4117702": {
+    "articleId": "joseph-deiss-neutralita-attiva",
+    "ts": "2026-09-28T13:17:06.814Z",
     "keyForm": 2
   }
 }
