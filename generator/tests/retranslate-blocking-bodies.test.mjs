@@ -18,11 +18,12 @@
  *      ancora, o cucita a meta' perche' un campo e' tornato vuoto dalla
  *      cascata. Sono i tre `return {write:false}`: senza di loro lo script
  *      pubblica esattamente il difetto che doveva togliere.
- *   1-bis. `translationSanityIssue()` — i due modi in cui una ri-traduzione e'
- *      inutilizzabile SENZA che la guardia lo veda: un taglio a 2000 caratteri
- *      della sorgente (il tier HuggingFace) che lascia marker bilanciati e zero
- *      `critical`, e un passthrough dell'italiano, che ha per costruzione gli
- *      stessi numeri e nessun falso amico.
+ *   1-bis. `translationSanityIssue()` — i modi in cui una ri-traduzione resta
+ *      inutilizzabile dopo la guardia condivisa sul passthrough esatto: un
+ *      taglio a 2000 caratteri della sorgente (il tier HuggingFace) che lascia
+ *      marker bilanciati e zero `critical`, oppure un residuo italiano in un
+ *      solo campo. Il controllo per-campo resta anche difesa indipendente per
+ *      i chiamanti diretti della funzione.
  *   2. `replaceBodyField()` — sostituire il campo giusto ma corrompere il
  *      resto del file. Il round-trip verifica che riscrivere un campo col
  *      proprio valore sia un no-op byte per byte, e che un valore con
@@ -457,10 +458,10 @@ test('translationSanityIssue non giudica la lunghezza di un campo cortissimo', (
   }), null);
 });
 
-test('translationSanityIssue rifiuta il passthrough dell italiano', () => {
-  // Stessi numeri e nessun falso amico: la guardia lo accetta con zero
-  // `critical`, ed e' esattamente il caso in cui si pubblicherebbe l'italiano
-  // sulla pagina inglese.
+test('translationSanityIssue mantiene la difesa per-campo sull italiano', () => {
+  // La cascata condivisa rifiuta gia' questo passthrough esatto. Il test blinda
+  // anche il verdetto locale della funzione esportata: se riceve direttamente
+  // le sezioni, l'italiano non diventa pubblicabile sulla pagina inglese.
   const r = translationSanityIssue({
     oldSections: { body1: EN_LONG },
     newSections: { body1: IT_LONG },
