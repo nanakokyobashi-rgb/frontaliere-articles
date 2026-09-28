@@ -139,11 +139,23 @@ spariscono con lui — la convergenza si ferma al primo ciclo.
 
 Non ogni issue produce una PR, e forzarne una è peggio che non farla:
 
-- **Root cause non determinabile** → commenta cosa hai trovato e termina.
+- **Valgono solo i codici elencati in «Telemetria degli esiti»** (gli stessi di
+  `issue-fix.yml`). Un codice inventato non è un verdetto: il drainer non lo
+  parcheggia (`NON_RETRYABLE`) e ri-accoda la issue. `automation-deferred` è
+  una label, non un esito.
+- **Root cause non determinabile** → commenta "Root cause non determinata: <cosa
+  hai trovato>" con `<!-- FIX_OUTCOME: no-root-cause -->` e
+  `<!-- AUTOMATION_DEFERRED: technical -->`, applica la label
+  `automation-deferred` e termina. Nessuna domanda al proprietario: lo sweep
+  automatico deve prima cambiare input, scheda o osservabilità.
 - **Capability mancante** — il fix richiederebbe di toccare
   `.github/workflows/**` senza lo scope, o impostazioni del repo, o segreti non
-  presenti in CI. **Valutalo al turno 1, non alla fine:** fare tutto il lavoro
-  per poi scoprire il blocco al push spreca l'intero run.
+  presenti in CI → il `blocked-*` che la nomina. **Valutalo al turno 1, non
+  alla fine:** fare tutto il lavoro per poi scoprire il blocco al push spreca
+  l'intero run.
+- **Issue nel repo sbagliato** → migrala nel repo proprietario, collega le
+  schede e chiudi l'errata con evidenza. **Manca solo il dato** → strumenta
+  (emetti il dato quando l'evento accade), non parcheggiare.
 - **Overlap** — una PR aperta modifica già uno dei file target: fermarsi evita
   un conflitto o un doppione.
 - **Già risolta / recovery verificata** — se una fix è già su `main` o una finestra runtime

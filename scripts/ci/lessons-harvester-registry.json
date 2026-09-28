@@ -1,0 +1,34 @@
+{
+  "_doc": [
+    "Registro delle decisioni del lessons-harvester su ogni cluster proposto (corpus).",
+    "Letto da scripts/ci/harvest-agent-lessons.mjs (parseLessonsRegistry, gemello identical del",
+    "sito): un cluster registrato torna NOVEL solo se dopo `decidedAt` raccoglie di nuovo almeno",
+    "THRESHOLD esempi; `added` vale come regola documentata (puo' ancora escalare), `declined` e'",
+    "uno scarto per scelta. La proposta Codex di lessons-harvester.yml aggiunge o aggiorna una voce",
+    "per OGNI cluster novel che decide, nella stessa PR. key = `<source>/<key>` del cluster.",
+    "decidedAt = istante ISO UTC della decisione; ref = PR/issue; reason = perche'."
+  ],
+  "entries": [
+    {
+      "key": "reviewer-finding/fp:contratto-body-valido-presenti",
+      "outcome": "declined",
+      "decidedAt": "2026-09-09T10:39:32Z",
+      "ref": "#1290",
+      "reason": "Non e' un finding: il fingerprint raccoglie il recap positivo del reviewer sul contratto del body."
+    },
+    {
+      "key": "reviewer-finding/fp:review-input-revision-body",
+      "outcome": "added",
+      "decidedAt": "2026-09-19T10:03:33Z",
+      "ref": "#1598",
+      "reason": "REVIEW.md impone newline reali nel body della review e righe proprie per marker, heading, finding e `## LGTM`."
+    },
+    {
+      "key": "fix-outcome/fix-outcome:verified-recovered",
+      "outcome": "added",
+      "decidedAt": "2026-09-27T11:02:21Z",
+      "ref": "#1928",
+      "reason": "ISSUES.md > Terminare senza PR: recovery verificata = `already-fixed` con evidenza; niente codici ad hoc come `verified-recovered`."
+    }
+  ]
+}
