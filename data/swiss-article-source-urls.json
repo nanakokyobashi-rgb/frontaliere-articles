@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1945947/percento-popolazione-social-anni-svizzera-utilizzo-media-utilizza-sondaggio-ia": {
-    "articleId": "utilizzo-ia-svizzera-2026",
-    "ts": "2026-08-25T22:28:08.459Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/attualita/1945921/domande-asilo-svizzera-richieste-insieme": {
     "articleId": "calo-domande-asilo-2026",
     "ts": "2026-08-25T23:30:57.733Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/ticino/attualita/1953116/non-sai-se-devi-andare-al-pronto-soccorso-chiedi-al-medico": {
     "articleId": "pronto-consulto-mendrisiotto-basso-ceresio",
     "ts": "2026-09-28T09:07:41.987Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1953127/fornitori-pressione-navi-navigazione-burckhardt": {
+    "articleId": "navigazione-sostenibile-svizzera",
+    "ts": "2026-09-28T09:59:20.421Z",
     "keyForm": 2
   }
 }
