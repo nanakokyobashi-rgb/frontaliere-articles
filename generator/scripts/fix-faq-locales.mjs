@@ -15,7 +15,7 @@
  * l'array FAQ»). Opt-in: la run schedulata non la passa.
  */
 
-import { readFileSync, writeFileSync, existsSync, readdirSync, unlinkSync, renameSync, mkdirSync, realpathSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync, lstatSync, readdirSync, unlinkSync, renameSync, mkdirSync, realpathSync } from 'fs';
 import { createHash } from 'crypto';
 import { resolve, basename } from 'path';
 import { fileURLToPath } from 'url';
@@ -732,14 +732,22 @@ const FAQ_REJECTION_LEDGER_PATH = resolve(ROOT, FAQ_REJECTION_LEDGER_GIT_PATH);
 // parcheggiato e lo aggiorna a ogni rifiuto (run 36297637209: 36 articoli
 // ritradotti ogni giorno col budget Codex, 0 scritti).
 
-export function loadFaqRejectionLedger() {
-  if (!existsSync(FAQ_REJECTION_LEDGER_PATH)) return {};
+export function loadFaqRejectionLedger(ledgerPath = FAQ_REJECTION_LEDGER_PATH) {
   try {
-    const parsed = JSON.parse(readFileSync(FAQ_REJECTION_LEDGER_PATH, 'utf-8'));
-    return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {};
+    lstatSync(ledgerPath);
   } catch (err) {
-    console.error(`⚠️ Impossibile leggere ${FAQ_REJECTION_LEDGER_PATH}: ${err.message}`);
-    return {};
+    if (err.code === 'ENOENT') return {};
+    throw new Error(`Impossibile leggere il ledger FAQ ${ledgerPath}: ${err.message}`, { cause: err });
+  }
+
+  try {
+    const parsed = JSON.parse(readFileSync(ledgerPath, 'utf-8'));
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+      throw new TypeError('atteso un oggetto JSON');
+    }
+    return parsed;
+  } catch (err) {
+    throw new Error(`Impossibile leggere il ledger FAQ ${ledgerPath}: ${err.message}`, { cause: err });
   }
 }
 
