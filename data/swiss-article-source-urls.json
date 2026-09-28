@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4014133": {
-    "articleId": "allerte-popolazione-cell-broadcast",
-    "ts": "2026-08-26T10:54:48.329Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/imprese-settore-mem%2c-ci-sono-segnali-di-ripresa/91957167": {
     "articleId": "imprese-mem-segnali-ripresa",
     "ts": "2026-08-26T12:06:23.291Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/politica/1953272/riserva-nazionale-centrali-destinati-monthey": {
     "articleId": "riserva-elettrica-nazionale-monthey",
     "ts": "2026-09-28T17:18:35.581Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1953257/requisiti-peste-aziende-stati-collaborazione": {
+    "articleId": "norme-biosicurezza-peste-suina",
+    "ts": "2026-09-28T17:36:45.149Z",
     "keyForm": 2
   }
 }
