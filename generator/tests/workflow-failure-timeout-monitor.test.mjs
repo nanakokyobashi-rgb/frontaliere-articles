@@ -127,6 +127,17 @@ test('scanner generico e specializzato condividono finestra e clock di completam
   assert.doesNotMatch(TIMEOUT_SCANNER, /Date\.parse\(run\.created_at\) < cutoffMs/);
 });
 
+test('il watermark timeout accetta soltanto una history schedule leggibile', () => {
+  assert.match(
+    TIMEOUT_SCANNER,
+    /runs\?status=success&event=schedule&per_page=1/,
+    'workflow_dispatch e dry-run non devono avanzare il watermark',
+  );
+  assert.match(TIMEOUT_SCANNER, /!data \|\| !Array\.isArray\(data\.workflow_runs\)/);
+  assert.match(TIMEOUT_SCANNER, /data\.workflow_runs\.length === 0\) return Number\.NaN/);
+  assert.match(TIMEOUT_SCANNER, /run\?\.event !== 'schedule'/);
+});
+
 test('il deep scan osserva una run creata oltre 3 giorni fa ma aggiornata nel cutoff', () => {
   const binDir = mkdtempSync(path.join(os.tmpdir(), 'timeout-updated-at-gh-'));
   const ghPath = path.join(binDir, 'gh');
@@ -152,6 +163,8 @@ test('il deep scan osserva una run creata oltre 3 giorni fa ma aggiornata nel cu
   writeFileSync(ghPath, `#!/bin/sh
 printf '%s\n' "$*" >> "$ARGS_LOG"
 case "$2" in
+  *"status=success&event=schedule"*)
+    printf '%s' '{"workflow_runs":[]}' ;;
   *"actions/runs?status=cancelled"*)
     printf '%s' '${JSON.stringify({ workflow_runs: [run] })}' ;;
   *"actions/runs?status=failure"*)
@@ -182,6 +195,11 @@ esac
     assert.match(result.stdout, /1 cancelled \+ 0 failed run\(s\)/);
     assert.match(result.stdout, /\(dry-run\) would report "CI Failure: Translate pending articles"/);
 
+    const historyListing = readFileSync(argsLog, 'utf8')
+      .split('\n')
+      .find((line) => line.includes('status=success&event=schedule'));
+    assert.ok(historyListing, 'history schedule non osservata');
+
     const cancelledListing = readFileSync(argsLog, 'utf8')
       .split('\n')
       .find((line) => line.includes('actions/runs?status=cancelled'));
@@ -193,6 +211,31 @@ esac
     const observedHorizonMs = now - Date.parse(oldest);
     assert.ok(observedHorizonMs >= expectedHorizonMs - 1_000, `${observedHorizonMs}ms`);
     assert.ok(observedHorizonMs < expectedHorizonMs + 60_000, `${observedHorizonMs}ms`);
+  } finally {
+    rmSync(binDir, { recursive: true, force: true });
+  }
+});
+
+test('history schedule illeggibile rende rosso il monitor invece di usare il floor', () => {
+  const binDir = mkdtempSync(path.join(os.tmpdir(), 'timeout-history-gh-'));
+  const ghPath = path.join(binDir, 'gh');
+  writeFileSync(ghPath, `#!/bin/sh
+printf '%s' '[]'
+`);
+  chmodSync(ghPath, 0o755);
+
+  try {
+    const result = spawnSync(process.execPath, [TIMEOUT_SCANNER_PATH, '--dry-run'], {
+      encoding: 'utf8',
+      env: {
+        ...process.env,
+        PATH: `${binDir}:${process.env.PATH}`,
+        GH_REPO: 'o/r',
+        TIMEOUT_SCAN_MAX_RUN_AGE_MINUTES: String(35 * 24 * 60),
+      },
+    });
+    assert.equal(result.status, 1);
+    assert.match(result.stderr, /impossibile leggere la history delle scansioni schedule riuscite/);
   } finally {
     rmSync(binDir, { recursive: true, force: true });
   }

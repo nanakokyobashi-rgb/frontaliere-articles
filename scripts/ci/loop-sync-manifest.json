@@ -408,7 +408,7 @@
         "alignedAt": "2026-09-26",
         "forcedAt": "2026-09-26T11:35:00.000Z"
       },
-      "reason": "Dipendenza non dichiarata di scripts/ci/scan-job-timeouts.mjs, importata dal sito in #7462 (05/09) come './report-validate-dist-failure.mjs' ma assente qui: il corpus-ahead-check del sito la segnala 'import-not-declared'. Portato quasi-VERBATIM per non lasciare rotto un futuro trasporto di scan-job-timeouts.mjs (both-moved), che qui NON viene ancora riconciliato: resta un modulo raggiungibile solo da altri eventuali import diretti finche' quella riconciliazione non arriva. Registrata lontano dalla voce di scan-job-timeouts.mjs per non creare conflitto quando quel trasporto verra' fatto. Diverge dal sito per un bug trovato dalla review Codex su questa stessa PR (#1894): `reportDist` troncava a MAX_PER_GATE_ISSUES la lista dei JOB falliti PRIMA di estrarne i gate, invece di troncare solo i gate/payload dopo la deduplicazione — con piu' di tre job validate-dist falliti (la matrice tipica e' a 4 locale), il quarto job perdeva per sempre il proprio gate. Fix applicata SOLO qui perche' il sito non va toccato da questo ciclo; e' un candidato di backport per il sito, non ancora fatto."
+      "reason": "Dipendenza adapted di scripts/ci/scan-job-timeouts.mjs, importata dal sito in #7462 (05/09) come './report-validate-dist-failure.mjs': dal trasporto #1971 e' presente e raggiungibile anche qui dallo scanner riconciliato. Diverge dal sito per un bug trovato dalla review Codex sulla PR #1894: `reportDist` troncava a MAX_PER_GATE_ISSUES la lista dei JOB falliti PRIMA di estrarne i gate, invece di troncare solo i gate/payload dopo la deduplicazione — con piu' di tre job validate-dist falliti (la matrice tipica e' a 4 locale), il quarto job perdeva per sempre il proprio gate. Fix applicata SOLO qui perche' il sito non andava toccato da quel ciclo; e' un candidato di backport per il sito, non ancora fatto."
     },
     {
       "path": "scripts/ci/lib/pr-review-admission.mjs",
@@ -559,11 +559,11 @@
     {
       "path": "scripts/ci/scan-job-timeouts.mjs",
       "mode": "identical",
-      "reason": "RICONCILIATO 2026-09-28 (issue #1110, trasporto concatenato da Site #10266 e follow-up #10273): lo scanner torna byte-identico al sito. Il lookback derivato ha un ceiling effettivo di 12 ore; l'orizzonte `created` realtime di 3 giorni e' fail-closed senza opt-in esplicito, mentre l'override retention-complete a 35 giorni conserva le run create oltre 3 giorni ma aggiornate nel cutoff. Split e paginazione evitano il limite di 1.000 risultati per search.",
+      "reason": "RICONCILIATO 2026-09-28 (issue #1110, trasporto concatenato da Site #10266 e follow-up #10273/#10277): lo scanner torna byte-identico al sito. Il watermark usa soltanto run `schedule` riuscite e distingue il primo avvio leggibile da una history illeggibile, che fallisce chiusa. Il lookback derivato ha un ceiling effettivo di 12 ore; l'orizzonte `created` realtime di 3 giorni e' fail-closed senza opt-in esplicito, mentre l'override retention-complete a 35 giorni conserva le run create oltre 3 giorni ma aggiornate nel cutoff. Split e paginazione evitano il limite di 1.000 risultati per search.",
       "baseline": {
-        "site": "f0a4e40bd5a59d9f",
-        "corpus": "f0a4e40bd5a59d9f",
-        "alignedAt": "2026-09-28"
+        "site": "9c97c7d9d24d6b62",
+        "corpus": "9c97c7d9d24d6b62",
+        "alignedAt": "2026-09-29"
       }
     },
     {
@@ -826,11 +826,11 @@
     {
       "path": "generator/tests/workflow-failure-timeout-monitor.test.mjs",
       "mode": "corpus-only",
-      "reason": "Gate adattato del monitor centrale Corpus: esercita insieme workflow-failure-issues.yml, lo scanner identical e il gemello corpus-only scan-failed-runs.mjs. Il sito copre gli stessi invarianti con i test Vitest tests/scan-job-timeouts-gap-window.test.ts e tests/scan-job-timeouts-observation-window.test.ts, quindi non esiste un file omonimo da trasportare byte-identico. Dal trasporto #1971 inchioda l'opt-in realtime, il fail-closed sotto 35 giorni, il cap 720m e una run creata 4 giorni prima ma aggiornata nel cutoff.",
+      "reason": "Gate adattato del monitor centrale Corpus: esercita insieme workflow-failure-issues.yml, lo scanner identical e il gemello corpus-only scan-failed-runs.mjs. Il sito copre gli stessi invarianti con i test Vitest tests/scan-job-timeouts-gap-window.test.ts e tests/scan-job-timeouts-observation-window.test.ts, quindi non esiste un file omonimo da trasportare byte-identico. Dal trasporto #1971 inchioda l'opt-in realtime, il fail-closed sotto 35 giorni, il cap 720m, una run creata 4 giorni prima ma aggiornata nel cutoff e il watermark schedule-only con history illeggibile fail-closed.",
       "baseline": {
         "site": null,
-        "corpus": "c17bebeb12dbd7fa",
-        "alignedAt": "2026-09-28"
+        "corpus": "2a5e3fbdf5adcf8f",
+        "alignedAt": "2026-09-29"
       }
     },
     {
