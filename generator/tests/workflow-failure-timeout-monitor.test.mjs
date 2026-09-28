@@ -95,9 +95,10 @@ test('scanner generico e specializzato condividono finestra e clock di completam
   assert.doesNotMatch(TIMEOUT_SCANNER, /Date\.parse\(run\.created_at\) < cutoffMs/);
 });
 
-test('un timeout iniziato 350 minuti fa ma appena concluso resta osservabile', () => {
+test('un timeout iniziato 350 minuti fa resta osservabile dentro il budget di ricerca di 3 giorni', () => {
   const binDir = mkdtempSync(path.join(os.tmpdir(), 'timeout-updated-at-gh-'));
   const ghPath = path.join(binDir, 'gh');
+  const argsLog = path.join(binDir, 'args.log');
   const now = Date.now();
   const run = {
     id: 456,
@@ -117,6 +118,7 @@ test('un timeout iniziato 350 minuti fa ma appena concluso resta osservabile', (
     check_run_url: 'repos/o/r/check-runs/789',
   };
   writeFileSync(ghPath, `#!/bin/sh
+printf '%s\n' "$*" >> "$ARGS_LOG"
 case "$2" in
   *"actions/runs?status=cancelled"*)
     printf '%s' '${JSON.stringify({ workflow_runs: [run] })}' ;;
@@ -125,7 +127,7 @@ case "$2" in
   "repos/o/r/actions/runs/456/jobs?per_page=100")
     printf '%s' '${JSON.stringify({ jobs: [job] })}' ;;
   "repos/o/r/check-runs/789/annotations")
-    printf '%s' '[{"message":"The job exceeded the maximum execution time"}]' ;;
+    printf '%s' '[[{"message":"The job exceeded the maximum execution time"}]]' ;;
   *)
     printf '%s' '[]' ;;
 esac
@@ -138,6 +140,7 @@ esac
       env: {
         ...process.env,
         PATH: `${binDir}:${process.env.PATH}`,
+        ARGS_LOG: argsLog,
         GH_REPO: 'o/r',
         TIMEOUT_SCAN_LOOKBACK_MINUTES: '40',
       },
@@ -145,6 +148,18 @@ esac
     assert.equal(result.status, 0, result.stderr);
     assert.match(result.stdout, /1 cancelled \+ 0 failed run\(s\)/);
     assert.match(result.stdout, /\(dry-run\) would report "CI Failure: Translate pending articles"/);
+
+    const cancelledListing = readFileSync(argsLog, 'utf8')
+      .split('\n')
+      .find((line) => line.includes('actions/runs?status=cancelled'));
+    assert.ok(cancelledListing, 'listing cancelled non osservato');
+    const created = new URLSearchParams(cancelledListing.split('?')[1]).get('created');
+    assert.ok(created?.includes('..'), 'range created mancante');
+    const [oldest] = created.split('..');
+    const expectedHorizonMs = (3 * 24 * 60 + 40) * 60_000;
+    const observedHorizonMs = now - Date.parse(oldest);
+    assert.ok(observedHorizonMs >= expectedHorizonMs - 1_000, `${observedHorizonMs}ms`);
+    assert.ok(observedHorizonMs < expectedHorizonMs + 60_000, `${observedHorizonMs}ms`);
   } finally {
     rmSync(binDir, { recursive: true, force: true });
   }
@@ -172,7 +187,8 @@ test('issue chiuse e titoli lunghi passano dal reopener senza dedup instabile', 
   assert.match(TIMEOUT_SCANNER, /const titlePrefix = searchSafePrefix\(title\)/);
   assert.doesNotMatch(TIMEOUT_SCANNER, /title\.slice\(0,\s*60\)/);
   assert.match(TIMEOUT_SCANNER, /'--json', 'number,title,state'/);
-  assert.match(TIMEOUT_SCANNER, /already && already\.state !== 'CLOSED'/);
+  assert.match(TIMEOUT_SCANNER, /already && normalizedIssueState\(already\) === 'OPEN'/);
+  assert.match(TIMEOUT_SCANNER, /state: normalizedIssueState\(issue\)/);
 });
 
 test('una write fallita resta retryable e rende rosso il monitor', () => {
