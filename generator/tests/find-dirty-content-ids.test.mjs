@@ -67,6 +67,8 @@ import {
   BODY_DIR_SECTIONS,
   validateDirtySurfaceSnapshot,
   fetchAnnouncedSurface,
+  ANNOUNCED_SURFACE_MAX_ATTEMPTS,
+  ANNOUNCED_SURFACE_MAX_DURATION_MS,
   ANNOUNCED_SURFACE_RETRY_DELAY_MS,
 } from '../../scripts/find-dirty-content-ids.mjs';
 
@@ -177,6 +179,17 @@ test('validateDirtySurfaceSnapshot rifiuta un id sostituito anche a cardinalita 
   assert.ok(errors.some((error) => error.includes('slugs.blog') && error.includes('id1')), errors.join('; '));
 });
 
+test('validateDirtySurfaceSnapshot rifiuta una release diversa anche con counts e ID identici', () => {
+  const surface = announcedSurfaceFixture();
+  surface.slugs.commit = 'generation-2';
+  surface.articles = surface.articles.map((article) => ({ ...article, commit: 'generation-2' }));
+  surface.swissArticles = surface.swissArticles.map((article) => ({ ...article, commit: 'generation-2' }));
+  const errors = validateDirtySurfaceSnapshot(surface).join('\n');
+  assert.match(errors, /slugs\.json appartiene al commit generation-2/);
+  assert.match(errors, /articles\.json appartiene a un commit diverso/);
+  assert.match(errors, /swiss-articles\.json appartiene a un commit diverso/);
+});
+
 test('la superficie incoerente viene ritentata come snapshot intero con cache-bust condiviso', async () => {
   const coherent = announcedSurfaceFixture();
   const mixed = {
@@ -255,6 +268,38 @@ test('una superficie incoerente persistente resta fail-closed dopo il budget', a
 
   assert.equal(calls.length, 8, 'il retry ripete tutti i quattro documenti');
   assert.deepEqual(waits, [ANNOUNCED_SURFACE_RETRY_DELAY_MS]);
+});
+
+test('il reader dirty applica un budget wall-clock condiviso a retry e backoff', async () => {
+  let clock = 0;
+  const calls = [];
+  const deadlines = [];
+  const waits = [];
+
+  await assert.rejects(
+    () => fetchAnnouncedSurface('https://api.example.test/articles', {
+      fetchJsonImpl: async (url, options) => {
+        calls.push(url);
+        deadlines.push(options.deadline);
+        clock += 60;
+        throw new Error('network down');
+      },
+      wait: async (ms) => {
+        waits.push(ms);
+        clock += ms;
+      },
+      now: () => clock,
+      maxAttempts: ANNOUNCED_SURFACE_MAX_ATTEMPTS,
+      maxDurationMs: 250,
+      retryDelayMs: 100,
+    }),
+    /budget 250ms/,
+  );
+
+  assert.ok(calls.length < ANNOUNCED_SURFACE_MAX_ATTEMPTS, 'il deadline deve prevalere sul numero massimo di tentativi');
+  assert.deepEqual([...new Set(deadlines)], [250]);
+  assert.deepEqual(waits, [100, 30]);
+  assert.equal(ANNOUNCED_SURFACE_MAX_DURATION_MS, 180_000);
 });
 
 // ── scanContentForDirtyIds: fixture su disco (unico punto che tocca fs) ────
