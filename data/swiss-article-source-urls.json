@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/ticino/attualita/1946192/elettricita-e-gas-meno-cari-nel-2027": {
-    "articleId": "elettricita-gas-meno-cari-2027",
-    "ts": "2026-08-26T15:25:32.735Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/politica/1946242/iniziativa-sull-alimentazione-il-fronte-del-no-obiettivi-impossibili": {
     "articleId": "iniziativa-alimentazione-no",
     "ts": "2026-08-26T16:14:03.730Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4119484": {
     "articleId": "vaud-riduzione-reddito-sostanza",
     "ts": "2026-09-28T21:32:07.385Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1953221/chi-se-la-cavera-meglio-in-un-mondo-del-lavoro-sconvolto-dall-ia": {
+    "articleId": "ia-lavoro-donne-uomini-2030",
+    "ts": "2026-09-28T22:31:41.972Z",
     "keyForm": 2
   }
 }
