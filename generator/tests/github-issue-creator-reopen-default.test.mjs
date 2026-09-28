@@ -200,7 +200,7 @@ test('senza opzioni: riapre la gemella chiusa invece di creare (invariante)', as
   assert.equal(res?.reopened, true);
 });
 
-test('costa 1 sola chiamata sulle chiuse, e chiede una pagina piu\' larga di 10', async () => {
+test('riconcilia indice e listing delle chiuse, con una pagina piu\' larga di 10', async () => {
   // A 244 issue/settimana aperte da monitor sui due repo, il costo per tentativo
   // e' load-bearing: la ricerca fra le chiuse non deve paginare. E la pagina
   // dev'essere piu' larga del ramo APERTE: di canonical aperti con lo stesso
@@ -211,13 +211,18 @@ test('costa 1 sola chiamata sulle chiuse, e chiede una pagina piu\' larga di 10'
   await createGithubIssue({ title: TITLE_NOW, description: 'misura', priority: 2 });
 
   const closed = listsFor('closed');
-  assert.equal(closed.length, 1, 'l\'indice ha risposto: nessun ripiego deve partire');
-  assert.ok(!closed[0].includes('--paginate'));
-  const limit = Number(closed[0][closed[0].indexOf('--limit') + 1]);
+  assert.equal(closed.length, 2, 'indice e listing immediatamente consistente vanno entrambi letti');
+  const search = closed.find((args) => args.includes('--search'));
+  const listing = closed.find((args) => !args.includes('--search'));
+  assert.ok(search, 'ricerca indicizzata delle chiuse mancante');
+  assert.ok(listing, 'listing immediatamente consistente delle chiuse mancante');
+  assert.ok(!search.includes('--paginate'));
+  assert.ok(!listing.includes('--paginate'));
+  const limit = Number(search[search.indexOf('--limit') + 1]);
   assert.ok(limit > 10, `--limit ${limit} non e' piu' largo del ramo aperte`);
   // I due campi che i tre filtri leggono devono essere CHIESTI: senza, arrivano
   // undefined e il guard sui tracker/NOT_PLANNED passa sempre.
-  const json = closed[0][closed[0].indexOf('--json') + 1];
+  const json = search[search.indexOf('--json') + 1];
   assert.ok(json.includes('stateReason'), '--json senza stateReason: il filtro NOT_PLANNED e\' cieco');
   assert.ok(json.includes('labels'), '--json senza labels: il filtro sui tracker e\' cieco');
   assert.ok(json.includes('closedAt'), '--json senza closedAt: la finestra dei 30gg e\' cieca');

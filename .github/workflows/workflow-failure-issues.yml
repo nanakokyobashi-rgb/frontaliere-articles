@@ -139,6 +139,10 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
+          # La query Actions filtra per created, non updated: 3 giorni sono un
+          # budget realtime esplicito. I deep scan retention-complete usano
+          # l'override 35d senza questo opt-in.
+          TIMEOUT_SCAN_ALLOW_TRUNCATED_CREATED_HORIZON: 'true'
           # NON si interpola `env.SCAN_RESOLVED_LOOKBACK_MIN` qui: una variabile
           # scritta in `GITHUB_ENV` da un passo precedente non alimenta in modo
           # affidabile il context `env.*` del passo successivo — è la stessa

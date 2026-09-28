@@ -698,6 +698,19 @@ const DECLARED_ABSENT = {
       'Descrittiva: la firma B e\' generica e non conosce nessun workflow per nome. La catena ' +
       'di pubblicazione di questo repo e\' `publish-api.yml`, che non c\'entra con quella.',
   },
+  'scripts/ci/scan-job-timeouts.mjs :: .github/workflows/foo.yml': {
+    kind: 'example',
+    reason:
+      'Path dimostrativo nel commento che spiega la redazione dei body; lo scanner non lo ' +
+      'importa, non lo legge e non dipende dalla sua esistenza.',
+  },
+  'scripts/ci/scan-job-timeouts.mjs :: job-timeout-monitor.yml': {
+    kind: 'site-only',
+    reason:
+      'Default del gemello Site. Nel Corpus il workflow centrale si chiama ' +
+      '`workflow-failure-issues.yml` e lo passa esplicitamente via ' +
+      '`TIMEOUT_SCAN_WORKFLOW_FILE`; il nome Site non e un referente runtime locale.',
+  },
   'scripts/lib/workflow-scope-detect.mjs :: .github/workflows/content-grounding-audit.yml': {
     kind: 'example',
     reason:
