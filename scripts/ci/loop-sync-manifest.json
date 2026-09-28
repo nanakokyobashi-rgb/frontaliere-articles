@@ -3464,8 +3464,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-04.yml",
       "mode": "identical",
       "baseline": {
-        "site": "a8f9ee26aae710f8",
-        "corpus": "a8f9ee26aae710f8",
+        "site": "4130e1ed1de007ca",
+        "corpus": "4130e1ed1de007ca",
         "alignedAt": "2026-09-28"
       }
     },
@@ -3524,8 +3524,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-10.yml",
       "mode": "identical",
       "baseline": {
-        "site": "e39d8f57890897aa",
-        "corpus": "e39d8f57890897aa",
+        "site": "9944dce2e99087e8",
+        "corpus": "9944dce2e99087e8",
         "alignedAt": "2026-09-28"
       }
     },
@@ -3534,8 +3534,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-11.yml",
       "mode": "identical",
       "baseline": {
-        "site": "209e896180747800",
-        "corpus": "209e896180747800",
+        "site": "d2ebe46287c38002",
+        "corpus": "d2ebe46287c38002",
         "alignedAt": "2026-09-28"
       }
     },
@@ -3654,8 +3654,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-23.yml",
       "mode": "identical",
       "baseline": {
-        "site": "6f5f96ca866dc79c",
-        "corpus": "6f5f96ca866dc79c",
+        "site": "6b55e197d51cd218",
+        "corpus": "6b55e197d51cd218",
         "alignedAt": "2026-09-28"
       }
     },
@@ -3675,8 +3675,8 @@
       "mode": "identical",
       "reason": "Riallineato il 2026-09-24 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono ora byte-identici fra sito e corpus, con il roster corrente di 621 crawler.",
       "baseline": {
-        "site": "c681764652e1e605",
-        "corpus": "c681764652e1e605",
+        "site": "9129a8838450d07e",
+        "corpus": "9129a8838450d07e",
         "alignedAt": "2026-09-28"
       }
     },
@@ -4403,8 +4403,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-24.yml",
       "mode": "identical",
       "baseline": {
-        "site": "9a608f8c2b14707f",
-        "corpus": "9a608f8c2b14707f",
+        "site": "c6f1d88317297034",
+        "corpus": "c6f1d88317297034",
         "alignedAt": "2026-09-28"
       }
     },
