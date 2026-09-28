@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/prezzo-della-benzina-e-del-diesel-torna-a-scendere-in-svizzera/91958237": {
-    "articleId": "benzina-diesel-prezzi-calano",
-    "ts": "2026-08-26T12:39:09.115Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/politica/1946160/federale-supplementari-siccita-bosco-cambiamenti": {
     "articleId": "fondi-siccita-foreste-agricoltura",
     "ts": "2026-08-26T13:12:39.503Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1953260/migros-edeka-supermercati-tegut-acquirenti": {
     "articleId": "migros-tegut-24-acquirenti",
     "ts": "2026-09-28T18:01:39.703Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1953247/snl-servizio-decisione-cantone-societa-navigazione-personale-conseguenze-contratto": {
+    "articleId": "snl-contratto-alternativo-personale",
+    "ts": "2026-09-28T18:40:39.804Z",
     "keyForm": 2
   }
 }
