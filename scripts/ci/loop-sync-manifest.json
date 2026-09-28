@@ -1271,6 +1271,16 @@
       }
     },
     {
+      "path": "scripts/ci/lessons-harvester-registry.json",
+      "mode": "corpus-only",
+      "reason": "Registro versionato delle decisioni del lessons-harvester di questo corpus: il workflow e `harvest-agent-lessons.mjs` lo usano per non riproporre cluster gia' decisi. Il sito non ha questo registro ne' il consumer corpus-side, quindi non esiste un gemello da portare e il file resta corpus-only.",
+      "baseline": {
+        "site": null,
+        "corpus": "c1f3b12275a69cc9",
+        "alignedAt": "2026-09-28"
+      }
+    },
+    {
       "path": "scripts/ci/lib/false-positive-declaration.mjs",
       "mode": "identical",
       "baseline": {
