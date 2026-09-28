@@ -15,7 +15,7 @@
  * l'array FAQ»). Opt-in: la run schedulata non la passa.
  */
 
-import { readFileSync, writeFileSync, lstatSync, readdirSync, unlinkSync, renameSync, mkdirSync, realpathSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync, lstatSync, readdirSync, unlinkSync, renameSync, mkdirSync, realpathSync } from 'fs';
 import { createHash } from 'crypto';
 import { resolve, basename } from 'path';
 import { fileURLToPath } from 'url';
