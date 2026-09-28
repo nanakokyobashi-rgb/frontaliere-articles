@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/amrize%3a-il-cfo-lascia-a-sorpresa%2c-gi%c3%b9-in-borsa/91950409": {
-    "articleId": "amrize-cfo-lascia-sorpresa-borsa",
-    "ts": "2026-08-25T10:57:25.149Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/z-jlxixpvkzj6al0r7rkj": {
     "articleId": "pagamenti-offline-carte-2026",
     "ts": "2026-08-25T11:17:06.111Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/politica/1952949/bellinzona": {
     "articleId": "voto-svizzera-esiti-politici",
     "ts": "2026-09-28T00:44:48.636Z",
+    "keyForm": 2
+  },
+  "https://lenews.ch/2026/09/27/swiss-voters-decisively-reject-initiatives-on-neutrality-and-food-security": {
+    "articleId": "voto-iniziative-neutralita-cibo",
+    "ts": "2026-09-28T01:11:41.327Z",
     "keyForm": 2
   }
 }
