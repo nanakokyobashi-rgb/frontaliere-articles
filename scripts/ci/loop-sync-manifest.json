@@ -1271,6 +1271,16 @@
       }
     },
     {
+      "path": "scripts/ci/lessons-harvester-registry.json",
+      "mode": "adapted",
+      "reason": "Registro delle decisioni del lessons-harvester: stesso schema del sito (parseLessonsRegistry nel gemello identical harvest-agent-lessons.mjs, sito #10225), ma voci diverse per costruzione, perche' ogni repo registra i propri cluster e le proprie PR. Si corregge lo schema nel sito, le voci in ciascun repo.",
+      "baseline": {
+        "site": "5d68789d78ab1bcd",
+        "corpus": "68fb354dfe1ef885",
+        "alignedAt": "2026-09-28"
+      }
+    },
+    {
       "path": "scripts/ci/lib/false-positive-declaration.mjs",
       "mode": "identical",
       "baseline": {
@@ -1768,7 +1778,7 @@
       "reason": "Helper introdotto con #1956 perche' `scripts/find-dirty-content-ids.mjs` e `scripts/reconcile-article-shards.mjs` validino gli stessi quattro JSON pubblicati come snapshot di release, con retry e deadline condivisi. Entrambi sono reader interni del publisher corpus; il sito consuma questa superficie via HTTP e non ha un reader equivalente ne' un gemello in `origin/main`. Corpus-only per costruzione: non c'e' comportamento da trasportare e non serve una issue di porting.",
       "baseline": {
         "site": null,
-        "corpus": "0693c262231502db",
+        "corpus": "b6c14d76619bf0b6",
         "alignedAt": "2026-09-28"
       }
     },
