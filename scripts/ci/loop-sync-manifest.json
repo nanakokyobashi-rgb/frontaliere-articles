@@ -817,7 +817,7 @@
     {
       "path": "scripts/lib/crawler-generation-token.mjs",
       "mode": "identical",
-      "reason": "Grammatica del token di generazione dei crawler, importata come `../lib/crawler-generation-token.mjs` da `scripts/ci/close-recovered-failure-issues.mjs` (identical): senza questa copia la discesa verbatim di quel file darebbe ERR_MODULE_NOT_FOUND. E' la terza copia nel corpus dello stesso file del sito, byte-identica alle altre due (`scripts/ci/lib/` e `.github/workflows/observers/scripts/lib/`), perche' ogni importatore la cerca accanto a se' con lo stesso path relativo che usa sul sito; il `sitePath` e' il path stesso, come per la voce degli observer (valerielinc-ops/frontaliere-si-o-no#7483).",
+      "reason": "Grammatica del token di generazione dei crawler, importata come `../lib/crawler-generation-token.mjs` da `scripts/ci/close-recovered-failure-issues.mjs` (identical): senza questa copia la discesa verbatim di quel file darebbe ERR_MODULE_NOT_FOUND. E' la terza copia nel corpus dello stesso file del sito, byte-identica alle altre due (`scripts/ci/lib/` e `.github/workflows/observers/scripts/lib/`), perche' ogni importatore la cerca accanto a se' con lo stesso path relativo che usa sul sito. Il gemello e' lo stesso path sul sito; per questo la voce degli observer non puo' piu' puntare qui (vedi la sua `reason`) (valerielinc-ops/frontaliere-si-o-no#7483).",
       "baseline": {
         "site": "4bc0d4d514be3f67",
         "corpus": "4bc0d4d514be3f67",
@@ -3879,8 +3879,9 @@
     },
     {
       "path": ".github/workflows/observers/scripts/lib/crawler-generation-token.mjs",
-      "sitePath": "scripts/lib/crawler-generation-token.mjs",
+      "sitePath": ".github/corpus-workflows/observers/scripts/lib/crawler-generation-token.mjs",
       "mode": "identical",
+      "reason": "2026-09-29 (valerielinc-ops/frontaliere-si-o-no#7483): `sitePath` riportato sulla copia del sito sotto `.github/corpus-workflows/observers/`, che e' la sorgente di questa (canale dedicato, `generator/data/crawler-cross-repo-contract.json`) e il mapping con cui la voce era nata il 2026-09-17 (#1542). Dal #1734 puntava a `scripts/lib/crawler-generation-token.mjs`, byte-identica; ora quel path e' anche una voce del corpus (import di `close-recovered-failure-issues.mjs`), e `readManifestSnapshot()` di handoff-to-site.mjs rifiuta un `sitePath` che e' il path corpus di un'altra voce. Contenuto e baseline invariati.",
       "baseline": {
         "site": "4bc0d4d514be3f67",
         "corpus": "4bc0d4d514be3f67",
