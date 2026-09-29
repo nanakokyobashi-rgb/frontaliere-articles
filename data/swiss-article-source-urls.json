@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4011503": {
-    "articleId": "berna-rinnova-festival-cinematografici",
-    "ts": "2026-08-27T22:40:23.550Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/attualita/1946469/reno-svizzera-ricerca-cinque-allarme": {
     "articleId": "reno-navigabilita-futuro-allarme",
     "ts": "2026-08-28T03:54:52.342Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/gr%3a-l%27aeroporto-di-samedan-aspetta-di-poter-decollare/92140070": {
     "articleId": "samedan-aeroporto-rinnovo-2025",
     "ts": "2026-09-29T22:17:12.765Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1953495/armi-svizzere-berna-vuole-facilitare-l-esportazione-di-materiale-bellico": {
+    "articleId": "revisione-legge-materiale-bellico",
+    "ts": "2026-09-29T22:44:38.902Z",
     "keyForm": 2
   }
 }
