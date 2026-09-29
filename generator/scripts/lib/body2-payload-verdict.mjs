@@ -960,6 +960,13 @@ const TOP_SECTION_HEADING_RE = /^##(?!#)\s*\S/;
  * body1, in quest'ordine: «Inizia con '## In breve' (…) + '## Fatti chiave'».
  */
 const BODY1_OPENING_HEADINGS_RE = [/^##\s*in breve\b/i, /^##\s*fatti chiave\b/i];
+/** Testo minimo di una sezione, titoli esclusi: lo stesso floor di `body2<40`. */
+const SPLIT_SECTION_MIN_TEXT_CHARS = 40;
+
+/** Il testo di una sezione senza le righe di titolo (`#`…`######`). */
+function sectionBodyText(section) {
+  return section.split('\n').filter((line) => !/^#{1,6}\s/.test(line)).join(' ').replace(/\s+/g, ' ').trim();
+}
 
 /**
  * ── L'ARTICOLO SCRITTO TUTTO NEL BODY1 ─────────────────────────────────────
@@ -995,6 +1002,10 @@ export function splitOverflowingBody1(body1) {
   if (!BODY1_OPENING_HEADINGS_RE.every((re, i) => re.test(texts[i] || ''))) return null;
   const content = texts.slice(opening);
   if (content.length < 3) return null;
+  // Una sezione di contenuto conta solo se, oltre ai titoli, ha testo: un
+  // `## Seguito` nudo diventerebbe un body3 fatto del solo titolo. Stessa
+  // soglia del `body2<40` del verdetto, per ogni sezione.
+  if (content.some((t) => sectionBodyText(t).length < SPLIT_SECTION_MIN_TEXT_CHARS)) return null;
   const lengths = content.map((t) => t.length);
   const total = lengths.reduce((a, b) => a + b, 0);
   const prefix = [0];

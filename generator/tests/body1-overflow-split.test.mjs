@@ -55,6 +55,16 @@ test('senza In breve e Fatti chiave in apertura, nell\'ordine del contratto, non
   assert.equal(splitOverflowingBody1([OPENING[0], ...SECTIONS].join('\n\n')), null, 'senza Fatti chiave');
 });
 
+test('una sezione fatta del solo titolo non si divide: body3 resterebbe senza testo', () => {
+  const headingOnly = [...OPENING, ...SECTIONS.slice(0, 3), '## Seguito'].join('\n\n');
+  assert.equal(splitOverflowingBody1(headingOnly), null);
+  const shortText = [...OPENING, ...SECTIONS.slice(0, 3), '## Seguito\nPoco.'].join('\n\n');
+  assert.equal(splitOverflowingBody1(shortText), null, 'sotto i 40 caratteri di testo');
+  const v = classifyBody2Payload({ parsed: payload({ body1: headingOnly, body2: '', body3: '' }) });
+  assert.equal(v.verdict, 'reject');
+  assert.equal(v.salvagedPayload, undefined);
+});
+
 test('senza almeno tre sezioni dopo l\'apertura non divide', () => {
   assert.equal(splitOverflowingBody1([...OPENING, ...SECTIONS.slice(0, 2)].join('\n\n')), null);
   assert.equal(splitOverflowingBody1(para('Solo testo senza titoli', 300)), null);

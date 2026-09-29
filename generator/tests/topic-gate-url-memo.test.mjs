@@ -23,6 +23,7 @@ import {
   recordTopicGateAbortedUrl,
   strikeEvergreenKeyword,
 } from '../scripts/lib/article-topic-selector.mjs';
+import { clearStrikesForPool } from '../scripts/reset-evergreen-strikes.mjs';
 
 const NOW = Date.parse('2026-09-29T03:00:00Z');
 const URL_KEY = 'https://www.cdt.ch/news/esempio-1234';
@@ -105,4 +106,11 @@ test('create-article controlla i duplicati prima del fact-check, oltre che dopo'
   assert.match(src, /checkTranslatedSlugCollisions\(data, \{ locales: localizedSlugs \? \['it', 'en', 'de', 'fr'\] : \['it'\] \}\);/);
   assert.match(fn.slice(lateDup), /checkForDuplicates\(data\);/, 'Step 3a.2 resta completo');
   assert.match(early, /assertTopicNotRecentlyCovered\(data, loadExistingArticleSummariesWithDates\(\)\);/);
+});
+
+test('reset-evergreen-strikes non cancella topicGateUrls', () => {
+  const t = recordTopicGateAbortedUrl({ keywords: ['kw'], strikes: { 'kw-pool': 3 } }, URL_KEY, 'svizzera', NOW);
+  const { ledger } = clearStrikesForPool(t, ['kw-pool']);
+  assert.deepEqual(ledger.strikes, {});
+  assert.equal(isTopicGateAbortedUrl(ledger, URL_KEY, 'svizzera', NOW + 1), true);
 });
