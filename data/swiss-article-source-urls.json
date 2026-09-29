@@ -1,9 +1,4 @@
 {
-  "https://www.laregione.ch/svizzera/svizzera/1944681/una-neutralita-credibile-richiede-un-ruolo-attivo": {
-    "articleId": "neutralita-ruolo-attivo",
-    "ts": "2026-08-27T06:17:17.018Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/pikqmhndhim85dtbkpkd-": {
     "articleId": "disoccupazione-laureati-2025-aumento",
     "ts": "2026-08-27T06:40:28.083Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/attualita/1953345/rispetto-prezzi-rincaro-costi-mobilita-abitazione-svizzera-franchi-comparis-auto": {
     "articleId": "rincari-abitazione-mobilita-svizzera",
     "ts": "2026-09-29T08:51:42.207Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1953367/assicurazione-detenuti-malattie-obbligo-costi": {
+    "articleId": "obbligo-assicurazione-detenuti",
+    "ts": "2026-09-29T09:13:37.495Z",
     "keyForm": 2
   }
 }
