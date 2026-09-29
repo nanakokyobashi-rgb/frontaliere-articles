@@ -1219,6 +1219,13 @@ export const CRAWLER_MEMBER_WARNING_ANNOTATION_RE =
 // crawler rosso, e l'aggregato lo dice con questo warning. Una expiry torna a
 // essere un `::error::<slug>: quarantena scaduta …`, gia' coperto dal livello failure.
 export const CRAWLER_MEMBER_QUARANTINE_ANNOTATION_RE = /^[^\s:]+: fallimento noto in quarantena/;
+// Il passo finale del gruppo emette anche un riepilogo `failure`, oltre alle
+// annotation per membro. Queste sono le sole forme aggregate deterministiche
+// che il generatore dei crawler-group puo' produrre: vanno ignorate per
+// continuare a valutare le prove del singolo crawler, mentre ogni altro
+// messaggio `failure` resta sconosciuto e quindi fail-closed.
+export const CRAWLER_GROUP_SUMMARY_FAILURE_ANNOTATION_RE =
+  /^crawler group (?:completed with \d+ succeeded, \d+ failed, \d+ missing, \d+ systemic; healthy siblings were preserved, (?:but the group remains failed until incomplete crawlers are recovered|\d+ known failures are excluded by the quarantine registry, and the failures counted here are new, regressions or past their deadline)|interrupted: \d+ member\(s\) stopped by a runner shutdown \(exit 143\) before completing; \d+ succeeded and were preserved, no per-crawler issue filed \(systemic class\), and the interrupted crawlers keep their previous data until the next wave)$/;
 // Limiti documentati di GitHub Actions: oltre, le annotation vengono scartate in
 // silenzio. Raggiunto il tetto, l'assenza di una riga non prova piu' nulla.
 export const GITHUB_ANNOTATIONS_PER_STEP_LIMIT = 10;
@@ -1246,9 +1253,10 @@ export const GITHUB_ANNOTATIONS_PER_JOB_LIMIT = 50;
  *   3. job non `failure` (cancelled, timed_out, …) → non verde;
  *   4. job `failure` → le annotation del job: una riga `<slug>: …` di livello failure, o
  *      un warning dell'aggregato (missing, exit 143) per quello slug, prova che il membro
- *      non e' verde; una failure annotation fuori dal formato per-membro e' prova
- *      insufficiente e tiene aperta la issue; nessuna riga, con annotation leggibili e
- *      sotto i tetti di GitHub, prova che il rosso era di un fratello.
+ *      non e' verde; una failure annotation fuori dal formato per-membro o dai
+ *      riepiloghi finali deterministici e' prova insufficiente e tiene aperta la issue;
+ *      nessuna riga, con annotation leggibili e sotto i tetti di GitHub, prova che il
+ *      rosso era di un fratello.
  * Ritorna `null` quando la prova manca (annotation illeggibili, vuote o troncate): il
  * chiamante tiene aperta la issue, come ogni altro fallback di questo file.
  *
@@ -1292,6 +1300,8 @@ export function decideCrawlerMemberConclusion({
     const message = annotation.message;
     const isAggregateFailure = level === 'failure' && CRAWLER_MEMBER_FAILURE_ANNOTATION_RE.test(message);
     const isAggregateWarning = level === 'warning' && CRAWLER_MEMBER_WARNING_ANNOTATION_RE.test(message);
+    const isGroupSummaryFailure = level === 'failure'
+      && CRAWLER_GROUP_SUMMARY_FAILURE_ANNOTATION_RE.test(message);
     // Un `::error::<slug>: …` (aggregato, exit 43 dello step, …) o un warning
     // dell'aggregato (missing, exit 143) sono entrambi «non verde». Un warning libero
     // dello stesso crawler no: non deve tenere aperta per sempre una issue guarita.
@@ -1299,7 +1309,7 @@ export function decideCrawlerMemberConclusion({
     // Una failure leggibile ma fuori dal formato per-membro può essere l'errore del
     // controllo finale del gruppo ("crawler aggregate ...") o un nuovo errore dello
     // stesso percorso. Non prova che questo membro sia verde: fail closed.
-    if (level === 'failure' && !isAggregateFailure) return null;
+    if (level === 'failure' && !isAggregateFailure && !isGroupSummaryFailure) return null;
     if (isAggregateFailure || isAggregateWarning) aggregateAnnotationCount += 1;
   }
   if (
