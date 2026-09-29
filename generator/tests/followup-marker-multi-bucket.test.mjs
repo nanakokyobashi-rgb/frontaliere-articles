@@ -13,6 +13,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import {
+  claimDailyTagBucketReferences,
   dailyTagBucketReferences,
   latestTriageComment,
   latestTriageCommentBody,
@@ -61,6 +62,45 @@ test('il tag si lega al #N piu vicino e mai a una PR', () => {
   assert.deepEqual(dailyTagBucketReferences('- PR #10015 → #1957 `follow-up(daily:2026-09-28)`'), [1957]);
   assert.deepEqual(dailyTagBucketReferences('- PR #1957 `follow-up(daily:2026-09-28)`'), []);
   assert.deepEqual(dailyTagBucketReferences('- Corpus #1957 senza tag'), []);
+});
+
+test('`pull-request #N` e `pull request #N` col tag daily non sono bucket', () => {
+  assert.deepEqual(dailyTagBucketReferences('- pull-request #10015 `follow-up(daily:2026-09-28)`'), []);
+  assert.deepEqual(dailyTagBucketReferences('- pull request #10050 `follow-up(daily:2026-09-28)`'), []);
+  const marker = [
+    '## Post-merge follow-up triage',
+    'Created/updated: 1 item.',
+    '- pull-request #10015 `follow-up(daily:2026-09-28)`',
+    '- Corpus #1957 `follow-up(daily:2026-09-28)`',
+    '- Daily bucket per pull-request #10015: #1958',
+  ].join('\n');
+  assert.deepEqual(triageMarkerPersistenceExpectation(marker).buckets, [1958, 1957]);
+});
+
+// Review di valerielinc-ops/frontaliere-si-o-no#10338: la forma col tag vale
+// solo nella finestra di claim (riga `Created/updated:` e bullet subito sotto).
+const WITH_HISTORY = [
+  '## Post-merge follow-up triage',
+  '',
+  'Created/updated: 1 item.',
+  '- Corpus #1957 `follow-up(daily:2026-09-28)` — `FU-2026-09-28-009`',
+  '',
+  'Historical #10171 `follow-up(daily:2026-09-28)`',
+].join('\n');
+
+test('una citazione storica col tag dopo la lista non e un claim', () => {
+  assert.deepEqual(claimDailyTagBucketReferences(WITH_HISTORY), [1957]);
+  assert.deepEqual(triageMarkerPersistenceExpectation(WITH_HISTORY).buckets, [1957]);
+  // Il bucket storico non chiede una prova in piu': #10015 resta provato.
+  assert.equal(verifyTriageMarkerPersistence(WITH_HISTORY, 10015, readBoth), true);
+});
+
+test('il gate sul conio qualifica solo i bucket della finestra di claim', () => {
+  const comments = JSON.stringify({ comments: [{ body: WITH_HISTORY }] });
+  assert.equal(triageMarkerCitesBucket(comments, 1957), true);
+  assert.equal(triageMarkerCitesBucket(comments, 10171), false);
+  const pullRequest = JSON.stringify({ comments: [{ body: '## Post-merge follow-up triage\nCreated/updated: 1 item.\n- pull-request #1957 `follow-up(daily:2026-09-28)`' }] });
+  assert.equal(triageMarkerCitesBucket(pullRequest, 1957), false);
 });
 
 test('la forma canonica a piu bucket di FOLLOWUP.md e letta riga per riga', () => {
