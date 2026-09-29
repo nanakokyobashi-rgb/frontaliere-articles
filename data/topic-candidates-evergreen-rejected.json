@@ -778,5 +778,27 @@
     "vivere a Proserpio e lavorare in Ticino da frontaliere": 1,
     "vivere a Merone e lavorare in Ticino da frontaliere": 2,
     "imposta di successione e donazione canton Friburgo aliquote": 2
+  },
+  "topicGateUrls": {
+    "frontaliere::https://www.varesenews.it/2026/09/vertenza-amazon-a-malpensa-i-sindacati-invocano-la-tutela-totale-dei-lavoratori-nessuno-va-lasciato-indietro/2691430": {
+      "section": "frontaliere",
+      "ts": 1790677181415
+    },
+    "frontaliere::https://www.rsi.ch/s/4117390": {
+      "section": "frontaliere",
+      "ts": 1790677205644
+    },
+    "frontaliere::https://www.tio.ch/ticino/politica/1953237/sentenza-su-pagani-l-mps-chiede-che-il-gran-consiglio-valuti-il-ricorso": {
+      "section": "frontaliere",
+      "ts": 1790677250063
+    },
+    "frontaliere::https://www.laregione.ch/cantone/luganese/1953159/cda-di-ail-sa-compensi-dei-membri-verso-la-pubblicazione": {
+      "section": "frontaliere",
+      "ts": 1790677296541
+    },
+    "frontaliere::https://www.varesenews.it/2026/09/passaggio-generazionale-nelle-imprese-del-varesotto-le-competenze-della-nuova-generazione/2691805": {
+      "section": "frontaliere",
+      "ts": 1790677336226
+    }
   }
 }
