@@ -50,8 +50,10 @@
  * Output (GITHUB_OUTPUT): `collection_ok=true|false` (le SORGENTI erano
  *   leggibili — non «la finestra è stata drenata»), `batch_prs=<csv di numeri>`,
  *   `batch_count=<n>`, `deferred_count=<n>` (PR rimaste fuori dal cap di
- *   sessione), `max_turns=<n>` e `daily_key=YYYY-MM-DD` (giorno di triage
- *   riuscito in Zurich).
+ *   sessione), `max_turns=<n>`, `daily_key=YYYY-MM-DD` (giorno di triage
+ *   riuscito in Zurich) e `quarantined_prs=<csv>`/`quarantined_count=<n>`
+ *   (PR tolte dal batch da `markerIdempotencyDecision`: marker con verdetto
+ *   `false` da oltre 6h, dichiarate anche in `::warning::`, summary e issue).
  *
  * Uso:  node scripts/ci/collect-followup-batch.mjs
  * Env:  GH_REPO|GITHUB_REPOSITORY, GITHUB_OUTPUT/GITHUB_STEP_SUMMARY (opz),
@@ -426,7 +428,35 @@ function bucketReferencesOnLine(line) {
       break;
     }
   }
-  return refs;
+  return [...refs, ...dailyTagBucketReferences(line)];
+}
+
+// `#N` seguito sulla stessa riga dal tag `follow-up(daily:YYYY-MM-DD)`, senza
+// un altro `#` in mezzo: il tag si lega al numero piu' vicino. Un `#N`
+// preceduto da `PR` non e' mai un bucket.
+const BUCKET_TAG_REF_RE = /(?<!\b(?:PR|pull\s+request)\s*)#([1-9]\d*)\b[^#\n]*?`follow-up\(daily:\d{4}-\d{2}-\d{2}\)`/gi;
+
+/**
+ * I `#N` legati al tag `follow-up(daily:YYYY-MM-DD)` in un testo: la seconda
+ * forma di riferimento a un bucket, accanto alla parola «bucket».
+ *
+ * Il triage su due repository scrive un bucket per bullet e NON usa la parola
+ * «bucket» (marker reali delle PR del sito #10015 e #10050, run del sito
+ * 36461728260):
+ *
+ *   Created/updated: 2 item.
+ *   - Corpus #1957 `follow-up(daily:2026-09-28)` — `FU-2026-09-28-009` (...)
+ *   - Site #10171 `follow-up(daily:2026-09-28)` — `FU-2026-09-28-033` (...)
+ *
+ * Con la sola regola della parola il marker non citava nessun bucket e la
+ * verifica restava rossa a ogni run. Il repository dichiarato nel bullet e'
+ * informativo: `readBucketIssue` legge ogni numero in tutti i `BUCKET_REPOS`
+ * e il predicato accetta solo il candidato che contiene l'item della PR.
+ * Unica copia della forma: la usa anche `triageMarkerCitesBucket` di
+ * gate-minted-followups.mjs.
+ */
+export function dailyTagBucketReferences(text) {
+  return [...String(text || '').matchAll(BUCKET_TAG_REF_RE)].map((match) => Number(match[1]));
 }
 
 /**
@@ -488,7 +518,9 @@ function attestationLines(lines) {
  *    stesso ID che compare nel corpo del bucket;
  *  - un BUCKET citato e' un `#N` su una riga che dice «bucket», in qualunque
  *    ordine e con qualunque punteggiatura, esclusi i `#N` preceduti da `PR`
- *    (la PR sorgente citata sulla stessa riga non e' un bucket);
+ *    (la PR sorgente citata sulla stessa riga non e' un bucket), oppure un
+ *    `#N` seguito dal tag `follow-up(daily:YYYY-MM-DD)` (un bucket per
+ *    bullet, vedi `dailyTagBucketReferences`);
  *  - uno ZERO esplicito e' l'INTESTAZIONE che il prompt impone per l'esito
  *    vuoto (`## Post-merge follow-up triage: zero outstanding items.` oppure
  *    `## Post-merge follow-up triage (backfill skipped): ...`). La sola altra
@@ -713,6 +745,125 @@ export function verifyTriageMarkerPersistence(markerBody, prNumber, readIssue, p
   }
   if (disproved) return false;
   return unreadable ? null : true;
+}
+
+/**
+ * Eta' oltre la quale un marker con verdetto DEFINITIVO `false` esce dal
+ * batch. Sei ore coprono il caso legittimo: il commento di conservazione del
+ * gate sul conio arriva DOPO la verifica, quindi subito dopo il marker un
+ * `false` puo' ancora diventare `true`.
+ */
+export const MARKER_QUARANTINE_AFTER_MS = 6 * 3600_000;
+
+/**
+ * Cosa fare di una PR che ha gia' il marker, dato il verdetto di
+ * `verifyTriageMarkerPersistence` e l'istante del marker corrente
+ * (`latestTriageComment(...).at`). Gemello del sito (stesso contratto).
+ *
+ * - `skip`: persistenza provata, idempotenza normale.
+ * - `quarantine`: verdetto `false` (tutte le letture definitive) su un marker
+ *   piu' vecchio di `MARKER_QUARANTINE_AFTER_MS`. Rimetterla nel batch non
+ *   converge: Codex la salta perche' il marker c'e' gia', la verifica resta
+ *   rossa e ogni run spreca una sessione (sul sito #10015 e #10050, run
+ *   36461728260, 36495756021, 36520419253). Esce dal batch ma resta VISIBILE:
+ *   il chiamante la dichiara con warning, summary, output e issue d'allarme,
+ *   perche' un marker non provato puo' anche essere un triage davvero perso.
+ * - `retry`: tutto il resto. Un verdetto `null` (lettura indisponibile) non
+ *   prova nulla; un marker recente puo' ancora ricevere la prova del gate; un
+ *   istante illeggibile (anche piu' marker senza istante) non permette di
+ *   misurarne l'eta'.
+ */
+export function markerIdempotencyDecision(persistence, markerAt, nowMs = Date.now(), quarantineAfterMs = MARKER_QUARANTINE_AFTER_MS) {
+  if (persistence === true) return 'skip';
+  if (persistence === false && Number.isFinite(markerAt) && nowMs - markerAt > quarantineAfterMs) {
+    return 'quarantine';
+  }
+  return 'retry';
+}
+
+/** Il motivo leggibile di una quarantena, per warning, summary e allarme. */
+export function quarantineReason(markerBody) {
+  const { buckets } = triageMarkerPersistenceExpectation(markerBody);
+  const age = `marker di oltre ${MARKER_QUARANTINE_AFTER_MS / 3600_000}h`;
+  return buckets.length
+    ? `${age} senza item/Source persistito né prova del gate (bucket=[${buckets.join(',')}])`
+    : `${age} senza riferimento a un bucket persistito`;
+}
+
+// Titolo FISSO e senza numeri: il dedup di github-issue-creator guarda il
+// prefisso, e una misura nel titolo aprirebbe una issue nuova a ogni run.
+export const QUARANTINE_ALARM_TITLE = 'Post-merge follow-up: marker di triage in quarantena';
+
+/**
+ * Le PR in quarantena non ancora segnalate. Una PR gia' citata (`PR #N`) nel
+ * corpo o in un commento di una issue d'allarme con questo titolo, aperta O
+ * chiusa, e' gia' stata riportata: la stessa PR resta nella finestra di 48h
+ * per piu' run e deve produrre UN commento, non uno a run, e una issue chiusa
+ * dal fixer non va riaperta per un caso gia' visto. `null` quando l'elenco
+ * delle issue non e' leggibile.
+ */
+export function unreportedQuarantine(quarantined, issuesJson, title = QUARANTINE_ALARM_TITLE) {
+  let issues;
+  try { issues = JSON.parse(issuesJson || ''); } catch { return null; }
+  if (!Array.isArray(issues)) return null;
+  const texts = issues
+    .filter((issue) => typeof issue?.title === 'string' && issue.title.startsWith(title))
+    .flatMap((issue) => [
+      typeof issue.body === 'string' ? issue.body : '',
+      ...(Array.isArray(issue.comments) ? issue.comments : [])
+        .map((comment) => (typeof comment?.body === 'string' ? comment.body : '')),
+    ]);
+  return (Array.isArray(quarantined) ? quarantined : []).filter(({ number }) => {
+    const mention = new RegExp(`\\bPR\\s+#${Number(number)}\\b`);
+    return !texts.some((text) => mention.test(text));
+  });
+}
+
+/**
+ * Canale d'allarme per le PR in quarantena: la issue di
+ * `scripts/lib/github-issue-creator.mjs`, lo stesso helper dei monitor del
+ * repo, con titolo fisso (commenta la gemella aperta invece di duplicarla).
+ * Idempotente per PR tramite `unreportedQuarantine`. Best-effort: warning,
+ * summary e output restano la traccia anche se la issue non si scrive.
+ */
+export async function reportQuarantinedMarkers(quarantined, {
+  listIssues = () => gh([
+    'issue', 'list', ...repoArgs, '--state', 'all', '--limit', '50',
+    '--search', `"${QUARANTINE_ALARM_TITLE}" in:title`,
+    '--json', 'number,title,body,comments',
+  ]),
+  createIssue = async (options) => (await import('../lib/github-issue-creator.mjs')).createGithubIssue(options),
+  log = console.log,
+} = {}) {
+  if (!Array.isArray(quarantined) || !quarantined.length) return { reported: [] };
+  const fresh = unreportedQuarantine(quarantined, listIssues());
+  if (fresh === null) {
+    log('::warning::Allarme quarantena non verificabile: elenco issue illeggibile, nessuna issue scritta (warning, summary e output restano la traccia).');
+    return { reported: [], unverifiable: true };
+  }
+  if (!fresh.length) {
+    log(`Quarantena gia' segnalata per ${quarantined.map(({ number }) => `PR #${number}`).join(', ')}: nessun nuovo commento.`);
+    return { reported: [] };
+  }
+  const result = await createIssue({
+    title: QUARANTINE_ALARM_TITLE,
+    description: [
+      'Il collector di `post-merge-followup.yml` ha tolto dal batch queste PR: hanno il marker `## Post-merge follow-up triage`, ma la verifica di persistenza dà un verdetto definitivo `false` su un marker di oltre 6 ore. Rimetterle nel batch non converge: Codex le salta per il marker già presente e la verifica resta rossa.',
+      '',
+      ...fresh.map(({ number, reason }) => `- PR #${number}: ${reason}.`),
+      '',
+      "Ipotesi da confermare o scartare: il marker usa una forma che `triageMarkerPersistenceExpectation` non legge (bug del parser), oppure l'item non è mai stato scritto nel bucket (triage perso).",
+      'Comando: `GH_REPO=<owner>/<repo> node scripts/ci/collect-followup-batch.mjs --verify-persistence <pr>`.',
+    ].join('\n'),
+    priority: 3,
+    labels: ['automation'],
+    workflow: 'Post-merge follow-up triage',
+  });
+  if (!result || result.persisted === false) {
+    log('::warning::Allarme quarantena non scritto: la issue non risulta persistita (warning, summary e output restano la traccia).');
+    return { reported: [] };
+  }
+  return { reported: fresh.map(({ number }) => number) };
 }
 
 /**
@@ -986,10 +1137,12 @@ function logGateNoVerdict(label, result, prNumber) {
   }
 }
 
-function emit(batch, dailyKey = triageDailyKey(), { collectionOk = true, deferred = 0 } = {}) {
+function emit(batch, dailyKey = triageDailyKey(), { collectionOk = true, deferred = 0, quarantined = [] } = {}) {
   reportGateFaults();
   reportGateWindowInconclusive();
   const csv = batch.join(',');
+  const quarantinedList = Array.isArray(quarantined) ? quarantined : [];
+  const quarantinedCsv = quarantinedList.map(({ number }) => number).join(',');
   const count = batch.length;
   const ok = collectionOk === true;
   const deferredN = Math.max(0, Number(deferred) || 0);
@@ -1000,11 +1153,17 @@ function emit(batch, dailyKey = triageDailyKey(), { collectionOk = true, deferre
   console.log(`deferred_count=${deferredN}`);
   console.log(`max_turns=${maxTurns}`);
   console.log(`daily_key=${dailyKey}`);
+  console.log(`quarantined_prs=${quarantinedCsv}`);
+  for (const { number, reason } of quarantinedList) {
+    // Una PR in quarantena esce dal batch ma non dal log della run.
+    console.log(`::warning title=Follow-up marker in quarantena::PR #${number}: ${reason} — tolta dal batch, verificare a mano.`);
+  }
   if (process.env.GITHUB_OUTPUT) {
     fs.appendFileSync(
       process.env.GITHUB_OUTPUT,
       `collection_ok=${ok}\nbatch_prs=${csv}\nbatch_count=${count}\n`
-      + `deferred_count=${deferredN}\nmax_turns=${maxTurns}\ndaily_key=${dailyKey}\n`,
+      + `deferred_count=${deferredN}\nmax_turns=${maxTurns}\ndaily_key=${dailyKey}\n`
+      + `quarantined_prs=${quarantinedCsv}\nquarantined_count=${quarantinedList.length}\n`,
     );
   }
   if (process.env.GITHUB_STEP_SUMMARY) {
@@ -1014,7 +1173,10 @@ function emit(batch, dailyKey = triageDailyKey(), { collectionOk = true, deferre
       (count ? `PR: ${csv} — max-turns ${maxTurns}.\n` : `Nessuna PR da triagiare in questa finestra.\n`) +
       (deferredN
         ? `Rinviate al prossimo giro: ${deferredN} PR (cap di sessione ${FOLLOWUP_SESSION_BATCH_LIMIT}).\n`
-        : ''),
+        : '') +
+      quarantinedList
+        .map(({ number, reason }) => `Quarantena: PR #${number} — ${reason}; tolta dal batch (issue «${QUARANTINE_ALARM_TITLE}»).\n`)
+        .join(''),
     );
   }
 }
@@ -1043,6 +1205,8 @@ export function main() {
   console.log(`Merged PRs nella finestra (autori eleggibili, dal piu' vecchio): ${candidates.length}`);
 
   const batch = [];
+  const quarantined = [];
+  const nowMs = Date.now();
   for (const pr of candidates) {
     const n = pr.number;
 
@@ -1058,8 +1222,15 @@ export function main() {
     if (hasTriageComment(commentsRaw)) {
       const markerBody = latestTriageCommentBody(commentsRaw);
       const persistence = verifyTriageMarkerPersistence(markerBody, n, readBucketIssue, commentsRaw);
-      if (persistence === true) {
+      const decision = markerIdempotencyDecision(persistence, latestTriageComment(commentsRaw)?.at, nowMs);
+      if (decision === 'skip') {
         console.log(`PR #${n}: already has '${TRIAGE_COMMENT_PREFIX}' plus persisted bucket/item evidence → skip (idempotent).`);
+        continue;
+      }
+      if (decision === 'quarantine') {
+        const reason = quarantineReason(markerBody);
+        quarantined.push({ number: n, reason });
+        console.log(`PR #${n}: ${reason} → QUARANTENA, fuori dal batch (il retry non converge).`);
         continue;
       }
       console.log(`PR #${n}: marker presente ma bucket/item non provato (${persistence === null ? 'lettura indisponibile' : 'evidenza assente/invalida'}) → resta nel batch per retry.`);
@@ -1103,7 +1274,8 @@ export function main() {
     // effettivamente consegnato; il residuo rientra nella finestra successiva.
     console.log(`Sessione limitata a ${sessionBatch.length} PR; ${deferred} PR rinviate alla prossima finestra. collection_ok resta true: il troncamento è un rinvio pianificato, non un errore di raccolta.`);
   }
-  emit(sessionBatch, dailyKey, { collectionOk: true, deferred });
+  emit(sessionBatch, dailyKey, { collectionOk: true, deferred, quarantined });
+  return { batch: sessionBatch, quarantined };
 }
 
 // CLI entrypoint only (importing for tests must not invoke gh). Proceed-safe: any
@@ -1153,14 +1325,24 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     const prs = process.argv.slice(3).flatMap((arg) => arg.split(',')).map((s) => s.trim()).filter(Boolean);
     process.exitCode = verifyPersistenceCli(prs) ? 0 : 1;
   } else {
+  let collected = null;
   try {
-    main();
+    collected = main();
   } catch (e) {
     console.error(`collect-followup-batch: unexpected error (${e?.message || e}) — collection_ok=false, watermark invariato.`);
     try { emit([], triageDailyKey(), { collectionOk: false }); } catch (emitError) {
       console.error(`collect-followup-batch: impossibile scrivere gli output di errore (${emitError?.message || emitError}).`);
     }
     process.exitCode = 1;
+  }
+  if (collected?.quarantined?.length) {
+    // L'allarme e' best-effort e non cambia l'esito della raccolta: le PR in
+    // quarantena sono gia' dichiarate in warning, summary e output.
+    try {
+      await reportQuarantinedMarkers(collected.quarantined);
+    } catch (alarmError) {
+      console.log(`::warning::Allarme quarantena non scritto (${alarmError?.message || alarmError}).`);
+    }
   }
   }
 }
