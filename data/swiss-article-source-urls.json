@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4014358": {
-    "articleId": "governo-finanzia-siccita-agricoltura",
-    "ts": "2026-08-27T12:01:42.791Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4015966": {
     "articleId": "disoccupazione-diplomati-svizzera-2025",
     "ts": "2026-08-27T12:47:04.176Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/ticino/politica/1953479/nuovo-aumento-dei-premi-ecco-le-reazioni-di-partiti-e-sindacati": {
     "articleId": "reazioni-partiti-aumento-premi-2027",
     "ts": "2026-09-29T14:46:30.677Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4121410": {
+    "articleId": "voto-armi-industria-difesa",
+    "ts": "2026-09-29T15:19:51.216Z",
     "keyForm": 2
   }
 }
