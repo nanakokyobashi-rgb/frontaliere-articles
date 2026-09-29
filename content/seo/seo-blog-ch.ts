@@ -91865,6 +91865,396 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-validita-lista-onu-svizzera': {
+    title: 'ONU: aggiornata in Svizzera la lista delle sanzioni',
+    description: 'Il 29 settembre 2026 il comitato di sanzioni dell’ONU ha modificato la lista. SESAM è stata aggiornata in modo analogo: validità giuridica immediata in Svizzera',
+    keywords: 'frontalieri, ticino, svizzera, italia, aggiornata, lista, sanzioni, settembre',
+    ogTitle: 'Sanzioni ONU: aggiornata la banca dati SESAM',
+    ogDescription: 'Il comitato di sanzioni dell’ONU ha modificato la lista di persone fisiche, imprese e organizzazioni sottoposte a sanzioni. Da Berna, la comunicazione richiama l’ordinanza approvata il 4 marzo 2016 e l’immediata validità in Svizzera.',
+    canonicalPath: '/articoli-svizzera/validita-lista-onu-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "ONU: aggiornata in Svizzera la lista delle sanzioni",
+      "description": "Il 29 settembre 2026 il comitato di sanzioni dell’ONU ha modificato la lista. SESAM è stata aggiornata in modo analogo: validità giuridica immediata in Svizzera",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/validita-lista-onu-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Berna, aggiornamento della lista ONU delle sanzioni nella banca dati SESAM"
+      },
+      "datePublished": "2026-09-29T18:51:03+00:00",
+      "dateModified": "2026-09-29T18:51:03+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/validita-lista-onu-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-centro-premi-salute-2027': {
+    title: 'Premi cassa malati 2027, il Centro chiede più misure',
+    description: 'In Ticino i premi di cassa malati saliranno del 3,7% nel 2027, contro il 5% nazionale. Il Centro chiede ulteriori misure cantonali e federali sui costi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, premi, cassa, malati, centro',
+    ogTitle: 'Premi cassa malati 2027, il Centro chiede più misure',
+    ogDescription: 'Il 3,7% previsto in Ticino per il 2027 è inferiore alla media nazionale del 5%. Per Il Centro è un segnale incoraggiante, ma la gestione dei costi della salute deve proseguire tra Cantoni e Confederazione.',
+    canonicalPath: '/articoli-svizzera/centro-premi-salute-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Premi cassa malati 2027, il Centro chiede più misure",
+      "description": "In Ticino i premi di cassa malati saliranno del 3,7% nel 2027, contro il 5% nazionale. Il Centro chiede ulteriori misure cantonali e federali sui costi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/centro-premi-salute-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ticino, documenti sui premi di cassa malati previsti per il 2027"
+      },
+      "datePublished": "2026-09-29T19:07:35+00:00",
+      "dateModified": "2026-09-29T19:07:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/centro-premi-salute-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-premi-cassa-malati-ticino-rincaro-lettori': {
+    title: 'Premi cassa malati, lo sfogo dei lettori: «Ogni anno le stesse parole»',
+    description: 'Analisi del rincaro premi cassa malati 2027 in Ticino, con il premio medio oltre 500 franchi e un aumento cumulato del 40% in quattro anni. Le reazioni',
+    keywords: 'frontalieri, ticino, svizzera, italia, premi, cassa, malati, sfogo',
+    ogTitle: 'Premi cassa malati Ticino: rincaro e reazioni dei lettori',
+    ogDescription: 'I premi della cassa malati 2027 in Ticino aumentano, pur essendo tra i più contenuti. Il premio medio supera i 500 franchi e il rincaro cumulato in 4 anni è stimato oltre il 40%. Scopri le proposte dei lettori e l\'impatto del tetto del 10%.',
+    canonicalPath: '/articoli-svizzera/premi-cassa-malati-ticino-rincaro-lettori/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Premi cassa malati, lo sfogo dei lettori: «Ogni anno le stesse parole»",
+      "description": "Analisi del rincaro premi cassa malati 2027 in Ticino, con il premio medio oltre 500 franchi e un aumento cumulato del 40% in quattro anni. Le reazioni",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/premi-cassa-malati-ticino-rincaro-lettori.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Persona in Ticino esamina bollette della cassa malati con vista su Lugano."
+      },
+      "datePublished": "2026-09-29T19:30:36+00:00",
+      "dateModified": "2026-09-29T19:30:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/premi-cassa-malati-ticino-rincaro-lettori/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-soletta-successione-donazione-aliquote': {
+    title: 'Soletta: aliquote successione e donazione senza imposta federale',
+    description: 'In Soletta, le aliquote di successione e donazione sono di competenza cantonale e comunale. AFC/ESTV non gestisce questo prelievo. Scopri come verificare',
+    keywords: 'frontalieri, ticino, svizzera, italia, soletta, aliquote, successione, donazione',
+    ogTitle: 'Soletta: aliquote successione e donazione senza imposta federale',
+    ogDescription: 'In Svizzera non esiste un\'imposta federale su successioni e donazioni. Nel Cantone di Soletta, la competenza è esclusivamente cantonale e comunale. Il Comune applica un moltiplicatore sull\'aliquota cantonale. Verifica la normativa specifica',
+    canonicalPath: '/articoli-svizzera/soletta-successione-donazione-aliquote/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Soletta: aliquote successione e donazione senza imposta federale",
+      "description": "In Soletta, le aliquote di successione e donazione sono di competenza cantonale e comunale. AFC/ESTV non gestisce questo prelievo. Scopri come verificare",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/soletta-successione-donazione-aliquote.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Paesaggio del Cantone di Soletta con colline e centri abitati"
+      },
+      "datePublished": "2026-09-29T20:00:46+00:00",
+      "dateModified": "2026-09-29T20:00:46+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/soletta-successione-donazione-aliquote/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-sresi-prezzi-lugano-2026': {
+    title: 'Investimenti immobiliari: il Ticino va in controtendenza',
+    description: 'L\'indice SRESI passa da 69,5 a 47,5 punti nel 2026: aumenti attesi a Zurigo, Svizzera centrale e Lago Lemano, calo a Lugano e in Ticino secondo KPMG.',
+    keywords: 'frontalieri, ticino, svizzera, italia, investimenti, immobiliari, controtendenza, indice',
+    ogTitle: 'Investimenti immobiliari: il Ticino va in controtendenza',
+    ogDescription: 'Il sentiment degli esperti sugli investimenti immobiliari resta solido secondo KPMG, ma il dato 2026 è più basso del 2025. Aumenti più marcati attesi a Zurigo, nella Svizzera centrale e sul Lago Lemano; Lugano è l\'unico centro con prezzi al ribasso.',
+    canonicalPath: '/articoli-svizzera/sresi-prezzi-lugano-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Investimenti immobiliari: il Ticino va in controtendenza",
+      "description": "L'indice SRESI passa da 69,5 a 47,5 punti nel 2026: aumenti attesi a Zurigo, Svizzera centrale e Lago Lemano, calo a Lugano e in Ticino secondo KPMG.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/sresi-prezzi-lugano-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Panorama di Lugano con edifici residenziali e lago sullo sfondo"
+      },
+      "datePublished": "2026-09-29T20:14:25+00:00",
+      "dateModified": "2026-09-29T20:14:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/sresi-prezzi-lugano-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-groupe-e-riorganizzazione-friburgo': {
+    title: 'Groupe E taglia 12 posti: colpiti soprattutto i dirigenti',
+    description: 'Groupe E conferma 12 licenziamenti a Friburgo, nove tra i quadri. Dal prossimo anno la ristrutturazione punta a snellire strutture e processi decisionali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, groupe, taglia, posti, colpiti',
+    ogTitle: 'Groupe E, 12 licenziamenti a Friburgo',
+    ogDescription: 'A Friburgo l\'azienda energetica Groupe E rende definitivi 12 licenziamenti, nove tra i quadri. La riorganizzazione scatterà dall\'anno prossimo: previste prestazioni del piano sociale e sostegno per trovare un nuovo impiego.',
+    canonicalPath: '/articoli-svizzera/groupe-e-riorganizzazione-friburgo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Groupe E taglia 12 posti: colpiti soprattutto i dirigenti",
+      "description": "Groupe E conferma 12 licenziamenti a Friburgo, nove tra i quadri. Dal prossimo anno la ristrutturazione punta a snellire strutture e processi decisionali.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/groupe-e-riorganizzazione-friburgo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Castelgrande, immagine simbolica della Svizzera per una notizia sul lavoro nell'energia"
+      },
+      "datePublished": "2026-09-29T20:27:30+00:00",
+      "dateModified": "2026-09-29T20:27:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/groupe-e-riorganizzazione-friburgo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-parlamento-sonno-power-nap': {
+    title: 'In Parlamento serve un posto per dormire: power nap',
+    description: 'Durante le sessioni parlamentari i deputati svizzeri dormono solo 6h10, 50 minuti in meno del solito. Björn Rasch propone spazi per power nap a Palazzo federale',
+    keywords: 'frontalieri, ticino, svizzera, italia, parlamento, serve, posto, dormire',
+    ogTitle: 'In Parlamento serve un posto per dormire: power nap',
+    ogDescription: 'Lo studio di Björn Rasch sull\'Università di Friburgo rivela che i parlamentari svizzeri dormono in media 6 ore e 10 minuti durante le sessioni, circa 50 minuti meno del solito. La stanchezza può portare a scelte più rischiose e difficoltà',
+    canonicalPath: '/articoli-svizzera/parlamento-sonno-power-nap/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "In Parlamento serve un posto per dormire: power nap",
+      "description": "Durante le sessioni parlamentari i deputati svizzeri dormono solo 6h10, 50 minuti in meno del solito. Björn Rasch propone spazi per power nap a Palazzo federale",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/parlamento-sonno-power-nap.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Stanza di riposo con divani silenziosi all'interno del Palazzo federale svizzero per power nap dei parlamentari"
+      },
+      "datePublished": "2026-09-29T21:03:20+00:00",
+      "dateModified": "2026-09-29T21:03:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/parlamento-sonno-power-nap/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-progetto-ia-medicina-bellinzona': {
+    title: 'IA e farmaci: Bellinzona nel progetto SWIT-DREAMS',
+    description: 'Dettagli sul progetto SWIT-DREAMS: 1,37 milioni di euro per la ricerca su IA e nanoanticorpi a Bellinzona. Partner, obiettivi e stime del mercato',
+    keywords: 'frontalieri, ticino, svizzera, italia, farmaci, bellinzona, progetto, swit-dreams',
+    ogTitle: 'IA e farmaci: Bellinzona protagonista in SWIT-DREAMS',
+    ogDescription: 'Scopri il progetto italo-svizzero SWIT-DREAMS: 1,37 milioni di euro per lo sviluppo di anticorpi di nuova generazione grazie all\'intelligenza artificiale. Focus sul ruolo di Bellinzona.',
+    canonicalPath: '/articoli-svizzera/progetto-ia-medicina-bellinzona/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "IA e farmaci: Bellinzona nel progetto SWIT-DREAMS",
+      "description": "Dettagli sul progetto SWIT-DREAMS: 1,37 milioni di euro per la ricerca su IA e nanoanticorpi a Bellinzona. Partner, obiettivi e stime del mercato",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/progetto-ia-medicina-bellinzona.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ricerca medica e intelligenza artificiale a Bellinzona"
+      },
+      "datePublished": "2026-09-29T21:23:36+00:00",
+      "dateModified": "2026-09-29T21:23:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/progetto-ia-medicina-bellinzona/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-dati-srf-dipendenti-rubati': {
+    title: 'Attacco hacker a SRF: dati rubati a circa 340 dipendenti',
+    description: 'Attacco hacker a SRF: sottratti dati di circa 340 collaboratori. La SSR esclude password, dati bancari, fonti giornalistiche e contenuti di comunicazione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, attacco, hacker, dati, rubati',
+    ogTitle: 'SRF: rubati dati di circa 340 collaboratori',
+    ogDescription: 'Un\'intrusione ha riguardato soprattutto la divisione Informazione della SRF. Sottratti dati di contatto e organizzativi di circa 340 ex e attuali collaboratori, risalenti al 2020. La SSR indaga sulla causa e ha sporto denuncia.',
+    canonicalPath: '/articoli-svizzera/dati-srf-dipendenti-rubati/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Attacco hacker a SRF: dati rubati a circa 340 dipendenti",
+      "description": "Attacco hacker a SRF: sottratti dati di circa 340 collaboratori. La SSR esclude password, dati bancari, fonti giornalistiche e contenuti di comunicazione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/dati-srf-dipendenti-rubati.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Redazione svizzera con monitor che illustrano un attacco informatico e dati di dipendenti"
+      },
+      "datePublished": "2026-09-29T21:53:18+00:00",
+      "dateModified": "2026-09-29T21:53:18+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/dati-srf-dipendenti-rubati/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-samedan-aeroporto-rinnovo-2025': {
+    title: 'Samedan airport renewal awaits federal court decision',
+    description: 'Il rinnovo dell\'aeroporto di Samedan, approvato con oltre il 54% dei voti il 17 agosto 2025, è bloccato da un ricorso al Tribunale federale. Si attendono',
+    keywords: 'frontalieri, ticino, svizzera, italia, samedan, airport, renewal, awaits',
+    ogTitle: 'Samedan airport renewal awaits federal court decision',
+    ogDescription: 'Il progetto di rinnovo dell\'aeroporto di Samedan, votato positivamente dall\'11 comuni dell\'Alta Engadina il 17 agosto 2025 con oltre il 54% di consenso, rimane fermo a causa di un ricorso pendente davanti al Tribunale federale. Mentre si attende',
+    canonicalPath: '/articoli-svizzera/samedan-aeroporto-rinnovo-2025/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Samedan airport renewal awaits federal court decision",
+      "description": "Il rinnovo dell'aeroporto di Samedan, approvato con oltre il 54% dei voti il 17 agosto 2025, è bloccato da un ricorso al Tribunale federale. Si attendono",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/samedan-aeroporto-rinnovo-2025.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea della pista dell'aeroporto di Samedan tra le montagne dell'Engadin, con un aereo in attesa di decollo sotto cielo sereno"
+      },
+      "datePublished": "2026-09-29T22:17:12+00:00",
+      "dateModified": "2026-09-29T22:17:12+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/samedan-aeroporto-rinnovo-2025/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
