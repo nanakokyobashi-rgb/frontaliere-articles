@@ -1,0 +1,165 @@
+{
+  "_source": "Log di sei run di generate-article.yml del 2026-09-29 (nanakokyobashi-rgb/frontaliere-articles). topic-gate-abort: da «🧠 Selezione articolo» ad «Articolo rigettato per topic-gate», con l'URL scelto. duplicate-after-body: da «Articolo IT generato» a «Duplicato post-generazione». body1-only-regenerated: da «output JSON incompleto: body2, body3 … rigenero» al completamento della chiamata.",
+  "runs": [
+    {
+      "run": 36510868703,
+      "events": [
+        {
+          "kind": "topic-gate-abort",
+          "at": "2026-09-29T02:08:02.103359Z",
+          "section": "frontaliere",
+          "url": "https://www.varesenews.it/2026/09/vertenza-amazon-a-malpensa-i-sindacati-invocano-la-tutela-totale-dei-lavoratori-nessuno-va-lasciato-indietro/2691430/",
+          "seconds": 62.7
+        },
+        {
+          "kind": "topic-gate-abort",
+          "at": "2026-09-29T02:08:18.080846Z",
+          "section": "frontaliere",
+          "url": "https://www.rsi.ch/s/4117390",
+          "seconds": 16.0
+        },
+        {
+          "kind": "topic-gate-abort",
+          "at": "2026-09-29T02:08:55.334585Z",
+          "section": "frontaliere",
+          "url": "https://www.tio.ch/ticino/attualita/1953134/ecco-i-finalisti-del-premio-bancastato-per-la-sostenibilita-aziendale",
+          "seconds": 37.3
+        },
+        {
+          "kind": "topic-gate-abort",
+          "at": "2026-09-29T02:09:27.323318Z",
+          "section": "frontaliere",
+          "url": "https://www.laregione.ch/cantone/luganese/1953159/cda-di-ail-sa-compensi-dei-membri-verso-la-pubblicazione",
+          "seconds": 32.0
+        },
+        {
+          "kind": "topic-gate-abort",
+          "at": "2026-09-29T02:09:55.876172Z",
+          "section": "frontaliere",
+          "url": "https://www.tio.ch/ticino/politica/1953237/sentenza-su-pagani-l-mps-chiede-che-il-gran-consiglio-valuti-il-ricorso",
+          "seconds": 28.6
+        }
+      ]
+    },
+    {
+      "run": 36514673677,
+      "events": [
+        {
+          "kind": "topic-gate-abort",
+          "at": "2026-09-29T02:57:19.693567Z",
+          "section": "frontaliere",
+          "url": "https://www.varesenews.it/2026/09/vertenza-amazon-a-malpensa-i-sindacati-invocano-la-tutela-totale-dei-lavoratori-nessuno-va-lasciato-indietro/2691430/",
+          "seconds": 60.6
+        },
+        {
+          "kind": "topic-gate-abort",
+          "at": "2026-09-29T02:57:52.421314Z",
+          "section": "frontaliere",
+          "url": "https://www.rsi.ch/s/4117390",
+          "seconds": 32.7
+        },
+        {
+          "kind": "topic-gate-abort",
+          "at": "2026-09-29T02:58:26.300618Z",
+          "section": "frontaliere",
+          "url": "https://www.tio.ch/ticino/attualita/1953134/ecco-i-finalisti-del-premio-bancastato-per-la-sostenibilita-aziendale",
+          "seconds": 33.9
+        },
+        {
+          "kind": "topic-gate-abort",
+          "at": "2026-09-29T02:59:01.802977Z",
+          "section": "frontaliere",
+          "url": "https://www.tio.ch/ticino/politica/1953237/sentenza-su-pagani-l-mps-chiede-che-il-gran-consiglio-valuti-il-ricorso",
+          "seconds": 35.5
+        },
+        {
+          "kind": "topic-gate-abort",
+          "at": "2026-09-29T02:59:46.830967Z",
+          "section": "frontaliere",
+          "url": "https://www.laregione.ch/cantone/luganese/1953159/cda-di-ail-sa-compensi-dei-membri-verso-la-pubblicazione",
+          "seconds": 45.0
+        },
+        {
+          "kind": "topic-gate-abort",
+          "at": "2026-09-29T03:00:21.037124Z",
+          "section": "frontaliere",
+          "url": "https://www.varesenews.it/2026/09/il-pos-corre-il-pagamento-in-contante-arretra-ma-resta-protagonista/2690938/",
+          "seconds": 34.2
+        },
+        {
+          "kind": "topic-gate-abort",
+          "at": "2026-09-29T03:00:39.720688Z",
+          "section": "frontaliere",
+          "url": "https://www.ocst.ch/il-sindacato/organi-statutari",
+          "seconds": 18.7
+        },
+        {
+          "kind": "body1-only-regenerated",
+          "at": "2026-09-29T03:04:50.449321Z",
+          "section": "frontaliere",
+          "payload": "body1:5100ch body2:vuoto body3:vuoto (split call 1/2, part=body)",
+          "seconds": 184.3
+        }
+      ]
+    },
+    {
+      "run": 36516509439,
+      "events": []
+    },
+    {
+      "run": 36517576176,
+      "events": []
+    },
+    {
+      "run": 36519078323,
+      "events": [
+        {
+          "kind": "topic-gate-abort",
+          "at": "2026-09-29T03:55:15.597100Z",
+          "section": "svizzera",
+          "url": "https://www.tio.ch/dal-mondo/cronaca/1953289/new-york-stati-blackout-inondazioni-nord-est-tempesta",
+          "seconds": 15.7
+        },
+        {
+          "kind": "topic-gate-abort",
+          "at": "2026-09-29T03:55:26.000749Z",
+          "section": "svizzera",
+          "url": "https://www.tio.ch/svizzera/cronaca/1953215/incidente-mortale-sul-lavoro-perde-la-vita-un-operaio-di-29-anni",
+          "seconds": 10.4
+        },
+        {
+          "kind": "topic-gate-abort",
+          "at": "2026-09-29T03:58:25.786958Z",
+          "section": "svizzera",
+          "url": "https://www.tio.ch/svizzera/attualita/1953171/internet-swiss-primo-aereo-velocita",
+          "seconds": 179.8
+        },
+        {
+          "kind": "duplicate-after-body",
+          "at": "2026-09-29T04:03:29.511922Z",
+          "section": "svizzera",
+          "reason": "lessicale (Titolo: 83% ≥ 82.61941642934715%)",
+          "seconds": 38.3
+        },
+        {
+          "kind": "duplicate-after-body",
+          "at": "2026-09-29T04:11:23.991162Z",
+          "section": "svizzera",
+          "reason": "lessicale (Titolo: 100% ≥ 82.61941642934715%)",
+          "seconds": 40.4
+        },
+        {
+          "kind": "duplicate-after-body",
+          "at": "2026-09-29T04:15:27.868587Z",
+          "section": "svizzera",
+          "reason": "lessicale (ID: 75% ≥ 72%)",
+          "seconds": 26.2
+        }
+      ]
+    },
+    {
+      "run": 36521853541,
+      "events": []
+    }
+  ]
+}

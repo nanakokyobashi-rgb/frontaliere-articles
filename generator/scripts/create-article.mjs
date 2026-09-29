@@ -233,6 +233,8 @@ import {
   strikeEvergreenKeyword as _strikeEvergreenKeyword,
   EVERGREEN_STRIKE_LIMIT as _EVERGREEN_STRIKE_LIMIT,
   persistEvergreenRejectedTracker as _persistEvergreenRejectedTracker,
+  isTopicGateAbortedUrl as _isTopicGateAbortedUrl,
+  recordTopicGateAbortedUrl as _recordTopicGateAbortedUrl,
 } from './lib/article-topic-selector.mjs';
 
 // ── Phase 3 — Discovery pool + quota controller ──────────────────
@@ -6406,7 +6408,7 @@ async function callLLM(messages, opts = {}) {
       // Il verdetto e' delegato a ./lib/body2-payload-verdict.mjs: e' li' che
       // vive la regola, ed e' li' che il test la esegue (questo file non e'
       // importabile senza `npm ci`, vedi l'intestazione del modulo).
-      const { verdict, itContent: _verdictContent, missing } = classifyBody2Payload({ parsed, parseErr, expectedFields: _body2Validation.fields });
+      const { verdict, itContent: _verdictContent, missing, salvagedPayload } = classifyBody2Payload({ parsed, parseErr, expectedFields: _body2Validation.fields });
       itContent = _verdictContent;
 
       // ── REGOLA #0: l'abort e' una risposta VALIDA, non un payload rotto ────
@@ -6512,6 +6514,16 @@ async function callLLM(messages, opts = {}) {
         throw _bodyErr;
       } else {
         recordModelContentSuccess(modelUsedRef.model);
+      }
+      // Articolo intero nel body1: il verdetto l'ha ridiviso ai titoli `##`
+      // (splitOverflowingBody1) e i body divisi hanno passato gli stessi
+      // controlli. Si restituisce quel payload invece di rigenerare il testo
+      // che il modello ha gia' scritto (run 36514673677: 184 s di Codex per
+      // riscrivere un articolo consegnato tutto nel body1).
+      if (salvagedPayload) {
+        console.error(`  ✂️  articolo intero nel body1 (${modelUsedRef.model || 'unknown'}): diviso ai titoli ## in body1/body2/body3, nessuna rigenerazione.`);
+        RUN_REPORT.body1SplitSalvages = (RUN_REPORT.body1SplitSalvages || 0) + 1;
+        return JSON.stringify(salvagedPayload);
       }
     }
     return result;
@@ -12873,7 +12885,7 @@ function preFlightHeadlineCheck(headline) {
 }
 
 // ── Step 3a.2: Programmatic duplicate detection (multi-signal) ──
-function checkForDuplicates(data) {
+function checkForDuplicates(data, { localizedSlugs = true } = {}) {
   // Read existing article titles AND excerpts across ALL sections (frontaliere
   // + svizzera). Cross-section coverage (was: active section only) so an
   // evergreen already published in the sibling section is caught — the
@@ -13023,7 +13035,10 @@ function checkForDuplicates(data) {
   // paths that derive their own translated slugs (e.g.
   // publish-journalist-article.mjs's deriveLocaleSlugs()) reuse this SAME
   // guard instead of re-implementing (and potentially forgetting) it.
-  checkTranslatedSlugCollisions(data);
+  // `localizedSlugs: false` (the early gate of Step 3a.0-dup) checks only the
+  // IT slot: EN/DE/FR slugs are still provisional there, and the full check
+  // runs at Step 3a.2 and again after relocalizeSlugsAfterTranslation().
+  checkTranslatedSlugCollisions(data, { locales: localizedSlugs ? ['it', 'en', 'de', 'fr'] : ['it'] });
 
   console.error('  ✅ Nessun duplicato rilevato');
   return data;
@@ -13046,12 +13061,12 @@ function checkForDuplicates(data) {
  * loudly instead of poisoning the registry and surfacing later as main-red
  * on the routing round-trip test.
  */
-function checkTranslatedSlugCollisions(data) {
+function checkTranslatedSlugCollisions(data, { locales = ['it', 'en', 'de', 'fr'] } = {}) {
   // `routerSrc` here was previously a dangling reference left by the section
   // refactor (it was a local of modifyRouterTs), which threw "routerSrc is
   // not defined" and broke EVERY generation run.
   const sectionSlugSrc = readSectionSlugData();
-  for (const locale of ['it', 'en', 'de', 'fr']) {
+  for (const locale of locales) {
     const newSlug = data.slugs[locale];
     // A nullish slug builds a degenerate regex (`escapeRegex(undefined)` → '')
     // that never matches a populated slot → the overlap check silently passes
@@ -14609,8 +14624,9 @@ const RUN_START_MS = Date.now();
 /**
  * Margine fra la scadenza del tier di traduzione Codex e il budget wall-clock.
  *
- * Il budget del tier (FREE_TRANSLATE_CODEX_MAX_MS, 300 s cumulati) non conosce
- * l'orologio di questo processo: sulle run 36309380063 e 36305591991 le
+ * Il budget del tier (FREE_TRANSLATE_CODEX_MAX_MS, 300 s di orologio con almeno
+ * una richiesta Codex in volo, contati dall'inizio delle traduzioni) non
+ * conosce l'orologio di questo processo: sulle run 36309380063 e 36305591991 le
  * traduzioni erano ancora in corso quando il `timeout` del workflow ha ucciso
  * il processo a 657 s, con l'articolo IT gia' pronto. Con la scadenza
  * dichiarata il tier non avvia chiamate che non possono finire entro
@@ -15154,6 +15170,21 @@ async function main() {
         console.error(`  📋 Post-filtro URL: ${headlines.length}/${beforeSourceFilter} headline rimanenti\n`);
       }
 
+      // ── Pre-filter: fonti gia' rifiutate dal topic-gate (REGOLA #0) ──
+      // Il verdetto di un abort e' sulla fonte, e nessun modello puo'
+      // ribaltarlo: la run successiva rifaceva selezione, fetch e chiamata
+      // Codex sullo stesso URL (run 36514673677: 4 abort su 5 erano URL gia'
+      // scartati 45 minuti prima). Ricordati per sezione e per 48 h in
+      // `topicGateUrls` (lib/article-topic-selector.mjs).
+      const topicGateTracker = _loadEvergreenRejectedTracker();
+      headlines = headlines.filter(h => {
+        if (!h.url || !_isTopicGateAbortedUrl(topicGateTracker, normalizeNewsUrl(h.url), SECTION_NAME)) return true;
+        console.error(`  🚫 Headline scartata (topic-gate REGOLA #0 su questa fonte nelle ultime 48 h): ${h.headline.slice(0, 60)}…`);
+        RUN_REPORT.preFilterDrops.topicGateAbortedRecently = (RUN_REPORT.preFilterDrops.topicGateAbortedRecently || 0) + 1;
+        recordDiscardedHeadline({ reason: 'topic_gate_aborted_recently', headline: h.headline });
+        return false;
+      });
+
       // ── Pre-filter: remove headlines whose TOPIC matches an existing article ──
       // Same news re-published on a different URL slips past the URL dedup. The
       // article-ID containment check (Italian stemmer + synonyms) catches
@@ -15476,6 +15507,13 @@ async function main() {
                 attempt--;
                 continue;
               }
+              // Il pre-filtro vede solo l'URL di redirect di Google News: la
+              // fonte reale si confronta qui con gli abort di REGOLA #0.
+              if (_isTopicGateAbortedUrl(_loadEvergreenRejectedTracker(), normalizeNewsUrl(realUrl), SECTION_NAME)) {
+                console.error('   🚫 Google News decodificata ma la fonte ha avuto un abort di REGOLA #0 nelle ultime 48 h — provo un\'altra headline (non conta come tentativo)');
+                attempt--;
+                continue;
+              }
               console.error(`   🔓 Google News decodificata → fonte reale: ${realUrl.slice(0, 80)}`);
               url = realUrl;
               chosen = { ...chosen, url: realUrl, _resolvedFromGoogleNewsRss: chosen.url };
@@ -15510,6 +15548,14 @@ async function main() {
             // 2026-05-11). Same quality outcome (slop not published)
             // but workflow stays green and retry budget is honored.
             const isTopicGateAbort = e.topicGateAbort === true || /topic-gate abort/i.test(e.message);
+            // La fonte non ha aggancio per questa sezione: la si ricorda per
+            // 48 h, cosi' le prossime run non la riselezionano (vedi il
+            // pre-filtro «fonti gia' rifiutate dal topic-gate»).
+            if (isTopicGateAbort && url && !String(url).startsWith('evergreen://')) {
+              try {
+                _persistEvergreenRejectedTracker(_recordTopicGateAbortedUrl(_loadEvergreenRejectedTracker(), normalizeNewsUrl(url), SECTION_NAME));
+              } catch { /* la memoria e' un risparmio, non un gate */ }
+            }
             const isQualityReject = isQualityRejectError(e);
             if (isQualityReject && attempt < MAX_DUPLICATE_RETRIES) {
               const tag = isTopicGateAbort ? 'topic-gate (REGOLA #0)' : 'qualità';
@@ -16229,6 +16275,22 @@ async function generateAndValidateArticle(url, sourceContext = null) {
     // primary path does not enter registerArticleFiles().
     assertGeneratedArticleQuality(data);
     optimizeSeoMetadata(data);
+    // Step 3a.0-dup: i gate deterministici dei duplicati, gli stessi di Step
+    // 3a.2 e 3a.4, gia' qui, prima del fact-check e dell'espansione. Id e
+    // titolo IT sono stabili da questo punto: il fact-check e l'espansione
+    // toccano il corpo. Nella run 36519078323 (2026-09-29) tre articoli
+    // evergreen sono stati scritti, verificati ed espansi e poi scartati a Step
+    // 3a.2 come duplicati lessicali (titolo 83% e 100%, id 75%): 105 s fra
+    // «Articolo IT generato» e il rigetto, spesi in verificatori e gate su
+    // testo gia' condannato, che qui costano millisecondi. La generazione del
+    // corpo resta pagata: la decide il titolo che il modello sceglie. Lo stesso errore, con lo stesso messaggio, arriva
+    // allo stesso chiamante («Duplicato post-generazione» → prossima keyword).
+    // I gate di Step 3a.2-3a.4 restano e giudicano l'articolo finale.
+    // `localizedSlugs: false`: gli slug EN/DE/FR sono ancora provvisori qui;
+    // la loro collisione la giudicano Step 3a.2 e il controllo dopo
+    // relocalizeSlugsAfterTranslation(), come prima.
+    checkForDuplicates(data, { localizedSlugs: false });
+    assertTopicNotRecentlyCovered(data, loadExistingArticleSummariesWithDates());
 
     // Step 3a.0-skip: bail early when the chosen source has zero frontaliere
     // signal. Detected on attempt 1 only — across retries the source URL is
