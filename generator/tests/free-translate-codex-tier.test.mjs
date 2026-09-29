@@ -42,7 +42,8 @@ for (const key of [
   'DEEPL_API_KEY_2', 'AZURE_TRANSLATOR_KEY_2', 'GSC_CLIENT_ID', 'GSC_CLIENT_SECRET',
   'GSC_REFRESH_TOKEN', 'HF_TOKEN', 'HUGGINGFACE_API_KEY', 'LIBRETRANSLATE_SELF_HOSTED_URL',
   'MT_LOCAL_OPUSMT', 'ENABLE_CODEX_ARTICLE_FALLBACK', 'AI_MODELS_PREFER', 'AI_MODELS_FORCE_CHAIN',
-  'FREE_TRANSLATE_CODEX_MAX_CALLS', 'FREE_TRANSLATE_CODEX_MAX_MS',
+  'FREE_TRANSLATE_CODEX_MAX_CALLS', 'FREE_TRANSLATE_CODEX_MAX_MS', 'FREE_TRANSLATE_CODEX_LANES',
+  'FREE_TRANSLATE_CODEX_BATCH_MAX_TEXTS',
 ]) delete process.env[key];
 process.env.DEEPL_API_KEY = 'deepl-finta';
 process.env.AZURE_TRANSLATOR_KEY = 'azure-finta';
@@ -127,6 +128,35 @@ function captureLog(fn) {
 }
 
 const it = (text = IT) => freeTranslate({ text, sourceLang: 'it', targetLang: 'en', fieldType: 'description' });
+
+/** Testi distinti, tutti it→en: `Numero N` li distingue. */
+const numbered = (count) => Array.from({ length: count }, (_, i) => `${IT} Numero ${i + 1}.`);
+const translationOf = (text) => `${EN} [${/Numero (\d+)/.exec(text)?.[1] ?? '?'}]`;
+
+/** Richiesta di gruppo: il messaggio utente e' l'array JSON delle voci. */
+function batchItems(messages) {
+  const user = messages.find((m) => m.role === 'user').content;
+  return user.startsWith('[') ? JSON.parse(user) : null;
+}
+
+/** Risponde come Codex: al testo singolo con la traduzione, al gruppo con lo schema a id. */
+function codexAnswer(translate = translationOf) {
+  return (messages) => {
+    const items = batchItems(messages);
+    if (items) return JSON.stringify({ items: items.map(({ id, text }) => ({ id, text: translate(text) })) });
+    const user = messages.find((m) => m.role === 'user').content;
+    return translate(/^BEGIN_TEXT_[A-Z0-9]{8}\n([\s\S]*)\nEND_TEXT_[A-Z0-9]{8}$/.exec(user)[1]);
+  };
+}
+
+async function withLanes(lanes, body) {
+  process.env.FREE_TRANSLATE_CODEX_LANES = String(lanes);
+  try {
+    return await body();
+  } finally {
+    delete process.env.FREE_TRANSLATE_CODEX_LANES;
+  }
+}
 
 test('DeepL sano: Codex non viene chiamato', async () => {
   const calls = stubCodex(`CODEX ${EN}`);
@@ -252,27 +282,37 @@ test('il budget di chiamate ferma il tier con una riga sola', async () => {
   }
 });
 
-test('le chiamate concorrenti non superano il budget', async () => {
-  process.env.FREE_TRANSLATE_CODEX_MAX_CALLS = '3';
+test('le richieste concorrenti non superano il budget, anche quando traducono piu\' testi', async () => {
+  // Una corsia: il primo testo parte da solo, i cinque successivi insieme
+  // nella seconda richiesta, e il settimo trova il budget di 2 esaurito.
+  process.env.FREE_TRANSLATE_CODEX_MAX_CALLS = '2';
   try {
-    const calls = stubCodex(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 5));
-      return `CODEX ${EN}`;
+    await withLanes(1, async () => {
+      const texts = numbered(7);
+      const answer = codexAnswer();
+      const calls = stubCodex(async (messages) => {
+        await new Promise((resolve) => setTimeout(resolve, 5));
+        return answer(messages);
+      });
+      const { value } = await captureLog(() => Promise.all(texts.map((text) => it(text))));
+      assert.equal(calls.length, 2);
+      assert.equal(batchItems(calls[0].messages), null);
+      assert.equal(batchItems(calls[1].messages).length, 5);
+      assert.deepEqual(value.slice(0, 6), texts.slice(0, 6).map(translationOf));
+      assert.equal(value[6], `MYMEMORY ${EN}`);
     });
-    const out = await captureLog(() => Promise.all(Array.from({ length: 6 }, () => it())));
-    assert.equal(calls.length, 3);
-    assert.equal(out.value.filter((v) => v === `CODEX ${EN}`).length, 3);
   } finally {
     delete process.env.FREE_TRANSLATE_CODEX_MAX_CALLS;
   }
 });
 
-test('le chiamate concorrenti passano una alla volta e non superano insieme il budget di tempo', async () => {
+test('con una corsia le richieste passano una alla volta e non superano insieme il budget di tempo', async () => {
   // Orologio finto: ogni chiamata "dura" 10 s. Con 20 s di budget la prima
   // chiamata lascia 10 s, sotto il minimo di 15 s per chiamata: le altre non
   // partono. Lette in parallelo prima dell'await, tutte e tre avrebbero visto
   // 20 s di residuo e sarebbero partite.
   process.env.FREE_TRANSLATE_CODEX_MAX_MS = '20000';
+  process.env.FREE_TRANSLATE_CODEX_LANES = '1';
   const realNow = Date.now;
   let offset = 0;
   Date.now = () => realNow() + offset;
@@ -295,23 +335,172 @@ test('le chiamate concorrenti passano una alla volta e non superano insieme il b
   } finally {
     Date.now = realNow;
     delete process.env.FREE_TRANSLATE_CODEX_MAX_MS;
+    delete process.env.FREE_TRANSLATE_CODEX_LANES;
   }
 });
 
-test('in coda le chiamate non si sovrappongono mai', async () => {
+test('il budget di tempo conta l\'orologio: due richieste parallele di 10 s ne costano 10', async () => {
+  // Con la somma delle durate due richieste parallele avrebbero speso 20 s e
+  // fermato il tier; a orologio ne hanno spesi 10, e la terza parte.
+  process.env.FREE_TRANSLATE_CODEX_MAX_MS = '30000';
+  const realNow = Date.now;
+  let offset = 0;
+  Date.now = () => realNow() + offset;
+  try {
+    let started = 0;
+    let release = () => {};
+    const bothStarted = new Promise((resolve) => { release = resolve; });
+    const answer = codexAnswer();
+    const calls = stubCodex(async (messages) => {
+      started += 1;
+      if (started === 2) {
+        offset += 10_000;
+        release();
+      }
+      if (started <= 2) await bothStarted;
+      return answer(messages);
+    });
+    const [a, b, c] = numbered(3);
+    const first = await captureLog(() => Promise.all([it(a), it(b)]));
+    assert.deepEqual(first.value, [translationOf(a), translationOf(b)]);
+    const third = await captureLog(() => it(c));
+    assert.equal(third.value, translationOf(c));
+    assert.equal(calls.length, 3);
+  } finally {
+    Date.now = realNow;
+    delete process.env.FREE_TRANSLATE_CODEX_MAX_MS;
+  }
+});
+
+test('mai piu\' richieste in volo delle corsie del processo', async () => {
   let inFlight = 0;
   let maxInFlight = 0;
-  const calls = stubCodex(async () => {
+  const answer = codexAnswer();
+  const calls = stubCodex(async (messages) => {
     inFlight += 1;
     maxInFlight = Math.max(maxInFlight, inFlight);
     await new Promise((resolve) => setTimeout(resolve, 5));
     inFlight -= 1;
-    return `CODEX ${EN}`;
+    return answer(messages);
   });
-  const out = await captureLog(() => Promise.all(Array.from({ length: 4 }, () => it())));
-  assert.deepEqual(out.value, Array(4).fill(`CODEX ${EN}`));
-  assert.equal(calls.length, 4);
-  assert.equal(maxInFlight, 1);
+  const texts = numbered(6);
+  const out = await captureLog(() => Promise.all(texts.map((text) => it(text))));
+  assert.deepEqual(out.value, texts.map(translationOf));
+  // Default: due corsie. I primi due testi partono da soli; al primo posto
+  // libero la coda di 4 si divide per le 2 corsie (gruppo di 2), poi i due
+  // testi rimasti partono uno per corsia.
+  assert.equal(maxInFlight, 2);
+  assert.deepEqual(calls.map((c) => batchItems(c.messages)?.length ?? 1), [1, 1, 2, 1, 1]);
+});
+
+test('una voce di gruppo avvolta in una cornice di codice arriva senza cornice', async () => {
+  await withLanes(1, async () => {
+    const answer = codexAnswer();
+    const fence = '```';
+    const calls = stubCodex((messages) => {
+      const items = batchItems(messages);
+      if (!items) return answer(messages);
+      return JSON.stringify({ items: items.map(({ id, text }) => ({ id, text: `${fence}\n${translationOf(text)}\n${fence}` })) });
+    });
+    const texts = numbered(3);
+    const { value } = await captureLog(() => Promise.all(texts.map((text) => it(text))));
+    assert.equal(calls.length, 2);
+    assert.deepEqual(value, texts.map(translationOf));
+  });
+});
+
+test('FREE_TRANSLATE_CODEX_BATCH_MAX_TEXTS=1 con una corsia torna una richiesta per testo, una alla volta', async () => {
+  process.env.FREE_TRANSLATE_CODEX_BATCH_MAX_TEXTS = '1';
+  try {
+    await withLanes(1, async () => {
+      let inFlight = 0;
+      let maxInFlight = 0;
+      const answer = codexAnswer();
+      const calls = stubCodex(async (messages) => {
+        inFlight += 1;
+        maxInFlight = Math.max(maxInFlight, inFlight);
+        await new Promise((resolve) => setTimeout(resolve, 5));
+        inFlight -= 1;
+        return answer(messages);
+      });
+      const texts = numbered(4);
+      const { value } = await captureLog(() => Promise.all(texts.map((text) => it(text))));
+      assert.deepEqual(value, texts.map(translationOf));
+      assert.equal(calls.length, 4);
+      assert.equal(maxInFlight, 1);
+      assert.ok(calls.every((c) => batchItems(c.messages) === null));
+    });
+  } finally {
+    delete process.env.FREE_TRANSLATE_CODEX_BATCH_MAX_TEXTS;
+  }
+});
+
+test('con le corsie occupate i testi in coda partono insieme, con lo schema a id e le regole del testo singolo', async () => {
+  await withLanes(1, async () => {
+    const calls = stubCodex(codexAnswer());
+    const texts = numbered(4);
+    const { value } = await captureLog(() => Promise.all(texts.map((text) => it(text))));
+    assert.deepEqual(value, texts.map(translationOf));
+    assert.equal(calls.length, 2);
+    const { messages, opts } = calls[1];
+    assert.deepEqual(batchItems(messages), texts.slice(1).map((text, i) => ({ id: i + 1, text })));
+    const system = messages.find((m) => m.role === 'system').content;
+    assert.match(system, /from Italian to English/);
+    assert.match(system, /Translate each item on its own/);
+    assert.match(system, /ZQX0XQZ/);
+    assert.equal(opts.jsonMode, true);
+    assert.deepEqual(opts.jsonSchema.schema.properties.items.items.required, ['id', 'text']);
+    assert.deepEqual(opts.chain, [AI_MODELS.CODEX_CLI_PRIMARY]);
+    assert.equal(opts.bypassForceChain, true);
+  });
+});
+
+test('una voce mancante, vuota o con un id estraneo scende al tier successivo, le altre restano', async () => {
+  await withLanes(1, async () => {
+    const answer = codexAnswer();
+    const calls = stubCodex((messages) => {
+      const items = batchItems(messages);
+      if (!items) return answer(messages);
+      return JSON.stringify({ items: [
+        { id: 1, text: translationOf(items[0].text) },
+        { id: 2, text: '' },
+        { id: 99, text: 'estranea' },
+      ] });
+    });
+    const texts = numbered(4);
+    const { value } = await captureLog(() => Promise.all(texts.map((text) => it(text))));
+    assert.equal(calls.length, 2);
+    assert.deepEqual(value, [translationOf(texts[0]), translationOf(texts[1]), `MYMEMORY ${EN}`, `MYMEMORY ${EN}`]);
+  });
+});
+
+test('testi identici in coda diventano una voce sola', async () => {
+  await withLanes(1, async () => {
+    const calls = stubCodex(codexAnswer());
+    const [a, b] = numbered(2);
+    const { value } = await captureLog(() => Promise.all([it(a), it(b), it(b), it(b)]));
+    assert.deepEqual(value, [translationOf(a), translationOf(b), translationOf(b), translationOf(b)]);
+    // Tre copie dello stesso testo: una voce, quindi il prompt del testo singolo.
+    assert.equal(calls.length, 2);
+    assert.equal(batchItems(calls[1].messages), null);
+  });
+});
+
+test('una richiesta di gruppo fallita e\' un errore per ogni suo testo e un fallimento solo', async () => {
+  await withLanes(1, async () => {
+    const before = codexCounters();
+    const answer = codexAnswer();
+    const calls = stubCodex((messages) => {
+      if (batchItems(messages)) throw new Error('broker non raggiungibile');
+      return answer(messages);
+    });
+    const texts = numbered(4);
+    const { value, lines } = await captureLog(() => Promise.all(texts.map((text) => it(text))));
+    assert.equal(calls.length, 2);
+    assert.deepEqual(value, [translationOf(texts[0]), `MYMEMORY ${EN}`, `MYMEMORY ${EN}`, `MYMEMORY ${EN}`]);
+    assert.equal(codexCounters().errors - before.errors, 3);
+    assert.equal(lines.filter((l) => l.includes('fallimenti consecutivi')).length, 0);
+  });
 });
 
 test('tre fallimenti consecutivi fermano il tier, contati come errori del tier', async () => {
@@ -505,6 +694,8 @@ test('la scadenza si rivaluta in coda: la chiamata che la consuma ferma le succe
   let offset = 0;
   Date.now = () => realNow() + offset;
   setCodexTranslateProcessDeadline(realNow() + 30_000);
+  // Una corsia: la seconda e la terza aspettano la prima, come prima delle corsie.
+  process.env.FREE_TRANSLATE_CODEX_LANES = '1';
   try {
     const calls = stubCodex(async () => {
       await new Promise((resolve) => setTimeout(resolve, 5));
@@ -517,5 +708,6 @@ test('la scadenza si rivaluta in coda: la chiamata che la consuma ferma le succe
   } finally {
     Date.now = realNow;
     setCodexTranslateProcessDeadline(null);
+    delete process.env.FREE_TRANSLATE_CODEX_LANES;
   }
 });
