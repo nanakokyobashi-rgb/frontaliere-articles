@@ -215,9 +215,9 @@
       "path": "scripts/ci/check-issue-already-resolved.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "ec154784e099f89c",
-        "corpus": "ec154784e099f89c",
-        "alignedAt": "2026-09-28"
+        "site": "af841d0dedc48fb6",
+        "corpus": "af841d0dedc48fb6",
+        "alignedAt": "2026-09-29"
       }
     },
     {
@@ -3884,9 +3884,9 @@
       "sitePath": "scripts/lib/github-actions-read-client.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "90d86156213f814f",
-        "corpus": "90d86156213f814f",
-        "alignedAt": "2026-09-25"
+        "site": "1b175fe8929c8803",
+        "corpus": "1b175fe8929c8803",
+        "alignedAt": "2026-09-29"
       }
     },
     {
@@ -4369,9 +4369,9 @@
       "path": ".github/actions/claude-codex-fallback/git-bridge-server.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "25f8137c77e8af1c",
-        "corpus": "25f8137c77e8af1c",
-        "alignedAt": "2026-09-28"
+        "site": "d7968e40d638f010",
+        "corpus": "d7968e40d638f010",
+        "alignedAt": "2026-09-29"
       }
     },
     {
