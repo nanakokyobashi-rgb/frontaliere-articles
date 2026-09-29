@@ -648,7 +648,7 @@
       "reason": "Verifica che i path citati fra backtick nel body di una PR ESISTANO. E' il secondo giro dell'escalation #140: `pr-body-sections-check` guarda la presenza della sezione, `pr-body-nextstep-check` la forma dello stato, e un body puo' essere di forma perfetta e citare file che qui non ci sono — sulla #358 `checkNextStepStates` dava `ok: true` mentre il reviewer spendeva un ciclo per dire che due path non esistevano. Sul sito non esiste, e non e' `corpus-only-pending`: il perimetro (`KNOWN_ROOTS`) e la dislocazione `scripts/` -> `generator/scripts/` sono la topologia di QUESTO repo, e la soglia advisory e' calibrata sulle 45 PR mergiate di qui (misura nel docblock). Sul sito quei due pezzi andrebbero rimisurati da zero, quindi la' e' un modulo diverso, non lo stesso file. Stessa politica del gemello `pr-body-nextstep-check.mjs`, corpus-only per la stessa ragione.",
       "baseline": {
         "site": null,
-        "corpus": "9b4844fb79d66cf3",
+        "corpus": "497c11bcbbcf6300",
         "alignedAt": "2026-09-03"
       }
     },
@@ -718,7 +718,7 @@
       "reason": "Identita' GITHUB_PAT_NANAKO, ponte RC del corpus, niente npm ci, niente exit 1 sul load-failure (il failure-scanner aprirebbe una issue doppia), niente step shard deploy-key (admin=false), cadenza 20 6,18 invece di 30 6. LOAD_FAIL_TITLE resta letterale: e' la chiave di dedup con alert-pat-down.mjs.",
       "baseline": {
         "site": "07b46476f187df45",
-        "corpus": "8346089e16d173a6",
+        "corpus": "90f620e2993cb87e",
         "alignedAt": "2026-08-08"
       }
     },
@@ -728,7 +728,7 @@
       "reason": "Un solo check obbligatorio per codice, test e review in entrambi i repo; gli edit del body sono gestiti dal recupero selettivo esterno. Il sito usa Vitest e un contratto API prima del checkout; il corpus usa node:test e i propri validatori modulari del body dopo il checkout. Il corpus conserva il gate generator-ci path-scoped, le esclusioni draft/engine-lockstep-auto e la review senza proxy Headroom. RICONCILIATO 2026-09-25: dopo la riconciliazione #9443 il sito ha cambiato il file solo in valerielinc-ops/frontaliere-si-o-no#9715 (prompt di review postato con --body-file), portato nel corpus da #1773; baseline riregistrata con --force. I due digest registrano le revisioni correnti dei lati adattati, non una falsa identità byte-a-byte. Dal 2026-09-25 il corpus legge il body in `Resolve review input revision` tramite `scripts/ci/lib/gh-rate-limit.mjs` (attesa del reset entro 15 min e un solo retry, altrimenti rosso che nomina il rate limit e il reset), preso dalla directory trusted del bootstrap del review gate e mai dal checkout della PR: il bucket REST del `GITHUB_TOKEN` e' uno solo per tutti i workflow di questo repo e si e' esaurito il 2026-09-25 06:58-07:10 UTC. Adattamento corpus: baseline corpus riattestata su questa modifica, quella site resta al riferimento gia' registrato cosi' il movimento del sito resta visibile.",
       "baseline": {
         "site": "898810d03711dfd2",
-        "corpus": "d860abda56bb1e73",
+        "corpus": "743fe9c86cb0694e",
         "alignedAt": "2026-09-25",
         "forcedAt": "2026-09-25T05:32:09.362Z"
       }
@@ -789,7 +789,7 @@
       "reason": "Solo la cadenza (53 5 invece di 17 5). NB: la mia esclusione iniziale era sbagliata — lo step Claude e' gatato su has_novel=='true', quindi senza pattern nuovi il workflow esce a costo ZERO, non brucia una run al giorno.",
       "baseline": {
         "site": "c24d679b209811d3",
-        "corpus": "53ae79b47ab50b37",
+        "corpus": "c95cf2c66ed9a40e",
         "alignedAt": "2026-09-11",
         "forcedAt": "2026-09-11T23:21:48.970Z"
       }
@@ -800,7 +800,7 @@
       "reason": "Solo la cadenza cambia: :47 invece del :17 del sito, per non sommare i picchi sulla stessa API. Lo script sottostante e' identical.",
       "baseline": {
         "site": "f7c6be4644c56dc2",
-        "corpus": "91fdbb8ee2f6f509",
+        "corpus": "351c149f3e52a127",
         "alignedAt": "2026-08-18"
       }
     },
@@ -830,7 +830,7 @@
       "reason": "Il sito apre le issue di fallimento con uno step dentro ognuno dei suoi 135 workflow. Qui la scansione e' centrale: modificare i workflow di generazione (il core operativo del repo) per una preoccupazione che non e' la loro lascerebbe comunque scoperto ogni workflow nuovo. Il sito e' gia' arrivato alla stessa conclusione per il lato che CHIUDE (close-recovered, 'without wiring a per-workflow step into ~300 YAML files'): questa e' la meta' simmetrica, ed e' un candidato a risalire. Dal trasporto #1971 il monitor dichiara anche l'opt-in al budget realtime di 3 giorni sul filtro `created`; un deep scan a 35 giorni resta retention-complete senza opt-in.",
       "baseline": {
         "site": null,
-        "corpus": "d7402fdbbfacddb2",
+        "corpus": "60a4ea3dc256edcd",
         "alignedAt": "2026-09-28"
       }
     },
@@ -901,7 +901,7 @@
       "reason": "Il workflow che esegue il rilevatore di divergenza. Vive solo qui: e' questo il lato che riceve il ciclo, il sito e' la sorgente e non ha bisogno di sorvegliare se stesso.",
       "baseline": {
         "site": null,
-        "corpus": "636e787ec850895c",
+        "corpus": "607d31f685ab3bc0",
         "alignedAt": "2026-08-07"
       }
     },
@@ -980,7 +980,7 @@
       "reason": "Niente npm ci; ponte RC in generator/scripts/load-rc-env.mjs; token di routing GITHUB_PAT_NANAKO, esposto a triage-sweep.mjs col nome GITHUB_PAT che lo script legge (mappare qui tiene lo script byte-identico invece di forkarlo); cadenza sweep sfasata.",
       "baseline": {
         "site": "0c6c95699e499c25",
-        "corpus": "3dc30e3bfcdbd817",
+        "corpus": "eef681d2ac22a267",
         "alignedAt": "2026-08-08"
       }
     },
@@ -990,7 +990,7 @@
       "reason": "Gate sender esteso agli account del progetto (la label di routing la applica il PAT di questo repo, di un altro account); identita' di push GITHUB_PAT_NANAKO invece del token GitHub App; gate test `node --test` invece di vitest; niente npm ci; il pre-flight di quota passa QUOTA_BEACON_PEER_REPO per cedere al sito. Prompt riscritto sul dominio di questo repo (superficie dist/api, contratto engine/host, content/ come dati). RIALLINEATO 2026-08-09 da `both-moved`, con le due modifiche verificate DISGIUNTE. Il sito ha sostituito `env.APP_TOKEN == ''` con `env.APP_TOKEN_WORKFLOWS != 'true'` nel gate del capability guard (riga 185 la'): qui quella stessa espressione era gia' `env.GITHUB_PAT_NANAKO == ''` (riga 136), cioe' il sito ha cambiato esattamente cio' che questo fork aveva gia' rimpiazzato. Il corpus si e' mosso per conto suo con #93 (rimozione dell'http.<host>.extraheader che rendeva inerte il set-url col PAT, e l'`ISSUE:` mancante per mark-claude-terminal-outcome.mjs). Nessuna delle due tocca cio' che l'altra ha toccato. Dal 2026-09-03 porta anche i tre step deterministici post-Claude del sito: il checkpoint WIP che salva su `fix/issue-N` il diff di un run morto ai turni, il backstop `FIX_OUTCOME` che garantisce un marker al drainer anche quando l'agente non lo posta, e il classificatore che colora il job sul LAVORO consegnato invece che sull'exit della CLI. Adattati all'identita' di push di questo repo (GITHUB_PAT_NANAKO invece del token di App) e al fatto che ogni `gh` qui vuole `--repo`. RICONCILIATO 2026-09-06 da `both-moved` (#956, item 1). Le due mosse dalla baseline precedente sono di nuovo DISGIUNTE. Lato sito: il tetto di step `timeout-minutes` su `Run Claude fix` (classe #7310), PORTATO qui con il numero ri-misurato su questo repo invece che copiato; il resto del suo diff e' la chiave di concorrenza per-issue (che qui era gia' arrivata con #908) e un commento sul default di FOLLOWUP_MAX_INFLIGHT_FIX, che nel nostro file non compare. Lato corpus: il pre-flight di dispatch stantio (#918), la terza condizione `no-root-cause`+manifest per la consegna al sito (#316), la discovery PR del vecchio backstop/classificatore con `sort_by(.createdAt) | last` (#925) e l'eccezione «issue aggregata» nel prompt — tutte modifiche che il sito non ha, quindi `corpus-ahead` da far risalire di la', non drift da correggere qui. Nota sul perche' il `both-moved` era in parte artificiale: l'allineamento del 2026-09-03 aveva aggiornato `baseline.corpus` e `alignedAt` lasciando `baseline.site` a quello del 2026-08-09, quindi il lato sito risultava mosso anche per i tre giri gia' letti allora. F5 (2026-09-20): baseline sidecar per run+attempt e helper `pr-delivery-evidence.mjs` trasportato insieme al marker; il workflow adattato prova nuova PR, nuovo HEAD o OPEN -> MERGED corrente e tratta lookup unknown fail-closed, preservando skipped/cancelled/no-op.",
       "baseline": {
         "site": "528d65247c678beb",
-        "corpus": "bf596d2a7eb43c43",
+        "corpus": "b7df63a69ab05087",
         "alignedAt": "2026-09-06"
       }
     },
@@ -1000,7 +1000,7 @@
       "reason": "Stadio di decomposizione (sito #6228). Adattamenti: sender gate con gli account del progetto; identita' GITHUB_PAT_NANAKO invece della GitHub App; ponte RC generator/scripts/load-rc-env.mjs; QUOTA_BEACON_PEER_REPO verso il sito; ensure-loop-labels; prompt sul dominio del corpus (manifest/identical, node --test) e recupero di VISION.md dal sito se assente qui.",
       "baseline": {
         "site": "3bcdb9b32a40a785",
-        "corpus": "fd4e8797614e8b96",
+        "corpus": "816752e6ace0032e",
         "alignedAt": "2026-08-21"
       }
     },
@@ -1010,7 +1010,7 @@
       "reason": "Niente npm ci; ponte RC del corpus; promozione via GITHUB_PAT_NANAKO; cadenza sfasata dal sito.",
       "baseline": {
         "site": "575a6adab631ac38",
-        "corpus": "003b503a130719da",
+        "corpus": "13a6ae65b92b1862",
         "alignedAt": "2026-09-27",
         "forcedAt": "2026-09-27T12:13:57.648Z"
       }
@@ -1021,7 +1021,7 @@
       "reason": "Stessa struttura del contratto del sito, non-negoziabili di questo repo: mai importare content/ nel sito, l'engine si modifica in packages/articles del SITO (qui verrebbe sovrascritto dal mirror), SiteShellContract e host/ viaggiano insieme, il glob obbligatorio in node --test. RIALLINEATO 2026-08-09 senza portare nulla: il diff del sito dalla baseline precedente e' UNA riga, che aggiunge «CWV field criterion (#5001) docs/CWV-FIELD-CRITERION.md» alla sezione «Reference Docs». Qui non si applica per due motivi verificati: questo AGENTS.md non ha una sezione «Reference Docs» (le sue sono Cos'e' questo repo / La superficie pubblica / Non-negoziabili / Build e test / Credenziali / Il ciclo autonomo), e il repo non ha una cartella docs/ (404). Una modifica futura del sito che invece si applichi tornera' a comparire, perche' la baseline e' aggiornata all'hash di oggi, non disattivata.",
       "baseline": {
         "site": "7b52bedf01d44f0d",
-        "corpus": "b10670c48facff7b",
+        "corpus": "89844a388d163b80",
         "alignedAt": "2026-09-03"
       }
     },
@@ -1109,7 +1109,7 @@
       "reason": "Niente npm ci, cadenza sfasata (18,48). Lo script sottostante e' identical.",
       "baseline": {
         "site": "621eb39d289ebb74",
-        "corpus": "0284db5fa2a3e17a",
+        "corpus": "636f5ceffb007a96",
         "alignedAt": "2026-08-08"
       }
     },
@@ -1119,7 +1119,7 @@
       "reason": "Rimosso sul sito in PR #6584 'ci: richiedi LGTM prima dell'auto-merge nativo' (2026-08-26): il sito e' passato dall'autorebase custom alla merge queue nativa di GitHub. Qui resta necessario: identita' di push/dispatch GITHUB_PAT_NANAKO; sparse-checkout sui path pesanti di QUESTO repo (content/ con 14.888 file, dist/, public/) invece di public/images del sito — il job fa solo merge e push e non li legge mai; niente npm ci; cadenza sfasata (22,52); e nessuna GitHub App per usare la merge queue nativa con l'identita' corretta.",
       "baseline": {
         "site": null,
-        "corpus": "9898137394c5554e",
+        "corpus": "ef98da20f76c33d0",
         "alignedAt": "2026-08-31"
       }
     },
@@ -1159,7 +1159,7 @@
       "reason": "Il corpus usa CI_CHECK_NAME e classi di recupero A/B/C/D con il workflow pr-autorebase indipendente; il sito riesegue il run di codice dalla label corrente dentro tests.yml. Si preservano i rimedi specifici del corpus, il rerun della classe B con marker del fixer e la cadenza :35. La closure transitiva statica e dinamica del checkout sparse del custode e' verificata da `generator/tests/orphan-pr-custodian.test.mjs` tramite l'estrattore condiviso di #929: site #9528 ha mostrato che nominare l'entrypoint senza un helper importato produce `ERR_MODULE_NOT_FOUND` prima della logica del custode. Questa guardia protegge il lato corpus adapted senza dichiarare risolta la issue site. Dal 2026-09-25 (bucket REST del `GITHUB_TOKEN` esaurito, 15 run del custode morte sulla prima lettura) il trigger `workflow_run` fa lo scan completo e il custode solo nel primo run partito in ogni finestra di 30 minuti (step `Decide scan scope`); gli altri run `workflow_run` classificano soltanto le PR del run di `tests` che li ha fatti nascere, e l'helper trusted del round-marker si materializza solo quando serve. Cron e dispatch restano completi. Il sito gira con un App token dal bucket separato: non e' un movimento da portare.",
       "baseline": {
         "site": "1d3108398b6a9623",
-        "corpus": "dec5c2a2c169d1c9",
+        "corpus": "0287a31f8b4606f8",
         "alignedAt": "2026-09-19"
       }
     },
@@ -1198,7 +1198,7 @@
       "reason": "Niente npm ci, ponte RC del corpus, identita' GITHUB_PAT_NANAKO, cron 50 6 sfasato dal 40 6 del sito. In piu' il Gate 0 su `autorebase-reopen-failed`, che il sito non ha e non gli serve: quella label dice \"non cancellare questo head ref\", e il suo lettore dev'essere il workflow che cancella branch. Sul sito lo fa `worktree-branch-janitor.yml`; qui quel workflow non esiste e l'unico che cancella branch e' questo, quindi e' qui che la label deve avere effetto. Sostituzione dichiarata anche in generator/tests/loop-references-exist.test.mjs, che sorveglia la citazione del janitor in pr-autorebase.mjs. ADATTAMENTO 2026-09-04 (issue #733): la lista `needs-human` dello step \"Surface needs-human PRs and issues\" esclude l'issue dedup di quello stesso step, filtrando sulla chiave di dedup (`DEDUP_TITLE`, unica sorgente del titolo, letta anche da --title). Lo step assumeva di non poter comparire nella propria lista perche' creato con `automation` e non con `needs-human`; il followup-drainer ha aggiunto `needs-human` alla issue #733 il 2026-09-02T13:39:50Z e da li' il report si auto-elenca, rendendo irraggiungibile la condizione di chiusura che scrive nel proprio corpo. Coperto da generator/tests/needs-human-digest-self-listing.test.mjs. E' un MIGLIORAMENTO del meccanismo, non un adattamento al corpus: candidato a risalire al sito, dove lo stesso step porta la stessa assunzione. ADATTAMENTO 2026-09-05 (issue #733, secondo giro): a liste entrambe vuote lo step non si limita piu' a `exit 0` — richiude l'issue dedup con `--resolve` sulla stessa `DEDUP_TITLE`. Raggiungere la condizione di chiusura non bastava: nessun altro processo chiude questo titolo (close-recovered-failure-issues.mjs copre le famiglie `Workflow Failure:` / `Crawler Failure:`), quindi il digest sarebbe rimasto aperto con un elenco ormai falso. Stessa via gia' usata da ticker-shadow-alert.mjs e lockstep-stall-watch.mjs via resolveGithubIssue. Coperto dallo stesso test. Anche questo e' un MIGLIORAMENTO, candidato a risalire al sito. ADATTAMENTO 2026-09-06 (issue #981, item 1): lo step \"Surface needs-human PRs and issues\" cattura l'exit status delle due query `gh` e salta il ramo di chiusura quando una e' fallita. Girando sotto `set -uo pipefail` senza `set -e`, un `gh` non-zero (jq su forma inattesa, rate-limit, token scaduto) lasciava le variabili vuote e indistinguibili da «nessun residuo»: con entrambe rotte dalla stessa causa lo step richiudeva il digest con `--resolve` mentre il backlog needs-human era pieno, senza fallire e sotto `continue-on-error: true`. E' la stessa subordinazione che i gemelli con `--resolve` (reconcile-article-shards.yml, republish-dirty-content.yml) esprimono gia' come `steps.detect.outcome == 'success'`, qui espressa in-step perche' produttore e consumatore sono lo stesso script. Coperto da generator/tests/needs-human-digest-self-listing.test.mjs. MIGLIORAMENTO del meccanismo, non adattamento al corpus: `corpus-ahead`, candidato a risalire al sito, dove lo stesso step ha lo stesso difetto. ADATTAMENTO 2026-09-07 (issue #1003, item 1 di #920): a liste entrambe vuote lo step non chiude piu' con `--resolve`, ma risolve da se' il NUMERO dell'issue dedup con la stessa uguaglianza esatta con cui la lista la esclude (`select(.title == env.DEDUP_TITLE)` su `gh api --paginate`, senza filtro per label perche' il digest nasce con `automation`) e chiude quel numero con `gh issue close`. `resolveGithubIssue` chiude la prima issue aperta il cui titolo `startsWith` il prefisso sanitizzato a 60 char: `DEDUP_TITLE` ne ha 52, quindi qualunque issue aperta il cui titolo comincia con la chiave e prosegue veniva chiusa AL POSTO del digest — e non portando `needs-human` non compariva in nessuna delle due liste, che restavano vuote a ogni run. Apertura, esclusione e chiusura tornano a usare UNA forma della chiave; `scripts/lib/github-issue-creator.mjs` non e' toccato (il match per prefisso li' e' deliberato e condiviso dagli altri chiamanti). La risoluzione ha il suo guard sull'exit status, come le due query sopra. Coperto da generator/tests/needs-human-digest-self-listing.test.mjs. MIGLIORAMENTO del meccanismo, non adattamento al corpus: `corpus-ahead`, candidato a risalire al sito, dove lo stesso step ha lo stesso difetto.",
       "baseline": {
         "site": "8e2799b49ef8ad31",
-        "corpus": "0670a7771189e338",
+        "corpus": "7e15b43ef6a2977f",
         "alignedAt": "2026-09-12"
       }
     },
@@ -1208,7 +1208,7 @@
       "reason": "Niente npm ci, ponte RC del corpus, identita' GITHUB_PAT_NANAKO, e lo scope-check «PR autonoma» sta nell'`if:` di job invece che nel preflight. RIALLINEATO 2026-08-09 senza portare nulla: il sito aveva cambiato una riga sola, `HAS_PAT: ${{ env.APP_TOKEN != '' || env.GITHUB_PAT != '' }}` -> `${{ env.APP_TOKEN_WORKFLOWS == 'true' || env.GITHUB_PAT != '' }}`. Qui la riga 212 e' gia' `HAS_PAT: ${{ env.GITHUB_PAT_NANAKO != '' }}`: la modifica cade dentro la zona adattata al 100%, e questo repo non ha una GitHub App da cui leggere APP_TOKEN_WORKFLOWS. RICONCILIATO 2026-09-06 (#977 item 3) da `both-moved`: dalla baseline del 2026-09-03 il sito si e' mosso due volte — #7600 (il `grep -qP` allineato alla PRIMA forma posizionale di `REDFLAG_IMPORTANT_RE`) e #7651 (il set dei reviewer bot accetta anche l'App bot, nell'`if:` e nel `--jq` del bundle). Entrambe sono gia' qui in forma piu' forte: il grep e' quello di #1106 (pinnato verbatim dal guard `mirror bash` di generator/tests/redflag-important-marker.test.mjs) e il set reviewer e' `startsWith(..., 'frontaliere-automation')` + `REVIEWER_BOT_LOGIN_JQ` da #970, che copre anche il login GraphQL senza `[bot]`. Niente da riportare in giu'. RESIDUO NOTO, non chiuso qui: il commento sopra HAS_PAT (righe 195-204) afferma ancora che «HAS_PAT accetta ORA anche APP_TOKEN», falso su questo repo, e lo step di push (riga 279) si gata su `env.APP_TOKEN != '' || env.GITHUB_PAT != ''` mentre PUSH_TOKEN e' GITHUB_PAT_NANAKO (riga 281) — variabili disallineate. Il gate passa comunque perche' GITHUB_PAT e' mappato in load-rc-env.mjs, quindi l'effetto pratico non e' stato verificato.",
       "baseline": {
         "site": "99dd0bb1b3d86d95",
-        "corpus": "52a7bedfd74f7a0b",
+        "corpus": "af0b0585b5075514",
         "alignedAt": "2026-09-26"
       }
     },
@@ -1218,7 +1218,7 @@
       "reason": "Adattamenti sostanziali: FOLLOWUP_ELIGIBLE_AUTHORS con gli autori di QUESTO repo (senza, il filtro resta quello del sito e il batch sarebbe SEMPRE vuoto — il workflow girerebbe ogni tre ore senza trovare nulla e senza un errore); il gate autore dentro il prompt allineato; QUOTA_BEACON_PEER_REPO per cedere al sito; cron 40 */2 sfasato; budget della sessione Codex uguale al sito dal 2026-09-27 (cap di sessione 14 PR, cron ogni 2h, job 140 min, step 120, watchdog 6840s), ma espresso con l'input dell'action del corpus (`exec_timeout_seconds: '6840'`) invece di `exec_timeout_minutes: \"114\"` del sito.",
       "baseline": {
         "site": "5e8e926af147845d",
-        "corpus": "cdb587f35f2f3209",
+        "corpus": "81b31776d8541a6c",
         "alignedAt": "2026-09-03"
       }
     },
@@ -1226,8 +1226,8 @@
       "path": ".github/actions/setup-headroom/install.sh",
       "mode": "identical",
       "baseline": {
-        "site": "87a2e28cd659bd54",
-        "corpus": "87a2e28cd659bd54",
+        "site": "ead03d5f93eec72f",
+        "corpus": "ead03d5f93eec72f",
         "alignedAt": "2026-09-16"
       }
     },
@@ -1356,7 +1356,7 @@
       "reason": "Wrapper di retry generico per i comandi di rete del percorso di pubblicazione (npx). Fratello di scripts/lib/npm-ci-retry.sh, che copre i soli `npm ci`; vive qui perche' e' il ciclo di pubblicazione a usarlo e il sito non ha un equivalente.",
       "baseline": {
         "site": null,
-        "corpus": "2e68972552cef864",
+        "corpus": "f39e72447e975713",
         "alignedAt": "2026-08-09"
       }
     },
@@ -1559,7 +1559,7 @@
       "reason": "Rimedio alla classe 'articolo fantasma' (run 31245282583): publish-api e fast-publish partono in parallelo dallo stesso push, e un fast-publish morto a npm ci lascia l'articolo annunciato ma 404 sugli shard, senza retry. La riconciliazione vive qui perche' e' questo il repo che annuncia (slugs.json) e che pusha gli shard; il sito non possiede nessuno dei due lati del confronto.",
       "baseline": {
         "site": null,
-        "corpus": "653a1e9222cda7a0",
+        "corpus": "5f8961035f1307b2",
         "alignedAt": "2026-08-08"
       }
     },
@@ -1849,7 +1849,7 @@
       "reason": "Resolver per-record dei conflitti sui registri append-only del corpus (#255, #281, #285). Il sito non ha un file omonimo: la' l'append-only si ripara con scripts/lib/resolve-append-conflicts.sh, che toglie i marker e tiene ENTRAMBI i lati e poi valida — una politica che qui sarebbe sbagliata, perche' sul boundary che git produce davvero (a meta' entry, misurato) quel 'tieni entrambi' salda due articoli in un oggetto solo. Questo unisce i RECORD confrontando i due documenti interi e rifiuta di scrivere cio' che non sa dimostrare sano. Se un giorno il sito volesse la stessa politica, si porta e diventa `identical`.",
       "baseline": {
         "site": null,
-        "corpus": "7b4be3ed1d753a46",
+        "corpus": "51e0fe627ad6fae0",
         "alignedAt": "2026-08-14"
       }
     },
@@ -3268,7 +3268,7 @@
       "reason": "Sitemap-XML builder estratto da scripts/build-api.mjs (issue #138 item 1), cosi' e' importabile sotto un node --test puro (nessun import .ts) per un test comportamentale reale. Il sito non ha un file omonimo: costruisce le sue sitemap con un renderer diverso (build-plugins/ogPagesPlugin.ts), non con questo script.",
       "baseline": {
         "site": null,
-        "corpus": "e1389cde15fab19e",
+        "corpus": "72f1caaadb03c397",
         "alignedAt": "2026-08-10"
       }
     },
@@ -3408,7 +3408,7 @@
       "reason": "L'unica porta di rientro da `needs-human`, portata qui il 2026-08-25 (il sito ce l'ha dal 21-08; qui zero workflow nominava `needs-human` o `vision`, e le issue parcheggiate erano 17 con la coda del ciclo VUOTA). Adattamenti che lo rendono non copiabile: (1) VISION.md NON e' duplicato qui — resta sorgente unica sul sito; la job `sweep` la preleva con `gh api` sul runner in `RUNNER_TEMP/review-ctx`, directory che l'action Codex trasferisce nel proprio scratch, e verifica header/driver prima di avviare Codex; il bridge dell'agente non deve eseguire `gh api --repo` cross-repo, mentre il pre-pass continua a leggerla via API con il GITHUB_TOKEN e resta fail-open. (2) Identita' GITHUB_PAT_NANAKO dal ponte RC generator/scripts/load-rc-env.mjs invece della GitHub App (niente mint-app-token). (3) Pre-flight quota col beacon peer verso il sito, che sul gemello non c'e'. (4) Niente npm ci: gli script del ciclo sono zero-dep. (5) Checkout sparse su content/ invece della lista data/+public/ del sito. (6) Prompt sul dominio del corpus, col vincolo di verificare il `mode` in questo manifest prima di instradare una fix — una issue su un file `identical` si ripara sul SITO. Il job prepass dichiara /scripts/ci/ E /scripts/lib/: la chiusura transitiva degli import del pre-pass esce da scripts/ci (close-recovered-failure-issues.mjs importa scripts/lib/github-issue-creator.mjs), e con la sola prima cartella il job moriva con ERR_MODULE_NOT_FOUND a ogni run — riprodotto, e ora sorvegliato da generator/tests/needs-human-prepass-sparse-closure.test.mjs.",
       "baseline": {
         "site": "bbdd364a84c5cdc8",
-        "corpus": "3511b1abbbfe678e",
+        "corpus": "062a79ece5b0c796",
         "alignedAt": "2026-09-24"
       }
     },
@@ -3457,8 +3457,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-01.yml",
       "mode": "identical",
       "baseline": {
-        "site": "98604109701e4879",
-        "corpus": "98604109701e4879",
+        "site": "ebdc8c62bb0065db",
+        "corpus": "ebdc8c62bb0065db",
         "alignedAt": "2026-09-29"
       }
     },
@@ -3467,8 +3467,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-02.yml",
       "mode": "identical",
       "baseline": {
-        "site": "d0f77713a50aa656",
-        "corpus": "d0f77713a50aa656",
+        "site": "13714f04fd670f83",
+        "corpus": "13714f04fd670f83",
         "alignedAt": "2026-09-29"
       }
     },
@@ -3477,8 +3477,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-03.yml",
       "mode": "identical",
       "baseline": {
-        "site": "00f6b692e84550dd",
-        "corpus": "00f6b692e84550dd",
+        "site": "45fe3092620fb13c",
+        "corpus": "45fe3092620fb13c",
         "alignedAt": "2026-09-29"
       }
     },
@@ -3487,8 +3487,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-04.yml",
       "mode": "identical",
       "baseline": {
-        "site": "b2f51268a45d2e60",
-        "corpus": "b2f51268a45d2e60",
+        "site": "31dd43ebf424896a",
+        "corpus": "31dd43ebf424896a",
         "alignedAt": "2026-09-29"
       }
     },
@@ -3497,8 +3497,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-05.yml",
       "mode": "identical",
       "baseline": {
-        "site": "994dddcc83dcd6eb",
-        "corpus": "994dddcc83dcd6eb",
+        "site": "48e2a6293fbc4d1a",
+        "corpus": "48e2a6293fbc4d1a",
         "alignedAt": "2026-09-29"
       }
     },
@@ -3507,8 +3507,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-06.yml",
       "mode": "identical",
       "baseline": {
-        "site": "417b8a7364d0a83a",
-        "corpus": "417b8a7364d0a83a",
+        "site": "44f1a54d1138dccd",
+        "corpus": "44f1a54d1138dccd",
         "alignedAt": "2026-09-29"
       }
     },
@@ -3517,8 +3517,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-07.yml",
       "mode": "identical",
       "baseline": {
-        "site": "91f3027c3379cd89",
-        "corpus": "91f3027c3379cd89",
+        "site": "2280d30e7d221049",
+        "corpus": "2280d30e7d221049",
         "alignedAt": "2026-09-29"
       }
     },
@@ -3527,8 +3527,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-08.yml",
       "mode": "identical",
       "baseline": {
-        "site": "4ab83f8fa7717317",
-        "corpus": "4ab83f8fa7717317",
+        "site": "e4a7e0bc4ee3b941",
+        "corpus": "e4a7e0bc4ee3b941",
         "alignedAt": "2026-09-29"
       }
     },
@@ -3537,8 +3537,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-09.yml",
       "mode": "identical",
       "baseline": {
-        "site": "ae4e10cb37e60c63",
-        "corpus": "ae4e10cb37e60c63",
+        "site": "3444557fc57dbba7",
+        "corpus": "3444557fc57dbba7",
         "alignedAt": "2026-09-29"
       }
     },
@@ -3547,8 +3547,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-10.yml",
       "mode": "identical",
       "baseline": {
-        "site": "9dd8e480aa64afb4",
-        "corpus": "9dd8e480aa64afb4",
+        "site": "1dbeffbf55aa902c",
+        "corpus": "1dbeffbf55aa902c",
         "alignedAt": "2026-09-29"
       }
     },
@@ -3557,8 +3557,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-11.yml",
       "mode": "identical",
       "baseline": {
-        "site": "9f711fd45b296465",
-        "corpus": "9f711fd45b296465",
+        "site": "57eb5178bfad8c9e",
+        "corpus": "57eb5178bfad8c9e",
         "alignedAt": "2026-09-29"
       }
     },
@@ -3567,8 +3567,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-12.yml",
       "mode": "identical",
       "baseline": {
-        "site": "ca9762fe5b0691d4",
-        "corpus": "ca9762fe5b0691d4",
+        "site": "86cc7b140ecff402",
+        "corpus": "86cc7b140ecff402",
         "alignedAt": "2026-09-29"
       }
     },
@@ -3577,8 +3577,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-13.yml",
       "mode": "identical",
       "baseline": {
-        "site": "19fe42553b666fa1",
-        "corpus": "19fe42553b666fa1",
+        "site": "54c93d5714d1c383",
+        "corpus": "54c93d5714d1c383",
         "alignedAt": "2026-09-29"
       }
     },
@@ -3587,8 +3587,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-14.yml",
       "mode": "identical",
       "baseline": {
-        "site": "83b3ab7795eb8978",
-        "corpus": "83b3ab7795eb8978",
+        "site": "810ccc1b17e72c18",
+        "corpus": "810ccc1b17e72c18",
         "alignedAt": "2026-09-29"
       }
     },
@@ -3597,8 +3597,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-15.yml",
       "mode": "identical",
       "baseline": {
-        "site": "6896e4686cd7291b",
-        "corpus": "6896e4686cd7291b",
+        "site": "9980701392b67732",
+        "corpus": "9980701392b67732",
         "alignedAt": "2026-09-29"
       }
     },
@@ -3607,8 +3607,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-16.yml",
       "mode": "identical",
       "baseline": {
-        "site": "8a4e5478a3344fad",
-        "corpus": "8a4e5478a3344fad",
+        "site": "d9930f822bb14656",
+        "corpus": "d9930f822bb14656",
         "alignedAt": "2026-09-29"
       }
     },
@@ -3617,8 +3617,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-17.yml",
       "mode": "identical",
       "baseline": {
-        "site": "4b45843852e6d7a1",
-        "corpus": "4b45843852e6d7a1",
+        "site": "67f9d83b93a0da20",
+        "corpus": "67f9d83b93a0da20",
         "alignedAt": "2026-09-29"
       }
     },
@@ -3627,8 +3627,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-18.yml",
       "mode": "identical",
       "baseline": {
-        "site": "18976ece5c60fac1",
-        "corpus": "18976ece5c60fac1",
+        "site": "5c0b8c432d5eaf29",
+        "corpus": "5c0b8c432d5eaf29",
         "alignedAt": "2026-09-29"
       }
     },
@@ -3637,8 +3637,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-19.yml",
       "mode": "identical",
       "baseline": {
-        "site": "cde4d3943b36f304",
-        "corpus": "cde4d3943b36f304",
+        "site": "fc0ba7c17d5b9ad5",
+        "corpus": "fc0ba7c17d5b9ad5",
         "alignedAt": "2026-09-29"
       }
     },
@@ -3647,8 +3647,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-20.yml",
       "mode": "identical",
       "baseline": {
-        "site": "0452b8b6b269fd51",
-        "corpus": "0452b8b6b269fd51",
+        "site": "94ca5978baa3218c",
+        "corpus": "94ca5978baa3218c",
         "alignedAt": "2026-09-29"
       }
     },
@@ -3657,8 +3657,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-21.yml",
       "mode": "identical",
       "baseline": {
-        "site": "fac82424839f8c74",
-        "corpus": "fac82424839f8c74",
+        "site": "bbf5d3b484d4eaf7",
+        "corpus": "bbf5d3b484d4eaf7",
         "alignedAt": "2026-09-29"
       }
     },
@@ -3667,8 +3667,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-22.yml",
       "mode": "identical",
       "baseline": {
-        "site": "d0b4a9c3322389b7",
-        "corpus": "d0b4a9c3322389b7",
+        "site": "20a3bba9e0fddc35",
+        "corpus": "20a3bba9e0fddc35",
         "alignedAt": "2026-09-29"
       }
     },
@@ -3677,8 +3677,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-23.yml",
       "mode": "identical",
       "baseline": {
-        "site": "fe510daf048f785e",
-        "corpus": "fe510daf048f785e",
+        "site": "578f432eb871492c",
+        "corpus": "578f432eb871492c",
         "alignedAt": "2026-09-29"
       }
     },
@@ -3687,9 +3687,9 @@
       "sitePath": ".github/corpus-workflows/translate-pending.yml",
       "mode": "identical",
       "baseline": {
-        "site": "3606a1213a7ad207",
-        "corpus": "3606a1213a7ad207",
-        "alignedAt": "2026-09-27"
+        "site": "6df98cddfc27c483",
+        "corpus": "6df98cddfc27c483",
+        "alignedAt": "2026-09-29"
       }
     },
     {
@@ -3698,8 +3698,8 @@
       "mode": "identical",
       "reason": "Riallineato il 2026-09-24 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono ora byte-identici fra sito e corpus, con il roster corrente di 621 crawler.",
       "baseline": {
-        "site": "bb3cd5e2ca59ed5d",
-        "corpus": "bb3cd5e2ca59ed5d",
+        "site": "c787c707e37be418",
+        "corpus": "c787c707e37be418",
         "alignedAt": "2026-09-29"
       }
     },
@@ -3708,9 +3708,9 @@
       "sitePath": ".github/corpus-workflows/observers/generator/tests/crawler-cross-repo-artifacts.test.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "eb1e95ef2fe42463",
-        "corpus": "eb1e95ef2fe42463",
-        "alignedAt": "2026-09-23"
+        "site": "88dc968242fec279",
+        "corpus": "88dc968242fec279",
+        "alignedAt": "2026-09-29"
       },
       "couplingSnapshot": [
         {
@@ -3744,9 +3744,9 @@
       "sitePath": ".github/corpus-workflows/observers/workflows/crawler-generation-observer-shadow.yml",
       "mode": "identical",
       "baseline": {
-        "site": "0441657a53fe6282",
-        "corpus": "0441657a53fe6282",
-        "alignedAt": "2026-09-23"
+        "site": "29c3fef13afe4a9e",
+        "corpus": "29c3fef13afe4a9e",
+        "alignedAt": "2026-09-29"
       }
     },
     {
@@ -3795,7 +3795,7 @@
       "reason": "Watchdog corpus-only della coda translate: censisce active/pending con sole GET bounded, separa la copertura storica troncabile e segnala il queue SLO. La preservazione rerun schedule e provata da workflow 347680591, run 33550046319, artifact 9817045831, schema v1 e token hash sha256:8f28835373c43bd2c90b532bd294eba56d827e64b979fb38a8924e898fca0c91; il recovery resta manuale per policy e il rerun autorizzato e protetto da claim/successor guard live.",
       "baseline": {
         "site": null,
-        "corpus": "e3b1ab08f65fa512",
+        "corpus": "1d7fbe144e99ee2b",
         "alignedAt": "2026-09-01"
       }
     },
@@ -3805,7 +3805,7 @@
       "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, misura l'eta' del detentore dal job attivo (`jobs.started_at`) invece che dalla coda del workflow e quella di un rerun pending dall'attempt corrente (`run_started_at`, fail-closed se illeggibile o anteriore a `created_at`) invece che dalla prima creazione, rifiuta fail-closed (`future_timestamp`) ogni istante di misura oltre la tolleranza di skew `MAX_CLOCK_SKEW_SECONDS` invece di azzerarne l'eta', dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
       "baseline": {
         "site": null,
-        "corpus": "9358cb0d2d128b9c",
+        "corpus": "0c9cc3567578a48b",
         "alignedAt": "2026-09-27"
       }
     },
@@ -4048,7 +4048,7 @@
       "reason": "Gemello del workflow del sito. Cambia SOLO il profilo di checkout e la cadenza: l'albero da escludere qui e' content/ (14.888 file di corpus), dist/ (la superficie pubblicata), public/ e data/. L'esclusione e' sicura nella direzione che conta: se una follow-up citasse un file escluso, citedFiles() non lo vedrebbe e la issue NON sarebbe rilevata come risolta — il costo di sbagliare e' una chiusura MANCATA, mai una chiusura sbagliata. Cron sfasato (06:25 invece di 06:00) come gli altri workflow di questo repo.",
       "baseline": {
         "site": "c44fe32935eb540a",
-        "corpus": "c68f9bd1573e3fbd",
+        "corpus": "f57c68abbb3651ed",
         "alignedAt": "2026-09-03"
       }
     },
@@ -4118,7 +4118,7 @@
       "reason": "Gemello del workflow del sito per il check richiesto ROSSO su una PR autonoma, il sintomo che il 🔴-fixer non copre (quello legge il diff, non la CI). Adattato su quattro punti non copiabili: (1) identita' di push GITHUB_PAT_NANAKO da Remote Config, non un token di GitHub App — questo repo non ha la App del sito; (2) niente npm ci ne' vitest: i gate qui sono dependency-free e il fixer riproduce con node --test; (3) il filtro del log e' TAP (`not ok N`, `✖`), non le righe `FAIL ` di vitest — copiare il filtro del sito darebbe un contesto VUOTO su ogni rosso, che e' peggio di nessun contesto perche' l'agente lo legge e conclude che non c'e' niente; (4) niente proxy di compressione, per la stessa ragione della review in tests.yml: qui l'input dell'agente e' un log. In piu' qui: lo skip su engine-lockstep-auto e il paragrafo del prompt che spiega quali QUATTRO cose porta il check richiesto e quale delle quattro NON e' compito suo (il verdetto della review lo ripara il gemello). Due divergenze in piu' dal sito, entrambe da un finding della review su questa stessa PR: (a) il contesto raccoglie ANCHE le righe `::error::` e, quando nominano il gate di generator-ci, scarica il log fallito di generator-ci.yml sullo stesso sha — il check richiesto qui porta quattro famiglie e solo una parla TAP, quindi il filtro TAP da solo lasciava fuori il rosso vero nelle altre tre; (b) il checkout usa lo SHA verificato dal preflight, non il nome del branch, cosi' l'albero e la diagnosi non possono divergere se arriva un push nel frattempo.",
       "baseline": {
         "site": "84011cb61e180899",
-        "corpus": "ab8c8a19dcf83e53",
+        "corpus": "97e1ec85a24e3a94",
         "alignedAt": "2026-09-26"
       }
     },
@@ -4208,7 +4208,7 @@
       "reason": "Stesso recupero del sito dopo un body corretto: riesegue l'ultima run `tests` della HEAD quando e' fallita sul contratto del body o sul SOLO gate della review, ed e' l'unica via di rientro da quando `tests.yml` non ha piu' `edited` fra i trigger. Adattato su cinque punti, tutti emersi dalla review della PR #1613 e tutti conseguenza dell'aver tolto `edited`: (1) niente `createWorkflowDispatch` quando la HEAD non ha run, perche' il `tests.yml` di questo repo fa checkout del ref dispatchato senza `ref: inputs.head_sha` e testerebbe il codice di base mettendo il check sulla SHA di base; (2) la run bersaglio e' scelta anche per branch della PR ed evento `pull_request`: mai una run `push` dello stesso commit, ne' un dispatch test-only di `pr-autorebase.mjs` (senza `pr_number`, quindi senza contratto del body e senza review); (3) una run ancora in volo e partita PRIMA dell'edit viene cancellata e rieseguita (poteva aver letto il body vecchio), invece di essere classificata prima che i suoi step falliti esistano; lo stato si rilegge prima di cancellare e un 409 (run appena conclusa) porta alla classificazione normale; una run partita DOPO l'edit, conclusa o no, non si tocca; (4) anche un'ultima run `cancelled`/`timed_out` viene rieseguita, perche' dopo l'edit nessun altro evento riporterebbe la HEAD a un verdetto; (5) una run VERDE viene rieseguita se il body nuovo viola il contratto, valutato con `scripts/lib/pr-body-contract-eval.mjs` dal checkout del branch base (zero-Claude), cosi' il check richiesto torna rosso prima che l'auto-merge nativo fonda un body rotto; la review non si rifa' su un body che passa il contratto, per la politica ratificata sul sito con valerielinc-ops/frontaliere-si-o-no#9118. Il sito ha gli stessi buchi (2)-(4), mascherati finche' il suo `tests.yml` aveva `edited`: la risalita va fatta la'.",
       "baseline": {
         "site": "746f8ace38ffe2f2",
-        "corpus": "b18f1396f2472489",
+        "corpus": "471c040faef4086c",
         "alignedAt": "2026-09-19"
       }
     },
@@ -4266,7 +4266,7 @@
       "reason": "Workflow zero-Claude che osserva la fine dei consumer e il cron per riattivare le review PR differite dal lease condiviso. Il sito non possiede questo lease ne' questo consumer, quindi non esiste un gemello da portare. Dal 2026-09-25 passa `REVIEW_RATE_LIMIT_SCAN` per limitare la lettura dei run `tests` rossi per rate limit ai tick cron/dispatch e ai completamenti di `tests`.",
       "baseline": {
         "site": null,
-        "corpus": "ae9dda84d95be040",
+        "corpus": "626245ac2abb68ab",
         "alignedAt": "2026-09-12"
       }
     },
@@ -4276,7 +4276,7 @@
       "reason": "Workflow post-merge che riallinea solo `baseline.corpus` per i gemelli `identical` trasportati; il sito non possiede il lato ricevente del manifest ne' il suo push sul main del corpus, quindi non esiste un gemello da portare.",
       "baseline": {
         "site": null,
-        "corpus": "8f11188c3c554f79",
+        "corpus": "fe0274f165a519c1",
         "alignedAt": "2026-09-13"
       }
     },
@@ -4416,8 +4416,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-24.yml",
       "mode": "identical",
       "baseline": {
-        "site": "9909fda3b562d615",
-        "corpus": "9909fda3b562d615",
+        "site": "2cbbbc8807a5859e",
+        "corpus": "2cbbbc8807a5859e",
         "alignedAt": "2026-09-29"
       }
     },
