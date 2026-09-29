@@ -1246,8 +1246,9 @@ export const GITHUB_ANNOTATIONS_PER_JOB_LIMIT = 50;
  *   3. job non `failure` (cancelled, timed_out, …) → non verde;
  *   4. job `failure` → le annotation del job: una riga `<slug>: …` di livello failure, o
  *      un warning dell'aggregato (missing, exit 143) per quello slug, prova che il membro
- *      non e' verde; nessuna riga, con annotation leggibili e sotto i tetti di GitHub,
- *      prova che il rosso era di un fratello.
+ *      non e' verde; una failure annotation fuori dal formato per-membro e' prova
+ *      insufficiente e tiene aperta la issue; nessuna riga, con annotation leggibili e
+ *      sotto i tetti di GitHub, prova che il rosso era di un fratello.
  * Ritorna `null` quando la prova manca (annotation illeggibili, vuote o troncate): il
  * chiamante tiene aperta la issue, come ogni altro fallback di questo file.
  *
@@ -1285,23 +1286,25 @@ export function decideCrawlerMemberConclusion({
 
   const annotations = annotationPages.flat();
   const prefix = `${slug}: `;
-  let aggregateFailures = 0;
-  let aggregateWarnings = 0;
+  let aggregateAnnotationCount = 0;
   for (const annotation of annotations) {
     const level = annotation?.annotation_level;
     const message = annotation.message;
+    const isAggregateFailure = level === 'failure' && CRAWLER_MEMBER_FAILURE_ANNOTATION_RE.test(message);
     const isAggregateWarning = level === 'warning' && CRAWLER_MEMBER_WARNING_ANNOTATION_RE.test(message);
     // Un `::error::<slug>: …` (aggregato, exit 43 dello step, …) o un warning
     // dell'aggregato (missing, exit 143) sono entrambi «non verde». Un warning libero
     // dello stesso crawler no: non deve tenere aperta per sempre una issue guarita.
     if (message.startsWith(prefix) && (level === 'failure' || isAggregateWarning)) return 'failure';
-    if (level === 'failure' && CRAWLER_MEMBER_FAILURE_ANNOTATION_RE.test(message)) aggregateFailures += 1;
-    if (isAggregateWarning) aggregateWarnings += 1;
+    // Una failure leggibile ma fuori dal formato per-membro può essere l'errore del
+    // controllo finale del gruppo ("crawler aggregate ...") o un nuovo errore dello
+    // stesso percorso. Non prova che questo membro sia verde: fail closed.
+    if (level === 'failure' && !isAggregateFailure) return null;
+    if (isAggregateFailure || isAggregateWarning) aggregateAnnotationCount += 1;
   }
   if (
     annotations.length >= GITHUB_ANNOTATIONS_PER_JOB_LIMIT
-    || aggregateFailures >= GITHUB_ANNOTATIONS_PER_STEP_LIMIT
-    || aggregateWarnings >= GITHUB_ANNOTATIONS_PER_STEP_LIMIT
+    || aggregateAnnotationCount >= GITHUB_ANNOTATIONS_PER_STEP_LIMIT
   ) {
     return null;
   }
