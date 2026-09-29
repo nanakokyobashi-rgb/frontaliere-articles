@@ -14621,8 +14621,9 @@ const RUN_START_MS = Date.now();
 /**
  * Margine fra la scadenza del tier di traduzione Codex e il budget wall-clock.
  *
- * Il budget del tier (FREE_TRANSLATE_CODEX_MAX_MS, 300 s cumulati) non conosce
- * l'orologio di questo processo: sulle run 36309380063 e 36305591991 le
+ * Il budget del tier (FREE_TRANSLATE_CODEX_MAX_MS, 300 s di orologio con almeno
+ * una richiesta Codex in volo, contati dall'inizio delle traduzioni) non
+ * conosce l'orologio di questo processo: sulle run 36309380063 e 36305591991 le
  * traduzioni erano ancora in corso quando il `timeout` del workflow ha ucciso
  * il processo a 657 s, con l'articolo IT gia' pronto. Con la scadenza
  * dichiarata il tier non avvia chiamate che non possono finire entro
