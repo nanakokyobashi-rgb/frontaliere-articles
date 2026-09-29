@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/udc%3a-glarner-lascer%c3%a0-gi%c3%a0-a-fine-anno-il-consiglio-nazionale/91960519": {
-    "articleId": "glarner-dimissioni-consiglio-nazionale",
-    "ts": "2026-08-27T00:10:51.231Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/attualita/1946264/stangata-sui-danni-da-parcheggio-rincari-fino-al-50": {
     "articleId": "danni-parcheggio-rincari-2025",
     "ts": "2026-08-27T00:33:10.443Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/cn%3a-limitare-stipendi-dirigenti-per-assicurazioni-malattia-di-base/92135621": {
     "articleId": "compensi-lvamal-camera-bassa",
     "ts": "2026-09-29T08:03:27.556Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/forti-rincari-per-l%27auto-e-l%27abitazione%2c-specie-in-ticino/92135882": {
+    "articleId": "rincari-auto-abitazione-ticino",
+    "ts": "2026-09-29T08:33:25.684Z",
     "keyForm": 2
   }
 }
