@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/cf%3a-176-milioni-per-l%27ambiente-globale-tra-il-2027-e-il-2030/91958395": {
-    "articleId": "ambiente-globale-176-milioni-2030",
-    "ts": "2026-08-26T19:24:39.544Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/cf%3a-allerta-popolazione-tramite-cellulare%3b-chiesti-quasi-16-milioni/91957955": {
     "articleId": "cell-broadcast-allerta-svizzera",
     "ts": "2026-08-26T19:58:15.929Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/cst%3a-bilaterali-iii-necessari%2c-no-a-un%27intesa-coloniale/92133887": {
     "articleId": "dibattito-stati-bilaterali-iii",
     "ts": "2026-09-29T02:52:56.634Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/gr%3a-iniziativa-sulla-neutralit%c3%a0%2c-s%c3%ac-di-santa-maria%2c-grono-e-brusio/92133624": {
+    "articleId": "voto-iniziativa-neutralita-grigioni",
+    "ts": "2026-09-29T03:31:48.220Z",
     "keyForm": 2
   }
 }
