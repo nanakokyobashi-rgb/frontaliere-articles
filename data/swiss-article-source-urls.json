@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/lrgwmdm0by1h16xpwrmb4": {
-    "articleId": "ddps-droni-priorita-strategica",
-    "ts": "2026-08-27T16:30:14.971Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/bzjelnqv6g2f": {
     "articleId": "ordinanze-trasporti-consultazione-videosorveglianza",
     "ts": "2026-08-27T17:13:38.493Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/lavoratori-svizzeri-usano-l%27ia%2c-ma-non-ne-sono-convinti/92139655": {
     "articleId": "lavoratori-svizzeri-ia-2026",
     "ts": "2026-09-29T18:06:16.305Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/dqx1wswwiifj": {
+    "articleId": "ufc-finanzia-ricerca-provenienza",
+    "ts": "2026-09-29T18:34:01.489Z",
     "keyForm": 2
   }
 }
