@@ -1,24 +1,4 @@
 {
-  "https://lenews.ch/2026/08/27/russia-seeks-to-influence-swiss-vote-on-neutrality": {
-    "articleId": "kremlin-voto-neutralita-svizzera",
-    "ts": "2026-08-27T14:59:47.519Z",
-    "keyForm": 2
-  },
-  "https://www.rsi.ch/s/4017883": {
-    "articleId": "vignetta-autostradale-non-subito",
-    "ts": "2026-08-27T15:40:34.054Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/ticino/attualita/1946444/formazione-musicale-rette-ridotte-per-i-giovani": {
-    "articleId": "formazione-musicale-rette-2026",
-    "ts": "2026-08-27T16:00:01.668Z",
-    "keyForm": 2
-  },
-  "https://www.admin.ch/it/newnsb/lrgwmdm0by1h16xpwrmb4": {
-    "articleId": "ddps-droni-priorita-strategica",
-    "ts": "2026-08-27T16:30:14.971Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/bzjelnqv6g2f": {
     "articleId": "ordinanze-trasporti-consultazione-videosorveglianza",
     "ts": "2026-08-27T17:13:38.493Z",
@@ -2497,6 +2477,26 @@
   "https://www.parlament.ch/it": {
     "articleId": "parlamento-svizzero-strumenti-ricerca",
     "ts": "2026-09-29T16:36:38.134Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4121749": {
+    "articleId": "premi-cassa-malati-2027-differenze-cantoni",
+    "ts": "2026-09-29T17:31:47.653Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1953526/premi-uss-urge-freno-svizzera": {
+    "articleId": "uss-freno-premi-cassa-malati-3",
+    "ts": "2026-09-29T17:51:01.494Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/lavoratori-svizzeri-usano-l%27ia%2c-ma-non-ne-sono-convinti/92139655": {
+    "articleId": "lavoratori-svizzeri-ia-2026",
+    "ts": "2026-09-29T18:06:16.305Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/dqx1wswwiifj": {
+    "articleId": "ufc-finanzia-ricerca-provenienza",
+    "ts": "2026-09-29T18:34:01.489Z",
     "keyForm": 2
   }
 }
