@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4017883": {
-    "articleId": "vignetta-autostradale-non-subito",
-    "ts": "2026-08-27T15:40:34.054Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/attualita/1946444/formazione-musicale-rette-ridotte-per-i-giovani": {
     "articleId": "formazione-musicale-rette-2026",
     "ts": "2026-08-27T16:00:01.668Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4121749": {
     "articleId": "premi-cassa-malati-2027-differenze-cantoni",
     "ts": "2026-09-29T17:31:47.653Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1953526/premi-uss-urge-freno-svizzera": {
+    "articleId": "uss-freno-premi-cassa-malati-3",
+    "ts": "2026-09-29T17:51:01.494Z",
     "keyForm": 2
   }
 }
