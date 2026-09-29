@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/hacmfwo4eqvck8pshstnm": {
-    "articleId": "fondi-federali-bosco-agricoltura",
-    "ts": "2026-08-26T21:06:29.925Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1946223/sede-basilea-manor-licenzia-piano": {
     "articleId": "manor-licenzia-basilea",
     "ts": "2026-08-26T21:46:28.306Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1953219/la-svizzera-corre-sui-robot-217-aziende-e-7-mila-posti-di-lavoro": {
     "articleId": "svizzera-robotica-crescita-aziende",
     "ts": "2026-09-29T06:29:41.003Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1953358/julius-bar-finma-procedimento-comunicato-banca-signa-relazione": {
+    "articleId": "finma-conclude-julius-baer",
+    "ts": "2026-09-29T06:44:48.799Z",
     "keyForm": 2
   }
 }
