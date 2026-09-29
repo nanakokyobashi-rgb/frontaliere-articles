@@ -823,6 +823,10 @@
     "frontaliere::https://www.ticinonews.ch/svizzera/premi-di-cassa-malati-in-ticino-aumento-contenuto-del-37-ma-paghiamo-piu-di-tutti-443567": {
       "section": "frontaliere",
       "ts": 1790697447190
+    },
+    "frontaliere::https://www.rsi.ch/s/4121749": {
+      "section": "frontaliere",
+      "ts": 1790698651484
     }
   }
 }
