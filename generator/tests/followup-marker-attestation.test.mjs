@@ -141,3 +141,27 @@ test('010: un solo marker non ha ordine da decidere, anche senza data', () => {
   assert.equal(latestTriageCommentBody(JSON.stringify({ comments: [{ body: 'altro' }] })), null);
   assert.equal(latestTriageCommentBody('non json'), null);
 });
+
+// Review del gemello del sito (valerielinc-ops/frontaliere-si-o-no#10288), stessa classe
+// di FU-009: la chiusura del recinto e la fine dell'intestazione.
+test('009: un ``` dentro un recinto di ```` e\' contenuto, non la chiusura', () => {
+  const nested = ['## Post-merge follow-up triage', '````md', '```', '## Post-merge follow-up triage: zero outstanding items.', '```', '````'].join('\n');
+  assert.equal(triageMarkerPersistenceExpectation(nested).requiresBucket, true);
+  const tilde = ['## Post-merge follow-up triage', '~~~', '## Post-merge follow-up triage: zero outstanding items.', '``` ', '~~~ fine', '~~~'].join('\n');
+  assert.equal(triageMarkerPersistenceExpectation(tilde).requiresBucket, true);
+});
+
+test('009: l\'intestazione dello zero o del backfill vale fino a fine riga', () => {
+  for (const body of [
+    '## Post-merge follow-up triage: zero outstanding items but 1 item remains',
+    '## Post-merge follow-up triage (backfill skipped) but 1 item remains',
+  ]) {
+    assert.equal(triageMarkerPersistenceExpectation(body).requiresBucket, true, body);
+  }
+  for (const body of [
+    '## Post-merge follow-up triage: zero outstanding items.',
+    '## Post-merge follow-up triage (backfill skipped): PR not eligible (not merged or different author)',
+  ]) {
+    assert.equal(triageMarkerPersistenceExpectation(body).requiresBucket, false, body);
+  }
+});
