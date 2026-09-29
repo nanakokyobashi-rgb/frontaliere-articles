@@ -1,34 +1,4 @@
 {
-  "https://www.tio.ch/ticino/politica/1946455/asilo-sicurezza-e-costi-quanto-ricade-sui-comuni-di-frontiera": {
-    "articleId": "frontiera-asilo-competenze",
-    "ts": "2026-08-27T18:43:45.269Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/syngenta-vende-di-meno-ma-guadagna-di-pi%c3%b9-nel-primo-semestre/91966619": {
-    "articleId": "syngenta-utili-ricavi-semestre",
-    "ts": "2026-08-27T19:25:33.803Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/gr%3a-gran-consiglio%2c-chiesti-pi%c3%b9-mezzi-finanziari-per-casa-donne/91965832": {
-    "articleId": "finanziamento-casa-donne-grigioni",
-    "ts": "2026-08-27T19:47:51.840Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/attualita/1946392/troppi-disagi-con-gli-aerei-le-ffs-valutano-treni-diretti-per-barcellona-amsterdam-e-londra": {
-    "articleId": "ffs-treni-diretti-europei",
-    "ts": "2026-08-27T20:27:23.235Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/cf-vuole-contrastare-l%27aumento-delle-tariffe-di-netflix/91965738": {
-    "articleId": "protezione-consumatori-streaming-svizzera",
-    "ts": "2026-08-27T21:38:59.068Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/attualita/1946516/foraggio-azienda-parmelin-animali-confederazione": {
-    "articleId": "foraggio-siccita-aiuti-federali",
-    "ts": "2026-08-27T22:06:31.196Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4011503": {
     "articleId": "berna-rinnova-festival-cinematografici",
     "ts": "2026-08-27T22:40:23.550Z",
@@ -2497,6 +2467,36 @@
   "https://www.tio.ch/ticino/attualita/1953535/malati-lettori-cassa-premi-ogni-parole": {
     "articleId": "premi-cassa-malati-ticino-rincaro-lettori",
     "ts": "2026-09-29T19:30:37.027Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/investimenti-immobiliari%3a-fiducia-elevata%2c-ma-meno-per-il-ticino/92140657": {
+    "articleId": "sresi-prezzi-lugano-2026",
+    "ts": "2026-09-29T20:14:26.009Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1953503/groupe-tagli-azienda-supporto-licenziamenti": {
+    "articleId": "groupe-e-riorganizzazione-friburgo",
+    "ts": "2026-09-29T20:27:30.798Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1953551/sessioni-minuti-parlamentari-dormono-spazi": {
+    "articleId": "parlamento-sonno-power-nap",
+    "ts": "2026-09-29T21:03:20.267Z",
+    "keyForm": 2
+  },
+  "https://www.malpensa24.it/novara-medicina-futuro-ia": {
+    "articleId": "progetto-ia-medicina-bellinzona",
+    "ts": "2026-09-29T21:23:36.714Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4117759": {
+    "articleId": "dati-srf-dipendenti-rubati",
+    "ts": "2026-09-29T21:53:18.380Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/gr%3a-l%27aeroporto-di-samedan-aspetta-di-poter-decollare/92140070": {
+    "articleId": "samedan-aeroporto-rinnovo-2025",
+    "ts": "2026-09-29T22:17:12.765Z",
     "keyForm": 2
   }
 }
