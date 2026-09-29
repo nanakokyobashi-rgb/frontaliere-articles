@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4015966": {
-    "articleId": "disoccupazione-diplomati-svizzera-2025",
-    "ts": "2026-08-27T12:47:04.176Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/cronaca/1946441/svizzera-corruzione-presidente-banchieri-caso": {
     "articleId": "processo-mirabaud-corruzione",
     "ts": "2026-08-27T13:40:12.325Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4121410": {
     "articleId": "voto-armi-industria-difesa",
     "ts": "2026-09-29T15:19:51.216Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1953496/prezzi-ticino-investimenti-rimane-fiducia": {
+    "articleId": "investimenti-immobiliari-fiducia-ticino",
+    "ts": "2026-09-29T15:53:10.113Z",
     "keyForm": 2
   }
 }
