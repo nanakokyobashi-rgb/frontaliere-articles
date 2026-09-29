@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/ticino/politica/1946455/asilo-sicurezza-e-costi-quanto-ricade-sui-comuni-di-frontiera": {
-    "articleId": "frontiera-asilo-competenze",
-    "ts": "2026-08-27T18:43:45.269Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/syngenta-vende-di-meno-ma-guadagna-di-pi%c3%b9-nel-primo-semestre/91966619": {
     "articleId": "syngenta-utili-ricavi-semestre",
     "ts": "2026-08-27T19:25:33.803Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/ticino/attualita/1953535/malati-lettori-cassa-premi-ogni-parole": {
     "articleId": "premi-cassa-malati-ticino-rincaro-lettori",
     "ts": "2026-09-29T19:30:37.027Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/investimenti-immobiliari%3a-fiducia-elevata%2c-ma-meno-per-il-ticino/92140657": {
+    "articleId": "sresi-prezzi-lugano-2026",
+    "ts": "2026-09-29T20:14:26.009Z",
     "keyForm": 2
   }
 }
