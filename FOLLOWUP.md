@@ -184,7 +184,9 @@ bucket su una riga che dice «bucket», oppure quando è seguito sulla stessa ri
 dal tag `` `follow-up(daily:<YYYY-MM-DD>)` ``: è la forma che il triage scrive
 spontaneamente, conteggio in testa e un bucket per bullet
 (``- Corpus #1957 `follow-up(daily:2026-09-28)` — …``, marker delle PR del sito
-#10015 e #10050). Il repository dichiarato è informativo: il numero viene
+#10015 e #10050). La forma col tag vale solo sulla riga `Created/updated:` e
+nei bullet subito sotto: una citazione storica dopo la lista non è un claim.
+Il repository dichiarato è informativo: il numero viene
 cercato in entrambi i repo. Un marker con verdetto definitivo «non persistito»
 da oltre 6 ore esce dal batch come **quarantena** visibile (warning, summary,
 output `quarantined_prs`, issue «Post-merge follow-up: marker di triage in

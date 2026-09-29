@@ -414,27 +414,29 @@ export function latestTriageComment(commentsJson, prefix = TRIAGE_COMMENT_PREFIX
  *
  * Prima si prendeva il primo `#N` dopo «bucket» e basta: in `bucket per PR
  * #1718: #9102` il candidato diventava la PR, cioe' un numero che non e' un
- * bucket (follow-up FU-2026-09-24-008 di PR #1718). Un `#N` preceduto da `PR`
- * o `pull request` viene saltato; se sulla riga non resta nessun altro numero
- * il bucket non e' dichiarato e la verifica resta non provata (fail-closed).
+ * bucket (follow-up FU-2026-09-24-008 di PR #1718). Un `#N` preceduto da `PR`,
+ * `pull request` o `pull-request` viene saltato; se sulla riga non resta nessun
+ * altro numero il bucket non e' dichiarato e la verifica resta non provata
+ * (fail-closed). La forma col tag daily NON si legge qui, su ogni riga: vale
+ * solo nella finestra di claim (`claimDailyTagBucketReferences`).
  */
 function bucketReferencesOnLine(line) {
   const refs = [];
   for (const bucket of line.matchAll(/\bbucket\b/gi)) {
     const rest = line.slice(bucket.index + bucket[0].length);
     for (const ref of rest.matchAll(/#([1-9]\d*)\b/g)) {
-      if (/\b(?:PR|pull\s+request)\s*$/i.test(rest.slice(0, ref.index))) continue;
+      if (/\b(?:PR|pull[-\s]+request)\s*$/i.test(rest.slice(0, ref.index))) continue;
       refs.push(Number(ref[1]));
       break;
     }
   }
-  return [...refs, ...dailyTagBucketReferences(line)];
+  return refs;
 }
 
 // `#N` seguito sulla stessa riga dal tag `follow-up(daily:YYYY-MM-DD)`, senza
 // un altro `#` in mezzo: il tag si lega al numero piu' vicino. Un `#N`
-// preceduto da `PR` non e' mai un bucket.
-const BUCKET_TAG_REF_RE = /(?<!\b(?:PR|pull\s+request)\s*)#([1-9]\d*)\b[^#\n]*?`follow-up\(daily:\d{4}-\d{2}-\d{2}\)`/gi;
+// preceduto da `PR`, `pull request` o `pull-request` non e' mai un bucket.
+const BUCKET_TAG_REF_RE = /(?<!\b(?:PR|pull[-\s]+request)\s*)#([1-9]\d*)\b[^#\n]*?`follow-up\(daily:\d{4}-\d{2}-\d{2}\)`/gi;
 
 /**
  * I `#N` legati al tag `follow-up(daily:YYYY-MM-DD)` in un testo: la seconda
@@ -452,11 +454,48 @@ const BUCKET_TAG_REF_RE = /(?<!\b(?:PR|pull\s+request)\s*)#([1-9]\d*)\b[^#\n]*?`
  * verifica restava rossa a ogni run. Il repository dichiarato nel bullet e'
  * informativo: `readBucketIssue` legge ogni numero in tutti i `BUCKET_REPOS`
  * e il predicato accetta solo il candidato che contiene l'item della PR.
- * Unica copia della forma: la usa anche `triageMarkerCitesBucket` di
- * gate-minted-followups.mjs.
  */
 export function dailyTagBucketReferences(text) {
   return [...String(text || '').matchAll(BUCKET_TAG_REF_RE)].map((match) => Number(match[1]));
+}
+
+const TRIAGE_CLAIM_LINE_RE = /^\s*(?:[-*]\s+)?Created(?:\/updated)?:/i;
+const CLAIM_BULLET_LINE_RE = /^\s*[-*+]\s+\S/;
+
+/**
+ * La finestra di claim del marker: ogni riga `Created/updated:` PIU' la lista
+ * di bullet che la segue immediatamente, fino alla prima riga che non e' un
+ * bullet (riga vuota inclusa). Stessa definizione del gemello del sito.
+ */
+function claimLinesWithBullets(lines) {
+  const out = [];
+  let inClaimList = false;
+  for (const line of lines) {
+    if (TRIAGE_CLAIM_LINE_RE.test(line)) {
+      out.push(line);
+      inClaimList = true;
+      continue;
+    }
+    if (inClaimList && CLAIM_BULLET_LINE_RE.test(line)) {
+      out.push(line);
+      continue;
+    }
+    inClaimList = false;
+  }
+  return out;
+}
+
+/**
+ * I `#N` col tag daily che il marker PROMETTE: solo nella finestra di claim
+ * (`claimLinesWithBullets`). Una citazione storica dopo la lista
+ * (`Historical #10171 `follow-up(daily:…)``) non e' un claim: non deve
+ * chiedere una prova in piu' al collector, ne' qualificare nel gate sul conio
+ * un bucket che il marker non ha promesso (review di
+ * valerielinc-ops/frontaliere-si-o-no#10338). Unica copia della regola: la usa
+ * anche `triageMarkerCitesBucket` di gate-minted-followups.mjs.
+ */
+export function claimDailyTagBucketReferences(markerBody) {
+  return dailyTagBucketReferences(claimLinesWithBullets(String(markerBody || '').split(/\r?\n/)).join('\n'));
 }
 
 /**
@@ -519,8 +558,8 @@ function attestationLines(lines) {
  *  - un BUCKET citato e' un `#N` su una riga che dice «bucket», in qualunque
  *    ordine e con qualunque punteggiatura, esclusi i `#N` preceduti da `PR`
  *    (la PR sorgente citata sulla stessa riga non e' un bucket), oppure un
- *    `#N` seguito dal tag `follow-up(daily:YYYY-MM-DD)` (un bucket per
- *    bullet, vedi `dailyTagBucketReferences`);
+ *    `#N` seguito dal tag `follow-up(daily:YYYY-MM-DD)` dentro la finestra
+ *    di claim (un bucket per bullet, vedi `claimDailyTagBucketReferences`);
  *  - uno ZERO esplicito e' l'INTESTAZIONE che il prompt impone per l'esito
  *    vuoto (`## Post-merge follow-up triage: zero outstanding items.` oppure
  *    `## Post-merge follow-up triage (backfill skipped): ...`). La sola altra
@@ -552,7 +591,7 @@ export function triageMarkerPersistenceExpectation(markerBody) {
   // ciascuna occorrenza di «bucket», non ogni numero della riga: la prosa puo'
   // citare la PR sorgente sulla stessa riga del bucket (issue #170), anche
   // PRIMA del numero del bucket (`bucket per PR #1718: #9102`).
-  const buckets = lines.flatMap(bucketReferencesOnLine);
+  const buckets = [...lines.flatMap(bucketReferencesOnLine), ...claimDailyTagBucketReferences(body)];
   // Zero e skip si attestano solo fuori da codice recintato e citazioni.
   const attesting = attestationLines(lines);
   // Una riga H2, non prosa: il modello a volte ripete il prefisso nudo prima
