@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/zmsyjbttr33fguq8ra_t6": {
-    "articleId": "seco-fmi-partenariato-economia",
-    "ts": "2026-08-26T18:49:50.571Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/cf%3a-176-milioni-per-l%27ambiente-globale-tra-il-2027-e-il-2030/91958395": {
     "articleId": "ambiente-globale-176-milioni-2030",
     "ts": "2026-08-26T19:24:39.544Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4116601": {
     "articleId": "voto-iniziativa-neutralita",
     "ts": "2026-09-29T02:03:55.821Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/cst%3a-bilaterali-iii-necessari%2c-no-a-un%27intesa-coloniale/92133887": {
+    "articleId": "dibattito-stati-bilaterali-iii",
+    "ts": "2026-09-29T02:52:56.634Z",
     "keyForm": 2
   }
 }
