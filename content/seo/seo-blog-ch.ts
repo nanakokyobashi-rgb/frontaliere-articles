@@ -90734,6 +90734,84 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-avvio-impresa-soletta-adempimenti': {
+    title: 'Aprire un\'attività a Soletta: registro e costi',
+    description: 'Guida pratica per aprire un\'attività nel Cantone di Soletta: forma giuridica, registro di commercio, fisco svizzero, contributi, LAMal e obblighi assicurativi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, aprire, attività, soletta, registro',
+    ogTitle: 'Aprire un\'attività a Soletta: registro e costi',
+    ogDescription: 'Dal capitale minimo agli obblighi assicurativi, il percorso per aprire un\'attività nel Cantone di Soletta passa da registro di commercio, imposta federale diretta, IVA, contributi AVS/LPP e regole sul lavoro.',
+    canonicalPath: '/articoli-svizzera/avvio-impresa-soletta-adempimenti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aprire un'attività a Soletta: registro e costi",
+      "description": "Guida pratica per aprire un'attività nel Cantone di Soletta: forma giuridica, registro di commercio, fisco svizzero, contributi, LAMal e obblighi assicurativi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/avvio-impresa-soletta-adempimenti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Avvio di un'attività nel Cantone di Soletta tra registro di commercio e costi"
+      },
+      "datePublished": "2026-09-29T05:26:33+00:00",
+      "dateModified": "2026-09-29T05:26:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/avvio-impresa-soletta-adempimenti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-licenza-estera-soletta-prove': {
+    title: 'Patente estera a Soletta: conversione ed esami',
+    description: 'Patente estera nel Cantone di Soletta: conversione, esame teorico e pratico, corsi obbligatori e ufficio della circolazione competente. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, patente, estera, soletta, conversione',
+    ogTitle: 'Patente estera a Soletta: conversione ed esami',
+    ogDescription: 'Nel Cantone di Soletta, la patente estera richiede una procedura da leggere tra conversione, esame teorico, esame pratico e corsi obbligatori. La guida chiarisce il ruolo dell\'ufficio della circolazione competente e i dettagli che la fonte',
+    canonicalPath: '/articoli-svizzera/licenza-estera-soletta-prove/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Patente estera a Soletta: conversione ed esami",
+      "description": "Patente estera nel Cantone di Soletta: conversione, esame teorico e pratico, corsi obbligatori e ufficio della circolazione competente. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/licenza-estera-soletta-prove.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Conversione della patente estera e prove di guida nel Cantone di Soletta"
+      },
+      "datePublished": "2026-09-29T05:42:57+00:00",
+      "dateModified": "2026-09-29T05:42:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/licenza-estera-soletta-prove/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
