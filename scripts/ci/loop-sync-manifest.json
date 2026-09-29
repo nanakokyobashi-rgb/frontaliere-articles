@@ -1245,10 +1245,10 @@
       "mode": "adapted",
       "reason": "ELIGIBLE_AUTHORS ora legge FOLLOWUP_ELIGIBLE_AUTHORS. Sul sito e' un literal con i suoi account: lasciato cosi' avrebbe scartato ogni PR del corpus. L'override e' opzionale, quindi il file resta valido identico anche sul sito. RIALLINEATO 2026-09-29 (both-moved, valerielinc-ops/frontaliere-si-o-no#7483): i due lati usano contratti DIVERSI per il marker di triage, ciascuno coerente con il prompt di `post-merge-followup.yml` del proprio repo (sito: riga `Created/updated:`; qui: `Follow-up item: FU-…`, bucket giornaliero, skip anti-nipote), e quella differenza resta per scelta. Audit dei commit solo-corpus dal 2026-09-10: gia' sul sito #1589, #1593 e #1822; portato con valerielinc-ops/frontaliere-si-o-no#10288 FU-009 di #1785 (uno zero si attesta solo con una riga di esito fuori da recinti e citazioni; la review del sito ha aggiunto la chiusura dei recinti alla CommonMark e le intestazioni ancorate a fine riga, riapplicate qui nella stessa PR con i test in `followup-marker-attestation.test.mjs`); non applicabili per contratto #1383, #1642, #1703 e #1783(a); osservabilita' senza caso osservato #1375, #1386, #1399 e #1783(c). I commit gemelli (#1572, #1581, #1718, #1390, #1943, #1951) sono gia' su entrambi i lati. Baseline come `--init --only --force` sui due hash di oggi.",
       "baseline": {
-        "site": "459f46690f3db601",
-        "corpus": "1c437581c8524550",
+        "site": "1a31e2baab9eceec",
+        "corpus": "494b4d89a67c0746",
         "alignedAt": "2026-09-29",
-        "forcedAt": "2026-09-29T06:49:58.000Z"
+        "forcedAt": "2026-09-29T11:05:39.916Z"
       }
     },
     {
