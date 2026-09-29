@@ -2216,15 +2216,32 @@ function loadOpenPrsForDailyMutex() {
 }
 
 /** Quante run issue-fix sono in volo (queued|in_progress). 0 = slot libero. */
+export function flattenPaginatedWorkflowRuns(pages, label = 'workflow runs') {
+  if (!Array.isArray(pages) || !pages.every((page) => page && typeof page === 'object' && !Array.isArray(page))) {
+    throw new Error(`${label}: risposta non e' un array di pagine`);
+  }
+  const runs = [];
+  for (const page of pages) {
+    if (!Array.isArray(page.workflow_runs)) {
+      throw new Error(`${label}: pagina senza workflow_runs`);
+    }
+    if (!page.workflow_runs.every((run) => run && typeof run === 'object' && !Array.isArray(run))) {
+      throw new Error(`${label}: pagina malformata`);
+    }
+    runs.push(...page.workflow_runs);
+  }
+  return runs;
+}
+
 function inFlightFixCount() {
   let n = 0;
   for (const status of ['queued', 'in_progress']) {
     try {
-      const runs = gh([
-        'run', 'list', '--workflow', 'issue-fix.yml',
-        '--status', status, '--json', 'databaseId', '--limit', '20',
+      const pages = gh([
+        'api', '--paginate', '--slurp',
+        `repos/${REPO}/actions/workflows/issue-fix.yml/runs?status=${status}&per_page=100`,
       ]);
-      n += Array.isArray(runs) ? runs.length : 0;
+      n += flattenPaginatedWorkflowRuns(pages, `issue-fix ${status}`).length;
     } catch {
       // su errore transient API conta come "occupato" (conservativo: non promuovere)
       return Number.POSITIVE_INFINITY;
@@ -2847,6 +2864,23 @@ export function promotionLiveCheck(live) {
     return { ok: false, reason: "non piu' promuovibile (claim, defer, park o stadio decompose)" };
   }
   return { ok: true, reason: '' };
+}
+
+/**
+ * Budget di promozione per un tick. Il valore osservato su GitHub rappresenta
+ * lo stato già esistente; le promozioni riuscite nel tick vengono conteggiate
+ * separatamente dal chiamante. In dry-run si conserva la preview storica anche
+ * quando il cap è pieno, senza cambiare il comportamento reale.
+ */
+export function promotionBudget({ maxInFlight, inFlight, dryRun = false } = {}) {
+  const max = Number.isFinite(Number(maxInFlight))
+    ? Math.max(1, Math.floor(Number(maxInFlight)))
+    : 1;
+  const observed = Number.isFinite(Number(inFlight))
+    ? Math.max(0, Math.floor(Number(inFlight)))
+    : Number.POSITIVE_INFINITY;
+  const free = Math.max(0, max - observed);
+  return dryRun ? Math.max(1, free) : free;
 }
 
 /**
@@ -4571,7 +4605,11 @@ export function runDrain() {
   // il resto della funzione calcola e logga cosa accadrebbe SE lo slot fosse
   // libero, invece di uscire muta.
   const inflight = inFlightFixCount();
-  const freeSlots = Math.max(0, MAX_INFLIGHT_FIX - inflight);
+  const freeSlots = promotionBudget({
+    maxInFlight: MAX_INFLIGHT_FIX,
+    inFlight: inflight,
+    dryRun: false,
+  });
   if (freeSlots === 0) {
     if (!DRY) {
       console.log(`slot issue-fix occupati (in-flight=${inflight}/${MAX_INFLIGHT_FIX}) → nessuna azione.`);
@@ -5297,7 +5335,11 @@ export function runDrain() {
   // e' 0 ma la preview deve mostrare almeno un candidato — e' l'unico motivo
   // per cui la si lancia (#5524 item 2). Il `Math.max(1, …)` sta qui, con un
   // nome, invece di essere ripetuto inline dove andrebbe letto tre volte.
-  const promoteBudget = Math.max(1, freeSlots);
+  const promoteBudget = promotionBudget({
+    maxInFlight: MAX_INFLIGHT_FIX,
+    inFlight: inflight,
+    dryRun: DRY,
+  });
   let promoted = 0;
 
   // Promuovi i candidati in coda fino a riempire gli slot, MA salta (parka)

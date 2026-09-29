@@ -56,6 +56,14 @@ test('l\'id stabile non cambia quando la riga si sposta', () => {
   assert.equal(dedupeFindingsById([before, after, other]).length, 2);
 });
 
+test('un finding multi-file conserva tutti i path nell\'id downstream', () => {
+  const first = finding('`engine/render.mjs:42`, `host/render.mjs:18`: 🔴 Important: `buildCanonical()` perde il locale.');
+  const second = finding('`engine/render.mjs:42`, `host/other.mjs:18`: 🔴 Important: `buildCanonical()` perde il locale.');
+  assert.deepEqual(first.citations.map((citation) => citation.path), ['engine/render.mjs', 'host/render.mjs']);
+  assert.deepEqual(second.citations.map((citation) => citation.path), ['engine/render.mjs', 'host/other.mjs']);
+  assert.notEqual(stableFindingId(first), stableFindingId(second));
+});
+
 test('la classe si dichiara DOPO i due punti, e una inventata vale other', () => {
   assert.equal(findingDeclaredClass('🔴 Important: [regression] rotto.'), 'regression');
   assert.equal(findingDeclaredClass('🔴 Important: [contract] rotto.'), 'contract');
