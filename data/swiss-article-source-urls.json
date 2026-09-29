@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1946190/rail-primo-borsa-semestre-stadler": {
-    "articleId": "stadler-rail-risultati-primo-semestre",
-    "ts": "2026-08-26T17:53:33.269Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/ffs%3a-%22rincari-malgrado-treni-affollati%3f-non-stabiliamo-noi-tariffe%22/91960212": {
     "articleId": "ffs-rincari-tariffe-wyss",
     "ts": "2026-08-26T18:18:48.819Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/cst%3a-bilaterali-iii-vitali%2c-un-%22no%22-sarebbe-un-salto-nel-buio/92134300": {
     "articleId": "consiglio-stati-bilaterali-iii",
     "ts": "2026-09-29T00:42:44.957Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/cst%3a-rete-elettrica-potr%c3%a0-essere-sviluppata-pi%c3%b9-rapidamente/92132623": {
+    "articleId": "sviluppo-rapido-rete-elettrica",
+    "ts": "2026-09-29T01:23:02.016Z",
     "keyForm": 2
   }
 }
