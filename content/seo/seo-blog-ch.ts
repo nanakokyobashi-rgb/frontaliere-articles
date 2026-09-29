@@ -91709,6 +91709,162 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-premi-cassa-malati-2027-differenze-cantoni': {
+    title: 'Cassa malati 2027: fino a 10\'000 franchi di differenza',
+    description: 'Nel 2027 la media dei premi cassa malati sarà di 16\'450 franchi, ma tra Ginevra e Zugo la differenza arriva a quasi 10\'000 franchi. Ecco i dati. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, cassa, malati, fino, franchi',
+    ogTitle: 'Cassa malati 2027: fino a 10\'000 franchi di differenza',
+    ogDescription: 'L\'UFSP ha pubblicato i dati per il 2027: una famiglia tipo in Ticino pagherà 21\'346 franchi, contro i 16\'450 della media nazionale. Scopri le differenze tra cantoni e come ottimizzare il premio.',
+    canonicalPath: '/articoli-svizzera/premi-cassa-malati-2027-differenze-cantoni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cassa malati 2027: fino a 10'000 franchi di differenza",
+      "description": "Nel 2027 la media dei premi cassa malati sarà di 16'450 franchi, ma tra Ginevra e Zugo la differenza arriva a quasi 10'000 franchi. Ecco i dati. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/premi-cassa-malati-2027-differenze-cantoni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Famiglia svizzera che esamina la fattura dell'assicurazione malattia in Ticino"
+      },
+      "datePublished": "2026-09-29T17:31:47+00:00",
+      "dateModified": "2026-09-29T17:31:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/premi-cassa-malati-2027-differenze-cantoni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-uss-freno-premi-cassa-malati-3': {
+    title: 'USS: freno legislativo ai premi al 3% | Frontaliere Ticino',
+    description: 'L\'USS chiede un limite del 3% ai premi LAMal. In Ticino l\'aumento 2027 è del 3,7%. La mozione sarà discussa al Consiglio degli Stati. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, freno, legislativo, premi, chiede',
+    ogTitle: 'USS: freno legislativo ai premi al 3%',
+    ogDescription: 'L\'Unione sindacale svizzera chiede un limite del 3% alla crescita dei premi di base. In Ticino l\'aumento 2027 è del 3,7%. La mozione di Pierre-Yves Maillard sarà discussa domani al Consiglio degli Stati. Ecco cosa cambia per le economie domestiche.',
+    canonicalPath: '/articoli-svizzera/uss-freno-premi-cassa-malati-3/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "USS: freno legislativo ai premi al 3%",
+      "description": "L'USS chiede un limite del 3% ai premi LAMal. In Ticino l'aumento 2027 è del 3,7%. La mozione sarà discussa al Consiglio degli Stati. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/uss-freno-premi-cassa-malati-3.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Berna, sede del Parlamento svizzero, con in primo piano una calcolatrice e una tessera assicurativa."
+      },
+      "datePublished": "2026-09-29T17:51:01+00:00",
+      "dateModified": "2026-09-29T17:51:01+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/uss-freno-premi-cassa-malati-3/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-lavoratori-svizzeri-ia-2026': {
+    title: 'Lavoratori svizzeri e IA: il 28% la usa ma non convince',
+    description: 'Il 28% usa l\'IA ogni giorno in Svizzera ma pochi vedono benefici concreti. I dati della ricerca Hopes and Fears 2026 di PwC sui dipendenti. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, lavoratori, svizzeri, convince, ogni',
+    ogTitle: 'Lavoratori svizzeri usano l\'IA ma non convincono i benefici',
+    ogDescription: 'La ricerca Hopes and Fears 2026 di PwC rivela il paradosso dell\'intelligenza artificiale generativa in Svizzera: alta frequenza d\'uso quotidiano ma scetticismo sui reali vantaggi per qualità del lavoro e competenze.',
+    canonicalPath: '/articoli-svizzera/lavoratori-svizzeri-ia-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lavoratori svizzeri e IA: il 28% la usa ma non convince",
+      "description": "Il 28% usa l'IA ogni giorno in Svizzera ma pochi vedono benefici concreti. I dati della ricerca Hopes and Fears 2026 di PwC sui dipendenti. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/lavoratori-svizzeri-ia-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lavoratore svizzero in ufficio alle prese con l'intelligenza artificiale generativa"
+      },
+      "datePublished": "2026-09-29T18:06:16+00:00",
+      "dateModified": "2026-09-29T18:06:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/lavoratori-svizzeri-ia-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-ufc-finanzia-ricerca-provenienza': {
+    title: 'UFC: 1,95 mln per 26 progetti di ricerca | Frontaliere Ticino',
+    description: 'L\'UFC stanzia circa 1,95 milioni di franchi per 26 progetti di ricerca sulla provenienza di musei e collezioni in Svizzera per il 2027-2028. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, progetti, ricerca, stanzia, circa',
+    ogTitle: 'UFC: 1,95 mln per 26 progetti di ricerca',
+    ogDescription: 'L\'Ufficio federale della cultura finanzia 26 progetti di ricerca sulla provenienza per circa 1,95 milioni di franchi. Il bando copre catalogazione, analisi di resti umani e collaborazioni internazionali per il periodo 2027-2028.',
+    canonicalPath: '/articoli-svizzera/ufc-finanzia-ricerca-provenienza/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "UFC: 1,95 mln per 26 progetti di ricerca",
+      "description": "L'UFC stanzia circa 1,95 milioni di franchi per 26 progetti di ricerca sulla provenienza di musei e collezioni in Svizzera per il 2027-2028. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/ufc-finanzia-ricerca-provenienza.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista di Bellinzona con musei sullo sfondo, luce mattutina"
+      },
+      "datePublished": "2026-09-29T18:34:01+00:00",
+      "dateModified": "2026-09-29T18:34:01+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ufc-finanzia-ricerca-provenienza/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
