@@ -33,10 +33,11 @@ export class AnnouncedSurfaceDeadlineError extends Error {
 }
 
 export class AnnouncedSurfaceIncoherentError extends Error {
-  constructor(surfaceErrors) {
+  constructor(surfaceErrors, { cause } = {}) {
     super(`superficie annunciata incoerente: ${surfaceErrors.join('; ')}`);
     this.name = 'AnnouncedSurfaceIncoherentError';
     this.surfaceErrors = surfaceErrors;
+    if (cause !== undefined) this.cause = cause;
   }
 }
 
@@ -123,12 +124,40 @@ export function validateReleaseMarkers(
 }
 
 function cacheBustedSurfaceUrl(apiBase, file, cacheBust) {
-  const url = new URL(`${apiBase}/${file}`);
+  const url = new URL(apiBase);
+  url.pathname = `${url.pathname.replace(/\/$/, '')}/${file}`;
   url.searchParams.set('reconcile', cacheBust);
   return url.href;
 }
 
-async function fetchJson(url, { deadline = Number.POSITIVE_INFINITY, now = Date.now } = {}) {
+function waitForRetry(delayMs, { deadline, now, signal } = {}) {
+  const remaining = Number.isFinite(deadline) ? deadline - now() : Number.POSITIVE_INFINITY;
+  if (remaining <= 0) return Promise.reject(new AnnouncedSurfaceDeadlineError());
+  const waitMs = Number.isFinite(remaining) ? Math.min(delayMs, remaining) : delayMs;
+  return new Promise((resolve, reject) => {
+    let timer;
+    const onAbort = () => {
+      clearTimeout(timer);
+      signal?.removeEventListener('abort', onAbort);
+      reject(signal.reason || new Error('fetch annullato'));
+    };
+    timer = setTimeout(() => {
+      signal?.removeEventListener('abort', onAbort);
+      if (Number.isFinite(deadline) && deadline - now() <= 0) {
+        reject(new AnnouncedSurfaceDeadlineError());
+      } else {
+        resolve();
+      }
+    }, Math.max(1, waitMs));
+    if (signal?.aborted) onAbort();
+    else signal?.addEventListener('abort', onAbort, { once: true });
+  });
+}
+
+async function fetchJson(
+  url,
+  { deadline = Number.POSITIVE_INFINITY, now = Date.now, signal: parentSignal } = {},
+) {
   let lastErr;
   for (let attempt = 1; attempt <= SURFACE_FETCH_MAX_ATTEMPTS; attempt++) {
     const remaining = Number.isFinite(deadline) ? deadline - now() : Number.POSITIVE_INFINITY;
@@ -140,11 +169,16 @@ async function fetchJson(url, { deadline = Number.POSITIVE_INFINITY, now = Date.
       ? Math.max(1, Math.min(SURFACE_FETCH_TIMEOUT_MS, Math.floor(remaining)))
       : SURFACE_FETCH_TIMEOUT_MS;
     try {
-      const res = await fetch(url, { signal: AbortSignal.timeout(timeoutMs) });
+      const timeoutSignal = AbortSignal.timeout(timeoutMs);
+      const signal = parentSignal
+        ? AbortSignal.any([parentSignal, timeoutSignal])
+        : timeoutSignal;
+      const res = await fetch(url, { signal });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       return await res.json();
     } catch (err) {
       lastErr = err;
+      if (parentSignal?.aborted) throw parentSignal.reason || err;
       if (attempt < SURFACE_FETCH_MAX_ATTEMPTS) {
         const remainingForBackoff = Number.isFinite(deadline)
           ? deadline - now()
@@ -153,10 +187,10 @@ async function fetchJson(url, { deadline = Number.POSITIVE_INFINITY, now = Date.
           lastErr = new AnnouncedSurfaceDeadlineError();
           break;
         }
-        await new Promise((resolve) => setTimeout(
-          resolve,
+        await waitForRetry(
           Math.min(SURFACE_FETCH_BACKOFF_MS(attempt), remainingForBackoff),
-        ));
+          { deadline, now, signal: parentSignal },
+        );
       }
     }
   }
@@ -187,6 +221,8 @@ export async function fetchAnnouncedSurfaceSnapshot(
   }
 
   let lastFailure;
+  let lastIncoherence;
+  const transportFailures = [];
   let attemptsUsed = 0;
   const attempts = Number.isInteger(maxAttempts) && maxAttempts > 0
     ? maxAttempts
@@ -201,15 +237,28 @@ export async function fetchAnnouncedSurfaceSnapshot(
     const remaining = deadline - now();
     if (remaining <= 0) return Promise.reject(new AnnouncedSurfaceDeadlineError());
 
+    const controller = new AbortController();
     let timer;
+    let deadlineReached = false;
     const timeout = new Promise((_, reject) => {
       timer = setTimeout(
-        () => reject(new AnnouncedSurfaceDeadlineError()),
+        () => {
+          deadlineReached = true;
+          controller.abort(new AnnouncedSurfaceDeadlineError());
+          reject(new AnnouncedSurfaceDeadlineError());
+        },
         Math.max(1, Math.ceil(remaining)),
       );
     });
-    const pending = Promise.resolve().then(() => fetchJsonImpl(url, { deadline, now }));
-    return Promise.race([pending, timeout]).finally(() => clearTimeout(timer));
+    const pending = Promise.resolve().then(() => fetchJsonImpl(url, {
+      deadline,
+      now,
+      signal: controller.signal,
+    }));
+    return Promise.race([pending, timeout]).finally(() => {
+      clearTimeout(timer);
+      if (!deadlineReached) controller.abort(new Error('lettura completata'));
+    });
   };
 
   for (let attempt = 1; attempt <= attempts; attempt++) {
@@ -229,9 +278,15 @@ export async function fetchAnnouncedSurfaceSnapshot(
       const surfaceErrors = validateSnapshot(surface);
       if (surfaceErrors.length === 0) return surface;
       lastFailure = new AnnouncedSurfaceIncoherentError(surfaceErrors);
+      lastIncoherence = lastFailure;
       retryContext = { errors: surfaceErrors };
     } catch (error) {
       lastFailure = error;
+      if (error instanceof AnnouncedSurfaceIncoherentError) {
+        lastIncoherence = error;
+      } else if (lastIncoherence) {
+        transportFailures.push(error);
+      }
       retryContext = { error };
     }
 
@@ -239,9 +294,31 @@ export async function fetchAnnouncedSurfaceSnapshot(
     onRetry?.({ attempt, maxAttempts: attempts, ...retryContext });
     const remainingBeforeWait = deadline - now();
     if (remainingBeforeWait <= 0) break;
-    await wait(Math.min(retryDelayMs, remainingBeforeWait));
+    const waitMs = Math.min(retryDelayMs, remainingBeforeWait);
+    let guardTimer;
+    let guardFired = false;
+    const guardedWait = new Promise((resolve) => {
+      guardTimer = setTimeout(() => {
+        guardFired = true;
+        resolve();
+      }, Math.max(1, Math.ceil(waitMs)));
+    });
+    try {
+      await Promise.race([Promise.resolve().then(() => wait(waitMs)), guardedWait]);
+    } finally {
+      clearTimeout(guardTimer);
+    }
+    if (guardFired || deadline - now() <= 0) break;
   }
 
+  if (lastIncoherence) {
+    if (transportFailures.length === 0) throw lastIncoherence;
+    const networkErrors = transportFailures.map((error) => `lettura rete successiva fallita: ${error}`);
+    throw new AnnouncedSurfaceIncoherentError(
+      [...lastIncoherence.surfaceErrors, ...networkErrors],
+      { cause: transportFailures.at(-1) },
+    );
+  }
   if (lastFailure instanceof AnnouncedSurfaceIncoherentError) throw lastFailure;
   throw new Error(
     `lettura della superficie annunciata fallita dopo ${attemptsUsed} tentativi ` +

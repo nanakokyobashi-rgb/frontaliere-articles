@@ -13,6 +13,7 @@ import {
   parseReviewQuotaDeferredMarker,
   runQuotaGitHubCommand,
   FIX_QUEUE_NON_PROMOTABLE_LABELS,
+  flattenPaginatedIssueRows,
   isPromotableFixQueueRow,
   promotableFixQueueDepth,
 } from '../../scripts/ci/check-quota-backoff.mjs';
@@ -497,7 +498,26 @@ test('#1495: la profondita della coda e\' lo specchio esatto di isDrainPromotabl
   }
 });
 
+test('#10171: la coda completa attraversa piu pagine REST e non perde la prima issue promuovibile', () => {
+  const parked = Array.from({ length: 101 }, (_, index) => ({
+    number: index + 1,
+    labels: [{ name: 'fu-parked' }],
+  }));
+  const pages = [
+    parked.slice(0, 100).map((row) => ({ ...row, pull_request: undefined })),
+    [
+      { ...parked[100], pull_request: undefined },
+      { number: 999, labels: [], pull_request: undefined },
+      { number: 1000, labels: [], pull_request: { url: 'https://example.test/pr/1000' } },
+    ],
+  ];
+  const rows = flattenPaginatedIssueRows(pages, 'issue-fix queue');
+  assert.equal(rows.length, 102);
+  assert.equal(promotableFixQueueDepth(rows), 1);
+  assert.equal(rows.some((row) => row.number === 1000), false, 'le pull request non sono issue candidate');
+});
+
 test('#1495: il lease legge le label della coda per calcolarne la profondita', () => {
   const source = fs.readFileSync(path.join(ROOT, 'scripts/ci/check-quota-backoff.mjs'), 'utf8');
-  assert.match(source, /const queueDepth = promotableFixQueueDepth\(leaseIssueRows\(\s*repo, 'agent:fix-queued', [^\n]*'number,updatedAt,labels'/);
+  assert.match(source, /const queueDepth = promotableFixQueueDepth\(leaseIssueRows\(\s*repo, 'agent:fix-queued',[\s\S]*?\{ paginate: true \}/);
 });

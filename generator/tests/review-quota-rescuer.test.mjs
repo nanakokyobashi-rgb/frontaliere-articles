@@ -813,6 +813,8 @@ test('il wiring reagisce al completamento dei consumer e rilascia reservation es
   assert.match(workflow, /PR 🔴 fixer \(bounded loop-closure on bot PRs\)/);
   assert.match(workflow, /PR ❌ check fixer \(bounded, check richiesto rosso su PR bot\)/);
   assert.match(workflow, /review-quota-rescuer\.mjs/);
+  assert.match(workflow, /github\.event\.workflow_run\.conclusion != 'skipped'[\s\S]*github\.event\.workflow_run\.conclusion != 'cancelled'/);
+  assert.match(workflow, /concurrency:\n\s+group: review-quota-rescuer\n\s+cancel-in-progress: false/);
   assert.match(tests, /HEAD_SHA: \$\{\{ steps\.resolve\.outputs\.head_sha \}\}/);
   assert.match(tests, /Pre-flight — Codex lane quota telemetry/);
   assert.match(tests, /CODEX_FALLBACK_MODE: '1'/);

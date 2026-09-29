@@ -166,8 +166,20 @@ export function promotableFixQueueDepth(rows) {
 }
 // La coda puo' contenere piu' parcheggiate dello scan dei lease: la profondita'
 // legge una pagina GraphQL intera, cosi' le promuovibili non restano oltre il
-// limite dietro le parcheggiate.
-const FIX_QUEUE_DEPTH_SCAN_MAX = 100;
+// La profondita' della coda non puo' avere un cap locale: una coda con piu'
+// di 100 issue parcheggiate deve comunque vedere la prima promuovibile che
+// viene dopo. La lettura usa quindi tutte le pagine REST (`per_page=100`) e
+// filtra le pull request, che l'endpoint issues include per contratto.
+export function flattenPaginatedIssueRows(pages, label = 'issue') {
+  if (!Array.isArray(pages) || !pages.every((page) => Array.isArray(page))) {
+    throw new Error(`${label}: risposta non e' un array di pagine`);
+  }
+  const rows = pages.flat();
+  if (!rows.every((row) => row && typeof row === 'object' && !Array.isArray(row))) {
+    throw new Error(`${label}: pagina malformata`);
+  }
+  return rows.filter((row) => !row.pull_request);
+}
 
 function validLeaseTarget(targetType, target) {
   return QUOTA_LEASE_TARGET_TYPES.has(targetType)
@@ -598,7 +610,14 @@ function leaseComments(repo, targetType, target) {
   return comments;
 }
 
-function leaseIssueRows(repo, label, max, fields = 'number,updatedAt') {
+function leaseIssueRows(repo, label, max, fields = 'number,updatedAt', { paginate = false } = {}) {
+  if (paginate) {
+    const pages = leaseJson([
+      'api', '--paginate', '--slurp',
+      `repos/${repo}/issues?state=open&labels=${encodeURIComponent(label)}&per_page=100`,
+    ], `issue ${label}`);
+    return flattenPaginatedIssueRows(pages, `issue ${label}`);
+  }
   return leaseRows(leaseJson([
     'issue', 'list', '--repo', repo, '--state', 'open', '--label', label,
     '--json', fields, '--limit', String(max),
@@ -765,7 +784,7 @@ export function runQuotaLease({
 
     const scan = scanQuotaLeases(repo, targetType, target, max, nowSec);
     const queueDepth = promotableFixQueueDepth(leaseIssueRows(
-      repo, 'agent:fix-queued', Math.max(max, FIX_QUEUE_DEPTH_SCAN_MAX), 'number,updatedAt,labels',
+      repo, 'agent:fix-queued', undefined, 'number,updatedAt,labels', { paginate: true },
     ));
     const decision = quotaLeaseDecision({
       action,

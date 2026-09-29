@@ -62,7 +62,9 @@ jobs:
     #    lease condiviso e non scrive marker di deferral. E' ~29% delle run
     #    `tests` su push (58 su 200, 2026-09-18/19); il dispatch su `main` ha la
     #    stessa semantica di run manuale fuori dalla famiglia review.
-    #  - una run sorgente `skipped`: nessun job e' partito, quindi nessun lease.
+    #  - una run sorgente `skipped`/`cancelled`: nessun esito utile può
+    #    riaprire il gate; lasciarla entrare nel gruppo permetterebbe a un
+    #    completamento non utile di sostituire una pending di rescue.
     # Il cron e il dispatch restano la rete che scandisce TUTTE le PR aperte.
     #
     # `tests` si riconosce dal PATH e non da `workflow_run.name`: tests.yml ha
@@ -74,6 +76,7 @@ jobs:
     if: >-
       github.event_name != 'workflow_run' ||
       (github.event.workflow_run.conclusion != 'skipped' &&
+       github.event.workflow_run.conclusion != 'cancelled' &&
        !(github.event.workflow_run.path == '.github/workflows/tests.yml' &&
          (github.event.workflow_run.event == 'push' ||
           (github.event.workflow_run.event == 'workflow_dispatch' &&
