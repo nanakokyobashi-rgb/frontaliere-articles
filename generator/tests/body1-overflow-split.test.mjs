@@ -1,6 +1,6 @@
 /**
  * Articolo scritto tutto nel body1, body2 e body3 vuoti: invece di rigenerare
- * (run 36514673677: 181 s di Codex per riscrivere un testo gia' consegnato) il
+ * (run 36514673677: 184 s di Codex per riscrivere un testo gia' consegnato) il
  * verdetto lo ridivide ai titoli `##` secondo il contratto del prompt — In
  * breve e Fatti chiave nel body1, le sezioni successive in tre parti
  * consecutive — e i body divisi passano gli stessi controlli di sempre.
@@ -46,6 +46,13 @@ test('divide ai titoli ##, tiene l\'apertura nel body1 e non perde ne\' sposta n
   assert.ok(!split.body2.startsWith('### ') && !split.body3.startsWith('### '));
   // Stesso testo, stesso ordine.
   assert.equal([split.body1, split.body2, split.body3].join('\n\n'), WHOLE);
+});
+
+test('senza In breve e Fatti chiave in apertura, nell\'ordine del contratto, non divide', () => {
+  assert.equal(splitOverflowingBody1(SECTIONS.join('\n\n')), null, 'senza apertura');
+  assert.equal(splitOverflowingBody1([OPENING[1], OPENING[0], ...SECTIONS].join('\n\n')), null, 'ordine invertito');
+  assert.equal(splitOverflowingBody1([`Premessa ${para('x', 10)}`, ...OPENING, ...SECTIONS].join('\n\n')), null, 'testo prima di In breve');
+  assert.equal(splitOverflowingBody1([OPENING[0], ...SECTIONS].join('\n\n')), null, 'senza Fatti chiave');
 });
 
 test('senza almeno tre sezioni dopo l\'apertura non divide', () => {

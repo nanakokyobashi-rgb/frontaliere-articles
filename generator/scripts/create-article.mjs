@@ -6518,7 +6518,7 @@ async function callLLM(messages, opts = {}) {
       // Articolo intero nel body1: il verdetto l'ha ridiviso ai titoli `##`
       // (splitOverflowingBody1) e i body divisi hanno passato gli stessi
       // controlli. Si restituisce quel payload invece di rigenerare il testo
-      // che il modello ha gia' scritto (run 36514673677: 181 s di Codex per
+      // che il modello ha gia' scritto (run 36514673677: 184 s di Codex per
       // riscrivere un articolo consegnato tutto nel body1).
       if (salvagedPayload) {
         console.error(`  ✂️  articolo intero nel body1 (${modelUsedRef.model || 'unknown'}): diviso ai titoli ## in body1/body2/body3, nessuna rigenerazione.`);
@@ -12885,7 +12885,7 @@ function preFlightHeadlineCheck(headline) {
 }
 
 // ── Step 3a.2: Programmatic duplicate detection (multi-signal) ──
-function checkForDuplicates(data) {
+function checkForDuplicates(data, { localizedSlugs = true } = {}) {
   // Read existing article titles AND excerpts across ALL sections (frontaliere
   // + svizzera). Cross-section coverage (was: active section only) so an
   // evergreen already published in the sibling section is caught — the
@@ -13035,7 +13035,10 @@ function checkForDuplicates(data) {
   // paths that derive their own translated slugs (e.g.
   // publish-journalist-article.mjs's deriveLocaleSlugs()) reuse this SAME
   // guard instead of re-implementing (and potentially forgetting) it.
-  checkTranslatedSlugCollisions(data);
+  // `localizedSlugs: false` (the early gate of Step 3a.0-dup) checks only the
+  // IT slot: EN/DE/FR slugs are still provisional there, and the full check
+  // runs at Step 3a.2 and again after relocalizeSlugsAfterTranslation().
+  checkTranslatedSlugCollisions(data, { locales: localizedSlugs ? ['it', 'en', 'de', 'fr'] : ['it'] });
 
   console.error('  ✅ Nessun duplicato rilevato');
   return data;
@@ -13058,12 +13061,12 @@ function checkForDuplicates(data) {
  * loudly instead of poisoning the registry and surfacing later as main-red
  * on the routing round-trip test.
  */
-function checkTranslatedSlugCollisions(data) {
+function checkTranslatedSlugCollisions(data, { locales = ['it', 'en', 'de', 'fr'] } = {}) {
   // `routerSrc` here was previously a dangling reference left by the section
   // refactor (it was a local of modifyRouterTs), which threw "routerSrc is
   // not defined" and broke EVERY generation run.
   const sectionSlugSrc = readSectionSlugData();
-  for (const locale of ['it', 'en', 'de', 'fr']) {
+  for (const locale of locales) {
     const newSlug = data.slugs[locale];
     // A nullish slug builds a degenerate regex (`escapeRegex(undefined)` → '')
     // that never matches a populated slot → the overlap check silently passes
@@ -16277,12 +16280,16 @@ async function generateAndValidateArticle(url, sourceContext = null) {
     // titolo IT sono stabili da questo punto: il fact-check e l'espansione
     // toccano il corpo. Nella run 36519078323 (2026-09-29) tre articoli
     // evergreen sono stati scritti, verificati ed espansi e poi scartati a Step
-    // 3a.2 come duplicati lessicali (titolo 83% e 100%, id 75%): circa sei
-    // minuti di verificatori e di espansione su testo gia' condannato, che qui
-    // costano millisecondi. Lo stesso errore, con lo stesso messaggio, arriva
+    // 3a.2 come duplicati lessicali (titolo 83% e 100%, id 75%): 105 s fra
+    // «Articolo IT generato» e il rigetto, spesi in verificatori e gate su
+    // testo gia' condannato, che qui costano millisecondi. La generazione del
+    // corpo resta pagata: la decide il titolo che il modello sceglie. Lo stesso errore, con lo stesso messaggio, arriva
     // allo stesso chiamante («Duplicato post-generazione» → prossima keyword).
     // I gate di Step 3a.2-3a.4 restano e giudicano l'articolo finale.
-    checkForDuplicates(data);
+    // `localizedSlugs: false`: gli slug EN/DE/FR sono ancora provvisori qui;
+    // la loro collisione la giudicano Step 3a.2 e il controllo dopo
+    // relocalizeSlugsAfterTranslation(), come prima.
+    checkForDuplicates(data, { localizedSlugs: false });
     assertTopicNotRecentlyCovered(data, loadExistingArticleSummariesWithDates());
 
     // Step 3a.0-skip: bail early when the chosen source has zero frontaliere

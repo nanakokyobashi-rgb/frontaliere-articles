@@ -955,8 +955,11 @@ export function wrongLanguageAdoptions(parsed, locale = 'it', expectedFields = R
  */
 /** Un titolo di sezione `##` (non `###`): e' il confine a cui un body si puo' dividere. */
 const TOP_SECTION_HEADING_RE = /^##(?!#)\s*\S/;
-/** Le sezioni d'apertura che il contratto del prompt mette sempre nel body1. */
-const BODY1_OPENING_HEADING_RE = /^##\s*(in breve|fatti chiave)\b/i;
+/**
+ * Le due sezioni d'apertura che il contratto del prompt mette in testa al
+ * body1, in quest'ordine: «Inizia con '## In breve' (…) + '## Fatti chiave'».
+ */
+const BODY1_OPENING_HEADINGS_RE = [/^##\s*in breve\b/i, /^##\s*fatti chiave\b/i];
 
 /**
  * ── L'ARTICOLO SCRITTO TUTTO NEL BODY1 ─────────────────────────────────────
@@ -966,14 +969,17 @@ const BODY1_OPENING_HEADING_RE = /^##\s*(in breve|fatti chiave)\b/i;
  * tutti nel body1, lasciando body2 e body3 vuoti. Il verdetto diceva «mancano
  * body2, body3» e la chiamata si rigenerava da capo: nella run 36514673677
  * (2026-09-29) Codex aveva consegnato l'articolo intero nel body1 in 230 s, e
- * la rigenerazione ne e' costata altri 181 per riscrivere lo stesso testo.
+ * la rigenerazione ne e' costata altri 184 per riscrivere lo stesso testo.
  *
  * Il testo pero' c'e', ed e' gia' diviso in sezioni `##` nell'ordine del
  * contratto. Qui lo si ridistribuisce: le sezioni d'apertura restano nel body1,
  * le successive si dividono in tre parti consecutive il piu' possibile uguali
- * per lunghezza, senza spostare nulla. Servono almeno tre sezioni di contenuto
- * dopo l'apertura, una per body: con meno il testo non ha la struttura del
- * contratto, e si rigenera come prima.
+ * per lunghezza, senza spostare nulla. Si divide solo un body1 che apre ESATTAMENTE
+ * come chiede il contratto — `## In breve` e poi `## Fatti chiave`, senza
+ * testo prima — e che dopo l'apertura ha almeno tre sezioni di contenuto, una
+ * per body: altrimenti il testo non ha la forma del contratto, e si rigenera
+ * come prima. Cosi' un salvataggio non pubblica mai un body1 senza le due
+ * sezioni che la superficie AI-search si aspetta.
  *
  * PURA: torna `{ body1, body2, body3 }` o `null`.
  */
@@ -985,10 +991,8 @@ export function splitOverflowingBody1(body1) {
     else sections[sections.length - 1].push(line);
   }
   const texts = sections.map((s) => s.join('\n').trim()).filter(Boolean);
-  let opening = 0;
-  // Un eventuale testo prima del primo `##` resta in testa al body1.
-  if (texts.length > 0 && !TOP_SECTION_HEADING_RE.test(texts[0])) opening = 1;
-  while (opening < texts.length && BODY1_OPENING_HEADING_RE.test(texts[opening])) opening += 1;
+  const opening = BODY1_OPENING_HEADINGS_RE.length;
+  if (!BODY1_OPENING_HEADINGS_RE.every((re, i) => re.test(texts[i] || ''))) return null;
   const content = texts.slice(opening);
   if (content.length < 3) return null;
   const lengths = content.map((t) => t.length);

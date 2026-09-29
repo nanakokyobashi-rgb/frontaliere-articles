@@ -38,10 +38,17 @@ test('un abort resta per la sua sezione e per 48 h', () => {
 test('registrare pota le voci scadute e tiene al massimo TOPIC_GATE_URL_MAX voci', () => {
   let t = recordTopicGateAbortedUrl({}, 'vecchio', 'frontaliere', NOW - TOPIC_GATE_URL_TTL_MS - 1);
   t = recordTopicGateAbortedUrl(t, URL_KEY, 'frontaliere', NOW);
-  assert.deepEqual(Object.keys(t.topicGateUrls), [URL_KEY]);
+  assert.deepEqual(Object.keys(t.topicGateUrls), [`frontaliere::${URL_KEY}`]);
   for (let i = 0; i < TOPIC_GATE_URL_MAX + 5; i++) t = recordTopicGateAbortedUrl(t, `u${i}`, 'frontaliere', NOW + i);
   assert.equal(Object.keys(t.topicGateUrls).length, TOPIC_GATE_URL_MAX);
-  assert.equal(t.topicGateUrls.u0, undefined, 'la voce piu\' vecchia esce per prima');
+  assert.equal(t.topicGateUrls['frontaliere::u0'], undefined, 'la voce piu\' vecchia esce per prima');
+});
+
+test('lo stesso URL scartato in due sezioni resta ricordato per entrambe', () => {
+  let t = recordTopicGateAbortedUrl({}, URL_KEY, 'frontaliere', NOW);
+  t = recordTopicGateAbortedUrl(t, URL_KEY, 'svizzera', NOW + 1000);
+  assert.equal(isTopicGateAbortedUrl(t, URL_KEY, 'frontaliere', NOW + 2000), true);
+  assert.equal(isTopicGateAbortedUrl(t, URL_KEY, 'svizzera', NOW + 2000), true);
 });
 
 test('le funzioni del tracker evergreen non perdono topicGateUrls', () => {
@@ -91,6 +98,11 @@ test('create-article controlla i duplicati prima del fact-check, oltre che dopo'
   const lateDup = fn.indexOf('// Step 3a.2: Check for duplicates BEFORE translating');
   assert.ok(earlyDup > 0 && earlyDup < factCheck && factCheck < lateDup, `ordine: early=${earlyDup} factCheck=${factCheck} late=${lateDup}`);
   const early = fn.slice(earlyDup, factCheck);
-  assert.match(early, /checkForDuplicates\(data\);/);
+  // Gli slug EN/DE/FR sono ancora provvisori prima della traduzione: il gate
+  // anticipato controlla solo lo slot IT, Step 3a.2 e la rilocalizzazione il resto.
+  assert.match(early, /checkForDuplicates\(data, \{ localizedSlugs: false \}\);/);
+  assert.match(src, /function checkTranslatedSlugCollisions\(data, \{ locales = \['it', 'en', 'de', 'fr'\] \} = \{\}\)/);
+  assert.match(src, /checkTranslatedSlugCollisions\(data, \{ locales: localizedSlugs \? \['it', 'en', 'de', 'fr'\] : \['it'\] \}\);/);
+  assert.match(fn.slice(lateDup), /checkForDuplicates\(data\);/, 'Step 3a.2 resta completo');
   assert.match(early, /assertTopicNotRecentlyCovered\(data, loadExistingArticleSummariesWithDates\(\)\);/);
 });

@@ -1011,7 +1011,7 @@ export function loadEvergreenRejectedTracker(opts = {}) {
  * scartati dalla run 36510868703 di 45 minuti prima, ognuno 11-30 s di Codex
  * piu' circa 100 s di selezione.
  *
- * Il campo `topicGateUrls` di questo stesso file (`{ <chiave URL>: { section,
+ * Il campo `topicGateUrls` di questo stesso file (`{ "<sezione>::<chiave URL>": { section,
  * ts } }`) li ricorda per TOPIC_GATE_URL_TTL_MS, per sezione: una notizia senza
  * aggancio frontaliere puo' averne uno per la sezione svizzera, e viceversa.
  * Vive qui perche' questo file e' gia' salvato da generate-article.yml anche
@@ -1032,9 +1032,17 @@ function readTopicGateUrls(value) {
   return out;
 }
 
+/**
+ * Key of one abort: section AND URL, so an abort of the same source in the
+ * other section never overwrites this one.
+ */
+export function topicGateUrlKey(urlKey, section) {
+  return `${section}::${urlKey}`;
+}
+
 /** Whether `urlKey` got a topic-gate abort in `section` within the TTL. */
 export function isTopicGateAbortedUrl(tracker, urlKey, section, now = Date.now(), ttlMs = TOPIC_GATE_URL_TTL_MS) {
-  const entry = tracker?.topicGateUrls?.[urlKey];
+  const entry = tracker?.topicGateUrls?.[topicGateUrlKey(urlKey, section)];
   return !!entry && entry.section === section && now - entry.ts >= 0 && now - entry.ts < ttlMs;
 }
 
@@ -1048,8 +1056,9 @@ export function recordTopicGateAbortedUrl(tracker, urlKey, section, now = Date.n
     if (now - entry.ts < ttlMs) topicGateUrls[key] = entry;
   }
   if (urlKey && section) {
-    delete topicGateUrls[urlKey];
-    topicGateUrls[urlKey] = { section, ts: now };
+    const key = topicGateUrlKey(urlKey, section);
+    delete topicGateUrls[key];
+    topicGateUrls[key] = { section, ts: now };
   }
   const keys = Object.keys(topicGateUrls);
   for (const key of keys.slice(0, Math.max(0, keys.length - TOPIC_GATE_URL_MAX))) delete topicGateUrls[key];
