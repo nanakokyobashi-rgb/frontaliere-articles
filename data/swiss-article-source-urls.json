@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/scarsit%c3%a0-di-foraggio-per-animali%3a-parmelin-visita-azienda-agricola/91966219": {
-    "articleId": "parmelin-agricoltura-siccita",
-    "ts": "2026-08-27T18:24:32.232Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/politica/1946455/asilo-sicurezza-e-costi-quanto-ricade-sui-comuni-di-frontiera": {
     "articleId": "frontiera-asilo-competenze",
     "ts": "2026-08-27T18:43:45.269Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/ticino/politica/1953599/centro-cure-costi-aumento-ticino": {
     "articleId": "centro-premi-salute-2027",
     "ts": "2026-09-29T19:07:36.227Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1953535/malati-lettori-cassa-premi-ogni-parole": {
+    "articleId": "premi-cassa-malati-ticino-rincaro-lettori",
+    "ts": "2026-09-29T19:30:37.027Z",
     "keyForm": 2
   }
 }
