@@ -102,12 +102,12 @@ test('un guasto persistente fallisce davvero, esaurite le attempt', () => {
 test('ogni argomento e ogni flag arrivano al comando, a ogni tentativo', () => {
   const { code, argLines } = runWith({
     failTimes: 1,
-    cmdArgs: ['-y', 'tsx@4', 'scripts/build-api.mjs'],
+    cmdArgs: ['-y', 'tsx@4.23.15', 'scripts/build-api.mjs'],
   });
   assert.equal(code, 0);
   assert.equal(argLines.length, 2, 'entrambi i tentativi devono aver ricevuto gli argomenti');
   for (const line of argLines) {
-    assert.equal(line.trim(), '-y tsx@4 scripts/build-api.mjs');
+    assert.equal(line.trim(), '-y tsx@4.23.15 scripts/build-api.mjs');
   }
 });
 
@@ -165,26 +165,26 @@ test('i due wrapper non divergono su tentativi e backoff', () => {
  * Chiave: `<file> :: <comando a partire da npx>`.
  */
 const NOT_YET_WRAPPED = {
-  'fast-publish-article.yml :: npx -y tsx@4 scripts/publish-article-fast.mjs': {
+  'fast-publish-article.yml :: npx -y tsx@4.23.15 scripts/publish-article-fast.mjs': {
     issue: 98,
     reason:
       "Percorso commit->200 in 60-115s. Merita il wrapper quanto publish-api, ma il file e' " +
       "di un'altra area: wrapparlo qui creerebbe una collisione su un workflow che qualcun " +
       'altro sta gia\' toccando. Da drenare con la stessa forma di questa PR.',
   },
-  'fast-publish-article.yml :: npx -y tsx@4 scripts/refresh-hub-landing.mjs': {
+  'fast-publish-article.yml :: npx -y tsx@4.23.15 scripts/refresh-hub-landing.mjs': {
     issue: 98,
     reason:
       "Stesso file e stesso motivo del precedente: e' il refresh degli hub che segue la " +
       'pubblicazione veloce, e un blip qui lascia gli hub indietro rispetto allo shard.',
   },
-  'generate-border-wait-ranking-weekly.yml :: npx -y tsx@4 generator/scripts/generate-border-wait-ranking-article.mjs': {
+  'generate-border-wait-ranking-weekly.yml :: npx -y tsx@4.23.15 generator/scripts/generate-border-wait-ranking-article.mjs': {
     issue: 98,
     reason:
       "Cadenza settimanale: un guasto costa un articolo e il cron successivo lo recupera. " +
       "E' la priorita' piu' bassa dei quattro, ed e' l'unico per cui il retry e' un lusso.",
   },
-  'generator-ci.yml :: npx -y tsx@4 generator/tests/shell-contract-coverage.mjs': {
+  'generator-ci.yml :: npx -y tsx@4.23.15 generator/tests/shell-contract-coverage.mjs': {
     issue: 98,
     reason:
       "Gate di PR, non percorso di pubblicazione: un guasto qui si vede subito e si ripara " +

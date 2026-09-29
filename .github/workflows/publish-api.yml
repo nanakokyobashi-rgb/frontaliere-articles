@@ -121,7 +121,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           # fetch-depth: 0 perche' `github.event.before` deve essere raggiungibile
           # dal passo sotto: senza storia completa il diff sui corpi toccati non
@@ -130,13 +130,13 @@ jobs:
           # push touched".
           fetch-depth: 0
 
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v7
         with:
           node-version: '22'
           # La meta' strutturale della mitigazione di #98, e quella che conta di
           # piu': il retry accorcia le probabilita', la cache toglie la richiesta.
           # Senza questa riga NIENTE in questo job era cachato — ne' `npx -y
-          # tsx@4` (che risolve e scarica tsx dal registro a OGNI run) ne'
+          # tsx@4.23.15` (che risolve e scarica tsx dal registro a OGNI run) ne'
           # l'install del parser qui sotto. `cache: 'npm'` conserva `~/.npm`, che
           # include sia la cache dei tarball sia `_npx/`: a cache calda entrambi
           # i comandi sono serviti da disco.
@@ -176,10 +176,10 @@ jobs:
           # Pin ESATTO, non un range. Un gate che cambia parser da solo puo'
           # iniziare a rifiutare qualcosa senza che nessuno abbia toccato una
           # riga, e questo gate ferma le pubblicazioni. La versione insegue
-          # quella con cui il SITO builda davvero (misurato: esbuild 0.25.12 nel
+          # quella con cui il SITO builda davvero (misurato: esbuild 0.28.2 nel
           # suo node_modules, via vite): l'oracolo del gate deve essere il
           # compilatore che poi si rompe, non un altro.
-          ESBUILD_PIN: esbuild@0.25.12
+          ESBUILD_PIN: esbuild@0.28.2
         run: |
           set -euo pipefail
           # In una directory ISOLATA, non nella radice del repo: `npm install`
@@ -417,7 +417,7 @@ jobs:
       # `dist/api/` mezzo vecchio e mezzo nuovo.
       # Costa poco anche quando non serve: misurato, questo step dura 6s.
       - name: Build data surface
-        run: bash scripts/ci/retry-cmd.sh npx -y tsx@4 scripts/build-api.mjs
+        run: bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/build-api.mjs
 
       # The runtime index the SITE's article LISTS read. Publishing an article
       # to its shard makes its own URL live in a minute; it does not put it in
@@ -579,14 +579,14 @@ jobs:
           runtime_pat="${GITHUB_PAT_NANAKO:-}"
           GH_TOKEN="${runtime_pat:-$GH_TOKEN}" node scripts/ci/ticker-shadow-alert.mjs
 
-      - uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@v6
 
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: dist/api
 
       - id: deploy
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 
       # Push the article sitemaps straight to the edge.
       #

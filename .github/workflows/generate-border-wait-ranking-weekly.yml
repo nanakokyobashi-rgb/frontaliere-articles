@@ -87,7 +87,7 @@ jobs:
           echo "event=${{ github.event_name }} → dry_run=$DRY"
 
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
           # persist-credentials: false is load-bearing, not hygiene.
@@ -101,7 +101,7 @@ jobs:
           persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v7
         with:
           node-version: '22'
           cache: 'npm'
@@ -128,7 +128,7 @@ jobs:
         id: producer
         env:
           DRY_RUN: ${{ steps.mode.outputs.dry == 'true' && '1' || '0' }}
-        run: npx -y tsx@4 generator/scripts/generate-border-wait-ranking-article.mjs
+        run: npx -y tsx@4.23.15 generator/scripts/generate-border-wait-ranking-article.mjs
 
       # ── La guardia sul percorso di scrittura (issue #275) ──────────────────
       #

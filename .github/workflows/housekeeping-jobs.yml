@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         lane: [prospective, rest]
-    uses: valerielinc-ops/frontaliere-si-o-no/.github/workflows/housekeeping-jobs-logic.yml@main
+    uses: valerielinc-ops/frontaliere-si-o-no/.github/workflows/housekeeping-jobs-logic.yml@02a4a7471e244a31adb940a1ad24a288520322b9
     with:
       lane: ${{ matrix.lane }}
     secrets:

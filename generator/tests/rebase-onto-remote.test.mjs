@@ -50,7 +50,7 @@ const GIT_ENV = {
   GIT_COMMITTER_EMAIL: 'test@example.invalid',
   GIT_CONFIG_GLOBAL: '/dev/null',
   GIT_CONFIG_SYSTEM: '/dev/null',
-  // Il probe `npx -y tsx@4` del resolver e' lo strato 2 del backstop e vuole la
+  // Il probe `npx -y tsx@4.23.15` del resolver e' lo strato 2 del backstop e vuole la
   // rete: qui e' spento, cosi' cio' che i test mettono alla prova e' lo strato
   // PORTANTE, quello offline che decide davvero. Un test che passa perche' un
   // download e' riuscito non prova niente sul giorno in cui non riesce.

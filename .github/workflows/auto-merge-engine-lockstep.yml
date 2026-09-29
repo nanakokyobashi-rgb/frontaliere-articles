@@ -61,13 +61,13 @@ jobs:
     # pr-redflag-fixer.yml).
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           # Il PAT arriva da Remote Config, non da qui: senza questo il credential di
           # actions/checkout resterebbe quello di GITHUB_TOKEN.
           persist-credentials: false
 
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v7
         with:
           node-version: '22'
           cache: npm

@@ -62,13 +62,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           # corpus-floors.mjs compares the live registry with the previous
           # revision before the content gate publishes its verdict.
           fetch-depth: 0
 
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v7
         with:
           node-version: '22'
 

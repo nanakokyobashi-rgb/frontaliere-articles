@@ -52,7 +52,7 @@
  * the mechanism itself is broken rather than one shard being slow.
  *
  * Usage:
- *   npx -y tsx@4 scripts/refresh-hub-landing.mjs --out <dir> [--section frontaliere|svizzera]
+ *   npx -y tsx@4.23.15 scripts/refresh-hub-landing.mjs --out <dir> [--section frontaliere|svizzera]
  *
  * Emits: <out>/articoli-frontaliere/index.html          (it)
  *        <out>/<loc>/<localized-slug>/index.html        (en, de, fr)

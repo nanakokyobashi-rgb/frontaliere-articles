@@ -119,7 +119,7 @@ jobs:
           echo "event=${{ github.event_name }} → dry_run=$DRY"
 
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
           # persist-credentials: false is load-bearing, not hygiene.
@@ -133,7 +133,7 @@ jobs:
           persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v7
         with:
           node-version: '22'
           cache: 'npm'
@@ -143,7 +143,7 @@ jobs:
 
       - name: Cache local Opus-MT models
         if: steps.mode.outputs.dry != 'true'
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: .cache/transformers
           key: local-mt-models-v2-opus-e5
@@ -178,7 +178,7 @@ jobs:
 
       - name: Upload provider preflight report
         if: always() && steps.mode.outputs.dry != 'true'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: provider-preflight-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/provider-preflight.json
