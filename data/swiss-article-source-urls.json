@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/cf%3a-allerta-popolazione-tramite-cellulare%3b-chiesti-quasi-16-milioni/91957955": {
-    "articleId": "cell-broadcast-allerta-svizzera",
-    "ts": "2026-08-26T19:58:15.929Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/cf%3a-canicola%2c-70-mio-supplementari-per-il-bosco-e-l%27agricoltura/91958663": {
     "articleId": "canicola-70-milioni-bosco",
     "ts": "2026-08-26T20:29:31.731Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/gr%3a-iniziativa-sulla-neutralit%c3%a0%2c-s%c3%ac-di-santa-maria%2c-grono-e-brusio/92133624": {
     "articleId": "voto-iniziativa-neutralita-grigioni",
     "ts": "2026-09-29T03:31:48.220Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1953171/internet-swiss-primo-aereo-velocita": {
+    "articleId": "swiss-starlink-aereo-internet",
+    "ts": "2026-09-29T04:59:42.935Z",
     "keyForm": 2
   }
 }
