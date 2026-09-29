@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/cf-vuole-contrastare-l%27aumento-delle-tariffe-di-netflix/91965738": {
-    "articleId": "protezione-consumatori-streaming-svizzera",
-    "ts": "2026-08-27T21:38:59.068Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/attualita/1946516/foraggio-azienda-parmelin-animali-confederazione": {
     "articleId": "foraggio-siccita-aiuti-federali",
     "ts": "2026-08-27T22:06:31.196Z",
@@ -2497,6 +2492,11 @@
   "https://www.malpensa24.it/novara-medicina-futuro-ia": {
     "articleId": "progetto-ia-medicina-bellinzona",
     "ts": "2026-09-29T21:23:36.714Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4117759": {
+    "articleId": "dati-srf-dipendenti-rubati",
+    "ts": "2026-09-29T21:53:18.380Z",
     "keyForm": 2
   }
 }
