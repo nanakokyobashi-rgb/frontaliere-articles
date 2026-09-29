@@ -45,7 +45,7 @@ function defaultCopyrightNotice(): string {
     : `© ${COPYRIGHT_YEAR_START}–${year} Frontaliere Ticino. Tutti i diritti riservati.`;
 }
 
-function resolveHttpUrl(value: unknown, fallback: unknown, field: string): string {
+export function resolveHttpUrl(value: unknown, fallback: unknown, field: string): string {
   const candidate = value === undefined ? fallback : value;
   if (typeof candidate !== 'string') {
     throw new Error(`imageObjectLd: ${field} must be an absolute http(s) URL`);
