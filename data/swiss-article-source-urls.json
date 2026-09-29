@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1946239/lusso-chronext-orologi-zugo-fallimento-venditore": {
-    "articleId": "chronext-fallimento-zugo",
-    "ts": "2026-08-26T23:53:50.493Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/udc%3a-glarner-lascer%c3%a0-gi%c3%a0-a-fine-anno-il-consiglio-nazionale/91960519": {
     "articleId": "glarner-dimissioni-consiglio-nazionale",
     "ts": "2026-08-27T00:10:51.231Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1953365/crescita-spr-ngli-lindt-caldo-margine": {
     "articleId": "lindt-prungli-stime-2026",
     "ts": "2026-09-29T07:46:28.203Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/cn%3a-limitare-stipendi-dirigenti-per-assicurazioni-malattia-di-base/92135621": {
+    "articleId": "compensi-lvamal-camera-bassa",
+    "ts": "2026-09-29T08:03:27.556Z",
     "keyForm": 2
   }
 }
