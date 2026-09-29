@@ -1,26 +1,40 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-28T11:33:56.501Z",
-  "dateIso": "2026-09-28",
+  "generatedAt": "2026-09-29T11:13:25.749Z",
+  "dateIso": "2026-09-29",
   "counts": {
-    "availableBlocks": 4,
+    "availableBlocks": 3,
     "crossings": 141,
     "fuelMunicipalities": 518,
     "exchangePoints": 32,
-    "jobsActive": 25198
+    "jobsActive": 0
   },
   "blocks": {
     "borderWait": {
       "available": true,
-      "updatedAt": "2026-09-28T11:09:34.391Z",
+      "updatedAt": "2026-09-29T07:38:30.215Z",
       "count": 141,
-      "zeroWaitCount": 141,
+      "zeroWaitCount": 139,
       "worst": {
-        "slug": "anieres",
-        "name": "Anières",
-        "waitMinutes": 0
+        "slug": "gaggiolo",
+        "name": "Gaggiolo (Cantello-Stabio)",
+        "waitMinutes": 8
       },
       "crossings": [
+        {
+          "slug": "gaggiolo",
+          "name": "Gaggiolo (Cantello-Stabio)",
+          "waitMinutes": 8,
+          "status": "yellow",
+          "direction": null
+        },
+        {
+          "slug": "san-pietro",
+          "name": "San Pietro (Clivio-Stabio)",
+          "waitMinutes": 8,
+          "status": "yellow",
+          "direction": null
+        },
         {
           "slug": "anieres",
           "name": "Anières",
@@ -360,13 +374,6 @@
         {
           "slug": "forcola-di-livigno",
           "name": "Forcola di Livigno",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "gaggiolo",
-          "name": "Gaggiolo (Cantello-Stabio)",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -876,13 +883,6 @@
           "direction": null
         },
         {
-          "slug": "san-pietro",
-          "name": "San Pietro (Clivio-Stabio)",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": null
-        },
-        {
           "slug": "sauverny",
           "name": "Sauverny",
           "waitMinutes": 0,
@@ -1013,11 +1013,11 @@
     },
     "fuel": {
       "available": true,
-      "generatedAt": "2026-09-28T07:37:07.203Z",
+      "generatedAt": "2026-09-29T09:02:52.469Z",
       "municipalityCount": 518,
-      "cheaperItalyCount": 30,
+      "cheaperItalyCount": 31,
       "cheaperSwissCount": 110,
-      "tieCount": 5,
+      "tieCount": 4,
       "cheapestItaly": [
         {
           "municipality": "Livigno",
@@ -1044,10 +1044,10 @@
           "stationName": "DISTRIBUTORE ENI APRICA"
         },
         {
-          "municipality": "Gallarate",
+          "municipality": "Cassano Magnago",
           "province": "VA",
-          "minPriceEur": 2.004,
-          "stationName": "Eni Station"
+          "minPriceEur": 1.99,
+          "stationName": "PV 2828"
         }
       ],
       "bestSavings": [
@@ -1056,27 +1056,27 @@
           "province": "SO",
           "cheaperCountry": "IT",
           "italyPriceEur": 1.623,
-          "swissPriceEur": 2.149,
+          "swissPriceEur": 2.145,
           "swissPriceChf": 2.03,
-          "saving50LEur": 26.3
+          "saving50LEur": 26.1
         },
         {
           "municipality": "Castronno",
           "province": "VA",
           "cheaperCountry": "CH",
           "italyPriceEur": 2.239,
-          "swissPriceEur": 1.832,
+          "swissPriceEur": 1.828,
           "swissPriceChf": 1.73,
-          "saving50LEur": 20.35
+          "saving50LEur": 20.55
         },
         {
           "municipality": "Luisago",
           "province": "CO",
           "cheaperCountry": "CH",
           "italyPriceEur": 2.226,
-          "swissPriceEur": 1.832,
+          "swissPriceEur": 1.828,
           "swissPriceChf": 1.73,
-          "saving50LEur": 19.7
+          "saving50LEur": 19.9
         }
       ],
       "cheapestSwissStation": null,
@@ -1084,26 +1084,21 @@
     },
     "exchange": {
       "available": true,
-      "rate": 1.0597,
-      "lastDate": "2026-09-27",
-      "prevRate": 1.0599,
-      "prevDate": "2026-09-26",
-      "delta1d": -0.0002,
-      "rate7dAgo": 1.056,
-      "delta7d": 0.0037,
+      "rate": 1.0582,
+      "lastDate": "2026-09-28",
+      "prevRate": 1.0594,
+      "prevDate": "2026-09-27",
+      "delta1d": -0.0012,
+      "rate7dAgo": 1.0584,
+      "delta7d": -0.0002,
       "source": "frankfurter",
       "pointCount": 32,
       "degradedEditions": 0
     },
     "jobs": {
-      "available": true,
-      "generatedAt": "2026-09-28T03:14:35.074Z",
-      "activeJobs": 25198,
-      "activeCompanies": 857,
-      "todayAdded": 36,
-      "yesterdayAdded": 270,
-      "last7dAdded": 6875,
-      "degradedEditions": 0
+      "available": false,
+      "reason": "jobs history stops at 2026-09-27, 2d before 2026-09-29 (max 1d) — corpus is not advancing",
+      "degradedEditions": 1
     }
   }
 }
