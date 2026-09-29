@@ -953,13 +953,115 @@ export function wrongLanguageAdoptions(parsed, locale = 'it', expectedFields = R
  * sopra il flag. Fidarsi del flag li' aveva buttato un articolo valido e in
  * tema (osservato su local/fallback qwen2.5:14b).
  */
+/** Un titolo di sezione `##` (non `###`): e' il confine a cui un body si puo' dividere. */
+const TOP_SECTION_HEADING_RE = /^##(?!#)\s*\S/;
+/**
+ * Le due sezioni d'apertura che il contratto del prompt mette in testa al
+ * body1, in quest'ordine: «Inizia con '## In breve' (…) + '## Fatti chiave'».
+ */
+const BODY1_OPENING_HEADINGS_RE = [/^##\s*in breve\b/i, /^##\s*fatti chiave\b/i];
+/** Testo minimo di una sezione, titoli esclusi: lo stesso floor di `body2<40`. */
+const SPLIT_SECTION_MIN_TEXT_CHARS = 40;
+
+/** Il testo di una sezione senza le righe di titolo (`#`…`######`). */
+function sectionBodyText(section) {
+  return section.split('\n').filter((line) => !/^#{1,6}\s/.test(line)).join(' ').replace(/\s+/g, ' ').trim();
+}
+
+/**
+ * ── L'ARTICOLO SCRITTO TUTTO NEL BODY1 ─────────────────────────────────────
+ *
+ * Il prompt chiede tre campi — body1 (In breve, Fatti chiave, i fatti della
+ * fonte), body2 (analisi), body3 (seguito) — e un modello a volte li scrive
+ * tutti nel body1, lasciando body2 e body3 vuoti. Il verdetto diceva «mancano
+ * body2, body3» e la chiamata si rigenerava da capo: nella run 36514673677
+ * (2026-09-29) Codex aveva consegnato l'articolo intero nel body1 in 230 s, e
+ * la rigenerazione ne e' costata altri 184 per riscrivere lo stesso testo.
+ *
+ * Il testo pero' c'e', ed e' gia' diviso in sezioni `##` nell'ordine del
+ * contratto. Qui lo si ridistribuisce: le sezioni d'apertura restano nel body1,
+ * le successive si dividono in tre parti consecutive il piu' possibile uguali
+ * per lunghezza, senza spostare nulla. Si divide solo un body1 che apre ESATTAMENTE
+ * come chiede il contratto — `## In breve` e poi `## Fatti chiave`, senza
+ * testo prima — e che dopo l'apertura ha almeno tre sezioni di contenuto, una
+ * per body: altrimenti il testo non ha la forma del contratto, e si rigenera
+ * come prima. Cosi' un salvataggio non pubblica mai un body1 senza le due
+ * sezioni che la superficie AI-search si aspetta.
+ *
+ * PURA: torna `{ body1, body2, body3 }` o `null`.
+ */
+export function splitOverflowingBody1(body1) {
+  const lines = String(body1 || '').split('\n');
+  const sections = [];
+  for (const line of lines) {
+    if (TOP_SECTION_HEADING_RE.test(line) || sections.length === 0) sections.push([line]);
+    else sections[sections.length - 1].push(line);
+  }
+  const texts = sections.map((s) => s.join('\n').trim()).filter(Boolean);
+  const opening = BODY1_OPENING_HEADINGS_RE.length;
+  if (!BODY1_OPENING_HEADINGS_RE.every((re, i) => re.test(texts[i] || ''))) return null;
+  const content = texts.slice(opening);
+  if (content.length < 3) return null;
+  // Una sezione di contenuto conta solo se, oltre ai titoli, ha testo: un
+  // `## Seguito` nudo diventerebbe un body3 fatto del solo titolo. Stessa
+  // soglia del `body2<40` del verdetto, per ogni sezione.
+  if (content.some((t) => sectionBodyText(t).length < SPLIT_SECTION_MIN_TEXT_CHARS)) return null;
+  const lengths = content.map((t) => t.length);
+  const total = lengths.reduce((a, b) => a + b, 0);
+  const prefix = [0];
+  for (const n of lengths) prefix.push(prefix[prefix.length - 1] + n);
+  // Due tagli a < b sui confini di sezione, ognuno il piu' vicino possibile a
+  // un terzo e due terzi del contenuto.
+  let best = null;
+  for (let a = 1; a < content.length - 1; a++) {
+    for (let b = a + 1; b < content.length; b++) {
+      const parts = [prefix[a], prefix[b] - prefix[a], total - prefix[b]];
+      const worst = Math.max(...parts.map((p) => Math.abs(p - total / 3)));
+      if (!best || worst < best.worst) best = { a, b, worst };
+    }
+  }
+  const join = (list) => list.join('\n\n');
+  return {
+    body1: join([...texts.slice(0, opening), ...content.slice(0, best.a)]),
+    body2: join(content.slice(best.a, best.b)),
+    body3: join(content.slice(best.b)),
+  };
+}
+
+/**
+ * Il payload con i tre body riscritti nel contenitore da cui il normalizzatore
+ * ha letto il body1 (`content[locale]`, `content` o la radice), cosi' che una
+ * rilettura del JSON trovi esattamente i body divisi. Non tocca `parsed`.
+ */
+export function payloadWithBodies(parsed, bodies, locale = 'it') {
+  const clone = JSON.parse(JSON.stringify(parsed));
+  const source = resolveContentFieldSources(clone, locale, ['body1']).body1?.source;
+  const target = source === `content.${locale}` ? clone.content[locale]
+    : source === 'content' ? clone.content
+      : clone;
+  Object.assign(target, bodies);
+  return clone;
+}
+
 export function classifyBody2Payload({
   parsed,
   parseErr = null,
   locale = 'it',
   expectedFields = REQUIRED_IT_BODY_FIELDS,
 } = {}) {
-  const itContent = parseErr ? null : normalizeItalianContentFromPayload(parsed, locale, expectedFields);
+  let itContent = parseErr ? null : normalizeItalianContentFromPayload(parsed, locale, expectedFields);
+  let salvagedPayload = null;
+  // Articolo intero nel body1, body2 e body3 vuoti: si ridistribuisce ai titoli
+  // `##` invece di rigenerare (splitOverflowingBody1). I controlli sotto
+  // giudicano poi i body divisi come qualunque altro payload.
+  if (itContent && BODY_ONLY_FIELDS.every((f) => expectedFields.includes(f))
+    && itContent.body1 && !itContent.body2?.trim() && !itContent.body3?.trim()) {
+    const split = splitOverflowingBody1(itContent.body1);
+    if (split) {
+      itContent = { ...itContent, ...split };
+      salvagedPayload = payloadWithBodies(parsed, split, locale);
+    }
+  }
 
   // ── Ramo 1: l'abort, riconosciuto PRIMA del ramo «non normalizzabile» ──
   // Solo quando il CORPO e' davvero assente: con i body popolati il modello si
@@ -1017,5 +1119,10 @@ export function classifyBody2Payload({
   // vede per costruzione: un titolo inglese ha ratio 0.
   missing.push(...wrongLanguageAdoptions(parsed, locale, expectedFields));
 
-  return { verdict: missing.length > 0 ? 'reject' : 'ok', itContent, missing };
+  const verdict = missing.length > 0 ? 'reject' : 'ok';
+  // `salvagedPayload` solo su un `ok`: un payload diviso che non passa i
+  // controlli si rigenera come prima, e il chiamante non deve restituirlo.
+  return verdict === 'ok' && salvagedPayload
+    ? { verdict, itContent, missing, salvagedPayload }
+    : { verdict, itContent, missing };
 }

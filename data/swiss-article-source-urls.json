@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/slkg5z6nqrvwdi3l1gh9v": {
-    "articleId": "credito-federale-ambiente-2027-2030",
-    "ts": "2026-08-26T23:15:31.050Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1946239/lusso-chronext-orologi-zugo-fallimento-venditore": {
     "articleId": "chronext-fallimento-zugo",
     "ts": "2026-08-26T23:53:50.493Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/udgmflnmh3zp": {
     "articleId": "zugo-cybersecurity-de-escalation",
     "ts": "2026-09-29T07:30:17.140Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1953365/crescita-spr-ngli-lindt-caldo-margine": {
+    "articleId": "lindt-prungli-stime-2026",
+    "ts": "2026-09-29T07:46:28.203Z",
     "keyForm": 2
   }
 }

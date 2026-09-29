@@ -114,7 +114,10 @@ export function clearStrikesForPool(ledger, pool) {
     else strikes[kw] = n;
   }
   return {
-    ledger: { keywords, strikes },
+    // `topicGateUrls` (fonti di notizie rifiutate dal topic-gate, 48 h) non
+    // riguarda il pool evergreen: passa intatto, o un `--apply` riaprirebbe
+    // le fonti appena rifiutate.
+    ledger: { keywords, strikes, topicGateUrls: { ...((ledger && typeof ledger.topicGateUrls === 'object' && ledger.topicGateUrls) || {}) } },
     cleared,
     // I ban restano: dichiarati esplicitamente perche' e' la meta' che questo
     // script sceglie di NON riparare, e la scelta va letta nel report.
