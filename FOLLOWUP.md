@@ -169,6 +169,27 @@ anche la sola attestazione completa «nessun item per questa PR; bucket #N non
 modificato da questa PR»: entrambe le clausole devono stare sulla stessa riga,
 cosi' un bucket aggiornato o una frase ambigua restano fail-closed.
 
+Item finiti in **più bucket** (per esempio uno qui e uno nel sito) → UNA riga
+di claim per bucket, ciascuna con il proprio `#<id>`, repository e conteggio:
+
+```markdown
+Created/updated: daily bucket #<id-corpus> `follow-up(daily:<YYYY-MM-DD>)` (corpus) con K item:
+- <item one-line>
+Created/updated: daily bucket #<id-sito> `follow-up(daily:<YYYY-MM-DD>)` (sito) con J item:
+- <item one-line>
+```
+
+«Verify complete follow-up triage» prova OGNI bucket citato. Un `#<id>` è un
+bucket su una riga che dice «bucket», oppure quando è seguito sulla stessa riga
+dal tag `` `follow-up(daily:<YYYY-MM-DD>)` ``: è la forma che il triage scrive
+spontaneamente, conteggio in testa e un bucket per bullet
+(``- Corpus #1957 `follow-up(daily:2026-09-28)` — …``, marker delle PR del sito
+#10015 e #10050). Il repository dichiarato è informativo: il numero viene
+cercato in entrambi i repo. Un marker con verdetto definitivo «non persistito»
+da oltre 6 ore esce dal batch come **quarantena** visibile (warning, summary,
+output `quarantined_prs`, issue «Post-merge follow-up: marker di triage in
+quarantena»), invece di tornare a ogni run.
+
 ## Formato del corpo della issue
 
 Questa struttura **non è cosmetica: è l'unico appiglio che ha la chiusura.**

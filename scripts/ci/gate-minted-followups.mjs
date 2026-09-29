@@ -93,7 +93,7 @@ import {
   followupItemId,
 } from './followup-resolution-match.mjs';
 import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
-import { hasTriageComment } from './collect-followup-batch.mjs';
+import { dailyTagBucketReferences, hasTriageComment } from './collect-followup-batch.mjs';
 
 const TRIAGE_MARKER_PREFIX = '## Post-merge follow-up triage';
 import { pinnedBy } from './manifest-pinned-issues.mjs';
@@ -956,7 +956,10 @@ export function demotedItemsBySourcePr(demoted, fallbackTargets = []) {
 
 /**
  * Un marker di triage della PR cita il bucket `#N` su una riga che dice
- * «bucket» (un `#N` preceduto da `PR` e' la PR, non il bucket).
+ * «bucket» (un `#N` preceduto da `PR` e' la PR, non il bucket), oppure con il
+ * tag `follow-up(daily:YYYY-MM-DD)` subito dopo il numero: e' la forma del
+ * triage su due repository, un bucket per bullet (``- Corpus #1957
+ * `follow-up(daily:2026-09-28)` …``, marker delle PR del sito #10015 e #10050).
  */
 export function triageMarkerCitesBucket(commentsJson, bucketNumber) {
   let data;
@@ -970,7 +973,8 @@ export function triageMarkerCitesBucket(commentsJson, bucketNumber) {
   return comments.some((comment) => {
     const body = typeof comment?.body === 'string' ? comment.body : '';
     if (!body.trimStart().startsWith(TRIAGE_MARKER_PREFIX)) return false;
-    return body.split(/\r?\n/).some((line) => /\bbucket\b/i.test(line) && ref.test(line));
+    return body.split(/\r?\n/).some((line) => (/\bbucket\b/i.test(line) && ref.test(line))
+      || dailyTagBucketReferences(line).includes(Number(bucketNumber)));
   });
 }
 
