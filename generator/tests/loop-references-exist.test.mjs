@@ -464,6 +464,13 @@ const DECLARED_ABSENT = {
       'La consolidazione dei crawler-group e\' del sito; qui non esistono crawler group. ' +
       'Citata per spiegare perche\' i nomi dei workflow cambiano sotto i piedi.',
   },
+  'scripts/ci/close-recovered-failure-issues.mjs :: scripts/lib/crawler-quarantine.mjs': {
+    kind: 'site-only',
+    reason:
+      'Sorgente sul sito di QUARANTINE_OUTCOMES_NOTICE_TITLE (valerielinc-ops/frontaliere-si-o-no#10301). ' +
+      'Il file che la cita tiene il titolo come costante locale proprio perche\' qui il modulo non c\'e\': ' +
+      'nulla dipende dalla sua esistenza, e un test del sito lega le due stringhe.',
+  },
   'scripts/ci/report-validate-dist-failure.mjs :: audit-dist-from-run.yml': {
     kind: 'site-only',
     reason:

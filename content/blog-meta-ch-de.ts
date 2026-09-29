@@ -7007,6 +7007,15 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.svizzera-robotica-crescita-aziende.title': 'Schweiz: 217 Roboterfirmen und 7 \'000 Arbeitsplätze',
     'blog.article.svizzera-robotica-crescita-aziende.excerpt': 'Raiffeisen-Analyse: 50 neue Unternehmen seit 2020. Zürich und Waadt Schlüsselpole, starke Verbindung zur akademischen Forschung und Spin-offs.',
     'blog.article.svizzera-robotica-crescita-aziende.imageAlt': 'Robotertechnologie in einem Schweizer Forschungszentrum',
+    'blog.article.finma-conclude-julius-baer.title': 'Fall Signa: Die FINMA schliesst das Verfahren gegen Julius Bär ab',
+    'blog.article.finma-conclude-julius-baer.excerpt': 'Die Aufsichtsbehörde schliesst den Fall im Zusammenhang mit der Immobiliengruppe Signa ab. Gefordert werden 250 Millionen Franken an zusätzlichem Kapital und neue Risikoberichte.',
+    'blog.article.finma-conclude-julius-baer.imageAlt': 'Hauptsitz eines Bankinstituts im Finanzviertel von Zürich',
+    'blog.article.stadler-nomina-nuovo-ceo.title': 'Stadler Rail: Philipp Brunner wird ab 2027 der neue CEO sein',
+    'blog.article.stadler-nomina-nuovo-ceo.excerpt': 'Wechsel an der Spitze des Schweizer Eisenbahnkonzerns: Philipp Brunner folgt Markus Bernsteiner ab dem 1° gennaio 2027 nach. Halbjahresumsatz bei 2 Milliarden.',
+    'blog.article.stadler-nomina-nuovo-ceo.imageAlt': 'Moderner Stadler-Zug in einer Schweizer Landschaft',
+    'blog.article.zugo-cybersecurity-de-escalation.title': 'Zug setzt auf Cybersicherheit: Deeskalation und Resilienz',
+    'blog.article.zugo-cybersecurity-de-escalation.excerpt': 'Der Kanton Zug startet eine Initiative für Cybersicherheit mit dem Schwerpunkt auf präventiver Diplomatie, Mediation und Zusammenarbeit zwischen Staat und Privatsektor.',
+    'blog.article.zugo-cybersecurity-de-escalation.imageAlt': 'Kompetenzzentrum für Cybersicherheit in Zug',
 };
 
 export default blogMetaChDe;

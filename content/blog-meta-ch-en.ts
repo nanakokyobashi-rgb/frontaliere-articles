@@ -7007,6 +7007,15 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.svizzera-robotica-crescita-aziende.title': 'Switzerland: 217 robotics companies and 7 thousand jobs',
     'blog.article.svizzera-robotica-crescita-aziende.excerpt': 'Raiffeisen analysis: 50 new companies since 2020. Zurich and Vaud key hubs, strong link with academic research and spin-offs.',
     'blog.article.svizzera-robotica-crescita-aziende.imageAlt': 'Robotic technology in a Swiss research center',
+    'blog.article.finma-conclude-julius-baer.title': 'Signa case, FINMA concludes proceedings concerning Julius Bär',
+    'blog.article.finma-conclude-julius-baer.excerpt': 'The supervisory authority closes the case related to the Signa real estate group. 250 million francs in additional capital and new risk reports requested.',
+    'blog.article.finma-conclude-julius-baer.imageAlt': 'Headquarters of a banking institution in Zurich financial district',
+    'blog.article.stadler-nomina-nuovo-ceo.title': 'Stadler Rail: Philipp Brunner will be the new CEO from 2027',
+    'blog.article.stadler-nomina-nuovo-ceo.excerpt': 'Leadership change at Swiss railway group: Philipp Brunner will succeed Markus Bernsteiner from 1° January 2027. Half-year revenue at 2 billion.',
+    'blog.article.stadler-nomina-nuovo-ceo.imageAlt': 'Modern Stadler train in a Swiss landscape',
+    'blog.article.zugo-cybersecurity-de-escalation.title': 'Zug focuses on cybersecurity: de-escalation and resilience',
+    'blog.article.zugo-cybersecurity-de-escalation.excerpt': 'The Canton of Zug launches an initiative for cybersecurity, focusing on preventive diplomacy, mediation, and cooperation between the state and the private sector.',
+    'blog.article.zugo-cybersecurity-de-escalation.imageAlt': 'Cybersecurity competence center in Zug',
 };
 
 export default blogMetaChEn;

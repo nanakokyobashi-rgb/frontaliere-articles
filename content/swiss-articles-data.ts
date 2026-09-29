@@ -21049,6 +21049,33 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'finma-conclude-julius-baer',
+    category: 'novita',
+    date: '2026-09-29T06:44:48.465Z',
+    image: '/images/blog/finma-conclude-julius-baer.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'stadler-nomina-nuovo-ceo',
+    category: 'novita',
+    date: '2026-09-29T07:01:35.851Z',
+    image: '/images/blog/stadler-nomina-nuovo-ceo.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'zugo-cybersecurity-de-escalation',
+    category: 'novita',
+    date: '2026-09-29T07:30:16.804Z',
+    image: '/images/blog/zugo-cybersecurity-de-escalation.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

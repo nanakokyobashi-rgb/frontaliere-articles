@@ -109,7 +109,7 @@
  *
  * ALGORITHM for `Crawler Failure:` issues — DIFFERENT since the crawler-workflow
  * consolidation (2026-07, see scripts/generate-crawler-group-workflows.mjs): 581
- * individual per-crawler workflows were replaced by 23 grouped `crawler-group-*.yml`
+ * individual per-crawler workflows were replaced by 24 grouped `crawler-group-*.yml`
  * workflows, each running ~25 crawlers as concurrent `background: true` steps inside
  * ONE job. `Crawler Failure:` titles now embed `Run <slug>` (the crawler's OWN
  * background-step name, baked in as a literal at generation time — see that script's
@@ -121,15 +121,20 @@
  *   2. Find which `crawler-group-*.yml` file currently contains that crawler (greps each
  *      group file's `id: crawler-<slug>` markers — group membership can shift whenever
  *      the generator re-runs, so this is resolved fresh each time, not cached).
- *   3. Ask GitHub for that GROUP workflow's most-recent COMPLETED run on `main`.
+ *   3. Ask GitHub for that GROUP workflow's most-recent COMPLETED run on the
+ *      production generation refs (`crawler-generation-shadow-<token>`) plus
+ *      `main` for legacy/local runs. The old `-b main` query never saw the
+ *      shadow runs that actually execute the crawlers.
  *   4. Fetch that run's job(s) via the Jobs API and find the STEP named `Run <slug>`
- *      inside it — steps have their OWN independent `conclusion` in the API response
- *      (confirmed empirically against a live run using this repo's other background-step
- *      workflow), so a sibling crawler's failure in the same job does NOT affect this
- *      step's own conclusion.
- *   5. If that STEP's conclusion is `success` and the run started after the issue was
+ *      inside it. Its API `conclusion` is NOT the crawler's outcome: the step is
+ *      `continue-on-error: true`, so GitHub reports `success` even when the crawler
+ *      failed (measured 2026-09-27, corpus run 36328240478: 5 failed members, all
+ *      `success`). decideCrawlerMemberConclusion() resolves the real outcome: a green
+ *      group job proves every member succeeded; a red one is read through the
+ *      aggregate's per-member annotations (`<slug>: crawler exited with status N`).
+ *   5. If that member outcome is `success` and the run started after the issue was
  *      opened → close, exactly as the non-crawler path (structural hold included).
- *      Otherwise keep open.
+ *      Otherwise (failed, or not provable) keep open.
  *   If the crawler can't be found in any current group file (renamed/removed), or the
  *   step can't be found in the run's job list (renamed background step id) → keep open
  *   (same conservative bias as the "no completed run" case).
@@ -164,6 +169,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { resolveGithubIssue, commentOnGithubIssue } from '../lib/github-issue-creator.mjs';
+import { isCrawlerGenerationToken } from '../lib/crawler-generation-token.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..', '..');
@@ -622,13 +628,12 @@ export function recurrenceHoldNote({ workflow, runUrl, decision } = {}) {
 //
 // I LABEL. `priority:urgent` perché il costo misurato lo è, e
 // `automation-deferred` perché l'automazione ha già provato e si è fermata da sola:
-// #249 porta `fu-parked`, che il
-// drainer mette dopo MAX_ATTEMPTS. Gli altri `priority:*` vengono tolti, come fa
+// #249 porta `fu-parked`, che il drainer mette dopo MAX_ATTEMPTS. Gli altri `priority:*` vengono tolti, come fa
 // `setIssuePriorityLabel()` nel creator, per non lasciare due priorità in conflitto
 // sulla stessa issue. Best-effort: se un label non esiste nel repo, `gh` fallisce e
 // il gate resta comunque un hold — il label è la visibilità, non la decisione.
 //
-// I LABEL SI TOLGONO. `automation-deferred` è un filtro di ESCLUSIONE tecnico, non un selettore:
+// I LABEL SI TOLGONO. `automation-deferred` è un filtro di ESCLUSIONE, non un selettore:
 // `scripts/ci/followup-drainer.mjs` lo usa per tenere una issue fuori dal pool dei
 // retry parcheggiati (:1091) e fuori dal rescue `agent:fix` dei crawler (:1204).
 // Applicarlo e non toglierlo mai renderebbe l'escalation una porta a senso unico: la
@@ -853,6 +858,61 @@ function fetchIssueComments(issueNumber) {
 // spinge verso la chiusura (il comportamento vecchio), mai verso l'hold.
 const RUN_HISTORY_LIMIT = 100;
 
+const CRAWLER_GENERATION_SHADOW_PREFIX = 'crawler-generation-shadow-';
+
+/** Production crawler runs use the generation token as their branch name. */
+function isCrawlerGenerationShadowBranch(branch) {
+  if (typeof branch !== 'string' || !branch.startsWith(CRAWLER_GENERATION_SHADOW_PREFIX)) return false;
+  return isCrawlerGenerationToken(branch.slice(CRAWLER_GENERATION_SHADOW_PREFIX.length));
+}
+
+/**
+ * Keep the allowlist exact: querying every branch would mix pull requests and
+ * unrelated manual runs into the recovery decision. `main` remains accepted
+ * for legacy/local runs, but is only a compatibility fallback (see the
+ * explicit ordering in `sortCrawlerRecoveryRuns`).
+ */
+export function isCrawlerRecoveryBranch(branch) {
+  if (branch === 'main') return true;
+  return isCrawlerGenerationShadowBranch(branch);
+}
+
+/** Keep only branches that can carry a production crawler-group run. */
+export function filterCrawlerRecoveryRuns(runs) {
+  if (!Array.isArray(runs)) return [];
+  return runs.filter((run) => isCrawlerRecoveryBranch(run?.headBranch));
+}
+
+/**
+ * Put production generation-shadow runs before the legacy `main` fallback.
+ * A newer legacy run must not hide an older shadow run, because the shadow
+ * branch is the authoritative production population after consolidation.
+ */
+export function sortCrawlerRecoveryRuns(runs) {
+  if (!Array.isArray(runs)) return [];
+  return [...runs].sort((a, b) => (
+    Number(isCrawlerGenerationShadowBranch(b?.headBranch))
+      - Number(isCrawlerGenerationShadowBranch(a?.headBranch))
+    || Date.parse(b?.createdAt ?? '') - Date.parse(a?.createdAt ?? '')
+    || Number(b?.databaseId ?? 0) - Number(a?.databaseId ?? 0)
+  ));
+}
+
+/**
+ * Build the `gh run list` arguments for a workflow family. Normal failures
+ * remain main-scoped; crawler recovery must list branches and filter the
+ * returned head branch explicitly because `gh` has no wildcard `--branch`.
+ */
+export function buildRunListArgs(workflowName, { includeCrawlerShadowBranches = false } = {}) {
+  const args = ['run', 'list', '-w', workflowName];
+  if (!includeCrawlerShadowBranches) args.push('-b', 'main');
+  args.push(
+    '-L', String(RUN_HISTORY_LIMIT),
+    '--json', 'databaseId,conclusion,status,createdAt,headBranch',
+  );
+  return args;
+}
+
 /**
  * True quando la run `cancelled` non ha una prova di timeout. Uno scarto in coda non ha
  * job; una cancellazione manuale o una supersessione dopo l'avvio ha job, ma nessuna
@@ -1012,37 +1072,64 @@ export function dropPhantomCancellations(runs, isPhantom) {
   return runs.filter((r) => r?.conclusion !== 'cancelled' || !isPhantom(r?.databaseId));
 }
 
-// Le run COMPLETATE più recenti del workflow su main, dalla più nuova alla più vecchia,
-// o null se il workflow non ha run (rinominato/cancellato) o il listing è fallito — nel
-// qual caso lasciamo conservativamente aperta la issue, come da sempre.
+// Le run COMPLETATE più recenti del workflow sulla popolazione richiesta,
+// dalla più nuova alla più vecchia, o null se il workflow non ha run
+// (rinominato/cancellato) o il listing è fallito — nel qual caso lasciamo
+// conservativamente aperta la issue, come da sempre.
 // Memo per passata del listing+filtro di UN workflow. Lo script è un processo
 // monouso per invocazione del cron, quindi la cache non attraversa mai due passate e non
 // può servire uno storico stantio.
 //
 // Perché serve: N issue aperte sullo stesso workflow moltiplicavano per N un fan-out che
 // per una sola run `cancelled` è già `jobs` + un'`annotations` per job cancellato (vedi
-// il blocco COSTO sopra). La chiave è `repo` + `workflowName` e NON include il token: è
-// derivato dal repo per costruzione (`crawlerRunToken(repo)`), quindi due chiamate con lo
-// stesso repo hanno per forza la stessa identità e quindi la stessa visibilità.
+// il blocco COSTO sopra). La chiave è `repo` + `workflowName` + popolazione e NON include
+// il token: è derivato dal repo per costruzione (`crawlerRunToken(repo)`), quindi due
+// chiamate con lo stesso repo hanno per forza la stessa identità e quindi la stessa
+// visibilità.
+//
+// La POPOLAZIONE (`includeCrawlerShadowBranches`) è nella chiave perché cambia il listing
+// stesso: `-b main` contro tutti i branch filtrati sulle ref `crawler-generation-shadow-*`
+// (vedi `buildRunListArgs`). Senza, la prima chiamata di una passata deciderebbe lo
+// storico anche per l'altra, e un gruppo crawler potrebbe essere giudicato sulle sole run
+// legacy di `main` — il cieco che #8557 ha tolto.
 //
 // `null` è un risultato memoizzabile quanto un array — significa "listing fallito o
 // workflow senza run", cioè "lascia la issue aperta" — quindi la cache si interroga con
 // `has()`, non con un falsy check: `??=` rifarebbe l'intero fan-out a ogni issue proprio
 // nel caso in cui l'API sta già dando problemi.
-const runHistoryMemo = new Map();
+//
+// Il memo è una factory con `compute` iniettabile per la stessa ragione di
+// `dropPhantomCancellations`: la chiave decide quale storico giudica una issue, e va
+// provata con un test, non a occhio.
 
-function recentCompletedRuns(workflowName, repo = REPO, token) {
-  const memoKey = `${repo || ''}\n${workflowName}`;
-  if (runHistoryMemo.has(memoKey)) return runHistoryMemo.get(memoKey);
-  const runs = computeRecentCompletedRuns(workflowName, repo, token);
-  runHistoryMemo.set(memoKey, runs);
-  return runs;
+/** Chiave del memo per passata: repo, workflow e popolazione di branch interrogata. */
+export function runHistoryMemoKey(workflowName, repo = REPO, options = {}) {
+  const population = options?.includeCrawlerShadowBranches === true ? 'shadow' : 'main';
+  return `${repo || ''}\n${workflowName}\n${population}`;
 }
 
-function computeRecentCompletedRuns(workflowName, repo, token) {
+/**
+ * Avvolge `compute(workflowName, repo, token, options)` in un memo per passata.
+ * @param {(workflowName: string, repo: string, token: string | undefined, options: object) => unknown} compute
+ */
+export function createRunHistoryMemo(compute) {
+  const memo = new Map();
+  return function memoizedRunHistory(workflowName, repo = REPO, token, options = {}) {
+    const memoKey = runHistoryMemoKey(workflowName, repo, options);
+    if (memo.has(memoKey)) return memo.get(memoKey);
+    const runs = compute(workflowName, repo, token, options);
+    memo.set(memoKey, runs);
+    return runs;
+  };
+}
+
+const recentCompletedRuns = createRunHistoryMemo(computeRecentCompletedRuns);
+
+function computeRecentCompletedRuns(workflowName, repo, token, options = {}) {
+  const includeCrawlerShadowBranches = options.includeCrawlerShadowBranches === true;
   const out = gh([
-    'run', 'list', '-w', workflowName, '-b', 'main', '-L', String(RUN_HISTORY_LIMIT),
-    '--json', 'databaseId,conclusion,status,createdAt', ...repoFlag(repo),
+    ...buildRunListArgs(workflowName, { includeCrawlerShadowBranches }),
+    ...repoFlag(repo),
   ], { allowFailure: true, token });
   if (out === null) return null;
   let runs;
@@ -1051,22 +1138,25 @@ function computeRecentCompletedRuns(workflowName, repo, token) {
   } catch {
     return null;
   }
-  // L'ordine di `gh run list` è già newest-first, ma la streak verde ne dipende in modo
-  // portante (un ordine invertito la calcolerebbe dal fondo della storia): riordinare
-  // esplicitamente costa nulla e toglie la dipendenza da un contratto non scritto.
+  const orderedRuns = includeCrawlerShadowBranches
+    ? sortCrawlerRecoveryRuns(filterCrawlerRecoveryRuns(runs))
+    : runs.slice()
+        // L'ordine di `gh run list` è già newest-first, ma la streak verde ne dipende in modo
+        // portante (un ordine invertito la calcolerebbe dal fondo della storia): riordinare
+        // esplicitamente costa nulla e toglie la dipendenza da un contratto non scritto.
+        .sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt));
   const completed = dropPhantomCancellations(
-    runs
-      .filter((r) => r.status === 'completed')
-      .sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt)),
+    orderedRuns.filter((r) => r.status === 'completed'),
     (databaseId) => hasNoTimeoutEvidence(databaseId, repo, token),
   );
   return completed.length ? completed : null;
 }
 
-// Most-recent COMPLETED run of the named workflow on main, or null if the workflow has
-// no runs (e.g. renamed/deleted) — in which case we conservatively leave the issue open.
-function latestCompletedRun(workflowName, repo = REPO, token) {
-  const runs = recentCompletedRuns(workflowName, repo, token);
+// Most-recent COMPLETED run of the named workflow on the requested population,
+// or null if the workflow has no runs (e.g. renamed/deleted) — in which case we
+// conservatively leave the issue open.
+function latestCompletedRun(workflowName, repo = REPO, token, options = {}) {
+  const runs = recentCompletedRuns(workflowName, repo, token, options);
   return runs ? runs[0] : null;
 }
 
@@ -1097,6 +1187,9 @@ export function findCrawlerGroupWorkflow(slug, workflowsDir = WORKFLOWS_DIR) {
         return {
           filename: file,
           name: nameMatch[1].trim().replace(/^["']|["']$/g, ''),
+          // Il gruppo di quarantena chiude verde anche con fallimenti noti: il suo
+          // verdetto per membro si legge solo dal notice `outcomes` dell'aggregato.
+          quarantine: content.includes(CRAWLER_QUARANTINE_OUTCOMES_NOTICE_TITLE),
         };
       }
     }
@@ -1116,20 +1209,236 @@ export function crawlerWorkflowReference(group, issueRepo = REPO, runRepo = CRAW
   return runRepo && runRepo !== issueRepo ? group.filename : group.name;
 }
 
-// Most-recent COMPLETED run of the named GROUP workflow, then the conclusion of the
-// SPECIFIC background step named `Run <slug>` inside that run's job (steps carry their
-// own independent conclusion in the Jobs API — a sibling crawler's failure in the same
-// job does not affect this step's own conclusion). Returns
+// Messaggi che lo step `Aggregate crawler outcomes` generato da
+// scripts/generate-crawler-group-workflows.mjs (buildCrawlerAggregateShellBody) emette
+// per ogni membro NON riuscito. Il prefisso `<slug>: ` e' lo stesso slug dello step
+// `Run <slug>`; un test legge il workflow generato e tiene i due lati allineati.
+// `quarantena scaduta il` e' il failure del gruppo di quarantena per un fallimento noto
+// oltre la scadenza: conta nel `failure_count` e consuma lo stesso tetto di 10 errori
+// dello step, quindi deve contare anche qui.
+export const CRAWLER_MEMBER_FAILURE_ANNOTATION_RE =
+  /^[^\s:]+: (?:crawler exited with status|invalid terminal status|quarantena scaduta il )/;
+export const CRAWLER_MEMBER_WARNING_ANNOTATION_RE =
+  /^[^\s:]+: (?:no terminal status was published|runner shutdown recorded as systemic outcome|fallimento noto in quarantena)/;
+// Il gruppo di quarantena (data/crawler-quarantine.json) esclude dal verdetto il
+// fallimento NOTO di un membro fino alla sua scadenza: il job chiude verde con quel
+// crawler rosso, e l'aggregato lo dice con questo warning. Una expiry torna a
+// essere un `::error::<slug>: quarantena scaduta …`, gia' coperto dal livello failure.
+export const CRAWLER_MEMBER_QUARANTINE_ANNOTATION_RE = /^[^\s:]+: fallimento noto in quarantena/;
+// Titolo del notice JSON con cui l'aggregato del gruppo di quarantena dichiara l'esito
+// di OGNI membro (`{"outcomes":{"<slug>":"success"|"failure"|"missing"|"systemic"}}`).
+// Sorgente: QUARANTINE_OUTCOMES_NOTICE_TITLE di scripts/lib/crawler-quarantine.mjs, non
+// importato perche' questo file scende identico nel corpus, che quel modulo non ha: un
+// test tiene allineate le due stringhe.
+export const CRAWLER_QUARANTINE_OUTCOMES_NOTICE_TITLE = 'crawler-quarantine-outcomes';
+
+/**
+ * Esiti per membro dal notice del gruppo di quarantena: l'oggetto `outcomes`, oppure
+ * `null` se il notice manca, e' duplicato o non e' leggibile.
+ */
+export function quarantineNoticeOutcomes(annotations) {
+  const notices = annotations.filter((annotation) => annotation?.title === CRAWLER_QUARANTINE_OUTCOMES_NOTICE_TITLE);
+  if (notices.length !== 1) return null;
+  try {
+    const outcomes = JSON.parse(notices[0].message)?.outcomes;
+    return outcomes && typeof outcomes === 'object' && !Array.isArray(outcomes) ? outcomes : null;
+  } catch {
+    return null;
+  }
+}
+// Limiti documentati di GitHub Actions: oltre, le annotation vengono scartate in
+// silenzio. Raggiunto il tetto, l'assenza di una riga non prova piu' nulla.
+export const GITHUB_ANNOTATIONS_PER_STEP_LIMIT = 10;
+export const GITHUB_ANNOTATIONS_PER_JOB_LIMIT = 50;
+// Le righe con cui il gate finale del gruppo (buildCrawlerAggregateFailureGateShellBody e
+// buildQuarantineFailureGateShellBody di scripts/generate-crawler-group-workflows.mjs)
+// chiude rosso PER I MEMBRI. Dichiarano quanti membri non sono verdi: e' l'unica prova
+// che l'elenco per-membro dell'aggregato e' completo. Un job rosso senza una di queste
+// righe (aggregato non concluso, conteggio invalido, runner senza `timeout`, step di
+// commit rosso) non dice nulla dei singoli membri.
+export const CRAWLER_GROUP_COMPLETED_ANNOTATION_RE =
+  /^crawler group completed with \d+ succeeded, (\d+) failed, (\d+) missing, (\d+) systemic;/;
+export const CRAWLER_GROUP_TOLERATED_COUNT_RE = /\b(\d+) known failures are excluded by the quarantine registry\b/;
+export const CRAWLER_GROUP_INTERRUPTED_ANNOTATION_RE =
+  /^crawler group interrupted: (\d+) member\(s\) stopped by a runner shutdown\b/;
+
+/**
+ * Quanti membri il gate del gruppo dichiara non verdi, da UNA sola riga di esito:
+ * `{ nonGreen, tolerated }` (`tolerated` e' `null` quando la riga non lo dichiara), oppure
+ * `null` se la riga manca o ce n'e' piu' d'una.
+ */
+export function declaredNonGreenCrawlerMembers(annotations) {
+  const declarations = [];
+  for (const annotation of annotations) {
+    if (annotation?.annotation_level !== 'failure' || typeof annotation.message !== 'string') continue;
+    const completed = CRAWLER_GROUP_COMPLETED_ANNOTATION_RE.exec(annotation.message);
+    if (completed) {
+      const tolerated = CRAWLER_GROUP_TOLERATED_COUNT_RE.exec(annotation.message);
+      declarations.push({
+        nonGreen: Number(completed[1]) + Number(completed[2]) + Number(completed[3]),
+        tolerated: tolerated ? Number(tolerated[1]) : null,
+      });
+      continue;
+    }
+    const interrupted = CRAWLER_GROUP_INTERRUPTED_ANNOTATION_RE.exec(annotation.message);
+    if (interrupted) declarations.push({ nonGreen: Number(interrupted[1]), tolerated: null });
+  }
+  return declarations.length === 1 ? declarations[0] : null;
+}
+
+/**
+ * Esito REALE di un membro crawler dentro la run di gruppo.
+ *
+ * Lo step `Run <slug>` e' generato con `continue-on-error: true` (serve a lasciare
+ * `job.status == 'success'` al commit dei fratelli sani), quindi nella Jobs API la sua
+ * `conclusion` e' SEMPRE `success`, anche quando il crawler e' fallito: GitHub espone
+ * `outcome` solo nel contesto `steps.*`, non nell'API. Misurato il 2026-09-27 sulla run
+ * corpus 36328240478 (gruppo 24): confederazione, knowledge-lab, lwphr, protectas e convit
+ * falliti, tutti `conclusion: success` nella Jobs API. Leggere quella conclusion chiudeva
+ * la issue `Crawler Failure: Run <slug>` sulla stessa run rossa che l'aveva riaperta
+ * (#9586, 15:14 → 15:50): 9 auto-resolve su 15 dal 2026-09-08 citavano come «verde» una
+ * run in cui quel crawler era fallito, e il fixer non vedeva mai i crashatori cronici.
+ *
+ * Fonte usata qui, in ordine:
+ *   1. step non concluso o conclusion diversa da `success` → quella conclusion;
+ *   2. gruppo di quarantena (`quarantineGroup`), job `success` o `failure` → l'esito del
+ *      membro nel notice `crawler-quarantine-outcomes` dell'aggregato; notice assente,
+ *      duplicato o illeggibile → `null`. Il gruppo chiude verde con i fallimenti NOTI
+ *      entro la scadenza, e il loro warning puo' essere scartato dai tetti di GitHub;
+ *   2b. job `success` → verde: lo step finale del gruppo esce 1 con qualunque failure,
+ *      missing o systemic, quindi un job verde prova che ogni membro e' riuscito (per
+ *      un gruppo di quarantena non riconosciuto, un warning `<slug>: fallimento noto in
+ *      quarantena` resta il fallback che lo rende non verde);
+ *   3. job non `failure` (cancelled, timed_out, …) → non verde;
+ *   4. job `failure` → le annotation del job: una riga `<slug>: …` di livello failure, o
+ *      un warning dell'aggregato (missing, exit 143) per quello slug, prova che il membro
+ *      non e' verde; nessuna riga prova che il rosso era di un fratello SOLO se l'elenco
+ *      e' completo: annotation leggibili, sotto i tetti di GitHub, e tanti membri non
+ *      verdi quanti ne dichiara la riga di esito del gate (`crawler group completed
+ *      with …` / `crawler group interrupted: …`).
+ * Ritorna `null` quando la prova manca (annotation illeggibili, vuote o troncate, job
+ * rosso per un errore di gruppo senza riga di esito, conteggio che non torna): il
+ * chiamante tiene aperta la issue, come ogni altro fallback di questo file.
+ *
+ * @param {{ slug: string, stepStatus?: string, stepConclusion?: string,
+ *           jobConclusion?: string, annotationPages?: unknown,
+ *           quarantineGroup?: boolean }} input
+ * @returns {string|null} `success`, un'altra conclusion non verde, oppure `null`
+ */
+export function decideCrawlerMemberConclusion({
+  slug,
+  stepStatus,
+  stepConclusion,
+  jobConclusion,
+  annotationPages,
+  quarantineGroup = false,
+} = {}) {
+  if (!slug) return null;
+  if (stepStatus !== 'completed') return null;
+  if (stepConclusion !== 'success') return stepConclusion || null;
+  if (quarantineGroup && (jobConclusion === 'success' || jobConclusion === 'failure')) {
+    // Il gruppo di quarantena chiude verde con i fallimenti noti, e il loro warning e'
+    // l'unica traccia per annotation: se GitHub lo scarta (tetto dei warning per step)
+    // o la lettura torna vuota, il membro sembrerebbe verde. Il notice `outcomes`
+    // dell'aggregato dice invece l'esito di ciascun membro: senza, la prova manca.
+    if (!Array.isArray(annotationPages) || !annotationPages.every(Array.isArray)) return null;
+    const outcome = quarantineNoticeOutcomes(annotationPages.flat())?.[slug];
+    if (typeof outcome !== 'string') return null;
+    return outcome === 'success' ? 'success' : 'failure';
+  }
+  if (jobConclusion === 'success') {
+    // Un job verde prova ogni membro verde, tranne i fallimenti noti che il gruppo
+    // di quarantena esclude dal verdetto: il loro warning e' l'unica traccia.
+    // Senza annotation passate (chiamanti che non le leggono) resta la regola storica;
+    // annotation illeggibili = prova mancante.
+    if (annotationPages === undefined) return 'success';
+    if (!Array.isArray(annotationPages) || !annotationPages.every(Array.isArray)) return null;
+    const prefix = `${slug}: `;
+    const tolerated = annotationPages.flat().some((annotation) => (
+      typeof annotation?.message === 'string'
+      && annotation.message.startsWith(prefix)
+      && CRAWLER_MEMBER_QUARANTINE_ANNOTATION_RE.test(annotation.message)
+    ));
+    return tolerated ? 'failure' : 'success';
+  }
+  if (jobConclusion !== 'failure') return jobConclusion || null;
+  if (!hasReadableAnnotations(annotationPages)) return null;
+
+  const annotations = annotationPages.flat();
+  const prefix = `${slug}: `;
+  let aggregateFailures = 0;
+  let aggregateWarnings = 0;
+  const nonGreenMembers = new Set();
+  const toleratedMembers = new Set();
+  for (const annotation of annotations) {
+    const level = annotation?.annotation_level;
+    const message = annotation.message;
+    const isAggregateWarning = level === 'warning' && CRAWLER_MEMBER_WARNING_ANNOTATION_RE.test(message);
+    const isAggregateFailure = level === 'failure' && CRAWLER_MEMBER_FAILURE_ANNOTATION_RE.test(message);
+    // Un `::error::<slug>: …` (aggregato, exit 43 dello step, …) o un warning
+    // dell'aggregato (missing, exit 143) sono entrambi «non verde». Un warning libero
+    // dello stesso crawler no: non deve tenere aperta per sempre una issue guarita.
+    if (message.startsWith(prefix) && (level === 'failure' || isAggregateWarning)) return 'failure';
+    if (isAggregateFailure) aggregateFailures += 1;
+    if (isAggregateWarning) aggregateWarnings += 1;
+    if (isAggregateFailure || isAggregateWarning) {
+      const member = message.slice(0, message.indexOf(': '));
+      (CRAWLER_MEMBER_QUARANTINE_ANNOTATION_RE.test(message) ? toleratedMembers : nonGreenMembers).add(member);
+    }
+  }
+  if (
+    annotations.length >= GITHUB_ANNOTATIONS_PER_JOB_LIMIT
+    || aggregateFailures >= GITHUB_ANNOTATIONS_PER_STEP_LIMIT
+    || aggregateWarnings >= GITHUB_ANNOTATIONS_PER_STEP_LIMIT
+  ) {
+    return null;
+  }
+  // L'assenza di una riga per questo slug prova il verde solo se l'elenco e' COMPLETO:
+  // il gate dichiara quanti membri non sono verdi, e l'aggregato ne ha elencati
+  // esattamente tanti. Senza la dichiarazione (errore di gruppo, aggregato non concluso)
+  // o con un conteggio che non torna (annotation scartate da GitHub), la prova manca.
+  const declared = declaredNonGreenCrawlerMembers(annotations);
+  if (!declared || nonGreenMembers.size !== declared.nonGreen) return null;
+  if (declared.tolerated !== null && toleratedMembers.size !== declared.tolerated) return null;
+  return 'success';
+}
+
+/** `https://api.github.com/repos/o/r/check-runs/1` → `repos/o/r/check-runs/1`. */
+export function checkRunApiPath(checkRunUrl) {
+  const match = /^(?:https:\/\/api\.github\.com\/)?(repos\/[^/]+\/[^/]+\/check-runs\/\d+)$/.exec(String(checkRunUrl ?? ''));
+  return match ? match[1] : null;
+}
+
+function readCheckRunAnnotations(checkRunUrl, token) {
+  const apiPath = checkRunApiPath(checkRunUrl);
+  if (!apiPath) return null;
+  const out = gh(['api', `${apiPath}/annotations`, '--paginate', '--slurp'], { allowFailure: true, token });
+  if (out === null) return null;
+  try {
+    return JSON.parse(out);
+  } catch {
+    return null;
+  }
+}
+
+// Most-recent COMPLETED run of the named GROUP workflow, then the outcome of the
+// SPECIFIC crawler member `Run <slug>` inside that run's job. The step's own Jobs API
+// conclusion is not that outcome (continue-on-error, see
+// decideCrawlerMemberConclusion), so a failed group job is resolved through the
+// aggregate's per-member annotations. Returns
 // { conclusion, status: 'completed', createdAt, databaseId } shaped like a run object
 // (so the caller's existing green/afterFailure logic works unchanged), or null if the
-// run, job, or step can't be resolved.
+// run, job, or step can't be resolved. `conclusion: 'unknown'` means the member outcome
+// could not be proved, and keeps the issue open.
 function latestCompletedCrawlerStepRun(slug) {
   const group = findCrawlerGroupWorkflow(slug);
   const workflowRef = crawlerWorkflowReference(group);
   if (!workflowRef) return null;
 
   const runToken = crawlerRunToken(CRAWLER_RUN_REPO);
-  const run = latestCompletedRun(workflowRef, CRAWLER_RUN_REPO, runToken);
+  const run = latestCompletedRun(workflowRef, CRAWLER_RUN_REPO, runToken, {
+    includeCrawlerShadowBranches: true,
+  });
   if (!run) return null;
 
   const jobsOut = gh(
@@ -1147,10 +1456,23 @@ function latestCompletedCrawlerStepRun(slug) {
   for (const job of jobsData.jobs || []) {
     const step = (job.steps || []).find((s) => s.name === stepName);
     if (step) {
+      // Anche un job verde: il gruppo di quarantena chiude verde con i fallimenti
+      // noti, e solo le annotation dicono quale membro lo era.
+      const needsAnnotations = step.status === 'completed'
+        && step.conclusion === 'success'
+        && (job.conclusion === 'failure' || job.conclusion === 'success');
+      const conclusion = decideCrawlerMemberConclusion({
+        slug,
+        stepStatus: step.status,
+        stepConclusion: step.conclusion,
+        jobConclusion: job.conclusion,
+        annotationPages: needsAnnotations ? readCheckRunAnnotations(job.check_run_url, runToken) : undefined,
+        quarantineGroup: group.quarantine === true,
+      });
       return {
         databaseId: run.databaseId,
         status: step.status,
-        conclusion: step.conclusion,
+        conclusion: conclusion ?? 'unknown',
         createdAt: run.createdAt,
         repository: CRAWLER_RUN_REPO,
       };
@@ -1165,6 +1487,9 @@ function latestCompletedCrawlerStepRun(slug) {
  * valida — il label è la visibilità, non il gate.
  */
 function applyChronicLabels(issueNumber) {
+  // Le label è introdotto dal nuovo percorso di defer e può non esistere nei
+  // repository già esistenti. Crearlo qui mantiene l'escalation osservabile
+  // senza trasformarla in un `needs-human` implicito.
   gh([
     'label', 'create', 'automation-deferred',
     '--color', 'FBCA04',

@@ -7007,6 +7007,15 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.svizzera-robotica-crescita-aziende.title': 'Svizzera: 217 aziende di robotica e 7 mila posti di lavoro',
     'blog.article.svizzera-robotica-crescita-aziende.excerpt': 'Analisi Raiffeisen: 50 nuove imprese dal 2020. Zurigo e Vaud poli chiave, forte legame con la ricerca accademica e spin-off.',
     'blog.article.svizzera-robotica-crescita-aziende.imageAlt': 'Tecnologia robotica in un centro di ricerca svizzero',
+    'blog.article.finma-conclude-julius-baer.title': 'Caso Signa, la FINMA conclude il procedimento su Julius Bär',
+    'blog.article.finma-conclude-julius-baer.excerpt': 'L\'autorità di vigilanza chiude il caso legato al gruppo immobiliare Signa. Richiesti 250 milioni di franchi di capitale aggiuntivo e nuove relazioni sui rischi.',
+    'blog.article.finma-conclude-julius-baer.imageAlt': 'Sede di un istituto bancario nel centro finanziario di Zurigo',
+    'blog.article.stadler-nomina-nuovo-ceo.title': 'Stadler Rail: Philipp Brunner sarà il nuovo CEO dal 2027',
+    'blog.article.stadler-nomina-nuovo-ceo.excerpt': 'Cambio al vertice per il gruppo ferroviario svizzero: Philipp Brunner succede a Markus Bernsteiner dal 1° gennaio 2027. Fatturato semestrale a 2 miliardi.',
+    'blog.article.stadler-nomina-nuovo-ceo.imageAlt': 'Treno moderno Stadler in un paesaggio svizzero',
+    'blog.article.zugo-cybersecurity-de-escalation.title': 'Zugo punta sulla cybersecurity: de-escalation e resilienza',
+    'blog.article.zugo-cybersecurity-de-escalation.excerpt': 'Il Canton Zugo lancia un\'iniziativa per la sicurezza informatica, puntando su diplomazia preventiva, mediazione e collaborazione tra Stato e settore privato.',
+    'blog.article.zugo-cybersecurity-de-escalation.imageAlt': 'Centro di competenza per la cybersecurity a Zugo',
 };
 
 export default blogMetaChIt;

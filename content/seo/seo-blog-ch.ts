@@ -90851,6 +90851,123 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-finma-conclude-julius-baer': {
+    title: 'Caso Signa, la FINMA conclude il procedimento su Julius Bär',
+    description: 'La FINMA chiude il caso Julius Bär legato a Signa: 250 milioni di capitale aggiuntivo e obblighi di reportistica sulla cultura del rischio fino al 2032.',
+    keywords: 'frontalieri, ticino, svizzera, italia, caso, signa, finma, conclude',
+    ogTitle: 'Caso Signa, la FINMA conclude il procedimento su Julius Bär',
+    ogDescription: 'L\'autorità di vigilanza ha concluso l\'enforcement su Julius Bär. Tra le misure: 250 milioni di capitale aggiuntivo, stop al private debt e report sui rischi fino al 2032.',
+    canonicalPath: '/articoli-svizzera/finma-conclude-julius-baer/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Caso Signa, la FINMA conclude il procedimento su Julius Bär",
+      "description": "La FINMA chiude il caso Julius Bär legato a Signa: 250 milioni di capitale aggiuntivo e obblighi di reportistica sulla cultura del rischio fino al 2032.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/finma-conclude-julius-baer.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sede di un istituto bancario nel centro finanziario di Zurigo"
+      },
+      "datePublished": "2026-09-29T06:44:48+00:00",
+      "dateModified": "2026-09-29T06:44:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/finma-conclude-julius-baer/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-stadler-nomina-nuovo-ceo': {
+    title: 'Stadler Rail: Philipp Brunner sarà il nuovo CEO dal 2027',
+    description: 'Cambio al vertice per il costruttore ferroviario Stadler: Philipp Brunner nominato nuovo CEO a partire dal 1° gennaio 2027. Dati economici e prospettive.',
+    keywords: 'frontalieri, ticino, svizzera, italia, stadler, rail, philipp, brunner',
+    ogTitle: 'Stadler Rail: Philipp Brunner nuovo CEO dal 2027',
+    ogDescription: 'Il gruppo ferroviario svizzero Stadler annuncia la successione al vertice: Philipp Brunner prenderà il posto di Markus Bernsteiner dal 2027. Analisi dei risultati finanziari 2026.',
+    canonicalPath: '/articoli-svizzera/stadler-nomina-nuovo-ceo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Stadler Rail: Philipp Brunner sarà il nuovo CEO dal 2027",
+      "description": "Cambio al vertice per il costruttore ferroviario Stadler: Philipp Brunner nominato nuovo CEO a partire dal 1° gennaio 2027. Dati economici e prospettive.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/stadler-nomina-nuovo-ceo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Treno moderno Stadler in un paesaggio svizzero"
+      },
+      "datePublished": "2026-09-29T07:01:35+00:00",
+      "dateModified": "2026-09-29T07:01:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/stadler-nomina-nuovo-ceo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-zugo-cybersecurity-de-escalation': {
+    title: 'Zugo punta sulla cybersecurity: de-escalation e resilienza',
+    description: 'Zugo lancia un\'iniziativa strategica per la cybersecurity: focus su diplomazia preventiva, protezione delle PMI e collaborazione tra Stato e settore privato.',
+    keywords: 'frontalieri, ticino, svizzera, italia, zugo, punta, sulla, cybersecurity',
+    ogTitle: 'Zugo punta sulla cybersecurity: de-escalation e resilienza',
+    ogDescription: 'Il Canton Zugo promuove la sicurezza digitale attraverso la collaborazione pubblico-privata e strumenti di mediazione diplomatica per prevenire le crisi informatiche.',
+    canonicalPath: '/articoli-svizzera/zugo-cybersecurity-de-escalation/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Zugo punta sulla cybersecurity: de-escalation e resilienza",
+      "description": "Zugo lancia un'iniziativa strategica per la cybersecurity: focus su diplomazia preventiva, protezione delle PMI e collaborazione tra Stato e settore privato.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/zugo-cybersecurity-de-escalation.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Centro di competenza per la cybersecurity a Zugo"
+      },
+      "datePublished": "2026-09-29T07:30:16+00:00",
+      "dateModified": "2026-09-29T07:30:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/zugo-cybersecurity-de-escalation/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

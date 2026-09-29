@@ -2358,6 +2358,9 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'avvio-impresa-soletta-adempimenti': { it: 'avvio-impresa-soletta-adempimenti', en: 'starting-business-solothurn-requirements', de: 'unternehmen-solothurn-handelsregister', fr: 'creer-entreprise-soleure-registre' },
  'licenza-estera-soletta-prove': { it: 'licenza-estera-soletta-prove', en: 'foreign-licence-solothurn-tests', de: 'auslaendischer-fuehrerausweis-solothurn-pruefungen', fr: 'permis-etranger-soleure-examens' },
  'svizzera-robotica-crescita-aziende': { it: 'svizzera-robotica-crescita-aziende', en: 'switzerland-robotics-growth-companies', de: 'schweiz-robotik-wachstum-unternehmen', fr: 'suisse-robotique-croissance-entreprises' },
+ 'finma-conclude-julius-baer': { it: 'finma-conclude-julius-baer', en: 'finma-concludes-julius-baer-case', de: 'finma-schliesst-julius-baer-verfahren', fr: 'la-finma-clot-le-dossier-julius-baer' },
+ 'stadler-nomina-nuovo-ceo': { it: 'stadler-nomina-nuovo-ceo', en: 'stadler-appoints-new-ceo', de: 'stadler-ernennt-neuen-ceo', fr: 'stadler-nomme-nouveau-ceo' },
+ 'zugo-cybersecurity-de-escalation': { it: 'zugo-cybersecurity-de-escalation', en: 'zug-cybersecurity-de-escalation', de: 'zug-cybersicherheit-deeskalation', fr: 'zoug-cybersecurite-de-escalade' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
