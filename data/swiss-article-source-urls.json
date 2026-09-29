@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1946097/donne-delle-pulizie-il-lavoro-nero-e-una-voragine-apparentemente-incolmabile": {
-    "articleId": "pulizie-lavoro-nero-2026",
-    "ts": "2026-08-26T22:28:09.483Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/slkg5z6nqrvwdi3l1gh9v": {
     "articleId": "credito-federale-ambiente-2027-2030",
     "ts": "2026-08-26T23:15:31.050Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1953360/stadler-gruppo-ceo-bernsteiner-brunner-nuovo-philipp-nomina": {
     "articleId": "stadler-nomina-nuovo-ceo",
     "ts": "2026-09-29T07:01:36.209Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/udgmflnmh3zp": {
+    "articleId": "zugo-cybersecurity-de-escalation",
+    "ts": "2026-09-29T07:30:17.140Z",
     "keyForm": 2
   }
 }
