@@ -8,7 +8,7 @@
  *                             keys exhausted or not configured — and the Codex
  *                             broker lane is present; bounded per process, see
  *                             `translateWithCodex`)
- *   4. Google Cloud Translation (OAuth, hard-capped at 16K chars/day)
+ *   4. Google Cloud Translation (service-account ADC/OAuth fallback, hard-capped at 16K chars/day)
  *   5. Local Opus-MT, self-hosted LibreTranslate (EN/DE/FR targets)
  *   6. MyMemory API
  *   7. Local Opus-MT, self-hosted LibreTranslate (IT target)
@@ -30,12 +30,13 @@
  * without depending on the full shared-jobs-crawler.mjs infrastructure.
  */
 
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { translateWithMyMemory } from './mymemory-translate.mjs';
 import { finalizeTranslatedText, maskProtectedTokens, normalizeGermanGenderForms, normalizeProtectedTokenSentinels } from './translation-glossary.mjs';
 import { translateWithLocalOpusMt, localOpusMtEnabled } from './local-opus-mt.mjs';
 import {
   extractOAuthErrorReason,
+  getServiceAccountAccessToken,
   isRetryableTokenExchangeStatus,
   TOKEN_EXCHANGE_ATTEMPTS,
   TOKEN_EXCHANGE_TIMEOUT_MS,
@@ -67,8 +68,25 @@ let _azureExhaustedKeys = new Set();
 
 // Google Cloud Translation (official API, free tier: 500K chars/month)
 // Hard-capped at 16K chars/day in code to match GCP quota setting and avoid billing.
-// Authenticates via OAuth2 using the same GSC credentials (no API key needed).
+// Authenticates with the workflow's service-account ADC using the scoped Cloud
+// Translation permission, then falls back to the legacy GSC OAuth refresh token
+// when ADC is unavailable. No API key is needed.
 const GCP_PROJECT_ID = (process.env.VITE_FIREBASE_PROJECT_ID || process.env.GCP_PROJECT_ID || 'frontaliere-ticino').trim();
+const GOOGLE_CLOUD_SCOPE = 'https://www.googleapis.com/auth/cloud-translation';
+const _gcServiceAccount = (() => {
+  const path = (process.env.GOOGLE_APPLICATION_CREDENTIALS || '').trim();
+  if (!path || !existsSync(path)) return null;
+  try {
+    const credentials = JSON.parse(readFileSync(path, 'utf8'));
+    return credentials?.client_email && credentials?.private_key && credentials?.project_id
+      ? credentials
+      : null;
+  } catch {
+    return null;
+  }
+})();
+const _gcServiceAccountAvailable = !!_gcServiceAccount;
+const _gcServiceAccountToken = { accessToken: '', expiresAt: 0 };
 const _gcOAuth = {
   clientId: (process.env.GSC_CLIENT_ID || '').trim(),
   clientSecret: (process.env.GSC_CLIENT_SECRET || '').trim(),
@@ -175,13 +193,16 @@ const DEEPL_LANG_MAP = { it: 'IT', en: 'EN', de: 'DE', fr: 'FR' };
  */
 export async function getTranslationCascadeConfigurationKey() {
   return JSON.stringify({
-    // version 3 (2026-09-25): `codex` ora vale false anche con lane fermata,
+    // version 4 (2026-09-29): Google Cloud can use the scoped service-account
+    // token from GOOGLE_APPLICATION_CREDENTIALS; memo keys from before that
+    // capability must not hide a retry when ADC becomes available. `codex` ora
+    // vale false anche con lane fermata,
     // budget esaurito o modello non disponibile. I memo scritti con la v2, che
     // a lane ferma diceva ancora disponibile, non devono combaciare.
-    version: 3,
+    version: 4,
     deepl: DEEPL_API_KEYS.length > 0,
     azure: AZURE_TRANSLATOR_KEYS.length > 0,
-    googleCloud: _gcOAuthAvailable,
+    googleCloud: _gcOAuthAvailable || _gcServiceAccountAvailable,
     localOpusMt: localOpusMtEnabled(),
     libreTranslateSelfHosted: Boolean(LIBRETRANSLATE_SELF_HOSTED),
     huggingFace: Boolean(HF_TOKEN),
@@ -380,7 +401,10 @@ export function logCascadeSummary() {
     const maxCalls = _codexBudget('FREE_TRANSLATE_CODEX_MAX_CALLS', CODEX_TRANSLATE_MAX_CALLS_DEFAULT);
     console.log(`   🤖 Codex Luna Max: ${_codexCalls}/${maxCalls} calls (${_codexTexts} texts), ${Math.round(_codexSpentNow() / 1000)}s${_codexStopReason ? ` (stopped: ${_codexStopReason})` : ''}`);
   }
-  const gcAuth = _gcOAuthAvailable ? 'OAuth2' : 'none';
+  const gcAuth = [
+    _gcServiceAccountAvailable ? 'service-account' : '',
+    _gcOAuthAvailable ? 'OAuth2' : '',
+  ].filter(Boolean).join('+') || 'none';
   const gcFailures = _googleCloudFailures
     ? `, ${_googleCloudFailures} call(s) refused (last: ${_googleCloudLastFailure})`
     : '';
@@ -1621,6 +1645,26 @@ export function setCodexTranslateCallForTests(fn) {
  * way, and this is one tier among ten, not the sole credential path.
  */
 async function _getGoogleCloudAccessToken() {
+  if (_gcServiceAccountAvailable) {
+    if (_gcServiceAccountToken.accessToken && Date.now() < _gcServiceAccountToken.expiresAt - 60_000) {
+      return _gcServiceAccountToken.accessToken;
+    }
+    try {
+      const token = await getServiceAccountAccessToken(_gcServiceAccount, GOOGLE_CLOUD_SCOPE);
+      if (token) {
+        _gcServiceAccountToken.accessToken = token;
+        // The shared helper intentionally returns only the token. Keep a
+        // conservative one-hour cache, matching Google's service-account JWT
+        // lifetime, so the cascade does not sign a JWT for every field.
+        _gcServiceAccountToken.expiresAt = Date.now() + 3_600_000;
+        return token;
+      }
+    } catch {
+      // Fall through to the legacy user OAuth path when ADC is unavailable or
+      // rejected. The failure remains visible in the Google tier summary.
+      _noteGoogleCloudFailure('service-account-token-unavailable');
+    }
+  }
   if (_gcOAuth.accessToken && Date.now() < _gcOAuth.expiresAt - 60_000) {
     return _gcOAuth.accessToken;
   }
@@ -1659,7 +1703,7 @@ async function _getGoogleCloudAccessToken() {
 }
 
 async function translateWithGoogleCloud(text, sourceLang, targetLang, outcome = null) {
-  if (!_gcOAuthAvailable) return '';
+  if (!_gcOAuthAvailable && !_gcServiceAccountAvailable) return '';
   const clean = normalizeBlock(text);
   if (!clean || sourceLang === targetLang) return '';
   if (_googleCloudDailyChars + clean.length > GOOGLE_CLOUD_DAILY_LIMIT) {

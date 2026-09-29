@@ -47,6 +47,7 @@ function runSummary({ tokenResponse, translateResponse }) {
       GSC_CLIENT_ID: 'test-client',
       GSC_CLIENT_SECRET: 'test-secret',
       GSC_REFRESH_TOKEN: 'test-refresh',
+      GOOGLE_APPLICATION_CREDENTIALS: '',
       HF_TOKEN: '',
       HUGGINGFACE_API_KEY: '',
       LIBRETRANSLATE_SELF_HOSTED_URL: '',
@@ -83,4 +84,74 @@ test('un tier che traduce non riporta rifiuti', () => {
   });
   assert.match(line, /auth=OAuth2, \d+\/16000 daily chars used$/);
   assert.doesNotMatch(line, /refused/);
+});
+
+test('preferisce il service account ADC con scope Cloud Translation al refresh token utente', () => {
+  const childScript = `
+    import { generateKeyPairSync } from 'node:crypto';
+    import { unlinkSync, writeFileSync } from 'node:fs';
+    import { tmpdir } from 'node:os';
+    import { join } from 'node:path';
+
+    const { privateKey } = generateKeyPairSync('rsa', { modulusLength: 2048 });
+    const credentialsPath = join(tmpdir(), 'frontaliere-google-translation-test.json');
+    writeFileSync(credentialsPath, JSON.stringify({
+      type: 'service_account',
+      project_id: 'frontaliere-ticino',
+      client_email: 'translation-test@frontaliere-ticino.iam.gserviceaccount.com',
+      private_key: privateKey.export({ type: 'pkcs8', format: 'pem' }),
+    }));
+    process.env.GOOGLE_APPLICATION_CREDENTIALS = credentialsPath;
+
+    let tokenCalls = 0;
+    let translationCalls = 0;
+    globalThis.fetch = async (url, options = {}) => {
+      const value = String(url);
+      if (value === 'https://oauth2.googleapis.com/token') {
+        tokenCalls += 1;
+        if (!String(options.body || '').includes('grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer')) {
+          throw new Error('the ADC path must use a signed service-account assertion');
+        }
+        return { ok: true, status: 200, json: async () => ({ access_token: 'service-account-token', expires_in: 3600 }) };
+      }
+      if (value === 'https://translation.googleapis.com/language/translate/v2') {
+        translationCalls += 1;
+        if (!String(options.headers?.Authorization || '').includes('service-account-token')) throw new Error('ADC token missing');
+        return { ok: true, status: 200, json: async () => ({ data: { translations: [{ translatedText: 'Hello from ADC' }] } }) };
+      }
+      throw new Error('endpoint inatteso nel test: ' + value);
+    };
+
+    const { freeTranslateWithRetryDetailed, logCascadeSummary } = await import(${JSON.stringify(MODULE_URL)});
+    const translated = await freeTranslateWithRetryDetailed({
+      text: 'Ciao', sourceLang: 'it', targetLang: 'en', fieldType: 'description', maxRetries: 0,
+    });
+    console.log('SERVICE_ACCOUNT_RESULT=' + translated.text);
+    console.log('SERVICE_ACCOUNT_CALLS=' + tokenCalls + '/' + translationCalls);
+    logCascadeSummary();
+    unlinkSync(credentialsPath);
+  `;
+  const child = spawnSync(process.execPath, ['--input-type=module', '--eval', childScript], {
+    encoding: 'utf8',
+    env: {
+      ...process.env,
+      DEEPL_API_KEY: '',
+      DEEPL_API_KEY_2: '',
+      AZURE_TRANSLATOR_KEY: '',
+      AZURE_TRANSLATOR_KEY_2: '',
+      GSC_CLIENT_ID: '',
+      GSC_CLIENT_SECRET: '',
+      GSC_REFRESH_TOKEN: '',
+      GOOGLE_APPLICATION_CREDENTIALS: '',
+      HF_TOKEN: '',
+      HUGGINGFACE_API_KEY: '',
+      LIBRETRANSLATE_SELF_HOSTED_URL: '',
+      MT_LOCAL_OPUSMT: '',
+      VITEST: '1',
+    },
+  });
+  assert.equal(child.status, 0, child.stderr || child.stdout);
+  assert.match(child.stdout, /SERVICE_ACCOUNT_RESULT=Hello from ADC/);
+  assert.match(child.stdout, /SERVICE_ACCOUNT_CALLS=1\/1/);
+  assert.match(child.stdout, /Google Cloud Translation: auth=service-account, \d+\/16000 daily chars used/);
 });
