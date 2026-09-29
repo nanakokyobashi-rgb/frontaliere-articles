@@ -1,9 +1,4 @@
 {
-  "https://www.cdt.ch/news/le-aziende-svizzere-non-chiedono-il-rimborso-dei-dazi-statunitensi-437427": {
-    "articleId": "rimborso-dazi-paura-amministrativa",
-    "ts": "2026-08-27T10:24:34.931Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/fd9vyvjqwc8ib0nfjol8f": {
     "articleId": "bilancio-eccedenza-debito-2025",
     "ts": "2026-08-27T10:50:38.737Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1953411/lindt-prezzi-prezzo-cacao-cioccolato-riduzioni-caldo": {
     "articleId": "lindt-prezzi-cacao-2026",
     "ts": "2026-09-29T12:03:01.575Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1953472/svizzera-innovazione-classificano-svezia-stati": {
+    "articleId": "classifica-ompi-alta-tecnologia",
+    "ts": "2026-09-29T12:39:48.456Z",
     "keyForm": 2
   }
 }
