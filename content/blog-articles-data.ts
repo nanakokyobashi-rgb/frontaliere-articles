@@ -36826,6 +36826,15 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'corpo-lago-como-288-metri',
+ category: 'novita',
+ date: '2026-09-29T11:08:28.214Z',
+ image: '/images/blog/corpo-lago-como-288-metri.webp',
+ hasCalculator: false,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

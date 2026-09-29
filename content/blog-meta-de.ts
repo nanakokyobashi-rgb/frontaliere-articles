@@ -12269,6 +12269,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.fials-vigilanza-ospedale-varese.title': 'FIALS: Mehr Nachtwache in Varese',
     'blog.article.fials-vigilanza-ospedale-varese.excerpt': 'Die Gewerkschaft fordert die asst Sette Laghi auf, die Zugänge und Schichten zu überprüfen: Eine einzige Wache in der Notaufnahme reicht nicht aus.',
     'blog.article.fials-vigilanza-ospedale-varese.imageAlt': 'Krankenhaustor, bewacht von einem Nachtwächter',
+    'blog.article.corpo-lago-como-288-metri.title': 'Comer See, Leiche 288 Meter entfernt gefunden',
+    'blog.article.corpo-lago-como-288-metri.excerpt': 'In San Siro fanden die Taucher der Feuerwehr in etwa 288 Metern Höhe die Leiche des 38-Jährigen, der im See von Como vermisst wurde.',
+    'blog.article.corpo-lago-como-288-metri.imageAlt': 'Comer See bei San Siro: Leichnam in etwa 288 Metern Tiefe gefunden (Como)',
 };
 
 export default blogMetaDe;

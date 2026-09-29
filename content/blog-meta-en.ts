@@ -12270,6 +12270,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.fials-vigilanza-ospedale-varese.title': 'FIALS: more nighttime security in Varese',
     'blog.article.fials-vigilanza-ospedale-varese.excerpt': 'The union asks ASST Sette Laghi to review access points and shifts: a single guard in the Emergency Department is not enough.',
     'blog.article.fials-vigilanza-ospedale-varese.imageAlt': 'Hospital entrance guarded by a security guard at night',
+    'blog.article.corpo-lago-como-288-metri.title': 'Lake Como, body found at 288 meters',
+    'blog.article.corpo-lago-como-288-metri.excerpt': 'At San Siro, Fire Brigade divers found the body of the 38-year-old who went missing in Lake Como at approximately 288 meters.',
+    'blog.article.corpo-lago-como-288-metri.imageAlt': 'Lake Como near San Siro, where the body was found at about 288 metres',
 };
 
 export default blogMetaEn;

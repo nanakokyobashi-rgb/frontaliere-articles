@@ -96988,6 +96988,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-corpo-lago-como-288-metri': {
+    title: 'Lago di Como, corpo trovato a 288 metri | Frontaliere Ticino',
+    description: 'A San Siro i sommozzatori dei Vigili del Fuoco hanno trovato a circa 288 metri il corpo del 38enne disperso nel Lago di Como. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, lago, como, corpo, trovato',
+    ogTitle: 'Lago di Como: corpo trovato a 288 metri',
+    ogDescription: 'Si sono concluse a San Siro le ricerche del 38enne disperso nel Lago di Como: il ROV dei Vigili del Fuoco ha individuato il corpo a circa 288 metri. Dopo il recupero, la salma è stata trasferita a Dongo e messa a disposizione dell\'Autorità',
+    canonicalPath: '/articoli-frontaliere/corpo-lago-como-288-metri',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lago di Como, corpo trovato a 288 metri",
+      "description": "A San Siro i sommozzatori dei Vigili del Fuoco hanno trovato a circa 288 metri il corpo del 38enne disperso nel Lago di Como. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/corpo-lago-como-288-metri.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lago di Como a San Siro, dove il corpo è stato trovato a circa 288 metri"
+      },
+      "datePublished": "2026-09-29T11:08:28+00:00",
+      "dateModified": "2026-09-29T11:08:28+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/corpo-lago-como-288-metri/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

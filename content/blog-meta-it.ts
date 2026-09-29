@@ -12271,6 +12271,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.fials-vigilanza-ospedale-varese.title': 'FIALS: più vigilanza notturna a Varese',
     'blog.article.fials-vigilanza-ospedale-varese.excerpt': 'Il sindacato chiede all\'ASST Sette Laghi di rivedere gli accessi e i turni: una sola guardia al Pronto Soccorso non basta.',
     'blog.article.fials-vigilanza-ospedale-varese.imageAlt': 'Ingresso di un ospedale presidiato da una guardia giurata di notte',
+    'blog.article.corpo-lago-como-288-metri.title': 'Lago di Como, corpo trovato a 288 metri',
+    'blog.article.corpo-lago-como-288-metri.excerpt': 'A San Siro i sommozzatori dei Vigili del Fuoco hanno trovato a circa 288 metri il corpo del 38enne disperso nel Lago di Como.',
+    'blog.article.corpo-lago-como-288-metri.imageAlt': 'Lago di Como a San Siro, dove il corpo è stato trovato a circa 288 metri',
 };
 
 export default blogMetaIt;

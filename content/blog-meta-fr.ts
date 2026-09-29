@@ -12272,6 +12272,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.fials-vigilanza-ospedale-varese.title': 'FIALS : plus de surveillance nocturne à Varèse',
     'blog.article.fials-vigilanza-ospedale-varese.excerpt': 'Le syndicat demande à l\'ASST Sept Lacs de revoir les accès et les quarts de travail : un seul garde aux urgences ne suffit pas.',
     'blog.article.fials-vigilanza-ospedale-varese.imageAlt': 'Entrée d\'un hôpital gardée par un agent de sécurité la nuit',
+    'blog.article.corpo-lago-como-288-metri.title': 'Lac de Côme, corps retrouvé à 288 mètres',
+    'blog.article.corpo-lago-como-288-metri.excerpt': 'À San Siro, les plongeurs des sapeurs-pompiers ont trouvé à environ 288 mètres le corps de l\'homme de 38 ans porté disparu dans le lac de Como.',
+    'blog.article.corpo-lago-como-288-metri.imageAlt': 'Lac de Côme près de San Siro, corps retrouvé à environ 288 mètres (Como)',
 };
 
 export default blogMetaFr;
