@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/cronaca/1946441/svizzera-corruzione-presidente-banchieri-caso": {
-    "articleId": "processo-mirabaud-corruzione",
-    "ts": "2026-08-27T13:40:12.325Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/bancastato%3a-ricavi-in-calo%2c-pesano-tassi-e-contesto-macro/91965179": {
     "articleId": "bancasto-ricavi-calo-semestre",
     "ts": "2026-08-27T14:24:35.304Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1953496/prezzi-ticino-investimenti-rimane-fiducia": {
     "articleId": "investimenti-immobiliari-fiducia-ticino",
     "ts": "2026-09-29T15:53:10.113Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1953529/sistema-lukas-direttori-sanita-conferenza": {
+    "articleId": "lucas-engelberger-premi-cassa-malati-2027",
+    "ts": "2026-09-29T16:13:57.898Z",
     "keyForm": 2
   }
 }
