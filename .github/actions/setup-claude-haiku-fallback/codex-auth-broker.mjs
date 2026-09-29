@@ -26,10 +26,20 @@
  * fires while a request is running or queued. Callers should still invoke the
  * explicit cleanup operation at the end of a job.
  *
- * Requests run one at a time, so a request can wait in the queue behind
- * others. A client that sends `notifyStart: true` receives one
- * CLIENT_START_SIGNAL byte when its own Codex process starts, and can time the
- * execution from there instead of from connect().
+ * Requests run in up to --max-concurrency lanes (default 1), so a request can
+ * wait in the queue behind others. Parallel lanes open only while the login
+ * cannot need a refresh (loginCannotRefresh): the refresh token is single-use,
+ * and two Codex processes refreshing it at once would spend it twice. A client
+ * that sends `notifyStart: true` receives one CLIENT_START_SIGNAL byte when
+ * its own Codex process starts, and can time the execution from there instead
+ * of from connect().
+ *
+ * A request with `profile: 'function'` runs Codex as a plain text function:
+ * minimal instructions instead of the coding-agent prompt, no tools, no
+ * environment or permission context. callLLM requests never need tools, and
+ * the agent prompt cost ~15.4k input tokens per request against ~5.9k for the
+ * function profile (local measure, gpt-5.6-luna at effort max, 2026-09-29).
+ * The model and the reasoning effort are the same for both profiles.
  */
 
 import fs from 'node:fs';
@@ -51,7 +61,25 @@ const DEFAULT_TTL_MS = 30 * 60 * 1000;
 // compatibility. The composite action passes --max-requests 4096 for its
 // shared crawler/job lane.
 const DEFAULT_MAX_REQUESTS = 1;
+const DEFAULT_MAX_CONCURRENCY = 1;
+const MAX_CONCURRENCY_LIMIT = 6;
 const MAX_TIMEOUT_MS = 600_000;
+// Codex refreshes a ChatGPT login when `last_refresh` is older than 8 days or
+// the access token has expired. Parallel lanes open only with a day of margin
+// on the first and an access token that outlives the longest request allowed,
+// plus half an hour.
+const LOGIN_REFRESH_SAFE_AGE_MS = 7 * 24 * 60 * 60 * 1000;
+const LOGIN_ACCESS_TOKEN_MIN_REMAINING_MS = MAX_TIMEOUT_MS + 30 * 60 * 1000;
+// `function` profile: Codex answers as a text function. The disabled features
+// are the agent's tools; all exist in the pinned 0.153.4, and `--strict-config`
+// rejects an unknown feature or key.
+const FUNCTION_PROFILE_INSTRUCTIONS = 'You are a stateless text-processing function called by a batch job. Read the request, produce the requested output directly, and never use tools, run commands or ask questions.\n';
+const FUNCTION_PROFILE_DISABLED_FEATURES = Object.freeze([
+  'shell_tool', 'unified_exec', 'multi_agent', 'image_generation', 'browser_use',
+  'computer_use', 'apps', 'plugins', 'view_image', 'goals', 'sleep_tool',
+  'tool_suggest', 'skill_search',
+]);
+const REQUEST_PROFILES = new Set(['agent', 'function']);
 const MAX_STDERR_TAIL_CHARS = 16 * 1024;
 // Fits the 300-character error the broker returns, after its own prefix.
 const MAX_FAILURE_REASON_CHARS = 200;
@@ -81,6 +109,10 @@ const maxRequestsRaw = Number(argument('--max-requests', String(DEFAULT_MAX_REQU
 const maxRequests = Number.isInteger(maxRequestsRaw) && maxRequestsRaw > 0
   ? maxRequestsRaw
   : DEFAULT_MAX_REQUESTS;
+const maxConcurrencyRaw = Number(argument('--max-concurrency', String(DEFAULT_MAX_CONCURRENCY)));
+const maxConcurrency = Number.isInteger(maxConcurrencyRaw) && maxConcurrencyRaw > 0
+  ? Math.min(maxConcurrencyRaw, MAX_CONCURRENCY_LIMIT)
+  : DEFAULT_MAX_CONCURRENCY;
 
 if (!socketArgument || !socketPath || socketPath === path.dirname(socketPath)) {
   console.error('Codex auth broker socket is required');
@@ -361,10 +393,64 @@ function prepareAuthHome(credential) {
     fs.writeFileSync(authPath, credential, { encoding: 'utf8', mode: 0o600 });
   }
   fs.chmodSync(authPath, 0o600);
-  fs.writeFileSync(configPath, permissionConfig(), { encoding: 'utf8', mode: 0o600 });
-  fs.chmodSync(configPath, 0o600);
+  writeConfigIfChanged(configPath, permissionConfig());
   assertPrivateRuntime(authHome, [], [authPath, configPath]);
   return { codexHome: authHome, authPath };
+}
+
+/**
+ * With several lanes another Codex may read config.toml while this request is
+ * being prepared: a writeFileSync that truncates and rewrites it could hand
+ * that process an empty or half-written file. It is written only when it
+ * changes, through an atomic rename inside the same 0700 directory.
+ */
+function writeConfigIfChanged(configPath, content) {
+  let current = null;
+  try {
+    if (fs.lstatSync(configPath).isFile()) current = fs.readFileSync(configPath, 'utf8');
+  } catch { /* missing: write it */ }
+  if (current === content) {
+    fs.chmodSync(configPath, 0o600);
+    return;
+  }
+  const staging = `${configPath}.${process.pid}.${crypto.randomBytes(4).toString('hex')}`;
+  fs.writeFileSync(staging, content, { encoding: 'utf8', mode: 0o600, flag: 'wx' });
+  fs.chmodSync(staging, 0o600);
+  fs.renameSync(staging, configPath);
+}
+
+/** The `exp` claim (seconds) of a JWT, signature unchecked; NaN if unreadable. */
+function jwtExpiryMs(token) {
+  try {
+    const payload = JSON.parse(Buffer.from(String(token).split('.')[1] || '', 'base64url').toString('utf8'));
+    const exp = Number(payload?.exp);
+    return Number.isFinite(exp) ? exp * 1000 : Number.NaN;
+  } catch {
+    return Number.NaN;
+  }
+}
+
+/**
+ * true only when the in-memory login cannot be refreshed by a request that
+ * starts now: no refresh token (API-key login), or a recent `last_refresh`
+ * and an access token that outlives the longest request. A login that cannot
+ * be read or has no dates counts as refreshable: requests stay one at a time,
+ * as before the lanes existed.
+ */
+function loginCannotRefresh(nowMs = Date.now()) {
+  let parsed;
+  try { parsed = JSON.parse(authJson); } catch { return false; }
+  if (!parsed || typeof parsed !== 'object') return false;
+  const tokens = parsed.tokens;
+  if (!tokens || typeof tokens !== 'object' || !tokens.refresh_token) {
+    return typeof parsed.OPENAI_API_KEY === 'string' && parsed.OPENAI_API_KEY !== '';
+  }
+  const lastRefreshMs = Date.parse(String(parsed.last_refresh || ''));
+  const accessExpiryMs = jwtExpiryMs(tokens.access_token);
+  if (!Number.isFinite(lastRefreshMs) || !Number.isFinite(accessExpiryMs)) return false;
+  if (lastRefreshMs > nowMs) return false;
+  return nowMs - lastRefreshMs < LOGIN_REFRESH_SAFE_AGE_MS
+    && accessExpiryMs - nowMs > LOGIN_ACCESS_TOKEN_MIN_REMAINING_MS;
 }
 
 /** Keep the in-memory login in step with a refresh Codex wrote to the home. */
@@ -383,7 +469,7 @@ function removeAuthHome() {
   }
 }
 
-function runCodex({ authJson: credential, prompt, timeoutMs, schema, onSpawn = () => {} }) {
+function runCodex({ authJson: credential, prompt, timeoutMs, schema, profile = 'agent', onSpawn = () => {}, job }) {
   // Per-request tree: workspace, TMPDIR and the output files. The login lives
   // in the per-job home instead (prepareAuthHome), outside this tree.
   const runtimeRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-haiku-broker-'));
@@ -392,6 +478,8 @@ function runCodex({ authJson: credential, prompt, timeoutMs, schema, onSpawn = (
   const codexOut = path.join(runtimeRoot, 'out');
   const outputPath = path.join(codexOut, 'last-message.txt');
   const schemaPath = path.join(codexOut, 'output-schema.json');
+  const instructionsPath = path.join(codexOut, 'function-instructions.md');
+  const functionProfile = profile === 'function';
   let codexHome = '';
   let child = null;
   let runtimeCleaned = false;
@@ -403,13 +491,13 @@ function runCodex({ authJson: credential, prompt, timeoutMs, schema, onSpawn = (
     // in-memory copy too.
     if (runtimeCleaned) return;
     runtimeCleaned = true;
-    if (activeRuntimeCleanup === finish) activeRuntimeCleanup = null;
+    if (job && job.runtimeCleanup === finish) job.runtimeCleanup = null;
     fs.rmSync(runtimeRoot, { recursive: true, force: true });
     adoptRefreshedAuth();
   };
   // Register before any setup/spawn work: a signal can arrive while the
   // runtime tree is being materialized, before the child handle exists.
-  activeRuntimeCleanup = finish;
+  if (job) job.runtimeCleanup = finish;
 
   const run = new Promise((resolve, reject) => {
     try {
@@ -443,10 +531,21 @@ function runCodex({ authJson: credential, prompt, timeoutMs, schema, onSpawn = (
         fs.chmodSync(schemaPath, 0o600);
         args.push('--output-schema', schemaPath);
       }
+      if (functionProfile) {
+        fs.writeFileSync(instructionsPath, FUNCTION_PROFILE_INSTRUCTIONS, { encoding: 'utf8', mode: 0o600 });
+        fs.chmodSync(instructionsPath, 0o600);
+        args.push(
+          '-c', `model_instructions_file=${JSON.stringify(instructionsPath)}`,
+          '-c', 'include_permissions_instructions=false',
+          '-c', 'include_environment_context=false',
+          '-c', 'web_search="disabled"',
+          ...FUNCTION_PROFILE_DISABLED_FEATURES.flatMap((feature) => ['--disable', feature]),
+        );
+      }
       assertPrivateRuntime(
         runtimeRoot,
         [codexWorkspace, codexTmp, codexOut],
-        [outputPath, ...(schema ? [schemaPath] : [])],
+        [outputPath, ...(schema ? [schemaPath] : []), ...(functionProfile ? [instructionsPath] : [])],
       );
       args.push('-');
 
@@ -459,7 +558,7 @@ function runCodex({ authJson: credential, prompt, timeoutMs, schema, onSpawn = (
         cwd: codexWorkspace,
         detached: process.platform !== 'win32',
       });
-      activeChild = child;
+      if (job) job.child = child;
       let stderrTail = '';
       child.stderr.setEncoding('utf8');
       child.stderr.on('data', (chunk) => {
@@ -525,21 +624,26 @@ function validateRequest(request) {
   if (request.schema !== null && request.schema !== undefined && typeof request.schema !== 'object') {
     return 'invalid output schema';
   }
+  if (request.profile !== null && request.profile !== undefined && !REQUEST_PROFILES.has(request.profile)) {
+    return 'invalid profile';
+  }
   return '';
 }
 
 let authJson = '';
 let authHome = '';
 let listeningPath = '';
-let activeChild = null;
-let activeRuntimeCleanup = null;
 let codexCliPath = '';
 let codexCliSha256 = '';
 let codexCliPrefix = '';
 let server;
 let closed = false;
 let acceptedRequests = 0;
-let activeRequest = null;
+// Codex requests this broker completed successfully. While it is zero the
+// requests run one at a time: the first one is the one that refreshes a stale
+// login and rewrites auth.json in the job home.
+let completedRequests = 0;
+const activeRequests = new Set();
 const pendingRequests = [];
 let expiry;
 
@@ -554,31 +658,36 @@ function refreshIdleExpiry() {
 // the broker under a running request. Expiry now re-arms while there is work.
 function expireIfIdle() {
   if (closed) return;
-  if (activeRequest || pendingRequests.some((job) => !job.cancelled && !job.client.destroyed)) {
+  if (activeRequests.size > 0 || pendingRequests.some((job) => !job.cancelled && !job.client.destroyed)) {
     refreshIdleExpiry();
     return;
   }
   cleanup();
 }
 
-function cleanupRuntime() {
-  terminateChild(activeChild, 'SIGKILL');
-  activeChild = null;
-  const runtimeCleanup = activeRuntimeCleanup;
-  activeRuntimeCleanup = null;
+function cleanupJobRuntime(job) {
+  if (!job) return;
+  terminateChild(job.child, 'SIGKILL');
+  job.child = null;
+  const runtimeCleanup = job.runtimeCleanup;
+  job.runtimeCleanup = null;
   try { runtimeCleanup?.(); } catch (error) {
     console.error(`Codex auth broker runtime cleanup failed: ${error.message}`);
   }
 }
 
+function cleanupRuntime() {
+  for (const job of activeRequests) cleanupJobRuntime(job);
+}
+
 function cancelRequest(job) {
   if (!job || job.cancelled || job.responseStarted) return;
-  const started = job.started === true || activeRequest === job;
+  const started = job.started === true || activeRequests.has(job);
   job.cancelled = true;
   if (!started && job.requestAccepted) {
     acceptedRequests = Math.max(0, acceptedRequests - 1);
   }
-  if (started) cleanupRuntime();
+  if (started) cleanupJobRuntime(job);
 }
 
 function cleanup() {
@@ -589,9 +698,9 @@ function cleanup() {
     job.cancelled = true;
     job.client.destroy();
   }
-  if (activeRequest) {
-    activeRequest.cancelled = true;
-    activeRequest.client.destroy();
+  for (const job of activeRequests) {
+    job.cancelled = true;
+    job.client.destroy();
   }
   cleanupRuntime();
   removeAuthHome();
@@ -624,19 +733,38 @@ function responseFor(client, body, onSent = () => {}) {
   client.end(response, onSent);
 }
 
-function startNextRequest() {
-  if (closed || activeRequest) return;
-  let job;
+/**
+ * How many requests may run now. One while no request has succeeded yet, or
+ * whenever the login could be refreshed: the refresh token is single-use, and
+ * two Codex processes refreshing it together would spend it twice. Otherwise
+ * up to --max-concurrency: at effort max a request is almost all reasoning
+ * time, and six parallel requests answered in 11.5 s against ~43 s one after
+ * the other (local measure, 2026-09-29).
+ */
+function laneLimit(nowMs = Date.now()) {
+  if (maxConcurrency <= 1 || completedRequests === 0) return 1;
+  return loginCannotRefresh(nowMs) ? maxConcurrency : 1;
+}
+
+function nextPendingRequest() {
   while (pendingRequests.length > 0) {
     const candidate = pendingRequests.shift();
-    if (!candidate.cancelled && !candidate.client.destroyed) {
-      job = candidate;
-      break;
-    }
+    if (!candidate.cancelled && !candidate.client.destroyed) return candidate;
   }
-  if (!job) return;
+  return null;
+}
+
+function startNextRequest() {
+  while (!closed && activeRequests.size < laneLimit()) {
+    const job = nextPendingRequest();
+    if (!job) return;
+    startRequest(job);
+  }
+}
+
+function startRequest(job) {
   job.started = true;
-  activeRequest = job;
+  activeRequests.add(job);
   const timeoutMs = Number(job.parsed.timeoutMs);
   // The execution budget, on both sides of the socket, starts when the Codex
   // process has actually spawned, not when the request leaves the queue.
@@ -658,9 +786,12 @@ function startNextRequest() {
     prompt: job.parsed.prompt,
     timeoutMs,
     schema: job.parsed.schema ?? null,
+    profile: job.parsed.profile === 'function' ? 'function' : 'agent',
     onSpawn,
+    job,
   }).then(
     (result) => {
+      completedRequests += 1;
       if (job.cancelled) return;
       job.responseStarted = true;
       responseFor(job.client, { ok: true, result });
@@ -671,8 +802,8 @@ function startNextRequest() {
       responseFor(job.client, { ok: false, error: String(error?.message || error).slice(0, 300) });
     },
   ).finally(() => {
-    activeChild = null;
-    if (activeRequest === job) activeRequest = null;
+    job.child = null;
+    activeRequests.delete(job);
     refreshIdleExpiry();
     startNextRequest();
   });
