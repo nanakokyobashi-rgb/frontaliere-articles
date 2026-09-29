@@ -983,7 +983,7 @@ export function loadEvergreenRejectedTracker(opts = {}) {
   const path = (opts && opts.path) || EVERGREEN_REJECTED_PATH;
   const raw = loadJsonSafe(path);
   if (!raw || typeof raw !== 'object' || !Array.isArray(raw.keywords)) {
-    return { keywords: [], strikes: {} };
+    return { keywords: [], strikes: {}, topicGateUrls: {} };
   }
   // `strikes` is additive: a file written before it existed simply has none,
   // and one written with it stays readable by an older build, which ignores it.
@@ -993,7 +993,71 @@ export function loadEvergreenRejectedTracker(opts = {}) {
       if (typeof k === 'string' && Number.isInteger(v) && v > 0) strikes[k] = v;
     }
   }
-  return { keywords: raw.keywords.filter((x) => typeof x === 'string'), strikes };
+  return {
+    keywords: raw.keywords.filter((x) => typeof x === 'string'),
+    strikes,
+    topicGateUrls: readTopicGateUrls(raw.topicGateUrls),
+  };
+}
+
+/**
+ * ── URL DI NOTIZIE SCARTATI DAL TOPIC-GATE ─────────────────────────────────
+ *
+ * Quando la generazione di una notizia finisce in un abort di REGOLA #0, il
+ * verdetto e' sulla FONTE: nessun modello puo' ribaltarlo (create-article.mjs,
+ * «cedo l'headline al ciclo esterno»). La run dopo pero' non lo sapeva e
+ * rifaceva selezione, fetch e chiamata Codex sullo stesso URL: nella run
+ * 36514673677 (2026-09-29 02:53) quattro dei cinque abort erano URL gia'
+ * scartati dalla run 36510868703 di 45 minuti prima, ognuno 11-30 s di Codex
+ * piu' circa 100 s di selezione.
+ *
+ * Il campo `topicGateUrls` di questo stesso file (`{ <chiave URL>: { section,
+ * ts } }`) li ricorda per TOPIC_GATE_URL_TTL_MS, per sezione: una notizia senza
+ * aggancio frontaliere puo' averne uno per la sezione svizzera, e viceversa.
+ * Vive qui perche' questo file e' gia' salvato da generate-article.yml anche
+ * dalle run che non generano articoli. Additivo come `strikes`: una build piu'
+ * vecchia lo ignora.
+ */
+export const TOPIC_GATE_URL_TTL_MS = 48 * 60 * 60 * 1000;
+export const TOPIC_GATE_URL_MAX = 300;
+
+function readTopicGateUrls(value) {
+  const out = {};
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return out;
+  for (const [key, entry] of Object.entries(value)) {
+    if (typeof key !== 'string' || !key) continue;
+    if (!entry || typeof entry.section !== 'string' || !Number.isFinite(entry.ts)) continue;
+    out[key] = { section: entry.section, ts: entry.ts };
+  }
+  return out;
+}
+
+/** Whether `urlKey` got a topic-gate abort in `section` within the TTL. */
+export function isTopicGateAbortedUrl(tracker, urlKey, section, now = Date.now(), ttlMs = TOPIC_GATE_URL_TTL_MS) {
+  const entry = tracker?.topicGateUrls?.[urlKey];
+  return !!entry && entry.section === section && now - entry.ts >= 0 && now - entry.ts < ttlMs;
+}
+
+/**
+ * Record a topic-gate abort for `urlKey` in `section`. Pure — caller persists.
+ * Expired entries are dropped and the map is FIFO-capped at TOPIC_GATE_URL_MAX.
+ */
+export function recordTopicGateAbortedUrl(tracker, urlKey, section, now = Date.now(), ttlMs = TOPIC_GATE_URL_TTL_MS) {
+  const topicGateUrls = {};
+  for (const [key, entry] of Object.entries(tracker?.topicGateUrls || {})) {
+    if (now - entry.ts < ttlMs) topicGateUrls[key] = entry;
+  }
+  if (urlKey && section) {
+    delete topicGateUrls[urlKey];
+    topicGateUrls[urlKey] = { section, ts: now };
+  }
+  const keys = Object.keys(topicGateUrls);
+  for (const key of keys.slice(0, Math.max(0, keys.length - TOPIC_GATE_URL_MAX))) delete topicGateUrls[key];
+  return {
+    keywords: Array.isArray(tracker?.keywords) ? tracker.keywords.slice() : [],
+    strikes: { ...(tracker?.strikes || {}) },
+    topicGateUrls,
+  };
 }
 
 /**
@@ -1026,14 +1090,15 @@ export function isEvergreenRejected(tracker, keyword) {
 export function strikeEvergreenKeyword(tracker, keyword, opts = {}) {
   const keywords = Array.isArray(tracker?.keywords) ? tracker.keywords.slice() : [];
   const strikes = { ...(tracker?.strikes || {}) };
-  if (!keyword) return { keywords, strikes };
+  const topicGateUrls = { ...(tracker?.topicGateUrls || {}) };
+  if (!keyword) return { keywords, strikes, topicGateUrls };
   strikes[keyword] = (strikes[keyword] || 0) + 1;
   // Bounded like `keywords`, and by the same FIFO rule, so a long-lived repo
   // cannot grow this map without limit.
   const maxIds = (opts && opts.maxIds) || EVERGREEN_REJECTED_MAX_IDS;
   const over = Object.keys(strikes).length - maxIds;
   if (over > 0) for (const k of Object.keys(strikes).slice(0, over)) delete strikes[k];
-  return { keywords, strikes };
+  return { keywords, strikes, topicGateUrls };
 }
 
 /**
@@ -1046,7 +1111,7 @@ export function appendEvergreenRejected(tracker, keyword, opts = {}) {
   const keywords = Array.isArray(tracker?.keywords) ? tracker.keywords.slice() : [];
   if (keyword && !keywords.includes(keyword)) keywords.push(keyword);
   while (keywords.length > maxIds) keywords.shift();
-  return { keywords, strikes: { ...(tracker?.strikes || {}) } };
+  return { keywords, strikes: { ...(tracker?.strikes || {}) }, topicGateUrls: { ...(tracker?.topicGateUrls || {}) } };
 }
 
 /** Persist the evergreen-rejected tracker to disk. */
@@ -1059,6 +1124,7 @@ export function persistEvergreenRejectedTracker(tracker, opts = {}) {
       JSON.stringify({
         keywords: Array.isArray(tracker?.keywords) ? tracker.keywords : [],
         strikes: (tracker && typeof tracker.strikes === 'object' && tracker.strikes) || {},
+        topicGateUrls: (tracker && typeof tracker.topicGateUrls === 'object' && tracker.topicGateUrls) || {},
       }, null, 2) + '\n',
       'utf-8',
     );

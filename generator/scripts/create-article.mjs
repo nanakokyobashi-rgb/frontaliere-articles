@@ -233,6 +233,8 @@ import {
   strikeEvergreenKeyword as _strikeEvergreenKeyword,
   EVERGREEN_STRIKE_LIMIT as _EVERGREEN_STRIKE_LIMIT,
   persistEvergreenRejectedTracker as _persistEvergreenRejectedTracker,
+  isTopicGateAbortedUrl as _isTopicGateAbortedUrl,
+  recordTopicGateAbortedUrl as _recordTopicGateAbortedUrl,
 } from './lib/article-topic-selector.mjs';
 
 // ── Phase 3 — Discovery pool + quota controller ──────────────────
@@ -6406,7 +6408,7 @@ async function callLLM(messages, opts = {}) {
       // Il verdetto e' delegato a ./lib/body2-payload-verdict.mjs: e' li' che
       // vive la regola, ed e' li' che il test la esegue (questo file non e'
       // importabile senza `npm ci`, vedi l'intestazione del modulo).
-      const { verdict, itContent: _verdictContent, missing } = classifyBody2Payload({ parsed, parseErr, expectedFields: _body2Validation.fields });
+      const { verdict, itContent: _verdictContent, missing, salvagedPayload } = classifyBody2Payload({ parsed, parseErr, expectedFields: _body2Validation.fields });
       itContent = _verdictContent;
 
       // ── REGOLA #0: l'abort e' una risposta VALIDA, non un payload rotto ────
@@ -6512,6 +6514,16 @@ async function callLLM(messages, opts = {}) {
         throw _bodyErr;
       } else {
         recordModelContentSuccess(modelUsedRef.model);
+      }
+      // Articolo intero nel body1: il verdetto l'ha ridiviso ai titoli `##`
+      // (splitOverflowingBody1) e i body divisi hanno passato gli stessi
+      // controlli. Si restituisce quel payload invece di rigenerare il testo
+      // che il modello ha gia' scritto (run 36514673677: 181 s di Codex per
+      // riscrivere un articolo consegnato tutto nel body1).
+      if (salvagedPayload) {
+        console.error(`  ✂️  articolo intero nel body1 (${modelUsedRef.model || 'unknown'}): diviso ai titoli ## in body1/body2/body3, nessuna rigenerazione.`);
+        RUN_REPORT.body1SplitSalvages = (RUN_REPORT.body1SplitSalvages || 0) + 1;
+        return JSON.stringify(salvagedPayload);
       }
     }
     return result;
@@ -15154,6 +15166,21 @@ async function main() {
         console.error(`  📋 Post-filtro URL: ${headlines.length}/${beforeSourceFilter} headline rimanenti\n`);
       }
 
+      // ── Pre-filter: fonti gia' rifiutate dal topic-gate (REGOLA #0) ──
+      // Il verdetto di un abort e' sulla fonte, e nessun modello puo'
+      // ribaltarlo: la run successiva rifaceva selezione, fetch e chiamata
+      // Codex sullo stesso URL (run 36514673677: 4 abort su 5 erano URL gia'
+      // scartati 45 minuti prima). Ricordati per sezione e per 48 h in
+      // `topicGateUrls` (lib/article-topic-selector.mjs).
+      const topicGateTracker = _loadEvergreenRejectedTracker();
+      headlines = headlines.filter(h => {
+        if (!h.url || !_isTopicGateAbortedUrl(topicGateTracker, normalizeNewsUrl(h.url), SECTION_NAME)) return true;
+        console.error(`  🚫 Headline scartata (topic-gate REGOLA #0 su questa fonte nelle ultime 48 h): ${h.headline.slice(0, 60)}…`);
+        RUN_REPORT.preFilterDrops.topicGateAbortedRecently = (RUN_REPORT.preFilterDrops.topicGateAbortedRecently || 0) + 1;
+        recordDiscardedHeadline({ reason: 'topic_gate_aborted_recently', headline: h.headline });
+        return false;
+      });
+
       // ── Pre-filter: remove headlines whose TOPIC matches an existing article ──
       // Same news re-published on a different URL slips past the URL dedup. The
       // article-ID containment check (Italian stemmer + synonyms) catches
@@ -15476,6 +15503,13 @@ async function main() {
                 attempt--;
                 continue;
               }
+              // Il pre-filtro vede solo l'URL di redirect di Google News: la
+              // fonte reale si confronta qui con gli abort di REGOLA #0.
+              if (_isTopicGateAbortedUrl(_loadEvergreenRejectedTracker(), normalizeNewsUrl(realUrl), SECTION_NAME)) {
+                console.error('   🚫 Google News decodificata ma la fonte ha avuto un abort di REGOLA #0 nelle ultime 48 h — provo un\'altra headline (non conta come tentativo)');
+                attempt--;
+                continue;
+              }
               console.error(`   🔓 Google News decodificata → fonte reale: ${realUrl.slice(0, 80)}`);
               url = realUrl;
               chosen = { ...chosen, url: realUrl, _resolvedFromGoogleNewsRss: chosen.url };
@@ -15510,6 +15544,14 @@ async function main() {
             // 2026-05-11). Same quality outcome (slop not published)
             // but workflow stays green and retry budget is honored.
             const isTopicGateAbort = e.topicGateAbort === true || /topic-gate abort/i.test(e.message);
+            // La fonte non ha aggancio per questa sezione: la si ricorda per
+            // 48 h, cosi' le prossime run non la riselezionano (vedi il
+            // pre-filtro «fonti gia' rifiutate dal topic-gate»).
+            if (isTopicGateAbort && url && !String(url).startsWith('evergreen://')) {
+              try {
+                _persistEvergreenRejectedTracker(_recordTopicGateAbortedUrl(_loadEvergreenRejectedTracker(), normalizeNewsUrl(url), SECTION_NAME));
+              } catch { /* la memoria e' un risparmio, non un gate */ }
+            }
             const isQualityReject = isQualityRejectError(e);
             if (isQualityReject && attempt < MAX_DUPLICATE_RETRIES) {
               const tag = isTopicGateAbort ? 'topic-gate (REGOLA #0)' : 'qualità';
@@ -16229,6 +16271,18 @@ async function generateAndValidateArticle(url, sourceContext = null) {
     // primary path does not enter registerArticleFiles().
     assertGeneratedArticleQuality(data);
     optimizeSeoMetadata(data);
+    // Step 3a.0-dup: i gate deterministici dei duplicati, gli stessi di Step
+    // 3a.2 e 3a.4, gia' qui, prima del fact-check e dell'espansione. Id e
+    // titolo IT sono stabili da questo punto: il fact-check e l'espansione
+    // toccano il corpo. Nella run 36519078323 (2026-09-29) tre articoli
+    // evergreen sono stati scritti, verificati ed espansi e poi scartati a Step
+    // 3a.2 come duplicati lessicali (titolo 83% e 100%, id 75%): circa sei
+    // minuti di verificatori e di espansione su testo gia' condannato, che qui
+    // costano millisecondi. Lo stesso errore, con lo stesso messaggio, arriva
+    // allo stesso chiamante («Duplicato post-generazione» → prossima keyword).
+    // I gate di Step 3a.2-3a.4 restano e giudicano l'articolo finale.
+    checkForDuplicates(data);
+    assertTopicNotRecentlyCovered(data, loadExistingArticleSummariesWithDates());
 
     // Step 3a.0-skip: bail early when the chosen source has zero frontaliere
     // signal. Detected on attempt 1 only — across retries the source URL is

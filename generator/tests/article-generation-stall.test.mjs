@@ -145,5 +145,5 @@ test('strikes are per-keyword and do not disturb the permanent ban list', () => 
 
 test('a tracker file written before strikes existed still loads', () => {
   const legacy = loadEvergreenRejectedTracker({ path: 'generator/tests/fixtures/does-not-exist.json' });
-  assert.deepEqual(legacy, { keywords: [], strikes: {} });
+  assert.deepEqual(legacy, { keywords: [], strikes: {}, topicGateUrls: {} });
 });
