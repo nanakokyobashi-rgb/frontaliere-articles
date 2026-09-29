@@ -2936,9 +2936,9 @@
       "sitePath": "services/seo/imageObjectLd.ts",
       "mode": "identical",
       "baseline": {
-        "site": "732ad6959a3fecc2",
-        "corpus": "732ad6959a3fecc2",
-        "alignedAt": "2026-09-28"
+        "site": "17516d72a1cee0cb",
+        "corpus": "17516d72a1cee0cb",
+        "alignedAt": "2026-09-29"
       }
     },
     {
