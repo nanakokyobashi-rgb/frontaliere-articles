@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1946516/foraggio-azienda-parmelin-animali-confederazione": {
-    "articleId": "foraggio-siccita-aiuti-federali",
-    "ts": "2026-08-27T22:06:31.196Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4011503": {
     "articleId": "berna-rinnova-festival-cinematografici",
     "ts": "2026-08-27T22:40:23.550Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4117759": {
     "articleId": "dati-srf-dipendenti-rubati",
     "ts": "2026-09-29T21:53:18.380Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/gr%3a-l%27aeroporto-di-samedan-aspetta-di-poter-decollare/92140070": {
+    "articleId": "samedan-aeroporto-rinnovo-2025",
+    "ts": "2026-09-29T22:17:12.765Z",
     "keyForm": 2
   }
 }
