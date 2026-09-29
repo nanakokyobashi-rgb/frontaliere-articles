@@ -7821,7 +7821,10 @@ function _requestCodexExecution({ prompt, timeoutMs, schema, deadlineMs }) {
     client.on('connect', () => {
       let request;
       try {
-        request = `${JSON.stringify({ op: 'exec', prompt, timeoutMs: requestTimeoutMs, schema: schema ?? null, notifyStart: true })}\n`;
+        // `profile: 'function'`: callLLM never uses the agent's tools, and the
+        // broker runs Codex without the coding-agent prompt (~15.4k input
+        // tokens per request against ~5.9k), same model and same effort.
+        request = `${JSON.stringify({ op: 'exec', prompt, timeoutMs: requestTimeoutMs, schema: schema ?? null, notifyStart: true, profile: 'function' })}\n`;
       } catch (error) {
         finish(error);
         return;

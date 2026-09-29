@@ -111,6 +111,8 @@ test('chiede il segnale di avvio e toglie i byte di controllo prima della rispos
   assert.equal(await callCodex(), 'PONG');
   assert.equal(requests[0].op, 'exec');
   assert.equal(requests[0].notifyStart, true);
+  // callLLM non usa mai i tool dell'agente: il broker risponde col profilo function.
+  assert.equal(requests[0].profile, 'function');
 });
 
 test('una richiesta mai partita scade come attesa in coda, senza toccare lo score', async () => {

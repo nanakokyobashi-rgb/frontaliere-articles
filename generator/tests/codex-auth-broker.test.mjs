@@ -676,11 +676,13 @@ process.stdin.setEncoding('utf8');
 process.stdin.on('data', (chunk) => { prompt += chunk; });
 process.stdin.on('end', () => {
   const wait = Number(prompt.match(/sleep:(\\d+)/)?.[1] || 0);
-  setTimeout(() => fs.writeFileSync(output, JSON.stringify({ prompt }), 'utf8'), wait);
+  const override = args.find((arg) => arg.startsWith('model_instructions_file='));
+  const instructions = override ? fs.readFileSync(JSON.parse(override.slice('model_instructions_file='.length)), 'utf8') : '';
+  setTimeout(() => fs.writeFileSync(output, JSON.stringify({ prompt, argv: args, instructions }), 'utf8'), wait);
 });
 `;
 
-async function withSleepingBroker(ttlMs, body) {
+async function withSleepingBroker(ttlMs, body, { extraArgs = [], credential = '{"access_token":"test"}' } = {}) {
   const brokerDir = tempBrokerDir();
   const cliPrefix = fs.mkdtempSync(path.join(os.tmpdir(), 'claude-haiku-codex-cli.'));
   const socketPath = path.join(brokerDir, 'auth.sock');
@@ -697,6 +699,7 @@ async function withSleepingBroker(ttlMs, body) {
     '--codex-realpath', cliPath,
     '--codex-sha256', cliSha256,
     '--codex-prefix', cliPrefix,
+    ...extraArgs,
   ], {
     cwd: ROOT,
     stdio: ['pipe', 'ignore', 'pipe'],
@@ -704,7 +707,7 @@ async function withSleepingBroker(ttlMs, body) {
   let stderr = '';
   broker.stderr.setEncoding('utf8');
   broker.stderr.on('data', (chunk) => { stderr += chunk; });
-  broker.stdin.end('{"access_token":"test"}');
+  broker.stdin.end(credential);
   try {
     await waitForSocket(socketPath, broker).catch((error) => {
       throw new Error(`${error.message}: ${stderr}`);
@@ -774,5 +777,87 @@ test('il segnale di avvio arriva quando la richiesta esce dalla coda, e solo a c
     assert.ok(queuedStarted >= firstAnswered, 'la richiesta in coda parte dopo la risposta alla precedente');
     assert.equal(c.raw.includes('\x01'), false, 'senza notifyStart il protocollo resta quello di prima');
     assert.equal(jsonLine(c.raw).ok, true, stderr());
+  });
+});
+
+/**
+ * Login ChatGPT finto con le sole date che il broker legge: `last_refresh` e
+ * l'`exp` dell'access token. La firma non conta, il broker non la verifica.
+ */
+function chatgptLogin({ lastRefreshAgoMs = 60_000, accessTtlMs = 10 * 24 * 60 * 60 * 1000 } = {}) {
+  const segment = (value) => Buffer.from(JSON.stringify(value)).toString('base64url');
+  const now = Date.now();
+  const accessToken = `${segment({ alg: 'none' })}.${segment({ exp: Math.floor((now + accessTtlMs) / 1000) })}.fixture`;
+  return JSON.stringify({
+    auth_mode: 'chatgpt',
+    OPENAI_API_KEY: null,
+    tokens: { id_token: 'fixture', access_token: accessToken, refresh_token: 'fixture-refresh', account_id: 'fixture' },
+    last_refresh: new Date(now - lastRefreshAgoMs).toISOString(),
+  });
+}
+
+/** Inizio (segnale \x01) e fine (riga JSON) di una richiesta, in ms. */
+const span = (exchange) => ({
+  start: exchange.chunks.find((chunk) => chunk.data.includes('\x01'))?.at,
+  end: exchange.chunks.find((chunk) => chunk.data.includes('{'))?.at,
+});
+
+test('dopo la prima richiesta si aprono le corsie parallele, finché il login non può rinnovarsi', async () => {
+  await withSleepingBroker(60_000, async ({ socketPath, stderr }) => {
+    const first = rawRequest(socketPath, { op: 'exec', prompt: 'sleep:300', timeoutMs: 5000, notifyStart: true });
+    await delay(50);
+    const queued = [1, 2, 3].map(() => rawRequest(socketPath, { op: 'exec', prompt: 'sleep:700', timeoutMs: 5000, notifyStart: true }));
+    const [a, ...rest] = await Promise.all([first, ...queued]);
+    for (const exchange of [a, ...rest]) assert.equal(jsonLine(exchange.raw).ok, true, stderr());
+    // La prima corre da sola: e' quella che rinnoverebbe un login vecchio.
+    const firstAnswered = span(a).end;
+    const spans = rest.map(span);
+    for (const s of spans) assert.ok(s.start >= firstAnswered, 'la prima richiesta corre da sola');
+    // Poi le tre in coda partono insieme: ognuna parte prima che una qualsiasi risponda.
+    assert.ok(Math.max(...spans.map((s) => s.start)) < Math.min(...spans.map((s) => s.end)), JSON.stringify(spans));
+  }, { extraArgs: ['--max-concurrency', '3'], credential: chatgptLogin() });
+});
+
+for (const [label, credential] of [
+  ['un login rinnovato più di 7 giorni fa', () => chatgptLogin({ lastRefreshAgoMs: 8 * 24 * 60 * 60 * 1000 })],
+  ['un access token vicino alla scadenza', () => chatgptLogin({ accessTtlMs: 20 * 60 * 1000 })],
+  ['un login senza date', () => '{"access_token":"test"}'],
+]) {
+  test(`con ${label} le richieste restano una alla volta`, async () => {
+    await withSleepingBroker(60_000, async ({ socketPath, stderr }) => {
+      assert.equal(jsonLine((await rawRequest(socketPath, { op: 'exec', prompt: 'sleep:10', timeoutMs: 5000 })).raw).ok, true, stderr());
+      const pair = await Promise.all([1, 2].map(() => rawRequest(socketPath, { op: 'exec', prompt: 'sleep:300', timeoutMs: 5000, notifyStart: true })));
+      const [earlier, later] = pair.map(span).sort((x, y) => x.start - y.start);
+      assert.ok(later.start >= earlier.end, JSON.stringify({ earlier, later }));
+    }, { extraArgs: ['--max-concurrency', '3'], credential: credential() });
+  });
+}
+
+test('il profilo function toglie prompt da agente e tool, con lo stesso modello ed effort', async () => {
+  await withSleepingBroker(60_000, async ({ socketPath, stderr }) => {
+    const response = jsonLine((await rawRequest(socketPath, { op: 'exec', prompt: 'traduci', timeoutMs: 5000, profile: 'function' })).raw);
+    assert.equal(response.ok, true, stderr());
+    const { argv, instructions } = JSON.parse(response.result);
+    for (const arg of ['model_reasoning_effort=max', 'include_permissions_instructions=false', 'include_environment_context=false', 'web_search="disabled"']) {
+      assert.ok(argv.includes(arg), arg);
+    }
+    for (const feature of ['shell_tool', 'unified_exec', 'multi_agent', 'apps', 'plugins']) {
+      assert.equal(argv[argv.indexOf(feature) - 1], '--disable', feature);
+    }
+    assert.match(instructions, /stateless text-processing function/);
+  });
+});
+
+test('una richiesta senza profilo tiene il prompt da agente, e un profilo sconosciuto è rifiutato', async () => {
+  await withSleepingBroker(60_000, async ({ socketPath, stderr }) => {
+    const agent = jsonLine((await rawRequest(socketPath, { op: 'exec', prompt: 'review', timeoutMs: 5000 })).raw);
+    assert.equal(agent.ok, true, stderr());
+    const { argv, instructions } = JSON.parse(agent.result);
+    assert.ok(argv.includes('model_reasoning_effort=max'));
+    assert.equal(argv.some((arg) => arg.startsWith('model_instructions_file=')), false);
+    assert.equal(argv.includes('--disable'), false);
+    assert.equal(instructions, '');
+    const bad = jsonLine((await rawRequest(socketPath, { op: 'exec', prompt: 'x', timeoutMs: 5000, profile: 'root' })).raw);
+    assert.deepEqual(bad, { ok: false, error: 'invalid profile' });
   });
 });
