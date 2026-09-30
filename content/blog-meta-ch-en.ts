@@ -7154,6 +7154,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.bilaterali-iii-esercito-cantoni.title': 'Bilaterals III, army and properties: the dossiers under discussion',
     'blog.article.bilaterali-iii-esercito-cantoni.excerpt': 'The Council of States votes today on the referendum for Bilaterals III, while the National Council examines federal properties for 2026.',
     'blog.article.bilaterali-iii-esercito-cantoni.imageAlt': 'Swiss Federal Palace in Bern',
+    'blog.article.tutela-salariale-camere.title': 'Wage protection: compromise approved on Bilaterals III',
+    'blog.article.tutela-salariale-camere.excerpt': 'In the debate on Bilaterals III, the Council of States approves measure 14: protection against dismissal for employee and trade union representatives.',
+    'blog.article.tutela-salariale-camere.imageAlt': 'Swiss institutional setting in Bern linked to the national wage protection vote.',
 };
 
 export default blogMetaChEn;

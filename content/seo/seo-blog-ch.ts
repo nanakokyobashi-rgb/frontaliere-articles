@@ -92762,6 +92762,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tutela-salariale-camere': {
+    title: 'Tutela salariale: compromesso approvato sui Bilaterali III',
+    description: 'Consiglio degli Stati: misura 14 dei Bilaterali III approvata con 26 voti contro 19; protezione dal licenziamento per rappresentanti del personale e sindacali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, tutela, salariale, compromesso, approvato',
+    ogTitle: 'Bilaterali III: approvata la misura 14',
+    ogDescription: 'Nel dibattito sui Bilaterali III, il Consiglio degli Stati ha accolto il compromesso sulla tutela salariale. La misura 14, approvata con 26 voti contro 19, riguarda la protezione dal licenziamento per rappresentanti del personale e sindacali.',
+    canonicalPath: '/articoli-svizzera/tutela-salariale-camere/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tutela salariale: compromesso approvato sui Bilaterali III",
+      "description": "Consiglio degli Stati: misura 14 dei Bilaterali III approvata con 26 voti contro 19; protezione dal licenziamento per rappresentanti del personale e sindacali.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/tutela-salariale-camere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scorcio istituzionale svizzero a Berna, richiamo al voto sulla tutela salariale."
+      },
+      "datePublished": "2026-09-30T07:51:45+00:00",
+      "dateModified": "2026-09-30T07:51:45+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/tutela-salariale-camere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -2407,6 +2407,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'fueglistaler-errori-rete-ferroviaria': { it: 'fueglistaler-errori-rete-ferroviaria', en: 'fueglistaler-railway-network-errors', de: 'fueglistaler-fehler-schienennetz', fr: 'fueglistaler-erreurs-reseau-ferroviaire' },
  'sanita-svizzera-costi-analisi': { it: 'sanita-svizzera-costi-analisi', en: 'swiss-healthcare-costs-analysis', de: 'schweizer-gesundheitskosten-analyse', fr: 'analyse-couts-sante-suisse' },
  'bilaterali-iii-esercito-cantoni': { it: 'bilaterali-iii-esercito-cantoni', en: 'bilaterals-iii-army-cantons', de: 'bilaterale-iii-armee-kantone', fr: 'bilaterales-iii-armee-cantons' },
+ 'tutela-salariale-camere': { it: 'tutela-salariale-camere', en: 'wage-protection-parliament', de: 'lohnschutz-parlament', fr: 'protection-salariale-parlement' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

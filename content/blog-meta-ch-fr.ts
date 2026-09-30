@@ -7154,6 +7154,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.bilaterali-iii-esercito-cantoni.title': 'Bilatérales III, armée et immobilier : les dossiers en discussion',
     'blog.article.bilaterali-iii-esercito-cantoni.excerpt': 'Le Conseil des États vote aujourd\'hui sur le référendum concernant les Bilatérales III, tandis que le Conseil national examine les immeubles fédéraux pour 2026.',
     'blog.article.bilaterali-iii-esercito-cantoni.imageAlt': 'Palais fédéral à Berne',
+    'blog.article.tutela-salariale-camere.title': 'Protection salariale : compromis approuvé sur les Bilaterali III',
+    'blog.article.tutela-salariale-camere.excerpt': 'Dans le débat sur les Bilaterali III, le Conseil des États approuve la mesure 14 : protection contre le licenciement pour les représentants du personnel et les représentants syndicaux.',
+    'blog.article.tutela-salariale-camere.imageAlt': 'Cadre institutionnel suisse à Berne lié au vote national sur la protection salariale.',
 };
 
 export default blogMetaChFr;

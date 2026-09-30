@@ -7154,6 +7154,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.bilaterali-iii-esercito-cantoni.title': 'Bilaterali III, esercito e immobili: i dossier in discussione',
     'blog.article.bilaterali-iii-esercito-cantoni.excerpt': 'Il Consiglio degli Stati vota oggi sul referendum per i Bilaterali III, mentre il Nazionale esamina gli immobili federali per il 2026.',
     'blog.article.bilaterali-iii-esercito-cantoni.imageAlt': 'Palazzo federale svizzero a Berna',
+    'blog.article.tutela-salariale-camere.title': 'Tutela salariale: compromesso approvato sui Bilaterali III',
+    'blog.article.tutela-salariale-camere.excerpt': 'Nel dibattito sui Bilaterali III, il Consiglio degli Stati approva la misura 14: protezione dal licenziamento per rappresentanti del personale e sindacali.',
+    'blog.article.tutela-salariale-camere.imageAlt': 'Scorcio istituzionale svizzero a Berna, richiamo al voto sulla tutela salariale.',
 };
 
 export default blogMetaChIt;

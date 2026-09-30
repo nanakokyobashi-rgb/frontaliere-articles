@@ -21490,6 +21490,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'tutela-salariale-camere',
+    category: 'novita',
+    date: '2026-09-30T07:51:45.596Z',
+    image: '/images/blog/tutela-salariale-camere.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

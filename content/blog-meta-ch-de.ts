@@ -7154,6 +7154,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.bilaterali-iii-esercito-cantoni.title': 'Bilaterale III, Armee und Immobilien: die zur Diskussion stehenden Dossiers',
     'blog.article.bilaterali-iii-esercito-cantoni.excerpt': 'Der Ständerat stimmt heute über das Referendum für die Bilateralen III ab, während der Nationalrat die Bundesimmobilien für 2026 prüft.',
     'blog.article.bilaterali-iii-esercito-cantoni.imageAlt': 'Bundeshaus in Bern',
+    'blog.article.tutela-salariale-camere.title': 'Lohnschutz: Kompromiss zu den Bilateralen III gebilligt',
+    'blog.article.tutela-salariale-camere.excerpt': 'In der Bilateral-III-Debatte genehmigt der Ständerat Massnahme 14: Kündigungsschutz für Arbeitnehmervertreter und Gewerkschaften.',
+    'blog.article.tutela-salariale-camere.imageAlt': 'Schweizer institutioneller Schauplatz in Bern zum nationalen Entscheid über den Lohnschutz.',
 };
 
 export default blogMetaChDe;
