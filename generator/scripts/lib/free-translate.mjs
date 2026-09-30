@@ -1636,6 +1636,12 @@ export function setCodexTranslateCallForTests(fn) {
 /**
  * Exchange OAuth2 refresh token for a short-lived access token.
  *
+ * Returns `{ token, fromServiceAccount }` (service account first, then the
+ * OAuth fallback below); `token` is '' when none is available. The caller
+ * needs the provenance with the token itself: concurrent first-use
+ * exchanges can each issue a different service-account token while the
+ * cache keeps only one.
+ *
  * Retries 429/5xx and a 403 carrying a recognized OAuth quota error, using
  * the same classifier as the sibling JWT-bearer exchange in
  * `exchangeAssertionForToken` (lib/google-service-account-token.mjs, #701):
@@ -1651,7 +1657,7 @@ export function setCodexTranslateCallForTests(fn) {
 async function _getGoogleCloudAccessToken() {
   if (_gcServiceAccountAvailable && !_gcServiceAccountToken.refused) {
     if (_gcServiceAccountToken.accessToken && Date.now() < _gcServiceAccountToken.expiresAt - 60_000) {
-      return _gcServiceAccountToken.accessToken;
+      return { token: _gcServiceAccountToken.accessToken, fromServiceAccount: true };
     }
     try {
       const token = await getServiceAccountAccessToken(_gcServiceAccount, GOOGLE_CLOUD_SCOPE);
@@ -1661,7 +1667,7 @@ async function _getGoogleCloudAccessToken() {
         // conservative one-hour cache, matching Google's service-account JWT
         // lifetime, so the cascade does not sign a JWT for every field.
         _gcServiceAccountToken.expiresAt = Date.now() + 3_600_000;
-        return token;
+        return { token, fromServiceAccount: true };
       }
     } catch {
       // Fall through to the legacy user OAuth path when ADC is unavailable or
@@ -1673,9 +1679,9 @@ async function _getGoogleCloudAccessToken() {
       _noteGoogleCloudFailure('service-account-token-unavailable');
     }
   }
-  if (!_gcOAuthAvailable) return '';
+  if (!_gcOAuthAvailable) return { token: '', fromServiceAccount: false };
   if (_gcOAuth.accessToken && Date.now() < _gcOAuth.expiresAt - 60_000) {
-    return _gcOAuth.accessToken;
+    return { token: _gcOAuth.accessToken, fromServiceAccount: false };
   }
   for (let attempt = 1; attempt <= TOKEN_EXCHANGE_ATTEMPTS; attempt++) {
     let res;
@@ -1701,14 +1707,14 @@ async function _getGoogleCloudAccessToken() {
       const data = await res.json();
       _gcOAuth.accessToken = data.access_token || '';
       _gcOAuth.expiresAt = Date.now() + (data.expires_in || 3600) * 1000;
-      return _gcOAuth.accessToken;
+      return { token: _gcOAuth.accessToken, fromServiceAccount: false };
     }
     const text = await res.text().catch(() => '');
     const reason = extractOAuthErrorReason(text);
-    if (!isRetryableTokenExchangeStatus(res.status, reason)) return '';
+    if (!isRetryableTokenExchangeStatus(res.status, reason)) return { token: '', fromServiceAccount: false };
     if (attempt < TOKEN_EXCHANGE_ATTEMPTS) await delay(1000 * 2 ** (attempt - 1));
   }
-  return '';
+  return { token: '', fromServiceAccount: false };
 }
 
 export async function translateWithGoogleCloud(text, sourceLang, targetLang, outcome = null) {
@@ -1721,7 +1727,12 @@ export async function translateWithGoogleCloud(text, sourceLang, targetLang, out
   }
 
   try {
-    let token = await _getGoogleCloudAccessToken();
+    // The provenance travels with the token: comparing it with the shared
+    // cache is wrong when concurrent first-use exchanges each issue their own
+    // service-account token, or when a concurrent refusal already cleared it.
+    const acquired = await _getGoogleCloudAccessToken();
+    let token = acquired.token;
+    const fromServiceAccount = acquired.fromServiceAccount;
     if (!token) {
       _noteGoogleCloudFailure('access-token-unavailable');
       noteTranslationOutcome(outcome, 'incomplete');
@@ -1738,10 +1749,6 @@ export async function translateWithGoogleCloud(text, sourceLang, targetLang, out
       body: JSON.stringify({ q: clean, source: sourceLang, target: targetLang, format: 'text' }),
       signal: AbortSignal.timeout(TIMEOUT_MS),
     });
-    // Provenance is read before the await: a concurrent field may drop the
-    // cached service-account token while this request is in flight, and a
-    // comparison after the response would then skip this field's fallback.
-    const fromServiceAccount = token === _gcServiceAccountToken.accessToken;
     let res = await request(token);
     // A service-account token the API rejects must not stay cached for the
     // rest of the run, or no later field ever reaches the OAuth fallback:
@@ -1758,7 +1765,7 @@ export async function translateWithGoogleCloud(text, sourceLang, targetLang, out
       _gcServiceAccountToken.refused = true;
       if (_gcServiceAccountToken.accessToken === token) _gcServiceAccountToken.accessToken = '';
       _noteGoogleCloudFailure(`service-account HTTP ${res.status}`);
-      token = await _getGoogleCloudAccessToken();
+      ({ token } = await _getGoogleCloudAccessToken());
       if (!token) {
         noteTranslationOutcome(outcome, 'incomplete');
         return '';
