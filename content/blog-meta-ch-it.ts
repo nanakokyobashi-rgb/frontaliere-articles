@@ -7196,6 +7196,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.franchigie-lamal-basilea-citta.title': 'Premi cassa malati canton Basilea Città: riduzione premi',
     'blog.article.franchigie-lamal-basilea-citta.excerpt': 'Nel canton Basilea Città, i premi LAMal seguono cantone e regione: franchigie adulti, modelli alternativi e riduzione dei premi come sussidio cantonale.',
     'blog.article.franchigie-lamal-basilea-citta.imageAlt': 'Confronto dei premi della cassa malati e riduzione dei premi in Svizzera',
+    'blog.article.iniziativa-congedo-parentale-18-settimane.title': 'Congedo parentale: depositate 112\'517 firme a Berna',
+    'blog.article.iniziativa-congedo-parentale-18-settimane.excerpt': 'L\'iniziativa per un congedo parentale di 18 settimane ha raggiunto le firme necessarie. La proposta punta a parità tra genitori e indennità equa.',
+    'blog.article.iniziativa-congedo-parentale-18-settimane.imageAlt': 'Palazzo federale a Berna, sede della Cancelleria federale',
 };
 
 export default blogMetaChIt;

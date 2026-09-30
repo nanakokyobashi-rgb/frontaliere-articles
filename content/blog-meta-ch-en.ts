@@ -7196,6 +7196,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.franchigie-lamal-basilea-citta.title': 'Health Insurance Premiums in the Canton of Basel-Stadt: Premium Reduction',
     'blog.article.franchigie-lamal-basilea-citta.excerpt': 'In the canton of Basel-Stadt, KVG premiums vary by canton and region: adult deductibles, alternative plans, and premium reductions as a cantonal subsidy.',
     'blog.article.franchigie-lamal-basilea-citta.imageAlt': 'Comparing Swiss health insurance premiums and premium reduction',
+    'blog.article.iniziativa-congedo-parentale-18-settimane.title': 'Parental Leave: 112,517 Signatures Submitted in Bern',
+    'blog.article.iniziativa-congedo-parentale-18-settimane.excerpt': 'The initiative for 18 weeks of parental leave has reached the necessary signatures. The proposal aims for equality between parents and fair compensation.',
+    'blog.article.iniziativa-congedo-parentale-18-settimane.imageAlt': 'Federal Palace in Bern, seat of the Federal Chancellery',
 };
 
 export default blogMetaChEn;

@@ -2421,6 +2421,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'lamal-franchigie-sussidio-basel': { it: 'lamal-franchigie-sussidio-basel', en: 'basel-city-health-premium-reduction', de: 'krankenkassenpraemien-basel-stadt', fr: 'primes-assurance-maladie-bale-ville' },
  'tassa-prodotti-zuccherati-svizzera': { it: 'tassa-prodotti-zuccherati-svizzera', en: 'sugary-products-tax-switzerland', de: 'steuer-zuckerhaltige-produkte-schweiz', fr: 'taxe-produits-sucres-suisse' },
  'franchigie-lamal-basilea-citta': { it: 'franchigie-lamal-basilea-citta', en: 'basel-city-lamal-premium-reduction', de: 'basel-stadt-krankenkassenpraemien', fr: 'primes-lamal-bale-ville' },
+ 'iniziativa-congedo-parentale-18-settimane': { it: 'iniziativa-congedo-parentale-18-settimane', en: 'parental-leave-initiative-18-weeks', de: 'elternzeit-initiative-18-wochen', fr: 'initiative-conge-parental-18-semaines' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
