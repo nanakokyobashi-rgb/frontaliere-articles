@@ -7184,6 +7184,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.bns-acquisti-divise-trimestre.title': 'SNB: Devisenkäufe im zweiten Quartal zurückgegangen',
     'blog.article.bns-acquisti-divise-trimestre.excerpt': 'Im zweiten Quartal hat die Schweizerische Nationalbank Fremdwährungen im Wert von 1,4 Milliarden Franken gekauft, was einem Rückgang gegenüber den 3,9 Milliarden Franken der ersten drei Monate entspricht.',
     'blog.article.bns-acquisti-divise-trimestre.imageAlt': 'Gebäude der Schweizerischen Nationalbank in Bern',
+    'blog.article.zugo-de-escalation-cyberspazio.title': 'Der Bund fördert die Deeskalation im Cyberspace',
+    'blog.article.zugo-de-escalation-cyberspazio.excerpt': 'In Zug findet eine internationale Konferenz der Eidgenossenschaft zum Thema Deeskalation im Cyberspace statt, bei der es um präventive Diplomatie, die OSZE und künstliche Intelligenz geht.',
+    'blog.article.zugo-de-escalation-cyberspazio.imageAlt': 'Internationale Cybersicherheitskonferenz in Zug',
 };
 
 export default blogMetaChDe;

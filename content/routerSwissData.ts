@@ -2417,6 +2417,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'kof-stime-crescita-svizzera': { it: 'kof-stime-crescita-svizzera', en: 'kof-swiss-growth-estimates', de: 'kof-schweizer-wachstumsschaetzungen', fr: 'kof-estimations-croissance-suisse' },
  'analisti-economia-svizzera-settembre': { it: 'analisti-economia-svizzera-settembre', en: 'swiss-economy-analysts-september', de: 'schweizer-wirtschaft-analysten-september', fr: 'economie-suisse-analystes-septembre' },
  'bns-acquisti-divise-trimestre': { it: 'bns-acquisti-divise-trimestre', en: 'snb-foreign-currency-purchases-quarter', de: 'snb-devisenkaeufe-quartal', fr: 'bns-achats-devises-trimestre' },
+ 'zugo-de-escalation-cyberspazio': { it: 'zugo-de-escalation-cyberspazio', en: 'zug-cyber-de-escalation', de: 'zug-cyber-deeskalation', fr: 'zoug-cyber-deescalade' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/politica/1946725/birsfelden-consiglio-bl-traffico-udc": {
-    "articleId": "grigioni-traffico-sviamento-attesa",
-    "ts": "2026-08-29T09:26:39.712Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/rubriche/ospite/1946767/scuola-lavoro-docenti-condizioni-ogni-scuole-vpod-ricomincia-matteo": {
     "articleId": "scuola-ticino-vpod-condizioni-docenti",
     "ts": "2026-08-29T10:10:53.119Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/bns%3a-diminuiti-nel-secondo-trimestre-gli-acquisti-di-divise/92143765": {
     "articleId": "bns-acquisti-divise-trimestre",
     "ts": "2026-09-30T11:54:17.360Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4123894": {
+    "articleId": "zugo-de-escalation-cyberspazio",
+    "ts": "2026-09-30T12:36:30.819Z",
     "keyForm": 2
   }
 }

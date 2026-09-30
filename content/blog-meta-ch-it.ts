@@ -7184,6 +7184,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.bns-acquisti-divise-trimestre.title': 'BNS: diminuiti nel secondo trimestre gli acquisti di divise',
     'blog.article.bns-acquisti-divise-trimestre.excerpt': 'Nel secondo trimestre la Banca nazionale svizzera ha acquistato valute estere per 1,4 miliardi di franchi, in calo rispetto ai 3,9 miliardi dei primi tre mesi.',
     'blog.article.bns-acquisti-divise-trimestre.imageAlt': 'Edificio della Banca nazionale svizzera a Berna',
+    'blog.article.zugo-de-escalation-cyberspazio.title': 'La Confederazione promuove la de-escalation nel cyberspazio',
+    'blog.article.zugo-de-escalation-cyberspazio.excerpt': 'A Zugo conferenza internazionale della Confederazione per la de-escalation nel cyberspazio, tra diplomazia preventiva, OSCE e intelligenza artificiale.',
+    'blog.article.zugo-de-escalation-cyberspazio.imageAlt': 'Conferenza internazionale sulla cybersicurezza a Zugo',
 };
 
 export default blogMetaChIt;

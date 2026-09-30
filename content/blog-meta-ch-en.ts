@@ -7184,6 +7184,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.bns-acquisti-divise-trimestre.title': 'BNS: foreign currency purchases decreased in the second quarter',
     'blog.article.bns-acquisti-divise-trimestre.excerpt': 'In the second quarter, the Swiss National Bank purchased foreign currencies for 1,4 billion francs, down from the 3,9 billion in the first three months.',
     'blog.article.bns-acquisti-divise-trimestre.imageAlt': 'Swiss National Bank building in Bern',
+    'blog.article.zugo-de-escalation-cyberspazio.title': 'The Confederation promotes de-escalation in cyberspace',
+    'blog.article.zugo-de-escalation-cyberspazio.excerpt': 'An international conference organized by the Swiss Confederation on de-escalation in cyberspace is taking place in Zug, focusing on preventive diplomacy, the OSCE, and artificial intelligence.',
+    'blog.article.zugo-de-escalation-cyberspazio.imageAlt': 'International cybersecurity conference in Zug',
 };
 
 export default blogMetaChEn;
