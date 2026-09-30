@@ -7241,6 +7241,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.custodia-bambini-vallese-sussidi.title': 'Asilo nido e custodia bambini in Vallese: costi',
     'blog.article.custodia-bambini-vallese-sussidi.excerpt': 'In Vallese asili nido, famiglie diurne e doposcuola: tariffe calcolate sul reddito e sussidi cantonali disponibili per la custodia dei bambini.',
     'blog.article.custodia-bambini-vallese-sussidi.imageAlt': 'Custodia dei bambini in una struttura svizzera ai piedi delle Alpi.',
+    'blog.article.ubs-artisan-partners-chiede-di-lasciare-svizzera.title': 'UBS: Artisan Partners chiede alla banca di lasciare la Svizzera',
+    'blog.article.ubs-artisan-partners-chiede-di-lasciare-svizzera.excerpt': 'Artisan Partners chiede a UBS di lasciare la Svizzera. I due fondi gestiscono oltre 60 milioni di azioni della maggiore banca elvetica.',
+    'blog.article.ubs-artisan-partners-chiede-di-lasciare-svizzera.imageAlt': 'Sede bancaria UBS in Svizzera con edifici finanziari',
 };
 
 export default blogMetaChIt;

@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1946995/franchi-divario-spiegata-componente-ufficio": {
-    "articleId": "divario-salariale-svizzera-ust-640",
-    "ts": "2026-08-31T13:59:31.394Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/0olso33mmzic": {
     "articleId": "commissione-lpp-tasso-minimo-2027",
     "ts": "2026-08-31T14:33:27.620Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/feyuckabneay": {
     "articleId": "aerodromo-kaegiswil-sospensione-voli",
     "ts": "2026-09-30T19:00:15.083Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/ubs%3a-artisan-partners-chiede-alla-banca-di-lasciare-la-svizzera/92147176": {
+    "articleId": "ubs-artisan-partners-chiede-di-lasciare-svizzera",
+    "ts": "2026-09-30T21:12:40.770Z",
     "keyForm": 2
   }
 }

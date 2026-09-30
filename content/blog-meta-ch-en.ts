@@ -7241,6 +7241,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.custodia-bambini-vallese-sussidi.title': 'Daycare and Childcare in Valais: Costs',
     'blog.article.custodia-bambini-vallese-sussidi.excerpt': 'In Valais, daycare centers, family daycare, and after-school programs: fees are based on income, and cantonal subsidies are available for child care.',
     'blog.article.custodia-bambini-vallese-sussidi.imageAlt': 'Childcare at a Swiss facility in an Alpine setting.',
+    'blog.article.ubs-artisan-partners-chiede-di-lasciare-svizzera.title': 'UBS: Artisan Partners Calls on the Bank to Leave Switzerland',
+    'blog.article.ubs-artisan-partners-chiede-di-lasciare-svizzera.excerpt': 'Artisan Partners asks UBS to leave Switzerland. The two funds manage more than 60 million shares of Switzerland\'s largest bank.',
+    'blog.article.ubs-artisan-partners-chiede-di-lasciare-svizzera.imageAlt': 'UBS banking headquarters in Switzerland with financial buildings',
 };
 
 export default blogMetaChEn;

@@ -2436,6 +2436,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'stati-chiedono-referendum-bilaterali': { it: 'stati-chiedono-referendum-bilaterali', en: 'states-ask-for-bilateral-referendum', de: 'staende-fordern-bilaterale-referendum', fr: 'etats-demandent-referendum-bilaterales' },
  'aerodromo-kaegiswil-sospensione-voli': { it: 'aerodromo-kaegiswil-sospensione-voli', en: 'flight-suspension-in-kagiswil-until-20-nov-2026', de: 'flugausfall-in-kagiswil-bis-zum-20-november-2026', fr: 'suspension-des-vols-a-kagiswil-jusqu-au-20-nov-2026' },
  'custodia-bambini-vallese-sussidi': { it: 'custodia-bambini-vallese-sussidi', en: 'childcare-costs-valais', de: 'kinderbetreuung-kosten-wallis', fr: 'garde-enfants-couts-valais' },
+ 'ubs-artisan-partners-chiede-di-lasciare-svizzera': { it: 'ubs-artisan-partners-chiede-di-lasciare-svizzera', en: 'ubs-artisan-partners-asks-to-leave-switzerland', de: 'ubs-artisan-partners-bittet-schweiz-zu-verlassen', fr: 'ubs-artisan-partners-demande-de-quitter-la-suisse' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

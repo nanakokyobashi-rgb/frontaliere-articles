@@ -7241,6 +7241,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.custodia-bambini-vallese-sussidi.title': 'Kindertagesstätte und Kinderbetreuung im Wallis: Kosten',
     'blog.article.custodia-bambini-vallese-sussidi.excerpt': 'Im Wallis: Kindertagesstätten, Tagesfamilien und Nachmittagsbetreuung: einkommensabhängige Tarife und kantonale Zuschüsse für die Kinderbetreuung.',
     'blog.article.custodia-bambini-vallese-sussidi.imageAlt': 'Kinderbetreuung in einer Schweizer Einrichtung vor alpiner Landschaft.',
+    'blog.article.ubs-artisan-partners-chiede-di-lasciare-svizzera.title': 'UBS: Artisan Partners fordert die Bank auf, die Schweiz zu verlassen',
+    'blog.article.ubs-artisan-partners-chiede-di-lasciare-svizzera.excerpt': 'Artisan Partners fordert die UBS auf, die Schweiz zu verlassen. Die beiden Fonds verwalten über 60 Millionen Aktien der größten Schweizer Bank.',
+    'blog.article.ubs-artisan-partners-chiede-di-lasciare-svizzera.imageAlt': 'UBS Bankhauptsitz in der Schweiz mit Finanzgebäuden',
 };
 
 export default blogMetaChDe;

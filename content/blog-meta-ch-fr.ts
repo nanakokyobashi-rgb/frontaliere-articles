@@ -7241,6 +7241,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.custodia-bambini-vallese-sussidi.title': 'Crèche et garde d’enfants en Valais : coûts',
     'blog.article.custodia-bambini-vallese-sussidi.excerpt': 'Dans le Valais, crèches, familles d\'accueil de jour et garderies périscolaires : tarifs calculés en fonction des revenus et aides cantonales disponibles pour la garde des enfants.',
     'blog.article.custodia-bambini-vallese-sussidi.imageAlt': 'Garde d\'enfants dans une structure suisse au pied des Alpes.',
+    'blog.article.ubs-artisan-partners-chiede-di-lasciare-svizzera.title': 'UBS : Artisan Partners demande à la banque de quitter la Suisse',
+    'blog.article.ubs-artisan-partners-chiede-di-lasciare-svizzera.excerpt': 'Artisan Partners demande à UBS de quitter la Suisse. Les deux fonds gèrent plus de 60 millions d\'actions de la plus grande banque helvétique.',
+    'blog.article.ubs-artisan-partners-chiede-di-lasciare-svizzera.imageAlt': 'Siège de la banque UBS en Suisse avec des bâtiments financiers',
 };
 
 export default blogMetaChFr;
