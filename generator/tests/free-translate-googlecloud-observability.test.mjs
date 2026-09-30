@@ -164,7 +164,7 @@ test('preferisce il service account ADC con scope Cloud Translation al refresh t
  * OAuth addebita allo stesso progetto: niente fallback. Stesso comportamento
  * del gemello del sito (valerielinc-ops/frontaliere-si-o-no#10454).
  */
-function runServiceAccountRejection({ refusal }) {
+function runServiceAccountRejection({ refusal, concurrent = false }) {
   const childScript = `
     import { generateKeyPairSync } from 'node:crypto';
     import { unlinkSync, writeFileSync } from 'node:fs';
@@ -182,6 +182,7 @@ function runServiceAccountRejection({ refusal }) {
     process.env.GOOGLE_APPLICATION_CREDENTIALS = credentialsPath;
 
     const bearers = [];
+    let saRejections = 0;
     globalThis.fetch = async (url, options = {}) => {
       const value = String(url);
       if (value === 'https://oauth2.googleapis.com/token') {
@@ -192,6 +193,10 @@ function runServiceAccountRejection({ refusal }) {
         const bearer = String(options.headers?.Authorization || '');
         bearers.push(bearer.includes('service-account-token') ? 'sa' : 'oauth');
         if (${refusal === 'quota'} || bearer.includes('service-account-token')) {
+          // Concurrent fields: the second rejection arrives after the first one
+          // already dropped the cached token.
+          saRejections += 1;
+          await new Promise((resolve) => setTimeout(resolve, saRejections === 1 ? 5 : 40));
           const body = ${JSON.stringify(refusal === 'quota'
             ? { error: { message: 'User Rate Limit Exceeded', errors: [{ reason: 'userRateLimitExceeded' }] } }
             : { error: { status: 'PERMISSION_DENIED', message: 'The caller does not have permission' } })};
@@ -206,8 +211,9 @@ function runServiceAccountRejection({ refusal }) {
     };
 
     const { translateWithGoogleCloud } = await import(${JSON.stringify(MODULE_URL)});
-    const first = await translateWithGoogleCloud('Ciao', 'it', 'en');
-    const second = await translateWithGoogleCloud('Buongiorno', 'it', 'en');
+    const [first, second] = ${concurrent}
+      ? await Promise.all([translateWithGoogleCloud('Ciao', 'it', 'en'), translateWithGoogleCloud('Buongiorno', 'it', 'en')])
+      : [await translateWithGoogleCloud('Ciao', 'it', 'en'), await translateWithGoogleCloud('Buongiorno', 'it', 'en')];
     console.log('RESULTS=' + JSON.stringify([first, second]));
     console.log('BEARERS=' + bearers.join(','));
     unlinkSync(credentialsPath);
@@ -245,4 +251,10 @@ test('il tetto giornaliero del progetto non attiva il fallback OAuth', () => {
   const out = runServiceAccountRejection({ refusal: 'quota' });
   assert.match(out, /RESULTS=\["",""\]/);
   assert.match(out, /BEARERS=sa,sa/);
+});
+
+test('due campi concorrenti con il token del service account rifiutato arrivano entrambi al fallback OAuth', () => {
+  const out = runServiceAccountRejection({ refusal: 'permission', concurrent: true });
+  assert.match(out, /RESULTS=\["Hello via OAuth","Hello via OAuth"\]/);
+  assert.match(out, /BEARERS=sa,sa,oauth,oauth/);
 });
