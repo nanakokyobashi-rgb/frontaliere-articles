@@ -21481,6 +21481,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'bilaterali-iii-esercito-cantoni',
+    category: 'fiscale',
+    date: '2026-09-30T07:37:00.957Z',
+    image: '/images/blog/bilaterali-iii-esercito-cantoni.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

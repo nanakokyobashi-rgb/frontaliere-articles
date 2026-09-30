@@ -7151,6 +7151,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.sanita-svizzera-costi-analisi.title': 'Swiss healthcare: how much do we pay and what can we learn',
     'blog.article.sanita-svizzera-costi-analisi.excerpt': 'Analysis of healthcare costs: the average premium in Ticino reaches 519,90 francs in 2027. Comparisons, efficiency and OECD data compared.',
     'blog.article.sanita-svizzera-costi-analisi.imageAlt': 'View of a modern Swiss hospital with an urban landscape.',
+    'blog.article.bilaterali-iii-esercito-cantoni.title': 'Bilaterals III, army and properties: the dossiers under discussion',
+    'blog.article.bilaterali-iii-esercito-cantoni.excerpt': 'The Council of States votes today on the referendum for Bilaterals III, while the National Council examines federal properties for 2026.',
+    'blog.article.bilaterali-iii-esercito-cantoni.imageAlt': 'Swiss Federal Palace in Bern',
 };
 
 export default blogMetaChEn;

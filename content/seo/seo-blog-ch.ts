@@ -92723,6 +92723,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-bilaterali-iii-esercito-cantoni': {
+    title: 'Bilaterali III, esercito e immobili: i dossier in discussione',
+    description: 'Il Consiglio degli Stati decide sul referendum per i Bilaterali III e discute le tutele salariali. Il Nazionale esamina gli immobili federali e il fondo',
+    keywords: 'frontalieri, ticino, svizzera, italia, bilaterali, esercito, immobili, dossier',
+    ogTitle: 'Bilaterali III, esercito e immobili: dossier in votazione',
+    ogDescription: 'Il Parlamento svizzero è impegnato su più fronti: dai Bilaterali III con la decisione sul referendum e le tutele salariali, all\'esame del messaggio sugli immobili federali 2026 e il controverso fondo per i danni da terremoti. Sul tavolo anche',
+    canonicalPath: '/articoli-svizzera/bilaterali-iii-esercito-cantoni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bilaterali III, esercito e immobili: i dossier in discussione",
+      "description": "Il Consiglio degli Stati decide sul referendum per i Bilaterali III e discute le tutele salariali. Il Nazionale esamina gli immobili federali e il fondo",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bilaterali-iii-esercito-cantoni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale svizzero a Berna"
+      },
+      "datePublished": "2026-09-30T07:37:01+00:00",
+      "dateModified": "2026-09-30T07:37:01+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/bilaterali-iii-esercito-cantoni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

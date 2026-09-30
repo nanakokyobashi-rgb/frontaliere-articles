@@ -7151,6 +7151,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.sanita-svizzera-costi-analisi.title': 'Système de santé suisse : combien payons-nous et que pouvons-nous apprendre',
     'blog.article.sanita-svizzera-costi-analisi.excerpt': 'Analyse des coûts de santé : la prime moyenne au Tessin atteint 519,90 francs en 2027. Comparaisons, efficacité et mise en perspective des données de l\'OCDE.',
     'blog.article.sanita-svizzera-costi-analisi.imageAlt': 'Vue d\'un hôpital suisse moderne avec un paysage urbain.',
+    'blog.article.bilaterali-iii-esercito-cantoni.title': 'Bilatérales III, armée et immobilier : les dossiers en discussion',
+    'blog.article.bilaterali-iii-esercito-cantoni.excerpt': 'Le Conseil des États vote aujourd\'hui sur le référendum concernant les Bilatérales III, tandis que le Conseil national examine les immeubles fédéraux pour 2026.',
+    'blog.article.bilaterali-iii-esercito-cantoni.imageAlt': 'Palais fédéral à Berne',
 };
 
 export default blogMetaChFr;

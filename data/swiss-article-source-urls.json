@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/gr%3a-lieve-calo-prezzo-elettricit%c3%a0%2c-famiglia-paga-20-franchi-in-meno/91970350": {
-    "articleId": "grigioni-luce-risparmio-20-franchi-optima",
-    "ts": "2026-08-28T13:02:21.704Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/transizione-energetica%3a-buoni-voti-a-svizzera-malgrado-eolico%2c-ses/91969197": {
     "articleId": "transizione-energetica-svizzera-ses-2025",
     "ts": "2026-08-28T13:09:10.820Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/rubriche/ospite/1953606/essere-svizzera-franchi-cure-ticino-sistema-paesi-sanita-costa-cittadino": {
     "articleId": "sanita-svizzera-costi-analisi",
     "ts": "2026-09-30T06:59:17.848Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1953654/bilaterali-canicola-iii-esercito-accordi": {
+    "articleId": "bilaterali-iii-esercito-cantoni",
+    "ts": "2026-09-30T07:37:01.296Z",
     "keyForm": 2
   }
 }

@@ -7151,6 +7151,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.sanita-svizzera-costi-analisi.title': 'Schweizer Gesundheitswesen: Wie viel wir bezahlen und was wir lernen können',
     'blog.article.sanita-svizzera-costi-analisi.excerpt': 'Analyse der Gesundheitskosten: Die durchschnittliche Prämie im Tessin erreicht 2027 519,90 Franken. Vergleiche, Effizienz und OECD-Daten im Vergleich.',
     'blog.article.sanita-svizzera-costi-analisi.imageAlt': 'Blick auf ein modernes Schweizer Krankenhaus mit Stadtlandschaft.',
+    'blog.article.bilaterali-iii-esercito-cantoni.title': 'Bilaterale III, Armee und Immobilien: die zur Diskussion stehenden Dossiers',
+    'blog.article.bilaterali-iii-esercito-cantoni.excerpt': 'Der Ständerat stimmt heute über das Referendum für die Bilateralen III ab, während der Nationalrat die Bundesimmobilien für 2026 prüft.',
+    'blog.article.bilaterali-iii-esercito-cantoni.imageAlt': 'Bundeshaus in Bern',
 };
 
 export default blogMetaChDe;
