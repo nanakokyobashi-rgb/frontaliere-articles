@@ -2416,6 +2416,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'consiglio-nazionale-terremoti-immobili': { it: 'consiglio-nazionale-terremoti-immobili', en: 'swiss-parliament-rejects-earthquake-property-fund', de: 'nationalrat-ablehnung-erdbebenversicherung-gebaeude', fr: 'conseil-national-rejet-fonds-seisme-biens' },
  'kof-stime-crescita-svizzera': { it: 'kof-stime-crescita-svizzera', en: 'kof-swiss-growth-estimates', de: 'kof-schweizer-wachstumsschaetzungen', fr: 'kof-estimations-croissance-suisse' },
  'analisti-economia-svizzera-settembre': { it: 'analisti-economia-svizzera-settembre', en: 'swiss-economy-analysts-september', de: 'schweizer-wirtschaft-analysten-september', fr: 'economie-suisse-analystes-septembre' },
+ 'bns-acquisti-divise-trimestre': { it: 'bns-acquisti-divise-trimestre', en: 'snb-foreign-currency-purchases-quarter', de: 'snb-devisenkaeufe-quartal', fr: 'bns-achats-devises-trimestre' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

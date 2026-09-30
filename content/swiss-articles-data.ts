@@ -21571,6 +21571,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'bns-acquisti-divise-trimestre',
+    category: 'fiscale',
+    date: '2026-09-30T11:54:17.007Z',
+    image: '/images/blog/bns-acquisti-divise-trimestre.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

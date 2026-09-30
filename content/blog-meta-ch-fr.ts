@@ -7181,6 +7181,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.analisti-economia-svizzera-settembre.title': 'Les analystes tempèrent leurs attentes concernant l\'économie suisse',
     'blog.article.analisti-economia-svizzera-settembre.excerpt': 'À Zurich, l\'indice des perspectives économiques suisses s\'établit à plus 2,6 points en septembre, marquant un recul par rapport à août.',
     'blog.article.analisti-economia-svizzera-settembre.imageAlt': 'Panorama financier à Zurich reflétant les perspectives économiques',
+    'blog.article.bns-acquisti-divise-trimestre.title': 'BNS : les achats de devises ont diminué au deuxième trimestre',
+    'blog.article.bns-acquisti-divise-trimestre.excerpt': 'Au deuxième trimestre, la Banque nationale suisse a acheté des devises étrangères pour 1,4 milliard de francs, en baisse par rapport aux 3,9 milliards des trois premiers mois.',
+    'blog.article.bns-acquisti-divise-trimestre.imageAlt': 'Bâtiment de la Banque nationale suisse à Berne',
 };
 
 export default blogMetaChFr;

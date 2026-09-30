@@ -7181,6 +7181,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.analisti-economia-svizzera-settembre.title': 'Analysten treten bei der Schweizer Konjunktur auf die Bremse.',
     'blog.article.analisti-economia-svizzera-settembre.excerpt': 'In Zürich liegt der Index zu den wirtschaftlichen Aussichten der Schweiz im September bei plus 2,6 Punkten und verzeichnet damit einen Rückgang gegenüber August.',
     'blog.article.analisti-economia-svizzera-settembre.imageAlt': 'Finanzpanorama in Zürich zur Wirtschaftsaussicht in der Schweiz',
+    'blog.article.bns-acquisti-divise-trimestre.title': 'SNB: Devisenkäufe im zweiten Quartal zurückgegangen',
+    'blog.article.bns-acquisti-divise-trimestre.excerpt': 'Im zweiten Quartal hat die Schweizerische Nationalbank Fremdwährungen im Wert von 1,4 Milliarden Franken gekauft, was einem Rückgang gegenüber den 3,9 Milliarden Franken der ersten drei Monate entspricht.',
+    'blog.article.bns-acquisti-divise-trimestre.imageAlt': 'Gebäude der Schweizerischen Nationalbank in Bern',
 };
 
 export default blogMetaChDe;

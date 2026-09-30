@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/ubs-sbarca-su-mercato-obbligazionario-cinese%2c-suo-primo-panda-bond/91971676": {
-    "articleId": "ubs-panda-bond-cina-mercato",
-    "ts": "2026-08-29T03:12:13.288Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/politica/1946725/birsfelden-consiglio-bl-traffico-udc": {
     "articleId": "grigioni-traffico-sviamento-attesa",
     "ts": "2026-08-29T09:26:39.712Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1953732/punti-indice-svizzera-analisti-disoccupazione": {
     "articleId": "analisti-economia-svizzera-settembre",
     "ts": "2026-09-30T11:02:17.395Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/bns%3a-diminuiti-nel-secondo-trimestre-gli-acquisti-di-divise/92143765": {
+    "articleId": "bns-acquisti-divise-trimestre",
+    "ts": "2026-09-30T11:54:17.360Z",
     "keyForm": 2
   }
 }

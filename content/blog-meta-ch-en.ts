@@ -7181,6 +7181,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.analisti-economia-svizzera-settembre.title': 'Analysts rein in their outlook for the Swiss economy',
     'blog.article.analisti-economia-svizzera-settembre.excerpt': 'In Zurich, the index for Swiss economic prospects stands at plus 2,6 points in September, marking a decline compared with August.',
     'blog.article.analisti-economia-svizzera-settembre.imageAlt': 'Financial panorama in Zurich reflecting Swiss economic outlook',
+    'blog.article.bns-acquisti-divise-trimestre.title': 'BNS: foreign currency purchases decreased in the second quarter',
+    'blog.article.bns-acquisti-divise-trimestre.excerpt': 'In the second quarter, the Swiss National Bank purchased foreign currencies for 1,4 billion francs, down from the 3,9 billion in the first three months.',
+    'blog.article.bns-acquisti-divise-trimestre.imageAlt': 'Swiss National Bank building in Bern',
 };
 
 export default blogMetaChEn;
