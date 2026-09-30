@@ -7136,6 +7136,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.lavoro-vaud-regole-salariali.title': 'Löhne und Arbeitsmarkt Waadt: Branchen und Ebenen',
     'blog.article.lavoro-vaud-regole-salariali.excerpt': 'Kein eidgenössischer Mindestlohn: Im Kanton Waadt geht es um Zeitpläne, AHV/BVG-BEITRÄGE, KVG, Steuern und Lebenshaltungskosten.',
     'blog.article.lavoro-vaud-regole-salariali.imageAlt': 'Dokumente zur Analyse von Lohn und Arbeit im Kanton Waadt',
+    'blog.article.lugano-trading-acciaio.title': 'Lugano und das Trading: Stahloligarchen am Ceresio',
+    'blog.article.lugano-trading-acciaio.excerpt': 'Die dritte Folge über das Trading zeichnet den Weg von den Luganer Gesellschaften im postsowjetischen Chaos bis zu den russischen und ukrainischen Stahlmagnaten nach, die sich am Ceresio angesiedelt haben.',
+    'blog.article.lugano-trading-acciaio.imageAlt': 'Luganer See bei Lugano mit finanziellem und industriellem Ambiente',
 };
 
 export default blogMetaChDe;

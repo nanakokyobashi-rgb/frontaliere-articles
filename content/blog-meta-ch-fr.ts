@@ -7136,6 +7136,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.lavoro-vaud-regole-salariali.title': 'Salaires et marché du travail vaudois : secteurs et niveaux',
     'blog.article.lavoro-vaud-regole-salariali.excerpt': 'Pas de salaire minimum fédéral : dans le canton de Vaud, la comparaison passe par les horaires, les cotisations AVS/LPP, LAMal, les impôts et le coût de la vie.',
     'blog.article.lavoro-vaud-regole-salariali.imageAlt': 'Documents pour analyser salaire et travail dans le canton de Vaud',
+    'blog.article.lugano-trading-acciaio.title': 'Lugano et le trading : oligarques de l’acier sur le Ceresio',
+    'blog.article.lugano-trading-acciaio.excerpt': 'Le troisième épisode sur le trading reconstitue le parcours des sociétés luganaises dans le chaos post-URSS jusqu’aux magnats russes et ukrainiens de l’acier installés sur le Ceresio.',
+    'blog.article.lugano-trading-acciaio.imageAlt': 'Rives de Lugano sur le Ceresio dans une atmosphère financière et industrielle',
 };
 
 export default blogMetaChFr;

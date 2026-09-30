@@ -21436,6 +21436,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'lugano-trading-acciaio',
+    category: 'novita',
+    date: '2026-09-30T05:02:48.729Z',
+    image: '/images/blog/lugano-trading-acciaio.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/newsblog/valute-e-frontiere/1946445/le-nuove-banconote-svizzere-prendono-forma-ecco-come-saranno-i-franchi-del-futuro": {
-    "articleId": "banconote-svizzere-decima-serie-2030",
-    "ts": "2026-08-28T06:05:25.997Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/ex-presidente-banchieri-svizzeri-a-processo-per-corruzione/91965610": {
     "articleId": "mirabaud-processo-corruzione-tpf",
     "ts": "2026-08-28T06:16:41.007Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/%22in-parlamento-serve-un-posto-per-dormire%22%2c-dice-esperto/92140460": {
     "articleId": "sonno-deputati-sessioni-federali",
     "ts": "2026-09-29T23:53:14.707Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/economia/economia/1953489/lugano-e-il-selvaggio-est-tra-acciaierie-guerre-e-oligarchi": {
+    "articleId": "lugano-trading-acciaio",
+    "ts": "2026-09-30T05:02:49.086Z",
     "keyForm": 2
   }
 }

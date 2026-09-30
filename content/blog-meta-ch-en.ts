@@ -7136,6 +7136,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.lavoro-vaud-regole-salariali.title': 'Salaries and the labor market in Vaud: sectors and levels',
     'blog.article.lavoro-vaud-regole-salariali.excerpt': 'No federal minimum wage: in the Canton of Vaud, the comparison involves hourly wages, AVS/LPP contributions, LAMal, taxes, and cost of living.',
     'blog.article.lavoro-vaud-regole-salariali.imageAlt': 'Documents for analysing salaries and work in Canton Vaud',
+    'blog.article.lugano-trading-acciaio.title': 'Lugano and trading: steel oligarchs on Lake Ceresio',
+    'blog.article.lugano-trading-acciaio.excerpt': 'The third episode on trading reconstructs the journey from Lugano-based companies amid the post-USSR chaos to Russian and Ukrainian steel tycoons settled on Lake Ceresio.',
+    'blog.article.lugano-trading-acciaio.imageAlt': 'Lugano waterfront on Lake Ceresio with a financial and industrial atmosphere',
 };
 
 export default blogMetaChEn;

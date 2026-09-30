@@ -92528,6 +92528,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-lugano-trading-acciaio': {
+    title: 'Lugano e il trading: oligarchi dell\'acciaio sul Ceresio',
+    description: 'La terza puntata sul trading racconta gli affari delle società luganesi nel caos post-Urss e l\'insediamento sul Ceresio di padroni dell\'acciaio russi e ucraini.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lugano, trading, oligarchi, dell',
+    ogTitle: 'Lugano e il trading: oligarchi dell\'acciaio sul Ceresio',
+    ogDescription: 'Il terzo episodio della serie sul trading segue un percorso in due tempi: le società luganesi fanno affari nel caos post-Urss, mentre i padroni dell\'acciaio russi e ucraini si insediano sul Ceresio. Il materiale non indica nomi, date o importi.',
+    canonicalPath: '/articoli-svizzera/lugano-trading-acciaio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lugano e il trading: oligarchi dell'acciaio sul Ceresio",
+      "description": "La terza puntata sul trading racconta gli affari delle società luganesi nel caos post-Urss e l'insediamento sul Ceresio di padroni dell'acciaio russi e ucraini.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/lugano-trading-acciaio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lungolago di Lugano sul Ceresio in un'atmosfera finanziaria e industriale"
+      },
+      "datePublished": "2026-09-30T05:02:48+00:00",
+      "dateModified": "2026-09-30T05:02:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/lugano-trading-acciaio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

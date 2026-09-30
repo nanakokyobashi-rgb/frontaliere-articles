@@ -2401,6 +2401,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'tirocinio-grigioni-guida-pratica': { it: 'tirocinio-grigioni-guida-pratica', en: 'grisons-apprenticeship-guide', de: 'graubuenden-lehre-berufsbildung', fr: 'grisons-apprentissage-formation' },
  'acquisto-immobile-grigioni-costi': { it: 'acquisto-immobile-grigioni-costi', en: 'graubunden-home-buying-costs', de: 'immobilienkauf-graubuenden-kosten', fr: 'achat-logement-grisons-couts' },
  'lavoro-vaud-regole-salariali': { it: 'lavoro-vaud-regole-salariali', en: 'vaud-labour-market-rules', de: 'waadt-arbeitsmarkt-regeln', fr: 'marche-travail-vaud-regles' },
+ 'lugano-trading-acciaio': { it: 'lugano-trading-acciaio', en: 'lugano-trading-steel-oligarchs', de: 'lugano-trading-stahl-oligarchen', fr: 'lugano-trading-acier-oligarques' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
