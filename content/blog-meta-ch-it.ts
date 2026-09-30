@@ -7130,6 +7130,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.tirocinio-grigioni-guida-pratica.title': 'Apprendistato e formazione professionale nei Grigioni',
     'blog.article.tirocinio-grigioni-guida-pratica.excerpt': 'Guida al tirocinio nel Canton Grigioni: posto, contratto, paga e maturità professionale, con 45 o 50 ore massime e 4 settimane minime.',
     'blog.article.tirocinio-grigioni-guida-pratica.imageAlt': 'Apprendista in un laboratorio di formazione professionale nel Cantone dei Grigioni',
+    'blog.article.acquisto-immobile-grigioni-costi.title': 'Comprare casa Canton Grigioni: prezzi e mutuo ipotecario',
+    'blog.article.acquisto-immobile-grigioni-costi.excerpt': 'Guida all\'acquisto nei Grigioni: prezzo, fondi propri, sostenibilità del mutuo, imposta sui trapassi, spese notarili e fisco su tre livelli.',
+    'blog.article.acquisto-immobile-grigioni-costi.imageAlt': 'Abitazione in un paesaggio alpino dei Grigioni, tema di una guida all\'acquisto immobiliare.',
 };
 
 export default blogMetaChIt;

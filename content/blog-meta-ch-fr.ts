@@ -7130,6 +7130,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.tirocinio-grigioni-guida-pratica.title': 'Apprentissage et formation professionnelle dans les Grisons',
     'blog.article.tirocinio-grigioni-guida-pratica.excerpt': 'Guide de stage dans le canton des Grisons : poste, contrat, salaire et maturité professionnelle, avec 45 ou 50 heures maximum et 4 semaines minimum.',
     'blog.article.tirocinio-grigioni-guida-pratica.imageAlt': 'Apprenti dans un atelier de formation professionnelle des Grisons',
+    'blog.article.acquisto-immobile-grigioni-costi.title': 'Acheter une maison dans le canton des Grisons : prix et prêt hypothécaire',
+    'blog.article.acquisto-immobile-grigioni-costi.excerpt': 'Guide d\'achat dans les Grisons : prix, fonds propres, capacité financière du prêt hypothécaire, impôt sur les mutations, frais notariaux et fiscalité à trois niveaux.',
+    'blog.article.acquisto-immobile-grigioni-costi.imageAlt': 'Maison dans un paysage alpin des Grisons pour illustrer un achat immobilier.',
 };
 
 export default blogMetaChFr;

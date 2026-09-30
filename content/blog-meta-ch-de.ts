@@ -7130,6 +7130,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.tirocinio-grigioni-guida-pratica.title': 'Lehre und Berufsbildung in Graubünden',
     'blog.article.tirocinio-grigioni-guida-pratica.excerpt': 'Leitfaden für die Lehre im Kanton Graubünden: Stelle, Vertrag, Lohn und Berufsmaturität, mit maximal 45 oder 50 Stunden und mindestens 4 Wochen.',
     'blog.article.tirocinio-grigioni-guida-pratica.imageAlt': 'Lernende Person in einer Berufsbildungswerkstatt im Kanton Graubünden',
+    'blog.article.acquisto-immobile-grigioni-costi.title': 'Hauskauf im Kanton Graubünden: Preise und Hypothekarkredit',
+    'blog.article.acquisto-immobile-grigioni-costi.excerpt': 'Leitfaden zum Kauf in Graubünden: Preis, Eigenmittel, Tragbarkeit der Hypothek, Handänderungssteuer, Notariatskosten und Steuerwesen auf drei Ebenen.',
+    'blog.article.acquisto-immobile-grigioni-costi.imageAlt': 'Haus in einer alpinen Landschaft Graubündens als Motiv für einen Immobilienkauf.',
 };
 
 export default blogMetaChDe;

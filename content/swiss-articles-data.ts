@@ -21418,6 +21418,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'acquisto-immobile-grigioni-costi',
+    category: 'pratico',
+    date: '2026-09-30T03:45:35.045Z',
+    image: '/images/blog/acquisto-immobile-grigioni-costi.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

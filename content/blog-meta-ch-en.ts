@@ -7130,6 +7130,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.tirocinio-grigioni-guida-pratica.title': 'Apprenticeships and vocational training in Graubünden',
     'blog.article.tirocinio-grigioni-guida-pratica.excerpt': 'Guide to an apprenticeship in the Canton of Grisons: position, contract, pay and vocational baccalaureate, with maximum 45 or 50 hours and minimum 4 weeks.',
     'blog.article.tirocinio-grigioni-guida-pratica.imageAlt': 'Apprentice in a vocational training workshop in the Canton of Grisons',
+    'blog.article.acquisto-immobile-grigioni-costi.title': 'Buying a home in the Canton of Graubünden: prices and mortgage loans',
+    'blog.article.acquisto-immobile-grigioni-costi.excerpt': 'Buying guide in Graubünden: price, own funds, mortgage affordability, transfer tax, notarial fees and taxation at three levels.',
+    'blog.article.acquisto-immobile-grigioni-costi.imageAlt': 'Home in a Graubünden alpine landscape, illustrating a Swiss property purchase guide.',
 };
 
 export default blogMetaChEn;

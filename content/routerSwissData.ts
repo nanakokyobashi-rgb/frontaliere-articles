@@ -2399,6 +2399,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'sonno-deputati-sessioni-federali': { it: 'sonno-deputati-sessioni-federali', en: 'sleep-deputies-federal-sessions', de: 'schlaf-abgeordnete-bundessitzungen', fr: 'sommeil-deputes-sessions-federales' },
  'fisco-eredita-soletta': { it: 'fisco-eredita-soletta', en: 'solothurn-inheritance-gift-tax', de: 'erbschafts-schenkungssteuer-solothurn', fr: 'impot-succession-donation-soleure' },
  'tirocinio-grigioni-guida-pratica': { it: 'tirocinio-grigioni-guida-pratica', en: 'grisons-apprenticeship-guide', de: 'graubuenden-lehre-berufsbildung', fr: 'grisons-apprentissage-formation' },
+ 'acquisto-immobile-grigioni-costi': { it: 'acquisto-immobile-grigioni-costi', en: 'graubunden-home-buying-costs', de: 'immobilienkauf-graubuenden-kosten', fr: 'achat-logement-grisons-couts' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
