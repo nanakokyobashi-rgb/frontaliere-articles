@@ -7223,6 +7223,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.dibattito-nazionale-siccita-rosti.title': 'Sécheresse et canicule : le débat au Conseil national',
     'blog.article.dibattito-nazionale-siccita-rosti.excerpt': 'Le Conseil national discute de douze interpellations sur la sécheresse. Rösti annonce une nouvelle stratégie de gestion de l’eau pour l’année prochaine.',
     'blog.article.dibattito-nazionale-siccita-rosti.imageAlt': 'Vue panoramique d\'une ville suisse pendant une période de sécheresse estivale.',
+    'blog.article.firma-parentale-berna.title': 'Congé parental : 112\'517 signatures pour 18 semaines',
+    'blog.article.firma-parentale-berna.excerpt': 'À Berne, 112\'517 signatures ont été déposées pour demander 18 semaines de congé parental aussi bien pour les mères que pour les pères.',
+    'blog.article.firma-parentale-berna.imageAlt': 'Signatures pour l\'initiative sur le congé parental à la Chancellerie fédérale suisse',
 };
 
 export default blogMetaChFr;

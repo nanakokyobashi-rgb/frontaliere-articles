@@ -7223,6 +7223,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.dibattito-nazionale-siccita-rosti.title': 'Drought and heatwave: the debate in the National Council',
     'blog.article.dibattito-nazionale-siccita-rosti.excerpt': 'The National Council is debating twelve parliamentary questions on the drought. Rösti announces a new water strategy for next year.',
     'blog.article.dibattito-nazionale-siccita-rosti.imageAlt': 'Panoramic view of a Swiss city during a summer drought period.',
+    'blog.article.firma-parentale-berna.title': 'Parental Leave: 112,517 signatures in support of 18 weeks',
+    'blog.article.firma-parentale-berna.excerpt': 'In Bern, 112\'517 signatures were submitted calling for 18 weeks of parental leave for both mothers and fathers.',
+    'blog.article.firma-parentale-berna.imageAlt': 'Signatures for the parental leave initiative submitted to the Swiss Federal Chancellery',
 };
 
 export default blogMetaChEn;

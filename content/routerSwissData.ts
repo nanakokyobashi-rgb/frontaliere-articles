@@ -2430,6 +2430,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'premi-malati-ticino-aumento-franchi-2027': { it: 'premi-malati-ticino-aumento-franchi-2027', en: 'health-insurance-premiums-ticino-increase-francs-2027', de: 'krankenkassenpraemien-tessin-erhoehung-franken-2027', fr: 'primes-assurance-maladie-tessin-augmentation-francs-2027' },
  'analisti-congiuntura-svizzera-settembre': { it: 'analisti-congiuntura-svizzera-settembre', en: 'swiss-economic-outlook-september-analysts', de: 'schweizer-konjunktur-september-analysten', fr: 'conjoncture-suisse-septembre-analystes' },
  'dibattito-nazionale-siccita-rosti': { it: 'dibattito-nazionale-siccita-rosti', en: 'national-drought-debate-rosti', de: 'nationale-duerre-debatte-rosti', fr: 'debat-national-secheresse-rosti' },
+ 'firma-parentale-berna': { it: 'firma-parentale-berna', en: 'parental-leave-signatures-bern', de: 'elternzeit-unterschriften-bern', fr: 'conge-parental-signatures-berne' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

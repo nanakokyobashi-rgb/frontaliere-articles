@@ -7223,6 +7223,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.dibattito-nazionale-siccita-rosti.title': 'Siccità e canicola: il dibattito in Consiglio nazionale',
     'blog.article.dibattito-nazionale-siccita-rosti.excerpt': 'Il Consiglio nazionale discute dodici interpellanze sulla siccità. Rösti annuncia una nuova strategia idrica per il prossimo anno.',
     'blog.article.dibattito-nazionale-siccita-rosti.imageAlt': 'Vista panoramica di una città svizzera durante un periodo di siccità estiva.',
+    'blog.article.firma-parentale-berna.title': 'Congedo parentale: 112\'517 firme per 18 settimane',
+    'blog.article.firma-parentale-berna.excerpt': 'A Berna sono state depositate 112\'517 firme per chiedere 18 settimane di congedo parentale sia per le madri sia per i padri.',
+    'blog.article.firma-parentale-berna.imageAlt': 'Firme per l\'iniziativa sul congedo parentale depositate alla Cancelleria federale',
 };
 
 export default blogMetaChIt;

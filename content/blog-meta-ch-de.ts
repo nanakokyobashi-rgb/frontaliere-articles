@@ -7223,6 +7223,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.dibattito-nazionale-siccita-rosti.title': 'Dürre und Hitzewelle: Die Debatte im Nationalrat',
     'blog.article.dibattito-nazionale-siccita-rosti.excerpt': 'Der Nationalrat erörtert zwölf Interpellationen zur Dürre. Rösti kündigt eine neue Wasserstrategie für das kommende Jahr an.',
     'blog.article.dibattito-nazionale-siccita-rosti.imageAlt': 'Panoramablick auf eine Schweizer Stadt während einer sommerlichen Dürreperiode.',
+    'blog.article.firma-parentale-berna.title': 'Elternzeit: 112\'517 Unterschriften für 18 Wochen',
+    'blog.article.firma-parentale-berna.excerpt': 'In Bern wurden 112\'517 Unterschriften eingereicht, um 18 Wochen Elternurlaub sowohl für Mütter als auch für Väter zu fordern.',
+    'blog.article.firma-parentale-berna.imageAlt': 'Unterschriften für die Elternzeit-Initiative bei der Schweizerischen Bundeskanzlei',
 };
 
 export default blogMetaChDe;
