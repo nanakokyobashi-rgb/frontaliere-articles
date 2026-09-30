@@ -7172,6 +7172,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.premi-slembeck-terapie-terminali.title': 'Health insurance premiums: discounts for foregoing end-of-life treatments',
     'blog.article.premi-slembeck-terapie-terminali.excerpt': 'Tilman Slembeck proposes lower premiums for those who voluntarily give up life-prolonging therapies in the terminal phase.',
     'blog.article.premi-slembeck-terapie-terminali.imageAlt': 'Reduced health insurance premiums proposal in Switzerland',
+    'blog.article.consiglio-nazionale-terremoti-immobili.title': 'National Council rejects article on earthquakes',
+    'blog.article.consiglio-nazionale-terremoti-immobili.excerpt': 'The National Council rejected the constitutional article on earthquake damage to properties: responsibility remains with private owners.',
+    'blog.article.consiglio-nazionale-terremoti-immobili.imageAlt': 'Residential buildings in Switzerland and earthquake coverage debate',
 };
 
 export default blogMetaChEn;

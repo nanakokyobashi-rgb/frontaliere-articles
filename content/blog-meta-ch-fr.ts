@@ -7172,6 +7172,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.premi-slembeck-terapie-terminali.title': 'Primes maladie : rabais si refus de soins finaux',
     'blog.article.premi-slembeck-terapie-terminali.excerpt': 'Tilman Slembeck propose des primes moins élevées pour les personnes qui renoncent volontairement aux thérapies de prolongement de la vie en phase terminale.',
     'blog.article.premi-slembeck-terapie-terminali.imageAlt': 'Proposition de primes d\'assurance maladie réduites en Suisse',
+    'blog.article.consiglio-nazionale-terremoti-immobili.title': 'Le Conseil national rejette l\'article sur les séismes',
+    'blog.article.consiglio-nazionale-terremoti-immobili.excerpt': 'Le Conseil national a rejeté l\'article constitutionnel sur les dommages causés par les séismes aux immeubles : la responsabilité reste aux propriétaires privés.',
+    'blog.article.consiglio-nazionale-terremoti-immobili.imageAlt': 'Immeubles résidentiels en Suisse et débat sur l\'assurance tremblement de terre',
 };
 
 export default blogMetaChFr;

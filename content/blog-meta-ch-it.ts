@@ -7172,6 +7172,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.premi-slembeck-terapie-terminali.title': 'Premi cassa malati: sconti per rinuncia a cure terminali',
     'blog.article.premi-slembeck-terapie-terminali.excerpt': 'Tilman Slembeck propone premi più bassi per chi rinuncia volontariamente alle terapie di prolungamento della vita nella fase terminale.',
     'blog.article.premi-slembeck-terapie-terminali.imageAlt': 'Proposta di premi ridotti per terapie terminali in Svizzera',
+    'blog.article.consiglio-nazionale-terremoti-immobili.title': 'Consiglio nazionale boccia l\'articolo sui terremoti',
+    'blog.article.consiglio-nazionale-terremoti-immobili.excerpt': 'Il Consiglio nazionale ha bocciato l\'articolo costituzionale sui danni da terremoti agli immobili: la responsabilità resta ai proprietari privati.',
+    'blog.article.consiglio-nazionale-terremoti-immobili.imageAlt': 'Edifici residenziali in Svizzera e discussione sulla copertura per terremoti',
 };
 
 export default blogMetaChIt;

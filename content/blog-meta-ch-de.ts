@@ -7172,6 +7172,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.premi-slembeck-terapie-terminali.title': 'Krankenkassenprämien: Rabatt für Verzicht auf Pflege',
     'blog.article.premi-slembeck-terapie-terminali.excerpt': 'Tilman Slembeck schlägt niedrigere Prämien für diejenigen vor, die in der terminalen Phase freiwillig auf lebensverlängernde Therapien verzichten.',
     'blog.article.premi-slembeck-terapie-terminali.imageAlt': 'Vorschlag für reduzierte Krankenkassenprämien in der Schweiz',
+    'blog.article.consiglio-nazionale-terremoti-immobili.title': 'Nationalrat lehnt Artikel zu Erdbeben ab',
+    'blog.article.consiglio-nazionale-terremoti-immobili.excerpt': 'Der Nationalrat hat den Verfassungsartikel zu Erdbebenschäden an Immobilien abgelehnt: Die Verantwortung bleibt bei den privaten Eigentümern.',
+    'blog.article.consiglio-nazionale-terremoti-immobili.imageAlt': 'Wohngebäude in der Schweiz und Debatte über Erdbebenversicherung',
 };
 
 export default blogMetaChDe;
