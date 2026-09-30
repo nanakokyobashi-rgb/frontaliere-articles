@@ -7253,6 +7253,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.preventivo-2027-ticino-polemica.title': 'Budget 2027 : déficit de 98,5 millions et polémiques',
     'blog.article.preventivo-2027-ticino-polemica.excerpt': 'Le Conseil d\'État présente un budget prévisionnel affichant un déficit de 98,5 millions. Les Verts critiquent la manœuvre, la qualifiant d\'électorale et dépourvue d\'investissements.',
     'blog.article.preventivo-2027-ticino-polemica.imageAlt': 'Bâtiment du gouvernement à Bellinzone',
+    'blog.article.chiusura-scuole-ftan-tarasp.title': 'Scuol ferme les écoles de Ftan et Tarasp, les parents recourent',
+    'blog.article.chiusura-scuole-ftan-tarasp.excerpt': 'La municipalité de Scuol souhaite fermer deux sites d’ici 2028/29 pour des raisons financières et démographiques. Les parents ont déposé un recours auprès du Tribunal d’appel des Grisons.',
+    'blog.article.chiusura-scuole-ftan-tarasp.imageAlt': 'École de village alpin dans les Grisons avec des enfants qui marchent',
 };
 
 export default blogMetaChFr;

@@ -2440,6 +2440,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'guida-ag-sconti-trasporti': { it: 'guida-ag-sconti-trasporti', en: 'swiss-public-transport-passes-discounts', de: 'schweizer-oev-abos-rabatte', fr: 'abonnements-transports-suisses-remises' },
  'licenziamento-swisscom-bulle': { it: 'licenziamento-swisscom-bulle', en: 'swisscom-dismissal-bulle', de: 'swisscom-entlassung-bulle', fr: 'licenciement-swisscom-bulle' },
  'preventivo-2027-ticino-polemica': { it: 'preventivo-2027-ticino-polemica', en: 'ticino-2027-budget-criticism', de: 'kanton-tessin-budget-2027-kritik', fr: 'budget-tessin-2027-critique' },
+ 'chiusura-scuole-ftan-tarasp': { it: 'chiusura-scuole-ftan-tarasp', en: 'school-closure-ftan-tarasp', de: 'schulschliessung-ftan-tarasp', fr: 'fermeture-ecoles-ftan-tarasp' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

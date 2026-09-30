@@ -94049,6 +94049,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-chiusura-scuole-ftan-tarasp': {
+    title: 'Scuol chiude scuole a Ftan e Tarasp, genitori ricorrono',
+    description: 'Il Comune di Scuol pianifica la chiusura delle scuole di Ftan e Tarasp entro il 2028/29. Genitori ricorrono al Tribunale d\'appello citando il contratto',
+    keywords: 'frontalieri, ticino, svizzera, italia, scuol, chiude, scuole, ftan',
+    ogTitle: 'Scuol: chiusura scuole Ftan e Tarasp, genitori fanno ricorso',
+    ogDescription: 'Il Municipio di Scuol annuncia la chiusura delle sedi scolastiche di Ftan e Tarasp entro l\'anno scolastico 2028/2029 per motivi finanziari e demografici. Un gruppo di genitori ha presentato ricorso al Tribunale d\'appello dei Grigioni, sostenendo',
+    canonicalPath: '/articoli-svizzera/chiusura-scuole-ftan-tarasp/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Scuol chiude scuole a Ftan e Tarasp, genitori ricorrono",
+      "description": "Il Comune di Scuol pianifica la chiusura delle scuole di Ftan e Tarasp entro il 2028/29. Genitori ricorrono al Tribunale d'appello citando il contratto",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/chiusura-scuole-ftan-tarasp.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scuola di villaggio alpino nei Grigioni con bambini che camminano"
+      },
+      "datePublished": "2026-09-30T22:52:15+00:00",
+      "dateModified": "2026-09-30T22:52:15+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/chiusura-scuole-ftan-tarasp/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

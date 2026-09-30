@@ -7253,6 +7253,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.preventivo-2027-ticino-polemica.title': 'Preventivo 2027: disavanzo di 98,5 milioni e polemiche',
     'blog.article.preventivo-2027-ticino-polemica.excerpt': 'Il Consiglio di Stato presenta un preventivo con 98,5 milioni di disavanzo. I Verdi criticano la manovra definendola elettorale e priva di investimenti.',
     'blog.article.preventivo-2027-ticino-polemica.imageAlt': 'Sede del Consiglio di Stato a Bellinzona',
+    'blog.article.chiusura-scuole-ftan-tarasp.title': 'Scuol chiude scuole a Ftan e Tarasp, genitori ricorrono',
+    'blog.article.chiusura-scuole-ftan-tarasp.excerpt': 'Il Municipio di Scuol vuole chiudere due sedi entro il 2028/29 per motivi finanziari e demografici. I genitori hanno presentato ricorso al Tribunale d\'appello dei Grigioni.',
+    'blog.article.chiusura-scuole-ftan-tarasp.imageAlt': 'Scuola di villaggio alpino nei Grigioni con bambini che camminano',
 };
 
 export default blogMetaChIt;

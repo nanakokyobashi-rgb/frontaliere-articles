@@ -7253,6 +7253,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.preventivo-2027-ticino-polemica.title': '2027 Budget: A Deficit of 98.5 Million and Controversy',
     'blog.article.preventivo-2027-ticino-polemica.excerpt': 'The State Council presents a budget with a deficit of 98.5 million. The Greens criticize the measure, calling it electoral and lacking investment.',
     'blog.article.preventivo-2027-ticino-polemica.imageAlt': 'Government building in Bellinzona',
+    'blog.article.chiusura-scuole-ftan-tarasp.title': 'Scuol closes schools in Ftan and Tarasp, parents appeal',
+    'blog.article.chiusura-scuole-ftan-tarasp.excerpt': 'The Scuol municipal government plans to close two schools by 2028/29 for financial and demographic reasons. Parents have filed an appeal with the Graubünden Court of Appeals.',
+    'blog.article.chiusura-scuole-ftan-tarasp.imageAlt': 'Alpine village school in Grisons with children walking',
 };
 
 export default blogMetaChEn;

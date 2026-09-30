@@ -7253,6 +7253,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.preventivo-2027-ticino-polemica.title': 'Haushaltsentwurf 2027: Defizit von 98,5 Millionen und Kontroversen',
     'blog.article.preventivo-2027-ticino-polemica.excerpt': 'Der Staatsrat legt einen Haushaltsentwurf mit einem Defizit von 98,5 Millionen vor. Die Grünen kritisieren den Haushaltsplan als wahltaktisch motiviert und investitionsarm.',
     'blog.article.preventivo-2027-ticino-polemica.imageAlt': 'Regierungsgebäude in Bellinzona',
+    'blog.article.chiusura-scuole-ftan-tarasp.title': 'Scuol schließt Schulen in Ftan und Tarasp, Eltern legen Widerspruch ein',
+    'blog.article.chiusura-scuole-ftan-tarasp.excerpt': 'Der Gemeindevorstand von Scuol will aus finanziellen und demografischen Gründen bis 2028/29 zwei Schulstandorte schliessen. Die Eltern haben beim Appellationsgericht des Kantons Graubünden Rekurs eingelegt.',
+    'blog.article.chiusura-scuole-ftan-tarasp.imageAlt': 'Alpines Dorfschulhaus in Graubünden mit spazierenden Kindern',
 };
 
 export default blogMetaChDe;
