@@ -7259,6 +7259,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.coop-millesimo-supermercato.title': 'Coop reaches 1\'000 supermarkets in Switzerland',
     'blog.article.coop-millesimo-supermercato.excerpt': 'Tomorrow, Coop’s 1,000th store will open in Emmen: 2,500 m². CEO Philipp Wyss announces new store openings and highlights the group’s leadership position in Ticino.',
     'blog.article.coop-millesimo-supermercato.imageAlt': 'Coop supermarket network in Switzerland, with a store in an urban setting',
+    'blog.article.guida-assenze-famiglia-svizzera.title': 'Parental leave in Switzerland: duration and IPG allowance',
+    'blog.article.guida-assenze-famiglia-svizzera.excerpt': 'In Switzerland, maternity leave lasts 14 weeks with an 80% IPG benefit; paternity leave lasts 2 weeks.',
+    'blog.article.guida-assenze-famiglia-svizzera.imageAlt': 'Parent planning Swiss parental leave with a calendar and documents at home',
 };
 
 export default blogMetaChEn;

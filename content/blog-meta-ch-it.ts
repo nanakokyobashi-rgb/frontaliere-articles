@@ -7259,6 +7259,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.coop-millesimo-supermercato.title': 'Coop raggiunge 1\'000 supermercati in Svizzera',
     'blog.article.coop-millesimo-supermercato.excerpt': 'Domani apre a Emmen il millesimo punto vendita Coop: 2\'500 m². Il CEO Philipp Wyss annuncia nuove aperture e indica il gruppo come leader in Ticino.',
     'blog.article.coop-millesimo-supermercato.imageAlt': 'Rete di supermercati Coop in Svizzera, con un punto vendita in un contesto urbano',
+    'blog.article.guida-assenze-famiglia-svizzera.title': 'Congedo parentale in Svizzera: durata e indennità IPG',
+    'blog.article.guida-assenze-famiglia-svizzera.excerpt': 'In Svizzera il congedo di maternità dura 14 settimane con indennità all\'80% IPG; il congedo di paternità dura 2 settimane.',
+    'blog.article.guida-assenze-famiglia-svizzera.imageAlt': 'Genitore pianifica il congedo parentale con calendario e documenti svizzeri',
 };
 
 export default blogMetaChIt;

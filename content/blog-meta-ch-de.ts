@@ -7259,6 +7259,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.coop-millesimo-supermercato.title': 'Coop erreicht die Marke von 1\'000 Supermärkten in der Schweiz',
     'blog.article.coop-millesimo-supermercato.excerpt': 'Morgen eröffnet in Emmen die tausendste Coop-Verkaufsstelle: 2\'500 m². CEO Philipp Wyss kündigt neue Eröffnungen an und bezeichnet die Gruppe als Marktführerin im Tessin.',
     'blog.article.coop-millesimo-supermercato.imageAlt': 'Coop-Supermarktnetz in der Schweiz mit einer Filiale in einem städtischen Umfeld',
+    'blog.article.guida-assenze-famiglia-svizzera.title': 'Elternurlaub in der Schweiz: Dauer und EO-Entschädigung',
+    'blog.article.guida-assenze-famiglia-svizzera.excerpt': 'In der Schweiz beträgt der Mutterschaftsurlaub 14 Wochen mit einer Entschädigung in Höhe von 80 % der IPG; der Vaterschaftsurlaub dauert 2 Wochen.',
+    'blog.article.guida-assenze-famiglia-svizzera.imageAlt': 'Elternteil plant den Elternurlaub mit Kalender und Schweizer Unterlagen',
 };
 
 export default blogMetaChDe;
