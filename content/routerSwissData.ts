@@ -2420,6 +2420,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'zugo-de-escalation-cyberspazio': { it: 'zugo-de-escalation-cyberspazio', en: 'zug-cyber-de-escalation', de: 'zug-cyber-deeskalation', fr: 'zoug-cyber-deescalade' },
  'lamal-franchigie-sussidio-basel': { it: 'lamal-franchigie-sussidio-basel', en: 'basel-city-health-premium-reduction', de: 'krankenkassenpraemien-basel-stadt', fr: 'primes-assurance-maladie-bale-ville' },
  'tassa-prodotti-zuccherati-svizzera': { it: 'tassa-prodotti-zuccherati-svizzera', en: 'sugary-products-tax-switzerland', de: 'steuer-zuckerhaltige-produkte-schweiz', fr: 'taxe-produits-sucres-suisse' },
+ 'franchigie-lamal-basilea-citta': { it: 'franchigie-lamal-basilea-citta', en: 'basel-city-lamal-premium-reduction', de: 'basel-stadt-krankenkassenpraemien', fr: 'primes-lamal-bale-ville' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

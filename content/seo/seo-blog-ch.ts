@@ -93269,6 +93269,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-franchigie-lamal-basilea-citta': {
+    title: 'Premi cassa malati canton Basilea Città: riduzione premi',
+    description: 'Premi cassa malati nel canton Basilea Città: franchigie adulti, modelli alternativi, obbligo LAMal entro tre mesi per residenti, riduzione cantonale dei premi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, premi, cassa, malati, canton',
+    ogTitle: 'Basilea Città: premi LAMal e riduzione',
+    ogDescription: 'LAMal obbligatoria per i residenti a Basilea Città: guida pratica a cantone, regione, franchigie adulte, modelli alternativi e riduzione dei premi come sussidio cantonale, con stipula entro tre mesi dall\'arrivo.',
+    canonicalPath: '/articoli-svizzera/franchigie-lamal-basilea-citta/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Premi cassa malati canton Basilea Città: riduzione premi",
+      "description": "Premi cassa malati nel canton Basilea Città: franchigie adulti, modelli alternativi, obbligo LAMal entro tre mesi per residenti, riduzione cantonale dei premi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/franchigie-lamal-basilea-citta.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Confronto dei premi della cassa malati e riduzione dei premi in Svizzera"
+      },
+      "datePublished": "2026-09-30T13:45:58+00:00",
+      "dateModified": "2026-09-30T13:45:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/franchigie-lamal-basilea-citta/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

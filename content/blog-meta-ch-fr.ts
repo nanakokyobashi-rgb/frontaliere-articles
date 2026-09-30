@@ -7193,6 +7193,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.tassa-prodotti-zuccherati-svizzera.title': 'Lutte contre l\'obésité : les Suisses ne veulent pas de taxe',
     'blog.article.tassa-prodotti-zuccherati-svizzera.excerpt': '68% des personnes interrogées à Zurich et en Suisse rejettent une taxe sur le sucre, le sel ou les graisses. Les données du suivi Gfs.Bern et les préférences en matière de prévention.',
     'blog.article.tassa-prodotti-zuccherati-svizzera.imageAlt': 'Surveillance à Zurich sur les produits sucrés et les taxes alimentaires en Suisse',
+    'blog.article.franchigie-lamal-basilea-citta.title': 'Primes d’assurance-maladie du canton de Bâle-Ville : réduction des primes',
+    'blog.article.franchigie-lamal-basilea-citta.excerpt': 'Dans le canton de Bâle-Ville, les primes LAMal dépendent du canton et de la région : franchises pour adultes, modèles alternatifs et réduction des primes sous forme de subside cantonal.',
+    'blog.article.franchigie-lamal-basilea-citta.imageAlt': 'Comparaison des primes d\'assurance-maladie suisses et de leur réduction',
 };
 
 export default blogMetaChFr;

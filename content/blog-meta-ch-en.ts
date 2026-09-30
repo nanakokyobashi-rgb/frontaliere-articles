@@ -7193,6 +7193,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.tassa-prodotti-zuccherati-svizzera.title': 'Fighting Obesity: The Swiss Don\'t Want a Tax',
     'blog.article.tassa-prodotti-zuccherati-svizzera.excerpt': '68% of respondents in Zurich and Switzerland reject a tax on sugar, salt or fat. The data from Gfs.Bern’s monitoring and preferences regarding prevention.',
     'blog.article.tassa-prodotti-zuccherati-svizzera.imageAlt': 'Zurich monitor on sugary products and food taxes in Switzerland',
+    'blog.article.franchigie-lamal-basilea-citta.title': 'Health Insurance Premiums in the Canton of Basel-Stadt: Premium Reduction',
+    'blog.article.franchigie-lamal-basilea-citta.excerpt': 'In the canton of Basel-Stadt, KVG premiums vary by canton and region: adult deductibles, alternative plans, and premium reductions as a cantonal subsidy.',
+    'blog.article.franchigie-lamal-basilea-citta.imageAlt': 'Comparing Swiss health insurance premiums and premium reduction',
 };
 
 export default blogMetaChEn;

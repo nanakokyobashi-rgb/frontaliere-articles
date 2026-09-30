@@ -7193,6 +7193,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.tassa-prodotti-zuccherati-svizzera.title': 'Kampf gegen Fettleibigkeit: Die Schweizer wollen keine Steuer',
     'blog.article.tassa-prodotti-zuccherati-svizzera.excerpt': '68 % der Befragten in Zürich und in der Schweiz lehnen eine Steuer auf Zucker, Salz oder Fette ab. Die Daten der Gfs.Bern-Umfrage und die Präferenzen in Bezug auf Prävention.',
     'blog.article.tassa-prodotti-zuccherati-svizzera.imageAlt': 'Monitoring in Zürich zu zuckerhaltigen Produkten und Lebensmittelsteuern in der Schweiz',
+    'blog.article.franchigie-lamal-basilea-citta.title': 'Krankenkassenprämien im Kanton Basel-Stadt: Prämienverbilligung',
+    'blog.article.franchigie-lamal-basilea-citta.excerpt': 'Im Kanton Basel-Stadt richten sich die LAMal-Prämien nach Kanton und Region: Erwachsenenfranchisen, alternative Modelle und Prämienverbilligung als kantonale Subvention.',
+    'blog.article.franchigie-lamal-basilea-citta.imageAlt': 'Vergleich der Schweizer Krankenkassenprämien und Prämienverbilligung',
 };
 
 export default blogMetaChDe;

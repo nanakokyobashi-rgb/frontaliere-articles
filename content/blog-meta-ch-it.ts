@@ -7193,6 +7193,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.tassa-prodotti-zuccherati-svizzera.title': 'Lotta a obesità: gli svizzeri non vogliono una tassa',
     'blog.article.tassa-prodotti-zuccherati-svizzera.excerpt': 'Il 68% degli interpellati a Zurigo e in Svizzera rifiuta una tassa su zucchero, sale o grassi. I dati del monitoraggio Gfs.Bern e le preferenze sulla prevenzione.',
     'blog.article.tassa-prodotti-zuccherati-svizzera.imageAlt': 'Monitoraggio a Zurigo sui prodotti zuccherati e le tasse sugli alimenti in Svizzera',
+    'blog.article.franchigie-lamal-basilea-citta.title': 'Premi cassa malati canton Basilea Città: riduzione premi',
+    'blog.article.franchigie-lamal-basilea-citta.excerpt': 'Nel canton Basilea Città, i premi LAMal seguono cantone e regione: franchigie adulti, modelli alternativi e riduzione dei premi come sussidio cantonale.',
+    'blog.article.franchigie-lamal-basilea-citta.imageAlt': 'Confronto dei premi della cassa malati e riduzione dei premi in Svizzera',
 };
 
 export default blogMetaChIt;
