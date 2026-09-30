@@ -7154,6 +7154,18 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.bilaterali-iii-esercito-cantoni.title': 'Bilatérales III, armée et immobilier : les dossiers en discussion',
     'blog.article.bilaterali-iii-esercito-cantoni.excerpt': 'Le Conseil des États vote aujourd\'hui sur le référendum concernant les Bilatérales III, tandis que le Conseil national examine les immeubles fédéraux pour 2026.',
     'blog.article.bilaterali-iii-esercito-cantoni.imageAlt': 'Palais fédéral à Berne',
+    'blog.article.tutela-salariale-camere.title': 'Protection salariale : compromis approuvé sur les Bilaterali III',
+    'blog.article.tutela-salariale-camere.excerpt': 'Dans le débat sur les Bilaterali III, le Conseil des États approuve la mesure 14 : protection contre le licenciement pour les représentants du personnel et les représentants syndicaux.',
+    'blog.article.tutela-salariale-camere.imageAlt': 'Cadre institutionnel suisse à Berne lié au vote national sur la protection salariale.',
+    'blog.article.record-nuove-imprese-ticino.title': 'Record de nouvelles entreprises, le Tessin est en tête',
+    'blog.article.record-nuove-imprese-ticino.excerpt': 'Au cours des neuf premiers mois, l\'Institut pour jeunes entrepreneurs enregistre 41\'716 nouvelles entreprises en Suisse. Le Tessin mène le classement avec une croissance de 9,3 %.',
+    'blog.article.record-nuove-imprese-ticino.imageAlt': 'Nouvelles entreprises dans le registre du commerce suisse avec le Tessin en tête',
+    'blog.article.scuola-vallese-cicli-iscrizione.title': 'Système scolaire du canton du Valais : inscription et cycles',
+    'blog.article.scuola-vallese-cicli-iscrizione.excerpt': 'Cycles, âge d\'inscription, calendrier, langues et passage aux écoles du secondaire II dans le système scolaire du Valais.',
+    'blog.article.scuola-vallese-cicli-iscrizione.imageAlt': 'Bâtiment scolaire dans le canton du Valais',
+    'blog.article.parita-tasse-atenei-ue.title': 'Universités : frais identiques pour les étudiants suisses et de l\'UE',
+    'blog.article.parita-tasse-atenei-ue.excerpt': 'Le Conseil des États approuve l\'égalité entre les étudiants suisses et ceux de l\'UE. La Confédération devrait couvrir pendant quatre ans la baisse des recettes des cantons.',
+    'blog.article.parita-tasse-atenei-ue.imageAlt': 'Étudiants devant une université suisse après la décision sur les taxes égales pour les citoyens de l\'UE',
 };
 
 export default blogMetaChFr;

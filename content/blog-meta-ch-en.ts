@@ -7154,6 +7154,18 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.bilaterali-iii-esercito-cantoni.title': 'Bilaterals III, army and properties: the dossiers under discussion',
     'blog.article.bilaterali-iii-esercito-cantoni.excerpt': 'The Council of States votes today on the referendum for Bilaterals III, while the National Council examines federal properties for 2026.',
     'blog.article.bilaterali-iii-esercito-cantoni.imageAlt': 'Swiss Federal Palace in Bern',
+    'blog.article.tutela-salariale-camere.title': 'Wage protection: compromise approved on Bilaterals III',
+    'blog.article.tutela-salariale-camere.excerpt': 'In the debate on Bilaterals III, the Council of States approves measure 14: protection against dismissal for employee and trade union representatives.',
+    'blog.article.tutela-salariale-camere.imageAlt': 'Swiss institutional setting in Bern linked to the national wage protection vote.',
+    'blog.article.record-nuove-imprese-ticino.title': 'Record number of new businesses, Ticino leads',
+    'blog.article.record-nuove-imprese-ticino.excerpt': 'In the first nine months, the Institute for Young Entrepreneurs recorded 41\'716 new companies in Switzerland. Ticino leads the ranking with growth of 9,3%.',
+    'blog.article.record-nuove-imprese-ticino.imageAlt': 'New businesses in the Swiss commercial register with Ticino leading',
+    'blog.article.scuola-vallese-cicli-iscrizione.title': 'Valais cantonal school system: enrollment and cycles',
+    'blog.article.scuola-vallese-cicli-iscrizione.excerpt': 'Cycles, enrollment age, calendar, languages and transition to upper secondary schools in the school system of Valais.',
+    'blog.article.scuola-vallese-cicli-iscrizione.imageAlt': 'School building in the canton of Valais',
+    'blog.article.parita-tasse-atenei-ue.title': 'University: equal tuition fees for Swiss and EU students',
+    'blog.article.parita-tasse-atenei-ue.excerpt': 'The Council of States approves equal treatment for Swiss and EU students. The Confederation should cover the Cantons\' lost revenue for four years.',
+    'blog.article.parita-tasse-atenei-ue.imageAlt': 'Students outside a Swiss university after the vote on equal tuition for EU citizens',
 };
 
 export default blogMetaChEn;

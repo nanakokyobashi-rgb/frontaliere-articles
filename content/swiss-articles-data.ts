@@ -21490,6 +21490,42 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'tutela-salariale-camere',
+    category: 'novita',
+    date: '2026-09-30T07:51:45.596Z',
+    image: '/images/blog/tutela-salariale-camere.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'record-nuove-imprese-ticino',
+    category: 'novita',
+    date: '2026-09-30T08:06:58.068Z',
+    image: '/images/blog/record-nuove-imprese-ticino.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'scuola-vallese-cicli-iscrizione',
+    category: 'pratico',
+    date: '2026-09-30T08:39:22.953Z',
+    image: '/images/blog/scuola-vallese-cicli-iscrizione.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'parita-tasse-atenei-ue',
+    category: 'novita',
+    date: '2026-09-30T08:53:43.570Z',
+    image: '/images/blog/parita-tasse-atenei-ue.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

@@ -2407,6 +2407,10 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'fueglistaler-errori-rete-ferroviaria': { it: 'fueglistaler-errori-rete-ferroviaria', en: 'fueglistaler-railway-network-errors', de: 'fueglistaler-fehler-schienennetz', fr: 'fueglistaler-erreurs-reseau-ferroviaire' },
  'sanita-svizzera-costi-analisi': { it: 'sanita-svizzera-costi-analisi', en: 'swiss-healthcare-costs-analysis', de: 'schweizer-gesundheitskosten-analyse', fr: 'analyse-couts-sante-suisse' },
  'bilaterali-iii-esercito-cantoni': { it: 'bilaterali-iii-esercito-cantoni', en: 'bilaterals-iii-army-cantons', de: 'bilaterale-iii-armee-kantone', fr: 'bilaterales-iii-armee-cantons' },
+ 'tutela-salariale-camere': { it: 'tutela-salariale-camere', en: 'wage-protection-parliament', de: 'lohnschutz-parlament', fr: 'protection-salariale-parlement' },
+ 'record-nuove-imprese-ticino': { it: 'record-nuove-imprese-ticino', en: 'record-new-businesses-ticino', de: 'rekord-neue-unternehmen-tessin', fr: 'record-nouvelles-entreprises-tessin' },
+ 'scuola-vallese-cicli-iscrizione': { it: 'scuola-vallese-cicli-iscrizione', en: 'valais-school-enrolment-cycles', de: 'walliser-schulsystem-anmeldung-zyklen', fr: 'ecole-valais-inscription-cycles' },
+ 'parita-tasse-atenei-ue': { it: 'parita-tasse-atenei-ue', en: 'equal-tuition-swiss-eu-students', de: 'gleiche-studiengebuehren-schweiz-eu', fr: 'meme-taxes-etudiants-suisse-ue' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

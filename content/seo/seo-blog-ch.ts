@@ -92762,6 +92762,162 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tutela-salariale-camere': {
+    title: 'Tutela salariale: compromesso approvato sui Bilaterali III',
+    description: 'Consiglio degli Stati: misura 14 dei Bilaterali III approvata con 26 voti contro 19; protezione dal licenziamento per rappresentanti del personale e sindacali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, tutela, salariale, compromesso, approvato',
+    ogTitle: 'Bilaterali III: approvata la misura 14',
+    ogDescription: 'Nel dibattito sui Bilaterali III, il Consiglio degli Stati ha accolto il compromesso sulla tutela salariale. La misura 14, approvata con 26 voti contro 19, riguarda la protezione dal licenziamento per rappresentanti del personale e sindacali.',
+    canonicalPath: '/articoli-svizzera/tutela-salariale-camere/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tutela salariale: compromesso approvato sui Bilaterali III",
+      "description": "Consiglio degli Stati: misura 14 dei Bilaterali III approvata con 26 voti contro 19; protezione dal licenziamento per rappresentanti del personale e sindacali.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/tutela-salariale-camere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scorcio istituzionale svizzero a Berna, richiamo al voto sulla tutela salariale."
+      },
+      "datePublished": "2026-09-30T07:51:45+00:00",
+      "dateModified": "2026-09-30T07:51:45+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/tutela-salariale-camere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-record-nuove-imprese-ticino': {
+    title: 'Record di nuove imprese, il Ticino è in testa | Frontaliere Ticino',
+    description: 'Nei primi nove mesi record di nuove imprese in Svizzera con 41\'716 iscrizioni. Il Ticino guida la classifica con una crescita del 9,3% secondo l\'IFJ.',
+    keywords: 'frontalieri, ticino, svizzera, italia, record, nuove, imprese, testa',
+    ogTitle: 'Record di nuove imprese nei primi nove mesi: il Ticino guida la classifica',
+    ogDescription: 'L\'Istituto per giovani imprenditori registra 41\'716 nuove aziende in Svizzera. Il Ticino è in testa con una crescita del 9,3%, mentre Zurigo registra un calo.',
+    canonicalPath: '/articoli-svizzera/record-nuove-imprese-ticino/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Record di nuove imprese, il Ticino è in testa",
+      "description": "Nei primi nove mesi record di nuove imprese in Svizzera con 41'716 iscrizioni. Il Ticino guida la classifica con una crescita del 9,3% secondo l'IFJ.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/record-nuove-imprese-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Nuove imprese nel registro di commercio svizzero con il Ticino in testa"
+      },
+      "datePublished": "2026-09-30T08:06:58+00:00",
+      "dateModified": "2026-09-30T08:06:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/record-nuove-imprese-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-scuola-vallese-cicli-iscrizione': {
+    title: 'Sistema scolastico canton Vallese: iscrizione e cicli',
+    description: 'Guida pratica al sistema scolastico del Cantone di Vallese: iscrizione, cicli, calendario, lingue di insegnamento e passaggio alle scuole medie superiori.',
+    keywords: 'frontalieri, ticino, svizzera, italia, sistema, scolastico, canton, vallese',
+    ogTitle: 'Sistema scolastico canton Vallese: iscrizione e cicli',
+    ogDescription: 'Cicli, età di iscrizione, calendario scolastico e lingue di insegnamento: una guida al percorso della scuola dell\'obbligo nel Cantone di Vallese, fino al passaggio alle scuole medie superiori, con una lettura pratica per orientarsi.',
+    canonicalPath: '/articoli-svizzera/scuola-vallese-cicli-iscrizione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Sistema scolastico canton Vallese: iscrizione e cicli",
+      "description": "Guida pratica al sistema scolastico del Cantone di Vallese: iscrizione, cicli, calendario, lingue di insegnamento e passaggio alle scuole medie superiori.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/scuola-vallese-cicli-iscrizione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio scolastico nel Cantone di Vallese"
+      },
+      "datePublished": "2026-09-30T08:39:23+00:00",
+      "dateModified": "2026-09-30T08:39:23+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/scuola-vallese-cicli-iscrizione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-parita-tasse-atenei-ue': {
+    title: 'Università: tasse uguali per studenti svizzeri e UE',
+    description: 'Il Consiglio degli Stati approva la parità nelle tasse tra studenti svizzeri e UE. Dal 2025, i due politecnici federali hanno portato le rette a 2.190 franchi',
+    keywords: 'frontalieri, ticino, svizzera, italia, università, tasse, uguali, studenti',
+    ogTitle: 'Parità nelle tasse per studenti svizzeri e UE',
+    ogDescription: 'Il voto del Consiglio degli Stati segue i negoziati tra Berna e Bruxelles: università e scuole universitarie professionali dovranno applicare la stessa tassa a svizzeri e cittadini UE; per gli Stati terzi resterà una retta almeno tre volte superiore.',
+    canonicalPath: '/articoli-svizzera/parita-tasse-atenei-ue/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Università: tasse uguali per studenti svizzeri e UE",
+      "description": "Il Consiglio degli Stati approva la parità nelle tasse tra studenti svizzeri e UE. Dal 2025, i due politecnici federali hanno portato le rette a 2.190 franchi",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/parita-tasse-atenei-ue.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Studenti davanti a un'università svizzera dopo il voto sulle tasse per i cittadini UE"
+      },
+      "datePublished": "2026-09-30T08:53:43+00:00",
+      "dateModified": "2026-09-30T08:53:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/parita-tasse-atenei-ue/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
