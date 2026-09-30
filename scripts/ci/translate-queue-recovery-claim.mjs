@@ -56,9 +56,19 @@ const MODES = new Set(['observe_only', 'claim_and_rerun']);
 const PHASES = new Set(['observe', 'claim']);
 
 function expectedLivenessGets(liveness) {
+  // Il guard e' fuori dal mutex: il watchdog ispeziona una GET jobs per ogni
+  // run workflow `in_progress`, ma `counts.active` contiene solo i detentori
+  // del job pesante dopo la distinzione guard/translate. Usa quindi la
+  // cardinalita' osservata, non il bound massimo, per verificare il budget.
+  const activeWorkflowRuns = liveness?.counts?.activeWorkflowRuns;
+  if (Number.isSafeInteger(activeWorkflowRuns)
+      && activeWorkflowRuns >= 0
+      && activeWorkflowRuns <= MAX_ACTIVE_JOB_GET_REQUESTS) {
+    return MAX_LIVENESS_STATUS_GET_REQUESTS + activeWorkflowRuns;
+  }
   const active = liveness?.counts?.active;
   return MAX_LIVENESS_STATUS_GET_REQUESTS
-    + (active > 0 ? MAX_ACTIVE_JOB_GET_REQUESTS : 0);
+    + (active > 0 ? 1 : 0);
 }
 
 export const RECOVERY_REASON_CODES = Object.freeze([
