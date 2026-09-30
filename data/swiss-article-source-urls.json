@@ -1,19 +1,4 @@
 {
-  "https://www.rsi.ch/s/4011503": {
-    "articleId": "berna-rinnova-festival-cinematografici",
-    "ts": "2026-08-27T22:40:23.550Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/attualita/1946469/reno-svizzera-ricerca-cinque-allarme": {
-    "articleId": "reno-navigabilita-futuro-allarme",
-    "ts": "2026-08-28T03:54:52.342Z",
-    "keyForm": 2
-  },
-  "https://www.seco.admin.ch/it/newnsb/m0qcd0qstxt6a_arjs6u0": {
-    "articleId": "esposizioni-nazionali-messaggio-2026",
-    "ts": "2026-08-28T04:51:43.079Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/newsblog/valute-e-frontiere/1946445/le-nuove-banconote-svizzere-prendono-forma-ecco-come-saranno-i-franchi-del-futuro": {
     "articleId": "banconote-svizzere-decima-serie-2030",
     "ts": "2026-08-28T06:05:25.997Z",
@@ -2497,6 +2482,21 @@
   "https://www.swissinfo.ch/ita/gr%3a-l%27aeroporto-di-samedan-aspetta-di-poter-decollare/92140070": {
     "articleId": "samedan-aeroporto-rinnovo-2025",
     "ts": "2026-09-29T22:17:12.765Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1953495/armi-svizzere-berna-vuole-facilitare-l-esportazione-di-materiale-bellico": {
+    "articleId": "revisione-legge-materiale-bellico",
+    "ts": "2026-09-29T22:44:38.902Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/berna-vuole-allentare-le-restrizioni-sulle-esportazione-di-armi/92139782": {
+    "articleId": "revisione-legge-armi-votazione-novembre",
+    "ts": "2026-09-29T23:20:15.815Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/%22in-parlamento-serve-un-posto-per-dormire%22%2c-dice-esperto/92140460": {
+    "articleId": "sonno-deputati-sessioni-federali",
+    "ts": "2026-09-29T23:53:14.707Z",
     "keyForm": 2
   }
 }

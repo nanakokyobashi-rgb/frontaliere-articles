@@ -92255,6 +92255,162 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-revisione-legge-materiale-bellico': {
+    title: 'Esportazione armi: al voto la revisione della legge',
+    description: 'Berna propone di allentare le regole sull\'esportazione di materiale bellico per difesa e occupazione. Votazione popolare il 29 novembre. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, esportazione, armi, voto, revisione',
+    ogTitle: 'Armi svizzere: Berna vuole facilitare l\'esportazione',
+    ogDescription: 'Il Consiglio federale invita ad approvare la revisione della legge sul materiale bellico il 29 novembre per tutelare l\'industria e la sicurezza nazionale.',
+    canonicalPath: '/articoli-svizzera/revisione-legge-materiale-bellico/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Esportazione armi: al voto la revisione della legge",
+      "description": "Berna propone di allentare le regole sull'esportazione di materiale bellico per difesa e occupazione. Votazione popolare il 29 novembre. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/revisione-legge-materiale-bellico.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna, sede del governo svizzero"
+      },
+      "datePublished": "2026-09-29T22:44:38+00:00",
+      "dateModified": "2026-09-29T22:44:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/revisione-legge-materiale-bellico/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-revisione-legge-armi-votazione-novembre': {
+    title: 'Berna allenta restrizioni esportazioni armi | Frontaliere Ticino',
+    description: 'Voto popolare 29 novembre per revisione legge materiale bellico: più flessibilità per esportazioni verso 17 Paesi UE e altri Stati. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, berna, allenta, restrizioni, esportazioni',
+    ogTitle: 'Berna allenta restrizioni esportazioni armi',
+    ogDescription: 'Il 29 novembre si voterà la revisione della legge sul materiale bellico che introduce maggiore flessibilità per esportazioni e riesportazioni verso Paesi con regimi simili a quello svizzero.',
+    canonicalPath: '/articoli-svizzera/revisione-legge-armi-votazione-novembre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Berna allenta restrizioni esportazioni armi",
+      "description": "Voto popolare 29 novembre per revisione legge materiale bellico: più flessibilità per esportazioni verso 17 Paesi UE e altri Stati. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/revisione-legge-armi-votazione-novembre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista di Lugano con bandiera svizzera e documenti sulle esportazioni di armi"
+      },
+      "datePublished": "2026-09-29T23:20:15+00:00",
+      "dateModified": "2026-09-29T23:20:15+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/revisione-legge-armi-votazione-novembre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-sonno-deputati-sessioni-federali': {
+    title: 'Parlamento: sonno breve in sessione, proposti power nap',
+    description: 'Indagine Uni Friburgo: 16 parlamentari dormono 6h10min in sessione (-50min). Esperto propone stanze per power nap a Palazzo federale per mantenere efficienza',
+    keywords: 'frontalieri, ticino, svizzera, italia, parlamento, sonno, breve, sessione',
+    ogTitle: 'Parlamento: sonno breve in sessione, proposti power nap',
+    ogDescription: 'Durante le sessioni i parlamentari dormono 50 minuti in meno del solito (6h10min). Il ricercatore Björn Rasch propone stanze per power nap a Palazzo federale: la stanchezza porta a decisioni più rischiose e minore capacità di assimilare informazioni',
+    canonicalPath: '/articoli-svizzera/sonno-deputati-sessioni-federali/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Parlamento: sonno breve in sessione, proposti power nap",
+      "description": "Indagine Uni Friburgo: 16 parlamentari dormono 6h10min in sessione (-50min). Esperto propone stanze per power nap a Palazzo federale per mantenere efficienza",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/sonno-deputati-sessioni-federali.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Stanza per il riposo a Palazzo federale con poltrone comode e luce soffusa"
+      },
+      "datePublished": "2026-09-29T23:53:14+00:00",
+      "dateModified": "2026-09-29T23:53:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/sonno-deputati-sessioni-federali/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-fisco-eredita-soletta': {
+    title: 'Canton Soletta: imposta di successione e donazione',
+    description: 'Aliquote, parentela, esenzioni e termini per leggere l\'imposta di successione e donazione nel Cantone di Soletta nel quadro fiscale svizzero. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, canton, soletta, imposta, successione',
+    ogTitle: 'Soletta: imposta di successione e donazione',
+    ogDescription: 'Il quadro svizzero distingue imposta federale diretta, fiscalità cantonale e comunale. Per Soletta la lettura passa da grado di parentela, coniuge, discendenti, dichiarazione e termini, senza confondere le competenze.',
+    canonicalPath: '/articoli-svizzera/fisco-eredita-soletta/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Canton Soletta: imposta di successione e donazione",
+      "description": "Aliquote, parentela, esenzioni e termini per leggere l'imposta di successione e donazione nel Cantone di Soletta nel quadro fiscale svizzero. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/fisco-eredita-soletta.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio cantonale svizzero e documenti fiscali per successioni e donazioni"
+      },
+      "datePublished": "2026-09-30T00:20:55+00:00",
+      "dateModified": "2026-09-30T00:20:55+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/fisco-eredita-soletta/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
