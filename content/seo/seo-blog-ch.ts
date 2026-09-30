@@ -93932,6 +93932,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-guida-ag-sconti-trasporti': {
+    title: 'Trasporti pubblici Svizzera: abbonamenti, AG e sconti',
+    description: 'AG, mezza tariffa, abbonamenti cantonali e comunitari: guida al confronto tra costi, sconti e vantaggi del trasporto pubblico in Svizzera. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, trasporti, pubblici, abbonamenti, sconti',
+    ogTitle: 'Trasporti pubblici Svizzera: abbonamenti e sconti',
+    ogDescription: 'AG, mezza tariffa, formule cantonali e comunitarie: una guida per confrontare costi, sconti e vantaggi degli abbonamenti di trasporto pubblico in Svizzera, con un metodo pratico per leggere le diverse opzioni.',
+    canonicalPath: '/articoli-svizzera/guida-ag-sconti-trasporti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Trasporti pubblici Svizzera: abbonamenti, AG e sconti",
+      "description": "AG, mezza tariffa, abbonamenti cantonali e comunitari: guida al confronto tra costi, sconti e vantaggi del trasporto pubblico in Svizzera. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/guida-ag-sconti-trasporti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Guida agli abbonamenti del trasporto pubblico in Svizzera"
+      },
+      "datePublished": "2026-09-30T21:38:03+00:00",
+      "dateModified": "2026-09-30T21:38:03+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/guida-ag-sconti-trasporti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

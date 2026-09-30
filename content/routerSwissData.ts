@@ -2437,6 +2437,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'aerodromo-kaegiswil-sospensione-voli': { it: 'aerodromo-kaegiswil-sospensione-voli', en: 'flight-suspension-in-kagiswil-until-20-nov-2026', de: 'flugausfall-in-kagiswil-bis-zum-20-november-2026', fr: 'suspension-des-vols-a-kagiswil-jusqu-au-20-nov-2026' },
  'custodia-bambini-vallese-sussidi': { it: 'custodia-bambini-vallese-sussidi', en: 'childcare-costs-valais', de: 'kinderbetreuung-kosten-wallis', fr: 'garde-enfants-couts-valais' },
  'ubs-artisan-partners-chiede-di-lasciare-svizzera': { it: 'ubs-artisan-partners-chiede-di-lasciare-svizzera', en: 'ubs-artisan-partners-asks-to-leave-switzerland', de: 'ubs-artisan-partners-bittet-schweiz-zu-verlassen', fr: 'ubs-artisan-partners-demande-de-quitter-la-suisse' },
+ 'guida-ag-sconti-trasporti': { it: 'guida-ag-sconti-trasporti', en: 'swiss-public-transport-passes-discounts', de: 'schweizer-oev-abos-rabatte', fr: 'abonnements-transports-suisses-remises' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

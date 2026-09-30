@@ -1,6 +1,5 @@
 {
   "keywords": [
-    "vivere a Rovellasca e lavorare in Ticino da frontaliere",
     "permesso di domicilio C canton Basilea Città requisiti e domanda",
     "asilo nido e custodia bambini canton Basilea Città costi",
     "comprare casa canton Basilea Città prezzi e mutuo ipotecario",
@@ -499,7 +498,8 @@
     "premi cassa malati canton Vallese e riduzione premi",
     "vivere a Mandello del Lario e lavorare in Ticino da frontaliere",
     "mercato degli affitti canton Grigioni canoni medi e diritto di locazione",
-    "vivere a Varese e lavorare in Ticino da frontaliere"
+    "vivere a Varese e lavorare in Ticino da frontaliere",
+    "asilo nido e custodia bambini canton Vallese costi"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -851,6 +851,10 @@
     "frontaliere::https://www.tio.ch/ticino/attualita/1953716/troppi-psicoterapeuti-a-carico-della-cassa-malati": {
       "section": "frontaliere",
       "ts": 1790758674242
+    },
+    "svizzera::https://www.admin.ch/it/newnsb/l6pd-kzlx5xp": {
+      "section": "svizzera",
+      "ts": 1790803336619
     }
   }
 }

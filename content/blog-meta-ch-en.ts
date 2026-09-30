@@ -7244,6 +7244,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.ubs-artisan-partners-chiede-di-lasciare-svizzera.title': 'UBS: Artisan Partners Calls on the Bank to Leave Switzerland',
     'blog.article.ubs-artisan-partners-chiede-di-lasciare-svizzera.excerpt': 'Artisan Partners asks UBS to leave Switzerland. The two funds manage more than 60 million shares of Switzerland\'s largest bank.',
     'blog.article.ubs-artisan-partners-chiede-di-lasciare-svizzera.imageAlt': 'UBS banking headquarters in Switzerland with financial buildings',
+    'blog.article.guida-ag-sconti-trasporti.title': 'Public Transportation in Switzerland: Passes, AG, and Discounts',
+    'blog.article.guida-ag-sconti-trasporti.excerpt': 'AG, half fare, cantonal and community subscriptions: a guide to comparing the costs, discounts and benefits of public transport in Switzerland.',
+    'blog.article.guida-ag-sconti-trasporti.imageAlt': 'Guide to Swiss public transport subscriptions',
 };
 
 export default blogMetaChEn;
