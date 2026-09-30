@@ -3488,7 +3488,7 @@
       "mode": "identical",
       "baseline": {
         "site": "17ca314ad5cde009",
-        "corpus": "31dd43ebf424896a",
+        "corpus": "17ca314ad5cde009",
         "alignedAt": "2026-09-30",
         "forcedAt": "2026-09-30T01:19:21.840Z"
       }
@@ -3499,7 +3499,7 @@
       "mode": "identical",
       "baseline": {
         "site": "b93682868ace3ab1",
-        "corpus": "48e2a6293fbc4d1a",
+        "corpus": "b93682868ace3ab1",
         "alignedAt": "2026-09-30",
         "forcedAt": "2026-09-30T01:19:24.024Z"
       }
@@ -3510,7 +3510,7 @@
       "mode": "identical",
       "baseline": {
         "site": "125562df5d861867",
-        "corpus": "44f1a54d1138dccd",
+        "corpus": "125562df5d861867",
         "alignedAt": "2026-09-30",
         "forcedAt": "2026-09-30T01:19:24.309Z"
       }
@@ -3571,7 +3571,7 @@
       "mode": "identical",
       "baseline": {
         "site": "fc679addfcc9950c",
-        "corpus": "86cc7b140ecff402",
+        "corpus": "fc679addfcc9950c",
         "alignedAt": "2026-09-30",
         "forcedAt": "2026-09-30T01:19:24.556Z"
       }
@@ -3582,7 +3582,7 @@
       "mode": "identical",
       "baseline": {
         "site": "4eb86d2cb073a3f3",
-        "corpus": "54c93d5714d1c383",
+        "corpus": "4eb86d2cb073a3f3",
         "alignedAt": "2026-09-30",
         "forcedAt": "2026-09-30T01:19:24.815Z"
       }
@@ -3593,7 +3593,7 @@
       "mode": "identical",
       "baseline": {
         "site": "e6ae8a53cbfb439c",
-        "corpus": "810ccc1b17e72c18",
+        "corpus": "e6ae8a53cbfb439c",
         "alignedAt": "2026-09-30",
         "forcedAt": "2026-09-30T01:19:25.026Z"
       }
@@ -3644,7 +3644,7 @@
       "mode": "identical",
       "baseline": {
         "site": "df868822fe147128",
-        "corpus": "fc0ba7c17d5b9ad5",
+        "corpus": "df868822fe147128",
         "alignedAt": "2026-09-30",
         "forcedAt": "2026-09-30T01:19:25.307Z"
       }
@@ -3685,7 +3685,7 @@
       "mode": "identical",
       "baseline": {
         "site": "d5ba6504e1e5626d",
-        "corpus": "578f432eb871492c",
+        "corpus": "d5ba6504e1e5626d",
         "alignedAt": "2026-09-30",
         "forcedAt": "2026-09-30T01:19:25.557Z"
       }
@@ -3706,9 +3706,9 @@
       "mode": "identical",
       "reason": "Riallineato il 2026-09-24 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono ora byte-identici fra sito e corpus, con il roster corrente di 621 crawler.",
       "baseline": {
-        "site": "bafb23d924eed2bc",
-        "corpus": "bafb23d924eed2bc",
-        "alignedAt": "2026-09-29"
+        "site": "6641756d933d0e5e",
+        "corpus": "6641756d933d0e5e",
+        "alignedAt": "2026-09-30"
       }
     },
     {
@@ -4425,7 +4425,7 @@
       "mode": "identical",
       "baseline": {
         "site": "8d1e2cbd716683ba",
-        "corpus": "2cbbbc8807a5859e",
+        "corpus": "8d1e2cbd716683ba",
         "alignedAt": "2026-09-30",
         "forcedAt": "2026-09-30T01:19:25.786Z"
       }
