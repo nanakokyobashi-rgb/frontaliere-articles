@@ -12307,6 +12307,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.frontalieri-vendemmia-ticino-stipendio.title': 'Frontaliers pour les vendanges au Tessin : 15 francs de l’heure',
     'blog.article.frontalieri-vendemmia-ticino-stipendio.excerpt': 'Au Tessin, 48 travailleurs frontaliers, pour la plupart originaires du Varesotto, travaillent aux vendanges dans les collines du Mendrisiotto. Le salaire net horaire s’élève à environ 15 francs, avec des contrats qui durent en moyenne un mois et demi.',
     'blog.article.frontalieri-vendemmia-ticino-stipendio.imageAlt': 'Travailleurs frontaliers pendant les vendanges sur les collines du Mendrisiotto, Tessin.',
+    'blog.article.preventivo-2027-disavanzo.title': 'Budget 2027 du Tessin : déficit d’exploitation de 98,5 mln',
+    'blog.article.preventivo-2027-disavanzo.excerpt': 'Le budget prévisionnel 2027 prévoit des dépenses de 4,73 mrd, des recettes de 4,63 mrd et un déficit d’exercice de 98,5 mln, avec un déficit total de 161,4 mln.',
+    'blog.article.preventivo-2027-disavanzo.imageAlt': 'Vue panoramique de Lugano au lever du soleil, montagnes et lac reflétés.',
 };
 
 export default blogMetaFr;

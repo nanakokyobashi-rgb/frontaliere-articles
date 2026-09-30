@@ -12306,6 +12306,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.frontalieri-vendemmia-ticino-stipendio.title': 'Frontalieri vendemmia Ticino: 15 franchi l\'ora',
     'blog.article.frontalieri-vendemmia-ticino-stipendio.excerpt': 'In Ticino, 48 frontalieri, per lo più dal Varesotto, lavorano alla vendemmia nei colli del Mendrisiotto. La paga netta oraria si aggira sui 15 franchi, con contratti che durano mediamente un mese e mezzo.',
     'blog.article.frontalieri-vendemmia-ticino-stipendio.imageAlt': 'Frontalieri al lavoro durante la vendemmia sui colli del Mendrisiotto, Ticino.',
+    'blog.article.preventivo-2027-disavanzo.title': 'Preventivo 2027 Ticino: disavanzo d’esercizio di 98,5 mln',
+    'blog.article.preventivo-2027-disavanzo.excerpt': 'Il preventivo 2027 prevede uscite per 4,73 mrd, entrate 4,63 mrd e un disavanzo d’esercizio di 98,5 mln, con un disavanzo totale di 161,4 mln.',
+    'blog.article.preventivo-2027-disavanzo.imageAlt': 'Vista panoramica di Lugano al sorgere del sole, con le montagne e il lago riflessi.',
 };
 
 export default blogMetaIt;
