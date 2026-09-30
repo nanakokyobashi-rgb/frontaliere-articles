@@ -97495,6 +97495,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-carugo-ticino-fisco': {
+    title: 'Vivere a Carugo e lavorare in Ticino da frontaliere',
+    description: 'Vivere a Carugo e lavorare in Ticino da frontaliere: accordo 2024, imposta alla fonte, esenzione di €7\'500, franchigia di €10\'000 e LAMal. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, carugo, lavorare, accordo',
+    ogTitle: 'Carugo-Ticino: guida fiscale per frontalieri',
+    ogDescription: 'Chi valuta di vivere a Carugo e lavorare in Ticino deve distinguere vecchi e nuovi frontalieri, leggere la trattenuta svizzera e separare AVS, LPP e LAMal. Una guida pratica per evitare confronti fiscali errati.',
+    canonicalPath: '/articoli-frontaliere/carugo-ticino-fisco',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Carugo e lavorare in Ticino da frontaliere",
+      "description": "Vivere a Carugo e lavorare in Ticino da frontaliere: accordo 2024, imposta alla fonte, esenzione di €7'500, franchigia di €10'000 e LAMal. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/carugo-ticino-fisco.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Strada di confine in Ticino al mattino per un lavoratore frontaliere"
+      },
+      "datePublished": "2026-09-30T15:40:04+00:00",
+      "dateModified": "2026-09-30T15:40:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/carugo-ticino-fisco/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

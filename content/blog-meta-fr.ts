@@ -12315,6 +12315,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-09-30.imageAlt': 'Les chiffres du jour pour les frontaliers – 30 septembre 2026 : attentes aux douanes, prix de l\'essence, taux CHF-EUR et offres d\'emploi',
     'blog.article.bollettino-frontaliere-2026-09-30.seoDescription': 'Bulletin du frontalier du 30 septembre 2026 : les files aux douanes ce matin, l\'essence la moins chère, taux franc-euro et nouvelles offres d\'emploi en Suisse.',
     'blog.article.bollettino-frontaliere-2026-09-30.ogDescription': 'Les chiffres du 30 septembre 2026 pour les frontaliers : combien de temps on attend ce matin à chaque douane, où l\'essence coûte le moins cher, ce que vaut le franc aujourd\'hui et combien d\'offres d\'emploi sont parues en Suisse.',
+    'blog.article.carugo-ticino-fisco.title': 'Vivre à Carugo et travailler au Tessin en tant que frontalier',
+    'blog.article.carugo-ticino-fisco.excerpt': 'Accord sur les travailleurs frontaliers en vigueur depuis 2024 : impôt uniquement en Suisse, exonération de €7\'500 pour les anciens et franchise de €10\'000 pour les nouveaux.',
+    'blog.article.carugo-ticino-fisco.imageAlt': 'Route frontalière au Tessin le matin avec un travailleur frontalier',
 };
 
 export default blogMetaFr;

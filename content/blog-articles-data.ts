@@ -36943,6 +36943,15 @@ const RAW_ARTICLES = [
  authorSlug: 'samuele-valente',
  authorName: 'Samuele Valente',
  },
+ {
+ id: 'carugo-ticino-fisco',
+ category: 'fiscale',
+ date: '2026-09-30T15:40:04.415Z',
+ image: '/images/blog/carugo-ticino-fisco.webp',
+ hasCalculator: true,
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

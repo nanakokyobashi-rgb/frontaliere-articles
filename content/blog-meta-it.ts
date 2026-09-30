@@ -12314,6 +12314,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-09-30.imageAlt': 'I numeri del giorno per i frontalieri – 30 settembre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro',
     'blog.article.bollettino-frontaliere-2026-09-30.seoDescription': 'Bollettino frontalieri del 30 settembre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
     'blog.article.bollettino-frontaliere-2026-09-30.ogDescription': 'I numeri del 30 settembre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    'blog.article.carugo-ticino-fisco.title': 'Vivere a Carugo e lavorare in Ticino da frontaliere',
+    'blog.article.carugo-ticino-fisco.excerpt': 'Accordo frontalieri in vigore dal 2024: imposta solo in Svizzera, esenzione €7\'500 per i vecchi e franchigia €10\'000 per i nuovi.',
+    'blog.article.carugo-ticino-fisco.imageAlt': 'Strada di confine in Ticino al mattino per un lavoratore frontaliere',
 };
 
 export default blogMetaIt;

@@ -12313,6 +12313,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-09-30.imageAlt': 'The day\'s numbers for cross-border commuters – September 30, 2026: border waits, fuel prices, CHF-EUR rate and job listings',
     'blog.article.bollettino-frontaliere-2026-09-30.seoDescription': 'Cross-border brief, September 30, 2026: queues at the crossings this morning, where fuel is cheapest, the franc-euro rate and new job postings in Switzerland.',
     'blog.article.bollettino-frontaliere-2026-09-30.ogDescription': 'The numbers for September 30, 2026, for cross-border commuters: how long the queue is at each crossing this morning, which towns have the cheapest fuel, what the franc is worth today and how many Swiss jobs went up.',
+    'blog.article.carugo-ticino-fisco.title': 'Living in Carugo and working in Ticino as a cross-border worker',
+    'blog.article.carugo-ticino-fisco.excerpt': 'Cross-border worker agreement effective as of 2024: taxation only in Switzerland, a €7,500 exemption for existing workers and a €10,000 exemption for new workers.',
+    'blog.article.carugo-ticino-fisco.imageAlt': 'Morning border road in Ticino with a cross-border commuter',
 };
 
 export default blogMetaEn;

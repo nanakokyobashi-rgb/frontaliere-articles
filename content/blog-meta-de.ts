@@ -12312,6 +12312,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-09-30.imageAlt': 'Die Zahlen des Tages für Grenzgänger – 30. September 2026: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote',
     'blog.article.bollettino-frontaliere-2026-09-30.seoDescription': 'Grenzgänger-Bulletin vom 30. September 2026: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.',
     'blog.article.bollettino-frontaliere-2026-09-30.ogDescription': 'Die Zahlen vom 30. September 2026 für Grenzgänger: wie lange man heute Morgen an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, was der Franken heute wert ist und wie viele Stellen neu dazugekommen sind.',
+    'blog.article.carugo-ticino-fisco.title': 'In Carugo wohnen und als Grenzgänger im Tessin arbeiten',
+    'blog.article.carugo-ticino-fisco.excerpt': 'Grenzgängerabkommen ab 2024 in Kraft: Besteuerung ausschließlich in der Schweiz, Steuerbefreiung von €7\'500 für die alten Grenzgänger und ein Freibetrag von €10\'000 für die neuen Grenzgänger.',
+    'blog.article.carugo-ticino-fisco.imageAlt': 'Grenzstrasse im Tessin am Morgen mit einem Grenzgänger',
 };
 
 export default blogMetaDe;
