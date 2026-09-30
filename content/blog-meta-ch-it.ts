@@ -7148,6 +7148,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.fueglistaler-errori-rete-ferroviaria.title': 'Füglistaler ammette errori nell\'ampliamento ferroviario',
     'blog.article.fueglistaler-errori-rete-ferroviaria.excerpt': 'L\'ex direttore dell\'UFT critica la pianificazione eccessiva: oltre 100 miliardi di progetti a fronte di 20 miliardi disponibili. Consultazione entro il 9 ottobre.',
     'blog.article.fueglistaler-errori-rete-ferroviaria.imageAlt': 'Treno svizzero in una stazione ferroviaria',
+    'blog.article.sanita-svizzera-costi-analisi.title': 'Sanità svizzera: quanto paghiamo e cosa possiamo imparare',
+    'blog.article.sanita-svizzera-costi-analisi.excerpt': 'Analisi dei costi sanitari: il premio medio in Ticino tocca i 519,90 franchi nel 2027. Confronti, efficienza e dati OCSE a confronto.',
+    'blog.article.sanita-svizzera-costi-analisi.imageAlt': 'Vista di un moderno ospedale svizzero con panorama urbano.',
 };
 
 export default blogMetaChIt;

@@ -7148,6 +7148,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.fueglistaler-errori-rete-ferroviaria.title': 'Füglistaler admet des erreurs dans l\'extension ferroviaire',
     'blog.article.fueglistaler-errori-rete-ferroviaria.excerpt': 'L\'ancien directeur de l\'OFT critique la planification excessive : plus de 100 milliards de projets contre 20 milliards disponibles. Consultation d\'ici au 9 octobre.',
     'blog.article.fueglistaler-errori-rete-ferroviaria.imageAlt': 'Train suisse dans une gare',
+    'blog.article.sanita-svizzera-costi-analisi.title': 'Système de santé suisse : combien payons-nous et que pouvons-nous apprendre',
+    'blog.article.sanita-svizzera-costi-analisi.excerpt': 'Analyse des coûts de santé : la prime moyenne au Tessin atteint 519,90 francs en 2027. Comparaisons, efficacité et mise en perspective des données de l\'OCDE.',
+    'blog.article.sanita-svizzera-costi-analisi.imageAlt': 'Vue d\'un hôpital suisse moderne avec un paysage urbain.',
 };
 
 export default blogMetaChFr;

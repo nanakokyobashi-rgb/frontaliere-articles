@@ -7148,6 +7148,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.fueglistaler-errori-rete-ferroviaria.title': 'Füglistaler admits mistakes in railway expansion',
     'blog.article.fueglistaler-errori-rete-ferroviaria.excerpt': 'The former director of the UFT criticizes excessive planning: over 100 billion in projects against 20 billion available. Consultation by 9 October.',
     'blog.article.fueglistaler-errori-rete-ferroviaria.imageAlt': 'Swiss train at a railway station',
+    'blog.article.sanita-svizzera-costi-analisi.title': 'Swiss healthcare: how much do we pay and what can we learn',
+    'blog.article.sanita-svizzera-costi-analisi.excerpt': 'Analysis of healthcare costs: the average premium in Ticino reaches 519,90 francs in 2027. Comparisons, efficiency and OECD data compared.',
+    'blog.article.sanita-svizzera-costi-analisi.imageAlt': 'View of a modern Swiss hospital with an urban landscape.',
 };
 
 export default blogMetaChEn;

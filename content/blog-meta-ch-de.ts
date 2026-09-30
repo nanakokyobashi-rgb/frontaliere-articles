@@ -7148,6 +7148,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.fueglistaler-errori-rete-ferroviaria.title': 'Füglistaler räumt Fehler beim Bahnausbau ein',
     'blog.article.fueglistaler-errori-rete-ferroviaria.excerpt': 'Der ehemalige BAV-Direktor kritisiert die Überplanung: Über 100 Milliarden Projekte gegenüber 20 Milliarden zur Verfügung. Konsultation bis zum 9. Oktober.',
     'blog.article.fueglistaler-errori-rete-ferroviaria.imageAlt': 'Schweizer Zug am Bahnhof',
+    'blog.article.sanita-svizzera-costi-analisi.title': 'Schweizer Gesundheitswesen: Wie viel wir bezahlen und was wir lernen können',
+    'blog.article.sanita-svizzera-costi-analisi.excerpt': 'Analyse der Gesundheitskosten: Die durchschnittliche Prämie im Tessin erreicht 2027 519,90 Franken. Vergleiche, Effizienz und OECD-Daten im Vergleich.',
+    'blog.article.sanita-svizzera-costi-analisi.imageAlt': 'Blick auf ein modernes Schweizer Krankenhaus mit Stadtlandschaft.',
 };
 
 export default blogMetaChDe;
