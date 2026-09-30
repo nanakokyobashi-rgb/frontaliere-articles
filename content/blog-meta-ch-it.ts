@@ -7199,6 +7199,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.iniziativa-congedo-parentale-18-settimane.title': 'Congedo parentale: depositate 112\'517 firme a Berna',
     'blog.article.iniziativa-congedo-parentale-18-settimane.excerpt': 'L\'iniziativa per un congedo parentale di 18 settimane ha raggiunto le firme necessarie. La proposta punta a parità tra genitori e indennità equa.',
     'blog.article.iniziativa-congedo-parentale-18-settimane.imageAlt': 'Palazzo federale a Berna, sede della Cancelleria federale',
+    'blog.article.alliance-care-crisi-sanita.title': 'Alliance Care verso il fallimento: la decisione il 14 ottobre',
+    'blog.article.alliance-care-crisi-sanita.excerpt': 'L\'organizzazione mantello degli infermieri rischia lo scioglimento. A giugno 17 licenziamenti su 91 dipendenti per il forte squilibrio finanziario.',
+    'blog.article.alliance-care-crisi-sanita.imageAlt': 'Sede di un ente sanitario in Svizzera',
 };
 
 export default blogMetaChIt;

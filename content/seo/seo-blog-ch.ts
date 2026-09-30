@@ -93347,6 +93347,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-alliance-care-crisi-sanita': {
+    title: 'Alliance Care verso il fallimento: la decisione il 14 ottobre',
+    description: 'L\'organizzazione mantello Alliance Care propone lo scioglimento per crisi finanziaria. Decisione finale il 14 ottobre dopo i 17 licenziamenti di giugno.',
+    keywords: 'frontalieri, ticino, svizzera, italia, alliance, care, verso, fallimento',
+    ogTitle: 'Alliance Care verso il fallimento: la decisione il 14 ottobre',
+    ogDescription: 'L\'organizzazione mantello degli infermieri Alliance Care è in crisi. Il comitato propone il fallimento, decisione attesa il 14 ottobre da Consiglio delle cure e Assemblea.',
+    canonicalPath: '/articoli-svizzera/alliance-care-crisi-sanita/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Alliance Care verso il fallimento: la decisione il 14 ottobre",
+      "description": "L'organizzazione mantello Alliance Care propone lo scioglimento per crisi finanziaria. Decisione finale il 14 ottobre dopo i 17 licenziamenti di giugno.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/alliance-care-crisi-sanita.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sede di un ente sanitario in Svizzera"
+      },
+      "datePublished": "2026-09-30T14:27:58+00:00",
+      "dateModified": "2026-09-30T14:27:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/alliance-care-crisi-sanita/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

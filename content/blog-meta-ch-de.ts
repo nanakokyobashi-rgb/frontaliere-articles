@@ -7199,6 +7199,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.iniziativa-congedo-parentale-18-settimane.title': 'Elternzeit: 112\'517 Unterschriften in Bern eingereicht',
     'blog.article.iniziativa-congedo-parentale-18-settimane.excerpt': 'Die Initiative für einen 18-wöchigen Elternurlaub hat die erforderliche Anzahl an Unterschriften erreicht. Der Vorschlag zielt auf Gleichstellung zwischen den Eltern und eine gerechte Entschädigung ab.',
     'blog.article.iniziativa-congedo-parentale-18-settimane.imageAlt': 'Bundeshaus in Bern, Sitz der Bundeskanzlei',
+    'blog.article.alliance-care-crisi-sanita.title': 'Alliance Care vor dem Konkurs: Entscheidung am 14. Oktober',
+    'blog.article.alliance-care-crisi-sanita.excerpt': 'Die Organisation mantello der Pflegekräfte droht aufgelöst zu werden. Im Juni 17 Entlassungen von 91 Beschäftigten wegen des starken finanziellen Ungleichgewichts.',
+    'blog.article.alliance-care-crisi-sanita.imageAlt': 'Hauptsitz einer Gesundheitsorganisation in der Schweiz',
 };
 
 export default blogMetaChDe;

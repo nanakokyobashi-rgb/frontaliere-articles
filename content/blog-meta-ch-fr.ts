@@ -7199,6 +7199,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.iniziativa-congedo-parentale-18-settimane.title': 'Congé parental : 112 517 signatures remises à Berne',
     'blog.article.iniziativa-congedo-parentale-18-settimane.excerpt': 'L’initiative pour un congé parental de 18 semaines a recueilli les signatures nécessaires. La proposition vise l’égalité entre les parents et une indemnité équitable.',
     'blog.article.iniziativa-congedo-parentale-18-settimane.imageAlt': 'Palais fédéral à Berne, siège de la Chancellerie fédérale',
+    'blog.article.alliance-care-crisi-sanita.title': 'Alliance Care vers la faillite : la décision le 14 octobre',
+    'blog.article.alliance-care-crisi-sanita.excerpt': 'L\'organisation mantello des infirmiers risque la dissolution. En juin, 17 licenciements sur 91 employés en raison du fort déséquilibre financier.',
+    'blog.article.alliance-care-crisi-sanita.imageAlt': 'Siège d\'une organisation de santé en Suisse',
 };
 
 export default blogMetaChFr;

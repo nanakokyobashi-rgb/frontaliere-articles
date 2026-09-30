@@ -21625,6 +21625,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'alliance-care-crisi-sanita',
+    category: 'novita',
+    date: '2026-09-30T14:27:58.225Z',
+    image: '/images/blog/alliance-care-crisi-sanita.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

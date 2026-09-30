@@ -7199,6 +7199,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.iniziativa-congedo-parentale-18-settimane.title': 'Parental Leave: 112,517 Signatures Submitted in Bern',
     'blog.article.iniziativa-congedo-parentale-18-settimane.excerpt': 'The initiative for 18 weeks of parental leave has reached the necessary signatures. The proposal aims for equality between parents and fair compensation.',
     'blog.article.iniziativa-congedo-parentale-18-settimane.imageAlt': 'Federal Palace in Bern, seat of the Federal Chancellery',
+    'blog.article.alliance-care-crisi-sanita.title': 'Alliance Care heading toward bankruptcy: the decision on 14 ottobre',
+    'blog.article.alliance-care-crisi-sanita.excerpt': 'The mantello nurses\' union is at risk of being dissolved. In June, 17 of the 91 employees were laid off due to severe financial difficulties.',
+    'blog.article.alliance-care-crisi-sanita.imageAlt': 'Healthcare organization headquarters in Switzerland',
 };
 
 export default blogMetaChEn;
