@@ -1863,4 +1863,5 @@ jobs:
     uses: ./.github/workflows/enable-native-automerge.yml
     with:
       pr_number: ${{ format('{0}', github.event.pull_request.number) }}
+      caller_run_id: ${{ format('{0}', github.run_id) }}
     secrets: inherit

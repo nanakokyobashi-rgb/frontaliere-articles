@@ -20,6 +20,7 @@ test('riattiva il gate sugli eventi che possono cambiare review, check o HEAD', 
   assert.match(source, /pr_number:[\s\S]*?required: true[\s\S]*?type: string/);
   assert.match(source, /continue-on-error: \$\{\{ inputs\.pr_number != '' \}\}/);
   assert.match(source, /PR_NUMBER: \$\{\{ inputs\.pr_number \|\| github\.event\.pull_request\.number \|\| '' \}\}/);
+  assert.match(source, /NATIVE_AUTOMERGE_IN_JOB_RUN_ID: \$\{\{ inputs\.caller_run_id \|\| '' \}\}/);
   assert.match(source, /types: \[opened, reopened, ready_for_review, synchronize\]/);
   assert.match(source, /pull_request_review:/);
   assert.match(source, /types: \[submitted, edited, dismissed\]/);
@@ -40,6 +41,7 @@ test('tests richiama il gate dopo il verdetto, senza dipendere da pull_request_r
   assert.match(postReview, /needs\.tests\.result == 'success'/);
   assert.match(postReview, /uses: \.\/\.github\/workflows\/enable-native-automerge\.yml/);
   assert.match(postReview, /pr_number: \$\{\{ format\('\{0\}', github\.event\.pull_request\.number\) \}\}/);
+  assert.match(postReview, /caller_run_id: \$\{\{ format\('\{0\}', github\.run_id\) \}\}/);
   assert.match(postReview, /secrets: inherit/);
   assert.match(source, /inputs\.pr_number != ''/);
   assert.ok(

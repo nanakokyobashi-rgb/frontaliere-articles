@@ -17,6 +17,10 @@ on:
         description: 'Open PR whose current-head verdict must be enrolled'
         required: true
         type: string
+      caller_run_id:
+        description: 'Calling tests run ID, used only to bind in-progress evidence'
+        required: false
+        type: string
   # This workflow only calls the GitHub API and never executes PR code.
   # pull_request_target keeps the write permission available for fork PRs too.
   pull_request_target:
@@ -225,6 +229,7 @@ jobs:
         env:
           PR_NUMBER: ${{ inputs.pr_number || github.event.pull_request.number || '' }}
           WORKFLOW_HEAD_SHA: ${{ github.event.workflow_run.head_sha || '' }}
+          NATIVE_AUTOMERGE_IN_JOB_RUN_ID: ${{ inputs.caller_run_id || '' }}
           REPOSITORY: ${{ github.repository }}
         run: |
           set -euo pipefail
