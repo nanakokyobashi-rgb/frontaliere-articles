@@ -7166,6 +7166,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.parita-tasse-atenei-ue.title': 'Universitäten: gleiche Gebühren für Schweizer und EU-Studierende',
     'blog.article.parita-tasse-atenei-ue.excerpt': 'Der Ständerat billigt die Gleichstellung von Schweizer und EU-Studierenden. Der Bund sollte die Mindereinnahmen der Kantone vier Jahre lang ausgleichen.',
     'blog.article.parita-tasse-atenei-ue.imageAlt': 'Studierende vor einer Schweizer Hochschule nach dem Entscheid zu gleichen Gebühren für EU-Bürger',
+    'blog.article.tetto-psicoterapeuti-cassa-malati.title': 'Obergrenze für Psychotherapeuten zulasten der Krankenkasse',
+    'blog.article.tetto-psicoterapeuti-cassa-malati.excerpt': 'Lorenzo Quadri reicht eine Motion zur Einführung einer kantonalen Obergrenze für psychologische Psychotherapeuten aufgrund der steigenden OKP-Ausgaben ein.',
+    'blog.article.tetto-psicoterapeuti-cassa-malati.imageAlt': 'Arzt- und Psychotherapiepraxis im Tessin mit Krankenkassendokumenten',
 };
 
 export default blogMetaChDe;

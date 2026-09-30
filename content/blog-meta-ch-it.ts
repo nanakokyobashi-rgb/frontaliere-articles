@@ -7166,6 +7166,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.parita-tasse-atenei-ue.title': 'Università: tasse uguali per studenti svizzeri e UE',
     'blog.article.parita-tasse-atenei-ue.excerpt': 'Il Consiglio degli Stati approva la parità tra studenti svizzeri e UE. La Confederazione dovrebbe coprire per quattro anni le minori entrate dei Cantoni.',
     'blog.article.parita-tasse-atenei-ue.imageAlt': 'Studenti davanti a un\'università svizzera dopo il voto sulle tasse per i cittadini UE',
+    'blog.article.tetto-psicoterapeuti-cassa-malati.title': 'Tetto per psicoterapeuti a carico della cassa malati',
+    'blog.article.tetto-psicoterapeuti-cassa-malati.excerpt': 'Lorenzo Quadri presenta una mozione per introdurre un tetto cantonale agli psicoterapeuti psicologici a causa dell\'aumento delle spese AOMS.',
+    'blog.article.tetto-psicoterapeuti-cassa-malati.imageAlt': 'Studio medico e psicoterapeutico in Ticino con documenti sulla cassa malati',
 };
 
 export default blogMetaChIt;

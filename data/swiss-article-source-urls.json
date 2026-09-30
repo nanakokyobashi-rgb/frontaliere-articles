@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4024825": {
-    "articleId": "fed-warsh-tassi-interesse",
-    "ts": "2026-08-29T02:12:21.523Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/rubriche/ospite/1946720/lavoro-opportunita-ticino-residenti-unita-lorenzo-onderka": {
     "articleId": "opportunita-lavoro-amministrazione-ticino",
     "ts": "2026-08-29T02:21:33.925Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/politica/1953703/tasse-studenti-ue-universita-parita": {
     "articleId": "parita-tasse-atenei-ue",
     "ts": "2026-09-30T08:53:43.909Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1953716/troppi-psicoterapeuti-a-carico-della-cassa-malati": {
+    "articleId": "tetto-psicoterapeuti-cassa-malati",
+    "ts": "2026-09-30T09:13:41.765Z",
     "keyForm": 2
   }
 }

@@ -2411,6 +2411,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'record-nuove-imprese-ticino': { it: 'record-nuove-imprese-ticino', en: 'record-new-businesses-ticino', de: 'rekord-neue-unternehmen-tessin', fr: 'record-nouvelles-entreprises-tessin' },
  'scuola-vallese-cicli-iscrizione': { it: 'scuola-vallese-cicli-iscrizione', en: 'valais-school-enrolment-cycles', de: 'walliser-schulsystem-anmeldung-zyklen', fr: 'ecole-valais-inscription-cycles' },
  'parita-tasse-atenei-ue': { it: 'parita-tasse-atenei-ue', en: 'equal-tuition-swiss-eu-students', de: 'gleiche-studiengebuehren-schweiz-eu', fr: 'meme-taxes-etudiants-suisse-ue' },
+ 'tetto-psicoterapeuti-cassa-malati': { it: 'tetto-psicoterapeuti-cassa-malati', en: 'cap-psychotherapists-health-insurance', de: 'obergrenze-psychotherapeuten-krankenkasse', fr: 'plafond-psychotherapues-assurance-maladie' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
