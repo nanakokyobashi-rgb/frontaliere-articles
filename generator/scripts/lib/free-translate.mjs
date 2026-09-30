@@ -86,7 +86,11 @@ const _gcServiceAccount = (() => {
   }
 })();
 const _gcServiceAccountAvailable = !!_gcServiceAccount;
-const _gcServiceAccountToken = { accessToken: '', expiresAt: 0 };
+const _gcServiceAccountToken = { accessToken: '', expiresAt: 0, refused: false };
+// Cloud Translation answers 403 both for a rejected credential and for the
+// project's daily character cap («User Rate Limit Exceeded»): only the first
+// is something another token can fix.
+const GOOGLE_CLOUD_QUOTA_REFUSAL = /rate ?limit|quota|dailyLimit|RESOURCE_EXHAUSTED/i;
 const _gcOAuth = {
   clientId: (process.env.GSC_CLIENT_ID || '').trim(),
   clientSecret: (process.env.GSC_CLIENT_SECRET || '').trim(),
@@ -1645,7 +1649,7 @@ export function setCodexTranslateCallForTests(fn) {
  * way, and this is one tier among ten, not the sole credential path.
  */
 async function _getGoogleCloudAccessToken() {
-  if (_gcServiceAccountAvailable) {
+  if (_gcServiceAccountAvailable && !_gcServiceAccountToken.refused) {
     if (_gcServiceAccountToken.accessToken && Date.now() < _gcServiceAccountToken.expiresAt - 60_000) {
       return _gcServiceAccountToken.accessToken;
     }
@@ -1661,10 +1665,15 @@ async function _getGoogleCloudAccessToken() {
       }
     } catch {
       // Fall through to the legacy user OAuth path when ADC is unavailable or
-      // rejected. The failure remains visible in the Google tier summary.
+      // rejected. The failure remains visible in the Google tier summary. The
+      // exchange already spent its own retry budget (TOKEN_EXCHANGE_ATTEMPTS),
+      // so a refused service account stays refused for this process instead
+      // of repeating that wait for every field (same as the site twin).
+      _gcServiceAccountToken.refused = true;
       _noteGoogleCloudFailure('service-account-token-unavailable');
     }
   }
+  if (!_gcOAuthAvailable) return '';
   if (_gcOAuth.accessToken && Date.now() < _gcOAuth.expiresAt - 60_000) {
     return _gcOAuth.accessToken;
   }
@@ -1702,7 +1711,7 @@ async function _getGoogleCloudAccessToken() {
   return '';
 }
 
-async function translateWithGoogleCloud(text, sourceLang, targetLang, outcome = null) {
+export async function translateWithGoogleCloud(text, sourceLang, targetLang, outcome = null) {
   if (!_gcOAuthAvailable && !_gcServiceAccountAvailable) return '';
   const clean = normalizeBlock(text);
   if (!clean || sourceLang === targetLang) return '';
@@ -1712,24 +1721,51 @@ async function translateWithGoogleCloud(text, sourceLang, targetLang, outcome = 
   }
 
   try {
-    const token = await _getGoogleCloudAccessToken();
+    let token = await _getGoogleCloudAccessToken();
     if (!token) {
       _noteGoogleCloudFailure('access-token-unavailable');
       noteTranslationOutcome(outcome, 'incomplete');
       return '';
     }
 
-    const res = await fetch('https://translation.googleapis.com/language/translate/v2', {
+    const request = (bearer) => fetch('https://translation.googleapis.com/language/translate/v2', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${bearer}`,
         'x-goog-user-project': GCP_PROJECT_ID,
       },
       body: JSON.stringify({ q: clean, source: sourceLang, target: targetLang, format: 'text' }),
       signal: AbortSignal.timeout(TIMEOUT_MS),
     });
-    if (res.status === 403 || res.status === 429) {
+    // Provenance is read before the await: a concurrent field may drop the
+    // cached service-account token while this request is in flight, and a
+    // comparison after the response would then skip this field's fallback.
+    const fromServiceAccount = token === _gcServiceAccountToken.accessToken;
+    let res = await request(token);
+    // A service-account token the API rejects must not stay cached for the
+    // rest of the run, or no later field ever reaches the OAuth fallback:
+    // drop it and give this field one try with the fallback. A 403 for the
+    // project's daily cap is not a credential problem, and the fallback bills
+    // the same project, so it is not retried (same as the site twin, #10454).
+    if ((res.status === 401 || res.status === 403) && fromServiceAccount) {
+      const refusal = await res.text().catch(() => '');
+      if (GOOGLE_CLOUD_QUOTA_REFUSAL.test(refusal)) {
+        _noteGoogleCloudFailure(`HTTP ${res.status} quota`);
+        noteTranslationOutcome(outcome, 'incomplete');
+        return '';
+      }
+      _gcServiceAccountToken.refused = true;
+      if (_gcServiceAccountToken.accessToken === token) _gcServiceAccountToken.accessToken = '';
+      _noteGoogleCloudFailure(`service-account HTTP ${res.status}`);
+      token = await _getGoogleCloudAccessToken();
+      if (!token) {
+        noteTranslationOutcome(outcome, 'incomplete');
+        return '';
+      }
+      res = await request(token);
+    }
+    if (res.status === 401 || res.status === 403 || res.status === 429) {
       _noteGoogleCloudFailure(`HTTP ${res.status}`);
       noteTranslationOutcome(outcome, 'incomplete');
       return ''; // quota exceeded, or API/scope not enabled for this token

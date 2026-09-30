@@ -155,3 +155,106 @@ test('preferisce il service account ADC con scope Cloud Translation al refresh t
   assert.match(child.stdout, /SERVICE_ACCOUNT_CALLS=1\/1/);
   assert.match(child.stdout, /Google Cloud Translation: auth=service-account, \d+\/16000 daily chars used/);
 });
+
+/**
+ * Service account valido per l'endpoint del token ma rifiutato da Cloud
+ * Translation (ruolo mancante): il token non deve restare in cache per il
+ * resto della run, o nessun campo arriva al fallback OAuth. Un 403 per il
+ * tetto giornaliero del progetto invece non e' un problema di credenziale, e
+ * OAuth addebita allo stesso progetto: niente fallback. Stesso comportamento
+ * del gemello del sito (valerielinc-ops/frontaliere-si-o-no#10454).
+ */
+function runServiceAccountRejection({ refusal, concurrent = false }) {
+  const childScript = `
+    import { generateKeyPairSync } from 'node:crypto';
+    import { unlinkSync, writeFileSync } from 'node:fs';
+    import { tmpdir } from 'node:os';
+    import { join } from 'node:path';
+
+    const { privateKey } = generateKeyPairSync('rsa', { modulusLength: 2048 });
+    const credentialsPath = join(tmpdir(), 'frontaliere-google-translation-rejected-' + process.pid + '.json');
+    writeFileSync(credentialsPath, JSON.stringify({
+      type: 'service_account',
+      project_id: 'frontaliere-ticino',
+      client_email: 'translation-test@frontaliere-ticino.iam.gserviceaccount.com',
+      private_key: privateKey.export({ type: 'pkcs8', format: 'pem' }),
+    }));
+    process.env.GOOGLE_APPLICATION_CREDENTIALS = credentialsPath;
+
+    const bearers = [];
+    let saRejections = 0;
+    globalThis.fetch = async (url, options = {}) => {
+      const value = String(url);
+      if (value === 'https://oauth2.googleapis.com/token') {
+        const refresh = String(options.body || '').includes('grant_type=refresh_token');
+        return { ok: true, status: 200, json: async () => ({ access_token: refresh ? 'user-token' : 'service-account-token', expires_in: 3600 }) };
+      }
+      if (value === 'https://translation.googleapis.com/language/translate/v2') {
+        const bearer = String(options.headers?.Authorization || '');
+        bearers.push(bearer.includes('service-account-token') ? 'sa' : 'oauth');
+        if (${refusal === 'quota'} || bearer.includes('service-account-token')) {
+          // Concurrent fields: the second rejection arrives after the first one
+          // already dropped the cached token.
+          saRejections += 1;
+          await new Promise((resolve) => setTimeout(resolve, saRejections === 1 ? 5 : 40));
+          const body = ${JSON.stringify(refusal === 'quota'
+            ? { error: { message: 'User Rate Limit Exceeded', errors: [{ reason: 'userRateLimitExceeded' }] } }
+            : { error: { status: 'PERMISSION_DENIED', message: 'The caller does not have permission' } })};
+          return { ok: false, status: 403, json: async () => body, text: async () => JSON.stringify(body) };
+        }
+        return { ok: true, status: 200, json: async () => ({ data: { translations: [{ translatedText: 'Hello via OAuth' }] } }) };
+      }
+      if (value.includes('api.mymemory.translated.net')) {
+        return { ok: true, status: 200, json: async () => ({ responseData: { translatedText: 'fallback', match: 1 } }) };
+      }
+      throw new Error('endpoint inatteso nel test: ' + value);
+    };
+
+    const { translateWithGoogleCloud } = await import(${JSON.stringify(MODULE_URL)});
+    const [first, second] = ${concurrent}
+      ? await Promise.all([translateWithGoogleCloud('Ciao', 'it', 'en'), translateWithGoogleCloud('Buongiorno', 'it', 'en')])
+      : [await translateWithGoogleCloud('Ciao', 'it', 'en'), await translateWithGoogleCloud('Buongiorno', 'it', 'en')];
+    console.log('RESULTS=' + JSON.stringify([first, second]));
+    console.log('BEARERS=' + bearers.join(','));
+    unlinkSync(credentialsPath);
+  `;
+  const child = spawnSync(process.execPath, ['--input-type=module', '--eval', childScript], {
+    encoding: 'utf8',
+    env: {
+      ...process.env,
+      DEEPL_API_KEY: '',
+      DEEPL_API_KEY_2: '',
+      AZURE_TRANSLATOR_KEY: '',
+      AZURE_TRANSLATOR_KEY_2: '',
+      GSC_CLIENT_ID: 'test-client',
+      GSC_CLIENT_SECRET: 'test-secret',
+      GSC_REFRESH_TOKEN: 'test-refresh',
+      GOOGLE_APPLICATION_CREDENTIALS: '',
+      HF_TOKEN: '',
+      HUGGINGFACE_API_KEY: '',
+      LIBRETRANSLATE_SELF_HOSTED_URL: '',
+      MT_LOCAL_OPUSMT: '',
+      VITEST: '1',
+    },
+  });
+  assert.equal(child.status, 0, child.stderr || child.stdout);
+  return child.stdout;
+}
+
+test('un token del service account rifiutato da Cloud Translation passa al fallback OAuth e non viene riusato', () => {
+  const out = runServiceAccountRejection({ refusal: 'permission' });
+  assert.match(out, /RESULTS=\["Hello via OAuth","Hello via OAuth"\]/);
+  assert.match(out, /BEARERS=sa,oauth,oauth/);
+});
+
+test('il tetto giornaliero del progetto non attiva il fallback OAuth', () => {
+  const out = runServiceAccountRejection({ refusal: 'quota' });
+  assert.match(out, /RESULTS=\["",""\]/);
+  assert.match(out, /BEARERS=sa,sa/);
+});
+
+test('due campi concorrenti con il token del service account rifiutato arrivano entrambi al fallback OAuth', () => {
+  const out = runServiceAccountRejection({ refusal: 'permission', concurrent: true });
+  assert.match(out, /RESULTS=\["Hello via OAuth","Hello via OAuth"\]/);
+  assert.match(out, /BEARERS=sa,sa,oauth,oauth/);
+});
