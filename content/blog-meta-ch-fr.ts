@@ -7211,6 +7211,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.industria-orologiera-lusso-svizzera.title': 'Horlogerie suisse : le luxe à lui seul ne suffit pas',
     'blog.article.industria-orologiera-lusso-svizzera.excerpt': 'Karine Szegedi, experte chez Deloitte, met en garde : la baisse des volumes et la focalisation sur le luxe mettent en péril près de 700 entreprises. La tranche de prix comprise entre 1 000 et 3 000 francs est négligée, alors que le rapport qualité-prix est déterminant.',
     'blog.article.industria-orologiera-lusso-svizzera.imageAlt': 'Industrie horlogère suisse, focus sur le luxe et défi des volumes, selon l\'experte Deloitte Karine Szegedi.',
+    'blog.article.preventivo-2027-sindacati-austerita-carovita.title': 'Budget 2027 : Les syndicats contestent l’austérité et la vie chère',
+    'blog.article.preventivo-2027-sindacati-austerita-carovita.excerpt': 'OCST, VPOD et SIT contestent le Budget 2027 du Conseil d\'État, demandant de \'changer de cap\'. Ils critiquent la compensation du renchérissement de 0,25% et le non-remplacement de 10% du personnel.',
+    'blog.article.preventivo-2027-sindacati-austerita-carovita.imageAlt': 'Vue panoramique de Bellinzona avec un accent sur les bâtiments publics ou administratifs, symbolisant les politiques cantonales.',
 };
 
 export default blogMetaChFr;

@@ -2426,6 +2426,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'intelligenza-artificiale-lavoro-svizzera': { it: 'intelligenza-artificiale-lavoro-svizzera', en: 'artificial-intelligence-work-switzerland', de: 'kuenstliche-intelligenz-arbeit-schweiz', fr: 'intelligence-artificielle-travail-suisse' },
  'crescita-part-time-uomini-svizzera': { it: 'crescita-part-time-uomini-svizzera', en: 'part-time-work-growth-men-switzerland', de: 'wachstum-teilzeitarbeit-manner-schweiz', fr: 'croissance-travail-partiel-hommes-suisse' },
  'industria-orologiera-lusso-svizzera': { it: 'industria-orologiera-lusso-svizzera', en: 'swiss-watch-industry-luxury-challenge', de: 'schweizer-uhrenindustrie-luxus-herausforderung', fr: 'industrie-horlogere-suisse-defi-luxe' },
+ 'preventivo-2027-sindacati-austerita-carovita': { it: 'preventivo-2027-sindacati-austerita-carovita', en: 'budget-2027-unions-austerity-cost-of-living', de: 'voranschlag-2027-gewerkschaften-austeritaet-lebenshaltungskosten', fr: 'budget-2027-syndicats-austerite-cout-vie' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

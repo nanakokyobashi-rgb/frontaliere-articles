@@ -93503,6 +93503,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-preventivo-2027-sindacati-austerita-carovita': {
+    title: 'Preventivo 2027: Sindacati contestano austerità e carovita',
+    description: 'OCST, VPOD e SIT criticano il Preventivo 2027 del Consiglio di Stato per tagli e carovita insufficiente dello 0,25%, chiedendo una piena compensazione',
+    keywords: 'frontalieri, ticino, svizzera, italia, preventivo, sindacati, contestano, austerità',
+    ogTitle: 'Preventivo 2027: Sindacati contestano austerità e carovita',
+    ogDescription: 'OCST, VPOD e SIT si oppongono al Preventivo 2027 del Consiglio di Stato, evidenziando tagli nel sociosanitario, un carovita dello 0,25% giudicato insufficiente e la mancata sostituzione del 10% del personale. Chiedono a Governo e Parlamento',
+    canonicalPath: '/articoli-svizzera/preventivo-2027-sindacati-austerita-carovita/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Preventivo 2027: Sindacati contestano austerità e carovita",
+      "description": "OCST, VPOD e SIT criticano il Preventivo 2027 del Consiglio di Stato per tagli e carovita insufficiente dello 0,25%, chiedendo una piena compensazione",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/preventivo-2027-sindacati-austerita-carovita.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta panoramica di Bellinzona con un focus su edifici pubblici o amministrativi, simbolo delle politiche cantonali."
+      },
+      "datePublished": "2026-09-30T16:23:19+00:00",
+      "dateModified": "2026-09-30T16:23:19+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/preventivo-2027-sindacati-austerita-carovita/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

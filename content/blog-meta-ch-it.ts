@@ -7211,6 +7211,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.industria-orologiera-lusso-svizzera.title': 'Orologeria Svizzera: il lusso da solo non basta',
     'blog.article.industria-orologiera-lusso-svizzera.excerpt': 'L\'esperta Deloitte Karine Szegedi avverte: il calo dei volumi e il focus sul lusso mettono a rischio quasi 700 aziende. La fascia 1000-3000 franchi è trascurata, mentre il rapporto prezzo-prestazioni è cruciale.',
     'blog.article.industria-orologiera-lusso-svizzera.imageAlt': 'Industria orologiera svizzera, focus sul lusso e sfida dei volumi, secondo l\'esperta Deloitte Karine Szegedi.',
+    'blog.article.preventivo-2027-sindacati-austerita-carovita.title': 'Preventivo 2027: Sindacati contestano austerità e carovita',
+    'blog.article.preventivo-2027-sindacati-austerita-carovita.excerpt': 'OCST, VPOD e SIT contestano il Preventivo 2027 del Consiglio di Stato, chiedendo di \'cambiare rotta\'. Criticano il carovita dello 0,25% e la mancata sostituzione del 10% del personale.',
+    'blog.article.preventivo-2027-sindacati-austerita-carovita.imageAlt': 'Veduta panoramica di Bellinzona con un focus su edifici pubblici o amministrativi, simbolo delle politiche cantonali.',
 };
 
 export default blogMetaChIt;
