@@ -7160,6 +7160,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.record-nuove-imprese-ticino.title': 'Record de nouvelles entreprises, le Tessin est en tête',
     'blog.article.record-nuove-imprese-ticino.excerpt': 'Au cours des neuf premiers mois, l\'Institut pour jeunes entrepreneurs enregistre 41\'716 nouvelles entreprises en Suisse. Le Tessin mène le classement avec une croissance de 9,3 %.',
     'blog.article.record-nuove-imprese-ticino.imageAlt': 'Nouvelles entreprises dans le registre du commerce suisse avec le Tessin en tête',
+    'blog.article.scuola-vallese-cicli-iscrizione.title': 'Système scolaire du canton du Valais : inscription et cycles',
+    'blog.article.scuola-vallese-cicli-iscrizione.excerpt': 'Cycles, âge d\'inscription, calendrier, langues et passage aux écoles du secondaire II dans le système scolaire du Valais.',
+    'blog.article.scuola-vallese-cicli-iscrizione.imageAlt': 'Bâtiment scolaire dans le canton du Valais',
 };
 
 export default blogMetaChFr;

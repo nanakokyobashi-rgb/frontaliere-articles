@@ -7160,6 +7160,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.record-nuove-imprese-ticino.title': 'Record di nuove imprese, il Ticino è in testa',
     'blog.article.record-nuove-imprese-ticino.excerpt': 'Nei primi nove mesi l\'Istituto per giovani imprenditori registra 41\'716 nuove aziende in Svizzera. Il Ticino guida la graduatoria con una crescita del 9,3%.',
     'blog.article.record-nuove-imprese-ticino.imageAlt': 'Nuove imprese nel registro di commercio svizzero con il Ticino in testa',
+    'blog.article.scuola-vallese-cicli-iscrizione.title': 'Sistema scolastico canton Vallese: iscrizione e cicli',
+    'blog.article.scuola-vallese-cicli-iscrizione.excerpt': 'Cicli, età di iscrizione, calendario, lingue e passaggio alle scuole medie superiori nel sistema scolastico del Vallese.',
+    'blog.article.scuola-vallese-cicli-iscrizione.imageAlt': 'Edificio scolastico nel Cantone di Vallese',
 };
 
 export default blogMetaChIt;

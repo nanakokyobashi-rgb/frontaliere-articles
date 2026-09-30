@@ -21508,6 +21508,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'scuola-vallese-cicli-iscrizione',
+    category: 'pratico',
+    date: '2026-09-30T08:39:22.953Z',
+    image: '/images/blog/scuola-vallese-cicli-iscrizione.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

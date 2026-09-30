@@ -7160,6 +7160,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.record-nuove-imprese-ticino.title': 'Record number of new businesses, Ticino leads',
     'blog.article.record-nuove-imprese-ticino.excerpt': 'In the first nine months, the Institute for Young Entrepreneurs recorded 41\'716 new companies in Switzerland. Ticino leads the ranking with growth of 9,3%.',
     'blog.article.record-nuove-imprese-ticino.imageAlt': 'New businesses in the Swiss commercial register with Ticino leading',
+    'blog.article.scuola-vallese-cicli-iscrizione.title': 'Valais cantonal school system: enrollment and cycles',
+    'blog.article.scuola-vallese-cicli-iscrizione.excerpt': 'Cycles, enrollment age, calendar, languages and transition to upper secondary schools in the school system of Valais.',
+    'blog.article.scuola-vallese-cicli-iscrizione.imageAlt': 'School building in the canton of Valais',
 };
 
 export default blogMetaChEn;

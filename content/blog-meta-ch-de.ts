@@ -7160,6 +7160,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.record-nuove-imprese-ticino.title': 'Neugeschäftsrekord, das Tessin liegt an der Spitze',
     'blog.article.record-nuove-imprese-ticino.excerpt': 'In den ersten neun Monaten verzeichnet das Institut für junge Unternehmer 41\'716 neue Unternehmen in der Schweiz. Das Tessin führt die Rangliste mit einem Wachstum von 9,3% an.',
     'blog.article.record-nuove-imprese-ticino.imageAlt': 'Neue Unternehmen im Schweizer Handelsregister mit dem Tessin an der Spitze',
+    'blog.article.scuola-vallese-cicli-iscrizione.title': 'Schulsystem Kanton Wallis: Einschreibung und Zyklen',
+    'blog.article.scuola-vallese-cicli-iscrizione.excerpt': 'Zyklen, Einschreibungsalter, Kalender, Sprachen und Übergang in die Sekundarstufe II im Walliser Schulsystem.',
+    'blog.article.scuola-vallese-cicli-iscrizione.imageAlt': 'Schulgebäude im Kanton Wallis',
 };
 
 export default blogMetaChDe;

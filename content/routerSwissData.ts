@@ -2409,6 +2409,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'bilaterali-iii-esercito-cantoni': { it: 'bilaterali-iii-esercito-cantoni', en: 'bilaterals-iii-army-cantons', de: 'bilaterale-iii-armee-kantone', fr: 'bilaterales-iii-armee-cantons' },
  'tutela-salariale-camere': { it: 'tutela-salariale-camere', en: 'wage-protection-parliament', de: 'lohnschutz-parlament', fr: 'protection-salariale-parlement' },
  'record-nuove-imprese-ticino': { it: 'record-nuove-imprese-ticino', en: 'record-new-businesses-ticino', de: 'rekord-neue-unternehmen-tessin', fr: 'record-nouvelles-entreprises-tessin' },
+ 'scuola-vallese-cicli-iscrizione': { it: 'scuola-vallese-cicli-iscrizione', en: 'valais-school-enrolment-cycles', de: 'walliser-schulsystem-anmeldung-zyklen', fr: 'ecole-valais-inscription-cycles' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
