@@ -123,11 +123,19 @@ function fakeGithub({
         const current = (currentRuns ?? pages.flat()).find((row) => (
           String(row?.id) === jobsMatch[1]
         ));
-        return response(200, activeJobsByRun[jobsMatch[1]] ?? (
+        const configured = activeJobsByRun[jobsMatch[1]];
+        if (configured) {
+          return response(200, {
+            ...configured,
+            jobs: configured.jobs.map((job) => ({ name: 'translate', ...job })),
+          });
+        }
+        return response(200, (
           current?.status === 'in_progress'
             ? {
               jobs: [{
                 id: `${jobsMatch[1]}-job`,
+                name: 'translate',
                 started_at: current.run_started_at ?? current.created_at,
                 status: 'in_progress',
               }],
@@ -238,6 +246,38 @@ test('misura il detentore dall avvio del job, non dalla coda del workflow', asyn
   assert.equal(report.queue.slo.alert, false);
   assert.equal(report.reasonCodes.includes('queue_slo_breached'), false);
   assert.equal(report.queryBudget.usedGets, 7);
+});
+
+test('un run in_progress con il solo guard non e un detentore translate', async () => {
+  const guardId = 33500000016;
+  const queuedId = 33500000017;
+  const { report } = await observe(fakeGithub({
+    activeJobsByRun: {
+      [guardId]: {
+        jobs: [{
+          id: 1,
+          name: 'translate_queue_guard',
+          started_at: '2026-09-01T17:20:00.000Z',
+          status: 'in_progress',
+        }],
+        total_count: 1,
+      },
+    },
+    currentRuns: [
+      run(guardId, { conclusion: null, status: 'in_progress' }),
+      run(queuedId, { conclusion: null, status: 'queued' }),
+    ],
+    pages: [[]],
+  }));
+
+  assert.equal(report.complete, true);
+  assert.equal(report.failClosed, false);
+  assert.equal(report.counts.active, 0);
+  assert.equal(report.counts.pending, 1);
+  assert.equal(report.queue.oldestActiveStartedAt, null);
+  assert.equal(report.queue.slo.measured, 'oldest_pending_age');
+  assert.equal(report.queue.slo.state, 'within_slo');
+  assert.equal(report.queue.slo.alert, false);
 });
 
 test('un job attivo non verificabile rende il censimento fail-closed', async () => {
@@ -853,6 +893,7 @@ test('workflow e runtime sono read-only/dry-run per costruzione', () => {
   assert.doesNotMatch(RUNTIME, /method:\s*['"](?:POST|PUT|PATCH|DELETE)['"]/);
   assert.doesNotMatch(RUNTIME, /\/(?:rerun|dispatches|cancel)(?:\b|\/)/);
   assert.doesNotMatch(RUNTIME, /writeFile|appendFile|createGithubIssue|child_process/);
+  assert.match(RUNTIME, /job\?\.name === 'translate'/);
 });
 
 test('target, workflow generato e manifest sono pinning corpus-only esatti', () => {

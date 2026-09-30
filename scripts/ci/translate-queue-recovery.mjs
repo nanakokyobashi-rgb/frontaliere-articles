@@ -30,11 +30,14 @@ export const MAX_GET_REQUESTS = MAX_TOTAL_GET_REQUESTS - BOOTSTRAP_GET_REQUESTS;
 export const MAX_SAMPLE_RUN_IDS = 5;
 export const MAX_RESPONSE_BYTES = 4 * 1024 * 1024;
 export const MAX_REPORT_BYTES = 16 * 1024;
-// La coda translate e' un mutex a slot singolo: translate-pending.yml usa
-// `concurrency: jobs-data-pipeline` con `cancel-in-progress: false` e dichiara
-// `timeout-minutes: 350`. Un run pending attende quindi per costruzione il
-// detentore corrente: "pending da ore" e' lo stato NORMALE della coda, non un
-// guasto. Distribuzione misurata il 2026-09-18 su questo repo:
+// La coda translate e' un mutex a slot singolo: translate-pending.yml applica
+// `concurrency: jobs-data-pipeline` al solo job `translate`, con
+// `cancel-in-progress: false`, mentre il guard della coda resta fuori dal
+// mutex. Un run pending attende quindi per costruzione il detentore corrente:
+// "pending da ore" e' lo stato NORMALE della coda, non un guasto. Un run
+// `in_progress` con il solo `translate_queue_guard` non e' invece un detentore
+// e va distinto dal job pesante prima di misurare lo SLO. Distribuzione misurata
+// il 2026-09-18 su questo repo:
 //   - run 35313063351: attesa 322 min, esecuzione 265 min, conclusione success;
 //   - run 35327548227: creata 09:03:37Z, job avviato 15:48:01Z (attesa 404 min),
 //     subentrata 4 s dopo la fine della precedente: lo slot non resta idle;
@@ -379,9 +382,19 @@ async function collectActiveJobStart(client, state, currentRuns) {
     throw new ObservationFailure('liveness_census_inconclusive');
   }
 
-  const activeJobs = jobs.jobs.filter((job) => job?.status === 'in_progress');
-  if (activeJobs.length !== 1) {
+  const activeJobs = jobs.jobs.filter((job) => (
+    job?.name === 'translate' && job?.status === 'in_progress'
+  ));
+  if (activeJobs.length > 1) {
     throw new ObservationFailure('liveness_census_inconclusive');
+  }
+  if (activeJobs.length === 0) {
+    const activeIndex = state.activeRunIds.indexOf(runId);
+    if (activeIndex >= 0) {
+      state.activeRunIds.splice(activeIndex, 1);
+      state.activeCreatedMs.splice(activeIndex, 1);
+    }
+    return;
   }
   const startedMs = validTimestamp(activeJobs[0].started_at);
   if (startedMs === null) throw new ObservationFailure('liveness_census_inconclusive');
