@@ -7217,6 +7217,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.premi-malati-ticino-aumento-franchi-2027.title': 'Health Insurance Premiums: When 3.7% Doesn\'t Tell the Whole Story',
     'blog.article.premi-malati-ticino-aumento-franchi-2027.excerpt': 'In 2027, the average health insurance premium in Ticino will increase by 3,7%, reaching 519.90 francs per month, an increase of 18.60 francs, 26% higher than the Swiss average of 412 francs.',
     'blog.article.premi-malati-ticino-aumento-franchi-2027.imageAlt': 'Panoramic view of Lugano with people reflecting on finances, symbolizing the cost of living in Ticino.',
+    'blog.article.analisti-congiuntura-svizzera-settembre.title': 'Analysts Less Optimistic About the Swiss Economy',
+    'blog.article.analisti-congiuntura-svizzera-settembre.excerpt': 'In September, the Swiss economic outlook index stood at +2.6 points, down 9.5 points from August, according to UBS and CFA Society Switzerland.',
+    'blog.article.analisti-congiuntura-svizzera-settembre.imageAlt': 'Financial analysts reviewing Swiss economic trends in an office',
 };
 
 export default blogMetaChEn;

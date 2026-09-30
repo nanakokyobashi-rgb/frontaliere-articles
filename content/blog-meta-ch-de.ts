@@ -7217,6 +7217,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.premi-malati-ticino-aumento-franchi-2027.title': 'Krankenkassenprämien: Wenn 3,7 % nicht alles sagen',
     'blog.article.premi-malati-ticino-aumento-franchi-2027.excerpt': 'Im Jahr 2027 wird der durchschnittliche Krankenkassenbeitrag im Tessin um 3,7 % steigen und 519,90 Franken pro Monat erreichen – ein Anstieg um 18,60 Franken, der 26 % über dem Schweizer Durchschnitt von 412 Franken liegt.',
     'blog.article.premi-malati-ticino-aumento-franchi-2027.imageAlt': 'Panoramablick auf Lugano mit Menschen, die über Finanzen nachdenken, als Symbol für die Lebenshaltungskosten im Tessin.',
+    'blog.article.analisti-congiuntura-svizzera-settembre.title': 'Analysten sind weniger zuversichtlich hinsichtlich der Schweizer Konjunktur',
+    'blog.article.analisti-congiuntura-svizzera-settembre.excerpt': 'Im September liegt der Index zu den Schweizer Wirtschaftsaussichten laut UBS und CFA Society Switzerland bei +2,6 Punkten, 9,5 Punkte niedriger als im August.',
+    'blog.article.analisti-congiuntura-svizzera-settembre.imageAlt': 'Finanzanalysten überprüfen Schweizer Konjunkturtrends im Büro',
 };
 
 export default blogMetaChDe;

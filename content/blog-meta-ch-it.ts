@@ -7217,6 +7217,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.premi-malati-ticino-aumento-franchi-2027.title': 'Premi di cassa malati: quando il 3,7% non racconta tutto',
     'blog.article.premi-malati-ticino-aumento-franchi-2027.excerpt': 'Nel 2027 il premio medio della cassa malati in Ticino aumenterà del 3,7%, raggiungendo 519.90 franchi mensili, un incremento di 18.60 franchi, superiore del 26% alla media svizzera di 412 franchi.',
     'blog.article.premi-malati-ticino-aumento-franchi-2027.imageAlt': 'Vista panoramica di Lugano con persone che riflettono sulle finanze, simbolo del costo della vita in Ticino.',
+    'blog.article.analisti-congiuntura-svizzera-settembre.title': 'Analisti meno fiduciosi sulla congiuntura svizzera',
+    'blog.article.analisti-congiuntura-svizzera-settembre.excerpt': 'In settembre l\'indice sulle prospettive economiche svizzere si attesta a +2,6 punti, in calo di 9,5 punti rispetto ad agosto secondo UBS e CFA Society Switzerland.',
+    'blog.article.analisti-congiuntura-svizzera-settembre.imageAlt': 'Analisti finanziari esaminano la congiuntura svizzera in ufficio',
 };
 
 export default blogMetaChIt;

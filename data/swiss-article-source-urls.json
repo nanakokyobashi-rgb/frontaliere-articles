@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/asb-prevede-crescita-per-settore-bancario-anche-nel-2026/91979115": {
-    "articleId": "asb-banche-svizzera-crescita-2026",
-    "ts": "2026-08-31T08:28:56.207Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/politica/1947008/entrate-partiti-federale-ps-soldi": {
     "articleId": "finanziamenti-partiti-ps-2025",
     "ts": "2026-08-31T09:31:18.028Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/rubriche/ospite/1953821/franchi-aumento-ticino-media-malati-premi-cassa-lorenzo-onderka": {
     "articleId": "premi-malati-ticino-aumento-franchi-2027",
     "ts": "2026-09-30T17:00:48.817Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/analisti-un-po%27-meno-fiduciosi-su-congiuntura-svizzera/92145231": {
+    "articleId": "analisti-congiuntura-svizzera-settembre",
+    "ts": "2026-09-30T17:15:52.037Z",
     "keyForm": 2
   }
 }

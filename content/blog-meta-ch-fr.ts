@@ -7217,6 +7217,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.premi-malati-ticino-aumento-franchi-2027.title': 'Primes d\'assurance maladie : quand le 3,7% ne dit pas tout',
     'blog.article.premi-malati-ticino-aumento-franchi-2027.excerpt': 'En 2027, la prime moyenne de la caisse-maladie au Tessin augmentera de 3,7%, atteignant 519.90 francs par mois, soit une hausse de 18.60 francs, supérieure de 26% à la moyenne suisse de 412 francs.',
     'blog.article.premi-malati-ticino-aumento-franchi-2027.imageAlt': 'Vue panoramique de Lugano avec des personnes réfléchissant aux finances, symbolisant le coût de la vie au Tessin.',
+    'blog.article.analisti-congiuntura-svizzera-settembre.title': 'Analystes moins confiants à l\'égard de la conjoncture suisse',
+    'blog.article.analisti-congiuntura-svizzera-settembre.excerpt': 'En septembre, l’indice des perspectives économiques suisses s’établit à +2,6 points, en baisse de 9,5 points par rapport à août, selon UBS et CFA Society Switzerland.',
+    'blog.article.analisti-congiuntura-svizzera-settembre.imageAlt': 'Analystes financiers examinant les tendances économiques suisses',
 };
 
 export default blogMetaChFr;
