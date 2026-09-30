@@ -7175,6 +7175,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.consiglio-nazionale-terremoti-immobili.title': 'National Council rejects article on earthquakes',
     'blog.article.consiglio-nazionale-terremoti-immobili.excerpt': 'The National Council rejected the constitutional article on earthquake damage to properties: responsibility remains with private owners.',
     'blog.article.consiglio-nazionale-terremoti-immobili.imageAlt': 'Residential buildings in Switzerland and earthquake coverage debate',
+    'blog.article.kof-stime-crescita-svizzera.title': 'KOF revises its growth estimates upward for 2026 and 2027',
+    'blog.article.kof-stime-crescita-svizzera.excerpt': 'KOF at the Swiss Federal Institute of Technology Zurich revises its estimates: GDP at 1,9% in 2026 and 1,7% in 2027. All details on employment, prices and rates.',
+    'blog.article.kof-stime-crescita-svizzera.imageAlt': 'Analysis of KOF economic growth estimates in Switzerland',
 };
 
 export default blogMetaChEn;

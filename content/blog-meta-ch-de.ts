@@ -7175,6 +7175,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.consiglio-nazionale-terremoti-immobili.title': 'Nationalrat lehnt Artikel zu Erdbeben ab',
     'blog.article.consiglio-nazionale-terremoti-immobili.excerpt': 'Der Nationalrat hat den Verfassungsartikel zu Erdbebenschäden an Immobilien abgelehnt: Die Verantwortung bleibt bei den privaten Eigentümern.',
     'blog.article.consiglio-nazionale-terremoti-immobili.imageAlt': 'Wohngebäude in der Schweiz und Debatte über Erdbebenversicherung',
+    'blog.article.kof-stime-crescita-svizzera.title': 'KOF korrigiert die Wachstumsschätzungen für 2026 und 2027 nach oben',
+    'blog.article.kof-stime-crescita-svizzera.excerpt': 'Die KOF der ETH Zürich revidiert die Schätzungen: BIP 2026 bei 1,9% und 2027 bei 1,7%. Alle Details zu Beschäftigung, Preisen und Zinsen.',
+    'blog.article.kof-stime-crescita-svizzera.imageAlt': 'Analyse der KOF-Wirtschaftswachstumsschätzungen in der Schweiz',
 };
 
 export default blogMetaChDe;

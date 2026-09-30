@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/politica/1946665/contanti-iniziativa-pagamento-servizi-grigionese-controprogetto": {
-    "articleId": "grigioni-contanti-servizi-pubblici",
-    "ts": "2026-08-29T02:37:01.590Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/gr%3a-si-dovrebbe-poter-pagare-in-contanti-per-i-servizi-cantonali/91970861": {
     "articleId": "grigioni-diritto-pagamento-contanti",
     "ts": "2026-08-29T02:53:47.165Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/cn%3a-danni-a-immobili-da-terremoti%2c-responsabilit%c3%a0-resta-a-privati/92143078": {
     "articleId": "consiglio-nazionale-terremoti-immobili",
     "ts": "2026-09-30T10:18:55.791Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/kof-corregge-al-rialzo-stime-su-crescita-svizzera-2026-e-2027/92143406": {
+    "articleId": "kof-stime-crescita-svizzera",
+    "ts": "2026-09-30T10:33:30.425Z",
     "keyForm": 2
   }
 }

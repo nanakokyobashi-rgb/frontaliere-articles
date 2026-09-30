@@ -7175,6 +7175,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.consiglio-nazionale-terremoti-immobili.title': 'Le Conseil national rejette l\'article sur les séismes',
     'blog.article.consiglio-nazionale-terremoti-immobili.excerpt': 'Le Conseil national a rejeté l\'article constitutionnel sur les dommages causés par les séismes aux immeubles : la responsabilité reste aux propriétaires privés.',
     'blog.article.consiglio-nazionale-terremoti-immobili.imageAlt': 'Immeubles résidentiels en Suisse et débat sur l\'assurance tremblement de terre',
+    'blog.article.kof-stime-crescita-svizzera.title': 'Le KOF revoit à la hausse les estimations de croissance pour 2026 et 2027',
+    'blog.article.kof-stime-crescita-svizzera.excerpt': 'Le KOF de l\'École polytechnique fédérale de Zurich révise ses estimations : PIB 2026 à 1,9% et 2027 à 1,7%. Tous les détails sur l\'emploi, les prix et les taux.',
+    'blog.article.kof-stime-crescita-svizzera.imageAlt': 'Analyse des estimations de croissance économique du KOF en Suisse',
 };
 
 export default blogMetaChFr;

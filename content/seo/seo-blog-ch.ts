@@ -93035,6 +93035,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-kof-stime-crescita-svizzera': {
+    title: 'KOF corregge al rialzo le stime di crescita per il 2026 e 2027',
+    description: 'Il KOF alza le stime di crescita della Svizzera: Pil 2026 all\'1,9% e 2027 all\'1,7%. Scopri i dati su occupazione, disoccupazione, prezzi e tassi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, corregge, rialzo, stime, crescita',
+    ogTitle: 'KOF corregge al rialzo le stime di crescita della Svizzera',
+    ogDescription: 'Il KOF del Politecnico federale di Zurigo ha aggiornato le previsioni economiche per la Svizzera. Pil al netto degli eventi sportivi all\'1,9% nel 2026 e all\'1,7% nel 2027. Scopri tutte le indicazioni su lavoro, salari e tassi.',
+    canonicalPath: '/articoli-svizzera/kof-stime-crescita-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "KOF corregge al rialzo le stime di crescita per il 2026 e 2027",
+      "description": "Il KOF alza le stime di crescita della Svizzera: Pil 2026 all'1,9% e 2027 all'1,7%. Scopri i dati su occupazione, disoccupazione, prezzi e tassi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/kof-stime-crescita-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Analisi delle stime economiche del KOF sulla crescita in Svizzera"
+      },
+      "datePublished": "2026-09-30T10:33:30+00:00",
+      "dateModified": "2026-09-30T10:33:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/kof-stime-crescita-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

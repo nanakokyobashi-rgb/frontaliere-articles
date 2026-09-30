@@ -7175,6 +7175,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.consiglio-nazionale-terremoti-immobili.title': 'Consiglio nazionale boccia l\'articolo sui terremoti',
     'blog.article.consiglio-nazionale-terremoti-immobili.excerpt': 'Il Consiglio nazionale ha bocciato l\'articolo costituzionale sui danni da terremoti agli immobili: la responsabilità resta ai proprietari privati.',
     'blog.article.consiglio-nazionale-terremoti-immobili.imageAlt': 'Edifici residenziali in Svizzera e discussione sulla copertura per terremoti',
+    'blog.article.kof-stime-crescita-svizzera.title': 'KOF corregge al rialzo le stime di crescita per il 2026 e 2027',
+    'blog.article.kof-stime-crescita-svizzera.excerpt': 'Il KOF del Politecnico federale di Zurigo rivede le stime: Pil 2026 all\'1,9% e 2027 all\'1,7%. Tutti i dettagli su occupazione, prezzi e tassi.',
+    'blog.article.kof-stime-crescita-svizzera.imageAlt': 'Analisi delle stime economiche del KOF sulla crescita in Svizzera',
 };
 
 export default blogMetaChIt;
