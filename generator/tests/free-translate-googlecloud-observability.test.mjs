@@ -183,11 +183,22 @@ function runServiceAccountRejection({ refusal, concurrent = false }) {
 
     const bearers = [];
     let saRejections = 0;
+    let saExchanges = 0;
+    let gate;
     globalThis.fetch = async (url, options = {}) => {
       const value = String(url);
       if (value === 'https://oauth2.googleapis.com/token') {
         const refresh = String(options.body || '').includes('grant_type=refresh_token');
-        return { ok: true, status: 200, json: async () => ({ access_token: refresh ? 'user-token' : 'service-account-token', expires_in: 3600 }) };
+        if (refresh) return { ok: true, status: 200, json: async () => ({ access_token: 'user-token', expires_in: 3600 }) };
+        // Concurrent first-use exchanges resolve on one gate, in the same tick,
+        // and each gets its own token, while the cache keeps only one.
+        saExchanges += 1;
+        const issued = saExchanges === 1 ? 'service-account-token-A' : 'service-account-token-B';
+        if (${concurrent}) {
+          gate ??= new Promise((resolve) => setTimeout(resolve, 10));
+          await gate;
+        }
+        return { ok: true, status: 200, json: async () => ({ access_token: issued, expires_in: 3600 }) };
       }
       if (value === 'https://translation.googleapis.com/language/translate/v2') {
         const bearer = String(options.headers?.Authorization || '');
