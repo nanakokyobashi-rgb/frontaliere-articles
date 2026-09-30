@@ -7169,6 +7169,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.tetto-psicoterapeuti-cassa-malati.title': 'Obergrenze für Psychotherapeuten zulasten der Krankenkasse',
     'blog.article.tetto-psicoterapeuti-cassa-malati.excerpt': 'Lorenzo Quadri reicht eine Motion zur Einführung einer kantonalen Obergrenze für psychologische Psychotherapeuten aufgrund der steigenden OKP-Ausgaben ein.',
     'blog.article.tetto-psicoterapeuti-cassa-malati.imageAlt': 'Arzt- und Psychotherapiepraxis im Tessin mit Krankenkassendokumenten',
+    'blog.article.premi-slembeck-terapie-terminali.title': 'Krankenkassenprämien: Rabatt für Verzicht auf Pflege',
+    'blog.article.premi-slembeck-terapie-terminali.excerpt': 'Tilman Slembeck schlägt niedrigere Prämien für diejenigen vor, die in der terminalen Phase freiwillig auf lebensverlängernde Therapien verzichten.',
+    'blog.article.premi-slembeck-terapie-terminali.imageAlt': 'Vorschlag für reduzierte Krankenkassenprämien in der Schweiz',
 };
 
 export default blogMetaChDe;

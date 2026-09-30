@@ -7169,6 +7169,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.tetto-psicoterapeuti-cassa-malati.title': 'Cap on psychotherapists covered by health insurance',
     'blog.article.tetto-psicoterapeuti-cassa-malati.excerpt': 'Lorenzo Quadri presents a motion to introduce a cantonal cap on psychological psychotherapists because of the increase in AOMS expenditure.',
     'blog.article.tetto-psicoterapeuti-cassa-malati.imageAlt': 'Medical and psychotherapeutic office in Ticino with health insurance documents',
+    'blog.article.premi-slembeck-terapie-terminali.title': 'Health insurance premiums: discounts for foregoing end-of-life treatments',
+    'blog.article.premi-slembeck-terapie-terminali.excerpt': 'Tilman Slembeck proposes lower premiums for those who voluntarily give up life-prolonging therapies in the terminal phase.',
+    'blog.article.premi-slembeck-terapie-terminali.imageAlt': 'Reduced health insurance premiums proposal in Switzerland',
 };
 
 export default blogMetaChEn;

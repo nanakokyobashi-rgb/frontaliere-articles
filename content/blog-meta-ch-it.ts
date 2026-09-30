@@ -7169,6 +7169,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.tetto-psicoterapeuti-cassa-malati.title': 'Tetto per psicoterapeuti a carico della cassa malati',
     'blog.article.tetto-psicoterapeuti-cassa-malati.excerpt': 'Lorenzo Quadri presenta una mozione per introdurre un tetto cantonale agli psicoterapeuti psicologici a causa dell\'aumento delle spese AOMS.',
     'blog.article.tetto-psicoterapeuti-cassa-malati.imageAlt': 'Studio medico e psicoterapeutico in Ticino con documenti sulla cassa malati',
+    'blog.article.premi-slembeck-terapie-terminali.title': 'Premi cassa malati: sconti per rinuncia a cure terminali',
+    'blog.article.premi-slembeck-terapie-terminali.excerpt': 'Tilman Slembeck propone premi più bassi per chi rinuncia volontariamente alle terapie di prolungamento della vita nella fase terminale.',
+    'blog.article.premi-slembeck-terapie-terminali.imageAlt': 'Proposta di premi ridotti per terapie terminali in Svizzera',
 };
 
 export default blogMetaChIt;
