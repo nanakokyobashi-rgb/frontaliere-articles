@@ -21733,6 +21733,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'aerodromo-kaegiswil-sospensione-voli',
+    category: 'novita',
+    date: '2026-09-30T19:00:14.700Z',
+    image: '/images/blog/aerodromo-kaegiswil-sospensione-voli.webp',
+    hasCalculator: true,
+    authorSlug: 'laura-bianchi',
+    authorName: 'Laura Bianchi',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

@@ -7235,6 +7235,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.stati-chiedono-referendum-bilaterali.title': 'Bilaterali III: il Consiglio degli Stati chiede il referendum',
     'blog.article.stati-chiedono-referendum-bilaterali.excerpt': 'Il Consiglio degli Stati ha chiesto il referendum obbligatorio per i Bilaterali III con 23 voti contro 17 e 3 astenuti. Ora la questione passa al Consiglio nazionale.',
     'blog.article.stati-chiedono-referendum-bilaterali.imageAlt': 'Il palazzo del Parlamento a Berna dove si è tenuto il dibattito sui Bilaterali III',
+    'blog.article.aerodromo-kaegiswil-sospensione-voli.title': 'Sospensione voli a Kägiswil fino al 20 nov 2026',
+    'blog.article.aerodromo-kaegiswil-sospensione-voli.excerpt': 'L\'UFAC ha disposto la sospensione dei voli dall\'9 ottobre 2026 almeno fino al 20 novembre 2026 presso l\'aerodromo di Kägiswil, in attesa del deposito pubblico PSIA-Rega dal 15 ottobre al 16 novembre 2026.',
+    'blog.article.aerodromo-kaegiswil-sospensione-voli.imageAlt': 'Vista aerea dell\'aerodromo di Kägiswil con velivoli fermi e le Alpi sullo sfondo',
 };
 
 export default blogMetaChIt;

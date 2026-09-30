@@ -7235,6 +7235,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.stati-chiedono-referendum-bilaterali.title': 'Bilateral Agreements III: The Council of States Calls for a Referendum',
     'blog.article.stati-chiedono-referendum-bilaterali.excerpt': 'The Council of States voted 23 to 17, with 3 abstentions, in favor of a mandatory referendum on the Bilateral Agreements III. The matter now goes to the National Council.',
     'blog.article.stati-chiedono-referendum-bilaterali.imageAlt': 'The Parliament building in Bern where the debate on Bilateral III took place',
+    'blog.article.aerodromo-kaegiswil-sospensione-voli.title': 'Flight suspension in Kägiswil until 20 nov 2026',
+    'blog.article.aerodromo-kaegiswil-sospensione-voli.excerpt': 'UFAC has ordered the suspension of flights from 9 October 2026 at least until 20 November 2026 at Kägiswil airfield, pending the PSIA-Rega public filing from 15 October to 16 November 2026.',
+    'blog.article.aerodromo-kaegiswil-sospensione-voli.imageAlt': 'Aerial view of Kägiswil airfield with grounded aircraft and the Alps in the background',
 };
 
 export default blogMetaChEn;

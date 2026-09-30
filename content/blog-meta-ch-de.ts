@@ -7235,6 +7235,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.stati-chiedono-referendum-bilaterali.title': 'Bilaterale III: Der Ständerat fordert ein Referendum',
     'blog.article.stati-chiedono-referendum-bilaterali.excerpt': 'Der Ständerat hat mit 23 zu 17 Stimmen bei 3 Enthaltungen das obligatorische Referendum für die Bilateralen III verlangt. Nun geht die Frage an den Nationalrat.',
     'blog.article.stati-chiedono-referendum-bilaterali.imageAlt': 'Das Parlamentsgebäude in Bern, in dem die Debatte über die Bilateralen III stattfand',
+    'blog.article.aerodromo-kaegiswil-sospensione-voli.title': 'Flugausfall in Kägiswil bis zum 20. November 2026',
+    'blog.article.aerodromo-kaegiswil-sospensione-voli.excerpt': 'Das BAZL hat angeordnet, dass der Flugbetrieb am Flugplatz Kägiswil ab dem 9. Oktober 2026 bis mindestens zum 20. November 2026 ausgesetzt wird, bis die öffentliche Vernehmlassung zum SIL-Rega vom 15. Oktober bis zum 16. November 2026 abgeschlossen ist.',
+    'blog.article.aerodromo-kaegiswil-sospensione-voli.imageAlt': 'Luftaufnahme des Flugplatzes Kägiswil mit grounded Flugzeugen und den Alpen im Hintergrund',
 };
 
 export default blogMetaChDe;

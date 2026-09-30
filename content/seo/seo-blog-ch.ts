@@ -93815,6 +93815,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-aerodromo-kaegiswil-sospensione-voli': {
+    title: 'Sospensione voli a Kägiswil fino al 20 nov 2026',
+    description: 'L\'UFAC sospende i voli all\'aerodromo di Kägiswil dal 9 ottobre 2026 almeno fino al 20 novembre 2026, mentre prende avvio il deposito pubblico PSIA-Rega dal 15',
+    keywords: 'frontalieri, ticino, svizzera, italia, sospensione, voli, kägiswil, fino',
+    ogTitle: 'Sospensione voli a Kägiswil fino al 20 nov 2026',
+    ogDescription: 'Il comunicato della Confederazione del 30 settembre 2026 annuncia la sospensione delle operazioni di volo presso l\'aerodromo di Kägiswil a partire dal 9 ottobre 2026, con validità almeno fino al 20 novembre 2026. Contemporaneamente avvia il deposito',
+    canonicalPath: '/articoli-svizzera/aerodromo-kaegiswil-sospensione-voli/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Sospensione voli a Kägiswil fino al 20 nov 2026",
+      "description": "L'UFAC sospende i voli all'aerodromo di Kägiswil dal 9 ottobre 2026 almeno fino al 20 novembre 2026, mentre prende avvio il deposito pubblico PSIA-Rega dal 15",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/aerodromo-kaegiswil-sospensione-voli.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea dell'aerodromo di Kägiswil con velivoli fermi e le Alpi sullo sfondo"
+      },
+      "datePublished": "2026-09-30T19:00:14+00:00",
+      "dateModified": "2026-09-30T19:00:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/aerodromo-kaegiswil-sospensione-voli/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

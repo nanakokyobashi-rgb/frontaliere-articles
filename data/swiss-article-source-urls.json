@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1947081/marchi-swatch-samsung-quadranti-violazione": {
-    "articleId": "swatch-samsung-risarcimento-marchi",
-    "ts": "2026-08-31T13:34:49.137Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/attualita/1946995/franchi-divario-spiegata-componente-ufficio": {
     "articleId": "divario-salariale-svizzera-ust-640",
     "ts": "2026-08-31T13:59:31.394Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4125328": {
     "articleId": "stati-chiedono-referendum-bilaterali",
     "ts": "2026-09-30T18:40:45.262Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/feyuckabneay": {
+    "articleId": "aerodromo-kaegiswil-sospensione-voli",
+    "ts": "2026-09-30T19:00:15.083Z",
     "keyForm": 2
   }
 }

@@ -7235,6 +7235,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.stati-chiedono-referendum-bilaterali.title': 'Bilatérales III : le Conseil des États demande le référendum',
     'blog.article.stati-chiedono-referendum-bilaterali.excerpt': 'Le Conseil des États a demandé le référendum obligatoire pour les Bilatérales III par 23 voix contre 17 et 3 abstentions. La question passe maintenant au Conseil national.',
     'blog.article.stati-chiedono-referendum-bilaterali.imageAlt': 'Le bâtiment du Parlement à Berne où s\'est déroulé le débat sur les Bilatérales III',
+    'blog.article.aerodromo-kaegiswil-sospensione-voli.title': 'Suspension des vols à Kägiswil jusqu\'au 20 nov 2026',
+    'blog.article.aerodromo-kaegiswil-sospensione-voli.excerpt': 'L\'OFAC a ordonné la suspension des vols à partir du 9 octobre 2026 jusqu\'au 20 novembre 2026 au moins à l\'aérodrome de Kägiswil, dans l\'attente de la mise à disposition publique du PSIA-Rega du 15 octobre au 16 novembre 2026.',
+    'blog.article.aerodromo-kaegiswil-sospensione-voli.imageAlt': 'Vue aérienne de l\'aérodrome de Kägiswil avec des avions au sol et les Alpes en arrière-plan',
 };
 
 export default blogMetaChFr;

@@ -2434,6 +2434,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'svizzeri-contro-tassa-zucchero': { it: 'svizzeri-contro-tassa-zucchero', en: 'swiss-against-sugar-tax', de: 'schweizer-gegen-zuckersteuer', fr: 'suisses-contre-taxe-sucre' },
  'guida-aiuti-formazione-vallese': { it: 'guida-aiuti-formazione-vallese', en: 'valais-study-support-guide', de: 'studienhilfen-wallis-leitfaden', fr: 'aides-etudes-valais-guide' },
  'stati-chiedono-referendum-bilaterali': { it: 'stati-chiedono-referendum-bilaterali', en: 'states-ask-for-bilateral-referendum', de: 'staende-fordern-bilaterale-referendum', fr: 'etats-demandent-referendum-bilaterales' },
+ 'aerodromo-kaegiswil-sospensione-voli': { it: 'aerodromo-kaegiswil-sospensione-voli', en: 'flight-suspension-in-kagiswil-until-20-nov-2026', de: 'flugausfall-in-kagiswil-bis-zum-20-november-2026', fr: 'suspension-des-vols-a-kagiswil-jusqu-au-20-nov-2026' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
