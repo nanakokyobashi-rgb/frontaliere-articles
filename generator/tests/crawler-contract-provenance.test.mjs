@@ -74,6 +74,16 @@ const fixtureManifest = {
     { path: '.github/workflows/crawler-group-01.yml', sitePath: '.github/corpus-workflows/crawler-group-01.yml' },
   ],
 };
+const observerTarget = 'scripts/observer-fixture.mjs';
+const observerFixtureManifest = {
+  files: [
+    ...fixtureManifest.files,
+    {
+      path: observerTarget,
+      sitePath: '.github/corpus-workflows/observer-fixture.mjs',
+    },
+  ],
+};
 const adaptedFixtureManifest = {
   files: [
     {
@@ -107,6 +117,11 @@ const fixtureContract = {
     rosterPath: 'scripts/ci/crawler-generation-roster.json',
     rosterDigest: `sha256:${HASH}`,
   },
+};
+const fixtureContractWithObserver = {
+  ...fixtureContract,
+  observerCount: 1,
+  observers: [{ target: observerTarget, sha256: HASH }],
 };
 
 test('#1264 — il piano runtime raccoglie ogni flag invocata dagli artifact', () => {
@@ -292,6 +307,7 @@ test('il piano copre generatore, sorgente e artifact di ogni voce', () => {
       ['generatorSha256', 'scripts/generate-crawler-group-workflows.mjs'],
       ['lineage#generatorSha256', 'scripts/generate-crawler-group-workflows.mjs'],
       ['lineage#crawlerGeneration.rosterDigest', 'scripts/ci/crawler-generation-roster.json'],
+      ['crawlerGeneration.rosterDigest', 'scripts/ci/crawler-generation-roster.json'],
       ['crawler-group-01.yml#sourceSha256', `${SITE_LOGIC_DIR}/crawler-group-01-logic.yml`],
       ['crawler-group-01.yml#artifactSha256', '.github/corpus-workflows/crawler-group-01.yml'],
       ['crawler-group-01.yml#sourceSha256@sourceCommit', `${SITE_LOGIC_DIR}/crawler-group-01-logic.yml`],
@@ -364,9 +380,20 @@ test(`il piano reale copre i digest correnti e la lineage del contratto committa
   const adaptedArtifacts = CONTRACT.artifacts.filter((artifact) => MANIFEST.files.some(
     (entry) => entry.path === `.github/workflows/${artifact.file}` && entry.mode === 'adapted',
   )).length;
-  const currentRemoteChecks = 1 + CONTRACT.artifacts.length * 2 - adaptedArtifacts;
-  const lineageRemoteChecks = 2 + CONTRACT.artifacts.length * 2 - adaptedArtifacts;
-  const localChecks = 7 + CONTRACT.artifacts.length;
+  const adaptedObservers = CONTRACT.observers.filter((observer) => MANIFEST.files.some(
+    (entry) => entry.path === observer.target && entry.mode === 'adapted',
+  )).length;
+  const currentRemoteChecks = 2
+    + CONTRACT.artifacts.length * 2 - adaptedArtifacts
+    + CONTRACT.observers.length - adaptedObservers;
+  const lineageRemoteChecks = 2
+    + CONTRACT.artifacts.length * 2 - adaptedArtifacts
+    + CONTRACT.observers.length - adaptedObservers;
+  const localChecks = 7
+    + CONTRACT.artifacts.length
+    + CONTRACT.observers.length
+    + adaptedArtifacts
+    + adaptedObservers;
   assert.equal(checks.filter((c) => !c.localOnly && !c.lineage).length, currentRemoteChecks);
   assert.equal(checks.filter((c) => !c.localOnly && c.lineage).length, lineageRemoteChecks);
   assert.equal(checks.filter((c) => c.localOnly).length, localChecks);
@@ -397,6 +424,54 @@ test(`il piano reale copre i digest correnti e la lineage del contratto committa
   assert.ok(checks.some((c) => c.field === 'generatorSha256' && c.expected === CONTRACT.generatorSha256));
   assert.ok(checks.some((c) => c.field === 'lineage#generatorSha256' && c.expected === CONTRACT.generatorSha256));
   assert.ok(checks.some((c) => c.field === 'lineage#crawlerGeneration.rosterDigest'));
+  assert.ok(checks.some((c) => c.field === 'crawlerGeneration.rosterDigest'));
+  for (const observer of CONTRACT.observers) {
+    const current = checks.find((c) => c.field === `${observer.target}#sha256`);
+    const local = checks.find((c) => c.field === `${observer.target}#sha256@local`);
+    const lineage = checks.find((c) => c.field === `${observer.target}#sha256@sourceCommit`);
+    assert.ok(current, `${observer.target}: digest currente fuori dal piano`);
+    assert.ok(local, `${observer.target}: digest locale fuori dal piano`);
+    assert.ok(lineage, `${observer.target}: digest lineage fuori dal piano`);
+    assert.equal(current.expected, observer.sha256, observer.target);
+    assert.equal(local.expected, observer.sha256, observer.target);
+    assert.equal(lineage.expected, observer.sha256, observer.target);
+  }
+});
+
+test('FU-011 — roster corrente e observer divergenti diventano rossi', () => {
+  const rosterChecks = planProvenanceChecks(fixtureContract, fixtureManifest);
+  const rosterObserved = new Map(rosterChecks.map((check) => [check.field, {
+    sha256: check.expected,
+  }]));
+  rosterObserved.set('crawlerGeneration.rosterDigest', { sha256: OTHER });
+  const rosterVerdict = evaluateProvenance(rosterChecks, rosterObserved);
+  assert.equal(
+    rosterVerdict.results.find((result) => result.field === 'crawlerGeneration.rosterDigest').state,
+    'drifted',
+  );
+  assert.equal(rosterVerdict.red, true);
+
+  const observerChecks = planProvenanceChecks(fixtureContractWithObserver, observerFixtureManifest);
+  assert.deepEqual(
+    observerChecks
+      .filter((check) => check.field.startsWith(`${observerTarget}#`))
+      .map((check) => [check.field, check.sitePath, check.observationRef]),
+    [
+      [`${observerTarget}#sha256@local`, null, undefined],
+      [`${observerTarget}#sha256`, '.github/corpus-workflows/observer-fixture.mjs', 'main'],
+      [`${observerTarget}#sha256@sourceCommit`, '.github/corpus-workflows/observer-fixture.mjs', SOURCE_COMMIT],
+    ],
+  );
+  const observerObserved = new Map(observerChecks.map((check) => [check.field, {
+    ...(check.localOnly ? { observed: check.expected } : { sha256: check.expected }),
+  }]));
+  observerObserved.set(`${observerTarget}#sha256`, { sha256: OTHER });
+  const observerVerdict = evaluateProvenance(observerChecks, observerObserved);
+  assert.equal(
+    observerVerdict.results.find((result) => result.field === `${observerTarget}#sha256`).state,
+    'drifted',
+  );
+  assert.equal(observerVerdict.red, true);
 });
 
 test('un artifact riordinato a mano, senza sorgente, è `undeclared` e rosso', () => {

@@ -46,6 +46,18 @@ test('extractBodyFields decodifica le stringhe TS senza confondere gli escape JS
   ]);
 });
 
+test('extractBodyFields include i body opzionali emessi dal writer fino a body20', () => {
+  const entries = extractBodyFields(
+    "'blog.article.demo.body4': 'Quattro',\n"
+      + "'blog.article.demo.body20': 'Venti',\n"
+      + "'blog.article.demo.body21': 'fuori schema',\n",
+  );
+  assert.deepEqual(entries, [
+    { id: 'demo', field: 'body4', value: 'Quattro' },
+    { id: 'demo', field: 'body20', value: 'Venti' },
+  ]);
+});
+
 test('FU-009 — il controllo rileva chiavi mancanti e copie italiane', () => {
   const root = fixtureRoot();
   const id = 'demo';
@@ -62,6 +74,47 @@ test('FU-009 — il controllo rileva chiavi mancanti e copie italiane', () => {
   assert.equal(report.counts['missing-key'], 2);
   assert.equal(report.counts['source-echo'], 2);
   assert.ok(report.violations.every((violation) => violation.path.includes('content/')));
+});
+
+test('FU-009 — il controllo segue i body opzionali presenti nella sorgente', () => {
+  const root = fixtureRoot();
+  const id = 'optional-bodies';
+  const source = {
+    body1: 'Testo italiano uno',
+    body2: 'Testo italiano due',
+    body3: 'Testo italiano tre',
+    body4: 'Testo italiano quattro',
+    body20: 'Testo italiano venti',
+  };
+  for (const { rel } of BODY_ROOTS) {
+    writeArticle(root, rel, 'it', id, source);
+    writeArticle(root, rel, 'en', id, {
+      body1: 'English text one',
+      body2: 'English text two',
+      body3: 'English text three',
+    });
+    writeArticle(root, rel, 'de', id, {
+      ...source,
+      body4: 'Deutscher Text vier',
+      body20: 'Deutscher Text zwanzig',
+    });
+    writeArticle(root, rel, 'fr', id, {
+      ...source,
+      body4: 'Texte français quatre',
+      body20: 'Texte français vingt',
+    });
+  }
+
+  const report = inspectBlogLocaleCompleteness({ root, minItalianFiles: 1, minItalianFields: 1 });
+  assert.equal(report.ok, false);
+  assert.equal(report.counts['missing-key'], 4);
+  assert.ok(report.violations.every((violation) => violation.field !== 'body21'));
+  assert.deepEqual(
+    report.violations
+      .filter((violation) => violation.code === 'missing-key')
+      .map((violation) => violation.field),
+    ['body4', 'body20', 'body4', 'body20'],
+  );
 });
 
 test('FU-009 — il pavimento impedisce uno scan vuoto', () => {

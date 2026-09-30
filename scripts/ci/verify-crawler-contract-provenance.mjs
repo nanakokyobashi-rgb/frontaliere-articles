@@ -14,6 +14,9 @@
  *     ha emesso l'artifact. Quei file non esistono in questo checkout: nessuna
  *     riga di codice lo leggeva.
  *   · `generatorSha256` — l'hash del generatore stesso, sul sito. Idem.
+ *   · `observers[].sha256` — il digest dei test, selector, librerie e
+ *     workflow che rendono osservabile la generazione; ogni target viene
+ *     verificato localmente, sulla head del sito e sulla lineage.
  *
  * Un dato che nessuno legge non intercetta niente. Se il generatore cambia
  * lato sito, i 24 artifact qui diventano stantii e **il contratto resta
@@ -756,6 +759,19 @@ export function planProvenanceChecks(
     });
   }
 
+  // The lineage roster is not enough: the live site may have changed its
+  // roster after the contract was generated. Observe the same canonical JSON
+  // digest at the current ref so a post-sourceCommit drift is red as well.
+  if (lineage.validRosterPath && lineage.validRosterDigest) {
+    checks.push({
+      field: 'crawlerGeneration.rosterDigest',
+      ...declared(lineage.validRosterPath),
+      expected: lineage.validRosterDigest,
+      observationRef,
+      digestKind: 'canonical-json',
+    });
+  }
+
   for (const artifact of contract.artifacts || []) {
     const candidates = artifact.sourceLogic
       ? logicDirs.map((dir) => `${dir}/${artifact.sourceLogic}`)
@@ -816,6 +832,49 @@ export function planProvenanceChecks(
           lineage: true,
         });
       }
+    }
+  }
+
+  // Observers are generated/cross-repo files too. A contract that declares
+  // their count and digests without scheduling them leaves the observer path
+  // itself outside the provenance guarantee. Each target is checked locally,
+  // at the current site ref, and at the pinned sourceCommit lineage ref.
+  for (const observer of contract.observers || []) {
+    const target = typeof observer?.target === 'string' && SOURCE_PATH_RE.test(observer.target)
+      ? observer.target
+      : null;
+    const manifestEntry = target ? byManifestPath.get(target) : null;
+    const adapted = manifestEntry?.mode === 'adapted';
+    const expected = typeof observer?.sha256 === 'string' ? observer.sha256 : null;
+    const label = target || String(observer?.target || '<invalid>');
+    checks.push({
+      field: `${label}#sha256@local`,
+      ...localLineageCheck(`${label}#sha256@local`, expected, null),
+      localObserverFile: target,
+    });
+    checks.push({
+      field: `${label}#sha256`,
+      ...(adapted
+        ? {
+          sitePath: null,
+          sitePathCandidates: [],
+          localOnly: true,
+          localObserverFile: target,
+        }
+        : declared(manifestEntry?.sitePath || null)),
+      mode: manifestEntry?.mode || null,
+      adapted,
+      expected,
+      observationRef,
+    });
+    if (lineage.validSourceCommit && !adapted) {
+      checks.push({
+        field: `${label}#sha256@sourceCommit`,
+        ...declared(manifestEntry?.sitePath || null),
+        expected,
+        observationRef: lineage.lineageRef,
+        lineage: true,
+      });
     }
   }
 
@@ -1001,7 +1060,7 @@ export function formatReport({ results, counts, red, reason, observationRef = SI
  * Il client verso il sito. `GH_TOKEN` qui e' il `GITHUB_TOKEN` di QUESTO repo,
  * che su `valerielinc-ops/…` non ha alcun permesso: se raw lo rifiuta, la
  * risposta autorevole e' quella anonima — il repo del sito e' pubblico. Senza
- * questo fallback un 401 renderebbe `unobserved` tutte e 49 le voci, e un 404
+ * questo fallback un 401 renderebbe `unobserved` tutte le osservazioni remote, e un 404
  * da mancato accesso si travestirebbe da `absent`. Vedi
  * `scripts/lib/cross-repo-raw-fetch.mjs` (issue #982).
  */
@@ -1045,6 +1104,18 @@ async function main() {
       });
     }
   }
+  const localObserverHashes = new Map();
+  for (const observer of contract.observers || []) {
+    const target = typeof observer?.target === 'string' && SOURCE_PATH_RE.test(observer.target)
+      ? observer.target
+      : null;
+    if (!target) continue;
+    try {
+      localObserverHashes.set(target, sha256(fs.readFileSync(path.join(ROOT, target))));
+    } catch {
+      localObserverHashes.set(target, null);
+    }
+  }
   const runtimeChecks = planRuntimeFlagChecks(contract, artifactSources);
 
   // Un fetch per coppia ref/path DISTINTA: la stessa coordinata viene osservata
@@ -1068,6 +1139,12 @@ async function main() {
     if (check.localArtifactFile) {
       observed.set(check.field, {
         observed: localArtifactHashes.get(check.localArtifactFile) ?? null,
+      });
+      continue;
+    }
+    if (check.localObserverFile) {
+      observed.set(check.field, {
+        observed: localObserverHashes.get(check.localObserverFile) ?? null,
       });
       continue;
     }

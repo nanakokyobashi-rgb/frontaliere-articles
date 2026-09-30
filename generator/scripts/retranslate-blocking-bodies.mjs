@@ -112,7 +112,11 @@ import { sanitizeBodyText } from './lib/sanitize-body-braces.mjs';
 import { detectLanguage, detectLanguageWithConfidence } from './lib/detect-language.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
-import { inspectBlogLocaleCompleteness } from '../../scripts/ci/check-blog-locale-completeness.mjs';
+import {
+  BODY_FIELDS as WRITER_BODY_FIELDS,
+  extractBodyFields,
+  inspectBlogLocaleCompleteness,
+} from '../../scripts/ci/check-blog-locale-completeness.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 // `../..`: il transport ha spostato `scripts/` sotto `generator/scripts/`,
@@ -120,7 +124,17 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..', '..');
 
 /** I campi che la guardia concatena: si ri-traducono insieme o niente. */
-export const BODY_FIELDS = ['body1', 'body2', 'body3'];
+export const BODY_FIELDS = [...WRITER_BODY_FIELDS];
+
+/** Campi body effettivamente emessi per questo articolo dal writer. */
+export function bodyFieldsForSource(src, id) {
+  const fields = new Set(
+    extractBodyFields(src)
+      .filter((entry) => entry.id === id)
+      .map((entry) => entry.field),
+  );
+  return BODY_FIELDS.filter((field) => fields.has(field));
+}
 
 /**
  * Lo scan storico degli articoli misura i residui per RIGA, non sul body
@@ -885,9 +899,10 @@ async function processPair(pair, { CONTENT_ROOT, APPLY }) {
   const itSrc = readFileSync(itPath, 'utf8');
   let trSrc = readFileSync(trPath, 'utf8');
 
+  const availableBodyFields = bodyFieldsForSource(itSrc, pair.id);
   const repairFields = pair.structural && Array.isArray(pair.fields) && pair.fields.length > 0
-    ? BODY_FIELDS.filter((field) => pair.fields.includes(field))
-    : BODY_FIELDS;
+    ? availableBodyFields.filter((field) => pair.fields.includes(field))
+    : availableBodyFields;
   const italianSections = {};
   for (const f of repairFields) {
     const v = readBodyField(itSrc, pair.id, f);

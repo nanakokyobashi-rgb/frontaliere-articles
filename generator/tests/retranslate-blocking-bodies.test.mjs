@@ -64,6 +64,7 @@ import {
   scanItalianResidue,
   hasItalianResidue,
   currentBlockingCodes,
+  bodyFieldsForSource,
 } from '../scripts/retranslate-blocking-bodies.mjs';
 // Dal modulo corpus-only, NON da `lib/article-sanitizers.mjs`: quello e'
 // `identical` nel manifest del ciclo e un export aggiunto dal corpus lo
@@ -247,6 +248,18 @@ test('replaceBodyField preserva prosa con apostrofi, backslash e newline', () =>
 test('replaceBodyField rende null su chiave assente invece di riscrivere a meta', () => {
   const src = fileFor('x', { body1: 'uno' });
   assert.equal(replaceBodyField(src, 'x', 'body9', 'niente'), null);
+});
+
+test('FU-009 — --missing deriva anche i body opzionali dalla sorgente italiana', () => {
+  const src = fileFor('x', {
+    body1: 'uno',
+    body2: 'due',
+    body3: 'tre',
+    body4: 'quattro',
+    body20: 'venti',
+  });
+  assert.deepEqual(bodyFieldsForSource(src, 'x'), ['body1', 'body2', 'body3', 'body4', 'body20']);
+  assert.deepEqual(bodyFieldsForSource(src, 'altro'), []);
 });
 
 test('criticalCodes conta solo i critical, deduplicati', () => {

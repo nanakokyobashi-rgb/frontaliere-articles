@@ -4,7 +4,7 @@
  * abbia la stessa superficie di chiavi dell'italiano.
  *
  * FU-009: una traduzione può essere sintatticamente valida e tuttavia lasciare
- * una pagina senza body1/body2/body3. Il publisher non se ne accorge perché i
+ * una pagina senza body1..bodyN. Il publisher non se ne accorge perché i
  * body non entrano nell'API che costruisce; il sito lo scopre soltanto quando
  * prova a renderizzare la pagina. Questo controllo resta nel repo del corpus,
  * dove l'italiano è la sorgente autorevole degli id e delle chiavi.
@@ -25,7 +25,15 @@ export const BODY_ROOTS = Object.freeze([
 ]);
 export const LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
 export const TARGET_LOCALES = Object.freeze(['en', 'de', 'fr']);
-export const BODY_FIELDS = Object.freeze(['body1', 'body2', 'body3']);
+// Keep this in lockstep with buildBodyFile() in
+// generator/scripts/create-article.mjs: body1..body3 are required by the
+// historical schema; body4..body20 are optional per article and must still be
+// propagated to every locale when the writer emits them.
+export const MAX_BODY_KEYS = 20;
+export const BODY_FIELDS = Object.freeze(
+  Array.from({ length: MAX_BODY_KEYS }, (_, index) => `body${index + 1}`),
+);
+export const REQUIRED_BODY_FIELDS = Object.freeze(BODY_FIELDS.slice(0, 3));
 
 // These are ratchets, not a content count to be updated whenever a file is
 // added. They make an empty/truncated checkout fail instead of auto-passing.
@@ -34,7 +42,7 @@ export const MIN_ITALIAN_FIELDS = 3000;
 export const LANGUAGE_CHECK_MIN_CHARS = 120;
 export const LANGUAGE_CHECK_MIN_CONFIDENCE = 0.65;
 
-const BODY_KEY_RE = /['"]blog\.article\.([^'"]+)\.(body[123])['"]\s*:/gu;
+const BODY_KEY_RE = /['"]blog\.article\.([^'"]+)\.(body(?:[1-9]|1[0-9]|20))['"]\s*:/gu;
 const STRING_QUOTES = new Set(["'", '`']);
 
 function decodeTsString(raw) {
@@ -76,7 +84,8 @@ function readQuotedValue(source, offset) {
 }
 
 /**
- * Extracts only body1/body2/body3 entries and their decoded values.
+ * Extracts body1..body20 entries and their decoded values. The writer emits
+ * body1..body3 for the historical schema and body4..body20 opportunistically.
  *
  * @returns {Array<{id: string, field: string, value: string}>}
  */
@@ -310,14 +319,15 @@ export function inspectBlogLocaleCompleteness({
       italianFields += expected.size;
       expectedByFile.set(file, expected);
       sourceByFile.set(file, entries);
-      if (expected.size !== BODY_FIELDS.length) {
+      const missingRequiredFields = REQUIRED_BODY_FIELDS.filter((field) => !expected.has(field));
+      if (missingRequiredFields.length > 0) {
         addViolation(violations, {
           code: 'source-missing-key',
           section: bodyRoot.name,
           locale: 'it',
           file,
           path: relativePath,
-          fields: BODY_FIELDS.filter((field) => !expected.has(field)),
+          fields: missingRequiredFields,
           message: `${relativePath}: sorgente italiana incompleta`,
         });
       }
