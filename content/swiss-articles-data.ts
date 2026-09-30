@@ -21670,6 +21670,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'premi-malati-ticino-aumento-franchi-2027',
+    category: 'fiscale',
+    date: '2026-09-30T17:00:48.460Z',
+    image: '/images/blog/premi-malati-ticino-aumento-franchi-2027.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

@@ -7214,6 +7214,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.preventivo-2027-sindacati-austerita-carovita.title': '2027 Budget: Unions challenge austerity and the rising cost of living',
     'blog.article.preventivo-2027-sindacati-austerita-carovita.excerpt': 'OCST, VPOD, and SIT are challenging the State Council’s 2027 Budget Proposal, calling for a “change of course.” They criticize the 0.25% cost-of-living adjustment and the failure to replace 10% of the staff.',
     'blog.article.preventivo-2027-sindacati-austerita-carovita.imageAlt': 'Panoramic view of Bellinzona with a focus on public or administrative buildings, symbolizing cantonal policies.',
+    'blog.article.premi-malati-ticino-aumento-franchi-2027.title': 'Health Insurance Premiums: When 3.7% Doesn\'t Tell the Whole Story',
+    'blog.article.premi-malati-ticino-aumento-franchi-2027.excerpt': 'In 2027, the average health insurance premium in Ticino will increase by 3,7%, reaching 519.90 francs per month, an increase of 18.60 francs, 26% higher than the Swiss average of 412 francs.',
+    'blog.article.premi-malati-ticino-aumento-franchi-2027.imageAlt': 'Panoramic view of Lugano with people reflecting on finances, symbolizing the cost of living in Ticino.',
 };
 
 export default blogMetaChEn;

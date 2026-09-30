@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4048792": {
-    "articleId": "parmelin-siccita-prestiti-agricoltura-2025",
-    "ts": "2026-08-31T06:12:56.440Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/asb-prevede-crescita-per-settore-bancario-anche-nel-2026/91979115": {
     "articleId": "asb-banche-svizzera-crescita-2026",
     "ts": "2026-08-31T08:28:56.207Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/ticino/attualita/1953815/vpod-sindacati-sit-tagli-rincaro-ocst-contestano-carovita-austerita": {
     "articleId": "preventivo-2027-sindacati-austerita-carovita",
     "ts": "2026-09-30T16:23:19.554Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/rubriche/ospite/1953821/franchi-aumento-ticino-media-malati-premi-cassa-lorenzo-onderka": {
+    "articleId": "premi-malati-ticino-aumento-franchi-2027",
+    "ts": "2026-09-30T17:00:48.817Z",
     "keyForm": 2
   }
 }

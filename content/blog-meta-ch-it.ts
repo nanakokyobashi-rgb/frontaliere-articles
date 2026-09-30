@@ -7214,6 +7214,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.preventivo-2027-sindacati-austerita-carovita.title': 'Preventivo 2027: Sindacati contestano austerità e carovita',
     'blog.article.preventivo-2027-sindacati-austerita-carovita.excerpt': 'OCST, VPOD e SIT contestano il Preventivo 2027 del Consiglio di Stato, chiedendo di \'cambiare rotta\'. Criticano il carovita dello 0,25% e la mancata sostituzione del 10% del personale.',
     'blog.article.preventivo-2027-sindacati-austerita-carovita.imageAlt': 'Veduta panoramica di Bellinzona con un focus su edifici pubblici o amministrativi, simbolo delle politiche cantonali.',
+    'blog.article.premi-malati-ticino-aumento-franchi-2027.title': 'Premi di cassa malati: quando il 3,7% non racconta tutto',
+    'blog.article.premi-malati-ticino-aumento-franchi-2027.excerpt': 'Nel 2027 il premio medio della cassa malati in Ticino aumenterà del 3,7%, raggiungendo 519.90 franchi mensili, un incremento di 18.60 franchi, superiore del 26% alla media svizzera di 412 franchi.',
+    'blog.article.premi-malati-ticino-aumento-franchi-2027.imageAlt': 'Vista panoramica di Lugano con persone che riflettono sulle finanze, simbolo del costo della vita in Ticino.',
 };
 
 export default blogMetaChIt;

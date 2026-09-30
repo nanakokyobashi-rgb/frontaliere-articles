@@ -7214,6 +7214,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.preventivo-2027-sindacati-austerita-carovita.title': 'Haushalt 2027: Gewerkschaften gegen Sparen und Teuerung',
     'blog.article.preventivo-2027-sindacati-austerita-carovita.excerpt': 'OCST, VPOD und SIT lehnen den Haushaltsvoranschlag 2027 des Staatsrats ab und fordern einen „Kurswechsel“. Sie kritisieren die Teuerungsanpassung von 0,25 % und den fehlenden Ersatz von 10 % des Personals.',
     'blog.article.preventivo-2027-sindacati-austerita-carovita.imageAlt': 'Panoramablick auf Bellinzona mit Fokus auf öffentliche oder administrative Gebäude, die kantonale Politik symbolisieren.',
+    'blog.article.premi-malati-ticino-aumento-franchi-2027.title': 'Krankenkassenprämien: Wenn 3,7 % nicht alles sagen',
+    'blog.article.premi-malati-ticino-aumento-franchi-2027.excerpt': 'Im Jahr 2027 wird der durchschnittliche Krankenkassenbeitrag im Tessin um 3,7 % steigen und 519,90 Franken pro Monat erreichen – ein Anstieg um 18,60 Franken, der 26 % über dem Schweizer Durchschnitt von 412 Franken liegt.',
+    'blog.article.premi-malati-ticino-aumento-franchi-2027.imageAlt': 'Panoramablick auf Lugano mit Menschen, die über Finanzen nachdenken, als Symbol für die Lebenshaltungskosten im Tessin.',
 };
 
 export default blogMetaChDe;

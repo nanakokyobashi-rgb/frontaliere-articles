@@ -7214,6 +7214,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.preventivo-2027-sindacati-austerita-carovita.title': 'Budget 2027 : Les syndicats contestent l’austérité et la vie chère',
     'blog.article.preventivo-2027-sindacati-austerita-carovita.excerpt': 'OCST, VPOD et SIT contestent le Budget 2027 du Conseil d\'État, demandant de \'changer de cap\'. Ils critiquent la compensation du renchérissement de 0,25% et le non-remplacement de 10% du personnel.',
     'blog.article.preventivo-2027-sindacati-austerita-carovita.imageAlt': 'Vue panoramique de Bellinzona avec un accent sur les bâtiments publics ou administratifs, symbolisant les politiques cantonales.',
+    'blog.article.premi-malati-ticino-aumento-franchi-2027.title': 'Primes d\'assurance maladie : quand le 3,7% ne dit pas tout',
+    'blog.article.premi-malati-ticino-aumento-franchi-2027.excerpt': 'En 2027, la prime moyenne de la caisse-maladie au Tessin augmentera de 3,7%, atteignant 519.90 francs par mois, soit une hausse de 18.60 francs, supérieure de 26% à la moyenne suisse de 412 francs.',
+    'blog.article.premi-malati-ticino-aumento-franchi-2027.imageAlt': 'Vue panoramique de Lugano avec des personnes réfléchissant aux finances, symbolisant le coût de la vie au Tessin.',
 };
 
 export default blogMetaChFr;
