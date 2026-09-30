@@ -9,6 +9,7 @@ import {
   reviewHasLgtm,
   reviewHasZeroFindings,
   reviewIsApproved,
+  latestBotReviewOnHead,
   reviewGateEvidenceDecision,
   isTransientGithubReadError,
   withTransientGithubReadRetry,
@@ -83,6 +84,19 @@ test('usa l ultimo verdetto sulla HEAD e non accetta check pending o su altra HE
   }).allow, true);
   assert.equal(requiredVitestDecision([check({ status: 'in_progress', conclusion: null, completed_at: null })], HEAD).allow, false);
   assert.equal(requiredVitestDecision([check({ head_sha: OLD_HEAD })], HEAD).allow, false);
+});
+
+test('dopo un push fra due review accetta il nuovo LGTM sulla HEAD corrente', () => {
+  const oldHeadReview = review(CLEAN_BODY, OLD_HEAD, '2026-09-13T12:00:00Z');
+  const currentHeadReview = review(CLEAN_BODY, HEAD, '2026-09-13T12:05:00Z');
+  const reviews = [oldHeadReview, currentHeadReview];
+
+  assert.equal(latestBotReviewOnHead(reviews, HEAD), currentHeadReview);
+  assert.equal(evaluateNativeAutoMerge({
+    pr: pr({ headRefOid: HEAD }),
+    reviews,
+    checkRuns: [check({ head_sha: HEAD })],
+  }).allow, true);
 });
 
 test('il gate segue la generazione e non completed_at, e resta pending sul run nuovo', () => {

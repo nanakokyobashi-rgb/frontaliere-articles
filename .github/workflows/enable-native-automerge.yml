@@ -7,6 +7,16 @@ name: Enable native auto-merge
 # to be anchored to the current HEAD, so an opening event cannot opt in an
 # unreviewed PR.
 on:
+  # `tests.yml` calls this workflow after it has published and validated the
+  # current-head review. This is the reliable post-review path: it does not
+  # depend on `pull_request_review`, which GitHub does not emit when the
+  # review was created with GITHUB_TOKEN.
+  workflow_call:
+    inputs:
+      pr_number:
+        description: 'Open PR whose current-head verdict must be enrolled'
+        required: true
+        type: string
   # This workflow only calls the GitHub API and never executes PR code.
   # pull_request_target keeps the write permission available for fork PRs too.
   pull_request_target:
@@ -35,7 +45,7 @@ concurrency:
   # repository and branch because that identity is available on both PR
   # events and workflow_run, including runs without pull_requests. This keeps
   # cancel-in-progress effective while the job resolves the PR number below.
-  group: native-automerge-${{ github.event.pull_request.head.repo.full_name || github.event.workflow_run.head_repository.full_name || github.repository }}-${{ github.event.pull_request.head.ref || github.event.workflow_run.head_branch || github.run_id }}
+  group: native-automerge-${{ github.event.pull_request.head.repo.full_name || github.event.workflow_run.head_repository.full_name || github.repository }}-${{ inputs.pr_number || github.event.pull_request.head.ref || github.event.workflow_run.head_branch || github.run_id }}
   cancel-in-progress: true
 jobs:
   enable:
@@ -44,9 +54,14 @@ jobs:
     # dereferencing pull_request fields that do not exist.
     if: >-
       github.event_name == 'workflow_run' ||
+      github.event_name == 'workflow_call' ||
       (github.event_name == 'pull_request_review' && github.event.pull_request.draft == false) ||
       (github.event_name == 'pull_request_target' && github.event.pull_request.draft == false)
     runs-on: ubuntu-latest
+    # A post-review enrollment failure must not repaint the already-green
+    # required `tests` job. The gate itself remains fail-closed: no successful
+    # mutation means no native auto-merge, and the event/sweep fallbacks retry.
+    continue-on-error: ${{ github.event_name == 'workflow_call' }}
     steps:
       # This job needs only the Remote Config loader and its dependency-free
       # JWT helper. A git checkout still has to fetch the repository's large
@@ -208,7 +223,7 @@ jobs:
       - name: Enable GitHub auto-merge after verified verdict
         if: env.NATIVE_AUTOMERGE_BOOTSTRAP_READY == 'true'
         env:
-          PR_NUMBER: ${{ github.event.pull_request.number || '' }}
+          PR_NUMBER: ${{ inputs.pr_number || github.event.pull_request.number || '' }}
           WORKFLOW_HEAD_SHA: ${{ github.event.workflow_run.head_sha || '' }}
           REPOSITORY: ${{ github.repository }}
         run: |
