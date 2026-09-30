@@ -7133,6 +7133,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.acquisto-immobile-grigioni-costi.title': 'Buying a home in the Canton of Graubünden: prices and mortgage loans',
     'blog.article.acquisto-immobile-grigioni-costi.excerpt': 'Buying guide in Graubünden: price, own funds, mortgage affordability, transfer tax, notarial fees and taxation at three levels.',
     'blog.article.acquisto-immobile-grigioni-costi.imageAlt': 'Home in a Graubünden alpine landscape, illustrating a Swiss property purchase guide.',
+    'blog.article.lavoro-vaud-regole-salariali.title': 'Salaries and the labor market in Vaud: sectors and levels',
+    'blog.article.lavoro-vaud-regole-salariali.excerpt': 'No federal minimum wage: in the Canton of Vaud, the comparison involves hourly wages, AVS/LPP contributions, LAMal, taxes, and cost of living.',
+    'blog.article.lavoro-vaud-regole-salariali.imageAlt': 'Documents for analysing salaries and work in Canton Vaud',
 };
 
 export default blogMetaChEn;

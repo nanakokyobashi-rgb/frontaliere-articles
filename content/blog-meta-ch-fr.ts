@@ -7133,6 +7133,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.acquisto-immobile-grigioni-costi.title': 'Acheter une maison dans le canton des Grisons : prix et prêt hypothécaire',
     'blog.article.acquisto-immobile-grigioni-costi.excerpt': 'Guide d\'achat dans les Grisons : prix, fonds propres, capacité financière du prêt hypothécaire, impôt sur les mutations, frais notariaux et fiscalité à trois niveaux.',
     'blog.article.acquisto-immobile-grigioni-costi.imageAlt': 'Maison dans un paysage alpin des Grisons pour illustrer un achat immobilier.',
+    'blog.article.lavoro-vaud-regole-salariali.title': 'Salaires et marché du travail vaudois : secteurs et niveaux',
+    'blog.article.lavoro-vaud-regole-salariali.excerpt': 'Pas de salaire minimum fédéral : dans le canton de Vaud, la comparaison passe par les horaires, les cotisations AVS/LPP, LAMal, les impôts et le coût de la vie.',
+    'blog.article.lavoro-vaud-regole-salariali.imageAlt': 'Documents pour analyser salaire et travail dans le canton de Vaud',
 };
 
 export default blogMetaChFr;

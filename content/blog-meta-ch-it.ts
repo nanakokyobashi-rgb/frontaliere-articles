@@ -7133,6 +7133,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.acquisto-immobile-grigioni-costi.title': 'Comprare casa Canton Grigioni: prezzi e mutuo ipotecario',
     'blog.article.acquisto-immobile-grigioni-costi.excerpt': 'Guida all\'acquisto nei Grigioni: prezzo, fondi propri, sostenibilità del mutuo, imposta sui trapassi, spese notarili e fisco su tre livelli.',
     'blog.article.acquisto-immobile-grigioni-costi.imageAlt': 'Abitazione in un paesaggio alpino dei Grigioni, tema di una guida all\'acquisto immobiliare.',
+    'blog.article.lavoro-vaud-regole-salariali.title': 'Salari e mercato del lavoro Vaud: settori e livelli',
+    'blog.article.lavoro-vaud-regole-salariali.excerpt': 'Nessun salario minimo federale: nel Canton Vaud il confronto passa da orari, contributi AVS/LPP, LAMal, imposte e costo della vita.',
+    'blog.article.lavoro-vaud-regole-salariali.imageAlt': 'Documenti per analizzare salario e lavoro nel Canton Vaud',
 };
 
 export default blogMetaChIt;

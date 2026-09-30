@@ -7133,6 +7133,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.acquisto-immobile-grigioni-costi.title': 'Hauskauf im Kanton Graubünden: Preise und Hypothekarkredit',
     'blog.article.acquisto-immobile-grigioni-costi.excerpt': 'Leitfaden zum Kauf in Graubünden: Preis, Eigenmittel, Tragbarkeit der Hypothek, Handänderungssteuer, Notariatskosten und Steuerwesen auf drei Ebenen.',
     'blog.article.acquisto-immobile-grigioni-costi.imageAlt': 'Haus in einer alpinen Landschaft Graubündens als Motiv für einen Immobilienkauf.',
+    'blog.article.lavoro-vaud-regole-salariali.title': 'Löhne und Arbeitsmarkt Waadt: Branchen und Ebenen',
+    'blog.article.lavoro-vaud-regole-salariali.excerpt': 'Kein eidgenössischer Mindestlohn: Im Kanton Waadt geht es um Zeitpläne, AHV/BVG-BEITRÄGE, KVG, Steuern und Lebenshaltungskosten.',
+    'blog.article.lavoro-vaud-regole-salariali.imageAlt': 'Dokumente zur Analyse von Lohn und Arbeit im Kanton Waadt',
 };
 
 export default blogMetaChDe;

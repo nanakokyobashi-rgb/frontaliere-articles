@@ -21427,6 +21427,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'lavoro-vaud-regole-salariali',
+    category: 'pratico',
+    date: '2026-09-30T04:41:01.030Z',
+    image: '/images/blog/lavoro-vaud-regole-salariali.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

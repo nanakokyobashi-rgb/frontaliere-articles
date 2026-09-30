@@ -92489,6 +92489,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-lavoro-vaud-regole-salariali': {
+    title: 'Salari e mercato del lavoro Vaud: settori e livelli',
+    description: 'Guida pratica ai salari e al mercato del lavoro nel Canton Vaud: salario minimo, contributi AVS e LPP, orari, imposte, LAMal e costo della vita in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, salari, mercato, lavoro, vaud',
+    ogTitle: 'Salari e mercato del lavoro Vaud: settori e livelli',
+    ogDescription: 'Nel Canton Vaud il confronto non parte da un salario minimo federale, perché in Svizzera non esiste. La guida separa lordo e contributi, spiega i tre livelli fiscali, la LAMal, gli orari, le vacanze e le regole di disdetta.',
+    canonicalPath: '/articoli-svizzera/lavoro-vaud-regole-salariali/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Salari e mercato del lavoro Vaud: settori e livelli",
+      "description": "Guida pratica ai salari e al mercato del lavoro nel Canton Vaud: salario minimo, contributi AVS e LPP, orari, imposte, LAMal e costo della vita in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/lavoro-vaud-regole-salariali.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documenti per analizzare salario e lavoro nel Canton Vaud"
+      },
+      "datePublished": "2026-09-30T04:41:01+00:00",
+      "dateModified": "2026-09-30T04:41:01+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/lavoro-vaud-regole-salariali/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
