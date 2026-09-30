@@ -67,7 +67,7 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           # `fetch-depth: 0` e non 1: la verifica delle baseline del manifest
           # contro la storia dei path (passo in fondo) e' integrale o non e'.
@@ -82,7 +82,7 @@ jobs:
           filter: blob:limit=1m
 
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v7
         with:
           node-version: '22'
 

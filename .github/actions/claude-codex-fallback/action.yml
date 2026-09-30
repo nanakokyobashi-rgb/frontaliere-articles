@@ -1488,7 +1488,7 @@ runs:
       # state is deliberately non-retryable to avoid duplicate fixes/PRs.
       if: always() && inputs.claude_code_oauth_token != '' && steps.claude_bridge.outcome == 'success' && (steps.codex.outcome == 'skipped' || (steps.codex.outcome == 'failure' && steps.codex.outputs.side_effect_detected == 'false'))
       continue-on-error: true
-      uses: anthropics/claude-code-action@9c5ddab2e6d17b83ea679153b31f1d5f023cf636
+      uses: anthropics/claude-code-action@8ce9314fa9a404564fa7e954cd84f25bcba2b829
       env:
         GITHUB_PAT: ''
         GITHUB_PAT_NANAKO: ''

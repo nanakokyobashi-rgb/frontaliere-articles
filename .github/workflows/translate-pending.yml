@@ -65,7 +65,7 @@ jobs:
     steps:
       - name: Checkout frontaliere-si-o-no (attempt 1/2, sparse)
         id: site_checkout_primary
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         continue-on-error: true
         with:
           repository: valerielinc-ops/frontaliere-si-o-no
@@ -94,7 +94,7 @@ jobs:
       - name: Checkout frontaliere-si-o-no (attempt 2/2, sparse)
         id: site_checkout_retry
         if: steps.site_checkout_primary.outcome == 'failure'
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           repository: valerielinc-ops/frontaliere-si-o-no
           fetch-depth: 50
@@ -144,7 +144,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: node scripts/ci/translate-recovery-successor-guard.mjs
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: npm
@@ -153,7 +153,7 @@ jobs:
       - name: Restore per-company translation cache
         id: translation_cache_restore
         continue-on-error: true
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: data/translation-cache
           key: translation-cache-v1-translate-pending-${{ github.run_id }}-${{ github.run_attempt }}
@@ -172,7 +172,7 @@ jobs:
             echo "translation-cache: miss" >> "$GITHUB_STEP_SUMMARY"
           fi
       - name: Cache local MT models (Opus-MT + e5 semantic judge)
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: .cache/transformers
           key: local-mt-models-v2-opus-e5
@@ -180,7 +180,7 @@ jobs:
             local-mt-models-
             opus-mt-models-
       - name: Cache Argos Translate models
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: ~/.local/share/argos-translate/packages
           key: argos-translate-models-v1
@@ -211,8 +211,8 @@ jobs:
         if: always() && steps.checkout.outcome == 'success' && inputs.skip_translate != true && vars.LOCAL_MT_DISABLE != '1' && (github.run_attempt == 1 || steps.recovery_guard.outcome == 'success')
         continue-on-error: true
         run: |
-          python3 -m pip install --quiet --upgrade pip
-          python3 -m pip install --quiet argostranslate
+          python3 -m pip install --quiet --upgrade pip==26.2.1
+          python3 -m pip install --quiet argostranslate==1.11.0
           python3 scripts/local-mt-translate.py --install
       - name: Initialize translation run clock
         if: inputs.skip_translate != true
@@ -236,7 +236,7 @@ jobs:
       - name: Record translation rollout context
         env:
           ROLLOUT_REPOSITORY: ${{ github.repository }}
-          ROLLOUT_SWITCH: ${{ vars.LOCAL_MT_LANG_AWARE_OVERWRITE || '0' }}
+          ROLLOUT_SWITCH: ${{ vars.LOCAL_MT_LANG_AWARE_OVERWRITE || '1' }}
           SEMANTIC_MAX_OVERWRITES: ${{ vars.LOCAL_MT_SEMANTIC_MAX_OVERWRITES || '100' }}
           OPUSMT_RESCUE_SWITCH: ${{ vars.LOCAL_MT_OPUSMT_RESCUE || '0' }}
         run: |
@@ -253,7 +253,7 @@ jobs:
         env:
           LOCAL_MT_TIME_BUDGET_MS: "9000000"
           LOCAL_MT_MOPUP_DEADLINE_MS: "12600000"
-          LOCAL_MT_LANG_AWARE_OVERWRITE: ${{ vars.LOCAL_MT_LANG_AWARE_OVERWRITE || '0' }}
+          LOCAL_MT_LANG_AWARE_OVERWRITE: ${{ vars.LOCAL_MT_LANG_AWARE_OVERWRITE || '1' }}
           LOCAL_MT_SEMANTIC_MAX_OVERWRITES: ${{ vars.LOCAL_MT_SEMANTIC_MAX_OVERWRITES || '100' }}
           LOCAL_MT_SEMANTIC_TELEMETRY_PATH: ${{ runner.temp }}/local-mt-semantic-telemetry-phase-2a.json
           LOCAL_MT_OPUSMT_RESCUE: ${{ vars.LOCAL_MT_OPUSMT_RESCUE || '0' }}
@@ -363,7 +363,7 @@ jobs:
         env:
           LOCAL_MT_TIME_BUDGET_MS: "9000000"
           LOCAL_MT_MOPUP_DEADLINE_MS: "12600000"
-          LOCAL_MT_LANG_AWARE_OVERWRITE: ${{ vars.LOCAL_MT_LANG_AWARE_OVERWRITE || '0' }}
+          LOCAL_MT_LANG_AWARE_OVERWRITE: ${{ vars.LOCAL_MT_LANG_AWARE_OVERWRITE || '1' }}
           LOCAL_MT_SEMANTIC_MAX_OVERWRITES: ${{ vars.LOCAL_MT_SEMANTIC_MAX_OVERWRITES || '100' }}
           LOCAL_MT_SEMANTIC_TELEMETRY_PATH: ${{ runner.temp }}/local-mt-semantic-telemetry-phase-2c.json
           LOCAL_MT_OPUSMT_RESCUE: ${{ vars.LOCAL_MT_OPUSMT_RESCUE || '0' }}
@@ -596,7 +596,7 @@ jobs:
       - name: Save per-company translation cache
         if: always() && steps.checkout.outcome == 'success' && inputs.dry_run != true && (github.run_attempt == 1 || steps.recovery_guard.outcome == 'success')
         continue-on-error: true
-        uses: actions/cache/save@v5
+        uses: actions/cache/save@v6
         with:
           path: data/translation-cache
           key: translation-cache-v1-translate-pending-${{ github.run_id }}-${{ github.run_attempt }}

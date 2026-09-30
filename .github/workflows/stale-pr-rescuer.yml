@@ -1158,7 +1158,7 @@ jobs:
       # minuti) non cambia l'esito. Il cron e il dispatch lo portano sempre.
       - name: Checkout orphan PR custodian
         if: steps.scope.outputs.mode == 'full'
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           fetch-depth: 1
           sparse-checkout: |
@@ -1169,7 +1169,7 @@ jobs:
 
       - name: Setup Node.js
         if: steps.scope.outputs.mode == 'full'
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v7
         with:
           node-version: '22'
 

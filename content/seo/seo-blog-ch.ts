@@ -92217,16 +92217,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
   },
 
   'blog-samedan-aeroporto-rinnovo-2025': {
-    title: 'Samedan airport renewal awaits federal court decision',
+    title: 'Il rinnovo dell\'aeroporto di Samedan attende la decisione del Tribunale federale',
     description: 'Il rinnovo dell\'aeroporto di Samedan, approvato con oltre il 54% dei voti il 17 agosto 2025, è bloccato da un ricorso al Tribunale federale. Si attendono',
     keywords: 'frontalieri, ticino, svizzera, italia, samedan, airport, renewal, awaits',
-    ogTitle: 'Samedan airport renewal awaits federal court decision',
+    ogTitle: 'Il rinnovo dell\'aeroporto di Samedan attende la decisione del Tribunale federale',
     ogDescription: 'Il progetto di rinnovo dell\'aeroporto di Samedan, votato positivamente dall\'11 comuni dell\'Alta Engadina il 17 agosto 2025 con oltre il 54% di consenso, rimane fermo a causa di un ricorso pendente davanti al Tribunale federale. Mentre si attende',
     canonicalPath: '/articoli-svizzera/samedan-aeroporto-rinnovo-2025/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
-      "headline": "Samedan airport renewal awaits federal court decision",
+      "headline": "Il rinnovo dell'aeroporto di Samedan attende la decisione del Tribunale federale",
       "description": "Il rinnovo dell'aeroporto di Samedan, approvato con oltre il 54% dei voti il 17 agosto 2025, è bloccato da un ricorso al Tribunale federale. Si attendono",
       "image": {
         "@type": "ImageObject",

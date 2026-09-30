@@ -413,7 +413,7 @@ test('i gate realistici fanno checkout della storia completa richiesta dal floor
   for (const workflow of [GENERATOR_WORKFLOW, CONTENT_GATES_WORKFLOW, TESTS_WORKFLOW]) {
     assert.match(
       fs.readFileSync(workflow, 'utf8'),
-      /uses: actions\/checkout@v5\s+with:\s+(?:#.*\n\s*)*fetch-depth:\s*0/,
+      /uses: actions\/checkout@v7\s+with:\s+(?:#.*\n\s*)*fetch-depth:\s*0/,
       `${path.basename(workflow)} deve rendere verificabile la revisione precedente`,
     );
   }
@@ -665,7 +665,7 @@ test('publish-api.yml esegue il gate, e gli passa la directory del parser', () =
   // trovava la riga del trigger e l'ordine risultava sempre sbagliato. Preso
   // da questo stesso test alla prima esecuzione.
   const iGate = src.indexOf('node scripts/ci/check-blog-body-syntax.mjs');
-  const iBuild = src.indexOf('npx -y tsx@4 scripts/build-api.mjs');
+  const iBuild = src.indexOf('npx -y tsx@4.23.15 scripts/build-api.mjs');
   assert.ok(iGate > 0, 'invocazione del gate non trovata');
   assert.ok(iBuild > 0, 'invocazione del build non trovata');
   assert.ok(iGate < iBuild, 'il preflight deve precedere la costruzione della superficie dati');

@@ -38,7 +38,7 @@
  *
  *   1. **Strutturale (la piu' importante, e non e' un'euristica).**
  *      `tests.yml`, che ospita questo gate, gira su `pull_request` con
- *      `actions/checkout@v5`, che su quell'evento estrae il MERGE REF — cioe' l'albero della PR gia'
+ *      `actions/checkout@v7`, che su quell'evento estrae il MERGE REF — cioe' l'albero della PR gia'
  *      fusa nella base. Un file che la PR AGGIUNGE esiste li' dentro: la classe
  *      «ho citato il file che sto creando» non produce un finding per
  *      costruzione, senza che nessuno debba annotare niente.

@@ -33,7 +33,7 @@
  * to be importable here directly, with no behaviour change and no tsx
  * subprocess.
  *
- * Measured effect on the live corpus (2026-08-10, `npx -y tsx@4
+ * Measured effect on the live corpus (2026-08-10, `npx -y tsx@4.23.15
  * scripts/build-api.mjs`): sitemap-blog.xml went from 3166 to 3164 `<url>`
  * blocks after this fix — the two shadowed piastrellista variants, and only
  * those.

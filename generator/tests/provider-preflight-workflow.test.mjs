@@ -19,7 +19,7 @@ test('Generate Blog Article esegue il preflight dopo il setup opzionale e prima 
   // Haiku spento (2026-09-24): nessuno step riceve piu' il token Claude.
   assert.doesNotMatch(WORKFLOW.slice(preflight, generate), /CLAUDE_CODE_OAUTH_TOKEN:/);
   assert.match(WORKFLOW.slice(preflight, generate), /Upload provider preflight report/);
-  assert.match(WORKFLOW.slice(preflight, generate), /actions\/upload-artifact@v4/);
+  assert.match(WORKFLOW.slice(preflight, generate), /actions\/upload-artifact@v7/);
   const nextStep = WORKFLOW.indexOf('\n      - ', generate + 1);
   const generateBlock = WORKFLOW.slice(generate, nextStep === -1 ? undefined : nextStep);
   assert.doesNotMatch(generateBlock, /CLAUDE_CODE_OAUTH_TOKEN:/);

@@ -293,7 +293,7 @@ test('batch-faq-articles abilita il fallback locale Opus-MT per le FAQ', () => {
   assert.ok(cacheIndex >= 0, 'cache locale Opus-MT non configurata');
   const cache = stepBlock(lines, cacheIndex);
   assert.match(cache, /if: steps\.mode\.outputs\.dry != 'true'/);
-  assert.match(cache, /uses: actions\/cache@v5/);
+  assert.match(cache, /uses: actions\/cache@v6/);
   assert.match(cache, /path: \.cache\/transformers/);
   assert.match(cache, /key: local-mt-models-v2-opus-e5/);
 
