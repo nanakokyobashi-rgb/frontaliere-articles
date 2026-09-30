@@ -7229,6 +7229,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.svizzeri-contro-tassa-zucchero.title': 'Die Schweizer lehnen eine Steuer auf Zucker, Salz oder Fette ab',
     'blog.article.svizzeri-contro-tassa-zucchero.excerpt': '68 % der von Gfs.Bern Befragten lehnen die Lebensmittelsteuer ab. Die Umfrage zeigt, dass Forderungen nach Prävention und Schutz von Minderjährigen laut werden.',
     'blog.article.svizzeri-contro-tassa-zucchero.imageAlt': 'Lebensmittel in einem Schweizer Supermarkt',
+    'blog.article.guida-aiuti-formazione-vallese.title': 'Stipendien des Kantons Wallis: Voraussetzungen und Beträge',
+    'blog.article.guida-aiuti-formazione-vallese.excerpt': 'Stipendien und Studiendarlehen im Kanton Wallis: Was Sie zu Voraussetzungen, Höchstbeträgen, Fristen und der zuständigen Stelle wissen sollten.',
+    'blog.article.guida-aiuti-formazione-vallese.imageAlt': 'Stipendienunterlagen auf einem Schreibtisch vor Schweizer Alpenlandschaft',
 };
 
 export default blogMetaChDe;

@@ -7229,6 +7229,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.svizzeri-contro-tassa-zucchero.title': 'Svizzeri contrari alla tassa su zucchero, sale o grassi',
     'blog.article.svizzeri-contro-tassa-zucchero.excerpt': 'Il 68% degli intervistati da Gfs.Bern respinge la tassa sugli alimenti. Il monitoraggio evidenzia richieste di prevenzione e tutela dei minori.',
     'blog.article.svizzeri-contro-tassa-zucchero.imageAlt': 'Prodotti alimentari esposti sugli scaffali di un negozio in Svizzera',
+    'blog.article.guida-aiuti-formazione-vallese.title': 'Borse di studio canton Vallese: requisiti e importi',
+    'blog.article.guida-aiuti-formazione-vallese.excerpt': 'Borse di studio e prestiti allo studio nel Cantone di Vallese: cosa verificare su requisiti, importi massimi, termini e ufficio competente.',
+    'blog.article.guida-aiuti-formazione-vallese.imageAlt': 'Documenti per borse di studio su una scrivania con paesaggio alpino svizzero',
 };
 
 export default blogMetaChIt;

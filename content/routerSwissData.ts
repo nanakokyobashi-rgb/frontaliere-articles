@@ -2432,6 +2432,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'dibattito-nazionale-siccita-rosti': { it: 'dibattito-nazionale-siccita-rosti', en: 'national-drought-debate-rosti', de: 'nationale-duerre-debatte-rosti', fr: 'debat-national-secheresse-rosti' },
  'firma-parentale-berna': { it: 'firma-parentale-berna', en: 'parental-leave-signatures-bern', de: 'elternzeit-unterschriften-bern', fr: 'conge-parental-signatures-berne' },
  'svizzeri-contro-tassa-zucchero': { it: 'svizzeri-contro-tassa-zucchero', en: 'swiss-against-sugar-tax', de: 'schweizer-gegen-zuckersteuer', fr: 'suisses-contre-taxe-sucre' },
+ 'guida-aiuti-formazione-vallese': { it: 'guida-aiuti-formazione-vallese', en: 'valais-study-support-guide', de: 'studienhilfen-wallis-leitfaden', fr: 'aides-etudes-valais-guide' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

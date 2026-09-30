@@ -7229,6 +7229,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.svizzeri-contro-tassa-zucchero.title': 'Suisses opposés à la taxe sur le sucre, le sel ou les matières grasses',
     'blog.article.svizzeri-contro-tassa-zucchero.excerpt': '68% des personnes interrogées par Gfs.Bern rejettent la taxe sur les aliments. Le suivi met en évidence des demandes de prévention et de protection des mineurs.',
     'blog.article.svizzeri-contro-tassa-zucchero.imageAlt': 'Produits alimentaires dans un supermarché suisse',
+    'blog.article.guida-aiuti-formazione-vallese.title': 'Bourses d’études du canton du Valais : conditions requises et montants',
+    'blog.article.guida-aiuti-formazione-vallese.excerpt': 'Bourses d’études et prêts d’études dans le canton du Valais : ce qu’il faut vérifier concernant les conditions requises, les montants maximaux, les délais et le service compétent.',
+    'blog.article.guida-aiuti-formazione-vallese.imageAlt': 'Dossiers de bourses d\'études sur un bureau face aux Alpes suisses',
 };
 
 export default blogMetaChFr;

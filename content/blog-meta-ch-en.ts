@@ -7229,6 +7229,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.svizzeri-contro-tassa-zucchero.title': 'Swiss Oppose Taxes on Sugar, Salt, or Fats',
     'blog.article.svizzeri-contro-tassa-zucchero.excerpt': '68% of those surveyed by Gfs.Bern reject the tax on food. The monitoring highlights calls for prevention and the protection of minors.',
     'blog.article.svizzeri-contro-tassa-zucchero.imageAlt': 'Food products displayed on supermarket shelves in Switzerland',
+    'blog.article.guida-aiuti-formazione-vallese.title': 'Scholarships in the Canton of Valais: Eligibility Requirements and Amounts',
+    'blog.article.guida-aiuti-formazione-vallese.excerpt': 'Scholarships and study loans in the Canton of Valais: what to check regarding requirements, maximum amounts, deadlines and the responsible office.',
+    'blog.article.guida-aiuti-formazione-vallese.imageAlt': 'Scholarship documents on a desk with a Swiss Alpine landscape',
 };
 
 export default blogMetaChEn;
