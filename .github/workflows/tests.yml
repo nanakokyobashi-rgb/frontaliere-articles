@@ -1862,5 +1862,5 @@ jobs:
       github.event.pull_request.draft == false && needs.tests.result == 'success' }}
     uses: ./.github/workflows/enable-native-automerge.yml
     with:
-      pr_number: ${{ github.event.pull_request.number }}
+      pr_number: ${{ format('{0}', github.event.pull_request.number) }}
     secrets: inherit

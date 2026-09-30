@@ -18,7 +18,7 @@ const VITEST_IMPORT_RE = /\bimport\s+(?:[^;]*?\s+from\s+)?['"]\.\/lib\/vitestChe
 test('riattiva il gate sugli eventi che possono cambiare review, check o HEAD', () => {
   assert.match(source, /workflow_call:\s*\n\s+inputs:\s*\n\s+pr_number:/);
   assert.match(source, /pr_number:[\s\S]*?required: true[\s\S]*?type: string/);
-  assert.match(source, /continue-on-error: \$\{\{ github\.event_name == 'workflow_call' \}\}/);
+  assert.match(source, /continue-on-error: \$\{\{ inputs\.pr_number != '' \}\}/);
   assert.match(source, /PR_NUMBER: \$\{\{ inputs\.pr_number \|\| github\.event\.pull_request\.number \|\| '' \}\}/);
   assert.match(source, /types: \[opened, reopened, ready_for_review, synchronize\]/);
   assert.match(source, /pull_request_review:/);
@@ -26,7 +26,7 @@ test('riattiva il gate sugli eventi che possono cambiare review, check o HEAD', 
   assert.match(source, /workflow_run:/);
   assert.match(source, /workflows: \[tests\]/);
   assert.match(source, /concurrency:\s*\n\s+# Every trigger below calls the same idempotent gate\./);
-  assert.match(source, /group: native-automerge-\$\{\{ github\.event\.pull_request\.head\.repo\.full_name \|\| github\.event\.workflow_run\.head_repository\.full_name \|\| github\.repository \}\}-\$\{\{ inputs\.pr_number \|\| github\.event\.pull_request\.head\.ref \|\| github\.event\.workflow_run\.head_branch \|\| github\.run_id \}\}/);
+  assert.match(source, /group: native-automerge-\$\{\{ github\.event\.pull_request\.head\.repo\.full_name \|\| github\.event\.workflow_run\.head_repository\.full_name \|\| github\.repository \}\}-\$\{\{ github\.event\.pull_request\.head\.ref \|\| github\.event\.workflow_run\.head_branch \|\| inputs\.pr_number \|\| github\.run_id \}\}/);
   assert.doesNotMatch(source, /group: native-automerge-.*pull_requests\[0\]\.number/);
   assert.match(source, /cancel-in-progress: true/);
   assert.match(source, /NATIVE_AUTOMERGE_BOOTSTRAP_READY=false/);
@@ -39,9 +39,9 @@ test('tests richiama il gate dopo il verdetto, senza dipendere da pull_request_r
   assert.match(postReview, /needs: tests/);
   assert.match(postReview, /needs\.tests\.result == 'success'/);
   assert.match(postReview, /uses: \.\/\.github\/workflows\/enable-native-automerge\.yml/);
-  assert.match(postReview, /pr_number: \$\{\{ github\.event\.pull_request\.number \}\}/);
+  assert.match(postReview, /pr_number: \$\{\{ format\('\{0\}', github\.event\.pull_request\.number\) \}\}/);
   assert.match(postReview, /secrets: inherit/);
-  assert.match(source, /github\.event_name == 'workflow_call'/);
+  assert.match(source, /inputs\.pr_number != ''/);
   assert.ok(
     postReviewOffset > testsSource.indexOf('Generator CI gate (solo per le PR che ne toccano i path)'),
     'il ponte deve arrivare dopo la pubblicazione/verifica del verdetto',

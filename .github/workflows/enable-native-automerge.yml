@@ -45,7 +45,7 @@ concurrency:
   # repository and branch because that identity is available on both PR
   # events and workflow_run, including runs without pull_requests. This keeps
   # cancel-in-progress effective while the job resolves the PR number below.
-  group: native-automerge-${{ github.event.pull_request.head.repo.full_name || github.event.workflow_run.head_repository.full_name || github.repository }}-${{ inputs.pr_number || github.event.pull_request.head.ref || github.event.workflow_run.head_branch || github.run_id }}
+  group: native-automerge-${{ github.event.pull_request.head.repo.full_name || github.event.workflow_run.head_repository.full_name || github.repository }}-${{ github.event.pull_request.head.ref || github.event.workflow_run.head_branch || inputs.pr_number || github.run_id }}
   cancel-in-progress: true
 jobs:
   enable:
@@ -54,14 +54,14 @@ jobs:
     # dereferencing pull_request fields that do not exist.
     if: >-
       github.event_name == 'workflow_run' ||
-      github.event_name == 'workflow_call' ||
+      inputs.pr_number != '' ||
       (github.event_name == 'pull_request_review' && github.event.pull_request.draft == false) ||
       (github.event_name == 'pull_request_target' && github.event.pull_request.draft == false)
     runs-on: ubuntu-latest
     # A post-review enrollment failure must not repaint the already-green
     # required `tests` job. The gate itself remains fail-closed: no successful
     # mutation means no native auto-merge, and the event/sweep fallbacks retry.
-    continue-on-error: ${{ github.event_name == 'workflow_call' }}
+    continue-on-error: ${{ inputs.pr_number != '' }}
     steps:
       # This job needs only the Remote Config loader and its dependency-free
       # JWT helper. A git checkout still has to fetch the repository's large
