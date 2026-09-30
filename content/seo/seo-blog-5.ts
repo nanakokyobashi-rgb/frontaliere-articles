@@ -97417,6 +97417,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-preventivo-2027-disavanzo': {
+    title: 'Preventivo 2027 Ticino: disavanzo d’esercizio di 98,5 mln',
+    description: 'Il cantone Ticino presenta il preventivo 2027 con uscite di 4,73 mrd, entrate di 4,63 mrd, disavanzo d’esercizio di 98,5 mln e totale di 161,4 mln, investimenti',
+    keywords: 'frontalieri, ticino, svizzera, italia, preventivo, disavanzo, esercizio, prevede',
+    ogTitle: 'Preventivo 2027 Ticino: disavanzo di 98,5 mln',
+    ogDescription: 'Il nuovo preventivo 2027 del Cantone Ticino mostra uscite per 4,73 mrd CHF, entrate per 4,63 mrd CHF, con un disavanzo d’esercizio di 98,5 mln CHF. Il disavanzo totale è 161,4 mln CHF, gli investimenti restano a 290,5 mln CHF e l’autofinanziamento è',
+    canonicalPath: '/articoli-frontaliere/preventivo-2027-disavanzo',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Preventivo 2027 Ticino: disavanzo d’esercizio di 98,5 mln",
+      "description": "Il cantone Ticino presenta il preventivo 2027 con uscite di 4,73 mrd, entrate di 4,63 mrd, disavanzo d’esercizio di 98,5 mln e totale di 161,4 mln, investimenti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/preventivo-2027-disavanzo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica di Lugano al sorgere del sole, con le montagne e il lago riflessi."
+      },
+      "datePublished": "2026-09-30T09:59:43+00:00",
+      "dateModified": "2026-09-30T09:59:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/preventivo-2027-disavanzo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

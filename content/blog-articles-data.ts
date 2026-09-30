@@ -36925,6 +36925,15 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'preventivo-2027-disavanzo',
+ category: 'fiscale',
+ date: '2026-09-30T09:59:43.308Z',
+ image: '/images/blog/preventivo-2027-disavanzo.webp',
+ hasCalculator: true,
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

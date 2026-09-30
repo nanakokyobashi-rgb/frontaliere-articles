@@ -12304,6 +12304,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.frontalieri-vendemmia-ticino-stipendio.title': 'Grenzgänger bei der Weinlese im Tessin: 15 Franken pro Stunde',
     'blog.article.frontalieri-vendemmia-ticino-stipendio.excerpt': 'Im Tessin arbeiten 48 Grenzgänger, hauptsächlich aus der Region Varese, bei der Weinlese in den Hügeln von Mendrisiotto. Der Nettostundenlohn liegt bei etwa 15 Franken, die Verträge haben eine durchschnittliche Laufzeit von anderthalb Monaten.',
     'blog.article.frontalieri-vendemmia-ticino-stipendio.imageAlt': 'Grenzgänger bei der Weinlese in den Hügeln des Mendrisiotto, Tessin.',
+    'blog.article.preventivo-2027-disavanzo.title': 'Budget 2027 Tessin: Jahresdefizit von 98,5 Mio.',
+    'blog.article.preventivo-2027-disavanzo.excerpt': 'Das Budget 2027 sieht Ausgaben in Höhe von 4,73 Mrd. EUR, Einnahmen in Höhe von 4,63 Mrd. EUR und ein Betriebsdefizit von 98,5 Mio. EUR mit einem Gesamtdefizit von 161,4 Mio. EUR vor.',
+    'blog.article.preventivo-2027-disavanzo.imageAlt': 'Panoramablick auf Lugano bei Sonnenaufgang, Berge und See spiegeln sich.',
 };
 
 export default blogMetaDe;

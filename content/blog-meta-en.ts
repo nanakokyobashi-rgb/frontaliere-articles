@@ -12305,6 +12305,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.frontalieri-vendemmia-ticino-stipendio.title': 'Cross-border workers for the grape harvest in Ticino: 15 francs an hour',
     'blog.article.frontalieri-vendemmia-ticino-stipendio.excerpt': 'In Ticino, 48 cross-border workers, mostly from the Varese area, work the grape harvest in the hills of Mendrisiotto. The net hourly pay is around 15 francs, with contracts lasting an average of a month and a half.',
     'blog.article.frontalieri-vendemmia-ticino-stipendio.imageAlt': 'Cross-border workers harvesting grapes on the hills of Mendrisiotto, Ticino.',
+    'blog.article.preventivo-2027-disavanzo.title': 'Ticino 2027 budget: operating deficit of 98,5 mln',
+    'blog.article.preventivo-2027-disavanzo.excerpt': 'The 2027 budget provides for expenditure of 4,73 mrd, revenue of 4,63 mrd and an operating deficit of 98,5 mln, with a total deficit of 161,4 mln.',
+    'blog.article.preventivo-2027-disavanzo.imageAlt': 'Panoramic view of Lugano at sunrise, mountains and lake reflected.',
 };
 
 export default blogMetaEn;
