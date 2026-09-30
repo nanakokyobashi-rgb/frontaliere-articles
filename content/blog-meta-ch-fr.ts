@@ -7262,6 +7262,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.guida-assenze-famiglia-svizzera.title': 'Congé parental en Suisse : durée et indemnité APG',
     'blog.article.guida-assenze-famiglia-svizzera.excerpt': 'En Suisse, le congé de maternité dure 14 semaines avec allocation à 80 % de l\'APG ; le congé de paternité dure 2 semaines.',
     'blog.article.guida-assenze-famiglia-svizzera.imageAlt': 'Parent planifiant le congé parental avec calendrier et documents suisses',
+    'blog.article.ticino-futuro-abitare-lugano.title': 'Le Tessin : les défis du logement débattus au LAC de Lugano',
+    'blog.article.ticino-futuro-abitare-lugano.excerpt': 'HOMEspace présenté, le numéro spécial d\'INFOpmi au LAC : architecture, finance et institutions confrontent leurs points de vue sur l\'avenir du territoire tessinois au cours des 20 prochaines années.',
+    'blog.article.ticino-futuro-abitare-lugano.imageAlt': 'Le centre culturel LAC Lugano Arte e Cultura à Lugano',
 };
 
 export default blogMetaChFr;

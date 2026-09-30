@@ -7262,6 +7262,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.guida-assenze-famiglia-svizzera.title': 'Congedo parentale in Svizzera: durata e indennità IPG',
     'blog.article.guida-assenze-famiglia-svizzera.excerpt': 'In Svizzera il congedo di maternità dura 14 settimane con indennità all\'80% IPG; il congedo di paternità dura 2 settimane.',
     'blog.article.guida-assenze-famiglia-svizzera.imageAlt': 'Genitore pianifica il congedo parentale con calendario e documenti svizzeri',
+    'blog.article.ticino-futuro-abitare-lugano.title': 'Ticino, le sfide dell\'abitare discusse al LAC di Lugano',
+    'blog.article.ticino-futuro-abitare-lugano.excerpt': 'Presentato HOMEspace, lo speciale di INFOpmi al LAC: architettura, finanza e istituzioni a confronto sul futuro del territorio ticinese nei prossimi 20 anni.',
+    'blog.article.ticino-futuro-abitare-lugano.imageAlt': 'Il centro culturale LAC Lugano Arte e Cultura a Lugano',
 };
 
 export default blogMetaChIt;

@@ -7262,6 +7262,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.guida-assenze-famiglia-svizzera.title': 'Parental leave in Switzerland: duration and IPG allowance',
     'blog.article.guida-assenze-famiglia-svizzera.excerpt': 'In Switzerland, maternity leave lasts 14 weeks with an 80% IPG benefit; paternity leave lasts 2 weeks.',
     'blog.article.guida-assenze-famiglia-svizzera.imageAlt': 'Parent planning Swiss parental leave with a calendar and documents at home',
+    'blog.article.ticino-futuro-abitare-lugano.title': 'Ticino, housing challenges discussed at Lugano’s LAC',
+    'blog.article.ticino-futuro-abitare-lugano.excerpt': 'HOMEspace, INFOpmi’s special event at the LAC, was presented: architecture, finance, and institutions came together to discuss the future of the Ticino region over the next 20 years.',
+    'blog.article.ticino-futuro-abitare-lugano.imageAlt': 'The LAC Lugano Arte e Cultura center in Lugano',
 };
 
 export default blogMetaChEn;

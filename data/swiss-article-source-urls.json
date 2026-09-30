@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4024606": {
-    "articleId": "siccita-depuratori-crisi-acque",
-    "ts": "2026-08-31T17:06:56.757Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/commissione-cst-frena-governo-su-capitale-proprio-grandi-banche/91982900": {
     "articleId": "commissione-cst-copertura-banche-svizzere",
     "ts": "2026-08-31T20:27:08.556Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1953847/emmen-coop-vendita-supermercati-ticino-raggiunge-quota-leader": {
     "articleId": "coop-millesimo-supermercato",
     "ts": "2026-09-30T23:06:34.567Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/rubriche/aziende-ticinesi-informano/1953866/ticino-territorio-qualita-architettura-lugano-lac": {
+    "articleId": "ticino-futuro-abitare-lugano",
+    "ts": "2026-09-30T23:49:04.566Z",
     "keyForm": 2
   }
 }

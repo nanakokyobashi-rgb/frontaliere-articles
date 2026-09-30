@@ -7262,6 +7262,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.guida-assenze-famiglia-svizzera.title': 'Elternurlaub in der Schweiz: Dauer und EO-Entschädigung',
     'blog.article.guida-assenze-famiglia-svizzera.excerpt': 'In der Schweiz beträgt der Mutterschaftsurlaub 14 Wochen mit einer Entschädigung in Höhe von 80 % der IPG; der Vaterschaftsurlaub dauert 2 Wochen.',
     'blog.article.guida-assenze-famiglia-svizzera.imageAlt': 'Elternteil plant den Elternurlaub mit Kalender und Schweizer Unterlagen',
+    'blog.article.ticino-futuro-abitare-lugano.title': 'Tessin: Im LAC in Lugano wurden die Herausforderungen des Wohnens diskutiert',
+    'blog.article.ticino-futuro-abitare-lugano.excerpt': 'HOMEspace, die Sonderveranstaltung von INFOpmi im LAC, wurde vorgestellt: Architektur, Finanzwesen und Institutionen diskutieren über die Zukunft des Tessins in den nächsten 20 Jahren.',
+    'blog.article.ticino-futuro-abitare-lugano.imageAlt': 'Das Kulturzentrum LAC Lugano Arte e Cultura in Lugano',
 };
 
 export default blogMetaChDe;
