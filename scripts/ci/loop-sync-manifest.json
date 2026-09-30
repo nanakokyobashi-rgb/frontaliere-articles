@@ -4063,6 +4063,16 @@
       }
     },
     {
+      "path": "scripts/ci/check-blog-locale-completeness.mjs",
+      "mode": "corpus-only",
+      "reason": "Gate fail-closed della completezza dei body localizzati: confronta ogni file e campo EN/DE/FR con la sorgente italiana prima della pubblicazione. Vive solo nel corpus perché la sorgente content/blog-body/** non viene trasportata come file nel sito; il sito riceve il JSON pubblicato.",
+      "baseline": {
+        "site": null,
+        "corpus": "f3b10e87e8365350",
+        "alignedAt": "2026-09-30"
+      }
+    },
+    {
       "path": "scripts/ci/transport-identical-twins.mjs",
       "mode": "corpus-only",
       "reason": "Il TRASPORTO dei gemelli `identical` di questo manifest (issue #331). Vive solo qui per la stessa ragione del drift check: e' questo il lato che RICEVE il ciclo, e un trasporto tirato non ha un gemello sul sito da sorvegliare. Il canale spinto — l'allowlist di mirror-articles-engine.yml — resta fermo a engine/ perche' copia directory INTERE e sotto scripts/**/host/** vivono decine di voci `adapted`: allargarlo le sovrascriverebbe. Questo script non ha quel problema perche' non copia mai una directory, solo i path dichiarati `identical` uno per uno, dal loro `sitePath`.",
