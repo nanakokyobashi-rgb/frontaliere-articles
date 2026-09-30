@@ -1848,3 +1848,20 @@ jobs:
           PR_NUMBER: ${{ github.event.pull_request.number }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         run: node scripts/ci/generator-ci-gate.mjs
+
+  # La review viene pubblicata dentro il job required con GITHUB_TOKEN. Il
+  # relativo `pull_request_review` non riattiva altri workflow: questo ponte
+  # chiama il medesimo gate trusted subito dopo il verdetto e prima che il
+  # workflow `tests` termini, quindi un push fra due review non lascia la PR
+  # dipendente dal cron di enrollment.
+  post-review:
+    name: post-review (native auto-merge opt-in)
+    needs: tests
+    if: >-
+      ${{ always() && github.event_name == 'pull_request' &&
+      github.event.pull_request.draft == false && needs.tests.result == 'success' }}
+    uses: ./.github/workflows/enable-native-automerge.yml
+    with:
+      pr_number: ${{ format('{0}', github.event.pull_request.number) }}
+      caller_run_id: ${{ format('{0}', github.run_id) }}
+    secrets: inherit

@@ -9,6 +9,7 @@ import {
   reviewHasLgtm,
   reviewHasZeroFindings,
   reviewIsApproved,
+  latestBotReviewOnHead,
   reviewGateEvidenceDecision,
   isTransientGithubReadError,
   withTransientGithubReadRetry,
@@ -83,6 +84,19 @@ test('usa l ultimo verdetto sulla HEAD e non accetta check pending o su altra HE
   }).allow, true);
   assert.equal(requiredVitestDecision([check({ status: 'in_progress', conclusion: null, completed_at: null })], HEAD).allow, false);
   assert.equal(requiredVitestDecision([check({ head_sha: OLD_HEAD })], HEAD).allow, false);
+});
+
+test('dopo un push fra due review accetta il nuovo LGTM sulla HEAD corrente', () => {
+  const oldHeadReview = review(CLEAN_BODY, OLD_HEAD, '2026-09-13T12:00:00Z');
+  const currentHeadReview = review(CLEAN_BODY, HEAD, '2026-09-13T12:05:00Z');
+  const reviews = [oldHeadReview, currentHeadReview];
+
+  assert.equal(latestBotReviewOnHead(reviews, HEAD), currentHeadReview);
+  assert.equal(evaluateNativeAutoMerge({
+    pr: pr({ headRefOid: HEAD }),
+    reviews,
+    checkRuns: [check({ head_sha: HEAD })],
+  }).allow, true);
 });
 
 test('il gate segue la generazione e non completed_at, e resta pending sul run nuovo', () => {
@@ -203,6 +217,69 @@ test('la prova temporale considera anche l aggiornamento successivo della review
     repo: 'owner/repo',
     head: HEAD,
     review: reviewEditedAfterGate,
+  }).allow, false);
+});
+
+test('ammette workflow tests ancora in corso solo col run ID del caller e job concluso', () => {
+  const evidence = {
+    reviewId: '7',
+    check: {
+      id: 100,
+      name: 'tests (node --test)',
+      details_url: 'https://github.com/owner/repo/actions/runs/200/job/300',
+      head_sha: HEAD,
+      status: 'completed',
+      conclusion: 'success',
+      completed_at: '2026-09-13T12:04:00Z',
+    },
+    workflow: {
+      id: 200,
+      path: '.github/workflows/tests.yml',
+      event: 'pull_request',
+      head_sha: HEAD,
+      status: 'in_progress',
+      conclusion: null,
+      run_started_at: '2026-09-13T12:01:00Z',
+      updated_at: '2026-09-13T12:05:00Z',
+    },
+    job: {
+      id: 300,
+      run_id: 200,
+      name: 'tests (node --test)',
+      head_sha: HEAD,
+      status: 'completed',
+      conclusion: 'success',
+      check_run_url: 'https://api.github.com/repos/owner/repo/check-runs/100',
+      started_at: '2026-09-13T12:02:00Z',
+      completed_at: '2026-09-13T12:04:00Z',
+      steps: [{
+        name: 'Require approving Codex review',
+        status: 'completed',
+        conclusion: 'success',
+        started_at: '2026-09-13T12:02:30Z',
+        completed_at: '2026-09-13T12:03:30Z',
+      }],
+    },
+  };
+  const fallbackReview = {
+    ...review('outside-diff finding', HEAD, '2026-09-13T12:00:00Z'),
+    id: 7,
+    updated_at: '2026-09-13T12:01:30Z',
+  };
+
+  assert.equal(reviewGateEvidenceDecision({
+    evidence,
+    repo: 'owner/repo',
+    head: HEAD,
+    review: fallbackReview,
+    inProgressWorkflowRunId: 200,
+  }).allow, true);
+  assert.equal(reviewGateEvidenceDecision({
+    evidence,
+    repo: 'owner/repo',
+    head: HEAD,
+    review: fallbackReview,
+    inProgressWorkflowRunId: 201,
   }).allow, false);
 });
 

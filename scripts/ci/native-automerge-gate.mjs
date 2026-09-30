@@ -355,6 +355,7 @@ export function reviewGateEvidenceDecision({
   repo,
   head,
   review,
+  inProgressWorkflowRunId = null,
 } = {}) {
   const deny = (reason) => ({ allow: false, reason });
   if (!evidence || typeof evidence !== 'object' || Array.isArray(evidence)) {
@@ -395,12 +396,20 @@ export function reviewGateEvidenceDecision({
   }
 
   const workflow = evidence.workflow;
+  const expectedInProgressRunId = validPositiveInteger(inProgressWorkflowRunId)
+    ? inProgressWorkflowRunId
+    : null;
+  const workflowIsCompleted = workflow?.status === 'completed'
+    && workflow?.conclusion === 'success';
+  const workflowIsBoundInProgress = expectedInProgressRunId !== null
+    && workflow?.id === expectedInProgressRunId
+    && workflow?.status === 'in_progress'
+    && (workflow?.conclusion === null || workflow?.conclusion === undefined || workflow?.conclusion === '');
   if (!workflow
       || !validPositiveInteger(workflow.id)
       || workflow.path !== TESTS_WORKFLOW_PATH
       || workflow.event !== TESTS_WORKFLOW_EVENT
-      || workflow.status !== 'completed'
-      || workflow.conclusion !== 'success'
+      || (!workflowIsCompleted && !workflowIsBoundInProgress)
       || workflow.head_sha !== head
       || validTimestamp(workflow.run_started_at) === null
       || validTimestamp(workflow.updated_at) === null) {
@@ -594,6 +603,7 @@ export function evaluateNativeAutoMerge({
   checkRuns,
   verifiedTestOnlyReview = null,
   reviewGateEvidence = null,
+  inProgressWorkflowRunId = null,
   repository = null,
 } = {}) {
   if (!pr || pr.state !== 'OPEN' || pr.isDraft !== false || pr.baseRefName !== 'main') {
@@ -627,6 +637,7 @@ export function evaluateNativeAutoMerge({
       repo: repository,
       head: pr.headRefOid,
       review,
+      inProgressWorkflowRunId,
     })
     : { allow: false, reason: 'review raw già approvante' };
   if (review && !reviewIsApproved(review) && !reviewGateException.allow) {
@@ -681,6 +692,7 @@ export function revalidateNativeAutoMerge({
   checkRuns,
   verifiedTestOnlyReview = null,
   reviewGateEvidence = null,
+  inProgressWorkflowRunId = null,
   repository = null,
 } = {}) {
   if (!pr || !Object.hasOwn(pr, 'autoMergeRequest')) {
@@ -692,6 +704,7 @@ export function revalidateNativeAutoMerge({
     checkRuns,
     verifiedTestOnlyReview,
     reviewGateEvidence,
+    inProgressWorkflowRunId,
     repository,
   });
   if (pr.autoMergeRequest !== null) {
@@ -904,6 +917,12 @@ function loadReviewGateEvidence(repo, prNumber, head, checkRuns, review) {
   return { ...evidence, ...loadCodexCarryForwardInputs(repo, prNumber, review) };
 }
 
+function positiveIntegerFromEnv(value) {
+  if (!/^[1-9]\d*$/u.test(String(value || ''))) return null;
+  const parsed = Number(value);
+  return validPositiveInteger(parsed) ? parsed : null;
+}
+
 const DISABLE_AUTO_MERGE_MUTATION =
   'mutation($pullRequestId:ID!){disablePullRequestAutoMerge(input:{pullRequestId:$pullRequestId}){pullRequest{number autoMergeRequest{enabledAt}}}}';
 
@@ -980,6 +999,7 @@ function main() {
   if (!/^[\w.-]+\/[\w.-]+$/.test(repo) || !/^\d+$/.test(prNumber)) {
     return skip('target PR mancante o non valido');
   }
+  const inProgressWorkflowRunId = positiveIntegerFromEnv(process.env.NATIVE_AUTOMERGE_IN_JOB_RUN_ID);
 
   let pr;
   try {
@@ -1026,6 +1046,7 @@ function main() {
     checkRuns,
     verifiedTestOnlyReview,
     reviewGateEvidence,
+    inProgressWorkflowRunId,
     repository: repo,
   });
   console.log(`Native auto-merge guard PR #${prNumber} HEAD=${pr.headRefOid}: ${decision.reason}`);
@@ -1096,6 +1117,7 @@ function main() {
     checkRuns: finalCheckRuns,
     verifiedTestOnlyReview: finalVerifiedTestOnlyReview,
     reviewGateEvidence: finalReviewGateEvidence,
+    inProgressWorkflowRunId,
     repository: repo,
   });
   console.log(`Native auto-merge guard PR #${prNumber} final gate: ${finalDecision.reason}`);
