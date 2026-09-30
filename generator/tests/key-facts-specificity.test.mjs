@@ -129,6 +129,44 @@ test('le intestazioni emesse dal serializzatore sono tutte leggibili', () => {
   }
 });
 
+test('il parser riconosce il blocco legacy di fatti senza bullet', () => {
+  const markdown = [
+    '## In breve',
+    '- Franco stabile',
+    '',
+    '## Key facts',
+    'Reference rate: 0%',
+    'Euro exchange rate: 0.94 francs',
+    'Date: 18 September',
+    '',
+    'The report continues here.',
+  ].join('\n');
+  const [section] = parseAiSearchSections(markdown);
+  assert.equal(section.heading, '## Key facts');
+  assert.deepEqual(section.bullets.map(({ raw, value }) => ({ raw, value })), [
+    { raw: 'Reference rate: 0%', value: '0%' },
+    { raw: 'Euro exchange rate: 0.94 francs', value: '0.94 francs' },
+    { raw: 'Date: 18 September', value: '18 September' },
+  ]);
+});
+
+test('il parser riconosce le righe dati di una tabella Markdown di fatti', () => {
+  const markdown = [
+    '## Wichtige Fakten',
+    '| Begriff | Wert |',
+    '|---|---|',
+    '| Zeitraum | 2016-2023 |',
+    "| Stichprobe | 300'000 Familien |",
+    '',
+    'Die Analyse folgt hier.',
+  ].join('\n');
+  const [section] = parseAiSearchSections(markdown);
+  assert.deepEqual(section.bullets.map(({ raw, value }) => ({ raw, value })), [
+    { raw: '| Zeitraum | 2016-2023 |', value: '2016-2023' },
+    { raw: "| Stichprobe | 300'000 Familien |", value: "300'000 Familien" },
+  ]);
+});
+
 test('il serializzatore accetta solo i fatti source-backed disponibili fino al cap', () => {
   const tldr = ['Un fatto', 'Un altro fatto'];
   const facts = Array.from({ length: MAX_KEY_FACTS }, (_, index) => ({

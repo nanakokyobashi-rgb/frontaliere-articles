@@ -72,6 +72,9 @@
  * Flag:
  *   --audit <file>     JSON di audit-article-factuality.mjs --json oppure
  *                      scan-v2 (`results[]`); richiesto, salvo --slug
+ *   --missing          seleziona i body con chiavi mancanti o copia italiana
+ *                      dal gate FU-009; usa la stessa cascata e gli stessi
+ *                      guard prima di aggiungere/sostituire i campi
  *   --slug a,b         id articolo (slug) da trattare. Con --audit filtra;
  *                      senza, sintetizza le coppie dai file gia' in content/.
  *                      E' l'entry point in-place per uno slug arbitrario,
@@ -109,6 +112,11 @@ import { sanitizeBodyText } from './lib/sanitize-body-braces.mjs';
 import { detectLanguage, detectLanguageWithConfidence } from './lib/detect-language.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
+import {
+  BODY_FIELDS as WRITER_BODY_FIELDS,
+  extractBodyFields,
+  inspectBlogLocaleCompleteness,
+} from '../../scripts/ci/check-blog-locale-completeness.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 // `../..`: il transport ha spostato `scripts/` sotto `generator/scripts/`,
@@ -116,7 +124,17 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..', '..');
 
 /** I campi che la guardia concatena: si ri-traducono insieme o niente. */
-export const BODY_FIELDS = ['body1', 'body2', 'body3'];
+export const BODY_FIELDS = [...WRITER_BODY_FIELDS];
+
+/** Campi body effettivamente emessi per questo articolo dal writer. */
+export function bodyFieldsForSource(src, id) {
+  const fields = new Set(
+    extractBodyFields(src)
+      .filter((entry) => entry.id === id)
+      .map((entry) => entry.field),
+  );
+  return BODY_FIELDS.filter((field) => fields.has(field));
+}
 
 /**
  * Lo scan storico degli articoli misura i residui per RIGA, non sul body
@@ -201,6 +219,7 @@ export const DIR_TO_REAL = {
 
 /** Chiave i18n di un campo body dentro il file di un articolo. */
 const bodyKey = (id, field) => `'blog.article.${id}.${field}': `;
+const escapeRegExp = (value) => String(value).replace(/[.*+?^${}()|[\]\\]/gu, '\\$&');
 
 /**
  * Legge un campo body dal sorgente TS.
@@ -273,6 +292,30 @@ export function replaceBodyField(src, id, field, value) {
   return `${src.slice(0, i + key.length)}'${escapeForSingleQuoteTS(value)}'${src.slice(j + 1)}`;
 }
 
+/**
+ * Inserisce un campo body assente in un file locale già registrato.
+ *
+ * Il registrar resta append-only: questa funzione non crea file né id nuovi,
+ * aggiunge solo la chiave dichiarata dalla sorgente italiana dentro il file
+ * esistente. Il campo viene inserito prima della prima chiave dello stesso
+ * articolo (quindi prima di `.faq` nei file storici che ne contengono solo
+ * quella), mantenendo il formato single-quoted dello writer canonico.
+ */
+export function insertBodyField(src, id, field, value) {
+  const key = bodyKey(id, field);
+  if (src.includes(key)) return null;
+  const firstKey = new RegExp(
+    `^([ \\t]*)['"]blog\\.article\\.${escapeRegExp(id)}\\.(?:body[123]|faq)['"]\\s*:`,
+    'mu',
+  ).exec(src);
+  const indent = firstKey?.[1] ?? '    ';
+  const insertionAt = firstKey
+    ? firstKey.index
+    : (src.lastIndexOf('};') >= 0 ? src.lastIndexOf('};') : src.length);
+  const line = `${indent}${key}'${escapeForSingleQuoteTS(value)}',\n`;
+  return `${src.slice(0, insertionAt)}${line}${src.slice(insertionAt)}`;
+}
+
 /** Scrittura atomica: un SIGKILL a meta' non lascia il body troncato. */
 let writeTmpSeq = 0;
 export function writeAtomic(filePath, content) {
@@ -309,7 +352,10 @@ export function criticalCodes(gateResult) {
  * @param {Record<string, string>} sections
  * @returns {{sections: Record<string, string>, issue: string|null, changed: boolean, result: object|null}}
  */
-export function guardTranslatedKeyFacts(sections) {
+export function guardTranslatedKeyFacts(sections, {
+  requireRecognizedSection = true,
+  maxSourceBackedResiduals = 0,
+} = {}) {
   const body1 = sections?.body1;
   if (typeof body1 !== 'string' || body1.length === 0) {
     return { sections, issue: null, changed: false, result: null };
@@ -331,7 +377,7 @@ export function guardTranslatedKeyFacts(sections) {
       && /[\p{L}\p{N}]/u.test(text)
       && !matchesVacuousValue(text);
   }));
-  if (result.residual.length > 0 || !hasUsableFact) {
+  if (result.residual.length > maxSourceBackedResiduals || (requireRecognizedSection && !hasUsableFact)) {
     return {
       sections,
       issue: '[key-facts-specificity] la ri-traduzione non conserva una sezione Fatti chiave riconosciuta con almeno un fatto non vuoto/non vacuo senza residui',
@@ -349,10 +395,17 @@ export function guardTranslatedKeyFacts(sections) {
  * E' il cuore del vincolo "mai peggiorare, mai riscrivere a mano", isolato in
  * una funzione pura proprio per essere testabile senza toccare la rete.
  */
-export function shouldWrite({ oldCodes, newCodes, missingField, sanity = null, qualityIssue = null }) {
+export function shouldWrite({
+  oldCodes,
+  newCodes,
+  missingField,
+  sanity = null,
+  qualityIssue = null,
+  structuralDefect = false,
+}) {
   if (missingField) return { write: false, reason: 'campo-vuoto-dalla-cascata' };
   if (qualityIssue) return { write: false, reason: qualityIssue };
-  if (oldCodes.length === 0) return { write: false, reason: 'vecchia-gia-pulita' };
+  if (oldCodes.length === 0 && !structuralDefect) return { write: false, reason: 'vecchia-gia-pulita' };
   if (newCodes.length > 0) return { write: false, reason: `ri-fallita: ${newCodes.join(',')}` };
   if (sanity) return { write: false, reason: sanity };
   return { write: true, reason: 'pulita' };
@@ -414,10 +467,20 @@ export const LANG_CHECK_MIN_CHARS = 50;
  * Ritorna `null` se il testo e' scrivibile, altrimenti la ragione del rifiuto
  * (che il report conta come tale, invece di lasciarla nel secchio "altro").
  */
-export function translationSanityIssue({ oldSections, newSections, italianSections, locale }) {
+export function translationSanityIssue({ oldSections, newSections, italianSections, locale, structuralRepair = false }) {
   const italianResidue = scanItalianResidue(newSections, locale);
-  if (italianResidue.length >= ITALIAN_RESIDUE_MIN_LINES) {
-    return `italian-residue: ${italianResidue.length} righe residue`;
+  // Structural FU-009 repairs operate on whole missing/copied fields. The
+  // line detector is deliberately sensitive for the historical residue audit,
+  // but short fact bullets containing proper names are too small for a
+  // language verdict (for example "Bologna coach → Alex Mumbrù") and would
+  // reject valid translations. Keep long residual prose fail-closed; exact
+  // source echoes are independently rejected by the caller and completeness
+  // gate.
+  const residueForWrite = structuralRepair
+    ? italianResidue.filter((hit) => hit.text.length >= 120)
+    : italianResidue;
+  if (residueForWrite.length >= ITALIAN_RESIDUE_MIN_LINES) {
+    return `italian-residue: ${residueForWrite.length} righe residue`;
   }
   for (const [f, text] of Object.entries(newSections)) {
     // DUE confronti, non uno scelto fra i due. Il pavimento contro la
@@ -570,16 +633,57 @@ export function pairsForSlugs(slugs, locales, contentRoot) {
 }
 
 /**
+ * Converte il report strutturale FU-009 in coppie consumabili dalla pipeline
+ * di ri-traduzione. Si selezionano solo difetti riparabili per campo: un file
+ * con un body corretto non viene riscritto insieme a quello mancante/italiano.
+ */
+export function completenessPairsFromReport(report) {
+  const byPair = new Map();
+  for (const violation of report?.violations || []) {
+    if (!['missing-key', 'source-echo', 'wrong-locale'].includes(violation.code)) continue;
+    const dir = violation.section === 'svizzera'
+      ? 'services/locales/blog-body-ch'
+      : violation.section === 'frontaliere'
+        ? 'services/locales/blog-body'
+        : null;
+    if (!dir || !violation.locale || !violation.file) continue;
+    const id = violation.file.replace(/\.ts$/u, '');
+    const key = `${dir}\u0000${violation.locale}\u0000${id}`;
+    const current = byPair.get(key) || {
+      id,
+      locale: violation.locale,
+      dir,
+      codes: [],
+      fields: [],
+      structural: true,
+    };
+    if (!current.codes.includes(violation.code)) current.codes.push(violation.code);
+    if (violation.field && !current.fields.includes(violation.field)) current.fields.push(violation.field);
+    byPair.set(key, current);
+  }
+  return [...byPair.values()].map((pair) => ({
+    ...pair,
+    codes: pair.codes.sort(),
+    fields: pair.fields.sort(),
+  }));
+}
+
+/**
  * Riscrive i campi body di un file locale GIA' registrato. Non crea id
  * nuovi e non chiama `registerArticleFiles()` (append-only). `null` su
  * una chiave assente: meglio saltare che riscrivere a meta'.
  */
-export function rewriteExistingLocaleBody(src, id, sections) {
+export function rewriteExistingLocaleBody(src, id, sections, { allowMissing = false } = {}) {
   let next = src;
   for (const [field, value] of Object.entries(sections || {})) {
-    const rewritten = replaceBodyField(next, id, field, value);
-    if (rewritten === null) return { src: next, missing: field };
-    next = rewritten;
+    const replaced = replaceBodyField(next, id, field, value);
+    if (replaced !== null) {
+      next = replaced;
+      continue;
+    }
+    const inserted = allowMissing ? insertBodyField(next, id, field, value) : null;
+    if (inserted === null) return { src: next, missing: field };
+    next = inserted;
   }
   return { src: next, missing: null };
 }
@@ -685,6 +789,7 @@ async function main() {
   const auditPath = flag('audit');
   const rawSlug = flag('slug');
   const SLUGS = parseSlugList(rawSlug);
+  const MISSING = bool('missing');
   // `--slug` is a safety boundary for --apply: an explicitly empty value
   // must not silently become "no filter" and let an audit rewrite every pair.
   // Keep the parser's null/empty result useful to callers, but reject the
@@ -700,8 +805,12 @@ async function main() {
     console.error('❌ --out è vuoto. Indica un file oppure ometti il flag per il report su stdout.');
     process.exit(2);
   }
-  if (!auditPath && SLUGS.length === 0) {
-    console.error('❌ --audit <file.json> oppure --slug <id> è richiesto.');
+  if (!auditPath && SLUGS.length === 0 && !MISSING) {
+    console.error('❌ --audit <file.json>, --slug <id> oppure --missing è richiesto.');
+    process.exit(2);
+  }
+  if (MISSING && (auditPath || SLUGS.length > 0)) {
+    console.error('❌ --missing non si combina con --audit o --slug.');
     process.exit(2);
   }
   const APPLY = bool('apply');
@@ -741,7 +850,10 @@ async function main() {
   }
 
   let pairs;
-  if (auditPath) {
+  if (MISSING) {
+    pairs = completenessPairsFromReport(inspectBlogLocaleCompleteness({ root: CONTENT_ROOT }));
+    pairs = selectBlockingPairs(pairs, { locales: LOCALES, slugs: undefined });
+  } else if (auditPath) {
     const audit = JSON.parse(readFileSync(auditPath, 'utf8'));
     pairs = selectBlockingPairs(blockingPairsFromAudit(audit), {
       locales: LOCALES,
@@ -787,8 +899,12 @@ async function processPair(pair, { CONTENT_ROOT, APPLY }) {
   const itSrc = readFileSync(itPath, 'utf8');
   let trSrc = readFileSync(trPath, 'utf8');
 
+  const availableBodyFields = bodyFieldsForSource(itSrc, pair.id);
+  const repairFields = pair.structural && Array.isArray(pair.fields) && pair.fields.length > 0
+    ? availableBodyFields.filter((field) => pair.fields.includes(field))
+    : availableBodyFields;
   const italianSections = {};
-  for (const f of BODY_FIELDS) {
+  for (const f of repairFields) {
     const v = readBodyField(itSrc, pair.id, f);
     if (v) italianSections[f] = v;
   }
@@ -801,14 +917,17 @@ async function processPair(pair, { CONTENT_ROOT, APPLY }) {
   if (isSourceLocale) {
     Object.assign(oldSections, italianSections);
   } else {
-    for (const f of BODY_FIELDS) {
+    for (const f of repairFields) {
       const v = readBodyField(trSrc, pair.id, f);
       if (v) oldSections[f] = v;
     }
   }
   const factualityCodes = criticalCodes(runFactualityGates({ sections: oldSections, locale: pair.locale, italianSections }));
   const oldItalianResidue = scanItalianResidue(oldSections, pair.locale);
-  const oldCodes = currentBlockingCodes({ factualityCodes, italianResidue: oldItalianResidue });
+  const oldCodes = [...new Set([
+    ...currentBlockingCodes({ factualityCodes, italianResidue: oldItalianResidue }),
+    ...(pair.structural ? (pair.codes || []) : []),
+  ])].sort();
 
   const newSections = {};
   let missingField = null;
@@ -849,9 +968,14 @@ async function processPair(pair, { CONTENT_ROOT, APPLY }) {
   // La guardia dei fatti chiave deve precedere factuality e writeAtomic: il
   // primo puo' vedere zero `critical` anche quando il secondo non deve mai
   // ricevere una sezione fatta solo di placeholder.
+  const sourceKeyFacts = stripVacuousFacts(italianSections.body1 || '');
+  const sourceHasKeyFacts = parseAiSearchSections(italianSections.body1 || '').length > 0;
   const keyFactsGuard = missingField
     ? { sections: newSections, issue: null }
-    : guardTranslatedKeyFacts(newSections);
+    : guardTranslatedKeyFacts(newSections, {
+      requireRecognizedSection: !pair.structural || sourceHasKeyFacts,
+      maxSourceBackedResiduals: pair.structural ? sourceKeyFacts.residual.length : 0,
+    });
   const checkedSections = keyFactsGuard.sections;
   const newCodes = missingField
     ? []
@@ -859,18 +983,27 @@ async function processPair(pair, { CONTENT_ROOT, APPLY }) {
 
   const sanity = missingField || isSourceLocale
     ? null
-    : translationSanityIssue({ oldSections, newSections: checkedSections, italianSections, locale: pair.locale });
+    : translationSanityIssue({
+      oldSections,
+      newSections: checkedSections,
+      italianSections,
+      locale: pair.locale,
+      structuralRepair: Boolean(pair.structural),
+    });
   const verdict = shouldWrite({
     oldCodes,
     newCodes,
     missingField,
     sanity,
     qualityIssue: keyFactsGuard.issue,
+    structuralDefect: Boolean(pair.structural),
   });
   const row = { ...base, oldCodes, newCodes, missingField, written: false, reason: verdict.reason };
   if (!verdict.write || !APPLY) return row;
 
-  const rewritten = rewriteExistingLocaleBody(trSrc, pair.id, checkedSections);
+  const rewritten = rewriteExistingLocaleBody(trSrc, pair.id, checkedSections, {
+    allowMissing: Boolean(pair.structural),
+  });
   if (rewritten.missing) return { ...row, reason: `chiave-assente: ${rewritten.missing}` };
   writeAtomic(trPath, rewritten.src);
   return { ...row, written: true };

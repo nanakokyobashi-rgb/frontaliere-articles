@@ -14,6 +14,9 @@
  *     ha emesso l'artifact. Quei file non esistono in questo checkout: nessuna
  *     riga di codice lo leggeva.
  *   · `generatorSha256` — l'hash del generatore stesso, sul sito. Idem.
+ *   · `observers[].sha256` — il digest dei test, selector, librerie e
+ *     workflow che rendono osservabile la generazione; ogni target viene
+ *     verificato localmente, sulla head del sito e sulla lineage.
  *
  * Un dato che nessuno legge non intercetta niente. Se il generatore cambia
  * lato sito, i 24 artifact qui diventano stantii e **il contratto resta
@@ -85,6 +88,8 @@ const SITE_REPO = process.env.SITE_REPO || 'valerielinc-ops/frontaliere-si-o-no'
 const SITE_REF = process.env.SITE_REF || 'main';
 const SOURCE_COMMIT_RE = /^[a-f0-9]{40}$/u;
 const SOURCE_REF_RE = /^(?![./-])(?!.*\/$)(?!.*(?:^|\/)\.{1,2}(?:\/|$))(?!.*\.\.)(?!.*\/{2})(?!.*[~^:?*\[\]\\@{}])[A-Za-z0-9._/-]{1,256}$/u;
+const SOURCE_PATH_RE = /^(?!\/)(?!.*(?:^|\/)\.\.(?:\/|$))(?!.*\/\/)[A-Za-z0-9._/-]{1,512}$/u;
+const DIGEST_RE = /^sha256:[a-f0-9]{64}$/u;
 
 /**
  * Dove vivono i `*-logic.yml` sul sito. E' l'unica coordinata che il contratto
@@ -127,6 +132,33 @@ export function siteLogicDirs(env = process.env) {
 
 const sha256 = (buf) => crypto.createHash('sha256').update(buf).digest('hex');
 
+function canonicalize(value) {
+  if (value === null || typeof value === 'string' || typeof value === 'boolean') return value;
+  if (typeof value === 'number' && Number.isFinite(value)) return value;
+  if (Array.isArray(value)) return value.map(canonicalize);
+  if (value && typeof value === 'object' && Object.getPrototypeOf(value) === Object.prototype) {
+    return Object.fromEntries(
+      Object.keys(value).sort((left, right) => (left < right ? -1 : left > right ? 1 : 0))
+        .map((key) => [key, canonicalize(value[key])]),
+    );
+  }
+  throw new TypeError('documento non canonico');
+}
+
+/** Digest del JSON roster nello stesso formato emesso dal generatore del sito. */
+export function canonicalJsonDigest(bytes) {
+  const document = JSON.parse(Buffer.from(bytes).toString('utf8'));
+  if (!document || typeof document !== 'object' || Array.isArray(document)) {
+    throw new TypeError('roster non oggetto');
+  }
+  const declared = document.digest;
+  const payload = { ...document };
+  delete payload.digest;
+  const computed = `sha256:${crypto.createHash('sha256').update(JSON.stringify(canonicalize(payload))).digest('hex')}`;
+  if (declared !== computed) throw new Error('digest interno del roster non corrisponde');
+  return computed;
+}
+
 function localLineageCheck(field, expected, observed) {
   return {
     field,
@@ -146,6 +178,14 @@ function contractObservationLineage(contract) {
     : {};
   const validSourceRef = sourceRef && SOURCE_REF_RE.test(sourceRef) ? sourceRef : null;
   const validSourceCommit = sourceCommit && SOURCE_COMMIT_RE.test(sourceCommit) ? sourceCommit : null;
+  const rosterPath = typeof contract?.crawlerGeneration?.rosterPath === 'string'
+    ? contract.crawlerGeneration.rosterPath
+    : null;
+  const rosterDigest = typeof contract?.crawlerGeneration?.rosterDigest === 'string'
+    ? contract.crawlerGeneration.rosterDigest
+    : null;
+  const validRosterPath = rosterPath && SOURCE_PATH_RE.test(rosterPath) ? rosterPath : null;
+  const validRosterDigest = rosterDigest && DIGEST_RE.test(rosterDigest) ? rosterDigest : null;
   // `sourceCommit`/`sourceRef` sono lineage, non il bersaglio del drift gate:
   // i digest remoti devono sempre osservare la head configurata (`main` di
   // default), altrimenti si confrontano i byte con il commit che li ha creati
@@ -158,6 +198,10 @@ function contractObservationLineage(contract) {
     observation,
     validSourceRef,
     validSourceCommit,
+    rosterPath,
+    rosterDigest,
+    validRosterPath,
+    validRosterDigest,
     lineageRef,
     observationRef,
   };
@@ -436,6 +480,9 @@ export function evaluateRuntimeFlagChecks(
     } else if (!check.declared) {
       state = 'undeclared';
       detail = check.runtimePath + ' non è presente in contract.siteRuntimePaths';
+    } else if (seen?.invalidDocument) {
+      state = 'unrecognized';
+      detail = `${sitePath} non contiene un JSON canonico valido su ${SITE_REPO}@${check.observationRef || observationRef}`;
     } else if (!seen || seen.error) {
       state = 'unobserved';
       detail = seen?.error ? String(seen.error).slice(0, 120) : 'nessuna osservazione';
@@ -667,6 +714,16 @@ export function planProvenanceChecks(
       lineage.sourceCommit,
       lineage.observation.sourceCommit,
     ),
+    localLineageCheck(
+      'contract#crawlerGeneration.rosterPath',
+      lineage.rosterPath,
+      lineage.validRosterPath,
+    ),
+    localLineageCheck(
+      'contract#crawlerGeneration.rosterDigest',
+      lineage.rosterDigest,
+      lineage.validRosterDigest,
+    ),
     {
       field: 'generatorSha256',
       ...declared(siteGeneratorPath(contract)),
@@ -674,6 +731,71 @@ export function planProvenanceChecks(
       observationRef,
     },
   ];
+
+  // `sourceCommit` is not documentation: it is the immutable source checkout
+  // that emitted the contract. Every digest below is checked twice — against
+  // the current observation ref for drift, and against this pinned checkout
+  // for lineage. If the pin is stale or malformed the local checks above are
+  // already red; never fall back to `main`, which would make an invalid
+  // lineage appear verified by coincidence.
+  if (lineage.validSourceCommit) {
+    checks.push({
+      field: 'lineage#generatorSha256',
+      ...declared(siteGeneratorPath(contract)),
+      expected: contract.generatorSha256 || null,
+      observationRef: lineage.lineageRef,
+      lineage: true,
+    });
+  }
+
+  if (lineage.validRosterPath && lineage.validRosterDigest && lineage.validSourceCommit) {
+    checks.push({
+      field: 'lineage#crawlerGeneration.rosterDigest',
+      ...declared(lineage.validRosterPath),
+      expected: lineage.validRosterDigest,
+      observationRef: lineage.lineageRef,
+      digestKind: 'canonical-json',
+      lineage: true,
+    });
+  }
+
+  // The lineage roster is not enough: the live site may have changed its
+  // roster after the contract was generated. Observe the same canonical JSON
+  // digest at the current ref so a post-sourceCommit drift is red as well.
+  if (lineage.validRosterPath && lineage.validRosterDigest) {
+    checks.push({
+      field: 'crawlerGeneration.rosterDigest',
+      ...declared(lineage.validRosterPath),
+      expected: lineage.validRosterDigest,
+      observationRef,
+      digestKind: 'canonical-json',
+    });
+  }
+
+  const hasObserverContract = Object.hasOwn(contract || {}, 'observerCount')
+    || Object.hasOwn(contract || {}, 'observers');
+  if (hasObserverContract) {
+    const observers = Array.isArray(contract?.observers) ? contract.observers : [];
+    const declaredObserverCount = Number.isInteger(contract?.observerCount)
+      ? contract.observerCount
+      : null;
+    const countMatches = declaredObserverCount !== null
+      && declaredObserverCount === observers.length;
+    const targets = observers.map((observer) => observer?.target);
+    const targetsValid = Array.isArray(contract?.observers)
+      && targets.every((target) => typeof target === 'string' && SOURCE_PATH_RE.test(target))
+      && new Set(targets).size === targets.length;
+    checks.push(localLineageCheck(
+      'contract#observerCount',
+      declaredObserverCount,
+      countMatches ? observers.length : null,
+    ));
+    checks.push(localLineageCheck(
+      'contract#observerTargets',
+      declaredObserverCount,
+      targetsValid ? targets.length : null,
+    ));
+  }
 
   for (const artifact of contract.artifacts || []) {
     const candidates = artifact.sourceLogic
@@ -715,6 +837,70 @@ export function planProvenanceChecks(
       contract.generatorSha256,
       artifact.generatorSha256,
     ));
+
+    if (lineage.validSourceCommit) {
+      checks.push({
+        field: `${artifact.file}#sourceSha256@sourceCommit`,
+        sourceLogic: artifact.sourceLogic || null,
+        sitePath: candidates[0] || null,
+        sitePathCandidates: candidates,
+        expected: artifact.sourceSha256 || null,
+        observationRef: lineage.lineageRef,
+        lineage: true,
+      });
+      if (!adapted) {
+        checks.push({
+          field: `${artifact.file}#artifactSha256@sourceCommit`,
+          ...declared(manifestEntry?.sitePath || null),
+          expected: artifact.artifactSha256 || null,
+          observationRef: lineage.lineageRef,
+          lineage: true,
+        });
+      }
+    }
+  }
+
+  // Observers are generated/cross-repo files too. A contract that declares
+  // their count and digests without scheduling them leaves the observer path
+  // itself outside the provenance guarantee. Each target is checked locally,
+  // at the current site ref, and at the pinned sourceCommit lineage ref.
+  for (const observer of contract.observers || []) {
+    const target = typeof observer?.target === 'string' && SOURCE_PATH_RE.test(observer.target)
+      ? observer.target
+      : null;
+    const manifestEntry = target ? byManifestPath.get(target) : null;
+    const adapted = manifestEntry?.mode === 'adapted';
+    const expected = typeof observer?.sha256 === 'string' ? observer.sha256 : null;
+    const label = target || String(observer?.target || '<invalid>');
+    checks.push({
+      field: `${label}#sha256@local`,
+      ...localLineageCheck(`${label}#sha256@local`, expected, null),
+      localObserverFile: target,
+    });
+    checks.push({
+      field: `${label}#sha256`,
+      ...(adapted
+        ? {
+          sitePath: null,
+          sitePathCandidates: [],
+          localOnly: true,
+          localObserverFile: target,
+        }
+        : declared(manifestEntry?.sitePath || null)),
+      mode: manifestEntry?.mode || null,
+      adapted,
+      expected,
+      observationRef,
+    });
+    if (lineage.validSourceCommit && !adapted) {
+      checks.push({
+        field: `${label}#sha256@sourceCommit`,
+        ...declared(manifestEntry?.sitePath || null),
+        expected,
+        observationRef: lineage.lineageRef,
+        lineage: true,
+      });
+    }
   }
 
   checks.duplicateManifestPaths = duplicates;
@@ -899,7 +1085,7 @@ export function formatReport({ results, counts, red, reason, observationRef = SI
  * Il client verso il sito. `GH_TOKEN` qui e' il `GITHUB_TOKEN` di QUESTO repo,
  * che su `valerielinc-ops/…` non ha alcun permesso: se raw lo rifiuta, la
  * risposta autorevole e' quella anonima — il repo del sito e' pubblico. Senza
- * questo fallback un 401 renderebbe `unobserved` tutte e 49 le voci, e un 404
+ * questo fallback un 401 renderebbe `unobserved` tutte le osservazioni remote, e un 404
  * da mancato accesso si travestirebbe da `absent`. Vedi
  * `scripts/lib/cross-repo-raw-fetch.mjs` (issue #982).
  */
@@ -943,21 +1129,34 @@ async function main() {
       });
     }
   }
+  const localObserverHashes = new Map();
+  for (const observer of contract.observers || []) {
+    const target = typeof observer?.target === 'string' && SOURCE_PATH_RE.test(observer.target)
+      ? observer.target
+      : null;
+    if (!target) continue;
+    try {
+      localObserverHashes.set(target, sha256(fs.readFileSync(path.join(ROOT, target))));
+    } catch {
+      localObserverHashes.set(target, null);
+    }
+  }
   const runtimeChecks = planRuntimeFlagChecks(contract, artifactSources);
 
-  // Un fetch per path DISTINTO: i 24 `sourceSha256` puntano a 24 file diversi,
-  // ma un contratto malformato potrebbe ripetere lo stesso path.
+  // Un fetch per coppia ref/path DISTINTA: la stessa coordinata viene osservata
+  // sia sulla head corrente sia sul commit di lineage, e non sono intercambiabili.
   const cache = new Map();
-  const observe = async (rel) => {
-    if (!cache.has(rel)) {
+  const observe = async (rel, ref = observationRef) => {
+    const cacheKey = `${ref}\u0000${rel}`;
+    if (!cache.has(cacheKey)) {
       try {
-        const bytes = await siteFile(rel, observationRef);
-        cache.set(rel, { sha256: bytes === null ? null : sha256(bytes), bytes });
+        const bytes = await siteFile(rel, ref);
+        cache.set(cacheKey, { sha256: bytes === null ? null : sha256(bytes), bytes });
       } catch (e) {
-        cache.set(rel, { error: String(e.message || e) });
+        cache.set(cacheKey, { error: String(e.message || e) });
       }
     }
-    return cache.get(rel);
+    return cache.get(cacheKey);
   };
 
   const observed = new Map();
@@ -968,17 +1167,33 @@ async function main() {
       });
       continue;
     }
+    if (check.localObserverFile) {
+      observed.set(check.field, {
+        observed: localObserverHashes.get(check.localObserverFile) ?? null,
+      });
+      continue;
+    }
     const candidates = check.sitePathCandidates?.length
       ? check.sitePathCandidates
       : (check.sitePath ? [check.sitePath] : []);
     if (!candidates.length) continue;
-    observed.set(check.field, await resolveSiteCandidate(candidates, observe, check.sourceLogic));
+    const refObserve = (rel) => observe(rel, check.observationRef || observationRef);
+    const resolved = await resolveSiteCandidate(candidates, refObserve, check.sourceLogic);
+    if (resolved.bytes && check.digestKind === 'canonical-json') {
+      try {
+        resolved.sha256 = canonicalJsonDigest(resolved.bytes);
+      } catch (error) {
+        resolved.sha256 = null;
+        resolved.invalidDocument = true;
+      }
+    }
+    observed.set(check.field, resolved);
   }
 
   const runtimeObserved = new Map();
   for (const check of runtimeChecks) {
     if (!check.declared || check.unobservedArtifact) continue;
-    runtimeObserved.set(check.field, await observe(check.sitePath));
+    runtimeObserved.set(check.field, await observe(check.sitePath, observationRef));
   }
 
   const verdict = mergeVerdicts(
