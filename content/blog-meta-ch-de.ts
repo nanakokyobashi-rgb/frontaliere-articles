@@ -7250,6 +7250,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.licenziamento-swisscom-bulle.title': 'Kündigung bei Swisscom nach 38 Jahren: Der Fall landet in Bern',
     'blog.article.licenziamento-swisscom-bulle.excerpt': 'Sébastien Perriard, ein 54-Jähriger aus Bulle, wurde nach 38 Dienstjahren von Swisscom entlassen. Über 530 Menschen fordern seine Wiedereinstellung mittels einer Petition.',
     'blog.article.licenziamento-swisscom-bulle.imageAlt': 'Swisscom Bürogebäude in der Schweiz',
+    'blog.article.preventivo-2027-ticino-polemica.title': 'Haushaltsentwurf 2027: Defizit von 98,5 Millionen und Kontroversen',
+    'blog.article.preventivo-2027-ticino-polemica.excerpt': 'Der Staatsrat legt einen Haushaltsentwurf mit einem Defizit von 98,5 Millionen vor. Die Grünen kritisieren den Haushaltsplan als wahltaktisch motiviert und investitionsarm.',
+    'blog.article.preventivo-2027-ticino-polemica.imageAlt': 'Regierungsgebäude in Bellinzona',
 };
 
 export default blogMetaChDe;

@@ -7250,6 +7250,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.licenziamento-swisscom-bulle.title': 'Swisscom Layoff After 38 Years: The Case Goes to Bern',
     'blog.article.licenziamento-swisscom-bulle.excerpt': 'Sébastien Perriard, a 54-year-old from Bulle, was fired by Swisscom after 38 years of service. More than 530 people have signed a petition calling for his reinstatement.',
     'blog.article.licenziamento-swisscom-bulle.imageAlt': 'Swisscom office building in Switzerland',
+    'blog.article.preventivo-2027-ticino-polemica.title': '2027 Budget: A Deficit of 98.5 Million and Controversy',
+    'blog.article.preventivo-2027-ticino-polemica.excerpt': 'The State Council presents a budget with a deficit of 98.5 million. The Greens criticize the measure, calling it electoral and lacking investment.',
+    'blog.article.preventivo-2027-ticino-polemica.imageAlt': 'Government building in Bellinzona',
 };
 
 export default blogMetaChEn;

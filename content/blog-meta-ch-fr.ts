@@ -7250,6 +7250,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.licenziamento-swisscom-bulle.title': 'Licenciement chez Swisscom après 38 ans : l\'affaire arrive à Berne',
     'blog.article.licenziamento-swisscom-bulle.excerpt': 'Sébastien Perriard, âgé de 54 ans et originaire de Bulle, a été licencié par Swisscom après 38 ans de service. Plus de 530 personnes demandent sa réintégration par voie de pétition.',
     'blog.article.licenziamento-swisscom-bulle.imageAlt': 'Bâtiment de Swisscom en Suisse',
+    'blog.article.preventivo-2027-ticino-polemica.title': 'Budget 2027 : déficit de 98,5 millions et polémiques',
+    'blog.article.preventivo-2027-ticino-polemica.excerpt': 'Le Conseil d\'État présente un budget prévisionnel affichant un déficit de 98,5 millions. Les Verts critiquent la manœuvre, la qualifiant d\'électorale et dépourvue d\'investissements.',
+    'blog.article.preventivo-2027-ticino-polemica.imageAlt': 'Bâtiment du gouvernement à Bellinzone',
 };
 
 export default blogMetaChFr;

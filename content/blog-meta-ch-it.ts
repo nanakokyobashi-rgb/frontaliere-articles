@@ -7250,6 +7250,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.licenziamento-swisscom-bulle.title': 'Licenziamento Swisscom dopo 38 anni: il caso arriva a Berna',
     'blog.article.licenziamento-swisscom-bulle.excerpt': 'Sébastien Perriard, 54enne di Bulle, è stato licenziato da Swisscom dopo 38 anni di servizio. Oltre 530 persone chiedono il suo reintegro tramite petizione.',
     'blog.article.licenziamento-swisscom-bulle.imageAlt': 'Sede di Swisscom in Svizzera',
+    'blog.article.preventivo-2027-ticino-polemica.title': 'Preventivo 2027: disavanzo di 98,5 milioni e polemiche',
+    'blog.article.preventivo-2027-ticino-polemica.excerpt': 'Il Consiglio di Stato presenta un preventivo con 98,5 milioni di disavanzo. I Verdi criticano la manovra definendola elettorale e priva di investimenti.',
+    'blog.article.preventivo-2027-ticino-polemica.imageAlt': 'Sede del Consiglio di Stato a Bellinzona',
 };
 
 export default blogMetaChIt;

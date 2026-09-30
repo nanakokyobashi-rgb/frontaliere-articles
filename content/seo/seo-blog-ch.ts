@@ -94010,6 +94010,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-preventivo-2027-ticino-polemica': {
+    title: 'Preventivo 2027: disavanzo di 98,5 milioni e polemiche',
+    description: 'Il preventivo 2027 del Ticino prevede 98,5 milioni di disavanzo. I Verdi criticano la manovra: tagli su prestazioni, asilo e Comuni. Ecco i dettagli.',
+    keywords: 'frontalieri, ticino, svizzera, italia, preventivo, disavanzo, milioni, polemiche',
+    ogTitle: 'Preventivo 2027: disavanzo di 98,5 milioni e polemiche',
+    ogDescription: 'Il Consiglio di Stato ticinese presenta un preventivo 2027 con un disavanzo di 98,5 milioni. I Verdi sollevano critiche sulle scelte di austerità e la mancanza di investimenti per il clima e l\'invecchiamento.',
+    canonicalPath: '/articoli-svizzera/preventivo-2027-ticino-polemica/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Preventivo 2027: disavanzo di 98,5 milioni e polemiche",
+      "description": "Il preventivo 2027 del Ticino prevede 98,5 milioni di disavanzo. I Verdi criticano la manovra: tagli su prestazioni, asilo e Comuni. Ecco i dettagli.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/preventivo-2027-ticino-polemica.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sede del Consiglio di Stato a Bellinzona"
+      },
+      "datePublished": "2026-09-30T22:24:48+00:00",
+      "dateModified": "2026-09-30T22:24:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/preventivo-2027-ticino-polemica/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

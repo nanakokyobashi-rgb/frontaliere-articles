@@ -2439,6 +2439,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'ubs-artisan-partners-chiede-di-lasciare-svizzera': { it: 'ubs-artisan-partners-chiede-di-lasciare-svizzera', en: 'ubs-artisan-partners-asks-to-leave-switzerland', de: 'ubs-artisan-partners-bittet-schweiz-zu-verlassen', fr: 'ubs-artisan-partners-demande-de-quitter-la-suisse' },
  'guida-ag-sconti-trasporti': { it: 'guida-ag-sconti-trasporti', en: 'swiss-public-transport-passes-discounts', de: 'schweizer-oev-abos-rabatte', fr: 'abonnements-transports-suisses-remises' },
  'licenziamento-swisscom-bulle': { it: 'licenziamento-swisscom-bulle', en: 'swisscom-dismissal-bulle', de: 'swisscom-entlassung-bulle', fr: 'licenciement-swisscom-bulle' },
+ 'preventivo-2027-ticino-polemica': { it: 'preventivo-2027-ticino-polemica', en: 'ticino-2027-budget-criticism', de: 'kanton-tessin-budget-2027-kritik', fr: 'budget-tessin-2027-critique' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
