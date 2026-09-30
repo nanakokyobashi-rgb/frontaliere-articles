@@ -273,11 +273,53 @@ test('un run in_progress con il solo guard non e un detentore translate', async 
   assert.equal(report.complete, true);
   assert.equal(report.failClosed, false);
   assert.equal(report.counts.active, 0);
-  assert.equal(report.counts.pending, 1);
+  assert.equal(report.counts.pending, 2);
   assert.equal(report.queue.oldestActiveStartedAt, null);
   assert.equal(report.queue.slo.measured, 'oldest_pending_age');
   assert.equal(report.queue.slo.state, 'within_slo');
   assert.equal(report.queue.slo.alert, false);
+});
+
+test('censisce piu run active distinguendo holder, guard e translate in attesa', async () => {
+  const holderId = 33500000023;
+  const guardId = 33500000024;
+  const waitingId = 33500000025;
+  const { report } = await observe(fakeGithub({
+    activeJobsByRun: {
+      [holderId]: {
+        jobs: [{ id: 1, name: 'translate', started_at: '2026-09-01T14:36:15.000Z', status: 'in_progress' }],
+        total_count: 1,
+      },
+      [guardId]: {
+        jobs: [{ id: 2, name: 'translate_queue_guard', status: 'in_progress' }],
+        total_count: 1,
+      },
+      [waitingId]: {
+        jobs: [{
+          id: 3,
+          name: 'translate',
+          created_at: '2026-09-01T16:30:00.000Z',
+          status: 'queued',
+        }],
+        total_count: 1,
+      },
+    },
+    currentRuns: [
+      run(holderId, { conclusion: null, created_at: '2026-09-01T12:00:00.000Z', status: 'in_progress' }),
+      run(guardId, { conclusion: null, created_at: '2026-09-01T17:00:00.000Z', status: 'in_progress' }),
+      run(waitingId, { conclusion: null, created_at: '2026-09-01T16:00:00.000Z', status: 'in_progress' }),
+    ],
+    pages: [[]],
+  }));
+
+  assert.equal(report.complete, true);
+  assert.equal(report.failClosed, false);
+  assert.equal(report.counts.active, 1);
+  assert.equal(report.counts.pending, 2);
+  assert.equal(report.queue.oldestActiveStartedAt, '2026-09-01T14:36:15.000Z');
+  assert.equal(report.queue.oldestPendingWaitStartedAt, '2026-09-01T16:30:00.000Z');
+  assert.equal(report.queue.slo.measured, 'oldest_holder_age');
+  assert.equal(report.queue.slo.state, 'within_slo');
 });
 
 test('un job attivo non verificabile rende il censimento fail-closed', async () => {

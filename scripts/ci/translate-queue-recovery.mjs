@@ -21,7 +21,11 @@ export const MAX_RUN_PAGES = 2;
 export const RUNS_PER_PAGE = 100;
 export const MAX_DEEP_CANDIDATES = 20;
 export const MAX_LIVENESS_STATUS_GET_REQUESTS = 5;
-export const MAX_ACTIVE_JOB_GET_REQUESTS = 1;
+// Il guard e' fuori dal mutex del job pesante: durante il censimento possono
+// quindi esserci piu' run `in_progress` (guard-only, translate in attesa o un
+// holder translate). Il bound protegge il watchdog da una risposta enorme e,
+// entro il bound, il censimento ispeziona ogni run active.
+export const MAX_ACTIVE_JOB_GET_REQUESTS = 5;
 export const MAX_LIVENESS_GET_REQUESTS =
   MAX_LIVENESS_STATUS_GET_REQUESTS + MAX_ACTIVE_JOB_GET_REQUESTS;
 export const MAX_TOTAL_GET_REQUESTS = 30;
@@ -217,6 +221,7 @@ function makeInitialState(nowMs) {
     deepCandidates: 0,
     deepInspected: 0,
     activeRunIds: [],
+    activeWorkflowRuns: 0,
     pendingRunIds: [],
     queueCreatedMs: [],
     pendingCreatedMs: [],
@@ -364,45 +369,76 @@ async function listCurrentQueueRuns(client, state) {
 async function collectActiveJobStart(client, state, currentRuns) {
   if (!state.complete) return;
   const activeRuns = currentRuns.filter((run) => ACTIVE_STATUSES.has(run?.status));
+  state.activeWorkflowRuns = activeRuns.length;
   if (activeRuns.length === 0) return;
-  if (activeRuns.length !== 1) {
+  if (activeRuns.length > MAX_ACTIVE_JOB_GET_REQUESTS) {
     throw new ObservationFailure('liveness_census_inconclusive');
   }
 
-  const runId = validRunId(activeRuns[0]?.id);
-  if (runId === null) throw new ObservationFailure('liveness_census_inconclusive');
-  const jobs = await client.getJson(
-    `/repos/${TARGET_REPOSITORY}/actions/runs/${runId}/jobs?filter=latest&per_page=100&page=1`,
-  );
-  if (!Number.isSafeInteger(jobs?.total_count)
-      || jobs.total_count < 0
-      || jobs.total_count > 100
-      || !Array.isArray(jobs?.jobs)
-      || jobs.jobs.length !== jobs.total_count) {
-    throw new ObservationFailure('liveness_census_inconclusive');
-  }
+  for (const activeRun of activeRuns) {
+    const runId = validRunId(activeRun?.id);
+    if (runId === null) throw new ObservationFailure('liveness_census_inconclusive');
+    const createdMs = validTimestamp(activeRun.created_at);
+    if (createdMs === null) throw new ObservationFailure('liveness_census_inconclusive');
+    const jobs = await client.getJson(
+      `/repos/${TARGET_REPOSITORY}/actions/runs/${runId}/jobs?filter=latest&per_page=100&page=1`,
+    );
+    if (!Number.isSafeInteger(jobs?.total_count)
+        || jobs.total_count < 0
+        || jobs.total_count > 100
+        || !Array.isArray(jobs?.jobs)
+        || jobs.jobs.length !== jobs.total_count) {
+      throw new ObservationFailure('liveness_census_inconclusive');
+    }
 
-  const activeJobs = jobs.jobs.filter((job) => (
-    job?.name === 'translate' && job?.status === 'in_progress'
-  ));
-  if (activeJobs.length > 1) {
-    throw new ObservationFailure('liveness_census_inconclusive');
-  }
-  if (activeJobs.length === 0) {
+    const activeJobs = jobs.jobs.filter((job) => (
+      job?.name === 'translate' && job?.status === 'in_progress'
+    ));
+    if (activeJobs.length > 1) {
+      throw new ObservationFailure('liveness_census_inconclusive');
+    }
+    if (activeJobs.length === 1) {
+      const startedMs = validTimestamp(activeJobs[0].started_at);
+      if (startedMs === null) throw new ObservationFailure('liveness_census_inconclusive');
+      if (isFutureMeasurement(state, startedMs)) {
+        failClosed(state, 'future_timestamp', runId);
+        continue;
+      }
+      state.activeStartedMs.push(startedMs);
+      continue;
+    }
+
+    // Workflow-level `in_progress` no longer means that the heavy job owns the
+    // mutex: the guard can be running by itself, or `translate` can be queued
+    // behind another holder. Demote both shapes to pending so the report keeps
+    // the waiting age instead of becoming empty and hiding a stuck queue.
+    const pendingJobs = jobs.jobs.filter((job) => (
+      job?.name === 'translate' && PENDING_STATUSES.has(job?.status)
+    ));
+    if (pendingJobs.length > 1) {
+      throw new ObservationFailure('liveness_census_inconclusive');
+    }
+    let waitStartedMs = createdMs;
+    const pendingJob = pendingJobs[0];
+    if (pendingJob?.created_at !== undefined && pendingJob.created_at !== null) {
+      waitStartedMs = validTimestamp(pendingJob.created_at);
+      if (waitStartedMs === null || waitStartedMs < createdMs) {
+        throw new ObservationFailure('liveness_census_inconclusive');
+      }
+    }
+    if (isFutureMeasurement(state, waitStartedMs)) {
+      failClosed(state, 'future_timestamp', runId);
+      continue;
+    }
     const activeIndex = state.activeRunIds.indexOf(runId);
     if (activeIndex >= 0) {
       state.activeRunIds.splice(activeIndex, 1);
       state.activeCreatedMs.splice(activeIndex, 1);
     }
-    return;
+    state.pendingRunIds.push(runId);
+    state.pendingCreatedMs.push(createdMs);
+    state.pendingWaitStartedMs.push(waitStartedMs);
   }
-  const startedMs = validTimestamp(activeJobs[0].started_at);
-  if (startedMs === null) throw new ObservationFailure('liveness_census_inconclusive');
-  if (isFutureMeasurement(state, startedMs)) {
-    failClosed(state, 'future_timestamp', runId);
-    return;
-  }
-  state.activeStartedMs.push(startedMs);
 }
 
 async function listAllBoundedRuns(client, state) {
@@ -701,6 +737,7 @@ function buildReport(state, client) {
     complete: state.complete,
     counts: {
       active: state.activeRunIds.length,
+      activeWorkflowRuns: state.activeWorkflowRuns,
       byReason: state.reasons.counts,
       deepCandidates: state.deepCandidates,
       deepInspected: state.deepInspected,
@@ -831,7 +868,11 @@ export async function observeTranslateQueueLiveness({
   }
   return {
     complete: state.complete,
-    counts: { active: state.activeRunIds.length, pending: state.pendingRunIds.length },
+    counts: {
+      active: state.activeRunIds.length,
+      activeWorkflowRuns: state.activeWorkflowRuns,
+      pending: state.pendingRunIds.length,
+    },
     failClosed: !state.complete,
     queryBudget: client.budget(),
     reasonCodes: REASON_CODES.filter((code) => state.reasons.counts[code] > 0),

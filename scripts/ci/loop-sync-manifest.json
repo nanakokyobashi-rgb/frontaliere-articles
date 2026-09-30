@@ -3805,7 +3805,7 @@
       "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, misura l'eta' del detentore dal job attivo (`jobs.started_at`) invece che dalla coda del workflow e quella di un rerun pending dall'attempt corrente (`run_started_at`, fail-closed se illeggibile o anteriore a `created_at`) invece che dalla prima creazione, rifiuta fail-closed (`future_timestamp`) ogni istante di misura oltre la tolleranza di skew `MAX_CLOCK_SKEW_SECONDS` invece di azzerarne l'eta', dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
       "baseline": {
         "site": null,
-        "corpus": "95946d27172ac226",
+        "corpus": "0b5a278dbdba2b02",
         "alignedAt": "2026-09-30"
       }
     },
@@ -3815,7 +3815,7 @@
       "reason": "Contratto Node deterministico corpus-only per watchdog e workflow translate: copre censimento corrente indipendente da oltre 200 run storiche, eta' dei rerun pending dall'attempt corrente, timestamp futuri oltre la tolleranza di skew, discovery troncata, budget, prova schedule redatta, assenza by construction di scritture remote e drift del pin blob contro il workflow generato.",
       "baseline": {
         "site": null,
-        "corpus": "bef3b2267ead2b08",
+        "corpus": "cd6b3d59df56df1a",
         "alignedAt": "2026-09-24"
       }
     },
@@ -3835,7 +3835,7 @@
       "reason": "Planner e claim CAS zero-dependency corpus-only: usa target-only senza discovery storica, riserva il budget per target/ancestry/blob/jobs/guard finali e richiede capability blob-bound con dedupe effectively-once e successor guard v1; empty_at_observation viene autorizzato solo dopo il guard live.",
       "baseline": {
         "site": null,
-        "corpus": "ebec1886d837829c",
+        "corpus": "57d07a7ae42efa40",
         "alignedAt": "2026-09-01"
       }
     },
