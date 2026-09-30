@@ -12295,6 +12295,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.intesa-mobilita-varese-ticino-malpensa.title': 'Entente Varese-Ticino: S40/S50 alle 30 Minuten und RE50 Malpensa',
     'blog.article.intesa-mobilita-varese-ticino-malpensa.excerpt': 'Der Regionalrat hat die Vereinbarung ratifiziert: S40 und S50 alle 30 Minuten zwischen Varese und Mendrisio. RE50 für Malpensa und Lugano geplant.',
     'blog.article.intesa-mobilita-varese-ticino-malpensa.imageAlt': 'Bahnhof Mendrisio: neue S40/S50-Verbindung alle 30 Minuten nach Varese und Malpensa',
+    'blog.article.craveggia-ticino-pendolare.title': 'Wohnen in Craveggia und Arbeiten im Tessin als Grenzgänger',
+    'blog.article.craveggia-ticino-pendolare.excerpt': 'Neue Grenzgängervereinbarung: Unterzeichnet am 23. Dezember 2020, gültig ab 1. Januar 2024, mit unterschiedlichen Freigrenzen für alte und neue Grenzgänger.',
+    'blog.article.craveggia-ticino-pendolare.imageAlt': 'Grenzgänger zwischen Italien und dem Tessin in alpiner Landschaft',
 };
 
 export default blogMetaDe;

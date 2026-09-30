@@ -12296,6 +12296,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.intesa-mobilita-varese-ticino-malpensa.title': 'Varese-Ticino agreement: S40/S50 every 30 min and RE50 to Malpensa',
     'blog.article.intesa-mobilita-varese-ticino-malpensa.excerpt': 'The Regional Council has ratified the agreement: S40 and S50 every 30 min between Varese and Mendrisio. The RE50 for Malpensa and Lugano is planned.',
     'blog.article.intesa-mobilita-varese-ticino-malpensa.imageAlt': 'Mendrisio station: new S40/S50 connection every 30 minutes to Varese and Malpensa',
+    'blog.article.craveggia-ticino-pendolare.title': 'Living in Craveggia and working in Ticino as a cross-border worker',
+    'blog.article.craveggia-ticino-pendolare.excerpt': 'New Cross-Border Workers Agreement: signed on December 23, 2020, in force from January 1, 2024, with different exemptions for old and new cross-border workers.',
+    'blog.article.craveggia-ticino-pendolare.imageAlt': 'Cross-border worker between Italy and Ticino in an Alpine landscape',
 };
 
 export default blogMetaEn;

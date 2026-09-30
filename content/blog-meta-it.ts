@@ -12297,6 +12297,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.intesa-mobilita-varese-ticino-malpensa.title': 'Intesa Varese-Ticino: S40/S50 ogni 30 min e RE50 Malpensa',
     'blog.article.intesa-mobilita-varese-ticino-malpensa.excerpt': 'Il Consiglio regionale ha ratificato l\'intesa: S40 e S50 ogni 30 min tra Varese e Mendrisio. Prevista la RE50 per Malpensa e Lugano.',
     'blog.article.intesa-mobilita-varese-ticino-malpensa.imageAlt': 'Stazione di Mendrisio: nuovo collegamento S40/S50 ogni 30 minuti verso Varese e Malpensa',
+    'blog.article.craveggia-ticino-pendolare.title': 'Vivere a Craveggia e lavorare in Ticino da frontaliere',
+    'blog.article.craveggia-ticino-pendolare.excerpt': 'Nuovo Accordo Frontalieri: firmato il 23 dicembre 2020, in vigore dal 1° gennaio 2024, con franchigie diverse per vecchi e nuovi frontalieri.',
+    'blog.article.craveggia-ticino-pendolare.imageAlt': 'Frontaliere tra Italia e Ticino in un paesaggio alpino',
 };
 
 export default blogMetaIt;

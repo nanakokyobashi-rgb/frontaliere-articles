@@ -97300,6 +97300,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-craveggia-ticino-pendolare': {
+    title: 'Vivere a Craveggia e lavorare in Ticino da frontaliere',
+    description: 'Regole per vivere a Craveggia e lavorare in Ticino: imposta alla fonte, franchigie, accordo del 2020, contributi svizzeri e LAMal per i frontalieri.',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, craveggia, lavorare, nuovo',
+    ogTitle: 'Vivere a Craveggia e lavorare in Ticino da frontaliere',
+    ogDescription: 'Vivere a Craveggia e lavorare in Ticino richiede di distinguere vecchi e nuovi frontalieri: l\'accordo è in vigore dal 1° gennaio 2024, l\'imposta alla fonte è svizzera e il credito passa dal 730, con AVS, AD/AC e LPP.',
+    canonicalPath: '/articoli-frontaliere/craveggia-ticino-pendolare',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Craveggia e lavorare in Ticino da frontaliere",
+      "description": "Regole per vivere a Craveggia e lavorare in Ticino: imposta alla fonte, franchigie, accordo del 2020, contributi svizzeri e LAMal per i frontalieri.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/craveggia-ticino-pendolare.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Frontaliere tra Italia e Ticino in un paesaggio alpino"
+      },
+      "datePublished": "2026-09-30T03:16:14+00:00",
+      "dateModified": "2026-09-30T03:16:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/craveggia-ticino-pendolare/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
