@@ -21499,6 +21499,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'record-nuove-imprese-ticino',
+    category: 'novita',
+    date: '2026-09-30T08:06:58.068Z',
+    image: '/images/blog/record-nuove-imprese-ticino.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

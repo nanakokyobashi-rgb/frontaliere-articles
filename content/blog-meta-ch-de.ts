@@ -7157,6 +7157,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.tutela-salariale-camere.title': 'Lohnschutz: Kompromiss zu den Bilateralen III gebilligt',
     'blog.article.tutela-salariale-camere.excerpt': 'In der Bilateral-III-Debatte genehmigt der Ständerat Massnahme 14: Kündigungsschutz für Arbeitnehmervertreter und Gewerkschaften.',
     'blog.article.tutela-salariale-camere.imageAlt': 'Schweizer institutioneller Schauplatz in Bern zum nationalen Entscheid über den Lohnschutz.',
+    'blog.article.record-nuove-imprese-ticino.title': 'Neugeschäftsrekord, das Tessin liegt an der Spitze',
+    'blog.article.record-nuove-imprese-ticino.excerpt': 'In den ersten neun Monaten verzeichnet das Institut für junge Unternehmer 41\'716 neue Unternehmen in der Schweiz. Das Tessin führt die Rangliste mit einem Wachstum von 9,3% an.',
+    'blog.article.record-nuove-imprese-ticino.imageAlt': 'Neue Unternehmen im Schweizer Handelsregister mit dem Tessin an der Spitze',
 };
 
 export default blogMetaChDe;

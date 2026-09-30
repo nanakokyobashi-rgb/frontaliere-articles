@@ -7157,6 +7157,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.tutela-salariale-camere.title': 'Wage protection: compromise approved on Bilaterals III',
     'blog.article.tutela-salariale-camere.excerpt': 'In the debate on Bilaterals III, the Council of States approves measure 14: protection against dismissal for employee and trade union representatives.',
     'blog.article.tutela-salariale-camere.imageAlt': 'Swiss institutional setting in Bern linked to the national wage protection vote.',
+    'blog.article.record-nuove-imprese-ticino.title': 'Record number of new businesses, Ticino leads',
+    'blog.article.record-nuove-imprese-ticino.excerpt': 'In the first nine months, the Institute for Young Entrepreneurs recorded 41\'716 new companies in Switzerland. Ticino leads the ranking with growth of 9,3%.',
+    'blog.article.record-nuove-imprese-ticino.imageAlt': 'New businesses in the Swiss commercial register with Ticino leading',
 };
 
 export default blogMetaChEn;

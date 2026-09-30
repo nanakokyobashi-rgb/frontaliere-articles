@@ -92801,6 +92801,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-record-nuove-imprese-ticino': {
+    title: 'Record di nuove imprese, il Ticino è in testa | Frontaliere Ticino',
+    description: 'Nei primi nove mesi record di nuove imprese in Svizzera con 41\'716 iscrizioni. Il Ticino guida la classifica con una crescita del 9,3% secondo l\'IFJ.',
+    keywords: 'frontalieri, ticino, svizzera, italia, record, nuove, imprese, testa',
+    ogTitle: 'Record di nuove imprese nei primi nove mesi: il Ticino guida la classifica',
+    ogDescription: 'L\'Istituto per giovani imprenditori registra 41\'716 nuove aziende in Svizzera. Il Ticino è in testa con una crescita del 9,3%, mentre Zurigo registra un calo.',
+    canonicalPath: '/articoli-svizzera/record-nuove-imprese-ticino/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Record di nuove imprese, il Ticino è in testa",
+      "description": "Nei primi nove mesi record di nuove imprese in Svizzera con 41'716 iscrizioni. Il Ticino guida la classifica con una crescita del 9,3% secondo l'IFJ.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/record-nuove-imprese-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Nuove imprese nel registro di commercio svizzero con il Ticino in testa"
+      },
+      "datePublished": "2026-09-30T08:06:58+00:00",
+      "dateModified": "2026-09-30T08:06:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/record-nuove-imprese-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -7157,6 +7157,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.tutela-salariale-camere.title': 'Tutela salariale: compromesso approvato sui Bilaterali III',
     'blog.article.tutela-salariale-camere.excerpt': 'Nel dibattito sui Bilaterali III, il Consiglio degli Stati approva la misura 14: protezione dal licenziamento per rappresentanti del personale e sindacali.',
     'blog.article.tutela-salariale-camere.imageAlt': 'Scorcio istituzionale svizzero a Berna, richiamo al voto sulla tutela salariale.',
+    'blog.article.record-nuove-imprese-ticino.title': 'Record di nuove imprese, il Ticino è in testa',
+    'blog.article.record-nuove-imprese-ticino.excerpt': 'Nei primi nove mesi l\'Istituto per giovani imprenditori registra 41\'716 nuove aziende in Svizzera. Il Ticino guida la graduatoria con una crescita del 9,3%.',
+    'blog.article.record-nuove-imprese-ticino.imageAlt': 'Nuove imprese nel registro di commercio svizzero con il Ticino in testa',
 };
 
 export default blogMetaChIt;

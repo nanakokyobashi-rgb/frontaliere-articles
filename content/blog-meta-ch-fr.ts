@@ -7157,6 +7157,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.tutela-salariale-camere.title': 'Protection salariale : compromis approuvé sur les Bilaterali III',
     'blog.article.tutela-salariale-camere.excerpt': 'Dans le débat sur les Bilaterali III, le Conseil des États approuve la mesure 14 : protection contre le licenciement pour les représentants du personnel et les représentants syndicaux.',
     'blog.article.tutela-salariale-camere.imageAlt': 'Cadre institutionnel suisse à Berne lié au vote national sur la protection salariale.',
+    'blog.article.record-nuove-imprese-ticino.title': 'Record de nouvelles entreprises, le Tessin est en tête',
+    'blog.article.record-nuove-imprese-ticino.excerpt': 'Au cours des neuf premiers mois, l\'Institut pour jeunes entrepreneurs enregistre 41\'716 nouvelles entreprises en Suisse. Le Tessin mène le classement avec une croissance de 9,3 %.',
+    'blog.article.record-nuove-imprese-ticino.imageAlt': 'Nouvelles entreprises dans le registre du commerce suisse avec le Tessin en tête',
 };
 
 export default blogMetaChFr;
