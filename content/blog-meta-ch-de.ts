@@ -7145,6 +7145,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.bilaterali-iii-referendum-immobili.title': 'Bilaterale III: Referendum, Immobilienausgaben 2026 und Erdbeben',
     'blog.article.bilaterali-iii-referendum-immobili.excerpt': 'Am dritten Tag der Bilateralen III entscheidet der Ständerat über die Art des Referendums und diskutiert 773,8 Millionen für zivile Immobilien 2026, darunter 211,7 Millionen für die Nationalbibliothek und 96 Millionen für die Botschaft in London.',
     'blog.article.bilaterali-iii-referendum-immobili.imageAlt': 'Schweizerisches Bundesparlament in Bern während der Bilaterali‑III‑Debatte',
+    'blog.article.fueglistaler-errori-rete-ferroviaria.title': 'Füglistaler räumt Fehler beim Bahnausbau ein',
+    'blog.article.fueglistaler-errori-rete-ferroviaria.excerpt': 'Der ehemalige BAV-Direktor kritisiert die Überplanung: Über 100 Milliarden Projekte gegenüber 20 Milliarden zur Verfügung. Konsultation bis zum 9. Oktober.',
+    'blog.article.fueglistaler-errori-rete-ferroviaria.imageAlt': 'Schweizer Zug am Bahnhof',
 };
 
 export default blogMetaChDe;

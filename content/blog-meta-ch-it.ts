@@ -7145,6 +7145,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.bilaterali-iii-referendum-immobili.title': 'Bilaterali III: referendum, spesa immobili 2026 e terremoti',
     'blog.article.bilaterali-iii-referendum-immobili.excerpt': 'Al terzo giorno sui Bilaterali III, il Consiglio degli Stati decide il tipo di referendum e discute 773,8 milioni per gli immobili civili 2026, tra cui 211,7 milioni per la Biblioteca nazionale e 96 milioni per l’ambasciata a Londra.',
     'blog.article.bilaterali-iii-referendum-immobili.imageAlt': 'Parlamento federale svizzero a Berna durante la discussione sui Bilaterali III',
+    'blog.article.fueglistaler-errori-rete-ferroviaria.title': 'Füglistaler ammette errori nell\'ampliamento ferroviario',
+    'blog.article.fueglistaler-errori-rete-ferroviaria.excerpt': 'L\'ex direttore dell\'UFT critica la pianificazione eccessiva: oltre 100 miliardi di progetti a fronte di 20 miliardi disponibili. Consultazione entro il 9 ottobre.',
+    'blog.article.fueglistaler-errori-rete-ferroviaria.imageAlt': 'Treno svizzero in una stazione ferroviaria',
 };
 
 export default blogMetaChIt;

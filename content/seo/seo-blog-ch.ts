@@ -92645,6 +92645,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-fueglistaler-errori-rete-ferroviaria': {
+    title: 'Füglistaler ammette errori nell\'ampliamento ferroviario',
+    description: 'L\'ex direttore dell\'UFT Peter Füglistaler critica l\'eccesso di pianificazione ferroviaria: 100 miliardi di progetti contro 20 disponibili. Dettagli sul 9',
+    keywords: 'frontalieri, ticino, svizzera, italia, füglistaler, ammette, errori, nell',
+    ogTitle: 'Füglistaler ammette errori nell\'ampliamento ferroviario',
+    ogDescription: 'Peter Füglistaler, ex direttore UFT, ammette errori nella pianificazione ferroviaria. Il divario tra i 100 miliardi di progetti e i 20 miliardi di risorse reali.',
+    canonicalPath: '/articoli-svizzera/fueglistaler-errori-rete-ferroviaria/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Füglistaler ammette errori nell'ampliamento ferroviario",
+      "description": "L'ex direttore dell'UFT Peter Füglistaler critica l'eccesso di pianificazione ferroviaria: 100 miliardi di progetti contro 20 disponibili. Dettagli sul 9",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/fueglistaler-errori-rete-ferroviaria.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Treno svizzero in una stazione ferroviaria"
+      },
+      "datePublished": "2026-09-30T06:39:06+00:00",
+      "dateModified": "2026-09-30T06:39:06+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/fueglistaler-errori-rete-ferroviaria/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

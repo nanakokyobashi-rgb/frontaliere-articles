@@ -21463,6 +21463,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'fueglistaler-errori-rete-ferroviaria',
+    category: 'novita',
+    date: '2026-09-30T06:39:06.890Z',
+    image: '/images/blog/fueglistaler-errori-rete-ferroviaria.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

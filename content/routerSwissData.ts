@@ -2404,6 +2404,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'lugano-trading-acciaio': { it: 'lugano-trading-acciaio', en: 'lugano-trading-steel-oligarchs', de: 'lugano-trading-stahl-oligarchen', fr: 'lugano-trading-acier-oligarques' },
  'assegni-vallese-cassa-domanda': { it: 'assegni-vallese-cassa-domanda', en: 'valais-family-allowances-claim', de: 'familienzulagen-wallis-antrag', fr: 'allocations-familiales-valais-demande' },
  'bilaterali-iii-referendum-immobili': { it: 'bilaterali-iii-referendum-immobili', en: 'bilaterali-iii-referendum-properties', de: 'bilaterale-iii-referendum-immobilien', fr: 'bilateraux-iii-referendum-immobilier' },
+ 'fueglistaler-errori-rete-ferroviaria': { it: 'fueglistaler-errori-rete-ferroviaria', en: 'fueglistaler-railway-network-errors', de: 'fueglistaler-fehler-schienennetz', fr: 'fueglistaler-erreurs-reseau-ferroviaire' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

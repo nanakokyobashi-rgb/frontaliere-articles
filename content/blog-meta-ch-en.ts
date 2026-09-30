@@ -7145,6 +7145,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.bilaterali-iii-referendum-immobili.title': 'Bilateral III: referendum, 2026 property costs & quakes',
     'blog.article.bilaterali-iii-referendum-immobili.excerpt': 'On the third day of discussions on Bilaterals III, the Council of States decides on the type of referendum and discusses 773,8 million for 2026 civilian properties, including 211,7 million for the National Library and 96 million for the embassy in London.',
     'blog.article.bilaterali-iii-referendum-immobili.imageAlt': 'Swiss Federal Parliament in Bern during the Bilaterali III debate',
+    'blog.article.fueglistaler-errori-rete-ferroviaria.title': 'Füglistaler admits mistakes in railway expansion',
+    'blog.article.fueglistaler-errori-rete-ferroviaria.excerpt': 'The former director of the UFT criticizes excessive planning: over 100 billion in projects against 20 billion available. Consultation by 9 October.',
+    'blog.article.fueglistaler-errori-rete-ferroviaria.imageAlt': 'Swiss train at a railway station',
 };
 
 export default blogMetaChEn;
