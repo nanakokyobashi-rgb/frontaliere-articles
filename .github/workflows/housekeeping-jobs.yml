@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         lane: [prospective, rest]
-    uses: valerielinc-ops/frontaliere-si-o-no/.github/workflows/housekeeping-jobs-logic.yml@9b5f5d564150b3124e0c0dc3745696eee5ce6aca
+    uses: valerielinc-ops/frontaliere-si-o-no/.github/workflows/housekeeping-jobs-logic.yml@9b5f5d564150b3124e0c0dc3745696eee5ce6aca # merge con checkout auth esplicito
     with:
       lane: ${{ matrix.lane }}
     secrets:
