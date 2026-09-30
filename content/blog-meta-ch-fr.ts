@@ -7181,6 +7181,21 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.analisti-economia-svizzera-settembre.title': 'Les analystes tempèrent leurs attentes concernant l\'économie suisse',
     'blog.article.analisti-economia-svizzera-settembre.excerpt': 'À Zurich, l\'indice des perspectives économiques suisses s\'établit à plus 2,6 points en septembre, marquant un recul par rapport à août.',
     'blog.article.analisti-economia-svizzera-settembre.imageAlt': 'Panorama financier à Zurich reflétant les perspectives économiques',
+    'blog.article.bns-acquisti-divise-trimestre.title': 'BNS : les achats de devises ont diminué au deuxième trimestre',
+    'blog.article.bns-acquisti-divise-trimestre.excerpt': 'Au deuxième trimestre, la Banque nationale suisse a acheté des devises étrangères pour 1,4 milliard de francs, en baisse par rapport aux 3,9 milliards des trois premiers mois.',
+    'blog.article.bns-acquisti-divise-trimestre.imageAlt': 'Bâtiment de la Banque nationale suisse à Berne',
+    'blog.article.zugo-de-escalation-cyberspazio.title': 'La Confédération encourage la désescalade dans le cyberespace',
+    'blog.article.zugo-de-escalation-cyberspazio.excerpt': 'À Zoug, conférence internationale de la Confédération pour la désescalade dans le cyberespace, entre diplomatie préventive, OSCE et intelligence artificielle.',
+    'blog.article.zugo-de-escalation-cyberspazio.imageAlt': 'Conférence internationale sur la cybersécurité à Zoug',
+    'blog.article.lamal-franchigie-sussidio-basel.title': 'Primes d’assurance-maladie Bâle-Ville : réduction des primes',
+    'blog.article.lamal-franchigie-sussidio-basel.excerpt': 'Guide pratique des primes LAMal à Bâle-Ville : franchises pour adultes, prime par canton et par région et réduction de primes en tant que subvention cantonale.',
+    'blog.article.lamal-franchigie-sussidio-basel.imageAlt': 'Documents LAMal devant une vue urbaine de Bâle-Ville',
+    'blog.article.tassa-prodotti-zuccherati-svizzera.title': 'Lutte contre l\'obésité : les Suisses ne veulent pas de taxe',
+    'blog.article.tassa-prodotti-zuccherati-svizzera.excerpt': '68% des personnes interrogées à Zurich et en Suisse rejettent une taxe sur le sucre, le sel ou les graisses. Les données du suivi Gfs.Bern et les préférences en matière de prévention.',
+    'blog.article.tassa-prodotti-zuccherati-svizzera.imageAlt': 'Surveillance à Zurich sur les produits sucrés et les taxes alimentaires en Suisse',
+    'blog.article.franchigie-lamal-basilea-citta.title': 'Primes d’assurance-maladie du canton de Bâle-Ville : réduction des primes',
+    'blog.article.franchigie-lamal-basilea-citta.excerpt': 'Dans le canton de Bâle-Ville, les primes LAMal dépendent du canton et de la région : franchises pour adultes, modèles alternatifs et réduction des primes sous forme de subside cantonal.',
+    'blog.article.franchigie-lamal-basilea-citta.imageAlt': 'Comparaison des primes d\'assurance-maladie suisses et de leur réduction',
 };
 
 export default blogMetaChFr;

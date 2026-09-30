@@ -7181,6 +7181,21 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.analisti-economia-svizzera-settembre.title': 'Gli analisti frenano sull\'economia svizzera',
     'blog.article.analisti-economia-svizzera-settembre.excerpt': 'A Zurigo l\'indice sulle prospettive economiche svizzere si attesta a più 2,6 punti in settembre, segnando una flessione rispetto ad agosto.',
     'blog.article.analisti-economia-svizzera-settembre.imageAlt': 'Panorama finanziario a Zurigo con l\'indice delle prospettive economiche',
+    'blog.article.bns-acquisti-divise-trimestre.title': 'BNS: diminuiti nel secondo trimestre gli acquisti di divise',
+    'blog.article.bns-acquisti-divise-trimestre.excerpt': 'Nel secondo trimestre la Banca nazionale svizzera ha acquistato valute estere per 1,4 miliardi di franchi, in calo rispetto ai 3,9 miliardi dei primi tre mesi.',
+    'blog.article.bns-acquisti-divise-trimestre.imageAlt': 'Edificio della Banca nazionale svizzera a Berna',
+    'blog.article.zugo-de-escalation-cyberspazio.title': 'La Confederazione promuove la de-escalation nel cyberspazio',
+    'blog.article.zugo-de-escalation-cyberspazio.excerpt': 'A Zugo conferenza internazionale della Confederazione per la de-escalation nel cyberspazio, tra diplomazia preventiva, OSCE e intelligenza artificiale.',
+    'blog.article.zugo-de-escalation-cyberspazio.imageAlt': 'Conferenza internazionale sulla cybersicurezza a Zugo',
+    'blog.article.lamal-franchigie-sussidio-basel.title': 'Premi cassa malati Basilea Città: riduzione premi',
+    'blog.article.lamal-franchigie-sussidio-basel.excerpt': 'Guida pratica ai premi LAMal a Basilea Città: franchigie adulti, premio per cantone e regione e riduzione premi come sussidio cantonale.',
+    'blog.article.lamal-franchigie-sussidio-basel.imageAlt': 'Documenti LAMal accanto a una vista urbana di Basilea Città',
+    'blog.article.tassa-prodotti-zuccherati-svizzera.title': 'Lotta a obesità: gli svizzeri non vogliono una tassa',
+    'blog.article.tassa-prodotti-zuccherati-svizzera.excerpt': 'Il 68% degli interpellati a Zurigo e in Svizzera rifiuta una tassa su zucchero, sale o grassi. I dati del monitoraggio Gfs.Bern e le preferenze sulla prevenzione.',
+    'blog.article.tassa-prodotti-zuccherati-svizzera.imageAlt': 'Monitoraggio a Zurigo sui prodotti zuccherati e le tasse sugli alimenti in Svizzera',
+    'blog.article.franchigie-lamal-basilea-citta.title': 'Premi cassa malati canton Basilea Città: riduzione premi',
+    'blog.article.franchigie-lamal-basilea-citta.excerpt': 'Nel canton Basilea Città, i premi LAMal seguono cantone e regione: franchigie adulti, modelli alternativi e riduzione dei premi come sussidio cantonale.',
+    'blog.article.franchigie-lamal-basilea-citta.imageAlt': 'Confronto dei premi della cassa malati e riduzione dei premi in Svizzera',
 };
 
 export default blogMetaChIt;

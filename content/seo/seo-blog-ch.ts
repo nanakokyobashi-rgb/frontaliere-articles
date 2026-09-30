@@ -93113,6 +93113,201 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-bns-acquisti-divise-trimestre': {
+    title: 'BNS: diminuiti nel secondo trimestre gli acquisti di divise',
+    description: 'Scopri i dati sugli acquisti di valute estere della Banca nazionale svizzera: 1,4 miliardi nel secondo trimestre contro i 3,9 miliardi dei primi tre mesi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, diminuiti, secondo, trimestre, acquisti',
+    ogTitle: 'BNS: diminuiti nel secondo trimestre gli acquisti di divise',
+    ogDescription: 'Nel secondo trimestre la Banca nazionale svizzera ha acquistato valute estere per 1,4 miliardi di franchi, registrando un calo rispetto ai 3,9 miliardi dei primi tre mesi dell\'anno.',
+    canonicalPath: '/articoli-svizzera/bns-acquisti-divise-trimestre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "BNS: diminuiti nel secondo trimestre gli acquisti di divise",
+      "description": "Scopri i dati sugli acquisti di valute estere della Banca nazionale svizzera: 1,4 miliardi nel secondo trimestre contro i 3,9 miliardi dei primi tre mesi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bns-acquisti-divise-trimestre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio della Banca nazionale svizzera a Berna"
+      },
+      "datePublished": "2026-09-30T11:54:17+00:00",
+      "dateModified": "2026-09-30T11:54:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/bns-acquisti-divise-trimestre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-zugo-de-escalation-cyberspazio': {
+    title: 'La Confederazione promuove la de-escalation nel cyberspazio',
+    description: 'La Confederazione promuove a Zugo la de-escalation nel cyberspazio nell\'anno di presidenza OSCE. Ruolo dell\'intelligenza artificiale e diplomazia.',
+    keywords: 'frontalieri, ticino, svizzera, italia, confederazione, promuove, de-escalation, cyberspazio',
+    ogTitle: 'La Confederazione promuove la de-escalation nel cyberspazio a Zugo',
+    ogDescription: 'Approfondimento sulla conferenza internazionale al Theater Casino di Zugo organizzata dalla Confederazione nell\'anno di presidenza elvetica dell\'OSCE, con l\'intervento di Florian Schütz sui rischi dell\'intelligenza artificiale e della sicurezza',
+    canonicalPath: '/articoli-svizzera/zugo-de-escalation-cyberspazio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "La Confederazione promuove la de-escalation nel cyberspazio",
+      "description": "La Confederazione promuove a Zugo la de-escalation nel cyberspazio nell'anno di presidenza OSCE. Ruolo dell'intelligenza artificiale e diplomazia.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/zugo-de-escalation-cyberspazio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Conferenza internazionale sulla cybersicurezza a Zugo"
+      },
+      "datePublished": "2026-09-30T12:36:30+00:00",
+      "dateModified": "2026-09-30T12:36:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/zugo-de-escalation-cyberspazio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-lamal-franchigie-sussidio-basel': {
+    title: 'Premi cassa malati Basilea Città: riduzione premi',
+    description: 'Guida pratica ai premi cassa malati LAMal nel Cantone di Basilea Città: franchigie adulti, premio per cantone e regione e riduzione premi cantonale in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, premi, cassa, malati, basilea',
+    ogTitle: 'Basilea Città: premi LAMal e riduzione',
+    ogDescription: 'Nel Cantone di Basilea Città, i premi LAMal sono legati a cantone e regione. La guida chiarisce le franchigie adulti, l\'obbligo entro tre mesi dall\'arrivo e la riduzione premi come sussidio cantonale, con un confronto utile per il bilancio svizzero.',
+    canonicalPath: '/articoli-svizzera/lamal-franchigie-sussidio-basel/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Premi cassa malati Basilea Città: riduzione premi",
+      "description": "Guida pratica ai premi cassa malati LAMal nel Cantone di Basilea Città: franchigie adulti, premio per cantone e regione e riduzione premi cantonale in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/lamal-franchigie-sussidio-basel.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documenti LAMal accanto a una vista urbana di Basilea Città"
+      },
+      "datePublished": "2026-09-30T12:56:57+00:00",
+      "dateModified": "2026-09-30T12:56:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/lamal-franchigie-sussidio-basel/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-tassa-prodotti-zuccherati-svizzera': {
+    title: 'Lotta a obesità: gli svizzeri non vogliono una tassa',
+    description: 'Il 68% degli svizzeri rifiuta la tassa su zucchero, sale e grassi. I dati del monitoraggio Gfs.Bern tra prevenzione, scuole e divieto di pubblicità.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lotta, obesità, svizzeri, vogliono',
+    ogTitle: 'Lotta a obesità: gli svizzeri non vogliono una tassa sui prodotti zuccherati',
+    ogDescription: 'I risultati del 13esimo monitoraggio Gfs.Bern a Zurigo e in Svizzera: il 68% è contrario a una tassa su zucchero, sale e grassi, mentre sale al 90% il favore per la prevenzione e i progetti con l\'economia.',
+    canonicalPath: '/articoli-svizzera/tassa-prodotti-zuccherati-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lotta a obesità: gli svizzeri non vogliono una tassa",
+      "description": "Il 68% degli svizzeri rifiuta la tassa su zucchero, sale e grassi. I dati del monitoraggio Gfs.Bern tra prevenzione, scuole e divieto di pubblicità.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/tassa-prodotti-zuccherati-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Monitoraggio a Zurigo sui prodotti zuccherati e le tasse sugli alimenti in Svizzera"
+      },
+      "datePublished": "2026-09-30T13:17:25+00:00",
+      "dateModified": "2026-09-30T13:17:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/tassa-prodotti-zuccherati-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-franchigie-lamal-basilea-citta': {
+    title: 'Premi cassa malati canton Basilea Città: riduzione premi',
+    description: 'Premi cassa malati nel canton Basilea Città: franchigie adulti, modelli alternativi, obbligo LAMal entro tre mesi per residenti, riduzione cantonale dei premi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, premi, cassa, malati, canton',
+    ogTitle: 'Basilea Città: premi LAMal e riduzione',
+    ogDescription: 'LAMal obbligatoria per i residenti a Basilea Città: guida pratica a cantone, regione, franchigie adulte, modelli alternativi e riduzione dei premi come sussidio cantonale, con stipula entro tre mesi dall\'arrivo.',
+    canonicalPath: '/articoli-svizzera/franchigie-lamal-basilea-citta/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Premi cassa malati canton Basilea Città: riduzione premi",
+      "description": "Premi cassa malati nel canton Basilea Città: franchigie adulti, modelli alternativi, obbligo LAMal entro tre mesi per residenti, riduzione cantonale dei premi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/franchigie-lamal-basilea-citta.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Confronto dei premi della cassa malati e riduzione dei premi in Svizzera"
+      },
+      "datePublished": "2026-09-30T13:45:58+00:00",
+      "dateModified": "2026-09-30T13:45:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/franchigie-lamal-basilea-citta/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

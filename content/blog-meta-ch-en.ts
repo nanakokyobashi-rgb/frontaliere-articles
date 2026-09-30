@@ -7181,6 +7181,21 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.analisti-economia-svizzera-settembre.title': 'Analysts rein in their outlook for the Swiss economy',
     'blog.article.analisti-economia-svizzera-settembre.excerpt': 'In Zurich, the index for Swiss economic prospects stands at plus 2,6 points in September, marking a decline compared with August.',
     'blog.article.analisti-economia-svizzera-settembre.imageAlt': 'Financial panorama in Zurich reflecting Swiss economic outlook',
+    'blog.article.bns-acquisti-divise-trimestre.title': 'BNS: foreign currency purchases decreased in the second quarter',
+    'blog.article.bns-acquisti-divise-trimestre.excerpt': 'In the second quarter, the Swiss National Bank purchased foreign currencies for 1,4 billion francs, down from the 3,9 billion in the first three months.',
+    'blog.article.bns-acquisti-divise-trimestre.imageAlt': 'Swiss National Bank building in Bern',
+    'blog.article.zugo-de-escalation-cyberspazio.title': 'The Confederation promotes de-escalation in cyberspace',
+    'blog.article.zugo-de-escalation-cyberspazio.excerpt': 'An international conference organized by the Swiss Confederation on de-escalation in cyberspace is taking place in Zug, focusing on preventive diplomacy, the OSCE, and artificial intelligence.',
+    'blog.article.zugo-de-escalation-cyberspazio.imageAlt': 'International cybersecurity conference in Zug',
+    'blog.article.lamal-franchigie-sussidio-basel.title': 'Basel-Stadt health insurance premiums: premium reduction',
+    'blog.article.lamal-franchigie-sussidio-basel.excerpt': 'A Practical Guide to LAMal Premiums in Basel-Stadt: Adult Deductibles, Premiums by Canton and Region, and Premium Reductions as Cantonal Subsidies.',
+    'blog.article.lamal-franchigie-sussidio-basel.imageAlt': 'LAMal documents beside an urban view of Basel City',
+    'blog.article.tassa-prodotti-zuccherati-svizzera.title': 'Fighting Obesity: The Swiss Don\'t Want a Tax',
+    'blog.article.tassa-prodotti-zuccherati-svizzera.excerpt': '68% of respondents in Zurich and Switzerland reject a tax on sugar, salt or fat. The data from Gfs.Bern’s monitoring and preferences regarding prevention.',
+    'blog.article.tassa-prodotti-zuccherati-svizzera.imageAlt': 'Zurich monitor on sugary products and food taxes in Switzerland',
+    'blog.article.franchigie-lamal-basilea-citta.title': 'Health Insurance Premiums in the Canton of Basel-Stadt: Premium Reduction',
+    'blog.article.franchigie-lamal-basilea-citta.excerpt': 'In the canton of Basel-Stadt, KVG premiums vary by canton and region: adult deductibles, alternative plans, and premium reductions as a cantonal subsidy.',
+    'blog.article.franchigie-lamal-basilea-citta.imageAlt': 'Comparing Swiss health insurance premiums and premium reduction',
 };
 
 export default blogMetaChEn;

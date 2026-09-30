@@ -2416,6 +2416,11 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'consiglio-nazionale-terremoti-immobili': { it: 'consiglio-nazionale-terremoti-immobili', en: 'swiss-parliament-rejects-earthquake-property-fund', de: 'nationalrat-ablehnung-erdbebenversicherung-gebaeude', fr: 'conseil-national-rejet-fonds-seisme-biens' },
  'kof-stime-crescita-svizzera': { it: 'kof-stime-crescita-svizzera', en: 'kof-swiss-growth-estimates', de: 'kof-schweizer-wachstumsschaetzungen', fr: 'kof-estimations-croissance-suisse' },
  'analisti-economia-svizzera-settembre': { it: 'analisti-economia-svizzera-settembre', en: 'swiss-economy-analysts-september', de: 'schweizer-wirtschaft-analysten-september', fr: 'economie-suisse-analystes-septembre' },
+ 'bns-acquisti-divise-trimestre': { it: 'bns-acquisti-divise-trimestre', en: 'snb-foreign-currency-purchases-quarter', de: 'snb-devisenkaeufe-quartal', fr: 'bns-achats-devises-trimestre' },
+ 'zugo-de-escalation-cyberspazio': { it: 'zugo-de-escalation-cyberspazio', en: 'zug-cyber-de-escalation', de: 'zug-cyber-deeskalation', fr: 'zoug-cyber-deescalade' },
+ 'lamal-franchigie-sussidio-basel': { it: 'lamal-franchigie-sussidio-basel', en: 'basel-city-health-premium-reduction', de: 'krankenkassenpraemien-basel-stadt', fr: 'primes-assurance-maladie-bale-ville' },
+ 'tassa-prodotti-zuccherati-svizzera': { it: 'tassa-prodotti-zuccherati-svizzera', en: 'sugary-products-tax-switzerland', de: 'steuer-zuckerhaltige-produkte-schweiz', fr: 'taxe-produits-sucres-suisse' },
+ 'franchigie-lamal-basilea-citta': { it: 'franchigie-lamal-basilea-citta', en: 'basel-city-lamal-premium-reduction', de: 'basel-stadt-krankenkassenpraemien', fr: 'primes-lamal-bale-ville' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

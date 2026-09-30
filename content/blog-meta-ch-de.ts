@@ -7181,6 +7181,21 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.analisti-economia-svizzera-settembre.title': 'Analysten treten bei der Schweizer Konjunktur auf die Bremse.',
     'blog.article.analisti-economia-svizzera-settembre.excerpt': 'In Zürich liegt der Index zu den wirtschaftlichen Aussichten der Schweiz im September bei plus 2,6 Punkten und verzeichnet damit einen Rückgang gegenüber August.',
     'blog.article.analisti-economia-svizzera-settembre.imageAlt': 'Finanzpanorama in Zürich zur Wirtschaftsaussicht in der Schweiz',
+    'blog.article.bns-acquisti-divise-trimestre.title': 'SNB: Devisenkäufe im zweiten Quartal zurückgegangen',
+    'blog.article.bns-acquisti-divise-trimestre.excerpt': 'Im zweiten Quartal hat die Schweizerische Nationalbank Fremdwährungen im Wert von 1,4 Milliarden Franken gekauft, was einem Rückgang gegenüber den 3,9 Milliarden Franken der ersten drei Monate entspricht.',
+    'blog.article.bns-acquisti-divise-trimestre.imageAlt': 'Gebäude der Schweizerischen Nationalbank in Bern',
+    'blog.article.zugo-de-escalation-cyberspazio.title': 'Der Bund fördert die Deeskalation im Cyberspace',
+    'blog.article.zugo-de-escalation-cyberspazio.excerpt': 'In Zug findet eine internationale Konferenz der Eidgenossenschaft zum Thema Deeskalation im Cyberspace statt, bei der es um präventive Diplomatie, die OSZE und künstliche Intelligenz geht.',
+    'blog.article.zugo-de-escalation-cyberspazio.imageAlt': 'Internationale Cybersicherheitskonferenz in Zug',
+    'blog.article.lamal-franchigie-sussidio-basel.title': 'Krankenkassenprämien Basel-Stadt: Prämien senken',
+    'blog.article.lamal-franchigie-sussidio-basel.excerpt': 'Praktischer Leitfaden zu den KVG-Prämien in Basel-Stadt: Selbstbehalte für Erwachsene, Prämien nach Kanton und Region sowie Prämienverbilligungen als kantonale Beihilfe.',
+    'blog.article.lamal-franchigie-sussidio-basel.imageAlt': 'LAMal-Unterlagen vor einer Stadtansicht von Basel-Stadt',
+    'blog.article.tassa-prodotti-zuccherati-svizzera.title': 'Kampf gegen Fettleibigkeit: Die Schweizer wollen keine Steuer',
+    'blog.article.tassa-prodotti-zuccherati-svizzera.excerpt': '68 % der Befragten in Zürich und in der Schweiz lehnen eine Steuer auf Zucker, Salz oder Fette ab. Die Daten der Gfs.Bern-Umfrage und die Präferenzen in Bezug auf Prävention.',
+    'blog.article.tassa-prodotti-zuccherati-svizzera.imageAlt': 'Monitoring in Zürich zu zuckerhaltigen Produkten und Lebensmittelsteuern in der Schweiz',
+    'blog.article.franchigie-lamal-basilea-citta.title': 'Krankenkassenprämien im Kanton Basel-Stadt: Prämienverbilligung',
+    'blog.article.franchigie-lamal-basilea-citta.excerpt': 'Im Kanton Basel-Stadt richten sich die LAMal-Prämien nach Kanton und Region: Erwachsenenfranchisen, alternative Modelle und Prämienverbilligung als kantonale Subvention.',
+    'blog.article.franchigie-lamal-basilea-citta.imageAlt': 'Vergleich der Schweizer Krankenkassenprämien und Prämienverbilligung',
 };
 
 export default blogMetaChDe;
