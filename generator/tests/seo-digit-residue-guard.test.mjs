@@ -57,7 +57,7 @@ describe('corpus pubblicato — nessun residuo cifra-lettera nei campi SEO', () 
       [],
       'un file SEO porta un byte C0 o un residuo cifra-lettera: e\' la forma del difetto sar0 (#222). ' +
         'Riparalo a mano (il canale automatico non ricostruisce punteggiatura/lettere accentate senza prova) ' +
-        'e verifica con: npx -y tsx@4 scripts/find-dirty-content-ids.mjs --out /tmp/r.json --skip-live',
+        'e verifica con: npx -y tsx@4.23.15 scripts/find-dirty-content-ids.mjs --out /tmp/r.json --skip-live',
     );
   });
 

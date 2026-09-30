@@ -73,7 +73,7 @@ set troncato è il caso peggiore proprio perché non fallisce.
 ## Build e test
 
 ```bash
-npx -y tsx@4 scripts/build-api.mjs   # genera dist/api/
+npx -y tsx@4.23.15 scripts/build-api.mjs   # genera dist/api/
 node --test 'generator/tests/*.test.mjs'
 ```
 
@@ -86,7 +86,7 @@ Due cose che sembrano dettagli e non lo sono:
   glob la suite "fallisce" senza aver eseguito nulla.
 
 Questo repo **non ha vitest**, non ha `node_modules` per default e builda con
-`npx -y tsx@4`. Gli script del ciclo agentico (`scripts/ci/**`) usano solo
+`npx -y tsx@4.23.15`. Gli script del ciclo agentico (`scripts/ci/**`) usano solo
 builtin Node, per scelta: è ciò che permette di eseguirli senza `npm ci`.
 
 ## Credenziali

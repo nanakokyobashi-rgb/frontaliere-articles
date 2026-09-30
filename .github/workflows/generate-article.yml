@@ -598,7 +598,7 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
           # persist-credentials: false is load-bearing, not hygiene.
@@ -686,7 +686,7 @@ jobs:
           echo "event=$EV chain=$CHAIN chain_link=$CHAIN_LINK → section=$SEC dry_run=$DRY"
 
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v7
         with:
           node-version: '22'
           cache: 'npm'
@@ -752,7 +752,7 @@ jobs:
 
       - name: Upload provider preflight report
         if: always() && steps.mode.outputs.dry != 'true'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: provider-preflight-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/provider-preflight.json
@@ -1564,7 +1564,7 @@ jobs:
       # per togliere.
       - name: Upload wedge diagnostics (stack, report, log del tentativo)
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: generate-article-diagnostics-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/generate-diagnostics

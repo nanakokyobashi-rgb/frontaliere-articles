@@ -176,7 +176,7 @@ jobs:
           done
           printf 'path=%s\n' "$gh_bin" >> "$GITHUB_OUTPUT"
 
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           # I gate dei body usano il high-water della revisione precedente per
           # rifiutare un registro troncato; il checkout deve quindi esporre la
@@ -192,7 +192,7 @@ jobs:
           # configurate. Ogni consumer distingue il path ASSENTE (dal tree, che
           # il partial clone ha sempre) dal blob ILLEGGIBILE (fetch fallito):
           # il secondo e' un errore o una storia non verificabile, mai
-          # un'assenza. Step `Run actions/checkout@v5`: 63-64 s col clone
+          # un'assenza. Step `Run actions/checkout@v7`: 63-64 s col clone
           # pieno, 52 s cosi' (run 35460972059 e 35460929675 contro 35461528619,
           # 2026-09-19).
           # Niente sparse: i gate della PR leggono `content/`, `public/` e
@@ -200,7 +200,7 @@ jobs:
           # solo `data/`).
           filter: blob:none
 
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v7
         with:
           node-version: '22'
 

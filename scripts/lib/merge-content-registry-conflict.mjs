@@ -72,7 +72,7 @@
  *   · lo strato PORTANTE e' offline e sempre attivo — l'analizzatore qui sotto,
  *     che e' quello che decide;
  *   · sopra ci va, quando si riesce a ottenerlo, il parere del compilatore vero
- *     (`npx -y tsx@4`, non `node`: questi sorgenti usano specificatori relativi
+ *     (`npx -y tsx@4.23.15`, non `node`: questi sorgenti usano specificatori relativi
  *     senza estensione, che Node ESM puro non risolve). E' deliberatamente NON
  *     fatale quando lo strumento non e' disponibile: metterlo sul percorso
  *     critico di un push renderebbe un intoppo di rete indistinguibile da una
@@ -782,7 +782,7 @@ export function backstop(merged, ours, theirs) {
 }
 
 /**
- * Strato 2 di (a): il parere del compilatore vero, via `npx -y tsx@4`.
+ * Strato 2 di (a): il parere del compilatore vero, via `npx -y tsx@4.23.15`.
  *
  * Gira su una COPIA accanto all'originale — stessa cartella, cosi' gli import
  * relativi senza estensione risolvono — e l'originale non viene toccato finche'
@@ -807,7 +807,7 @@ export function tsxParseProbe(file, contents) {
       "  .catch((e) => console.log('__MERGE_PROBE_FAIL__ ' + String(e && e.message).replace(/\\s*\\n\\s*/g, ' | ').slice(0, 300)));",
     ].join('\n'));
 
-    const res = spawnSync('npx', ['-y', 'tsx@4', runner], {
+    const res = spawnSync('npx', ['-y', 'tsx@4.23.15', runner], {
       encoding: 'utf8',
       timeout: 240_000,
       env: { ...process.env, NODE_TEST_CONTEXT: '' },

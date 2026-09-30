@@ -9,7 +9,7 @@
  * nel corpus reale, quale sarebbe il costo di un ciclo `while` a convergenza
  * reale»*. Quella misura ora esiste, presa il 2026-08-25 su `origin/main`:
  *
- *     npx -y tsx@4 generator/scripts/repair-mangled-chars.mjs --json
+ *     npx -y tsx@4.23.15 generator/scripts/repair-mangled-chars.mjs --json
  *
  *     19.588 file esaminati · 26 con marker · 223 occorrenze · 0 riparate
  *     escapate: 45 occorrenze, 0 riparate, 45 lasciate

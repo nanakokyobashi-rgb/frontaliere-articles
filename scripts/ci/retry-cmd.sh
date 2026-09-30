@@ -2,15 +2,15 @@
 # retry-cmd.sh — ritenta un comando QUALUNQUE. Fratello generico di
 # `scripts/lib/npm-ci-retry.sh`, che copre solo `npm ci`.
 #
-#   run: bash scripts/ci/retry-cmd.sh npx -y tsx@4 scripts/build-api.mjs
-#   run: bash scripts/ci/retry-cmd.sh npm install --no-save esbuild@0.25.12
+#   run: bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/build-api.mjs
+#   run: bash scripts/ci/retry-cmd.sh npm install --no-save esbuild@0.28.2
 #
 # ── Perche' esiste, dato che npm-ci-retry.sh esiste gia' (issue #98) ─────────
 #
 # La PR #91 ha messo il retry sui 9 punti con `npm ci` letterale. Restano
 # scoperti i punti che `npm ci` non sono, e il piu' caro e' in questo file:
 #
-#   .github/workflows/publish-api.yml → npx -y tsx@4 scripts/build-api.mjs
+#   .github/workflows/publish-api.yml → npx -y tsx@4.23.15 scripts/build-api.mjs
 #
 # `npx -y` scarica tsx dal registro a ogni run. Li' un ETIMEDOUT non costa un
 # articolo: costa la pubblicazione dell'INTERA superficie dati — manifest,
@@ -31,7 +31,7 @@
 # Questo wrapper e' generico e quella garanzia NON puo' darla. Ogni call-site
 # deve giustificare la propria idempotenza, e le due di oggi lo fanno:
 #
-#   - `npx -y tsx@4 scripts/build-api.mjs` — build-api.mjs fa
+#   - `npx -y tsx@4.23.15 scripts/build-api.mjs` — build-api.mjs fa
 #     `fs.rmSync(OUT, { recursive: true, force: true })` sulla propria cartella
 #     di output alla riga 71, prima di scrivere qualunque cosa. E' esattamente
 #     la proprieta' che rende sicuro ritentare `npm ci`: un tentativo a meta'
@@ -39,7 +39,7 @@
 #     non dedotto.
 #   - `npm install ... esbuild@<pin>` in una directory usa-e-getta sotto
 #     RUNNER_TEMP, che nessun altro step legge o scrive.
-#   - `npx -y tsx@4 --test 'host/tests/*.test.mjs'` in generator-ci.yml — i due
+#   - `npx -y tsx@4.23.15 --test 'host/tests/*.test.mjs'` in generator-ci.yml — i due
 #     test del SiteShellContract sono di sola lettura: leggono
 #     `host/shell-contract-fingerprint.json` e
 #     `host/tests/shell-contract-functions.golden.json`, importano

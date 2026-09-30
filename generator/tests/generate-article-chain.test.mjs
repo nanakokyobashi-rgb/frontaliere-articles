@@ -759,7 +759,7 @@ test('le diagnostiche del wedge si caricano sempre, e da fuori il workspace', ()
   const step = sliceBetween(WF, '      - name: Upload wedge diagnostics', '      - name: Guard');
   assert.ok(step, 'lo step che carica le diagnostiche e\' sparito');
   assert.match(step, /if: always\(\)/, 'lo step sopra e\' ROSSO proprio quando l\'artifact serve');
-  assert.match(step, /uses: actions\/upload-artifact@v4/);
+  assert.match(step, /uses: actions\/upload-artifact@v7/);
   assert.match(
     step,
     /path: \$\{\{ runner\.temp \}\}\/generate-diagnostics/,

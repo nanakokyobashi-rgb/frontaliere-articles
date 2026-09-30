@@ -8,16 +8,16 @@
   "types": "index.ts",
   "sideEffects": false,
   "peerDependencies": {
-    "vite": "^6.2.0"
+    "vite": "^8.3.1"
   },
   "dependencies": {
-    "@huggingface/transformers": "^4.2.0",
-    "firebase-admin": "^13.6.1",
+    "@huggingface/transformers": "^4.3.0",
+    "firebase-admin": "^14.5.0",
     "google-trends-api": "^4.9.2",
-    "jsdom": "^28.0.0",
-    "playwright": "^1.58.2",
-    "sharp": "^0.34.5",
-    "undici": "^7.24.5"
+    "jsdom": "^30.1.1",
+    "playwright": "^1.63.0",
+    "sharp": "^0.35.5",
+    "undici": "^8.11.2"
   },
   "scripts": {
     "test": "node --test 'generator/tests/*.test.mjs'",
@@ -26,6 +26,6 @@
     "refresh:border-wait": "node generator/scripts/refresh-border-wait-averages.mjs",
     "refresh:border-wait-window": "node generator/scripts/refresh-border-wait-window.mjs",
     "refresh:events": "node generator/scripts/refresh-events-dataset.mjs",
-    "test:shell-contract": "npx -y tsx@4 generator/tests/shell-contract-coverage.mjs"
+    "test:shell-contract": "npx -y tsx@4.23.15 generator/tests/shell-contract-coverage.mjs"
   }
 }

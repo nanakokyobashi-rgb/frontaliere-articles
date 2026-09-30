@@ -702,7 +702,7 @@ test('lo step che porta fuori la card ha if: always()', () => {
   assert.ok(stepIdx > 0, 'lo step di upload deve esistere con questo nome');
   const block = GA_RAW.slice(stepIdx, stepIdx + 400);
   assert.match(block, /\n\s+if:\s*always\(\)\s*\n/, 'Upload wedge diagnostics deve avere if: always()');
-  assert.match(block, /uses:\s*actions\/upload-artifact@v4/);
+  assert.match(block, /uses:\s*actions\/upload-artifact@v7/);
 });
 
 // ── 4. #625: la catena di push si misura da sola ────────────────────────────

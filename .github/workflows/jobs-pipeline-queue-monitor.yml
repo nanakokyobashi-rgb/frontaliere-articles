@@ -24,12 +24,12 @@ jobs:
     timeout-minutes: 15
     steps:
       - name: Checkout publisher workflows
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           fetch-depth: 1
 
       - name: Checkout observer source
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           repository: valerielinc-ops/frontaliere-si-o-no
           ref: main

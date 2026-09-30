@@ -62,11 +62,11 @@ test('il preflight ha sul disco l helper che decide il prefilter', () => {
 
   assert.match(
     job,
-    /uses: actions\/checkout@v5[\s\S]*sparse-checkout: scripts\/ci/,
+    /uses: actions\/checkout@v7[\s\S]*sparse-checkout: scripts\/ci/,
     'senza checkout di scripts/ci l helper esce con ERR_MODULE_NOT_FOUND e il prefilter e\' un ramo morto',
   );
   assert.ok(
-    job.indexOf('uses: actions/checkout@v5') < job.indexOf('redcheck-review-prefilter.mjs'),
+    job.indexOf('uses: actions/checkout@v7') < job.indexOf('redcheck-review-prefilter.mjs'),
     'il checkout deve precedere lo step che invoca l helper',
   );
   assert.doesNotMatch(

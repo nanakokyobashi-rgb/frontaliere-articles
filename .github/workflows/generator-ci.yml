@@ -70,13 +70,13 @@ jobs:
       PREFLIGHT_PUSH_BASE_REVISION: ${{ github.ref_name == 'engine-lockstep-auto' && github.sha || github.event.before }}
       PREFLIGHT_PR_BASE_REVISION: ${{ github.event.pull_request.base.sha }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           # The body floor rejects a registry truncation only when the previous
           # corpus revision is locally verifiable.
           fetch-depth: 0
 
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v7
         with:
           node-version: '22'
 
@@ -99,7 +99,7 @@ jobs:
       # tsx via npx, not a dependency: this job deliberately has no `npm ci`
       # (see the note above), and the repo's own scripts already run this way.
       - name: Shell contract - host/ satisfies the mirrored engine
-        run: npx -y tsx@4 generator/tests/shell-contract-coverage.mjs
+        run: npx -y tsx@4.23.15 generator/tests/shell-contract-coverage.mjs
 
       # The other two thirds of the same contract, and until now NOTHING ran
       # them. The coverage gate above checks only PRESENCE (`k in shell &&
@@ -138,7 +138,7 @@ jobs:
             echo "::error::found $n test file(s) under host/tests/, expected at least 2 — the glob stopped matching and this gate would have passed for free."
             exit 1
           fi
-          bash scripts/ci/retry-cmd.sh npx -y tsx@4 --test 'host/tests/*.test.mjs'
+          bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 --test 'host/tests/*.test.mjs'
 
       # The parity gate: the transported modules must still behave exactly as
       # main's did at transport time. The golden was recorded by running the
@@ -191,9 +191,9 @@ jobs:
     # perfectly correct and still be dead on arrival.
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v7
         with:
           node-version: '22'
 

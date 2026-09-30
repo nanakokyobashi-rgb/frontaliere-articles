@@ -7,7 +7,7 @@
  * (.github/workflows/tests.yml) is deliberately dependency-free — no `npm ci`,
  * no network, no browser — because it is the check-run every PR's auto-merge
  * waits on regardless of which path it touches; shelling out to
- * `npx -y tsx@4` from inside it would trade that guarantee for exactly the
+ * `npx -y tsx@4.23.15` from inside it would trade that guarantee for exactly the
  * registry-fetch flakiness `scripts/ci/retry-cmd.sh` exists to paper over
  * elsewhere (publish-api.yml). Keeping this module free of `.ts` imports is
  * what lets a real behavioural test of the sitemap output run in that gate.
