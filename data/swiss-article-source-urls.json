@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4034059": {
-    "articleId": "capo-esercito-lugano-minacce-2025",
-    "ts": "2026-08-30T05:10:30.805Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/3995199": {
     "articleId": "neutralita-svizzera-voto-settembre",
     "ts": "2026-08-30T08:52:23.135Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/attualita/1953794/organizzazione-infermieri-fallimento-mantello-svizzera": {
     "articleId": "alliance-care-crisi-sanita",
     "ts": "2026-09-30T14:27:58.557Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4124239": {
+    "articleId": "intelligenza-artificiale-lavoro-svizzera",
+    "ts": "2026-09-30T14:49:37.844Z",
     "keyForm": 2
   }
 }

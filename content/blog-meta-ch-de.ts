@@ -7202,6 +7202,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.alliance-care-crisi-sanita.title': 'Alliance Care vor dem Konkurs: Entscheidung am 14. Oktober',
     'blog.article.alliance-care-crisi-sanita.excerpt': 'Die Organisation mantello der Pflegekräfte droht aufgelöst zu werden. Im Juni 17 Entlassungen von 91 Beschäftigten wegen des starken finanziellen Ungleichgewichts.',
     'blog.article.alliance-care-crisi-sanita.imageAlt': 'Hauptsitz einer Gesundheitsorganisation in der Schweiz',
+    'blog.article.intelligenza-artificiale-lavoro-svizzera.title': 'Künstliche Intelligenz: Zwei von drei Schweizer Unternehmen setzen sie ein',
+    'blog.article.intelligenza-artificiale-lavoro-svizzera.excerpt': 'Im ersten Quartal 2026 wird KI bei der Personalauswahl eingesetzt. 72 % der Schweizer Unternehmen berichten von einer positiven Kapitalrendite.',
+    'blog.article.intelligenza-artificiale-lavoro-svizzera.imageAlt': 'Modernes Büro in der Schweiz mit digitaler Technologie zur Personalauswahl.',
 };
 
 export default blogMetaChDe;

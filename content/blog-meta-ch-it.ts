@@ -7202,6 +7202,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.alliance-care-crisi-sanita.title': 'Alliance Care verso il fallimento: la decisione il 14 ottobre',
     'blog.article.alliance-care-crisi-sanita.excerpt': 'L\'organizzazione mantello degli infermieri rischia lo scioglimento. A giugno 17 licenziamenti su 91 dipendenti per il forte squilibrio finanziario.',
     'blog.article.alliance-care-crisi-sanita.imageAlt': 'Sede di un ente sanitario in Svizzera',
+    'blog.article.intelligenza-artificiale-lavoro-svizzera.title': 'Intelligenza artificiale: due aziende svizzere su tre la usa',
+    'blog.article.intelligenza-artificiale-lavoro-svizzera.excerpt': 'Nel primo trimestre 2026, l\'IA è impiegata per la selezione del personale. Il 72% delle imprese svizzere segnala un ritorno positivo sull\'investimento.',
+    'blog.article.intelligenza-artificiale-lavoro-svizzera.imageAlt': 'Ufficio moderno in Svizzera con tecnologia digitale per la selezione del personale.',
 };
 
 export default blogMetaChIt;

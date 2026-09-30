@@ -21634,6 +21634,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'intelligenza-artificiale-lavoro-svizzera',
+    category: 'novita',
+    date: '2026-09-30T14:49:37.519Z',
+    image: '/images/blog/intelligenza-artificiale-lavoro-svizzera.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

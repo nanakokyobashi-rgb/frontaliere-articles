@@ -93386,6 +93386,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-intelligenza-artificiale-lavoro-svizzera': {
+    title: 'Intelligenza artificiale: due aziende svizzere su tre la usa',
+    description: 'L\'IA è usata da due aziende svizzere su tre. Analisi dell\'impatto sulla selezione, benefici per le imprese e rischi di trasparenza nel primo trimestre 2026.',
+    keywords: 'frontalieri, ticino, svizzera, italia, intelligenza, artificiale, aziende, svizzere',
+    ogTitle: 'Intelligenza artificiale: due aziende svizzere su tre la usa',
+    ogDescription: 'Nel primo trimestre 2026, l\'IA è impiegata per la selezione del personale. Il 72% delle imprese svizzere segnala un ritorno positivo sull\'investimento. Scopri come cambia il reclutamento.',
+    canonicalPath: '/articoli-svizzera/intelligenza-artificiale-lavoro-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Intelligenza artificiale: due aziende svizzere su tre la usa",
+      "description": "L'IA è usata da due aziende svizzere su tre. Analisi dell'impatto sulla selezione, benefici per le imprese e rischi di trasparenza nel primo trimestre 2026.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/intelligenza-artificiale-lavoro-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio moderno in Svizzera con tecnologia digitale per la selezione del personale."
+      },
+      "datePublished": "2026-09-30T14:49:37+00:00",
+      "dateModified": "2026-09-30T14:49:37+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/intelligenza-artificiale-lavoro-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
