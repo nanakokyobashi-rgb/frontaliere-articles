@@ -198,11 +198,19 @@ function fakeGithub({
         const active = snapshot.find((row) => (
           String(row?.id) === jobsMatch[1] && row?.status === 'in_progress'
         ));
-        return response(200, activeJobsByRun[jobsMatch[1]] ?? (
+        const configured = activeJobsByRun[jobsMatch[1]];
+        if (configured) {
+          return response(200, {
+            ...configured,
+            jobs: configured.jobs.map((job) => ({ name: 'translate', ...job })),
+          });
+        }
+        return response(200, (
           active
             ? {
               jobs: [{
                 id: 1,
+                name: 'translate',
                 started_at: active.run_started_at ?? active.created_at,
                 status: 'in_progress',
               }],
