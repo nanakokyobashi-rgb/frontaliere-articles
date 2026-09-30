@@ -3482,8 +3482,8 @@
         "alignedAt": "2026-09-30"
       }
     },
-      {
-        "path": ".github/workflows/crawler-group-04.yml",
+    {
+      "path": ".github/workflows/crawler-group-04.yml",
       "sitePath": ".github/corpus-workflows/crawler-group-04.yml",
       "mode": "identical",
       "baseline": {
