@@ -7142,6 +7142,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.assegni-vallese-cassa-domanda.title': 'Allocations familiales dans le canton du Valais : montants et demande',
     'blog.article.assegni-vallese-cassa-domanda.excerpt': 'Montants mensuels par enfant, conditions d’octroi, caisse de compensation compétente et procédure : le guide du canton du Valais.',
     'blog.article.assegni-vallese-cassa-domanda.imageAlt': 'Famille devant un paysage alpin du Valais',
+    'blog.article.bilaterali-iii-referendum-immobili.title': 'Bilatérales III : référendum, dépenses immobilières 2026 et séismes',
+    'blog.article.bilaterali-iii-referendum-immobili.excerpt': 'Au troisième jour des Bilatérales III, le Conseil des États décide du type de référendum et débat de 773,8 millions pour les immeubles civils en 2026, dont 211,7 millions pour la Bibliothèque nationale et 96 millions pour l’ambassade à Londres.',
+    'blog.article.bilaterali-iii-referendum-immobili.imageAlt': 'Parlement fédéral suisse à Berne lors du débat sur les Bilaterali III',
 };
 
 export default blogMetaChFr;

@@ -2403,6 +2403,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'lavoro-vaud-regole-salariali': { it: 'lavoro-vaud-regole-salariali', en: 'vaud-labour-market-rules', de: 'waadt-arbeitsmarkt-regeln', fr: 'marche-travail-vaud-regles' },
  'lugano-trading-acciaio': { it: 'lugano-trading-acciaio', en: 'lugano-trading-steel-oligarchs', de: 'lugano-trading-stahl-oligarchen', fr: 'lugano-trading-acier-oligarques' },
  'assegni-vallese-cassa-domanda': { it: 'assegni-vallese-cassa-domanda', en: 'valais-family-allowances-claim', de: 'familienzulagen-wallis-antrag', fr: 'allocations-familiales-valais-demande' },
+ 'bilaterali-iii-referendum-immobili': { it: 'bilaterali-iii-referendum-immobili', en: 'bilaterali-iii-referendum-properties', de: 'bilaterale-iii-referendum-immobilien', fr: 'bilateraux-iii-referendum-immobilier' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

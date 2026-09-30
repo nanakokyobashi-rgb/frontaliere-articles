@@ -7142,6 +7142,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.assegni-vallese-cassa-domanda.title': 'Family allowances in the Canton of Valais: amounts and application',
     'blog.article.assegni-vallese-cassa-domanda.excerpt': 'Monthly amounts per child, entitlement conditions, competent compensation fund and procedure: the guide to the Canton of Valais.',
     'blog.article.assegni-vallese-cassa-domanda.imageAlt': 'Family in front of an Alpine Valais landscape',
+    'blog.article.bilaterali-iii-referendum-immobili.title': 'Bilateral III: referendum, 2026 property costs & quakes',
+    'blog.article.bilaterali-iii-referendum-immobili.excerpt': 'On the third day of discussions on Bilaterals III, the Council of States decides on the type of referendum and discusses 773,8 million for 2026 civilian properties, including 211,7 million for the National Library and 96 million for the embassy in London.',
+    'blog.article.bilaterali-iii-referendum-immobili.imageAlt': 'Swiss Federal Parliament in Bern during the Bilaterali III debate',
 };
 
 export default blogMetaChEn;

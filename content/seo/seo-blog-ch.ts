@@ -92606,6 +92606,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-bilaterali-iii-referendum-immobili': {
+    title: 'Bilaterali III: referendum, spesa immobili 2026 e terremoti',
+    description: 'Il Consiglio degli Stati discute i Bilaterali III: scelta del tipo di referendum, 773,8 milioni per gli immobili civili 2026, e un nuovo fondo terremoti fino',
+    keywords: 'frontalieri, ticino, svizzera, italia, bilaterali, referendum, spesa, immobili',
+    ogTitle: 'Bilaterali III: referendum, spesa immobili 2026 e terremoti',
+    ogDescription: 'Durante il terzo giorno di dibattiti sui Bilaterali III, il Consiglio degli Stati decide se adottare un referendum facoltativo o obbligatorio, esamina una spesa di 773,8 milioni per gli immobili civili 2026, inclusi 211,7 milioni per la Biblioteca',
+    canonicalPath: '/articoli-svizzera/bilaterali-iii-referendum-immobili/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bilaterali III: referendum, spesa immobili 2026 e terremoti",
+      "description": "Il Consiglio degli Stati discute i Bilaterali III: scelta del tipo di referendum, 773,8 milioni per gli immobili civili 2026, e un nuovo fondo terremoti fino",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bilaterali-iii-referendum-immobili.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Parlamento federale svizzero a Berna durante la discussione sui Bilaterali III"
+      },
+      "datePublished": "2026-09-30T06:25:07+00:00",
+      "dateModified": "2026-09-30T06:25:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/bilaterali-iii-referendum-immobili/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

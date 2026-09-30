@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/ex-presidente-banchieri-svizzeri-a-processo-per-corruzione/91965610": {
-    "articleId": "mirabaud-processo-corruzione-tpf",
-    "ts": "2026-08-28T06:16:41.007Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/cdf%3a-quasi-otto-milioni-per-campagne-votazioni-del-27-settembre/91968146": {
     "articleId": "cdf-budget-campagne-voto-settembre",
     "ts": "2026-08-28T12:14:59.737Z",
@@ -2497,6 +2492,11 @@
   "https://www.laregione.ch/economia/economia/1953489/lugano-e-il-selvaggio-est-tra-acciaierie-guerre-e-oligarchi": {
     "articleId": "lugano-trading-acciaio",
     "ts": "2026-09-30T05:02:49.086Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/camere%3a-bilaterali-iii%2c-esercito-e-canicola/92141758": {
+    "articleId": "bilaterali-iii-referendum-immobili",
+    "ts": "2026-09-30T06:25:07.651Z",
     "keyForm": 2
   }
 }

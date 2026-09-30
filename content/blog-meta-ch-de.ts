@@ -7142,6 +7142,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.assegni-vallese-cassa-domanda.title': 'Familienzulagen im Kanton Wallis: Beträge und Antrag',
     'blog.article.assegni-vallese-cassa-domanda.excerpt': 'Monatliche Beträge pro Kind, Anspruchsvoraussetzungen, zuständige Ausgleichskasse und Verfahren: der Leitfaden zum Kanton Wallis.',
     'blog.article.assegni-vallese-cassa-domanda.imageAlt': 'Familie vor einer alpinen Landschaft im Wallis',
+    'blog.article.bilaterali-iii-referendum-immobili.title': 'Bilaterale III: Referendum, Immobilienausgaben 2026 und Erdbeben',
+    'blog.article.bilaterali-iii-referendum-immobili.excerpt': 'Am dritten Tag der Bilateralen III entscheidet der Ständerat über die Art des Referendums und diskutiert 773,8 Millionen für zivile Immobilien 2026, darunter 211,7 Millionen für die Nationalbibliothek und 96 Millionen für die Botschaft in London.',
+    'blog.article.bilaterali-iii-referendum-immobili.imageAlt': 'Schweizerisches Bundesparlament in Bern während der Bilaterali‑III‑Debatte',
 };
 
 export default blogMetaChDe;

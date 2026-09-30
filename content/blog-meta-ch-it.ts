@@ -7142,6 +7142,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.assegni-vallese-cassa-domanda.title': 'Assegni familiari Canton Vallese: importi e domanda',
     'blog.article.assegni-vallese-cassa-domanda.excerpt': 'Importi mensili per figlio, condizioni di diritto, cassa di compensazione competente e procedura: la guida al Cantone di Vallese.',
     'blog.article.assegni-vallese-cassa-domanda.imageAlt': 'Famiglia davanti a un paesaggio alpino del Vallese',
+    'blog.article.bilaterali-iii-referendum-immobili.title': 'Bilaterali III: referendum, spesa immobili 2026 e terremoti',
+    'blog.article.bilaterali-iii-referendum-immobili.excerpt': 'Al terzo giorno sui Bilaterali III, il Consiglio degli Stati decide il tipo di referendum e discute 773,8 milioni per gli immobili civili 2026, tra cui 211,7 milioni per la Biblioteca nazionale e 96 milioni per l’ambasciata a Londra.',
+    'blog.article.bilaterali-iii-referendum-immobili.imageAlt': 'Parlamento federale svizzero a Berna durante la discussione sui Bilaterali III',
 };
 
 export default blogMetaChIt;
