@@ -7139,6 +7139,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.lugano-trading-acciaio.title': 'Lugano e il trading: oligarchi dell\'acciaio sul Ceresio',
     'blog.article.lugano-trading-acciaio.excerpt': 'La terza puntata sul trading ricostruisce il percorso dalle società luganesi nel caos post-Urss ai padroni dell\'acciaio russi e ucraini insediati sul Ceresio.',
     'blog.article.lugano-trading-acciaio.imageAlt': 'Lungolago di Lugano sul Ceresio in un\'atmosfera finanziaria e industriale',
+    'blog.article.assegni-vallese-cassa-domanda.title': 'Assegni familiari Canton Vallese: importi e domanda',
+    'blog.article.assegni-vallese-cassa-domanda.excerpt': 'Importi mensili per figlio, condizioni di diritto, cassa di compensazione competente e procedura: la guida al Cantone di Vallese.',
+    'blog.article.assegni-vallese-cassa-domanda.imageAlt': 'Famiglia davanti a un paesaggio alpino del Vallese',
 };
 
 export default blogMetaChIt;

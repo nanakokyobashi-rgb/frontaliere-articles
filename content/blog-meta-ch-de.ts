@@ -7139,6 +7139,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.lugano-trading-acciaio.title': 'Lugano und das Trading: Stahloligarchen am Ceresio',
     'blog.article.lugano-trading-acciaio.excerpt': 'Die dritte Folge über das Trading zeichnet den Weg von den Luganer Gesellschaften im postsowjetischen Chaos bis zu den russischen und ukrainischen Stahlmagnaten nach, die sich am Ceresio angesiedelt haben.',
     'blog.article.lugano-trading-acciaio.imageAlt': 'Luganer See bei Lugano mit finanziellem und industriellem Ambiente',
+    'blog.article.assegni-vallese-cassa-domanda.title': 'Familienzulagen im Kanton Wallis: Beträge und Antrag',
+    'blog.article.assegni-vallese-cassa-domanda.excerpt': 'Monatliche Beträge pro Kind, Anspruchsvoraussetzungen, zuständige Ausgleichskasse und Verfahren: der Leitfaden zum Kanton Wallis.',
+    'blog.article.assegni-vallese-cassa-domanda.imageAlt': 'Familie vor einer alpinen Landschaft im Wallis',
 };
 
 export default blogMetaChDe;

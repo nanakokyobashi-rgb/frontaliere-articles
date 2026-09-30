@@ -7139,6 +7139,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.lugano-trading-acciaio.title': 'Lugano and trading: steel oligarchs on Lake Ceresio',
     'blog.article.lugano-trading-acciaio.excerpt': 'The third episode on trading reconstructs the journey from Lugano-based companies amid the post-USSR chaos to Russian and Ukrainian steel tycoons settled on Lake Ceresio.',
     'blog.article.lugano-trading-acciaio.imageAlt': 'Lugano waterfront on Lake Ceresio with a financial and industrial atmosphere',
+    'blog.article.assegni-vallese-cassa-domanda.title': 'Family allowances in the Canton of Valais: amounts and application',
+    'blog.article.assegni-vallese-cassa-domanda.excerpt': 'Monthly amounts per child, entitlement conditions, competent compensation fund and procedure: the guide to the Canton of Valais.',
+    'blog.article.assegni-vallese-cassa-domanda.imageAlt': 'Family in front of an Alpine Valais landscape',
 };
 
 export default blogMetaChEn;
