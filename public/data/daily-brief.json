@@ -1,36 +1,29 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-29T11:13:25.749Z",
-  "dateIso": "2026-09-29",
+  "generatedAt": "2026-09-30T11:29:28.309Z",
+  "dateIso": "2026-09-30",
   "counts": {
-    "availableBlocks": 3,
+    "availableBlocks": 4,
     "crossings": 141,
     "fuelMunicipalities": 518,
     "exchangePoints": 32,
-    "jobsActive": 0
+    "jobsActive": 30447
   },
   "blocks": {
     "borderWait": {
       "available": true,
-      "updatedAt": "2026-09-29T07:38:30.215Z",
+      "updatedAt": "2026-09-30T11:09:58.837Z",
       "count": 141,
-      "zeroWaitCount": 139,
+      "zeroWaitCount": 140,
       "worst": {
-        "slug": "gaggiolo",
-        "name": "Gaggiolo (Cantello-Stabio)",
+        "slug": "ferney-voltaire-grand-saconnex",
+        "name": "Ferney-Voltaire / Grand-Saconnex",
         "waitMinutes": 8
       },
       "crossings": [
         {
-          "slug": "gaggiolo",
-          "name": "Gaggiolo (Cantello-Stabio)",
-          "waitMinutes": 8,
-          "status": "yellow",
-          "direction": null
-        },
-        {
-          "slug": "san-pietro",
-          "name": "San Pietro (Clivio-Stabio)",
+          "slug": "ferney-voltaire-grand-saconnex",
+          "name": "Ferney-Voltaire / Grand-Saconnex",
           "waitMinutes": 8,
           "status": "yellow",
           "direction": null
@@ -365,15 +358,15 @@
           "direction": null
         },
         {
-          "slug": "ferney-voltaire-grand-saconnex",
-          "name": "Ferney-Voltaire / Grand-Saconnex",
+          "slug": "forcola-di-livigno",
+          "name": "Forcola di Livigno",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
         },
         {
-          "slug": "forcola-di-livigno",
-          "name": "Forcola di Livigno",
+          "slug": "gaggiolo",
+          "name": "Gaggiolo (Cantello-Stabio)",
           "waitMinutes": 0,
           "status": "green",
           "direction": null
@@ -883,6 +876,13 @@
           "direction": null
         },
         {
+          "slug": "san-pietro",
+          "name": "San Pietro (Clivio-Stabio)",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": null
+        },
+        {
           "slug": "sauverny",
           "name": "Sauverny",
           "waitMinutes": 0,
@@ -1013,23 +1013,17 @@
     },
     "fuel": {
       "available": true,
-      "generatedAt": "2026-09-29T09:02:52.469Z",
+      "generatedAt": "2026-09-30T07:24:48.634Z",
       "municipalityCount": 518,
-      "cheaperItalyCount": 31,
-      "cheaperSwissCount": 110,
-      "tieCount": 4,
+      "cheaperItalyCount": 35,
+      "cheaperSwissCount": 104,
+      "tieCount": 6,
       "cheapestItaly": [
         {
           "municipality": "Livigno",
           "province": "SO",
           "minPriceEur": 1.623,
           "stationName": "Global Srl"
-        },
-        {
-          "municipality": "Veduggio con Colzano",
-          "province": "MB",
-          "minPriceEur": 1.849,
-          "stationName": "105052 VEDUGGIO OVEST"
         },
         {
           "municipality": "Arcisate",
@@ -1044,10 +1038,16 @@
           "stationName": "DISTRIBUTORE ENI APRICA"
         },
         {
-          "municipality": "Cassano Magnago",
-          "province": "VA",
+          "municipality": "Appiano Gentile",
+          "province": "CO",
           "minPriceEur": 1.99,
-          "stationName": "PV 2828"
+          "stationName": "ENI STOP & GO"
+        },
+        {
+          "municipality": "Bregnano",
+          "province": "CO",
+          "minPriceEur": 1.99,
+          "stationName": "1858 BREGNANO"
         }
       ],
       "bestSavings": [
@@ -1056,27 +1056,27 @@
           "province": "SO",
           "cheaperCountry": "IT",
           "italyPriceEur": 1.623,
-          "swissPriceEur": 2.145,
-          "swissPriceChf": 2.03,
-          "saving50LEur": 26.1
+          "swissPriceEur": 2.22,
+          "swissPriceChf": 2.1,
+          "saving50LEur": 29.85
         },
         {
           "municipality": "Castronno",
           "province": "VA",
           "cheaperCountry": "CH",
           "italyPriceEur": 2.239,
-          "swissPriceEur": 1.828,
+          "swissPriceEur": 1.829,
           "swissPriceChf": 1.73,
-          "saving50LEur": 20.55
+          "saving50LEur": 20.5
         },
         {
-          "municipality": "Luisago",
+          "municipality": "Brenna",
           "province": "CO",
           "cheaperCountry": "CH",
-          "italyPriceEur": 2.226,
-          "swissPriceEur": 1.828,
+          "italyPriceEur": 2.229,
+          "swissPriceEur": 1.829,
           "swissPriceChf": 1.73,
-          "saving50LEur": 19.9
+          "saving50LEur": 20
         }
       ],
       "cheapestSwissStation": null,
@@ -1084,21 +1084,26 @@
     },
     "exchange": {
       "available": true,
-      "rate": 1.0582,
-      "lastDate": "2026-09-28",
-      "prevRate": 1.0594,
-      "prevDate": "2026-09-27",
-      "delta1d": -0.0012,
-      "rate7dAgo": 1.0584,
-      "delta7d": -0.0002,
+      "rate": 1.057,
+      "lastDate": "2026-09-30",
+      "prevRate": 1.0573,
+      "prevDate": "2026-09-29",
+      "delta1d": -0.0003,
+      "rate7dAgo": 1.0636,
+      "delta7d": -0.0066,
       "source": "frankfurter",
       "pointCount": 32,
       "degradedEditions": 0
     },
     "jobs": {
-      "available": false,
-      "reason": "jobs history stops at 2026-09-27, 2d before 2026-09-29 (max 1d) — corpus is not advancing",
-      "degradedEditions": 1
+      "available": true,
+      "generatedAt": "2026-09-30T08:10:38.297Z",
+      "activeJobs": 30447,
+      "activeCompanies": 856,
+      "todayAdded": 2162,
+      "yesterdayAdded": 5785,
+      "last7dAdded": 14246,
+      "degradedEditions": 0
     }
   }
 }

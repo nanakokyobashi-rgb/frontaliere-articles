@@ -12309,6 +12309,11 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.preventivo-2027-disavanzo.title': 'Preventivo 2027 Ticino: disavanzo d’esercizio di 98,5 mln',
     'blog.article.preventivo-2027-disavanzo.excerpt': 'Il preventivo 2027 prevede uscite per 4,73 mrd, entrate 4,63 mrd e un disavanzo d’esercizio di 98,5 mln, con un disavanzo totale di 161,4 mln.',
     'blog.article.preventivo-2027-disavanzo.imageAlt': 'Vista panoramica di Lugano al sorgere del sole, con le montagne e il lago riflessi.',
+    'blog.article.bollettino-frontaliere-2026-09-30.title': 'Bollettino del frontaliere – 30 settembre 2026: 5785 nuovi annunci di lavoro ieri',
+    'blog.article.bollettino-frontaliere-2026-09-30.excerpt': 'I numeri di oggi, 30 settembre 2026, per chi attraversa il confine: le attese ai valichi misurate stamattina, i comuni dove la benzina costa meno, il cambio franco-euro aggiornato e i nuovi annunci di lavoro pubblicati in Svizzera. Dati del nostro monitoraggio, rilevati ogni giorno.',
+    'blog.article.bollettino-frontaliere-2026-09-30.imageAlt': 'I numeri del giorno per i frontalieri – 30 settembre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro',
+    'blog.article.bollettino-frontaliere-2026-09-30.seoDescription': 'Bollettino frontalieri del 30 settembre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
+    'blog.article.bollettino-frontaliere-2026-09-30.ogDescription': 'I numeri del 30 settembre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
 };
 
 export default blogMetaIt;

@@ -12307,6 +12307,11 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.preventivo-2027-disavanzo.title': 'Budget 2027 Tessin: Jahresdefizit von 98,5 Mio.',
     'blog.article.preventivo-2027-disavanzo.excerpt': 'Das Budget 2027 sieht Ausgaben in Höhe von 4,73 Mrd. EUR, Einnahmen in Höhe von 4,63 Mrd. EUR und ein Betriebsdefizit von 98,5 Mio. EUR mit einem Gesamtdefizit von 161,4 Mio. EUR vor.',
     'blog.article.preventivo-2027-disavanzo.imageAlt': 'Panoramablick auf Lugano bei Sonnenaufgang, Berge und See spiegeln sich.',
+    'blog.article.bollettino-frontaliere-2026-09-30.title': 'Grenzgänger-Tagesbulletin – 30. September 2026: 5\'785 neue Stellenangebote gestern',
+    'blog.article.bollettino-frontaliere-2026-09-30.excerpt': 'Die Zahlen von heute, 30. September 2026, für Grenzgänger: die heute Morgen gemessenen Wartezeiten an den Übergängen, die Gemeinden mit dem günstigsten Benzin, der Franken-Euro-Kurs vom Schlusskurs und die neu ausgeschriebenen Stellen in der Schweiz. Täglich aus unserem Monitoring.',
+    'blog.article.bollettino-frontaliere-2026-09-30.imageAlt': 'Die Zahlen des Tages für Grenzgänger – 30. September 2026: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote',
+    'blog.article.bollettino-frontaliere-2026-09-30.seoDescription': 'Grenzgänger-Bulletin vom 30. September 2026: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.',
+    'blog.article.bollettino-frontaliere-2026-09-30.ogDescription': 'Die Zahlen vom 30. September 2026 für Grenzgänger: wie lange man heute Morgen an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, was der Franken heute wert ist und wie viele Stellen neu dazugekommen sind.',
 };
 
 export default blogMetaDe;
