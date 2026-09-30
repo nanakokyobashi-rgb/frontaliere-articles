@@ -419,6 +419,16 @@ async function collectActiveJobStart(client, state, currentRuns) {
       throw new ObservationFailure('liveness_census_inconclusive');
     }
     let waitStartedMs = createdMs;
+    if (activeRun.run_attempt > 1) {
+      // Un rerun conserva il `created_at` della prima esecuzione: se il job
+      // pesante non e' ancora partito, la misura deve comunque seguire
+      // l'avvio dell'attempt corrente, come per un pending workflow-level.
+      const runStartedMs = validTimestamp(activeRun.run_started_at);
+      if (runStartedMs === null || runStartedMs < createdMs) {
+        throw new ObservationFailure('invalid_run_started_at');
+      }
+      waitStartedMs = runStartedMs;
+    }
     const pendingJob = pendingJobs[0];
     if (pendingJob?.created_at !== undefined && pendingJob.created_at !== null) {
       waitStartedMs = validTimestamp(pendingJob.created_at);

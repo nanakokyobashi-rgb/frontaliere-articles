@@ -322,6 +322,35 @@ test('censisce piu run active distinguendo holder, guard e translate in attesa',
   assert.equal(report.queue.slo.state, 'within_slo');
 });
 
+test('un rerun active demotato a pending usa l avvio dell attempt corrente', async () => {
+  const rerunId = 33500000026;
+  const { report } = await observe(fakeGithub({
+    activeJobsByRun: {
+      [rerunId]: {
+        jobs: [{ id: 4, name: 'translate_queue_guard', status: 'in_progress' }],
+        total_count: 1,
+      },
+    },
+    currentRuns: [run(rerunId, {
+      conclusion: null,
+      created_at: '2026-08-30T17:00:00.000Z',
+      run_attempt: 2,
+      run_started_at: '2026-09-01T17:17:00.000Z',
+      status: 'in_progress',
+    })],
+    pages: [[]],
+  }));
+
+  assert.equal(report.complete, true);
+  assert.equal(report.failClosed, false);
+  assert.equal(report.counts.active, 0);
+  assert.equal(report.counts.pending, 1);
+  assert.equal(report.queue.oldestPendingCreatedAt, '2026-08-30T17:00:00.000Z');
+  assert.equal(report.queue.oldestPendingWaitStartedAt, '2026-09-01T17:17:00.000Z');
+  assert.equal(report.queue.oldestPendingAgeSeconds, 600);
+  assert.equal(report.queue.slo.state, 'within_slo');
+});
+
 test('un job attivo non verificabile rende il censimento fail-closed', async () => {
   const holderId = 33500000015;
   const fake = fakeGithub({
