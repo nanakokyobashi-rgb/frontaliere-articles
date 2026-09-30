@@ -7205,6 +7205,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.intelligenza-artificiale-lavoro-svizzera.title': 'Künstliche Intelligenz: Zwei von drei Schweizer Unternehmen setzen sie ein',
     'blog.article.intelligenza-artificiale-lavoro-svizzera.excerpt': 'Im ersten Quartal 2026 wird KI bei der Personalauswahl eingesetzt. 72 % der Schweizer Unternehmen berichten von einer positiven Kapitalrendite.',
     'blog.article.intelligenza-artificiale-lavoro-svizzera.imageAlt': 'Modernes Büro in der Schweiz mit digitaler Technologie zur Personalauswahl.',
+    'blog.article.crescita-part-time-uomini-svizzera.title': 'Die Teilzeitarbeit unter Männern in der Schweiz nimmt zu',
+    'blog.article.crescita-part-time-uomini-svizzera.excerpt': 'Seit 2000 hat sich der Anteil der Schweizer Männer in Teilzeit verdoppelt und liegt bei über 20%. Analyse einer Studie zu den Daten 2004-2020 zwischen kulturellen Normen und Karriere.',
+    'blog.article.crescita-part-time-uomini-svizzera.imageAlt': 'Mann arbeitet in einem modernen Büro in der Schweiz',
 };
 
 export default blogMetaChDe;

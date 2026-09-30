@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/3995199": {
-    "articleId": "neutralita-svizzera-voto-settembre",
-    "ts": "2026-08-30T08:52:23.135Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4018144": {
     "articleId": "esercito-droni-svizzera-2026",
     "ts": "2026-08-30T12:45:50.292Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4124239": {
     "articleId": "intelligenza-artificiale-lavoro-svizzera",
     "ts": "2026-09-30T14:49:37.844Z",
+    "keyForm": 2
+  },
+  "https://www.tvsvizzera.it/tvs/lavoro-ed-economia/il-lavoro-part-time-conquista-anche-gli-uomini-in-svizzera/92133067": {
+    "articleId": "crescita-part-time-uomini-svizzera",
+    "ts": "2026-09-30T15:12:23.216Z",
     "keyForm": 2
   }
 }

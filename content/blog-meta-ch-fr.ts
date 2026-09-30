@@ -7205,6 +7205,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.intelligenza-artificiale-lavoro-svizzera.title': 'Intelligence artificielle : deux entreprises suisses sur trois l’utilisent',
     'blog.article.intelligenza-artificiale-lavoro-svizzera.excerpt': 'Au premier trimestre 2026, l’IA est utilisée pour la sélection du personnel. 72% des entreprises suisses signalent un retour sur investissement positif.',
     'blog.article.intelligenza-artificiale-lavoro-svizzera.imageAlt': 'Bureau moderne en Suisse avec technologie numérique pour la sélection du personnel.',
+    'blog.article.crescita-part-time-uomini-svizzera.title': 'Le travail à temps partiel chez les hommes est en hausse en Suisse',
+    'blog.article.crescita-part-time-uomini-svizzera.excerpt': 'Depuis 2000, la proportion d\'hommes suisses travaillant à temps partiel a doublé, dépassant les 20 %. Analyse d\'une étude portant sur les données de 2004 à 2020, entre normes culturelles et carrière.',
+    'blog.article.crescita-part-time-uomini-svizzera.imageAlt': 'Homme travaillant dans un bureau moderne en Suisse',
 };
 
 export default blogMetaChFr;

@@ -7205,6 +7205,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.intelligenza-artificiale-lavoro-svizzera.title': 'Intelligenza artificiale: due aziende svizzere su tre la usa',
     'blog.article.intelligenza-artificiale-lavoro-svizzera.excerpt': 'Nel primo trimestre 2026, l\'IA è impiegata per la selezione del personale. Il 72% delle imprese svizzere segnala un ritorno positivo sull\'investimento.',
     'blog.article.intelligenza-artificiale-lavoro-svizzera.imageAlt': 'Ufficio moderno in Svizzera con tecnologia digitale per la selezione del personale.',
+    'blog.article.crescita-part-time-uomini-svizzera.title': 'Cresce il lavoro part-time tra gli uomini in Svizzera',
+    'blog.article.crescita-part-time-uomini-svizzera.excerpt': 'Dal 2000 la quota di uomini svizzeri part-time è raddoppiata, superando il 20%. Analisi di uno studio sui dati 2004-2020 tra norme culturali e carriera.',
+    'blog.article.crescita-part-time-uomini-svizzera.imageAlt': 'Uomo che lavora in un ufficio moderno in Svizzera',
 };
 
 export default blogMetaChIt;

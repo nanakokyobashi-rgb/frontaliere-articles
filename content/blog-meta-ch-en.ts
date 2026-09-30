@@ -7205,6 +7205,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.intelligenza-artificiale-lavoro-svizzera.title': 'Artificial intelligence: two out of three Swiss companies use it',
     'blog.article.intelligenza-artificiale-lavoro-svizzera.excerpt': 'In the first quarter of 2026, AI is being used for recruitment. Seventy-two percent of Swiss companies report a positive return on investment.',
     'blog.article.intelligenza-artificiale-lavoro-svizzera.imageAlt': 'Modern office in Switzerland with digital technology for personnel selection.',
+    'blog.article.crescita-part-time-uomini-svizzera.title': 'Part-time work among men is increasing in Switzerland',
+    'blog.article.crescita-part-time-uomini-svizzera.excerpt': 'Since 2000, the percentage of Swiss men working part-time has doubled, exceeding 20%. Analysis of a study based on data from 2004 to 2020, examining the relationship between cultural norms and career paths.',
+    'blog.article.crescita-part-time-uomini-svizzera.imageAlt': 'Man working in a modern office in Switzerland',
 };
 
 export default blogMetaChEn;

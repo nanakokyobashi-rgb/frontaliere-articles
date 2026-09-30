@@ -2424,6 +2424,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'iniziativa-congedo-parentale-18-settimane': { it: 'iniziativa-congedo-parentale-18-settimane', en: 'parental-leave-initiative-18-weeks', de: 'elternzeit-initiative-18-wochen', fr: 'initiative-conge-parental-18-semaines' },
  'alliance-care-crisi-sanita': { it: 'alliance-care-crisi-sanita', en: 'alliance-care-health-crisis', de: 'alliance-care-gesundheitskrise', fr: 'alliance-care-crise-sante' },
  'intelligenza-artificiale-lavoro-svizzera': { it: 'intelligenza-artificiale-lavoro-svizzera', en: 'artificial-intelligence-work-switzerland', de: 'kuenstliche-intelligenz-arbeit-schweiz', fr: 'intelligence-artificielle-travail-suisse' },
+ 'crescita-part-time-uomini-svizzera': { it: 'crescita-part-time-uomini-svizzera', en: 'part-time-work-growth-men-switzerland', de: 'wachstum-teilzeitarbeit-manner-schweiz', fr: 'croissance-travail-partiel-hommes-suisse' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

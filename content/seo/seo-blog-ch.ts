@@ -93425,6 +93425,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-crescita-part-time-uomini-svizzera': {
+    title: 'Cresce il lavoro part-time tra gli uomini in Svizzera',
+    description: 'Dal 2000 la quota di uomini che lavorano part-time in Svizzera è raddoppiata oltre il 20%. Analizziamo i dati e gli ostacoli culturali allo sviluppo.',
+    keywords: 'frontalieri, ticino, svizzera, italia, cresce, lavoro, part-time, uomini',
+    ogTitle: 'Cresce il lavoro part-time tra gli uomini in Svizzera',
+    ogDescription: 'Dal 2000 la quota di uomini che lavorano part-time in Svizzera è raddoppiata, superando il 20%. Analizziamo i dati dello studio 2004-2020, il confronto europeo e l\'impatto delle norme culturali sulle scelte professionali maschili.',
+    canonicalPath: '/articoli-svizzera/crescita-part-time-uomini-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cresce il lavoro part-time tra gli uomini in Svizzera",
+      "description": "Dal 2000 la quota di uomini che lavorano part-time in Svizzera è raddoppiata oltre il 20%. Analizziamo i dati e gli ostacoli culturali allo sviluppo.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/crescita-part-time-uomini-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Uomo che lavora in un ufficio moderno in Svizzera"
+      },
+      "datePublished": "2026-09-30T15:12:22+00:00",
+      "dateModified": "2026-09-30T15:12:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/crescita-part-time-uomini-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
