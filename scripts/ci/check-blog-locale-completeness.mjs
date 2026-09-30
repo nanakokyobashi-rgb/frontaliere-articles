@@ -42,8 +42,8 @@ export const MIN_ITALIAN_FIELDS = 3000;
 export const LANGUAGE_CHECK_MIN_CHARS = 120;
 export const LANGUAGE_CHECK_MIN_CONFIDENCE = 0.65;
 
-const BODY_KEY_RE = /['"]blog\.article\.([^'"]+)\.(body(?:[1-9]|1[0-9]|20))['"]\s*:/gu;
 const STRING_QUOTES = new Set(["'", '`']);
+const BODY_KEY_VALUE_RE = /^blog\.article\.([^'"\r\n]+)\.(body(?:[1-9]|1[0-9]|20))$/u;
 
 function decodeTsString(raw) {
   let out = '';
@@ -68,9 +68,16 @@ function decodeTsString(raw) {
 function readQuotedValue(source, offset) {
   let i = offset;
   while (i < source.length && /\s/u.test(source[i])) i += 1;
-  const quote = source[i];
+  const token = readQuotedToken(source, i);
+  if (!token) return null;
+  return { value: token.value, end: token.end };
+}
+
+function readQuotedToken(source, offset) {
+  const quote = source[offset];
   if (!STRING_QUOTES.has(quote)) return null;
-  const start = ++i;
+  const start = offset + 1;
+  let i = start;
   for (; i < source.length; i += 1) {
     if (source[i] === '\\') {
       i += 1;
@@ -83,6 +90,19 @@ function readQuotedValue(source, offset) {
   return null;
 }
 
+function skipComment(source, offset) {
+  if (source[offset] !== '/' || offset + 1 >= source.length) return offset;
+  if (source[offset + 1] === '/') {
+    const newline = source.indexOf('\n', offset + 2);
+    return newline === -1 ? source.length : newline + 1;
+  }
+  if (source[offset + 1] === '*') {
+    const end = source.indexOf('*/', offset + 2);
+    return end === -1 ? source.length : end + 2;
+  }
+  return offset;
+}
+
 /**
  * Extracts body1..body20 entries and their decoded values. The writer emits
  * body1..body3 for the historical schema and body4..body20 opportunistically.
@@ -92,14 +112,32 @@ function readQuotedValue(source, offset) {
 export function extractBodyFields(source) {
   const text = String(source ?? '');
   const entries = [];
-  BODY_KEY_RE.lastIndex = 0;
-  for (const match of text.matchAll(BODY_KEY_RE)) {
-    const parsed = readQuotedValue(text, match.index + match[0].length);
-    entries.push({
-      id: match[1],
-      field: match[2],
-      value: parsed?.value ?? null,
-    });
+  // Scan string tokens instead of matching the whole file with a regexp:
+  // body text and comments can contain examples that look like i18n keys.
+  // A real writer key is a quoted token followed by the object-property colon.
+  for (let i = 0; i < text.length;) {
+    const afterComment = skipComment(text, i);
+    if (afterComment !== i) {
+      i = afterComment;
+      continue;
+    }
+    const token = readQuotedToken(text, i);
+    if (!token) {
+      i += 1;
+      continue;
+    }
+    let next = token.end;
+    while (next < text.length && /\s/u.test(text[next])) next += 1;
+    const key = BODY_KEY_VALUE_RE.exec(token.value);
+    if (key && text[next] === ':') {
+      const parsed = readQuotedValue(text, next + 1);
+      entries.push({
+        id: key[1],
+        field: key[2],
+        value: parsed?.value ?? null,
+      });
+    }
+    i = token.end;
   }
   return entries;
 }

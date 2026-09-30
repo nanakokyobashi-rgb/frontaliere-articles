@@ -58,6 +58,23 @@ test('extractBodyFields include i body opzionali emessi dal writer fino a body20
   ]);
 });
 
+test('extractBodyFields ignora chiavi dentro commenti e prosa dei body', () => {
+  const entries = extractBodyFields([
+    "// 'blog.article.demo.body4': 'commento'",
+    '/* "blog.article.demo.body5": "commento" */',
+    'const body = {',
+    "  'blog.article.demo.body1': 'Testo con \\'blog.article.demo.body4\\': falso',",
+    '  \'blog.article.demo.body2\': `Testo con ${"blog.article.demo.body5: falso"}`,',
+    "  'blog.article.demo.body3': 'Tre',",
+    '};',
+  ].join('\n'));
+  assert.deepEqual(entries.map(({ id, field }) => ({ id, field })), [
+    { id: 'demo', field: 'body1' },
+    { id: 'demo', field: 'body2' },
+    { id: 'demo', field: 'body3' },
+  ]);
+});
+
 test('FU-009 — il controllo rileva chiavi mancanti e copie italiane', () => {
   const root = fixtureRoot();
   const id = 'demo';

@@ -389,7 +389,7 @@ test(`il piano reale copre i digest correnti e la lineage del contratto committa
   const lineageRemoteChecks = 2
     + CONTRACT.artifacts.length * 2 - adaptedArtifacts
     + CONTRACT.observers.length - adaptedObservers;
-  const localChecks = 7
+  const localChecks = 9
     + CONTRACT.artifacts.length
     + CONTRACT.observers.length
     + adaptedArtifacts
@@ -472,6 +472,32 @@ test('FU-011 — roster corrente e observer divergenti diventano rossi', () => {
     'drifted',
   );
   assert.equal(observerVerdict.red, true);
+});
+
+test('FU-011 — cardinalità e target duplicati degli observer sono fail-closed', () => {
+  const invalidContract = {
+    ...fixtureContractWithObserver,
+    observerCount: 2,
+    observers: [
+      fixtureContractWithObserver.observers[0],
+      fixtureContractWithObserver.observers[0],
+    ],
+  };
+  const checks = planProvenanceChecks(invalidContract, observerFixtureManifest);
+  const observed = new Map(checks.map((check) => [check.field, {
+    ...(check.localOnly ? { observed: check.observed } : { sha256: check.expected }),
+  }]));
+  const verdict = evaluateProvenance(checks, observed);
+  assert.equal(
+    verdict.results.find((result) => result.field === 'contract#observerCount').state,
+    'verified',
+    'la cardinalità dichiarata coincide con la lista, quindi il controllo è isolato',
+  );
+  assert.equal(
+    verdict.results.find((result) => result.field === 'contract#observerTargets').state,
+    'undeclared',
+  );
+  assert.equal(verdict.red, true);
 });
 
 test('un artifact riordinato a mano, senza sorgente, è `undeclared` e rosso', () => {

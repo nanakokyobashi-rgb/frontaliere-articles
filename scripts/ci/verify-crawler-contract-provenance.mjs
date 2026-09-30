@@ -772,6 +772,31 @@ export function planProvenanceChecks(
     });
   }
 
+  const hasObserverContract = Object.hasOwn(contract || {}, 'observerCount')
+    || Object.hasOwn(contract || {}, 'observers');
+  if (hasObserverContract) {
+    const observers = Array.isArray(contract?.observers) ? contract.observers : [];
+    const declaredObserverCount = Number.isInteger(contract?.observerCount)
+      ? contract.observerCount
+      : null;
+    const countMatches = declaredObserverCount !== null
+      && declaredObserverCount === observers.length;
+    const targets = observers.map((observer) => observer?.target);
+    const targetsValid = Array.isArray(contract?.observers)
+      && targets.every((target) => typeof target === 'string' && SOURCE_PATH_RE.test(target))
+      && new Set(targets).size === targets.length;
+    checks.push(localLineageCheck(
+      'contract#observerCount',
+      declaredObserverCount,
+      countMatches ? observers.length : null,
+    ));
+    checks.push(localLineageCheck(
+      'contract#observerTargets',
+      declaredObserverCount,
+      targetsValid ? targets.length : null,
+    ));
+  }
+
   for (const artifact of contract.artifacts || []) {
     const candidates = artifact.sourceLogic
       ? logicDirs.map((dir) => `${dir}/${artifact.sourceLogic}`)
