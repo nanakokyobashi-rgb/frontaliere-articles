@@ -7256,6 +7256,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.chiusura-scuole-ftan-tarasp.title': 'Scuol chiude scuole a Ftan e Tarasp, genitori ricorrono',
     'blog.article.chiusura-scuole-ftan-tarasp.excerpt': 'Il Municipio di Scuol vuole chiudere due sedi entro il 2028/29 per motivi finanziari e demografici. I genitori hanno presentato ricorso al Tribunale d\'appello dei Grigioni.',
     'blog.article.chiusura-scuole-ftan-tarasp.imageAlt': 'Scuola di villaggio alpino nei Grigioni con bambini che camminano',
+    'blog.article.coop-millesimo-supermercato.title': 'Coop raggiunge 1\'000 supermercati in Svizzera',
+    'blog.article.coop-millesimo-supermercato.excerpt': 'Domani apre a Emmen il millesimo punto vendita Coop: 2\'500 m². Il CEO Philipp Wyss annuncia nuove aperture e indica il gruppo come leader in Ticino.',
+    'blog.article.coop-millesimo-supermercato.imageAlt': 'Rete di supermercati Coop in Svizzera, con un punto vendita in un contesto urbano',
 };
 
 export default blogMetaChIt;

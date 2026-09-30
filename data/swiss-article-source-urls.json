@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/politica/1947133/consiglio-due-chiede-scuole-smartphone-parlamento-velo": {
-    "articleId": "divieto-velo-cellulari-scuole",
-    "ts": "2026-08-31T16:44:29.431Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4024606": {
     "articleId": "siccita-depuratori-crisi-acque",
     "ts": "2026-08-31T17:06:56.757Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/gr%3a-chiusura-delle-scuole-di-ftan-e-tarasp%2c-i-genitori-si-oppongono/92145664": {
     "articleId": "chiusura-scuole-ftan-tarasp",
     "ts": "2026-09-30T22:52:16.158Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1953847/emmen-coop-vendita-supermercati-ticino-raggiunge-quota-leader": {
+    "articleId": "coop-millesimo-supermercato",
+    "ts": "2026-09-30T23:06:34.567Z",
     "keyForm": 2
   }
 }

@@ -7256,6 +7256,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.chiusura-scuole-ftan-tarasp.title': 'Scuol closes schools in Ftan and Tarasp, parents appeal',
     'blog.article.chiusura-scuole-ftan-tarasp.excerpt': 'The Scuol municipal government plans to close two schools by 2028/29 for financial and demographic reasons. Parents have filed an appeal with the Graubünden Court of Appeals.',
     'blog.article.chiusura-scuole-ftan-tarasp.imageAlt': 'Alpine village school in Grisons with children walking',
+    'blog.article.coop-millesimo-supermercato.title': 'Coop reaches 1\'000 supermarkets in Switzerland',
+    'blog.article.coop-millesimo-supermercato.excerpt': 'Tomorrow, Coop’s 1,000th store will open in Emmen: 2,500 m². CEO Philipp Wyss announces new store openings and highlights the group’s leadership position in Ticino.',
+    'blog.article.coop-millesimo-supermercato.imageAlt': 'Coop supermarket network in Switzerland, with a store in an urban setting',
 };
 
 export default blogMetaChEn;

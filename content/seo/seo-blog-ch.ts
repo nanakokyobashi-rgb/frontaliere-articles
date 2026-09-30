@@ -94088,6 +94088,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-coop-millesimo-supermercato': {
+    title: 'Coop raggiunge 1\'000 supermercati in Svizzera | Frontaliere Ticino',
+    description: 'Domani Coop apre a Emmen il millesimo supermercato: 2\'500 m², 124 filiali in dieci anni e nuove aperture annunciate. In Ticino il gruppo si dice leader.',
+    keywords: 'frontalieri, ticino, svizzera, italia, coop, raggiunge, supermercati, domani',
+    ogTitle: 'Coop supera quota 1\'000 supermercati in Svizzera',
+    ogDescription: 'Il punto vendita di Emmen porta Coop a quota 1\'000. La cooperativa ha investito circa 3,5 miliardi di franchi nella ristrutturazione dei negozi e guarda a nuove aperture, mentre Migros prepara 140 nuovi supermercati entro il 2030.',
+    canonicalPath: '/articoli-svizzera/coop-millesimo-supermercato/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Coop raggiunge 1'000 supermercati in Svizzera",
+      "description": "Domani Coop apre a Emmen il millesimo supermercato: 2'500 m², 124 filiali in dieci anni e nuove aperture annunciate. In Ticino il gruppo si dice leader.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/coop-millesimo-supermercato.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Rete di supermercati Coop in Svizzera, con un punto vendita in un contesto urbano"
+      },
+      "datePublished": "2026-09-30T23:06:34+00:00",
+      "dateModified": "2026-09-30T23:06:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/coop-millesimo-supermercato/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

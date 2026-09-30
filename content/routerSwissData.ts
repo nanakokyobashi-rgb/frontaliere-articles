@@ -2441,6 +2441,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'licenziamento-swisscom-bulle': { it: 'licenziamento-swisscom-bulle', en: 'swisscom-dismissal-bulle', de: 'swisscom-entlassung-bulle', fr: 'licenciement-swisscom-bulle' },
  'preventivo-2027-ticino-polemica': { it: 'preventivo-2027-ticino-polemica', en: 'ticino-2027-budget-criticism', de: 'kanton-tessin-budget-2027-kritik', fr: 'budget-tessin-2027-critique' },
  'chiusura-scuole-ftan-tarasp': { it: 'chiusura-scuole-ftan-tarasp', en: 'school-closure-ftan-tarasp', de: 'schulschliessung-ftan-tarasp', fr: 'fermeture-ecoles-ftan-tarasp' },
+ 'coop-millesimo-supermercato': { it: 'coop-millesimo-supermercato', en: 'coop-reaches-1000-supermarkets', de: 'coop-erreicht-1000-supermarkte', fr: 'coop-atteint-1000-supermarches' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
