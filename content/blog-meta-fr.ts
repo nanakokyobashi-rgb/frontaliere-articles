@@ -12321,6 +12321,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.conti-ticino-disavanzo-2030.title': 'Comptes du Tessin : déficit proche du demi-milliard',
     'blog.article.conti-ticino-disavanzo-2030.excerpt': 'Le budget 2027 et le plan financier indiquent un déficit structurel. Les initiatives concernant les primes d’assurance-maladie et la réforme sanitaire EFAS pèsent.',
     'blog.article.conti-ticino-disavanzo-2030.imageAlt': 'Le Palazzo delle Orse à Bellinzona, siège du gouvernement cantonal du Tessin',
+    'blog.article.rovellasca-vita-transfrontaliera.title': 'Vivre à Rovellasca et travailler au Tessin en tant que frontalier',
+    'blog.article.rovellasca-vita-transfrontaliera.excerpt': 'Accord en vigueur depuis le 1er janvier 2024 : exonération € 7\'500 pour les anciens frontaliers, franchise € 10\'000 pour les nouveaux.',
+    'blog.article.rovellasca-vita-transfrontaliera.imageAlt': 'Travailleur frontalier en route vers le Tessin sur une route frontière',
 };
 
 export default blogMetaFr;

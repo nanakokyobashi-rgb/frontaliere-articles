@@ -36961,6 +36961,15 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'rovellasca-vita-transfrontaliera',
+ category: 'fiscale',
+ date: '2026-09-30T21:58:11.874Z',
+ image: '/images/blog/rovellasca-vita-transfrontaliera.webp',
+ hasCalculator: true,
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

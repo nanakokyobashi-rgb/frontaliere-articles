@@ -12320,6 +12320,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.conti-ticino-disavanzo-2030.title': 'Conti Ticino: disavanzo verso il mezzo miliardo',
     'blog.article.conti-ticino-disavanzo-2030.excerpt': 'Il preventivo 2027 e il piano finanziario indicano un rosso strutturale. Pesano le iniziative sui premi di cassa malati e la riforma sanitaria EFAS.',
     'blog.article.conti-ticino-disavanzo-2030.imageAlt': 'Il Palazzo delle Orse a Bellinzona, sede del Governo del Canton Ticino',
+    'blog.article.rovellasca-vita-transfrontaliera.title': 'Vivere a Rovellasca e lavorare in Ticino da frontaliere',
+    'blog.article.rovellasca-vita-transfrontaliera.excerpt': 'Accordo in vigore dal 1° gennaio 2024: esenzione €7\'500 per i vecchi frontalieri, franchigia €10\'000 per i nuovi.',
+    'blog.article.rovellasca-vita-transfrontaliera.imageAlt': 'Pendolare transfrontaliero verso il Ticino su una strada di confine',
 };
 
 export default blogMetaIt;

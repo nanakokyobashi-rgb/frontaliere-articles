@@ -12318,6 +12318,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.conti-ticino-disavanzo-2030.title': 'Haushalt Tessin: Defizit von fast einer halben Milliarde',
     'blog.article.conti-ticino-disavanzo-2030.excerpt': 'Das Budget 2027 und der Finanzplan weisen ein strukturelles Defizit aus. Belastend wirken die Initiativen zu den Krankenkassenprämien und die Gesundheitsreform EFAS.',
     'blog.article.conti-ticino-disavanzo-2030.imageAlt': 'Der Palazzo delle Orse in Bellinzona, Sitz der Tessiner Kantonsregierung',
+    'blog.article.rovellasca-vita-transfrontaliera.title': 'In Rovellasca wohnen und als Grenzgänger im Tessin arbeiten',
+    'blog.article.rovellasca-vita-transfrontaliera.excerpt': 'Seit dem 1° gennaio 2024 geltendes Abkommen: Steuerbefreiung von €7\'500 für bisherige Grenzgänger, Freibetrag von €10\'000 für neue Grenzgänger.',
+    'blog.article.rovellasca-vita-transfrontaliera.imageAlt': 'Grenzgänger auf dem Weg ins Tessin an einer Grenzstrasse',
 };
 
 export default blogMetaDe;

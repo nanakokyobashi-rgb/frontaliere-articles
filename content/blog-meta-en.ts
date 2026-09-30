@@ -12319,6 +12319,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.conti-ticino-disavanzo-2030.title': 'Ticino finances: deficit nearing half a billion',
     'blog.article.conti-ticino-disavanzo-2030.excerpt': 'The 2027 budget and financial plan indicate a structural deficit. The initiatives on health insurance premiums and the EFAS healthcare reform weigh heavily.',
     'blog.article.conti-ticino-disavanzo-2030.imageAlt': 'The Palazzo delle Orse in Bellinzona, seat of the Ticino Cantonal Government',
+    'blog.article.rovellasca-vita-transfrontaliera.title': 'Living in Rovellasca and working in Ticino as a cross-border worker',
+    'blog.article.rovellasca-vita-transfrontaliera.excerpt': 'Agreement in force from 1° gennaio 2024: €7\'500 exemption for existing cross-border workers, €10\'000 tax-free allowance for new ones.',
+    'blog.article.rovellasca-vita-transfrontaliera.imageAlt': 'Cross-border commuter heading to Ticino on a border road',
 };
 
 export default blogMetaEn;

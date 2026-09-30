@@ -97573,6 +97573,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-rovellasca-vita-transfrontaliera': {
+    title: 'Vivere a Rovellasca e lavorare in Ticino da frontaliere',
+    description: 'Vivere a Rovellasca e lavorare in Ticino: accordo frontalieri, imposta alla fonte, franchigie, contributi AVS e controlli pratici prima del trasferimento.',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, rovellasca, lavorare, accordo',
+    ogTitle: 'Vivere a Rovellasca e lavorare in Ticino da frontaliere',
+    ogDescription: 'La scelta di Rovellasca per lavorare in Ticino richiede di distinguere vecchi e nuovi frontalieri, leggere trattenute AVS, LPP e LAMal e applicare correttamente il credito d\'imposta italiano, senza doppia imposizione.',
+    canonicalPath: '/articoli-frontaliere/rovellasca-vita-transfrontaliera',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Rovellasca e lavorare in Ticino da frontaliere",
+      "description": "Vivere a Rovellasca e lavorare in Ticino: accordo frontalieri, imposta alla fonte, franchigie, contributi AVS e controlli pratici prima del trasferimento.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/rovellasca-vita-transfrontaliera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Pendolare transfrontaliero verso il Ticino su una strada di confine"
+      },
+      "datePublished": "2026-09-30T21:58:11+00:00",
+      "dateModified": "2026-09-30T21:58:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/rovellasca-vita-transfrontaliera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
