@@ -93191,6 +93191,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-lamal-franchigie-sussidio-basel': {
+    title: 'Premi cassa malati Basilea Città: riduzione premi',
+    description: 'Guida pratica ai premi cassa malati LAMal nel Cantone di Basilea Città: franchigie adulti, premio per cantone e regione e riduzione premi cantonale in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, premi, cassa, malati, basilea',
+    ogTitle: 'Basilea Città: premi LAMal e riduzione',
+    ogDescription: 'Nel Cantone di Basilea Città, i premi LAMal sono legati a cantone e regione. La guida chiarisce le franchigie adulti, l\'obbligo entro tre mesi dall\'arrivo e la riduzione premi come sussidio cantonale, con un confronto utile per il bilancio svizzero.',
+    canonicalPath: '/articoli-svizzera/lamal-franchigie-sussidio-basel/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Premi cassa malati Basilea Città: riduzione premi",
+      "description": "Guida pratica ai premi cassa malati LAMal nel Cantone di Basilea Città: franchigie adulti, premio per cantone e regione e riduzione premi cantonale in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/lamal-franchigie-sussidio-basel.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documenti LAMal accanto a una vista urbana di Basilea Città"
+      },
+      "datePublished": "2026-09-30T12:56:57+00:00",
+      "dateModified": "2026-09-30T12:56:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/lamal-franchigie-sussidio-basel/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

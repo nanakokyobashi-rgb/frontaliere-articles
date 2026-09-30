@@ -7187,6 +7187,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.zugo-de-escalation-cyberspazio.title': 'La Confédération encourage la désescalade dans le cyberespace',
     'blog.article.zugo-de-escalation-cyberspazio.excerpt': 'À Zoug, conférence internationale de la Confédération pour la désescalade dans le cyberespace, entre diplomatie préventive, OSCE et intelligence artificielle.',
     'blog.article.zugo-de-escalation-cyberspazio.imageAlt': 'Conférence internationale sur la cybersécurité à Zoug',
+    'blog.article.lamal-franchigie-sussidio-basel.title': 'Primes d’assurance-maladie Bâle-Ville : réduction des primes',
+    'blog.article.lamal-franchigie-sussidio-basel.excerpt': 'Guide pratique des primes LAMal à Bâle-Ville : franchises pour adultes, prime par canton et par région et réduction de primes en tant que subvention cantonale.',
+    'blog.article.lamal-franchigie-sussidio-basel.imageAlt': 'Documents LAMal devant une vue urbaine de Bâle-Ville',
 };
 
 export default blogMetaChFr;

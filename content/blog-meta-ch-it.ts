@@ -7187,6 +7187,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.zugo-de-escalation-cyberspazio.title': 'La Confederazione promuove la de-escalation nel cyberspazio',
     'blog.article.zugo-de-escalation-cyberspazio.excerpt': 'A Zugo conferenza internazionale della Confederazione per la de-escalation nel cyberspazio, tra diplomazia preventiva, OSCE e intelligenza artificiale.',
     'blog.article.zugo-de-escalation-cyberspazio.imageAlt': 'Conferenza internazionale sulla cybersicurezza a Zugo',
+    'blog.article.lamal-franchigie-sussidio-basel.title': 'Premi cassa malati Basilea Città: riduzione premi',
+    'blog.article.lamal-franchigie-sussidio-basel.excerpt': 'Guida pratica ai premi LAMal a Basilea Città: franchigie adulti, premio per cantone e regione e riduzione premi come sussidio cantonale.',
+    'blog.article.lamal-franchigie-sussidio-basel.imageAlt': 'Documenti LAMal accanto a una vista urbana di Basilea Città',
 };
 
 export default blogMetaChIt;

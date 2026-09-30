@@ -2418,6 +2418,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'analisti-economia-svizzera-settembre': { it: 'analisti-economia-svizzera-settembre', en: 'swiss-economy-analysts-september', de: 'schweizer-wirtschaft-analysten-september', fr: 'economie-suisse-analystes-septembre' },
  'bns-acquisti-divise-trimestre': { it: 'bns-acquisti-divise-trimestre', en: 'snb-foreign-currency-purchases-quarter', de: 'snb-devisenkaeufe-quartal', fr: 'bns-achats-devises-trimestre' },
  'zugo-de-escalation-cyberspazio': { it: 'zugo-de-escalation-cyberspazio', en: 'zug-cyber-de-escalation', de: 'zug-cyber-deeskalation', fr: 'zoug-cyber-deescalade' },
+ 'lamal-franchigie-sussidio-basel': { it: 'lamal-franchigie-sussidio-basel', en: 'basel-city-health-premium-reduction', de: 'krankenkassenpraemien-basel-stadt', fr: 'primes-assurance-maladie-bale-ville' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

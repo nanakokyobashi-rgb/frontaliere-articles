@@ -7187,6 +7187,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.zugo-de-escalation-cyberspazio.title': 'Der Bund fördert die Deeskalation im Cyberspace',
     'blog.article.zugo-de-escalation-cyberspazio.excerpt': 'In Zug findet eine internationale Konferenz der Eidgenossenschaft zum Thema Deeskalation im Cyberspace statt, bei der es um präventive Diplomatie, die OSZE und künstliche Intelligenz geht.',
     'blog.article.zugo-de-escalation-cyberspazio.imageAlt': 'Internationale Cybersicherheitskonferenz in Zug',
+    'blog.article.lamal-franchigie-sussidio-basel.title': 'Krankenkassenprämien Basel-Stadt: Prämien senken',
+    'blog.article.lamal-franchigie-sussidio-basel.excerpt': 'Praktischer Leitfaden zu den KVG-Prämien in Basel-Stadt: Selbstbehalte für Erwachsene, Prämien nach Kanton und Region sowie Prämienverbilligungen als kantonale Beihilfe.',
+    'blog.article.lamal-franchigie-sussidio-basel.imageAlt': 'LAMal-Unterlagen vor einer Stadtansicht von Basel-Stadt',
 };
 
 export default blogMetaChDe;

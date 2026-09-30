@@ -7187,6 +7187,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.zugo-de-escalation-cyberspazio.title': 'The Confederation promotes de-escalation in cyberspace',
     'blog.article.zugo-de-escalation-cyberspazio.excerpt': 'An international conference organized by the Swiss Confederation on de-escalation in cyberspace is taking place in Zug, focusing on preventive diplomacy, the OSCE, and artificial intelligence.',
     'blog.article.zugo-de-escalation-cyberspazio.imageAlt': 'International cybersecurity conference in Zug',
+    'blog.article.lamal-franchigie-sussidio-basel.title': 'Basel-Stadt health insurance premiums: premium reduction',
+    'blog.article.lamal-franchigie-sussidio-basel.excerpt': 'A Practical Guide to LAMal Premiums in Basel-Stadt: Adult Deductibles, Premiums by Canton and Region, and Premium Reductions as Cantonal Subsidies.',
+    'blog.article.lamal-franchigie-sussidio-basel.imageAlt': 'LAMal documents beside an urban view of Basel City',
 };
 
 export default blogMetaChEn;
