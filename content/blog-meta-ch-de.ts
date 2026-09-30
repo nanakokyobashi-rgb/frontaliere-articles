@@ -7196,6 +7196,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.franchigie-lamal-basilea-citta.title': 'Krankenkassenprämien im Kanton Basel-Stadt: Prämienverbilligung',
     'blog.article.franchigie-lamal-basilea-citta.excerpt': 'Im Kanton Basel-Stadt richten sich die LAMal-Prämien nach Kanton und Region: Erwachsenenfranchisen, alternative Modelle und Prämienverbilligung als kantonale Subvention.',
     'blog.article.franchigie-lamal-basilea-citta.imageAlt': 'Vergleich der Schweizer Krankenkassenprämien und Prämienverbilligung',
+    'blog.article.iniziativa-congedo-parentale-18-settimane.title': 'Elternzeit: 112\'517 Unterschriften in Bern eingereicht',
+    'blog.article.iniziativa-congedo-parentale-18-settimane.excerpt': 'Die Initiative für einen 18-wöchigen Elternurlaub hat die erforderliche Anzahl an Unterschriften erreicht. Der Vorschlag zielt auf Gleichstellung zwischen den Eltern und eine gerechte Entschädigung ab.',
+    'blog.article.iniziativa-congedo-parentale-18-settimane.imageAlt': 'Bundeshaus in Bern, Sitz der Bundeskanzlei',
 };
 
 export default blogMetaChDe;

@@ -7196,6 +7196,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.franchigie-lamal-basilea-citta.title': 'Primes d’assurance-maladie du canton de Bâle-Ville : réduction des primes',
     'blog.article.franchigie-lamal-basilea-citta.excerpt': 'Dans le canton de Bâle-Ville, les primes LAMal dépendent du canton et de la région : franchises pour adultes, modèles alternatifs et réduction des primes sous forme de subside cantonal.',
     'blog.article.franchigie-lamal-basilea-citta.imageAlt': 'Comparaison des primes d\'assurance-maladie suisses et de leur réduction',
+    'blog.article.iniziativa-congedo-parentale-18-settimane.title': 'Congé parental : 112 517 signatures remises à Berne',
+    'blog.article.iniziativa-congedo-parentale-18-settimane.excerpt': 'L’initiative pour un congé parental de 18 semaines a recueilli les signatures nécessaires. La proposition vise l’égalité entre les parents et une indemnité équitable.',
+    'blog.article.iniziativa-congedo-parentale-18-settimane.imageAlt': 'Palais fédéral à Berne, siège de la Chancellerie fédérale',
 };
 
 export default blogMetaChFr;

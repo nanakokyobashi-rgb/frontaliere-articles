@@ -21616,6 +21616,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'iniziativa-congedo-parentale-18-settimane',
+    category: 'novita',
+    date: '2026-09-30T14:06:15.763Z',
+    image: '/images/blog/iniziativa-congedo-parentale-18-settimane.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

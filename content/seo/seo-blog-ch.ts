@@ -93308,6 +93308,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-iniziativa-congedo-parentale-18-settimane': {
+    title: 'Congedo parentale: depositate 112\'517 firme a Berna',
+    description: 'L\'iniziativa per un congedo parentale di 18 settimane ha raggiunto le firme necessarie. La proposta punta a parità tra genitori e indennità equa.',
+    keywords: 'frontalieri, ticino, svizzera, italia, congedo, parentale, depositate, firme',
+    ogTitle: 'Congedo parentale: depositate 112\'517 firme a Berna',
+    ogDescription: 'L\'iniziativa popolare per un congedo parentale di 18 settimane, uguale per madri e padri, ha superato il quorum necessario. Depositati i documenti in Cancelleria.',
+    canonicalPath: '/articoli-svizzera/iniziativa-congedo-parentale-18-settimane/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Congedo parentale: depositate 112'517 firme a Berna",
+      "description": "L'iniziativa per un congedo parentale di 18 settimane ha raggiunto le firme necessarie. La proposta punta a parità tra genitori e indennità equa.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/iniziativa-congedo-parentale-18-settimane.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna, sede della Cancelleria federale"
+      },
+      "datePublished": "2026-09-30T14:06:15+00:00",
+      "dateModified": "2026-09-30T14:06:15+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/iniziativa-congedo-parentale-18-settimane/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
