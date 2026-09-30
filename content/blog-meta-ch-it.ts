@@ -7127,6 +7127,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.fisco-eredita-soletta.title': 'Canton Soletta: imposta di successione e donazione',
     'blog.article.fisco-eredita-soletta.excerpt': 'Fiscalità svizzera a tre livelli: per il Cantone di Soletta contano parentela, esenzioni, dichiarazione e termini.',
     'blog.article.fisco-eredita-soletta.imageAlt': 'Edificio cantonale svizzero e documenti fiscali per successioni e donazioni',
+    'blog.article.tirocinio-grigioni-guida-pratica.title': 'Apprendistato e formazione professionale nei Grigioni',
+    'blog.article.tirocinio-grigioni-guida-pratica.excerpt': 'Guida al tirocinio nel Canton Grigioni: posto, contratto, paga e maturità professionale, con 45 o 50 ore massime e 4 settimane minime.',
+    'blog.article.tirocinio-grigioni-guida-pratica.imageAlt': 'Apprendista in un laboratorio di formazione professionale nel Cantone dei Grigioni',
 };
 
 export default blogMetaChIt;

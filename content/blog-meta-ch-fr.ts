@@ -7127,6 +7127,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.fisco-eredita-soletta.title': 'Canton de Soleure : impôt sur les successions et les donations',
     'blog.article.fisco-eredita-soletta.excerpt': 'Fiscalité suisse à trois niveaux : pour le canton de Soleure, le lien de parenté, les exonérations, la déclaration et les délais comptent.',
     'blog.article.fisco-eredita-soletta.imageAlt': 'Bâtiment cantonal suisse et documents fiscaux sur successions et donations',
+    'blog.article.tirocinio-grigioni-guida-pratica.title': 'Apprentissage et formation professionnelle dans les Grisons',
+    'blog.article.tirocinio-grigioni-guida-pratica.excerpt': 'Guide de stage dans le canton des Grisons : poste, contrat, salaire et maturité professionnelle, avec 45 ou 50 heures maximum et 4 semaines minimum.',
+    'blog.article.tirocinio-grigioni-guida-pratica.imageAlt': 'Apprenti dans un atelier de formation professionnelle des Grisons',
 };
 
 export default blogMetaChFr;

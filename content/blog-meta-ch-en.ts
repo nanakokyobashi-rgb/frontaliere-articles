@@ -7127,6 +7127,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.fisco-eredita-soletta.title': 'Canton of Solothurn: inheritance and gift tax',
     'blog.article.fisco-eredita-soletta.excerpt': 'Swiss taxation at three levels: for the Canton of Solothurn, kinship, exemptions, declaration and deadlines matter.',
     'blog.article.fisco-eredita-soletta.imageAlt': 'Swiss cantonal building and tax documents for inheritances and gifts',
+    'blog.article.tirocinio-grigioni-guida-pratica.title': 'Apprenticeships and vocational training in Graubünden',
+    'blog.article.tirocinio-grigioni-guida-pratica.excerpt': 'Guide to an apprenticeship in the Canton of Grisons: position, contract, pay and vocational baccalaureate, with maximum 45 or 50 hours and minimum 4 weeks.',
+    'blog.article.tirocinio-grigioni-guida-pratica.imageAlt': 'Apprentice in a vocational training workshop in the Canton of Grisons',
 };
 
 export default blogMetaChEn;

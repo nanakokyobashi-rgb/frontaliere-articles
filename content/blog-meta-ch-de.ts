@@ -7127,6 +7127,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.fisco-eredita-soletta.title': 'Kanton Solothurn: Erbschafts- und Schenkungssteuer',
     'blog.article.fisco-eredita-soletta.excerpt': 'Dreistufige Schweizer Besteuerung: Für den Kanton Solothurn zählen Verwandtschaft, Befreiungen, Erklärung und Fristen.',
     'blog.article.fisco-eredita-soletta.imageAlt': 'Schweizer Kantonsgebäude und Steuerunterlagen zu Erbschaften und Schenkungen',
+    'blog.article.tirocinio-grigioni-guida-pratica.title': 'Lehre und Berufsbildung in Graubünden',
+    'blog.article.tirocinio-grigioni-guida-pratica.excerpt': 'Leitfaden für die Lehre im Kanton Graubünden: Stelle, Vertrag, Lohn und Berufsmaturität, mit maximal 45 oder 50 Stunden und mindestens 4 Wochen.',
+    'blog.article.tirocinio-grigioni-guida-pratica.imageAlt': 'Lernende Person in einer Berufsbildungswerkstatt im Kanton Graubünden',
 };
 
 export default blogMetaChDe;

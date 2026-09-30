@@ -92411,6 +92411,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tirocinio-grigioni-guida-pratica': {
+    title: 'Apprendistato e formazione professionale nei Grigioni',
+    description: 'Guida pratica al tirocinio nei Grigioni: posto, contratto, paga, maturità professionale, orari, vacanze, contributi e LAMal per chi vive e lavora in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, apprendistato, formazione, professionale, grigioni',
+    ogTitle: 'Apprendistato e formazione professionale nei Grigioni',
+    ogDescription: 'Dal posto di tirocinio alla busta paga: una guida per leggere contratto, orari e vacanze, distinguere imposte e contributi, considerare LAMal e alloggio e preparare la scelta della maturità professionale nel Canton Grigioni.',
+    canonicalPath: '/articoli-svizzera/tirocinio-grigioni-guida-pratica/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Apprendistato e formazione professionale nei Grigioni",
+      "description": "Guida pratica al tirocinio nei Grigioni: posto, contratto, paga, maturità professionale, orari, vacanze, contributi e LAMal per chi vive e lavora in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/tirocinio-grigioni-guida-pratica.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Apprendista in un laboratorio di formazione professionale nel Cantone dei Grigioni"
+      },
+      "datePublished": "2026-09-30T02:24:45+00:00",
+      "dateModified": "2026-09-30T02:24:45+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/tirocinio-grigioni-guida-pratica/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
