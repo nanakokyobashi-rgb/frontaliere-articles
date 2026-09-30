@@ -92918,6 +92918,84 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tetto-psicoterapeuti-cassa-malati': {
+    title: 'Tetto per psicoterapeuti a carico della cassa malati',
+    description: 'Scopri la mozione di Lorenzo Quadri per introdurre un tetto cantonale agli psicoterapeuti psicologici e frenare la spesa AOMS salita a 922 milioni.',
+    keywords: 'frontalieri, ticino, svizzera, italia, tetto, psicoterapeuti, carico, cassa',
+    ogTitle: 'Tetto per psicoterapeuti a carico della cassa malati',
+    ogDescription: 'Analisi della mozione presentata da Lorenzo Quadri al Consiglio federale per contingentare gli psicoterapeuti psicologici e contenere i costi dell\'assicurazione malattia in Svizzera e in Ticino.',
+    canonicalPath: '/articoli-svizzera/tetto-psicoterapeuti-cassa-malati/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tetto per psicoterapeuti a carico della cassa malati",
+      "description": "Scopri la mozione di Lorenzo Quadri per introdurre un tetto cantonale agli psicoterapeuti psicologici e frenare la spesa AOMS salita a 922 milioni.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/tetto-psicoterapeuti-cassa-malati.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Studio medico e psicoterapeutico in Ticino con documenti sulla cassa malati"
+      },
+      "datePublished": "2026-09-30T09:13:41+00:00",
+      "dateModified": "2026-09-30T09:13:41+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/tetto-psicoterapeuti-cassa-malati/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-premi-slembeck-terapie-terminali': {
+    title: 'Premi cassa malati: sconti per rinuncia a cure terminali',
+    description: 'Tilman Slembeck propone premi di cassa malati più bassi in cambio della rinuncia volontaria alle terapie di prolungamento della vita nella fase terminale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, premi, cassa, malati, sconti',
+    ogTitle: 'Premi cassa malati: sconti per chi rinuncia alle cure terminali',
+    ogDescription: 'L\'economista Tilman Slembeck suggerisce un modello basato su premi più convenienti per gli assicurati che scelgono volontariamente di rinunciare alle terapie di prolungamento della vita in fase terminale.',
+    canonicalPath: '/articoli-svizzera/premi-slembeck-terapie-terminali/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Premi cassa malati: sconti per rinuncia a cure terminali",
+      "description": "Tilman Slembeck propone premi di cassa malati più bassi in cambio della rinuncia volontaria alle terapie di prolungamento della vita nella fase terminale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/premi-slembeck-terapie-terminali.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Proposta di premi ridotti per terapie terminali in Svizzera"
+      },
+      "datePublished": "2026-09-30T09:31:43+00:00",
+      "dateModified": "2026-09-30T09:31:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/premi-slembeck-terapie-terminali/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

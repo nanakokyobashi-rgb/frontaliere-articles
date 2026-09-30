@@ -21526,6 +21526,24 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'tetto-psicoterapeuti-cassa-malati',
+    category: 'pratico',
+    date: '2026-09-30T09:13:41.403Z',
+    image: '/images/blog/tetto-psicoterapeuti-cassa-malati.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'premi-slembeck-terapie-terminali',
+    category: 'pratico',
+    date: '2026-09-30T09:31:43.290Z',
+    image: '/images/blog/premi-slembeck-terapie-terminali.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

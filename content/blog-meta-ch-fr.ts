@@ -7166,6 +7166,12 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.parita-tasse-atenei-ue.title': 'Universités : frais identiques pour les étudiants suisses et de l\'UE',
     'blog.article.parita-tasse-atenei-ue.excerpt': 'Le Conseil des États approuve l\'égalité entre les étudiants suisses et ceux de l\'UE. La Confédération devrait couvrir pendant quatre ans la baisse des recettes des cantons.',
     'blog.article.parita-tasse-atenei-ue.imageAlt': 'Étudiants devant une université suisse après la décision sur les taxes égales pour les citoyens de l\'UE',
+    'blog.article.tetto-psicoterapeuti-cassa-malati.title': 'Plafond pour les psychothérapeutes à la charge de l\'assurance-maladie',
+    'blog.article.tetto-psicoterapeuti-cassa-malati.excerpt': 'Lorenzo Quadri présente une motion visant à introduire un plafond cantonal pour les psychothérapeutes psychologiques en raison de l\'augmentation des dépenses AOS.',
+    'blog.article.tetto-psicoterapeuti-cassa-malati.imageAlt': 'Cabinet médical et psychothérapeutique au Tessin avec des documents d\'assurance maladie',
+    'blog.article.premi-slembeck-terapie-terminali.title': 'Primes maladie : rabais si refus de soins finaux',
+    'blog.article.premi-slembeck-terapie-terminali.excerpt': 'Tilman Slembeck propose des primes moins élevées pour les personnes qui renoncent volontairement aux thérapies de prolongement de la vie en phase terminale.',
+    'blog.article.premi-slembeck-terapie-terminali.imageAlt': 'Proposition de primes d\'assurance maladie réduites en Suisse',
 };
 
 export default blogMetaChFr;
