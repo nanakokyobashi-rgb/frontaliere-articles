@@ -136,6 +136,7 @@ const BODIES = Object.freeze({
       '',
       '- CAUSA: una cosa sola.',
       '- FIX: toccare un file.',
+      '- Suggested action: chiamare `resolveCollectionPageSchema()`.',
       '',
       '## Origine',
       '',
@@ -317,7 +318,8 @@ test('i tre gemelli restano allineati su conteggio stretto e scope del titolo (#
   const keywordBody = 'Il corpo cita sweep, batch e bulk come prosa, non come item.';
   assert.equal(isAggregate(singleTitle, keywordBody), false);
   assert.equal(isAggregateTitle(singleTitle, keywordBody), false);
-  assert.equal(isAvoidableAlreadyFixed(singleTitle, ['follow-up'], keywordBody), true);
+  assert.equal(isAvoidableAlreadyFixed(singleTitle, ['follow-up'], keywordBody), false,
+    'il conteggio esplicito N=1 sopprime il fallback keyword e senza acceptance non è contabile');
   assert.equal(isAvoidableMaxTurns(singleTitle, [], false, keywordBody), true);
 });
 

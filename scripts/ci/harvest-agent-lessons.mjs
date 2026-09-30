@@ -13,7 +13,10 @@
 //   - prints a human summary to stdout
 //   - appends `has_novel=<bool>` and `novel_count=<n>` to $GITHUB_OUTPUT
 //
-// Env knobs: WINDOW_DAYS (14), THRESHOLD (3), MAX_PRS (40), MAX_ISSUES (120).
+// Env knobs: WINDOW_DAYS (14), THRESHOLD (3), MAX_PRS (0), MAX_ISSUES (0).
+// MAX_PRS / MAX_ISSUES a 0 = nessun tetto: la finestra si legge INTERA (vedi
+// `collectWindow`). Un tetto esplicito resta possibile, ma viene dichiarato
+// come vista parziale, mai applicato in silenzio.
 //
 // Pure helpers (detectSeverity / tallyFindings / bucketFinding / issueClass /
 // severityLabelForCount / parseEscalationKey) are exported and unit-tested; the
@@ -25,17 +28,35 @@ import fs from 'node:fs';
 import { createGithubIssue } from '../lib/github-issue-creator.mjs';
 import { FIX_OUTCOME_RE } from './close-recovered-failure-issues.mjs';
 import { FALSE_POSITIVE_DECLARATION_RE } from './lib/false-positive-declaration.mjs';
-import { isManagedReview } from './lib/constants.mjs';
+import { REVIEWER_BOT_LOGIN_RE } from './lib/constants.mjs';
+import { isExplicitNonFunnelDisposition, isMalformedReviewBody } from './lib/review-findings.mjs';
 import { intFromEnv } from '../lib/int-from-env.mjs';
-import { hasEnumeratedItems } from './followup-resolution-match.mjs';
-import { isAggregateForAnalytics } from './check-issue-already-resolved.mjs';
+import { ACCEPTANCE_CONDITION, hasEnumeratedItems } from './followup-resolution-match.mjs';
+import { isAggregate, isAggregateForAnalytics } from './check-issue-already-resolved.mjs';
 
 export { hasEnumeratedItems };
 
 const WINDOW_DAYS = intFromEnv('WINDOW_DAYS', 14);
 const THRESHOLD = intFromEnv('THRESHOLD', 3);
-const MAX_PRS = intFromEnv('MAX_PRS', 40);
-const MAX_ISSUES = intFromEnv('MAX_ISSUES', 120);
+// Default 0 = nessun tetto. Fino al 2026-09-27 erano 40 e 120, e la «finestra
+// di 14 giorni» era una finzione: il sito mergia 70-120 PR al giorno (999 PR
+// dal 13 al 27-09), quindi `--limit 40` leggeva le review delle ultime ~12 ore;
+// le issue `agent:triaged` aggiornate nella finestra erano 664 e ne entravano
+// 120. Misurato sulla stessa finestra: capped 0 NOVEL / 0 ESCALATE per 30+ run
+// di fila, finestra intera 1 NOVEL + 2 ESCALATE. Il corpus (126 PR, 182 issue
+// in 14 giorni) ne leggeva abbastanza da produrre lezioni, e per questo il
+// difetto sembrava del solo sito.
+const MAX_PRS = intFromEnv('MAX_PRS', 0);
+const MAX_ISSUES = intFromEnv('MAX_ISSUES', 0);
+// La search API di GitHub restituisce al massimo 1000 risultati per query:
+// oltre, `gh ... --limit N` si ferma senza errore. Per questo la finestra si
+// legge un giorno alla volta (`collectWindow`) e un giorno che tocca il tetto
+// viene dichiarato troncato.
+export const SEARCH_RESULT_CAP = 1000;
+// `gh pr list --json reviews` / `gh issue list --json comments` leggono al
+// massimo 100 nodi annidati per elemento: chi li raggiunge viene riletto con
+// `gh pr view` / `gh issue view`, che paginano.
+export const NESTED_PAGE_CAP = 100;
 const OUT = process.env.HARVEST_OUT || 'harvest-clusters.json';
 const NO_AUTOCLOSE = process.env.FOLLOWUP_NO_AUTOCLOSE === '1' || process.env.NO_AUTOCLOSE === '1';
 // EFFICACY_FACTOR: a documented pattern that STILL recurs at ≥ THRESHOLD×factor
@@ -60,6 +81,116 @@ function ghJson(args) {
   try { return JSON.parse(raw); } catch { return null; }
 }
 
+// Le liste della finestra portano body e commenti: una pagina GraphQL da 100
+// issue puo' rispondere 504 (misurato il 2026-09-27 su `updated:2026-09-27`).
+// Un 504 e' transitorio, quindi si ritenta prima di dichiarare il giorno fallito.
+function ghJsonRetry(args, attempts = 3) {
+  for (let i = 1; i <= attempts; i++) {
+    const out = ghJson(args);
+    if (out !== null) return out;
+    if (i < attempts) Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 3000 * i);
+  }
+  return null;
+}
+
+// ---- Window coverage (pure → unit-tested) ----------------------------------
+/**
+ * I giorni UTC `YYYY-MM-DD` da `sinceDay` a `todayDay` inclusi.
+ * @param {string} sinceDay
+ * @param {string} todayDay
+ * @returns {string[]}
+ */
+export function windowDays(sinceDay, todayDay) {
+  const days = [];
+  const end = Date.parse(`${todayDay}T00:00:00Z`);
+  for (let t = Date.parse(`${sinceDay}T00:00:00Z`); Number.isFinite(t) && t <= end; t += 86_400_000) {
+    days.push(new Date(t).toISOString().slice(0, 10));
+  }
+  return days;
+}
+
+/**
+ * Legge la finestra un giorno alla volta e unisce per `number`. `fetchDay`
+ * restituisce le righe del giorno, oppure `null` se la lettura e' fallita.
+ * Un giorno che raggiunge `cap` righe e' TRONCATO dalla search API; un giorno
+ * fallito e' un BUCO: entrambi finiscono nel risultato, perche' una finestra
+ * letta a meta' che si dichiara intera e' esattamente il guasto che ha tenuto
+ * l'harvester del sito a zero lezioni per settimane.
+ * @param {string[]} days
+ * @param {(day: string) => Array<{number: number}> | null} fetchDay
+ * @param {{cap?: number}} [opts]
+ */
+export function collectWindow(days, fetchDay, { cap = SEARCH_RESULT_CAP } = {}) {
+  const byNumber = new Map();
+  const truncatedDays = [];
+  const failedDays = [];
+  for (const day of days) {
+    const rows = fetchDay(day);
+    if (!Array.isArray(rows)) { failedDays.push(day); continue; }
+    if (rows.length >= cap) truncatedDays.push(day);
+    for (const r of rows) {
+      if (r && r.number != null && !byNumber.has(r.number)) byNumber.set(r.number, r);
+    }
+  }
+  const items = [...byNumber.values()].sort((a, b) => b.number - a.number);
+  return { items, truncatedDays, failedDays };
+}
+
+/**
+ * Un giorno della finestra con ripiego: prima la lista completa (una query);
+ * se fallisce, la lista leggera idratata elemento per elemento. `null` solo se
+ * falliscono entrambe, e allora `collectWindow` dichiara il giorno mancante.
+ * @template T
+ * @param {() => T[] | null} fetchFull
+ * @param {() => T[] | null} fetchLight
+ * @param {(item: T) => T} hydrate
+ * @returns {T[] | null}
+ */
+export function fetchDayWithFallback(fetchFull, fetchLight, hydrate) {
+  const full = fetchFull();
+  if (Array.isArray(full)) return full;
+  const light = fetchLight();
+  if (!Array.isArray(light)) return null;
+  return light.map(hydrate);
+}
+
+/**
+ * Tetto opzionale: `max` 0 = nessun tetto. Restituisce anche se ha tagliato,
+ * cosi' il chiamante lo dichiara invece di tacerlo.
+ * @template T
+ * @param {T[]} items
+ * @param {number} max
+ * @returns {{items: T[], cut: number}}
+ */
+export function applyCap(items, max) {
+  if (!max || items.length <= max) return { items, cut: 0 };
+  return { items: items.slice(0, max), cut: items.length - max };
+}
+
+/**
+ * Le righe `::warning::` di copertura: vuote quando la finestra e' stata
+ * letta per intero.
+ * @param {string} label
+ * @param {{truncatedDays: string[], failedDays: string[]}} window
+ * @param {number} cut
+ * @param {number[]} [unreadItems] elementi letti senza i loro nodi annidati
+ * @returns {string[]}
+ */
+export function coverageWarnings(label, { truncatedDays, failedDays }, cut, unreadItems = []) {
+  const out = [];
+  if (truncatedDays.length) {
+    out.push(`::warning::${label}: giorni al tetto della search API (${SEARCH_RESULT_CAP}), vista PARZIALE: ${truncatedDays.join(', ')}`);
+  }
+  if (failedDays.length) {
+    out.push(`::warning::${label}: lettura fallita, giorni MANCANTI dalla finestra: ${failedDays.join(', ')}`);
+  }
+  if (cut) out.push(`::warning::${label}: tetto esplicito, ${cut} elementi della finestra esclusi (vista PARZIALE)`);
+  if (unreadItems.length) {
+    out.push(`::warning::${label}: commenti illeggibili per ${unreadItems.length} elementi, vista PARZIALE: ${unreadItems.map((n) => `#${n}`).join(', ')}`);
+  }
+  return out;
+}
+
 // ---- Reviewer-finding taxonomy: stable buckets via regex on finding text. ----
 // Each finding (a 🔴/🟡/❓ line in a reviewer review body) maps to ONE bucket so
 // recurrence is countable without fuzzy NLP. `docKeys` are substrings searched
@@ -75,16 +206,54 @@ function ghJson(args) {
 //     `recurringDespiteRule` → the prose rule isn't working → escalate to a
 //     STRUCTURAL fix (template / CI gate / shared module), not another line.
 //     (These 4 buckets were the harvester's blind spot until 2026-06-04.)
+const ADSENSE_BOT_GATE_AD_SURFACE = String.raw`(?:\badsense\b|\badsbygoogle\b|\bauto[- ]?ads?\b|\bads?\b|\badvertising\b|\badvertisements?\b|\bcta\b)`;
+const ADSENSE_BOT_GATE_SIGNAL = String.raw`(?:\b(?:bot|bots)\b|\banti[- ]?bot\b|\bautomation(?:[- ]?(?:gate|classifier|detector|signature))?\b|\bscreen\s+signature\b|\bfalse\s+positive\b|\b(?:real|legitimate)\s+(?:session|user)\b)`;
+const ADSENSE_BOT_GATE_RE = new RegExp(
+  String.raw`(?:${ADSENSE_BOT_GATE_AD_SURFACE}[\s\S]{0,180}${ADSENSE_BOT_GATE_SIGNAL}|${ADSENSE_BOT_GATE_SIGNAL}[\s\S]{0,180}${ADSENSE_BOT_GATE_AD_SURFACE})`,
+  'i',
+);
 const TAXONOMY = [
   { key: 'structured-data', re: /structured data|json-?ld|basesalary|postalcode|hiringorganization|jobposting/i, docKeys: ['structured data', 'json-ld', 'basesalary'] },
   { key: 'missing-test-funnel', re: /missing test|test mancant|no test|senza test|test coverage/i, docKeys: ['test coverage', 'test mancant', 'senza test'] },
   { key: 'time-bomb-hardcoded', re: /hardcoded|time-?bomb|absolute date|aged? out|invecchia|date assolut/i, docKeys: ['date assolut', 'time-bomb', 'daysago'] },
+  // AdSense findings need a structural subtype before the generic topic bucket.
+  // The old flat regex grouped unrelated reviewer findings from #10030, #10028,
+  // #9836, #9835 and #9492 into `auto-ads`, so the harvester escalated a topic
+  // even though no single antipattern recurred. Keep the threshold unchanged;
+  // improve the measurement by preserving the failure mode in the bucket key.
+  //
+  // `noindex`/`indexable` alone are deliberately NOT thin-content evidence:
+  // SEO parser and audit findings mention both routinely, while `ad` alone also
+  // appears in ordinary prose such as "metadata"/"head". Require an explicit
+  // content-floor signal and an explicit ad-unit surface in the same finding.
+  // This keeps a real "thin page still carries AdSense" finding countable while
+  // leaving unrelated noindex, missing-ad and generic SEO findings to their own
+  // bucket/fingerprint (measured on #10177, #10037 and #9910).
+  { key: 'adsense-thin-content', re: new RegExp(
+    String.raw`(?:(?:thin(?:[- ]content)?|word[- ]?count|below[- ]floor|mfa)[\s\S]{0,220}(?:adsense|adsbygoogle|auto[- ]?ads|manual\s+(?:ad|adsense)|multiplex|<ins\b|(?:ad|ads)\s+(?:unit|slot|block|snippet|placement)|(?:unit|slot|block|snippet|placement)\s+(?:ad|ads))|(?:adsense|adsbygoogle|auto[- ]?ads|manual\s+(?:ad|adsense)|multiplex|<ins\b|(?:ad|ads)\s+(?:unit|slot|block|snippet|placement)|(?:unit|slot|block|snippet|placement)\s+(?:ad|ads))[\s\S]{0,220}(?:thin(?:[- ]content)?|word[- ]?count|below[- ]floor|mfa))`,
+    'i',
+  ), docKeys: ['auto ads', 'adsense'] },
+  { key: 'adsense-slot-lifecycle', re: /(?:(?:static[- ]slot|drive[- ]by|adsbygoogle|<ins>)[\s\S]{0,180}(?:collapse|timeout|consent|no[- ]ads|unfilled|watcher)|(?:collapse|timeout|consent|no[- ]ads|unfilled|watcher)[\s\S]{0,180}(?:static[- ]slot|drive[- ]by|adsbygoogle|<ins>))/i, docKeys: ['auto ads', 'adsense'] },
+  // Keep both sides explicit and word-bounded. The previous `ads?`/`bot`
+  // fragments matched the tail of ordinary words (`load` + `automation`,
+  // `advertised` + `antiBotChallenge`, `ad` + `both`, `instead` +
+  // `antiBotExhausted`) and turned unrelated funnel findings into this bucket
+  // (#10209). A bot-gate finding must mention an ad surface and a genuine
+  // bot/automation signal; short substrings are not evidence.
+  { key: 'adsense-bot-gate', re: ADSENSE_BOT_GATE_RE, docKeys: ['auto ads', 'adsense'] },
+  { key: 'adsense-loader-contract', re: /(?:(?:adsense|adsbygoogle|auto ?ads)[\s\S]{0,220}(?:loader|script|asset|chunk|cdn|same[- ]origin|missing|absent|drop|zero|offload)|(?:loader|script|asset|chunk|cdn|same[- ]origin|missing|absent|drop|zero|offload)[\s\S]{0,220}(?:adsense|adsbygoogle|auto ?ads))/i, docKeys: ['auto ads', 'adsense'] },
   { key: 'cls-layout', re: /\bcls\b|layout shift|reflow|reserve space|min-h-|aspect-ratio/i, docKeys: ['cls', 'reserve space', 'layout shift'] },
   { key: 'auto-ads', re: /auto ?ads|adsense|anchor ad|vignette|in-page ad/i, docKeys: ['auto ads', 'adsense'] },
   // Precedence is intentional: when a finding mentions both surfaces, the
   // topic bucket wins before the sibling-sweep process bucket below.
-  { key: 'canonical-sitemap', re: /canonical|sitemap|noindex|cross-section/i, docKeys: ['canonical', 'sitemap', 'noindex'] },
-  { key: 'workflow-scope-creds', re: /workflows? scope|github_pat|\bpat\b|credential|secret|branch protection|push.*workflow/i, docKeys: ['workflows`', 'capability-guard', 'github_pat'] },
+  { key: 'canonical-sitemap', re: /\b(?:canonical|sitemaps?|noindex|cross-section)\b/i, docKeys: ['canonical', 'sitemap', 'noindex'] },
+  // Keep this bucket about authentication/capability mistakes. The former
+  // `push.*workflow` alternative matched any workflow finding whose prose
+  // mentioned a push and later said "workflow" (#9566/#9326/#9218), merging
+  // trigger/retry correctness with credential scope and repeatedly re-firing
+  // this escalation. Those findings still go through the fingerprint safety
+  // net; they must not inflate the credential bucket.
+  { key: 'workflow-scope-creds', re: /workflows? scope|github_pat|github[_ .-]?token|\bpat\b|app token|credential|secret|branch protection|token\s+(?:scope|permission|capabilit)/i, docKeys: ['workflows`', 'capability-guard', 'github_pat'] },
   // i18n-NAMING: genuine naming/i18n defects only — locale URL segments, translated
   // brand names, canton-aware slug naming, missing/untranslated keys. The old regex
   // `/locale|i18n|translat|canton-?aware|naming|brand/i` was far too loose: the bare
@@ -247,6 +416,17 @@ export function isGenuinePrBodyContractViolation(text) {
 // Pure → unit-tested, mirrors isGenuinePrBodyContractViolation's structure.
 const SIBLING_CLASS_AFFIRM_RE =
   /nessun\w*\s*(?:[\u{1F534}\u{1F7E1}]\s*\/?\s*)*(?:da propagare|altro finding|bug replicat\w*|antipattern replicat\w*)|nessun\s+sibling\s+resid\w*|no inconsistenc\w*|not a candidate for|correctly mirrors? the sibling|coerente\s+(?:col|con il)\s+sibling|match(?:es)?\s+the sibling'?s?\s+(?:proven\s+)?(?:pattern|guard)/iu;
+// A bare `sibling` is not evidence of an AGENTS.md #6 violation. Reviewer
+// findings also use it for semantic neighbours (`same-level sibling` in a DOM
+// parser), for scope prose (`consumer sibling`), or for a checker feature that
+// is merely being described. Those lines must not inflate this process bucket.
+// Keep the positive side explicit: a class finding needs an actionable relation
+// between the sibling and the repeated construct/sweep. Ambiguous lines fall
+// through to the fingerprint safety net in `bucketFinding`, so this guard does
+// not discard the reviewer finding; it only refuses to call it a sibling-class
+// recurrence without evidence.
+const SIBLING_CLASS_EVIDENCE_RE =
+  /(?:\b(?:stesso|same)\s+(?:anti-?pattern|costrutto|construct|pattern|bug|guard|logic|class)\b|\b(?:file|script|workflow|consumer|ramo|branch)\s+gemell\w*\b|\b(?:sibling|gemell\w*)\b[^.\n]{0,120}\b(?:non|not|never|mai|still|resta|lasciat\w*|left|remain\w*|unchanged|untouched|unfixed|unaddressed|omess\w*|manc\w*|sweep\w*|check\w*|guard\w*|pattern\w*|bug\w*|fix\w*|modif\w*|chang\w*|address\w*|propagat\w*)\b|\b(?:non|not|never|mai|still|resta|lasciat\w*|left|remain\w*|unchanged|untouched|unfixed|unaddressed|omess\w*|manc\w*|diverg\w*|different|unlike)\b[^.\n]{0,120}\b(?:sibling|gemell\w*)\b)/iu;
 // Negation-aware false-positive-declaration matcher, shared with
 // sibling-check-gate.mjs's isDeclaredFalsePositive (issue #3367 — the two
 // copies drifted when kept in sync by docstring promise only).
@@ -258,9 +438,10 @@ export function isGenuineSiblingClassViolation(text) {
   // (b) the line AFFIRMS the sweep is complete / nothing to propagate → not a
   //     defect, even if it contains 🔴/🟡 glyphs as prose rather than a marker.
   if (SIBLING_CLASS_AFFIRM_RE.test(s)) return false;
-  // Default: no affirmation, no declared false positive → conservative: keep as
-  // a genuine (possibly deferred-but-real) sibling-class finding.
-  return true;
+  // A class relation is required before this process bucket can claim the line.
+  // Scope-only and semantic-neighbour mentions remain available to the generic
+  // fingerprint path instead of being mistaken for an unswept sibling.
+  return SIBLING_CLASS_EVIDENCE_RE.test(s);
 }
 
 // ---- NEGATED-IMPACT recap clauses (DETERMINISTIC, cross-bucket) ------------
@@ -372,6 +553,39 @@ export function stripNegatedImpactClauses(text) {
       SWEEP_ASSERTION_RE.test(sentenceAround(whole, offset, offset + match.length)) ? match : prefix + ' ');
 }
 
+// ---- `canonical-sitemap` false-positive guard -----------------------------
+// The topic regex is intentionally broad enough to catch every SEO surface,
+// but `canonical` is also a common application-domain adjective: canonical
+// vacancy links, canonical replacements, archive canonicalizers, and canonical
+// route URLs are not sitemap/canonical SEO findings. Once the negated-impact
+// recap is stripped, require an explicit SEO defect/surface signal before
+// assigning the topic bucket. Unmatched lines still reach fingerprintFinding()
+// below, so narrowing this bucket cannot silently discard a real recurrence.
+const NON_SEO_CANONICAL_MENTION_RE =
+  /\bcanonical(?:izer)?\b\s+(?:vacancy|job|listing|replacement|record|row|entry|entries|id|key|data(?:set)?|fallback|route|routes|slug|component|hub|duty|history|source|snapshot|payload|stats?|archive|document)\b/i;
+
+const CANONICAL_SEO_DEFECT_RE =
+  /\b(?:canonical[- ](?:missing|mismatch|drift)|self[- ]canonical|non[- ]canonical|rel\s*=\s*["']?canonical\b|canonical\s+(?:href|tag|markup|link)\b|(?:empty|missing|invalid|wrong|incorrect|broken|drift|mismatch|unset|unresolved|manca\w*|mancante|non\s+(?:emette|emesso|aggiorna|aggiornato|punta|include)|does\s+not\s+(?:emit|set|include|point)|fails?\s+to\s+(?:emit|set|include|point))[^.\n]{0,70}\bcanonical(?:s)?\b|\bcanonical(?:s)?\b[^.\n]{0,70}\b(?:mismatch|drift|missing|invalid|wrong|incorrect|broken|unresolved|consolidat\w*|redirect\w*|self[- ]canonical)\b|(?:tocca|touch(?:es)?|affect(?:s)?|impatt\w*)[^.\n]{0,45}\bcanonical(?:s)?\b)/i;
+
+const SITEMAP_SEO_DEFECT_RE =
+  /\b(?:sitemaps?|noindex)\b[^.\n]{0,100}\b(?:missing|empty|unsupported|stale|wrong|incorrect|broken|not|doesn['’]?t|does\s+not|fails?|omits?|drop(?:s|ped)?|update(?:s|d)?|aggiorna\w*|publish(?:es|ed)?|pubblic\w*|republish(?:es|ed)?|ripubblic\w*|emit(?:s|ted)?|emett\w*|noindex|non[- ]canonical|canonical|loc|inventory|coverage|redirect\w*|unreachable|include(?:s|d)?|listed)\b|\b(?:missing|empty|unsupported|stale|wrong|incorrect|broken|not|doesn['’]?t|does\s+not|fails?|omits?|drop(?:s|ped)?|update(?:s|d)?|aggiorna\w*|publish(?:es|ed)?|pubblic\w*|republish(?:es|ed)?|ripubblic\w*|emit(?:s|ted)?|emett\w*|noindex|non[- ]canonical|canonical|loc|inventory|coverage|redirect\w*|unreachable|include(?:s|d)?|listed)[^.\n]{0,100}\b(?:sitemaps?|noindex)\b/i;
+
+export function isGenuineCanonicalSitemapFinding(text) {
+  const s = String(text || '');
+  if (!s) return false;
+  // noindex is an SEO indexing directive by definition; the negated-impact
+  // strip has already removed the "not touched" recap when this is called from
+  // bucketFinding().
+  if (/\bnoindex\b/i.test(s)) return true;
+  if (/\bsitemaps?\b/i.test(s)) return SITEMAP_SEO_DEFECT_RE.test(s);
+  if (/\bcross-section\b/i.test(s)) {
+    return /\b(?:canonical|indexable|hreflang|robots?|google|seo)\b/i.test(s) &&
+      /\b(?:mismatch|drift|missing|wrong|incorrect|broken|non[- ]canonical|self[- ]canonical|not|fails?|cross-section)\b/i.test(s);
+  }
+  if (NON_SEO_CANONICAL_MENTION_RE.test(s)) return false;
+  return CANONICAL_SEO_DEFECT_RE.test(s);
+}
+
 export function bucketFinding(text) {
   // I bucket si scelgono sul testo SENZA le ricognizioni negate: una sitemap
   // nominata solo per dire che non e' stata toccata non e' un finding su di lei.
@@ -391,6 +605,11 @@ export function bucketFinding(text) {
     // declared false positives so the bucket counts only genuine unswept-sibling
     // findings, mirroring pr-body-contract's filter above.
     if (t.key === 'sibling-class-fix' && !isGenuineSiblingClassViolation(text)) continue;
+    // `canonical` is overloaded outside SEO (canonical vacancy links, archive
+    // canonicalizers, canonical replacements, route URLs). Keep those lines in
+    // the fingerprint safety-net instead of inflating the canonical-sitemap
+    // topic with unrelated reviewer findings.
+    if (t.key === 'canonical-sitemap' && !isGenuineCanonicalSitemapFinding(scannable)) continue;
     return t.key;
   }
   // La rete fingerprint riceve il testo INTERO, non quello strippato. Lo strip e'
@@ -449,18 +668,48 @@ export function detectSeverity(line) {
 // the same way it already filters fix-outcome ones (#5516: without this stamp
 // a bucket re-fires on the SAME pre-fix occurrences forever, indistinguishable
 // from a rule that never worked).
+/**
+ * Le righe di un body di review. Un body malformato (`isMalformedReviewBody`:
+ * tutto su una riga con `\n` LETTERALI, difetto del reviewer del 13-19/09
+ * spento da #9781) si divide solo dopo aver riportato quei `\n` ad a-capo veri:
+ * altrimenti l'intero body e' UNA riga, `detectSeverity` ci trova il primo glifo
+ * di qualunque finding, e la rete fingerprint la battezza con le prime parole
+ * del body (`<!-- CODEX_FALLBACK_REVIEW -->\n\n## Scope ...`). Sulla finestra
+ * 14-28/09 del sito queste review generavano il cluster fantasma
+ * `fp:codex-fallback-review-scope` (×18) — riproposto ogni giorno alla proposta
+ * Codex e scartato ogni giorno (#10153, #10212). Un body sano non viene toccato:
+ * un `\n` letterale citato in prosa resta testo.
+ * @param {unknown} body
+ * @returns {string[]}
+ */
+export function reviewBodyLines(body) {
+  const raw = String(body ?? '');
+  const text = isMalformedReviewBody(raw) ? raw.replace(/\\n/gu, '\n') : raw;
+  return text.split('\n');
+}
+
 export function tallyFindings(prs, { bucketOf = bucketFinding } = {}) {
   const counts = {};
   const examples = {};
   for (const { number, reviews, mergedAt } of prs || []) {
     const seenBuckets = new Set(); // per-PR dedup across all its reviews
     for (const r of reviews || []) {
-      if (!isManagedReview(r)) continue;
-      for (const line of String(r.body || '').split('\n')) {
+      // GraphQL exposes bot logins without the REST [bot] suffix.
+      const reviewerLogin = String(r.author?.login || '').replace(/\[bot\]$/i, '') + '[bot]';
+      if (!REVIEWER_BOT_LOGIN_RE.test(reviewerLogin)) continue;
+      for (const line of reviewBodyLines(r.body)) {
         const sev = detectSeverity(line);
         if (!sev || !COUNTABLE_SEVERITIES.has(sev)) continue;
         const bucket = bucketOf(line);
         if (!bucket) continue;
+        // REVIEW.md makes an explicitly disposed non-funnel Nit advisory and
+        // FOLLOWUP.md drops it. It is therefore not evidence that a documented
+        // stale-comment rule failed; counting it here made that bucket recur
+        // forever even when every example was marked `deferred, non funnel-critical`.
+        // Keep other process buckets (for example pr-body-contract) unchanged:
+        // their deterministic contracts still make a recurring Nit actionable.
+        // Keep 🔴 fail-closed: a red finding cannot self-dispose this way.
+        if (bucket === 'stale-comment' && sev === '🟡' && isExplicitNonFunnelDisposition(line)) continue;
         if (seenBuckets.has(bucket)) continue;
         seenBuckets.add(bucket);
         counts[bucket] = (counts[bucket] || 0) + 1;
@@ -491,7 +740,13 @@ export function tallyFindings(prs, { bucketOf = bucketFinding } = {}) {
 //      never be pre-empted by a content-token matcher.
 // Same feedback-loop class as the reconcile-bot / pre-flight-deterministic skips in
 // the outcome loop below: don't count burn that no safe gate could have prevented.
-// Pure → unit-tested. `labels` is an array of label-name strings.
+// A single-item follow-up is countable when the deterministic pre-flight has
+// actionable evidence: either the explicit `Suggested action` + distinctive
+// code-token contract, or a body keyword that the pre-flight still recognizes
+// (the analytics classifier intentionally excludes that body-only fallback).
+// Path-only or body-less follow-ups still need the Claude verification path, so
+// counting them here would recreate the false escalation loop tracked by #9109.
+// Pure → unit-tested. `labels` is an array of label names.
 export function isAvoidableAlreadyFixed(title, labels, body = '') {
   const names = Array.isArray(labels) ? labels : [];
   if (!names.includes('follow-up')) return false; // out of the gate's scope
@@ -499,7 +754,11 @@ export function isAvoidableAlreadyFixed(title, labels, body = '') {
   // its title-only keyword contract. A daily bucket is aggregate even with one
   // current item; it is processed item by item and must not be counted as burn.
   if (isAggregateForAnalytics(title, body)) return false;
-  return true; // single-item follow-up → the gate's real target → countable
+  // Keep this classifier aligned with deterministic pre-flight evidence. The
+  // body-keyword fallback is intentionally retained here because pre-flight
+  // recognizes it even though analytics does not (G5 contract).
+  if (ACCEPTANCE_CONDITION.holds(body) || isAggregate(title, body)) return true;
+  return false; // no actionable evidence → Claude verification is expected
 }
 
 // ---- `max-turns` avoidability classifier (DETERMINISTIC) --------------------
@@ -515,11 +774,11 @@ export function isAvoidableAlreadyFixed(title, labels, body = '') {
 //      ALL items in one run blows the budget by construction (#2332 = 5 items). The
 //      circuit-breaker already caps the run at ONE item; a death here is the
 //      multi-item attempt the breaker is meant to stop, not a fixable loop.
-//   2. Issues the drainer has ALREADY PARKED `needs-human` (malformed body / network
+//   2. Issues the drainer has ALREADY PARKED `automation-deferred` (malformed body / network
 //      -audit / repeated-death too-large): the deterministic pre-flight detected the
 //      structural non-fixability and stopped re-queueing. The lingering marker is the
 //      run that triggered the park, expected — not preventable burn.
-// Single-item, still-routable follow-ups that die at the cap (no `needs-human`) are
+// Single-item, still-routable follow-ups that die at the cap (no `automation-deferred`) are
 // the genuine signal — a fixable loop the budget should have covered → countable.
 // Same feedback-loop class as isAvoidableAlreadyFixed. Pure → unit-tested.
 // `labels` is an array of label-name strings.
@@ -595,7 +854,9 @@ export function isAvoidableMaxTurns(title, labels, delivery = false, body = '') 
   // (4) commits on `fix/issue-<N>` ahead of main → the run delivered recoverable work.
   if (hasRecoverableBranch) return false;
   // (2) drainer already parked it as structurally non-fixable → expected death.
-  if (names.includes('needs-human')) return false;
+  // `needs-human` resta compatibile per le decisioni reali del proprietario;
+  // `automation-deferred` è il percorso tecnico oggi prodotto dal drainer.
+  if (names.includes('needs-human') || names.includes('automation-deferred')) return false;
   // (1) aggregate multi-item/daily bucket → over-budget by construction
   // (circuit-breaker target), not a fixable loop. Reuse the shared predicate;
   // its explicit analytics mode keeps ordinary body prose from changing burn.
@@ -742,6 +1003,13 @@ export function isEscalationDriver(source, key) {
   if (source === 'fix-outcome' && bareKey === 'skip-duplicate-diagnosis') return false;
   if (source === 'fix-outcome' && bareKey === 'overlap-skip') return false;
   if (source === 'fix-outcome' && bareKey === 'pr-already-open') return false;
+  // revenue-tracker-manual is an intentional terminal handoff, not a
+  // repeatable agent mistake: its diagnosis may depend on an external provider,
+  // a production-only measurement, or a credential/dispatch owned outside the
+  // repository. Keep the marker in the volume summary, but do not let the
+  // heterogeneous manual cases manufacture a false "rule is not working"
+  // escalation.
+  if (source === 'fix-outcome' && bareKey === 'revenue-tracker-manual') return false;
   return true;
 }
 
@@ -886,6 +1154,115 @@ export function examplesSinceFix(examples, cutoffMs) {
   });
 }
 
+// ---- Registro versionato delle decisioni sui cluster -----------------------
+// `alreadyDocumented` riconosce un bucket della tassonomia dai suoi `docKeys`,
+// ma per un cluster `fp:<...>` (rete fingerprint) o per un codice `fix-outcome`
+// cerca la FRASE DEL FINGERPRINT nei doc, che una regola scritta in italiano
+// non contiene quasi mai. Risultato misurato: ogni giorno la proposta Codex
+// (10-16 min a run) ridecideva gli stessi cluster. `fp:scripts-funnel-treats-every`
+// e' tornato NOVEL il 28-09, il giorno dopo la regola di #10153;
+// `fp:body-not-closing-state` e' stato scartato il 27-09 (#10153) e accettato
+// il 28-09 (#10212) sugli stessi tre esempi.
+//
+// Il registro e' la memoria di quelle decisioni: una voce per cluster
+// (`<source>/<key>`, la stessa forma del titolo di escalation), con l'esito
+// (`added` = regola scritta, `declined` = scartato per scelta), l'istante e il
+// riferimento. Lo scrive la proposta Codex nella stessa PR in cui decide. Un
+// cluster registrato torna NOVEL solo se DOPO la decisione raccoglie di nuovo
+// ≥ soglia esempi (stesso filtro di `examplesSinceFix`); un `added` vale come
+// documentato, quindi puo' ancora escalare se la regola non funziona.
+export const LESSONS_REGISTRY_PATH = 'scripts/ci/lessons-harvester-registry.json';
+export const REGISTRY_OUTCOMES = Object.freeze(['added', 'declined']);
+const REGISTRY_KEY_RE = /^(?:reviewer-finding|fix-outcome|issue-class)\/\S+$/u;
+
+/** Chiave di registro di un cluster: `<source>/<key>`, come `escalationTitle`. */
+export function registryKey(source, key) {
+  return `${source}/${key}`;
+}
+
+/**
+ * Istante della decisione in epoch ms, o null. Una data sola (`YYYY-MM-DD`)
+ * vale fine giornata UTC: gli esempi dello stesso giorno li aveva gia' visti
+ * chi ha deciso, quindi non devono farlo riemergere.
+ * @param {unknown} decidedAt
+ */
+export function registryDecidedAtMs(decidedAt) {
+  const s = String(decidedAt ?? '').trim();
+  if (/^\d{4}-\d{2}-\d{2}$/u.test(s)) return Date.parse(`${s}T23:59:59.999Z`);
+  if (!/^\d{4}-\d{2}-\d{2}T/u.test(s)) return null;
+  const t = Date.parse(s);
+  return Number.isNaN(t) ? null : t;
+}
+
+/**
+ * Valida e indicizza il registro. Una voce non valida NON sopprime niente (il
+ * cluster torna a essere valutato come prima) e finisce in `errors`, che il
+ * main stampa come `::warning::` e il test sul file versionato fa fallire.
+ * Due voci con la stessa chiave: vince la decisione piu' recente.
+ * @param {string | object} raw
+ * @returns {{entries: Map<string, {key: string, outcome: string, decidedAt: string, decidedAtMs: number, ref: string, reason: string}>, errors: string[]}}
+ */
+export function parseLessonsRegistry(raw) {
+  const entries = new Map();
+  const errors = [];
+  let data;
+  try {
+    data = typeof raw === 'string' ? JSON.parse(raw) : raw;
+  } catch (err) {
+    return { entries, errors: [`JSON non valido: ${err.message}`] };
+  }
+  if (!Array.isArray(data?.entries)) return { entries, errors: ['manca l\'array `entries`'] };
+  data.entries.forEach((e, i) => {
+    const where = `entries[${i}]`;
+    const key = String(e?.key ?? '');
+    if (!REGISTRY_KEY_RE.test(key)) { errors.push(`${where}: key "${key}" non e' <source>/<key>`); return; }
+    if (!REGISTRY_OUTCOMES.includes(e?.outcome)) {
+      errors.push(`${where} (${key}): outcome "${e?.outcome}" non in ${REGISTRY_OUTCOMES.join('|')}`);
+      return;
+    }
+    const decidedAtMs = registryDecidedAtMs(e?.decidedAt);
+    if (decidedAtMs === null) { errors.push(`${where} (${key}): decidedAt "${e?.decidedAt}" non e' una data ISO`); return; }
+    const reason = String(e?.reason ?? '').trim();
+    if (!reason) { errors.push(`${where} (${key}): reason vuota`); return; }
+    const prev = entries.get(key);
+    if (prev && prev.decidedAtMs > decidedAtMs) return;
+    entries.set(key, { key, outcome: e.outcome, decidedAt: String(e.decidedAt), decidedAtMs,
+      ref: String(e?.ref ?? ''), reason });
+  });
+  return { entries, errors };
+}
+
+/**
+ * Legge il registro. File assente = registro vuoto (il corpus riceve questo
+ * script per mirror prima di avere un registro suo): nessuna soppressione.
+ * @param {string} [path]
+ * @param {(p: string, enc: string) => string} [readFile]
+ */
+export function loadLessonsRegistry(path = LESSONS_REGISTRY_PATH, readFile = fs.readFileSync) {
+  let raw;
+  try {
+    raw = readFile(path, 'utf-8');
+  } catch (err) {
+    if (err?.code === 'ENOENT') return { entries: new Map(), errors: [], missing: true };
+    return { entries: new Map(), errors: [`registro illeggibile: ${err.message}`] };
+  }
+  return parseLessonsRegistry(raw);
+}
+
+/**
+ * Stato di un cluster rispetto al registro. Senza voce: nessun effetto. Con
+ * voce: contano solo gli esempi successivi alla decisione, e il cluster
+ * «riemerge» solo se sono di nuovo ≥ soglia. Puro → testabile.
+ * @param {{decidedAtMs: number} | null | undefined} entry
+ * @param {Array<{at?: string}>} examples
+ * @param {number} [threshold]
+ */
+export function registryVerdict(entry, examples, threshold = THRESHOLD) {
+  if (!entry) return { registered: false, resurfaced: true, examplesSinceDecision: examples || [] };
+  const since = examplesSinceFix(examples, entry.decidedAtMs);
+  return { registered: true, resurfaced: since.length >= threshold, examplesSinceDecision: since };
+}
+
 function formatExamples(c) {
   return (c.examples || [])
     .map((e) => [e?.pr, e?.issue].find((value) => value !== null && value !== undefined && value !== ''))
@@ -934,20 +1311,35 @@ async function main() {
   // `mergedAt` fetched here (not from `pr view`) so tallyFindings can stamp each
   // example with it — needed so the post-fix re-escalation guard below can filter
   // reviewer-finding examples the same way it already filters fix-outcome ones.
-  const mergedPrs = ghJson(['pr', 'list', '--state', 'merged', '--search', `merged:>=${sinceDay}`,
-    '--limit', String(MAX_PRS), '--json', 'number,mergedAt']) || [];
+  // Reviews e commenti arrivano nella stessa lista (una query per giorno), non
+  // con un `view` per elemento: con la finestra intera il sito ha ~1000 PR e
+  // ~650 issue, e un `view` ciascuna costerebbe ~10 minuti di chiamate seriali.
+  const days = windowDays(sinceDay, new Date().toISOString().slice(0, 10));
+  const coverage = [];
+  const prWindow = collectWindow(days, (day) => ghJsonRetry(['pr', 'list', '--state', 'merged',
+    '--search', `merged:${day}`, '--limit', String(SEARCH_RESULT_CAP), '--json', 'number,mergedAt,reviews']));
+  const prCap = applyCap(prWindow.items, MAX_PRS);
+  coverage.push(...coverageWarnings('merged PRs', prWindow, prCap.cut));
+  const mergedPrs = prCap.items;
   const prReviews = [];
-  for (const { number, mergedAt } of mergedPrs) {
-    const data = ghJson(['pr', 'view', String(number), '--json', 'reviews']);
-    prReviews.push({ number, reviews: data?.reviews || [], mergedAt });
+  for (const { number, mergedAt, reviews } of mergedPrs) {
+    let all = reviews || [];
+    if (all.length >= NESTED_PAGE_CAP) {
+      const data = ghJson(['pr', 'view', String(number), '--json', 'reviews']);
+      if (data?.reviews) all = data.reviews;
+    }
+    prReviews.push({ number, reviews: all, mergedAt });
   }
   const { counts: findingCounts, examples: findingExamples } = tallyFindings(prReviews);
 
   // ---- 2. Recurring issue classes (created in window) ----
   const issueCounts = {};
   const issueExamples = {};
-  const allIssues = ghJson(['issue', 'list', '--state', 'all', '--search', `created:>=${sinceDay}`,
-    '--limit', String(MAX_ISSUES), '--json', 'number,title,labels']) || [];
+  const issueWindow = collectWindow(days, (day) => ghJsonRetry(['issue', 'list', '--state', 'all',
+    '--search', `created:${day}`, '--limit', String(SEARCH_RESULT_CAP), '--json', 'number,title,labels']));
+  const issueCap = applyCap(issueWindow.items, MAX_ISSUES);
+  coverage.push(...coverageWarnings('issues', issueWindow, issueCap.cut));
+  const allIssues = issueCap.items;
   for (const it of allIssues) {
     const cls = issueClass(it.title, it.labels);
     if (!cls) continue;
@@ -965,13 +1357,39 @@ async function main() {
   // land, not noise. Surfaced in the harvest output (and in $GITHUB_OUTPUT) so it is
   // visible without reading 31 run logs by hand.
   const recoverableMaxTurns = [];
-  const fixIssues = ghJson(['issue', 'list', '--search', `label:agent:triaged updated:>=${sinceDay}`,
-    '--state', 'all', '--limit', String(MAX_ISSUES), '--json', 'number,title,labels']) || [];
-  for (const issue of fixIssues.slice(0, MAX_ISSUES)) {
+  // `body` entra nella lista perche' i classificatori `isAvoidable*` lo leggono
+  // (`issue.body`): prima la lista chiedeva solo number,title,labels e il body
+  // arrivava sempre vuoto.
+  // Il giorno corrente porta le issue piu' attive, cioe' quelle coi thread piu'
+  // lunghi: la pagina con `comments` risponde 504 anche dopo i retry (run
+  // 36333749234, `updated:2026-09-27`, 3 tentativi su 3). Li' si ricade sulla
+  // lista leggera e sui commenti per issue, invece di perdere il giorno.
+  const fixListArgs = (day, fields) => ['issue', 'list', '--state', 'all',
+    '--search', `label:agent:triaged updated:${day}`, '--limit', String(SEARCH_RESULT_CAP), '--json', fields];
+  // Un `view` fallito nel ripiego NON diventa `comments: []` in silenzio: la
+  // issue finisce in `unreadItems` e la finestra si dichiara PARTIAL (review
+  // di #10118), perche' i suoi marker FIX_OUTCOME mancano dal conteggio.
+  const unreadFixIssues = [];
+  const fixWindow = collectWindow(days, (day) => fetchDayWithFallback(
+    () => ghJsonRetry(fixListArgs(day, 'number,title,labels,body,comments')),
+    () => ghJsonRetry(fixListArgs(day, 'number,title,labels,body')),
+    (it) => {
+      const view = ghJsonRetry(['issue', 'view', String(it.number), '--json', 'comments']);
+      if (!Array.isArray(view?.comments)) unreadFixIssues.push(it.number);
+      return { ...it, comments: view?.comments || [] };
+    },
+  ));
+  const fixCap = applyCap(fixWindow.items, MAX_ISSUES);
+  coverage.push(...coverageWarnings('fix-issues', fixWindow, fixCap.cut, unreadFixIssues));
+  const fixIssues = fixCap.items;
+  for (const issue of fixIssues) {
     const { number } = issue;
     const labelNames = (issue.labels || []).map((l) => l.name);
-    const data = ghJson(['issue', 'view', String(number), '--json', 'comments']);
-    const comments = data?.comments || [];
+    let comments = issue.comments || [];
+    if (comments.length >= NESTED_PAGE_CAP) {
+      const data = ghJson(['issue', 'view', String(number), '--json', 'comments']);
+      if (data?.comments) comments = data.comments;
+    }
     // Dedup PER-ISSUE: una stessa issue ri-accodata dal followup-drainer (rescue
     // a 3 tentativi) può postare lo STESSO marker N volte. Contarli tutti gonfia
     // il bucket (3 run di UNA issue → conta 3) e fa scattare l'escalation su una
@@ -1025,7 +1443,7 @@ async function main() {
       if (code === 'already-fixed' && !isAvoidableAlreadyFixed(issue.title, labelNames, issue.body || '')) continue;
       // `max-turns` on an aggregate multi-item issue (over-budget by construction,
       // the per-item circuit-breaker's target) or on an issue the drainer has already
-      // parked `needs-human` (structurally non-fixable: malformed body / network-audit
+      // parked `automation-deferred` (structurally non-fixable: malformed body / network-audit
       // / repeated-death) is an EXPECTED deterministic death, not a fixable loop → no
       // actionable structural fix beyond what shipped (#2291 + circuit-breaker), so
       // don't escalate it (root cause of #2439: bucket re-fired at 14/14d, examples
@@ -1079,6 +1497,10 @@ async function main() {
     '--search', 'ricorre nonostante regola in:title',
     '--json', 'number,title,closedAt', '--limit', '100']) || [];
 
+  // ---- Registro delle decisioni (vedi parseLessonsRegistry) ----
+  const registryPath = process.env.HARVEST_REGISTRY || LESSONS_REGISTRY_PATH;
+  const registry = loadLessonsRegistry(registryPath);
+
   // ---- Assemble clusters above threshold + novel ----
   const clusters = [];
   // `driver`: clusters that can drive a doc-rule proposal (an agent repeating a
@@ -1091,21 +1513,37 @@ async function main() {
     for (const [key, count] of Object.entries(counts)) {
       if (count < THRESHOLD) continue;
       const driver = isEscalationDriver(source, key);
-      const documented = alreadyDocumented(key, corpus);
+      const regKey = registryKey(source, key);
+      const reg = registry.entries.get(regKey) || null;
+      // Una regola registrata come `added` vale come documentata anche quando
+      // la sua prosa non contiene la frase del fingerprint.
+      const documented = alreadyDocumented(key, corpus) || reg?.outcome === 'added';
       const allExamples = examples[key] || [];
+      const decision = registryVerdict(reg, allExamples);
       // A bucket whose last escalation was already closed via a shipped fix
       // shouldn't re-fire on the SAME pre-fix occurrences still sitting in the
       // trailing window — only count what happened AFTER that fix landed.
-      const cutoff = TIMESTAMPED_SOURCES.has(source)
+      // Stesso ragionamento per una regola `added` dal registro: la sua
+      // efficacia si misura sugli esempi successivi alla regola.
+      const escalationCutoff = TIMESTAMPED_SOURCES.has(source)
         ? lastEscalationClosedAt(`${source}/${key}`, closedEscalations)
         : null;
+      const ruleCutoff = TIMESTAMPED_SOURCES.has(source) && reg?.outcome === 'added' ? reg.decidedAtMs : null;
+      const cutoff = escalationCutoff === null ? ruleCutoff
+        : ruleCutoff === null ? escalationCutoff : Math.max(escalationCutoff, ruleCutoff);
       const liveExamples = TIMESTAMPED_SOURCES.has(source) ? examplesSinceFix(allExamples, cutoff) : allExamples;
       const effectiveCount = TIMESTAMPED_SOURCES.has(source) ? liveExamples.length : count;
       // Documented + still recurring hard (post-fix) = the rule exists but isn't working.
       const recurringDespiteRule = driver && documented && effectiveCount >= THRESHOLD * EFFICACY_FACTOR;
-      clusters.push({ source, key, count, driver, novel: driver && !documented,
+      // Un cluster gia' deciso torna NOVEL solo con ≥ soglia esempi nuovi.
+      const novel = driver && !documented && decision.resurfaced;
+      const shown = reg && decision.examplesSinceDecision.length ? decision.examplesSinceDecision
+        : liveExamples.length ? liveExamples : allExamples;
+      clusters.push({ source, key, registryKey: regKey, count, driver, novel,
         recurringDespiteRule, alreadyDocumented: documented,
-        examples: (liveExamples.length ? liveExamples : allExamples).slice(0, 5) });
+        registry: reg ? { outcome: reg.outcome, decidedAt: reg.decidedAt, ref: reg.ref,
+          examplesSinceDecision: decision.examplesSinceDecision.length } : null,
+        examples: shown.slice(0, 5) });
     }
   }
   consider('reviewer-finding', findingCounts, findingExamples);
@@ -1119,16 +1557,28 @@ async function main() {
   const result = { generatedForWindowDays: WINDOW_DAYS, threshold: THRESHOLD,
     efficacyFactor: EFFICACY_FACTOR, since: sinceDay, totalClusters: clusters.length,
     novelClusters: novel.length, escalationClusters: escalations.length, clusters,
-    recoverableMaxTurns };
+    recoverableMaxTurns,
+    registry: { path: registryPath, entries: registry.entries.size, missing: Boolean(registry.missing),
+      errors: registry.errors },
+    coverage: { days: days.length, mergedPrs: mergedPrs.length, issues: allIssues.length,
+      fixIssues: fixIssues.length, partial: coverage.length > 0, warnings: coverage } };
   fs.writeFileSync(OUT, JSON.stringify(result, null, 2));
 
   // ---- Human summary ----
   console.log(`Lessons harvest — window ${WINDOW_DAYS}d (since ${sinceDay}), threshold ≥${THRESHOLD}`);
-  console.log(`Merged PRs scanned: ${mergedPrs.length} · issues scanned: ${allIssues.length} · fix-issues: ${fixIssues.length}`);
+  console.log(`Registro decisioni: ${registry.entries.size} voci (${registryPath}${registry.missing ? ', assente' : ''})`);
+  for (const e of registry.errors) console.log(`::warning::registro ${registryPath}: ${e}`);
+  console.log(`Merged PRs scanned: ${mergedPrs.length} · issues scanned: ${allIssues.length} · fix-issues: ${fixIssues.length}` +
+    ` · window: ${days.length} days, ${coverage.length ? 'PARTIAL' : 'complete'}`);
+  for (const w of coverage) console.log(w);
   if (!clusters.length) console.log('No recurring clusters above threshold.');
   for (const c of clusters) {
-    const tag = c.novel ? 'NOVEL' : c.recurringDespiteRule ? 'ESCALATE' : 'documented';
-    console.log(`  [${tag}] ${c.source}/${c.key} ×${c.count}` +
+    const tag = c.novel ? 'NOVEL' : c.recurringDespiteRule ? 'ESCALATE'
+      : c.registry ? `registered:${c.registry.outcome}` : 'documented';
+    const reg = c.registry
+      ? ` [registro ${c.registry.outcome} ${c.registry.decidedAt} ${c.registry.ref}, +${c.registry.examplesSinceDecision} dopo]`
+      : '';
+    console.log(`  [${tag}] ${c.source}/${c.key} ×${c.count}${reg}` +
       (c.examples?.length ? `  e.g. ${c.examples.map((e) => '#' + (e.pr || e.issue)).join(',')}` : ''));
   }
   console.log(`\n→ novel recurring clusters: ${novel.length} · escalations (documented-but-recurring): ${escalations.length}`);

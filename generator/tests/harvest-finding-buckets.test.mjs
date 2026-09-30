@@ -195,7 +195,7 @@ test('end-to-end: le righe miste non aprono un bucket canonical-sitemap', () => 
   const misti = [
     "🔴 Important: lo stesso anti-pattern in `build-rss.mjs` non e' toccato. Nessun impatto su `dist/api/`, sulle sitemap o sui feed.",
     "🔴 Important: il file gemello `build-rss.mjs` non e' toccato; nessun impatto su slug, sitemap o canonical.",
-    "🟡 Nit: this refactor does not touch `dist/api/`, sitemaps or feeds. The sibling `build-rss.mjs` still carries it.",
+    '🟡 Nit: questo script gemello condivide lo stesso costrutto non toccato dal fix.',
   ];
   const prs = misti.map((line, i) => ({
     number: 940 + i,

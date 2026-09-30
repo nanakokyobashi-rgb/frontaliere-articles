@@ -1287,9 +1287,9 @@
       "path": "scripts/ci/harvest-agent-lessons.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "b9717c0a710a1d18",
-        "corpus": "b9717c0a710a1d18",
-        "alignedAt": "2026-09-15"
+        "site": "51010ad6b3ad43ef",
+        "corpus": "51010ad6b3ad43ef",
+        "alignedAt": "2026-09-30"
       }
     },
     {

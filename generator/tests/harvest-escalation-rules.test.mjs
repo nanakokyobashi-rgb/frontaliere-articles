@@ -158,7 +158,8 @@ const HARVESTER_DECISION = Object.freeze({
   'blocked-workflows-scope': 'escalatable',
   'blocked-secrets': 'escalatable',
   'blocked-admin-settings': 'escalatable',
-  'revenue-tracker-manual': 'escalatable',
+  // Il nuovo harvester lo tratta come contesto, non come driver di escalation.
+  'revenue-tracker-manual': 'carved-out',
 });
 
 /** I codici `FIX_OUTCOME` vivi nel repo: contratto dichiarato + marker emessi. */
@@ -258,12 +259,13 @@ test('isAvoidableMaxTurns non è troppo larga: il caso singolo resta contato', (
 
 test('isAvoidableAlreadyFixed non è inerte in nessuna delle due direzioni', () => {
   const FU = ['follow-up'];
+  const ACTION = 'Suggested action: `resolveCollectionPageSchema()`';
   assert.equal(isAvoidableAlreadyFixed('follow-up(#9): 3 items deferred', FU), false,
     'un aggregato è la conferma attesa, non burn prevenibile (#2290)');
   assert.equal(isAvoidableAlreadyFixed('follow-up(#9): una cosa sola', []), false,
     'senza la label `follow-up` la issue è fuori dallo scope della pre-flight');
-  assert.equal(isAvoidableAlreadyFixed('follow-up(#9): una cosa sola', FU), true,
-    'il follow-up a un solo item è il bersaglio vero del gate');
+  assert.equal(isAvoidableAlreadyFixed('follow-up(#9): una cosa sola', FU, ACTION), true,
+    'il follow-up a un solo item con acceptance è il bersaglio vero del gate');
   // #568: il multi-item SENZA conteggio nel titolo — item enumerati nel corpo
   // come sezioni numerate (#374, #505) o bullet in grassetto (#466). Misurato il
   // 2026-09-05: 3 esempi su 5 del bucket che ha innescato l'escalation #560
@@ -278,7 +280,8 @@ test('isAvoidableAlreadyFixed non è inerte in nessuna delle due direzioni', () 
       '- [ ] **Primo item.** Testo.\n- [ ] **Secondo item.** Testo.'),
     false, 'bullet con lead in grassetto: stessa forma, stesso verdetto');
   assert.equal(
-    isAvoidableAlreadyFixed('follow-up(#9): una cosa sola', FU, '## 1. La cosa\n\nTesto.'),
+    isAvoidableAlreadyFixed('follow-up(#9): una cosa sola', FU,
+      `## 1. La cosa\n\nTesto.\n\n${ACTION}`),
     true, 'una sola sezione numerata non enumera niente: resta un item solo');
 });
 
