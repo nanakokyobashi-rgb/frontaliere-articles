@@ -12299,6 +12299,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.craveggia-ticino-pendolare.title': 'Living in Craveggia and working in Ticino as a cross-border worker',
     'blog.article.craveggia-ticino-pendolare.excerpt': 'New Cross-Border Workers Agreement: signed on December 23, 2020, in force from January 1, 2024, with different exemptions for old and new cross-border workers.',
     'blog.article.craveggia-ticino-pendolare.imageAlt': 'Cross-border worker between Italy and Ticino in an Alpine landscape',
+    'blog.article.miazzina-pendolare-fisco-ticino.title': 'Living in Miazzina and working in Ticino as a cross-border commuter',
+    'blog.article.miazzina-pendolare-fisco-ticino.excerpt': 'New Cross-Border Commuters Agreement signed on 23 dicembre 2020 and in force from 1° gennaio 2024: rules, contributions and LAMal for those considering Miazzina.',
+    'blog.article.miazzina-pendolare-fisco-ticino.imageAlt': 'Living in Miazzina and working in Ticino: cross-border guide',
 };
 
 export default blogMetaEn;

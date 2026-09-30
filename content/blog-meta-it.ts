@@ -12300,6 +12300,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.craveggia-ticino-pendolare.title': 'Vivere a Craveggia e lavorare in Ticino da frontaliere',
     'blog.article.craveggia-ticino-pendolare.excerpt': 'Nuovo Accordo Frontalieri: firmato il 23 dicembre 2020, in vigore dal 1° gennaio 2024, con franchigie diverse per vecchi e nuovi frontalieri.',
     'blog.article.craveggia-ticino-pendolare.imageAlt': 'Frontaliere tra Italia e Ticino in un paesaggio alpino',
+    'blog.article.miazzina-pendolare-fisco-ticino.title': 'Vivere a Miazzina e lavorare in Ticino da frontaliere',
+    'blog.article.miazzina-pendolare-fisco-ticino.excerpt': 'Nuovo Accordo Frontalieri firmato il 23 dicembre 2020 e in vigore dal 1° gennaio 2024: regole, contributi e LAMal per chi valuta Miazzina.',
+    'blog.article.miazzina-pendolare-fisco-ticino.imageAlt': 'Miazzina e lavoro in Ticino: guida pratica per frontalieri',
 };
 
 export default blogMetaIt;

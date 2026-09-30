@@ -12298,6 +12298,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.craveggia-ticino-pendolare.title': 'Wohnen in Craveggia und Arbeiten im Tessin als Grenzgänger',
     'blog.article.craveggia-ticino-pendolare.excerpt': 'Neue Grenzgängervereinbarung: Unterzeichnet am 23. Dezember 2020, gültig ab 1. Januar 2024, mit unterschiedlichen Freigrenzen für alte und neue Grenzgänger.',
     'blog.article.craveggia-ticino-pendolare.imageAlt': 'Grenzgänger zwischen Italien und dem Tessin in alpiner Landschaft',
+    'blog.article.miazzina-pendolare-fisco-ticino.title': 'In Miazzina leben und als Grenzgänger im Ticino arbeiten',
+    'blog.article.miazzina-pendolare-fisco-ticino.excerpt': 'Nuovo Accordo Frontalieri, unterzeichnet am 23 dicembre 2020 und seit dem 1° gennaio 2024 in Kraft: Regeln, Beiträge und LAMal für diejenigen, die Miazzina in Betracht ziehen.',
+    'blog.article.miazzina-pendolare-fisco-ticino.imageAlt': 'In Miazzina wohnen und im Tessin arbeiten: Grenzgänger-Leitfaden',
 };
 
 export default blogMetaDe;
