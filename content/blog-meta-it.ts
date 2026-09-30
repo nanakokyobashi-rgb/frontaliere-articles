@@ -12303,6 +12303,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.miazzina-pendolare-fisco-ticino.title': 'Vivere a Miazzina e lavorare in Ticino da frontaliere',
     'blog.article.miazzina-pendolare-fisco-ticino.excerpt': 'Nuovo Accordo Frontalieri firmato il 23 dicembre 2020 e in vigore dal 1° gennaio 2024: regole, contributi e LAMal per chi valuta Miazzina.',
     'blog.article.miazzina-pendolare-fisco-ticino.imageAlt': 'Miazzina e lavoro in Ticino: guida pratica per frontalieri',
+    'blog.article.frontalieri-vendemmia-ticino-stipendio.title': 'Frontalieri vendemmia Ticino: 15 franchi l\'ora',
+    'blog.article.frontalieri-vendemmia-ticino-stipendio.excerpt': 'In Ticino, 48 frontalieri, per lo più dal Varesotto, lavorano alla vendemmia nei colli del Mendrisiotto. La paga netta oraria si aggira sui 15 franchi, con contratti che durano mediamente un mese e mezzo.',
+    'blog.article.frontalieri-vendemmia-ticino-stipendio.imageAlt': 'Frontalieri al lavoro durante la vendemmia sui colli del Mendrisiotto, Ticino.',
 };
 
 export default blogMetaIt;

@@ -12302,6 +12302,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.miazzina-pendolare-fisco-ticino.title': 'Living in Miazzina and working in Ticino as a cross-border commuter',
     'blog.article.miazzina-pendolare-fisco-ticino.excerpt': 'New Cross-Border Commuters Agreement signed on 23 dicembre 2020 and in force from 1° gennaio 2024: rules, contributions and LAMal for those considering Miazzina.',
     'blog.article.miazzina-pendolare-fisco-ticino.imageAlt': 'Living in Miazzina and working in Ticino: cross-border guide',
+    'blog.article.frontalieri-vendemmia-ticino-stipendio.title': 'Cross-border workers for the grape harvest in Ticino: 15 francs an hour',
+    'blog.article.frontalieri-vendemmia-ticino-stipendio.excerpt': 'In Ticino, 48 cross-border workers, mostly from the Varese area, work the grape harvest in the hills of Mendrisiotto. The net hourly pay is around 15 francs, with contracts lasting an average of a month and a half.',
+    'blog.article.frontalieri-vendemmia-ticino-stipendio.imageAlt': 'Cross-border workers harvesting grapes on the hills of Mendrisiotto, Ticino.',
 };
 
 export default blogMetaEn;
