@@ -21688,6 +21688,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'dibattito-nazionale-siccita-rosti',
+    category: 'novita',
+    date: '2026-09-30T17:37:01.742Z',
+    image: '/images/blog/dibattito-nazionale-siccita-rosti.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

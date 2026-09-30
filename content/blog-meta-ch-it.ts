@@ -7220,6 +7220,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.analisti-congiuntura-svizzera-settembre.title': 'Analisti meno fiduciosi sulla congiuntura svizzera',
     'blog.article.analisti-congiuntura-svizzera-settembre.excerpt': 'In settembre l\'indice sulle prospettive economiche svizzere si attesta a +2,6 punti, in calo di 9,5 punti rispetto ad agosto secondo UBS e CFA Society Switzerland.',
     'blog.article.analisti-congiuntura-svizzera-settembre.imageAlt': 'Analisti finanziari esaminano la congiuntura svizzera in ufficio',
+    'blog.article.dibattito-nazionale-siccita-rosti.title': 'Siccità e canicola: il dibattito in Consiglio nazionale',
+    'blog.article.dibattito-nazionale-siccita-rosti.excerpt': 'Il Consiglio nazionale discute dodici interpellanze sulla siccità. Rösti annuncia una nuova strategia idrica per il prossimo anno.',
+    'blog.article.dibattito-nazionale-siccita-rosti.imageAlt': 'Vista panoramica di una città svizzera durante un periodo di siccità estiva.',
 };
 
 export default blogMetaChIt;

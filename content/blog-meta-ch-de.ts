@@ -7220,6 +7220,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.analisti-congiuntura-svizzera-settembre.title': 'Analysten sind weniger zuversichtlich hinsichtlich der Schweizer Konjunktur',
     'blog.article.analisti-congiuntura-svizzera-settembre.excerpt': 'Im September liegt der Index zu den Schweizer Wirtschaftsaussichten laut UBS und CFA Society Switzerland bei +2,6 Punkten, 9,5 Punkte niedriger als im August.',
     'blog.article.analisti-congiuntura-svizzera-settembre.imageAlt': 'Finanzanalysten überprüfen Schweizer Konjunkturtrends im Büro',
+    'blog.article.dibattito-nazionale-siccita-rosti.title': 'Dürre und Hitzewelle: Die Debatte im Nationalrat',
+    'blog.article.dibattito-nazionale-siccita-rosti.excerpt': 'Der Nationalrat erörtert zwölf Interpellationen zur Dürre. Rösti kündigt eine neue Wasserstrategie für das kommende Jahr an.',
+    'blog.article.dibattito-nazionale-siccita-rosti.imageAlt': 'Panoramablick auf eine Schweizer Stadt während einer sommerlichen Dürreperiode.',
 };
 
 export default blogMetaChDe;

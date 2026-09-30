@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/politica/1947008/entrate-partiti-federale-ps-soldi": {
-    "articleId": "finanziamenti-partiti-ps-2025",
-    "ts": "2026-08-31T09:31:18.028Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/attualita/1947035/energia-ses-tariffa-costi-clienti": {
     "articleId": "bollette-ses-2027-riduzione",
     "ts": "2026-08-31T10:35:26.742Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/analisti-un-po%27-meno-fiduciosi-su-congiuntura-svizzera/92145231": {
     "articleId": "analisti-congiuntura-svizzera-settembre",
     "ts": "2026-09-30T17:15:52.037Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1953825/siccita-canicola-rosti-centro-critiche": {
+    "articleId": "dibattito-nazionale-siccita-rosti",
+    "ts": "2026-09-30T17:37:01.954Z",
     "keyForm": 2
   }
 }

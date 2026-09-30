@@ -2429,6 +2429,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'preventivo-2027-sindacati-austerita-carovita': { it: 'preventivo-2027-sindacati-austerita-carovita', en: 'budget-2027-unions-austerity-cost-of-living', de: 'voranschlag-2027-gewerkschaften-austeritaet-lebenshaltungskosten', fr: 'budget-2027-syndicats-austerite-cout-vie' },
  'premi-malati-ticino-aumento-franchi-2027': { it: 'premi-malati-ticino-aumento-franchi-2027', en: 'health-insurance-premiums-ticino-increase-francs-2027', de: 'krankenkassenpraemien-tessin-erhoehung-franken-2027', fr: 'primes-assurance-maladie-tessin-augmentation-francs-2027' },
  'analisti-congiuntura-svizzera-settembre': { it: 'analisti-congiuntura-svizzera-settembre', en: 'swiss-economic-outlook-september-analysts', de: 'schweizer-konjunktur-september-analysten', fr: 'conjoncture-suisse-septembre-analystes' },
+ 'dibattito-nazionale-siccita-rosti': { it: 'dibattito-nazionale-siccita-rosti', en: 'national-drought-debate-rosti', de: 'nationale-duerre-debatte-rosti', fr: 'debat-national-secheresse-rosti' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

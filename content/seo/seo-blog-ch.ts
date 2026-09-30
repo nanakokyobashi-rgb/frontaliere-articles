@@ -93620,6 +93620,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-dibattito-nazionale-siccita-rosti': {
+    title: 'Siccità e canicola: il dibattito in Consiglio nazionale',
+    description: 'Il Consiglio nazionale discute dodici interpellanze sulla siccità. Rösti annuncia una nuova strategia idrica per il prossimo anno. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, siccità, canicola, dibattito, consiglio',
+    ogTitle: 'Siccità e canicola: il dibattito in Consiglio nazionale',
+    ogDescription: 'Il Consiglio nazionale ha affrontato il tema della siccità con dodici interpellanze. Rösti annuncia una strategia idrica per il prossimo anno e difende le misure adottate.',
+    canonicalPath: '/articoli-svizzera/dibattito-nazionale-siccita-rosti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Siccità e canicola: il dibattito in Consiglio nazionale",
+      "description": "Il Consiglio nazionale discute dodici interpellanze sulla siccità. Rösti annuncia una nuova strategia idrica per il prossimo anno. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/dibattito-nazionale-siccita-rosti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica di una città svizzera durante un periodo di siccità estiva."
+      },
+      "datePublished": "2026-09-30T17:37:01+00:00",
+      "dateModified": "2026-09-30T17:37:01+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/dibattito-nazionale-siccita-rosti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

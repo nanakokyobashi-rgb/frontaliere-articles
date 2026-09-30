@@ -7220,6 +7220,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.analisti-congiuntura-svizzera-settembre.title': 'Analysts Less Optimistic About the Swiss Economy',
     'blog.article.analisti-congiuntura-svizzera-settembre.excerpt': 'In September, the Swiss economic outlook index stood at +2.6 points, down 9.5 points from August, according to UBS and CFA Society Switzerland.',
     'blog.article.analisti-congiuntura-svizzera-settembre.imageAlt': 'Financial analysts reviewing Swiss economic trends in an office',
+    'blog.article.dibattito-nazionale-siccita-rosti.title': 'Drought and heatwave: the debate in the National Council',
+    'blog.article.dibattito-nazionale-siccita-rosti.excerpt': 'The National Council is debating twelve parliamentary questions on the drought. Rösti announces a new water strategy for next year.',
+    'blog.article.dibattito-nazionale-siccita-rosti.imageAlt': 'Panoramic view of a Swiss city during a summer drought period.',
 };
 
 export default blogMetaChEn;
