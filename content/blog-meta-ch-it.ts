@@ -7238,6 +7238,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.aerodromo-kaegiswil-sospensione-voli.title': 'Sospensione voli a Kägiswil fino al 20 nov 2026',
     'blog.article.aerodromo-kaegiswil-sospensione-voli.excerpt': 'L\'UFAC ha disposto la sospensione dei voli dall\'9 ottobre 2026 almeno fino al 20 novembre 2026 presso l\'aerodromo di Kägiswil, in attesa del deposito pubblico PSIA-Rega dal 15 ottobre al 16 novembre 2026.',
     'blog.article.aerodromo-kaegiswil-sospensione-voli.imageAlt': 'Vista aerea dell\'aerodromo di Kägiswil con velivoli fermi e le Alpi sullo sfondo',
+    'blog.article.custodia-bambini-vallese-sussidi.title': 'Asilo nido e custodia bambini in Vallese: costi',
+    'blog.article.custodia-bambini-vallese-sussidi.excerpt': 'In Vallese asili nido, famiglie diurne e doposcuola: tariffe calcolate sul reddito e sussidi cantonali disponibili per la custodia dei bambini.',
+    'blog.article.custodia-bambini-vallese-sussidi.imageAlt': 'Custodia dei bambini in una struttura svizzera ai piedi delle Alpi.',
 };
 
 export default blogMetaChIt;

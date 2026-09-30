@@ -7238,6 +7238,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.aerodromo-kaegiswil-sospensione-voli.title': 'Suspension des vols à Kägiswil jusqu\'au 20 nov 2026',
     'blog.article.aerodromo-kaegiswil-sospensione-voli.excerpt': 'L\'OFAC a ordonné la suspension des vols à partir du 9 octobre 2026 jusqu\'au 20 novembre 2026 au moins à l\'aérodrome de Kägiswil, dans l\'attente de la mise à disposition publique du PSIA-Rega du 15 octobre au 16 novembre 2026.',
     'blog.article.aerodromo-kaegiswil-sospensione-voli.imageAlt': 'Vue aérienne de l\'aérodrome de Kägiswil avec des avions au sol et les Alpes en arrière-plan',
+    'blog.article.custodia-bambini-vallese-sussidi.title': 'Crèche et garde d’enfants en Valais : coûts',
+    'blog.article.custodia-bambini-vallese-sussidi.excerpt': 'Dans le Valais, crèches, familles d\'accueil de jour et garderies périscolaires : tarifs calculés en fonction des revenus et aides cantonales disponibles pour la garde des enfants.',
+    'blog.article.custodia-bambini-vallese-sussidi.imageAlt': 'Garde d\'enfants dans une structure suisse au pied des Alpes.',
 };
 
 export default blogMetaChFr;

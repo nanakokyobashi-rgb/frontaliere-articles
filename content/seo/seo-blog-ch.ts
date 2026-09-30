@@ -93854,6 +93854,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-custodia-bambini-vallese-sussidi': {
+    title: 'Asilo nido e custodia bambini in Vallese: costi',
+    description: 'Asilo nido, famiglie diurne e doposcuola in Vallese: costi calcolati sul reddito, sussidi cantonali disponibili e criteri pratici per confrontare la custodia.',
+    keywords: 'frontalieri, ticino, svizzera, italia, asilo, nido, custodia, bambini',
+    ogTitle: 'Asilo nido e custodia bambini in Vallese: costi',
+    ogDescription: 'Nel Cantone Vallese la custodia dei bambini comprende asili nido, famiglie diurne e doposcuola. Le tariffe sono legate al reddito e il quadro prevede sussidi cantonali: una guida per impostare il confronto dei costi con metodo pratico.',
+    canonicalPath: '/articoli-svizzera/custodia-bambini-vallese-sussidi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Asilo nido e custodia bambini in Vallese: costi",
+      "description": "Asilo nido, famiglie diurne e doposcuola in Vallese: costi calcolati sul reddito, sussidi cantonali disponibili e criteri pratici per confrontare la custodia.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/custodia-bambini-vallese-sussidi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Custodia dei bambini in una struttura svizzera ai piedi delle Alpi."
+      },
+      "datePublished": "2026-09-30T19:28:17+00:00",
+      "dateModified": "2026-09-30T19:28:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/custodia-bambini-vallese-sussidi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

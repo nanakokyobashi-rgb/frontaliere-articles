@@ -7238,6 +7238,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.aerodromo-kaegiswil-sospensione-voli.title': 'Flugausfall in Kägiswil bis zum 20. November 2026',
     'blog.article.aerodromo-kaegiswil-sospensione-voli.excerpt': 'Das BAZL hat angeordnet, dass der Flugbetrieb am Flugplatz Kägiswil ab dem 9. Oktober 2026 bis mindestens zum 20. November 2026 ausgesetzt wird, bis die öffentliche Vernehmlassung zum SIL-Rega vom 15. Oktober bis zum 16. November 2026 abgeschlossen ist.',
     'blog.article.aerodromo-kaegiswil-sospensione-voli.imageAlt': 'Luftaufnahme des Flugplatzes Kägiswil mit grounded Flugzeugen und den Alpen im Hintergrund',
+    'blog.article.custodia-bambini-vallese-sussidi.title': 'Kindertagesstätte und Kinderbetreuung im Wallis: Kosten',
+    'blog.article.custodia-bambini-vallese-sussidi.excerpt': 'Im Wallis: Kindertagesstätten, Tagesfamilien und Nachmittagsbetreuung: einkommensabhängige Tarife und kantonale Zuschüsse für die Kinderbetreuung.',
+    'blog.article.custodia-bambini-vallese-sussidi.imageAlt': 'Kinderbetreuung in einer Schweizer Einrichtung vor alpiner Landschaft.',
 };
 
 export default blogMetaChDe;

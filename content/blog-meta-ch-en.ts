@@ -7238,6 +7238,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.aerodromo-kaegiswil-sospensione-voli.title': 'Flight suspension in Kägiswil until 20 nov 2026',
     'blog.article.aerodromo-kaegiswil-sospensione-voli.excerpt': 'UFAC has ordered the suspension of flights from 9 October 2026 at least until 20 November 2026 at Kägiswil airfield, pending the PSIA-Rega public filing from 15 October to 16 November 2026.',
     'blog.article.aerodromo-kaegiswil-sospensione-voli.imageAlt': 'Aerial view of Kägiswil airfield with grounded aircraft and the Alps in the background',
+    'blog.article.custodia-bambini-vallese-sussidi.title': 'Daycare and Childcare in Valais: Costs',
+    'blog.article.custodia-bambini-vallese-sussidi.excerpt': 'In Valais, daycare centers, family daycare, and after-school programs: fees are based on income, and cantonal subsidies are available for child care.',
+    'blog.article.custodia-bambini-vallese-sussidi.imageAlt': 'Childcare at a Swiss facility in an Alpine setting.',
 };
 
 export default blogMetaChEn;
