@@ -7208,6 +7208,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.crescita-part-time-uomini-svizzera.title': 'Cresce il lavoro part-time tra gli uomini in Svizzera',
     'blog.article.crescita-part-time-uomini-svizzera.excerpt': 'Dal 2000 la quota di uomini svizzeri part-time è raddoppiata, superando il 20%. Analisi di uno studio sui dati 2004-2020 tra norme culturali e carriera.',
     'blog.article.crescita-part-time-uomini-svizzera.imageAlt': 'Uomo che lavora in un ufficio moderno in Svizzera',
+    'blog.article.industria-orologiera-lusso-svizzera.title': 'Orologeria Svizzera: il lusso da solo non basta',
+    'blog.article.industria-orologiera-lusso-svizzera.excerpt': 'L\'esperta Deloitte Karine Szegedi avverte: il calo dei volumi e il focus sul lusso mettono a rischio quasi 700 aziende. La fascia 1000-3000 franchi è trascurata, mentre il rapporto prezzo-prestazioni è cruciale.',
+    'blog.article.industria-orologiera-lusso-svizzera.imageAlt': 'Industria orologiera svizzera, focus sul lusso e sfida dei volumi, secondo l\'esperta Deloitte Karine Szegedi.',
 };
 
 export default blogMetaChIt;

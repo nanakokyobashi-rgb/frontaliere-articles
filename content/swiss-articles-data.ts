@@ -21652,6 +21652,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'industria-orologiera-lusso-svizzera',
+    category: 'pratico',
+    date: '2026-09-30T15:59:43.343Z',
+    image: '/images/blog/industria-orologiera-lusso-svizzera.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

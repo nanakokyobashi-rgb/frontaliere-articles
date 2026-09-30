@@ -7208,6 +7208,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.crescita-part-time-uomini-svizzera.title': 'Die Teilzeitarbeit unter Männern in der Schweiz nimmt zu',
     'blog.article.crescita-part-time-uomini-svizzera.excerpt': 'Seit 2000 hat sich der Anteil der Schweizer Männer in Teilzeit verdoppelt und liegt bei über 20%. Analyse einer Studie zu den Daten 2004-2020 zwischen kulturellen Normen und Karriere.',
     'blog.article.crescita-part-time-uomini-svizzera.imageAlt': 'Mann arbeitet in einem modernen Büro in der Schweiz',
+    'blog.article.industria-orologiera-lusso-svizzera.title': 'Schweizer Uhrenindustrie: Luxus allein reicht nicht aus',
+    'blog.article.industria-orologiera-lusso-svizzera.excerpt': 'Die Deloitte-Expertin Karine Szegedi warnt: Der Rückgang der Absatzmengen und die Konzentration auf das Luxussegment gefährden fast 700 Unternehmen. Die Preisklasse von 1’000 bis 3’000 Franken wird vernachlässigt, dabei ist das Preis-Leistungs-Verhältnis entscheidend.',
+    'blog.article.industria-orologiera-lusso-svizzera.imageAlt': 'Schweizer Uhrenindustrie, Luxusfokus und Volumenherausforderung, laut Deloitte-Expertin Karine Szegedi.',
 };
 
 export default blogMetaChDe;

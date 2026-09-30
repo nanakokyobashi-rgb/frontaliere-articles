@@ -7208,6 +7208,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.crescita-part-time-uomini-svizzera.title': 'Part-time work among men is increasing in Switzerland',
     'blog.article.crescita-part-time-uomini-svizzera.excerpt': 'Since 2000, the percentage of Swiss men working part-time has doubled, exceeding 20%. Analysis of a study based on data from 2004 to 2020, examining the relationship between cultural norms and career paths.',
     'blog.article.crescita-part-time-uomini-svizzera.imageAlt': 'Man working in a modern office in Switzerland',
+    'blog.article.industria-orologiera-lusso-svizzera.title': 'Swiss watchmaking: luxury alone is not enough',
+    'blog.article.industria-orologiera-lusso-svizzera.excerpt': 'Deloitte expert Karine Szegedi warns: declining sales volumes and a focus on luxury are putting nearly 700 companies at risk. The 1,000–3,000 franc price range is being neglected, while the price-performance ratio is crucial.',
+    'blog.article.industria-orologiera-lusso-svizzera.imageAlt': 'Swiss watch industry, luxury focus and volume challenge, according to Deloitte expert Karine Szegedi.',
 };
 
 export default blogMetaChEn;

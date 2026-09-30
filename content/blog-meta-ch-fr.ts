@@ -7208,6 +7208,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.crescita-part-time-uomini-svizzera.title': 'Le travail à temps partiel chez les hommes est en hausse en Suisse',
     'blog.article.crescita-part-time-uomini-svizzera.excerpt': 'Depuis 2000, la proportion d\'hommes suisses travaillant à temps partiel a doublé, dépassant les 20 %. Analyse d\'une étude portant sur les données de 2004 à 2020, entre normes culturelles et carrière.',
     'blog.article.crescita-part-time-uomini-svizzera.imageAlt': 'Homme travaillant dans un bureau moderne en Suisse',
+    'blog.article.industria-orologiera-lusso-svizzera.title': 'Horlogerie suisse : le luxe à lui seul ne suffit pas',
+    'blog.article.industria-orologiera-lusso-svizzera.excerpt': 'Karine Szegedi, experte chez Deloitte, met en garde : la baisse des volumes et la focalisation sur le luxe mettent en péril près de 700 entreprises. La tranche de prix comprise entre 1 000 et 3 000 francs est négligée, alors que le rapport qualité-prix est déterminant.',
+    'blog.article.industria-orologiera-lusso-svizzera.imageAlt': 'Industrie horlogère suisse, focus sur le luxe et défi des volumes, selon l\'experte Deloitte Karine Szegedi.',
 };
 
 export default blogMetaChFr;

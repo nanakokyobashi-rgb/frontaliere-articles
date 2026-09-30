@@ -93464,6 +93464,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-industria-orologiera-lusso-svizzera': {
+    title: 'Orologeria Svizzera: il lusso da solo non basta',
+    description: 'L\'esperta Deloitte Karine Szegedi avverte che il focus sul lusso mette a rischio l\'industria orologiera svizzera. Volumi in calo, fascia media trascurata',
+    keywords: 'frontalieri, ticino, svizzera, italia, orologeria, lusso, solo, basta',
+    ogTitle: 'Orologeria Svizzera: il lusso da solo non basta per 700 aziende',
+    ogDescription: 'Karine Szegedi di Deloitte lancia un allarme: la base industriale svizzera, composta da quasi 700 aziende orologiere, è minacciata dal calo dei volumi e dall\'eccessiva concentrazione sul lusso. La fascia 1000-3000 franchi è trascurata, mentre',
+    canonicalPath: '/articoli-svizzera/industria-orologiera-lusso-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Orologeria Svizzera: il lusso da solo non basta",
+      "description": "L'esperta Deloitte Karine Szegedi avverte che il focus sul lusso mette a rischio l'industria orologiera svizzera. Volumi in calo, fascia media trascurata",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/industria-orologiera-lusso-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Industria orologiera svizzera, focus sul lusso e sfida dei volumi, secondo l'esperta Deloitte Karine Szegedi."
+      },
+      "datePublished": "2026-09-30T15:59:43+00:00",
+      "dateModified": "2026-09-30T15:59:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/industria-orologiera-lusso-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
