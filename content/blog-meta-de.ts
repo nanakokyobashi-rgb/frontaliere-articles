@@ -12301,6 +12301,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.miazzina-pendolare-fisco-ticino.title': 'In Miazzina leben und als Grenzgänger im Ticino arbeiten',
     'blog.article.miazzina-pendolare-fisco-ticino.excerpt': 'Nuovo Accordo Frontalieri, unterzeichnet am 23 dicembre 2020 und seit dem 1° gennaio 2024 in Kraft: Regeln, Beiträge und LAMal für diejenigen, die Miazzina in Betracht ziehen.',
     'blog.article.miazzina-pendolare-fisco-ticino.imageAlt': 'In Miazzina wohnen und im Tessin arbeiten: Grenzgänger-Leitfaden',
+    'blog.article.frontalieri-vendemmia-ticino-stipendio.title': 'Grenzgänger bei der Weinlese im Tessin: 15 Franken pro Stunde',
+    'blog.article.frontalieri-vendemmia-ticino-stipendio.excerpt': 'Im Tessin arbeiten 48 Grenzgänger, hauptsächlich aus der Region Varese, bei der Weinlese in den Hügeln von Mendrisiotto. Der Nettostundenlohn liegt bei etwa 15 Franken, die Verträge haben eine durchschnittliche Laufzeit von anderthalb Monaten.',
+    'blog.article.frontalieri-vendemmia-ticino-stipendio.imageAlt': 'Grenzgänger bei der Weinlese in den Hügeln des Mendrisiotto, Tessin.',
 };
 
 export default blogMetaDe;

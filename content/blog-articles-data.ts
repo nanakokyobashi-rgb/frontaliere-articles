@@ -36916,6 +36916,15 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'frontalieri-vendemmia-ticino-stipendio',
+ category: 'pratico',
+ date: '2026-09-30T07:18:00.502Z',
+ image: '/images/blog/frontalieri-vendemmia-ticino-stipendio.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

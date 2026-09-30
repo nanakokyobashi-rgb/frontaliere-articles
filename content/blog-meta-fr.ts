@@ -12304,6 +12304,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.miazzina-pendolare-fisco-ticino.title': 'Vivre à Miazzina et travailler au Tessin en tant que frontalier',
     'blog.article.miazzina-pendolare-fisco-ticino.excerpt': 'Nouvel accord frontalier signé le 23 décembre 2020 et en vigueur depuis le 1er janvier 2024 : règles, contributions et LAMal pour ceux qui évaluent Miazzina.',
     'blog.article.miazzina-pendolare-fisco-ticino.imageAlt': 'Vivre à Miazzina et travailler au Tessin: guide du frontalier',
+    'blog.article.frontalieri-vendemmia-ticino-stipendio.title': 'Frontaliers pour les vendanges au Tessin : 15 francs de l’heure',
+    'blog.article.frontalieri-vendemmia-ticino-stipendio.excerpt': 'Au Tessin, 48 travailleurs frontaliers, pour la plupart originaires du Varesotto, travaillent aux vendanges dans les collines du Mendrisiotto. Le salaire net horaire s’élève à environ 15 francs, avec des contrats qui durent en moyenne un mois et demi.',
+    'blog.article.frontalieri-vendemmia-ticino-stipendio.imageAlt': 'Travailleurs frontaliers pendant les vendanges sur les collines du Mendrisiotto, Tessin.',
 };
 
 export default blogMetaFr;

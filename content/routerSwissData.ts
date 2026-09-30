@@ -2406,6 +2406,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'bilaterali-iii-referendum-immobili': { it: 'bilaterali-iii-referendum-immobili', en: 'bilaterali-iii-referendum-properties', de: 'bilaterale-iii-referendum-immobilien', fr: 'bilateraux-iii-referendum-immobilier' },
  'fueglistaler-errori-rete-ferroviaria': { it: 'fueglistaler-errori-rete-ferroviaria', en: 'fueglistaler-railway-network-errors', de: 'fueglistaler-fehler-schienennetz', fr: 'fueglistaler-erreurs-reseau-ferroviaire' },
  'sanita-svizzera-costi-analisi': { it: 'sanita-svizzera-costi-analisi', en: 'swiss-healthcare-costs-analysis', de: 'schweizer-gesundheitskosten-analyse', fr: 'analyse-couts-sante-suisse' },
+ 'bilaterali-iii-esercito-cantoni': { it: 'bilaterali-iii-esercito-cantoni', en: 'bilaterals-iii-army-cantons', de: 'bilaterale-iii-armee-kantone', fr: 'bilaterales-iii-armee-cantons' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

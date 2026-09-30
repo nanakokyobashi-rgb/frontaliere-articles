@@ -7151,6 +7151,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.sanita-svizzera-costi-analisi.title': 'Sanità svizzera: quanto paghiamo e cosa possiamo imparare',
     'blog.article.sanita-svizzera-costi-analisi.excerpt': 'Analisi dei costi sanitari: il premio medio in Ticino tocca i 519,90 franchi nel 2027. Confronti, efficienza e dati OCSE a confronto.',
     'blog.article.sanita-svizzera-costi-analisi.imageAlt': 'Vista di un moderno ospedale svizzero con panorama urbano.',
+    'blog.article.bilaterali-iii-esercito-cantoni.title': 'Bilaterali III, esercito e immobili: i dossier in discussione',
+    'blog.article.bilaterali-iii-esercito-cantoni.excerpt': 'Il Consiglio degli Stati vota oggi sul referendum per i Bilaterali III, mentre il Nazionale esamina gli immobili federali per il 2026.',
+    'blog.article.bilaterali-iii-esercito-cantoni.imageAlt': 'Palazzo federale svizzero a Berna',
 };
 
 export default blogMetaChIt;
