@@ -7232,6 +7232,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.guida-aiuti-formazione-vallese.title': 'Bourses d’études du canton du Valais : conditions requises et montants',
     'blog.article.guida-aiuti-formazione-vallese.excerpt': 'Bourses d’études et prêts d’études dans le canton du Valais : ce qu’il faut vérifier concernant les conditions requises, les montants maximaux, les délais et le service compétent.',
     'blog.article.guida-aiuti-formazione-vallese.imageAlt': 'Dossiers de bourses d\'études sur un bureau face aux Alpes suisses',
+    'blog.article.stati-chiedono-referendum-bilaterali.title': 'Bilatérales III : le Conseil des États demande le référendum',
+    'blog.article.stati-chiedono-referendum-bilaterali.excerpt': 'Le Conseil des États a demandé le référendum obligatoire pour les Bilatérales III par 23 voix contre 17 et 3 abstentions. La question passe maintenant au Conseil national.',
+    'blog.article.stati-chiedono-referendum-bilaterali.imageAlt': 'Le bâtiment du Parlement à Berne où s\'est déroulé le débat sur les Bilatérales III',
 };
 
 export default blogMetaChFr;

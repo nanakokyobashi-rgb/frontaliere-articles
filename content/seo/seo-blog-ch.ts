@@ -93776,6 +93776,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-stati-chiedono-referendum-bilaterali': {
+    title: 'Bilaterali III: il Consiglio degli Stati chiede il referendum',
+    description: 'Il Consiglio degli Stati chiede il referendum obbligatorio per i Bilaterali III con 23 voti contro 17. Prossima tappa al Consiglio nazionale. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, bilaterali, consiglio, stati, chiede',
+    ogTitle: 'Bilaterali III: il Consiglio degli Stati chiede il referendum obbligatorio',
+    ogDescription: 'Il Consiglio degli Stati ha deciso con 23 voti contro 17 e 3 astenuti di chiedere il referendum obbligatorio per i Bilaterali III con l\'Unione europea. La palla passa ora al Consiglio nazionale.',
+    canonicalPath: '/articoli-svizzera/stati-chiedono-referendum-bilaterali/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bilaterali III: il Consiglio degli Stati chiede il referendum",
+      "description": "Il Consiglio degli Stati chiede il referendum obbligatorio per i Bilaterali III con 23 voti contro 17. Prossima tappa al Consiglio nazionale. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/stati-chiedono-referendum-bilaterali.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Il palazzo del Parlamento a Berna dove si è tenuto il dibattito sui Bilaterali III"
+      },
+      "datePublished": "2026-09-30T18:40:44+00:00",
+      "dateModified": "2026-09-30T18:40:44+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/stati-chiedono-referendum-bilaterali/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

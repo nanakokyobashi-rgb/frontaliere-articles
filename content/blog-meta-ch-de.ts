@@ -7232,6 +7232,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.guida-aiuti-formazione-vallese.title': 'Stipendien des Kantons Wallis: Voraussetzungen und Beträge',
     'blog.article.guida-aiuti-formazione-vallese.excerpt': 'Stipendien und Studiendarlehen im Kanton Wallis: Was Sie zu Voraussetzungen, Höchstbeträgen, Fristen und der zuständigen Stelle wissen sollten.',
     'blog.article.guida-aiuti-formazione-vallese.imageAlt': 'Stipendienunterlagen auf einem Schreibtisch vor Schweizer Alpenlandschaft',
+    'blog.article.stati-chiedono-referendum-bilaterali.title': 'Bilaterale III: Der Ständerat fordert ein Referendum',
+    'blog.article.stati-chiedono-referendum-bilaterali.excerpt': 'Der Ständerat hat mit 23 zu 17 Stimmen bei 3 Enthaltungen das obligatorische Referendum für die Bilateralen III verlangt. Nun geht die Frage an den Nationalrat.',
+    'blog.article.stati-chiedono-referendum-bilaterali.imageAlt': 'Das Parlamentsgebäude in Bern, in dem die Debatte über die Bilateralen III stattfand',
 };
 
 export default blogMetaChDe;

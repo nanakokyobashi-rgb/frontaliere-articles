@@ -7232,6 +7232,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.guida-aiuti-formazione-vallese.title': 'Borse di studio canton Vallese: requisiti e importi',
     'blog.article.guida-aiuti-formazione-vallese.excerpt': 'Borse di studio e prestiti allo studio nel Cantone di Vallese: cosa verificare su requisiti, importi massimi, termini e ufficio competente.',
     'blog.article.guida-aiuti-formazione-vallese.imageAlt': 'Documenti per borse di studio su una scrivania con paesaggio alpino svizzero',
+    'blog.article.stati-chiedono-referendum-bilaterali.title': 'Bilaterali III: il Consiglio degli Stati chiede il referendum',
+    'blog.article.stati-chiedono-referendum-bilaterali.excerpt': 'Il Consiglio degli Stati ha chiesto il referendum obbligatorio per i Bilaterali III con 23 voti contro 17 e 3 astenuti. Ora la questione passa al Consiglio nazionale.',
+    'blog.article.stati-chiedono-referendum-bilaterali.imageAlt': 'Il palazzo del Parlamento a Berna dove si è tenuto il dibattito sui Bilaterali III',
 };
 
 export default blogMetaChIt;

@@ -7232,6 +7232,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.guida-aiuti-formazione-vallese.title': 'Scholarships in the Canton of Valais: Eligibility Requirements and Amounts',
     'blog.article.guida-aiuti-formazione-vallese.excerpt': 'Scholarships and study loans in the Canton of Valais: what to check regarding requirements, maximum amounts, deadlines and the responsible office.',
     'blog.article.guida-aiuti-formazione-vallese.imageAlt': 'Scholarship documents on a desk with a Swiss Alpine landscape',
+    'blog.article.stati-chiedono-referendum-bilaterali.title': 'Bilateral Agreements III: The Council of States Calls for a Referendum',
+    'blog.article.stati-chiedono-referendum-bilaterali.excerpt': 'The Council of States voted 23 to 17, with 3 abstentions, in favor of a mandatory referendum on the Bilateral Agreements III. The matter now goes to the National Council.',
+    'blog.article.stati-chiedono-referendum-bilaterali.imageAlt': 'The Parliament building in Bern where the debate on Bilateral III took place',
 };
 
 export default blogMetaChEn;

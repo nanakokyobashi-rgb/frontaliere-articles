@@ -21724,6 +21724,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'stati-chiedono-referendum-bilaterali',
+    category: 'novita',
+    date: '2026-09-30T18:40:44.909Z',
+    image: '/images/blog/stati-chiedono-referendum-bilaterali.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
