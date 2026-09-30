@@ -7190,6 +7190,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.lamal-franchigie-sussidio-basel.title': 'Basel-Stadt health insurance premiums: premium reduction',
     'blog.article.lamal-franchigie-sussidio-basel.excerpt': 'A Practical Guide to LAMal Premiums in Basel-Stadt: Adult Deductibles, Premiums by Canton and Region, and Premium Reductions as Cantonal Subsidies.',
     'blog.article.lamal-franchigie-sussidio-basel.imageAlt': 'LAMal documents beside an urban view of Basel City',
+    'blog.article.tassa-prodotti-zuccherati-svizzera.title': 'Fighting Obesity: The Swiss Don\'t Want a Tax',
+    'blog.article.tassa-prodotti-zuccherati-svizzera.excerpt': '68% of respondents in Zurich and Switzerland reject a tax on sugar, salt or fat. The data from Gfs.Bern’s monitoring and preferences regarding prevention.',
+    'blog.article.tassa-prodotti-zuccherati-svizzera.imageAlt': 'Zurich monitor on sugary products and food taxes in Switzerland',
 };
 
 export default blogMetaChEn;

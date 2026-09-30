@@ -93230,6 +93230,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tassa-prodotti-zuccherati-svizzera': {
+    title: 'Lotta a obesità: gli svizzeri non vogliono una tassa',
+    description: 'Il 68% degli svizzeri rifiuta la tassa su zucchero, sale e grassi. I dati del monitoraggio Gfs.Bern tra prevenzione, scuole e divieto di pubblicità.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lotta, obesità, svizzeri, vogliono',
+    ogTitle: 'Lotta a obesità: gli svizzeri non vogliono una tassa sui prodotti zuccherati',
+    ogDescription: 'I risultati del 13esimo monitoraggio Gfs.Bern a Zurigo e in Svizzera: il 68% è contrario a una tassa su zucchero, sale e grassi, mentre sale al 90% il favore per la prevenzione e i progetti con l\'economia.',
+    canonicalPath: '/articoli-svizzera/tassa-prodotti-zuccherati-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lotta a obesità: gli svizzeri non vogliono una tassa",
+      "description": "Il 68% degli svizzeri rifiuta la tassa su zucchero, sale e grassi. I dati del monitoraggio Gfs.Bern tra prevenzione, scuole e divieto di pubblicità.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/tassa-prodotti-zuccherati-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Monitoraggio a Zurigo sui prodotti zuccherati e le tasse sugli alimenti in Svizzera"
+      },
+      "datePublished": "2026-09-30T13:17:25+00:00",
+      "dateModified": "2026-09-30T13:17:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/tassa-prodotti-zuccherati-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

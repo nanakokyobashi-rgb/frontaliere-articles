@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/rubriche/ospite/1946767/scuola-lavoro-docenti-condizioni-ogni-scuole-vpod-ricomincia-matteo": {
-    "articleId": "scuola-ticino-vpod-condizioni-docenti",
-    "ts": "2026-08-29T10:10:53.119Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/gr%3a-gran-consiglio-attende-decisione-su-birsfelden-%28bl%29-su-traffico/91972371": {
     "articleId": "grigioni-attesa-modello-birsfelden",
     "ts": "2026-08-29T21:08:22.050Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4123894": {
     "articleId": "zugo-de-escalation-cyberspazio",
     "ts": "2026-09-30T12:36:30.819Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1953741/tassa-zuccherati-prodotti-vogliono-protezione": {
+    "articleId": "tassa-prodotti-zuccherati-svizzera",
+    "ts": "2026-09-30T13:17:25.777Z",
     "keyForm": 2
   }
 }

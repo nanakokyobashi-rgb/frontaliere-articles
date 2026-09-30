@@ -7190,6 +7190,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.lamal-franchigie-sussidio-basel.title': 'Krankenkassenprämien Basel-Stadt: Prämien senken',
     'blog.article.lamal-franchigie-sussidio-basel.excerpt': 'Praktischer Leitfaden zu den KVG-Prämien in Basel-Stadt: Selbstbehalte für Erwachsene, Prämien nach Kanton und Region sowie Prämienverbilligungen als kantonale Beihilfe.',
     'blog.article.lamal-franchigie-sussidio-basel.imageAlt': 'LAMal-Unterlagen vor einer Stadtansicht von Basel-Stadt',
+    'blog.article.tassa-prodotti-zuccherati-svizzera.title': 'Kampf gegen Fettleibigkeit: Die Schweizer wollen keine Steuer',
+    'blog.article.tassa-prodotti-zuccherati-svizzera.excerpt': '68 % der Befragten in Zürich und in der Schweiz lehnen eine Steuer auf Zucker, Salz oder Fette ab. Die Daten der Gfs.Bern-Umfrage und die Präferenzen in Bezug auf Prävention.',
+    'blog.article.tassa-prodotti-zuccherati-svizzera.imageAlt': 'Monitoring in Zürich zu zuckerhaltigen Produkten und Lebensmittelsteuern in der Schweiz',
 };
 
 export default blogMetaChDe;

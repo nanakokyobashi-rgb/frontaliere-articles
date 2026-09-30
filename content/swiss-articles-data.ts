@@ -21598,6 +21598,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'tassa-prodotti-zuccherati-svizzera',
+    category: 'novita',
+    date: '2026-09-30T13:17:25.467Z',
+    image: '/images/blog/tassa-prodotti-zuccherati-svizzera.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
