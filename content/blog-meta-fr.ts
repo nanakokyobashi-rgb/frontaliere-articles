@@ -12318,6 +12318,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.carugo-ticino-fisco.title': 'Vivre à Carugo et travailler au Tessin en tant que frontalier',
     'blog.article.carugo-ticino-fisco.excerpt': 'Accord sur les travailleurs frontaliers en vigueur depuis 2024 : impôt uniquement en Suisse, exonération de €7\'500 pour les anciens et franchise de €10\'000 pour les nouveaux.',
     'blog.article.carugo-ticino-fisco.imageAlt': 'Route frontalière au Tessin le matin avec un travailleur frontalier',
+    'blog.article.conti-ticino-disavanzo-2030.title': 'Comptes du Tessin : déficit proche du demi-milliard',
+    'blog.article.conti-ticino-disavanzo-2030.excerpt': 'Le budget 2027 et le plan financier indiquent un déficit structurel. Les initiatives concernant les primes d’assurance-maladie et la réforme sanitaire EFAS pèsent.',
+    'blog.article.conti-ticino-disavanzo-2030.imageAlt': 'Le Palazzo delle Orse à Bellinzona, siège du gouvernement cantonal du Tessin',
 };
 
 export default blogMetaFr;

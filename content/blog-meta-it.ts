@@ -12317,6 +12317,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.carugo-ticino-fisco.title': 'Vivere a Carugo e lavorare in Ticino da frontaliere',
     'blog.article.carugo-ticino-fisco.excerpt': 'Accordo frontalieri in vigore dal 2024: imposta solo in Svizzera, esenzione €7\'500 per i vecchi e franchigia €10\'000 per i nuovi.',
     'blog.article.carugo-ticino-fisco.imageAlt': 'Strada di confine in Ticino al mattino per un lavoratore frontaliere',
+    'blog.article.conti-ticino-disavanzo-2030.title': 'Conti Ticino: disavanzo verso il mezzo miliardo',
+    'blog.article.conti-ticino-disavanzo-2030.excerpt': 'Il preventivo 2027 e il piano finanziario indicano un rosso strutturale. Pesano le iniziative sui premi di cassa malati e la riforma sanitaria EFAS.',
+    'blog.article.conti-ticino-disavanzo-2030.imageAlt': 'Il Palazzo delle Orse a Bellinzona, sede del Governo del Canton Ticino',
 };
 
 export default blogMetaIt;

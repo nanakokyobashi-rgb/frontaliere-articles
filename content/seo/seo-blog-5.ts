@@ -97534,6 +97534,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-conti-ticino-disavanzo-2030': {
+    title: 'Conti Ticino: disavanzo verso il mezzo miliardo',
+    description: 'Analisi del preventivo ticinese: disavanzo d\'esercizio a 98,5 milioni e debito pubblico verso i 4,5 miliardi entro il 2030. Impatto di EFAS e premi salute.',
+    keywords: 'frontalieri, ticino, svizzera, italia, conti, disavanzo, verso, mezzo',
+    ogTitle: 'Conti Ticino: previsioni di disavanzo e debito al 2030',
+    ogDescription: 'Il Canton Ticino affronta una crisi finanziaria strutturale: il disavanzo d\'esercizio potrebbe toccare il mezzo miliardo. Scopri l\'impatto delle iniziative sui premi di cassa malati e della riforma EFAS.',
+    canonicalPath: '/articoli-frontaliere/conti-ticino-disavanzo-2030',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Conti Ticino: disavanzo verso il mezzo miliardo",
+      "description": "Analisi del preventivo ticinese: disavanzo d'esercizio a 98,5 milioni e debito pubblico verso i 4,5 miliardi entro il 2030. Impatto di EFAS e premi salute.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/conti-ticino-disavanzo-2030.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Il Palazzo delle Orse a Bellinzona, sede del Governo del Canton Ticino"
+      },
+      "datePublished": "2026-09-30T16:42:23+00:00",
+      "dateModified": "2026-09-30T16:42:23+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/conti-ticino-disavanzo-2030/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

@@ -36952,6 +36952,15 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'conti-ticino-disavanzo-2030',
+ category: 'novita',
+ date: '2026-09-30T16:42:23.005Z',
+ image: '/images/blog/conti-ticino-disavanzo-2030.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

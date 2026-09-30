@@ -12316,6 +12316,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.carugo-ticino-fisco.title': 'Living in Carugo and working in Ticino as a cross-border worker',
     'blog.article.carugo-ticino-fisco.excerpt': 'Cross-border worker agreement effective as of 2024: taxation only in Switzerland, a €7,500 exemption for existing workers and a €10,000 exemption for new workers.',
     'blog.article.carugo-ticino-fisco.imageAlt': 'Morning border road in Ticino with a cross-border commuter',
+    'blog.article.conti-ticino-disavanzo-2030.title': 'Ticino finances: deficit nearing half a billion',
+    'blog.article.conti-ticino-disavanzo-2030.excerpt': 'The 2027 budget and financial plan indicate a structural deficit. The initiatives on health insurance premiums and the EFAS healthcare reform weigh heavily.',
+    'blog.article.conti-ticino-disavanzo-2030.imageAlt': 'The Palazzo delle Orse in Bellinzona, seat of the Ticino Cantonal Government',
 };
 
 export default blogMetaEn;

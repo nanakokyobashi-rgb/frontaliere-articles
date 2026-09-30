@@ -12315,6 +12315,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.carugo-ticino-fisco.title': 'In Carugo wohnen und als Grenzgänger im Tessin arbeiten',
     'blog.article.carugo-ticino-fisco.excerpt': 'Grenzgängerabkommen ab 2024 in Kraft: Besteuerung ausschließlich in der Schweiz, Steuerbefreiung von €7\'500 für die alten Grenzgänger und ein Freibetrag von €10\'000 für die neuen Grenzgänger.',
     'blog.article.carugo-ticino-fisco.imageAlt': 'Grenzstrasse im Tessin am Morgen mit einem Grenzgänger',
+    'blog.article.conti-ticino-disavanzo-2030.title': 'Haushalt Tessin: Defizit von fast einer halben Milliarde',
+    'blog.article.conti-ticino-disavanzo-2030.excerpt': 'Das Budget 2027 und der Finanzplan weisen ein strukturelles Defizit aus. Belastend wirken die Initiativen zu den Krankenkassenprämien und die Gesundheitsreform EFAS.',
+    'blog.article.conti-ticino-disavanzo-2030.imageAlt': 'Der Palazzo delle Orse in Bellinzona, Sitz der Tessiner Kantonsregierung',
 };
 
 export default blogMetaDe;
