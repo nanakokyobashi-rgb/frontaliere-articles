@@ -7226,6 +7226,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.firma-parentale-berna.title': 'Congedo parentale: 112\'517 firme per 18 settimane',
     'blog.article.firma-parentale-berna.excerpt': 'A Berna sono state depositate 112\'517 firme per chiedere 18 settimane di congedo parentale sia per le madri sia per i padri.',
     'blog.article.firma-parentale-berna.imageAlt': 'Firme per l\'iniziativa sul congedo parentale depositate alla Cancelleria federale',
+    'blog.article.svizzeri-contro-tassa-zucchero.title': 'Svizzeri contrari alla tassa su zucchero, sale o grassi',
+    'blog.article.svizzeri-contro-tassa-zucchero.excerpt': 'Il 68% degli intervistati da Gfs.Bern respinge la tassa sugli alimenti. Il monitoraggio evidenzia richieste di prevenzione e tutela dei minori.',
+    'blog.article.svizzeri-contro-tassa-zucchero.imageAlt': 'Prodotti alimentari esposti sugli scaffali di un negozio in Svizzera',
 };
 
 export default blogMetaChIt;

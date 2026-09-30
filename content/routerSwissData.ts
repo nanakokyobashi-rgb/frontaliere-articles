@@ -2431,6 +2431,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'analisti-congiuntura-svizzera-settembre': { it: 'analisti-congiuntura-svizzera-settembre', en: 'swiss-economic-outlook-september-analysts', de: 'schweizer-konjunktur-september-analysten', fr: 'conjoncture-suisse-septembre-analystes' },
  'dibattito-nazionale-siccita-rosti': { it: 'dibattito-nazionale-siccita-rosti', en: 'national-drought-debate-rosti', de: 'nationale-duerre-debatte-rosti', fr: 'debat-national-secheresse-rosti' },
  'firma-parentale-berna': { it: 'firma-parentale-berna', en: 'parental-leave-signatures-bern', de: 'elternzeit-unterschriften-bern', fr: 'conge-parental-signatures-berne' },
+ 'svizzeri-contro-tassa-zucchero': { it: 'svizzeri-contro-tassa-zucchero', en: 'swiss-against-sugar-tax', de: 'schweizer-gegen-zuckersteuer', fr: 'suisses-contre-taxe-sucre' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

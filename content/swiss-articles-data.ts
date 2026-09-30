@@ -21706,6 +21706,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'svizzeri-contro-tassa-zucchero',
+    category: 'pratico',
+    date: '2026-09-30T18:06:12.328Z',
+    image: '/images/blog/svizzeri-contro-tassa-zucchero.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

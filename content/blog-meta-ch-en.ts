@@ -7226,6 +7226,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.firma-parentale-berna.title': 'Parental Leave: 112,517 signatures in support of 18 weeks',
     'blog.article.firma-parentale-berna.excerpt': 'In Bern, 112\'517 signatures were submitted calling for 18 weeks of parental leave for both mothers and fathers.',
     'blog.article.firma-parentale-berna.imageAlt': 'Signatures for the parental leave initiative submitted to the Swiss Federal Chancellery',
+    'blog.article.svizzeri-contro-tassa-zucchero.title': 'Swiss Oppose Taxes on Sugar, Salt, or Fats',
+    'blog.article.svizzeri-contro-tassa-zucchero.excerpt': '68% of those surveyed by Gfs.Bern reject the tax on food. The monitoring highlights calls for prevention and the protection of minors.',
+    'blog.article.svizzeri-contro-tassa-zucchero.imageAlt': 'Food products displayed on supermarket shelves in Switzerland',
 };
 
 export default blogMetaChEn;

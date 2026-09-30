@@ -7226,6 +7226,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.firma-parentale-berna.title': 'Congé parental : 112\'517 signatures pour 18 semaines',
     'blog.article.firma-parentale-berna.excerpt': 'À Berne, 112\'517 signatures ont été déposées pour demander 18 semaines de congé parental aussi bien pour les mères que pour les pères.',
     'blog.article.firma-parentale-berna.imageAlt': 'Signatures pour l\'initiative sur le congé parental à la Chancellerie fédérale suisse',
+    'blog.article.svizzeri-contro-tassa-zucchero.title': 'Suisses opposés à la taxe sur le sucre, le sel ou les matières grasses',
+    'blog.article.svizzeri-contro-tassa-zucchero.excerpt': '68% des personnes interrogées par Gfs.Bern rejettent la taxe sur les aliments. Le suivi met en évidence des demandes de prévention et de protection des mineurs.',
+    'blog.article.svizzeri-contro-tassa-zucchero.imageAlt': 'Produits alimentaires dans un supermarché suisse',
 };
 
 export default blogMetaChFr;

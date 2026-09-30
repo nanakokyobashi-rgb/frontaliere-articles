@@ -7226,6 +7226,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.firma-parentale-berna.title': 'Elternzeit: 112\'517 Unterschriften für 18 Wochen',
     'blog.article.firma-parentale-berna.excerpt': 'In Bern wurden 112\'517 Unterschriften eingereicht, um 18 Wochen Elternurlaub sowohl für Mütter als auch für Väter zu fordern.',
     'blog.article.firma-parentale-berna.imageAlt': 'Unterschriften für die Elternzeit-Initiative bei der Schweizerischen Bundeskanzlei',
+    'blog.article.svizzeri-contro-tassa-zucchero.title': 'Die Schweizer lehnen eine Steuer auf Zucker, Salz oder Fette ab',
+    'blog.article.svizzeri-contro-tassa-zucchero.excerpt': '68 % der von Gfs.Bern Befragten lehnen die Lebensmittelsteuer ab. Die Umfrage zeigt, dass Forderungen nach Prävention und Schutz von Minderjährigen laut werden.',
+    'blog.article.svizzeri-contro-tassa-zucchero.imageAlt': 'Lebensmittel in einem Schweizer Supermarkt',
 };
 
 export default blogMetaChDe;
