@@ -7163,6 +7163,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.scuola-vallese-cicli-iscrizione.title': 'Schulsystem Kanton Wallis: Einschreibung und Zyklen',
     'blog.article.scuola-vallese-cicli-iscrizione.excerpt': 'Zyklen, Einschreibungsalter, Kalender, Sprachen und Übergang in die Sekundarstufe II im Walliser Schulsystem.',
     'blog.article.scuola-vallese-cicli-iscrizione.imageAlt': 'Schulgebäude im Kanton Wallis',
+    'blog.article.parita-tasse-atenei-ue.title': 'Universitäten: gleiche Gebühren für Schweizer und EU-Studierende',
+    'blog.article.parita-tasse-atenei-ue.excerpt': 'Der Ständerat billigt die Gleichstellung von Schweizer und EU-Studierenden. Der Bund sollte die Mindereinnahmen der Kantone vier Jahre lang ausgleichen.',
+    'blog.article.parita-tasse-atenei-ue.imageAlt': 'Studierende vor einer Schweizer Hochschule nach dem Entscheid zu gleichen Gebühren für EU-Bürger',
 };
 
 export default blogMetaChDe;

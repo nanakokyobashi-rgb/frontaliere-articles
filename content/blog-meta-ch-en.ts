@@ -7163,6 +7163,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.scuola-vallese-cicli-iscrizione.title': 'Valais cantonal school system: enrollment and cycles',
     'blog.article.scuola-vallese-cicli-iscrizione.excerpt': 'Cycles, enrollment age, calendar, languages and transition to upper secondary schools in the school system of Valais.',
     'blog.article.scuola-vallese-cicli-iscrizione.imageAlt': 'School building in the canton of Valais',
+    'blog.article.parita-tasse-atenei-ue.title': 'University: equal tuition fees for Swiss and EU students',
+    'blog.article.parita-tasse-atenei-ue.excerpt': 'The Council of States approves equal treatment for Swiss and EU students. The Confederation should cover the Cantons\' lost revenue for four years.',
+    'blog.article.parita-tasse-atenei-ue.imageAlt': 'Students outside a Swiss university after the vote on equal tuition for EU citizens',
 };
 
 export default blogMetaChEn;

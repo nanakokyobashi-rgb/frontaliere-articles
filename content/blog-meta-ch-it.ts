@@ -7163,6 +7163,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.scuola-vallese-cicli-iscrizione.title': 'Sistema scolastico canton Vallese: iscrizione e cicli',
     'blog.article.scuola-vallese-cicli-iscrizione.excerpt': 'Cicli, età di iscrizione, calendario, lingue e passaggio alle scuole medie superiori nel sistema scolastico del Vallese.',
     'blog.article.scuola-vallese-cicli-iscrizione.imageAlt': 'Edificio scolastico nel Cantone di Vallese',
+    'blog.article.parita-tasse-atenei-ue.title': 'Università: tasse uguali per studenti svizzeri e UE',
+    'blog.article.parita-tasse-atenei-ue.excerpt': 'Il Consiglio degli Stati approva la parità tra studenti svizzeri e UE. La Confederazione dovrebbe coprire per quattro anni le minori entrate dei Cantoni.',
+    'blog.article.parita-tasse-atenei-ue.imageAlt': 'Studenti davanti a un\'università svizzera dopo il voto sulle tasse per i cittadini UE',
 };
 
 export default blogMetaChIt;

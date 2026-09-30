@@ -7163,6 +7163,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.scuola-vallese-cicli-iscrizione.title': 'Système scolaire du canton du Valais : inscription et cycles',
     'blog.article.scuola-vallese-cicli-iscrizione.excerpt': 'Cycles, âge d\'inscription, calendrier, langues et passage aux écoles du secondaire II dans le système scolaire du Valais.',
     'blog.article.scuola-vallese-cicli-iscrizione.imageAlt': 'Bâtiment scolaire dans le canton du Valais',
+    'blog.article.parita-tasse-atenei-ue.title': 'Universités : frais identiques pour les étudiants suisses et de l\'UE',
+    'blog.article.parita-tasse-atenei-ue.excerpt': 'Le Conseil des États approuve l\'égalité entre les étudiants suisses et ceux de l\'UE. La Confédération devrait couvrir pendant quatre ans la baisse des recettes des cantons.',
+    'blog.article.parita-tasse-atenei-ue.imageAlt': 'Étudiants devant une université suisse après la décision sur les taxes égales pour les citoyens de l\'UE',
 };
 
 export default blogMetaChFr;

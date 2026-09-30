@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/settore-paralberghiero%2c-lieve-progressione-nel-secondo-trimestre/91969300": {
-    "articleId": "paralberghiero-progression-trimestre-2026",
-    "ts": "2026-08-28T13:27:11.928Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4024825": {
     "articleId": "fed-warsh-tassi-interesse",
     "ts": "2026-08-29T02:12:21.523Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1953676/svizzera-rispetto-ticino-imprese-record-testa": {
     "articleId": "record-nuove-imprese-ticino",
     "ts": "2026-09-30T08:06:58.413Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1953703/tasse-studenti-ue-universita-parita": {
+    "articleId": "parita-tasse-atenei-ue",
+    "ts": "2026-09-30T08:53:43.909Z",
     "keyForm": 2
   }
 }

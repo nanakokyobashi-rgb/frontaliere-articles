@@ -92879,6 +92879,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-parita-tasse-atenei-ue': {
+    title: 'Università: tasse uguali per studenti svizzeri e UE',
+    description: 'Il Consiglio degli Stati approva la parità nelle tasse tra studenti svizzeri e UE. Dal 2025, i due politecnici federali hanno portato le rette a 2.190 franchi',
+    keywords: 'frontalieri, ticino, svizzera, italia, università, tasse, uguali, studenti',
+    ogTitle: 'Parità nelle tasse per studenti svizzeri e UE',
+    ogDescription: 'Il voto del Consiglio degli Stati segue i negoziati tra Berna e Bruxelles: università e scuole universitarie professionali dovranno applicare la stessa tassa a svizzeri e cittadini UE; per gli Stati terzi resterà una retta almeno tre volte superiore.',
+    canonicalPath: '/articoli-svizzera/parita-tasse-atenei-ue/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Università: tasse uguali per studenti svizzeri e UE",
+      "description": "Il Consiglio degli Stati approva la parità nelle tasse tra studenti svizzeri e UE. Dal 2025, i due politecnici federali hanno portato le rette a 2.190 franchi",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/parita-tasse-atenei-ue.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Studenti davanti a un'università svizzera dopo il voto sulle tasse per i cittadini UE"
+      },
+      "datePublished": "2026-09-30T08:53:43+00:00",
+      "dateModified": "2026-09-30T08:53:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/parita-tasse-atenei-ue/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

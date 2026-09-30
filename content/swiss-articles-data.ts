@@ -21517,6 +21517,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'parita-tasse-atenei-ue',
+    category: 'novita',
+    date: '2026-09-30T08:53:43.570Z',
+    image: '/images/blog/parita-tasse-atenei-ue.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
