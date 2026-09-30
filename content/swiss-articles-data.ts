@@ -21562,6 +21562,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'analisti-economia-svizzera-settembre',
+    category: 'pratico',
+    date: '2026-09-30T11:02:17.056Z',
+    image: '/images/blog/analisti-economia-svizzera-settembre.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

@@ -93074,6 +93074,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-analisti-economia-svizzera-settembre': {
+    title: 'Gli analisti frenano sull\'economia svizzera | Frontaliere Ticino',
+    description: 'A Zurigo l\'indice sulle prospettive economiche svizzere scende a più 2,6 punti in settembre. Scopri i dati di UBS e CFA Society su inflazione, tassi e SMI.',
+    keywords: 'frontalieri, ticino, svizzera, italia, analisti, frenano, sull, economia',
+    ogTitle: 'Analisti economia svizzera: indice a più 2,6 punti in settembre',
+    ogDescription: 'Il sondaggio di UBS e CFA Society Switzerland su 78 analisti fotografa un saldo positivo ma in calo per l\'economia elvetica. Dettagli su inflazione, tassi e mercati.',
+    canonicalPath: '/articoli-svizzera/analisti-economia-svizzera-settembre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Gli analisti frenano sull'economia svizzera",
+      "description": "A Zurigo l'indice sulle prospettive economiche svizzere scende a più 2,6 punti in settembre. Scopri i dati di UBS e CFA Society su inflazione, tassi e SMI.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/analisti-economia-svizzera-settembre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Panorama finanziario a Zurigo con l'indice delle prospettive economiche"
+      },
+      "datePublished": "2026-09-30T11:02:17+00:00",
+      "dateModified": "2026-09-30T11:02:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/analisti-economia-svizzera-settembre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

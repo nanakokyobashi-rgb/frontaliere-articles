@@ -7178,6 +7178,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.kof-stime-crescita-svizzera.title': 'Le KOF revoit à la hausse les estimations de croissance pour 2026 et 2027',
     'blog.article.kof-stime-crescita-svizzera.excerpt': 'Le KOF de l\'École polytechnique fédérale de Zurich révise ses estimations : PIB 2026 à 1,9% et 2027 à 1,7%. Tous les détails sur l\'emploi, les prix et les taux.',
     'blog.article.kof-stime-crescita-svizzera.imageAlt': 'Analyse des estimations de croissance économique du KOF en Suisse',
+    'blog.article.analisti-economia-svizzera-settembre.title': 'Les analystes tempèrent leurs attentes concernant l\'économie suisse',
+    'blog.article.analisti-economia-svizzera-settembre.excerpt': 'À Zurich, l\'indice des perspectives économiques suisses s\'établit à plus 2,6 points en septembre, marquant un recul par rapport à août.',
+    'blog.article.analisti-economia-svizzera-settembre.imageAlt': 'Panorama financier à Zurich reflétant les perspectives économiques',
 };
 
 export default blogMetaChFr;

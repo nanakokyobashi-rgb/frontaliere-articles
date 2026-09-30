@@ -7178,6 +7178,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.kof-stime-crescita-svizzera.title': 'KOF korrigiert die Wachstumsschätzungen für 2026 und 2027 nach oben',
     'blog.article.kof-stime-crescita-svizzera.excerpt': 'Die KOF der ETH Zürich revidiert die Schätzungen: BIP 2026 bei 1,9% und 2027 bei 1,7%. Alle Details zu Beschäftigung, Preisen und Zinsen.',
     'blog.article.kof-stime-crescita-svizzera.imageAlt': 'Analyse der KOF-Wirtschaftswachstumsschätzungen in der Schweiz',
+    'blog.article.analisti-economia-svizzera-settembre.title': 'Analysten treten bei der Schweizer Konjunktur auf die Bremse.',
+    'blog.article.analisti-economia-svizzera-settembre.excerpt': 'In Zürich liegt der Index zu den wirtschaftlichen Aussichten der Schweiz im September bei plus 2,6 Punkten und verzeichnet damit einen Rückgang gegenüber August.',
+    'blog.article.analisti-economia-svizzera-settembre.imageAlt': 'Finanzpanorama in Zürich zur Wirtschaftsaussicht in der Schweiz',
 };
 
 export default blogMetaChDe;

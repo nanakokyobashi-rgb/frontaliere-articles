@@ -7178,6 +7178,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.kof-stime-crescita-svizzera.title': 'KOF revises its growth estimates upward for 2026 and 2027',
     'blog.article.kof-stime-crescita-svizzera.excerpt': 'KOF at the Swiss Federal Institute of Technology Zurich revises its estimates: GDP at 1,9% in 2026 and 1,7% in 2027. All details on employment, prices and rates.',
     'blog.article.kof-stime-crescita-svizzera.imageAlt': 'Analysis of KOF economic growth estimates in Switzerland',
+    'blog.article.analisti-economia-svizzera-settembre.title': 'Analysts rein in their outlook for the Swiss economy',
+    'blog.article.analisti-economia-svizzera-settembre.excerpt': 'In Zurich, the index for Swiss economic prospects stands at plus 2,6 points in September, marking a decline compared with August.',
+    'blog.article.analisti-economia-svizzera-settembre.imageAlt': 'Financial panorama in Zurich reflecting Swiss economic outlook',
 };
 
 export default blogMetaChEn;

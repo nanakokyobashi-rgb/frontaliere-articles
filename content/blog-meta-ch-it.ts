@@ -7178,6 +7178,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.kof-stime-crescita-svizzera.title': 'KOF corregge al rialzo le stime di crescita per il 2026 e 2027',
     'blog.article.kof-stime-crescita-svizzera.excerpt': 'Il KOF del Politecnico federale di Zurigo rivede le stime: Pil 2026 all\'1,9% e 2027 all\'1,7%. Tutti i dettagli su occupazione, prezzi e tassi.',
     'blog.article.kof-stime-crescita-svizzera.imageAlt': 'Analisi delle stime economiche del KOF sulla crescita in Svizzera',
+    'blog.article.analisti-economia-svizzera-settembre.title': 'Gli analisti frenano sull\'economia svizzera',
+    'blog.article.analisti-economia-svizzera-settembre.excerpt': 'A Zurigo l\'indice sulle prospettive economiche svizzere si attesta a più 2,6 punti in settembre, segnando una flessione rispetto ad agosto.',
+    'blog.article.analisti-economia-svizzera-settembre.imageAlt': 'Panorama finanziario a Zurigo con l\'indice delle prospettive economiche',
 };
 
 export default blogMetaChIt;
