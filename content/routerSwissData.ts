@@ -2438,6 +2438,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'custodia-bambini-vallese-sussidi': { it: 'custodia-bambini-vallese-sussidi', en: 'childcare-costs-valais', de: 'kinderbetreuung-kosten-wallis', fr: 'garde-enfants-couts-valais' },
  'ubs-artisan-partners-chiede-di-lasciare-svizzera': { it: 'ubs-artisan-partners-chiede-di-lasciare-svizzera', en: 'ubs-artisan-partners-asks-to-leave-switzerland', de: 'ubs-artisan-partners-bittet-schweiz-zu-verlassen', fr: 'ubs-artisan-partners-demande-de-quitter-la-suisse' },
  'guida-ag-sconti-trasporti': { it: 'guida-ag-sconti-trasporti', en: 'swiss-public-transport-passes-discounts', de: 'schweizer-oev-abos-rabatte', fr: 'abonnements-transports-suisses-remises' },
+ 'licenziamento-swisscom-bulle': { it: 'licenziamento-swisscom-bulle', en: 'swisscom-dismissal-bulle', de: 'swisscom-entlassung-bulle', fr: 'licenciement-swisscom-bulle' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

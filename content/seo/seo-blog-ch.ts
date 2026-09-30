@@ -93971,6 +93971,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-licenziamento-swisscom-bulle': {
+    title: 'Licenziamento Swisscom dopo 38 anni: il caso arriva a Berna',
+    description: 'Sébastien Perriard licenziato da Swisscom dopo 38 anni a Bulle. Oltre 530 adesioni alla petizione e interrogazione parlamentare di Benoît Gaillard.',
+    keywords: 'frontalieri, ticino, svizzera, italia, licenziamento, swisscom, dopo, anni',
+    ogTitle: 'Licenziamento Swisscom dopo 38 anni: il caso arriva a Berna',
+    ogDescription: 'Il caso di Sébastien Perriard, licenziato da Swisscom dopo 38 anni di servizio, diventa un caso politico nazionale. Oltre 530 firme chiedono il reintegro.',
+    canonicalPath: '/articoli-svizzera/licenziamento-swisscom-bulle/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Licenziamento Swisscom dopo 38 anni: il caso arriva a Berna",
+      "description": "Sébastien Perriard licenziato da Swisscom dopo 38 anni a Bulle. Oltre 530 adesioni alla petizione e interrogazione parlamentare di Benoît Gaillard.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/licenziamento-swisscom-bulle.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sede di Swisscom in Svizzera"
+      },
+      "datePublished": "2026-09-30T22:10:22+00:00",
+      "dateModified": "2026-09-30T22:10:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/licenziamento-swisscom-bulle/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

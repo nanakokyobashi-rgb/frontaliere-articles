@@ -7247,6 +7247,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.guida-ag-sconti-trasporti.title': 'Public Transportation in Switzerland: Passes, AG, and Discounts',
     'blog.article.guida-ag-sconti-trasporti.excerpt': 'AG, half fare, cantonal and community subscriptions: a guide to comparing the costs, discounts and benefits of public transport in Switzerland.',
     'blog.article.guida-ag-sconti-trasporti.imageAlt': 'Guide to Swiss public transport subscriptions',
+    'blog.article.licenziamento-swisscom-bulle.title': 'Swisscom Layoff After 38 Years: The Case Goes to Bern',
+    'blog.article.licenziamento-swisscom-bulle.excerpt': 'Sébastien Perriard, a 54-year-old from Bulle, was fired by Swisscom after 38 years of service. More than 530 people have signed a petition calling for his reinstatement.',
+    'blog.article.licenziamento-swisscom-bulle.imageAlt': 'Swisscom office building in Switzerland',
 };
 
 export default blogMetaChEn;

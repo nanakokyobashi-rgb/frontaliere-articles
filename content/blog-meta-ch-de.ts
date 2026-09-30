@@ -7247,6 +7247,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.guida-ag-sconti-trasporti.title': 'Öffentlicher Nahverkehr in der Schweiz: Abonnements, GA und Ermäßigungen',
     'blog.article.guida-ag-sconti-trasporti.excerpt': 'AG, Halbtax, kantonale und Verbundabonnements: Leitfaden zum Vergleich von Kosten, Rabatten und Vorteilen des öffentlichen Verkehrs in der Schweiz.',
     'blog.article.guida-ag-sconti-trasporti.imageAlt': 'Guide zu Abos im Schweizer öffentlichen Verkehr',
+    'blog.article.licenziamento-swisscom-bulle.title': 'Kündigung bei Swisscom nach 38 Jahren: Der Fall landet in Bern',
+    'blog.article.licenziamento-swisscom-bulle.excerpt': 'Sébastien Perriard, ein 54-Jähriger aus Bulle, wurde nach 38 Dienstjahren von Swisscom entlassen. Über 530 Menschen fordern seine Wiedereinstellung mittels einer Petition.',
+    'blog.article.licenziamento-swisscom-bulle.imageAlt': 'Swisscom Bürogebäude in der Schweiz',
 };
 
 export default blogMetaChDe;

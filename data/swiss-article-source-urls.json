@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/0olso33mmzic": {
-    "articleId": "commissione-lpp-tasso-minimo-2027",
-    "ts": "2026-08-31T14:33:27.620Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4050478": {
     "articleId": "skyguide-licenziamenti-50-ristrutturazione",
     "ts": "2026-08-31T15:24:35.578Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/ubs%3a-artisan-partners-chiede-alla-banca-di-lasciare-la-svizzera/92147176": {
     "articleId": "ubs-artisan-partners-chiede-di-lasciare-svizzera",
     "ts": "2026-09-30T21:12:40.770Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1953650/dopo-il-brutale-licenziamento-in-centinaia-chiedono-il-suo-reintegro": {
+    "articleId": "licenziamento-swisscom-bulle",
+    "ts": "2026-09-30T22:10:22.349Z",
     "keyForm": 2
   }
 }

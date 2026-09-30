@@ -7247,6 +7247,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.guida-ag-sconti-trasporti.title': 'Transports publics en Suisse : abonnements, AG et réductions',
     'blog.article.guida-ag-sconti-trasporti.excerpt': 'AG, demi-tarif, abonnements cantonaux et communautaires : guide pour comparer les coûts, les réductions et les avantages des transports publics en Suisse.',
     'blog.article.guida-ag-sconti-trasporti.imageAlt': 'Guide des abonnements de transports publics en Suisse',
+    'blog.article.licenziamento-swisscom-bulle.title': 'Licenciement chez Swisscom après 38 ans : l\'affaire arrive à Berne',
+    'blog.article.licenziamento-swisscom-bulle.excerpt': 'Sébastien Perriard, âgé de 54 ans et originaire de Bulle, a été licencié par Swisscom après 38 ans de service. Plus de 530 personnes demandent sa réintégration par voie de pétition.',
+    'blog.article.licenziamento-swisscom-bulle.imageAlt': 'Bâtiment de Swisscom en Suisse',
 };
 
 export default blogMetaChFr;
