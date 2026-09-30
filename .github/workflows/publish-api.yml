@@ -240,6 +240,9 @@ jobs:
           PREFLIGHT_PUSH_BASE_REVISION: ${{ github.event.before }}
         run: node scripts/ci/check-blog-body-syntax.mjs
 
+      - name: Preflight — ogni locale deve avere tutti i body dell’italiano
+        run: node scripts/ci/check-blog-locale-completeness.mjs
+
       # ── LA RETE DI SICUREZZA CHE MANCAVA (issue #267, #245 item 2) ──────────
       #
       # Fino a qui gli articoli generati non passavano da NESSUNA guardia.

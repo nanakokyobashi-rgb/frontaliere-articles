@@ -35,6 +35,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   CRAWLER_COMMIT_RUNTIME_PATH,
+  canonicalJsonDigest,
   SITE_LOGIC_DIR,
   SITE_LOGIC_DIR_FALLBACKS,
   duplicateManifestPaths,
@@ -102,6 +103,10 @@ const fixtureContract = {
     sourceRef: 'main',
     sourceCommit: SOURCE_COMMIT,
   },
+  crawlerGeneration: {
+    rosterPath: 'scripts/ci/crawler-generation-roster.json',
+    rosterDigest: `sha256:${HASH}`,
+  },
 };
 
 test('#1264 — il piano runtime raccoglie ogni flag invocata dagli artifact', () => {
@@ -126,6 +131,17 @@ test('#1264 — il piano runtime raccoglie ogni flag invocata dagli artifact', (
   assert.deepEqual(
     checks.find((check) => check.flag === '--slice-only').artifactFiles,
     ['crawler-group-01.yml'],
+  );
+});
+
+test('FU-011 — il digest del roster verifica il payload senza accettare un digest interno falso', () => {
+  const payload = { schemaVersion: 1, groupCount: 1, crawlerCount: 0, groups: {}, primarySlices: {} };
+  const canonical = JSON.stringify(Object.fromEntries(Object.keys(payload).sort().map((key) => [key, payload[key]])));
+  const digest = `sha256:${createHash('sha256').update(canonical).digest('hex')}`;
+  assert.equal(canonicalJsonDigest(Buffer.from(JSON.stringify({ ...payload, digest }))), digest);
+  assert.throws(
+    () => canonicalJsonDigest(Buffer.from(JSON.stringify({ ...payload, digest: `sha256:${'b'.repeat(64)}` }))),
+    /digest interno/,
   );
 });
 
@@ -274,8 +290,12 @@ test('il piano copre generatore, sorgente e artifact di ogni voce', () => {
     checks.filter((c) => !c.localOnly).map((c) => [c.field, c.sitePath]),
     [
       ['generatorSha256', 'scripts/generate-crawler-group-workflows.mjs'],
+      ['lineage#generatorSha256', 'scripts/generate-crawler-group-workflows.mjs'],
+      ['lineage#crawlerGeneration.rosterDigest', 'scripts/ci/crawler-generation-roster.json'],
       ['crawler-group-01.yml#sourceSha256', `${SITE_LOGIC_DIR}/crawler-group-01-logic.yml`],
       ['crawler-group-01.yml#artifactSha256', '.github/corpus-workflows/crawler-group-01.yml'],
+      ['crawler-group-01.yml#sourceSha256@sourceCommit', `${SITE_LOGIC_DIR}/crawler-group-01-logic.yml`],
+      ['crawler-group-01.yml#artifactSha256@sourceCommit', '.github/corpus-workflows/crawler-group-01.yml'],
     ],
   );
   assert.deepEqual(
@@ -286,10 +306,19 @@ test('il piano copre generatore, sorgente e artifact di ogni voce', () => {
       'contract#artifactObservation.generatorSha256',
       'contract#artifactObservation.sourceRef',
       'contract#artifactObservation.sourceCommit',
+      'contract#crawlerGeneration.rosterPath',
+      'contract#crawlerGeneration.rosterDigest',
       'crawler-group-01.yml#generatorSha256',
     ],
   );
-  assert.equal(checks.filter((c) => !c.localOnly).every((c) => c.observationRef === 'main'), true);
+  assert.equal(
+    checks.filter((c) => !c.localOnly && !c.lineage).every((c) => c.observationRef === 'main'),
+    true,
+  );
+  assert.equal(
+    checks.filter((c) => !c.localOnly && c.lineage).every((c) => c.observationRef === SOURCE_COMMIT),
+    true,
+  );
 });
 
 test('un artifact `adapted` salta solo il confronto remoto e resta esplicito', () => {
@@ -302,7 +331,7 @@ test('un artifact `adapted` salta solo il confronto remoto e resta esplicito', (
   assert.equal(artifact.localArtifactFile, 'crawler-group-01.yml');
   assert.equal(artifact.expected, HASH);
 
-  const observed = new Map(checks.map((c) => [c.field, { sha256: HASH }]));
+  const observed = new Map(checks.map((c) => [c.field, { sha256: c.expected }]));
   observed.set(artifact.field, { observed: HASH });
   const verdict = evaluateProvenance(checks, observed);
   assert.equal(verdict.results.find((r) => r.field === artifact.field).state, 'adapted');
@@ -330,18 +359,19 @@ test('un artifact `adapted` senza digest resta `undeclared` e rosso', () => {
   assert.equal(verdict.red, true);
 });
 
-test(`il piano reale copre i ${1 + CRAWLER_ARTIFACT_COUNT * 2} digest e la lineage del contratto committato`, () => {
+test(`il piano reale copre i digest correnti e la lineage del contratto committato`, () => {
   const checks = planProvenanceChecks(CONTRACT, MANIFEST);
   const adaptedArtifacts = CONTRACT.artifacts.filter((artifact) => MANIFEST.files.some(
     (entry) => entry.path === `.github/workflows/${artifact.file}` && entry.mode === 'adapted',
   )).length;
-  assert.equal(
-    checks.filter((c) => !c.localOnly).length,
-    1 + CONTRACT.artifacts.length * 2 - adaptedArtifacts,
-  );
-  assert.equal(checks.filter((c) => c.localOnly).length, 5 + CONTRACT.artifacts.length + adaptedArtifacts);
-  assert.equal(checks.length, 5 + CONTRACT.artifacts.length + 1 + CONTRACT.artifacts.length * 2);
-  assert.equal(checks.filter((c) => !c.localOnly).length, 1 + CRAWLER_ARTIFACT_COUNT * 2 - adaptedArtifacts);
+  const currentRemoteChecks = 1 + CONTRACT.artifacts.length * 2 - adaptedArtifacts;
+  const lineageRemoteChecks = 2 + CONTRACT.artifacts.length * 2 - adaptedArtifacts;
+  const localChecks = 7 + CONTRACT.artifacts.length;
+  assert.equal(checks.filter((c) => !c.localOnly && !c.lineage).length, currentRemoteChecks);
+  assert.equal(checks.filter((c) => !c.localOnly && c.lineage).length, lineageRemoteChecks);
+  assert.equal(checks.filter((c) => c.localOnly).length, localChecks);
+  assert.equal(checks.length, currentRemoteChecks + lineageRemoteChecks + localChecks);
+  assert.equal(checks.filter((c) => !c.localOnly).length, currentRemoteChecks + lineageRemoteChecks);
   for (const artifact of CONTRACT.artifacts) {
     assert.equal(artifact.generatorSha256, CONTRACT.generatorSha256, `${artifact.file}: generatorSha256 fuori lineage`);
   }
@@ -365,6 +395,8 @@ test(`il piano reale copre i ${1 + CRAWLER_ARTIFACT_COUNT * 2} digest e la linea
     }
   }
   assert.ok(checks.some((c) => c.field === 'generatorSha256' && c.expected === CONTRACT.generatorSha256));
+  assert.ok(checks.some((c) => c.field === 'lineage#generatorSha256' && c.expected === CONTRACT.generatorSha256));
+  assert.ok(checks.some((c) => c.field === 'lineage#crawlerGeneration.rosterDigest'));
 });
 
 test('un artifact riordinato a mano, senza sorgente, è `undeclared` e rosso', () => {
@@ -411,7 +443,10 @@ test('un path del sito sparito è `absent`, non un verde per assenza di prove', 
 
 test('tutto verificato è verde, e il piano completo non lascia buchi', () => {
   const checks = planProvenanceChecks(fixtureContract, fixtureManifest);
-  const verdict = evaluateProvenance(checks, new Map(checks.map((c) => [c.field, { sha256: HASH }])));
+  const verdict = evaluateProvenance(checks, new Map(checks.map((c) => [
+    c.field,
+    c.localOnly ? { observed: c.observed } : { sha256: c.expected },
+  ])));
   assert.equal(verdict.red, false);
   assert.equal(verdict.counts.verified, checks.length);
   assert.equal(verdict.observationRef, 'main');
@@ -567,7 +602,14 @@ test('un sourceRef non canonico resta lineage invalida e non diventa ref remoto'
   }, fixtureManifest);
   const sourceRef = checks.find((check) => check.field === 'contract#sourceRef');
   assert.equal(sourceRef.observed, null);
-  assert.equal(checks.filter((check) => !check.localOnly).every((check) => check.observationRef === 'main'), true);
+  assert.equal(
+    checks.filter((check) => !check.localOnly && !check.lineage).every((check) => check.observationRef === 'main'),
+    true,
+  );
+  assert.equal(
+    checks.filter((check) => !check.localOnly && check.lineage).every((check) => check.observationRef === SOURCE_COMMIT),
+    true,
+  );
   const verdict = evaluateProvenance(checks, new Map(checks.map((check) => [check.field, { sha256: HASH }])));
   assert.equal(verdict.red, true);
   assert.match(verdict.reason, /sourceRef/);

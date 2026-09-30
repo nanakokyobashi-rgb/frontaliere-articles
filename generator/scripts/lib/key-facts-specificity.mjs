@@ -153,7 +153,76 @@ function splitBullets(sectionBody) {
     if (start !== -1) bullets.push({ start, end: markerStart });
     start = markerStart;
   }
-  if (start === -1) return [];
+  if (start === -1) {
+    // Some older bodies use a Markdown table for the key facts. Treat each
+    // data row as one fact and ignore the header/separator rows.
+    const lines = sectionBody.split('\n');
+    const table = [];
+    let offset = 0;
+    const tableCells = (line) => {
+      const trimmed = line.trim();
+      if (!/^\|.*\|$/u.test(trimmed)) return null;
+      return trimmed.slice(1, -1).split('|').map((cell) => cell.trim());
+    };
+    const isSeparator = (cells) => Array.isArray(cells)
+      && cells.length >= 2
+      && cells.every((cell) => /^:?-{3,}:?$/u.test(cell));
+    for (let index = 0; index < lines.length; index += 1) {
+      const line = lines[index];
+      const cells = tableCells(line);
+      if (cells && !isSeparator(cells)) {
+        const nextCells = tableCells(lines[index + 1] ?? '');
+        if (isSeparator(nextCells)) {
+          // Header row; the following separator is handled on its own.
+        } else if (cells.length >= 2 && cells[0] && cells.slice(1).some(Boolean)) {
+          const lineStart = offset + line.search(/\S/u);
+          table.push({
+            start: lineStart,
+            end: offset + line.length,
+            value: cells.slice(1).filter(Boolean).join(' | '),
+          });
+        }
+      }
+      offset += line.length + 1;
+    }
+    if (table.length > 0) {
+      return table.map(({ start: factStart, end: factEnd, value }) => ({
+        start: factStart,
+        end: factEnd,
+        raw: sectionBody.slice(factStart, factEnd),
+        value,
+      }));
+    }
+
+    // Older published bodies emitted the key facts as a compact block of
+    // `Label: value` lines without a Markdown bullet. Keep that format
+    // recognizable so structural repairs can validate it without changing
+    // the article's established shape.
+    const legacy = [];
+    let legacyOffset = 0;
+    for (const line of sectionBody.split('\n')) {
+      const trimmed = line.trim();
+      const isFactLine = /^(?:\*\*)?[^:\n]{1,80}(?:\*\*)?\s*(?::|→|->)\s*\S/u.test(trimmed);
+      if (isFactLine) {
+        const lineStart = legacyOffset + line.search(/\S/u);
+        legacy.push({ start: lineStart, end: legacyOffset + line.length });
+      } else if (legacy.length > 0 && trimmed === '') {
+        break;
+      } else if (legacy.length > 0) {
+        break;
+      }
+      legacyOffset += line.length + 1;
+    }
+    return legacy.map(({ start: factStart, end: factEnd }) => {
+      const raw = sectionBody.slice(factStart, factEnd);
+      return {
+        start: factStart,
+        end: factEnd,
+        raw,
+        value: factValueOf(raw),
+      };
+    });
+  }
   bullets.push({ start, end: sectionBody.length });
 
   return bullets.map(({ start: bulletStart, end: bulletEnd }) => {

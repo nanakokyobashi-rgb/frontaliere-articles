@@ -46,6 +46,7 @@ import {
   translationSanityIssue,
   LENGTH_FLOOR,
   replaceBodyField,
+  insertBodyField,
   readBodyField,
   escapeForSingleQuoteTS,
   stratify,
@@ -110,6 +111,17 @@ test('shouldWrite scrive solo bloccante-prima e pulita-dopo', () => {
   assert.deepEqual(v, { write: true, reason: 'pulita' });
 });
 
+test('FU-009 — shouldWrite consente il backfill solo se il difetto strutturale è dichiarato', () => {
+  assert.deepEqual(
+    shouldWrite({ oldCodes: [], newCodes: [], missingField: null }),
+    { write: false, reason: 'vecchia-gia-pulita' },
+  );
+  assert.deepEqual(
+    shouldWrite({ oldCodes: ['missing-key'], newCodes: [], missingField: null, structuralDefect: true }),
+    { write: true, reason: 'pulita' },
+  );
+});
+
 test('la ri-traduzione rifiuta i fatti chiave vacui sotto soglia', () => {
   const body1 = [
     '## Fatti chiave',
@@ -140,6 +152,20 @@ test('la ri-traduzione può togliere un fatto vuoto se restano tre superstiti', 
   assert.equal(guarded.issue, null);
   assert.equal(guarded.changed, true);
   assert.doesNotMatch(guarded.sections.body1, /non specificato/i);
+});
+
+test('la riparazione strutturale conserva un residuo esplicito già presente nella fonte', () => {
+  const body1 = [
+    '## Key facts',
+    '- **What**: family allowance.',
+    '- Where: Canton of Jura.',
+    '- Amount: Defined by cantonal scales (not yet specified in detail).',
+  ].join('\n');
+  const guarded = guardTranslatedKeyFacts({ body1 }, {
+    maxSourceBackedResiduals: 1,
+  });
+  assert.equal(guarded.issue, null);
+  assert.equal(guarded.changed, false);
 });
 
 test('la ri-traduzione rifiuta una sezione Fatti chiave eliminata o rinominata', () => {
@@ -192,9 +218,9 @@ test('la guardia dei fatti chiave sta prima del gate e della scrittura atomica',
     new URL('../scripts/retranslate-blocking-bodies.mjs', import.meta.url),
     'utf8',
   );
-  const guard = source.indexOf('guardTranslatedKeyFacts(newSections)');
+  const guard = source.indexOf('guardTranslatedKeyFacts(newSections,');
   const gate = source.indexOf('runFactualityGates({ sections: checkedSections');
-  const filteredWrite = source.indexOf('rewriteExistingLocaleBody(trSrc, pair.id, checkedSections)');
+  const filteredWrite = source.indexOf('rewriteExistingLocaleBody(trSrc, pair.id, checkedSections, {');
   const write = source.indexOf('writeAtomic(trPath, rewritten.src)');
   assert.ok(guard >= 0 && guard < gate, 'la factuality gate deve ricevere il payload gia\' guardato');
   assert.ok(gate < filteredWrite && filteredWrite < write, 'la scrittura deve persistere il payload gia\' guardato dopo tutti i gate');
@@ -979,6 +1005,25 @@ test('rewriteExistingLocaleBody riscrive i campi senza toccare le altre chiavi',
   assert.equal(readBodyField(out.src, 'slug-arbitrario', 'body2'), "l'articolo nuovo");
   assert.equal(readBodyField(out.src, 'slug-arbitrario', 'body3'), 'tre');
   assert.equal(rewriteExistingLocaleBody(src, 'slug-arbitrario', { body9: 'x' }).missing, 'body9');
+});
+
+test('FU-009 — rewriteExistingLocaleBody può aggiungere solo le chiavi mancanti', () => {
+  const src = `const b = {\n    'blog.article.slug.faq': 'faq',\n};\n`;
+  const inserted = insertBodyField(src, 'slug', 'body1', "testo con l'apostrofo");
+  assert.match(inserted, /blog\.article\.slug\.body1/);
+  assert.match(inserted, /testo con l\\'apostrofo/);
+  assert.match(inserted, /blog\.article\.slug\.faq/);
+
+  const rewritten = rewriteExistingLocaleBody(
+    src,
+    'slug',
+    { body1: 'uno', body2: 'due' },
+    { allowMissing: true },
+  );
+  assert.equal(rewritten.missing, null);
+  assert.match(rewritten.src, /blog\.article\.slug\.body1/);
+  assert.match(rewritten.src, /blog\.article\.slug\.body2/);
+  assert.match(rewritten.src, /blog\.article\.slug\.faq/);
 });
 
 test('lo script non importa registerArticleFiles: la riscrittura resta in-place', () => {

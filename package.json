@@ -23,6 +23,7 @@
     "test": "node --test 'generator/tests/*.test.mjs'",
     "test:parity": "node generator/tests/parity/run.mjs --check",
     "test:dry-run": "node generator/tests/dry-run-entrypoints.mjs",
+    "check:blog-locales": "node scripts/ci/check-blog-locale-completeness.mjs",
     "refresh:border-wait": "node generator/scripts/refresh-border-wait-averages.mjs",
     "refresh:border-wait-window": "node generator/scripts/refresh-border-wait-window.mjs",
     "refresh:events": "node generator/scripts/refresh-events-dataset.mjs",

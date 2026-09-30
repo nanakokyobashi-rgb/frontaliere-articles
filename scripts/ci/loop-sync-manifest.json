@@ -3482,35 +3482,35 @@
         "alignedAt": "2026-09-29"
       }
     },
-    {
-      "path": ".github/workflows/crawler-group-04.yml",
+      {
+        "path": ".github/workflows/crawler-group-04.yml",
       "sitePath": ".github/corpus-workflows/crawler-group-04.yml",
       "mode": "identical",
-      "baseline": {
-        "site": "17ca314ad5cde009",
-        "corpus": "17ca314ad5cde009",
-        "alignedAt": "2026-09-30"
-      }
+        "baseline": {
+          "site": "17ca314ad5cde009",
+          "corpus": "17ca314ad5cde009",
+          "alignedAt": "2026-09-30"
+        }
     },
     {
       "path": ".github/workflows/crawler-group-05.yml",
       "sitePath": ".github/corpus-workflows/crawler-group-05.yml",
       "mode": "identical",
-      "baseline": {
-        "site": "b93682868ace3ab1",
-        "corpus": "b93682868ace3ab1",
-        "alignedAt": "2026-09-30"
-      }
+        "baseline": {
+          "site": "b93682868ace3ab1",
+          "corpus": "b93682868ace3ab1",
+          "alignedAt": "2026-09-30"
+        }
     },
     {
       "path": ".github/workflows/crawler-group-06.yml",
       "sitePath": ".github/corpus-workflows/crawler-group-06.yml",
       "mode": "identical",
-      "baseline": {
-        "site": "125562df5d861867",
-        "corpus": "125562df5d861867",
-        "alignedAt": "2026-09-30"
-      }
+        "baseline": {
+          "site": "125562df5d861867",
+          "corpus": "125562df5d861867",
+          "alignedAt": "2026-09-30"
+        }
     },
     {
       "path": ".github/workflows/crawler-group-07.yml",
@@ -3566,31 +3566,31 @@
       "path": ".github/workflows/crawler-group-12.yml",
       "sitePath": ".github/corpus-workflows/crawler-group-12.yml",
       "mode": "identical",
-      "baseline": {
-        "site": "fc679addfcc9950c",
-        "corpus": "fc679addfcc9950c",
-        "alignedAt": "2026-09-30"
-      }
+        "baseline": {
+          "site": "fc679addfcc9950c",
+          "corpus": "fc679addfcc9950c",
+          "alignedAt": "2026-09-30"
+        }
     },
     {
       "path": ".github/workflows/crawler-group-13.yml",
       "sitePath": ".github/corpus-workflows/crawler-group-13.yml",
       "mode": "identical",
-      "baseline": {
-        "site": "4eb86d2cb073a3f3",
-        "corpus": "4eb86d2cb073a3f3",
-        "alignedAt": "2026-09-30"
-      }
+        "baseline": {
+          "site": "4eb86d2cb073a3f3",
+          "corpus": "4eb86d2cb073a3f3",
+          "alignedAt": "2026-09-30"
+        }
     },
     {
       "path": ".github/workflows/crawler-group-14.yml",
       "sitePath": ".github/corpus-workflows/crawler-group-14.yml",
       "mode": "identical",
-      "baseline": {
-        "site": "e6ae8a53cbfb439c",
-        "corpus": "e6ae8a53cbfb439c",
-        "alignedAt": "2026-09-30"
-      }
+        "baseline": {
+          "site": "e6ae8a53cbfb439c",
+          "corpus": "e6ae8a53cbfb439c",
+          "alignedAt": "2026-09-30"
+        }
     },
     {
       "path": ".github/workflows/crawler-group-15.yml",
@@ -3636,11 +3636,11 @@
       "path": ".github/workflows/crawler-group-19.yml",
       "sitePath": ".github/corpus-workflows/crawler-group-19.yml",
       "mode": "identical",
-      "baseline": {
-        "site": "df868822fe147128",
-        "corpus": "df868822fe147128",
-        "alignedAt": "2026-09-30"
-      }
+        "baseline": {
+          "site": "df868822fe147128",
+          "corpus": "df868822fe147128",
+          "alignedAt": "2026-09-30"
+        }
     },
     {
       "path": ".github/workflows/crawler-group-20.yml",
@@ -3676,11 +3676,11 @@
       "path": ".github/workflows/crawler-group-23.yml",
       "sitePath": ".github/corpus-workflows/crawler-group-23.yml",
       "mode": "identical",
-      "baseline": {
-        "site": "d5ba6504e1e5626d",
-        "corpus": "d5ba6504e1e5626d",
-        "alignedAt": "2026-09-30"
-      }
+        "baseline": {
+          "site": "d5ba6504e1e5626d",
+          "corpus": "d5ba6504e1e5626d",
+          "alignedAt": "2026-09-30"
+        }
     },
     {
       "path": ".github/workflows/translate-pending.yml",
@@ -3697,10 +3697,10 @@
       "sitePath": ".github/corpus-workflows/contract.json",
       "mode": "identical",
       "reason": "Riallineato il 2026-09-24 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono ora byte-identici fra sito e corpus, con il roster corrente di 621 crawler.",
-      "baseline": {
-        "site": "58ab3941c40442a9",
-        "corpus": "58ab3941c40442a9",
-        "alignedAt": "2026-09-30"
+        "baseline": {
+          "site": "58ab3941c40442a9",
+          "corpus": "58ab3941c40442a9",
+          "alignedAt": "2026-09-30"
       }
     },
     {
@@ -3803,11 +3803,11 @@
       "path": "scripts/ci/translate-queue-recovery.mjs",
       "mode": "corpus-only",
       "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, misura l'eta' del detentore dal job attivo (`jobs.started_at`) invece che dalla coda del workflow e quella di un rerun pending dall'attempt corrente (`run_started_at`, fail-closed se illeggibile o anteriore a `created_at`) invece che dalla prima creazione, rifiuta fail-closed (`future_timestamp`) ogni istante di misura oltre la tolleranza di skew `MAX_CLOCK_SKEW_SECONDS` invece di azzerarne l'eta', dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
-      "baseline": {
-        "site": null,
-        "corpus": "8b2244c262cd6924",
-        "alignedAt": "2026-09-30"
-      }
+        "baseline": {
+          "site": null,
+          "corpus": "8b2244c262cd6924",
+          "alignedAt": "2026-09-30"
+        }
     },
     {
       "path": "generator/tests/translate-queue-recovery.test.mjs",
@@ -4415,11 +4415,11 @@
       "path": ".github/workflows/crawler-group-24.yml",
       "sitePath": ".github/corpus-workflows/crawler-group-24.yml",
       "mode": "identical",
-      "baseline": {
-        "site": "8d1e2cbd716683ba",
-        "corpus": "8d1e2cbd716683ba",
-        "alignedAt": "2026-09-30"
-      }
+        "baseline": {
+          "site": "8d1e2cbd716683ba",
+          "corpus": "8d1e2cbd716683ba",
+          "alignedAt": "2026-09-30"
+        }
     },
     {
       "path": "generator/scripts/lib/synthetic-source-contract.mjs",
