@@ -3687,20 +3687,20 @@
       "sitePath": ".github/corpus-workflows/translate-pending.yml",
       "mode": "identical",
       "baseline": {
-        "site": "2454542660254de0",
-        "corpus": "2454542660254de0",
-        "alignedAt": "2026-09-30"
+        "site": "e0c219e27b3faea1",
+        "corpus": "e0c219e27b3faea1",
+        "alignedAt": "2026-10-01"
       }
     },
     {
       "path": "generator/data/crawler-cross-repo-contract.json",
       "sitePath": ".github/corpus-workflows/contract.json",
       "mode": "identical",
-      "reason": "Riallineato il 2026-09-30 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono ora byte-identici fra sito e corpus, con il roster corrente di 624 crawler.",
+      "reason": "Riallineato il 2026-10-01 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono ora byte-identici fra sito e corpus, con il roster corrente di 624 crawler.",
       "baseline": {
-        "site": "2d603b415acca7e7",
-        "corpus": "2d603b415acca7e7",
-        "alignedAt": "2026-09-30"
+        "site": "1368dbf1cd04fdf7",
+        "corpus": "1368dbf1cd04fdf7",
+        "alignedAt": "2026-10-01"
       }
     },
     {
@@ -3805,8 +3805,8 @@
       "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, misura l'eta' del detentore dal job attivo (`jobs.started_at`) invece che dalla coda del workflow e quella di un rerun pending dall'attempt corrente (`run_started_at`, fail-closed se illeggibile o anteriore a `created_at`) invece che dalla prima creazione, rifiuta fail-closed (`future_timestamp`) ogni istante di misura oltre la tolleranza di skew `MAX_CLOCK_SKEW_SECONDS` invece di azzerarne l'eta', dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
       "baseline": {
         "site": null,
-        "corpus": "b904072abd91cdfb",
-        "alignedAt": "2026-09-30"
+        "corpus": "0588bc3690d92ee6",
+        "alignedAt": "2026-10-01"
       }
     },
     {
