@@ -7403,6 +7403,18 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.agenda-federale-autunno-2026.title': 'Bundesrat: Mieten, Integration und Cybersicherheit',
     'blog.article.agenda-federale-autunno-2026.excerpt': '334,5 Millionen für die Integration im Zeitraum 2028-2032, Gegenvorschlag zu den Mieten und Vorschlag zur Cybersicherheit bis Juni 2027.',
     'blog.article.agenda-federale-autunno-2026.imageAlt': 'Schweizerisches Regierungsgebäude zu aktuellen Bundesentscheiden',
+    'blog.article.infomaniak-debutto-six.title': 'Infomaniak, Debüt an der Schweizer Börse',
+    'blog.article.infomaniak-debutto-six.excerpt': 'Die Aktien von Infomaniak eröffneten bei 56 Francs, erreichten 140 Francs und schlossen nach der umgekehrten Fusion mit Perrot Duval bei 85 Francs.',
+    'blog.article.infomaniak-debutto-six.imageAlt': 'Die Schweizer Börse in Zürich beim Börsendebüt von Infomaniak.',
+    'blog.article.killsec-server-dati-svizzeri.title': 'KillSec: Hacker-Netzwerk aufgelöst, Schweiz beteiligt',
+    'blog.article.killsec-server-dati-svizzeri.excerpt': 'Internationale Operation gegen KillSec: drei Festnahmen, fünf Server beschlagnahmt und 110 Terabyte gestohlener Daten geborgen. Schweizer Ermittlungen laufen.',
+    'blog.article.killsec-server-dati-svizzeri.imageAlt': 'Serverraum eines Schweizer Unternehmens als Symbolbild zur internationalen Operation gegen KillSec',
+    'blog.article.fisioterapisti-petizioni-tariffe-cantoni.title': 'Physiotherapeuten: 112k Stimmen für höhere Tarife, Kantone',
+    'blog.article.fisioterapisti-petizioni-tariffe-cantoni.excerpt': 'Physioswiss reicht im Oktober 26 kantonale Anträge ein: eine Mindesterhöhung von 30 % wird beantragt, um die Studienkosten zu decken und den Zugang zur Versorgung zu gewährleisten',
+    'blog.article.fisioterapisti-petizioni-tariffe-cantoni.imageAlt': 'Physiotherapiepraxis in der Schweiz mit Therapeut bei der Arbeit',
+    'blog.article.operazione-ransomware-dati-sottratti.title': 'KillSec: drei Festnahmen und 110 Terabyte gestohlene Daten',
+    'blog.article.operazione-ransomware-dati-sottratti.excerpt': 'Drei Festnahmen, acht Durchsuchungen und fünf beschlagnahmte Server: Die Operation gegen KillSec sicherte mindestens 110 Terabyte gestohlener Daten.',
+    'blog.article.operazione-ransomware-dati-sottratti.imageAlt': 'Computermonitore und Schweizer Karte zur Untersuchung gegen die Ransomware-Gruppe KillSec',
 };
 
 export default blogMetaChDe;

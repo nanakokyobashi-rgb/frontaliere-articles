@@ -208,7 +208,16 @@ test('followup-drainer: la baseline post-B19 non dichiara piu\' una falsa identi
   assert.match(entry.reason, /#8081/);
   assert.match(entry.reason, /ISSUE_GROUP_MAX_SIZE/);
   assert.match(entry.reason, /autoTitleGroupingKey\(\)/);
+  assert.match(entry.reason, /fu-parked.*agent:fix-queued.*cooldown/);
   assert.doesNotMatch(entry.reason, /byte-identico a origin\/main del sito/);
+});
+
+test('gate-minted-followups: il mint corpus rispetta il cooldown fu-parked', () => {
+  const entry = byPath.get('scripts/ci/gate-minted-followups.mjs');
+  assert.ok(entry, 'gate-minted-followups.mjs deve restare censito');
+  assert.equal(entry.mode, 'adapted');
+  assert.match(entry.reason, /[Nn]on aggiunge `agent:fix-queued` a un issue `fu-parked`/);
+  assert.match(entry.reason, /cooldown/);
 });
 
 test('files: sitePath e baseline coerenti col mode', () => {

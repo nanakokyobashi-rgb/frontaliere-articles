@@ -7403,6 +7403,18 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.agenda-federale-autunno-2026.title': 'Consiglio federale: affitti, integrazione e cibersicurezza',
     'blog.article.agenda-federale-autunno-2026.excerpt': '334,5 milioni per l\'integrazione nel 2028-2032, controprogetto sulle pigioni e proposta sulla cibersicurezza entro giugno 2027.',
     'blog.article.agenda-federale-autunno-2026.imageAlt': 'Edificio istituzionale svizzero sullo sfondo delle decisioni federali',
+    'blog.article.infomaniak-debutto-six.title': 'Infomaniak, debutto alla Borsa svizzera',
+    'blog.article.infomaniak-debutto-six.excerpt': 'Il titolo Infomaniak apre a 56 franchi, tocca 140 e chiude a 85 dopo la fusione inversa con Perrot Duval.',
+    'blog.article.infomaniak-debutto-six.imageAlt': 'La Borsa svizzera a Zurigo per il debutto di Infomaniak.',
+    'blog.article.killsec-server-dati-svizzeri.title': 'KillSec: rete hacker smantellata, coinvolta la Svizzera',
+    'blog.article.killsec-server-dati-svizzeri.excerpt': 'Operazione internazionale contro KillSec: tre arresti, cinque server sequestrati e 110 terabyte di dati rubati recuperati. Indagini svizzere in corso.',
+    'blog.article.killsec-server-dati-svizzeri.imageAlt': 'Sala server di un\'azienda svizzera, immagine simbolica per l\'operazione contro KillSec',
+    'blog.article.fisioterapisti-petizioni-tariffe-cantoni.title': 'Fisioterapisti: 112mila firme per tariffe più alte, petizioni ai cantoni',
+    'blog.article.fisioterapisti-petizioni-tariffe-cantoni.excerpt': 'Physioswiss consegna 26 petizioni cantonali a ottobre: chiesto aumento minimo 30% per coprire costi studi e garantire accesso cure',
+    'blog.article.fisioterapisti-petizioni-tariffe-cantoni.imageAlt': 'Studio di fisioterapia in Svizzera con terapista al lavoro',
+    'blog.article.operazione-ransomware-dati-sottratti.title': 'KillSec: tre arresti e 110 terabyte di dati rubati',
+    'blog.article.operazione-ransomware-dati-sottratti.excerpt': 'Tre arresti, otto perquisizioni e cinque server sequestrati: l\'operazione contro KillSec ha recuperato almeno 110 terabyte di dati rubati.',
+    'blog.article.operazione-ransomware-dati-sottratti.imageAlt': 'Schermi informatici e mappa svizzera per l\'inchiesta sul ransomware KillSec',
 };
 
 export default blogMetaChIt;

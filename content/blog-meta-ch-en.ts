@@ -7403,6 +7403,18 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.agenda-federale-autunno-2026.title': 'Federal Council: rents, integration and cybersecurity',
     'blog.article.agenda-federale-autunno-2026.excerpt': '€334.5 million for integration in 2028-2032, counter-proposal on rents and proposal on cybersecurity by June 2027.',
     'blog.article.agenda-federale-autunno-2026.imageAlt': 'Swiss institutional building illustrating federal decisions',
+    'blog.article.infomaniak-debutto-six.title': 'Infomaniak, debut on the Swiss Stock Exchange',
+    'blog.article.infomaniak-debutto-six.excerpt': 'Infomaniak shares opened at 56 francs, reached 140 francs and closed at 85 francs after the reverse merger with Perrot Duval.',
+    'blog.article.infomaniak-debutto-six.imageAlt': 'The Swiss stock exchange in Zurich during Infomaniak\'s market debut.',
+    'blog.article.killsec-server-dati-svizzeri.title': 'KillSec: hacker network dismantled, Switzerland involved',
+    'blog.article.killsec-server-dati-svizzeri.excerpt': 'International operation against KillSec: three arrests, five servers seized and 110 terabytes of stolen data recovered. Swiss investigations ongoing.',
+    'blog.article.killsec-server-dati-svizzeri.imageAlt': 'Swiss company server room, symbolic image for the international operation against KillSec',
+    'blog.article.fisioterapisti-petizioni-tariffe-cantoni.title': 'Physiotherapists: 112k signatures for higher rates, cantonal petitions',
+    'blog.article.fisioterapisti-petizioni-tariffe-cantoni.excerpt': 'Physioswiss delivers 26 cantonal petitions in October: minimum 30% increase requested to cover study costs and guarantee access to care',
+    'blog.article.fisioterapisti-petizioni-tariffe-cantoni.imageAlt': 'Physiotherapy clinic in Switzerland with therapist working',
+    'blog.article.operazione-ransomware-dati-sottratti.title': 'KillSec: three arrests and 110 terabytes of stolen data',
+    'blog.article.operazione-ransomware-dati-sottratti.excerpt': 'Three arrests, eight searches and five servers seized: the operation against KillSec recovered at least 110 terabytes of stolen data.',
+    'blog.article.operazione-ransomware-dati-sottratti.imageAlt': 'Computer screens and a Swiss map illustrating the KillSec ransomware investigation',
 };
 
 export default blogMetaChEn;

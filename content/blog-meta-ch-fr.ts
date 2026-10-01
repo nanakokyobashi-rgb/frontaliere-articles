@@ -7403,6 +7403,18 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.agenda-federale-autunno-2026.title': 'Conseil fédéral : loyers, intégration et cybersécurité',
     'blog.article.agenda-federale-autunno-2026.excerpt': '334,5 millions d’euros pour l’intégration en 2028-2032, contre-proposition sur les loyers et proposition sur la cybersécurité d’ici juin 2027.',
     'blog.article.agenda-federale-autunno-2026.imageAlt': 'Bâtiment institutionnel suisse illustrant les décisions fédérales',
+    'blog.article.infomaniak-debutto-six.title': 'Infomaniak, débuts à la Bourse suisse',
+    'blog.article.infomaniak-debutto-six.excerpt': 'Les actions d’Infomaniak ont ouvert à 56 francs, ont atteint 140 francs et ont clôturé à 85 francs après la fusion inversée avec Perrot Duval.',
+    'blog.article.infomaniak-debutto-six.imageAlt': 'La Bourse suisse à Zurich lors des débuts d\'Infomaniak.',
+    'blog.article.killsec-server-dati-svizzeri.title': 'KillSec : réseau de hackers démantelé, Suisse impliquée',
+    'blog.article.killsec-server-dati-svizzeri.excerpt': 'Opération internationale contre KillSec : trois arrestations, cinq serveurs saisis et récupération de 110 téraoctets de données volées. Enquêtes suisses en cours.',
+    'blog.article.killsec-server-dati-svizzeri.imageAlt': 'Salle de serveurs d\'une entreprise suisse, image symbolique de l\'opération contre KillSec',
+    'blog.article.fisioterapisti-petizioni-tariffe-cantoni.title': 'Physiothérapeutes : 112k signatures, pétitions cantons',
+    'blog.article.fisioterapisti-petizioni-tariffe-cantoni.excerpt': 'Physioswiss délivre 26 pétitions cantonales en octobre : une augmentation minimale de 30 % demandée pour couvrir les frais d’étude et garantir l’accès aux soins',
+    'blog.article.fisioterapisti-petizioni-tariffe-cantoni.imageAlt': 'Cabinet de physiothérapie en Suisse avec thérapeute au travail',
+    'blog.article.operazione-ransomware-dati-sottratti.title': 'KillSec : trois arrestations et 110 téraoctets de données volées',
+    'blog.article.operazione-ransomware-dati-sottratti.excerpt': 'Trois arrestations, huit perquisitions et cinq serveurs saisis : l’opération contre KillSec a récupéré au moins 110 téraoctets de données volées.',
+    'blog.article.operazione-ransomware-dati-sottratti.imageAlt': 'Écrans informatiques et carte suisse pour l\'enquête sur le rançongiciel KillSec',
 };
 
 export default blogMetaChFr;

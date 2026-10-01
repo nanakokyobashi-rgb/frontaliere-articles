@@ -22237,6 +22237,42 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'infomaniak-debutto-six',
+    category: 'novita',
+    date: '2026-10-01T21:29:11.717Z',
+    image: '/images/blog/infomaniak-debutto-six.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'killsec-server-dati-svizzeri',
+    category: 'novita',
+    date: '2026-10-01T22:05:44.874Z',
+    image: '/images/blog/killsec-server-dati-svizzeri.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'fisioterapisti-petizioni-tariffe-cantoni',
+    category: 'novita',
+    date: '2026-10-01T22:31:50.277Z',
+    image: '/images/blog/fisioterapisti-petizioni-tariffe-cantoni.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'operazione-ransomware-dati-sottratti',
+    category: 'novita',
+    date: '2026-10-01T22:55:16.816Z',
+    image: '/images/blog/operazione-ransomware-dati-sottratti.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

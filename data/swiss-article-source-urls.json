@@ -1,24 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1947297/asib-ubs-impiegati-sostegno-svizzera": {
-    "articleId": "asib-normativa-ubs-sostegno",
-    "ts": "2026-09-01T15:00:15.416Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/ubs%3a-%22apprezziamo-lavoro-svolto%2c-ma-no-a-proposta-concreta%22/91987864": {
-    "articleId": "ubs-requisiti-patrimoniali",
-    "ts": "2026-09-01T15:19:06.995Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/impiegati-di-banca-accolgono-con-favore-normativa-ubs/91986411": {
-    "articleId": "sindacato-banca-ubs-regolamentazione",
-    "ts": "2026-09-01T15:27:16.348Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/economia/1947302/telefonia-comcom-asta-mercato-operatori": {
-    "articleId": "comcom-esclude-nuovi-operatori-mobile",
-    "ts": "2026-09-01T15:34:48.148Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/gtstudico3hi": {
     "articleId": "audizione-concezione-energia-eolica",
     "ts": "2026-09-01T15:42:13.822Z",
@@ -2497,6 +2477,26 @@
   "https://www.rsi.ch/s/4128369": {
     "articleId": "utile-bns-distribuzione-2030",
     "ts": "2026-10-01T19:46:22.457Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4128432": {
+    "articleId": "infomaniak-debutto-six",
+    "ts": "2026-10-01T21:29:12.038Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/smantellata-rete-internazionale-di-hacker/92151953": {
+    "articleId": "killsec-server-dati-svizzeri",
+    "ts": "2026-10-01T22:05:45.245Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/fisioterapisti-chiedono-tariffe-pi%c3%b9-elevate%2c-petizioni-ai-cantoni/92151150": {
+    "articleId": "fisioterapisti-petizioni-tariffe-cantoni",
+    "ts": "2026-10-01T22:31:50.625Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4127529": {
+    "articleId": "operazione-ransomware-dati-sottratti",
+    "ts": "2026-10-01T22:55:17.184Z",
     "keyForm": 2
   }
 }
