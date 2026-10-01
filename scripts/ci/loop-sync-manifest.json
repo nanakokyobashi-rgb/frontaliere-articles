@@ -219,8 +219,8 @@
       "path": "scripts/ci/check-issue-already-resolved.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "f8c0efbcdf212ead",
-        "corpus": "f8c0efbcdf212ead",
+        "site": "091785e2f1f73690",
+        "corpus": "091785e2f1f73690",
         "alignedAt": "2026-10-01"
       }
     },
@@ -1528,10 +1528,10 @@
       "path": "generator/tests/conflict-handoff-reconcile.test.mjs",
       "sitePath": "tests/conflict-handoff-reconcile.test.ts",
       "mode": "adapted",
-      "reason": "Gemello node:test (via expect-shim) del test Vitest del sito sulla chiusura degli hand-off di conflitto gia' risolti: stessi casi puri (handoffResolution sulla HEAD nuova, keyword Closes/Supersedes, duplicati, decideHandoff, commento senza keyword di chiusura). Cambiano il runner, gli esempi (#1586/#1569) e il test di wiring, che legge il followup-drainer.yml di questo repo invece di ENTRYPOINTS, che qui non esiste.",
+      "reason": "Gemello node:test (via expect-shim) del test Vitest del sito sulla chiusura degli hand-off di conflitto gia' risolti: stessi casi puri (prova da merge-tree di conflictClearedAfter, handoffResolution sulla stessa HEAD e su una nuova, keyword Closes/Supersedes via closedIssueRefs, duplicati, decideHandoff, stillClosable, commento senza keyword di chiusura). Cambiano il runner, gli esempi (#1586/#1569) e il test di wiring, che legge il followup-drainer.yml di questo repo invece di ENTRYPOINTS, che qui non esiste.",
       "baseline": {
-        "site": "7b8bd11d6431ab3c",
-        "corpus": "a70d5fc4eaec474f",
+        "site": "fbf2a618bc05e821",
+        "corpus": "e0c0e4439bc7ec3a",
         "alignedAt": "2026-10-01"
       }
     },
@@ -4051,8 +4051,8 @@
       "path": "scripts/ci/reconcile-conflict-handoffs.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "73d0b22685d431d6",
-        "corpus": "73d0b22685d431d6",
+        "site": "50a2830febf8acec",
+        "corpus": "50a2830febf8acec",
         "alignedAt": "2026-10-01"
       }
     },
