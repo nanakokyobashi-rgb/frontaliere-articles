@@ -94361,6 +94361,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tariffe-cura-infanzia-baselstadt': {
+    title: 'Asilo nido Basilea Città: costi e sussidi | Frontaliere Ticino',
+    description: 'Asilo nido e custodia bambini a Basilea Città: costi di nidi, famiglie diurne e doposcuola, tariffe basate sul reddito e sussidi cantonali in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, asilo, nido, basilea, città',
+    ogTitle: 'Asilo nido Basilea Città: costi e sussidi',
+    ogDescription: 'A Basilea Città la spesa per la custodia si legge insieme al reddito: il quadro comprende asili nido, famiglie diurne e doposcuola, con sussidi cantonali disponibili. Una guida pratica per separare questa voce da imposte, premi e contributi.',
+    canonicalPath: '/articoli-svizzera/tariffe-cura-infanzia-baselstadt/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Asilo nido Basilea Città: costi e sussidi",
+      "description": "Asilo nido e custodia bambini a Basilea Città: costi di nidi, famiglie diurne e doposcuola, tariffe basate sul reddito e sussidi cantonali in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/tariffe-cura-infanzia-baselstadt.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Custodia bambini a Basilea Città: ingresso di un asilo nido"
+      },
+      "datePublished": "2026-10-01T01:12:49+00:00",
+      "dateModified": "2026-10-01T01:12:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/tariffe-cura-infanzia-baselstadt/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

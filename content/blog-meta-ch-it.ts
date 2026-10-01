@@ -7277,6 +7277,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.mappa-fiscale-berna-2026.title': 'Imposta cantonale: confronto Svizzera 2026 e Berna',
     'blog.article.mappa-fiscale-berna-2026.excerpt': 'Nel 2026 il confronto fiscale parte da IFD federale, imposta cantonale e imposta comunale: per Berna conta anche il moltiplicatore comunale.',
     'blog.article.mappa-fiscale-berna-2026.imageAlt': 'Documenti fiscali svizzeri e calcolatrice su una scrivania',
+    'blog.article.tariffe-cura-infanzia-baselstadt.title': 'Asilo nido Basilea Città: costi e sussidi',
+    'blog.article.tariffe-cura-infanzia-baselstadt.excerpt': 'Asilo nido e custodia bambini a Basilea Città: nidi, famiglie diurne e doposcuola, tariffe legate al reddito e sussidi cantonali.',
+    'blog.article.tariffe-cura-infanzia-baselstadt.imageAlt': 'Custodia bambini a Basilea Città: ingresso di un asilo nido',
 };
 
 export default blogMetaChIt;

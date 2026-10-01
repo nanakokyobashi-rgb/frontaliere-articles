@@ -7277,6 +7277,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.mappa-fiscale-berna-2026.title': 'Kantonssteuer: Vergleich Schweiz 2026 und Bern',
     'blog.article.mappa-fiscale-berna-2026.excerpt': 'Im Jahr 2026 basiert der Steuervergleich auf der eidgenössischen direkten Steuer, der Kantonssteuer und der Gemeindesteuer; für Bern spielt zudem der Gemeindemultiplikator eine Rolle.',
     'blog.article.mappa-fiscale-berna-2026.imageAlt': 'Schweizer Steuerunterlagen und ein Taschenrechner auf einem Bürotisch',
+    'blog.article.tariffe-cura-infanzia-baselstadt.title': 'Kindergarten Basel-Stadt: Kosten und Zuschüsse',
+    'blog.article.tariffe-cura-infanzia-baselstadt.excerpt': 'Kindertagesstätten und Kinderbetreuung in Basel-Stadt: Krippen, Tagesfamilien und Nachmittagsbetreuung, einkommensabhängige Tarife und kantonale Zuschüsse.',
+    'blog.article.tariffe-cura-infanzia-baselstadt.imageAlt': 'Kinderbetreuung in Basel-Stadt: Eingang einer Kindertagesstätte',
 };
 
 export default blogMetaChDe;

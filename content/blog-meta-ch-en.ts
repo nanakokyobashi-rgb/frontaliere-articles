@@ -7277,6 +7277,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.mappa-fiscale-berna-2026.title': 'Cantonal Tax: A Comparison Between Switzerland in 2026 and Bern',
     'blog.article.mappa-fiscale-berna-2026.excerpt': 'In 2026, the tax comparison will be based on the federal direct tax, cantonal tax, and municipal tax; for Bern, the municipal multiplier will also be taken into account.',
     'blog.article.mappa-fiscale-berna-2026.imageAlt': 'Swiss tax documents and a calculator on an office desk',
+    'blog.article.tariffe-cura-infanzia-baselstadt.title': 'Daycare in Basel-Stadt: Costs and Subsidies',
+    'blog.article.tariffe-cura-infanzia-baselstadt.excerpt': 'Crèche and childcare in Basel-Stadt: crèches, day and after-school families, income-related tariffs and cantonal subsidies.',
+    'blog.article.tariffe-cura-infanzia-baselstadt.imageAlt': 'Childcare in Basel-Stadt: entrance to a daycare centre',
 };
 
 export default blogMetaChEn;

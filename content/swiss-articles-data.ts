@@ -21859,6 +21859,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'tariffe-cura-infanzia-baselstadt',
+    category: 'pratico',
+    date: '2026-10-01T01:12:49.462Z',
+    image: '/images/blog/tariffe-cura-infanzia-baselstadt.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

@@ -7277,6 +7277,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.mappa-fiscale-berna-2026.title': 'Taxe cantonale : comparaison entre la Suisse et Berne en 2026',
     'blog.article.mappa-fiscale-berna-2026.excerpt': 'En 2026, la comparaison fiscale commence avec le DFI fédéral, l’impôt cantonal et l’impôt municipal : pour Berne, le multiplicateur municipal compte également.',
     'blog.article.mappa-fiscale-berna-2026.imageAlt': 'Documents fiscaux suisses et calculatrice sur un bureau',
+    'blog.article.tariffe-cura-infanzia-baselstadt.title': 'Maternelle Bâle-Stadt : coûts et subventions',
+    'blog.article.tariffe-cura-infanzia-baselstadt.excerpt': 'Crèche et garde d’enfants à Bâle-Stadt : crèches, familles de jour et après l’école, tarifs liés au revenu et subventions cantonales.',
+    'blog.article.tariffe-cura-infanzia-baselstadt.imageAlt': 'Garde d’enfants à Bâle-Ville: entrée d’une crèche',
 };
 
 export default blogMetaChFr;

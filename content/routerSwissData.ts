@@ -2448,6 +2448,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'seco-apprendistato-tirocini': { it: 'seco-apprendistato-tirocini', en: 'seco-apprenticeships-internships', de: 'seco-lehre-praktika', fr: 'seco-apprentissages-stages' },
  'riduzione-deflusso-lago-zurigo-2026': { it: 'riduzione-deflusso-lago-zurigo-2026', en: 'zurich-lake-outflow-reduction-2026', de: 'zuerichsee-abfluss-reduktion-2026', fr: 'reduction-debit-lac-zurich-2026' },
  'mappa-fiscale-berna-2026': { it: 'mappa-fiscale-berna-2026', en: 'swiss-tax-map-bern-2026', de: 'steuervergleich-bern-schweiz-2026', fr: 'comparatif-fiscal-berne-suisse-2026' },
+ 'tariffe-cura-infanzia-baselstadt': { it: 'tariffe-cura-infanzia-baselstadt', en: 'basel-stadt-childcare-costs', de: 'basel-stadt-kinderbetreuung-kosten', fr: 'bale-ville-couts-garde-enfants' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
