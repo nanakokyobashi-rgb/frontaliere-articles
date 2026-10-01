@@ -13,17 +13,25 @@
  *
  * `ghostVerdict()` è il pezzo puro di quella verifica: decide se una baseline
  * è "fantasma" dati i fatti già raccolti (hash attuale, e se/come la storia
- * è stata cercata), senza fare fetch. La parte che FA fetch —
- * `checkBaselineProvenance()`, dentro `main()` — non è testata qui per la
- * stessa ragione per cui `loop-sync-manifest-scope.test.mjs` tiene il
- * censimento di rete offline dai test veloci: dipende dall'API di GitHub
- * (commits + contents), che per IP anonimo vale 60 richieste l'ora condivise
- * fra tutti i runner. Un guard che dipende da quella quota non è un guard, è
- * un flake che qualcuno finirà per spegnere.
+ * è stata cercata), senza fare fetch. `checkBaselineProvenance()` mantiene il
+ * fetch reale via `repoHistoryMatch`, ma espone un matcher iniettato per
+ * provare offline l'orchestrazione dei due lati e dell'entry `adapted`; il
+ * test non consuma la quota GitHub condivisa dai runner.
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { ghostVerdict, provenanceRateLimitVerdict, repoHistoryMatch, sha256 } from '../../scripts/ci/loop-drift-check.mjs';
+import { readFileSync } from 'node:fs';
+import {
+  checkBaselineProvenance,
+  ghostVerdict,
+  provenanceRateLimitVerdict,
+  repoHistoryMatch,
+  sha256,
+} from '../../scripts/ci/loop-drift-check.mjs';
+
+const manifest = JSON.parse(readFileSync(new URL('../../scripts/ci/loop-sync-manifest.json', import.meta.url), 'utf8'));
+const ADAPTED_QUEUE_ENTRY = manifest.files.find((entry) => entry.path === 'scripts/ci/unwedge-pages-deploy-queue.mjs');
+assert.equal(ADAPTED_QUEUE_ENTRY?.mode, 'adapted', 'il nuovo reaper deve restare sorvegliato come entry adapted');
 
 test('baseline null: niente da verificare, mai ghost', () => {
   const v = ghostVerdict({ baselineHash: null, currentHash: 'abc123', historyMatch: undefined, historyExhausted: undefined });
@@ -121,6 +129,67 @@ test('la passata di provenienza si ferma al rate limit invece di accumulare note
     'i ghost devono restare prioritari rispetto alla nota di rate limit',
   );
   assert.match(source, /e instanceof CrossRepoRateLimitError/);
+});
+
+test('checkBaselineProvenance riconcilia la provenienza di entrambi i lati dell’entry adapted', async () => {
+  const calls = [];
+  const historyMatcher = async (request) => {
+    calls.push(request);
+    return {
+      match: true,
+      exhausted: true,
+      readable: 1,
+      historyReadable: true,
+      matchedDate: '2026-10-01T00:00:00Z',
+    };
+  };
+  const entry = {
+    ...ADAPTED_QUEUE_ENTRY,
+    baseline: { site: 'site-baseline-before-change', corpus: 'corpus-baseline-before-change' },
+  };
+
+  const result = await checkBaselineProvenance(
+    entry,
+    { site: 'site-after-change', corpus: 'corpus-after-change' },
+    { rateLimited: false, detail: '' },
+    { historyMatcher },
+  );
+
+  assert.deepEqual(result.ghosts, [], 'baseline storiche esistenti non sono ghost');
+  assert.equal(result.rateLimited, false);
+  assert.deepEqual(calls.map(({ repo, filePath, targetHash }) => ({ repo, filePath, targetHash })), [
+    {
+      repo: 'valerielinc-ops/frontaliere-si-o-no',
+      filePath: 'scripts/ci/unwedge-pages-deploy-queue.mjs',
+      targetHash: 'site-baseline-before-change',
+    },
+    {
+      repo: 'nanakokyobashi-rgb/frontaliere-articles',
+      filePath: 'scripts/ci/unwedge-pages-deploy-queue.mjs',
+      targetHash: 'corpus-baseline-before-change',
+    },
+  ]);
+});
+
+test('checkBaselineProvenance segnala il lato adapted con baseline fantasma', async () => {
+  const result = await checkBaselineProvenance(
+    { ...ADAPTED_QUEUE_ENTRY, baseline: { site: 'site-ghost', corpus: 'corpus-ghost' } },
+    { site: 'site-now', corpus: 'corpus-now' },
+    { rateLimited: false, detail: '' },
+    {
+      historyMatcher: async ({ repo }) => ({
+        match: repo === 'nanakokyobashi-rgb/frontaliere-articles',
+        exhausted: true,
+        readable: 1,
+        historyReadable: true,
+        matchedDate: null,
+      }),
+    },
+  );
+
+  assert.deepEqual(result.ghosts, ['site']);
+  assert.match(result.detail, /baseline\.site/);
+  assert.doesNotMatch(result.detail, /baseline\.corpus/);
 });
 
 test('importare il modulo non esegue loop-drift-check: nessun fetch, nessun process.exit', () => {
