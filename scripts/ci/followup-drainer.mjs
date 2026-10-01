@@ -2480,9 +2480,12 @@ const reparkGenOf = (iss) => {
  * «un tracker non entra mai nel pool» dev'essere un'asserzione vera su questa
  * funzione, non un controllo sul testo del sorgente.
  *
- * Esclude: chi non è queue-managed; chi è già in lavorazione o in coda; chi è già
- * differito a `automation-deferred` (too-large); i tracker permanenti (vedi
- * `isPermanentTracker`); chi ha esaurito il generation-cap.
+ * Esclude: chi non è queue-managed; chi è già in lavorazione; chi è già in coda
+ * senza `fu-parked`. L'intersezione `fu-parked` + `agent:fix-queued` resta una
+ * candidata parked: il mint gate non deve crearla, ma il retry la normalizza
+ * rimuovendo `fu-parked` solo dopo il cooldown; prima di allora il DRAIN continua
+ * a escluderla. Esclude anche il defer tecnico, i tracker permanenti (vedi
+ * `isPermanentTracker`) e chi ha esaurito il generation-cap.
  *
  * NB: nessuna di queste condizioni dipende dalla capacità del token. Il
  * capability-guard (WF-scope / secrets-scope) è una decisione DIVERSA e si applica
@@ -2492,7 +2495,8 @@ const reparkGenOf = (iss) => {
 export function isReparkableCandidate(iss) {
   if (!isQueueManaged(iss)) return false;
   if (hasActiveAgentClaim(iss)) return false;
-  if (has(iss, LBL_FIX) || has(iss, LBL_QUEUED)) return false; // già in lavoro/coda
+  if (has(iss, LBL_FIX)) return false; // già in lavorazione
+  if (has(iss, LBL_QUEUED) && !has(iss, LBL_PARKED)) return false; // coda attiva senza park
   if (has(iss, LBL_DECOMP_QUEUED) || has(iss, LBL_DECOMP) || has(iss, LBL_DECOMPOSED)) return false; // nello stadio decompose
   if (has(iss, 'needs-human') || has(iss, LBL_AUTOMATION_DEFERRED)) return false; // già differita/escalata
   if (isPermanentTracker(iss)) return false;                   // tracker permanente (#5615/#5544)

@@ -46,6 +46,8 @@ const DEMOTE_BODY = [
 
 const FOLLOWUP = { name: 'follow-up', color: '0366d6' };
 const NEEDS_HUMAN = { name: 'needs-human', color: 'b60205' };
+const PARKED = { name: 'fu-parked', color: 'cccccc' };
+const QUEUED = { name: 'agent:fix-queued', color: 'fbca04' };
 
 test('il parser dei label conserva il raw ma rifiuta metadata mancanti/malformati', () => {
   const valid = { number: 1, title: 'x', body: 'y', labels: [FOLLOWUP, 'custom'] };
@@ -62,6 +64,8 @@ test('il parser dei label conserva il raw ma rifiuta metadata mancanti/malformat
   assert.equal(canMintQueueLabel(valid), true);
   assert.equal(canMintQueueLabel({ ...valid, labels: [FOLLOWUP, NEEDS_HUMAN] }), false);
   assert.equal(canMintQueueLabel({ ...valid, labels: [FOLLOWUP, { name: 'Needs-Human' }] }), false);
+  assert.equal(canMintQueueLabel({ ...valid, labels: [FOLLOWUP, PARKED] }), false);
+  assert.equal(canMintQueueLabel({ ...valid, labels: [FOLLOWUP, PARKED, QUEUED] }), false);
   assert.equal(canMintQueueLabel({ ...valid, labels: [{}] }), false);
   assert.equal(canMintQueueLabel({ ...valid, labels: [''] }), false);
   assert.equal(parseOpenFollowupPages(JSON.stringify([[{ ...valid, state: 'open' }]])).at(0).labels[0].name, 'follow-up');
@@ -170,7 +174,7 @@ function hasBodyMutation(calls) {
   return calls.some((args) => args[0] === 'issue' && args[1] === 'edit' && args.includes('--body-file'));
 }
 
-test('il ramo keep accoda solo con label raw verificabili e senza needs-human', () => {
+test('il ramo keep accoda solo con label verificabili e senza veto needs-human/parked', () => {
   const allowed = runGate({ body: SEALED_BODY, listLabels: [FOLLOWUP] });
   try {
     assert.equal(allowed.result.status, 0, allowed.result.stdout + allowed.result.stderr);
@@ -186,6 +190,15 @@ test('il ramo keep accoda solo con label raw verificabili e senza needs-human', 
     assert.match(vetoed.result.stdout, /needs-human-veto/);
   } finally {
     vetoed.cleanup();
+  }
+
+  const parked = runGate({ body: SEALED_BODY, listLabels: [FOLLOWUP, PARKED, QUEUED] });
+  try {
+    assert.equal(parked.result.status, 0, parked.result.stdout + parked.result.stderr);
+    assert.equal(hasQueueMutation(parked.calls), false);
+    assert.match(parked.result.stdout, /fu-parked:parked-retry-cooldown/);
+  } finally {
+    parked.cleanup();
   }
 
   const malformed = runGate({ body: SEALED_BODY, listLabels: [FOLLOWUP], viewLabels: [{}] });
