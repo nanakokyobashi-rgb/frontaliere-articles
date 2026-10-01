@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1947302/telefonia-comcom-asta-mercato-operatori": {
-    "articleId": "comcom-esclude-nuovi-operatori-mobile",
-    "ts": "2026-09-01T15:34:48.148Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/gtstudico3hi": {
     "articleId": "audizione-concezione-energia-eolica",
     "ts": "2026-09-01T15:42:13.822Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/fisioterapisti-chiedono-tariffe-pi%c3%b9-elevate%2c-petizioni-ai-cantoni/92151150": {
     "articleId": "fisioterapisti-petizioni-tariffe-cantoni",
     "ts": "2026-10-01T22:31:50.625Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4127529": {
+    "articleId": "operazione-ransomware-dati-sottratti",
+    "ts": "2026-10-01T22:55:17.184Z",
     "keyForm": 2
   }
 }
