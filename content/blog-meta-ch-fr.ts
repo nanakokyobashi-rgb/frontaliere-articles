@@ -7298,6 +7298,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.grigioni-percorso-quotidiano-pass.title': 'Abonnements aux transports publics des Grisons : zones et tarifs',
     'blog.article.grigioni-percorso-quotidiano-pass.excerpt': 'Réseau tarifaire, zones, cartes de voyage annuelles et mensuelles : la comparaison en Grisons inclut une carte de voyage à demi-tarif, une carte de voyage GA et des réductions pour les étudiants et apprentis.',
     'blog.article.grigioni-percorso-quotidiano-pass.imageAlt': 'Transports publics dans les montagnes des Grisons, illustrant abonnements, zones et tarifs',
+    'blog.article.aliquote-locali-san-gallo.title': 'Comparaison des impôts cantonaux en Suisse en 2026 : Saint-Gall',
+    'blog.article.aliquote-locali-san-gallo.excerpt': 'Comparaison 2026 de la taxe cantonale en Suisse : trois niveaux d’imposition, multiplicateur municipal et critères pratiques pour lire le canton de Saint-Gall.',
+    'blog.article.aliquote-locali-san-gallo.imageAlt': 'Documents fiscaux suisses et calculatrice pour comparer les impôts cantonaux.',
 };
 
 export default blogMetaChFr;

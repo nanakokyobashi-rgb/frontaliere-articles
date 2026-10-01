@@ -2455,6 +2455,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'domanda-cittadinanza-grigioni': { it: 'domanda-cittadinanza-grigioni', en: 'graubunden-naturalization-requirements', de: 'einbuergerung-graubuenden', fr: 'naturalisation-grisons-guide' },
  'grigioni-primo-pilastro-rendita': { it: 'grigioni-primo-pilastro-rendita', en: 'grisons-ahv-supplementary-benefits', de: 'graubuenden-ahv-ergaenzungsleistungen', fr: 'grisons-avs-caisse-prestations-complementaires' },
  'grigioni-percorso-quotidiano-pass': { it: 'grigioni-percorso-quotidiano-pass', en: 'graubunden-public-transport-pass', de: 'graubuenden-oev-abos', fr: 'grisons-transports-abonnements' },
+ 'aliquote-locali-san-gallo': { it: 'aliquote-locali-san-gallo', en: 'cantonal-tax-rates-st-gallen', de: 'kantonale-steuersaetze-st-gallen', fr: 'taux-fiscaux-cantonaux-saint-gall' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

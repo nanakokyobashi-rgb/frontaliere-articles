@@ -94634,6 +94634,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-aliquote-locali-san-gallo': {
+    title: 'Confronto imposta cantonale Svizzera 2026: San Gallo',
+    description: 'Imposta cantonale in Svizzera nel 2026: tre livelli fiscali, moltiplicatore comunale e guida pratica al confronto nazionale con focus sul canton San Gallo.',
+    keywords: 'frontalieri, ticino, svizzera, italia, confronto, imposta, cantonale, gallo',
+    ogTitle: 'Imposta cantonale Svizzera 2026: San Gallo',
+    ogDescription: 'Le imposte svizzere si leggono su tre piani: IFD federale, cantone e comune. Il confronto 2026 chiarisce legge cantonale e moltiplicatore comunale, distingue fiscalita\', AVS/AHV, LPP/BVG e LAMal/KVG e analizza il canton San Gallo.',
+    canonicalPath: '/articoli-svizzera/aliquote-locali-san-gallo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Confronto imposta cantonale Svizzera 2026: San Gallo",
+      "description": "Imposta cantonale in Svizzera nel 2026: tre livelli fiscali, moltiplicatore comunale e guida pratica al confronto nazionale con focus sul canton San Gallo.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/aliquote-locali-san-gallo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documenti fiscali svizzeri e calcolatrice per un confronto tra imposte cantonali."
+      },
+      "datePublished": "2026-10-01T03:25:07+00:00",
+      "dateModified": "2026-10-01T03:25:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/aliquote-locali-san-gallo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

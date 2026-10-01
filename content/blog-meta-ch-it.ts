@@ -7298,6 +7298,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.grigioni-percorso-quotidiano-pass.title': 'Abbonamenti trasporti pubblici Grigioni: zone e tariffe',
     'blog.article.grigioni-percorso-quotidiano-pass.excerpt': 'Comunità tariffaria, zone, abbonamenti annuali e mensili: il confronto nei Grigioni include metà-prezzo, AG e sconti per studenti e apprendisti.',
     'blog.article.grigioni-percorso-quotidiano-pass.imageAlt': 'Trasporto pubblico tra le montagne dei Grigioni, per una guida ad abbonamenti, zone e tariffe',
+    'blog.article.aliquote-locali-san-gallo.title': 'Confronto imposta cantonale Svizzera 2026: San Gallo',
+    'blog.article.aliquote-locali-san-gallo.excerpt': 'Confronto 2026 dell\'imposta cantonale in Svizzera: tre livelli fiscali, moltiplicatore comunale e criteri pratici per leggere il canton San Gallo.',
+    'blog.article.aliquote-locali-san-gallo.imageAlt': 'Documenti fiscali svizzeri e calcolatrice per un confronto tra imposte cantonali.',
 };
 
 export default blogMetaChIt;

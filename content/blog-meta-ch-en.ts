@@ -7298,6 +7298,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.grigioni-percorso-quotidiano-pass.title': 'Graubünden Public Transportation Passes: Zones and Fares',
     'blog.article.grigioni-percorso-quotidiano-pass.excerpt': 'Fare network, zones, annual and monthly travelcards: the comparison in Graubünden includes Half-Fare travelcard, GA travelcard and discounts for students and apprentices.',
     'blog.article.grigioni-percorso-quotidiano-pass.imageAlt': 'Public transport in the Graubünden mountains, illustrating passes, zones and fares',
+    'blog.article.aliquote-locali-san-gallo.title': 'Cantonal tax comparison Switzerland 2026: St. Gallen',
+    'blog.article.aliquote-locali-san-gallo.excerpt': '2026 Comparison of Cantonal Taxes in Switzerland: Three Tax Brackets, Municipal Multiplier, and Practical Criteria for Analyzing the Canton of St. Gallen.',
+    'blog.article.aliquote-locali-san-gallo.imageAlt': 'Swiss tax documents and a calculator for comparing cantonal taxes.',
 };
 
 export default blogMetaChEn;

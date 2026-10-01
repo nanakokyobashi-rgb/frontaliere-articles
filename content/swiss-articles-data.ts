@@ -21922,6 +21922,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'aliquote-locali-san-gallo',
+    category: 'fiscale',
+    date: '2026-10-01T03:25:07.406Z',
+    image: '/images/blog/aliquote-locali-san-gallo.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

@@ -7298,6 +7298,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.grigioni-percorso-quotidiano-pass.title': 'Abonnements für den öffentlichen Nahverkehr in Graubünden: Zonen und Tarife',
     'blog.article.grigioni-percorso-quotidiano-pass.excerpt': 'Tarifverbund, Zonen, Jahres- und Monatsabonnemente: Der Vergleich in Graubünden umfasst den Halbtax, das GA sowie Ermäßigungen für Studierende und Auszubildende.',
     'blog.article.grigioni-percorso-quotidiano-pass.imageAlt': 'Öffentlicher Verkehr in den Bündner Bergen als Symbol für Abos, Zonen und Tarife',
+    'blog.article.aliquote-locali-san-gallo.title': 'Vergleich der Kantonssteuern in der Schweiz 2026: St. Gallen',
+    'blog.article.aliquote-locali-san-gallo.excerpt': 'Vergleich der kantonalen Steuer in der Schweiz 2026: drei Steuerniveaus, kommunaler Multiplikator und praktische Kriterien zur Lesung des Kantons St. Gallen.',
+    'blog.article.aliquote-locali-san-gallo.imageAlt': 'Schweizer Steuerunterlagen und Taschenrechner für einen Kantonssteuervergleich.',
 };
 
 export default blogMetaChDe;
