@@ -2475,6 +2475,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'iniziativa-fiscale-centro-29-novembre': { it: 'iniziativa-fiscale-centro-29-novembre', en: 'tax-initiative-centre-29-november', de: 'steuerinitiative-zentrum-29-november', fr: 'initiative-fiscale-centre-29-novembre' },
  'novita-legali-ottobre-2026-svizzera': { it: 'novita-legali-ottobre-2026-svizzera', en: 'swiss-legal-changes-october-2026', de: 'schweizer-rechtsaenderungen-oktober-2026', fr: 'nouvelles-legales-suisse-octobre-2026' },
  'imposte-coppie-sposate': { it: 'imposte-coppie-sposate', en: 'swiss-married-couples-taxes', de: 'schweiz-steuern-verheiratete-paare', fr: 'impots-suisses-couples-maries' },
+ 'ipc-settembre-rincaro-annuo': { it: 'ipc-settembre-rincaro-annuo', en: 'consumer-prices-september', de: 'konsumentenpreise-september', fr: 'prix-consommation-septembre' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

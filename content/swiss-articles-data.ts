@@ -22102,6 +22102,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'ipc-settembre-rincaro-annuo',
+    category: 'novita',
+    date: '2026-10-01T14:15:42.775Z',
+    image: '/images/blog/ipc-settembre-rincaro-annuo.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

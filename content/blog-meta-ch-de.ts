@@ -7358,6 +7358,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.imposte-coppie-sposate.title': 'Verheiratete Paare, die Abstimmung über direkte Bundessteuern',
     'blog.article.imposte-coppie-sposate.excerpt': 'Das überparteiliche Komitee fordert, den steuerlichen Nachteil verheirateter Paare zu beseitigen und dabei die gemeinsame Steuererklärung beizubehalten. Abstimmung am 29. November.',
     'blog.article.imposte-coppie-sposate.imageAlt': 'Verheiratetes Paar prüft Schweizer Steuerunterlagen vor einem institutionellen Gebäude',
+    'blog.article.ipc-settembre-rincaro-annuo.title': 'Stabile Verbraucherpreise im September: +1 % im Jahresvergleich',
+    'blog.article.ipc-settembre-rincaro-annuo.excerpt': 'Am 1. Oktober 2026 meldete das BFS einen unveränderten LIK von 101,5 Punkten im September: eine Jahresteuerung von +1,0%, bei steigenden Treibstoffpreisen.',
+    'blog.article.ipc-settembre-rincaro-annuo.imageAlt': 'Schweizer Konsumentenpreise und Alltag',
 };
 
 export default blogMetaChDe;

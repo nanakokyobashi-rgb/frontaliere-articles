@@ -95414,6 +95414,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ipc-settembre-rincaro-annuo': {
+    title: 'Prezzi al consumo stabili a settembre: +1% annuo',
+    description: 'Nel settembre 2026 l\'IPC è rimasto a 101,5 punti: rincaro annuo dell\'1%. Benzina, diesel e olio da riscaldamento sono saliti; viaggi e ospitalità sono scesi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, prezzi, consumo, stabili, settembre',
+    ogTitle: 'Prezzi al consumo stabili a settembre: +1% annuo',
+    ogDescription: 'Nel settembre 2026 l\'IPC è rimasto invariato a 101,5 punti rispetto al mese precedente. Il rincaro annuo è stato del +1,0%: olio da riscaldamento, benzina e diesel sono saliti, mentre viaggi, noleggio auto, car sharing e ospitalità sono diminuiti.',
+    canonicalPath: '/articoli-svizzera/ipc-settembre-rincaro-annuo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Prezzi al consumo stabili a settembre: +1% annuo",
+      "description": "Nel settembre 2026 l'IPC è rimasto a 101,5 punti: rincaro annuo dell'1%. Benzina, diesel e olio da riscaldamento sono saliti; viaggi e ospitalità sono scesi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/ipc-settembre-rincaro-annuo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Indice dei prezzi al consumo e vita quotidiana in Svizzera"
+      },
+      "datePublished": "2026-10-01T14:15:42+00:00",
+      "dateModified": "2026-10-01T14:15:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ipc-settembre-rincaro-annuo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

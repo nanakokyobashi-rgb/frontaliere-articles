@@ -7358,6 +7358,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.imposte-coppie-sposate.title': 'Coppie sposate, il voto sull\'imposta federale diretta',
     'blog.article.imposte-coppie-sposate.excerpt': 'Il comitato trasversale chiede di eliminare lo svantaggio fiscale delle coppie sposate mantenendo la dichiarazione congiunta. Voto il 29 novembre.',
     'blog.article.imposte-coppie-sposate.imageAlt': 'Coppia sposata esamina documenti fiscali svizzeri davanti a un edificio istituzionale',
+    'blog.article.ipc-settembre-rincaro-annuo.title': 'Prezzi al consumo stabili a settembre: +1% annuo',
+    'blog.article.ipc-settembre-rincaro-annuo.excerpt': 'Il 1 ottobre 2026 l\'UST ha comunicato un IPC invariato a 101,5 punti a settembre: rincaro annuo del +1,0%, con carburanti in aumento.',
+    'blog.article.ipc-settembre-rincaro-annuo.imageAlt': 'Indice dei prezzi al consumo e vita quotidiana in Svizzera',
 };
 
 export default blogMetaChIt;

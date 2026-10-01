@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/tasso-ipotecario-di-riferimento-non-cambia%2c-rimane-a-1%2c25%25/91984180": {
-    "articleId": "tasso-ipotecario-riferimento-1-25-stabile",
-    "ts": "2026-09-01T10:53:04.705Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/associazione-inquilini%2c-%22occorre-chiedere-riduzione-dell%27affitto%22/91985994": {
     "articleId": "riduzione-affitto-tassi-ipotecari",
     "ts": "2026-09-01T11:09:31.864Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/politica/1953946/coppie-comitato-svantaggio-dovrebbe-svizzera": {
     "articleId": "imposte-coppie-sposate",
     "ts": "2026-10-01T13:46:25.547Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/wnfni1dvzkuq": {
+    "articleId": "ipc-settembre-rincaro-annuo",
+    "ts": "2026-10-01T14:15:43.048Z",
     "keyForm": 2
   }
 }

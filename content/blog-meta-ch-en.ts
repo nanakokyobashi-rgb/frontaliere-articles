@@ -7358,6 +7358,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.imposte-coppie-sposate.title': 'Married couples, the vote on direct federal tax',
     'blog.article.imposte-coppie-sposate.excerpt': 'The cross-party committee calls for the tax disadvantage of married couples to be eliminated by maintaining the joint declaration. Vote on 29 November.',
     'blog.article.imposte-coppie-sposate.imageAlt': 'Married couple reviews Swiss tax documents outside an institutional building',
+    'blog.article.ipc-settembre-rincaro-annuo.title': 'Stable consumer prices in September: +1% year-on-year',
+    'blog.article.ipc-settembre-rincaro-annuo.excerpt': 'On 1 October 2026, the FSO reported an unchanged CPI at 101.5 points in September: annual inflation of +1.0%, with fuel prices rising.',
+    'blog.article.ipc-settembre-rincaro-annuo.imageAlt': 'Swiss consumer prices and everyday cost of living',
 };
 
 export default blogMetaChEn;
