@@ -806,9 +806,16 @@ function ghostVerdict({ baselineHash, currentHash, historyMatch, historyExhauste
  * `repoHistoryMatch` solo quando serve (il lato è cambiato dalla baseline —
  * altrimenti `currentHash === baselineHash` chiude la domanda senza rete).
  * Un fallimento di rete non genera un ghost: si segnala e si prosegue,
- * PROCEED-SAFE come il resto di questo script.
+ * PROCEED-SAFE come il resto di questo script. Il matcher opzionale è un seam
+ * di test: in produzione resta `repoHistoryMatch`, mentre i test possono
+ * esercitare i due lati senza consumare la quota GitHub.
  */
-async function checkBaselineProvenance(entry, now, passState = { rateLimited: false, detail: '' }) {
+async function checkBaselineProvenance(
+  entry,
+  now,
+  passState = { rateLimited: false, detail: '' },
+  { historyMatcher = repoHistoryMatch } = {},
+) {
   const rel = entry.path;
   const sitePath = entry.sitePath || rel;
   const base = entry.baseline || {};
@@ -836,7 +843,7 @@ async function checkBaselineProvenance(entry, now, passState = { rateLimited: fa
     let historyReadable;
     if (currentHash !== baselineHash) {
       try {
-        const r = await repoHistoryMatch({ repo, ref, filePath, targetHash: baselineHash });
+        const r = await historyMatcher({ repo, ref, filePath, targetHash: baselineHash });
         historyMatch = r.match;
         historyExhausted = r.exhausted;
         historyReadable = r.historyReadable;
@@ -2151,4 +2158,4 @@ if (process.argv[1] && process.argv[1].endsWith('loop-drift-check.mjs')) {
 // baseline con LA STESSA regola con cui la pesa il cron, altrimenti una voce
 // accettata in PR verrebbe dichiarata fantasma il mattino dopo — o peggio, il
 // contrario. Una seconda copia della regola lo renderebbe inevitabile.
-export { classify, parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, initAttestVerdict, initPassOutcome, initBaseline, initOnlyManifestUnchanged, localHash, ghostVerdict, strandedVerdict, provenanceRateLimitVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, implicitPinnersVerdict, declaredAbsentCiters, crawlerContractIsActive, resetPinnerIndex, DECLARED_ABSENT_REGISTRY_REL, CRAWLER_CONTRACT_REL, DORMANT_WITH_CRAWLER_CONTRACT, resolvedLocalImports, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch };
+export { classify, parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, initAttestVerdict, initPassOutcome, initBaseline, initOnlyManifestUnchanged, localHash, ghostVerdict, strandedVerdict, provenanceRateLimitVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, implicitPinnersVerdict, declaredAbsentCiters, crawlerContractIsActive, resetPinnerIndex, DECLARED_ABSENT_REGISTRY_REL, CRAWLER_CONTRACT_REL, DORMANT_WITH_CRAWLER_CONTRACT, resolvedLocalImports, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch, checkBaselineProvenance };
