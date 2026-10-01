@@ -215,9 +215,9 @@
       "path": "scripts/ci/check-issue-already-resolved.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "af841d0dedc48fb6",
-        "corpus": "af841d0dedc48fb6",
-        "alignedAt": "2026-09-29"
+        "site": "f8c0efbcdf212ead",
+        "corpus": "f8c0efbcdf212ead",
+        "alignedAt": "2026-10-01"
       }
     },
     {
@@ -1010,7 +1010,7 @@
       "reason": "Niente npm ci; ponte RC del corpus; promozione via GITHUB_PAT_NANAKO; cadenza sfasata dal sito.",
       "baseline": {
         "site": "575a6adab631ac38",
-        "corpus": "13a6ae65b92b1862",
+        "corpus": "dbaccc84620f11a3",
         "alignedAt": "2026-09-27",
         "forcedAt": "2026-09-27T12:13:57.648Z"
       }
@@ -1518,6 +1518,17 @@
         "site": "bf07932f2eb0a3e1",
         "corpus": "3222f4bf740aa007",
         "alignedAt": "2026-09-19"
+      }
+    },
+    {
+      "path": "generator/tests/conflict-handoff-reconcile.test.mjs",
+      "sitePath": "tests/conflict-handoff-reconcile.test.ts",
+      "mode": "adapted",
+      "reason": "Gemello node:test (via expect-shim) del test Vitest del sito sulla chiusura degli hand-off di conflitto gia' risolti: stessi casi puri (handoffResolution sulla HEAD nuova, keyword Closes/Supersedes, duplicati, decideHandoff, commento senza keyword di chiusura). Cambiano il runner, gli esempi (#1586/#1569) e il test di wiring, che legge il followup-drainer.yml di questo repo invece di ENTRYPOINTS, che qui non esiste.",
+      "baseline": {
+        "site": "7b8bd11d6431ab3c",
+        "corpus": "a70d5fc4eaec474f",
+        "alignedAt": "2026-10-01"
       }
     },
     {
@@ -4030,6 +4041,15 @@
         "corpus": "15199d21df208103",
         "alignedAt": "2026-09-10",
         "forcedAt": "2026-09-10T12:33:28.976Z"
+      }
+    },
+    {
+      "path": "scripts/ci/reconcile-conflict-handoffs.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "73d0b22685d431d6",
+        "corpus": "73d0b22685d431d6",
+        "alignedAt": "2026-10-01"
       }
     },
     {
