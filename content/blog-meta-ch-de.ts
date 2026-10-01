@@ -7304,6 +7304,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.neutralita-voto-rigetto.title': 'Schweizer Neutralität: Die strengste Initiative wurde abgelehnt',
     'blog.article.neutralita-voto-rigetto.excerpt': 'Das Schweizer Volk lehnte die Initiative ab, ein strengeres Neutralitätskonzept in der Verfassung zu verankern.',
     'blog.article.neutralita-voto-rigetto.imageAlt': 'Schweizer Flagge vor einem institutionellen Gebäude als Symbol für die Abstimmung über die Neutralität.',
+    'blog.article.fisco-lucerna-tre-livelli-2026.title': 'Kantonale Steuern im Vergleich – Schweiz 2026: Kanton Luzern',
+    'blog.article.fisco-lucerna-tre-livelli-2026.excerpt': 'Drei Steuerstufen und kommunaler Multiplikator: Der Vergleich für 2026 geht von der nationalen Struktur aus und wendet die Methode auf den Kanton Luzern an.',
+    'blog.article.fisco-lucerna-tre-livelli-2026.imageAlt': 'Schreibtisch mit Schweizer Steuerdokument und Rechner für den Kantonsvergleich',
 };
 
 export default blogMetaChDe;

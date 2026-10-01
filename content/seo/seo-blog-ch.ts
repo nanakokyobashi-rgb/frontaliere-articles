@@ -94712,6 +94712,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-fisco-lucerna-tre-livelli-2026': {
+    title: 'Imposta cantonale confronto Svizzera 2026: canton Lucerna',
+    description: 'Confronto 2026 dell\'imposta cantonale in Svizzera: tre livelli fiscali, moltiplicatori comunali e metodo pratico per leggere il canton Lucerna. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, imposta, cantonale, confronto, canton',
+    ogTitle: 'Fisco svizzero 2026: confronto con il canton Lucerna',
+    ogDescription: 'Per leggere il fisco del canton Lucerna non basta una percentuale: il confronto nazionale distingue imposta federale diretta, quota cantonale e quota comunale, con il moltiplicatore locale e le competenze corrette.',
+    canonicalPath: '/articoli-svizzera/fisco-lucerna-tre-livelli-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Imposta cantonale confronto Svizzera 2026: canton Lucerna",
+      "description": "Confronto 2026 dell'imposta cantonale in Svizzera: tre livelli fiscali, moltiplicatori comunali e metodo pratico per leggere il canton Lucerna. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/fisco-lucerna-tre-livelli-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scrivania con documento fiscale svizzero e calcolatrice per il confronto cantonale"
+      },
+      "datePublished": "2026-10-01T03:47:26+00:00",
+      "dateModified": "2026-10-01T03:47:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/fisco-lucerna-tre-livelli-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

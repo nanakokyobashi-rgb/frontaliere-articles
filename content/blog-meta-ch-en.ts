@@ -7304,6 +7304,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.neutralita-voto-rigetto.title': 'Swiss neutrality: Stricter initiative rejected',
     'blog.article.neutralita-voto-rigetto.excerpt': 'The Swiss people rejected the initiative that sought to enshrine a stricter interpretation of neutrality in the Constitution.',
     'blog.article.neutralita-voto-rigetto.imageAlt': 'Swiss flag outside an institutional building, symbolizing the vote on neutrality.',
+    'blog.article.fisco-lucerna-tre-livelli-2026.title': 'Swiss Cantonal Tax Comparison 2026: Canton of Lucerne',
+    'blog.article.fisco-lucerna-tre-livelli-2026.excerpt': 'Three tax tiers and the municipal multiplier: The 2026 comparison begins with the national structure and applies the method to the canton of Lucerne.',
+    'blog.article.fisco-lucerna-tre-livelli-2026.imageAlt': 'Desk with a Swiss tax document and calculator for comparing cantonal taxes',
 };
 
 export default blogMetaChEn;
