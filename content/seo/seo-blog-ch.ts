@@ -95492,6 +95492,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-svizzera-ue-sanita-consiglio-stati': {
+    title: 'Consiglio Stati approva accordo UE sanità | Frontaliere Ticino',
+    description: 'Il Consiglio degli Stati approva l\'accordo UE sulla sanità con 31 contro 11. Ora al Nazionale. Referendum facoltativo scelto, elettricità in inverno.',
+    keywords: 'frontalieri, ticino, svizzera, italia, consiglio, stati, approva, accordo',
+    ogTitle: 'Consiglio Stati approva accordo UE sanità',
+    ogDescription: 'Via libera al Consiglio degli Stati per l\'accordo UE sulla sanità (31 contro 11). Il dossier passa al Nazionale. Scelto il referendum facoltativo. L\'elettricità resta da esaminare nella sessione invernale.',
+    canonicalPath: '/articoli-svizzera/svizzera-ue-sanita-consiglio-stati/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Consiglio Stati approva accordo UE sanità",
+      "description": "Il Consiglio degli Stati approva l'accordo UE sulla sanità con 31 contro 11. Ora al Nazionale. Referendum facoltativo scelto, elettricità in inverno.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/svizzera-ue-sanita-consiglio-stati.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna, sede del Consiglio degli Stati"
+      },
+      "datePublished": "2026-10-01T15:19:08+00:00",
+      "dateModified": "2026-10-01T15:19:08+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/svizzera-ue-sanita-consiglio-stati/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

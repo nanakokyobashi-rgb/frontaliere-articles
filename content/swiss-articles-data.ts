@@ -22120,6 +22120,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'svizzera-ue-sanita-consiglio-stati',
+    category: 'novita',
+    date: '2026-10-01T15:19:07.979Z',
+    image: '/images/blog/svizzera-ue-sanita-consiglio-stati.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

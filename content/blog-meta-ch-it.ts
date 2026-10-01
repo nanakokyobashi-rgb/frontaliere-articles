@@ -7364,6 +7364,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.icann-gtld-candidature-2026.title': 'Nuovi domini Internet: ICANN pubblica lista 7 ottobre',
     'blog.article.icann-gtld-candidature-2026.excerpt': 'Circa 1600 candidature per i nuovi gTLD. L\'ICANN confermerà i domini il 17 novembre 2026. UFCOM segnala rischi per i marchi.',
     'blog.article.icann-gtld-candidature-2026.imageAlt': 'Esperto svizzero che verifica le candidature ICANN per i nuovi domini Internet',
+    'blog.article.svizzera-ue-sanita-consiglio-stati.title': 'Consiglio Stati approva accordo UE sanità',
+    'blog.article.svizzera-ue-sanita-consiglio-stati.excerpt': '31 contro 11: via libera alla sanità UE. Ora al Nazionale. Referendum facoltativo scelto, elettricità in inverno.',
+    'blog.article.svizzera-ue-sanita-consiglio-stati.imageAlt': 'Palazzo federale a Berna, sede del Consiglio degli Stati',
 };
 
 export default blogMetaChIt;

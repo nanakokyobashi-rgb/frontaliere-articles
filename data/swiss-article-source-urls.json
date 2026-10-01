@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/commercio-al-dettaglio%2c-aumentano-le-vendite-in-luglio/91985445": {
-    "articleId": "commercio-dettaglio-vendite-luglio-2025",
-    "ts": "2026-09-01T11:48:32.552Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4051353": {
     "articleId": "tasso-ipotecario-riferimento-stabile",
     "ts": "2026-09-01T12:04:28.107Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/acnmicqxffdq": {
     "articleId": "icann-gtld-candidature-2026",
     "ts": "2026-10-01T14:32:47.922Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1954055/ue-accordo-consiglio-svizzera-sanita-sicurezza-pacchetto-dossier-accordi-decreti": {
+    "articleId": "svizzera-ue-sanita-consiglio-stati",
+    "ts": "2026-10-01T15:19:08.340Z",
     "keyForm": 2
   }
 }
