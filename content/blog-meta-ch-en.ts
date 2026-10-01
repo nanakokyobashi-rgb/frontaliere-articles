@@ -7292,6 +7292,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.domanda-cittadinanza-grigioni.title': 'Naturalisation of the canton of Graubünden: requirements and procedure',
     'blog.article.domanda-cittadinanza-grigioni.excerpt': 'In the Canton of Graubünden, ordinary naturalization requires a C permit and 10 years of residence: years spent between the ages of 8 and 18 count double, and there are additional cantonal and municipal requirements.',
     'blog.article.domanda-cittadinanza-grigioni.imageAlt': 'Swiss alpine landscape illustrating naturalization in Graubünden',
+    'blog.article.grigioni-primo-pilastro-rendita.title': 'AVS Graubünden: Pension Fund and Supplemental Benefits',
+    'blog.article.grigioni-primo-pilastro-rendita.excerpt': 'In the canton of Graubünden, the compensation office links AHV calculations, contribution gaps and supplementary benefits for the minimum subsistence.',
+    'blog.article.grigioni-primo-pilastro-rendita.imageAlt': 'Swiss alpine landscape illustrating AHV and supplementary benefits in Graubünden',
 };
 
 export default blogMetaChEn;

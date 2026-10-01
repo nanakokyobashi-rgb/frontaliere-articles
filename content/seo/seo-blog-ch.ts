@@ -94556,6 +94556,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-grigioni-primo-pilastro-rendita': {
+    title: 'AVS Grigioni: cassa e prestazioni complementari',
+    description: 'Guida al primo pilastro nei Grigioni: cassa di compensazione, rendita AVS, lacune contributive e prestazioni per il minimo vitale, con calcolo pratico.',
+    keywords: 'frontalieri, ticino, svizzera, italia, grigioni, cassa, prestazioni, complementari',
+    ogTitle: 'AVS Grigioni: cassa e prestazioni complementari',
+    ogDescription: 'Nel Cantone dei Grigioni, leggere il primo pilastro significa separare calcolo della rendita AVS, lacune contributive e prestazioni complementari. La guida chiarisce il ruolo della cassa cantonale e il riferimento al minimo vitale.',
+    canonicalPath: '/articoli-svizzera/grigioni-primo-pilastro-rendita/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "AVS Grigioni: cassa e prestazioni complementari",
+      "description": "Guida al primo pilastro nei Grigioni: cassa di compensazione, rendita AVS, lacune contributive e prestazioni per il minimo vitale, con calcolo pratico.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/grigioni-primo-pilastro-rendita.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Paesaggio alpino svizzero per AVS e prestazioni complementari nei Grigioni"
+      },
+      "datePublished": "2026-10-01T02:46:48+00:00",
+      "dateModified": "2026-10-01T02:46:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/grigioni-primo-pilastro-rendita/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

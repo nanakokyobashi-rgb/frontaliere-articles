@@ -7292,6 +7292,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.domanda-cittadinanza-grigioni.title': 'Naturalisation du canton des Grisons : exigences et procédure',
     'blog.article.domanda-cittadinanza-grigioni.excerpt': 'Dans le canton des Grisons, la naturalisation ordinaire requiert un permis C et 10 ans de résidence : les années entre 8 et 18 comptent double, avec des exigences cantonales et communales.',
     'blog.article.domanda-cittadinanza-grigioni.imageAlt': 'Paysage alpin suisse sur la naturalisation dans les Grisons',
+    'blog.article.grigioni-primo-pilastro-rendita.title': 'AHV Grisons : Assurance complémentaire et avantages sociaux',
+    'blog.article.grigioni-primo-pilastro-rendita.excerpt': 'Dans le canton des Grisons, le bureau de compensation relie les calculs de la valeur de la vie, les écarts de contributions et les prestations complémentaires pour la subsistance minimale.',
+    'blog.article.grigioni-primo-pilastro-rendita.imageAlt': 'Paysage alpin suisse illustrant l’AVS et les prestations complémentaires aux Grisons',
 };
 
 export default blogMetaChFr;

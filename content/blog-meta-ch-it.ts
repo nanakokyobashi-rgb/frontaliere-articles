@@ -7292,6 +7292,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.domanda-cittadinanza-grigioni.title': 'Naturalizzazione canton Grigioni: requisiti e procedura',
     'blog.article.domanda-cittadinanza-grigioni.excerpt': 'Nel Cantone dei Grigioni la naturalizzazione ordinaria richiede permesso C e 10 anni di residenza: gli anni tra 8 e 18 contano doppio, con requisiti cantonali e comunali.',
     'blog.article.domanda-cittadinanza-grigioni.imageAlt': 'Paesaggio alpino svizzero per la naturalizzazione nei Grigioni',
+    'blog.article.grigioni-primo-pilastro-rendita.title': 'AVS Grigioni: cassa e prestazioni complementari',
+    'blog.article.grigioni-primo-pilastro-rendita.excerpt': 'Nel Cantone dei Grigioni, la cassa di compensazione collega calcolo AVS, lacune contributive e prestazioni complementari per il minimo vitale.',
+    'blog.article.grigioni-primo-pilastro-rendita.imageAlt': 'Paesaggio alpino svizzero per AVS e prestazioni complementari nei Grigioni',
 };
 
 export default blogMetaChIt;

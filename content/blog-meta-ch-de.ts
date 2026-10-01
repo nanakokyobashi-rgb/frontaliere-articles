@@ -7292,6 +7292,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.domanda-cittadinanza-grigioni.title': 'Einbürgerung im Kanton Graubünden: Voraussetzungen und Verfahren',
     'blog.article.domanda-cittadinanza-grigioni.excerpt': 'Im Kanton Graubünden sind für die ordentliche Einbürgerung eine C-Bewilligung und eine 10-jährige Aufenthaltsdauer erforderlich: Die Jahre zwischen dem 8. und 18. Lebensjahr zählen doppelt, wobei kantonale und kommunale Voraussetzungen gelten.',
     'blog.article.domanda-cittadinanza-grigioni.imageAlt': 'Schweizer Alpenlandschaft zur Einbürgerung in Graubünden',
+    'blog.article.grigioni-primo-pilastro-rendita.title': 'AHV Graubünden: Kasse und Zusatzleistungen',
+    'blog.article.grigioni-primo-pilastro-rendita.excerpt': 'Im Kanton Graubünden vereint die Ausgleichskasse die Berechnung der AHV, Beitragslücken und Ergänzungsleistungen zum Existenzminimum.',
+    'blog.article.grigioni-primo-pilastro-rendita.imageAlt': 'Schweizer Alpenlandschaft zu AHV und Ergänzungsleistungen in Graubünden',
 };
 
 export default blogMetaChDe;
