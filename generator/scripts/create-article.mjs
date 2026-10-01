@@ -14353,6 +14353,7 @@ function validateStructuredData(data) {
   const seoFile = SECTION.seoFile;
   const src = read(seoFile);
   const entryKey = `'blog-${data.id}'`;
+  const BASE = BASE_URL;
 
   // 1. Resolve the complete object, not a fixed-size prefix. The resolver
   // ignores comments/templates and closes nested objects before the fields
@@ -14395,7 +14396,6 @@ function validateStructuredData(data) {
   }
 
   // 4. Build the same JSON-LD object ogPagesPlugin builds and verify JSON.stringify works
-  const BASE = 'https://frontaliereticino.ch';
   const ldObj = {
     '@context': 'https://schema.org',
     '@type': 'Article',
