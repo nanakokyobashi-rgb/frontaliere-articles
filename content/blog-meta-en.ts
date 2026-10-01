@@ -12333,6 +12333,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-01.imageAlt': 'The day\'s numbers for cross-border commuters – October 1, 2026: border waits, fuel prices, CHF-EUR rate and job listings',
     'blog.article.bollettino-frontaliere-2026-10-01.seoDescription': 'Cross-border brief, October 1, 2026: queues at the crossings this morning, where fuel is cheapest, the franc-euro rate and new job postings in Switzerland.',
     'blog.article.bollettino-frontaliere-2026-10-01.ogDescription': 'The numbers for October 1, 2026, for cross-border commuters: how long the queue is at each crossing this morning, which towns have the cheapest fuel, what the franc is worth today and how many Swiss jobs went up.',
+    'blog.article.deputazione-ticinese-doppia-imposizione.title': 'Double taxation and transport: Ticino deputation questions',
+    'blog.article.deputazione-ticinese-doppia-imposizione.excerpt': 'Panimi asks for clarification on the residual dividend rate (15%). A2-A13, line of Luino and management of Lake Maggiore are discussed.',
+    'blog.article.deputazione-ticinese-doppia-imposizione.imageAlt': 'View of the Bellinzona district with medieval towers in the foreground',
 };
 
 export default blogMetaEn;

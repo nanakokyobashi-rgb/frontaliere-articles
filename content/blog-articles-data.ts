@@ -36997,6 +36997,15 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'deputazione-ticinese-doppia-imposizione',
+ category: 'fiscale',
+ date: '2026-10-01T11:45:47.890Z',
+ image: '/images/blog/deputazione-ticinese-doppia-imposizione.webp',
+ hasCalculator: true,
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

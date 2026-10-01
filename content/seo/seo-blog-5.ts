@@ -97729,6 +97729,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-deputazione-ticinese-doppia-imposizione': {
+    title: 'Doppia imposizione e trasporti: deputazione ticinese interroga',
+    description: 'La deputazione ticinese interroga il Consiglio federale su doppia imposizione (15% dividendi), A2-A13, linea di Luino e gestione del Lago Maggiore.',
+    keywords: 'frontalieri, ticino, svizzera, italia, doppia, imposizione, trasporti, deputazione',
+    ogTitle: 'Doppia imposizione e trasporti: la mossa ticinese',
+    ogDescription: 'Palmi Panimi e i deputati ticinesi chiedono chiarimenti su fisco e infrastrutture: aliquota dividendi al 15%, rischio rinvio A2-A13 oltre il 2050 e regime ridotto linea Luino.',
+    canonicalPath: '/articoli-frontaliere/deputazione-ticinese-doppia-imposizione',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Doppia imposizione e trasporti: deputazione ticinese interroga",
+      "description": "La deputazione ticinese interroga il Consiglio federale su doppia imposizione (15% dividendi), A2-A13, linea di Luino e gestione del Lago Maggiore.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/deputazione-ticinese-doppia-imposizione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista del distretto di Bellinzona con le torri medievali in primo piano"
+      },
+      "datePublished": "2026-10-01T11:45:47+00:00",
+      "dateModified": "2026-10-01T11:45:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/deputazione-ticinese-doppia-imposizione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

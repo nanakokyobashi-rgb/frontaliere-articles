@@ -12334,6 +12334,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-01.imageAlt': 'I numeri del giorno per i frontalieri – 1 ottobre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro',
     'blog.article.bollettino-frontaliere-2026-10-01.seoDescription': 'Bollettino frontalieri del 1 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
     'blog.article.bollettino-frontaliere-2026-10-01.ogDescription': 'I numeri del 1 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    'blog.article.deputazione-ticinese-doppia-imposizione.title': 'Doppia imposizione e trasporti: deputazione ticinese interroga',
+    'blog.article.deputazione-ticinese-doppia-imposizione.excerpt': 'Panimi chiede chiarimenti sull\'aliquota residua dei dividendi (15%). Si discute A2-A13, linea di Luino e gestione del Lago Maggiore.',
+    'blog.article.deputazione-ticinese-doppia-imposizione.imageAlt': 'Vista del distretto di Bellinzona con le torri medievali in primo piano',
 };
 
 export default blogMetaIt;

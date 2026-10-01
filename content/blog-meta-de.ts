@@ -12332,6 +12332,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-01.imageAlt': 'Die Zahlen des Tages für Grenzgänger – 1. Oktober 2026: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote',
     'blog.article.bollettino-frontaliere-2026-10-01.seoDescription': 'Grenzgänger-Bulletin vom 1. Oktober 2026: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.',
     'blog.article.bollettino-frontaliere-2026-10-01.ogDescription': 'Die Zahlen vom 1. Oktober 2026 für Grenzgänger: wie lange man heute Morgen an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, was der Franken heute wert ist und wie viele Stellen neu dazugekommen sind.',
+    'blog.article.deputazione-ticinese-doppia-imposizione.title': 'Doppelbesteuerung und Transport: Fragen zur Tessin-Deputation',
+    'blog.article.deputazione-ticinese-doppia-imposizione.excerpt': 'Panimi bittet um eine Klarstellung der Restdividendenquote (15 %). A2-A13, die Linie Luino und die Verwaltung des Lago Maggiore werden besprochen.',
+    'blog.article.deputazione-ticinese-doppia-imposizione.imageAlt': 'Blick auf das Bellinzona-Gebiet mit mittelalterlichen Türmen im Vordergrund',
 };
 
 export default blogMetaDe;
