@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1947297/asib-ubs-impiegati-sostegno-svizzera": {
-    "articleId": "asib-normativa-ubs-sostegno",
-    "ts": "2026-09-01T15:00:15.416Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/ubs%3a-%22apprezziamo-lavoro-svolto%2c-ma-no-a-proposta-concreta%22/91987864": {
     "articleId": "ubs-requisiti-patrimoniali",
     "ts": "2026-09-01T15:19:06.995Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4128369": {
     "articleId": "utile-bns-distribuzione-2030",
     "ts": "2026-10-01T19:46:22.457Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4128432": {
+    "articleId": "infomaniak-debutto-six",
+    "ts": "2026-10-01T21:29:12.038Z",
     "keyForm": 2
   }
 }
