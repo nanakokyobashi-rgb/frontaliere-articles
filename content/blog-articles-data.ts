@@ -36979,6 +36979,15 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'snl-locarno-magadino-garanzie',
+ category: 'novita',
+ date: '2026-10-01T08:23:52.094Z',
+ image: '/images/blog/snl-locarno-magadino-garanzie.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
