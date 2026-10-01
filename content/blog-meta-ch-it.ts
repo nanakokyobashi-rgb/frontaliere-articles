@@ -7283,6 +7283,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.primo-pilastro-basel-stadt.title': 'AVS e prestazioni complementari a Basilea Città',
     'blog.article.primo-pilastro-basel-stadt.excerpt': 'Cassa di compensazione cantonale, calcolo della rendita AVS, lacune contributive e prestazioni complementari per il minimo vitale a Basilea Città.',
     'blog.article.primo-pilastro-basel-stadt.imageAlt': 'Documenti AVS e prestazioni complementari per Basilea Città',
+    'blog.article.abbonamenti-basilea-zone-tariffe.title': 'Basilea Città: abbonamenti ai trasporti, zone e tariffe',
+    'blog.article.abbonamenti-basilea-zone-tariffe.excerpt': 'Comunità tariffaria, zone e formule mensili o annuali: come orientarsi a Basilea Città tra metà-prezzo, AG e sconti per studenti e apprendisti.',
+    'blog.article.abbonamenti-basilea-zone-tariffe.imageAlt': 'Trasporto pubblico a Basilea Città con mappa delle zone tariffarie',
 };
 
 export default blogMetaChIt;

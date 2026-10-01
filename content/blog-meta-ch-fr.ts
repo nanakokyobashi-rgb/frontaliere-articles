@@ -7283,6 +7283,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.primo-pilastro-basel-stadt.title': 'AHV et prestations complémentaires à Bâle-Stadt',
     'blog.article.primo-pilastro-basel-stadt.excerpt': 'Caisse cantonale de compensation, calcul de la rente AVS, lacunes de cotisation et prestations complémentaires au revenu minimum vital à Bâle-Ville.',
     'blog.article.primo-pilastro-basel-stadt.imageAlt': 'Documents AVS et prestations complémentaires pour Bâle-Ville',
+    'blog.article.abbonamenti-basilea-zone-tariffe.title': 'Bâle-Ville : cartes de voyage, zones et tarifs de transport',
+    'blog.article.abbonamenti-basilea-zone-tariffe.excerpt': 'Réseau tarifaire, zones mensuelles ou annuelles et forfaits : comment vous orienter entre les cartes de voyage demi-tarif, les cartes de voyage GA et les réductions pour étudiants et apprentis.',
+    'blog.article.abbonamenti-basilea-zone-tariffe.imageAlt': 'Transports publics à Bâle-Ville avec carte des zones tarifaires',
 };
 
 export default blogMetaChFr;

@@ -7283,6 +7283,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.primo-pilastro-basel-stadt.title': 'AHV and supplementary benefits in Basel-Stadt',
     'blog.article.primo-pilastro-basel-stadt.excerpt': 'Cantonal Compensation Fund, calculation of the AVS pension, contribution gaps, and supplementary benefits to ensure a minimum standard of living in Basel-Stadt.',
     'blog.article.primo-pilastro-basel-stadt.imageAlt': 'AVS and supplementary benefits documents for Basel-Stadt',
+    'blog.article.abbonamenti-basilea-zone-tariffe.title': 'Basel-Stadt: transport travelcards, zones and fares',
+    'blog.article.abbonamenti-basilea-zone-tariffe.excerpt': 'Fare zone system, zones, and monthly or annual passes: a guide to navigating Basel-Stadt’s half-fare, GA, and student and apprentice discounts.',
+    'blog.article.abbonamenti-basilea-zone-tariffe.imageAlt': 'Public transport in Basel-Stadt with a fare-zone map',
 };
 
 export default blogMetaChEn;

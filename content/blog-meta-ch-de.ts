@@ -7283,6 +7283,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.primo-pilastro-basel-stadt.title': 'AHV und Ergänzungsleistungen in Basel-Stadt',
     'blog.article.primo-pilastro-basel-stadt.excerpt': 'Kantonale Ausgleichskasse, Berechnung der AHV-Rente, Beitragslücken und Ergänzungsleistungen zum Existenzminimum in Basel-Stadt.',
     'blog.article.primo-pilastro-basel-stadt.imageAlt': 'AHV- und Ergänzungsleistungsunterlagen für Basel-Stadt',
+    'blog.article.abbonamenti-basilea-zone-tariffe.title': 'Basel-Stadt: Fahrkarten, Zonen und Tarife',
+    'blog.article.abbonamenti-basilea-zone-tariffe.excerpt': 'Tarifverbund, Zonen und Monats- oder Jahresabonnements: So finden Sie sich in Basel-Stadt zurecht – zwischen Halbtax, GA und Ermäßigungen für Studenten und Auszubildende.',
+    'blog.article.abbonamenti-basilea-zone-tariffe.imageAlt': 'Öffentlicher Verkehr in Basel-Stadt mit Karte der Tarifzonen',
 };
 
 export default blogMetaChDe;

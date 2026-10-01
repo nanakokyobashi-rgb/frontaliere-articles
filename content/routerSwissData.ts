@@ -2450,6 +2450,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'mappa-fiscale-berna-2026': { it: 'mappa-fiscale-berna-2026', en: 'swiss-tax-map-bern-2026', de: 'steuervergleich-bern-schweiz-2026', fr: 'comparatif-fiscal-berne-suisse-2026' },
  'tariffe-cura-infanzia-baselstadt': { it: 'tariffe-cura-infanzia-baselstadt', en: 'basel-stadt-childcare-costs', de: 'basel-stadt-kinderbetreuung-kosten', fr: 'bale-ville-couts-garde-enfants' },
  'primo-pilastro-basel-stadt': { it: 'primo-pilastro-basel-stadt', en: 'basel-city-avs-supplementary-benefits', de: 'basel-stadt-ahv-ergaenzungsleistungen', fr: 'bale-ville-avs-prestations-complementaires' },
+ 'abbonamenti-basilea-zone-tariffe': { it: 'abbonamenti-basilea-zone-tariffe', en: 'basel-public-transport-passes', de: 'basel-oev-abos-zonen-tarife', fr: 'abonnements-transports-bale-zones' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

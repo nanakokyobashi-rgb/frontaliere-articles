@@ -94439,6 +94439,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-abbonamenti-basilea-zone-tariffe': {
+    title: 'Basilea Città: abbonamenti ai trasporti, zone e tariffe',
+    description: 'Guida agli abbonamenti dei trasporti pubblici a Basilea Città: zone, formule mensili e annuali, metà-prezzo, AG e sconti per studenti e apprendisti in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, basilea, città, abbonamenti, trasporti',
+    ogTitle: 'Basilea Città: abbonamenti ai trasporti, zone e tariffe',
+    ogDescription: 'Nel Cantone di Basilea Città, zone e comunità tariffaria sono il punto di partenza per confrontare abbonamenti mensili e annuali. La guida considera anche metà-prezzo, AG e gli sconti destinati a studenti e apprendisti.',
+    canonicalPath: '/articoli-svizzera/abbonamenti-basilea-zone-tariffe/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Basilea Città: abbonamenti ai trasporti, zone e tariffe",
+      "description": "Guida agli abbonamenti dei trasporti pubblici a Basilea Città: zone, formule mensili e annuali, metà-prezzo, AG e sconti per studenti e apprendisti in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/abbonamenti-basilea-zone-tariffe.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Trasporto pubblico a Basilea Città con mappa delle zone tariffarie"
+      },
+      "datePublished": "2026-10-01T01:57:38+00:00",
+      "dateModified": "2026-10-01T01:57:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/abbonamenti-basilea-zone-tariffe/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
