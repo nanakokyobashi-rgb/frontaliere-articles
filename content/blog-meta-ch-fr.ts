@@ -7334,6 +7334,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.inflazione-svizzera-settembre-1-percento.title': 'Inflation suisse : grimpe à 1 % après deux ans en septembre',
     'blog.article.inflazione-svizzera-settembre-1-percento.excerpt': 'L’inflation en Suisse est passée à 1 % en septembre, contre 0,8 % en août. C’est la première fois qu’elle atteint ce seuil depuis août 2024, selon le FSO.',
     'blog.article.inflazione-svizzera-settembre-1-percento.imageAlt': 'Scène urbaine animée dans une ville suisse, avec des gens passant devant des vitrines affichant des prix, reflétant le coût de la vie.',
+    'blog.article.iniziativa-fisco-matrimonio.title': 'Impôts équitables : fin à la pénalisation fiscale du mariage',
+    'blog.article.iniziativa-fisco-matrimonio.excerpt': 'À Berne, le comité multipartite soutient l’initiative du Centre : l’impôt fédéral direct ne devrait pas pénaliser les couples mariés par rapport aux couples non mariés.',
+    'blog.article.iniziativa-fisco-matrimonio.imageAlt': 'Un couple marié examine des documents fiscaux suisses près des alliances.',
 };
 
 export default blogMetaChFr;

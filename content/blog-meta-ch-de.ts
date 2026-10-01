@@ -7334,6 +7334,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.inflazione-svizzera-settembre-1-percento.title': 'Schweizer Inflation: steigt nach zwei Jahren im September auf 1 %',
     'blog.article.inflazione-svizzera-settembre-1-percento.excerpt': 'Die Inflation in der Schweiz stieg im September auf 1 %, von 0,8 % im August. Dies ist laut FSO das erste Mal seit August 2024, dass sie diese Schwelle erreicht hat.',
     'blog.article.inflazione-svizzera-settembre-1-percento.imageAlt': 'Belebte Stadtszene in einer Schweizer Stadt, mit Menschen, die an Schaufenstern mit Preisen vorbeigehen, was die Lebenshaltungskosten widerspiegelt.',
+    'blog.article.iniziativa-fisco-matrimonio.title': 'Faire Steuern: Abschaffung der Steuerstrafe auf die Ehe',
+    'blog.article.iniziativa-fisco-matrimonio.excerpt': 'In Bern unterstützt der parteiübergreifende Ausschuss die Initiative des Zentrums: Die direkte Bundessteuer sollte verheiratete Paare im Vergleich zu unverheirateten Paaren nicht bestrafen.',
+    'blog.article.iniziativa-fisco-matrimonio.imageAlt': 'Verheiratetes Paar prüft Schweizer Steuerunterlagen neben Eheringen.',
 };
 
 export default blogMetaChDe;

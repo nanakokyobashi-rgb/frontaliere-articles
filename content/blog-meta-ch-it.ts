@@ -7334,6 +7334,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.inflazione-svizzera-settembre-1-percento.title': 'Inflazione Svizzera: a settembre sale all\'1% dopo due anni',
     'blog.article.inflazione-svizzera-settembre-1-percento.excerpt': 'L\'inflazione in Svizzera è salita all\'1% a settembre, dal 0,8% di agosto. È la prima volta che raggiunge questa soglia da agosto 2024, secondo l\'UST.',
     'blog.article.inflazione-svizzera-settembre-1-percento.imageAlt': 'Scena urbana affollata in una città svizzera, con persone che passano davanti a vetrine che mostrano prezzi, riflettendo il costo della vita.',
+    'blog.article.iniziativa-fisco-matrimonio.title': 'Imposte eque: via la penalità fiscale sul matrimonio',
+    'blog.article.iniziativa-fisco-matrimonio.excerpt': 'A Berna il comitato interpartitico sostiene l\'iniziativa del Centro: l\'imposta federale diretta non penalizzi le coppie sposate rispetto alle coppie di fatto.',
+    'blog.article.iniziativa-fisco-matrimonio.imageAlt': 'Coppia sposata esamina documenti fiscali svizzeri accanto alle fedi nuziali.',
 };
 
 export default blogMetaChIt;

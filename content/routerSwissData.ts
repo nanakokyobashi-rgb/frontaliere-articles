@@ -2467,6 +2467,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'seduta-federale-bilaterali': { it: 'seduta-federale-bilaterali', en: 'federal-session-bilateral-talks', de: 'bundessitzung-bilaterale-olympiade', fr: 'session-federale-olympiades-asile' },
  'fiammata-inflazione-carburanti': { it: 'fiammata-inflazione-carburanti', en: 'swiss-inflation-fuel-surge', de: 'schweizer-inflation-treibstoffanstieg', fr: 'inflation-suisse-hausse-carburants' },
  'inflazione-svizzera-settembre-1-percento': { it: 'inflazione-svizzera-settembre-1-percento', en: 'swiss-inflation-september-1-percent', de: 'schweizer-inflation-september-1-prozent', fr: 'inflation-suisse-septembre-1-pourcent' },
+ 'iniziativa-fisco-matrimonio': { it: 'iniziativa-fisco-matrimonio', en: 'fair-tax-marriage-initiative', de: 'faire-steuern-ehe-initiative', fr: 'initiative-fiscale-mariage' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

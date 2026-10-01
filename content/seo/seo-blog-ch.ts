@@ -95102,6 +95102,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-iniziativa-fisco-matrimonio': {
+    title: 'Imposte eque: via la penalità fiscale sul matrimonio',
+    description: 'A Berna parte la campagna del Centro per un fisco equo: le coppie sposate non dovrebbero pagare più imposta federale diretta delle coppie di fatto in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, imposte, eque, penalità, fiscale',
+    ogTitle: 'Imposte eque: via la penalità fiscale sul matrimonio',
+    ogDescription: 'Il comitato interpartitico ha presentato a Berna la campagna per l\'iniziativa del Centro: la proposta riguarda solo l\'imposta federale diretta, cumula i redditi dei coniugi nella dichiarazione ed esclude l\'imposizione individuale.',
+    canonicalPath: '/articoli-svizzera/iniziativa-fisco-matrimonio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Imposte eque: via la penalità fiscale sul matrimonio",
+      "description": "A Berna parte la campagna del Centro per un fisco equo: le coppie sposate non dovrebbero pagare più imposta federale diretta delle coppie di fatto in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/iniziativa-fisco-matrimonio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Coppia sposata esamina documenti fiscali svizzeri accanto alle fedi nuziali."
+      },
+      "datePublished": "2026-10-01T08:35:48+00:00",
+      "dateModified": "2026-10-01T08:35:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/iniziativa-fisco-matrimonio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

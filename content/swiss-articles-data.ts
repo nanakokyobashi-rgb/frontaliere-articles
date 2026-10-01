@@ -22030,6 +22030,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'iniziativa-fisco-matrimonio',
+    category: 'fiscale',
+    date: '2026-10-01T08:35:48.442Z',
+    image: '/images/blog/iniziativa-fisco-matrimonio.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
