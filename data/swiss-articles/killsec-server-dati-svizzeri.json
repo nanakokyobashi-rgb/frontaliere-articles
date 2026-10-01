@@ -1,0 +1,9 @@
+{
+  "id": "killsec-server-dati-svizzeri",
+  "slug": "killsec-server-dati-svizzeri",
+  "publishedAt": "2026-10-01T22:05:45.448Z",
+  "cluster": null,
+  "_pool": "discovery",
+  "_pool_source": "swissinfo.ch",
+  "_score_breakdown": null
+}
