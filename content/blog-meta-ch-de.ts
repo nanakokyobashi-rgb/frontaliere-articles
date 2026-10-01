@@ -7391,6 +7391,12 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.pieno-cittadino-imposta-benzina.title': 'Der Bürger zahlt immer für den vollen Tank',
     'blog.article.pieno-cittadino-imposta-benzina.excerpt': 'Im August 2026 beträgt die monatliche Inflation +0,4 % und die Jahresinflation +0,8 %; die Benzinsteuer beträgt 76,82 Cent pro Liter, auf Diesel 79,57 Cent pro Liter; im Jahr 2025 betrug der Umsatz 4,367 Milliarden Francs.',
     'blog.article.pieno-cittadino-imposta-benzina.imageAlt': 'Kraftstoffpumpendüse mit einem Schweizer Franken Münze und den Alpen im Hintergrund',
+    'blog.article.draghi-ue-riforme-crescita.title': 'Draghi bei der ETH: Die EU sollte dem Schweizer Beispiel folgen, um zu wachsen',
+    'blog.article.draghi-ue-riforme-crescita.excerpt': 'Draghi in Zürich: Schulden/BIP bei 130 % im Jahr 2040, 1,3 Billionen für KI bis 2030. Die EU muss sich wie die USA integrieren, wobei wir die Konföderation als Modell anführen.',
+    'blog.article.draghi-ue-riforme-crescita.imageAlt': 'ETH Zürich Hauptgebäude wo Mario Draghi sprach',
+    'blog.article.utile-bns-distribuzione-2030.title': 'SNB: Bis zu sechs Milliarden pro Jahr für den Bund und die Kantone',
+    'blog.article.utile-bns-distribuzione-2030.excerpt': 'Das neue FDF-SNB-Abkommen für 2026–2030 sieht bis zu sechs Milliarden pro Jahr vor, sofern Gewinn und finanzielle Lage es zulassen.',
+    'blog.article.utile-bns-distribuzione-2030.imageAlt': 'Schweizerische Nationalbank und Bund: Gewinnausschüttung 2026-2030',
 };
 
 export default blogMetaChDe;

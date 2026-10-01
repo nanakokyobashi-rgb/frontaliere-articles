@@ -7391,6 +7391,12 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.pieno-cittadino-imposta-benzina.title': 'Le citoyen paie toujours le réservoir plein',
     'blog.article.pieno-cittadino-imposta-benzina.excerpt': 'En août 2026, l’inflation mensuelle est de +0,4 % et l’inflation annuelle de +0,8 % ; la taxe sur l’essence est de 76,82 cents/litre, celle sur le diesel de 79,57 cents/litre ; en 2025, le chiffre d’affaires s’élevait à 4,367 milliards de francs.',
     'blog.article.pieno-cittadino-imposta-benzina.imageAlt': 'Pistolet de pompe à essence avec une pièce de franc suisse et les Alpes en arrière-plan',
+    'blog.article.draghi-ue-riforme-crescita.title': 'Draghi à ETH : L’UE devrait suivre l’exemple suisse pour croître',
+    'blog.article.draghi-ue-riforme-crescita.excerpt': 'Draghi à Zurich : dette/PIB à 130 % en 2040, il faut 1,3 billion pour l\'IA d\'ici 2030. L\'UE doit s\'intégrer comme les États-Unis, en citant la Confédération comme modèle.',
+    'blog.article.draghi-ue-riforme-crescita.imageAlt': 'EPF Zurich bâtiment principal où Mario Draghi a parlé',
+    'blog.article.utile-bns-distribuzione-2030.title': 'SNB : Jusqu’à six milliards par an pour la Confédération et les cantons',
+    'blog.article.utile-bns-distribuzione-2030.excerpt': 'Le nouvel accord FDF-SNB pour 2026-2030 prévoit jusqu’à six milliards par an, si le bénéfice et la situation financière le permettent.',
+    'blog.article.utile-bns-distribuzione-2030.imageAlt': 'BNS et Confédération: répartition du bénéfice 2026-2030',
 };
 
 export default blogMetaChFr;
