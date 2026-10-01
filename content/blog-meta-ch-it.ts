@@ -7274,6 +7274,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.riduzione-deflusso-lago-zurigo-2026.title': 'Lago di Zurigo: deflusso ridotto da ottobre 2026',
     'blog.article.riduzione-deflusso-lago-zurigo-2026.excerpt': 'Per contrastare la siccità, dal 1 ottobre 2026 il deflusso del Lago di Zurigo scende da 30 a 20 metri cubi al secondo per tutelare la navigazione.',
     'blog.article.riduzione-deflusso-lago-zurigo-2026.imageAlt': 'Veduta del Lago di Zurigo in una giornata di sole',
+    'blog.article.mappa-fiscale-berna-2026.title': 'Imposta cantonale: confronto Svizzera 2026 e Berna',
+    'blog.article.mappa-fiscale-berna-2026.excerpt': 'Nel 2026 il confronto fiscale parte da IFD federale, imposta cantonale e imposta comunale: per Berna conta anche il moltiplicatore comunale.',
+    'blog.article.mappa-fiscale-berna-2026.imageAlt': 'Documenti fiscali svizzeri e calcolatrice su una scrivania',
 };
 
 export default blogMetaChIt;

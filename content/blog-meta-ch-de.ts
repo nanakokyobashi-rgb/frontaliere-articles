@@ -7274,6 +7274,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.riduzione-deflusso-lago-zurigo-2026.title': 'Zürichsee: Reduzierte Abflussmenge ab Oktober 2026',
     'blog.article.riduzione-deflusso-lago-zurigo-2026.excerpt': 'Um der Dürre entgegenzuwirken, wird der Abfluss des Zürichsees ab dem 1. Oktober 2026 von 30 auf 20 Kubikmeter pro Sekunde sinken, um den Schiffsverkehr zu schützen.',
     'blog.article.riduzione-deflusso-lago-zurigo-2026.imageAlt': 'Blick auf den Zürichsee an einem sonnigen Tag',
+    'blog.article.mappa-fiscale-berna-2026.title': 'Kantonssteuer: Vergleich Schweiz 2026 und Bern',
+    'blog.article.mappa-fiscale-berna-2026.excerpt': 'Im Jahr 2026 basiert der Steuervergleich auf der eidgenössischen direkten Steuer, der Kantonssteuer und der Gemeindesteuer; für Bern spielt zudem der Gemeindemultiplikator eine Rolle.',
+    'blog.article.mappa-fiscale-berna-2026.imageAlt': 'Schweizer Steuerunterlagen und ein Taschenrechner auf einem Bürotisch',
 };
 
 export default blogMetaChDe;

@@ -7274,6 +7274,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.riduzione-deflusso-lago-zurigo-2026.title': 'Lac Zurich : ruissellement réduit à partir d’octobre 2026',
     'blog.article.riduzione-deflusso-lago-zurigo-2026.excerpt': 'Pour lutter contre la sécheresse, le ruissellement du lac Zurich passera de 30 à 20 mètres cubes par seconde à partir du 1er octobre 2026 afin de protéger la navigation.',
     'blog.article.riduzione-deflusso-lago-zurigo-2026.imageAlt': 'Vue du lac de Zurich par une journée ensoleillée',
+    'blog.article.mappa-fiscale-berna-2026.title': 'Taxe cantonale : comparaison entre la Suisse et Berne en 2026',
+    'blog.article.mappa-fiscale-berna-2026.excerpt': 'En 2026, la comparaison fiscale commence avec le DFI fédéral, l’impôt cantonal et l’impôt municipal : pour Berne, le multiplicateur municipal compte également.',
+    'blog.article.mappa-fiscale-berna-2026.imageAlt': 'Documents fiscaux suisses et calculatrice sur un bureau',
 };
 
 export default blogMetaChFr;

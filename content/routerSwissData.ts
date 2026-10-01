@@ -2447,6 +2447,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'extramuro-soccorso-ticino': { it: 'extramuro-soccorso-ticino', en: 'extramuro-civil-protection-ticino', de: 'extramuro-zivilschutz-tessin', fr: 'extramuro-protection-civile-tessin' },
  'seco-apprendistato-tirocini': { it: 'seco-apprendistato-tirocini', en: 'seco-apprenticeships-internships', de: 'seco-lehre-praktika', fr: 'seco-apprentissages-stages' },
  'riduzione-deflusso-lago-zurigo-2026': { it: 'riduzione-deflusso-lago-zurigo-2026', en: 'zurich-lake-outflow-reduction-2026', de: 'zuerichsee-abfluss-reduktion-2026', fr: 'reduction-debit-lac-zurich-2026' },
+ 'mappa-fiscale-berna-2026': { it: 'mappa-fiscale-berna-2026', en: 'swiss-tax-map-bern-2026', de: 'steuervergleich-bern-schweiz-2026', fr: 'comparatif-fiscal-berne-suisse-2026' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

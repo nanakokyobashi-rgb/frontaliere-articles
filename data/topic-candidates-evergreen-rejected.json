@@ -1,7 +1,5 @@
 {
   "keywords": [
-    "permesso di domicilio C canton Basilea Città requisiti e domanda",
-    "asilo nido e custodia bambini canton Basilea Città costi",
     "comprare casa canton Basilea Città prezzi e mutuo ipotecario",
     "avs e prestazioni complementari canton Basilea Città cassa di compensazione",
     "abbonamenti trasporti pubblici canton Basilea Città zone e tariffe",
@@ -499,7 +497,9 @@
     "vivere a Mandello del Lario e lavorare in Ticino da frontaliere",
     "mercato degli affitti canton Grigioni canoni medi e diritto di locazione",
     "vivere a Varese e lavorare in Ticino da frontaliere",
-    "asilo nido e custodia bambini canton Vallese costi"
+    "asilo nido e custodia bambini canton Vallese costi",
+    "congedo parentale svizzera durata indennita",
+    "imposta cantonale confronto svizzera 2026"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -879,6 +879,10 @@
     "svizzera::https://www.swissinfo.ch/ita/sh%3a-assalto-a-bancomat%2c-rapinatore-gravemente-ferito-da-esplosione/92144288": {
       "section": "svizzera",
       "ts": 1790810417704
+    },
+    "svizzera::https://www.tio.ch/svizzera/cronaca/1953743/esplosivi-polizia-sciaffusa-stazione-esplosione": {
+      "section": "svizzera",
+      "ts": 1790814654520
     }
   }
 }

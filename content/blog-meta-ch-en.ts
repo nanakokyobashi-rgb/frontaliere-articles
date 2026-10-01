@@ -7274,6 +7274,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.riduzione-deflusso-lago-zurigo-2026.title': 'Lake Zurich: Reduced Outflow Starting in October 2026',
     'blog.article.riduzione-deflusso-lago-zurigo-2026.excerpt': 'To combat the drought, starting October 1, 2026, the outflow from Lake Zurich will be reduced from 30 to 20 cubic meters per second to ensure safe navigation.',
     'blog.article.riduzione-deflusso-lago-zurigo-2026.imageAlt': 'View of Lake Zurich on a sunny day',
+    'blog.article.mappa-fiscale-berna-2026.title': 'Cantonal Tax: A Comparison Between Switzerland in 2026 and Bern',
+    'blog.article.mappa-fiscale-berna-2026.excerpt': 'In 2026, the tax comparison will be based on the federal direct tax, cantonal tax, and municipal tax; for Bern, the municipal multiplier will also be taken into account.',
+    'blog.article.mappa-fiscale-berna-2026.imageAlt': 'Swiss tax documents and a calculator on an office desk',
 };
 
 export default blogMetaChEn;

@@ -94322,6 +94322,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-mappa-fiscale-berna-2026': {
+    title: 'Imposta cantonale: confronto Svizzera 2026 e Berna',
+    description: 'Confronto 2026 dell\'imposta cantonale in Svizzera: tre livelli, regole dei Cantoni e metodo pratico per leggere Berna tra fisco, contributi e costo della vita.',
+    keywords: 'frontalieri, ticino, svizzera, italia, imposta, cantonale, confronto, berna',
+    ogTitle: 'Imposta cantonale Svizzera 2026: Berna',
+    ogDescription: 'Il confronto 2026 non si esaurisce in una percentuale: per Berna bisogna separare imposta federale diretta, imposta cantonale e quota comunale, poi distinguere fisco, AVS/AHV, LPP/BVG e premi LAMal. Guida pratica per distinguere le componenti.',
+    canonicalPath: '/articoli-svizzera/mappa-fiscale-berna-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Imposta cantonale: confronto Svizzera 2026 e Berna",
+      "description": "Confronto 2026 dell'imposta cantonale in Svizzera: tre livelli, regole dei Cantoni e metodo pratico per leggere Berna tra fisco, contributi e costo della vita.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/mappa-fiscale-berna-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documenti fiscali svizzeri e calcolatrice su una scrivania"
+      },
+      "datePublished": "2026-10-01T00:55:32+00:00",
+      "dateModified": "2026-10-01T00:55:32+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/mappa-fiscale-berna-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
