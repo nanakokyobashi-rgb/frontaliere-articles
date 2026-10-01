@@ -237,7 +237,12 @@ test('ogni closer corpus-owned consulta la sorgente dei pin', () => {
  */
 test('i closer mirror-locked sono dichiarati, non dimenticati', () => {
   const EXPECTED_MIRROR_LOCKED = [
+    // Chiudono SOLO gli hand-off di conflitto («Conflitto con main…: riapplicare
+    // la PR #N su main», titolo esatto di pr-autorebase), mai un trackingIssue:
+    // valerielinc-ops/frontaliere-si-o-no#10714.
+    'scripts/ci/check-issue-already-resolved.mjs',
     'scripts/ci/harvest-agent-lessons.mjs',
+    'scripts/ci/reconcile-conflict-handoffs.mjs',
   ];
   const actual = discoverClosers().filter((c) => c.mode === 'identical').map((c) => c.rel);
   assert.deepEqual(
