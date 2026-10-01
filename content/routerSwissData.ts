@@ -2454,6 +2454,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'basilea-citta-mobilita-tariffe': { it: 'basilea-citta-mobilita-tariffe', en: 'basel-city-transport-subscriptions', de: 'basel-stadt-abo-zonen-tarife', fr: 'bale-ville-abonnements-transports' },
  'domanda-cittadinanza-grigioni': { it: 'domanda-cittadinanza-grigioni', en: 'graubunden-naturalization-requirements', de: 'einbuergerung-graubuenden', fr: 'naturalisation-grisons-guide' },
  'grigioni-primo-pilastro-rendita': { it: 'grigioni-primo-pilastro-rendita', en: 'grisons-ahv-supplementary-benefits', de: 'graubuenden-ahv-ergaenzungsleistungen', fr: 'grisons-avs-caisse-prestations-complementaires' },
+ 'grigioni-percorso-quotidiano-pass': { it: 'grigioni-percorso-quotidiano-pass', en: 'graubunden-public-transport-pass', de: 'graubuenden-oev-abos', fr: 'grisons-transports-abonnements' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

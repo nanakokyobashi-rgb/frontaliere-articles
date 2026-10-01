@@ -94595,6 +94595,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-grigioni-percorso-quotidiano-pass': {
+    title: 'Abbonamenti trasporti pubblici Grigioni: zone e tariffe',
+    description: 'Abbonamenti trasporti nei Grigioni: guida a comunità tariffaria, zone, formule annuali e mensili, metà-prezzo, AG e sconti per studenti e apprendisti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, abbonamenti, trasporti, pubblici, grigioni',
+    ogTitle: 'Grigioni: abbonamenti pubblici, zone e tariffe',
+    ogDescription: 'Nel Cantone dei Grigioni il confronto non riguarda solo il prezzo: occorre leggere insieme comunità tariffaria, zone, durata annuale o mensile, combinazioni con metà-prezzo e AG e sconti per studenti e apprendisti.',
+    canonicalPath: '/articoli-svizzera/grigioni-percorso-quotidiano-pass/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Abbonamenti trasporti pubblici Grigioni: zone e tariffe",
+      "description": "Abbonamenti trasporti nei Grigioni: guida a comunità tariffaria, zone, formule annuali e mensili, metà-prezzo, AG e sconti per studenti e apprendisti.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/grigioni-percorso-quotidiano-pass.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Trasporto pubblico tra le montagne dei Grigioni, per una guida ad abbonamenti, zone e tariffe"
+      },
+      "datePublished": "2026-10-01T03:03:01+00:00",
+      "dateModified": "2026-10-01T03:03:01+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/grigioni-percorso-quotidiano-pass/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

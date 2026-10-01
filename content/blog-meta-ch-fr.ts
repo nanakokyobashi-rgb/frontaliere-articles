@@ -7295,6 +7295,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.grigioni-primo-pilastro-rendita.title': 'AHV Grisons : Assurance complémentaire et avantages sociaux',
     'blog.article.grigioni-primo-pilastro-rendita.excerpt': 'Dans le canton des Grisons, le bureau de compensation relie les calculs de la valeur de la vie, les écarts de contributions et les prestations complémentaires pour la subsistance minimale.',
     'blog.article.grigioni-primo-pilastro-rendita.imageAlt': 'Paysage alpin suisse illustrant l’AVS et les prestations complémentaires aux Grisons',
+    'blog.article.grigioni-percorso-quotidiano-pass.title': 'Abonnements aux transports publics des Grisons : zones et tarifs',
+    'blog.article.grigioni-percorso-quotidiano-pass.excerpt': 'Réseau tarifaire, zones, cartes de voyage annuelles et mensuelles : la comparaison en Grisons inclut une carte de voyage à demi-tarif, une carte de voyage GA et des réductions pour les étudiants et apprentis.',
+    'blog.article.grigioni-percorso-quotidiano-pass.imageAlt': 'Transports publics dans les montagnes des Grisons, illustrant abonnements, zones et tarifs',
 };
 
 export default blogMetaChFr;

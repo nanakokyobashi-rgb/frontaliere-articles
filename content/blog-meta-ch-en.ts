@@ -7295,6 +7295,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.grigioni-primo-pilastro-rendita.title': 'AVS Graubünden: Pension Fund and Supplemental Benefits',
     'blog.article.grigioni-primo-pilastro-rendita.excerpt': 'In the canton of Graubünden, the compensation office links AHV calculations, contribution gaps and supplementary benefits for the minimum subsistence.',
     'blog.article.grigioni-primo-pilastro-rendita.imageAlt': 'Swiss alpine landscape illustrating AHV and supplementary benefits in Graubünden',
+    'blog.article.grigioni-percorso-quotidiano-pass.title': 'Graubünden Public Transportation Passes: Zones and Fares',
+    'blog.article.grigioni-percorso-quotidiano-pass.excerpt': 'Fare network, zones, annual and monthly travelcards: the comparison in Graubünden includes Half-Fare travelcard, GA travelcard and discounts for students and apprentices.',
+    'blog.article.grigioni-percorso-quotidiano-pass.imageAlt': 'Public transport in the Graubünden mountains, illustrating passes, zones and fares',
 };
 
 export default blogMetaChEn;

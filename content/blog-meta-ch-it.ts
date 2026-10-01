@@ -7295,6 +7295,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.grigioni-primo-pilastro-rendita.title': 'AVS Grigioni: cassa e prestazioni complementari',
     'blog.article.grigioni-primo-pilastro-rendita.excerpt': 'Nel Cantone dei Grigioni, la cassa di compensazione collega calcolo AVS, lacune contributive e prestazioni complementari per il minimo vitale.',
     'blog.article.grigioni-primo-pilastro-rendita.imageAlt': 'Paesaggio alpino svizzero per AVS e prestazioni complementari nei Grigioni',
+    'blog.article.grigioni-percorso-quotidiano-pass.title': 'Abbonamenti trasporti pubblici Grigioni: zone e tariffe',
+    'blog.article.grigioni-percorso-quotidiano-pass.excerpt': 'Comunità tariffaria, zone, abbonamenti annuali e mensili: il confronto nei Grigioni include metà-prezzo, AG e sconti per studenti e apprendisti.',
+    'blog.article.grigioni-percorso-quotidiano-pass.imageAlt': 'Trasporto pubblico tra le montagne dei Grigioni, per una guida ad abbonamenti, zone e tariffe',
 };
 
 export default blogMetaChIt;

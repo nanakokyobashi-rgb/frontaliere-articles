@@ -7295,6 +7295,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.grigioni-primo-pilastro-rendita.title': 'AHV Graubünden: Kasse und Zusatzleistungen',
     'blog.article.grigioni-primo-pilastro-rendita.excerpt': 'Im Kanton Graubünden vereint die Ausgleichskasse die Berechnung der AHV, Beitragslücken und Ergänzungsleistungen zum Existenzminimum.',
     'blog.article.grigioni-primo-pilastro-rendita.imageAlt': 'Schweizer Alpenlandschaft zu AHV und Ergänzungsleistungen in Graubünden',
+    'blog.article.grigioni-percorso-quotidiano-pass.title': 'Abonnements für den öffentlichen Nahverkehr in Graubünden: Zonen und Tarife',
+    'blog.article.grigioni-percorso-quotidiano-pass.excerpt': 'Tarifverbund, Zonen, Jahres- und Monatsabonnemente: Der Vergleich in Graubünden umfasst den Halbtax, das GA sowie Ermäßigungen für Studierende und Auszubildende.',
+    'blog.article.grigioni-percorso-quotidiano-pass.imageAlt': 'Öffentlicher Verkehr in den Bündner Bergen als Symbol für Abos, Zonen und Tarife',
 };
 
 export default blogMetaChDe;
