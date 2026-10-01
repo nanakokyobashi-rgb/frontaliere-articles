@@ -7307,6 +7307,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.fisco-lucerna-tre-livelli-2026.title': 'Imposta cantonale confronto Svizzera 2026: canton Lucerna',
     'blog.article.fisco-lucerna-tre-livelli-2026.excerpt': 'Tre livelli fiscali e moltiplicatore comunale: il confronto 2026 parte dalla struttura nazionale e applica il metodo al canton Lucerna.',
     'blog.article.fisco-lucerna-tre-livelli-2026.imageAlt': 'Scrivania con documento fiscale svizzero e calcolatrice per il confronto cantonale',
+    'blog.article.argovia-mappa-fiscale-2026.title': 'Imposta cantonale Svizzera 2026: confronto Argovia',
+    'blog.article.argovia-mappa-fiscale-2026.excerpt': 'Nel 2026 il confronto parte da tre livelli fiscali: federale, cantonale e comunale. In Argovia contano legge cantonale e moltiplicatore comunale.',
+    'blog.article.argovia-mappa-fiscale-2026.imageAlt': 'Panorama urbano svizzero per il confronto dell\'imposta cantonale 2026',
 };
 
 export default blogMetaChIt;

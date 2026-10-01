@@ -94751,6 +94751,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-argovia-mappa-fiscale-2026': {
+    title: 'Imposta cantonale Svizzera 2026: confronto Argovia',
+    description: 'Imposta cantonale in Svizzera nel 2026: tre livelli fiscali, legge cantonale, moltiplicatore comunale e criteri pratici per il confronto sul canton Argovia.',
+    keywords: 'frontalieri, ticino, svizzera, italia, imposta, cantonale, confronto, argovia',
+    ogTitle: 'Imposta cantonale Svizzera 2026: confronto Argovia',
+    ogDescription: 'Nel 2026 l\'imposta svizzera si legge su tre piani: federale, cantonale e comunale. Il confronto sul canton Argovia richiede di distinguere la legge del Cantone, il moltiplicatore del comune e le voci separate di salario, previdenza e LAMal.',
+    canonicalPath: '/articoli-svizzera/argovia-mappa-fiscale-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Imposta cantonale Svizzera 2026: confronto Argovia",
+      "description": "Imposta cantonale in Svizzera nel 2026: tre livelli fiscali, legge cantonale, moltiplicatore comunale e criteri pratici per il confronto sul canton Argovia.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/argovia-mappa-fiscale-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Panorama urbano svizzero per il confronto dell'imposta cantonale 2026"
+      },
+      "datePublished": "2026-10-01T03:59:43+00:00",
+      "dateModified": "2026-10-01T03:59:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/argovia-mappa-fiscale-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

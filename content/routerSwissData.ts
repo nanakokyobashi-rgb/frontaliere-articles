@@ -2458,6 +2458,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'aliquote-locali-san-gallo': { it: 'aliquote-locali-san-gallo', en: 'cantonal-tax-rates-st-gallen', de: 'kantonale-steuersaetze-st-gallen', fr: 'taux-fiscaux-cantonaux-saint-gall' },
  'neutralita-voto-rigetto': { it: 'neutralita-voto-rigetto', en: 'swiss-neutrality-vote-rejected', de: 'schweizer-neutralitaet-initiative-abgelehnt', fr: 'initiative-neutralite-suisse-rejetee' },
  'fisco-lucerna-tre-livelli-2026': { it: 'fisco-lucerna-tre-livelli-2026', en: 'lucerne-tax-three-levels-2026', de: 'steuern-luzern-drei-ebenen-2026', fr: 'impots-lucerne-trois-niveaux-2026' },
+ 'argovia-mappa-fiscale-2026': { it: 'argovia-mappa-fiscale-2026', en: 'aargau-tax-comparison-2026', de: 'steuervergleich-aargau-2026', fr: 'comparatif-fiscal-argovie-2026' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

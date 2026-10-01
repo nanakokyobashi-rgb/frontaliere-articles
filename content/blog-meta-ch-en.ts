@@ -7307,6 +7307,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.fisco-lucerna-tre-livelli-2026.title': 'Swiss Cantonal Tax Comparison 2026: Canton of Lucerne',
     'blog.article.fisco-lucerna-tre-livelli-2026.excerpt': 'Three tax tiers and the municipal multiplier: The 2026 comparison begins with the national structure and applies the method to the canton of Lucerne.',
     'blog.article.fisco-lucerna-tre-livelli-2026.imageAlt': 'Desk with a Swiss tax document and calculator for comparing cantonal taxes',
+    'blog.article.argovia-mappa-fiscale-2026.title': 'Swiss Cantonal Taxes 2026: A Comparison of Aargau',
+    'blog.article.argovia-mappa-fiscale-2026.excerpt': 'In 2026, the comparison starts from three tax levels: federal, cantonal and municipal. In Aargau, the cantonal law and the municipal multiplier count.',
+    'blog.article.argovia-mappa-fiscale-2026.imageAlt': 'Swiss urban panorama for the 2026 cantonal tax comparison',
 };
 
 export default blogMetaChEn;

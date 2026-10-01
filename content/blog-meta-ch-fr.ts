@@ -7307,6 +7307,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.fisco-lucerna-tre-livelli-2026.title': 'Comparaison fiscale cantonale en Suisse 2026 : canton de Lucerne',
     'blog.article.fisco-lucerna-tre-livelli-2026.excerpt': 'Trois niveaux d’imposition et multiplicateur municipal : la comparaison 2026 part de la structure nationale et applique la méthode au canton de Lucerne.',
     'blog.article.fisco-lucerna-tre-livelli-2026.imageAlt': 'Bureau avec document fiscal suisse et calculatrice pour comparer les impôts cantonaux',
+    'blog.article.argovia-mappa-fiscale-2026.title': 'Taxe cantonale suisse 2026 : comparaison avec l’Argovie',
+    'blog.article.argovia-mappa-fiscale-2026.excerpt': 'En 2026, la comparaison part de trois niveaux d’imposition : fédéral, cantonal et municipal. En Aargovie, la loi cantonale et le multiplicateur municipal comptent.',
+    'blog.article.argovia-mappa-fiscale-2026.imageAlt': 'Panorama urbain suisse pour la comparaison fiscale cantonale 2026',
 };
 
 export default blogMetaChFr;

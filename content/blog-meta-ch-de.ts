@@ -7307,6 +7307,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.fisco-lucerna-tre-livelli-2026.title': 'Kantonale Steuern im Vergleich – Schweiz 2026: Kanton Luzern',
     'blog.article.fisco-lucerna-tre-livelli-2026.excerpt': 'Drei Steuerstufen und kommunaler Multiplikator: Der Vergleich für 2026 geht von der nationalen Struktur aus und wendet die Methode auf den Kanton Luzern an.',
     'blog.article.fisco-lucerna-tre-livelli-2026.imageAlt': 'Schreibtisch mit Schweizer Steuerdokument und Rechner für den Kantonsvergleich',
+    'blog.article.argovia-mappa-fiscale-2026.title': 'Kantonalsteuer Schweiz 2026: Vergleich mit dem Kanton Aargau',
+    'blog.article.argovia-mappa-fiscale-2026.excerpt': 'Im Jahr 2026 beginnt der Vergleich mit drei Steuerebenen: Bundes-, Kantons- und Gemeindeebene. In Aargau zählen das Kantonsgesetz und der Gemeindemultiplikator.',
+    'blog.article.argovia-mappa-fiscale-2026.imageAlt': 'Schweizer Stadtpanorama für den kantonalen Steuervergleich 2026',
 };
 
 export default blogMetaChDe;
