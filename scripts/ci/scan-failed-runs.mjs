@@ -1237,18 +1237,71 @@ export function crawlerFailuresFromLog(text) {
 }
 
 /**
- * Issue diagnostica per un gruppo con un solo membro fallito.
+ * Report diagnostico per i gruppi crawler.
  *
- * Con più membri non scegliamo arbitrariamente un colpevole: il chiamante
- * resta sul titolo aggregato, che è più onesto del binding di un alert a uno
- * step non determinato. La forma per-membro è invece recuperabile dal guard
- * esistente, perché `Crawler Failure: Run <slug>` viene confrontato con lo
- * step omonimo della run successiva.
+ * Un solo membro fallito consente il titolo per-membro, che il guard confronta
+ * con lo step omonimo della run successiva. Più membri o un errore condiviso
+ * restano sul titolo del gruppo: il body espone gli esiti e gli estratti senza
+ * attribuire una causa a uno slug che i log non collegano con certezza.
  */
 export function buildCrawlerFailureReport({ log, run, workflowName, jobLines } = {}) {
   if (!isCrawlerGroupWorkflow(workflowName)) return null;
   const failures = crawlerFailuresFromLog(log);
-  if (failures.length !== 1) return null;
+  const diagnostics = crawlerGroupDiagnosticLines(log);
+  if (failures.length === 0 && diagnostics.length === 0) return null;
+
+  const hasSharedFailure = diagnostics.some((line) => {
+    const memberStatus = CRAWLER_GROUP_MEMBER_STATUS_RE.exec(line);
+    const exitCode = memberStatus ? Number(memberStatus[2]) : null;
+    return PUSH_EXHAUSTED_RE.test(line)
+      || CRAWLER_SHARED_FAILURE_RE.test(line)
+      || CRAWLER_LEASE_DIAGNOSTIC_RE.test(line)
+      || (exitCode !== null && [42, 43, 44, 143].includes(exitCode))
+      || /(?:no terminal status was published|invalid terminal status|invalid status:|crawler group interrupted)/i.test(line);
+  });
+
+  if (failures.length !== 1 || hasSharedFailure) {
+    const group = workflowName || 'crawler group';
+    const evidence = diagnostics.length
+      ? diagnostics
+      : failures.flatMap(({ lines }) => lines);
+    const memberRows = failures.length
+      ? failures.map(({ slug, exitCode }) => `| \`${slug}\` | \`${exitCode}\` |`)
+      : ['| _(nessun esito membro attribuibile)_ | — |'];
+    const safeEvidence = evidence.map((line) => line.replace(/`/g, 'ʼ'));
+    const systemicRows = failures.filter(({ exitCode }) => exitCode === 143).length;
+    const description = [
+      `Il gruppo **${group}** ha un esito rosso con ${failures.length} membro/i non riuscito/i${hasSharedFailure ? ' o un errore di coordinamento/pubblicazione' : ''}.`,
+      '',
+      `- Run: ${run?.url || '?'}`,
+      `- Branch: \`${run?.headBranch || '?'}\``,
+      `- Evento: \`${run?.event || '?'}\``,
+      `- Concluso: ${run?.updatedAt || run?.createdAt || '?'}`,
+      '',
+      '**Esiti membro individuati**',
+      '',
+      '| Crawler | Exit |',
+      '| --- | ---: |',
+      ...memberRows,
+      '',
+      '**Estratti diagnostici della run**',
+      '',
+      '```',
+      ...safeEvidence,
+      '```',
+      '',
+      `Il titolo resta aggregato perché questi log non giustificano un unico binding per-membro. Gli exit 143${systemicRows ? ` (${systemicRows} esito/i sistemico/i)` : ''}, gli errori di lease e i push falliti restano visibili come errori; questo report non li converte in successi.`,
+      '',
+      'Issue aperta automaticamente da `scan-failed-runs.mjs`. Si chiude da sola quando il workflow del gruppo torna verde.',
+    ].join('\n');
+
+    return {
+      title: `Workflow Failure: ${group}`,
+      description,
+      failures,
+      groupLevel: true,
+    };
+  }
 
   const [{ slug, exitCode, lines }] = failures;
   const group = workflowName || 'crawler group';
@@ -1303,6 +1356,37 @@ const NOT_BOOKKEEPING_RE = /rebase conflict on '([^']+)', which is not a whole-f
 // L'errore vero emesso dallo step, non l'eco dello script che GitHub stampa a
 // ogni avvio dello step (quella riga c'e' anche quando il push riesce).
 const PUSH_EXHAUSTED_RE = /##\[error\]push failed after \d+ attempts/;
+const CRAWLER_GROUP_MEMBER_STATUS_RE = /(?:^|[^a-z0-9-])([a-z0-9][a-z0-9-]*):\s*crawler exited with status\s+([1-9]\d*)\b/i;
+const CRAWLER_SHARED_FAILURE_RE = /(?:shared deferred-commit precondition failed|shared group precondition failure|group commit failed|crawler group interrupted)/i;
+const CRAWLER_LEASE_DIAGNOSTIC_RE = /(?:lease|lock).{0,120}(?:failed|error|busy|not acquired|missing|expired|unavailable|conflict)|(?:failed|error|busy|not acquired|missing|expired|unavailable|conflict).{0,120}(?:lease|lock)/i;
+const CRAWLER_GROUP_DIAGNOSTIC_RE = /crawler failed:|crawler exited with status [1-9]\d*\b|no terminal status was published|invalid terminal status|invalid status:|crawler aggregate|crawler group (?:completed with|interrupted)|shared deferred-commit precondition failed|shared group precondition failure|group commit failed|runner shutdown.*exit 143|systemic.*143/i;
+const MAX_CRAWLER_GROUP_DIAGNOSTIC_LINES = 64;
+const MAX_CRAWLER_GROUP_DIAGNOSTIC_LINE_LENGTH = 800;
+
+function crawlerGroupDiagnosticLines(text) {
+  const rawLines = String(text || '').split('\n');
+  const systemicSlugs = new Set();
+  for (const raw of rawLines) {
+    const marker = SYSTEMIC_CRAWLER_FAILURE_RE.exec(cleanLogLine(raw));
+    if (marker) systemicSlugs.add(marker[1].toLowerCase());
+  }
+
+  const evidence = new Set();
+  for (const raw of rawLines) {
+    const line = cleanLogLine(raw);
+    if (!line || /^\s*(?:echo|printf)\b/.test(line)) continue;
+    const memberStatus = CRAWLER_GROUP_MEMBER_STATUS_RE.exec(line);
+    if (memberStatus && systemicSlugs.has(memberStatus[1].toLowerCase())) continue;
+    if (!CRAWLER_GROUP_DIAGNOSTIC_RE.test(line)
+      && !PUSH_EXHAUSTED_RE.test(line)
+      && !CRAWLER_LEASE_DIAGNOSTIC_RE.test(line)) continue;
+    evidence.add(line.length > MAX_CRAWLER_GROUP_DIAGNOSTIC_LINE_LENGTH
+      ? `${line.slice(0, MAX_CRAWLER_GROUP_DIAGNOSTIC_LINE_LENGTH)}…`
+      : line);
+    if (evidence.size >= MAX_CRAWLER_GROUP_DIAGNOSTIC_LINES) break;
+  }
+  return [...evidence];
+}
 // `ARTICLE: true` e' il dump dell'env dello step di summary, cioe' il valore
 // vero di steps.generate.outputs.article. `ENABLE_HAIKU_ARTICLE_FALLBACK: true`
 // non matcha: serve `ARTICLE:` preceduto da inizio riga o spazio.
