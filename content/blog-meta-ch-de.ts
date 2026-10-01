@@ -7271,6 +7271,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.seco-apprendistato-tirocini.title': 'Arbeiten beim SECO: Lehrstellen und Praktika',
     'blog.article.seco-apprendistato-tirocini.excerpt': 'Das SECO beschäftigt über 900 Mitarbeitende, verfügt über drei Standorte in der Schweiz und rund 30 Außenstellen: Hier gibt es Lehrstellen, Praktika und Übersetzungsaufträge.',
     'blog.article.seco-apprendistato-tirocini.imageAlt': 'Arbeitsumfeld der SECO in der Schweiz',
+    'blog.article.riduzione-deflusso-lago-zurigo-2026.title': 'Zürichsee: Reduzierte Abflussmenge ab Oktober 2026',
+    'blog.article.riduzione-deflusso-lago-zurigo-2026.excerpt': 'Um der Dürre entgegenzuwirken, wird der Abfluss des Zürichsees ab dem 1. Oktober 2026 von 30 auf 20 Kubikmeter pro Sekunde sinken, um den Schiffsverkehr zu schützen.',
+    'blog.article.riduzione-deflusso-lago-zurigo-2026.imageAlt': 'Blick auf den Zürichsee an einem sonnigen Tag',
 };
 
 export default blogMetaChDe;

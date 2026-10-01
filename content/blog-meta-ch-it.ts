@@ -7271,6 +7271,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.seco-apprendistato-tirocini.title': 'Lavorare alla SECO: apprendistati e tirocini',
     'blog.article.seco-apprendistato-tirocini.excerpt': 'La SECO conta oltre 900 collaboratori, tre sedi in Svizzera e circa 30 distaccati: ecco apprendistati, tirocini e mandati di traduzione.',
     'blog.article.seco-apprendistato-tirocini.imageAlt': 'Ambiente di lavoro della SECO in Svizzera',
+    'blog.article.riduzione-deflusso-lago-zurigo-2026.title': 'Lago di Zurigo: deflusso ridotto da ottobre 2026',
+    'blog.article.riduzione-deflusso-lago-zurigo-2026.excerpt': 'Per contrastare la siccità, dal 1 ottobre 2026 il deflusso del Lago di Zurigo scende da 30 a 20 metri cubi al secondo per tutelare la navigazione.',
+    'blog.article.riduzione-deflusso-lago-zurigo-2026.imageAlt': 'Veduta del Lago di Zurigo in una giornata di sole',
 };
 
 export default blogMetaChIt;

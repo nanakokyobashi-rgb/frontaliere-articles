@@ -7271,6 +7271,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.seco-apprendistato-tirocini.title': 'Travailler chez SECO : apprentissages et stages',
     'blog.article.seco-apprendistato-tirocini.excerpt': 'SECO compte plus de 900 employés, trois bureaux en Suisse et environ 30 détachements : apprentissages, stages et mandats de traduction.',
     'blog.article.seco-apprendistato-tirocini.imageAlt': 'Environnement de travail de la SECO en Suisse',
+    'blog.article.riduzione-deflusso-lago-zurigo-2026.title': 'Lac Zurich : ruissellement réduit à partir d’octobre 2026',
+    'blog.article.riduzione-deflusso-lago-zurigo-2026.excerpt': 'Pour lutter contre la sécheresse, le ruissellement du lac Zurich passera de 30 à 20 mètres cubes par seconde à partir du 1er octobre 2026 afin de protéger la navigation.',
+    'blog.article.riduzione-deflusso-lago-zurigo-2026.imageAlt': 'Vue du lac de Zurich par une journée ensoleillée',
 };
 
 export default blogMetaChFr;

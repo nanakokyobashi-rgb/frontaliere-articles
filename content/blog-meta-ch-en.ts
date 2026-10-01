@@ -7271,6 +7271,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.seco-apprendistato-tirocini.title': 'Working at SECO: Apprenticeships and Internships',
     'blog.article.seco-apprendistato-tirocini.excerpt': 'SECO has more than 900 employees, three offices in Switzerland and around 30 secondments: apprenticeships, traineeships and translation mandates.',
     'blog.article.seco-apprendistato-tirocini.imageAlt': 'SECO workplace environment in Switzerland',
+    'blog.article.riduzione-deflusso-lago-zurigo-2026.title': 'Lake Zurich: Reduced Outflow Starting in October 2026',
+    'blog.article.riduzione-deflusso-lago-zurigo-2026.excerpt': 'To combat the drought, starting October 1, 2026, the outflow from Lake Zurich will be reduced from 30 to 20 cubic meters per second to ensure safe navigation.',
+    'blog.article.riduzione-deflusso-lago-zurigo-2026.imageAlt': 'View of Lake Zurich on a sunny day',
 };
 
 export default blogMetaChEn;

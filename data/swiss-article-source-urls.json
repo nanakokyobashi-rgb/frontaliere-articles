@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1947110/norme-banche-consiglio-stati-commissione": {
-    "articleId": "ubs-norme-bancarie-compromesso",
-    "ts": "2026-08-31T21:35:37.016Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/holsnqc6wk9s_okvufdf5": {
     "articleId": "divario-salariale-genere-agosto-2026",
     "ts": "2026-08-31T21:48:54.890Z",
@@ -2497,6 +2492,11 @@
   "https://comozero.it/attualita/maxi-test-di-protezione-civile-tra-italia-e-svizzera-9-giorni-di-esercitazioni-congiunte-tra-como-e-ticino": {
     "articleId": "extramuro-soccorso-ticino",
     "ts": "2026-10-01T00:09:01.966Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/ahgamdnkdnpt": {
+    "articleId": "riduzione-deflusso-lago-zurigo-2026",
+    "ts": "2026-10-01T00:26:43.270Z",
     "keyForm": 2
   }
 }
