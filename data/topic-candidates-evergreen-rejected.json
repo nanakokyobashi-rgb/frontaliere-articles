@@ -780,30 +780,6 @@
     "imposta di successione e donazione canton Friburgo aliquote": 2
   },
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/svizzera/politica/1953526/premi-uss-urge-freno-svizzera": {
-      "section": "frontaliere",
-      "ts": 1790696233529
-    },
-    "frontaliere::https://www.ticinonews.ch/ticino/cassa-malati-il-governo-ticinese-segnale-incoraggiante-443575": {
-      "section": "frontaliere",
-      "ts": 1790696262352
-    },
-    "frontaliere::https://www.tio.ch/ticino/attualita/1953535/malati-lettori-cassa-premi-ogni-parole": {
-      "section": "frontaliere",
-      "ts": 1790696284773
-    },
-    "frontaliere::https://www.ticinonews.ch/svizzera/premi-di-cassa-malati-in-ticino-aumento-contenuto-del-37-ma-paghiamo-piu-di-tutti-443567": {
-      "section": "frontaliere",
-      "ts": 1790697447190
-    },
-    "frontaliere::https://www.rsi.ch/s/4121749": {
-      "section": "frontaliere",
-      "ts": 1790698651484
-    },
-    "frontaliere::https://www.ticinonews.ch/ticino/de-rosa-dopo-tanti-anni-le-misure-stanno-dando-risultati-ma-nessuno-si-chiami-fuori-443610": {
-      "section": "frontaliere",
-      "ts": 1790700357000
-    },
     "frontaliere::https://www.tio.ch/ticino/politica/1953599/centro-cure-costi-aumento-ticino": {
       "section": "frontaliere",
       "ts": 1790707035578
@@ -867,6 +843,10 @@
     "svizzera::https://www.tio.ch/dal-mondo/cronaca/1954074/benzina-e-diesel-anche-tamoil-frena-sui-prezzi": {
       "section": "svizzera",
       "ts": 1790868353156
+    },
+    "svizzera::https://www.tio.ch/dal-mondo/economia/1954095/blume-germania-proposta-lavoro-costi": {
+      "section": "svizzera",
+      "ts": 1790879374850
     }
   }
 }
