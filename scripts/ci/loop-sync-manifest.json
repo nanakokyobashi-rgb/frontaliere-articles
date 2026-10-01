@@ -1829,6 +1829,36 @@
       }
     },
     {
+      "path": "scripts/lib/clear-checkout-git-credentials.sh",
+      "mode": "identical",
+      "reason": "Dipendenza condivisa da configure-main-push-auth.sh: rimuove le credenziali extraheader lasciate da actions/checkout prima di un push autenticato.",
+      "baseline": {
+        "site": "2cd4cec0026ebe3d",
+        "corpus": "2cd4cec0026ebe3d",
+        "alignedAt": "2026-10-01"
+      }
+    },
+    {
+      "path": "scripts/lib/configure-main-push-auth.sh",
+      "mode": "identical",
+      "reason": "Configura l'identità PAT/App esplicita per i push diretti a main e delega a clear-checkout-git-credentials.sh la rimozione degli extraheader di actions/checkout.",
+      "baseline": {
+        "site": "34e65376f84e62cd",
+        "corpus": "34e65376f84e62cd",
+        "alignedAt": "2026-10-01"
+      }
+    },
+    {
+      "path": "scripts/lib/git-push-rejection.sh",
+      "mode": "identical",
+      "reason": "Classificatore condiviso dei rifiuti GH013/GH006 usato dal retry helper per distinguere un verdetto permanente da una gara sul ref.",
+      "baseline": {
+        "site": "8f98d37c34f04ea0",
+        "corpus": "8f98d37c34f04ea0",
+        "alignedAt": "2026-10-01"
+      }
+    },
+    {
       "path": "scripts/lib/git-push-with-retry.sh",
       "mode": "identical",
       "reason": "Push con retry usato dai job che scrivono sugli shard. RIALLINEATO il 2026-08-24 (stranded-twin, 5.2gg): il sito aveva aggiunto il flag opt-in `--soft-fail-exhausted` (warn+exit 0 invece di exit 1 su MAX_ATTEMPTS esaurito, per un caller la cui data e' una recomputation a finestra scorrevole che si riprende da sola al giro dopo — vedi issue del sito #5568). Nessun caller di questo repo lo passa ancora, quindi la copia e' comportamentalmente no-op qui finche' non viene adottato. Il file cita esplicitamente issue del SITO (#2988, #4190, #4557, #3809, #4183, #5568): e' un gemello, non un omonimo. Le registrazioni dei merge driver (`known-slugs-shard`, `orphan-enriched-shard`, `ai-cache`, `compat-shard`) puntano a `scripts/ci/merge-*.mjs` che qui non esistono — innocuo: ogni `git config` finisce in `|| true` e nessun `.gitattributes` locale marca quei path, quindi il driver non viene mai invocato. Se un giorno un `.gitattributes` di questo repo marcasse uno di quei path, il driver mancante diventerebbe un guasto: e' l'unica condizione da tenere d'occhio.",
