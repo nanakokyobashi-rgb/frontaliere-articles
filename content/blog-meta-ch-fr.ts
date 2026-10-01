@@ -7337,6 +7337,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.iniziativa-fisco-matrimonio.title': 'Impôts équitables : fin à la pénalisation fiscale du mariage',
     'blog.article.iniziativa-fisco-matrimonio.excerpt': 'À Berne, le comité multipartite soutient l’initiative du Centre : l’impôt fédéral direct ne devrait pas pénaliser les couples mariés par rapport aux couples non mariés.',
     'blog.article.iniziativa-fisco-matrimonio.imageAlt': 'Un couple marié examine des documents fiscaux suisses près des alliances.',
+    'blog.article.stati-approvano-accordi-ue.title': 'Conseil des États : décrets fédéraux de l’UE approuvés',
+    'blog.article.stati-approvano-accordi-ue.excerpt': 'Le Conseil des États a approuvé la stabilisation des accords avec l’UE et le crédit Erasmus+ de 192,6 millions d’euros après environ 22 heures de débat.',
+    'blog.article.stati-approvano-accordi-ue.imageAlt': 'Le Palais fédéral à Berne où le Conseil des États a débattu des accords avec l\'UE',
 };
 
 export default blogMetaChFr;

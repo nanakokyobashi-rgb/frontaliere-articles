@@ -7337,6 +7337,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.iniziativa-fisco-matrimonio.title': 'Faire Steuern: Abschaffung der Steuerstrafe auf die Ehe',
     'blog.article.iniziativa-fisco-matrimonio.excerpt': 'In Bern unterstützt der parteiübergreifende Ausschuss die Initiative des Zentrums: Die direkte Bundessteuer sollte verheiratete Paare im Vergleich zu unverheirateten Paaren nicht bestrafen.',
     'blog.article.iniziativa-fisco-matrimonio.imageAlt': 'Verheiratetes Paar prüft Schweizer Steuerunterlagen neben Eheringen.',
+    'blog.article.stati-approvano-accordi-ue.title': 'Ständerat: EU-Bundesbeschlüsse genehmigt',
+    'blog.article.stati-approvano-accordi-ue.excerpt': 'Der Staatsrat genehmigte nach etwa 22 Stunden Debatte die Stabilisierung der Abkommen mit der EU und des Erasmus+-Kredits in Höhe von 192,6 Millionen Euro.',
+    'blog.article.stati-approvano-accordi-ue.imageAlt': 'Das Bundeshaus in Bern, wo der Ständerat über die EU-Abkommen debattierte',
 };
 
 export default blogMetaChDe;

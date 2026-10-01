@@ -7337,6 +7337,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.iniziativa-fisco-matrimonio.title': 'Imposte eque: via la penalità fiscale sul matrimonio',
     'blog.article.iniziativa-fisco-matrimonio.excerpt': 'A Berna il comitato interpartitico sostiene l\'iniziativa del Centro: l\'imposta federale diretta non penalizzi le coppie sposate rispetto alle coppie di fatto.',
     'blog.article.iniziativa-fisco-matrimonio.imageAlt': 'Coppia sposata esamina documenti fiscali svizzeri accanto alle fedi nuziali.',
+    'blog.article.stati-approvano-accordi-ue.title': 'Consiglio degli Stati: approvati i decreti federali UE',
+    'blog.article.stati-approvano-accordi-ue.excerpt': 'Il Consiglio degli Stati ha approvato la stabilizzazione degli accordi con l\'UE e il credito Erasmus+ di 192,6 milioni dopo circa 22 ore di dibattito.',
+    'blog.article.stati-approvano-accordi-ue.imageAlt': 'Il palazzo federale a Berna dove il Consiglio degli Stati ha discusso gli accordi UE',
 };
 
 export default blogMetaChIt;

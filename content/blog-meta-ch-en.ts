@@ -7337,6 +7337,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.iniziativa-fisco-matrimonio.title': 'Fair taxes: end the marriage tax penalty',
     'blog.article.iniziativa-fisco-matrimonio.excerpt': 'In Bern, the cross-party committee supports the Centre\'s initiative: direct federal tax should not penalise married couples compared to unmarried couples.',
     'blog.article.iniziativa-fisco-matrimonio.imageAlt': 'Married couple reviewing Swiss tax papers beside wedding rings.',
+    'blog.article.stati-approvano-accordi-ue.title': 'Council of States: EU federal decrees approved',
+    'blog.article.stati-approvano-accordi-ue.excerpt': 'The Council of States approved the stabilisation of the agreements with the EU and the Erasmus+ credit of €192.6 million after around 22 hours of debate.',
+    'blog.article.stati-approvano-accordi-ue.imageAlt': 'The Federal Palace in Bern where the Council of States debated EU agreements',
 };
 
 export default blogMetaChEn;
