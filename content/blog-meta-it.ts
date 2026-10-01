@@ -12337,6 +12337,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.deputazione-ticinese-doppia-imposizione.title': 'Doppia imposizione e trasporti: deputazione ticinese interroga',
     'blog.article.deputazione-ticinese-doppia-imposizione.excerpt': 'Panimi chiede chiarimenti sull\'aliquota residua dei dividendi (15%). Si discute A2-A13, linea di Luino e gestione del Lago Maggiore.',
     'blog.article.deputazione-ticinese-doppia-imposizione.imageAlt': 'Vista del distretto di Bellinzona con le torri medievali in primo piano',
+    'blog.article.estradizione-arresto-como.title': 'Estradato dalla Svizzera, arrestato a Ponte Chiasso',
+    'blog.article.estradizione-arresto-como.excerpt': 'Ponte Chiasso: il 18 settembre un 28enne nigeriano è stato consegnato dalla Svizzera e arrestato. Deve scontare quattro anni, nove mesi e 18 giorni di reclusione.',
+    'blog.article.estradizione-arresto-como.imageAlt': 'Ponte Chiasso, arresto dopo la consegna del cittadino nigeriano dalle autorità svizzere',
 };
 
 export default blogMetaIt;

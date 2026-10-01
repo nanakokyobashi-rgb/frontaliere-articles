@@ -12335,6 +12335,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.deputazione-ticinese-doppia-imposizione.title': 'Doppelbesteuerung und Transport: Fragen zur Tessin-Deputation',
     'blog.article.deputazione-ticinese-doppia-imposizione.excerpt': 'Panimi bittet um eine Klarstellung der Restdividendenquote (15 %). A2-A13, die Linie Luino und die Verwaltung des Lago Maggiore werden besprochen.',
     'blog.article.deputazione-ticinese-doppia-imposizione.imageAlt': 'Blick auf das Bellinzona-Gebiet mit mittelalterlichen Türmen im Vordergrund',
+    'blog.article.estradizione-arresto-como.title': 'Ausgeliefert aus der Schweiz, in Ponte Chiasso verhaftet',
+    'blog.article.estradizione-arresto-como.excerpt': 'Ponte Chiasso: Am 18. September wurde ein 28-jähriger Nigerianer aus der Schweiz übergeben und festgenommen. Er muss vier Jahre, neun Monate und 18 Tage im Gefängnis verbüßen.',
+    'blog.article.estradizione-arresto-como.imageAlt': 'Ponte Chiasso: Festnahme nach der Übergabe eines nigerianischen Staatsbürgers aus der Schweiz',
 };
 
 export default blogMetaDe;

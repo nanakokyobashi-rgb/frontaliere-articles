@@ -37006,6 +37006,15 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'estradizione-arresto-como',
+ category: 'novita',
+ date: '2026-10-01T12:10:19.439Z',
+ image: '/images/blog/estradizione-arresto-como.webp',
+ hasCalculator: false,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
