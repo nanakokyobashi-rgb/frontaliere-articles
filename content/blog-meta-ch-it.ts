@@ -7340,6 +7340,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.stati-approvano-accordi-ue.title': 'Consiglio degli Stati: approvati i decreti federali UE',
     'blog.article.stati-approvano-accordi-ue.excerpt': 'Il Consiglio degli Stati ha approvato la stabilizzazione degli accordi con l\'UE e il credito Erasmus+ di 192,6 milioni dopo circa 22 ore di dibattito.',
     'blog.article.stati-approvano-accordi-ue.imageAlt': 'Il palazzo federale a Berna dove il Consiglio degli Stati ha discusso gli accordi UE',
+    'blog.article.iniziativa-lega-premio-uniforme.title': 'Premio nazionale di cassa malati: la proposta della Lega',
+    'blog.article.iniziativa-lega-premio-uniforme.excerpt': 'Il 1° ottobre a Bellinzona la Lega dei Ticinesi ha presentato in Gran Consiglio un\'iniziativa per un premio di cassa malati uguale in tutta la Svizzera, a parità di età, franchigia e modello assicurativo.',
+    'blog.article.iniziativa-lega-premio-uniforme.imageAlt': 'Il Gran Consiglio di Bellinzona con la bandiera svizzera, scena del dibattito sul premio nazionale di cassa malati.',
 };
 
 export default blogMetaChIt;

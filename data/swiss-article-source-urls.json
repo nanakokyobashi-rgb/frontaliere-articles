@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1946769/fattura-sistema-puo-paziente-documento-fatture-ospedali": {
-    "articleId": "drg-fatture-trasparenza",
-    "ts": "2026-09-01T05:43:39.231Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4051266": {
     "articleId": "swiss-life-600-tagli-2028",
     "ts": "2026-09-01T06:17:05.503Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/cst%3a-stabilizzazione-accordi-ue%3b-approvati-tutti-i-decreti-federali/92148745": {
     "articleId": "stati-approvano-accordi-ue",
     "ts": "2026-10-01T08:52:27.297Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1953978/premio-nazionale-svizzera-ticino-mazzoleni": {
+    "articleId": "iniziativa-lega-premio-uniforme",
+    "ts": "2026-10-01T12:00:47.773Z",
     "keyForm": 2
   }
 }

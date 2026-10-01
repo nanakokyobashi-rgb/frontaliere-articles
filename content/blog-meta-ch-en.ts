@@ -7340,6 +7340,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.stati-approvano-accordi-ue.title': 'Council of States: EU federal decrees approved',
     'blog.article.stati-approvano-accordi-ue.excerpt': 'The Council of States approved the stabilisation of the agreements with the EU and the Erasmus+ credit of €192.6 million after around 22 hours of debate.',
     'blog.article.stati-approvano-accordi-ue.imageAlt': 'The Federal Palace in Bern where the Council of States debated EU agreements',
+    'blog.article.iniziativa-lega-premio-uniforme.title': 'National health insurance premium: the League\'s proposal',
+    'blog.article.iniziativa-lega-premio-uniforme.excerpt': 'On 1 October in Bellinzona, the Lega dei Ticinese presented an initiative in the Grand Council for a health insurance premium that is the same throughout Switzerland, with the same age, deductible and insurance model.',
+    'blog.article.iniziativa-lega-premio-uniforme.imageAlt': 'The Gran Consiglio building in Bellinzona with the Swiss flag, depicting the debate on a national health insurance premium.',
 };
 
 export default blogMetaChEn;

@@ -7340,6 +7340,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.stati-approvano-accordi-ue.title': 'Conseil des États : décrets fédéraux de l’UE approuvés',
     'blog.article.stati-approvano-accordi-ue.excerpt': 'Le Conseil des États a approuvé la stabilisation des accords avec l’UE et le crédit Erasmus+ de 192,6 millions d’euros après environ 22 heures de débat.',
     'blog.article.stati-approvano-accordi-ue.imageAlt': 'Le Palais fédéral à Berne où le Conseil des États a débattu des accords avec l\'UE',
+    'blog.article.iniziativa-lega-premio-uniforme.title': 'Prime nationale d’assurance santé : la proposition de la Ligue',
+    'blog.article.iniziativa-lega-premio-uniforme.excerpt': 'Le 1er octobre à Bellinzone, la Lega dei Ticinese a présenté au Grand Conseil une initiative pour une prime d’assurance santé identique dans toute la Suisse, avec le même modèle d’âge, franchise et assurance.',
+    'blog.article.iniziativa-lega-premio-uniforme.imageAlt': 'Le bâtiment du Grand Conseil à Bellinzone avec le drapeau suisse, illustrant le débat sur la prime nationale d\'assurance maladie.',
 };
 
 export default blogMetaChFr;

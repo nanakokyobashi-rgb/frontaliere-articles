@@ -95180,6 +95180,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-iniziativa-lega-premio-uniforme': {
+    title: 'Premio nazionale di cassa malati: la proposta della Lega',
+    description: 'Il 1° ottobre a Bellinzona la Lega dei Ticinesi presenta in Gran Consiglio un\'iniziativa per un premio di cassa malati uguale in tutta la Svizzera, a parità',
+    keywords: 'frontalieri, ticino, svizzera, italia, premio, nazionale, cassa, malati',
+    ogTitle: 'Premio nazionale di cassa malati: proposta Lega Ticino',
+    ogDescription: 'La Lega dei Ticinesi ha lanciato il 1° ottobre a Bellinzona un\'iniziativa cantonale che chiede un premio di cassa malati identico in tutto il territorio svizzero, mantenendo invariati età, franchigia e modello assicurativo. Il premio sarebbe',
+    canonicalPath: '/articoli-svizzera/iniziativa-lega-premio-uniforme/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Premio nazionale di cassa malati: la proposta della Lega",
+      "description": "Il 1° ottobre a Bellinzona la Lega dei Ticinesi presenta in Gran Consiglio un'iniziativa per un premio di cassa malati uguale in tutta la Svizzera, a parità",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/iniziativa-lega-premio-uniforme.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Il Gran Consiglio di Bellinzona con la bandiera svizzera, scena del dibattito sul premio nazionale di cassa malati."
+      },
+      "datePublished": "2026-10-01T12:00:47+00:00",
+      "dateModified": "2026-10-01T12:00:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/iniziativa-lega-premio-uniforme/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

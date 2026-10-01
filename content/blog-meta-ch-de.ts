@@ -7340,6 +7340,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.stati-approvano-accordi-ue.title': 'Ständerat: EU-Bundesbeschlüsse genehmigt',
     'blog.article.stati-approvano-accordi-ue.excerpt': 'Der Staatsrat genehmigte nach etwa 22 Stunden Debatte die Stabilisierung der Abkommen mit der EU und des Erasmus+-Kredits in Höhe von 192,6 Millionen Euro.',
     'blog.article.stati-approvano-accordi-ue.imageAlt': 'Das Bundeshaus in Bern, wo der Ständerat über die EU-Abkommen debattierte',
+    'blog.article.iniziativa-lega-premio-uniforme.title': 'Nationale Krankenversicherungsprämie: Vorschlag der Liga',
+    'blog.article.iniziativa-lega-premio-uniforme.excerpt': 'Am 1. Oktober hat die Lega dei Ticinesi in Bellinzona im Grossen Rat eine Initiative für eine in der ganzen Schweiz gleiche Krankenkassenprämie bei gleichem Alter, gleicher Franchise und gleichem Versicherungsmodell vorgestellt.',
+    'blog.article.iniziativa-lega-premio-uniforme.imageAlt': 'Das Gran Consiglio-Gebäude in Bellinzona mit der Schweizer Flagge, das die Debatte über eine nationale Krankenkassenprämie zeigt.',
 };
 
 export default blogMetaChDe;
