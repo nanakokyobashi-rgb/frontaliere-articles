@@ -2502,6 +2502,24 @@ export function isReparkableCandidate(iss) {
   if (isPermanentTracker(iss)) return false;                   // tracker permanente (#5615/#5544)
   return reparkGenOf(iss) < MAX_REPARK_GEN;                    // generation-cap
 }
+
+/**
+ * Filtro per l'uscita terminale dei follow-up parked. La coppia
+ * `fu-parked` + `agent:fix-queued` è una coda contraddittoria, non una coda
+ * attiva: il DRAIN la esclude e quindi il VERDICT-EXIT deve poter consumare i
+ * verdetti non ri-tentabili che il PARKED-RETRY non ri-accoda. Una issue già
+ * `maybe-resolved` rientra solo quando conserva anche la label queued, così il
+ * pass può togliere quella label stantia senza riaprire il caso umano.
+ * @param {{title?: string, labels?: Array<string|{name:string}>}} iss
+ */
+export function isVerdictExitCandidate(iss) {
+  if (!has(iss, LBL_PARKED) || !isQueueManaged(iss)) return false;
+  if (hasActiveAgentClaim(iss) || has(iss, LBL_FIX)) return false;
+  if (has(iss, 'needs-human') || has(iss, LBL_AUTOMATION_DEFERRED)) return false;
+  if (has(iss, LBL_DECOMP_QUEUED) || has(iss, LBL_DECOMP) || has(iss, LBL_DECOMPOSED)) return false;
+  if (has(iss, LBL_MAYBE_RESOLVED) && !has(iss, LBL_QUEUED)) return false;
+  return !isPermanentTracker(iss);
+}
 /**
  * Ammissione al pool del RESCUE CRAWLER (#5514), sulle sole label (puro, niente
  * `gh`) → testabile. È il COMPLEMENTO esatto di `stuckFix` dentro `agent:fix`:
@@ -4145,22 +4163,7 @@ export function runDrain() {
   // `verdictExitDecision`). Zero Claude: legge un marker e applica una label.
   {
     const parked = listIssues(LBL_PARKED)
-      .filter((iss) => isQueueManaged(iss))
-      .filter((iss) => !hasActiveAgentClaim(iss))
-      // Chi è già in coda, in lavoro, nello stadio decompose o già escalato non
-      // ha bisogno di un'uscita: ce l'ha. `needs-human` incluso, altrimenti
-      // questo stadio ri-commenterebbe a ogni tick ciò che ha già instradato.
-      .filter((iss) => !has(iss, LBL_FIX) && !has(iss, LBL_QUEUED)
-        && !has(iss, 'needs-human') && !has(iss, LBL_AUTOMATION_DEFERRED))
-      .filter((iss) => !has(iss, LBL_DECOMP_QUEUED) && !has(iss, LBL_DECOMP) && !has(iss, LBL_DECOMPOSED))
-      // Già flaggata da un giro precedente del ramo `flag`: rientrare non
-      // produce nulla (il ramo fa `continue` sul marker) ma consuma uno slot del
-      // cap, e con `FOLLOWUP_NO_AUTOCLOSE=1` e più di `VERDICT_EXIT_MAX_PER_RUN`
-      // flaggate lo esaurirebbe sui no-op prima di arrivare alle candidate
-      // nuove. Stessa esclusione già presente in `isDecomposeEligible` (#6275).
-      .filter((iss) => !has(iss, LBL_MAYBE_RESOLVED))
-      // Un tracker permanente non si chiude e non si escala: è aperto per scelta.
-      .filter((iss) => !isPermanentTracker(iss));
+      .filter(isVerdictExitCandidate);
 
     // La rotazione serve alla stessa ragione del cooldown-scan: senza, il cap
     // taglia SEMPRE dalla stessa coda della lista (`gh issue list` ordina dalla
@@ -4327,9 +4330,25 @@ export function runDrain() {
       }
 
       if (d.action === 'flag') {
-        if (DRY) { succeeded++; console.log(`[dry] flag #${iss.number} (verdict-exit: ${d.reason})`); continue; }
-        if (has(iss, LBL_MAYBE_RESOLVED)) continue; // già flaggata: niente commento duplicato
-        if (!edit(iss.number, { add: [LBL_MAYBE_RESOLVED], remove: [] })) continue;
+        const alreadyFlagged = has(iss, LBL_MAYBE_RESOLVED);
+        const clearQueue = has(iss, LBL_QUEUED) ? [LBL_QUEUED] : [];
+        if (alreadyFlagged && !clearQueue.length) continue; // già flaggata: niente commento duplicato
+        if (DRY) {
+          succeeded++;
+          console.log(alreadyFlagged
+            ? `[dry] unqueue #${iss.number} (verdict-exit: maybe-resolved già confermata, ${LBL_QUEUED} stantia)`
+            : `[dry] flag #${iss.number} (verdict-exit: ${d.reason})`);
+          continue;
+        }
+        if (!edit(iss.number, {
+          add: alreadyFlagged ? [] : [LBL_MAYBE_RESOLVED],
+          remove: clearQueue,
+        })) continue;
+        if (alreadyFlagged) {
+          succeeded++;
+          console.log(`VERDICT-EXIT unqueue #${iss.number} (maybe-resolved già confermata, rimossa ${LBL_QUEUED})`);
+          continue;
+        }
         succeeded++;
         commentIssue(iss.number,
           `🔎 **followup-drainer (zero-Claude)**: verdetto \`already-fixed\` — il fixer ha verificato che il difetto non c'è più. Chiusura automatica disattivata (\`FOLLOWUP_NO_AUTOCLOSE=1\`), quindi resta aperta per conferma umana.`,
@@ -4503,9 +4522,12 @@ export function runDrain() {
       // solo a `isRetryCooldownElapsed` più sotto: `updatedAt` è la scorciatoia
       // che salta la lettura dei commenti, e con la soglia corta avrebbe
       // ri-accodato la data-pending prima che la finestra di osservazione
-      // fosse trascorsa, cioè scavalcando la variante appena introdotta.
+      // fosse trascorsa, cioè scavalcando la variante appena introdotta. La
+      // coda contraddittoria `fu-parked` + `agent:fix-queued` non usa invece la
+      // scorciatoia: deve leggere anche il FIX_OUTCOME, altrimenti un verdetto
+      // NON_RETRYABLE stantio verrebbe ri-eseguito dopo il cooldown.
       const cdDays = cooldownDaysFor(iss);
-      if (minutesSince(iss.updatedAt) >= cdDays * 1440) {
+      if (minutesSince(iss.updatedAt) >= cdDays * 1440 && !has(iss, LBL_QUEUED)) {
         // Quieto anche sul campo grezzo → eleggibile senza chiamate extra. La
         // chiave d'ordine è `updatedAt`, che sovrastima la staleness reale: chi
         // passa da questo ramo non può quindi scavalcare in coda chi è entrato
