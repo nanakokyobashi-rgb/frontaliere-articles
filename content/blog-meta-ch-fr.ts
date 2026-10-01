@@ -7316,6 +7316,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.preventivo-2027-conti-pubblici.title': 'Budget 2027 : déficit et comptes publics au Tessin',
     'blog.article.preventivo-2027-conti-pubblici.excerpt': 'Le budget 2027 du canton prévoit un déficit de 98,5 millions. Entre bureaucratie, personnel et fiscalité, voici les réactions et le débat à Bellinzona.',
     'blog.article.preventivo-2027-conti-pubblici.imageAlt': 'Vue de Bellinzone et des bâtiments du gouvernement cantonal du Tessin',
+    'blog.article.spese-ginevra-analisi-nazionale.title': 'Coût de la vie en Suisse 2026 : canton de Genève',
+    'blog.article.spese-ginevra-analisi-nazionale.excerpt': 'Loyers, courses, transports et KVG : la comparaison 2026 entre Genève et les autres cantons commence par les règles fiscales, salariales et de location.',
+    'blog.article.spese-ginevra-analisi-nazionale.imageAlt': 'Coût de la vie en Suisse 2026: loyers et dépenses courantes dans un quartier genevois.',
 };
 
 export default blogMetaChFr;

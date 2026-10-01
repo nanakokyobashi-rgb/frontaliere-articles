@@ -21976,6 +21976,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'spese-ginevra-analisi-nazionale',
+    category: 'pratico',
+    date: '2026-10-01T05:15:53.131Z',
+    image: '/images/blog/spese-ginevra-analisi-nazionale.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

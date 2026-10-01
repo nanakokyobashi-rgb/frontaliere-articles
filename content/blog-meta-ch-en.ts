@@ -7316,6 +7316,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.preventivo-2027-conti-pubblici.title': '2027 budget: deficit and public accounts in Ticino',
     'blog.article.preventivo-2027-conti-pubblici.excerpt': 'The Canton\'s 2027 Budget forecasts a deficit of 98.5 million. Between bureaucracy, personnel and taxation, here are the reactions and the debate in Bellinzona.',
     'blog.article.preventivo-2027-conti-pubblici.imageAlt': 'View of Bellinzona and cantonal government buildings in Ticino',
+    'blog.article.spese-ginevra-analisi-nazionale.title': 'Swiss Cost of Living 2026: Canton of Geneva',
+    'blog.article.spese-ginevra-analisi-nazionale.excerpt': 'Rents, food shopping, transport and KVG: the 2026 comparison between Geneva and the other cantons starts with fiscal, wage and rental rules.',
+    'blog.article.spese-ginevra-analisi-nazionale.imageAlt': 'Swiss cost of living 2026: rents and daily expenses in an urban Geneva district.',
 };
 
 export default blogMetaChEn;

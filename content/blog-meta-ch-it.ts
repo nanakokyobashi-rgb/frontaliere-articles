@@ -7316,6 +7316,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.preventivo-2027-conti-pubblici.title': 'Preventivo 2027: disavanzo e conti pubblici in Ticino',
     'blog.article.preventivo-2027-conti-pubblici.excerpt': 'Il Preventivo 2027 del Cantone prevede un disavanzo di 98,5 milioni. Tra burocrazia, personale e fisco, ecco le reazioni e il dibattito a Bellinzona.',
     'blog.article.preventivo-2027-conti-pubblici.imageAlt': 'Vista di Bellinzona e dei palazzi istituzionali del Cantone Ticino',
+    'blog.article.spese-ginevra-analisi-nazionale.title': 'Costo della vita svizzera 2026: canton Ginevra',
+    'blog.article.spese-ginevra-analisi-nazionale.excerpt': 'Affitti, spesa alimentare, trasporti e LAMal: il confronto 2026 tra Ginevra e gli altri Cantoni parte da regole fiscali, salariali e di locazione.',
+    'blog.article.spese-ginevra-analisi-nazionale.imageAlt': 'Costo della vita in Svizzera 2026: affitti e spese in un quartiere urbano di Ginevra.',
 };
 
 export default blogMetaChIt;

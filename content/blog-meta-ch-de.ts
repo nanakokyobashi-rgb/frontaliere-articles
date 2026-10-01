@@ -7316,6 +7316,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.preventivo-2027-conti-pubblici.title': 'Haushalt 2027: Defizit und öffentliche Konten im Tessin',
     'blog.article.preventivo-2027-conti-pubblici.excerpt': 'Der Kantonshaushalt für 2027 prognostiziert ein Defizit von 98,5 Millionen. Zwischen Bürokratie, Personal und Steuern sind hier die Reaktionen und die Debatte in Bellinzona.',
     'blog.article.preventivo-2027-conti-pubblici.imageAlt': 'Ansicht von Bellinzona und den kantonalen Regierungsgebäuden im Tessin',
+    'blog.article.spese-ginevra-analisi-nazionale.title': 'Schweizer Lebenshaltungskosten 2026: Kanton Genf',
+    'blog.article.spese-ginevra-analisi-nazionale.excerpt': 'Mieten, Lebensmittelausgaben, Transport und KVG: Der Vergleich 2026 zwischen Genf und den anderen Kantonen geht von Steuer-, Lohn- und Mietregeln aus.',
+    'blog.article.spese-ginevra-analisi-nazionale.imageAlt': 'Lebenskosten Schweiz 2026: Mieten und Alltagsausgaben in einem Genfer Stadtviertel.',
 };
 
 export default blogMetaChDe;
