@@ -7286,6 +7286,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.abbonamenti-basilea-zone-tariffe.title': 'Bâle-Ville : cartes de voyage, zones et tarifs de transport',
     'blog.article.abbonamenti-basilea-zone-tariffe.excerpt': 'Réseau tarifaire, zones mensuelles ou annuelles et forfaits : comment vous orienter entre les cartes de voyage demi-tarif, les cartes de voyage GA et les réductions pour étudiants et apprentis.',
     'blog.article.abbonamenti-basilea-zone-tariffe.imageAlt': 'Transports publics à Bâle-Ville avec carte des zones tarifaires',
+    'blog.article.basilea-citta-mobilita-tariffe.title': 'Passes de transport en commun à Bâle : zones et tarifs',
+    'blog.article.basilea-citta-mobilita-tariffe.excerpt': 'Cartes de voyage de transport en commun dans le canton de Bâle-Stadt : guide de zone, forfaits annuels et mensuels, carte de voyage demi-tarif, carte de voyage GA et réductions pour les étudiants et apprentis.',
+    'blog.article.basilea-citta-mobilita-tariffe.imageAlt': 'Abonnements de transports publics dans le canton de Bâle-Ville',
 };
 
 export default blogMetaChFr;

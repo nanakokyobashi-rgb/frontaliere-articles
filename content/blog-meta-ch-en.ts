@@ -7286,6 +7286,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.abbonamenti-basilea-zone-tariffe.title': 'Basel-Stadt: transport travelcards, zones and fares',
     'blog.article.abbonamenti-basilea-zone-tariffe.excerpt': 'Fare zone system, zones, and monthly or annual passes: a guide to navigating Basel-Stadt’s half-fare, GA, and student and apprentice discounts.',
     'blog.article.abbonamenti-basilea-zone-tariffe.imageAlt': 'Public transport in Basel-Stadt with a fare-zone map',
+    'blog.article.basilea-citta-mobilita-tariffe.title': 'Public Transportation Passes in Basel: Zones and Fares',
+    'blog.article.basilea-citta-mobilita-tariffe.excerpt': 'Public Transportation Passes in the Canton of Basel-Stadt: A Guide to Zones, Annual and Monthly Passes, Half-Price Passes, AG Passes, and Discounts for Students and Apprentices.',
+    'blog.article.basilea-citta-mobilita-tariffe.imageAlt': 'Public transport subscriptions in the canton of Basel-City',
 };
 
 export default blogMetaChEn;

@@ -94478,6 +94478,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-basilea-citta-mobilita-tariffe': {
+    title: 'Abbonamenti trasporti pubblici a Basilea: zone e tariffe',
+    description: 'Abbonamenti trasporti pubblici nel Cantone di Basilea Città: guida a zone, formule annuali e mensili, metà-prezzo, AG e sconti per studenti e apprendisti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, abbonamenti, trasporti, pubblici, basilea',
+    ogTitle: 'Abbonamenti trasporti pubblici a Basilea: zone e tariffe',
+    ogDescription: 'Dalla comunità tariffaria alle zone, la guida agli abbonamenti dei trasporti pubblici nel Cantone di Basilea Città confronta formule annuali e mensili, metà-prezzo, AG e sconti per studenti e apprendisti.',
+    canonicalPath: '/articoli-svizzera/basilea-citta-mobilita-tariffe/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Abbonamenti trasporti pubblici a Basilea: zone e tariffe",
+      "description": "Abbonamenti trasporti pubblici nel Cantone di Basilea Città: guida a zone, formule annuali e mensili, metà-prezzo, AG e sconti per studenti e apprendisti.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/basilea-citta-mobilita-tariffe.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Trasporto pubblico e abbonamenti nel Cantone di Basilea Città"
+      },
+      "datePublished": "2026-10-01T02:08:49+00:00",
+      "dateModified": "2026-10-01T02:08:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/basilea-citta-mobilita-tariffe/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

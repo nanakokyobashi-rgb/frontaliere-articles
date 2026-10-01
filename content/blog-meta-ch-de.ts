@@ -7286,6 +7286,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.abbonamenti-basilea-zone-tariffe.title': 'Basel-Stadt: Fahrkarten, Zonen und Tarife',
     'blog.article.abbonamenti-basilea-zone-tariffe.excerpt': 'Tarifverbund, Zonen und Monats- oder Jahresabonnements: So finden Sie sich in Basel-Stadt zurecht – zwischen Halbtax, GA und Ermäßigungen für Studenten und Auszubildende.',
     'blog.article.abbonamenti-basilea-zone-tariffe.imageAlt': 'Öffentlicher Verkehr in Basel-Stadt mit Karte der Tarifzonen',
+    'blog.article.basilea-citta-mobilita-tariffe.title': 'Öffentliche Nahverkehrspässe in Basel: Zonen und Tarife',
+    'blog.article.basilea-citta-mobilita-tariffe.excerpt': 'Abonnements für den öffentlichen Nahverkehr im Kanton Basel-Stadt: Übersicht über Zonen, Jahres- und Monatsabonnements, Halbtax, GA sowie Ermäßigungen für Studierende und Auszubildende.',
+    'blog.article.basilea-citta-mobilita-tariffe.imageAlt': 'Abonnemente des öffentlichen Verkehrs im Kanton Basel-Stadt',
 };
 
 export default blogMetaChDe;

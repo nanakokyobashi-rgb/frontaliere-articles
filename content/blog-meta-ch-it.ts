@@ -7286,6 +7286,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.abbonamenti-basilea-zone-tariffe.title': 'Basilea Città: abbonamenti ai trasporti, zone e tariffe',
     'blog.article.abbonamenti-basilea-zone-tariffe.excerpt': 'Comunità tariffaria, zone e formule mensili o annuali: come orientarsi a Basilea Città tra metà-prezzo, AG e sconti per studenti e apprendisti.',
     'blog.article.abbonamenti-basilea-zone-tariffe.imageAlt': 'Trasporto pubblico a Basilea Città con mappa delle zone tariffarie',
+    'blog.article.basilea-citta-mobilita-tariffe.title': 'Abbonamenti trasporti pubblici a Basilea: zone e tariffe',
+    'blog.article.basilea-citta-mobilita-tariffe.excerpt': 'Abbonamenti trasporti pubblici nel Cantone di Basilea Città: guida a zone, formule annuali e mensili, metà-prezzo, AG e sconti per studenti e apprendisti.',
+    'blog.article.basilea-citta-mobilita-tariffe.imageAlt': 'Trasporto pubblico e abbonamenti nel Cantone di Basilea Città',
 };
 
 export default blogMetaChIt;
