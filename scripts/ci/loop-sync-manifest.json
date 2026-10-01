@@ -126,6 +126,10 @@
       {
         "prefix": ".github/workflows/observers/generator/tests/crawler-cross-repo-artifacts.test.mjs",
         "reason": "Stessa ragione del selector che questo test copre: il lato sito importa MAX_DISCOVERY_ARTIFACT_REFERENCES e asserisce il budget cumulativo, questa copia no. In piu' il lato sito importa `../../scripts/ci/crawler-generation-observer-selector.mjs`, path che nella disposizione del corpus (observers/scripts/, senza `ci/`) non risolve: copiarlo alla lettera non basta, e questa e' una dipendenza implicita che il drift check non vede. Va trasportato insieme al selector, non da solo."
+      },
+      {
+        "prefix": ".github/workflows/observers/scripts/lib/crawler-generation-token.mjs",
+        "reason": "Copia della disposizione legacy `.github/workflows/observers/` (#1479), byte-identica a `scripts/lib/crawler-generation-token.mjs` e a `.github/corpus-workflows/observers/scripts/lib/crawler-generation-token.mjs` del sito, ma nessuno la esegue ne' la importa: GitHub Actions non legge le sottocartelle di `.github/workflows/`, e gli importatori del corpus usano `scripts/ci/lib/` (voce `identical` del trasporto lockstep) e `scripts/lib/` (voce `identical`, import di `close-recovered-failure-issues.mjs`). Una voce in `files` non regge: `prepare-crawler-workflow-corpus-sync.mjs` del sito (`isLegacyObserverTransportEntry`) cancella ogni voce sotto `.github/workflows/observers/` mappata su una sorgente observer — l'ha fatto il lockstep #1980 il 2026-09-29, ed e' da li' che il censimento e' rosso (run 36580702291) — e ripuntarla su `scripts/lib/crawler-generation-token.mjs` la fa rifiutare da `readManifestSnapshot()` di handoff-to-site.mjs (sitePath uguale al path corpus di un'altra voce, #1973). Dichiarata qui finche' l'albero legacy resta nel repo; la sua rimozione e' il rimedio definitivo."
       }
     ]
   },
@@ -817,7 +821,7 @@
     {
       "path": "scripts/lib/crawler-generation-token.mjs",
       "mode": "identical",
-      "reason": "Grammatica del token di generazione dei crawler, importata come `../lib/crawler-generation-token.mjs` da `scripts/ci/close-recovered-failure-issues.mjs` (identical): senza questa copia la discesa verbatim di quel file darebbe ERR_MODULE_NOT_FOUND. E' la terza copia nel corpus dello stesso file del sito, byte-identica alle altre due (`scripts/ci/lib/` e `.github/workflows/observers/scripts/lib/`), perche' ogni importatore la cerca accanto a se' con lo stesso path relativo che usa sul sito. Il gemello e' lo stesso path sul sito; per questo la voce degli observer non puo' piu' puntare qui (vedi la sua `reason`) (valerielinc-ops/frontaliere-si-o-no#7483).",
+      "reason": "Grammatica del token di generazione dei crawler, importata come `../lib/crawler-generation-token.mjs` da `scripts/ci/close-recovered-failure-issues.mjs` (identical): senza questa copia la discesa verbatim di quel file darebbe ERR_MODULE_NOT_FOUND. E' la terza copia nel corpus dello stesso file del sito, byte-identica alle altre due (`scripts/ci/lib/` e `.github/workflows/observers/scripts/lib/`), perche' ogni importatore la cerca accanto a se' con lo stesso path relativo che usa sul sito. Il gemello e' lo stesso path sul sito; per questo la copia legacy degli observer non puo' puntare qui: e' dichiarata in `scope.outOfScope` con la sua ragione (valerielinc-ops/frontaliere-si-o-no#7483).",
       "baseline": {
         "site": "4bc0d4d514be3f67",
         "corpus": "4bc0d4d514be3f67",
@@ -4298,6 +4302,16 @@
         "site": null,
         "corpus": "7eb0c82546609329",
         "alignedAt": "2026-09-13"
+      }
+    },
+    {
+      "path": "generator/tests/fixtures/followup-multi-bucket-markers.json",
+      "sitePath": "tests/fixtures/followup-multi-bucket-markers.json",
+      "mode": "identical",
+      "baseline": {
+        "site": "9f4d4b7709025b9d",
+        "corpus": "9f4d4b7709025b9d",
+        "alignedAt": "2026-10-01"
       }
     },
     {
