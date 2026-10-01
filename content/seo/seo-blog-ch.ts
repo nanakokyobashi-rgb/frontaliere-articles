@@ -94985,6 +94985,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-seduta-federale-bilaterali': {
+    title: 'Olimpiadi, navigazione, asilo e Bilaterali in Parlamento',
+    description: 'Il Nazionale esamina 8,24 milioni per gli eventi sportivi; gli Stati affrontano Erasmus+, navigazione sotto bandiera svizzera e cinque mozioni sull\'asilo.',
+    keywords: 'frontalieri, ticino, svizzera, italia, olimpiadi, navigazione, asilo, bilaterali',
+    ogTitle: 'Parlamento: Olimpiadi, asilo e Bilaterali',
+    ogDescription: 'La seduta odierna mette sul tavolo il credito per gli eventi sportivi 2027-2029, il contributo federale alle Olimpiadi invernali del 2038, la riforma della navigazione sotto bandiera svizzera e cinque mozioni sull\'asilo.',
+    canonicalPath: '/articoli-svizzera/seduta-federale-bilaterali/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Olimpiadi, navigazione, asilo e Bilaterali in Parlamento",
+      "description": "Il Nazionale esamina 8,24 milioni per gli eventi sportivi; gli Stati affrontano Erasmus+, navigazione sotto bandiera svizzera e cinque mozioni sull'asilo.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/seduta-federale-bilaterali.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Parlamento svizzero a Berna durante una giornata di dibattiti federali"
+      },
+      "datePublished": "2026-10-01T06:02:00+00:00",
+      "dateModified": "2026-10-01T06:02:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/seduta-federale-bilaterali/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -1,9 +1,4 @@
 {
-  "https://www.laregione.ch/svizzera/svizzera/1947100/i-partiti-hanno-annunciato-finanziamenti-per-complessivi-24-6-milioni": {
-    "articleId": "dichiarazioni-cdf-partiti-2025",
-    "ts": "2026-09-01T00:09:59.156Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4050496": {
     "articleId": "swatch-vince-samsung-quadranti",
     "ts": "2026-09-01T00:19:56.888Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/camere%3a-olimpiadi%2c-navigazione-marittima%2c-bilaterali%2c-asilo/92147952": {
     "articleId": "agenda-parlamento-olimpiadi-navi",
     "ts": "2026-10-01T05:48:44.519Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1953922/asilo-navigazione-bilaterali-olimpiadi-camere": {
+    "articleId": "seduta-federale-bilaterali",
+    "ts": "2026-10-01T06:02:00.402Z",
     "keyForm": 2
   }
 }

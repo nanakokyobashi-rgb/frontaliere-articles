@@ -7325,6 +7325,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.agenda-parlamento-olimpiadi-navi.title': 'Swiss Chambers: Olympics, bilateral agreements, asylum and ships',
     'blog.article.agenda-parlamento-olimpiadi-navi.excerpt': 'The National Council examines 8,24 million for sport and 200 million for the 2038 Olympics. The Council of States discusses Bilaterals III, ships and asylum.',
     'blog.article.agenda-parlamento-olimpiadi-navi.imageAlt': 'Afternoon session in a Swiss parliamentary chamber',
+    'blog.article.seduta-federale-bilaterali.title': 'Olympics, navigation, asylum and bilateral meetings in Parliament',
+    'blog.article.seduta-federale-bilaterali.excerpt': 'The National Council examines 8,24 million for sporting events; the Council of States addresses Erasmus+, navigation under the Swiss flag and five asylum motions.',
+    'blog.article.seduta-federale-bilaterali.imageAlt': 'Swiss Parliament in Bern during a day of federal debates',
 };
 
 export default blogMetaChEn;

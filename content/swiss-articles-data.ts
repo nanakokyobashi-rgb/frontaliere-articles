@@ -22003,6 +22003,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'seduta-federale-bilaterali',
+    category: 'novita',
+    date: '2026-10-01T06:02:00.070Z',
+    image: '/images/blog/seduta-federale-bilaterali.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

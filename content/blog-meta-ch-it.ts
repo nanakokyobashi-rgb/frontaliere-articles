@@ -7325,6 +7325,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.agenda-parlamento-olimpiadi-navi.title': 'Camere svizzere: Olimpiadi, bilaterali, asilo e navi',
     'blog.article.agenda-parlamento-olimpiadi-navi.excerpt': 'Il Nazionale esamina 8,24 milioni per lo sport e 200 milioni per le Olimpiadi 2038. Gli Stati trattano Bilaterali III, navi e asilo.',
     'blog.article.agenda-parlamento-olimpiadi-navi.imageAlt': 'Seduta pomeridiana in un\'aula parlamentare svizzera',
+    'blog.article.seduta-federale-bilaterali.title': 'Olimpiadi, navigazione, asilo e Bilaterali in Parlamento',
+    'blog.article.seduta-federale-bilaterali.excerpt': 'Il Nazionale esamina 8,24 milioni per gli eventi sportivi; gli Stati affrontano Erasmus+, navigazione sotto bandiera svizzera e cinque mozioni sull\'asilo.',
+    'blog.article.seduta-federale-bilaterali.imageAlt': 'Parlamento svizzero a Berna durante una giornata di dibattiti federali',
 };
 
 export default blogMetaChIt;

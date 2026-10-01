@@ -7325,6 +7325,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.agenda-parlamento-olimpiadi-navi.title': 'Schweizer Kammern: Olympische Spiele, bilaterale Abkommen, Asyl und Schiffe',
     'blog.article.agenda-parlamento-olimpiadi-navi.excerpt': 'Der Nationalrat prüft 8,24 Millionen für den Sport und 200 Millionen für die Olympischen Spiele 2038. Der Ständerat behandelt Bilaterale III, Schiffe und Asyl.',
     'blog.article.agenda-parlamento-olimpiadi-navi.imageAlt': 'Nachmittagssitzung in einem Schweizer Parlamentssaal',
+    'blog.article.seduta-federale-bilaterali.title': 'Olympische Spiele, Navigation, Asyl und bilaterale Sitzungen im Parlament',
+    'blog.article.seduta-federale-bilaterali.excerpt': 'Das National prüft 8,24 Millionen für Sportveranstaltungen; die Bundesstaaten stehen vor Erasmus+, Navigation unter Schweizer Flagge und fünf Anträgen auf Asyl.',
+    'blog.article.seduta-federale-bilaterali.imageAlt': 'Schweizer Parlament in Bern während eines Tages mit Bundesdebatten',
 };
 
 export default blogMetaChDe;

@@ -7325,6 +7325,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.agenda-parlamento-olimpiadi-navi.title': 'Chambres suisses : Jeux olympiques, accords bilatéraux, asile et navires',
     'blog.article.agenda-parlamento-olimpiadi-navi.excerpt': 'Le National examine 8,24 millions pour le sport et 200 millions pour les Jeux olympiques de 2038. Les États s’occupent du Bilateral III, des navires et de l’asile.',
     'blog.article.agenda-parlamento-olimpiadi-navi.imageAlt': 'Séance de l\'après-midi dans une salle parlementaire suisse',
+    'blog.article.seduta-federale-bilaterali.title': 'Jeux olympiques, navigation, asile et relations bilatérales au Parlement',
+    'blog.article.seduta-federale-bilaterali.excerpt': 'Le National examine 8,24 millions pour les événements sportifs; les États abordent Erasmus+, la navigation sous pavillon suisse et cinq motions sur l’asile.',
+    'blog.article.seduta-federale-bilaterali.imageAlt': 'Parlement suisse à Berne pendant une journée de débats fédéraux',
 };
 
 export default blogMetaChFr;
