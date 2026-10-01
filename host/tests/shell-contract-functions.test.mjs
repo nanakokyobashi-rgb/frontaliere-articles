@@ -61,6 +61,11 @@ async function probe() {
   out.clampMetaDescriptionShort = c.clampMetaDescription('breve');
 
   out.truncateHeadline = c.truncateHeadline('Un titolo molto lungo che deve essere troncato', 20);
+  out.truncateHeadlineToMeasuredBudget = c.truncateHeadlineToMeasuredBudget(
+    `${'N'.repeat(70)} &A<Z>"`,
+    66,
+    (value) => c.esc(value).length,
+  );
   out.buildTitleWithBrand = c.buildTitleWithBrand('Titolo');
   out.truncateCodeUnits = c.truncateCodeUnits('abcdefghij', 4);
 
