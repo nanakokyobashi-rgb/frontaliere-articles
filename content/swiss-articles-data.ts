@@ -22138,6 +22138,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'cyber-security-month-oversharing-2026',
+    category: 'pratico',
+    date: '2026-10-01T16:47:38.792Z',
+    image: '/images/blog/cyber-security-month-oversharing-2026.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

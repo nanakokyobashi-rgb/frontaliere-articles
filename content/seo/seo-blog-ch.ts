@@ -95570,6 +95570,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-cyber-security-month-oversharing-2026': {
+    title: 'Oversharing e AI al lavoro: guida Cyber Security Month 2026',
+    description: 'Scopri come il Cyber Security Month 2026 dell’UFCS affronta l’oversharing e l’uso dell’intelligenza artificiale al lavoro, con consigli pratici, workshop',
+    keywords: 'frontalieri, ticino, svizzera, italia, oversharing, lavoro, cyber, security',
+    ogTitle: 'Oversharing e AI al lavoro: guida Cyber Security Month 2026',
+    ogDescription: 'Il Cyber Security Month 2026, lanciato dall’Ufficio federale della cibersicurezza da Berna, mette in guardia sull’oversharing: la combinazione di dati apparentemente innocui come foto, numeri e nomi può creare profili sfruttabili dai criminali',
+    canonicalPath: '/articoli-svizzera/cyber-security-month-oversharing-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Oversharing e AI al lavoro: guida Cyber Security Month 2026",
+      "description": "Scopri come il Cyber Security Month 2026 dell’UFCS affronta l’oversharing e l’uso dell’intelligenza artificiale al lavoro, con consigli pratici, workshop",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/cyber-security-month-oversharing-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Persona che lavora su laptop con icone dei social media visibili attorno, ufficio svizzero moderno"
+      },
+      "datePublished": "2026-10-01T16:47:38+00:00",
+      "dateModified": "2026-10-01T16:47:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/cyber-security-month-oversharing-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

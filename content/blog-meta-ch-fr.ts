@@ -7370,6 +7370,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.wolfurt-sdoganamento-reno-2026.title': 'Wolfurt : arrêt pour le dédouanement d’importation à partir du 1er octobre',
     'blog.article.wolfurt-sdoganamento-reno-2026.excerpt': 'À partir du 1er octobre 2026, les procédures pour le trafic commercial de marchandises dans la vallée du Rhin changeront : le dédouanement d’importation ne sera plus effectué à Wolfurt.',
     'blog.article.wolfurt-sdoganamento-reno-2026.imageAlt': 'Trafic de marchandises à un poste-frontière dans la vallée du Rhin.',
+    'blog.article.cyber-security-month-oversharing-2026.title': 'Surpartage et IA à l’œuvre : guide du Mois de la cybersécurité 2026',
+    'blog.article.cyber-security-month-oversharing-2026.excerpt': 'Le 1er octobre 2026, depuis Berne, l’OFCS lance le Cyber Security Month sur le thème « Oversharing – partager en toute connaissance de cause », en collaboration avec Netpathie et PFPDT.',
+    'blog.article.cyber-security-month-oversharing-2026.imageAlt': 'Personne travaillant sur un ordinateur portable avec des icônes de réseaux sociaux visibles autour, bureau suisse moderne',
 };
 
 export default blogMetaChFr;

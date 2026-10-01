@@ -7370,6 +7370,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.wolfurt-sdoganamento-reno-2026.title': 'Wolfurt: Stopp zur Importzöllabfertigung ab 1. Oktober',
     'blog.article.wolfurt-sdoganamento-reno-2026.excerpt': 'Ab dem 1. Oktober 2026 ändern sich die Verfahren für den gewerblichen Güterverkehr im Rheintal: In Wolfurt wird keine Einfuhrverzollung mehr durchgeführt.',
     'blog.article.wolfurt-sdoganamento-reno-2026.imageAlt': 'Warenverkehr an einem Grenzübergang im Rheintal.',
+    'blog.article.cyber-security-month-oversharing-2026.title': 'Oversharing und KI bei der Arbeit: Leitfaden zum Cyber Security Month 2026',
+    'blog.article.cyber-security-month-oversharing-2026.excerpt': 'Am 1 ottobre 2026 startet die UFCS von Bern aus den Cyber Security Month zum Thema «Oversharing – bewusst teilen», gemeinsam mit Netpathie und IFPDT.',
+    'blog.article.cyber-security-month-oversharing-2026.imageAlt': 'Person, die auf einem Laptop arbeitet, mit sichtbaren Social-Media-Symbolen herum, modernes Schweizer Büro',
 };
 
 export default blogMetaChDe;

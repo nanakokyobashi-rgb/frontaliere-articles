@@ -7370,6 +7370,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.wolfurt-sdoganamento-reno-2026.title': 'Wolfurt: stop allo sdoganamento import dal 1° ottobre',
     'blog.article.wolfurt-sdoganamento-reno-2026.excerpt': 'Dal 1° ottobre 2026 cambiano le procedure per il traffico commerciale di merci nella Valle del Reno: a Wolfurt non si farà più lo sdoganamento all\'importazione.',
     'blog.article.wolfurt-sdoganamento-reno-2026.imageAlt': 'Traffico di merci a un posto di frontiera nella Valle del Reno.',
+    'blog.article.cyber-security-month-oversharing-2026.title': 'Oversharing e AI al lavoro: guida Cyber Security Month 2026',
+    'blog.article.cyber-security-month-oversharing-2026.excerpt': 'Il 1 ottobre 2026, da Berna, l’UFCS avvia il Cyber Security Month sul tema «Oversharing – condividere con consapevolezza», insieme a Netpathie e IFPDT.',
+    'blog.article.cyber-security-month-oversharing-2026.imageAlt': 'Persona che lavora su laptop con icone dei social media visibili attorno, ufficio svizzero moderno',
 };
 
 export default blogMetaChIt;

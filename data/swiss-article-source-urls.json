@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/8bjbd2b5j7tz": {
-    "articleId": "formazione-azienda-prioritario",
-    "ts": "2026-09-01T12:20:18.348Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/e-pdmv8w0nn3": {
     "articleId": "dazit-termine-2026",
     "ts": "2026-09-01T12:39:20.293Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/7utg-tj4cxe-": {
     "articleId": "wolfurt-sdoganamento-reno-2026",
     "ts": "2026-10-01T15:43:42.614Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/gfsmne9flhnl": {
+    "articleId": "cyber-security-month-oversharing-2026",
+    "ts": "2026-10-01T16:47:39.117Z",
     "keyForm": 2
   }
 }

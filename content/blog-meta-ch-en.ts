@@ -7370,6 +7370,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.wolfurt-sdoganamento-reno-2026.title': 'Wolfurt: stop to import customs clearance from 1 October',
     'blog.article.wolfurt-sdoganamento-reno-2026.excerpt': 'From 1 October 2026, the procedures for the commercial traffic of goods in the Rhine Valley will change: import customs clearance will no longer be carried out in Wolfurt.',
     'blog.article.wolfurt-sdoganamento-reno-2026.imageAlt': 'Goods traffic at a border post in the Rhine Valley.',
+    'blog.article.cyber-security-month-oversharing-2026.title': 'Oversharing and AI at work: Cyber Security Month 2026 guide',
+    'blog.article.cyber-security-month-oversharing-2026.excerpt': 'On 1 October 2026, the FOCS will launch Cyber Security Month in Bern on the topic of "Oversharing – sharing with awareness", together with Netpathie and the FDPIC.',
+    'blog.article.cyber-security-month-oversharing-2026.imageAlt': 'Person working on a laptop with social media icons visible around, modern Swiss office',
 };
 
 export default blogMetaChEn;
