@@ -7328,6 +7328,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.seduta-federale-bilaterali.title': 'Olimpiadi, navigazione, asilo e Bilaterali in Parlamento',
     'blog.article.seduta-federale-bilaterali.excerpt': 'Il Nazionale esamina 8,24 milioni per gli eventi sportivi; gli Stati affrontano Erasmus+, navigazione sotto bandiera svizzera e cinque mozioni sull\'asilo.',
     'blog.article.seduta-federale-bilaterali.imageAlt': 'Parlamento svizzero a Berna durante una giornata di dibattiti federali',
+    'blog.article.fiammata-inflazione-carburanti.title': 'Inflazione svizzera all\'1%: spinta dai carburanti',
+    'blog.article.fiammata-inflazione-carburanti.excerpt': 'L\'inflazione in Svizzera è salita all\'1% a settembre. L\'UST segnala carburanti in forte aumento, mentre l\'IPC resta stabile sul mese precedente.',
+    'blog.article.fiammata-inflazione-carburanti.imageAlt': 'Distributore di carburante in Svizzera, simbolo del rincaro dei prezzi.',
 };
 
 export default blogMetaChIt;

@@ -7328,6 +7328,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.seduta-federale-bilaterali.title': 'Olympische Spiele, Navigation, Asyl und bilaterale Sitzungen im Parlament',
     'blog.article.seduta-federale-bilaterali.excerpt': 'Das National prüft 8,24 Millionen für Sportveranstaltungen; die Bundesstaaten stehen vor Erasmus+, Navigation unter Schweizer Flagge und fünf Anträgen auf Asyl.',
     'blog.article.seduta-federale-bilaterali.imageAlt': 'Schweizer Parlament in Bern während eines Tages mit Bundesdebatten',
+    'blog.article.fiammata-inflazione-carburanti.title': 'Schweizer Inflation bei 1 %: Kraftstoffgetrieben',
+    'blog.article.fiammata-inflazione-carburanti.excerpt': 'Die Inflation in der Schweiz stieg im September auf 1 %. Das FSO berichtet, dass die Kraftstoffpreise stark gestiegen sind, während der Verbraucherpreisindex im Vergleich zum Vormonat stabil blieb.',
+    'blog.article.fiammata-inflazione-carburanti.imageAlt': 'Schweizer Tankstelle als Symbol für steigende Konsumentenpreise.',
 };
 
 export default blogMetaChDe;

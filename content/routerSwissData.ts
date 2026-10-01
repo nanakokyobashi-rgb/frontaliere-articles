@@ -2465,6 +2465,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'chifra-tabelle-doganali-2026': { it: 'chifra-tabelle-doganali-2026', en: 'chifra-customs-tables-2026', de: 'chifra-zolltabellen-2026', fr: 'chifra-tableaux-douaniers-2026' },
  'agenda-parlamento-olimpiadi-navi': { it: 'agenda-parlamento-olimpiadi-navi', en: 'parliament-agenda-olympics-shipping', de: 'parlamentsagenda-olympia-schifffahrt', fr: 'agenda-parlement-olympiades-navigation' },
  'seduta-federale-bilaterali': { it: 'seduta-federale-bilaterali', en: 'federal-session-bilateral-talks', de: 'bundessitzung-bilaterale-olympiade', fr: 'session-federale-olympiades-asile' },
+ 'fiammata-inflazione-carburanti': { it: 'fiammata-inflazione-carburanti', en: 'swiss-inflation-fuel-surge', de: 'schweizer-inflation-treibstoffanstieg', fr: 'inflation-suisse-hausse-carburants' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

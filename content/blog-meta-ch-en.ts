@@ -7328,6 +7328,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.seduta-federale-bilaterali.title': 'Olympics, navigation, asylum and bilateral meetings in Parliament',
     'blog.article.seduta-federale-bilaterali.excerpt': 'The National Council examines 8,24 million for sporting events; the Council of States addresses Erasmus+, navigation under the Swiss flag and five asylum motions.',
     'blog.article.seduta-federale-bilaterali.imageAlt': 'Swiss Parliament in Bern during a day of federal debates',
+    'blog.article.fiammata-inflazione-carburanti.title': 'Swiss inflation at 1%: Fuel-driven',
+    'blog.article.fiammata-inflazione-carburanti.excerpt': 'Inflation in Switzerland rose to 1% in September. The FSO reports that fuels rose sharply, while the CPI remained stable on the previous month.',
+    'blog.article.fiammata-inflazione-carburanti.imageAlt': 'Swiss petrol station symbolizing the rise in consumer prices.',
 };
 
 export default blogMetaChEn;

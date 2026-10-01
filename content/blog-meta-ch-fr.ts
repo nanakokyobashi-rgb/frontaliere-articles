@@ -7328,6 +7328,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.seduta-federale-bilaterali.title': 'Jeux olympiques, navigation, asile et relations bilatérales au Parlement',
     'blog.article.seduta-federale-bilaterali.excerpt': 'Le National examine 8,24 millions pour les événements sportifs; les États abordent Erasmus+, la navigation sous pavillon suisse et cinq motions sur l’asile.',
     'blog.article.seduta-federale-bilaterali.imageAlt': 'Parlement suisse à Berne pendant une journée de débats fédéraux',
+    'blog.article.fiammata-inflazione-carburanti.title': 'Inflation suisse à 1 % : Alimentée par le carburant',
+    'blog.article.fiammata-inflazione-carburanti.excerpt': 'L’inflation en Suisse est montée à 1 % en septembre. Le FSO rapporte que les carburants ont fortement augmenté, tandis que l’IPC est resté stable par rapport au mois précédent.',
+    'blog.article.fiammata-inflazione-carburanti.imageAlt': 'Station-service suisse illustrant la hausse des prix à la consommation.',
 };
 
 export default blogMetaChFr;

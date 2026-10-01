@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4050496": {
-    "articleId": "swatch-vince-samsung-quadranti",
-    "ts": "2026-09-01T00:19:56.888Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/attualita/1947130/trasporti-personale-sev-violenza-aggressioni": {
     "articleId": "trasporti-pubblici-violenza-sev",
     "ts": "2026-09-01T00:27:09.408Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/politica/1953922/asilo-navigazione-bilaterali-olimpiadi-camere": {
     "articleId": "seduta-federale-bilaterali",
     "ts": "2026-10-01T06:02:00.402Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4125747": {
+    "articleId": "fiammata-inflazione-carburanti",
+    "ts": "2026-10-01T07:54:41.202Z",
     "keyForm": 2
   }
 }

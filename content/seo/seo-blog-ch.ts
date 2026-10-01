@@ -95024,6 +95024,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-fiammata-inflazione-carburanti': {
+    title: 'Inflazione svizzera all\'1%: spinta dai carburanti',
+    description: 'A settembre l\'inflazione in Svizzera è salita all\'1% su base annua. L\'UST segnala carburanti in forte aumento, mentre l\'IPC resta stabile sul mese precedente.',
+    keywords: 'frontalieri, ticino, svizzera, italia, inflazione, spinta, carburanti, salita',
+    ogTitle: 'Inflazione svizzera all\'1%: il ruolo dei carburanti',
+    ogDescription: 'Il dato UST di settembre porta l\'inflazione svizzera all\'1% su base annua, dopo lo 0,8% di agosto. L\'IPC resta stabile sul mese precedente, mentre olio combustibile, diesel e benzina guidano l\'aumento dei prezzi.',
+    canonicalPath: '/articoli-svizzera/fiammata-inflazione-carburanti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Inflazione svizzera all'1%: spinta dai carburanti",
+      "description": "A settembre l'inflazione in Svizzera è salita all'1% su base annua. L'UST segnala carburanti in forte aumento, mentre l'IPC resta stabile sul mese precedente.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/fiammata-inflazione-carburanti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Distributore di carburante in Svizzera, simbolo del rincaro dei prezzi."
+      },
+      "datePublished": "2026-10-01T07:54:40+00:00",
+      "dateModified": "2026-10-01T07:54:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/fiammata-inflazione-carburanti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
