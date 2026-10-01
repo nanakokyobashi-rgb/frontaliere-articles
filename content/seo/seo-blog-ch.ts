@@ -94400,6 +94400,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-primo-pilastro-basel-stadt': {
+    title: 'AVS e prestazioni complementari a Basilea Città',
+    description: 'Guida ad AVS e prestazioni complementari a Basilea Città: cassa cantonale, calcolo della rendita, lacune contributive e minimo vitale nel primo pilastro.',
+    keywords: 'frontalieri, ticino, svizzera, italia, prestazioni, complementari, basilea, città',
+    ogTitle: 'Basilea Città: AVS e prestazioni complementari',
+    ogDescription: 'Nel Cantone di Basilea Città, il primo pilastro ruota attorno alla cassa di compensazione cantonale: calcolo della rendita AVS, lacune contributive e prestazioni complementari per il minimo vitale. La guida distingue AVS, LPP e imposte.',
+    canonicalPath: '/articoli-svizzera/primo-pilastro-basel-stadt/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "AVS e prestazioni complementari a Basilea Città",
+      "description": "Guida ad AVS e prestazioni complementari a Basilea Città: cassa cantonale, calcolo della rendita, lacune contributive e minimo vitale nel primo pilastro.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/primo-pilastro-basel-stadt.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documenti AVS e prestazioni complementari per Basilea Città"
+      },
+      "datePublished": "2026-10-01T01:37:16+00:00",
+      "dateModified": "2026-10-01T01:37:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/primo-pilastro-basel-stadt/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

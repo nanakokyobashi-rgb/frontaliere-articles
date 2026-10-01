@@ -7280,6 +7280,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.tariffe-cura-infanzia-baselstadt.title': 'Daycare in Basel-Stadt: Costs and Subsidies',
     'blog.article.tariffe-cura-infanzia-baselstadt.excerpt': 'Crèche and childcare in Basel-Stadt: crèches, day and after-school families, income-related tariffs and cantonal subsidies.',
     'blog.article.tariffe-cura-infanzia-baselstadt.imageAlt': 'Childcare in Basel-Stadt: entrance to a daycare centre',
+    'blog.article.primo-pilastro-basel-stadt.title': 'AHV and supplementary benefits in Basel-Stadt',
+    'blog.article.primo-pilastro-basel-stadt.excerpt': 'Cantonal Compensation Fund, calculation of the AVS pension, contribution gaps, and supplementary benefits to ensure a minimum standard of living in Basel-Stadt.',
+    'blog.article.primo-pilastro-basel-stadt.imageAlt': 'AVS and supplementary benefits documents for Basel-Stadt',
 };
 
 export default blogMetaChEn;

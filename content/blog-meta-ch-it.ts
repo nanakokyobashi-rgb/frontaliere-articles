@@ -7280,6 +7280,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.tariffe-cura-infanzia-baselstadt.title': 'Asilo nido Basilea Città: costi e sussidi',
     'blog.article.tariffe-cura-infanzia-baselstadt.excerpt': 'Asilo nido e custodia bambini a Basilea Città: nidi, famiglie diurne e doposcuola, tariffe legate al reddito e sussidi cantonali.',
     'blog.article.tariffe-cura-infanzia-baselstadt.imageAlt': 'Custodia bambini a Basilea Città: ingresso di un asilo nido',
+    'blog.article.primo-pilastro-basel-stadt.title': 'AVS e prestazioni complementari a Basilea Città',
+    'blog.article.primo-pilastro-basel-stadt.excerpt': 'Cassa di compensazione cantonale, calcolo della rendita AVS, lacune contributive e prestazioni complementari per il minimo vitale a Basilea Città.',
+    'blog.article.primo-pilastro-basel-stadt.imageAlt': 'Documenti AVS e prestazioni complementari per Basilea Città',
 };
 
 export default blogMetaChIt;

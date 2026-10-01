@@ -7280,6 +7280,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.tariffe-cura-infanzia-baselstadt.title': 'Kindergarten Basel-Stadt: Kosten und Zuschüsse',
     'blog.article.tariffe-cura-infanzia-baselstadt.excerpt': 'Kindertagesstätten und Kinderbetreuung in Basel-Stadt: Krippen, Tagesfamilien und Nachmittagsbetreuung, einkommensabhängige Tarife und kantonale Zuschüsse.',
     'blog.article.tariffe-cura-infanzia-baselstadt.imageAlt': 'Kinderbetreuung in Basel-Stadt: Eingang einer Kindertagesstätte',
+    'blog.article.primo-pilastro-basel-stadt.title': 'AHV und Ergänzungsleistungen in Basel-Stadt',
+    'blog.article.primo-pilastro-basel-stadt.excerpt': 'Kantonale Ausgleichskasse, Berechnung der AHV-Rente, Beitragslücken und Ergänzungsleistungen zum Existenzminimum in Basel-Stadt.',
+    'blog.article.primo-pilastro-basel-stadt.imageAlt': 'AHV- und Ergänzungsleistungsunterlagen für Basel-Stadt',
 };
 
 export default blogMetaChDe;

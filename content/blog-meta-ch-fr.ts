@@ -7280,6 +7280,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.tariffe-cura-infanzia-baselstadt.title': 'Maternelle Bâle-Stadt : coûts et subventions',
     'blog.article.tariffe-cura-infanzia-baselstadt.excerpt': 'Crèche et garde d’enfants à Bâle-Stadt : crèches, familles de jour et après l’école, tarifs liés au revenu et subventions cantonales.',
     'blog.article.tariffe-cura-infanzia-baselstadt.imageAlt': 'Garde d’enfants à Bâle-Ville: entrée d’une crèche',
+    'blog.article.primo-pilastro-basel-stadt.title': 'AHV et prestations complémentaires à Bâle-Stadt',
+    'blog.article.primo-pilastro-basel-stadt.excerpt': 'Caisse cantonale de compensation, calcul de la rente AVS, lacunes de cotisation et prestations complémentaires au revenu minimum vital à Bâle-Ville.',
+    'blog.article.primo-pilastro-basel-stadt.imageAlt': 'Documents AVS et prestations complémentaires pour Bâle-Ville',
 };
 
 export default blogMetaChFr;
