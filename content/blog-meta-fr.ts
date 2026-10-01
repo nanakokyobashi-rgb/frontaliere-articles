@@ -12324,6 +12324,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.rovellasca-vita-transfrontaliera.title': 'Vivre à Rovellasca et travailler au Tessin en tant que frontalier',
     'blog.article.rovellasca-vita-transfrontaliera.excerpt': 'Accord en vigueur depuis le 1er janvier 2024 : exonération € 7\'500 pour les anciens frontaliers, franchise € 10\'000 pour les nouveaux.',
     'blog.article.rovellasca-vita-transfrontaliera.imageAlt': 'Travailleur frontalier en route vers le Tessin sur une route frontière',
+    'blog.article.caronno-ticino-fiscalita.title': 'Vivre à Caronno Varesino : frontalier au Tessin',
+    'blog.article.caronno-ticino-fiscalita.excerpt': 'Pour ceux qui vivent à Caronno Varesino et travaillent au Tessin : le Nouvel Accord Transfrontalier pour les Navetteurs est en vigueur à partir du 1er janvier 2024, avec des franchises différentes.',
+    'blog.article.caronno-ticino-fiscalita.imageAlt': 'Paysage tessinois avec une route pour travailleurs frontaliers',
 };
 
 export default blogMetaFr;

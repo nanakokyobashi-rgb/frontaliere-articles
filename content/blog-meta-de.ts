@@ -12321,6 +12321,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.rovellasca-vita-transfrontaliera.title': 'In Rovellasca wohnen und als Grenzgänger im Tessin arbeiten',
     'blog.article.rovellasca-vita-transfrontaliera.excerpt': 'Seit dem 1° gennaio 2024 geltendes Abkommen: Steuerbefreiung von €7\'500 für bisherige Grenzgänger, Freibetrag von €10\'000 für neue Grenzgänger.',
     'blog.article.rovellasca-vita-transfrontaliera.imageAlt': 'Grenzgänger auf dem Weg ins Tessin an einer Grenzstrasse',
+    'blog.article.caronno-ticino-fiscalita.title': 'Leben in Caronno Varesino: Als Grenzgänger im Tessin arbeiten',
+    'blog.article.caronno-ticino-fiscalita.excerpt': 'Für diejenigen, die in Caronno Varesino wohnen und in Tessin arbeiten: Das neue grenzüberschreitende Pendlerabkommen gilt ab dem 1. Januar 2024 mit unterschiedlichen Selbstbeteiligungen.',
+    'blog.article.caronno-ticino-fiscalita.imageAlt': 'Tessiner Landschaft mit einer Straße für Grenzgänger',
 };
 
 export default blogMetaDe;

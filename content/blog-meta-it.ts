@@ -12323,6 +12323,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.rovellasca-vita-transfrontaliera.title': 'Vivere a Rovellasca e lavorare in Ticino da frontaliere',
     'blog.article.rovellasca-vita-transfrontaliera.excerpt': 'Accordo in vigore dal 1° gennaio 2024: esenzione €7\'500 per i vecchi frontalieri, franchigia €10\'000 per i nuovi.',
     'blog.article.rovellasca-vita-transfrontaliera.imageAlt': 'Pendolare transfrontaliero verso il Ticino su una strada di confine',
+    'blog.article.caronno-ticino-fiscalita.title': 'Vivere a Caronno Varesino: lavorare in Ticino da frontaliere',
+    'blog.article.caronno-ticino-fiscalita.excerpt': 'Per chi vive a Caronno Varesino e lavora in Ticino: il Nuovo Accordo Frontalieri è in vigore dal 1° gennaio 2024, con franchigie diverse.',
+    'blog.article.caronno-ticino-fiscalita.imageAlt': 'Paesaggio ticinese con una strada frequentata da lavoratori frontalieri',
 };
 
 export default blogMetaIt;

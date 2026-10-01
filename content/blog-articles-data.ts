@@ -36970,6 +36970,15 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'caronno-ticino-fiscalita',
+ category: 'fiscale',
+ date: '2026-10-01T04:37:45.182Z',
+ image: '/images/blog/caronno-ticino-fiscalita.webp',
+ hasCalculator: true,
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

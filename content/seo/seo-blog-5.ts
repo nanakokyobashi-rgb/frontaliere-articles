@@ -97612,6 +97612,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-caronno-ticino-fiscalita': {
+    title: 'Vivere a Caronno Varesino: lavorare in Ticino da frontaliere',
+    description: 'Vivere a Caronno Varesino e lavorare in Ticino: accordo frontalieri, imposta alla fonte, franchigie, AVS, LPP e LAMal da considerare. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, caronno, varesino, lavorare',
+    ogTitle: 'Vivere a Caronno Varesino: lavorare in Ticino da frontaliere',
+    ogDescription: 'Una guida pratica per chi valuta Caronno Varesino come base e un lavoro in Ticino: date del Nuovo Accordo Frontalieri, franchigie per vecchi e nuovi frontalieri, trattenute svizzere e contributi da leggere.',
+    canonicalPath: '/articoli-frontaliere/caronno-ticino-fiscalita',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Caronno Varesino: lavorare in Ticino da frontaliere",
+      "description": "Vivere a Caronno Varesino e lavorare in Ticino: accordo frontalieri, imposta alla fonte, franchigie, AVS, LPP e LAMal da considerare. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/caronno-ticino-fiscalita.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Paesaggio ticinese con una strada frequentata da lavoratori frontalieri"
+      },
+      "datePublished": "2026-10-01T04:37:45+00:00",
+      "dateModified": "2026-10-01T04:37:45+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/caronno-ticino-fiscalita/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

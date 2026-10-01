@@ -12322,6 +12322,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.rovellasca-vita-transfrontaliera.title': 'Living in Rovellasca and working in Ticino as a cross-border worker',
     'blog.article.rovellasca-vita-transfrontaliera.excerpt': 'Agreement in force from 1° gennaio 2024: €7\'500 exemption for existing cross-border workers, €10\'000 tax-free allowance for new ones.',
     'blog.article.rovellasca-vita-transfrontaliera.imageAlt': 'Cross-border commuter heading to Ticino on a border road',
+    'blog.article.caronno-ticino-fiscalita.title': 'Living in Caronno Varesino: working in Ticino as a cross-border commuter',
+    'blog.article.caronno-ticino-fiscalita.excerpt': 'For those who live in Caronno Varesino and work in Ticino: The New Cross-Border Workers Agreement has been in effect since January 1, 2024, with different exemption thresholds.',
+    'blog.article.caronno-ticino-fiscalita.imageAlt': 'Ticino landscape with a road used by cross-border workers',
 };
 
 export default blogMetaEn;
