@@ -7346,6 +7346,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.bilaterali-iii-sicurezza-alimentare.title': 'Schweizerisch-EU-Ernährungssicherheitsabkommen genehmigt',
     'blog.article.bilaterali-iii-sicurezza-alimentare.excerpt': 'Der Staatsrat hat das Schweizerisch-EU-Abkommen zur Lebensmittelsicherheit genehmigt; mehr als 50 % der Exporte und mehr als 70 % der Importe gehen in die EU, während die Abstimmung über Foie-Gras-Etiketten mit 22 zu 21 endete.',
     'blog.article.bilaterali-iii-sicurezza-alimentare.imageAlt': 'Foto von schweizerischen Lebensmitteln mit EU-Symbolen, die das Lebensmittel-sicherheitsabkommen darstellen',
+    'blog.article.fisioterapia-tariffe-petizioni-ottobre.title': 'Physiotherapie: 112.000 Unterschriften für höhere Raten',
+    'blog.article.fisioterapia-tariffe-petizioni-ottobre.excerpt': 'Physioswiss hat in der Schweiz 112.000 Unterschriften gesammelt und fordert eine Erhöhung der Physiotherapiegebühren um mindestens 30 %; 26 kantonale Petitionen werden im Oktober eingereicht und das neue Fünf-Minuten-Abrechnungsmodell soll 2027 in Kraft treten.',
+    'blog.article.fisioterapia-tariffe-petizioni-ottobre.imageAlt': 'Physiotherapeut, der einen Patienten in einer modernen Schweizer Klinik behandelt',
 };
 
 export default blogMetaChDe;

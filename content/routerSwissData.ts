@@ -2471,6 +2471,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'stati-approvano-accordi-ue': { it: 'stati-approvano-accordi-ue', en: 'states-approve-eu-agreements', de: 'staenderat-billigt-eu-abkommen', fr: 'etats-approuvent-accords-ue' },
  'iniziativa-lega-premio-uniforme': { it: 'iniziativa-lega-premio-uniforme', en: 'national-health-insurance-premium-the-league-s-proposal', de: 'nationale-krankenversicherungspramie-vorschlag-der-liga', fr: 'prime-nationale-d-assurance-sante-la-proposition-de-la-ligue' },
  'bilaterali-iii-sicurezza-alimentare': { it: 'bilaterali-iii-sicurezza-alimentare', en: 'swiss-eu-food-security-agreement-approved', de: 'schweizerisch-eu-ernahrungssicherheitsabkommen-genehmigt', fr: 'accord-suisse-europeen-sur-la-securite-alimentaire-approuve' },
+ 'fisioterapia-tariffe-petizioni-ottobre': { it: 'fisioterapia-tariffe-petizioni-ottobre', en: 'physiotherapy-112-000-signatures-for-higher-fees', de: 'physiotherapie-112-000-unterschriften-fur-hohere-raten', fr: 'physiotherapie-112-000-signatures-pour-des-tarifs-plus-eleves' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

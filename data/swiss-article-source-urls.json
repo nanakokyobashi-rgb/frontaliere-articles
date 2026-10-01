@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1947226/tasso-riferimento-rimane-minimo-riduzione": {
-    "articleId": "tasso-riferimento-ipotecario-1-25",
-    "ts": "2026-09-01T06:41:37.879Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/svizzeri-chiedono-misure-contro-riscaldamento-climatico/91984730": {
     "articleId": "svizzeri-chiedono-misure-clima",
     "ts": "2026-09-01T10:00:23.698Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/politica/1953996/ue-consiglio-svizzera-accordo-senatori-sicurezza-nuovo-bilaterali-iii": {
     "articleId": "bilaterali-iii-sicurezza-alimentare",
     "ts": "2026-10-01T12:28:35.805Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1954027/tariffe-petizioni-cantoni-fisioterapia-svizzera": {
+    "articleId": "fisioterapia-tariffe-petizioni-ottobre",
+    "ts": "2026-10-01T12:48:22.165Z",
     "keyForm": 2
   }
 }

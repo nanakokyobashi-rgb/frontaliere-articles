@@ -7346,6 +7346,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.bilaterali-iii-sicurezza-alimentare.title': 'Swiss-EU food security agreement approved',
     'blog.article.bilaterali-iii-sicurezza-alimentare.excerpt': 'The Council of States has approved the Swiss-EU food safety agreement; more than 50% of exports and more than 70% of imports go to the EU, while the vote on foie gras labels ended 22 to 21.',
     'blog.article.bilaterali-iii-sicurezza-alimentare.imageAlt': 'Photo of Swiss food products with EU symbols representing the food safety agreement',
+    'blog.article.fisioterapia-tariffe-petizioni-ottobre.title': 'Physiotherapy: 112\'000 signatures for higher fees',
+    'blog.article.fisioterapia-tariffe-petizioni-ottobre.excerpt': 'Physioswiss has collected 112,000 signatures across Switzerland calling for an increase in physiotherapy fees of at least 30%; 26 cantonal petitions will be delivered in October and the new five-minute billing model is expected to come into force in 2027.',
+    'blog.article.fisioterapia-tariffe-petizioni-ottobre.imageAlt': 'Physiotherapist treating a patient in a modern Swiss clinic',
 };
 
 export default blogMetaChEn;

@@ -7346,6 +7346,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.bilaterali-iii-sicurezza-alimentare.title': 'Accordo sicurezza alimentare Svizzera-UE approvato',
     'blog.article.bilaterali-iii-sicurezza-alimentare.excerpt': 'Il Consiglio degli Stati ha approvato l\'accordo sulla sicurezza alimentare Svizzera-UE; oltre il 50% delle esportazioni e oltre il 70% delle importazioni riguardano l\'UE, mentre il voto sulle etichette foie gras è finito 22 a 21.',
     'blog.article.bilaterali-iii-sicurezza-alimentare.imageAlt': 'Foto di prodotti alimentari svizzeri con simboli UE che rappresentano l\'accordo sulla sicurezza alimentare',
+    'blog.article.fisioterapia-tariffe-petizioni-ottobre.title': 'Fisioterapia: 112\'000 firme per tariffe più alte',
+    'blog.article.fisioterapia-tariffe-petizioni-ottobre.excerpt': 'Physioswiss ha raccolto 112\'000 firme in tutta la Svizzera per chiedere un aumento delle tariffe di fisioterapia almeno del 30%; 26 petizioni cantonali saranno consegnate a ottobre e il nuovo modello di fatturazione a intervalli di cinque minuti dovrebbe entrare in vigore nel 2027.',
+    'blog.article.fisioterapia-tariffe-petizioni-ottobre.imageAlt': 'Fisioterapista che tratta un paziente in una clinica svizzera moderna',
 };
 
 export default blogMetaChIt;
