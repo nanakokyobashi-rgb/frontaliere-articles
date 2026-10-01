@@ -21931,6 +21931,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'neutralita-voto-rigetto',
+    category: 'novita',
+    date: '2026-10-01T03:36:21.684Z',
+    image: '/images/blog/neutralita-voto-rigetto.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

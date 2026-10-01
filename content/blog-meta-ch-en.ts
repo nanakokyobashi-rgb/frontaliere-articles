@@ -7301,6 +7301,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.aliquote-locali-san-gallo.title': 'Cantonal tax comparison Switzerland 2026: St. Gallen',
     'blog.article.aliquote-locali-san-gallo.excerpt': '2026 Comparison of Cantonal Taxes in Switzerland: Three Tax Brackets, Municipal Multiplier, and Practical Criteria for Analyzing the Canton of St. Gallen.',
     'blog.article.aliquote-locali-san-gallo.imageAlt': 'Swiss tax documents and a calculator for comparing cantonal taxes.',
+    'blog.article.neutralita-voto-rigetto.title': 'Swiss neutrality: Stricter initiative rejected',
+    'blog.article.neutralita-voto-rigetto.excerpt': 'The Swiss people rejected the initiative that sought to enshrine a stricter interpretation of neutrality in the Constitution.',
+    'blog.article.neutralita-voto-rigetto.imageAlt': 'Swiss flag outside an institutional building, symbolizing the vote on neutrality.',
 };
 
 export default blogMetaChEn;

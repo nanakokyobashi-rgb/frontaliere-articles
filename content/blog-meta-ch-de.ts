@@ -7301,6 +7301,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.aliquote-locali-san-gallo.title': 'Vergleich der Kantonssteuern in der Schweiz 2026: St. Gallen',
     'blog.article.aliquote-locali-san-gallo.excerpt': 'Vergleich der kantonalen Steuer in der Schweiz 2026: drei Steuerniveaus, kommunaler Multiplikator und praktische Kriterien zur Lesung des Kantons St. Gallen.',
     'blog.article.aliquote-locali-san-gallo.imageAlt': 'Schweizer Steuerunterlagen und Taschenrechner für einen Kantonssteuervergleich.',
+    'blog.article.neutralita-voto-rigetto.title': 'Schweizer Neutralität: Die strengste Initiative wurde abgelehnt',
+    'blog.article.neutralita-voto-rigetto.excerpt': 'Das Schweizer Volk lehnte die Initiative ab, ein strengeres Neutralitätskonzept in der Verfassung zu verankern.',
+    'blog.article.neutralita-voto-rigetto.imageAlt': 'Schweizer Flagge vor einem institutionellen Gebäude als Symbol für die Abstimmung über die Neutralität.',
 };
 
 export default blogMetaChDe;

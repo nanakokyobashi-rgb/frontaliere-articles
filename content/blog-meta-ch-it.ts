@@ -7301,6 +7301,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.aliquote-locali-san-gallo.title': 'Confronto imposta cantonale Svizzera 2026: San Gallo',
     'blog.article.aliquote-locali-san-gallo.excerpt': 'Confronto 2026 dell\'imposta cantonale in Svizzera: tre livelli fiscali, moltiplicatore comunale e criteri pratici per leggere il canton San Gallo.',
     'blog.article.aliquote-locali-san-gallo.imageAlt': 'Documenti fiscali svizzeri e calcolatrice per un confronto tra imposte cantonali.',
+    'blog.article.neutralita-voto-rigetto.title': 'Neutralità svizzera: respinta l\'iniziativa più rigida',
+    'blog.article.neutralita-voto-rigetto.excerpt': 'Il popolo svizzero ha respinto l\'iniziativa che voleva fissare nella Costituzione una concezione più rigida della neutralità.',
+    'blog.article.neutralita-voto-rigetto.imageAlt': 'Bandiera svizzera davanti a un edificio istituzionale, simbolo del voto sulla neutralità.',
 };
 
 export default blogMetaChIt;
