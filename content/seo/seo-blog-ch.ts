@@ -95219,6 +95219,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-bilaterali-iii-sicurezza-alimentare': {
+    title: 'Accordo sicurezza alimentare Svizzera-UE approvato',
+    description: 'Il Consiglio degli Stati approva l\'accordo sulla sicurezza alimentare Svizzera-UE: oltre il 50% delle esportazioni e oltre il 70% delle importazioni riguardano',
+    keywords: 'frontalieri, ticino, svizzera, italia, accordo, sicurezza, alimentare, svizzera-ue',
+    ogTitle: 'Accordo sicurezza alimentare Svizzera-UE approvato',
+    ogDescription: 'Il Consiglio degli Stati ha dato il via libera al nuovo accordo sulla sicurezza alimentare tra Svizzera e Unione europea, che punta a creare uno spazio comune per tutelare la salute di persone, animali e piante. Oltre metà delle esportazioni svizzere',
+    canonicalPath: '/articoli-svizzera/bilaterali-iii-sicurezza-alimentare/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Accordo sicurezza alimentare Svizzera-UE approvato",
+      "description": "Il Consiglio degli Stati approva l'accordo sulla sicurezza alimentare Svizzera-UE: oltre il 50% delle esportazioni e oltre il 70% delle importazioni riguardano",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bilaterali-iii-sicurezza-alimentare.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Foto di prodotti alimentari svizzeri con simboli UE che rappresentano l'accordo sulla sicurezza alimentare"
+      },
+      "datePublished": "2026-10-01T12:28:35+00:00",
+      "dateModified": "2026-10-01T12:28:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/bilaterali-iii-sicurezza-alimentare/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -2470,6 +2470,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'iniziativa-fisco-matrimonio': { it: 'iniziativa-fisco-matrimonio', en: 'fair-tax-marriage-initiative', de: 'faire-steuern-ehe-initiative', fr: 'initiative-fiscale-mariage' },
  'stati-approvano-accordi-ue': { it: 'stati-approvano-accordi-ue', en: 'states-approve-eu-agreements', de: 'staenderat-billigt-eu-abkommen', fr: 'etats-approuvent-accords-ue' },
  'iniziativa-lega-premio-uniforme': { it: 'iniziativa-lega-premio-uniforme', en: 'national-health-insurance-premium-the-league-s-proposal', de: 'nationale-krankenversicherungspramie-vorschlag-der-liga', fr: 'prime-nationale-d-assurance-sante-la-proposition-de-la-ligue' },
+ 'bilaterali-iii-sicurezza-alimentare': { it: 'bilaterali-iii-sicurezza-alimentare', en: 'swiss-eu-food-security-agreement-approved', de: 'schweizerisch-eu-ernahrungssicherheitsabkommen-genehmigt', fr: 'accord-suisse-europeen-sur-la-securite-alimentaire-approuve' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

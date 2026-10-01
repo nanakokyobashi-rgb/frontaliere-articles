@@ -7343,6 +7343,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.iniziativa-lega-premio-uniforme.title': 'Nationale Krankenversicherungsprämie: Vorschlag der Liga',
     'blog.article.iniziativa-lega-premio-uniforme.excerpt': 'Am 1. Oktober hat die Lega dei Ticinesi in Bellinzona im Grossen Rat eine Initiative für eine in der ganzen Schweiz gleiche Krankenkassenprämie bei gleichem Alter, gleicher Franchise und gleichem Versicherungsmodell vorgestellt.',
     'blog.article.iniziativa-lega-premio-uniforme.imageAlt': 'Das Gran Consiglio-Gebäude in Bellinzona mit der Schweizer Flagge, das die Debatte über eine nationale Krankenkassenprämie zeigt.',
+    'blog.article.bilaterali-iii-sicurezza-alimentare.title': 'Schweizerisch-EU-Ernährungssicherheitsabkommen genehmigt',
+    'blog.article.bilaterali-iii-sicurezza-alimentare.excerpt': 'Der Staatsrat hat das Schweizerisch-EU-Abkommen zur Lebensmittelsicherheit genehmigt; mehr als 50 % der Exporte und mehr als 70 % der Importe gehen in die EU, während die Abstimmung über Foie-Gras-Etiketten mit 22 zu 21 endete.',
+    'blog.article.bilaterali-iii-sicurezza-alimentare.imageAlt': 'Foto von schweizerischen Lebensmitteln mit EU-Symbolen, die das Lebensmittel-sicherheitsabkommen darstellen',
 };
 
 export default blogMetaChDe;

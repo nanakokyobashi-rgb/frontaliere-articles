@@ -7343,6 +7343,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.iniziativa-lega-premio-uniforme.title': 'National health insurance premium: the League\'s proposal',
     'blog.article.iniziativa-lega-premio-uniforme.excerpt': 'On 1 October in Bellinzona, the Lega dei Ticinese presented an initiative in the Grand Council for a health insurance premium that is the same throughout Switzerland, with the same age, deductible and insurance model.',
     'blog.article.iniziativa-lega-premio-uniforme.imageAlt': 'The Gran Consiglio building in Bellinzona with the Swiss flag, depicting the debate on a national health insurance premium.',
+    'blog.article.bilaterali-iii-sicurezza-alimentare.title': 'Swiss-EU food security agreement approved',
+    'blog.article.bilaterali-iii-sicurezza-alimentare.excerpt': 'The Council of States has approved the Swiss-EU food safety agreement; more than 50% of exports and more than 70% of imports go to the EU, while the vote on foie gras labels ended 22 to 21.',
+    'blog.article.bilaterali-iii-sicurezza-alimentare.imageAlt': 'Photo of Swiss food products with EU symbols representing the food safety agreement',
 };
 
 export default blogMetaChEn;

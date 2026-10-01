@@ -7343,6 +7343,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.iniziativa-lega-premio-uniforme.title': 'Prime nationale d’assurance santé : la proposition de la Ligue',
     'blog.article.iniziativa-lega-premio-uniforme.excerpt': 'Le 1er octobre à Bellinzone, la Lega dei Ticinese a présenté au Grand Conseil une initiative pour une prime d’assurance santé identique dans toute la Suisse, avec le même modèle d’âge, franchise et assurance.',
     'blog.article.iniziativa-lega-premio-uniforme.imageAlt': 'Le bâtiment du Grand Conseil à Bellinzone avec le drapeau suisse, illustrant le débat sur la prime nationale d\'assurance maladie.',
+    'blog.article.bilaterali-iii-sicurezza-alimentare.title': 'Accord suisse-européen sur la sécurité alimentaire approuvé',
+    'blog.article.bilaterali-iii-sicurezza-alimentare.excerpt': 'Le Conseil des États a approuvé l’accord suisse-UE sur la sécurité alimentaire ; plus de 50 % des exportations et plus de 70 % des importations sont destinées à l’UE, tandis que le vote sur les étiquettes du foie gras s’est terminé sur un score de 22 contre 21.',
+    'blog.article.bilaterali-iii-sicurezza-alimentare.imageAlt': 'Photo de produits alimentaires suisses avec des symboles de l\'UE représentant l\'accord sur la sécurité alimentare',
 };
 
 export default blogMetaChFr;

@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4051266": {
-    "articleId": "swiss-life-600-tagli-2028",
-    "ts": "2026-09-01T06:17:05.503Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1947226/tasso-riferimento-rimane-minimo-riduzione": {
     "articleId": "tasso-riferimento-ipotecario-1-25",
     "ts": "2026-09-01T06:41:37.879Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/ticino/attualita/1953978/premio-nazionale-svizzera-ticino-mazzoleni": {
     "articleId": "iniziativa-lega-premio-uniforme",
     "ts": "2026-10-01T12:00:47.773Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1953996/ue-consiglio-svizzera-accordo-senatori-sicurezza-nuovo-bilaterali-iii": {
+    "articleId": "bilaterali-iii-sicurezza-alimentare",
+    "ts": "2026-10-01T12:28:35.805Z",
     "keyForm": 2
   }
 }
