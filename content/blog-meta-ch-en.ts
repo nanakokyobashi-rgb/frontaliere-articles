@@ -7334,6 +7334,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.inflazione-svizzera-settembre-1-percento.title': 'Swiss inflation: rises to 1% after two years in September',
     'blog.article.inflazione-svizzera-settembre-1-percento.excerpt': 'Inflation in Switzerland rose to 1% in September, from 0.8% in August. This is the first time it has reached this threshold since August 2024, according to the FSO.',
     'blog.article.inflazione-svizzera-settembre-1-percento.imageAlt': 'Busy urban scene in a Swiss city, with people walking past shop windows displaying prices, reflecting the cost of living.',
+    'blog.article.iniziativa-fisco-matrimonio.title': 'Fair taxes: end the marriage tax penalty',
+    'blog.article.iniziativa-fisco-matrimonio.excerpt': 'In Bern, the cross-party committee supports the Centre\'s initiative: direct federal tax should not penalise married couples compared to unmarried couples.',
+    'blog.article.iniziativa-fisco-matrimonio.imageAlt': 'Married couple reviewing Swiss tax papers beside wedding rings.',
 };
 
 export default blogMetaChEn;

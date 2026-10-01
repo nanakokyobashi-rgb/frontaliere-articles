@@ -12325,6 +12325,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.caronno-ticino-fiscalita.title': 'Living in Caronno Varesino: working in Ticino as a cross-border commuter',
     'blog.article.caronno-ticino-fiscalita.excerpt': 'For those who live in Caronno Varesino and work in Ticino: The New Cross-Border Workers Agreement has been in effect since January 1, 2024, with different exemption thresholds.',
     'blog.article.caronno-ticino-fiscalita.imageAlt': 'Ticino landscape with a road used by cross-border workers',
+    'blog.article.snl-locarno-magadino-garanzie.title': 'SNL: 5 jobs at risk, FART guarantees requested',
+    'blog.article.snl-locarno-magadino-garanzie.excerpt': 'Assembly in Locarno on 29/09/2026: 5 SNL employees threatened by termination or seasonality. Unions call for orderly transition to the FART.',
+    'blog.article.snl-locarno-magadino-garanzie.imageAlt': 'SNL ferries docked at the Locarno port on Lake Maggiore.',
 };
 
 export default blogMetaEn;

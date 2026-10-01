@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/n8mk5ezmi1vw": {
-    "articleId": "sanzioni-onu-2026-aggiornamento",
-    "ts": "2026-09-01T05:18:16.561Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1947217/life-swiss-svizzera-lavoro-posti": {
     "articleId": "swiss-life-taglio-posti-lavoro-2028",
     "ts": "2026-09-01T05:35:30.216Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/svizzera%3a-inflazione-sale-all%271%25-a-settembre/92148543": {
     "articleId": "inflazione-svizzera-settembre-1-percento",
     "ts": "2026-10-01T08:09:43.605Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4126134": {
+    "articleId": "iniziativa-fisco-matrimonio",
+    "ts": "2026-10-01T08:35:48.656Z",
     "keyForm": 2
   }
 }

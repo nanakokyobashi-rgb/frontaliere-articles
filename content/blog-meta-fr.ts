@@ -12327,6 +12327,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.caronno-ticino-fiscalita.title': 'Vivre à Caronno Varesino : frontalier au Tessin',
     'blog.article.caronno-ticino-fiscalita.excerpt': 'Pour ceux qui vivent à Caronno Varesino et travaillent au Tessin : le Nouvel Accord Transfrontalier pour les Navetteurs est en vigueur à partir du 1er janvier 2024, avec des franchises différentes.',
     'blog.article.caronno-ticino-fiscalita.imageAlt': 'Paysage tessinois avec une route pour travailleurs frontaliers',
+    'blog.article.snl-locarno-magadino-garanzie.title': 'SNL : 5 emplois en danger, garanties FART demandées',
+    'blog.article.snl-locarno-magadino-garanzie.excerpt': 'Assemblée à Locarno le 29/09/2026 : 5 employés de SNL menacés de licenciement ou de saisonnalité. Les syndicats appellent à une transition ordonnée vers le FART.',
+    'blog.article.snl-locarno-magadino-garanzie.imageAlt': 'Bateaux SNL amarrés au port de Locarno sur le lac Majeur.',
 };
 
 export default blogMetaFr;

@@ -1,0 +1,66 @@
+name: Publish API queue unwedge
+
+# Libera il gruppo di concurrency `publish-api` quando una run di
+# `publish-api.yml` resta parcheggiata al gate dell'environment `github-pages`.
+#
+# Il job `publish` dichiara `environment: github-pages` (obbligatorio:
+# actions/deploy-pages lega il deployment Pages alla run tramite l'identita'
+# OIDC di quell'environment) e la concurrency `publish-api` NON cancella
+# (`cancel-in-progress: false`, vedi publish-api.yml). Un job fermo al gate non
+# e' "in esecuzione": `timeout-minutes` non si applica, e GitHub non lo sfratta
+# mai. Run 36762664618 e' entrata in `waiting` il 2026-09-30T19:00:51Z con
+# `wait_timer: 0` e `reviewers: []` — niente da approvare, niente che scada — e
+# ci e' rimasta: ogni push successivo e' finito `cancelled` senza partire, e la
+# superficie servita al sito e' rimasta alla build delle 18:59Z.
+#
+# Gemello del passo «Unwedge the pages-deploy queue» di
+# pages-publish-lag-watchdog.yml del sito, che risolve la stessa incastratura
+# (sua run 31118787881, 14 h al gate). Cancella SOLO run in stato `waiting` da
+# oltre 45 minuti: mai `in_progress`, quindi non puo' interrompere un deploy o
+# una spinta all'edge a meta'. La logica e il perche' della soglia sono in
+# scripts/ci/unwedge-pages-deploy-queue.mjs.
+#
+# Ogni 15 minuti e non ogni ora come sul sito: qui il sito non ribuilda quando
+# questo repo pubblica, quindi la coda ferma e' staleness servita in
+# produzione, e una run di questo job costa pochi secondi.
+
+on:
+  schedule:
+    - cron: '7,22,37,52 * * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: publish-api-unwedge
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  # POST /actions/runs/{id}/cancel. Senza, la cancel risponde 403 e lo script
+  # lo stampa come ::warning:: — il gate resterebbe incastrato a run verde.
+  actions: write
+
+jobs:
+  unwedge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+          sparse-checkout: |
+            scripts/ci/unwedge-pages-deploy-queue.mjs
+            scripts/lib/githubApiHeaders.mjs
+          sparse-checkout-cone-mode: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: Unwedge the publish-api queue (cancel runs stuck at the environment gate)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node scripts/ci/unwedge-pages-deploy-queue.mjs

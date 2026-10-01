@@ -12326,6 +12326,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.caronno-ticino-fiscalita.title': 'Vivere a Caronno Varesino: lavorare in Ticino da frontaliere',
     'blog.article.caronno-ticino-fiscalita.excerpt': 'Per chi vive a Caronno Varesino e lavora in Ticino: il Nuovo Accordo Frontalieri è in vigore dal 1° gennaio 2024, con franchigie diverse.',
     'blog.article.caronno-ticino-fiscalita.imageAlt': 'Paesaggio ticinese con una strada frequentata da lavoratori frontalieri',
+    'blog.article.snl-locarno-magadino-garanzie.title': 'SNL: 5 posti a rischio, chieste garanzie FART',
+    'blog.article.snl-locarno-magadino-garanzie.excerpt': 'Assemblea a Locarno il 29/09/2026: 5 dipendenti SNL minacciati da disdetta o stagionalità. Sindacati chiedono transizione ordinata alle FART.',
+    'blog.article.snl-locarno-magadino-garanzie.imageAlt': 'Traghetti SNL ormeggiati al porto di Locarno sul Lago Maggiore.',
 };
 
 export default blogMetaIt;
