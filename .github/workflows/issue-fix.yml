@@ -661,7 +661,21 @@ jobs:
             #
             # Verificato contro github.com: con un extraheader fasullo e un URL
             # valido, `git ls-remote` fallisce; rimuovendo l'extraheader riesce.
+            #
+            # Con actions/checkout v6+ (qui v7, da #1991) l'header NON sta piu'
+            # in .git/config ma in $RUNNER_TEMP/git-credentials-<uuid>.config,
+            # incluso via `includeIf.gitdir:…`: l'`--unset-all` da solo esce 5
+            # senza toccarlo e il push resta sul token del runner. Si staccano
+            # anche le include che puntano a quel file, come fa il post-step di
+            # checkout (stessa logica del gemello sul sito).
             git config --unset-all http."https://github.com/".extraheader 2>/dev/null || true
+            while IFS= read -r inc_key; do
+              while IFS= read -r inc_path; do
+                if [[ "$inc_path" =~ (^|/)git-credentials-[0-9A-Fa-f-]+\.config$ ]]; then
+                  git config --local --fixed-value --unset-all "$inc_key" "$inc_path"
+                fi
+              done < <(git config --local --get-all "$inc_key")
+            done < <({ git config --local --name-only --get-regexp '^includeif\.gitdir:' || true; } | sort -u)
             git remote set-url origin "https://x-access-token:${GITHUB_PAT_NANAKO}@github.com/${REPO}.git"
             # ATTENZIONE alla portata di questo step: vale per i push lanciati
             # da un `run:`. Per il lavoro dell'agente NON basta, e non perche'
@@ -885,6 +899,18 @@ jobs:
           # trappola documentata nello step «Configure git identity».
           if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
             git config --unset-all http."https://github.com/".extraheader 2>/dev/null || true
+            # Stessa rimozione dello step «Configure git identity»: con
+            # actions/checkout v6+ l'header vive nel file incluso via
+            # `includeIf.gitdir:…`, che l'`--unset-all` qui sopra non tocca.
+            # Inline e non uno script: l'albero contiene gia' le modifiche
+            # dell'agente. Idempotente se quello step l'ha gia' tolta.
+            while IFS= read -r inc_key; do
+              while IFS= read -r inc_path; do
+                if [[ "$inc_path" =~ (^|/)git-credentials-[0-9A-Fa-f-]+\.config$ ]]; then
+                  git config --local --fixed-value --unset-all "$inc_key" "$inc_path"
+                fi
+              done < <(git config --local --get-all "$inc_key")
+            done < <({ git config --local --name-only --get-regexp '^includeif\.gitdir:' || true; } | sort -u)
             git remote set-url origin "https://x-access-token:${GITHUB_PAT_NANAKO}@github.com/${REPO}.git"
           fi
 

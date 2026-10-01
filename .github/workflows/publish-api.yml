@@ -117,6 +117,15 @@ jobs:
     # e' il cron di scan-job-timeouts.mjs. Il tetto serve comunque: e' cio' che
     # fa finire il job.
     timeout-minutes: 20
+    # ⚠️ Il tetto qui sopra NON copre l'attesa al gate di questo `environment:`:
+    # un job parcheggiato al gate non e' in esecuzione, e GitHub non gli applica
+    # nessuna scadenza. Run 36762664618 e' rimasta in `waiting` dal
+    # 2026-09-30T19:00:51Z con `wait_timer: 0` e `reviewers: []`, tenendo il
+    # gruppo `publish-api` e facendo finire `cancelled` ogni push successivo.
+    # L'environment non si puo' togliere (actions/deploy-pages lega il
+    # deployment alla run tramite la sua identita' OIDC): la via d'uscita e'
+    # publish-api-unwedge.yml, che ogni 15 minuti cancella SOLO le run ferme in
+    # `waiting` da oltre 45 minuti (scripts/ci/unwedge-pages-deploy-queue.mjs).
     environment:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}

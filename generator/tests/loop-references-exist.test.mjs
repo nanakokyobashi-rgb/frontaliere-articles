@@ -253,6 +253,20 @@ const resolveToken = (token) => (token.includes('/') ? token : `${WORKFLOW_DIR}/
  *                    test «`retired` solo su file `identical`».
  */
 const DECLARED_ABSENT = {
+  '.github/workflows/publish-api-unwedge.yml :: pages-publish-lag-watchdog.yml': {
+    kind: 'site-only',
+    reason:
+      'Il commento nomina il passo del sito di cui questo workflow e\' il gemello (stesso reaper, ' +
+      'sua run 31118787881): e\' provenienza, non un referente. Qui il chiamante e\' ' +
+      'publish-api-unwedge.yml stesso, e niente nel corpus legge il watchdog del sito.',
+  },
+  'scripts/ci/unwedge-pages-deploy-queue.mjs :: deploy-publish.yml': {
+    kind: 'site-only',
+    reason:
+      'L\'intestazione dice quale publisher sblocca il gemello del sito; lo script del corpus ' +
+      'interroga solo `WORKFLOW_FILE = \'publish-api.yml\'`, e il legame con quel file e\' ' +
+      'asserito da generator/tests/unwedge-pages-deploy-queue.test.mjs.',
+  },
   '.github/workflows/housekeeping-jobs.yml :: .github/workflows/housekeeping-jobs-logic.yml': {
     kind: 'site-only',
     reason:
