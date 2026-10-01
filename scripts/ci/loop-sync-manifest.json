@@ -63,7 +63,7 @@
     "roots": [
       {
         "path": "scripts/ci",
-        "reason": "Il cuore del ciclo agentico. Gia' censito al 100% prima di questo blocco (35/35): il root lo DICHIARA, cosi' il prossimo script che ci atterra non puo' entrare senza un mode."
+        "reason": "Il cuore del ciclo agentico. Il root e' censito al 100% e lo DICHIARA, cosi' il prossimo script che ci atterra non puo' entrare senza un mode."
       },
       {
         "path": "scripts/lib",
@@ -4569,6 +4569,16 @@
         "site": "17e820b66a2fc615",
         "corpus": "17e820b66a2fc615",
         "alignedAt": "2026-09-23"
+      }
+    },
+    {
+      "path": "scripts/ci/requeue-quota-lease.mjs",
+      "mode": "corpus-only",
+      "reason": "Helper zero-dipendenze per la transizione atomica di requeue dopo un lease quota negato, usato esclusivamente dai workflow corpus `issue-decompose.yml` e `issue-fix.yml` per ritentare mutazioni GitHub transitorie senza consumare un tentativo dell'agente. Il sito non ha questi consumer e non deve importare questo codice, quindi non esiste un gemello da portare.",
+      "baseline": {
+        "site": null,
+        "corpus": "5f9a8909792ece61",
+        "alignedAt": "2026-10-01"
       }
     }
   ]

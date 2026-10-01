@@ -162,7 +162,7 @@ function main(argv = process.argv.slice(2)) {
   try {
     const options = parseArgs(argv);
     if (options.help) {
-      console.log('uso: requeue-quota-lease.mjs --issue N --repo owner/repo --add-label LABEL --remove-label LABEL [--remove-label LABEL]');
+      console.log('uso: requeue-quota-lease.mjs --issue N --repo owner/repo --add-label <label> --remove-label <label> [--remove-label <label>]');
       return 0;
     }
     requeueQuotaLease(options);
