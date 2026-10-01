@@ -140,10 +140,11 @@ jobs:
         run: |
           set -euo pipefail
           node -e "
-            const admin = (await import('firebase-admin')).default;
-            admin.initializeApp({ credential: admin.credential.applicationDefault(),
+            const { applicationDefault, initializeApp } = await import('firebase-admin/app');
+            const { getFirestore } = await import('firebase-admin/firestore');
+            initializeApp({ credential: applicationDefault(),
               projectId: process.env.GCLOUD_PROJECT || 'frontaliere-ticino' });
-            const snap = await admin.firestore().collection('journalist_articles')
+            const snap = await getFirestore().collection('journalist_articles')
               .where('status','==','queued').get();
             console.log('queued journalist articles:', snap.size);
           " --input-type=module
