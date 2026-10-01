@@ -7310,6 +7310,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.argovia-mappa-fiscale-2026.title': 'Swiss Cantonal Taxes 2026: A Comparison of Aargau',
     'blog.article.argovia-mappa-fiscale-2026.excerpt': 'In 2026, the comparison starts from three tax levels: federal, cantonal and municipal. In Aargau, the cantonal law and the municipal multiplier count.',
     'blog.article.argovia-mappa-fiscale-2026.imageAlt': 'Swiss urban panorama for the 2026 cantonal tax comparison',
+    'blog.article.budget-svizzero-affitto-zurigo.title': 'Swiss Cost of Living 2026: Canton of Zurich',
+    'blog.article.budget-svizzero-affitto-zurigo.excerpt': '2026 Guide to the Cost of Living in Switzerland: Rent, Groceries, Transportation, LAMal, and Taxes, with a Focus on the System in the Canton of Zurich.',
+    'blog.article.budget-svizzero-affitto-zurigo.imageAlt': 'Zurich urban panorama for a 2026 Swiss cost-of-living comparison',
 };
 
 export default blogMetaChEn;

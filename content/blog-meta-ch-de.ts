@@ -7310,6 +7310,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.argovia-mappa-fiscale-2026.title': 'Kantonalsteuer Schweiz 2026: Vergleich mit dem Kanton Aargau',
     'blog.article.argovia-mappa-fiscale-2026.excerpt': 'Im Jahr 2026 beginnt der Vergleich mit drei Steuerebenen: Bundes-, Kantons- und Gemeindeebene. In Aargau zählen das Kantonsgesetz und der Gemeindemultiplikator.',
     'blog.article.argovia-mappa-fiscale-2026.imageAlt': 'Schweizer Stadtpanorama für den kantonalen Steuervergleich 2026',
+    'blog.article.budget-svizzero-affitto-zurigo.title': 'Lebenshaltungskosten in der Schweiz 2026: Kanton Zürich',
+    'blog.article.budget-svizzero-affitto-zurigo.excerpt': 'Leitfaden 2026 zu den Lebenshaltungskosten in der Schweiz: Mieten, Lebenshaltungskosten, Verkehr, KVG und Steuern, mit Schwerpunkt auf den Regelungen im Kanton Zürich.',
+    'blog.article.budget-svizzero-affitto-zurigo.imageAlt': 'Stadtpanorama von Zürich im Vergleich der Lebenshaltungskosten 2026',
 };
 
 export default blogMetaChDe;

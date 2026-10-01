@@ -2459,6 +2459,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'neutralita-voto-rigetto': { it: 'neutralita-voto-rigetto', en: 'swiss-neutrality-vote-rejected', de: 'schweizer-neutralitaet-initiative-abgelehnt', fr: 'initiative-neutralite-suisse-rejetee' },
  'fisco-lucerna-tre-livelli-2026': { it: 'fisco-lucerna-tre-livelli-2026', en: 'lucerne-tax-three-levels-2026', de: 'steuern-luzern-drei-ebenen-2026', fr: 'impots-lucerne-trois-niveaux-2026' },
  'argovia-mappa-fiscale-2026': { it: 'argovia-mappa-fiscale-2026', en: 'aargau-tax-comparison-2026', de: 'steuervergleich-aargau-2026', fr: 'comparatif-fiscal-argovie-2026' },
+ 'budget-svizzero-affitto-zurigo': { it: 'budget-svizzero-affitto-zurigo', en: 'swiss-living-cost-zurich', de: 'lebenskosten-schweiz-zuerich', fr: 'cout-vie-suisse-zurich' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

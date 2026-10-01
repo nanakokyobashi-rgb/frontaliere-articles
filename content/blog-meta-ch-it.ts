@@ -7310,6 +7310,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.argovia-mappa-fiscale-2026.title': 'Imposta cantonale Svizzera 2026: confronto Argovia',
     'blog.article.argovia-mappa-fiscale-2026.excerpt': 'Nel 2026 il confronto parte da tre livelli fiscali: federale, cantonale e comunale. In Argovia contano legge cantonale e moltiplicatore comunale.',
     'blog.article.argovia-mappa-fiscale-2026.imageAlt': 'Panorama urbano svizzero per il confronto dell\'imposta cantonale 2026',
+    'blog.article.budget-svizzero-affitto-zurigo.title': 'Costo della vita svizzera 2026: canton Zurigo',
+    'blog.article.budget-svizzero-affitto-zurigo.excerpt': 'Guida 2026 al costo della vita in Svizzera: affitti, spesa, trasporti, LAMal e imposte, con focus sui meccanismi del canton Zurigo.',
+    'blog.article.budget-svizzero-affitto-zurigo.imageAlt': 'Panorama urbano del canton Zurigo nel confronto sul costo della vita 2026',
 };
 
 export default blogMetaChIt;
