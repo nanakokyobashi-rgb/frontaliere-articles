@@ -7373,6 +7373,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.cyber-security-month-oversharing-2026.title': 'Oversharing e AI al lavoro: guida Cyber Security Month 2026',
     'blog.article.cyber-security-month-oversharing-2026.excerpt': 'Il 1 ottobre 2026, da Berna, l’UFCS avvia il Cyber Security Month sul tema «Oversharing – condividere con consapevolezza», insieme a Netpathie e IFPDT.',
     'blog.article.cyber-security-month-oversharing-2026.imageAlt': 'Persona che lavora su laptop con icone dei social media visibili attorno, ufficio svizzero moderno',
+    'blog.article.operazione-internazionale-contro-killsec.title': 'KillSec smantellato: 110 TB di dati sequestrati',
+    'blog.article.operazione-internazionale-contro-killsec.excerpt': 'Operazione internazionale del 30 settembre 2026 ha smantellato la rete di KillSec, arrestato tre persone, eseguito otto perquisizioni in Spagna, Grecia, Regno Unito e Romania e sequestrato cinque server.',
+    'blog.article.operazione-internazionale-contro-killsec.imageAlt': 'Centrale dati svizzera moderna con bandiera svizzera, simbolo di sicurezza informatica',
 };
 
 export default blogMetaChIt;

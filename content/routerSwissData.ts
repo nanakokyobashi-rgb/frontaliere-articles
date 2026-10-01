@@ -2480,6 +2480,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'svizzera-ue-sanita-consiglio-stati': { it: 'svizzera-ue-sanita-consiglio-stati', en: 'swiss-ue-health-council-states', de: 'schweiz-ue-gesundheit-staenderat', fr: 'suisse-ue-sante-conseil-etats' },
  'wolfurt-sdoganamento-reno-2026': { it: 'wolfurt-sdoganamento-reno-2026', en: 'wolfurt-customs-rhine-2026', de: 'wolfurt-zoll-rheintal-2026', fr: 'wolfurt-douane-rhin-2026' },
  'cyber-security-month-oversharing-2026': { it: 'cyber-security-month-oversharing-2026', en: 'oversharing-and-ai-at-work-cyber-security-month-2026-guide', de: 'oversharing-und-ki-bei-der-arbeit-leitfaden-zum-cyber-security-month-2026', fr: 'surpartage-et-ia-a-l-uvre-guide-du-mois-de-la-cybersecurite-2026' },
+ 'operazione-internazionale-contro-killsec': { it: 'operazione-internazionale-contro-killsec', en: 'killsec-dismantled-110-tb-of-data-seized', de: 'killsec-deaktiviert-110-tb-daten-beschlagnahmt', fr: 'killsec-demantele-110-to-de-donnees-saisies' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

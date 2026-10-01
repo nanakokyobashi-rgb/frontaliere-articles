@@ -7373,6 +7373,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.cyber-security-month-oversharing-2026.title': 'Surpartage et IA à l’œuvre : guide du Mois de la cybersécurité 2026',
     'blog.article.cyber-security-month-oversharing-2026.excerpt': 'Le 1er octobre 2026, depuis Berne, l’OFCS lance le Cyber Security Month sur le thème « Oversharing – partager en toute connaissance de cause », en collaboration avec Netpathie et PFPDT.',
     'blog.article.cyber-security-month-oversharing-2026.imageAlt': 'Personne travaillant sur un ordinateur portable avec des icônes de réseaux sociaux visibles autour, bureau suisse moderne',
+    'blog.article.operazione-internazionale-contro-killsec.title': 'KillSec démantelé : 110 To de données saisies',
+    'blog.article.operazione-internazionale-contro-killsec.excerpt': 'Une opération internationale le 30 septembre 2026 a démantelé le réseau de KillSec, arrêté trois personnes, mené huit perquisitions en Espagne, en Grèce, au Royaume-Uni et en Roumanie, et saisi cinq serveurs.',
+    'blog.article.operazione-internazionale-contro-killsec.imageAlt': 'Centre de données suisse moderne avec drapeau suisse, symbole de cybersécurité',
 };
 
 export default blogMetaChFr;

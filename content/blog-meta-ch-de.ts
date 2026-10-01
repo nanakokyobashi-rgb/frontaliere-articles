@@ -7373,6 +7373,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.cyber-security-month-oversharing-2026.title': 'Oversharing und KI bei der Arbeit: Leitfaden zum Cyber Security Month 2026',
     'blog.article.cyber-security-month-oversharing-2026.excerpt': 'Am 1 ottobre 2026 startet die UFCS von Bern aus den Cyber Security Month zum Thema «Oversharing – bewusst teilen», gemeinsam mit Netpathie und IFPDT.',
     'blog.article.cyber-security-month-oversharing-2026.imageAlt': 'Person, die auf einem Laptop arbeitet, mit sichtbaren Social-Media-Symbolen herum, modernes Schweizer Büro',
+    'blog.article.operazione-internazionale-contro-killsec.title': 'KillSec deaktiviert: 110 TB Daten beschlagnahmt',
+    'blog.article.operazione-internazionale-contro-killsec.excerpt': 'Eine internationale Operation am 30. September 2026 zerlegte das Netzwerk von KillSec, verhaftete drei Personen, führte acht Durchsuchungen in Spanien, Griechenland, Großbritannien und Rumänien durch und beschlagnahmte fünf Server.',
+    'blog.article.operazione-internazionale-contro-killsec.imageAlt': 'Moderne Schweizer Datenzentrum mit Schweizer Flagge, Symbol für Cybersicherheit',
 };
 
 export default blogMetaChDe;

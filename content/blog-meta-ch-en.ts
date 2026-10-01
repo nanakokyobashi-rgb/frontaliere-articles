@@ -7373,6 +7373,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.cyber-security-month-oversharing-2026.title': 'Oversharing and AI at work: Cyber Security Month 2026 guide',
     'blog.article.cyber-security-month-oversharing-2026.excerpt': 'On 1 October 2026, the FOCS will launch Cyber Security Month in Bern on the topic of "Oversharing – sharing with awareness", together with Netpathie and the FDPIC.',
     'blog.article.cyber-security-month-oversharing-2026.imageAlt': 'Person working on a laptop with social media icons visible around, modern Swiss office',
+    'blog.article.operazione-internazionale-contro-killsec.title': 'KillSec dismantled: 110 TB of data seized',
+    'blog.article.operazione-internazionale-contro-killsec.excerpt': 'An international operation on September 30, 2026 dismantled KillSec\'s network, arrested three people, carried out eight searches in Spain, Greece, the United Kingdom, and Romania, and seized five servers.',
+    'blog.article.operazione-internazionale-contro-killsec.imageAlt': 'Modern Swiss data centre with Swiss flag, symbol of cybersecurity',
 };
 
 export default blogMetaChEn;
