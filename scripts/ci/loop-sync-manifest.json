@@ -418,9 +418,9 @@
       "path": "scripts/ci/lib/pr-review-admission.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "ba066c9ffa1f69cf",
-        "corpus": "ba066c9ffa1f69cf",
-        "alignedAt": "2026-09-26"
+        "site": "f749975d894057ef",
+        "corpus": "f749975d894057ef",
+        "alignedAt": "2026-10-01"
       },
       "reason": "Dipendenza non dichiarata di scripts/ci/orphan-pr-custodian.mjs, importata dal sito in #9525 (22/09) come './lib/pr-review-admission.mjs' ma assente qui: il corpus-ahead-check del sito la segnala 'import-not-declared'. Portato VERBATIM (import risolti su ./constants.mjs e ./review-input-revision.mjs, gia' presenti nel corpus) per non lasciare rotto un futuro trasporto di orphan-pr-custodian.mjs (both-moved), che qui NON viene ancora riconciliato. Registrata lontano dalla voce di orphan-pr-custodian.mjs per non creare conflitto quando quel trasporto verra' fatto."
     },
@@ -517,9 +517,9 @@
       "path": "scripts/ci/pr-collision-detector.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "835e4ba295e74c5a",
-        "corpus": "835e4ba295e74c5a",
-        "alignedAt": "2026-09-01"
+        "site": "da8dfa4ce9bdf67f",
+        "corpus": "da8dfa4ce9bdf67f",
+        "alignedAt": "2026-10-01"
       }
     },
     {
@@ -1645,9 +1645,9 @@
       "mode": "identical",
       "reason": "Primitiva di troncamento su clausola (lista di stopword dei 4 locali + peel della coda). E' arrivata qui con la meta' `host/` del SiteShellContract e non e' coperta da nessuno dei due mirror: mirror-articles-engine.yml ha una allowlist che rifiuta ogni path fuori da engine/. Registrata perche' da ora ci dipende anche generator/scripts/create-article.mjs, che la importa invece di ricopiare la lista (AGENTS.md #6): un `site-ahead` qui significa una stopword aggiunta la' che questo generatore non applica, cioe' il ritorno esatto della divergenza che la fix ha chiuso. RICONCILIATO il 2026-08-14 (#234, classe `both-moved`): era un both-moved APPARENTE. Il blob qui era byte-identico a `valerielinc-ops@8bfe4e3b:build-plugins/shared/clauseTail.mjs`, cioe' la \"modifica del corpus\" ERA la modifica del sito, arrivata col trasporto di #116 senza che la baseline venisse aggiornata; il sito e' poi andato avanti da solo con 79a6b924. Le due modifiche non sono indipendenti — una contiene l'altra — quindi la riconciliazione e' un fast-forward: adottata la versione del sito. Porta un CAMBIO DI COMPORTAMENTO, non solo un export nuovo: `truncateToClause` ora RIFIUTA (torna la stringa vuota) quando il primo token da solo sfora il budget, invece di tagliare duro a `maxLen`. Per questo `generator/scripts/create-article.mjs` e' passato a `truncateToClauseNonEmpty` sui due call site di titolo e breadcrumb, dove il fallback e' lo slug (nessuno spazio) e il rifiuto sarebbe stato la norma, non il caso limite.",
       "baseline": {
-        "site": "eb990c4da4d95a93",
-        "corpus": "eb990c4da4d95a93",
-        "alignedAt": "2026-08-14"
+        "site": "b90d13451bef2ee2",
+        "corpus": "b90d13451bef2ee2",
+        "alignedAt": "2026-10-01"
       }
     },
     {
@@ -1656,9 +1656,9 @@
       "mode": "identical",
       "reason": "Riesporta tipizzata clauseTail.mjs e ospita repairSerpSnippet, che l'engine chiama a render time (SiteShellContract) per riparare le description gia' scritte. Stessa ragione di clauseTail.mjs — fuori dall'allowlist del mirror dell'engine — piu' una specifica: generator/tests/seo-clause-truncation.test.mjs lega il letterale della guardia «gia' completo» di repairSerpSnippet, perche' quel .ts non e' importabile da node:test. E' un contratto senza forma di import, la classe che loop-references-exist.test.mjs esiste per coprire. RICONCILIATO il 2026-08-14 insieme a clauseTail.mjs, stessa dinamica (both-moved apparente risolto in fast-forward): qui il delta e' la sola riesportazione tipizzata di `truncateToClauseNonEmpty`.",
       "baseline": {
-        "site": "a887d8aaf2ddf4bf",
-        "corpus": "a887d8aaf2ddf4bf",
-        "alignedAt": "2026-08-15"
+        "site": "2c0d386aea7eccd3",
+        "corpus": "2c0d386aea7eccd3",
+        "alignedAt": "2026-10-01"
       }
     },
     {
@@ -1833,9 +1833,9 @@
       "mode": "identical",
       "reason": "Push con retry usato dai job che scrivono sugli shard. RIALLINEATO il 2026-08-24 (stranded-twin, 5.2gg): il sito aveva aggiunto il flag opt-in `--soft-fail-exhausted` (warn+exit 0 invece di exit 1 su MAX_ATTEMPTS esaurito, per un caller la cui data e' una recomputation a finestra scorrevole che si riprende da sola al giro dopo — vedi issue del sito #5568). Nessun caller di questo repo lo passa ancora, quindi la copia e' comportamentalmente no-op qui finche' non viene adottato. Il file cita esplicitamente issue del SITO (#2988, #4190, #4557, #3809, #4183, #5568): e' un gemello, non un omonimo. Le registrazioni dei merge driver (`known-slugs-shard`, `orphan-enriched-shard`, `ai-cache`, `compat-shard`) puntano a `scripts/ci/merge-*.mjs` che qui non esistono — innocuo: ogni `git config` finisce in `|| true` e nessun `.gitattributes` locale marca quei path, quindi il driver non viene mai invocato. Se un giorno un `.gitattributes` di questo repo marcasse uno di quei path, il driver mancante diventerebbe un guasto: e' l'unica condizione da tenere d'occhio.",
       "baseline": {
-        "site": "270c92e622170c4c",
-        "corpus": "270c92e622170c4c",
-        "alignedAt": "2026-09-21"
+        "site": "1b87e374164b004c",
+        "corpus": "1b87e374164b004c",
+        "alignedAt": "2026-10-01"
       }
     },
     {
@@ -4342,7 +4342,13 @@
         "site": "9f4d4b7709025b9d",
         "corpus": "9f4d4b7709025b9d",
         "alignedAt": "2026-10-01"
-      }
+      },
+      "couplingSnapshot": [
+        {
+          "path": "generator/tests/followup-marker-multi-bucket.test.mjs",
+          "mode": "non registrato"
+        }
+      ]
     },
     {
       "path": "scripts/lib/plate-auction-editorial.mjs",
