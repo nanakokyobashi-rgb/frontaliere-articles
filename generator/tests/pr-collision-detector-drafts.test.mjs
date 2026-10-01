@@ -27,6 +27,7 @@ import assert from 'node:assert/strict';
 import {
   selectCollisionCandidates,
   computeColliders,
+  isAutonomousCollisionPr,
 } from '../../scripts/ci/pr-collision-detector.mjs';
 
 const WF = '.github/workflows/tests.yml';
@@ -109,4 +110,22 @@ test('lo script non esegue lo scan quando viene importato', () => {
   // asserzione lo dichiara invece di lasciarlo implicito.
   assert.equal(typeof selectCollisionCandidates, 'function');
   assert.equal(typeof computeColliders, 'function');
+});
+
+test('isAutonomousCollisionPr: la label della duplicata non rende autonomo il keeper umano', () => {
+  assert.equal(isAutonomousCollisionPr({
+    headRefName: 'seo/manual-canonical-review',
+    author: { login: 'valerielinc-ops', type: 'User' },
+    labels: [],
+  }), false);
+  assert.equal(isAutonomousCollisionPr({
+    headRefName: 'fix/issue-10544',
+    labels: [{ name: 'needs-human' }],
+  }), false);
+});
+
+test('isAutonomousCollisionPr: riconosce branch, bot e label del ciclo', () => {
+  assert.equal(isAutonomousCollisionPr({ headRefName: 'fix/issue-10544', labels: [] }), true);
+  assert.equal(isAutonomousCollisionPr({ headRefName: 'manual-review', labels: [{ name: 'agent:autofix' }] }), true);
+  assert.equal(isAutonomousCollisionPr({ headRefName: 'manual-review', author: { isBot: true }, labels: [] }), true);
 });
