@@ -7352,6 +7352,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.iniziativa-fiscale-centro-29-novembre.title': 'Iniziativa Centro: voto 29 novembre per equità fiscale',
     'blog.article.iniziativa-fiscale-centro-29-novembre.excerpt': 'Il 29 novembre si vota sull\'iniziativa Centro che vuole eliminare gli svantaggi fiscali del matrimonio, mantenendo la dichiarazione congiunta per l\'imposta federale diretta; il Parlamento avrebbe tre anni per attuarla, mentre l\'imposizione individuale è prevista dal 2032.',
     'blog.article.iniziativa-fiscale-centro-29-novembre.imageAlt': 'Illustrazione del voto sull\'iniziativa fiscale del Centro del 29 novembre con coppie e documenti fiscali davanti al Palazzo federale',
+    'blog.article.novita-legali-ottobre-2026-svizzera.title': '1 ottobre 2026: novità su riciclaggio, EES e zone 30',
+    'blog.article.novita-legali-ottobre-2026-svizzera.excerpt': 'TJPG, EES e limiti di velocità cambiano il 1 ottobre 2026.',
+    'blog.article.novita-legali-ottobre-2026-svizzera.imageAlt': 'Vista di una strada cittadina svizzera con insegna di limite di velocità 50 km/h e architettura moderna',
 };
 
 export default blogMetaChIt;

@@ -7352,6 +7352,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.iniziativa-fiscale-centro-29-novembre.title': 'Initiative Centro : votez le 29 novembre pour l’équité fiscale',
     'blog.article.iniziativa-fiscale-centro-29-novembre.excerpt': 'Le 29 novembre, un vote aura lieu sur l’initiative Centro qui vise à éliminer les inconvénients fiscaux du mariage, en maintenant la déclaration conjointe de la fiscalité fédérale directe ; le Parlement disposerait de trois ans pour la mettre en œuvre, tandis que la fiscalité des particuliers est attendue à partir de 2032.',
     'blog.article.iniziativa-fiscale-centro-29-novembre.imageAlt': 'Illustration du vote sur l\'initiative fiscale du Centre du 29 novembre avec des couples et des documents fiscaux devant le Palais fédéral',
+    'blog.article.novita-legali-ottobre-2026-svizzera.title': '1er octobre 2026 : Actualités sur le recyclage, l’EES et les zones 30',
+    'blog.article.novita-legali-ottobre-2026-svizzera.excerpt': 'TJPG, ES et les limites de vitesse changent le 1er octobre 2026.',
+    'blog.article.novita-legali-ottobre-2026-svizzera.imageAlt': 'Vue d\'une rue suisse avec panneau de limitation de vitesse à 50 km/h et architecture moderne',
 };
 
 export default blogMetaChFr;

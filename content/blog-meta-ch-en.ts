@@ -7352,6 +7352,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.iniziativa-fiscale-centro-29-novembre.title': 'Centro Initiative: vote 29 November for tax fairness',
     'blog.article.iniziativa-fiscale-centro-29-novembre.excerpt': 'On November 29, a vote will be held on the Centro initiative which wants to eliminate the tax disadvantages of marriage, maintaining the joint declaration for direct federal taxation; Parliament would have three years to implement it, while individual taxation is expected from 2032.',
     'blog.article.iniziativa-fiscale-centro-29-novembre.imageAlt': 'Illustration of the vote on the Centre\'s fiscal initiative of 29 November with couples and tax documents in front of the Federal Palace',
+    'blog.article.novita-legali-ottobre-2026-svizzera.title': '1 October 2026: News on recycling, EES and 30 zones',
+    'blog.article.novita-legali-ottobre-2026-svizzera.excerpt': 'TJPG, EES, and speed limits change on October 1, 2026.',
+    'blog.article.novita-legali-ottobre-2026-svizzera.imageAlt': 'View of a Swiss city street with a 50 km/h speed limit sign and modern architecture',
 };
 
 export default blogMetaChEn;
