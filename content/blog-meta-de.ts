@@ -12338,6 +12338,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.estradizione-arresto-como.title': 'Ausgeliefert aus der Schweiz, in Ponte Chiasso verhaftet',
     'blog.article.estradizione-arresto-como.excerpt': 'Ponte Chiasso: Am 18. September wurde ein 28-jähriger Nigerianer aus der Schweiz übergeben und festgenommen. Er muss vier Jahre, neun Monate und 18 Tage im Gefängnis verbüßen.',
     'blog.article.estradizione-arresto-como.imageAlt': 'Ponte Chiasso: Festnahme nach der Übergabe eines nigerianischen Staatsbürgers aus der Schweiz',
+    'blog.article.m5s-vco-frontalieri-incertezze.title': 'M5S: Unsicherheiten für Grenzgänger nach drei Jahren',
+    'blog.article.m5s-vco-frontalieri-incertezze.excerpt': 'Am 17. September wurde das Dekret zum Fonds unterzeichnet: 1,66 mln für 2025 und 21,16 mln für 2026; Rundschreiben zur NASpI erwartet; ab 2024 strengere LPP-Anträge; interministerielle Arbeitsrunde am 9. Nov.',
+    'blog.article.m5s-vco-frontalieri-incertezze.imageAlt': 'Realistische Ansicht des Luganer Sees mit Grenzgängern zwischen Italien und der Schweiz',
 };
 
 export default blogMetaDe;

@@ -12341,6 +12341,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.estradizione-arresto-como.title': 'Extradé de Suisse, arrêté à Ponte Chiasso',
     'blog.article.estradizione-arresto-como.excerpt': 'Ponte Chiasso : Le 18 septembre, un Nigérian de 28 ans a été livré de Suisse et arrêté. Il doit purger quatre ans, neuf mois et 18 jours de prison.',
     'blog.article.estradizione-arresto-como.imageAlt': 'Ponte Chiasso : arrestation après la remise d\'un ressortissant nigérian par les autorités suisses',
+    'blog.article.m5s-vco-frontalieri-incertezze.title': 'M5S: retards et incertitudes pour les frontaliers',
+    'blog.article.m5s-vco-frontalieri-incertezze.excerpt': 'Le 17 septembre, le décret sur le Fonds a été signé : 1,66 million pour 2025 et 21,16 millions pour 2026 ; la circulaire NASpI est attendue ; à partir de 2024, les demandes LPP sont plus restrictives ; table interministérielle du 9 novembre.',
+    'blog.article.m5s-vco-frontalieri-incertezze.imageAlt': 'Vue réelle du lac de Lugano avec les frontaliers traversant la frontière entre l\'Italie et la Suisse',
 };
 
 export default blogMetaFr;

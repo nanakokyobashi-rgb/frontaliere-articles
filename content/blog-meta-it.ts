@@ -12340,6 +12340,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.estradizione-arresto-como.title': 'Estradato dalla Svizzera, arrestato a Ponte Chiasso',
     'blog.article.estradizione-arresto-como.excerpt': 'Ponte Chiasso: il 18 settembre un 28enne nigeriano è stato consegnato dalla Svizzera e arrestato. Deve scontare quattro anni, nove mesi e 18 giorni di reclusione.',
     'blog.article.estradizione-arresto-como.imageAlt': 'Ponte Chiasso, arresto dopo la consegna del cittadino nigeriano dalle autorità svizzere',
+    'blog.article.m5s-vco-frontalieri-incertezze.title': 'M5S: ritardi e incertezze per frontalieri dopo tre anni',
+    'blog.article.m5s-vco-frontalieri-incertezze.excerpt': 'Il 17 settembre è stato firmato il decreto sul Fondo: 1,66 mln per il 2025 e 21,16 mln per il 2026; attesa la circolare NASpI; dal 2024 più restrittive le richieste LPP; tavolo interministeriale il 9 nov.',
+    'blog.article.m5s-vco-frontalieri-incertezze.imageAlt': 'Vista reale del lago di Lugano con frontalieri che attraversano il confine tra Italia e Svizzera',
 };
 
 export default blogMetaIt;
