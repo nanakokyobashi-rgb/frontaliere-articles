@@ -7313,6 +7313,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.budget-svizzero-affitto-zurigo.title': 'Lebenshaltungskosten in der Schweiz 2026: Kanton Zürich',
     'blog.article.budget-svizzero-affitto-zurigo.excerpt': 'Leitfaden 2026 zu den Lebenshaltungskosten in der Schweiz: Mieten, Lebenshaltungskosten, Verkehr, KVG und Steuern, mit Schwerpunkt auf den Regelungen im Kanton Zürich.',
     'blog.article.budget-svizzero-affitto-zurigo.imageAlt': 'Stadtpanorama von Zürich im Vergleich der Lebenshaltungskosten 2026',
+    'blog.article.preventivo-2027-conti-pubblici.title': 'Haushalt 2027: Defizit und öffentliche Konten im Tessin',
+    'blog.article.preventivo-2027-conti-pubblici.excerpt': 'Der Kantonshaushalt für 2027 prognostiziert ein Defizit von 98,5 Millionen. Zwischen Bürokratie, Personal und Steuern sind hier die Reaktionen und die Debatte in Bellinzona.',
+    'blog.article.preventivo-2027-conti-pubblici.imageAlt': 'Ansicht von Bellinzona und den kantonalen Regierungsgebäuden im Tessin',
 };
 
 export default blogMetaChDe;

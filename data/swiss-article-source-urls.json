@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/holsnqc6wk9s_okvufdf5": {
-    "articleId": "divario-salariale-genere-agosto-2026",
-    "ts": "2026-08-31T21:48:54.890Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/citt%c3%a0%3a-pi%c3%b9-margine-manovra-per-adattamento-climatico-sulle-strade/91979739": {
     "articleId": "citta-clima-30-kmh-strade",
     "ts": "2026-08-31T22:02:28.264Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/ahgamdnkdnpt": {
     "articleId": "riduzione-deflusso-lago-zurigo-2026",
     "ts": "2026-10-01T00:26:43.270Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/politica/1953797/preventivo-2027-i-lettori-a-parole-tutti-d-accordo-poi-nessuno-taglia": {
+    "articleId": "preventivo-2027-conti-pubblici",
+    "ts": "2026-10-01T04:47:59.351Z",
     "keyForm": 2
   }
 }

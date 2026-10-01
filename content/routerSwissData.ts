@@ -2460,6 +2460,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'fisco-lucerna-tre-livelli-2026': { it: 'fisco-lucerna-tre-livelli-2026', en: 'lucerne-tax-three-levels-2026', de: 'steuern-luzern-drei-ebenen-2026', fr: 'impots-lucerne-trois-niveaux-2026' },
  'argovia-mappa-fiscale-2026': { it: 'argovia-mappa-fiscale-2026', en: 'aargau-tax-comparison-2026', de: 'steuervergleich-aargau-2026', fr: 'comparatif-fiscal-argovie-2026' },
  'budget-svizzero-affitto-zurigo': { it: 'budget-svizzero-affitto-zurigo', en: 'swiss-living-cost-zurich', de: 'lebenskosten-schweiz-zuerich', fr: 'cout-vie-suisse-zurich' },
+ 'preventivo-2027-conti-pubblici': { it: 'preventivo-2027-conti-pubblici', en: 'preventivo-2027-public-accounts', de: 'preventivo-2027-oeffentliche-finanzen', fr: 'preventivo-2027-comptes-publics' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

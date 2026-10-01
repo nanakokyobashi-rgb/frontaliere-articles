@@ -7313,6 +7313,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.budget-svizzero-affitto-zurigo.title': 'Costo della vita svizzera 2026: canton Zurigo',
     'blog.article.budget-svizzero-affitto-zurigo.excerpt': 'Guida 2026 al costo della vita in Svizzera: affitti, spesa, trasporti, LAMal e imposte, con focus sui meccanismi del canton Zurigo.',
     'blog.article.budget-svizzero-affitto-zurigo.imageAlt': 'Panorama urbano del canton Zurigo nel confronto sul costo della vita 2026',
+    'blog.article.preventivo-2027-conti-pubblici.title': 'Preventivo 2027: disavanzo e conti pubblici in Ticino',
+    'blog.article.preventivo-2027-conti-pubblici.excerpt': 'Il Preventivo 2027 del Cantone prevede un disavanzo di 98,5 milioni. Tra burocrazia, personale e fisco, ecco le reazioni e il dibattito a Bellinzona.',
+    'blog.article.preventivo-2027-conti-pubblici.imageAlt': 'Vista di Bellinzona e dei palazzi istituzionali del Cantone Ticino',
 };
 
 export default blogMetaChIt;

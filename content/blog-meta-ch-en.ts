@@ -7313,6 +7313,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.budget-svizzero-affitto-zurigo.title': 'Swiss Cost of Living 2026: Canton of Zurich',
     'blog.article.budget-svizzero-affitto-zurigo.excerpt': '2026 Guide to the Cost of Living in Switzerland: Rent, Groceries, Transportation, LAMal, and Taxes, with a Focus on the System in the Canton of Zurich.',
     'blog.article.budget-svizzero-affitto-zurigo.imageAlt': 'Zurich urban panorama for a 2026 Swiss cost-of-living comparison',
+    'blog.article.preventivo-2027-conti-pubblici.title': '2027 budget: deficit and public accounts in Ticino',
+    'blog.article.preventivo-2027-conti-pubblici.excerpt': 'The Canton\'s 2027 Budget forecasts a deficit of 98.5 million. Between bureaucracy, personnel and taxation, here are the reactions and the debate in Bellinzona.',
+    'blog.article.preventivo-2027-conti-pubblici.imageAlt': 'View of Bellinzona and cantonal government buildings in Ticino',
 };
 
 export default blogMetaChEn;

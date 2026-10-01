@@ -94829,6 +94829,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-preventivo-2027-conti-pubblici': {
+    title: 'Preventivo 2027: disavanzo e conti pubblici in Ticino',
+    description: 'Scopri i dettagli del Preventivo 2027 del Cantone Ticino con un disavanzo di 98,5 milioni. Analisi del dibattito pubblico su spesa, personale e fisco.',
+    keywords: 'frontalieri, ticino, svizzera, italia, preventivo, disavanzo, conti, pubblici',
+    ogTitle: 'Preventivo 2027 Ticino: disavanzo di 98,5 milioni',
+    ogDescription: 'Il Preventivo 2027 del Cantone Ticino apre il dibattito sui conti pubblici con un disavanzo di 98,5 milioni. Analisi delle proposte di taglio, personale e fiscalità.',
+    canonicalPath: '/articoli-svizzera/preventivo-2027-conti-pubblici/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Preventivo 2027: disavanzo e conti pubblici in Ticino",
+      "description": "Scopri i dettagli del Preventivo 2027 del Cantone Ticino con un disavanzo di 98,5 milioni. Analisi del dibattito pubblico su spesa, personale e fisco.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/preventivo-2027-conti-pubblici.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista di Bellinzona e dei palazzi istituzionali del Cantone Ticino"
+      },
+      "datePublished": "2026-10-01T04:47:59+00:00",
+      "dateModified": "2026-10-01T04:47:59+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/preventivo-2027-conti-pubblici/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

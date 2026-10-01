@@ -7313,6 +7313,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.budget-svizzero-affitto-zurigo.title': 'Coût de la vie en Suisse 2026 : Canton de Zurich',
     'blog.article.budget-svizzero-affitto-zurigo.excerpt': 'Guide 2026 du coût de la vie en Suisse : loyers, épiceries, transports, KVG et impôts, avec un accent sur les mécanismes du canton de Zurich.',
     'blog.article.budget-svizzero-affitto-zurigo.imageAlt': 'Panorama urbain de Zurich pour comparer le coût de la vie en 2026',
+    'blog.article.preventivo-2027-conti-pubblici.title': 'Budget 2027 : déficit et comptes publics au Tessin',
+    'blog.article.preventivo-2027-conti-pubblici.excerpt': 'Le budget 2027 du canton prévoit un déficit de 98,5 millions. Entre bureaucratie, personnel et fiscalité, voici les réactions et le débat à Bellinzona.',
+    'blog.article.preventivo-2027-conti-pubblici.imageAlt': 'Vue de Bellinzone et des bâtiments du gouvernement cantonal du Tessin',
 };
 
 export default blogMetaChFr;
