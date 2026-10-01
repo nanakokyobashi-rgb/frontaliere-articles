@@ -7289,6 +7289,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.basilea-citta-mobilita-tariffe.title': 'Öffentliche Nahverkehrspässe in Basel: Zonen und Tarife',
     'blog.article.basilea-citta-mobilita-tariffe.excerpt': 'Abonnements für den öffentlichen Nahverkehr im Kanton Basel-Stadt: Übersicht über Zonen, Jahres- und Monatsabonnements, Halbtax, GA sowie Ermäßigungen für Studierende und Auszubildende.',
     'blog.article.basilea-citta-mobilita-tariffe.imageAlt': 'Abonnemente des öffentlichen Verkehrs im Kanton Basel-Stadt',
+    'blog.article.domanda-cittadinanza-grigioni.title': 'Einbürgerung im Kanton Graubünden: Voraussetzungen und Verfahren',
+    'blog.article.domanda-cittadinanza-grigioni.excerpt': 'Im Kanton Graubünden sind für die ordentliche Einbürgerung eine C-Bewilligung und eine 10-jährige Aufenthaltsdauer erforderlich: Die Jahre zwischen dem 8. und 18. Lebensjahr zählen doppelt, wobei kantonale und kommunale Voraussetzungen gelten.',
+    'blog.article.domanda-cittadinanza-grigioni.imageAlt': 'Schweizer Alpenlandschaft zur Einbürgerung in Graubünden',
 };
 
 export default blogMetaChDe;

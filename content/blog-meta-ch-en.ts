@@ -7289,6 +7289,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.basilea-citta-mobilita-tariffe.title': 'Public Transportation Passes in Basel: Zones and Fares',
     'blog.article.basilea-citta-mobilita-tariffe.excerpt': 'Public Transportation Passes in the Canton of Basel-Stadt: A Guide to Zones, Annual and Monthly Passes, Half-Price Passes, AG Passes, and Discounts for Students and Apprentices.',
     'blog.article.basilea-citta-mobilita-tariffe.imageAlt': 'Public transport subscriptions in the canton of Basel-City',
+    'blog.article.domanda-cittadinanza-grigioni.title': 'Naturalisation of the canton of Graubünden: requirements and procedure',
+    'blog.article.domanda-cittadinanza-grigioni.excerpt': 'In the Canton of Graubünden, ordinary naturalization requires a C permit and 10 years of residence: years spent between the ages of 8 and 18 count double, and there are additional cantonal and municipal requirements.',
+    'blog.article.domanda-cittadinanza-grigioni.imageAlt': 'Swiss alpine landscape illustrating naturalization in Graubünden',
 };
 
 export default blogMetaChEn;

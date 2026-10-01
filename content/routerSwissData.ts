@@ -2452,6 +2452,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'primo-pilastro-basel-stadt': { it: 'primo-pilastro-basel-stadt', en: 'basel-city-avs-supplementary-benefits', de: 'basel-stadt-ahv-ergaenzungsleistungen', fr: 'bale-ville-avs-prestations-complementaires' },
  'abbonamenti-basilea-zone-tariffe': { it: 'abbonamenti-basilea-zone-tariffe', en: 'basel-public-transport-passes', de: 'basel-oev-abos-zonen-tarife', fr: 'abonnements-transports-bale-zones' },
  'basilea-citta-mobilita-tariffe': { it: 'basilea-citta-mobilita-tariffe', en: 'basel-city-transport-subscriptions', de: 'basel-stadt-abo-zonen-tarife', fr: 'bale-ville-abonnements-transports' },
+ 'domanda-cittadinanza-grigioni': { it: 'domanda-cittadinanza-grigioni', en: 'graubunden-naturalization-requirements', de: 'einbuergerung-graubuenden', fr: 'naturalisation-grisons-guide' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

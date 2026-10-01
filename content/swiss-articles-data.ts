@@ -21895,6 +21895,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'domanda-cittadinanza-grigioni',
+    category: 'pratico',
+    date: '2026-10-01T02:34:04.324Z',
+    image: '/images/blog/domanda-cittadinanza-grigioni.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

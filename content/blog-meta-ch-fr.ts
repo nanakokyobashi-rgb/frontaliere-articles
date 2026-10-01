@@ -7289,6 +7289,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.basilea-citta-mobilita-tariffe.title': 'Passes de transport en commun à Bâle : zones et tarifs',
     'blog.article.basilea-citta-mobilita-tariffe.excerpt': 'Cartes de voyage de transport en commun dans le canton de Bâle-Stadt : guide de zone, forfaits annuels et mensuels, carte de voyage demi-tarif, carte de voyage GA et réductions pour les étudiants et apprentis.',
     'blog.article.basilea-citta-mobilita-tariffe.imageAlt': 'Abonnements de transports publics dans le canton de Bâle-Ville',
+    'blog.article.domanda-cittadinanza-grigioni.title': 'Naturalisation du canton des Grisons : exigences et procédure',
+    'blog.article.domanda-cittadinanza-grigioni.excerpt': 'Dans le canton des Grisons, la naturalisation ordinaire requiert un permis C et 10 ans de résidence : les années entre 8 et 18 comptent double, avec des exigences cantonales et communales.',
+    'blog.article.domanda-cittadinanza-grigioni.imageAlt': 'Paysage alpin suisse sur la naturalisation dans les Grisons',
 };
 
 export default blogMetaChFr;

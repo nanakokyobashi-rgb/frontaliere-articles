@@ -7289,6 +7289,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.basilea-citta-mobilita-tariffe.title': 'Abbonamenti trasporti pubblici a Basilea: zone e tariffe',
     'blog.article.basilea-citta-mobilita-tariffe.excerpt': 'Abbonamenti trasporti pubblici nel Cantone di Basilea Città: guida a zone, formule annuali e mensili, metà-prezzo, AG e sconti per studenti e apprendisti.',
     'blog.article.basilea-citta-mobilita-tariffe.imageAlt': 'Trasporto pubblico e abbonamenti nel Cantone di Basilea Città',
+    'blog.article.domanda-cittadinanza-grigioni.title': 'Naturalizzazione canton Grigioni: requisiti e procedura',
+    'blog.article.domanda-cittadinanza-grigioni.excerpt': 'Nel Cantone dei Grigioni la naturalizzazione ordinaria richiede permesso C e 10 anni di residenza: gli anni tra 8 e 18 contano doppio, con requisiti cantonali e comunali.',
+    'blog.article.domanda-cittadinanza-grigioni.imageAlt': 'Paesaggio alpino svizzero per la naturalizzazione nei Grigioni',
 };
 
 export default blogMetaChIt;
