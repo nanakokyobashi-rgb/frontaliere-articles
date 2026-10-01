@@ -2896,12 +2896,12 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/677",
       "reason": "Costanti del sito che l'engine legge via SiteShellContract. E' un ESTRATTO PER CHIUSURA di build-plugins/constants.ts (circa 1.200 righe la': solo le 20 dichiarazioni che il contratto raggiunge, 247 righe qui al 2026-09-26), quindi non potra' mai essere byte-identico e adapted e' il mode giusto. Per questa sola entry scalarFingerprint confronta i 22 scalari authoritative: cambiamenti del sorgente fuori dalla chiusura restano stable, ma un digest diverso, mancante, malformato o non dichiarato non puo' mai essere stable. I comportamenti del contratto restano coperti dai fingerprint test esistenti; host/host-drift.test.mjs non esiste e non e' una guardia. Il lato sito della PR #10686 e' ora su main; questa baseline registra l'osservazione verificata dei due lati dopo l'allineamento dell'identita' NewsMediaOrganization e del gate offerwall, mentre il codice runtime conserva il match sulla chiave Firebase esatta. Il digest 7102c4f9… riflette lo snippet Funding Choices statico che trattiene l'Offerwall fino al click su «Candidati» su ogni sezione job board (tutti i cantoni, l'aggregatore Svizzera, prefisso opzionale /it|/en|/de|/fr) e fuori dal job board sopprime solo l'Offerwall; segue i cambi di rotta client-side pushState/replaceState/popstate. Quando una visita SPA entra nel job board dopo essere stata fuori sezione, lo stato Offerwall precedente viene invalidato e il gate attende il callback corrente successivo senza riprodurre il callback della pagina precedente (FC_JOBBOARD_OFFERWALL_GATE_JS, la chiave ADS_CONSENT_STORAGE_KEY e le copie locali JOB_BOARD_SECTION_PREFIX_SOURCE/JOB_BOARD_SECTION_PATHNAME_RX di scripts/lib/jobBoardSections.mjs del sito entrano nella chiusura; sito PR #10686); non dipende da segreti o variabili di ambiente del runner.",
       "baseline": {
-        "site": "bbe9ae880f4f7d8",
-        "corpus": "bbe9ae880f4f7d8",
-        "alignedAt": "2026-10-01"
+        "site": "5bedfc2a3453a9f5",
+        "corpus": "db9e22109da26397",
+        "alignedAt": "2026-09-12",
+        "forcedAt": "2026-09-12T04:17:23.514Z"
       },
       "scalarFingerprint": {
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
