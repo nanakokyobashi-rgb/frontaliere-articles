@@ -3123,8 +3123,8 @@
       "mode": "identical",
       "reason": "Impronta SHA-256 dei 22 campi scalari di SiteShellContract, prodotta e verificata da `host/tests/shell-contract-fingerprint.test.mjs`. Il gemello del sito vive in `tests/articles-shell-contract-fingerprint.json` con lo stesso contenuto; i due artefatti restano `identical` e la baseline ne sorveglia il drift. E' il gate runtime che impedisce di spedire l'engine senza la sua meta' `host/`.",
       "baseline": {
-        "site": "bbe9ae880f4f7d8",
-        "corpus": "bbe9ae880f4f7d8",
+        "site": "bbe9ae880f4f7d8b",
+        "corpus": "bbe9ae880f4f7d8b",
         "alignedAt": "2026-10-01"
       }
     },
