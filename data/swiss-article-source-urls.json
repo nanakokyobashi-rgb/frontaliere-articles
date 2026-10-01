@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1947342/capitale-ubs-miliardi-proposta-cet1": {
-    "articleId": "ubs-ermotti-capital-requirements",
-    "ts": "2026-09-01T14:38:54.299Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/ozmbl-ca5ee4": {
     "articleId": "tasso-ipotecario-riferimento-1-25-2026",
     "ts": "2026-09-01T14:51:28.869Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/rubriche/ospite/1954121/benzina-puo-potere-inflazione-acquisto-paga-costi-quando-ogni-prezzi": {
     "articleId": "pieno-cittadino-imposta-benzina",
     "ts": "2026-10-01T19:14:40.991Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1954127/draghi-crescita-europa-ue-svizzera-riforme-guardi": {
+    "articleId": "draghi-ue-riforme-crescita",
+    "ts": "2026-10-01T19:33:26.741Z",
     "keyForm": 2
   }
 }
