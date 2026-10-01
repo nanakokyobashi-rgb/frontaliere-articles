@@ -28,6 +28,7 @@ import {
   selectCollisionCandidates,
   computeColliders,
   isAutonomousCollisionPr,
+  duplicateClosureConfirmed,
 } from '../../scripts/ci/pr-collision-detector.mjs';
 
 const WF = '.github/workflows/tests.yml';
@@ -128,4 +129,12 @@ test('isAutonomousCollisionPr: riconosce branch, bot e label del ciclo', () => {
   assert.equal(isAutonomousCollisionPr({ headRefName: 'fix/issue-10544', labels: [] }), true);
   assert.equal(isAutonomousCollisionPr({ headRefName: 'manual-review', labels: [{ name: 'agent:autofix' }] }), true);
   assert.equal(isAutonomousCollisionPr({ headRefName: 'manual-review', author: { isBot: true }, labels: [] }), true);
+});
+
+test('duplicateClosureConfirmed: richiede CLOSED fuori dal dry-run', () => {
+  assert.equal(duplicateClosureConfirmed({ state: 'CLOSED' }), true);
+  assert.equal(duplicateClosureConfirmed({ state: 'closed' }), true);
+  assert.equal(duplicateClosureConfirmed({ state: 'OPEN' }), false);
+  assert.equal(duplicateClosureConfirmed({ state: '' }), false);
+  assert.equal(duplicateClosureConfirmed({ dryRun: true, state: 'OPEN' }), true);
 });

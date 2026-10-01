@@ -517,8 +517,8 @@
       "path": "scripts/ci/pr-collision-detector.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "faab249e3574beb2",
-        "corpus": "faab249e3574beb2",
+        "site": "e689d869c0c040fb",
+        "corpus": "e689d869c0c040fb",
         "alignedAt": "2026-10-01"
       }
     },
