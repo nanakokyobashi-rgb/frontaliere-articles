@@ -2444,6 +2444,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'coop-millesimo-supermercato': { it: 'coop-millesimo-supermercato', en: 'coop-reaches-1000-supermarkets', de: 'coop-erreicht-1000-supermarkte', fr: 'coop-atteint-1000-supermarches' },
  'guida-assenze-famiglia-svizzera': { it: 'guida-assenze-famiglia-svizzera', en: 'swiss-parental-leave-guide', de: 'elternzeit-schweiz-leitfaden', fr: 'conge-parental-suisse-guide' },
  'ticino-futuro-abitare-lugano': { it: 'ticino-futuro-abitare-lugano', en: 'ticino-future-living-lugano', de: 'tessin-zukunft-wohnen-lugano', fr: 'tessin-futur-logement-lugano' },
+ 'extramuro-soccorso-ticino': { it: 'extramuro-soccorso-ticino', en: 'extramuro-civil-protection-ticino', de: 'extramuro-zivilschutz-tessin', fr: 'extramuro-protection-civile-tessin' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

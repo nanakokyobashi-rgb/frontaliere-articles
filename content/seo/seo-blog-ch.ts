@@ -94205,6 +94205,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-extramuro-soccorso-ticino': {
+    title: 'Protezione civile: 9 giorni tra Ticino e Como | Frontaliere Ticino',
+    description: 'Extramuro 2026: dal 1° al 9 ottobre esercitazioni di protezione civile tra Pollegio, in Ticino, ed Erba, Merone e Pusiano. Finale al CPE di Erba il 9 ottobre.',
+    keywords: 'frontalieri, ticino, svizzera, italia, protezione, civile, giorni, como',
+    ogTitle: 'Protezione civile: 9 giorni tra Ticino e Como',
+    ogDescription: 'Extramuro 2026 porta la formazione congiunta della protezione civile tra Svizzera e Italia: la fase ticinese si svolge a Pollegio, quella italiana coinvolge Erba, Merone e Pusiano. La cerimonia finale è al CPE di Erba.',
+    canonicalPath: '/articoli-svizzera/extramuro-soccorso-ticino/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Protezione civile: 9 giorni tra Ticino e Como",
+      "description": "Extramuro 2026: dal 1° al 9 ottobre esercitazioni di protezione civile tra Pollegio, in Ticino, ed Erba, Merone e Pusiano. Finale al CPE di Erba il 9 ottobre.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/extramuro-soccorso-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Operatori italiani e svizzeri in un'esercitazione di protezione civile transfrontaliera"
+      },
+      "datePublished": "2026-10-01T00:09:01+00:00",
+      "dateModified": "2026-10-01T00:09:01+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/extramuro-soccorso-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

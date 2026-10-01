@@ -21823,6 +21823,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'extramuro-soccorso-ticino',
+    category: 'novita',
+    date: '2026-10-01T00:09:01.619Z',
+    image: '/images/blog/extramuro-soccorso-ticino.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

@@ -7265,6 +7265,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.ticino-futuro-abitare-lugano.title': 'Ticino, le sfide dell\'abitare discusse al LAC di Lugano',
     'blog.article.ticino-futuro-abitare-lugano.excerpt': 'Presentato HOMEspace, lo speciale di INFOpmi al LAC: architettura, finanza e istituzioni a confronto sul futuro del territorio ticinese nei prossimi 20 anni.',
     'blog.article.ticino-futuro-abitare-lugano.imageAlt': 'Il centro culturale LAC Lugano Arte e Cultura a Lugano',
+    'blog.article.extramuro-soccorso-ticino.title': 'Protezione civile: 9 giorni tra Ticino e Como',
+    'blog.article.extramuro-soccorso-ticino.excerpt': 'Extramuro 2026 si svolge dal 1° al 9 ottobre: due giorni a Pollegio e cinque in provincia di Como con operatori italiani e svizzeri.',
+    'blog.article.extramuro-soccorso-ticino.imageAlt': 'Operatori italiani e svizzeri in un\'esercitazione di protezione civile transfrontaliera',
 };
 
 export default blogMetaChIt;

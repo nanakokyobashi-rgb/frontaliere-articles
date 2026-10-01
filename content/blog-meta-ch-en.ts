@@ -7265,6 +7265,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.ticino-futuro-abitare-lugano.title': 'Ticino, housing challenges discussed at Lugano’s LAC',
     'blog.article.ticino-futuro-abitare-lugano.excerpt': 'HOMEspace, INFOpmi’s special event at the LAC, was presented: architecture, finance, and institutions came together to discuss the future of the Ticino region over the next 20 years.',
     'blog.article.ticino-futuro-abitare-lugano.imageAlt': 'The LAC Lugano Arte e Cultura center in Lugano',
+    'blog.article.extramuro-soccorso-ticino.title': 'Civil Protection: 9 days between Ticino and Como',
+    'blog.article.extramuro-soccorso-ticino.excerpt': 'Extramuro 2026 takes place from October 1 to 9: two days in Pollegio and five in the province of Como, featuring Italian and Swiss operators.',
+    'blog.article.extramuro-soccorso-ticino.imageAlt': 'Italian and Swiss operators during a cross-border civil protection exercise',
 };
 
 export default blogMetaChEn;

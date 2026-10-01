@@ -7265,6 +7265,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.ticino-futuro-abitare-lugano.title': 'Tessin: Im LAC in Lugano wurden die Herausforderungen des Wohnens diskutiert',
     'blog.article.ticino-futuro-abitare-lugano.excerpt': 'HOMEspace, die Sonderveranstaltung von INFOpmi im LAC, wurde vorgestellt: Architektur, Finanzwesen und Institutionen diskutieren über die Zukunft des Tessins in den nächsten 20 Jahren.',
     'blog.article.ticino-futuro-abitare-lugano.imageAlt': 'Das Kulturzentrum LAC Lugano Arte e Cultura in Lugano',
+    'blog.article.extramuro-soccorso-ticino.title': 'Katastrophenschutz: 9 Tage zwischen dem Tessin und Como',
+    'blog.article.extramuro-soccorso-ticino.excerpt': 'Extramuro 2026 findet vom 1. bis zum 9. Oktober statt: zwei Tage in Pollegio und fünf Tage in der Provinz Como mit italienischen und schweizerischen Akteuren.',
+    'blog.article.extramuro-soccorso-ticino.imageAlt': 'Italienische und Schweizer Einsatzkräfte bei einer grenzüberschreitenden Zivilschutzübung',
 };
 
 export default blogMetaChDe;
