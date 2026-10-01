@@ -780,10 +780,6 @@
     "imposta di successione e donazione canton Friburgo aliquote": 2
   },
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/ticino/politica/1953599/centro-cure-costi-aumento-ticino": {
-      "section": "frontaliere",
-      "ts": 1790707035578
-    },
     "svizzera::https://www.tio.ch/svizzera/attualita/1953612/sahrawi-film-sahara-thunberg-festival-zurich-greta-riflettori": {
       "section": "svizzera",
       "ts": 1790720481266
@@ -847,6 +843,10 @@
     "svizzera::https://www.tio.ch/dal-mondo/economia/1954095/blume-germania-proposta-lavoro-costi": {
       "section": "svizzera",
       "ts": 1790879374850
+    },
+    "svizzera::https://www.tio.ch/rubriche/aziende-ticinesi-informano/1954062/occhiali-aot-associazione-iniziativa-ticino-canton-buono-dona-ricevi-sostieni": {
+      "section": "svizzera",
+      "ts": 1790881539151
     }
   }
 }
