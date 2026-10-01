@@ -2476,6 +2476,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'novita-legali-ottobre-2026-svizzera': { it: 'novita-legali-ottobre-2026-svizzera', en: 'swiss-legal-changes-october-2026', de: 'schweizer-rechtsaenderungen-oktober-2026', fr: 'nouvelles-legales-suisse-octobre-2026' },
  'imposte-coppie-sposate': { it: 'imposte-coppie-sposate', en: 'swiss-married-couples-taxes', de: 'schweiz-steuern-verheiratete-paare', fr: 'impots-suisses-couples-maries' },
  'ipc-settembre-rincaro-annuo': { it: 'ipc-settembre-rincaro-annuo', en: 'consumer-prices-september', de: 'konsumentenpreise-september', fr: 'prix-consommation-septembre' },
+ 'icann-gtld-candidature-2026': { it: 'icann-gtld-candidature-2026', en: 'icann-gtld-applications-2026', de: 'icann-gtld-antrage-2026', fr: 'icann-gtld-candidatures-2026' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

@@ -7361,6 +7361,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.ipc-settembre-rincaro-annuo.title': 'Stabile Verbraucherpreise im September: +1 % im Jahresvergleich',
     'blog.article.ipc-settembre-rincaro-annuo.excerpt': 'Am 1. Oktober 2026 meldete das BFS einen unveränderten LIK von 101,5 Punkten im September: eine Jahresteuerung von +1,0%, bei steigenden Treibstoffpreisen.',
     'blog.article.ipc-settembre-rincaro-annuo.imageAlt': 'Schweizer Konsumentenpreise und Alltag',
+    'blog.article.icann-gtld-candidature-2026.title': 'Neue Internet-Domains: ICANN veröffentlicht Liste am 7. Oktober',
+    'blog.article.icann-gtld-candidature-2026.excerpt': 'Etwa 1600 Anträge für die neuen gTLD. ICANN wird die Domains am 17 novembre 2026 bestätigen. UFCOM weist auf Risiken für Marken hin.',
+    'blog.article.icann-gtld-candidature-2026.imageAlt': 'Schweizer Experte prüft ICANN-Anträge für neue Internet-Domainnamen',
 };
 
 export default blogMetaChDe;

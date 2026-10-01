@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/associazione-inquilini%2c-%22occorre-chiedere-riduzione-dell%27affitto%22/91985994": {
-    "articleId": "riduzione-affitto-tassi-ipotecari",
-    "ts": "2026-09-01T11:09:31.864Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/commercio-al-dettaglio%2c-aumentano-le-vendite-in-luglio/91985445": {
     "articleId": "commercio-dettaglio-vendite-luglio-2025",
     "ts": "2026-09-01T11:48:32.552Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/wnfni1dvzkuq": {
     "articleId": "ipc-settembre-rincaro-annuo",
     "ts": "2026-10-01T14:15:43.048Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/acnmicqxffdq": {
+    "articleId": "icann-gtld-candidature-2026",
+    "ts": "2026-10-01T14:32:47.922Z",
     "keyForm": 2
   }
 }

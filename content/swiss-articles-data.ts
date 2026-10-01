@@ -22111,6 +22111,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'icann-gtld-candidature-2026',
+    category: 'novita',
+    date: '2026-10-01T14:32:47.568Z',
+    image: '/images/blog/icann-gtld-candidature-2026.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

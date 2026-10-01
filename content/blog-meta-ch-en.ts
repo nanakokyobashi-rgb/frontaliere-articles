@@ -7361,6 +7361,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.ipc-settembre-rincaro-annuo.title': 'Stable consumer prices in September: +1% year-on-year',
     'blog.article.ipc-settembre-rincaro-annuo.excerpt': 'On 1 October 2026, the FSO reported an unchanged CPI at 101.5 points in September: annual inflation of +1.0%, with fuel prices rising.',
     'blog.article.ipc-settembre-rincaro-annuo.imageAlt': 'Swiss consumer prices and everyday cost of living',
+    'blog.article.icann-gtld-candidature-2026.title': 'New Internet domains: ICANN publishes list 7 October',
+    'blog.article.icann-gtld-candidature-2026.excerpt': 'Around 1600 applications for the new gTLDs. ICANN will confirm the domains on 17 November 2026. OFCOM warns of risks to trade marks.',
+    'blog.article.icann-gtld-candidature-2026.imageAlt': 'Swiss expert reviewing ICANN applications for new Internet domain names',
 };
 
 export default blogMetaChEn;

@@ -7361,6 +7361,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.ipc-settembre-rincaro-annuo.title': 'Prezzi al consumo stabili a settembre: +1% annuo',
     'blog.article.ipc-settembre-rincaro-annuo.excerpt': 'Il 1 ottobre 2026 l\'UST ha comunicato un IPC invariato a 101,5 punti a settembre: rincaro annuo del +1,0%, con carburanti in aumento.',
     'blog.article.ipc-settembre-rincaro-annuo.imageAlt': 'Indice dei prezzi al consumo e vita quotidiana in Svizzera',
+    'blog.article.icann-gtld-candidature-2026.title': 'Nuovi domini Internet: ICANN pubblica lista 7 ottobre',
+    'blog.article.icann-gtld-candidature-2026.excerpt': 'Circa 1600 candidature per i nuovi gTLD. L\'ICANN confermerà i domini il 17 novembre 2026. UFCOM segnala rischi per i marchi.',
+    'blog.article.icann-gtld-candidature-2026.imageAlt': 'Esperto svizzero che verifica le candidature ICANN per i nuovi domini Internet',
 };
 
 export default blogMetaChIt;
