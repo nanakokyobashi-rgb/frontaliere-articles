@@ -95180,6 +95180,240 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-iniziativa-lega-premio-uniforme': {
+    title: 'Premio nazionale di cassa malati: la proposta della Lega',
+    description: 'Il 1° ottobre a Bellinzona la Lega dei Ticinesi presenta in Gran Consiglio un\'iniziativa per un premio di cassa malati uguale in tutta la Svizzera, a parità',
+    keywords: 'frontalieri, ticino, svizzera, italia, premio, nazionale, cassa, malati',
+    ogTitle: 'Premio nazionale di cassa malati: proposta Lega Ticino',
+    ogDescription: 'La Lega dei Ticinesi ha lanciato il 1° ottobre a Bellinzona un\'iniziativa cantonale che chiede un premio di cassa malati identico in tutto il territorio svizzero, mantenendo invariati età, franchigia e modello assicurativo. Il premio sarebbe',
+    canonicalPath: '/articoli-svizzera/iniziativa-lega-premio-uniforme/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Premio nazionale di cassa malati: la proposta della Lega",
+      "description": "Il 1° ottobre a Bellinzona la Lega dei Ticinesi presenta in Gran Consiglio un'iniziativa per un premio di cassa malati uguale in tutta la Svizzera, a parità",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/iniziativa-lega-premio-uniforme.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Il Gran Consiglio di Bellinzona con la bandiera svizzera, scena del dibattito sul premio nazionale di cassa malati."
+      },
+      "datePublished": "2026-10-01T12:00:47+00:00",
+      "dateModified": "2026-10-01T12:00:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/iniziativa-lega-premio-uniforme/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-bilaterali-iii-sicurezza-alimentare': {
+    title: 'Accordo sicurezza alimentare Svizzera-UE approvato',
+    description: 'Il Consiglio degli Stati approva l\'accordo sulla sicurezza alimentare Svizzera-UE: oltre il 50% delle esportazioni e oltre il 70% delle importazioni riguardano',
+    keywords: 'frontalieri, ticino, svizzera, italia, accordo, sicurezza, alimentare, svizzera-ue',
+    ogTitle: 'Accordo sicurezza alimentare Svizzera-UE approvato',
+    ogDescription: 'Il Consiglio degli Stati ha dato il via libera al nuovo accordo sulla sicurezza alimentare tra Svizzera e Unione europea, che punta a creare uno spazio comune per tutelare la salute di persone, animali e piante. Oltre metà delle esportazioni svizzere',
+    canonicalPath: '/articoli-svizzera/bilaterali-iii-sicurezza-alimentare/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Accordo sicurezza alimentare Svizzera-UE approvato",
+      "description": "Il Consiglio degli Stati approva l'accordo sulla sicurezza alimentare Svizzera-UE: oltre il 50% delle esportazioni e oltre il 70% delle importazioni riguardano",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bilaterali-iii-sicurezza-alimentare.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Foto di prodotti alimentari svizzeri con simboli UE che rappresentano l'accordo sulla sicurezza alimentare"
+      },
+      "datePublished": "2026-10-01T12:28:35+00:00",
+      "dateModified": "2026-10-01T12:28:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/bilaterali-iii-sicurezza-alimentare/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-fisioterapia-tariffe-petizioni-ottobre': {
+    title: 'Fisioterapia: 112\'000 firme per tariffe più alte',
+    description: 'Physioswiss ha raccolto 112\'000 firme in Svizzera per chiedere un aumento delle tariffe di fisioterapia almeno del 30%; 26 petizioni cantonali saranno',
+    keywords: 'frontalieri, ticino, svizzera, italia, fisioterapia, firme, tariffe, alte',
+    ogTitle: 'Fisioterapia: 112\'000 firme per tariffe più alte',
+    ogDescription: 'In Svizzera, Physioswiss ha raccolto 112\'000 firme per sollecitare un aumento delle tariffe di fisioterapia almeno del 30%. Le 26 petizioni cantonali saranno presentate nel mese di ottobre, con consegne già avvenute a Neuchâtel e Zugo',
+    canonicalPath: '/articoli-svizzera/fisioterapia-tariffe-petizioni-ottobre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Fisioterapia: 112'000 firme per tariffe più alte",
+      "description": "Physioswiss ha raccolto 112'000 firme in Svizzera per chiedere un aumento delle tariffe di fisioterapia almeno del 30%; 26 petizioni cantonali saranno",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/fisioterapia-tariffe-petizioni-ottobre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Fisioterapista che tratta un paziente in una clinica svizzera moderna"
+      },
+      "datePublished": "2026-10-01T12:48:21+00:00",
+      "dateModified": "2026-10-01T12:48:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/fisioterapia-tariffe-petizioni-ottobre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-iniziativa-fiscale-centro-29-novembre': {
+    title: 'Iniziativa Centro: voto 29 novembre per equità fiscale',
+    description: 'Il 29 novembre gli svizzeri votano sull\'iniziativa Centro per eliminare gli svantaggi fiscali del matrimonio, mantenendo la dichiarazione congiunta',
+    keywords: 'frontalieri, ticino, svizzera, italia, iniziativa, centro, voto, novembre',
+    ogTitle: 'Iniziativa Centro: voto 29 novembre per equità fiscale',
+    ogDescription: 'L\'iniziativa popolare del Centro, sottoposta a votazione il 29 novembre, propone di eliminare gli svantaggi fiscali legati al matrimonio mantenendo la dichiarazione congiunta dei redditi per l\'imposta federale diretta. Se approvata, il Parlamento',
+    canonicalPath: '/articoli-svizzera/iniziativa-fiscale-centro-29-novembre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Iniziativa Centro: voto 29 novembre per equità fiscale",
+      "description": "Il 29 novembre gli svizzeri votano sull'iniziativa Centro per eliminare gli svantaggi fiscali del matrimonio, mantenendo la dichiarazione congiunta",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/iniziativa-fiscale-centro-29-novembre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Illustrazione del voto sull'iniziativa fiscale del Centro del 29 novembre con coppie e documenti fiscali davanti al Palazzo federale"
+      },
+      "datePublished": "2026-10-01T13:17:19+00:00",
+      "dateModified": "2026-10-01T13:17:19+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/iniziativa-fiscale-centro-29-novembre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-novita-legali-ottobre-2026-svizzera': {
+    title: '1 ottobre 2026: novità su riciclaggio, EES e zone 30',
+    description: 'Dal 1 ottobre 2026 cambiano le regole su riciclaggio (TJPG), controlli aeroportuali (EES) e limiti di velocità nelle località svizzere. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, ottobre, novità, riciclaggio, zone',
+    ogTitle: '1 ottobre 2026: novità legali in Svizzera',
+    ogDescription: 'Scopri le cinque modifiche che entrano in vigore il 1 ottobre 2026 in Svizzera: trasparenza aziendale, controlli EES, titoli di studio, accordi EFTA-Kosovo e limiti di velocità nelle zone urbane.',
+    canonicalPath: '/articoli-svizzera/novita-legali-ottobre-2026-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "1 ottobre 2026: novità su riciclaggio, EES e zone 30",
+      "description": "Dal 1 ottobre 2026 cambiano le regole su riciclaggio (TJPG), controlli aeroportuali (EES) e limiti di velocità nelle località svizzere. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/novita-legali-ottobre-2026-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista di una strada cittadina svizzera con insegna di limite di velocità 50 km/h e architettura moderna"
+      },
+      "datePublished": "2026-10-01T13:33:13+00:00",
+      "dateModified": "2026-10-01T13:33:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/novita-legali-ottobre-2026-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-imposte-coppie-sposate': {
+    title: 'Coppie sposate, il voto sull\'imposta federale diretta',
+    description: 'A Berna il comitato trasversale presenta l\'iniziativa contro lo svantaggio delle coppie sposate nell\'imposta federale diretta: la votazione è il 29 novembre.',
+    keywords: 'frontalieri, ticino, svizzera, italia, coppie, sposate, voto, sull',
+    ogTitle: 'Imposte federali, la proposta per le coppie sposate',
+    ogDescription: 'Da Berna, il comitato trasversale presenta l\'iniziativa per eliminare lo svantaggio fiscale delle coppie sposate. La dichiarazione resterebbe congiunta; dopo tre anni senza attuazione, il Consiglio federale introdurrebbe una soluzione transitoria.',
+    canonicalPath: '/articoli-svizzera/imposte-coppie-sposate/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Coppie sposate, il voto sull'imposta federale diretta",
+      "description": "A Berna il comitato trasversale presenta l'iniziativa contro lo svantaggio delle coppie sposate nell'imposta federale diretta: la votazione è il 29 novembre.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/imposte-coppie-sposate.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Coppia sposata esamina documenti fiscali svizzeri davanti a un edificio istituzionale"
+      },
+      "datePublished": "2026-10-01T13:46:25+00:00",
+      "dateModified": "2026-10-01T13:46:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/imposte-coppie-sposate/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

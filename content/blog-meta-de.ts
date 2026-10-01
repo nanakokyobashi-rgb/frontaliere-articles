@@ -12327,6 +12327,17 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.snl-locarno-magadino-garanzie.title': 'SNL: 5 Arbeitsplätze gefährdet, FART-Garantien angefordert',
     'blog.article.snl-locarno-magadino-garanzie.excerpt': 'Versammlung in Locarno am 29.09.2026: 5 SNL-Mitarbeiter bedroht durch Kündigung oder Saisonalität. Gewerkschaften fordern einen geordneten Übergang zum FART.',
     'blog.article.snl-locarno-magadino-garanzie.imageAlt': 'SNL-Fähren im Hafen von Locarno am Lago Maggiore.',
+    'blog.article.bollettino-frontaliere-2026-10-01.title': 'Grenzgänger-Tagesbulletin – 1. Oktober 2026: 36 Minuten Wartezeit in Stühlingen – Schleitheim',
+    'blog.article.bollettino-frontaliere-2026-10-01.excerpt': 'Die Zahlen von heute, 1. Oktober 2026, für Grenzgänger: die heute Morgen gemessenen Wartezeiten an den Übergängen, die Gemeinden mit dem günstigsten Benzin, der Franken-Euro-Kurs vom Schlusskurs und die neu ausgeschriebenen Stellen in der Schweiz. Täglich aus unserem Monitoring.',
+    'blog.article.bollettino-frontaliere-2026-10-01.imageAlt': 'Die Zahlen des Tages für Grenzgänger – 1. Oktober 2026: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote',
+    'blog.article.bollettino-frontaliere-2026-10-01.seoDescription': 'Grenzgänger-Bulletin vom 1. Oktober 2026: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.',
+    'blog.article.bollettino-frontaliere-2026-10-01.ogDescription': 'Die Zahlen vom 1. Oktober 2026 für Grenzgänger: wie lange man heute Morgen an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, was der Franken heute wert ist und wie viele Stellen neu dazugekommen sind.',
+    'blog.article.deputazione-ticinese-doppia-imposizione.title': 'Doppelbesteuerung und Transport: Fragen zur Tessin-Deputation',
+    'blog.article.deputazione-ticinese-doppia-imposizione.excerpt': 'Panimi bittet um eine Klarstellung der Restdividendenquote (15 %). A2-A13, die Linie Luino und die Verwaltung des Lago Maggiore werden besprochen.',
+    'blog.article.deputazione-ticinese-doppia-imposizione.imageAlt': 'Blick auf das Bellinzona-Gebiet mit mittelalterlichen Türmen im Vordergrund',
+    'blog.article.estradizione-arresto-como.title': 'Ausgeliefert aus der Schweiz, in Ponte Chiasso verhaftet',
+    'blog.article.estradizione-arresto-como.excerpt': 'Ponte Chiasso: Am 18. September wurde ein 28-jähriger Nigerianer aus der Schweiz übergeben und festgenommen. Er muss vier Jahre, neun Monate und 18 Tage im Gefängnis verbüßen.',
+    'blog.article.estradizione-arresto-como.imageAlt': 'Ponte Chiasso: Festnahme nach der Übergabe eines nigerianischen Staatsbürgers aus der Schweiz',
 };
 
 export default blogMetaDe;

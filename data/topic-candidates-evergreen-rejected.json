@@ -780,30 +780,6 @@
     "imposta di successione e donazione canton Friburgo aliquote": 2
   },
   "topicGateUrls": {
-    "frontaliere::https://www.varesenews.it/2026/09/vertenza-amazon-a-malpensa-i-sindacati-invocano-la-tutela-totale-dei-lavoratori-nessuno-va-lasciato-indietro/2691430": {
-      "section": "frontaliere",
-      "ts": 1790677181415
-    },
-    "frontaliere::https://www.rsi.ch/s/4117390": {
-      "section": "frontaliere",
-      "ts": 1790677205644
-    },
-    "frontaliere::https://www.tio.ch/ticino/politica/1953237/sentenza-su-pagani-l-mps-chiede-che-il-gran-consiglio-valuti-il-ricorso": {
-      "section": "frontaliere",
-      "ts": 1790677250063
-    },
-    "frontaliere::https://www.laregione.ch/cantone/luganese/1953159/cda-di-ail-sa-compensi-dei-membri-verso-la-pubblicazione": {
-      "section": "frontaliere",
-      "ts": 1790677296541
-    },
-    "frontaliere::https://www.varesenews.it/2026/09/passaggio-generazionale-nelle-imprese-del-varesotto-le-competenze-della-nuova-generazione/2691805": {
-      "section": "frontaliere",
-      "ts": 1790677336226
-    },
-    "frontaliere::https://www.tio.ch/newsblog/ticino-top/1953439/manutenzione-bruciatori-impianti-azienda-riscaldamento-servizio-sa-caldaie-aziende-ticino": {
-      "section": "frontaliere",
-      "ts": 1790679594676
-    },
     "frontaliere::https://www.ticinonews.ch/ticino/cassa-malati-una-mozione-del-plr-contro-il-caro-premi-il-conto-e-sempre-piu-pesante-443586": {
       "section": "frontaliere",
       "ts": 1790695461549
@@ -883,6 +859,14 @@
     "svizzera::https://www.tio.ch/svizzera/cronaca/1953743/esplosivi-polizia-sciaffusa-stazione-esplosione": {
       "section": "svizzera",
       "ts": 1790814654520
+    },
+    "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/una-13esima-avs-solidale-per-i-giovani-ticinesi--4126848.html": {
+      "section": "frontaliere",
+      "ts": 1790857996848
+    },
+    "frontaliere::https://www.rsi.ch/s/4126848": {
+      "section": "frontaliere",
+      "ts": 1790859960019
     }
   }
 }

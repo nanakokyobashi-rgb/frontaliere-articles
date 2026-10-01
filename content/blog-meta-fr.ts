@@ -12330,6 +12330,17 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.snl-locarno-magadino-garanzie.title': 'SNL : 5 emplois en danger, garanties FART demandées',
     'blog.article.snl-locarno-magadino-garanzie.excerpt': 'Assemblée à Locarno le 29/09/2026 : 5 employés de SNL menacés de licenciement ou de saisonnalité. Les syndicats appellent à une transition ordonnée vers le FART.',
     'blog.article.snl-locarno-magadino-garanzie.imageAlt': 'Bateaux SNL amarrés au port de Locarno sur le lac Majeur.',
+    'blog.article.bollettino-frontaliere-2026-10-01.title': 'Bulletin du frontalier – 1 octobre 2026 : 36 minutes d\'attente à Stühlingen – Schleitheim',
+    'blog.article.bollettino-frontaliere-2026-10-01.excerpt': 'Les chiffres du jour, 1 octobre 2026, pour les frontaliers : les attentes relevées ce matin à chaque douane, les communes où l\'essence coûte le moins cher, le taux franc-euro à la clôture et les offres d\'emploi parues en Suisse. Des données de notre suivi, relevées chaque jour.',
+    'blog.article.bollettino-frontaliere-2026-10-01.imageAlt': 'Les chiffres du jour pour les frontaliers – 1 octobre 2026 : attentes aux douanes, prix de l\'essence, taux CHF-EUR et offres d\'emploi',
+    'blog.article.bollettino-frontaliere-2026-10-01.seoDescription': 'Bulletin du frontalier du 1 octobre 2026 : les files aux douanes ce matin, l\'essence la moins chère, taux franc-euro et nouvelles offres d\'emploi en Suisse.',
+    'blog.article.bollettino-frontaliere-2026-10-01.ogDescription': 'Les chiffres du 1 octobre 2026 pour les frontaliers : combien de temps on attend ce matin à chaque douane, où l\'essence coûte le moins cher, ce que vaut le franc aujourd\'hui et combien d\'offres d\'emploi sont parues en Suisse.',
+    'blog.article.deputazione-ticinese-doppia-imposizione.title': 'Double imposition et transports : questions sur la délégation au Tessin',
+    'blog.article.deputazione-ticinese-doppia-imposizione.excerpt': 'Panimi demande des clarifications sur le taux de dividende résiduel (15 %). A2-A13, la ligne Luino et la gestion du lac Majeur sont discutées.',
+    'blog.article.deputazione-ticinese-doppia-imposizione.imageAlt': 'Vue du district de Bellinzone avec les tours médiévales au premier plan',
+    'blog.article.estradizione-arresto-como.title': 'Extradé de Suisse, arrêté à Ponte Chiasso',
+    'blog.article.estradizione-arresto-como.excerpt': 'Ponte Chiasso : Le 18 septembre, un Nigérian de 28 ans a été livré de Suisse et arrêté. Il doit purger quatre ans, neuf mois et 18 jours de prison.',
+    'blog.article.estradizione-arresto-como.imageAlt': 'Ponte Chiasso : arrestation après la remise d\'un ressortissant nigérian par les autorités suisses',
 };
 
 export default blogMetaFr;

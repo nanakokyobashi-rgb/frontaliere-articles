@@ -12329,6 +12329,17 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.snl-locarno-magadino-garanzie.title': 'SNL: 5 posti a rischio, chieste garanzie FART',
     'blog.article.snl-locarno-magadino-garanzie.excerpt': 'Assemblea a Locarno il 29/09/2026: 5 dipendenti SNL minacciati da disdetta o stagionalità. Sindacati chiedono transizione ordinata alle FART.',
     'blog.article.snl-locarno-magadino-garanzie.imageAlt': 'Traghetti SNL ormeggiati al porto di Locarno sul Lago Maggiore.',
+    'blog.article.bollettino-frontaliere-2026-10-01.title': 'Bollettino del frontaliere – 1 ottobre 2026: a Stühlingen – Schleitheim 36 minuti di coda',
+    'blog.article.bollettino-frontaliere-2026-10-01.excerpt': 'I numeri di oggi, 1 ottobre 2026, per chi attraversa il confine: le attese ai valichi misurate stamattina, i comuni dove la benzina costa meno, il cambio franco-euro aggiornato e i nuovi annunci di lavoro pubblicati in Svizzera. Dati del nostro monitoraggio, rilevati ogni giorno.',
+    'blog.article.bollettino-frontaliere-2026-10-01.imageAlt': 'I numeri del giorno per i frontalieri – 1 ottobre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro',
+    'blog.article.bollettino-frontaliere-2026-10-01.seoDescription': 'Bollettino frontalieri del 1 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
+    'blog.article.bollettino-frontaliere-2026-10-01.ogDescription': 'I numeri del 1 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    'blog.article.deputazione-ticinese-doppia-imposizione.title': 'Doppia imposizione e trasporti: deputazione ticinese interroga',
+    'blog.article.deputazione-ticinese-doppia-imposizione.excerpt': 'Panimi chiede chiarimenti sull\'aliquota residua dei dividendi (15%). Si discute A2-A13, linea di Luino e gestione del Lago Maggiore.',
+    'blog.article.deputazione-ticinese-doppia-imposizione.imageAlt': 'Vista del distretto di Bellinzona con le torri medievali in primo piano',
+    'blog.article.estradizione-arresto-como.title': 'Estradato dalla Svizzera, arrestato a Ponte Chiasso',
+    'blog.article.estradizione-arresto-como.excerpt': 'Ponte Chiasso: il 18 settembre un 28enne nigeriano è stato consegnato dalla Svizzera e arrestato. Deve scontare quattro anni, nove mesi e 18 giorni di reclusione.',
+    'blog.article.estradizione-arresto-como.imageAlt': 'Ponte Chiasso, arresto dopo la consegna del cittadino nigeriano dalle autorità svizzere',
 };
 
 export default blogMetaIt;

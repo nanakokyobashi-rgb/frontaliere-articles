@@ -12328,6 +12328,17 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.snl-locarno-magadino-garanzie.title': 'SNL: 5 jobs at risk, FART guarantees requested',
     'blog.article.snl-locarno-magadino-garanzie.excerpt': 'Assembly in Locarno on 29/09/2026: 5 SNL employees threatened by termination or seasonality. Unions call for orderly transition to the FART.',
     'blog.article.snl-locarno-magadino-garanzie.imageAlt': 'SNL ferries docked at the Locarno port on Lake Maggiore.',
+    'blog.article.bollettino-frontaliere-2026-10-01.title': 'Cross-border daily brief – October 1, 2026: 36-minute queue at Stühlingen – Schleitheim',
+    'blog.article.bollettino-frontaliere-2026-10-01.excerpt': 'Today\'s numbers, October 1, 2026, for cross-border commuters: the waits measured at every crossing this morning, the municipalities where fuel is cheapest, the franc-euro rate at yesterday\'s close and the jobs newly posted in Switzerland. Measured daily by our own monitoring.',
+    'blog.article.bollettino-frontaliere-2026-10-01.imageAlt': 'The day\'s numbers for cross-border commuters – October 1, 2026: border waits, fuel prices, CHF-EUR rate and job listings',
+    'blog.article.bollettino-frontaliere-2026-10-01.seoDescription': 'Cross-border brief, October 1, 2026: queues at the crossings this morning, where fuel is cheapest, the franc-euro rate and new job postings in Switzerland.',
+    'blog.article.bollettino-frontaliere-2026-10-01.ogDescription': 'The numbers for October 1, 2026, for cross-border commuters: how long the queue is at each crossing this morning, which towns have the cheapest fuel, what the franc is worth today and how many Swiss jobs went up.',
+    'blog.article.deputazione-ticinese-doppia-imposizione.title': 'Double taxation and transport: Ticino deputation questions',
+    'blog.article.deputazione-ticinese-doppia-imposizione.excerpt': 'Panimi asks for clarification on the residual dividend rate (15%). A2-A13, line of Luino and management of Lake Maggiore are discussed.',
+    'blog.article.deputazione-ticinese-doppia-imposizione.imageAlt': 'View of the Bellinzona district with medieval towers in the foreground',
+    'blog.article.estradizione-arresto-como.title': 'Extradited from Switzerland, arrested in Ponte Chiasso',
+    'blog.article.estradizione-arresto-como.excerpt': 'Ponte Chiasso: On 18 September, a 28-year-old Nigerian man was handed over from Switzerland and arrested. He must serve four years, nine months and 18 days in prison.',
+    'blog.article.estradizione-arresto-como.imageAlt': 'Ponte Chiasso, arrest after a Nigerian citizen was handed over by Swiss authorities',
 };
 
 export default blogMetaEn;

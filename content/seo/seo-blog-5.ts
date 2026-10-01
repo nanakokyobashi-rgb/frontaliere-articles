@@ -45299,7 +45299,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "caption": "Eventi del weekend in Ticino"
       },
       "datePublished": "2026-06-29T23:19:06+02:00",
-      "dateModified": "2026-09-24T00:00:00+02:00",
+      "dateModified": "2026-10-01T00:00:00+02:00",
       "inLanguage": "it",
       "author": {
         "@type": "Person",
@@ -97686,6 +97686,123 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/snl-locarno-magadino-garanzie/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-bollettino-frontaliere-2026-10-01': {
+    title: 'Bollettino del frontaliere – 1 ottobre 2026: a Stühlingen – Schleitheim 36 minuti di coda',
+    description: 'Bollettino frontalieri del 1 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
+    keywords: 'bollettino frontaliere, dogana, attesa dogana, code valichi ticino, prezzi benzina confine, cambio franco euro, lavoro svizzera, frontalieri ticino',
+    ogTitle: 'Bollettino del frontaliere – 1 ottobre 2026: a Stühlingen – Schleitheim 36 minuti di coda',
+    ogDescription: 'I numeri del 1 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    canonicalPath: '/articoli-frontaliere/bollettino-frontaliere-2026-10-01',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bollettino del frontaliere – 1 ottobre 2026: a Stühlingen – Schleitheim 36 minuti di coda",
+      "description": "Bollettino frontalieri del 1 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bollettino-frontaliere-2026-10-01.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "I numeri del giorno per i frontalieri – 1 ottobre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro"
+      },
+      "datePublished": "2026-10-01T11:28:29+00:00",
+      "dateModified": "2026-10-01T11:28:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/bollettino-frontaliere-2026-10-01/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-deputazione-ticinese-doppia-imposizione': {
+    title: 'Doppia imposizione e trasporti: deputazione ticinese interroga',
+    description: 'La deputazione ticinese interroga il Consiglio federale su doppia imposizione (15% dividendi), A2-A13, linea di Luino e gestione del Lago Maggiore.',
+    keywords: 'frontalieri, ticino, svizzera, italia, doppia, imposizione, trasporti, deputazione',
+    ogTitle: 'Doppia imposizione e trasporti: la mossa ticinese',
+    ogDescription: 'Palmi Panimi e i deputati ticinesi chiedono chiarimenti su fisco e infrastrutture: aliquota dividendi al 15%, rischio rinvio A2-A13 oltre il 2050 e regime ridotto linea Luino.',
+    canonicalPath: '/articoli-frontaliere/deputazione-ticinese-doppia-imposizione',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Doppia imposizione e trasporti: deputazione ticinese interroga",
+      "description": "La deputazione ticinese interroga il Consiglio federale su doppia imposizione (15% dividendi), A2-A13, linea di Luino e gestione del Lago Maggiore.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/deputazione-ticinese-doppia-imposizione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista del distretto di Bellinzona con le torri medievali in primo piano"
+      },
+      "datePublished": "2026-10-01T11:45:47+00:00",
+      "dateModified": "2026-10-01T11:45:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/deputazione-ticinese-doppia-imposizione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-estradizione-arresto-como': {
+    title: 'Estradato dalla Svizzera, arrestato a Ponte Chiasso',
+    description: 'Ponte Chiasso: il 18 settembre un 28enne nigeriano è stato consegnato dalla Svizzera e arrestato. Deve scontare quattro anni, nove mesi e 18 giorni',
+    keywords: 'frontalieri, ticino, svizzera, italia, estradato, dalla, arrestato, ponte',
+    ogTitle: 'Estradato dalla Svizzera, arrestato a Ponte Chiasso',
+    ogDescription: 'A Ponte Chiasso la Polizia di frontiera ha arrestato il 18 settembre un cittadino nigeriano di 28 anni, consegnato dalle autorità svizzere a quelle italiane. Il mandato europeo riguarda fatti commessi a Torino e in altre città dal 2017.',
+    canonicalPath: '/articoli-frontaliere/estradizione-arresto-como',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Estradato dalla Svizzera, arrestato a Ponte Chiasso",
+      "description": "Ponte Chiasso: il 18 settembre un 28enne nigeriano è stato consegnato dalla Svizzera e arrestato. Deve scontare quattro anni, nove mesi e 18 giorni",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/estradizione-arresto-como.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ponte Chiasso, arresto dopo la consegna del cittadino nigeriano dalle autorità svizzere"
+      },
+      "datePublished": "2026-10-01T12:10:19+00:00",
+      "dateModified": "2026-10-01T12:10:19+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/estradizione-arresto-como/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },

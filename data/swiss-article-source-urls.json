@@ -1,34 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1946769/fattura-sistema-puo-paziente-documento-fatture-ospedali": {
-    "articleId": "drg-fatture-trasparenza",
-    "ts": "2026-09-01T05:43:39.231Z",
-    "keyForm": 2
-  },
-  "https://www.rsi.ch/s/4051266": {
-    "articleId": "swiss-life-600-tagli-2028",
-    "ts": "2026-09-01T06:17:05.503Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/economia/1947226/tasso-riferimento-rimane-minimo-riduzione": {
-    "articleId": "tasso-riferimento-ipotecario-1-25",
-    "ts": "2026-09-01T06:41:37.879Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/svizzeri-chiedono-misure-contro-riscaldamento-climatico/91984730": {
-    "articleId": "svizzeri-chiedono-misure-clima",
-    "ts": "2026-09-01T10:00:23.698Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/attualita/1947247/inquilini-riduzione-affitto-associazione-asi": {
-    "articleId": "affitti-riduzione-tasso-riferimento",
-    "ts": "2026-09-01T10:15:10.226Z",
-    "keyForm": 2
-  },
-  "https://www.rsi.ch/s/4051479": {
-    "articleId": "dogane-strumenti-digitali-merci",
-    "ts": "2026-09-01T10:43:34.847Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/tasso-ipotecario-di-riferimento-non-cambia%2c-rimane-a-1%2c25%25/91984180": {
     "articleId": "tasso-ipotecario-riferimento-1-25-stabile",
     "ts": "2026-09-01T10:53:04.705Z",
@@ -2497,6 +2467,36 @@
   "https://www.swissinfo.ch/ita/cst%3a-stabilizzazione-accordi-ue%3b-approvati-tutti-i-decreti-federali/92148745": {
     "articleId": "stati-approvano-accordi-ue",
     "ts": "2026-10-01T08:52:27.297Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1953978/premio-nazionale-svizzera-ticino-mazzoleni": {
+    "articleId": "iniziativa-lega-premio-uniforme",
+    "ts": "2026-10-01T12:00:47.773Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1953996/ue-consiglio-svizzera-accordo-senatori-sicurezza-nuovo-bilaterali-iii": {
+    "articleId": "bilaterali-iii-sicurezza-alimentare",
+    "ts": "2026-10-01T12:28:35.805Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1954027/tariffe-petizioni-cantoni-fisioterapia-svizzera": {
+    "articleId": "fisioterapia-tariffe-petizioni-ottobre",
+    "ts": "2026-10-01T12:48:22.165Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/voto-29-novembre%3a-iniziativa-fiscale-centro-equa-e-semplice/92149624": {
+    "articleId": "iniziativa-fiscale-centro-29-novembre",
+    "ts": "2026-10-01T13:17:20.189Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1953951/vigore-svizzera-controlli-entrano-ottobre-riciclaggio-denaro": {
+    "articleId": "novita-legali-ottobre-2026-svizzera",
+    "ts": "2026-10-01T13:33:13.712Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1953946/coppie-comitato-svantaggio-dovrebbe-svizzera": {
+    "articleId": "imposte-coppie-sposate",
+    "ts": "2026-10-01T13:46:25.547Z",
     "keyForm": 2
   }
 }
