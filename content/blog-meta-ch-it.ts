@@ -7349,6 +7349,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.fisioterapia-tariffe-petizioni-ottobre.title': 'Fisioterapia: 112\'000 firme per tariffe più alte',
     'blog.article.fisioterapia-tariffe-petizioni-ottobre.excerpt': 'Physioswiss ha raccolto 112\'000 firme in tutta la Svizzera per chiedere un aumento delle tariffe di fisioterapia almeno del 30%; 26 petizioni cantonali saranno consegnate a ottobre e il nuovo modello di fatturazione a intervalli di cinque minuti dovrebbe entrare in vigore nel 2027.',
     'blog.article.fisioterapia-tariffe-petizioni-ottobre.imageAlt': 'Fisioterapista che tratta un paziente in una clinica svizzera moderna',
+    'blog.article.iniziativa-fiscale-centro-29-novembre.title': 'Iniziativa Centro: voto 29 novembre per equità fiscale',
+    'blog.article.iniziativa-fiscale-centro-29-novembre.excerpt': 'Il 29 novembre si vota sull\'iniziativa Centro che vuole eliminare gli svantaggi fiscali del matrimonio, mantenendo la dichiarazione congiunta per l\'imposta federale diretta; il Parlamento avrebbe tre anni per attuarla, mentre l\'imposizione individuale è prevista dal 2032.',
+    'blog.article.iniziativa-fiscale-centro-29-novembre.imageAlt': 'Illustrazione del voto sull\'iniziativa fiscale del Centro del 29 novembre con coppie e documenti fiscali davanti al Palazzo federale',
 };
 
 export default blogMetaChIt;

@@ -95297,6 +95297,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-iniziativa-fiscale-centro-29-novembre': {
+    title: 'Iniziativa Centro: voto 29 novembre per equità fiscale',
+    description: 'Il 29 novembre gli svizzeri votano sull\'iniziativa Centro per eliminare gli svantaggi fiscali del matrimonio, mantenendo la dichiarazione congiunta',
+    keywords: 'frontalieri, ticino, svizzera, italia, iniziativa, centro, voto, novembre',
+    ogTitle: 'Iniziativa Centro: voto 29 novembre per equità fiscale',
+    ogDescription: 'L\'iniziativa popolare del Centro, sottoposta a votazione il 29 novembre, propone di eliminare gli svantaggi fiscali legati al matrimonio mantenendo la dichiarazione congiunta dei redditi per l\'imposta federale diretta. Se approvata, il Parlamento',
+    canonicalPath: '/articoli-svizzera/iniziativa-fiscale-centro-29-novembre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Iniziativa Centro: voto 29 novembre per equità fiscale",
+      "description": "Il 29 novembre gli svizzeri votano sull'iniziativa Centro per eliminare gli svantaggi fiscali del matrimonio, mantenendo la dichiarazione congiunta",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/iniziativa-fiscale-centro-29-novembre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Illustrazione del voto sull'iniziativa fiscale del Centro del 29 novembre con coppie e documenti fiscali davanti al Palazzo federale"
+      },
+      "datePublished": "2026-10-01T13:17:19+00:00",
+      "dateModified": "2026-10-01T13:17:19+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/iniziativa-fiscale-centro-29-novembre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

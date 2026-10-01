@@ -7349,6 +7349,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.fisioterapia-tariffe-petizioni-ottobre.title': 'Physiothérapie : 112\'000 signatures pour des tarifs plus élevés',
     'blog.article.fisioterapia-tariffe-petizioni-ottobre.excerpt': 'Physioswiss a recueilli 112 000 signatures à travers la Suisse appelant à une augmentation des frais de physiothérapie d’au moins 30 % ; 26 pétitions cantonales seront déposées en octobre et le nouveau modèle de facturation en cinq minutes devrait entrer en vigueur en 2027.',
     'blog.article.fisioterapia-tariffe-petizioni-ottobre.imageAlt': 'Kinésithérapeute traitant un patient dans une clinique suisse moderne',
+    'blog.article.iniziativa-fiscale-centro-29-novembre.title': 'Initiative Centro : votez le 29 novembre pour l’équité fiscale',
+    'blog.article.iniziativa-fiscale-centro-29-novembre.excerpt': 'Le 29 novembre, un vote aura lieu sur l’initiative Centro qui vise à éliminer les inconvénients fiscaux du mariage, en maintenant la déclaration conjointe de la fiscalité fédérale directe ; le Parlement disposerait de trois ans pour la mettre en œuvre, tandis que la fiscalité des particuliers est attendue à partir de 2032.',
+    'blog.article.iniziativa-fiscale-centro-29-novembre.imageAlt': 'Illustration du vote sur l\'initiative fiscale du Centre du 29 novembre avec des couples et des documents fiscaux devant le Palais fédéral',
 };
 
 export default blogMetaChFr;
