@@ -7331,6 +7331,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.fiammata-inflazione-carburanti.title': 'Schweizer Inflation bei 1 %: Kraftstoffgetrieben',
     'blog.article.fiammata-inflazione-carburanti.excerpt': 'Die Inflation in der Schweiz stieg im September auf 1 %. Das FSO berichtet, dass die Kraftstoffpreise stark gestiegen sind, während der Verbraucherpreisindex im Vergleich zum Vormonat stabil blieb.',
     'blog.article.fiammata-inflazione-carburanti.imageAlt': 'Schweizer Tankstelle als Symbol für steigende Konsumentenpreise.',
+    'blog.article.inflazione-svizzera-settembre-1-percento.title': 'Schweizer Inflation: steigt nach zwei Jahren im September auf 1 %',
+    'blog.article.inflazione-svizzera-settembre-1-percento.excerpt': 'Die Inflation in der Schweiz stieg im September auf 1 %, von 0,8 % im August. Dies ist laut FSO das erste Mal seit August 2024, dass sie diese Schwelle erreicht hat.',
+    'blog.article.inflazione-svizzera-settembre-1-percento.imageAlt': 'Belebte Stadtszene in einer Schweizer Stadt, mit Menschen, die an Schaufenstern mit Preisen vorbeigehen, was die Lebenshaltungskosten widerspiegelt.',
 };
 
 export default blogMetaChDe;

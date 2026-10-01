@@ -2466,6 +2466,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'agenda-parlamento-olimpiadi-navi': { it: 'agenda-parlamento-olimpiadi-navi', en: 'parliament-agenda-olympics-shipping', de: 'parlamentsagenda-olympia-schifffahrt', fr: 'agenda-parlement-olympiades-navigation' },
  'seduta-federale-bilaterali': { it: 'seduta-federale-bilaterali', en: 'federal-session-bilateral-talks', de: 'bundessitzung-bilaterale-olympiade', fr: 'session-federale-olympiades-asile' },
  'fiammata-inflazione-carburanti': { it: 'fiammata-inflazione-carburanti', en: 'swiss-inflation-fuel-surge', de: 'schweizer-inflation-treibstoffanstieg', fr: 'inflation-suisse-hausse-carburants' },
+ 'inflazione-svizzera-settembre-1-percento': { it: 'inflazione-svizzera-settembre-1-percento', en: 'swiss-inflation-september-1-percent', de: 'schweizer-inflation-september-1-prozent', fr: 'inflation-suisse-septembre-1-pourcent' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

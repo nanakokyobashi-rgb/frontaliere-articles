@@ -7331,6 +7331,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.fiammata-inflazione-carburanti.title': 'Inflazione svizzera all\'1%: spinta dai carburanti',
     'blog.article.fiammata-inflazione-carburanti.excerpt': 'L\'inflazione in Svizzera è salita all\'1% a settembre. L\'UST segnala carburanti in forte aumento, mentre l\'IPC resta stabile sul mese precedente.',
     'blog.article.fiammata-inflazione-carburanti.imageAlt': 'Distributore di carburante in Svizzera, simbolo del rincaro dei prezzi.',
+    'blog.article.inflazione-svizzera-settembre-1-percento.title': 'Inflazione Svizzera: a settembre sale all\'1% dopo due anni',
+    'blog.article.inflazione-svizzera-settembre-1-percento.excerpt': 'L\'inflazione in Svizzera è salita all\'1% a settembre, dal 0,8% di agosto. È la prima volta che raggiunge questa soglia da agosto 2024, secondo l\'UST.',
+    'blog.article.inflazione-svizzera-settembre-1-percento.imageAlt': 'Scena urbana affollata in una città svizzera, con persone che passano davanti a vetrine che mostrano prezzi, riflettendo il costo della vita.',
 };
 
 export default blogMetaChIt;

@@ -95063,6 +95063,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-inflazione-svizzera-settembre-1-percento': {
+    title: 'Inflazione Svizzera: a settembre sale all\'1% dopo due anni',
+    description: 'A settembre l\'inflazione in Svizzera è salita all\'1% dal 0,8% di agosto, la prima volta oltre questa soglia da agosto 2024. L\'UST rileva aumenti in carburanti',
+    keywords: 'frontalieri, ticino, svizzera, italia, inflazione, settembre, sale, dopo',
+    ogTitle: 'Inflazione Svizzera: a settembre sale all\'1% dopo due anni',
+    ogDescription: 'L\'inflazione svizzera ha raggiunto l\'1% a settembre, in aumento dal 0,8% di agosto e superando la soglia dell\'1% per la prima volta da agosto 2024. L\'UST ha rilevato un incremento dei prezzi di olio da riscaldamento, benzina e diesel, mentre viaggi',
+    canonicalPath: '/articoli-svizzera/inflazione-svizzera-settembre-1-percento/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Inflazione Svizzera: a settembre sale all'1% dopo due anni",
+      "description": "A settembre l'inflazione in Svizzera è salita all'1% dal 0,8% di agosto, la prima volta oltre questa soglia da agosto 2024. L'UST rileva aumenti in carburanti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/inflazione-svizzera-settembre-1-percento.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scena urbana affollata in una città svizzera, con persone che passano davanti a vetrine che mostrano prezzi, riflettendo il costo della vita."
+      },
+      "datePublished": "2026-10-01T08:09:43+00:00",
+      "dateModified": "2026-10-01T08:09:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/inflazione-svizzera-settembre-1-percento/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

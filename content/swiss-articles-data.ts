@@ -22021,6 +22021,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'inflazione-svizzera-settembre-1-percento',
+    category: 'novita',
+    date: '2026-10-01T08:09:43.251Z',
+    image: '/images/blog/inflazione-svizzera-settembre-1-percento.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

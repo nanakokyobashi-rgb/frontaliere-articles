@@ -7331,6 +7331,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.fiammata-inflazione-carburanti.title': 'Swiss inflation at 1%: Fuel-driven',
     'blog.article.fiammata-inflazione-carburanti.excerpt': 'Inflation in Switzerland rose to 1% in September. The FSO reports that fuels rose sharply, while the CPI remained stable on the previous month.',
     'blog.article.fiammata-inflazione-carburanti.imageAlt': 'Swiss petrol station symbolizing the rise in consumer prices.',
+    'blog.article.inflazione-svizzera-settembre-1-percento.title': 'Swiss inflation: rises to 1% after two years in September',
+    'blog.article.inflazione-svizzera-settembre-1-percento.excerpt': 'Inflation in Switzerland rose to 1% in September, from 0.8% in August. This is the first time it has reached this threshold since August 2024, according to the FSO.',
+    'blog.article.inflazione-svizzera-settembre-1-percento.imageAlt': 'Busy urban scene in a Swiss city, with people walking past shop windows displaying prices, reflecting the cost of living.',
 };
 
 export default blogMetaChEn;
