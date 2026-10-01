@@ -4307,10 +4307,10 @@
     {
       "path": "scripts/ci/unwedge-pages-deploy-queue.mjs",
       "mode": "adapted",
-      "reason": "Reaper del gate `github-pages`: cancella SOLO le run di un publisher ferme in `waiting` oltre 45 minuti, cioe' run che non hanno eseguito niente. Sul sito libera `pages-deploy` di deploy-publish.yml ed e' chiamato da pages-publish-lag-watchdog.yml; qui libera la concurrency `publish-api` di publish-api.yml ed e' chiamato da publish-api-unwedge.yml ogni 15 minuti (run 36762664618, in `waiting` dal 2026-09-30T19:00:51Z con `reviewers: []` e `wait_timer: 0`). Adattamenti: `REPO` da GITHUB_REPOSITORY (default questo repo) invece della costante del sito, `WORKFLOW_FILE = 'publish-api.yml'` invece di `deploy-publish.yml`, intestazione e messaggi col gruppo e con l'evidenza di questo repo, e un crash esce 1 senza un `continue-on-error` a valle (qui il passo e' l'unico del job, e il rosso arriva a workflow-failure-issues). `selectWedgedRuns()`/`wedgeAgeMinutes()`, soglia e direzione di fallimento sono quelle del sito: una fix li' va riapplicata qui.",
+      "reason": "Reaper del gate `github-pages`: cancella SOLO le run di un publisher ferme in `waiting` oltre 45 minuti, cioe' run che non hanno eseguito niente. Sul sito libera `pages-deploy` di deploy-publish.yml ed e' chiamato da pages-publish-lag-watchdog.yml; qui libera la concurrency `publish-api` di publish-api.yml ed e' chiamato da publish-api-unwedge.yml ogni 15 minuti (run 36762664618, in `waiting` dal 2026-09-30T19:00:51Z con `reviewers: []` e `wait_timer: 0`). Adattamenti: `REPO` da GITHUB_REPOSITORY (default questo repo) invece della costante del sito, `WORKFLOW_FILE = 'publish-api.yml'` invece di `deploy-publish.yml`, intestazione e messaggi col gruppo e con l'evidenza di questo repo, e un crash esce 1 senza un `continue-on-error` a valle (qui il passo e' l'unico del job, e il rosso arriva a workflow-failure-issues). `selectWedgedRuns()`, `gateEntryMs()`, `parkedAtPagesGate()`, `cancelVerdict()`, la ri-lettura prima della cancel, soglia e direzione di fallimento sono quelle del sito: una fix li' va riapplicata qui. Unica differenza di esito: qui il passo e' l'unico del job, quindi l'exit 1 su coda illeggibile o cancel rifiutata rende rossa la run, mentre sul sito il chiamante e' `continue-on-error`.",
       "baseline": {
         "site": "a77c03212f6c3936",
-        "corpus": "9ca2c4a0284bd6fa",
+        "corpus": "1ce27cf6342d3179",
         "alignedAt": "2026-10-01"
       }
     },
