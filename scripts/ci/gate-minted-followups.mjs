@@ -121,6 +121,7 @@ const COLLECTION_OK = process.env.COLLECTION_OK === 'true';
 // duplicato costa una riga, mentre perderli è irreversibile.
 const MINT_GATE_MARKER = '<!-- followup-mint-gate -->';
 export const AUTOMATION_DEFERRED_LABEL = 'automation-deferred';
+const FOLLOWUP_PARKED_LABEL = 'fu-parked';
 
 /**
  * Spezza il corpo coniato in testa + item, e partiziona gli item con l'oracolo
@@ -607,6 +608,9 @@ function queueLabelDecision(issue) {
   }
   if (issue.labels.some((label) => rawIssueLabelName(label).toLowerCase() === 'needs-human')) {
     return { allowed: false, code: 'needs-human', reason: 'needs-human-veto' };
+  }
+  if (issue.labels.some((label) => rawIssueLabelName(label).toLowerCase() === FOLLOWUP_PARKED_LABEL)) {
+    return { allowed: false, code: FOLLOWUP_PARKED_LABEL, reason: 'parked-retry-cooldown' };
   }
   if (hasAutomationDeferredLabel(issue)) {
     return { allowed: false, code: AUTOMATION_DEFERRED_LABEL, reason: 'automation-deferred' };
