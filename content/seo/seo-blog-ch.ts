@@ -94244,6 +94244,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-seco-apprendistato-tirocini': {
+    title: 'Lavorare alla SECO: apprendistati e tirocini | Frontaliere Ticino',
+    description: 'La SECO offre apprendistati AFC, tirocini SMC e universitari e mandati di traduzione per collaboratori esterni nelle lingue ufficiali e in altre lingue.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lavorare, alla, seco, apprendistati',
+    ogTitle: 'SECO: apprendistati, tirocini e lavoro in Svizzera',
+    ogDescription: 'Oltre 900 collaboratori e dirigenti lavorano alla SECO in tre sedi svizzere, con circa 30 distaccati in diversi paesi. L\'offerta comprende posti AFC, tirocini SMC e universitari e mandati di traduzione.',
+    canonicalPath: '/articoli-svizzera/seco-apprendistato-tirocini/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lavorare alla SECO: apprendistati e tirocini",
+      "description": "La SECO offre apprendistati AFC, tirocini SMC e universitari e mandati di traduzione per collaboratori esterni nelle lingue ufficiali e in altre lingue.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/seco-apprendistato-tirocini.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ambiente di lavoro della SECO in Svizzera"
+      },
+      "datePublished": "2026-10-01T00:18:20+00:00",
+      "dateModified": "2026-10-01T00:18:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/seco-apprendistato-tirocini/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -7268,6 +7268,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.extramuro-soccorso-ticino.title': 'Civil Protection: 9 days between Ticino and Como',
     'blog.article.extramuro-soccorso-ticino.excerpt': 'Extramuro 2026 takes place from October 1 to 9: two days in Pollegio and five in the province of Como, featuring Italian and Swiss operators.',
     'blog.article.extramuro-soccorso-ticino.imageAlt': 'Italian and Swiss operators during a cross-border civil protection exercise',
+    'blog.article.seco-apprendistato-tirocini.title': 'Working at SECO: Apprenticeships and Internships',
+    'blog.article.seco-apprendistato-tirocini.excerpt': 'SECO has more than 900 employees, three offices in Switzerland and around 30 secondments: apprenticeships, traineeships and translation mandates.',
+    'blog.article.seco-apprendistato-tirocini.imageAlt': 'SECO workplace environment in Switzerland',
 };
 
 export default blogMetaChEn;

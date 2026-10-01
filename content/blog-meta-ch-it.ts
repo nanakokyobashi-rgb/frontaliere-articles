@@ -7268,6 +7268,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.extramuro-soccorso-ticino.title': 'Protezione civile: 9 giorni tra Ticino e Como',
     'blog.article.extramuro-soccorso-ticino.excerpt': 'Extramuro 2026 si svolge dal 1° al 9 ottobre: due giorni a Pollegio e cinque in provincia di Como con operatori italiani e svizzeri.',
     'blog.article.extramuro-soccorso-ticino.imageAlt': 'Operatori italiani e svizzeri in un\'esercitazione di protezione civile transfrontaliera',
+    'blog.article.seco-apprendistato-tirocini.title': 'Lavorare alla SECO: apprendistati e tirocini',
+    'blog.article.seco-apprendistato-tirocini.excerpt': 'La SECO conta oltre 900 collaboratori, tre sedi in Svizzera e circa 30 distaccati: ecco apprendistati, tirocini e mandati di traduzione.',
+    'blog.article.seco-apprendistato-tirocini.imageAlt': 'Ambiente di lavoro della SECO in Svizzera',
 };
 
 export default blogMetaChIt;
