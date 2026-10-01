@@ -7355,6 +7355,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.novita-legali-ottobre-2026-svizzera.title': '1 October 2026: News on recycling, EES and 30 zones',
     'blog.article.novita-legali-ottobre-2026-svizzera.excerpt': 'TJPG, EES, and speed limits change on October 1, 2026.',
     'blog.article.novita-legali-ottobre-2026-svizzera.imageAlt': 'View of a Swiss city street with a 50 km/h speed limit sign and modern architecture',
+    'blog.article.imposte-coppie-sposate.title': 'Married couples, the vote on direct federal tax',
+    'blog.article.imposte-coppie-sposate.excerpt': 'The cross-party committee calls for the tax disadvantage of married couples to be eliminated by maintaining the joint declaration. Vote on 29 November.',
+    'blog.article.imposte-coppie-sposate.imageAlt': 'Married couple reviews Swiss tax documents outside an institutional building',
 };
 
 export default blogMetaChEn;

@@ -2474,6 +2474,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'fisioterapia-tariffe-petizioni-ottobre': { it: 'fisioterapia-tariffe-petizioni-ottobre', en: 'physiotherapy-112-000-signatures-for-higher-fees', de: 'physiotherapie-112-000-unterschriften-fur-hohere-raten', fr: 'physiotherapie-112-000-signatures-pour-des-tarifs-plus-eleves' },
  'iniziativa-fiscale-centro-29-novembre': { it: 'iniziativa-fiscale-centro-29-novembre', en: 'tax-initiative-centre-29-november', de: 'steuerinitiative-zentrum-29-november', fr: 'initiative-fiscale-centre-29-novembre' },
  'novita-legali-ottobre-2026-svizzera': { it: 'novita-legali-ottobre-2026-svizzera', en: 'swiss-legal-changes-october-2026', de: 'schweizer-rechtsaenderungen-oktober-2026', fr: 'nouvelles-legales-suisse-octobre-2026' },
+ 'imposte-coppie-sposate': { it: 'imposte-coppie-sposate', en: 'swiss-married-couples-taxes', de: 'schweiz-steuern-verheiratete-paare', fr: 'impots-suisses-couples-maries' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

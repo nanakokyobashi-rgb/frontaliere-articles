@@ -95375,6 +95375,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-imposte-coppie-sposate': {
+    title: 'Coppie sposate, il voto sull\'imposta federale diretta',
+    description: 'A Berna il comitato trasversale presenta l\'iniziativa contro lo svantaggio delle coppie sposate nell\'imposta federale diretta: la votazione è il 29 novembre.',
+    keywords: 'frontalieri, ticino, svizzera, italia, coppie, sposate, voto, sull',
+    ogTitle: 'Imposte federali, la proposta per le coppie sposate',
+    ogDescription: 'Da Berna, il comitato trasversale presenta l\'iniziativa per eliminare lo svantaggio fiscale delle coppie sposate. La dichiarazione resterebbe congiunta; dopo tre anni senza attuazione, il Consiglio federale introdurrebbe una soluzione transitoria.',
+    canonicalPath: '/articoli-svizzera/imposte-coppie-sposate/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Coppie sposate, il voto sull'imposta federale diretta",
+      "description": "A Berna il comitato trasversale presenta l'iniziativa contro lo svantaggio delle coppie sposate nell'imposta federale diretta: la votazione è il 29 novembre.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/imposte-coppie-sposate.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Coppia sposata esamina documenti fiscali svizzeri davanti a un edificio istituzionale"
+      },
+      "datePublished": "2026-10-01T13:46:25+00:00",
+      "dateModified": "2026-10-01T13:46:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/imposte-coppie-sposate/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

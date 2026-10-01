@@ -7355,6 +7355,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.novita-legali-ottobre-2026-svizzera.title': '1 ottobre 2026: novità su riciclaggio, EES e zone 30',
     'blog.article.novita-legali-ottobre-2026-svizzera.excerpt': 'TJPG, EES e limiti di velocità cambiano il 1 ottobre 2026.',
     'blog.article.novita-legali-ottobre-2026-svizzera.imageAlt': 'Vista di una strada cittadina svizzera con insegna di limite di velocità 50 km/h e architettura moderna',
+    'blog.article.imposte-coppie-sposate.title': 'Coppie sposate, il voto sull\'imposta federale diretta',
+    'blog.article.imposte-coppie-sposate.excerpt': 'Il comitato trasversale chiede di eliminare lo svantaggio fiscale delle coppie sposate mantenendo la dichiarazione congiunta. Voto il 29 novembre.',
+    'blog.article.imposte-coppie-sposate.imageAlt': 'Coppia sposata esamina documenti fiscali svizzeri davanti a un edificio istituzionale',
 };
 
 export default blogMetaChIt;

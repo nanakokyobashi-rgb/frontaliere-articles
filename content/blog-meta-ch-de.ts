@@ -7355,6 +7355,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.novita-legali-ottobre-2026-svizzera.title': '1. Oktober 2026: Nachrichten zu Recycling, EES und 30 Zonen',
     'blog.article.novita-legali-ottobre-2026-svizzera.excerpt': 'TJPG, EES und Geschwindigkeitsbegrenzungen ändern sich am 1. Oktober 2026.',
     'blog.article.novita-legali-ottobre-2026-svizzera.imageAlt': 'Ansicht einer Schweizer Strasse mit 50-km/h-Schild und moderner Architektur',
+    'blog.article.imposte-coppie-sposate.title': 'Verheiratete Paare, die Abstimmung über direkte Bundessteuern',
+    'blog.article.imposte-coppie-sposate.excerpt': 'Das überparteiliche Komitee fordert, den steuerlichen Nachteil verheirateter Paare zu beseitigen und dabei die gemeinsame Steuererklärung beizubehalten. Abstimmung am 29. November.',
+    'blog.article.imposte-coppie-sposate.imageAlt': 'Verheiratetes Paar prüft Schweizer Steuerunterlagen vor einem institutionellen Gebäude',
 };
 
 export default blogMetaChDe;
