@@ -2462,6 +2462,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'budget-svizzero-affitto-zurigo': { it: 'budget-svizzero-affitto-zurigo', en: 'swiss-living-cost-zurich', de: 'lebenskosten-schweiz-zuerich', fr: 'cout-vie-suisse-zurich' },
  'preventivo-2027-conti-pubblici': { it: 'preventivo-2027-conti-pubblici', en: 'preventivo-2027-public-accounts', de: 'preventivo-2027-oeffentliche-finanzen', fr: 'preventivo-2027-comptes-publics' },
  'spese-ginevra-analisi-nazionale': { it: 'spese-ginevra-analisi-nazionale', en: 'geneva-living-cost-2026', de: 'lebenskosten-genf-schweiz-2026', fr: 'cout-vie-geneve-suisse-2026' },
+ 'chifra-tabelle-doganali-2026': { it: 'chifra-tabelle-doganali-2026', en: 'chifra-customs-tables-2026', de: 'chifra-zolltabellen-2026', fr: 'chifra-tableaux-douaniers-2026' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

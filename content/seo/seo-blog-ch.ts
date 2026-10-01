@@ -94907,6 +94907,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-chifra-tabelle-doganali-2026': {
+    title: 'Chifra 2.1 e 3.1: aggiornate le regole doganali',
+    description: 'Dal 1° ottobre 2026 Chifra 2.1 e 3.1 riorganizzano i privilegi doganali e precisano le regole per tessere KD, B, modulo 14.60 e traffico turistico.',
+    keywords: 'frontalieri, ticino, svizzera, italia, chifra, aggiornate, regole, doganali',
+    ogTitle: 'Chifra 2.1 e 3.1: aggiornate le regole doganali',
+    ogDescription: 'La comunicazione del 1° ottobre 2026 corregge un errore nell\'elenco precedente e distingue le regole per funzionari consolari con tessera KD blu, titolari di tessera B e altri titolari nel traffico turistico.',
+    canonicalPath: '/articoli-svizzera/chifra-tabelle-doganali-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Chifra 2.1 e 3.1: aggiornate le regole doganali",
+      "description": "Dal 1° ottobre 2026 Chifra 2.1 e 3.1 riorganizzano i privilegi doganali e precisano le regole per tessere KD, B, modulo 14.60 e traffico turistico.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/chifra-tabelle-doganali-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Aggiornamento sulle merci in franchigia e sulle tessere di legittimazione"
+      },
+      "datePublished": "2026-10-01T05:29:13+00:00",
+      "dateModified": "2026-10-01T05:29:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/chifra-tabelle-doganali-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

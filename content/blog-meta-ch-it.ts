@@ -7319,6 +7319,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.spese-ginevra-analisi-nazionale.title': 'Costo della vita svizzera 2026: canton Ginevra',
     'blog.article.spese-ginevra-analisi-nazionale.excerpt': 'Affitti, spesa alimentare, trasporti e LAMal: il confronto 2026 tra Ginevra e gli altri Cantoni parte da regole fiscali, salariali e di locazione.',
     'blog.article.spese-ginevra-analisi-nazionale.imageAlt': 'Costo della vita in Svizzera 2026: affitti e spese in un quartiere urbano di Ginevra.',
+    'blog.article.chifra-tabelle-doganali-2026.title': 'Chifra 2.1 e 3.1: aggiornate le regole doganali',
+    'blog.article.chifra-tabelle-doganali-2026.excerpt': 'Dal 1° ottobre 2026 la comunicazione riorganizza Chifra 2.1 e chiarisce le esenzioni per tessere KD e B, modulo 14.60 e traffico turistico.',
+    'blog.article.chifra-tabelle-doganali-2026.imageAlt': 'Aggiornamento sulle merci in franchigia e sulle tessere di legittimazione',
 };
 
 export default blogMetaChIt;

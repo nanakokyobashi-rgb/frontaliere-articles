@@ -7319,6 +7319,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.spese-ginevra-analisi-nazionale.title': 'Schweizer Lebenshaltungskosten 2026: Kanton Genf',
     'blog.article.spese-ginevra-analisi-nazionale.excerpt': 'Mieten, Lebensmittelausgaben, Transport und KVG: Der Vergleich 2026 zwischen Genf und den anderen Kantonen geht von Steuer-, Lohn- und Mietregeln aus.',
     'blog.article.spese-ginevra-analisi-nazionale.imageAlt': 'Lebenskosten Schweiz 2026: Mieten und Alltagsausgaben in einem Genfer Stadtviertel.',
+    'blog.article.chifra-tabelle-doganali-2026.title': 'Chifra 2.1 und 3.1: Zollregeln aktualisiert',
+    'blog.article.chifra-tabelle-doganali-2026.excerpt': 'Ab dem 1. Oktober 2026 reorganisiert die Kommunikation Chifra 2.1 und klärt die Ausnahmen für KD- und B-Karten, Formular 14.60 sowie für Touristenverkehr.',
+    'blog.article.chifra-tabelle-doganali-2026.imageAlt': 'Aktualisierung zu abgabenfreien Waren und Legitimationskarten',
 };
 
 export default blogMetaChDe;

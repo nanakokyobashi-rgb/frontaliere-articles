@@ -7319,6 +7319,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.spese-ginevra-analisi-nazionale.title': 'Swiss Cost of Living 2026: Canton of Geneva',
     'blog.article.spese-ginevra-analisi-nazionale.excerpt': 'Rents, food shopping, transport and KVG: the 2026 comparison between Geneva and the other cantons starts with fiscal, wage and rental rules.',
     'blog.article.spese-ginevra-analisi-nazionale.imageAlt': 'Swiss cost of living 2026: rents and daily expenses in an urban Geneva district.',
+    'blog.article.chifra-tabelle-doganali-2026.title': 'Chifra 2.1 and 3.1: customs rules updated',
+    'blog.article.chifra-tabelle-doganali-2026.excerpt': 'From 1 October 2026, the communication reorganizes Chifra 2.1 and clarifies the exemptions for KD and B cards, form 14.60 and tourist traffic.',
+    'blog.article.chifra-tabelle-doganali-2026.imageAlt': 'Update on duty-free goods and legitimation cards',
 };
 
 export default blogMetaChEn;

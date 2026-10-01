@@ -7319,6 +7319,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.spese-ginevra-analisi-nazionale.title': 'Coût de la vie en Suisse 2026 : canton de Genève',
     'blog.article.spese-ginevra-analisi-nazionale.excerpt': 'Loyers, courses, transports et KVG : la comparaison 2026 entre Genève et les autres cantons commence par les règles fiscales, salariales et de location.',
     'blog.article.spese-ginevra-analisi-nazionale.imageAlt': 'Coût de la vie en Suisse 2026: loyers et dépenses courantes dans un quartier genevois.',
+    'blog.article.chifra-tabelle-doganali-2026.title': 'Chifra 2.1 et 3.1 : Mise à jour des règles douanières',
+    'blog.article.chifra-tabelle-doganali-2026.excerpt': 'À partir du 1er octobre 2026, la communication réorganise Chifra 2.1 et clarifie les exemptions pour les cartes KD et B, le formulaire 14.60 et le trafic touristique.',
+    'blog.article.chifra-tabelle-doganali-2026.imageAlt': 'Mise à jour sur les marchandises en franchise et les cartes de légitimation',
 };
 
 export default blogMetaChFr;

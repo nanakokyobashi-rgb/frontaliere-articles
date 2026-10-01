@@ -21985,6 +21985,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'chifra-tabelle-doganali-2026',
+    category: 'novita',
+    date: '2026-10-01T05:29:13.871Z',
+    image: '/images/blog/chifra-tabelle-doganali-2026.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
