@@ -124,11 +124,14 @@ test('un gruppo crawler ha un riconoscimento strutturale e non viene ridotto a u
 test('un esito di lease condiviso non attribuisce il fallimento a un crawler', () => {
   const log = groupLogLine('28:00.0000000', 'fust: crawler exited with status 44').replaceAll('capri-holdings', 'fust');
   assert.deepEqual(crawlerFailuresFromLog(log), []);
-  assert.equal(buildCrawlerFailureReport({
+  const report = buildCrawlerFailureReport({
     log,
     run: CRAWLER_RUN,
     workflowName: CRAWLER_GROUP,
-  }), null);
+  });
+  assert.ok(report);
+  assert.equal(report.title, `Workflow Failure: ${CRAWLER_GROUP}`);
+  assert.match(report.description, /fust: crawler exited with status 44/);
 });
 
 test('il precondition failure condiviso con exit 43 non diventa un falso errore per-membro', () => {
@@ -138,11 +141,15 @@ test('il precondition failure condiviso con exit 43 non diventa un falso errore 
   ].join('\n');
   assert.equal(isSystemicCrawlerFailureLog(log), true);
   assert.deepEqual(crawlerFailuresFromLog(log), []);
-  assert.equal(buildCrawlerFailureReport({
+  const report = buildCrawlerFailureReport({
     log,
     run: CRAWLER_RUN,
     workflowName: CRAWLER_GROUP,
-  }), null);
+  });
+  assert.ok(report);
+  assert.equal(report.title, `Workflow Failure: ${CRAWLER_GROUP}`);
+  assert.match(report.description, /shared deferred-commit precondition failed \(exit 43\)/);
+  assert.doesNotMatch(report.description, /fust: crawler exited with status 1/);
 });
 
 test('l\'eco del blocco shell non sopprime un failure reale dello stesso membro', () => {
@@ -176,7 +183,9 @@ test('un marker sistemico non nasconde un failure reale di un altro membro', () 
     run: CRAWLER_RUN,
     workflowName: CRAWLER_GROUP,
   });
-  assert.equal(report?.title, 'Crawler Failure: Run capri-holdings');
+  assert.equal(report?.title, `Workflow Failure: ${CRAWLER_GROUP}`);
+  assert.match(report.description, /`capri-holdings`/);
+  assert.match(report.description, /shared deferred-commit precondition failed \(exit 43\)/);
 });
 
 test('il report del gruppo 22 conserva la causa concreta del guard Fust', () => {
@@ -191,16 +200,48 @@ test('il report del gruppo 22 conserva la causa concreta del guard Fust', () => 
   assert.match(report.description, /step `Run fust`/);
 });
 
-test('più membri falliti restano aggregati: nessun titolo per-step inventato', () => {
+test('più membri falliti hanno un report aggregato con esiti e cause, senza colpevole inventato', () => {
   const log = [
+    groupLogLine('28:00.0000000', '❌ Capri Holdings crawler failed: Workday empty search returned zero unexpectedly.'),
     groupLogLine('28:00.0000000', 'capri-holdings: crawler exited with status 1'),
-    groupLogLine('28:01.0000000', 'fust: crawler exited with status 1'),
+    groupLogLine('28:01.0000000', '❌ Fust crawler failed: workplace canton invariant failed for Niederwangen BE.'),
+    groupLogLine('28:01.1000000', 'fust: crawler exited with status 1'),
   ].join('\n');
-  assert.equal(buildCrawlerFailureReport({
+  const report = buildCrawlerFailureReport({
     log,
     run: CRAWLER_RUN,
     workflowName: CRAWLER_GROUP,
-  }), null);
+  });
+  assert.ok(report);
+  assert.equal(report.title, `Workflow Failure: ${CRAWLER_GROUP}`);
+  assert.match(report.description, /`capri-holdings`/);
+  assert.match(report.description, /`fust`/);
+  assert.match(report.description, /Workday empty search returned zero unexpectedly/);
+  assert.match(report.description, /workplace canton invariant failed for Niederwangen BE/);
+  assert.match(report.description, /Il titolo resta aggregato/);
+});
+
+test('exit 143 resta un esito sistemico visibile nel report del gruppo', () => {
+  const log = [
+    groupLogLine('28:00.0000000', '::warning::fust: runner shutdown interrupted the crawler (exit 143)'),
+    groupLogLine('28:00.1000000', 'fust: crawler exited with status 143'),
+  ].join('\n');
+  assert.deepEqual(crawlerFailuresFromLog(log), [{
+    slug: 'fust',
+    exitCode: 143,
+    lines: ['fust: crawler exited with status 143'],
+  }]);
+  const report = buildCrawlerFailureReport({ log, run: CRAWLER_RUN, workflowName: CRAWLER_GROUP });
+  assert.equal(report?.title, `Workflow Failure: ${CRAWLER_GROUP}`);
+  assert.match(report.description, /`143`/);
+  assert.match(report.description, /runner shutdown interrupted the crawler/);
+});
+
+test('un push esausto resta visibile anche quando il gruppo non ha marker per-membro', () => {
+  const log = groupLogLine('28:00.0000000', '##[error]push failed after 5 attempts — crawler output was not published');
+  const report = buildCrawlerFailureReport({ log, run: CRAWLER_RUN, workflowName: CRAWLER_GROUP });
+  assert.equal(report?.title, `Workflow Failure: ${CRAWLER_GROUP}`);
+  assert.match(report.description, /push failed after 5 attempts/);
 });
 
 test('push fallito su un workflow SENZA trigger pull_request gemello resta segnalato', () => {
