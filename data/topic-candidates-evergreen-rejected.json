@@ -780,10 +780,6 @@
     "imposta di successione e donazione canton Friburgo aliquote": 2
   },
   "topicGateUrls": {
-    "frontaliere::https://www.ticinonews.ch/ticino/cassa-malati-una-mozione-del-plr-contro-il-caro-premi-il-conto-e-sempre-piu-pesante-443586": {
-      "section": "frontaliere",
-      "ts": 1790695461549
-    },
     "frontaliere::https://www.tio.ch/svizzera/politica/1953526/premi-uss-urge-freno-svizzera": {
       "section": "frontaliere",
       "ts": 1790696233529
@@ -867,6 +863,10 @@
     "frontaliere::https://www.rsi.ch/s/4126848": {
       "section": "frontaliere",
       "ts": 1790859960019
+    },
+    "svizzera::https://www.tio.ch/dal-mondo/cronaca/1954074/benzina-e-diesel-anche-tamoil-frena-sui-prezzi": {
+      "section": "svizzera",
+      "ts": 1790868353156
     }
   }
 }

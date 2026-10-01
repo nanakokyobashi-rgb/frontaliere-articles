@@ -7367,6 +7367,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.svizzera-ue-sanita-consiglio-stati.title': 'Ständerat genehmigt EU-Gesundheitsabkommen',
     'blog.article.svizzera-ue-sanita-consiglio-stati.excerpt': '31 gegen 11: grünes Licht für EU-Gesundheitsversorgung. Jetzt zum National. Optionales Referendum gewählt, Strom im Winter.',
     'blog.article.svizzera-ue-sanita-consiglio-stati.imageAlt': 'Bundeshaus in Bern, Sitz des Ständerats',
+    'blog.article.wolfurt-sdoganamento-reno-2026.title': 'Wolfurt: Stopp zur Importzöllabfertigung ab 1. Oktober',
+    'blog.article.wolfurt-sdoganamento-reno-2026.excerpt': 'Ab dem 1. Oktober 2026 ändern sich die Verfahren für den gewerblichen Güterverkehr im Rheintal: In Wolfurt wird keine Einfuhrverzollung mehr durchgeführt.',
+    'blog.article.wolfurt-sdoganamento-reno-2026.imageAlt': 'Warenverkehr an einem Grenzübergang im Rheintal.',
 };
 
 export default blogMetaChDe;

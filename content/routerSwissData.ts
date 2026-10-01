@@ -2478,6 +2478,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'ipc-settembre-rincaro-annuo': { it: 'ipc-settembre-rincaro-annuo', en: 'consumer-prices-september', de: 'konsumentenpreise-september', fr: 'prix-consommation-septembre' },
  'icann-gtld-candidature-2026': { it: 'icann-gtld-candidature-2026', en: 'icann-gtld-applications-2026', de: 'icann-gtld-antrage-2026', fr: 'icann-gtld-candidatures-2026' },
  'svizzera-ue-sanita-consiglio-stati': { it: 'svizzera-ue-sanita-consiglio-stati', en: 'swiss-ue-health-council-states', de: 'schweiz-ue-gesundheit-staenderat', fr: 'suisse-ue-sante-conseil-etats' },
+ 'wolfurt-sdoganamento-reno-2026': { it: 'wolfurt-sdoganamento-reno-2026', en: 'wolfurt-customs-rhine-2026', de: 'wolfurt-zoll-rheintal-2026', fr: 'wolfurt-douane-rhin-2026' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

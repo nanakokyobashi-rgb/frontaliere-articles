@@ -7367,6 +7367,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.svizzera-ue-sanita-consiglio-stati.title': 'Le Conseil des États approuve l’accord de santé de l’UE',
     'blog.article.svizzera-ue-sanita-consiglio-stati.excerpt': '31 contre 11 : feu vert aux soins de santé de l’UE. Maintenant au Conseil national. Référendum facultatif choisi, électricité en hiver.',
     'blog.article.svizzera-ue-sanita-consiglio-stati.imageAlt': 'Palais fédéral à Berne, siège du Conseil des États',
+    'blog.article.wolfurt-sdoganamento-reno-2026.title': 'Wolfurt : arrêt pour le dédouanement d’importation à partir du 1er octobre',
+    'blog.article.wolfurt-sdoganamento-reno-2026.excerpt': 'À partir du 1er octobre 2026, les procédures pour le trafic commercial de marchandises dans la vallée du Rhin changeront : le dédouanement d’importation ne sera plus effectué à Wolfurt.',
+    'blog.article.wolfurt-sdoganamento-reno-2026.imageAlt': 'Trafic de marchandises à un poste-frontière dans la vallée du Rhin.',
 };
 
 export default blogMetaChFr;

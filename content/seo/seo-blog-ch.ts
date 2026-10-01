@@ -95531,6 +95531,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-wolfurt-sdoganamento-reno-2026': {
+    title: 'Wolfurt: stop allo sdoganamento import dal 1° ottobre',
+    description: 'Dal 1° ottobre 2026 cambiano le procedure per il traffico commerciale di merci nella Valle del Reno: a Wolfurt non si farà più lo sdoganamento all\'importazione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, wolfurt, stop, allo, sdoganamento',
+    ogTitle: 'Wolfurt: sdoganamento e procedure cambiano dal 1° ottobre',
+    ogDescription: 'Nella Valle del Reno cambiano le procedure per il traffico commerciale. Dal 1° ottobre 2026 Smart Border Austria e Passar 2.0 accompagnano il passaggio a processi più digitali e automatizzati; a Wolfurt termina lo sdoganamento all\'importazione.',
+    canonicalPath: '/articoli-svizzera/wolfurt-sdoganamento-reno-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Wolfurt: stop allo sdoganamento import dal 1° ottobre",
+      "description": "Dal 1° ottobre 2026 cambiano le procedure per il traffico commerciale di merci nella Valle del Reno: a Wolfurt non si farà più lo sdoganamento all'importazione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/wolfurt-sdoganamento-reno-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Traffico di merci a un posto di frontiera nella Valle del Reno."
+      },
+      "datePublished": "2026-10-01T15:43:42+00:00",
+      "dateModified": "2026-10-01T15:43:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/wolfurt-sdoganamento-reno-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -7367,6 +7367,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.svizzera-ue-sanita-consiglio-stati.title': 'Council of States approves EU healthcare agreement',
     'blog.article.svizzera-ue-sanita-consiglio-stati.excerpt': '31 against 11: green light for EU healthcare. Now to the National. Optional referendum chosen, electricity in winter.',
     'blog.article.svizzera-ue-sanita-consiglio-stati.imageAlt': 'Federal Palace in Bern, headquarters of the Council of States',
+    'blog.article.wolfurt-sdoganamento-reno-2026.title': 'Wolfurt: stop to import customs clearance from 1 October',
+    'blog.article.wolfurt-sdoganamento-reno-2026.excerpt': 'From 1 October 2026, the procedures for the commercial traffic of goods in the Rhine Valley will change: import customs clearance will no longer be carried out in Wolfurt.',
+    'blog.article.wolfurt-sdoganamento-reno-2026.imageAlt': 'Goods traffic at a border post in the Rhine Valley.',
 };
 
 export default blogMetaChEn;

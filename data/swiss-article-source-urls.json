@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4051353": {
-    "articleId": "tasso-ipotecario-riferimento-stabile",
-    "ts": "2026-09-01T12:04:28.107Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/8bjbd2b5j7tz": {
     "articleId": "formazione-azienda-prioritario",
     "ts": "2026-09-01T12:20:18.348Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/politica/1954055/ue-accordo-consiglio-svizzera-sanita-sicurezza-pacchetto-dossier-accordi-decreti": {
     "articleId": "svizzera-ue-sanita-consiglio-stati",
     "ts": "2026-10-01T15:19:08.340Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/7utg-tj4cxe-": {
+    "articleId": "wolfurt-sdoganamento-reno-2026",
+    "ts": "2026-10-01T15:43:42.614Z",
     "keyForm": 2
   }
 }
