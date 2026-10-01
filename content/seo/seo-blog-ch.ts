@@ -94946,6 +94946,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-agenda-parlamento-olimpiadi-navi': {
+    title: 'Camere svizzere: Olimpiadi, bilaterali, asilo e navi',
+    description: 'Il Parlamento esamina crediti per sport e Olimpiadi 2038, Bilaterali III, bandiera svizzera per le navi e cinque mozioni sull\'asilo. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, camere, svizzere, olimpiadi, bilaterali',
+    ogTitle: 'Camere svizzere: Olimpiadi, bilaterali, asilo e navi',
+    ogDescription: 'Dal credito di 8,24 milioni per gli eventi sportivi 2027-2029 ai 200 milioni per le Olimpiadi invernali 2038: il Nazionale vota, mentre gli Stati discutono Erasmus+, navigazione marittima e cinque mozioni sull\'asilo.',
+    canonicalPath: '/articoli-svizzera/agenda-parlamento-olimpiadi-navi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Camere svizzere: Olimpiadi, bilaterali, asilo e navi",
+      "description": "Il Parlamento esamina crediti per sport e Olimpiadi 2038, Bilaterali III, bandiera svizzera per le navi e cinque mozioni sull'asilo. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/agenda-parlamento-olimpiadi-navi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Seduta pomeridiana in un'aula parlamentare svizzera"
+      },
+      "datePublished": "2026-10-01T05:48:44+00:00",
+      "dateModified": "2026-10-01T05:48:44+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/agenda-parlamento-olimpiadi-navi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

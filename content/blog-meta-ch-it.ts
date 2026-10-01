@@ -7322,6 +7322,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.chifra-tabelle-doganali-2026.title': 'Chifra 2.1 e 3.1: aggiornate le regole doganali',
     'blog.article.chifra-tabelle-doganali-2026.excerpt': 'Dal 1° ottobre 2026 la comunicazione riorganizza Chifra 2.1 e chiarisce le esenzioni per tessere KD e B, modulo 14.60 e traffico turistico.',
     'blog.article.chifra-tabelle-doganali-2026.imageAlt': 'Aggiornamento sulle merci in franchigia e sulle tessere di legittimazione',
+    'blog.article.agenda-parlamento-olimpiadi-navi.title': 'Camere svizzere: Olimpiadi, bilaterali, asilo e navi',
+    'blog.article.agenda-parlamento-olimpiadi-navi.excerpt': 'Il Nazionale esamina 8,24 milioni per lo sport e 200 milioni per le Olimpiadi 2038. Gli Stati trattano Bilaterali III, navi e asilo.',
+    'blog.article.agenda-parlamento-olimpiadi-navi.imageAlt': 'Seduta pomeridiana in un\'aula parlamentare svizzera',
 };
 
 export default blogMetaChIt;

@@ -7322,6 +7322,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.chifra-tabelle-doganali-2026.title': 'Chifra 2.1 and 3.1: customs rules updated',
     'blog.article.chifra-tabelle-doganali-2026.excerpt': 'From 1 October 2026, the communication reorganizes Chifra 2.1 and clarifies the exemptions for KD and B cards, form 14.60 and tourist traffic.',
     'blog.article.chifra-tabelle-doganali-2026.imageAlt': 'Update on duty-free goods and legitimation cards',
+    'blog.article.agenda-parlamento-olimpiadi-navi.title': 'Swiss Chambers: Olympics, bilateral agreements, asylum and ships',
+    'blog.article.agenda-parlamento-olimpiadi-navi.excerpt': 'The National Council examines 8,24 million for sport and 200 million for the 2038 Olympics. The Council of States discusses Bilaterals III, ships and asylum.',
+    'blog.article.agenda-parlamento-olimpiadi-navi.imageAlt': 'Afternoon session in a Swiss parliamentary chamber',
 };
 
 export default blogMetaChEn;

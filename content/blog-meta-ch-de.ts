@@ -7322,6 +7322,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.chifra-tabelle-doganali-2026.title': 'Chifra 2.1 und 3.1: Zollregeln aktualisiert',
     'blog.article.chifra-tabelle-doganali-2026.excerpt': 'Ab dem 1. Oktober 2026 reorganisiert die Kommunikation Chifra 2.1 und klärt die Ausnahmen für KD- und B-Karten, Formular 14.60 sowie für Touristenverkehr.',
     'blog.article.chifra-tabelle-doganali-2026.imageAlt': 'Aktualisierung zu abgabenfreien Waren und Legitimationskarten',
+    'blog.article.agenda-parlamento-olimpiadi-navi.title': 'Schweizer Kammern: Olympische Spiele, bilaterale Abkommen, Asyl und Schiffe',
+    'blog.article.agenda-parlamento-olimpiadi-navi.excerpt': 'Der Nationalrat prüft 8,24 Millionen für den Sport und 200 Millionen für die Olympischen Spiele 2038. Der Ständerat behandelt Bilaterale III, Schiffe und Asyl.',
+    'blog.article.agenda-parlamento-olimpiadi-navi.imageAlt': 'Nachmittagssitzung in einem Schweizer Parlamentssaal',
 };
 
 export default blogMetaChDe;

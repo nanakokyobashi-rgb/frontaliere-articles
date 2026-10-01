@@ -7322,6 +7322,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.chifra-tabelle-doganali-2026.title': 'Chifra 2.1 et 3.1 : Mise à jour des règles douanières',
     'blog.article.chifra-tabelle-doganali-2026.excerpt': 'À partir du 1er octobre 2026, la communication réorganise Chifra 2.1 et clarifie les exemptions pour les cartes KD et B, le formulaire 14.60 et le trafic touristique.',
     'blog.article.chifra-tabelle-doganali-2026.imageAlt': 'Mise à jour sur les marchandises en franchise et les cartes de légitimation',
+    'blog.article.agenda-parlamento-olimpiadi-navi.title': 'Chambres suisses : Jeux olympiques, accords bilatéraux, asile et navires',
+    'blog.article.agenda-parlamento-olimpiadi-navi.excerpt': 'Le National examine 8,24 millions pour le sport et 200 millions pour les Jeux olympiques de 2038. Les États s’occupent du Bilateral III, des navires et de l’asile.',
+    'blog.article.agenda-parlamento-olimpiadi-navi.imageAlt': 'Séance de l\'après-midi dans une salle parlementaire suisse',
 };
 
 export default blogMetaChFr;
