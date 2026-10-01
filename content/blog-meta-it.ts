@@ -12329,6 +12329,11 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.snl-locarno-magadino-garanzie.title': 'SNL: 5 posti a rischio, chieste garanzie FART',
     'blog.article.snl-locarno-magadino-garanzie.excerpt': 'Assemblea a Locarno il 29/09/2026: 5 dipendenti SNL minacciati da disdetta o stagionalità. Sindacati chiedono transizione ordinata alle FART.',
     'blog.article.snl-locarno-magadino-garanzie.imageAlt': 'Traghetti SNL ormeggiati al porto di Locarno sul Lago Maggiore.',
+    'blog.article.bollettino-frontaliere-2026-10-01.title': 'Bollettino del frontaliere – 1 ottobre 2026: a Stühlingen – Schleitheim 36 minuti di coda',
+    'blog.article.bollettino-frontaliere-2026-10-01.excerpt': 'I numeri di oggi, 1 ottobre 2026, per chi attraversa il confine: le attese ai valichi misurate stamattina, i comuni dove la benzina costa meno, il cambio franco-euro aggiornato e i nuovi annunci di lavoro pubblicati in Svizzera. Dati del nostro monitoraggio, rilevati ogni giorno.',
+    'blog.article.bollettino-frontaliere-2026-10-01.imageAlt': 'I numeri del giorno per i frontalieri – 1 ottobre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro',
+    'blog.article.bollettino-frontaliere-2026-10-01.seoDescription': 'Bollettino frontalieri del 1 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
+    'blog.article.bollettino-frontaliere-2026-10-01.ogDescription': 'I numeri del 1 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
 };
 
 export default blogMetaIt;
