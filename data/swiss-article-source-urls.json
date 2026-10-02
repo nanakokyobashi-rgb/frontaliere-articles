@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/dare-alle-lenticchie-la-consistenza-della-carne%2c-ricerca-eth/91987836": {
-    "articleId": "legumi-texture-carne-ricerca-eth",
-    "ts": "2026-09-01T18:05:27.136Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/settore-dei-servizi%2c-forte-aumento-del-fatturato-in-giugno/91989104": {
     "articleId": "settore-servizi-aumento-fatturato-giugno",
     "ts": "2026-09-01T18:16:11.745Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4128663": {
     "articleId": "cambio-cassa-sondaggio",
     "ts": "2026-10-02T06:43:46.339Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1954194/assicurazione-malattia-svizzera-deloitte-malati-prevede-cassa": {
+    "articleId": "deloitte-previsione-cambi-cassa-malati",
+    "ts": "2026-10-02T06:54:49.225Z",
     "keyForm": 2
   }
 }

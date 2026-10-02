@@ -96857,6 +96857,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-deloitte-previsione-cambi-cassa-malati': {
+    title: 'Casse malati, fino a 900mila cambi per l\'anno prossimo',
+    description: 'Tra 600mila e 900mila assicurati potrebbero cambiare cassa malati l\'anno prossimo. I dati del sondaggio YouGov per Deloitte in Svizzera e Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, casse, malati, fino, 900mila',
+    ogTitle: 'Casse malati, fino a 900mila cambi per l\'anno prossimo',
+    ogDescription: 'Un sondaggio YouGov per Deloitte prevede tra 600\'000 e 900\'000 cambi di cassa malati per l\'anno prossimo. Scopri i dati su controlli, premi e aumenti in Svizzera e in Ticino.',
+    canonicalPath: '/articoli-svizzera/deloitte-previsione-cambi-cassa-malati/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Casse malati, fino a 900mila cambi per l'anno prossimo",
+      "description": "Tra 600mila e 900mila assicurati potrebbero cambiare cassa malati l'anno prossimo. I dati del sondaggio YouGov per Deloitte in Svizzera e Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/deloitte-previsione-cambi-cassa-malati.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Previsioni Deloitte sui cambi di cassa malati in Svizzera e Ticino"
+      },
+      "datePublished": "2026-10-02T06:54:48+00:00",
+      "dateModified": "2026-10-02T06:54:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/deloitte-previsione-cambi-cassa-malati/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
