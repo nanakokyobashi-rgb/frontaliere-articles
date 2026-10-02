@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1947550/svizzera-euro-tassi-franco-agosto": {
-    "articleId": "franco-svizzero-euro-minimi",
-    "ts": "2026-09-02T12:44:14.777Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/politica/1947569/piu-lavori-piu-ti-resta": {
     "articleId": "laps-ticino-incentivi-lavoro",
     "ts": "2026-09-02T13:49:51.192Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1954240/micasa-investitori-filiali-proprieta-langendorf": {
     "articleId": "micasa-investitori-svizzeri-chiude-filiali",
     "ts": "2026-10-02T14:05:40.100Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/poveri-versano-altrettante-tasse-dei-ricchi%2c-secondo-studio-eth/92157999": {
+    "articleId": "studio-eth-carico-fiscale-svizzera",
+    "ts": "2026-10-02T14:34:59.433Z",
     "keyForm": 2
   }
 }
