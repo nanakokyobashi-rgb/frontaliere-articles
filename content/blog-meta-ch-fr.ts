@@ -7448,6 +7448,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.stipendi-professioni-cantoni-2026.title': 'Salaire moyen des professions en Suisse 2026 : comparaison',
     'blog.article.stipendi-professioni-cantoni-2026.excerpt': 'Comparaison des professions, secteurs et cantons en 2026 : impôt fédéral direct, AHV/IV/EO, BVG, KVG et salaire minimum.',
     'blog.article.stipendi-professioni-cantoni-2026.imageAlt': 'Comparaison des salaires moyens par profession et canton en Suisse en 2026',
+    'blog.article.sostegno-formazione-basilea.title': 'Bourses dans le canton de Bâle-Landschaft : exigences et montants',
+    'blog.article.sostegno-formazione-basilea.excerpt': 'Guide des bourses et prêts étudiants dans le canton de Bâle-Landschaft : exigences, montants maximaux, délais de soumission et bureau cantonal compétent.',
+    'blog.article.sostegno-formazione-basilea.imageAlt': 'Bourses et prêts d\'études dans le canton de Basilea Campagna',
 };
 
 export default blogMetaChFr;

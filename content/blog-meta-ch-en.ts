@@ -7448,6 +7448,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.stipendi-professioni-cantoni-2026.title': 'Average salary by profession in Switzerland 2026: comparison',
     'blog.article.stipendi-professioni-cantoni-2026.excerpt': 'Comparison of professions, sectors and cantons in 2026: direct federal tax, AHV/IV/EO, BVG, KVG AND MINIMUM WAGE.',
     'blog.article.stipendi-professioni-cantoni-2026.imageAlt': 'Comparison of average salaries by profession and canton in Switzerland in 2026',
+    'blog.article.sostegno-formazione-basilea.title': 'Scholarships in the canton of Basel-Landschaft: requirements and amounts',
+    'blog.article.sostegno-formazione-basilea.excerpt': 'Guide to scholarships and student loans in the Canton of Basel-Landschaft: requirements, maximum amounts, deadlines for submission and competent cantonal office.',
+    'blog.article.sostegno-formazione-basilea.imageAlt': 'Scholarships and study loans in the Canton of Basilea Campagna',
 };
 
 export default blogMetaChEn;

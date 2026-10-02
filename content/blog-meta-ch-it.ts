@@ -7448,6 +7448,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.stipendi-professioni-cantoni-2026.title': 'Salario medio professioni Svizzera 2026: confronto',
     'blog.article.stipendi-professioni-cantoni-2026.excerpt': 'Confronto 2026 tra professioni, settori e cantoni: imposta federale diretta, AVS/AI/IPG, LPP, LAMal e salario minimo.',
     'blog.article.stipendi-professioni-cantoni-2026.imageAlt': 'Confronto dei salari medi per professione e cantone in Svizzera nel 2026',
+    'blog.article.sostegno-formazione-basilea.title': 'Borse di studio canton Basilea Campagna: requisiti e importi',
+    'blog.article.sostegno-formazione-basilea.excerpt': 'Guida a borse e prestiti allo studio nel Cantone di Basilea Campagna: requisiti, importi massimi, termini di presentazione e ufficio cantonale competente.',
+    'blog.article.sostegno-formazione-basilea.imageAlt': 'Borse di studio e prestiti nel Cantone di Basilea Campagna',
 };
 
 export default blogMetaChIt;

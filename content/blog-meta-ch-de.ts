@@ -7448,6 +7448,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.stipendi-professioni-cantoni-2026.title': 'Durchschnittsgehalt für Berufe in der Schweiz 2026: Vergleich',
     'blog.article.stipendi-professioni-cantoni-2026.excerpt': 'Vergleich 2026 zwischen Berufen, Branchen und Kantonen: direkte Bundessteuer, AHV/IV/EO, BVG, KVG und Mindestlohn.',
     'blog.article.stipendi-professioni-cantoni-2026.imageAlt': 'Vergleich der Durchschnittslöhne nach Beruf und Kanton in der Schweiz 2026',
+    'blog.article.sostegno-formazione-basilea.title': 'Stipendien im Kanton Basel-Landschaft: Anforderungen und Beträge',
+    'blog.article.sostegno-formazione-basilea.excerpt': 'Leitfaden zu Stipendien und Studiendarlehen im Kanton Basel-Landschaft: Anforderungen, Höchstbeträge, Einreichungsfristen und zuständiges Kantonsamt.',
+    'blog.article.sostegno-formazione-basilea.imageAlt': 'Stipendien und Studiendarlehen im Kanton Basilea Campagna',
 };
 
 export default blogMetaChDe;
