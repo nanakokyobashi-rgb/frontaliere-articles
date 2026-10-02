@@ -7508,6 +7508,18 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.franco-apprezzamento-eurozona.title': 'Le franc suisse grimpe fortement : l’euro chute à 0,93 CHF',
     'blog.article.franco-apprezzamento-eurozona.excerpt': 'Le franc apprécie plus d’un centime par jour. Craintes concernant la dette publique européenne et les taux de la BNS à 0 %.',
     'blog.article.franco-apprezzamento-eurozona.imageAlt': 'Vue du lac de Lugano avec des montagnes en arrière-plan, lumière du matin sur l\'eau, ambiance financière suisse.',
+    'blog.article.defr-successore-parmelin-sfide.title': 'Le successeur de Parmelin : tarifs douaniers, agriculture et logement américains',
+    'blog.article.defr-successore-parmelin-sfide.excerpt': 'Le nouveau responsable de l’EAER s’attaquera aux tarifs américains, au PA30+ et au plan logement avec plus de 30 mesures, entre le vote du 29 novembre et la date limite de 2028.',
+    'blog.article.defr-successore-parmelin-sfide.imageAlt': 'Le Palais fédéral à Berne au crépuscule, avec des vignes au premier plan, symbole des défis agricoles et économiques du DFEP.',
+    'blog.article.proroga-aiuto-monetario-fmi.title': 'Aide financière : prolongation à 10 milliards jusqu’en 2033',
+    'blog.article.proroga-aiuto-monetario-fmi.excerpt': 'Le Conseil fédéral propose au parlement de prolonger le décret jusqu’en avril 2033, en maintenant le plafond de 10 milliards.',
+    'blog.article.proroga-aiuto-monetario-fmi.imageAlt': 'Le Palais fédéral à Berne, siège du Conseil fédéral.',
+    'blog.article.moderniz-perseguimento-penale.title': 'La Suisse engage une consultation sur le troisième protocole de la CEAGG',
+    'blog.article.moderniz-perseguimento-penale.excerpt': 'Le Conseil fédéral a ouvert la consultation sur le troisième protocole CEAG le 2 octobre 2026, qui se clôturera le 19 janvier 2027 ; La Suisse a signé le texte à Malte le 19 septembre 2025.',
+    'blog.article.moderniz-perseguimento-penale.imageAlt': 'Palais fédéral suisse avec des symboles d\'échange de données numériques représentant la coopération judiciaire transfrontalière',
+    'blog.article.otto-progetti-ricostruzione-ucraina.title': 'Ukraine : huit projets suisses pour 135 millions',
+    'blog.article.otto-progetti-ricostruzione-ucraina.excerpt': 'Le Conseil fédéral alloue 135 millions de CHF à huit projets d’entreprises suisses en Ukraine, notamment l’énergie, les transports publics et l’eau.',
+    'blog.article.otto-progetti-ricostruzione-ucraina.imageAlt': 'Le Castelgrande, image éditoriale sur des projets suisses en Ukraine',
 };
 
 export default blogMetaChFr;

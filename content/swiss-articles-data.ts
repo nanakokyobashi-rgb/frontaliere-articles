@@ -22552,6 +22552,42 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'defr-successore-parmelin-sfide',
+    category: 'novita',
+    date: '2026-10-02T12:42:35.604Z',
+    image: '/images/blog/defr-successore-parmelin-sfide.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'proroga-aiuto-monetario-fmi',
+    category: 'novita',
+    date: '2026-10-02T13:01:16.412Z',
+    image: '/images/blog/proroga-aiuto-monetario-fmi.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'moderniz-perseguimento-penale',
+    category: 'novita',
+    date: '2026-10-02T13:14:42.871Z',
+    image: '/images/blog/moderniz-perseguimento-penale.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'otto-progetti-ricostruzione-ucraina',
+    category: 'novita',
+    date: '2026-10-02T13:28:19.956Z',
+    image: '/images/blog/otto-progetti-ricostruzione-ucraina.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

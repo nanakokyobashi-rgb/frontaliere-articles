@@ -7508,6 +7508,18 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.franco-apprezzamento-eurozona.title': 'Der Schweizer Franken steigt stark: Euro fällt auf 0,93 CHF',
     'blog.article.franco-apprezzamento-eurozona.excerpt': 'Der Franken steigt an einem Tag um mehr als einen Cent an. Befürchtungen über europäische Staatsanleihen und SNB-Zinsen bei 0 %.',
     'blog.article.franco-apprezzamento-eurozona.imageAlt': 'Aussicht auf den Luganersee mit Bergen im Hintergrund, Morgenlicht auf dem Wasser, Schweizer Finanzstimmung.',
+    'blog.article.defr-successore-parmelin-sfide.title': 'Parmelins Nachfolger: US-Zölle, Landwirtschaft und Wohnungsbau',
+    'blog.article.defr-successore-parmelin-sfide.excerpt': 'Der neue Leiter des EAER wird sich zwischen der Abstimmung am 29. November und der Deadline 2028 mit mehr als 30 Maßnahmen mit US-Zöllen, PA30+ und dem Wohnungsbauplan befassen.',
+    'blog.article.defr-successore-parmelin-sfide.imageAlt': 'Der Bundespalast in Bern bei Dämmerung, im Vordergrund Reben, Symbol für die landwirtschaftlichen und wirtschaftlichen Herausforderungen des WBF.',
+    'blog.article.proroga-aiuto-monetario-fmi.title': 'Währungshilfe: Verlängerung auf 10 Mrd. bis 2033',
+    'blog.article.proroga-aiuto-monetario-fmi.excerpt': 'Der Bundesrat schlägt dem Parlament vor, das Dekret bis April 2033 zu verlängern und die Obergrenze von 10 Milliarden beizubehalten.',
+    'blog.article.proroga-aiuto-monetario-fmi.imageAlt': 'Das Bundeshaus in Bern, Sitz des Bundesrats.',
+    'blog.article.moderniz-perseguimento-penale.title': 'Die Schweiz leitet eine Konsultation zum dritten ECAG-Protokoll ein',
+    'blog.article.moderniz-perseguimento-penale.excerpt': 'Der Bundesrat hat am 2. Oktober 2026 die Vernehmlassung zum dritten CEAG-Protokoll eröffnet, die am 19. Januar 2027 abgeschlossen wird; die Schweiz hat den Text am 19. September 2025 in Malta unterzeichnet.',
+    'blog.article.moderniz-perseguimento-penale.imageAlt': 'Bundeshaus der Schweiz mit Symbolen für digitalen Datenaustausch, die die grenzüberschreitende Justizzusammenarbeit darstellen',
+    'blog.article.otto-progetti-ricostruzione-ucraina.title': 'Ukraine: acht Schweizer Projekte im Wert von 135 Millionen',
+    'blog.article.otto-progetti-ricostruzione-ucraina.excerpt': 'Der Bundesrat stellt 135 Millionen Franken für acht Projekte Schweizer Unternehmen in der Ukraine bereit, in den Bereichen Energie, öffentlicher Verkehr und Wasserressourcen.',
+    'blog.article.otto-progetti-ricostruzione-ucraina.imageAlt': 'Castelgrande, redaktionelles Bild zu Schweizer Projekten in der Ukraine',
 };
 
 export default blogMetaChDe;

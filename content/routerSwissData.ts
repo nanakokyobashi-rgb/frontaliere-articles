@@ -2525,6 +2525,10 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'parmelin-successore-defr': { it: 'parmelin-successore-defr', en: 'parmelin-successor-defr', de: 'parmelin-nachfolger-defr', fr: 'parmelin-successeur-defr' },
  'ordinanza-vigilanza-mercati-energia': { it: 'ordinanza-vigilanza-mercati-energia', en: 'ordinance-supervision-energy-markets', de: 'verordnung-aufsicht-energiemaerkte', fr: 'ordonnance-surveillance-marches-energie' },
  'franco-apprezzamento-eurozona': { it: 'franco-apprezzamento-eurozona', en: 'franc-strengthens-eurozone', de: 'franken-verstarkt-eurozone', fr: 'franc-se-reforce-zoneuro' },
+ 'defr-successore-parmelin-sfide': { it: 'defr-successore-parmelin-sfide', en: 'defr-parmelin-successor-challenges', de: 'wbf-nachfolger-parmelin-herausforderungen', fr: 'dfep-successeur-parmelin-defis' },
+ 'proroga-aiuto-monetario-fmi': { it: 'proroga-aiuto-monetario-fmi', en: 'monetary-aid-extension-imf', de: 'geldhilfe-verlaengerung-ifi', fr: 'prolongation-aide-monetaire-fmi' },
+ 'moderniz-perseguimento-penale': { it: 'moderniz-perseguimento-penale', en: 'switzerland-initiates-consultation-on-the-third-ecag-protocol', de: 'die-schweiz-leitet-eine-konsultation-zum-dritten-ecag-protokoll-ein', fr: 'la-suisse-engage-une-consultation-sur-le-troisieme-protocole-de-la-ceagg' },
+ 'otto-progetti-ricostruzione-ucraina': { it: 'otto-progetti-ricostruzione-ucraina', en: 'eight-ukraine-reconstruction-projects', de: 'acht-ukraine-wiederaufbauprojekte', fr: 'huit-projets-reconstruction-ukraine' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

@@ -1,24 +1,4 @@
 {
-  "https://www.laregione.ch/svizzera/svizzera/1947513/un-tribunale-ordina-ai-promotori-dell-iniziativa-sulla-neutralita-di-correggere-il-loro-bollettino": {
-    "articleId": "tribunale-ordina-bollettino-neutralita",
-    "ts": "2026-09-02T09:41:45.292Z",
-    "keyForm": 2
-  },
-  "https://www.admin.ch/it/newnsb/egx1xhifgtun": {
-    "articleId": "postazione-lavoro-sovranita-digitale",
-    "ts": "2026-09-02T10:24:41.647Z",
-    "keyForm": 2
-  },
-  "https://www.rsi.ch/s/4054524": {
-    "articleId": "aiuti-malattie-rare-2025",
-    "ts": "2026-09-02T11:33:45.167Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/politica/1947536/agricoltori-margine-manovra-politica-cf": {
-    "articleId": "politica-agricola-2030-tagli-120-milioni",
-    "ts": "2026-09-02T11:48:15.361Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/sdanuz7ynr9j": {
     "articleId": "consiglio-federale-consultazione-agricola-2030",
     "ts": "2026-09-02T12:18:01.923Z",
@@ -2497,6 +2477,26 @@
   "https://www.swissinfo.ch/ita/franco-si-rafforza-bruscamente%2c-tornano-i-timori-sull%27eurozona/92156931": {
     "articleId": "franco-apprezzamento-eurozona",
     "ts": "2026-10-02T12:25:43.610Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1954249/parmelin-dovra-svizzera-successore-sfide-dazi-agricoltura": {
+    "articleId": "defr-successore-parmelin-sfide",
+    "ts": "2026-10-02T12:42:35.921Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/l-zk1ztp5vve": {
+    "articleId": "proroga-aiuto-monetario-fmi",
+    "ts": "2026-10-02T13:01:16.783Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/g2c0adhrztcy": {
+    "articleId": "moderniz-perseguimento-penale",
+    "ts": "2026-10-02T13:14:43.242Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/4xkhpgvw0ryd": {
+    "articleId": "otto-progetti-ricostruzione-ucraina",
+    "ts": "2026-10-02T13:28:20.333Z",
     "keyForm": 2
   }
 }

@@ -7508,6 +7508,18 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.franco-apprezzamento-eurozona.title': 'Franco in forte rialzo: l\'euro scende a 0,93 CHF',
     'blog.article.franco-apprezzamento-eurozona.excerpt': 'Il franco si apprezza oltre un centesimo in un giorno. Timori sul debito pubblico europeo e tassi BNS allo 0%.',
     'blog.article.franco-apprezzamento-eurozona.imageAlt': 'Vista sul Lago di Lugano con montagne sullo sfondo, luce mattutina sull\'acqua, atmosfera finanziaria svizzera.',
+    'blog.article.defr-successore-parmelin-sfide.title': 'Successore di Parmelin: dazi USA, agricoltura e alloggi',
+    'blog.article.defr-successore-parmelin-sfide.excerpt': 'Il nuovo capo del DEFR affronterà i dazi USA, la PA30+ e il piano alloggi con oltre 30 misure, tra voto del 29 novembre e scadenza 2028.',
+    'blog.article.defr-successore-parmelin-sfide.imageAlt': 'Il Palazzo federale a Berna al tramonto, con vigneti in primo piano, simbolo delle sfide agricole ed economiche del DEFR.',
+    'blog.article.proroga-aiuto-monetario-fmi.title': 'Aiuto monetario: proroga a 10 mld fino al 2033',
+    'blog.article.proroga-aiuto-monetario-fmi.excerpt': 'Il Consiglio federale propone al Parlamento di estendere il decreto fino ad aprile 2033, mantenendo il tetto di 10 miliardi.',
+    'blog.article.proroga-aiuto-monetario-fmi.imageAlt': 'Il Palazzo federale a Berna, sede del Consiglio federale che ha approvato il messaggio.',
+    'blog.article.moderniz-perseguimento-penale.title': 'Svizzera avvia consulta sul terzo protocollo CEAG',
+    'blog.article.moderniz-perseguimento-penale.excerpt': 'Il Consiglio federale ha aperto la consultazione sul terzo protocollo CEAG il 2 ottobre 2026, che si chiuderà il 19 gennaio 2027; la Svizzera ha firmato il testo a Malta il 19 settembre 2025.',
+    'blog.article.moderniz-perseguimento-penale.imageAlt': 'Palazzo federale svizzero con simboli di scambio dati digitali che rappresentano la cooperazione giudiziaria transfrontaliera',
+    'blog.article.otto-progetti-ricostruzione-ucraina.title': 'Ucraina: otto progetti svizzeri per 135 milioni',
+    'blog.article.otto-progetti-ricostruzione-ucraina.excerpt': 'Il Consiglio federale destina 135 milioni di franchi a otto progetti di aziende svizzere in Ucraina, tra energia, trasporti pubblici e risorse idriche.',
+    'blog.article.otto-progetti-ricostruzione-ucraina.imageAlt': 'Castelgrande, immagine editoriale per i progetti svizzeri in Ucraina',
 };
 
 export default blogMetaChIt;

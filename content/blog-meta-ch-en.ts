@@ -7508,6 +7508,18 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.franco-apprezzamento-eurozona.title': 'Swiss franc rises sharply: euro falls to CHF 0.93',
     'blog.article.franco-apprezzamento-eurozona.excerpt': 'The franc appreciates more than a cent in a day. Fears about European public debt and SNB rates at 0%.',
     'blog.article.franco-apprezzamento-eurozona.imageAlt': 'View of Lake Lugano with mountains in the background, morning light on the water, Swiss financial atmosphere.',
+    'blog.article.defr-successore-parmelin-sfide.title': 'Parmelin\'s successor: US tariffs, agriculture and housing',
+    'blog.article.defr-successore-parmelin-sfide.excerpt': 'The new head of the EAER will tackle US tariffs, PA30+ and the housing plan with more than 30 measures, between the vote on November 29 and the 2028 deadline.',
+    'blog.article.defr-successore-parmelin-sfide.imageAlt': 'The Federal Palace in Bern at dusk, with vineyards in the foreground, symbolizing the DEFR\'s agricultural and economic challenges.',
+    'blog.article.proroga-aiuto-monetario-fmi.title': 'Monetary aid: extension to 10 billion until 2033',
+    'blog.article.proroga-aiuto-monetario-fmi.excerpt': 'The Federal Council proposes that Parliament extend the decree until April 2033, maintaining the cap of 10 billion.',
+    'blog.article.proroga-aiuto-monetario-fmi.imageAlt': 'The Federal Palace in Bern, seat of the Federal Council.',
+    'blog.article.moderniz-perseguimento-penale.title': 'Switzerland initiates consultation on the third ECAG Protocol',
+    'blog.article.moderniz-perseguimento-penale.excerpt': 'The Federal Council opened the consultation on the third CEAG protocol on 2 October 2026, which will close on 19 January 2027; Switzerland signed the text in Malta on 19 September 2025.',
+    'blog.article.moderniz-perseguimento-penale.imageAlt': 'Swiss Federal Palace with digital data exchange symbols representing transborder judicial cooperation',
+    'blog.article.otto-progetti-ricostruzione-ucraina.title': 'Ukraine: eight Swiss projects worth 135 million',
+    'blog.article.otto-progetti-ricostruzione-ucraina.excerpt': 'The Federal Council allocates 135 million francs to eight projects by Swiss companies in Ukraine, spanning energy, public transport and water resources.',
+    'blog.article.otto-progetti-ricostruzione-ucraina.imageAlt': 'Castelgrande, editorial image for Swiss projects in Ukraine',
 };
 
 export default blogMetaChEn;

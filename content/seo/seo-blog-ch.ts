@@ -97364,6 +97364,162 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-defr-successore-parmelin-sfide': {
+    title: 'Successore di Parmelin: dazi USA, agricoltura e alloggi',
+    description: 'Il nuovo capo del DEFR eredita dazi USA, PA30+ e piano alloggi. Voto 29 novembre su materiale bellico e scadenza 2028 per l\'agricoltura. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, successore, parmelin, dazi, agricoltura',
+    ogTitle: 'Successore Parmelin: sfide DEFR, dazi e alloggi',
+    ogDescription: 'Il futuro capo del DEFR affronterà i dazi USA, la difesa della PA30+ nel 2028 e il piano nazionale sugli alloggi. Tante le scadenze: voto del 29 novembre e negoziati commerciali.',
+    canonicalPath: '/articoli-svizzera/defr-successore-parmelin-sfide/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Successore di Parmelin: dazi USA, agricoltura e alloggi",
+      "description": "Il nuovo capo del DEFR eredita dazi USA, PA30+ e piano alloggi. Voto 29 novembre su materiale bellico e scadenza 2028 per l'agricoltura. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/defr-successore-parmelin-sfide.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Il Palazzo federale a Berna al tramonto, con vigneti in primo piano, simbolo delle sfide agricole ed economiche del DEFR."
+      },
+      "datePublished": "2026-10-02T12:42:35+00:00",
+      "dateModified": "2026-10-02T12:42:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/defr-successore-parmelin-sfide/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-proroga-aiuto-monetario-fmi': {
+    title: 'Aiuto monetario: proroga a 10 mld fino al 2033',
+    description: 'Il Consiglio federale propone di prorogare l\'aiuto monetario internazionale fino ad aprile 2033 con un tetto di 10 miliardi di franchi. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, aiuto, monetario, proroga, fino',
+    ogTitle: 'Aiuto monetario: proroga a 10 mld fino al 2033',
+    ogDescription: 'Il Consiglio federale ha approvato il messaggio per prorogare l\'aiuto monetario internazionale fino ad aprile 2033. Il tetto massimo resta di 10 miliardi di franchi. La quota FMI svizzera vale circa 90 milioni. Scopri i dettagli del dossier federale.',
+    canonicalPath: '/articoli-svizzera/proroga-aiuto-monetario-fmi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aiuto monetario: proroga a 10 mld fino al 2033",
+      "description": "Il Consiglio federale propone di prorogare l'aiuto monetario internazionale fino ad aprile 2033 con un tetto di 10 miliardi di franchi. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/proroga-aiuto-monetario-fmi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Il Palazzo federale a Berna, sede del Consiglio federale che ha approvato il messaggio."
+      },
+      "datePublished": "2026-10-02T13:01:16+00:00",
+      "dateModified": "2026-10-02T13:01:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/proroga-aiuto-monetario-fmi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-moderniz-perseguimento-penale': {
+    title: 'Svizzera avvia consulta sul terzo protocollo CEAG',
+    description: 'La Svizzera ha avviato il 2 ottobre 2026 la consultazione sul terzo protocollo CEAG, che si chiuderà il 19 gennaio 2027, dopo la firma a Malta il 19 settembre',
+    keywords: 'frontalieri, ticino, svizzera, italia, avvia, consulta, terzo, protocollo',
+    ogTitle: 'Svizzera avvia consulta sul terzo protocollo CEAG',
+    ogDescription: 'Il Consiglio federale ha aperto la procedura di consultazione sul terzo protocollo alla Convenzione europea di assistenza giudiziaria in materia penale il 2 ottobre 2026, con scadenza fissata al 19 gennaio 2027. La Svizzera aveva già firmato il testo',
+    canonicalPath: '/articoli-svizzera/moderniz-perseguimento-penale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Svizzera avvia consulta sul terzo protocollo CEAG",
+      "description": "La Svizzera ha avviato il 2 ottobre 2026 la consultazione sul terzo protocollo CEAG, che si chiuderà il 19 gennaio 2027, dopo la firma a Malta il 19 settembre",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/moderniz-perseguimento-penale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale svizzero con simboli di scambio dati digitali che rappresentano la cooperazione giudiziaria transfrontaliera"
+      },
+      "datePublished": "2026-10-02T13:14:42+00:00",
+      "dateModified": "2026-10-02T13:14:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/moderniz-perseguimento-penale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-otto-progetti-ricostruzione-ucraina': {
+    title: 'Ucraina: otto progetti svizzeri per 135 milioni',
+    description: 'Il Consiglio federale destina 135 milioni di franchi a otto progetti di aziende svizzere in Ucraina, tra energia, trasporti pubblici e risorse idriche.',
+    keywords: 'frontalieri, ticino, svizzera, italia, ucraina, otto, progetti, svizzeri',
+    ogTitle: 'Otto progetti svizzeri per la ricostruzione ucraina',
+    ogDescription: 'Il 2 ottobre 2026 il Consiglio federale ha approvato otto progetti di imprese svizzere nel programma nazionale per l\'Ucraina. Il finanziamento previsto è di 135 milioni di franchi e copre energia, trasporti pubblici e risorse idriche. La selezione è',
+    canonicalPath: '/articoli-svizzera/otto-progetti-ricostruzione-ucraina/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ucraina: otto progetti svizzeri per 135 milioni",
+      "description": "Il Consiglio federale destina 135 milioni di franchi a otto progetti di aziende svizzere in Ucraina, tra energia, trasporti pubblici e risorse idriche.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/otto-progetti-ricostruzione-ucraina.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Castelgrande, immagine editoriale per i progetti svizzeri in Ucraina"
+      },
+      "datePublished": "2026-10-02T13:28:20+00:00",
+      "dateModified": "2026-10-02T13:28:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/otto-progetti-ricostruzione-ucraina/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
