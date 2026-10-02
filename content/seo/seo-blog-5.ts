@@ -98197,6 +98197,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-guasto-treno-s50-busto-arsizio-2026': {
+    title: 'S50 guasto a Busto Arsizio: passeggeri bloccati 3 ore',
+    description: 'Treno S50 Malpensa-Bellinzona guasto a Busto Arsizio: passeggeri fermi 3 ore. Europa Verde chiede spiegazioni a Rfi e Trenord sulla gestione del disagio.',
+    keywords: 'frontalieri, ticino, svizzera, italia, guasto, busto, arsizio, passeggeri',
+    ogTitle: 'Guasto S50 Busto Arsizio: passeggeri bloccati 3 ore',
+    ogDescription: 'Un guasto sulla linea S50 Malpensa-Bellinzona ha lasciato i passeggeri bloccati per oltre tre ore a soli 200 metri dalla stazione. Europa Verde solleva il tema dell\'affidabilità del servizio ferroviario transfrontaliero.',
+    canonicalPath: '/articoli-frontaliere/guasto-treno-s50-busto-arsizio-2026',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "S50 guasto a Busto Arsizio: passeggeri bloccati 3 ore",
+      "description": "Treno S50 Malpensa-Bellinzona guasto a Busto Arsizio: passeggeri fermi 3 ore. Europa Verde chiede spiegazioni a Rfi e Trenord sulla gestione del disagio.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/guasto-treno-s50-busto-arsizio-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Treno S50 fermo sui binari vicino alla stazione di Busto Arsizio"
+      },
+      "datePublished": "2026-10-02T20:21:36+00:00",
+      "dateModified": "2026-10-02T20:21:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/guasto-treno-s50-busto-arsizio-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
