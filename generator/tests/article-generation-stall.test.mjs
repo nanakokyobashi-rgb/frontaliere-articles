@@ -24,6 +24,7 @@ import {
   appendEvergreenRejected,
   loadEvergreenRejectedTracker,
   EVERGREEN_STRIKE_LIMIT,
+  EVERGREEN_REJECTED_MAX_IDS,
 } from '../scripts/lib/article-topic-selector.mjs';
 
 // ── Defect 1: all-caps emphasis harvested as required "institutions" ──
@@ -141,6 +142,25 @@ test('strikes are per-keyword and do not disturb the permanent ban list', () => 
   assert.equal(isEvergreenRejected(t, 'kw-unlucky'), false);
   assert.deepEqual(t.keywords, ['kw-dup']);
   assert.equal(t.strikes['kw-doomed'], EVERGREEN_STRIKE_LIMIT);
+});
+
+test('the shared rejection ledger can retain both current evergreen pools', () => {
+  // Current pools: 537 frontaliere + 610 svizzera topics. The tracker path is
+  // shared by both sections, so its cap must cover their combined candidates
+  // or FIFO eviction makes already-rejected topics eligible for another run.
+  const currentCombinedPoolSize = 537 + 610;
+  assert.ok(
+    EVERGREEN_REJECTED_MAX_IDS >= currentCombinedPoolSize,
+    `rejection cap ${EVERGREEN_REJECTED_MAX_IDS} is below current combined pool ${currentCombinedPoolSize}`,
+  );
+
+  let tracker = { keywords: [], strikes: {}, topicGateUrls: {} };
+  for (let i = 0; i < currentCombinedPoolSize; i++) {
+    tracker = appendEvergreenRejected(tracker, `evergreen-topic-${i}`);
+  }
+  assert.equal(tracker.keywords.length, currentCombinedPoolSize);
+  assert.equal(tracker.keywords[0], 'evergreen-topic-0');
+  assert.equal(tracker.keywords.at(-1), `evergreen-topic-${currentCombinedPoolSize - 1}`);
 });
 
 test('a tracker file written before strikes existed still loads', () => {

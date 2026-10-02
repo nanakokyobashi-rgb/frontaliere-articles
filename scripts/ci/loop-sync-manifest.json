@@ -2063,7 +2063,7 @@
       "path": "generator/scripts/lib/article-topic-selector.mjs",
       "sitePath": "scripts/lib/article-topic-selector.mjs",
       "mode": "adapted",
-      "reason": "Selettore dei topic. Divergente anche da `be6b31d5`: due sole righe, l'import di `corpusPath` da `./corpus-paths.mjs` e il default di `loadExistingItTitles`, che qui deve risolvere dentro `content/` invece che sotto `services/locales/`. Adattamento di trasporto puro; qualunque altra modifica del sito e' copiabile sopra.",
+      "reason": "Selettore dei topic. Divergente anche da `be6b31d5`: due righe di trasporto (`corpusPath` e il default di `loadExistingItTitles`) e, qui soltanto, il cap del ledger evergreen portato a 2048. Le sezioni frontaliere e svizzera condividono lo stesso file di stato e i pool correnti hanno circa 537 e 610 topic: il vecchio cap 500 espelleva rifiuti ancora validi dalla FIFO, permettendo alle run successive di riprovarli. La generazione live usa `generator/` nel corpus, che i workflow mirror non trasportano; il sito resta la sorgente per le altre modifiche al selettore.",
       "baseline": {
         "site": "963503e2e083d20a",
         "corpus": "0d9e75ceb94e873a",
