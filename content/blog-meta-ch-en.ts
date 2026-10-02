@@ -7460,6 +7460,12 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.guida-retribuzioni-ginevra-2026.title': 'Average Salaries by Occupation in Switzerland in 2026: Canton of Geneva',
     'blog.article.guida-retribuzioni-ginevra-2026.excerpt': '2026 Comparison of Professions and Cantons: In Geneva, gross income should be calculated after deducting 5.3% for AVS/AI/IPG, taxes, LAMal, and LPP.',
     'blog.article.guida-retribuzioni-ginevra-2026.imageAlt': 'Calculator and payslip on a desk with Geneva skyline',
+    'blog.article.deloitte-cambi-assicuratori.title': 'Deloitte forecasts up to 900,000 health insurance plan switches',
+    'blog.article.deloitte-cambi-assicuratori.excerpt': 'Deloitte forecasts between 600,000 and 900,000 health insurance plan switches. Nearly half would consider switching for an additional 20 francs per month.',
+    'blog.article.deloitte-cambi-assicuratori.imageAlt': 'Swiss residents comparing health insurance premiums',
+    'blog.article.camere-sessione-autunnale.title': 'Federal Chambers: The fall session ends today',
+    'blog.article.camere-sessione-autunnale.excerpt': 'The fall session ends today in Bern. Final votes on 17 items are on the agenda for the Federal Assembly; the winter session will run from November 30 to December 18.',
+    'blog.article.camere-sessione-autunnale.imageAlt': 'Swiss federal chambers in Bern as the autumn parliamentary session closes.',
 };
 
 export default blogMetaChEn;

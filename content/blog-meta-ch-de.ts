@@ -7460,6 +7460,12 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.guida-retribuzioni-ginevra-2026.title': 'Durchschnittslohn nach Berufsgruppen in der Schweiz 2026: Kanton Genf',
     'blog.article.guida-retribuzioni-ginevra-2026.excerpt': 'Vergleich 2026 zwischen Berufen und Kantonen: In Genf sind beim Bruttoeinkommen die Beiträge für AHV/IV/EO in Höhe von 5,3 % sowie Steuern, KVG und BVG zu berücksichtigen.',
     'blog.article.guida-retribuzioni-ginevra-2026.imageAlt': 'Taschenrechner und Lohnabrechnung auf einem Schreibtisch mit Genfer Skyline',
+    'blog.article.deloitte-cambi-assicuratori.title': 'Deloitte rechnet mit bis zu 900\'000 Krankenkassenwechseln',
+    'blog.article.deloitte-cambi-assicuratori.excerpt': 'Deloitte rechnet mit 600\'000 bis 900\'000 Krankenkassenwechseln. Fast die Hälfte würde einen Wechsel in Kauf nehmen, wenn sie dafür 20 Franken mehr pro Monat bekäme.',
+    'blog.article.deloitte-cambi-assicuratori.imageAlt': 'Versicherte in der Schweiz vergleichen Krankenkassenprämien',
+    'blog.article.camere-sessione-autunnale.title': 'Eidgenössische Räte: Die Herbstsession endet heute',
+    'blog.article.camere-sessione-autunnale.excerpt': 'In Bern endet heute die Herbstsession. Auf der Tagesordnung der eidgenössischen Räte stehen Schlussabstimmungen über 17 Vorlagen; die Wintersession findet vom 30. November bis zum 18. Dezember statt.',
+    'blog.article.camere-sessione-autunnale.imageAlt': 'Schweizer Bundesversammlung in Bern zum Abschluss der Herbstsession.',
 };
 
 export default blogMetaChDe;
