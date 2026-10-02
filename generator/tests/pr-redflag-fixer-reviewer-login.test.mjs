@@ -9,6 +9,7 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -130,6 +131,46 @@ test('un evento review con HEAD stantia viene scartato prima di scope, lease e m
   assert.match(pre, /actionable=false/);
   assert.ok(pre.indexOf('EVENT_HEAD_STALE') < pre.indexOf('REVIEW_BODY='),
     'lo skip stale deve avvenire prima della classificazione della review');
+});
+
+test('un avanzamento HEAD fra preflight e round-cap è un no-op; body stale e malformed restano rossi', () => {
+  const guardStart = src.indexOf('- name: Round cap + capability guard + tier');
+  const guardEnd = src.indexOf('\n      - name: Configure git identity', guardStart);
+  assert.ok(guardStart >= 0 && guardEnd > guardStart);
+  const guard = src.slice(guardStart, guardEnd);
+  const argsMarker = '--argjson max "$MAX_ROUNDS" \\\n';
+  const argsAt = guard.indexOf(argsMarker);
+  const queryStart = guard.indexOf("'", argsAt + argsMarker.length);
+  const queryEnd = guard.indexOf("'); then", queryStart);
+  assert.ok(argsAt >= 0 && queryStart > argsAt && queryEnd > queryStart,
+    'il predicato jq effettivo del round-cap deve restare leggibile dal test');
+  const jqProgram = guard.slice(queryStart + 1, queryEnd);
+  const expectedHead = 'a'.repeat(40);
+  const expectedBody = 'b'.repeat(64);
+  const classify = (state) => spawnSync('jq', [
+    '-er', '--arg', 'expected', expectedHead,
+    '--arg', 'expected_body', expectedBody, '--argjson', 'max', '2', jqProgram,
+  ], { input: JSON.stringify(state), encoding: 'utf8' });
+
+  const staleHead = classify({ headSha: 'c'.repeat(40), bodyRevision: expectedBody, round: 1 });
+  assert.equal(staleHead.status, 0, staleHead.stderr);
+  assert.equal(staleHead.stdout.trim(), 'head-stale');
+
+  const staleBody = classify({ headSha: expectedHead, bodyRevision: 'd'.repeat(64), round: 1 });
+  assert.notEqual(staleBody.status, 0, 'una body revision superata resta retryable/fail-closed');
+  assert.match(staleBody.stderr, /round state body snapshot stale/);
+
+  const current = classify({ headSha: expectedHead, bodyRevision: expectedBody, round: 1 });
+  assert.equal(current.status, 0, current.stderr);
+  assert.equal(current.stdout.trim(), 'current:1');
+
+  const malformed = classify({ headSha: expectedHead, bodyRevision: expectedBody, round: 3 });
+  assert.notEqual(malformed.status, 0, 'un round fuori cap resta fail-closed');
+
+  const staleCase = guard.slice(guard.indexOf('          case "$round_state_status" in'));
+  assert.match(staleCase, /head-stale\)[\s\S]*?proceed=false[\s\S]*?retryable=false[\s\S]*?exit 0/);
+  assert.match(guard, /if ! round_state_status=/);
+  assert.match(guard, /snapshot stale o malformed, nessun Codex, stato retryable/);
 });
 
 test('il push guard controlla il token che il push remote usa davvero', () => {
