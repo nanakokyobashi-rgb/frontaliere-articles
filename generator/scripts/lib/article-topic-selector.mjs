@@ -116,7 +116,11 @@ export const EVERGREEN_COUNTER_PATH = 'data/topic-candidates-evergreen-counter.j
 // previous run already proved is a duplicate. Persisted here so the next
 // run can skip known-rejected keywords for free (no wasted generation).
 export const EVERGREEN_REJECTED_PATH = 'data/topic-candidates-evergreen-rejected.json';
-export const EVERGREEN_REJECTED_MAX_IDS = 500;
+// Both sections persist to the same tracker. Their current pools contain
+// about 537 frontaliere topics and 610 Swiss topics, so the old 500-entry FIFO
+// cap could evict still-valid rejections and make scheduled runs try them
+// again. Keep the ledger bounded while leaving room for both pools together.
+export const EVERGREEN_REJECTED_MAX_IDS = 2048;
 
 // Scoring weights — per design doc.
 export const SCORE_WEIGHT_DEMAND = 0.6;
