@@ -434,11 +434,15 @@ test('lo scan non conta `fiscale` come residuo nei titoli francesi', () => {
     ].join('\n'),
   };
 
-  assert.deepEqual(scanItalianResidue(french, 'fr'), []);
-  assert.equal(hasItalianResidue(french, 'fr'), false);
-  assert.deepEqual(scanItalianResidue({ body1: '## Situazione fiscale' }, 'fr').map((hit) => hit.text), [
-    'Situazione fiscale',
-  ]);
+  for (const locale of ['en', 'de', 'fr']) {
+    assert.deepEqual(scanItalianResidue(french, locale), [], locale);
+    assert.equal(hasItalianResidue(french, locale), false, locale);
+  }
+  for (const locale of ['en', 'de', 'fr']) {
+    assert.deepEqual(scanItalianResidue({ body1: '## Situazione fiscale' }, locale).map((hit) => hit.text), [
+      'Situazione fiscale',
+    ], locale);
+  }
 });
 
 test('lo scan ignora heading localizzati in blockquote, lista e forma Setext', () => {
@@ -472,6 +476,46 @@ test('lo scan ignora ATX e Setext dentro fenced code con stato per campo', () =>
   }, 'en'), [{
     field: 'body1',
     line: 11,
+    reason: 'language',
+    text: 'Redditi',
+  }]);
+});
+
+test('lo scan non chiude un fence root con contenitori Markdown nel codice', () => {
+  const body1 = [
+    '```markdown',
+    '- ```',
+    '> ```',
+    '1. ```',
+    '## Redditi',
+    'Pensioni',
+    'Tasse',
+    '```',
+    '## Redditi',
+  ].join('\n');
+
+  assert.deepEqual(scanItalianResidue({ body1 }, 'en'), [{
+    field: 'body1',
+    line: 9,
+    reason: 'language',
+    text: 'Redditi',
+  }]);
+});
+
+test('lo scan non tratta un info string backtick non valido come chiusura', () => {
+  const body1 = [
+    '```markdown',
+    '```language`with-backtick',
+    '## Redditi',
+    'Pensioni',
+    'Tasse',
+    '```',
+    '## Redditi',
+  ].join('\n');
+
+  assert.deepEqual(scanItalianResidue({ body1 }, 'en'), [{
+    field: 'body1',
+    line: 7,
     reason: 'language',
     text: 'Redditi',
   }]);
