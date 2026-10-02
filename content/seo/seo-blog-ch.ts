@@ -97325,6 +97325,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-franco-apprezzamento-eurozona': {
+    title: 'Franco in forte rialzo: l\'euro scende a 0,93 CHF',
+    description: 'Il franco si apprezza bruscamente contro l\'euro a 0,93 CHF. Effetti su importazioni, export e politica monetaria della BNS. Dati aggiornati 2026 per frontalieri',
+    keywords: 'frontalieri, ticino, svizzera, italia, franco, forte, rialzo, euro',
+    ogTitle: 'Franco in forte rialzo: l\'euro scende a 0,93 CHF',
+    ogDescription: 'Il franco si è apprezzato di oltre un centesimo in un giorno, portando l\'euro a circa 0,93 CHF. La BNS mantiene il tasso guida allo 0%. Scopri come questo movimento influisce sui prezzi delle importazioni e sulla competitività dell\'export svizzero',
+    canonicalPath: '/articoli-svizzera/franco-apprezzamento-eurozona/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Franco in forte rialzo: l'euro scende a 0,93 CHF",
+      "description": "Il franco si apprezza bruscamente contro l'euro a 0,93 CHF. Effetti su importazioni, export e politica monetaria della BNS. Dati aggiornati 2026 per frontalieri",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/franco-apprezzamento-eurozona.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista sul Lago di Lugano con montagne sullo sfondo, luce mattutina sull'acqua, atmosfera finanziaria svizzera."
+      },
+      "datePublished": "2026-10-02T12:25:43+00:00",
+      "dateModified": "2026-10-02T12:25:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/franco-apprezzamento-eurozona/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

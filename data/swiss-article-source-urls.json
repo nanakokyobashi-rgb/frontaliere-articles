@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/qvbx3mydemku": {
-    "articleId": "penuria-insegnanti-rapporto-cause-dati",
-    "ts": "2026-09-02T09:33:18.401Z",
-    "keyForm": 2
-  },
   "https://www.laregione.ch/svizzera/svizzera/1947513/un-tribunale-ordina-ai-promotori-dell-iniziativa-sulla-neutralita-di-correggere-il-loro-bollettino": {
     "articleId": "tribunale-ordina-bollettino-neutralita",
     "ts": "2026-09-02T09:41:45.292Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/yvxapwgf7hnp": {
     "articleId": "ordinanza-vigilanza-mercati-energia",
     "ts": "2026-10-02T12:09:16.361Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/franco-si-rafforza-bruscamente%2c-tornano-i-timori-sull%27eurozona/92156931": {
+    "articleId": "franco-apprezzamento-eurozona",
+    "ts": "2026-10-02T12:25:43.610Z",
     "keyForm": 2
   }
 }
