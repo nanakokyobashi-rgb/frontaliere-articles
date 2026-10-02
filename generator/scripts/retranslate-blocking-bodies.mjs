@@ -154,6 +154,7 @@ const ITALIAN_HEADING_HINT_RE = /\b(?:aggiornament(?:i|o)|canton(?:e|i)|contribu
 // short-heading fast-path: the same French heading can be audited with a
 // stale or non-French locale hint.
 const AMBIGUOUS_ITALIAN_HEADING_HINT_RE = /\bfiscale\b/iu;
+const ITALIAN_SHORT_HEADING_HINT_RE = /\b(?:come fare|chi paga|quando)\b/iu;
 const LOCALIZED_HEADING_HINT_RE = {
   en: /\b(?:and|are|avoid|by|closure|contact|delays|do|facts|future|history|how|nutshell|our|phase|the|these|this|those|to|what|when|where|which|who|why|with|without|your)\b/iu,
   de: /\b(?:aber|auch|auf|aus|bei|das|der|die|digitale|ein|eine|einer|einem|einen|für|ist|mit|nach|nutzen|oder|praktische|schritt|straßennetz|stress|tools|über|und|unter|von|wichtig|zu|zum|zur)\b/iu,
@@ -161,6 +162,15 @@ const LOCALIZED_HEADING_HINT_RE = {
   // contesto di un titolo come `Qui sono le novità` prima del fast-path.
   fr: /\b(?:activités|au|aux|avec|cette|ces|contacter|dans|délais|des|du|envoi|et|les|olympique|pour|sont|sur|une|village|votre|vos)\b/iu,
 };
+
+/** Conta le colonne Markdown, espandendo i tab ai successivi stop da quattro. */
+function markdownColumns(text) {
+  let columns = 0;
+  for (const char of String(text ?? '')) {
+    columns += char === '\t' ? 4 - (columns % 4) : 1;
+  }
+  return columns;
+}
 
 function normalizeItalianResidueLine(line) {
   return String(line ?? '')
@@ -190,23 +200,25 @@ function markdownContainerContext(line) {
   const containers = [];
   for (;;) {
     const quoted = rest.match(/^[ \t]{0,3}>[ \t]?/u);
-    if (quoted) {
+    const quotedIndent = quoted ? (quoted[0].match(/^[ \t]*/u) || [''])[0] : '';
+    if (quoted && markdownColumns(quotedIndent) <= 3) {
       containers.push({
         kind: 'blockquote',
-        width: quoted[0].length,
-        indent: (quoted[0].match(/^[ \t]*/u) || [''])[0].length,
+        width: markdownColumns(quoted[0]),
+        indent: markdownColumns(quotedIndent),
       });
       rest = rest.slice(quoted[0].length);
       continue;
     }
     const listed = rest.match(/^[ \t]{0,3}(?:[-+*]|\d{1,9}[.)])[ \t]+/u);
-    if (listed) {
+    const listIndent = listed ? (listed[0].match(/^[ \t]*/u) || [''])[0] : '';
+    if (listed && markdownColumns(listIndent) <= 3) {
       containers.push({
         kind: /^\d/u.test(listed[0].trim()) ? 'ordered-list' : 'unordered-list',
         // The consumed prefix is also the minimum indentation needed when a
         // list container continues without repeating its marker.
-        width: listed[0].length,
-        indent: (listed[0].match(/^[ \t]*/u) || [''])[0].length,
+        width: markdownColumns(listed[0]),
+        indent: markdownColumns(listIndent),
       });
       rest = rest.slice(listed[0].length);
       continue;
@@ -215,7 +227,7 @@ function markdownContainerContext(line) {
       rest,
       containerKey: containers.map(({ kind }) => kind).join('|'),
       containers,
-      contentIndent: (rest.match(/^[ \t]*/u) || [''])[0].length,
+      contentIndent: markdownColumns((rest.match(/^[ \t]*/u) || [''])[0]),
     };
   }
 }
@@ -260,14 +272,15 @@ function compatibleContainerContinuation(openingContext, candidateContext) {
 /** Restituisce il testo di un heading ATX, oppure null. */
 function atxHeadingText(line) {
   const rest = stripMarkdownContainerPrefixes(line);
-  const match = rest.match(/^[ \t]{0,3}#{1,6}(?:[ \t]+(.*))?$/u);
-  if (!match) return null;
-  return (match[1] || '').replace(/[ \t]+#+[ \t]*$/u, '').trim();
+  const match = rest.match(/^([ \t]*)(#{1,6})(?:[ \t]+(.*))?$/u);
+  if (!match || markdownColumns(match[1]) > 3) return null;
+  return (match[3] || '').replace(/[ \t]+#+[ \t]*$/u, '').trim();
 }
 
 function isSetextUnderline(line) {
   const rest = stripMarkdownContainerPrefixes(line);
-  return /^[ \t]{0,3}(?:=+|-+)[ \t]*$/u.test(rest);
+  const match = rest.match(/^([ \t]*)(?:=+|-+)[ \t]*$/u);
+  return Boolean(match && markdownColumns(match[1]) <= 3);
 }
 
 function markdownFenceMarker(line, expectedContext = null) {
@@ -276,7 +289,7 @@ function markdownFenceMarker(line, expectedContext = null) {
     ? compatibleContainerContinuation(expectedContext, context)
     : { omittedListIndent: 0 };
   if (!continuation) return null;
-  const indentation = (context.rest.match(/^[ \t]*/u) || [''])[0].length;
+  const indentation = markdownColumns((context.rest.match(/^[ \t]*/u) || [''])[0]);
   const match = context.rest.match(/^[ \t]*(`{3,}|~{3,})(.*)$/u);
   if (!match || indentation > 3 + continuation.omittedListIndent) return null;
   const trailing = match[2];
@@ -352,7 +365,8 @@ function markdownHeadingText(line, nextLine, fenceState = null) {
 function italianMarkdownHeadingReason(text, locale) {
   const localizedHint = LOCALIZED_HEADING_HINT_RE[locale];
   const ambiguousHint = AMBIGUOUS_ITALIAN_HEADING_HINT_RE.test(text);
-  const hasItalianHint = ITALIAN_HEADING_HINT_RE.test(text)
+  const hasItalianHint = (ITALIAN_HEADING_HINT_RE.test(text)
+    || ITALIAN_SHORT_HEADING_HINT_RE.test(text))
     && !ambiguousHint;
   const detected = detectLanguageWithConfidence(text, locale);
 

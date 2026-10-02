@@ -417,6 +417,21 @@ test('lo scan conserva heading italiani brevi con flessioni comuni', () => {
   }
 });
 
+test('lo scan conserva heading italiani brevi con segnali interrogativi comuni', () => {
+  const body1 = [
+    '## Come fare',
+    '## Chi paga',
+    '## Quando',
+  ].join('\n');
+
+  assert.deepEqual(scanItalianResidue({ body1 }, 'en'), [
+    { field: 'body1', line: 1, reason: 'language', text: 'Come fare' },
+    { field: 'body1', line: 2, reason: 'language', text: 'Chi paga' },
+    { field: 'body1', line: 3, reason: 'language', text: 'Quando' },
+  ]);
+  assert.deepEqual(scanItalianResidue({ body1: '## Fiscale' }, 'en'), []);
+});
+
 test('lo scan risolve `qui` condiviso prima del fast-path francese', () => {
   const body1 = Array.from({ length: ITALIAN_RESIDUE_MIN_LINES }, () => '## Qui sono le novità').join('\n');
   const hits = scanItalianResidue({ body1 }, 'fr');
@@ -556,6 +571,24 @@ test('lo scan non tratta un info string backtick non valido come chiusura', () =
   assert.deepEqual(scanItalianResidue({ body1 }, 'en'), [{
     field: 'body1',
     line: 7,
+    reason: 'language',
+    text: 'Redditi',
+  }]);
+});
+
+test('lo scan espande i tab prima di riconoscere fence e heading', () => {
+  const body1 = [
+    '\t```markdown',
+    '\t## Redditi',
+    '\tPensioni',
+    '\tTasse',
+    '\t```',
+    '## Redditi',
+  ].join('\n');
+
+  assert.deepEqual(scanItalianResidue({ body1 }, 'en'), [{
+    field: 'body1',
+    line: 6,
     reason: 'language',
     text: 'Redditi',
   }]);
