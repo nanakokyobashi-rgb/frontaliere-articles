@@ -96896,6 +96896,123 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-aprire-attivita-grigioni-guida-costi': {
+    title: 'Aprire un\'attività nei Grigioni: guida a costi e fisco',
+    description: 'Guida pratica per aprire un\'attività nei Grigioni: scopri come gestire fisco, contributi salariali, registro di commercio e costi previdenziali in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, aprire, attività, grigioni, costi',
+    ogTitle: 'Aprire un\'attività nei Grigioni: guida a costi e fisco',
+    ogDescription: 'Pianificare l\'apertura di un\'attività nel Cantone dei Grigioni richiede una distinzione chiara tra imposte, contributi salariali e costi personali. Ecco la guida completa.',
+    canonicalPath: '/articoli-svizzera/aprire-attivita-grigioni-guida-costi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aprire un'attività nei Grigioni: guida a costi e fisco",
+      "description": "Guida pratica per aprire un'attività nei Grigioni: scopri come gestire fisco, contributi salariali, registro di commercio e costi previdenziali in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/aprire-attivita-grigioni-guida-costi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documenti e scrivania con vista sulle montagne svizzere"
+      },
+      "datePublished": "2026-10-02T07:24:44+00:00",
+      "dateModified": "2026-10-02T07:24:44+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/aprire-attivita-grigioni-guida-costi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-remunerazioni-ail-mps-lugano': {
+    title: 'Remunerazioni AIL e trasparenza: l\'interrogazione dell\'MPS',
+    description: 'Giuseppe Sergi e Matteo Pronzini interrogano il Consiglio di Stato sulle remunerazioni AIL e sulla tutela del patrimonio pubblico della Città di Lugano.',
+    keywords: 'frontalieri, ticino, svizzera, italia, remunerazioni, trasparenza, interrogazione, dell',
+    ogTitle: 'Remunerazioni AIL e trasparenza: l\'interrogazione dell\'MPS',
+    ogDescription: 'Approfondimento sull\'interrogazione presentata da Giuseppe Sergi e Matteo Pronzini in merito ai compensi del Cda delle Aziende Industriali di Lugano per il primo semestre del 2026, con focus sull\'autonomia societaria e la tutela del patrimonio',
+    canonicalPath: '/articoli-svizzera/remunerazioni-ail-mps-lugano/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Remunerazioni AIL e trasparenza: l'interrogazione dell'MPS",
+      "description": "Giuseppe Sergi e Matteo Pronzini interrogano il Consiglio di Stato sulle remunerazioni AIL e sulla tutela del patrimonio pubblico della Città di Lugano.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/remunerazioni-ail-mps-lugano.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta di Lugano con la sede e le attività delle Aziende Industriali"
+      },
+      "datePublished": "2026-10-02T07:35:31+00:00",
+      "dateModified": "2026-10-02T07:35:31+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/remunerazioni-ail-mps-lugano/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-fallimenti-aziendali-ticino-media': {
+    title: 'Fallimenti in aumento. E il Ticino è sopra la media',
+    description: 'Nei primi nove mesi l\'aumento dei fallimenti in Svizzera tocca quota 11\'412. Il Ticino segna 721 bancarotte e un +48%. Tutti i dati e le novità fiscali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, fallimenti, aumento, sopra, media',
+    ogTitle: 'Fallimenti aziendali in Ticino: dati Crif e aumento bancarotte',
+    ogDescription: 'Nei primi nove mesi l\'aumento dei fallimenti in Svizzera tocca quota 11\'412. Il Ticino segna 721 bancarotte e un +48%. Scopri tutti i dati ufficiali di Crif e le novità normative sui debiti fiscali.',
+    canonicalPath: '/articoli-svizzera/fallimenti-aziendali-ticino-media/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Fallimenti in aumento. E il Ticino è sopra la media",
+      "description": "Nei primi nove mesi l'aumento dei fallimenti in Svizzera tocca quota 11'412. Il Ticino segna 721 bancarotte e un +48%. Tutti i dati e le novità fiscali.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/fallimenti-aziendali-ticino-media.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Aumento dei fallimenti aziendali e nuove ditte in Ticino"
+      },
+      "datePublished": "2026-10-02T07:43:55+00:00",
+      "dateModified": "2026-10-02T07:43:55+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/fallimenti-aziendali-ticino-media/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

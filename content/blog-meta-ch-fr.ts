@@ -7472,6 +7472,15 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.deloitte-previsione-cambi-cassa-malati.title': 'Casse-maladies : 900\'000 changements attendus',
     'blog.article.deloitte-previsione-cambi-cassa-malati.excerpt': 'Entre 600 000 et 900 000 assurés pourraient changer de caisse d\'assurance maladie l\'année prochaine. C\'est ce que révèle un sondage YouGov réalisé pour Deloitte auprès de 1 236 personnes.',
     'blog.article.deloitte-previsione-cambi-cassa-malati.imageAlt': 'Prévisions de Deloitte sur le changement de caisse maladie en Suisse et au Tessin',
+    'blog.article.aprire-attivita-grigioni-guida-costi.title': 'Créer une entreprise dans les Grisons : guide sur les coûts et la fiscalité',
+    'blog.article.aprire-attivita-grigioni-guida-costi.excerpt': 'De la forme juridique aux cotisations salariales : guide pratique sur les trois niveaux d\'imposition et les obligations en matière de sécurité sociale pour ceux qui créent une entreprise dans les Grisons.',
+    'blog.article.aprire-attivita-grigioni-guida-costi.imageAlt': 'Documents et bureau avec vue sur les montagnes suisses',
+    'blog.article.remunerazioni-ail-mps-lugano.title': 'Rémunérations de l\'AIL et transparence : la question posée par le MPS',
+    'blog.article.remunerazioni-ail-mps-lugano.excerpt': 'Giuseppe Sergi et Matteo Pronzini interpellent le Conseil d\'État au sujet des rémunérations versées par l\'AIL et de la protection du patrimoine public.',
+    'blog.article.remunerazioni-ail-mps-lugano.imageAlt': 'Vue de Lugano représentant la gestion des entreprises publiques',
+    'blog.article.fallimenti-aziendali-ticino-media.title': 'Les faillites sont en hausse. Et le Tessin se situe au-dessus de la moyenne',
+    'blog.article.fallimenti-aziendali-ticino-media.excerpt': 'Au cours des neuf premiers mois de l\'année, le nombre de faillites d\'entreprises en Suisse s\'élève à 11 412 (+37 %). Le Tessin enregistre 721 faillites, soit une hausse de 48 %.',
+    'blog.article.fallimenti-aziendali-ticino-media.imageAlt': 'Augmentation des faillites d\'entreprises et nouvelles sociétés au Tessin',
 };
 
 export default blogMetaChFr;

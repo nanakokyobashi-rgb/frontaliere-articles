@@ -7472,6 +7472,15 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.deloitte-previsione-cambi-cassa-malati.title': 'Krankenkassen: Bis zu 900.000 Wechsel im nächsten Jahr',
     'blog.article.deloitte-previsione-cambi-cassa-malati.excerpt': 'Zwischen 600\'000 und 900\'000 Versicherte könnten im nächsten Jahr die Krankenkasse wechseln. Das geht aus einer YouGov-Umfrage für Deloitte hervor, die unter 1\'236 Personen durchgeführt wurde.',
     'blog.article.deloitte-previsione-cambi-cassa-malati.imageAlt': 'Deloitte-Prognosen zum Krankenkassenwechsel in der Schweiz und im Tessin',
+    'blog.article.aprire-attivita-grigioni-guida-costi.title': 'Ein Unternehmen in Graubünden gründen: Leitfaden zu Kosten und Steuern',
+    'blog.article.aprire-attivita-grigioni-guida-costi.excerpt': 'Von der Rechtsform bis zu den Lohnbeiträgen: Ein praktischer Leitfaden zu den drei Steuerstufen und den Sozialversicherungspflichten für Existenzgründer in Graubünden.',
+    'blog.article.aprire-attivita-grigioni-guida-costi.imageAlt': 'Dokumente und Schreibtisch mit Blick auf die Schweizer Berge',
+    'blog.article.remunerazioni-ail-mps-lugano.title': 'AIL-Vergütungen und Transparenz: die Anfrage der MPS',
+    'blog.article.remunerazioni-ail-mps-lugano.excerpt': 'Giuseppe Sergi und Matteo Pronzini befragen den Staatsrat zu den Vergütungen der AIL und zum Schutz des öffentlichen Vermögens.',
+    'blog.article.remunerazioni-ail-mps-lugano.imageAlt': 'Ansicht von Lugano mit Bezug auf die städtischen Betriebe',
+    'blog.article.fallimenti-aziendali-ticino-media.title': 'Die Zahl der Insolvenzen steigt. Und das Tessin liegt über dem Durchschnitt',
+    'blog.article.fallimenti-aziendali-ticino-media.excerpt': 'In den ersten neun Monaten des Jahres stieg die Zahl der Unternehmenskonkurse in der Schweiz auf 11\'412 (+37 %). Im Tessin wurden 721 Konkurse verzeichnet, was einem Anstieg von 48 % entspricht.',
+    'blog.article.fallimenti-aziendali-ticino-media.imageAlt': 'Zunahme von Firmenkonkursen und Neugründungen im Tessin',
 };
 
 export default blogMetaChDe;

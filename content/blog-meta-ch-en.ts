@@ -7472,6 +7472,15 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.deloitte-previsione-cambi-cassa-malati.title': 'Health Insurance Plans: Up to 900,000 Switchers Expected Next Year',
     'blog.article.deloitte-previsione-cambi-cassa-malati.excerpt': 'Between 600,000 and 900,000 insured individuals could switch health insurance providers next year. This finding comes from a YouGov survey conducted for Deloitte among 1,236 people.',
     'blog.article.deloitte-previsione-cambi-cassa-malati.imageAlt': 'Deloitte health insurance switching forecasts in Switzerland and Ticino',
+    'blog.article.aprire-attivita-grigioni-guida-costi.title': 'Starting a Business in Graubünden: A Guide to Costs and Taxes',
+    'blog.article.aprire-attivita-grigioni-guida-costi.excerpt': 'From Legal Structure to Payroll Taxes: A Practical Guide to the Three Tax Levels and Social Security Obligations for Those Starting a Business in Graubünden.',
+    'blog.article.aprire-attivita-grigioni-guida-costi.imageAlt': 'Documents and desk with a view of the Swiss mountains',
+    'blog.article.remunerazioni-ail-mps-lugano.title': 'AIL Compensation and Transparency: The MPS Inquiry',
+    'blog.article.remunerazioni-ail-mps-lugano.excerpt': 'Giuseppe Sergi and Matteo Pronzini question the Council of State regarding AIL compensation and the protection of public assets.',
+    'blog.article.remunerazioni-ail-mps-lugano.imageAlt': 'View of Lugano representing municipal enterprises and public management',
+    'blog.article.fallimenti-aziendali-ticino-media.title': 'Bankruptcies on the rise. And Ticino is above average',
+    'blog.article.fallimenti-aziendali-ticino-media.excerpt': 'In the first nine months of the year, corporate bankruptcies in Switzerland rose to 11,412 (+37%). Ticino recorded 721 bankruptcies, an increase of 48%.',
+    'blog.article.fallimenti-aziendali-ticino-media.imageAlt': 'Increase in corporate bankruptcies and new companies in Ticino',
 };
 
 export default blogMetaChEn;
