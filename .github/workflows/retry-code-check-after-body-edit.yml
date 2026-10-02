@@ -71,6 +71,7 @@ jobs:
           # La finestra effettiva e' il minimo dei due: vanno alzati insieme.
           BODY_RECOVERY_WAIT_MS: '540000'
           BODY_RECOVERY_RATE_LIMIT_WAIT_MS: '540000'
+          BODY_RECOVERY_TRANSIENT_RETRIES: '3'
         with:
           script: |
             const repo = context.repo;
@@ -80,6 +81,7 @@ jobs:
             const waitMs = Number(process.env.BODY_RECOVERY_WAIT_MS) || 540000;
             const retryMs = Number(process.env.BODY_RECOVERY_RETRY_MS) || 1000;
             const rateLimitRetries = Number(process.env.BODY_RECOVERY_RATE_LIMIT_RETRIES) || 3;
+            const transientRetries = Number(process.env.BODY_RECOVERY_TRANSIENT_RETRIES) || 3;
             const rateLimitWaitMs = Number(process.env.BODY_RECOVERY_RATE_LIMIT_WAIT_MS) || 540000;
             const recoveryWindowMs = Math.min(waitMs, rateLimitWaitMs);
             const recoveryDeadline = Date.now() + recoveryWindowMs;
@@ -117,6 +119,17 @@ jobs:
                 ))
                 || (graphqlErrors && remaining === '0');
             };
+            const isTransientServerError = error => {
+              const status = Number(error?.status ?? error?.response?.status);
+              return status >= 500 && status <= 599;
+            };
+            const retryClass = error => {
+              if (isRateLimitError(error)) return { name: 'rate limit', retries: rateLimitRetries };
+              if (isTransientServerError(error)) {
+                return { name: 'transient GitHub server error', retries: transientRetries };
+              }
+              return null;
+            };
             const retryDelay = (error, attempt) => {
               const headers = errorHeaders(error);
               const retryAfterRaw = headerValue(headers, 'retry-after');
@@ -135,28 +148,32 @@ jobs:
               if (retryAfterRaw !== null && retryAfterRaw !== '') return retryAfterMs;
               if (remaining === '0' && Number.isFinite(resetAt) && resetAt > 0) return resetMs;
               // GitHub recommends at least one minute for a secondary limit
-              // when neither Retry-After nor a usable reset is available.
-              return Math.max(60000, retryMs * 2 ** attempt);
+              // when neither Retry-After nor a usable reset is available. A
+              // transient 5xx has no rate-limit reset, so its bounded backoff
+              // stays short enough to recover from an Actions API blip.
+              const fallback = isRateLimitError(error) ? 60000 : 1;
+              return Math.max(fallback, retryMs * 2 ** attempt);
             };
             // The installation token can exhaust its shared core quota while
             // several workflows are inspecting the same PR. A rate-limit 403
-            // is transient when the reset fits in this job's bounded window;
-            // every other API error remains fatal and every exhausted retry
-            // still fails closed.
+            // and a GitHub 5xx are transient when they fit in this job's
+            // bounded window; every other API error remains fatal and every
+            // exhausted retry still fails closed.
             const apiCall = async (label, operation) => {
               for (let attempt = 0; ; attempt += 1) {
                 try {
                   return await operation();
                 } catch (error) {
-                  if (!isRateLimitError(error) || attempt >= rateLimitRetries) throw error;
+                  const retry = retryClass(error);
+                  if (!retry || attempt >= retry.retries) throw error;
                   const delay = retryDelay(error, attempt);
                   if (Date.now() + delay > retryDeadline) {
-                    const exhausted = new Error(`GitHub API rate limit while ${label}; retry window exhausted`, { cause: error });
+                    const exhausted = new Error(`GitHub API ${retry.name} while ${label}; retry window exhausted`, { cause: error });
                     exhausted.status = error?.status ?? error?.response?.status;
                     exhausted.response = error?.response;
                     throw exhausted;
                   }
-                  core.warning(`GitHub API rate limit while ${label}; retrying in ${delay}ms (${attempt + 1}/${rateLimitRetries}).`);
+                  core.warning(`GitHub API ${retry.name} while ${label}; retrying in ${delay}ms (${attempt + 1}/${retry.retries}).`);
                   await sleep(delay);
                 }
               }

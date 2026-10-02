@@ -26,13 +26,14 @@ const AFTER_EDIT = '2026-09-19T12:01:00Z';
 
 // `later`: fields the run takes on successive getWorkflowRun reads (the
 // first read is the script's re-read of the listed run).
-async function recover(bodyConclusion, status = 'completed', failedSteps = [], later = [], runOverrides = {}, cancelError = null, autoMerge = null, editTimestamp = EDITED_AT, graphqlError = null, checkError = null, rateLimitFailures = {}) {
+async function recover(bodyConclusion, status = 'completed', failedSteps = [], later = [], runOverrides = {}, cancelError = null, autoMerge = null, editTimestamp = EDITED_AT, graphqlError = null, checkError = null, rateLimitFailures = {}, transientRerunFailures = 0) {
   const reruns = [];
   const cancels = [];
   const failures = [];
   const autoMergeRevokes = [];
   const requiredCheckBlocks = [];
   const remainingRateLimitFailures = new Map(Object.entries(rateLimitFailures));
+  let remainingTransientRerunFailures = transientRerunFailures;
   const maybeRateLimit = name => {
     const remaining = remainingRateLimitFailures.get(name) || 0;
     if (!remaining) return;
@@ -74,7 +75,16 @@ async function recover(bodyConclusion, status = 'completed', failedSteps = [], l
           if (cancelError) throw cancelError;
           cancels.push(run_id);
         },
-        reRunWorkflow: async ({ run_id }) => { reruns.push(run_id); },
+        reRunWorkflow: async ({ run_id }) => {
+          if (remainingTransientRerunFailures > 0) {
+            remainingTransientRerunFailures -= 1;
+            throw Object.assign(new Error('GitHub Actions temporarily unavailable'), {
+              status: 500,
+              response: { status: 500, data: {} },
+            });
+          }
+          reruns.push(run_id);
+        },
       },
       checks: {
         create: async ({ name, head_sha, status, conclusion }) => {
@@ -163,6 +173,13 @@ test('body edits re-enter through the trusted recovery, not through a tests.yml 
 
 test('a corrected failed body retries the code run', async () => {
   assert.deepEqual(await recover('failure'), [42]);
+});
+
+test('a transient GitHub 5xx while requesting the rerun is retried', async () => {
+  assert.deepEqual(
+    await recover('failure', 'completed', [], [], {}, null, null, EDITED_AT, null, null, {}, 1),
+    [42],
+  );
 });
 
 test('an installation rate limit is retried before recovery classifies the body', async () => {
