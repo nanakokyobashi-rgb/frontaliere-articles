@@ -148,6 +148,29 @@ export const ITALIAN_RESIDUE_MIN_LINES = 3;
 const ITALIAN_RESIDUE_MIN_CONFIDENCE = 0.15;
 const ITALIAN_RESIDUE_HEADING_RE = /^(?:#{1,6}\s*)?(?:in breve|fatti chiave|domande frequenti|punti chiave|conclusione|conclusioni|fonti|consiglio pratico|cosa cambia|attenzione|da sapere|in sintesi)\s*:?[ \t]*$/iu;
 const ITALIAN_RESIDUE_WORD_RE = /[\p{L}]+(?:['’][\p{L}]+)*/gu;
+const ITALIAN_HEADING_HINT_RE = /\b(?:aggiornament(?:i|o)|canton(?:e|i)|contribut(?:i|o)|cos(?:a|e)|fiscal(?:e|i)|frontalier(?:a|e|i|o)|impatt(?:i|o)|impost(?:a|e)|italian(?:a|e|i|o)|lavorator(?:e|i)|misur(?:a|e)|nuov(?:a|e|i|o)|pension(?:e|i)|reddit(?:i|o)|regol(?:a|e)|salar(?:i|io)|tass(?:a|e)|ticin(?:o|esi)|titol(?:i|o))\b/iu;
+// `fiscale` is valid Italian and French. It must go through the detector
+// independently of the expected locale instead of the unconditional
+// short-heading fast-path: the same French heading can be audited with a
+// stale or non-French locale hint.
+const AMBIGUOUS_ITALIAN_HEADING_HINT_RE = /\bfiscale\b/iu;
+const ITALIAN_SHORT_HEADING_HINT_RE = /\b(?:come fare|chi paga|quando)\b/iu;
+const LOCALIZED_HEADING_HINT_RE = {
+  en: /\b(?:and|are|avoid|by|closure|contact|delays|do|facts|future|history|how|nutshell|our|phase|the|these|this|those|to|what|when|where|which|who|why|with|without|your)\b/iu,
+  de: /\b(?:aber|auch|auf|aus|bei|das|der|die|digitale|ein|eine|einer|einem|einen|für|ist|mit|nach|nutzen|oder|praktische|schritt|straßennetz|stress|tools|über|und|unter|von|wichtig|zu|zum|zur)\b/iu,
+  // `qui` e' condiviso con l'italiano: il detector deve poter risolvere il
+  // contesto di un titolo come `Qui sono le novità` prima del fast-path.
+  fr: /\b(?:activités|au|aux|avec|cette|ces|contacter|dans|délais|des|du|envoi|et|les|olympique|pour|sont|sur|une|village|votre|vos)\b/iu,
+};
+
+/** Conta le colonne Markdown, espandendo i tab ai successivi stop da quattro. */
+function markdownColumns(text) {
+  let columns = 0;
+  for (const char of String(text ?? '')) {
+    columns += char === '\t' ? 4 - (columns % 4) : 1;
+  }
+  return columns;
+}
 
 function normalizeItalianResidueLine(line) {
   return String(line ?? '')
@@ -158,11 +181,225 @@ function normalizeItalianResidueLine(line) {
     .trim();
 }
 
+/** Rimuove i contenitori Markdown che possono precedere un heading. */
+function stripMarkdownContainerPrefixes(line) {
+  return markdownContainerContext(line).rest;
+}
+
+function isListContainer(container) {
+  return container.kind === 'ordered-list' || container.kind === 'unordered-list';
+}
+
+/**
+ * Parse only the Markdown containers that precede a line. The semantic
+ * context is retained for fenced-code matching: a list/blockquote marker in
+ * the body of a root-level fence is code, not a closing fence.
+ */
+function markdownContainerContext(line) {
+  let rest = String(line ?? '').replace(/\r$/u, '');
+  const containers = [];
+  for (;;) {
+    const quoted = rest.match(/^[ \t]{0,3}>[ \t]?/u);
+    const quotedIndent = quoted ? (quoted[0].match(/^[ \t]*/u) || [''])[0] : '';
+    if (quoted && markdownColumns(quotedIndent) <= 3) {
+      containers.push({
+        kind: 'blockquote',
+        width: markdownColumns(quoted[0]),
+        indent: markdownColumns(quotedIndent),
+      });
+      rest = rest.slice(quoted[0].length);
+      continue;
+    }
+    const listed = rest.match(/^[ \t]{0,3}(?:[-+*]|\d{1,9}[.)])[ \t]+/u);
+    const listIndent = listed ? (listed[0].match(/^[ \t]*/u) || [''])[0] : '';
+    if (listed && markdownColumns(listIndent) <= 3) {
+      containers.push({
+        kind: /^\d/u.test(listed[0].trim()) ? 'ordered-list' : 'unordered-list',
+        // The consumed prefix is also the minimum indentation needed when a
+        // list container continues without repeating its marker.
+        width: markdownColumns(listed[0]),
+        indent: markdownColumns(listIndent),
+      });
+      rest = rest.slice(listed[0].length);
+      continue;
+    }
+    return {
+      rest,
+      containerKey: containers.map(({ kind }) => kind).join('|'),
+      containers,
+      contentIndent: markdownColumns((rest.match(/^[ \t]*/u) || [''])[0]),
+    };
+  }
+}
+
+/**
+ * A child line may omit list markers while continuing the same list item.
+ * Blockquotes cannot be omitted: `> title` followed by a root-level `---` is
+ * a separator, not a Setext underline. Omitted lists can occur before a
+ * later blockquote as well as at the end; their content indent must then be
+ * present before that blockquote or before the fence marker itself.
+ */
+function compatibleContainerContinuation(openingContext, candidateContext) {
+  const opening = openingContext.containers;
+  const candidate = candidateContext.containers;
+  let openingIndex = 0;
+  let omittedListIndent = 0;
+
+  for (const candidateContainer of candidate) {
+    while (
+      openingIndex < opening.length
+      && opening[openingIndex].kind !== candidateContainer.kind
+    ) {
+      if (!isListContainer(opening[openingIndex])) return null;
+      omittedListIndent += opening[openingIndex].width;
+      openingIndex += 1;
+    }
+    if (openingIndex >= opening.length) return null;
+    if (candidateContainer.indent < omittedListIndent) return null;
+    openingIndex += 1;
+    omittedListIndent = 0;
+  }
+
+  while (openingIndex < opening.length) {
+    if (!isListContainer(opening[openingIndex])) return null;
+    omittedListIndent += opening[openingIndex].width;
+    openingIndex += 1;
+  }
+  if (candidateContext.contentIndent < omittedListIndent) return null;
+  return { omittedListIndent };
+}
+
+/** Restituisce il testo di un heading ATX, oppure null. */
+function atxHeadingText(line) {
+  const rest = stripMarkdownContainerPrefixes(line);
+  const match = rest.match(/^([ \t]*)(#{1,6})(?:[ \t]+(.*))?$/u);
+  if (!match || markdownColumns(match[1]) > 3) return null;
+  return (match[3] || '').replace(/[ \t]+#+[ \t]*$/u, '').trim();
+}
+
+function isSetextUnderline(line) {
+  const rest = stripMarkdownContainerPrefixes(line);
+  const match = rest.match(/^([ \t]*)(?:=+|-+)[ \t]*$/u);
+  return Boolean(match && markdownColumns(match[1]) <= 3);
+}
+
+function markdownFenceMarker(line, expectedContext = null) {
+  const context = markdownContainerContext(line);
+  const continuation = expectedContext
+    ? compatibleContainerContinuation(expectedContext, context)
+    : { omittedListIndent: 0 };
+  if (!continuation) return null;
+  const indentation = markdownColumns((context.rest.match(/^[ \t]*/u) || [''])[0]);
+  const match = context.rest.match(/^[ \t]*(`{3,}|~{3,})(.*)$/u);
+  if (!match || indentation > 3 + continuation.omittedListIndent) return null;
+  const trailing = match[2];
+  // CommonMark forbids backticks in a backtick fence's info string. Treating
+  // such a line as a marker could close a real fence from inside its code.
+  if (match[1][0] === '`' && trailing.includes('`')) return null;
+  return {
+    char: match[1][0],
+    length: match[1].length,
+    trailing,
+    containerKey: context.containerKey,
+    context,
+  };
+}
+
+function compatibleSetextContexts(titleContext, underlineContext) {
+  const continuation = compatibleContainerContinuation(titleContext, underlineContext);
+  if (!continuation) return false;
+
+  // `- title\n- ---` starts a second list item. A Setext underline in a list
+  // continues by indentation (`  ---`), while blockquote markers must be
+  // repeated explicitly (`> ---`).
+  const titleHasList = titleContext.containers.some(isListContainer);
+  const underlineRepeatsList = underlineContext.containers.some(isListContainer);
+  return !(titleHasList && underlineRepeatsList);
+}
+
+/**
+ * Restituisce il testo di un heading Markdown, incluse le forme dentro
+ * blockquote/lista e Setext. Il testo viene normalizzato solo dopo aver
+ * rimosso la sintassi contenitore, così il detector non deve indovinare che
+ * `- ## Titolo` e `> ## Titolo` sono heading. Con `fenceState` i blocchi di
+ * codice fenced vengono ignorati per campo, inclusa la loro coppia Setext.
+ */
+function markdownHeadingText(line, nextLine, fenceState = null) {
+  if (fenceState) {
+    fenceState.fenceLine = false;
+    const marker = markdownFenceMarker(line, fenceState.marker?.context ?? null);
+    if (fenceState.marker) {
+      const closes = marker
+        && marker.char === fenceState.marker.char
+        && marker.length >= fenceState.marker.length
+        && !marker.trailing.trim()
+        // A repeated list marker is a list item inside the fence, not its
+        // closing continuation. The indented, marker-free continuation is
+        // handled by compatibleContainerContinuation above.
+        && !(
+          fenceState.marker.context.containers.some(isListContainer)
+          && marker.context.containers.some(isListContainer)
+        );
+      if (closes) fenceState.marker = null;
+      fenceState.fenceLine = true;
+      return null;
+    }
+    if (marker) {
+      fenceState.marker = marker;
+      fenceState.fenceLine = true;
+      return null;
+    }
+  }
+  const atx = atxHeadingText(line);
+  if (atx !== null) return normalizeItalianResidueLine(atx);
+  if (nextLine !== undefined && isSetextUnderline(nextLine)) {
+    const titleContext = markdownContainerContext(line);
+    const underlineContext = markdownContainerContext(nextLine);
+    if (compatibleSetextContexts(titleContext, underlineContext)) {
+      return normalizeItalianResidueLine(titleContext.rest);
+    }
+  }
+  return null;
+}
+
+function italianMarkdownHeadingReason(text, locale) {
+  const localizedHint = LOCALIZED_HEADING_HINT_RE[locale];
+  const ambiguousHint = AMBIGUOUS_ITALIAN_HEADING_HINT_RE.test(text);
+  const hasItalianHint = (ITALIAN_HEADING_HINT_RE.test(text)
+    || ITALIAN_SHORT_HEADING_HINT_RE.test(text))
+    && !ambiguousHint;
+  const detected = detectLanguageWithConfidence(text, locale);
+
+  if (ambiguousHint) {
+    return detected.lang === 'it' && detected.confidence >= ITALIAN_RESIDUE_MIN_CONFIDENCE
+      ? 'language'
+      : null;
+  }
+
+  // Il detector trigramma puo' chiamare italiano un titolo breve inglese,
+  // quindi un segnale lessicale della lingua attesa vince sul suo verdetto.
+  // I segnali italiani servono a conservare titoli non canonici anche quando
+  // il titolo e' troppo corto per il profilo trigramma.
+  if (localizedHint?.test(text) && !hasItalianHint) return null;
+  if (hasItalianHint) return 'language';
+  return detected.lang === 'it' && detected.confidence >= ITALIAN_RESIDUE_MIN_CONFIDENCE
+    ? 'language'
+    : null;
+}
+
 /** Ritorna il tipo di segnale, oppure null se la riga non e' probante. */
-function italianResidueLineReason(line, locale) {
+function italianResidueLineReason(line, locale, nextLine, heading = undefined) {
   if (locale === 'it') return null;
   const clean = normalizeItalianResidueLine(line);
   if (!clean) return null;
+  const headingText = heading === undefined
+    ? markdownHeadingText(line, nextLine)
+    : heading;
+  if (headingText !== null) {
+    if (!headingText) return null;
+    if (ITALIAN_RESIDUE_HEADING_RE.test(headingText)) return 'heading';
+    return italianMarkdownHeadingReason(headingText, locale);
+  }
   if (ITALIAN_RESIDUE_HEADING_RE.test(clean)) return 'heading';
 
   const words = clean.match(ITALIAN_RESIDUE_WORD_RE) || [];
@@ -182,14 +419,19 @@ export function scanItalianResidue(sections, locale) {
   const hits = [];
   for (const [field, value] of Object.entries(sections)) {
     if (typeof value !== 'string') continue;
-    value.split(/\r?\n/u).forEach((line, index) => {
-      const reason = italianResidueLineReason(line, locale);
+    const fenceState = { marker: null, fenceLine: false };
+    const lines = value.split(/\r?\n/u);
+    lines.forEach((line, index) => {
+      const nextLine = lines[index + 1];
+      const heading = markdownHeadingText(line, nextLine, fenceState);
+      if (fenceState.fenceLine || fenceState.marker) return;
+      const reason = italianResidueLineReason(line, locale, nextLine, heading);
       if (!reason) return;
       hits.push({
         field,
         line: index + 1,
         reason,
-        text: normalizeItalianResidueLine(line).slice(0, 300),
+        text: (heading ?? normalizeItalianResidueLine(line)).slice(0, 300),
       });
     });
   }
