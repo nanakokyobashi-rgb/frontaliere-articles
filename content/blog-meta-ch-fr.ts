@@ -7436,6 +7436,21 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.c-basilea-campagna-criteri.title': 'Permis C à Bâle-Landschaft : exigences et application',
     'blog.article.c-basilea-campagna-criteri.excerpt': 'Dans le canton de Bâle-Landschaft : 10 ans de résidence, 5 ans pour l’UE/EFTA, intégration, langue et procédure pour le permis C.',
     'blog.article.c-basilea-campagna-criteri.imageAlt': 'Demande de permis d\'établissement C à Bâle-Campagne',
+    'blog.article.cicli-basilea-campagna.title': 'Système scolaire de Bâle-Landschaft : effectifs et cycles',
+    'blog.article.cicli-basilea-campagna.excerpt': 'Guide de la scolarité obligatoire à Bâle-Landschaft : inscription, cycles, calendrier, langues d’enseignement et transition vers le secondaire.',
+    'blog.article.cicli-basilea-campagna.imageAlt': 'École publique dans le canton de Bâle-Campagne',
+    'blog.article.guida-san-gallo-lamal-2026.title': 'Primes d’assurance santé KVG 2026 : Canton de Saint-Gall',
+    'blog.article.guida-san-gallo-lamal-2026.excerpt': 'Primes KVG 2026 dans le canton de Saint-Gall : six franchises pour adultes, différences par canton et région, et réduction de primes cantonale.',
+    'blog.article.guida-san-gallo-lamal-2026.imageAlt': 'Guide des primes LAMal 2026 dans le canton de Saint-Gall',
+    'blog.article.franchigia-lamal-lucerna-guida.title': 'Primes d’assurance santé KVG 2026 : Canton de Lucerne',
+    'blog.article.franchigia-lamal-lucerna-guida.excerpt': 'À Lucerne, les primes KVG dépendent du canton et de la région : franchises adultes, change de monnaie et réduction de primes cantonale pour 2026.',
+    'blog.article.franchigia-lamal-lucerna-guida.imageAlt': 'Comparaison des primes LAMal 2026 et franchises dans le canton de Lucerne',
+    'blog.article.stipendi-professioni-cantoni-2026.title': 'Salaire moyen des professions en Suisse 2026 : comparaison',
+    'blog.article.stipendi-professioni-cantoni-2026.excerpt': 'Comparaison des professions, secteurs et cantons en 2026 : impôt fédéral direct, AHV/IV/EO, BVG, KVG et salaire minimum.',
+    'blog.article.stipendi-professioni-cantoni-2026.imageAlt': 'Comparaison des salaires moyens par profession et canton en Suisse en 2026',
+    'blog.article.sostegno-formazione-basilea.title': 'Bourses dans le canton de Bâle-Landschaft : exigences et montants',
+    'blog.article.sostegno-formazione-basilea.excerpt': 'Guide des bourses et prêts étudiants dans le canton de Bâle-Landschaft : exigences, montants maximaux, délais de soumission et bureau cantonal compétent.',
+    'blog.article.sostegno-formazione-basilea.imageAlt': 'Bourses et prêts d\'études dans le canton de Basilea Campagna',
 };
 
 export default blogMetaChFr;

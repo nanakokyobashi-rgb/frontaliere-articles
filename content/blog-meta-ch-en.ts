@@ -7436,6 +7436,21 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.c-basilea-campagna-criteri.title': 'C Permit in Basel-Landschaft: Requirements and Application',
     'blog.article.c-basilea-campagna-criteri.excerpt': 'In the Canton of Basel-Landschaft: 10 years of residence, 5 for EU/EFTA, integration, language, and procedure for the C permit.',
     'blog.article.c-basilea-campagna-criteri.imageAlt': 'Application for a C residence permit in Basel-Landschaft',
+    'blog.article.cicli-basilea-campagna.title': 'Basel-Landschaft school system: enrolment and cycles',
+    'blog.article.cicli-basilea-campagna.excerpt': 'Guide to compulsory schooling in Basel-Landschaft: enrolment, cycles, calendar, languages of instruction and transition to secondary school.',
+    'blog.article.cicli-basilea-campagna.imageAlt': 'Public school in the Canton of Basel Campagna',
+    'blog.article.guida-san-gallo-lamal-2026.title': 'KVG health insurance premiums 2026: Canton of St. Gallen',
+    'blog.article.guida-san-gallo-lamal-2026.excerpt': 'KVG premiums 2026 in the canton of St. Gallen: six adult deductibles, differences by canton and region, and cantonal premium reduction.',
+    'blog.article.guida-san-gallo-lamal-2026.imageAlt': 'Guide to 2026 LAMal premiums in the canton of St. Gallen',
+    'blog.article.franchigia-lamal-lucerna-guida.title': 'KVG health insurance premiums 2026: Canton of Lucerne',
+    'blog.article.franchigia-lamal-lucerna-guida.excerpt': 'In Lucerne, LAMal premiums depend on the canton and region: adult deductibles, changing health insurer and cantonal premium reduction for 2026.',
+    'blog.article.franchigia-lamal-lucerna-guida.imageAlt': 'Comparing 2026 LAMal premiums and deductibles in the canton of Lucerne',
+    'blog.article.stipendi-professioni-cantoni-2026.title': 'Average salary by profession in Switzerland 2026: comparison',
+    'blog.article.stipendi-professioni-cantoni-2026.excerpt': 'Comparison of professions, sectors and cantons in 2026: direct federal tax, AHV/IV/EO, BVG, KVG AND MINIMUM WAGE.',
+    'blog.article.stipendi-professioni-cantoni-2026.imageAlt': 'Comparison of average salaries by profession and canton in Switzerland in 2026',
+    'blog.article.sostegno-formazione-basilea.title': 'Scholarships in the canton of Basel-Landschaft: requirements and amounts',
+    'blog.article.sostegno-formazione-basilea.excerpt': 'Guide to scholarships and student loans in the Canton of Basel-Landschaft: requirements, maximum amounts, deadlines for submission and competent cantonal office.',
+    'blog.article.sostegno-formazione-basilea.imageAlt': 'Scholarships and study loans in the Canton of Basilea Campagna',
 };
 
 export default blogMetaChEn;

@@ -7436,6 +7436,21 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.c-basilea-campagna-criteri.title': 'C-Genehmigung in Basel-Landschaft: Anforderungen und Anwendung',
     'blog.article.c-basilea-campagna-criteri.excerpt': 'Im Kanton Basel-Landschaft: 10 Jahre Aufenthalt, 5 Jahre für EU/EFTA, Integration, Sprache und Verfahren für die C-Genehmigung.',
     'blog.article.c-basilea-campagna-criteri.imageAlt': 'Antrag für die Niederlassungsbewilligung C in Basel-Landschaft',
+    'blog.article.cicli-basilea-campagna.title': 'Schulsystem Basel-Landschaft: Einschreibung und Zyklen',
+    'blog.article.cicli-basilea-campagna.excerpt': 'Leitfaden zur Schulpflicht in Basel-Landschaft: Einschreibung, Zyklen, Kalender, Unterrichtssprachen und Übergang zur weiterführenden Schule.',
+    'blog.article.cicli-basilea-campagna.imageAlt': 'Öffentliche Schule im Kanton Basel-Landschaft',
+    'blog.article.guida-san-gallo-lamal-2026.title': 'Krankenkassenprämien LAMal 2026: Kanton St. Gallen',
+    'blog.article.guida-san-gallo-lamal-2026.excerpt': 'LAMal-Prämien 2026 im Kanton St. Gallen: sechs Franchisen für Erwachsene, Unterschiede nach Kanton und Region sowie kantonale Prämienverbilligung.',
+    'blog.article.guida-san-gallo-lamal-2026.imageAlt': 'Leitfaden zu LAMal-Prämien 2026 im Kanton St. Gallen',
+    'blog.article.franchigia-lamal-lucerna-guida.title': 'KVG Krankenversicherungsprämien 2026: Kanton Luzern',
+    'blog.article.franchigia-lamal-lucerna-guida.excerpt': 'In Luzern hängen die LAMal-Prämien von Kanton und Region ab: Erwachsenenfranchisen, Kassenwechsel und kantonale Prämienverbilligung für 2026.',
+    'blog.article.franchigia-lamal-lucerna-guida.imageAlt': 'Vergleich von LAMal-Prämien und Franchisen 2026 im Kanton Luzern',
+    'blog.article.stipendi-professioni-cantoni-2026.title': 'Durchschnittsgehalt für Berufe in der Schweiz 2026: Vergleich',
+    'blog.article.stipendi-professioni-cantoni-2026.excerpt': 'Vergleich 2026 zwischen Berufen, Branchen und Kantonen: direkte Bundessteuer, AHV/IV/EO, BVG, KVG und Mindestlohn.',
+    'blog.article.stipendi-professioni-cantoni-2026.imageAlt': 'Vergleich der Durchschnittslöhne nach Beruf und Kanton in der Schweiz 2026',
+    'blog.article.sostegno-formazione-basilea.title': 'Stipendien im Kanton Basel-Landschaft: Anforderungen und Beträge',
+    'blog.article.sostegno-formazione-basilea.excerpt': 'Leitfaden zu Stipendien und Studiendarlehen im Kanton Basel-Landschaft: Anforderungen, Höchstbeträge, Einreichungsfristen und zuständiges Kantonsamt.',
+    'blog.article.sostegno-formazione-basilea.imageAlt': 'Stipendien und Studiendarlehen im Kanton Basilea Campagna',
 };
 
 export default blogMetaChDe;

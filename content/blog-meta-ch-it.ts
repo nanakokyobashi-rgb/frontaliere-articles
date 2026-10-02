@@ -7436,6 +7436,21 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.c-basilea-campagna-criteri.title': 'Permesso C a Basilea Campagna: requisiti e domanda',
     'blog.article.c-basilea-campagna-criteri.excerpt': 'Nel Cantone di Basilea Campagna: 10 anni di residenza, 5 per UE/AELS, integrazione, lingua e procedura per il permesso C.',
     'blog.article.c-basilea-campagna-criteri.imageAlt': 'Domanda per il permesso di domicilio C a Basilea Campagna',
+    'blog.article.cicli-basilea-campagna.title': 'Sistema scolastico Basilea Campagna: iscrizione e cicli',
+    'blog.article.cicli-basilea-campagna.excerpt': 'Guida alla scuola dell\'obbligo a Basilea Campagna: iscrizione, cicli, calendario, lingue di insegnamento e passaggio alle scuole medie superiori.',
+    'blog.article.cicli-basilea-campagna.imageAlt': 'Scuola pubblica nel Cantone di Basilea Campagna',
+    'blog.article.guida-san-gallo-lamal-2026.title': 'Premi cassa malati lamal 2026: canton san gallo',
+    'blog.article.guida-san-gallo-lamal-2026.excerpt': 'Premi LAMal 2026 nel canton San Gallo: sei franchigie adulti, differenze per cantone e regione e riduzione premi cantonale.',
+    'blog.article.guida-san-gallo-lamal-2026.imageAlt': 'Guida ai premi LAMal 2026 nel canton San Gallo',
+    'blog.article.franchigia-lamal-lucerna-guida.title': 'Premi cassa malati LAMal 2026: canton Lucerna',
+    'blog.article.franchigia-lamal-lucerna-guida.excerpt': 'A Lucerna i premi LAMal dipendono da cantone e regione: franchigie adulti, cambio cassa e riduzione premi cantonale per il 2026.',
+    'blog.article.franchigia-lamal-lucerna-guida.imageAlt': 'Confronto dei premi LAMal 2026 e delle franchigie nel canton Lucerna',
+    'blog.article.stipendi-professioni-cantoni-2026.title': 'Salario medio professioni Svizzera 2026: confronto',
+    'blog.article.stipendi-professioni-cantoni-2026.excerpt': 'Confronto 2026 tra professioni, settori e cantoni: imposta federale diretta, AVS/AI/IPG, LPP, LAMal e salario minimo.',
+    'blog.article.stipendi-professioni-cantoni-2026.imageAlt': 'Confronto dei salari medi per professione e cantone in Svizzera nel 2026',
+    'blog.article.sostegno-formazione-basilea.title': 'Borse di studio canton Basilea Campagna: requisiti e importi',
+    'blog.article.sostegno-formazione-basilea.excerpt': 'Guida a borse e prestiti allo studio nel Cantone di Basilea Campagna: requisiti, importi massimi, termini di presentazione e ufficio cantonale competente.',
+    'blog.article.sostegno-formazione-basilea.imageAlt': 'Borse di studio e prestiti nel Cantone di Basilea Campagna',
 };
 
 export default blogMetaChIt;
