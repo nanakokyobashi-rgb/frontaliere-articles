@@ -23,6 +23,21 @@ test('keeps free and contextual prices on their existing paths', () => {
   assert.deepEqual(parsePriceText('CHF 10 pro Person'), { amount: 10, currency: 'CHF', isFree: false });
 });
 
+test('keeps the paid adult tariff when children are free, including punctuation and inflection', () => {
+  assert.deepEqual(parsePriceText('Bambini: gratis, adulti CHF 20'), { amount: 20, currency: 'CHF', isFree: false });
+  assert.deepEqual(parsePriceText('Bambini gratuiti, adulti CHF 20'), { amount: 20, currency: 'CHF', isFree: false });
+});
+
+test('keeps grouped amounts and associates the selected amount with its currency', () => {
+  assert.deepEqual(parsePriceText("CHF 1'000"), { amount: 1000, currency: 'CHF', isFree: false });
+  assert.deepEqual(parsePriceText('CHF 20 (EUR 22)'), { amount: 20, currency: 'CHF', isFree: false });
+});
+
+test('accepts an explicit currency marker adjacent to the amount', () => {
+  assert.deepEqual(parsePriceText('CHF10'), { amount: 10, currency: 'CHF', isFree: false });
+  assert.deepEqual(parsePriceText('10CHF'), { amount: 10, currency: 'CHF', isFree: false });
+});
+
 test('does not treat ambiguous dates or phone numbers as bare prices', () => {
   assert.equal(parsePriceText('31.12.2026').amount, null);
   assert.equal(parsePriceText('+41 79 123 45 67').amount, null);
