@@ -499,7 +499,9 @@
     "permesso L di breve durata canton Basilea Campagna validità e proroga",
     "premi cassa malati lamal 2026 canton Argovia",
     "apprendistato e formazione professionale canton Basilea Campagna",
-    "salario medio professioni svizzera 2026"
+    "salario medio professioni svizzera 2026",
+    "salario medio professioni svizzera 2026 canton Zurigo",
+    "salario medio professioni svizzera 2026 canton Vaud"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -892,6 +894,10 @@
     "svizzera::https://www.tio.ch/ticino/attualita/1954316/occhio-all-acceleratore-il-piede-pesante-si-paga": {
       "section": "svizzera",
       "ts": 1790963159924
+    },
+    "svizzera::https://lenews.ch/2026/10/02/film-zurich-film-festival-2026-excellent-international-films-and-top-stars": {
+      "section": "svizzera",
+      "ts": 1790964335227
     }
   }
 }

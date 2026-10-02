@@ -97871,6 +97871,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-netto-professioni-stgallen-2026': {
+    title: 'Salario medio professioni Svizzera 2026: San Gallo',
+    description: 'Salario medio per professione in Svizzera nel 2026: guida al confronto con il canton San Gallo tra lordo, contributi, imposte, LAMal e netto disponibile.',
+    keywords: 'frontalieri, ticino, svizzera, italia, salario, medio, professioni, gallo',
+    ogTitle: 'Salario medio Svizzera 2026: canton San Gallo',
+    ogDescription: 'Confronto 2026 tra professioni, settori e cantoni: il salario del canton San Gallo va letto insieme a AVS/AI/IPG, AD/AC, LPP, imposte su tre livelli e premi LAMal. Tutti i passaggi per evitare importi non verificati e distinguere il lordo dal netto.',
+    canonicalPath: '/articoli-svizzera/netto-professioni-stgallen-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Salario medio professioni Svizzera 2026: San Gallo",
+      "description": "Salario medio per professione in Svizzera nel 2026: guida al confronto con il canton San Gallo tra lordo, contributi, imposte, LAMal e netto disponibile.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/netto-professioni-stgallen-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Confronto dei salari svizzeri per professione, con focus sul canton San Gallo"
+      },
+      "datePublished": "2026-10-02T18:40:14+00:00",
+      "dateModified": "2026-10-02T18:40:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/netto-professioni-stgallen-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
