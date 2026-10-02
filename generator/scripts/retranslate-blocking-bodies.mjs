@@ -176,6 +176,10 @@ function stripMarkdownContainerPrefixes(line) {
   return markdownContainerContext(line).rest;
 }
 
+function isListContainer(container) {
+  return container.kind === 'ordered-list' || container.kind === 'unordered-list';
+}
+
 /**
  * Parse only the Markdown containers that precede a line. The semantic
  * context is retained for fenced-code matching: a list/blockquote marker in
@@ -187,18 +191,49 @@ function markdownContainerContext(line) {
   for (;;) {
     const quoted = rest.match(/^[ \t]{0,3}>[ \t]?/u);
     if (quoted) {
-      containers.push('blockquote');
+      containers.push({ kind: 'blockquote', width: quoted[0].length });
       rest = rest.slice(quoted[0].length);
       continue;
     }
     const listed = rest.match(/^[ \t]{0,3}(?:[-+*]|\d{1,9}[.)])[ \t]+/u);
     if (listed) {
-      containers.push(/^\d/u.test(listed[0].trim()) ? 'ordered-list' : 'unordered-list');
+      containers.push({
+        kind: /^\d/u.test(listed[0].trim()) ? 'ordered-list' : 'unordered-list',
+        // The consumed prefix is also the minimum indentation needed when a
+        // list container continues without repeating its marker.
+        width: listed[0].length,
+      });
       rest = rest.slice(listed[0].length);
       continue;
     }
-    return { rest, containerKey: containers.join('|') };
+    return {
+      rest,
+      containerKey: containers.map(({ kind }) => kind).join('|'),
+      containers,
+      contentIndent: (rest.match(/^[ \t]*/u) || [''])[0].length,
+    };
   }
+}
+
+/**
+ * A child line may omit list markers while continuing the same list item.
+ * Blockquotes cannot be omitted: `> title` followed by a root-level `---` is
+ * a separator, not a Setext underline. The returned indentation is the extra
+ * allowance needed for a fence after omitted list containers.
+ */
+function compatibleContainerContinuation(openingContext, candidateContext) {
+  const opening = openingContext.containers;
+  const candidate = candidateContext.containers;
+  if (candidate.length > opening.length) return null;
+  for (let index = 0; index < candidate.length; index += 1) {
+    if (candidate[index].kind !== opening[index].kind) return null;
+  }
+
+  const omitted = opening.slice(candidate.length);
+  if (omitted.some((container) => !isListContainer(container))) return null;
+  const omittedListIndent = omitted.reduce((sum, container) => sum + container.width, 0);
+  if (candidateContext.contentIndent < omittedListIndent) return null;
+  return { omittedListIndent };
 }
 
 /** Restituisce il testo di un heading ATX, oppure null. */
@@ -214,11 +249,15 @@ function isSetextUnderline(line) {
   return /^[ \t]{0,3}(?:=+|-+)[ \t]*$/u.test(rest);
 }
 
-function markdownFenceMarker(line, expectedContainerKey = null) {
-  const { rest, containerKey } = markdownContainerContext(line);
-  if (expectedContainerKey !== null && containerKey !== expectedContainerKey) return null;
-  const match = rest.match(/^[ \t]{0,3}(`{3,}|~{3,})(.*)$/u);
-  if (!match) return null;
+function markdownFenceMarker(line, expectedContext = null) {
+  const context = markdownContainerContext(line);
+  const continuation = expectedContext
+    ? compatibleContainerContinuation(expectedContext, context)
+    : { omittedListIndent: 0 };
+  if (!continuation) return null;
+  const indentation = (context.rest.match(/^[ \t]*/u) || [''])[0].length;
+  const match = context.rest.match(/^[ \t]*(`{3,}|~{3,})(.*)$/u);
+  if (!match || indentation > 3 + continuation.omittedListIndent) return null;
   const trailing = match[2];
   // CommonMark forbids backticks in a backtick fence's info string. Treating
   // such a line as a marker could close a real fence from inside its code.
@@ -227,8 +266,21 @@ function markdownFenceMarker(line, expectedContainerKey = null) {
     char: match[1][0],
     length: match[1].length,
     trailing,
-    containerKey,
+    containerKey: context.containerKey,
+    context,
   };
+}
+
+function compatibleSetextContexts(titleContext, underlineContext) {
+  const continuation = compatibleContainerContinuation(titleContext, underlineContext);
+  if (!continuation) return false;
+
+  // `- title\n- ---` starts a second list item. A Setext underline in a list
+  // continues by indentation (`  ---`), while blockquote markers must be
+  // repeated explicitly (`> ---`).
+  const titleHasList = titleContext.containers.some(isListContainer);
+  const underlineRepeatsList = underlineContext.containers.some(isListContainer);
+  return !(titleHasList && underlineRepeatsList);
 }
 
 /**
@@ -241,12 +293,19 @@ function markdownFenceMarker(line, expectedContainerKey = null) {
 function markdownHeadingText(line, nextLine, fenceState = null) {
   if (fenceState) {
     fenceState.fenceLine = false;
-    const marker = markdownFenceMarker(line, fenceState.marker?.containerKey ?? null);
+    const marker = markdownFenceMarker(line, fenceState.marker?.context ?? null);
     if (fenceState.marker) {
       const closes = marker
         && marker.char === fenceState.marker.char
         && marker.length >= fenceState.marker.length
-        && !marker.trailing.trim();
+        && !marker.trailing.trim()
+        // A repeated list marker is a list item inside the fence, not its
+        // closing continuation. The indented, marker-free continuation is
+        // handled by compatibleContainerContinuation above.
+        && !(
+          fenceState.marker.context.containers.some(isListContainer)
+          && marker.context.containers.some(isListContainer)
+        );
       if (closes) fenceState.marker = null;
       fenceState.fenceLine = true;
       return null;
@@ -260,7 +319,11 @@ function markdownHeadingText(line, nextLine, fenceState = null) {
   const atx = atxHeadingText(line);
   if (atx !== null) return normalizeItalianResidueLine(atx);
   if (nextLine !== undefined && isSetextUnderline(nextLine)) {
-    return normalizeItalianResidueLine(stripMarkdownContainerPrefixes(line));
+    const titleContext = markdownContainerContext(line);
+    const underlineContext = markdownContainerContext(nextLine);
+    if (compatibleSetextContexts(titleContext, underlineContext)) {
+      return normalizeItalianResidueLine(titleContext.rest);
+    }
   }
   return null;
 }

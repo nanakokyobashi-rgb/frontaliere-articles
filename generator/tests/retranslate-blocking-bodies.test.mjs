@@ -502,6 +502,32 @@ test('lo scan non chiude un fence root con contenitori Markdown nel codice', () 
   }]);
 });
 
+test('lo scan chiude le fence in lista sulla continuazione indentata', () => {
+  const listFence = [
+    '- ```markdown',
+    '- ```',
+    '## Redditi',
+    'Pensioni',
+    'Tasse',
+    '  ```',
+    '## Redditi',
+  ].join('\n');
+  const quotedListFence = [
+    '> - ```markdown',
+    '> - ```',
+    '> ## Redditi',
+    '> Pensioni',
+    '> Tasse',
+    '>   ```',
+    '> ## Redditi',
+  ].join('\n');
+
+  assert.deepEqual(scanItalianResidue({ body1: listFence, body2: quotedListFence }, 'en'), [
+    { field: 'body1', line: 7, reason: 'language', text: 'Redditi' },
+    { field: 'body2', line: 7, reason: 'language', text: 'Redditi' },
+  ]);
+});
+
 test('lo scan non tratta un info string backtick non valido come chiusura', () => {
   const body1 = [
     '```markdown',
@@ -519,6 +545,26 @@ test('lo scan non tratta un info string backtick non valido come chiusura', () =
     reason: 'language',
     text: 'Redditi',
   }]);
+});
+
+test('lo scan richiede container compatibili tra titolo Setext e underline', () => {
+  const mismatched = [
+    '> Redditi italiani',
+    '---',
+    '- Redditi italiani',
+    '---',
+    '> - Redditi italiani',
+    '---',
+  ].join('\n');
+  assert.deepEqual(scanItalianResidue({ body1: mismatched }, 'en'), []);
+
+  assert.deepEqual(scanItalianResidue({
+    body1: '- Redditi italiani\n  ---',
+    body2: '> Redditi italiani\n> ---',
+  }, 'en'), [
+    { field: 'body1', line: 1, reason: 'language', text: 'Redditi italiani' },
+    { field: 'body2', line: 1, reason: 'language', text: 'Redditi italiani' },
+  ]);
 });
 
 test('la soglia lascia fuori una riga italiana isolata e il locale sorgente', () => {
