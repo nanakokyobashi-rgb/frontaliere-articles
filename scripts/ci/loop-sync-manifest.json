@@ -2849,9 +2849,9 @@
       "sitePath": "scripts/lib/topic-sources/wordpressSearch.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "57d680bbaf19c26d",
-        "corpus": "57d680bbaf19c26d",
-        "alignedAt": "2026-08-09"
+        "site": "29304c56a0b58f82",
+        "corpus": "29304c56a0b58f82",
+        "alignedAt": "2026-10-02"
       }
     },
     {
