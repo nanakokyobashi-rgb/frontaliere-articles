@@ -184,6 +184,7 @@ function stripMarkdownContainerPrefixes(line) {
 function markdownContainerContext(line) {
   let rest = String(line ?? '').replace(/\r$/u, '');
   const containers = [];
+  let listContinuationIndent = null;
   for (;;) {
     const quoted = rest.match(/^[ \t]{0,3}>[ \t]?/u);
     if (quoted) {
@@ -194,11 +195,37 @@ function markdownContainerContext(line) {
     const listed = rest.match(/^[ \t]{0,3}(?:[-+*]|\d{1,9}[.)])[ \t]+/u);
     if (listed) {
       containers.push(/^\d/u.test(listed[0].trim()) ? 'ordered-list' : 'unordered-list');
+      // A fence inside a list item may close on a bare, indented continuation
+      // line (`- ```\n  ````). Keep the content indent of the innermost list so
+      // that continuation is accepted without treating a root-level list
+      // marker in a fence as a closing marker.
+      listContinuationIndent = listed[0].length;
       rest = rest.slice(listed[0].length);
       continue;
     }
-    return { rest, containerKey: containers.join('|') };
+    const leadingIndent = rest.match(/^[ \t]*/u)?.[0].length ?? 0;
+    return {
+      rest,
+      containers,
+      containerKey: containers.join('|'),
+      leadingIndent,
+      listContinuationIndent,
+    };
   }
+}
+
+/** Allow only the same containers or a valid indented list continuation. */
+function markdownContainersCompatible(opening, candidate) {
+  if (candidate.containerKey === opening.containerKey) return true;
+  if (candidate.containers.length >= opening.containers.length) return false;
+  const shared = opening.containers.slice(0, candidate.containers.length);
+  if (!shared.every((container, index) => container === candidate.containers[index])) return false;
+  const omitted = opening.containers.slice(candidate.containers.length);
+  if (!omitted.every((container) => container === 'ordered-list' || container === 'unordered-list')) {
+    return false;
+  }
+  return opening.listContinuationIndent !== null
+    && candidate.leadingIndent >= opening.listContinuationIndent;
 }
 
 /** Restituisce il testo di un heading ATX, oppure null. */
@@ -209,25 +236,31 @@ function atxHeadingText(line) {
   return (match[1] || '').replace(/[ \t]+#+[ \t]*$/u, '').trim();
 }
 
-function isSetextUnderline(line) {
-  const rest = stripMarkdownContainerPrefixes(line);
+function isSetextUnderline(line, expectedContainer = null) {
+  const context = markdownContainerContext(line);
+  if (expectedContainer && !markdownContainersCompatible(expectedContainer, context)) return false;
+  const { rest } = context;
   return /^[ \t]{0,3}(?:=+|-+)[ \t]*$/u.test(rest);
 }
 
-function markdownFenceMarker(line, expectedContainerKey = null) {
-  const { rest, containerKey } = markdownContainerContext(line);
-  if (expectedContainerKey !== null && containerKey !== expectedContainerKey) return null;
-  const match = rest.match(/^[ \t]{0,3}(`{3,}|~{3,})(.*)$/u);
+function markdownFenceMarker(line, expectedContainer = null) {
+  const context = markdownContainerContext(line);
+  if (expectedContainer && !markdownContainersCompatible(expectedContainer, context)) return null;
+  const { rest } = context;
+  const match = rest.match(/^([ \t]{0,3})(`{3,}|~{3,})(.*)$/u);
   if (!match) return null;
-  const trailing = match[2];
+  const trailing = match[3];
   // CommonMark forbids backticks in a backtick fence's info string. Treating
   // such a line as a marker could close a real fence from inside its code.
-  if (match[1][0] === '`' && trailing.includes('`')) return null;
+  if (match[2][0] === '`' && trailing.includes('`')) return null;
   return {
-    char: match[1][0],
-    length: match[1].length,
+    char: match[2][0],
+    length: match[2].length,
     trailing,
-    containerKey,
+    context: {
+      ...context,
+      leadingIndent: match[1].length,
+    },
   };
 }
 
@@ -241,7 +274,7 @@ function markdownFenceMarker(line, expectedContainerKey = null) {
 function markdownHeadingText(line, nextLine, fenceState = null) {
   if (fenceState) {
     fenceState.fenceLine = false;
-    const marker = markdownFenceMarker(line, fenceState.marker?.containerKey ?? null);
+    const marker = markdownFenceMarker(line, fenceState.marker?.context ?? null);
     if (fenceState.marker) {
       const closes = marker
         && marker.char === fenceState.marker.char
@@ -259,7 +292,7 @@ function markdownHeadingText(line, nextLine, fenceState = null) {
   }
   const atx = atxHeadingText(line);
   if (atx !== null) return normalizeItalianResidueLine(atx);
-  if (nextLine !== undefined && isSetextUnderline(nextLine)) {
+  if (nextLine !== undefined && isSetextUnderline(nextLine, markdownContainerContext(line))) {
     return normalizeItalianResidueLine(stripMarkdownContainerPrefixes(line));
   }
   return null;

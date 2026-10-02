@@ -521,6 +521,37 @@ test('lo scan non tratta un info string backtick non valido come chiusura', () =
   }]);
 });
 
+test('lo scan chiude un fence dentro una lista sulla continuazione indentata', () => {
+  const body1 = [
+    '- ```markdown',
+    '  ## Redditi',
+    '  Pensioni',
+    '  Tasse',
+    '  ```',
+    '## Redditi',
+  ].join('\n');
+
+  assert.deepEqual(scanItalianResidue({ body1 }, 'en'), [{
+    field: 'body1',
+    line: 6,
+    reason: 'language',
+    text: 'Redditi',
+  }]);
+});
+
+test('lo scan richiede un container compatibile fra Setext e underline', () => {
+  const body1 = [
+    '> Situazione fiscale',
+    '---',
+    '> Redditi',
+    '---',
+    '> Pensioni',
+    '---',
+  ].join('\n');
+
+  assert.deepEqual(scanItalianResidue({ body1 }, 'en'), []);
+});
+
 test('la soglia lascia fuori una riga italiana isolata e il locale sorgente', () => {
   const oneLine = { body1: '## Fatti chiave\n- **Cosa**: Convocazione dell’assemblea CUV.' };
   assert.equal(scanItalianResidue(oneLine, 'fr').length, 2);
