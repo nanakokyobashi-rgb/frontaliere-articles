@@ -384,6 +384,27 @@ test('publish-journalist persiste il marker anche quando producer o guard fallis
   assert.match(commit, /else\n\s+COMMIT_MESSAGE="Publish journalist article\(s\)"\n\s+git add -A/);
 });
 
+test('publish-journalist riaccoda gli ID pubblicati se una guardia successiva boccia il contenuto', () => {
+  const publisher = workflows.find((w) => w.file === 'publish-journalist-articles.yml');
+  assert.ok(publisher, 'publish-journalist-articles.yml non esiste piu\'');
+  assert.match(
+    publisher.src,
+    /PUBLISHED_IDS:\s*\$\{\{\s*steps\.publish\.outputs\.published_ids\s*\|\|\s*'\[\]'\s*\}\}/,
+    'la guardia non riceve gli ID gia\' marcati published',
+  );
+  const guard = extractRun(
+    publisher.src,
+    'Guard — cio\' che questo run ha scritto non raggiunge main se viola le guardie',
+  );
+  assert.match(guard, /requeuePublishedIds|requeue-published-journalist-documents\.mjs/);
+  assert.equal(
+    (guard.match(/requeue_published_ids/g) || []).length,
+    3,
+    'la funzione deve essere definita e chiamata in entrambi i rami rossi',
+  );
+  assert.match(guard, /if ! requeue_published_ids; then/);
+});
+
 test('publish-journalist rimette in coda i completati prima di un fatal successivo', () => {
   const source = fs.readFileSync(
     path.join(ROOT, 'generator/scripts/publish-journalist-article.mjs'),

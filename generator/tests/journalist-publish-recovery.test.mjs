@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 
 import {
   JournalistRequeueError,
+  requeuePublishedDocumentIds,
   requeuePublishedDocuments,
 } from '../scripts/lib/journalist-publish-recovery.mjs';
 
@@ -100,4 +101,42 @@ test('un chunk irrisolto rilancia ma conserva gli ID dei chunk rimessi in coda',
   assert.equal(requeuedIds.length, 500, 'gli ID del primo chunk non si perdono nel reject successivo');
   assert.ok(documents.slice(0, 500).every(({ docRef }) => docRef.currentStatus() === 'queued'));
   assert.equal(documents[500].docRef.currentStatus(), 'published');
+});
+
+test('gli ID del guard failure usano lo stesso rollback idempotente', async () => {
+  const documents = [documentRecord('article-a'), documentRecord('article-b')];
+  const byId = new Map(documents.map((doc) => [doc.id, doc.docRef]));
+  const db = {
+    collection(name) {
+      assert.equal(name, 'journalist_articles');
+      return {
+        doc(id) {
+          return byId.get(id);
+        },
+      };
+    },
+    batch() {
+      const operations = [];
+      return {
+        update(docRef, update) {
+          operations.push({ docRef, update });
+        },
+        async commit() {
+          for (const { docRef, update } of operations) docRef.apply(update);
+        },
+      };
+    },
+  };
+
+  const requeuedIds = [];
+  const result = await requeuePublishedDocumentIds({
+    db,
+    FieldValue,
+    ids: ['article-a', 'article-a', 'article-b'],
+    requeuedIds,
+  });
+
+  assert.deepEqual(result, ['article-a', 'article-b']);
+  assert.deepEqual(requeuedIds, ['article-a', 'article-b']);
+  assert.ok(documents.every(({ docRef }) => docRef.currentStatus() === 'queued'));
 });

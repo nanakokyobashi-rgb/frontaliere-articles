@@ -127,3 +127,46 @@ export async function requeuePublishedDocuments({
 
   return requeuedIds;
 }
+
+/**
+ * Requeue IDs emitted by the producer when a later workflow guard rejects the
+ * working tree.  The guard has only the document IDs in `GITHUB_OUTPUT`, not
+ * the DocumentSnapshot references retained by the producer, so resolve the
+ * same collection references here and use the identical idempotent rollback.
+ *
+ * @param {{
+ *   db: { collection: (name: string) => { doc: (id: string) => object } },
+ *   FieldValue: { delete: Function },
+ *   ids: string[],
+ *   requeuedIds?: string[],
+ *   maxAttempts?: number,
+ * }} args
+ * @returns {Promise<string[]>} IDs confirmed queued by the helper
+ */
+export async function requeuePublishedDocumentIds({
+  db,
+  FieldValue,
+  ids,
+  requeuedIds = [],
+  maxAttempts = JOURNALIST_REQUEUE_MAX_ATTEMPTS,
+}) {
+  if (!db || typeof db.collection !== 'function') {
+    throw new TypeError('journalist requeue IDs require a Firestore database');
+  }
+  if (!Array.isArray(ids)) {
+    throw new TypeError('journalist requeue IDs require an ids array');
+  }
+  const uniqueIds = [...new Set(ids.map((id) => String(id).trim()).filter(Boolean))];
+  const collection = db.collection('journalist_articles');
+  const publishedDocs = uniqueIds.map((id) => ({
+    docRef: collection.doc(id),
+    id,
+  }));
+  return requeuePublishedDocuments({
+    db,
+    FieldValue,
+    publishedDocs,
+    requeuedIds,
+    maxAttempts,
+  });
+}
