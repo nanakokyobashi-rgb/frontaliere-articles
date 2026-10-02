@@ -191,7 +191,11 @@ function markdownContainerContext(line) {
   for (;;) {
     const quoted = rest.match(/^[ \t]{0,3}>[ \t]?/u);
     if (quoted) {
-      containers.push({ kind: 'blockquote', width: quoted[0].length });
+      containers.push({
+        kind: 'blockquote',
+        width: quoted[0].length,
+        indent: (quoted[0].match(/^[ \t]*/u) || [''])[0].length,
+      });
       rest = rest.slice(quoted[0].length);
       continue;
     }
@@ -202,6 +206,7 @@ function markdownContainerContext(line) {
         // The consumed prefix is also the minimum indentation needed when a
         // list container continues without repeating its marker.
         width: listed[0].length,
+        indent: (listed[0].match(/^[ \t]*/u) || [''])[0].length,
       });
       rest = rest.slice(listed[0].length);
       continue;
@@ -218,20 +223,36 @@ function markdownContainerContext(line) {
 /**
  * A child line may omit list markers while continuing the same list item.
  * Blockquotes cannot be omitted: `> title` followed by a root-level `---` is
- * a separator, not a Setext underline. The returned indentation is the extra
- * allowance needed for a fence after omitted list containers.
+ * a separator, not a Setext underline. Omitted lists can occur before a
+ * later blockquote as well as at the end; their content indent must then be
+ * present before that blockquote or before the fence marker itself.
  */
 function compatibleContainerContinuation(openingContext, candidateContext) {
   const opening = openingContext.containers;
   const candidate = candidateContext.containers;
-  if (candidate.length > opening.length) return null;
-  for (let index = 0; index < candidate.length; index += 1) {
-    if (candidate[index].kind !== opening[index].kind) return null;
+  let openingIndex = 0;
+  let omittedListIndent = 0;
+
+  for (const candidateContainer of candidate) {
+    while (
+      openingIndex < opening.length
+      && opening[openingIndex].kind !== candidateContainer.kind
+    ) {
+      if (!isListContainer(opening[openingIndex])) return null;
+      omittedListIndent += opening[openingIndex].width;
+      openingIndex += 1;
+    }
+    if (openingIndex >= opening.length) return null;
+    if (candidateContainer.indent < omittedListIndent) return null;
+    openingIndex += 1;
+    omittedListIndent = 0;
   }
 
-  const omitted = opening.slice(candidate.length);
-  if (omitted.some((container) => !isListContainer(container))) return null;
-  const omittedListIndent = omitted.reduce((sum, container) => sum + container.width, 0);
+  while (openingIndex < opening.length) {
+    if (!isListContainer(opening[openingIndex])) return null;
+    omittedListIndent += opening[openingIndex].width;
+    openingIndex += 1;
+  }
   if (candidateContext.contentIndent < omittedListIndent) return null;
   return { omittedListIndent };
 }

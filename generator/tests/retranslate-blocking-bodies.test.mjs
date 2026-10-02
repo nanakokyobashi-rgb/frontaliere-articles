@@ -521,10 +521,24 @@ test('lo scan chiude le fence in lista sulla continuazione indentata', () => {
     '>   ```',
     '> ## Redditi',
   ].join('\n');
+  const externalListFence = [
+    '- > ```markdown',
+    '  > codice',
+    '  > ## Redditi',
+    '  > Pensioni',
+    '  > Tasse',
+    '  > ```',
+    '  > ## Redditi',
+  ].join('\n');
 
-  assert.deepEqual(scanItalianResidue({ body1: listFence, body2: quotedListFence }, 'en'), [
+  assert.deepEqual(scanItalianResidue({
+    body1: listFence,
+    body2: quotedListFence,
+    body3: externalListFence,
+  }, 'en'), [
     { field: 'body1', line: 7, reason: 'language', text: 'Redditi' },
     { field: 'body2', line: 7, reason: 'language', text: 'Redditi' },
+    { field: 'body3', line: 7, reason: 'language', text: 'Redditi' },
   ]);
 });
 
@@ -573,15 +587,19 @@ test('lo scan richiede container compatibili tra titolo Setext e underline', () 
     '---',
     '> - Redditi italiani',
     '---',
+    '- > Redditi italiani',
+    '> ---',
   ].join('\n');
   assert.deepEqual(scanItalianResidue({ body1: mismatched }, 'en'), []);
 
   assert.deepEqual(scanItalianResidue({
     body1: '- Redditi italiani\n  ---',
     body2: '> Redditi italiani\n> ---',
+    body3: '- > Redditi italiani\n  > ---',
   }, 'en'), [
     { field: 'body1', line: 1, reason: 'language', text: 'Redditi italiani' },
     { field: 'body2', line: 1, reason: 'language', text: 'Redditi italiani' },
+    { field: 'body3', line: 1, reason: 'language', text: 'Redditi italiani' },
   ]);
 });
 
