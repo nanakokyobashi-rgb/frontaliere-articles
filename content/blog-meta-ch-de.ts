@@ -7445,6 +7445,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.franchigia-lamal-lucerna-guida.title': 'KVG Krankenversicherungsprämien 2026: Kanton Luzern',
     'blog.article.franchigia-lamal-lucerna-guida.excerpt': 'In Luzern hängen die LAMal-Prämien von Kanton und Region ab: Erwachsenenfranchisen, Kassenwechsel und kantonale Prämienverbilligung für 2026.',
     'blog.article.franchigia-lamal-lucerna-guida.imageAlt': 'Vergleich von LAMal-Prämien und Franchisen 2026 im Kanton Luzern',
+    'blog.article.stipendi-professioni-cantoni-2026.title': 'Durchschnittsgehalt für Berufe in der Schweiz 2026: Vergleich',
+    'blog.article.stipendi-professioni-cantoni-2026.excerpt': 'Vergleich 2026 zwischen Berufen, Branchen und Kantonen: direkte Bundessteuer, AHV/IV/EO, BVG, KVG und Mindestlohn.',
+    'blog.article.stipendi-professioni-cantoni-2026.imageAlt': 'Vergleich der Durchschnittslöhne nach Beruf und Kanton in der Schweiz 2026',
 };
 
 export default blogMetaChDe;

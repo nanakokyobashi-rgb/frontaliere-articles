@@ -7445,6 +7445,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.franchigia-lamal-lucerna-guida.title': 'KVG health insurance premiums 2026: Canton of Lucerne',
     'blog.article.franchigia-lamal-lucerna-guida.excerpt': 'In Lucerne, LAMal premiums depend on the canton and region: adult deductibles, changing health insurer and cantonal premium reduction for 2026.',
     'blog.article.franchigia-lamal-lucerna-guida.imageAlt': 'Comparing 2026 LAMal premiums and deductibles in the canton of Lucerne',
+    'blog.article.stipendi-professioni-cantoni-2026.title': 'Average salary by profession in Switzerland 2026: comparison',
+    'blog.article.stipendi-professioni-cantoni-2026.excerpt': 'Comparison of professions, sectors and cantons in 2026: direct federal tax, AHV/IV/EO, BVG, KVG AND MINIMUM WAGE.',
+    'blog.article.stipendi-professioni-cantoni-2026.imageAlt': 'Comparison of average salaries by profession and canton in Switzerland in 2026',
 };
 
 export default blogMetaChEn;

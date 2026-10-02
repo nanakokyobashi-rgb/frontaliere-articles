@@ -7445,6 +7445,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.franchigia-lamal-lucerna-guida.title': 'Premi cassa malati LAMal 2026: canton Lucerna',
     'blog.article.franchigia-lamal-lucerna-guida.excerpt': 'A Lucerna i premi LAMal dipendono da cantone e regione: franchigie adulti, cambio cassa e riduzione premi cantonale per il 2026.',
     'blog.article.franchigia-lamal-lucerna-guida.imageAlt': 'Confronto dei premi LAMal 2026 e delle franchigie nel canton Lucerna',
+    'blog.article.stipendi-professioni-cantoni-2026.title': 'Salario medio professioni Svizzera 2026: confronto',
+    'blog.article.stipendi-professioni-cantoni-2026.excerpt': 'Confronto 2026 tra professioni, settori e cantoni: imposta federale diretta, AVS/AI/IPG, LPP, LAMal e salario minimo.',
+    'blog.article.stipendi-professioni-cantoni-2026.imageAlt': 'Confronto dei salari medi per professione e cantone in Svizzera nel 2026',
 };
 
 export default blogMetaChIt;

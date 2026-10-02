@@ -7445,6 +7445,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.franchigia-lamal-lucerna-guida.title': 'Primes d’assurance santé KVG 2026 : Canton de Lucerne',
     'blog.article.franchigia-lamal-lucerna-guida.excerpt': 'À Lucerne, les primes KVG dépendent du canton et de la région : franchises adultes, change de monnaie et réduction de primes cantonale pour 2026.',
     'blog.article.franchigia-lamal-lucerna-guida.imageAlt': 'Comparaison des primes LAMal 2026 et franchises dans le canton de Lucerne',
+    'blog.article.stipendi-professioni-cantoni-2026.title': 'Salaire moyen des professions en Suisse 2026 : comparaison',
+    'blog.article.stipendi-professioni-cantoni-2026.excerpt': 'Comparaison des professions, secteurs et cantons en 2026 : impôt fédéral direct, AHV/IV/EO, BVG, KVG et salaire minimum.',
+    'blog.article.stipendi-professioni-cantoni-2026.imageAlt': 'Comparaison des salaires moyens par profession et canton en Suisse en 2026',
 };
 
 export default blogMetaChFr;
