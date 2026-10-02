@@ -7442,6 +7442,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.guida-san-gallo-lamal-2026.title': 'Premi cassa malati lamal 2026: canton san gallo',
     'blog.article.guida-san-gallo-lamal-2026.excerpt': 'Premi LAMal 2026 nel canton San Gallo: sei franchigie adulti, differenze per cantone e regione e riduzione premi cantonale.',
     'blog.article.guida-san-gallo-lamal-2026.imageAlt': 'Guida ai premi LAMal 2026 nel canton San Gallo',
+    'blog.article.franchigia-lamal-lucerna-guida.title': 'Premi cassa malati LAMal 2026: canton Lucerna',
+    'blog.article.franchigia-lamal-lucerna-guida.excerpt': 'A Lucerna i premi LAMal dipendono da cantone e regione: franchigie adulti, cambio cassa e riduzione premi cantonale per il 2026.',
+    'blog.article.franchigia-lamal-lucerna-guida.imageAlt': 'Confronto dei premi LAMal 2026 e delle franchigie nel canton Lucerna',
 };
 
 export default blogMetaChIt;

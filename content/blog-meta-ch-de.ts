@@ -7442,6 +7442,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.guida-san-gallo-lamal-2026.title': 'Krankenkassenprämien LAMal 2026: Kanton St. Gallen',
     'blog.article.guida-san-gallo-lamal-2026.excerpt': 'LAMal-Prämien 2026 im Kanton St. Gallen: sechs Franchisen für Erwachsene, Unterschiede nach Kanton und Region sowie kantonale Prämienverbilligung.',
     'blog.article.guida-san-gallo-lamal-2026.imageAlt': 'Leitfaden zu LAMal-Prämien 2026 im Kanton St. Gallen',
+    'blog.article.franchigia-lamal-lucerna-guida.title': 'KVG Krankenversicherungsprämien 2026: Kanton Luzern',
+    'blog.article.franchigia-lamal-lucerna-guida.excerpt': 'In Luzern hängen die LAMal-Prämien von Kanton und Region ab: Erwachsenenfranchisen, Kassenwechsel und kantonale Prämienverbilligung für 2026.',
+    'blog.article.franchigia-lamal-lucerna-guida.imageAlt': 'Vergleich von LAMal-Prämien und Franchisen 2026 im Kanton Luzern',
 };
 
 export default blogMetaChDe;

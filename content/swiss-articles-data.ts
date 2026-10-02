@@ -22354,6 +22354,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'franchigia-lamal-lucerna-guida',
+    category: 'pratico',
+    date: '2026-10-02T03:42:39.056Z',
+    image: '/images/blog/franchigia-lamal-lucerna-guida.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

@@ -7442,6 +7442,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.guida-san-gallo-lamal-2026.title': 'KVG health insurance premiums 2026: Canton of St. Gallen',
     'blog.article.guida-san-gallo-lamal-2026.excerpt': 'KVG premiums 2026 in the canton of St. Gallen: six adult deductibles, differences by canton and region, and cantonal premium reduction.',
     'blog.article.guida-san-gallo-lamal-2026.imageAlt': 'Guide to 2026 LAMal premiums in the canton of St. Gallen',
+    'blog.article.franchigia-lamal-lucerna-guida.title': 'KVG health insurance premiums 2026: Canton of Lucerne',
+    'blog.article.franchigia-lamal-lucerna-guida.excerpt': 'In Lucerne, LAMal premiums depend on the canton and region: adult deductibles, changing health insurer and cantonal premium reduction for 2026.',
+    'blog.article.franchigia-lamal-lucerna-guida.imageAlt': 'Comparing 2026 LAMal premiums and deductibles in the canton of Lucerne',
 };
 
 export default blogMetaChEn;

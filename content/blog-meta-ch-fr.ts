@@ -7442,6 +7442,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.guida-san-gallo-lamal-2026.title': 'Primes d’assurance santé KVG 2026 : Canton de Saint-Gall',
     'blog.article.guida-san-gallo-lamal-2026.excerpt': 'Primes KVG 2026 dans le canton de Saint-Gall : six franchises pour adultes, différences par canton et région, et réduction de primes cantonale.',
     'blog.article.guida-san-gallo-lamal-2026.imageAlt': 'Guide des primes LAMal 2026 dans le canton de Saint-Gall',
+    'blog.article.franchigia-lamal-lucerna-guida.title': 'Primes d’assurance santé KVG 2026 : Canton de Lucerne',
+    'blog.article.franchigia-lamal-lucerna-guida.excerpt': 'À Lucerne, les primes KVG dépendent du canton et de la région : franchises adultes, change de monnaie et réduction de primes cantonale pour 2026.',
+    'blog.article.franchigia-lamal-lucerna-guida.imageAlt': 'Comparaison des primes LAMal 2026 et franchises dans le canton de Lucerne',
 };
 
 export default blogMetaChFr;

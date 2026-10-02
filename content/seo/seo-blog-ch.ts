@@ -96506,6 +96506,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-franchigia-lamal-lucerna-guida': {
+    title: 'Premi cassa malati LAMal 2026: canton Lucerna | Frontaliere Ticino',
+    description: 'Premi cassa malati LAMal 2026 nel canton Lucerna: franchigie adulti, differenze tra cantoni e regioni, cambio cassa e sussidi cantonali. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, premi, cassa, malati, lamal',
+    ogTitle: 'Premi cassa malati LAMal 2026: canton Lucerna',
+    ogDescription: 'Una guida pratica ai premi LAMal 2026 nel canton Lucerna: come leggere le differenze tra cantoni e regioni, scegliere tra le franchigie adulti, valutare il cambio cassa e cercare la riduzione premi cantonale.',
+    canonicalPath: '/articoli-svizzera/franchigia-lamal-lucerna-guida/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Premi cassa malati LAMal 2026: canton Lucerna",
+      "description": "Premi cassa malati LAMal 2026 nel canton Lucerna: franchigie adulti, differenze tra cantoni e regioni, cambio cassa e sussidi cantonali. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/franchigia-lamal-lucerna-guida.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Confronto dei premi LAMal 2026 e delle franchigie nel canton Lucerna"
+      },
+      "datePublished": "2026-10-02T03:42:39+00:00",
+      "dateModified": "2026-10-02T03:42:39+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/franchigia-lamal-lucerna-guida/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
