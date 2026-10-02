@@ -1,6 +1,5 @@
 {
   "keywords": [
-    "aprire un'attività canton Grigioni registro di commercio e costi",
     "salari e mercato del lavoro canton Grigioni settori e livelli",
     "patente di guida canton Grigioni conversione ed esami",
     "imposta di successione e donazione canton Grigioni aliquote",
@@ -499,7 +498,8 @@
     "permesso di domicilio C canton Basilea Campagna requisiti e domanda",
     "permesso L di breve durata canton Basilea Campagna validità e proroga",
     "premi cassa malati lamal 2026 canton Argovia",
-    "apprendistato e formazione professionale canton Basilea Campagna"
+    "apprendistato e formazione professionale canton Basilea Campagna",
+    "salario medio professioni svizzera 2026"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -777,13 +777,10 @@
     "vivere a Gemonio e lavorare in Ticino da frontaliere": 1,
     "vivere a Proserpio e lavorare in Ticino da frontaliere": 1,
     "vivere a Merone e lavorare in Ticino da frontaliere": 2,
-    "imposta di successione e donazione canton Friburgo aliquote": 2
+    "imposta di successione e donazione canton Friburgo aliquote": 2,
+    "salario medio professioni svizzera 2026 canton Zurigo": 1
   },
   "topicGateUrls": {
-    "svizzera::https://www.tio.ch/rubriche/aziende-ticinesi-informano/1953447/tesla-futuro-idi-trasformazioni-possibilita-collaborazione": {
-      "section": "svizzera",
-      "ts": 1790743551704
-    },
     "frontaliere::https://www.tio.ch/svizzera/attualita/1953678/premi-vita-terapie-rinuncia-svizzera": {
       "section": "frontaliere",
       "ts": 1790754900400
@@ -871,6 +868,10 @@
     "svizzera::https://www.tio.ch/ticino/attualita/1952241/arriva-l-uomo-che-guarisce-tutte-le-malattie-il-video": {
       "section": "svizzera",
       "ts": 1790916149003
+    },
+    "frontaliere::https://www.swissinfo.ch/ita/deloitte-prevede-fino-a-900%27000-cambi-di-cassa-malati/92154103": {
+      "section": "frontaliere",
+      "ts": 1790920670205
     }
   }
 }
