@@ -23,7 +23,8 @@
  *   rss*.xml           ten RSS feeds (two sections x four locales + main copy)
  *   news-ticker-live.json  the homepage ticker's five newest articles
  *   plate-auction-editorial.json  localized evergreen/weekly editorial blocks
- *                      built from the public plate-auction API over HTTP
+ *                      built from the public plate-auction snapshot over HTTP
+ *                      (static CDN file first, the Cloud Function as fallback)
  *   sitemap-news-candidates.xml  Google News candidates (migration §7.2)
  *   images-manifest.json + images/blog/*.webp  hero images (migration §7.1),
  *                      emitted ONLY when this repo actually holds images

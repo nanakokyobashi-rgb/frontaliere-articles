@@ -259,7 +259,9 @@ export function shapeBorderWait(docs, { nowMs = Date.now() } = {}) {
     const wait = toFiniteNumber(d?.waitTimeMinutes);
     const updatedMs = Date.parse(d?.lastUpdate || '');
     if (!Number.isFinite(wait) || wait < 0) continue;
-    if (!Number.isFinite(updatedMs) || nowMs - updatedMs > BORDER_WAIT_DOC_MAX_AGE_MS) continue;
+    // A lastUpdate in the future proves nothing about freshness: dropped like
+    // an old one (same rule as the plate-auction editorial, review on 2037).
+    if (!Number.isFinite(updatedMs) || updatedMs > nowMs || nowMs - updatedMs > BORDER_WAIT_DOC_MAX_AGE_MS) continue;
     newestMs = Math.max(newestMs, updatedMs);
     rows.push({
       slug: d.slug,
@@ -292,6 +294,7 @@ export function shapeFuel(meta, { nowMs = Date.now() } = {}) {
   if (!meta || typeof meta !== 'object') return unavailable('fuelPrices/metadata missing');
   const generatedMs = Date.parse(meta.generatedAt || '');
   if (!Number.isFinite(generatedMs)) return unavailable('fuelPrices/metadata has no generatedAt');
+  if (generatedMs > nowMs) return unavailable('fuelPrices/metadata generatedAt is in the future');
   if (nowMs - generatedMs > FUEL_MAX_AGE_MS) {
     return unavailable(`fuel data is ${Math.round((nowMs - generatedMs) / HOUR_MS)}h old (max ${FUEL_MAX_AGE_MS / HOUR_MS}h)`);
   }
@@ -390,6 +393,8 @@ export function shapeExchange(doc, { todayIso } = {}) {
   const last = points[points.length - 1];
   const prev = points[points.length - 2];
   const lastMs = isoDayMs(last.date);
+  // A point dated after today would make ageDays negative and read as fresh.
+  if (lastMs > todayMs) return unavailable(`latest exchange point (${last.date}) is after today (${todayIso})`);
   const ageDays = (todayMs - lastMs) / (24 * HOUR_MS);
   if (ageDays > EXCHANGE_MAX_AGE_DAYS) {
     return unavailable(`latest exchange point (${last.date}) is ${Math.round(ageDays)}d old (max ${EXCHANGE_MAX_AGE_DAYS}d)`);
@@ -545,6 +550,7 @@ export function shapeJobs(stats, { nowMs = Date.now(), todayIso } = {}) {
   if (!stats || typeof stats !== 'object') return unavailable('jobs-stats.json missing');
   const generatedMs = Date.parse(stats.generatedAt || '');
   if (!Number.isFinite(generatedMs)) return unavailable('jobs-stats.json has no generatedAt');
+  if (generatedMs > nowMs) return unavailable('jobs-stats.json generatedAt is in the future');
   if (nowMs - generatedMs > JOBS_MAX_AGE_MS) {
     return unavailable(`jobs stats are ${Math.round((nowMs - generatedMs) / HOUR_MS)}h old (max ${JOBS_MAX_AGE_MS / HOUR_MS}h)`);
   }

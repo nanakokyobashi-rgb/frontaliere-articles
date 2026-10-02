@@ -151,7 +151,12 @@ jobs:
             echo "::error::Lease quota condiviso illeggibile o non verificabile → issue-decompose fermato fail-closed."
             exit 1
           fi
-          gh issue edit "$ISSUE" --repo "$GH_REPO" --add-label agent:decompose-queued --remove-label agent:decompose --remove-label automation-deferred
+          node scripts/ci/requeue-quota-lease.mjs \
+            --issue "$ISSUE" \
+            --repo "$GH_REPO" \
+            --add-label agent:decompose-queued \
+            --remove-label agent:decompose \
+            --remove-label automation-deferred
           echo "::warning::Lease quota condiviso negato (${{ steps.quota_lease.outputs.lease_reason }}) → issue #$ISSUE ri-accodata senza consumare quota Claude."
 
       - name: Run Codex Luna Max decompose

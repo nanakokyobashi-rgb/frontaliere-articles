@@ -7451,6 +7451,12 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.sostegno-formazione-basilea.title': 'Borse di studio canton Basilea Campagna: requisiti e importi',
     'blog.article.sostegno-formazione-basilea.excerpt': 'Guida a borse e prestiti allo studio nel Cantone di Basilea Campagna: requisiti, importi massimi, termini di presentazione e ufficio cantonale competente.',
     'blog.article.sostegno-formazione-basilea.imageAlt': 'Borse di studio e prestiti nel Cantone di Basilea Campagna',
+    'blog.article.lordo-netto-cantoni-2026.title': 'Salario medio professioni Svizzera 2026: lordo e netto',
+    'blog.article.lordo-netto-cantoni-2026.excerpt': 'Nel confronto 2026 contano cantone, settore e trattenute: AVS/AI/IPG, AD, LAINF e LPP cambiano la distanza tra salario lordo e netto.',
+    'blog.article.lordo-netto-cantoni-2026.imageAlt': 'Confronto di salari e trattenute su una scrivania in Svizzera',
+    'blog.article.retribuzioni-svizzere-netto.title': 'Salari medi per professione in Svizzera nel 2026',
+    'blog.article.retribuzioni-svizzere-netto.excerpt': 'Salario medio per professione in Svizzera nel 2026: confronto tra cantoni, imposte, contributi, LPP, LAMal e netto disponibile con regole del lavoro cantonali.',
+    'blog.article.retribuzioni-svizzere-netto.imageAlt': 'Persona esamina una busta paga svizzera e un confronto tra salari professionali.',
 };
 
 export default blogMetaChIt;

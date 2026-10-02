@@ -22381,6 +22381,24 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'lordo-netto-cantoni-2026',
+    category: 'pratico',
+    date: '2026-10-02T05:03:16.192Z',
+    image: '/images/blog/lordo-netto-cantoni-2026.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'retribuzioni-svizzere-netto',
+    category: 'pratico',
+    date: '2026-10-02T05:14:31.904Z',
+    image: '/images/blog/retribuzioni-svizzere-netto.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
