@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/3wqfmopvqj4sdn-juiuw9": {
-    "articleId": "consiglio-federale-nomina-walser",
-    "ts": "2026-09-02T14:04:53.653Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/svizzera-sta-diventando-meno-attrattiva-per-le-multinazionali/91994544": {
     "articleId": "svizzera-perde-attrattiva-multinazionali",
     "ts": "2026-09-02T14:19:40.736Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/rubriche/ospite/1954308/frasa-luca-malati-cassa-svizzera": {
     "articleId": "cassa-malati-premi-ticino-aumento",
     "ts": "2026-10-02T15:14:14.512Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/parmelin%3a-il-mondo-economico-lo-ringrazia/92156531": {
+    "articleId": "annuncio-parmelin-sgravio-2024",
+    "ts": "2026-10-02T15:48:02.008Z",
     "keyForm": 2
   }
 }

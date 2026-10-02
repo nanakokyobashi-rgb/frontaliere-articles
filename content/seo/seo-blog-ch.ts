@@ -97676,6 +97676,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-annuncio-parmelin-sgravio-2024': {
+    title: 'Parmelin si dimette: il mondo economico lo ringrazia',
+    description: 'Guy Parmelin, 66 anni, annuncia oggi le dimissioni dal DEFR. Economiesuisse e USAM elogiano i suoi accordi con India, Vietnam e il rinnovo con la Cina',
+    keywords: 'frontalieri, ticino, svizzera, italia, parmelin, dimette, mondo, economico',
+    ogTitle: 'Parmelin si dimette, lodi economiche e nuovi accordi',
+    ogDescription: 'Il consigliere federale Guy Parmelin, 66enne, ha annunciato oggi le dimissioni dal DEFR. Economiesuisse e USAM hanno lodato il suo operato, citando gli accordi di libero scambio con India e Vietnam, l’avvio del rinnovo con la Cina, la legge sullo',
+    canonicalPath: '/articoli-svizzera/annuncio-parmelin-sgravio-2024/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Parmelin si dimette: il mondo economico lo ringrazia",
+      "description": "Guy Parmelin, 66 anni, annuncia oggi le dimissioni dal DEFR. Economiesuisse e USAM elogiano i suoi accordi con India, Vietnam e il rinnovo con la Cina",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/annuncio-parmelin-sgravio-2024.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale di Berna con simboli commerciali, rappresenta la leadership economica svizzera."
+      },
+      "datePublished": "2026-10-02T15:48:01+00:00",
+      "dateModified": "2026-10-02T15:48:01+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/annuncio-parmelin-sgravio-2024/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
