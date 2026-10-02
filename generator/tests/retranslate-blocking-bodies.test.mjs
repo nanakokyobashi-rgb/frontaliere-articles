@@ -356,6 +356,286 @@ test('lo scan per riga riconosce prosa italiana comune senza segnalare il france
   assert.deepEqual(french, []);
 });
 
+test('lo scan ignora heading Markdown tradotti ma conserva quelli italiani canonici', () => {
+  const translatedHeadings = {
+    en: [
+      '## In a nutshell',
+      '### What to do to avoid future delays',
+      '## Closure history by phase',
+    ].join('\n'),
+    de: [
+      '## Ein Straßennetz unter Stress',
+      '### Schritt 4: Digitale Tools nutzen',
+      '## Praktische Analyse: Lebenslektionen von Alex Zanardi',
+    ].join('\n'),
+    fr: [
+      '## Activités collatérales et village olympique',
+      '### Délais et envoi',
+      '## Contacter un avocat',
+    ].join('\n'),
+  };
+
+  for (const [locale, body1] of Object.entries(translatedHeadings)) {
+    assert.deepEqual(scanItalianResidue({ body1 }, locale), [], locale);
+  }
+
+  assert.deepEqual(scanItalianResidue({ body1: '## In breve' }, 'en'), [{
+    field: 'body1',
+    line: 1,
+    reason: 'heading',
+    text: 'In breve',
+  }]);
+});
+
+test('lo scan conserva heading italiani non canonici anche dentro Markdown', () => {
+  const body1 = [
+    '## Titolo italiano non canonico',
+    '> ### Nuove regole fiscali',
+    '- #### Impatto sui lavoratori frontalieri',
+  ].join('\n');
+  const hits = scanItalianResidue({ body1 }, 'en');
+
+  assert.equal(hits.length, ITALIAN_RESIDUE_MIN_LINES);
+  assert.ok(hits.every((hit) => hit.reason === 'language'));
+  assert.deepEqual(hits.map((hit) => hit.text), [
+    'Titolo italiano non canonico',
+    'Nuove regole fiscali',
+    'Impatto sui lavoratori frontalieri',
+  ]);
+  assert.deepEqual(currentBlockingCodes({ italianResidue: hits }), ['italian-residue']);
+  assert.equal(scanItalianResidue({ body1: '## Salari e contributi' }, 'en').length, 1);
+});
+
+test('lo scan conserva heading italiani brevi con flessioni comuni', () => {
+  for (const title of ['Redditi', 'Pensioni', 'Tasse']) {
+    assert.deepEqual(scanItalianResidue({ body1: `## ${title}` }, 'en'), [{
+      field: 'body1',
+      line: 1,
+      reason: 'language',
+      text: title,
+    }]);
+  }
+});
+
+test('lo scan conserva heading italiani brevi con segnali interrogativi comuni', () => {
+  const body1 = [
+    '## Come fare',
+    '## Chi paga',
+    '## Quando',
+  ].join('\n');
+
+  assert.deepEqual(scanItalianResidue({ body1 }, 'en'), [
+    { field: 'body1', line: 1, reason: 'language', text: 'Come fare' },
+    { field: 'body1', line: 2, reason: 'language', text: 'Chi paga' },
+    { field: 'body1', line: 3, reason: 'language', text: 'Quando' },
+  ]);
+  assert.deepEqual(scanItalianResidue({ body1: '## Fiscale' }, 'en'), []);
+});
+
+test('lo scan risolve `qui` condiviso prima del fast-path francese', () => {
+  const body1 = Array.from({ length: ITALIAN_RESIDUE_MIN_LINES }, () => '## Qui sono le novità').join('\n');
+  const hits = scanItalianResidue({ body1 }, 'fr');
+  assert.equal(hits.length, ITALIAN_RESIDUE_MIN_LINES);
+  assert.ok(hits.every((hit) => hit.reason === 'language'));
+  assert.equal(hasItalianResidue({ body1 }, 'fr'), true);
+});
+
+test('lo scan non conta `fiscale` come residuo nei titoli francesi', () => {
+  const french = {
+    body1: [
+      '## Situation fiscale',
+      '## Convention fiscale',
+      '## Charge fiscale',
+    ].join('\n'),
+  };
+
+  for (const locale of ['en', 'de', 'fr']) {
+    assert.deepEqual(scanItalianResidue(french, locale), [], locale);
+    assert.equal(hasItalianResidue(french, locale), false, locale);
+  }
+  for (const locale of ['en', 'de', 'fr']) {
+    assert.deepEqual(scanItalianResidue({ body1: '## Situazione fiscale' }, locale).map((hit) => hit.text), [
+      'Situazione fiscale',
+    ], locale);
+  }
+});
+
+test('lo scan ignora heading localizzati in blockquote, lista e forma Setext', () => {
+  const body1 = [
+    '> ## What to do',
+    '- ## What to do to avoid future delays',
+    'Closure history by phase',
+    '===',
+  ].join('\n');
+
+  assert.deepEqual(scanItalianResidue({ body1 }, 'en'), []);
+});
+
+test('lo scan ignora ATX e Setext dentro fenced code con stato per campo', () => {
+  const body1 = [
+    '```markdown',
+    '## Redditi',
+    'Pensioni',
+    '---',
+    '```',
+    '~~~markdown',
+    '## Tasse',
+    'Redditi',
+    '---',
+    '~~~',
+    '## Redditi',
+  ].join('\n');
+  assert.deepEqual(scanItalianResidue({
+    body1,
+    body2: '```\n## Pensioni\n```',
+  }, 'en'), [{
+    field: 'body1',
+    line: 11,
+    reason: 'language',
+    text: 'Redditi',
+  }]);
+});
+
+test('lo scan non chiude un fence root con contenitori Markdown nel codice', () => {
+  const body1 = [
+    '```markdown',
+    '- ```',
+    '> ```',
+    '1. ```',
+    '## Redditi',
+    'Pensioni',
+    'Tasse',
+    '```',
+    '## Redditi',
+  ].join('\n');
+
+  assert.deepEqual(scanItalianResidue({ body1 }, 'en'), [{
+    field: 'body1',
+    line: 9,
+    reason: 'language',
+    text: 'Redditi',
+  }]);
+});
+
+test('lo scan chiude le fence in lista sulla continuazione indentata', () => {
+  const listFence = [
+    '- ```markdown',
+    '- ```',
+    '## Redditi',
+    'Pensioni',
+    'Tasse',
+    '  ```',
+    '## Redditi',
+  ].join('\n');
+  const quotedListFence = [
+    '> - ```markdown',
+    '> - ```',
+    '> ## Redditi',
+    '> Pensioni',
+    '> Tasse',
+    '>   ```',
+    '> ## Redditi',
+  ].join('\n');
+  const externalListFence = [
+    '- > ```markdown',
+    '  > codice',
+    '  > ## Redditi',
+    '  > Pensioni',
+    '  > Tasse',
+    '  > ```',
+    '  > ## Redditi',
+  ].join('\n');
+
+  assert.deepEqual(scanItalianResidue({
+    body1: listFence,
+    body2: quotedListFence,
+    body3: externalListFence,
+  }, 'en'), [
+    { field: 'body1', line: 7, reason: 'language', text: 'Redditi' },
+    { field: 'body2', line: 7, reason: 'language', text: 'Redditi' },
+    { field: 'body3', line: 7, reason: 'language', text: 'Redditi' },
+  ]);
+});
+
+test('lo scan non tratta un info string backtick non valido come chiusura', () => {
+  const body1 = [
+    '```markdown',
+    '```language`with-backtick',
+    '## Redditi',
+    'Pensioni',
+    'Tasse',
+    '```',
+    '## Redditi',
+  ].join('\n');
+
+  assert.deepEqual(scanItalianResidue({ body1 }, 'en'), [{
+    field: 'body1',
+    line: 7,
+    reason: 'language',
+    text: 'Redditi',
+  }]);
+});
+
+test('lo scan espande i tab prima di riconoscere fence e heading', () => {
+  const body1 = [
+    '\t```markdown',
+    '\t## Redditi',
+    '\tPensioni',
+    '\tTasse',
+    '\t```',
+    '## Redditi',
+  ].join('\n');
+
+  assert.deepEqual(scanItalianResidue({ body1 }, 'en'), [{
+    field: 'body1',
+    line: 6,
+    reason: 'language',
+    text: 'Redditi',
+  }]);
+});
+
+test('lo scan ignora anche il contenuto indentato della fence in lista', () => {
+  const body1 = [
+    '- ```markdown',
+    '  ## Redditi',
+    '  Pensioni',
+    '  Tasse',
+    '  ```',
+    '## Redditi',
+  ].join('\n');
+
+  assert.deepEqual(scanItalianResidue({ body1 }, 'en'), [{
+    field: 'body1',
+    line: 6,
+    reason: 'language',
+    text: 'Redditi',
+  }]);
+});
+
+test('lo scan richiede container compatibili tra titolo Setext e underline', () => {
+  const mismatched = [
+    '> Redditi italiani',
+    '---',
+    '- Redditi italiani',
+    '---',
+    '> - Redditi italiani',
+    '---',
+    '- > Redditi italiani',
+    '> ---',
+  ].join('\n');
+  assert.deepEqual(scanItalianResidue({ body1: mismatched }, 'en'), []);
+
+  assert.deepEqual(scanItalianResidue({
+    body1: '- Redditi italiani\n  ---',
+    body2: '> Redditi italiani\n> ---',
+    body3: '- > Redditi italiani\n  > ---',
+  }, 'en'), [
+    { field: 'body1', line: 1, reason: 'language', text: 'Redditi italiani' },
+    { field: 'body2', line: 1, reason: 'language', text: 'Redditi italiani' },
+    { field: 'body3', line: 1, reason: 'language', text: 'Redditi italiani' },
+  ]);
+});
+
 test('la soglia lascia fuori una riga italiana isolata e il locale sorgente', () => {
   const oneLine = { body1: '## Fatti chiave\n- **Cosa**: Convocazione dell’assemblea CUV.' };
   assert.equal(scanItalianResidue(oneLine, 'fr').length, 2);
