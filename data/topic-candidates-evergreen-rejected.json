@@ -781,14 +781,6 @@
     "salario medio professioni svizzera 2026 canton Zurigo": 1
   },
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/svizzera/attualita/1953678/premi-vita-terapie-rinuncia-svizzera": {
-      "section": "frontaliere",
-      "ts": 1790754900400
-    },
-    "frontaliere::https://www.tio.ch/ticino/attualita/1953716/troppi-psicoterapeuti-a-carico-della-cassa-malati": {
-      "section": "frontaliere",
-      "ts": 1790758674242
-    },
     "svizzera::https://www.admin.ch/it/newnsb/l6pd-kzlx5xp": {
       "section": "svizzera",
       "ts": 1790803336619
@@ -884,6 +876,10 @@
     "frontaliere::https://www.ticinonews.ch/svizzera/aumento-dei-premi-fino-a-900-mila-assicurati-cambieranno-cassa-malati-443788": {
       "section": "frontaliere",
       "ts": 1790926080801
+    },
+    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1954245/mendrisio-e-chiasso-sostengono-le-donne-che-vogliono-lavorare": {
+      "section": "frontaliere",
+      "ts": 1790938996414
     }
   }
 }
