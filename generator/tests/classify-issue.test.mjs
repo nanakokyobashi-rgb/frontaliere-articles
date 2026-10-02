@@ -126,6 +126,21 @@ test('needs-human non instrada mai: e\' assorbente, solo needs-human-sweep.yml l
   assert.equal(r.fuPrio, null);
 });
 
+test('keep-open e agent:no-age-out non vengono ri-accodate senza needs-human (#733/#1644)', () => {
+  const cases = [
+    ['needs-human: PR bloccate in attesa di revisione umana', 'keep-open'],
+    ['📊 Loop health report (tracker)', 'agent:no-age-out'],
+  ];
+
+  for (const [title, pin] of cases) {
+    const labels = [pin, 'automation', 'agent:triaged'];
+    const r = classifyIssue(title, labels);
+    assert.equal(isFixerExempt(labels), true, `${pin} deve esentare anche il triage-sweep`);
+    assert.equal(r.route, 'none', `${pin} non deve rientrare nella coda`);
+    assert.equal(r.fuPrio, null, `${pin} non deve ricevere priorità di coda`);
+  }
+});
+
 test('needs-human vince anche su publish (nessuna label salta il guard)', () => {
   const r = classifyIssue('Workflow Failure: Publish article data API', ['needs-human']);
   assert.equal(r.route, 'none');
@@ -147,6 +162,8 @@ test('i pin locali del classificatore tengono l\'issue fuori dal fixer', () => {
   assert.equal(isFixerExempt(['backlog']), true);
   assert.equal(isFixerExempt([{ name: 'needs-human' }]), true);
   assert.equal(isFixerExempt(['operations-audit-review']), true);
+  assert.equal(isFixerExempt(['keep-open']), true);
+  assert.equal(isFixerExempt([{ name: 'agent:no-age-out' }]), true);
   assert.equal(isFixerExempt(['priority:high']), false);
 });
 
