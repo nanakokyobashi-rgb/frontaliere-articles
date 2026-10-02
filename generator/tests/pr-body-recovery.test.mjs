@@ -301,10 +301,13 @@ test('every fail-closed exit revokes native auto-merge before turning red', asyn
   assert.match(recover.lastFailures[0], /Edit timestamp/);
 });
 
-test('a revocation API failure blocks the required check on the exact head', async () => {
+test('a persistent revocation API failure blocks the required check on the exact head', async () => {
   const revokeError = Object.assign(new Error('GraphQL temporarily unavailable'), { status: 502 });
   assert.deepEqual(
-    await recover('success', 'completed', [], [], { run_started_at: undefined }, null, { enabled_by: 'bot' }, EDITED_AT, revokeError),
+    await recover(
+      'success', 'completed', [], [], { run_started_at: undefined }, null, { enabled_by: 'bot' },
+      EDITED_AT, [revokeError, revokeError, revokeError, revokeError],
+    ),
     [],
   );
   assert.deepEqual(recover.lastAutoMergeRevokes, []);
