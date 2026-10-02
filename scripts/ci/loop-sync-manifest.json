@@ -1525,6 +1525,17 @@
       }
     },
     {
+      "path": "generator/tests/followup-drainer-overlap-hold.test.mjs",
+      "sitePath": "tests/followup-drainer-overlap-hold.test.ts",
+      "mode": "adapted",
+      "reason": "Gemello node:test (via expect-shim) del test Vitest del sito sull'overlap-skip che non consuma tentativi (overlapSkipBlocker, overlapBlockerActive, ramo del rescue e hold del drain), con in piu' i casi delle PR ferme di #10708 del sito (isStalledPr, findOverlapFile con ignorePr, label nella mappa delle PR aperte) che qui arrivano nello stesso porting. Il wiring legge il followup-drainer.mjs e il prompt di issue-fix.yml di questo repo, che sono adapted.",
+      "baseline": {
+        "site": "43b33f063ddfdd42",
+        "corpus": "ec1cf0b369b1321e",
+        "alignedAt": "2026-10-02"
+      }
+    },
+    {
       "path": "generator/tests/conflict-handoff-reconcile.test.mjs",
       "sitePath": "tests/conflict-handoff-reconcile.test.ts",
       "mode": "adapted",
