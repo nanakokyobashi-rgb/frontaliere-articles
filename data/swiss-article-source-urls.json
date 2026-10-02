@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/hbmvdm0uldvu": {
-    "articleId": "lpp-fondi-libero-passaggio-tesoreria",
-    "ts": "2026-09-02T09:26:14.504Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/qvbx3mydemku": {
     "articleId": "penuria-insegnanti-rapporto-cause-dati",
     "ts": "2026-09-02T09:33:18.401Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4129356": {
     "articleId": "parmelin-successore-defr",
     "ts": "2026-10-02T11:55:57.825Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/yvxapwgf7hnp": {
+    "articleId": "ordinanza-vigilanza-mercati-energia",
+    "ts": "2026-10-02T12:09:16.361Z",
     "keyForm": 2
   }
 }

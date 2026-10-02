@@ -97286,6 +97286,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ordinanza-vigilanza-mercati-energia': {
+    title: 'Mercati energetici: approvata nuova ordinanza | Frontaliere Ticino',
+    description: 'Il 1° gennaio 2027 entrano in vigore la legge e l\'ordinanza OVTE per la vigilanza e trasparenza dei mercati energetici all\'ingrosso. ElCom centralizzerà dati',
+    keywords: 'frontalieri, ticino, svizzera, italia, mercati, energetici, approvata, nuova',
+    ogTitle: 'Mercati energetici: approvata ordinanza OVTE dal 1° gennaio 2027',
+    ogDescription: 'Novità per i mercati energetici svizzeri: dal 1° gennaio 2027 entra in vigore l\'ordinanza OVTE. Scopri chi è interessato, quali dati verranno trasmessi a ElCom e le implicazioni operative per operatori e grandi consumatori.',
+    canonicalPath: '/articoli-svizzera/ordinanza-vigilanza-mercati-energia/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mercati energetici: approvata nuova ordinanza",
+      "description": "Il 1° gennaio 2027 entrano in vigore la legge e l'ordinanza OVTE per la vigilanza e trasparenza dei mercati energetici all'ingrosso. ElCom centralizzerà dati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/ordinanza-vigilanza-mercati-energia.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine che simboleggia la vigilanza sui mercati energetici svizzeri."
+      },
+      "datePublished": "2026-10-02T12:09:16+00:00",
+      "dateModified": "2026-10-02T12:09:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ordinanza-vigilanza-mercati-energia/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
