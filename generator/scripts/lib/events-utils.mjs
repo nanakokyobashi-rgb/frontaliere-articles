@@ -1544,6 +1544,25 @@ export function hasConfidentPrice(price) {
   return Boolean(price) && (price.isFree === true || typeof price.amount === 'number');
 }
 
+/**
+ * Normalize an optional textual price carried by a published event record.
+ * The site normally publishes the structured price already; this adapter is
+ * deliberately additive so a future publisher payload with `priceText` (or
+ * a legacy string `price`) reaches the same parser without replacing a
+ * structured value or inventing one for an ambiguous label.
+ */
+export function normalizeDatasetEventPrice(event) {
+  if (!event || typeof event !== 'object' || (event.price && typeof event.price === 'object')) return event;
+  const raw = typeof event.priceText === 'string'
+    ? event.priceText
+    : typeof event.price === 'string'
+      ? event.price
+      : '';
+  if (!raw) return event;
+  const parsed = parsePriceText(raw);
+  return hasConfidentPrice(parsed) ? { ...event, price: { ...parsed } } : event;
+}
+
 // ── Date helpers ─────────────────────────────────────────────
 /** Convert "YYYYMMDD" → "YYYY-MM-DD". Returns '' on malformed input. */
 export function isoFromCompactDate(compact) {
@@ -1639,13 +1658,14 @@ export function loadEventsDataset(file = EVENTS_DATASET_PATH) {
     const raw = JSON.parse(readFileSync(file, 'utf-8'));
     if (!raw || !Array.isArray(raw.events)) return { schemaVersion: 1, generatedAt: null, events: [] };
     const { events, dropped } = sanitizeDatasetEvents(raw.events);
+    const normalizedEvents = events.map(normalizeDatasetEventPrice);
     if (dropped) {
       console.warn(
         `${DATASET_DROP_WARNING}: ${dropped}/${raw.events.length} evento/i senza titolo pubblicabile ` +
           `scartati alla lettura del dataset`,
       );
     }
-    return { ...raw, events };
+    return { ...raw, events: normalizedEvents };
   } catch {
     return { schemaVersion: 1, generatedAt: null, events: [] };
   }

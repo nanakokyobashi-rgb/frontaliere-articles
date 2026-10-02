@@ -12,6 +12,9 @@ assert.ok(start >= 0 && end > start, 'price parser block not found');
 const parsePriceText = new Function(
   `${source.slice(start, end).replace('export function parsePriceText', 'function parsePriceText')}\nreturn parsePriceText;`,
 )();
+const normalizeDatasetEventPrice = new Function(
+  `${source.slice(start, source.indexOf('// ── Date helpers', start)).replaceAll('export function', 'function')}\nreturn normalizeDatasetEventPrice;`,
+)();
 
 test('preserves a bare numeric price already supplied by the price field', () => {
   assert.deepEqual(parsePriceText('20'), { amount: 20, currency: 'CHF', isFree: false });
@@ -87,4 +90,15 @@ test('accepts an explicit currency marker adjacent to the amount', () => {
 test('does not treat ambiguous dates or phone numbers as bare prices', () => {
   assert.equal(parsePriceText('31.12.2026').amount, null);
   assert.equal(parsePriceText('+41 79 123 45 67').amount, null);
+});
+
+test('normalizes optional publisher text without replacing structured or ambiguous prices', () => {
+  assert.deepEqual(
+    normalizeDatasetEventPrice({ id: 'free', priceText: 'Accès gratuits' }).price,
+    { amount: 0, currency: 'CHF', isFree: true },
+  );
+  const structured = { id: 'structured', price: { amount: 12, currency: 'CHF', isFree: false }, priceText: 'free' };
+  assert.equal(normalizeDatasetEventPrice(structured), structured);
+  const ambiguous = { id: 'unknown', priceText: 'su richiesta' };
+  assert.equal(normalizeDatasetEventPrice(ambiguous), ambiguous);
 });
