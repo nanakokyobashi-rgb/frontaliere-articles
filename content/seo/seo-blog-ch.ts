@@ -97247,6 +97247,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-parmelin-successore-defr': {
+    title: 'Parmelin lascia il Governo: corsa alla successione UDC',
+    description: 'Guy Parmelin annuncia le dimissioni dal Governo il 2 ottobre 2026; la candidatura UDC scade il 23 ottobre, l\'elezione del successore è prevista per il 9',
+    keywords: 'frontalieri, ticino, svizzera, italia, parmelin, lascia, governo, corsa',
+    ogTitle: 'Parmelin lascia il Governo: corsa alla successione UDC',
+    ogDescription: 'Il consigliere federale Guy Parmelin ha lasciato il Governo il 2 ottobre 2026, aprendo la corsa alla successione entro l\'UDC. I candidati hanno tempo fino al 23 ottobre per presentarsi; le audizioni seguiranno, poi le proposte della commissione',
+    canonicalPath: '/articoli-svizzera/parmelin-successore-defr/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Parmelin lascia il Governo: corsa alla successione UDC",
+      "description": "Guy Parmelin annuncia le dimissioni dal Governo il 2 ottobre 2026; la candidatura UDC scade il 23 ottobre, l'elezione del successore è prevista per il 9",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/parmelin-successore-defr.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Guy Parmelin lascia il Governo svizzero"
+      },
+      "datePublished": "2026-10-02T11:55:57+00:00",
+      "dateModified": "2026-10-02T11:55:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/parmelin-successore-defr/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
