@@ -49,7 +49,8 @@
  * `MIN_COVERAGE_FRACTION` e `countCrawlerGroups`), su una finestra di 24 ore che
  * contiene sempre almeno un'ondata intera — con 6 ore un'ondata sana appena
  * fuori finestra darebbe un falso positivo. Resta la condizione `hard-stop` per
- * lo zero assoluto, che prende il caso pulito prima.
+ * lo zero assoluto, ma solo quando anche la copertura completa e' sotto soglia:
+ * una pausa tra due ondate sane non deve contraddire la prova delle consegne.
  *
  * ## Un allarme che tace e' peggio di un allarme assente
  *
@@ -257,10 +258,12 @@ export const MIN_GROUPS_PER_DAY = Math.max(2, Math.round(EXPECTED_GROUPS * MIN_C
 export const COVERAGE_WINDOW_HOURS = 24;
 
 /**
- * Verdetto sullo stallo, su DUE condizioni indipendenti.
+ * Verdetto sullo stallo: la copertura e' il segnale comune; il silenzio recente
+ * distingue solo il hard-stop dalla sotto-copertura parziale.
  *
- * - `hard-stop`: nessuna consegna da `stallHours`. Prende il caso pulito (il
- *   2026-09-15 fu zero assoluto) e suona presto.
+ * - `hard-stop`: nessuna consegna da `stallHours` E copertura sotto soglia
+ *   nell'intera finestra. Prende il caso pulito (il 2026-09-15 fu zero
+ *   assoluto) senza scambiare la pausa fra due ondate sane per uno stallo.
  * - `under-coverage`: meno di `MIN_GROUPS_PER_DAY` gruppi distinti in 24 ore.
  *   Prende il caso REALE, che la prima condizione da sola non vede, perche' un
  *   convoglio che fa passare 2 gruppi su 23 non e' mai "silenzioso".
@@ -294,7 +297,7 @@ export function stallVerdict({
     deliveries.filter((d) => nowMs - d.atMs <= coverageWindowHours * 3600_000).map((d) => d.group),
   )];
 
-  if (recentGroups.length === 0) {
+  if (recentGroups.length === 0 && coverage.length < minGroups) {
     return {
       stalled: true,
       reason: last ? 'hard-stop' : 'no-delivery-in-window',

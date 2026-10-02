@@ -45,7 +45,7 @@ on:
         type: boolean
         default: false
       stall_hours:
-        description: 'Ore senza NESSUNA consegna che fanno scattare hard-stop (default 6)'
+        description: 'Ore senza consegne per hard-stop quando la copertura è già sotto soglia (default 6)'
         required: false
         default: ''
 

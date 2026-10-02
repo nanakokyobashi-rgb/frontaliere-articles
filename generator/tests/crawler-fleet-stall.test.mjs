@@ -104,6 +104,19 @@ test('un fleet sano non suona', () => {
   assert.equal(v.coverage, EXPECTED_GROUPS);
 });
 
+test('una pausa tra ondate sane non supera la prova della copertura 24h', () => {
+  // #1579: il 2026-10-01 il monitor ha segnalato 8.7h senza commit pur
+  // registrando tutti i 24 gruppi nella giornata. Il silenzio di 6h non deve
+  // prevalere su una finestra di copertura che dimostra una wave completa.
+  const v = stallVerdict({
+    deliveries: wave(EXPECTED_GROUPS, 8.7), nowMs: NOW, stallHours: 6, readable: true,
+  });
+  assert.equal(v.recentGroups.length, 0, 'nessuna consegna nella soglia breve');
+  assert.equal(v.coverage, EXPECTED_GROUPS, 'la finestra completa contiene tutti i gruppi');
+  assert.equal(v.stalled, false);
+  assert.equal(v.reason, 'delivering');
+});
+
 test('LA MISURA: la soglia separa i giorni sani da quelli rotti senza sovrapposizione', () => {
   // Minimo osservato sano = 21; massimo osservato rotto = 6.
   const healthy = [21, 22, EXPECTED_GROUPS];
