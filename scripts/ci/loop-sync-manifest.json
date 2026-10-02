@@ -4577,7 +4577,7 @@
       "reason": "Helper zero-dipendenze per la transizione atomica di requeue dopo un lease quota negato, usato esclusivamente dai workflow corpus `issue-decompose.yml` e `issue-fix.yml` per ritentare mutazioni GitHub transitorie senza consumare un tentativo dell'agente. Il sito non ha questi consumer e non deve importare questo codice, quindi non esiste un gemello da portare.",
       "baseline": {
         "site": null,
-        "corpus": "8564a231df0db3d0",
+        "corpus": "e53c89aaac816fe7",
         "alignedAt": "2026-10-02"
       }
     }
