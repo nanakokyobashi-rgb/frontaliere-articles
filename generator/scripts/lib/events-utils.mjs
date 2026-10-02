@@ -1400,11 +1400,11 @@ export function eventStableId(sourceKey, rawId) {
 // price accordion, tio-agenda's "Prezzo:" label) — one regex pair, not a
 // copy per crawler (AGENTS.md §6: literal duplicate regex across ≥2 files
 // must live in one shared module).
-const PRICE_FREE_RE = /\b(gratis|gratuit(?:[oaie])?|free(?:\s+(?:entry|admission|entrance))?|kostenlos|eintritt\s+frei|(?:ingresso|entrata)\s+(?:libero|gratuito|libera)|entr[ée]e\s+(?:libre|gratuite))\b/iu;
-const PRICE_CHILD_FREE_RE = /(?:children|kids|bambini|enfants|kinder)(?:\s+\d{1,2}\s*[–—-]\s*\d{1,2})?\s*(?:[:,;-]\s*)?(?:are|is|sono|sont|sind)?\s*(?:free|gratis|gratuit(?:[oaie])?|kostenlos|frei|liber[oa])/iu;
+const PRICE_FREE_RE = /\b(gratis|gratuit(?:[aioe]|i)?|free(?:\s+(?:entry|admission|entrance))?|kostenlos|eintritt\s+frei|(?:ingresso|entrata)\s+(?:libero|gratuit(?:[aioe]|i)?|libera)|entr[ée]e\s+(?:libre|gratuite))\b/iu;
+const PRICE_CHILD_FREE_RE = /(?:children|kids|bambini|enfants|kinder)(?:\s+\d{1,2}\s*[–—-]\s*\d{1,2})?\s*(?:[:,;-]\s*)?(?:are|is|sono|sont|sind)?\s*(?:free|gratis|gratuit(?:[aioe]|i)?|kostenlos|frei|liber[oa])/iu;
 const PRICE_AMOUNT_RE = /(?<![\p{L}\p{N}])(?:\d{1,3}(?:['’\s]\d{3})+|\d{1,3}(?:\.\d{3})+(?:,\d{1,2})?|\d{1,3}(?:,\d{3})+(?:\.\d{1,2})?|\d{1,5})(?:[.,]\d{1,2})?(?![\p{L}\p{N}])/gu;
-const PRICE_NUMBER_TOKEN_RE = /(?:\d{1,3}(?:['’\s]\d{3})+|\d{1,5})(?:[.,]\d{1,2})?/u;
-const PRICE_ADJACENT_AMOUNT_RE = /(?:(?:CHF|EUR|€|S?Fr\.?|francs?|franchi|franken)\s*(?:\d{1,3}(?:['’\s]\d{3})+|\d{1,5})(?:[.,]\d{1,2})?|(?:\d{1,3}(?:['’\s]\d{3})+|\d{1,5})(?:[.,]\d{1,2})?\s*(?:CHF|EUR|€|S?Fr\.?|francs?|franchi|franken))/giu;
+const PRICE_ADJACENT_AMOUNT_RE = /(?:(CHF|EUR|€|S?Fr\.?)((?:\d{1,3}(?:['’\s]\d{3})+|\d{1,3}(?:\.\d{3})+(?:,\d{1,2})?|\d{1,3}(?:,\d{3})+(?:\.\d{1,2})?|\d{1,5})(?:[.,]\d{1,2})?)|((?:\d{1,3}(?:['’\s]\d{3})+|\d{1,3}(?:\.\d{3})+(?:,\d{1,2})?|\d{1,3}(?:,\d{3})+(?:\.\d{1,2})?|\d{1,5})(?:[.,]\d{1,2})?)(CHF|EUR|€|S?Fr\.?))/giu;
+const PRICE_CURRENCY_RE = /(?:CHF|EUR|€|S?Fr\.?)/iu;
 const PRICE_CONTEXT_RE = /(?:\b(?:price|prices|prezzo|preise?|prix|tariffa|tarif|admission|entry|entrance|ingresso|entrata|eintritt|pro\s+person|per\s+person|par\s+personne|per\s+persona)\b|(?:CHF|EUR|€|S?Fr\.?|francs?|franchi|franken)|\d[.,]?\s*[–—-]{1,2})/iu;
 const PRICE_DATE_OR_PHONE_RE = /(?:\b\d{1,2}[./-]\d{1,2}[./-]\d{2,4}\b|\b(?:19|20)\d{2}[./-]\d{1,2}[./-]\d{1,2}\b|\+?\d[\d\s()./-]{6,}\d\b)/u;
 const PRICE_PHONE_RE = /\+?\d[\d\s()./-]{6,}\d/u;
@@ -1414,69 +1414,36 @@ function priceResult(value, evidence) {
   return value;
 }
 
-function parsePriceAmount(raw) {
-  const normalized = raw
-    .replace(/['’\s]/g, '')
-    .replace(/\.(?=\d{3}(?:\D|$))/g, '')
-    .replace(/,(?=\d{3}(?:\D|$))/g, '')
-    .replace(',', '.');
-  const amount = Number.parseFloat(normalized);
-  return Number.isFinite(amount) ? amount : undefined;
+function normalizePriceAmount(raw) {
+  const normalized = raw.replace(/['’\s]/g, '').replace(/\.(?=\d{3}(?:\D|$))/g, '').replace(/,(?=\d{3}(?:\D|$))/g, '').replace(',', '.');
+  return Number.parseFloat(normalized);
 }
 
-function currencyAroundAmount(text, index, length) {
-  const before = text.slice(Math.max(0, index - 16), index);
-  const after = text.slice(index + length, index + length + 16);
-  const beforeCurrency = before.match(/(?:CHF|EUR|€|S?Fr\.?|francs?|franchi|franken)\s*$/iu)?.[0];
-  const afterCurrency = after.match(/^\s*(?:CHF|EUR|€|S?Fr\.?|francs?|franchi|franken)/iu)?.[0];
-  const marker = beforeCurrency || afterCurrency;
-  if (!marker) return undefined;
-  return /EUR|€/iu.test(marker) ? 'EUR' : 'CHF';
+function canonicalPriceCurrency(raw) {
+  return /EUR|€/iu.test(raw) ? 'EUR' : 'CHF';
 }
 
-function priceCandidates(text) {
+function collectPriceCandidates(text) {
   const candidates = [];
-  const seen = new Set();
+  const defaultCurrency = canonicalPriceCurrency(text);
   PRICE_AMOUNT_RE.lastIndex = 0;
-  for (const match of text.matchAll(PRICE_AMOUNT_RE)) {
-    const index = match.index ?? -1;
-    if (index < 0) continue;
-    const amount = parsePriceAmount(match[0]);
-    if (amount === undefined || amount < 0) continue;
-    seen.add(`${index}:${match[0].length}`);
-    candidates.push({ amount, currency: currencyAroundAmount(text, index, match[0].length) });
+  let match;
+  while ((match = PRICE_AMOUNT_RE.exec(text))) {
+    const before = text.slice(Math.max(0, match.index - 8), match.index);
+    const after = text.slice(match.index + match[0].length, match.index + match[0].length + 8);
+    const currency = before.match(PRICE_CURRENCY_RE)?.[0] || after.match(PRICE_CURRENCY_RE)?.[0] || defaultCurrency;
+    const amount = normalizePriceAmount(match[0]);
+    if (Number.isFinite(amount) && amount >= 0) candidates.push({ amount, currency: canonicalPriceCurrency(currency) });
   }
-  // The word-boundary parser deliberately rejects CHF10/10CHF as prose. A
-  // currency-adjacent token is still an explicit price, so recover it here
-  // without weakening the date/phone filters around the general parser.
   PRICE_ADJACENT_AMOUNT_RE.lastIndex = 0;
-  for (const match of text.matchAll(PRICE_ADJACENT_AMOUNT_RE)) {
-    const matchIndex = match.index ?? -1;
-    const numberIndex = match[0].search(PRICE_NUMBER_TOKEN_RE);
-    const rawNumber = PRICE_NUMBER_TOKEN_RE.exec(match[0])?.[0];
-    if (matchIndex < 0 || numberIndex < 0 || !rawNumber) continue;
-    const index = matchIndex + numberIndex;
-    const key = `${index}:${rawNumber.length}`;
-    if (seen.has(key)) continue;
-    const amount = parsePriceAmount(rawNumber);
-    if (amount === undefined || amount < 0) continue;
-    seen.add(key);
-    candidates.push({ amount, currency: currencyAroundAmount(text, index, rawNumber.length) });
+  while ((match = PRICE_ADJACENT_AMOUNT_RE.exec(text))) {
+    const rawAmount = match[2] || match[3];
+    const rawCurrency = match[1] || match[4];
+    const amount = normalizePriceAmount(rawAmount);
+    if (Number.isFinite(amount) && amount >= 0) candidates.push({ amount, currency: canonicalPriceCurrency(rawCurrency) });
   }
   return candidates;
 }
-
-function cheapestPrice(text) {
-  const candidates = priceCandidates(text);
-  if (!candidates.length) return undefined;
-  const selected = candidates.reduce((best, candidate) => (candidate.amount < best.amount ? candidate : best));
-  return {
-    amount: selected.amount,
-    currency: selected.currency || (/EUR|€/iu.test(text) ? 'EUR' : 'CHF'),
-    isFree: selected.amount === 0,
-  };
-}
-
 /**
  * Parse a free-text price snippet (e.g. "CHF 10.00 pro Person", "Ingresso 20
  * franchi, Bambini gratis", "Eintritt frei") into `{amount, currency, isFree}`.
@@ -1490,22 +1457,28 @@ export function parsePriceText(rawText) {
   const t = typeof rawText === 'string' ? rawText.replace(/\s+/g, ' ').trim() : '';
   if (!t) return undefined;
   const free = PRICE_FREE_RE.test(t);
-  const conditionalFree = PRICE_CHILD_FREE_RE.test(t) || /(?:free|gratis|gratuit(?:[oaie])?|kostenlos|frei|liber[oa])\s+(?:for|pour|per|für)\s+(?:children|kids|bambini|enfants|kinder)/iu.test(t);
+  const conditionalFree = PRICE_CHILD_FREE_RE.test(t) || /(?:free|gratis|gratuit(?:[aioe]|i)?|kostenlos|frei|liber[oa])\s+(?:for|pour|per|für)\s+(?:children|kids|bambini|enfants|kinder)/iu.test(t);
   if (free && conditionalFree && /\d/u.test(t)) {
     if (PRICE_DATE_OR_PHONE_RE.test(t)) return priceResult({ amount: null, currency: 'CHF', isFree: false }, 'unknown');
-    const paidPrice = cheapestPrice(t.replace(PRICE_CHILD_FREE_RE, ' '));
-    if (paidPrice) return priceResult({ ...paidPrice, isFree: paidPrice.amount === 0 ? false : paidPrice.isFree }, 'numeric');
+    const conditionalAmounts = collectPriceCandidates(t.replace(PRICE_CHILD_FREE_RE, ' '));
+    if (conditionalAmounts.length) {
+      const cheapest = conditionalAmounts.reduce((min, candidate) => candidate.amount < min.amount ? candidate : min);
+      return priceResult({ amount: cheapest.amount, currency: cheapest.currency, isFree: false }, 'numeric');
+    }
     return priceResult({ amount: null, currency: 'CHF', isFree: false }, 'unknown');
   }
   if (free && !PRICE_PHONE_RE.test(t)) return priceResult({ amount: 0, currency: 'CHF', isFree: true }, 'label-free');
   if (/^0(?:[.,]0{1,2}|[.][–—-]{1,2})?$/u.test(t)) return priceResult({ amount: 0, currency: 'CHF', isFree: true }, 'numeric');
   if (/^(?:\d{1,3}(?:['’\s]\d{3})+|\d{1,3}(?:\.\d{3})+(?:,\d{1,2})?|\d{1,3}(?:,\d{3})+(?:\.\d{1,2})?|\d{1,5})(?:[.,]\d{1,2})?$/u.test(t)) {
-    const amount = parsePriceAmount(t);
+    const amount = normalizePriceAmount(t);
     if (Number.isFinite(amount)) return priceResult({ amount, currency: 'CHF', isFree: amount === 0 }, 'numeric');
   }
   if (!PRICE_CONTEXT_RE.test(t) || PRICE_DATE_OR_PHONE_RE.test(t)) return priceResult({ amount: null, currency: 'CHF', isFree: false }, 'unknown');
-  const paidPrice = cheapestPrice(t);
-  if (paidPrice) return priceResult(paidPrice, 'numeric');
+  const candidates = collectPriceCandidates(t);
+  if (candidates.length) {
+    const cheapest = candidates.reduce((min, candidate) => candidate.amount < min.amount ? candidate : min);
+    return priceResult({ amount: cheapest.amount, currency: cheapest.currency, isFree: cheapest.amount === 0 }, 'numeric');
+  }
   return priceResult({ amount: null, currency: 'CHF', isFree: false }, 'unknown');
 }
 
