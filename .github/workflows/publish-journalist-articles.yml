@@ -216,6 +216,20 @@ jobs:
             exit 0
           fi
           git status --porcelain -- content/ | head -20 || true
+          # FU-009: this writer bypasses generate-article.yml, but it still
+          # registers the same localized body files. Reject the write before
+          # the commit if any EN/DE/FR body key is missing or empty.
+          if ! node scripts/ci/check-blog-locale-completeness.mjs; then
+            {
+              echo "### ✖ Scrittura RIFIUTATA prima del commit — localizzazione incompleta"
+              echo
+              echo "Il controllo confronta i campi body localizzati con quelli italiani."
+              echo "**Niente e' stato committato**: correggere o rigenerare l'articolo prima del push."
+              echo
+              echo "Gli offender sono elencati nel log dello step; confrontali con i path stampati sopra da \`git status\`."
+            } >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
           if node --test \
             generator/tests/article-fabrication-guard.test.mjs \
             generator/tests/prompt-placeholder-guard.test.mjs; then

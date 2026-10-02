@@ -47,6 +47,8 @@ import { sliceBetween } from './lib/anchored-slice.mjs';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const WF_PATH = path.resolve(HERE, '../../.github/workflows/generate-article.yml');
 const WF = readFileSync(WF_PATH, 'utf8');
+const JOURNALIST_WF_PATH = path.resolve(HERE, '../../.github/workflows/publish-journalist-articles.yml');
+const JOURNALIST_WF = readFileSync(JOURNALIST_WF_PATH, 'utf8');
 
 /** Solo le righe eseguibili: i commenti citano i difetti e li descriverebbero come presenti. */
 const ACTIVE = WF.split('\n')
@@ -940,6 +942,23 @@ test('il preflight dei body localizzati rifiuta prima del commit', () => {
   assert.match(block, /if: steps\.mode\.outputs\.dry != 'true' && steps\.generate\.outputs\.article == 'true'/);
   assert.ok(!/continue-on-error/.test(block), 'un preflight advisory lascia passare l\'articolo incompleto');
   assert.ok(!/if: always\(\)/.test(block), 'nessuno step successivo deve poter committare dopo il rifiuto');
+});
+
+test('il writer journalist applica lo stesso preflight prima del commit', () => {
+  const guardName = 'Guard — cio\' che questo run ha scritto non raggiunge main se viola le guardie';
+  const guardAt = JOURNALIST_WF.indexOf(`      - name: ${guardName}`);
+  const commitAt = JOURNALIST_WF.indexOf('      - name: Commit and push registered articles');
+  assert.notEqual(guardAt, -1, 'la guardia del writer journalist e\' sparita');
+  assert.notEqual(commitAt, -1);
+  assert.ok(guardAt < commitAt, 'la completezza va verificata prima del commit journalist');
+
+  const block = sliceBetween(
+    JOURNALIST_WF,
+    `      - name: ${guardName}`,
+    '      - name: Commit and push registered articles',
+  );
+  assert.match(block, /if ! node scripts\/ci\/check-blog-locale-completeness\.mjs; then/);
+  assert.ok(!/continue-on-error/.test(block), 'il preflight journalist non puo\' essere advisory');
 });
 
 // ── L'ANELLO CHE MANCAVA: il dispatch del successore (2026-08-18) ────────────
