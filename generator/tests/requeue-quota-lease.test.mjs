@@ -25,6 +25,8 @@ test('riconosce il transient GraphQL osservato nel run e non confonde i permessi
     true,
   );
   assert.equal(isRetryableGitHubMutationError(ghError('HTTP 503 Service Unavailable')), true);
+  assert.equal(isRetryableGitHubMutationError(ghError('HTTP 500 Internal Server Error')), true);
+  assert.equal(isRetryableGitHubMutationError(ghError('500 Internal Server Error')), true);
   assert.equal(isRetryableGitHubMutationError(ghError('HTTP 403 Resource not accessible by integration')), false);
   assert.equal(isRetryableGitHubMutationError(ghError('GraphQL: Could not resolve to an issue or pull request')), false);
 });

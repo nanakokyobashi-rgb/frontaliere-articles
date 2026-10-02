@@ -32,8 +32,8 @@ export function isRetryableGitHubMutationError(error) {
   const text = errorText(error);
   return [
     /GraphQL:\s+Something went wrong/i,
-    /\bHTTP\s+5(?:02|03|04)\b/i,
-    /\b(?:502|503|504)\s+(?:Bad Gateway|Service Unavailable|Gateway Timeout)\b/i,
+    /\bHTTP\s+5\d{2}\b/i,
+    /\b5\d{2}\s+(?:Internal Server Error|Not Implemented|Bad Gateway|Service Unavailable|Gateway Timeout|HTTP Version Not Supported|Variant Also Negotiates|Insufficient Storage|Loop Detected|Not Extended|Network Authentication Required)\b/i,
     /\b(?:ECONNRESET|ECONNREFUSED|ETIMEDOUT|EAI_AGAIN)\b/i,
     /(?:connection\s+(?:reset|closed)|timed out|temporarily unavailable)/i,
   ].some((pattern) => pattern.test(text));
