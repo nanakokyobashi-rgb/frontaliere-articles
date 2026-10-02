@@ -134,6 +134,26 @@ test('un esito di lease condiviso non attribuisce il fallimento a un crawler', (
   assert.match(report.description, /fust: crawler exited with status 44/);
 });
 
+test('lo shell trace con ANSI serializzato come ^[[ non diventa una diagnostica runtime', () => {
+  const escapedAnsi = '^[[36;1m';
+  const reset = '^[[0m';
+  const log = [
+    groupLogLine('28:00.0000000', `${escapedAnsi}  echo "::warning::fust: global data-pipeline lease is busy (exit 44); retrying"${reset}`),
+    groupLogLine('28:00.0100000', `${escapedAnsi}  echo "::error::fust: crawl OK but the crawler group's shared deferred-commit precondition failed (exit 43)."${reset}`),
+  ].join('\n');
+
+  assert.equal(cleanLogLine(log.split('\n')[0]), '  echo "::warning::fust: global data-pipeline lease is busy (exit 44); retrying"');
+  assert.deepEqual(crawlerFailuresFromLog(log), []);
+  assert.equal(
+    buildCrawlerFailureReport({
+      log,
+      run: CRAWLER_RUN,
+      workflowName: CRAWLER_GROUP,
+    }),
+    null,
+  );
+});
+
 test('il precondition failure condiviso con exit 43 non diventa un falso errore per-membro', () => {
   const log = [
     groupLogLine('28:00.0000000', "::error::fust: crawl OK but the crawler group's shared deferred-commit precondition failed (exit 43). Group-wide fault, identical for every sibling — step stays red, no per-crawler issue filed (systemic class)."),
