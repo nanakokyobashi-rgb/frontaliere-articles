@@ -14404,7 +14404,7 @@ function validateStructuredData(data) {
     image: `${BASE}${data._generatedImagePath || `/images/places/${data.image}`}`,
     url: `${BASE}${cp}`,
     publisher: {
-      '@type': 'Organization', name: 'Frontaliere Ticino', url: BASE,
+      '@type': 'NewsMediaOrganization', '@id': siteOrganizationId, name: 'Frontaliere Ticino', url: BASE,
       logo: {
         '@type': 'ImageObject',
         acquireLicensePage: 'https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini',
@@ -14415,7 +14415,7 @@ function validateStructuredData(data) {
         url: `${BASE}/icons/icon-512x512.png`,
       },
     },
-    author: { '@type': 'Organization', name: 'Frontaliere Ticino', url: BASE },
+    author: { '@type': 'NewsMediaOrganization', '@id': siteOrganizationId, name: 'Frontaliere Ticino', url: BASE },
     mainEntityOfPage: `${BASE}${cp}`,
   };
   if (datePub) ldObj.datePublished = datePub;
