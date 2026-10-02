@@ -876,6 +876,10 @@
     "frontaliere::https://www.rsi.ch/s/4128663": {
       "section": "frontaliere",
       "ts": 1790922932239
+    },
+    "svizzera::https://www.tio.ch/svizzera/cronaca/1954206/cassaforma-incidente-operaio-stato-ospedale": {
+      "section": "svizzera",
+      "ts": 1790924358128
     }
   }
 }
