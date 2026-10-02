@@ -170,20 +170,37 @@ jobs:
           if node --test \
             generator/tests/article-fabrication-guard.test.mjs \
             generator/tests/prompt-placeholder-guard.test.mjs; then
-            exit 0
+            :
+          else
+            {
+              echo "### ✖ Scrittura RIFIUTATA prima del commit — \`generate-daily-brief\`"
+              echo
+              echo "\`article-fabrication-guard\` / \`prompt-placeholder-guard\` hanno trovato offender nel corpus dopo la scrittura."
+              echo "**Niente e' stato committato**: l'edizione resta sul runner e sparisce con lui, \`main\` non la vede."
+              echo
+              echo "Gli offender sono elencati per path nel log di questo step. Confrontali con i path stampati sopra da \`git status\`:"
+              echo
+              echo "- se coincidono, il difetto e' dell'edizione appena scritta (template o snapshot), e va riparato li';"
+              echo "- se NON coincidono, il difetto e' **preesistente nel corpus**. L'edizione di oggi non e' persa: dopo la fix si rifa' col \`workflow_dispatch\`, che rientra nel ramo \`exists\` e riscrive gli stessi file."
+            } >> "$GITHUB_STEP_SUMMARY"
+            exit 1
           fi
-          {
-            echo "### ✖ Scrittura RIFIUTATA prima del commit — \`generate-daily-brief\`"
-            echo
-            echo "\`article-fabrication-guard\` / \`prompt-placeholder-guard\` hanno trovato offender nel corpus dopo la scrittura."
-            echo "**Niente e' stato committato**: l'edizione resta sul runner e sparisce con lui, \`main\` non la vede."
-            echo
-            echo "Gli offender sono elencati per path nel log di questo step. Confrontali con i path stampati sopra da \`git status\`:"
-            echo
-            echo "- se coincidono, il difetto e' dell'edizione appena scritta (template o snapshot), e va riparato li';"
-            echo "- se NON coincidono, il difetto e' **preesistente nel corpus**. L'edizione di oggi non e' persa: dopo la fix si rifa' col \`workflow_dispatch\`, che rientra nel ramo \`exists\` e riscrive gli stessi file."
-          } >> "$GITHUB_STEP_SUMMARY"
-          exit 1
+
+          # FU-009: this writer refreshes the four localized body files directly.
+          # Keep the completeness gate in this fail-closed step: the commit below
+          # runs with `always()` and consumes `steps.guard.outcome`.
+          if ! node scripts/ci/check-blog-locale-completeness.mjs; then
+            {
+              echo "### ✖ Scrittura RIFIUTATA prima del commit — localizzazione incompleta"
+              echo
+              echo "Il controllo confronta i campi body localizzati con quelli italiani."
+              echo "**Niente e' stato committato**: correggere o rigenerare l'edizione prima del push."
+              echo
+              echo "Gli offender sono elencati nel log dello step; confrontali con i path stampati sopra da \`git status\`."
+            } >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+          exit 0
 
       # A producer can leave a registration marker and then exit non-zero.
       # The normal commit step is behind the default success() condition, so

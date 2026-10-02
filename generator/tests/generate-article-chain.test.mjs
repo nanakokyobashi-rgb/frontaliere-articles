@@ -49,6 +49,12 @@ const WF_PATH = path.resolve(HERE, '../../.github/workflows/generate-article.yml
 const WF = readFileSync(WF_PATH, 'utf8');
 const JOURNALIST_WF_PATH = path.resolve(HERE, '../../.github/workflows/publish-journalist-articles.yml');
 const JOURNALIST_WF = readFileSync(JOURNALIST_WF_PATH, 'utf8');
+const DAILY_BRIEF_WF_PATH = path.resolve(HERE, '../../.github/workflows/generate-daily-brief.yml');
+const DAILY_BRIEF_WF = readFileSync(DAILY_BRIEF_WF_PATH, 'utf8');
+const BORDER_WAIT_WF_PATH = path.resolve(HERE, '../../.github/workflows/generate-border-wait-ranking-weekly.yml');
+const BORDER_WAIT_WF = readFileSync(BORDER_WAIT_WF_PATH, 'utf8');
+const EVENTS_DIGEST_WF_PATH = path.resolve(HERE, '../../.github/workflows/refresh-events-digest.yml');
+const EVENTS_DIGEST_WF = readFileSync(EVENTS_DIGEST_WF_PATH, 'utf8');
 
 /** Solo le righe eseguibili: i commenti citano i difetti e li descriverebbero come presenti. */
 const ACTIVE = WF.split('\n')
@@ -959,6 +965,51 @@ test('il writer journalist applica lo stesso preflight prima del commit', () => 
   );
   assert.match(block, /if ! node scripts\/ci\/check-blog-locale-completeness\.mjs; then/);
   assert.ok(!/continue-on-error/.test(block), 'il preflight journalist non puo\' essere advisory');
+});
+
+test('tutti i writer deterministici dei body bloccano il commit su localizzazione incompleta', () => {
+  const guardName = 'Guard — cio\' che questo run ha scritto non raggiunge main se viola le guardie';
+  const writers = [
+    {
+      name: 'generate-daily-brief',
+      workflow: DAILY_BRIEF_WF,
+      commitName: '      - name: Commit and push',
+    },
+    {
+      name: 'generate-border-wait-ranking-weekly',
+      workflow: BORDER_WAIT_WF,
+      commitName: '      - name: Commit and push',
+    },
+    {
+      name: 'refresh-events-digest',
+      workflow: EVENTS_DIGEST_WF,
+      commitName: '      - name: Commit and push',
+    },
+  ];
+
+  for (const { name, workflow, commitName } of writers) {
+    const guardAt = workflow.indexOf(`      - name: ${guardName}`);
+    const commitAt = workflow.indexOf(commitName);
+    assert.notEqual(guardAt, -1, `${name}: guardia corpus sparita`);
+    assert.notEqual(commitAt, -1, `${name}: commit sparito`);
+    assert.ok(guardAt < commitAt, `${name}: la guardia deve precedere il commit`);
+
+    const block = sliceBetween(
+      workflow,
+      `      - name: ${guardName}`,
+      '      - name: Checkpoint — stage registration marker after producer failure',
+    );
+    const corpusGuardAt = block.indexOf('generator/tests/prompt-placeholder-guard.test.mjs');
+    const localeGateAt = block.indexOf('node scripts/ci/check-blog-locale-completeness.mjs');
+    assert.ok(corpusGuardAt >= 0, `${name}: suite corpus assente`);
+    assert.ok(localeGateAt > corpusGuardAt, `${name}: FU-009 deve seguire le suite corpus`);
+    assert.match(block, /if ! node scripts\/ci\/check-blog-locale-completeness\.mjs; then/);
+    assert.ok(!/continue-on-error/.test(block), `${name}: FU-009 non puo\' essere advisory`);
+    assert.ok(
+      localeGateAt < block.lastIndexOf('exit 0'),
+      `${name}: FU-009 deve essere eseguito prima dell\'uscita verde della guardia`,
+    );
+  }
 });
 
 // ── L'ANELLO CHE MANCAVA: il dispatch del successore (2026-08-18) ────────────
