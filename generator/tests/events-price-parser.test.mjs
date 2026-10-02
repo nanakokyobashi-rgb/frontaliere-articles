@@ -59,6 +59,13 @@ test('keeps free and contextual prices on their existing paths', () => {
   assert.deepEqual(parsePriceText('Gratis per tutti'), { amount: 0, currency: 'CHF', isFree: true });
   assert.deepEqual(parsePriceText('Free for all'), { amount: 0, currency: 'CHF', isFree: true });
   assert.deepEqual(parsePriceText('Price: 10 CHF/person'), { amount: 10, currency: 'CHF', isFree: false });
+  assert.deepEqual(parsePriceText('Freier Eintritt'), { amount: 0, currency: 'CHF', isFree: true });
+  assert.deepEqual(parsePriceText('entrées gratuites'), { amount: 0, currency: 'CHF', isFree: true });
+  assert.deepEqual(parsePriceText('Access free'), { amount: 0, currency: 'CHF', isFree: true });
+  assert.deepEqual(parsePriceText('Accesso gratuito'), { amount: 0, currency: 'CHF', isFree: true });
+  assert.deepEqual(parsePriceText('accès gratuit'), { amount: 0, currency: 'CHF', isFree: true });
+  assert.deepEqual(parsePriceText('Gratuits pour tous'), { amount: 0, currency: 'CHF', isFree: true });
+  assert.deepEqual(parsePriceText('Gratuites pour tous'), { amount: 0, currency: 'CHF', isFree: true });
 });
 
 test('keeps the paid adult tariff when children are free, including punctuation and inflection', () => {
