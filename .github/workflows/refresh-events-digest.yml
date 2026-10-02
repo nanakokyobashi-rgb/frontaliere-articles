@@ -147,20 +147,37 @@ jobs:
           if node --test \
             generator/tests/article-fabrication-guard.test.mjs \
             generator/tests/prompt-placeholder-guard.test.mjs; then
-            exit 0
+            :
+          else
+            {
+              echo "### ✖ Scrittura RIFIUTATA prima del commit — \`refresh-events-digest\`"
+              echo
+              echo "\`article-fabrication-guard\` / \`prompt-placeholder-guard\` hanno trovato offender nel corpus dopo la scrittura."
+              echo "**Niente e' stato committato**: il digest resta sul runner e sparisce con lui, \`main\` non lo vede."
+              echo
+              echo "Gli offender sono elencati per path nel log di questo step. Confrontali con i path stampati sopra da \`git status\`:"
+              echo
+              echo "- se coincidono, il difetto e' entrato col dataset degli eventi di questo giro;"
+              echo "- se NON coincidono, il difetto e' **preesistente nel corpus** e va riparato prima — il digest si rifa' al giro dopo, e' evergreen e non ha una data da perdere."
+            } >> "$GITHUB_STEP_SUMMARY"
+            exit 1
           fi
-          {
-            echo "### ✖ Scrittura RIFIUTATA prima del commit — \`refresh-events-digest\`"
-            echo
-            echo "\`article-fabrication-guard\` / \`prompt-placeholder-guard\` hanno trovato offender nel corpus dopo la scrittura."
-            echo "**Niente e' stato committato**: il digest resta sul runner e sparisce con lui, \`main\` non lo vede."
-            echo
-            echo "Gli offender sono elencati per path nel log di questo step. Confrontali con i path stampati sopra da \`git status\`:"
-            echo
-            echo "- se coincidono, il difetto e' entrato col dataset degli eventi di questo giro;"
-            echo "- se NON coincidono, il difetto e' **preesistente nel corpus** e va riparato prima — il digest si rifa' al giro dopo, e' evergreen e non ha una data da perdere."
-          } >> "$GITHUB_STEP_SUMMARY"
-          exit 1
+
+          # FU-009: this writer refreshes the four localized body files directly.
+          # Keep the completeness gate in this fail-closed step: the commit below
+          # runs with `always()` and consumes `steps.guard.outcome`.
+          if ! node scripts/ci/check-blog-locale-completeness.mjs; then
+            {
+              echo "### ✖ Scrittura RIFIUTATA prima del commit — localizzazione incompleta"
+              echo
+              echo "Il controllo confronta i campi body localizzati con quelli italiani."
+              echo "**Niente e' stato committato**: correggere o rigenerare il digest prima del push."
+              echo
+              echo "Gli offender sono elencati nel log dello step; confrontali con i path stampati sopra da \`git status\`."
+            } >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+          exit 0
 
       # A producer can leave a registration marker and then exit non-zero.
       # The normal commit step is behind the default success() condition, so

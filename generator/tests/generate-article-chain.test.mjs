@@ -47,6 +47,14 @@ import { sliceBetween } from './lib/anchored-slice.mjs';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const WF_PATH = path.resolve(HERE, '../../.github/workflows/generate-article.yml');
 const WF = readFileSync(WF_PATH, 'utf8');
+const JOURNALIST_WF_PATH = path.resolve(HERE, '../../.github/workflows/publish-journalist-articles.yml');
+const JOURNALIST_WF = readFileSync(JOURNALIST_WF_PATH, 'utf8');
+const DAILY_BRIEF_WF_PATH = path.resolve(HERE, '../../.github/workflows/generate-daily-brief.yml');
+const DAILY_BRIEF_WF = readFileSync(DAILY_BRIEF_WF_PATH, 'utf8');
+const BORDER_WAIT_WF_PATH = path.resolve(HERE, '../../.github/workflows/generate-border-wait-ranking-weekly.yml');
+const BORDER_WAIT_WF = readFileSync(BORDER_WAIT_WF_PATH, 'utf8');
+const EVENTS_DIGEST_WF_PATH = path.resolve(HERE, '../../.github/workflows/refresh-events-digest.yml');
+const EVENTS_DIGEST_WF = readFileSync(EVENTS_DIGEST_WF_PATH, 'utf8');
 
 /** Solo le righe eseguibili: i commenti citano i difetti e li descriverebbero come presenti. */
 const ACTIVE = WF.split('\n')
@@ -756,7 +764,11 @@ test('lo stallo si valuta PRIMA del kill duro: escono entrambi 137', () => {
 });
 
 test('le diagnostiche del wedge si caricano sempre, e da fuori il workspace', () => {
-  const step = sliceBetween(WF, '      - name: Upload wedge diagnostics', '      - name: Guard');
+  const step = sliceBetween(
+    WF,
+    '      - name: Upload wedge diagnostics',
+    '      - name: Guard — l\'articolo generato non raggiunge main se viola le guardie',
+  );
   assert.ok(step, 'lo step che carica le diagnostiche e\' sparito');
   assert.match(step, /if: always\(\)/, 'lo step sopra e\' ROSSO proprio quando l\'artifact serve');
   assert.match(step, /uses: actions\/upload-artifact@v7/);
@@ -919,6 +931,85 @@ test('la guardia legge lo stesso output degli altri, senza inventarsi un secondo
     !/--diff-filter=A/.test(block),
     'un secondo probe qui e\' il difetto che «esiste una sola definizione» esiste per impedire',
   );
+});
+
+test('il preflight dei body localizzati rifiuta prima del commit', () => {
+  const guardName = 'Guard — l\'articolo generato ha tutti i body localizzati';
+  const guard = extractRun(guardName);
+  assert.match(guard, /node scripts\/ci\/check-blog-locale-completeness\.mjs/);
+
+  const guardAt = WF.indexOf(`      - name: ${guardName}`);
+  const commitAt = WF.indexOf('      - name: Commit and push');
+  assert.notEqual(guardAt, -1, 'il preflight di localizzazione e\' sparito');
+  assert.notEqual(commitAt, -1);
+  assert.ok(guardAt < commitAt, 'la completezza va verificata prima che il commit raggiunga main');
+
+  const block = sliceBetween(WF, `      - name: ${guardName}`, '      - name: Commit and push');
+  assert.match(block, /if: steps\.mode\.outputs\.dry != 'true' && steps\.generate\.outputs\.article == 'true'/);
+  assert.ok(!/continue-on-error/.test(block), 'un preflight advisory lascia passare l\'articolo incompleto');
+  assert.ok(!/if: always\(\)/.test(block), 'nessuno step successivo deve poter committare dopo il rifiuto');
+});
+
+test('il writer journalist applica lo stesso preflight prima del commit', () => {
+  const guardName = 'Guard — cio\' che questo run ha scritto non raggiunge main se viola le guardie';
+  const guardAt = JOURNALIST_WF.indexOf(`      - name: ${guardName}`);
+  const commitAt = JOURNALIST_WF.indexOf('      - name: Commit and push registered articles');
+  assert.notEqual(guardAt, -1, 'la guardia del writer journalist e\' sparita');
+  assert.notEqual(commitAt, -1);
+  assert.ok(guardAt < commitAt, 'la completezza va verificata prima del commit journalist');
+
+  const block = sliceBetween(
+    JOURNALIST_WF,
+    `      - name: ${guardName}`,
+    '      - name: Commit and push registered articles',
+  );
+  assert.match(block, /if ! node scripts\/ci\/check-blog-locale-completeness\.mjs; then/);
+  assert.ok(!/continue-on-error/.test(block), 'il preflight journalist non puo\' essere advisory');
+});
+
+test('tutti i writer deterministici dei body bloccano il commit su localizzazione incompleta', () => {
+  const guardName = 'Guard — cio\' che questo run ha scritto non raggiunge main se viola le guardie';
+  const writers = [
+    {
+      name: 'generate-daily-brief',
+      workflow: DAILY_BRIEF_WF,
+      commitName: '      - name: Commit and push',
+    },
+    {
+      name: 'generate-border-wait-ranking-weekly',
+      workflow: BORDER_WAIT_WF,
+      commitName: '      - name: Commit and push',
+    },
+    {
+      name: 'refresh-events-digest',
+      workflow: EVENTS_DIGEST_WF,
+      commitName: '      - name: Commit and push',
+    },
+  ];
+
+  for (const { name, workflow, commitName } of writers) {
+    const guardAt = workflow.indexOf(`      - name: ${guardName}`);
+    const commitAt = workflow.indexOf(commitName);
+    assert.notEqual(guardAt, -1, `${name}: guardia corpus sparita`);
+    assert.notEqual(commitAt, -1, `${name}: commit sparito`);
+    assert.ok(guardAt < commitAt, `${name}: la guardia deve precedere il commit`);
+
+    const block = sliceBetween(
+      workflow,
+      `      - name: ${guardName}`,
+      '      - name: Checkpoint — stage registration marker after producer failure',
+    );
+    const corpusGuardAt = block.indexOf('generator/tests/prompt-placeholder-guard.test.mjs');
+    const localeGateAt = block.indexOf('node scripts/ci/check-blog-locale-completeness.mjs');
+    assert.ok(corpusGuardAt >= 0, `${name}: suite corpus assente`);
+    assert.ok(localeGateAt > corpusGuardAt, `${name}: FU-009 deve seguire le suite corpus`);
+    assert.match(block, /if ! node scripts\/ci\/check-blog-locale-completeness\.mjs; then/);
+    assert.ok(!/continue-on-error/.test(block), `${name}: FU-009 non puo\' essere advisory`);
+    assert.ok(
+      localeGateAt < block.lastIndexOf('exit 0'),
+      `${name}: FU-009 deve essere eseguito prima dell\'uscita verde della guardia`,
+    );
+  }
 });
 
 // ── L'ANELLO CHE MANCAVA: il dispatch del successore (2026-08-18) ────────────

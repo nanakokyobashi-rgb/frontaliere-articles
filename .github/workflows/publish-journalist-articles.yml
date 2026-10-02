@@ -209,8 +209,20 @@ jobs:
       - name: Guard — cio' che questo run ha scritto non raggiunge main se viola le guardie
         id: guard
         if: steps.mode.outputs.dry != 'true'
+        env:
+          PUBLISHED_IDS: ${{ steps.publish.outputs.published_ids || '[]' }}
         run: |
           set -uo pipefail
+          requeue_published_ids() {
+            if [ -z "${PUBLISHED_IDS:-}" ] || [ "$PUBLISHED_IDS" = "[]" ]; then
+              echo "nessun documento published da riaccodare dopo il rifiuto della guardia"
+              return 0
+            fi
+            if ! node generator/scripts/requeue-published-journalist-documents.mjs; then
+              echo "::error::il rollback dei documenti published non e' stato completato"
+              return 1
+            fi
+          }
           if [ -z "$(git status --porcelain -- content/)" ]; then
             echo "nessuna scrittura sotto content/ in questo run — niente da validare"
             exit 0
@@ -219,20 +231,45 @@ jobs:
           if node --test \
             generator/tests/article-fabrication-guard.test.mjs \
             generator/tests/prompt-placeholder-guard.test.mjs; then
-            exit 0
+            :
+          else
+            {
+              echo "### ✖ Scrittura RIFIUTATA prima del commit — \`publish-journalist-articles\`"
+              echo
+              echo "\`article-fabrication-guard\` / \`prompt-placeholder-guard\` hanno trovato offender nel corpus dopo la scrittura."
+              echo "**Niente e' stato committato**: le modifiche restano sul runner e spariscono con lui, \`main\` non le vede."
+              echo
+              echo "Gli offender sono elencati per path nel log di questo step. Confrontali con i path stampati sopra da \`git status\`:"
+              echo
+              echo "- se coincidono, il difetto e' di cio' che questo run ha appena scritto: gli id restano \`published\` in Firestore e vanno rimessi in coda a mano;"
+              echo "- se NON coincidono, il difetto e' **preesistente nel corpus** e va riparato prima — finche' resta li', ogni run che scrive muore qui."
+            } >> "$GITHUB_STEP_SUMMARY"
+            if ! requeue_published_ids; then
+              echo "::error::guardia corpus rossa e rollback Firestore incompleto"
+            fi
+            exit 1
           fi
-          {
-            echo "### ✖ Scrittura RIFIUTATA prima del commit — \`publish-journalist-articles\`"
-            echo
-            echo "\`article-fabrication-guard\` / \`prompt-placeholder-guard\` hanno trovato offender nel corpus dopo la scrittura."
-            echo "**Niente e' stato committato**: le modifiche restano sul runner e spariscono con lui, \`main\` non le vede."
-            echo
-            echo "Gli offender sono elencati per path nel log di questo step. Confrontali con i path stampati sopra da \`git status\`:"
-            echo
-            echo "- se coincidono, il difetto e' di cio' che questo run ha appena scritto: gli id restano \`published\` in Firestore e vanno rimessi in coda a mano;"
-            echo "- se NON coincidono, il difetto e' **preesistente nel corpus** e va riparato prima — finche' resta li', ogni run che scrive muore qui."
-          } >> "$GITHUB_STEP_SUMMARY"
-          exit 1
+
+          # FU-009: this writer bypasses generate-article.yml, but it still
+          # registers the same localized body files. Reject the write before
+          # the commit if any EN/DE/FR body key is missing or empty. Keep this
+          # after the corpus guards, matching generate-article.yml: the node
+          # test contract must exercise both corpus suites when they are red.
+          if ! node scripts/ci/check-blog-locale-completeness.mjs; then
+            {
+              echo "### ✖ Scrittura RIFIUTATA prima del commit — localizzazione incompleta"
+              echo
+              echo "Il controllo confronta i campi body localizzati con quelli italiani."
+              echo "**Niente e' stato committato**: correggere o rigenerare l'articolo prima del push."
+              echo
+              echo "Gli offender sono elencati nel log dello step; confrontali con i path stampati sopra da \`git status\`."
+            } >> "$GITHUB_STEP_SUMMARY"
+            if ! requeue_published_ids; then
+              echo "::error::gate FU-009 rosso e rollback Firestore incompleto"
+            fi
+            exit 1
+          fi
+          exit 0
 
       - name: Commit and push registered articles
         id: commit
