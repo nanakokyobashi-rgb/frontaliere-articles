@@ -7478,6 +7478,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.remunerazioni-ail-mps-lugano.title': 'AIL-Vergütungen und Transparenz: die Anfrage der MPS',
     'blog.article.remunerazioni-ail-mps-lugano.excerpt': 'Giuseppe Sergi und Matteo Pronzini befragen den Staatsrat zu den Vergütungen der AIL und zum Schutz des öffentlichen Vermögens.',
     'blog.article.remunerazioni-ail-mps-lugano.imageAlt': 'Ansicht von Lugano mit Bezug auf die städtischen Betriebe',
+    'blog.article.fallimenti-aziendali-ticino-media.title': 'Die Zahl der Insolvenzen steigt. Und das Tessin liegt über dem Durchschnitt',
+    'blog.article.fallimenti-aziendali-ticino-media.excerpt': 'In den ersten neun Monaten des Jahres stieg die Zahl der Unternehmenskonkurse in der Schweiz auf 11\'412 (+37 %). Im Tessin wurden 721 Konkurse verzeichnet, was einem Anstieg von 48 % entspricht.',
+    'blog.article.fallimenti-aziendali-ticino-media.imageAlt': 'Zunahme von Firmenkonkursen und Neugründungen im Tessin',
 };
 
 export default blogMetaChDe;

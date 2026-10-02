@@ -7478,6 +7478,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.remunerazioni-ail-mps-lugano.title': 'AIL Compensation and Transparency: The MPS Inquiry',
     'blog.article.remunerazioni-ail-mps-lugano.excerpt': 'Giuseppe Sergi and Matteo Pronzini question the Council of State regarding AIL compensation and the protection of public assets.',
     'blog.article.remunerazioni-ail-mps-lugano.imageAlt': 'View of Lugano representing municipal enterprises and public management',
+    'blog.article.fallimenti-aziendali-ticino-media.title': 'Bankruptcies on the rise. And Ticino is above average',
+    'blog.article.fallimenti-aziendali-ticino-media.excerpt': 'In the first nine months of the year, corporate bankruptcies in Switzerland rose to 11,412 (+37%). Ticino recorded 721 bankruptcies, an increase of 48%.',
+    'blog.article.fallimenti-aziendali-ticino-media.imageAlt': 'Increase in corporate bankruptcies and new companies in Ticino',
 };
 
 export default blogMetaChEn;

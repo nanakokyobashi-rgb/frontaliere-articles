@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4052268": {
-    "articleId": "shein-ipo-hong-kong-malus-francese",
-    "ts": "2026-09-01T19:56:56.153Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/vendite-auto-nuove-in-calo-in-agosto%2c-quasi-una-su-tre-%c3%a8-elettrica/91988908": {
     "articleId": "vendite-auto-svizzera-agosto-2026",
     "ts": "2026-09-01T21:20:56.815Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/ticino/politica/1954215/remunerazioni-quali-interesse-gestione-sergi-aziende-consiglio-ail-mps": {
     "articleId": "remunerazioni-ail-mps-lugano",
     "ts": "2026-10-02T07:35:31.615Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/economia/1954219/ticino-aumento-fallimenti-cantone-media": {
+    "articleId": "fallimenti-aziendali-ticino-media",
+    "ts": "2026-10-02T07:43:56.033Z",
     "keyForm": 2
   }
 }

@@ -22462,6 +22462,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'fallimenti-aziendali-ticino-media',
+    category: 'pratico',
+    date: '2026-10-02T07:43:55.739Z',
+    image: '/images/blog/fallimenti-aziendali-ticino-media.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

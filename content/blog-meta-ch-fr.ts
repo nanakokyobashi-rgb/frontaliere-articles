@@ -7478,6 +7478,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.remunerazioni-ail-mps-lugano.title': 'Rémunérations de l\'AIL et transparence : la question posée par le MPS',
     'blog.article.remunerazioni-ail-mps-lugano.excerpt': 'Giuseppe Sergi et Matteo Pronzini interpellent le Conseil d\'État au sujet des rémunérations versées par l\'AIL et de la protection du patrimoine public.',
     'blog.article.remunerazioni-ail-mps-lugano.imageAlt': 'Vue de Lugano représentant la gestion des entreprises publiques',
+    'blog.article.fallimenti-aziendali-ticino-media.title': 'Les faillites sont en hausse. Et le Tessin se situe au-dessus de la moyenne',
+    'blog.article.fallimenti-aziendali-ticino-media.excerpt': 'Au cours des neuf premiers mois de l\'année, le nombre de faillites d\'entreprises en Suisse s\'élève à 11 412 (+37 %). Le Tessin enregistre 721 faillites, soit une hausse de 48 %.',
+    'blog.article.fallimenti-aziendali-ticino-media.imageAlt': 'Augmentation des faillites d\'entreprises et nouvelles sociétés au Tessin',
 };
 
 export default blogMetaChFr;
