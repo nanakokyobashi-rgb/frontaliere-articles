@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/q7pmelb65adn": {
-    "articleId": "malattie-rare-cure-efficaci-2027",
-    "ts": "2026-09-02T08:38:14.838Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/hcqnhgqawauv": {
     "articleId": "impulso-alberghi-montagna",
     "ts": "2026-09-02T08:47:09.110Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/finita-sessione%3a-s%c3%ac-a-mercosur%2c-%22lex-ubs%22-e-bilaterali-iii/92154944": {
     "articleId": "sessione-autunnale-mercosur-ubs",
     "ts": "2026-10-02T08:08:27.280Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/vendite-auto-nuove-in-aumento%2c-forte-crescita-dell%27elettrico/92155014": {
+    "articleId": "vendite-auto-elettrico-svizzera",
+    "ts": "2026-10-02T08:22:28.547Z",
     "keyForm": 2
   }
 }
