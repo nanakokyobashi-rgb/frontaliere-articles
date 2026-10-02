@@ -7451,6 +7451,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.sostegno-formazione-basilea.title': 'Scholarships in the canton of Basel-Landschaft: requirements and amounts',
     'blog.article.sostegno-formazione-basilea.excerpt': 'Guide to scholarships and student loans in the Canton of Basel-Landschaft: requirements, maximum amounts, deadlines for submission and competent cantonal office.',
     'blog.article.sostegno-formazione-basilea.imageAlt': 'Scholarships and study loans in the Canton of Basilea Campagna',
+    'blog.article.lordo-netto-cantoni-2026.title': 'Average salary by profession in Switzerland 2026: gross and net',
+    'blog.article.lordo-netto-cantoni-2026.excerpt': 'In the 2026 comparison, the canton, sector and deductions count: AHV/IV/EO, ALV, UVG and BVG change the distance between gross and net salary.',
+    'blog.article.lordo-netto-cantoni-2026.imageAlt': 'Comparison of Swiss salaries and deductions on an office desk',
 };
 
 export default blogMetaChEn;

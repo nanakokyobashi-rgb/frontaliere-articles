@@ -7451,6 +7451,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.sostegno-formazione-basilea.title': 'Stipendien im Kanton Basel-Landschaft: Anforderungen und Beträge',
     'blog.article.sostegno-formazione-basilea.excerpt': 'Leitfaden zu Stipendien und Studiendarlehen im Kanton Basel-Landschaft: Anforderungen, Höchstbeträge, Einreichungsfristen und zuständiges Kantonsamt.',
     'blog.article.sostegno-formazione-basilea.imageAlt': 'Stipendien und Studiendarlehen im Kanton Basilea Campagna',
+    'blog.article.lordo-netto-cantoni-2026.title': 'Durchschnittsgehalt für Berufe in der Schweiz 2026: Brutto- und Nettogehalt',
+    'blog.article.lordo-netto-cantoni-2026.excerpt': 'Beim Vergleich 2026 sind Kanton, Branche und Abzüge entscheidend: AVS/AI/IPG, AD, LAINF und LPP verändern den Abstand zwischen Brutto- und Nettolohn.',
+    'blog.article.lordo-netto-cantoni-2026.imageAlt': 'Vergleich von Schweizer Löhnen und Abzügen auf einem Schreibtisch',
 };
 
 export default blogMetaChDe;
