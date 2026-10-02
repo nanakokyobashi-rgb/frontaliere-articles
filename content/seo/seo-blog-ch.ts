@@ -98261,6 +98261,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-diritti-inquilino-svizzera-2026': {
+    title: 'Affitti Svizzera 2026: mercato immobiliare e diritti',
+    description: 'Affitti Svizzera 2026: regole nazionali, cauzione fino a tre mensilità, disdetta del locatore su modulo cantonale e contestazione entro 30 giorni in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, mercato, immobiliare, diritti',
+    ogTitle: 'Affitti Svizzera 2026: cauzione e disdetta',
+    ogDescription: 'Una guida nazionale al mercato degli affitti in Svizzera: il deposito cauzionale, il conto vincolato intestato all\'inquilino, il modulo ufficiale del Cantone e i 30 giorni per contestare la disdetta del locatore.',
+    canonicalPath: '/articoli-svizzera/diritti-inquilino-svizzera-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti Svizzera 2026: mercato immobiliare e diritti",
+      "description": "Affitti Svizzera 2026: regole nazionali, cauzione fino a tre mensilità, disdetta del locatore su modulo cantonale e contestazione entro 30 giorni in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/diritti-inquilino-svizzera-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio residenziale svizzero con avviso di locazione e contratto tra le mani"
+      },
+      "datePublished": "2026-10-02T22:30:25+00:00",
+      "dateModified": "2026-10-02T22:30:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/diritti-inquilino-svizzera-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
