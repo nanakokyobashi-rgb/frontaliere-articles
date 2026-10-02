@@ -1677,6 +1677,27 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
           exit 1
 
+      # Publish-api controlla la completezza dopo il push, quando il nuovo
+      # articolo e' gia' su main. Lo stesso gate va eseguito sul percorso di
+      # scrittura: una traduzione senza una chiave body non deve bloccare la
+      # superficie HTTP dopo essere entrata nel corpus.
+      - name: Guard — l'articolo generato ha tutti i body localizzati
+        if: steps.mode.outputs.dry != 'true' && steps.generate.outputs.article == 'true'
+        run: |
+          set -uo pipefail
+          if node scripts/ci/check-blog-locale-completeness.mjs; then
+            exit 0
+          fi
+          {
+            echo "### ✖ Articolo RIFIUTATO prima del commit — localizzazione incompleta"
+            echo
+            echo "Il controllo confronta i campi body localizzati con quelli italiani."
+            echo "**Niente e' stato committato**: correggere o rigenerare l'articolo prima del push."
+            echo
+            echo "Gli offender sono elencati nel log dello step; confrontali con `article body added:` dello step «Generate the article»."
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit 1
+
       # Encode the 480w WebP thumbnail for the new hero. This step exists in the
       # main repo's generate-article.yml and was dropped in transport, so every
       # article generated here since the cutover has a hero and no thumbnail.

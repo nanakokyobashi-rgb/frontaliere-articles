@@ -756,7 +756,11 @@ test('lo stallo si valuta PRIMA del kill duro: escono entrambi 137', () => {
 });
 
 test('le diagnostiche del wedge si caricano sempre, e da fuori il workspace', () => {
-  const step = sliceBetween(WF, '      - name: Upload wedge diagnostics', '      - name: Guard');
+  const step = sliceBetween(
+    WF,
+    '      - name: Upload wedge diagnostics',
+    '      - name: Guard — l\'articolo generato non raggiunge main se viola le guardie',
+  );
   assert.ok(step, 'lo step che carica le diagnostiche e\' sparito');
   assert.match(step, /if: always\(\)/, 'lo step sopra e\' ROSSO proprio quando l\'artifact serve');
   assert.match(step, /uses: actions\/upload-artifact@v7/);
@@ -919,6 +923,23 @@ test('la guardia legge lo stesso output degli altri, senza inventarsi un secondo
     !/--diff-filter=A/.test(block),
     'un secondo probe qui e\' il difetto che «esiste una sola definizione» esiste per impedire',
   );
+});
+
+test('il preflight dei body localizzati rifiuta prima del commit', () => {
+  const guardName = 'Guard — l\'articolo generato ha tutti i body localizzati';
+  const guard = extractRun(guardName);
+  assert.match(guard, /node scripts\/ci\/check-blog-locale-completeness\.mjs/);
+
+  const guardAt = WF.indexOf(`      - name: ${guardName}`);
+  const commitAt = WF.indexOf('      - name: Commit and push');
+  assert.notEqual(guardAt, -1, 'il preflight di localizzazione e\' sparito');
+  assert.notEqual(commitAt, -1);
+  assert.ok(guardAt < commitAt, 'la completezza va verificata prima che il commit raggiunga main');
+
+  const block = sliceBetween(WF, `      - name: ${guardName}`, '      - name: Commit and push');
+  assert.match(block, /if: steps\.mode\.outputs\.dry != 'true' && steps\.generate\.outputs\.article == 'true'/);
+  assert.ok(!/continue-on-error/.test(block), 'un preflight advisory lascia passare l\'articolo incompleto');
+  assert.ok(!/if: always\(\)/.test(block), 'nessuno step successivo deve poter committare dopo il rifiuto');
 });
 
 // ── L'ANELLO CHE MANCAVA: il dispatch del successore (2026-08-18) ────────────
