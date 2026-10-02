@@ -501,7 +501,8 @@
     "apprendistato e formazione professionale canton Basilea Campagna",
     "salario medio professioni svizzera 2026",
     "salario medio professioni svizzera 2026 canton Zurigo",
-    "salario medio professioni svizzera 2026 canton Vaud"
+    "salario medio professioni svizzera 2026 canton Vaud",
+    "salario medio professioni svizzera 2026 canton Lucerna"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -898,6 +899,14 @@
     "svizzera::https://lenews.ch/2026/10/02/film-zurich-film-festival-2026-excellent-international-films-and-top-stars": {
       "section": "svizzera",
       "ts": 1790964335227
+    },
+    "svizzera::https://www.tio.ch/ticino/cronaca/1954338/nel-traffico-di-una-serata-da-dimenticare-un-furgone-prende-fuoco-all-improvviso": {
+      "section": "svizzera",
+      "ts": 1790969532151
+    },
+    "svizzera::https://www.tio.ch/svizzera/cronaca/1954203/medico-80enne-adescava-minorenni-online-denaro-in-cambio-di-sesso": {
+      "section": "svizzera",
+      "ts": 1790969542409
     }
   }
 }
