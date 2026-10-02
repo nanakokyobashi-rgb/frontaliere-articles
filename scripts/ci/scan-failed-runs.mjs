@@ -1192,12 +1192,21 @@ export function selectIssueFixCandidate(candidates, { getFailedJobs, getLog } = 
  * ────────────────────────────────────────────────────────────────────────── */
 
 // Prefisso dei log di GitHub Actions (`job\tstep\t2026-08-11T05:00:18.4631322Z `)
-// e sequenze ANSI. Vanno via prima di mostrare una riga in una issue.
+// e sequenze ANSI. Vanno via prima di mostrare una riga in una issue. Alcuni
+// percorsi dell'API/bridge conservano l'ANSI in forma caret (`^[[36;1m`)
+// invece del byte ESC: se non lo togliamo, il guard `echo` sotto non riconosce
+// piu' il sorgente dello shell trace e lo promuove a diagnostica runtime.
 const ANSI_RE = /\u001b\[[0-9;]*[A-Za-z]/g;
+const CARET_ANSI_RE = /\^\[\[[0-9;]*[A-Za-z]/g;
 const LOG_PREFIX_RE = /^(?:[^\t]*\t[^\t]*\t)?\d{4}-\d{2}-\d{2}T[\d:.]+Z ?/;
 
 export function cleanLogLine(line) {
-  return String(line).replace(/\r$/, '').replace(ANSI_RE, '').replace(LOG_PREFIX_RE, '').trimEnd();
+  return String(line)
+    .replace(/\r$/, '')
+    .replace(ANSI_RE, '')
+    .replace(CARET_ANSI_RE, '')
+    .replace(LOG_PREFIX_RE, '')
+    .trimEnd();
 }
 
 /**
