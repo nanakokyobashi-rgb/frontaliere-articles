@@ -123,9 +123,9 @@ jobs:
               const status = Number(error?.status ?? error?.response?.status);
               return status >= 500 && status <= 599;
             };
-            const retryClass = error => {
+            const retryClass = (error, { retryTransient = false } = {}) => {
               if (isRateLimitError(error)) return { name: 'rate limit', retries: rateLimitRetries };
-              if (isTransientServerError(error)) {
+              if (retryTransient && isTransientServerError(error)) {
                 return { name: 'transient GitHub server error', retries: transientRetries };
               }
               return null;
@@ -155,16 +155,18 @@ jobs:
               return Math.max(fallback, retryMs * 2 ** attempt);
             };
             // The installation token can exhaust its shared core quota while
-            // several workflows are inspecting the same PR. A rate-limit 403
-            // and a GitHub 5xx are transient when they fit in this job's
-            // bounded window; every other API error remains fatal and every
-            // exhausted retry still fails closed.
-            const apiCall = async (label, operation) => {
+            // several workflows are inspecting the same PR. Rate-limit
+            // responses remain retryable for every operation, as before. A
+            // 5xx is retryable only when the caller opts in for a read or an
+            // idempotent write; non-idempotent mutations must fail closed
+            // after the first response because GitHub may have accepted the
+            // request before returning the 5xx.
+            const apiCall = async (label, operation, options = {}) => {
               for (let attempt = 0; ; attempt += 1) {
                 try {
                   return await operation();
                 } catch (error) {
-                  const retry = retryClass(error);
+                  const retry = retryClass(error, options);
                   if (!retry || attempt >= retry.retries) throw error;
                   const delay = retryDelay(error, attempt);
                   if (Date.now() + delay > retryDeadline) {
@@ -178,6 +180,7 @@ jobs:
                 }
               }
             };
+            const readApiCall = (label, operation) => apiCall(label, operation, { retryTransient: true });
             // Read the required context from the same trusted source used by
             // the CI gates; a duplicated literal could block a different
             // check if the job is ever renamed.
@@ -189,7 +192,7 @@ jobs:
               // it is still enabled, so an unverifiable body cannot merge.
               // apiCall owns the single recovery deadline and bounded retry;
               // an outer retry loop could consume the fail-closed reserve.
-              const { data: currentPr } = await apiCall('check native auto-merge', () => github.rest.pulls.get({ ...repo, pull_number: number }));
+              const { data: currentPr } = await readApiCall('check native auto-merge', () => github.rest.pulls.get({ ...repo, pull_number: number }));
               if (currentPr.state !== 'open' || !currentPr.auto_merge) return;
               await apiCall('disable native auto-merge', () => github.graphql(`
                 mutation DisablePullRequestAutoMerge($pullRequestId: ID!) {
@@ -197,7 +200,7 @@ jobs:
                     clientMutationId
                   }
                 }
-              `, { pullRequestId: currentPr.node_id }));
+              `, { pullRequestId: currentPr.node_id }), { retryTransient: true });
               core.warning(`Native auto-merge revoked for PR #${number} before fail-closed recovery.`);
             };
             const failClosed = async message => {
@@ -223,7 +226,7 @@ jobs:
                       title: 'Body recovery fail-closed',
                       summary: `Auto-merge revocation could not be confirmed: ${message}`,
                     },
-                  }));
+                  }), { retryTransient: false });
                   core.warning(`Required check blocked for PR #${number} because native auto-merge revocation failed.`);
                 } catch (checkError) {
                   core.setFailed(`Recovery could not revoke native auto-merge or block the required check: ${checkError.message}`);
@@ -233,9 +236,9 @@ jobs:
               core.setFailed(message);
             };
             const main = async () => {
-              pr = (await apiCall('load pull request', () => github.rest.pulls.get({ ...repo, pull_number: number }))).data;
+              pr = (await readApiCall('load pull request', () => github.rest.pulls.get({ ...repo, pull_number: number }))).data;
             if (pr.state !== 'open' || pr.head.sha !== context.payload.pull_request.head.sha) return;
-            const runs = await apiCall('list tests workflow runs', () => github.paginate(github.rest.actions.listWorkflowRuns, {
+            const runs = await readApiCall('list tests workflow runs', () => github.paginate(github.rest.actions.listWorkflowRuns, {
               ...repo, workflow_id: 'tests.yml', head_sha: pr.head.sha, per_page: 100,
             }));
             // Only runs that carry this PR's body contract and review: the
@@ -247,7 +250,7 @@ jobs:
               core.info(`No tests run of PR #${number} exists on ${pr.head.sha}; the next push re-enters the code check.`);
               return;
             }
-            const getRun = async () => (await apiCall(`read workflow run ${latest.id}`, () => github.rest.actions.getWorkflowRun({ ...repo, run_id: latest.id }))).data;
+            const getRun = async () => (await readApiCall(`read workflow run ${latest.id}`, () => github.rest.actions.getWorkflowRun({ ...repo, run_id: latest.id }))).data;
             const settle = async attempt => {
               let run = await getRun();
               while (run.status !== 'completed') {
@@ -281,7 +284,7 @@ jobs:
             }
             if (target.status !== 'completed') {
               try {
-                await apiCall(`cancel workflow run ${target.id}`, () => github.rest.actions.cancelWorkflowRun({ ...repo, run_id: target.id }));
+                await apiCall(`cancel workflow run ${target.id}`, () => github.rest.actions.cancelWorkflowRun({ ...repo, run_id: target.id }), { retryTransient: true });
               } catch (error) {
                 // 409: it completed in the meantime; classify it below.
                 if (error?.status !== 409) throw error;
@@ -303,7 +306,7 @@ jobs:
               // Inspect the latest attempt only, never an old failure
               // underneath a running retry. A passed preflight alone is not
               // enough: the reviewer can also reject the body.
-              const jobs = await apiCall('list tests workflow jobs', () => github.paginate(github.rest.actions.listJobsForWorkflowRun, {
+              const jobs = await readApiCall('list tests workflow jobs', () => github.paginate(github.rest.actions.listJobsForWorkflowRun, {
                 ...repo, run_id: latest.id, filter: 'latest', per_page: 100,
               }));
               const failedBody = jobs.some(job => job.steps?.some(step => step.name.startsWith('PR-body completeness + multi-issue Closes') &&
@@ -336,12 +339,12 @@ jobs:
             // Recheck both head and attempt right before the write. Duplicate
             // edit deliveries must not restart a retry that is already queued.
             const [{ data: currentPr }, currentRun] = await Promise.all([
-              apiCall('recheck pull request before retry', () => github.rest.pulls.get({ ...repo, pull_number: number })),
+              readApiCall('recheck pull request before retry', () => github.rest.pulls.get({ ...repo, pull_number: number })),
               getRun(),
             ]);
             if (currentPr.state !== 'open' || currentPr.head.sha !== pr.head.sha ||
                 currentRun.status !== 'completed' || currentRun.run_attempt !== target.run_attempt) return;
-            await apiCall(`rerun workflow ${latest.id}`, () => github.rest.actions.reRunWorkflow({ ...repo, run_id: latest.id }));
+            await apiCall(`rerun workflow ${latest.id}`, () => github.rest.actions.reRunWorkflow({ ...repo, run_id: latest.id }), { retryTransient: false });
             core.info(`Retrying code run ${latest.id}: ${retryReason} and the description changed.`);
             };
             await main().catch(async error => {

@@ -26,13 +26,14 @@ const AFTER_EDIT = '2026-09-19T12:01:00Z';
 
 // `later`: fields the run takes on successive getWorkflowRun reads (the
 // first read is the script's re-read of the listed run).
-async function recover(bodyConclusion, status = 'completed', failedSteps = [], later = [], runOverrides = {}, cancelError = null, autoMerge = null, editTimestamp = EDITED_AT, graphqlError = null, checkError = null, rateLimitFailures = {}, transientRerunFailures = 0) {
+async function recover(bodyConclusion, status = 'completed', failedSteps = [], later = [], runOverrides = {}, cancelError = null, autoMerge = null, editTimestamp = EDITED_AT, graphqlError = null, checkError = null, rateLimitFailures = {}, transientRerunFailures = 0, transientReadFailures = {}) {
   const reruns = [];
   const cancels = [];
   const failures = [];
   const autoMergeRevokes = [];
   const requiredCheckBlocks = [];
   const remainingRateLimitFailures = new Map(Object.entries(rateLimitFailures));
+  const remainingTransientReadFailures = new Map(Object.entries(transientReadFailures));
   let remainingTransientRerunFailures = transientRerunFailures;
   const maybeRateLimit = name => {
     const remaining = remainingRateLimitFailures.get(name) || 0;
@@ -47,6 +48,15 @@ async function recover(bodyConclusion, status = 'completed', failedSteps = [], l
       },
     });
     throw error;
+  };
+  const maybeTransientRead = name => {
+    const remaining = remainingTransientReadFailures.get(name) || 0;
+    if (!remaining) return;
+    remainingTransientReadFailures.set(name, remaining - 1);
+    throw Object.assign(new Error('GitHub Actions temporarily unavailable'), {
+      status: 502,
+      response: { status: 502, data: {} },
+    });
   };
   const run = {
     id: 42, run_attempt: 1, status, conclusion: status === 'completed' ? 'failure' : null,
@@ -68,6 +78,7 @@ async function recover(bodyConclusion, status = 'completed', failedSteps = [], l
       actions: {
         listWorkflowRuns: 'runs', listJobsForWorkflowRun: 'jobs',
         getWorkflowRun: async () => {
+          maybeTransientRead('getWorkflowRun');
           if (polls.length) Object.assign(run, polls.shift());
           return { data: { ...run } };
         },
@@ -175,11 +186,19 @@ test('a corrected failed body retries the code run', async () => {
   assert.deepEqual(await recover('failure'), [42]);
 });
 
-test('a transient GitHub 5xx while requesting the rerun is retried', async () => {
+test('a transient GitHub 5xx while reading workflow state is retried', async () => {
   assert.deepEqual(
-    await recover('failure', 'completed', [], [], {}, null, null, EDITED_AT, null, null, {}, 1),
+    await recover('failure', 'completed', [], [], {}, null, null, EDITED_AT, null, null, {}, 0, { getWorkflowRun: 1 }),
     [42],
   );
+});
+
+test('a transient GitHub 5xx while requesting the rerun fails closed without repeating the mutation', async () => {
+  assert.deepEqual(
+    await recover('failure', 'completed', [], [], {}, null, null, EDITED_AT, null, null, {}, 1),
+    [],
+  );
+  assert.match(recover.lastFailures[0], /temporarily unavailable/);
 });
 
 test('an installation rate limit is retried before recovery classifies the body', async () => {
