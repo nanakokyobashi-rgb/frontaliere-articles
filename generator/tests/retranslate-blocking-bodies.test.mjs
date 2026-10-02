@@ -387,6 +387,36 @@ test('lo scan ignora heading Markdown tradotti ma conserva quelli italiani canon
   }]);
 });
 
+test('lo scan conserva heading italiani non canonici anche dentro Markdown', () => {
+  const body1 = [
+    '## Titolo italiano non canonico',
+    '> ### Nuove regole fiscali',
+    '- #### Impatto sui lavoratori frontalieri',
+  ].join('\n');
+  const hits = scanItalianResidue({ body1 }, 'en');
+
+  assert.equal(hits.length, ITALIAN_RESIDUE_MIN_LINES);
+  assert.ok(hits.every((hit) => hit.reason === 'language'));
+  assert.deepEqual(hits.map((hit) => hit.text), [
+    'Titolo italiano non canonico',
+    'Nuove regole fiscali',
+    'Impatto sui lavoratori frontalieri',
+  ]);
+  assert.deepEqual(currentBlockingCodes({ italianResidue: hits }), ['italian-residue']);
+  assert.equal(scanItalianResidue({ body1: '## Salari e contributi' }, 'en').length, 1);
+});
+
+test('lo scan ignora heading localizzati in blockquote, lista e forma Setext', () => {
+  const body1 = [
+    '> ## What to do',
+    '- ## What to do to avoid future delays',
+    'Closure history by phase',
+    '===',
+  ].join('\n');
+
+  assert.deepEqual(scanItalianResidue({ body1 }, 'en'), []);
+});
+
 test('la soglia lascia fuori una riga italiana isolata e il locale sorgente', () => {
   const oneLine = { body1: '## Fatti chiave\n- **Cosa**: Convocazione dell’assemblea CUV.' };
   assert.equal(scanItalianResidue(oneLine, 'fr').length, 2);

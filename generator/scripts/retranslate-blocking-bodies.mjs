@@ -148,6 +148,12 @@ export const ITALIAN_RESIDUE_MIN_LINES = 3;
 const ITALIAN_RESIDUE_MIN_CONFIDENCE = 0.15;
 const ITALIAN_RESIDUE_HEADING_RE = /^(?:#{1,6}\s*)?(?:in breve|fatti chiave|domande frequenti|punti chiave|conclusione|conclusioni|fonti|consiglio pratico|cosa cambia|attenzione|da sapere|in sintesi)\s*:?[ \t]*$/iu;
 const ITALIAN_RESIDUE_WORD_RE = /[\p{L}]+(?:['’][\p{L}]+)*/gu;
+const ITALIAN_HEADING_HINT_RE = /\b(?:aggiornament[io]|cantone|cosa|fiscal[ei]|frontalier[io]|impatto|italian[ao]|lavorator[ei]|misur[ae]|nuov[aei]|reddito|regol[aei]|ticino|titolo)\b/iu;
+const LOCALIZED_HEADING_HINT_RE = {
+  en: /\b(?:and|are|avoid|by|closure|contact|delays|do|facts|future|history|how|nutshell|our|phase|the|these|this|those|to|what|when|where|which|who|why|with|without|your)\b/iu,
+  de: /\b(?:aber|auch|auf|aus|bei|das|der|die|digitale|ein|eine|einer|einem|einen|für|ist|mit|nach|nutzen|oder|praktische|schritt|straßennetz|stress|tools|über|und|unter|von|wichtig|zu|zum|zur)\b/iu,
+  fr: /\b(?:activités|au|aux|avec|cette|ces|contacter|dans|délais|des|du|envoi|et|les|olympique|pour|qui|sont|sur|une|village|votre|vos)\b/iu,
+};
 
 function normalizeItalianResidueLine(line) {
   return String(line ?? '')
@@ -158,17 +164,80 @@ function normalizeItalianResidueLine(line) {
     .trim();
 }
 
+/** Rimuove i contenitori Markdown che possono precedere un heading. */
+function stripMarkdownContainerPrefixes(line) {
+  let rest = String(line ?? '').replace(/\r$/u, '');
+  for (;;) {
+    const unquoted = rest.replace(/^[ \t]{0,3}>[ \t]?/u, '');
+    if (unquoted !== rest) {
+      rest = unquoted;
+      continue;
+    }
+    const unlisted = rest.replace(/^[ \t]{0,3}(?:[-+*]|\d{1,9}[.)])[ \t]+/u, '');
+    if (unlisted !== rest) {
+      rest = unlisted;
+      continue;
+    }
+    return rest;
+  }
+}
+
+/** Restituisce il testo di un heading ATX, oppure null. */
+function atxHeadingText(line) {
+  const rest = stripMarkdownContainerPrefixes(line);
+  const match = rest.match(/^[ \t]{0,3}#{1,6}(?:[ \t]+(.*))?$/u);
+  if (!match) return null;
+  return (match[1] || '').replace(/[ \t]+#+[ \t]*$/u, '').trim();
+}
+
+function isSetextUnderline(line) {
+  const rest = stripMarkdownContainerPrefixes(line);
+  return /^[ \t]{0,3}(?:=+|-+)[ \t]*$/u.test(rest);
+}
+
+/**
+ * Restituisce il testo di un heading Markdown, incluse le forme dentro
+ * blockquote/lista e Setext. Il testo viene normalizzato solo dopo aver
+ * rimosso la sintassi contenitore, così il detector non deve indovinare che
+ * `- ## Titolo` e `> ## Titolo` sono heading.
+ */
+function markdownHeadingText(line, nextLine) {
+  const atx = atxHeadingText(line);
+  if (atx !== null) return normalizeItalianResidueLine(atx);
+  if (nextLine !== undefined && isSetextUnderline(nextLine)) {
+    return normalizeItalianResidueLine(stripMarkdownContainerPrefixes(line));
+  }
+  return null;
+}
+
+function italianMarkdownHeadingReason(text, locale) {
+  const localizedHint = LOCALIZED_HEADING_HINT_RE[locale];
+  const hasItalianHint = ITALIAN_HEADING_HINT_RE.test(text);
+  const detected = detectLanguageWithConfidence(text, locale);
+
+  // Il detector trigramma puo' chiamare italiano un titolo breve inglese,
+  // quindi un segnale lessicale della lingua attesa vince sul suo verdetto.
+  // I segnali italiani servono a conservare titoli non canonici anche quando
+  // il titolo e' troppo corto per il profilo trigramma.
+  if (localizedHint?.test(text) && !hasItalianHint) return null;
+  if (hasItalianHint) return 'language';
+  return detected.lang === 'it' && detected.confidence >= ITALIAN_RESIDUE_MIN_CONFIDENCE
+    ? 'language'
+    : null;
+}
+
 /** Ritorna il tipo di segnale, oppure null se la riga non e' probante. */
-function italianResidueLineReason(line, locale) {
+function italianResidueLineReason(line, locale, nextLine) {
   if (locale === 'it') return null;
   const clean = normalizeItalianResidueLine(line);
   if (!clean) return null;
+  const heading = markdownHeadingText(line, nextLine);
+  if (heading !== null) {
+    if (!heading) return null;
+    if (ITALIAN_RESIDUE_HEADING_RE.test(heading)) return 'heading';
+    return italianMarkdownHeadingReason(heading, locale);
+  }
   if (ITALIAN_RESIDUE_HEADING_RE.test(clean)) return 'heading';
-  // Il detector trigram e' poco affidabile sui titoli Markdown brevi: per
-  // esempio classifica "In a nutshell" e "What to do..." come italiano.
-  // Conta solo i titoli italiani canonici sopra; un titolo gia' localizzato
-  // non deve, da solo o in gruppo con altri titoli, autorizzare una riscrittura.
-  if (/^\s*#{1,6}\s+/u.test(line)) return null;
 
   const words = clean.match(ITALIAN_RESIDUE_WORD_RE) || [];
   if (words.length < 3) return null;
@@ -187,14 +256,17 @@ export function scanItalianResidue(sections, locale) {
   const hits = [];
   for (const [field, value] of Object.entries(sections)) {
     if (typeof value !== 'string') continue;
-    value.split(/\r?\n/u).forEach((line, index) => {
-      const reason = italianResidueLineReason(line, locale);
+    const lines = value.split(/\r?\n/u);
+    lines.forEach((line, index) => {
+      const nextLine = lines[index + 1];
+      const reason = italianResidueLineReason(line, locale, nextLine);
       if (!reason) return;
+      const heading = markdownHeadingText(line, nextLine);
       hits.push({
         field,
         line: index + 1,
         reason,
-        text: normalizeItalianResidueLine(line).slice(0, 300),
+        text: (heading ?? normalizeItalianResidueLine(line)).slice(0, 300),
       });
     });
   }
