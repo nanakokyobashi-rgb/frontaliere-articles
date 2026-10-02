@@ -26,13 +26,15 @@ const AFTER_EDIT = '2026-09-19T12:01:00Z';
 
 // `later`: fields the run takes on successive getWorkflowRun reads (the
 // first read is the script's re-read of the listed run).
-async function recover(bodyConclusion, status = 'completed', failedSteps = [], later = [], runOverrides = {}, cancelError = null, autoMerge = null, editTimestamp = EDITED_AT, graphqlError = null, checkError = null, rateLimitFailures = {}) {
+async function recover(bodyConclusion, status = 'completed', failedSteps = [], later = [], runOverrides = {}, cancelError = null, autoMerge = null, editTimestamp = EDITED_AT, graphqlError = null, checkError = null, rateLimitFailures = {}, transientRerunFailures = 0, transientReadFailures = {}) {
   const reruns = [];
   const cancels = [];
   const failures = [];
   const autoMergeRevokes = [];
   const requiredCheckBlocks = [];
   const remainingRateLimitFailures = new Map(Object.entries(rateLimitFailures));
+  const remainingTransientReadFailures = new Map(Object.entries(transientReadFailures));
+  let remainingTransientRerunFailures = transientRerunFailures;
   const maybeRateLimit = name => {
     const remaining = remainingRateLimitFailures.get(name) || 0;
     if (!remaining) return;
@@ -46,6 +48,15 @@ async function recover(bodyConclusion, status = 'completed', failedSteps = [], l
       },
     });
     throw error;
+  };
+  const maybeTransientRead = name => {
+    const remaining = remainingTransientReadFailures.get(name) || 0;
+    if (!remaining) return;
+    remainingTransientReadFailures.set(name, remaining - 1);
+    throw Object.assign(new Error('GitHub Actions temporarily unavailable'), {
+      status: 502,
+      response: { status: 502, data: {} },
+    });
   };
   const run = {
     id: 42, run_attempt: 1, status, conclusion: status === 'completed' ? 'failure' : null,
@@ -67,6 +78,7 @@ async function recover(bodyConclusion, status = 'completed', failedSteps = [], l
       actions: {
         listWorkflowRuns: 'runs', listJobsForWorkflowRun: 'jobs',
         getWorkflowRun: async () => {
+          maybeTransientRead('getWorkflowRun');
           if (polls.length) Object.assign(run, polls.shift());
           return { data: { ...run } };
         },
@@ -74,7 +86,16 @@ async function recover(bodyConclusion, status = 'completed', failedSteps = [], l
           if (cancelError) throw cancelError;
           cancels.push(run_id);
         },
-        reRunWorkflow: async ({ run_id }) => { reruns.push(run_id); },
+        reRunWorkflow: async ({ run_id }) => {
+          if (remainingTransientRerunFailures > 0) {
+            remainingTransientRerunFailures -= 1;
+            throw Object.assign(new Error('GitHub Actions temporarily unavailable'), {
+              status: 500,
+              response: { status: 500, data: {} },
+            });
+          }
+          reruns.push(run_id);
+        },
       },
       checks: {
         create: async ({ name, head_sha, status, conclusion }) => {
@@ -163,6 +184,21 @@ test('body edits re-enter through the trusted recovery, not through a tests.yml 
 
 test('a corrected failed body retries the code run', async () => {
   assert.deepEqual(await recover('failure'), [42]);
+});
+
+test('a transient GitHub 5xx while reading workflow state is retried', async () => {
+  assert.deepEqual(
+    await recover('failure', 'completed', [], [], {}, null, null, EDITED_AT, null, null, {}, 0, { getWorkflowRun: 1 }),
+    [42],
+  );
+});
+
+test('a transient GitHub 5xx while requesting the rerun fails closed without repeating the mutation', async () => {
+  assert.deepEqual(
+    await recover('failure', 'completed', [], [], {}, null, null, EDITED_AT, null, null, {}, 1),
+    [],
+  );
+  assert.match(recover.lastFailures[0], /temporarily unavailable/);
 });
 
 test('an installation rate limit is retried before recovery classifies the body', async () => {
@@ -284,10 +320,13 @@ test('every fail-closed exit revokes native auto-merge before turning red', asyn
   assert.match(recover.lastFailures[0], /Edit timestamp/);
 });
 
-test('a revocation API failure blocks the required check on the exact head', async () => {
+test('a persistent revocation API failure blocks the required check on the exact head', async () => {
   const revokeError = Object.assign(new Error('GraphQL temporarily unavailable'), { status: 502 });
   assert.deepEqual(
-    await recover('success', 'completed', [], [], { run_started_at: undefined }, null, { enabled_by: 'bot' }, EDITED_AT, revokeError),
+    await recover(
+      'success', 'completed', [], [], { run_started_at: undefined }, null, { enabled_by: 'bot' },
+      EDITED_AT, [revokeError, revokeError, revokeError, revokeError],
+    ),
     [],
   );
   assert.deepEqual(recover.lastAutoMergeRevokes, []);
@@ -342,6 +381,9 @@ test('the recovery window outlasts a cancelled tests run and fits the job timeou
   const rateLimitWait = envMs('BODY_RECOVERY_RATE_LIMIT_WAIT_MS');
   assert.equal(defaultMs('BODY_RECOVERY_WAIT_MS'), wait, 'default e env della finestra divergono');
   assert.equal(defaultMs('BODY_RECOVERY_RATE_LIMIT_WAIT_MS'), rateLimitWait, 'default e env del rate limit divergono');
+  const transientRetries = Number(recovery.match(/^\s+BODY_RECOVERY_TRANSIENT_RETRIES: '(\d+)'$/m)?.[1]);
+  const defaultTransientRetries = Number(recovery.match(/Number\(process\.env\.BODY_RECOVERY_TRANSIENT_RETRIES\) \|\| (\d+)/)?.[1]);
+  assert.equal(defaultTransientRetries, transientRetries, 'default e env dei retry 5xx divergono');
   const windowMs = Math.min(wait, rateLimitWait);
   const reserveMs = Math.min(15000, Math.floor(windowMs / 10));
   assert.ok(windowMs - reserveMs >= 8 * 60 * 1000, `attesa effettiva ${windowMs - reserveMs} ms < 8 min`);
