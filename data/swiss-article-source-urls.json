@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/franco%3a-scende-ancora-rispetto-all%27euro%2c-ai-minimi-da-un-anno/91993996": {
-    "articleId": "franco-euro-minimi-anno",
-    "ts": "2026-09-02T15:41:21.798Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/attualita/1947572/knutti-caldo-estate-svizzera-siccita-due": {
     "articleId": "estate-calda-svizzera-2026",
     "ts": "2026-09-02T15:49:18.915Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/novartis%3a-accordo-con-biotech-cinese%2c-pagamenti-fino-a-7-miliardi/92159315": {
     "articleId": "novartis-abo2203-rna-licenza",
     "ts": "2026-10-02T18:52:21.250Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/rubriche/aziende-ticinesi-informano/1954311/lavoro-vita-sondaggio-pro-svizzera": {
+    "articleId": "sondaggio-conciliazione-lavoro-vita",
+    "ts": "2026-10-02T19:11:19.827Z",
     "keyForm": 2
   }
 }
