@@ -97988,6 +97988,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-analisi-traffico-gottardo-app': {
+    title: 'Gottardo: l\'analisi dei dati per evitare le code',
+    description: 'Fabrizio Bacchini ha creato l\'app Gottardo Live analizzando 19mila segnalazioni USTRA. Scopri come monitorare il traffico e pianificare meglio il viaggio.',
+    keywords: 'frontalieri, ticino, svizzera, italia, gottardo, analisi, dati, evitare',
+    ogTitle: 'Gottardo: l\'analisi dei dati per evitare le code',
+    ogDescription: 'Fabrizio Bacchini analizza il traffico del Gottardo: dall\'11 luglio code in 82 giorni su 83. Con la sua app Gottardo Live, basata sui dati USTRA, aiuta a pianificare i viaggi.',
+    canonicalPath: '/articoli-svizzera/analisi-traffico-gottardo-app/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Gottardo: l'analisi dei dati per evitare le code",
+      "description": "Fabrizio Bacchini ha creato l'app Gottardo Live analizzando 19mila segnalazioni USTRA. Scopri come monitorare il traffico e pianificare meglio il viaggio.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/analisi-traffico-gottardo-app.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Traffico in attesa davanti all'ingresso di un tunnel autostradale in Svizzera."
+      },
+      "datePublished": "2026-10-02T19:28:25+00:00",
+      "dateModified": "2026-10-02T19:28:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/analisi-traffico-gottardo-app/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
