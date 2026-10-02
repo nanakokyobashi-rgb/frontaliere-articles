@@ -1,9 +1,4 @@
 {
-  "https://www.seco.admin.ch/it": {
-    "articleId": "dazi-svizzera-voto",
-    "ts": "2026-10-01T20:06:53.957Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/nsut8um5sbxj": {
     "articleId": "prezzi-consumo-aumentati-agosto-2026",
     "ts": "2026-09-03T07:46:38.845Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1954387/micasa-quattro-negozi-migros-filiale": {
     "articleId": "micasa-quattro-negozi-2027",
     "ts": "2026-10-02T20:52:31.459Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/rubriche/aziende-ticinesi-informano/1954386/comitato-assemblea-swissaccounting-svizzera-neodiplomati-swiss": {
+    "articleId": "assemblea-swissaccounting-melide",
+    "ts": "2026-10-02T21:05:06.099Z",
     "keyForm": 2
   }
 }

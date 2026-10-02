@@ -98144,6 +98144,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-assemblea-swissaccounting-melide': {
+    title: 'SwissAccounting, 60ª assemblea e nuove diciture professionali',
+    description: 'SwissAccounting Svizzera Italiana celebra la 60ª assemblea a Melide. Novità sui titoli federali: dal 1° ottobre 2026 arrivano Professional Master e Bachelor.',
+    keywords: 'frontalieri, ticino, svizzera, italia, swissaccounting, assemblea, nuove, diciture',
+    ogTitle: 'SwissAccounting: 60ª assemblea e nuove diciture professionali',
+    ogDescription: 'L\'associazione SwissAccounting Svizzera Italiana ha tenuto la sua 60ª assemblea a Melide, premiando i neodiplomati e illustrando le nuove diciture per i titoli professionali.',
+    canonicalPath: '/articoli-svizzera/assemblea-swissaccounting-melide/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "SwissAccounting, 60ª assemblea e nuove diciture professionali",
+      "description": "SwissAccounting Svizzera Italiana celebra la 60ª assemblea a Melide. Novità sui titoli federali: dal 1° ottobre 2026 arrivano Professional Master e Bachelor.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/assemblea-swissaccounting-melide.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Assemblea generale di SwissAccounting a Melide"
+      },
+      "datePublished": "2026-10-02T21:05:05+00:00",
+      "dateModified": "2026-10-02T21:05:05+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/assemblea-swissaccounting-melide/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
