@@ -149,6 +149,11 @@ const ITALIAN_RESIDUE_MIN_CONFIDENCE = 0.15;
 const ITALIAN_RESIDUE_HEADING_RE = /^(?:#{1,6}\s*)?(?:in breve|fatti chiave|domande frequenti|punti chiave|conclusione|conclusioni|fonti|consiglio pratico|cosa cambia|attenzione|da sapere|in sintesi)\s*:?[ \t]*$/iu;
 const ITALIAN_RESIDUE_WORD_RE = /[\p{L}]+(?:['’][\p{L}]+)*/gu;
 const ITALIAN_HEADING_HINT_RE = /\b(?:aggiornament(?:i|o)|canton(?:e|i)|contribut(?:i|o)|cos(?:a|e)|fiscal(?:e|i)|frontalier(?:a|e|i|o)|impatt(?:i|o)|impost(?:a|e)|italian(?:a|e|i|o)|lavorator(?:e|i)|misur(?:a|e)|nuov(?:a|e|i|o)|pension(?:e|i)|reddit(?:i|o)|regol(?:a|e)|salar(?:i|io)|tass(?:a|e)|ticin(?:o|esi)|titol(?:i|o))\b/iu;
+const AMBIGUOUS_ITALIAN_HEADING_HINT_RE = {
+  // `fiscale` is valid Italian and French. In French it must go through the
+  // detector instead of the unconditional short-heading fast-path.
+  fr: /\bfiscale\b/iu,
+};
 const LOCALIZED_HEADING_HINT_RE = {
   en: /\b(?:and|are|avoid|by|closure|contact|delays|do|facts|future|history|how|nutshell|our|phase|the|these|this|those|to|what|when|where|which|who|why|with|without|your)\b/iu,
   de: /\b(?:aber|auch|auf|aus|bei|das|der|die|digitale|ein|eine|einer|einem|einen|für|ist|mit|nach|nutzen|oder|praktische|schritt|straßennetz|stress|tools|über|und|unter|von|wichtig|zu|zum|zur)\b/iu,
@@ -244,7 +249,8 @@ function markdownHeadingText(line, nextLine, fenceState = null) {
 
 function italianMarkdownHeadingReason(text, locale) {
   const localizedHint = LOCALIZED_HEADING_HINT_RE[locale];
-  const hasItalianHint = ITALIAN_HEADING_HINT_RE.test(text);
+  const hasItalianHint = ITALIAN_HEADING_HINT_RE.test(text)
+    && !AMBIGUOUS_ITALIAN_HEADING_HINT_RE[locale]?.test(text);
   const detected = detectLanguageWithConfidence(text, locale);
 
   // Il detector trigramma puo' chiamare italiano un titolo breve inglese,

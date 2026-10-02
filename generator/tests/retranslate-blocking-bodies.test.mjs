@@ -425,6 +425,22 @@ test('lo scan risolve `qui` condiviso prima del fast-path francese', () => {
   assert.equal(hasItalianResidue({ body1 }, 'fr'), true);
 });
 
+test('lo scan non conta `fiscale` come residuo nei titoli francesi', () => {
+  const french = {
+    body1: [
+      '## Situation fiscale',
+      '## Convention fiscale',
+      '## Charge fiscale',
+    ].join('\n'),
+  };
+
+  assert.deepEqual(scanItalianResidue(french, 'fr'), []);
+  assert.equal(hasItalianResidue(french, 'fr'), false);
+  assert.deepEqual(scanItalianResidue({ body1: '## Situazione fiscale' }, 'fr').map((hit) => hit.text), [
+    'Situazione fiscale',
+  ]);
+});
+
 test('lo scan ignora heading localizzati in blockquote, lista e forma Setext', () => {
   const body1 = [
     '> ## What to do',
