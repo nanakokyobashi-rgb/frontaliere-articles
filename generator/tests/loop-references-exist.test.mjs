@@ -1555,6 +1555,15 @@ const DECLARED_ABSENT = {
       'Il file e\' `identical` nel manifest: riscriverla qui fabbricherebbe un `corpus-ahead` ' +
       'su un commento, quindi la correzione va fatta sul sito e fatta scendere.',
   },
+  'scripts/ci/harvest-agent-lessons.mjs :: unsubscribe-credential-monitor.yml': {
+    kind: 'site-only',
+    reason:
+      'Il commento sopra WORKFLOW_SCOPE_CREDS_RE nomina il workflow del sito dove e\' nato il falso ' +
+      'positivo (#10637 del sito): un path che contiene «credential» senza che il finding parli di ' +
+      'credenziali GitHub. E\' l\'esempio del caso, non un referente: lo script non legge, non esegue ' +
+      'e non dipende da quel workflow. Il file e\' `identical` nel manifest, quindi il commento resta ' +
+      'byte-identico al sito.',
+  },
   'scripts/ci/harvest-agent-lessons.mjs :: pr-body-contract.yml': {
     kind: 'retired',
     reason:
