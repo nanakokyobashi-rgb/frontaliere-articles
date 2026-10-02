@@ -14,6 +14,8 @@ test('triage-sweep si importa e non riesamina i pin locali senza routing', () =>
   assert.equal(isTriagedButNotRouted({ labels: [{ name: 'needs-human' }] }), false);
   assert.equal(isTriagedButNotRouted({ labels: [{ name: 'automation-deferred' }] }), false);
   assert.equal(isTriagedButNotRouted({ labels: [{ name: 'operations-audit-review' }] }), false);
+  assert.equal(isTriagedButNotRouted({ labels: [{ name: 'keep-open' }] }), false);
+  assert.equal(isTriagedButNotRouted({ labels: [{ name: 'agent:no-age-out' }] }), false);
   assert.equal(isTriagedButNotRouted({ labels: [] }), true);
   assert.equal(isTriagedButNotRouted({ labels: [{ name: 'agent:fix' }] }), false);
 });

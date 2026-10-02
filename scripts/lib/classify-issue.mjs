@@ -61,15 +61,22 @@
  *   node scripts/lib/classify-issue.mjs "<title>" '<labels-json-array>'
  */
 
-const FIXER_EXEMPT_LABELS = new Set(['backlog', 'needs-human', 'operations-audit-review']);
+const FIXER_EXEMPT_LABELS = new Set([
+  'backlog',
+  'needs-human',
+  'operations-audit-review',
+  'keep-open',
+  'agent:no-age-out',
+]);
 export const AUTOMATION_DEFERRED_LABEL = 'automation-deferred';
 
 /**
  * Labels che tengono un'issue fuori dal ciclo automatico del corpus.
  *
- * Il gemello del sito ha un set di pin diverso; qui la topologia locale è
- * `backlog`/`needs-human`/`operations-audit-review`, e `triage-sweep.mjs` deve
- * condividere questa decisione invece di duplicarla.
+ * Qui si aggiungono le label di stato proprie del corpus (`backlog`,
+ * `needs-human`, `operations-audit-review`); i pin permanenti `keep-open` e
+ * `agent:no-age-out` sono condivisi col gemello del sito. `triage-sweep.mjs`
+ * usa lo stesso predicato invece di duplicare la decisione.
  *
  * @param {Array<string|{name?: string}>} labels
  */
@@ -127,12 +134,12 @@ export function classifyIssue(title = '', labels = [], _body = '', _options = {}
   // è entrato in `agent:fix` nello stesso giorno. Non tocca `category`
   // (resta visibile per telemetria), solo il route — come `crawler-transient`.
   const needsHuman = has('needs-human');
-  const operationsAuditReview = has('operations-audit-review');
 
   // Come sul sito: nessuna categoria è human-only. Le safety-valve del fixer
   // (root-cause non determinabile, capability-guard su workflows/secret) sono
   // generiche e restano — non sono guardrail di categoria.
   const automationDeferred = has(AUTOMATION_DEFERRED_LABEL);
+  const fixerExempt = isFixerExempt(labels);
   const autofix = !needsHuman && !automationDeferred;
   // `crawler-transient` è l'esito, non un bug da instradare: la issue è già la
   // ledger (o un commento su di essa) che assorbe i blip sotto-soglia — vedi
@@ -144,7 +151,7 @@ export function classifyIssue(title = '', labels = [], _body = '', _options = {}
   // fin dalla nascita) è finita in coda ed è stata promossa al fixer. Il guard
   // vive qui, sorgente unica per entrambi i percorsi.
   const route =
-    has('backlog') || has('crawler-transient') || needsHuman || operationsAuditReview || automationDeferred
+    fixerExempt || has('crawler-transient') || automationDeferred
       ? 'none'
       : category === 'publish'
         ? 'fix'
