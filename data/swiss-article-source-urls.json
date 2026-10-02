@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1947576/novartis-posti-lavoro-produzione-campus": {
-    "articleId": "novartis-130-ristrutturazione-basilea",
-    "ts": "2026-09-02T14:56:07.344Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/franco%3a-scende-ancora-rispetto-all%27euro%2c-ai-minimi-da-un-anno/91993996": {
     "articleId": "franco-euro-minimi-anno",
     "ts": "2026-09-02T15:41:21.798Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/politica/1954231/la-mia-salute-non-c-entra-nulla": {
     "articleId": "dimissioni-guy-parmelin-2026",
     "ts": "2026-10-02T16:44:51.708Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/novartis%3a-accordo-con-biotech-cinese%2c-pagamenti-fino-a-7-miliardi/92159315": {
+    "articleId": "novartis-abo2203-rna-licenza",
+    "ts": "2026-10-02T18:52:21.250Z",
     "keyForm": 2
   }
 }

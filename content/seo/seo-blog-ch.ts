@@ -97910,6 +97910,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-novartis-abo2203-rna-licenza': {
+    title: 'Novartis e Abogen: licenza RNA fino a 7,2 miliardi',
+    description: 'Novartis ottiene da Abogen la licenza mondiale su ABO2203: 575 milioni di dollari iniziali, fino a 7,2 miliardi con opzioni, sviluppo clinico e approvazione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, novartis, abogen, licenza, fino',
+    ogTitle: 'Novartis e Abogen: licenza RNA fino a 7,2 miliardi',
+    ogDescription: 'Un accordo porta a Novartis la licenza esclusiva mondiale su ABO2203, terapia a mRNA contro i linfociti B. Abogen riceve 575 milioni di dollari iniziali; opzioni e traguardi possono portare i pagamenti a circa 7,2 miliardi.',
+    canonicalPath: '/articoli-svizzera/novartis-abo2203-rna-licenza/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Novartis e Abogen: licenza RNA fino a 7,2 miliardi",
+      "description": "Novartis ottiene da Abogen la licenza mondiale su ABO2203: 575 milioni di dollari iniziali, fino a 7,2 miliardi con opzioni, sviluppo clinico e approvazione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/novartis-abo2203-rna-licenza.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Laboratorio farmaceutico svizzero con visualizzazione grafica dell'RNA"
+      },
+      "datePublished": "2026-10-02T18:52:20+00:00",
+      "dateModified": "2026-10-02T18:52:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/novartis-abo2203-rna-licenza/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
