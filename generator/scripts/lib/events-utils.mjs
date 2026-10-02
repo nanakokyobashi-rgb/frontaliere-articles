@@ -1402,6 +1402,10 @@ export function eventStableId(sourceKey, rawId) {
 // must live in one shared module).
 const PRICE_FREE_RE = /\b(gratis|gratuit(?:[oaie])?|free(?:\s+(?:entry|admission|entrance))?|kostenlos|eintritt\s+frei|(?:ingresso|entrata)\s+(?:libero|gratuito|libera)|entr[ée]e\s+(?:libre|gratuite))\b/iu;
 const PRICE_AMOUNT_RE = /(?<![\p{L}\p{N}])(?:\d{1,3}(?:['’\s]\d{3})+|\d{1,5})(?:[.,]\d{1,2})?(?![\p{L}\p{N}])/gu;
+// A value that occupies the price field by itself is already price context.
+// Keep this explicit path before the prose-context guard: the old parser
+// published a bare `20` as 20 CHF, while dates/phones remain protected below.
+const PRICE_BARE_NUMBER_RE = /^(?:\d{1,3}(?:['’\s]\d{3})+|\d{1,5})(?:[.,]\d{1,2})?$/u;
 const PRICE_CONTEXT_RE = /(?:\b(?:price|prices|prezzo|preise?|prix|tariffa|tarif|admission|entry|entrance|ingresso|entrata|eintritt|pro\s+person|per\s+person|par\s+personne|per\s+persona)\b|(?:CHF|EUR|€|S?Fr\.?|francs?|franchi|franken)|\d[.,]?\s*[–—-]{1,2})/iu;
 const PRICE_DATE_OR_PHONE_RE = /(?:\b\d{1,2}[./-]\d{1,2}[./-]\d{2,4}\b|\b(?:19|20)\d{2}[./-]\d{1,2}[./-]\d{1,2}\b|\+?\d[\d\s()./-]{6,}\d\b)/u;
 const PRICE_PHONE_RE = /\+?\d[\d\s()./-]{6,}\d/u;
@@ -1437,6 +1441,10 @@ export function parsePriceText(rawText) {
   }
   if (free && !PRICE_PHONE_RE.test(t)) return priceResult({ amount: 0, currency: 'CHF', isFree: true }, 'label-free');
   if (/^0(?:[.,]0{1,2}|[.][–—-]{1,2})?$/u.test(t)) return priceResult({ amount: 0, currency: 'CHF', isFree: true }, 'numeric');
+  if (PRICE_BARE_NUMBER_RE.test(t)) {
+    const amount = Number.parseFloat(t.replace(/['’\s]/g, '').replace(',', '.'));
+    if (Number.isFinite(amount)) return priceResult({ amount, currency: 'CHF', isFree: amount === 0 }, 'numeric');
+  }
   if (!PRICE_CONTEXT_RE.test(t) || PRICE_DATE_OR_PHONE_RE.test(t)) return priceResult({ amount: null, currency: 'CHF', isFree: false }, 'unknown');
   const numbers = [];
   PRICE_AMOUNT_RE.lastIndex = 0;
