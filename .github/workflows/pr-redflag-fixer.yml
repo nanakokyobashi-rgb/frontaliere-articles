@@ -748,16 +748,43 @@ jobs:
             echo "retryable=true" >> "$GITHUB_OUTPUT"
             exit 1
           fi
-          if ! ROUND=$(printf '%s' "$round_state" | jq -er \
+          if ! round_state_status=$(printf '%s' "$round_state" | jq -er \
             --arg expected "${{ needs.preflight.outputs.head_sha }}" \
             --arg expected_body "$marker_body_revision_before" --argjson max "$MAX_ROUNDS" \
-            'if type == "object" and .headSha == $expected and .bodyRevision == $expected_body and (.round | type == "number" and floor == . and . >= 0 and . <= $max) then (.round | tostring) else error("round state stale or malformed") end'); then
-            echo "::error::Round REDFLAG_FIX_ROUND stale/malformato rispetto a HEAD o cap: nessun Codex, stato retryable."
+            'def sha40: if type == "string" then test("^[a-f0-9]{40}$") else false end;
+             def sha64: if type == "string" then test("^[a-f0-9]{64}$") else false end;
+             if (($expected | sha40) | not) or (($expected_body | sha64) | not) then error("expected round snapshot malformed")
+             elif type != "object" then error("round state is not an object")
+             elif ((.headSha | sha40) | not) or ((.bodyRevision | sha64) | not) then error("round snapshot malformed")
+             elif (.round | type) != "number" or (.round | floor) != .round or .round < 0 or .round > $max then error("round is outside the bounded range")
+             elif .headSha != $expected then "head-stale"
+             elif .bodyRevision != $expected_body then error("round state body snapshot stale")
+             else ("current:" + (.round | tostring)) end'); then
+            echo "::error::Round REDFLAG_FIX_ROUND non classificabile: snapshot stale o malformed, nessun Codex, stato retryable."
             echo "proceed=false" >> "$GITHUB_OUTPUT"
             echo "marker_verified=false" >> "$GITHUB_OUTPUT"
             echo "retryable=true" >> "$GITHUB_OUTPUT"
             exit 1
           fi
+          case "$round_state_status" in
+            head-stale)
+              echo "::notice::HEAD della review superata dopo il preflight → redflag fixer no-op, nessun round o Codex consumato."
+              echo "proceed=false" >> "$GITHUB_OUTPUT"
+              echo "marker_verified=false" >> "$GITHUB_OUTPUT"
+              echo "retryable=false" >> "$GITHUB_OUTPUT"
+              exit 0
+              ;;
+            current:*)
+              ROUND="${round_state_status#current:}"
+              ;;
+            *)
+              echo "::error::Round REDFLAG_FIX_ROUND malformato rispetto al cap: nessun Codex, stato retryable."
+              echo "proceed=false" >> "$GITHUB_OUTPUT"
+              echo "marker_verified=false" >> "$GITHUB_OUTPUT"
+              echo "retryable=true" >> "$GITHUB_OUTPUT"
+              exit 1
+              ;;
+          esac
           NEXT=$((ROUND + 1))
           echo "Round 🔴-fix correnti: $ROUND (cap $MAX_ROUNDS)"
 
