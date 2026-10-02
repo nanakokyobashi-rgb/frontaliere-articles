@@ -2516,6 +2516,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'aprire-attivita-grigioni-guida-costi': { it: 'aprire-attivita-grigioni-guida-costi', en: 'start-business-grisons-cost-guide', de: 'unternehmen-graubuenden-kosten-leitfaden', fr: 'ouvrir-entreprise-grisons-guide-couts' },
  'remunerazioni-ail-mps-lugano': { it: 'remunerazioni-ail-mps-lugano', en: 'ail-remunerations-mps-lugano', de: 'ail-verguetungen-mps-lugano', fr: 'remunerations-ail-mps-lugano' },
  'fallimenti-aziendali-ticino-media': { it: 'fallimenti-aziendali-ticino-media', en: 'corporate-bankruptcies-ticino-average', de: 'firmenkonkurse-tessin-durchschnitt', fr: 'faillites-entreprises-ticino-moyenne' },
+ 'rientro-maternita-filanda': { it: 'rientro-maternita-filanda', en: 'return-to-work-maternity-filanda', de: 'wiedereinstieg-mutterschaft-filanda', fr: 'retour-travail-maternite-filanda' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

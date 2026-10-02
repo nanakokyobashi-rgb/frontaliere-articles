@@ -7481,6 +7481,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.fallimenti-aziendali-ticino-media.title': 'Bankruptcies on the rise. And Ticino is above average',
     'blog.article.fallimenti-aziendali-ticino-media.excerpt': 'In the first nine months of the year, corporate bankruptcies in Switzerland rose to 11,412 (+37%). Ticino recorded 721 bankruptcies, an increase of 48%.',
     'blog.article.fallimenti-aziendali-ticino-media.imageAlt': 'Increase in corporate bankruptcies and new companies in Ticino',
+    'blog.article.rientro-maternita-filanda.title': 'Returning to Work After Maternity Leave: Events in Mendrisio',
+    'blog.article.rientro-maternita-filanda.excerpt': 'The cities of Chiasso and Mendrisio are offering a free program at LaFilanda that includes counseling sessions, meetings, and childcare services to help women return to work after maternity leave.',
+    'blog.article.rientro-maternita-filanda.imageAlt': 'LaFilanda in Mendrisio, venue for meetings on returning to work after maternity.',
 };
 
 export default blogMetaChEn;

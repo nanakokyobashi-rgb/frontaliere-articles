@@ -7481,6 +7481,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.fallimenti-aziendali-ticino-media.title': 'Die Zahl der Insolvenzen steigt. Und das Tessin liegt über dem Durchschnitt',
     'blog.article.fallimenti-aziendali-ticino-media.excerpt': 'In den ersten neun Monaten des Jahres stieg die Zahl der Unternehmenskonkurse in der Schweiz auf 11\'412 (+37 %). Im Tessin wurden 721 Konkurse verzeichnet, was einem Anstieg von 48 % entspricht.',
     'blog.article.fallimenti-aziendali-ticino-media.imageAlt': 'Zunahme von Firmenkonkursen und Neugründungen im Tessin',
+    'blog.article.rientro-maternita-filanda.title': 'Rückkehr in den Beruf nach dem Mutterschaftsurlaub: Veranstaltungen in Mendrisio',
+    'blog.article.rientro-maternita-filanda.excerpt': 'Die Städte Chiasso und Mendrisio bieten bei LaFilanda ein kostenloses Programm mit Beratungsgesprächen, Treffen und Kinderbetreuung an, um Frauen den Wiedereinstieg in den Beruf nach der Mutterschaft zu erleichtern.',
+    'blog.article.rientro-maternita-filanda.imageAlt': 'LaFilanda in Mendrisio, Treffpunkt für den Wiedereinstieg nach der Mutterschaft.',
 };
 
 export default blogMetaChDe;

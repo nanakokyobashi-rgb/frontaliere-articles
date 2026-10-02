@@ -7481,6 +7481,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.fallimenti-aziendali-ticino-media.title': 'Fallimenti in aumento. E il Ticino è sopra la media',
     'blog.article.fallimenti-aziendali-ticino-media.excerpt': 'Nei primi nove mesi dell\'anno i fallimenti aziendali in Svizzera salgono a 11\'412 (+37%). Il Ticino registra 721 bancarotte e un incremento del 48%.',
     'blog.article.fallimenti-aziendali-ticino-media.imageAlt': 'Aumento dei fallimenti aziendali e nuove ditte in Ticino',
+    'blog.article.rientro-maternita-filanda.title': 'Rientro al lavoro dopo la maternità: incontri a Mendrisio',
+    'blog.article.rientro-maternita-filanda.excerpt': 'Le Città di Chiasso e Mendrisio promuovono a LaFilanda un percorso gratuito con colloqui, incontri e babysitting per il rientro al lavoro dopo la maternità.',
+    'blog.article.rientro-maternita-filanda.imageAlt': 'LaFilanda di Mendrisio, sede degli incontri sul rientro al lavoro dopo la maternità.',
 };
 
 export default blogMetaChIt;

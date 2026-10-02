@@ -7481,6 +7481,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.fallimenti-aziendali-ticino-media.title': 'Les faillites sont en hausse. Et le Tessin se situe au-dessus de la moyenne',
     'blog.article.fallimenti-aziendali-ticino-media.excerpt': 'Au cours des neuf premiers mois de l\'année, le nombre de faillites d\'entreprises en Suisse s\'élève à 11 412 (+37 %). Le Tessin enregistre 721 faillites, soit une hausse de 48 %.',
     'blog.article.fallimenti-aziendali-ticino-media.imageAlt': 'Augmentation des faillites d\'entreprises et nouvelles sociétés au Tessin',
+    'blog.article.rientro-maternita-filanda.title': 'Retour au travail après un congé maternité : rencontres à Mendrisio',
+    'blog.article.rientro-maternita-filanda.excerpt': 'Les villes de Chiasso et de Mendrisio proposent à LaFilanda un parcours gratuit comprenant des entretiens, des rencontres et un service de garde d\'enfants pour faciliter le retour au travail après un congé maternité.',
+    'blog.article.rientro-maternita-filanda.imageAlt': 'LaFilanda à Mendrisio, lieu des rencontres sur le retour au travail après la maternité.',
 };
 
 export default blogMetaChFr;
