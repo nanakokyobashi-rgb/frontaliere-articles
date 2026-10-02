@@ -96818,6 +96818,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-cambio-cassa-sondaggio': {
+    title: 'Premi cassa malati 2027: cresce il cambio di cassa',
+    description: 'Deloitte stima 600\'000-900\'000 cambi di cassa malati. Nel 2027 il premio medio salirà del 5% a 412 franchi al mese, con 19,70 franchi in più in media.',
+    keywords: 'frontalieri, ticino, svizzera, italia, premi, cassa, malati, cresce',
+    ogTitle: 'Premi 2027: 600\'000-900\'000 cambi di cassa',
+    ogDescription: 'Il sondaggio YouGov citato da Deloitte segnala una maggiore attenzione ai costi: più della metà verifica ogni anno l\'assicurazione malattia. Con un rincaro di 20 franchi al mese per persona, un assicurato su due valuta il cambio.',
+    canonicalPath: '/articoli-svizzera/cambio-cassa-sondaggio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Premi cassa malati 2027: cresce il cambio di cassa",
+      "description": "Deloitte stima 600'000-900'000 cambi di cassa malati. Nel 2027 il premio medio salirà del 5% a 412 franchi al mese, con 19,70 franchi in più in media.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/cambio-cassa-sondaggio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documenti e calcolatrice per valutare i premi della cassa malati in Svizzera"
+      },
+      "datePublished": "2026-10-02T06:43:46+00:00",
+      "dateModified": "2026-10-02T06:43:46+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/cambio-cassa-sondaggio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
