@@ -216,9 +216,30 @@ jobs:
             exit 0
           fi
           git status --porcelain -- content/ | head -20 || true
+          if node --test \
+            generator/tests/article-fabrication-guard.test.mjs \
+            generator/tests/prompt-placeholder-guard.test.mjs; then
+            :
+          else
+            {
+              echo "### ✖ Scrittura RIFIUTATA prima del commit — \`publish-journalist-articles\`"
+              echo
+              echo "\`article-fabrication-guard\` / \`prompt-placeholder-guard\` hanno trovato offender nel corpus dopo la scrittura."
+              echo "**Niente e' stato committato**: le modifiche restano sul runner e spariscono con lui, \`main\` non le vede."
+              echo
+              echo "Gli offender sono elencati per path nel log di questo step. Confrontali con i path stampati sopra da \`git status\`:"
+              echo
+              echo "- se coincidono, il difetto e' di cio' che questo run ha appena scritto: gli id restano \`published\` in Firestore e vanno rimessi in coda a mano;"
+              echo "- se NON coincidono, il difetto e' **preesistente nel corpus** e va riparato prima — finche' resta li', ogni run che scrive muore qui."
+            } >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+
           # FU-009: this writer bypasses generate-article.yml, but it still
           # registers the same localized body files. Reject the write before
-          # the commit if any EN/DE/FR body key is missing or empty.
+          # the commit if any EN/DE/FR body key is missing or empty. Keep this
+          # after the corpus guards, matching generate-article.yml: the node
+          # test contract must exercise both corpus suites when they are red.
           if ! node scripts/ci/check-blog-locale-completeness.mjs; then
             {
               echo "### ✖ Scrittura RIFIUTATA prima del commit — localizzazione incompleta"
@@ -230,23 +251,7 @@ jobs:
             } >> "$GITHUB_STEP_SUMMARY"
             exit 1
           fi
-          if node --test \
-            generator/tests/article-fabrication-guard.test.mjs \
-            generator/tests/prompt-placeholder-guard.test.mjs; then
-            exit 0
-          fi
-          {
-            echo "### ✖ Scrittura RIFIUTATA prima del commit — \`publish-journalist-articles\`"
-            echo
-            echo "\`article-fabrication-guard\` / \`prompt-placeholder-guard\` hanno trovato offender nel corpus dopo la scrittura."
-            echo "**Niente e' stato committato**: le modifiche restano sul runner e spariscono con lui, \`main\` non le vede."
-            echo
-            echo "Gli offender sono elencati per path nel log di questo step. Confrontali con i path stampati sopra da \`git status\`:"
-            echo
-            echo "- se coincidono, il difetto e' di cio' che questo run ha appena scritto: gli id restano \`published\` in Firestore e vanno rimessi in coda a mano;"
-            echo "- se NON coincidono, il difetto e' **preesistente nel corpus** e va riparato prima — finche' resta li', ogni run che scrive muore qui."
-          } >> "$GITHUB_STEP_SUMMARY"
-          exit 1
+          exit 0
 
       - name: Commit and push registered articles
         id: commit
