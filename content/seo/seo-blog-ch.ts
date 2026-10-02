@@ -97637,6 +97637,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-cassa-malati-premi-ticino-aumento': {
+    title: 'Cassa malati: non chiamiamolo un successo | Frontaliere Ticino',
+    description: 'Premi in Ticino aumenteranno del 3,7% nel 2027 contro il 5% medio svizzera. Il premio medio raggiunge 519,90 franchi, +56% in un decennio. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, cassa, malati, chiamiamolo, successo',
+    ogTitle: 'Premi cassa malati Ticino: +3,7% nel 2027',
+    ogDescription: 'Nel 2027 i premi in Ticino aumenteranno del 3,7%, contro il 5% della media svizzera. Il premio medio raggiungerà 519,90 franchi al mese, con un aumento del 56% in un decennio.',
+    canonicalPath: '/articoli-svizzera/cassa-malati-premi-ticino-aumento/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cassa malati: non chiamiamolo un successo",
+      "description": "Premi in Ticino aumenteranno del 3,7% nel 2027 contro il 5% medio svizzera. Il premio medio raggiunge 519,90 franchi, +56% in un decennio. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/cassa-malati-premi-ticino-aumento.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista sul lago di Lugano con struttura sanitaria sullo sfondo, simbolo dei costi della sanità in Ticino"
+      },
+      "datePublished": "2026-10-02T15:14:14+00:00",
+      "dateModified": "2026-10-02T15:14:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/cassa-malati-premi-ticino-aumento/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
