@@ -406,6 +406,25 @@ test('lo scan conserva heading italiani non canonici anche dentro Markdown', () 
   assert.equal(scanItalianResidue({ body1: '## Salari e contributi' }, 'en').length, 1);
 });
 
+test('lo scan conserva heading italiani brevi con flessioni comuni', () => {
+  for (const title of ['Redditi', 'Pensioni', 'Tasse']) {
+    assert.deepEqual(scanItalianResidue({ body1: `## ${title}` }, 'en'), [{
+      field: 'body1',
+      line: 1,
+      reason: 'language',
+      text: title,
+    }]);
+  }
+});
+
+test('lo scan risolve `qui` condiviso prima del fast-path francese', () => {
+  const body1 = Array.from({ length: ITALIAN_RESIDUE_MIN_LINES }, () => '## Qui sono le novità').join('\n');
+  const hits = scanItalianResidue({ body1 }, 'fr');
+  assert.equal(hits.length, ITALIAN_RESIDUE_MIN_LINES);
+  assert.ok(hits.every((hit) => hit.reason === 'language'));
+  assert.equal(hasItalianResidue({ body1 }, 'fr'), true);
+});
+
 test('lo scan ignora heading localizzati in blockquote, lista e forma Setext', () => {
   const body1 = [
     '> ## What to do',
@@ -415,6 +434,31 @@ test('lo scan ignora heading localizzati in blockquote, lista e forma Setext', (
   ].join('\n');
 
   assert.deepEqual(scanItalianResidue({ body1 }, 'en'), []);
+});
+
+test('lo scan ignora ATX e Setext dentro fenced code con stato per campo', () => {
+  const body1 = [
+    '```markdown',
+    '## Redditi',
+    'Pensioni',
+    '---',
+    '```',
+    '~~~markdown',
+    '## Tasse',
+    'Redditi',
+    '---',
+    '~~~',
+    '## Redditi',
+  ].join('\n');
+  assert.deepEqual(scanItalianResidue({
+    body1,
+    body2: '```\n## Pensioni\n```',
+  }, 'en'), [{
+    field: 'body1',
+    line: 11,
+    reason: 'language',
+    text: 'Redditi',
+  }]);
 });
 
 test('la soglia lascia fuori una riga italiana isolata e il locale sorgente', () => {
