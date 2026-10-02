@@ -547,6 +547,24 @@ test('lo scan non tratta un info string backtick non valido come chiusura', () =
   }]);
 });
 
+test('lo scan ignora anche il contenuto indentato della fence in lista', () => {
+  const body1 = [
+    '- ```markdown',
+    '  ## Redditi',
+    '  Pensioni',
+    '  Tasse',
+    '  ```',
+    '## Redditi',
+  ].join('\n');
+
+  assert.deepEqual(scanItalianResidue({ body1 }, 'en'), [{
+    field: 'body1',
+    line: 6,
+    reason: 'language',
+    text: 'Redditi',
+  }]);
+});
+
 test('lo scan richiede container compatibili tra titolo Setext e underline', () => {
   const mismatched = [
     '> Redditi italiani',
