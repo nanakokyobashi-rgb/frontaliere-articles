@@ -39,3 +39,11 @@ public/images/events/*
 # `git commit -F`, non e' un artefatto del repo. Committato una volta (#899),
 # rimosso e ignorato qui.
 .git-commit-msg.txt
+
+# Worktree degli agenti (fast-worktree, EnterWorktree, Codex): non sono
+# contenuto del repo, e senza queste righe compaiono come non tracciati nel
+# checkout principale. Le stesse cartelle che lo sweep dei worktree
+# (scripts/prune-merged-worktrees.mjs del sito) pulisce.
+.wt/
+.worktrees/
+.claude/worktrees/
