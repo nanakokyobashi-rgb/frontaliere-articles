@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/egx1xhifgtun": {
-    "articleId": "postazione-lavoro-sovranita-digitale",
-    "ts": "2026-09-02T10:24:41.647Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4054524": {
     "articleId": "aiuti-malattie-rare-2025",
     "ts": "2026-09-02T11:33:45.167Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/politica/1954249/parmelin-dovra-svizzera-successore-sfide-dazi-agricoltura": {
     "articleId": "defr-successore-parmelin-sfide",
     "ts": "2026-10-02T12:42:35.921Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/l-zk1ztp5vve": {
+    "articleId": "proroga-aiuto-monetario-fmi",
+    "ts": "2026-10-02T13:01:16.783Z",
     "keyForm": 2
   }
 }

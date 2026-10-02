@@ -97403,6 +97403,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-proroga-aiuto-monetario-fmi': {
+    title: 'Aiuto monetario: proroga a 10 mld fino al 2033',
+    description: 'Il Consiglio federale propone di prorogare l\'aiuto monetario internazionale fino ad aprile 2033 con un tetto di 10 miliardi di franchi. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, aiuto, monetario, proroga, fino',
+    ogTitle: 'Aiuto monetario: proroga a 10 mld fino al 2033',
+    ogDescription: 'Il Consiglio federale ha approvato il messaggio per prorogare l\'aiuto monetario internazionale fino ad aprile 2033. Il tetto massimo resta di 10 miliardi di franchi. La quota FMI svizzera vale circa 90 milioni. Scopri i dettagli del dossier federale.',
+    canonicalPath: '/articoli-svizzera/proroga-aiuto-monetario-fmi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aiuto monetario: proroga a 10 mld fino al 2033",
+      "description": "Il Consiglio federale propone di prorogare l'aiuto monetario internazionale fino ad aprile 2033 con un tetto di 10 miliardi di franchi. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/proroga-aiuto-monetario-fmi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Il Palazzo federale a Berna, sede del Consiglio federale che ha approvato il messaggio."
+      },
+      "datePublished": "2026-10-02T13:01:16+00:00",
+      "dateModified": "2026-10-02T13:01:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/proroga-aiuto-monetario-fmi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
