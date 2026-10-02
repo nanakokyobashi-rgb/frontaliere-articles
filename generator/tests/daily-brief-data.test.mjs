@@ -749,3 +749,29 @@ test('a block degraded edition after edition raises an alarm instead of degradin
   assert.equal(recovered.blocks.jobs.degradedEditions, 0);
   assert.deepEqual(degradationAlarms(recovered), []);
 });
+
+// Review on nanakokyobashi-rgb/frontaliere-articles 2037: a timestamp in the
+// future made `nowMs - ts` negative and passed every freshness guard.
+test('treats a source timestamp in the future as not fresh', () => {
+  const future = '2026-08-08T09:00:00.000Z';
+  const docs = manyCrossings(BORDER_WAIT_MIN_CROSSINGS + 5).map((doc, index) => (index === 0 ? { ...doc, lastUpdate: future } : doc));
+  const border = shapeBorderWait(docs, { nowMs: NOW });
+  assert.equal(border.available, true);
+  assert.equal(border.crossings.some((row) => row.slug === 'brogeda'), false);
+  assert.ok(Date.parse(border.updatedAt) <= NOW);
+
+  const fuel = shapeFuel({ ...FUEL_META, generatedAt: future }, { nowMs: NOW });
+  assert.equal(fuel.available, false);
+  assert.match(fuel.reason, /in the future/);
+
+  const jobs = shapeJobs({ ...JOBS_STATS, generatedAt: future }, { nowMs: NOW, todayIso: TODAY });
+  assert.equal(jobs.available, false);
+  assert.match(jobs.reason, /in the future/);
+});
+
+test('exchange: degrades when the latest point is dated after today', () => {
+  const ahead = { points: [...EXCHANGE_DOC.points, { date: '2026-08-12', rate: 1.07 }] };
+  const block = shapeExchange(ahead, { todayIso: TODAY });
+  assert.equal(block.available, false);
+  assert.match(block.reason, /after today/);
+});
