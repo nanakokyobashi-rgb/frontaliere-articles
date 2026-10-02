@@ -778,7 +778,7 @@
     "vivere a Proserpio e lavorare in Ticino da frontaliere": 1,
     "vivere a Merone e lavorare in Ticino da frontaliere": 2,
     "imposta di successione e donazione canton Friburgo aliquote": 2,
-    "salario medio professioni svizzera 2026 canton Zurigo": 1
+    "salario medio professioni svizzera 2026 canton Zurigo": 2
   },
   "topicGateUrls": {
     "svizzera::https://www.admin.ch/it/newnsb/l6pd-kzlx5xp": {
@@ -888,6 +888,10 @@
     "svizzera::https://www.tio.ch/ticino/cronaca/1954320/a2-rega-autostrada-soccorso-elicottero": {
       "section": "svizzera",
       "ts": 1790960721177
+    },
+    "svizzera::https://www.tio.ch/ticino/attualita/1954316/occhio-all-acceleratore-il-piede-pesante-si-paga": {
+      "section": "svizzera",
+      "ts": 1790963159924
     }
   }
 }
