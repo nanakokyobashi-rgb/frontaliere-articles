@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/svizzera-sta-diventando-meno-attrattiva-per-le-multinazionali/91994544": {
-    "articleId": "svizzera-perde-attrattiva-multinazionali",
-    "ts": "2026-09-02T14:19:40.736Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/cf%3a-politica-agricola-2030%2c-pi%c3%b9-margine-di-manovra-a-agricoltori/91993680": {
     "articleId": "pa30-autonomia-agricoltori",
     "ts": "2026-09-02T14:41:47.799Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/parmelin%3a-il-mondo-economico-lo-ringrazia/92156531": {
     "articleId": "annuncio-parmelin-sgravio-2024",
     "ts": "2026-10-02T15:48:02.008Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/xtlaal5ambw0": {
+    "articleId": "inventario-idroelettrico-storico",
+    "ts": "2026-10-02T16:30:37.635Z",
     "keyForm": 2
   }
 }
