@@ -97208,6 +97208,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-automazione-ia-amministrazione-federale': {
+    title: 'IA e automazione: piano per l\'efficienza federale',
+    description: 'Il Consiglio federale adotta il rapporto 2 ottobre 2026 su automazione e IA. Cinque priorità per semplificare procedure e ridurre i tempi di attesa',
+    keywords: 'frontalieri, ticino, svizzera, italia, automazione, piano, efficienza, federale',
+    ogTitle: 'IA e automazione: piano per l\'efficienza federale',
+    ogDescription: 'Il Consiglio federale ha adottato il 2 ottobre 2026 un rapporto per aumentare l\'efficienza dell\'Amministrazione federale tramite automazione e IA. Obiettivo: semplificare procedure, ridurre tempi di attesa e ottimizzare le risorse umane',
+    canonicalPath: '/articoli-svizzera/automazione-ia-amministrazione-federale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "IA e automazione: piano per l'efficienza federale",
+      "description": "Il Consiglio federale adotta il rapporto 2 ottobre 2026 su automazione e IA. Cinque priorità per semplificare procedure e ridurre i tempi di attesa",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/automazione-ia-amministrazione-federale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio dell'Amministrazione federale con schermi digitali per automazione e intelligenza artificiale"
+      },
+      "datePublished": "2026-10-02T11:41:29+00:00",
+      "dateModified": "2026-10-02T11:41:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/automazione-ia-amministrazione-federale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

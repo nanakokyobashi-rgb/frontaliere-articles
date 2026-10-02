@@ -1,9 +1,4 @@
 {
-  "https://www.seco.admin.ch/it/newnsb/hcqnhgqawauv": {
-    "articleId": "programma-modernizzazione-alberghi-montagna",
-    "ts": "2026-09-02T09:06:54.841Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/qehxviifpjad": {
     "articleId": "voto-elettronico-neuchatel-2028",
     "ts": "2026-09-02T09:15:51.327Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/forte-aumento-dei-fallimenti-aziendali-in-svizzera/92156067": {
     "articleId": "bancarotte-imprese-nove-mesi",
     "ts": "2026-10-02T11:28:26.988Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/nj04ugpffuoa": {
+    "articleId": "automazione-ia-amministrazione-federale",
+    "ts": "2026-10-02T11:41:30.073Z",
     "keyForm": 2
   }
 }
