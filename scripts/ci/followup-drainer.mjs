@@ -70,6 +70,7 @@ import { FIX_OUTCOME_RE, TITLE_RE as RECONCILER_TITLE_RE } from './close-recover
 import { runBudgetFromEnv } from './lib/run-budget.mjs';
 import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
 import { pinnedBy } from './manifest-pinned-issues.mjs';
+import { conflictHandoffOriginPr } from './check-issue-already-resolved.mjs';
 import {
   bucketState,
   dailyKeyFromBucketBody,
@@ -1756,18 +1757,75 @@ export function groupIssueQueue(issues, {
  * Dato l'array di path del candidato e una mappa PR→files (pre-caricata),
  * ritorna il PRIMO overlap trovato {prNumber, prTitle, file} o null se nessuno.
  * Pura (niente gh) → testabile in unit test senza mock.
+ * Le PR ferme (`STALLED_PR_LABELS`) non contano come overlap, e nemmeno la PR
+ * di origine di un hand-off di conflitto (`ignorePr`): quell'issue la sostituisce.
  * @param {string[]} paths
- * @param {Map<number, {title:string, files:Set<string>}>} prFilesMap
+ * @param {Map<number, {title:string, files:Set<string>, labels?:string[]}>} prFilesMap
  * @returns {{prNumber:number, prTitle:string, file:string}|null}
  */
-export function findOverlapFile(paths, prFilesMap) {
+// Gemello del sito (valerielinc-ops/frontaliere-si-o-no#10708). Una PR FERMA
+// non e' «lavoro in volo»: l'overlap esiste per aspettare che una PR in corsa
+// mergi, e queste non mergeranno da sole. `has-conflicts` aspetta a sua volta
+// un hand-off o un recycle, `stale-review` e' ferma su uno stallo noto,
+// `needs-human` e' fuori dal ciclo. Aspettarle chiude un cerchio: sul sito
+// #10586/#10587 sono finite `fu-parked` dopo tre rinvii per un file «in volo»
+// in #10555, a sua volta in conflitto. Se la PR nuova mergia per prima, quella
+// ferma va in conflitto e il suo hand-off la riapplica sopra: la catena converge.
+export const STALLED_PR_LABELS = Object.freeze(['has-conflicts', 'stale-review', 'needs-human']);
+
+export function isStalledPr(labels = []) {
+  return (labels || []).some((label) => STALLED_PR_LABELS.includes(
+    typeof label === 'string' ? label : label?.name,
+  ));
+}
+
+export function findOverlapFile(paths, prFilesMap, { ignorePr = null } = {}) {
   if (!(prFilesMap instanceof Map)) return null;
-  for (const [prNumber, { title, files }] of prFilesMap) {
+  for (const [prNumber, { title, files, labels = [] }] of prFilesMap) {
+    if (ignorePr !== null && Number(prNumber) === Number(ignorePr)) continue;
+    if (isStalledPr(labels)) continue;
     for (const p of paths) {
       if (files.has(p)) return { prNumber, prTitle: String(title || ''), file: p };
     }
   }
   return null;
+}
+
+// --- OVERLAP DICHIARATO DAL FIXER --------------------------------------------
+// Gemello del sito (valerielinc-ops/frontaliere-si-o-no#10714). Il pre-flight
+// qui sopra vede solo i path di CODE_PATH_RE; il fixer applica la regola
+// Overlap-file del suo prompt a qualunque file citato, `generator/tests/`
+// compreso. Quando il fixer rinvia (`FIX_OUTCOME: overlap-skip`) su un file che
+// il drainer non vede, il rescue lo contava come run morta: `fu-attempt`++,
+// ri-promozione al tick dopo, stesso rinvio, fino a `fu-parked`, senza che il
+// fixer avesse mai potuto provare.
+//
+// La PR che il fixer nomina nel suo commento diventa la condizione di rinvio:
+// finché resta aperta e attiva (non ferma, `isStalledPr`) la issue torna in coda
+// SENZA consumare un tentativo e il drain non la promuove; appena la PR mergia,
+// si chiude o si ferma, la issue riparte. Bounded: un giro gratuito richiede una
+// PR attiva diversa a ogni rinvio. PR illeggibile o non nominata → come prima
+// (tentativo consumato al rescue, promozione al drain).
+
+/** PR nominata dall'ultimo verdetto del fixer, se quel verdetto è `overlap-skip`. Pura. */
+export function overlapSkipBlocker(comments) {
+  const latest = latestFixOutcomeEntryFromComments(comments);
+  if (latest.outcome !== 'overlap-skip') return null;
+  const comment = (comments || []).find((c) => {
+    const match = FIX_OUTCOME_RE.exec(String(c?.body || ''));
+    return match && match[1].toLowerCase() === 'overlap-skip'
+      && Date.parse(String(c?.createdAt ?? c?.created_at ?? '')) === latest.at;
+  });
+  // La forma del prompt («già in volo nella PR #<n>») prima di qualunque altra
+  // PR citata: in un hand-off il commento nomina anche la PR da riapplicare.
+  const text = String(comment?.body || '');
+  const pr = /in volo nella PR\s+#(\d+)/i.exec(text) || /\bPR\s+#(\d+)/i.exec(text);
+  return pr ? Number(pr[1]) : null;
+}
+
+/** La PR bloccante è ancora lavoro in volo? (`gh pr view --json state,labels`). Pura. */
+export function overlapBlockerActive(pr) {
+  return String(pr?.state || '').toUpperCase() === 'OPEN' && !isStalledPr(pr?.labels || []);
 }
 
 /**
@@ -3669,6 +3727,16 @@ function issueComments(num) {
   }
 }
 
+/** Stato della PR nominata da un `overlap-skip`, o `null` su errore gh
+ * (`overlapBlockerActive(null)` è falso: nessun rinvio su un glitch API). */
+function readOverlapBlocker(num) {
+  try {
+    return gh(['pr', 'view', String(num), '--repo', REPO, '--json', 'state,labels']);
+  } catch {
+    return null;
+  }
+}
+
 /** Commenti della issue in forma REST, o `null` su errore gh. Serve SOLO al
  * cooldown del PARKED-RETRY, ed è l'unica sorgente che porta `user.type` — il
  * flag di bot autoritativo, che non richiede alcuna allowlist da mantenere
@@ -3743,7 +3811,12 @@ export function openPrFilesScanDecision(openPrs, diffOutputs) {
       return { ok: false, map: null, reason: `open-pr-diff-unavailable-${number}` };
     }
     const files = new Set(diffOut.split('\n').map((line) => line.trim()).filter(Boolean));
-    map.set(number, { title: pr.title, body: pr.body || '', files });
+    // Label assenti o illeggibili = nessuna: la PR resta un overlap pieno
+    // (direzione conservativa, vedi `isStalledPr`).
+    const labels = Array.isArray(pr?.labels)
+      ? pr.labels.map((label) => (typeof label === 'string' ? label : label?.name)).filter((name) => typeof name === 'string')
+      : [];
+    map.set(number, { title: pr.title, body: pr.body || '', files, labels });
   }
   return { ok: true, map };
 }
@@ -4893,6 +4966,17 @@ export function runDrain() {
       edit(iss.number, { add: [LBL_QUEUED], remove: [LBL_FIX, LBL_AUTOMATION_DEFERRED] });
       continue;
     }
+    // OVERLAP DICHIARATO (vedi `overlapSkipBlocker`): aspettare una PR attiva
+    // non è un tentativo fallito. Il drain trattiene la issue finché la PR resta
+    // in volo; PR non nominata, illeggibile o già ferma → ramo età-tentativi.
+    if (outcome === 'overlap-skip') {
+      const blocker = overlapSkipBlocker(issueComments(iss.number) || []);
+      if (blocker !== null && overlapBlockerActive(readOverlapBlocker(blocker))) {
+        console.log(`RE-QUEUE #${iss.number} (overlap-skip sulla PR #${blocker}, ancora in volo) → tentativo NON consumato, il drain la trattiene finché #${blocker} è attiva`);
+        edit(iss.number, { add: [LBL_QUEUED], remove: [LBL_FIX] });
+        continue;
+      }
+    }
     if (outcome && NON_RETRYABLE.has(outcome)) {
       console.log(`PARK #${iss.number} (esito non-ri-tentabile: ${outcome}) → no re-queue, evito run identica`);
       edit(iss.number, { add: [LBL_PARKED], remove: [LBL_FIX, LBL_QUEUED] });
@@ -5667,6 +5751,18 @@ export function runDrain() {
       continue; // prova il prossimo in coda
     }
 
+    // Overlap dichiarato dal fixer all'ultimo giro (vedi `overlapSkipBlocker`):
+    // la PR che ha nominato è ancora attiva → rinvio, come l'overlap dei path
+    // qui sotto. Stessa direzione conservativa: commenti o PR illeggibili → si
+    // promuove. Ultimo controllo prima dei path: la lettura dei commenti la
+    // pagano solo i candidati che hanno superato tutti gli altri.
+    const declaredBlocker = overlapSkipBlocker(issueComments(cand.number) || []);
+    if (declaredBlocker !== null && overlapBlockerActive(readOverlapBlocker(declaredBlocker))) {
+      console.log(`OVERLAP-SKIP #${cand.number} (il fixer ha rinviato per la PR #${declaredBlocker}, ancora in volo) → rinvio al prossimo tick`);
+      overlapSkipped++;
+      continue;
+    }
+
     // Check: overlap-file con PR aperta (escalation #3810). Zero-Claude, pre-promozione.
     const candPaths = extractCodePaths(`${cand.title}\n${body}`);
     if (candPaths.length > 0) {
@@ -5676,7 +5772,9 @@ export function runDrain() {
         overlapScanBlocked++;
         continue;
       }
-      const overlap = findOverlapFile(candPaths, prFilesScan.map);
+      const overlap = findOverlapFile(candPaths, prFilesScan.map, {
+        ignorePr: conflictHandoffOriginPr(cand.title),
+      });
       if (overlap) {
         console.log(`OVERLAP-SKIP #${cand.number} (file \`${overlap.file}\` in-volo in PR #${overlap.prNumber} "${overlap.prTitle.slice(0, 40)}") → rinvio al prossimo tick`);
         overlapSkipped++;
