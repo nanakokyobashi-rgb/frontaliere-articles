@@ -97169,6 +97169,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-bancarotte-imprese-nove-mesi': {
+    title: 'Fallimenti aziendali in Svizzera: +37% in nove mesi',
+    description: 'Nei primi nove mesi dell\'anno la Svizzera registra 11\'412 bancarotte, +37% sul 2025. Ticino e Grigioni sopra la media; cresce anche la nascita di ditte, secondo',
+    keywords: 'frontalieri, ticino, svizzera, italia, fallimenti, aziendali, nove, mesi',
+    ogTitle: 'Svizzera, 11\'412 bancarotte in nove mesi',
+    ogDescription: 'Il dato Crif mostra un aumento delle bancarotte in Svizzera, con Ticino e Grigioni sopra la media nazionale. La modifica dal 1° gennaio 2025 estende la procedura fallimentare ai debiti fiscali delle aziende iscritte nel registro di commercio.',
+    canonicalPath: '/articoli-svizzera/bancarotte-imprese-nove-mesi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Fallimenti aziendali in Svizzera: +37% in nove mesi",
+      "description": "Nei primi nove mesi dell'anno la Svizzera registra 11'412 bancarotte, +37% sul 2025. Ticino e Grigioni sopra la media; cresce anche la nascita di ditte, secondo",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bancarotte-imprese-nove-mesi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Uffici e negozi svizzeri in una scena editoriale sul mondo delle imprese."
+      },
+      "datePublished": "2026-10-02T11:28:26+00:00",
+      "dateModified": "2026-10-02T11:28:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/bancarotte-imprese-nove-mesi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
