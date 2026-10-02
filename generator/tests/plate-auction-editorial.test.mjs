@@ -2,7 +2,10 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
   buildPlateAuctionEditorial,
+  DEFAULT_PLATE_AUCTION_API_URL,
+  DEFAULT_PLATE_AUCTION_STATIC_URL,
   fetchPlateAuctionEditorialInput,
+  PLATE_AUCTION_STATIC_MAX_AGE_MS,
 } from '../../scripts/lib/plate-auction-editorial.mjs';
 
 const SNAPSHOT = {
@@ -193,4 +196,56 @@ test('fetches only the HTTP public snapshot contract and rejects malformed respo
     fetcher: async () => ({ ok: true, json: async () => ({ schema: 1, auctions: 'not-an-array' }) }),
   });
   assert.deepEqual(bad, { status: 'unavailable', snapshot: null, errorCode: 'invalid-snapshot' });
+});
+
+// Each publish-api.yml run used to call the Cloud Function (~3 an hour), and a
+// call that found its cache expired cost ~22'700 Firestore reads. The static
+// CDN snapshot the site reads first must serve the editorial on its own.
+test('reads a fresh static snapshot and never calls the function', async () => {
+  const calls = [];
+  const now = Date.parse('2026-10-02T04:00:00.000Z');
+  const input = await fetchPlateAuctionEditorialInput({
+    now,
+    fetcher: async (url) => {
+      calls.push(url);
+      return { ok: true, json: async () => ({ ...SNAPSHOT, generatedAt: '2026-10-01T22:45:10.138Z' }) };
+    },
+  });
+  assert.equal(input.status, 'ready');
+  assert.deepEqual(calls, [DEFAULT_PLATE_AUCTION_STATIC_URL]);
+});
+
+test('asks the function only when the static snapshot is old or fails', async () => {
+  const now = Date.parse('2026-10-02T04:00:00.000Z');
+  const stale = new Date(now - PLATE_AUCTION_STATIC_MAX_AGE_MS - 1).toISOString();
+  const fresh = new Date(now).toISOString();
+
+  const staleCalls = [];
+  const fromApi = await fetchPlateAuctionEditorialInput({
+    now,
+    fetcher: async (url) => {
+      staleCalls.push(url);
+      return { ok: true, json: async () => ({ ...SNAPSHOT, generatedAt: url === DEFAULT_PLATE_AUCTION_STATIC_URL ? stale : fresh }) };
+    },
+  });
+  assert.deepEqual(staleCalls, [DEFAULT_PLATE_AUCTION_STATIC_URL, DEFAULT_PLATE_AUCTION_API_URL]);
+  assert.equal(fromApi.snapshot.generatedAt, fresh);
+
+  const failedStatic = await fetchPlateAuctionEditorialInput({
+    now,
+    fetcher: async (url) => (url === DEFAULT_PLATE_AUCTION_STATIC_URL
+      ? { ok: false, status: 404 }
+      : { ok: true, json: async () => ({ ...SNAPSHOT, generatedAt: fresh }) }),
+  });
+  assert.equal(failedStatic.status, 'ready');
+  assert.equal(failedStatic.snapshot.generatedAt, fresh);
+
+  const keepStale = await fetchPlateAuctionEditorialInput({
+    now,
+    fetcher: async (url) => (url === DEFAULT_PLATE_AUCTION_STATIC_URL
+      ? { ok: true, json: async () => ({ ...SNAPSHOT, generatedAt: stale }) }
+      : { ok: false, status: 503 }),
+  });
+  assert.equal(keepStale.status, 'ready');
+  assert.equal(keepStale.snapshot.generatedAt, stale);
 });

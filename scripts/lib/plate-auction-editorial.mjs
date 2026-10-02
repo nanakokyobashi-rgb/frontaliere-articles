@@ -7,8 +7,23 @@
  */
 
 export const PLATE_AUCTION_EDITORIAL_SCHEMA = 1;
+/**
+ * The static snapshot the site itself reads first, served by the CDN. Every
+ * publish-api.yml run used to fetch the Cloud Function instead, ~3 times an
+ * hour; each call that found the per-instance cache expired rebuilt the
+ * snapshot from Firestore, ~22'700 billed reads (measured 2026-10-02).
+ */
+export const DEFAULT_PLATE_AUCTION_STATIC_URL =
+  'https://cdn.frontaliereticino.ch/data/plate-auctions.json';
+/** The live function: only a fallback when the static file fails or is old. */
 export const DEFAULT_PLATE_AUCTION_API_URL =
   'https://europe-west6-frontaliere-ticino.cloudfunctions.net/getPlateAuctions';
+/**
+ * Same bound as the site (PLATE_AUCTION_STATIC_MAX_AGE_MS in its
+ * services/plateAuctions/api.ts): a healthy refresh publishes files up to
+ * ~15 h old, so only a day-old file means the refresh stopped.
+ */
+export const PLATE_AUCTION_STATIC_MAX_AGE_MS = 24 * 60 * 60 * 1000;
 
 const LOCALES = ['it', 'en', 'de', 'fr'];
 const FINAL_STATUSES = new Set(['closed', 'sold', 'unsold']);
@@ -254,12 +269,31 @@ export function buildPlateAuctionEditorial({ snapshot = null, upstreamStatus = '
   };
 }
 
+/**
+ * An explicit `url` (or PLATE_AUCTION_API_URL) is the only source used. By
+ * default the static CDN snapshot comes first; the function is asked only when
+ * that file fails or is older than PLATE_AUCTION_STATIC_MAX_AGE_MS, and an old
+ * static snapshot still beats none when the function fails too.
+ */
 export async function fetchPlateAuctionEditorialInput({
-  url = process.env.PLATE_AUCTION_API_URL || DEFAULT_PLATE_AUCTION_API_URL,
+  url = process.env.PLATE_AUCTION_API_URL || undefined,
   fetcher = globalThis.fetch,
   timeoutMs = 10_000,
+  now = Date.now(),
 } = {}) {
   if (typeof fetcher !== 'function') return { status: 'unavailable', snapshot: null, errorCode: 'fetch-unavailable' };
+  if (url) return fetchPlateAuctionSnapshot(url, fetcher, timeoutMs);
+  const staticInput = await fetchPlateAuctionSnapshot(DEFAULT_PLATE_AUCTION_STATIC_URL, fetcher, timeoutMs);
+  const generatedMs = Date.parse(staticInput.snapshot?.generatedAt);
+  if (staticInput.snapshot && Number.isFinite(generatedMs) && now - generatedMs <= PLATE_AUCTION_STATIC_MAX_AGE_MS) {
+    return staticInput;
+  }
+  const apiInput = await fetchPlateAuctionSnapshot(DEFAULT_PLATE_AUCTION_API_URL, fetcher, timeoutMs);
+  if (apiInput.snapshot || !staticInput.snapshot) return apiInput;
+  return staticInput;
+}
+
+async function fetchPlateAuctionSnapshot(url, fetcher, timeoutMs) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
