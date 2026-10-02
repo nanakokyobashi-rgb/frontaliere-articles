@@ -362,6 +362,9 @@ test('the recovery window outlasts a cancelled tests run and fits the job timeou
   const rateLimitWait = envMs('BODY_RECOVERY_RATE_LIMIT_WAIT_MS');
   assert.equal(defaultMs('BODY_RECOVERY_WAIT_MS'), wait, 'default e env della finestra divergono');
   assert.equal(defaultMs('BODY_RECOVERY_RATE_LIMIT_WAIT_MS'), rateLimitWait, 'default e env del rate limit divergono');
+  const transientRetries = Number(recovery.match(/^\s+BODY_RECOVERY_TRANSIENT_RETRIES: '(\d+)'$/m)?.[1]);
+  const defaultTransientRetries = Number(recovery.match(/Number\(process\.env\.BODY_RECOVERY_TRANSIENT_RETRIES\) \|\| (\d+)/)?.[1]);
+  assert.equal(defaultTransientRetries, transientRetries, 'default e env dei retry 5xx divergono');
   const windowMs = Math.min(wait, rateLimitWait);
   const reserveMs = Math.min(15000, Math.floor(windowMs / 10));
   assert.ok(windowMs - reserveMs >= 8 * 60 * 1000, `attesa effettiva ${windowMs - reserveMs} ms < 8 min`);
