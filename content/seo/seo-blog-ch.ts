@@ -97052,6 +97052,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-sessione-autunnale-mercosur-ubs': {
+    title: 'Sessione autunnale: via a mercosur, lex UBS e bilaterali III',
+    description: 'Le Camere federali chiudono la sessione autunnale: approvati i decreti sui Bilaterali III, l\'accordo Mercosur, la Lex UBS e la proroga dell\'IVA alberghiera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, sessione, autunnale, mercosur, bilaterali',
+    ogTitle: 'Sessione autunnale: via a Mercosur, Lex UBS e Bilaterali III',
+    ogDescription: 'Scopri le decisioni chiave della sessione autunnale delle Camere federali svizzere: dal voto obbligatorio sui Bilaterali III all\'accordo Mercosur, passando per la Lex UBS e l\'IVA alberghiera.',
+    canonicalPath: '/articoli-svizzera/sessione-autunnale-mercosur-ubs/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Sessione autunnale: via a mercosur, lex UBS e bilaterali III",
+      "description": "Le Camere federali chiudono la sessione autunnale: approvati i decreti sui Bilaterali III, l'accordo Mercosur, la Lex UBS e la proroga dell'IVA alberghiera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/sessione-autunnale-mercosur-ubs.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna durante la sessione autunnale delle Camere"
+      },
+      "datePublished": "2026-10-02T08:08:27+00:00",
+      "dateModified": "2026-10-02T08:08:27+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/sessione-autunnale-mercosur-ubs/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -7484,6 +7484,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.rientro-maternita-filanda.title': 'Rientro al lavoro dopo la maternità: incontri a Mendrisio',
     'blog.article.rientro-maternita-filanda.excerpt': 'Le Città di Chiasso e Mendrisio promuovono a LaFilanda un percorso gratuito con colloqui, incontri e babysitting per il rientro al lavoro dopo la maternità.',
     'blog.article.rientro-maternita-filanda.imageAlt': 'LaFilanda di Mendrisio, sede degli incontri sul rientro al lavoro dopo la maternità.',
+    'blog.article.sessione-autunnale-mercosur-ubs.title': 'Sessione autunnale: via a mercosur, lex UBS e bilaterali III',
+    'blog.article.sessione-autunnale-mercosur-ubs.excerpt': 'Le Camere federali chiudono la sessione autunnale. Semaforo verde per i Bilaterali III, l\'accordo Mercosur e la Lex UBS.',
+    'blog.article.sessione-autunnale-mercosur-ubs.imageAlt': 'Palazzo federale a Berna durante la sessione autunnale delle Camere',
 };
 
 export default blogMetaChIt;

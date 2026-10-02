@@ -7484,6 +7484,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.rientro-maternita-filanda.title': 'Returning to Work After Maternity Leave: Events in Mendrisio',
     'blog.article.rientro-maternita-filanda.excerpt': 'The cities of Chiasso and Mendrisio are offering a free program at LaFilanda that includes counseling sessions, meetings, and childcare services to help women return to work after maternity leave.',
     'blog.article.rientro-maternita-filanda.imageAlt': 'LaFilanda in Mendrisio, venue for meetings on returning to work after maternity.',
+    'blog.article.sessione-autunnale-mercosur-ubs.title': 'Fall Session: Mercosur, UBS Act & Bilaterals III',
+    'blog.article.sessione-autunnale-mercosur-ubs.excerpt': 'The Federal Chambers conclude their fall session. Green light for the Bilateral Agreements III, the Mercosur agreement, and the UBS Act.',
+    'blog.article.sessione-autunnale-mercosur-ubs.imageAlt': 'Federal Palace in Bern during the autumn session of the chambers',
 };
 
 export default blogMetaChEn;

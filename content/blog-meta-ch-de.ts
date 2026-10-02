@@ -7484,6 +7484,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.rientro-maternita-filanda.title': 'Rückkehr in den Beruf nach dem Mutterschaftsurlaub: Veranstaltungen in Mendrisio',
     'blog.article.rientro-maternita-filanda.excerpt': 'Die Städte Chiasso und Mendrisio bieten bei LaFilanda ein kostenloses Programm mit Beratungsgesprächen, Treffen und Kinderbetreuung an, um Frauen den Wiedereinstieg in den Beruf nach der Mutterschaft zu erleichtern.',
     'blog.article.rientro-maternita-filanda.imageAlt': 'LaFilanda in Mendrisio, Treffpunkt für den Wiedereinstieg nach der Mutterschaft.',
+    'blog.article.sessione-autunnale-mercosur-ubs.title': 'Herbstsession: Startschuss für Mercosur, Lex UBS und die Bilateralen III',
+    'blog.article.sessione-autunnale-mercosur-ubs.excerpt': 'Die eidgenössischen Räte schließen die Herbstsession ab. Grünes Licht für die Bilateralen III, das Mercosur-Abkommen und die Lex UBS.',
+    'blog.article.sessione-autunnale-mercosur-ubs.imageAlt': 'Bundeshaus in Bern während der Herbstsession der Räte',
 };
 
 export default blogMetaChDe;

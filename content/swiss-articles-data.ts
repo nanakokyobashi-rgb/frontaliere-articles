@@ -22480,6 +22480,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'sessione-autunnale-mercosur-ubs',
+    category: 'novita',
+    date: '2026-10-02T08:08:26.961Z',
+    image: '/images/blog/sessione-autunnale-mercosur-ubs.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
