@@ -98119,6 +98119,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-adeguamento-pensioni-gennaio': {
+    title: 'AVS in leggero aumento da gennaio | Frontaliere Ticino',
+    description: 'Da gennaio salgono le rendite AVS/AI: la minima arriva a 1\'280 franchi e la massima a 2\'560. Cambiano anche contributi minimi e prestazioni complementari.',
+    keywords: 'frontalieri, ticino, svizzera, italia, leggero, aumento, gennaio, rendita',
+    ogTitle: 'AVS e AI, nuovi importi da gennaio',
+    ogDescription: 'Il Consiglio federale adegua rendite e contributi all\'evoluzione di prezzi e salari. La nota indica anche i nuovi importi per persone sole, coppie sposate e figli, oltre ai costi per Confederazione e Cantoni.',
+    canonicalPath: '/articoli-frontaliere/adeguamento-pensioni-gennaio',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "AVS in leggero aumento da gennaio",
+      "description": "Da gennaio salgono le rendite AVS/AI: la minima arriva a 1'280 franchi e la massima a 2'560. Cambiano anche contributi minimi e prestazioni complementari.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/adeguamento-pensioni-gennaio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Rendite AVS e AI adeguate da gennaio"
+      },
+      "datePublished": "2026-10-02T16:04:33+00:00",
+      "dateModified": "2026-10-02T16:04:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/adeguamento-pensioni-gennaio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
