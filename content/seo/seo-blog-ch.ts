@@ -98105,6 +98105,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-micasa-quattro-negozi-2027': {
+    title: 'Micasa chiude quattro negozi entro gennaio 2027',
+    description: 'Micasa si separerà da quattro negozi entro gennaio 2027: Crissier chiude entro fine 2026. Coinvolti Langendorf, Brügg e Buchs; nessun commento sui posti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, micasa, chiude, quattro, negozi',
+    ogTitle: 'Micasa chiude quattro negozi entro gennaio 2027',
+    ogDescription: 'Uscita dal gruppo Migros nel 2025, Micasa riduce la rete: si separerà da quattro negozi entro gennaio 2027. Crissier chiuderà entro fine 2026; gli altri siti sono Langendorf, Brügg e Buchs. L\'azienda cita la situazione economica e il mercato.',
+    canonicalPath: '/articoli-svizzera/micasa-quattro-negozi-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Micasa chiude quattro negozi entro gennaio 2027",
+      "description": "Micasa si separerà da quattro negozi entro gennaio 2027: Crissier chiude entro fine 2026. Coinvolti Langendorf, Brügg e Buchs; nessun commento sui posti.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/micasa-quattro-negozi-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Negozio svizzero di arredamento con vetrine in fase di chiusura"
+      },
+      "datePublished": "2026-10-02T20:52:31+00:00",
+      "dateModified": "2026-10-02T20:52:31+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/micasa-quattro-negozi-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

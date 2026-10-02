@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/nj-exnvlgwda": {
-    "articleId": "consultazione-politica-agricola-2030",
-    "ts": "2026-09-02T20:00:22.882Z",
-    "keyForm": 2
-  },
   "https://www.seco.admin.ch/it": {
     "articleId": "dazi-svizzera-voto",
     "ts": "2026-10-01T20:06:53.957Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4129479": {
     "articleId": "inflazione-eurozona-picco-triennale",
     "ts": "2026-10-02T20:35:48.073Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1954387/micasa-quattro-negozi-migros-filiale": {
+    "articleId": "micasa-quattro-negozi-2027",
+    "ts": "2026-10-02T20:52:31.459Z",
     "keyForm": 2
   }
 }
