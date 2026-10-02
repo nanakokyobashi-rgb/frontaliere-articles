@@ -7475,6 +7475,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.aprire-attivita-grigioni-guida-costi.title': 'Créer une entreprise dans les Grisons : guide sur les coûts et la fiscalité',
     'blog.article.aprire-attivita-grigioni-guida-costi.excerpt': 'De la forme juridique aux cotisations salariales : guide pratique sur les trois niveaux d\'imposition et les obligations en matière de sécurité sociale pour ceux qui créent une entreprise dans les Grisons.',
     'blog.article.aprire-attivita-grigioni-guida-costi.imageAlt': 'Documents et bureau avec vue sur les montagnes suisses',
+    'blog.article.remunerazioni-ail-mps-lugano.title': 'Rémunérations de l\'AIL et transparence : la question posée par le MPS',
+    'blog.article.remunerazioni-ail-mps-lugano.excerpt': 'Giuseppe Sergi et Matteo Pronzini interpellent le Conseil d\'État au sujet des rémunérations versées par l\'AIL et de la protection du patrimoine public.',
+    'blog.article.remunerazioni-ail-mps-lugano.imageAlt': 'Vue de Lugano représentant la gestion des entreprises publiques',
 };
 
 export default blogMetaChFr;

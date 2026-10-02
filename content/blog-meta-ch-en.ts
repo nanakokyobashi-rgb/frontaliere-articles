@@ -7475,6 +7475,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.aprire-attivita-grigioni-guida-costi.title': 'Starting a Business in Graubünden: A Guide to Costs and Taxes',
     'blog.article.aprire-attivita-grigioni-guida-costi.excerpt': 'From Legal Structure to Payroll Taxes: A Practical Guide to the Three Tax Levels and Social Security Obligations for Those Starting a Business in Graubünden.',
     'blog.article.aprire-attivita-grigioni-guida-costi.imageAlt': 'Documents and desk with a view of the Swiss mountains',
+    'blog.article.remunerazioni-ail-mps-lugano.title': 'AIL Compensation and Transparency: The MPS Inquiry',
+    'blog.article.remunerazioni-ail-mps-lugano.excerpt': 'Giuseppe Sergi and Matteo Pronzini question the Council of State regarding AIL compensation and the protection of public assets.',
+    'blog.article.remunerazioni-ail-mps-lugano.imageAlt': 'View of Lugano representing municipal enterprises and public management',
 };
 
 export default blogMetaChEn;

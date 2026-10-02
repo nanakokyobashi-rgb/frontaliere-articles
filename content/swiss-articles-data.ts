@@ -22453,6 +22453,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'remunerazioni-ail-mps-lugano',
+    category: 'fiscale',
+    date: '2026-10-02T07:35:31.337Z',
+    image: '/images/blog/remunerazioni-ail-mps-lugano.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

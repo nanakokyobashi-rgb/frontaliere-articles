@@ -7475,6 +7475,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.aprire-attivita-grigioni-guida-costi.title': 'Aprire un\'attività nei Grigioni: guida a costi e fisco',
     'blog.article.aprire-attivita-grigioni-guida-costi.excerpt': 'Dalla forma giuridica ai contributi salariali: guida pratica sui tre livelli fiscali e gli obblighi previdenziali per chi avvia un\'impresa nei Grigioni.',
     'blog.article.aprire-attivita-grigioni-guida-costi.imageAlt': 'Documenti e scrivania con vista sulle montagne svizzere',
+    'blog.article.remunerazioni-ail-mps-lugano.title': 'Remunerazioni AIL e trasparenza: l\'interrogazione dell\'MPS',
+    'blog.article.remunerazioni-ail-mps-lugano.excerpt': 'Giuseppe Sergi e Matteo Pronzini interrogano il Consiglio di Stato sui compensi AIL e sulla tutela del patrimonio pubblico.',
+    'blog.article.remunerazioni-ail-mps-lugano.imageAlt': 'Veduta di Lugano con la sede e le attività delle Aziende Industriali',
 };
 
 export default blogMetaChIt;

@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/settore-dei-servizi%2c-forte-aumento-del-fatturato-in-giugno/91989104": {
-    "articleId": "settore-servizi-aumento-fatturato-giugno",
-    "ts": "2026-09-01T18:16:11.745Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4052268": {
     "articleId": "shein-ipo-hong-kong-malus-francese",
     "ts": "2026-09-01T19:56:56.153Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1954194/assicurazione-malattia-svizzera-deloitte-malati-prevede-cassa": {
     "articleId": "deloitte-previsione-cambi-cassa-malati",
     "ts": "2026-10-02T06:54:49.225Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/politica/1954215/remunerazioni-quali-interesse-gestione-sergi-aziende-consiglio-ail-mps": {
+    "articleId": "remunerazioni-ail-mps-lugano",
+    "ts": "2026-10-02T07:35:31.615Z",
     "keyForm": 2
   }
 }
