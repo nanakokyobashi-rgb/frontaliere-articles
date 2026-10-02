@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/politica/1947536/agricoltori-margine-manovra-politica-cf": {
-    "articleId": "politica-agricola-2030-tagli-120-milioni",
-    "ts": "2026-09-02T11:48:15.361Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/sdanuz7ynr9j": {
     "articleId": "consiglio-federale-consultazione-agricola-2030",
     "ts": "2026-09-02T12:18:01.923Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/g2c0adhrztcy": {
     "articleId": "moderniz-perseguimento-penale",
     "ts": "2026-10-02T13:14:43.242Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/4xkhpgvw0ryd": {
+    "articleId": "otto-progetti-ricostruzione-ucraina",
+    "ts": "2026-10-02T13:28:20.333Z",
     "keyForm": 2
   }
 }
