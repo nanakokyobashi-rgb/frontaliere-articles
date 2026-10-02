@@ -2539,6 +2539,15 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'guida-imprenditoriale-grigioni': { it: 'guida-imprenditoriale-grigioni', en: 'grisons-business-registration-costs', de: 'geschaeft-gruenden-graubuenden-kosten', fr: 'creer-entreprise-grisons-couts' },
  'confronto-salari-settori-berna': { it: 'confronto-salari-settori-berna', en: 'swiss-salary-sectors-bern', de: 'schweizer-loehne-berufe-bern', fr: 'salaires-suisses-secteurs-berne' },
  'netto-professioni-stgallen-2026': { it: 'netto-professioni-stgallen-2026', en: 'swiss-salary-st-gallen-2026', de: 'schweizer-gehalt-st-gallen-2026', fr: 'salaire-suisse-saint-gall-2026' },
+ 'novartis-abo2203-rna-licenza': { it: 'novartis-abo2203-rna-licenza', en: 'novartis-abo2203-rna-license', de: 'novartis-abo2203-rna-lizenz', fr: 'licence-rna-abo2203-novartis' },
+ 'sondaggio-conciliazione-lavoro-vita': { it: 'sondaggio-conciliazione-lavoro-vita', en: 'work-life-balance-survey-ticino', de: 'umfrage-work-life-balance-tessin', fr: 'sondage-equilibre-vie-travail-tessin' },
+ 'analisi-traffico-gottardo-app': { it: 'analisi-traffico-gottardo-app', en: 'gotthard-traffic-analysis-app', de: 'gotthard-verkehrsanalyse-app', fr: 'analyse-trafic-gothard-app' },
+ 'guida-retribuzioni-argovia-2026': { it: 'guida-retribuzioni-argovia-2026', en: 'swiss-average-salary-aargau-2026', de: 'durchschnittslohn-berufe-aargau-2026', fr: 'salaire-moyen-metiers-argovie-2026' },
+ 'inflazione-eurozona-picco-triennale': { it: 'inflazione-eurozona-picco-triennale', en: 'eurozone-inflation-three-year-high', de: 'inflation-eurozone-drei-jahres-hoch', fr: 'inflation-zone-euro-pic-trois-ans' },
+ 'micasa-quattro-negozi-2027': { it: 'micasa-quattro-negozi-2027', en: 'micasa-four-stores-2027', de: 'micasa-vier-filialen-2027', fr: 'micasa-quatre-magasins-2027' },
+ 'assemblea-swissaccounting-melide': { it: 'assemblea-swissaccounting-melide', en: 'swissaccounting-assembly-melide', de: 'swissaccounting-versammlung-melide', fr: 'assemblee-swissaccounting-melide' },
+ 'secondo-pilastro-lpp-ginevra-2026': { it: 'secondo-pilastro-lpp-ginevra-2026', en: 'second-pillar-lpp-geneva-2026', de: 'zweite-saeule-lpp-genf-2026', fr: 'deuxieme-pilier-lpp-geneve-2026' },
+ 'bvg-lucerna-previdenza-2026': { it: 'bvg-lucerna-previdenza-2026', en: 'bvg-lucerne-pension-2026', de: 'bvg-luzern-vorsorge-2026', fr: 'bvg-lucerne-prevoyance-2026' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

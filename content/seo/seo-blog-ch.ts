@@ -97910,6 +97910,357 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-novartis-abo2203-rna-licenza': {
+    title: 'Novartis e Abogen: licenza RNA fino a 7,2 miliardi',
+    description: 'Novartis ottiene da Abogen la licenza mondiale su ABO2203: 575 milioni di dollari iniziali, fino a 7,2 miliardi con opzioni, sviluppo clinico e approvazione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, novartis, abogen, licenza, fino',
+    ogTitle: 'Novartis e Abogen: licenza RNA fino a 7,2 miliardi',
+    ogDescription: 'Un accordo porta a Novartis la licenza esclusiva mondiale su ABO2203, terapia a mRNA contro i linfociti B. Abogen riceve 575 milioni di dollari iniziali; opzioni e traguardi possono portare i pagamenti a circa 7,2 miliardi.',
+    canonicalPath: '/articoli-svizzera/novartis-abo2203-rna-licenza/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Novartis e Abogen: licenza RNA fino a 7,2 miliardi",
+      "description": "Novartis ottiene da Abogen la licenza mondiale su ABO2203: 575 milioni di dollari iniziali, fino a 7,2 miliardi con opzioni, sviluppo clinico e approvazione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/novartis-abo2203-rna-licenza.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Laboratorio farmaceutico svizzero con visualizzazione grafica dell'RNA"
+      },
+      "datePublished": "2026-10-02T18:52:20+00:00",
+      "dateModified": "2026-10-02T18:52:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/novartis-abo2203-rna-licenza/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-sondaggio-conciliazione-lavoro-vita': {
+    title: 'Conciliazione lavoro-vita: parte il sondaggio ticinese',
+    description: 'Pro Familia Svizzera Italiana lancia il primo sondaggio cantonale sulla conciliazione lavoro-vita privata per le aziende ticinesi. Scopri i dettagli',
+    keywords: 'frontalieri, ticino, svizzera, italia, conciliazione, lavoro-vita, parte, sondaggio',
+    ogTitle: 'Conciliazione lavoro-vita: al via il sondaggio in Ticino',
+    ogDescription: 'Pro Familia Svizzera Italiana avvia la prima indagine cantonale sulla conciliazione lavoro-vita per mappare flessibilità e buone pratiche nelle aziende ticinesi.',
+    canonicalPath: '/articoli-svizzera/sondaggio-conciliazione-lavoro-vita/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Conciliazione lavoro-vita: parte il sondaggio ticinese",
+      "description": "Pro Familia Svizzera Italiana lancia il primo sondaggio cantonale sulla conciliazione lavoro-vita privata per le aziende ticinesi. Scopri i dettagli",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/sondaggio-conciliazione-lavoro-vita.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio moderno con vista su Lugano"
+      },
+      "datePublished": "2026-10-02T19:11:19+00:00",
+      "dateModified": "2026-10-02T19:11:19+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/sondaggio-conciliazione-lavoro-vita/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-analisi-traffico-gottardo-app': {
+    title: 'Gottardo: l\'analisi dei dati per evitare le code',
+    description: 'Fabrizio Bacchini ha creato l\'app Gottardo Live analizzando 19mila segnalazioni USTRA. Scopri come monitorare il traffico e pianificare meglio il viaggio.',
+    keywords: 'frontalieri, ticino, svizzera, italia, gottardo, analisi, dati, evitare',
+    ogTitle: 'Gottardo: l\'analisi dei dati per evitare le code',
+    ogDescription: 'Fabrizio Bacchini analizza il traffico del Gottardo: dall\'11 luglio code in 82 giorni su 83. Con la sua app Gottardo Live, basata sui dati USTRA, aiuta a pianificare i viaggi.',
+    canonicalPath: '/articoli-svizzera/analisi-traffico-gottardo-app/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Gottardo: l'analisi dei dati per evitare le code",
+      "description": "Fabrizio Bacchini ha creato l'app Gottardo Live analizzando 19mila segnalazioni USTRA. Scopri come monitorare il traffico e pianificare meglio il viaggio.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/analisi-traffico-gottardo-app.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Traffico in attesa davanti all'ingresso di un tunnel autostradale in Svizzera."
+      },
+      "datePublished": "2026-10-02T19:28:25+00:00",
+      "dateModified": "2026-10-02T19:28:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/analisi-traffico-gottardo-app/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-guida-retribuzioni-argovia-2026': {
+    title: 'Salario medio professioni Svizzera 2026: canton Argovia',
+    description: 'Salario medio per professione in Svizzera nel 2026: confronto tra cantoni e settori, focus Argovia, imposte, contributi, LAMal e criteri per leggere il netto.',
+    keywords: 'frontalieri, ticino, svizzera, italia, salario, medio, professioni, canton',
+    ogTitle: 'Salari svizzeri 2026: confronto tra settori e Argovia',
+    ogDescription: 'Confronto 2026 tra salari per professione, cantoni e settori: il focus sull\'Argovia spiega come distinguere imposta federale diretta, imposte cantonali e comunali, contributi AVS/AI/IPG, LPP, LAMal e salario minimo.',
+    canonicalPath: '/articoli-svizzera/guida-retribuzioni-argovia-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Salario medio professioni Svizzera 2026: canton Argovia",
+      "description": "Salario medio per professione in Svizzera nel 2026: confronto tra cantoni e settori, focus Argovia, imposte, contributi, LAMal e criteri per leggere il netto.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/guida-retribuzioni-argovia-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio svizzero con grafici sul salario medio e riferimento al canton Argovia."
+      },
+      "datePublished": "2026-10-02T19:52:29+00:00",
+      "dateModified": "2026-10-02T19:52:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/guida-retribuzioni-argovia-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-inflazione-eurozona-picco-triennale': {
+    title: 'Inflazione eurozona: nuovo picco da tre anni | Frontaliere Ticino',
+    description: 'Eurozona: inflazione al 3,8% a settembre, contro il 3,2% di agosto. L\'energia sale al 18,8% e la BCE porta il tasso principale al 2,5%, secondo Eurostat.',
+    keywords: 'frontalieri, ticino, svizzera, italia, inflazione, eurozona, nuovo, picco',
+    ogTitle: 'Inflazione eurozona: picco da tre anni',
+    ogDescription: 'La prima stima Eurostat porta l\'inflazione dell\'eurozona al 3,8% a settembre, dal 3,2% di agosto. Nei 21 Paesi della moneta unica, l\'energia cresce al 18,8% e la BCE ha portato il tasso principale al 2,5%.',
+    canonicalPath: '/articoli-svizzera/inflazione-eurozona-picco-triennale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Inflazione eurozona: nuovo picco da tre anni",
+      "description": "Eurozona: inflazione al 3,8% a settembre, contro il 3,2% di agosto. L'energia sale al 18,8% e la BCE porta il tasso principale al 2,5%, secondo Eurostat.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/inflazione-eurozona-picco-triennale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista urbana svizzera con monitor sull'inflazione dell'eurozona."
+      },
+      "datePublished": "2026-10-02T20:35:47+00:00",
+      "dateModified": "2026-10-02T20:35:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/inflazione-eurozona-picco-triennale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-micasa-quattro-negozi-2027': {
+    title: 'Micasa chiude quattro negozi entro gennaio 2027',
+    description: 'Micasa si separerà da quattro negozi entro gennaio 2027: Crissier chiude entro fine 2026. Coinvolti Langendorf, Brügg e Buchs; nessun commento sui posti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, micasa, chiude, quattro, negozi',
+    ogTitle: 'Micasa chiude quattro negozi entro gennaio 2027',
+    ogDescription: 'Uscita dal gruppo Migros nel 2025, Micasa riduce la rete: si separerà da quattro negozi entro gennaio 2027. Crissier chiuderà entro fine 2026; gli altri siti sono Langendorf, Brügg e Buchs. L\'azienda cita la situazione economica e il mercato.',
+    canonicalPath: '/articoli-svizzera/micasa-quattro-negozi-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Micasa chiude quattro negozi entro gennaio 2027",
+      "description": "Micasa si separerà da quattro negozi entro gennaio 2027: Crissier chiude entro fine 2026. Coinvolti Langendorf, Brügg e Buchs; nessun commento sui posti.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/micasa-quattro-negozi-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Negozio svizzero di arredamento con vetrine in fase di chiusura"
+      },
+      "datePublished": "2026-10-02T20:52:31+00:00",
+      "dateModified": "2026-10-02T20:52:31+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/micasa-quattro-negozi-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-assemblea-swissaccounting-melide': {
+    title: 'SwissAccounting, 60ª assemblea e nuove diciture professionali',
+    description: 'SwissAccounting Svizzera Italiana celebra la 60ª assemblea a Melide. Novità sui titoli federali: dal 1° ottobre 2026 arrivano Professional Master e Bachelor.',
+    keywords: 'frontalieri, ticino, svizzera, italia, swissaccounting, assemblea, nuove, diciture',
+    ogTitle: 'SwissAccounting: 60ª assemblea e nuove diciture professionali',
+    ogDescription: 'L\'associazione SwissAccounting Svizzera Italiana ha tenuto la sua 60ª assemblea a Melide, premiando i neodiplomati e illustrando le nuove diciture per i titoli professionali.',
+    canonicalPath: '/articoli-svizzera/assemblea-swissaccounting-melide/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "SwissAccounting, 60ª assemblea e nuove diciture professionali",
+      "description": "SwissAccounting Svizzera Italiana celebra la 60ª assemblea a Melide. Novità sui titoli federali: dal 1° ottobre 2026 arrivano Professional Master e Bachelor.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/assemblea-swissaccounting-melide.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Assemblea generale di SwissAccounting a Melide"
+      },
+      "datePublished": "2026-10-02T21:05:05+00:00",
+      "dateModified": "2026-10-02T21:05:05+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/assemblea-swissaccounting-melide/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-secondo-pilastro-lpp-ginevra-2026': {
+    title: 'Secondo pilastro LPP Svizzera: guida 2026 per Ginevra',
+    description: 'Guida pratica al secondo pilastro LPP 2026: contributi, riscatto lacune e pianificazione previdenziale nel canton Ginevra e a livello nazionale. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, secondo, pilastro, ginevra, pratica',
+    ogTitle: 'Secondo pilastro LPP Svizzera: Guida 2026 per Ginevra',
+    ogDescription: 'Tutto quello che c\'è da sapere sul secondo pilastro LPP: dalla normativa federale alle specifiche per il canton Ginevra. Guida 2026.',
+    canonicalPath: '/articoli-svizzera/secondo-pilastro-lpp-ginevra-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Secondo pilastro LPP Svizzera: guida 2026 per Ginevra",
+      "description": "Guida pratica al secondo pilastro LPP 2026: contributi, riscatto lacune e pianificazione previdenziale nel canton Ginevra e a livello nazionale. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/secondo-pilastro-lpp-ginevra-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documenti di pianificazione pensionistica LPP in un ufficio svizzero"
+      },
+      "datePublished": "2026-10-02T21:35:40+00:00",
+      "dateModified": "2026-10-02T21:35:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/secondo-pilastro-lpp-ginevra-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-bvg-lucerna-previdenza-2026': {
+    title: 'Secondo pilastro LPP Svizzera: guida 2026, canton Lucerna',
+    description: 'Contributi LPP dal 7% al 18% per età, prelievo, riscatto lacune e pianificazione: guida 2026 per il canton Lucerna, con contributi e imposte nel quadro',
+    keywords: 'frontalieri, ticino, svizzera, italia, secondo, pilastro, canton, lucerna',
+    ogTitle: 'LPP Svizzera 2026: guida al canton Lucerna',
+    ogDescription: 'Dalle aliquote sul salario coordinato alle differenze tra previdenza, imposte e LAMal: una guida pratica per leggere i contributi, orientarsi tra prelievo e riscatto delle lacune e aggiornare i dati annuali nel canton Lucerna.',
+    canonicalPath: '/articoli-svizzera/bvg-lucerna-previdenza-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Secondo pilastro LPP Svizzera: guida 2026, canton Lucerna",
+      "description": "Contributi LPP dal 7% al 18% per età, prelievo, riscatto lacune e pianificazione: guida 2026 per il canton Lucerna, con contributi e imposte nel quadro",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bvg-lucerna-previdenza-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Guida al secondo pilastro LPP con focus sul canton Lucerna"
+      },
+      "datePublished": "2026-10-02T22:04:40+00:00",
+      "dateModified": "2026-10-02T22:04:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/bvg-lucerna-previdenza-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

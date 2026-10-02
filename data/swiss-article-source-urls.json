@@ -1,34 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1947576/novartis-posti-lavoro-produzione-campus": {
-    "articleId": "novartis-130-ristrutturazione-basilea",
-    "ts": "2026-09-02T14:56:07.344Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/franco%3a-scende-ancora-rispetto-all%27euro%2c-ai-minimi-da-un-anno/91993996": {
-    "articleId": "franco-euro-minimi-anno",
-    "ts": "2026-09-02T15:41:21.798Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/attualita/1947572/knutti-caldo-estate-svizzera-siccita-due": {
-    "articleId": "estate-calda-svizzera-2026",
-    "ts": "2026-09-02T15:49:18.915Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/aziende-svizzere-stanno-bene%2c-risultati-semestrali-oltre-le-stime/91995924": {
-    "articleId": "aziende-svizzere-semestre-2026",
-    "ts": "2026-09-02T17:30:06.878Z",
-    "keyForm": 2
-  },
-  "https://www.admin.ch/it/newnsb/nj-exnvlgwda": {
-    "articleId": "consultazione-politica-agricola-2030",
-    "ts": "2026-09-02T20:00:22.882Z",
-    "keyForm": 2
-  },
-  "https://www.seco.admin.ch/it": {
-    "articleId": "dazi-svizzera-voto",
-    "ts": "2026-10-01T20:06:53.957Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/nsut8um5sbxj": {
     "articleId": "prezzi-consumo-aumentati-agosto-2026",
     "ts": "2026-09-03T07:46:38.845Z",
@@ -2497,6 +2467,36 @@
   "https://www.tio.ch/svizzera/politica/1954231/la-mia-salute-non-c-entra-nulla": {
     "articleId": "dimissioni-guy-parmelin-2026",
     "ts": "2026-10-02T16:44:51.708Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/novartis%3a-accordo-con-biotech-cinese%2c-pagamenti-fino-a-7-miliardi/92159315": {
+    "articleId": "novartis-abo2203-rna-licenza",
+    "ts": "2026-10-02T18:52:21.250Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/rubriche/aziende-ticinesi-informano/1954311/lavoro-vita-sondaggio-pro-svizzera": {
+    "articleId": "sondaggio-conciliazione-lavoro-vita",
+    "ts": "2026-10-02T19:11:19.827Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1954204/bacchin-coda-quando-gotthard-traffico-tunnel-amici-considerano": {
+    "articleId": "analisi-traffico-gottardo-app",
+    "ts": "2026-10-02T19:28:25.990Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4129479": {
+    "articleId": "inflazione-eurozona-picco-triennale",
+    "ts": "2026-10-02T20:35:48.073Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1954387/micasa-quattro-negozi-migros-filiale": {
+    "articleId": "micasa-quattro-negozi-2027",
+    "ts": "2026-10-02T20:52:31.459Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/rubriche/aziende-ticinesi-informano/1954386/comitato-assemblea-swissaccounting-svizzera-neodiplomati-swiss": {
+    "articleId": "assemblea-swissaccounting-melide",
+    "ts": "2026-10-02T21:05:06.099Z",
     "keyForm": 2
   }
 }
