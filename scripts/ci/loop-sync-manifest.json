@@ -517,9 +517,9 @@
       "path": "scripts/ci/pr-collision-detector.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "e689d869c0c040fb",
-        "corpus": "e689d869c0c040fb",
-        "alignedAt": "2026-10-01"
+        "site": "3fd861a16c10c4ed",
+        "corpus": "3fd861a16c10c4ed",
+        "alignedAt": "2026-10-02"
       }
     },
     {
@@ -603,9 +603,9 @@
       "mode": "identical",
       "reason": "RICONCILIATO 2026-09-28 come chiusura transitiva del trasporto di scripts/ci/scan-job-timeouts.mjs per #1110: lo scanner Site importa isFailureReportingDisabled, assente nella copia Corpus precedente. Copia byte-identica dal sito, senza adattamenti locali.",
       "baseline": {
-        "site": "171c4f2567240b19",
-        "corpus": "171c4f2567240b19",
-        "alignedAt": "2026-09-28"
+        "site": "bececdc15d5a0e8c",
+        "corpus": "bececdc15d5a0e8c",
+        "alignedAt": "2026-10-02"
       }
     },
     {
@@ -813,9 +813,9 @@
       "mode": "identical",
       "reason": "2026-09-29 (valerielinc-ops/frontaliere-si-o-no#7483): era `both-moved` dal 2026-09-04. Il delta del corpus (#837: pagine annotations vuote che non provano l'assenza di timeout, job `failure` fuori dalle cancellazioni fantasma, storico run memoizzato) e' risalito sul sito con valerielinc-ops/frontaliere-si-o-no#9783, e il sito ha poi aggiunto i branch shadow dei crawler (#8557), il verdetto sulla stessa run rossa con continue-on-error (#10101) e il criterio di uscita del gruppo di quarantena 24 (#10226). Il sito contiene quindi tutto il corpus: sceso VERBATIM, con il modulo che importa (`scripts/lib/crawler-generation-token.mjs`, voce propria). La review della discesa (#1973) ha trovato due buchi nel verdetto dei membri crawler, corretti sul sito con valerielinc-ops/frontaliere-si-o-no#10295 e scesi nella stessa PR: un membro di un gruppo rosso e' verde solo se la riga di esito del gate dichiara tanti membri non verdi quanti l'aggregato ne elenca. Il secondo giro di review ha trovato il buco simmetrico sul gruppo di quarantena, che chiude verde con i fallimenti noti: corretto con valerielinc-ops/frontaliere-si-o-no#10301, il verdetto dei suoi membri si legge dal notice `crawler-quarantine-outcomes` dell'aggregato (qui come sul sito solo `crawler-group-24.yml` lo emette).",
       "baseline": {
-        "site": "0c2e4edd5b3e9c1a",
-        "corpus": "0c2e4edd5b3e9c1a",
-        "alignedAt": "2026-09-29"
+        "site": "f4f1222ffbb468ec",
+        "corpus": "f4f1222ffbb468ec",
+        "alignedAt": "2026-10-02"
       }
     },
     {
@@ -1291,9 +1291,9 @@
       "path": "scripts/ci/harvest-agent-lessons.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "51010ad6b3ad43ef",
-        "corpus": "51010ad6b3ad43ef",
-        "alignedAt": "2026-09-30"
+        "site": "50c9f7695affab9b",
+        "corpus": "50c9f7695affab9b",
+        "alignedAt": "2026-10-02"
       }
     },
     {
