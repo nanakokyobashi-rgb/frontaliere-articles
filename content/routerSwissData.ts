@@ -2535,6 +2535,10 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'cassa-malati-premi-ticino-aumento': { it: 'cassa-malati-premi-ticino-aumento', en: 'health-insurance-premiums-ticino-increase', de: 'krankenversicherungspramien-tiino-erhohung', fr: 'primes-assurance-maladie-tessin-augmentation' },
  'annuncio-parmelin-sgravio-2024': { it: 'annuncio-parmelin-sgravio-2024', en: 'parmelin-resignation-economic-praise', de: 'parmelin-ruecktritt-wirtschaft-dank', fr: 'parmelin-demission-merci-economique' },
  'inventario-idroelettrico-storico': { it: 'inventario-idroelettrico-storico', en: 'historic-hydropower-inventory', de: 'historisches-wasserkraft-inventar', fr: 'inventaire-hydroelectrique-historique' },
+ 'dimissioni-guy-parmelin-2026': { it: 'dimissioni-guy-parmelin-2026', en: 'guy-parmelin-resignation-2026', de: 'ruecktritt-guy-parmelin-2026', fr: 'demission-guy-parmelin-2026' },
+ 'guida-imprenditoriale-grigioni': { it: 'guida-imprenditoriale-grigioni', en: 'grisons-business-registration-costs', de: 'geschaeft-gruenden-graubuenden-kosten', fr: 'creer-entreprise-grisons-couts' },
+ 'confronto-salari-settori-berna': { it: 'confronto-salari-settori-berna', en: 'swiss-salary-sectors-bern', de: 'schweizer-loehne-berufe-bern', fr: 'salaires-suisses-secteurs-berne' },
+ 'netto-professioni-stgallen-2026': { it: 'netto-professioni-stgallen-2026', en: 'swiss-salary-st-gallen-2026', de: 'schweizer-gehalt-st-gallen-2026', fr: 'salaire-suisse-saint-gall-2026' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

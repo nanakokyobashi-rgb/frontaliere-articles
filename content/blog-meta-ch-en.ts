@@ -7538,6 +7538,18 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.inventario-idroelettrico-storico.title': 'Inventory of Historic Hydropower Plants',
     'blog.article.inventario-idroelettrico-storico.excerpt': 'In Bern, the Federal Council took note of the report on hydroelectric power plants that were active in 1914 and still exist. The inventory completes the Swiss statistics.',
     'blog.article.inventario-idroelettrico-storico.imageAlt': 'Historic hydropower plant in a Swiss Alpine landscape',
+    'blog.article.dimissioni-guy-parmelin-2026.title': 'Guy Parmelin announces his resignation from the Federal Council',
+    'blog.article.dimissioni-guy-parmelin-2026.excerpt': 'The head of the Federal Department of Economic Affairs will leave office on 31 December 2026. Excluding health reasons: \'I feel a certain tiredness\'.',
+    'blog.article.dimissioni-guy-parmelin-2026.imageAlt': 'Federal Palace in Bern, seat of the Swiss government.',
+    'blog.article.guida-imprenditoriale-grigioni.title': 'Opening a business in the Canton of Graubünden: register and costs',
+    'blog.article.guida-imprenditoriale-grigioni.excerpt': 'In the canton of Graubünden, the course combines legal form, commercial register, minimum capital, registration fees and insurance obligations.',
+    'blog.article.guida-imprenditoriale-grigioni.imageAlt': 'Business registration documents in the Swiss canton of Grisons',
+    'blog.article.confronto-salari-settori-berna.title': 'Average salary for professions in Switzerland 2026: canton of Bern',
+    'blog.article.confronto-salari-settori-berna.excerpt': '2026 comparison of the average salary by profession in Switzerland and the canton of Bern: cantons, minimum wage, AHV/IV/EO, BVG, contributions and cost of living.',
+    'blog.article.confronto-salari-settori-berna.imageAlt': 'Swiss workers comparing salary data and payroll contributions in an office',
+    'blog.article.netto-professioni-stgallen-2026.title': 'Average salary by profession Switzerland 2026: St. Gallen',
+    'blog.article.netto-professioni-stgallen-2026.excerpt': '2026 comparison between professions, cantons and sectors: AHV contributions, BVG, taxes on three levels and KVG to read the canton of St. Gallen.',
+    'blog.article.netto-professioni-stgallen-2026.imageAlt': 'Swiss salary comparison by profession, focused on the canton of St. Gallen',
 };
 
 export default blogMetaChEn;

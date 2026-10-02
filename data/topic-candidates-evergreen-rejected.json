@@ -499,7 +499,9 @@
     "permesso L di breve durata canton Basilea Campagna validità e proroga",
     "premi cassa malati lamal 2026 canton Argovia",
     "apprendistato e formazione professionale canton Basilea Campagna",
-    "salario medio professioni svizzera 2026"
+    "salario medio professioni svizzera 2026",
+    "salario medio professioni svizzera 2026 canton Zurigo",
+    "salario medio professioni svizzera 2026 canton Vaud"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -778,7 +780,7 @@
     "vivere a Proserpio e lavorare in Ticino da frontaliere": 1,
     "vivere a Merone e lavorare in Ticino da frontaliere": 2,
     "imposta di successione e donazione canton Friburgo aliquote": 2,
-    "salario medio professioni svizzera 2026 canton Zurigo": 1
+    "salario medio professioni svizzera 2026 canton Zurigo": 2
   },
   "topicGateUrls": {
     "svizzera::https://www.admin.ch/it/newnsb/l6pd-kzlx5xp": {
@@ -884,6 +886,18 @@
     "svizzera::https://www.swissinfo.ch/ita/beyond-gravity-nel-mirino-di-un-attacco-informatico/92158747": {
       "section": "svizzera",
       "ts": 1790957953931
+    },
+    "svizzera::https://www.tio.ch/ticino/cronaca/1954320/a2-rega-autostrada-soccorso-elicottero": {
+      "section": "svizzera",
+      "ts": 1790960721177
+    },
+    "svizzera::https://www.tio.ch/ticino/attualita/1954316/occhio-all-acceleratore-il-piede-pesante-si-paga": {
+      "section": "svizzera",
+      "ts": 1790963159924
+    },
+    "svizzera::https://lenews.ch/2026/10/02/film-zurich-film-festival-2026-excellent-international-films-and-top-stars": {
+      "section": "svizzera",
+      "ts": 1790964335227
     }
   }
 }

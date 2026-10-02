@@ -22642,6 +22642,42 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'dimissioni-guy-parmelin-2026',
+    category: 'novita',
+    date: '2026-10-02T16:44:51.281Z',
+    image: '/images/blog/dimissioni-guy-parmelin-2026.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'guida-imprenditoriale-grigioni',
+    category: 'pratico',
+    date: '2026-10-02T17:40:42.667Z',
+    image: '/images/blog/guida-imprenditoriale-grigioni.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'confronto-salari-settori-berna',
+    category: 'pratico',
+    date: '2026-10-02T17:59:04.595Z',
+    image: '/images/blog/confronto-salari-settori-berna.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'netto-professioni-stgallen-2026',
+    category: 'pratico',
+    date: '2026-10-02T18:40:14.683Z',
+    image: '/images/blog/netto-professioni-stgallen-2026.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

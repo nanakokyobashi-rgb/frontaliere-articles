@@ -7538,6 +7538,18 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.inventario-idroelettrico-storico.title': 'Inventario degli impianti idroelettrici storici',
     'blog.article.inventario-idroelettrico-storico.excerpt': 'Il Consiglio federale ha preso atto a Berna del rapporto sugli impianti idroelettrici attivi nel 1914 e ancora esistenti. L\'inventario completa la statistica svizzera.',
     'blog.article.inventario-idroelettrico-storico.imageAlt': 'Impianto idroelettrico storico in un paesaggio alpino svizzero',
+    'blog.article.dimissioni-guy-parmelin-2026.title': 'Guy Parmelin annuncia le dimissioni dal Consiglio federale',
+    'blog.article.dimissioni-guy-parmelin-2026.excerpt': 'Il capo del Dipartimento federale dell\'economia lascerà l\'incarico il 31 dicembre 2026. Esclusi motivi di salute: \'Avverto una certa stanchezza\'.',
+    'blog.article.dimissioni-guy-parmelin-2026.imageAlt': 'Palazzo federale a Berna, sede del governo svizzero.',
+    'blog.article.guida-imprenditoriale-grigioni.title': 'Aprire attività nel Canton Grigioni: registro e costi',
+    'blog.article.guida-imprenditoriale-grigioni.excerpt': 'Nel Canton Grigioni il percorso unisce forma giuridica, registro di commercio, capitale minimo, tasse d\'iscrizione e obblighi assicurativi.',
+    'blog.article.guida-imprenditoriale-grigioni.imageAlt': 'Documenti per avviare un\'attività nel Cantone dei Grigioni',
+    'blog.article.confronto-salari-settori-berna.title': 'Salario medio professioni Svizzera 2026: canton Berna',
+    'blog.article.confronto-salari-settori-berna.excerpt': 'Confronto 2026 del salario medio per professione in Svizzera e nel canton Berna: Cantoni, salario minimo, AVS/AI/IPG, LPP, contributi e costo della vita.',
+    'blog.article.confronto-salari-settori-berna.imageAlt': 'Lavoratori svizzeri confrontano dati salariali e contributi in ufficio',
+    'blog.article.netto-professioni-stgallen-2026.title': 'Salario medio professioni Svizzera 2026: San Gallo',
+    'blog.article.netto-professioni-stgallen-2026.excerpt': 'Confronto 2026 tra professioni, cantoni e settori: contributi AVS, LPP, imposte su tre livelli e LAMal per leggere il canton San Gallo.',
+    'blog.article.netto-professioni-stgallen-2026.imageAlt': 'Confronto dei salari svizzeri per professione, con focus sul canton San Gallo',
 };
 
 export default blogMetaChIt;

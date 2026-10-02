@@ -7538,6 +7538,18 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.inventario-idroelettrico-storico.title': 'Inventar historischer Wasserkraftwerke',
     'blog.article.inventario-idroelettrico-storico.excerpt': 'In Bern nahm der Bundesrat den Bericht über Wasserkraftwerke zur Kenntnis, die 1914 in Betrieb waren und noch existieren. Das Inventar vervollständigt die Schweizer Statistiken.',
     'blog.article.inventario-idroelettrico-storico.imageAlt': 'Historische Wasserkraftanlage in einer Schweizer Alpenlandschaft',
+    'blog.article.dimissioni-guy-parmelin-2026.title': 'Guy Parmelin kündigt seinen Rücktritt aus dem Bundesrat an',
+    'blog.article.dimissioni-guy-parmelin-2026.excerpt': 'Der Vorsteher des Eidgenössischen Departements für Wirtschaft wird am 31. Dezember 2026 sein Amt niederlegen. Gesundheitliche Gründe ausgeschlossen: \'Ich verspüre eine gewisse Müdigkeit\'.',
+    'blog.article.dimissioni-guy-parmelin-2026.imageAlt': 'Bundeshaus in Bern, Sitz der Schweizer Regierung.',
+    'blog.article.guida-imprenditoriale-grigioni.title': 'Geschäftsgründung im Kanton Graubünden: Registrierung und Kosten',
+    'blog.article.guida-imprenditoriale-grigioni.excerpt': 'Im Kanton Graubünden kombiniert der Kurs Rechtsform, Handelsregister, Mindestkapital, Registrierungsgebühren und Versicherungspflichten.',
+    'blog.article.guida-imprenditoriale-grigioni.imageAlt': 'Unterlagen zur Unternehmensgründung im Schweizer Kanton Graubünden',
+    'blog.article.confronto-salari-settori-berna.title': 'Durchschnittsgehalt für Berufe in der Schweiz 2026: Kanton Bern',
+    'blog.article.confronto-salari-settori-berna.excerpt': 'Vergleich 2026 des durchschnittlichen Gehalts nach Berufen in der Schweiz und im Kanton Bern: Kantone, Mindestlohn, AHV/IV/EO, BVG, Beiträge und Lebenshaltungskosten.',
+    'blog.article.confronto-salari-settori-berna.imageAlt': 'Schweizer Arbeitnehmer vergleichen Lohndaten und Lohnbeiträge im Büro',
+    'blog.article.netto-professioni-stgallen-2026.title': 'Durchschnittliches Berufsgehalt Schweiz 2026: St. Gallen',
+    'blog.article.netto-professioni-stgallen-2026.excerpt': 'Vergleich 2026 zwischen Berufen, Kantonen und Sektoren: AHV- und BVG-Beiträge, Steuern auf drei Ebenen und KVG zur Einordnung des Kantons St. Gallen.',
+    'blog.article.netto-professioni-stgallen-2026.imageAlt': 'Schweizer Gehaltsvergleich nach Beruf mit Fokus auf den Kanton St. Gallen',
 };
 
 export default blogMetaChDe;

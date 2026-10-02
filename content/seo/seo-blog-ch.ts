@@ -97754,6 +97754,162 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-dimissioni-guy-parmelin-2026': {
+    title: 'Guy Parmelin annuncia le dimissioni dal Consiglio federale',
+    description: 'Guy Parmelin lascerà il Consiglio federale il 31 dicembre 2026. Il capo del DFE parla di stanchezza e non di salute. Successione aperta tra sfide economiche.',
+    keywords: 'frontalieri, ticino, svizzera, italia, parmelin, annuncia, dimissioni, consiglio',
+    ogTitle: 'Guy Parmelin annuncia le dimissioni dal Consiglio federale',
+    ogDescription: 'Il capo del Dipartimento federale dell\'economia lascerà l\'incarico a fine anno. Esclusi motivi di salute, il consigliere federale punta alla continuità fino al 31 dicembre.',
+    canonicalPath: '/articoli-svizzera/dimissioni-guy-parmelin-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Guy Parmelin annuncia le dimissioni dal Consiglio federale",
+      "description": "Guy Parmelin lascerà il Consiglio federale il 31 dicembre 2026. Il capo del DFE parla di stanchezza e non di salute. Successione aperta tra sfide economiche.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/dimissioni-guy-parmelin-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna, sede del governo svizzero."
+      },
+      "datePublished": "2026-10-02T16:44:51+00:00",
+      "dateModified": "2026-10-02T16:44:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/dimissioni-guy-parmelin-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-guida-imprenditoriale-grigioni': {
+    title: 'Aprire attività nel Canton Grigioni: registro e costi',
+    description: 'Aprire un\'attività nei Grigioni: forma giuridica, registro di commercio, capitale minimo, tasse, IVA, AVS/AI/IPG, LPP e LAMal in una guida pratica.',
+    keywords: 'frontalieri, ticino, svizzera, italia, aprire, attività, canton, grigioni',
+    ogTitle: 'Attività nei Grigioni: registro e costi',
+    ogDescription: 'Il preventivo per un\'attività nel Canton Grigioni deve separare iscrizione, capitale minimo, imposte federali, cantonali e comunali, contributi sui salari e LAMal. Una guida pratica a competenze, percentuali e scadenze.',
+    canonicalPath: '/articoli-svizzera/guida-imprenditoriale-grigioni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aprire attività nel Canton Grigioni: registro e costi",
+      "description": "Aprire un'attività nei Grigioni: forma giuridica, registro di commercio, capitale minimo, tasse, IVA, AVS/AI/IPG, LPP e LAMal in una guida pratica.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/guida-imprenditoriale-grigioni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documenti per avviare un'attività nel Cantone dei Grigioni"
+      },
+      "datePublished": "2026-10-02T17:40:42+00:00",
+      "dateModified": "2026-10-02T17:40:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/guida-imprenditoriale-grigioni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-confronto-salari-settori-berna': {
+    title: 'Salario medio professioni Svizzera 2026: canton Berna',
+    description: 'Confronto 2026 del salario medio per professione in Svizzera e nel canton Berna: Cantoni, salario minimo, AVS/AI/IPG, LPP, contributi e costo della vita.',
+    keywords: 'frontalieri, ticino, svizzera, italia, salario, medio, professioni, canton',
+    ogTitle: 'Salario medio Svizzera 2026: focus Berna',
+    ogDescription: 'Il confronto del salario medio 2026 tra professioni e Cantoni richiede più della cifra annuale: contano salario minimo cantonale, AVS/AI/IPG, LPP/BVG, fisco a tre livelli, premi LAMal e costo della vita, con un focus sul canton Berna.',
+    canonicalPath: '/articoli-svizzera/confronto-salari-settori-berna/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Salario medio professioni Svizzera 2026: canton Berna",
+      "description": "Confronto 2026 del salario medio per professione in Svizzera e nel canton Berna: Cantoni, salario minimo, AVS/AI/IPG, LPP, contributi e costo della vita.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/confronto-salari-settori-berna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lavoratori svizzeri confrontano dati salariali e contributi in ufficio"
+      },
+      "datePublished": "2026-10-02T17:59:04+00:00",
+      "dateModified": "2026-10-02T17:59:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/confronto-salari-settori-berna/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-netto-professioni-stgallen-2026': {
+    title: 'Salario medio professioni Svizzera 2026: San Gallo',
+    description: 'Salario medio per professione in Svizzera nel 2026: guida al confronto con il canton San Gallo tra lordo, contributi, imposte, LAMal e netto disponibile.',
+    keywords: 'frontalieri, ticino, svizzera, italia, salario, medio, professioni, gallo',
+    ogTitle: 'Salario medio Svizzera 2026: canton San Gallo',
+    ogDescription: 'Confronto 2026 tra professioni, settori e cantoni: il salario del canton San Gallo va letto insieme a AVS/AI/IPG, AD/AC, LPP, imposte su tre livelli e premi LAMal. Tutti i passaggi per evitare importi non verificati e distinguere il lordo dal netto.',
+    canonicalPath: '/articoli-svizzera/netto-professioni-stgallen-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Salario medio professioni Svizzera 2026: San Gallo",
+      "description": "Salario medio per professione in Svizzera nel 2026: guida al confronto con il canton San Gallo tra lordo, contributi, imposte, LAMal e netto disponibile.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/netto-professioni-stgallen-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Confronto dei salari svizzeri per professione, con focus sul canton San Gallo"
+      },
+      "datePublished": "2026-10-02T18:40:14+00:00",
+      "dateModified": "2026-10-02T18:40:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/netto-professioni-stgallen-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
