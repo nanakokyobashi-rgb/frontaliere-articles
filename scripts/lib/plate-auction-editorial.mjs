@@ -285,12 +285,16 @@ export async function fetchPlateAuctionEditorialInput({
   if (url) return fetchPlateAuctionSnapshot(url, fetcher, timeoutMs);
   const staticInput = await fetchPlateAuctionSnapshot(DEFAULT_PLATE_AUCTION_STATIC_URL, fetcher, timeoutMs);
   const generatedMs = Date.parse(staticInput.snapshot?.generatedAt);
-  if (staticInput.snapshot && Number.isFinite(generatedMs) && now - generatedMs <= PLATE_AUCTION_STATIC_MAX_AGE_MS) {
+  // A generatedAt in the future proves nothing about freshness: such a file
+  // goes to the function like an old one.
+  if (staticInput.snapshot && Number.isFinite(generatedMs) && generatedMs <= now
+    && now - generatedMs <= PLATE_AUCTION_STATIC_MAX_AGE_MS) {
     return staticInput;
   }
   const apiInput = await fetchPlateAuctionSnapshot(DEFAULT_PLATE_AUCTION_API_URL, fetcher, timeoutMs);
   if (apiInput.snapshot || !staticInput.snapshot) return apiInput;
-  return staticInput;
+  // Kept, but not silently: build-api.mjs records errorCode in the editorial.
+  return { ...staticInput, errorCode: `stale-static-api-${apiInput.errorCode || 'unavailable'}` };
 }
 
 async function fetchPlateAuctionSnapshot(url, fetcher, timeoutMs) {

@@ -248,4 +248,21 @@ test('asks the function only when the static snapshot is old or fails', async ()
   });
   assert.equal(keepStale.status, 'ready');
   assert.equal(keepStale.snapshot.generatedAt, stale);
+  // Kept, but the upstream failure stays visible in the published editorial.
+  assert.equal(keepStale.errorCode, 'stale-static-api-http-503');
+});
+
+// Review on 2037: a future generatedAt must not pass for a fresh snapshot.
+test('treats a static snapshot dated in the future as not fresh', async () => {
+  const now = Date.parse('2026-10-02T04:00:00.000Z');
+  const calls = [];
+  const input = await fetchPlateAuctionEditorialInput({
+    now,
+    fetcher: async (url) => {
+      calls.push(url);
+      return { ok: true, json: async () => ({ ...SNAPSHOT, generatedAt: url === DEFAULT_PLATE_AUCTION_STATIC_URL ? '2027-01-01T00:00:00.000Z' : '2026-10-02T03:59:00.000Z' }) };
+    },
+  });
+  assert.deepEqual(calls, [DEFAULT_PLATE_AUCTION_STATIC_URL, DEFAULT_PLATE_AUCTION_API_URL]);
+  assert.equal(input.snapshot.generatedAt, '2026-10-02T03:59:00.000Z');
 });
