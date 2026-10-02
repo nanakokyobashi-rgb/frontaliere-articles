@@ -21,6 +21,10 @@ test('preserves a bare numeric price already supplied by the price field', () =>
 test('keeps free and contextual prices on their existing paths', () => {
   assert.deepEqual(parsePriceText('0'), { amount: 0, currency: 'CHF', isFree: true });
   assert.deepEqual(parsePriceText('CHF 10 pro Person'), { amount: 10, currency: 'CHF', isFree: false });
+  assert.deepEqual(parsePriceText('CHF10'), { amount: 10, currency: 'CHF', isFree: false });
+  assert.deepEqual(parsePriceText('10CHF'), { amount: 10, currency: 'CHF', isFree: false });
+  assert.deepEqual(parsePriceText('CHF 20 (EUR 22)'), { amount: 20, currency: 'CHF', isFree: false });
+  assert.deepEqual(parsePriceText('Bambini gratuiti, adulti CHF 20'), { amount: 20, currency: 'CHF', isFree: false });
 });
 
 test('does not treat ambiguous dates or phone numbers as bare prices', () => {
