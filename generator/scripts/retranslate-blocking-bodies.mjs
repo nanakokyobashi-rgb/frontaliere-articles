@@ -164,6 +164,11 @@ function italianResidueLineReason(line, locale) {
   const clean = normalizeItalianResidueLine(line);
   if (!clean) return null;
   if (ITALIAN_RESIDUE_HEADING_RE.test(clean)) return 'heading';
+  // Il detector trigram e' poco affidabile sui titoli Markdown brevi: per
+  // esempio classifica "In a nutshell" e "What to do..." come italiano.
+  // Conta solo i titoli italiani canonici sopra; un titolo gia' localizzato
+  // non deve, da solo o in gruppo con altri titoli, autorizzare una riscrittura.
+  if (/^\s*#{1,6}\s+/u.test(line)) return null;
 
   const words = clean.match(ITALIAN_RESIDUE_WORD_RE) || [];
   if (words.length < 3) return null;

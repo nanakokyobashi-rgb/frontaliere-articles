@@ -356,6 +356,37 @@ test('lo scan per riga riconosce prosa italiana comune senza segnalare il france
   assert.deepEqual(french, []);
 });
 
+test('lo scan ignora heading Markdown tradotti ma conserva quelli italiani canonici', () => {
+  const translatedHeadings = {
+    en: [
+      '## In a nutshell',
+      '### What to do to avoid future delays',
+      '## Closure history by phase',
+    ].join('\n'),
+    de: [
+      '## Ein Straßennetz unter Stress',
+      '### Schritt 4: Digitale Tools nutzen',
+      '## Praktische Analyse: Lebenslektionen von Alex Zanardi',
+    ].join('\n'),
+    fr: [
+      '## Activités collatérales et village olympique',
+      '### Délais et envoi',
+      '## Contacter un avocat',
+    ].join('\n'),
+  };
+
+  for (const [locale, body1] of Object.entries(translatedHeadings)) {
+    assert.deepEqual(scanItalianResidue({ body1 }, locale), [], locale);
+  }
+
+  assert.deepEqual(scanItalianResidue({ body1: '## In breve' }, 'en'), [{
+    field: 'body1',
+    line: 1,
+    reason: 'heading',
+    text: 'In breve',
+  }]);
+});
+
 test('la soglia lascia fuori una riga italiana isolata e il locale sorgente', () => {
   const oneLine = { body1: '## Fatti chiave\n- **Cosa**: Convocazione dell’assemblea CUV.' };
   assert.equal(scanItalianResidue(oneLine, 'fr').length, 2);
