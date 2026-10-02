@@ -98066,6 +98066,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-inflazione-eurozona-picco-triennale': {
+    title: 'Inflazione eurozona: nuovo picco da tre anni | Frontaliere Ticino',
+    description: 'Eurozona: inflazione al 3,8% a settembre, contro il 3,2% di agosto. L\'energia sale al 18,8% e la BCE porta il tasso principale al 2,5%, secondo Eurostat.',
+    keywords: 'frontalieri, ticino, svizzera, italia, inflazione, eurozona, nuovo, picco',
+    ogTitle: 'Inflazione eurozona: picco da tre anni',
+    ogDescription: 'La prima stima Eurostat porta l\'inflazione dell\'eurozona al 3,8% a settembre, dal 3,2% di agosto. Nei 21 Paesi della moneta unica, l\'energia cresce al 18,8% e la BCE ha portato il tasso principale al 2,5%.',
+    canonicalPath: '/articoli-svizzera/inflazione-eurozona-picco-triennale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Inflazione eurozona: nuovo picco da tre anni",
+      "description": "Eurozona: inflazione al 3,8% a settembre, contro il 3,2% di agosto. L'energia sale al 18,8% e la BCE porta il tasso principale al 2,5%, secondo Eurostat.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/inflazione-eurozona-picco-triennale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista urbana svizzera con monitor sull'inflazione dell'eurozona."
+      },
+      "datePublished": "2026-10-02T20:35:47+00:00",
+      "dateModified": "2026-10-02T20:35:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/inflazione-eurozona-picco-triennale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
