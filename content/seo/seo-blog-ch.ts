@@ -98378,6 +98378,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-diritti-inquilino-ginevra-2026': {
+    title: 'Affitti in Svizzera 2026: mercato e regole a Ginevra',
+    description: 'Deposito fino a tre mensilità, conto vincolato e 30 giorni per contestare la disdetta: le regole federali valgono anche nel canton Ginevra e negli altri',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, mercato, regole, ginevra',
+    ogTitle: 'Affitti in Svizzera 2026: mercato e regole a Ginevra',
+    ogDescription: 'Deposito massimo di tre mensilità, conto vincolato e modulo cantonale per la disdetta del locatore: la guida al diritto federale della locazione affronta il bilancio familiare e il focus sul canton Ginevra, con le scadenze da rispettare.',
+    canonicalPath: '/articoli-svizzera/diritti-inquilino-ginevra-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti in Svizzera 2026: mercato e regole a Ginevra",
+      "description": "Deposito fino a tre mensilità, conto vincolato e 30 giorni per contestare la disdetta: le regole federali valgono anche nel canton Ginevra e negli altri",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/diritti-inquilino-ginevra-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzi residenziali svizzeri in un quartiere urbano, simbolo del mercato degli affitti"
+      },
+      "datePublished": "2026-10-03T00:16:14+00:00",
+      "dateModified": "2026-10-03T00:16:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/diritti-inquilino-ginevra-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
