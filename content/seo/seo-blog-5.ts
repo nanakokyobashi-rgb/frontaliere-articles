@@ -98470,6 +98470,162 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-bollettino-frontaliere-2026-10-03': {
+    title: 'Bollettino del frontaliere – 3 ottobre 2026: a Ponte Tresa 41 minuti di coda',
+    description: 'Bollettino frontalieri del 3 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
+    keywords: 'bollettino frontaliere, dogana, attesa dogana, code valichi ticino, prezzi benzina confine, cambio franco euro, lavoro svizzera, frontalieri ticino',
+    ogTitle: 'Bollettino del frontaliere – 3 ottobre 2026: a Ponte Tresa 41 minuti di coda',
+    ogDescription: 'I numeri del 3 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    canonicalPath: '/articoli-frontaliere/bollettino-frontaliere-2026-10-03',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bollettino del frontaliere – 3 ottobre 2026: a Ponte Tresa 41 minuti di coda",
+      "description": "Bollettino frontalieri del 3 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bollettino-frontaliere-2026-10-03.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "I numeri del giorno per i frontalieri – 3 ottobre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro"
+      },
+      "datePublished": "2026-10-03T10:17:32+00:00",
+      "dateModified": "2026-10-03T10:17:32+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/samuele-valente/#person",
+        "name": "Samuele Valente",
+        "url": "https://frontaliereticino.ch/autori/samuele-valente/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/bollettino-frontaliere-2026-10-03/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-pasture-vertenza-governo-federale': {
+    title: 'Pasture: vertenza del personale al governo federale',
+    description: 'Pasture, Giorgio Fonio interroga il governo federale su mandati e garanzie occupazionali. Sindacati e Commissione del personale chiedono un incontro ad AOZ.',
+    keywords: 'frontalieri, ticino, svizzera, italia, pasture, vertenza, personale, governo',
+    ogTitle: 'Pasture, la vertenza arriva al governo federale',
+    ogDescription: 'La vertenza sul personale di Pasture si sposta sul piano federale: il deputato Giorgio Fonio interroga su mandati e garanzie occupazionali. Intanto, sindacati e Commissione del personale chiedono ad AOZ un incontro sulla situazione in Ticino.',
+    canonicalPath: '/articoli-frontaliere/pasture-vertenza-governo-federale',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Pasture: vertenza del personale al governo federale",
+      "description": "Pasture, Giorgio Fonio interroga il governo federale su mandati e garanzie occupazionali. Sindacati e Commissione del personale chiedono un incontro ad AOZ.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/pasture-vertenza-governo-federale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lavoratori davanti a un edificio in Ticino, in stile reportage."
+      },
+      "datePublished": "2026-10-03T10:40:14+00:00",
+      "dateModified": "2026-10-03T10:40:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/pasture-vertenza-governo-federale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-furto-noranco-arresti-garage': {
+    title: 'Furto auto Noranco: tre arresti e veicoli recuperati',
+    description: 'Tre auto di alta gamma rubate in un garage di Noranco recuperate. Tre persone, residenti in Francia, fermate a Manno, Tenero e Lucerna. Le autorità raccomandano',
+    keywords: 'frontalieri, ticino, svizzera, italia, furto, auto, noranco, arresti',
+    ogTitle: 'Furto auto a Noranco: tre arresti, veicoli recuperati',
+    ogDescription: 'Nella notte, tre auto di alta gamma sono state rubate da un garage di Noranco. Grazie a un\'operazione coordinata tra diverse polizie, i veicoli sono stati recuperati e tre persone, residenti in Francia, sono state fermate. Scopri i dettagli',
+    canonicalPath: '/articoli-frontaliere/furto-noranco-arresti-garage',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Furto auto Noranco: tre arresti e veicoli recuperati",
+      "description": "Tre auto di alta gamma rubate in un garage di Noranco recuperate. Tre persone, residenti in Francia, fermate a Manno, Tenero e Lucerna. Le autorità raccomandano",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/furto-noranco-arresti-garage.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine di un garage sicuro con sistemi di protezione, che richiama le misure di prevenzione contro i furti in Ticino."
+      },
+      "datePublished": "2026-10-03T11:39:30+00:00",
+      "dateModified": "2026-10-03T11:39:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/furto-noranco-arresti-garage/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-prezzi-carburanti-settembre': {
+    title: 'Inflazione Svizzera: +1% a settembre per i carburanti',
+    description: 'Inflazione svizzera all\'1% a settembre: i carburanti trainano i prezzi, con olio combustibile +65%, diesel +28,7% e benzina +19,9%. IPC mensile resta stabile.',
+    keywords: 'frontalieri, ticino, svizzera, italia, inflazione, settembre, carburanti, sale',
+    ogTitle: 'Inflazione Svizzera: carburanti spingono i prezzi',
+    ogDescription: 'A settembre l\'inflazione annua svizzera è salita all\'1%. La fonte collega l\'impennata dei carburanti alla guerra in Medio Oriente: +65% per l\'olio combustibile, +28,7% per il diesel e +19,9% per la benzina. L\'IPC mensile è rimasto stabile.',
+    canonicalPath: '/articoli-frontaliere/prezzi-carburanti-settembre',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Inflazione Svizzera: +1% a settembre per i carburanti",
+      "description": "Inflazione svizzera all'1% a settembre: i carburanti trainano i prezzi, con olio combustibile +65%, diesel +28,7% e benzina +19,9%. IPC mensile resta stabile.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/prezzi-carburanti-settembre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Distributore di carburante in Svizzera con auto in sosta"
+      },
+      "datePublished": "2026-10-03T12:21:29+00:00",
+      "dateModified": "2026-10-03T12:21:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/prezzi-carburanti-settembre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

@@ -12394,6 +12394,20 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.svizzera-tassa-ingresso-franchi.title': 'Suisse, taxe d\'entrée jusqu\'à 4mila francs',
     'blog.article.svizzera-tassa-ingresso-franchi.excerpt': 'La proposition suisse prévoit une taxe incitative comprise entre 2mila et 4mila francs, liée à la clause de sauvegarde pour les citoyens de l\'UE.',
     'blog.article.svizzera-tassa-ingresso-franchi.imageAlt': 'Route frontalière au Tessin avec signalisation suisse et trafic léger.',
+    'blog.article.bollettino-frontaliere-2026-10-03.title': 'Bulletin du frontalier – 3 octobre 2026 : 41 minutes d\'attente à Ponte Tresa',
+    'blog.article.bollettino-frontaliere-2026-10-03.excerpt': 'Les chiffres du jour, 3 octobre 2026, pour les frontaliers : les attentes relevées ce matin à chaque douane, les communes où l\'essence coûte le moins cher, le taux franc-euro à la clôture et les offres d\'emploi parues en Suisse. Des données de notre suivi, relevées chaque jour.',
+    'blog.article.bollettino-frontaliere-2026-10-03.imageAlt': 'Les chiffres du jour pour les frontaliers – 3 octobre 2026 : attentes aux douanes, prix de l\'essence, taux CHF-EUR et offres d\'emploi',
+    'blog.article.bollettino-frontaliere-2026-10-03.seoDescription': 'Bulletin du frontalier du 3 octobre 2026 : les files aux douanes ce matin, l\'essence la moins chère, taux franc-euro et nouvelles offres d\'emploi en Suisse.',
+    'blog.article.bollettino-frontaliere-2026-10-03.ogDescription': 'Les chiffres du 3 octobre 2026 pour les frontaliers : combien de temps on attend ce matin à chaque douane, où l\'essence coûte le moins cher, ce que vaut le franc aujourd\'hui et combien d\'offres d\'emploi sont parues en Suisse.',
+    'blog.article.pasture-vertenza-governo-federale.title': 'Pasture : le conflit du personnel devant le gouvernement fédéral',
+    'blog.article.pasture-vertenza-governo-federale.excerpt': 'Giorgio Fonio interroge sur les mandats et les garanties d\'emploi. Les syndicats et la Commission du personnel demandent une rencontre avec AOZ au sujet de la situation au Tessin.',
+    'blog.article.pasture-vertenza-governo-federale.imageAlt': 'Travailleurs devant un bâtiment au Tessin, dans un style reportage.',
+    'blog.article.furto-noranco-arresti-garage.title': 'Vol de voitures à Noranco : trois arrestations et véhicules récupérés',
+    'blog.article.furto-noranco-arresti-garage.excerpt': 'Trois voitures haut de gamme volées à Noranco ont été récupérées. Trois personnes, un Italien de 20 ans, un Algérien de 21 ans et un Français de 25 ans, résidant en France, ont été interpellées.',
+    'blog.article.furto-noranco-arresti-garage.imageAlt': 'Image d\'un garage sécurisé avec des systèmes de protection, rappelant les mesures de prévention contre les vols au Tessin.',
+    'blog.article.prezzi-carburanti-settembre.title': 'Inflation suisse : +1% en septembre pour les carburants',
+    'blog.article.prezzi-carburanti-settembre.excerpt': 'L\'inflation suisse augmente de 1% sur un an en septembre : les carburants en tête avec le fioul à +65%, le diesel à +28,7% et l\'essence à +19,9%.',
+    'blog.article.prezzi-carburanti-settembre.imageAlt': 'Station-service en Suisse avec des voitures garées',
 };
 
 export default blogMetaFr;

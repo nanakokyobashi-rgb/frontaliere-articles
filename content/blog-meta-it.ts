@@ -12393,6 +12393,20 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.svizzera-tassa-ingresso-franchi.title': 'Svizzera, tassa d\'ingresso fino a 4mila franchi',
     'blog.article.svizzera-tassa-ingresso-franchi.excerpt': 'La proposta svizzera prevede un\'imposta di incentivazione tra 2mila e 4mila franchi, legata alla clausola di salvaguardia per i cittadini UE.',
     'blog.article.svizzera-tassa-ingresso-franchi.imageAlt': 'Strada di confine in Ticino con segnaletica svizzera e traffico leggero.',
+    'blog.article.bollettino-frontaliere-2026-10-03.title': 'Bollettino del frontaliere – 3 ottobre 2026: a Ponte Tresa 41 minuti di coda',
+    'blog.article.bollettino-frontaliere-2026-10-03.excerpt': 'I numeri di oggi, 3 ottobre 2026, per chi attraversa il confine: le attese ai valichi misurate stamattina, i comuni dove la benzina costa meno, il cambio franco-euro aggiornato e i nuovi annunci di lavoro pubblicati in Svizzera. Dati del nostro monitoraggio, rilevati ogni giorno.',
+    'blog.article.bollettino-frontaliere-2026-10-03.imageAlt': 'I numeri del giorno per i frontalieri – 3 ottobre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro',
+    'blog.article.bollettino-frontaliere-2026-10-03.seoDescription': 'Bollettino frontalieri del 3 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
+    'blog.article.bollettino-frontaliere-2026-10-03.ogDescription': 'I numeri del 3 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    'blog.article.pasture-vertenza-governo-federale.title': 'Pasture: vertenza del personale al governo federale',
+    'blog.article.pasture-vertenza-governo-federale.excerpt': 'Giorgio Fonio interroga su mandati e garanzie occupazionali. Sindacati e Commissione del personale chiedono un incontro ad AOZ sulla situazione in Ticino.',
+    'blog.article.pasture-vertenza-governo-federale.imageAlt': 'Lavoratori davanti a un edificio in Ticino, in stile reportage.',
+    'blog.article.furto-noranco-arresti-garage.title': 'Furto auto Noranco: tre arresti e veicoli recuperati',
+    'blog.article.furto-noranco-arresti-garage.excerpt': 'Tre auto di alta gamma rubate a Noranco sono state recuperate. Tre persone, un 20enne italiano, un 21enne algerino e un 25enne francese, residenti in Francia, sono state fermate.',
+    'blog.article.furto-noranco-arresti-garage.imageAlt': 'Immagine di un garage sicuro con sistemi di protezione, che richiama le misure di prevenzione contro i furti in Ticino.',
+    'blog.article.prezzi-carburanti-settembre.title': 'Inflazione Svizzera: +1% a settembre per i carburanti',
+    'blog.article.prezzi-carburanti-settembre.excerpt': 'L\'inflazione svizzera sale dell\'1% annuo a settembre: carburanti in testa con olio combustibile +65%, diesel +28,7% e benzina +19,9%.',
+    'blog.article.prezzi-carburanti-settembre.imageAlt': 'Distributore di carburante in Svizzera con auto in sosta',
 };
 
 export default blogMetaIt;

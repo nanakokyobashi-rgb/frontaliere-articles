@@ -22984,6 +22984,33 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'guida-fiscale-vaud-2026',
+    category: 'fiscale',
+    date: '2026-10-03T11:04:13.754Z',
+    image: '/images/blog/guida-fiscale-vaud-2026.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
+   {
+    id: 'fisco-argovia-online-2026',
+    category: 'fiscale',
+    date: '2026-10-03T11:59:46.219Z',
+    image: '/images/blog/fisco-argovia-online-2026.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
+   {
+    id: 'pilastro3a-zurigo-strategia',
+    category: 'fiscale',
+    date: '2026-10-03T12:39:34.477Z',
+    image: '/images/blog/pilastro3a-zurigo-strategia.webp',
+    hasCalculator: true,
+    authorSlug: 'laura-bianchi',
+    authorName: 'Laura Bianchi',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

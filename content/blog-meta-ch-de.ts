@@ -7652,6 +7652,15 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.fisco-berna-guida-2026.title': 'Schweizer Steuererklärung: praktischer Leitfaden 2026 in Bern',
     'blog.article.fisco-berna-guida-2026.excerpt': 'Drei Steuerstufen, kommunaler Steuerfuss und getrennte Zuständigkeiten: der Leitfaden 2026 zur Online-Steuererklärung im Kanton Bern, mit einem nationalen Vergleich.',
     'blog.article.fisco-berna-guida-2026.imageAlt': 'Schweizer Steuerunterlagen und Taschenrechner auf einem Schreibtisch mit Fokus auf den Kanton Bern',
+    'blog.article.guida-fiscale-vaud-2026.title': 'Steuererklärung Schweiz: Leitfaden Vaud 2026',
+    'blog.article.guida-fiscale-vaud-2026.excerpt': 'Drei Steuerstufen, kommunaler Steuerfuss und Online-Verfahren: der Leitfaden 2026 zur Steuererklärung in der Schweiz mit Fokus auf den Kanton Waadt.',
+    'blog.article.guida-fiscale-vaud-2026.imageAlt': 'Schweizer Einwohner füllt online eine Steuererklärung für den Kanton Waadt aus',
+    'blog.article.fisco-argovia-online-2026.title': 'Schweizer Steuererklärung: Leitfaden 2026 im Aargau',
+    'blog.article.fisco-argovia-online-2026.excerpt': 'Der Leitfaden 2026 zur Steuererklärung im Aargau erläutert die direkte Bundessteuer, die Kantons- und Gemeindesteuern, den Steuerfuss und das Online-Verfahren.',
+    'blog.article.fisco-argovia-online-2026.imageAlt': 'Schweizer kantonales Steueramt mit Laptop und Unterlagen zur Steuererklärung 2026.',
+    'blog.article.pilastro3a-zurigo-strategia.title': 'Dritte Säule 3a: Vorteile 2026 im Kanton Zürich',
+    'blog.article.pilastro3a-zurigo-strategia.excerpt': 'Leitfaden 2026 zur dritten Säule 3a im Kanton Zürich: drei Steuerstufen, kommunaler Multiplikator und Bank- oder Versicherungsanbieter.',
+    'blog.article.pilastro3a-zurigo-strategia.imageAlt': 'Schweizer Steuerunterlagen und ein 3a-Sparplan auf einem Schreibtisch mit Zürcher Skyline.',
 };
 
 export default blogMetaChDe;

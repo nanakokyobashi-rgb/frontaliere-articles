@@ -12392,6 +12392,20 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.svizzera-tassa-ingresso-franchi.title': 'Switzerland, entry tax of up to 4 thousand francs',
     'blog.article.svizzera-tassa-ingresso-franchi.excerpt': 'The Swiss proposal provides for an incentive tax between 2 thousand and 4 thousand francs, linked to the safeguard clause for EU citizens.',
     'blog.article.svizzera-tassa-ingresso-franchi.imageAlt': 'Border road in Ticino with Swiss signs and light traffic.',
+    'blog.article.bollettino-frontaliere-2026-10-03.title': 'Cross-border daily brief – October 3, 2026: 41-minute queue at Ponte Tresa',
+    'blog.article.bollettino-frontaliere-2026-10-03.excerpt': 'Today\'s numbers, October 3, 2026, for cross-border commuters: the waits measured at every crossing this morning, the municipalities where fuel is cheapest, the franc-euro rate at yesterday\'s close and the jobs newly posted in Switzerland. Measured daily by our own monitoring.',
+    'blog.article.bollettino-frontaliere-2026-10-03.imageAlt': 'The day\'s numbers for cross-border commuters – October 3, 2026: border waits, fuel prices, CHF-EUR rate and job listings',
+    'blog.article.bollettino-frontaliere-2026-10-03.seoDescription': 'Cross-border brief, October 3, 2026: queues at the crossings this morning, where fuel is cheapest, the franc-euro rate and new job postings in Switzerland.',
+    'blog.article.bollettino-frontaliere-2026-10-03.ogDescription': 'The numbers for October 3, 2026, for cross-border commuters: how long the queue is at each crossing this morning, which towns have the cheapest fuel, what the franc is worth today and how many Swiss jobs went up.',
+    'blog.article.pasture-vertenza-governo-federale.title': 'Pasture: staff dispute before the federal government',
+    'blog.article.pasture-vertenza-governo-federale.excerpt': 'Giorgio Fonio submits an inquiry about mandates and employment guarantees. Trade unions and the Staff Commission request a meeting with AOZ about the situation in Ticino.',
+    'blog.article.pasture-vertenza-governo-federale.imageAlt': 'Workers outside a building in Ticino, captured in documentary style.',
+    'blog.article.furto-noranco-arresti-garage.title': 'Noranco car theft: three arrests and vehicles recovered',
+    'blog.article.furto-noranco-arresti-garage.excerpt': 'Three high-end cars stolen in Noranco have been recovered. Three people, a 20-year-old Italian national, a 21-year-old Algerian national and a 25-year-old French national, residing in France, were detained.',
+    'blog.article.furto-noranco-arresti-garage.imageAlt': 'Image of a secure garage with protection systems, recalling prevention measures against thefts in Ticino.',
+    'blog.article.prezzi-carburanti-settembre.title': 'Swiss inflation: +1% in September driven by fuel',
+    'blog.article.prezzi-carburanti-settembre.excerpt': 'Swiss inflation rises by 1% annually in September: fuels lead the way, with heating oil +65%, diesel +28,7% and petrol +19,9%.',
+    'blog.article.prezzi-carburanti-settembre.imageAlt': 'Fuel station in Switzerland with cars parked nearby',
 };
 
 export default blogMetaEn;
