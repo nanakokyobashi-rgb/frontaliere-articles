@@ -98899,6 +98899,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-diego-kostner-milano-hockey': {
+    title: 'Diego kostner lascia l\'ambrì piotta | Frontaliere Ticino',
+    description: 'Diego Kostner lascia subito l\'Ambrì Piotta dopo dieci stagioni: 432 partite, 52 reti e 77 assist in National League prima del passaggio al Milano Hockey Club.',
+    keywords: 'frontalieri, ticino, svizzera, italia, diego, kostner, lascia, ambrì',
+    ogTitle: 'Kostner lascia l\'Ambrì per il Milano Hockey Club',
+    ogDescription: 'Dopo dieci stagioni in biancoblù, il centro classe 1992 chiude l\'esperienza in Leventina. Il club annuncia la partenza immediata; il 34enne di Bressanone continuerà con il neonato Milano Hockey Club.',
+    canonicalPath: '/articoli-frontaliere/diego-kostner-milano-hockey/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Diego kostner lascia l'ambrì piotta",
+      "description": "Diego Kostner lascia subito l'Ambrì Piotta dopo dieci stagioni: 432 partite, 52 reti e 77 assist in National League prima del passaggio al Milano Hockey Club.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/diego-kostner-milano-hockey.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Pista di hockey in Ticino nei colori biancoblù dell'Ambrì Piotta"
+      },
+      "datePublished": "2026-10-03T18:09:34+00:00",
+      "dateModified": "2026-10-03T18:09:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/diego-kostner-milano-hockey/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
