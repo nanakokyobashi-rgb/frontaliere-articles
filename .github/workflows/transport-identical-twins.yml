@@ -145,7 +145,12 @@ jobs:
       # Il dry-run gira SEMPRE, anche senza PAT: il report nel log e' gia' la
       # meta' osservativa, e senza di lui un run senza credenziali non
       # lascerebbe traccia di cosa avrebbe portato.
+      # Il dry-run scrive anche lo step summary e l'output `needs_reconcile`:
+      # i gemelli `identical` modificati su entrambi i lati e DIVERGENTI, per
+      # nome, coi due hash e l'eta' della baseline (site#6369). Nessuna azione
+      # automatica su di loro: e' l'elenco che il report dava solo come numero.
       - name: Cosa c'e' da portare (dry-run)
+        id: dryrun
         if: steps.guard.outputs.open_transports == '0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -217,6 +222,11 @@ jobs:
           [ "$previous_rc" -gt "$rc" ] && rc="$previous_rc"
           echo "$rc" > "$RUNNER_TEMP/transport-rc"
           PORTED=$(node -e 'console.log(require("/tmp/transport.json").transported.length)')
+          # I `both-moved-converged` riattestati: solo baseline nel manifest,
+          # nessun file. Una passata con 0 copie e N convergenti apre comunque
+          # la PR (solo manifest), che passa da test, review e
+          # `loop-baseline-pr-gate` come le altre.
+          REALIGNED=$(node -e 'console.log((require("/tmp/transport.json").realign || []).length)')
           MANIFEST_CHANGED=$(node -e 'console.log(require("/tmp/transport.json").manifestChanged ? "true" : "false")')
           if [ "$MANIFEST_CHANGED" != "true" ]; then
             echo "Nessun gemello o snapshot da registrare: niente PR."
@@ -242,7 +252,7 @@ jobs:
           cut -f1 /tmp/transport-paths.tsv | xargs -r -d '\n' git add --
           git add -- scripts/ci/loop-sync-manifest.json
           git diff --cached --name-only
-          git commit -m "chore(loop): porta ${PORTED} gemelli identical dal sito"
+          git commit -m "chore(loop): porta ${PORTED} gemelli identical dal sito, riattesta ${REALIGNED} convergenti"
           # La baseline che `--apply` ha scritto e' l'hash dei byte SCARICATI,
           # calcolato prima che il commit esistesse (issue #852). Qui il commit
           # c'e', quindi i byte committati sono finalmente leggibili e la
@@ -377,7 +387,7 @@ jobs:
               echo "Dopo il fallback restano solo workflow non pubblicabili: nessuna PR apribile."
               exit 0
             fi
-            git commit --amend -m "chore(loop): porta ${PORTED} gemelli identical dal sito"
+            git commit --amend -m "chore(loop): porta ${PORTED} gemelli identical dal sito, riattesta ${REALIGNED} convergenti"
             RETRY_LOG=/tmp/transport-push-retry.log
             retry_rc=0
             git push -u origin "$BRANCH" > "$RETRY_LOG" 2>&1 || retry_rc=$?
@@ -397,20 +407,26 @@ jobs:
           # shellcheck disable=SC2016
           node --input-type=module -e '
             import fs from "node:fs";
-            import { markdownCodeSpan, transportBulletLine } from "./scripts/ci/transport-realign-body.mjs";
+            import { convergedBulletLine, markdownCodeSpan, transportBulletLine } from "./scripts/ci/transport-realign-body.mjs";
             const r = JSON.parse(fs.readFileSync("/tmp/transport.json", "utf8"));
             const list = r.transported.map((t) => transportBulletLine(t)).join("\n");
+            const converged = (r.realign || []).length
+              ? "- Riattestata la baseline di " + r.realign.length + " gemelli `identical` modificati su entrambi i lati che oggi coincidono byte per byte (`both-moved-converged`): nessun file copiato, solo il manifest, con i due lati riletti al momento della scrittura.\n" + r.realign.map((x) => convergedBulletLine(x)).join("\n")
+              : "";
             const deltas = (r.couplingDelta || []).map((d) => "- Snapshot accoppiamenti per " + markdownCodeSpan(d.path) + ": +" + d.added.length + "/-" + d.removed.length + (d.initialized ? " (prima osservazione)" : " (delta dalla passata precedente)" ) + ".").join("\n");
             const excluded = (r.realignExcluded || []).map((p) => "- " + markdownCodeSpan(p) + " escluso dal commit per mismatch/normalizzazione dei byte; blocked: diagnosi realign da correggere a mano.").join("\n");
             const workflowExcluded = (r.workflowExcluded || []).map((p) => "- " + markdownCodeSpan(p) + " escluso dal commit dopo il rifiuto esplicito GitHub dello scope `workflows`; blocked: resta `site-ahead` e verra ritentato in un giro futuro.").join("\n");
             const workflowsBlocked = process.env.PAT_WORKFLOWS_SCOPE !== "true";
             const deferred = workflowExcluded || (workflowsBlocked
-              ? "- Le voci `adapted` restano escluse per costruzione; i gemelli sotto `.github/workflows/` richiedono lo scope `workflows`: blocked: PAT_WORKFLOWS_SCOPE non è true per questa identità."
+              ? "- Le voci `adapted` restano escluse per costruzione; i gemelli `site-ahead` sotto `.github/workflows/` richiedono lo scope `workflows` per essere COPIATI (la sola riattestazione della baseline di un convergente non lo richiede): blocked: PAT_WORKFLOWS_SCOPE non è true per questa identità."
               : "- Le voci `adapted` restano escluse per scelta; i gemelli sotto `.github/workflows/` non sono bloccati dallo scope in questa passata e vengono valutati solo se dichiarati `identical` e `site-ahead`.");
             fs.writeFileSync("/tmp/pr-body.md", [
               "## Implementato",
-              "- Copia automatica dei gemelli dichiarati `mode: identical` in `scripts/ci/loop-sync-manifest.json` che il sito ha portato avanti mentre questo lato restava fermo sulla baseline (stato `site-ahead`), con riallineamento della baseline ai byte committati solo per i path verificati. Aperta da `.github/workflows/transport-identical-twins.yml` (issue #331).",
+              r.transported.length
+                ? "- Copia automatica dei gemelli dichiarati `mode: identical` in `scripts/ci/loop-sync-manifest.json` che il sito ha portato avanti mentre questo lato restava fermo sulla baseline (stato `site-ahead`), con riallineamento della baseline ai byte committati solo per i path verificati. Aperta da `.github/workflows/transport-identical-twins.yml` (issue #331)."
+                : "- Nessun gemello `site-ahead` da copiare in questa passata: la PR aggiorna solo `scripts/ci/loop-sync-manifest.json`. Aperta da `.github/workflows/transport-identical-twins.yml` (issue #331).",
               list,
+              converged,
               deltas,
               "",
               "## Non implementato (ancora)",
@@ -420,7 +436,7 @@ jobs:
             ].join("\n"));
           '
           gh pr create --base main --head "$BRANCH" \
-            --title "chore(loop): trasporto di ${PORTED} gemelli \`identical\` dal sito" \
+            --title "chore(loop): trasporto di ${PORTED} gemelli \`identical\` dal sito, ${REALIGNED} convergenti riattestati" \
             --body-file /tmp/pr-body.md
 
       # Il rosso dei blocchi permanenti e dei mismatch vive QUI e non dentro

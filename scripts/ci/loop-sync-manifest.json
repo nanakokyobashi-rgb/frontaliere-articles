@@ -912,7 +912,7 @@
     {
       "path": "scripts/ci/followup-drainer.mjs",
       "mode": "adapted",
-      "reason": "Portato lo stadio di decomposizione (sito #6228) con gli adattamenti corpus: parser numerico locale `parse-positive-num.mjs`, classificatore/route del corpus e guard `manifest-pinned-issues.mjs` su age-out, parent-close e verdict-exit. La riconciliazione post-#1284 del 2026-09-10 conferma che il grouping B19 (`ISSUE_GROUP_MAX_SIZE`, `ISSUE_GROUP_LABEL_PATTERN`, `autoTitleGroupingKey()`, `prepareIssueGroup()`) è già presente nel gemello del sito dal 2026-09-09 (#8081) e nel corpus da #1284: il vecchio segnale `corpus-ahead` è stato assorbito nella baseline attestata da #1310. Il file non è più mirror-locked: la sorgente dei pin e il contratto del parser non esistono byte-identici sul sito. Age-out degli allarmi (sito #9833, portato il 2026-09-26): `isOwnerClosedFailureAlarm` importa il `TITLE_RE` del reconciler come sul sito, ma NON porta `OWNER_CLOSED_SCOPED_ALARM_RE` (`CI Failure (build|deploy)`, `Validation Failure (dist|live)`): in questo repo nessuno apre né chiude quelle famiglie, e dichiararle chiuse da un proprietario le renderebbe immortali. `generator/tests/followup-drainer-ageout-alarm-issues.test.mjs` diventa rosso se cominciano a essere coniate qui. Follow-up triad #2015/#1997/#1495 verificato il 2026-10-02: #1997 (`already-fixed`) e #1495 (`no-root-cause`) mostrano `fu-parked` + `agent:fix-queued`; il mint gate nega nuove code su issue già parked, il PARKED-RETRY legge comunque il FIX_OUTCOME delle code conflittuali anche dopo il cooldown e il VERDICT-EXIT le instrada/toglie la label queued invece di lasciarle fuori sia dal retry sia dal DRAIN. Il DRAIN resta escluso finché `fu-parked` è presente. Il site #10677 è evidenza comparativa della stessa classe; il suo gemello resta invariato in questa modifica corpus. La baseline non è stata rigenerata: il resto del delta col sito non è stato riconciliato in questo giro.",
+      "reason": "Portato lo stadio di decomposizione (sito #6228) con gli adattamenti corpus: parser numerico locale `parse-positive-num.mjs`, classificatore/route del corpus e guard `manifest-pinned-issues.mjs` su age-out, parent-close e verdict-exit. La riconciliazione post-#1284 del 2026-09-10 conferma che il grouping B19 (`ISSUE_GROUP_MAX_SIZE`, `ISSUE_GROUP_LABEL_PATTERN`, `autoTitleGroupingKey()`, `prepareIssueGroup()`) è già presente nel gemello del sito dal 2026-09-09 (#8081) e nel corpus da #1284: il vecchio segnale `corpus-ahead` è stato assorbito nella baseline attestata da #1310. Il file non è più mirror-locked: la sorgente dei pin e il contratto del parser non esistono byte-identici sul sito. Age-out degli allarmi (sito #9833, portato il 2026-09-26): `isOwnerClosedFailureAlarm` importa il `TITLE_RE` del reconciler come sul sito, ma NON porta `OWNER_CLOSED_SCOPED_ALARM_RE` (`CI Failure (build|deploy)`, `Validation Failure (dist|live)`): in questo repo nessuno apre né chiude quelle famiglie, e dichiararle chiuse da un proprietario le renderebbe immortali. `generator/tests/followup-drainer-ageout-alarm-issues.test.mjs` diventa rosso se cominciano a essere coniate qui. Follow-up triad #2015/#1997/#1495 verificato il 2026-10-02: #1997 (`already-fixed`) e #1495 (`no-root-cause`) mostrano `fu-parked` + `agent:fix-queued`; il mint gate nega nuove code su issue già parked, il PARKED-RETRY legge comunque il FIX_OUTCOME delle code conflittuali anche dopo il cooldown e il VERDICT-EXIT le instrada/toglie la label queued invece di lasciarle fuori sia dal retry sia dal DRAIN. Il DRAIN resta escluso finché `fu-parked` è presente. Il site #10677 è evidenza comparativa della stessa classe; il suo gemello resta invariato in questa modifica corpus. FU-03 (sito #11204) portata il 2026-10-03: marker `PARENT_DEQUEUED` con contatore `parent_dequeue_repeat` e `detectDataPending` a grana di item (bucket giornaliero = aggregata, intestazioni Markdown ignorate); adattamento corpus: in `applyParentDequeue` le label si tolgono PRIMA del commento, che si posta solo a `edit()` confermato (qui `edit()` può rifiutare per claim live o `CLAIM-READ-FAIL`). La baseline non è stata rigenerata: il resto del delta col sito non è stato riconciliato in questo giro.",
       "baseline": {
         "site": "2224d435396695c7",
         "corpus": "400c0e21db98b8ab",
@@ -4168,6 +4168,16 @@
       }
     },
     {
+      "path": "scripts/ci/realign-adapted-baseline.mjs",
+      "mode": "corpus-only",
+      "reason": "Riallineamento automatico delle baseline dei gemelli `adapted` dichiarate nel body della PR del corpus (riga `Realign-adapted: <path> site-prs=#N`, issue #1997). Vive solo qui come transport-realign-body.mjs: legge e scrive il manifest di questo repo dal job `realign-adapted` di transport-identical-twins-realign.yml, e il sito non possiede ne' il manifest ne' quel push.",
+      "baseline": {
+        "site": null,
+        "corpus": "a24813f361778be5",
+        "alignedAt": "2026-10-03"
+      }
+    },
+    {
       "path": "scripts/ci/verify-crawler-contract-provenance.mjs",
       "mode": "corpus-only",
       "reason": "L'osservazione del lato SITO dei digest di generator/data/crawler-cross-repo-contract.json (issue #916): `generatorSha256` e i 24 `sourceSha256` non hanno un gemello in questo checkout, quindi l'unico modo di verificarli e' chiederli al sito. Vive solo qui per la stessa ragione del drift check e del trasporto: e' questo il lato che RICEVE il ciclo, e il sito non ha bisogno di verificare la provenienza di se stesso.",
@@ -4358,11 +4368,11 @@
     {
       "path": ".github/workflows/transport-identical-twins-realign.yml",
       "mode": "corpus-only",
-      "reason": "Workflow post-merge che riallinea solo `baseline.corpus` per i gemelli `identical` trasportati; il sito non possiede il lato ricevente del manifest ne' il suo push sul main del corpus, quindi non esiste un gemello da portare.",
+      "reason": "Workflow che scrive le baseline del manifest su main sotto un lock globale: il job `realign` riallinea solo `baseline.corpus` dopo il merge di una PR di trasporto dei gemelli `identical`; il job `realign-adapted` (schedule ogni 6 ore e dispatch, issue #1997) riallinea i gemelli `adapted` dichiarati con `Realign-adapted:` nel body della PR del corpus, tramite scripts/ci/realign-adapted-baseline.mjs. Il sito non possiede il lato ricevente del manifest ne' il suo push sul main del corpus, quindi non esiste un gemello da portare.",
       "baseline": {
         "site": null,
-        "corpus": "fe0274f165a519c1",
-        "alignedAt": "2026-09-13"
+        "corpus": "770fe063c7829b3d",
+        "alignedAt": "2026-10-03"
       }
     },
     {

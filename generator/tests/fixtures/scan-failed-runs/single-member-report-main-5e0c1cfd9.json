@@ -1,0 +1,6 @@
+{
+  "title": "Crawler Failure: Run fust",
+  "description": "Il gruppo **Crawler Group 23 (sparse cross-repo execution)** ha un membro crawler fallito: **`fust`**.\n\n- Run: https://github.com/nanakokyobashi-rgb/frontaliere-articles/actions/runs/37112917183\n- Branch: `crawler-generation-shadow-37111567883-1`\n- Evento: `workflow_dispatch`\n- Concluso: 2026-10-03T10:12:45Z\n- Exit del crawler: `1`\n\n**Job falliti del gruppo**\n- `crawler_group_23` — step fallito: `Fail crawler group after all member outcomes`\n\n**Estratto diagnostico del membro**\n\n```\n❌ Fust crawler failed: Fust workplace invariant failed: enriched 58/100 canonical details.\n##[error]fust: crawler exited with status 1\n```\n\nQuesto alert usa il titolo per-membro `Crawler Failure: Run fust`, così il recupero richiede che lo step `Run fust` di una run successiva sia verde; il verde aggregato del gruppo, da solo, non chiude più questa diagnosi.\n\nIssue aperta automaticamente da `scan-failed-runs.mjs`.",
+  "slug": "fust",
+  "exitCode": 1
+}

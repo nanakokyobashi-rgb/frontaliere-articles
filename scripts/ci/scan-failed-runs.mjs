@@ -42,11 +42,19 @@
  *
  * 4. **Gruppi crawler: recovery per membro.** Un gruppo contiene molti worker
  *    nello stesso job e il suo rosso aggregato non identifica il crawler che ha
- *    fallito. Per i gruppi si legge il log solo dopo aver trovato il job rosso:
- *    quando c'è un solo exit non sistemico, l'issue usa `Crawler Failure: Run
- *    <slug>`. Il reconciler già esistente può così verificare lo step `Run
- *    <slug>` della run successiva; il verde dell'aggregatore da solo non è più
- *    una prova sufficiente. Con più membri falliti il report resta aggregato.
+ *    fallito. Per i gruppi si legge il log solo dopo aver trovato il job rosso
+ *    e si lega OGNI membro fallito al proprio titolo `Crawler Failure: Run
+ *    <slug>` finché i falliti sono una minoranza stretta del gruppo. Il
+ *    reconciler già esistente può così verificare lo step `Run <slug>` della
+ *    run successiva; il verde dell'aggregatore da solo non è più una prova
+ *    sufficiente. L'issue di gruppo (`Workflow Failure: <gruppo>`) resta per i
+ *    guasti di gruppo: errore condiviso (lease, push, exit 42/43/44/143, stato
+ *    terminale mancante o invalido), metà o più dei membri falliti, oppure
+ *    numero dei membri non ricavabile dalla riga di verdetto dell'aggregatore.
+ *    Il motivo è il gate di ricorrenza, che conta per TITOLO: con il titolo
+ *    aggregato contava «il gruppo è rosso» e arrivava a 3 su 3 in 48 ore con
+ *    membri che ruotavano, senza che nessuno fosse cronico (gruppo 23, dal
+ *    2026-09-30 al 2026-10-03: cinque membri diversi, al massimo due per run).
  *
  * ## Anti-doppio-conteggio
  *
@@ -1065,6 +1073,192 @@ export function alreadyReported(title, runUrl, { checkTransientLedger = false } 
   return false;
 }
 
+// Chiave con cui `createGithubIssue` firma ogni briciola del ledger: i primi 60
+// caratteri del titolo dentro `` `transient-key: …` `` (LEDGER_KEY_PREFIX e
+// DEDUP_TITLE_PREFIX_LEN in scripts/lib/github-issue-creator.mjs, che non li
+// esporta; l'allineamento e' pinnato da
+// generator/tests/scan-failed-runs-member-grain.test.mjs). Il backtick di
+// chiusura fa parte del marcatore: senza, `Run fust` combacerebbe con
+// `Run fust-ch`.
+export function transientLedgerMarker(title) {
+  return `\`transient-key: ${String(title).slice(0, 60)}\``;
+}
+
+/** Una voce del ledger conta QUESTA run per uno di QUESTI titoli? */
+export function ledgerEntryCountsRun(entry, runUrl, titles) {
+  const text = String(entry || '');
+  if (!runUrl || !text.includes(runUrl)) return false;
+  return titles.some((title) => title && text.includes(transientLedgerMarker(title)));
+}
+
+/**
+ * Una voce del ledger conta QUESTA run per uno di QUESTI titoli? Variante per
+ * le voci di `transientLedgerEntries`, che vale anche per una issue legacy per
+ * crawler: quando `createGithubIssue` non riesce a commentare il ledger ripiega
+ * su una issue `crawler-transient` intitolata al membro, senza marcatore. La
+ * ricerca per titolo di `alreadyReported` puo' non vederla ancora (ritardo
+ * dell'indice); la lista per label si', e il titolo esatto la lega al membro.
+ */
+export function transientEntryCountsRun(entry, runUrl, titles) {
+  const text = String(entry?.text || '');
+  if (ledgerEntryCountsRun(text, runUrl, titles)) return true;
+  if (!runUrl || !text.includes(runUrl)) return false;
+  const issueTitle = String(entry?.issueTitle || '');
+  return Boolean(issueTitle) && titles.some((title) => title && title === issueTitle);
+}
+
+/**
+ * Body e commenti, uno per voce, di ogni issue aperta `crawler-transient`,
+ * ciascuno col titolo della sua issue (`{ text, issueTitle }`).
+ */
+function transientLedgerEntries() {
+  let issues = [];
+  try {
+    const parsed = JSON.parse(gh([
+      'issue', 'list', '--repo', REPO, '--state', 'open',
+      '--label', 'crawler-transient', '--json', 'number,title', '--limit', '200',
+    ], '[]') || '[]');
+    issues = Array.isArray(parsed) ? parsed : [];
+  } catch {
+    issues = [];
+  }
+  const entries = [];
+  for (const issue of issues) {
+    if (!Number.isInteger(Number(issue?.number))) continue;
+    try {
+      const data = JSON.parse(gh([
+        'issue', 'view', String(issue.number), '--repo', REPO, '--json', 'body,comments',
+      ], '{}') || '{}');
+      const issueTitle = String(issue?.title || '');
+      entries.push({ text: String(data?.body || ''), issueTitle });
+      for (const comment of Array.isArray(data?.comments) ? data.comments : []) {
+        entries.push({ text: String(comment?.body || ''), issueTitle });
+      }
+    } catch {
+      // Lettura fallita = «non ancora segnalata», come in `alreadyReported`:
+      // il costo e' una briciola doppia, non un fallimento perso.
+    }
+  }
+  return entries;
+}
+
+/**
+ * Deduplica di un report PER MEMBRO di un gruppo crawler.
+ *
+ * `alreadyReported(…, { checkTransientLedger: true })` cerca nel ledger il solo
+ * URL della run: bastava finche' una run produceva un solo report. Con piu'
+ * membri falliti la briciola del primo conterrebbe gia' l'URL e spegnerebbe
+ * quella di tutti gli altri — subito, e a ogni ri-scansione dopo una consegna
+ * parziale. Qui la voce del ledger deve portare, oltre all'URL, la chiave di
+ * QUESTO membro.
+ *
+ * Vale anche la chiave del gruppo: una run gia' contata a grana di gruppo (da
+ * una scansione precedente a questa regola, nella sovrapposizione del
+ * lookback) non va ricontata per membro.
+ *
+ * `memo` vive quanto una run: evita di rileggere ledger e issue di gruppo per
+ * ogni membro. Le voci scritte nel frattempo riguardano altri membri.
+ */
+export function memberAlreadyReported(title, runUrl, { groupTitle = '', memo = {} } = {}) {
+  if (alreadyReported(title, runUrl)) return true;
+  if (groupTitle) {
+    if (memo.groupReported === undefined) memo.groupReported = alreadyReported(groupTitle, runUrl);
+    if (memo.groupReported) return true;
+  }
+  if (memo.ledgerEntries === undefined) memo.ledgerEntries = transientLedgerEntries();
+  return memo.ledgerEntries.some((entry) => transientEntryCountsRun(entry, runUrl, [title, groupTitle]));
+}
+
+/**
+ * Consegna i report di UNA run: di norma uno, piu' di uno quando un gruppo
+ * crawler ha piu' membri falliti in minoranza. Ogni report ripete lo stesso
+ * percorso (deduplica per titolo + URL della run, poi `createGithubIssue` con
+ * il gate di ricorrenza del workflow), cosi' il gate conta per membro.
+ *
+ * Non decide ne' il cap ne' l'esito della passata: rende i conteggi e lascia
+ * a `main()` il watermark (vedi `capUnitsForRun`).
+ */
+export async function deliverRunReports({
+  name,
+  run,
+  reports,
+  genericDescription = '',
+  lost = false,
+  dryRun = DRY_RUN,
+  createIssue = createGithubIssue,
+} = {}) {
+  const outcome = { delivered: 0, skipped: 0, undelivered: [] };
+  const groupTitle = `Workflow Failure: ${name}`;
+  const memo = {};
+  for (const report of reports) {
+    const title = report ? report.title : groupTitle;
+    const memberLevel = Boolean(report?.slug) && !report.groupLevel;
+    const reported = memberLevel
+      ? memberAlreadyReported(title, run.url, { groupTitle, memo })
+      : alreadyReported(title, run.url, { checkTransientLedger: isRecurrenceGatedWorkflow(name) });
+    if (reported) {
+      console.log(`[scan-failed-runs] ${name}: run ${run.databaseId} già segnalata${memberLevel ? ` per ${report.slug}` : ''} → skip (evita doppio conteggio nel gate).`);
+      outcome.skipped++;
+      continue;
+    }
+
+    if (dryRun) {
+      console.log(`[scan-failed-runs] (dry-run) aprirei: "${title}" — run ${run.url}`);
+      outcome.delivered++;
+      continue;
+    }
+
+    const res = await createIssue({
+      title,
+      description: report ? report.description : genericDescription,
+      // Un articolo intero buttato via non e' un blip: e' la perdita piu' cara
+      // per unita' della pipeline, ed e' gia' successa quando la issue si apre.
+      priority: lost ? 1 : 2,
+      labels: ['Bug'],
+      workflow: name,
+      // Il primo blip resta una briciola priority:low solo per i flussi ad alta
+      // frequenza classificati da gateForWorkflow. I workflow ordinari, inclusi
+      // i cron giornalieri e settimanali, arrivano alla prima issue: `-1`
+      // disattiva il gate (vedi consecutiveGate in github-issue-creator.mjs).
+      // Non vale per un articolo perso: aspettare la terza perdita significa
+      // buttarne tre.
+      consecutiveGate: gateForWorkflow(name, { lost }),
+    });
+    // `if (res) opened++` contava come consegnati anche i due casi di
+    // fallimento, ed e' il secondo dei tre 🔴 della review: `createGithubIssue`
+    // rende `null` quando la creazione fallisce e `{persisted: false}` quando
+    // fallisce un commento o una riapertura. Contarli chiudeva la passata a 0 e
+    // faceva avanzare il confine oltre una failure NON registrata — inclusa una
+    // possibile failure di `publish-api`, che lascia la superficie dati vecchia.
+    //
+    // `ledger: true` e `staleBuild: true` sono percorsi RIUSCITI che non
+    // portano `persisted`, quindi si testano esattamente i due fallimenti e non
+    // la verita' di `persisted` (il caso ledger va preservato, come chiede la
+    // review).
+    if (res === null || res?.persisted === false) {
+      outcome.undelivered.push({
+        title,
+        reason: res === null ? 'createGithubIssue ha reso null' : 'commento non persistito',
+        short: res === null ? 'null' : 'persisted: false',
+      });
+      continue;
+    }
+    outcome.delivered++;
+  }
+  return outcome;
+}
+
+/**
+ * Quanto pesa una run sul cap `--max-issues`: UNA unita' se ha consegnato
+ * almeno un report, qualunque sia il numero dei membri. Contare per membro
+ * farebbe consumare a un solo gruppo con cinque rossi un quarto del budget, e
+ * troncare workflow che non c'entrano. I sorvegliati non pesano mai.
+ */
+export function capUnitsForRun({ name, delivered }) {
+  if (ALWAYS_ESCALATE_WORKFLOWS.has(name)) return 0;
+  return delivered > 0 ? 1 : 0;
+}
+
 /** I job falliti di una run, per dare al triage un aggancio concreto. */
 function failedJobs(runId) {
   const raw = gh(
@@ -1246,81 +1440,133 @@ export function crawlerFailuresFromLog(text) {
 }
 
 /**
- * Report diagnostico per i gruppi crawler.
- *
- * Un solo membro fallito consente il titolo per-membro, che il guard confronta
- * con lo step omonimo della run successiva. Più membri o un errore condiviso
- * restano sul titolo del gruppo: il body espone gli esiti e gli estratti senza
- * attribuire una causa a uno slug che i log non collegano con certezza.
+ * Il verdetto dell'aggregatore: quanti membri sono riusciti, falliti, senza
+ * stato o interrotti. `null` quando la riga manca, e' solo l'eco dello shell
+ * trace (li' i contatori sono `$success_count`, non cifre) o compare con
+ * numeri discordi: in tutti e tre i casi il numero dei membri non e' noto.
  */
-export function buildCrawlerFailureReport({ log, run, workflowName, jobLines } = {}) {
-  if (!isCrawlerGroupWorkflow(workflowName)) return null;
-  const failures = crawlerFailuresFromLog(log);
-  const diagnostics = crawlerGroupDiagnosticLines(log);
-  if (failures.length === 0 && diagnostics.length === 0) return null;
-
-  const hasSharedFailure = diagnostics.some((line) => {
-    const memberStatus = CRAWLER_GROUP_MEMBER_STATUS_RE.exec(line);
-    const exitCode = memberStatus ? Number(memberStatus[2]) : null;
-    return PUSH_EXHAUSTED_RE.test(line)
-      || CRAWLER_SHARED_FAILURE_RE.test(line)
-      || CRAWLER_LEASE_DIAGNOSTIC_RE.test(line)
-      || (exitCode !== null && [42, 43, 44, 143].includes(exitCode))
-      || /(?:no terminal status was published|invalid terminal status|invalid status:|crawler group interrupted)/i.test(line);
-  });
-
-  if (failures.length !== 1 || hasSharedFailure) {
-    const group = workflowName || 'crawler group';
-    const evidence = diagnostics.length
-      ? diagnostics
-      : failures.flatMap(({ lines }) => lines);
-    const memberRows = failures.length
-      ? failures.map(({ slug, exitCode }) => `| \`${slug}\` | \`${exitCode}\` |`)
-      : ['| _(nessun esito membro attribuibile)_ | — |'];
-    const safeEvidence = evidence.map((line) => line.replace(/`/g, 'ʼ'));
-    const systemicRows = failures.filter(({ exitCode }) => exitCode === 143).length;
-    const description = [
-      `Il gruppo **${group}** ha un esito rosso con ${failures.length} membro/i non riuscito/i${hasSharedFailure ? ' o un errore di coordinamento/pubblicazione' : ''}.`,
-      '',
-      `- Run: ${run?.url || '?'}`,
-      `- Branch: \`${run?.headBranch || '?'}\``,
-      `- Evento: \`${run?.event || '?'}\``,
-      `- Concluso: ${run?.updatedAt || run?.createdAt || '?'}`,
-      '',
-      '**Esiti membro individuati**',
-      '',
-      '| Crawler | Exit |',
-      '| --- | ---: |',
-      ...memberRows,
-      '',
-      '**Estratti diagnostici della run**',
-      '',
-      '```',
-      ...safeEvidence,
-      '```',
-      '',
-      `Il titolo resta aggregato perché questi log non giustificano un unico binding per-membro. Gli exit 143${systemicRows ? ` (${systemicRows} esito/i sistemico/i)` : ''}, gli errori di lease e i push falliti restano visibili come errori; questo report non li converte in successi.`,
-      '',
-      'Issue aperta automaticamente da `scan-failed-runs.mjs`. Si chiude da sola quando il workflow del gruppo torna verde.',
-    ].join('\n');
-
-    return {
-      title: `Workflow Failure: ${group}`,
-      description,
-      failures,
-      groupLevel: true,
-    };
+export function crawlerGroupVerdictFromLog(text) {
+  const verdicts = new Map();
+  for (const raw of String(text || '').split('\n')) {
+    const line = cleanLogLine(raw);
+    if (!line || /^\s*(?:echo|printf)\b/.test(line)) continue;
+    const match = CRAWLER_GROUP_VERDICT_RE.exec(line);
+    if (!match) continue;
+    const [succeeded, failed, missing, systemic] = match.slice(1, 5).map(Number);
+    verdicts.set(match.slice(1, 5).join('/'), {
+      succeeded,
+      failed,
+      missing,
+      systemic,
+      members: succeeded + failed + missing + systemic,
+    });
   }
+  return verdicts.size === 1 ? [...verdicts.values()][0] : null;
+}
 
-  const [{ slug, exitCode, lines }] = failures;
+/**
+ * A quale grana va segnalato il rosso di un gruppo crawler.
+ *
+ * `member` solo quando il log lo dimostra: nessun guasto condiviso e i falliti
+ * sono una minoranza stretta di un gruppo di cui si conosce la dimensione. In
+ * ogni altro caso si resta sulla grana piu' larga (`group`): spezzare per
+ * membro un guasto condiviso attribuirebbe la radice alle foglie, e quando
+ * cade meta' flotta la causa e' comune anche se il log non la nomina.
+ *
+ * Un solo membro fallito resta per-membro come prima di questa regola, con o
+ * senza riga di verdetto: quel ramo esisteva gia' e non viene ristretto.
+ */
+export function crawlerReportGrain({ failures = [], hasSharedFailure = false, verdict = null } = {}) {
+  if (hasSharedFailure) return { grain: 'group', reason: 'shared-failure' };
+  if (failures.length === 0) return { grain: 'group', reason: 'no-member-attribution' };
+  if (failures.length === 1) return { grain: 'member', reason: 'single-member' };
+  if (!verdict) return { grain: 'group', reason: 'member-count-unknown' };
+  if (verdict.missing > 0 || verdict.systemic > 0) return { grain: 'group', reason: 'shared-failure' };
+  // L'aggregatore conta fra i `failed` anche timeout (124) e stati invalidi,
+  // che non stampano `crawler exited with status`: se i due numeri divergono
+  // c'e' un fallito che questo scanner non sa attribuire, e i report per
+  // membro lo farebbero sparire.
+  if (verdict.failed !== failures.length) return { grain: 'group', reason: 'verdict-mismatch' };
+  if (failures.length * 2 >= verdict.members) return { grain: 'group', reason: 'majority-failed' };
+  return { grain: 'member', reason: 'minority-failed' };
+}
+
+function buildCrawlerGroupReport({ failures, diagnostics, hasSharedFailure, run, workflowName, grainReason }) {
   const group = workflowName || 'crawler group';
+  const evidence = diagnostics.length
+    ? diagnostics
+    : failures.flatMap(({ lines }) => lines);
+  const memberRows = failures.length
+    ? failures.map(({ slug, exitCode }) => `| \`${slug}\` | \`${exitCode}\` |`)
+    : ['| _(nessun esito membro attribuibile)_ | — |'];
+  const safeEvidence = evidence.map((line) => line.replace(/`/g, 'ʼ'));
+  const systemicRows = failures.filter(({ exitCode }) => exitCode === 143).length;
+  const description = [
+    `Il gruppo **${group}** ha un esito rosso con ${failures.length} membro/i non riuscito/i${hasSharedFailure ? ' o un errore di coordinamento/pubblicazione' : ''}.`,
+    '',
+    `- Run: ${run?.url || '?'}`,
+    `- Branch: \`${run?.headBranch || '?'}\``,
+    `- Evento: \`${run?.event || '?'}\``,
+    `- Concluso: ${run?.updatedAt || run?.createdAt || '?'}`,
+    '',
+    '**Esiti membro individuati**',
+    '',
+    '| Crawler | Exit |',
+    '| --- | ---: |',
+    ...memberRows,
+    '',
+    '**Estratti diagnostici della run**',
+    '',
+    '```',
+    ...safeEvidence,
+    '```',
+    '',
+    `Il titolo resta aggregato perché questi log non giustificano un unico binding per-membro. Gli exit 143${systemicRows ? ` (${systemicRows} esito/i sistemico/i)` : ''}, gli errori di lease e i push falliti restano visibili come errori; questo report non li converte in successi.`,
+    '',
+    'Issue aperta automaticamente da `scan-failed-runs.mjs`. Si chiude da sola quando il workflow del gruppo torna verde.',
+  ].join('\n');
+
+  return {
+    title: `Workflow Failure: ${group}`,
+    description,
+    failures,
+    groupLevel: true,
+    grainReason,
+  };
+}
+
+// `❌ Capri Holdings crawler failed: …` → `capri-holdings`. Il crawler stampa il
+// nome leggibile, non lo slug: serve solo a NON mettere nel report di un membro
+// la causa di un altro membro fallito della stessa run.
+function crawlerFailedLineSlug(line) {
+  const match = /^[^\p{L}\p{N}]*(.+?)\s+crawler failed:/iu.exec(line);
+  if (!match) return '';
+  return match[1]
+    .normalize('NFKD')
+    .replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function buildCrawlerMemberReport({ failure, otherSlugs, log, run, workflowName, jobLines }) {
+  const { slug, exitCode, lines } = failure;
+  const group = workflowName || 'crawler group';
+  const ownExitRe = new RegExp(
+    `(?:^|[^a-z0-9-])${slug.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}:\\s*crawler exited with status\\s+\\d+\\b`,
+    'i',
+  );
   const logEvidence = String(log || '')
     .split('\n')
     .map(cleanLogLine)
-    .filter((line) => /crawler failed:/i.test(line) || new RegExp(
-      `(?:^|[^a-z0-9-])${slug.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}:\\s*crawler exited with status\\s+\\d+\\b`,
-      'i',
-    ).test(line));
+    .filter((line) => {
+      if (ownExitRe.test(line)) return true;
+      if (!/crawler failed:/i.test(line)) return false;
+      // Una causa che il nome attribuisce a un ALTRO membro fallito resta nel
+      // report di quel membro. Una riga che non si sa attribuire resta in
+      // tutti: meglio una causa in piu' che una causa persa.
+      return !otherSlugs.has(crawlerFailedLineSlug(line));
+    });
   const evidence = [...new Set([...(logEvidence.length ? logEvidence : lines)])];
   if (evidence.length === 0) evidence.push(`${slug}: crawler exited with status ${exitCode}`);
   const description = [
@@ -1331,6 +1577,12 @@ export function buildCrawlerFailureReport({ log, run, workflowName, jobLines } =
     `- Evento: \`${run?.event || '?'}\``,
     `- Concluso: ${run?.updatedAt || run?.createdAt || '?'}`,
     `- Exit del crawler: \`${exitCode}\``,
+    // Solo con piu' membri falliti: chi fa il triage di un membro deve sapere
+    // che la run e' stata un'ondata, utile per riconoscere una causa comune che
+    // il classificatore non ha visto. Con un membro solo il corpo non cambia.
+    ...(otherSlugs.size > 0
+      ? [`- Altri membri falliti nella stessa run: ${[...otherSlugs].map((s) => `\`${s}\``).join(', ')}`]
+      : []),
     '',
     '**Job falliti del gruppo**',
     jobLines || '_(nessun job fallito riportato dall\'API)_',
@@ -1357,6 +1609,56 @@ export function buildCrawlerFailureReport({ log, run, workflowName, jobLines } =
   };
 }
 
+/**
+ * Report diagnostici per i gruppi crawler: un ELENCO, perché una run può
+ * produrne più di uno.
+ *
+ * Binding per membro (`Crawler Failure: Run <slug>`, che il guard confronta
+ * con lo step omonimo della run successiva) per ogni membro fallito in
+ * minoranza stretta. Un solo report di gruppo (`Workflow Failure: <gruppo>`)
+ * per i guasti condivisi, per metà o più dei membri falliti e quando il numero
+ * dei membri non si ricava dal log: lì il body espone esiti ed estratti senza
+ * attribuire una causa a uno slug che i log non collegano con certezza.
+ * Elenco vuoto quando il workflow non è un gruppo o il log non dice niente.
+ */
+export function buildCrawlerFailureReports({ log, run, workflowName, jobLines } = {}) {
+  if (!isCrawlerGroupWorkflow(workflowName)) return [];
+  const failures = crawlerFailuresFromLog(log);
+  const diagnostics = crawlerGroupDiagnosticLines(log);
+  if (failures.length === 0 && diagnostics.length === 0) return [];
+
+  const hasSharedFailure = diagnostics.some((line) => {
+    const memberStatus = CRAWLER_GROUP_MEMBER_STATUS_RE.exec(line);
+    const exitCode = memberStatus ? Number(memberStatus[2]) : null;
+    return PUSH_EXHAUSTED_RE.test(line)
+      || CRAWLER_SHARED_FAILURE_RE.test(line)
+      || CRAWLER_LEASE_DIAGNOSTIC_RE.test(line)
+      || (exitCode !== null && [42, 43, 44, 143].includes(exitCode))
+      || /(?:no terminal status was published|invalid terminal status|invalid status:|crawler group interrupted)/i.test(line);
+  });
+
+  const { grain, reason } = crawlerReportGrain({
+    failures,
+    hasSharedFailure,
+    verdict: crawlerGroupVerdictFromLog(log),
+  });
+  if (grain === 'group') {
+    return [buildCrawlerGroupReport({
+      failures, diagnostics, hasSharedFailure, run, workflowName, grainReason: reason,
+    })];
+  }
+
+  const slugs = failures.map(({ slug }) => slug);
+  return failures.map((failure) => buildCrawlerMemberReport({
+    failure,
+    otherSlugs: new Set(slugs.filter((slug) => slug !== failure.slug)),
+    log,
+    run,
+    workflowName,
+    jobLines,
+  }));
+}
+
 // `git rebase` quando il conflitto e' reale.
 const CONFLICT_RE = /CONFLICT \([^)]*\): Merge conflict in (\S.*)$/;
 // L'avviso di scripts/lib/rebase-onto-remote.sh: e' IL path che ha fatto
@@ -1369,6 +1671,12 @@ const CRAWLER_GROUP_MEMBER_STATUS_RE = /(?:^|[^a-z0-9-])([a-z0-9][a-z0-9-]*):\s*
 const CRAWLER_SHARED_FAILURE_RE = /(?:shared deferred-commit precondition failed|shared group precondition failure|group commit failed|crawler group interrupted)/i;
 const CRAWLER_LEASE_DIAGNOSTIC_RE = /(?:lease|lock).{0,120}(?:failed|error|busy|not acquired|missing|expired|unavailable|conflict)|(?:failed|error|busy|not acquired|missing|expired|unavailable|conflict).{0,120}(?:lease|lock)/i;
 const CRAWLER_GROUP_DIAGNOSTIC_RE = /crawler failed:|crawler exited with status [1-9]\d*\b|no terminal status was published|invalid terminal status|invalid status:|crawler aggregate|crawler group (?:completed with|interrupted)|shared deferred-commit precondition failed|shared group precondition failure|group commit failed|runner shutdown.*exit 143|systemic.*143/i;
+// Riga di verdetto dell'aggregatore (step «Fail crawler group after all member
+// outcomes» dei workflow generati). Forma letta dal log vero della run
+// 37112917183: `##[error]crawler group completed with 21 succeeded, 2 failed,
+// 0 missing, 0 systemic; …`. E' l'unico punto del log che dice quanti membri ha
+// il gruppo: senza, la grana per membro non e' dimostrabile.
+const CRAWLER_GROUP_VERDICT_RE = /crawler group completed with (\d+) succeeded, (\d+) failed, (\d+) missing, (\d+) systemic\b/i;
 const MAX_CRAWLER_GROUP_DIAGNOSTIC_LINES = 64;
 const MAX_CRAWLER_GROUP_DIAGNOSTIC_LINE_LENGTH = 800;
 
@@ -1632,7 +1940,6 @@ async function main() {
   for (const [name, selected] of servedOrder) {
     position += 1;
     const run = selected.run;
-    const surveillance = ALWAYS_ESCALATE_WORKFLOWS.has(name);
     if (capReached({ name, cappedOpened, maxIssues: MAX_ISSUES })) {
       truncated = servedOrder.map(([workflowName]) => workflowName).slice(position);
       // Un cap che tronca in silenzio si legge come "tutto coperto". Lo diciamo.
@@ -1699,25 +2006,28 @@ async function main() {
       jobLines,
     });
 
-    // Per i gruppi con un solo membro fallito, il titolo specifico porta il
-    // segnale nel percorso di recovery per-step. Con più membri o un log non
-    // leggibile conserviamo l'alert aggregato: inventare un colpevole sarebbe
-    // peggio di lasciare il gruppo in triage.
-    const crawler = lost ? null : buildCrawlerFailureReport({
+    // Per i gruppi, il titolo per-membro porta il segnale nel percorso di
+    // recovery per-step: un report per ogni membro fallito in minoranza. Con
+    // un guasto condiviso, mezza flotta a terra o un log che non dice quanti
+    // membri ha il gruppo conserviamo l'alert aggregato: inventare un colpevole
+    // sarebbe peggio di lasciare il gruppo in triage.
+    const crawlerReports = lost ? [] : buildCrawlerFailureReports({
       log: failureLog,
       run,
       workflowName: name,
       jobLines,
     });
-    const report = lost || crawler;
-    const title = report ? report.title : `Workflow Failure: ${name}`;
-
-    if (alreadyReported(title, run.url, { checkTransientLedger: isRecurrenceGatedWorkflow(name) })) {
-      console.log(`[scan-failed-runs] ${name}: run ${run.databaseId} già segnalata → skip (evita doppio conteggio nel gate).`);
-      continue;
+    if (crawlerReports.length > 0) {
+      console.log(
+        `[scan-failed-runs] ${name}: run ${run.databaseId} → ${crawlerReports.length} report `
+          + `(${crawlerReports.map((r) => r.title).join(' · ')})`
+          + `${crawlerReports[0].grainReason ? ` — grana di gruppo: ${crawlerReports[0].grainReason}` : ''}.`,
+      );
     }
+    // `null` = nessun report ricco: titolo e corpo generici del workflow.
+    const reports = lost ? [lost] : (crawlerReports.length > 0 ? crawlerReports : [null]);
 
-    const description = report ? report.description : [
+    const genericDescription = [
       `Il workflow **${name}** è fallito.`,
       '',
       `- Run: ${run.url}`,
@@ -1733,54 +2043,24 @@ async function main() {
       'Issue aperta automaticamente da `scripts/ci/scan-failed-runs.mjs`. Si chiude da sola quando il workflow torna verde (`close-recovered-failure-issues.mjs`, cron orario) — non serve chiuderla a mano dopo un fix.',
     ].join('\n');
 
-    if (DRY_RUN) {
-      console.log(`[scan-failed-runs] (dry-run) aprirei: "${title}" — run ${run.url}`);
-      opened++;
-      if (!surveillance) cappedOpened++;
-      continue;
-    }
-
-    const res = await createGithubIssue({
-      title,
-      description,
-      // Un articolo intero buttato via non e' un blip: e' la perdita piu' cara
-      // per unita' della pipeline, ed e' gia' successa quando la issue si apre.
-      priority: lost ? 1 : 2,
-      labels: ['Bug'],
-      workflow: name,
-      // Il primo blip resta una briciola priority:low solo per i flussi ad alta
-      // frequenza classificati da gateForWorkflow. I workflow ordinari, inclusi
-      // i cron giornalieri e settimanali, arrivano alla prima issue: `-1`
-      // disattiva il gate (vedi consecutiveGate in github-issue-creator.mjs).
-      // Non vale per un articolo perso: aspettare la terza perdita significa
-      // buttarne tre.
-      consecutiveGate: gateForWorkflow(name, { lost: Boolean(lost) }),
+    const outcome = await deliverRunReports({
+      name,
+      run,
+      reports,
+      genericDescription,
+      lost: Boolean(lost),
     });
-    // `if (res) opened++` contava come consegnati anche i due casi di
-    // fallimento, ed e' il secondo dei tre 🔴 della review: `createGithubIssue`
-    // rende `null` quando la creazione fallisce e `{persisted: false}` quando
-    // fallisce un commento o una riapertura. Contarli chiudeva la passata a 0 e
-    // faceva avanzare il confine oltre una failure NON registrata — inclusa una
-    // possibile failure di `publish-api`, che lascia la superficie dati vecchia.
-    //
-    // `ledger: true` e `staleBuild: true` sono percorsi RIUSCITI che non
-    // portano `persisted`, quindi si testano esattamente i due fallimenti e non
-    // la verita' di `persisted` (il caso ledger va preservato, come chiede la
-    // review).
-    if (res === null || res?.persisted === false) {
-      markIncomplete(
-        `segnalazione non consegnata per "${name}": `
-          + `${res === null ? 'createGithubIssue ha reso null' : 'commento non persistito'}`,
-      );
+    for (const { title, reason, short } of outcome.undelivered) {
+      markIncomplete(`segnalazione non consegnata per "${name}" (${title}): ${reason}`);
       console.error(
-        `::error::[scan-failed-runs] ${name}: segnalazione NON consegnata `
-          + `(${res === null ? 'null' : 'persisted: false'}) — la passata non e' completa.`,
+        `::error::[scan-failed-runs] ${name}: segnalazione "${title}" NON consegnata `
+          + `(${short}) — la passata non e' completa.`,
       );
-      continue;
     }
-    opened++;
-    // Solo una segnalazione CONSEGNATA conta verso il cap del rumore.
-    if (!surveillance) cappedOpened++;
+    opened += outcome.delivered;
+    // Solo una segnalazione CONSEGNATA conta verso il cap del rumore, e una run
+    // conta una volta sola anche quando consegna un report per membro.
+    cappedOpened += capUnitsForRun({ name, delivered: outcome.delivered });
   }
 
   console.log(`[scan-failed-runs] Fatto — ${opened} segnalazione/i emesse.`);

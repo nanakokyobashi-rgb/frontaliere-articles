@@ -14,7 +14,7 @@ import {
   isReportableRun,
   cleanLogLine,
   crawlerFailuresFromLog,
-  buildCrawlerFailureReport,
+  buildCrawlerFailureReports,
   isCrawlerGroupWorkflow,
   isSystemicCrawlerFailureLog,
   conflictedPathsFromLog,
@@ -92,6 +92,16 @@ const CRAWLER_RUN = {
   headBranch: 'crawler-generation-shadow-35403879560-1',
   event: 'workflow_dispatch',
   updatedAt: '2026-09-19T01:28:01Z',
+};
+// `buildCrawlerFailureReports` rende un elenco (un report per membro fallito in
+// minoranza). I casi di questo file ne attendono al piu' UNO: l'helper lo
+// pretende, cosi' un caso che iniziasse a spezzarsi per membro diventa rosso
+// qui invece di essere letto come «primo report». I casi con piu' report sono
+// in scan-failed-runs-member-grain.test.mjs.
+const buildCrawlerFailureReport = (args) => {
+  const reports = buildCrawlerFailureReports(args);
+  assert.ok(reports.length <= 1, `atteso al piu' un report, trovati ${reports.length}`);
+  return reports[0] ?? null;
 };
 const groupLogLine = (t, s) => `crawler_group_20\tRun capri-holdings\t2026-09-19T01:${t}Z ${s}`;
 const GROUP_FAILURE_LOG = [
@@ -220,7 +230,7 @@ test('il report del gruppo 22 conserva la causa concreta del guard Fust', () => 
   assert.match(report.description, /step `Run fust`/);
 });
 
-test('più membri falliti hanno un report aggregato con esiti e cause, senza colpevole inventato', () => {
+test('più membri falliti SENZA riga di verdetto restano un report aggregato con esiti e cause, senza colpevole inventato', () => {
   const log = [
     groupLogLine('28:00.0000000', '❌ Capri Holdings crawler failed: Workday empty search returned zero unexpectedly.'),
     groupLogLine('28:00.0000000', 'capri-holdings: crawler exited with status 1'),
@@ -239,6 +249,9 @@ test('più membri falliti hanno un report aggregato con esiti e cause, senza col
   assert.match(report.description, /Workday empty search returned zero unexpectedly/);
   assert.match(report.description, /workplace canton invariant failed for Niederwangen BE/);
   assert.match(report.description, /Il titolo resta aggregato/);
+  // Il numero dei membri del gruppo non e' ricavabile da questo log: la grana
+  // per membro non e' dimostrabile e si resta su quella piu' larga.
+  assert.equal(report.grainReason, 'member-count-unknown');
 });
 
 test('exit 143 resta un esito sistemico visibile nel report del gruppo', () => {

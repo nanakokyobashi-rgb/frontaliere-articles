@@ -792,10 +792,6 @@
     "affitti svizzera mercato immobiliare 2026": 1
   },
   "topicGateUrls": {
-    "svizzera::https://www.tio.ch/dal-mondo/economia/1954095/blume-germania-proposta-lavoro-costi": {
-      "section": "svizzera",
-      "ts": 1790879374850
-    },
     "svizzera::https://www.tio.ch/rubriche/aziende-ticinesi-informano/1954062/occhiali-aot-associazione-iniziativa-ticino-canton-buono-dona-ricevi-sostieni": {
       "section": "svizzera",
       "ts": 1790881539151
@@ -995,6 +991,14 @@
     "frontaliere::https://www.varesenews.it/2026/10/ci-vuole-una-generazione-cosi-la-i-m-p-di-saronno-passa-dallazienda-di-famiglia-al-management/2695432": {
       "section": "frontaliere",
       "ts": 1791050078916
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/longevity-economy-a-materia-il-confronto-su-come-cambia-limpresa-quando-si-vive-piu-a-lungo/2694334": {
+      "section": "frontaliere",
+      "ts": 1791051413826
+    },
+    "frontaliere::https://comozero.it/attualita/como-nigeriano-estradato-per-mafia-dalla-svizzera-e-arrestato-dalla-polizia-di-frontiera": {
+      "section": "frontaliere",
+      "ts": 1791053468891
     }
   }
 }

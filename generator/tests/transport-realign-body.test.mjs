@@ -21,6 +21,7 @@ import { execFileSync, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import {
   MANIFEST_PATH,
+  convergedBulletLine,
   decodeCodeSpanContent,
   markdownCodeSpan,
   parseTransportBullets,
@@ -176,8 +177,9 @@ test('la CLI scrive il TSV letto dallo step di realign', () => {
 test('produttore e consumatore importano lo stesso modulo', () => {
   const producer = fs.readFileSync(path.join(ROOT, '.github/workflows/transport-identical-twins.yml'), 'utf8');
   const consumer = fs.readFileSync(path.join(ROOT, '.github/workflows/transport-identical-twins-realign.yml'), 'utf8');
-  assert.match(producer, /node --input-type=module -e '\s+import fs from "node:fs";\s+import \{ markdownCodeSpan, transportBulletLine \} from "\.\/scripts\/ci\/transport-realign-body\.mjs";/);
+  assert.match(producer, /node --input-type=module -e '\s+import fs from "node:fs";\s+import \{ convergedBulletLine, markdownCodeSpan, transportBulletLine \} from "\.\/scripts\/ci\/transport-realign-body\.mjs";/);
   assert.match(producer, /r\.transported\.map\(\(t\) => transportBulletLine\(t\)\)/);
+  assert.match(producer, /r\.realign\.map\(\(x\) => convergedBulletLine\(x\)\)/);
   assert.doesNotMatch(producer, /"- `" \+ t\.path \+ "`/, 'il produttore non deve piu\' scrivere il code span a mano');
   assert.match(consumer, /node scripts\/ci\/transport-realign-body\.mjs/);
   assert.doesNotMatch(consumer, /const re = \/\^- `\(\[\^`/, 'nessun secondo parser inline nel workflow');
@@ -189,4 +191,31 @@ test('produttore e consumatore importano lo stesso modulo', () => {
     'import { transportBulletLine } from "./scripts/ci/transport-realign-body.mjs"; console.log(transportBulletLine({ path: "a`b", sitePath: "a`b", to: "' + HASH16 + '" }));',
   ], { cwd: ROOT, encoding: 'utf8' }).trim();
   assert.equal(out, '- ``a`b`` ← ``a`b`` del sito (site sha256 `' + HASH16 + '`)');
+});
+
+// site#6369: una passata con 0 copie e N `both-moved-converged` riattestati apre
+// una PR che tocca SOLO il manifest. Le righe dei convergenti stanno nel body
+// per chi rivede, ma non devono entrare nel contratto `(site sha256 ...)`: il
+// realign post-merge pretende che ogni path citato così sia fra i file della
+// PR, e un convergente non lo è mai.
+test('le righe dei convergenti riattestati non entrano nel realign post-merge', () => {
+  const manifest = {
+    files: [
+      { path: 'scripts/ci/a.mjs', mode: 'identical' },
+      { path: 'scripts/ci/with`tick.mjs', mode: 'identical' },
+    ],
+  };
+  const body = [
+    '## Implementato',
+    '- Copia automatica dei gemelli.',
+    convergedBulletLine({ path: 'scripts/ci/a.mjs', hash: HASH16 }),
+    convergedBulletLine({ path: 'scripts/ci/with`tick.mjs', hash: HASH16 }),
+    '',
+    '## Non implementato (ancora)',
+    '- niente',
+  ].join('\n');
+  assert.deepEqual(parseTransportBullets(body), []);
+  const plan = planTransportRealign({ body, changedFiles: [MANIFEST_PATH], manifest });
+  assert.deepEqual(plan.rows, []);
+  assert.deepEqual(plan.expected, []);
 });
