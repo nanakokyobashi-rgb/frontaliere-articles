@@ -98203,7 +98203,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     keywords: 'frontalieri, ticino, svizzera, italia, guasto, busto, arsizio, passeggeri',
     ogTitle: 'Guasto S50 Busto Arsizio: passeggeri bloccati 3 ore',
     ogDescription: 'Un guasto sulla linea S50 Malpensa-Bellinzona ha lasciato i passeggeri bloccati per oltre tre ore a soli 200 metri dalla stazione. Europa Verde solleva il tema dell\'affidabilità del servizio ferroviario transfrontaliero.',
-    canonicalPath: '/articoli-frontaliere/guasto-treno-s50-busto-arsizio-2026',
+    canonicalPath: '/articoli-frontaliere/guasto-treno-s50-busto-arsizio-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
@@ -98242,7 +98242,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     keywords: 'frontalieri, ticino, svizzera, italia, caos, viario, dell, agosto',
     ogTitle: 'Caos viario dell\'8 agosto: gruppo di lavoro valuta migliorie',
     ogDescription: 'La chiusura della A2 dopo un grosso incidente a Mezzovico-Vira ha provocato oltre quattro ore di disagi nel Luganese. Il Consiglio di Stato ricostruisce la serata e annuncia un gruppo di lavoro per valutare migliorie.',
-    canonicalPath: '/articoli-frontaliere/caos-a2-mezzovico-migliorie',
+    canonicalPath: '/articoli-frontaliere/caos-a2-mezzovico-migliorie/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
@@ -98281,7 +98281,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     keywords: 'frontalieri, ticino, svizzera, italia, carburanti, tetto, italiano, riporta',
     ogTitle: 'Carburanti: il tetto italiano riporta il pieno oltreconfine',
     ogDescription: 'Diverse compagnie in Italia mettono un limite alle tariffe dei carburanti e il pieno torna conveniente oltreconfine. La Confederazione viene descritta come rimasta immobile: il confronto è il centro delle preoccupazioni svizzere richiamate',
-    canonicalPath: '/articoli-frontaliere/tetto-italiano-carburanti',
+    canonicalPath: '/articoli-frontaliere/tetto-italiano-carburanti/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
@@ -98320,7 +98320,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     keywords: 'frontalieri, ticino, svizzera, italia, principio, incendio, furgoncino, paradiso',
     ogTitle: 'Principio d\'incendio a Melide: TCS segnala ritardi',
     ogDescription: 'La serata era segnata da traffico da bollino nero sulle strade del cantone. Il conducente ha accostato il furgoncino in Via Cantonale e cercato aiuto tra le auto in colonna; nessuno è rimasto ferito. Il TCS segnala rallentamenti.',
-    canonicalPath: '/articoli-frontaliere/furgoncino-fiamme-paradiso-melide',
+    canonicalPath: '/articoli-frontaliere/furgoncino-fiamme-paradiso-melide/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
@@ -98359,7 +98359,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     keywords: 'frontalieri, ticino, svizzera, italia, controlli, velocità, ottobre, sono',
     ogTitle: 'Controlli velocità in Ticino dal 5 all\'11 ottobre',
     ogDescription: 'Da lunedì 5 a domenica 11 ottobre la Polizia cantonale ha pianificato controlli della velocità sulle strade ticinesi. La comunicazione riguarda la mappa dei radar, le località interessate e i controlli semi-stazionari.',
-    canonicalPath: '/articoli-frontaliere/radar-strade-ticinesi-ottobre',
+    canonicalPath: '/articoli-frontaliere/radar-strade-ticinesi-ottobre/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
@@ -98398,7 +98398,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, regole, potrebbero, cambiare',
     ogTitle: 'Disoccupazione frontalieri, le regole potrebbero cambiare',
     ogDescription: 'Un\'importante revisione delle regole europee sul coordinamento della sicurezza sociale potrebbe modificare il sistema di disoccupazione per i frontalieri residenti in Italia e impiegati in Svizzera. Le attuali norme e le possibili novità con il via',
-    canonicalPath: '/articoli-frontaliere/disoccupazione-frontalieri-cambio-regole',
+    canonicalPath: '/articoli-frontaliere/disoccupazione-frontalieri-cambio-regole/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
@@ -98437,7 +98437,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     keywords: 'frontalieri, ticino, svizzera, italia, tassa, ingresso, fino, 4mila',
     ogTitle: 'Svizzera: tassa d\'ingresso fino a 4mila franchi',
     ogDescription: 'La proposta svizzera collega un\'imposta di incentivazione alla clausola di salvaguardia: almeno 4mila franchi per lavoratori, autonomi e persone senza attività lucrativa, 2mila per il ricongiungimento familiare.',
-    canonicalPath: '/articoli-frontaliere/svizzera-tassa-ingresso-franchi',
+    canonicalPath: '/articoli-frontaliere/svizzera-tassa-ingresso-franchi/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
@@ -98476,7 +98476,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     keywords: 'bollettino frontaliere, dogana, attesa dogana, code valichi ticino, prezzi benzina confine, cambio franco euro, lavoro svizzera, frontalieri ticino',
     ogTitle: 'Bollettino del frontaliere – 3 ottobre 2026: a Ponte Tresa 41 minuti di coda',
     ogDescription: 'I numeri del 3 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
-    canonicalPath: '/articoli-frontaliere/bollettino-frontaliere-2026-10-03',
+    canonicalPath: '/articoli-frontaliere/bollettino-frontaliere-2026-10-03/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
@@ -98515,7 +98515,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     keywords: 'frontalieri, ticino, svizzera, italia, pasture, vertenza, personale, governo',
     ogTitle: 'Pasture, la vertenza arriva al governo federale',
     ogDescription: 'La vertenza sul personale di Pasture si sposta sul piano federale: il deputato Giorgio Fonio interroga su mandati e garanzie occupazionali. Intanto, sindacati e Commissione del personale chiedono ad AOZ un incontro sulla situazione in Ticino.',
-    canonicalPath: '/articoli-frontaliere/pasture-vertenza-governo-federale',
+    canonicalPath: '/articoli-frontaliere/pasture-vertenza-governo-federale/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
@@ -98554,7 +98554,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     keywords: 'frontalieri, ticino, svizzera, italia, furto, auto, noranco, arresti',
     ogTitle: 'Furto auto a Noranco: tre arresti, veicoli recuperati',
     ogDescription: 'Nella notte, tre auto di alta gamma sono state rubate da un garage di Noranco. Grazie a un\'operazione coordinata tra diverse polizie, i veicoli sono stati recuperati e tre persone, residenti in Francia, sono state fermate. Scopri i dettagli',
-    canonicalPath: '/articoli-frontaliere/furto-noranco-arresti-garage',
+    canonicalPath: '/articoli-frontaliere/furto-noranco-arresti-garage/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
@@ -98593,7 +98593,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     keywords: 'frontalieri, ticino, svizzera, italia, inflazione, settembre, carburanti, sale',
     ogTitle: 'Inflazione Svizzera: carburanti spingono i prezzi',
     ogDescription: 'A settembre l\'inflazione annua svizzera è salita all\'1%. La fonte collega l\'impennata dei carburanti alla guerra in Medio Oriente: +65% per l\'olio combustibile, +28,7% per il diesel e +19,9% per la benzina. L\'IPC mensile è rimasto stabile.',
-    canonicalPath: '/articoli-frontaliere/prezzi-carburanti-settembre',
+    canonicalPath: '/articoli-frontaliere/prezzi-carburanti-settembre/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
@@ -98632,7 +98632,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     keywords: 'frontalieri, ticino, svizzera, italia, tamponamento, sull, coldrerio, 73enne',
     ogTitle: 'Tamponamento sull\'A2 a Coldrerio: 73enne grave',
     ogDescription: 'Incidente nel pomeriggio sull\'A2 in direzione sud: la conducente 68enne ha riportato ferite lievi, il passeggero 73enne è stato portato in elicottero all\'ospedale. L\'autostrada è stata chiusa e poi il traffico è stato incanalato su una corsia.',
-    canonicalPath: '/articoli-frontaliere/a2-coldrerio-incidente-camion',
+    canonicalPath: '/articoli-frontaliere/a2-coldrerio-incidente-camion/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
@@ -98671,7 +98671,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     keywords: 'frontalieri, ticino, svizzera, italia, giornata, transfrontaliera, sulla, sostenibilità',
     ogTitle: 'Sostenibilità, giornata transfrontaliera a Mezzana',
     ogDescription: 'A Mezzana, esperti del Cantone Ticino e di Regione Lombardia hanno incontrato oltre settanta docenti per parlare di sostenibilità, gestione forestale responsabile e attività da portare in classe, con una scheda da consegnare entro metà marzo 2027.',
-    canonicalPath: '/articoli-frontaliere/giornata-sostenibilita-mezzana',
+    canonicalPath: '/articoli-frontaliere/giornata-sostenibilita-mezzana/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",

@@ -14240,9 +14240,8 @@ function modifySeoService(data) {
   const blogSeoFile = SECTION.seoFile;
   let blogSrc = read(blogSeoFile);
   const itHub = SECTION.hubSlug.it;
-  // frontaliere canonicalPath has historically had NO trailing slash; keep it
-  // byte-identical. svizzera uses a trailing slash (per seo-blog-ch.ts contract).
-  const itHubPath = IS_FRONTALIERE ? `/${itHub}/${data.slugs.it}` : `/${itHub}/${data.slugs.it}/`;
+  // Both article sections use the site's trailing-slash canonical contract.
+  const itHubPath = `/${itHub}/${data.slugs.it}/`;
 
   const seoEntry = `
   'blog-${data.id}': {
