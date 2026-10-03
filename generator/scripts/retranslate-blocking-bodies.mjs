@@ -68,10 +68,27 @@
  *   node generator/scripts/retranslate-blocking-bodies.mjs --audit a.json
  *   ...--audit a.json --code translation-false-friend --limit 20   # pilota
  *   ...--audit a.json --apply                                      # scrive
+ *   ...--scan --count-only --out stock.json      # misura lo stock, non scrive
+ *   ...--scan --code translation-false-friend --limit 20           # pilota
  *
  * Flag:
  *   --audit <file>     JSON di audit-article-factuality.mjs --json oppure
- *                      scan-v2 (`results[]`); richiesto, salvo --slug
+ *                      scan-v2 (`results[]`); richiesto, salvo --slug,
+ *                      --missing o --scan
+ *   --scan             seleziona le coppie bloccanti leggendo `content/` con
+ *                      la stessa guardia (`runFactualityGates`, codici
+ *                      `critical`), un file alla volta: zero rete, zero MT,
+ *                      niente audit da 6 GB del sito. Non si combina con
+ *                      --audit, --slug o --missing. Il resto (--code,
+ *                      --locale, --limit, --stratify, --apply) e' invariato.
+ *   --count-only       solo con --scan: non tratta nessuna coppia, stampa
+ *                      `{ scanned, byCode: { <codice>: { it, en, de, fr,
+ *                      total } } }` su stdout (e su --out). Default locali
+ *                      it,en,de,fr. Non si combina con --apply.
+ *   --list-out <file>  solo con --scan: JSONL ordinato per `key`, una coppia
+ *                      per riga, `{ key, codes, evidence: [{ code, excerpt }] }`
+ *                      (primo rilievo `critical` per codice). Rispetta
+ *                      --locale e --code, non --limit.
  *   --missing          seleziona i body con chiavi mancanti o copia italiana
  *                      dal gate FU-009; usa la stessa cascata e gli stessi
  *                      guard prima di aggiungere/sostituire i campi
@@ -93,7 +110,7 @@
  *                      STDOUT ("DeepL key #1 quota exhausted"), quindi un
  *                      `--json` rediretto con `>` non e' parsabile.
  */
-import { readFileSync, writeFileSync, existsSync, renameSync, unlinkSync, realpathSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, renameSync, unlinkSync, realpathSync, readdirSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -874,6 +891,128 @@ export function pairsForSlugs(slugs, locales, contentRoot) {
   return out;
 }
 
+/** Locali misurati da `--count-only`: lo stock comprende anche l'italiano. */
+export const SCAN_COUNT_LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
+
+/** Chiave stabile di una coppia, la stessa di `--list-out`. */
+export const scanPairKey = (pair) => `${pair.dir}/${pair.locale}/${pair.id}`;
+
+function readSections(src, id) {
+  const sections = {};
+  for (const f of bodyFieldsForSource(src, id)) {
+    const v = readBodyField(src, id, f);
+    if (v) sections[f] = v;
+  }
+  return sections;
+}
+
+/**
+ * Selettore dal CONTENUTO: le coppie bloccanti senza il file `--audit`.
+ *
+ * L'audit ufficiale (`audit-article-factuality.mjs`) vive solo nel sito e
+ * tiene in memoria l'intero corpus (~6 GB di heap): nessun workflow del corpus
+ * lo puo' ne' importare (il confine e' HTTP) ne' lanciare, e senza il suo file
+ * lo strumento usciva 2. Qui si applica la STESSA guardia che `processPair`
+ * usa per decidere `oldCodes` — `runFactualityGates` sui campi body del file,
+ * con l'italiano dello stesso id come riferimento, e i soli `critical` — un
+ * file alla volta: per ogni `content/blog-body[-ch]/<locale>/<id>.ts` si leggono
+ * quel file e il suo `it`, poi si lasciano andare.
+ *
+ * Il `dir` restituito e' quello dell'audit (`services/locales/blog-body[-ch]`)
+ * perche' `processPair` lo traduce con `DIR_TO_REAL`: le coppie entrano nella
+ * pipeline esistente senza adattatori. Ogni coppia porta anche `evidence`
+ * (primo rilievo `critical` per codice, l'estratto gia' troncato a 200
+ * caratteri dalla guardia): serve a chi deve GIUDICARE un campione prima di
+ * una scrittura, perche' il report di `processPair` non contiene contesti.
+ *
+ * Una traduzione senza il suo italiano resta valutata (scaffolding e
+ * troncamenti non dipendono dal riferimento): la conta dello stock deve
+ * vederla, e `processPair` la salta come `sorgente-mancante`.
+ *
+ * Funzione pura sul filesystem in sola lettura: zero rete, zero MT, nessuna
+ * scrittura.
+ *
+ * @param {string} contentRoot radice che contiene `content/`
+ * @param {{ locales?: string[] }} [opts]
+ * @returns {{ scanned: number, pairs: Array<{ id: string, locale: string, dir: string, codes: string[], evidence: Array<{ code: string, excerpt: string }> }> }}
+ */
+export function scanContentForBlockingPairs(contentRoot, { locales = ['en', 'de', 'fr'] } = {}) {
+  const uniqueLocales = [...new Set(Array.isArray(locales) ? locales.filter(Boolean) : [])];
+  const pairs = [];
+  let scanned = 0;
+  for (const [dir, realDir] of Object.entries(DIR_TO_REAL)) {
+    for (const locale of uniqueLocales) {
+      const localeDir = resolve(contentRoot, realDir, locale);
+      if (!existsSync(localeDir)) continue;
+      const files = readdirSync(localeDir).filter((name) => name.endsWith('.ts')).sort();
+      for (const name of files) {
+        const id = name.slice(0, -'.ts'.length);
+        const src = readFileSync(resolve(localeDir, name), 'utf8');
+        scanned += 1;
+        const sections = readSections(src, id);
+        if (!Object.keys(sections).length) continue;
+        let italianSections = null;
+        if (locale === 'it') {
+          italianSections = sections;
+        } else {
+          const itPath = resolve(contentRoot, realDir, 'it', name);
+          if (existsSync(itPath)) {
+            const itSections = readSections(readFileSync(itPath, 'utf8'), id);
+            if (Object.keys(itSections).length) italianSections = itSections;
+          }
+        }
+        const result = runFactualityGates({ sections, locale, italianSections });
+        const codes = criticalCodes(result);
+        if (!codes.length) continue;
+        const evidence = codes.map((code) => ({
+          code,
+          excerpt: (result.issues || []).find((i) => i.severity === 'critical' && i.code === code)?.evidence || '',
+        }));
+        pairs.push({ id, locale, dir, codes, evidence });
+      }
+    }
+  }
+  pairs.sort((a, b) => (scanPairKey(a) < scanPairKey(b) ? -1 : scanPairKey(a) > scanPairKey(b) ? 1 : 0));
+  return { scanned, pairs };
+}
+
+/**
+ * Coppie bloccanti dal contenuto, nello stesso formato di
+ * `blockingPairsFromAudit` (`{ id, locale, dir, codes }`).
+ */
+export function blockingPairsFromContent(contentRoot, { locales } = {}) {
+  return scanContentForBlockingPairs(contentRoot, { locales })
+    .pairs.map(({ id, locale, dir, codes }) => ({ id, locale, dir, codes }));
+}
+
+/**
+ * Conteggio per codice e locale: la metrica dello stock. Una coppia con due
+ * codici conta in entrambi; `total` e' per codice, non coppie distinte.
+ */
+export function countBlockingPairs(pairs, { scanned = 0, locales = SCAN_COUNT_LOCALES } = {}) {
+  const localeKeys = [...new Set([...SCAN_COUNT_LOCALES, ...(locales || [])])];
+  const byCode = {};
+  for (const pair of Array.isArray(pairs) ? pairs : []) {
+    for (const code of pair.codes || []) {
+      if (!byCode[code]) {
+        byCode[code] = Object.fromEntries([...localeKeys.map((l) => [l, 0]), ['total', 0]]);
+      }
+      byCode[code][pair.locale] = (byCode[code][pair.locale] || 0) + 1;
+      byCode[code].total += 1;
+    }
+  }
+  const sorted = Object.fromEntries(Object.keys(byCode).sort().map((code) => [code, byCode[code]]));
+  return { scanned, byCode: sorted };
+}
+
+/** Righe JSONL di `--list-out`, ordinate per `key`. */
+export function scanListLines(pairs) {
+  return (Array.isArray(pairs) ? pairs : [])
+    .map((pair) => ({ key: scanPairKey(pair), codes: pair.codes, evidence: pair.evidence || [] }))
+    .sort((a, b) => (a.key < b.key ? -1 : a.key > b.key ? 1 : 0))
+    .map((row) => JSON.stringify(row));
+}
+
 /**
  * Converte il report strutturale FU-009 in coppie consumabili dalla pipeline
  * di ri-traduzione. Si selezionano solo difetti riparabili per campo: un file
@@ -1047,15 +1186,38 @@ async function main() {
     console.error('❌ --out è vuoto. Indica un file oppure ometti il flag per il report su stdout.');
     process.exit(2);
   }
-  if (!auditPath && SLUGS.length === 0 && !MISSING) {
-    console.error('❌ --audit <file.json>, --slug <id> oppure --missing è richiesto.');
+  const SCAN = bool('scan');
+  const COUNT_ONLY = bool('count-only');
+  if (!auditPath && SLUGS.length === 0 && !MISSING && !SCAN) {
+    console.error('❌ --audit <file.json>, --slug <id>, --missing oppure --scan è richiesto.');
     process.exit(2);
   }
   if (MISSING && (auditPath || SLUGS.length > 0)) {
     console.error('❌ --missing non si combina con --audit o --slug.');
     process.exit(2);
   }
+  // Un solo sorgente di coppie: `--scan --audit` non deve decidere in silenzio
+  // quale dei due vince, perche' con --apply sarebbe la differenza fra il
+  // lotto chiesto e un altro.
+  if (SCAN && (has('audit') || has('slug') || MISSING)) {
+    console.error('❌ --scan non si combina con --audit, --slug o --missing.');
+    process.exit(2);
+  }
+  if ((COUNT_ONLY || has('list-out')) && !SCAN) {
+    console.error('❌ --count-only e --list-out valgono solo con --scan.');
+    process.exit(2);
+  }
+  if (has('list-out') && !flag('list-out')) {
+    console.error('❌ --list-out è vuoto. Indica un file oppure ometti il flag.');
+    process.exit(2);
+  }
   const APPLY = bool('apply');
+  // `--count-only --apply` e' contraddittorio: la conta non scrive mai, e
+  // ignorare l'--apply farebbe credere a chi lancia di aver bonificato.
+  if (COUNT_ONLY && APPLY) {
+    console.error('❌ --count-only non si combina con --apply.');
+    process.exit(2);
+  }
   const AS_JSON = bool('json');
   // `|| Infinity` sarebbe sbagliato: `--limit 0` e' zero, non "nessun limite".
   const rawLimit = flag('limit');
@@ -1076,7 +1238,7 @@ async function main() {
   }
   const CONCURRENCY = Math.max(1, Number(flag('concurrency', 2)) || 2);
   const CONTENT_ROOT = resolve(flag('content-root', ROOT));
-  const LOCALES = parseLocaleList(flag('locale', 'en,de,fr'));
+  const LOCALES = parseLocaleList(flag('locale', COUNT_ONLY ? SCAN_COUNT_LOCALES.join(',') : 'en,de,fr'));
   const CODE = flag('code');
   const SLUG_FILTER = has('slug') ? SLUGS : undefined;
 
@@ -1092,7 +1254,22 @@ async function main() {
   }
 
   let pairs;
-  if (MISSING) {
+  if (SCAN) {
+    const scan = scanContentForBlockingPairs(CONTENT_ROOT, { locales: LOCALES });
+    const selected = scan.pairs.filter((p) => !CODE || p.codes.includes(CODE));
+    if (has('list-out')) {
+      const lines = scanListLines(selected);
+      writeFileSync(resolve(flag('list-out')), lines.length ? `${lines.join('\n')}\n` : '', 'utf-8');
+    }
+    if (COUNT_ONLY) {
+      const counts = JSON.stringify(countBlockingPairs(selected, { scanned: scan.scanned, locales: LOCALES }), null, 2);
+      if (flag('out')) writeFileSync(resolve(flag('out')), `${counts}\n`, 'utf-8');
+      console.log(counts);
+      return;
+    }
+    // Stesso formato dell'audit: `evidence` resta nel --list-out, non nel report.
+    pairs = selected.map(({ id, locale, dir, codes }) => ({ id, locale, dir, codes }));
+  } else if (MISSING) {
     pairs = completenessPairsFromReport(inspectBlogLocaleCompleteness({ root: CONTENT_ROOT }));
     pairs = selectBlockingPairs(pairs, { locales: LOCALES, slugs: undefined });
   } else if (auditPath) {
