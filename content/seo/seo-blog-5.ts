@@ -98236,6 +98236,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-caos-a2-mezzovico-migliorie': {
+    title: 'Caos viario dell\'8 agosto: gruppo di lavoro valuta migliorie',
+    description: 'Dopo oltre quattro ore di caos nel Luganese, la Polizia cantonale istituisce un gruppo di lavoro sulla chiusura della A2 a Mezzovico-Vira e sui disagi viari.',
+    keywords: 'frontalieri, ticino, svizzera, italia, caos, viario, dell, agosto',
+    ogTitle: 'Caos viario dell\'8 agosto: gruppo di lavoro valuta migliorie',
+    ogDescription: 'La chiusura della A2 dopo un grosso incidente a Mezzovico-Vira ha provocato oltre quattro ore di disagi nel Luganese. Il Consiglio di Stato ricostruisce la serata e annuncia un gruppo di lavoro per valutare migliorie.',
+    canonicalPath: '/articoli-frontaliere/caos-a2-mezzovico-migliorie',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Caos viario dell'8 agosto: gruppo di lavoro valuta migliorie",
+      "description": "Dopo oltre quattro ore di caos nel Luganese, la Polizia cantonale istituisce un gruppo di lavoro sulla chiusura della A2 a Mezzovico-Vira e sui disagi viari.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/caos-a2-mezzovico-migliorie.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Traffico congestionato nel Luganese dopo la chiusura della A2 a Mezzovico-Vira"
+      },
+      "datePublished": "2026-10-03T03:52:06+00:00",
+      "dateModified": "2026-10-03T03:52:06+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/caos-a2-mezzovico-migliorie/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
