@@ -583,7 +583,7 @@ test('#1084: il consumo issue-fix con pool pieno resta invariato', () => {
   assert.equal(consume(4, pool, 3).reason, 'issue-fix-pool-full');
 });
 
-test('#1084: acquire, consume e rilettura dopo la scrittura condividono un solo predicato di contesa', () => {
+test('#1084: il predicato di contesa copre la rilettura dopo la scrittura', () => {
   const own = { token: 'own', role: 'issue-decompose' };
   const fix = (token) => ({ token, role: 'issue-fix' });
   // Ruolo esclusivo: dopo la scrittura deve restare solo il proprio lease.
@@ -596,15 +596,46 @@ test('#1084: acquire, consume e rilettura dopo la scrittura condividono un solo 
   assert.equal(quotaLeaseReservationContended({ role: 'issue-fix', live: [fix('a'), fix('b')], issueFixPool: 2 }), false);
   assert.equal(quotaLeaseReservationContended({ role: 'issue-fix', live: [fix('a'), fix('b')], issueFixPool: 1 }), true);
   assert.equal(quotaLeaseReservationContended({ role: 'issue-fix', live: [fix('a'), own], issueFixPool: 7 }), true);
+});
 
-  // I tre punti di decisione non possono più divergere: nessuno riscrive la regola a mano.
-  const src = fs.readFileSync(path.join(ROOT, 'scripts/ci/check-quota-backoff.mjs'), 'utf8');
-  const uses = src.match(/quotaLeaseReservationContended\(\{ role, live(?:: liveAfter)?, issueFixPool \}\)/g) || [];
-  assert.deepEqual(uses, [
-    'quotaLeaseReservationContended({ role, live, issueFixPool })',
-    'quotaLeaseReservationContended({ role, live, issueFixPool })',
-    'quotaLeaseReservationContended({ role, live: liveAfter, issueFixPool })',
-  ]);
-  const consumeBranch = src.slice(src.indexOf("if (action === 'consume') {"), src.indexOf("if (role === 'issue-fix') {"));
-  assert.doesNotMatch(consumeBranch.split('if (reservedForTarget) {')[0], /otherLive|issueFixLive/);
+test('#1084: acquire e consume danno la stessa risposta di contesa del predicato, per ogni ruolo', () => {
+  const nowSec = 1_800_000_000;
+  const headSha = 'a'.repeat(40);
+  const runId = '4242';
+  const lease = (token, role, targetType, target, state = 'consumed') => ({
+    token, role, targetType, target: String(target), state, issuedAt: nowSec - 10, expiresAt: nowSec + 600,
+  });
+  const CONTENDED = 'shared-quota-lease-reservation-contended';
+  const roles = [
+    { role: 'issue-decompose', targetType: 'issue', target: '1084' },
+    { role: 'review', targetType: 'pr', target: '77' },
+    { role: 'issue-fix', targetType: 'issue', target: '55' },
+  ];
+  for (const { role, targetType, target } of roles) {
+    // Reservation propria, bound a HEAD e run: adottabile da acquire, consumabile da consume.
+    const own = { ...lease('own', role, targetType, target, 'reserved'), headSha, reservationRunId: runId };
+    const others = {
+      'solo la propria reservation': [],
+      'più un issue-fix': [lease('fix-a', 'issue-fix', 'issue', 12)],
+      'più due issue-fix': [lease('fix-a', 'issue-fix', 'issue', 12), lease('fix-b', 'issue-fix', 'issue', 13, 'reserved')],
+      'più un review': [lease('rev', 'review', 'pr', 99, 'active')],
+      'più un issue-decompose': [lease('dec', 'issue-decompose', 'issue', 300, 'reserved')],
+      'doppia reservation': [{ ...own, token: 'dup' }],
+    };
+    for (const [label, extra] of Object.entries(others)) {
+      for (const maxIssueFixLeases of [1, 2, 3, 7]) {
+        const live = [own, ...extra];
+        const expected = quotaLeaseReservationContended({ role, live, issueFixPool: maxIssueFixLeases });
+        const args = { role, targetType, target, activeLeases: live, queueDepth: 0, nowSec, maxIssueFixLeases };
+        const where = `${role}, ${label}, pool ${maxIssueFixLeases}`;
+        const consumed = quotaLeaseDecision({ action: 'consume', ...args });
+        const acquired = quotaLeaseDecision({ action: 'acquire', headSha, runId, ...args });
+        assert.equal(consumed.reason === CONTENDED, expected, `consume diverge dal predicato (${where}): ${consumed.reason}`);
+        assert.equal(acquired.reason === CONTENDED, expected, `acquire diverge dal predicato (${where}): ${acquired.reason}`);
+        // Non contesa = la reservation propria viene adottata, non un altro rifiuto.
+        assert.equal(consumed.allowed, !expected, `consume (${where}): ${consumed.reason}`);
+        assert.equal(acquired.allowed, !expected, `acquire (${where}): ${acquired.reason}`);
+      }
+    }
+  }
 });

@@ -413,7 +413,8 @@ export function activeQuotaLeases(events = [], { nowSec = Math.floor(Date.now() 
 /**
  * Una reservation gia' scritta e' contesa? UNICA regola per chi la adotta
  * (`acquire`), per chi la consuma (`consume`) e per la rilettura dopo la
- * scrittura. `issue-fix` condivide un pool: e' conteso da un lease di un altro
+ * scrittura dei ruoli esclusivi (la rilettura `issue-fix` ha un blocco
+ * proprio in `runQuotaLease`). `issue-fix` condivide un pool: e' conteso da un lease di un altro
  * ruolo o dal pool oltre il tetto. Ogni altro ruolo e' ESCLUSIVO: la propria
  * reservation deve essere l'unico lease vivo. `live` comprende la reservation
  * stessa. Finche' `consume` usava la regola del pool per tutti i ruoli, una
