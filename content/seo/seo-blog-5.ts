@@ -98509,6 +98509,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-pasture-vertenza-governo-federale': {
+    title: 'Pasture: vertenza del personale al governo federale',
+    description: 'Pasture, Giorgio Fonio interroga il governo federale su mandati e garanzie occupazionali. Sindacati e Commissione del personale chiedono un incontro ad AOZ.',
+    keywords: 'frontalieri, ticino, svizzera, italia, pasture, vertenza, personale, governo',
+    ogTitle: 'Pasture, la vertenza arriva al governo federale',
+    ogDescription: 'La vertenza sul personale di Pasture si sposta sul piano federale: il deputato Giorgio Fonio interroga su mandati e garanzie occupazionali. Intanto, sindacati e Commissione del personale chiedono ad AOZ un incontro sulla situazione in Ticino.',
+    canonicalPath: '/articoli-frontaliere/pasture-vertenza-governo-federale',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Pasture: vertenza del personale al governo federale",
+      "description": "Pasture, Giorgio Fonio interroga il governo federale su mandati e garanzie occupazionali. Sindacati e Commissione del personale chiedono un incontro ad AOZ.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/pasture-vertenza-governo-federale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lavoratori davanti a un edificio in Ticino, in stile reportage."
+      },
+      "datePublished": "2026-10-03T10:40:14+00:00",
+      "dateModified": "2026-10-03T10:40:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/pasture-vertenza-governo-federale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
