@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         lane: [prospective, rest]
-    uses: valerielinc-ops/frontaliere-si-o-no/.github/workflows/housekeeping-jobs-logic.yml@3243ef9ce00be86f2aca8c6084ff19a944273c1d # sito #10753: lista sparse con packages/articles/engine/shared
+    uses: valerielinc-ops/frontaliere-si-o-no/.github/workflows/housekeeping-jobs-logic.yml@2c27327f0b381e7a868468620e099f54e7a72ebc # sito #11175: lista sparse letta da main insieme al codice
     with:
       lane: ${{ matrix.lane }}
     secrets:
