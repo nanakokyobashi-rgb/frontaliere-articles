@@ -33,3 +33,23 @@ for (const type of ['Organization', 'NewsMediaOrganization', ['NewsMediaOrganiza
     assert.equal(creator['@id'], 'https://example.com/#stale-site-id');
   });
 }
+
+for (const identity of [
+  { '@id': 'https://example.com/#newsroom' },
+  { '@id': 'https://example.com/#newsroom', url: 'https://example.com/' },
+  {},
+]) {
+  test(`a shared organization name does not establish site identity: ${JSON.stringify(identity)}`, () => {
+    const creator = Object.freeze({ '@type': 'NewsMediaOrganization', name: 'Frontaliere Ticino', ...identity });
+    assert.deepEqual(imageObjectLd({ contentUrl: 'https://example.com/image.jpg', creator }).creator, {
+      ...creator, '@type': 'Organization',
+    });
+  });
+}
+
+test('an explicit canonical organization id does not require a URL', () => {
+  const creator = Object.freeze({ '@type': 'NewsMediaOrganization', name: 'Frontaliere Ticino', '@id': SITE_ORGANIZATION_ID });
+  assert.deepEqual(imageObjectLd({ contentUrl: 'https://example.com/image.jpg', creator }).creator, {
+    ...creator, '@type': 'Organization',
+  });
+});
