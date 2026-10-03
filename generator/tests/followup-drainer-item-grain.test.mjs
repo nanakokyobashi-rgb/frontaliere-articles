@@ -32,27 +32,48 @@ const DRAINER = readFileSync(path.join(ROOT, 'scripts/ci/followup-drainer.mjs'),
 const BODY = 'padre decomposto fuori dalla coda del fixer';
 
 /** I/O finto: registra commenti, rimozioni di label e righe di log. */
-function fakeIo(readComments) {
-  const calls = { comments: [], removed: [], log: [] };
+function fakeIo(readComments, removeResult = true) {
+  const calls = { comments: [], removed: [], log: [], order: [] };
   return {
     calls,
     io: {
       readComments,
-      postComment: (num, body) => { calls.comments.push({ num, body }); },
-      removeLabels: (num) => { calls.removed.push(num); },
+      postComment: (num, body) => { calls.comments.push({ num, body }); calls.order.push('comment'); },
+      removeLabels: (num) => {
+        calls.removed.push(num);
+        calls.order.push('remove');
+        if (removeResult instanceof Error) throw removeResult;
+        return removeResult;
+      },
       body: BODY,
       log: (line) => { calls.log.push(line); },
     },
   };
 }
 
-test('primo dequeue: un commento con il marker, label tolte', () => {
+test('primo dequeue: label tolte, poi un commento con il marker', () => {
   const { calls, io } = fakeIo(() => [{ body: 'un commento qualsiasi' }]);
-  assert.equal(applyParentDequeue({ number: 41 }, io), 'comment');
+  assert.deepEqual(applyParentDequeue({ number: 41 }, io), { decision: 'comment', labelsRemoved: true });
   assert.equal(calls.comments.length, 1);
   assert.ok(calls.comments[0].body.startsWith(PARENT_DEQUEUED_MARKER));
   assert.ok(calls.comments[0].body.includes(BODY));
   assert.deepEqual(calls.removed, [41]);
+  assert.deepEqual(calls.order, ['remove', 'comment'], 'il commento segue un edit confermato');
+});
+
+test('edit rifiutato (claim live, CLAIM-READ-FAIL) o in errore: zero commenti, niente marker', () => {
+  // Solo `true` conferma: un valore non booleano (null, stringa) non è un edit riuscito.
+  for (const refused of [false, null, 'ok', new Error('gh: HTTP 502')]) {
+    const { calls, io } = fakeIo(() => [], refused);
+    const out = applyParentDequeue({ number: 41 }, io);
+    assert.deepEqual(out, { decision: 'comment', labelsRemoved: false });
+    assert.equal(calls.comments.length, 0, `nessun commento con removeLabels → ${String(refused)}`);
+    assert.ok(calls.log.some((line) => line.startsWith('::warning::') && line.includes('#41')));
+
+    // Il tick dopo NON è un repeat: senza marker il padre è ancora un primo dequeue.
+    const next = fakeIo(() => calls.comments.map((c) => ({ body: c.body })));
+    assert.equal(applyParentDequeue({ number: 41 }, next.io).decision, 'comment');
+  }
 });
 
 test('secondo dequeue con marker: zero commenti, decisione repeat, warning che nomina la issue', () => {
@@ -62,7 +83,7 @@ test('secondo dequeue con marker: zero commenti, decisione repeat, warning che n
   const posted = first.calls.comments.map((c) => ({ body: c.body }));
 
   const second = fakeIo(() => posted);
-  assert.equal(applyParentDequeue({ number: 41 }, second.io), 'repeat');
+  assert.deepEqual(applyParentDequeue({ number: 41 }, second.io), { decision: 'repeat', labelsRemoved: true });
   assert.equal(second.calls.comments.length, 0);
   assert.deepEqual(second.calls.removed, [41], 'la rimozione delle label resta incondizionata');
   assert.ok(second.calls.log.some((line) => line.startsWith('::warning::') && line.includes('#41')));
@@ -75,7 +96,7 @@ test('lettura commenti fallita (null o eccezione): zero commenti, label tolte co
   ];
   for (const reader of readers) {
     const { calls, io } = fakeIo(reader);
-    assert.equal(applyParentDequeue({ number: 7 }, io), 'unreadable');
+    assert.deepEqual(applyParentDequeue({ number: 7 }, io), { decision: 'unreadable', labelsRemoved: true });
     assert.equal(calls.comments.length, 0);
     assert.deepEqual(calls.removed, [7]);
     assert.ok(calls.log.some((line) => line.startsWith('::warning::')));

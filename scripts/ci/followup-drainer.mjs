@@ -112,19 +112,27 @@ export function parentDequeueCommentDecision(comments) {
 
 /**
  * Esegue il dequeue di UN padre decomposto con I/O iniettato. La rimozione
- * delle label è incondizionata (è la mutazione che conta); il commento si posta
+ * delle label si tenta sempre (è la mutazione che conta); il commento si posta
  * solo la prima volta. Marker già presente = qualcuno ha rimesso la label dopo
  * un dequeue: niente commento, ma un `::warning::` che nomina la issue.
+ *
+ * Adattamento corpus (il sito commenta prima di togliere le label): qui
+ * `edit()` rilegge il claim live e può RIFIUTARE la mutazione (claim arrivato
+ * nel frattempo o `CLAIM-READ-FAIL`). Le label si tolgono quindi PRIMA e il
+ * commento col marker si posta solo a rimozione confermata (`=== true`):
+ * altrimenti il marker resterebbe su un padre ancora in coda e il tick dopo
+ * conterebbe un `repeat` falso, proprio nel segnale che il marker introduce.
+ * Stessa regola «commento solo dopo un edit confermato» degli altri stadi.
  *
  * @param {{number: number}} parent
  * @param {{
  *   readComments: (num: number) => Array<{body?: string}>|null,
  *   postComment: (num: number, body: string) => unknown,
- *   removeLabels: (num: number) => unknown,
+ *   removeLabels: (num: number) => boolean,
  *   body: string,
  *   log?: (line: string) => void,
  * }} io
- * @returns {'comment'|'repeat'|'unreadable'}
+ * @returns {{decision: 'comment'|'repeat'|'unreadable', labelsRemoved: boolean}}
  */
 export function applyParentDequeue(parent, { readComments, postComment, removeLabels, body, log = console.log }) {
   const num = parent.number;
@@ -135,19 +143,28 @@ export function applyParentDequeue(parent, { readComments, postComment, removeLa
     comments = null;
   }
   const decision = parentDequeueCommentDecision(comments);
+  let labelsRemoved = false;
+  try {
+    labelsRemoved = removeLabels(num) === true;
+  } catch (e) {
+    log(`::warning::parent-dequeue: rimozione label #${num} fallita: ${String(e).slice(0, 120)}`);
+  }
   if (decision === 'comment') {
-    try {
-      postComment(num, `${PARENT_DEQUEUED_MARKER}\n${body}`);
-    } catch (e) {
-      log(`::warning::parent-dequeue: comment #${num} fallito: ${String(e).slice(0, 120)}`);
+    if (!labelsRemoved) {
+      log(`::warning::parent-dequeue: label di #${num} non tolte → nessun commento (riprovo al prossimo tick).`);
+    } else {
+      try {
+        postComment(num, `${PARENT_DEQUEUED_MARKER}\n${body}`);
+      } catch (e) {
+        log(`::warning::parent-dequeue: comment #${num} fallito: ${String(e).slice(0, 120)}`);
+      }
     }
   } else if (decision === 'repeat') {
-    log(`::warning::parent-dequeue ripetuto #${num}: \`agent:fix\`/\`agent:fix-queued\` rimessa su un padre già tolto dalla coda — tolgo le label senza un altro commento; va corretto chi la rimette.`);
+    log(`::warning::parent-dequeue ripetuto #${num}: \`agent:fix\`/\`agent:fix-queued\` rimessa su un padre già tolto dalla coda — ${labelsRemoved ? 'tolgo le label' : 'label non tolte in questo giro'} senza un altro commento; va corretto chi la rimette.`);
   } else {
-    log(`::warning::parent-dequeue: commenti di #${num} non leggibili → nessun commento (label tolte comunque).`);
+    log(`::warning::parent-dequeue: commenti di #${num} non leggibili → nessun commento (${labelsRemoved ? 'label tolte comunque' : 'label non tolte in questo giro'}).`);
   }
-  removeLabels(num);
-  return decision;
+  return { decision, labelsRemoved };
 }
 
 // Il sito usa int-from-env.mjs; nel corpus l'helper equivalente riceve il
@@ -4193,11 +4210,10 @@ export function runDrain() {
       dequeueExamined++;
       if (DRY) { console.log(`[dry] parent-dequeue #${p.number}`); continue; }
       dequeueApplied++;
-      let labelsRemoved = false;
-      const dequeueDecision = applyParentDequeue(p, {
+      const { decision: dequeueDecision, labelsRemoved } = applyParentDequeue(p, {
         readComments: issueComments,
         postComment: (num, body) => commentIssue(num, body, 'parent-dequeue comment'),
-        removeLabels: (num) => { labelsRemoved = edit(num, { remove: [LBL_FIX, LBL_QUEUED] }); },
+        removeLabels: (num) => edit(num, { remove: [LBL_FIX, LBL_QUEUED] }),
         body: `⏭️ **Pre-flight drainer (zero-Claude): padre decomposto fuori dalla coda del fixer.** Lo scope di questa issue vive nelle sub-issue dichiarate da \`DECOMPOSED_INTO\`, che entrano in coda per conto loro; qui non resta lavoro proprio, e un run del fixer non potrebbe che terminare senza PR (o duplicare una figlia). Rimuovo \`agent:fix\`/\`agent:fix-queued\`. La issue **resta aperta**: la chiude il PARENT-CLOSE quando tutte le figlie sono chiuse.`,
       });
       if (dequeueDecision === 'repeat') parentDequeueRepeats.push(p.number);
