@@ -98626,6 +98626,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-a2-coldrerio-incidente-camion': {
+    title: 'Tamponamento sull\'A2 a Coldrerio: 73enne grave',
+    description: 'Incidente sull\'A2 a Coldrerio: un\'auto ha tamponato un camion fermo. Un 73enne è in pericolo di vita, la conducente ha ferite lievi; traffico su una corsia.',
+    keywords: 'frontalieri, ticino, svizzera, italia, tamponamento, sull, coldrerio, 73enne',
+    ogTitle: 'Tamponamento sull\'A2 a Coldrerio: 73enne grave',
+    ogDescription: 'Incidente nel pomeriggio sull\'A2 in direzione sud: la conducente 68enne ha riportato ferite lievi, il passeggero 73enne è stato portato in elicottero all\'ospedale. L\'autostrada è stata chiusa e poi il traffico è stato incanalato su una corsia.',
+    canonicalPath: '/articoli-frontaliere/a2-coldrerio-incidente-camion',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tamponamento sull'A2 a Coldrerio: 73enne grave",
+      "description": "Incidente sull'A2 a Coldrerio: un'auto ha tamponato un camion fermo. Un 73enne è in pericolo di vita, la conducente ha ferite lievi; traffico su una corsia.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/a2-coldrerio-incidente-camion.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Traffico e soccorsi sull'A2 a Coldrerio dopo un tamponamento tra auto e camion"
+      },
+      "datePublished": "2026-10-03T13:38:42+00:00",
+      "dateModified": "2026-10-03T13:38:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/a2-coldrerio-incidente-camion/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
