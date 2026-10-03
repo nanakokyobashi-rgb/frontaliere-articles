@@ -4168,6 +4168,16 @@
       }
     },
     {
+      "path": "scripts/ci/realign-adapted-baseline.mjs",
+      "mode": "corpus-only",
+      "reason": "Riallineamento automatico delle baseline dei gemelli `adapted` dichiarate nel body della PR del corpus (riga `Realign-adapted: <path> site-prs=#N`, issue #1997). Vive solo qui come transport-realign-body.mjs: legge e scrive il manifest di questo repo dal job `realign-adapted` di transport-identical-twins-realign.yml, e il sito non possiede ne' il manifest ne' quel push.",
+      "baseline": {
+        "site": null,
+        "corpus": "a24813f361778be5",
+        "alignedAt": "2026-10-03"
+      }
+    },
+    {
       "path": "scripts/ci/verify-crawler-contract-provenance.mjs",
       "mode": "corpus-only",
       "reason": "L'osservazione del lato SITO dei digest di generator/data/crawler-cross-repo-contract.json (issue #916): `generatorSha256` e i 24 `sourceSha256` non hanno un gemello in questo checkout, quindi l'unico modo di verificarli e' chiederli al sito. Vive solo qui per la stessa ragione del drift check e del trasporto: e' questo il lato che RICEVE il ciclo, e il sito non ha bisogno di verificare la provenienza di se stesso.",
@@ -4358,11 +4368,11 @@
     {
       "path": ".github/workflows/transport-identical-twins-realign.yml",
       "mode": "corpus-only",
-      "reason": "Workflow post-merge che riallinea solo `baseline.corpus` per i gemelli `identical` trasportati; il sito non possiede il lato ricevente del manifest ne' il suo push sul main del corpus, quindi non esiste un gemello da portare.",
+      "reason": "Workflow che scrive le baseline del manifest su main sotto un lock globale: il job `realign` riallinea solo `baseline.corpus` dopo il merge di una PR di trasporto dei gemelli `identical`; il job `realign-adapted` (schedule ogni 6 ore e dispatch, issue #1997) riallinea i gemelli `adapted` dichiarati con `Realign-adapted:` nel body della PR del corpus, tramite scripts/ci/realign-adapted-baseline.mjs. Il sito non possiede il lato ricevente del manifest ne' il suo push sul main del corpus, quindi non esiste un gemello da portare.",
       "baseline": {
         "site": null,
-        "corpus": "fe0274f165a519c1",
-        "alignedAt": "2026-09-13"
+        "corpus": "770fe063c7829b3d",
+        "alignedAt": "2026-10-03"
       }
     },
     {
