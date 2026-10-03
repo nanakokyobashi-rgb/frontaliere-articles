@@ -98710,7 +98710,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     keywords: 'frontalieri, ticino, svizzera, italia, incidente, sulla, ss707, varese',
     ogTitle: 'Incidente sulla SS707 a Varese, bretella chiusa per ore',
     ogDescription: 'Scontro tra due auto sulla SS707 alle porte di Varese. La tratta tra Largo Flaiano e lo svincolo dei Laghi è rimasta chiusa per ore, con deviazione verso il centro città. Due persone, un uomo e una donna, sono state soccorse in codice giallo.',
-    canonicalPath: '/articoli-frontaliere/scontro-ss707-largo-flaiano',
+    canonicalPath: '/articoli-frontaliere/scontro-ss707-largo-flaiano/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
@@ -98749,7 +98749,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     keywords: 'frontalieri, ticino, svizzera, italia, preventivo, disavanzo, vicino, milioni',
     ogTitle: 'Preventivo 2027 Ticino: disavanzo vicino ai 100 milioni',
     ogDescription: 'Christian Vitta presenta l\'ultimo preventivo: debito possibile oltre 3 miliardi alla fine del 2027 e necessità di una riflessione a 360 gradi sulle entrate.',
-    canonicalPath: '/articoli-frontaliere/preventivo-ticino-2027-vitta',
+    canonicalPath: '/articoli-frontaliere/preventivo-ticino-2027-vitta/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
@@ -98817,6 +98817,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/viabilita-varese-tre-valli-ottobre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-saronno-autofficina-sequestrata': {
+    title: 'Saronno, sequestrata un’autofficina per irregolarità',
+    description: 'Polizia locale in un’autofficina di Saronno: due lavoratori senza contratto, irregolarità sulla sicurezza e autorizzazioni. Attività sequestrata e sospesa.',
+    keywords: 'frontalieri, ticino, svizzera, italia, saronno, sequestrata, autofficina, irregolarità',
+    ogTitle: 'Saronno, sequestrata un’autofficina per irregolarità',
+    ogDescription: 'A Saronno, la Polizia locale ha trovato due cittadini extracomunitari al lavoro senza contratto regolare. Uno era senza permesso di soggiorno; il controllo ha riguardato anche qualifica professionale, sicurezza e autorizzazioni dell’autofficina.',
+    canonicalPath: '/articoli-frontaliere/saronno-autofficina-sequestrata/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Saronno, sequestrata un’autofficina per irregolarità",
+      "description": "Polizia locale in un’autofficina di Saronno: due lavoratori senza contratto, irregolarità sulla sicurezza e autorizzazioni. Attività sequestrata e sospesa.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/saronno-autofficina-sequestrata.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Autofficina di Saronno sottoposta al controllo della Polizia locale"
+      },
+      "datePublished": "2026-10-03T17:19:56+00:00",
+      "dateModified": "2026-10-03T17:19:56+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/saronno-autofficina-sequestrata/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
