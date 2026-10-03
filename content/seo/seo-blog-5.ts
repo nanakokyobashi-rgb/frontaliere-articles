@@ -98353,6 +98353,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-radar-strade-ticinesi-ottobre': {
+    title: 'Controlli velocità in Ticino dal 5 all\'11 ottobre',
+    description: 'Controlli della velocità in Ticino da lunedì 5 a domenica 11 ottobre: la Polizia cantonale cura la mappa dei radar e comunica anche le località interessate.',
+    keywords: 'frontalieri, ticino, svizzera, italia, controlli, velocità, ottobre, sono',
+    ogTitle: 'Controlli velocità in Ticino dal 5 all\'11 ottobre',
+    ogDescription: 'Da lunedì 5 a domenica 11 ottobre la Polizia cantonale ha pianificato controlli della velocità sulle strade ticinesi. La comunicazione riguarda la mappa dei radar, le località interessate e i controlli semi-stazionari.',
+    canonicalPath: '/articoli-frontaliere/radar-strade-ticinesi-ottobre',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Controlli velocità in Ticino dal 5 all'11 ottobre",
+      "description": "Controlli della velocità in Ticino da lunedì 5 a domenica 11 ottobre: la Polizia cantonale cura la mappa dei radar e comunica anche le località interessate.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/radar-strade-ticinesi-ottobre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Controlli della velocità su una strada del Ticino in autunno"
+      },
+      "datePublished": "2026-10-03T05:47:16+00:00",
+      "dateModified": "2026-10-03T05:47:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/radar-strade-ticinesi-ottobre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
