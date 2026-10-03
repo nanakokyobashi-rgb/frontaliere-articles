@@ -85,6 +85,9 @@ const url = (n) => 'https://github.com/o/r/issues/' + n;
 if (args[0] === 'issue') {
   const issue = st.issues.find((i) => String(i.number) === args[2]);
   if (args[1] === 'list') {
+    // Ritardo dell'indice di ricerca: la ricerca per titolo non vede ancora
+    // nulla, la lista per label (immediatamente consistente) si'.
+    if (st.searchLag && args.includes('--search')) { process.stdout.write('[]'); process.exit(0); }
     const state = (opt('--state') || 'open').toLowerCase();
     const label = opt('--label');
     process.stdout.write(JSON.stringify(st.issues
@@ -281,6 +284,9 @@ test('log vero, 2 membri falliti su 23 senza guasto condiviso → 2 report per m
   assert.match(capri.description, /Workday Versace Switzerland search returned a malformed page at offset 0/);
   assert.match(capri.description, /##\[error\]capri-holdings: crawler exited with status 1/);
   assert.doesNotMatch(capri.description, /Fust crawler failed|fust: crawler exited/);
+  // Il contesto dell'ondata resta: ogni membro nomina gli altri falliti.
+  assert.match(fust.description, /Altri membri falliti nella stessa run: `capri-holdings`/);
+  assert.match(capri.description, /Altri membri falliti nella stessa run: `fust`/);
   for (const report of reports) {
     // L'URL della run e' la chiave di deduplica: deve stare in ogni corpo.
     assert.ok(report.description.includes(REAL_RUN.url));
@@ -497,6 +503,33 @@ test('una run già contata a grana di gruppo non viene ricontata per membro', as
   const fromIssue = await deliverRunReports({ name: GROUP, run, reports: threeMemberReports(run), dryRun: false });
   assert.deepEqual(fromIssue, { delivered: 0, skipped: THREE.length, undelivered: [] });
   assert.deepEqual(writes(), []);
+});
+
+test('una issue legacy per crawler (ripiego senza marcatore) conta la run anche col ritardo della ricerca', async () => {
+  // `createGithubIssue` che non riesce a commentare il ledger ripiega su una
+  // issue `crawler-transient` intitolata al membro, senza `transient-key`. Con
+  // la ricerca per titolo ancora cieca, solo la lista per label la vede.
+  const run = runOf(5008);
+  const state = emptyLedger();
+  state.searchLag = true;
+  state.issues.push({
+    number: 9100, title: 'Crawler Failure: Run fust', body: `Transient failure.\n\n- Run: ${run.url}`,
+    state: 'OPEN', labels: ['crawler-transient'], createdAt: new Date().toISOString(), comments: [],
+  });
+  setState(state);
+  const calls = [];
+  const result = await deliverRunReports({
+    name: GROUP,
+    run,
+    reports: threeMemberReports(run),
+    dryRun: false,
+    createIssue: async (args) => {
+      calls.push(args.title);
+      return { number: LEDGER_NUMBER, ledger: true, persisted: true };
+    },
+  });
+  assert.deepEqual(calls, ['Crawler Failure: Run capri-holdings', 'Crawler Failure: Run lidl']);
+  assert.deepEqual(result, { delivered: 2, skipped: 1, undelivered: [] });
 });
 
 test('la briciola di un membro non spegne quella di un membro col nome che la prolunga', () => {

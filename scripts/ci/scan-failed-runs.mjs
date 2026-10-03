@@ -1091,7 +1091,26 @@ export function ledgerEntryCountsRun(entry, runUrl, titles) {
   return titles.some((title) => title && text.includes(transientLedgerMarker(title)));
 }
 
-/** Body e commenti, uno per voce, di ogni issue aperta `crawler-transient`. */
+/**
+ * Una voce del ledger conta QUESTA run per uno di QUESTI titoli? Variante per
+ * le voci di `transientLedgerEntries`, che vale anche per una issue legacy per
+ * crawler: quando `createGithubIssue` non riesce a commentare il ledger ripiega
+ * su una issue `crawler-transient` intitolata al membro, senza marcatore. La
+ * ricerca per titolo di `alreadyReported` puo' non vederla ancora (ritardo
+ * dell'indice); la lista per label si', e il titolo esatto la lega al membro.
+ */
+export function transientEntryCountsRun(entry, runUrl, titles) {
+  const text = String(entry?.text || '');
+  if (ledgerEntryCountsRun(text, runUrl, titles)) return true;
+  if (!runUrl || !text.includes(runUrl)) return false;
+  const issueTitle = String(entry?.issueTitle || '');
+  return Boolean(issueTitle) && titles.some((title) => title && title === issueTitle);
+}
+
+/**
+ * Body e commenti, uno per voce, di ogni issue aperta `crawler-transient`,
+ * ciascuno col titolo della sua issue (`{ text, issueTitle }`).
+ */
 function transientLedgerEntries() {
   let issues = [];
   try {
@@ -1110,9 +1129,10 @@ function transientLedgerEntries() {
       const data = JSON.parse(gh([
         'issue', 'view', String(issue.number), '--repo', REPO, '--json', 'body,comments',
       ], '{}') || '{}');
-      entries.push(String(data?.body || ''));
+      const issueTitle = String(issue?.title || '');
+      entries.push({ text: String(data?.body || ''), issueTitle });
       for (const comment of Array.isArray(data?.comments) ? data.comments : []) {
-        entries.push(String(comment?.body || ''));
+        entries.push({ text: String(comment?.body || ''), issueTitle });
       }
     } catch {
       // Lettura fallita = «non ancora segnalata», come in `alreadyReported`:
@@ -1146,7 +1166,7 @@ export function memberAlreadyReported(title, runUrl, { groupTitle = '', memo = {
     if (memo.groupReported) return true;
   }
   if (memo.ledgerEntries === undefined) memo.ledgerEntries = transientLedgerEntries();
-  return memo.ledgerEntries.some((entry) => ledgerEntryCountsRun(entry, runUrl, [title, groupTitle]));
+  return memo.ledgerEntries.some((entry) => transientEntryCountsRun(entry, runUrl, [title, groupTitle]));
 }
 
 /**
@@ -1557,6 +1577,12 @@ function buildCrawlerMemberReport({ failure, otherSlugs, log, run, workflowName,
     `- Evento: \`${run?.event || '?'}\``,
     `- Concluso: ${run?.updatedAt || run?.createdAt || '?'}`,
     `- Exit del crawler: \`${exitCode}\``,
+    // Solo con piu' membri falliti: chi fa il triage di un membro deve sapere
+    // che la run e' stata un'ondata, utile per riconoscere una causa comune che
+    // il classificatore non ha visto. Con un membro solo il corpo non cambia.
+    ...(otherSlugs.size > 0
+      ? [`- Altri membri falliti nella stessa run: ${[...otherSlugs].map((s) => `\`${s}\``).join(', ')}`]
+      : []),
     '',
     '**Job falliti del gruppo**',
     jobLines || '_(nessun job fallito riportato dall\'API)_',
