@@ -98651,6 +98651,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-locazione-cauzione-basilea-2026': {
+    title: 'Affitti in Svizzera 2026: regole e focus Basilea',
+    description: 'Affitti in Svizzera nel 2026: deposito cauzionale, disdetta del locatore e contestazione entro 30 giorni, con focus sul canton Basilea e sul quadro federale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, regole, focus, basilea',
+    ogTitle: 'Affitti in Svizzera 2026: regole e focus Basilea',
+    ogDescription: 'Il quadro degli affitti in Svizzera nel 2026 vale anche per il canton Basilea: cauzione fino a tre mesi, conto vincolato all\'inquilino, modulo ufficiale per la disdetta del locatore e 30 giorni per la contestazione all\'autorita\' di conciliazione.',
+    canonicalPath: '/articoli-svizzera/locazione-cauzione-basilea-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti in Svizzera 2026: regole e focus Basilea",
+      "description": "Affitti in Svizzera nel 2026: deposito cauzionale, disdetta del locatore e contestazione entro 30 giorni, con focus sul canton Basilea e sul quadro federale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/locazione-cauzione-basilea-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edifici residenziali svizzeri e regole per gli affitti nel canton Basilea"
+      },
+      "datePublished": "2026-10-03T02:37:43+00:00",
+      "dateModified": "2026-10-03T02:37:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/locazione-cauzione-basilea-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
