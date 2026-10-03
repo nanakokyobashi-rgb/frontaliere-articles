@@ -99119,6 +99119,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-fisco-zurigo-guida-online': {
+    title: 'Dichiarazione imposte svizzera 2026: guida a Zurigo',
+    description: 'Guida 2026 alla dichiarazione delle imposte in Svizzera: IFD, Cantoni, Comuni, deduzioni e procedura online, con focus sul canton Zurigo e confronto nazionale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, dichiarazione, imposte, zurigo, distingue',
+    ogTitle: 'Guida 2026 alle imposte svizzere: focus sul canton Zurigo',
+    ogDescription: 'Dalla distinzione tra imposta federale diretta, Cantoni e Comuni alle voci AVS, LPP e LAMal: una guida operativa per leggere la dichiarazione 2026 nel canton Zurigo senza confondere autorità, contributi e premi.',
+    canonicalPath: '/articoli-svizzera/fisco-zurigo-guida-online/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Dichiarazione imposte svizzera 2026: guida a Zurigo",
+      "description": "Guida 2026 alla dichiarazione delle imposte in Svizzera: IFD, Cantoni, Comuni, deduzioni e procedura online, con focus sul canton Zurigo e confronto nazionale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/fisco-zurigo-guida-online.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Dichiarazione fiscale svizzera su una scrivania, con lo skyline di Zurigo sullo sfondo."
+      },
+      "datePublished": "2026-10-03T08:33:46+00:00",
+      "dateModified": "2026-10-03T08:33:46+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/fisco-zurigo-guida-online/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
