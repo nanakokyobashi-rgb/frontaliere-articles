@@ -792,22 +792,6 @@
     "affitti svizzera mercato immobiliare 2026": 1
   },
   "topicGateUrls": {
-    "svizzera::https://www.tio.ch/rubriche/aziende-ticinesi-informano/1954062/occhiali-aot-associazione-iniziativa-ticino-canton-buono-dona-ricevi-sostieni": {
-      "section": "svizzera",
-      "ts": 1790881539151
-    },
-    "svizzera::https://www.tio.ch/dal-mondo/cronaca/1954074/tamoil-frena-sui-prezzi-sconti-fino-al-31-ottobre": {
-      "section": "svizzera",
-      "ts": 1790890629317
-    },
-    "svizzera::https://www.tio.ch/dal-mondo/cronaca/1954109/membri-uccisi-esercito-nomi-gruppi": {
-      "section": "svizzera",
-      "ts": 1790890664964
-    },
-    "svizzera::https://www.tio.ch/ticino/cronaca/1954092/truffa-milionaria-impresario-a-giudizio-per-un-maxi-raggiro": {
-      "section": "svizzera",
-      "ts": 1790890704220
-    },
     "svizzera::https://www.swissinfo.ch/ita/cn%3a-giochi-olimpici-2038%2c-s%c3%ac-a-credito-200-milioni%2c-no-a-referendum/92149423": {
       "section": "svizzera",
       "ts": 1790894678541
@@ -999,6 +983,26 @@
     "frontaliere::https://comozero.it/attualita/como-nigeriano-estradato-per-mafia-dalla-svizzera-e-arrestato-dalla-polizia-di-frontiera": {
       "section": "frontaliere",
       "ts": 1791053468891
+    },
+    "svizzera::https://www.tio.ch/people/people/1954538/fuel-harbor-flesh-bucks-film-festival-zurich": {
+      "section": "svizzera",
+      "ts": 1791063979749
+    },
+    "svizzera::https://www.tio.ch/sport/hockey/1954480/friborgo-ambri-league-national-hcap": {
+      "section": "svizzera",
+      "ts": 1791064005267
+    },
+    "frontaliere::https://www.rsi.ch/info/economia/infomaniak-vola-al-debutto-in-borsa--4128432.html": {
+      "section": "frontaliere",
+      "ts": 1791065096588
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/scuola-e-imprese-si-puo-fare-a-villa-recalcati-il-bilancio-del-progetto-che-cambia-lorientamento/2695297": {
+      "section": "frontaliere",
+      "ts": 1791065171583
+    },
+    "frontaliere::https://www.tio.ch/sport/hockey/1954480/friborgo-ambri-league-national-hcap": {
+      "section": "frontaliere",
+      "ts": 1791065480590
     }
   }
 }

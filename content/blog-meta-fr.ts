@@ -12438,6 +12438,12 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.como-pusher-consegne-domicilio.title': 'Côme, un trafiquant arrêté pour des livraisons à domicile',
     'blog.article.como-pusher-consegne-domicilio.excerpt': 'La Police d\'État de Como a arrêté un homme de 48 ans : 51.45 grammes de cocaïne répartis en 86 doses, 120 euros et 141.18 grammes supplémentaires de cocaïne ont été saisis.',
     'blog.article.como-pusher-consegne-domicilio.imageAlt': 'Côme, opération de la police d\'État contre le trafic de drogue en ville. (Como)',
+    'blog.article.martina-bonalumi-podio-canottaggio.title': 'Martina Bonalumi : double podium international en huit',
+    'blog.article.martina-bonalumi-podio-canottaggio.excerpt': 'La barreuse de Dumenza décroche le bronze aux Mondiaux universitaires de la FISU au Canada et l\'argent aux Championnats d\'Europe des moins de 23 ans en Pologne.',
+    'blog.article.martina-bonalumi-podio-canottaggio.imageAlt': 'Bateau de rame sur un lac alpin',
+    'blog.article.como-fai-giornate-autunno.title': 'FAITES l\'automne à Côme : chantiers, industries et Val d’Intelvi',
+    'blog.article.como-fai-giornate-autunno.excerpt': 'Les 10 et 11 octobre, les Journées FAI d’Automne ouvrent le Chantier Navigation Lacs à Tavernola et les Industries Textiles Colombo et Visgomma à Fino Mornasco, avec des visites de 50 minutes et des tours spéciaux « Machines en mouvement ».',
+    'blog.article.como-fai-giornate-autunno.imageAlt': 'Visite automnale du FAI à Como avec chantiers navals et usines textiles au bord du lac',
 };
 
 export default blogMetaFr;

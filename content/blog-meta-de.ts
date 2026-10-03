@@ -12435,6 +12435,12 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.como-pusher-consegne-domicilio.title': 'Como, Drogenhändler wegen Lieferungen nach Hause festgenommen',
     'blog.article.como-pusher-consegne-domicilio.excerpt': 'Die Staatspolizei von Como hat einen 48-Jährigen festgenommen: beschlagnahmt wurden 51.45 Gramm Kokain in 86 Dosen, 120 Euro und weitere 141.18 Gramm Kokain.',
     'blog.article.como-pusher-consegne-domicilio.imageAlt': 'Como: Einsatz der Staatspolizei gegen Drogenhandel in der Stadt.',
+    'blog.article.martina-bonalumi-podio-canottaggio.title': 'Martina Bonalumi: zwei internationale Podiumsplätze im Achter',
+    'blog.article.martina-bonalumi-podio-canottaggio.excerpt': 'Die Steuerfrau von Dumenza erringt bei den FISU-Universitätsweltmeisterschaften in Kanada Bronze und bei den U23-Europameisterschaften in Polen Silber.',
+    'blog.article.martina-bonalumi-podio-canottaggio.imageAlt': 'Ruderboot auf einem Alpensee',
+    'blog.article.como-fai-giornate-autunno.title': 'FAI d \'Autunno in Como: Baustellen, Industrie und Val d\' Intelvi',
+    'blog.article.como-fai-giornate-autunno.excerpt': 'Am 10. und 11. Oktober öffnen die FAI-Herbsttage die Werft Cantiere Navigazione Laghi a Tavernola und die Textilindustrien Colombo und Visgomma auf Fino Mornasco, mit Besuchen ab 50 Minuten und speziellen Schichten "Maschinen in Bewegung".',
+    'blog.article.como-fai-giornate-autunno.imageAlt': 'Herbstlicher FAI-Besuch in Como mit historischen Werften und Textilfabriken am See',
 };
 
 export default blogMetaDe;
