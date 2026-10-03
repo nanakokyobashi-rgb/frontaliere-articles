@@ -792,10 +792,6 @@
     "affitti svizzera mercato immobiliare 2026": 1
   },
   "topicGateUrls": {
-    "svizzera::https://www.tio.ch/dal-mondo/cronaca/1954074/benzina-e-diesel-anche-tamoil-frena-sui-prezzi": {
-      "section": "svizzera",
-      "ts": 1790868353156
-    },
     "svizzera::https://www.tio.ch/dal-mondo/economia/1954095/blume-germania-proposta-lavoro-costi": {
       "section": "svizzera",
       "ts": 1790879374850
@@ -927,6 +923,14 @@
     "frontaliere::https://www.varesenews.it/2026/10/sicurezza-sul-lavoro-astuti-serve-una-procura-speciale-e-sanzioni-piu-severe/2696254": {
       "section": "frontaliere",
       "ts": 1791040655844
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/nasce-la-segreteria-della-nidil-cgil-varese-la-sigla-dei-lavoratori-atipici-precari-e-in-partita-iva/2695771": {
+      "section": "frontaliere",
+      "ts": 1791041951221
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/ffim-cisl-dei-laghi-linclusione-non-termina-con-unassunzione-dalle-storie-di-disabilita-alla-contrattazione-in-azienda/2697043": {
+      "section": "frontaliere",
+      "ts": 1791042075833
     }
   }
 }

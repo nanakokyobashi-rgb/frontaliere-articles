@@ -98782,6 +98782,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-viabilita-varese-tre-valli-ottobre': {
+    title: 'Varese, viabilità Tre Valli: chiusure 3 e 4 ottobre',
+    description: 'Varese: chiusure stradali per Cronometro e Gran Fondo Tre Valli Varesine il 3 e 4 ottobre. Orari, vie interessate e divieti di sosta. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, varese, viabilità, valli, chiusure',
+    ogTitle: 'Varese, viabilità Tre Valli: chiusure 3 e 4 ottobre',
+    ogDescription: 'Attenzione ai transiti a Varese il weekend del 3-4 ottobre: chiusure per la Cronometro e la 10ª Gran Fondo Tre Valli Varesine. Ecco gli orari e le vie interessate.',
+    canonicalPath: '/articoli-frontaliere/viabilita-varese-tre-valli-ottobre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Varese, viabilità Tre Valli: chiusure 3 e 4 ottobre",
+      "description": "Varese: chiusure stradali per Cronometro e Gran Fondo Tre Valli Varesine il 3 e 4 ottobre. Orari, vie interessate e divieti di sosta. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/viabilita-varese-tre-valli-ottobre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Segnale stradale in un paesaggio autunnale ticinese"
+      },
+      "datePublished": "2026-10-03T16:00:25+00:00",
+      "dateModified": "2026-10-03T16:00:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/viabilita-varese-tre-valli-ottobre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
