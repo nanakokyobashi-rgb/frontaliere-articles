@@ -98665,6 +98665,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-giornata-sostenibilita-mezzana': {
+    title: 'Giornata transfrontaliera sulla sostenibilità a Mezzana',
+    description: 'Oltre settanta docenti della Regione Insubrica si sono riuniti a Mezzana per una giornata tra teoria, atelier pratici e progetti sulla sostenibilità.',
+    keywords: 'frontalieri, ticino, svizzera, italia, giornata, transfrontaliera, sulla, sostenibilità',
+    ogTitle: 'Sostenibilità, giornata transfrontaliera a Mezzana',
+    ogDescription: 'A Mezzana, esperti del Cantone Ticino e di Regione Lombardia hanno incontrato oltre settanta docenti per parlare di sostenibilità, gestione forestale responsabile e attività da portare in classe, con una scheda da consegnare entro metà marzo 2027.',
+    canonicalPath: '/articoli-frontaliere/giornata-sostenibilita-mezzana',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Giornata transfrontaliera sulla sostenibilità a Mezzana",
+      "description": "Oltre settanta docenti della Regione Insubrica si sono riuniti a Mezzana per una giornata tra teoria, atelier pratici e progetti sulla sostenibilità.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/giornata-sostenibilita-mezzana.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Docenti durante una giornata formativa sulla sostenibilità a Mezzana"
+      },
+      "datePublished": "2026-10-03T14:21:55+00:00",
+      "dateModified": "2026-10-03T14:21:55+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/giornata-sostenibilita-mezzana/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
