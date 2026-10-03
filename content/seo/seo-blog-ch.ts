@@ -99002,6 +99002,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-dazio-ue-pacchi-posta': {
+    title: 'Dazio Ue da 3 euro: calano i pacchi della Posta svizzera',
+    description: 'Il dazio Ue da 3 euro per articolo frena i pacchi della Posta svizzera verso l\'Unione: calo a due cifre e quota cinese dal 6% all\'11% nell\'arco di dieci anni.',
+    keywords: 'frontalieri, ticino, svizzera, italia, dazio, euro, calano, pacchi',
+    ogTitle: 'Dazio Ue da 3 euro: calano i pacchi della Posta svizzera',
+    ogDescription: 'Il dazio Ue da 3 euro per articolo ha fatto crollare a due cifre i colli della Posta svizzera diretti verso l\'Unione. Pascal Grieder dubita che protegga il mercato dalle importazioni cinesi: Temu può spedire dai magazzini europei.',
+    canonicalPath: '/articoli-svizzera/dazio-ue-pacchi-posta/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Dazio Ue da 3 euro: calano i pacchi della Posta svizzera",
+      "description": "Il dazio Ue da 3 euro per articolo frena i pacchi della Posta svizzera verso l'Unione: calo a due cifre e quota cinese dal 6% all'11% nell'arco di dieci anni.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/dazio-ue-pacchi-posta.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Pacchi in un centro postale svizzero mentre cambiano le spedizioni verso l'Unione europea"
+      },
+      "datePublished": "2026-10-03T07:32:47+00:00",
+      "dateModified": "2026-10-03T07:32:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/dazio-ue-pacchi-posta/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
