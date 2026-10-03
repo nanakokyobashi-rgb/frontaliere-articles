@@ -98710,7 +98710,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     keywords: 'frontalieri, ticino, svizzera, italia, incidente, sulla, ss707, varese',
     ogTitle: 'Incidente sulla SS707 a Varese, bretella chiusa per ore',
     ogDescription: 'Scontro tra due auto sulla SS707 alle porte di Varese. La tratta tra Largo Flaiano e lo svincolo dei Laghi è rimasta chiusa per ore, con deviazione verso il centro città. Due persone, un uomo e una donna, sono state soccorse in codice giallo.',
-    canonicalPath: '/articoli-frontaliere/scontro-ss707-largo-flaiano',
+    canonicalPath: '/articoli-frontaliere/scontro-ss707-largo-flaiano/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
@@ -98749,7 +98749,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     keywords: 'frontalieri, ticino, svizzera, italia, preventivo, disavanzo, vicino, milioni',
     ogTitle: 'Preventivo 2027 Ticino: disavanzo vicino ai 100 milioni',
     ogDescription: 'Christian Vitta presenta l\'ultimo preventivo: debito possibile oltre 3 miliardi alla fine del 2027 e necessità di una riflessione a 360 gradi sulle entrate.',
-    canonicalPath: '/articoli-frontaliere/preventivo-ticino-2027-vitta',
+    canonicalPath: '/articoli-frontaliere/preventivo-ticino-2027-vitta/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
