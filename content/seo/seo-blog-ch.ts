@@ -98534,6 +98534,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tutela-inquilini-berna-2026': {
+    title: 'Affitti in Svizzera 2026: mercato e diritti a Berna',
+    description: 'Affitti in Svizzera nel 2026: deposito cauzionale fino a tre mensilità, disdetta del locatore su modulo cantonale e contestazione entro 30 giorni.',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, mercato, diritti, berna',
+    ogTitle: 'Affitti in Svizzera 2026: mercato e diritti a Berna',
+    ogDescription: 'Il diritto federale della locazione vale in ogni cantone: deposito cauzionale massimo di tre mensilità su conto vincolato, disdetta del locatore su modulo ufficiale cantonale e contestazione entro 30 giorni all\'autorità di conciliazione.',
+    canonicalPath: '/articoli-svizzera/tutela-inquilini-berna-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti in Svizzera 2026: mercato e diritti a Berna",
+      "description": "Affitti in Svizzera nel 2026: deposito cauzionale fino a tre mensilità, disdetta del locatore su modulo cantonale e contestazione entro 30 giorni.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/tutela-inquilini-berna-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ingresso di un appartamento svizzero con documento di locazione e chiavi"
+      },
+      "datePublished": "2026-10-03T01:27:54+00:00",
+      "dateModified": "2026-10-03T01:27:54+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/tutela-inquilini-berna-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
