@@ -98704,6 +98704,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-scontro-ss707-largo-flaiano': {
+    title: 'Incidente sulla SS707 a Varese, bretella chiusa per ore',
+    description: 'Incidente sulla SS707 a Varese: due auto coinvolte, chiusura per ore tra Largo Flaiano e lo svincolo dei Laghi; due feriti, codice giallo, viabilità riaperta.',
+    keywords: 'frontalieri, ticino, svizzera, italia, incidente, sulla, ss707, varese',
+    ogTitle: 'Incidente sulla SS707 a Varese, bretella chiusa per ore',
+    ogDescription: 'Scontro tra due auto sulla SS707 alle porte di Varese. La tratta tra Largo Flaiano e lo svincolo dei Laghi è rimasta chiusa per ore, con deviazione verso il centro città. Due persone, un uomo e una donna, sono state soccorse in codice giallo.',
+    canonicalPath: '/articoli-frontaliere/scontro-ss707-largo-flaiano',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Incidente sulla SS707 a Varese, bretella chiusa per ore",
+      "description": "Incidente sulla SS707 a Varese: due auto coinvolte, chiusura per ore tra Largo Flaiano e lo svincolo dei Laghi; due feriti, codice giallo, viabilità riaperta.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/scontro-ss707-largo-flaiano.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "SS707 a Varese chiusa dopo lo scontro tra due auto"
+      },
+      "datePublished": "2026-10-03T15:12:55+00:00",
+      "dateModified": "2026-10-03T15:12:55+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/scontro-ss707-largo-flaiano/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

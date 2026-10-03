@@ -915,6 +915,14 @@
     "svizzera::https://www.tio.ch/dal-mondo/attualita/1954495/ucraina-kiev-mosca-stranieri-ministero": {
       "section": "svizzera",
       "ts": 1791037537100
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/a-varese-fondata-sul-lavoro-una-giornata-di-confronto-su-salari-diritti-e-sicurezza/2697295": {
+      "section": "frontaliere",
+      "ts": 1791039398765
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/nasce-la-rete-badanti-alto-verbano-per-qualificare-il-lavoro-degli-assistenti-familiari/2696011": {
+      "section": "frontaliere",
+      "ts": 1791039517173
     }
   }
 }
