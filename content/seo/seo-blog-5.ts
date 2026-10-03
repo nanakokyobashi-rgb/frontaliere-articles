@@ -98938,6 +98938,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-controlli-zona-tutela-como': {
+    title: 'Como, Polizia locale: 16 allontanamenti e 4 denunce',
+    description: 'Como, controlli della Polizia Locale tra il 15 settembre e il 2 ottobre 2026: 16 ordini di allontanamento e 4 denunce nelle aree a tutela rafforzata di Como.',
+    keywords: 'frontalieri, ticino, svizzera, italia, como, polizia, locale, allontanamenti',
+    ogTitle: 'Como: 16 allontanamenti e 4 denunce',
+    ogDescription: 'Dal 15 settembre al 2 ottobre 2026 la Polizia Locale di Como ha controllato l\'area del Crocifisso e i Giardini di viale Varese: 16 ordini di allontanamento e quattro persone straniere deferite all\'Autorità giudiziaria.',
+    canonicalPath: '/articoli-frontaliere/controlli-zona-tutela-como/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Como, Polizia locale: 16 allontanamenti e 4 denunce",
+      "description": "Como, controlli della Polizia Locale tra il 15 settembre e il 2 ottobre 2026: 16 ordini di allontanamento e 4 denunce nelle aree a tutela rafforzata di Como.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/controlli-zona-tutela-como.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Parco urbano in Ticino con viali alberati e edifici storici"
+      },
+      "datePublished": "2026-10-03T18:39:28+00:00",
+      "dateModified": "2026-10-03T18:39:28+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/controlli-zona-tutela-como/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
