@@ -98417,6 +98417,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-swissair-grounding-memoria-ferita': {
+    title: 'Swissair, 25 anni dopo: la ferita mai rimarginata',
+    description: 'Scopri i dettagli del grounding di Swissair del 2 ottobre 2001 e l\'impatto sul lavoro di cabina attraverso la testimonianza di Sandrine Nikolic-Fuss.',
+    keywords: 'frontalieri, ticino, svizzera, italia, swissair, anni, dopo, ferita',
+    ogTitle: 'Swissair, 25 anni dopo: la ferita mai rimarginata di chi amava volare',
+    ogDescription: 'Il racconto del grounding di Swissair del 2 ottobre 2001 e la trasformazione del settore aeronautico svizzero nelle parole della sindacalista Sandrine Nikolic-Fuss.',
+    canonicalPath: '/articoli-svizzera/swissair-grounding-memoria-ferita/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Swissair, 25 anni dopo: la ferita mai rimarginata",
+      "description": "Scopri i dettagli del grounding di Swissair del 2 ottobre 2001 e l'impatto sul lavoro di cabina attraverso la testimonianza di Sandrine Nikolic-Fuss.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/swissair-grounding-memoria-ferita.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Aereo di linea a terra in Svizzera in ricordo del grounding Swissair"
+      },
+      "datePublished": "2026-10-03T00:31:32+00:00",
+      "dateModified": "2026-10-03T00:31:32+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/swissair-grounding-memoria-ferita/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
