@@ -69,6 +69,18 @@ export function transportBulletLine({ path: filePath, sitePath, to }) {
     + ' del sito (site sha256 `' + to + '`)';
 }
 
+/**
+ * Riga del body per un convergente riattestato (solo baseline, nessun file
+ * nella PR). Volutamente FUORI dal formato `(site sha256 ...)`: il realign
+ * post-merge pretende che ogni path citato così sia fra i file della PR, e un
+ * convergente non lo è mai — la sua riga resta leggibile per chi rivede, ma
+ * invisibile a `parseTransportBullets`.
+ */
+export function convergedBulletLine({ path: filePath, hash }) {
+  return '- ' + markdownCodeSpan(filePath)
+    + ': baseline riattestata, i due lati si sono mossi e coincidono già byte per byte (hash `' + hash + '`)';
+}
+
 export function normalizeSiteHash(value) {
   const normalized = String(value).toLowerCase();
   return normalized.length === 64 ? normalized.slice(0, 16) : normalized;
