@@ -98743,6 +98743,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-preventivo-ticino-2027-vitta': {
+    title: 'Preventivo 2027 Ticino: disavanzo vicino ai 100 milioni',
+    description: 'Il preventivo 2027 del Canton Ticino prevede un disavanzo di quasi 100 milioni e un debito oltre i 3 miliardi. Ecco i dettagli di Christian Vitta.',
+    keywords: 'frontalieri, ticino, svizzera, italia, preventivo, disavanzo, vicino, milioni',
+    ogTitle: 'Preventivo 2027 Ticino: disavanzo vicino ai 100 milioni',
+    ogDescription: 'Christian Vitta presenta l\'ultimo preventivo: debito possibile oltre 3 miliardi alla fine del 2027 e necessità di una riflessione a 360 gradi sulle entrate.',
+    canonicalPath: '/articoli-frontaliere/preventivo-ticino-2027-vitta',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Preventivo 2027 Ticino: disavanzo vicino ai 100 milioni",
+      "description": "Il preventivo 2027 del Canton Ticino prevede un disavanzo di quasi 100 milioni e un debito oltre i 3 miliardi. Ecco i dettagli di Christian Vitta.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/preventivo-ticino-2027-vitta.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzi governativi di Bellinzona, sede del preventivo cantonale"
+      },
+      "datePublished": "2026-10-03T15:33:09+00:00",
+      "dateModified": "2026-10-03T15:33:09+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/preventivo-ticino-2027-vitta/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
