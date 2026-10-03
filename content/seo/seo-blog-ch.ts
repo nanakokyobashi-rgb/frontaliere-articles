@@ -98963,6 +98963,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-locazione-cauzione-argovia-2026': {
+    title: 'Affitti in Svizzera 2026: cauzione e disdetta in Argovia',
+    description: 'Affitti in Svizzera nel 2026: in Argovia valgono le regole federali su cauzione, conto vincolato, disdetta del locatore e contestazione entro 30 giorni.',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, cauzione, disdetta, argovia',
+    ogTitle: 'Affitti in Svizzera 2026: cauzione e disdetta in Argovia',
+    ogDescription: 'Dal deposito cauzionale alla disdetta del locatore, la guida alle regole federali degli affitti in Svizzera nel 2026: conto vincolato, modulo ufficiale cantonale e contestazione entro 30 giorni, con focus sul canton Argovia.',
+    canonicalPath: '/articoli-svizzera/locazione-cauzione-argovia-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti in Svizzera 2026: cauzione e disdetta in Argovia",
+      "description": "Affitti in Svizzera nel 2026: in Argovia valgono le regole federali su cauzione, conto vincolato, disdetta del locatore e contestazione entro 30 giorni.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/locazione-cauzione-argovia-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edifici residenziali svizzeri per il mercato degli affitti 2026"
+      },
+      "datePublished": "2026-10-03T06:52:35+00:00",
+      "dateModified": "2026-10-03T06:52:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/locazione-cauzione-argovia-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
