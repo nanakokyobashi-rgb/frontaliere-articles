@@ -42,7 +42,7 @@
 import { realpathSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 import { execFileSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import { appendFileSync, readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { classifyIssue } from '../lib/classify-issue.mjs';
 import {
@@ -79,11 +79,93 @@ import {
   hasStableItemIds,
   hasStableItemIdsForDailyKey,
   hasUnterminatedMarkdownFence,
+  isDailyBucketTitle,
   followupItemMarkers,
   parseFollowupItems,
   selectFirstOpenItem,
   AGGREGATE_ITEM_COUNT_RE as AGGREGATE_ITEMS_RE,
 } from './followup-resolution-match.mjs';
+
+// Marker di idempotenza del commento `parent-dequeue`. Senza, ogni tick in cui
+// qualcuno RIMETTE `agent:fix*` su un padre decomposto produce un commento
+// identico (misurato sul sito: 13 su 9443 e 13 su 9508 in 25 ore), e ogni
+// commento rinfresca `updatedAt`, che cooldown e age-out leggono. Il commento
+// resta uno; il riaccodamento diventa un segnale (`parent_dequeue_repeat`),
+// non rumore.
+export const PARENT_DEQUEUED_MARKER = '<!-- PARENT_DEQUEUED -->';
+const PARENT_DEQUEUED_RE = /<!--\s*PARENT_DEQUEUED\s*-->/;
+
+/**
+ * Cosa fare del commento di un `parent-dequeue`. Pura → testabile.
+ * `null`/non-array = «non ho potuto leggere i commenti», che non è «non ce ne
+ * sono»: al buio non si commenta (un commento in più è proprio il difetto).
+ *
+ * @param {Array<{body?: string}>|null|undefined} comments
+ * @returns {'comment'|'repeat'|'unreadable'}
+ */
+export function parentDequeueCommentDecision(comments) {
+  if (!Array.isArray(comments)) return 'unreadable';
+  return comments.some((c) => PARENT_DEQUEUED_RE.test(String(c?.body || '')))
+    ? 'repeat'
+    : 'comment';
+}
+
+/**
+ * Esegue il dequeue di UN padre decomposto con I/O iniettato. La rimozione
+ * delle label si tenta sempre (è la mutazione che conta); il commento si posta
+ * solo la prima volta. Marker già presente = qualcuno ha rimesso la label dopo
+ * un dequeue: niente commento, ma un `::warning::` che nomina la issue.
+ *
+ * Adattamento corpus (il sito commenta prima di togliere le label): qui
+ * `edit()` rilegge il claim live e può RIFIUTARE la mutazione (claim arrivato
+ * nel frattempo o `CLAIM-READ-FAIL`). Le label si tolgono quindi PRIMA e il
+ * commento col marker si posta solo a rimozione confermata (`=== true`):
+ * altrimenti il marker resterebbe su un padre ancora in coda e il tick dopo
+ * conterebbe un `repeat` falso, proprio nel segnale che il marker introduce.
+ * Stessa regola «commento solo dopo un edit confermato» degli altri stadi.
+ *
+ * @param {{number: number}} parent
+ * @param {{
+ *   readComments: (num: number) => Array<{body?: string}>|null,
+ *   postComment: (num: number, body: string) => unknown,
+ *   removeLabels: (num: number) => boolean,
+ *   body: string,
+ *   log?: (line: string) => void,
+ * }} io
+ * @returns {{decision: 'comment'|'repeat'|'unreadable', labelsRemoved: boolean}}
+ */
+export function applyParentDequeue(parent, { readComments, postComment, removeLabels, body, log = console.log }) {
+  const num = parent.number;
+  let comments = null;
+  try {
+    comments = readComments(num);
+  } catch {
+    comments = null;
+  }
+  const decision = parentDequeueCommentDecision(comments);
+  let labelsRemoved = false;
+  try {
+    labelsRemoved = removeLabels(num) === true;
+  } catch (e) {
+    log(`::warning::parent-dequeue: rimozione label #${num} fallita: ${String(e).slice(0, 120)}`);
+  }
+  if (decision === 'comment') {
+    if (!labelsRemoved) {
+      log(`::warning::parent-dequeue: label di #${num} non tolte → nessun commento (riprovo al prossimo tick).`);
+    } else {
+      try {
+        postComment(num, `${PARENT_DEQUEUED_MARKER}\n${body}`);
+      } catch (e) {
+        log(`::warning::parent-dequeue: comment #${num} fallito: ${String(e).slice(0, 120)}`);
+      }
+    }
+  } else if (decision === 'repeat') {
+    log(`::warning::parent-dequeue ripetuto #${num}: \`agent:fix\`/\`agent:fix-queued\` rimessa su un padre già tolto dalla coda — ${labelsRemoved ? 'tolgo le label' : 'label non tolte in questo giro'} senza un altro commento; va corretto chi la rimette.`);
+  } else {
+    log(`::warning::parent-dequeue: commenti di #${num} non leggibili → nessun commento (${labelsRemoved ? 'label tolte comunque' : 'label non tolte in questo giro'}).`);
+  }
+  return { decision, labelsRemoved };
+}
 
 // Il sito usa int-from-env.mjs; nel corpus l'helper equivalente riceve il
 // valore grezzo. Tutte le leve del drainer sono conteggi o durate discrete:
@@ -1446,6 +1528,8 @@ const DATA_PENDING_RE = new RegExp([
   String.raw`\bpost[-\s]merge\b[^.\n]{0,40}\bbaseline\b`,
 ].join('|'), 'i');
 
+const MARKDOWN_HEADING_LINE_RE = /^\s{0,3}#{1,6}\s/;
+
 /**
  * L'issue è ferma su un dato che non esiste ancora? Pura → testabile.
  *
@@ -1454,6 +1538,17 @@ const DATA_PENDING_RE = new RegExp([
  * solo se copre l'issue INTERA — cioè se sta nel TITOLO (che descrive lo scope
  * complessivo: «(blocked, in attesa di dati…)»), oppure se l'issue non è
  * aggregata (`N items deferred` / `N item deferito/i` assente o N<=1).
+ *
+ * Un bucket giornaliero («follow-up(daily:…): N items — <repo>») è
+ * un'aggregata con un'altra grammatica del titolo: `AGGREGATE_ITEMS_RE` non lo
+ * riconosce, e letto come issue singola veniva scandito riga per riga — sul
+ * sito il bucket 10831 è stato parcheggiato intero con 7 item `open` fermi. Un
+ * item del bucket che aspetta davvero un dato lo dichiara il suo
+ * `State: blocked`, non questa regex.
+ *
+ * Le righe di intestazione Markdown non si valutano: un titolo di sezione
+ * («### … Full-suite post-merge: report e baseline di performance») nomina un
+ * argomento, non dichiara un'attesa.
  * @param {string} title @param {string} body
  * @returns {string|null} la frase che ha fatto scattare il rilevamento
  */
@@ -1463,7 +1558,9 @@ export function detectDataPending(title, body) {
   if (titleHit) return t.trim().slice(0, 200);
   const m = AGGREGATE_ITEMS_RE.exec(t);
   if (m && Number(m[1]) > 1) return null; // aggregata: un bullet non parla per gli altri
+  if (isDailyBucketTitle(t)) return null; // bucket giornaliero: aggregata per costruzione
   for (const raw of String(body || '').split('\n')) {
+    if (MARKDOWN_HEADING_LINE_RE.test(raw)) continue;
     if (DATA_PENDING_RE.test(raw)) return raw.trim().slice(0, 200);
   }
   return null;
@@ -4081,7 +4178,8 @@ export function runDrain() {
     // `isDecomposedParent`). I filtri di RESCUE/DRAIN impediscono che ci
     // rientri, ma non tolgono la label a chi ci è già dentro: senza questo
     // passo #7340 & C. resterebbero `agent:fix` per sempre, invisibili a ogni
-    // altro strato. Solo label (nessuna `gh view`), con cap e budget propri.
+    // altro strato. Una lettura dei commenti (marker di idempotenza) più le
+    // label, con cap e budget propri.
     // La riserva impedisce a questo pass di consumare il tempo necessario al
     // parent-close che viene subito dopo.
     const parentCloseReserveMs = Math.min(PARENT_CLOSE_MAX_PER_RUN, parents.length) * ITEM_COST_MS;
@@ -4096,6 +4194,8 @@ export function runDrain() {
       stableKey: (parent) => parent?.number,
     });
     let dequeueExamined = 0;
+    let dequeueApplied = 0;
+    const parentDequeueRepeats = [];
     for (const p of rotatedDequeue) {
       if (dequeueExamined >= PARENT_DEQUEUE_MAX_PER_RUN) {
         console.log(`parent-dequeue: cap ${PARENT_DEQUEUE_MAX_PER_RUN}/run raggiunto, ${dequeueCandidates.length - dequeueExamined} padri rinviati al prossimo tick (no silent cap).`);
@@ -4109,11 +4209,30 @@ export function runDrain() {
       if (!budget.take(`#${p.number} (parent-dequeue)`, ITEM_COST_MS)) break;
       dequeueExamined++;
       if (DRY) { console.log(`[dry] parent-dequeue #${p.number}`); continue; }
-      commentIssue(p.number,
-        `⏭️ **Pre-flight drainer (zero-Claude): padre decomposto fuori dalla coda del fixer.** Lo scope di questa issue vive nelle sub-issue dichiarate da \`DECOMPOSED_INTO\`, che entrano in coda per conto loro; qui non resta lavoro proprio, e un run del fixer non potrebbe che terminare senza PR (o duplicare una figlia). Rimuovo \`agent:fix\`/\`agent:fix-queued\`. La issue **resta aperta**: la chiude il PARENT-CLOSE quando tutte le figlie sono chiuse.`,
-        'parent-dequeue comment');
-      if (!edit(p.number, { remove: [LBL_FIX, LBL_QUEUED] })) continue;
-      console.log(`PARENT-DEQUEUE #${p.number} (decomposed:1, lavoro delegato alle figlie) — "${p.title?.slice(0, 50)}"`);
+      dequeueApplied++;
+      const { decision: dequeueDecision, labelsRemoved } = applyParentDequeue(p, {
+        readComments: issueComments,
+        postComment: (num, body) => commentIssue(num, body, 'parent-dequeue comment'),
+        removeLabels: (num) => edit(num, { remove: [LBL_FIX, LBL_QUEUED] }),
+        body: `⏭️ **Pre-flight drainer (zero-Claude): padre decomposto fuori dalla coda del fixer.** Lo scope di questa issue vive nelle sub-issue dichiarate da \`DECOMPOSED_INTO\`, che entrano in coda per conto loro; qui non resta lavoro proprio, e un run del fixer non potrebbe che terminare senza PR (o duplicare una figlia). Rimuovo \`agent:fix\`/\`agent:fix-queued\`. La issue **resta aperta**: la chiude il PARENT-CLOSE quando tutte le figlie sono chiuse.`,
+      });
+      if (dequeueDecision === 'repeat') parentDequeueRepeats.push(p.number);
+      if (!labelsRemoved) continue;
+      console.log(`PARENT-DEQUEUE #${p.number} (decomposed:1, lavoro delegato alle figlie; commento: ${dequeueDecision}) — "${p.title?.slice(0, 50)}"`);
+    }
+    // Contatore stampato a ogni giro non-DRY che ha lavorato un padre (anche a
+    // 0): è la misura del riaccodamento residuo, cioè di chi rimette la label
+    // su un padre già tolto dalla coda.
+    if (dequeueApplied > 0) console.log(`parent_dequeue_repeat=${parentDequeueRepeats.length}`);
+    if (parentDequeueRepeats.length > 0 && process.env.GITHUB_STEP_SUMMARY) {
+      try {
+        appendFileSync(
+          process.env.GITHUB_STEP_SUMMARY,
+          `### parent-dequeue ripetuto\n\n\`parent_dequeue_repeat=${parentDequeueRepeats.length}\` — ${parentDequeueRepeats.map((n) => `#${n}`).join(', ')}: \`agent:fix\`/\`agent:fix-queued\` rimessa su un padre decomposto già tolto dalla coda.\n\n`,
+        );
+      } catch (e) {
+        console.log(`parent-dequeue: step summary non scrivibile (${String(e).slice(0, 120)})`);
+      }
     }
     // Il cap di questo stadio conta le ESAMINATE, non le azioni — a differenza
     // di age-out (`slice` su candidate già filtrate), verdict-exit (`attempted`) e
