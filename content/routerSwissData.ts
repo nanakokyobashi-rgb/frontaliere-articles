@@ -2565,6 +2565,15 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'diritti-casa-san-gallo': { it: 'diritti-casa-san-gallo', en: 'swiss-rentals-st-gallen-2026', de: 'mieten-schweiz-st-gallen-2026', fr: 'loyers-suisse-saint-gall-2026' },
  'affitti-lucerna-regole-2026': { it: 'affitti-lucerna-regole-2026', en: 'lucerne-rentals-rules-2026', de: 'luzern-mietrecht-regeln-2026', fr: 'lucerne-location-regles-2026' },
  'canoni-casa-lucerna-2026': { it: 'canoni-casa-lucerna-2026', en: 'swiss-rental-market-lucerne-2026', de: 'mietmarkt-schweiz-luzern-2026', fr: 'marche-locatif-suisse-lucerne-2026' },
+ 'affitti-regole-deposito-argovia-2026': { it: 'affitti-regole-deposito-argovia-2026', en: 'rent-deposit-rules-aargau-2026', de: 'mietzins-kaution-regeln-aargau-2026', fr: 'regles-depot-garantie-argovie-2026' },
+ 'locazione-cauzione-argovia-2026': { it: 'locazione-cauzione-argovia-2026', en: 'switzerland-rents-aargau-2026', de: 'mieten-schweiz-aargau-2026', fr: 'loyers-suisse-argovie-2026' },
+ 'dazio-ue-pacchi-posta': { it: 'dazio-ue-pacchi-posta', en: 'eu-tariff-swiss-post-parcels', de: 'eu-zoll-swiss-post-pakete', fr: 'droits-ue-colis-poste-suisse' },
+ 'spedizioni-ue-posta-svizzera': { it: 'spedizioni-ue-posta-svizzera', en: 'eu-duties-small-parcels-swiss-post', de: 'eu-zoll-kleine-pakete-schweizerische-post', fr: 'droits-ue-petits-colis-poste-suisse' },
+ 'inquilini-cantoni-disdetta': { it: 'inquilini-cantoni-disdetta', en: 'swiss-rent-tenant-rights', de: 'mietrecht-schweiz-argau', fr: 'location-suisse-argovie' },
+ 'fisco-zurigo-guida-online': { it: 'fisco-zurigo-guida-online', en: 'zurich-tax-return-online-guide', de: 'steuererklaerung-zuerich-online-ratgeber', fr: 'declaration-impots-zurich-guide-en-ligne' },
+ 'guida-fiscale-ginevra-2026': { it: 'guida-fiscale-ginevra-2026', en: 'geneva-tax-return-guide-2026', de: 'steuererklaerung-genf-leitfaden-2026', fr: 'declaration-impots-geneve-guide-2026' },
+ 'fisco-berna-guida-2026': { it: 'fisco-berna-guida-2026', en: 'swiss-tax-guide-bern-2026', de: 'steuererklaerung-bern-2026', fr: 'declaration-impots-berne-2026' },
+ 'guida-fiscale-vaud-2026': { it: 'guida-fiscale-vaud-2026', en: 'swiss-tax-return-vaud-2026', de: 'steuererklaerung-waadt-2026', fr: 'declaration-impots-vaud-2026' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

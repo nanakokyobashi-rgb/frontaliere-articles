@@ -98924,6 +98924,357 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-affitti-regole-deposito-argovia-2026': {
+    title: 'Affitti in Svizzera: regole sul deposito cauzionale 2026',
+    description: 'Scopri le regole per gli affitti in Svizzera e Argovia nel 2026: limite tre mensilità per il deposito cauzionale, conto vincolato e verifiche contrattuali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, regole, deposito, cauzionale',
+    ogTitle: 'Affitti in Svizzera: regole sul deposito cauzionale e Argovia 2026',
+    ogDescription: 'Guida ufficiale alle regole sugli affitti in Svizzera e in Argovia per il 2026: come calcolare il limite di tre mensilità per la cauzione, l\'uso del conto vincolato e le verifiche essenziali prima della firma del contratto di locazione.',
+    canonicalPath: '/articoli-svizzera/affitti-regole-deposito-argovia-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti in Svizzera: regole sul deposito cauzionale 2026",
+      "description": "Scopri le regole per gli affitti in Svizzera e Argovia nel 2026: limite tre mensilità per il deposito cauzionale, conto vincolato e verifiche contrattuali.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/affitti-regole-deposito-argovia-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Mercato immobiliare e regole sugli affitti in Svizzera e canton Argovia"
+      },
+      "datePublished": "2026-10-03T06:10:29+00:00",
+      "dateModified": "2026-10-03T06:10:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/affitti-regole-deposito-argovia-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-locazione-cauzione-argovia-2026': {
+    title: 'Affitti in Svizzera 2026: cauzione e disdetta in Argovia',
+    description: 'Affitti in Svizzera nel 2026: in Argovia valgono le regole federali su cauzione, conto vincolato, disdetta del locatore e contestazione entro 30 giorni.',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, cauzione, disdetta, argovia',
+    ogTitle: 'Affitti in Svizzera 2026: cauzione e disdetta in Argovia',
+    ogDescription: 'Dal deposito cauzionale alla disdetta del locatore, la guida alle regole federali degli affitti in Svizzera nel 2026: conto vincolato, modulo ufficiale cantonale e contestazione entro 30 giorni, con focus sul canton Argovia.',
+    canonicalPath: '/articoli-svizzera/locazione-cauzione-argovia-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti in Svizzera 2026: cauzione e disdetta in Argovia",
+      "description": "Affitti in Svizzera nel 2026: in Argovia valgono le regole federali su cauzione, conto vincolato, disdetta del locatore e contestazione entro 30 giorni.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/locazione-cauzione-argovia-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edifici residenziali svizzeri per il mercato degli affitti 2026"
+      },
+      "datePublished": "2026-10-03T06:52:35+00:00",
+      "dateModified": "2026-10-03T06:52:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/locazione-cauzione-argovia-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-dazio-ue-pacchi-posta': {
+    title: 'Dazio Ue da 3 euro: calano i pacchi della Posta svizzera',
+    description: 'Il dazio Ue da 3 euro per articolo frena i pacchi della Posta svizzera verso l\'Unione: calo a due cifre e quota cinese dal 6% all\'11% nell\'arco di dieci anni.',
+    keywords: 'frontalieri, ticino, svizzera, italia, dazio, euro, calano, pacchi',
+    ogTitle: 'Dazio Ue da 3 euro: calano i pacchi della Posta svizzera',
+    ogDescription: 'Il dazio Ue da 3 euro per articolo ha fatto crollare a due cifre i colli della Posta svizzera diretti verso l\'Unione. Pascal Grieder dubita che protegga il mercato dalle importazioni cinesi: Temu può spedire dai magazzini europei.',
+    canonicalPath: '/articoli-svizzera/dazio-ue-pacchi-posta/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Dazio Ue da 3 euro: calano i pacchi della Posta svizzera",
+      "description": "Il dazio Ue da 3 euro per articolo frena i pacchi della Posta svizzera verso l'Unione: calo a due cifre e quota cinese dal 6% all'11% nell'arco di dieci anni.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/dazio-ue-pacchi-posta.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Pacchi in un centro postale svizzero mentre cambiano le spedizioni verso l'Unione europea"
+      },
+      "datePublished": "2026-10-03T07:32:47+00:00",
+      "dateModified": "2026-10-03T07:32:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/dazio-ue-pacchi-posta/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-spedizioni-ue-posta-svizzera': {
+    title: 'Dazi UE sui pacchi: impatto sulla Posta svizzera',
+    description: 'Dazi UE da 3 euro per articolo sui piccoli pacchi dai Paesi terzi: la Posta svizzera registra un calo a due cifre degli invii postali spediti verso l\'UE.',
+    keywords: 'frontalieri, ticino, svizzera, italia, dazi, pacchi, impatto, sulla',
+    ogTitle: 'Dazi UE sui pacchi: impatto sulla Posta svizzera',
+    ogDescription: 'Il nuovo dazio forfettario dell\'Unione europea pesa sulle spedizioni: la Posta svizzera segnala un calo a due cifre dei pacchi inviati nell\'UE. Pascal Grieder dubita dell\'efficacia della misura contro le importazioni cinesi.',
+    canonicalPath: '/articoli-svizzera/spedizioni-ue-posta-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Dazi UE sui pacchi: impatto sulla Posta svizzera",
+      "description": "Dazi UE da 3 euro per articolo sui piccoli pacchi dai Paesi terzi: la Posta svizzera registra un calo a due cifre degli invii postali spediti verso l'UE.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/spedizioni-ue-posta-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Pacchi della Posta svizzera destinati all'Unione europea"
+      },
+      "datePublished": "2026-10-03T07:48:59+00:00",
+      "dateModified": "2026-10-03T07:48:59+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/spedizioni-ue-posta-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-inquilini-cantoni-disdetta': {
+    title: 'Affitti Svizzera 2026: mercato immobiliare Argovia',
+    description: 'Affitti in Svizzera nel 2026: deposito massimo di tre mensilità, conto vincolato e disdetta del locatore contestabile entro 30 giorni anche in Argovia.',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, mercato, immobiliare, argovia',
+    ogTitle: 'Affitti 2026: regole del mercato in Argovia',
+    ogDescription: 'Focus Argovia: regole uniformi in Svizzera, cauzione massima di tre mensilità, conto vincolato, modulo ufficiale per la disdetta del locatore e 30 giorni per la contestazione dell\'inquilino all\'autorità di conciliazione.',
+    canonicalPath: '/articoli-svizzera/inquilini-cantoni-disdetta/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti Svizzera 2026: mercato immobiliare Argovia",
+      "description": "Affitti in Svizzera nel 2026: deposito massimo di tre mensilità, conto vincolato e disdetta del locatore contestabile entro 30 giorni anche in Argovia.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/inquilini-cantoni-disdetta.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio residenziale svizzero con documenti per un contratto d'affitto"
+      },
+      "datePublished": "2026-10-03T08:05:54+00:00",
+      "dateModified": "2026-10-03T08:05:54+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/inquilini-cantoni-disdetta/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-fisco-zurigo-guida-online': {
+    title: 'Dichiarazione imposte svizzera 2026: guida a Zurigo',
+    description: 'Guida 2026 alla dichiarazione delle imposte in Svizzera: IFD, Cantoni, Comuni, deduzioni e procedura online, con focus sul canton Zurigo e confronto nazionale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, dichiarazione, imposte, zurigo, distingue',
+    ogTitle: 'Guida 2026 alle imposte svizzere: focus sul canton Zurigo',
+    ogDescription: 'Dalla distinzione tra imposta federale diretta, Cantoni e Comuni alle voci AVS, LPP e LAMal: una guida operativa per leggere la dichiarazione 2026 nel canton Zurigo senza confondere autorità, contributi e premi.',
+    canonicalPath: '/articoli-svizzera/fisco-zurigo-guida-online/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Dichiarazione imposte svizzera 2026: guida a Zurigo",
+      "description": "Guida 2026 alla dichiarazione delle imposte in Svizzera: IFD, Cantoni, Comuni, deduzioni e procedura online, con focus sul canton Zurigo e confronto nazionale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/fisco-zurigo-guida-online.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Dichiarazione fiscale svizzera su una scrivania, con lo skyline di Zurigo sullo sfondo."
+      },
+      "datePublished": "2026-10-03T08:33:46+00:00",
+      "dateModified": "2026-10-03T08:33:46+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/fisco-zurigo-guida-online/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-guida-fiscale-ginevra-2026': {
+    title: 'Dichiarazione imposte Svizzera 2026: guida Ginevra',
+    description: 'Guida 2026 alla dichiarazione delle imposte in Svizzera: tre livelli fiscali, AFC/ESTV, deduzioni, procedura online e focus sul canton Ginevra per il 2026.',
+    keywords: 'frontalieri, ticino, svizzera, italia, dichiarazione, imposte, ginevra, alla',
+    ogTitle: 'Dichiarazione fiscale svizzera 2026: focus Ginevra',
+    ogDescription: 'Scadenze cantonali, tre livelli d\'imposta e competenze tra AFC/ESTV e amministrazioni cantonali: la guida 2026 spiega la dichiarazione online, con focus sul canton Ginevra e distingue imposte, AVS/AHV, LPP/BVG e LAMal/KVG.',
+    canonicalPath: '/articoli-svizzera/guida-fiscale-ginevra-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Dichiarazione imposte Svizzera 2026: guida Ginevra",
+      "description": "Guida 2026 alla dichiarazione delle imposte in Svizzera: tre livelli fiscali, AFC/ESTV, deduzioni, procedura online e focus sul canton Ginevra per il 2026.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/guida-fiscale-ginevra-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Dichiarazione fiscale svizzera online con documenti e panorama urbano cantonale"
+      },
+      "datePublished": "2026-10-03T08:50:02+00:00",
+      "dateModified": "2026-10-03T08:50:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/guida-fiscale-ginevra-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-fisco-berna-guida-2026': {
+    title: 'Dichiarazione imposte svizzera: guida pratica 2026 a Berna',
+    description: 'Guida 2026 alla dichiarazione imposte in Svizzera: tre livelli fiscali, canton Berna, moltiplicatore comunale, scadenze, procedura online e autorità competenti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, dichiarazione, imposte, pratica, berna',
+    ogTitle: 'Dichiarazione imposte svizzera: guida pratica 2026 a Berna',
+    ogDescription: 'Tre livelli fiscali a Berna: la guida spiega chi gestisce l\'IFD e l\'IVA, come leggere il moltiplicatore comunale e distinguere imposte da AVS e LPP nei dati della retribuzione. Include la procedura online e le scadenze cantonali.',
+    canonicalPath: '/articoli-svizzera/fisco-berna-guida-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Dichiarazione imposte svizzera: guida pratica 2026 a Berna",
+      "description": "Guida 2026 alla dichiarazione imposte in Svizzera: tre livelli fiscali, canton Berna, moltiplicatore comunale, scadenze, procedura online e autorità competenti.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/fisco-berna-guida-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documenti fiscali svizzeri e calcolatrice su una scrivania, con focus sul canton Berna"
+      },
+      "datePublished": "2026-10-03T09:08:36+00:00",
+      "dateModified": "2026-10-03T09:08:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/fisco-berna-guida-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-guida-fiscale-vaud-2026': {
+    title: 'Dichiarazione imposte Svizzera: guida Vaud 2026',
+    description: 'Guida 2026 alla dichiarazione delle imposte in Svizzera: tre livelli, scadenze cantonali, deduzioni ammesse e procedura online con focus sul canton Vaud.',
+    keywords: 'frontalieri, ticino, svizzera, italia, dichiarazione, imposte, vaud, livelli',
+    ogTitle: 'Dichiarazione imposte: guida Vaud 2026',
+    ogDescription: 'Dal calcolo su tre livelli alla procedura online, una guida operativa per orientarsi tra imposta federale diretta, quota cantonale e comunale, deduzioni ammesse e controlli da fare nel canton Vaud senza confondere tasse, previdenza e LAMal.',
+    canonicalPath: '/articoli-svizzera/guida-fiscale-vaud-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Dichiarazione imposte Svizzera: guida Vaud 2026",
+      "description": "Guida 2026 alla dichiarazione delle imposte in Svizzera: tre livelli, scadenze cantonali, deduzioni ammesse e procedura online con focus sul canton Vaud.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/guida-fiscale-vaud-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Dichiarazione online delle imposte svizzere per un residente nel canton Vaud"
+      },
+      "datePublished": "2026-10-03T11:04:13+00:00",
+      "dateModified": "2026-10-03T11:04:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/guida-fiscale-vaud-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

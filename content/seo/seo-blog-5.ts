@@ -98353,6 +98353,240 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-radar-strade-ticinesi-ottobre': {
+    title: 'Controlli velocità in Ticino dal 5 all\'11 ottobre',
+    description: 'Controlli della velocità in Ticino da lunedì 5 a domenica 11 ottobre: la Polizia cantonale cura la mappa dei radar e comunica anche le località interessate.',
+    keywords: 'frontalieri, ticino, svizzera, italia, controlli, velocità, ottobre, sono',
+    ogTitle: 'Controlli velocità in Ticino dal 5 all\'11 ottobre',
+    ogDescription: 'Da lunedì 5 a domenica 11 ottobre la Polizia cantonale ha pianificato controlli della velocità sulle strade ticinesi. La comunicazione riguarda la mappa dei radar, le località interessate e i controlli semi-stazionari.',
+    canonicalPath: '/articoli-frontaliere/radar-strade-ticinesi-ottobre',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Controlli velocità in Ticino dal 5 all'11 ottobre",
+      "description": "Controlli della velocità in Ticino da lunedì 5 a domenica 11 ottobre: la Polizia cantonale cura la mappa dei radar e comunica anche le località interessate.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/radar-strade-ticinesi-ottobre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Controlli della velocità su una strada del Ticino in autunno"
+      },
+      "datePublished": "2026-10-03T05:47:16+00:00",
+      "dateModified": "2026-10-03T05:47:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/radar-strade-ticinesi-ottobre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-disoccupazione-frontalieri-cambio-regole': {
+    title: 'Disoccupazione frontalieri, le regole potrebbero cambiare',
+    description: 'Le regole attuali per la disoccupazione dei frontalieri in Ticino prevedono la NASpI. La revisione europea potrebbe cambiare la competenza al Paese dell\'ultima',
+    keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, regole, potrebbero, cambiare',
+    ogTitle: 'Disoccupazione frontalieri, le regole potrebbero cambiare',
+    ogDescription: 'Un\'importante revisione delle regole europee sul coordinamento della sicurezza sociale potrebbe modificare il sistema di disoccupazione per i frontalieri residenti in Italia e impiegati in Svizzera. Le attuali norme e le possibili novità con il via',
+    canonicalPath: '/articoli-frontaliere/disoccupazione-frontalieri-cambio-regole',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Disoccupazione frontalieri, le regole potrebbero cambiare",
+      "description": "Le regole attuali per la disoccupazione dei frontalieri in Ticino prevedono la NASpI. La revisione europea potrebbe cambiare la competenza al Paese dell'ultima",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/disoccupazione-frontalieri-cambio-regole.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica del lago di Lugano al mattino, con le montagne e la città sullo sfondo, simbolo di lavoro transfrontaliero."
+      },
+      "datePublished": "2026-10-03T06:35:30+00:00",
+      "dateModified": "2026-10-03T06:35:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/disoccupazione-frontalieri-cambio-regole/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-svizzera-tassa-ingresso-franchi': {
+    title: 'Svizzera, tassa d\'ingresso fino a 4mila franchi',
+    description: 'La Svizzera valuta un\'imposta di incentivazione tra 2mila e 4mila franchi, legata alla clausola di salvaguardia per gli ingressi dei cittadini UE in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, tassa, ingresso, fino, 4mila',
+    ogTitle: 'Svizzera: tassa d\'ingresso fino a 4mila franchi',
+    ogDescription: 'La proposta svizzera collega un\'imposta di incentivazione alla clausola di salvaguardia: almeno 4mila franchi per lavoratori, autonomi e persone senza attività lucrativa, 2mila per il ricongiungimento familiare.',
+    canonicalPath: '/articoli-frontaliere/svizzera-tassa-ingresso-franchi',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Svizzera, tassa d'ingresso fino a 4mila franchi",
+      "description": "La Svizzera valuta un'imposta di incentivazione tra 2mila e 4mila franchi, legata alla clausola di salvaguardia per gli ingressi dei cittadini UE in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/svizzera-tassa-ingresso-franchi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Strada di confine in Ticino con segnaletica svizzera e traffico leggero."
+      },
+      "datePublished": "2026-10-03T07:17:00+00:00",
+      "dateModified": "2026-10-03T07:17:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/svizzera-tassa-ingresso-franchi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-bollettino-frontaliere-2026-10-03': {
+    title: 'Bollettino del frontaliere – 3 ottobre 2026: a Ponte Tresa 41 minuti di coda',
+    description: 'Bollettino frontalieri del 3 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
+    keywords: 'bollettino frontaliere, dogana, attesa dogana, code valichi ticino, prezzi benzina confine, cambio franco euro, lavoro svizzera, frontalieri ticino',
+    ogTitle: 'Bollettino del frontaliere – 3 ottobre 2026: a Ponte Tresa 41 minuti di coda',
+    ogDescription: 'I numeri del 3 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    canonicalPath: '/articoli-frontaliere/bollettino-frontaliere-2026-10-03',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bollettino del frontaliere – 3 ottobre 2026: a Ponte Tresa 41 minuti di coda",
+      "description": "Bollettino frontalieri del 3 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bollettino-frontaliere-2026-10-03.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "I numeri del giorno per i frontalieri – 3 ottobre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro"
+      },
+      "datePublished": "2026-10-03T10:17:32+00:00",
+      "dateModified": "2026-10-03T10:17:32+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/samuele-valente/#person",
+        "name": "Samuele Valente",
+        "url": "https://frontaliereticino.ch/autori/samuele-valente/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/bollettino-frontaliere-2026-10-03/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-pasture-vertenza-governo-federale': {
+    title: 'Pasture: vertenza del personale al governo federale',
+    description: 'Pasture, Giorgio Fonio interroga il governo federale su mandati e garanzie occupazionali. Sindacati e Commissione del personale chiedono un incontro ad AOZ.',
+    keywords: 'frontalieri, ticino, svizzera, italia, pasture, vertenza, personale, governo',
+    ogTitle: 'Pasture, la vertenza arriva al governo federale',
+    ogDescription: 'La vertenza sul personale di Pasture si sposta sul piano federale: il deputato Giorgio Fonio interroga su mandati e garanzie occupazionali. Intanto, sindacati e Commissione del personale chiedono ad AOZ un incontro sulla situazione in Ticino.',
+    canonicalPath: '/articoli-frontaliere/pasture-vertenza-governo-federale',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Pasture: vertenza del personale al governo federale",
+      "description": "Pasture, Giorgio Fonio interroga il governo federale su mandati e garanzie occupazionali. Sindacati e Commissione del personale chiedono un incontro ad AOZ.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/pasture-vertenza-governo-federale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lavoratori davanti a un edificio in Ticino, in stile reportage."
+      },
+      "datePublished": "2026-10-03T10:40:14+00:00",
+      "dateModified": "2026-10-03T10:40:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/pasture-vertenza-governo-federale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-furto-noranco-arresti-garage': {
+    title: 'Furto auto Noranco: tre arresti e veicoli recuperati',
+    description: 'Tre auto di alta gamma rubate in un garage di Noranco recuperate. Tre persone, residenti in Francia, fermate a Manno, Tenero e Lucerna. Le autorità raccomandano',
+    keywords: 'frontalieri, ticino, svizzera, italia, furto, auto, noranco, arresti',
+    ogTitle: 'Furto auto a Noranco: tre arresti, veicoli recuperati',
+    ogDescription: 'Nella notte, tre auto di alta gamma sono state rubate da un garage di Noranco. Grazie a un\'operazione coordinata tra diverse polizie, i veicoli sono stati recuperati e tre persone, residenti in Francia, sono state fermate. Scopri i dettagli',
+    canonicalPath: '/articoli-frontaliere/furto-noranco-arresti-garage',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Furto auto Noranco: tre arresti e veicoli recuperati",
+      "description": "Tre auto di alta gamma rubate in un garage di Noranco recuperate. Tre persone, residenti in Francia, fermate a Manno, Tenero e Lucerna. Le autorità raccomandano",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/furto-noranco-arresti-garage.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine di un garage sicuro con sistemi di protezione, che richiama le misure di prevenzione contro i furti in Ticino."
+      },
+      "datePublished": "2026-10-03T11:39:30+00:00",
+      "dateModified": "2026-10-03T11:39:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/furto-noranco-arresti-garage/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

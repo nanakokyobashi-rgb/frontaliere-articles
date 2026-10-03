@@ -508,7 +508,8 @@
     "affitti svizzera mercato immobiliare 2026 canton Ginevra",
     "affitti svizzera mercato immobiliare 2026 canton Berna",
     "affitti svizzera mercato immobiliare 2026 canton Basilea",
-    "affitti svizzera mercato immobiliare 2026 canton San Gallo"
+    "affitti svizzera mercato immobiliare 2026 canton San Gallo",
+    "dichiarazione imposte svizzera guida pratica 2026 canton Basilea"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -890,6 +891,18 @@
     "frontaliere::https://www.varesenews.it/2026/10/controllo-lavoratori-a-distanza-reato-senza-accordo-o-autorizzazione/2694982": {
       "section": "frontaliere",
       "ts": 1791003371812
+    },
+    "svizzera::https://www.tio.ch/dal-mondo/cronaca/1954446/lunedi-proteste-istituti-disagi-francia": {
+      "section": "svizzera",
+      "ts": 1791012987043
+    },
+    "frontaliere::https://comozero.it/attualita/lombardia-82-milioni-di-euro-per-potenziare-la-rete-ferroviaria-anche-a-como": {
+      "section": "frontaliere",
+      "ts": 1791023059255
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/nasce-lo-sportello-dellagricoltura-per-imprese-e-operatori-del-ticino-e-lago-maggiore/2695627": {
+      "section": "frontaliere",
+      "ts": 1791026283479
     }
   }
 }
