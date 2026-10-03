@@ -99236,6 +99236,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-guida-fiscale-vaud-2026': {
+    title: 'Dichiarazione imposte Svizzera: guida Vaud 2026',
+    description: 'Guida 2026 alla dichiarazione delle imposte in Svizzera: tre livelli, scadenze cantonali, deduzioni ammesse e procedura online con focus sul canton Vaud.',
+    keywords: 'frontalieri, ticino, svizzera, italia, dichiarazione, imposte, vaud, livelli',
+    ogTitle: 'Dichiarazione imposte: guida Vaud 2026',
+    ogDescription: 'Dal calcolo su tre livelli alla procedura online, una guida operativa per orientarsi tra imposta federale diretta, quota cantonale e comunale, deduzioni ammesse e controlli da fare nel canton Vaud senza confondere tasse, previdenza e LAMal.',
+    canonicalPath: '/articoli-svizzera/guida-fiscale-vaud-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Dichiarazione imposte Svizzera: guida Vaud 2026",
+      "description": "Guida 2026 alla dichiarazione delle imposte in Svizzera: tre livelli, scadenze cantonali, deduzioni ammesse e procedura online con focus sul canton Vaud.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/guida-fiscale-vaud-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Dichiarazione online delle imposte svizzere per un residente nel canton Vaud"
+      },
+      "datePublished": "2026-10-03T11:04:13+00:00",
+      "dateModified": "2026-10-03T11:04:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/guida-fiscale-vaud-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
