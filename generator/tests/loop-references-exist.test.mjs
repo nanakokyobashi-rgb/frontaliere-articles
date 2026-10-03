@@ -271,7 +271,7 @@ const DECLARED_ABSENT = {
     kind: 'site-only',
     reason:
       'Reusable workflow posseduto dal repository del sito: il caller corpus lo invoca ' +
-      'cross-repo con un ref main, quindi la sua assenza locale e intenzionale e non un ' +
+      'cross-repo pinnato a uno SHA completo, quindi la sua assenza locale e intenzionale e non un ' +
       'referente runtime mancante nel publisher.',
   },
   '.github/workflows/jobs-pipeline-queue-monitor.yml :: scripts/monitor-jobs-pipeline-queue.mjs': {
