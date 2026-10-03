@@ -649,7 +649,6 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
 
   const NEWS_PUBLICATION = 'Frontaliere Ticino';
   const now = Date.now();
-  const today = new Date(now).toISOString().slice(0, 10);
 
   const candidateBlocks = [];
   let considered = 0;
@@ -695,7 +694,10 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
       const itLoc = `${SITE}${paths.it}${xmlEsc(slug)}/`;
       const img = a.image ? (a.image.startsWith('http') ? a.image : SITE + a.image) : null;
 
-      const parts = [`  <url>`, `    <loc>${itLoc}</loc>`, `    <lastmod>${today}</lastmod>`];
+      // Match the blog sitemap: initial publication is the first content change;
+      // an editorial update supersedes it. Rebuilding is not a content change.
+      const lastmod = a.updatedAt || publishedAt;
+      const parts = [`  <url>`, `    <loc>${itLoc}</loc>`, `    <lastmod>${xmlEsc(lastmod)}</lastmod>`];
       for (const loc of LOCALES) {
         const s2 = slugMap?.[a.id]?.[loc];
         if (s2 && !isReservedPublishedSlug(s2)) {
