@@ -1343,6 +1343,26 @@ test('un lato cambiato fra lettura e scrittura: la voce si salta e la baseline r
   assert.deepEqual(entry.baseline, before);
 });
 
+test('soggetto convergente saltato dalla rilettura: anche il suo fixture torna alla baseline di prima', async () => {
+  const subject = twin({ path: 'host/x.ts', baseline: { ...BASE_MOVED, alignedAt: '2026-09-01' } });
+  const fixture = twin({ path: 'host/tests/x.golden.json', baseline: { ...BASE_MOVED, alignedAt: '2026-09-02' } });
+  const fixtureBefore = structuredClone(fixture.baseline);
+  const subjectBefore = structuredClone(subject.baseline);
+  const { realigned, stale } = await applyConvergedRealign(
+    [
+      { entry: fixture, path: fixture.path, sitePath: fixture.path, now: CONVERGED_NOW, couplings: [{ path: subject.path, mode: 'identical' }] },
+      { entry: subject, path: subject.path, sitePath: subject.path, now: CONVERGED_NOW, couplings: [] },
+    ],
+    // Il sito del soggetto si è mosso fra lettura e scrittura; il fixture no.
+    { readSite: async (p) => (p === subject.path ? 'ffff' : 'dddd'), readLocal: () => 'dddd', today: '2026-10-03' },
+  );
+  assert.deepEqual(realigned, []);
+  assert.deepEqual(stale.map((s) => s.path).sort(), [fixture.path, subject.path].sort());
+  assert.match(stale.find((s) => s.path === fixture.path).reason, /soggetto non è stato riattestato/);
+  assert.deepEqual(fixture.baseline, fixtureBefore);
+  assert.deepEqual(subject.baseline, subjectBefore);
+});
+
 test('oltre il tetto dei convergenti: si riattesta fino al tetto, l\'eccedenza resta nominata', () => {
   const n = 26;
   const candidates = Array.from({ length: n }, (_, i) => ({ path: `scripts/ci/c${String(i).padStart(2, '0')}.mjs`, couplings: [] }));

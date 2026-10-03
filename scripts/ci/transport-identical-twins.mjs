@@ -304,10 +304,13 @@ export function unreadableCouplings(couplings = []) {
  *   couplings        [{ path, mode }] gli accoppiamenti locali della voce
  *                    (rilevanti solo per un fixture: vedi `isFixture`).
  *
- * Ritorna `{ transport, permanent, state, reason }`. `transport: true` SOLO per
- * un `identical` in `site-ahead` con una destinazione scrivibile: ogni altro
- * verdetto è un no con la sua ragione, mai un silenzio. `permanent` dice se
- * quel no scade (vedi `permanentBlock`).
+ * Ritorna `{ transport, realign?, permanent, state, reason }`. `transport: true`
+ * SOLO per un `identical` in `site-ahead` con una destinazione scrivibile.
+ * `realign: true` SOLO per un `identical` in `both-moved-converged` i cui hash
+ * attuali coincidono: è una riattestazione della baseline senza copia, e per
+ * questo ignora `unsafeTarget` (`permanentBlock` con `writesFile: false`).
+ * Ogni altro verdetto è un no con la sua ragione, mai un silenzio. `permanent`
+ * dice se quel no scade (vedi `permanentBlock`).
  */
 /**
  * Le ragioni per cui una voce non è copiabile in NESSUN giro, separate da
@@ -545,10 +548,15 @@ export function closeRealignSet(candidates, { maxRealign = 25, settledPaths = ne
  * l'uguaglianza che si attesta deve essere quella di ADESSO, non quella di
  * qualche minuto fa. Nessun file viene scritto: i byte sono già uguali.
  *
- *   chosen     [{ entry, path, sitePath, now }] da `closeRealignSet`.
+ *   chosen     [{ entry, path, sitePath, now, couplings }] da `closeRealignSet`.
  *   readSite   async (sitePath) => hash attuale del sito (`null` se assente).
  *   readLocal  (path) => hash attuale di questo lato (`null` se assente).
  *   today      data `YYYY-MM-DD` per `alignedAt`.
+ *
+ * Un fixture riattestato il cui soggetto `identical` viene saltato dalla
+ * rilettura torna alla baseline di prima e finisce fra gli `stale`: la regola
+ * di `closeRealignSet` deve valere a fine passata, non solo al momento della
+ * scelta.
  *
  * Muta `entry.baseline` delle sole voci riattestate. Ritorna
  * `{ realigned: [{ path, hash, from }], stale: [{ path, reason }] }`.
@@ -556,7 +564,8 @@ export function closeRealignSet(candidates, { maxRealign = 25, settledPaths = ne
 export async function applyConvergedRealign(chosen, { readSite, readLocal, today }) {
   const realigned = [];
   const stale = [];
-  for (const { entry, path: rel, sitePath, now } of chosen) {
+  const previous = new Map();
+  for (const { entry, path: rel, sitePath, now, couplings } of chosen) {
     let site;
     let corpus;
     try {
@@ -574,8 +583,31 @@ export async function applyConvergedRealign(chosen, { readSite, readLocal, today
       continue;
     }
     const from = entry.baseline ? { site: entry.baseline.site ?? null, corpus: entry.baseline.corpus ?? null } : { site: null, corpus: null };
+    previous.set(rel, { entry, baseline: entry.baseline, couplings });
     entry.baseline = { site, corpus, alignedAt: today };
     realigned.push({ path: rel, hash: site, from });
+  }
+  // `closeRealignSet` ha contato come allineato un soggetto convergente scelto
+  // insieme al fixture; se la rilettura lo ha poi saltato, il fixture non ha
+  // più il soggetto allineato e la sua baseline torna quella di prima.
+  const staleSet = new Set(stale.map((s) => s.path));
+  for (let changed = true; changed; ) {
+    changed = false;
+    for (let i = realigned.length - 1; i >= 0; i -= 1) {
+      const rel = realigned[i].path;
+      if (!isFixture(rel)) continue;
+      const prev = previous.get(rel);
+      const lost = (prev.couplings || [])
+        .filter((k) => k.mode === 'identical' && staleSet.has(k.path))
+        .map((k) => k.path)
+        .sort();
+      if (!lost.length) continue;
+      prev.entry.baseline = prev.baseline;
+      realigned.splice(i, 1);
+      staleSet.add(rel);
+      stale.push({ path: rel, reason: `fixture convergente il cui soggetto non è stato riattestato (${lost.join(', ')}): baseline non riattestata` });
+      changed = true;
+    }
   }
   return { realigned, stale };
 }
@@ -1873,6 +1905,13 @@ async function main() {
   // I convergenti DOPO la copia: un fixture convergente si riattesta solo se i
   // suoi accoppiamenti sono allineati a fine passata, e i path appena copiati
   // lo sono. Non scrivono file, quindi non consumano `MAX_FILES`.
+  // Limite accettato: un soggetto copiato qui ma poi escluso dal commit dal
+  // workflow (mismatch/normalizzazione del realign o fallback dello scope
+  // `workflows`) conta comunque come allineato per il suo fixture convergente.
+  // Nessun byte cambia: la baseline del fixture descrive due lati che sono
+  // davvero uguali, e il soggetto escluso resta `site-ahead` e torna al
+  // prossimo giro. Il caso del soggetto CONVERGENTE saltato dalla rilettura,
+  // invece, lo disfa `applyConvergedRealign`.
   const settledPaths = new Set([...alignedPaths, ...chosen.map((c) => c.path)]);
   const realignPlan = closeRealignSet(realignCandidates, { maxRealign: MAX_REALIGN, settledPaths });
   for (const d of realignPlan.dropped) skipped.push({ path: d.path, state: 'both-moved-converged', reason: d.reason });

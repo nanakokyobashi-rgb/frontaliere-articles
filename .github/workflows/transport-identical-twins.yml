@@ -418,11 +418,13 @@ jobs:
             const workflowExcluded = (r.workflowExcluded || []).map((p) => "- " + markdownCodeSpan(p) + " escluso dal commit dopo il rifiuto esplicito GitHub dello scope `workflows`; blocked: resta `site-ahead` e verra ritentato in un giro futuro.").join("\n");
             const workflowsBlocked = process.env.PAT_WORKFLOWS_SCOPE !== "true";
             const deferred = workflowExcluded || (workflowsBlocked
-              ? "- Le voci `adapted` restano escluse per costruzione; i gemelli sotto `.github/workflows/` richiedono lo scope `workflows`: blocked: PAT_WORKFLOWS_SCOPE non è true per questa identità."
+              ? "- Le voci `adapted` restano escluse per costruzione; i gemelli `site-ahead` sotto `.github/workflows/` richiedono lo scope `workflows` per essere COPIATI (la sola riattestazione della baseline di un convergente non lo richiede): blocked: PAT_WORKFLOWS_SCOPE non è true per questa identità."
               : "- Le voci `adapted` restano escluse per scelta; i gemelli sotto `.github/workflows/` non sono bloccati dallo scope in questa passata e vengono valutati solo se dichiarati `identical` e `site-ahead`.");
             fs.writeFileSync("/tmp/pr-body.md", [
               "## Implementato",
-              "- Copia automatica dei gemelli dichiarati `mode: identical` in `scripts/ci/loop-sync-manifest.json` che il sito ha portato avanti mentre questo lato restava fermo sulla baseline (stato `site-ahead`), con riallineamento della baseline ai byte committati solo per i path verificati. Aperta da `.github/workflows/transport-identical-twins.yml` (issue #331).",
+              r.transported.length
+                ? "- Copia automatica dei gemelli dichiarati `mode: identical` in `scripts/ci/loop-sync-manifest.json` che il sito ha portato avanti mentre questo lato restava fermo sulla baseline (stato `site-ahead`), con riallineamento della baseline ai byte committati solo per i path verificati. Aperta da `.github/workflows/transport-identical-twins.yml` (issue #331)."
+                : "- Nessun gemello `site-ahead` da copiare in questa passata: la PR aggiorna solo `scripts/ci/loop-sync-manifest.json`. Aperta da `.github/workflows/transport-identical-twins.yml` (issue #331).",
               list,
               converged,
               deltas,
