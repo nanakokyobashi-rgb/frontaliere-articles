@@ -5,9 +5,34 @@ name: Transport identical twins (post-merge realign)
 # provenienza dal body della PR e il commit di main dopo il merge, quindi
 # aggiorna solo `baseline.corpus` quando i byte committati sono ancora quelli
 # scaricati. Un mismatch resta rosso: non inventa una baseline locale.
+#
+# Secondo job, `realign-adapted` (issue #1997): i gemelli `adapted` non hanno un
+# trasporto, quindi il loro riallineamento non nasce da una PR di trasporto ma
+# da una riga `Realign-adapted: <path> site-prs=#N[,#M]` nel body della PR del
+# corpus che porta la meta' adattata. Gira a orario (e a mano per una PR del
+# sito senza meta' corpus) e scrive lo stesso manifest: per questo vive qui,
+# sotto lo stesso lock globale. Le prove e il formato sono in
+# scripts/ci/realign-adapted-baseline.mjs.
 on:
   pull_request:
     types: [closed]
+  schedule:
+    - cron: '23 */6 * * *'
+  workflow_dispatch:
+    inputs:
+      paths:
+        description: 'Path del manifest (voci adapted) da riallineare, separati da virgola. Vuoto: legge i body delle PR del corpus.'
+        required: false
+        default: ''
+      site_prs:
+        description: 'PR del sito che hanno toccato quei path, separate da virgola. Obbligatorio con paths.'
+        required: false
+        default: ''
+      dry_run:
+        description: 'Decide e stampa, senza scrivere il manifest.'
+        type: boolean
+        required: false
+        default: false
 
 permissions:
   contents: write
@@ -134,4 +159,94 @@ jobs:
             exit 0
           fi
           echo "::error::GITHUB_PAT_NANAKO assente: la correzione post-merge del manifest è blocked: credenziale Remote Config non disponibile."
+          exit 1
+
+  realign-adapted:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: Write Firebase SA (se presente)
+        continue-on-error: true
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -uo pipefail
+          if [ -n "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/firebase-sa.json"
+            echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/firebase-sa.json" >> "$GITHUB_ENV"
+          fi
+
+      - name: Load secrets from Remote Config
+        continue-on-error: true
+        run: node generator/scripts/load-rc-env.mjs
+
+      # Le letture (PR del corpus, storia e PR del sito) usano il token del
+      # job; il PAT serve solo al push del manifest sul branch protetto.
+      - name: Riallinea le baseline adapted dichiarate
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          SITE_REPO: valerielinc-ops/frontaliere-si-o-no
+          INPUT_PATHS: ${{ github.event.inputs.paths }}
+          INPUT_SITE_PRS: ${{ github.event.inputs.site_prs }}
+          INPUT_DRY_RUN: ${{ github.event.inputs.dry_run }}
+        run: |
+          set -euo pipefail
+          args=()
+          if [ -n "${INPUT_PATHS:-}" ]; then args+=("--paths=${INPUT_PATHS}"); fi
+          if [ -n "${INPUT_SITE_PRS:-}" ]; then args+=("--site-prs=${INPUT_SITE_PRS}"); fi
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          if [ "${INPUT_DRY_RUN:-}" = "true" ] || [ -z "$runtime_pat" ]; then
+            # Senza PAT il manifest non si puo' pushare: si decide e si stampa
+            # lo stesso, ma il job resta rosso per dire che non ha scritto.
+            node scripts/ci/realign-adapted-baseline.mjs --dry-run ${args[@]+"${args[@]}"}
+            if [ "${INPUT_DRY_RUN:-}" != "true" ]; then
+              echo "::error::GITHUB_PAT_NANAKO assente: il riallineamento delle baseline adapted è blocked: credenziale Remote Config non disponibile."
+              exit 1
+            fi
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git remote set-url origin "https://x-access-token:${runtime_pat}@github.com/${REPO}.git"
+          for attempt in 1 2 3; do
+            git fetch origin main --prune
+            git checkout --detach origin/main
+            rc=0
+            node scripts/ci/realign-adapted-baseline.mjs ${args[@]+"${args[@]}"} || rc=$?
+            if [ "$rc" = "2" ]; then
+              echo "::error::Errore d'uso: nessuna baseline riallineata."
+              exit "$rc"
+            fi
+            if git diff --quiet -- scripts/ci/loop-sync-manifest.json; then
+              echo "Nessuna baseline adapted da riallineare."
+              exit "$rc"
+            fi
+            if [ -n "$(git diff --name-only)" ] && [ "$(git diff --name-only)" != "scripts/ci/loop-sync-manifest.json" ]; then
+              echo "::error::Il riallineamento adapted ha modificato file oltre il manifest."
+              exit 1
+            fi
+            git add -- scripts/ci/loop-sync-manifest.json
+            git commit -m "chore(loop): riallinea baseline adapted dichiarate"
+            if git push origin HEAD:main; then
+              # Le voci certificate sono su main; una lettura fallita su
+              # un'ALTRA voce resta comunque un rosso da guardare.
+              exit "$rc"
+            fi
+            echo "::warning::Push non fast-forward o temporaneamente rifiutato; aggiorno main e ritento ($attempt/3)."
+          done
+          echo "::error::Push fallito dopo 3 tentativi: le baseline adapted restano da riallineare alla prossima passata."
           exit 1
