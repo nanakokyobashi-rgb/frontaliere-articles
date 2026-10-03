@@ -98690,6 +98690,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-deposito-cauzionale-basilea': {
+    title: 'Affitti Svizzera 2026: deposito e disdetta a Basilea',
+    description: 'Affitti Svizzera 2026 a Basilea: regole federali su deposito fino a tre mensilità, conto vincolato, disdetta del locatore e contestazione entro 30 giorni.',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, deposito, disdetta, basilea',
+    ogTitle: 'Affitti Svizzera 2026: deposito e disdetta a Basilea',
+    ogDescription: 'Il diritto federale vale in ogni cantone: chi affitta nel canton Basilea deve conoscere il limite del deposito, il conto vincolato intestato all\'inquilino, il modulo ufficiale per la disdetta del locatore e la scadenza di 30 giorni per contestarla.',
+    canonicalPath: '/articoli-svizzera/deposito-cauzionale-basilea/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti Svizzera 2026: deposito e disdetta a Basilea",
+      "description": "Affitti Svizzera 2026 a Basilea: regole federali su deposito fino a tre mensilità, conto vincolato, disdetta del locatore e contestazione entro 30 giorni.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/deposito-cauzionale-basilea.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio residenziale svizzero nel canton Basilea, tema affitti e locazione"
+      },
+      "datePublished": "2026-10-03T02:52:20+00:00",
+      "dateModified": "2026-10-03T02:52:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/deposito-cauzionale-basilea/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
