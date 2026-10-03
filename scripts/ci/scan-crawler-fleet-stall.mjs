@@ -409,7 +409,8 @@ const DAY_MS = 24 * 3600_000;
  *   stallHours?: number}} a
  * @returns {{sustained: boolean, reason: string, detail: string,
  *   perDay: Array<{day: string, groups: number}>, maxGapHours: number|null,
- *   maxGapEndMs: number|null, windowHours: number}}
+ *   maxGapEndMs: number|null, windowHours: number, gapLimitHours: number}}
+ *   `maxGapHours` e' il gap MISURATO; `gapLimitHours` la soglia applicata.
  */
 export function sustainedDelivery({
   deliveries,
@@ -421,7 +422,9 @@ export function sustainedDelivery({
   stallHours = DEFAULT_STALL_HOURS,
 }) {
   const windowHours = days * 24;
-  const base = { sustained: false, perDay: [], maxGapHours: null, maxGapEndMs: null, windowHours };
+  const base = {
+    sustained: false, perDay: [], maxGapHours: null, maxGapEndMs: null, windowHours, gapLimitHours: maxGapHours,
+  };
   if (readable !== true) {
     return { ...base, reason: 'unreadable', detail: 'storia dei commit illeggibile' };
   }
@@ -487,7 +490,12 @@ export function sustainedDelivery({
   };
 }
 
-/** Label che sottraggono una issue a ogni chiusura automatica. */
+/**
+ * Label che sottraggono una issue a ogni chiusura automatica (confronto senza
+ * maiuscole). Non riusa `isFixerExempt` di `scripts/lib/classify-issue.mjs`:
+ * quello include anche backlog/needs-human, che non devono impedire la
+ * chiusura di un allarme guarito.
+ */
 export const KEEP_OPEN_LABELS = new Set(['keep-open', 'agent:no-age-out']);
 
 /** Il commento con la misura che accompagna la chiusura. */
@@ -497,7 +505,7 @@ export function sustainedCloseNote({ sustained, minGroups = MIN_GROUPS_PER_DAY, 
     '',
     `Criterio di chiusura (\`sustainedDelivery\` in \`scripts/ci/scan-crawler-fleet-stall.mjs\`): `
       + `${sustained.perDay.length} giorni UTC completi con almeno ${minGroups} gruppi distinti E nessun `
-      + `intervallo fra consegne oltre ${CLOSE_MAX_GAP_HOURS}h nelle ultime ${sustained.windowHours}h. `
+      + `intervallo fra consegne oltre ${sustained.gapLimitHours}h nelle ultime ${sustained.windowHours}h. `
       + 'Il solo verdetto di copertura 24h non basta: lascia passare un\'ondata persa.',
     '',
     '| giorno | gruppi |',
@@ -505,7 +513,7 @@ export function sustainedCloseNote({ sustained, minGroups = MIN_GROUPS_PER_DAY, 
     ...sustained.perDay.map(({ day, groups }) => `| ${day} | ${groups}/${expectedGroups} |`),
     '',
     `Intervallo massimo senza consegne nelle ultime ${sustained.windowHours}h: `
-      + `**${sustained.maxGapHours.toFixed(1)}h** (soglia ${CLOSE_MAX_GAP_HOURS}h).`,
+      + `**${sustained.maxGapHours.toFixed(1)}h** (soglia ${sustained.gapLimitHours}h).`,
     runUrl ? `\nRun del watchdog: ${runUrl}` : '',
     '\nSe lo stallo si ripresenta, lo stesso titolo riapre questa issue.',
   ].join('\n');
@@ -544,6 +552,11 @@ function findOpenStallIssue(title) {
  * pin), `dry-run`, `comment-failed` (la misura non e' atterrata: niente
  * chiusura muta), `closed`, `close-failed`.
  *
+ * Costo accettato: se il commento atterra ma la chiusura fallisce, la run
+ * successiva (ogni 2h) ripubblica la misura finche' la chiusura riesce. E' il
+ * lato sicuro (l'allarme resta aperto) e ogni commento porta la misura del
+ * momento.
+ *
  * @returns {Promise<{action: string, number?: number, exitCode: number}>}
  */
 export async function closeRecoveredStallIssue({
@@ -578,7 +591,9 @@ export async function closeRecoveredStallIssue({
     log(`[fleet-stall] #${issue.number} resta aperta: consegna non ancora sostenuta (${sustained.reason}: ${sustained.detail}).`);
     return { action: 'not-sustained', number: issue.number, exitCode: 0 };
   }
-  const pin = (issue.labels || []).map((l) => (typeof l === 'string' ? l : l?.name)).find((n) => KEEP_OPEN_LABELS.has(n));
+  const pin = (issue.labels || [])
+    .map((l) => (typeof l === 'string' ? l : l?.name))
+    .find((n) => KEEP_OPEN_LABELS.has(String(n || '').toLowerCase()));
   if (pin) {
     log(`[fleet-stall] #${issue.number} ha la label \`${pin}\`: consegna sostenuta ma nessuna chiusura automatica.`);
     return { action: 'kept-open', number: issue.number, exitCode: 0 };
@@ -597,6 +612,12 @@ export async function closeRecoveredStallIssue({
   try {
     const res = await resolve(title, { workflow: 'Crawler fleet stall watchdog', runUrl, exactTitle: true });
     if (res?.persisted === true) {
+      if (Number(res.number) !== Number(issue.number)) {
+        // Il lookup di `resolveGithubIssue` e' diverso dal nostro (gemelle con
+        // lo stesso titolo, indice di ricerca in ritardo): la misura e il
+        // controllo delle label stanno su un'altra issue. Lo si rende visibile.
+        warn(`::warning::[fleet-stall] misura commentata su #${issue.number} ma chiusa #${res.number}: verificare a mano le due issue.`);
+      }
       log(`[fleet-stall] #${res.number} chiusa: consegna sostenuta.`);
       return { action: 'closed', number: res.number, exitCode: 0 };
     }
@@ -654,7 +675,7 @@ async function main() {
     console.log(
       `[fleet-stall] consegna sostenuta: ${sustained.sustained} (${sustained.reason}: ${sustained.detail}); `
         + `gap massimo ${sustained.maxGapHours === null ? 'n/d' : `${sustained.maxGapHours.toFixed(2)}h`} `
-        + `nelle ultime ${sustained.windowHours}h (soglia ${CLOSE_MAX_GAP_HOURS}h); `
+        + `nelle ultime ${sustained.windowHours}h (soglia ${sustained.gapLimitHours}h); `
         + `giorni completi: ${sustained.perDay.map(({ day, groups }) => `${day}=${groups}`).join(', ')}.`,
     );
     const runUrl = process.env.GITHUB_SERVER_URL && process.env.GITHUB_REPOSITORY && process.env.GITHUB_RUN_ID

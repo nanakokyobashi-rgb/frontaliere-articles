@@ -231,9 +231,10 @@ test('il titolo e UNICO per entrambi i verdetti e fra apertura e chiusura', () =
   // è anche la chiave della chiusura: se apertura e chiusura usassero due
   // letterali, la chiusura cercherebbe una issue che nessuno apre.
   const src = readFileSync(new URL('../../scripts/ci/scan-crawler-fleet-stall.mjs', import.meta.url), 'utf8');
+  // L'invariante vero: il letterale esiste UNA volta (la costante). Che la
+  // chiusura cerchi proprio quella costante lo verifica il test comportamentale
+  // della chiusura (`calls.resolve[0].title`).
   assert.equal(STALL_ISSUE_TITLE, 'Crawler fleet: i gruppi non consegnano dati');
-  assert.match(src, /const title = STALL_ISSUE_TITLE;/, 'il ramo di apertura usa la costante');
-  assert.match(src, /title = STALL_ISSUE_TITLE,/, 'il default della chiusura usa la stessa costante');
   assert.equal(src.split(`'${STALL_ISSUE_TITLE}'`).length - 1, 1, 'il letterale compare una volta sola');
   assert.doesNotMatch(src, /const title = verdict\.reason === 'under-coverage'/);
 });
@@ -444,7 +445,7 @@ test('una issue con keep-open o agent:no-age-out non si chiude', async () => {
   const deliveries = fleetDays(['2026-09-29', '2026-09-30', '2026-10-01', '2026-10-02', '2026-10-03'])
     .filter((d) => d.atMs <= nowMs);
   const s = sustainedDelivery({ deliveries, nowMs, readable: true });
-  for (const name of ['keep-open', 'agent:no-age-out']) {
+  for (const name of ['keep-open', 'agent:no-age-out', 'Keep-Open']) {
     const { calls, deps } = fakeDeps({ issue: { number: 1579, title: STALL_ISSUE_TITLE, labels: [{ name }] } });
     const r = await closeRecoveredStallIssue({ sustained: s, deps, ...quiet });
     assert.equal(r.action, 'kept-open', name);
@@ -475,6 +476,33 @@ test('senza la misura persistita non si chiude, e una chiusura rifiutata esce no
   } finally {
     console.error = origError;
   }
+});
+
+test('la nota e il risultato riportano la soglia di gap APPLICATA, non la costante', async () => {
+  const nowMs = Date.parse('2026-10-03T18:37:00Z');
+  const deliveries = fleetDays(['2026-09-29', '2026-09-30', '2026-10-01', '2026-10-02', '2026-10-03'])
+    .filter((d) => d.atMs <= nowMs);
+  const s = sustainedDelivery({ deliveries, nowMs, readable: true, maxGapHours: 12 });
+  assert.equal(s.gapLimitHours, 12);
+  assert.equal(sustainedDelivery({ deliveries, nowMs, readable: true }).gapLimitHours, CLOSE_MAX_GAP_HOURS);
+  const { calls, deps } = fakeDeps();
+  await closeRecoveredStallIssue({ sustained: s, deps, ...quiet });
+  assert.ok(calls.comment[0].body.includes('(soglia 12h)'), 'la soglia applicata');
+  assert.ok(!calls.comment[0].body.includes(`${CLOSE_MAX_GAP_HOURS}h`), 'non la costante di default');
+});
+
+test('se resolve chiude una issue diversa da quella commentata, lo segnala', async () => {
+  const nowMs = Date.parse('2026-10-03T18:37:00Z');
+  const deliveries = fleetDays(['2026-09-29', '2026-09-30', '2026-10-01', '2026-10-02', '2026-10-03'])
+    .filter((d) => d.atMs <= nowMs);
+  const s = sustainedDelivery({ deliveries, nowMs, readable: true });
+  const { deps } = fakeDeps({ resolveImpl: () => ({ number: 1600, title: STALL_ISSUE_TITLE, persisted: true }) });
+  const warnings = [];
+  const r = await closeRecoveredStallIssue({ sustained: s, deps, log: () => {}, warn: (m) => warnings.push(m) });
+  assert.equal(r.action, 'closed');
+  assert.equal(r.number, 1600);
+  assert.equal(warnings.length, 1);
+  assert.match(warnings[0], /#1579 ma chiusa #1600/);
 });
 
 test('il gap a cavallo dell inizio finestra conta per intero', () => {
