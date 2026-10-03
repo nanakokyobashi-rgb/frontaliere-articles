@@ -99275,6 +99275,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-fisco-argovia-online-2026': {
+    title: 'Dichiarazione imposte svizzera: guida 2026 in Argovia',
+    description: 'Guida 2026 alla dichiarazione delle imposte svizzera in Argovia: tre livelli fiscali, moltiplicatore comunale, procedura online e valori indicizzati.',
+    keywords: 'frontalieri, ticino, svizzera, italia, dichiarazione, imposte, argovia, alla',
+    ogTitle: 'Dichiarazione imposte svizzera: guida 2026 in Argovia',
+    ogDescription: 'Nel 2026 il fisco svizzero è articolato su tre livelli. La guida mostra come distinguere IFD, imposte cantonali e comunali, quale ruolo hanno AFC/ESTV e amministrazioni cantonali e come trattare i valori aggiornati ogni anno.',
+    canonicalPath: '/articoli-svizzera/fisco-argovia-online-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Dichiarazione imposte svizzera: guida 2026 in Argovia",
+      "description": "Guida 2026 alla dichiarazione delle imposte svizzera in Argovia: tre livelli fiscali, moltiplicatore comunale, procedura online e valori indicizzati.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/fisco-argovia-online-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio fiscale cantonale svizzero con laptop e documenti della dichiarazione 2026."
+      },
+      "datePublished": "2026-10-03T11:59:46+00:00",
+      "dateModified": "2026-10-03T11:59:46+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/fisco-argovia-online-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
