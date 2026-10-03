@@ -99197,6 +99197,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-fisco-berna-guida-2026': {
+    title: 'Dichiarazione imposte svizzera: guida pratica 2026 a Berna',
+    description: 'Guida 2026 alla dichiarazione imposte in Svizzera: tre livelli fiscali, canton Berna, moltiplicatore comunale, scadenze, procedura online e autorità competenti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, dichiarazione, imposte, pratica, berna',
+    ogTitle: 'Dichiarazione imposte svizzera: guida pratica 2026 a Berna',
+    ogDescription: 'Tre livelli fiscali a Berna: la guida spiega chi gestisce l\'IFD e l\'IVA, come leggere il moltiplicatore comunale e distinguere imposte da AVS e LPP nei dati della retribuzione. Include la procedura online e le scadenze cantonali.',
+    canonicalPath: '/articoli-svizzera/fisco-berna-guida-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Dichiarazione imposte svizzera: guida pratica 2026 a Berna",
+      "description": "Guida 2026 alla dichiarazione imposte in Svizzera: tre livelli fiscali, canton Berna, moltiplicatore comunale, scadenze, procedura online e autorità competenti.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/fisco-berna-guida-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documenti fiscali svizzeri e calcolatrice su una scrivania, con focus sul canton Berna"
+      },
+      "datePublished": "2026-10-03T09:08:36+00:00",
+      "dateModified": "2026-10-03T09:08:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/fisco-berna-guida-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
