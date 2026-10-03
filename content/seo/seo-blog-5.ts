@@ -98977,6 +98977,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-como-pusher-consegne-domicilio': {
+    title: 'Como, arrestato pusher per consegne a domicilio',
+    description: 'Arrestato a Como un 48enne per detenzione ai fini di spaccio: sequestrati 51.45 grammi in 86 dosi, altri 141.18 grammi di cocaina e circa 4000 euro in contanti',
+    keywords: 'frontalieri, ticino, svizzera, italia, como, arrestato, pusher, consegne',
+    ogTitle: 'Como: arrestato il 48enne delle consegne a domicilio',
+    ogDescription: 'Como, la Polizia di Stato ha arrestato un 48enne cittadino italiano di origini domenicane. La Squadra Mobile ha accertato cessioni di cocaina a domicilio in città e periferia; sequestrati 51.45 grammi in 86 dosi, denaro, due telefoni e altra',
+    canonicalPath: '/articoli-frontaliere/como-pusher-consegne-domicilio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Como, arrestato pusher per consegne a domicilio",
+      "description": "Arrestato a Como un 48enne per detenzione ai fini di spaccio: sequestrati 51.45 grammi in 86 dosi, altri 141.18 grammi di cocaina e circa 4000 euro in contanti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/como-pusher-consegne-domicilio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Como, operazione della Polizia di Stato contro lo spaccio in città."
+      },
+      "datePublished": "2026-10-03T19:06:08+00:00",
+      "dateModified": "2026-10-03T19:06:08+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/como-pusher-consegne-domicilio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
