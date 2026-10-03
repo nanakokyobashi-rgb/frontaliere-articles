@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/%22basta-delocalizzazioni-posta-e-swisscom%22%2c-lanciata-una-petizione/91998672": {
-    "articleId": "petizione-delocalizzazioni-svizzera",
-    "ts": "2026-09-03T09:30:21.608Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/salari-salgono-dello-0%2c4%25-quest%27anno%2c-ma-l%27inflazione-sar%c3%a0-pi%c3%b9-alta/91999164": {
     "articleId": "salari-svizzera-2026-inflazione",
     "ts": "2026-09-03T11:50:43.394Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/ticino/politica/1954492/possono-evaristo-roncelli-m-hlemann-ticino": {
     "articleId": "lista-governo-ticino-2027",
     "ts": "2026-10-03T14:01:50.889Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/ge%3a-un-migliaio-a-manifestazione-pro-palestina%2c-sanzioni-a-israele/92162044": {
+    "articleId": "ginevra-manifestazione-palestina-sanzioni-2025",
+    "ts": "2026-10-03T16:24:51.329Z",
     "keyForm": 2
   }
 }
