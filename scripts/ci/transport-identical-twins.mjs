@@ -74,6 +74,13 @@
  *
  * Non mergia e non decide: scrive i file e aggiorna la baseline delle sole voci
  * copiate. La PR la apre il workflow, e passa dalla review come ogni altra.
+ *
+ * L'unica baseline aggiornata SENZA copia è quella dei `both-moved-converged`
+ * (site#6369): due lati mossi che oggi coincidono byte per byte. Lì non c'è una
+ * decisione da prendere, solo l'`--init --only` che il drift check indica e
+ * che nessuno eseguiva. La riattestazione rilegge i due lati al momento della
+ * scrittura e viaggia nella stessa PR. I `both-moved` DIVERGENTI restano senza
+ * azione automatica, ma escono per nome (`needsReconcile`, step summary).
  * Senza `--apply` non scrive niente: la modalità di default è il dry-run.
  *
  * La baseline che `--apply` registra è però quella dei byte SCARICATI, scritta
@@ -99,6 +106,8 @@
  *   SITE_REPO / SITE_REF   letti da `loop-drift-check.mjs` (stessa sorgente).
  *   GH_TOKEN               opzionale; il repo del sito è pubblico.
  *   TRANSPORT_MAX_FILES    default 25; tetto di file copiati in una passata.
+ *   TRANSPORT_MAX_REALIGN  default 25; tetto dei `both-moved-converged`
+ *                          riattestati (solo baseline) in una passata.
  *   TRANSPORT_MAX_FAILURE_RATIO  default 0.25; oltre questa frazione di fetch
  *                          fallite la passata esce ROSSA invece che verde.
  *
@@ -118,6 +127,7 @@ import { classify, siteFile } from './loop-drift-check.mjs';
 // issue, e importarla per leggere un numero tira dentro
 // `github-issue-creator.mjs` e le sue costanti di argv.
 import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
+import { markdownCodeSpan } from './transport-realign-body.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const MANIFEST_PATH = path.join(ROOT, 'scripts/ci/loop-sync-manifest.json');
@@ -150,6 +160,18 @@ const MAX_FILES = parsePositiveNum(process.env.TRANSPORT_MAX_FILES, 25, {
   // `TRANSPORT_MAX_FILES=0.5` da' `slice(0, 0)`, zero copie e un «niente da
   // portare» verde. E' lo stesso spegnimento silenzioso del `NaN`, per un
   // valore che `> 0` non intercetta (issue #871).
+  integer: true,
+});
+
+/**
+ * Tetto per passata dei convergenti riattestati (solo baseline, nessuna
+ * copia): non consuma `MAX_FILES`, ma un giorno in cui decine di voci
+ * convergono insieme resta una PR leggibile. Stessa validazione del tetto
+ * sopra, per la stessa ragione.
+ */
+const MAX_REALIGN = parsePositiveNum(process.env.TRANSPORT_MAX_REALIGN, 25, {
+  label: 'TRANSPORT_MAX_REALIGN',
+  tool: 'transport-identical-twins',
   integer: true,
 });
 
@@ -300,7 +322,7 @@ export function unreadableCouplings(couplings = []) {
  * la usa per il proprio verdetto e `main()` per costruire l'insieme dei path
  * bloccati per sempre che il tetto deve saper riconoscere.
  */
-export function permanentBlock(entry, { outOfScopePrefixes = [], couplings = [] } = {}) {
+export function permanentBlock(entry, { outOfScopePrefixes = [], couplings = [], writesFile = true } = {}) {
   if (entry.mode !== 'identical') {
     return `mode \`${entry.mode}\`: solo \`identical\` è copiabile così com'è`;
   }
@@ -311,7 +333,11 @@ export function permanentBlock(entry, { outOfScopePrefixes = [], couplings = [] 
   if (covered) {
     return `\`${covered}\` è outOfScope: ha già un trasporto suo, due canali sullo stesso path sono un conflitto`;
   }
-  const unsafe = unsafeTarget(entry.path);
+  // `writesFile: false` è la riattestazione di un convergente: scrive solo la
+  // baseline nel manifest, mai il file. La destinazione non diventa una
+  // scrittura, quindi né il path risalente né lo scope `workflows` del push
+  // hanno qualcosa da proteggere.
+  const unsafe = writesFile ? unsafeTarget(entry.path) : null;
   if (unsafe) return `destinazione non scrivibile (${unsafe})`;
   // L'insieme trasportabile dev'essere CHIUSO, non solo enumerato: un fixture
   // copiato da solo mette rossa la PR di trasporto, che resta aperta e spegne
@@ -335,6 +361,29 @@ export function permanentBlock(entry, { outOfScopePrefixes = [], couplings = [] 
 
 export function transportVerdict(entry, now, base, { outOfScopePrefixes = [], couplings = [] } = {}) {
   const state = classify(entry, now, base).state;
+  // `both-moved-converged`: i due lati si sono mossi dalla baseline ma OGGI
+  // coincidono byte per byte. Non c'è niente da copiare né da riconciliare,
+  // solo una baseline da registrare: è l'`--init --only` che il drift check
+  // indica e che nessun processo eseguiva, così la voce restava fuori baseline
+  // per sempre e gonfiava il conteggio del drift (site#6369, misurati 12 il
+  // 2026-10-03). Vale per i soli `identical` (un `adapted` resta fuori via
+  // `permanentBlock`) e un fixture segue la stessa regola di accoppiamento
+  // della copia. La guardia sugli hash è difesa in profondità: il verdetto di
+  // `classify()` la implica già.
+  if (state === 'both-moved-converged') {
+    const block = permanentBlock(entry, { outOfScopePrefixes, couplings, writesFile: false });
+    if (block) return { transport: false, realign: false, permanent: true, state, reason: block };
+    if (typeof now.site !== 'string' || now.site !== now.corpus) {
+      return { transport: false, realign: false, permanent: false, state, reason: 'hash dei due lati non confrontabili: niente riattestazione' };
+    }
+    return {
+      transport: false,
+      realign: true,
+      permanent: false,
+      state,
+      reason: 'entrambi i lati si sono mossi ma oggi coincidono byte per byte: nessuna copia, solo la baseline da riattestare',
+    };
+  }
   const forever = permanentBlock(entry, { outOfScopePrefixes, couplings });
   if (forever) return { transport: false, permanent: true, state, reason: forever };
   if (state !== 'site-ahead') {
@@ -439,6 +488,140 @@ export function closeTransportSet(candidates, { maxFiles = 25, alignedPaths = ne
 
   const chosen = candidates.filter((c) => kept.has(c.path));
   return { chosen, dropped, capped: candidates.length - chosen.length };
+}
+
+/**
+ * L'insieme dei convergenti da riattestare in questa passata: il tetto proprio
+ * (`TRANSPORT_MAX_REALIGN`, separato da `TRANSPORT_MAX_FILES` perché qui non
+ * si copia niente) e poi la regola dei fixture.
+ *
+ * Un fixture convergente si riattesta solo se i suoi accoppiamenti
+ * `identical` sono ALLINEATI alla fine della passata: `stable`, copiati in
+ * questa stessa passata, oppure riattestati con lui. Altrimenti la baseline
+ * dichiarerebbe allineato un golden il cui soggetto qui è ancora indietro. Gli
+ * accoppiamenti non `identical` non arrivano fin qui: li ferma già
+ * `permanentBlock` nel verdetto. Il tetto si applica PRIMA della chiusura, come
+ * in `closeTransportSet`: tagliare dopo potrebbe separare un fixture dal
+ * soggetto convergente che lo rendeva riattestabile.
+ *
+ *   candidates    [{ path, couplings }] in ordine, verdetto `realign: true`.
+ *   maxRealign    il tetto per passata.
+ *   settledPaths  Set dei path allineati senza questo insieme (`stable` e
+ *                 copiati in questa passata).
+ *
+ * Ritorna `{ chosen, dropped, overflow }`: `overflow` sono i convergenti oltre
+ * il tetto (al prossimo giro), `dropped` quelli fermati dalla regola dei
+ * fixture, con la ragione.
+ */
+export function closeRealignSet(candidates, { maxRealign = 25, settledPaths = new Set() } = {}) {
+  const overflow = candidates.slice(maxRealign).map((c) => c.path);
+  const kept = new Map(candidates.slice(0, maxRealign).map((c) => [c.path, c]));
+  const dropped = [];
+  for (let changed = true; changed; ) {
+    changed = false;
+    for (const [rel, c] of [...kept]) {
+      if (!isFixture(rel)) continue;
+      const unsettled = (c.couplings || [])
+        .filter((k) => k.mode === 'identical' && !settledPaths.has(k.path) && !kept.has(k.path))
+        .map((k) => k.path)
+        .sort();
+      if (!unsettled.length) continue;
+      kept.delete(rel);
+      dropped.push({
+        path: rel,
+        unsettled,
+        reason: `fixture convergente con accoppiamenti non allineati (${unsettled.join(', ')}): la baseline lo dichiarerebbe coerente con un soggetto che qui è ancora indietro`,
+      });
+      changed = true;
+    }
+  }
+  return { chosen: candidates.filter((c) => kept.has(c.path)), dropped, overflow };
+}
+
+/**
+ * Scrive la baseline dei convergenti scelti, RILEGGENDO i due lati al momento
+ * della scrittura: se uno dei due non è più quello letto dalla passata (qualcuno
+ * ha mosso un lato nel frattempo) la voce si salta con la sua ragione, perché
+ * l'uguaglianza che si attesta deve essere quella di ADESSO, non quella di
+ * qualche minuto fa. Nessun file viene scritto: i byte sono già uguali.
+ *
+ *   chosen     [{ entry, path, sitePath, now }] da `closeRealignSet`.
+ *   readSite   async (sitePath) => hash attuale del sito (`null` se assente).
+ *   readLocal  (path) => hash attuale di questo lato (`null` se assente).
+ *   today      data `YYYY-MM-DD` per `alignedAt`.
+ *
+ * Muta `entry.baseline` delle sole voci riattestate. Ritorna
+ * `{ realigned: [{ path, hash, from }], stale: [{ path, reason }] }`.
+ */
+export async function applyConvergedRealign(chosen, { readSite, readLocal, today }) {
+  const realigned = [];
+  const stale = [];
+  for (const { entry, path: rel, sitePath, now } of chosen) {
+    let site;
+    let corpus;
+    try {
+      site = await readSite(sitePath || rel);
+      corpus = readLocal(rel);
+    } catch (e) {
+      stale.push({ path: rel, reason: `rilettura fallita (${String(e.message || e).slice(0, 120)}): baseline non riattestata` });
+      continue;
+    }
+    if (site !== now.site || corpus !== now.corpus || site !== corpus || typeof site !== 'string') {
+      stale.push({
+        path: rel,
+        reason: `un lato è cambiato fra lettura e scrittura (sito ${now.site} → ${site}, corpus ${now.corpus} → ${corpus}): baseline non riattestata`,
+      });
+      continue;
+    }
+    const from = entry.baseline ? { site: entry.baseline.site ?? null, corpus: entry.baseline.corpus ?? null } : { site: null, corpus: null };
+    entry.baseline = { site, corpus, alignedAt: today };
+    realigned.push({ path: rel, hash: site, from });
+  }
+  return { realigned, stale };
+}
+
+/**
+ * Un `both-moved` DIVERGENTE su un `identical` non ha un'azione automatica
+ * (per scelta, come nel drift check: nessun merge automatico). Ma come numero
+ * nel report non lo possiede nessuno: questa voce lo trasforma in un elemento
+ * con nome, i due hash, la baseline e la sua età, per lo step summary e per
+ * l'output `needs_reconcile` del workflow.
+ */
+export function reconcileItem(entry, now, today) {
+  const base = entry.baseline || {};
+  const alignedAt = base.alignedAt || null;
+  const t = Date.parse(`${today}T00:00:00Z`);
+  const a = alignedAt ? Date.parse(`${alignedAt}T00:00:00Z`) : NaN;
+  return {
+    path: entry.path,
+    sitePath: entry.sitePath || entry.path,
+    site: now.site,
+    corpus: now.corpus,
+    baseline: { site: base.site ?? null, corpus: base.corpus ?? null },
+    alignedAt,
+    ageDays: Number.isFinite(t) && Number.isFinite(a) ? Math.round((t - a) / 86400000) : null,
+  };
+}
+
+/** Markdown dello step summary: convergenti riattestati/rinviati e divergenti per nome. */
+export function reconcileSummaryMarkdown({ realign = [], realignDropped = [], realignOverflow = [], needsReconcile = [] } = {}) {
+  const lines = ['### Gemelli `identical` modificati su entrambi i lati', ''];
+  const code = (v) => markdownCodeSpan(String(v));
+  lines.push(`- Convergenti da riattestare (solo baseline, nessuna copia): **${realign.length}**`);
+  for (const r of realign) lines.push(`  - ${code(r.path)}`);
+  if (realignOverflow.length) {
+    lines.push(`- Convergenti oltre il tetto per passata: **${realignOverflow.length}** (al prossimo giro)`);
+    for (const p of realignOverflow) lines.push(`  - ${code(p)}`);
+  }
+  for (const d of realignDropped) lines.push(`- Non riattestato ${code(d.path)}: ${d.reason}`);
+  lines.push(`- Divergenti da riconciliare per file (nessuna azione automatica): **${needsReconcile.length}**`);
+  if (needsReconcile.length) {
+    lines.push('', '| path | sito | corpus | baseline sito / corpus | alignedAt | giorni |', '|---|---|---|---|---|---|');
+    for (const n of needsReconcile) {
+      lines.push(`| ${code(n.path)} | ${code(n.site)} | ${code(n.corpus)} | ${code(n.baseline.site)} / ${code(n.baseline.corpus)} | ${n.alignedAt || 'n/d'} | ${n.ageDays ?? 'n/d'} |`);
+    }
+  }
+  return `${lines.join('\n')}\n`;
 }
 
 /**
@@ -1531,6 +1714,20 @@ function realignMain(listFile) {
   return 0;
 }
 
+/**
+ * Scrive lo step summary e l'output `needs_reconcile` (JSON su una riga) solo
+ * dentro GitHub Actions. Un errore di scrittura non rende rossa la passata: il
+ * report sullo stdout resta la fonte, questo è il suo riepilogo.
+ */
+function writeWorkflowReport(report) {
+  try {
+    if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, reconcileSummaryMarkdown(report));
+    if (process.env.GITHUB_OUTPUT) fs.appendFileSync(process.env.GITHUB_OUTPUT, `needs_reconcile=${JSON.stringify(report.needsReconcile)}\n`);
+  } catch (e) {
+    console.warn(`::warning::[transport-identical-twins] step summary/output non scritti: ${String(e.message || e).slice(0, 160)}`);
+  }
+}
+
 async function main() {
   // `--realign lista.tsv` (con lo spazio) e `--realign=` vuoto lascerebbero
   // `REALIGN_FILE` a `null`: si cadrebbe qui sotto nel dry-run di rete — exit
@@ -1554,6 +1751,8 @@ async function main() {
   const couplingDelta = [];
   const alignedPaths = new Set();
   const blockedForever = new Set();
+  const realignCandidates = [];
+  const needsReconcile = [];
   let couplingSnapshotChanged = false;
   let attempted = 0;
   let missingOnSite = 0;
@@ -1602,6 +1801,13 @@ async function main() {
     }
 
     const verdict = transportVerdict(entry, now, base, { outOfScopePrefixes, couplings });
+    if (verdict.realign) {
+      realignCandidates.push({ entry, path: rel, sitePath, now, couplings });
+      continue;
+    }
+    // Il divergente si nomina qualunque sia il suo blocco (anche un workflow
+    // senza scope): la riconciliazione è comunque a mano.
+    if (verdict.state === 'both-moved') needsReconcile.push(reconcileItem(entry, now, today));
     if (!verdict.transport) {
       skipped.push({ path: rel, state: verdict.state, reason: verdict.reason });
       // Un no PERMANENTE su un file che il sito ha gia' portato avanti non e'
@@ -1664,7 +1870,28 @@ async function main() {
     transported.push({ path: rel, sitePath, from: base.site, to: now.site });
   }
 
-  const manifestChanged = APPLY && (transported.length > 0 || couplingSnapshotChanged);
+  // I convergenti DOPO la copia: un fixture convergente si riattesta solo se i
+  // suoi accoppiamenti sono allineati a fine passata, e i path appena copiati
+  // lo sono. Non scrivono file, quindi non consumano `MAX_FILES`.
+  const settledPaths = new Set([...alignedPaths, ...chosen.map((c) => c.path)]);
+  const realignPlan = closeRealignSet(realignCandidates, { maxRealign: MAX_REALIGN, settledPaths });
+  for (const d of realignPlan.dropped) skipped.push({ path: d.path, state: 'both-moved-converged', reason: d.reason });
+  let realign = realignPlan.chosen.map((c) => ({ path: c.path, hash: c.now.site, from: { site: c.entry.baseline?.site ?? null, corpus: c.entry.baseline?.corpus ?? null } }));
+  let realignStale = [];
+  if (APPLY && realignPlan.chosen.length) {
+    const applied = await applyConvergedRealign(realignPlan.chosen, {
+      readSite: async (sitePath) => {
+        const buf = await siteFile(sitePath);
+        return buf === null ? null : sha256(buf);
+      },
+      readLocal: localHash,
+      today,
+    });
+    realign = applied.realigned;
+    realignStale = applied.stale;
+  }
+
+  const manifestChanged = APPLY && (transported.length > 0 || realign.length > 0 || couplingSnapshotChanged);
   if (APPLY && manifestChanged) {
     fs.writeFileSync(MANIFEST_PATH, `${JSON.stringify(manifest, null, 2)}\n`);
   }
@@ -1681,6 +1908,11 @@ async function main() {
       manifestChanged,
       transported,
       capped,
+      realign,
+      realignOverflow: realignPlan.overflow,
+      realignDropped: realignPlan.dropped,
+      realignStale,
+      needsReconcile,
       couplingDelta,
       failed,
       missingOnSite,
@@ -1699,12 +1931,22 @@ async function main() {
       for (const c of d.removed) console.log(`     - ${c.path} (${c.mode})`);
     }
     if (capped) console.log(`  ⏸ altri ${capped} candidati non copiati oggi (tetto di ${MAX_FILES} file, più le metà che il taglio avrebbe separato): restano al prossimo giro`);
+    console.log(`  ${realign.length} convergenti da riattestare (solo baseline), ${needsReconcile.length} divergenti da riconciliare a mano`);
+    for (const r of realign) console.log(`  ⟳ ${r.path}: baseline ${APPLY ? 'riattestata' : 'da riattestare'} su ${r.hash} (i due lati coincidono)`);
+    if (realignPlan.overflow.length) console.log(`  ⏸ altri ${realignPlan.overflow.length} convergenti oltre il tetto di ${MAX_REALIGN}: restano al prossimo giro (${realignPlan.overflow.join(', ')})`);
+    for (const s of realignStale) console.log(`  ↷ ${s.path}: ${s.reason}`);
+    for (const n of needsReconcile) console.log(`  ⇄ ${n.path}: da riconciliare (sito ${n.site}, corpus ${n.corpus}, baseline del ${n.alignedAt || 'n/d'})`);
     for (const f of failed) console.log(`  ⚠ ${f.path}: ${f.reason}`);
     for (const m of manual) console.log(`  ⛔ ${m.path}: ${m.reason}`);
     // Gli skip attivi — quelli che una persona deve guardare — sono i soli
     // stampati: elencare 150 `stable` ogni giorno è la riga che nessuno legge.
     for (const s of skipped.filter((x) => x.state !== 'stable')) console.log(`  · ${s.path}: ${s.reason}`);
   }
+
+  // Lo step summary e l'output `needs_reconcile` li scrive il solo dry-run:
+  // gira a ogni passata (anche senza PAT), e l'apply che segue nello stesso
+  // job li duplicherebbe.
+  if (!APPLY) writeWorkflowReport({ realign, realignDropped: realignPlan.dropped, realignOverflow: realignPlan.overflow, needsReconcile });
 
   if (dark.red) {
     // Un fallimento di rete arrivava prima del ramo `manual`: il codice 1 era

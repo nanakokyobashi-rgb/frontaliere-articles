@@ -40,6 +40,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import crypto from 'node:crypto';
 import {
+  applyConvergedRealign,
+  closeRealignSet,
   closeTransportSet,
   couplingDiff,
   couplingBlockers,
@@ -55,6 +57,8 @@ import {
   readsContentOf,
   parseRatio,
   permanentBlock,
+  reconcileItem,
+  reconcileSummaryMarkdown,
   realignFromCommitted,
   couplingScanRoot,
   hasTypeScriptTwin,
@@ -1218,4 +1222,164 @@ test('un attributo Git di normalizzazione blocca il realign prima della baseline
   assert.equal(result.normalization.length, 1);
   assert.deepEqual(result.corrections, []);
   assert.deepEqual(manifest, before);
+});
+
+// ---------------------------------------------------------------------------
+// `both-moved-converged`: riattestazione della baseline senza copia (site#6369)
+// ---------------------------------------------------------------------------
+//
+// Il drift check riconosce i due lati mossi che oggi coincidono byte per byte
+// e prescrive `--init --only`, ma nessun processo lo eseguiva: 12 voci fuori
+// baseline il 2026-10-03, ferme negli stessi tre report. Il trasporto ora le
+// riattesta nella sua PR. Titolo se questo osservatore scatta:
+// «Trasporto dei gemelli: voce identical convergente lasciata fuori baseline».
+
+const CONVERGED_NOW = { site: 'dddd', corpus: 'dddd' };
+const BASE_MOVED = { site: 'aaaa', corpus: 'bbbb' };
+
+test('convergente `identical`: nessuna copia, baseline da riattestare', () => {
+  const v = transportVerdict(twin({ baseline: BASE_MOVED }), CONVERGED_NOW, BASE_MOVED);
+  assert.equal(v.state, 'both-moved-converged');
+  assert.equal(v.transport, false, 'i byte sono gia\' uguali: copiare non porta niente');
+  assert.equal(v.realign, true);
+  assert.equal(v.permanent, false);
+});
+
+test('la riattestazione scrive la baseline ai byte CORRENTI dei due lati', async () => {
+  const entry = twin({ baseline: { ...BASE_MOVED, alignedAt: '2026-09-01' } });
+  const { realigned, stale } = await applyConvergedRealign(
+    [{ entry, path: entry.path, sitePath: entry.path, now: CONVERGED_NOW }],
+    { readSite: async () => 'dddd', readLocal: () => 'dddd', today: '2026-10-03' },
+  );
+  assert.deepEqual(stale, []);
+  assert.equal(realigned.length, 1);
+  assert.deepEqual(entry.baseline, { site: 'dddd', corpus: 'dddd', alignedAt: '2026-10-03' });
+  assert.deepEqual(realigned[0].from, { site: 'aaaa', corpus: 'bbbb' });
+  // Il giro dopo il drift check legge `stable`: la voce esce dal conteggio.
+  assert.equal(classify(entry, CONVERGED_NOW, entry.baseline).state, 'stable');
+});
+
+test('both-moved DIVERGENTE: nessuna riattestazione, ma nominato con hash ed eta\'', () => {
+  const entry = twin({ baseline: { ...BASE_MOVED, alignedAt: '2026-09-23' } });
+  const now = { site: 'dddd', corpus: 'eeee' };
+  const v = transportVerdict(entry, now, entry.baseline);
+  assert.equal(v.state, 'both-moved');
+  assert.equal(v.transport, false);
+  assert.ok(!v.realign, 'un divergente non si riattesta MAI: sarebbe una sepoltura del drift');
+  const item = reconcileItem(entry, now, '2026-10-03');
+  assert.equal(item.path, entry.path);
+  assert.equal(item.site, 'dddd');
+  assert.equal(item.corpus, 'eeee');
+  assert.deepEqual(item.baseline, { site: 'aaaa', corpus: 'bbbb' });
+  assert.equal(item.alignedAt, '2026-09-23');
+  assert.equal(item.ageDays, 10);
+  const md = reconcileSummaryMarkdown({ needsReconcile: [item] });
+  assert.ok(md.includes(entry.path), 'lo step summary nomina il path, non solo il numero');
+  assert.ok(md.includes('2026-09-23'));
+});
+
+test('un `adapted` convergente non si tocca', () => {
+  const entry = twin({ path: 'scripts/ci/auto-merge-eval.mjs', mode: 'adapted', reason: 'gate in piu\' qui', baseline: BASE_MOVED });
+  const v = transportVerdict(entry, CONVERGED_NOW, BASE_MOVED);
+  assert.equal(v.transport, false);
+  assert.equal(v.realign, false);
+  assert.equal(v.permanent, true);
+});
+
+test('un fixture convergente accoppiato a un non `identical` non si riattesta', () => {
+  const entry = twin({ path: 'host/tests/shell-contract-functions.golden.json', baseline: BASE_MOVED });
+  const v = transportVerdict(entry, CONVERGED_NOW, BASE_MOVED, {
+    couplings: [{ path: 'host/siteShellBootstrap.ts', mode: 'adapted' }],
+  });
+  assert.equal(v.realign, false);
+  assert.match(v.reason, /fixture/);
+});
+
+test('un fixture convergente con il soggetto `identical` NON allineato non si riattesta', () => {
+  const fixture = { path: 'host/tests/x.golden.json', couplings: [{ path: 'host/x.ts', mode: 'identical' }] };
+  const blocked = closeRealignSet([fixture], { settledPaths: new Set() });
+  assert.deepEqual(blocked.chosen, []);
+  assert.equal(blocked.dropped.length, 1);
+  assert.deepEqual(blocked.dropped[0].unsettled, ['host/x.ts']);
+  // Soggetto `stable` (o copiato in questa passata): il fixture si riattesta.
+  const settled = closeRealignSet([fixture], { settledPaths: new Set(['host/x.ts']) });
+  assert.deepEqual(settled.chosen.map((c) => c.path), [fixture.path]);
+  // Soggetto convergente riattestato insieme: coerente anche lui.
+  const together = closeRealignSet([fixture, { path: 'host/x.ts', couplings: [] }], { settledPaths: new Set() });
+  assert.deepEqual(together.chosen.map((c) => c.path).sort(), ['host/tests/x.golden.json', 'host/x.ts']);
+});
+
+test('il tetto non separa un fixture convergente dal soggetto convergente oltre il taglio', () => {
+  const fixture = { path: 'host/tests/x.golden.json', couplings: [{ path: 'host/x.ts', mode: 'identical' }] };
+  const r = closeRealignSet([fixture, { path: 'host/x.ts', couplings: [] }], { maxRealign: 1, settledPaths: new Set() });
+  assert.deepEqual(r.chosen, []);
+  assert.deepEqual(r.overflow, ['host/x.ts']);
+  assert.equal(r.dropped.length, 1);
+});
+
+test('un lato cambiato fra lettura e scrittura: la voce si salta e la baseline resta', async () => {
+  const entry = twin({ baseline: { ...BASE_MOVED, alignedAt: '2026-09-01' } });
+  const before = structuredClone(entry.baseline);
+  const sitePass = await applyConvergedRealign(
+    [{ entry, path: entry.path, sitePath: entry.path, now: CONVERGED_NOW }],
+    { readSite: async () => 'ffff', readLocal: () => 'dddd', today: '2026-10-03' },
+  );
+  assert.deepEqual(sitePass.realigned, []);
+  assert.equal(sitePass.stale.length, 1);
+  assert.match(sitePass.stale[0].reason, /fra lettura e scrittura/);
+  assert.deepEqual(entry.baseline, before);
+  const corpusPass = await applyConvergedRealign(
+    [{ entry, path: entry.path, sitePath: entry.path, now: CONVERGED_NOW }],
+    { readSite: async () => 'dddd', readLocal: () => 'ffff', today: '2026-10-03' },
+  );
+  assert.deepEqual(corpusPass.realigned, []);
+  assert.deepEqual(entry.baseline, before);
+  const failedRead = await applyConvergedRealign(
+    [{ entry, path: entry.path, sitePath: entry.path, now: CONVERGED_NOW }],
+    { readSite: async () => { throw new Error('HTTP 503'); }, readLocal: () => 'dddd', today: '2026-10-03' },
+  );
+  assert.deepEqual(failedRead.realigned, []);
+  assert.match(failedRead.stale[0].reason, /rilettura fallita/);
+  assert.deepEqual(entry.baseline, before);
+});
+
+test('oltre il tetto dei convergenti: si riattesta fino al tetto, l\'eccedenza resta nominata', () => {
+  const n = 26;
+  const candidates = Array.from({ length: n }, (_, i) => ({ path: `scripts/ci/c${String(i).padStart(2, '0')}.mjs`, couplings: [] }));
+  const r = closeRealignSet(candidates, { maxRealign: 25 });
+  assert.equal(r.chosen.length, 25);
+  assert.deepEqual(r.overflow, [candidates[n - 1].path]);
+  assert.deepEqual(r.dropped, []);
+  const md = reconcileSummaryMarkdown({ realign: r.chosen, realignOverflow: r.overflow });
+  assert.ok(md.includes(candidates[n - 1].path), 'l\'eccedenza ha la sua riga');
+});
+
+test('un convergente sotto `.github/workflows/` si riattesta: si scrive solo il manifest', () => {
+  const previous = process.env.PAT_WORKFLOWS_SCOPE;
+  delete process.env.PAT_WORKFLOWS_SCOPE;
+  try {
+    const entry = twin({ path: '.github/workflows/tests.yml', baseline: BASE_MOVED });
+    const v = transportVerdict(entry, CONVERGED_NOW, BASE_MOVED);
+    assert.equal(v.realign, true, 'nessun file scritto: lo scope `workflows` del push non c\'entra');
+    // La copia di un site-ahead resta fuori come prima.
+    assert.equal(transportVerdict(entry, { site: 'bbbb', corpus: 'aaaa' }, BASE).transport, false);
+  } finally {
+    if (previous === undefined) delete process.env.PAT_WORKFLOWS_SCOPE;
+    else process.env.PAT_WORKFLOWS_SCOPE = previous;
+  }
+});
+
+test('invariante: i verdetti di site-ahead, corpus-ahead e undeclared-drift non cambiano forma', () => {
+  const cases = [
+    [twin(), { site: 'bbbb', corpus: 'aaaa' }, BASE, 'site-ahead', true],
+    [twin(), { site: 'aaaa', corpus: 'cccc' }, BASE, 'corpus-ahead', false],
+    [twin({ baseline: { site: 'aaaa', corpus: 'cccc' } }), { site: 'aaaa', corpus: 'cccc' }, { site: 'aaaa', corpus: 'cccc' }, 'undeclared-drift', false],
+  ];
+  for (const [entry, now, base, state, transport] of cases) {
+    const v = transportVerdict(entry, now, base);
+    assert.equal(v.state, state);
+    assert.equal(v.transport, transport);
+    assert.equal(v.permanent, false);
+    assert.deepEqual(Object.keys(v).sort(), ['permanent', 'reason', 'state', 'transport'], `${state}: nessun campo nuovo`);
+  }
 });
