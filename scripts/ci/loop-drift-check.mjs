@@ -668,12 +668,134 @@ function localHash(rel, { committed = false } = {}) {
  * raw.githubusercontent basta e non consuma rate-limit autenticato.
  * 404 → null (il file non esiste più là: è un segnale, non un errore).
  */
-async function siteFile(rel) {
-  const url = `https://raw.githubusercontent.com/${SITE_REPO}/${SITE_REF}/${rel}`;
+async function siteFile(rel, ref = SITE_REF) {
+  const url = `https://raw.githubusercontent.com/${SITE_REPO}/${ref}/${rel}`;
   const res = await rawFetch(url);
   if (res.status === 404) return null;
   if (!res.ok) throw new Error(`GET ${rel} → HTTP ${res.status}`);
   return Buffer.from(await res.arrayBuffer());
+}
+
+/**
+ * ## `reusable-pin-drift`: il pin di un workflow riusabile del sito
+ *
+ * Un caller di questo repo che invoca un workflow riusabile del sito (`uses: <sito>/<workflow>@<sha>`)
+ * non e' un gemello: non c'e' una copia locale da confrontare, quindi il
+ * manifest non lo vede. Ma il pin congela SOLO lo YAML: se quel workflow fa
+ * checkout del sito a `main`, gira YAML vecchio contro codice nuovo. E' cosi'
+ * che `housekeeping-jobs.yml` e' rimasto rosso due notti (run 36997521307 e
+ * 37115405583, issue #1926): la lista sparse dello SHA pinnato non conteneva
+ * `packages/articles/engine/shared`, che il codice di main importava gia'.
+ *
+ * La domanda e' la stessa del resto del file — «il sito e' andato avanti, qui
+ * no» — posta al blob del workflow al ref pinnato contro quello di `SITE_REF`.
+ */
+const REUSABLE_PIN_STATE = 'reusable-pin-drift';
+const FULL_COMMIT_SHA_RE = /^[0-9a-f]{40}$/;
+const WORKFLOWS_DIR_REL = '.github/workflows';
+
+/**
+ * I `uses:` di `source` che chiamano un workflow riusabile di `siteRepo`.
+ * Lavora per riga: una riga commentata non comincia con `uses:` e resta fuori.
+ *
+ * @returns {{ sitePath: string, ref: string, line: number }[]}
+ */
+function siteReusablePins(source, { siteRepo = SITE_DEFAULT_REPO } = {}) {
+  const prefix = `${siteRepo.toLowerCase()}/`;
+  const pins = [];
+  String(source).split('\n').forEach((raw, i) => {
+    const m = raw.match(/^\s*(?:-\s*)?uses:\s*['"]?([^\s'"#]+)/);
+    if (!m) return;
+    const at = m[1].lastIndexOf('@');
+    const target = at < 0 ? m[1] : m[1].slice(0, at);
+    if (!target.toLowerCase().startsWith(`${prefix}.github/workflows/`)) return;
+    pins.push({ sitePath: target.slice(prefix.length), ref: at < 0 ? '' : m[1].slice(at + 1), line: i + 1 });
+  });
+  return pins;
+}
+
+/**
+ * Verdetto PURO su un pin. `pinnedHash`/`headHash` sono gli hash del workflow
+ * al ref pinnato e a `siteRef`; `null` = il file non esiste a quel ref.
+ */
+function reusablePinVerdict({ sitePath, ref, pinnedHash = null, headHash = null, siteRef = SITE_DEFAULT_REF }) {
+  const bump = `Porta il pin allo SHA completo dell'ultimo commit di \`${siteRef}\` che ha toccato \`${sitePath}\` (\`git log origin/${siteRef} -1 --format=%H -- ${sitePath}\`).`;
+  if (!FULL_COMMIT_SHA_RE.test(ref || '')) {
+    return {
+      state: REUSABLE_PIN_STATE,
+      actionable: true,
+      headline: `\`${sitePath}\` e' chiamato con il ref \`${ref || '(nessuno)'}\`, non con uno SHA completo`,
+      detail: `Un ref flottante fa girare qui qualunque cosa il sito mergi, senza una PR di questo repo che lo dica. ${bump}`,
+    };
+  }
+  if (headHash === null) {
+    return {
+      state: REUSABLE_PIN_STATE,
+      actionable: true,
+      headline: `\`${sitePath}\` non esiste piu' su \`${siteRef}\` del sito`,
+      detail: `Il pin \`${ref.slice(0, 12)}\` continua a eseguire un workflow che il sito ha rimosso o rinominato: il caller va riportato al nuovo path, o ritirato.`,
+    };
+  }
+  if (pinnedHash === null) {
+    return {
+      state: REUSABLE_PIN_STATE,
+      actionable: true,
+      headline: `\`${sitePath}\` non esiste al commit pinnato \`${ref.slice(0, 12)}\``,
+      detail: `Il caller fallisce alla risoluzione del workflow. ${bump}`,
+    };
+  }
+  if (pinnedHash !== headHash) {
+    return {
+      state: REUSABLE_PIN_STATE,
+      actionable: true,
+      headline: `il sito ha cambiato \`${sitePath}\` dopo il commit pinnato \`${ref.slice(0, 12)}\``,
+      detail:
+        `Il pin congela lo YAML, non il codice: se il workflow fa checkout del sito a \`${siteRef}\`, qui gira ` +
+        `la sua versione vecchia contro il codice nuovo (issue #1926: lista sparse rimasta indietro, \`ERR_MODULE_NOT_FOUND\`). ${bump}`,
+    };
+  }
+  return { state: 'stable', actionable: false, headline: 'pin allineato al sito', detail: '' };
+}
+
+/** I workflow di QUESTO checkout: `[{ path, source }]`. */
+function localWorkflowSources() {
+  const dir = path.join(ROOT, WORKFLOWS_DIR_REL);
+  if (!fs.existsSync(dir)) return [];
+  return fs.readdirSync(dir)
+    .filter((name) => /\.ya?ml$/.test(name))
+    .sort()
+    .map((name) => ({ path: `${WORKFLOWS_DIR_REL}/${name}`, source: fs.readFileSync(path.join(dir, name), 'utf8') }));
+}
+
+/**
+ * Una riga di report per ogni pin. `readSite(sitePath, ref)` e' iniettata: in
+ * CLI e' `siteFile`, nei test una tabella — nessuna rete nei guard.
+ */
+async function reusablePinResults({ workflows, readSite, siteRepo = SITE_REPO, siteRef = SITE_REF }) {
+  const out = [];
+  const headCache = new Map();
+  const hashAt = async (sitePath, ref) => {
+    const bytes = await readSite(sitePath, ref);
+    return bytes === null ? null : sha256(bytes);
+  };
+  for (const wf of workflows) {
+    for (const pin of siteReusablePins(wf.source, { siteRepo })) {
+      const row = { path: wf.path, mode: 'reusable-pin', sitePath: pin.sitePath, ref: pin.ref };
+      try {
+        let hashes = {};
+        if (FULL_COMMIT_SHA_RE.test(pin.ref)) {
+          if (!headCache.has(pin.sitePath)) headCache.set(pin.sitePath, await hashAt(pin.sitePath, siteRef));
+          hashes = { headHash: headCache.get(pin.sitePath), pinnedHash: await hashAt(pin.sitePath, pin.ref) };
+        }
+        out.push({ ...row, ...reusablePinVerdict({ ...pin, ...hashes, siteRef }), hashes });
+      } catch (e) {
+        // PROCEED-SAFE: come nel ciclo principale, una lettura fallita non e'
+        // un verdetto. Resta visibile come `check-failed`, mai un falso rosso.
+        out.push({ ...row, state: 'check-failed', actionable: false, headline: `verifica del pin fallita: ${String(e.message || e).slice(0, 80)}`, detail: '' });
+      }
+    }
+  }
+  return out;
 }
 
 function scalarFingerprintVerdict(entry, { site, corpus }) {
@@ -2050,6 +2172,10 @@ async function main() {
     }
   }
 
+  // I pin dei workflow riusabili del sito: non sono voci del manifest (non
+  // esiste una copia locale), ma la rete per leggerli e' gia' qui.
+  results.push(...await reusablePinResults({ workflows: localWorkflowSources(), readSite: siteFile }));
+
   const actionable = results.filter((r) => r.actionable);
 
   if (AS_JSON) {
@@ -2064,7 +2190,7 @@ async function main() {
       console.log('Niente che richieda una decisione: i due cicli sono allineati, o divergono solo dove dichiarato.');
     } else {
       // Ordine per urgenza decisionale, non alfabetico.
-      const ORDER = ['ghost-baseline', 'corpus-only-twin', 'identical-unmirrorable', 'stranded-twin', 'undeclared-drift', 'both-moved', 'both-moved-converged', 'site-ahead', 'corpus-only-pending-landed', 'missing-here', 'removed-on-site', 'corpus-ahead', 'corpus-only-pending'];
+      const ORDER = ['ghost-baseline', REUSABLE_PIN_STATE, 'corpus-only-twin', 'identical-unmirrorable', 'stranded-twin', 'undeclared-drift', 'both-moved', 'both-moved-converged', 'site-ahead', 'corpus-only-pending-landed', 'missing-here', 'removed-on-site', 'corpus-ahead', 'corpus-only-pending'];
       actionable.sort((a, b) => ORDER.indexOf(a.state) - ORDER.indexOf(b.state));
       for (const r of actionable) {
         console.log(`  [${r.state}] ${r.path}`);
@@ -2095,6 +2221,7 @@ async function main() {
       '',
       section('provenance-rate-limited', '⚠️ Provenienza non verificata — verdetto locale conservato'),
       section('ghost-baseline', '💀 Baseline fantasma — mai esistita nella storia esaminata'),
+      section(REUSABLE_PIN_STATE, '📌 Pin di un workflow riusabile del sito rimasto indietro'),
       section('stranded-twin', `🚨 Gemello \`identical\` fermo indietro da oltre ${STRANDED_AFTER_DAYS} giorni — nessun trasporto lo porta`),
       section('corpus-only-twin', '🔴 Dichiarato `corpus-only`, ma il gemello esiste sul sito'),
       section('identical-unmirrorable', '🔴 Dichiarato `identical`, ma importa un modulo che il sito non ha'),
@@ -2158,4 +2285,4 @@ if (process.argv[1] && process.argv[1].endsWith('loop-drift-check.mjs')) {
 // baseline con LA STESSA regola con cui la pesa il cron, altrimenti una voce
 // accettata in PR verrebbe dichiarata fantasma il mattino dopo — o peggio, il
 // contrario. Una seconda copia della regola lo renderebbe inevitabile.
-export { classify, parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, initAttestVerdict, initPassOutcome, initBaseline, initOnlyManifestUnchanged, localHash, ghostVerdict, strandedVerdict, provenanceRateLimitVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, implicitPinnersVerdict, declaredAbsentCiters, crawlerContractIsActive, resetPinnerIndex, DECLARED_ABSENT_REGISTRY_REL, CRAWLER_CONTRACT_REL, DORMANT_WITH_CRAWLER_CONTRACT, resolvedLocalImports, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch, checkBaselineProvenance };
+export { classify, parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, initAttestVerdict, initPassOutcome, initBaseline, initOnlyManifestUnchanged, localHash, ghostVerdict, strandedVerdict, provenanceRateLimitVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, implicitPinnersVerdict, declaredAbsentCiters, crawlerContractIsActive, resetPinnerIndex, DECLARED_ABSENT_REGISTRY_REL, CRAWLER_CONTRACT_REL, DORMANT_WITH_CRAWLER_CONTRACT, resolvedLocalImports, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch, checkBaselineProvenance, siteReusablePins, reusablePinVerdict, reusablePinResults, localWorkflowSources, REUSABLE_PIN_STATE };
