@@ -99392,6 +99392,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-lista-governo-ticino-2027': {
+    title: 'Avanti con Ticino&Lavoro: lista Governo 2027 | Frontaliere Ticino',
+    description: 'Avanti con Ticino&Lavoro presenta a Lamone cinque candidati al Consiglio di Stato del Ticino per le elezioni dell\'11 aprile 2027: trasparenza e partecipazione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, avanti, lavoro, lista, governo',
+    ogTitle: 'Avanti con Ticino&Lavoro: lista Governo 2027',
+    ogDescription: 'Avanti con Ticino&Lavoro presenta a Lamone cinque candidati al Consiglio di Stato: Sergio Savoia, Amalia Mirante, Valentina Mühlemann, Evaristo Roncelli e Giovanni Albertini. L\'appello richiama partecipazione e trasparenza.',
+    canonicalPath: '/articoli-svizzera/lista-governo-ticino-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Avanti con Ticino&Lavoro: lista Governo 2027",
+      "description": "Avanti con Ticino&Lavoro presenta a Lamone cinque candidati al Consiglio di Stato del Ticino per le elezioni dell'11 aprile 2027: trasparenza e partecipazione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/lista-governo-ticino-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Presentazione politica a Lamone per la lista al Governo ticinese"
+      },
+      "datePublished": "2026-10-03T14:01:50+00:00",
+      "dateModified": "2026-10-03T14:01:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/lista-governo-ticino-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
