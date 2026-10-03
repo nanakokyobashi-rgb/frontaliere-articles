@@ -98314,6 +98314,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-furgoncino-fiamme-paradiso-melide': {
+    title: 'Principio d\'incendio a un furgoncino tra Paradiso e Melide',
+    description: 'Un furgoncino aziendale ha avuto un principio d\'incendio poco prima delle 17 tra Paradiso e Melide. Il TCS segnala rallentamenti e possibili lunghi ritardi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, principio, incendio, furgoncino, paradiso',
+    ogTitle: 'Principio d\'incendio a Melide: TCS segnala ritardi',
+    ogDescription: 'La serata era segnata da traffico da bollino nero sulle strade del cantone. Il conducente ha accostato il furgoncino in Via Cantonale e cercato aiuto tra le auto in colonna; nessuno è rimasto ferito. Il TCS segnala rallentamenti.',
+    canonicalPath: '/articoli-frontaliere/furgoncino-fiamme-paradiso-melide',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Principio d'incendio a un furgoncino tra Paradiso e Melide",
+      "description": "Un furgoncino aziendale ha avuto un principio d'incendio poco prima delle 17 tra Paradiso e Melide. Il TCS segnala rallentamenti e possibili lunghi ritardi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/furgoncino-fiamme-paradiso-melide.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Furgoncino fermo sulla strada cantonale tra Paradiso e Melide dopo un principio d'incendio"
+      },
+      "datePublished": "2026-10-03T05:12:21+00:00",
+      "dateModified": "2026-10-03T05:12:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/furgoncino-fiamme-paradiso-melide/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
