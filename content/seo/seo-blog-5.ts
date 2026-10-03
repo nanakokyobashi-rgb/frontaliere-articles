@@ -98587,6 +98587,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-prezzi-carburanti-settembre': {
+    title: 'Inflazione Svizzera: +1% a settembre per i carburanti',
+    description: 'Inflazione svizzera all\'1% a settembre: i carburanti trainano i prezzi, con olio combustibile +65%, diesel +28,7% e benzina +19,9%. IPC mensile resta stabile.',
+    keywords: 'frontalieri, ticino, svizzera, italia, inflazione, settembre, carburanti, sale',
+    ogTitle: 'Inflazione Svizzera: carburanti spingono i prezzi',
+    ogDescription: 'A settembre l\'inflazione annua svizzera è salita all\'1%. La fonte collega l\'impennata dei carburanti alla guerra in Medio Oriente: +65% per l\'olio combustibile, +28,7% per il diesel e +19,9% per la benzina. L\'IPC mensile è rimasto stabile.',
+    canonicalPath: '/articoli-frontaliere/prezzi-carburanti-settembre',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Inflazione Svizzera: +1% a settembre per i carburanti",
+      "description": "Inflazione svizzera all'1% a settembre: i carburanti trainano i prezzi, con olio combustibile +65%, diesel +28,7% e benzina +19,9%. IPC mensile resta stabile.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/prezzi-carburanti-settembre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Distributore di carburante in Svizzera con auto in sosta"
+      },
+      "datePublished": "2026-10-03T12:21:29+00:00",
+      "dateModified": "2026-10-03T12:21:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/prezzi-carburanti-settembre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
