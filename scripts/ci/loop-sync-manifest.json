@@ -3205,6 +3205,16 @@
       }
     },
     {
+      "path": "host/tests/image-creator-types.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Test node:test del normalizzatore host ImageObject: verifica attribuzione esterna, identità del sito e input array immutabili sul runtime del corpus. Il sito ha la propria copertura Vitest; questo harness host non viene mirrorato.",
+      "baseline": {
+        "site": null,
+        "corpus": "3125fcdc76588ebf",
+        "alignedAt": "2026-10-03"
+      }
+    },
+    {
       "path": "host/tests/shell-contract-fingerprint.test.mjs",
       "mode": "corpus-only",
       "reason": "Gate runtime che avvia il bootstrap vero e conta i membri del contratto. Nessun omonimo sul sito: la' l'equivalente e' `tests/packages-articles-confinement.test.ts`, che pero' controlla gli import, non il contratto.",
