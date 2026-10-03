@@ -98846,6 +98846,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-affitti-lucerna-regole-2026': {
+    title: 'Affitti a Lucerna e Svizzera: regole per la cauzione nel 2026',
+    description: 'Scopri le regole per gli affitti nel canton Lucerna e in Svizzera nel 2026: limite cauzione a tre mesi, conto vincolato e diritto federale della locazione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, lucerna, regole, cauzione',
+    ogTitle: 'Affitti in Svizzera 2026: regole per la cauzione a Lucerna',
+    ogDescription: 'Analisi del mercato immobiliare e della locazione nel canton Lucerna per il 2026. Approfondisci il limite massimo di tre mesi per la cauzione, il conto vincolato e la distinzione tra diritto federale e fiscalità cantonale.',
+    canonicalPath: '/articoli-svizzera/affitti-lucerna-regole-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti a Lucerna e Svizzera: regole per la cauzione nel 2026",
+      "description": "Scopri le regole per gli affitti nel canton Lucerna e in Svizzera nel 2026: limite cauzione a tre mesi, conto vincolato e diritto federale della locazione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/affitti-lucerna-regole-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Mercato immobiliare e regole per gli affitti nel canton Lucerna"
+      },
+      "datePublished": "2026-10-03T04:50:50+00:00",
+      "dateModified": "2026-10-03T04:50:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/affitti-lucerna-regole-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
