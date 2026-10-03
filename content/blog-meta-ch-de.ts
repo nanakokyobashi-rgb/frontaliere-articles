@@ -7658,6 +7658,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.fisco-argovia-online-2026.title': 'Schweizer Steuererklärung: Leitfaden 2026 im Aargau',
     'blog.article.fisco-argovia-online-2026.excerpt': 'Der Leitfaden 2026 zur Steuererklärung im Aargau erläutert die direkte Bundessteuer, die Kantons- und Gemeindesteuern, den Steuerfuss und das Online-Verfahren.',
     'blog.article.fisco-argovia-online-2026.imageAlt': 'Schweizer kantonales Steueramt mit Laptop und Unterlagen zur Steuererklärung 2026.',
+    'blog.article.pilastro3a-zurigo-strategia.title': 'Dritte Säule 3a: Vorteile 2026 im Kanton Zürich',
+    'blog.article.pilastro3a-zurigo-strategia.excerpt': 'Leitfaden 2026 zur dritten Säule 3a im Kanton Zürich: drei Steuerstufen, kommunaler Multiplikator und Bank- oder Versicherungsanbieter.',
+    'blog.article.pilastro3a-zurigo-strategia.imageAlt': 'Schweizer Steuerunterlagen und ein 3a-Sparplan auf einem Schreibtisch mit Zürcher Skyline.',
 };
 
 export default blogMetaChDe;
