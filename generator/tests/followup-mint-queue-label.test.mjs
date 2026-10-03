@@ -9,6 +9,7 @@ import test from 'node:test';
 import {
   canMintQueueLabel,
   isValidRawIssueLabels,
+  mintQueueLabelDecision,
   parseIssueJson,
   parseOpenFollowupPages,
 } from '../../scripts/ci/gate-minted-followups.mjs';
@@ -48,6 +49,10 @@ const FOLLOWUP = { name: 'follow-up', color: '0366d6' };
 const NEEDS_HUMAN = { name: 'needs-human', color: 'b60205' };
 const PARKED = { name: 'fu-parked', color: 'cccccc' };
 const QUEUED = { name: 'agent:fix-queued', color: 'fbca04' };
+const DECOMPOSED = { name: 'decomposed:1', color: 'cccccc' };
+const DECOMPOSE_QUEUED = { name: 'agent:decompose-queued', color: 'cccccc' };
+const DECOMPOSE = { name: 'agent:decompose', color: 'cccccc' };
+const MAYBE_RESOLVED = { name: 'maybe-resolved', color: 'cccccc' };
 
 test('il parser dei label conserva il raw ma rifiuta metadata mancanti/malformati', () => {
   const valid = { number: 1, title: 'x', body: 'y', labels: [FOLLOWUP, 'custom'] };
@@ -70,6 +75,33 @@ test('il parser dei label conserva il raw ma rifiuta metadata mancanti/malformat
   assert.equal(canMintQueueLabel({ ...valid, labels: [''] }), false);
   assert.equal(parseOpenFollowupPages(JSON.stringify([[{ ...valid, state: 'open' }]])).at(0).labels[0].name, 'follow-up');
   assert.equal(parseOpenFollowupPages(JSON.stringify([[{ ...valid, state: 'open', labels: [{}] }]])), null);
+});
+
+// Titolo di fallimento: «Gate sul conio (corpus): un padre decomposto è stato rimesso in
+// `agent:fix-queued`».
+test('un padre decomposto o un bucket nello stadio decompose non riceve la queue label', () => {
+  const issue = { number: 1, title: 'x', body: 'y' };
+  const cases = [
+    [[FOLLOWUP, DECOMPOSED], 'decomposed-parent'],
+    [[FOLLOWUP, { name: 'Decomposed:1' }], 'decomposed-parent'],
+    [[FOLLOWUP, DECOMPOSE_QUEUED], 'decompose-stage'],
+    [[FOLLOWUP, DECOMPOSE], 'decompose-stage'],
+    [[FOLLOWUP, 'agent:decompose'], 'decompose-stage'],
+  ];
+  for (const [labels, code] of cases) {
+    const decision = mintQueueLabelDecision({ ...issue, labels });
+    assert.equal(decision.allowed, false, JSON.stringify(labels));
+    assert.equal(decision.code, code, JSON.stringify(labels));
+    assert.equal(canMintQueueLabel({ ...issue, labels }), false, JSON.stringify(labels));
+  }
+  // I veti precedenti vincono: il codice riportato resta quello di prima.
+  assert.equal(mintQueueLabelDecision({ ...issue, labels: [FOLLOWUP, NEEDS_HUMAN, DECOMPOSED] }).code, 'needs-human');
+  assert.equal(mintQueueLabelDecision({ ...issue, labels: [FOLLOWUP, PARKED, DECOMPOSED] }).code, 'fu-parked');
+  // `maybe-resolved` da sola NON è un veto: un bucket con item aperti deve poter rientrare.
+  const maybeResolved = mintQueueLabelDecision({ ...issue, labels: [FOLLOWUP, MAYBE_RESOLVED] });
+  assert.equal(maybeResolved.allowed, true);
+  assert.equal(maybeResolved.code, 'labels-verified');
+  assert.equal(canMintQueueLabel({ ...issue, labels: [FOLLOWUP, MAYBE_RESOLVED] }), true);
 });
 
 function runGate({
@@ -208,6 +240,33 @@ test('il ramo keep accoda solo con label verificabili e senza veto needs-human/p
     assert.doesNotMatch(malformed.result.stdout, /queue label negata/);
   } finally {
     malformed.cleanup();
+  }
+});
+
+test('il queue repair del ramo keep non riaccoda un padre decomposto e lo conta nel tally', () => {
+  for (const [extra, code, reason] of [
+    [DECOMPOSED, 'decomposed-parent', 'lavoro delegato alle figlie'],
+    [DECOMPOSE_QUEUED, 'decompose-stage', 'stadio decompose in corso'],
+    [DECOMPOSE, 'decompose-stage', 'stadio decompose in corso'],
+  ]) {
+    const vetoed = runGate({ body: SEALED_BODY, listLabels: [FOLLOWUP, extra] });
+    try {
+      assert.equal(vetoed.result.status, 0, vetoed.result.stdout + vetoed.result.stderr);
+      assert.equal(hasQueueMutation(vetoed.calls), false, extra.name);
+      assert.ok(vetoed.result.stdout.includes(`queue label negata (${code}:${reason})`), vetoed.result.stdout);
+      assert.ok(vetoed.result.stdout.includes(`MINT_GATE_TALLY repo=owner/repo queue_vetoed=1 code=${code}`), vetoed.result.stdout);
+    } finally {
+      vetoed.cleanup();
+    }
+  }
+
+  const maybeResolved = runGate({ body: SEALED_BODY, listLabels: [FOLLOWUP, MAYBE_RESOLVED] });
+  try {
+    assert.equal(maybeResolved.result.status, 0, maybeResolved.result.stdout + maybeResolved.result.stderr);
+    assert.equal(hasQueueMutation(maybeResolved.calls), true);
+    assert.doesNotMatch(maybeResolved.result.stdout, /queue_vetoed=/);
+  } finally {
+    maybeResolved.cleanup();
   }
 });
 

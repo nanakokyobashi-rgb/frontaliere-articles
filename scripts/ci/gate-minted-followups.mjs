@@ -122,6 +122,10 @@ const COLLECTION_OK = process.env.COLLECTION_OK === 'true';
 const MINT_GATE_MARKER = '<!-- followup-mint-gate -->';
 export const AUTOMATION_DEFERRED_LABEL = 'automation-deferred';
 const FOLLOWUP_PARKED_LABEL = 'fu-parked';
+// Un padre decomposto ha per definizione item ancora `open`: il lavoro è delle figlie.
+// Nomi letterali (non importati dal drainer): il gate deve restare leggibile da solo.
+const DECOMPOSED_PARENT_LABEL = 'decomposed:1';
+const DECOMPOSE_STAGE_LABELS = new Set(['agent:decompose-queued', 'agent:decompose']);
 
 /**
  * Spezza il corpo coniato in testa + item, e partiziona gli item con l'oracolo
@@ -615,8 +619,30 @@ function queueLabelDecision(issue) {
   if (hasAutomationDeferredLabel(issue)) {
     return { allowed: false, code: AUTOMATION_DEFERRED_LABEL, reason: 'automation-deferred' };
   }
+  // Il «queue repair» gira a ogni passata: senza questi due rami un padre decomposto
+  // (o un bucket ancora nello stadio decompose) tornerebbe in `agent:fix-queued` e il
+  // drainer lo ritoglierebbe al tick dopo, all'infinito. `maybe-resolved` NON è un veto:
+  // un bucket con item ancora aperti e quella label residua resterebbe fuori coda per sempre.
+  if (issue.labels.some((label) => rawIssueLabelName(label).toLowerCase() === DECOMPOSED_PARENT_LABEL)) {
+    return { allowed: false, code: 'decomposed-parent', reason: 'lavoro delegato alle figlie' };
+  }
+  if (issue.labels.some((label) => DECOMPOSE_STAGE_LABELS.has(rawIssueLabelName(label).toLowerCase()))) {
+    return { allowed: false, code: 'decompose-stage', reason: 'stadio decompose in corso' };
+  }
   return { allowed: true, code: 'labels-verified', reason: 'labels-clear' };
 }
+
+/**
+ * Return the queue-label decision (`allowed`, `code`, `reason`) for an issue snapshot.
+ * @param {{labels?: unknown}} issue
+ * @returns {{allowed: boolean, code: string, reason: string}}
+ */
+export function mintQueueLabelDecision(issue) {
+  return queueLabelDecision(issue);
+}
+
+// Veti di coda per codice, contati per la riga `MINT_GATE_TALLY ... queue_vetoed=<n>`.
+const queueVetoTally = new Map();
 
 /** Return whether a queue-label mutation is safe for this issue snapshot. */
 export function canMintQueueLabel(issue) {
@@ -641,6 +667,7 @@ function queueLabelIfAllowed(issue, repoArgs) {
   }
   const decision = queueLabelDecision(latest);
   if (!decision.allowed) {
+    queueVetoTally.set(decision.code, (queueVetoTally.get(decision.code) || 0) + 1);
     console.log(`#${latest.number || issue?.number || 'unknown'}: queue label negata (${decision.code}:${decision.reason}) → nessuna mutazione.`);
     return null;
   }
@@ -1635,6 +1662,9 @@ function main() {
   // convenzione di `CLAUDE_USAGE` in claude-usage-summary.mjs).
   for (const t of tally) {
     console.log(`MINT_GATE_TALLY repo=${process.env.GH_REPO || 'default'} pr=${t.pr} issue=${t.issue} action=${t.action} reason=${t.reason} demoted=${t.demoted} kept=${t.kept}`);
+  }
+  for (const [code, count] of [...queueVetoTally].sort(([a], [b]) => a.localeCompare(b))) {
+    console.log(`MINT_GATE_TALLY repo=${process.env.GH_REPO || 'default'} queue_vetoed=${count} code=${code}`);
   }
   const demotedTotal = tally.reduce((a, t) => a + t.demoted, 0);
   const summary = `Gate sul conio: ${report.length} issue nel report, ${demotedTotal} item demoti${DRY_RUN ? ' (dry-run)' : ''}.`;
