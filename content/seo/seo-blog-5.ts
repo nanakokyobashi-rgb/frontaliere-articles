@@ -98431,6 +98431,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-svizzera-tassa-ingresso-franchi': {
+    title: 'Svizzera, tassa d\'ingresso fino a 4mila franchi',
+    description: 'La Svizzera valuta un\'imposta di incentivazione tra 2mila e 4mila franchi, legata alla clausola di salvaguardia per gli ingressi dei cittadini UE in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, tassa, ingresso, fino, 4mila',
+    ogTitle: 'Svizzera: tassa d\'ingresso fino a 4mila franchi',
+    ogDescription: 'La proposta svizzera collega un\'imposta di incentivazione alla clausola di salvaguardia: almeno 4mila franchi per lavoratori, autonomi e persone senza attività lucrativa, 2mila per il ricongiungimento familiare.',
+    canonicalPath: '/articoli-frontaliere/svizzera-tassa-ingresso-franchi',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Svizzera, tassa d'ingresso fino a 4mila franchi",
+      "description": "La Svizzera valuta un'imposta di incentivazione tra 2mila e 4mila franchi, legata alla clausola di salvaguardia per gli ingressi dei cittadini UE in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/svizzera-tassa-ingresso-franchi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Strada di confine in Ticino con segnaletica svizzera e traffico leggero."
+      },
+      "datePublished": "2026-10-03T07:17:00+00:00",
+      "dateModified": "2026-10-03T07:17:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/svizzera-tassa-ingresso-franchi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
