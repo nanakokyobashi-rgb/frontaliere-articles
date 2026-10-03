@@ -98729,6 +98729,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-locazioni-vaud-regole-2026': {
+    title: 'Affitti in Svizzera 2026: mercato immobiliare Vaud',
+    description: 'Affitti in Svizzera 2026: nel canton Vaud deposito massimo di tre mesi, conto vincolato e 30 giorni per contestare la disdetta del locatore in ogni cantone.',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, mercato, immobiliare, vaud',
+    ogTitle: 'Affitti in Svizzera 2026: regole nel Vaud',
+    ogDescription: 'Una guida pratica al mercato degli affitti svizzero nel 2026 spiega il quadro federale, il deposito cauzionale, il modulo ufficiale per la disdetta e i 30 giorni per rivolgersi all\'autorità di conciliazione, con focus sul canton Vaud.',
+    canonicalPath: '/articoli-svizzera/locazioni-vaud-regole-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti in Svizzera 2026: mercato immobiliare Vaud",
+      "description": "Affitti in Svizzera 2026: nel canton Vaud deposito massimo di tre mesi, conto vincolato e 30 giorni per contestare la disdetta del locatore in ogni cantone.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/locazioni-vaud-regole-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio residenziale e bacheca per gli affitti nel canton Vaud"
+      },
+      "datePublished": "2026-10-03T03:18:23+00:00",
+      "dateModified": "2026-10-03T03:18:23+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/locazioni-vaud-regole-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
