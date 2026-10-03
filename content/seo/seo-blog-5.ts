@@ -98860,6 +98860,84 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-museo-storico-palazzo-civico-lugano': {
+    title: 'Museo storico a Palazzo Civico: mozione interpartitica a Lugano',
+    description: 'Dieci consiglieri comunali propongono un museo storico al secondo piano di Palazzo Civico a Lugano. Spazi liberi nel 2028 col trasloco a Cornaredo.',
+    keywords: 'frontalieri, ticino, svizzera, italia, museo, storico, palazzo, civico',
+    ogTitle: 'Museo storico a Palazzo Civico: mozione a Lugano',
+    ogDescription: 'Dieci consiglieri comunali di Lugano chiedono di valutare un museo storico negli spazi di Palazzo Civico che si libereranno nel 2028. La proposta nasce dal successo della mostra «Lugano Belle Époque» e dalla storia museale cittadina. Il vicesindaco',
+    canonicalPath: '/articoli-frontaliere/museo-storico-palazzo-civico-lugano/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Museo storico a Palazzo Civico: mozione interpartitica a Lugano",
+      "description": "Dieci consiglieri comunali propongono un museo storico al secondo piano di Palazzo Civico a Lugano. Spazi liberi nel 2028 col trasloco a Cornaredo.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/museo-storico-palazzo-civico-lugano.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo Civico di Lugano, edificio neoclassico sede del Municipio"
+      },
+      "datePublished": "2026-10-03T17:47:01+00:00",
+      "dateModified": "2026-10-03T17:47:01+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/museo-storico-palazzo-civico-lugano/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-diego-kostner-milano-hockey': {
+    title: 'Diego kostner lascia l\'ambrì piotta | Frontaliere Ticino',
+    description: 'Diego Kostner lascia subito l\'Ambrì Piotta dopo dieci stagioni: 432 partite, 52 reti e 77 assist in National League prima del passaggio al Milano Hockey Club.',
+    keywords: 'frontalieri, ticino, svizzera, italia, diego, kostner, lascia, ambrì',
+    ogTitle: 'Kostner lascia l\'Ambrì per il Milano Hockey Club',
+    ogDescription: 'Dopo dieci stagioni in biancoblù, il centro classe 1992 chiude l\'esperienza in Leventina. Il club annuncia la partenza immediata; il 34enne di Bressanone continuerà con il neonato Milano Hockey Club.',
+    canonicalPath: '/articoli-frontaliere/diego-kostner-milano-hockey/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Diego kostner lascia l'ambrì piotta",
+      "description": "Diego Kostner lascia subito l'Ambrì Piotta dopo dieci stagioni: 432 partite, 52 reti e 77 assist in National League prima del passaggio al Milano Hockey Club.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/diego-kostner-milano-hockey.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Pista di hockey in Ticino nei colori biancoblù dell'Ambrì Piotta"
+      },
+      "datePublished": "2026-10-03T18:09:34+00:00",
+      "dateModified": "2026-10-03T18:09:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/diego-kostner-milano-hockey/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
