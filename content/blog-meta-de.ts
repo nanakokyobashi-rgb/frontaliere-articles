@@ -12373,6 +12373,15 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.guasto-treno-s50-busto-arsizio-2026.title': 'S50 Ausfall in Büste Arsizio: Fahrgäste gesperrt 3 Stunden',
     'blog.article.guasto-treno-s50-busto-arsizio-2026.excerpt': 'Am 29. September hielt ein Zug der S50 Malpensa-Bellinzona über drei Stunden lang 200 Meter vom Bahnhof entfernt an. Grünes Europa bittet Rfi und Trenord um Erklärungen.',
     'blog.article.guasto-treno-s50-busto-arsizio-2026.imageAlt': 'S50 Zug hält auf den Gleisen in der Nähe des Bahnhofs Busto Arsizio',
+    'blog.article.caos-a2-mezzovico-migliorie.title': 'Verkehrschaos vom 8 agosto: Arbeitsgruppe prüft Verbesserungen',
+    'blog.article.caos-a2-mezzovico-migliorie.excerpt': 'Nach mehr als vier Stunden Chaos im Luganese setzt die Kantonspolizei eine Arbeitsgruppe zur Sperrung der A2 in Mezzovico-Vira und zu den Verkehrsbehinderungen ein.',
+    'blog.article.caos-a2-mezzovico-migliorie.imageAlt': 'Verkehrsstau im Luganese nach der Sperrung der A2 bei Mezzovico-Vira',
+    'blog.article.tetto-italiano-carburanti.title': 'Kraftstoffe: Italien-Preisgrenze macht Tanken attraktiv',
+    'blog.article.tetto-italiano-carburanti.excerpt': 'Mehrere Unternehmen in Italien begrenzen die Preise: Die Quelle weist darauf hin, dass sich das Volltanken jenseits der Grenze wieder lohnt, während die Eidgenossenschaft untätig bleibt.',
+    'blog.article.tetto-italiano-carburanti.imageAlt': 'Tankstelle an der Grenze zwischen der Schweiz und Italien',
+    'blog.article.furgoncino-fiamme-paradiso-melide.title': 'Brandanschlag auf einen Lieferwagen zwischen Paradiso und Melide',
+    'blog.article.furgoncino-fiamme-paradiso-melide.excerpt': 'Kleinbrand kurz vor 17 Uhr in einem Firmenlieferwagen an der Via Cantonale zwischen Paradiso und Melide. Der TCS meldet mögliche lange Verzögerungen.',
+    'blog.article.furgoncino-fiamme-paradiso-melide.imageAlt': 'Firmenwagen auf der Kantonsstrasse zwischen Paradiso und Melide nach einem Brandherd',
 };
 
 export default blogMetaDe;

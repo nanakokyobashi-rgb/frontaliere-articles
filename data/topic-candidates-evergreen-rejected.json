@@ -502,7 +502,13 @@
     "salario medio professioni svizzera 2026",
     "salario medio professioni svizzera 2026 canton Zurigo",
     "salario medio professioni svizzera 2026 canton Vaud",
-    "salario medio professioni svizzera 2026 canton Lucerna"
+    "salario medio professioni svizzera 2026 canton Lucerna",
+    "secondo pilastro lpp svizzera guida 2026 canton Argovia",
+    "affitti svizzera mercato immobiliare 2026",
+    "affitti svizzera mercato immobiliare 2026 canton Ginevra",
+    "affitti svizzera mercato immobiliare 2026 canton Berna",
+    "affitti svizzera mercato immobiliare 2026 canton Basilea",
+    "affitti svizzera mercato immobiliare 2026 canton San Gallo"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -781,41 +787,10 @@
     "vivere a Proserpio e lavorare in Ticino da frontaliere": 1,
     "vivere a Merone e lavorare in Ticino da frontaliere": 2,
     "imposta di successione e donazione canton Friburgo aliquote": 2,
-    "salario medio professioni svizzera 2026 canton Zurigo": 2
+    "salario medio professioni svizzera 2026 canton Zurigo": 2,
+    "affitti svizzera mercato immobiliare 2026": 1
   },
   "topicGateUrls": {
-    "svizzera::https://www.admin.ch/it/newnsb/l6pd-kzlx5xp": {
-      "section": "svizzera",
-      "ts": 1790803336619
-    },
-    "frontaliere::https://www.ticinonews.ch/ticino/premi-di-cassa-malati-francetic-la-politica-non-puo-fermare-laumento-della-spesa-sanitaria-443667": {
-      "section": "frontaliere",
-      "ts": 1790804493695
-    },
-    "svizzera::https://www.tio.ch/dal-mondo/economia/1953863/trump-export-diesel-usa-europa": {
-      "section": "svizzera",
-      "ts": 1790805787202
-    },
-    "svizzera::https://www.swissinfo.ch/ita/abb%3a-insieme-con-novenco-per-migliorare-la-ventilazione-industriale/92144115": {
-      "section": "svizzera",
-      "ts": 1790807978110
-    },
-    "frontaliere::https://www.varesenoi.it/2026/10/01/leggi-notizia/articolo/pd-riunione-con-schlein-il-programma-con-m5s-avs-e-centristi-poi-le-primarie-pronti-a-vincerle.html": {
-      "section": "frontaliere",
-      "ts": 1790808934767
-    },
-    "svizzera::https://www.tio.ch/svizzera/cronaca/1953790/botox-siringhe-medici-base-trattamenti": {
-      "section": "svizzera",
-      "ts": 1790810404406
-    },
-    "svizzera::https://www.swissinfo.ch/ita/sh%3a-assalto-a-bancomat%2c-rapinatore-gravemente-ferito-da-esplosione/92144288": {
-      "section": "svizzera",
-      "ts": 1790810417704
-    },
-    "svizzera::https://www.tio.ch/svizzera/cronaca/1953743/esplosivi-polizia-sciaffusa-stazione-esplosione": {
-      "section": "svizzera",
-      "ts": 1790814654520
-    },
     "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/una-13esima-avs-solidale-per-i-giovani-ticinesi--4126848.html": {
       "section": "frontaliere",
       "ts": 1790857996848
@@ -911,6 +886,10 @@
     "svizzera::https://www.tio.ch/dal-mondo/cronaca/1954389/protesta-scontri-violenze-stato-ministro": {
       "section": "svizzera",
       "ts": 1790973583388
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/controllo-lavoratori-a-distanza-reato-senza-accordo-o-autorizzazione/2694982": {
+      "section": "frontaliere",
+      "ts": 1791003371812
     }
   }
 }

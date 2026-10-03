@@ -98261,6 +98261,669 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-diritti-inquilino-svizzera-2026': {
+    title: 'Affitti Svizzera 2026: mercato immobiliare e diritti',
+    description: 'Affitti Svizzera 2026: regole nazionali, cauzione fino a tre mensilità, disdetta del locatore su modulo cantonale e contestazione entro 30 giorni in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, mercato, immobiliare, diritti',
+    ogTitle: 'Affitti Svizzera 2026: cauzione e disdetta',
+    ogDescription: 'Una guida nazionale al mercato degli affitti in Svizzera: il deposito cauzionale, il conto vincolato intestato all\'inquilino, il modulo ufficiale del Cantone e i 30 giorni per contestare la disdetta del locatore.',
+    canonicalPath: '/articoli-svizzera/diritti-inquilino-svizzera-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti Svizzera 2026: mercato immobiliare e diritti",
+      "description": "Affitti Svizzera 2026: regole nazionali, cauzione fino a tre mensilità, disdetta del locatore su modulo cantonale e contestazione entro 30 giorni in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/diritti-inquilino-svizzera-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio residenziale svizzero con avviso di locazione e contratto tra le mani"
+      },
+      "datePublished": "2026-10-02T22:30:25+00:00",
+      "dateModified": "2026-10-02T22:30:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/diritti-inquilino-svizzera-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-diritti-inquilini-zurigo-2026': {
+    title: 'Affitti in Svizzera 2026: diritti e regole a Zurigo',
+    description: 'Affitti in Svizzera nel 2026: deposito massimo di tre mensilità, conto vincolato, modulo cantonale e 30 giorni per contestare la disdetta. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, diritti, regole, zurigo',
+    ogTitle: 'Affitti in Svizzera 2026: diritti e regole a Zurigo',
+    ogDescription: 'Il quadro federale della locazione vale anche nel canton Zurigo: come controllare il deposito, verificare il modulo di disdetta del locatore, rispettare i 30 giorni per la contestazione e separare la pigione dagli altri costi del bilancio familiare.',
+    canonicalPath: '/articoli-svizzera/diritti-inquilini-zurigo-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti in Svizzera 2026: diritti e regole a Zurigo",
+      "description": "Affitti in Svizzera nel 2026: deposito massimo di tre mensilità, conto vincolato, modulo cantonale e 30 giorni per contestare la disdetta. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/diritti-inquilini-zurigo-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio residenziale svizzero in un quartiere urbano."
+      },
+      "datePublished": "2026-10-02T23:05:22+00:00",
+      "dateModified": "2026-10-02T23:05:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/diritti-inquilini-zurigo-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-affitti-zurigo-cauzione-disdetta-2026': {
+    title: 'Affitti Svizzera 2026: mercato immobiliare nel canton Zurigo',
+    description: 'Affitti in Svizzera nel 2026: cauzione massima di tre mesi, disdetta del locatore e contestazione entro 30 giorni, con focus sul canton Zurigo e regole',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, mercato, immobiliare, canton',
+    ogTitle: 'Affitti Svizzera 2026: cauzione e disdetta a Zurigo',
+    ogDescription: 'Il quadro 2026 degli affitti svizzeri unisce il confronto tra Cantoni alle regole federali: deposito fino a tre mesi su conto vincolato, modulo ufficiale per la disdetta del locatore e 30 giorni per contestare all\'autorità di conciliazione.',
+    canonicalPath: '/articoli-svizzera/affitti-zurigo-cauzione-disdetta-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti Svizzera 2026: mercato immobiliare nel canton Zurigo",
+      "description": "Affitti in Svizzera nel 2026: cauzione massima di tre mesi, disdetta del locatore e contestazione entro 30 giorni, con focus sul canton Zurigo e regole",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/affitti-zurigo-cauzione-disdetta-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio residenziale svizzero e panorama urbano legati al mercato degli affitti"
+      },
+      "datePublished": "2026-10-02T23:51:27+00:00",
+      "dateModified": "2026-10-02T23:51:27+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/affitti-zurigo-cauzione-disdetta-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-diritti-inquilino-ginevra-2026': {
+    title: 'Affitti in Svizzera 2026: mercato e regole a Ginevra',
+    description: 'Deposito fino a tre mensilità, conto vincolato e 30 giorni per contestare la disdetta: le regole federali valgono anche nel canton Ginevra e negli altri',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, mercato, regole, ginevra',
+    ogTitle: 'Affitti in Svizzera 2026: mercato e regole a Ginevra',
+    ogDescription: 'Deposito massimo di tre mensilità, conto vincolato e modulo cantonale per la disdetta del locatore: la guida al diritto federale della locazione affronta il bilancio familiare e il focus sul canton Ginevra, con le scadenze da rispettare.',
+    canonicalPath: '/articoli-svizzera/diritti-inquilino-ginevra-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti in Svizzera 2026: mercato e regole a Ginevra",
+      "description": "Deposito fino a tre mensilità, conto vincolato e 30 giorni per contestare la disdetta: le regole federali valgono anche nel canton Ginevra e negli altri",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/diritti-inquilino-ginevra-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzi residenziali svizzeri in un quartiere urbano, simbolo del mercato degli affitti"
+      },
+      "datePublished": "2026-10-03T00:16:14+00:00",
+      "dateModified": "2026-10-03T00:16:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/diritti-inquilino-ginevra-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-swissair-grounding-memoria-ferita': {
+    title: 'Swissair, 25 anni dopo: la ferita mai rimarginata',
+    description: 'Scopri i dettagli del grounding di Swissair del 2 ottobre 2001 e l\'impatto sul lavoro di cabina attraverso la testimonianza di Sandrine Nikolic-Fuss.',
+    keywords: 'frontalieri, ticino, svizzera, italia, swissair, anni, dopo, ferita',
+    ogTitle: 'Swissair, 25 anni dopo: la ferita mai rimarginata di chi amava volare',
+    ogDescription: 'Il racconto del grounding di Swissair del 2 ottobre 2001 e la trasformazione del settore aeronautico svizzero nelle parole della sindacalista Sandrine Nikolic-Fuss.',
+    canonicalPath: '/articoli-svizzera/swissair-grounding-memoria-ferita/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Swissair, 25 anni dopo: la ferita mai rimarginata",
+      "description": "Scopri i dettagli del grounding di Swissair del 2 ottobre 2001 e l'impatto sul lavoro di cabina attraverso la testimonianza di Sandrine Nikolic-Fuss.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/swissair-grounding-memoria-ferita.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Aereo di linea a terra in Svizzera in ricordo del grounding Swissair"
+      },
+      "datePublished": "2026-10-03T00:31:32+00:00",
+      "dateModified": "2026-10-03T00:31:32+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/swissair-grounding-memoria-ferita/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-tariffe-usa-agenda-seco': {
+    title: 'SECO: nuovi dazi USA e voto federale 2026 | Frontaliere Ticino',
+    description: 'Dazi USA fino al 12,5% sulle importazioni dalla Svizzera, voto federale il 29 novembre 2026 e dimissioni di Helene Budliger Artieda alla SECO a fine marzo 2027.',
+    keywords: 'frontalieri, ticino, svizzera, italia, seco, nuovi, dazi, voto',
+    ogTitle: 'SECO, dazi USA e voto federale nel 2026',
+    ogDescription: 'Il 24 luglio 2026 gli Stati Uniti hanno adottato nuovi dazi aggiuntivi variabili fino al 12,5% sulle importazioni dalla Svizzera. La SECO segnala anche il voto del 29 novembre 2026 e le dimissioni di Helene Budliger Artieda.',
+    canonicalPath: '/articoli-svizzera/tariffe-usa-agenda-seco/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "SECO: nuovi dazi USA e voto federale 2026",
+      "description": "Dazi USA fino al 12,5% sulle importazioni dalla Svizzera, voto federale il 29 novembre 2026 e dimissioni di Helene Budliger Artieda alla SECO a fine marzo 2027.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/tariffe-usa-agenda-seco.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documenti sulla SECO e sui nuovi dazi statunitensi per le importazioni dalla Svizzera."
+      },
+      "datePublished": "2026-10-03T00:46:53+00:00",
+      "dateModified": "2026-10-03T00:46:53+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/tariffe-usa-agenda-seco/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-garanzia-disdetta-locazione-ginevra': {
+    title: 'Affitti Svizzera 2026: regole, deposito e Ginevra',
+    description: 'Affitti in Svizzera nel 2026: deposito massimo di tre mensilità, conto vincolato, modulo cantonale e 30 giorni per contestare la disdetta a Ginevra in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, regole, deposito, ginevra',
+    ogTitle: 'Affitti Svizzera 2026: regole, deposito e Ginevra',
+    ogDescription: 'Il diritto federale vale in ogni Cantone: deposito cauzionale fino a tre mensilità, conto vincolato intestato all\'inquilino e disdetta del locatore su modulo ufficiale cantonale, con 30 giorni per contestare.',
+    canonicalPath: '/articoli-svizzera/garanzia-disdetta-locazione-ginevra/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti Svizzera 2026: regole, deposito e Ginevra",
+      "description": "Affitti in Svizzera nel 2026: deposito massimo di tre mensilità, conto vincolato, modulo cantonale e 30 giorni per contestare la disdetta a Ginevra in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/garanzia-disdetta-locazione-ginevra.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo residenziale a Ginevra, immagine del mercato degli affitti svizzero"
+      },
+      "datePublished": "2026-10-03T01:04:32+00:00",
+      "dateModified": "2026-10-03T01:04:32+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/garanzia-disdetta-locazione-ginevra/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-tutela-inquilini-berna-2026': {
+    title: 'Affitti in Svizzera 2026: mercato e diritti a Berna',
+    description: 'Affitti in Svizzera nel 2026: deposito cauzionale fino a tre mensilità, disdetta del locatore su modulo cantonale e contestazione entro 30 giorni.',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, mercato, diritti, berna',
+    ogTitle: 'Affitti in Svizzera 2026: mercato e diritti a Berna',
+    ogDescription: 'Il diritto federale della locazione vale in ogni cantone: deposito cauzionale massimo di tre mensilità su conto vincolato, disdetta del locatore su modulo ufficiale cantonale e contestazione entro 30 giorni all\'autorità di conciliazione.',
+    canonicalPath: '/articoli-svizzera/tutela-inquilini-berna-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti in Svizzera 2026: mercato e diritti a Berna",
+      "description": "Affitti in Svizzera nel 2026: deposito cauzionale fino a tre mensilità, disdetta del locatore su modulo cantonale e contestazione entro 30 giorni.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/tutela-inquilini-berna-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ingresso di un appartamento svizzero con documento di locazione e chiavi"
+      },
+      "datePublished": "2026-10-03T01:27:54+00:00",
+      "dateModified": "2026-10-03T01:27:54+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/tutela-inquilini-berna-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-affitti-svizzera-regole-2026': {
+    title: 'Affitti Svizzera: regole federali e cauzione nel 2026',
+    description: 'Scopri le regole federali sugli affitti in Svizzera nel 2026: limite cauzione a tre mesi, conto vincolato, costi della vita e tasse. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, regole, federali, cauzione',
+    ogTitle: 'Affitti in Svizzera: regole federali e cauzione 2026',
+    ogDescription: 'Analisi del mercato degli affitti in Svizzera per il 2026 con focus sulle norme del Codice delle Obbligazioni, il limite di tre mesi per la cauzione, il conto vincolato e il bilancio complessivo oltre la pigione.',
+    canonicalPath: '/articoli-svizzera/affitti-svizzera-regole-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti Svizzera: regole federali e cauzione nel 2026",
+      "description": "Scopri le regole federali sugli affitti in Svizzera nel 2026: limite cauzione a tre mesi, conto vincolato, costi della vita e tasse. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/affitti-svizzera-regole-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Mercato degli affitti in Svizzera e regole federali sulla locazione"
+      },
+      "datePublished": "2026-10-03T01:51:50+00:00",
+      "dateModified": "2026-10-03T01:51:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/affitti-svizzera-regole-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-affitti-berna-quadro-2026': {
+    title: 'Affitti nel canton Berna e regole federali della locazione',
+    description: 'Scopri le regole federali della locazione, i limiti della cauzione e il confronto sugli affitti nel canton Berna per il 2026. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, canton, berna, regole',
+    ogTitle: 'Affitti nel canton Berna e regole federali della locazione',
+    ogDescription: 'Approfondimento sul mercato degli affitti nel canton Berna, la normativa federale sulla cauzione e la gestione della spesa abitativa in Svizzera per il 2026.',
+    canonicalPath: '/articoli-svizzera/affitti-berna-quadro-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti nel canton Berna e regole federali della locazione",
+      "description": "Scopri le regole federali della locazione, i limiti della cauzione e il confronto sugli affitti nel canton Berna per il 2026. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/affitti-berna-quadro-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edifici residenziali e mercato degli affitti nel canton Berna"
+      },
+      "datePublished": "2026-10-03T02:14:54+00:00",
+      "dateModified": "2026-10-03T02:14:54+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/affitti-berna-quadro-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-locazione-cauzione-basilea-2026': {
+    title: 'Affitti in Svizzera 2026: regole e focus Basilea',
+    description: 'Affitti in Svizzera nel 2026: deposito cauzionale, disdetta del locatore e contestazione entro 30 giorni, con focus sul canton Basilea e sul quadro federale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, regole, focus, basilea',
+    ogTitle: 'Affitti in Svizzera 2026: regole e focus Basilea',
+    ogDescription: 'Il quadro degli affitti in Svizzera nel 2026 vale anche per il canton Basilea: cauzione fino a tre mesi, conto vincolato all\'inquilino, modulo ufficiale per la disdetta del locatore e 30 giorni per la contestazione all\'autorita\' di conciliazione.',
+    canonicalPath: '/articoli-svizzera/locazione-cauzione-basilea-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti in Svizzera 2026: regole e focus Basilea",
+      "description": "Affitti in Svizzera nel 2026: deposito cauzionale, disdetta del locatore e contestazione entro 30 giorni, con focus sul canton Basilea e sul quadro federale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/locazione-cauzione-basilea-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edifici residenziali svizzeri e regole per gli affitti nel canton Basilea"
+      },
+      "datePublished": "2026-10-03T02:37:43+00:00",
+      "dateModified": "2026-10-03T02:37:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/locazione-cauzione-basilea-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-deposito-cauzionale-basilea': {
+    title: 'Affitti Svizzera 2026: deposito e disdetta a Basilea',
+    description: 'Affitti Svizzera 2026 a Basilea: regole federali su deposito fino a tre mensilità, conto vincolato, disdetta del locatore e contestazione entro 30 giorni.',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, deposito, disdetta, basilea',
+    ogTitle: 'Affitti Svizzera 2026: deposito e disdetta a Basilea',
+    ogDescription: 'Il diritto federale vale in ogni cantone: chi affitta nel canton Basilea deve conoscere il limite del deposito, il conto vincolato intestato all\'inquilino, il modulo ufficiale per la disdetta del locatore e la scadenza di 30 giorni per contestarla.',
+    canonicalPath: '/articoli-svizzera/deposito-cauzionale-basilea/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti Svizzera 2026: deposito e disdetta a Basilea",
+      "description": "Affitti Svizzera 2026 a Basilea: regole federali su deposito fino a tre mensilità, conto vincolato, disdetta del locatore e contestazione entro 30 giorni.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/deposito-cauzionale-basilea.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio residenziale svizzero nel canton Basilea, tema affitti e locazione"
+      },
+      "datePublished": "2026-10-03T02:52:20+00:00",
+      "dateModified": "2026-10-03T02:52:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/deposito-cauzionale-basilea/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-locazioni-vaud-regole-2026': {
+    title: 'Affitti in Svizzera 2026: mercato immobiliare Vaud',
+    description: 'Affitti in Svizzera 2026: nel canton Vaud deposito massimo di tre mesi, conto vincolato e 30 giorni per contestare la disdetta del locatore in ogni cantone.',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, mercato, immobiliare, vaud',
+    ogTitle: 'Affitti in Svizzera 2026: regole nel Vaud',
+    ogDescription: 'Una guida pratica al mercato degli affitti svizzero nel 2026 spiega il quadro federale, il deposito cauzionale, il modulo ufficiale per la disdetta e i 30 giorni per rivolgersi all\'autorità di conciliazione, con focus sul canton Vaud.',
+    canonicalPath: '/articoli-svizzera/locazioni-vaud-regole-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti in Svizzera 2026: mercato immobiliare Vaud",
+      "description": "Affitti in Svizzera 2026: nel canton Vaud deposito massimo di tre mesi, conto vincolato e 30 giorni per contestare la disdetta del locatore in ogni cantone.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/locazioni-vaud-regole-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio residenziale e bacheca per gli affitti nel canton Vaud"
+      },
+      "datePublished": "2026-10-03T03:18:23+00:00",
+      "dateModified": "2026-10-03T03:18:23+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/locazioni-vaud-regole-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-deposito-modulo-conciliazione': {
+    title: 'Mercato degli affitti in Svizzera 2026: San Gallo',
+    description: 'Affitti in Svizzera 2026: deposito massimo di tre mensilità, conto vincolato e disdetta del locatore contestabile entro 30 giorni, anche nel canton San Gallo.',
+    keywords: 'frontalieri, ticino, svizzera, italia, mercato, affitti, gallo, deposito',
+    ogTitle: 'Mercato degli affitti in Svizzera 2026: San Gallo',
+    ogDescription: 'Nel canton San Gallo, il diritto federale della locazione indica un deposito massimo di tre mensilità, un conto vincolato intestato all\'inquilino e 30 giorni per contestare la disdetta del locatore all\'autorità di conciliazione.',
+    canonicalPath: '/articoli-svizzera/deposito-modulo-conciliazione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mercato degli affitti in Svizzera 2026: San Gallo",
+      "description": "Affitti in Svizzera 2026: deposito massimo di tre mensilità, conto vincolato e disdetta del locatore contestabile entro 30 giorni, anche nel canton San Gallo.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/deposito-modulo-conciliazione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio residenziale svizzero per un articolo sul mercato degli affitti"
+      },
+      "datePublished": "2026-10-03T03:34:59+00:00",
+      "dateModified": "2026-10-03T03:34:59+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/deposito-modulo-conciliazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-diritti-casa-san-gallo': {
+    title: 'Affitti Svizzera 2026: regole nel canton San Gallo',
+    description: 'Affitti in Svizzera 2026: a San Gallo il deposito cauzionale è limitato a tre mensilità; regole federali, disdetta e contestazione in 30 giorni per gli',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, regole, canton, gallo',
+    ogTitle: 'Affitti Svizzera 2026: regole a San Gallo',
+    ogDescription: 'Il mercato degli affitti in Svizzera nel 2026 si legge anche dalle regole: nel canton San Gallo valgono il diritto federale, la cauzione massima di tre pigioni, il conto vincolato e 30 giorni per contestare una disdetta.',
+    canonicalPath: '/articoli-svizzera/diritti-casa-san-gallo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti Svizzera 2026: regole nel canton San Gallo",
+      "description": "Affitti in Svizzera 2026: a San Gallo il deposito cauzionale è limitato a tre mensilità; regole federali, disdetta e contestazione in 30 giorni per gli",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/diritti-casa-san-gallo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Panorama svizzero per una guida sul mercato degli affitti e sui diritti dell'inquilino"
+      },
+      "datePublished": "2026-10-03T04:06:28+00:00",
+      "dateModified": "2026-10-03T04:06:28+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/diritti-casa-san-gallo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-affitti-lucerna-regole-2026': {
+    title: 'Affitti a Lucerna e Svizzera: regole per la cauzione nel 2026',
+    description: 'Scopri le regole per gli affitti nel canton Lucerna e in Svizzera nel 2026: limite cauzione a tre mesi, conto vincolato e diritto federale della locazione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, lucerna, regole, cauzione',
+    ogTitle: 'Affitti in Svizzera 2026: regole per la cauzione a Lucerna',
+    ogDescription: 'Analisi del mercato immobiliare e della locazione nel canton Lucerna per il 2026. Approfondisci il limite massimo di tre mesi per la cauzione, il conto vincolato e la distinzione tra diritto federale e fiscalità cantonale.',
+    canonicalPath: '/articoli-svizzera/affitti-lucerna-regole-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti a Lucerna e Svizzera: regole per la cauzione nel 2026",
+      "description": "Scopri le regole per gli affitti nel canton Lucerna e in Svizzera nel 2026: limite cauzione a tre mesi, conto vincolato e diritto federale della locazione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/affitti-lucerna-regole-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Mercato immobiliare e regole per gli affitti nel canton Lucerna"
+      },
+      "datePublished": "2026-10-03T04:50:50+00:00",
+      "dateModified": "2026-10-03T04:50:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/affitti-lucerna-regole-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-canoni-casa-lucerna-2026': {
+    title: 'Affitti in Svizzera 2026: mercato immobiliare a Lucerna',
+    description: 'Mercato affitti Svizzera 2026: a Lucerna e negli altri Cantoni contano cauzione massima di tre mesi, conto vincolato e 30 giorni per contestare la disdetta.',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, mercato, immobiliare, lucerna',
+    ogTitle: 'Affitti in Svizzera 2026: mercato immobiliare a Lucerna',
+    ogDescription: 'Il confronto tra i prezzi medi degli affitti nei Cantoni passa anche dalle regole federali: cauzione su conto vincolato intestato all\'inquilino, modulo ufficiale per la disdetta del locatore e 30 giorni per contestare.',
+    canonicalPath: '/articoli-svizzera/canoni-casa-lucerna-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti in Svizzera 2026: mercato immobiliare a Lucerna",
+      "description": "Mercato affitti Svizzera 2026: a Lucerna e negli altri Cantoni contano cauzione massima di tre mesi, conto vincolato e 30 giorni per contestare la disdetta.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/canoni-casa-lucerna-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzi residenziali nel canton Lucerna, tema del mercato degli affitti svizzero"
+      },
+      "datePublished": "2026-10-03T05:29:36+00:00",
+      "dateModified": "2026-10-03T05:29:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/canoni-casa-lucerna-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

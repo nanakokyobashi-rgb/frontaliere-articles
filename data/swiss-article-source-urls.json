@@ -1,14 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/nsut8um5sbxj": {
-    "articleId": "prezzi-consumo-aumentati-agosto-2026",
-    "ts": "2026-09-03T07:46:38.845Z",
-    "keyForm": 2
-  },
-  "https://www.admin.ch/it/newnsb/gxrlpmwjcvkb": {
-    "articleId": "emissioni-co2-vcp-2025",
-    "ts": "2026-09-03T08:20:50.512Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4056264": {
     "articleId": "affitti-benzina-spingono-inflazione",
     "ts": "2026-09-03T08:35:51.842Z",
@@ -2497,6 +2487,16 @@
   "https://www.tio.ch/rubriche/aziende-ticinesi-informano/1954386/comitato-assemblea-swissaccounting-svizzera-neodiplomati-swiss": {
     "articleId": "assemblea-swissaccounting-melide",
     "ts": "2026-10-02T21:05:06.099Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1954239/lavoro-swissair-svizzera-anni-ferita": {
+    "articleId": "swissair-grounding-memoria-ferita",
+    "ts": "2026-10-03T00:31:32.306Z",
+    "keyForm": 2
+  },
+  "https://www.seco.admin.ch/it": {
+    "articleId": "tariffe-usa-agenda-seco",
+    "ts": "2026-10-03T00:46:53.922Z",
     "keyForm": 2
   }
 }

@@ -37114,6 +37114,33 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'caos-a2-mezzovico-migliorie',
+ category: 'novita',
+ date: '2026-10-03T03:52:06.078Z',
+ image: '/images/blog/caos-a2-mezzovico-migliorie.webp',
+ hasCalculator: false,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'tetto-italiano-carburanti',
+ category: 'novita',
+ date: '2026-10-03T04:24:31.152Z',
+ image: '/images/blog/tetto-italiano-carburanti.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'furgoncino-fiamme-paradiso-melide',
+ category: 'novita',
+ date: '2026-10-03T05:12:21.013Z',
+ image: '/images/blog/furgoncino-fiamme-paradiso-melide.webp',
+ hasCalculator: false,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

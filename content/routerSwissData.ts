@@ -2548,6 +2548,23 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'assemblea-swissaccounting-melide': { it: 'assemblea-swissaccounting-melide', en: 'swissaccounting-assembly-melide', de: 'swissaccounting-versammlung-melide', fr: 'assemblee-swissaccounting-melide' },
  'secondo-pilastro-lpp-ginevra-2026': { it: 'secondo-pilastro-lpp-ginevra-2026', en: 'second-pillar-lpp-geneva-2026', de: 'zweite-saeule-lpp-genf-2026', fr: 'deuxieme-pilier-lpp-geneve-2026' },
  'bvg-lucerna-previdenza-2026': { it: 'bvg-lucerna-previdenza-2026', en: 'bvg-lucerne-pension-2026', de: 'bvg-luzern-vorsorge-2026', fr: 'bvg-lucerne-prevoyance-2026' },
+ 'diritti-inquilino-svizzera-2026': { it: 'diritti-inquilino-svizzera-2026', en: 'swiss-tenant-rights-2026', de: 'mieterrechte-schweiz-2026', fr: 'droits-locataire-suisse-2026' },
+ 'diritti-inquilini-zurigo-2026': { it: 'diritti-inquilini-zurigo-2026', en: 'tenant-rights-zurich-2026', de: 'mieterrechte-zuerich-2026', fr: 'droits-locataire-zurich-2026' },
+ 'affitti-zurigo-cauzione-disdetta-2026': { it: 'affitti-zurigo-cauzione-disdetta-2026', en: 'swiss-rents-zurich-deposit-2026', de: 'mieten-zuerich-kaution-2026', fr: 'loyers-zurich-caution-2026' },
+ 'diritti-inquilino-ginevra-2026': { it: 'diritti-inquilino-ginevra-2026', en: 'geneva-tenant-rights-2026', de: 'mietrecht-genf-2026', fr: 'droits-locataire-geneve-2026' },
+ 'swissair-grounding-memoria-ferita': { it: 'swissair-grounding-memoria-ferita', en: 'swissair-grounding-memory-wound', de: 'swissair-grounding-erinnerung-wunde', fr: 'swissair-grounding-memoire-blessure' },
+ 'tariffe-usa-agenda-seco': { it: 'tariffe-usa-agenda-seco', en: 'seco-us-tariffs-federal-vote', de: 'seco-us-zoelle-bundesabstimmung', fr: 'seco-droits-us-vote-federal' },
+ 'garanzia-disdetta-locazione-ginevra': { it: 'garanzia-disdetta-locazione-ginevra', en: 'swiss-rental-market-geneva-2026', de: 'mietmarkt-schweiz-genf-2026', fr: 'marche-locatif-suisse-geneve-2026' },
+ 'tutela-inquilini-berna-2026': { it: 'tutela-inquilini-berna-2026', en: 'swiss-rental-rights-bern-2026', de: 'mietrecht-schweiz-bern-2026', fr: 'droits-locataire-suisse-berne-2026' },
+ 'affitti-svizzera-regole-2026': { it: 'affitti-svizzera-regole-2026', en: 'switzerland-rental-market-regulations-2026', de: 'mietmarkt-schweiz-regeln-2026', fr: 'marche-locatif-suisse-regles-2026' },
+ 'affitti-berna-quadro-2026': { it: 'affitti-berna-quadro-2026', en: 'rents-bern-framework-2026', de: 'mieten-bern-rahmen-2026', fr: 'loyers-berne-cadre-2026' },
+ 'locazione-cauzione-basilea-2026': { it: 'locazione-cauzione-basilea-2026', en: 'swiss-rent-deposit-basel-2026', de: 'mietrecht-kaution-basel-2026', fr: 'location-caution-bale-2026' },
+ 'deposito-cauzionale-basilea': { it: 'deposito-cauzionale-basilea', en: 'swiss-rent-deposit-basel', de: 'mietkaution-schweiz-basel', fr: 'depot-loyer-suisse-bale' },
+ 'locazioni-vaud-regole-2026': { it: 'locazioni-vaud-regole-2026', en: 'vaud-rent-rights-2026', de: 'mietrecht-waadt-2026', fr: 'loyers-vaud-droits-2026' },
+ 'deposito-modulo-conciliazione': { it: 'deposito-modulo-conciliazione', en: 'rental-deposit-official-form', de: 'mietkaution-formular-schlichtung', fr: 'depot-formulaire-conciliation' },
+ 'diritti-casa-san-gallo': { it: 'diritti-casa-san-gallo', en: 'swiss-rentals-st-gallen-2026', de: 'mieten-schweiz-st-gallen-2026', fr: 'loyers-suisse-saint-gall-2026' },
+ 'affitti-lucerna-regole-2026': { it: 'affitti-lucerna-regole-2026', en: 'lucerne-rentals-rules-2026', de: 'luzern-mietrecht-regeln-2026', fr: 'lucerne-location-regles-2026' },
+ 'canoni-casa-lucerna-2026': { it: 'canoni-casa-lucerna-2026', en: 'swiss-rental-market-lucerne-2026', de: 'mietmarkt-schweiz-luzern-2026', fr: 'marche-locatif-suisse-lucerne-2026' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

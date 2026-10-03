@@ -12374,6 +12374,15 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.guasto-treno-s50-busto-arsizio-2026.title': 'S50 breakdown in Busto Arsizio: passengers stranded for 3 hours',
     'blog.article.guasto-treno-s50-busto-arsizio-2026.excerpt': 'On 29 September, an S50 Malpensa-Bellinzona train remained stopped for more than three hours 200 meters from the station. Europa Verde asks Rfi and Trenord for explanations.',
     'blog.article.guasto-treno-s50-busto-arsizio-2026.imageAlt': 'S50 train stopped on tracks near Busto Arsizio station',
+    'blog.article.caos-a2-mezzovico-migliorie.title': 'Traffic chaos on August 8: working group evaluates improvements',
+    'blog.article.caos-a2-mezzovico-migliorie.excerpt': 'After more than four hours of chaos in the Luganese, the Cantonal Police sets up a working group on the closure of the A2 in Mezzovico-Vira and the traffic disruption.',
+    'blog.article.caos-a2-mezzovico-migliorie.imageAlt': 'Traffic congestion in the Luganese after the A2 closure at Mezzovico-Vira',
+    'blog.article.tetto-italiano-carburanti.title': 'Fuel: Italy\'s cap makes filling up across the border worthwhile again',
+    'blog.article.tetto-italiano-carburanti.excerpt': 'Several companies in Italy are capping prices: the source indicates that filling up across the border is worthwhile again, while the Confederation remains inactive.',
+    'blog.article.tetto-italiano-carburanti.imageAlt': 'Fuel pump at the border between Switzerland and Italy',
+    'blog.article.furgoncino-fiamme-paradiso-melide.title': 'Small fire involving a van between Paradiso and Melide',
+    'blog.article.furgoncino-fiamme-paradiso-melide.excerpt': 'Small fire shortly before 17 involving a company van on Via Cantonale, between Paradiso and Melide. TCS reports possible long delays.',
+    'blog.article.furgoncino-fiamme-paradiso-melide.imageAlt': 'Commercial van stopped on the cantonal road between Paradiso and Melide after a fire started',
 };
 
 export default blogMetaEn;

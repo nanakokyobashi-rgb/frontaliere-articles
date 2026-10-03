@@ -98236,6 +98236,123 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-caos-a2-mezzovico-migliorie': {
+    title: 'Caos viario dell\'8 agosto: gruppo di lavoro valuta migliorie',
+    description: 'Dopo oltre quattro ore di caos nel Luganese, la Polizia cantonale istituisce un gruppo di lavoro sulla chiusura della A2 a Mezzovico-Vira e sui disagi viari.',
+    keywords: 'frontalieri, ticino, svizzera, italia, caos, viario, dell, agosto',
+    ogTitle: 'Caos viario dell\'8 agosto: gruppo di lavoro valuta migliorie',
+    ogDescription: 'La chiusura della A2 dopo un grosso incidente a Mezzovico-Vira ha provocato oltre quattro ore di disagi nel Luganese. Il Consiglio di Stato ricostruisce la serata e annuncia un gruppo di lavoro per valutare migliorie.',
+    canonicalPath: '/articoli-frontaliere/caos-a2-mezzovico-migliorie',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Caos viario dell'8 agosto: gruppo di lavoro valuta migliorie",
+      "description": "Dopo oltre quattro ore di caos nel Luganese, la Polizia cantonale istituisce un gruppo di lavoro sulla chiusura della A2 a Mezzovico-Vira e sui disagi viari.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/caos-a2-mezzovico-migliorie.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Traffico congestionato nel Luganese dopo la chiusura della A2 a Mezzovico-Vira"
+      },
+      "datePublished": "2026-10-03T03:52:06+00:00",
+      "dateModified": "2026-10-03T03:52:06+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/caos-a2-mezzovico-migliorie/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-tetto-italiano-carburanti': {
+    title: 'Carburanti: il tetto italiano riporta il pieno oltreconfine',
+    description: 'Il limite alle tariffe di diverse compagnie in Italia rende di nuovo conveniente il pieno oltreconfine e richiama le preoccupazioni svizzere descritte',
+    keywords: 'frontalieri, ticino, svizzera, italia, carburanti, tetto, italiano, riporta',
+    ogTitle: 'Carburanti: il tetto italiano riporta il pieno oltreconfine',
+    ogDescription: 'Diverse compagnie in Italia mettono un limite alle tariffe dei carburanti e il pieno torna conveniente oltreconfine. La Confederazione viene descritta come rimasta immobile: il confronto è il centro delle preoccupazioni svizzere richiamate',
+    canonicalPath: '/articoli-frontaliere/tetto-italiano-carburanti',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Carburanti: il tetto italiano riporta il pieno oltreconfine",
+      "description": "Il limite alle tariffe di diverse compagnie in Italia rende di nuovo conveniente il pieno oltreconfine e richiama le preoccupazioni svizzere descritte",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/tetto-italiano-carburanti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Pompa di benzina al confine tra Svizzera e Italia"
+      },
+      "datePublished": "2026-10-03T04:24:31+00:00",
+      "dateModified": "2026-10-03T04:24:31+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/tetto-italiano-carburanti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-furgoncino-fiamme-paradiso-melide': {
+    title: 'Principio d\'incendio a un furgoncino tra Paradiso e Melide',
+    description: 'Un furgoncino aziendale ha avuto un principio d\'incendio poco prima delle 17 tra Paradiso e Melide. Il TCS segnala rallentamenti e possibili lunghi ritardi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, principio, incendio, furgoncino, paradiso',
+    ogTitle: 'Principio d\'incendio a Melide: TCS segnala ritardi',
+    ogDescription: 'La serata era segnata da traffico da bollino nero sulle strade del cantone. Il conducente ha accostato il furgoncino in Via Cantonale e cercato aiuto tra le auto in colonna; nessuno è rimasto ferito. Il TCS segnala rallentamenti.',
+    canonicalPath: '/articoli-frontaliere/furgoncino-fiamme-paradiso-melide',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Principio d'incendio a un furgoncino tra Paradiso e Melide",
+      "description": "Un furgoncino aziendale ha avuto un principio d'incendio poco prima delle 17 tra Paradiso e Melide. Il TCS segnala rallentamenti e possibili lunghi ritardi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/furgoncino-fiamme-paradiso-melide.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Furgoncino fermo sulla strada cantonale tra Paradiso e Melide dopo un principio d'incendio"
+      },
+      "datePublished": "2026-10-03T05:12:21+00:00",
+      "dateModified": "2026-10-03T05:12:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/furgoncino-fiamme-paradiso-melide/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
