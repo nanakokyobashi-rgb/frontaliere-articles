@@ -1600,5 +1600,35 @@
     "articleId": "svizzera-tassa-ingresso-franchi",
     "ts": "2026-10-03T07:17:01.093Z",
     "keyForm": 2
+  },
+  "https://www.laregione.ch/cantone/mendrisiotto/1954290/personale-di-pasture-la-vertenza-approda-davanti-al-governo-federale": {
+    "articleId": "pasture-vertenza-governo-federale",
+    "ts": "2026-10-03T10:40:14.529Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/cronaca/1954324/tre-polizia-furto-scasso-garage-noranco": {
+    "articleId": "furto-noranco-arresti-garage",
+    "ts": "2026-10-03T11:39:31.051Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/info/svizzera/fiammata-dell%e2%80%991-per-l%e2%80%99inflazione-in-svizzera--4125747.html": {
+    "articleId": "prezzi-carburanti-settembre",
+    "ts": "2026-10-03T12:21:29.759Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/ticino/grave-tamponamento-tra-auto-e-camion-sulla2-a-coldrerio-73enne-in-pericolo-di-morte-443847": {
+    "articleId": "a2-coldrerio-incidente-camion",
+    "ts": "2026-10-03T13:38:42.494Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/ticino/raccontare-la-sostenibilita-giornata-formativa-transfrontaliera-a-mezzana-443887": {
+    "articleId": "giornata-sostenibilita-mezzana",
+    "ts": "2026-10-03T14:21:55.658Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/incidente-alle-porte-di-varese-scontro-tra-due-auto-nella-bretella-per-lautostrada-chiusa-la-statale-verso-milano-traffico-deviato-in-largo-flaiano/2697022": {
+    "articleId": "scontro-ss707-largo-flaiano",
+    "ts": "2026-10-03T15:12:55.920Z",
+    "keyForm": 2
   }
 }

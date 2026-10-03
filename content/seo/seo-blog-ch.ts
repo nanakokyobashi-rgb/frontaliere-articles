@@ -99236,6 +99236,240 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-guida-fiscale-vaud-2026': {
+    title: 'Dichiarazione imposte Svizzera: guida Vaud 2026',
+    description: 'Guida 2026 alla dichiarazione delle imposte in Svizzera: tre livelli, scadenze cantonali, deduzioni ammesse e procedura online con focus sul canton Vaud.',
+    keywords: 'frontalieri, ticino, svizzera, italia, dichiarazione, imposte, vaud, livelli',
+    ogTitle: 'Dichiarazione imposte: guida Vaud 2026',
+    ogDescription: 'Dal calcolo su tre livelli alla procedura online, una guida operativa per orientarsi tra imposta federale diretta, quota cantonale e comunale, deduzioni ammesse e controlli da fare nel canton Vaud senza confondere tasse, previdenza e LAMal.',
+    canonicalPath: '/articoli-svizzera/guida-fiscale-vaud-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Dichiarazione imposte Svizzera: guida Vaud 2026",
+      "description": "Guida 2026 alla dichiarazione delle imposte in Svizzera: tre livelli, scadenze cantonali, deduzioni ammesse e procedura online con focus sul canton Vaud.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/guida-fiscale-vaud-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Dichiarazione online delle imposte svizzere per un residente nel canton Vaud"
+      },
+      "datePublished": "2026-10-03T11:04:13+00:00",
+      "dateModified": "2026-10-03T11:04:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/guida-fiscale-vaud-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-fisco-argovia-online-2026': {
+    title: 'Dichiarazione imposte svizzera: guida 2026 in Argovia',
+    description: 'Guida 2026 alla dichiarazione delle imposte svizzera in Argovia: tre livelli fiscali, moltiplicatore comunale, procedura online e valori indicizzati.',
+    keywords: 'frontalieri, ticino, svizzera, italia, dichiarazione, imposte, argovia, alla',
+    ogTitle: 'Dichiarazione imposte svizzera: guida 2026 in Argovia',
+    ogDescription: 'Nel 2026 il fisco svizzero è articolato su tre livelli. La guida mostra come distinguere IFD, imposte cantonali e comunali, quale ruolo hanno AFC/ESTV e amministrazioni cantonali e come trattare i valori aggiornati ogni anno.',
+    canonicalPath: '/articoli-svizzera/fisco-argovia-online-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Dichiarazione imposte svizzera: guida 2026 in Argovia",
+      "description": "Guida 2026 alla dichiarazione delle imposte svizzera in Argovia: tre livelli fiscali, moltiplicatore comunale, procedura online e valori indicizzati.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/fisco-argovia-online-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio fiscale cantonale svizzero con laptop e documenti della dichiarazione 2026."
+      },
+      "datePublished": "2026-10-03T11:59:46+00:00",
+      "dateModified": "2026-10-03T11:59:46+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/fisco-argovia-online-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-pilastro3a-zurigo-strategia': {
+    title: 'Terzo pilastro 3a: vantaggi 2026 nel canton Zurigo',
+    description: 'Guida 2026 al terzo pilastro 3a a Zurigo: tre livelli fiscali, moltiplicatore comunale, provider bancari o assicurativi e massimale annuale da verificare ogni',
+    keywords: 'frontalieri, ticino, svizzera, italia, terzo, pilastro, vantaggi, canton',
+    ogTitle: 'Terzo pilastro 3a: vantaggi 2026 nel canton Zurigo',
+    ogDescription: 'Nel canton Zurigo il terzo pilastro 3a va letto tra imposta federale diretta, fiscalità cantonale e comunale. La guida confronta provider bancari e assicurativi, richiama il controllo annuale del massimale 2026 e separa le competenze istituzionali.',
+    canonicalPath: '/articoli-svizzera/pilastro3a-zurigo-strategia/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Terzo pilastro 3a: vantaggi 2026 nel canton Zurigo",
+      "description": "Guida 2026 al terzo pilastro 3a a Zurigo: tre livelli fiscali, moltiplicatore comunale, provider bancari o assicurativi e massimale annuale da verificare ogni",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/pilastro3a-zurigo-strategia.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documenti fiscali svizzeri e piano 3a su una scrivania con skyline di Zurigo."
+      },
+      "datePublished": "2026-10-03T12:39:34+00:00",
+      "dateModified": "2026-10-03T12:39:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/pilastro3a-zurigo-strategia/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-guida-terzo-3a-berna': {
+    title: 'Terzo pilastro 3a svizzera: vantaggi 2026 canton Berna',
+    description: 'Terzo pilastro 3a 2026 nel canton Berna: vantaggi fiscali, massimale indicizzato, tre livelli d\'imposta e confronto tra provider bancari e assicurativi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, terzo, pilastro, vantaggi, canton',
+    ogTitle: 'Terzo pilastro 3a svizzera: vantaggi 2026 canton Berna',
+    ogDescription: 'Nel canton Berna il 3a si valuta su tre livelli fiscali: imposta federale diretta, legge cantonale e moltiplicatore comunale. Il massimale è indicizzato ogni anno; la guida 2026 confronta provider bancari e assicurativi.',
+    canonicalPath: '/articoli-svizzera/guida-terzo-3a-berna/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Terzo pilastro 3a svizzera: vantaggi 2026 canton Berna",
+      "description": "Terzo pilastro 3a 2026 nel canton Berna: vantaggi fiscali, massimale indicizzato, tre livelli d'imposta e confronto tra provider bancari e assicurativi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/guida-terzo-3a-berna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Persona in Svizzera consulta documenti sul terzo pilastro 3a e sulle imposte"
+      },
+      "datePublished": "2026-10-03T13:22:34+00:00",
+      "dateModified": "2026-10-03T13:22:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/guida-terzo-3a-berna/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-lista-governo-ticino-2027': {
+    title: 'Avanti con Ticino&Lavoro: lista Governo 2027 | Frontaliere Ticino',
+    description: 'Avanti con Ticino&Lavoro presenta a Lamone cinque candidati al Consiglio di Stato del Ticino per le elezioni dell\'11 aprile 2027: trasparenza e partecipazione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, avanti, lavoro, lista, governo',
+    ogTitle: 'Avanti con Ticino&Lavoro: lista Governo 2027',
+    ogDescription: 'Avanti con Ticino&Lavoro presenta a Lamone cinque candidati al Consiglio di Stato: Sergio Savoia, Amalia Mirante, Valentina Mühlemann, Evaristo Roncelli e Giovanni Albertini. L\'appello richiama partecipazione e trasparenza.',
+    canonicalPath: '/articoli-svizzera/lista-governo-ticino-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Avanti con Ticino&Lavoro: lista Governo 2027",
+      "description": "Avanti con Ticino&Lavoro presenta a Lamone cinque candidati al Consiglio di Stato del Ticino per le elezioni dell'11 aprile 2027: trasparenza e partecipazione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/lista-governo-ticino-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Presentazione politica a Lamone per la lista al Governo ticinese"
+      },
+      "datePublished": "2026-10-03T14:01:50+00:00",
+      "dateModified": "2026-10-03T14:01:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/lista-governo-ticino-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-guida-3a-fisco-vaud': {
+    title: 'Terzo pilastro 3a: vantaggi 2026 nel canton Vaud',
+    description: 'Guida 2026 al terzo pilastro 3a nel canton Vaud: vantaggi fiscali, tre livelli d\'imposta, massimale indicizzato e confronto nazionale. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, terzo, pilastro, vantaggi, canton',
+    ogTitle: 'Terzo pilastro 3a 2026: guida al canton Vaud',
+    ogDescription: 'Nel canton Vaud il terzo pilastro 3a va letto tra imposta federale diretta, livello cantonale e livello comunale. La guida 2026 distingue AFC/ESTV, amministrazioni cantonali e UFAS/BSV, e spiega perché il massimale è indicizzato ogni anno.',
+    canonicalPath: '/articoli-svizzera/guida-3a-fisco-vaud/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Terzo pilastro 3a: vantaggi 2026 nel canton Vaud",
+      "description": "Guida 2026 al terzo pilastro 3a nel canton Vaud: vantaggi fiscali, tre livelli d'imposta, massimale indicizzato e confronto nazionale. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/guida-3a-fisco-vaud.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documenti fiscali e calcolatore per il terzo pilastro 3a nel canton Vaud"
+      },
+      "datePublished": "2026-10-03T14:44:40+00:00",
+      "dateModified": "2026-10-03T14:44:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/guida-3a-fisco-vaud/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

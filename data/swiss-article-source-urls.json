@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/vwrqaoztclwf": {
-    "articleId": "calo-natalita-finanze-pubbliche",
-    "ts": "2026-09-03T09:13:41.237Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/%22basta-delocalizzazioni-posta-e-swisscom%22%2c-lanciata-una-petizione/91998672": {
     "articleId": "petizione-delocalizzazioni-svizzera",
     "ts": "2026-09-03T09:30:21.608Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4131072": {
     "articleId": "spedizioni-ue-posta-svizzera",
     "ts": "2026-10-03T07:48:59.885Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/politica/1954492/possono-evaristo-roncelli-m-hlemann-ticino": {
+    "articleId": "lista-governo-ticino-2027",
+    "ts": "2026-10-03T14:01:50.889Z",
     "keyForm": 2
   }
 }
