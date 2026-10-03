@@ -98548,6 +98548,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-furto-noranco-arresti-garage': {
+    title: 'Furto auto Noranco: tre arresti e veicoli recuperati',
+    description: 'Tre auto di alta gamma rubate in un garage di Noranco recuperate. Tre persone, residenti in Francia, fermate a Manno, Tenero e Lucerna. Le autorità raccomandano',
+    keywords: 'frontalieri, ticino, svizzera, italia, furto, auto, noranco, arresti',
+    ogTitle: 'Furto auto a Noranco: tre arresti, veicoli recuperati',
+    ogDescription: 'Nella notte, tre auto di alta gamma sono state rubate da un garage di Noranco. Grazie a un\'operazione coordinata tra diverse polizie, i veicoli sono stati recuperati e tre persone, residenti in Francia, sono state fermate. Scopri i dettagli',
+    canonicalPath: '/articoli-frontaliere/furto-noranco-arresti-garage',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Furto auto Noranco: tre arresti e veicoli recuperati",
+      "description": "Tre auto di alta gamma rubate in un garage di Noranco recuperate. Tre persone, residenti in Francia, fermate a Manno, Tenero e Lucerna. Le autorità raccomandano",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/furto-noranco-arresti-garage.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine di un garage sicuro con sistemi di protezione, che richiama le misure di prevenzione contro i furti in Ticino."
+      },
+      "datePublished": "2026-10-03T11:39:30+00:00",
+      "dateModified": "2026-10-03T11:39:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/furto-noranco-arresti-garage/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
