@@ -813,9 +813,9 @@
       "mode": "identical",
       "reason": "2026-09-29 (valerielinc-ops/frontaliere-si-o-no#7483): era `both-moved` dal 2026-09-04. Il delta del corpus (#837: pagine annotations vuote che non provano l'assenza di timeout, job `failure` fuori dalle cancellazioni fantasma, storico run memoizzato) e' risalito sul sito con valerielinc-ops/frontaliere-si-o-no#9783, e il sito ha poi aggiunto i branch shadow dei crawler (#8557), il verdetto sulla stessa run rossa con continue-on-error (#10101) e il criterio di uscita del gruppo di quarantena 24 (#10226). Il sito contiene quindi tutto il corpus: sceso VERBATIM, con il modulo che importa (`scripts/lib/crawler-generation-token.mjs`, voce propria). La review della discesa (#1973) ha trovato due buchi nel verdetto dei membri crawler, corretti sul sito con valerielinc-ops/frontaliere-si-o-no#10295 e scesi nella stessa PR: un membro di un gruppo rosso e' verde solo se la riga di esito del gate dichiara tanti membri non verdi quanti l'aggregato ne elenca. Il secondo giro di review ha trovato il buco simmetrico sul gruppo di quarantena, che chiude verde con i fallimenti noti: corretto con valerielinc-ops/frontaliere-si-o-no#10301, il verdetto dei suoi membri si legge dal notice `crawler-quarantine-outcomes` dell'aggregato (qui come sul sito solo `crawler-group-24.yml` lo emette).",
       "baseline": {
-        "site": "f4f1222ffbb468ec",
-        "corpus": "f4f1222ffbb468ec",
-        "alignedAt": "2026-10-02"
+        "site": "bc982c8fa542ccec",
+        "corpus": "bc982c8fa542ccec",
+        "alignedAt": "2026-10-03"
       }
     },
     {
@@ -3515,7 +3515,7 @@
       "baseline": {
         "site": "db25ed4f1760f5c6",
         "corpus": "db25ed4f1760f5c6",
-        "alignedAt": "2026-10-02"
+        "alignedAt": "2026-10-03"
       }
     },
     {
@@ -3525,7 +3525,7 @@
       "baseline": {
         "site": "8d12ae0ae95f9d96",
         "corpus": "8d12ae0ae95f9d96",
-        "alignedAt": "2026-10-02"
+        "alignedAt": "2026-10-03"
       }
     },
     {
@@ -3535,7 +3535,7 @@
       "baseline": {
         "site": "3bf0bd28c564a97a",
         "corpus": "3bf0bd28c564a97a",
-        "alignedAt": "2026-10-02"
+        "alignedAt": "2026-10-03"
       }
     },
     {
@@ -3545,7 +3545,7 @@
       "baseline": {
         "site": "18a353d3b4cb6b58",
         "corpus": "18a353d3b4cb6b58",
-        "alignedAt": "2026-10-02"
+        "alignedAt": "2026-10-03"
       }
     },
     {
@@ -3555,7 +3555,7 @@
       "baseline": {
         "site": "df211290b9b5e7a6",
         "corpus": "df211290b9b5e7a6",
-        "alignedAt": "2026-10-02"
+        "alignedAt": "2026-10-03"
       }
     },
     {
@@ -3565,7 +3565,7 @@
       "baseline": {
         "site": "f598da4c0f87496f",
         "corpus": "f598da4c0f87496f",
-        "alignedAt": "2026-10-02"
+        "alignedAt": "2026-10-03"
       }
     },
     {
@@ -3575,7 +3575,7 @@
       "baseline": {
         "site": "f96c048ef372c4db",
         "corpus": "f96c048ef372c4db",
-        "alignedAt": "2026-10-02"
+        "alignedAt": "2026-10-03"
       }
     },
     {
@@ -3585,7 +3585,7 @@
       "baseline": {
         "site": "7dcb3fe8330d5012",
         "corpus": "7dcb3fe8330d5012",
-        "alignedAt": "2026-10-02"
+        "alignedAt": "2026-10-03"
       }
     },
     {
@@ -3595,7 +3595,7 @@
       "baseline": {
         "site": "dd6599b62beb0db6",
         "corpus": "dd6599b62beb0db6",
-        "alignedAt": "2026-10-02"
+        "alignedAt": "2026-10-03"
       }
     },
     {
@@ -3605,7 +3605,7 @@
       "baseline": {
         "site": "f270963af6315a3e",
         "corpus": "f270963af6315a3e",
-        "alignedAt": "2026-10-02"
+        "alignedAt": "2026-10-03"
       }
     },
     {
@@ -3615,7 +3615,7 @@
       "baseline": {
         "site": "9343be368cb65be8",
         "corpus": "9343be368cb65be8",
-        "alignedAt": "2026-10-02"
+        "alignedAt": "2026-10-03"
       }
     },
     {
@@ -3625,7 +3625,7 @@
       "baseline": {
         "site": "f70019cf49ae779d",
         "corpus": "f70019cf49ae779d",
-        "alignedAt": "2026-10-02"
+        "alignedAt": "2026-10-03"
       }
     },
     {
@@ -3635,7 +3635,7 @@
       "baseline": {
         "site": "cb77646f50fe5a65",
         "corpus": "cb77646f50fe5a65",
-        "alignedAt": "2026-10-02"
+        "alignedAt": "2026-10-03"
       }
     },
     {
@@ -3645,7 +3645,7 @@
       "baseline": {
         "site": "639787be4f50b784",
         "corpus": "639787be4f50b784",
-        "alignedAt": "2026-10-02"
+        "alignedAt": "2026-10-03"
       }
     },
     {
@@ -3655,7 +3655,7 @@
       "baseline": {
         "site": "a27c12e2442827cf",
         "corpus": "a27c12e2442827cf",
-        "alignedAt": "2026-10-02"
+        "alignedAt": "2026-10-03"
       }
     },
     {
@@ -3665,7 +3665,7 @@
       "baseline": {
         "site": "4b99633ea6632346",
         "corpus": "4b99633ea6632346",
-        "alignedAt": "2026-10-02"
+        "alignedAt": "2026-10-03"
       }
     },
     {
@@ -3675,7 +3675,7 @@
       "baseline": {
         "site": "4d72e3a0de478b5b",
         "corpus": "4d72e3a0de478b5b",
-        "alignedAt": "2026-10-02"
+        "alignedAt": "2026-10-03"
       }
     },
     {
@@ -3685,7 +3685,7 @@
       "baseline": {
         "site": "28603e3421b194be",
         "corpus": "28603e3421b194be",
-        "alignedAt": "2026-10-02"
+        "alignedAt": "2026-10-03"
       }
     },
     {
@@ -3695,7 +3695,7 @@
       "baseline": {
         "site": "dd5136b49ba14773",
         "corpus": "dd5136b49ba14773",
-        "alignedAt": "2026-10-02"
+        "alignedAt": "2026-10-03"
       }
     },
     {
@@ -3705,7 +3705,7 @@
       "baseline": {
         "site": "9063e62df884c855",
         "corpus": "9063e62df884c855",
-        "alignedAt": "2026-10-02"
+        "alignedAt": "2026-10-03"
       }
     },
     {
@@ -3715,7 +3715,7 @@
       "baseline": {
         "site": "b07321325acf6ef1",
         "corpus": "b07321325acf6ef1",
-        "alignedAt": "2026-10-02"
+        "alignedAt": "2026-10-03"
       }
     },
     {
@@ -3725,7 +3725,7 @@
       "baseline": {
         "site": "b64560987311f712",
         "corpus": "b64560987311f712",
-        "alignedAt": "2026-10-02"
+        "alignedAt": "2026-10-03"
       }
     },
     {
@@ -3735,7 +3735,7 @@
       "baseline": {
         "site": "4331434b692e15e5",
         "corpus": "4331434b692e15e5",
-        "alignedAt": "2026-10-02"
+        "alignedAt": "2026-10-03"
       }
     },
     {
@@ -3745,7 +3745,7 @@
       "baseline": {
         "site": "c94cb73497fa7ac4",
         "corpus": "c94cb73497fa7ac4",
-        "alignedAt": "2026-10-02"
+        "alignedAt": "2026-10-03"
       }
     },
     {
