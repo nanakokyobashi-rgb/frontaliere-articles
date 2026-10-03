@@ -411,6 +411,23 @@ export function activeQuotaLeases(events = [], { nowSec = Math.floor(Date.now() 
 }
 
 /**
+ * Una reservation gia' scritta e' contesa? UNICA regola per chi la adotta
+ * (`acquire`), per chi la consuma (`consume`) e per la rilettura dopo la
+ * scrittura dei ruoli esclusivi (la rilettura `issue-fix` ha un blocco
+ * proprio in `runQuotaLease`). `issue-fix` condivide un pool: e' conteso da un lease di un altro
+ * ruolo o dal pool oltre il tetto. Ogni altro ruolo e' ESCLUSIVO: la propria
+ * reservation deve essere l'unico lease vivo. `live` comprende la reservation
+ * stessa. Finche' `consume` usava la regola del pool per tutti i ruoli, una
+ * reservation `issue-decompose` contava se stessa fra i concorrenti e non era
+ * mai consumabile (corpus 1084: 29 reserved, 0 consumed). Pure.
+ */
+export function quotaLeaseReservationContended({ role = '', live = [], issueFixPool = 1 } = {}) {
+  if (role !== 'issue-fix') return live.length !== 1;
+  const issueFixLive = live.filter((lease) => lease?.role === 'issue-fix');
+  return issueFixLive.length !== live.length || issueFixLive.length > issueFixPool;
+}
+
+/**
  * Admission policy for the shared lease. Issue-fix consumers can use a bounded
  * pool of Codex-primary slots; review/redflag/redcheck still contend for one
  * residual slot and are denied while the issue-fix pool is active. This keeps
@@ -460,10 +477,7 @@ export function quotaLeaseDecision({
       && SHA1_RE.test(String(headSha || ''))
       && String(reservedForRun.headSha || '').toLowerCase() === String(headSha).toLowerCase()
       && String(reservedForRun.reservationRunId || '') === String(runId || '');
-    const reservationContended = role === 'issue-fix'
-      ? otherLive.length > 0 || issueFixLive.length > issueFixPool
-      : live.length !== 1;
-    if (boundReservation && reservationContended) {
+    if (boundReservation && quotaLeaseReservationContended({ role, live, issueFixPool })) {
       return { allowed: false, error: false, reason: 'shared-quota-lease-reservation-contended' };
     }
     if (boundReservation) {
@@ -483,8 +497,7 @@ export function quotaLeaseDecision({
       && lease.targetType === targetType
       && String(lease.target) === String(target),
     );
-    if (reservedForTarget
-      && (otherLive.length > 0 || issueFixLive.length > issueFixPool)) {
+    if (reservedForTarget && quotaLeaseReservationContended({ role, live, issueFixPool })) {
       return { allowed: false, error: false, reason: 'shared-quota-lease-reservation-contended' };
     }
     if (reservedForTarget) {
@@ -855,7 +868,8 @@ export function runQuotaLease({
       }
       throw new Error(`pool issue-fix conteso: ${liveAfter.length} lease attivi, cap ${issueFixPool}`);
     }
-    if (existing && role !== 'issue-fix' && liveAfter.length !== 1) {
+    if (existing && role !== 'issue-fix'
+      && quotaLeaseReservationContended({ role, live: liveAfter, issueFixPool })) {
       // Una reservation adottabile non è un lasciapassare per una seconda run:
       // se nel frattempo è comparso un altro lease, questa run non spende quota.
       // La reservation è però head/run-bound a questa stessa run: la ritiriamo
