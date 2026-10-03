@@ -792,10 +792,6 @@
     "affitti svizzera mercato immobiliare 2026": 1
   },
   "topicGateUrls": {
-    "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/una-13esima-avs-solidale-per-i-giovani-ticinesi--4126848.html": {
-      "section": "frontaliere",
-      "ts": 1790857996848
-    },
     "frontaliere::https://www.rsi.ch/s/4126848": {
       "section": "frontaliere",
       "ts": 1790859960019
@@ -907,6 +903,10 @@
     "frontaliere::https://www.varesenews.it/2026/10/fim-cisl-dei-laghi-linclusione-e-un-diritto-dalle-storie-di-disabilita-alla-contrattazione-in-azienda/2697043": {
       "section": "frontaliere",
       "ts": 1791029170390
+    },
+    "svizzera::https://www.laregione.ch/svizzera/svizzera/1954477/scappano-su-un-monopattino-elettrico-ferito-un-agente": {
+      "section": "svizzera",
+      "ts": 1791032005242
     }
   }
 }
