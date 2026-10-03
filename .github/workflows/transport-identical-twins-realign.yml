@@ -227,13 +227,19 @@ jobs:
             git checkout --detach origin/main
             rc=0
             node scripts/ci/realign-adapted-baseline.mjs ${args[@]+"${args[@]}"} || rc=$?
-            if [ "$rc" = "2" ]; then
-              echo "::error::Errore d'uso: nessuna baseline riallineata."
+            # Solo 0 (tutto certificato) e 3 (esito parziale: voci certificate
+            # sul disco, altro da guardare) portano a un push. 2 = errore
+            # d'uso; 1 o altro = eccezione: il manifest sul disco non e'
+            # certificato e non esce dal runner.
+            if [ "$rc" != "0" ] && [ "$rc" != "3" ]; then
+              echo "::error::Riallineamento adapted terminato con rc=$rc (errore d'uso o eccezione): nessun push del manifest."
               exit "$rc"
             fi
+            final=0
+            if [ "$rc" = "3" ]; then final=1; fi
             if git diff --quiet -- scripts/ci/loop-sync-manifest.json; then
               echo "Nessuna baseline adapted da riallineare."
-              exit "$rc"
+              exit "$final"
             fi
             if [ -n "$(git diff --name-only)" ] && [ "$(git diff --name-only)" != "scripts/ci/loop-sync-manifest.json" ]; then
               echo "::error::Il riallineamento adapted ha modificato file oltre il manifest."
@@ -242,9 +248,9 @@ jobs:
             git add -- scripts/ci/loop-sync-manifest.json
             git commit -m "chore(loop): riallinea baseline adapted dichiarate"
             if git push origin HEAD:main; then
-              # Le voci certificate sono su main; una lettura fallita su
-              # un'ALTRA voce resta comunque un rosso da guardare.
-              exit "$rc"
+              # Le voci certificate sono su main; un esito parziale (rc=3)
+              # resta comunque un rosso da guardare.
+              exit "$final"
             fi
             echo "::warning::Push non fast-forward o temporaneamente rifiutato; aggiorno main e ritento ($attempt/3)."
           done

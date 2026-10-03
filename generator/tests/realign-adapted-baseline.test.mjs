@@ -25,9 +25,12 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   STALE_DECLARATION_TITLE,
+  EXIT_PARTIAL,
   baselineNewerThanDeclaration,
   collectDeclarations,
+  declarationCandidateLines,
   evaluateDeclaration,
+  initRunFailed,
   isStaleDeclaration,
   parseRealignDeclarations,
   realignDeclarationLine,
@@ -257,6 +260,28 @@ test('riga Realign-adapted malformata: ignorata e segnalata, le righe valide res
   ]);
 });
 
+test('un esempio del formato in un blocco di codice recintato non dichiara nulla', () => {
+  const body = [
+    'Formato:',
+    '```',
+    'Realign-adapted: scripts/ci/esempio.mjs site-prs=#1',
+    'Realign-adapted: <path> site-prs=#N[,#M…]',
+    '```',
+    '~~~text',
+    'Realign-adapted: scripts/ci/tilde.mjs site-prs=#2',
+    '```',
+    'Realign-adapted: scripts/ci/ancora-dentro.mjs site-prs=#3',
+    '~~~',
+    'Realign-adapted: scripts/ci/vera.mjs site-prs=#4',
+  ].join('\n');
+  const parsed = parseRealignDeclarations(body);
+  assert.deepEqual(parsed.declarations, [{ path: 'scripts/ci/vera.mjs', sitePrs: [4] }]);
+  assert.deepEqual(parsed.malformed, []);
+  // Il pre-filtro dell'elenco delle PR usa le stesse righe candidate.
+  assert.deepEqual(declarationCandidateLines(body), ['Realign-adapted: scripts/ci/vera.mjs site-prs=#4']);
+  assert.deepEqual(declarationCandidateLines('```\nRealign-adapted: x site-prs=#1\n```'), []);
+});
+
 test('il formato ha una sorgente: la riga prodotta e\' quella che il parser rilegge', () => {
   const line = realignDeclarationLine({ path: REL, sitePrs: [5, 8] });
   assert.equal(line, `Realign-adapted: ${REL} site-prs=#5,#8`);
@@ -291,6 +316,19 @@ test('verifyInitResult: la baseline scritta deve essere la coppia valutata', () 
   );
 });
 
+test('initRunFailed: un rifiuto di `--init` dopo le tre prove lascia il job rosso', () => {
+  // `loop-drift-check.mjs --init` esce 1 apposta quando rifiuta una voce: il wrapper non lo zittisce.
+  assert.equal(initRunFailed({ childStatus: 1, statuses: ['realigned'] }), true);
+  // Ucciso da un segnale: `status` e' null.
+  assert.equal(initRunFailed({ childStatus: null, statuses: ['realigned'] }), true);
+  // Exit 0 ma voce non riscritta: e' comunque un rifiuto.
+  assert.equal(initRunFailed({ childStatus: 0, statuses: ['realigned', 'init-refused'] }), true);
+  // Un lato mosso durante `--init` si ritenta alla passata dopo: non e' rosso.
+  assert.equal(initRunFailed({ childStatus: 0, statuses: ['moved-during-init'] }), false);
+  assert.equal(initRunFailed({ childStatus: 0, statuses: ['realigned'] }), false);
+  assert.equal(EXIT_PARTIAL, 3);
+});
+
 test('dichiarazione trattenuta oltre la soglia: allarme, salvo baseline riscritta dopo la dichiarazione', () => {
   const held = { held: true, realign: false, status: 'site-pr-not-merged', reason: '' };
   const source = { kind: 'pr', number: 50, mergedAt: '2026-09-20T10:00:00Z', mergeCommitSha: 'm50' };
@@ -322,8 +360,15 @@ function jobBlock(name) {
   return next < 0 ? rest : rest.slice(0, next + 1);
 }
 
+/** Il testo prima di `jobs:`; un indice mancante non deve far leggere tutto il file. */
+function workflowHead() {
+  const idx = yml.indexOf('\njobs:\n');
+  assert.ok(idx >= 0, `chiave \`jobs:\` non trovata in ${WORKFLOW}`);
+  return yml.slice(0, idx);
+}
+
 test('workflow: realign-adapted scrive sotto lo stesso lock globale del realign dei trasporti', () => {
-  const head = yml.slice(0, yml.indexOf('\njobs:\n'));
+  const head = workflowHead();
   assert.match(head, /\nconcurrency:\n(?:\s+#.*\n)*\s+group: transport-identical-twins-realign-main\n\s+cancel-in-progress: false\n/);
   // Il lock e' del workflow: un `concurrency:` di job lo sostituirebbe per quel job.
   for (const name of ['realign', 'realign-adapted']) {
@@ -332,7 +377,7 @@ test('workflow: realign-adapted scrive sotto lo stesso lock globale del realign 
 });
 
 test('workflow: trigger a orario e a mano, e il job dei trasporti resta sul solo evento pull_request', () => {
-  const head = yml.slice(0, yml.indexOf('\njobs:\n'));
+  const head = workflowHead();
   assert.match(head, /\n  schedule:\n\s+- cron: '\d+ \*\/6 \* \* \*'\n/);
   assert.match(head, /\n  workflow_dispatch:\n\s+inputs:\n\s+paths:[\s\S]*?\n\s+site_prs:[\s\S]*?\n\s+dry_run:/);
   assert.match(head, /\npermissions:\n\s+contents: write\n\s+pull-requests: read\n/);
@@ -354,7 +399,21 @@ test('workflow: il push e\' condizionato al diff del SOLO manifest, e gli input 
   assert.match(job, /persist-credentials: false/);
   assert.match(job, /runtime_pat="\$\{GITHUB_PAT_NANAKO:-\}"/);
   // Gli input del dispatch arrivano come env, mai interpolati in `run:`.
-  const run = job.slice(job.indexOf('        run: |\n          set -euo pipefail\n          args=()'));
+  const runStart = job.indexOf('        run: |\n          set -euo pipefail\n          args=()');
+  assert.ok(runStart >= 0, 'step di riallineamento non trovato: il controllo sugli input sarebbe vacuo');
+  const run = job.slice(runStart);
+  assert.match(run, /node scripts\/ci\/realign-adapted-baseline\.mjs/);
   assert.doesNotMatch(run, /\$\{\{/);
-  assert.match(job, /node scripts\/ci\/realign-adapted-baseline\.mjs/);
+});
+
+test('workflow: si pusha solo con rc 0 o 3; un\'eccezione (rc 1) non porta il manifest fuori dal runner', () => {
+  const job = jobBlock('realign-adapted');
+  const gate = job.indexOf('if [ "$rc" != "0" ] && [ "$rc" != "3" ]; then');
+  const add = job.indexOf(`git add -- ${MANIFEST_REL}`);
+  assert.ok(gate >= 0, 'manca il cancello sull\'exit code dello script');
+  assert.ok(add > gate, 'il cancello sull\'exit code deve precedere `git add`');
+  // L'esito parziale pusha le voci certificate ma chiude rosso.
+  assert.match(job, /if \[ "\$rc" = "3" \]; then final=1; fi/);
+  const pushBlock = job.slice(job.indexOf('if git push origin HEAD:main; then'));
+  assert.match(pushBlock.slice(0, pushBlock.indexOf('fi\n')), /exit "\$final"/);
 });

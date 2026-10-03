@@ -71,14 +71,24 @@
  *   node scripts/ci/realign-adapted-baseline.mjs --dry-run       # decide e stampa, non scrive
  *   node scripts/ci/realign-adapted-baseline.mjs --paths=<a>[,<b>] --site-prs=<N>[,<M>]
  *
- * Exit: 0 anche con voci trattenute (e' l'esito previsto); 1 se una lettura e'
- * fallita o l'elenco delle PR e' incompleto; 2 per un errore d'uso.
+ * Le righe dentro un blocco di codice recintato (``` o ~~~) non contano: un
+ * body che MOSTRA il formato non dichiara nulla.
+ *
+ * Exit:
+ *   0  anche con voci trattenute dalle prove (e' l'esito previsto);
+ *   3  esito parziale da guardare: una lettura e' fallita, l'elenco delle PR e'
+ *      incompleto, oppure `--init` ha rifiutato una voce che aveva passato le
+ *      tre prove (exit del figlio != 0 o voce non riscritta). Le voci
+ *      certificate sono sul disco e il workflow le pusha, poi chiude rosso;
+ *   2  errore d'uso;
+ *   1  eccezione non gestita: il manifest sul disco non e' certificato e il
+ *      workflow NON lo pusha.
  *
  * Env:
  *   GH_TOKEN                   token per le API GitHub (PR del corpus, storia del sito)
  *   GITHUB_REPOSITORY          default `nanakokyobashi-rgb/frontaliere-articles`
  *   SITE_REPO                  default `valerielinc-ops/frontaliere-si-o-no`
- *   REALIGN_SITE_HISTORY_CAP   default 30: commit del sito letti per file
+ *   REALIGN_SITE_HISTORY_CAP   default 30, massimo 100 (una pagina API): commit del sito letti per file
  *   REALIGN_WINDOW_DAYS        default 14: finestra delle PR dichiaranti
  *   REALIGN_STALE_DAYS         default 7: eta' oltre cui una dichiarazione trattenuta e' un warning
  *   GITHUB_STEP_SUMMARY        se presente, riceve il riepilogo
@@ -97,6 +107,10 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const TOOL = 'realign-adapted-baseline';
 const SITE_MAIN = 'main';
 const DAY_MS = 24 * 60 * 60 * 1000;
+/** Commit per pagina dell'API `commits`: la storia del sito si legge in una pagina sola. */
+const SITE_HISTORY_MAX = 100;
+/** Exit di un esito parziale: voci certificate da pushare, ma il job resta rosso. */
+export const EXIT_PARTIAL = 3;
 
 /** Titolo dell'allarme quando una dichiarazione resta trattenuta troppo a lungo. */
 export const STALE_DECLARATION_TITLE = 'Mirror: gemello `adapted` con riallineamento dichiarato e mai avvenuto';
@@ -111,6 +125,29 @@ export function realignDeclarationLine({ path: filePath, sitePrs }) {
   return `Realign-adapted: ${filePath} site-prs=${sitePrs.map((n) => `#${n}`).join(',')}`;
 }
 
+/** Recinto di un blocco di codice Markdown (``` o ~~~, fino a 3 spazi di rientro). */
+const FENCE_RE = /^ {0,3}(`{3,}|~{3,})/;
+
+/**
+ * Le righe di un body che possono essere dichiarazioni: col prefisso giusto e
+ * FUORI da un blocco di codice recintato. Un esempio del formato mostrato in un
+ * blocco di codice non e' una dichiarazione (ne' valida ne' malformata).
+ */
+export function declarationCandidateLines(body) {
+  const lines = [];
+  let fence = null;
+  for (const line of String(body || '').split(/\r?\n/)) {
+    const marker = FENCE_RE.exec(line);
+    if (marker) {
+      if (fence === null) fence = marker[1][0];
+      else if (marker[1][0] === fence) fence = null;
+      continue;
+    }
+    if (fence === null && DECLARATION_PREFIX_RE.test(line)) lines.push(line);
+  }
+  return lines;
+}
+
 /**
  * Le dichiarazioni di un body. Una riga col prefisso giusto ma la forma
  * sbagliata finisce in `malformed`: ignorata, mai interpretata a meta'.
@@ -119,8 +156,7 @@ export function realignDeclarationLine({ path: filePath, sitePrs }) {
 export function parseRealignDeclarations(body) {
   const declarations = [];
   const malformed = [];
-  for (const line of String(body || '').split(/\r?\n/)) {
-    if (!DECLARATION_PREFIX_RE.test(line)) continue;
+  for (const line of declarationCandidateLines(body)) {
     const match = DECLARATION_RE.exec(line);
     if (!match) {
       malformed.push(line.trim());
@@ -299,6 +335,19 @@ export function verifyInitResult({ before, after, expected }) {
   return { ok: true, revert: false, status: 'realigned', reason: '' };
 }
 
+/**
+ * Il giro di `--init` va guardato da una persona? `loop-drift-check.mjs --init`
+ * esce 1 apposta quando rifiuta una voce (attestazione dell'albero del sito,
+ * che `--force` non copre), e una voce che ha passato le tre prove e poi viene
+ * rifiutata e' esattamente l'anomalia da guardare: il job resta rosso. Un
+ * `moved-during-init` NO: un lato si e' mosso, la passata successiva ritenta.
+ * @param {{childStatus: number|null, statuses: string[]}} a
+ */
+export function initRunFailed({ childStatus, statuses }) {
+  if (childStatus !== 0) return true;
+  return statuses.some((status) => status === 'init-refused');
+}
+
 /** Raccoglie la storia del sito per un file, fermandosi alla baseline. */
 export async function gatherSiteCommits({ sitePath, baselineSite, cap, io }) {
   const history = await io.siteHistory(sitePath, cap);
@@ -362,7 +411,7 @@ function createIo({ siteRepo, api }) {
     },
     async siteHistory(sitePath, cap) {
       const commits = await getJson(
-        `https://api.github.com/repos/${siteRepo}/commits?path=${encodeURIComponent(sitePath)}&sha=${SITE_MAIN}&per_page=${Math.min(cap, 100)}`,
+        `https://api.github.com/repos/${siteRepo}/commits?path=${encodeURIComponent(sitePath)}&sha=${SITE_MAIN}&per_page=${Math.min(cap, SITE_HISTORY_MAX)}`,
       );
       return commits.slice(0, cap).map((commit) => ({ sha: commit.sha }));
     },
@@ -397,7 +446,7 @@ async function listDeclaringPrs({ repo, sinceMs, api, maxPages = 10 }) {
     const batch = await res.json();
     for (const pr of batch) {
       if (!pr.merged_at || Date.parse(pr.merged_at) < sinceMs) continue;
-      if (!String(pr.body || '').split(/\r?\n/).some((line) => DECLARATION_PREFIX_RE.test(line))) continue;
+      if (!declarationCandidateLines(pr.body).length) continue;
       prs.push({ number: pr.number, mergedAt: pr.merged_at, mergeCommitSha: pr.merge_commit_sha, body: pr.body });
     }
     const last = batch[batch.length - 1];
@@ -434,7 +483,12 @@ async function main(argv) {
     console.error(`\`--site-prs\` accetta solo numeri di PR: ${sitePrTokens.join(',')}`);
     return 2;
   }
-  const cap = parsePositiveNum(process.env.REALIGN_SITE_HISTORY_CAP, 30, { label: 'REALIGN_SITE_HISTORY_CAP', tool: TOOL, integer: true });
+  let cap = parsePositiveNum(process.env.REALIGN_SITE_HISTORY_CAP, 30, { label: 'REALIGN_SITE_HISTORY_CAP', tool: TOOL, integer: true });
+  if (cap > SITE_HISTORY_MAX) {
+    // Una pagina sola: oltre, il tetto stampato nei motivi mentirebbe.
+    console.log(`::warning::${TOOL}: REALIGN_SITE_HISTORY_CAP=${cap} oltre il massimo di ${SITE_HISTORY_MAX} (una pagina API): uso ${SITE_HISTORY_MAX}.`);
+    cap = SITE_HISTORY_MAX;
+  }
   const windowDays = parsePositiveNum(process.env.REALIGN_WINDOW_DAYS, 14, { label: 'REALIGN_WINDOW_DAYS', tool: TOOL });
   const staleDays = parsePositiveNum(process.env.REALIGN_STALE_DAYS, 7, { label: 'REALIGN_STALE_DAYS', tool: TOOL });
   const corpusRepo = process.env.GITHUB_REPOSITORY || 'nanakokyobashi-rgb/frontaliere-articles';
@@ -496,8 +550,13 @@ async function main(argv) {
       if (verdict.revert) {
         afterEntry.baseline = row.entry.baseline;
         reverted = true;
+        console.log(`::warning::${TOOL}: ${row.declaration.path} — ${verdict.reason}; riportata com'era, la prossima passata ritenta.`);
       }
       row.decision = hold(verdict.status, verdict.reason);
+    }
+    if (initRunFailed({ childStatus: child.status, statuses: toInit.map((row) => row.decision.status) })) {
+      failed = true;
+      console.log(`::error::${TOOL}: \`loop-drift-check.mjs --init\` ha rifiutato una voce che aveva passato le tre prove (exit ${child.status}): vedi il log qui sopra.`);
     }
     if (!rows.some((row) => row.decision.status === 'realigned')) {
       // Nessuna voce certificata: il manifest torna byte per byte com'era.
@@ -532,7 +591,7 @@ async function main(argv) {
   for (const row of stale) {
     console.log(`::warning title=${STALE_DECLARATION_TITLE}::${row.declaration.path} — ${row.decision.status}: ${row.decision.reason}`);
   }
-  return failed ? 1 : 0;
+  return failed ? EXIT_PARTIAL : 0;
 }
 
 const isDirectRun = (() => {

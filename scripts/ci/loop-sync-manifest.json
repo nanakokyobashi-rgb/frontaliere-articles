@@ -4173,7 +4173,7 @@
       "reason": "Riallineamento automatico delle baseline dei gemelli `adapted` dichiarate nel body della PR del corpus (riga `Realign-adapted: <path> site-prs=#N`, issue #1997). Vive solo qui come transport-realign-body.mjs: legge e scrive il manifest di questo repo dal job `realign-adapted` di transport-identical-twins-realign.yml, e il sito non possiede ne' il manifest ne' quel push.",
       "baseline": {
         "site": null,
-        "corpus": "9910453db6830780",
+        "corpus": "a24813f361778be5",
         "alignedAt": "2026-10-03"
       }
     },
@@ -4371,7 +4371,7 @@
       "reason": "Workflow che scrive le baseline del manifest su main sotto un lock globale: il job `realign` riallinea solo `baseline.corpus` dopo il merge di una PR di trasporto dei gemelli `identical`; il job `realign-adapted` (schedule ogni 6 ore e dispatch, issue #1997) riallinea i gemelli `adapted` dichiarati con `Realign-adapted:` nel body della PR del corpus, tramite scripts/ci/realign-adapted-baseline.mjs. Il sito non possiede il lato ricevente del manifest ne' il suo push sul main del corpus, quindi non esiste un gemello da portare.",
       "baseline": {
         "site": null,
-        "corpus": "09fbeac2f3c06ec9",
+        "corpus": "770fe063c7829b3d",
         "alignedAt": "2026-10-03"
       }
     },
