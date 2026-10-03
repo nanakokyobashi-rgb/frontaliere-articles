@@ -98456,6 +98456,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tariffe-usa-agenda-seco': {
+    title: 'SECO: nuovi dazi USA e voto federale 2026 | Frontaliere Ticino',
+    description: 'Dazi USA fino al 12,5% sulle importazioni dalla Svizzera, voto federale il 29 novembre 2026 e dimissioni di Helene Budliger Artieda alla SECO a fine marzo 2027.',
+    keywords: 'frontalieri, ticino, svizzera, italia, seco, nuovi, dazi, voto',
+    ogTitle: 'SECO, dazi USA e voto federale nel 2026',
+    ogDescription: 'Il 24 luglio 2026 gli Stati Uniti hanno adottato nuovi dazi aggiuntivi variabili fino al 12,5% sulle importazioni dalla Svizzera. La SECO segnala anche il voto del 29 novembre 2026 e le dimissioni di Helene Budliger Artieda.',
+    canonicalPath: '/articoli-svizzera/tariffe-usa-agenda-seco/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "SECO: nuovi dazi USA e voto federale 2026",
+      "description": "Dazi USA fino al 12,5% sulle importazioni dalla Svizzera, voto federale il 29 novembre 2026 e dimissioni di Helene Budliger Artieda alla SECO a fine marzo 2027.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/tariffe-usa-agenda-seco.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documenti sulla SECO e sui nuovi dazi statunitensi per le importazioni dalla Svizzera."
+      },
+      "datePublished": "2026-10-03T00:46:53+00:00",
+      "dateModified": "2026-10-03T00:46:53+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/tariffe-usa-agenda-seco/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
