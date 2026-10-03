@@ -991,6 +991,18 @@
     "svizzera::https://www.tio.ch/sport/hockey/1954480/friborgo-ambri-league-national-hcap": {
       "section": "svizzera",
       "ts": 1791064005267
+    },
+    "frontaliere::https://www.rsi.ch/info/economia/infomaniak-vola-al-debutto-in-borsa--4128432.html": {
+      "section": "frontaliere",
+      "ts": 1791065096588
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/scuola-e-imprese-si-puo-fare-a-villa-recalcati-il-bilancio-del-progetto-che-cambia-lorientamento/2695297": {
+      "section": "frontaliere",
+      "ts": 1791065171583
+    },
+    "frontaliere::https://www.tio.ch/sport/hockey/1954480/friborgo-ambri-league-national-hcap": {
+      "section": "frontaliere",
+      "ts": 1791065480590
     }
   }
 }
