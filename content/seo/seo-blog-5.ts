@@ -99094,6 +99094,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-festa-zucca-gavirate-weekend-ottobre': {
+    title: 'Festa della Zucca a Gavirate: weekend di ottobre tra sagre e sport',
+    description: 'Il 4 ottobre il lungolago di Gavirate ospita la Festa della Zucca con stand gastronomici, musica e rievocazioni storiche, mentre la Grand Fondo chiude molte',
+    keywords: 'frontalieri, ticino, svizzera, italia, festa, zucca, gavirate, weekend',
+    ogTitle: 'Festa della Zucca a Gavirate: weekend di ottobre in Varese',
+    ogDescription: 'Nel primo weekend di ottobre la provincia di Varese si anima: a Gavirate la Festa della Zucca attira famiglie con cibo, musica e rievocazioni dei Celti, Longobardi e Normanni; la Grand Fondo Tre Valli Varesine chiude numerose vie, rendendo gli',
+    canonicalPath: '/articoli-frontaliere/festa-zucca-gavirate-weekend-ottobre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Festa della Zucca a Gavirate: weekend di ottobre tra sagre e sport",
+      "description": "Il 4 ottobre il lungolago di Gavirate ospita la Festa della Zucca con stand gastronomici, musica e rievocazioni storiche, mentre la Grand Fondo chiude molte",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/festa-zucca-gavirate-weekend-ottobre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lungolago di Gavirate illuminato dalla Festa della Zucca, stand gastronomici e famiglie in atmosfera autunnale."
+      },
+      "datePublished": "2026-10-03T23:04:46+00:00",
+      "dateModified": "2026-10-03T23:04:46+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/festa-zucca-gavirate-weekend-ottobre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
