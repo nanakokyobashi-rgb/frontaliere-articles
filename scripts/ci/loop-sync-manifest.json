@@ -2992,8 +2992,8 @@
       "sitePath": "services/seo/imageObjectLd.ts",
       "mode": "identical",
       "baseline": {
-        "site": "bb617d3b4c45796b",
-        "corpus": "bb617d3b4c45796b",
+        "site": "2fe7c578047070e4",
+        "corpus": "2fe7c578047070e4",
         "alignedAt": "2026-10-03"
       }
     },
@@ -3210,7 +3210,7 @@
       "reason": "Test node:test del normalizzatore host ImageObject: verifica attribuzione esterna, identità del sito e input array immutabili sul runtime del corpus. Il sito ha la propria copertura Vitest; questo harness host non viene mirrorato.",
       "baseline": {
         "site": null,
-        "corpus": "3125fcdc76588ebf",
+        "corpus": "22b95e9a4e04fbf2",
         "alignedAt": "2026-10-03"
       }
     },
