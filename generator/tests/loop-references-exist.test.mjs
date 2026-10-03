@@ -753,6 +753,14 @@ const DECLARED_ABSENT = {
     kind: 'site-only',
     reason: 'L\'orchestratore dei crawler e\' del sito; qui non esistono crawler. Descrittiva.',
   },
+  'scripts/ci/scan-crawler-fleet-stall.mjs :: orchestrate-crawlers.yml': {
+    kind: 'site-only',
+    reason:
+      'Il commento di MAX_DELIVERY_GAP_HOURS spiega da dove viene la cadenza delle ondate ' +
+      '(Cloud Scheduler alle 09:00 e alle 21:00 UTC verso l\'orchestratore del sito) per ' +
+      'motivare la soglia del gap fra consegne. Lo scanner misura i commit di consegna dei ' +
+      'gruppi e non legge, non invoca e non dipende dal workflow del sito. Descrittiva.',
+  },
   'scripts/lib/secrets-scope-detect.mjs :: evergreen-refresh-audit.yml': {
     kind: 'site-only',
     reason: 'Stessa mappa categoria-issue → workflow del sito. Descrittiva.',

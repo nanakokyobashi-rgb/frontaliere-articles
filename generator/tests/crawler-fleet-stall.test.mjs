@@ -27,6 +27,11 @@ import {
   parseDeliveryRows,
   stallVerdict,
   deliveriesByDay,
+  STALL_ISSUE_TITLE,
+  CLOSE_SUSTAINED_DAYS,
+  CLOSE_MAX_GAP_HOURS,
+  sustainedDelivery,
+  closeRecoveredStallIssue,
 } from '../../scripts/ci/scan-crawler-fleet-stall.mjs';
 
 const H = 3600_000;
@@ -220,12 +225,17 @@ test('un timestamp nel futuro non vale come consegna recente', () => {
   assert.equal(groupDeliveries(skewed, NOW).length, 1);
 });
 
-test('il titolo e UNICO per entrambi i verdetti, o la dedup apre due issue', () => {
+test('il titolo e UNICO per entrambi i verdetti e fra apertura e chiusura', () => {
   // Un incidente che passa da under-coverage a hard-stop è il PEGGIORAMENTO
-  // dello stesso guasto: con due titoli la dedup non lo riconosce e, dato che la
-  // chiusura automatica è dichiarata non implementata, restano aperte entrambe.
+  // dello stesso guasto: con due titoli la dedup non lo riconosce. E il titolo
+  // è anche la chiave della chiusura: se apertura e chiusura usassero due
+  // letterali, la chiusura cercherebbe una issue che nessuno apre.
   const src = readFileSync(new URL('../../scripts/ci/scan-crawler-fleet-stall.mjs', import.meta.url), 'utf8');
-  assert.match(src, /const title = 'Crawler fleet: i gruppi non consegnano dati';/);
+  // L'invariante vero: il letterale esiste UNA volta (la costante). Che la
+  // chiusura cerchi proprio quella costante lo verifica il test comportamentale
+  // della chiusura (`calls.resolve[0].title`).
+  assert.equal(STALL_ISSUE_TITLE, 'Crawler fleet: i gruppi non consegnano dati');
+  assert.equal(src.split(`'${STALL_ISSUE_TITLE}'`).length - 1, 1, 'il letterale compare una volta sola');
   assert.doesNotMatch(src, /const title = verdict\.reason === 'under-coverage'/);
 });
 
@@ -260,4 +270,255 @@ test('le pagine di gh api arrivano come TSV di due campi, senza JSON da ricucire
   assert.doesNotMatch(src, /'--paginate', '--jq', '\.\[\]'\]/);
   assert.doesNotMatch(src, /replace\(\/\\\]\\s\*\\\[\/g/);
   assert.doesNotMatch(src, /JSON\.parse\(t\)/, 'nessun parsing JSON per riga');
+});
+
+// ── Chiusura dell'allarme: consegna SOSTENUTA, non il primo verdetto OK ──────
+//
+// Le ondate partono alle 09:00 e alle 21:00 UTC e consegnano in circa 1,5 ore.
+// `fleetWave` riproduce un'ondata: `n` gruppi distinti a 4 minuti l'uno
+// dall'altro. Con l'ondata serale che termina alle 22:29 e quella del mattino
+// che parte alle 09:19, la pausa sana fra due ondate è di ~10,8 ore.
+
+const pad = (i) => String(i).padStart(2, '0');
+
+function fleetWave(startIso, n = EXPECTED_GROUPS) {
+  const start = Date.parse(startIso);
+  return Array.from({ length: n }, (_, i) => ({ group: pad(i + 1), atMs: start + i * 4 * 60_000 }));
+}
+
+/** Due ondate al giorno per ciascun giorno; `skip` toglie un'ondata, `groups` la riduce. */
+function fleetDays(days, { skip = [], groups = {} } = {}) {
+  const out = [];
+  for (const day of days) {
+    for (const [slot, hhmm] of [['am', '09:19'], ['pm', '20:57']]) {
+      const key = `${day}-${slot}`;
+      if (skip.includes(key)) continue;
+      out.push(...fleetWave(`${day}T${hhmm}:00Z`, groups[key] ?? EXPECTED_GROUPS));
+    }
+  }
+  return out.sort((a, b) => b.atMs - a.atMs);
+}
+
+/** Dipendenze di rete finte: registrano ogni scrittura. */
+function fakeDeps({ issue = { number: 1579, title: STALL_ISSUE_TITLE, labels: [] }, commentOk = true, resolveImpl } = {}) {
+  const calls = { findOpen: [], comment: [], resolve: [] };
+  return {
+    calls,
+    deps: {
+      findOpen: async (title) => { calls.findOpen.push(title); return issue; },
+      comment: async (n, body) => { calls.comment.push({ n, body }); return commentOk; },
+      resolve: async (title, ctx) => {
+        calls.resolve.push({ title, ctx });
+        if (resolveImpl) return resolveImpl();
+        return { number: issue?.number, title, persisted: true };
+      },
+    },
+  };
+}
+
+const quiet = { log: () => {}, warn: () => {} };
+
+test('LA MISURA: la soglia di gap separa la pausa sana dall ondata persa', () => {
+  // Misurato il 2026-10-03 sulla storia dei commit del sito: gap massimi sani
+  // 10,27-10,42h (ondate puntuali dal 10-01); ondata persa o in ritardo 15,35h
+  // (09-28) e 17,40h (09-30), con la ricorrenza delle 12:51Z già a 14,4h.
+  const healthyMax = 10.42;
+  const lostWaveMin = 14.4;
+  assert.ok(healthyMax < CLOSE_MAX_GAP_HOURS && CLOSE_MAX_GAP_HOURS < lostWaveMin,
+    'la soglia deve stare nell intervallo vuoto fra pausa sana e ondata persa');
+  assert.equal(CLOSE_SUSTAINED_DAYS, 3);
+});
+
+test('REPLAY 30-09: copertura sopra soglia ma 14,4h senza consegne → issue aperta NON chiusa', async () => {
+  // La ricorrenza vera del 30-09 alle 12:51Z: l'ondata del mattino non è
+  // arrivata, l'ultima consegna è delle 22:29 del giorno prima. La copertura
+  // 24h contiene ancora l'ondata serale intera, quindi `stallVerdict` dice
+  // `delivering`: chiudere su quel verdetto avrebbe dato per guarita un'ondata
+  // persa.
+  const nowMs = Date.parse('2026-09-30T12:51:00Z');
+  const deliveries = fleetDays(['2026-09-26', '2026-09-27', '2026-09-28', '2026-09-29'])
+    .filter((d) => d.atMs <= nowMs);
+  const v = stallVerdict({ deliveries, nowMs, stallHours: 6, readable: true });
+  assert.equal(v.stalled, false, 'il verdetto indebolito non suona');
+  assert.equal(v.reason, 'delivering');
+  assert.ok(v.idleHours > 14.3 && v.idleHours < 14.5, `idle ${v.idleHours}`);
+
+  const s = sustainedDelivery({ deliveries, nowMs, readable: true });
+  assert.equal(s.sustained, false, 'un ondata persa non è consegna sostenuta');
+  assert.equal(s.reason, 'gap-too-long');
+  assert.ok(s.maxGapHours > CLOSE_MAX_GAP_HOURS);
+  assert.equal(s.maxGapEndMs, nowMs, 'il buco è ancora in corso');
+
+  const { calls, deps } = fakeDeps();
+  const r = await closeRecoveredStallIssue({ sustained: s, deps, ...quiet });
+  assert.equal(r.action, 'not-sustained');
+  assert.equal(calls.comment.length, 0, 'nessun commento');
+  assert.equal(calls.resolve.length, 0, 'nessuna chiusura');
+});
+
+test('tre giorni completi sopra soglia e nessun gap oltre il limite → una chiusura con la misura', async () => {
+  const nowMs = Date.parse('2026-10-03T18:37:00Z');
+  const deliveries = fleetDays(['2026-09-29', '2026-09-30', '2026-10-01', '2026-10-02', '2026-10-03'])
+    .filter((d) => d.atMs <= nowMs);
+  const s = sustainedDelivery({ deliveries, nowMs, readable: true });
+  assert.equal(s.sustained, true, s.detail);
+  assert.equal(s.reason, 'sustained');
+  assert.deepEqual(s.perDay.map((d) => d.day), ['2026-09-30', '2026-10-01', '2026-10-02'], 'oggi escluso');
+  assert.ok(s.perDay.every((d) => d.groups === EXPECTED_GROUPS));
+  assert.ok(s.maxGapHours < CLOSE_MAX_GAP_HOURS);
+
+  const { calls, deps } = fakeDeps();
+  const runUrl = 'https://github.com/o/r/actions/runs/1';
+  const r = await closeRecoveredStallIssue({ sustained: s, runUrl, deps, ...quiet });
+  assert.equal(r.action, 'closed');
+  assert.equal(r.exitCode, 0);
+  assert.equal(calls.comment.length, 1, 'un commento con la misura');
+  assert.equal(calls.resolve.length, 1, 'una chiusura');
+  const body = calls.comment[0].body;
+  assert.equal(calls.comment[0].n, 1579);
+  for (const { day } of s.perDay) assert.ok(body.includes(`| ${day} | ${EXPECTED_GROUPS}/${EXPECTED_GROUPS} |`), day);
+  assert.ok(body.includes(`**${s.maxGapHours.toFixed(1)}h**`), 'il gap massimo misurato');
+  assert.ok(body.includes(`ultime ${CLOSE_SUSTAINED_DAYS * 24}h`), 'la finestra');
+  assert.ok(body.includes(runUrl), 'la run del watchdog');
+  assert.equal(calls.resolve[0].title, STALL_ISSUE_TITLE, 'chiude per titolo canonico');
+  assert.equal(calls.resolve[0].ctx.exactTitle, true, 'titolo ESATTO, non prefisso');
+});
+
+test('due giorni sopra soglia e il terzo sotto → nessuna chiusura', async () => {
+  const nowMs = Date.parse('2026-10-03T12:00:00Z');
+  const deliveries = fleetDays(['2026-09-30', '2026-10-01', '2026-10-02', '2026-10-03'], {
+    groups: { '2026-10-02-am': 5, '2026-10-02-pm': 5 },
+  }).filter((d) => d.atMs <= nowMs);
+  // Il verdetto 24h è OK (l'ondata di stamattina è intera): è proprio il caso
+  // in cui un closer sul verdetto chiuderebbe troppo presto.
+  assert.equal(stallVerdict({ deliveries, nowMs, stallHours: 6, readable: true }).stalled, false);
+  const s = sustainedDelivery({ deliveries, nowMs, readable: true });
+  assert.equal(s.sustained, false);
+  assert.equal(s.reason, 'day-below-threshold');
+  assert.match(s.detail, /2026-10-02: 5 gruppi/);
+
+  const { calls, deps } = fakeDeps();
+  const r = await closeRecoveredStallIssue({ sustained: s, deps, ...quiet });
+  assert.equal(r.action, 'not-sustained');
+  assert.equal(calls.comment.length + calls.resolve.length, 0);
+});
+
+test('primo verdetto OK dopo uno stallo (meno di tre giorni completi) → nessuna chiusura', async () => {
+  const nowMs = Date.parse('2026-10-03T12:00:00Z');
+  // Fermo fino al 10-01 compreso, consegne riprese il 10-02.
+  const deliveries = fleetDays(['2026-10-02', '2026-10-03']).filter((d) => d.atMs <= nowMs);
+  const v = stallVerdict({ deliveries, nowMs, stallHours: 6, readable: true });
+  assert.equal(v.stalled, false, 'il primo verdetto è già OK');
+  const s = sustainedDelivery({ deliveries, nowMs, readable: true });
+  assert.equal(s.sustained, false);
+  assert.equal(s.reason, 'day-below-threshold');
+
+  const { calls, deps } = fakeDeps();
+  await closeRecoveredStallIssue({ sustained: s, deps, ...quiet });
+  assert.equal(calls.comment.length + calls.resolve.length, 0);
+});
+
+test('verdetto OK sostenuto senza issue aperta → nessuna scrittura', async () => {
+  const nowMs = Date.parse('2026-10-03T18:37:00Z');
+  const deliveries = fleetDays(['2026-09-29', '2026-09-30', '2026-10-01', '2026-10-02', '2026-10-03'])
+    .filter((d) => d.atMs <= nowMs);
+  const s = sustainedDelivery({ deliveries, nowMs, readable: true });
+  assert.equal(s.sustained, true);
+  const { calls, deps } = fakeDeps({ issue: null });
+  const r = await closeRecoveredStallIssue({ sustained: s, deps, ...quiet });
+  assert.equal(r.action, 'no-open-issue');
+  assert.equal(calls.comment.length + calls.resolve.length, 0);
+});
+
+test('verdetto unreadable con issue aperta → nessuna chiusura (il fail-open resta)', async () => {
+  const s = sustainedDelivery({ deliveries: [], nowMs: NOW, readable: false });
+  assert.equal(s.sustained, false);
+  assert.equal(s.reason, 'unreadable');
+  const { calls, deps } = fakeDeps();
+  const r = await closeRecoveredStallIssue({ sustained: s, deps, ...quiet });
+  assert.equal(r.action, 'not-sustained');
+  assert.equal(calls.findOpen.length + calls.comment.length + calls.resolve.length, 0, 'cieco non tocca niente');
+});
+
+test('una issue con keep-open o agent:no-age-out non si chiude', async () => {
+  const nowMs = Date.parse('2026-10-03T18:37:00Z');
+  const deliveries = fleetDays(['2026-09-29', '2026-09-30', '2026-10-01', '2026-10-02', '2026-10-03'])
+    .filter((d) => d.atMs <= nowMs);
+  const s = sustainedDelivery({ deliveries, nowMs, readable: true });
+  for (const name of ['keep-open', 'agent:no-age-out', 'Keep-Open']) {
+    const { calls, deps } = fakeDeps({ issue: { number: 1579, title: STALL_ISSUE_TITLE, labels: [{ name }] } });
+    const r = await closeRecoveredStallIssue({ sustained: s, deps, ...quiet });
+    assert.equal(r.action, 'kept-open', name);
+    assert.equal(calls.comment.length + calls.resolve.length, 0, name);
+  }
+});
+
+test('senza la misura persistita non si chiude, e una chiusura rifiutata esce non-zero', async () => {
+  const nowMs = Date.parse('2026-10-03T18:37:00Z');
+  const deliveries = fleetDays(['2026-09-29', '2026-09-30', '2026-10-01', '2026-10-02', '2026-10-03'])
+    .filter((d) => d.atMs <= nowMs);
+  const s = sustainedDelivery({ deliveries, nowMs, readable: true });
+
+  const noComment = fakeDeps({ commentOk: false });
+  const r1 = await closeRecoveredStallIssue({ sustained: s, deps: noComment.deps, ...quiet });
+  assert.equal(r1.action, 'comment-failed');
+  assert.equal(noComment.calls.resolve.length, 0, 'una chiusura senza la prova del perché no');
+
+  const refused = fakeDeps({
+    resolveImpl: () => { const e = new Error('close rejected'); e.persisted = false; throw e; },
+  });
+  const origError = console.error;
+  console.error = () => {};
+  try {
+    const r2 = await closeRecoveredStallIssue({ sustained: s, deps: refused.deps, ...quiet });
+    assert.equal(r2.action, 'close-failed');
+    assert.equal(r2.exitCode, 1, 'dichiararla chiusa sarebbe falso');
+  } finally {
+    console.error = origError;
+  }
+});
+
+test('la nota e il risultato riportano la soglia di gap APPLICATA, non la costante', async () => {
+  const nowMs = Date.parse('2026-10-03T18:37:00Z');
+  const deliveries = fleetDays(['2026-09-29', '2026-09-30', '2026-10-01', '2026-10-02', '2026-10-03'])
+    .filter((d) => d.atMs <= nowMs);
+  const s = sustainedDelivery({ deliveries, nowMs, readable: true, maxGapHours: 12 });
+  assert.equal(s.gapLimitHours, 12);
+  assert.equal(sustainedDelivery({ deliveries, nowMs, readable: true }).gapLimitHours, CLOSE_MAX_GAP_HOURS);
+  const { calls, deps } = fakeDeps();
+  await closeRecoveredStallIssue({ sustained: s, deps, ...quiet });
+  assert.ok(calls.comment[0].body.includes('(soglia 12h)'), 'la soglia applicata');
+  assert.ok(!calls.comment[0].body.includes(`${CLOSE_MAX_GAP_HOURS}h`), 'non la costante di default');
+});
+
+test('se resolve chiude una issue diversa da quella commentata, lo segnala', async () => {
+  const nowMs = Date.parse('2026-10-03T18:37:00Z');
+  const deliveries = fleetDays(['2026-09-29', '2026-09-30', '2026-10-01', '2026-10-02', '2026-10-03'])
+    .filter((d) => d.atMs <= nowMs);
+  const s = sustainedDelivery({ deliveries, nowMs, readable: true });
+  const { deps } = fakeDeps({ resolveImpl: () => ({ number: 1600, title: STALL_ISSUE_TITLE, persisted: true }) });
+  const warnings = [];
+  const r = await closeRecoveredStallIssue({ sustained: s, deps, log: () => {}, warn: (m) => warnings.push(m) });
+  assert.equal(r.action, 'closed');
+  assert.equal(r.number, 1600);
+  assert.equal(warnings.length, 1);
+  assert.match(warnings[0], /#1579 ma chiusa #1600/);
+});
+
+test('il gap a cavallo dell inizio finestra conta per intero', () => {
+  // L'ultima consegna prima della finestra di 72h è il punto di partenza del
+  // primo intervallo: un buco iniziato prima e finito dentro non si accorcia.
+  // Finestra 72h dal 10-01 08:00: l'ondata serale del 09-30 è persa, quindi
+  // il buco va dalle 10:51 del 09-30 alle 09:19 del 10-01 (22,5h). Misurato
+  // solo da inizio finestra sarebbe 1,3h e la issue si chiuderebbe.
+  const nowMs = Date.parse('2026-10-04T08:00:00Z');
+  const deliveries = fleetDays(['2026-09-29', '2026-09-30', '2026-10-01', '2026-10-02', '2026-10-03'], {
+    skip: ['2026-09-30-pm'],
+  }).filter((d) => d.atMs <= nowMs);
+  const s = sustainedDelivery({ deliveries, nowMs, readable: true });
+  assert.ok(s.perDay.every((d) => d.groups === EXPECTED_GROUPS), 'i tre giorni completi sono interi');
+  assert.equal(s.sustained, false);
+  assert.equal(s.reason, 'gap-too-long');
+  assert.ok(s.maxGapHours > 22, `gap ${s.maxGapHours}`);
+  assert.equal(s.maxGapEndMs, Date.parse('2026-10-01T09:19:00Z'));
 });

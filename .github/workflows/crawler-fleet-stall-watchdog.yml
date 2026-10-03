@@ -1,6 +1,7 @@
 name: Crawler fleet stall watchdog
 
-# Apre una issue quando la flotta crawler gira VERDE e non consegna dati.
+# Apre una issue quando la flotta crawler gira VERDE e non consegna dati, e la
+# richiude solo su consegna sostenuta (vedi `sustainedDelivery` nello script).
 #
 # Il razionale completo, la misura che ha scelto la soglia e perché la soglia
 # ovvia non funziona stanno in `scripts/ci/scan-crawler-fleet-stall.mjs`. In
