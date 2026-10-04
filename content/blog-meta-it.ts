@@ -12476,6 +12476,15 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.sequestro-stupefacenti-camper-varese.title': 'Varese: 70 kg di droga sul camper, arresti',
     'blog.article.sequestro-stupefacenti-camper-varese.excerpt': 'La Finanza blocca un camper spagnolo: sequestrati 19 kg di cocaina, 49 di marijuana e un bassotto affidato a una famiglia.',
     'blog.article.sequestro-stupefacenti-camper-varese.imageAlt': 'Area boschiva nella provincia di Varese dove è stato sequestrato il carico di stupefacenti',
+    'blog.article.scontro-a2-coldrerio.title': 'Scontro auto-camion sull\'A2, interviene la Rega',
+    'blog.article.scontro-a2-coldrerio.excerpt': 'Un\'auto e un camion coinvolti venerdì sull\'A2 a Coldrerio: tre feriti, due apparentemente gravi. Chiusura temporanea fra Mendrisio e Chiasso.',
+    'blog.article.scontro-a2-coldrerio.imageAlt': 'L\'autostrada A2 nei pressi di Coldrerio, in Ticino.',
+    'blog.article.incendio-asso-corda-doppia.title': 'Incendio ad Asso: manovra su corda doppia nella gola',
+    'blog.article.incendio-asso-corda-doppia.excerpt': 'Incendio nella vegetazione ad Asso: Vigili del Fuoco e SAF hanno operato in una gola. Danneggiati circa 100 metri quadrati.',
+    'blog.article.incendio-asso-corda-doppia.imageAlt': 'Vigili del Fuoco al lavoro in una gola impervia durante un incendio della vegetazione ad Asso',
+    'blog.article.arresto-luino-46enne-violenza-familiare.title': 'Luino: arrestato 46enne per violenze e maltrattamenti',
+    'blog.article.arresto-luino-46enne-violenza-familiare.excerpt': 'Carabinieri di Luino eseguono misura cautelare in carcere su ordine del GIP di Varese. Trovata balestra in casa.',
+    'blog.article.arresto-luino-46enne-violenza-familiare.imageAlt': 'Balestra a fucile sequestrata dai Carabinieri a Luino durante un\'operazione per violenze in famiglia',
 };
 
 export default blogMetaIt;

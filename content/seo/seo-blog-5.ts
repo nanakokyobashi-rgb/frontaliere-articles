@@ -99523,6 +99523,123 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-scontro-a2-coldrerio': {
+    title: 'Scontro auto-camion sull\'A2, interviene la Rega',
+    description: 'Incidente sull\'A2 a Coldrerio in direzione sud: un\'auto e un camion coinvolti. Tre feriti, due apparentemente gravi; chiusura dell\'A2 fra Mendrisio e Chiasso.',
+    keywords: 'frontalieri, ticino, svizzera, italia, scontro, auto-camion, sull, interviene',
+    ogTitle: 'Scontro auto-camion sull\'A2 a Coldrerio',
+    ogDescription: 'L\'incidente è avvenuto venerdì pomeriggio sull\'A2 in direzione sud, a Coldrerio. Sul posto SAM, REGA, pompieri del Mendrisiotto e Polizia Cantonale. Dopo la chiusura fra Mendrisio e Chiasso, il traffico è stato incanalato su un\'unica corsia.',
+    canonicalPath: '/articoli-frontaliere/scontro-a2-coldrerio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Scontro auto-camion sull'A2, interviene la Rega",
+      "description": "Incidente sull'A2 a Coldrerio in direzione sud: un'auto e un camion coinvolti. Tre feriti, due apparentemente gravi; chiusura dell'A2 fra Mendrisio e Chiasso.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/scontro-a2-coldrerio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "L'autostrada A2 nei pressi di Coldrerio, in Ticino."
+      },
+      "datePublished": "2026-10-04T02:05:31+00:00",
+      "dateModified": "2026-10-04T02:05:31+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/scontro-a2-coldrerio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-incendio-asso-corda-doppia': {
+    title: 'Incendio ad Asso: manovra su corda doppia nella gola',
+    description: 'Incendio nella vegetazione ad Asso: Vigili del Fuoco di Canzo e Cantù e SAF da Como hanno domato le fiamme in una gola. Danneggiati circa 100 metri quadrati.',
+    keywords: 'frontalieri, ticino, svizzera, italia, incendio, asso, manovra, corda',
+    ogTitle: 'Asso, incendio nella gola: intervento su corda doppia',
+    ogDescription: 'Le fiamme si stavano propagando in una gola dal terreno impervio. Gli specialisti SAF da Como hanno raggiunto i punti più difficili su corda doppia e trasportato le attrezzature, mentre le squadre di Canzo e Cantù partecipavano allo spegnimento.',
+    canonicalPath: '/articoli-frontaliere/incendio-asso-corda-doppia/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Incendio ad Asso: manovra su corda doppia nella gola",
+      "description": "Incendio nella vegetazione ad Asso: Vigili del Fuoco di Canzo e Cantù e SAF da Como hanno domato le fiamme in una gola. Danneggiati circa 100 metri quadrati.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/incendio-asso-corda-doppia.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vigili del Fuoco al lavoro in una gola impervia durante un incendio della vegetazione ad Asso"
+      },
+      "datePublished": "2026-10-04T02:20:05+00:00",
+      "dateModified": "2026-10-04T02:20:05+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/incendio-asso-corda-doppia/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-arresto-luino-46enne-violenza-familiare': {
+    title: 'Luino: arrestato 46enne per violenze e maltrattamenti',
+    description: 'Arrestato a Luino un 46enne già agli arresti domiciliari. Denuncia della compagna per violenza sessuale e maltrattamenti. Sequestrata balestra. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, luino, arrestato, 46enne, violenze',
+    ogTitle: 'Luino: arrestato 46enne per violenze e maltrattamenti',
+    ogDescription: 'I Carabinieri di Luino hanno eseguito un\'ordinanza di custodia cautelare in carcere nei confronti di un 46enne, già agli arresti domiciliari. L\'uomo è indagato per violenza sessuale e maltrattamenti in famiglia. Durante la perquisizione è stata',
+    canonicalPath: '/articoli-frontaliere/arresto-luino-46enne-violenza-familiare/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Luino: arrestato 46enne per violenze e maltrattamenti",
+      "description": "Arrestato a Luino un 46enne già agli arresti domiciliari. Denuncia della compagna per violenza sessuale e maltrattamenti. Sequestrata balestra. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/arresto-luino-46enne-violenza-familiare.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Balestra a fucile sequestrata dai Carabinieri a Luino durante un'operazione per violenze in famiglia"
+      },
+      "datePublished": "2026-10-04T02:36:57+00:00",
+      "dateModified": "2026-10-04T02:36:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/arresto-luino-46enne-violenza-familiare/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

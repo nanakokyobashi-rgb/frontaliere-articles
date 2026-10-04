@@ -12475,6 +12475,15 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.sequestro-stupefacenti-camper-varese.title': 'Varese: 70 kg of drugs in camper, arrests',
     'blog.article.sequestro-stupefacenti-camper-varese.excerpt': 'The Guardia di Finanza stops a Spanish camper van: 19 kg of cocaine, 49 of marijuana seized, and a dachshund entrusted to a family.',
     'blog.article.sequestro-stupefacenti-camper-varese.imageAlt': 'Wooded area in the province of Varese where the drug load was seized',
+    'blog.article.scontro-a2-coldrerio.title': 'Car-truck collision on the A2, Rega responds',
+    'blog.article.scontro-a2-coldrerio.excerpt': 'A car and a truck involved on Friday on the A2 in Coldrerio: three injured, two apparently seriously injured. Temporary closure between Mendrisio and Chiasso.',
+    'blog.article.scontro-a2-coldrerio.imageAlt': 'The A2 motorway near Coldrerio in Ticino.',
+    'blog.article.incendio-asso-corda-doppia.title': 'Fire in Asso: double-rope maneuver in the gorge',
+    'blog.article.incendio-asso-corda-doppia.excerpt': 'Vegetation fire in Asso: Firefighters and SAF personnel operated in a gorge. Approximately 100 square meters were damaged.',
+    'blog.article.incendio-asso-corda-doppia.imageAlt': 'Firefighters working in a steep gorge during a vegetation fire in Asso',
+    'blog.article.arresto-luino-46enne-violenza-familiare.title': 'Luino: 46-year-old arrested for violence and abuse',
+    'blog.article.arresto-luino-46enne-violenza-familiare.excerpt': 'Carabinieri of Luino carry out a pre-trial detention order in prison by order of the GIP of Varese. A crossbow was found at home.',
+    'blog.article.arresto-luino-46enne-violenza-familiare.imageAlt': 'Crossbow seized by Carabinieri in Luino during a domestic violence operation',
 };
 
 export default blogMetaEn;

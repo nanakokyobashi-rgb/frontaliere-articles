@@ -274,6 +274,12 @@ export function buildPlateAuctionEditorial({ snapshot = null, upstreamStatus = '
  * default the static CDN snapshot comes first; the function is asked only when
  * that file fails or is older than PLATE_AUCTION_STATIC_MAX_AGE_MS, and an old
  * static snapshot still beats none when the function fails too.
+ *
+ * Time bound (publish-api.yml runs this in "Build data surface"): at most two
+ * sequential reads, each at most `timeoutMs` even when the fetcher ignores the
+ * abort signal, so the worst case is 2 x timeoutMs; with an explicit `url`,
+ * one read and timeoutMs. A third read must not be added without revisiting
+ * that budget (generator/tests/plate-auction-editorial.test.mjs pins it).
  */
 export async function fetchPlateAuctionEditorialInput({
   url = process.env.PLATE_AUCTION_API_URL || undefined,
@@ -299,11 +305,28 @@ export async function fetchPlateAuctionEditorialInput({
 
 async function fetchPlateAuctionSnapshot(url, fetcher, timeoutMs) {
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
-  try {
+  let timer;
+  // The abort alone bounds only a fetcher that honours the signal: the timer
+  // also rejects, so a fetch or a body that ignores it still ends at timeoutMs.
+  const deadline = new Promise((_, reject) => {
+    timer = setTimeout(() => {
+      controller.abort();
+      const error = new Error(`plate-auction fetch exceeded ${timeoutMs} ms`);
+      error.name = 'AbortError';
+      reject(error);
+    }, timeoutMs);
+  });
+  const read = (async () => {
     const response = await fetcher(url, { redirect: 'follow', signal: controller.signal });
+    if (!response.ok) return { response, snapshot: undefined };
+    return { response, snapshot: await response.json() };
+  })();
+  // The loser of the race must not surface as an unhandled rejection.
+  read.catch(() => {});
+  deadline.catch(() => {});
+  try {
+    const { response, snapshot } = await Promise.race([read, deadline]);
     if (!response.ok) return { status: 'unavailable', snapshot: null, errorCode: `http-${response.status}` };
-    const snapshot = await response.json();
     if (!isRecord(snapshot) || snapshot.schema !== 1 || !Array.isArray(snapshot.auctions)) {
       return { status: 'unavailable', snapshot: null, errorCode: 'invalid-snapshot' };
     }

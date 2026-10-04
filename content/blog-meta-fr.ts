@@ -12477,6 +12477,15 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.sequestro-stupefacenti-camper-varese.title': 'Varese : 70 kg de drogue dans le camping-car, arrestations',
     'blog.article.sequestro-stupefacenti-camper-varese.excerpt': 'La Guardia di Finanza immobilise un camping-car espagnol : 19 kg de cocaïne et 49 de marijuana saisis, et un teckel confié à une famille.',
     'blog.article.sequestro-stupefacenti-camper-varese.imageAlt': 'Zone boisée dans la province de Varèse où la cargaison de drogue a été saisie (Varese)',
+    'blog.article.scontro-a2-coldrerio.title': 'Collision voiture-camion sur l\'A2, la Rega intervient',
+    'blog.article.scontro-a2-coldrerio.excerpt': 'Une voiture et un camion impliqués vendredi sur l\'A2 à Coldrerio : trois blessés, dont deux apparemment graves. Fermeture temporaire entre Mendrisio et Chiasso.',
+    'blog.article.scontro-a2-coldrerio.imageAlt': 'L\'autoroute A2 près de Coldrerio, au Tessin.',
+    'blog.article.incendio-asso-corda-doppia.title': 'Incendie à Asso : manœuvre sur corde double dans la gorge',
+    'blog.article.incendio-asso-corda-doppia.excerpt': 'Incendie de végétation à Asso : les sapeurs-pompiers et le SAF sont intervenus dans une gorge. Environ 100 mètres carrés endommagés.',
+    'blog.article.incendio-asso-corda-doppia.imageAlt': 'Pompiers au travail dans une gorge escarpée lors d\'un feu de végétation à Asso',
+    'blog.article.arresto-luino-46enne-violenza-familiare.title': 'Luino : un homme de 46 ans arrêté pour violences et mauvais traitements',
+    'blog.article.arresto-luino-46enne-violenza-familiare.excerpt': 'Les carabiniers de Luino mettent à exécution une mesure de placement en détention provisoire sur ordre du juge des enquêtes préliminaires de Varese. Une arbalète a été trouvée au domicile.',
+    'blog.article.arresto-luino-46enne-violenza-familiare.imageAlt': 'Arbalète saisie par les Carabinieri à Luino lors d\'une opération pour violences conjugales',
 };
 
 export default blogMetaFr;

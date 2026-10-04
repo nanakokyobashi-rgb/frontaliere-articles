@@ -266,3 +266,77 @@ test('treats a static snapshot dated in the future as not fresh', async () => {
   assert.deepEqual(calls, [DEFAULT_PLATE_AUCTION_STATIC_URL, DEFAULT_PLATE_AUCTION_API_URL]);
   assert.equal(input.snapshot.generatedAt, '2026-10-02T03:59:00.000Z');
 });
+
+// publish-api.yml runs this inside "Build data surface". The documented bound
+// is at most two reads (static, then function), each at most timeoutMs: the
+// limit must hold even for a fetcher that ignores the abort signal, and a
+// third sequential read or a lost race against the timer must turn this red.
+const BOUND_TIMEOUT_MS = 40;
+// CI scheduler jitter. A third read is caught by the exact call list, the
+// lost race by the elapsed time.
+const BOUND_SLACK_MS = 500;
+const BOUND_NOW = Date.parse('2026-10-02T04:00:00.000Z');
+// CI runs `node --test` without --test-timeout: each test carries its own
+// limit, so a regression fails fast instead of hanging the job.
+
+function abortError() {
+  const error = new Error('aborted');
+  error.name = 'AbortError';
+  return error;
+}
+
+test('double timeout: a fetcher that ignores the signal still stops at 2x timeoutMs', { timeout: 2000 }, async () => {
+  const calls = [];
+  const started = performance.now();
+  const input = await fetchPlateAuctionEditorialInput({
+    now: BOUND_NOW,
+    timeoutMs: BOUND_TIMEOUT_MS,
+    fetcher: (url) => {
+      calls.push(url);
+      return new Promise(() => {});
+    },
+  });
+  const elapsed = performance.now() - started;
+  assert.deepEqual(calls, [DEFAULT_PLATE_AUCTION_STATIC_URL, DEFAULT_PLATE_AUCTION_API_URL]);
+  assert.equal(input.status, 'unavailable');
+  assert.equal(input.errorCode, 'timeout');
+  assert.ok(elapsed >= 2 * BOUND_TIMEOUT_MS - 10, `elapsed ${elapsed} ms`);
+  assert.ok(elapsed < 2 * BOUND_TIMEOUT_MS + BOUND_SLACK_MS, `elapsed ${elapsed} ms`);
+});
+
+test('double timeout: a fetcher that honours the signal maps both aborts to timeout', { timeout: 2000 }, async () => {
+  const calls = [];
+  const input = await fetchPlateAuctionEditorialInput({
+    now: BOUND_NOW,
+    timeoutMs: BOUND_TIMEOUT_MS,
+    fetcher: (url, { signal }) => {
+      calls.push(url);
+      return new Promise((resolve, reject) => {
+        if (signal.aborted) reject(abortError());
+        signal.addEventListener('abort', () => reject(abortError()), { once: true });
+      });
+    },
+  });
+  assert.deepEqual(calls, [DEFAULT_PLATE_AUCTION_STATIC_URL, DEFAULT_PLATE_AUCTION_API_URL]);
+  assert.equal(input.status, 'unavailable');
+  assert.equal(input.errorCode, 'timeout');
+});
+
+test('double timeout: an explicit url reads once, and a stalled body is bounded too', { timeout: 2000 }, async () => {
+  const calls = [];
+  const started = performance.now();
+  const input = await fetchPlateAuctionEditorialInput({
+    url: 'https://example.test/plate-auctions.json',
+    now: BOUND_NOW,
+    timeoutMs: BOUND_TIMEOUT_MS,
+    fetcher: async (url) => {
+      calls.push(url);
+      return { ok: true, json: () => new Promise(() => {}) };
+    },
+  });
+  const elapsed = performance.now() - started;
+  assert.deepEqual(calls, ['https://example.test/plate-auctions.json']);
+  assert.equal(input.status, 'unavailable');
+  assert.equal(input.errorCode, 'timeout');
+  assert.ok(elapsed < BOUND_TIMEOUT_MS + BOUND_SLACK_MS, `elapsed ${elapsed} ms`);
+});

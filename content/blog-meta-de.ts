@@ -12474,6 +12474,15 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.sequestro-stupefacenti-camper-varese.title': 'Varese: 70 kg Drogen im Wohnmobil, Festnahmen',
     'blog.article.sequestro-stupefacenti-camper-varese.excerpt': 'Die Guardia di Finanza stoppt ein spanisches Wohnmobil: 19 kg Kokain, 49 kg Marihuana und ein einer Familie anvertrauter Dackel beschlagnahmt.',
     'blog.article.sequestro-stupefacenti-camper-varese.imageAlt': 'Waldgebiet in der Provinz Varese, wo die Drogenlast beschlagnahmt wurde',
+    'blog.article.scontro-a2-coldrerio.title': 'Kollision zwischen Auto und Lastwagen auf der A2, Rega im Einsatz',
+    'blog.article.scontro-a2-coldrerio.excerpt': 'Ein Auto und ein Lastwagen waren am Freitag auf der A2 bei Coldrerio beteiligt: drei Verletzte, zwei offenbar schwer verletzt. Vorübergehende Sperrung zwischen Mendrisio und Chiasso.',
+    'blog.article.scontro-a2-coldrerio.imageAlt': 'Die Autobahn A2 nahe Coldrerio im Tessin.',
+    'blog.article.incendio-asso-corda-doppia.title': 'Brand in Asso: Doppelseilmanöver in der Schlucht',
+    'blog.article.incendio-asso-corda-doppia.excerpt': 'Vegetationsbrand in Asso: Feuerwehr und SAF waren in einer Schlucht im Einsatz. Etwa 100 Quadratmeter beschädigt.',
+    'blog.article.incendio-asso-corda-doppia.imageAlt': 'Feuerwehrleute arbeiten in einer unwegsamen Schlucht bei einem Vegetationsbrand in Asso',
+    'blog.article.arresto-luino-46enne-violenza-familiare.title': 'Luino: 46-Jähriger wegen Gewalt und Misshandlungen festgenommen',
+    'blog.article.arresto-luino-46enne-violenza-familiare.excerpt': 'Carabinieri von Luino vollziehen eine Untersuchungshaft auf Anordnung des GIP von Varese. Armbrust im Haus gefunden.',
+    'blog.article.arresto-luino-46enne-violenza-familiare.imageAlt': 'Armbrust, die von den Carabinieri in Luino bei einer häuslichen Gewalt ermittelt wurde',
 };
 
 export default blogMetaDe;
