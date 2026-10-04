@@ -49,25 +49,14 @@
  *
  * ## Cosa fa, e cosa deliberatamente NON fa
  *
- *   - NON blocca niente. Non e' un required check, non entra nel gate
- *     dell'auto-merge (che aspetta il check-run chiamato `tests`), non tocca la
- *     branch protection. Su offender trovati esce 0: il segnale e' la issue.
- *   - Su offender trovati apre — o commenta — UNA sola issue, deduplicata sul
- *     titolo dal macchinario esistente (`scripts/lib/github-issue-creator.mjs`,
- *     dedup sui primi 60 caratteri). `TITLE` e' stabile e porta il
- *     discriminante all'INIZIO: il taglio a 60 butta l'ultimo token.
- *   - Quando i gate tornano verdi richiude la stessa issue, sullo stesso
- *     titolo, con `resolveGithubIssue`. Apertura e chiusura sono la STESSA
- *     valutazione, per la ragione di `ticker-shadow-alert.mjs`: una condizione
- *     senza un percorso di chiusura proprio resterebbe accesa per sempre col
- *     dedup sul titolo.
- *   - Esce !=0 SOLO quando il preflight fallisce, cioe' quando `content/` non
- *     c'e' o e' quasi vuoto. E' l'unico caso in cui una run rossa e' il segnale
- *     giusto: significa che il gate non ha guardato niente, e un gate che passa
- *     senza guardare e' peggio di nessun gate. Il rosso arriva a
- *     `workflow-failure-issues.yml`, che apre la sua issue centrale — ed e'
- *     anche il motivo per cui gli offender NON fanno uscire !=0: darebbero due
- *     issue per la stessa condizione.
+ *   - Non è un required check e non cambia la branch protection.
+ *   - Un gate rosso, TAP incompleto, errore di esecuzione o preflight fallito
+ *     esce !=0: lo stato Actions deve riflettere il risultato, anche in dry-run.
+ *   - Gli offender aprono/commentano una issue deduplicata su TITLE; un run
+ *     interamente verde richiude lo stesso alert. Il reporting non converte
+ *     mai un fallimento in successo.
+ *   - Scrive sempre un riepilogo JSON, anche su successo o preflight fallito.
+ *     Node drena stdout/stderr prima dell'uscita: niente process.exit immediato.
  *
  * Uso:
  *   node scripts/ci/content-gates-main.mjs [--dry-run] [--json <path>]
@@ -472,91 +461,102 @@ export function buildIssueBody({ failures, offenders, perRoot, runUrl, sha }) {
   return lines.join('\n');
 }
 
-const ARGV = process.argv.slice(2);
-const val = (n, d) => {
-  const i = ARGV.indexOf(n);
-  return i !== -1 && ARGV[i + 1] ? ARGV[i + 1] : d;
-};
-
-export async function main() {
-  const dryRun = ARGV.includes('--dry-run');
-  const jsonOut = val('--json', null);
-
-  const pre = preflight();
-  for (const r of pre.perRoot) console.log(`[content-gates-main] ${r.rel}: ${r.count} file`);
-  if (!pre.ok) {
-    for (const v of pre.violations) console.error(`::error::preflight content — ${v}`);
-    console.error(
-      '[content-gates-main] preflight fallito: il gate NON ha guardato il corpus. ' +
-        'Esco !=0 di proposito — un verde qui sarebbe la bugia peggiore che questo file possa dire.',
-    );
-    return 1;
+/** Final top-level TAP counters, kept separate from nested subtest output. */
+export function parseTapSummary(output) {
+  const counters = {};
+  for (const name of ['tests', 'pass', 'fail', 'cancelled', 'skipped', 'todo']) {
+    const match = String(output).match(new RegExp(`^# ${name} (\\d+)\\s*$`, 'm'));
+    counters[name] = match ? Number(match[1]) : null;
   }
-
-  const res = spawnSync(
-    process.execPath,
-    ['--test', '--test-reporter=tap', ...CONTENT_GATES],
-    { cwd: ROOT, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 },
-  );
-  const output = `${res.stdout || ''}\n${res.stderr || ''}`;
-  console.log(output);
-
-  const runUrl =
-    process.env.GITHUB_SERVER_URL && process.env.GITHUB_REPOSITORY && process.env.GITHUB_RUN_ID
-      ? `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`
-      : null;
-
-  if (res.status === 0) {
-    console.log(`[content-gates-main] ${CONTENT_GATES.length} gate verdi — richiudo un eventuale alert aperto.`);
-    if (!dryRun) resolveGithubIssue(TITLE, { workflow: 'content-gates-main', runUrl });
-    return 0;
-  }
-
-  const failures = parseTapFailures(output);
-  const offenders = extractOffenders(output);
-  console.log(
-    `[content-gates-main] ROSSO: ${failures.tests.length} test falliti in ` +
-      `${failures.files.length} gate, ${offenders.length} file di corpus nominati.`,
-  );
-
-  const description = buildIssueBody({
-    failures,
-    offenders,
-    perRoot: pre.perRoot,
-    runUrl,
-    sha: process.env.GITHUB_SHA,
-  });
-  if (jsonOut) {
-    fs.writeFileSync(jsonOut, `${JSON.stringify({ failures, offenders }, null, 2)}\n`);
-  }
-  if (dryRun) {
-    console.log(`[content-gates-main] dry-run — aprirei/commenterei "${TITLE}":\n${description}`);
-    return 0;
-  }
-
-  await createGithubIssue({
-    title: TITLE,
-    description,
-    // priority:high — `classifyIssue` manda questo titolo in coda (categoria
-    // `other`), e la label e' cio' che lo fa drenare per primo (`fuPrio` alto).
-    priority: 2,
-    labels: ['bug', 'automation'],
-    workflow: 'content-gates-main',
-  });
-
-  // 0 di proposito: vedi l'intestazione. Il segnale e' la issue, e una run rossa
-  // qui produrrebbe una SECONDA issue da `workflow-failure-issues.yml`.
-  return 0;
+  const complete = /^1\.\.\d+\s*$/m.test(String(output))
+    && Object.values(counters).every((value) => value !== null)
+    && counters.tests > 0
+    && counters.tests === counters.pass + counters.fail + counters.cancelled + counters.skipped + counters.todo;
+  return { ...counters, complete };
 }
 
-// Solo in modalita' CLI: senza la guardia, importare questo modulo da un test lo
-// eseguirebbe — e questo script apre issue sul repo.
+/** Dependency injection keeps runner tests independent of the live corpus and GitHub. */
+export async function main({
+  argv = process.argv.slice(2), root = ROOT, gates = CONTENT_GATES,
+  checkPreflight = preflight, runTests = spawnSync,
+  createIssue = createGithubIssue, resolveIssue = resolveGithubIssue,
+  env = process.env,
+} = {}) {
+  const dryRun = argv.includes('--dry-run');
+  const jsonIndex = argv.indexOf('--json');
+  const jsonOut = path.resolve(root, jsonIndex >= 0 && argv[jsonIndex + 1]
+    ? argv[jsonIndex + 1] : 'reports/content-gates-main-summary.json');
+  const summary = {
+    schemaVersion: 1, state: 'execution-error', exitCode: 1,
+    commit: env.GITHUB_SHA || null, gates: [...gates],
+    preflight: null, child: null, tap: null,
+    failures: { tests: [], files: [] }, offenders: [],
+  };
+  const save = () => {
+    fs.mkdirSync(path.dirname(jsonOut), { recursive: true });
+    fs.writeFileSync(jsonOut, `${JSON.stringify(summary, null, 2)}\n`);
+  };
+  try {
+    const pre = checkPreflight(root);
+    summary.preflight = pre;
+    for (const r of pre.perRoot) console.log(`[content-gates-main] ${r.rel}: ${r.count} file`);
+    if (!pre.ok) {
+      summary.state = 'preflight-failed';
+      for (const v of pre.violations) console.error(`::error::preflight content — ${v}`);
+      console.error('[content-gates-main] preflight fallito: il gate NON ha guardato il corpus.');
+      return 1;
+    }
+
+    const res = runTests(process.execPath, ['--test', '--test-reporter=tap', ...gates],
+      { cwd: root, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
+    const output = `${res.stdout || ''}\n${res.stderr || ''}`;
+    console.log(output);
+    summary.child = { status: res.status ?? null, signal: res.signal || null, error: res.error?.message || null };
+    summary.tap = parseTapSummary(res.stdout || '');
+    summary.failures = parseTapFailures(output);
+    summary.offenders = extractOffenders(output);
+    const passed = res.status === 0 && !res.error && !res.signal && summary.tap.complete
+      && summary.tap.fail === 0 && summary.tap.cancelled === 0
+      && summary.failures.tests.length === 0 && summary.failures.files.length === 0;
+    summary.state = passed ? 'passed' : (res.error || res.signal || !summary.tap.complete ? 'execution-error' : 'failed');
+    summary.exitCode = passed ? 0 : 1;
+
+    const runUrl = env.GITHUB_SERVER_URL && env.GITHUB_REPOSITORY && env.GITHUB_RUN_ID
+      ? `${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}/actions/runs/${env.GITHUB_RUN_ID}` : null;
+    if (passed) {
+      console.log(`[content-gates-main] ${gates.length} gate verdi — richiudo un eventuale alert aperto.`);
+      if (!dryRun) await resolveIssue(TITLE, { workflow: 'content-gates-main', runUrl });
+      return 0;
+    }
+
+    console.error(`[content-gates-main] ROSSO: ${summary.failures.tests.length} test falliti; `
+      + `${summary.offenders.length} file di corpus nominati; stato ${summary.state}.`);
+    const description = buildIssueBody({ failures: summary.failures, offenders: summary.offenders,
+      perRoot: pre.perRoot, runUrl, sha: env.GITHUB_SHA });
+    if (dryRun) console.log(`[content-gates-main] dry-run — aprirei/commenterei "${TITLE}":\n${description}`);
+    else await createIssue({ title: TITLE, description, priority: 2, labels: ['bug', 'automation'], workflow: 'content-gates-main' });
+    return 1;
+  } catch (error) {
+    summary.state = 'execution-error';
+    summary.exitCode = 1;
+    summary.error = error?.message || String(error);
+    console.error(`[content-gates-main] errore fatale: ${error?.stack || error}`);
+    return 1;
+  } finally {
+    save();
+  }
+}
+
+/** Let Node drain stdout/stderr naturally; process.exit() can truncate piped TAP. */
+export async function runCli(run = main) {
+  try {
+    process.exitCode = await run();
+  } catch (error) {
+    console.error(`[content-gates-main] errore fatale: ${error?.stack || error}`);
+    process.exitCode = 1;
+  }
+}
+
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  main().then(
-    (c) => process.exit(c),
-    (e) => {
-      console.error(`[content-gates-main] errore fatale: ${e && e.stack ? e.stack : e}`);
-      process.exit(1);
-    },
-  );
+  await runCli();
 }
