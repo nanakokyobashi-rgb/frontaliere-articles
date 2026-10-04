@@ -99562,6 +99562,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-incendio-asso-corda-doppia': {
+    title: 'Incendio ad Asso: manovra su corda doppia nella gola',
+    description: 'Incendio nella vegetazione ad Asso: Vigili del Fuoco di Canzo e Cantù e SAF da Como hanno domato le fiamme in una gola. Danneggiati circa 100 metri quadrati.',
+    keywords: 'frontalieri, ticino, svizzera, italia, incendio, asso, manovra, corda',
+    ogTitle: 'Asso, incendio nella gola: intervento su corda doppia',
+    ogDescription: 'Le fiamme si stavano propagando in una gola dal terreno impervio. Gli specialisti SAF da Como hanno raggiunto i punti più difficili su corda doppia e trasportato le attrezzature, mentre le squadre di Canzo e Cantù partecipavano allo spegnimento.',
+    canonicalPath: '/articoli-frontaliere/incendio-asso-corda-doppia/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Incendio ad Asso: manovra su corda doppia nella gola",
+      "description": "Incendio nella vegetazione ad Asso: Vigili del Fuoco di Canzo e Cantù e SAF da Como hanno domato le fiamme in una gola. Danneggiati circa 100 metri quadrati.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/incendio-asso-corda-doppia.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vigili del Fuoco al lavoro in una gola impervia durante un incendio della vegetazione ad Asso"
+      },
+      "datePublished": "2026-10-04T02:20:05+00:00",
+      "dateModified": "2026-10-04T02:20:05+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/incendio-asso-corda-doppia/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
