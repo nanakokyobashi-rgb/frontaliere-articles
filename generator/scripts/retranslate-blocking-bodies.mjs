@@ -162,6 +162,7 @@ import {
   parseAiSearchSections,
   stripVacuousFacts,
 } from './lib/key-facts-specificity.mjs';
+import { getKeyFactsHeading, getTldrHeading } from './lib/ai-search-template.mjs';
 import { unescapeTsString } from './lib/unescape-ts-string.mjs';
 import { escapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
 import { sanitizeBodyText } from './lib/sanitize-body-braces.mjs';
@@ -686,6 +687,46 @@ export function guardTranslatedKeyFacts(sections, {
   }
   if (!result.changed) return { sections, issue: null, changed: false, result };
   return { sections: { ...sections, body1: result.value }, issue: null, changed: true, result };
+}
+
+/** Codice del rifiuto per un titolo di template tradotto fuori dalla forma canonica. */
+export const TEMPLATE_HEADING_NOT_CANONICAL = 'template-heading-not-canonical';
+
+/** Il campo ha una riga che e' esattamente quel titolo (senza distinzione di maiuscole, come `isKeyFactsHeading`). */
+function hasHeadingLine(text, heading) {
+  const wanted = heading.toLowerCase();
+  return String(text ?? '').split('\n').some((line) => line.trim().toLowerCase() === wanted);
+}
+
+/**
+ * I titoli di template della sorgente italiana (`## In breve`, `## Fatti
+ * chiave`) devono uscire nella forma canonica del locale, quella di
+ * ai-search-template.mjs. Senza questo controllo un sinonimo cadeva in due
+ * modi: `## Eckdaten` al posto di `## Wichtige Fakten` faceva perdere la
+ * sezione a `guardTranslatedKeyFacts`, che rifiutava col motivo generico
+ * «nessuna sezione Fatti chiave riconosciuta» (6 coppie su 20 nel lotto 1
+ * della bonifica Codex, #2121); `## Kurz zusammengefasst` al posto di `## Auf
+ * einen Blick` non lo vedeva nessuno e si scriveva (8 coppie su 9 scritte).
+ *
+ * Ritorna `null` se ogni titolo di template della sorgente ha il suo canonico
+ * nello stesso campo tradotto, altrimenti il motivo del rifiuto. Un titolo che
+ * la sorgente non ha non si pretende.
+ */
+export function templateHeadingIssue({ italianSections, newSections, locale }) {
+  const pairs = [
+    [getTldrHeading('it'), getTldrHeading(locale)],
+    [getKeyFactsHeading('it'), getKeyFactsHeading(locale)],
+  ];
+  const missing = [];
+  for (const [field, source] of Object.entries(italianSections || {})) {
+    for (const [itHeading, canonical] of pairs) {
+      if (hasHeadingLine(source, itHeading) && !hasHeadingLine(newSections?.[field], canonical)) {
+        missing.push(`${field} «${canonical}»`);
+      }
+    }
+  }
+  if (missing.length === 0) return null;
+  return `[${TEMPLATE_HEADING_NOT_CANONICAL}] la ri-traduzione non usa il titolo di template canonico per ${locale}: manca ${missing.join(', ')}`;
 }
 
 /**
@@ -1779,6 +1820,11 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
     ? []
     : criticalCodes(runFactualityGates({ sections: checkedSections, locale: pair.locale, italianSections }));
 
+  // Prima del motivo generico della guardia dei fatti chiave: un sinonimo del
+  // titolo e' la causa, «sezione non riconosciuta» solo la sua conseguenza.
+  const templateIssue = missingField || isSourceLocale
+    ? null
+    : templateHeadingIssue({ italianSections, newSections: checkedSections, locale: pair.locale });
   const sanity = missingField || isSourceLocale
     ? null
     : translationSanityIssue({
@@ -1809,7 +1855,7 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
     newCodes,
     missingField,
     sanity,
-    qualityIssue: titleMarkerPlan?.issue || keyFactsGuard.issue,
+    qualityIssue: titleMarkerPlan?.issue || templateIssue || keyFactsGuard.issue,
     structuralDefect: Boolean(pair.structural),
   });
   const row = { ...base, oldCodes, newCodes, missingField, written: false, reason: verdict.reason };
@@ -1853,6 +1899,7 @@ function report(results, { APPLY, AS_JSON, ENGINE = 'cascade', total, OUT }) {
   const empty = results.filter((r) => r.reason === 'campo-vuoto-dalla-cascata').length;
   const truncated = results.filter((r) => r.reason.startsWith('troncata')).length;
   const wrongLang = results.filter((r) => r.reason.startsWith('lingua-sbagliata')).length;
+  const templateHeading = results.filter((r) => r.reason.startsWith(`[${TEMPLATE_HEADING_NOT_CANONICAL}]`)).length;
   const residue = results.filter((r) => r.oldCodes?.includes('italian-residue')).length;
 
   console.log(`\nmodalità: ${APPLY ? 'APPLY (scrive)' : 'DRY-RUN (non scrive)'} — motore: ${ENGINE} — coppie trattate: ${results.length}/${total}`);
@@ -1861,8 +1908,9 @@ function report(results, { APPLY, AS_JSON, ENGINE = 'cascade', total, OUT }) {
   console.log(`  campo vuoto (skip)   : ${empty}`);
   console.log(`  troncata (skip)      : ${truncated}`);
   console.log(`  lingua sbagliata     : ${wrongLang}`);
+  console.log(`  titolo non canonico  : ${templateHeading}`);
   console.log(`  italian-residue      : ${residue}`);
-  console.log(`  altro                : ${results.length - clean - refailed - empty - truncated - wrongLang}`);
+  console.log(`  altro                : ${results.length - clean - refailed - empty - truncated - wrongLang - templateHeading}`);
 
   // Per-codice: e' la misura che decide se un codice va escluso dal lotto.
   const perCode = new Map();

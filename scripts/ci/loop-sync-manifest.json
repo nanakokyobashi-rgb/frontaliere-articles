@@ -4713,7 +4713,17 @@
       "reason": "P14: i controlli lato corpus sui record di credito delle copertine Commons (nome del file = copertina, pubblicato solo `ok`, accordo fra le copertine di uno stesso file Commons, letterali SEO di una copertina accreditata senza i cinque campi di diritti) e il file `data/image-credits-<sezione>.json` che `scripts/build-blog-index.mjs` pubblica per la SPA. Il sito legge quel JSON via HTTP e non ha questo modulo: corpus-only per costruzione, come il resto della pubblicazione.",
       "baseline": {
         "site": null,
-        "corpus": "f5144784aed4adf4",
+        "corpus": "0380d00aa2d146ea",
+        "alignedAt": "2026-10-04"
+      }
+    },
+    {
+      "path": "scripts/ci/image-credits-revalidate.mjs",
+      "mode": "corpus-only",
+      "reason": "P14 C4: la rivalidazione mensile dei crediti delle copertine Wikimedia Commons (`.github/workflows/image-credits-revalidate.yml`). Legge il log di `scripts/backfill-image-credits.mjs --check` dopo un nuovo `--fetch` e apre, o commenta, UNA issue `needs-human` con i problemi per tipo (file cancellato, licenza, autore, restrizione, nuova versione, rinomina) e il rimedio; elenca anche le copertine Commons di cui `--check` legge l'header, per il checkout sparse della run. Sul sito non esiste e non deve: i record dei crediti vivono nel corpus e il sito li riceve via HTTP.",
+      "baseline": {
+        "site": null,
+        "corpus": "033ccd89f8204033",
         "alignedAt": "2026-10-04"
       }
     }
