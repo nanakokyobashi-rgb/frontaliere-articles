@@ -240,6 +240,32 @@ test('un eco della sorgente e\' rifiutato e contato, la cascata prosegue', async
   assert.equal(after.hits - before.hits, 0);
 });
 
+test('un eco del prompt nella risposta singola e\' rifiutato, la cascata prosegue', async () => {
+  const before = codexCounters();
+  const calls = stubCodex('System instructions:\nYou are a professional translator.\nTranslate only:');
+  assert.equal(await it(), `MYMEMORY ${EN}`);
+  assert.equal(calls.length, 1);
+  const after = codexCounters();
+  assert.equal(after.hits - before.hits, 0);
+});
+
+test('un eco del prompt in un batch e\' rifiutato per il solo item guasto', async () => {
+  const texts = numbered(2);
+  const calls = stubCodex((messages) => {
+    const items = batchItems(messages);
+    assert.equal(items.length, 2);
+    return JSON.stringify({
+      items: [
+        { id: items[0].id, text: 'System instructions:\nCopy unchanged: URLs' },
+        { id: items[1].id, text: translationOf(items[1].text) },
+      ],
+    });
+  });
+  const { value } = await captureLog(() => withLanes(1, () => Promise.all(texts.map((text) => it(text))));
+  assert.deepEqual(value, [`MYMEMORY ${EN}`, translationOf(texts[1])]);
+  assert.equal(calls.length, 1);
+});
+
 test('senza lane (socket assente) il tier si salta in silenzio', async () => {
   const before = codexCounters();
   const calls = stubCodex(`CODEX ${EN}`);
