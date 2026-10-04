@@ -133,6 +133,39 @@ const it = (text = IT) => freeTranslate({ text, sourceLang: 'it', targetLang: 'e
 const numbered = (count) => Array.from({ length: count }, (_, i) => `${IT} Numero ${i + 1}.`);
 const translationOf = (text) => `${EN} [${/Numero (\d+)/.exec(text)?.[1] ?? '?'}]`;
 
+const DATE_CASES = [
+  {
+    source: 'La domanda e\' valida dal 1° gennaio 2024 e il limite e\' di 42 giorni.',
+    de: 'Der Antrag ist ab dem 1. Januar 2024 gültig und die Frist beträgt 42 Tage.',
+  },
+  {
+    source: 'La scadenza e\' il 2 febbraio 2025 e il valore resta 7.',
+    de: 'Die Frist ist am 2. Februar 2025 und der Wert bleibt 7.',
+  },
+];
+const DATE_CASE_BY_SOURCE = new Map(DATE_CASES.map((item) => [item.source, item]));
+
+function assertLocalizedDateRule(system) {
+  assert.match(system, /Localize dates using the target language's customary format/);
+  assert.match(system, /same calendar day, month, year and numeric values/);
+  assert.match(system, /non-date numbers, amounts/);
+  assert.doesNotMatch(system, /Copy unchanged:[^\n]*dates/);
+}
+
+function localizedDateAnswer(messages) {
+  const system = messages.find((m) => m.role === 'system').content;
+  assertLocalizedDateRule(system);
+  const items = batchItems(messages);
+  if (items) {
+    return JSON.stringify({
+      items: items.map(({ id, text }) => ({ id, text: DATE_CASE_BY_SOURCE.get(text)?.de ?? '' })),
+    });
+  }
+  const user = messages.find((m) => m.role === 'user').content;
+  const framed = /^BEGIN_TEXT_[A-Z0-9]{8}\n([\s\S]*)\nEND_TEXT_[A-Z0-9]{8}$/.exec(user);
+  return DATE_CASE_BY_SOURCE.get(framed?.[1])?.de ?? '';
+}
+
 /** Richiesta di gruppo: il messaggio utente e' l'array JSON delle voci. */
 function batchItems(messages) {
   const user = messages.find((m) => m.role === 'user').content;
@@ -201,6 +234,30 @@ test('DeepL 456 e Azure 401: tier Codex, con il prompt stretto e la sola lane Co
   assert.deepEqual(opts.prefer, [AI_MODELS.CODEX_CLI_PRIMARY]);
   assert.equal(opts.bypassForceChain, true);
   assert.ok(opts.deadlineMs > Date.now() && opts.deadlineMs <= Date.now() + 180_000);
+});
+
+test('le date sono localizzate nella lingua di arrivo, con valori invariati, in singola e batch', async () => {
+  const singleCalls = stubCodex(localizedDateAnswer);
+  assert.equal(await freeTranslate({
+    text: DATE_CASES[0].source,
+    sourceLang: 'it',
+    targetLang: 'de',
+    fieldType: 'description',
+  }), DATE_CASES[0].de);
+  assert.equal(singleCalls.length, 1);
+
+  await withLanes(1, async () => {
+    const batchCalls = stubCodex(localizedDateAnswer);
+    const { value } = await captureLog(() => Promise.all(DATE_CASES.map(({ source }) => freeTranslate({
+      text: source,
+      sourceLang: 'it',
+      targetLang: 'de',
+      fieldType: 'description',
+    }))));
+    assert.deepEqual(value, DATE_CASES.map(({ de }) => de));
+    assert.equal(batchCalls.length, 2);
+    assert.equal(batchItems(batchCalls[1].messages).length, 1);
+  });
 });
 
 test('la risposta passa da finalize: cornice tolta, token protetto rimesso nella lingua di arrivo', async () => {
