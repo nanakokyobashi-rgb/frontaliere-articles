@@ -2205,6 +2205,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/strip-leaked-title-marker.mjs",
+      "mode": "corpus-only",
+      "reason": "Toglie da un body `it` pubblicato la sola riga `TITOLO ARTICOLO: <titolo>` lasciata dal prompt di generazione (valerielinc-ops/frontaliere-si-o-no#7682: 39 pagine `it` il 2026-10-04; il proprietario ha approvato lo stesso giorno la cancellazione della sola riga, senza rigenerare il body). Lo usano solo `generator/scripts/retranslate-blocking-bodies.mjs` e `.github/workflows/bonifica-blocking-bodies.yml`, che il sito non ha: i body pubblicati e la loro bonifica vivono qui, il sito li consuma via HTTP, quindi non esiste un gemello da portare.",
+      "baseline": {
+        "site": null,
+        "corpus": "2ea9e64f56370c05",
+        "alignedAt": "2026-10-04"
+      }
+    },
+    {
       "path": "generator/scripts/lib/daily-brief-content.mjs",
       "mode": "corpus-only",
       "reason": "Composizione del Bollettino del Frontaliere, edizione datata quotidiana nata su questo repo. Nessun omonimo sul sito.",
