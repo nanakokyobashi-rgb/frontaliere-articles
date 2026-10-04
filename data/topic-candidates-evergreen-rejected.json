@@ -1012,6 +1012,14 @@
     "svizzera::https://www.tio.ch/dal-mondo/cronaca/1954638/copilota-aeroporto-tel-aviv-flydubai": {
       "section": "svizzera",
       "ts": 1791138143624
+    },
+    "frontaliere::https://www.laregione.ch/cantone/ticino/1954599/mirante-avanti-con-ticino-lavoro-punta-a-un-seggio-in-governo": {
+      "section": "frontaliere",
+      "ts": 1791139183489
+    },
+    "frontaliere::https://www.tio.ch/ticino/attualita/1954274/lascia-il-lavoro-per-salvare-cani-c-e-chi-li-regala-a-natale-e-poi-non-li-vuole-piu": {
+      "section": "frontaliere",
+      "ts": 1791139244256
     }
   }
 }
