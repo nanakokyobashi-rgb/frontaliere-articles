@@ -147,6 +147,8 @@ const REASON_GLOSS = [
   ['sorgente-mancante', 'manca il body italiano di riferimento'],
   ['italiano-illeggibile', 'il body italiano di riferimento non si legge'],
   ['chiave-assente', 'una chiave del body non si trova nel file di destinazione'],
+  ['forma-non-riparabile', 'la riga `TITOLO ARTICOLO` non e\' nella sola forma rimovibile, o toglierla cambierebbe altro oltre alla riga: pagina intatta, da sistemare a mano in una PR editoriale'],
+  ['codici-misti', 'oltre allo scaffolding la pagina ha altri codici `critical`: togliere la sola riga `TITOLO ARTICOLO` non basta'],
 ];
 
 function glossOf(reason) {
@@ -175,9 +177,18 @@ export function buildPrBody({ report, before = null, after = null, runUrl = '' }
   const written = results.filter((r) => r.written === true);
   const notWritten = results.filter((r) => r.written !== true);
   const runRef = runUrl ? `run ${runUrl}` : 'run del workflow';
+  // Sull'italiano (scaffolding) non gira nessuna cascata: lo strumento toglie
+  // la sola riga `TITOLO ARTICOLO` e riporta le righe tolte in `removedLines`.
+  const isLineRemoval = (r) => Array.isArray(r.removedLines) && r.removedLines.length > 0;
+  const removalCount = written.filter(isLineRemoval).length;
+  const mtCount = written.length - removalCount;
+  const howWritten = [
+    mtCount ? `${mtCount} ri-tradotti dalla cascata MT di produzione` : '',
+    removalCount ? `${removalCount} \`it\` da cui e\' stata tolta la sola riga \`TITOLO ARTICOLO: …\` del prompt (nessun testo generato, diff = la riga)` : '',
+  ].filter(Boolean).join('; ') || 'nessuno scritto';
 
   const done = capped(
-    written.map((r) => `- \`${pairKey(r)}\`: codici ${codesOf(r.oldCodes)} → ${codesOf(r.newCodes)}.`),
+    written.map((r) => `- \`${pairKey(r)}\`: codici ${codesOf(r.oldCodes)} → ${codesOf(r.newCodes)}${isLineRemoval(r) ? ' (tolta la sola riga `TITOLO ARTICOLO`)' : ''}.`),
     (n) => `- Altre ${n} coppie scritte con lo stesso esito: elenco completo nel report della ${runRef}.`,
   );
   const open = capped(
@@ -186,13 +197,13 @@ export function buildPrBody({ report, before = null, after = null, runUrl = '' }
         ? `- \`${pairKey(r)}\` *(by construction)* **Motivo:** la guardia accetta gia' il body pubblicato. **Prossimo passo:** nessuno.`
         : `- \`${pairKey(r)}\` (${codesOf(r.oldCodes)}) — blocked: ${glossOf(reasonOf(r))}.`,
     ),
-    (n) => `- Altre ${n} coppie non scritte — blocked: stessi motivi della cascata MT, elenco nel report della ${runRef}.`,
+    (n) => `- Altre ${n} coppie non scritte — blocked: motivi come nelle righe sopra, elenco nel report della ${runRef}.`,
   );
 
   const lines = [
     '## Implementato',
     '',
-    `- Bonifica di ${s.written} body bloccanti su ${s.treated} coppie trattate, ri-tradotti dalla cascata MT di produzione e scritti solo con zero \`critical\` (${runRef}).`,
+    `- Bonifica di ${s.written} body bloccanti su ${s.treated} coppie trattate (${howWritten}), scritti solo con zero \`critical\` (${runRef}).`,
     ...done,
     '',
     '## Non implementato (ancora)',
