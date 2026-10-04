@@ -161,3 +161,37 @@ test('un bullet di una PR del corpus che cita un identical viene instradato al s
   assert.deepEqual(byChoice.routes, []);
   assert.deepEqual(existsTwin.calls, []);
 });
+
+// Review della PR corpus 2080 (finding 🔴): `EMPTY_DECLARED_RE` ancorata solo
+// all'inizio scartava «Nessuno: <azione>» come vuoto, mentre l'oracolo lo
+// dichiara candidato. Allineato al sito #11352.
+const bodyOf = (line) => `## Non implementato (ancora)\n- ${line}\n`;
+const classifyOne = (line) =>
+  classifyCandidateBullets({
+    pr: { body: bodyOf(line) },
+    side: 'corpus',
+    manifestFiles: MANIFEST_FILES,
+    existsHere: () => true,
+    existsTwin: () => true,
+  })[0];
+
+for (const line of ['Nessuno.', '**Nessuno**', 'none', '_Niente._', 'Nothing —']) {
+  test(`«${line}» da solo è una sezione dichiarata vuota`, () => {
+    const bullet = classifyOne(line);
+    assert.equal(bullet.kind, 'empty-declared');
+    assert.equal(bullet.candidate, false);
+    assert.equal(bullet.reason, 'empty');
+  });
+}
+
+for (const line of [
+  'Nessuno: aggiornare `scripts/ci/foo.mjs`',
+  'Nessuno — aggiungere il guard',
+  'Nessuno — snapshot automatizzato, senza residui.',
+]) {
+  test(`«${line}»: «Nessuno» seguito da un'azione resta candidato`, () => {
+    const bullet = classifyOne(line);
+    assert.equal(bullet.kind, 'bullet');
+    assert.equal(bullet.candidate, true);
+  });
+}
