@@ -264,6 +264,31 @@ test('FU-004: conserva una copia di ogni chunk quando il reader riusa il buffer'
   assert.deepEqual([...result], [1, 2, 3, 4]);
 });
 
+// Sito valerielinc-ops/frontaliere-si-o-no, issue 10283 (FU-2026-09-29-004):
+// un body polyfill puo' restituire l'ArrayBuffer nudo. Su quello
+// `Buffer.from(value)` e' una vista sulla memoria del produttore e, con la
+// lunghezza dichiarata, `buffer.set(value, n)` non copiava niente.
+for (const [label, headers] of [['chunked', {}], ['lunghezza dichiarata', { 'content-length': '4' }]]) {
+  test(`FU-004: copia un ArrayBuffer nudo riusato dal reader (${label})`, async () => {
+    const { readEventImageBody } = loadBodyReader();
+    const shared = new ArrayBuffer(2);
+    let read = 0;
+    const reader = {
+      read: async () => {
+        read += 1;
+        if (read > 2) return { done: true, value: undefined };
+        new Uint8Array(shared).set(read === 1 ? [1, 2] : [3, 4]);
+        return { done: false, value: shared };
+      },
+      cancel: async () => {},
+      releaseLock() {},
+    };
+
+    const result = await readEventImageBody(fakeResponse(reader, headers), 10);
+    assert.deepEqual([...result], [1, 2, 3, 4]);
+  });
+}
+
 test('FU-003: un releaseLock() che lancia non trasforma un\'immagine letta in null', async () => {
   const { readEventImageBody } = loadBodyReader();
   const reader = readerOf([[1, 2], [3]], {
