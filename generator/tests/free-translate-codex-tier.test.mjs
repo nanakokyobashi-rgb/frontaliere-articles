@@ -250,9 +250,13 @@ test('un eco del prompt nella risposta singola e\' rifiutato, la cascata prosegu
 });
 
 test('un eco del prompt in un batch e\' rifiutato per il solo item guasto', async () => {
-  const texts = numbered(2);
-  const calls = stubCodex((messages) => {
+  const texts = numbered(3);
+  const calls = stubCodex(async (messages) => {
+    // Lascia partire la prima richiesta da sola: le due successive formano il
+    // batch mentre la corsia e' occupata, come nella coda reale.
+    await new Promise((resolve) => setTimeout(resolve, 5));
     const items = batchItems(messages);
+    if (!items) return translationOf(texts[0]);
     assert.equal(items.length, 2);
     return JSON.stringify({
       items: [
@@ -262,8 +266,10 @@ test('un eco del prompt in un batch e\' rifiutato per il solo item guasto', asyn
     });
   });
   const { value } = await captureLog(() => withLanes(1, () => Promise.all(texts.map((text) => it(text)))));
-  assert.deepEqual(value, [`MYMEMORY ${EN}`, translationOf(texts[1])]);
-  assert.equal(calls.length, 1);
+  assert.deepEqual(value, [translationOf(texts[0]), `MYMEMORY ${EN}`, translationOf(texts[2])]);
+  assert.equal(calls.length, 2);
+  assert.equal(batchItems(calls[0].messages), null);
+  assert.equal(batchItems(calls[1].messages).length, 2);
 });
 
 test('senza lane (socket assente) il tier si salta in silenzio', async () => {
