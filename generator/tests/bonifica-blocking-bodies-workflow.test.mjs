@@ -669,3 +669,19 @@ test('body della PR: tutte scritte → Non implementato con lo stato by construc
   assert.equal(evaluateBodyContract(body).blocking, 0);
   assert.match(body, /## Non implementato \(ancora\)\n\n- Nessuno\. \*\(by construction\)\*/);
 });
+
+test('body della PR: la rimozione della riga TITOLO ARTICOLO sull\'italiano non e\' descritta come cascata MT', () => {
+  const it = (id, extra) => ({ id, locale: 'it', dir: DIR, codes: ['leaked-prompt-scaffolding'], oldCodes: ['leaked-prompt-scaffolding'], newCodes: [], removedLines: [], ...extra });
+  const report = { mode: 'apply', total: 3, results: [
+    it('a', { written: true, reason: 'pulita', removedLines: ['TITOLO ARTICOLO: Frontalieri'] }),
+    it('b', { written: false, reason: 'forma-non-riparabile: body2 intestazione: ## TITOLO ARTICOLO' }),
+    it('c', { written: false, reason: 'codici-misti', oldCodes: ['fabricated-institution', 'leaked-prompt-scaffolding'] }),
+  ] };
+  const body = buildPrBody({ report });
+  assert.equal(evaluateBodyContract(body).blocking, 0, body);
+  assert.doesNotMatch(body, /cascata MT/);
+  assert.match(body, /1 `it` da cui e' stata tolta la sola riga `TITOLO ARTICOLO: …` del prompt \(nessun testo generato/);
+  assert.match(body, /`services\/locales\/blog-body\/it\/a`: codici leaked-prompt-scaffolding → nessuno \(tolta la sola riga `TITOLO ARTICOLO`\)\./);
+  assert.match(body, /`services\/locales\/blog-body\/it\/b` .* blocked: la riga `TITOLO ARTICOLO` non e' nella sola forma rimovibile/);
+  assert.match(body, /`services\/locales\/blog-body\/it\/c` .* blocked: oltre allo scaffolding la pagina ha altri codici/);
+});

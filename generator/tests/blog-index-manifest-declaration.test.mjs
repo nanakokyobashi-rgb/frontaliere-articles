@@ -24,10 +24,11 @@ import assert from 'node:assert/strict';
 import { cpSync, existsSync, mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
-import { join, resolve, dirname } from 'node:path';
+import { join, resolve, dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { declareApiArtifacts, byteSize } from '../../scripts/lib/api-manifest.mjs';
 import { sliceFrom, sliceUntil } from './lib/anchored-slice.mjs';
+import { relativeImportClosure } from './lib/reachable-source.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -149,18 +150,11 @@ test('build-blog-index dichiara i suoi shard e rifiuta un set parziale', () => {
 
 test('build-blog-index valida tutte le sezioni prima di scrivere qualsiasi shard', () => {
   const root = mkdtempSync(join(tmpdir(), 'blog-index-atomic-'));
-  const copied = [
-    'scripts/build-blog-index.mjs',
-    'scripts/lib/api-manifest.mjs',
-    'scripts/lib/corpus-floors.mjs',
-    'scripts/lib/parse-positive-num.mjs',
-    'scripts/lib/sanitize-control-chars.mjs',
-    'scripts/lib/seo-entry.mjs',
-    'engine/shared/seo-entry.mjs',
-    'generator/scripts/lib/control-char-write-report.mjs',
-    'generator/scripts/lib/meta-field-regex.mjs',
-    'generator/scripts/lib/unescape-ts-string.mjs',
-  ];
+  // The import closure, not a hand list: the list stopped at ten files while
+  // corpus-floors.mjs gained three imports, and the script then died on
+  // ERR_MODULE_NOT_FOUND — exit 1 and no output, i.e. this test passed
+  // without ever reaching the validation it is named after.
+  const copied = relativeImportClosure(resolve(ROOT, 'scripts/build-blog-index.mjs')).map((file) => relative(ROOT, file));
   try {
     for (const rel of copied) {
       const dest = join(root, rel);
@@ -184,6 +178,8 @@ test('build-blog-index valida tutte le sezioni prima di scrivere qualsiasi shard
       encoding: 'utf8',
     });
     assert.equal(result.status, 1, result.stdout + '\n' + result.stderr);
+    assert.doesNotMatch(result.stderr, /ERR_MODULE_NOT_FOUND/, 'the script must fail on the section, not on its own imports');
+    assert.match(result.stderr, /svizzera: .*refusing to publish/, 'the refusal is the missing section\'s');
     assert.equal(existsSync(out), false, 'la sezione valida non deve lasciare output quando quella successiva fallisce');
   } finally {
     rmSync(root, { recursive: true, force: true });

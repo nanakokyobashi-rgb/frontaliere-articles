@@ -59,6 +59,10 @@ on:
       # built by the old code until an unrelated corpus change happens along.
       - 'scripts/build-blog-index.mjs'
       - 'scripts/lib/sanitize-control-chars.mjs'
+      # build-blog-index.mjs also emits the cover credits
+      # (data/image-credits-<section>.json) through this module; the records
+      # themselves are under content/** and the reader under engine/**.
+      - 'scripts/lib/image-credit-records.mjs'
       - '.github/workflows/publish-api.yml'
   # The editorial companion contains a weekly update even when no article or
   # code push occurs. Rebuild it on a real weekly cadence so the HTTP surface
@@ -678,7 +682,12 @@ jobs:
           # publish stays invisible when that purge does not happen — a missing
           # CF_API_TOKEN, a Cloudflare error, a variant nobody thought of. That
           # window was 24 hours. It is now 10 minutes.
-          for f in dist/api/data/blog-index-*.json; do
+          #
+          # The cover credits (data/image-credits-<section>.json, P14) are the
+          # same class — written by build-blog-index.mjs, rewritten on every
+          # publish, fetched by the SPA's article page from the URL
+          # cdnDataUrl() builds — so they take the same path, TTL and purge.
+          for f in dist/api/data/blog-index-*.json dist/api/data/image-credits-*.json; do
             [ -s "$f" ] || continue
             bash scripts/lib/upload-cdn-file.sh "$f" "data/$(basename "$f")" "public,max-age=600"
             urls+=("https://cdn.frontaliereticino.ch/data/$(basename "$f")")

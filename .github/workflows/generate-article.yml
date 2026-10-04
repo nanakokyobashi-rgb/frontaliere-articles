@@ -1849,6 +1849,14 @@ jobs:
             # variante swiss-). Era assente dall'allowlist: un conflitto di
             # rebase su questo file abortiva il run esattamente come #76/#225/#496.
             #
+            # content/image-credits/blog/ (P14) e' un target PER-ARTICOLO come i
+            # corpi e l'hero: per una copertina Commons il generatore scrive
+            # `<slug>.json`, il credito di QUEL file webp. Due run sullo stesso
+            # slug lo scrivono in add/add, e fuori da --take-theirs il rebase
+            # aborterebbe come in #281; deve vincere lo stesso lato di
+            # public/images/blog/, altrimenti l'immagine di un run porterebbe il
+            # credito della foto dell'altro.
+            #
             # Il backoff deve precedere fetch+rebase: dormire DOPO il rebase
             # rende HEAD gia' stantio prima del tentativo successivo, proprio
             # durante le raffiche di push dei crawler.
@@ -1882,6 +1890,7 @@ jobs:
               --take-theirs content/blog-body-ch/ \
               --take-theirs data/blog-articles/ \
               --take-theirs data/swiss-articles/ \
+              --take-theirs content/image-credits/blog/ \
               --take-theirs public/images/blog/ || true
           done
           echo "::error::push failed after 5 attempts — the article is registered locally but not pushed"
