@@ -12510,6 +12510,18 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.fondazione-morandini-eventi-ottobre-2026.title': 'Veranstaltungen im Oktober 2026: Fondazione Morandini in Varese',
     'blog.article.fondazione-morandini-eventi-ottobre-2026.excerpt': 'Die Fondazione Marcello Morandini in Varese bietet im Oktober 2026 vier Termine an, mit Führungen, einem Konzert, einem Katalog und einem Workshop als Begleitprogramm zur Ausstellung \'Antonio Barrese: Morfologie di luce\', die bis zum 20. Dezember 2026 geöffnet ist.',
     'blog.article.fondazione-morandini-eventi-ottobre-2026.imageAlt': 'Innenansicht der Fondazione Marcello Morandini in Varese mit Lichtinstallationen der Ausstellung \'Antonio Barrese: Morfologie di luce\'.',
+    'blog.article.vescovi-openjobmetis-della-valle.title': 'Cecco Vescovi: Della Valle, Schlüsselspieler von Openjobmetis',
+    'blog.article.vescovi-openjobmetis-della-valle.excerpt': 'Cecco Vescovi, zu Gast bei «Luci a Masnago», analysierte die Niederlage von Openjobmetis Varese gegen Virtus Bologna und hob dabei die Ausfälle sowie die Schlüsselrolle von Della Valle hervor.',
+    'blog.article.vescovi-openjobmetis-della-valle.imageAlt': 'Basketballspiel-Action in einer Sporthalle, mit Spielern in Bewegung und Zuschauern auf den Tribünen.',
+    'blog.article.scontro-notturno-gallarate.title': 'Nächtlicher Unfall in Gallarate: drei Jugendliche betroffen',
+    'blog.article.scontro-notturno-gallarate.excerpt': 'Unfall in Gallarate, Straße Stelvio: drei Jugendliche im Alter von 18, 20 und 24 Jahren betroffen. Zwei wurden in die Krankenhäuser von Legnano und Gallarate gebracht.',
+    'blog.article.scontro-notturno-gallarate.imageAlt': 'Nachtunfall in Gallarate mit drei jungen Menschen',
+    'blog.article.saracino-comandante-carabinieri-mornago.title': 'Saracino ist neuer Kommandant der Carabinieri in Mornago',
+    'blog.article.saracino-comandante-carabinieri-mornago.excerpt': 'Leutnant mit Sonderfunktion Anacleto Antonio Saracino leitet die Carabinieri-Station von Mornago, die der Kompanie von Gallarate untersteht und für die öffentliche Sicherheit in den Gemeinden Mornago, Sumirago, Casale Litta und Inarzo zuständig ist.',
+    'blog.article.saracino-comandante-carabinieri-mornago.imageAlt': 'Leutnant Anacleto Antonio Saracino vor der Carabinieri-Wache in Mornago',
+    'blog.article.tre-valli-corti.title': 'Tre Valli Varesine, die Geschichte in der Ausstellung bei Le Corti',
+    'blog.article.tre-valli-corti.excerpt': 'Zwanzig Tafeln zeichnen bei Le Corti von Varese die Geschichte der Tre Valli Varesine von 1919 bis heute nach. Ausstellung bis 20 ottobre.',
+    'blog.article.tre-valli-corti.imageAlt': 'Zwanzig Tafeln zur Geschichte der Tre Valli Varesine im Einkaufszentrum Le Corti in Varese.',
 };
 
 export default blogMetaDe;

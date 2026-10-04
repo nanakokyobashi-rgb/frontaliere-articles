@@ -60,7 +60,7 @@ for (const locale of LOCALES) {
     assert.match(source, /lavoro\.gov\.it\/temi-e-priorita\/ammortizzatori-sociali\/focus-on\/indennita-disoccupazione\/naspi/);
     assert.match(source, /circolare-numero-2-del-04-01-2022/);
     assert.match(source, /circolare-numero-4-del-28-01-2026/);
-    assert.match(source, /schede-servizi\.50188\./, 'scheda INPS sui frontalieri');
+    assert.match(source, /schede-servizi\.50188\.Indennit--di-disoccupazione-lavoratori-frontalieri-e-diversi-dai-frontalieri%2C-prevista-dai-Regolamenti-UE-di-sicurezza-sociale\.html/, 'URL originale della scheda INPS, non tradotto');
     assert.match(source, /CELEX:02004R0883/);
   });
 
