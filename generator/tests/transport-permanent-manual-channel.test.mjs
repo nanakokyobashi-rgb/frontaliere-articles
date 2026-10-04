@@ -34,7 +34,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { EXIT_MANUAL_NEEDED, manualTransportReason } from '../../scripts/ci/transport-identical-twins.mjs';
-import { TRANSPORT_BULLET_RE, parseTransportBullets } from '../../scripts/ci/transport-realign-body.mjs';
+import { TRANSPORT_BULLET_RE, buildTransportPrBody, parseTransportBullets } from '../../scripts/ci/transport-realign-body.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8');
@@ -213,16 +213,20 @@ test('il parser post-merge accetta sia il body storico sia quello corrente', () 
 });
 
 test('il body del trasporto descrive lo scope workflow osservato, non uno stato inventato', () => {
+  // Il body non vive piu' nel YAML: lo costruisce `buildTransportPrBody`, e il
+  // workflow passa solo l'esito della sonda (`PAT_WORKFLOWS_SCOPE`).
   const yml = read(WORKFLOW);
-  assert.match(yml, /const workflowsBlocked = process\.env\.PAT_WORKFLOWS_SCOPE !== "true";/);
-  assert.match(yml, /blocked: PAT_WORKFLOWS_SCOPE non è true/);
-  assert.match(yml, /restano escluse per scelta/);
-  assert.match(yml, /non sono bloccati dallo scope in questa passata/);
-  assert.doesNotMatch(
-    yml,
-    /i gemelli sotto `\.github\/workflows\/`: fuori dall.*token.*non ha lo scope/,
-    'il body non deve dichiarare sempre il blocco: la sonda può aver concesso lo scope',
-  );
+  assert.match(yml, /buildTransportPrBody\(r, \{ workflowsScope: process\.env\.PAT_WORKFLOWS_SCOPE === "true" \}\)/);
+
+  const blocked = buildTransportPrBody({ transported: [] }, { workflowsScope: false });
+  assert.match(blocked, /blocked: PAT_WORKFLOWS_SCOPE non è true/);
+  assert.match(blocked, /restano escluse dal trasporto \*\(per scelta\)\*/);
+  assert.doesNotMatch(blocked, /non sono bloccati dallo scope|è disponibile per questa identita/);
+
+  const granted = buildTransportPrBody({ transported: [] }, { workflowsScope: true });
+  assert.match(granted, /restano escluse dal trasporto \*\(per scelta\)\*/);
+  assert.match(granted, /scope `workflows` e' disponibile per questa identita'/);
+  assert.doesNotMatch(granted, /PAT_WORKFLOWS_SCOPE non è true/, 'la sonda può aver concesso lo scope');
 });
 
 /**

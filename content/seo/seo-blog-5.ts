@@ -99757,6 +99757,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-workshop-difesa-bullismo': {
+    title: 'Travedona Monate: difesa personale e bullismo | Frontaliere Ticino',
+    description: 'A Travedona Monate workshop gratuito di difesa personale sabato 10 ottobre: focus su bullismo e prevenzione, con Sos dei Laghi e Squadra mobile di Varese.',
+    keywords: 'frontalieri, ticino, svizzera, italia, travedona, monate, difesa, personale',
+    ogTitle: 'Travedona Monate: difesa personale e bullismo',
+    ogDescription: 'Sabato 10 ottobre la palestra delle scuole medie comunali di Travedona Monate ospita un workshop gratuito aperto dagli 11 anni, con Stefano Gallucci, Sos dei Laghi e un intervento della Squadra mobile di Varese.',
+    canonicalPath: '/articoli-frontaliere/workshop-difesa-bullismo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Travedona Monate: difesa personale e bullismo",
+      "description": "A Travedona Monate workshop gratuito di difesa personale sabato 10 ottobre: focus su bullismo e prevenzione, con Sos dei Laghi e Squadra mobile di Varese.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/workshop-difesa-bullismo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Workshop gratuito di difesa personale nella palestra delle scuole medie di Travedona Monate"
+      },
+      "datePublished": "2026-10-04T03:46:08+00:00",
+      "dateModified": "2026-10-04T03:46:08+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/workshop-difesa-bullismo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
