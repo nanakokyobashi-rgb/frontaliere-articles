@@ -13,11 +13,15 @@
  *     Commons file as every other record of that file;
  *   - no SEO literal of a credited cover still claims the photo for the site
  *     («© … Frontaliere Ticino. Tutti i diritti riservati» and the other four
- *     rights fields): the engine builds them from the record.
+ *     rights fields): the engine builds them from the record;
+ *   - every live Commons cover — the image of a registry row whose cover is in
+ *     either usage map with a Commons URL — has a publishable record. Since the
+ *     backfill (data PR C2) a page never shows a Commons photo without its
+ *     credit; a file that cannot be credited is replaced, not left uncredited.
  *
- * Before the backfill (data PR C2) few or no covers have a record, which is a
- * legitimate state; the literal scan is checked against a raw count so that a
- * parser reading nothing cannot pass for a clean corpus.
+ * The literal scan is checked against a raw count, and the live covers
+ * against a floor, so that a parser reading nothing cannot pass for a clean
+ * corpus.
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -26,11 +30,13 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   auditCreditRecords,
+  corpusCreditReader,
   findCreditedRightsClaims,
   readCreditRecords,
   scanSeoImageBlocks,
   seoLiteralFiles,
 } from '../../scripts/lib/image-credit-records.mjs';
+import { liveCommonsCovers } from '../../scripts/backfill-image-credits.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const RECORDS_DIR = path.join(ROOT, 'content', 'image-credits', 'blog');
@@ -60,4 +66,17 @@ test('the literal scan reads every image object of content/seo (no silent zero)'
   }
   assert.ok(counted > 0, 'no image object at all in content/seo');
   assert.equal(scanned, counted, 'the scanner lost image objects: a claim inside them would go unseen');
+});
+
+test('every live Commons cover has a publishable credit record', () => {
+  const live = liveCommonsCovers(ROOT);
+  // The 2026-10-04 corpus showed 1,478 live Commons covers; far fewer means
+  // the usage maps or the registries were not read, not that the corpus is clean.
+  assert.ok(live.length >= 1000, `only ${live.length} live Commons covers read from the usage maps and the registries`);
+  const reader = corpusCreditReader(ROOT, () => {});
+  const uncredited = live
+    .filter(({ id }) => !reader.get(`/images/blog/${id}.webp`))
+    .map(({ id, title }) => `${id} («${title}»)`);
+  assert.deepEqual(uncredited, [], `live Commons covers without a publishable record (${path.join('content', 'image-credits', 'blog')}): `
+    + `write it with node scripts/backfill-image-credits.mjs --build, or replace the cover:\n  ${uncredited.slice(0, 20).join('\n  ')}`);
 });
