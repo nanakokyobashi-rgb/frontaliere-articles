@@ -99484,6 +99484,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-sequestro-stupefacenti-camper-varese': {
+    title: 'Varese: 70 kg di droga sul camper, arresti | Frontaliere Ticino',
+    description: 'La Guardia di Finanza di Varese sequestra oltre 70 kg di stupefacenti su un camper. Arrestati tre persone, trovato un bassotto affidato a una famiglia.',
+    keywords: 'frontalieri, ticino, svizzera, italia, varese, droga, camper, arresti',
+    ogTitle: 'Varese: 70 kg di droga sul camper, arresti',
+    ogDescription: 'Operazione della Guardia di Finanza di Varese: sequestrati 19 kg di cocaina e 49 di marijuana su un camper spagnolo. Tre persone arrestate e un bassotto affidato a una famiglia per adozione temporanea.',
+    canonicalPath: '/articoli-frontaliere/sequestro-stupefacenti-camper-varese/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Varese: 70 kg di droga sul camper, arresti",
+      "description": "La Guardia di Finanza di Varese sequestra oltre 70 kg di stupefacenti su un camper. Arrestati tre persone, trovato un bassotto affidato a una famiglia.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/sequestro-stupefacenti-camper-varese.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Area boschiva nella provincia di Varese dove è stato sequestrato il carico di stupefacenti"
+      },
+      "datePublished": "2026-10-04T01:50:38+00:00",
+      "dateModified": "2026-10-04T01:50:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/sequestro-stupefacenti-camper-varese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
