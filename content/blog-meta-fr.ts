@@ -1204,9 +1204,9 @@ const blogMetaFr: Record<string, string> = {
  'blog.article.lavoro-economia-2026.title': 'La fuite de talents à Zurich : les entreprises se plaignent de la pénurie de logements',
  'blog.article.lavoro-economia-2026.excerpt': 'La pénurie de logements à Zurich est un problème grave qui décourage les candidats des entreprises zurichoises. La pénurie de logements est l\'une des principales préoccupations des entreprises.',
  'blog.article.lavoro-economia-2026.imageAlt': 'Une jeune femme cherche un appartement dans un quartier résidentiel de Lugano, mars 2026',
- 'blog.article.sequestro-cocaina-brogeda-2026.title': '15 kg de cocaïne saisis à Brogeda : qu\'est-ce qui change pour les frontaliers',
- 'blog.article.sequestro-cocaina-brogeda-2026.excerpt': 'Maxi-saisie au poste frontière de Brogeda : 15,3 kg de cocaïne très pure dissimulés dans un double fond. Enquêtes en cours, contrôles renforcés possibles.',
- 'blog.article.sequestro-cocaina-brogeda-2026.imageAlt': 'Contrôle douanier Brogeda-Chiasso avec saisie record de cocaïne',
+ 'blog.article.sequestro-cocaina-brogeda-2026.title': 'Saisie à Brogeda : information et rectification',
+ 'blog.article.sequestro-cocaina-brogeda-2026.excerpt': 'La communication ADM de mars 2026 et la rectification d’affirmations non étayées sur les contrôles, les permis et les conséquences financières.',
+ 'blog.article.sequestro-cocaina-brogeda-2026.imageAlt': 'Image illustrative du poste frontière de Brogeda',
  'blog.article.infiltrazioni-criminali-ticino-grigioni.title': 'Culture, argent, infiltrations criminelles : Tessin et Grisons en comparaison',
  'blog.article.infiltrazioni-criminali-ticino-grigioni.excerpt': 'Le comparaison entre le Tessin et le Grisons en matière d\'infiltrations criminelles et de culture économique.',
  'blog.article.infiltrazioni-criminali-ticino-grigioni.imageAlt': 'Bellinzona, avec le Castelgrande en arrière-plan',
@@ -12507,6 +12507,12 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.maga-giornata-contemporaneo.title': 'Au MA*GA de gallarate la journée du contemporain',
     'blog.article.maga-giornata-contemporaneo.excerpt': 'Samedi 10 octobre au Musée MA*GA de Gallarate entrée gratuite, finissage de trois expositions, livres, vidéos et performances pour la XXIIe Journée du Contemporain.',
     'blog.article.maga-giornata-contemporaneo.imageAlt': 'Le musée MA*GA de Gallarate pour la Journée de l’art contemporain',
+    'blog.article.licenza-sospesa-bar-busto-2026.title': 'Buste Arsizio : licence suspendue 15 jours pour agression',
+    'blog.article.licenza-sospesa-bar-busto-2026.excerpt': 'Le commissaire de Varese a suspendu pendant 15 jours la licence d\'un bar de Busto Arsizio après l\'agression du 20 septembre avec des jets de pierres près d\'un couple avec une poussette ; le blessé a été emmené à l\'hôpital de Gallarate.',
+    'blog.article.licenza-sospesa-bar-busto-2026.imageAlt': 'Bar de Busto Arsizio avec police après attaque à la pierre',
+    'blog.article.fondazione-morandini-eventi-ottobre-2026.title': 'Événements d\'octobre 2026 : Fondazione Morandini à Varese',
+    'blog.article.fondazione-morandini-eventi-ottobre-2026.excerpt': 'La Fondazione Marcello Morandini de Varese propose quatre rendez-vous en octobre 2026, entre visites, concert, catalogue et atelier, en complément de l\'exposition \'Antonio Barrese : Morphologies de la lumière\', ouverte jusqu\'au 20 décembre 2026.',
+    'blog.article.fondazione-morandini-eventi-ottobre-2026.imageAlt': 'Intérieur de la Fondation Marcello Morandini à Varèse avec des installations lumineuses de l\'exposition \'Antonio Barrese: Morfologie di luce\'. (Varese)',
 };
 
 export default blogMetaFr;

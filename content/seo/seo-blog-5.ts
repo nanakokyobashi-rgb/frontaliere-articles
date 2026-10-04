@@ -99913,6 +99913,84 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-licenza-sospesa-bar-busto-2026': {
+    title: 'Busto Arsizio: licenza sospesa 15 giorni per aggressione',
+    description: 'Il Questore di Varese ha sospeso per 15 giorni la licenza di un bar di Busto Arsizio dopo l\'aggressione del 20 settembre con lancio di pietre vicino',
+    keywords: 'frontalieri, ticino, svizzera, italia, busto, arsizio, licenza, sospesa',
+    ogTitle: 'Sospensione licenza bar Busto Arsizio aggressione',
+    ogDescription: 'Il Questore di Varese ha ordinato la sospensione per quindici giorni della licenza di un bar di Busto Arsizio a seguito di una violenta aggressione avvenuta la sera del 20 settembre. Pietre sono state lanciate contro un uomo, mettendo in pericolo',
+    canonicalPath: '/articoli-frontaliere/licenza-sospesa-bar-busto-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Busto Arsizio: licenza sospesa 15 giorni per aggressione",
+      "description": "Il Questore di Varese ha sospeso per 15 giorni la licenza di un bar di Busto Arsizio dopo l'aggressione del 20 settembre con lancio di pietre vicino",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/licenza-sospesa-bar-busto-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Bar di Busto Arsizio con polizia dopo aggressione"
+      },
+      "datePublished": "2026-10-04T06:49:38+00:00",
+      "dateModified": "2026-10-04T06:49:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/licenza-sospesa-bar-busto-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-fondazione-morandini-eventi-ottobre-2026': {
+    title: 'Eventi ottobre 2026: Fondazione Morandini a Varese',
+    description: 'Scopri i quattro appuntamenti di ottobre 2026 alla Fondazione Marcello Morandini di Varese: visite per bambini, concerto dell\'Orchestra della Scala',
+    keywords: 'frontalieri, ticino, svizzera, italia, eventi, ottobre, fondazione, morandini',
+    ogTitle: 'Eventi ottobre 2026: Fondazione Morandini a Varese',
+    ogDescription: 'La Fondazione Marcello Morandini di Varese presenta un ricco programma di eventi a ottobre 2026, tra visite guidate per i più piccoli, un concerto con i contrabbassisti della Scala, la presentazione del catalogo della mostra «Antonio Barrese',
+    canonicalPath: '/articoli-frontaliere/fondazione-morandini-eventi-ottobre-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Eventi ottobre 2026: Fondazione Morandini a Varese",
+      "description": "Scopri i quattro appuntamenti di ottobre 2026 alla Fondazione Marcello Morandini di Varese: visite per bambini, concerto dell'Orchestra della Scala",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/fondazione-morandini-eventi-ottobre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Interno della Fondazione Marcello Morandini a Varese con installazioni luminose della mostra 'Antonio Barrese: Morfologie di luce'."
+      },
+      "datePublished": "2026-10-04T07:21:29+00:00",
+      "dateModified": "2026-10-04T07:21:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/fondazione-morandini-eventi-ottobre-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

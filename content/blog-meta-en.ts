@@ -1203,9 +1203,9 @@ const blogMetaEn: Record<string, string> = {
  'blog.article.lavoro-economia-2026.title': 'The talent drain to Zurich: companies also complain about the housing shortage',
  'blog.article.lavoro-economia-2026.excerpt': 'Zurich\'s housing shortage is a serious problem that is deterring candidates from Zurich-based companies. The lack of housing is one of the main concerns for businesses.',
  'blog.article.lavoro-economia-2026.imageAlt': 'A young woman searching for an apartment in a residential area of Lugano, March 2026',
- 'blog.article.sequestro-cocaina-brogeda-2026.title': '15 kg of Cocaine Seized at Brogeda: What Changes for Frontaliers',
- 'blog.article.sequestro-cocaina-brogeda-2026.excerpt': 'Massive Cocaine Seizure at Brogeda: 15.3 kg of Pure Cocaine Hidden in a Custom-Made Compartment. Investigations Ongoing, Possible Enhanced Controls.',
- 'blog.article.sequestro-cocaina-brogeda-2026.imageAlt': 'Brogeda-Chiasso customs checkpoint with record cocaine seizure',
+ 'blog.article.sequestro-cocaina-brogeda-2026.title': 'Brogeda seizure: news report and factual correction',
+ 'blog.article.sequestro-cocaina-brogeda-2026.excerpt': 'The March 2026 ADM news entry and a correction of unsupported claims about border checks, permits and financial consequences.',
+ 'blog.article.sequestro-cocaina-brogeda-2026.imageAlt': 'Illustrative image of the Brogeda border crossing',
  'blog.article.infiltrazioni-criminali-ticino-grigioni.title': 'Culture, money, criminal infiltration: Ticino and Graubünden compared',
  'blog.article.infiltrazioni-criminali-ticino-grigioni.excerpt': 'A comparison between Ticino and Graubünden on criminal infiltration and economic culture.',
  'blog.article.infiltrazioni-criminali-ticino-grigioni.imageAlt': 'Bellinzona, with the Castelgrande in the foreground',
@@ -12505,6 +12505,12 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.maga-giornata-contemporaneo.title': 'At the MA*GA in Gallarate, the Contemporary Day',
     'blog.article.maga-giornata-contemporaneo.excerpt': 'Saturday 10 October at the MA*GA Museum in Gallarate, free admission, closing event for three exhibitions, books, video and performance for the XXII Contemporary Day.',
     'blog.article.maga-giornata-contemporaneo.imageAlt': 'The MA*GA Museum in Gallarate for Contemporary Art Day',
+    'blog.article.licenza-sospesa-bar-busto-2026.title': 'Busto Arsizio: license suspended for 15 days for assault',
+    'blog.article.licenza-sospesa-bar-busto-2026.excerpt': 'The Police Commissioner of Varese suspended the license of a bar in Busto Arsizio for 15 days after the September 20 assault involving stones being thrown near a couple with a stroller; the injured person was taken to the hospital in Gallarate.',
+    'blog.article.licenza-sospesa-bar-busto-2026.imageAlt': 'Bar in Busto Arsizio with police after stone‑throwing attack',
+    'blog.article.fondazione-morandini-eventi-ottobre-2026.title': 'October 2026 events: Fondazione Morandini in Varese',
+    'blog.article.fondazione-morandini-eventi-ottobre-2026.excerpt': 'The Marcello Morandini Foundation of Varese is offering four events in October 2026, including visits, a concert, a catalogue and a workshop, accompanying the exhibition \'Antonio Barrese: Morphologies of Light\' open until December 20, 2026.',
+    'blog.article.fondazione-morandini-eventi-ottobre-2026.imageAlt': 'Interior of the Marcello Morandini Foundation in Varese with light installations from the \'Antonio Barrese: Morfologie di luce\' exhibition.',
 };
 
 export default blogMetaEn;
