@@ -65,6 +65,9 @@
  * REQUISITO DI UGUAGLIANZA. Continua a essere sorvegliato sulla baseline,
  * perché è proprio sui file adattati che una modifica del sito si perde più
  * facilmente — nessuno se ne accorge, visto che "tanto è diverso apposta".
+ * Se una sua PARTE deve invece restare uguale nei due repo, la voce la dichiara
+ * con `identicalSections` e il confronto di quei byte, indipendente dalla
+ * baseline, produce `section-drift` (vedi `identicalSectionsVerdict()`).
  *
  * ## `corpus-only` vs `corpus-only-pending` (issue #125)
  *
@@ -825,6 +828,114 @@ function scalarFingerprintVerdict(entry, { site, corpus }) {
     return { checked: true, valid: false, matches: false, detail: 'fingerprint scalare incoerente con il digest dichiarato nel manifest' };
   }
   return { checked: true, valid: true, matches: true };
+}
+
+/**
+ * ## `section-drift`: una sezione dichiarata byte-identica dentro un file `adapted`
+ *
+ * Un file `adapted` diverge per scelta, quindi il confronto a tre vie sul file
+ * intero non dice niente di una sua PARTE che invece deve restare uguale nei
+ * due repo. Il caso reale: la sezione `Codex Luna Max` di
+ * `generator/scripts/lib/free-translate.mjs`, byte-identica per decisione del
+ * proprietario, e' divergita il 2026-10-04 (corpus #2118 e #2119, parte sito
+ * della issue 2113 mai aperta) senza che niente lo segnalasse — e
+ * `translate-pending.yml` esegue la copia del SITO, quindi la fix non girava.
+ *
+ * La voce del manifest dichiara le sezioni con
+ * `identicalSections: [{ start, end }]`: la sezione va dalla prima occorrenza
+ * di `start` (inclusa) alla prima occorrenza di `end` dopo di essa (esclusa),
+ * confrontata BYTE per byte (sha256) fra il file del sito e quello del corpus.
+ * Il verdetto non dipende dalla baseline: una riattestazione con `--init`
+ * (anche `--force`) non lo spegne finche' i byte non tornano uguali.
+ *
+ * Ritorna `{ checked, drift, sections, detail }`; `sections` porta per ogni
+ * dichiarazione gli sha256[:16] dei due lati (o il marcatore mancante).
+ */
+const SECTION_DRIFT_STATE = 'section-drift';
+
+function sectionBytes(buf, { start, end }) {
+  const from = buf.indexOf(start, 0, 'utf8');
+  if (from < 0) return { missing: 'start' };
+  const to = buf.indexOf(end, from + Buffer.byteLength(start, 'utf8'), 'utf8');
+  if (to < 0) return { missing: 'end' };
+  return { bytes: buf.subarray(from, to) };
+}
+
+function identicalSectionsVerdict(entry, { site, corpus }) {
+  const declared = entry.identicalSections;
+  if (declared === undefined) return { checked: false, drift: false, sections: [], detail: '' };
+  const toBuf = (raw) => (raw === null || raw === undefined ? null : Buffer.isBuffer(raw) ? raw : Buffer.from(String(raw), 'utf8'));
+  const siteBuf = toBuf(site);
+  const corpusBuf = toBuf(corpus);
+  const valid = Array.isArray(declared) && declared.length > 0 && declared.every(
+    (s) => s && typeof s.start === 'string' && s.start.length > 0 && typeof s.end === 'string' && s.end.length > 0,
+  );
+  if (!valid) {
+    return {
+      checked: true,
+      drift: true,
+      sections: [],
+      detail: '`identicalSections` malformata: serve un elenco non vuoto di `{ start, end }` con due marcatori non vuoti.',
+    };
+  }
+  const sections = declared.map((decl) => {
+    const row = { start: decl.start, end: decl.end, site: null, corpus: null, missing: [] };
+    const bytes = {};
+    for (const [side, buf] of [['site', siteBuf], ['corpus', corpusBuf]]) {
+      if (!buf) {
+        row.missing.push(`${side}: file`);
+        continue;
+      }
+      const cut = sectionBytes(buf, decl);
+      if (cut.missing) {
+        row.missing.push(`${side}: ${cut.missing}`);
+        continue;
+      }
+      bytes[side] = cut.bytes;
+      // Lo sha256[:16] (stessa forma delle baseline) e' quello che si legge
+      // nel report e nella `reason` del manifest; il confronto e' sui byte.
+      row[side] = sha256(cut.bytes);
+    }
+    row.matches = !row.missing.length && bytes.site.equals(bytes.corpus);
+    return row;
+  });
+  const broken = sections.filter((s) => !s.matches);
+  const describe = (s) => {
+    const name = `\`${s.start.slice(0, 60)}\``;
+    if (s.missing.length) return `${name}: marcatore assente (${s.missing.join(', ')})`;
+    return `${name}: sito ${s.site} ≠ corpus ${s.corpus}`;
+  };
+  return {
+    checked: true,
+    drift: broken.length > 0,
+    sections,
+    detail: broken.map(describe).join('; '),
+  };
+}
+
+/** Il verdetto della riga quando una sezione dichiarata diverge. */
+function sectionDriftResult(fileVerdict, sections) {
+  return {
+    state: SECTION_DRIFT_STATE,
+    actionable: true,
+    headline: 'una sezione dichiarata byte-identica diverge fra sito e corpus',
+    detail:
+      `${sections.detail}. Porta la sezione dal lato che ha la modifica all'altro, byte per byte ` +
+      "(PR gemella), poi riattesta la baseline. Il resto del file resta `adapted`. " +
+      `Verdetto sul file intero: \`${fileVerdict.state}\` (${fileVerdict.headline}).`,
+    fileState: fileVerdict.state,
+    sections: sections.sections,
+  };
+}
+
+/**
+ * Il verdetto della riga dopo il confronto delle sezioni dichiarate: invariato
+ * se ogni sezione coincide (o la voce non ne dichiara), `section-drift`
+ * altrimenti, qualunque fosse il verdetto sul file intero.
+ */
+function withIdenticalSections(entry, fileVerdict, { site, corpus }) {
+  const sections = identicalSectionsVerdict(entry, { site, corpus });
+  return sections.drift ? sectionDriftResult(fileVerdict, sections) : fileVerdict;
 }
 
 /**
@@ -1970,6 +2081,17 @@ async function main() {
       }
     }
 
+    // Ortogonale al verdetto sul file intero, e DOPO di lui: un `adapted`
+    // `stable` (o assolto dalla fingerprint) puo' nascondere una sezione
+    // dichiarata byte-identica che non lo e' piu'. Il verdetto sul file resta
+    // nel `detail` e in `fileState`, cosi' la riga resta una per path.
+    if (entry.identicalSections !== undefined && siteBytes !== null && now.corpus !== null) {
+      verdict = withIdenticalSections(entry, verdict, {
+        site: siteBytes,
+        corpus: fs.readFileSync(path.join(ROOT, rel)),
+      });
+    }
+
     // Issue #148: un file assente da un lato non produce un confronto in
     // `classify()`, quindi una baseline fabbricata (presa da un ramo mai
     // mergiato, o da uno stato mai committato) può restare verde per sempre —
@@ -2190,7 +2312,7 @@ async function main() {
       console.log('Niente che richieda una decisione: i due cicli sono allineati, o divergono solo dove dichiarato.');
     } else {
       // Ordine per urgenza decisionale, non alfabetico.
-      const ORDER = ['ghost-baseline', REUSABLE_PIN_STATE, 'corpus-only-twin', 'identical-unmirrorable', 'stranded-twin', 'undeclared-drift', 'both-moved', 'both-moved-converged', 'site-ahead', 'corpus-only-pending-landed', 'missing-here', 'removed-on-site', 'corpus-ahead', 'corpus-only-pending'];
+      const ORDER = ['ghost-baseline', REUSABLE_PIN_STATE, 'corpus-only-twin', 'identical-unmirrorable', 'stranded-twin', 'undeclared-drift', SECTION_DRIFT_STATE, 'both-moved', 'both-moved-converged', 'site-ahead', 'corpus-only-pending-landed', 'missing-here', 'removed-on-site', 'corpus-ahead', 'corpus-only-pending'];
       actionable.sort((a, b) => ORDER.indexOf(a.state) - ORDER.indexOf(b.state));
       for (const r of actionable) {
         console.log(`  [${r.state}] ${r.path}`);
@@ -2226,6 +2348,7 @@ async function main() {
       section('corpus-only-twin', '🔴 Dichiarato `corpus-only`, ma il gemello esiste sul sito'),
       section('identical-unmirrorable', '🔴 Dichiarato `identical`, ma importa un modulo che il sito non ha'),
       section('undeclared-drift', '🔴 Divergenza non dichiarata'),
+      section(SECTION_DRIFT_STATE, '🔴 Sezione dichiarata byte-identica divergente fra sito e corpus'),
       section('both-moved', '🔴 Modificato su entrambi i lati'),
       section('both-moved-converged', '🟢 Modificato su entrambi i lati, ma gia\' convergente — solo da ri-baselinare'),
       section('site-ahead', '⬇️ Il sito è andato avanti — da portare qui'),
@@ -2239,6 +2362,8 @@ async function main() {
       'Le classi `site-ahead` e `corpus-ahead` non sono errori: sono le due direzioni in cui il ciclo evolve. La prima è lavoro da portare, la seconda è un miglioramento locale che probabilmente serve a entrambi i cicli.',
       '',
       `\`stranded-twin\` (issue #303) è un \`site-ahead\` a cui è stata misurata l'ETÀ: un gemello dichiarato \`identical\` che il sito ha lasciato indietro da più di ${STRANDED_AFTER_DAYS} giorni. La distinzione è la sola cosa che separa "qualcuno lo porterà" da "non lo porterà nessuno", perché **nessuna** voce \`identical\` di questo manifest ha un trasporto automatico: \`mirror-articles-engine.yml\` copre \`engine/\`, e \`engine/\` è \`outOfScope\` qui proprio per quel motivo. I due insiemi sono disgiunti per costruzione, quindi per ogni file di questo manifest il trasporto è una copia a mano — e finché non la si fa, la riga qui sopra è l'unica cosa che lo dice.`,
+      '',
+      `\`${SECTION_DRIFT_STATE}\` riguarda un file \`adapted\` che dichiara nel manifest una o più \`identicalSections\`: la sezione fra i due marcatori deve restare byte-identica nei due repo e non lo è più. Il verdetto confronta i byte attuali, non la baseline, quindi una riattestazione non lo spegne: si chiude portando la sezione con una PR gemella.`,
       '',
       '`ghost-baseline` (issue #148) è diverso da tutte le altre classi: non descrive dove si è mosso il codice, dice che il DATO della baseline non è mai stato reale — verificato contro l\'intera storia disponibile del path su quel lato (o, se la storia supera il cap di ricerca, la entry non compare qui: un mancato match parziale resta silenzioso per non produrre falsi rossi). La correzione è ricalcolare la baseline dal contenuto REALE — l\'hash del blob a cui quel lato era davvero allineato alla data di `alignedAt` — e non semplicemente rilanciare `--init`, perché `--init` scrive `now`, che per una entry già rotta potrebbe anch\'esso non essere il valore che ci si aspetta. Se `now` è invece il valore giusto (la voce è nuova e non si è più mossa), `--init --only <path>` la registra da sola, senza dichiarare allineate le altre trecento (issue #653).',
       '',
@@ -2285,4 +2410,4 @@ if (process.argv[1] && process.argv[1].endsWith('loop-drift-check.mjs')) {
 // baseline con LA STESSA regola con cui la pesa il cron, altrimenti una voce
 // accettata in PR verrebbe dichiarata fantasma il mattino dopo — o peggio, il
 // contrario. Una seconda copia della regola lo renderebbe inevitabile.
-export { classify, parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, initAttestVerdict, initPassOutcome, initBaseline, initOnlyManifestUnchanged, localHash, ghostVerdict, strandedVerdict, provenanceRateLimitVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, implicitPinnersVerdict, declaredAbsentCiters, crawlerContractIsActive, resetPinnerIndex, DECLARED_ABSENT_REGISTRY_REL, CRAWLER_CONTRACT_REL, DORMANT_WITH_CRAWLER_CONTRACT, resolvedLocalImports, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch, checkBaselineProvenance, siteReusablePins, reusablePinVerdict, reusablePinResults, localWorkflowSources, REUSABLE_PIN_STATE };
+export { classify, parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, initAttestVerdict, initPassOutcome, initBaseline, initOnlyManifestUnchanged, localHash, ghostVerdict, strandedVerdict, provenanceRateLimitVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, implicitPinnersVerdict, declaredAbsentCiters, crawlerContractIsActive, resetPinnerIndex, DECLARED_ABSENT_REGISTRY_REL, CRAWLER_CONTRACT_REL, DORMANT_WITH_CRAWLER_CONTRACT, resolvedLocalImports, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch, checkBaselineProvenance, siteReusablePins, reusablePinVerdict, reusablePinResults, localWorkflowSources, REUSABLE_PIN_STATE, identicalSectionsVerdict, withIdenticalSections, SECTION_DRIFT_STATE };
