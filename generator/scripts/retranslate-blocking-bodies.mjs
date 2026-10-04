@@ -45,6 +45,20 @@
  *      fail-closed dalla cascata condivisa; questo controllo resta una difesa
  *      ulteriore per residui parziali o per chiamanti futuri della funzione.
  *
+ * UNA eccezione, solo sull'italiano e solo per `leaked-prompt-scaffolding`:
+ * l'italiano e' il sorgente, la cascata non lo puo' rifare, e il gate stesso
+ * prescrive di cancellare il marcatore del prompt («Rimuovi il blocco… Non
+ * riscrivere l'istruzione in prosa»). Il proprietario ha approvato il
+ * 2026-10-04 (site 7682) la cancellazione della sola riga
+ * `TITOLO ARTICOLO: <titolo>` invece di una rigenerazione LLM. E' la
+ * cancellazione di un token esatto del prompt (`lib/strip-leaked-title-marker.mjs`),
+ * non una regex di riparazione: nessun testo viene generato o riscritto, si
+ * scrive solo se la pagina aveva quel SOLO codice `critical`, se la guardia
+ * sul testo nuovo torna a zero `critical` e se il diff riga per riga (e il
+ * file, byte per byte fuori dal campo) e' esattamente la riga tolta. Ogni
+ * altra forma del marcatore resta intatta e si risolve a mano
+ * (`planTitleMarkerRemoval`).
+ *
  * E dalla regola di forma: l'uscita della cascata passa da `sanitizeBodyText()`
  * come nel percorso di produzione. Le graffe spaiate dell'MT (la chiusura mal
  * fatta delle virgolette basse tedesche) non sono nel vocabolario di
@@ -135,6 +149,7 @@ import {
 import { unescapeTsString } from './lib/unescape-ts-string.mjs';
 import { escapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
 import { sanitizeBodyText } from './lib/sanitize-body-braces.mjs';
+import { stripLeakedTitleMarkerLine, diffIsExactlyRemovedLines } from './lib/strip-leaked-title-marker.mjs';
 import { detectLanguage, detectLanguageWithConfidence } from './lib/detect-language.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
@@ -1205,6 +1220,64 @@ export function rewriteExistingLocaleBody(src, id, sections, { allowMissing = fa
   return { src: next, missing: null };
 }
 
+/** Il solo codice per cui l'italiano ha una riparazione (riga del prompt). */
+export const TITLE_MARKER_REPAIR_CODE = 'leaked-prompt-scaffolding';
+
+/**
+ * Decide se la rimozione della riga `TITOLO ARTICOLO: <titolo>` da un body
+ * italiano si puo' scrivere, e prepara il sorgente da scrivere.
+ *
+ * Ritorna `{ issue, src }`: `issue` e' il motivo del rifiuto (che diventa il
+ * `reason` del report, e la pagina resta intatta), altrimenti `null` e `src`
+ * e' il file da scrivere. Rifiuta, nell'ordine:
+ *
+ *   - `codici-misti`: la pagina ha altri `critical` oltre allo scaffolding.
+ *     Togliere la riga la lascerebbe comunque bloccata, e un'altra
+ *     riparazione non passa di qui;
+ *   - `forma-non-riparabile: <motivo>: <riga>`: il token compare in una forma
+ *     che non e' una riga intera (intestazione, titolo su un'altra riga…);
+ *   - `forma-non-riparabile: nessuna-riga-marcatore`: niente da togliere;
+ *   - `forma-non-riparabile: diff-oltre-la-riga (<campo>)`: il testo che si
+ *     scriverebbe (dopo sanificazione e guardia dei fatti chiave) differisce
+ *     dal pubblicato per piu' della riga tolta;
+ *   - `forma-non-riparabile: file-oltre-la-riga`: riscrivere il campo
+ *     cambierebbe altri byte del file (campo non nella forma canonica dello
+ *     scrittore, caratteri di controllo che `writeAtomic` toglierebbe).
+ *
+ * Si riscrivono SOLO i campi da cui una riga e' stata tolta: gli altri restano
+ * byte per byte come sono.
+ */
+export function planTitleMarkerRemoval({
+  src, id, oldCodes = [], oldSections = {}, newSections = {}, removedByField = {}, skipped = [],
+}) {
+  const others = oldCodes.filter((code) => code !== TITLE_MARKER_REPAIR_CODE);
+  if (others.length) return { issue: 'codici-misti', src: null };
+  if (skipped.length) return { issue: `forma-non-riparabile: ${skipped.join(' | ')}`, src: null };
+  const changed = Object.keys(removedByField).filter((f) => removedByField[f]?.length);
+  if (!changed.length) return { issue: 'forma-non-riparabile: nessuna-riga-marcatore', src: null };
+  const fields = [...new Set([...Object.keys(oldSections), ...Object.keys(newSections)])];
+  for (const f of fields) {
+    if (!diffIsExactlyRemovedLines(oldSections[f], newSections[f], removedByField[f] || [])) {
+      return { issue: `forma-non-riparabile: diff-oltre-la-riga (${f})`, src: null };
+    }
+  }
+  const toWrite = Object.fromEntries(changed.map((f) => [f, newSections[f]]));
+  const rewritten = rewriteExistingLocaleBody(src, id, toWrite);
+  if (rewritten.missing) return { issue: `chiave-assente: ${rewritten.missing}`, src: null };
+  // Prova a livello di file: rimettere i valori pubblicati nei campi toccati
+  // deve ridare il file originale byte per byte, e `writeAtomic` non deve
+  // avere niente da togliere. Altrimenti la scrittura cambierebbe altro.
+  const restored = rewriteExistingLocaleBody(
+    rewritten.src,
+    id,
+    Object.fromEntries(changed.map((f) => [f, oldSections[f]])),
+  );
+  if (restored.missing || restored.src !== src || sanitizeText(rewritten.src) !== rewritten.src) {
+    return { issue: 'forma-non-riparabile: file-oltre-la-riga', src: null };
+  }
+  return { issue: null, src: rewritten.src };
+}
+
 /**
  * Sceglie il campione del pilota: una fetta per ciascun codice presente, a
  * turno, finche' non si raggiunge `limit`. Round-robin invece di "i primi N"
@@ -1541,15 +1614,34 @@ async function processPair(pair, { CONTENT_ROOT, APPLY }) {
 
   const newSections = {};
   let missingField = null;
+  // Solo sull'italiano con scaffolding: la riga del prompt da togliere, per campo.
+  const titleMarkerRepair = isSourceLocale && oldCodes.includes(TITLE_MARKER_REPAIR_CODE)
+    ? { removedByField: {}, skipped: [] }
+    : null;
   if (isSourceLocale) {
     // L'italiano e' il sorgente: ri-tradurlo non ha senso. Si riscrive IN
     // PLACE sullo stesso file, con lo stesso `shouldWrite` della bonifica
     // dei locale, senza `registerArticleFiles()` (append-only). Il contenuto
     // nuovo e' il body esistente passato da `sanitizeBodyText` — la stessa
-    // sanificazione del percorso di produzione. Una rigenerazione editoriale
-    // (scaffolding, istituzioni fabbricate) resta un'altra operazione.
+    // sanificazione del percorso di produzione.
+    //
+    // Con `leaked-prompt-scaffolding`, PRIMA della sanificazione si toglie la
+    // sola riga `TITOLO ARTICOLO: <titolo>` (approvazione del proprietario del
+    // 2026-10-04, site 7682): e' la cancellazione del token esatto del prompt
+    // che il gate stesso prescrive, non una riscrittura, e si scrive solo se
+    // `planTitleMarkerRemoval` prova che il diff e' quella riga e nient'altro.
+    // Ogni altra forma del marcatore, e ogni rigenerazione editoriale
+    // (istituzioni fabbricate, scaffolding in prosa), resta un'altra
+    // operazione: qui la pagina non si tocca.
     for (const f of Object.keys(italianSections)) {
-      const sanitized = sanitizeTranslatedField(italianSections[f]);
+      let source = italianSections[f];
+      if (titleMarkerRepair) {
+        const stripped = stripLeakedTitleMarkerLine(source);
+        source = stripped.value;
+        titleMarkerRepair.removedByField[f] = stripped.removed;
+        titleMarkerRepair.skipped.push(...stripped.skipped.map((s) => `${f} ${s}`));
+      }
+      const sanitized = sanitizeTranslatedField(source);
       if (sanitized === null) { missingField = f; break; }
       newSections[f] = sanitized;
     }
@@ -1600,16 +1692,38 @@ async function processPair(pair, { CONTENT_ROOT, APPLY }) {
       locale: pair.locale,
       structuralRepair: Boolean(pair.structural),
     });
+  // Calcolato sul testo che verrebbe scritto (`checkedSections`), cioe' dopo
+  // sanificazione e guardia dei fatti chiave: se una delle due cambia altro,
+  // il diff non e' piu' la sola riga e la pagina resta intatta.
+  const titleMarkerPlan = titleMarkerRepair && !missingField
+    ? planTitleMarkerRemoval({
+      src: trSrc,
+      id: pair.id,
+      oldCodes,
+      oldSections,
+      newSections: checkedSections,
+      removedByField: titleMarkerRepair.removedByField,
+      skipped: titleMarkerRepair.skipped,
+    })
+    : null;
   const verdict = shouldWrite({
     oldCodes,
     newCodes,
     missingField,
     sanity,
-    qualityIssue: keyFactsGuard.issue,
+    qualityIssue: titleMarkerPlan?.issue || keyFactsGuard.issue,
     structuralDefect: Boolean(pair.structural),
   });
   const row = { ...base, oldCodes, newCodes, missingField, written: false, reason: verdict.reason };
+  if (titleMarkerRepair) {
+    row.removedLines = Object.values(titleMarkerRepair.removedByField).flat();
+  }
   if (!verdict.write || !APPLY) return row;
+
+  if (titleMarkerPlan) {
+    writeAtomic(trPath, titleMarkerPlan.src);
+    return { ...row, written: true };
+  }
 
   const rewritten = rewriteExistingLocaleBody(trSrc, pair.id, checkedSections, {
     allowMissing: Boolean(pair.structural),

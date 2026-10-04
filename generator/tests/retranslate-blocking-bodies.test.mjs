@@ -67,6 +67,7 @@ import {
   bodyFieldsForSource,
   blockingPairsFromContent,
   scanContentForBlockingPairs,
+  planTitleMarkerRemoval,
 } from '../scripts/retranslate-blocking-bodies.mjs';
 // Dal modulo corpus-only, NON da `lib/article-sanitizers.mjs`: quello e'
 // `identical` nel manifest del ciclo e un export aggiunto dal corpus lo
@@ -1672,4 +1673,138 @@ test('--scan senza --apply non tocca la fixture; --count-only e --list-out ripor
   } finally {
     fs.rmSync(tmp, { recursive: true, force: true });
   }
+});
+
+// ── Italiano con `TITOLO ARTICOLO`: la sola riga del prompt ────────────────
+//
+// Il ramo `it` di `processPair` ripassava il body da `sanitizeBodyText` e lo
+// stock scaffolding (site 7682) non poteva mai uscire. Con l'approvazione del
+// proprietario del 2026-10-04 si toglie SOLO la riga `TITOLO ARTICOLO: …`.
+// Rosso se: la scrittura cambia altro oltre a quella riga, una forma non
+// riconosciuta viene editata, si scrive con altri `critical` o senza --apply.
+
+const IT_FACTS = [
+  '## Fatti chiave',
+  '- **Cosa**: dichiarazione dei redditi dei frontalieri.',
+  '- **Dove**: Cantone Ticino.',
+  '- **Chi**: lavoratori frontalieri residenti in Italia.',
+  '',
+].join('\n');
+const IT_BODY1 = `${IT_FACTS}${IT_LONG}`;
+const TITLE_LINE = 'TITOLO ARTICOLO: «Frontalieri e redditi» in Ticino';
+
+function writeItFixture(root, files) {
+  for (const tree of ['content/blog-body', 'content/blog-body-ch']) {
+    fs.mkdirSync(path.join(root, tree, 'it'), { recursive: true });
+  }
+  for (const [rel, src] of Object.entries(files)) {
+    fs.writeFileSync(path.join(root, rel), src);
+  }
+  return Object.keys(files);
+}
+
+function runItScan(root, ...extra) {
+  const run = spawnSync(process.execPath, [
+    SCAN_SCRIPT, '--scan', '--locale', 'it', '--code', 'leaked-prompt-scaffolding',
+    '--content-root', root, '--json', ...extra,
+  ], { encoding: 'utf8' });
+  assert.equal(run.status, 0, run.stderr);
+  return JSON.parse(run.stdout);
+}
+
+test('it scaffolding: --apply toglie la sola riga TITOLO ARTICOLO e nient\'altro', () => {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'retranslate-it-title-'));
+  try {
+    const rel = 'content/blog-body/it/riga.ts';
+    const original = fileFor('riga', {
+      body1: `${IT_BODY1}\n\n${TITLE_LINE}`,
+      body2: IT_LONG,
+      body3: IT_LONG,
+    });
+    writeItFixture(tmp, { [rel]: original });
+
+    const dry = runItScan(tmp);
+    assert.deepEqual(dry.results.map((r) => [r.id, r.reason, r.written]), [['riga', 'pulita', false]]);
+    assert.deepEqual(dry.results[0].removedLines, [TITLE_LINE]);
+    assert.equal(fs.readFileSync(path.join(tmp, rel), 'utf8'), original, 'senza --apply il file resta byte per byte');
+
+    const applied = runItScan(tmp, '--apply');
+    assert.deepEqual(applied.results.map((r) => [r.id, r.reason, r.written]), [['riga', 'pulita', true]]);
+    const after = fs.readFileSync(path.join(tmp, rel), 'utf8');
+    // Il file e' l'originale meno la riga e il suo terminatore (`\n` escapato).
+    assert.equal(after, original.replace(`\\n${TITLE_LINE}`, ''));
+    assert.notEqual(after, original);
+    assert.equal(readBodyField(after, 'riga', 'body1'), `${IT_BODY1}\n`);
+    assert.equal(readBodyField(after, 'riga', 'body2'), IT_LONG);
+    assert.equal(readBodyField(after, 'riga', 'body3'), IT_LONG);
+
+    // La pagina esce dallo stock: un secondo giro non la trova piu'.
+    assert.deepEqual(runItScan(tmp).results, []);
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
+});
+
+test('it scaffolding: forme non riparabili e codici misti lasciano la pagina intatta', () => {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'retranslate-it-title-skip-'));
+  try {
+    const files = {
+      // Forma B: intestazione con il titolo sulla riga sotto.
+      'content/blog-body/it/forma-b.ts': fileFor('forma-b', {
+        body1: IT_BODY1,
+        body2: `## TITOLO ARTICOLO\nFrontalieri e redditi\n\n${IT_LONG}`,
+        body3: IT_LONG,
+      }),
+      // Riga rimovibile E un'istituzione inventata: un altro `critical`.
+      'content/blog-body/it/misti.ts': fileFor('misti', {
+        body1: `${IT_BODY1}\n\n${TITLE_LINE}`,
+        body2: `${IT_LONG}Secondo l'Ufficio federale delle imposte (UFI), circa 2.000 lavoratori sono coinvolti.`,
+        body3: IT_LONG,
+      }),
+      // Fatti chiave con un valore vacuo: la guardia dei fatti chiave toglierebbe
+      // anche quella riga, quindi il diff non e' piu' la sola riga del prompt.
+      'content/blog-body-ch/it/vacuo.ts': fileFor('vacuo', {
+        body1: `${IT_FACTS.replace('- **Chi**', '- **Quando**: non specificato.\n- **Importo**: CHF 200 al mese.\n- **Chi**')}${IT_LONG}\n\n${TITLE_LINE}`,
+        body2: IT_LONG,
+        body3: IT_LONG,
+      }),
+    };
+    const rels = writeItFixture(tmp, files);
+    // Campo in template literal: riscriverlo nella forma canonica cambierebbe
+    // altri byte del file oltre alla riga.
+    const tplRel = 'content/blog-body/it/tpl.ts';
+    const tplSrc = `const b: Record<string, string> = {\n`
+      + `  'blog.article.tpl.body1': \`${IT_BODY1}\n\n${TITLE_LINE}\`,\n`
+      + `  'blog.article.tpl.body2': '${escapeForSingleQuoteTS(IT_LONG)}',\n`
+      + `  'blog.article.tpl.body3': '${escapeForSingleQuoteTS(IT_LONG)}',\n`
+      + `};\n\nexport default b;\n`;
+    fs.writeFileSync(path.join(tmp, tplRel), tplSrc);
+    rels.push(tplRel);
+    const before = snapshotFiles(tmp, rels);
+
+    const applied = runItScan(tmp, '--apply');
+    const byId = Object.fromEntries(applied.results.map((r) => [r.id, r]));
+    assert.deepEqual(Object.keys(byId).sort(), ['forma-b', 'misti', 'tpl', 'vacuo']);
+    for (const r of applied.results) assert.equal(r.written, false, `${r.id}: ${r.reason}`);
+    assert.match(byId['forma-b'].reason, /^forma-non-riparabile: body2 intestazione: ## TITOLO ARTICOLO/);
+    assert.equal(byId.misti.reason, 'codici-misti');
+    assert.equal(byId.vacuo.reason, 'forma-non-riparabile: diff-oltre-la-riga (body1)');
+    assert.equal(byId.tpl.reason, 'forma-non-riparabile: file-oltre-la-riga');
+    assert.deepEqual(snapshotFiles(tmp, rels), before, 'nessuna di queste pagine va riscritta');
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
+});
+
+test('planTitleMarkerRemoval: niente da togliere non e\' una riparazione', () => {
+  const src = fileFor('x', { body1: IT_BODY1 });
+  assert.deepEqual(planTitleMarkerRemoval({
+    src,
+    id: 'x',
+    oldCodes: ['leaked-prompt-scaffolding'],
+    oldSections: { body1: IT_BODY1 },
+    newSections: { body1: IT_BODY1 },
+    removedByField: { body1: [] },
+    skipped: [],
+  }), { issue: 'forma-non-riparabile: nessuna-riga-marcatore', src: null });
 });
