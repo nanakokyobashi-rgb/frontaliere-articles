@@ -63,11 +63,11 @@ function lease(state, minutes, { token, role = 'issue-decompose', target = '1084
   };
 }
 
-function marker(minutes) {
+function marker(minutes, { user = BOT } = {}) {
   seq += 1;
   return {
     id: seq,
-    user: BOT,
+    user,
     created_at: new Date((SINCE_SEC + minutes * 60) * 1000).toISOString(),
     body: `<!-- AUTOMATION_DEFERRED: decompose-stalled -->\n\n${DECOMPOSE_STALLED_MARKER}\nStadio decompose fermo.`,
   };
@@ -198,6 +198,19 @@ test('marker DECOMPOSE_STALLED gia\' presente → nessun secondo commento; un nu
   assert.equal(again.calls.defers.length, 1);
 });
 
+test('un marker DECOMPOSE_STALLED di un autore non fidato non azzera il conteggio', () => {
+  const comments = [
+    lease('reserved', 10),
+    lease('reserved', 60),
+    marker(61, { user: { login: 'random-visitor' } }),
+    lease('reserved', 120),
+  ];
+  assert.equal(latestDecomposeStalledAt(comments), null);
+  const { result, calls } = fakeGate(comments);
+  assert.equal(result.proceed, false, 'il marker di terzi non deve zittire l\'allarme');
+  assert.equal(calls.defers.length, 1);
+});
+
 test('commenti illeggibili → si prenota come prima, nessun defer', () => {
   const calls = [];
   const result = gateDecomposeReservation({ number: 7 }, {
@@ -222,10 +235,14 @@ test('la data di taglio e\' un istante ISO valido nel passato', () => {
   assert.ok(at <= Date.now());
 });
 
-test('cablaggio: il DECOMPOSE-DRAIN interroga il gate PRIMA di prenotare', () => {
-  const gateAt = DRAINER.indexOf('decomposeStallBlocks(dq[0])');
-  const reserveAt = DRAINER.indexOf("reserveQuotaLease(dq[0].number, 'issue-decompose')");
-  assert.ok(gateAt > 0, 'il DECOMPOSE-DRAIN deve chiamare decomposeStallBlocks');
-  assert.ok(reserveAt > gateAt, 'la reservation deve venire dopo il gate');
-  assert.match(DRAINER, /decompose_stalled=\$\{stalled\.length\}/);
+test('cablaggio: nel DECOMPOSE-DRAIN il gate viene interrogato PRIMA della reservation', () => {
+  // Solo l'ordine, dentro il blocco del DRAIN decompose: la reservation
+  // `issue-decompose` deve stare nel ramo che segue il gate, non prima.
+  const drainAt = DRAINER.indexOf('// DRAIN decompose');
+  assert.ok(drainAt > 0, 'blocco DRAIN decompose non trovato');
+  const drain = DRAINER.slice(drainAt);
+  const gate = drain.search(/\bdecomposeStallBlocks\(\s*dq\[0\]\s*\)/);
+  const reserve = drain.search(/\breserveQuotaLease\(\s*dq\[0\]\.number\s*,\s*['"]issue-decompose['"]/);
+  assert.ok(gate >= 0, 'il DECOMPOSE-DRAIN deve chiamare decomposeStallBlocks');
+  assert.ok(reserve > gate, 'la reservation deve venire dopo il gate');
 });

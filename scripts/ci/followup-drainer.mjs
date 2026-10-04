@@ -65,7 +65,7 @@ import {
   latestFixOutcomeFromComments,
   maxQuotaResetsAt,
 } from './claude-rate-limit.mjs';
-import { quotaFallbackDecision, quotaLeaseEvents, runQuotaLease } from './check-quota-backoff.mjs';
+import { REVIEW_QUOTA_TRUSTED_ACTOR_RE, quotaFallbackDecision, quotaLeaseEvents, runQuotaLease } from './check-quota-backoff.mjs';
 import { FIX_OUTCOME_RE, TITLE_RE as RECONCILER_TITLE_RE } from './close-recovered-failure-issues.mjs';
 import { runBudgetFromEnv } from './lib/run-budget.mjs';
 import { parsePositiveNum } from '../lib/parse-positive-num.mjs';
@@ -196,12 +196,16 @@ function epochSec(value) {
  * marker chiude l'episodio: dopo un allarme la issue esce dalla coda
  * (`fu-parked` + `automation-deferred`) e, se qualcuno la rimette in coda con
  * contesto nuovo, il conteggio riparte da zero invece di ri-scattare subito su
- * reservation gia' denunciate. Un marker scritto a mano concede al piu'
- * `threshold` reservation in piu': il costo resta limitato. Pure.
+ * reservation gia' denunciate. Vale solo il marker di un attore fidato (lo
+ * stesso filtro di `quotaLeaseEvents`): un commento di terzi che cita il
+ * marker non puo' azzerare il conteggio e zittire l'allarme. I commenti senza
+ * login (fixture offline) restano validi, come in `quotaLeaseEvents`. Pure.
  */
 export function latestDecomposeStalledAt(comments) {
   let latest = null;
   for (const comment of comments || []) {
+    const login = String(comment?.user?.login || comment?.author?.login || '');
+    if (login && !REVIEW_QUOTA_TRUSTED_ACTOR_RE.test(login)) continue;
     if (!DECOMPOSE_STALLED_RE.test(String(comment?.body || ''))) continue;
     const at = epochSec(comment?.created_at ?? comment?.createdAt);
     if (at !== null && (latest === null || at > latest)) latest = at;
