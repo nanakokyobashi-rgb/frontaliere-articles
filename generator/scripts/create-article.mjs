@@ -5461,11 +5461,22 @@ function assertTranslationsPassFactualityGates(data) {
     const content = data?.content?.[locale];
     if (!content) continue;
     const sections = collectBodySections(content);
-    if (!Object.values(sections).some((s) => s.trim())) continue;
+    // Un body lasciato NON tradotto da `translateArticle()` col marker
+    // `markBodyTranslationPending` e' un'assenza AUTORIZZATA: la SPA ripiega
+    // sull'italiano e il recupero lo ritraduce. Il riferimento italiano per
+    // quel locale lo esclude, cosi' `translation-section-missing` scatta solo
+    // sulle assenze che nessuno ha dichiarato. Per lo stesso motivo un locale
+    // senza alcun body si salta SOLO se ogni body italiano e' in attesa:
+    // altrimenti il buco non dichiarato arriva al gate invece di sparire.
+    const referenceSections = Object.fromEntries(
+      Object.entries(italianSections).filter(([field]) => !isBodyTranslationPending(data, locale, field)),
+    );
+    if (!Object.values(sections).some((s) => s.trim())
+      && !Object.values(referenceSections).some((s) => s.trim())) continue;
     const result = runArticleFactualityGates({
       sections,
       locale,
-      italianSections,
+      italianSections: referenceSections,
       deterministicBodySections: data?._deterministicBodySections,
     });
     if (result.issues.length > 0) {
@@ -11456,7 +11467,14 @@ ${terminologyByLang[targetLang] || ''}`;
       // is 'major') is by definition a truncation signal, so any non-empty
       // result must trigger the retry — filtering to 'critical' only let the
       // majority of real-corpus mid-sentence cuts through silently.
-      const isTruncated = detectTruncation(text, { label: `${locale}/${field}` }).length > 0;
+      // `referenceText` accende `translation-semantic-truncation`: una sezione
+      // chiusa da un punto ma con meno parole dell'italiano (fino al «...» di
+      // `como-fai-giornate-autunno`, 2026-10-03) e' troncata quanto una frase
+      // tagliata, e prende lo stesso retry e lo stesso esito pending. Senza, il
+      // rilievo `major` arrivava solo al gate di ammissione, che blocca i soli
+      // `critical`, e il body ridotto finiva su disco.
+      const truncationOpts = { label: `${locale}/${field}`, locale, referenceText: itContent[field] };
+      const isTruncated = detectTruncation(text, truncationOpts).length > 0;
       if (!isTruncated) continue;
       const itValue = itContent[field];
       let pendingReason = 'truncation-retry-unusable';
@@ -11497,7 +11515,7 @@ ${terminologyByLang[targetLang] || ''}`;
         // accettazione di un body tradotto.
         const retriedPassthrough = isSourcePassthrough(retried, itValue);
         if (retriedPassthrough) pendingReason = 'truncation-retry-passthrough';
-        if (retried && !retriedPassthrough && detectTruncation(retried, { label: `${locale}/${field}` }).length === 0) {
+        if (retried && !retriedPassthrough && detectTruncation(retried, truncationOpts).length === 0) {
           data.content[locale][field] = sanitizeBodyText(retried);
           console.error(`  ✅ ${field} (${locale}) ritradotto con successo dopo troncamento`);
           continue;

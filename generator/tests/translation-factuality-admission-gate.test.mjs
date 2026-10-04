@@ -51,7 +51,8 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { runFactualityGates, formatIssues } from '../scripts/lib/article-factuality-gates.mjs';
+import { runFactualityGates, formatIssues, detectTruncation } from '../scripts/lib/article-factuality-gates.mjs';
+import { markBodyTranslationPending, isBodyTranslationPending } from '../scripts/lib/free-mt-recovery.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
@@ -108,6 +109,7 @@ function makeGate() {
   const factory = new Function(
     'runFactualityGates',
     'formatIssues',
+    'isBodyTranslationPending',
     'console',
     `${SECTIONS_SRC}\n${ADMISSION_CONSTANTS_SRC}\n${ADMISSION_SRC}\n${GATE_SRC}\nreturn assertTranslationsPassFactualityGates;`,
   );
@@ -115,6 +117,7 @@ function makeGate() {
   return factory(
     runFactualityGates,
     formatIssues,
+    isBodyTranslationPending,
     { error: () => {} },
   );
 }
@@ -359,6 +362,76 @@ test('#8 rigetta un body tradotto ridotto a «...» anche se finisce con un punt
 test('#8b la stessa traduzione completa passa (il confronto non punisce una resa fedele)', () => {
   const gate = makeGate();
   assert.doesNotThrow(() => gate({ content: { it: { ...IT_LUNGO }, en: { ...EN_LUNGO } } }));
+});
+
+// ── #9 Body in attesa: assenza autorizzata contro buco non dichiarato ──────
+//
+// `translation-section-missing` e' `critical`: senza distinguere, un body che
+// `translateArticle()` ha lasciato NON tradotto col marker pending (la SPA
+// ripiega sull'italiano, il recupero lo ritraduce) rigettava l'intero articolo,
+// e un locale senza alcun body saltava il gate anche quando nessuno aveva
+// dichiarato l'assenza.
+function senzaBody(fields) {
+  const data = { content: { it: { ...IT_LUNGO }, en: { ...EN_LUNGO } } };
+  for (const f of fields) delete data.content.en[f];
+  return data;
+}
+
+test('#9 un body in attesa (marker pending) non fa rigettare l\'articolo', () => {
+  const gate = makeGate();
+  const data = { content: { it: { ...IT_LUNGO }, en: { ...EN_LUNGO } } };
+  markBodyTranslationPending(data, { locale: 'en', field: 'body2', reason: 'truncation-retry-unusable' });
+  assert.equal(data.content.en.body2, undefined, 'il marker toglie il campo, come in translateArticle()');
+  assert.doesNotThrow(() => gate(data));
+});
+
+test('#9b un body assente SENZA marker resta un buco bloccante', () => {
+  const gate = makeGate();
+  assert.throws(
+    () => gate(senzaBody(['body2'])),
+    (error) => error?.qualityReject === true && /translation-section-missing/.test(error.message),
+  );
+});
+
+test('#9c un locale senza alcun body passa solo se ogni body e\' in attesa', () => {
+  const gate = makeGate();
+  assert.throws(
+    () => gate(senzaBody(['body1', 'body2', 'body3'])),
+    (error) => error?.qualityReject === true && /translation-section-missing/.test(error.message),
+    'tre body spariti senza marker non possono saltare il gate',
+  );
+  const tuttiPending = { content: { it: { ...IT_LUNGO }, en: { ...EN_LUNGO } } };
+  for (const field of ['body1', 'body2', 'body3']) {
+    markBodyTranslationPending(tuttiPending, { locale: 'en', field, reason: 'retry-error' });
+  }
+  assert.doesNotThrow(() => gate(tuttiPending));
+});
+
+// ── #10 Il troncamento semantico accende il retry della traduzione ─────────
+//
+// Il gate di ammissione blocca i soli `critical`: un body che conserva fra il
+// 50% e la soglia delle parole italiane esce `major` e da li' passava. Il
+// posto giusto per agire e' il retry di `translateArticle()`, che gia' ritraduce
+// un body troncato e, se il retry fallisce, lo lascia in attesa invece di
+// pubblicarlo: deve vedere anche il troncamento semantico.
+test('#10 il retry di troncamento di translateArticle confronta con l\'italiano', () => {
+  const start = src.indexOf('const truncationOpts = {');
+  assert.notEqual(start, -1, 'il loop di retry non costruisce piu\' le opzioni condivise — aggiornare questo test');
+  const loop = src.slice(start, src.indexOf('markBodyTranslationPending(data', start));
+  assert.match(loop.split('\n')[0], /referenceText: itContent\[field\]/, 'il retry deve passare l\'italiano come riferimento');
+  assert.match(loop.split('\n')[0], /\blocale\b/, 'senza locale il confronto si spegne (l\'italiano non si giudica)');
+  const calls = loop.match(/detectTruncation\([^)]*\)/g) || [];
+  assert.equal(calls.length, 2, 'rilevazione e verifica del retry: due chiamate');
+  for (const call of calls) assert.match(call, /truncationOpts/, `${call} non usa il riferimento italiano`);
+
+  // E il riferimento cambia davvero il verdetto: un body chiuso da un punto
+  // ma con meta' delle parole e' pulito senza italiano, troncato con.
+  const meta = EN_LUNGO.body1.split(' ').slice(0, 30).join(' ') + '.';
+  assert.deepEqual(detectTruncation(meta, { label: 'en/body1' }), []);
+  assert.ok(
+    detectTruncation(meta, { label: 'en/body1', locale: 'en', referenceText: IT_LUNGO.body1 })
+      .some((i) => i.code === 'translation-semantic-truncation'),
+  );
 });
 
 test('#4 il gate e\' collegato a ENTRAMBI i percorsi di scrittura', () => {

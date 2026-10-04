@@ -13,6 +13,7 @@
  */
 
 import { hasUsableTranslatedText, hasUsableContentText } from './body2-payload-verdict.mjs';
+import { escapeRegExpLiteral } from './escape-regexp.mjs';
 import { findLoneSurrogates } from '../../../scripts/lib/sanitize-control-chars.mjs';
 import {
   comuneTopicKey,
@@ -76,9 +77,9 @@ const MUNICIPALITY_NAMES = Object.freeze(
   ).values()].sort((a, b) => b.length - a.length),
 );
 
-function escapeRegExp(value) {
-  return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
+// Un solo escape per le regex del generatore: escape-regexp.mjs, gemello
+// identical del sito. `String()` resta qui perche' la copia locale coerceva.
+const escapeRegExp = (value) => escapeRegExpLiteral(String(value));
 
 const MUNICIPALITY_MATCH_RE = MUNICIPALITY_NAMES.length > 0
   ? new RegExp(
