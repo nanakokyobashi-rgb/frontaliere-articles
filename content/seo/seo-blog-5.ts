@@ -99679,6 +99679,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-notte-rissa-saronno-soccorsi': {
+    title: 'Rissa a Saronno: feriti due giovani nella notte',
+    description: 'Rissa nel centro storico di Saronno tra il 2 e il 3 ottobre: feriti due giovani di 25 e 27 anni, tre ambulanze e carabinieri nella zona pedonale del centro',
+    keywords: 'frontalieri, ticino, svizzera, italia, rissa, saronno, feriti, giovani',
+    ogTitle: 'Saronno, rissa nella notte: due giovani feriti',
+    ogDescription: 'Le urla di un gruppo hanno richiamato l\'attenzione poco prima delle 0.30, tra piazza Libertà e via Garibaldi. Due ragazzi sono finiti in ospedale; i carabinieri cercano di ricostruire la lite e identificare gli altri partecipanti.',
+    canonicalPath: '/articoli-frontaliere/notte-rissa-saronno-soccorsi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Rissa a Saronno: feriti due giovani nella notte",
+      "description": "Rissa nel centro storico di Saronno tra il 2 e il 3 ottobre: feriti due giovani di 25 e 27 anni, tre ambulanze e carabinieri nella zona pedonale del centro",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/notte-rissa-saronno-soccorsi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Zona pedonale illuminata nel centro storico di Saronno"
+      },
+      "datePublished": "2026-10-04T03:06:50+00:00",
+      "dateModified": "2026-10-04T03:06:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/notte-rissa-saronno-soccorsi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
