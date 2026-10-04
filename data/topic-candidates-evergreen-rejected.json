@@ -792,18 +792,6 @@
     "affitti svizzera mercato immobiliare 2026": 1
   },
   "topicGateUrls": {
-    "svizzera::https://www.tio.ch/ticino/attualita/1954064/occhiali-cambio-check-up-esame-possibilita": {
-      "section": "svizzera",
-      "ts": 1790916126470
-    },
-    "svizzera::https://www.tio.ch/agenda/mostre-e-incontri/1953926/lugano-musica-teatro-festival-scena-terra-festa-bellinzona-serata-locarno": {
-      "section": "svizzera",
-      "ts": 1790916136788
-    },
-    "svizzera::https://www.tio.ch/ticino/attualita/1952241/arriva-l-uomo-che-guarisce-tutte-le-malattie-il-video": {
-      "section": "svizzera",
-      "ts": 1790916149003
-    },
     "frontaliere::https://www.swissinfo.ch/ita/deloitte-prevede-fino-a-900%27000-cambi-di-cassa-malati/92154103": {
       "section": "frontaliere",
       "ts": 1790920670205
@@ -1019,6 +1007,10 @@
     "frontaliere::https://www.varesenews.it/2026/10/la-giornata-della-meraviglia-per-i-bimbi-della-guerra-ottiene-il-riconoscimento-del-parlamento/2696128": {
       "section": "frontaliere",
       "ts": 1791084801042
+    },
+    "frontaliere::https://www.rsi.ch/info/economia/dazi-ue-sui-%e2%80%9cpacchettini%e2%80%9d-coinvolta-anche-la-posta-svizzera--4131072.html": {
+      "section": "frontaliere",
+      "ts": 1791092681481
     }
   }
 }
