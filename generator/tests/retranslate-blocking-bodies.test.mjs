@@ -69,6 +69,8 @@ import {
   scanContentForBlockingPairs,
   planTitleMarkerRemoval,
   keyFactsGuardMode,
+  templateHeadingIssue,
+  TEMPLATE_HEADING_NOT_CANONICAL,
 } from '../scripts/retranslate-blocking-bodies.mjs';
 import { diffIsExactlyRemovedLines } from '../scripts/lib/strip-leaked-title-marker.mjs';
 // Dal modulo corpus-only, NON da `lib/article-sanitizers.mjs`: quello e'
@@ -230,6 +232,77 @@ test('la guardia dei fatti chiave sta prima del gate e della scrittura atomica',
   const write = source.indexOf('writeAtomic(trPath, rewritten.src)');
   assert.ok(guard >= 0 && guard < gate, 'la factuality gate deve ricevere il payload gia\' guardato');
   assert.ok(gate < filteredWrite && filteredWrite < write, 'la scrittura deve persistere il payload gia\' guardato dopo tutti i gate');
+});
+
+// Lotto 1 della bonifica Codex (#2121, 20 coppie de): 6 rifiutate col motivo
+// generico «sezione Fatti chiave riconosciuta» perche' la traduzione diceva
+// `## Eckdaten`, e 8 delle 9 scritte con `## Kurz zusammengefasst` al posto di
+// `## Auf einen Blick`, che nessuna guardia vedeva.
+const IT_TEMPLATE_BODY1 = [
+  '## In breve',
+  '- Il permesso G si rinnova ogni cinque anni.',
+  '',
+  '## Fatti chiave',
+  '- **Cosa**: rinnovo del permesso G.',
+  '- **Dove**: Ufficio della migrazione, Bellinzona.',
+  '',
+  'Il frontaliere presenta la domanda prima della scadenza.',
+].join('\n');
+const deTemplateBody1 = (tldr, keyFacts) => [
+  tldr,
+  '- Die Grenzgängerbewilligung G wird alle fünf Jahre erneuert.',
+  '',
+  keyFacts,
+  '- **Was**: Erneuerung der Bewilligung G.',
+  '- **Wo**: Migrationsamt, Bellinzona.',
+  '',
+  'Der Grenzgänger reicht den Antrag vor Ablauf ein.',
+].join('\n');
+
+test('templateHeadingIssue: `## Eckdaten` e `## Kurz zusammengefasst` danno il codice esplicito, i canonici passano', () => {
+  const italianSections = { body1: IT_TEMPLATE_BODY1, body2: 'Seconda parte.' };
+  const check = (body1, locale = 'de') => templateHeadingIssue({
+    italianSections,
+    newSections: { body1, body2: 'Zweiter Teil.' },
+    locale,
+  });
+
+  const eckdaten = check(deTemplateBody1('## Auf einen Blick', '## Eckdaten'));
+  assert.match(eckdaten, new RegExp(`^\\[${TEMPLATE_HEADING_NOT_CANONICAL}\\]`));
+  assert.match(eckdaten, /body1 «## Wichtige Fakten»/);
+  assert.doesNotMatch(eckdaten, /Auf einen Blick/);
+
+  const kurz = check(deTemplateBody1('## Kurz zusammengefasst', '## Wichtige Fakten'));
+  assert.match(kurz, new RegExp(`^\\[${TEMPLATE_HEADING_NOT_CANONICAL}\\]`));
+  assert.match(kurz, /body1 «## Auf einen Blick»/);
+
+  assert.equal(check(deTemplateBody1('## Auf einen Blick', '## Wichtige Fakten')), null);
+  // Stesso confronto di `isKeyFactsHeading`: maiuscole e spazi di bordo non contano.
+  assert.equal(check(deTemplateBody1('## auf einen blick ', '## WICHTIGE FAKTEN')), null);
+  // Gli altri locali col loro canonico.
+  assert.equal(check('## TL;DR\n- x\n\n## Key facts\n- **What**: y', 'en'), null);
+  assert.equal(check('## En bref\n- x\n\n## Faits clés\n- **Quoi**: y', 'fr'), null);
+  assert.match(check('## In brief\n- x\n\n## Key facts\n- **What**: y', 'en'), /«## TL;DR»/);
+  // Un titolo che la sorgente non ha non si pretende.
+  assert.equal(templateHeadingIssue({
+    italianSections: { body1: 'Solo prosa, senza template.' },
+    newSections: { body1: 'Nur Text, ohne Vorlage.' },
+    locale: 'de',
+  }), null);
+});
+
+test('templateHeadingIssue: con `## Eckdaten` il motivo e\' il titolo, non il generico dei fatti chiave', () => {
+  const newSections = { body1: deTemplateBody1('## Auf einen Blick', '## Eckdaten') };
+  // La guardia dei fatti chiave da sola rifiuta col motivo generico...
+  assert.match(guardTranslatedKeyFacts(newSections).issue, /sezione Fatti chiave riconosciuta/);
+  // ...e processPair mette davanti il codice esplicito.
+  const source = fs.readFileSync(new URL('../scripts/retranslate-blocking-bodies.mjs', import.meta.url), 'utf8');
+  assert.match(source, /qualityIssue: titleMarkerPlan\?\.issue \|\| templateIssue \|\| keyFactsGuard\.issue,/);
+  assert.match(source, /templateHeadingIssue\(\{ italianSections, newSections: checkedSections, locale: pair\.locale \}\)/);
+  assert.match(
+    templateHeadingIssue({ italianSections: { body1: IT_TEMPLATE_BODY1 }, newSections, locale: 'de' }),
+    new RegExp(TEMPLATE_HEADING_NOT_CANONICAL),
+  );
 });
 
 test('replaceBodyField col valore attuale e un no-op byte per byte', () => {

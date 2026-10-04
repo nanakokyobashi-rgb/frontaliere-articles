@@ -8,7 +8,9 @@
  * file, a GFDL-only file to replace, a file with no machine-readable licence,
  * a site-era cover whose webp is not in this repository, a cover still shown
  * by another article after its own was retired, a cover that is not Commons at
- * all, a map entry no page shows any more, and literals in both formats.
+ * all, a map entry no page shows any more, and literals in both formats. The
+ * last tests add what C3 met: a restricted file replaced by a new Commons
+ * cover under a new name, `<id>-2.webp`, with its own record and map entry.
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -22,12 +24,19 @@ import {
   SNAPSHOT_FILE,
   checkTree,
   fetchSnapshot,
+  liveCommonsCovers,
   retryAfterSeconds,
   serializeSnapshot,
   titleBatches,
 } from '../../scripts/backfill-image-credits.mjs';
-import { scanSeoImageBlocks } from '../../scripts/lib/image-credit-records.mjs';
-import { acceptCommonsCandidate, assessCommonsFile, finalizeCreditRecord, writeCreditRecord } from '../scripts/lib/commons-credit.mjs';
+import { corpusCreditReader, scanSeoImageBlocks } from '../../scripts/lib/image-credit-records.mjs';
+import {
+  acceptCommonsCandidate,
+  assessCommonsFile,
+  creditRecordForCover,
+  finalizeCreditRecord,
+  writeCreditRecord,
+} from '../scripts/lib/commons-credit.mjs';
 
 const SCRIPT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../scripts/backfill-image-credits.mjs');
 const PROBE = JSON.parse(fs.readFileSync(new URL('./fixtures/commons-credit/probe-2026-10-04.snapshot.json', import.meta.url), 'utf-8'));
@@ -278,6 +287,31 @@ test('--check catches what a hand edit or a later write breaks', () => {
   }
 });
 
+test('--check after a new --fetch: an unchanged file is not a change, a changed one is named by field', () => {
+  const root = corpusTree();
+  try {
+    write(root, OVERRIDES_FILE, JSON.stringify(OVERRIDES, null, 2));
+    assert.equal(run(root, '--build').status, 0);
+    // The monthly revalidation: the same metadata, read again a month later.
+    const snapshot = JSON.parse(fs.readFileSync(path.join(root, SNAPSHOT_FILE), 'utf-8'));
+    write(root, SNAPSHOT_FILE, serializeSnapshot({ ...snapshot, fetchedAt: '2026-11-07' }));
+    assert.deepEqual(checkTree(root), [], 'a re-read on another day that finds every file unchanged is clean');
+    // Commons relicenses one file and uploads a new version of it.
+    const locarno = snapshot.files['Locarno 1.jpg'];
+    snapshot.files['Locarno 1.jpg'] = {
+      ...locarno,
+      revision: '2026-10-20T08:00:00Z',
+      meta: { ...locarno.meta, LicenseShortName: 'CC BY-SA 4.0', LicenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0', License: 'cc-by-sa-4.0' },
+    };
+    write(root, SNAPSHOT_FILE, serializeSnapshot({ ...snapshot, fetchedAt: '2026-11-07' }));
+    assert.deepEqual(checkTree(root), ['ch-locarno', 'locarno-uno', 'ritirato'].map((key) => (
+      `content/image-credits/blog/${key}.json: differs from a rebuild — run --build (commons.revision, licence.name, licence.url)`
+    )));
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('--check refuses a malformed curation file before using it', () => {
   const root = corpusTree();
   try {
@@ -461,6 +495,111 @@ test('--build: a curated author replaces a redacted address in the Artist text, 
     assert.equal(record.author.name, 'Mario Rossi');
     assert.equal(record.author.text, null, 'the placeholder is not kept as the author text');
     assert.equal(run(root, '--check').status, 0);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+// ── C3: a replaced cover moved to a new Commons cover, `<id>-2.webp` ─────────
+//
+// A new file name keeps stale CDN copies of the old cover out of the pages.
+// The usage map is keyed by the cover, as the generator keys it (there the
+// cover is `<id>.webp`): `<id>-2` → the file's URL. That entry is what makes
+// the new cover a live Commons cover, so the content gate requires its record.
+
+const NEW_PICK = '1 a gorgier train station 22.jpg';
+
+/** Installs `/images/blog/<id>-2.webp` as Strategy 4 installs a cover: the webp, its record, then its usage-map entry. */
+function installC3Cover(root, id, title = NEW_PICK) {
+  const key = `${id}-2`;
+  const cover = `/images/blog/${key}.webp`;
+  write(root, `public${cover}`, webpHeader(1200, 675));
+  const verdict = acceptCommonsCandidate({ title, ...PROBE.files[title] }, { fetchedAt: '2026-10-04' });
+  assert.equal(verdict.ok, true, verdict.reasons?.join(', '));
+  const record = creditRecordForCover(verdict.template, {
+    cover,
+    original: { width: PROBE.files[title].width, height: PROBE.files[title].height },
+    coverSize: { width: 1200, height: 675 },
+  });
+  writeCreditRecord(root, record);
+  const map = JSON.parse(fs.readFileSync(path.join(root, 'data/blog-images-used.json'), 'utf-8'));
+  write(root, 'data/blog-images-used.json', JSON.stringify({ ...map, [key]: thumb(title) }));
+  return record;
+}
+
+/** The owner's Q1 default applied: the restricted file is replaced, and `polizia` gets its own new cover. */
+const C3_OVERRIDES = {
+  ...OVERRIDES,
+  files: { ...OVERRIDES.files, 'Patrol Police.jpg': { decision: 'replace', curation: { by: 'owner', at: '2026-10-05', note: 'Q1: replaced' } } },
+  covers: { ...OVERRIDES.covers, polizia: { replacement: '/images/blog/polizia-2.webp' } },
+};
+
+/** The content gate's last check, per live Commons cover: does the engine reader find a publishable record? */
+const liveCredited = (root) => {
+  const reader = corpusCreditReader(root, () => {});
+  return liveCommonsCovers(root).map(({ id, title }) => ({ id, title, credited: Boolean(reader.get(`/images/blog/${id}.webp`)) }));
+};
+
+test('C3: a restricted cover replaced by a new Commons cover <id>-2.webp is repointed, then credited and checked like any other', () => {
+  const root = corpusTree();
+  try {
+    // C2's state: the restricted file credited with the owner's acceptance.
+    write(root, OVERRIDES_FILE, JSON.stringify(OVERRIDES, null, 2));
+    assert.equal(run(root, '--build').status, 0);
+    assert.ok(records(root).includes('polizia.json'));
+
+    const record = installC3Cover(root, 'polizia');
+    write(root, OVERRIDES_FILE, JSON.stringify(C3_OVERRIDES, null, 2));
+    const result = run(root, '--build');
+    assert.equal(result.status, 0, result.stdout + result.stderr);
+    assert.match(result.stdout, /0 written, 1 removed; 1 covers repointed in 2 files; 0 literals stripped/);
+    assert.ok(!records(root).includes('polizia.json'), 'the replaced cover loses its record');
+    assert.deepEqual(readRecord(root, 'polizia-2'), record, 'the new cover keeps the record it was installed with');
+    const registry = fs.readFileSync(path.join(root, 'content/blog-articles-data.ts'), 'utf-8');
+    assert.match(registry, /id: 'polizia',[\s\S]*?image: '\/images\/blog\/polizia-2\.webp'/);
+    const seo = fs.readFileSync(path.join(root, 'content/seo/seo-blog-5.ts'), 'utf-8');
+    assert.match(seo, /"url": `\$\{BASE_URL\}\/images\/blog\/polizia-2\.webp`,\n {8}"width": 1200,\n {8}"height": 675/);
+    assert.equal(rightsByCover(root)['seo-blog-5.ts#2:polizia-2'], 0, 'the literal claims nothing: the record credits the photo');
+
+    // The content gate: a live Commons cover, with a publishable record; the old one is no longer live.
+    const live = liveCredited(root);
+    assert.deepEqual(live.filter((c) => c.id.startsWith('polizia')), [{ id: 'polizia-2', title: NEW_PICK, credited: true }]);
+    assert.deepEqual(live.filter((c) => !c.credited), []);
+    assert.deepEqual(checkTree(root), []);
+
+    // A later --build (after a rebase) neither drops nor rewrites it.
+    const file = path.join(root, 'content/image-credits/blog/polizia-2.json');
+    const before = fs.readFileSync(file, 'utf-8');
+    const again = run(root, '--build');
+    assert.equal(again.status, 0);
+    assert.match(again.stdout, /0 written, 0 removed; 0 covers repointed in 0 files; 0 literals stripped/);
+    assert.equal(fs.readFileSync(file, 'utf-8'), before);
+
+    // Once a --fetch has read its file, --build derives the very same record from the snapshot.
+    const snapshot = JSON.parse(fs.readFileSync(path.join(root, SNAPSHOT_FILE), 'utf-8'));
+    write(root, SNAPSHOT_FILE, serializeSnapshot({ ...snapshot, files: { ...snapshot.files, [NEW_PICK]: PROBE.files[NEW_PICK] } }));
+    const refreshed = run(root, '--build');
+    assert.equal(refreshed.status, 0, refreshed.stdout + refreshed.stderr);
+    assert.match(refreshed.stdout, /0 written, 0 removed/);
+    assert.equal(fs.readFileSync(file, 'utf-8'), before);
+    assert.deepEqual(checkTree(root), []);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('C3: a <id>-2.webp cover that loses its record is caught by the gate and by --build, never published uncredited', () => {
+  const root = corpusTree();
+  try {
+    installC3Cover(root, 'polizia');
+    write(root, OVERRIDES_FILE, JSON.stringify(C3_OVERRIDES, null, 2));
+    assert.equal(run(root, '--build').status, 0);
+    fs.rmSync(path.join(root, 'content/image-credits/blog/polizia-2.json'));
+    assert.deepEqual(liveCredited(root).filter((c) => !c.credited).map((c) => c.id), ['polizia-2']);
+    const result = run(root, '--build');
+    assert.equal(result.status, 1);
+    assert.match(result.stderr, /«1 a gorgier train station 22\.jpg» \(polizia-2\): not in the snapshot: run --fetch/);
+    assert.match(checkTree(root).join('\n'), /needs a human: «1 a gorgier train station 22\.jpg» \(polizia-2\)/);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }

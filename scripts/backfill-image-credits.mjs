@@ -27,7 +27,10 @@
  *   --check  OFFLINE. The content gate's checks on the records on disk, the
  *            overrides file well-formed and applied, no credited cover's
  *            literal still claiming the photo, and — once the snapshot exists —
- *            a rebuild in memory identical to the tree.
+ *            a rebuild in memory identical to the tree but for `fetchedAt`,
+ *            each difference named by field. After a new --fetch this is the
+ *            monthly revalidation (`scripts/ci/image-credits-revalidate.mjs`):
+ *            a file Commons still describes the same way is not a change.
  *
  * The overrides file (`data/image-credit-overrides.json`), schema 1:
  *
@@ -142,8 +145,7 @@ export function readRegistryImages(root) {
 /**
  * The live Commons covers: an id of either usage map whose cover
  * `/images/blog/<id>.webp` some registry row shows — its own article, or
- * another one that reuses it (retirement keeps the webp, so a reused cover can
- * outlive the article it was made for, and its page still needs the credit).
+ * another one that reuses it, whose page needs the credit too.
  * The corpus map is read first, so it wins if an id ever appears in both.
  *
  * @returns {{ id: string, url: string, title: string }[]}
@@ -565,6 +567,34 @@ export function applyBackfill(root, plan) {
 // ── --check ────────────────────────────────────────────────────────────────
 
 /**
+ * The fields in which a record on disk differs from its rebuild, as sorted
+ * dotted paths (`author.name`, `licence.url`, `commons.revision`). Not
+ * `fetchedAt`: it says when Commons was read, and a re-read that finds the file
+ * unchanged changes nothing — without this, every new --fetch would make every
+ * record differ, and the monthly revalidation would report all of them.
+ *
+ * @param {Record<string, any>} current
+ * @param {Record<string, any>} rebuilt
+ * @returns {string[]}
+ */
+function changedRecordFields(current, rebuilt) {
+  const changed = [];
+  const isObject = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
+  const walk = (a, b, at) => {
+    if (isObject(a) && isObject(b)) {
+      for (const key of new Set([...Object.keys(a), ...Object.keys(b)])) {
+        if (!at && key === 'fetchedAt') continue;
+        walk(a[key], b[key], at ? `${at}.${key}` : key);
+      }
+    } else if (canonicalJson(a) !== canonicalJson(b)) {
+      changed.push(at);
+    }
+  };
+  walk(current, rebuilt, '');
+  return changed.sort();
+}
+
+/**
  * The tree as it must be: every problem as one line, empty when clean.
  */
 export function checkTree(root) {
@@ -600,8 +630,12 @@ export function checkTree(root) {
     const onDisk = new Map(entries.filter((e) => e.record).map((e) => [e.key, e.record]));
     for (const [key, record] of plan.records) {
       const current = onDisk.get(key);
-      if (!current) problems.push(`${IMAGE_CREDIT_RECORDS_DIR}/${key}.json: missing — run --build`);
-      else if (canonicalJson(current) !== canonicalJson(record)) problems.push(`${IMAGE_CREDIT_RECORDS_DIR}/${key}.json: differs from a rebuild — run --build`);
+      if (!current) {
+        problems.push(`${IMAGE_CREDIT_RECORDS_DIR}/${key}.json: missing — run --build`);
+        continue;
+      }
+      const changed = changedRecordFields(current, record);
+      if (changed.length > 0) problems.push(`${IMAGE_CREDIT_RECORDS_DIR}/${key}.json: differs from a rebuild — run --build (${changed.join(', ')})`);
     }
     const registry = readRegistryImages(root);
     for (const key of plan.repoints.keys()) {

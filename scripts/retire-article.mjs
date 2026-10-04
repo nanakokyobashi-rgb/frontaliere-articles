@@ -64,6 +64,7 @@ import {
 // rigenera (vedi il file per il perché delle due euristiche cadute).
 import { matchingDelimiter, removeFromIdListLiteral } from './lib/ts-literals.mjs';
 import { removeSeoEntriesFromSource } from './lib/seo-entry.mjs';
+import { IMAGE_CREDIT_RECORDS_DIR } from './lib/image-credit-records.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -413,10 +414,13 @@ function main() {
     }
   }
 
-  // 10. asset immagine
+  // 10. asset immagine, e con la copertina il suo credito (P14): il record
+  //     `content/image-credits/blog/<id>.json` descrive proprio questo file, e
+  //     senza il file resterebbe il credito di una copertina che non c'è più.
   for (const asset of [`public/images/blog/${id}.webp`, `public/images/blog/thumbnails/${id}-480w.webp`]) {
     queueDeleteTarget(deletes, planned, asset, 'asset');
   }
+  queueDeleteTarget(deletes, planned, `${IMAGE_CREDIT_RECORDS_DIR}/${id}.json`, 'credito della copertina');
 
   // Il ledger dei ritirati è scritto atomicamente più avanti, ma va letto e
   // validato ora: una directory, una symlink o un JSON rotto non devono poter
