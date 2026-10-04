@@ -99587,6 +99587,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-assistenza-sociale-zurigo-domanda': {
+    title: 'Assistenza sociale nel canton Zurigo: requisiti e domanda',
+    description: 'Guida all\'assistenza sociale nel canton Zurigo: requisiti legati al bisogno, ufficio comunale o cantonale, documenti, prestazioni e obblighi di collaborazione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, assistenza, sociale, canton, zurigo',
+    ogTitle: 'Assistenza sociale nel canton Zurigo: requisiti e domanda',
+    ogDescription: 'Chi vive nel canton Zurigo trova qui i passaggi essenziali per la domanda di assistenza sociale: condizione di bisogno, ufficio competente, documenti, prestazioni e collaborazione, con le distinzioni da LAMal e previdenza.',
+    canonicalPath: '/articoli-svizzera/assistenza-sociale-zurigo-domanda/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Assistenza sociale nel canton Zurigo: requisiti e domanda",
+      "description": "Guida all'assistenza sociale nel canton Zurigo: requisiti legati al bisogno, ufficio comunale o cantonale, documenti, prestazioni e obblighi di collaborazione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/assistenza-sociale-zurigo-domanda.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio comunale svizzero per una domanda di assistenza sociale"
+      },
+      "datePublished": "2026-10-04T12:15:27+00:00",
+      "dateModified": "2026-10-04T12:15:27+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/assistenza-sociale-zurigo-domanda/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
