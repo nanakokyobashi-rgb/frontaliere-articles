@@ -12480,6 +12480,12 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.incendio-asso-corda-doppia.title': 'Brand in Asso: Doppelseilmanöver in der Schlucht',
     'blog.article.incendio-asso-corda-doppia.excerpt': 'Vegetationsbrand in Asso: Feuerwehr und SAF waren in einer Schlucht im Einsatz. Etwa 100 Quadratmeter beschädigt.',
     'blog.article.incendio-asso-corda-doppia.imageAlt': 'Feuerwehrleute arbeiten in einer unwegsamen Schlucht bei einem Vegetationsbrand in Asso',
+    'blog.article.arresto-luino-46enne-violenza-familiare.title': 'Luino: 46-Jähriger wegen Gewalt und Misshandlungen festgenommen',
+    'blog.article.arresto-luino-46enne-violenza-familiare.excerpt': 'Carabinieri von Luino vollziehen eine Untersuchungshaft auf Anordnung des GIP von Varese. Armbrust im Haus gefunden.',
+    'blog.article.arresto-luino-46enne-violenza-familiare.imageAlt': 'Armbrust, die von den Carabinieri in Luino bei einer häuslichen Gewalt ermittelt wurde',
+    'blog.article.decesso-coldrerio-corsia-nord-sud.title': 'A2 bei Coldrerio: Der bei dem Unfall verletzte 73-Jährige ist gestorben',
+    'blog.article.decesso-coldrerio-corsia-nord-sud.excerpt': 'Der 73-jährige Schweizer mit Wohnsitz im Kanton Zürich ist nach dem Unfall auf der A2 in Coldrerio im Krankenhaus gestorben. Er war der Beifahrer des von einer 68-Jährigen gelenkten Autos.',
+    'blog.article.decesso-coldrerio-corsia-nord-sud.imageAlt': 'A2 bei Coldrerio auf der Nord-Süd-Fahrbahn',
 };
 
 export default blogMetaDe;
