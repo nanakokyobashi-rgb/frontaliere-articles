@@ -28,6 +28,7 @@
  * processo, e lo stato dei tier (chiavi esaurite) prosegue fra i casi
  * nell'ordine in cui sono scritti.
  */
+import './lib/stdout-off-runner-pipe.mjs'; // stdout e' la pipe dei frame di node:test (issue 1819)
 import { test, after } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';

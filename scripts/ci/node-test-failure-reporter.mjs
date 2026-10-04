@@ -100,7 +100,9 @@ export function recordStdoutWrite(writers, data = {}) {
   entry.events += 1;
   entry.bytes += Buffer.byteLength(message);
   if (entry.sample.length < MAX_STDOUT_SAMPLE_LENGTH) {
-    entry.sample = trimMessage(`${entry.sample}${message}`).slice(0, MAX_STDOUT_SAMPLE_LENGTH);
+    // Concatenato grezzo e rifilato solo in `buildReport`: rifilare a ogni
+    // evento incollerebbe due righe consecutive togliendo l'a-capo fra loro.
+    entry.sample = `${entry.sample}${message}`.slice(0, MAX_STDOUT_SAMPLE_LENGTH);
   }
   writers.set(file, entry);
   return writers;
@@ -113,6 +115,7 @@ export function buildReport(failures = [], suiteFailures = [], stdoutWriters = [
     failures: failures.slice(0, MAX_FAILURES),
     suiteFailures: suiteFailures.slice(0, MAX_FAILURES),
     stdoutWriters: [...stdoutWriters]
+      .map((w) => ({ ...w, sample: trimMessage(w.sample) }))
       .sort((a, b) => a.file.localeCompare(b.file))
       .slice(0, MAX_FAILURES),
   };

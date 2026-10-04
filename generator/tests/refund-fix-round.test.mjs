@@ -13,6 +13,7 @@
  * workflow gemelli — il nome del marker vive sia nella bash del guard sia
  * nell'env dello step di rimborso, e non possono importarsi (AGENTS.md #6).
  */
+import './lib/stdout-off-runner-pipe.mjs'; // stdout e' la pipe dei frame di node:test (issue 1819)
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';

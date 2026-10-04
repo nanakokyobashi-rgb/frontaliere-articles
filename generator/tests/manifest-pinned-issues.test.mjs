@@ -18,6 +18,7 @@
  * per tutti — un closer che smette di consultare la sorgente — e va vista in un
  * posto solo, dove si nota anche il closer nuovo che nessuno ha collegato.
  */
+import './lib/stdout-off-runner-pipe.mjs'; // stdout e' la pipe dei frame di node:test (issue 1819)
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';

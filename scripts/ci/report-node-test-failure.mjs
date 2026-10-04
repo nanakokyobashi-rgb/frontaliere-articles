@@ -79,7 +79,18 @@ export function buildComment(report, {
     lines.push('', 'Dettaglio suite/file fallite:');
     for (const failure of suiteFailures.slice(0, MAX_FAILURES)) lines.push(...buildFailureLines(failure));
   }
-  if (failures.length === 0 && suiteFailures.length === 0) {
+  const stdoutWriters = Array.isArray(report?.stdoutWriters) ? report.stdoutWriters : [];
+  if (stdoutWriters.length > 0) {
+    lines.push(
+      '',
+      'File che scrivono su stdout fuori dal protocollo `node:test` (gate `scripts/ci/check-node-test-stdout.mjs`: su Node 22 basta per «Unable to deserialize cloned data»):',
+    );
+    for (const writer of stdoutWriters.slice(0, MAX_FAILURES)) {
+      const sample = String(writer.sample || '').replace(/\s+/g, ' ').slice(0, 160);
+      lines.push(`- \`${writer.file}\` — ${writer.bytes} byte: \`${sample.replaceAll('`', "'")}\``);
+    }
+  }
+  if (failures.length === 0 && suiteFailures.length === 0 && stdoutWriters.length === 0) {
     lines.push('- Il runner non ha prodotto eventi strutturati; consultare il log della run.');
   }
   if (runUrl) lines.push('', `Run: ${runUrl}`);

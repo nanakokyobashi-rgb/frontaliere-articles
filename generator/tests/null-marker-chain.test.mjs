@@ -21,6 +21,7 @@
  * sbagliato — un marker pubblicato, o il testo italiano sotto `/de/` — e'
  * comunque un articolo che esce verde.
  */
+import './lib/stdout-off-runner-pipe.mjs'; // stdout e' la pipe dei frame di node:test (issue 1819)
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, writeFileSync, unlinkSync } from 'node:fs';

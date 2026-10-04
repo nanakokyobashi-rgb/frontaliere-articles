@@ -27,6 +27,7 @@
  * divergessero, il backstop crederebbe di aver chiuso l'idempotenza senza
  * averlo fatto.
  */
+import './lib/stdout-off-runner-pipe.mjs'; // stdout e' la pipe dei frame di node:test (issue 1819)
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {

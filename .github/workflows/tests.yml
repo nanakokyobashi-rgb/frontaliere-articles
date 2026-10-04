@@ -298,7 +298,7 @@ jobs:
             # (issue 1819). Rosso deterministico sul prerequisito del flake.
             stdout_status=0
             node scripts/ci/check-node-test-stdout.mjs "$NODE_TEST_REPORT_FILE" || stdout_status=$?
-            echo "misura: check-node-test-stdout exit=$stdout_status (non bloccante in questo commit di misura)" >&2
+            if [ "$stdout_status" -ne 0 ] && [ "$node_status" -eq 0 ]; then node_status=1; fi
           fi
           exit "$node_status"
 

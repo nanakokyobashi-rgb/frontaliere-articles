@@ -14,6 +14,7 @@
  * passa al repository gemello SOLO sulla risposta definitiva «non e' una PR»;
  * un guasto resta `unavailable` e non viene indovinato altrove.
  */
+import './lib/stdout-off-runner-pipe.mjs'; // stdout e' la pipe dei frame di node:test (issue 1819)
 import assert from 'node:assert/strict';
 import { chmodSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
