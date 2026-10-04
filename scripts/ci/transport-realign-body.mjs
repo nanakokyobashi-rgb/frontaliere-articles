@@ -117,7 +117,10 @@ export function buildTransportPrBody(report, { workflowsScope = false } = {}) {
   const deltas = (r.couplingDelta || []).map((d) => '- Snapshot accoppiamenti per ' + markdownCodeSpan(d.path) + ': +'
     + d.added.length + '/-' + d.removed.length
     + (d.initialized ? ' (prima osservazione)' : ' (delta dalla passata precedente)') + '.').join('\n');
-  const scopeNote = workflowsScope
+  const hasWorkflowExcluded = (r.workflowExcluded || []).length > 0;
+  // Con un rifiuto esplicito dello scope la nota contraddirebbe le voci
+  // `workflowExcluded` di `## Non implementato (ancora)`.
+  const scopeNote = workflowsScope && !hasWorkflowExcluded
     ? '- Lo scope `workflows` e\' disponibile per questa identita\': i gemelli sotto `.github/workflows/` sono stati valutati come gli altri, se dichiarati `identical` e `site-ahead`.'
     : '';
   const excluded = (r.realignExcluded || []).map((p) => '- ' + markdownCodeSpan(p)

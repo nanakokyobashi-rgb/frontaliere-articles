@@ -181,6 +181,8 @@ test('produttore e consumatore importano lo stesso modulo', () => {
   // `transportBulletLine`/`convergedBulletLine` dello stesso modulo.
   assert.match(producer, /node --input-type=module -e '\s+import fs from "node:fs";\s+import \{ buildTransportPrBody \} from "\.\/scripts\/ci\/transport-realign-body\.mjs";/);
   assert.doesNotMatch(producer, /"- `" \+ t\.path \+ "`/, 'il produttore non deve piu\' scrivere il code span a mano');
+  assert.match(producer, /buildTransportPrBody\(r, \{ workflowsScope: process\.env\.PAT_WORKFLOWS_SCOPE === "true" \}\)/);
+  assert.doesNotMatch(producer, /"## Non implementato \(ancora\)"/, 'nessun secondo template inline del body');
   assert.match(consumer, /node scripts\/ci\/transport-realign-body\.mjs/);
   assert.doesNotMatch(consumer, /const re = \/\^- `\(\[\^`/, 'nessun secondo parser inline nel workflow');
 

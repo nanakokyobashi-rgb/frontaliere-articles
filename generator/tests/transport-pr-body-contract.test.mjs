@@ -16,9 +16,6 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import fs from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { evaluateBodyContract } from '../../scripts/lib/pr-body-contract-eval.mjs';
 import { checkPrBodySections, decisionDeferralFindings } from '../../scripts/lib/pr-body-sections-check.mjs';
 import {
@@ -28,8 +25,6 @@ import {
   parseTransportBullets,
   planTransportRealign,
 } from '../../scripts/ci/transport-realign-body.mjs';
-
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
 const h = (n) => n.toString(16).padStart(16, '0');
 
@@ -79,6 +74,15 @@ const FIXTURES = [
     },
     opts: { workflowsScope: false },
   },
+  {
+    name: 'scope presente ma rifiutato esplicitamente da GitHub',
+    report: {
+      transported: RUN_37173895046.transported.slice(0, 1),
+      realign: [],
+      workflowExcluded: ['.github/workflows/needs-scope.yml'],
+    },
+    opts: { workflowsScope: true },
+  },
   { name: 'report vuoto', report: {}, opts: {} },
 ];
 
@@ -92,6 +96,8 @@ for (const { name, report, opts } of FIXTURES) {
     // Modalita' del gate locale `pr-body-check-gate` per ogni scrittura nuova.
     const strict = checkPrBodySections(body, { strictDecisionDeferrals: true });
     assert.deepEqual(strict.violations, []);
+    // Il gate locale promuove anche i bullet senza stato a violazione.
+    assert.deepEqual((strict.warnings ?? []).filter((w) => w.type === 'bullet-without-state'), []);
     assert.deepEqual(decisionDeferralFindings(body), []);
     // Ogni sezione ha voci sostanziose subito sotto l'header.
     assert.match(body, /^## Implementato\n- \S/m);
@@ -113,6 +119,11 @@ test('lo scope workflows mancante resta un blocco tecnico, non una deroga decisi
   const withRejected = buildTransportPrBody({ transported: [], workflowExcluded: ['.github/workflows/x.yml'] }, { workflowsScope: false });
   assert.doesNotMatch(withRejected, /PAT_WORKFLOWS_SCOPE/, 'il rifiuto esplicito sostituisce la riga generica');
   assert.doesNotMatch(buildTransportPrBody({ transported: [] }, { workflowsScope: true }), /PAT_WORKFLOWS_SCOPE/);
+  const rejectedWithScope = buildTransportPrBody(
+    { transported: [], workflowExcluded: ['.github/workflows/x.yml'] },
+    { workflowsScope: true },
+  );
+  assert.doesNotMatch(rejectedWithScope, /e' disponibile per questa identita'/, 'nessuna nota che contraddica il rifiuto esplicito');
 });
 
 test('il body generato resta leggibile dal realign post-merge', () => {
@@ -131,11 +142,4 @@ test('il body generato resta leggibile dal realign post-merge', () => {
     manifest,
   });
   assert.equal(plan.rows.length, RUN_37173895046.transported.length);
-});
-
-test('il workflow scrive il body solo con buildTransportPrBody', () => {
-  const producer = fs.readFileSync(path.join(ROOT, '.github/workflows/transport-identical-twins.yml'), 'utf8');
-  assert.match(producer, /import \{ buildTransportPrBody \} from "\.\/scripts\/ci\/transport-realign-body\.mjs";/);
-  assert.match(producer, /buildTransportPrBody\(r, \{ workflowsScope: process\.env\.PAT_WORKFLOWS_SCOPE === "true" \}\)/);
-  assert.doesNotMatch(producer, /"## Non implementato \(ancora\)"/, 'nessun secondo template inline del body');
 });
