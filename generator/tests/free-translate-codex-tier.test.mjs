@@ -261,7 +261,7 @@ test('un eco del prompt in un batch e\' rifiutato per il solo item guasto', asyn
       ],
     });
   });
-  const { value } = await captureLog(() => withLanes(1, () => Promise.all(texts.map((text) => it(text))));
+  const { value } = await captureLog(() => withLanes(1, () => Promise.all(texts.map((text) => it(text)))));
   assert.deepEqual(value, [`MYMEMORY ${EN}`, translationOf(texts[1])]);
   assert.equal(calls.length, 1);
 });
