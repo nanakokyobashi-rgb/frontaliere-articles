@@ -149,7 +149,7 @@ function _preferisceModelloSenzaCap(prefer) {
 // (scripts/lib/dedicated-crawler-common.mjs, batch-add-faq-to-articles.mjs).
 // Routing article translation through it instead of the generation LLM frees
 // ~60% of per-article LLM calls for actual generation (the quota bottleneck).
-import { freeTranslateWithRetry, balanceMarkdownMarkers, setCodexTranslateProcessDeadline, translateWithCodexEngine } from './lib/free-translate.mjs';
+import { freeTranslateWithRetry, balanceMarkdownMarkers, setCodexTranslateProcessDeadline, translateWithCodexEngine, codexCallDeadlineMs } from './lib/free-translate.mjs';
 import {
   translateFieldFreeMt,
   translatedStringOrNull,
@@ -10925,8 +10925,13 @@ Rispondi con un JSON object (no markdown, no code fences):
  * rifiuti NON finiscono in `recordFreeMtUnusableOutput`: i loop che usano
  * quel report per il cap sono gia' chiusi.
  *
- * La scadenza e' quella che il processo ha dichiarato al tier di traduzione
- * Codex (`installCodexTranslateProcessDeadline`), mai l'orologio di modulo.
+ * Ogni chiamata ha la stessa finestra di una traduzione del tier Codex
+ * (`codexCallDeadlineMs` di lib/free-translate.mjs: tetto per chiamata di
+ * 180 s, coda del broker compresa, limitato dalla scadenza che il processo ha
+ * dichiarato con `installCodexTranslateProcessDeadline`), mai i 600 s della
+ * lane del corpo articolo ne' l'orologio di modulo: un broker bloccato costa
+ * al piu' due finestre (la striscia di stop), non il residuo della run. Sotto
+ * la finestra minima la chiamata non parte e il body resta in attesa.
  *
  * La corsia e' ARMATA solo nel percorso CLI, dallo stesso installer: e' li'
  * che il job ha il broker Codex e che la guardia `missing-key` di
@@ -10944,14 +10949,21 @@ function pendingBodySecondLaneAvailable() {
 
 async function translatePendingBodyWithCodex(itValue, locale, field) {
   const codex = AI_MODELS.CODEX_CLI_PRIMARY;
-  const deadlineMs = _pendingBodyCodexDeadlineMs;
+  const deadlineMs = codexCallDeadlineMs({
+    now: Date.now(),
+    budgetRemainingMs: Number.POSITIVE_INFINITY,
+    processDeadlineMs: _pendingBodyCodexDeadlineMs,
+  });
+  if (deadlineMs === null) {
+    throw new Error('finestra residua troppo corta per una chiamata Codex');
+  }
   const call = (messages, opts = {}) => _aiCallLLM(messages, {
     ...opts,
     model: codex,
     chain: [codex],
     prefer: [codex],
     bypassForceChain: true,
-    ...(deadlineMs !== null ? { deadlineMs } : {}),
+    deadlineMs,
   });
   const rejected = [];
   const text = await translateFieldFreeMt({

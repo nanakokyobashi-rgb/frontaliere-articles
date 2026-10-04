@@ -40,6 +40,7 @@ import {
 } from '../scripts/lib/free-mt-recovery.mjs';
 import { translatedStringOrNull, isSourcePassthrough, translateFieldFreeMt } from '../scripts/lib/article-free-mt.mjs';
 import { detectTruncation } from '../scripts/lib/article-factuality-gates.mjs';
+import { codexCallDeadlineMs } from '../scripts/lib/free-translate.mjs';
 import { sanitizeBodyText } from '../scripts/lib/sanitize-body-braces.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -202,6 +203,14 @@ test('il percorso della corsia (translateFieldFreeMt) rifiuta un riassunto compl
   assert.deepEqual(errReasons, ['error']);
 });
 
+test('la finestra per chiamata della corsia e\' quella del tier Codex, mai oltre la scadenza dichiarata', () => {
+  const now = 1_000_000;
+  const unbounded = codexCallDeadlineMs({ now, budgetRemainingMs: Number.POSITIVE_INFINITY, processDeadlineMs: null });
+  assert.ok(unbounded > now && unbounded - now < 600_000, 'la finestra non deve essere quella di 600 s della lane');
+  assert.equal(codexCallDeadlineMs({ now, budgetRemainingMs: Number.POSITIVE_INFINITY, processDeadlineMs: now + 60_000 }), now + 60_000);
+  assert.equal(codexCallDeadlineMs({ now, budgetRemainingMs: Number.POSITIVE_INFINITY, processDeadlineMs: now + 5_000 }), null);
+});
+
 // ── Il cablaggio in translateArticle() ─────────────────────────────────────
 
 const BLOCK_START = '  // ── Seconda corsia per i body rimasti in attesa';
@@ -238,7 +247,12 @@ test('la corsia e\' Codex pinnata, passa da translateFieldFreeMt e usa la scaden
   // Nessun orologio di modulo: i producer che importano translateArticle()
   // (publish-journalist-article.mjs) non hanno CREATE_ARTICLE_MAX_WALL_MS.
   assert.doesNotMatch(body, /RUN_START_MS|RUN_WALL_BUDGET_MS/);
-  assert.match(body, /const deadlineMs = _pendingBodyCodexDeadlineMs;/);
+  // Finestra per chiamata del tier Codex (180 s, coda compresa), limitata
+  // dalla scadenza dichiarata: non i 600 s della lane del corpo articolo.
+  assert.match(body, /const deadlineMs = codexCallDeadlineMs\(\{/);
+  assert.match(body, /processDeadlineMs: _pendingBodyCodexDeadlineMs,/);
+  assert.match(body, /if \(deadlineMs === null\) \{\n\s+throw /);
+  assert.match(body, /\n    deadlineMs,\n/);
   const install = src.slice(src.indexOf('function installCodexTranslateProcessDeadline() {'));
   assert.match(install.slice(0, install.indexOf('\n}\n')), /_pendingBodyCodexDeadlineMs = RUN_START_MS \+ RUN_WALL_BUDGET_MS - TRANSLATE_DEADLINE_MARGIN_MS;/);
   const stop = src.slice(src.indexOf('function pendingBodyLaneShouldStop() {'));
