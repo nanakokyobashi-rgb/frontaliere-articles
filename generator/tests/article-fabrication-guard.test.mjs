@@ -43,6 +43,10 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, it } from 'node:test';
 import { expect } from './lib/expect-shim.mjs';
+import {
+  FABRICATED_INSTITUTION_ACRONYMS,
+  checkFabricatedInstitutionAcronyms,
+} from '../scripts/lib/article-factuality-gates.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const BODY_ROOTS = ['blog-body', 'blog-body-ch'];
@@ -152,6 +156,49 @@ const WRONG_CONVENTION_DATE = {
   fr: new RegExp(String.raw`\b0?9\s*décembre\s*1976\b|${NUMERIC_WRONG_CONVENTION_DATE}`, 'i'),
 };
 
+// ── Enti inventati della denylist CURATA del generatore (issue corpus 2115) ──
+//
+// Le liste FABRICATED_INSTITUTIONS / FABRICATED_ACRONYMS qui sopra sono una
+// copia corta e congelata: `(UFI)`, `(OFOS)`, `(UAFS)`, `(UJF)` stanno nella
+// denylist che il generatore usa per bloccare un articolo nuovo
+// (FABRICATED_INSTITUTION_ACRONYMS in article-factuality-gates.mjs), ma questo
+// gate sul contenuto non le guardava. Quattro corpi IT pubblicati prima che le
+// sigle entrassero in denylist sono quindi rimasti online senza che nessun
+// gate su `main` diventasse rosso: li vedeva solo la scansione della bonifica.
+//
+// Il test non copia la lista: importa la stessa funzione del gate, così ogni
+// sigla aggiunta alla denylist vale da subito anche per il corpus già scritto.
+// Solo la parte CURATA (nessuna memoria appresa): il verdetto non dipende da
+// `data/article-defect-memory.json`, che un cron riscrive.
+//
+// I locali: INSTITUTION_RE del gate riconosce solo sostantivi italiani
+// («Ufficio», «Istituto», …), quindi la traduzione dello stesso ente inventato
+// — «Federal Office of Switzerland (OFOS)», «Bundesamt für Rechtsangelegenheiten
+// (UJF)» — gli era invisibile. Qui la stessa denylist vale con un sostantivo di
+// ente nella lingua del locale, nella stessa finestra di 80 caratteri senza
+// parentesi né punto.
+const LOCALE_INSTITUTION_NOUN = {
+  en: String.raw`(?:Office|Offices|Agency|Department|Commission|Institute|Authority|Secretariat|Directorate|Administration|Observatory|Bureau)`,
+  de: String.raw`(?:[A-Za-zÄÖÜäöüß]*(?:amt|amtes|amts)|Departement|Departements|Kommission|Institut|Instituts|Behörde|Sekretariat|Sekretariats|Direktion|Verwaltung|Agentur)`,
+  fr: String.raw`(?:Office|Offices|Agence|Département|Commission|Institut|Autorité|Secrétariat|Direction|Administration|Observatoire|Bureau)`,
+};
+
+function unescapeTsString(text) {
+  return text.replace(/\\n/g, '\n').replace(/\\(['"\\])/g, '$1');
+}
+
+function localeFabricatedInstitutions(locale, text) {
+  const noun = LOCALE_INSTITUTION_NOUN[locale];
+  if (!noun) return [];
+  // Lookaround su \p{L} invece di \b: \b è solo ASCII e non chiude «Autorité».
+  const re = new RegExp(String.raw`(?<!\p{L})${noun}(?!\p{L})[^().\n]{0,80}?\(([A-Z]{2,8})\)`, 'gu');
+  const hits = [];
+  for (const m of text.matchAll(re)) {
+    if (FABRICATED_INSTITUTION_ACRONYMS.has(m[1])) hits.push(m[0].trim());
+  }
+  return hits;
+}
+
 describe('article fabrication guard', () => {
   const files = getArticleFiles();
   const itFiles = files.filter((f) => f.locale === 'it');
@@ -179,6 +226,36 @@ describe('article fabrication guard', () => {
 
   it('no fabricated acronyms in any IT body', () => {
     expect(scanIt(FABRICATED_ACRONYMS)).toEqual([]);
+  });
+
+  it('no IT body names an institution in the generator curated denylist (fabricated-institution)', () => {
+    const offenders = [];
+    for (const { id, text } of itTexts) {
+      for (const i of checkFabricatedInstitutionAcronyms(unescapeTsString(text))) {
+        if (i.code === 'fabricated-institution') offenders.push(`${id}: ${i.evidence}`);
+      }
+    }
+    expect(offenders).toEqual([]);
+  });
+
+  it('no en/de/fr body names an institution in the generator curated denylist', () => {
+    const offenders = [];
+    for (const f of files) {
+      if (f.locale === 'it') continue;
+      for (const hit of localeFabricatedInstitutions(f.locale, unescapeTsString(extractTextContent(f.path)))) {
+        offenders.push(`${f.id}: ${hit}`);
+      }
+    }
+    expect(offenders).toEqual([]);
+  });
+
+  it('the locale denylist matcher recognises the translated form of an invented body', () => {
+    expect(localeFabricatedInstitutions('en', 'established by the Federal Office of Switzerland (OFOS) and')).toEqual(['Office of Switzerland (OFOS)']);
+    expect(localeFabricatedInstitutions('de', 'die Website des Bundesamtes für Rechtsangelegenheiten (UJF) zu')).toEqual(['Bundesamtes für Rechtsangelegenheiten (UJF)']);
+    expect(localeFabricatedInstitutions('fr', "établie par l'Office fédéral de la Suisse (OFOS) et")).toEqual(['Office fédéral de la Suisse (OFOS)']);
+    // Real bodies and acronyms outside the denylist stay clean.
+    expect(localeFabricatedInstitutions('en', 'the Federal Tax Administration (AFC) publishes')).toEqual([]);
+    expect(localeFabricatedInstitutions('de', 'das Bundesamt für Gesundheit (BAG) publiziert')).toEqual([]);
   });
 
   it('no known incorrect facts in any IT body', () => {
