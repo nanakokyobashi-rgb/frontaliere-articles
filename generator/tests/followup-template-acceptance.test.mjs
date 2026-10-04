@@ -154,6 +154,15 @@ test('il prompt vincola il token derivato ad essere assente oggi, accanto a DERI
     /cerca nel file target il simbolo\/campo da toccare e riportalo verbatim/,
     'la vecchia istruzione faceva copiare un simbolo già presente: token vero al conio',
   );
+  // FOLLOWUP.md è il «contratto operativo completo» che il prompt fa leggere per
+  // primo: se pretende un token già presente, contraddice il prompt e rigenera
+  // item nati veri.
+  assert.doesNotMatch(
+    FOLLOWUP,
+    /DEVE già esistere verbatim/,
+    'FOLLOWUP.md pretende di nuovo un token già presente: contraddice «ASSENTE OGGI» del prompt',
+  );
+  assert.match(FOLLOWUP, /ASSENTE OGGI/, 'FOLLOWUP.md deve dire che il token derivato è assente oggi');
 });
 
 test('il prompt legge i bullet già classificati e instradati del bundle', () => {
@@ -167,6 +176,15 @@ test('il prompt legge i bullet già classificati e instradati del bundle', () =>
     'nel corpus un file identical esiste anche qui: il prompt deve dire che si corregge nel sito',
   );
   assert.match(WORKFLOW, /State: blocked/, 'manca la regola `State: blocked` per le cause non di codice');
+  // La mappa in prosa manda `generator/**` al corpus, dove vivono decine di
+  // file `identical`: è solo un'indicazione, e le `routes` prevalgono.
+  assert.doesNotMatch(WORKFLOW, /mappa fissa/, 'la mappa in prosa non può essere «fissa»: le `routes` prevalgono');
+  assert.match(WORKFLOW, /Mappa indicativa \(le `routes` di `## Candidate bullets` prevalgono\)/);
+  assert.match(
+    WORKFLOW,
+    /Tranne i file `identical` di `scripts\/ci\/loop-sync-manifest\.json`: si coniano\s+nel sito col `sitePath`/,
+    'i path della review non hanno `routes`: la mappa deve escludere da sé i file identical',
+  );
 });
 
 test('il prefetch invoca lo script con side=corpus e mette la sezione nel bundle', () => {

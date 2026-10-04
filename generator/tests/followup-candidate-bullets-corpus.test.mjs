@@ -15,7 +15,6 @@
  */
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 import {
@@ -27,7 +26,6 @@ import {
 
 const ROOT = fileURLToPath(new URL('../../', import.meta.url));
 const MANIFEST_FILES = readManifestFile(`${ROOT}${MANIFEST_PATH}`);
-const WORKFLOW = readFileSync(`${ROOT}.github/workflows/post-merge-followup.yml`, 'utf8');
 
 /** Un lookup del gemello che registra le chiamate: per i path decisi dal manifest non deve servire. */
 function recordingTwin() {
@@ -48,13 +46,8 @@ test('il manifest di mirror si legge dal disco di questo checkout', () => {
   assert.ok(MANIFEST_FILES.length > 0);
 });
 
-test('il workflow passa allo script il lato corpus e lo stesso manifest che il test legge', () => {
-  assert.match(
-    WORKFLOW,
-    /node scripts\/ci\/followup-candidate-bullets\.mjs --side corpus\s*\\?\s*--manifest scripts\/ci\/loop-sync-manifest\.json/,
-    'post-merge-followup.yml: il prefetch deve invocare lo script con `--side corpus` e il manifest dal disco ' +
-      '(senza `--manifest` lo script leggerebbe il manifest via API)',
-  );
+test('lo script legge di default lo stesso manifest che il prefetch gli passa', () => {
+  // L'invocazione nel workflow è pinnata in followup-template-acceptance.test.mjs.
   assert.equal(MANIFEST_PATH, 'scripts/ci/loop-sync-manifest.json');
 });
 

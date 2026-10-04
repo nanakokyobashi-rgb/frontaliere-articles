@@ -379,7 +379,7 @@ jobs:
             - Metadata + review della PR: già nel bundle (`## Per-PR metadata + reviews`, punto 4 del Bootstrap sopra). Non rifare `gh pr view`/`gh api .../reviews` a meno che la sezione di questa PR risulti vuota.
             - **Risolvi il repository PRIMA di creare qualunque issue.** Il repo della PR
               sorgente NON decide il repo dell'issue: lo decide il primo file realmente
-              modificabile indicato dall'item. Usa questa mappa fissa:
+              modificabile indicato dall'item. Mappa indicativa (le `routes` di `## Candidate bullets` prevalgono):
               - `nanakokyobashi-rgb/frontaliere-articles`: `generator/**`,
                 `generator/tests/**`, `generator/scripts/**`, `content/**`,
                 `data/blog-articles/**`, `data/article-source-urls.json`,
@@ -388,13 +388,15 @@ jobs:
                 `publish-journalist-articles.yml`, `publish-api.yml`). Anche il twin
                 `scripts/create-article.mjs` appartiene qui quando l'item riguarda la
                 generazione live: il producer del sito e' disattivato dal cutover.
+                Tranne i file `identical` di `scripts/ci/loop-sync-manifest.json`: si coniano
+                nel sito col `sitePath` (anche i path citati dalla review, che non hanno `routes`).
               - `valerielinc-ops/frontaliere-si-o-no`: tutto il resto, inclusi i file
                 del sito, i workflow di deploy/sync/validation e i mirror che leggono
                 il corpus senza generarlo.
               Se un item cita piu' file, scegli il repo del file che richiede la modifica
               comportamentale; se cita solo un sintomo, individua prima il file sorgente
               reale. Scrivi sempre nell'issue `Target repository:` e `Target file:`.
-              Mappa indicativa: per i path dei bullet valgono le `routes` di `## Candidate bullets`
+              Per i path dei bullet valgono le `routes` di `## Candidate bullets`
               (`repo`/`targetPath` → `Target repository`/`Target file`). Esistere QUI non basta: un
               `identical` va nel sito col `sitePath`. `unknown` → repository della PR, nota `route-unverified`.
               Per Valerie usa SEMPRE `gh issue create --repo valerielinc-ops/frontaliere-si-o-no ...`.
