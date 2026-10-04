@@ -99548,6 +99548,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-salario-minimo-zurigo-requisiti': {
+    title: 'Salario minimo canton Zurigo: requisiti e applicazione',
+    description: 'Salario minimo nel Cantone di Zurigo: requisiti, settori, controlli, ufficio competente e differenza tra disciplina cantonale e contratti collettivi svizzeri.',
+    keywords: 'frontalieri, ticino, svizzera, italia, salario, minimo, canton, zurigo',
+    ogTitle: 'Salario minimo canton Zurigo: requisiti e applicazione',
+    ogDescription: 'Nel Cantone di Zurigo la verifica parte dal quadro cantonale: alcuni Cantoni hanno un minimo proprio, mentre a livello federale non esiste. Guida pratica a requisiti, controlli, contratti collettivi e trattenute.',
+    canonicalPath: '/articoli-svizzera/salario-minimo-zurigo-requisiti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Salario minimo canton Zurigo: requisiti e applicazione",
+      "description": "Salario minimo nel Cantone di Zurigo: requisiti, settori, controlli, ufficio competente e differenza tra disciplina cantonale e contratti collettivi svizzeri.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/salario-minimo-zurigo-requisiti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documenti sul salario minimo in un ufficio cantonale svizzero"
+      },
+      "datePublished": "2026-10-04T11:39:08+00:00",
+      "dateModified": "2026-10-04T11:39:08+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/salario-minimo-zurigo-requisiti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
