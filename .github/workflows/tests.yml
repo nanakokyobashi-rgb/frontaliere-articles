@@ -292,6 +292,13 @@ jobs:
           if [ ! -s "$NODE_TEST_REPORT_FILE" ]; then
             echo "::error::node-test-failure-reporter non ha scritto $NODE_TEST_REPORT_FILE (exit node --test=$node_status): il report strutturato dei test falliti manca." >&2
             if [ "$node_status" -eq 0 ]; then node_status=1; fi
+          else
+            # Un file che scrive su stdout condivide la pipe coi frame del
+            # runner: su Node 22 basta per «Unable to deserialize cloned data»
+            # (issue 1819). Rosso deterministico sul prerequisito del flake.
+            stdout_status=0
+            node scripts/ci/check-node-test-stdout.mjs "$NODE_TEST_REPORT_FILE" || stdout_status=$?
+            if [ "$stdout_status" -ne 0 ] && [ "$node_status" -eq 0 ]; then node_status=1; fi
           fi
           exit "$node_status"
 

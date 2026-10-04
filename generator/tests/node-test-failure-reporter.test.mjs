@@ -10,7 +10,10 @@ import {
   buildReport,
   describeError,
   normalizeFailure,
+  recordStdoutWrite,
 } from '../../scripts/ci/node-test-failure-reporter.mjs';
+import { findStdoutWriters } from '../../scripts/ci/check-node-test-stdout.mjs';
+import { routeInfoLogsToStderr } from './lib/stdout-off-runner-pipe.mjs';
 
 const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const WORKFLOW = path.join(REPO, '.github', 'workflows', 'tests.yml');
@@ -31,6 +34,7 @@ test('il reporter strutturato conserva file, riga, nome ed errore', () => {
     failedSuites: 0,
     failures: [failure],
     suiteFailures: [],
+    stdoutWriters: [],
   });
 });
 
@@ -188,3 +192,109 @@ test('tests.yml: un report stantio non sopravvive e un reporter muto rende il ga
     fs.rmSync(tmp, { recursive: true, force: true });
   }
 });
+
+// ── stdout fuori protocollo: il prerequisito di «Unable to deserialize» ──────
+//
+// Issue 1819: con l'isolamento a processo il figlio serializza i frame del
+// runner su STDOUT, e su Node 22 un `console.log` accanto a un header spezzato
+// fra due letture della pipe fa fallire il file intero a subtest verdi
+// (`score-ledger-persistence.test.mjs`, run 37174186291 e 37194730172). Il
+// flake e' raro, il suo prerequisito e' deterministico: questi casi provano che
+// il gate lo vede, che lo vede col blocco VERO di tests.yml, e che il rimedio
+// documentato lo spegne senza zittire il log.
+
+const STDOUT_HELPER = new URL('./lib/stdout-off-runner-pipe.mjs', import.meta.url).href;
+const LOGGING_FIXTURE = [
+  "import { test } from 'node:test';",
+  "test('verde ma loggante', () => { console.log('RIGA_SU_STDOUT_1819'); });",
+  '',
+].join('\n');
+
+test('reporter: un test:stdout diventa uno stdoutWriter con file, byte e frammento', () => {
+  const writers = new Map();
+  recordStdoutWrite(writers, { file: 'generator/tests/a.test.mjs', message: 'ciao\n' });
+  recordStdoutWrite(writers, { file: 'generator/tests/a.test.mjs', message: 'mondo\n' });
+  const report = buildReport([], [], writers.values());
+  assert.deepEqual(report.stdoutWriters, [
+    { file: 'generator/tests/a.test.mjs', events: 2, bytes: 11, sample: 'ciao\nmondo' },
+  ]);
+  assert.deepEqual(findStdoutWriters(report).map((w) => w.file), ['generator/tests/a.test.mjs']);
+  assert.throws(() => findStdoutWriters({ failedTests: 0 }), /stdoutWriters/,
+    'un report senza il campo non e\' una prova di pulizia');
+});
+
+test('tests.yml: un file verde che scrive su stdout rende il gate rosso e viene nominato (#1819)', () => {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'node-test-report-out-'));
+  const reportFile = path.join(tmp, 'node-test-failures.json');
+  try {
+    const run = runUnitGates({ 'fixture-logging.mjs': LOGGING_FIXTURE }, { reportFile });
+    fs.rmSync(run.dir, { recursive: true, force: true });
+    assert.notEqual(run.status, 0, `stdout fuori protocollo deve essere rosso; stderr:\n${run.stderr}`);
+    const report = JSON.parse(fs.readFileSync(reportFile, 'utf8'));
+    assert.equal(report.failedTests, 0, 'il test in se\' e\' verde: il rosso e\' del gate');
+    assert.equal(report.stdoutWriters.length, 1);
+    assert.match(report.stdoutWriters[0].file, /fixture-logging\.mjs$/);
+    assert.match(report.stdoutWriters[0].sample, /RIGA_SU_STDOUT_1819/);
+    assert.match(run.stderr, /::error file=[^,]*fixture-logging\.mjs,title=node:test stdout fuori protocollo::/);
+    assert.match(buildComment(report), /fixture-logging\.mjs` — \d+ byte: `RIGA_SU_STDOUT_1819/);
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
+});
+
+test('tests.yml: col redirect documentato lo stesso file e\' verde e il log resta visibile su stderr', () => {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'node-test-report-out-'));
+  const reportFile = path.join(tmp, 'node-test-failures.json');
+  try {
+    const run = runUnitGates({
+      'fixture-routed.mjs': `import ${JSON.stringify(STDOUT_HELPER)};\n${LOGGING_FIXTURE}`,
+    }, { reportFile });
+    fs.rmSync(run.dir, { recursive: true, force: true });
+    assert.equal(run.status, 0, `stderr:\n${run.stderr}`);
+    assert.deepEqual(JSON.parse(fs.readFileSync(reportFile, 'utf8')).stdoutWriters, []);
+    assert.match(run.stdout, /RIGA_SU_STDOUT_1819/,
+      'il reporter spec ristampa lo stderr del figlio: il log non e\' stato zittito');
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
+});
+
+test('score-ledger-persistence.test.mjs non scrive piu\' su stdout fuori protocollo (#1819)', () => {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'node-test-report-out-'));
+  const reportFile = path.join(tmp, 'node-test-failures.json');
+  const block = unitGatesRunBlock().replace('"$FIXTURE_FILES"', '"$REAL_FILES"');
+  const env = { ...process.env, REAL_FILES: 'generator/tests/score-ledger-persistence.test.mjs', NODE_TEST_REPORT_FILE: reportFile };
+  delete env.NODE_TEST_CONTEXT;
+  delete env.NODE_OPTIONS;
+  try {
+    const run = spawnSync('bash', ['-c', block], { cwd: REPO, encoding: 'utf8', env });
+    const report = JSON.parse(fs.readFileSync(reportFile, 'utf8'));
+    assert.deepEqual(report.stdoutWriters, [], `il flush del ScoreStore logga su stdout:\n${run.stderr}`);
+    assert.equal(run.status, 0, `stderr:\n${run.stderr}`);
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
+});
+
+test('il redirect agisce solo nel figlio del runner e usa il console.error originale', () => {
+  const calls = [];
+  const fake = {
+    log: () => calls.push('log-originale'),
+    info: () => calls.push('info-originale'),
+    debug: () => calls.push('debug-originale'),
+    error: (...a) => calls.push(`error:${a.join(' ')}`),
+  };
+  assert.equal(routeInfoLogsToStderr(fake, {}), false, 'fuori dal figlio stdout non porta frame');
+  fake.log('x');
+  assert.deepEqual(calls, ['log-originale']);
+
+  calls.length = 0;
+  assert.equal(routeInfoLogsToStderr(fake, { NODE_TEST_CONTEXT: 'child-v8' }), true);
+  fake.error = () => calls.push('spia-su-error');
+  fake.log('a');
+  fake.info('b');
+  fake.debug('c');
+  assert.deepEqual(calls, ['error:a', 'error:b', 'error:c'],
+    'una spia installata dopo su console.error non deve ricevere le righe di console.log');
+});
+

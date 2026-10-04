@@ -41,6 +41,7 @@
  * ledger scritto da `createGithubIssue` VERO viene riletto dalla deduplica e
  * dal gate veri. Niente mock dei moduli.
  */
+import './lib/stdout-off-runner-pipe.mjs'; // stdout e' la pipe dei frame di node:test (issue 1819)
 import { test, before, beforeEach, after } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';

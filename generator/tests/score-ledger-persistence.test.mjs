@@ -147,6 +147,24 @@ async function freshInstance() {
   return import(`../scripts/lib/ai-models.mjs?ledger-test=${instanceSeq++}`);
 }
 
+// `flushScoresBeforeExit()` logga l'esito con `console.log`, cioe' su STDOUT:
+// la stessa pipe su cui il figlio di `node --test` serializza i frame del
+// runner. Su Node 22 quel testo accanto a un header spezzato fa fallire il file
+// intero con «Unable to deserialize cloned data» a subtest verdi (issue 1819,
+// run 37174186291 e 37194730172). Il test cattura il log invece di lasciarlo
+// sulla pipe, e ne asserisce il contenuto: e' la riga che i workflow leggono.
+async function captureConsoleLog(fn) {
+  const printed = [];
+  const orig = console.log;
+  console.log = (...a) => printed.push(a.join(' '));
+  try {
+    const value = await fn();
+    return { value, out: printed.join('\n') };
+  } finally {
+    console.log = orig;
+  }
+}
+
 test('due run concorrenti sullo stesso modello: nessuna delle due perde i propri esiti', async () => {
   const db = makeFakeFirestore();
   const fv = makeFieldValue();
@@ -264,9 +282,10 @@ test('flushScoresBeforeExit attende davvero la scrittura invece di lanciarla e u
   run.__installScoreStoreForTests(db, makeFieldValue());
 
   run.recordModelSuccess(HAIKU);
-  const ok = await run.flushScoresBeforeExit();
+  const { value: ok, out } = await captureConsoleLog(() => run.flushScoresBeforeExit());
 
   assert.equal(ok, true);
+  assert.match(out, /\[ScoreStore\] Final flush landed in \d+ms — 1 model\(s\) persisted/);
   assert.equal(db._model().successes, 1,
     'al ritorno la scrittura deve essere ATTERRATA: _persistScoresToFirestore svuota _dirtyModels prima di await, quindi un fire-and-forget seguito da process.exit perde il dato E lo marca pulito');
   assert.equal(run.getStats().dirtyModels, 0);
@@ -281,10 +300,11 @@ test('flushScoresBeforeExit non appende un\'uscita quando Firestore non risponde
 
   run.recordModelSuccess(HAIKU);
   const started = Date.now();
-  const ok = await run.flushScoresBeforeExit(30);
+  const { value: ok, out } = await captureConsoleLog(() => run.flushScoresBeforeExit(30));
   const elapsed = Date.now() - started;
 
   assert.equal(ok, false, 'deve dichiarare di aver rinunciato, non fingere di aver scritto');
+  assert.match(out, /::warning::\[ScoreStore\] Final flush timed out after 30ms/);
   assert.ok(elapsed < 250, `l'uscita non puo' restare appesa al ledger (attesa ${elapsed}ms)`);
 
   run.resetState();

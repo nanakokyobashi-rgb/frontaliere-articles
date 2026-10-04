@@ -57,6 +57,7 @@
  * questo file. Regola: una mutazione della logica di riapertura DEVE produrre
  * un rosso qui, un commento innocuo NO.
  */
+import './lib/stdout-off-runner-pipe.mjs'; // stdout e' la pipe dei frame di node:test (issue 1819)
 import { test, before, beforeEach, after } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';

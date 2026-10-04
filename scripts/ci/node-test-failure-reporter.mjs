@@ -5,6 +5,18 @@
  * Il reporter `spec` resta sullo stdout della run. Questo secondo reporter
  * raccoglie gli eventi `test:fail` e scrive un JSON stabile in un file del
  * runner, così il passo successivo può pubblicare sulla PR i test falliti.
+ *
+ * Raccoglie anche gli eventi `test:stdout` (`stdoutWriters`): byte che il
+ * processo figlio di un file di test ha scritto su stdout FUORI dal protocollo
+ * del runner. Con l'isolamento a processo il figlio serializza gli eventi
+ * (frame V8) proprio su stdout, e su Node 22 il parser del padre perde il
+ * primo byte di un header spezzato fra due letture della pipe quando davanti
+ * c'e' testo non serializzato: il frame successivo viene letto disallineato e
+ * il file intero fallisce con «Unable to deserialize cloned data due to
+ * invalid or unsupported version» anche se tutti i suoi test sono verdi
+ * (issue 1819 del corpus, run 37174186291 e 37194730172 su
+ * `score-ledger-persistence.test.mjs`). `check-node-test-stdout.mjs` rende
+ * deterministico quel prerequisito del flake.
  */
 
 import path from 'node:path';
@@ -12,6 +24,7 @@ import { inspect } from 'node:util';
 
 const MAX_FAILURES = 50;
 const MAX_MESSAGE_LENGTH = 3000;
+const MAX_STDOUT_SAMPLE_LENGTH = 300;
 
 function trimMessage(message) {
   const text = String(message || '').replace(/\x1B\[[0-?]*[ -/]*[@-~]/g, '').trim();
@@ -75,23 +88,52 @@ export function normalizeFailure(data = {}) {
   };
 }
 
-export function buildReport(failures = [], suiteFailures = []) {
+/**
+ * Accumula un evento `test:stdout` per file: quanti eventi, quanti byte e il
+ * primo frammento, abbastanza per sapere QUALE log sfugge senza copiare nel
+ * report l'intero output.
+ */
+export function recordStdoutWrite(writers, data = {}) {
+  const file = relativeTestFile(data.file);
+  const message = String(data.message ?? '');
+  const entry = writers.get(file) || { file, events: 0, bytes: 0, sample: '' };
+  entry.events += 1;
+  entry.bytes += Buffer.byteLength(message);
+  if (entry.sample.length < MAX_STDOUT_SAMPLE_LENGTH) {
+    // Concatenato grezzo e rifilato solo in `buildReport`: rifilare a ogni
+    // evento incollerebbe due righe consecutive togliendo l'a-capo fra loro.
+    entry.sample = `${entry.sample}${message}`.slice(0, MAX_STDOUT_SAMPLE_LENGTH);
+  }
+  writers.set(file, entry);
+  return writers;
+}
+
+export function buildReport(failures = [], suiteFailures = [], stdoutWriters = []) {
   return {
     failedTests: failures.length,
     failedSuites: suiteFailures.length,
     failures: failures.slice(0, MAX_FAILURES),
     suiteFailures: suiteFailures.slice(0, MAX_FAILURES),
+    stdoutWriters: [...stdoutWriters]
+      .map((w) => ({ ...w, sample: trimMessage(w.sample) }))
+      .sort((a, b) => a.file.localeCompare(b.file))
+      .slice(0, MAX_FAILURES),
   };
 }
 
 export default async function* nodeTestFailureReporter(source) {
   const failures = [];
   const suiteFailures = [];
+  const stdoutWriters = new Map();
   for await (const event of source) {
+    if (event?.type === 'test:stdout') {
+      recordStdoutWrite(stdoutWriters, event.data);
+      continue;
+    }
     if (event?.type !== 'test:fail') continue;
     const failure = normalizeFailure(event.data);
     if (event.data?.type === 'suite') suiteFailures.push(failure);
     else failures.push(failure);
   }
-  yield `${JSON.stringify(buildReport(failures, suiteFailures))}\n`;
+  yield `${JSON.stringify(buildReport(failures, suiteFailures, stdoutWriters.values()))}\n`;
 }

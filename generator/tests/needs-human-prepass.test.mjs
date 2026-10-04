@@ -512,14 +512,30 @@ test('#815: una manopola non numerica torna al default invece di mutare la guard
   // ogni confronto con `NaN` e' `false`: la finestra non scadeva MAI e la
   // guardia diventava codice morto senza una riga di log. E' la stessa forma
   // dell'item 1 — una guardia disattivata da un input degenere.
-  assert.equal(posNum(undefined, 30), 30);
-  assert.equal(posNum('', 30), 30);
-  assert.equal(posNum('30d', 30), 30);
-  assert.equal(posNum('  ', 30), 30);
-  assert.equal(posNum('0', 30), 30);
-  assert.equal(posNum('-5', 30), 30);
-  assert.equal(posNum('7', 30), 7);
-  assert.equal(posNum('0.5', 1), 0.5);
+  //
+  // Il ritorno al default si DICE con un `::warning::` su stdout: il test lo
+  // cattura invece di lasciarlo sulla pipe dei frame di `node --test` (issue
+  // 1819 del corpus, gate `scripts/ci/check-node-test-stdout.mjs`), e cosi'
+  // asserisce anche che la riga esista.
+  const warnings = [];
+  const realConsoleLog = console.log;
+  console.log = (...args) => warnings.push(args.join(' '));
+  try {
+    assert.equal(posNum(undefined, 30), 30);
+    assert.equal(posNum('', 30), 30);
+    assert.equal(posNum('30d', 30), 30);
+    assert.equal(posNum('  ', 30), 30);
+    assert.equal(posNum('0', 30), 30);
+    assert.equal(posNum('-5', 30), 30);
+    assert.equal(posNum('7', 30), 7);
+    assert.equal(posNum('0.5', 1), 0.5);
+  } finally {
+    console.log = realConsoleLog;
+  }
+  assert.ok(
+    warnings.some((w) => w.includes('::warning::needs-human-prepass: valore non numerico "30d"')),
+    'un valore illeggibile deve tornare al default DICENDOLO',
+  );
   // E i valori vivi restano numeri utilizzabili.
   assert.ok(Number.isFinite(VERDICT_MAX_AGE_DAYS) && VERDICT_MAX_AGE_DAYS > 0);
   assert.ok(Number.isFinite(EXPIRY_REQUEUE_MAX_CYCLES) && EXPIRY_REQUEUE_MAX_CYCLES > 0);

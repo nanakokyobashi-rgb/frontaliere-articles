@@ -435,6 +435,16 @@
       }
     },
     {
+      "path": "scripts/ci/check-node-test-stdout.mjs",
+      "mode": "corpus-only",
+      "reason": "Gate del corpus sugli eventi `test:stdout` di `node:test` (issue 1819): un file di test che scrive su stdout condivide la pipe coi frame V8 del runner, e su Node 22 basta per «Unable to deserialize cloned data» a subtest verdi. Legge il JSON di scripts/ci/node-test-failure-reporter.mjs, anch'esso corpus-only. Il sito usa Vitest, che non serializza gli eventi su stdout, quindi non ha un gemello.",
+      "baseline": {
+        "site": null,
+        "corpus": "b07ee3aa62a8b764",
+        "alignedAt": "2026-10-04"
+      }
+    },
+    {
       "path": "scripts/ci/report-node-test-failure.mjs",
       "mode": "corpus-only",
       "reason": "Publisher del commento sticky per i failure `node:test` del corpus, con fallback fail-soft quando il report manca. Il sito ha il consumer adattato `scripts/ci/report-vitest-failure.mjs` per Vitest, quindi questo script resta specifico del corpus.",
