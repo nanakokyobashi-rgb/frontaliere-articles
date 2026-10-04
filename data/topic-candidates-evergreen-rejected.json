@@ -509,7 +509,8 @@
     "affitti svizzera mercato immobiliare 2026 canton Berna",
     "affitti svizzera mercato immobiliare 2026 canton Basilea",
     "affitti svizzera mercato immobiliare 2026 canton San Gallo",
-    "dichiarazione imposte svizzera guida pratica 2026 canton Basilea"
+    "dichiarazione imposte svizzera guida pratica 2026 canton Basilea",
+    "imposta sugli autoveicoli canton Zurigo calcolo e pagamento"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -1011,6 +1012,10 @@
     "svizzera::https://www.tio.ch/dal-mondo/cronaca/1954587/migranti-spiaggia-polizia-ceuta-strutture": {
       "section": "svizzera",
       "ts": 1791115117783
+    },
+    "svizzera::https://www.tio.ch/dal-mondo/attualita/1954607/nobel-ottobre-medicina-premio-economia": {
+      "section": "svizzera",
+      "ts": 1791125994294
     }
   }
 }

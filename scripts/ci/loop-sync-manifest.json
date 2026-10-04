@@ -1673,7 +1673,7 @@
       "path": "generator/scripts/create-article.mjs",
       "sitePath": "scripts/create-article.mjs",
       "mode": "adapted",
-      "reason": "Fork del generatore principale del sito: percorsi (PROJECT_ROOT un livello sopra la', due qui), corpusPath() per il layout content/ vs services/locales/, sanitize-control-chars.mjs al write, whitelist news-sitemap vendorizzata invece che letta da un .ts, niente vitest-import (nessun node_modules). Era fuori dal manifest per omissione, non per scelta: la fix del sito sul cap della meta description (valerielinc-ops#5360, 2026-08-08) non e' mai scesa qui perche' nessuno dei due mirror copre generator/, e il difetto (description a 265 caratteri) e' tornato identico il giorno dopo (issue #81). `adapted` e non `identical` perche' il fork e' cosi' per costruzione; ma resta sorvegliato, che e' cio' che serviva a intercettare #5360 prima del ripresentarsi. 2026-08-14: `baseline.corpus` era un GHOST (3025de18994bdabc, un hash che loop-drift-check non ha trovato in nessuna revisione storica del path) ed e' stata ricalcolata dal contenuto reale. `baseline.site` NON e' stata toccata di proposito: di questo giro e' stata portata solo la meta' legata a clauseTail (i due call site passati a `truncateToClauseNonEmpty`), il resto del delta del sito non e' stato letto — la voce resta quindi `site-ahead`, che e' la verita', invece di dichiarare un allineamento che non c'e' stato.",
+      "reason": "Fork del generatore principale del sito: percorsi (PROJECT_ROOT un livello sopra la', due qui), corpusPath() per il layout content/ vs services/locales/, sanitize-control-chars.mjs al write, whitelist news-sitemap vendorizzata invece che letta da un .ts, niente vitest-import (nessun node_modules). Era fuori dal manifest per omissione, non per scelta: la fix del sito sul cap della meta description (valerielinc-ops#5360, 2026-08-08) non e' mai scesa qui perche' nessuno dei due mirror copre generator/, e il difetto (description a 265 caratteri) e' tornato identico il giorno dopo (issue #81). `adapted` e non `identical` perche' il fork e' cosi' per costruzione; ma resta sorvegliato, che e' cio' che serviva a intercettare #5360 prima del ripresentarsi. Dal P14 diverge di proposito anche sulle copertine Wikimedia Commons (Strategy 4, `findStockImageCandidates`, `modifySeoService`, `validateStructuredData`): licenza e autore letti con la ricerca, record in `content/image-credits/blog/`, dedup per file Commons invece che per URL, letterale SEO senza i cinque campi di diritti per una copertina accreditata. Non va portato al sito: il gemello di la' e' il generatore legacy disabilitato (`confirm_corpus_write=yes`), e i record vivono nel corpus. 2026-08-14: `baseline.corpus` era un GHOST (3025de18994bdabc, un hash che loop-drift-check non ha trovato in nessuna revisione storica del path) ed e' stata ricalcolata dal contenuto reale. `baseline.site` NON e' stata toccata di proposito: di questo giro e' stata portata solo la meta' legata a clauseTail (i due call site passati a `truncateToClauseNonEmpty`), il resto del delta del sito non e' stato letto — la voce resta quindi `site-ahead`, che e' la verita', invece di dichiarare un allineamento che non c'e' stato.",
       "baseline": {
         "site": "44b4dcb727b012ea",
         "corpus": "e48b58a762604895",
@@ -1748,7 +1748,7 @@
       "path": "generator/scripts/publish-journalist-article.mjs",
       "sitePath": "scripts/publish-journalist-article.mjs",
       "mode": "adapted",
-      "reason": "Percorso di pubblicazione degli articoli firmati. Il gemello con il diff piu' piccolo dei sette: Differenza comune a tutti i gemelli trasportati: `PROJECT_ROOT` risale di due livelli invece di uno, perche' il trasporto ha spostato lo script da `scripts/` a `generator/scripts/`. Nient'altro. Proprio per questo e' il piu' esposto al punto cieco che il manifest esiste per coprire: un file quasi uguale non ha nessun segnale visibile che lo distingua da uno allineato, e una modifica del sito qui si perde senza lasciare traccia.",
+      "reason": "Percorso di pubblicazione degli articoli firmati. Differenza comune a tutti i gemelli trasportati: `PROJECT_ROOT` risale di due livelli invece di uno, perche' il trasporto ha spostato lo script da `scripts/` a `generator/scripts/`. Fino al P14 era l'unica, e questo era il gemello con il diff piu' piccolo dei sette: proprio per questo e' il piu' esposto al punto cieco che il manifest esiste per coprire — un file quasi uguale non ha nessun segnale visibile che lo distingua da uno allineato, e una modifica del sito qui si perde senza lasciare traccia. Dal P14 (crediti delle copertine Wikimedia Commons) diverge di proposito anche in `resolveHeroImage`: un URL Commons passa da `lib/commons-credit.mjs` (licenza e autore letti da Commons, record in `content/image-credits/blog/`), e una scelta che non si puo' accreditare cede al fallback. Non va portato al sito: il gemello di la' non gira piu' da solo (schedule rimosso il 2026-08-14, la coda `journalist_articles` e' di questo repo) e i record vivono nel corpus.",
       "baseline": {
         "site": "e8d8cb515301783c",
         "corpus": "49aa1cb695aa6844",
@@ -2205,6 +2205,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/strip-leaked-title-marker.mjs",
+      "mode": "corpus-only",
+      "reason": "Toglie da un body `it` pubblicato la sola riga `TITOLO ARTICOLO: <titolo>` lasciata dal prompt di generazione (valerielinc-ops/frontaliere-si-o-no#7682: 39 pagine `it` il 2026-10-04; il proprietario ha approvato lo stesso giorno la cancellazione della sola riga, senza rigenerare il body). Lo usano solo `generator/scripts/retranslate-blocking-bodies.mjs` e `.github/workflows/bonifica-blocking-bodies.yml`, che il sito non ha: i body pubblicati e la loro bonifica vivono qui, il sito li consuma via HTTP, quindi non esiste un gemello da portare.",
+      "baseline": {
+        "site": null,
+        "corpus": "2ea9e64f56370c05",
+        "alignedAt": "2026-10-04"
+      }
+    },
+    {
       "path": "generator/scripts/lib/daily-brief-content.mjs",
       "mode": "corpus-only",
       "reason": "Composizione del Bollettino del Frontaliere, edizione datata quotidiana nata su questo repo. Nessun omonimo sul sito.",
@@ -2516,7 +2526,13 @@
         "corpus": "94f1e6f650292be4",
         "alignedAt": "2026-10-04"
       },
-      "reason": "Il corpus conserva adattamenti propri della cascata di traduzione (fingerprint delle capability per il memo eventi, neutralità dei tier opzionali non configurati, retry OAuth Google Cloud e conteggio dei suoi rifiuti silenziosi nel riepilogo della cascata, attribuzione rung/durata e rifiuto dei payload OPUS-MT troncati); la copia byte-identica del sito cancellerebbe questi comportamenti e rende rossi i test di passthrough del corpus. In questa PR si portano la normalizzazione tedesca `frau:mann`, il guard sui sentinel mangled e il confronto con la sorgente raw prima della normalizzazione, mantenendo gli adattamenti locali dichiarati. Dal 2026-09-24 il tier Google Cloud, che su token mancante, 403/429, !ok o timeout rende '' senza lanciare (quindi fuori da `tierErrors`), registra quanti rifiuti ha dato e l'ultimo motivo: il riepilogo diceva `0/16000 daily chars used` sia per «mai chiamato» sia per «ogni chiamata rifiutata». Dal 2026-09-25 i due lati portano lo stesso tier Codex Luna Max dopo DeepL e Azure (sezione `translateWithCodex` byte-identica nei due file, decisione del proprietario): RICONCILIATO il 2026-09-25 dopo il merge di valerielinc-ops/frontaliere-si-o-no#9813 e #1846: sezione `translateWithCodex` byte-identica nei due file (verificato su `origin/main` del sito). Anche la posizione `last` del tier (FREE_TRANSLATE_CODEX_TIER, usata da translate-pending nelle fasi 2d/2e dopo Argos) e la sua chiamata in coda alla cascata sono uguali nei due file. La lane Codex nella fingerprint del memo eventi (`getTranslationCascadeConfigurationKey`, version 3) e' un adattamento del corpus, come il resto della fingerprint; vale false quando la lane non puo' servire la run: fermata, budget di chiamate/tempo esaurito, o modello non disponibile secondo `isModelAvailable` di ai-models.mjs, la stessa guardia della lane (la fingerprint e' async per questo). La riconciliazione e' registrata con `--init --only --force` nel commit d17ba3ae (lato site `b95b6f9fa6c12fc5`). Le riattestazioni successive del solo lato corpus, per le fix della fingerprint (version 3), sono senza `--force` perche' il sito non si e' mosso. RIALLINEATO 2026-09-29 (both-moved, valerielinc-ops/frontaliere-si-o-no#7483): #1931 aveva aggiunto qui la scadenza del processo al tier Codex (`setCodexTranslateProcessDeadline`, `codexCallDeadlineMs`), rompendo la sezione byte-identica; valerielinc-ops/frontaliere-si-o-no#10288 l'ha copiata sul sito, dove e' inerte perche' nessuno installa una scadenza. La sezione `Codex Luna Max` e' di nuovo byte-identica nei due file (sha256[:16] `55d897ea7d00c0b5`, verificato su `origin/main` dei due lati). Baseline come `--init --only --force`, quindi con `forcedAt`. RIALLINEATO 2026-09-30 (both-moved, valerielinc-ops/frontaliere-si-o-no#10454, issue valerielinc-ops/frontaliere-si-o-no#10220): il sito eseguiva ancora il solo token OAuth GSC nel tier Google Cloud (403 ACCESS_TOKEN_SCOPE_INSUFFICIENT su ogni chiamata, misurato il 2026-09-30), perche' #1987 aveva corretto solo questo file e translate-pending esegue la copia del sito. valerielinc-ops/frontaliere-si-o-no#10454 porta sul sito il service account con scope `cloud-translation`, il conteggio dei rifiuti e, su richiesta della review, lo scarto del token del service account rifiutato da Translation con un solo tentativo di fallback OAuth (nessun fallback sul tetto giornaliero di quota, che OAuth condivide). Questa riconciliazione porta qui lo stesso scarto, il flag `refused` del service account e l'uscita anticipata senza credenziali OAuth, ed esporta `translateWithGoogleCloud` come sul sito. Restano adattamenti del corpus il retry dello scambio OAuth con `TOKEN_EXCHANGE_ATTEMPTS` e l'import statico del firmatario (il sito lo carica al primo uso perche' i suoi test valutano il modulo standalone con gli import relativi sostituiti). La sezione `Codex Luna Max` e' byte-identica nei due file (sha256[:16] `4c0c99891d0edc8b`, verificato su `origin/main` dei due lati). Baseline come `--init --only --force`, quindi con `forcedAt`. RIALLINEATO di nuovo il 2026-09-30 (both-moved, valerielinc-ops/frontaliere-si-o-no#10480 e questa PR): la provenienza del token Google viaggia con il token (`_getGoogleCloudAccessToken()` restituisce `{ token, fromServiceAccount }` nei due file), perche' due scambi del service account al primo uso nello stesso tick emettono token diversi e la cache ne conserva uno solo; la sezione `Codex Luna Max` resta byte-identica (`4c0c99891d0edc8b`). RIATTESTATO 2026-10-04 solo lato corpus (sito fermo su `703afd82872b7491`, nessun `--force`): `_prepareEngineSource`/`_finalizeEngineOutput` estraggono da `freeTranslate` l'ingresso e l'uscita unica gia' esistenti, e `translateWithCodexEngine` espone il tier Codex da solo con un trasporto iniettato per la bonifica locale `retranslate-blocking-bodies.mjs --engine codex` (decisione del proprietario, nanakokyobashi-rgb/frontaliere-articles#1084 item 2). La bonifica esiste solo nel corpus, quindi il sito non ha niente da risalire; la sezione `Codex Luna Max` non e' toccata e resta byte-identica nei due file."
+      "reason": "Il corpus conserva adattamenti propri della cascata di traduzione (fingerprint delle capability per il memo eventi, neutralità dei tier opzionali non configurati, retry OAuth Google Cloud e conteggio dei suoi rifiuti silenziosi nel riepilogo della cascata, attribuzione rung/durata e rifiuto dei payload OPUS-MT troncati); la copia byte-identica del sito cancellerebbe questi comportamenti e rende rossi i test di passthrough del corpus. In questa PR si portano la normalizzazione tedesca `frau:mann`, il guard sui sentinel mangled e il confronto con la sorgente raw prima della normalizzazione, mantenendo gli adattamenti locali dichiarati. Dal 2026-09-24 il tier Google Cloud, che su token mancante, 403/429, !ok o timeout rende '' senza lanciare (quindi fuori da `tierErrors`), registra quanti rifiuti ha dato e l'ultimo motivo: il riepilogo diceva `0/16000 daily chars used` sia per «mai chiamato» sia per «ogni chiamata rifiutata». Dal 2026-09-25 i due lati portano lo stesso tier Codex Luna Max dopo DeepL e Azure (sezione `translateWithCodex` byte-identica nei due file, decisione del proprietario): RICONCILIATO il 2026-09-25 dopo il merge di valerielinc-ops/frontaliere-si-o-no#9813 e #1846: sezione `translateWithCodex` byte-identica nei due file (verificato su `origin/main` del sito). Anche la posizione `last` del tier (FREE_TRANSLATE_CODEX_TIER, usata da translate-pending nelle fasi 2d/2e dopo Argos) e la sua chiamata in coda alla cascata sono uguali nei due file. La lane Codex nella fingerprint del memo eventi (`getTranslationCascadeConfigurationKey`, version 3) e' un adattamento del corpus, come il resto della fingerprint; vale false quando la lane non puo' servire la run: fermata, budget di chiamate/tempo esaurito, o modello non disponibile secondo `isModelAvailable` di ai-models.mjs, la stessa guardia della lane (la fingerprint e' async per questo). La riconciliazione e' registrata con `--init --only --force` nel commit d17ba3ae (lato site `b95b6f9fa6c12fc5`). Le riattestazioni successive del solo lato corpus, per le fix della fingerprint (version 3), sono senza `--force` perche' il sito non si e' mosso. RIALLINEATO 2026-09-29 (both-moved, valerielinc-ops/frontaliere-si-o-no#7483): #1931 aveva aggiunto qui la scadenza del processo al tier Codex (`setCodexTranslateProcessDeadline`, `codexCallDeadlineMs`), rompendo la sezione byte-identica; valerielinc-ops/frontaliere-si-o-no#10288 l'ha copiata sul sito, dove e' inerte perche' nessuno installa una scadenza. La sezione `Codex Luna Max` e' di nuovo byte-identica nei due file (sha256[:16] `55d897ea7d00c0b5`, verificato su `origin/main` dei due lati). Baseline come `--init --only --force`, quindi con `forcedAt`. RIALLINEATO 2026-09-30 (both-moved, valerielinc-ops/frontaliere-si-o-no#10454, issue valerielinc-ops/frontaliere-si-o-no#10220): il sito eseguiva ancora il solo token OAuth GSC nel tier Google Cloud (403 ACCESS_TOKEN_SCOPE_INSUFFICIENT su ogni chiamata, misurato il 2026-09-30), perche' #1987 aveva corretto solo questo file e translate-pending esegue la copia del sito. valerielinc-ops/frontaliere-si-o-no#10454 porta sul sito il service account con scope `cloud-translation`, il conteggio dei rifiuti e, su richiesta della review, lo scarto del token del service account rifiutato da Translation con un solo tentativo di fallback OAuth (nessun fallback sul tetto giornaliero di quota, che OAuth condivide). Questa riconciliazione porta qui lo stesso scarto, il flag `refused` del service account e l'uscita anticipata senza credenziali OAuth, ed esporta `translateWithGoogleCloud` come sul sito. Restano adattamenti del corpus il retry dello scambio OAuth con `TOKEN_EXCHANGE_ATTEMPTS` e l'import statico del firmatario (il sito lo carica al primo uso perche' i suoi test valutano il modulo standalone con gli import relativi sostituiti). La sezione `Codex Luna Max` e' byte-identica nei due file (sha256[:16] `4c0c99891d0edc8b`, verificato su `origin/main` dei due lati). Baseline come `--init --only --force`, quindi con `forcedAt`. RIALLINEATO di nuovo il 2026-09-30 (both-moved, valerielinc-ops/frontaliere-si-o-no#10480 e questa PR): la provenienza del token Google viaggia con il token (`_getGoogleCloudAccessToken()` restituisce `{ token, fromServiceAccount }` nei due file), perche' due scambi del service account al primo uso nello stesso tick emettono token diversi e la cache ne conserva uno solo; la sezione `Codex Luna Max` resta byte-identica (`4c0c99891d0edc8b`). RIATTESTATO 2026-10-04 solo lato corpus (sito fermo su `703afd82872b7491`, nessun `--force`): `_prepareEngineSource`/`_finalizeEngineOutput` estraggono da `freeTranslate` l'ingresso e l'uscita unica gia' esistenti, e `translateWithCodexEngine` espone il tier Codex da solo con un trasporto iniettato per la bonifica locale `retranslate-blocking-bodies.mjs --engine codex` (decisione del proprietario, nanakokyobashi-rgb/frontaliere-articles#1084 item 2). La bonifica esiste solo nel corpus, quindi il sito non ha niente da risalire; la sezione `Codex Luna Max` non e' toccata e resta byte-identica nei due file. La fix della issue #2113 (#2118, date localizzate) e #2119 (eco del prompt scartata nella cascata) hanno modificato la sezione solo lato corpus (sha256[:16] della sezione: corpus `897e8b9a374a388d`, sito `99bb3ba9ac6f98ea`); la parte sito e' valerielinc-ops/frontaliere-si-o-no#11503, che porta la sezione a `897e8b9a374a388d` e, fuori sezione, `codexPromptEchoMarker` da cui la sezione dipende. Dal 2026-10-04 la regola «sezione byte-identica» non e' piu' solo prosa: `identicalSections` qui sotto dichiara i due marcatori e `loop-drift-check.mjs` confronta i byte della sezione sui due lati a ogni passata (verdetto `section-drift`, indipendente dalla baseline). Finche' valerielinc-ops/frontaliere-si-o-no#11503 non e' mergiata la voce e' `section-drift` e la baseline non va riattestata; dopo il merge la riallinea `realign-adapted-baseline.mjs` dalla dichiarazione nel body di questa PR.",
+      "identicalSections": [
+        {
+          "start": "// ── Codex Luna Max (decisione del proprietario, 2026-09-25)",
+          "end": "// ── Google Cloud Translation"
+        }
+      ]
     },
     {
       "path": "generator/scripts/lib/google-service-account-token.mjs",
@@ -3802,8 +3818,8 @@
       "sitePath": ".github/corpus-workflows/translate-pending.yml",
       "mode": "identical",
       "baseline": {
-        "site": "06405b3713cb2ce3",
-        "corpus": "06405b3713cb2ce3",
+        "site": "fc268d811d8e6b48",
+        "corpus": "fc268d811d8e6b48",
         "alignedAt": "2026-10-04"
       }
     },
@@ -3813,8 +3829,8 @@
       "mode": "identical",
       "reason": "Riallineato il 2026-10-01 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono ora byte-identici fra sito e corpus, con il roster corrente di 624 crawler.",
       "baseline": {
-        "site": "82be8a45e96843e7",
-        "corpus": "82be8a45e96843e7",
+        "site": "d0e8bf9117f450ac",
+        "corpus": "d0e8bf9117f450ac",
         "alignedAt": "2026-10-04"
       }
     },
@@ -3920,7 +3936,7 @@
       "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, misura l'eta' del detentore dal job attivo (`jobs.started_at`) invece che dalla coda del workflow e quella di un rerun pending dall'attempt corrente (`run_started_at`, fail-closed se illeggibile o anteriore a `created_at`) invece che dalla prima creazione, rifiuta fail-closed (`future_timestamp`) ogni istante di misura oltre la tolleranza di skew `MAX_CLOCK_SKEW_SECONDS` invece di azzerarne l'eta', dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
       "baseline": {
         "site": null,
-        "corpus": "a5fb3993c1d6023d",
+        "corpus": "e146832521a99cd2",
         "alignedAt": "2026-10-01"
       }
     },
@@ -4679,6 +4695,26 @@
         "site": null,
         "corpus": "bc5a72d18b99a03e",
         "alignedAt": "2026-10-02"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/commons-credit.mjs",
+      "mode": "corpus-only",
+      "reason": "P14: autore e licenza della copertina Wikimedia Commons, letti con la richiesta di ricerca che il generatore fa gia' (`extmetadata`, nessuna chiamata in piu'), con la regola di accettazione misurata dal probe del 2026-10-04 (492 accettati, 38 da rivedere, 2 da sostituire su 532 file) e il record `content/image-credits/blog/<id>.json` validato con `engine/shared/imageCredits.mjs` prima di scriverlo. Dedup per file Commons, non per URL. Sul sito non esiste e non deve: il generatore del sito e' quello legacy disabilitato e i record vivono nel corpus. Senza dipendenze di proposito (niente jsdom): i gate del generatore girano senza `npm ci`, e un sanitizzatore non caricabile li' non sarebbe testato dove e' gated.",
+      "baseline": {
+        "site": null,
+        "corpus": "20db761f970a4ca1",
+        "alignedAt": "2026-10-04"
+      }
+    },
+    {
+      "path": "scripts/lib/image-credit-records.mjs",
+      "mode": "corpus-only",
+      "reason": "P14: i controlli lato corpus sui record di credito delle copertine Commons (nome del file = copertina, pubblicato solo `ok`, accordo fra le copertine di uno stesso file Commons, letterali SEO di una copertina accreditata senza i cinque campi di diritti) e il file `data/image-credits-<sezione>.json` che `scripts/build-blog-index.mjs` pubblica per la SPA. Il sito legge quel JSON via HTTP e non ha questo modulo: corpus-only per costruzione, come il resto della pubblicazione.",
+      "baseline": {
+        "site": null,
+        "corpus": "f5144784aed4adf4",
+        "alignedAt": "2026-10-04"
       }
     }
   ]

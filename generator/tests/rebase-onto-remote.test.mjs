@@ -34,6 +34,7 @@ import { backstop, findDuplicates, mergeSource } from '../../scripts/lib/merge-c
 // sui registri dichiarati una guardia e non un elenco che invecchia da solo.
 import { corpusPath } from '../scripts/lib/corpus-paths.mjs';
 import { ARTICLE_SECTION_CORE } from '../../engine/shared/articleSectionCore.mjs';
+import { IMAGE_CREDIT_RECORDS_DIR } from '../../scripts/lib/image-credit-records.mjs';
 import { sliceBetween } from './lib/anchored-slice.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -919,6 +920,7 @@ test('la collisione sullo STESSO slug (#281) sopravvive: registri fusi, file per
             `export const body = 'testo ${loc} scritto dal run ${side}';\n`]),
           [`data/swiss-articles/${slug}.json`, `{"id":"${slug}","run":"${side}"}\n`],
           [`public/images/blog/${slug}.webp`, `RIFF-fake-${side}\n`],
+          [`content/image-credits/blog/${slug}.json`, `{"cover":"/images/blog/${slug}.webp","run":"${side}"}\n`],
         ]
         : []),
     ];
@@ -952,6 +954,9 @@ test('la collisione sullo STESSO slug (#281) sopravvive: registri fusi, file per
         `il corpo ${loc} deve venire dal commit rigiocato, come il record del registro`);
     }
     assert.match(git(w.work, 'show', `HEAD:data/swiss-articles/${slug}.json`), /"run":"mine"/);
+    // P14: il credito descrive QUEL file webp, quindi viene dallo stesso lato.
+    assert.match(git(w.work, 'show', `HEAD:content/image-credits/blog/${slug}.json`), /"run":"mine"/,
+      'il credito della copertina deve venire dal commit rigiocato, come la sua immagine');
   } finally {
     w.cleanup();
   }
@@ -974,6 +979,10 @@ test('i prefissi --take-theirs coprono i target per-articolo di ENTRAMBE le sezi
   assert.equal(sidecars.length, Object.keys(ARTICLE_SECTION_CORE).length,
     `atteso un sidecarDir per sezione in create-article.mjs, trovati: ${JSON.stringify(sidecars)}`);
   for (const s of sidecars) expected.add(s);
+  // P14: il credito di una copertina Commons e' un file per articolo
+  // (`<slug>.json`) che il generatore scrive accanto all'hero; la cartella e'
+  // la costante di chi lo scrive, non un letterale ricopiato.
+  expected.add(`${IMAGE_CREDIT_RECORDS_DIR}/`);
 
   for (const prefix of expected) {
     assert.ok(

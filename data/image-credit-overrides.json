@@ -1,0 +1,2810 @@
+{
+  "schema": 1,
+  "files": {
+    "A starboard bow view of the vehicle cargo ship USNS ADMIRAL WILLIAM M. CALLAGHAN (T-AKR-1001) in a Mediterranean port. The ship is in the region for exercise BRIGHT STAR '85 - DPLA - e2266333cba881d2b2901dbf9b7e093f.jpeg": {
+      "author": {
+        "name": "Department of Defense, Defense Visual Information Center",
+        "url": null,
+        "type": "Organization"
+      },
+      "curation": {
+        "by": "P14 C2, from the Commons file page",
+        "at": "2026-10-04",
+        "note": "Courtesy credit (public domain). File page: '{{ InFi | Creator | Department of Defense. American Forces Information Service. Defense Visual Information Center. 1994 }}', 'permission = {{PD-USGov-Military}}'; the description names the camera operator ('Scene Camera Operator: David Nolan')."
+      }
+    },
+    "Altanshagal Munkhnasan, actor, at the Locarno Film Festival in Locarno, Switzerland in August 2025 1.jpg": {
+      "decision": "accept-restriction",
+      "curation": {
+        "by": "owner decision (P14)",
+        "at": "2026-10-04",
+        "note": "Restriction on the file page: personality. Credited normally for now; awaits replacement in C3 (owner question Q1, default: replace)."
+      }
+    },
+    "Altanshagal Munkhnasan, actor, at the Locarno Film Festival in Locarno, Switzerland in August 2025 3.jpg": {
+      "decision": "accept-restriction",
+      "curation": {
+        "by": "owner decision (P14)",
+        "at": "2026-10-04",
+        "note": "Restriction on the file page: personality. Credited normally for now; awaits replacement in C3 (owner question Q1, default: replace)."
+      }
+    },
+    "Azzaya Munkhbat, actor, at the Locarno Film Festival in Locarno, Switzerland in August 2025 2.jpg": {
+      "decision": "accept-restriction",
+      "curation": {
+        "by": "owner decision (P14)",
+        "at": "2026-10-04",
+        "note": "Restriction on the file page: personality. Credited normally for now; awaits replacement in C3 (owner question Q1, default: replace)."
+      }
+    },
+    "Ben Rivers, director, at the Locarno Film Festival in Locarno, Switzerland in August 2025 03.jpg": {
+      "decision": "accept-restriction",
+      "curation": {
+        "by": "owner decision (P14)",
+        "at": "2026-10-04",
+        "note": "Restriction on the file page: personality. Credited normally for now; awaits replacement in C3 (owner question Q1, default: replace)."
+      }
+    },
+    "CH.VS.Zermatt Sunnegga Grindjisee Matterhorn 9034 16x9-R 16K.jpg": {
+      "author": {
+        "text": "Roy Egloff",
+        "name": "Roy Egloff",
+        "url": "https://commons.wikimedia.org/wiki/User:Roy_Egloff",
+        "type": "Person"
+      },
+      "curation": {
+        "by": "P14 C2, from the Commons file page",
+        "at": "2026-10-04",
+        "note": "File page: 'author=[[User:Roy Egloff|Roy Egloff]] {{Panorama}}', 'source={{own}}', '{{self|cc-by-sa-4.0}}'. The {{Panorama}} note inside the author field is what Commons returned as Artist."
+      }
+    },
+    "Copy of a Dale-Schuster pump, Europe, undated Wellcome L0060514.jpg": {
+      "author": {
+        "name": "Wellcome Collection",
+        "url": null,
+        "type": "Organization"
+      },
+      "curation": {
+        "by": "P14 C2, from the Commons file page",
+        "at": "2026-10-04",
+        "note": "File page: 'maker: Unknown maker', 'credit line = {{Wellcome Images}}', 'source = … Wellcome Collection gallery (2018-03-28): https://wellcomecollection.org/works/dkyepeaq [… CC-BY-4.0]'."
+      }
+    },
+    "Doctor Dorkar logo.png": {
+      "decision": "replace",
+      "curation": {
+        "by": "owner decision (P14)",
+        "at": "2026-10-04",
+        "note": "Deleted on Commons: the API answers the page as missing, so no author or licence can be shown. Replaced by a cover that is not from Commons, one per article (covers[].replacement)."
+      }
+    },
+    "Doctor Patient (NIH BioArt 130).png": {
+      "author": {
+        "name": "Ryan Kissinger, NIAID",
+        "url": null,
+        "type": "Person"
+      },
+      "curation": {
+        "by": "P14 C2, from the Commons file page",
+        "at": "2026-10-04",
+        "note": "Courtesy credit (public domain). File page: 'author = Courtesy of NIAID / Ryan Kissinger', 'source = [https://bioart.niaid.nih.gov/bioart/130 Doctor Patient]', '{{PD-USGov-NIH-NIAID}}'."
+      }
+    },
+    "EHIC Slovenia.jpg": {
+      "decision": "replace",
+      "curation": {
+        "by": "owner decision (P14)",
+        "at": "2026-10-04",
+        "note": "GFDL 1.2 only ('LicenseShortName: GFDL 1.2'): the licence wants its full text with every copy. Replaced by a cover that is not from Commons, one per article."
+      }
+    },
+    "Eduardo Casanova, director, at the Locarno Film Festival in Locarno, Switzerland in August 2025 01.jpg": {
+      "decision": "accept-restriction",
+      "curation": {
+        "by": "owner decision (P14)",
+        "at": "2026-10-04",
+        "note": "Restriction on the file page: personality. Credited normally for now; awaits replacement in C3 (owner question Q1, default: replace)."
+      }
+    },
+    "Eduardo Casanova, director, at the Locarno Film Festival in Locarno, Switzerland in August 2025 02.jpg": {
+      "decision": "accept-restriction",
+      "curation": {
+        "by": "owner decision (P14)",
+        "at": "2026-10-04",
+        "note": "Restriction on the file page: personality. Credited normally for now; awaits replacement in C3 (owner question Q1, default: replace)."
+      }
+    },
+    "Emosson Construction.jpg": {
+      "author": {
+        "name": "ETH-Bibliothek, E-Pics Bildarchiv",
+        "url": "https://commons.wikimedia.org/wiki/User:ETH-Bibliothek",
+        "type": "Organization"
+      },
+      "curation": {
+        "by": "P14 C2, from the Commons file page",
+        "at": "2026-10-04",
+        "note": "Photographer unknown: 'photographer = {{unknown|author}}, possibly … Heinz Baumann, Comet Photo AG (Zürich)'. The page names the source: 'institution = {{Institution:ETH-Bibliothek}}', 'source = E-Pics Bildarchiv online', and the credit 'This image is from the collection of the ETH-Bibliothek and has been published on Wikimedia Commons as part of a cooperation with Wikimedia CH.'"
+      }
+    },
+    "Flag of the Pension Fund of Ukraine.png": {
+      "decision": "accept-restriction",
+      "curation": {
+        "by": "owner decision (P14)",
+        "at": "2026-10-04",
+        "note": "Restriction on the file page: insignia. Credited normally for now; awaits replacement in C3 (owner question Q1, default: replace)."
+      }
+    },
+    "Food shop, Istanbul, July 2018 - 3.jpg": {
+      "author": {
+        "name": "Yann Forget",
+        "url": "https://commons.wikimedia.org/wiki/User:Yann",
+        "type": "Person"
+      },
+      "attribution": "© Yann Forget / Wikimedia Commons",
+      "curation": {
+        "by": "P14 C2, from the Commons file page",
+        "at": "2026-10-04",
+        "note": "File page: 'author=[[User:Yann|Yann Forget]]', '{{self|cc-by-sa-3.0}}'; '{{User:Yann/License}}' asks to use '© Yann Forget / Wikimedia Commons' next to the image. Only that credit line is kept, not the request around it."
+      }
+    },
+    "Gabriel next to an open train door, Basel SBB train station, Basel, Switzerland julesvernex2.jpg": {
+      "decision": "accept-restriction",
+      "curation": {
+        "by": "owner decision (P14)",
+        "at": "2026-10-04",
+        "note": "Restriction on the file page: personality. Credited normally for now; awaits replacement in C3 (owner question Q1, default: replace)."
+      }
+    },
+    "Gottlieb Duttweiler - Familie, 'Dutti' rechts - Strohhaus-Ausstellung 'Park im Grüene' 2015-06-17 18-25-09.JPG": {
+      "author": {
+        "name": "Roland Fischer",
+        "url": "https://commons.wikimedia.org/wiki/User:Roland_zh",
+        "type": "Person"
+      },
+      "attribution": "© Roland Fischer, Zürich (Switzerland)",
+      "licence": {
+        "name": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "family": "cc-by-sa",
+        "attributionRequired": true
+      },
+      "curation": {
+        "by": "P14 C2, from the Commons file page",
+        "at": "2026-10-04",
+        "note": "File page: '{{self|cc-by-sa-3.0}}' for this photograph and '{{PD-old}}' for the historical print it shows; 'Author= {{unknown}}, upload by [[User:Roland zh|Roland zh]]'; '{{Credit line | License = CC-BY-SA-3.0 Unported | Author = © Roland Fischer, Zürich (Switzerland) – Mail notification to: …}}'. Credited as the photographer's CC BY-SA 3.0, with his credit line minus the mail instruction."
+      }
+    },
+    "ISS051-E-12869 (Bellinzona) lrg.jpg": {
+      "author": {
+        "name": "ISS Crew Earth Observations Facility, Johnson Space Center",
+        "url": null,
+        "type": "Organization"
+      },
+      "curation": {
+        "by": "P14 C2, from the Commons file page",
+        "at": "2026-10-04",
+        "note": "Courtesy credit (public domain). File page: '{{PD-USGov-NASA}}'; author field: '…is provided by the ISS Crew Earth Observations Facility and the Earth Science and Remote Sensing Unit, Johnson Space Center. The image was taken by a member of the Expedition 51 crew.'"
+      }
+    },
+    "ISS051-E-12869 (Bellinzona).jpg": {
+      "author": {
+        "name": "ISS Crew Earth Observations Facility, Johnson Space Center",
+        "url": null,
+        "type": "Organization"
+      },
+      "curation": {
+        "by": "P14 C2, from the Commons file page",
+        "at": "2026-10-04",
+        "note": "Courtesy credit (public domain). File page: '{{PD-USGov-NASA}}'; author field: '…is provided by the ISS Crew Earth Observations Facility and the Earth Science and Remote Sensing Unit, Johnson Space Center. The image was taken by a member of the Expedition 51 crew.'"
+      }
+    },
+    "Katia Khazak, director, at the Locarno Film Festival in Locarno, Switzerland in August 2025.jpg": {
+      "decision": "accept-restriction",
+      "curation": {
+        "by": "owner decision (P14)",
+        "at": "2026-10-04",
+        "note": "Restriction on the file page: personality. Credited normally for now; awaits replacement in C3 (owner question Q1, default: replace)."
+      }
+    },
+    "Lugano, Switzerland - panoramio (83).jpg": {
+      "decision": "replace",
+      "curation": {
+        "by": "owner decision (P14)",
+        "at": "2026-10-04",
+        "note": "File page: the author field is an e-mail address linked to a Panoramio profile, and the licence is '{{cc-by-3.0|<the same address>}}'. No responsible party can be named without publishing the address. Replaced."
+      }
+    },
+    "Mariola Fuentes, actor, at the Locarno Film Festival in Locarno, Switzerland in August 2025 01.jpg": {
+      "decision": "accept-restriction",
+      "curation": {
+        "by": "owner decision (P14)",
+        "at": "2026-10-04",
+        "note": "Restriction on the file page: personality. Credited normally for now; awaits replacement in C3 (owner question Q1, default: replace)."
+      }
+    },
+    "María Léon, actor, at the Locarno Film Festival in Locarno, Switzerland in August 2025 06.jpg": {
+      "decision": "accept-restriction",
+      "curation": {
+        "by": "owner decision (P14)",
+        "at": "2026-10-04",
+        "note": "Restriction on the file page: personality. Credited normally for now; awaits replacement in C3 (owner question Q1, default: replace)."
+      }
+    },
+    "Mastcam-Z Views the 'Cheyava Falls' Workspace (PIA26401).jpg": {
+      "decision": "replace",
+      "curation": {
+        "by": "P14 C2, from the Commons file page",
+        "at": "2026-10-04",
+        "note": "File page licence: '{{JPL Image Copyright}}' (credit 'NASA/JPL-Caltech/ASU/MSSS'), no PD-USGov tag. P14 rule for NASA/JPL PIA files: replaced."
+      }
+    },
+    "Oberfallenberg Rheintal Panorama 3.jpg": {
+      "author": {
+        "text": "Böhringer",
+        "name": "Böhringer",
+        "url": "https://commons.wikimedia.org/wiki/User:B%C3%B6hringer",
+        "type": "Person"
+      },
+      "curation": {
+        "by": "P14 C2, from the Commons file page",
+        "at": "2026-10-04",
+        "note": "File page: 'Author= {{User:Böhringer/Template:Credits}}', 'Source= {{Own}}', 'Permission={{self|GFDL|cc-by-sa-3.0-at}}' (credited under the CC BY-SA 3.0 AT option). The credits template is a request to mention the author and an e-mail address; credited by the account it names, without either."
+      }
+    },
+    "PIA11044-PhoenixLander-WorkspaceNames-20080819.jpg": {
+      "decision": "replace",
+      "curation": {
+        "by": "P14 C2, from the Commons file page",
+        "at": "2026-10-04",
+        "note": "File page licence: '{{JPL_Image_Copyright}}' (author 'NASA/JPL-Caltech/University of Arizona/Texas A&M University'), no PD-USGov tag. P14 rule for NASA/JPL PIA files: replaced."
+      }
+    },
+    "Park Syeyoung, director, at the Locarno Film Festival in Locarno, Switzerland in August 2025 01.jpg": {
+      "decision": "accept-restriction",
+      "curation": {
+        "by": "owner decision (P14)",
+        "at": "2026-10-04",
+        "note": "Restriction on the file page: personality. Credited normally for now; awaits replacement in C3 (owner question Q1, default: replace)."
+      }
+    },
+    "Park Syeyoung, director, at the Locarno Film Festival in Locarno, Switzerland in August 2025 02.jpg": {
+      "decision": "accept-restriction",
+      "curation": {
+        "by": "owner decision (P14)",
+        "at": "2026-10-04",
+        "note": "Restriction on the file page: personality. Credited normally for now; awaits replacement in C3 (owner question Q1, default: replace)."
+      }
+    },
+    "Patrol Police.jpg": {
+      "decision": "accept-restriction",
+      "curation": {
+        "by": "owner decision (P14)",
+        "at": "2026-10-04",
+        "note": "Restriction on the file page: personality. Credited normally for now; awaits replacement in C3 (owner question Q1, default: replace)."
+      }
+    },
+    "People on a platform waiting for a train, Basel SBB train station, Basel, Switzerland julesvernex2.jpg": {
+      "decision": "accept-restriction",
+      "curation": {
+        "by": "owner decision (P14)",
+        "at": "2026-10-04",
+        "note": "Restriction on the file page: personality. Credited normally for now; awaits replacement in C3 (owner question Q1, default: replace)."
+      }
+    },
+    "Philippe Bober, producer, at the Locarno Film Festival in Locarno, Switzerland in August 2025.jpg": {
+      "decision": "accept-restriction",
+      "curation": {
+        "by": "owner decision (P14)",
+        "at": "2026-10-04",
+        "note": "Restriction on the file page: personality. Credited normally for now; awaits replacement in C3 (owner question Q1, default: replace)."
+      }
+    },
+    "Piazza Grande at the 2026 Locarno Film Festival.jpg": {
+      "decision": "accept-restriction",
+      "curation": {
+        "by": "owner decision (P14)",
+        "at": "2026-10-04",
+        "note": "Restriction on the file page: personality. Credited normally for now; awaits replacement in C3 (owner question Q1, default: replace)."
+      }
+    },
+    "Piazza Grande at the 78th Locarno Film Festival.jpg": {
+      "decision": "accept-restriction",
+      "curation": {
+        "by": "owner decision (P14)",
+        "at": "2026-10-04",
+        "note": "Restriction on the file page: personality. Credited normally for now; awaits replacement in C3 (owner question Q1, default: replace)."
+      }
+    },
+    "Piazza Grande, Locarno 78.jpg": {
+      "decision": "accept-restriction",
+      "curation": {
+        "by": "owner decision (P14)",
+        "at": "2026-10-04",
+        "note": "Restriction on the file page: personality. Credited normally for now; awaits replacement in C3 (owner question Q1, default: replace)."
+      }
+    },
+    "Pureum Kim, actor, at the Locarno Film Festival in Locarno, Switzerland in August 2025 01.jpg": {
+      "decision": "accept-restriction",
+      "curation": {
+        "by": "owner decision (P14)",
+        "at": "2026-10-04",
+        "note": "Restriction on the file page: personality. Credited normally for now; awaits replacement in C3 (owner question Q1, default: replace)."
+      }
+    },
+    "Spectators at Piazza Grande, Locarno Film Festival.jpg": {
+      "decision": "accept-restriction",
+      "curation": {
+        "by": "owner decision (P14)",
+        "at": "2026-10-04",
+        "note": "Restriction on the file page: personality. Credited normally for now; awaits replacement in C3 (owner question Q1, default: replace)."
+      }
+    },
+    "Storm clouds brewing in the mountains. (14909116490).jpg": {
+      "author": {
+        "name": "davebloggs007",
+        "url": "https://www.flickr.com/people/92599451@N08",
+        "type": "Person"
+      },
+      "curation": {
+        "by": "P14 C2, from the Commons file page",
+        "at": "2026-10-04",
+        "note": "File page: 'Author = [https://www.flickr.com/people/… Thank you for visiting my page] from Canada' links the Flickr account; the account is named in 'Source = [https://www.flickr.com/photos/davebloggs007/…]' and '{{FlickreviewR|status=passed|author=davebloggs007|…}}'. The display name is not a name: credited by that username."
+      }
+    },
+    "Storm clouds brewing in the mountains. (14909201167).jpg": {
+      "author": {
+        "name": "davebloggs007",
+        "url": "https://www.flickr.com/people/92599451@N08",
+        "type": "Person"
+      },
+      "curation": {
+        "by": "P14 C2, from the Commons file page",
+        "at": "2026-10-04",
+        "note": "File page: 'Author = [https://www.flickr.com/people/… Thank you for visiting my page] from Canada' links the Flickr account; the account is named in 'Source = [https://www.flickr.com/photos/davebloggs007/…]' and '{{FlickreviewR|status=passed|author=davebloggs007|…}}'. The display name is not a name: credited by that username."
+      }
+    },
+    "Storm clouds brewing in the mountains. (15092739701).jpg": {
+      "author": {
+        "name": "davebloggs007",
+        "url": "https://www.flickr.com/people/92599451@N08",
+        "type": "Person"
+      },
+      "curation": {
+        "by": "P14 C2, from the Commons file page",
+        "at": "2026-10-04",
+        "note": "File page: 'Author = [https://www.flickr.com/people/… Thank you for visiting my page] from Canada' links the Flickr account; the account is named in 'Source = [https://www.flickr.com/photos/davebloggs007/…]' and '{{FlickreviewR|status=passed|author=davebloggs007|…}}'. The display name is not a name: credited by that username."
+      }
+    },
+    "The Chairman, PFRDA, Dr. D. Swarup addressing at the inaugural session of the workshop on the ‘New Pension Scheme’ jointly organized by Pension Fund Regulatory & Development Authority (PFRDA) and National Securities.jpg": {
+      "decision": "accept-restriction",
+      "curation": {
+        "by": "owner decision (P14)",
+        "at": "2026-10-04",
+        "note": "GODL-India photo of identifiable officials, on an unrelated story. Credited normally for now; awaits replacement in C3 (owner question Q1, default: replace)."
+      }
+    },
+    "The Minister of State for Communications and Information Technology, Shri Sachin Pilot addressing at the inauguration of the new W3C India Office Workspace, at Electronics Niketan, in New Delhi on September 15, 2011.jpg": {
+      "decision": "accept-restriction",
+      "curation": {
+        "by": "owner decision (P14)",
+        "at": "2026-10-04",
+        "note": "GODL-India photo of identifiable officials, on an unrelated story. Credited normally for now; awaits replacement in C3 (owner question Q1, default: replace)."
+      }
+    },
+    "The Minister of State for Communications and Information Technology, Shri Sachin Pilot briefing the press after inaugurating the new W3C India Office Workspace, at Electronics Niketan, in New Delhi on September 15, 2011.jpg": {
+      "decision": "accept-restriction",
+      "curation": {
+        "by": "owner decision (P14)",
+        "at": "2026-10-04",
+        "note": "GODL-India photo of identifiable officials, on an unrelated story. Credited normally for now; awaits replacement in C3 (owner question Q1, default: replace)."
+      }
+    },
+    "The Minister of State for Communications and Information Technology, Shri Sachin Pilot unveiling the plaque to inaugurate the new W3C India Office Workspace, at Electronics Niketan, in New Delhi on September 15, 2011.jpg": {
+      "decision": "accept-restriction",
+      "curation": {
+        "by": "owner decision (P14)",
+        "at": "2026-10-04",
+        "note": "GODL-India photo of identifiable officials, on an unrelated story. Credited normally for now; awaits replacement in C3 (owner question Q1, default: replace)."
+      }
+    },
+    "Voting sign Switzerland (2024, cropped).jpg": {
+      "author": {
+        "name": "kecko",
+        "url": "https://www.flickr.com/people/kecko/",
+        "type": "Person"
+      },
+      "curation": {
+        "by": "P14 C2, from the Commons file page",
+        "at": "2026-10-04",
+        "note": "No author field: '{{Extracted from|1=Voting Sign Switzerland.jpg}}'. This page and the original's: '{{Uploaded with Flickypedia|…|flickrUser=Welcome to Switzerland backstage!|flickrUserUrl=https://www.flickr.com/people/kecko/|…}}'. Credited by the Flickr username in the profile URL, as for a display name that is not a name."
+      }
+    }
+  },
+  "covers": {
+    "9-maggio-europa-bandiera-unione": {
+      "modified": "cropped"
+    },
+    "a2-giornico-cantiere-disagi-frontalieri": {
+      "modified": "resized"
+    },
+    "a4-milano-brescia-diviazione-obbligatoria-2026": {
+      "modified": "cropped"
+    },
+    "a9-chiasso-como-chiusure-frontalieri": {
+      "modified": "cropped"
+    },
+    "abbonamento-newsletter-ticino": {
+      "modified": "resized"
+    },
+    "abolizione-imposta-valore-locativo-2029": {
+      "modified": "cropped"
+    },
+    "accordi-bilaterali-3-parlamento": {
+      "modified": "resized"
+    },
+    "accordi-svizzera-ue-parmelin-bruxelles": {
+      "modified": "resized"
+    },
+    "accordo-edilizia-ticino-2026-2031": {
+      "modified": "cropped"
+    },
+    "accordo-editori-sindacati-svizzera-tedesca": {
+      "modified": "cropped"
+    },
+    "acinque-lancia-piano-genitorialita": {
+      "modified": "resized"
+    },
+    "acquarossa-nuovo-polo-filovia-2026": {
+      "modified": "resized"
+    },
+    "addio-alex-zanardi-2001-incidente-vita": {
+      "modified": "resized"
+    },
+    "adulti-genitori-sostegno-finanziario-ticino-2026": {
+      "modified": "cropped"
+    },
+    "aeroporto-lugano-costi-interpellanza": {
+      "modified": "cropped"
+    },
+    "aeroporto-lugano-costi-interpellanza-2025": {
+      "modified": "cropped"
+    },
+    "aeroporto-zurigo-traffico-crescita-2026": {
+      "modified": "cropped"
+    },
+    "affitti-rialzo-crisi-ticino-2026": {
+      "modified": "resized"
+    },
+    "afghano-arresto-zug-chiasso": {
+      "modified": "cropped"
+    },
+    "agenzia-formativa-varese-dimissioni-2026": {
+      "modified": "cropped"
+    },
+    "agenzie-interim-lugano-ticino-frontaliere": {
+      "modified": "cropped"
+    },
+    "aggregazione-basso-mendrisiotto-rizza-chiasso-autocritica": {
+      "modified": "cropped"
+    },
+    "aggregazione-rischio-basso-mendrisiotto": {
+      "modified": "cropped"
+    },
+    "agricoltura-ticino-prodotti-locali-eventi-2026": {
+      "modified": "cropped"
+    },
+    "agriscambio": {
+      "modified": "cropped"
+    },
+    "aiuti-svizzera-ucraina-2026": {
+      "modified": "cropped"
+    },
+    "alessandro-logistica-swissskills-2025": {
+      "modified": "cropped"
+    },
+    "alleanza-clima-ticino-comuni": {
+      "modified": "cropped"
+    },
+    "allerta-meteo-ticino-lombardia-2026": {
+      "modified": "cropped"
+    },
+    "alloggi-frontalieri-ticino-crisi-2025": {
+      "modified": "cropped"
+    },
+    "alluvione-lavizzara-piano-pericoli-approvato": {
+      "modified": "cropped"
+    },
+    "ampliamento-parco-eolico-san-gottardo": {
+      "modified": "resized"
+    },
+    "ampliamento-parco-eolico-san-gottardo-digital-2026": {
+      "modified": "resized"
+    },
+    "anguria-pannelli-incendio-ticino-2026": {
+      "modified": "cropped"
+    },
+    "annunci-lavoro-dumping-ticino-governo": {
+      "modified": "resized"
+    },
+    "anziana-si-difende-da-una-scippatrice-e-la-fa-arrestare": {
+      "modified": "cropped"
+    },
+    "apertura-pesca-ticino": {
+      "modified": "resized"
+    },
+    "apprendisti-frontalieri-riforma-permesso-g": {
+      "modified": "resized"
+    },
+    "aprire-conto-banca-svizzera-residenti": {
+      "modified": "cropped"
+    },
+    "area-sosta-fantasma-sicurezza-autostrada": {
+      "modified": "cropped"
+    },
+    "arresto-cocaina-mendrisio-albanese": {
+      "modified": "cropped"
+    },
+    "arresto-frauenfeld-30enne-barricato": {
+      "modified": "cropped"
+    },
+    "ascensione-traffico-ticino-2026": {
+      "modified": "cropped"
+    },
+    "asili-bellinzona-progetto-pilota-orario-prolungato-2027": {
+      "modified": "cropped"
+    },
+    "asili-nido-bellinzona-asp-2026": {
+      "modified": "cropped"
+    },
+    "asili-nido-bellinzona-iniziativa-firme-2026": {
+      "modified": "cropped"
+    },
+    "asili-nido-bellinzona-sussidi-2026": {
+      "modified": "cropped"
+    },
+    "asili-nido-pubblici-ticino-iniziativa-popolare-2026": {
+      "modified": "cropped"
+    },
+    "asilo-nido-frontalieri-ticino": {
+      "modified": "cropped"
+    },
+    "assegni-familiari-frontalieri-ticino": {
+      "modified": "resized"
+    },
+    "assegno-educativo-mendrisio-2026": {
+      "modified": "cropped"
+    },
+    "assicurazione-auto-rincari-2026": {
+      "modified": "resized"
+    },
+    "assicurazione-dentaria-obbligatoria-ticino-2026": {
+      "modified": "cropped"
+    },
+    "assicurazione-malattie-pilota-ticino": {
+      "modified": "cropped"
+    },
+    "asta-villa-geno-como-400mila-euro": {
+      "modified": "cropped"
+    },
+    "atleti-ticinesi-vittoria-arcegno-ascona": {
+      "modified": "cropped"
+    },
+    "atted-digitale-ticino-cyber-security": {
+      "replacement": "/images/blog/cyber-security-month-oversharing-2026.webp"
+    },
+    "attivisti-flotilla-israele-interrogati": {
+      "modified": "cropped"
+    },
+    "aumentare-gia-il-prezzo-della-benzina": {
+      "modified": "resized"
+    },
+    "aumento-export-bellico-svizzero-ticino": {
+      "modified": "resized"
+    },
+    "aumento-franchigia-minima": {
+      "modified": "resized"
+    },
+    "aumento-mezzi-pubblici-ticino": {
+      "modified": "cropped"
+    },
+    "aumento-prezzi-carburanti-maggio-2026": {
+      "modified": "cropped"
+    },
+    "austriaci-ferma-verifica-2026": {
+      "modified": "cropped"
+    },
+    "autista-belga-20-ore-thurgau-intervento": {
+      "modified": "cropped"
+    },
+    "autista-stellato-fabio-giorgianni-premio": {
+      "modified": "cropped"
+    },
+    "auto-cinesi-svizzera-2026": {
+      "modified": "cropped"
+    },
+    "auto-truccate-polizia-zugo-2026": {
+      "modified": "cropped"
+    },
+    "avs-dati-digitale-frontalieri": {
+      "modified": "cropped"
+    },
+    "azienda-assume-autisti-lombardia-800-euro": {
+      "modified": "cropped"
+    },
+    "bagni-bellinzona-riaprono-novita-2026": {
+      "modified": "cropped"
+    },
+    "bambini-carabinieri-como-2026": {
+      "modified": "cropped"
+    },
+    "bambini-tecnologia-varese-2026": {
+      "modified": "cropped"
+    },
+    "banca-grigionese-denuncia-centinaia-milioni": {
+      "modified": "cropped"
+    },
+    "bancastato-walking-mendrisio-2026": {
+      "modified": "cropped"
+    },
+    "banche-golfo-frontalieri-ticino-2026": {
+      "modified": "resized"
+    },
+    "banche-golfo-preparano-frontalieri": {
+      "modified": "cropped"
+    },
+    "banche-svizzere-pronti-clienti-golfo-2026": {
+      "modified": "cropped"
+    },
+    "banche-ticino-disoccupazione": {
+      "modified": "resized"
+    },
+    "bandecchi-quarti-chiasso-2026": {
+      "modified": "cropped"
+    },
+    "bando-formazione-professionale-plr-2026": {
+      "modified": "cropped"
+    },
+    "barometro-kof-aprile-2026-prospettive-modeste": {
+      "modified": "cropped"
+    },
+    "beat-jans-10-milioni-comunicazione": {
+      "modified": "cropped"
+    },
+    "beatificazione-don-roberto-malgesini-2026": {
+      "modified": "cropped"
+    },
+    "bellinzona-auscultazione-2026": {
+      "modified": "resized"
+    },
+    "bellinzona-calcio-licenza-negata-finanze": {
+      "modified": "cropped"
+    },
+    "bellinzona-crescita-qualita-vita": {
+      "modified": "resized"
+    },
+    "bellinzona-paese-dormitorio": {
+      "modified": "resized"
+    },
+    "bellinzona-scomparsa-ricerche-ticino-piemonte": {
+      "modified": "resized"
+    },
+    "benessere-integrita-allievi-bellinzona-2026": {
+      "modified": "cropped"
+    },
+    "benzina-19-euro-5-maggio-2026": {
+      "modified": "cropped"
+    },
+    "benzina-cara-ticino": {
+      "modified": "cropped"
+    },
+    "benzina-conveniente": {
+      "modified": "cropped"
+    },
+    "benzina-e-diesel-prezzi-saliti": {
+      "modified": "cropped"
+    },
+    "benzina-lombardia-frontalieri-ticinesi-2026": {
+      "modified": "cropped"
+    },
+    "benzina-prezzi-aumentano-ticino": {
+      "modified": "cropped"
+    },
+    "benzina-prezzi-svizzera-oggi": {
+      "modified": "cropped"
+    },
+    "benzina-ticino-taglio-accise": {
+      "modified": "cropped"
+    },
+    "berna-discute-approvvigionamento-economico-e-13esima-avs": {
+      "modified": "resized"
+    },
+    "biandronno-incontro-astuti-licata-2026": {
+      "modified": "cropped"
+    },
+    "bibo-sistema-biglietti-digitali-mezzi-2026": {
+      "modified": "cropped"
+    },
+    "bici-bellinzona-valli-strategia": {
+      "modified": "cropped"
+    },
+    "bilancio-voto-canone-ssr-2026": {
+      "modified": "cropped"
+    },
+    "bilaterali-iii-cassis-ticino": {
+      "modified": "resized"
+    },
+    "bilaterali-iii-parlamento-ticino-2026": {
+      "modified": "resized"
+    },
+    "bilaterali-iii-ticino-parlamento-2026": {
+      "modified": "resized"
+    },
+    "bilaterali-terza-fase-parlamento-ticino": {
+      "modified": "resized"
+    },
+    "bolla-immobiliare-ticino-2026": {
+      "modified": "cropped"
+    },
+    "borsa-di-zurigo-sprazzi-qu-c3-a0-l-27umor-grigio-resta": {
+      "modified": "resized"
+    },
+    "borse-in-rosso-prezzo-petrolio-ticino": {
+      "modified": "resized"
+    },
+    "bper-risiko-bancario-crescita-mercato": {
+      "modified": "cropped"
+    },
+    "bruno-breguet-scomparsa-ufficializzata": {
+      "modified": "cropped"
+    },
+    "bus-elettrici-lugano-problemi-utenti": {
+      "modified": "cropped"
+    },
+    "busto-arsizio-carcere-denuncia-strada": {
+      "modified": "cropped"
+    },
+    "cabov-precipita-forte-vento": {
+      "modified": "resized"
+    },
+    "calcio-dnb-bellinzona-ultimo-appello": {
+      "modified": "cropped"
+    },
+    "calcio-dnb-bellinzona-vittoria-stade-nyonnais": {
+      "modified": "cropped"
+    },
+    "cambiamenti-commissione-magistrati-ticino-2026": {
+      "modified": "cropped"
+    },
+    "camedo-buffet-eventi-ticino": {
+      "modified": "resized"
+    },
+    "camelie-locarno-record-visitatori-2026": {
+      "modified": "cropped"
+    },
+    "campagna-dss-appropriatezza-sanitaria": {
+      "modified": "cropped"
+    },
+    "campagna-iraniana-allarma-svizzera": {
+      "modified": "cropped"
+    },
+    "candidato-medico-eoc-bellinzona": {
+      "modified": "cropped"
+    },
+    "cane-morto-binarie-campo-calcio": {
+      "modified": "resized"
+    },
+    "cannabis-sequestro-ticino-2026": {
+      "modified": "resized"
+    },
+    "cantiere-nsif-lavori-avanzati-e-tempistiche-rispettate": {
+      "modified": "cropped"
+    },
+    "cantonale-interna-ascona-porto-ronco-lavori-disagi-vista": {
+      "modified": "cropped"
+    },
+    "caos-medioriente-e-impatti-costruzione-ticino": {
+      "modified": "cropped"
+    },
+    "carburante-prezzo-salito-opportunismo": {
+      "modified": "resized"
+    },
+    "carburante-svizzera-scorte-2026": {
+      "modified": "cropped"
+    },
+    "carburante-ticino-costo-aumenti": {
+      "modified": "resized"
+    },
+    "carburante-ticino-guerra-2026": {
+      "modified": "cropped"
+    },
+    "carburanti-prezzo-rialzo-ticino": {
+      "modified": "cropped"
+    },
+    "carburanti-ticino-aumento-prezzi": {
+      "modified": "cropped"
+    },
+    "cardiocentro-lugano-ristrutturazione-2026": {
+      "modified": "cropped"
+    },
+    "carenza-carburante-svizzera-2026": {
+      "modified": "cropped"
+    },
+    "carenza-carburante-svizzera-frontalieri": {
+      "modified": "cropped"
+    },
+    "cargo-chiasso-lavoro-saperi": {
+      "modified": "cropped"
+    },
+    "caro-benzina-varese-accise-2026": {
+      "modified": "cropped"
+    },
+    "caro-carburante-benzina-ticino": {
+      "modified": "resized"
+    },
+    "caronno-varesino-campetto-dante-mercanti-2026": {
+      "modified": "cropped"
+    },
+    "carpooling-aziendale-ticino": {
+      "modified": "resized"
+    },
+    "casa-artigianato-dongio-sostegno": {
+      "modified": "cropped"
+    },
+    "casa-hockey-ticino-novita": {
+      "modified": "cropped"
+    },
+    "casa-montana-nante-governo-regolare": {
+      "modified": "cropped"
+    },
+    "casa-montana-nante-ricorso-tram": {
+      "modified": "cropped"
+    },
+    "casa-ticino-2026-piu-difficile": {
+      "modified": "cropped"
+    },
+    "casanova-pressione-aziende": {
+      "modified": "cropped"
+    },
+    "case-lusso-svizzera-2026": {
+      "modified": "cropped"
+    },
+    "casellario-giudiziale-ue-ticino": {
+      "modified": "resized"
+    },
+    "cassa-malati-franchigia-minima-ticino": {
+      "modified": "resized"
+    },
+    "cassa-malati-leghista-applicata-subito": {
+      "modified": "cropped"
+    },
+    "casse-malati-alloggi-landsgemeinde-2026": {
+      "modified": "cropped"
+    },
+    "cassis-araghchi-colloquio-2026": {
+      "modified": "cropped"
+    },
+    "cavalli-esercito-svizzero-costi": {
+      "modified": "cropped"
+    },
+    "cbt-italia-ciclisti-mercato": {
+      "modified": "resized"
+    },
+    "centri-famiglia-altovaresotto-2026": {
+      "modified": "cropped"
+    },
+    "centri-responsabilita-frontalieri-ticino": {
+      "modified": "cropped"
+    },
+    "centro-breggia-risparmio-casa-arriva-balerna": {
+      "modified": "cropped"
+    },
+    "centro-pasture-balerna-asilo": {
+      "modified": "cropped"
+    },
+    "centromedico-bellinzona-frontalieri": {
+      "modified": "cropped"
+    },
+    "centromedico-castello-chirurgia-ambulatoriale": {
+      "modified": "cropped"
+    },
+    "chiasso-conti-2025-disavanzo-avanzo": {
+      "modified": "cropped"
+    },
+    "chiasso-dogana-tempi-attesa": {
+      "modified": "cropped"
+    },
+    "chiasso-jazz-festival-2026": {
+      "modified": "resized"
+    },
+    "chiasso-missione-emergenza": {
+      "modified": "cropped"
+    },
+    "chiasso-missione-emergenza-luci-blu": {
+      "modified": "cropped"
+    },
+    "chiasso-ora-terra-2026": {
+      "modified": "cropped"
+    },
+    "chiasso-piano-regolatore-telefonia": {
+      "modified": "resized"
+    },
+    "chiasso-tassa-refezione-scuola-infanzia": {
+      "modified": "cropped"
+    },
+    "chiasso-valore-economico-aggregazione": {
+      "modified": "cropped"
+    },
+    "chiasso-verde-sufficiente": {
+      "modified": "resized"
+    },
+    "chiasso-zanzara-tigre-strategia-2026": {
+      "modified": "cropped"
+    },
+    "chiese-ticino-derubate-2026": {
+      "modified": "cropped"
+    },
+    "chiusa-val-bedretto": {
+      "modified": "resized"
+    },
+    "chiusure-autostrada-confine-ticino-2026": {
+      "modified": "resized"
+    },
+    "cinque-atti-parlamentari-ticino-mobilita": {
+      "modified": "cropped"
+    },
+    "cinque-curiosita-brevetti-svizzeri-2026": {
+      "modified": "resized"
+    },
+    "cioccolato-illumina-bellinzona-2026": {
+      "modified": "cropped"
+    },
+    "cioccolato-meno-ma-pagato-di-piu": {
+      "modified": "resized"
+    },
+    "clima-ticino-stagioni": {
+      "modified": "cropped"
+    },
+    "cnhi-mendrisio-dipendenti-allarme": {
+      "modified": "cropped"
+    },
+    "com-aziende-lavoro-como": {
+      "modified": "resized"
+    },
+    "comano-run-record-2026": {
+      "modified": "cropped"
+    },
+    "como-asfaltature-war-costs": {
+      "modified": "cropped"
+    },
+    "como-cantu-creativity-week-2026": {
+      "modified": "cropped"
+    },
+    "como-nuoto-750mila-euro-tribunale": {
+      "modified": "cropped"
+    },
+    "como-taccheggio-rapina-doppio-arresto": {
+      "modified": "cropped"
+    },
+    "como-vivibile-frontalieri-2026": {
+      "modified": "cropped"
+    },
+    "comuni-locarno-futuro-aggregazione": {
+      "modified": "resized"
+    },
+    "comunita-montana-valli-verbano-incontri-natura-cambia": {
+      "modified": "cropped"
+    },
+    "confederazione-valuta-sistemi-difesa-aerea": {
+      "modified": "cropped"
+    },
+    "conflitto-medio-oriente-energia-ticino": {
+      "modified": "cropped"
+    },
+    "confusione-tassa-salute-frontalieri": {
+      "replacement": "/images/blog/cassa-malati-tassa-salute.webp"
+    },
+    "congedo-lutto-malattia-frontaliere-svizzera": {
+      "modified": "cropped"
+    },
+    "congresso-varese-2026-fisco-lavoro-ticino": {
+      "modified": "cropped"
+    },
+    "consiglio-stati-soluzione-mista-13esima-avs": {
+      "modified": "resized"
+    },
+    "contratti-collettivi-salari-ticino": {
+      "modified": "resized"
+    },
+    "contratto-lago-lands-lake-2026": {
+      "modified": "cropped"
+    },
+    "controlli-cantieri-mendrisiotto": {
+      "modified": "resized"
+    },
+    "controlli-cantieri-mendrisiotto-2026": {
+      "modified": "resized"
+    },
+    "controlli-frontalieri-ponte-chiasso-2025": {
+      "modified": "cropped"
+    },
+    "controlli-frontiera-g7-divieti-entrata": {
+      "modified": "cropped"
+    },
+    "cooperazione-fiscale-dac9-traguardo": {
+      "modified": "cropped"
+    },
+    "coppa-del-mondo-orientamento-locarnese-2026": {
+      "modified": "cropped"
+    },
+    "corsi-a-b-scuola-media-ticino": {
+      "modified": "cropped"
+    },
+    "corso-pastori-ticino": {
+      "modified": "cropped"
+    },
+    "corteo-maggio-lugano-traffico-2024": {
+      "modified": "cropped"
+    },
+    "corteo-pro-palestina-lungolago-lugano": {
+      "modified": "cropped"
+    },
+    "costo-auto-pendolare-frontalieri-ticino": {
+      "modified": "cropped"
+    },
+    "costo-auto-pendolare-ticino": {
+      "modified": "cropped"
+    },
+    "costo-vita-lugano-confronto-milano-frontalieri": {
+      "modified": "cropped"
+    },
+    "costo-vita-lugano-milano-scelta": {
+      "replacement": "/images/blog/costo-vita-salari-lgn.webp"
+    },
+    "cottarelli-liceo-manzoni-geopolitica": {
+      "modified": "cropped"
+    },
+    "cpb-forfettario-semplificato-soglia-150mila": {
+      "modified": "cropped"
+    },
+    "cpi-caso-hospita-rivalutazione-periti": {
+      "modified": "resized"
+    },
+    "crans-montana-italia-risarcimento-300000-euro": {
+      "modified": "cropped"
+    },
+    "crans-montana-soccorso-denunciato": {
+      "modified": "cropped"
+    },
+    "crd-output-floor-ii-pilastro": {
+      "modified": "cropped"
+    },
+    "crescita-economica-ticino-2026": {
+      "modified": "cropped"
+    },
+    "crescita-misera-libera-circolazione": {
+      "modified": "resized"
+    },
+    "crisi-spermatozoi-svizzera-ticino": {
+      "modified": "resized"
+    },
+    "crisi-turismo-golfo-persico": {
+      "modified": "resized"
+    },
+    "cure-a-domicilio-atlas-protesta-18-aprile": {
+      "modified": "cropped"
+    },
+    "cure-a-domicilio-tassa-ticino": {
+      "modified": "resized"
+    },
+    "cure-domicilio-pensionati-ticino-2026": {
+      "modified": "cropped"
+    },
+    "cure-infermieristiche-190mila-firme-2026": {
+      "modified": "cropped"
+    },
+    "dagatra-incontro-migranti-chiasso": {
+      "modified": "resized"
+    },
+    "dancing-shoes-albertoni-cinelli-collaboration": {
+      "modified": "cropped"
+    },
+    "dati-tasse-frontalieri-italia": {
+      "modified": "cropped"
+    },
+    "dazi-usa-rimborsi-ritardi": {
+      "modified": "resized"
+    },
+    "deduzione-ristorni-frontalieri-contraria-accordi-ch-roma": {
+      "modified": "cropped"
+    },
+    "delia-bella-ciao-concertone-2026": {
+      "modified": "cropped"
+    },
+    "deputazione-ticinese-italofoni-2024": {
+      "modified": "resized"
+    },
+    "dichiarazione-imposta-digitale-ticino-26": {
+      "modified": "resized"
+    },
+    "diesel-aumento-prezzi-svizzera-2026": {
+      "modified": "resized"
+    },
+    "digitale-frontaliere-ticino-varese": {
+      "modified": "cropped"
+    },
+    "disagi-tilo-mendrisio-malpensa-2026": {
+      "modified": "cropped"
+    },
+    "discover-eu-2026-frontalieri-ticino": {
+      "modified": "cropped"
+    },
+    "disoccupazione-stabile-svizzera-2026": {
+      "modified": "resized"
+    },
+    "disoccupazione-svizzera-2026": {
+      "modified": "resized"
+    },
+    "disoccupazione-ticino-2026-effetti-guerra": {
+      "modified": "cropped"
+    },
+    "disordini-pensilina-botta-lugano-2026": {
+      "modified": "cropped"
+    },
+    "disordini-pensilina-lugano-intervento-veloce": {
+      "modified": "cropped"
+    },
+    "disordini-pensilina-lugano-intervento-veloce-2026": {
+      "modified": "cropped"
+    },
+    "distributori-carburante-ticino-2026": {
+      "modified": "cropped"
+    },
+    "divario-irpef-pensionati-2026": {
+      "modified": "cropped"
+    },
+    "dividere-lavoratori-salari-2026": {
+      "modified": "cropped"
+    },
+    "divieti-social-media-minori": {
+      "modified": "cropped"
+    },
+    "divieto-cellulari-scuola-ticino-2024": {
+      "modified": "resized"
+    },
+    "divieto-smartphone-scuola-ticino-2026": {
+      "modified": "resized"
+    },
+    "docente-arrestato-giubiasco-proroga": {
+      "modified": "cropped"
+    },
+    "domenica-corriere-piccaluga-lavoro-salari-economia": {
+      "modified": "cropped"
+    },
+    "domeniche-senza-auto-ticino-2026": {
+      "modified": "resized"
+    },
+    "dominicano-auto-svizzera-arresto": {
+      "modified": "resized"
+    },
+    "dona-spesa-nova-coop-2026": {
+      "modified": "cropped"
+    },
+    "doppietta-frontalieri-santonino-2026": {
+      "modified": "cropped"
+    },
+    "droga-al-confine-ticino-2025": {
+      "modified": "resized"
+    },
+    "due-arresti-brogeda-smuggling-droga-2024": {
+      "modified": "cropped"
+    },
+    "dumping-salariale-ticino-no": {
+      "modified": "resized"
+    },
+    "economia-svizzera-rischio-burocrazia": {
+      "modified": "cropped"
+    },
+    "edilizia-ticino-estate-sfide-ssic": {
+      "modified": "cropped"
+    },
+    "edilizia-ticino-resiste-investimenti-geopolitica": {
+      "modified": "cropped"
+    },
+    "editto-canonizzazione-don-roberto-malgesini": {
+      "modified": "cropped"
+    },
+    "elezioni-como-frontalieri-2026": {
+      "modified": "cropped"
+    },
+    "elmec-innovation-summit-brunello-2026": {
+      "modified": "cropped"
+    },
+    "emergenza-casa-como-analisi": {
+      "modified": "cropped"
+    },
+    "emigrazione-cassa-pensione-risparmio-imposte": {
+      "modified": "cropped"
+    },
+    "energia-ets-von-der-leyen": {
+      "modified": "resized"
+    },
+    "erba-sintetica-scuole-ticino-rischi": {
+      "modified": "cropped"
+    },
+    "estate-chiasso-2026-eventi": {
+      "modified": "cropped"
+    },
+    "estival-jazz-lugano-pagamento-2024": {
+      "modified": "cropped"
+    },
+    "estival-pagamento-caduta-stile-lugano": {
+      "modified": "cropped"
+    },
+    "eurospin-luino-occhio-al-cambio": {
+      "modified": "cropped"
+    },
+    "ex-casa-comunale-lopagno-vendita": {
+      "modified": "cropped"
+    },
+    "falegnami-stipendi-2025": {
+      "modified": "cropped"
+    },
+    "falsi-preti-barasso-truffe-anziani": {
+      "modified": "cropped"
+    },
+    "farmaci-competitiva-europa": {
+      "modified": "resized"
+    },
+    "fart-2025-frontalieri-transporti": {
+      "modified": "cropped"
+    },
+    "fattura-miliardaria-energia-2026": {
+      "modified": "cropped"
+    },
+    "fattura-miliardaria-energia-medio-oriente": {
+      "modified": "resized"
+    },
+    "fedpol-talpa-accesso-dossier-inchiesta": {
+      "modified": "cropped"
+    },
+    "fermato-brogeda-cocaina": {
+      "modified": "resized"
+    },
+    "festa-famiglie-lugano-2026": {
+      "modified": "cropped"
+    },
+    "ffs-cargo-chiasso-personale-2026": {
+      "modified": "cropped"
+    },
+    "ffs-collegamenti-estivi-rimini-francia-2026": {
+      "modified": "cropped"
+    },
+    "ffs-dirigenza-ticino-deposito-chiasso": {
+      "modified": "cropped"
+    },
+    "ffs-siemens-nuovi-treni-ticino": {
+      "modified": "cropped"
+    },
+    "fiera-antiquariato-mendrisio-2026": {
+      "modified": "cropped"
+    },
+    "finanza-ticino-si-reinventa-economia-dati": {
+      "modified": "cropped"
+    },
+    "finanze-pubbliche-ticino-2026-preoccupazioni": {
+      "modified": "cropped"
+    },
+    "folgorato-stazione-bellinzona-morto-uomo": {
+      "modified": "cropped"
+    },
+    "fondazione-bignasca-aiuti-2026": {
+      "modified": "cropped"
+    },
+    "fondi-europei-ticino-2026": {
+      "modified": "cropped"
+    },
+    "food-truck-festival-locarno-2026": {
+      "modified": "cropped"
+    },
+    "foreste-sommerse-lago-como-lugano": {
+      "modified": "cropped"
+    },
+    "formula-1-riparte-rischi-polemiche": {
+      "modified": "cropped"
+    },
+    "franchigia-minima-sanitario-ticino": {
+      "modified": "resized"
+    },
+    "franco-forte-problemi-economici": {
+      "modified": "resized"
+    },
+    "franco-svizzero-a-valori-record-2026": {
+      "modified": "resized"
+    },
+    "franco-svizzero-impatti-ticino": {
+      "modified": "resized"
+    },
+    "franco-svizzero-minimi-euro": {
+      "modified": "cropped"
+    },
+    "franzolini-fenealuil-piano-casa": {
+      "modified": "cropped"
+    },
+    "frode-reddito-cittadinanza-varese-2026": {
+      "modified": "cropped"
+    },
+    "frontaliere-adozione-affido-procedura-italia-svizzera": {
+      "modified": "cropped"
+    },
+    "frontaliere-asilo-nido-guida-2026": {
+      "modified": "cropped"
+    },
+    "frontaliere-asilo-nido-svizzera": {
+      "modified": "cropped"
+    },
+    "frontaliere-bonus-famiglia-2026": {
+      "modified": "cropped"
+    },
+    "frontaliere-cambio-chf-eur-strategia-2026-simulazione-pratica": {
+      "modified": "cropped"
+    },
+    "frontaliere-con-figli-asilo-nido-svizzera": {
+      "modified": "resized"
+    },
+    "frontaliere-doppia-imposizione-credito-imposta": {
+      "modified": "cropped"
+    },
+    "frontaliere-figli-asilo-nido-svizzera": {
+      "modified": "cropped"
+    },
+    "frontaliere-pensione-avs-inps-2026-errori-comuni": {
+      "modified": "cropped"
+    },
+    "frontalieri-asili-nido-ticino": {
+      "modified": "resized"
+    },
+    "frontalieri-guerra-fiscale-ticino-bellinzona-blocca-50-miliardi-ristorni": {
+      "modified": "cropped"
+    },
+    "frontalieri-lugano-chiarezza-2026": {
+      "modified": "cropped"
+    },
+    "frontalieri-rega-boglia-intervento": {
+      "modified": "cropped"
+    },
+    "frontalieri-riapertura-attivita-edilizia": {
+      "modified": "cropped"
+    },
+    "frontalieri-salari-perequazione-ricchezza-2026": {
+      "modified": "cropped"
+    },
+    "frontalieri-tassa-salute-scontro": {
+      "modified": "cropped"
+    },
+    "frontalieri-tassa-salute-teatro": {
+      "modified": "resized"
+    },
+    "frontalieri-ticino-spese-svizzera-2026": {
+      "modified": "cropped"
+    },
+    "frontaliers-sabotage-varese-successo": {
+      "modified": "resized"
+    },
+    "funivia-monte-lema-stagione-2026": {
+      "modified": "cropped"
+    },
+    "funivia-santis-ammodernamento-2026": {
+      "modified": "cropped"
+    },
+    "furti-chiese-bellinzonese-arresti-2026": {
+      "modified": "cropped"
+    },
+    "furti-supermercati-ponte-tresa": {
+      "modified": "resized"
+    },
+    "gala-sorriso-solidarieta-ospedale-del-ponte": {
+      "modified": "cropped"
+    },
+    "gambarogno-contributi-costruzione-ricorrenti": {
+      "modified": "cropped"
+    },
+    "geopolitica-sindacato-nuovi-equilibri-varese": {
+      "modified": "cropped"
+    },
+    "gianni-morandi-locarno-2026": {
+      "modified": "cropped"
+    },
+    "giardino-ferroviario-balerna-2026": {
+      "modified": "cropped"
+    },
+    "giornata-contro-rumore-lugano-2024": {
+      "modified": "cropped"
+    },
+    "giovani-agenti-como-polizia-locale": {
+      "modified": "cropped"
+    },
+    "giovani-rematori-ceresio-2026": {
+      "modified": "cropped"
+    },
+    "giro-italia-2026-bellinzona-cari-tappa": {
+      "modified": "cropped"
+    },
+    "giustizia-in-bilico-2026": {
+      "modified": "resized"
+    },
+    "giustizia-referendum-ticino": {
+      "modified": "cropped"
+    },
+    "globalisti-fuga-medio-oriente-ticino": {
+      "modified": "resized"
+    },
+    "golasecca-esplorazione-passeggiata-2026": {
+      "modified": "cropped"
+    },
+    "gordola-santa-maria-ricorso-2026": {
+      "modified": "cropped"
+    },
+    "grandine-bellinzonese-allerta-lugano-chiasso-19-aprile-2026": {
+      "modified": "resized"
+    },
+    "grandine-gt86-trd-perdita-totale": {
+      "modified": "cropped"
+    },
+    "grassi-1925-marchio-storico": {
+      "modified": "cropped"
+    },
+    "gratis-museo-costume-bagno-2026": {
+      "modified": "cropped"
+    },
+    "graudio-flash-2-maggio-2026": {
+      "modified": "cropped"
+    },
+    "gravincidente-stradale-regina-feriti": {
+      "modified": "resized"
+    },
+    "guasti-trenord-aprile-2026": {
+      "modified": "cropped"
+    },
+    "guerra-frena-viaggi-estero-2026": {
+      "modified": "cropped"
+    },
+    "guerra-iran-industria-alimentare-svizzera": {
+      "modified": "cropped"
+    },
+    "guerre-dellinformazione": {
+      "modified": "cropped"
+    },
+    "guida-affettuosa-separazione-ticino-2026": {
+      "modified": "cropped"
+    },
+    "hockey-chiasso-wild-boars-bis": {
+      "modified": "resized"
+    },
+    "ia-aziende-svizzere-occupazione-ticino": {
+      "modified": "cropped"
+    },
+    "ia-meteo-eventi-estremi": {
+      "modified": "cropped"
+    },
+    "ia-swiss-re-produttivita-ceo-berger": {
+      "modified": "cropped"
+    },
+    "il-valore-del-vicino-ciclo-incontri-economia-prossimita": {
+      "modified": "cropped"
+    },
+    "imposta-fonte-frontalieri-ticino": {
+      "modified": "cropped"
+    },
+    "imposta-fonte-frontalieri-ticino-dettagli": {
+      "modified": "cropped"
+    },
+    "imposta-ocse-multinazionali-obiettivi-lontani": {
+      "modified": "cropped"
+    },
+    "impresari-costruttori-caldo-estremo": {
+      "modified": "cropped"
+    },
+    "inaugurazione-ail-arena-lugano-30-31-maggio": {
+      "modified": "cropped"
+    },
+    "incendio-bellinzona-appartamento-evacuato": {
+      "modified": "cropped"
+    },
+    "incendio-bellinzona-via-borromini-evacuati": {
+      "modified": "cropped"
+    },
+    "incendio-bellinzona-via-borromini-evacuati-10-persone": {
+      "modified": "cropped"
+    },
+    "incendio-chiasso-evacuati-trentina-persone": {
+      "modified": "cropped"
+    },
+    "incendio-chiasso-operai-feriti": {
+      "modified": "cropped"
+    },
+    "incendio-chiasso-operai-ricoverati": {
+      "modified": "cropped"
+    },
+    "incendio-chiasso-palazzina-evacuati-30": {
+      "modified": "cropped"
+    },
+    "incendio-langnau-due-case-garage": {
+      "modified": "cropped"
+    },
+    "incendio-malpensa-terminal-1-2-maggio-2026": {
+      "modified": "cropped"
+    },
+    "incendio-malpensa-terminal-1-risolto": {
+      "modified": "cropped"
+    },
+    "incidente-autolaghi-donna-ferita": {
+      "modified": "cropped"
+    },
+    "incidente-ispra-frontaliere-2026": {
+      "modified": "cropped"
+    },
+    "incontro-sbt-finanze-clima-colpo-freno-svizzera": {
+      "modified": "cropped"
+    },
+    "infermiere-lugano-lis": {
+      "modified": "cropped"
+    },
+    "infermiere-pratiche-avanzate-ticino-2024": {
+      "modified": "cropped"
+    },
+    "infermieri-svizzera-frontalieri-ticino": {
+      "modified": "resized"
+    },
+    "infiltrazioni-criminali-ticino-grigioni": {
+      "modified": "resized"
+    },
+    "inflazione-aprile-2026-italia": {
+      "modified": "cropped"
+    },
+    "iniziativa-10-milioni-votazione-14-giugno": {
+      "modified": "cropped"
+    },
+    "iniziativa-caos-comitato-ticino-2026": {
+      "modified": "cropped"
+    },
+    "iniziativa-democrazia-respinta-2026": {
+      "modified": "cropped"
+    },
+    "iniziativa-democrazia-respinta-nazionale": {
+      "modified": "cropped"
+    },
+    "iniziative-cassa-malati-costituzionalista-ticino": {
+      "modified": "resized"
+    },
+    "iniziative-casse-malati-61-milioni-ticino": {
+      "modified": "cropped"
+    },
+    "innovazione-tecnologica-sfide-svizzera": {
+      "modified": "cropped"
+    },
+    "intelligenza-artificiale-aziende-ticino": {
+      "modified": "cropped"
+    },
+    "investimenti-immobiliari-italia-estero-2026": {
+      "modified": "cropped"
+    },
+    "investimenti-sicurezza-turismo-valsolda-26": {
+      "modified": "resized"
+    },
+    "investimento-pedone-bioggio": {
+      "modified": "resized"
+    },
+    "ippodromo-varese-svicc-allenatori": {
+      "modified": "cropped"
+    },
+    "iran-tajani-non-tratta-navi": {
+      "modified": "resized"
+    },
+    "irb-bellinzona-valore-aggiunto-ticino": {
+      "modified": "cropped"
+    },
+    "isola-artica-islanda-pugliese": {
+      "modified": "cropped"
+    },
+    "italia-taglia-accise-benzinai-preoccupati": {
+      "modified": "cropped"
+    },
+    "kebab-case-3-5-words-max-40-chars": {
+      "modified": "cropped"
+    },
+    "kebab-case-ticino-nubifragio-grigioni": {
+      "modified": "resized"
+    },
+    "kebab-case-turismo-ticino": {
+      "modified": "resized"
+    },
+    "kuhne-nagel-tagli-posti-ticino-2026": {
+      "modified": "resized"
+    },
+    "la-finanza-svizzera-sotto-esame-per-il-suo-impatto-sul-clima": {
+      "modified": "cropped"
+    },
+    "ladri-intercettati-lavena-ponte-tresa": {
+      "modified": "resized"
+    },
+    "laghi-lombardi-sicurezza-estate-2026": {
+      "modified": "cropped"
+    },
+    "lamal-low-cost-premi-bassi-2026": {
+      "modified": "cropped"
+    },
+    "lamal-rilevazione-dati-unica-ticino": {
+      "modified": "cropped"
+    },
+    "landsgemeinde-glarona-2026": {
+      "modified": "cropped"
+    },
+    "landsgemeinde-glarona-2026-finanze-alloggi": {
+      "modified": "cropped"
+    },
+    "lati-industria-termoplastici-premiata-intesanpaolo": {
+      "modified": "cropped"
+    },
+    "lavena-ponte-tresa-addio-antonio-cannavale": {
+      "modified": "resized"
+    },
+    "lavena-ponte-tresa-giro-spaccio": {
+      "modified": "resized"
+    },
+    "lavori-a9-lomazzo-saronno-chiusura-notte": {
+      "modified": "cropped"
+    },
+    "lavori-chiasso-franscini-2026": {
+      "modified": "cropped"
+    },
+    "lavori-linea-locarno-cadenazzo-2026": {
+      "modified": "resized"
+    },
+    "lavori-notturni-via-lavizzari": {
+      "modified": "cropped"
+    },
+    "lavori-rete-ferroviaria-tilo": {
+      "modified": "cropped"
+    },
+    "lavoro-economia-2026": {
+      "modified": "resized"
+    },
+    "lavoro-nero-dumping-2025-svizzera": {
+      "modified": "cropped"
+    },
+    "lavoro-richiedenti-asilo-ucraini-ticino": {
+      "modified": "resized"
+    },
+    "lega-ticino-solidarieta-casa-propria-2026": {
+      "modified": "cropped"
+    },
+    "legal-insurance-utilita-sicurezza": {
+      "replacement": "/images/blog/fiv-costi-assicurazione-svizzera.webp"
+    },
+    "libera-circolazione-ue-svizzera-impatti": {
+      "modified": "cropped"
+    },
+    "liberta-dovery-autocensura-mendrisio": {
+      "modified": "cropped"
+    },
+    "liberta-stampa-minimi-25-anni": {
+      "modified": "cropped"
+    },
+    "libretto-digitale-militare-ticino-2026": {
+      "modified": "cropped"
+    },
+    "libriamoci-varese-studenti-2026": {
+      "modified": "cropped"
+    },
+    "limiti-eta-smartphone-social-media": {
+      "modified": "cropped"
+    },
+    "locarno-abitanti-domiciliati-2026": {
+      "modified": "cropped"
+    },
+    "locarno-giovani-assistenza-sociale": {
+      "modified": "cropped"
+    },
+    "locarno-landquart-rifiuti-1000-tonnellate": {
+      "modified": "cropped"
+    },
+    "locarno-magadino-trasporto": {
+      "modified": "cropped"
+    },
+    "locarno-zanzara-tigre-campagna-rilancia-2026": {
+      "modified": "cropped"
+    },
+    "logistica-sostenibile-a22": {
+      "modified": "resized"
+    },
+    "lombardia-affitto-famiglie-varesine": {
+      "modified": "resized"
+    },
+    "lotta-violenza-di-genere-ticino": {
+      "modified": "resized"
+    },
+    "lotta-zanzara-tigre-mendrisio": {
+      "modified": "cropped"
+    },
+    "lpp-minimo-secondo-pilastro-2026": {
+      "modified": "cropped"
+    },
+    "lucerna-paradiso-fiscale-frontalieri": {
+      "modified": "cropped"
+    },
+    "lugano-aggressione-abitazione-2024": {
+      "modified": "cropped"
+    },
+    "lugano-airport-fondi-salvati-2026": {
+      "modified": "resized"
+    },
+    "lugano-calcio-frontalieri-2026": {
+      "modified": "cropped"
+    },
+    "lugano-cultura-digitale-2024": {
+      "modified": "cropped"
+    },
+    "lugano-ingaggia-olle-lycksell-2026": {
+      "modified": "cropped"
+    },
+    "lugano-lavori-di-asfaltatura": {
+      "modified": "cropped"
+    },
+    "lugano-park-ride-bus-sovvenzioni-2026": {
+      "modified": "resized"
+    },
+    "lugano-renato-steffen-goal-staffa": {
+      "modified": "cropped"
+    },
+    "lugano-sicurezza-2025": {
+      "modified": "cropped"
+    },
+    "lugano-young-boys-cornaredo-2026": {
+      "modified": "cropped"
+    },
+    "luigi-bignami-insubria-scienza-2026": {
+      "modified": "cropped"
+    },
+    "lusso-immobiliare-svizzera-2026": {
+      "modified": "cropped"
+    },
+    "macchinisti-autisti-lavoro-locarno": {
+      "modified": "cropped"
+    },
+    "made-in-italy-doganali-ticino-2026": {
+      "modified": "resized"
+    },
+    "maggiolone-social-park-cassano-magnago": {
+      "modified": "cropped"
+    },
+    "magliaso-zona-educativa-ripresa": {
+      "modified": "cropped"
+    },
+    "maillard-uss-udc-iniziativa-1-maggio-2026": {
+      "modified": "cropped"
+    },
+    "mal-dislanda-materia-castronno-2026": {
+      "modified": "cropped"
+    },
+    "malcantone-fai-di-primavera-2026": {
+      "modified": "resized"
+    },
+    "mani-pulite-vite-salvate-asst-iniziativa": {
+      "modified": "cropped"
+    },
+    "massiccio-intervento-polizia-lugano-2026": {
+      "modified": "cropped"
+    },
+    "medico-frontaliere-stipendio-ticino": {
+      "modified": "cropped"
+    },
+    "medico-medicina-interna-intensiva-eoc": {
+      "modified": "cropped"
+    },
+    "medio-vedeggio-gruppo-lavoro-aggregazione": {
+      "modified": "resized"
+    },
+    "meloni-governo-longevo-2026": {
+      "modified": "cropped"
+    },
+    "mendrisio-capitale-culturale-2026": {
+      "modified": "cropped"
+    },
+    "mendrisio-capitale-culturale-opportunita": {
+      "modified": "cropped"
+    },
+    "mendrisio-senso-citta-rossini-lorenzon": {
+      "modified": "cropped"
+    },
+    "mensa-solidarieta-degrado-sicurezza-2026": {
+      "modified": "cropped"
+    },
+    "mense-scolastiche-ticino-prezzi-2026": {
+      "modified": "resized"
+    },
+    "mercato-agricolo-besozzo-superiore": {
+      "modified": "cropped"
+    },
+    "mercato-immobiliare-ticino-prezzi-tendenze": {
+      "modified": "cropped"
+    },
+    "mercato-lavoro-kof-ripresa-2026": {
+      "modified": "cropped"
+    },
+    "mercato-lavoro-ticino-q4-2025": {
+      "modified": "resized"
+    },
+    "migros-24h-herisau": {
+      "modified": "cropped"
+    },
+    "migros-immigrazione-necessaria-2026": {
+      "modified": "cropped"
+    },
+    "migros-immigrazione-necessaria-offerta": {
+      "modified": "cropped"
+    },
+    "miliardari-dubai-svizzera-lugano": {
+      "modified": "cropped"
+    },
+    "montagne-neve-riapertura-passo-novena": {
+      "modified": "cropped"
+    },
+    "moon-stars-resident-discount-locarno-card": {
+      "modified": "cropped"
+    },
+    "moschea-lugano-pregassona-2026": {
+      "modified": "cropped"
+    },
+    "movieri-traffico-ss340-2026": {
+      "modified": "cropped"
+    },
+    "multe-vignetta-chiasso-2026": {
+      "modified": "cropped"
+    },
+    "musica-antica-san-cassiano-2026": {
+      "modified": "cropped"
+    },
+    "national-geographic-scuola-einaudi-varese": {
+      "modified": "cropped"
+    },
+    "navigazione-lago-lugano-2026": {
+      "modified": "resized"
+    },
+    "negozio-danese-arese-2026": {
+      "modified": "cropped"
+    },
+    "neutalia-bilancio-2025-crescita-ricavi": {
+      "modified": "cropped"
+    },
+    "neutralizzazione-stime-2026-classi-media": {
+      "modified": "cropped"
+    },
+    "nevicate-strade-bloccate-ticino": {
+      "modified": "resized"
+    },
+    "noleggio-auto-frontalieri-ticino-2026": {
+      "modified": "cropped"
+    },
+    "nomine-annullate-sims-tram": {
+      "modified": "resized"
+    },
+    "nubifragio-coira-mesolcina-ristoro": {
+      "modified": "resized"
+    },
+    "nucleare-svizzero-minaccia-lavoro-frontalieri-edilizia": {
+      "modified": "cropped"
+    },
+    "nuova-direttrice-servizi-sociali-bellinzona": {
+      "modified": "cropped"
+    },
+    "nuova-riforma-avs-2024-frontalieri": {
+      "modified": "cropped"
+    },
+    "nuove-accise-carburanti-2026": {
+      "modified": "cropped"
+    },
+    "nuove-regole-scambio-informazioni-ader-enti-creditori": {
+      "modified": "cropped"
+    },
+    "nuove-tratte-estive-ffs-ticino-2026": {
+      "modified": "cropped"
+    },
+    "nuovi-frontalieri-tasse-salate": {
+      "modified": "cropped"
+    },
+    "nuovi-posti-moto-lago-como": {
+      "modified": "cropped"
+    },
+    "nuovo-accordo-cremona-fisco-2026": {
+      "modified": "cropped"
+    },
+    "nuovo-cardiocentro-lugano-realta": {
+      "modified": "cropped"
+    },
+    "nuovo-ccnl-edilizia-ticino-2026-2031": {
+      "modified": "resized"
+    },
+    "nuovo-centenario-chiasso-luciano-bordignon": {
+      "modified": "cropped"
+    },
+    "nuovo-contratto-edilizia-ticino-2026": {
+      "modified": "cropped"
+    },
+    "nuovo-contratto-edilizia-ticino-2026-2031": {
+      "modified": "cropped"
+    },
+    "nuovo-orario-ferroviario-lombardia-2026": {
+      "modified": "cropped"
+    },
+    "nuovo-questore-varese-sicurezza-frontalieri": {
+      "modified": "cropped"
+    },
+    "ogm-fallimento-ticino": {
+      "modified": "resized"
+    },
+    "operatore-socio-sanitario-frontaliere": {
+      "modified": "cropped"
+    },
+    "opinioni-tram-treno-lugano": {
+      "modified": "cropped"
+    },
+    "ospedale-erba-cura-oncologiche-2026": {
+      "modified": "cropped"
+    },
+    "ospedale-universitario-ticino-2026": {
+      "modified": "cropped"
+    },
+    "ospedale-zurigo-mancanze-cardiochirurgia": {
+      "modified": "cropped"
+    },
+    "ostetriche-eoc-mendrisio-2026": {
+      "modified": "cropped"
+    },
+    "palacinema-locarno-urgenti-2026": {
+      "modified": "cropped"
+    },
+    "palaraiffeisen-porta-aperte-lugano-2026": {
+      "modified": "cropped"
+    },
+    "palazzo-civico-collegiata-accessibilita-bellinzona-2026": {
+      "modified": "cropped"
+    },
+    "panchina-bianca-varese-2026": {
+      "modified": "cropped"
+    },
+    "papa-paperino-cuasso-monte": {
+      "modified": "cropped"
+    },
+    "paradosso-ticino-lavoro": {
+      "modified": "resized"
+    },
+    "parcheggi-cernobbio-ticino-residenti": {
+      "modified": "cropped"
+    },
+    "parcheggio-abusivo-como-villa-olmo": {
+      "modified": "cropped"
+    },
+    "parmelin-washington-dazi-usa-2026": {
+      "modified": "cropped"
+    },
+    "passaporto-digitale-sicurezza-sociale-ue": {
+      "replacement": "/images/blog/cyber-security-month-oversharing-2026.webp"
+    },
+    "passeggiata-lago-inverno-ascona-2026": {
+      "modified": "cropped"
+    },
+    "patentino-digitale-lombardia-2026": {
+      "modified": "cropped"
+    },
+    "patriot-ritardo-svizzera-valuta-alternative": {
+      "modified": "cropped"
+    },
+    "pd-como-sfiducia-maccabeo-2026": {
+      "modified": "cropped"
+    },
+    "pemsa-lugano-mercato-lavoro": {
+      "modified": "cropped"
+    },
+    "pendolare-inverso-altdorf-lugano-problemi": {
+      "modified": "cropped"
+    },
+    "pensione-et-ticino-sentiero": {
+      "modified": "resized"
+    },
+    "pensioni-svantaggio-tasse-frontalieri": {
+      "modified": "cropped"
+    },
+    "penuria-carburante-svizzera-2026": {
+      "modified": "cropped"
+    },
+    "perbacco-bianchi-bellinzona-2026": {
+      "modified": "cropped"
+    },
+    "pericoli-minori-iniziativa-10-milioni": {
+      "modified": "cropped"
+    },
+    "permesso-g-apprendisti-frontali": {
+      "modified": "resized"
+    },
+    "permesso-g-b-2026-20km-frontalieri": {
+      "modified": "cropped"
+    },
+    "permesso-g-vs-b-2026-famiglia-figli": {
+      "modified": "cropped"
+    },
+    "petizione-chiasso-ritorno-alla-natura-2025": {
+      "modified": "cropped"
+    },
+    "petrolio-e-gas-svizzera-approvvigionamento-2026": {
+      "modified": "cropped"
+    },
+    "petrolio-gas-sicuro-ticino-2026": {
+      "modified": "cropped"
+    },
+    "petrolio-inflazione-svizzera-2026": {
+      "modified": "cropped"
+    },
+    "petrolio-uccide-protesta-vezia-2026": {
+      "modified": "resized"
+    },
+    "pirati-strada-ticino-italiani-2026": {
+      "modified": "resized"
+    },
+    "piu-interventi-soccorso-meno-vittime-montagna-ticino-2025": {
+      "modified": "cropped"
+    },
+    "pizza-price-italy-implications": {
+      "modified": "cropped"
+    },
+    "poliani-digital-innovation-hub-2026": {
+      "modified": "cropped"
+    },
+    "polizia-bandi-4500-posti-2026": {
+      "modified": "cropped"
+    },
+    "polizia-stabio-futuro-incerto": {
+      "modified": "cropped"
+    },
+    "polizia-ticino-abbandono-progetto-2026": {
+      "modified": "cropped"
+    },
+    "polizia-ticino-progetto-abbandono-2026": {
+      "modified": "cropped"
+    },
+    "pompieri-lugano-24-ore-2026": {
+      "modified": "cropped"
+    },
+    "ponte-l-acqua-ticino-2026": {
+      "modified": "cropped"
+    },
+    "ponte-maggio-villa-panza-laboratori-bambini": {
+      "modified": "resized"
+    },
+    "potenziamento-linee-tilo-mendrisio-gallarate": {
+      "modified": "cropped"
+    },
+    "precompilata-2026-frontalieri-ticino": {
+      "modified": "cropped"
+    },
+    "premi-cassa-malati-lamal-2026-canton-basilea": {
+      "replacement": "/images/blog/cassa-malati-tassa-salute.webp"
+    },
+    "premiate-classi-acqua-vita-2026": {
+      "modified": "cropped"
+    },
+    "premio-la-rondine-2026-ticino": {
+      "modified": "resized"
+    },
+    "premio-walo-2026-frontalieri": {
+      "modified": "cropped"
+    },
+    "presentazione-libro-odio-massacro-varese": {
+      "modified": "cropped"
+    },
+    "presunti-maltrattamenti-asilo-chiasso": {
+      "modified": "cropped"
+    },
+    "prezzi-benzina-ticino": {
+      "modified": "cropped"
+    },
+    "prezzi-carburanti-ticino-marzo-2026": {
+      "modified": "cropped"
+    },
+    "prezzi-diesel-svizzera-oggi": {
+      "modified": "cropped"
+    },
+    "prezzi-immobili-svizzera-giugno": {
+      "modified": "cropped"
+    },
+    "prezzi-pizza-italia-implicazioni": {
+      "modified": "cropped"
+    },
+    "primo-maggio-baume-schneider-sanita-avs": {
+      "modified": "cropped"
+    },
+    "primo-maggio-monito-svizzera-10-milioni": {
+      "modified": "cropped"
+    },
+    "primo-maggio-varese-2026-lavoro-dignitoso": {
+      "modified": "cropped"
+    },
+    "problemi-rotaia-bellinzona-lugano": {
+      "modified": "resized"
+    },
+    "processo-broker-vip-retrocessioni": {
+      "modified": "cropped"
+    },
+    "processo-mendrisio-19-capit": {
+      "modified": "cropped"
+    },
+    "processo-quadroni-ex-capo-posto-contesta-accuse": {
+      "modified": "cropped"
+    },
+    "professioni-sanitarie-lamal-cantone-ticino": {
+      "modified": "cropped"
+    },
+    "progetto-prossimita-locarno-2026": {
+      "modified": "cropped"
+    },
+    "proposte-cernobbio-2026-tessile": {
+      "modified": "cropped"
+    },
+    "protezione-vittime-142-ticino-2026": {
+      "modified": "cropped"
+    },
+    "psicoterapia-digitale-deprexis-rimborsata-2026": {
+      "modified": "resized"
+    },
+    "public-eye-denuncia-salari-on-ticino": {
+      "modified": "cropped"
+    },
+    "putin-ucraina-termine-frontalieri": {
+      "modified": "resized"
+    },
+    "quadri-interpella-consiglio-frontiere-tasse": {
+      "modified": "cropped"
+    },
+    "raccolti-2000-euro-parco-matteo": {
+      "modified": "resized"
+    },
+    "radio-materia-volontari-banca-etica-libri-sport": {
+      "modified": "cropped"
+    },
+    "ragazza-morta-campo-perquisita-casa-amico": {
+      "modified": "cropped"
+    },
+    "reclutamento-infermieri-lombardia": {
+      "modified": "cropped"
+    },
+    "reddito-como-2024-frontalieri": {
+      "modified": "cropped"
+    },
+    "referendum-castelli-bellinzona-2026": {
+      "modified": "cropped"
+    },
+    "regazzi-rieletto-usam-burocrazia-udc": {
+      "modified": "cropped"
+    },
+    "regime-fiscale-frontaliere-svizzera": {
+      "modified": "cropped"
+    },
+    "retromarcia-contromano-faido-chiggiogna-2026": {
+      "modified": "cropped"
+    },
+    "riapertura-bagno-bellinzona-2026": {
+      "modified": "cropped"
+    },
+    "riapertura-casetta-chiosco-davesco": {
+      "modified": "resized"
+    },
+    "ricchi-fuga-medio-oriente-ticino": {
+      "modified": "resized"
+    },
+    "ricerca-lavoro-lidl-locarno": {
+      "modified": "cropped"
+    },
+    "richiami-fiscali-errati-ticino": {
+      "modified": "cropped"
+    },
+    "ricorso-patente-lavoro-varese-2026": {
+      "modified": "cropped"
+    },
+    "ricostruzione-capanna-soveltra-avanza": {
+      "modified": "cropped"
+    },
+    "riforma-commissioni-federali-2026": {
+      "modified": "cropped"
+    },
+    "riforma-medici-famiglia-sumai-organizzazione": {
+      "modified": "cropped"
+    },
+    "rimpatrio-famiglia-curda-riazzino": {
+      "modified": "cropped"
+    },
+    "rinascita-praterie-sommerse-laghi-ticino": {
+      "modified": "cropped"
+    },
+    "rincari-festival-estate-ticino": {
+      "modified": "cropped"
+    },
+    "ripristino-treni-locarno-cadenazzo": {
+      "modified": "cropped"
+    },
+    "rischi-petrolio-lugano-3-maggio-2026": {
+      "modified": "cropped"
+    },
+    "rischio-benzina-svizzera-frontalieri": {
+      "modified": "cropped"
+    },
+    "rischio-lugano-young-boys": {
+      "modified": "resized"
+    },
+    "rissa-lavena-ponte-tres": {
+      "modified": "cropped"
+    },
+    "rissa-lugano-pensilina-botta-feriti-2026": {
+      "modified": "cropped"
+    },
+    "rissa-lugano-primo-maggio-2026": {
+      "modified": "cropped"
+    },
+    "ritardo-sconto-carburante-ticino-2026": {
+      "modified": "resized"
+    },
+    "rive-libere-ascona-2026": {
+      "modified": "cropped"
+    },
+    "roveredo-carnevale-tutti-2026": {
+      "modified": "cropped"
+    },
+    "rovine-magliaso-scuole-nuove-2026": {
+      "modified": "cropped"
+    },
+    "russotto-bellinzona-frontalieri-2026": {
+      "modified": "cropped"
+    },
+    "salari-minimi-ccl-ticino-2026": {
+      "modified": "resized"
+    },
+    "salario-minimo-25-chf-ticino": {
+      "modified": "cropped"
+    },
+    "salario-minimo-per-il-controprogetto-la-strada-e-in-discesa": {
+      "modified": "resized"
+    },
+    "salario-minimo-ticino-2027-2029": {
+      "modified": "cropped"
+    },
+    "salario-minimo-ticino-2027-2029-nuove-regole": {
+      "modified": "cropped"
+    },
+    "salario-minimo-ticino-2029-4000-franchi": {
+      "modified": "cropped"
+    },
+    "salotto-ciani-lugano-2026": {
+      "modified": "cropped"
+    },
+    "salute-prevenzione-burocrazia-svizzera": {
+      "modified": "resized"
+    },
+    "sanita-fontana-fedriga": {
+      "modified": "resized"
+    },
+    "sanita-manifesto-varese-2026": {
+      "modified": "resized"
+    },
+    "sanremo-eurovision-campione-2026": {
+      "modified": "cropped"
+    },
+    "saronno-bar-licenza-sospesa-rissa": {
+      "modified": "cropped"
+    },
+    "scambio-abiti-bellinzona": {
+      "modified": "cropped"
+    },
+    "scambio-dati-salariali-italia": {
+      "modified": "cropped"
+    },
+    "scelta-residenza-italia-svizzera-2026": {
+      "modified": "cropped"
+    },
+    "scommesse-guerra-trump-prediction-market": {
+      "modified": "cropped"
+    },
+    "sconto-benzina-ticino": {
+      "modified": "cropped"
+    },
+    "scontri-lugano-pensilina-2024": {
+      "modified": "cropped"
+    },
+    "scontri-pensilina-lugano-violenza": {
+      "modified": "cropped"
+    },
+    "scontro-polizia-lugano-spray-urticante": {
+      "modified": "cropped"
+    },
+    "scuola-austriaca-bitcoin-lugano-2026": {
+      "modified": "cropped"
+    },
+    "scuola-chiude-fino-mornasco-2026": {
+      "modified": "cropped"
+    },
+    "scuola-como-chiusura-socco": {
+      "modified": "cropped"
+    },
+    "scuola-viganello-gaza-gemellaggio-2026": {
+      "modified": "cropped"
+    },
+    "seco-dazi-segreti-washington": {
+      "modified": "cropped"
+    },
+    "secondo-pilastro-diviso-frontalieri-ticino": {
+      "modified": "cropped"
+    },
+    "separazioni-ticino-famiglie-monoparentali": {
+      "modified": "cropped"
+    },
+    "servizio-civile-errore-voto-2026": {
+      "modified": "cropped"
+    },
+    "servizio-trasfusionale-locarno-chiusura-24-giugno": {
+      "modified": "cropped"
+    },
+    "sesto-calende-centro-sportivo": {
+      "modified": "cropped"
+    },
+    "settanta-chili-di-mozzarella": {
+      "modified": "cropped"
+    },
+    "sfruttamento-corsieri-ticino-2026": {
+      "modified": "resized"
+    },
+    "sicurezza-commerciali-locarno-2026": {
+      "modified": "cropped"
+    },
+    "sicurezza-privata-chiasso-nebiopoli": {
+      "modified": "resized"
+    },
+    "sindacati-contro-snl-ticino-2026": {
+      "modified": "resized"
+    },
+    "sindacati-ticino-1-maggio-2026": {
+      "modified": "resized"
+    },
+    "sindacati-ticino-leonardo-cascina-costa": {
+      "modified": "cropped"
+    },
+    "sistema-sanitario-svizzero-lamal-2026": {
+      "modified": "cropped"
+    },
+    "slowup-strade-trasporti-limiti-2026": {
+      "modified": "cropped"
+    },
+    "smartphone-a-scuola-e-nuove-direttive": {
+      "modified": "resized"
+    },
+    "sondaggio-tamedia-iva-esercito-avs": {
+      "modified": "resized"
+    },
+    "sospensione-costi-utenti-ticino": {
+      "modified": "resized"
+    },
+    "spaccio-droga-busto-18mila-euro": {
+      "modified": "cropped"
+    },
+    "spesa-alimentare-svizzera-italia-convieni-frontaliere": {
+      "modified": "cropped"
+    },
+    "spirit-varesini-valico-tassa-2026": {
+      "modified": "resized"
+    },
+    "spirometrie-gratuite-bambini-varese-2026": {
+      "modified": "cropped"
+    },
+    "st-moritz-case-accessibili-2026": {
+      "modified": "cropped"
+    },
+    "stalking-swiss-2026-ticino": {
+      "modified": "resized"
+    },
+    "stangata-nascosta-tasse-immobiliari": {
+      "modified": "cropped"
+    },
+    "stop-agli-artigiani-per-caso": {
+      "modified": "cropped"
+    },
+    "stralugano-percorsi-frontalieri-2026": {
+      "modified": "cropped"
+    },
+    "stresa-espulsione-egiziano-2026": {
+      "modified": "cropped"
+    },
+    "strutture-dedicate-migranti-ticino": {
+      "modified": "resized"
+    },
+    "successo-farmaceutica-ticino": {
+      "modified": "resized"
+    },
+    "summer-camp-malnate-tenuta-novella": {
+      "modified": "cropped"
+    },
+    "super-ricco-tasse-frontalieri-ticino": {
+      "modified": "cropped"
+    },
+    "supermercati-ticino-2026": {
+      "modified": "cropped"
+    },
+    "sussidi-cassa-malati-mendrisio-rallentamenti": {
+      "modified": "cropped"
+    },
+    "sussidi-cassa-malati-mendrisio-ritardi": {
+      "modified": "cropped"
+    },
+    "sussidi-cassa-malati-mendrisio-ritardi-2026": {
+      "modified": "cropped"
+    },
+    "svincolo-a2-biasca-rischi-frontaliere": {
+      "modified": "resized"
+    },
+    "svizzera-10-milioni-votazione-ticino": {
+      "modified": "cropped"
+    },
+    "svizzera-alleanza-porti-europei-anti-droga": {
+      "modified": "cropped"
+    },
+    "svizzera-caccia-evasori-fiscali-2026": {
+      "modified": "cropped"
+    },
+    "svizzera-canada-mercati-alternativi-trump": {
+      "modified": "cropped"
+    },
+    "svizzera-dazi-usa-lavoro-forzato": {
+      "modified": "cropped"
+    },
+    "svizzera-deroghe-costi-sanitari-crans-montana": {
+      "modified": "cropped"
+    },
+    "svizzera-frontalieri-franco-lavoro": {
+      "modified": "resized"
+    },
+    "svizzera-hockey-finlandia-2026": {
+      "modified": "cropped"
+    },
+    "svizzera-hockey-sconfitta-finlandia": {
+      "modified": "cropped"
+    },
+    "svizzera-recessione-cieslakiewicz": {
+      "modified": "resized"
+    },
+    "svizzera-usa-accordo-commerciale-2026": {
+      "modified": "cropped"
+    },
+    "svizzera-usa-nuovi-negoziati-commerciali-2026": {
+      "modified": "cropped"
+    },
+    "svizzeri-bloccati-medio-oriente": {
+      "modified": "resized"
+    },
+    "svizzeri-contributo-clima-acquisti-online-2026": {
+      "modified": "cropped"
+    },
+    "svizzeri-felici-salute-mentale-costi": {
+      "modified": "cropped"
+    },
+    "svizzeri-secondo-pilastro-casa": {
+      "modified": "cropped"
+    },
+    "swiss-market-index-crescita-2026": {
+      "modified": "cropped"
+    },
+    "swiss-market-index-entusiasmo-2026": {
+      "modified": "cropped"
+    },
+    "swiss-risultati-trimestre-frontalieri": {
+      "modified": "cropped"
+    },
+    "swiss-voice-tour-tenero-2026": {
+      "modified": "cropped"
+    },
+    "switzerland-uk-free-trade-agreement-update": {
+      "modified": "cropped"
+    },
+    "taglio-accise-carburanti-22-maggio": {
+      "modified": "cropped"
+    },
+    "taglio-accise-carburanti-maggio-2026": {
+      "modified": "cropped"
+    },
+    "tajani-parmelin-crans-montana-2026": {
+      "modified": "cropped"
+    },
+    "tassa-aerei-sostegno-treni": {
+      "modified": "resized"
+    },
+    "tassa-aerei-trasporto-pubblico": {
+      "modified": "cropped"
+    },
+    "tassa-automobilisti-svizzera": {
+      "modified": "resized"
+    },
+    "tassa-mensa-asilo-chiasso": {
+      "modified": "cropped"
+    },
+    "tassa-salute-lombardia-frontalieri": {
+      "modified": "resized"
+    },
+    "tassa-salute-lombardia-rinvio": {
+      "modified": "resized"
+    },
+    "tassa-salute-ticino-riforme-invece-aggravi": {
+      "modified": "cropped"
+    },
+    "tassa-traffico-pesante-camion-elettrici": {
+      "modified": "resized"
+    },
+    "tassa-transito-ticino-pedemontana": {
+      "modified": "resized"
+    },
+    "tasse-aeree-kerosene-2026": {
+      "modified": "cropped"
+    },
+    "tasse-agevolate-milionari-ticino-golfo": {
+      "modified": "cropped"
+    },
+    "tasse-frontalieri-ticino-2026": {
+      "modified": "cropped"
+    },
+    "tasse-mance-frontalieri-ticino": {
+      "modified": "cropped"
+    },
+    "tassi-ipotecari-ticino-medio-oriente-2026": {
+      "modified": "resized"
+    },
+    "telefonate-choc-truffa-anziani-ticino": {
+      "modified": "resized"
+    },
+    "temporali-grandine-varesotto-allerta-meteo": {
+      "modified": "cropped"
+    },
+    "tentato-assassinio-chiasso-2026": {
+      "modified": "cropped"
+    },
+    "ticino-benzina-frontalieri-2026": {
+      "modified": "cropped"
+    },
+    "ticino-biglietti-senza-contanti": {
+      "modified": "resized"
+    },
+    "ticino-carburante-alle-stelle-quadri-berna-riduca-tasse": {
+      "modified": "resized"
+    },
+    "ticino-carburanti-prezzo-potere-acquisto": {
+      "modified": "resized"
+    },
+    "ticino-confine-droga": {
+      "modified": "cropped"
+    },
+    "ticino-no-anti-dumping": {
+      "modified": "resized"
+    },
+    "ticino-prevenzione-incendi-scuole-2026": {
+      "modified": "resized"
+    },
+    "ticino-spitex-contributo-pressione": {
+      "modified": "resized"
+    },
+    "ticino-svolta-per-apprendisti": {
+      "modified": "resized"
+    },
+    "ticino-swissminiatur-inaugura-miniera-doro-sessa": {
+      "modified": "resized"
+    },
+    "tilo-25-milioni-passeggeri-2025": {
+      "modified": "resized"
+    },
+    "tilo-lavori-gallarate-luglio": {
+      "modified": "cropped"
+    },
+    "tilo-record-passeggeri-2025": {
+      "modified": "resized"
+    },
+    "tilo-s50-lavori-mal-pensa-varese-2026": {
+      "modified": "cropped"
+    },
+    "tilo-s50-modifiche-aprile": {
+      "modified": "cropped"
+    },
+    "tragedia-bellinzona-folgorazione-2026": {
+      "modified": "cropped"
+    },
+    "tragedia-stazione-bellinzona-frontalieri": {
+      "modified": "cropped"
+    },
+    "tragedia-vico-morcote-bimbo-piscina": {
+      "modified": "cropped"
+    },
+    "tram-treno-ricorso-zali": {
+      "modified": "cropped"
+    },
+    "trasporti-chiasso-lugano-2026": {
+      "modified": "cropped"
+    },
+    "trasporti-lombardia-ticino-record-tilo": {
+      "modified": "resized"
+    },
+    "trattative-acordo-usa-oltre-31-marzo": {
+      "modified": "cropped"
+    },
+    "tredicesima-avs-soluzione-mista-stati": {
+      "modified": "resized"
+    },
+    "treni-varese-milano-ceresio-express": {
+      "modified": "resized"
+    },
+    "treno-guasto-bellinzona-2026": {
+      "modified": "cropped"
+    },
+    "trin-tunnel-grave-frontalieri": {
+      "modified": "resized"
+    },
+    "truffa-lavoro-svizzera-anticipo-2026": {
+      "modified": "resized"
+    },
+    "truffe-chiamate-shock-ticino": {
+      "modified": "resized"
+    },
+    "trump-export-limits-petrol-2026": {
+      "modified": "cropped"
+    },
+    "trump-ue-accordo-commerciale-4-luglio": {
+      "modified": "cropped"
+    },
+    "turismo-como-frontalieri-2026": {
+      "modified": "cropped"
+    },
+    "turismo-luganese-formazione": {
+      "modified": "resized"
+    },
+    "turisti-ticinesi-bloccati-medio-oriente": {
+      "modified": "resized"
+    },
+    "tutela-sovranita-dati-sanitari": {
+      "replacement": "/images/blog/consiglio-nazionale-cartella-sanitaria.webp"
+    },
+    "ubs-fusione-credit-suisse-ticino": {
+      "modified": "resized"
+    },
+    "udc-bilaterali-2026-frontalieri": {
+      "modified": "cropped"
+    },
+    "udc-cultura-indipendente-spesa-giustificata": {
+      "modified": "cropped"
+    },
+    "ufficio-postale-chiasso-trasloco": {
+      "modified": "resized"
+    },
+    "uisp-scuola-dante-varese-2026": {
+      "modified": "cropped"
+    },
+    "un-passaporto-di-fedelt": {
+      "modified": "resized"
+    },
+    "unitalsi-busto-varese-malati-spiritualita": {
+      "modified": "cropped"
+    },
+    "universita-insubria-4-4-milioni-ricerca": {
+      "modified": "cropped"
+    },
+    "universita-insubria-premia-frontalieri": {
+      "modified": "cropped"
+    },
+    "universita-ticino-numero-chiuso-2026": {
+      "modified": "cropped"
+    },
+    "universita-varese-intelligenza-artificiale-2026": {
+      "modified": "cropped"
+    },
+    "usa-petrolio-export-hormuz-impatti-ticino": {
+      "modified": "cropped"
+    },
+    "utile-bns-2025-ticino": {
+      "modified": "resized"
+    },
+    "vacanze-estive-2026-costi-guerra": {
+      "modified": "cropped"
+    },
+    "vandalismo-bar-bellinzona-2026": {
+      "modified": "cropped"
+    },
+    "varese-arrampicata-salewa-cube-2026": {
+      "modified": "cropped"
+    },
+    "varese-digitale-3d-visita": {
+      "modified": "cropped"
+    },
+    "varese-economia-frontalieri-ticino-2026": {
+      "modified": "cropped"
+    },
+    "varese-friuli-solidarieta-2026": {
+      "modified": "cropped"
+    },
+    "varese-frontalieri-7000-postivacanti-2026": {
+      "modified": "cropped"
+    },
+    "varese-incendio-palazzo-frontalieri": {
+      "modified": "cropped"
+    },
+    "varese-lago-perduto-memoria-comunita": {
+      "modified": "cropped"
+    },
+    "varese-luna-park-schiranna-2026": {
+      "modified": "cropped"
+    },
+    "varese-solidale-2026-frontalieri": {
+      "replacement": "/images/blog/varese-ponti-gallerie-controllo-2026.webp"
+    },
+    "varese-solidale-convegno-poverta-sanitaria-alimentare-2026": {
+      "modified": "cropped"
+    },
+    "vaud-parlamento-dimissioni-dittli": {
+      "modified": "cropped"
+    },
+    "venezia-serie-a-promozione-2026": {
+      "modified": "cropped"
+    },
+    "via-mazzini-lugano-chiusura-lavori": {
+      "replacement": "/images/blog/cavalcavia-boesio-chiusura-lavori-2026.webp"
+    },
+    "vico-morcote-tragedia-bambino-pool": {
+      "modified": "resized"
+    },
+    "villaggio-angelo-busto-arsizio": {
+      "modified": "cropped"
+    },
+    "vini-ticinesi-collaborazione": {
+      "modified": "resized"
+    },
+    "vino-amaro-vallese-2026": {
+      "modified": "cropped"
+    },
+    "violenza-donne-consiglio-europa-ticino": {
+      "modified": "resized"
+    },
+    "visita-ticinese-coira-criminalita-organizzata": {
+      "modified": "resized"
+    },
+    "vittima-folgorata-bellinzona-2026": {
+      "modified": "cropped"
+    },
+    "vittoria-bagatin-tappa-turchia": {
+      "modified": "cropped"
+    },
+    "vivere-piu-lungo-ticino": {
+      "modified": "resized"
+    },
+    "volandia-battesimo-volo-elicottero-2026": {
+      "modified": "cropped"
+    },
+    "votazione-popolare-lamal-frontalieri": {
+      "modified": "cropped"
+    },
+    "votazioni-8-marzo-iniziativa-ssr-aperto": {
+      "modified": "resized"
+    },
+    "votazioni-cure-dentarie-ticino-2024": {
+      "modified": "cropped"
+    },
+    "votazioni-svizzera-10-milioni-frontalieri": {
+      "modified": "cropped"
+    },
+    "walter-bonatti-in-capo-al-mondo": {
+      "modified": "resized"
+    },
+    "zurigo-economia-svizzera-crescita": {
+      "modified": "cropped"
+    },
+    "zurigo-economia-svizzera-crescita-media-2026": {
+      "modified": "cropped"
+    }
+  }
+}
