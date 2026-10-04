@@ -413,6 +413,24 @@ describe('gate argomento-già-coperto — (pilastro tematico × cantone)', () =>
     // articolo della sezione frontaliere che sfiora un tema svizzero.
     expect(cantonThemeTopicKey('Guida al costo della vita a Milano')).toBe(null);
   });
+
+  it('riconosce i dieci pilastri della rotazione bounded', () => {
+    const cases = [
+      ['Salario minimo canton Zurigo: requisiti e applicazione', 'salario-minimo:zurigo'],
+      ['Assistenza sociale canton Zurigo: requisiti e domanda', 'assistenza-sociale:zurigo'],
+      ['Imposta sugli autoveicoli canton Zurigo: calcolo e pagamento', 'imposta-autoveicoli:zurigo'],
+      ['Incentivi energetici canton Zurigo: requisiti e domanda', 'incentivi-energetici:zurigo'],
+      ['Autorizzazione edilizia canton Zurigo: requisiti e procedura', 'autorizzazione-edilizia:zurigo'],
+      ['Voto cantonale canton Zurigo: guida a iniziative e referendum', 'voto-cantonale:zurigo'],
+      ['Elezioni cantonali canton Zurigo: guida a calendario e voto', 'elezioni-cantonali:zurigo'],
+      ['Protezione civile canton Zurigo: requisiti e indennità', 'protezione-civile:zurigo'],
+      ['Assicurazione immobili canton Zurigo: guida a obbligo e premi', 'assicurazione-immobili:zurigo'],
+      ['Formazione continua canton Zurigo: requisiti e contributi', 'formazione-continua:zurigo'],
+    ];
+    for (const [text, expected] of cases) {
+      expect(cantonThemeTopicKey(text)).toBe(expected);
+    }
+  });
 });
 
 // ── Perché serviva un gate NUOVO: i vecchi non la vedono ──────────────────

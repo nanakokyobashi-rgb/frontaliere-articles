@@ -116,6 +116,32 @@ const SATURATED_FAMILIES = new Function(
 
 const tuttoIlPool = [...SVI.statiche, ...SVI.dinamiche, ...SVI.strutturali];
 
+const RETIRED_PILLARS = [
+  'permesso di domicilio C',
+  'permesso L di breve durata',
+  'sistema scolastico',
+  'borse di studio',
+  'asilo nido e custodia bambini',
+  'comprare casa',
+  'mercato degli affitti',
+  'naturalizzazione',
+  'abbonamenti trasporti pubblici',
+  'salari e mercato del lavoro',
+];
+
+const FRESH_PILLARS = [
+  'salario minimo',
+  'assistenza sociale',
+  'imposta sugli autoveicoli',
+  'incentivi energetici',
+  'autorizzazione edilizia',
+  'voto cantonale',
+  'elezioni cantonali',
+  'protezione civile',
+  'assicurazione immobili',
+  'formazione continua',
+];
+
 // ── 1. Taglia ────────────────────────────────────────────────────────────
 
 test('il pool svizzero non e\' piu\' un decimo di quello frontaliere', () => {
@@ -144,6 +170,17 @@ test('il pool strutturale nazionale e\' 20 pilastri × 25 cantoni, senza collisi
     // Un `%c`/`%C` rimasto significa un pilastro che non ha ricevuto il cantone:
     // sarebbe una keyword identica per tutti e 25, cioe' 24 duplicati garantiti.
     assert.ok(!/%[cC]/.test(`${t.keyword} ${t.angle}`), `placeholder non sostituito in "${t.keyword}"`);
+  }
+});
+
+test('la rotazione sostituisce dieci pilastri esauriti con 250 keyword nuove', () => {
+  for (const root of RETIRED_PILLARS) {
+    const count = SVI.strutturali.filter((t) => t.keyword.startsWith(`${root} canton `)).length;
+    assert.equal(count, 0, `il pilastro ritirato e\' ancora nel pool: ${root}`);
+  }
+  for (const root of FRESH_PILLARS) {
+    const count = SVI.strutturali.filter((t) => t.keyword.startsWith(`${root} canton `)).length;
+    assert.equal(count, 25, `il pilastro nuovo non copre tutti i cantoni: ${root} (${count}/25)`);
   }
 });
 
@@ -259,7 +296,7 @@ test('reset-evergreen-strikes ricostruisce il pool COMPLETO, non solo le liste v
   // diventerebbe una no-op sull'82% del pool senza fallire.
   assert.ok(pool.includes('affitti svizzera diritti inquilino disdetta'), 'manca la lista statica');
   assert.ok(pool.some((k) => /canton (Vaud|Ginevra|Zurigo)/.test(k)), 'manca la lista dinamica');
-  assert.ok(pool.includes('naturalizzazione canton Giura requisiti e procedura'), 'manca il pool strutturale nazionale');
+  assert.ok(pool.includes('autorizzazione edilizia canton Giura requisiti e procedura'), 'manca il pool strutturale nazionale');
 });
 
 // ── 6. Cablaggio: il builder deve essere DAVVERO nel pool del run ────────
