@@ -99406,6 +99406,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-mastini-varese-pergine-hockey': {
+    title: 'Mastini varese-pergine: sfida all\'acinque ice arena',
+    description: 'Sabato alle 18.30 i Mastini ospitano il Pergine all\'Acinque Ice Arena per la quarta giornata di IHL. Analisi, assenze e stato della classifica. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, mastini, varese-pergine, sfida, acinque',
+    ogTitle: 'Mastini Varese-Pergine: sfida all\'Acinque Ice Arena',
+    ogDescription: 'I Mastini di Varese affrontano il Pergine in un importante scontro diretto di IHL. Scopri le ultime sull\'organico, le assenze di Vanetti e Terzago e il punto sulla classifica.',
+    canonicalPath: '/articoli-frontaliere/mastini-varese-pergine-hockey/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mastini varese-pergine: sfida all'acinque ice arena",
+      "description": "Sabato alle 18.30 i Mastini ospitano il Pergine all'Acinque Ice Arena per la quarta giornata di IHL. Analisi, assenze e stato della classifica. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/mastini-varese-pergine-hockey.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Partita di hockey su ghiaccio dei Mastini di Varese all'Acinque Ice Arena."
+      },
+      "datePublished": "2026-10-04T01:23:33+00:00",
+      "dateModified": "2026-10-04T01:23:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/mastini-varese-pergine-hockey/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

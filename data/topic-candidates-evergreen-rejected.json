@@ -792,10 +792,6 @@
     "affitti svizzera mercato immobiliare 2026": 1
   },
   "topicGateUrls": {
-    "svizzera::https://www.swissinfo.ch/ita/cn%3a-giochi-olimpici-2038%2c-s%c3%ac-a-credito-200-milioni%2c-no-a-referendum/92149423": {
-      "section": "svizzera",
-      "ts": 1790894678541
-    },
     "svizzera::https://www.tio.ch/ticino/attualita/1954064/occhiali-cambio-check-up-esame-possibilita": {
       "section": "svizzera",
       "ts": 1790916126470
@@ -1003,6 +999,14 @@
     "frontaliere::https://www.tio.ch/sport/hockey/1954480/friborgo-ambri-league-national-hcap": {
       "section": "frontaliere",
       "ts": 1791065480590
+    },
+    "frontaliere::https://comozero.it/cronaca/provincia-di-como-lodiosa-truffa-ai-danni-di-una-89enne-derubata-dei-gioielli-lettera-del-sindaco-non-fidatevi": {
+      "section": "frontaliere",
+      "ts": 1791076221629
+    },
+    "frontaliere::https://comozero.it/attualita/como-vivo-da-un-mese-in-centro-storico-e-ho-scoperto-che-dormire-e-unimpresa-mi-colpisce-la-rassegnazione-dei-residenti-video": {
+      "section": "frontaliere",
+      "ts": 1791076277994
     }
   }
 }
