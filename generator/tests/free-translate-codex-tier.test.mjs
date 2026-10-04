@@ -804,3 +804,59 @@ test('la scadenza si rivaluta in coda: la chiamata che la consuma ferma le succe
     delete process.env.FREE_TRANSLATE_CODEX_LANES;
   }
 });
+
+// ── Titoli di template nel prompt (gemello del test del sito) ──────────────
+//
+// Lotto 1 della bonifica Codex (#2121, 20 coppie de): con la sola regola «tieni
+// il Markdown dei titoli» Codex rendeva `## Fatti chiave` come `## Eckdaten` e
+// `## In breve` come `## Kurz zusammengefasst`, e la guardia dei Fatti chiave
+// riconosce solo il titolo canonico. I valori attesi sono scritti qui a mano
+// apposta: la tabella del modulo si genera da ai-search-template.mjs, e un
+// cambio di quel modulo deve passare da questo test.
+const TEMPLATE_EXPECTED = {
+  it: ['## In breve', '## Fatti chiave'],
+  en: ['## TL;DR', '## Key facts'],
+  de: ['## Auf einen Blick', '## Wichtige Fakten'],
+  fr: ['## En bref', '## Faits clés'],
+};
+const promptModule = await import('../scripts/lib/free-translate.mjs');
+const templateModule = await import('../scripts/lib/ai-search-template.mjs');
+const systemOf = (messages) => messages.find((m) => m.role === 'system').content;
+const templateRule = (target) => {
+  const [tldr, keyFacts] = TEMPLATE_EXPECTED[target];
+  return `write the heading line "## In breve" as "${tldr}" and "## Fatti chiave" as "${keyFacts}", exactly, never with a synonym.`;
+};
+
+test('titoli di template: la tabella del tier coincide con ai-search-template.mjs', () => {
+  const table = promptModule.CODEX_TEMPLATE_HEADINGS;
+  assert.deepEqual(Object.keys(table).sort(), ['de', 'en', 'fr', 'it']);
+  for (const [lang, headings] of Object.entries(table)) {
+    assert.deepEqual([...headings], [templateModule.getTldrHeading(lang), templateModule.getKeyFactsHeading(lang)], lang);
+    assert.deepEqual([...headings], TEMPLATE_EXPECTED[lang], lang);
+  }
+});
+
+test('titoli di template: richiesta singola e a gruppi it→en/de/fr portano il canonico della lingua di arrivo', () => {
+  for (const target of ['en', 'de', 'fr']) {
+    const single = systemOf(promptModule.codexTranslatePromptsForTests.single('## In breve\n- uno', 'it', target));
+    const batch = systemOf(promptModule.codexTranslatePromptsForTests.batch(['## In breve\n- uno', '## Fatti chiave\n- x: y'], 'it', target));
+    assert.ok(single.includes(templateRule(target)), `singola it→${target}`);
+    assert.ok(batch.includes(templateRule(target)), `gruppo it→${target}`);
+  }
+  assert.ok(!systemOf(promptModule.codexTranslatePromptsForTests.single('testo', 'it', 'es')).includes('Template headings'));
+});
+
+test('titoli di template: la bonifica (`translateWithCodexEngine`) manda la regola a Codex', async () => {
+  const seen = [];
+  await promptModule.translateWithCodexEngine({
+    text: '## In breve\n- Il permesso G si rinnova ogni cinque anni.\n\n## Fatti chiave\n- **Cosa**: rinnovo del permesso G.',
+    sourceLang: 'it',
+    targetLang: 'de',
+    call: async (messages) => {
+      seen.push(messages);
+      return '## Auf einen Blick\n- Die Bewilligung G wird alle fünf Jahre erneuert.\n\n## Wichtige Fakten\n- **Was**: Erneuerung der Bewilligung G.';
+    },
+  });
+  assert.equal(seen.length, 1);
+  assert.ok(systemOf(seen[0]).includes(templateRule('de')));
+});
