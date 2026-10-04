@@ -278,6 +278,31 @@ test('--check catches what a hand edit or a later write breaks', () => {
   }
 });
 
+test('--check after a new --fetch: an unchanged file is not a change, a changed one is named by field', () => {
+  const root = corpusTree();
+  try {
+    write(root, OVERRIDES_FILE, JSON.stringify(OVERRIDES, null, 2));
+    assert.equal(run(root, '--build').status, 0);
+    // The monthly revalidation: the same metadata, read again a month later.
+    const snapshot = JSON.parse(fs.readFileSync(path.join(root, SNAPSHOT_FILE), 'utf-8'));
+    write(root, SNAPSHOT_FILE, serializeSnapshot({ ...snapshot, fetchedAt: '2026-11-07' }));
+    assert.deepEqual(checkTree(root), [], 'a re-read on another day that finds every file unchanged is clean');
+    // Commons relicenses one file and uploads a new version of it.
+    const locarno = snapshot.files['Locarno 1.jpg'];
+    snapshot.files['Locarno 1.jpg'] = {
+      ...locarno,
+      revision: '2026-10-20T08:00:00Z',
+      meta: { ...locarno.meta, LicenseShortName: 'CC BY-SA 4.0', LicenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0', License: 'cc-by-sa-4.0' },
+    };
+    write(root, SNAPSHOT_FILE, serializeSnapshot({ ...snapshot, fetchedAt: '2026-11-07' }));
+    assert.deepEqual(checkTree(root), ['ch-locarno', 'locarno-uno', 'ritirato'].map((key) => (
+      `content/image-credits/blog/${key}.json: differs from a rebuild — run --build (commons.revision, licence.name, licence.url)`
+    )));
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('--check refuses a malformed curation file before using it', () => {
   const root = corpusTree();
   try {

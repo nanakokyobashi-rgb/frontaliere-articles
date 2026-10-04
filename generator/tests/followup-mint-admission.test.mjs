@@ -159,14 +159,52 @@ describe('contentsApiIo — il main del repository del bucket, non il disco', ()
     assert.deepEqual(io.stats(), { reads: 1, cap: 10, capped: 0, errors: 0 });
   });
 
-  test('404 → missing; ogni altro errore → unknown e contato', () => {
-    const missing = contentsApiIo({ repo: 'o/r', gh: fail('gh: Not Found (HTTP 404)'), cap: 5 });
+  // Un 404 sul file vale `missing` solo se il repository si legge con QUESTO
+  // token: l'API risponde 404 anche a un token senza accesso (review di questo
+  // repo #2097, contratto del gemello `identical` cambiato dal sito #11408).
+  // La prova è UNA lettura del ref (`repos/<repo>/commits/<ref>`), per run.
+  const readableRepo = (stderr) => (args) => {
+    if (args[1] === 'repos/o/r/commits/main') return '0123456789abcdef0123456789abcdef01234567\n';
+    return fail(stderr)();
+  };
+
+  test('404 su un repository leggibile → missing; ogni altro errore → unknown e contato', () => {
+    const missing = contentsApiIo({ repo: 'o/r', gh: readableRepo('gh: Not Found (HTTP 404)'), cap: 5 });
     assert.equal(missing.status(TARGET), 'missing');
     assert.equal(missing.stats().errors, 0);
     const broken = contentsApiIo({ repo: 'o/r', gh: fail('HTTP 502: Bad Gateway'), cap: 5 });
     assert.equal(broken.status(TARGET), 'unknown');
     assert.equal(broken.readFile(TARGET), null);
     assert.equal(broken.stats().errors, 1);
+  });
+
+  test('404 con repository non leggibile da questo token (404, 403 o rete sul ref) → unknown, mai missing', () => {
+    for (const probeError of ['gh: Not Found (HTTP 404)', 'gh: Resource not accessible (HTTP 403)', 'dial tcp: i/o timeout']) {
+      const io = contentsApiIo({ repo: 'o/r', gh: (args) => {
+        if (args[1] === 'repos/o/r/commits/main') return fail(probeError)();
+        return fail('gh: Not Found (HTTP 404)')();
+      }, cap: 5 });
+      assert.equal(io.status(TARGET), 'unknown', probeError);
+      assert.equal(io.fileExists(TARGET), false, probeError);
+      assert.equal(io.stats().errors, 1, probeError);
+      assert.deepEqual(mintAdmission(parsed(itemText()), io).observed, [MINT_OBSERVATIONS.unknown], probeError);
+    }
+  });
+
+  test('la prova di leggibilità è una sola per run, e solo dopo un 404', () => {
+    const calls = [];
+    const io = contentsApiIo({ repo: 'o/r', gh: (args) => {
+      calls.push(args);
+      if (args[1] === 'repos/o/r/commits/main') return 'sha\n';
+      if (args[3]?.includes('present.mjs')) return 'x';
+      return fail('HTTP 404')();
+    }, cap: 10 });
+    const probes = () => calls.filter((args) => args[1] === 'repos/o/r/commits/main').length;
+    assert.equal(io.status('scripts/present.mjs'), 'present');
+    assert.equal(probes(), 0);
+    assert.equal(io.status('scripts/a.mjs'), 'missing');
+    assert.equal(io.status('scripts/b.mjs'), 'missing');
+    assert.equal(probes(), 1);
   });
 
   test('il tetto è rispettato e dichiarato: oltre il tetto un path nuovo è unknown, senza chiamate', () => {

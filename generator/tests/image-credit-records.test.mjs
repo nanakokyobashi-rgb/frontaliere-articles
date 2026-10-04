@@ -239,7 +239,7 @@ test('credits index: two covers that credit one file differently are a conflict,
   try {
     const first = recordFor('Locarno 1.jpg', '/images/blog/a-uno.webp');
     writeCreditRecord(root, first);
-    // Same file read on another day: not a conflict, the earlier date is kept.
+    // Same file read on another day: not a conflict, the most recent read is kept.
     writeCreditRecord(root, { ...first, cover: '/images/blog/b-due.webp', fetchedAt: '2026-09-30' });
     writeCreditRecord(root, { ...first, cover: '/images/blog/c-tre.webp', licence: { ...first.licence, name: 'CC BY-SA 4.0', url: 'https://creativecommons.org/licenses/by-sa/4.0/' } });
     const { conflicts, payload } = buildImageCreditsIndex({
@@ -249,8 +249,28 @@ test('credits index: two covers that credit one file differently are a conflict,
     assert.deepEqual(conflicts, ['covers a-uno and c-tre credit Commons file «Locarno 1.jpg» differently']);
     // c-tre was read the same day as a-uno, the group's latest read: a tie keeps the cover first in key order.
     assert.equal(payload.files['Locarno 1.jpg'].licence.name, 'CC BY-SA 3.0');
-    assert.equal(payload.files['Locarno 1.jpg'].fetchedAt, '2026-09-30');
+    assert.equal(payload.files['Locarno 1.jpg'].fetchedAt, '2026-10-04');
     assert.deepEqual(payload.covers['c-tre'], { file: 'Locarno 1.jpg', modified: first.modified }, 'no cover goes out without a credit');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('credits index: covers of one file that agree carry its most recent read, whatever their key order', () => {
+  const root = tempRoot();
+  try {
+    const record = recordFor('Locarno 1.jpg', '/images/blog/a-uno.webp');
+    // The latest read sits between two older ones in key order.
+    writeCreditRecord(root, { ...record, fetchedAt: '2026-09-01' });
+    writeCreditRecord(root, { ...record, cover: '/images/blog/b-due.webp', fetchedAt: '2026-10-04' });
+    writeCreditRecord(root, { ...record, cover: '/images/blog/c-tre.webp', fetchedAt: '2026-09-15' });
+    const { conflicts, payload } = buildImageCreditsIndex({
+      section: 'frontaliere', commit: null, reader: corpusCreditReader(root),
+      images: ['/images/blog/a-uno.webp', '/images/blog/b-due.webp', '/images/blog/c-tre.webp'],
+    });
+    assert.deepEqual(conflicts, [], 'the same credit read on three days is not a conflict');
+    assert.equal(payload.files['Locarno 1.jpg'].fetchedAt, '2026-10-04', 'the day the credit was last confirmed');
+    assert.deepEqual(Object.keys(payload.covers), ['a-uno', 'b-due', 'c-tre']);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
