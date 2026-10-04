@@ -64,6 +64,12 @@
  * condiviso che ferma il ciclo agentico. Il "cascade" da ~265 job/giorno e'
  * un'altra cosa (gli annunci di lavoro) e non viene toccato.
  *
+ * Eccezione dichiarata: `--engine codex` NON e' a quota zero. Ogni campo body
+ * e' una chiamata `codex exec` (gpt-5.6-luna, effort max) sulla subscription
+ * dell'operatore, la stessa dell'uso interattivo. Pilota del 2026-10-04: da 64
+ * a 994 s per coppia (tre campi in fila), 5 coppie in 24 minuti con
+ * `--concurrency 2`. Si lancia a lotti, mai sull'intero stock in un colpo.
+ *
  * Usage:
  *   node generator/scripts/retranslate-blocking-bodies.mjs --audit a.json
  *   ...--audit a.json --code translation-false-friend --limit 20   # pilota
@@ -111,6 +117,15 @@
  *   --code <code>      filtra per codice bloccante (stratificazione del pilota)
  *   --stratify         una fetta per ogni codice, fino a --limit complessivo
  *   --concurrency N    articoli in parallelo (default 2, gentile coi motori)
+ *   --engine <nome>    motore di traduzione: `cascade` (default, la cascata
+ *                      free-MT di `freeTranslateWithRetry`) oppure `codex`
+ *                      (solo in locale: il tier Codex della cascata da solo,
+ *                      eseguito con `codex exec`, gpt-5.6-luna a effort max;
+ *                      decisione del proprietario 2026-10-04, #1084 item 2).
+ *                      Cambia SOLO chi traduce: l'uscita passa dalle stesse
+ *                      guardie (`translateFieldFreeMt`, `sanitizeBodyText`,
+ *                      fatti chiave, `runFactualityGates`, residuo italiano,
+ *                      `translationSanityIssue`, `shouldWrite`).
  *   --content-root <p> radice che contiene content/ (default: root del repo)
  *   --json             report macchina invece della tabella
  *   --out <file>       scrive il report `--json` in un file. Serve davvero: i
@@ -124,7 +139,8 @@ import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 import { translateFieldFreeMt } from './lib/article-free-mt.mjs';
-import { freeTranslateWithRetry, balanceMarkdownMarkers } from './lib/free-translate.mjs';
+import { freeTranslateWithRetry, balanceMarkdownMarkers, translateWithCodexEngine } from './lib/free-translate.mjs';
+import { createCodexExecCall } from './lib/codex-exec-call.mjs';
 import { runFactualityGates } from './lib/article-factuality-gates.mjs';
 import {
   MIN_FACTS_PER_SECTION,
@@ -1302,6 +1318,30 @@ export function inlineBoolean(args, name) {
 }
 const bool = (name) => inlineBoolean(argv, name);
 
+/** I motori che `--engine` accetta. `cascade` e' il default storico. */
+export const TRANSLATION_ENGINES = Object.freeze(['cascade', 'codex']);
+
+/** `--engine` normalizzato, oppure `null` se il nome non e' un motore noto. */
+export function parseEngine(raw) {
+  const value = raw == null ? 'cascade' : String(raw).trim().toLowerCase();
+  return TRANSLATION_ENGINES.includes(value) ? value : null;
+}
+
+/**
+ * Il `translate` iniettato in `translateFieldFreeMt` per il motore scelto.
+ * E' l'UNICO punto in cui i motori differiscono: tutto cio' che segue
+ * l'uscita (`translateFieldFreeMt` e le guardie di `processPair`) e' lo stesso
+ * codice per entrambi.
+ */
+export function engineTranslator(engine, { codexCall = null } = {}) {
+  if (engine === 'cascade') return freeTranslateWithRetry;
+  if (engine === 'codex') {
+    if (typeof codexCall !== 'function') throw new TypeError('motore codex senza trasporto');
+    return (args) => translateWithCodexEngine({ ...args, call: codexCall });
+  }
+  throw new Error(`motore sconosciuto: ${engine}`);
+}
+
 async function main() {
   const auditPath = flag('audit');
   const rawSlug = flag('slug');
@@ -1373,6 +1413,23 @@ async function main() {
     process.exit(2);
   }
   const CONCURRENCY = Math.max(1, Number(flag('concurrency', 2)) || 2);
+  // Un nome sconosciuto non ricade sulla cascata: con --apply sarebbe un altro
+  // motore da quello chiesto, a scrivere pagine pubblicate.
+  const rawEngine = flag('engine');
+  const ENGINE = parseEngine(rawEngine);
+  if (ENGINE === null) {
+    console.error(`❌ --engine "${rawEngine}" non è un motore noto (${TRANSLATION_ENGINES.join(', ')}).`);
+    process.exit(2);
+  }
+  let translate;
+  try {
+    translate = engineTranslator(ENGINE, {
+      codexCall: ENGINE === 'codex' ? createCodexExecCall() : null,
+    });
+  } catch (err) {
+    console.error(`❌ --engine ${ENGINE}: ${err?.message || err}`);
+    process.exit(2);
+  }
   const CONTENT_ROOT = resolve(flag('content-root', ROOT));
   const rawLocale = flag('locale', COUNT_ONLY ? SCAN_COUNT_LOCALES.join(',') : 'en,de,fr');
   const LOCALES = parseLocaleList(rawLocale);
@@ -1488,15 +1545,17 @@ async function main() {
       const idx = cursor++;
       if (idx >= pairs.length) return;
       const p = pairs[idx];
-      results.push(await processPair(p, { CONTENT_ROOT, APPLY }));
+      const started = Date.now();
+      const row = await processPair(p, { CONTENT_ROOT, APPLY, translate });
+      results.push({ ...row, ms: Date.now() - started });
     }
   };
   await Promise.all(Array.from({ length: Math.min(CONCURRENCY, pairs.length) }, worker));
 
-  report(results, { APPLY, AS_JSON, total: pairs.length, OUT: flag('out') && resolve(flag('out')) });
+  report(results, { APPLY, AS_JSON, ENGINE, total: pairs.length, OUT: flag('out') && resolve(flag('out')) });
 }
 
-async function processPair(pair, { CONTENT_ROOT, APPLY }) {
+async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslateWithRetry }) {
   const base = { ...pair };
   const realDir = DIR_TO_REAL[pair.dir];
   if (!realDir) return { ...base, written: false, reason: `dir-sconosciuta: ${pair.dir}` };
@@ -1562,7 +1621,7 @@ async function processPair(pair, { CONTENT_ROOT, APPLY }) {
         targetLang: pair.locale,
         fieldType: 'description',
         fieldName: f,
-        translate: freeTranslateWithRetry,
+        translate,
         balanceMarkdown: balanceMarkdownMarkers,
       });
       if (!out) { missingField = f; break; }
@@ -1619,8 +1678,8 @@ async function processPair(pair, { CONTENT_ROOT, APPLY }) {
   return { ...row, written: true };
 }
 
-function report(results, { APPLY, AS_JSON, total, OUT }) {
-  const payload = () => JSON.stringify({ mode: APPLY ? 'apply' : 'dry-run', total, results }, null, 2);
+function report(results, { APPLY, AS_JSON, ENGINE = 'cascade', total, OUT }) {
+  const payload = () => JSON.stringify({ mode: APPLY ? 'apply' : 'dry-run', engine: ENGINE, total, results }, null, 2);
   if (OUT) {
     // Su file, non su stdout: i tier loggano li' e romperebbero il parse.
     writeAtomic(OUT, payload());
@@ -1637,7 +1696,7 @@ function report(results, { APPLY, AS_JSON, total, OUT }) {
   const wrongLang = results.filter((r) => r.reason.startsWith('lingua-sbagliata')).length;
   const residue = results.filter((r) => r.oldCodes?.includes('italian-residue')).length;
 
-  console.log(`\nmodalità: ${APPLY ? 'APPLY (scrive)' : 'DRY-RUN (non scrive)'} — coppie trattate: ${results.length}/${total}`);
+  console.log(`\nmodalità: ${APPLY ? 'APPLY (scrive)' : 'DRY-RUN (non scrive)'} — motore: ${ENGINE} — coppie trattate: ${results.length}/${total}`);
   console.log(`  ri-traduzione pulita : ${clean}${APPLY ? ` (scritte ${written})` : ''}`);
   console.log(`  ri-fallita           : ${refailed}`);
   console.log(`  campo vuoto (skip)   : ${empty}`);
