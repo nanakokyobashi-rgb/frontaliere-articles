@@ -99640,6 +99640,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-decesso-coldrerio-corsia-nord-sud': {
+    title: 'A2 a Coldrerio, morto il 73enne ferito nell\'incidente',
+    description: 'Un 73enne svizzero del canton Zurigo è morto in ospedale dopo l\'incidente sulla A2 a Coldrerio: era passeggero dell\'auto che ha tamponato un autoarticolato.',
+    keywords: 'frontalieri, ticino, svizzera, italia, coldrerio, morto, 73enne, ferito',
+    ogTitle: 'A2 a Coldrerio, morto il 73enne',
+    ogDescription: 'Il 73enne passeggero di una vettura è morto in ospedale dopo l\'incidente di venerdì sulla A2 a Coldrerio. L\'auto, guidata da una 68enne, aveva tamponato un autoarticolato fermo nella nicchia di emergenza; la donna ha riportato ferite leggere.',
+    canonicalPath: '/articoli-frontaliere/decesso-coldrerio-corsia-nord-sud/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "A2 a Coldrerio, morto il 73enne ferito nell'incidente",
+      "description": "Un 73enne svizzero del canton Zurigo è morto in ospedale dopo l'incidente sulla A2 a Coldrerio: era passeggero dell'auto che ha tamponato un autoarticolato.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/decesso-coldrerio-corsia-nord-sud.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "A2 a Coldrerio, sulla carreggiata nord-sud"
+      },
+      "datePublished": "2026-10-04T02:50:46+00:00",
+      "dateModified": "2026-10-04T02:50:46+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/decesso-coldrerio-corsia-nord-sud/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
