@@ -36,7 +36,7 @@ on:
   workflow_dispatch:
     inputs:
       code:
-        description: 'Codice bloccante (vuoto = tutti), es. translation-false-friend o leaked-prompt-scaffolding.'
+        description: 'Un solo codice bloccante (vuoto = tutti), es. translation-false-friend o leaked-prompt-scaffolding. Non si combina con slugs.'
         required: false
         default: ''
         type: string
@@ -56,7 +56,7 @@ on:
         default: false
         type: boolean
       slugs:
-        description: 'Facoltativo: slug separati da virgola al posto della scansione del contenuto.'
+        description: 'Facoltativo: slug separati da virgola al posto della scansione del contenuto (lascia code vuoto).'
         required: false
         default: ''
         type: string
@@ -203,6 +203,19 @@ jobs:
         if: steps.guard.outputs.open_bonifiche == '0'
         run: |
           set -euo pipefail
+          # Selettori che lo strumento accetterebbe trattando 0 coppie, cioe' un
+          # verde che sembra «niente da fare»: con `--slug` le coppie hanno il
+          # codice `in-place`, e `--code` confronta un solo codice esatto.
+          if [ -n "$SLUGS" ] && [ -n "$CODE" ]; then
+            echo "::error::slugs e code non si combinano: con slugs lo strumento non filtra per codice e il lotto tratterebbe 0 coppie"
+            exit 1
+          fi
+          case "$CODE" in
+            *,*)
+              echo "::error::code accetta un solo codice, non una lista ($CODE): il lotto tratterebbe 0 coppie"
+              exit 1
+              ;;
+          esac
           ARGS=()
           if [ -n "$SLUGS" ]; then ARGS+=(--slug "$SLUGS"); else ARGS+=(--scan); fi
           if [ -n "$CODE" ]; then ARGS+=(--code "$CODE"); fi

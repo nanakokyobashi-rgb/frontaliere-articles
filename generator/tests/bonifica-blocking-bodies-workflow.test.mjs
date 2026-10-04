@@ -207,6 +207,88 @@ test('la rete del commit ferma le scritture false-friend senza campione, prima d
   assert.match(pr.env.SAMPLE_URL_VALID || '', /steps\.sample_gate\.outputs\.sample_url_valid/);
 });
 
+/**
+ * Comandi finti (`git`, `node`, `gh`) che registrano ogni invocazione in un
+ * file: `git diff --cached --name-only` stampa `staged` righe. Il chiamante
+ * mette `bin` in testa al PATH e legge `calls()` dopo il passo.
+ */
+function fakeBin({ staged = 0 } = {}) {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'bonifica-bin-'));
+  const log = path.join(dir, 'calls.log');
+  fs.writeFileSync(log, '');
+  const files = Array.from({ length: staged }, (_, i) => `content/x-${i}.json`).join('\\n');
+  const script = (name, body = '') => {
+    const file = path.join(dir, name);
+    fs.writeFileSync(file, `#!/usr/bin/env bash\nprintf '%s\\n' "${name} $*" >> '${log}'\n${body}\nexit 0\n`);
+    fs.chmodSync(file, 0o755);
+  };
+  script('git', `if [ "$1" = diff ]; then [ -n "${files}" ] && printf '${files}\\n'; fi`);
+  script('node');
+  script('gh');
+  return {
+    PATH: `${dir}:${process.env.PATH}`,
+    calls: () => fs.readFileSync(log, 'utf8').split('\n').filter(Boolean),
+    cleanup: () => fs.rmSync(dir, { recursive: true, force: true }),
+  };
+}
+
+test('la rete del commit esce 1 se i file in stage non sono le coppie scritte, prima di git commit', () => {
+  const pr = STEPS.find((s) => /gh pr create/.test(s.run));
+  const base = { FALSE_FRIEND_WRITTEN: '0', SAMPLE_URL_VALID: 'false', GITHUB_PAT_NANAKO: 'x', GITHUB_RUN_ID: '1', REPO: 'o/r', OUT_DIR: '/tmp/x', LOCALE: 'en', RUN_URL: 'https://github.com/o/r/actions/runs/1' };
+  const mismatch = fakeBin({ staged: 1 });
+  try {
+    const res = runStep(pr, { ...base, WRITTEN: '2', PATH: mismatch.PATH });
+    assert.equal(res.status, 1, res.stdout + res.stderr);
+    assert.match(res.stdout, /::error::il report dice 2 coppie scritte ma sotto content\/ sono cambiati 1 file/);
+    assert.ok(!mismatch.calls().some((c) => /^git (commit|push)\b/.test(c)), mismatch.calls().join('\n'));
+    assert.ok(!mismatch.calls().some((c) => /^gh /.test(c)));
+  } finally {
+    mismatch.cleanup();
+  }
+  // Controprova: con i conti giusti il passo arriva a commit, push e PR.
+  const match = fakeBin({ staged: 2 });
+  try {
+    const res = runStep(pr, { ...base, WRITTEN: '2', PATH: match.PATH });
+    assert.equal(res.status, 0, res.stdout + res.stderr);
+    const calls = match.calls();
+    assert.ok(calls.some((c) => /^git commit\b/.test(c)), calls.join('\n'));
+    assert.ok(calls.some((c) => c === 'git push origin bonifica/blocking-bodies-1'), calls.join('\n'));
+    assert.ok(calls.some((c) => /^gh pr create\b/.test(c)), calls.join('\n'));
+  } finally {
+    match.cleanup();
+  }
+});
+
+test('selettori che tratterebbero 0 coppie: slugs+code o code a lista escono 1 prima dello strumento', () => {
+  const step = STEPS.find((s) => s.run.includes('ARGS+=(--apply)'));
+  assert.ok(step, 'passo della ri-traduzione assente');
+  const base = { LOCALE: 'en,de,fr', LIMIT: '20', APPLY: 'false', OUT_DIR: '/tmp/x' };
+  const cases = [
+    { SLUGS: 'a,b', CODE: 'translation-false-friend', status: 1, error: /slugs e code non si combinano/ },
+    { SLUGS: '', CODE: 'translation-false-friend,leaked-prompt-scaffolding', status: 1, error: /code accetta un solo codice/ },
+    { SLUGS: '', CODE: 'translation-false-friend', status: 0, args: /--scan --code translation-false-friend --locale en,de,fr --limit 20 --stratify/ },
+    { SLUGS: 'a,b', CODE: '', status: 0, args: /--slug a,b --locale en,de,fr/ },
+  ];
+  for (const c of cases) {
+    const bin = fakeBin();
+    try {
+      const res = runStep(step, { ...base, SLUGS: c.SLUGS, CODE: c.CODE, PATH: bin.PATH });
+      const label = `SLUGS=${c.SLUGS || '(vuoto)'} CODE=${c.CODE || '(vuoto)'}`;
+      assert.equal(res.status, c.status, `${label}: ${res.stdout}${res.stderr}`);
+      const tool = bin.calls().filter((l) => RETRANSLATE.test(l));
+      if (c.error) {
+        assert.match(res.stdout, c.error, label);
+        assert.deepEqual(tool, [], `${label}: lo strumento e' partito`);
+      } else {
+        assert.equal(tool.length, 1, label);
+        assert.match(tool[0], c.args, label);
+      }
+    } finally {
+      bin.cleanup();
+    }
+  }
+});
+
 test('il campione scrive sample.md ed e\' PRIMA del passo che puo\' passare --apply', () => {
   const sample = stepIndex((s) => /bonifica-sample\.mjs/.test(s.run));
   const write = stepIndex((s) => /--apply\b/.test(s.run));
