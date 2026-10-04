@@ -923,7 +923,7 @@ test('#923: la nota non si posta se i commenti non sono stati letti', () => {
 // ── Copertura: un sottoinsieme di riferimenti gia' annotati non e' una nota nuova ──
 //
 // Gemello della fix del sito (PR 11292, issue 8441: nove note in nove giorni,
-// piu' della meta' con soli riferimenti gia' annotati). L'insieme `b=` oscilla
+// quattro delle quali ripetevano solo riferimenti gia' annotati). L'insieme `b=` oscilla
 // quando un lookup fallisce e toglie una chiave: il confronto per identita' di
 // stringa trattava il sottoinsieme come una novita'.
 test('copertura: marker sano con chiavi gia\' annotate da note precedenti → already', () => {

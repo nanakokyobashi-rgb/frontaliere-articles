@@ -563,8 +563,8 @@ export function noteMarker(reg, staleBlocks = [], { staleBlocksUnknown = false }
  * `r=`, `b=` con `b=`). L'insieme `b=` non e' stabile fra le run: un lookup
  * fallito (`catch` → `null` nel resolver) toglie una chiave, e il confronto per
  * identita' di stringa trattava quel sottoinsieme come una nota nuova — misurato
- * sul sito, issue 8441: nove note in nove giorni, piu' della meta' con soli
- * riferimenti gia' annotati. Una chiave davvero nuova riapre la nota una volta
+ * sul sito, issue 8441: nove note in nove giorni, quattro delle quali
+ * ripetevano solo riferimenti gia' annotati. Una chiave davvero nuova riapre la nota una volta
  * sola. Il `?` di un marker degradato non e' una chiave: non copre niente. Il
  * ramo degradato resta quello di #1078.
  *
