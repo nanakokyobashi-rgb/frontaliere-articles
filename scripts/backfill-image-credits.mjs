@@ -34,12 +34,14 @@
  *   { "schema": 1,
  *     "files": { "<Commons title>": {
  *         "decision": "replace" | "accept-restriction",   (optional)
- *         "replacement": "/images/…",                     (with replace: the new cover path)
+ *         "replacement": "/images/…",                     (with replace: the new cover of every article)
  *         "author": { "text"?, "name"?, "url"?, "type"? },  (optional, merged)
  *         "attribution": "…" | null,                      (optional)
  *         "licence": { "name"?, "url"?, "family"?, "attributionRequired"? },  (optional, merged)
  *         "curation": { "by", "at", "note" } } },         (required with any of the above)
- *     "covers": { "<cover key>": { "modified": "cropped" | "resized" } } }
+ *     "covers": { "<cover key>": {
+ *         "modified": "cropped" | "resized",              (optional)
+ *         "replacement": "/images/…" } } }                (optional: this article's new cover)
  *
  * `covers` carries the crop/resize verdict of the site-era covers, whose webp
  * files are not in this repository (computed once from the site's git blobs).
@@ -72,6 +74,7 @@ import {
 import {
   IMAGE_CREDIT_RECORDS_DIR,
   auditCreditRecords,
+  corpusCreditReader,
   canonicalJson,
   findCreditedRightsClaims,
   readCreditRecords,
@@ -159,6 +162,19 @@ export function liveCommonsCovers(root) {
   return covers.sort((a, b) => a.id.localeCompare(b.id));
 }
 
+/** `id → Commons title` of every entry of the usage maps, live or not (the corpus map wins). */
+function commonsMapTitles(root) {
+  /** @type {Map<string, string>} */
+  const titles = new Map();
+  for (const rel of COMMONS_USAGE_MAPS) {
+    for (const [id, url] of Object.entries(readJsonIfPresent(path.join(root, rel)) ?? {})) {
+      const title = titleFromCommonsUrl(url);
+      if (title && !titles.has(id)) titles.set(id, title);
+    }
+  }
+  return titles;
+}
+
 /** The snapshot, one Commons file per line so a refresh diffs file by file. */
 export function serializeSnapshot(snapshot) {
   const { files, aliases, ...head } = snapshot;
@@ -168,6 +184,24 @@ export function serializeSnapshot(snapshot) {
 }
 
 // ── --fetch ────────────────────────────────────────────────────────────────
+
+const EMAIL_IN_TEXT_RX = /[^\s@<>()"':;]+@[^\s@<>()"']+\.[A-Za-z]{2,}/g;
+const OBFUSCATED_EMAIL_IN_TEXT_RX = /[\w.-]+\s*[([]\s*at\s*[)\]]\s*[\w.-]+(?:\s*[([]\s*dot\s*[)\]]\s*[\w.-]+)+/gi;
+
+/**
+ * A Commons `Artist` or `Attribution` sometimes carries the photographer's
+ * e-mail address, and the snapshot is committed: no third party's address
+ * enters the repository (AGENTS.md #7). Each one becomes a placeholder that
+ * keeps the `@` / `(at)` the acceptance rule reacts to, so every verdict is
+ * the same as on the raw value.
+ *
+ * @param {string} value
+ */
+export function redactEmailAddresses(value) {
+  return value
+    .replace(EMAIL_IN_TEXT_RX, 'redacted@example.invalid')
+    .replace(OBFUSCATED_EMAIL_IN_TEXT_RX, 'redacted(at)example(dot)invalid');
+}
 
 /**
  * Reads the Commons metadata of every file the backfill needs and writes the
@@ -227,6 +261,7 @@ export async function fetchSnapshot({
       const page = pages.get(title);
       const { title: _ignored, ...entry } = readCommonsPage(page ?? { title, missing: true });
       void _ignored;
+      if (entry.meta) entry.meta = Object.fromEntries(Object.entries(entry.meta).map(([k, v]) => [k, redactEmailAddresses(v)]));
       files[title] = entry;
     }
     log(`[backfill] batch ${i / BATCH_SIZE}: ${batch.length} titles`);
@@ -241,6 +276,8 @@ export async function fetchSnapshot({
 
 const OVERRIDE_DECISIONS = new Set(['replace', 'accept-restriction']);
 const OVERRIDE_FILE_KEYS = new Set(['decision', 'replacement', 'author', 'attribution', 'licence', 'curation']);
+const OVERRIDE_COVER_KEYS = new Set(['modified', 'replacement']);
+const REPLACEMENT_RX = /^\/images\/[A-Za-z0-9][A-Za-z0-9/._-]*\.(?:webp|png|jpe?g|avif)$/;
 
 /** @returns {string[]} problems; empty when the overrides can be applied as written */
 export function validateOverrides(overrides) {
@@ -251,8 +288,8 @@ export function validateOverrides(overrides) {
     const where = `${OVERRIDES_FILE}: files["${title}"]`;
     for (const key of Object.keys(entry)) if (!OVERRIDE_FILE_KEYS.has(key)) problems.push(`${where}: unknown field "${key}"`);
     if (entry.decision !== undefined && !OVERRIDE_DECISIONS.has(entry.decision)) problems.push(`${where}: decision must be replace or accept-restriction`);
-    if (entry.decision === 'replace' && !/^\/images\/[A-Za-z0-9][A-Za-z0-9/._-]*\.(?:webp|png|jpe?g|avif)$/.test(entry.replacement ?? '')) {
-      problems.push(`${where}: replace needs a "replacement" site path under /images/`);
+    if (entry.replacement !== undefined && !REPLACEMENT_RX.test(entry.replacement)) {
+      problems.push(`${where}: "replacement" must be a site path under /images/`);
     }
     if (entry.decision !== 'replace' && entry.replacement !== undefined) problems.push(`${where}: "replacement" without decision replace`);
     const curation = entry.curation;
@@ -266,7 +303,11 @@ export function validateOverrides(overrides) {
     }
   }
   for (const [key, entry] of Object.entries(overrides?.covers ?? {})) {
-    if (entry?.modified !== 'cropped' && entry?.modified !== 'resized') problems.push(`${OVERRIDES_FILE}: covers["${key}"].modified must be cropped or resized`);
+    const where = `${OVERRIDES_FILE}: covers["${key}"]`;
+    for (const field of Object.keys(entry ?? {})) if (!OVERRIDE_COVER_KEYS.has(field)) problems.push(`${where}: unknown field "${field}"`);
+    if (entry?.modified === undefined && entry?.replacement === undefined) problems.push(`${where}: give "modified" or "replacement"`);
+    if (entry?.modified !== undefined && entry.modified !== 'cropped' && entry.modified !== 'resized') problems.push(`${where}.modified must be cropped or resized`);
+    if (entry?.replacement !== undefined && !REPLACEMENT_RX.test(entry.replacement)) problems.push(`${where}.replacement must be a site path under /images/`);
   }
   return problems;
 }
@@ -317,6 +358,7 @@ export function planBackfill(root, { snapshot, overrides }) {
   const repoints = new Map();
   const pending = [];
   const aliases = snapshot.aliases ?? {};
+  const publishedRecords = corpusCreditReader(root, () => {});
   /** @type {Map<string, string[]>} */
   const coversByTitle = new Map();
   for (const { id, title } of liveCommonsCovers(root)) {
@@ -328,11 +370,20 @@ export function planBackfill(root, { snapshot, overrides }) {
     const entry = overrides?.files?.[title];
     const file = snapshot.files?.[title];
     if (entry?.decision === 'replace') {
-      for (const id of covers) repoints.set(id, entry.replacement);
+      // A cover suited to each article: the cover's own replacement first, the file's as the default.
+      for (const id of covers) {
+        const replacement = overrides?.covers?.[id]?.replacement ?? entry.replacement;
+        if (replacement) repoints.set(id, replacement);
+        else pending.push({ title, covers: [id], reasons: ['decision "replace" without a replacement for this cover'] });
+      }
       continue;
     }
     if (!file) {
-      pending.push({ title, covers, reasons: ['not in the snapshot: run --fetch'] });
+      // Picked by the generator after the snapshot: its covers carry the
+      // record the generator wrote, which stays as it is. Only a cover without
+      // one needs the metadata.
+      const uncredited = covers.filter((id) => !publishedRecords.get(`/images/blog/${id}.webp`));
+      if (uncredited.length > 0) pending.push({ title, covers: uncredited, reasons: ['not in the snapshot: run --fetch'] });
       continue;
     }
     const assessment = assessCommonsFile({ title, ...file });
@@ -368,6 +419,17 @@ export function planBackfill(root, { snapshot, overrides }) {
       records.set(id, record);
     }
   }
+  // A replacement for a cover whose Commons file is not replaced is a curation
+  // that silently does nothing. Asked of the usage maps, not of the live
+  // covers: once --build has repointed a cover, no row shows it any more.
+  const mapTitles = commonsMapTitles(root);
+  for (const [id, cover] of Object.entries(overrides?.covers ?? {})) {
+    if (cover?.replacement === undefined) continue;
+    const title = mapTitles.get(id);
+    if (!title || overrides?.files?.[aliases[title] ?? title]?.decision !== 'replace') {
+      pending.push({ title: '(overrides)', covers: [id], reasons: ['a replacement for a cover whose Commons file is not replaced'] });
+    }
+  }
   return { records, repoints, pending };
 }
 
@@ -398,9 +460,18 @@ function repointCovers(root, repoints) {
     const edits = [];
     for (const block of scanSeoImageBlocks(src)) {
       if (!block.cover || !repoints.has(block.cover)) continue;
+      const replacement = repoints.get(block.cover);
       const url = block.props.find((p) => p.key === 'url');
       const value = src.slice(url.valueStart, url.valueEnd);
-      edits.push({ from: url.valueStart, to: url.valueEnd, text: value.replace(`/images/blog/${block.cover}.webp`, repoints.get(block.cover)) });
+      edits.push({ from: url.valueStart, to: url.valueEnd, text: value.replace(`/images/blog/${block.cover}.webp`, replacement) });
+      // The declared size (og:image width/height) follows the new cover when
+      // its file is in this tree; otherwise the old values stay.
+      const file = path.join(root, 'public', replacement);
+      const size = replacement.endsWith('.webp') && fs.existsSync(file) ? webpDimensions(fs.readFileSync(file)) : null;
+      for (const key of size ? ['width', 'height'] : []) {
+        const prop = block.props.find((p) => p.key === key);
+        if (prop && /^\d+$/.test(src.slice(prop.valueStart, prop.valueEnd))) edits.push({ from: prop.valueStart, to: prop.valueEnd, text: String(size[key]) });
+      }
     }
     if (edits.length === 0) continue;
     let out = src;

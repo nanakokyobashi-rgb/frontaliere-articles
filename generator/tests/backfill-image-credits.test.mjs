@@ -25,6 +25,7 @@ import {
   serializeSnapshot,
 } from '../../scripts/backfill-image-credits.mjs';
 import { scanSeoImageBlocks } from '../../scripts/lib/image-credit-records.mjs';
+import { acceptCommonsCandidate, assessCommonsFile, finalizeCreditRecord, writeCreditRecord } from '../scripts/lib/commons-credit.mjs';
 
 const SCRIPT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../scripts/backfill-image-credits.mjs');
 const PROBE = JSON.parse(fs.readFileSync(new URL('./fixtures/commons-credit/probe-2026-10-04.snapshot.json', import.meta.url), 'utf-8'));
@@ -85,6 +86,7 @@ function corpusTree() {
     row('prokudin', '/images/blog/prokudin.webp'),
     row('stock', '/images/blog/stock.webp'),
     row('usa-ritirato', '/images/blog/ritirato.webp'),
+    row('tessera-due', '/images/blog/tessera-due.webp'),
   ].join('')}];\n`);
   write(root, 'content/swiss-articles-data.ts', `const RAW_SWISS_ARTICLES = [\n${row('ch-locarno', '/images/blog/ch-locarno.webp')}];\n`);
   write(root, 'data/blog-images-used.json', JSON.stringify({
@@ -95,6 +97,7 @@ function corpusTree() {
     'ch-locarno': upload('Locarno 1.jpg'),
     'non-pubblicato': upload('Locarno 1.jpg'),
     ritirato: upload('Locarno 1.jpg'),
+    'tessera-due': upload('EHIC Slovenia.jpg'),
   }));
   write(root, 'data/blog-images-used-site-legacy.json', JSON.stringify({ prokudin: upload('Lugano prokudin.jpg') }));
   const files = Object.fromEntries(['Locarno 1.jpg', 'Patrol Police.jpg', 'EHIC Slovenia.jpg', NASA, 'Lugano prokudin.jpg'].map((t) => [t, PROBE.files[t]]));
@@ -105,6 +108,8 @@ function corpusTree() {
   write(root, 'public/images/blog/tessera.webp', webpHeader(1200, 675));
   write(root, 'public/images/blog/nasa.webp', webpHeader(1200, 675));
   write(root, 'public/images/blog/ritirato.webp', webpHeader(1200, 675));
+  write(root, 'public/images/blog/tessera-due.webp', webpHeader(1200, 675));
+  write(root, 'public/images/blog/stock.webp', webpHeader(1280, 720));
   write(root, 'content/seo/seo-blog-5.ts', `const BLOG_SEO_METADATA_5 = {\n${[
     literal('locarno-uno', '/images/blog/locarno-uno.webp'),
     literal('riuso-locarno', '/images/blog/locarno-uno.webp'),
@@ -114,6 +119,7 @@ function corpusTree() {
     literal('prokudin', '/images/blog/prokudin.webp'),
     literal('stock', '/images/blog/stock.webp'),
     literal('usa-ritirato', '/images/blog/ritirato.webp'),
+    literal('tessera-due', '/images/blog/tessera-due.webp'),
   ].join('')}};\nexport default BLOG_SEO_METADATA_5;\n`);
   write(root, 'content/seo/seo-blog-ch.ts', `const BLOG_CH_SEO_METADATA = {\n${literal('ch-locarno', '/images/blog/ch-locarno.webp', SITE_RIGHTS_SL)}};\nexport default BLOG_CH_SEO_METADATA;\n`);
   return root;
@@ -130,7 +136,8 @@ const OVERRIDES = {
       curation: CURATION,
     },
   },
-  covers: { prokudin: { modified: 'cropped' } },
+  // A cover suited to each article: the second GFDL cover gets its own replacement.
+  covers: { prokudin: { modified: 'cropped' }, 'tessera-due': { replacement: '/images/blog/stock.webp' } },
 };
 
 function run(root, mode) {
@@ -163,7 +170,7 @@ test('--build without curation: credits what it can, strips those literals, and 
     const needs = result.stderr.split('\n').filter((l) => l.includes('needs a human'));
     assert.equal(needs.length, 4, result.stderr);
     assert.match(result.stderr, /«Patrol Police\.jpg» \(polizia\): restriction:personality/);
-    assert.match(result.stderr, /«EHIC Slovenia\.jpg» \(tessera\): licence:GFDL.*decision "replace"/);
+    assert.match(result.stderr, /«EHIC Slovenia\.jpg» \(tessera, tessera-due\): licence:GFDL.*decision "replace"/);
     assert.match(result.stderr, new RegExp(`«${NASA.replace(/[.]/g, '\\.')}» \\(nasa\\): licence:OTHER:none`));
     assert.match(result.stderr, /«Lugano prokudin\.jpg» \(prokudin\): size of \/images\/blog\/prokudin\.webp unknown/);
     assert.deepEqual(rightsByCover(root), {
@@ -175,6 +182,7 @@ test('--build without curation: credits what it can, strips those literals, and 
       'seo-blog-5.ts#5:prokudin': 5,
       'seo-blog-5.ts#6:stock': 5,
       'seo-blog-5.ts#7:ritirato': 0,
+      'seo-blog-5.ts#8:tessera-due': 5,
       'seo-blog-ch.ts#0:ch-locarno': 0,
     });
     const check = run(root, '--check');
@@ -216,8 +224,13 @@ test('--build with curation: every file answered, the replaced cover repointed, 
       'seo-blog-5.ts#5:prokudin': 0,
       'seo-blog-5.ts#6:stock': 5,
       'seo-blog-5.ts#7:ritirato': 0,
+      'seo-blog-5.ts#8:stock': 5, // its own replacement, a cover that is not Commons
       'seo-blog-ch.ts#0:ch-locarno': 0,
     });
+    assert.match(registry, /id: 'tessera-due',[\s\S]*?image: '\/images\/blog\/stock\.webp'/);
+    // The declared size follows the new cover when its file is here, and stays when it is not.
+    assert.match(seo, /"url": `\$\{BASE_URL\}\/images\/blog\/stock\.webp`,\n {8}"width": 1280,\n {8}"height": 720/);
+    assert.match(seo, /"url": `\$\{BASE_URL\}\/images\/places\/lugano-view\.webp`,\n {8}"width": 1200,\n {8}"height": 675/);
     assert.deepEqual(checkTree(root), []);
     assert.equal(run(root, '--check').status, 0);
     const before = fs.statSync(path.join(root, 'content/image-credits/blog/locarno-uno.json')).mtimeMs;
@@ -270,14 +283,14 @@ test('--check refuses a malformed curation file before using it', () => {
       schema: 1,
       files: {
         'Patrol Police.jpg': { decision: 'maybe', curation: CURATION },
-        'EHIC Slovenia.jpg': { decision: 'replace', curation: CURATION },
+        'EHIC Slovenia.jpg': { decision: 'replace', replacement: 'images/no-leading-slash.webp', curation: CURATION },
         [NASA]: { author: { url: 'https://example.com/me' } },
       },
       covers: { prokudin: { modified: 'squashed' } },
     }));
     const problems = checkTree(root).join('\n');
     assert.match(problems, /files\["Patrol Police\.jpg"\]: decision must be replace or accept-restriction/);
-    assert.match(problems, /files\["EHIC Slovenia\.jpg"\]: replace needs a "replacement"/);
+    assert.match(problems, /files\["EHIC Slovenia\.jpg"\]: "replacement" must be a site path under \/images\//);
     assert.match(problems, /: every override needs curation \{ by, at, note \}/);
     assert.match(problems, /author\.url is not an allowed profile URL/);
     assert.match(problems, /covers\["prokudin"\]\.modified must be cropped or resized/);
@@ -285,6 +298,57 @@ test('--check refuses a malformed curation file before using it', () => {
     assert.deepEqual(records(root), []);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('--build: a replaced file needs a replacement for each of its covers; an unused one is reported', () => {
+  const root = corpusTree();
+  try {
+    const overrides = structuredClone(OVERRIDES);
+    delete overrides.files['EHIC Slovenia.jpg'].replacement; // only tessera-due has its own
+    overrides.covers.stock = { replacement: '/images/places/lugano-view.webp' }; // not a Commons cover
+    write(root, OVERRIDES_FILE, JSON.stringify(overrides));
+    const result = run(root, '--build');
+    assert.equal(result.status, 1);
+    assert.match(result.stderr, /«EHIC Slovenia\.jpg» \(tessera\): decision "replace" without a replacement for this cover/);
+    assert.match(result.stderr, /\(stock\): a replacement for a cover whose Commons file is not replaced/);
+    const registry = fs.readFileSync(path.join(root, 'content/blog-articles-data.ts'), 'utf-8');
+    assert.match(registry, /id: 'tessera-due',[\s\S]*?image: '\/images\/blog\/stock\.webp'/, 'the cover with its own replacement is repointed');
+    assert.match(registry, /id: 'tessera',[\s\S]*?image: '\/images\/blog\/tessera\.webp'/, 'the one without stays as it is');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('--build after a rebase: a cover the generator credited after the snapshot keeps its record', () => {
+  const root = corpusTree();
+  try {
+    write(root, OVERRIDES_FILE, JSON.stringify(OVERRIDES, null, 2));
+    // Since C1 the generator writes the record, the map entry and a literal
+    // without rights fields for each new Commons cover. Its file may be one the
+    // snapshot has never seen.
+    const title = 'Gorgier station nov 2020.jpg';
+    assert.equal(JSON.parse(fs.readFileSync(path.join(root, SNAPSHOT_FILE), 'utf-8')).files[title], undefined);
+    const registry = path.join(root, 'content/blog-articles-data.ts');
+    fs.writeFileSync(registry, fs.readFileSync(registry, 'utf-8').replace('];\n', `${row('generato-dopo', '/images/blog/generato-dopo.webp')}];\n`));
+    const map = path.join(root, 'data/blog-images-used.json');
+    write(root, 'data/blog-images-used.json', JSON.stringify({ ...JSON.parse(fs.readFileSync(map, 'utf-8')), 'generato-dopo': thumb(title) }));
+    const seo = path.join(root, 'content/seo/seo-blog-5.ts');
+    fs.writeFileSync(seo, fs.readFileSync(seo, 'utf-8').replace('};\nexport default', `${literal('generato-dopo', '/images/blog/generato-dopo.webp', '')}};\nexport default`));
+    write(root, 'public/images/blog/generato-dopo.webp', webpHeader(1200, 675));
+    const record = finalizeCreditRecord(acceptCommonsCandidate({ title, ...PROBE.files[title] }, { fetchedAt: '2026-10-06' }).template, { cover: '/images/blog/generato-dopo.webp', modified: 'cropped' });
+    writeCreditRecord(root, record);
+
+    assert.equal(run(root, '--build').status, 0);
+    assert.deepEqual(readRecord(root, 'generato-dopo'), record, 'the generator\'s record is kept as it is');
+    assert.deepEqual(checkTree(root), []);
+
+    fs.rmSync(path.join(root, 'content/image-credits/blog/generato-dopo.json'));
+    const result = run(root, '--build');
+    assert.equal(result.status, 1, 'without its record the cover needs the metadata');
+    assert.match(result.stderr, /«Gorgier station nov 2020\.jpg» \(generato-dopo\): not in the snapshot: run --fetch/);
+  } finally {
+    fs.rmSync(path.join(root), { recursive: true, force: true });
   }
 });
 
@@ -318,7 +382,13 @@ test('--fetch follows the API etiquette: ≤50 titles per GET, maxlag, User-Agen
       const asked = new URL(url).searchParams.get('titles').split('|').map((t) => t.replace(/^File:/, ''));
       const pages = asked.map((t) => (t === 'Foto 03.jpg'
         ? { title: 'File:Foto 03.jpg', missing: true }
-        : { pageid: 1, title: `File:${t === 'Foto 01.jpg' ? 'Foto uno.jpg' : t}`, imageinfo: [{ width: 10, height: 10, timestamp: 't', descriptionurl: 'https://commons.wikimedia.org/wiki/File:x', extmetadata: { LicenseShortName: { value: 'CC0' } } }] }));
+        : { pageid: 1, title: `File:${t === 'Foto 01.jpg' ? 'Foto uno.jpg' : t}`, imageinfo: [{ width: 10, height: 10, timestamp: 't', descriptionurl: 'https://commons.wikimedia.org/wiki/File:x', extmetadata: {
+          LicenseShortName: { value: t === 'Foto 02.jpg' ? 'CC BY-SA 4.0' : 'CC0' },
+          ...(t === 'Foto 02.jpg' ? {
+            Artist: { value: 'Mail me: <a href="mailto:jane.doe@example.com">jane.doe@example.com</a>' },
+            Attribution: { value: 'jane (at) example (dot) com' },
+          } : {}),
+        } }] }));
       const redirects = asked.includes('Foto 01.jpg') ? [{ from: 'File:Foto 01.jpg', to: 'File:Foto uno.jpg' }] : [];
       return { ok: true, status: 200, headers: { get: () => null }, text: async () => JSON.stringify({ query: { redirects, pages } }) };
     };
@@ -341,6 +411,15 @@ test('--fetch follows the API etiquette: ≤50 titles per GET, maxlag, User-Agen
     assert.deepEqual(snapshot.files['Foto 03.jpg'], { exists: false });
     assert.equal(snapshot.files['Foto uno.jpg'].meta.LicenseShortName, 'CC0');
     assert.equal(Object.keys(snapshot.files).length, 51);
+    // No third party's e-mail address reaches the committed snapshot, and the
+    // rule still sees that the author text is an address.
+    const raw = fs.readFileSync(path.join(root, SNAPSHOT_FILE), 'utf-8');
+    assert.doesNotMatch(raw, /jane|example\.com/);
+    assert.match(snapshot.files['Foto 02.jpg'].meta.Artist, /mailto:redacted@example\.invalid">redacted@example\.invalid</);
+    assert.equal(snapshot.files['Foto 02.jpg'].meta.Attribution, 'redacted(at)example(dot)invalid');
+    const verdict = assessCommonsFile({ title: 'Foto 02.jpg', ...snapshot.files['Foto 02.jpg'] });
+    assert.equal(verdict.decision, 'review');
+    assert.match(verdict.reasons.join(','), /attribution-needs-curation/);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
