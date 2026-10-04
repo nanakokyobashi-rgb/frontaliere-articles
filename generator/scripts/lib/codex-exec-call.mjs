@@ -38,7 +38,7 @@
 import { spawn } from 'node:child_process';
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { delimiter, dirname, join } from 'node:path';
+import { delimiter, dirname, isAbsolute, join, resolve as resolvePath } from 'node:path';
 
 /** Stessi valori del broker (`CODEX_MODEL`, `CODEX_EFFORT`): un test li lega. */
 export const CODEX_EXEC_MODEL = 'gpt-5.6-luna';
@@ -91,13 +91,26 @@ export function assertLocalCodexExec(env = process.env) {
 export function codexExecChildEnv({ env = process.env, codexBin = 'codex', tmp }) {
   const nodeDir = dirname(process.execPath);
   const binDir = codexBin.includes('/') ? dirname(codexBin) : '';
+  // Solo voci assolute: il figlio parte con `cwd` nella cartella temporanea,
+  // dove una voce relativa del PATH del chiamante indicherebbe un'altra cosa.
   const pathParts = [binDir, nodeDir, ...(String(env.PATH || '').split(delimiter)), '/usr/bin', '/bin']
-    .filter(Boolean);
+    .filter((part) => isAbsolute(part));
   const out = { PATH: [...new Set(pathParts)].join(delimiter), TMPDIR: tmp };
   for (const key of ['HOME', 'CODEX_HOME', 'LANG', 'LC_ALL', 'TERM']) {
-    if (env[key]) out[key] = env[key];
+    if (!env[key]) continue;
+    // HOME e CODEX_HOME dicono dove sta il login: relativi, cambierebbero
+    // significato con la `cwd` temporanea, quindi si risolvono qui.
+    out[key] = key === 'HOME' || key === 'CODEX_HOME' ? resolvePath(env[key]) : env[key];
   }
   return out;
+}
+
+/** SIGKILL al gruppo del figlio; ricade sul solo figlio se il gruppo non c'e'. */
+export function killProcessGroup(child, killImpl = process.kill) {
+  if (child?.pid && process.platform !== 'win32') {
+    try { killImpl(-child.pid, 'SIGKILL'); return; } catch { /* gruppo gia' uscito */ }
+  }
+  try { child?.kill?.('SIGKILL'); } catch { /* gia' uscito */ }
 }
 
 /** Argomenti di `codex exec` nel profilo «function». Puro, per i test. */
@@ -160,17 +173,23 @@ export function createCodexExecCall({
       writeFileSync(outputPath, '', { encoding: 'utf8', mode: 0o600 });
       const args = codexExecArgs({ workdir, outputPath, instructionsPath, model, effort });
       await new Promise((resolve, reject) => {
-        const child = spawnImpl(codexBin, args, {
+        // `codexBin` relativo si risolve rispetto alla cartella di chi lancia,
+        // non a quella temporanea in cui parte il figlio.
+        const bin = codexBin.includes('/') ? resolvePath(codexBin) : codexBin;
+        // Gruppo di processi proprio (`detached`): al timeout si uccide il
+        // gruppo intero, non solo il processo diretto, come fa il broker.
+        const child = spawnImpl(bin, args, {
           stdio: ['pipe', 'ignore', 'pipe'],
-          env: codexExecChildEnv({ env, codexBin, tmp: root }),
+          env: codexExecChildEnv({ env, codexBin: bin, tmp: root }),
           cwd: workdir,
+          detached: process.platform !== 'win32',
         });
         let stderrTail = '';
         let settled = false;
         const timer = setTimeout(() => {
           if (settled) return;
           settled = true;
-          try { child.kill('SIGKILL'); } catch { /* gia' uscito */ }
+          killProcessGroup(child);
           reject(new Error(`codex exec: timeout dopo ${timeoutMs} ms`));
         }, timeoutMs);
         timer.unref?.();

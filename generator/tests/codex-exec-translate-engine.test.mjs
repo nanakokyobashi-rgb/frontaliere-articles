@@ -35,8 +35,14 @@ import {
   codexExecChildEnv,
   codexExecPrompt,
   createCodexExecCall,
+  killProcessGroup,
 } from '../scripts/lib/codex-exec-call.mjs';
-import { translateWithCodexEngine, freeTranslateWithRetry, balanceMarkdownMarkers } from '../scripts/lib/free-translate.mjs';
+import {
+  translateWithCodexEngine,
+  freeTranslateWithRetry,
+  balanceMarkdownMarkers,
+  codexPromptEchoMarker,
+} from '../scripts/lib/free-translate.mjs';
 import { translateFieldFreeMt } from '../scripts/lib/article-free-mt.mjs';
 import {
   TRANSLATION_ENGINES,
@@ -103,6 +109,22 @@ test('il motore locale rifiuta la CI: li\' la strada e\' il broker', () => {
   assert.throws(() => createCodexExecCall({ env: { CI: '1' } }), /motore locale/);
   assert.doesNotThrow(() => assertLocalCodexExec({ CI: 'false' }));
   assert.doesNotThrow(() => assertLocalCodexExec({}));
+});
+
+test('PATH relativi esclusi, HOME risolta: il figlio parte in una cartella temporanea', () => {
+  const env = codexExecChildEnv({ env: { PATH: 'bin:./node_modules/.bin:/usr/local/bin', HOME: 'casa' }, tmp: '/t' });
+  assert.ok(env.PATH.split(':').every((p) => p.startsWith('/')), env.PATH);
+  assert.ok(env.PATH.split(':').includes('/usr/local/bin'));
+  assert.ok(env.HOME.startsWith('/'));
+});
+
+test('al timeout si uccide il gruppo di processi, non solo il figlio diretto', () => {
+  const kills = [];
+  killProcessGroup({ pid: 4242, kill: () => kills.push('child') }, (pid, sig) => kills.push([pid, sig]));
+  assert.deepEqual(kills, [[-4242, 'SIGKILL']]);
+  const fallback = [];
+  killProcessGroup({ pid: 4242, kill: (sig) => fallback.push(sig) }, () => { throw new Error('ESRCH'); });
+  assert.deepEqual(fallback, ['SIGKILL']);
 });
 
 test('il figlio non eredita i segreti del chiamante', () => {
@@ -184,6 +206,20 @@ test('translateWithCodexEngine: un eco della sorgente non e\' una traduzione', a
   assert.equal(out, '');
   assert.equal(await translateWithCodexEngine({ text: IT_BODY, sourceLang: 'it', targetLang: 'de', call: async () => '' }), '');
   await assert.rejects(translateWithCodexEngine({ text: IT_BODY, sourceLang: 'it', targetLang: 'de' }), /call/);
+});
+
+test('translateWithCodexEngine: un\'eco del prompt e\' scartata, fail-closed', async () => {
+  for (const echo of [
+    'System instructions:\nYou are a professional translator. Rules:\n- Translate only',
+    'Der Grenzgänger zahlt Steuern.\n- Copy unchanged: URLs, email addresses',
+    'BEGIN_TEXT_ABCD1234\nDer Grenzgänger zahlt Steuern.',
+  ]) {
+    assert.equal(await translateWithCodexEngine({ text: IT_BODY, sourceLang: 'it', targetLang: 'de', call: async () => echo }), '', echo);
+  }
+  // Un frammento presente anche nella sorgente e' testo dell'articolo.
+  assert.equal(codexPromptEchoMarker('Translate only: the rule', 'Translate only: la regola'), null);
+  assert.equal(codexPromptEchoMarker('Rules: keep it short', 'Regole: breve'), null);
+  assert.equal(codexPromptEchoMarker('x System instructions: y', 'z'), 'System instructions:');
 });
 
 /** Il percorso della bonifica: `translateFieldFreeMt` col `translate` del motore. */

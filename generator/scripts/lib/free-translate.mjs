@@ -2321,6 +2321,36 @@ export async function freeTranslateWithRetry({ text, sourceLang, targetLang, fie
  * @param {(messages: Array<{role: string, content: string}>, opts: object) => Promise<string>} args.call
  * @returns {Promise<string>} traduzione finalizzata, oppure '' (eco o vuoto)
  */
+/**
+ * Frammenti del prompt del tier Codex (`_codexTranslateMessages`) e della
+ * cornice del trasporto (`System instructions:` di `_codexPrompt` in
+ * ai-models.mjs) che non devono mai comparire in una traduzione. Un modello
+ * che ricopia il prompt produce un testo non vuoto, non uguale alla sorgente e
+ * con gli stessi numeri: nessuna guardia a valle lo riconosce, perche' i
+ * marker di scaffolding dei gate sono quelli dei prompt di generazione.
+ */
+const CODEX_PROMPT_ECHO_MARKERS = Object.freeze([
+  'System instructions:',
+  'You are a professional translator',
+  'Translate only:',
+  'Copy unchanged:',
+  'Reply with the translated text only',
+  'Keep line breaks, paragraphs and Markdown',
+  'BEGIN_TEXT_',
+  'END_TEXT_',
+]);
+
+/**
+ * Il primo frammento del prompt ricopiato nella risposta, oppure `null`. Un
+ * frammento presente anche nella sorgente non conta: e' testo dell'articolo,
+ * non un'eco del prompt.
+ */
+export function codexPromptEchoMarker(out, source) {
+  const text = String(out ?? '');
+  const src = String(source ?? '');
+  return CODEX_PROMPT_ECHO_MARKERS.find((marker) => text.includes(marker) && !src.includes(marker)) ?? null;
+}
+
 export async function translateWithCodexEngine({ text, sourceLang, targetLang, fieldType = 'description', call, _outcome = null }) {
   if (typeof call !== 'function') throw new TypeError('translateWithCodexEngine: `call` è richiesto');
   const prepared = _prepareEngineSource(text, sourceLang, fieldType);
@@ -2331,6 +2361,12 @@ export async function translateWithCodexEngine({ text, sourceLang, targetLang, f
     return '';
   }
   if (!out) {
+    noteTranslationOutcome(_outcome, 'incomplete');
+    return '';
+  }
+  // Fail-closed sull'eco del prompt: si scarta il campo intero, e la bonifica
+  // salta l'articolo invece di pubblicare le istruzioni del traduttore.
+  if (codexPromptEchoMarker(out, prepared.sourceClean)) {
     noteTranslationOutcome(_outcome, 'incomplete');
     return '';
   }
