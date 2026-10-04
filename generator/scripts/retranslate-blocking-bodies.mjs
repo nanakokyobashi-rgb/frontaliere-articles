@@ -673,6 +673,41 @@ export function guardTranslatedKeyFacts(sections, {
 }
 
 /**
+ * Come `processPair` usa la guardia dei fatti chiave.
+ *
+ * Ovunque, tranne un ramo, e' la guardia di sempre: riscrive `body1` togliendo
+ * i fatti vacui (se restano abbastanza superstiti) e pretende una sezione Fatti
+ * chiave riconosciuta con almeno un fatto usabile (salvo la riparazione
+ * strutturale di una fonte che non ce l'ha).
+ *
+ * L'eccezione e' il SOLO ramo che toglie la riga `TITOLO ARTICOLO: <titolo>`
+ * da un body italiano (`titleMarkerRemoval`). Decisioni del proprietario del
+ * 2026-10-04 sui casi limite di quel ramo:
+ *
+ *   1. `verifyOnly`: la guardia verifica ma non riscrive. Il testo da scrivere
+ *      e' il pubblicato meno la riga, e `planTitleMarkerRemoval` prova che il
+ *      diff e' esattamente quella riga: i Fatti chiave restano identici al
+ *      pubblicato, e togliere qui un «non specificato» sarebbe un'altra
+ *      modifica, che il diff rifiuterebbe;
+ *   2. `requireRecognizedSection: false`: una pagina senza una sezione Fatti
+ *      chiave riconosciuta non la perde togliendo la riga (non l'aveva), quindi
+ *      il requisito non dice niente sulla rimozione.
+ *
+ * Le altre verifiche della guardia (soglia dei superstiti, residui) restano.
+ */
+export function keyFactsGuardMode({ titleMarkerRemoval = false, structural = false, sourceBody1 = '' } = {}) {
+  const maxSourceBackedResiduals = structural ? stripVacuousFacts(sourceBody1).residual.length : 0;
+  if (titleMarkerRemoval) {
+    return { verifyOnly: true, options: { requireRecognizedSection: false, maxSourceBackedResiduals } };
+  }
+  const sourceHasKeyFacts = parseAiSearchSections(sourceBody1).length > 0;
+  return {
+    verifyOnly: false,
+    options: { requireRecognizedSection: !structural || sourceHasKeyFacts, maxSourceBackedResiduals },
+  };
+}
+
+/**
  * Decide se la nuova traduzione va scritta.
  *
  * E' il cuore del vincolo "mai peggiorare, mai riscrivere a mano", isolato in
@@ -1238,7 +1273,7 @@ export const TITLE_MARKER_REPAIR_CODE = 'leaked-prompt-scaffolding';
  *     che non e' una riga intera (intestazione, titolo su un'altra riga…);
  *   - `forma-non-riparabile: nessuna-riga-marcatore`: niente da togliere;
  *   - `forma-non-riparabile: diff-oltre-la-riga (<campo>)`: il testo che si
- *     scriverebbe (dopo sanificazione e guardia dei fatti chiave) differisce
+ *     scriverebbe (dopo la sanificazione) differisce
  *     dal pubblicato per piu' della riga tolta;
  *   - `forma-non-riparabile: file-oltre-la-riga`: riscrivere il campo
  *     cambierebbe altri byte del file (campo non nella forma canonica dello
@@ -1669,16 +1704,18 @@ async function processPair(pair, { CONTENT_ROOT, APPLY }) {
 
   // La guardia dei fatti chiave deve precedere factuality e writeAtomic: il
   // primo puo' vedere zero `critical` anche quando il secondo non deve mai
-  // ricevere una sezione fatta solo di placeholder.
-  const sourceKeyFacts = stripVacuousFacts(italianSections.body1 || '');
-  const sourceHasKeyFacts = parseAiSearchSections(italianSections.body1 || '').length > 0;
+  // ricevere una sezione fatta solo di placeholder. Nel solo ramo della
+  // rimozione della riga del prompt la guardia verifica senza riscrivere e non
+  // pretende la sezione riconosciuta (`keyFactsGuardMode`).
+  const keyFactsMode = keyFactsGuardMode({
+    titleMarkerRemoval: Boolean(titleMarkerRepair),
+    structural: Boolean(pair.structural),
+    sourceBody1: italianSections.body1 || '',
+  });
   const keyFactsGuard = missingField
     ? { sections: newSections, issue: null }
-    : guardTranslatedKeyFacts(newSections, {
-      requireRecognizedSection: !pair.structural || sourceHasKeyFacts,
-      maxSourceBackedResiduals: pair.structural ? sourceKeyFacts.residual.length : 0,
-    });
-  const checkedSections = keyFactsGuard.sections;
+    : guardTranslatedKeyFacts(newSections, keyFactsMode.options);
+  const checkedSections = keyFactsMode.verifyOnly ? newSections : keyFactsGuard.sections;
   const newCodes = missingField
     ? []
     : criticalCodes(runFactualityGates({ sections: checkedSections, locale: pair.locale, italianSections }));
@@ -1692,9 +1729,11 @@ async function processPair(pair, { CONTENT_ROOT, APPLY }) {
       locale: pair.locale,
       structuralRepair: Boolean(pair.structural),
     });
-  // Calcolato sul testo che verrebbe scritto (`checkedSections`), cioe' dopo
-  // sanificazione e guardia dei fatti chiave: se una delle due cambia altro,
-  // il diff non e' piu' la sola riga e la pagina resta intatta.
+  // Calcolato sul testo che verrebbe scritto (`checkedSections`, che in questo
+  // ramo e' il testo sanificato: la guardia dei fatti chiave qui verifica e non
+  // riscrive): se la sanificazione cambia altro, il diff non e' piu' la sola
+  // riga e la pagina resta intatta. Le righe vuote attorno alla riga tolta
+  // restano (decisioni del proprietario del 2026-10-04).
   const titleMarkerPlan = titleMarkerRepair && !missingField
     ? planTitleMarkerRemoval({
       src: trSrc,
