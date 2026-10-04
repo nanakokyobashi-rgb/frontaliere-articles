@@ -793,14 +793,6 @@
     "affitti svizzera mercato immobiliare 2026": 1
   },
   "topicGateUrls": {
-    "svizzera::https://www.tio.ch/ticino/cronaca/1954338/nel-traffico-di-una-serata-da-dimenticare-un-furgone-prende-fuoco-all-improvviso": {
-      "section": "svizzera",
-      "ts": 1790969532151
-    },
-    "svizzera::https://www.tio.ch/svizzera/cronaca/1954203/medico-80enne-adescava-minorenni-online-denaro-in-cambio-di-sesso": {
-      "section": "svizzera",
-      "ts": 1790969542409
-    },
     "svizzera::https://www.tio.ch/dal-mondo/cronaca/1954389/protesta-scontri-violenze-stato-ministro": {
       "section": "svizzera",
       "ts": 1790973583388
@@ -1020,6 +1012,10 @@
     "frontaliere::https://www.tio.ch/ticino/attualita/1954274/lascia-il-lavoro-per-salvare-cani-c-e-chi-li-regala-a-natale-e-poi-non-li-vuole-piu": {
       "section": "frontaliere",
       "ts": 1791139244256
+    },
+    "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/la-festa-d%e2%80%99autunno-anima-lugano--4133136.html": {
+      "section": "frontaliere",
+      "ts": 1791143743510
     }
   }
 }
