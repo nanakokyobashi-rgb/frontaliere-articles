@@ -99367,6 +99367,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-fondo-13esima-avs-giovani': {
+    title: 'Fondo AVS in Ticino: la 13esima ai giovani | Frontaliere Ticino',
+    description: 'Presentato in Ticino un Fondo: chi potrà e vorrà rinunciare alla 13esima AVS sosterrà progetti dedicati alle nuove generazioni a favore della collettività.',
+    keywords: 'frontalieri, ticino, svizzera, italia, fondo, 13esima, giovani, presentato',
+    ogTitle: 'Fondo AVS in Ticino: la 13esima ai giovani',
+    ogDescription: 'La proposta presentata in Ticino punta a trasformare una rinuncia volontaria alla 13esima AVS in risorse per progetti dedicati ai giovani. L\'annuncio descrive un Fondo a favore della collettività, ma non indica importi o modalità operative del Fondo.',
+    canonicalPath: '/articoli-frontaliere/fondo-13esima-avs-giovani/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Fondo AVS in Ticino: la 13esima ai giovani",
+      "description": "Presentato in Ticino un Fondo: chi potrà e vorrà rinunciare alla 13esima AVS sosterrà progetti dedicati alle nuove generazioni a favore della collettività.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/fondo-13esima-avs-giovani.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Pensionati e giovani durante un incontro sul Fondo AVS in Ticino"
+      },
+      "datePublished": "2026-10-04T01:05:00+00:00",
+      "dateModified": "2026-10-04T01:05:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/fondo-13esima-avs-giovani/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
